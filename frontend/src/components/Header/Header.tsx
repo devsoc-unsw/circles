@@ -82,6 +82,19 @@ const Header = () => {
       <Drawer onClose={() => setShowDrawer(false)} open={showDrawer}>
         <DrawerContent onCloseDrawer={() => setShowDrawer(false)} />
       </Drawer>
+      <span
+        style={{
+          color: '#722ED1',
+          fontSize: '20px',
+          opacity: 0.05,
+          position: 'absolute',
+          left: '20%',
+          top: '1px',
+          zIndex: 2
+        }}
+      >
+        Th1s_1s_P4rt_0n3_
+      </span>
     </S.HeaderWrapper>
   );
 };
