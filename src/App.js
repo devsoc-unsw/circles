@@ -1,25 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React from 'React';
+import {useSelector, useDispatch} from 'react-redux';
+import {updateDegree, resetDegree} from './actions/updateDegree'; 
+import {appendCourse, deleteCourse} from './actions/updateCourses';
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    // Note: You can access the state from any component since it is passed down from root! 
+    const degree = useSelector(state => state.degree);
+    const dispatch = useDispatch();
+    return ( 
+      <div> 
+        {degree == null ? (
+        <div> Select your degree, replace with dropdown 
+          <button onClick={() => dispatch(update)}> UPDATE </button>
+        </div> ) : (<Page/>)}
+      </div>
+    )
 }
 
 export default App;
