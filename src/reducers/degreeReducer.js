@@ -1,11 +1,11 @@
-const updateDegreeReducer = (state=null, action) => { 
+const degreeReducer = (state=null, action) => { 
     switch (action.type) { 
         case 'UPDATE': 
-            return state = actions.payload; 
+            return state = action.payload; 
         case 'RESET': 
             return state = null;
         default: 
             return state;    
     }
 }
-export default updateDegreeReducer; 
+export default degreeReducer; 
