@@ -13,7 +13,9 @@ import ast
 #     json.dump(programs, fp)
 
 
-
+'''
+Initialises dictionary and assigns it to main programs dictionary
+'''
 def initialiseProgram(programsProcessed, data):
 
     content = {
@@ -22,12 +24,15 @@ def initialiseProgram(programsProcessed, data):
         'studyLevel': None,
         'faculty': None,
         'duration': None,
-        'courseList': None
+        'progStructure': None
     }
     courseCode = data['course_code']
     programsProcessed[courseCode] = content
     return courseCode
-
+    
+'''
+Retrieves data for all undergraduate specialisations 
+'''
 def getData():
     url = "https://www.handbook.unsw.edu.au/api/es/search"
     payload = {"query":{"bool":{"must":[{"term":{"live":True}},[{"bool":{"minimum_should_match":"100%","should":[{"query_string":{"fields":["unsw_pcourse.studyLevelValue"],"query":"*ugrd*"}}]}},{"bool":{"minimum_should_match":"100%","should":[{"query_string":{"fields":["unsw_pcourse.implementationYear"],"query":"*2021*"}}]}},{"bool":{"minimum_should_match":"100%","should":[{"query_string":{"fields":["unsw_pcourse.active"],"query":"*1*"}}]}}]],"filter":[{"terms":{"contenttype":["unsw_pcourse","unsw_pcourse"]}}]}},"sort":[{"unsw_pcourse.code_dotraw":{"order":"asc"}}],"from":0,"size":249,"track_scores":True,"_source":{"includes":["*.code","*.name","*.award_titles","*.keywords","urlmap","contenttype"],"excludes":["",None]}}
@@ -39,7 +44,10 @@ def getData():
     r = requests.post(url, data=json.dumps(payload), headers=headers)
     json_res = r.json()
     return json_res
-
+    
+'''
+Assign values to dictionary
+'''
 def addData(programsProcessed, courseCode, program, data, curriculumStructure):
     prog = programsProcessed[courseCode]
     
@@ -48,7 +56,6 @@ def addData(programsProcessed, courseCode, program, data, curriculumStructure):
     prog['studyLevel'] = program.get('studyLevelURL')
     prog['faculty'] = data['parent_academic_org']['value']
     prog['duration'] = data.get('full_time_duration')
-
 
 
 def writeDataToFile():
