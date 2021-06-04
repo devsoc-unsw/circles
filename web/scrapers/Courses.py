@@ -6,6 +6,9 @@ Under ['data']:
     equivalents and exclusions unsolved
         keepList = ['eqivalents', 'exclusion']
 
+    Attributes:
+        attributes
+
     May need faculty
         faculty_detail
 
@@ -48,7 +51,7 @@ Under ['data']:
 '''
 
 #keepList = ['code', 'title','creditPoints','data',"description","educationalArea","effectiveDate","generalEducation","implementationYear","keywords","languageId","level","levelNumber","locked","modDate","specialUnitType","studyLevel","version","URL_MAP_FOR_CONTENT"]
-keepList4data = ['attributes', 'campus', 'code', 'credit_points', 'description', 'enrolment_rules', 'search_title', 'study_level', 'title', 'offering_detail']
+keepList4data = ['campus', 'code', 'credit_points', 'description', 'enrolment_rules', 'search_title', 'study_level', 'title', 'offering_detail']
 
 # keep certain items in one dictionary
 def keep(data, keepList):
@@ -100,9 +103,8 @@ def getCourseData():
         data[i] = data[i]['data']
         data[i] = json.loads(data[i])
         data[i] = keep(data[i], keepList4data)
-        del data[i]['offering_detail']
-        data[i]['terms'] = data[i]['offering_detail']['offering_terms']
 
+    data = processData(data)
     return data
 
 def getEnrolmentRules():
@@ -114,6 +116,24 @@ def getEnrolmentRules():
             data[i] = None
         else:
             data[i] = data[i][0]
+    return data
+
+def processData(data):
+
+    for i,v in enumerate(data):
+        data[i]['terms'] = data[i]['offering_detail']['offering_terms']
+        del data[i]['offering_detail']
+
+    # TODO convert study_level to a handy type
+    
+    return data
+
+def getERList():
+    rules = getEnrolmentRules()
+    names = getCourseNames()
+    data = {}
+    for r, n in zip(rules, names):
+        data[n] = r
     return data
 
 def runTheTest():
@@ -128,3 +148,4 @@ def runTheTest():
         data[n] = r
     return data
     '''
+    
