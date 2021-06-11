@@ -1,5 +1,6 @@
 """
-Program processes scraped data for specialisations.
+Program processes the formatted data by editing and customising the data for 
+use on the frontend.
 
 Proposed data structure:
 

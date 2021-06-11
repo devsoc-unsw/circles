@@ -1,6 +1,9 @@
 # Scraping specialisations data and putting it inside specialisationsRaw.json
 """
-Program scrapes relevant data for UNSW program specialisations.
+Program extracts raw data for specialisations and formats it by filtering out 
+superfluous fields and formatting relevant fields. It creates two files:
+ 1. 'specialisationsPureRaw.json' containing the raw extracted data, and
+ 2. 'specialisationFormattedRaw.json' containing relevant formatted data.
 
 Within 'contentLets', relevant info includes:
  - creditPoints
@@ -143,6 +146,10 @@ def getData():
     }
 
     r = requests.post(url, data=json.dumps(payload), headers=headers)
+
+    with open('specialisationsPureRaw.json', 'w') as FILE:
+        json.dump(r.json()["contentlets"], FILE)
+
     return r.json()
 
 def initialiseSpecialisation(item):
@@ -150,14 +157,14 @@ def initialiseSpecialisation(item):
 
     new = {
         "title":  item.get("title"),
-        "studyLevel": item["studyLevel"].lower(),
+        "study_level": item["studyLevel"].lower(),
         "level":  item.get("level"),
-        "creditPoints":  item.get("creditPoints"), # Not all specialisations have credit points
+        "credit_points":  item.get("creditPoints"), # Not all specialisations have credit points
         "faculty": "", 
         "school": "", # Not all specialisations have a school
         "description": item.get("description"),
-        "availableIn": [], # Programs that the specialisation is available in
-        "additionalInfo": item.get("additionalInfo"), # Not all specialisations have additional info
+        "programs": [], # Programs that the specialisation is available in
+        "additional_info": item.get("additionalInfo"), # Not all specialisations have additional info
         "constraints": [], # Not all specialisations have constraints
         "structure": [], # This is where the required courses will sit
     }
@@ -169,7 +176,7 @@ def getAvailableIn(programs, specialisations, specCode):
     
     if programs:
         for program in programs:
-            specialisations[specCode]["availableIn"].append(program["assoc_code"])
+            specialisations[specCode]["programs"].append(program["assoc_code"])
 
 def getConstraints(data):
     """ Returns list of dictionaries containing any constraint details for specialisation """
@@ -195,7 +202,7 @@ def getStructure(structure, currContainer):
         structure.append({
             "title": element["title"],
             "description": element.get("description"),
-            "creditPoints": element.get("credit_points"),
+            "credit_points": element.get("credit_points"),
             "courses": [],
             "structure": [], # Structure contains required courses for a 
             # specialisation, and is represented as a list of dicitonaries
@@ -256,7 +263,7 @@ def writeDataToFile():
         if "container" in curriculumStructure:
             getStructure(specialisations[specCode]["structure"], curriculumStructure["container"])
         
-    with open('specialisationsRaw.json', 'w') as FILE:
+    with open('specialisationsFormattedRaw.json', 'w') as FILE:
         json.dump(specialisations, FILE)
 
 if __name__ == "__main__":
