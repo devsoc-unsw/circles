@@ -75,6 +75,15 @@ def pick(data, key):
     data = peel(data, key)
     return data
 
+def processData(data):
+
+    for i,v in enumerate(data):
+        data[i]['terms'] = data[i]['offering_detail']['offering_terms']
+        del data[i]['offering_detail']
+
+    # TODO convert study_level to a handy type
+    
+    return data
 
 # Return all course data
 def getCourses(size = 10000, begin = 0, onlyContent = True):
@@ -107,6 +116,22 @@ def getCourseData():
     data = processData(data)
     return data
 
+
+def cleanEnrolmentRules(data):
+    for i,v in enumerate(data):
+        if v is None:
+            continue
+        data[i] = v.replace('<br/>', '')
+        data[i] = data[i].replace('Prequisite:', '')
+        data[i] = data[i].replace('Prerequisite:', '')
+        data[i] = data[i].replace('Prerequisites:', '')
+        data[i] = data[i].replace('Pre-requisite:', '')
+        data[i] = data[i].replace('Pre-requsite:', '')
+        data[i] = data[i].replace('Prerequiste:', '')
+        data[i] = data[i].replace('Pre:', '')
+        data[i] = data[i].strip()
+    return data
+
 def getEnrolmentRules():
     data = getCourseData()
     data = pick(data, 'enrolment_rules')
@@ -116,16 +141,7 @@ def getEnrolmentRules():
             data[i] = None
         else:
             data[i] = data[i][0]
-    return data
-
-def processData(data):
-
-    for i,v in enumerate(data):
-        data[i]['terms'] = data[i]['offering_detail']['offering_terms']
-        del data[i]['offering_detail']
-
-    # TODO convert study_level to a handy type
-    
+    data = cleanEnrolmentRules(data)
     return data
 
 def getERList():
