@@ -229,7 +229,7 @@ def getStructure(structure, currContainer):
             # Course info in deeper container level, so recurse and repeat
             getStructure(structure[-1]["structure"], element["container"])
 
-def writeDataToFile():
+def writeDataToFiles():
     """ Extracts, processes and writes specialisation data to file """
 
     json_res = getData()
@@ -267,4 +267,4 @@ def writeDataToFile():
         json.dump(specialisations, FILE)
 
 if __name__ == "__main__":
-    writeDataToFile()
+    writeDataToFiles()
