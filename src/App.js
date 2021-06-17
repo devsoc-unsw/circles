@@ -2,8 +2,9 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { updateDegree, resetDegree } from "./actions/updateDegree";
 import { appendCourse, deleteCourse } from "./actions/updateCourses";
-import { Button } from "antd";
+import { Button, Switch } from "antd";
 import "./App.less";
+import ThemeToggle from "./components/ThemeToggle";
 
 function App() {
   // Note: You can access the state from any component since it is passed down from root!
@@ -22,6 +23,7 @@ function App() {
           >
             UPDATE
           </Button>
+          <ThemeToggle />
         </div>
       ) : (
         <div>Hello! {degree}</div>
