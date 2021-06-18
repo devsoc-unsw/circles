@@ -1,0 +1,175 @@
+{
+    "COMPA1": {
+        "programs": [
+            "3778"
+        ],
+        "name": "Computer Science",
+        "type": "major",
+        "total_credits": "96",
+        "curriculum": [
+            {
+                "courses": {
+                    "COMP3121 or COMP3821": 2,
+                    "MATH1141 or MATH1131": 2,
+                    "COMP1511": 1,
+                    "COMP1521": 1,
+                    "COMP1531": 1,
+                    "COMP2511": 1,
+                    "COMP2521": 1,
+                    "COMP4920": 1,
+                    "COMP3900": 1,
+                    "MATH1081": 1,
+                    "MATH1241 or MATH1231": 2
+                },
+                "title": "Core Courses",
+                "credits_to_complete": "66",
+                "type": "core",
+                "levels": []
+            },
+            {
+                "courses": {
+                    "ENGG2600": 1,
+                    "ENGG4600": 1,
+                    "ENGG3600": 1,
+                    "any level 3 Computer Science course": 1,
+                    "any level 4 Computer Science course": 1,
+                    "any level 6 Computer Science course": 1,
+                    "any level 9 Computer Science course": 1
+                },
+                "title": "Computing Electives",
+                "credits_to_complete": "30",
+                "type": "elective",
+                "levels": []
+            }
+        ]
+    },
+    "SENGAH": {
+        "programs": [
+            "3707"
+        ],
+        "name": "Software Engineering",
+        "type": "honours",
+        "total_credits": "168",
+        "curriculum": [
+            {
+                "courses": {
+                    "any course": 1
+                },
+                "title": "Free Elective",
+                "credits_to_complete": "6",
+                "type": "elective",
+                "levels": []
+            },
+            {
+                "courses": {
+                    "COMP3311": 1,
+                    "SENG3011": 1,
+                    "COMP3141": 1,
+                    "COMP3331": 1
+                },
+                "title": "Level 3 Core Courses",
+                "credits_to_complete": "24",
+                "type": "core",
+                "levels": [
+                    3
+                ]
+            },
+            {
+                "courses": {
+                    "MATH1141 or MATH1131": 2,
+                    "MATH1241 or MATH1231": 2,
+                    "MATH1081": 1,
+                    "COMP1531": 1,
+                    "COMP1511": 1,
+                    "ENGG1000": 1,
+                    "COMP1521": 1
+                },
+                "title": "Level 1 Core Courses",
+                "credits_to_complete": "42",
+                "type": "core",
+                "levels": [
+                    1
+                ]
+            },
+            {
+                "courses": {
+                    "ENGG3060": 1,
+                    "ENGG4600": 1,
+                    "ENGG3600": 1,
+                    "ENGG2600": 1,
+                    "any level 3 Computer Science course": 1,
+                    "any level 4 Computer Science course": 1,
+                    "any level 6 Computer Science course": 1,
+                    "any level 9 Computer Science course": 1,
+                    "any level 3 Information Systems course": 1,
+                    "any level 4 Information Systems course": 1,
+                    "any level 3 Mathematics course": 1,
+                    "any level 4 Mathematics course": 1,
+                    "any level 6 Mathematics course": 1,
+                    "any level 3 Electrical Engineering course": 1,
+                    "any level 4 Electrical Engineering course": 1,
+                    "any level 3 Telecommunications course": 1,
+                    "any level 4 Telecommunications course": 1
+                },
+                "title": "Discipline Electives",
+                "credits_to_complete": "36",
+                "type": "elective",
+                "levels": []
+            },
+            {
+                "courses": {
+                    "COMP4952": 1,
+                    "COMP4951": 1,
+                    "SENG4920": 1,
+                    "COMP4953": 1
+                },
+                "title": "Level 4 Core Courses",
+                "credits_to_complete": "18",
+                "type": "core",
+                "levels": [
+                    4
+                ]
+            },
+            {
+                "courses": {
+                    "COMP2041": 1,
+                    "COMP2511": 1,
+                    "DESN2000": 1,
+                    "SENG2011": 1,
+                    "MATH2859": 1,
+                    "SENG2021": 1,
+                    "COMP2521": 1,
+                    "MATH2400": 1
+                },
+                "title": "Level 2 Core Courses",
+                "credits_to_complete": "42",
+                "type": "core",
+                "levels": [
+                    2
+                ]
+            },
+            {
+                "courses": {
+                    "COMP4920": 1,
+                    "any level 4 Computer Science (COMP) course": 1,
+                    "any level 6 Computer Science (COMP) course": 1,
+                    "any level 9 Computer Science (COMP) course": 1,
+                    "COMP4951": 1,
+                    "COMP4952": 1,
+                    "COMP4953": 1
+                },
+                "title": "Level 4 (or higher) COMP UOC Minimum",
+                "credits_to_complete": "30",
+                "type": "other",
+                "levels": [
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
+                ]
+            }
+        ]
+    }
+}
