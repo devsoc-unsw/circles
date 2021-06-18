@@ -2,9 +2,10 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { updateDegree, resetDegree } from "./actions/updateDegree";
 import { appendCourse, deleteCourse } from "./actions/updateCourses";
-import { Button, Switch } from "antd";
+import { Button, Switch, Typography } from "antd";
 import "./App.less";
 import ThemeToggle from "./components/ThemeToggle";
+import ProgressionChecker from "./pages/ProgressionChecker";
 
 function App() {
   // Note: You can access the state from any component since it is passed down from root!
@@ -24,6 +25,7 @@ function App() {
             UPDATE
           </Button>
           <ThemeToggle />
+          <ProgressionChecker />
         </div>
       ) : (
         <div>Hello! {degree}</div>
