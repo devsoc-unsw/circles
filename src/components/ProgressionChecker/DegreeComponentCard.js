@@ -15,6 +15,7 @@ function DegreeComponentCard({ title, subTitle, completedUOC, totalUOC }) {
       <div data-tip data-for={subTitle}>
         <Progress
           percent={progress}
+          trailColor="white"
           style={{ marginTop: "0.5em", color: "white" }}
           showInfo={false}
         />
