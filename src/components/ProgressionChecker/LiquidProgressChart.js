@@ -6,7 +6,10 @@ function LiquidProgressChart({ fillValue }) {
   var ref;
   var config = {
     percent,
-    radius: 0.8,
+    radius: 1,
+    width: 320,
+    height: 320,
+    autoFit: false,
     statistic: {
       title: {
         formatter: function formatter() {

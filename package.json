@@ -16,6 +16,7 @@
     "react-flow-renderer": "^9.1.1",
     "react-icons": "^4.2.0",
     "react-scripts": "4.0.3",
+    "react-tooltip": "^4.2.21",
     "redux": "^4.0.5",
     "storybook": "^6.1.21",
     "web-vitals": "^1.0.1",
