@@ -17,12 +17,21 @@ function ProgressionChecker() {
         }}
       >
         <LiquidProgressChart fillValue={0.6} completedUOC={60} totalUOC={200} />
-        <Title
-          className="text"
-          style={{ marginBottom: "0.5em", marginTop: "0.8em" }}
+        <a
+          href="https://www.handbook.unsw.edu.au/undergraduate/programs/2021/3767?year=2021"
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          Engineering (Hons) / Science
-        </Title>
+          <Title
+            className="text textLink"
+            style={{
+              marginBottom: "0.5em",
+              marginTop: "0.8em",
+            }}
+          >
+            Engineering (Hons) / Science
+          </Title>
+        </a>
         <div
           style={{
             display: "flex",
