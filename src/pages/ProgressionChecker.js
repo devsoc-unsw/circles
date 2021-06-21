@@ -16,7 +16,7 @@ function ProgressionChecker() {
           alignSelf: "center",
         }}
       >
-        <LiquidProgressChart fillValue={0.6} />
+        <LiquidProgressChart fillValue={0.6} completedUOC={60} totalUOC={200} />
         <Title
           className="text"
           style={{ marginBottom: "0.5em", marginTop: "0.8em" }}
