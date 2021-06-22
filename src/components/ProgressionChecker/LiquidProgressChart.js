@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Liquid, measureTextWidth } from "@ant-design/charts";
-
-function LiquidProgressChart({ fillValue }) {
+import ReactTooltip from "react-tooltip";
+function LiquidProgressChart({ completedUOC, totalUOC }) {
   var [percent, setPercent] = useState(0);
   var ref;
+  var fillValue = completedUOC / totalUOC;
   var config = {
     percent,
     radius: 1,
@@ -74,7 +75,16 @@ function LiquidProgressChart({ fillValue }) {
       }
     }, time);
   }, []);
-  return <Liquid {...config} chartRef={(chartRef) => (ref = chartRef)} />;
+  return (
+    <div>
+      <ReactTooltip place="bottom">
+        {completedUOC}/{totalUOC} UOC
+      </ReactTooltip>
+      <div data-tip>
+        <Liquid {...config} chartRef={(chartRef) => (ref = chartRef)} />
+      </div>
+    </div>
+  );
 }
 
 export default LiquidProgressChart;

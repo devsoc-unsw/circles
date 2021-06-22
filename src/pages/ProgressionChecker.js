@@ -20,13 +20,19 @@ function ProgressionChecker() {
       }}
     >
       <animated.div className="centerCol" style={props}>
-        <LiquidProgressChart fillValue={0.6} />
-        <Title
-          className="text"
-          style={{ marginBottom: "0.5em", marginTop: "0.8em" }}
+        <LiquidProgressChart completedUOC={108} totalUOC={216} />
+        <a
+          href="https://www.handbook.unsw.edu.au/undergraduate/programs/2021/3767?year=2021"
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          Engineering (Hons) / Science
-        </Title>
+          <Title
+            className="text"
+            style={{ marginBottom: "0.5em", marginTop: "0.8em" }}
+          >
+            Engineering (Hons) / Science
+          </Title>
+        </a>
         <div
           style={{
             display: "flex",
