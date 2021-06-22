@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, Progress, Typography } from "antd";
 import ReactTooltip from "react-tooltip";
+import { purple } from "@ant-design/colors";
 
 function DegreeComponentCard({ title, subTitle, completedUOC, totalUOC }) {
   const { Title, Text } = Typography;
@@ -18,6 +19,7 @@ function DegreeComponentCard({ title, subTitle, completedUOC, totalUOC }) {
           trailColor="white"
           style={{ marginTop: "0.5em", color: "white" }}
           showInfo={false}
+          strokeColor={{ "0%": purple[3], "100%": purple[4] }}
         />
       </div>
       <ReactTooltip id={subTitle} place="bottom">
@@ -30,7 +32,7 @@ function DegreeComponentCard({ title, subTitle, completedUOC, totalUOC }) {
         >
           <div>{progress}%</div>
           <div>
-            {completedUOC}/{totalUOC} UOC
+            ({completedUOC}/{totalUOC} UOC)
           </div>
         </div>
       </ReactTooltip>
