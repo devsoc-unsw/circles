@@ -2,20 +2,24 @@ import React from "react";
 import LiquidProgressChart from "../components/ProgressionChecker/LiquidProgressChart";
 import { Button, Switch, Typography } from "antd";
 import DegreeComponentCard from "../components/ProgressionChecker/DegreeComponentCard";
-
+import { useSpring, animated } from "react-spring";
 function ProgressionChecker() {
   const { Title, Text } = Typography;
-
+  const props = useSpring({
+    to: { opacity: 1 },
+    from: { opacity: 0 },
+    delay: 200,
+  });
   return (
-    <div style={{ height: "100vh", display: "flex", justifyContent: "center" }}>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          flexDirection: "column",
-          alignSelf: "center",
-        }}
-      >
+    <div
+      style={{
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <animated.div className="centerCol" style={props}>
         <LiquidProgressChart fillValue={0.6} />
         <Title
           className="text"
@@ -49,7 +53,7 @@ function ProgressionChecker() {
             totalUOC={200}
           />
         </div>
-      </div>
+      </animated.div>
     </div>
   );
 }
