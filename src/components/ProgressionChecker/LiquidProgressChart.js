@@ -5,6 +5,19 @@ function LiquidProgressChart({ completedUOC, totalUOC }) {
   var [percent, setPercent] = useState(0);
   var ref;
   var fillValue = completedUOC / totalUOC;
+  var color;
+
+  if (percent < 0.31) {
+    color = "#f9b01e"; // yellow
+  } else if (percent < 0.45) {
+    color = "#565652"; // light grey
+  } else if (percent < 0.56) {
+    color = "#323739"; // dark grey
+  } else {
+    color = "white"; // white
+  }
+
+  console.log(color);
   var config = {
     percent,
     radius: 1,
@@ -13,11 +26,16 @@ function LiquidProgressChart({ completedUOC, totalUOC }) {
     autoFit: false,
     statistic: {
       title: {
-        formatter: function formatter() {
+        formatter: function formatter(_ref1) {
+          var percent = _ref1.percent;
           return "Progress";
         },
         style: function style(_ref) {
-          return { fill: "white" };
+          return {
+            fill: color,
+            //      percent < 0.55 ? "#323739" : "white",
+            //       percent < 0.31 ? "#f9b01e" : percent < 0.53 ? "#595959" : "white",
+          };
         },
       },
       content: {
@@ -26,7 +44,9 @@ function LiquidProgressChart({ completedUOC, totalUOC }) {
           return {
             fontSize: 60,
             lineHeight: 1,
-            fill: "white",
+            fill: color,
+            //     percent < 0.55 ? "#323739" : "white",
+            //       percent < 0.31 ? "#f9b01e" : percent < 0.53 ? "#595959" : "white",
           };
         },
 
