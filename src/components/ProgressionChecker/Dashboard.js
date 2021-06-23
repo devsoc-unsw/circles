@@ -3,6 +3,7 @@ import { Card, Progress, Typography } from "antd";
 import { useSpring, animated } from "react-spring";
 import DegreeComponentCard from "./DegreeComponentCard";
 import LiquidProgressChart from "./LiquidProgressChart";
+import RadialBarChart from "./RadialBarChart";
 
 function Dashboard() {
   const { Title, Text } = Typography;
@@ -21,6 +22,7 @@ function Dashboard() {
       }}
     >
       <animated.div className="centerCol" style={props}>
+        {/* <RadialBarChart completedUOC={108} totalUOC={216} /> */}
         <LiquidProgressChart completedUOC={108} totalUOC={216} />
         <a
           href="https://www.handbook.unsw.edu.au/undergraduate/programs/2021/3767?year=2021"

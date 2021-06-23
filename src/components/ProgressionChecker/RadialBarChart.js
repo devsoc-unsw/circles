@@ -1,13 +1,8 @@
 import React from "react";
 import { RadialBar } from "@ant-design/charts";
 
-function ReactBarChart() {
+function RadialBarChart() {
   var data = [
-    {
-      name: "L7",
-      UOC: 10,
-      color: "#d3adf7",
-    },
     {
       name: "G6",
       UOC: 10,
@@ -29,7 +24,8 @@ function ReactBarChart() {
     xField: "name",
     yField: "UOC",
     maxAngle: 720,
-    radius: 0.7,
+    width: 320,
+    height: 320,
     innerRadius: 0.3,
     tooltip: {
       formatter: function formatter(datum) {
@@ -49,4 +45,4 @@ function ReactBarChart() {
   return <RadialBar {...config} />;
 }
 
-export default ReactBarChart;
+export default RadialBarChart;
