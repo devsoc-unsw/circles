@@ -1,8 +1,8 @@
 import updateCoursesReducer from "./updateCourses"; 
-import degreeReducer from "./degreeReducer";
+import userReducer from "./userReducer";
 import { combineReducers } from 'redux';
 const allReducers = combineReducers({ 
-    degree: degreeReducer,
+    user: userReducer,
     updateCourses: updateCoursesReducer 
 });
 

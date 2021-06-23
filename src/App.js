@@ -1,34 +1,30 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { updateDegree, resetDegree } from "./actions/updateDegree";
-import { appendCourse, deleteCourse } from "./actions/updateCourses";
-import { Button, Switch } from "antd";
-import "./App.less";
-import ThemeToggle from "./components/ThemeToggle";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from 'react-router-dom';
+import './App.less';
+import Home from './pages/Home';
+import CourseSelector from './pages/CourseSelector/CourseSelector';
+
 
 function App() {
   // Note: You can access the state from any component since it is passed down from root!
-  const degree = useSelector((state) => {
-    return state.degree;
-  });
-  const dispatch = useDispatch();
   return (
-    <div>
-      {degree == null ? (
-        <div>
-          Select your degree, replace with dropdown
-          <Button
-            type="primary"
-            onClick={() => dispatch(updateDegree("some chosen degree"))}
-          >
-            UPDATE
-          </Button>
-          <ThemeToggle />
-        </div>
-      ) : (
-        <div>Hello! {degree}</div>
-      )}
-    </div>
+    <>
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route path="/course-selector">
+            <CourseSelector />
+          </Route>
+        </Switch>
+      </Router>
+    </>
   );
 }
 
