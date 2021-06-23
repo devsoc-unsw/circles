@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Liquid, measureTextWidth } from "@ant-design/charts";
 import ReactTooltip from "react-tooltip";
+import { useSelector } from "react-redux";
+
 function LiquidProgressChart({ completedUOC, totalUOC }) {
   var [percent, setPercent] = useState(0);
   var ref;
@@ -17,7 +19,11 @@ function LiquidProgressChart({ completedUOC, totalUOC }) {
     color = "white"; // white
   }
 
-  console.log(color);
+  const theme = useSelector((state) => state.theme);
+  if (theme === "dark") {
+    color = "white";
+  }
+
   var config = {
     percent,
     radius: 1,
