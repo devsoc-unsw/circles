@@ -7,7 +7,7 @@ class Condition:
         return
     
     def select(self, course):
-        self.selected.append(course)
+        self.selected += course
 
 class Requirement:
     def __init__(self):
@@ -35,7 +35,7 @@ class CourseRequirement(Requirement):
         return satisfied
     
     def show(self):
-        print(self.components, end = ' ')
+        print(self.components, end = '')
 
 class CompositeRequirement(Requirement):
     def __init__(self):
@@ -60,21 +60,23 @@ class CompositeRequirement(Requirement):
                 satisfied = satisfied or c.validate(Condition)
         return satisfied
     
-    def show(self):
+    def show(self, newLine = False):
         print('(', end = '')
         if self.type == 'and':
             satisfied = True
             for c in self.components[:-1]:
                 c.show()
-                print('and', end = ' ')
+                print(' and', end = ' ')
             self.components[-1].show() 
         else:
             satisfied = False
             for c in self.components[:-1]:
                 c.show()
-                print('or', end = ' ')     
+                print(' or', end = ' ')     
             self.components[-1].show() 
-        print(')', end = ' ')
+        print(')', end = '')
+        if newLine:
+            print()
 
 def orLike(text):
     result = False
@@ -92,18 +94,25 @@ def andLike(text):
         result = True
     return result
 
+#This function cannot work properly with more than one leading '('s
+#The correct method is to add white spaces on the both side of parentheses and treat them seperately
+#But the data source is simple and here's no such cases, so I remain the code unchanged
+#At least it works well now
 def parseRequirement(text, isCalled = False, tracedBack = False):
     result = Requirement()
+    #If empty, always True
     if len(text) == 0:
         result = Requirement()
+    #If only one element, simply add a CourseRequirement
     elif len(text) == 1:
         result = CourseRequirement(text[0])
+    #Add a compositeRequirement instead
     else:
         result = CompositeRequirement()
         for index, i in enumerate(text):
 
             if tracedBack:
-                if len(i) == 9 and i[8] == ')':
+                if len(i) >= 9 and i[8] == ')':
                     tracedBack = False
                 continue
 
@@ -111,7 +120,7 @@ def parseRequirement(text, isCalled = False, tracedBack = False):
             if len(i) == 8:
                 newCourse = CourseRequirement(i)
                 result.addComponent(newCourse)
-            elif len(i) == 9:
+            elif len(i) >= 9:
                 if i[0] == '(':
                     if isCalled:
                         newCourse = CourseRequirement(i[1:])

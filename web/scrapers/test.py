@@ -1,15 +1,16 @@
 from Enrolment import *
 
-cond = Condition()
-cond.select('MTRN2500')
-cond.select('COMP1911')
-print(cond.selected)
+# put selected Courses here
+selectedCourses = ['MTRN2500', 'COMP1911']
+# Text is the enrolmentRules
+text = "(MATH1081 and (COMP1531 or COMP2041))"
 
-text = "COMP1917 OR COMP1921 OR COMP1511 OR DPST1091 OR COMP1521 OR DPST1092 OR (COMP1911 AND MTRN2500)"
+cond = Condition()
+cond.select(selectedCourses)
 
 data = text.split()
 
 data = parseRequirement(data)
-data.show()
+data.show(True)
 data = data.validate(cond)
 print(data)
