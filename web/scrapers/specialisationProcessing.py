@@ -43,8 +43,18 @@ Proposed data structure:
 
             "courses": [ ... ],
         } ,
-
-    }
+    },
+    
+    "constraints": [
+        {
+            "title": ...,
+            "description": ...
+        },
+        {
+            "title": ...,
+            "description": ...
+        }
+    ]
 }
 
 """
