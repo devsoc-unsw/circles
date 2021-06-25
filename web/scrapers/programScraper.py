@@ -1,4 +1,5 @@
 # Scraping programs data and putting it inside programsRaw.json
+from os import SEEK_DATA
 import requests
 import json
 import ast
@@ -24,7 +25,7 @@ def initialiseProgram(programsProcessed, data):
         'studyLevel': None,
         'faculty': None,
         'duration': None,
-        'progStructure': None
+        'progStructure': []
     }
     courseCode = data['course_code']
     programsProcessed[courseCode] = content
@@ -56,7 +57,89 @@ def addData(programsProcessed, courseCode, program, data, curriculumStructure):
     prog['studyLevel'] = program.get('studyLevelURL')
     prog['faculty'] = data['parent_academic_org']['value']
     prog['duration'] = data.get('full_time_duration')
+    # prog['structure'] = {
+    #     'majors' : {},
+    #     'minors' : {},
+    #     'courses' : {},
+    #     'freeElectives' : {},
+    #     'generalEducation' : {}
+    #     }
+    
+    format_curriculum(prog['progStructure'], curriculumStructure["container"])
 
+    # addCurriculum(prog['structure'], curriculumStructure)
+
+def format_curriculum(structure, currcontainer):
+    for item in currcontainer:
+        # structure.append({
+        #     "vertical_grouping": item.get('vertical_grouping'),
+        #     "title": item["title"],
+        #     "description": item.get("description"),
+        #     "credit_points": item.get("credit_points"),
+        #     "credit_points_max": item.get("credit_points_max"),
+        #     "parent_record": item.get("parent_record"),          
+        #     "container": [],
+        #     "relationship": [] 
+        # })
+        info = {
+            "vertical_grouping": item.get('vertical_grouping'),
+            "title": item["title"],
+            "description": item.get("description"),
+            "credit_points": item.get("credit_points"),
+            "credit_points_max": item.get("credit_points_max"),
+            "parent_record": item["parent_record"]["value"],          
+            "container": [],
+            "relationship": [] 
+        }
+        
+        if "relationship" in item and item["relationship"] != []:
+            for course in item["relationship"]:
+                item = {}
+                item["academic_item_code"] = course.get("academic_item_code")
+                item["academic_item_credit_points"] = course.get("academic_item_credit_points")
+                item["academic_item_name"] = course.get("academic_item_name")
+                item["academic_item_type"] = course.get( "academic_item_type")
+                item["parent_record"] = course["parent_record"]["value"]
+                info["relationship"].append(item)
+        
+        elif "container" in item and item["container"] != []:
+            # Course info in deeper container level, so recurse and repeat
+            format_curriculum(info["container"], item["container"])
+        
+        structure.append(info)
+    return structure
+
+
+
+
+
+
+def addCurriculum(structure, curriculumStructure):
+    """
+    something[UOC]
+    something[description]
+    something[speclist]
+
+    """
+    
+
+    # for item in curriculumStructure['container']:
+    #     if item["vertical_grouping"]["label"] == "Free Elective":
+
+    #     if item["vertical_grouping"]["label"] == "General Education":
+            
+
+    #     if item["vertical_grouping"]["label"] == "Undergraduate Minor":
+
+    #     if item["vertical_grouping"]["label"] == "Undergraduate Major":
+            
+            
+
+
+
+    # structure['majors']
+    # structure['minors']
+    # structure['freeElectives']
 
 def writeDataToFile():
     """ Extracts, processes and writes program data to file """
@@ -64,7 +147,8 @@ def writeDataToFile():
     programsProcessed = {}
 
     for program in json_res['contentlets']:
-
+        if program["studyLevelURL"] != "undergraduate":
+            continue
         data = json.loads(program["data"]) 
         curriculumStructure = json.loads(program["CurriculumStructure"])
 
@@ -73,9 +157,16 @@ def writeDataToFile():
         addData(programsProcessed, courseCode, program, data, curriculumStructure)
 
 
-    with open('programsProcessed.json', 'w') as fp:
+    with open('programsFormattedRaw.json', 'w') as fp:
         json.dump(programsProcessed, fp)
 
 
 if __name__ == "__main__":
+    
     writeDataToFile()
+
+    # json_res = getData()
+    # structure = json.loads(json_res['contentlets'][0]["CurriculumStructure"])
+    
+    # with open('testingBio.json', 'w') as fp:
+    #     json.dump(structure, fp)
