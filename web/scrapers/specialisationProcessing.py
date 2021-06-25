@@ -9,7 +9,10 @@ import json
 import re 
 from typing import List, Iterable, Union, Optional 
 
-TEST_SPNS = ["COMPA1", "SENGAH"]
+TEST_SPNS = ["COMPA1", "COMPAH", "COMPBH", "SENGAH"]
+# TODO: "COMPD1", "COMPE1", "COMPI1", "COMPJ1", "COMPN1", 
+#       "COMPS1", "COMPY1", "COMPZ1",
+
 CODE_MAPPING = {}
 
 def customise_spn_data():
@@ -20,6 +23,8 @@ def customise_spn_data():
 
     customised_data = {} # Dictionary for all customised data
     for spn in TEST_SPNS:
+
+        print(f"Processing {spn}\n")
 
         formatted = data[spn]
         customised_data[spn] = {}
@@ -32,7 +37,7 @@ def customise_spn_data():
                 "courses": {},
                 "title": container["title"],
             }
-            curriculum_item["credits_to_complete"] = get_credits(container)
+            curriculum_item["credits_to_complete"] = int(get_credits(container))
             curriculum_item["type"] = get_type(curriculum_item["title"].lower())
             curriculum_item["levels"] = get_levels(curriculum_item["title"].lower())
 
@@ -76,9 +81,9 @@ def initialise_spn(spn: dict, data: dict) -> None:
     spn["programs"] = data["programs"]
     spn["name"] = data["title"]
     spn["type"] = data["level"]
-    spn["total_credits"] = data["credit_points"]
+    spn["total_credits"] = int(data["credit_points"])
 
-def get_credits(container: dict):
+def get_credits(container: dict) -> str:
     """
     Adds credit point requirements to curriculum item dict.
     Credit points exist either explicitly in the container's field 
@@ -138,8 +143,11 @@ def get_courses(curriculum_courses: dict, container_courses: List[str],
 
     # No courses in container's "courses" field, so parse description. 
     if not container_courses:
-        # Captures course codes and 'any level ... course' 
-        res = re.findall("[A-Z]{4}[0-9]{4}|any level.*?courses?", description)
+        # Captures course codes and strings like 'any level X course offered by ... ' 
+        print(description)
+        # res = re.findall("[A-Z]{4}[0-9]{4}|any level[^<]+.*?courses?.*?", description)
+        res = re.findall("[A-Z]{4}[0-9]{4}|any level[^<]+", description)
+        print(res)
         for course in res:
             if "any level" in course:
                 course = process_any_level(course) 
@@ -149,21 +157,28 @@ def process_any_level(unprocessed_course: str) -> str:
     """
     Processes 'any level X PROGRAM NAME course' into 'CODEX'
     """
-    # group 1 contains level number and group 2 contains program title
-    # Note ?: means inner parentheses is non-capturing group
-    res = re.search("level (\d) ((?:[^ ]+ )+)course", unprocessed_course)
-    course_level = res.group(1).strip()
-    program_title = res.group(2).strip()
+    try:
+        # group 1 contains level number and group 2 contains program title
+        # Note ?: means inner parentheses is non-capturing group
+        res = re.search("level (\d) ((?:[^ ]+ )+)course", unprocessed_course)
+        course_level = res.group(1).strip()
+        program_title = res.group(2).strip()
 
-    # Removes any "(CODE)" text in program title 
-    # e.g. changes "Computer Science (COMP) "
-    program_title = re.sub("\([A-Z]{4}\)", "", program_title)
+        # Removes any "(CODE)" text in program title 
+        # e.g. changes "Computer Science (COMP) "
+        program_title = re.sub("\([A-Z]{4}\)", "", program_title)
 
-    # Find CODE mapping; if unsuccessful, do nothing
-    program_code = CODE_MAPPING.get(program_title, program_title)
-    processed_course = program_code + course_level
+        # Find CODE mapping; if unsuccessful, do nothing
+        program_code = CODE_MAPPING.get(program_title, program_title)
+        processed_course = program_code + course_level
 
-    return processed_course
+        return processed_course
+    except:
+        # plaintext does not fit above pattern; e.g. it might say "any level 4
+        # course offered by School of Computer Science and Engineering". In that
+        # case, do not process. Manual customisation may be needed.
+        print(f"Unable to process course: {unprocessed_course}")
+        return unprocessed_course
 
 def get_nested_data(container: dict, curriculum_item: dict) -> None:
     """
