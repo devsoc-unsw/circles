@@ -8,9 +8,48 @@ NOTE: "spn" == "specialisation"
 import json
 import re 
 from typing import List, Iterable, Union, Optional 
-# TODO import courseCodes when complete
 
 TEST_SPNS = ["COMPA1", "SENGAH"]
+CODE_MAPPING = {}
+
+def customise_spn_data():
+
+    data = get_formatted_data()
+    global CODE_MAPPING
+    CODE_MAPPING = get_code_map()
+
+    customised_data = {} # Dictionary for all customised data
+    for spn in TEST_SPNS:
+
+        formatted = data[spn]
+        customised_data[spn] = {}
+        initialise_spn(customised_data[spn], formatted)
+
+        curriculum = []
+        for container in formatted["structure"]: # Add course / curriculum data
+
+            curriculum_item = {
+                "courses": {},
+                "title": container["title"],
+            }
+            curriculum_item["credits_to_complete"] = get_credits(container)
+            curriculum_item["type"] = get_type(curriculum_item["title"].lower())
+            curriculum_item["levels"] = get_levels(curriculum_item["title"].lower())
+
+            if container["structure"]:
+                # Nested container exists containing curriculum data
+                get_nested_data(container["structure"], curriculum_item)
+            else:
+                # No nested container containing curriculum data
+                get_courses(curriculum_item["courses"], container["courses"], 
+                            container["description"])
+
+            # Add item to curriculum  
+            curriculum.append(curriculum_item)
+
+        customised_data[spn]["curriculum"] = curriculum
+    
+    write_to_file(customised_data)
 
 def get_formatted_data() -> dict:
     """
@@ -21,6 +60,15 @@ def get_formatted_data() -> dict:
 
     return data
 
+def get_code_map() -> str:
+    """
+    Returns program title to code mapping from file
+    """
+    with open("programCodeMappings.json", "r") as FILE:
+        mapping = json.load(FILE)
+
+    return mapping["title_to_code"]
+
 def initialise_spn(spn: dict, data: dict) -> None:
     """
     Initialises basic attributes of the specialisation.
@@ -29,6 +77,20 @@ def initialise_spn(spn: dict, data: dict) -> None:
     spn["name"] = data["title"]
     spn["type"] = data["level"]
     spn["total_credits"] = data["credit_points"]
+
+def get_credits(container: dict):
+    """
+    Adds credit point requirements to curriculum item dict.
+    Credit points exist either explicitly in the container's field 
+    "credit_points" or must be parsed from the "description" field.
+    """
+    if container["credit_points"]:
+        return container["credit_points"]
+    else:
+        # No data in "credit_points" field, so parse plaintext "description"
+        # Catches XX UOC, XX credits, XX Credit, etc.
+        credits = re.search("(\d+) UOC|[cC]redit", container["description"])
+        return credits.group(1)
 
 def get_type(title: str) -> str:
     """ 
@@ -70,6 +132,8 @@ def get_courses(curriculum_courses: dict, container_courses: List[str],
     from the "description" field.
     """
     for course in container_courses:
+        if "any level" in course:
+            course = process_any_level(course) 
         curriculum_courses[course] = 1
 
     # No courses in container's "courses" field, so parse description. 
@@ -77,7 +141,46 @@ def get_courses(curriculum_courses: dict, container_courses: List[str],
         # Captures course codes and 'any level ... course' 
         res = re.findall("[A-Z]{4}[0-9]{4}|any level.*?courses?", description)
         for course in res:
+            if "any level" in course:
+                course = process_any_level(course) 
             curriculum_courses[course] = 1
+
+def process_any_level(unprocessed_course: str) -> str:
+    """
+    Processes 'any level X PROGRAM NAME course' into 'CODEX'
+    """
+    # group 1 contains level number and group 2 contains program title
+    # Note ?: means inner parentheses is non-capturing group
+    res = re.search("level (\d) ((?:[^ ]+ )+)course", unprocessed_course)
+    course_level = res.group(1).strip()
+    program_title = res.group(2).strip()
+
+    # Removes any "(CODE)" text in program title 
+    # e.g. changes "Computer Science (COMP) "
+    program_title = re.sub("\([A-Z]{4}\)", "", program_title)
+
+    # Find CODE mapping; if unsuccessful, do nothing
+    program_code = CODE_MAPPING.get(program_title, program_title)
+    processed_course = program_code + course_level
+
+    return processed_course
+
+def get_nested_data(container: dict, curriculum_item: dict) -> None:
+    """
+    Adds curriculum data from nested container (the 'sub_container') into
+    the curriculum item dict.
+    """
+    for sub_container in container: 
+
+        # Student may choose one of two courses
+        if sub_container["title"] == "One of the following:":
+            get_one_of_courses(sub_container["courses"], curriculum_item["courses"])
+
+        # Sub container title matches parent container title, so extract courses
+        elif sub_container["title"] == curriculum_item["title"]:
+            get_courses(curriculum_item["courses"], 
+                        sub_container["courses"], 
+                        sub_container["description"])
 
 def get_one_of_courses(container_courses: List[str], curriculum_courses: dict) -> None:
     """
@@ -97,74 +200,8 @@ def get_one_of_courses(container_courses: List[str], curriculum_courses: dict) -
     
     curriculum_courses[one_of_courses] = 2
 
-def get_nested_data(container: dict, curriculum_item: dict) -> None:
-    """
-    Adds curriculum data from nested container (the 'sub_container') into
-    the curriculum item dict.
-    """
-    for sub_container in container: 
-
-        # Student may choose one of two courses
-        if sub_container["title"] == "One of the following:":
-            get_one_of_courses(sub_container["courses"], curriculum_item["courses"])
-            # curriculum_item["courses"][str(tuple(sub_container["courses"]))] = 2
-
-        # Sub container title matches parent container title, so extract courses
-        elif sub_container["title"] == curriculum_item["title"]:
-            get_courses(curriculum_item["courses"], 
-                        sub_container["courses"], 
-                        sub_container["description"])
-
-def get_credits(container: dict):
-    """
-    Adds credit point requirements to curriculum item dict.
-    Credit points exist either explicitly in the container's field 
-    "credit_points" or must be parsed from the "description" field.
-    """
-    if container["credit_points"]:
-        return container["credit_points"]
-    else:
-        # No data in "credit_points" field, so parse plaintext "description"
-        # Catches XX UOC, XX credits, XX Credit, etc.
-        credits = re.search("(\d+) UOC|[cC]redit", container["description"])
-        return credits.group(1)
-
-def customise_spn_data():
-
-    data = get_formatted_data()
-
-    customised_data = {} # Dictionary for all customised data
-    for spn in TEST_SPNS:
-
-        formatted = data[spn]
-        customised_data[spn] = {}
-        initialise_spn(customised_data[spn], formatted)
-
-        curriculum = []
-        for container in formatted["structure"]:
-            # Add course / curriculum data
-
-            curriculum_item = {
-                "courses": {},
-                "title": container["title"],
-            }
-            curriculum_item["credits_to_complete"] = get_credits(container)
-            curriculum_item["type"] = get_type(curriculum_item["title"].lower())
-            curriculum_item["levels"] = get_levels(curriculum_item["title"].lower())
-
-            if container["structure"]: 
-                # Nested container exists containing curriculum data
-                get_nested_data(container["structure"], curriculum_item)
-            else: 
-                # No nested container containing curriculum data
-                get_courses(curriculum_item["courses"], container["courses"], 
-                            container["description"])
-
-            # Add item to curriculum  
-            curriculum.append(curriculum_item)
-
-        customised_data[spn]["curriculum"] = curriculum
-    
+def write_to_file(customised_data):
+    """ Writes processed data to file """
     with open("specialisationsProcessed.json", 'w') as OUTPUT_FILE:
         json.dump(customised_data, OUTPUT_FILE)
 
