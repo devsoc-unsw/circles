@@ -10,6 +10,8 @@ module.exports = {
           lessOptions: {
             modifyVars: {
               "@primary-color": "#9254de",
+              "@heading-color": "white",
+              "@text-color": "white",
             }, // purple-5
             javascriptEnabled: true,
           },

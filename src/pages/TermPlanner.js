@@ -1,9 +1,22 @@
 import React from "react";
 
-import { Card, Progress, Typography, Tag, Button, Divider } from "antd";
+import {
+  Card,
+  Progress,
+  Typography,
+  Tag,
+  Button,
+  Divider,
+  Drawer,
+  Space,
+  Collapse,
+} from "antd";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import DraggableCourse from "../components/TermPlanner/DraggableCourse";
 import TermBox from "../components/TermPlanner/TermBox";
+import { BiChevronLeft } from "react-icons/bi";
+import { RightOutlined, CloseOutlined } from "@ant-design/icons";
+import { useSelector } from "react-redux";
 
 function TermPlanner() {
   const { Title, Text } = Typography;
@@ -32,6 +45,10 @@ function TermPlanner() {
       COMP2041: {
         title: "Software Construction: Techniques and Tools",
         termsOffered: ["t2", "t3"],
+      },
+      COMP4441: {
+        title: "Random Course",
+        termsOffered: ["t1", "t2", "t3"],
       },
     },
 
@@ -106,50 +123,109 @@ function TermPlanner() {
   };
   console.log("update");
 
+  const [visible, setVisible] = React.useState(false);
+  const { Panel } = Collapse;
+
+  const theme = useSelector((state) => state.theme);
+
   return (
     <>
-      <Title style={{ marginLeft: "1em" }} className="text">
+      {/* <Title style={{ marginLeft: "1em", textAlign: "left" }} className="text">
         Computer Science/Arts
-      </Title>
+      </Title> */}
       <Divider />
-      <div class="gridContainer">
-        <div class="gridItem"></div>
-        <div class="gridItem">Term 1</div>
-        <div class="gridItem">Term 2</div>
-        <div class="gridItem">Term 3</div>
+      <DragDropContext
+        onDragEnd={handleOnDragEnd}
+        onDragStart={handleOnDragStart}
+      >
+        <div className="container">
+          <Button
+            type="primary"
+            icon={<RightOutlined />}
+            ghost
+            onClick={() => setVisible(true)}
+            shape="circle"
+          />
+          <div class="gridContainer">
+            <div class="gridItem"></div>
+            <div class="gridItem">Term 1</div>
+            <div class="gridItem">Term 2</div>
+            <div class="gridItem">Term 3</div>
 
-        <DragDropContext
-          onDragEnd={handleOnDragEnd}
-          onDragStart={handleOnDragStart}
-        >
-          {years.map((year, index) => (
-            <React.Fragment key={index}>
-              <div class="gridItem">{data.startYear + index}</div>
-              <TermBox
-                name={data.startYear + index + "t1"}
-                courses={year.t1}
-                courseNames={data.courses}
-                termsOffered={termsOffered}
-                isDragFinished={isDragFinished}
-              />
-              <TermBox
-                name={data.startYear + index + "t2"}
-                courses={year.t2}
-                courseNames={data.courses}
-                termsOffered={termsOffered}
-                isDragFinished={isDragFinished}
-              />
-              <TermBox
-                name={data.startYear + index + "t3"}
-                courses={year.t3}
-                courseNames={data.courses}
-                termsOffered={termsOffered}
-                isDragFinished={isDragFinished}
-              />
-            </React.Fragment>
-          ))}
-        </DragDropContext>
-      </div>
+            {years.map((year, index) => (
+              <React.Fragment key={index}>
+                <div class="gridItem">{data.startYear + index}</div>
+                <TermBox
+                  name={data.startYear + index + "t1"}
+                  courses={year.t1}
+                  courseNames={data.courses}
+                  termsOffered={termsOffered}
+                  isDragFinished={isDragFinished}
+                />
+                <TermBox
+                  name={data.startYear + index + "t2"}
+                  courses={year.t2}
+                  courseNames={data.courses}
+                  termsOffered={termsOffered}
+                  isDragFinished={isDragFinished}
+                />
+                <TermBox
+                  name={data.startYear + index + "t3"}
+                  courses={year.t3}
+                  courseNames={data.courses}
+                  termsOffered={termsOffered}
+                  isDragFinished={isDragFinished}
+                />
+              </React.Fragment>
+            ))}
+          </div>
+
+          <Drawer
+            placement="left"
+            onClose={() => setVisible(false)}
+            closeIcon={<CloseOutlined style={{ color: "white" }} />}
+            visible={visible}
+            getContainer={false}
+            bodyStyle={{
+              background: theme === "dark" ? "#151718" : "white",
+            }}
+            mask={false}
+            width="20%"
+          >
+            <Title class="text">Options</Title>
+            <Title level={2} class="text">
+              Unplanned Courses
+            </Title>
+            <Collapse
+              defaultActiveKey={["1"]}
+              className="collapse"
+              ghost={theme === "dark"}
+            >
+              <Panel header="Core" key="1">
+                <Droppable droppableId="cont" isDropDisabled={true}>
+                  {(provided, snapshot) => (
+                    <div ref={provided.innerRef} {...provided.droppableProps}>
+                      <DraggableCourse
+                        code="COMP4441"
+                        index="0"
+                        courseNames={data.courses}
+                        key="COMP4441"
+                      />
+                      {provided.placeholder}
+                    </div>
+                  )}
+                </Droppable>
+              </Panel>
+              <Panel header="Elective" key="2">
+                <p>dsfsdf</p>
+              </Panel>
+              <Panel header="General Education" key="3">
+                <p>sdfsdf</p>
+              </Panel>
+            </Collapse>
+          </Drawer>
+        </div>
+      </DragDropContext>
     </>
   );
 }
