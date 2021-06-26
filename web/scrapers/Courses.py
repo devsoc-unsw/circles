@@ -125,6 +125,7 @@ def cleanEnrolmentRules(data):
         data[i] = data[i].replace('Prequisite:', '')
         data[i] = data[i].replace('Prerequisite:', '')
         data[i] = data[i].replace('Prerequisites:', '')
+        data[i] = data[i].replace('Pre-requisites:', '')
         data[i] = data[i].replace('Pre-requisite:', '')
         data[i] = data[i].replace('Pre-requsite:', '')
         data[i] = data[i].replace('Prerequiste:', '')

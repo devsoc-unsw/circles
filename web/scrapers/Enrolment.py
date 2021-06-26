@@ -17,7 +17,7 @@ class Requirement:
     def validate(self, Condition):
         return True
     
-    def show():
+    def show(self, newLine = True):
         print('empty!')
 
 class CourseRequirement(Requirement):
@@ -34,8 +34,10 @@ class CourseRequirement(Requirement):
             satisfied = True
         return satisfied
     
-    def show(self):
+    def show(self, newLine = False):
         print(self.components, end = '')
+        if newLine:
+            print()
 
 class CompositeRequirement(Requirement):
     def __init__(self):
@@ -94,6 +96,8 @@ def andLike(text):
         result = True
     return result
 
+bad = False
+
 #This function cannot work properly with more than one leading '('s
 #The correct method is to add white spaces on the both side of parentheses and treat them seperately
 #But the data source is simple and here's no such cases, so I remain the code unchanged
@@ -138,5 +142,7 @@ def parseRequirement(text, isCalled = False, tracedBack = False):
             elif andLike(i):
                 pass
             else:
-                print('Unknown type: ', i)
+                bad = True
+                return
+                #print('Unknown type: ', i)
     return result
