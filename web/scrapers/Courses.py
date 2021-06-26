@@ -112,6 +112,7 @@ def getCourseData():
         data[i] = data[i]['data']
         data[i] = json.loads(data[i])
         data[i] = keep(data[i], keepList4data)
+        #Add code here
 
     data = processData(data)
     return data
