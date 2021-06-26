@@ -22,48 +22,36 @@ body {
   }
 
   .gridContainer {
-    margin-top: 2em;
     display: grid;
     grid-template-columns: 10em 1fr 1fr 1fr;
     padding: 10px;
     align-items: center;
-    max-width: 140em;
-	margin: auto auto
-    // justify-content: space-around;
-    // background-color: #2196f3;
+    max-width: 100em;
+    margin: auto auto;
   }
   .gridItem {
     font-size: 30px;
     text-align: center;
-    // border: 1px solid rgba(0, 0, 0, 0.8);
   }
 
   .termBubble {
-    background-color: #f8ebfe;
-    padding: 1.5em;
     margin: 0.5em;
     font-size: 30px;
-    border-radius: 3em;
     min-height: 10em;
-    // display: flex;
-    // flex-direction: column;
-    // justify-content: space-evenly;
-    // align-items: space-evenly;
-    // gap: 0.5em;
     color: white;
-	list-style: none;
-
+    list-style: none;
+    padding: 1.2em;
+    border-radius: 3em;
   }
 
   .course {
-    font-size: 1rem;
-    border-radius: 1.5em;
+    font-size: 0.9rem;
+    cursor: pointer;
+    margin-top: 1em;
     padding: 0.7em;
-	padding-right: 1em;
-	padding-left: 1em;
-	cursor: pointer;
-	margin-top: 1em;
-
+    padding-right: 1em;
+    padding-left: 1em;
+    border-radius: 1em;
   }
 }
 
@@ -103,5 +91,12 @@ body {
   }
   .course {
     background-color: #be7df2;
+  }
+
+  .termBubble {
+    // border: 1px solid #c4c4c4;
+    // filter: drop-shadow(1px 2px 4px rgba(0, 0, 0, 0.25));
+    background-color: #f9edff;
+    border: 0.5px solid #e6c3f8;
   }
 }

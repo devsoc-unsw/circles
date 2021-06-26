@@ -25,8 +25,8 @@ function App() {
           >
             UPDATE
           </Button> */}
-          <ThemeToggle />
           <TermPlanner />
+          <ThemeToggle />
         </div>
       ) : (
         <div>Hello! {degree}</div>

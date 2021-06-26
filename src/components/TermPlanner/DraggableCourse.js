@@ -2,11 +2,13 @@ import React from "react";
 import { Typography } from "antd";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
-function DraggableCourse({ course, index }) {
+function DraggableCourse({ code, index, courseNames }) {
   //   let code = course.match(/([A-Z]{4}[0-9]{4}):/)[1];
   const { Title, Text } = Typography;
+  const course = courseNames[code];
+
   return (
-    <Draggable key={course} draggableId={course} index={index}>
+    <Draggable draggableId={code} index={index}>
       {(provided) => (
         <li
           className="course"
@@ -14,7 +16,10 @@ function DraggableCourse({ course, index }) {
           {...provided.dragHandleProps}
           ref={provided.innerRef}
         >
-          {course}
+          <Text strong style={{ color: "white" }}>
+            {code}
+          </Text>
+          <Text style={{ color: "white" }}>: {course} </Text>
         </li>
       )}
     </Draggable>
