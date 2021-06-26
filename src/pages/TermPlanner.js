@@ -10,15 +10,29 @@ function TermPlanner() {
 
   const data = {
     courses: {
-      COMP3333: "Extended algorithms and programming techniques",
-      ARTS4268:
-        "Methodologies in the Social Sciences: Questions and Quandaries",
-      COMP1511: "Programming Fundamentals",
-      CHEM1011: "Chemistry 1A",
-      MATH1131: "Mathematics 1A",
-      BIOC2201: "Biochemistry",
-      ENGG1000: "Introduction to Engineering Design and Innovation",
-      COMP2041: "Software Construction: Techniques and Tools",
+      COMP3333: {
+        title: "Extended algorithms and programming techniques",
+        termsOffered: ["t1", "t3"],
+      },
+      ARTS4268: {
+        title: "Methodologies in the Social Sciences: Questions and Quandaries",
+        termsOffered: ["t1", "t2"],
+      },
+      COMP1511: {
+        title: "Programming Fundamentals",
+        termsOffered: ["t1", "t2", "t3"],
+      },
+      CHEM1011: { title: "Chemistry 1A", termsOffered: ["t1", "t2", "t3"] },
+      MATH1131: { title: "Mathematics 1A", termsOffered: ["t1", "t2", "t3"] },
+      BIOC2201: { title: "Biochemistry", termsOffered: ["t2"] },
+      ENGG1000: {
+        title: "Introduction to Engineering Design and Innovation",
+        termsOffered: ["t3"],
+      },
+      COMP2041: {
+        title: "Software Construction: Techniques and Tools",
+        termsOffered: ["t2", "t3"],
+      },
     },
 
     startYear: 2021,
@@ -36,6 +50,8 @@ function TermPlanner() {
   const [years, setYears] = React.useState(data.years);
 
   const handleOnDragEnd = (result) => {
+    setIsDragFinished(true);
+
     const { destination, source, draggableId } = result;
     if (!destination) return; // drag outside of droppable area
     if (
@@ -80,6 +96,16 @@ function TermPlanner() {
     setYears(newYears);
   };
 
+  const [termsOffered, setTermsOffered] = React.useState([]);
+  const [isDragFinished, setIsDragFinished] = React.useState(true);
+  const handleOnDragStart = (input) => {
+    setIsDragFinished(false);
+    const course = input.draggableId;
+    const terms = data.courses[course]["termsOffered"];
+    setTermsOffered(terms);
+  };
+  console.log("update");
+
   return (
     <>
       <Title style={{ marginLeft: "1em" }} className="text">
@@ -92,7 +118,10 @@ function TermPlanner() {
         <div class="gridItem">Term 2</div>
         <div class="gridItem">Term 3</div>
 
-        <DragDropContext onDragEnd={handleOnDragEnd}>
+        <DragDropContext
+          onDragEnd={handleOnDragEnd}
+          onDragStart={handleOnDragStart}
+        >
           {years.map((year, index) => (
             <React.Fragment key={index}>
               <div class="gridItem">{data.startYear + index}</div>
@@ -100,16 +129,22 @@ function TermPlanner() {
                 name={data.startYear + index + "t1"}
                 courses={year.t1}
                 courseNames={data.courses}
+                termsOffered={termsOffered}
+                isDragFinished={isDragFinished}
               />
               <TermBox
                 name={data.startYear + index + "t2"}
                 courses={year.t2}
                 courseNames={data.courses}
+                termsOffered={termsOffered}
+                isDragFinished={isDragFinished}
               />
               <TermBox
                 name={data.startYear + index + "t3"}
                 courses={year.t3}
                 courseNames={data.courses}
+                termsOffered={termsOffered}
+                isDragFinished={isDragFinished}
               />
             </React.Fragment>
           ))}
