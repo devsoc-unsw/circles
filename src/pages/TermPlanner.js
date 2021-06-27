@@ -50,6 +50,14 @@ function TermPlanner() {
         title: "Random Course",
         termsOffered: ["t1", "t2", "t3"],
       },
+      COMP3131: {
+        title: "Programming Languages and Compilers",
+        termsOffered: ["t3"],
+      },
+      COMP3601: {
+        title: "Design Project A",
+        termsOffered: ["t1", "t2"],
+      },
     },
 
     startYear: 2021,
@@ -183,7 +191,9 @@ function TermPlanner() {
           <Drawer
             placement="left"
             onClose={() => setVisible(false)}
-            closeIcon={<CloseOutlined style={{ color: "white" }} />}
+            closeIcon={
+              <CloseOutlined style={{ color: theme === "dark" && "white" }} />
+            }
             visible={visible}
             getContainer={false}
             bodyStyle={{
@@ -211,6 +221,18 @@ function TermPlanner() {
                         courseNames={data.courses}
                         key="COMP4441"
                       />
+                      <DraggableCourse
+                        code="COMP3601"
+                        index="1"
+                        courseNames={data.courses}
+                        key="COMP4441"
+                      />
+                      <DraggableCourse
+                        code="COMP3131"
+                        index="2"
+                        courseNames={data.courses}
+                        key="COMP4441"
+                      />
                       {provided.placeholder}
                     </div>
                   )}
@@ -223,6 +245,9 @@ function TermPlanner() {
                 <p>sdfsdf</p>
               </Panel>
             </Collapse>
+            <Title level={2} class="text">
+              Number of Years
+            </Title>
           </Drawer>
         </div>
       </DragDropContext>
