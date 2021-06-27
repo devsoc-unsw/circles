@@ -95,7 +95,6 @@ function TermPlanner() {
     const destTerm = destination.droppableId.match(/t[1-3]/)[0];
     const destIndex = destYear - data.startYear;
     const destBox = years[destIndex][destTerm];
-
     let newYears = [...years];
 
     // === move within one list ===
@@ -141,7 +140,7 @@ function TermPlanner() {
       {/* <Title style={{ marginLeft: "1em", textAlign: "left" }} className="text">
         Computer Science/Arts
       </Title> */}
-      <Divider />
+      {/* <Divider /> */}
       <DragDropContext
         onDragEnd={handleOnDragEnd}
         onDragStart={handleOnDragStart}
@@ -200,7 +199,7 @@ function TermPlanner() {
               background: theme === "dark" ? "#151718" : "white",
             }}
             mask={false}
-            width="20%"
+            width="25em"
           >
             <Title class="text">Options</Title>
             <Title level={2} class="text">
@@ -214,24 +213,28 @@ function TermPlanner() {
               <Panel header="Core" key="1">
                 <Droppable droppableId="cont" isDropDisabled={true}>
                   {(provided, snapshot) => (
-                    <div ref={provided.innerRef} {...provided.droppableProps}>
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.droppableProps}
+                      style={{ marginBottom: "1em" }}
+                    >
                       <DraggableCourse
                         code="COMP4441"
-                        index="0"
+                        index={0}
                         courseNames={data.courses}
                         key="COMP4441"
                       />
                       <DraggableCourse
                         code="COMP3601"
-                        index="1"
+                        index={1}
                         courseNames={data.courses}
-                        key="COMP4441"
+                        key="COMP3601"
                       />
                       <DraggableCourse
                         code="COMP3131"
-                        index="2"
+                        index={2}
                         courseNames={data.courses}
-                        key="COMP4441"
+                        key="COMP3131"
                       />
                       {provided.placeholder}
                     </div>
