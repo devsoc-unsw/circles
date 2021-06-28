@@ -205,11 +205,7 @@ function TermPlanner() {
             <Title level={2} class="text">
               Unplanned Courses
             </Title>
-            <Collapse
-              defaultActiveKey={["1"]}
-              className="collapse"
-              ghost={theme === "dark"}
-            >
+            <Collapse className="collapse" ghost={theme === "dark"}>
               <Panel header="Core" key="1">
                 <Droppable droppableId="cont" isDropDisabled={true}>
                   {(provided, snapshot) => (
