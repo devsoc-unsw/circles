@@ -1,13 +1,45 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { Menu } from 'antd';
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 
 const { SubMenu } = Menu;
 
 export default function CourseMenu() {
+  const history = useHistory();
+  const courses = useSelector(state => state.updateCourses.courses);
+  const [core, setCore] = useState([]);
+  const [electives, setElectives] = useState([]);
+  const [genEd, setGenEd] = useState([]);
+
+  useEffect(() => {
+    if (courses) {
+      let currCore = [...core];
+      let currElec = [...electives];
+      let currGenEd = [...genEd];
+      for (const course in courses) {
+        if (courses[course].type === 'core') {
+          currCore.push(course);
+        } else if (courses[course].type === 'elective') {
+          currElec.push(course);
+        } else if (courses[course].type === 'gened') {
+          currGenEd.push(course);
+        }
+      };
+      setCore(currCore);
+      setElectives(currElec);
+      setGenEd(currGenEd);
+    }
+  }, []);
+
   const handleClick = e => {
     console.log('click ', e);
   };
+
+  const goToCourse = (id) => {
+    history.push(`/course-selector/${id}`);
+  }
 
   return (
     <Menu
@@ -17,29 +49,35 @@ export default function CourseMenu() {
       defaultOpenKeys={['sub1']}
       mode="inline"
     >
-      <SubMenu key="sub1" icon={<MailOutlined />} title="Navigation One">
-        <Menu.ItemGroup key="g1" title="Item 1">
-          <Menu.Item key="1">Option 1</Menu.Item>
-          <Menu.Item key="2">Option 2</Menu.Item>
-        </Menu.ItemGroup>
-        <Menu.ItemGroup key="g2" title="Item 2">
-          <Menu.Item key="3">Option 3</Menu.Item>
-          <Menu.Item key="4">Option 4</Menu.Item>
-        </Menu.ItemGroup>
+      <SubMenu key="sub1" /* icon={<MailOutlined />} */ title="Recently Viewed">
+
       </SubMenu>
-      <SubMenu key="sub2" icon={<AppstoreOutlined />} title="Navigation Two">
-        <Menu.Item key="5">Option 5</Menu.Item>
-        <Menu.Item key="6">Option 6</Menu.Item>
-        <SubMenu key="sub3" title="Submenu">
-          <Menu.Item key="7">Option 7</Menu.Item>
-          <Menu.Item key="8">Option 8</Menu.Item>
-        </SubMenu>
+      <SubMenu key="sub2" /* icon={<AppstoreOutlined />} */ title="Core">
+        {
+          core.map((course) => {
+            return (
+              <Menu.Item key={ course } onClick={ () => goToCourse(course) }>{ course }</Menu.Item>
+            )
+          })
+        }
       </SubMenu>
-      <SubMenu key="sub4" icon={<SettingOutlined />} title="Navigation Three">
-        <Menu.Item key="9">Option 9</Menu.Item>
-        <Menu.Item key="10">Option 10</Menu.Item>
-        <Menu.Item key="11">Option 11</Menu.Item>
-        <Menu.Item key="12">Option 12</Menu.Item>
+      <SubMenu key="sub4" /* icon={<SettingOutlined />} */ title="Electives">
+        {
+          electives.map((course) => {
+            return (
+              <Menu.Item key={ course } onClick={ () => goToCourse(course) }>{ course }</Menu.Item>
+            )
+          })
+        }
+      </SubMenu>
+      <SubMenu key="sub5" /* icon={<SettingOutlined />} */ title="General Education">
+        {
+          genEd.map((course) => {
+            return (
+              <Menu.Item key={ course } onClick={ () => goToCourse(course) }>{ course }</Menu.Item>
+            )
+          })
+        }
       </SubMenu>
     </Menu>
   );

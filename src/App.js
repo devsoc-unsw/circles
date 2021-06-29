@@ -8,6 +8,7 @@ import {
 import './App.less';
 import Home from './pages/Home';
 import CourseSelector from './pages/CourseSelector/CourseSelector';
+import CourseDescription from './pages/CourseSelector/CourseDescription';
 
 
 function App() {
