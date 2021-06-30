@@ -29,32 +29,55 @@ def customise_spn_data():
         formatted = data[spn]
         customised_data[spn] = {}
         initialise_spn(customised_data[spn], formatted)
-
+        
         curriculum = []
-        for container in formatted["structure"]: # Add course / curriculum data
+        constraints = []
+        for container in formatted["structure"]: 
+            # Build curriculum data and locate any constraints within curriculum
 
-            curriculum_item = {
-                "courses": {},
-                "title": container["title"],
-            }
-            curriculum_item["credits_to_complete"] = int(get_credits(container))
-            curriculum_item["type"] = get_type(curriculum_item["title"].lower())
-            curriculum_item["levels"] = get_levels(curriculum_item["title"].lower())
+            if container["description"] and not container["courses"] and not container["structure"]:
+                # If container lists not courses and has no nested curriculum
+                # 'structure', then there is likely to be a constraint in the
+                # 'description' field
+                constraints.append(get_constraint(container))
 
-            if container["structure"]:
-                # Nested container exists containing curriculum data
-                get_nested_data(container["structure"], curriculum_item)
             else:
-                # No nested container containing curriculum data
-                get_courses(curriculum_item["courses"], container["courses"], 
-                            container["description"])
+                # Otherwise, the container includes course data which must be
+                # parsed and extracted
+                curriculum_item = {
+                    "courses": {},
+                    "title": container["title"],
+                }
+                curriculum_item["credits_to_complete"] = int(get_credits(container))
+                curriculum_item["type"] = get_type(curriculum_item["title"].lower())
+                curriculum_item["levels"] = get_levels(curriculum_item["title"].lower())
 
-            # Add item to curriculum  
-            curriculum.append(curriculum_item)
+                if container["structure"]:
+                    # Nested container exists containing curriculum data
+                    get_nested_data(container["structure"], curriculum_item)
+                else:
+                    # No nested container containing curriculum data
+                    get_courses(curriculum_item["courses"], container["courses"], 
+                                container["description"])
 
+                # Add item to curriculum  
+                curriculum.append(curriculum_item)
+        
+        customised_data[spn]["course_constraints"] = constraints
         customised_data[spn]["curriculum"] = curriculum
     
     write_to_file(customised_data)
+
+def get_constraint(constraint_data: dict) -> dict:
+    """
+    Returns dict containing title and description of curriculum constraint;
+    e.g. where students must complete at least X level 4 courses (such courses
+    already being captured in the curriculum data)
+    """
+    return {
+        "title": constraint_data["title"],
+        "description": constraint_data["description"]
+    }
 
 def get_formatted_data() -> dict:
     """
@@ -99,7 +122,7 @@ def get_credits(container: dict) -> str:
 
 def get_type(title: str) -> str:
     """ 
-    Returns curriculum type of specialisation item .
+    Parses 'title' to get curriculum type of specialisation item .
     Curriculum type is one of {"elective", "core", "other"}.
     """
     if "elective" in title:
@@ -111,8 +134,8 @@ def get_type(title: str) -> str:
 
 def get_levels(title: str) -> List[int]:
     """
-    Returns curriculum levels of specialisation item.
-    Level can be any combination of [1, 2, 3, 4, 5, 6, 7, 8, 9].
+    Parses 'title' to get curriculum levels of specialisation item.
+    Level can be any combination of {1, 2, 3, 4, 5, 6, 7, 8, 9}.
     """
     levels = []
     # s? \d[^ ]* captures cases like "Level 1/2", "Levels 1,2,3" and "Level 1-2"
@@ -129,29 +152,60 @@ def get_levels(title: str) -> List[int]:
         
     return levels
 
+def get_nested_data(container: dict, curriculum_item: dict) -> None:
+    """
+    Adds curriculum data from nested container (the 'sub_container') into
+    the curriculum item dict.
+    """
+    for sub_container in container: 
+
+        # Student may choose one of two courses
+        if sub_container["title"] == "One of the following:":
+            get_one_of_courses(sub_container["courses"], curriculum_item["courses"])
+
+        # Sub container title matches parent container title, so simply 
+        # extract courses to put into your curriculum dict
+        elif sub_container["title"] == curriculum_item["title"]:
+            get_courses(curriculum_item["courses"], sub_container["courses"], 
+                        sub_container["description"])
+
+def get_one_of_courses(container_courses: List[str], curriculum_courses: dict) -> None:
+    """
+    Since tuples are not supported by JSON, current approach to 'one of
+    the following' courses is to convert to key-value pair
+    "COURSE1 or COURSE2": 2, the '2' representing that the key contains
+    2 courses.
+    """
+    one_of_courses = ""
+    course_added = False # Flag value to identify where 'or' needs to be added
+    for course in container_courses:
+        if course_added:
+            one_of_courses += " or "
+
+        one_of_courses += course
+        course_added = True
+    
+    curriculum_courses[one_of_courses] = 2
+
 def get_courses(curriculum_courses: dict, container_courses: List[str], 
                 description: str) -> None:
     """ 
     Adds courses from container to the customised curriculum course dict.
-    Courses exist either explitily in the "courses" field or must be parsed
-    from the "description" field.
     """
     for course in container_courses:
         if "any level" in course:
             course = process_any_level(course) 
         curriculum_courses[course] = 1
 
-    # No courses in container's "courses" field, so parse description. 
-    if not container_courses:
-        # Captures course codes and strings like 'any level X course offered by ... ' 
-        print(description)
-        # res = re.findall("[A-Z]{4}[0-9]{4}|any level[^<]+.*?courses?.*?", description)
-        res = re.findall("[A-Z]{4}[0-9]{4}|any level[^<]+", description)
-        print(res)
-        for course in res:
-            if "any level" in course:
-                course = process_any_level(course) 
-            curriculum_courses[course] = 1
+    # Old code parsing description for course codes:
+    # Captures course codes and strings like 'any level X course offered by ... ' 
+        # if not container_courses:
+        # res = re.findall("[A-Z]{4}[0-9]{4}|any level[^<]+", description)
+        # print(res)
+        # for course in res:
+        #     if "any level" in course:
+        #         course = process_any_level(course) 
+        #     curriculum_courses[course] = 1
 
 def process_any_level(unprocessed_course: str) -> str:
     """
@@ -179,41 +233,6 @@ def process_any_level(unprocessed_course: str) -> str:
         # case, do not process. Manual customisation may be needed.
         print(f"Unable to process course: {unprocessed_course}")
         return unprocessed_course
-
-def get_nested_data(container: dict, curriculum_item: dict) -> None:
-    """
-    Adds curriculum data from nested container (the 'sub_container') into
-    the curriculum item dict.
-    """
-    for sub_container in container: 
-
-        # Student may choose one of two courses
-        if sub_container["title"] == "One of the following:":
-            get_one_of_courses(sub_container["courses"], curriculum_item["courses"])
-
-        # Sub container title matches parent container title, so extract courses
-        elif sub_container["title"] == curriculum_item["title"]:
-            get_courses(curriculum_item["courses"], 
-                        sub_container["courses"], 
-                        sub_container["description"])
-
-def get_one_of_courses(container_courses: List[str], curriculum_courses: dict) -> None:
-    """
-    Since tuples are not supported by JSON, current approach to 'one of
-    the following' courses is to convert to key-value pair
-    "COURSE1 or COURSE2": 2, the '2' representing that the key contains
-    2 courses.
-    """
-    one_of_courses = ""
-    course_added = False # Flag value to identify where 'or' needs to be added
-    for course in container_courses:
-        if course_added:
-            one_of_courses += " or "
-
-        one_of_courses += course
-        course_added = True
-    
-    curriculum_courses[one_of_courses] = 2
 
 def write_to_file(customised_data):
     """ Writes processed data to file """

@@ -6,6 +6,7 @@
         "name": "Computer Science",
         "type": "major",
         "total_credits": 96,
+        "constraints": [],
         "curriculum": [
             {
                 "courses": {
@@ -50,6 +51,7 @@
         "name": "Computer Science",
         "type": "honours",
         "total_credits": 48,
+        "constraints": [],
         "curriculum": [
             {
                 "courses": {
@@ -82,6 +84,12 @@
         "name": "Computer Engineering",
         "type": "honours",
         "total_credits": 168,
+        "constraints": [
+            {
+                "title": "Level 4 UOC Minimum",
+                "description": "Students must complete a minimum of 36 UOC of Level 4 courses including core courses and at least 12 UOC of Level 4 Discipline Electives, including:<br /><br />COMP4601 - Design Project B<br />COMP4920 - Management and Ethics<br />COMP4951 - Research Thesis A<br />COMP4952 - Research Thesis B<br />COMP4953 - Research Thesis C<br />any level 4 course offered by School of Computer Science and Engineering<br />"
+            }
+        ],
         "curriculum": [
             {
                 "courses": {
@@ -136,22 +144,6 @@
                 "courses": {
                     "COMP4601": 1,
                     "COMP4920": 1,
-                    "COMP4951": 1,
-                    "COMP4952": 1,
-                    "COMP4953": 1,
-                    "any level 4 course offered by School of Computer Science and Engineering": 1
-                },
-                "title": "Level 4 UOC Minimum",
-                "credits_to_complete": 36,
-                "type": "other",
-                "levels": [
-                    4
-                ]
-            },
-            {
-                "courses": {
-                    "COMP4601": 1,
-                    "COMP4920": 1,
                     "COMP4952": 1,
                     "COMP4951": 1,
                     "COMP4953": 1
@@ -189,6 +181,12 @@
         "name": "Software Engineering",
         "type": "honours",
         "total_credits": 168,
+        "constraints": [
+            {
+                "title": "Level 4 (or higher) COMP UOC Minimum",
+                "description": "Students must complete a minimum of 30 UOC of the following courses.<br /><br />COMP4920 - Management and Ethics<br />any level 4 Computer Science (COMP) course<br />any level 6 Computer Science (COMP) course<br />any level 9 Computer Science (COMP) course<br />COMP4951 - Research Thesis A<br />COMP4952 - Research Thesis B<br />COMP4953 - Research Thesis C<br />"
+            }
+        ],
         "curriculum": [
             {
                 "courses": {
@@ -285,28 +283,6 @@
                 "type": "core",
                 "levels": [
                     2
-                ]
-            },
-            {
-                "courses": {
-                    "COMP4920": 1,
-                    "Computer Science 4": 1,
-                    "Computer Science 6": 1,
-                    "Computer Science 9": 1,
-                    "COMP4951": 1,
-                    "COMP4952": 1,
-                    "COMP4953": 1
-                },
-                "title": "Level 4 (or higher) COMP UOC Minimum",
-                "credits_to_complete": 30,
-                "type": "other",
-                "levels": [
-                    4,
-                    5,
-                    6,
-                    7,
-                    8,
-                    9
                 ]
             }
         ]
