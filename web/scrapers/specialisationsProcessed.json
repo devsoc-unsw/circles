@@ -1,1 +1,837 @@
-{"COMPA1": {"programs": ["3778"], "name": "Computer Science", "type": "major", "total_credits": 96, "course_constraints": [], "curriculum": [{"courses": {"COMP3121 or COMP3821": 2, "MATH1141 or MATH1131": 2, "COMP1511": 1, "COMP1521": 1, "COMP1531": 1, "COMP2511": 1, "COMP2521": 1, "COMP4920": 1, "COMP3900": 1, "MATH1081": 1, "MATH1241 or MATH1231": 2}, "title": "Core Courses", "credits_to_complete": 66, "type": "core", "levels": [], "notes": ""}, {"courses": {"ENGG2600": 1, "ENGG4600": 1, "ENGG3600": 1, "COMP3": 1, "COMP4": 1, "COMP6": 1, "COMP9": 1}, "title": "Computing Electives", "credits_to_complete": 30, "type": "elective", "levels": [], "notes": "<br />NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. <br />2 UOC courses are run over consecutive terms for a final total of 6 UOC."}]}, "COMPAH": {"programs": ["4515"], "name": "Computer Science", "type": "honours", "total_credits": 48, "course_constraints": [], "curriculum": [{"courses": {"COMP4": 1, "COMP9": 1, "COMP6": 1}, "title": "Coursework", "credits_to_complete": 30, "type": "other", "levels": [], "notes": ""}, {"courses": {"COMP4963": 1, "COMP4961": 1, "COMP4962": 1}, "title": "Thesis", "credits_to_complete": 18, "type": "other", "levels": [], "notes": ""}]}, "COMPBH": {"programs": ["3707"], "name": "Computer Engineering", "type": "honours", "total_credits": 168, "course_constraints": [{"title": "Level 4 UOC Minimum", "description": "Students must complete a minimum of 36 UOC of Level 4 courses including core courses and at least 12 UOC of Level 4 Discipline Electives, including:<br /><br />COMP4601 - Design Project B<br />COMP4920 - Management and Ethics<br />COMP4951 - Research Thesis A<br />COMP4952 - Research Thesis B<br />COMP4953 - Research Thesis C<br />any level 4 course offered by School of Computer Science and Engineering<br />"}], "curriculum": [{"courses": {"ENGG3060": 1, "ENGG4600": 1, "ENGG2600": 1, "ENGG3600": 1, "COMP3": 1, "COMP4": 1, "COMP6": 1, "COMP9": 1}, "title": "Discipline Electives", "credits_to_complete": 24, "type": "elective", "levels": [], "notes": "<br /><br />2 UOC and 3 UOC courses are run over consecutive terms for a final total of 6 UOC."}, {"courses": {"COMP3222": 1, "COMP3601": 1, "COMP3211": 1, "COMP3231": 1}, "title": "Level 3 Core Courses", "credits_to_complete": 24, "type": "core", "levels": [3], "notes": ""}, {"courses": {"MATH1141 or MATH1131": 2, "PHYS1131 or PHYS1121": 2, "COMP1521": 1, "ELEC1111": 1, "COMP1531": 1, "COMP1511": 1, "ENGG1000": 1, "PHYS1221 or PHYS1231": 2, "MATH1241 or MATH1231": 2}, "title": "Level 1 Core Courses", "credits_to_complete": 54, "type": "core", "levels": [1], "notes": ""}, {"courses": {"COMP4601": 1, "COMP4920": 1, "COMP4952": 1, "COMP4951": 1, "COMP4953": 1}, "title": "Level 4 Core Courses", "credits_to_complete": 24, "type": "core", "levels": [4], "notes": ""}, {"courses": {"ELEC2133": 1, "ELEC2134": 1, "COMP2521": 1, "COMP2511": 1, "DESN2000": 1, "MATH2069": 1, "MATH2099": 1}, "title": "Level 2 Core Courses", "credits_to_complete": 42, "type": "core", "levels": [2], "notes": ""}]}, "SENGAH": {"programs": ["3707"], "name": "Software Engineering", "type": "honours", "total_credits": 168, "course_constraints": [{"title": "Level 4 (or higher) COMP UOC Minimum", "description": "Students must complete a minimum of 30 UOC of the following courses.<br /><br />COMP4920 - Management and Ethics<br />any level 4 Computer Science (COMP) course<br />any level 6 Computer Science (COMP) course<br />any level 9 Computer Science (COMP) course<br />COMP4951 - Research Thesis A<br />COMP4952 - Research Thesis B<br />COMP4953 - Research Thesis C<br />"}], "curriculum": [{"courses": {"any course": 1}, "title": "Free Elective", "credits_to_complete": 6, "type": "elective", "levels": [], "notes": ""}, {"courses": {"COMP3311": 1, "SENG3011": 1, "COMP3141": 1, "COMP3331": 1}, "title": "Level 3 Core Courses", "credits_to_complete": 24, "type": "core", "levels": [3], "notes": ""}, {"courses": {"MATH1141 or MATH1131": 2, "MATH1241 or MATH1231": 2, "MATH1081": 1, "COMP1531": 1, "COMP1511": 1, "ENGG1000": 1, "COMP1521": 1}, "title": "Level 1 Core Courses", "credits_to_complete": 42, "type": "core", "levels": [1], "notes": ""}, {"courses": {"ENGG3060": 1, "ENGG4600": 1, "ENGG3600": 1, "ENGG2600": 1, "COMP3": 1, "COMP4": 1, "COMP6": 1, "COMP9": 1, "INFS3": 1, "INFS4": 1, "MATH3": 1, "MATH4": 1, "MATH6": 1, "ELEC3": 1, "ELEC4": 1, "TELE3": 1, "TELE4": 1}, "title": "Discipline Electives", "credits_to_complete": 36, "type": "elective", "levels": [], "notes": ""}, {"courses": {"COMP4952": 1, "COMP4951": 1, "SENG4920": 1, "COMP4953": 1}, "title": "Level 4 Core Courses", "credits_to_complete": 18, "type": "core", "levels": [4], "notes": ""}, {"courses": {"COMP2041": 1, "COMP2511": 1, "DESN2000": 1, "SENG2011": 1, "MATH2859": 1, "SENG2021": 1, "COMP2521": 1, "MATH2400": 1}, "title": "Level 2 Core Courses", "credits_to_complete": 42, "type": "core", "levels": [2], "notes": ""}]}, "COMPD1": {"programs": ["3778"], "name": "Computer Science (Database Systems)", "type": "major", "total_credits": 96, "course_constraints": [], "curriculum": [{"courses": {"COMP9319": 1, "COMP9313": 1, "COMP9315": 1, "COMP6714": 1, "COMP9318": 1}, "title": "Database Systems Prescribed Electives", "credits_to_complete": 18, "type": "elective", "levels": [], "notes": ""}, {"courses": {"ENGG2600": 1, "ENGG3600": 1, "ENGG4600": 1, "COMP3": 1, "COMP4": 1, "COMP6": 1, "COMP9": 1}, "title": "Computing Elective", "credits_to_complete": 6, "type": "elective", "levels": [], "notes": "<br />NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. <br />2 UOC courses are run over consecutive terms for a final total of 6 UOC."}, {"courses": {"MATH1081": 1, "COMP1511": 1, "COMP1531": 1, "COMP3311": 1, "COMP4920": 1, "COMP1521": 1, "COMP2521": 1, "COMP2511": 1, "COMP3900": 1, "COMP3121 or COMP3821": 2, "MATH1241 or MATH1231": 2, "MATH1131 or MATH1141": 2}, "title": "Core Courses", "credits_to_complete": 72, "type": "core", "levels": [], "notes": ""}]}, "COMPE1": {"programs": ["3778"], "name": "Computer Science (eCommerce Systems)", "type": "major", "total_credits": 96, "course_constraints": [], "curriculum": [{"courses": {"COMP3511": 1, "COMP9321": 1, "COMP9323": 1, "COMP9322": 1}, "title": "Discipline Electives", "credits_to_complete": 18, "type": "elective", "levels": [], "notes": ""}, {"courses": {"ENGG4600": 1, "ENGG2600": 1, "ENGG3600": 1, "COMP3": 1, "COMP4": 1, "COMP6": 1, "COMP9": 1}, "title": "Computing Electives", "credits_to_complete": 6, "type": "elective", "levels": [], "notes": "<br />NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. <br />2 UOC courses are run over consecutive terms for a final total of 6 UOC."}, {"courses": {"MATH1131 or MATH1141": 2, "COMP3311": 1, "COMP1531": 1, "MATH1081": 1, "COMP3900": 1, "COMP4920": 1, "COMP2511": 1, "COMP1511": 1, "COMP1521": 1, "COMP2521": 1, "MATH1231 or MATH1241": 2, "COMP3121 or COMP3821": 2}, "title": "Core Courses", "credits_to_complete": 72, "type": "core", "levels": [], "notes": ""}]}, "COMPI1": {"programs": ["3778"], "name": "Computer Science (Artificial Intelligence)", "type": "major", "total_credits": 96, "course_constraints": [], "curriculum": [{"courses": {"ENGG2600": 1, "ENGG3600": 1, "ENGG4600": 1, "COMP3": 1, "COMP4": 1, "COMP6": 1, "COMP9": 1}, "title": "Computing Electives", "credits_to_complete": 6, "type": "elective", "levels": [], "notes": "<br />NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. <br />2 UOC courses are run over consecutive terms for a final total of 6 UOC."}, {"courses": {"MATH1131 or MATH1141": 2, "COMP3121 or COMP3821": 2, "MATH1231 or MATH1241": 2, "COMP2521": 1, "COMP1521": 1, "COMP1531": 1, "COMP3900": 1, "COMP2511": 1, "COMP4920": 1, "COMP3411": 1, "COMP1511": 1, "MATH1081": 1}, "title": "Core Courses", "credits_to_complete": 72, "type": "core", "levels": [], "notes": ""}, {"courses": {"COMP9417": 1, "COMP4418": 1, "COMP9517": 1, "COMP9418": 1, "COMP9444": 1, "COMP3431": 1, "COMP9318": 1}, "title": "Artificial Intelligence Prescribed Electives", "credits_to_complete": 18, "type": "elective", "levels": [], "notes": ""}]}, "COMPJ1": {"programs": ["3778"], "name": "Computer Science (Programming Languages)", "type": "major", "total_credits": 96, "course_constraints": [], "curriculum": [{"courses": {"MATH1081": 1, "COMP3900": 1, "COMP2521": 1, "COMP1521": 1, "COMP4920": 1, "COMP2511": 1, "COMP3161": 1, "COMP3121": 1, "COMP1511": 1, "COMP1531": 1, "MATH1231 or MATH1241": 2, "MATH1141 or MATH1131": 2}, "title": "Core Course", "credits_to_complete": 72, "type": "core", "levels": [], "notes": ""}, {"courses": {"ENGG3600": 1, "ENGG4600": 1, "ENGG2600": 1, "COMP3": 1, "COMP4": 1, "COMP6": 1, "COMP9": 1}, "title": "Computing Electives", "credits_to_complete": 6, "type": "elective", "levels": [], "notes": "<br />NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. <br />2 UOC courses are run over consecutive terms for a final total of 6 UOC."}, {"courses": {"COMP6771": 1, "COMP3151": 1, "COMP3131": 1, "COMP3141": 1}, "title": "Discipline Electives", "credits_to_complete": 18, "type": "elective", "levels": [], "notes": ""}]}, "COMPN1": {"programs": ["3778"], "name": "Computer Science (Computer Networks)", "type": "major", "total_credits": 96, "course_constraints": [], "curriculum": [{"courses": {"ENGG4600": 1, "ENGG3600": 1, "ENGG2600": 1, "COMP3": 1, "COMP4": 1, "COMP6": 1, "COMP9": 1}, "title": "Computing Electives", "credits_to_complete": 6, "type": "elective", "levels": [], "notes": "<br />NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. <br />2 UOC courses are run over consecutive terms for a final total of 6 UOC."}, {"courses": {"MATH1131 or MATH1141": 2, "MATH1231 or MATH1241": 2, "COMP1511": 1, "COMP2521": 1, "COMP4920": 1, "COMP1521": 1, "COMP3900": 1, "MATH1081": 1, "COMP2511": 1, "COMP1531": 1, "COMP3331": 1, "COMP3821 or COMP3121": 2}, "title": "Core Courses", "credits_to_complete": 72, "type": "core", "levels": [], "notes": ""}, {"courses": {"COMP9332": 1, "COMP9334": 1, "COMP6733": 1, "COMP4336": 1, "COMP4337": 1}, "title": "Discipline Electives", "credits_to_complete": 18, "type": "elective", "levels": [], "notes": ""}]}, "COMPS1": {"programs": ["3778"], "name": "Computer Science (Embedded Systems)", "type": "major", "total_credits": 96, "course_constraints": [], "curriculum": [{"courses": {"COMP3231": 1, "COMP9517": 1, "COMP4601": 1, "COMP9242": 1, "COMP3211": 1, "COMP3601": 1}, "title": "Prescribed Electives", "credits_to_complete": 18, "type": "elective", "levels": [], "notes": ""}, {"courses": {"COMP3821 or COMP3121": 2, "MATH1231 or MATH1241": 2, "COMP1531": 1, "MATH1081": 1, "COMP2521": 1, "COMP2121": 1, "COMP4920": 1, "COMP2511": 1, "COMP3900": 1, "COMP3222": 1, "COMP1511": 1, "COMP1521": 1, "MATH1141 or MATH1131": 2}, "title": "Core Courses", "credits_to_complete": 78, "type": "core", "levels": [], "notes": ""}]}, "COMPY1": {"programs": ["3778"], "name": "Computer Science (Security Engineering)", "type": "major", "total_credits": 96, "course_constraints": [{"title": "Prescribed Electives Requirement", "description": "Students must complete a minimum of 6 UOC of the following courses.<br /><br />COMP6445 - Digital Forensics<br />COMP6845 - Extended Digital Forensics and Incident Response<br />COMP6447 - System and Software Security Assessment<br />COMP6449 - Security Engineering Professional Practice<br />"}], "curriculum": [{"courses": {"MATH1241 or MATH1231": 2, "MATH1141 or MATH1131": 2, "COMP6441 or COMP6841": 2, "COMP1511": 1, "COMP3900": 1, "COMP3121": 1, "COMP2511": 1, "MATH1081": 1, "COMP2521": 1, "COMP1521": 1, "COMP4920": 1, "COMP1531": 1}, "title": "Core Courses", "credits_to_complete": 72, "type": "core", "levels": [], "notes": ""}, {"courses": {"ENGG3600": 1, "ENGG4600": 1, "ENGG2600": 1, "COMP3": 1, "COMP4": 1, "COMP6": 1, "COMP9": 1}, "title": "Computing Elective", "credits_to_complete": 6, "type": "elective", "levels": [], "notes": "<br />NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. <br />2 UOC courses are run over consecutive terms for a final total of 6 UOC."}, {"courses": {"COMP4337": 1, "MATH3411": 1, "COMP6843": 1, "COMP6448": 1, "COMP9447": 1, "COMP6443": 1, "COMP6845": 1, "TELE3119": 1, "COMP6447": 1, "COMP6445": 1, "COMP6449": 1}, "title": "Security Engineering Prescribed Electives", "credits_to_complete": 18, "type": "elective", "levels": [], "notes": ""}]}, "COMPZ1": {"programs": ["3959"], "name": "Computational Data Science", "type": "major", "total_credits": 66, "course_constraints": [], "curriculum": [{"courses": {"COMP2041": 1, "COMP2521": 1}, "title": "Level 2 Core Courses", "credits_to_complete": 12, "type": "core", "levels": [2], "notes": ""}, {"courses": {"MATH1131": 1, "COMP1511": 1, "MATH1081": 1}, "title": "Level 1 Core Courses", "credits_to_complete": 18, "type": "core", "levels": [1], "notes": ""}, {"courses": {"ECON2209": 1, "COMP3411": 1, "COMP6841": 1, "ECON2104": 1, "COMP6441": 1, "ACTL3142": 1, "ECON2206": 1, "COMP9418": 1, "ECON3107": 1, "MATH2111": 1, "MATH3041": 1, "MATH2831": 1, "COMP4418": 1, "COMP9319": 1, "MARK1012": 1, "COMP4121": 1, "INFS1602": 1, "MATH2871": 1, "COMP6714": 1, "ECON3208": 1, "MATH3821": 1, "MATH3871": 1, "COMP9315": 1, "ACTL3141": 1, "MATH3161": 1, "MATH2011": 1, "MATH2931": 1, "MARK3085": 1, "COMP6771": 1, "ECON1102": 1, "ECON3130": 1, "MATH5836": 1, "ECON2101": 1, "INFS3603": 1, "ECON2111": 1, "ECON3206": 1, "ECON3123": 1, "MATH3411": 1, "MARK3054": 1, "COMP9318": 1}, "title": "Prescribed Electives", "credits_to_complete": 18, "type": "elective", "levels": [], "notes": ""}, {"courses": {"COMP3121": 1, "COMP9417": 1, "COMP9313": 1}, "title": "Level 3 Core Courses", "credits_to_complete": 18, "type": "core", "levels": [3], "notes": ""}]}}
+{
+    "COMPA1": {
+        "programs": [
+            "3778"
+        ],
+        "name": "Computer Science",
+        "type": "major",
+        "total_credits": 96,
+        "course_constraints": [],
+        "curriculum": [
+            {
+                "courses": {
+                    "COMP3121 or COMP3821": 2,
+                    "MATH1141 or MATH1131": 2,
+                    "COMP1511": 1,
+                    "COMP1521": 1,
+                    "COMP1531": 1,
+                    "COMP2511": 1,
+                    "COMP2521": 1,
+                    "COMP4920": 1,
+                    "COMP3900": 1,
+                    "MATH1081": 1,
+                    "MATH1241 or MATH1231": 2
+                },
+                "title": "Core Courses",
+                "credits_to_complete": 66,
+                "type": "core",
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ENGG2600": 1,
+                    "ENGG4600": 1,
+                    "ENGG3600": 1,
+                    "COMP3": 1,
+                    "COMP4": 1,
+                    "COMP6": 1,
+                    "COMP9": 1
+                },
+                "title": "Computing Electives",
+                "credits_to_complete": 30,
+                "type": "elective",
+                "levels": [],
+                "notes": "<br />NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. <br />2 UOC courses are run over consecutive terms for a final total of 6 UOC."
+            }
+        ]
+    },
+    "COMPAH": {
+        "programs": [
+            "4515"
+        ],
+        "name": "Computer Science",
+        "type": "honours",
+        "total_credits": 48,
+        "course_constraints": [],
+        "curriculum": [
+            {
+                "courses": {
+                    "COMP4": 1,
+                    "COMP9": 1,
+                    "COMP6": 1
+                },
+                "title": "Coursework",
+                "credits_to_complete": 30,
+                "type": "other",
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "COMP4963": 1,
+                    "COMP4961": 1,
+                    "COMP4962": 1
+                },
+                "title": "Thesis",
+                "credits_to_complete": 18,
+                "type": "other",
+                "levels": [],
+                "notes": ""
+            }
+        ]
+    },
+    "COMPBH": {
+        "programs": [
+            "3707"
+        ],
+        "name": "Computer Engineering",
+        "type": "honours",
+        "total_credits": 168,
+        "course_constraints": [
+            {
+                "title": "Level 4 UOC Minimum",
+                "description": "Students must complete a minimum of 36 UOC of Level 4 courses including core courses and at least 12 UOC of Level 4 Discipline Electives, including:<br /><br />COMP4601 - Design Project B<br />COMP4920 - Management and Ethics<br />COMP4951 - Research Thesis A<br />COMP4952 - Research Thesis B<br />COMP4953 - Research Thesis C<br />any level 4 course offered by School of Computer Science and Engineering<br />"
+            }
+        ],
+        "curriculum": [
+            {
+                "courses": {
+                    "ENGG3060": 1,
+                    "ENGG4600": 1,
+                    "ENGG2600": 1,
+                    "ENGG3600": 1,
+                    "COMP3": 1,
+                    "COMP4": 1,
+                    "COMP6": 1,
+                    "COMP9": 1
+                },
+                "title": "Discipline Electives",
+                "credits_to_complete": 24,
+                "type": "elective",
+                "levels": [],
+                "notes": "<br /><br />2 UOC and 3 UOC courses are run over consecutive terms for a final total of 6 UOC."
+            },
+            {
+                "courses": {
+                    "COMP3222": 1,
+                    "COMP3601": 1,
+                    "COMP3211": 1,
+                    "COMP3231": 1
+                },
+                "title": "Level 3 Core Courses",
+                "credits_to_complete": 24,
+                "type": "core",
+                "levels": [
+                    3
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "MATH1141 or MATH1131": 2,
+                    "PHYS1131 or PHYS1121": 2,
+                    "COMP1521": 1,
+                    "ELEC1111": 1,
+                    "COMP1531": 1,
+                    "COMP1511": 1,
+                    "ENGG1000": 1,
+                    "PHYS1221 or PHYS1231": 2,
+                    "MATH1241 or MATH1231": 2
+                },
+                "title": "Level 1 Core Courses",
+                "credits_to_complete": 54,
+                "type": "core",
+                "levels": [
+                    1
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "COMP4601": 1,
+                    "COMP4920": 1,
+                    "COMP4952": 1,
+                    "COMP4951": 1,
+                    "COMP4953": 1
+                },
+                "title": "Level 4 Core Courses",
+                "credits_to_complete": 24,
+                "type": "core",
+                "levels": [
+                    4
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ELEC2133": 1,
+                    "ELEC2134": 1,
+                    "COMP2521": 1,
+                    "COMP2511": 1,
+                    "DESN2000": 1,
+                    "MATH2069": 1,
+                    "MATH2099": 1
+                },
+                "title": "Level 2 Core Courses",
+                "credits_to_complete": 42,
+                "type": "core",
+                "levels": [
+                    2
+                ],
+                "notes": ""
+            }
+        ]
+    },
+    "SENGAH": {
+        "programs": [
+            "3707"
+        ],
+        "name": "Software Engineering",
+        "type": "honours",
+        "total_credits": 168,
+        "course_constraints": [
+            {
+                "title": "Level 4 (or higher) COMP UOC Minimum",
+                "description": "Students must complete a minimum of 30 UOC of the following courses.<br /><br />COMP4920 - Management and Ethics<br />any level 4 Computer Science (COMP) course<br />any level 6 Computer Science (COMP) course<br />any level 9 Computer Science (COMP) course<br />COMP4951 - Research Thesis A<br />COMP4952 - Research Thesis B<br />COMP4953 - Research Thesis C<br />"
+            }
+        ],
+        "curriculum": [
+            {
+                "courses": {
+                    "any course": 1
+                },
+                "title": "Free Elective",
+                "credits_to_complete": 6,
+                "type": "elective",
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "COMP3311": 1,
+                    "SENG3011": 1,
+                    "COMP3141": 1,
+                    "COMP3331": 1
+                },
+                "title": "Level 3 Core Courses",
+                "credits_to_complete": 24,
+                "type": "core",
+                "levels": [
+                    3
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "MATH1141 or MATH1131": 2,
+                    "MATH1241 or MATH1231": 2,
+                    "MATH1081": 1,
+                    "COMP1531": 1,
+                    "COMP1511": 1,
+                    "ENGG1000": 1,
+                    "COMP1521": 1
+                },
+                "title": "Level 1 Core Courses",
+                "credits_to_complete": 42,
+                "type": "core",
+                "levels": [
+                    1
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ENGG3060": 1,
+                    "ENGG4600": 1,
+                    "ENGG3600": 1,
+                    "ENGG2600": 1,
+                    "COMP3": 1,
+                    "COMP4": 1,
+                    "COMP6": 1,
+                    "COMP9": 1,
+                    "INFS3": 1,
+                    "INFS4": 1,
+                    "MATH3": 1,
+                    "MATH4": 1,
+                    "MATH6": 1,
+                    "ELEC3": 1,
+                    "ELEC4": 1,
+                    "TELE3": 1,
+                    "TELE4": 1
+                },
+                "title": "Discipline Electives",
+                "credits_to_complete": 36,
+                "type": "elective",
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "COMP4952": 1,
+                    "COMP4951": 1,
+                    "SENG4920": 1,
+                    "COMP4953": 1
+                },
+                "title": "Level 4 Core Courses",
+                "credits_to_complete": 18,
+                "type": "core",
+                "levels": [
+                    4
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "COMP2041": 1,
+                    "COMP2511": 1,
+                    "DESN2000": 1,
+                    "SENG2011": 1,
+                    "MATH2859": 1,
+                    "SENG2021": 1,
+                    "COMP2521": 1,
+                    "MATH2400": 1
+                },
+                "title": "Level 2 Core Courses",
+                "credits_to_complete": 42,
+                "type": "core",
+                "levels": [
+                    2
+                ],
+                "notes": ""
+            }
+        ]
+    },
+    "COMPD1": {
+        "programs": [
+            "3778"
+        ],
+        "name": "Computer Science (Database Systems)",
+        "type": "major",
+        "total_credits": 96,
+        "course_constraints": [],
+        "curriculum": [
+            {
+                "courses": {
+                    "COMP9319": 1,
+                    "COMP9313": 1,
+                    "COMP9315": 1,
+                    "COMP6714": 1,
+                    "COMP9318": 1
+                },
+                "title": "Database Systems Prescribed Electives",
+                "credits_to_complete": 18,
+                "type": "elective",
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ENGG2600": 1,
+                    "ENGG3600": 1,
+                    "ENGG4600": 1,
+                    "COMP3": 1,
+                    "COMP4": 1,
+                    "COMP6": 1,
+                    "COMP9": 1
+                },
+                "title": "Computing Elective",
+                "credits_to_complete": 6,
+                "type": "elective",
+                "levels": [],
+                "notes": "<br />NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. <br />2 UOC courses are run over consecutive terms for a final total of 6 UOC."
+            },
+            {
+                "courses": {
+                    "MATH1081": 1,
+                    "COMP1511": 1,
+                    "COMP1531": 1,
+                    "COMP3311": 1,
+                    "COMP4920": 1,
+                    "COMP1521": 1,
+                    "COMP2521": 1,
+                    "COMP2511": 1,
+                    "COMP3900": 1,
+                    "COMP3121 or COMP3821": 2,
+                    "MATH1241 or MATH1231": 2,
+                    "MATH1131 or MATH1141": 2
+                },
+                "title": "Core Courses",
+                "credits_to_complete": 72,
+                "type": "core",
+                "levels": [],
+                "notes": ""
+            }
+        ]
+    },
+    "COMPE1": {
+        "programs": [
+            "3778"
+        ],
+        "name": "Computer Science (eCommerce Systems)",
+        "type": "major",
+        "total_credits": 96,
+        "course_constraints": [],
+        "curriculum": [
+            {
+                "courses": {
+                    "COMP3511": 1,
+                    "COMP9321": 1,
+                    "COMP9323": 1,
+                    "COMP9322": 1
+                },
+                "title": "Discipline Electives",
+                "credits_to_complete": 18,
+                "type": "elective",
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ENGG4600": 1,
+                    "ENGG2600": 1,
+                    "ENGG3600": 1,
+                    "COMP3": 1,
+                    "COMP4": 1,
+                    "COMP6": 1,
+                    "COMP9": 1
+                },
+                "title": "Computing Electives",
+                "credits_to_complete": 6,
+                "type": "elective",
+                "levels": [],
+                "notes": "<br />NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. <br />2 UOC courses are run over consecutive terms for a final total of 6 UOC."
+            },
+            {
+                "courses": {
+                    "MATH1131 or MATH1141": 2,
+                    "COMP3311": 1,
+                    "COMP1531": 1,
+                    "MATH1081": 1,
+                    "COMP3900": 1,
+                    "COMP4920": 1,
+                    "COMP2511": 1,
+                    "COMP1511": 1,
+                    "COMP1521": 1,
+                    "COMP2521": 1,
+                    "MATH1231 or MATH1241": 2,
+                    "COMP3121 or COMP3821": 2
+                },
+                "title": "Core Courses",
+                "credits_to_complete": 72,
+                "type": "core",
+                "levels": [],
+                "notes": ""
+            }
+        ]
+    },
+    "COMPI1": {
+        "programs": [
+            "3778"
+        ],
+        "name": "Computer Science (Artificial Intelligence)",
+        "type": "major",
+        "total_credits": 96,
+        "course_constraints": [],
+        "curriculum": [
+            {
+                "courses": {
+                    "ENGG2600": 1,
+                    "ENGG3600": 1,
+                    "ENGG4600": 1,
+                    "COMP3": 1,
+                    "COMP4": 1,
+                    "COMP6": 1,
+                    "COMP9": 1
+                },
+                "title": "Computing Electives",
+                "credits_to_complete": 6,
+                "type": "elective",
+                "levels": [],
+                "notes": "<br />NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. <br />2 UOC courses are run over consecutive terms for a final total of 6 UOC."
+            },
+            {
+                "courses": {
+                    "MATH1131 or MATH1141": 2,
+                    "COMP3121 or COMP3821": 2,
+                    "MATH1231 or MATH1241": 2,
+                    "COMP2521": 1,
+                    "COMP1521": 1,
+                    "COMP1531": 1,
+                    "COMP3900": 1,
+                    "COMP2511": 1,
+                    "COMP4920": 1,
+                    "COMP3411": 1,
+                    "COMP1511": 1,
+                    "MATH1081": 1
+                },
+                "title": "Core Courses",
+                "credits_to_complete": 72,
+                "type": "core",
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "COMP9417": 1,
+                    "COMP4418": 1,
+                    "COMP9517": 1,
+                    "COMP9418": 1,
+                    "COMP9444": 1,
+                    "COMP3431": 1,
+                    "COMP9318": 1
+                },
+                "title": "Artificial Intelligence Prescribed Electives",
+                "credits_to_complete": 18,
+                "type": "elective",
+                "levels": [],
+                "notes": ""
+            }
+        ]
+    },
+    "COMPJ1": {
+        "programs": [
+            "3778"
+        ],
+        "name": "Computer Science (Programming Languages)",
+        "type": "major",
+        "total_credits": 96,
+        "course_constraints": [],
+        "curriculum": [
+            {
+                "courses": {
+                    "MATH1081": 1,
+                    "COMP3900": 1,
+                    "COMP2521": 1,
+                    "COMP1521": 1,
+                    "COMP4920": 1,
+                    "COMP2511": 1,
+                    "COMP3161": 1,
+                    "COMP3121": 1,
+                    "COMP1511": 1,
+                    "COMP1531": 1,
+                    "MATH1231 or MATH1241": 2,
+                    "MATH1141 or MATH1131": 2
+                },
+                "title": "Core Course",
+                "credits_to_complete": 72,
+                "type": "core",
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ENGG3600": 1,
+                    "ENGG4600": 1,
+                    "ENGG2600": 1,
+                    "COMP3": 1,
+                    "COMP4": 1,
+                    "COMP6": 1,
+                    "COMP9": 1
+                },
+                "title": "Computing Electives",
+                "credits_to_complete": 6,
+                "type": "elective",
+                "levels": [],
+                "notes": "<br />NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. <br />2 UOC courses are run over consecutive terms for a final total of 6 UOC."
+            },
+            {
+                "courses": {
+                    "COMP6771": 1,
+                    "COMP3151": 1,
+                    "COMP3131": 1,
+                    "COMP3141": 1
+                },
+                "title": "Discipline Electives",
+                "credits_to_complete": 18,
+                "type": "elective",
+                "levels": [],
+                "notes": ""
+            }
+        ]
+    },
+    "COMPN1": {
+        "programs": [
+            "3778"
+        ],
+        "name": "Computer Science (Computer Networks)",
+        "type": "major",
+        "total_credits": 96,
+        "course_constraints": [],
+        "curriculum": [
+            {
+                "courses": {
+                    "ENGG4600": 1,
+                    "ENGG3600": 1,
+                    "ENGG2600": 1,
+                    "COMP3": 1,
+                    "COMP4": 1,
+                    "COMP6": 1,
+                    "COMP9": 1
+                },
+                "title": "Computing Electives",
+                "credits_to_complete": 6,
+                "type": "elective",
+                "levels": [],
+                "notes": "<br />NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. <br />2 UOC courses are run over consecutive terms for a final total of 6 UOC."
+            },
+            {
+                "courses": {
+                    "MATH1131 or MATH1141": 2,
+                    "MATH1231 or MATH1241": 2,
+                    "COMP1511": 1,
+                    "COMP2521": 1,
+                    "COMP4920": 1,
+                    "COMP1521": 1,
+                    "COMP3900": 1,
+                    "MATH1081": 1,
+                    "COMP2511": 1,
+                    "COMP1531": 1,
+                    "COMP3331": 1,
+                    "COMP3821 or COMP3121": 2
+                },
+                "title": "Core Courses",
+                "credits_to_complete": 72,
+                "type": "core",
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "COMP9332": 1,
+                    "COMP9334": 1,
+                    "COMP6733": 1,
+                    "COMP4336": 1,
+                    "COMP4337": 1
+                },
+                "title": "Discipline Electives",
+                "credits_to_complete": 18,
+                "type": "elective",
+                "levels": [],
+                "notes": ""
+            }
+        ]
+    },
+    "COMPS1": {
+        "programs": [
+            "3778"
+        ],
+        "name": "Computer Science (Embedded Systems)",
+        "type": "major",
+        "total_credits": 96,
+        "course_constraints": [],
+        "curriculum": [
+            {
+                "courses": {
+                    "COMP3231": 1,
+                    "COMP9517": 1,
+                    "COMP4601": 1,
+                    "COMP9242": 1,
+                    "COMP3211": 1,
+                    "COMP3601": 1
+                },
+                "title": "Prescribed Electives",
+                "credits_to_complete": 18,
+                "type": "elective",
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "COMP3821 or COMP3121": 2,
+                    "MATH1231 or MATH1241": 2,
+                    "COMP1531": 1,
+                    "MATH1081": 1,
+                    "COMP2521": 1,
+                    "COMP2121": 1,
+                    "COMP4920": 1,
+                    "COMP2511": 1,
+                    "COMP3900": 1,
+                    "COMP3222": 1,
+                    "COMP1511": 1,
+                    "COMP1521": 1,
+                    "MATH1141 or MATH1131": 2
+                },
+                "title": "Core Courses",
+                "credits_to_complete": 78,
+                "type": "core",
+                "levels": [],
+                "notes": ""
+            }
+        ]
+    },
+    "COMPY1": {
+        "programs": [
+            "3778"
+        ],
+        "name": "Computer Science (Security Engineering)",
+        "type": "major",
+        "total_credits": 96,
+        "course_constraints": [
+            {
+                "title": "Prescribed Electives Requirement",
+                "description": "Students must complete a minimum of 6 UOC of the following courses.<br /><br />COMP6445 - Digital Forensics<br />COMP6845 - Extended Digital Forensics and Incident Response<br />COMP6447 - System and Software Security Assessment<br />COMP6449 - Security Engineering Professional Practice<br />"
+            }
+        ],
+        "curriculum": [
+            {
+                "courses": {
+                    "MATH1241 or MATH1231": 2,
+                    "MATH1141 or MATH1131": 2,
+                    "COMP6441 or COMP6841": 2,
+                    "COMP1511": 1,
+                    "COMP3900": 1,
+                    "COMP3121": 1,
+                    "COMP2511": 1,
+                    "MATH1081": 1,
+                    "COMP2521": 1,
+                    "COMP1521": 1,
+                    "COMP4920": 1,
+                    "COMP1531": 1
+                },
+                "title": "Core Courses",
+                "credits_to_complete": 72,
+                "type": "core",
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ENGG3600": 1,
+                    "ENGG4600": 1,
+                    "ENGG2600": 1,
+                    "COMP3": 1,
+                    "COMP4": 1,
+                    "COMP6": 1,
+                    "COMP9": 1
+                },
+                "title": "Computing Elective",
+                "credits_to_complete": 6,
+                "type": "elective",
+                "levels": [],
+                "notes": "<br />NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. <br />2 UOC courses are run over consecutive terms for a final total of 6 UOC."
+            },
+            {
+                "courses": {
+                    "COMP4337": 1,
+                    "MATH3411": 1,
+                    "COMP6843": 1,
+                    "COMP6448": 1,
+                    "COMP9447": 1,
+                    "COMP6443": 1,
+                    "COMP6845": 1,
+                    "TELE3119": 1,
+                    "COMP6447": 1,
+                    "COMP6445": 1,
+                    "COMP6449": 1
+                },
+                "title": "Security Engineering Prescribed Electives",
+                "credits_to_complete": 18,
+                "type": "elective",
+                "levels": [],
+                "notes": ""
+            }
+        ]
+    },
+    "COMPZ1": {
+        "programs": [
+            "3959"
+        ],
+        "name": "Computational Data Science",
+        "type": "major",
+        "total_credits": 66,
+        "course_constraints": [],
+        "curriculum": [
+            {
+                "courses": {
+                    "COMP2041": 1,
+                    "COMP2521": 1
+                },
+                "title": "Level 2 Core Courses",
+                "credits_to_complete": 12,
+                "type": "core",
+                "levels": [
+                    2
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "MATH1131": 1,
+                    "COMP1511": 1,
+                    "MATH1081": 1
+                },
+                "title": "Level 1 Core Courses",
+                "credits_to_complete": 18,
+                "type": "core",
+                "levels": [
+                    1
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ECON2209": 1,
+                    "COMP3411": 1,
+                    "COMP6841": 1,
+                    "ECON2104": 1,
+                    "COMP6441": 1,
+                    "ACTL3142": 1,
+                    "ECON2206": 1,
+                    "COMP9418": 1,
+                    "ECON3107": 1,
+                    "MATH2111": 1,
+                    "MATH3041": 1,
+                    "MATH2831": 1,
+                    "COMP4418": 1,
+                    "COMP9319": 1,
+                    "MARK1012": 1,
+                    "COMP4121": 1,
+                    "INFS1602": 1,
+                    "MATH2871": 1,
+                    "COMP6714": 1,
+                    "ECON3208": 1,
+                    "MATH3821": 1,
+                    "MATH3871": 1,
+                    "COMP9315": 1,
+                    "ACTL3141": 1,
+                    "MATH3161": 1,
+                    "MATH2011": 1,
+                    "MATH2931": 1,
+                    "MARK3085": 1,
+                    "COMP6771": 1,
+                    "ECON1102": 1,
+                    "ECON3130": 1,
+                    "MATH5836": 1,
+                    "ECON2101": 1,
+                    "INFS3603": 1,
+                    "ECON2111": 1,
+                    "ECON3206": 1,
+                    "ECON3123": 1,
+                    "MATH3411": 1,
+                    "MARK3054": 1,
+                    "COMP9318": 1
+                },
+                "title": "Prescribed Electives",
+                "credits_to_complete": 18,
+                "type": "elective",
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "COMP3121": 1,
+                    "COMP9417": 1,
+                    "COMP9313": 1
+                },
+                "title": "Level 3 Core Courses",
+                "credits_to_complete": 18,
+                "type": "core",
+                "levels": [
+                    3
+                ],
+                "notes": ""
+            }
+        ]
+    }
+}
