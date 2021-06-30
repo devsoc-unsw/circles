@@ -6,7 +6,7 @@
         "name": "Computer Science",
         "type": "major",
         "total_credits": 96,
-        "constraints": [],
+        "course_constraints": [],
         "curriculum": [
             {
                 "courses": {
@@ -25,7 +25,8 @@
                 "title": "Core Courses",
                 "credits_to_complete": 66,
                 "type": "core",
-                "levels": []
+                "levels": [],
+                "notes": ""
             },
             {
                 "courses": {
@@ -40,7 +41,8 @@
                 "title": "Computing Electives",
                 "credits_to_complete": 30,
                 "type": "elective",
-                "levels": []
+                "levels": [],
+                "notes": "<br />NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. <br />2 UOC courses are run over consecutive terms for a final total of 6 UOC."
             }
         ]
     },
@@ -51,7 +53,7 @@
         "name": "Computer Science",
         "type": "honours",
         "total_credits": 48,
-        "constraints": [],
+        "course_constraints": [],
         "curriculum": [
             {
                 "courses": {
@@ -62,7 +64,8 @@
                 "title": "Coursework",
                 "credits_to_complete": 30,
                 "type": "other",
-                "levels": []
+                "levels": [],
+                "notes": ""
             },
             {
                 "courses": {
@@ -73,7 +76,8 @@
                 "title": "Thesis",
                 "credits_to_complete": 18,
                 "type": "other",
-                "levels": []
+                "levels": [],
+                "notes": ""
             }
         ]
     },
@@ -84,7 +88,7 @@
         "name": "Computer Engineering",
         "type": "honours",
         "total_credits": 168,
-        "constraints": [
+        "course_constraints": [
             {
                 "title": "Level 4 UOC Minimum",
                 "description": "Students must complete a minimum of 36 UOC of Level 4 courses including core courses and at least 12 UOC of Level 4 Discipline Electives, including:<br /><br />COMP4601 - Design Project B<br />COMP4920 - Management and Ethics<br />COMP4951 - Research Thesis A<br />COMP4952 - Research Thesis B<br />COMP4953 - Research Thesis C<br />any level 4 course offered by School of Computer Science and Engineering<br />"
@@ -105,7 +109,8 @@
                 "title": "Discipline Electives",
                 "credits_to_complete": 24,
                 "type": "elective",
-                "levels": []
+                "levels": [],
+                "notes": "<br /><br />2 UOC and 3 UOC courses are run over consecutive terms for a final total of 6 UOC."
             },
             {
                 "courses": {
@@ -119,7 +124,8 @@
                 "type": "core",
                 "levels": [
                     3
-                ]
+                ],
+                "notes": ""
             },
             {
                 "courses": {
@@ -138,7 +144,8 @@
                 "type": "core",
                 "levels": [
                     1
-                ]
+                ],
+                "notes": ""
             },
             {
                 "courses": {
@@ -153,7 +160,8 @@
                 "type": "core",
                 "levels": [
                     4
-                ]
+                ],
+                "notes": ""
             },
             {
                 "courses": {
@@ -170,7 +178,8 @@
                 "type": "core",
                 "levels": [
                     2
-                ]
+                ],
+                "notes": ""
             }
         ]
     },
@@ -181,7 +190,7 @@
         "name": "Software Engineering",
         "type": "honours",
         "total_credits": 168,
-        "constraints": [
+        "course_constraints": [
             {
                 "title": "Level 4 (or higher) COMP UOC Minimum",
                 "description": "Students must complete a minimum of 30 UOC of the following courses.<br /><br />COMP4920 - Management and Ethics<br />any level 4 Computer Science (COMP) course<br />any level 6 Computer Science (COMP) course<br />any level 9 Computer Science (COMP) course<br />COMP4951 - Research Thesis A<br />COMP4952 - Research Thesis B<br />COMP4953 - Research Thesis C<br />"
@@ -195,7 +204,8 @@
                 "title": "Free Elective",
                 "credits_to_complete": 6,
                 "type": "elective",
-                "levels": []
+                "levels": [],
+                "notes": ""
             },
             {
                 "courses": {
@@ -209,7 +219,8 @@
                 "type": "core",
                 "levels": [
                     3
-                ]
+                ],
+                "notes": ""
             },
             {
                 "courses": {
@@ -226,7 +237,8 @@
                 "type": "core",
                 "levels": [
                     1
-                ]
+                ],
+                "notes": ""
             },
             {
                 "courses": {
@@ -251,7 +263,8 @@
                 "title": "Discipline Electives",
                 "credits_to_complete": 36,
                 "type": "elective",
-                "levels": []
+                "levels": [],
+                "notes": ""
             },
             {
                 "courses": {
@@ -265,7 +278,8 @@
                 "type": "core",
                 "levels": [
                     4
-                ]
+                ],
+                "notes": ""
             },
             {
                 "courses": {
@@ -283,7 +297,8 @@
                 "type": "core",
                 "levels": [
                     2
-                ]
+                ],
+                "notes": ""
             }
         ]
     }

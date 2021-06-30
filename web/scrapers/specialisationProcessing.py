@@ -51,6 +51,7 @@ def customise_spn_data():
                 curriculum_item["credits_to_complete"] = int(get_credits(container))
                 curriculum_item["type"] = get_type(curriculum_item["title"].lower())
                 curriculum_item["levels"] = get_levels(curriculum_item["title"].lower())
+                curriculum_item["notes"] = get_notes(container["description"])
 
                 if container["structure"]:
                     # Nested container exists containing curriculum data
@@ -152,6 +153,19 @@ def get_levels(title: str) -> List[int]:
         
     return levels
 
+def get_notes(description: str) -> str:
+    """ Extracts any unique notes in the container description. While most 
+    course containers state 'Students must take X UOC of the following courses.',
+    some include extra info after this line: e.g. 'Counting further VIP courses
+    is only possible if etc.' """
+
+    # Non-greedy search to catch anything after first matching line
+    res = re.search("Students must.*?following courses\.(.+)", description)
+    if res: # Unique notes found
+        return res.group(1)
+    else:
+        return ""
+
 def get_nested_data(container: dict, curriculum_item: dict) -> None:
     """
     Adds curriculum data from nested container (the 'sub_container') into
@@ -197,7 +211,8 @@ def get_courses(curriculum_courses: dict, container_courses: List[str],
             course = process_any_level(course) 
         curriculum_courses[course] = 1
 
-    # Old code parsing description for course codes:
+    # NOTE: Below is the ild code parsing description for course codes. It
+    # may come in handy later, but if not then delete
     # Captures course codes and strings like 'any level X course offered by ... ' 
         # if not container_courses:
         # res = re.findall("[A-Z]{4}[0-9]{4}|any level[^<]+", description)
