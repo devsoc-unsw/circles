@@ -3,15 +3,19 @@ Program processes the formatted data by editing and customising the data for
 use on the frontend. See 'specialisationsProcessed.json' for output.
 
 NOTE: "spn" == "specialisation"
+
+Status: Currently works for all COMP specialisations and SENGAH. Query next
+        set of specialisations to include.
 """
 
 import json
 import re 
 from typing import List, Iterable, Union, Optional 
 
-TEST_SPNS = ["COMPA1", "COMPAH", "COMPBH", "SENGAH"]
-# TODO: "COMPD1", "COMPE1", "COMPI1", "COMPJ1", "COMPN1", 
-#       "COMPS1", "COMPY1", "COMPZ1",
+# TODO: add more specialisations as we expand scope of Circles
+TEST_SPNS = ["COMPA1", "COMPAH", "COMPBH", "SENGAH", "COMPD1", "COMPD1", 
+             "COMPE1", "COMPI1", "COMPJ1", "COMPN1", "COMPS1", "COMPY1", 
+             "COMPZ1"]
 
 CODE_MAPPING = {}
 
@@ -24,7 +28,7 @@ def customise_spn_data():
     customised_data = {} # Dictionary for all customised data
     for spn in TEST_SPNS:
 
-        print(f"Processing {spn}\n")
+        print(f"Processing {spn} . . .")
 
         formatted = data[spn]
         customised_data[spn] = {}
@@ -66,6 +70,7 @@ def customise_spn_data():
         
         customised_data[spn]["course_constraints"] = constraints
         customised_data[spn]["curriculum"] = curriculum
+        print("Processing complete :)\n")
     
     write_to_file(customised_data)
 
@@ -207,11 +212,12 @@ def get_courses(curriculum_courses: dict, container_courses: List[str],
     Adds courses from container to the customised curriculum course dict.
     """
     for course in container_courses:
-        if "any level" in course:
+        if "any level" in course: 
+            # e.g. modify "any level 4 COMP course" to "COMP4"
             course = process_any_level(course) 
         curriculum_courses[course] = 1
 
-    # NOTE: Below is the ild code parsing description for course codes. It
+    # TODO: Below is the ild code parsing description for course codes. It
     # may come in handy later, but if not then delete
     # Captures course codes and strings like 'any level X course offered by ... ' 
         # if not container_courses:
