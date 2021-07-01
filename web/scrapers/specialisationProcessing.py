@@ -6,24 +6,27 @@ NOTE: "spn" == "specialisation"
 
 Status: Currently works for all COMP specialisations and SENGAH. Query next
         set of specialisations to include.
+
+Step in the data's journey:
+    [   ] Scrape raw data (specialisationScraper.py)
+    [   ] Format scraped data (specialisationFormatting.py)
+    [ X ] Customise formatted data (specialisationProcessing.py)
 """
 
-import json
 import re 
 from typing import List, Iterable, Union, Optional 
+import dataHelpers
 
 # TODO: add more specialisations as we expand scope of Circles
 TEST_SPNS = ["COMPA1", "COMPAH", "COMPBH", "SENGAH", "COMPD1", "COMPD1", 
              "COMPE1", "COMPI1", "COMPJ1", "COMPN1", "COMPS1", "COMPY1", 
              "COMPZ1"]
 
-CODE_MAPPING = {}
+CODE_MAPPING = dataHelpers.read_data("programCodeMappings.json")["title_to_code"]
 
 def customise_spn_data():
 
-    data = get_formatted_data()
-    global CODE_MAPPING
-    CODE_MAPPING = get_code_map()
+    data = dataHelpers.read_data("specialisationsFormattedRaw.json")
 
     customised_data = {} # Dictionary for all customised data
     for spn in TEST_SPNS:
@@ -72,7 +75,7 @@ def customise_spn_data():
         customised_data[spn]["curriculum"] = curriculum
         print("Processing complete :)\n")
     
-    write_to_file(customised_data)
+    dataHelpers.write_data(customised_data, "specialisationsProcessed.json")
 
 def get_constraint(constraint_data: dict) -> dict:
     """
@@ -84,24 +87,6 @@ def get_constraint(constraint_data: dict) -> dict:
         "title": constraint_data["title"],
         "description": constraint_data["description"]
     }
-
-def get_formatted_data() -> dict:
-    """
-    Returns variable containing formatted specialisations data.
-    """
-    with open("specialisationsFormattedRaw.json", 'r') as INPUT_FILE:
-        data = json.load(INPUT_FILE)
-
-    return data
-
-def get_code_map() -> str:
-    """
-    Returns program title to code mapping from file
-    """
-    with open("programCodeMappings.json", "r") as FILE:
-        mapping = json.load(FILE)
-
-    return mapping["title_to_code"]
 
 def initialise_spn(spn: dict, data: dict) -> None:
     """
@@ -217,7 +202,7 @@ def get_courses(curriculum_courses: dict, container_courses: List[str],
             course = process_any_level(course) 
         curriculum_courses[course] = 1
 
-    # TODO: Below is the ild code parsing description for course codes. It
+    # TODO: Below is the old code parsing description for course codes. It
     # may come in handy later, but if not then delete
     # Captures course codes and strings like 'any level X course offered by ... ' 
         # if not container_courses:
@@ -254,11 +239,6 @@ def process_any_level(unprocessed_course: str) -> str:
         # case, do not process. Manual customisation may be needed.
         print(f"Unable to process course: {unprocessed_course}")
         return unprocessed_course
-
-def write_to_file(customised_data):
-    """ Writes processed data to file """
-    with open("specialisationsProcessed.json", 'w') as OUTPUT_FILE:
-        json.dump(customised_data, OUTPUT_FILE)
 
 if __name__ == "__main__":
     customise_spn_data()
