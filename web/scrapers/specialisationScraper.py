@@ -1,4 +1,3 @@
-# Scraping specialisations data and putting it inside specialisationsRaw.json
 """
 Program extracts raw data for specialisations and place data in file
 'specialisationsPureRaw.json', ready for formatting.
@@ -12,6 +11,7 @@ Step in the data's journey:
 import requests
 import json
 from datetime import date
+import dataHelpers
 
 THIS_YEAR = str(date.today().year) # Ensures request remains up-to-date
 TOTAL_SPNS = 500 # Update if number of specialisations increases
@@ -121,8 +121,7 @@ def scrape_spn_data():
 
     r = requests.post(url, data=json.dumps(PAYLOAD), headers=headers)
 
-    with open('specialisationsPureRaw.json', 'w') as FILE:
-        json.dump(r.json()["contentlets"], FILE)
+    dataHelpers.write_data(r.json()["contentlets"], 'specialisationsPureRaw.json')
 
 if __name__ == "__main__":
     scrape_spn_data()

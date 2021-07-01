@@ -5637,6 +5637,130 @@
             }
         ]
     },
+    "CHINE2": {
+        "title": "Chinese Studies",
+        "study_level": "undergraduate",
+        "level": "minor",
+        "credit_points": "24",
+        "faculty": "Faculty of Arts, Design and Architecture",
+        "school": "School of Humanities and Languages",
+        "description": "<p>Chinese is a fascinating modern language with a rich cultural heritage and an increasingly important medium in global business and communication. The minor stream in Chinese Studies encompasses the study of Chinese language and communication but also offers you the study of culture, society and civilisation. A background in Chinese Studies is useful in many areas of professional specialisation, from commerce and the business sector to tourism, the media, the public service sector and education.</p>\n\n<p><br />\nThis stream is available to students commencing at Introductory and Intermediate entry levels.<br />\n<br />\n<strong>Placement Information</strong><br />\n<br />\nThe School of Humanities and Languages offers a flexible program for students with different interests and different Chinese language backgrounds. You can enter Chinese language courses at different levels, depending on your knowledge of Chinese characters. Within each year, you are allocated to different groups, depending on your speaking ability.<br />\n<br />\nIf you have prior language knowledge you will need to take an online placement evaluation so that we can assess your skills and select an appropriate level of course for you. Information about the evaluation and additional course details can be found on the web at: <a href=\"http://hal.arts.unsw.edu.au\" rel=\"nofollow\">hal.arts.unsw.edu.au</a><br />\n<br />\nYou will not be permitted to enrol in language courses that are too easy for you in terms of Chinese character knowledge. If this occurs, you will be requested to change your enrolment.<br />\n<br />\nIf you are admitted in your first year of study to ARTS2450 or higher on the grounds of your ability and/or previous study, such courses will be counted as Level 1 courses in terms of your degree requirements.</p>\n",
+        "programs": [
+            "3543",
+            "3444",
+            "3502",
+            "3434",
+            "3454",
+            "3447",
+            "3554",
+            "3429",
+            "3453",
+            "3558",
+            "3438",
+            "3409"
+        ],
+        "additional_info": "<p><strong>Language Studies for Commencing Mid-Year Students</strong></p>\n\n<p>If your language skills are assessed as Level A in Introductory, Intermediate, Advanced or Professional you cannot commence study until Term 1.</p>\n",
+        "constraints": [],
+        "structure": [
+            {
+                "title": "Commencing Mid-Year",
+                "description": "If you commence the language studies sequence at Introductory Chinese B, you must complete a further 18 UOC in contextual courses (taught in English) or language courses.<br /><br />If you commence the language studies sequence at Intermediate Chinese B, you must complete a further 18 UOC in contextual courses (taught in English) or language courses.",
+                "credit_points": "",
+                "courses": [],
+                "structure": []
+            },
+            {
+                "title": "Arts/Education (Secondary) Students",
+                "description": "The minor in Chinese Studies (24 uoc) must not be taken as it is not an approved teaching specialisation.",
+                "credit_points": "",
+                "courses": [],
+                "structure": []
+            },
+            {
+                "title": "Advanced Language Courses",
+                "description": "If you commence the language studies sequence at Intermediate Level you may take 12 UOC of the following language courses.",
+                "credit_points": "",
+                "courses": [
+                    "ARTS3451",
+                    "ARTS3450"
+                ],
+                "structure": []
+            },
+            {
+                "title": "Introductory Language Core Courses",
+                "description": "If you commence at Introductory Level you must take 12 UOC of the following courses.",
+                "credit_points": "",
+                "courses": [],
+                "structure": [
+                    {
+                        "title": "One of the following:",
+                        "description": "",
+                        "credit_points": "",
+                        "courses": [
+                            "ARTS1453",
+                            "ARTS1451"
+                        ],
+                        "structure": []
+                    },
+                    {
+                        "title": "One of the following:",
+                        "description": "",
+                        "credit_points": "",
+                        "courses": [
+                            "ARTS1452",
+                            "ARTS1450"
+                        ],
+                        "structure": []
+                    }
+                ]
+            },
+            {
+                "title": "Intermediate Language Core Courses",
+                "description": "You can take up to a maximum of 12 UOC of the following courses.<br />These are required language courses if you  commence at Intermediate Level.",
+                "credit_points": "",
+                "courses": [],
+                "structure": [
+                    {
+                        "title": "One of the following:",
+                        "description": "",
+                        "credit_points": "",
+                        "courses": [
+                            "ARTS2451",
+                            "ARTS2462"
+                        ],
+                        "structure": []
+                    },
+                    {
+                        "title": "One of the following:",
+                        "description": "",
+                        "credit_points": "",
+                        "courses": [
+                            "ARTS2450",
+                            "ARTS2461"
+                        ],
+                        "structure": []
+                    }
+                ]
+            },
+            {
+                "title": "Chinese Contextual Studies Electives",
+                "description": "You can take up to a maximum of 18 UOC of the following courses.",
+                "credit_points": "",
+                "courses": [
+                    "ARTS2453",
+                    "ARTS2458",
+                    "ARTS2457",
+                    "ARTS3216",
+                    "ARTS2463",
+                    "ARTS2464",
+                    "ARTS3217",
+                    "ARTS2455",
+                    "ARTS2213"
+                ],
+                "structure": []
+            }
+        ]
+    },
     "CHINF1": {
         "title": "Advanced Chinese Studies",
         "study_level": "undergraduate",
@@ -5730,6 +5854,86 @@
                 "courses": [
                     "ARTS3330",
                     "ARTS3458"
+                ],
+                "structure": []
+            }
+        ]
+    },
+    "CHINF2": {
+        "title": "Advanced Chinese Studies",
+        "study_level": "undergraduate",
+        "level": "minor",
+        "credit_points": "24",
+        "faculty": "Faculty of Arts, Design and Architecture",
+        "school": "School of Humanities and Languages",
+        "description": "<p>Chinese is a fascinating modern language with a rich cultural heritage and an increasingly important medium in global business and communication. The minor stream in Chinese Studies encompasses the study of Chinese language and communication but also offers you the study of culture, society and civilisation. A background in Chinese Studies is useful in many areas of professional specialisation, from commerce and the business sector to tourism, the media, the public service sector and education.</p>\n\n<p><br />\nThis stream is available to students commencing at Advanced, Professional and Expert entry levels.<br />\n<br />\n<strong>Placement Information</strong><br />\n<br />\nThe School of Humanities and Languages offers a flexible program for students with different interests and different Chinese language backgrounds. You can enter Chinese language courses at different levels, depending on your knowledge of Chinese characters. Within each year, you are allocated to different groups, depending on your speaking ability.<br />\n<br />\nIf you have prior language knowledge you will need to take an online placement evaluation so that we can assess your skills and select an appropriate level of course for you. Information about the evaluation and additional course details can be found on the web at: <a href=\"http://hal.arts.unsw.edu.au\" rel=\"nofollow\">hal.arts.unsw.edu.au</a><br />\n<br />\nYou will not be permitted to enrol in language courses that are too easy for you in terms of Chinese character knowledge. If this occurs, you will be requested to change your enrolment.<br />\n<br />\nIf you are admitted in your first year of study to ARTS2450 or higher on the grounds of your ability and/or previous study, such courses will be counted as Level 1 courses in terms of your degree requirements.<br />\n<br />\nYou will be admitted to the Expert level of entry to the Minor if you have completed high school in China or have elsewhere achieved equivalent language proficiency to a Chinese high school graduate. This level emphasises Chinese Studies (contextual and professional) courses. Since you already have a high level of language proficiency and literacy in Chinese, you will enroll in Translation and Interpreting courses as Gateway language courses \u2013 which are a requirement for the minor at this entry level.</p>\n",
+        "programs": [
+            "3444",
+            "3502",
+            "3434",
+            "3454",
+            "3447",
+            "3554",
+            "3429",
+            "3453",
+            "3558",
+            "3438",
+            "3409"
+        ],
+        "additional_info": "<p><strong>Language Studies for Commencing Mid-Year Students</strong></p>\n\n<p>If your language skills are assessed as Level A in Introductory, Intermediate, Advanced or Professional you cannot commence study until Term 1.</p>\n",
+        "constraints": [],
+        "structure": [
+            {
+                "title": "Arts/Education (Secondary) Students",
+                "description": "The minor in Advanced Chinese Studies (24 uoc ) must not be taken as it is not an approved teaching specialisation.",
+                "credit_points": "",
+                "courses": [],
+                "structure": []
+            },
+            {
+                "title": "Language Core Courses",
+                "description": "If you commence at Advanced Level you must complete ARTS3450 and ARTS3451 (12 UOC).<br /><br />If you commence at Professional Level you must complete ARTS3452 and ARTS3453 (12 UOC).<br /><br />If you commence at Expert Level you must complete ARTS2452 and ARTS3454 (12 UOC).",
+                "credit_points": "12",
+                "courses": [
+                    "ARTS3454",
+                    "ARTS2452",
+                    "ARTS3450",
+                    "ARTS3452",
+                    "ARTS3451",
+                    "ARTS3453"
+                ],
+                "structure": []
+            },
+            {
+                "title": "Chinese Contextual Studies Electives",
+                "description": "You can take up to a maximum of 12 UOC of the following courses.",
+                "credit_points": "",
+                "courses": [
+                    "ARTS2455",
+                    "ARTS2464",
+                    "ARTS2458",
+                    "ARTS3216",
+                    "ARTS2457",
+                    "ARTS2463",
+                    "ARTS2213",
+                    "ARTS3217",
+                    "ARTS2453"
+                ],
+                "structure": []
+            },
+            {
+                "title": "Chinese Professional Studies Electives",
+                "description": "You can take up to a maximum of 12 UOC of the following courses in addition to your 12 UOC of core courses. <br /><br />Note: If you commence at Expert Level you are not permitted to enrol in ARTS3452 or ARTS3453.",
+                "credit_points": "",
+                "courses": [
+                    "ARTS3454",
+                    "ARTS3462",
+                    "ARTS3453",
+                    "ARTS3456",
+                    "ARTS2452",
+                    "ARTS3452",
+                    "ARTS3463",
+                    "ARTS3455"
                 ],
                 "structure": []
             }
@@ -6173,6 +6377,69 @@
                         "structure": []
                     }
                 ]
+            }
+        ]
+    },
+    "COMDF2": {
+        "title": "Global Development",
+        "study_level": "undergraduate",
+        "level": "minor",
+        "credit_points": "24",
+        "faculty": "Faculty of Arts, Design and Architecture",
+        "school": "School of Social Sciences",
+        "description": "<p>International development practice and humanitarian action has increasingly become interdisciplinary, attracting a wide range of professionals with different skill sets. This includes engineers, medical professionals, urban planners, media consultants, psychologists, social workers, social scientists, economists, business managers and many others. In addition to disciplinary-specific knowledge, a nuanced understanding of the environment in which they work is required.</p>\n<p>In a minor in Global Development you will develop the knowledge and skills to enable you to work in and with the actors of the development sector, including UN and international organizations, donor governments, non-governmental and private sector organisations as well as community-based initiatives. Courses emphasize interdisciplinary team learning environments that replicate the actual world of development practice. Upon graduation, you will have an understanding of development practices that complements learning in other fields / disciplines.</p>\n<p><strong></strong></p>",
+        "programs": [
+            "3444",
+            "3454",
+            "3447",
+            "3453",
+            "3558",
+            "3438",
+            "3409"
+        ],
+        "additional_info": null,
+        "constraints": [],
+        "structure": [
+            {
+                "title": "Level 2 Prescribed Electives",
+                "description": "Students must take at least 12 UOC of the following courses.",
+                "credit_points": "12",
+                "courses": [
+                    "ARTS2754",
+                    "ARTS2752",
+                    "ARTS2755",
+                    "ARTS2751"
+                ],
+                "structure": []
+            },
+            {
+                "title": "Level 3 Prescribed Electives",
+                "description": "Students must take at least 6 UOC of the following courses.",
+                "credit_points": "6",
+                "courses": [
+                    "ARTS3750",
+                    "ARTS3757",
+                    "ARTS3755",
+                    "ARTS3756"
+                ],
+                "structure": []
+            },
+            {
+                "title": "Level 1 Prescribed Electives",
+                "description": "Students must take at least 6 UOC of the following courses.",
+                "credit_points": "6",
+                "courses": [
+                    "ARTS1750",
+                    "ARTS1753"
+                ],
+                "structure": []
+            },
+            {
+                "title": "Arts/Education (Secondary) Students",
+                "description": "The minor in Global Development (24 UOC) must not be taken as it is not an approved teaching specialisation.",
+                "credit_points": "",
+                "courses": [],
+                "structure": []
             }
         ]
     },
@@ -10194,6 +10461,76 @@
             }
         ]
     },
+    "ENVPE2": {
+        "title": "Environmental Humanities",
+        "study_level": "undergraduate",
+        "level": "minor",
+        "credit_points": "24",
+        "faculty": "Faculty of Arts, Design and Architecture",
+        "school": "School of Humanities and Languages",
+        "description": "<p>Species extinction, genetically modified organisms, climate change and nuclear power are just a few of the challenges facing us today. While these are all clearly &#39;environmental&#39; issues, they are also all profoundly social, cultural and political challenges. Education in the Environmental Humanities focuses on developing critical insight into the &#39;human dimensions&#39; of these environmental issues; issues that now permeate almost every aspect of our lives, from everyday lifestyle decisions to collective and public choices concerning urban development, energy security and food production.</p>\n\n<p>Environmental Humanities is an interdisciplinary minor stream that is designed to provide you with a foundation from which to understand and critically engage with contemporary environmental issues. Drawing on resources from across the humanities and social sciences, teaching in Environmental Humanities provides you with a valuable and distinctive approach to the environment, grounded in the fields of history, philosophy, geography, cultural studies, literature, science and technology studies (STS) and social theory.</p>\n",
+        "programs": [
+            "3543",
+            "3444",
+            "3434",
+            "3454",
+            "3447",
+            "3429",
+            "3453",
+            "3438",
+            "3409"
+        ],
+        "additional_info": null,
+        "constraints": [],
+        "structure": [
+            {
+                "title": "ARTS/EDUCATION (SECONDARY) STUDENTS",
+                "description": "The 24 uoc minor in Environmental Humanities can be combined with a major in History as preparation for a double first teaching specialisation.",
+                "credit_points": "",
+                "courses": [],
+                "structure": []
+            },
+            {
+                "title": "Level 2 Prescribed Electives",
+                "description": "You must take at least 6 UOC, up to a maximum of 12 UOC of the following courses.",
+                "credit_points": "",
+                "courses": [
+                    "ARTS2244",
+                    "ARTS2248",
+                    "ARTS2249",
+                    "ARTS2240",
+                    "ARTS2243",
+                    "ARTS2242"
+                ],
+                "structure": []
+            },
+            {
+                "title": "Level 3 Prescribed Electives",
+                "description": "You can take up to a maximum of 6 UOC of the following courses.",
+                "credit_points": "",
+                "courses": [
+                    "ATSI3003",
+                    "ARTS3243",
+                    "ARTS3241",
+                    "DART3330",
+                    "ARTS3245",
+                    "ARTS3240",
+                    "ARTS3242"
+                ],
+                "structure": []
+            },
+            {
+                "title": "Level 1 Core Courses",
+                "description": "You must take 12 UOC of the following courses.",
+                "credit_points": "12",
+                "courses": [
+                    "ARTS1240",
+                    "ARTS1241"
+                ],
+                "structure": []
+            }
+        ]
+    },
     "ENVPEH": {
         "title": "Environmental Humanities",
         "study_level": "undergraduate",
@@ -10494,6 +10831,78 @@
             {
                 "title": "Arts/Education (Secondary) Students",
                 "description": "The major in European Studies must not be taken as it is not an approved teaching specialisation.",
+                "credit_points": "",
+                "courses": [],
+                "structure": []
+            }
+        ]
+    },
+    "EUROC2": {
+        "title": "European Studies",
+        "study_level": "undergraduate",
+        "level": "minor",
+        "credit_points": "24",
+        "faculty": "Faculty of Arts, Design and Architecture",
+        "school": "School of Humanities and Languages",
+        "description": "<p><strong>This stream structure is for the following students:</strong></p>\n\n<ul><li><strong>Bachelor of Arts, Bachelor of Arts and Business, and Bachelor of Media students commencing from 2016</strong></li><li><strong>Bachelor of International Studies students commencing from 2017</strong></li></ul>\n\n<p>European Studies is an interdisciplinary area of study focusing on modern European societies and their cultures, past and present, and their historical traditions. The minor stream in European studies provides you a basic understanding of the political, ideological, social and cultural forces that have shaped modern and contemporary Europe. European Studies brings together the perspectives and approaches of disciplines such as History, Philosophy, Cultural and Literary Studies, Politics and International Relations, to explore modern Europe.</p>\n",
+        "programs": [
+            "3543",
+            "3444",
+            "3434",
+            "3454",
+            "3447",
+            "3429",
+            "3453",
+            "3558",
+            "3438",
+            "3409"
+        ],
+        "additional_info": null,
+        "constraints": [],
+        "structure": [
+            {
+                "title": "Level 2 Prescribed Electives",
+                "description": "You must take at least 6 UOC, up to a maximum of 12 UOC of the following courses.",
+                "credit_points": "",
+                "courses": [
+                    "ARTS3789",
+                    "ECON2322",
+                    "ARTS2272",
+                    "ARTS2788",
+                    "ARTS2285",
+                    "ARTS2781",
+                    "ARTS2487",
+                    "ARTS2484",
+                    "ARTS2542",
+                    "ARTS2785"
+                ],
+                "structure": []
+            },
+            {
+                "title": "Level 3 Prescribed Electives",
+                "description": "You can take up to a maximum of 6 UOC of the following courses.",
+                "credit_points": "",
+                "courses": [
+                    "ARTS3787",
+                    "ARTS3295",
+                    "ARTS3786",
+                    "ARTS3780"
+                ],
+                "structure": []
+            },
+            {
+                "title": "Level 1 Core Courses",
+                "description": "You must take 12 UOC of the following courses.",
+                "credit_points": "12",
+                "courses": [
+                    "ARTS1780",
+                    "ARTS1782"
+                ],
+                "structure": []
+            },
+            {
+                "title": "ARTS/EDUCATION (SECONDARY) STUDENTS",
+                "description": "The 24 uoc minor in European Studies can be combined with a major in History as preparation for a double first teaching specialisation.",
                 "credit_points": "",
                 "courses": [],
                 "structure": []
@@ -12136,6 +12545,91 @@
             }
         ]
     },
+    "FRENF2": {
+        "title": "French Studies",
+        "study_level": "undergraduate",
+        "level": "minor",
+        "credit_points": "24",
+        "faculty": "Faculty of Arts, Design and Architecture",
+        "school": "School of Humanities and Languages",
+        "description": "<p>The minor stream in French Studies enables you to study French at a number of levels in order to attain proficiency. Courses are offered from the introductory level to the advanced and professional levels. You will not only develop your knowledge of the French language, but also gain intercultural awareness and understanding of the French-speaking world. You will study cultures, communities, societies and literature in France and the Francophone world. The French language plays a key role in expressing the cultures and identities of the places in which it is spoken. Learning French will provide you with a privileged form of access to the cultural resources and complex patterns of life in other countries. Developing competence in French will have an important place in promoting relationships and mutual understanding between countries and peoples.</p>\n\n<p>This stream is available to students commencing at Introductory and Intermediate entry levels.</p>\n\n<p><strong>Placement Information</strong></p>\n\n<p>If you have prior language knowledge you will need to take an online placement evaluation so that we can assess your skills and select an appropriate level of course for you. Information about the evaluation and additional course details can be found on the web at: <a href=\"http://hal.arts.unsw.edu.au\" rel=\"nofollow\">hal.arts.unsw.edu.au</a></p>\n\n<p>You will not be permitted to enrol in language courses that are too easy for. If this occurs, you will be requested to change your enrolment.</p>\n\n<p>If you are admitted in your first year of study to ARTS2480 or higher on the grounds of ability and/or previous study, such courses will be counted as Level 1 courses in terms of degree requirements.</p>\n",
+        "programs": [
+            "3543",
+            "3444",
+            "3502",
+            "3434",
+            "3454",
+            "3447",
+            "3554",
+            "3429",
+            "3453",
+            "3558",
+            "3438",
+            "3409"
+        ],
+        "additional_info": "<p><strong>Language Studies for Commencing Mid-Year Students</strong></p>\n\n<p>If your language skills are assessed as Level A in Introductory, Advanced or Professional you cannot commence study until Term 1.</p>\n",
+        "constraints": [],
+        "structure": [
+            {
+                "title": "Intermediate Language Core Courses",
+                "description": "You can take up to a maximum of 12 UOC of the following courses.<br />These are required language courses if you commence at Intermediate Level.",
+                "credit_points": "",
+                "courses": [
+                    "ARTS2481",
+                    "ARTS2480"
+                ],
+                "structure": []
+            },
+            {
+                "title": "Arts/Education (Secondary) Students",
+                "description": "The minor in French Studies (24 uoc) must not be taken as it is not an approved teaching specialisation.",
+                "credit_points": "",
+                "courses": [],
+                "structure": []
+            },
+            {
+                "title": "Advanced Language Courses",
+                "description": "If you commence at Intermediate Level you can take 12 UOC of the following courses.",
+                "credit_points": "",
+                "courses": [
+                    "ARTS3481",
+                    "ARTS3480"
+                ],
+                "structure": []
+            },
+            {
+                "title": "Commencing Mid-Year",
+                "description": "If you commence the language studies sequence at Introductory French B, you must complete a further 18 UOC in contextual courses (taught in English) or language courses.<br /><br />If you commence the language studies sequence at Intermediate French B, you must complete a further 18 UOC in contextual courses (taught in English) or language courses.",
+                "credit_points": "",
+                "courses": [],
+                "structure": []
+            },
+            {
+                "title": "French Contextual Studies Electives",
+                "description": "You can take up to a maximum of 18 UOC of the following courses.",
+                "credit_points": "",
+                "courses": [
+                    "ARTS2482",
+                    "ARTS2487",
+                    "ARTS2785",
+                    "ARTS2486",
+                    "ARTS2485",
+                    "ARTS2484"
+                ],
+                "structure": []
+            },
+            {
+                "title": "Introductory Language Core Courses",
+                "description": "If you commence at Introductory Level you must take 12 UOC of the following courses.",
+                "credit_points": "",
+                "courses": [
+                    "ARTS1481",
+                    "ARTS1480"
+                ],
+                "structure": []
+            }
+        ]
+    },
     "FRENG1": {
         "title": "Advanced French Studies",
         "study_level": "undergraduate",
@@ -12216,6 +12710,85 @@
                         "structure": []
                     }
                 ]
+            }
+        ]
+    },
+    "FRENG2": {
+        "title": "Advanced French Studies",
+        "study_level": "undergraduate",
+        "level": "minor",
+        "credit_points": "24",
+        "faculty": "Faculty of Arts, Design and Architecture",
+        "school": "School of Humanities and Languages",
+        "description": "<p>The minor stream in Advanced French Studies enables you to study French beginning at the Advanced or Professional entry level. You will not only develop your knowledge of the French language, but also gain intercultural awareness and understanding of the French-speaking world. You will study cultures, communities, societies and literature in France and the Francophone world. The French language plays a key role in expressing the cultures and identities of the places in which it is spoken. Learning French will provide you with a privileged form of access to the cultural resources and complex patterns of life in other countries. Developing competence in French will have an important place in promoting relationships and mutual understanding between countries and peoples.</p>\n\n<p><br />\nThis stream is available to students commencing at Advanced and Professional entry levels.<br />\n<br />\nPlacement Information<br />\n<br />\nYou will need to take an online placement evaluation so that we can assess your skills and select an appropriate level of course for you. Information about the evaluation and additional course details can be found on the web at: <a href=\"http://hal.arts.unsw.edu.au\" rel=\"nofollow\">hal.arts.unsw.edu.au</a><br />\n<br />\nYou will not be permitted to enrol in language courses that are too easy for you. If this occurs, you will be requested to change your enrolment.<br />\n<br />\nIf you are admitted in your first year of study to ARTS3480 or higher on the grounds of ability and/or previous study, such courses will be counted as Level 1 courses in terms of degree requirements.</p>\n",
+        "programs": [
+            "3444",
+            "3502",
+            "3434",
+            "3454",
+            "3447",
+            "3554",
+            "3429",
+            "3453",
+            "3558",
+            "3438",
+            "3409"
+        ],
+        "additional_info": "<p><strong>Language Studies for Commencing Mid-Year Students</strong></p>\n\n<p>If your language skills are assessed as Level A in Introductory, Advanced or Professional you cannot commence study until Term 1.</p>\n",
+        "constraints": [],
+        "structure": [
+            {
+                "title": "French Contextual Studies Electives",
+                "description": "You can take up to a maximum of 12 UOC of the following courses.",
+                "credit_points": "",
+                "courses": [
+                    "ARTS2484",
+                    "ARTS2486",
+                    "ARTS2785",
+                    "ARTS2482",
+                    "ARTS2487",
+                    "ARTS2485"
+                ],
+                "structure": []
+            },
+            {
+                "title": "Arts/Education (Secondary) Students",
+                "description": "The minor in Advanced French Studies (24 uoc) must not be taken as it is not an approved teaching specialisation",
+                "credit_points": "",
+                "courses": [],
+                "structure": []
+            },
+            {
+                "title": "French Professional Studies Electives",
+                "description": "If you commence at Professional Level you can take up to 12 UOC of the following courses.",
+                "credit_points": "",
+                "courses": [
+                    "ARTS3486",
+                    "ARTS3487",
+                    "ARTS3484",
+                    "ARTS3488"
+                ],
+                "structure": []
+            },
+            {
+                "title": "Advanced Language Core Courses",
+                "description": "If you commence at Advanced Level you must take 12 UOC of the following courses.",
+                "credit_points": "",
+                "courses": [
+                    "ARTS3481",
+                    "ARTS3480"
+                ],
+                "structure": []
+            },
+            {
+                "title": "Professional Language Courses",
+                "description": "You can take up to a maximum of 12 UOC of the following courses.<br />These are required language courses if you commence at Professional Level.",
+                "credit_points": "",
+                "courses": [
+                    "ARTS3482",
+                    "ARTS3483"
+                ],
+                "structure": []
             }
         ]
     },
@@ -13064,6 +13637,92 @@
                 "courses": [
                     "ARTS3780"
                 ],
+                "structure": []
+            }
+        ]
+    },
+    "GERSF2": {
+        "title": "German Studies",
+        "study_level": "undergraduate",
+        "level": "minor",
+        "credit_points": "24",
+        "faculty": "Faculty of Arts, Design and Architecture",
+        "school": "School of Humanities and Languages",
+        "description": "<p>German Studies at UNSW places special emphasis on integrating the study of social, historical and cultural developments in Germany with the teaching of practical language skills. This approach aims to enable you to achieve a high level of communicative competence in German while offering you a critical understanding of this fascinating modern European society.</p>\n\n<p>Students in the intermediate and advanced sequences who will complete some components of their sequence via cross-institutional study are advised that they are responsible for enrolling themselves before the appropriate UNSW and partner university deadlines for cross-institutional enrolment, which fall well before the beginning of regular UNSW teaching periods. See <a href=\"https://student.unsw.edu.au/cross-institutional-study\" rel=\"nofollow\">Cross Institutional Study</a>.</p>\n\n<p>Each course of cross-institutional study requires approval from the German Studies convenor, with whom students must consult at an early stage to discuss the selection of courses. Students who successfully complete German Studies courses cross-institutionally will have their results reported as transfer credits at UNSW, i.e. specific grades will not appear on their transcript.</p>\n\n<p>If in a given term you are unable to take appropriate courses cross-institutionally you may be eligible to apply for an individual variation of program.</p>\n\n<p><strong>Placement Information</strong></p>\n\n<p>If you have prior language knowledge you will need to take an online placement evaluation so that we can assess your skills and select an appropriate level of course for you. Information about the evaluation and additional course details can be found on the web at: <a href=\"http://hal.arts.unsw.edu.au\" rel=\"nofollow\">hal.arts.unsw.edu.au</a></p>\n\n<p>You will not be permitted to enrol in language courses that are too easy for you. If this occurs, you will be requested to change your enrolment.</p>\n\n<p>If you are admitted in your first year of study to ARTS2510 or higher on the grounds of ability and/or previous study, such courses will be counted as Level 1 courses in terms of degree requirements.</p>\n",
+        "programs": [
+            "3543",
+            "3444",
+            "3502",
+            "3434",
+            "3454",
+            "3447",
+            "3554",
+            "3429",
+            "3453",
+            "3558",
+            "3438",
+            "3409"
+        ],
+        "additional_info": "<p><strong>Language Studies for Commencing Mid-Year Students</strong></p>\n\n<p>If your language skills are assessed as Level A in Introductory or Advanced you cannot commence study until Term 1.</p>\n",
+        "constraints": [],
+        "structure": [
+            {
+                "title": "Intermediate Language Core Courses",
+                "description": "If you commence at Introductory Level you can take up to a maximum of 12 UOC of the following courses.<br />These are required language courses if you commence at Intermediate Level.",
+                "credit_points": "",
+                "courses": [
+                    "ARTS2510",
+                    "ARTS2511"
+                ],
+                "structure": []
+            },
+            {
+                "title": "Advanced Language Core Courses",
+                "description": "If you commence at Intermediate Level you can take up to a maximum of 12 UOC of the following courses.<br />These are required language courses if you commence at Advanced Level.",
+                "credit_points": "",
+                "courses": [
+                    "ARTS3511",
+                    "ARTS3510"
+                ],
+                "structure": []
+            },
+            {
+                "title": "Introductory Language Core Courses",
+                "description": "If you commence at Introductory Level you must take 12 UOC of the following courses.",
+                "credit_points": "",
+                "courses": [
+                    "ARTS1510",
+                    "ARTS1511"
+                ],
+                "structure": []
+            },
+            {
+                "title": "Arts/Education (Secondary) Students",
+                "description": "The minor in German Studies (24 uoc) must not be taken as it is not an approved teaching specialisation.",
+                "credit_points": "",
+                "courses": [],
+                "structure": []
+            },
+            {
+                "title": "Prescribed Electives",
+                "description": "You can take up to a maximum of 12 UOC of the following courses.",
+                "credit_points": "",
+                "courses": [
+                    "ARTS2285",
+                    "ARTS3295",
+                    "ARTS3780",
+                    "ARTS3787",
+                    "ARTS2788",
+                    "ARTS3786",
+                    "ARTS2785"
+                ],
+                "structure": []
+            },
+            {
+                "title": "Cross-Institutional Prescribed Electives",
+                "description": "If you commence at Advanced Level you may take up to 12 UOC approved upper-level German Studies prescribed electives via cross-institutional study.",
+                "credit_points": "",
+                "courses": [],
                 "structure": []
             }
         ]
@@ -13918,6 +14577,47 @@
                     "MGMT2102",
                     "MGMT2101",
                     "MGMT3102",
+                    "MGMT3101"
+                ],
+                "structure": []
+            }
+        ]
+    },
+    "IBUSA2": {
+        "title": "International Business",
+        "study_level": "undergraduate",
+        "level": "minor",
+        "credit_points": "30",
+        "faculty": "UNSW Business School",
+        "school": "School of Management and Governance",
+        "description": "A minor in International Business consists of 30 UOC (5 courses) containing the following courses: MGMT1101, MGMT2101, MGMT2102, MGMT3102 and MGMT3101.",
+        "programs": [
+            "3543",
+            "3502",
+            "3587",
+            "3434",
+            "3454",
+            "3447",
+            "3554",
+            "3429",
+            "3453",
+            "3558",
+            "3586",
+            "3438",
+            "3409"
+        ],
+        "additional_info": "<p><strong>Honours</strong></p>\n\n<p>Honours level study is available for International Business students.</p>\n\n<p>Students interested in studying at Honours Level should refer to the relevant Honours stream record for entry requirements.</p>\n\n<p><strong>Further Information</strong></p>\n\n<p>Please note that these requirements may be subject to change.\u00a0<br />\nStudents are advised to follow requirements according to the year they commenced. Please refer to previous editions of the\u00a0<br />\n<a href=\"http://legacy.handbook.unsw.edu.au/general/2018/SSAPO/previousEditions.html\" rel=\"nofollow\">Online Handbook</a>\u00a0for pre-2019 program requirements.</p>\n\n<p>Contact the\u00a0<a href=\"http://www.asb.unsw.edu.au/schools/organisationandmanagement/Pages/default.aspx\" rel=\"nofollow\">School of Management</a>\u00a0for advice.<br />\ntel: &#43; 61 2 9385 7157<br />\nlocation: Level 5, West Wing, UNSW Business School Building</p>\n",
+        "constraints": [],
+        "structure": [
+            {
+                "title": "Core Courses",
+                "description": "Students must take 30 UOC of the following courses. <br /><br />Students in Comm/Econ and Comm/Actl should take COMM1900 instead of COMM1150. Students in Econ and Actl should take ECON1102. All other students should complete COMM1150.<br /><br />Please note: courses completed under the minor do not form of a nominated major.",
+                "credit_points": "30",
+                "courses": [
+                    "MGMT2101",
+                    "COMM1150",
+                    "MGMT3102",
+                    "MGMT2102",
                     "MGMT3101"
                 ],
                 "structure": []
@@ -14837,6 +15537,91 @@
             }
         ]
     },
+    "JAPNF2": {
+        "title": "Japanese Studies",
+        "study_level": "undergraduate",
+        "level": "minor",
+        "credit_points": "24",
+        "faculty": "Faculty of Arts, Design and Architecture",
+        "school": "School of Humanities and Languages",
+        "description": "<p>The minor stream in Japanese Studies provides you with the opportunity to develop as a competent user of the Japanese language with explicit knowledge of Japanese society and culture. Through provisions of Australia-Japan contact situations, you will gain intercultural awareness and understanding, develop your knowledge of the language, cultures, societies and communities in Japan. The Japanese language plays a key role in expressing the cultures and identities of Japan. Japan is of increasing fundamental importance to Australia for political, strategic and economic reasons in realisation of Australia in the Asian Century. Thus, learning Japanese and developing competence in Japanese will provide you with a privileged form of access to the cultural resources and complex patterns of life in Japan and beyond, take an important role in promoting relationships and mutual understanding between countries and peoples.</p>\n\n<p>This stream is available to students commencing at Introductory and Intermediate entry levels.</p>\n\n<p><strong>Placement Information</strong></p>\n\n<p>If you have prior language knowledge you will need to take an online placement evaluation so that we can assess your skills and select an appropriate level of course for you. Information about the evaluation and additional course details can be found on the web at: <a href=\"http://hal.arts.unsw.edu.au\" rel=\"nofollow\">hal.arts.unsw.edu.au</a></p>\n\n<p>You will not be permitted to enrol in language courses that are too easy for. If this occurs, you will be requested to change your enrolment.</p>\n\n<p>If you are admitted in your first year of study to ARTS2630 or higher on the grounds of ability and/or previous study, such courses will be counted as Level 1 courses in terms of degree requirements.</p>\n",
+        "programs": [
+            "3543",
+            "3444",
+            "3502",
+            "3434",
+            "3454",
+            "3447",
+            "3554",
+            "3429",
+            "3453",
+            "3558",
+            "3438",
+            "3409"
+        ],
+        "additional_info": "<p><strong>Language Studies for Commencing Mid-Year Students</strong></p>\n\n<p>If your language skills are assessed as Level A in Introductory, Intermediate, Advanced or Professional you cannot commence study until Term 1.</p>\n",
+        "constraints": [],
+        "structure": [
+            {
+                "title": "Japanese Contextual Studies Electives",
+                "description": "You can take up to a maximum of 18 UOC of the following courses.",
+                "credit_points": "",
+                "courses": [
+                    "ARTS2663",
+                    "ARTS3639",
+                    "ARTS3640",
+                    "ARTS2633",
+                    "ARTS3218",
+                    "ARTS2908"
+                ],
+                "structure": []
+            },
+            {
+                "title": "Introductory Language Core Courses",
+                "description": "If you commence at Introductory Level you must take 12 UOC of the following courses.",
+                "credit_points": "",
+                "courses": [
+                    "ARTS1631",
+                    "ARTS1630"
+                ],
+                "structure": []
+            },
+            {
+                "title": "Advanced Language Courses",
+                "description": "If you commence at Intermediate Level you can take 12 UOC of the following courses.",
+                "credit_points": "",
+                "courses": [
+                    "ARTS3631",
+                    "ARTS3630"
+                ],
+                "structure": []
+            },
+            {
+                "title": "Arts/Education (Secondary) Students",
+                "description": "The minor in Japanese Studies (24 uoc) must not be taken as it is not an approved teaching specialisation.",
+                "credit_points": "",
+                "courses": [],
+                "structure": []
+            },
+            {
+                "title": "Intermediate Language Core Courses",
+                "description": "You can take up to a maximum of 12 UOC of the following courses.<br /><br />These are required language courses if you commence at Intermediate Level.",
+                "credit_points": "",
+                "courses": [
+                    "ARTS2631",
+                    "ARTS2630"
+                ],
+                "structure": []
+            },
+            {
+                "title": "Substitutions",
+                "description": "If you commence the language studies sequence at Introductory Japanese B, you must complete a further 18 UOC in contextual courses (taught in English) or language courses.<br /><br />If you commence the language studies sequence at Intermediate Japanese B, you must complete a further 18 UOC in contextual courses (taught in English) or language courses.",
+                "credit_points": "",
+                "courses": [],
+                "structure": []
+            }
+        ]
+    },
     "JAPNG1": {
         "title": "Advanced Japanese Studies",
         "study_level": "undergraduate",
@@ -14914,6 +15699,85 @@
                 "courses": [
                     "ARTS3630",
                     "ARTS3631"
+                ],
+                "structure": []
+            }
+        ]
+    },
+    "JAPNG2": {
+        "title": "Advanced Japanese Studies",
+        "study_level": "undergraduate",
+        "level": "minor",
+        "credit_points": "24",
+        "faculty": "Faculty of Arts, Design and Architecture",
+        "school": "School of Humanities and Languages",
+        "description": "<p>The minor stream in Advanced Japanese Studies provides you with the opportunity to develop as a highly competent user of the Japanese language with explicit knowledge of Japanese society and culture. Through provisions of Australia-Japan contact situations, you will gain intercultural awareness and understanding, develop your knowledge of the language, cultures, societies and communities in Japan. The Japanese language plays a key role in expressing the cultures and identities of Japan. Japan is of increasing fundamental importance to Australia for political, strategic and economic reasons in realisation of Australia in the Asian Century. Thus, learning Japanese and developing competence in Japanese will provide you with a privileged form of access to the cultural resources and complex patterns of life in Japan and beyond, take an important role in promoting relationships and mutual understanding between countries and peoples.</p>\n\n<p>This stream is available to students commencing at Advanced and Professional entry levels.</p>\n\n<p><strong>Placement Information</strong></p>\n\n<p>You will need to take an online placement evaluation so that we can assess your skills and select an appropriate level of course for you. Information about the evaluation and additional course details can be found on the web at: <a href=\"http://hal.arts.unsw.edu.au\" rel=\"nofollow\">hal.arts.unsw.edu.au</a></p>\n\n<p>You will not be permitted to enrol in language courses that are too easy for you. If this occurs, you will be requested to change your enrolment.</p>\n\n<p>If you are admitted in their first year of study to ARTS3630 or higher on the grounds of ability and/or previous study, such courses will be counted as Level 1 courses in terms of degree requirements.</p>\n",
+        "programs": [
+            "3444",
+            "3502",
+            "3434",
+            "3454",
+            "3447",
+            "3554",
+            "3429",
+            "3453",
+            "3558",
+            "3438",
+            "3409"
+        ],
+        "additional_info": "<p><strong>Language Studies for Commencing Mid-Year Students</strong></p>\n\n<p>If your language skills are assessed as Level A in Introductory, Intermediate, Advanced or Professional you cannot commence study until Term 1.</p>\n",
+        "constraints": [],
+        "structure": [
+            {
+                "title": "Professional Language Core Courses",
+                "description": "You can take up to a maximum of 12 UOC of the following courses.<br /><br />These are required language courses if you commence at Professional Level.",
+                "credit_points": "",
+                "courses": [
+                    "ARTS3633",
+                    "ARTS3632"
+                ],
+                "structure": []
+            },
+            {
+                "title": "Advanced Language Core Courses",
+                "description": "If you commence at Advanced Level you must take 12 UOC of the following courses.",
+                "credit_points": "",
+                "courses": [
+                    "ARTS3631",
+                    "ARTS3630"
+                ],
+                "structure": []
+            },
+            {
+                "title": "Arts/Education (Secondary) Students",
+                "description": "The major/minor in Advanced Japanese Studies (24 UOC) must not be taken as it is not an approved teaching specialisation.",
+                "credit_points": "",
+                "courses": [],
+                "structure": []
+            },
+            {
+                "title": "Japanese Contextual Studies Electives",
+                "description": "You can take up to a maximum of 12 UOC of the following courses.",
+                "credit_points": "",
+                "courses": [
+                    "ARTS3639",
+                    "ARTS3218",
+                    "ARTS2633",
+                    "ARTS3640",
+                    "ARTS2908",
+                    "ARTS2663"
+                ],
+                "structure": []
+            },
+            {
+                "title": "Japanese Professional Studies Electives",
+                "description": "If you commence the language studies sequence at Professional Level you may take up to 12 UOC of the following courses.",
+                "credit_points": "",
+                "courses": [
+                    "ARTS3638",
+                    "ARTS3641",
+                    "ARTS3634",
+                    "ARTS3643"
                 ],
                 "structure": []
             }
@@ -15305,6 +16169,72 @@
             }
         ]
     },
+    "KOREF2": {
+        "title": "Korean Studies",
+        "study_level": "undergraduate",
+        "level": "minor",
+        "credit_points": "24",
+        "faculty": "Faculty of Arts, Design and Architecture",
+        "school": "School of Humanities and Languages",
+        "description": "<p>The minor stream in Korean Studies covers the study of the Korean language and the study of the social, cultural and historical aspects associated with the language. It provides you with the opportunity to develop as a competent user of the Korean language. You will gain intercultural awareness and understanding, develop explicit knowledge of language, and gain knowledge of the social, cultural and historical background of Korean-speaking people. The Korean language plays a key role in expressing the cultures and identities of the places in which it is spoken.</p>\n\n<p>Learning Korean will provide you with a privileged form of access to the cultural resources and complex patterns of life in Korea and other countries. Developing competence in Korean will have an important place in promoting relationships and mutual understanding between countries and peoples.</p>\n\n<p>This stream is available to students commencing at Introductory and Intermediate entry levels.</p>\n\n<p><strong>Placement Information</strong></p>\n\n<p>If you have prior language knowledge you will need to take an online placement evaluation so that we can assess your skills and select an appropriate level of course for you. Information about the evaluation and additional course details can be found on the web at: <a href=\"http://hal.arts.unsw.edu.au\" rel=\"nofollow\">hal.arts.unsw.edu.au</a></p>\n\n<p>You will not be permitted to enrol in language courses that are too easy for you. If this occurs, you will be requested to change your enrolment.</p>\n\n<p>If you are admitted in your first year of study to ARTS2660 or higher on the grounds of ability and/or previous study, such courses will be counted as Level 1 courses in terms of degree requirements.</p>\n",
+        "programs": [
+            "3543",
+            "3444",
+            "3502",
+            "3434",
+            "3454",
+            "3447",
+            "3554",
+            "3429",
+            "3453",
+            "3558",
+            "3438",
+            "3409"
+        ],
+        "additional_info": "<p><strong>Language Studies for Commencing Mid-Year Students</strong></p>\n\n<p>If your language skills are assessed as Level A in Introductory, Intermediate or Advanced you cannot commence study until Term 1.</p>\n",
+        "constraints": [],
+        "structure": [
+            {
+                "title": "Korean Contextual Studies Courses",
+                "description": "You may take up to 12 UOC of the following courses.<br /><br />Note: If you commence the language studies sequence at Introductory B or Intermediate B, you must complete a further 18 UOC of contextual studies courses or language courses.",
+                "credit_points": "",
+                "courses": [
+                    "ARTS2662",
+                    "ARTS2663",
+                    "ARTS3640",
+                    "ARTS2211"
+                ],
+                "structure": []
+            },
+            {
+                "title": "Intermediate Language Core Courses",
+                "description": "You can take up to a maximum of 12 UOC of the following courses.<br /><br />These are required language courses if you commence at Intermediate Level.",
+                "credit_points": "",
+                "courses": [
+                    "ARTS2660",
+                    "ARTS2661"
+                ],
+                "structure": []
+            },
+            {
+                "title": "ARTS/EDUCATION (SECONDARY) STUDENTS",
+                "description": "The minor in Korean Studies (24 uoc) must not be taken as it is not an approved teaching specialisation.",
+                "credit_points": "",
+                "courses": [],
+                "structure": []
+            },
+            {
+                "title": "Introductory Language Core Courses",
+                "description": "If you commence at Introductory Level you must take 12 UOC of the following courses.",
+                "credit_points": "",
+                "courses": [
+                    "ARTS1661",
+                    "ARTS1660"
+                ],
+                "structure": []
+            }
+        ]
+    },
     "KOREG1": {
         "title": "Advanced Korean Studies",
         "study_level": "undergraduate",
@@ -15365,6 +16295,74 @@
                     "ARTS3661",
                     "ARTS3660"
                 ],
+                "structure": []
+            }
+        ]
+    },
+    "KOREG2": {
+        "title": "Advanced Korean Studies",
+        "study_level": "undergraduate",
+        "level": "minor",
+        "credit_points": "24",
+        "faculty": "Faculty of Arts, Design and Architecture",
+        "school": "School of Humanities and Languages",
+        "description": "<p>The minor stream in Advanced Korean Studies covers the study of the Korean language and the study of the social, cultural and historical aspects associated with the language. It provides you with the opportunity to develop as a competent user of the Korean language. You will gain intercultural awareness and understanding, develop explicit knowledge of language, and gain knowledge of the social, cultural and historical background of Korean-speaking people. The Korean language plays a key role in expressing the cultures and identities of the places in which it is spoken.</p>\n\n<p>Learning Korean will provide you with a privileged form of access to the cultural resources and complex patterns of life in Korea and other countries. Developing competence in Korean will have an important place in promoting relationships and mutual understanding between countries and peoples.</p>\n\n<p>This stream is available to students commencing at Advanced entry level.</p>\n\n<p><strong>Placement Information</strong></p>\n\n<p>You will need to take an online placement evaluation so that we can assess your skills and select an appropriate level of course for you. Information about the evaluation and additional course details can be found on the web at: <a href=\"http://hal.arts.unsw.edu.au\" rel=\"nofollow\">hal.arts.unsw.edu.au</a></p>\n\n<p>You will not be permitted to enrol in language courses that are too easy for you. If this occurs, you will be requested to change your enrolment.</p>\n\n<p>If you are admitted in your first year of study to ARTS3660 or higher on the grounds of ability and/or previous study, such courses will be counted as Level 1 courses in terms of degree requirements.</p>\n",
+        "programs": [
+            "3444",
+            "3502",
+            "3434",
+            "3454",
+            "3447",
+            "3554",
+            "3429",
+            "3453",
+            "3558",
+            "3438",
+            "3409"
+        ],
+        "additional_info": "<p><strong>Language Studies for Commencing Mid-Year Students</strong></p>\n\n<p>If your language skills are assessed as Level A in Introductory, Intermediate or Advanced you cannot commence study until Term 1.</p>\n",
+        "constraints": [],
+        "structure": [
+            {
+                "title": "Advanced Language Core Courses",
+                "description": "You must take 12 UOC of the following courses.",
+                "credit_points": "12",
+                "courses": [
+                    "ARTS3660",
+                    "ARTS3661"
+                ],
+                "structure": []
+            },
+            {
+                "title": "Korean Professional Studies Course",
+                "description": "You can take up to a maximum of 12 UOC of the following courses.",
+                "credit_points": "",
+                "courses": [
+                    "ARTS3662",
+                    "ARTS3665",
+                    "ARTS3663",
+                    "ARTS3664",
+                    "ARTS3667"
+                ],
+                "structure": []
+            },
+            {
+                "title": "Korean Contextual Studies Courses",
+                "description": "You can take up to a maximum of 12 UOC of the following courses.",
+                "credit_points": "",
+                "courses": [
+                    "ARTS2663",
+                    "ARTS3640",
+                    "ARTS2662",
+                    "ARTS2211"
+                ],
+                "structure": []
+            },
+            {
+                "title": "ARTS/EDUCATION (SECONDARY) STUDENTS",
+                "description": "The minor in Advanced Korean Studies (24 uoc) must not be taken as it is not an approved teaching specialisation.",
+                "credit_points": "",
+                "courses": [],
                 "structure": []
             }
         ]
@@ -23226,6 +24224,80 @@
             }
         ]
     },
+    "POLSG2": {
+        "title": "Politics and International Relations",
+        "study_level": "undergraduate",
+        "level": "minor",
+        "credit_points": "24",
+        "faculty": "Faculty of Arts, Design and Architecture",
+        "school": "School of Social Sciences",
+        "description": "<p>The study of Politics and International Relations focuses on the workings of government and global politics, and will help you understand the most pressing challenges facing the world today,including political instability and conflict, security, great-power rivalry, climate change,development, human rights, governance and inequality. The solutions to many national and global problems are often intricately connected with regional and global processes, structures,mechanisms, forces, interests, customs and institutions. Knowing how to identify these solutions,their context and histories, is often challenging, frequently rewarding, and always interesting. A major stream in Politics and International Relations will give you insight into the complex relationships between state and non-state actors, individuals and organisations in national and international contexts, and you will learn how to think critically about the nature of power in contemporary and historical perspective.</p>\n",
+        "programs": [
+            "3444",
+            "3434",
+            "3454",
+            "3447",
+            "3429",
+            "3453",
+            "3558",
+            "3438",
+            "3409"
+        ],
+        "additional_info": null,
+        "constraints": [],
+        "structure": [
+            {
+                "title": "Level 1 Core Courses",
+                "description": "You must take 12 UOC of the following Level 1 core courses.",
+                "credit_points": "12",
+                "courses": [
+                    "ARTS1811",
+                    "ARTS1810"
+                ],
+                "structure": []
+            },
+            {
+                "title": "Level 2 Prescribed Electives",
+                "description": "You must take 6 UOC of the following courses.",
+                "credit_points": "6",
+                "courses": [
+                    "ARTS2845",
+                    "ARTS2820",
+                    "ARTS2815",
+                    "ARTS2819",
+                    "ARTS2852",
+                    "ARTS2817",
+                    "ARTS2816",
+                    "ARTS2818",
+                    "ARTS2813"
+                ],
+                "structure": []
+            },
+            {
+                "title": "Level 2 Core Course",
+                "description": "You must complete the following Level 2 core course (6 UOC);",
+                "credit_points": "6",
+                "courses": [
+                    "ARTS2821"
+                ],
+                "structure": []
+            },
+            {
+                "title": "ARTS/EDUCATION (SECONDARY) STUDENTS",
+                "description": "The minor in Politics and International Relations (24 uoc) must not be taken as it is not an approved teaching specialisation.",
+                "credit_points": "",
+                "courses": [],
+                "structure": []
+            },
+            {
+                "title": "Specialisation UOC",
+                "description": "If you wish to gain a minor in Politics and International Relations, you must complete 24 units of credit including 12 UOC at Level 1 and 12 UOC at Level 2.",
+                "credit_points": "",
+                "courses": [],
+                "structure": []
+            }
+        ]
+    },
     "POLSGH": {
         "title": "Politics and International Relations",
         "study_level": "undergraduate",
@@ -24211,6 +25283,82 @@
                 "description": "If you are enrolled in the Bachelor of Social Work (Honours)/Bachelor of Arts you will complete ARTS1753 Culture, Experience and Change (6 UOC) as part of your Social Work core requirement. If you choose a major or minor in Sociology and Anthropology you must complete an additional 6 UOC UNSW Arts and Social Sciences Prescribed Elective.",
                 "credit_points": "",
                 "courses": [],
+                "structure": []
+            }
+        ]
+    },
+    "SOCAD2": {
+        "title": "Sociology and Anthropology",
+        "study_level": "undergraduate",
+        "level": "minor",
+        "credit_points": "24",
+        "faculty": "Faculty of Arts, Design and Architecture",
+        "school": "School of Social Sciences",
+        "description": "<p><strong>This stream structure is for the following students:</strong></p>\n\n<ul><li><strong>Bachelor of Arts, Bachelor of Arts and Business, and Bachelor of Media students commencing from 2016</strong></li><li><strong>Bachelor of International Studies students commencing from 2017</strong></li></ul>\n\n<p>Sociology and Anthropology will appeal to you if you are interested in the social and cultural relations through which we live. If you are doing a major in the humanities, Sociology and Anthropology as a minor will give you an invaluable social and cross-cultural perspective. If you are majoring in a specialist social science, most of which grew from Sociology and Anthropology, a minor in Sociology and Anthropology will give greater depth and cross-cultural breadth. If you are majoring in a discipline that is concerned with social and cultural trends, a minor in Sociology and Anthropology will improve your analytical skills, your conceptual understanding and your appreciation of ethical relations.</p>\n",
+        "programs": [
+            "3543",
+            "3444",
+            "3434",
+            "3454",
+            "3447",
+            "3429",
+            "3453",
+            "3438",
+            "3409"
+        ],
+        "additional_info": null,
+        "constraints": [],
+        "structure": [
+            {
+                "title": "Level 1 Core Courses",
+                "description": "You must take 12 UOC of the following courses.",
+                "credit_points": "12",
+                "courses": [
+                    "ARTS1870",
+                    "ARTS1753"
+                ],
+                "structure": []
+            },
+            {
+                "title": "Note: Social Work (Honours)/Arts",
+                "description": "If you are enrolled in the Bachelor of Social Work (Honours)/Bachelor of Arts you will complete ARTS1753 Culture, Experience and Change (6 UOC) as part of your Social Work core requirement. If you choose a major or minor in Sociology and Anthropology you must complete an additional 6 UOC UNSW Arts and Social Sciences Prescribed Elective.",
+                "credit_points": "",
+                "courses": [],
+                "structure": []
+            },
+            {
+                "title": "Prescribed Electives",
+                "description": "You must take 6 UOC of the following courses.",
+                "credit_points": "6",
+                "courses": [
+                    "ARTS2872",
+                    "ARTS3874",
+                    "ARTS2877",
+                    "ARTS3871",
+                    "ARTS3885",
+                    "ARTS2870",
+                    "ARTS2874",
+                    "ARTS3883",
+                    "ARTS2873",
+                    "ARTS3872",
+                    "ARTS2876"
+                ],
+                "structure": []
+            },
+            {
+                "title": "ARTS/EDUCATION (SECONDARY) STUDENTS",
+                "description": "The minor in Sociology and Anthropology (24 uoc) must not be taken as it is not an approved teaching specialisation.",
+                "credit_points": "",
+                "courses": [],
+                "structure": []
+            },
+            {
+                "title": "Level 2 Core Courses",
+                "description": "You must take 6 UOC of the following courses.",
+                "credit_points": "6",
+                "courses": [
+                    "ARTS2871"
+                ],
                 "structure": []
             }
         ]
@@ -25315,6 +26463,92 @@
                 "courses": [
                     "TABL5805",
                     "TABL5810"
+                ],
+                "structure": []
+            }
+        ]
+    },
+    "TABLC1": {
+        "title": "Taxation",
+        "study_level": "undergraduate",
+        "level": "major",
+        "credit_points": "48",
+        "faculty": "UNSW Business School",
+        "school": "School of Accounting, Auditing and Taxation",
+        "description": "<p>NOTE: For Commerce/Law students. Courses listed in the Taxation Major of the BCom (other than TABL1710 and TABL2741) may be counted to the Commerce component of the degree. No other TABL courses may be counted to the degree.<br />\n<br />\nTaxation funds the provision of government services, is a tool in economic management and is an important consideration in all business decisions. Indeed in a modern business environment no decision can be responsibly made without consideration being given to tax implications.<br />\n<br />\nTaxation affects every aspect of commercial life from the choice of business vehicle, to the financing of business operations, to the offshore expansion of a business, to the retirement plans for employees.<br />\n<br />\nManagers, accountants, auditors, financial officers and those working in banking, insurance, international business and government policy development and commerce generally require knowledge of business taxation. Tax consultants assist clients in structuring business transactions in tax effective ways. Tax consultants are highly sought after and are involved in creative, challenging and rewarding work.</p>\n",
+        "programs": [
+            "3543",
+            "3502",
+            "3587",
+            "3554",
+            "3558",
+            "3586"
+        ],
+        "additional_info": "<p><strong>Honours</strong></p>\n\n<p>Honours level study is available for Taxation students.</p>\n\n<p>Students interested in studying at Honours Level should refer to the relevant Honours stream record for entry requirements.</p>\n\n<p><strong>Further Information</strong></p>\n\n<p>Please note that these requirements may be subject to change.<br />\nStudents are advised to follow requirements according to the year they commenced. Please refer to previous editions of the <a href=\"http://legacy.handbook.unsw.edu.au/general/2018/SSAPO/previousEditions.html\" rel=\"nofollow\">Online Handbook</a> for pre-2019 program requirements.</p>\n\n<p>Contact the <a href=\"https://www.business.unsw.edu.au/students/resources/student-centre\" rel=\"nofollow\">UNSW Business School Student Centre</a> for advice.<br />\nTelephone: &#43; 61 2 9385 3189<br />\nLocation: Level 1, Room 1028, Quadrangle Building<br />\n<a href=\"https://www.business.unsw.edu.au/students/resources/online-forms\" rel=\"nofollow\">Forms, policies and procedures</a><br />\n<a href=\"https://www.business.unsw.edu.au/students/resources/faq\" rel=\"nofollow\">Frequently asked questions</a></p>\n",
+        "constraints": [],
+        "structure": [
+            {
+                "title": "Taxation Course List for Commerce/Law (4733) Students",
+                "description": "A major in Taxation consists of 48 UOC (8 courses) all of them elective for Commerce/Law candidates. The eight (8) courses are chosen from the list below. At least three (3) of the elective courses completed must be at level 3 (i.e. TABL3XXX). This is regardless of whether you are doing a single major or taking Taxation as a second major. <br /><br />Students enrolled in Program 4733 will not study TABL1710 or TABL2741 (as this material is covered elsewhere in the 4733 program). Students who have already completed LAWS3147, will not study TABL2751 but will instead choose another TABL course from the list.<br /><br />Students may count ONE (6 UOC) of COMM2101, COMM3202, COMM3303, COMM2222, COMM2233, COMM3020 or COMM3030 towards their Taxation major.",
+                "credit_points": "48",
+                "courses": [
+                    "TABL3003",
+                    "TABL2793",
+                    "TABL2751",
+                    "TABL3755",
+                    "TABL2756",
+                    "TABL3016",
+                    "TABL4722",
+                    "TABL3752",
+                    "COMM3101",
+                    "COMM3202",
+                    "COMM2222",
+                    "TABL3033",
+                    "TABL3005",
+                    "TABL3006",
+                    "TABL3010",
+                    "COMM3303",
+                    "COMM3020",
+                    "COMM2233",
+                    "COMM3030",
+                    "TABL3757",
+                    "TABL3023"
+                ],
+                "structure": []
+            },
+            {
+                "title": "Core Courses",
+                "description": "Students must take 18 UOC of the following courses. <br /><br />Students in Comm/Econ and Comm/Actl should take COMM1900 instead of COMM1150. Students in Econ and Actl should take ECON1102. All other students should complete COMM1150.",
+                "credit_points": "18",
+                "courses": [
+                    "TABL2710",
+                    "COMM1150",
+                    "TABL2751"
+                ],
+                "structure": []
+            },
+            {
+                "title": "Prescribed Electives",
+                "description": "Student must take 30 UOC of the following electives.<br /><br />At least three (3) of the elective courses completed must be at level 3 (i.e. TABL3XXX). <br /><br />Other Taxation courses may be taken from the list of courses offered by the School of Taxation & Business Law, with prior permission of the Head of School.<br /><br />Students may count ONE (6 UOC) of COMM3101, COMM3202, COMM2222, COMM2233, COMM3020 or COMM3030 towards their Taxation major.",
+                "credit_points": "30",
+                "courses": [
+                    "TABL3755",
+                    "COMM3030",
+                    "COMM2233",
+                    "TABL3023",
+                    "TABL2756",
+                    "TABL2741",
+                    "COMM3020",
+                    "TABL3016",
+                    "TABL4722",
+                    "TABL3752",
+                    "TABL3033",
+                    "TABL2793",
+                    "COMM2222",
+                    "COMM3101",
+                    "TABL3757",
+                    "COMM3202",
+                    "TABL3010"
                 ],
                 "structure": []
             }
@@ -26804,1240 +28038,6 @@
                     "ZPEM4001",
                     "ZPEM4004",
                     "ZPEM4002"
-                ],
-                "structure": []
-            }
-        ]
-    },
-    "SOCAD2": {
-        "title": "Sociology and Anthropology",
-        "study_level": "undergraduate",
-        "level": "minor",
-        "credit_points": "24",
-        "faculty": "Faculty of Arts, Design and Architecture",
-        "school": "School of Social Sciences",
-        "description": "<p><strong>This stream structure is for the following students:</strong></p>\n\n<ul><li><strong>Bachelor of Arts, Bachelor of Arts and Business, and Bachelor of Media students commencing from 2016</strong></li><li><strong>Bachelor of International Studies students commencing from 2017</strong></li></ul>\n\n<p>Sociology and Anthropology will appeal to you if you are interested in the social and cultural relations through which we live. If you are doing a major in the humanities, Sociology and Anthropology as a minor will give you an invaluable social and cross-cultural perspective. If you are majoring in a specialist social science, most of which grew from Sociology and Anthropology, a minor in Sociology and Anthropology will give greater depth and cross-cultural breadth. If you are majoring in a discipline that is concerned with social and cultural trends, a minor in Sociology and Anthropology will improve your analytical skills, your conceptual understanding and your appreciation of ethical relations.</p>\n",
-        "programs": [
-            "3543",
-            "3444",
-            "3434",
-            "3454",
-            "3447",
-            "3429",
-            "3453",
-            "3438",
-            "3409"
-        ],
-        "additional_info": null,
-        "constraints": [],
-        "structure": [
-            {
-                "title": "Level 1 Core Courses",
-                "description": "You must take 12 UOC of the following courses.",
-                "credit_points": "12",
-                "courses": [
-                    "ARTS1870",
-                    "ARTS1753"
-                ],
-                "structure": []
-            },
-            {
-                "title": "Note: Social Work (Honours)/Arts",
-                "description": "If you are enrolled in the Bachelor of Social Work (Honours)/Bachelor of Arts you will complete ARTS1753 Culture, Experience and Change (6 UOC) as part of your Social Work core requirement. If you choose a major or minor in Sociology and Anthropology you must complete an additional 6 UOC UNSW Arts and Social Sciences Prescribed Elective.",
-                "credit_points": "",
-                "courses": [],
-                "structure": []
-            },
-            {
-                "title": "Prescribed Electives",
-                "description": "You must take 6 UOC of the following courses.",
-                "credit_points": "6",
-                "courses": [
-                    "ARTS2872",
-                    "ARTS3874",
-                    "ARTS2877",
-                    "ARTS3871",
-                    "ARTS3885",
-                    "ARTS2870",
-                    "ARTS2874",
-                    "ARTS3883",
-                    "ARTS2873",
-                    "ARTS3872",
-                    "ARTS2876"
-                ],
-                "structure": []
-            },
-            {
-                "title": "ARTS/EDUCATION (SECONDARY) STUDENTS",
-                "description": "The minor in Sociology and Anthropology (24 uoc) must not be taken as it is not an approved teaching specialisation.",
-                "credit_points": "",
-                "courses": [],
-                "structure": []
-            },
-            {
-                "title": "Level 2 Core Courses",
-                "description": "You must take 6 UOC of the following courses.",
-                "credit_points": "6",
-                "courses": [
-                    "ARTS2871"
-                ],
-                "structure": []
-            }
-        ]
-    },
-    "JAPNG2": {
-        "title": "Advanced Japanese Studies",
-        "study_level": "undergraduate",
-        "level": "minor",
-        "credit_points": "24",
-        "faculty": "Faculty of Arts, Design and Architecture",
-        "school": "School of Humanities and Languages",
-        "description": "<p>The minor stream in Advanced Japanese Studies provides you with the opportunity to develop as a highly competent user of the Japanese language with explicit knowledge of Japanese society and culture. Through provisions of Australia-Japan contact situations, you will gain intercultural awareness and understanding, develop your knowledge of the language, cultures, societies and communities in Japan. The Japanese language plays a key role in expressing the cultures and identities of Japan. Japan is of increasing fundamental importance to Australia for political, strategic and economic reasons in realisation of Australia in the Asian Century. Thus, learning Japanese and developing competence in Japanese will provide you with a privileged form of access to the cultural resources and complex patterns of life in Japan and beyond, take an important role in promoting relationships and mutual understanding between countries and peoples.</p>\n\n<p>This stream is available to students commencing at Advanced and Professional entry levels.</p>\n\n<p><strong>Placement Information</strong></p>\n\n<p>You will need to take an online placement evaluation so that we can assess your skills and select an appropriate level of course for you. Information about the evaluation and additional course details can be found on the web at: <a href=\"http://hal.arts.unsw.edu.au\" rel=\"nofollow\">hal.arts.unsw.edu.au</a></p>\n\n<p>You will not be permitted to enrol in language courses that are too easy for you. If this occurs, you will be requested to change your enrolment.</p>\n\n<p>If you are admitted in their first year of study to ARTS3630 or higher on the grounds of ability and/or previous study, such courses will be counted as Level 1 courses in terms of degree requirements.</p>\n",
-        "programs": [
-            "3444",
-            "3502",
-            "3434",
-            "3454",
-            "3447",
-            "3554",
-            "3429",
-            "3453",
-            "3558",
-            "3438",
-            "3409"
-        ],
-        "additional_info": "<p><strong>Language Studies for Commencing Mid-Year Students</strong></p>\n\n<p>If your language skills are assessed as Level A in Introductory, Intermediate, Advanced or Professional you cannot commence study until Term 1.</p>\n",
-        "constraints": [],
-        "structure": [
-            {
-                "title": "Professional Language Core Courses",
-                "description": "You can take up to a maximum of 12 UOC of the following courses.<br /><br />These are required language courses if you commence at Professional Level.",
-                "credit_points": "",
-                "courses": [
-                    "ARTS3633",
-                    "ARTS3632"
-                ],
-                "structure": []
-            },
-            {
-                "title": "Advanced Language Core Courses",
-                "description": "If you commence at Advanced Level you must take 12 UOC of the following courses.",
-                "credit_points": "",
-                "courses": [
-                    "ARTS3631",
-                    "ARTS3630"
-                ],
-                "structure": []
-            },
-            {
-                "title": "Arts/Education (Secondary) Students",
-                "description": "The major/minor in Advanced Japanese Studies (24 UOC) must not be taken as it is not an approved teaching specialisation.",
-                "credit_points": "",
-                "courses": [],
-                "structure": []
-            },
-            {
-                "title": "Japanese Contextual Studies Electives",
-                "description": "You can take up to a maximum of 12 UOC of the following courses.",
-                "credit_points": "",
-                "courses": [
-                    "ARTS3639",
-                    "ARTS3218",
-                    "ARTS2633",
-                    "ARTS3640",
-                    "ARTS2908",
-                    "ARTS2663"
-                ],
-                "structure": []
-            },
-            {
-                "title": "Japanese Professional Studies Electives",
-                "description": "If you commence the language studies sequence at Professional Level you may take up to 12 UOC of the following courses.",
-                "credit_points": "",
-                "courses": [
-                    "ARTS3638",
-                    "ARTS3641",
-                    "ARTS3634",
-                    "ARTS3643"
-                ],
-                "structure": []
-            }
-        ]
-    },
-    "EUROC2": {
-        "title": "European Studies",
-        "study_level": "undergraduate",
-        "level": "minor",
-        "credit_points": "24",
-        "faculty": "Faculty of Arts, Design and Architecture",
-        "school": "School of Humanities and Languages",
-        "description": "<p><strong>This stream structure is for the following students:</strong></p>\n\n<ul><li><strong>Bachelor of Arts, Bachelor of Arts and Business, and Bachelor of Media students commencing from 2016</strong></li><li><strong>Bachelor of International Studies students commencing from 2017</strong></li></ul>\n\n<p>European Studies is an interdisciplinary area of study focusing on modern European societies and their cultures, past and present, and their historical traditions. The minor stream in European studies provides you a basic understanding of the political, ideological, social and cultural forces that have shaped modern and contemporary Europe. European Studies brings together the perspectives and approaches of disciplines such as History, Philosophy, Cultural and Literary Studies, Politics and International Relations, to explore modern Europe.</p>\n",
-        "programs": [
-            "3543",
-            "3444",
-            "3434",
-            "3454",
-            "3447",
-            "3429",
-            "3453",
-            "3558",
-            "3438",
-            "3409"
-        ],
-        "additional_info": null,
-        "constraints": [],
-        "structure": [
-            {
-                "title": "Level 2 Prescribed Electives",
-                "description": "You must take at least 6 UOC, up to a maximum of 12 UOC of the following courses.",
-                "credit_points": "",
-                "courses": [
-                    "ARTS3789",
-                    "ECON2322",
-                    "ARTS2272",
-                    "ARTS2788",
-                    "ARTS2285",
-                    "ARTS2781",
-                    "ARTS2487",
-                    "ARTS2484",
-                    "ARTS2542",
-                    "ARTS2785"
-                ],
-                "structure": []
-            },
-            {
-                "title": "Level 3 Prescribed Electives",
-                "description": "You can take up to a maximum of 6 UOC of the following courses.",
-                "credit_points": "",
-                "courses": [
-                    "ARTS3787",
-                    "ARTS3295",
-                    "ARTS3786",
-                    "ARTS3780"
-                ],
-                "structure": []
-            },
-            {
-                "title": "Level 1 Core Courses",
-                "description": "You must take 12 UOC of the following courses.",
-                "credit_points": "12",
-                "courses": [
-                    "ARTS1780",
-                    "ARTS1782"
-                ],
-                "structure": []
-            },
-            {
-                "title": "ARTS/EDUCATION (SECONDARY) STUDENTS",
-                "description": "The 24 uoc minor in European Studies can be combined with a major in History as preparation for a double first teaching specialisation.",
-                "credit_points": "",
-                "courses": [],
-                "structure": []
-            }
-        ]
-    },
-    "FRENG2": {
-        "title": "Advanced French Studies",
-        "study_level": "undergraduate",
-        "level": "minor",
-        "credit_points": "24",
-        "faculty": "Faculty of Arts, Design and Architecture",
-        "school": "School of Humanities and Languages",
-        "description": "<p>The minor stream in Advanced French Studies enables you to study French beginning at the Advanced or Professional entry level. You will not only develop your knowledge of the French language, but also gain intercultural awareness and understanding of the French-speaking world. You will study cultures, communities, societies and literature in France and the Francophone world. The French language plays a key role in expressing the cultures and identities of the places in which it is spoken. Learning French will provide you with a privileged form of access to the cultural resources and complex patterns of life in other countries. Developing competence in French will have an important place in promoting relationships and mutual understanding between countries and peoples.</p>\n\n<p><br />\nThis stream is available to students commencing at Advanced and Professional entry levels.<br />\n<br />\nPlacement Information<br />\n<br />\nYou will need to take an online placement evaluation so that we can assess your skills and select an appropriate level of course for you. Information about the evaluation and additional course details can be found on the web at: <a href=\"http://hal.arts.unsw.edu.au\" rel=\"nofollow\">hal.arts.unsw.edu.au</a><br />\n<br />\nYou will not be permitted to enrol in language courses that are too easy for you. If this occurs, you will be requested to change your enrolment.<br />\n<br />\nIf you are admitted in your first year of study to ARTS3480 or higher on the grounds of ability and/or previous study, such courses will be counted as Level 1 courses in terms of degree requirements.</p>\n",
-        "programs": [
-            "3444",
-            "3502",
-            "3434",
-            "3454",
-            "3447",
-            "3554",
-            "3429",
-            "3453",
-            "3558",
-            "3438",
-            "3409"
-        ],
-        "additional_info": "<p><strong>Language Studies for Commencing Mid-Year Students</strong></p>\n\n<p>If your language skills are assessed as Level A in Introductory, Advanced or Professional you cannot commence study until Term 1.</p>\n",
-        "constraints": [],
-        "structure": [
-            {
-                "title": "French Contextual Studies Electives",
-                "description": "You can take up to a maximum of 12 UOC of the following courses.",
-                "credit_points": "",
-                "courses": [
-                    "ARTS2484",
-                    "ARTS2486",
-                    "ARTS2785",
-                    "ARTS2482",
-                    "ARTS2487",
-                    "ARTS2485"
-                ],
-                "structure": []
-            },
-            {
-                "title": "Arts/Education (Secondary) Students",
-                "description": "The minor in Advanced French Studies (24 uoc) must not be taken as it is not an approved teaching specialisation",
-                "credit_points": "",
-                "courses": [],
-                "structure": []
-            },
-            {
-                "title": "French Professional Studies Electives",
-                "description": "If you commence at Professional Level you can take up to 12 UOC of the following courses.",
-                "credit_points": "",
-                "courses": [
-                    "ARTS3486",
-                    "ARTS3487",
-                    "ARTS3484",
-                    "ARTS3488"
-                ],
-                "structure": []
-            },
-            {
-                "title": "Advanced Language Core Courses",
-                "description": "If you commence at Advanced Level you must take 12 UOC of the following courses.",
-                "credit_points": "",
-                "courses": [
-                    "ARTS3481",
-                    "ARTS3480"
-                ],
-                "structure": []
-            },
-            {
-                "title": "Professional Language Courses",
-                "description": "You can take up to a maximum of 12 UOC of the following courses.<br />These are required language courses if you commence at Professional Level.",
-                "credit_points": "",
-                "courses": [
-                    "ARTS3482",
-                    "ARTS3483"
-                ],
-                "structure": []
-            }
-        ]
-    },
-    "JAPNF2": {
-        "title": "Japanese Studies",
-        "study_level": "undergraduate",
-        "level": "minor",
-        "credit_points": "24",
-        "faculty": "Faculty of Arts, Design and Architecture",
-        "school": "School of Humanities and Languages",
-        "description": "<p>The minor stream in Japanese Studies provides you with the opportunity to develop as a competent user of the Japanese language with explicit knowledge of Japanese society and culture. Through provisions of Australia-Japan contact situations, you will gain intercultural awareness and understanding, develop your knowledge of the language, cultures, societies and communities in Japan. The Japanese language plays a key role in expressing the cultures and identities of Japan. Japan is of increasing fundamental importance to Australia for political, strategic and economic reasons in realisation of Australia in the Asian Century. Thus, learning Japanese and developing competence in Japanese will provide you with a privileged form of access to the cultural resources and complex patterns of life in Japan and beyond, take an important role in promoting relationships and mutual understanding between countries and peoples.</p>\n\n<p>This stream is available to students commencing at Introductory and Intermediate entry levels.</p>\n\n<p><strong>Placement Information</strong></p>\n\n<p>If you have prior language knowledge you will need to take an online placement evaluation so that we can assess your skills and select an appropriate level of course for you. Information about the evaluation and additional course details can be found on the web at: <a href=\"http://hal.arts.unsw.edu.au\" rel=\"nofollow\">hal.arts.unsw.edu.au</a></p>\n\n<p>You will not be permitted to enrol in language courses that are too easy for. If this occurs, you will be requested to change your enrolment.</p>\n\n<p>If you are admitted in your first year of study to ARTS2630 or higher on the grounds of ability and/or previous study, such courses will be counted as Level 1 courses in terms of degree requirements.</p>\n",
-        "programs": [
-            "3543",
-            "3444",
-            "3502",
-            "3434",
-            "3454",
-            "3447",
-            "3554",
-            "3429",
-            "3453",
-            "3558",
-            "3438",
-            "3409"
-        ],
-        "additional_info": "<p><strong>Language Studies for Commencing Mid-Year Students</strong></p>\n\n<p>If your language skills are assessed as Level A in Introductory, Intermediate, Advanced or Professional you cannot commence study until Term 1.</p>\n",
-        "constraints": [],
-        "structure": [
-            {
-                "title": "Japanese Contextual Studies Electives",
-                "description": "You can take up to a maximum of 18 UOC of the following courses.",
-                "credit_points": "",
-                "courses": [
-                    "ARTS2663",
-                    "ARTS3639",
-                    "ARTS3640",
-                    "ARTS2633",
-                    "ARTS3218",
-                    "ARTS2908"
-                ],
-                "structure": []
-            },
-            {
-                "title": "Introductory Language Core Courses",
-                "description": "If you commence at Introductory Level you must take 12 UOC of the following courses.",
-                "credit_points": "",
-                "courses": [
-                    "ARTS1631",
-                    "ARTS1630"
-                ],
-                "structure": []
-            },
-            {
-                "title": "Advanced Language Courses",
-                "description": "If you commence at Intermediate Level you can take 12 UOC of the following courses.",
-                "credit_points": "",
-                "courses": [
-                    "ARTS3631",
-                    "ARTS3630"
-                ],
-                "structure": []
-            },
-            {
-                "title": "Arts/Education (Secondary) Students",
-                "description": "The minor in Japanese Studies (24 uoc) must not be taken as it is not an approved teaching specialisation.",
-                "credit_points": "",
-                "courses": [],
-                "structure": []
-            },
-            {
-                "title": "Intermediate Language Core Courses",
-                "description": "You can take up to a maximum of 12 UOC of the following courses.<br /><br />These are required language courses if you commence at Intermediate Level.",
-                "credit_points": "",
-                "courses": [
-                    "ARTS2631",
-                    "ARTS2630"
-                ],
-                "structure": []
-            },
-            {
-                "title": "Substitutions",
-                "description": "If you commence the language studies sequence at Introductory Japanese B, you must complete a further 18 UOC in contextual courses (taught in English) or language courses.<br /><br />If you commence the language studies sequence at Intermediate Japanese B, you must complete a further 18 UOC in contextual courses (taught in English) or language courses.",
-                "credit_points": "",
-                "courses": [],
-                "structure": []
-            }
-        ]
-    },
-    "POLSG2": {
-        "title": "Politics and International Relations",
-        "study_level": "undergraduate",
-        "level": "minor",
-        "credit_points": "24",
-        "faculty": "Faculty of Arts, Design and Architecture",
-        "school": "School of Social Sciences",
-        "description": "<p>The study of Politics and International Relations focuses on the workings of government and global politics, and will help you understand the most pressing challenges facing the world today,including political instability and conflict, security, great-power rivalry, climate change,development, human rights, governance and inequality. The solutions to many national and global problems are often intricately connected with regional and global processes, structures,mechanisms, forces, interests, customs and institutions. Knowing how to identify these solutions,their context and histories, is often challenging, frequently rewarding, and always interesting. A major stream in Politics and International Relations will give you insight into the complex relationships between state and non-state actors, individuals and organisations in national and international contexts, and you will learn how to think critically about the nature of power in contemporary and historical perspective.</p>\n",
-        "programs": [
-            "3444",
-            "3434",
-            "3454",
-            "3447",
-            "3429",
-            "3453",
-            "3558",
-            "3438",
-            "3409"
-        ],
-        "additional_info": null,
-        "constraints": [],
-        "structure": [
-            {
-                "title": "Level 1 Core Courses",
-                "description": "You must take 12 UOC of the following Level 1 core courses.",
-                "credit_points": "12",
-                "courses": [
-                    "ARTS1811",
-                    "ARTS1810"
-                ],
-                "structure": []
-            },
-            {
-                "title": "Level 2 Prescribed Electives",
-                "description": "You must take 6 UOC of the following courses.",
-                "credit_points": "6",
-                "courses": [
-                    "ARTS2845",
-                    "ARTS2820",
-                    "ARTS2815",
-                    "ARTS2819",
-                    "ARTS2852",
-                    "ARTS2817",
-                    "ARTS2816",
-                    "ARTS2818",
-                    "ARTS2813"
-                ],
-                "structure": []
-            },
-            {
-                "title": "Level 2 Core Course",
-                "description": "You must complete the following Level 2 core course (6 UOC);",
-                "credit_points": "6",
-                "courses": [
-                    "ARTS2821"
-                ],
-                "structure": []
-            },
-            {
-                "title": "ARTS/EDUCATION (SECONDARY) STUDENTS",
-                "description": "The minor in Politics and International Relations (24 uoc) must not be taken as it is not an approved teaching specialisation.",
-                "credit_points": "",
-                "courses": [],
-                "structure": []
-            },
-            {
-                "title": "Specialisation UOC",
-                "description": "If you wish to gain a minor in Politics and International Relations, you must complete 24 units of credit including 12 UOC at Level 1 and 12 UOC at Level 2.",
-                "credit_points": "",
-                "courses": [],
-                "structure": []
-            }
-        ]
-    },
-    "COMDF2": {
-        "title": "Global Development",
-        "study_level": "undergraduate",
-        "level": "minor",
-        "credit_points": "24",
-        "faculty": "Faculty of Arts, Design and Architecture",
-        "school": "School of Social Sciences",
-        "description": "<p>International development practice and humanitarian action has increasingly become interdisciplinary, attracting a wide range of professionals with different skill sets. This includes engineers, medical professionals, urban planners, media consultants, psychologists, social workers, social scientists, economists, business managers and many others. In addition to disciplinary-specific knowledge, a nuanced understanding of the environment in which they work is required.</p>\n<p>In a minor in Global Development you will develop the knowledge and skills to enable you to work in and with the actors of the development sector, including UN and international organizations, donor governments, non-governmental and private sector organisations as well as community-based initiatives. Courses emphasize interdisciplinary team learning environments that replicate the actual world of development practice. Upon graduation, you will have an understanding of development practices that complements learning in other fields / disciplines.</p>\n<p><strong></strong></p>",
-        "programs": [
-            "3444",
-            "3454",
-            "3447",
-            "3453",
-            "3558",
-            "3438",
-            "3409"
-        ],
-        "additional_info": null,
-        "constraints": [],
-        "structure": [
-            {
-                "title": "Level 2 Prescribed Electives",
-                "description": "Students must take at least 12 UOC of the following courses.",
-                "credit_points": "12",
-                "courses": [
-                    "ARTS2754",
-                    "ARTS2752",
-                    "ARTS2755",
-                    "ARTS2751"
-                ],
-                "structure": []
-            },
-            {
-                "title": "Level 3 Prescribed Electives",
-                "description": "Students must take at least 6 UOC of the following courses.",
-                "credit_points": "6",
-                "courses": [
-                    "ARTS3750",
-                    "ARTS3757",
-                    "ARTS3755",
-                    "ARTS3756"
-                ],
-                "structure": []
-            },
-            {
-                "title": "Level 1 Prescribed Electives",
-                "description": "Students must take at least 6 UOC of the following courses.",
-                "credit_points": "6",
-                "courses": [
-                    "ARTS1750",
-                    "ARTS1753"
-                ],
-                "structure": []
-            },
-            {
-                "title": "Arts/Education (Secondary) Students",
-                "description": "The minor in Global Development (24 UOC) must not be taken as it is not an approved teaching specialisation.",
-                "credit_points": "",
-                "courses": [],
-                "structure": []
-            }
-        ]
-    },
-    "IBUSA2": {
-        "title": "International Business",
-        "study_level": "undergraduate",
-        "level": "minor",
-        "credit_points": "30",
-        "faculty": "UNSW Business School",
-        "school": "School of Management and Governance",
-        "description": "A minor in International Business consists of 30 UOC (5 courses) containing the following courses: MGMT1101, MGMT2101, MGMT2102, MGMT3102 and MGMT3101.",
-        "programs": [
-            "3543",
-            "3502",
-            "3587",
-            "3434",
-            "3454",
-            "3447",
-            "3554",
-            "3429",
-            "3453",
-            "3558",
-            "3586",
-            "3438",
-            "3409"
-        ],
-        "additional_info": "<p><strong>Honours</strong></p>\n\n<p>Honours level study is available for International Business students.</p>\n\n<p>Students interested in studying at Honours Level should refer to the relevant Honours stream record for entry requirements.</p>\n\n<p><strong>Further Information</strong></p>\n\n<p>Please note that these requirements may be subject to change.\u00a0<br />\nStudents are advised to follow requirements according to the year they commenced. Please refer to previous editions of the\u00a0<br />\n<a href=\"http://legacy.handbook.unsw.edu.au/general/2018/SSAPO/previousEditions.html\" rel=\"nofollow\">Online Handbook</a>\u00a0for pre-2019 program requirements.</p>\n\n<p>Contact the\u00a0<a href=\"http://www.asb.unsw.edu.au/schools/organisationandmanagement/Pages/default.aspx\" rel=\"nofollow\">School of Management</a>\u00a0for advice.<br />\ntel: &#43; 61 2 9385 7157<br />\nlocation: Level 5, West Wing, UNSW Business School Building</p>\n",
-        "constraints": [],
-        "structure": [
-            {
-                "title": "Core Courses",
-                "description": "Students must take 30 UOC of the following courses. <br /><br />Students in Comm/Econ and Comm/Actl should take COMM1900 instead of COMM1150. Students in Econ and Actl should take ECON1102. All other students should complete COMM1150.<br /><br />Please note: courses completed under the minor do not form of a nominated major.",
-                "credit_points": "30",
-                "courses": [
-                    "MGMT2101",
-                    "COMM1150",
-                    "MGMT3102",
-                    "MGMT2102",
-                    "MGMT3101"
-                ],
-                "structure": []
-            }
-        ]
-    },
-    "CHINF2": {
-        "title": "Advanced Chinese Studies",
-        "study_level": "undergraduate",
-        "level": "minor",
-        "credit_points": "24",
-        "faculty": "Faculty of Arts, Design and Architecture",
-        "school": "School of Humanities and Languages",
-        "description": "<p>Chinese is a fascinating modern language with a rich cultural heritage and an increasingly important medium in global business and communication. The minor stream in Chinese Studies encompasses the study of Chinese language and communication but also offers you the study of culture, society and civilisation. A background in Chinese Studies is useful in many areas of professional specialisation, from commerce and the business sector to tourism, the media, the public service sector and education.</p>\n\n<p><br />\nThis stream is available to students commencing at Advanced, Professional and Expert entry levels.<br />\n<br />\n<strong>Placement Information</strong><br />\n<br />\nThe School of Humanities and Languages offers a flexible program for students with different interests and different Chinese language backgrounds. You can enter Chinese language courses at different levels, depending on your knowledge of Chinese characters. Within each year, you are allocated to different groups, depending on your speaking ability.<br />\n<br />\nIf you have prior language knowledge you will need to take an online placement evaluation so that we can assess your skills and select an appropriate level of course for you. Information about the evaluation and additional course details can be found on the web at: <a href=\"http://hal.arts.unsw.edu.au\" rel=\"nofollow\">hal.arts.unsw.edu.au</a><br />\n<br />\nYou will not be permitted to enrol in language courses that are too easy for you in terms of Chinese character knowledge. If this occurs, you will be requested to change your enrolment.<br />\n<br />\nIf you are admitted in your first year of study to ARTS2450 or higher on the grounds of your ability and/or previous study, such courses will be counted as Level 1 courses in terms of your degree requirements.<br />\n<br />\nYou will be admitted to the Expert level of entry to the Minor if you have completed high school in China or have elsewhere achieved equivalent language proficiency to a Chinese high school graduate. This level emphasises Chinese Studies (contextual and professional) courses. Since you already have a high level of language proficiency and literacy in Chinese, you will enroll in Translation and Interpreting courses as Gateway language courses \u2013 which are a requirement for the minor at this entry level.</p>\n",
-        "programs": [
-            "3444",
-            "3502",
-            "3434",
-            "3454",
-            "3447",
-            "3554",
-            "3429",
-            "3453",
-            "3558",
-            "3438",
-            "3409"
-        ],
-        "additional_info": "<p><strong>Language Studies for Commencing Mid-Year Students</strong></p>\n\n<p>If your language skills are assessed as Level A in Introductory, Intermediate, Advanced or Professional you cannot commence study until Term 1.</p>\n",
-        "constraints": [],
-        "structure": [
-            {
-                "title": "Arts/Education (Secondary) Students",
-                "description": "The minor in Advanced Chinese Studies (24 uoc ) must not be taken as it is not an approved teaching specialisation.",
-                "credit_points": "",
-                "courses": [],
-                "structure": []
-            },
-            {
-                "title": "Language Core Courses",
-                "description": "If you commence at Advanced Level you must complete ARTS3450 and ARTS3451 (12 UOC).<br /><br />If you commence at Professional Level you must complete ARTS3452 and ARTS3453 (12 UOC).<br /><br />If you commence at Expert Level you must complete ARTS2452 and ARTS3454 (12 UOC).",
-                "credit_points": "12",
-                "courses": [
-                    "ARTS3454",
-                    "ARTS2452",
-                    "ARTS3450",
-                    "ARTS3452",
-                    "ARTS3451",
-                    "ARTS3453"
-                ],
-                "structure": []
-            },
-            {
-                "title": "Chinese Contextual Studies Electives",
-                "description": "You can take up to a maximum of 12 UOC of the following courses.",
-                "credit_points": "",
-                "courses": [
-                    "ARTS2455",
-                    "ARTS2464",
-                    "ARTS2458",
-                    "ARTS3216",
-                    "ARTS2457",
-                    "ARTS2463",
-                    "ARTS2213",
-                    "ARTS3217",
-                    "ARTS2453"
-                ],
-                "structure": []
-            },
-            {
-                "title": "Chinese Professional Studies Electives",
-                "description": "You can take up to a maximum of 12 UOC of the following courses in addition to your 12 UOC of core courses. <br /><br />Note: If you commence at Expert Level you are not permitted to enrol in ARTS3452 or ARTS3453.",
-                "credit_points": "",
-                "courses": [
-                    "ARTS3454",
-                    "ARTS3462",
-                    "ARTS3453",
-                    "ARTS3456",
-                    "ARTS2452",
-                    "ARTS3452",
-                    "ARTS3463",
-                    "ARTS3455"
-                ],
-                "structure": []
-            }
-        ]
-    },
-    "KOREF2": {
-        "title": "Korean Studies",
-        "study_level": "undergraduate",
-        "level": "minor",
-        "credit_points": "24",
-        "faculty": "Faculty of Arts, Design and Architecture",
-        "school": "School of Humanities and Languages",
-        "description": "<p>The minor stream in Korean Studies covers the study of the Korean language and the study of the social, cultural and historical aspects associated with the language. It provides you with the opportunity to develop as a competent user of the Korean language. You will gain intercultural awareness and understanding, develop explicit knowledge of language, and gain knowledge of the social, cultural and historical background of Korean-speaking people. The Korean language plays a key role in expressing the cultures and identities of the places in which it is spoken.</p>\n\n<p>Learning Korean will provide you with a privileged form of access to the cultural resources and complex patterns of life in Korea and other countries. Developing competence in Korean will have an important place in promoting relationships and mutual understanding between countries and peoples.</p>\n\n<p>This stream is available to students commencing at Introductory and Intermediate entry levels.</p>\n\n<p><strong>Placement Information</strong></p>\n\n<p>If you have prior language knowledge you will need to take an online placement evaluation so that we can assess your skills and select an appropriate level of course for you. Information about the evaluation and additional course details can be found on the web at: <a href=\"http://hal.arts.unsw.edu.au\" rel=\"nofollow\">hal.arts.unsw.edu.au</a></p>\n\n<p>You will not be permitted to enrol in language courses that are too easy for you. If this occurs, you will be requested to change your enrolment.</p>\n\n<p>If you are admitted in your first year of study to ARTS2660 or higher on the grounds of ability and/or previous study, such courses will be counted as Level 1 courses in terms of degree requirements.</p>\n",
-        "programs": [
-            "3543",
-            "3444",
-            "3502",
-            "3434",
-            "3454",
-            "3447",
-            "3554",
-            "3429",
-            "3453",
-            "3558",
-            "3438",
-            "3409"
-        ],
-        "additional_info": "<p><strong>Language Studies for Commencing Mid-Year Students</strong></p>\n\n<p>If your language skills are assessed as Level A in Introductory, Intermediate or Advanced you cannot commence study until Term 1.</p>\n",
-        "constraints": [],
-        "structure": [
-            {
-                "title": "Korean Contextual Studies Courses",
-                "description": "You may take up to 12 UOC of the following courses.<br /><br />Note: If you commence the language studies sequence at Introductory B or Intermediate B, you must complete a further 18 UOC of contextual studies courses or language courses.",
-                "credit_points": "",
-                "courses": [
-                    "ARTS2662",
-                    "ARTS2663",
-                    "ARTS3640",
-                    "ARTS2211"
-                ],
-                "structure": []
-            },
-            {
-                "title": "Intermediate Language Core Courses",
-                "description": "You can take up to a maximum of 12 UOC of the following courses.<br /><br />These are required language courses if you commence at Intermediate Level.",
-                "credit_points": "",
-                "courses": [
-                    "ARTS2660",
-                    "ARTS2661"
-                ],
-                "structure": []
-            },
-            {
-                "title": "ARTS/EDUCATION (SECONDARY) STUDENTS",
-                "description": "The minor in Korean Studies (24 uoc) must not be taken as it is not an approved teaching specialisation.",
-                "credit_points": "",
-                "courses": [],
-                "structure": []
-            },
-            {
-                "title": "Introductory Language Core Courses",
-                "description": "If you commence at Introductory Level you must take 12 UOC of the following courses.",
-                "credit_points": "",
-                "courses": [
-                    "ARTS1661",
-                    "ARTS1660"
-                ],
-                "structure": []
-            }
-        ]
-    },
-    "FRENF2": {
-        "title": "French Studies",
-        "study_level": "undergraduate",
-        "level": "minor",
-        "credit_points": "24",
-        "faculty": "Faculty of Arts, Design and Architecture",
-        "school": "School of Humanities and Languages",
-        "description": "<p>The minor stream in French Studies enables you to study French at a number of levels in order to attain proficiency. Courses are offered from the introductory level to the advanced and professional levels. You will not only develop your knowledge of the French language, but also gain intercultural awareness and understanding of the French-speaking world. You will study cultures, communities, societies and literature in France and the Francophone world. The French language plays a key role in expressing the cultures and identities of the places in which it is spoken. Learning French will provide you with a privileged form of access to the cultural resources and complex patterns of life in other countries. Developing competence in French will have an important place in promoting relationships and mutual understanding between countries and peoples.</p>\n\n<p>This stream is available to students commencing at Introductory and Intermediate entry levels.</p>\n\n<p><strong>Placement Information</strong></p>\n\n<p>If you have prior language knowledge you will need to take an online placement evaluation so that we can assess your skills and select an appropriate level of course for you. Information about the evaluation and additional course details can be found on the web at: <a href=\"http://hal.arts.unsw.edu.au\" rel=\"nofollow\">hal.arts.unsw.edu.au</a></p>\n\n<p>You will not be permitted to enrol in language courses that are too easy for. If this occurs, you will be requested to change your enrolment.</p>\n\n<p>If you are admitted in your first year of study to ARTS2480 or higher on the grounds of ability and/or previous study, such courses will be counted as Level 1 courses in terms of degree requirements.</p>\n",
-        "programs": [
-            "3543",
-            "3444",
-            "3502",
-            "3434",
-            "3454",
-            "3447",
-            "3554",
-            "3429",
-            "3453",
-            "3558",
-            "3438",
-            "3409"
-        ],
-        "additional_info": "<p><strong>Language Studies for Commencing Mid-Year Students</strong></p>\n\n<p>If your language skills are assessed as Level A in Introductory, Advanced or Professional you cannot commence study until Term 1.</p>\n",
-        "constraints": [],
-        "structure": [
-            {
-                "title": "Intermediate Language Core Courses",
-                "description": "You can take up to a maximum of 12 UOC of the following courses.<br />These are required language courses if you commence at Intermediate Level.",
-                "credit_points": "",
-                "courses": [
-                    "ARTS2481",
-                    "ARTS2480"
-                ],
-                "structure": []
-            },
-            {
-                "title": "Arts/Education (Secondary) Students",
-                "description": "The minor in French Studies (24 uoc) must not be taken as it is not an approved teaching specialisation.",
-                "credit_points": "",
-                "courses": [],
-                "structure": []
-            },
-            {
-                "title": "Advanced Language Courses",
-                "description": "If you commence at Intermediate Level you can take 12 UOC of the following courses.",
-                "credit_points": "",
-                "courses": [
-                    "ARTS3481",
-                    "ARTS3480"
-                ],
-                "structure": []
-            },
-            {
-                "title": "Commencing Mid-Year",
-                "description": "If you commence the language studies sequence at Introductory French B, you must complete a further 18 UOC in contextual courses (taught in English) or language courses.<br /><br />If you commence the language studies sequence at Intermediate French B, you must complete a further 18 UOC in contextual courses (taught in English) or language courses.",
-                "credit_points": "",
-                "courses": [],
-                "structure": []
-            },
-            {
-                "title": "French Contextual Studies Electives",
-                "description": "You can take up to a maximum of 18 UOC of the following courses.",
-                "credit_points": "",
-                "courses": [
-                    "ARTS2482",
-                    "ARTS2487",
-                    "ARTS2785",
-                    "ARTS2486",
-                    "ARTS2485",
-                    "ARTS2484"
-                ],
-                "structure": []
-            },
-            {
-                "title": "Introductory Language Core Courses",
-                "description": "If you commence at Introductory Level you must take 12 UOC of the following courses.",
-                "credit_points": "",
-                "courses": [
-                    "ARTS1481",
-                    "ARTS1480"
-                ],
-                "structure": []
-            }
-        ]
-    },
-    "GERSF2": {
-        "title": "German Studies",
-        "study_level": "undergraduate",
-        "level": "minor",
-        "credit_points": "24",
-        "faculty": "Faculty of Arts, Design and Architecture",
-        "school": "School of Humanities and Languages",
-        "description": "<p>German Studies at UNSW places special emphasis on integrating the study of social, historical and cultural developments in Germany with the teaching of practical language skills. This approach aims to enable you to achieve a high level of communicative competence in German while offering you a critical understanding of this fascinating modern European society.</p>\n\n<p>Students in the intermediate and advanced sequences who will complete some components of their sequence via cross-institutional study are advised that they are responsible for enrolling themselves before the appropriate UNSW and partner university deadlines for cross-institutional enrolment, which fall well before the beginning of regular UNSW teaching periods. See <a href=\"https://student.unsw.edu.au/cross-institutional-study\" rel=\"nofollow\">Cross Institutional Study</a>.</p>\n\n<p>Each course of cross-institutional study requires approval from the German Studies convenor, with whom students must consult at an early stage to discuss the selection of courses. Students who successfully complete German Studies courses cross-institutionally will have their results reported as transfer credits at UNSW, i.e. specific grades will not appear on their transcript.</p>\n\n<p>If in a given term you are unable to take appropriate courses cross-institutionally you may be eligible to apply for an individual variation of program.</p>\n\n<p><strong>Placement Information</strong></p>\n\n<p>If you have prior language knowledge you will need to take an online placement evaluation so that we can assess your skills and select an appropriate level of course for you. Information about the evaluation and additional course details can be found on the web at: <a href=\"http://hal.arts.unsw.edu.au\" rel=\"nofollow\">hal.arts.unsw.edu.au</a></p>\n\n<p>You will not be permitted to enrol in language courses that are too easy for you. If this occurs, you will be requested to change your enrolment.</p>\n\n<p>If you are admitted in your first year of study to ARTS2510 or higher on the grounds of ability and/or previous study, such courses will be counted as Level 1 courses in terms of degree requirements.</p>\n",
-        "programs": [
-            "3543",
-            "3444",
-            "3502",
-            "3434",
-            "3454",
-            "3447",
-            "3554",
-            "3429",
-            "3453",
-            "3558",
-            "3438",
-            "3409"
-        ],
-        "additional_info": "<p><strong>Language Studies for Commencing Mid-Year Students</strong></p>\n\n<p>If your language skills are assessed as Level A in Introductory or Advanced you cannot commence study until Term 1.</p>\n",
-        "constraints": [],
-        "structure": [
-            {
-                "title": "Intermediate Language Core Courses",
-                "description": "If you commence at Introductory Level you can take up to a maximum of 12 UOC of the following courses.<br />These are required language courses if you commence at Intermediate Level.",
-                "credit_points": "",
-                "courses": [
-                    "ARTS2510",
-                    "ARTS2511"
-                ],
-                "structure": []
-            },
-            {
-                "title": "Advanced Language Core Courses",
-                "description": "If you commence at Intermediate Level you can take up to a maximum of 12 UOC of the following courses.<br />These are required language courses if you commence at Advanced Level.",
-                "credit_points": "",
-                "courses": [
-                    "ARTS3511",
-                    "ARTS3510"
-                ],
-                "structure": []
-            },
-            {
-                "title": "Introductory Language Core Courses",
-                "description": "If you commence at Introductory Level you must take 12 UOC of the following courses.",
-                "credit_points": "",
-                "courses": [
-                    "ARTS1510",
-                    "ARTS1511"
-                ],
-                "structure": []
-            },
-            {
-                "title": "Arts/Education (Secondary) Students",
-                "description": "The minor in German Studies (24 uoc) must not be taken as it is not an approved teaching specialisation.",
-                "credit_points": "",
-                "courses": [],
-                "structure": []
-            },
-            {
-                "title": "Prescribed Electives",
-                "description": "You can take up to a maximum of 12 UOC of the following courses.",
-                "credit_points": "",
-                "courses": [
-                    "ARTS2285",
-                    "ARTS3295",
-                    "ARTS3780",
-                    "ARTS3787",
-                    "ARTS2788",
-                    "ARTS3786",
-                    "ARTS2785"
-                ],
-                "structure": []
-            },
-            {
-                "title": "Cross-Institutional Prescribed Electives",
-                "description": "If you commence at Advanced Level you may take up to 12 UOC approved upper-level German Studies prescribed electives via cross-institutional study.",
-                "credit_points": "",
-                "courses": [],
-                "structure": []
-            }
-        ]
-    },
-    "CHINE2": {
-        "title": "Chinese Studies",
-        "study_level": "undergraduate",
-        "level": "minor",
-        "credit_points": "24",
-        "faculty": "Faculty of Arts, Design and Architecture",
-        "school": "School of Humanities and Languages",
-        "description": "<p>Chinese is a fascinating modern language with a rich cultural heritage and an increasingly important medium in global business and communication. The minor stream in Chinese Studies encompasses the study of Chinese language and communication but also offers you the study of culture, society and civilisation. A background in Chinese Studies is useful in many areas of professional specialisation, from commerce and the business sector to tourism, the media, the public service sector and education.</p>\n\n<p><br />\nThis stream is available to students commencing at Introductory and Intermediate entry levels.<br />\n<br />\n<strong>Placement Information</strong><br />\n<br />\nThe School of Humanities and Languages offers a flexible program for students with different interests and different Chinese language backgrounds. You can enter Chinese language courses at different levels, depending on your knowledge of Chinese characters. Within each year, you are allocated to different groups, depending on your speaking ability.<br />\n<br />\nIf you have prior language knowledge you will need to take an online placement evaluation so that we can assess your skills and select an appropriate level of course for you. Information about the evaluation and additional course details can be found on the web at: <a href=\"http://hal.arts.unsw.edu.au\" rel=\"nofollow\">hal.arts.unsw.edu.au</a><br />\n<br />\nYou will not be permitted to enrol in language courses that are too easy for you in terms of Chinese character knowledge. If this occurs, you will be requested to change your enrolment.<br />\n<br />\nIf you are admitted in your first year of study to ARTS2450 or higher on the grounds of your ability and/or previous study, such courses will be counted as Level 1 courses in terms of your degree requirements.</p>\n",
-        "programs": [
-            "3543",
-            "3444",
-            "3502",
-            "3434",
-            "3454",
-            "3447",
-            "3554",
-            "3429",
-            "3453",
-            "3558",
-            "3438",
-            "3409"
-        ],
-        "additional_info": "<p><strong>Language Studies for Commencing Mid-Year Students</strong></p>\n\n<p>If your language skills are assessed as Level A in Introductory, Intermediate, Advanced or Professional you cannot commence study until Term 1.</p>\n",
-        "constraints": [],
-        "structure": [
-            {
-                "title": "Commencing Mid-Year",
-                "description": "If you commence the language studies sequence at Introductory Chinese B, you must complete a further 18 UOC in contextual courses (taught in English) or language courses.<br /><br />If you commence the language studies sequence at Intermediate Chinese B, you must complete a further 18 UOC in contextual courses (taught in English) or language courses.",
-                "credit_points": "",
-                "courses": [],
-                "structure": []
-            },
-            {
-                "title": "Arts/Education (Secondary) Students",
-                "description": "The minor in Chinese Studies (24 uoc) must not be taken as it is not an approved teaching specialisation.",
-                "credit_points": "",
-                "courses": [],
-                "structure": []
-            },
-            {
-                "title": "Advanced Language Courses",
-                "description": "If you commence the language studies sequence at Intermediate Level you may take 12 UOC of the following language courses.",
-                "credit_points": "",
-                "courses": [
-                    "ARTS3451",
-                    "ARTS3450"
-                ],
-                "structure": []
-            },
-            {
-                "title": "Introductory Language Core Courses",
-                "description": "If you commence at Introductory Level you must take 12 UOC of the following courses.",
-                "credit_points": "",
-                "courses": [],
-                "structure": [
-                    {
-                        "title": "One of the following:",
-                        "description": "",
-                        "credit_points": "",
-                        "courses": [
-                            "ARTS1453",
-                            "ARTS1451"
-                        ],
-                        "structure": []
-                    },
-                    {
-                        "title": "One of the following:",
-                        "description": "",
-                        "credit_points": "",
-                        "courses": [
-                            "ARTS1452",
-                            "ARTS1450"
-                        ],
-                        "structure": []
-                    }
-                ]
-            },
-            {
-                "title": "Intermediate Language Core Courses",
-                "description": "You can take up to a maximum of 12 UOC of the following courses.<br />These are required language courses if you  commence at Intermediate Level.",
-                "credit_points": "",
-                "courses": [],
-                "structure": [
-                    {
-                        "title": "One of the following:",
-                        "description": "",
-                        "credit_points": "",
-                        "courses": [
-                            "ARTS2451",
-                            "ARTS2462"
-                        ],
-                        "structure": []
-                    },
-                    {
-                        "title": "One of the following:",
-                        "description": "",
-                        "credit_points": "",
-                        "courses": [
-                            "ARTS2450",
-                            "ARTS2461"
-                        ],
-                        "structure": []
-                    }
-                ]
-            },
-            {
-                "title": "Chinese Contextual Studies Electives",
-                "description": "You can take up to a maximum of 18 UOC of the following courses.",
-                "credit_points": "",
-                "courses": [
-                    "ARTS2453",
-                    "ARTS2458",
-                    "ARTS2457",
-                    "ARTS3216",
-                    "ARTS2463",
-                    "ARTS2464",
-                    "ARTS3217",
-                    "ARTS2455",
-                    "ARTS2213"
-                ],
-                "structure": []
-            }
-        ]
-    },
-    "KOREG2": {
-        "title": "Advanced Korean Studies",
-        "study_level": "undergraduate",
-        "level": "minor",
-        "credit_points": "24",
-        "faculty": "Faculty of Arts, Design and Architecture",
-        "school": "School of Humanities and Languages",
-        "description": "<p>The minor stream in Advanced Korean Studies covers the study of the Korean language and the study of the social, cultural and historical aspects associated with the language. It provides you with the opportunity to develop as a competent user of the Korean language. You will gain intercultural awareness and understanding, develop explicit knowledge of language, and gain knowledge of the social, cultural and historical background of Korean-speaking people. The Korean language plays a key role in expressing the cultures and identities of the places in which it is spoken.</p>\n\n<p>Learning Korean will provide you with a privileged form of access to the cultural resources and complex patterns of life in Korea and other countries. Developing competence in Korean will have an important place in promoting relationships and mutual understanding between countries and peoples.</p>\n\n<p>This stream is available to students commencing at Advanced entry level.</p>\n\n<p><strong>Placement Information</strong></p>\n\n<p>You will need to take an online placement evaluation so that we can assess your skills and select an appropriate level of course for you. Information about the evaluation and additional course details can be found on the web at: <a href=\"http://hal.arts.unsw.edu.au\" rel=\"nofollow\">hal.arts.unsw.edu.au</a></p>\n\n<p>You will not be permitted to enrol in language courses that are too easy for you. If this occurs, you will be requested to change your enrolment.</p>\n\n<p>If you are admitted in your first year of study to ARTS3660 or higher on the grounds of ability and/or previous study, such courses will be counted as Level 1 courses in terms of degree requirements.</p>\n",
-        "programs": [
-            "3444",
-            "3502",
-            "3434",
-            "3454",
-            "3447",
-            "3554",
-            "3429",
-            "3453",
-            "3558",
-            "3438",
-            "3409"
-        ],
-        "additional_info": "<p><strong>Language Studies for Commencing Mid-Year Students</strong></p>\n\n<p>If your language skills are assessed as Level A in Introductory, Intermediate or Advanced you cannot commence study until Term 1.</p>\n",
-        "constraints": [],
-        "structure": [
-            {
-                "title": "Advanced Language Core Courses",
-                "description": "You must take 12 UOC of the following courses.",
-                "credit_points": "12",
-                "courses": [
-                    "ARTS3660",
-                    "ARTS3661"
-                ],
-                "structure": []
-            },
-            {
-                "title": "Korean Professional Studies Course",
-                "description": "You can take up to a maximum of 12 UOC of the following courses.",
-                "credit_points": "",
-                "courses": [
-                    "ARTS3662",
-                    "ARTS3665",
-                    "ARTS3663",
-                    "ARTS3664",
-                    "ARTS3667"
-                ],
-                "structure": []
-            },
-            {
-                "title": "Korean Contextual Studies Courses",
-                "description": "You can take up to a maximum of 12 UOC of the following courses.",
-                "credit_points": "",
-                "courses": [
-                    "ARTS2663",
-                    "ARTS3640",
-                    "ARTS2662",
-                    "ARTS2211"
-                ],
-                "structure": []
-            },
-            {
-                "title": "ARTS/EDUCATION (SECONDARY) STUDENTS",
-                "description": "The minor in Advanced Korean Studies (24 uoc) must not be taken as it is not an approved teaching specialisation.",
-                "credit_points": "",
-                "courses": [],
-                "structure": []
-            }
-        ]
-    },
-    "ENVPE2": {
-        "title": "Environmental Humanities",
-        "study_level": "undergraduate",
-        "level": "minor",
-        "credit_points": "24",
-        "faculty": "Faculty of Arts, Design and Architecture",
-        "school": "School of Humanities and Languages",
-        "description": "<p>Species extinction, genetically modified organisms, climate change and nuclear power are just a few of the challenges facing us today. While these are all clearly &#39;environmental&#39; issues, they are also all profoundly social, cultural and political challenges. Education in the Environmental Humanities focuses on developing critical insight into the &#39;human dimensions&#39; of these environmental issues; issues that now permeate almost every aspect of our lives, from everyday lifestyle decisions to collective and public choices concerning urban development, energy security and food production.</p>\n\n<p>Environmental Humanities is an interdisciplinary minor stream that is designed to provide you with a foundation from which to understand and critically engage with contemporary environmental issues. Drawing on resources from across the humanities and social sciences, teaching in Environmental Humanities provides you with a valuable and distinctive approach to the environment, grounded in the fields of history, philosophy, geography, cultural studies, literature, science and technology studies (STS) and social theory.</p>\n",
-        "programs": [
-            "3543",
-            "3444",
-            "3434",
-            "3454",
-            "3447",
-            "3429",
-            "3453",
-            "3438",
-            "3409"
-        ],
-        "additional_info": null,
-        "constraints": [],
-        "structure": [
-            {
-                "title": "ARTS/EDUCATION (SECONDARY) STUDENTS",
-                "description": "The 24 uoc minor in Environmental Humanities can be combined with a major in History as preparation for a double first teaching specialisation.",
-                "credit_points": "",
-                "courses": [],
-                "structure": []
-            },
-            {
-                "title": "Level 2 Prescribed Electives",
-                "description": "You must take at least 6 UOC, up to a maximum of 12 UOC of the following courses.",
-                "credit_points": "",
-                "courses": [
-                    "ARTS2244",
-                    "ARTS2248",
-                    "ARTS2249",
-                    "ARTS2240",
-                    "ARTS2243",
-                    "ARTS2242"
-                ],
-                "structure": []
-            },
-            {
-                "title": "Level 3 Prescribed Electives",
-                "description": "You can take up to a maximum of 6 UOC of the following courses.",
-                "credit_points": "",
-                "courses": [
-                    "ATSI3003",
-                    "ARTS3243",
-                    "ARTS3241",
-                    "DART3330",
-                    "ARTS3245",
-                    "ARTS3240",
-                    "ARTS3242"
-                ],
-                "structure": []
-            },
-            {
-                "title": "Level 1 Core Courses",
-                "description": "You must take 12 UOC of the following courses.",
-                "credit_points": "12",
-                "courses": [
-                    "ARTS1240",
-                    "ARTS1241"
-                ],
-                "structure": []
-            }
-        ]
-    },
-    "TABLC1": {
-        "title": "Taxation",
-        "study_level": "undergraduate",
-        "level": "major",
-        "credit_points": "48",
-        "faculty": "UNSW Business School",
-        "school": "School of Accounting, Auditing and Taxation",
-        "description": "<p>NOTE: For Commerce/Law students. Courses listed in the Taxation Major of the BCom (other than TABL1710 and TABL2741) may be counted to the Commerce component of the degree. No other TABL courses may be counted to the degree.<br />\n<br />\nTaxation funds the provision of government services, is a tool in economic management and is an important consideration in all business decisions. Indeed in a modern business environment no decision can be responsibly made without consideration being given to tax implications.<br />\n<br />\nTaxation affects every aspect of commercial life from the choice of business vehicle, to the financing of business operations, to the offshore expansion of a business, to the retirement plans for employees.<br />\n<br />\nManagers, accountants, auditors, financial officers and those working in banking, insurance, international business and government policy development and commerce generally require knowledge of business taxation. Tax consultants assist clients in structuring business transactions in tax effective ways. Tax consultants are highly sought after and are involved in creative, challenging and rewarding work.</p>\n",
-        "programs": [
-            "3543",
-            "3502",
-            "3587",
-            "3554",
-            "3558",
-            "3586"
-        ],
-        "additional_info": "<p><strong>Honours</strong></p>\n\n<p>Honours level study is available for Taxation students.</p>\n\n<p>Students interested in studying at Honours Level should refer to the relevant Honours stream record for entry requirements.</p>\n\n<p><strong>Further Information</strong></p>\n\n<p>Please note that these requirements may be subject to change.<br />\nStudents are advised to follow requirements according to the year they commenced. Please refer to previous editions of the <a href=\"http://legacy.handbook.unsw.edu.au/general/2018/SSAPO/previousEditions.html\" rel=\"nofollow\">Online Handbook</a> for pre-2019 program requirements.</p>\n\n<p>Contact the <a href=\"https://www.business.unsw.edu.au/students/resources/student-centre\" rel=\"nofollow\">UNSW Business School Student Centre</a> for advice.<br />\nTelephone: &#43; 61 2 9385 3189<br />\nLocation: Level 1, Room 1028, Quadrangle Building<br />\n<a href=\"https://www.business.unsw.edu.au/students/resources/online-forms\" rel=\"nofollow\">Forms, policies and procedures</a><br />\n<a href=\"https://www.business.unsw.edu.au/students/resources/faq\" rel=\"nofollow\">Frequently asked questions</a></p>\n",
-        "constraints": [],
-        "structure": [
-            {
-                "title": "Taxation Course List for Commerce/Law (4733) Students",
-                "description": "A major in Taxation consists of 48 UOC (8 courses) all of them elective for Commerce/Law candidates. The eight (8) courses are chosen from the list below. At least three (3) of the elective courses completed must be at level 3 (i.e. TABL3XXX). This is regardless of whether you are doing a single major or taking Taxation as a second major. <br /><br />Students enrolled in Program 4733 will not study TABL1710 or TABL2741 (as this material is covered elsewhere in the 4733 program). Students who have already completed LAWS3147, will not study TABL2751 but will instead choose another TABL course from the list.<br /><br />Students may count ONE (6 UOC) of COMM2101, COMM3202, COMM3303, COMM2222, COMM2233, COMM3020 or COMM3030 towards their Taxation major.",
-                "credit_points": "48",
-                "courses": [
-                    "TABL3003",
-                    "TABL2793",
-                    "TABL2751",
-                    "TABL3755",
-                    "TABL2756",
-                    "TABL3016",
-                    "TABL4722",
-                    "TABL3752",
-                    "COMM3101",
-                    "COMM3202",
-                    "COMM2222",
-                    "TABL3033",
-                    "TABL3005",
-                    "TABL3006",
-                    "TABL3010",
-                    "COMM3303",
-                    "COMM3020",
-                    "COMM2233",
-                    "COMM3030",
-                    "TABL3757",
-                    "TABL3023"
-                ],
-                "structure": []
-            },
-            {
-                "title": "Core Courses",
-                "description": "Students must take 18 UOC of the following courses. <br /><br />Students in Comm/Econ and Comm/Actl should take COMM1900 instead of COMM1150. Students in Econ and Actl should take ECON1102. All other students should complete COMM1150.",
-                "credit_points": "18",
-                "courses": [
-                    "TABL2710",
-                    "COMM1150",
-                    "TABL2751"
-                ],
-                "structure": []
-            },
-            {
-                "title": "Prescribed Electives",
-                "description": "Student must take 30 UOC of the following electives.<br /><br />At least three (3) of the elective courses completed must be at level 3 (i.e. TABL3XXX). <br /><br />Other Taxation courses may be taken from the list of courses offered by the School of Taxation & Business Law, with prior permission of the Head of School.<br /><br />Students may count ONE (6 UOC) of COMM3101, COMM3202, COMM2222, COMM2233, COMM3020 or COMM3030 towards their Taxation major.",
-                "credit_points": "30",
-                "courses": [
-                    "TABL3755",
-                    "COMM3030",
-                    "COMM2233",
-                    "TABL3023",
-                    "TABL2756",
-                    "TABL2741",
-                    "COMM3020",
-                    "TABL3016",
-                    "TABL4722",
-                    "TABL3752",
-                    "TABL3033",
-                    "TABL2793",
-                    "COMM2222",
-                    "COMM3101",
-                    "TABL3757",
-                    "COMM3202",
-                    "TABL3010"
                 ],
                 "structure": []
             }

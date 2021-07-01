@@ -29,7 +29,7 @@ these dictionaries includes:
  - relationship
  - dynamic_relationship
  - container 
- 
+
 The required courses are either in 'relationship', 'dynamic_relationship', or 
 in deeper levels of 'container' (which has been accessed via recursion in
 the below code). 
@@ -42,11 +42,12 @@ Step in the data's journey:
 
 import requests
 import json
+import dataHelpers
 
 def format_spn_data():
     """ Extracts, processes and writes specialisation data to file """
 
-    raw_content = get_raw_data()
+    raw_content = dataHelpers.read_data("specialisationsPureRaw.json")
     specialisations = {}
     for item in raw_content:
         
@@ -61,13 +62,11 @@ def format_spn_data():
         curriculum_structure = json.loads(item["CurriculumStructure"])
 
         # Add faculty and school
-        specialisations[specCode]["faculty"] = data["faculty_detail"][0]["name"]
-        if data["school_detail"]: # Not all specialisations have a school
-            specialisations[specCode]["school"] = data["school_detail"][0]["name"]
+        add_school_details(specialisations[specCode], data)
         
         # Program availability seems be in one of two keys
-        availableIn = ["available_in_programs", "available_in_programs2021plus"]
-        for key in availableIn:
+        available_in = ["available_in_programs", "available_in_programs2021plus"]
+        for key in available_in:
             get_available_in(data.get(key), specialisations, specCode)
 
         # Add any constraints on the specialisation
@@ -77,23 +76,13 @@ def format_spn_data():
         if "container" in curriculum_structure:
             get_structure(specialisations[specCode]["structure"], 
                             curriculum_structure["container"])
-        
-    with open('specialisationsFormattedRaw.json', 'w') as FILE:
-        json.dump(specialisations, FILE)
 
-def get_raw_data():
-    """
-    Returns variable containing raw specialisations data.
-    """
-    with open("specialisationsPureRaw.json", "r") as INPUT_FILE:
-        data = json.load(INPUT_FILE)
-
-    return data
+    dataHelpers.write_data(specialisations, 'specialisationsFormattedRaw.json')    
 
 def initialise_specialisation(item):
     """ Set up dictionary and add data in first level of 'contentLets' """
 
-    new = {
+    return {
         "title":  item.get("title"),
         "study_level": item["studyLevel"].lower(),
         "level":  item.get("level"),
@@ -107,7 +96,12 @@ def initialise_specialisation(item):
         "structure": [], # This is where the required courses will sit
     }
 
-    return new
+def add_school_details(specialisation, data):
+    """ Adds faculty and school details, if any """
+
+    specialisation["faculty"] = data["faculty_detail"][0]["name"]
+    if data["school_detail"]: # Not all specialisations have a school
+        specialisation["school"] = data["school_detail"][0]["name"]
 
 def get_available_in(programs, specialisations, specCode):
     """ Adds program codes that specialisation is available in """
@@ -131,10 +125,10 @@ def get_constraints(data):
 
     return constraints
 
-def get_structure(structure, currContainer):
+def get_structure(structure, curr_container):
     """ Adds curriculum structure for specialisation """
 
-    for element in currContainer: 
+    for element in curr_container: 
 
         structure.append({
             "title": element["title"],
