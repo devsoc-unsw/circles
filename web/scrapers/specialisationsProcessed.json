@@ -10,17 +10,17 @@
         "curriculum": [
             {
                 "courses": {
-                    "COMP3121 or COMP3821": 2,
-                    "MATH1141 or MATH1131": 2,
-                    "COMP1511": 1,
+                    "COMP3821 or COMP3121": 2,
                     "COMP1521": 1,
-                    "COMP1531": 1,
-                    "COMP2511": 1,
-                    "COMP2521": 1,
-                    "COMP4920": 1,
                     "COMP3900": 1,
+                    "COMP1511": 1,
                     "MATH1081": 1,
-                    "MATH1241 or MATH1231": 2
+                    "COMP4920": 1,
+                    "COMP1531": 1,
+                    "COMP2521": 1,
+                    "COMP2511": 1,
+                    "MATH1231 or MATH1241": 2,
+                    "MATH1131 or MATH1141": 2
                 },
                 "title": "Core Courses",
                 "credits_to_complete": 66,
@@ -30,8 +30,8 @@
             },
             {
                 "courses": {
-                    "ENGG2600": 1,
                     "ENGG4600": 1,
+                    "ENGG2600": 1,
                     "ENGG3600": 1,
                     "COMP3": 1,
                     "COMP4": 1,
@@ -327,9 +327,30 @@
             },
             {
                 "courses": {
-                    "ENGG2600": 1,
-                    "ENGG3600": 1,
+                    "COMP4920": 1,
+                    "COMP2521": 1,
+                    "COMP1511": 1,
+                    "COMP3900": 1,
+                    "COMP1521": 1,
+                    "COMP1531": 1,
+                    "MATH1081": 1,
+                    "COMP2511": 1,
+                    "COMP3311": 1,
+                    "COMP3121 or COMP3821": 2,
+                    "MATH1231 or MATH1241": 2,
+                    "MATH1131 or MATH1141": 2
+                },
+                "title": "Core Courses",
+                "credits_to_complete": 72,
+                "type": "core",
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
                     "ENGG4600": 1,
+                    "ENGG3600": 1,
+                    "ENGG2600": 1,
                     "COMP3": 1,
                     "COMP4": 1,
                     "COMP6": 1,
@@ -340,27 +361,6 @@
                 "type": "elective",
                 "levels": [],
                 "notes": "<br />NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. <br />2 UOC courses are run over consecutive terms for a final total of 6 UOC."
-            },
-            {
-                "courses": {
-                    "MATH1081": 1,
-                    "COMP1511": 1,
-                    "COMP1531": 1,
-                    "COMP3311": 1,
-                    "COMP4920": 1,
-                    "COMP1521": 1,
-                    "COMP2521": 1,
-                    "COMP2511": 1,
-                    "COMP3900": 1,
-                    "COMP3121 or COMP3821": 2,
-                    "MATH1241 or MATH1231": 2,
-                    "MATH1131 or MATH1141": 2
-                },
-                "title": "Core Courses",
-                "credits_to_complete": 72,
-                "type": "core",
-                "levels": [],
-                "notes": ""
             }
         ]
     },
@@ -375,21 +375,8 @@
         "curriculum": [
             {
                 "courses": {
-                    "COMP3511": 1,
-                    "COMP9321": 1,
-                    "COMP9323": 1,
-                    "COMP9322": 1
-                },
-                "title": "Discipline Electives",
-                "credits_to_complete": 18,
-                "type": "elective",
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ENGG4600": 1,
                     "ENGG2600": 1,
+                    "ENGG4600": 1,
                     "ENGG3600": 1,
                     "COMP3": 1,
                     "COMP4": 1,
@@ -404,22 +391,35 @@
             },
             {
                 "courses": {
-                    "MATH1131 or MATH1141": 2,
                     "COMP3311": 1,
                     "COMP1531": 1,
-                    "MATH1081": 1,
-                    "COMP3900": 1,
                     "COMP4920": 1,
-                    "COMP2511": 1,
                     "COMP1511": 1,
+                    "COMP2511": 1,
                     "COMP1521": 1,
+                    "COMP3900": 1,
+                    "MATH1081": 1,
                     "COMP2521": 1,
-                    "MATH1231 or MATH1241": 2,
-                    "COMP3121 or COMP3821": 2
+                    "MATH1241 or MATH1231": 2,
+                    "COMP3121 or COMP3821": 2,
+                    "MATH1131 or MATH1141": 2
                 },
                 "title": "Core Courses",
                 "credits_to_complete": 72,
                 "type": "core",
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "COMP9323": 1,
+                    "COMP9322": 1,
+                    "COMP3511": 1,
+                    "COMP9321": 1
+                },
+                "title": "Discipline Electives",
+                "credits_to_complete": 18,
+                "type": "elective",
                 "levels": [],
                 "notes": ""
             }
@@ -436,9 +436,25 @@
         "curriculum": [
             {
                 "courses": {
+                    "COMP9417": 1,
+                    "COMP9444": 1,
+                    "COMP4418": 1,
+                    "COMP9318": 1,
+                    "COMP9517": 1,
+                    "COMP3431": 1,
+                    "COMP9418": 1
+                },
+                "title": "Artificial Intelligence Prescribed Electives",
+                "credits_to_complete": 18,
+                "type": "elective",
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ENGG4600": 1,
                     "ENGG2600": 1,
                     "ENGG3600": 1,
-                    "ENGG4600": 1,
                     "COMP3": 1,
                     "COMP4": 1,
                     "COMP6": 1,
@@ -452,38 +468,22 @@
             },
             {
                 "courses": {
+                    "MATH1241 or MATH1231": 2,
                     "MATH1131 or MATH1141": 2,
-                    "COMP3121 or COMP3821": 2,
-                    "MATH1231 or MATH1241": 2,
-                    "COMP2521": 1,
-                    "COMP1521": 1,
+                    "COMP2511": 1,
+                    "COMP3411": 1,
                     "COMP1531": 1,
                     "COMP3900": 1,
-                    "COMP2511": 1,
-                    "COMP4920": 1,
-                    "COMP3411": 1,
                     "COMP1511": 1,
-                    "MATH1081": 1
+                    "COMP2521": 1,
+                    "COMP1521": 1,
+                    "COMP4920": 1,
+                    "MATH1081": 1,
+                    "COMP3121 or COMP3821": 2
                 },
                 "title": "Core Courses",
                 "credits_to_complete": 72,
                 "type": "core",
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "COMP9417": 1,
-                    "COMP4418": 1,
-                    "COMP9517": 1,
-                    "COMP9418": 1,
-                    "COMP9444": 1,
-                    "COMP3431": 1,
-                    "COMP9318": 1
-                },
-                "title": "Artificial Intelligence Prescribed Electives",
-                "credits_to_complete": 18,
-                "type": "elective",
                 "levels": [],
                 "notes": ""
             }
@@ -500,18 +500,31 @@
         "curriculum": [
             {
                 "courses": {
-                    "MATH1081": 1,
-                    "COMP3900": 1,
-                    "COMP2521": 1,
+                    "COMP3141": 1,
+                    "COMP6771": 1,
+                    "COMP3151": 1,
+                    "COMP3131": 1
+                },
+                "title": "Discipline Electives",
+                "credits_to_complete": 18,
+                "type": "elective",
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
                     "COMP1521": 1,
-                    "COMP4920": 1,
                     "COMP2511": 1,
-                    "COMP3161": 1,
+                    "MATH1081": 1,
                     "COMP3121": 1,
-                    "COMP1511": 1,
+                    "COMP4920": 1,
                     "COMP1531": 1,
-                    "MATH1231 or MATH1241": 2,
-                    "MATH1141 or MATH1131": 2
+                    "COMP3161": 1,
+                    "COMP2521": 1,
+                    "COMP1511": 1,
+                    "COMP3900": 1,
+                    "MATH1131 or MATH1141": 2,
+                    "MATH1241 or MATH1231": 2
                 },
                 "title": "Core Course",
                 "credits_to_complete": 72,
@@ -521,9 +534,9 @@
             },
             {
                 "courses": {
+                    "ENGG2600": 1,
                     "ENGG3600": 1,
                     "ENGG4600": 1,
-                    "ENGG2600": 1,
                     "COMP3": 1,
                     "COMP4": 1,
                     "COMP6": 1,
@@ -534,19 +547,6 @@
                 "type": "elective",
                 "levels": [],
                 "notes": "<br />NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. <br />2 UOC courses are run over consecutive terms for a final total of 6 UOC."
-            },
-            {
-                "courses": {
-                    "COMP6771": 1,
-                    "COMP3151": 1,
-                    "COMP3131": 1,
-                    "COMP3141": 1
-                },
-                "title": "Discipline Electives",
-                "credits_to_complete": 18,
-                "type": "elective",
-                "levels": [],
-                "notes": ""
             }
         ]
     },
@@ -561,9 +561,9 @@
         "curriculum": [
             {
                 "courses": {
+                    "ENGG2600": 1,
                     "ENGG4600": 1,
                     "ENGG3600": 1,
-                    "ENGG2600": 1,
                     "COMP3": 1,
                     "COMP4": 1,
                     "COMP6": 1,
@@ -577,36 +577,36 @@
             },
             {
                 "courses": {
-                    "MATH1131 or MATH1141": 2,
-                    "MATH1231 or MATH1241": 2,
-                    "COMP1511": 1,
-                    "COMP2521": 1,
-                    "COMP4920": 1,
-                    "COMP1521": 1,
-                    "COMP3900": 1,
-                    "MATH1081": 1,
-                    "COMP2511": 1,
-                    "COMP1531": 1,
-                    "COMP3331": 1,
-                    "COMP3821 or COMP3121": 2
-                },
-                "title": "Core Courses",
-                "credits_to_complete": 72,
-                "type": "core",
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
                     "COMP9332": 1,
-                    "COMP9334": 1,
                     "COMP6733": 1,
+                    "COMP9334": 1,
                     "COMP4336": 1,
                     "COMP4337": 1
                 },
                 "title": "Discipline Electives",
                 "credits_to_complete": 18,
                 "type": "elective",
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "MATH1081": 1,
+                    "COMP3900": 1,
+                    "COMP4920": 1,
+                    "COMP2511": 1,
+                    "COMP1531": 1,
+                    "COMP1511": 1,
+                    "COMP2521": 1,
+                    "COMP1521": 1,
+                    "COMP3331": 1,
+                    "COMP3821 or COMP3121": 2,
+                    "MATH1131 or MATH1141": 2,
+                    "MATH1231 or MATH1241": 2
+                },
+                "title": "Core Courses",
+                "credits_to_complete": 72,
+                "type": "core",
                 "levels": [],
                 "notes": ""
             }
@@ -623,12 +623,12 @@
         "curriculum": [
             {
                 "courses": {
-                    "COMP3231": 1,
-                    "COMP9517": 1,
+                    "COMP3601": 1,
                     "COMP4601": 1,
-                    "COMP9242": 1,
                     "COMP3211": 1,
-                    "COMP3601": 1
+                    "COMP3231": 1,
+                    "COMP9242": 1,
+                    "COMP9517": 1
                 },
                 "title": "Prescribed Electives",
                 "credits_to_complete": 18,
@@ -638,18 +638,18 @@
             },
             {
                 "courses": {
-                    "COMP3821 or COMP3121": 2,
                     "MATH1231 or MATH1241": 2,
-                    "COMP1531": 1,
-                    "MATH1081": 1,
-                    "COMP2521": 1,
-                    "COMP2121": 1,
-                    "COMP4920": 1,
-                    "COMP2511": 1,
-                    "COMP3900": 1,
                     "COMP3222": 1,
+                    "COMP1531": 1,
+                    "COMP4920": 1,
+                    "MATH1081": 1,
                     "COMP1511": 1,
+                    "COMP2521": 1,
                     "COMP1521": 1,
+                    "COMP2511": 1,
+                    "COMP2121": 1,
+                    "COMP3900": 1,
+                    "COMP3121 or COMP3821": 2,
                     "MATH1141 or MATH1131": 2
                 },
                 "title": "Core Courses",
@@ -676,30 +676,29 @@
         "curriculum": [
             {
                 "courses": {
-                    "MATH1241 or MATH1231": 2,
-                    "MATH1141 or MATH1131": 2,
-                    "COMP6441 or COMP6841": 2,
-                    "COMP1511": 1,
-                    "COMP3900": 1,
-                    "COMP3121": 1,
-                    "COMP2511": 1,
-                    "MATH1081": 1,
-                    "COMP2521": 1,
-                    "COMP1521": 1,
-                    "COMP4920": 1,
-                    "COMP1531": 1
+                    "COMP6845": 1,
+                    "COMP6443": 1,
+                    "COMP6449": 1,
+                    "COMP6448": 1,
+                    "COMP6843": 1,
+                    "MATH3411": 1,
+                    "COMP9447": 1,
+                    "COMP4337": 1,
+                    "COMP6445": 1,
+                    "COMP6447": 1,
+                    "TELE3119": 1
                 },
-                "title": "Core Courses",
-                "credits_to_complete": 72,
-                "type": "core",
+                "title": "Security Engineering Prescribed Electives",
+                "credits_to_complete": 18,
+                "type": "elective",
                 "levels": [],
                 "notes": ""
             },
             {
                 "courses": {
-                    "ENGG3600": 1,
-                    "ENGG4600": 1,
                     "ENGG2600": 1,
+                    "ENGG4600": 1,
+                    "ENGG3600": 1,
                     "COMP3": 1,
                     "COMP4": 1,
                     "COMP6": 1,
@@ -713,21 +712,22 @@
             },
             {
                 "courses": {
-                    "COMP4337": 1,
-                    "MATH3411": 1,
-                    "COMP6843": 1,
-                    "COMP6448": 1,
-                    "COMP9447": 1,
-                    "COMP6443": 1,
-                    "COMP6845": 1,
-                    "TELE3119": 1,
-                    "COMP6447": 1,
-                    "COMP6445": 1,
-                    "COMP6449": 1
+                    "MATH1131 or MATH1141": 2,
+                    "COMP1511": 1,
+                    "COMP4920": 1,
+                    "COMP1521": 1,
+                    "COMP2511": 1,
+                    "COMP2521": 1,
+                    "MATH1081": 1,
+                    "COMP3121": 1,
+                    "COMP3900": 1,
+                    "COMP1531": 1,
+                    "COMP6441 or COMP6841": 2,
+                    "MATH1231 or MATH1241": 2
                 },
-                "title": "Security Engineering Prescribed Electives",
-                "credits_to_complete": 18,
-                "type": "elective",
+                "title": "Core Courses",
+                "credits_to_complete": 72,
+                "type": "core",
                 "levels": [],
                 "notes": ""
             }
@@ -744,6 +744,20 @@
         "curriculum": [
             {
                 "courses": {
+                    "COMP9313": 1,
+                    "COMP9417": 1,
+                    "COMP3121": 1
+                },
+                "title": "Level 3 Core Courses",
+                "credits_to_complete": 18,
+                "type": "core",
+                "levels": [
+                    3
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
                     "COMP2041": 1,
                     "COMP2521": 1
                 },
@@ -757,9 +771,9 @@
             },
             {
                 "courses": {
-                    "MATH1131": 1,
+                    "MATH1081": 1,
                     "COMP1511": 1,
-                    "MATH1081": 1
+                    "MATH1131": 1
                 },
                 "title": "Level 1 Core Courses",
                 "credits_to_complete": 18,
@@ -771,65 +785,51 @@
             },
             {
                 "courses": {
-                    "ECON2209": 1,
-                    "COMP3411": 1,
-                    "COMP6841": 1,
-                    "ECON2104": 1,
-                    "COMP6441": 1,
-                    "ACTL3142": 1,
-                    "ECON2206": 1,
-                    "COMP9418": 1,
-                    "ECON3107": 1,
-                    "MATH2111": 1,
-                    "MATH3041": 1,
-                    "MATH2831": 1,
-                    "COMP4418": 1,
-                    "COMP9319": 1,
-                    "MARK1012": 1,
-                    "COMP4121": 1,
-                    "INFS1602": 1,
-                    "MATH2871": 1,
-                    "COMP6714": 1,
-                    "ECON3208": 1,
-                    "MATH3821": 1,
-                    "MATH3871": 1,
-                    "COMP9315": 1,
-                    "ACTL3141": 1,
                     "MATH3161": 1,
-                    "MATH2011": 1,
+                    "COMP4121": 1,
                     "MATH2931": 1,
-                    "MARK3085": 1,
-                    "COMP6771": 1,
-                    "ECON1102": 1,
-                    "ECON3130": 1,
                     "MATH5836": 1,
-                    "ECON2101": 1,
-                    "INFS3603": 1,
-                    "ECON2111": 1,
-                    "ECON3206": 1,
-                    "ECON3123": 1,
+                    "ACTL3141": 1,
+                    "COMP3411": 1,
+                    "MATH3871": 1,
+                    "COMP4418": 1,
+                    "COMP6441": 1,
+                    "ECON3107": 1,
                     "MATH3411": 1,
+                    "MARK3085": 1,
+                    "ECON2101": 1,
+                    "ECON2206": 1,
+                    "MATH3041": 1,
+                    "ECON3123": 1,
+                    "COMP9319": 1,
+                    "ACTL3142": 1,
+                    "ECON2111": 1,
+                    "MATH2011": 1,
+                    "INFS1602": 1,
+                    "MATH3821": 1,
+                    "ECON2104": 1,
+                    "COMP9418": 1,
+                    "COMP6714": 1,
+                    "COMP9315": 1,
+                    "COMP6841": 1,
+                    "ECON3206": 1,
+                    "MATH2871": 1,
+                    "ECON2209": 1,
                     "MARK3054": 1,
-                    "COMP9318": 1
+                    "COMP6771": 1,
+                    "INFS3603": 1,
+                    "ECON3208": 1,
+                    "ECON3130": 1,
+                    "MARK1012": 1,
+                    "MATH2111": 1,
+                    "COMP9318": 1,
+                    "ECON1102": 1,
+                    "MATH2831": 1
                 },
                 "title": "Prescribed Electives",
                 "credits_to_complete": 18,
                 "type": "elective",
                 "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "COMP3121": 1,
-                    "COMP9417": 1,
-                    "COMP9313": 1
-                },
-                "title": "Level 3 Core Courses",
-                "credits_to_complete": 18,
-                "type": "core",
-                "levels": [
-                    3
-                ],
                 "notes": ""
             }
         ]
