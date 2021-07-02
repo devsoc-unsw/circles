@@ -1,24 +1,9 @@
 import React from "react";
 import { RadialBar } from "@ant-design/charts";
+import { data } from "./radialChartData";
 
-function RadialBarChart() {
-  var data = [
-    {
-      name: "G6",
-      UOC: 10,
-      color: "#b37feb",
-    },
-    {
-      name: "Specialisation",
-      UOC: 20,
-      color: "#9254de",
-    },
-    {
-      name: "Total",
-      UOC: 15,
-      color: "#722ed1",
-    },
-  ];
+// not currently used
+const RadialBarChart = () => {
   var config = {
     data: data,
     xField: "name",
@@ -43,6 +28,6 @@ function RadialBarChart() {
     barStyle: { lineCap: "round" },
   };
   return <RadialBar {...config} />;
-}
+};
 
 export default RadialBarChart;

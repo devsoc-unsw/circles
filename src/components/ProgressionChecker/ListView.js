@@ -1,19 +1,29 @@
 import React from "react";
 import { Typography } from "antd";
+import { Skeleton } from "antd";
 
-function ListView({ title }) {
+const ListView = ({ loading, degree }) => {
   const { Title } = Typography;
+
   return (
-    <div
-      style={{
-        height: "100vh",
-        padding: "2em",
-      }}
-      id={title}
-    >
-      <Title className="text">{title}</Title>
-    </div>
+    <>
+      {loading ? (
+        <Skeleton />
+      ) : (
+        <>
+          {degree["concentrations"].map((concentration) => (
+            <div
+              className="listPage"
+              id={concentration["name"]}
+              key={concentration["name"]}
+            >
+              <Title className="text">{concentration["name"]}</Title>
+            </div>
+          ))}
+        </>
+      )}
+    </>
   );
-}
+};
 
 export default ListView;

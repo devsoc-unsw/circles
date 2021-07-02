@@ -1,71 +1,54 @@
-import React from "react";
-import { Card, Progress, Typography } from "antd";
+import React, { useEffect, useState } from "react";
+import { Typography } from "antd";
 import { useSpring, animated } from "react-spring";
 import DegreeComponentCard from "./DegreeComponentCard";
 import LiquidProgressChart from "./LiquidProgressChart";
-import RadialBarChart from "./RadialBarChart";
+import SkeletonDashboard from "./SkeletonDashboard";
 
-function Dashboard() {
-  const { Title, Text } = Typography;
+const Dashboard = ({ loading, degree }) => {
+  const { Title } = Typography;
+  const currYear = new Date().getFullYear();
+
   const props = useSpring({
-    to: { opacity: 1 },
     from: { opacity: 0 },
-    delay: 200,
+    to: { opacity: 1 },
+    reset: true,
+    config: { tension: 80, friction: 60 },
   });
+
   return (
-    <div
-      style={{
-        height: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <animated.div className="centerCol" style={props}>
-        {/* <RadialBarChart completedUOC={108} totalUOC={216} /> */}
-        <LiquidProgressChart completedUOC={108} totalUOC={216} />
-        <a
-          href="https://www.handbook.unsw.edu.au/undergraduate/programs/2021/3767?year=2021"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="textLink"
-        >
-          <Title
-            className="text textLink"
-            style={{ marginBottom: "0.5em", marginTop: "0.8em" }}
+    <div className="container">
+      {loading ? (
+        <SkeletonDashboard />
+      ) : (
+        <animated.div className="centered" style={props}>
+          <LiquidProgressChart
+            completedUOC={degree["completed_UOC"]}
+            totalUOC={degree["UOC"]}
+          />
+          <a
+            href={`https://www.handbook.unsw.edu.au/undergraduate/programs/${currYear}/${degree["code"]}?year=${currYear}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="textLink"
           >
-            Engineering (Hons) / Science
-          </Title>
-        </a>
-        <div
-          style={{
-            display: "flex",
-            gap: "1em",
-            marginTop: "1em",
-          }}
-        >
-          <DegreeComponentCard
-            title="Software Engineering"
-            subTitle="Specialisation"
-            completedUOC={60}
-            totalUOC={200}
-          />
-          <DegreeComponentCard
-            title="Bioinformatics"
-            subTitle="Major"
-            completedUOC={30}
-            totalUOC={200}
-          />
-          <DegreeComponentCard
-            title="Marine Science"
-            subTitle="Minor"
-            completedUOC={80}
-            totalUOC={200}
-          />
-        </div>
-      </animated.div>
+            <Title className="text textLink">{degree["name"]}</Title>
+          </a>
+          <div className="cards">
+            {degree["concentrations"].map((concentration, index) => (
+              <DegreeComponentCard
+                key={index}
+                title={concentration["name"]}
+                subTitle={concentration["type"]}
+                completedUOC={concentration["completed_UOC"]}
+                totalUOC={concentration["UOC"]}
+              />
+            ))}
+          </div>
+        </animated.div>
+      )}
     </div>
   );
-}
+};
 
 export default Dashboard;

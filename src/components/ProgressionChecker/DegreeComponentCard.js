@@ -4,14 +4,13 @@ import ReactTooltip from "react-tooltip";
 import { purple } from "@ant-design/colors";
 import { Link } from "react-scroll";
 
-function DegreeComponentCard({ title, subTitle, completedUOC, totalUOC }) {
+const DegreeComponentCard = ({ title, subTitle, completedUOC, totalUOC }) => {
   const { Title, Text } = Typography;
   const progress = Math.round((completedUOC / totalUOC) * 100);
-  //TODO - change tooltip color based off theme variable in redux
   return (
     <Link to={title} smooth={true} duration={1000}>
       <Card className="card text" hoverable bordered={false}>
-        <Title className="text" level={5} style={{ marginBottom: "0" }}>
+        <Title className="text" level={5}>
           {title}
         </Title>
         <Text className="secondaryText">{subTitle}</Text>
@@ -19,28 +18,19 @@ function DegreeComponentCard({ title, subTitle, completedUOC, totalUOC }) {
           <Progress
             percent={progress}
             trailColor="white"
-            style={{ marginTop: "0.5em", color: "white" }}
             showInfo={false}
             strokeColor={{ "0%": purple[3], "100%": purple[4] }}
           />
         </div>
-        <ReactTooltip id={subTitle} place="bottom">
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <div>{progress}%</div>
-            <div>
-              ({completedUOC}/{totalUOC} UOC)
-            </div>
+        <ReactTooltip id={subTitle} place="bottom" className="tooltip">
+          <div>{progress}%</div>
+          <div>
+            ({completedUOC}/{totalUOC} UOC)
           </div>
         </ReactTooltip>
       </Card>
     </Link>
   );
-}
+};
 
 export default DegreeComponentCard;
