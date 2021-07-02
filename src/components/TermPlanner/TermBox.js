@@ -2,6 +2,7 @@ import React from "react";
 import { Typography, Badge } from "antd";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import DraggableCourse from "./DraggableCourse";
+import { useSelector } from "react-redux";
 
 function TermBox({ name, courses, courseNames, termsOffered, isDragFinished }) {
   const term = name.match(/t[0-3]/)[0];
@@ -9,6 +10,9 @@ function TermBox({ name, courses, courseNames, termsOffered, isDragFinished }) {
   if (termsOffered.includes(term)) {
     isDropDisabled = false;
   }
+  const theme = useSelector((state) => {
+    return state.theme;
+  });
 
   return (
     <Droppable droppableId={name} isDropDisabled={isDropDisabled}>
@@ -23,8 +27,8 @@ function TermBox({ name, courses, courseNames, termsOffered, isDragFinished }) {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            backgroundColor: "#D170FF",
-            borderColor: "#D170FF",
+            backgroundColor: theme === "light" ? "#D170FF" : "#6E45FE",
+            borderColor: theme === "light" ? "#D170FF" : "#6E45FE",
           }}
         >
           <ul

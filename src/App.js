@@ -26,6 +26,7 @@ function App() {
             UPDATE
           </Button> */}
           <TermPlanner />
+          {/* <ProgressionChecker /> */}
           <ThemeToggle />
         </div>
       ) : (
