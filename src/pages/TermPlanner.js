@@ -1,81 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-import {
-  Card,
-  Progress,
-  Typography,
-  Tag,
-  Button,
-  Divider,
-  Drawer,
-  Space,
-  Collapse,
-} from "antd";
+import { Typography, Button, Drawer, Collapse } from "antd";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import DraggableCourse from "../components/TermPlanner/DraggableCourse";
 import TermBox from "../components/TermPlanner/TermBox";
-import { BiChevronLeft } from "react-icons/bi";
-import { RightOutlined, CloseOutlined } from "@ant-design/icons";
-import { useSelector } from "react-redux";
+import { RightOutlined } from "@ant-design/icons";
+import axios from "axios";
+import OptionsDrawer from "../components/TermPlanner/OptionsDrawer";
 
-function TermPlanner() {
-  const { Title, Text } = Typography;
+const TermPlanner = () => {
+  const [years, setYears] = useState([{}]);
+  const [data, setData] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
-  const data = {
-    courses: {
-      COMP3333: {
-        title: "Extended algorithms and programming techniques",
-        termsOffered: ["t1", "t3"],
-      },
-      ARTS4268: {
-        title: "Methodologies in the Social Sciences: Questions and Quandaries",
-        termsOffered: ["t1", "t2"],
-      },
-      COMP1511: {
-        title: "Programming Fundamentals",
-        termsOffered: ["t1", "t2", "t3"],
-      },
-      CHEM1011: { title: "Chemistry 1A", termsOffered: ["t1", "t2", "t3"] },
-      MATH1131: { title: "Mathematics 1A", termsOffered: ["t1", "t2", "t3"] },
-      BIOC2201: { title: "Biochemistry", termsOffered: ["t2"] },
-      ENGG1000: {
-        title: "Introduction to Engineering Design and Innovation",
-        termsOffered: ["t3"],
-      },
-      COMP2041: {
-        title: "Software Construction: Techniques and Tools",
-        termsOffered: ["t2", "t3"],
-      },
-      COMP4441: {
-        title: "Random Course",
-        termsOffered: ["t1", "t2", "t3"],
-      },
-      COMP3131: {
-        title: "Programming Languages and Compilers",
-        termsOffered: ["t3"],
-      },
-      COMP3601: {
-        title: "Design Project A",
-        termsOffered: ["t1", "t2"],
-      },
-    },
-
-    startYear: 2021,
-    numYears: 3,
-    years: [
-      {
-        t1: ["COMP3333", "COMP1511"],
-        t2: ["ARTS4268"],
-        t3: ["CHEM1011"],
-      },
-      { t1: ["MATH1131"], t2: ["BIOC2201"], t3: [] },
-      { t1: ["COMP2041"], t2: [], t3: ["ENGG1000"] },
-    ],
+  const fetchCourses = async () => {
+    const res = await axios.get("data.json");
+    setData(res.data);
+    setYears(res.data.years);
+    setIsLoading(false);
   };
-  const [years, setYears] = React.useState(data.years);
+
+  useEffect(() => {
+    // setTimeout(fetchDegree, 2000);  // testing skeleton
+    fetchCourses();
+  }, []);
+  console.log(data);
 
   const handleOnDragEnd = (result) => {
-    setIsDragFinished(true);
+    setIsDragging(false);
 
     const { destination, source, draggableId } = result;
     if (!destination) return; // drag outside of droppable area
@@ -120,138 +72,65 @@ function TermPlanner() {
     setYears(newYears);
   };
 
-  const [termsOffered, setTermsOffered] = React.useState([]);
-  const [isDragFinished, setIsDragFinished] = React.useState(true);
-  const handleOnDragStart = (input) => {
-    setIsDragFinished(false);
-    const course = input.draggableId;
+  const [termsOffered, setTermsOffered] = useState([]);
+  const [isDragging, setIsDragging] = useState(false);
+  const handleOnDragStart = (courseItem) => {
+    setIsDragging(true);
+    const course = courseItem.draggableId;
     const terms = data.courses[course]["termsOffered"];
     setTermsOffered(terms);
   };
-  console.log("update");
 
-  const [visible, setVisible] = React.useState(false);
-  const { Panel } = Collapse;
-
-  const theme = useSelector((state) => state.theme);
+  const [visible, setVisible] = useState(false);
 
   return (
     <>
-      {/* <Title style={{ marginLeft: "1em", textAlign: "left" }} className="text">
-        Computer Science/Arts
-      </Title> */}
-      {/* <Divider /> */}
-      <DragDropContext
-        onDragEnd={handleOnDragEnd}
-        onDragStart={handleOnDragStart}
-      >
-        <div className="container">
-          <Button
-            type="primary"
-            icon={<RightOutlined />}
-            ghost
-            onClick={() => setVisible(true)}
-            shape="circle"
-          />
-          <div class="gridContainer">
-            <div class="gridItem"></div>
-            <div class="gridItem">Term 1</div>
-            <div class="gridItem">Term 2</div>
-            <div class="gridItem">Term 3</div>
+      {isLoading ? (
+        <>loading</>
+      ) : (
+        <DragDropContext
+          onDragEnd={handleOnDragEnd}
+          onDragStart={handleOnDragStart}
+        >
+          <div className="container">
+            <Button
+              icon={<RightOutlined />}
+              ghost
+              onClick={() => setVisible(true)}
+              shape="circle"
+            />
+            <div class="gridContainer">
+              <div class="gridItem"></div>
+              <div class="gridItem">Term 1</div>
+              <div class="gridItem">Term 2</div>
+              <div class="gridItem">Term 3</div>
 
-            {years.map((year, index) => (
-              <React.Fragment key={index}>
-                <div class="gridItem">{data.startYear + index}</div>
-                <TermBox
-                  name={data.startYear + index + "t1"}
-                  courses={year.t1}
-                  courseNames={data.courses}
-                  termsOffered={termsOffered}
-                  isDragFinished={isDragFinished}
-                />
-                <TermBox
-                  name={data.startYear + index + "t2"}
-                  courses={year.t2}
-                  courseNames={data.courses}
-                  termsOffered={termsOffered}
-                  isDragFinished={isDragFinished}
-                />
-                <TermBox
-                  name={data.startYear + index + "t3"}
-                  courses={year.t3}
-                  courseNames={data.courses}
-                  termsOffered={termsOffered}
-                  isDragFinished={isDragFinished}
-                />
-              </React.Fragment>
-            ))}
+              {years.map((year, index) => (
+                <React.Fragment key={index}>
+                  <div class="gridItem">{data.startYear + index}</div>
+                  {Object.keys(year).map((term) => (
+                    <TermBox
+                      key={data.startYear + index + term}
+                      name={data.startYear + index + term}
+                      courses={year[term]}
+                      courseNames={data.courses}
+                      termsOffered={termsOffered}
+                      isDragging={isDragging}
+                    />
+                  ))}
+                </React.Fragment>
+              ))}
+            </div>
+            <OptionsDrawer
+              visible={visible}
+              setVisible={setVisible}
+              courses={data["courses"]}
+            />
           </div>
-
-          <Drawer
-            placement="left"
-            onClose={() => setVisible(false)}
-            closeIcon={
-              <CloseOutlined style={{ color: theme === "dark" && "white" }} />
-            }
-            visible={visible}
-            getContainer={false}
-            bodyStyle={{
-              background: theme === "dark" ? "#151718" : "white",
-            }}
-            mask={false}
-            width="25em"
-          >
-            <Title class="text">Options</Title>
-            <Title level={2} class="text">
-              Unplanned Courses
-            </Title>
-            <Collapse className="collapse" ghost={theme === "dark"}>
-              <Panel header="Core" key="1">
-                <Droppable droppableId="cont" isDropDisabled={true}>
-                  {(provided, snapshot) => (
-                    <div
-                      ref={provided.innerRef}
-                      {...provided.droppableProps}
-                      style={{ marginBottom: "1em" }}
-                    >
-                      <DraggableCourse
-                        code="COMP4441"
-                        index={0}
-                        courseNames={data.courses}
-                        key="COMP4441"
-                      />
-                      <DraggableCourse
-                        code="COMP3601"
-                        index={1}
-                        courseNames={data.courses}
-                        key="COMP3601"
-                      />
-                      <DraggableCourse
-                        code="COMP3131"
-                        index={2}
-                        courseNames={data.courses}
-                        key="COMP3131"
-                      />
-                      {provided.placeholder}
-                    </div>
-                  )}
-                </Droppable>
-              </Panel>
-              <Panel header="Elective" key="2">
-                <p>dsfsdf</p>
-              </Panel>
-              <Panel header="General Education" key="3">
-                <p>sdfsdf</p>
-              </Panel>
-            </Collapse>
-            <Title level={2} class="text">
-              Number of Years
-            </Title>
-          </Drawer>
-        </div>
-      </DragDropContext>
+        </DragDropContext>
+      )}
     </>
   );
-}
+};
 
 export default TermPlanner;

@@ -11,6 +11,7 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "antd": "^4.16.3",
+    "axios": "^0.21.1",
     "craco-less": "^1.17.1",
     "react": "^17.0.1",
     "react-beautiful-dnd": "^13.1.0",

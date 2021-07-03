@@ -1,0 +1,120 @@
+{
+	"courses":{
+	   "COMP3333":{
+		  "title":"Extended algorithms and programming techniques",
+		  "termsOffered":[
+			 "t1",
+			 "t3"
+		  ]
+	   },
+	   "ARTS4268":{
+		  "title":"Methodologies in the Social Sciences: Questions and Quandaries",
+		  "termsOffered":[
+			 "t1",
+			 "t2"
+		  ]
+	   },
+	   "COMP1511":{
+		  "title":"Programming Fundamentals",
+		  "termsOffered":[
+			 "t1",
+			 "t2",
+			 "t3"
+		  ]
+	   },
+	   "CHEM1011":{
+		  "title":"Chemistry 1A",
+		  "termsOffered":[
+			 "t1",
+			 "t2",
+			 "t3"
+		  ]
+	   },
+	   "MATH1131":{
+		  "title":"Mathematics 1A",
+		  "termsOffered":[
+			 "t1",
+			 "t2",
+			 "t3"
+		  ]
+	   },
+	   "BIOC2201":{
+		  "title":"Biochemistry",
+		  "termsOffered":[
+			 "t2"
+		  ]
+	   },
+	   "ENGG1000":{
+		  "title":"Introduction to Engineering Design and Innovation",
+		  "termsOffered":[
+			 "t3"
+		  ]
+	   },
+	   "COMP2041":{
+		  "title":"Software Construction: Techniques and Tools",
+		  "termsOffered":[
+			 "t2",
+			 "t3"
+		  ]
+	   },
+	   "COMP4441":{
+		  "title":"Random Course",
+		  "termsOffered":[
+			 "t1",
+			 "t2",
+			 "t3"
+		  ]
+	   },
+	   "COMP3131":{
+		  "title":"Programming Languages and Compilers",
+		  "termsOffered":[
+			 "t3"
+		  ]
+	   },
+	   "COMP3601":{
+		  "title":"Design Project A",
+		  "termsOffered":[
+			 "t1",
+			 "t2"
+		  ]
+	   }
+	},
+	"startYear":2021,
+	"numYears":3,
+	"years":[
+	   {
+		  "t1":[
+			 "COMP3333",
+			 "COMP1511"
+		  ],
+		  "t2":[
+			 "ARTS4268"
+		  ],
+		  "t3":[
+			 "CHEM1011"
+		  ]
+	   },
+	   {
+		  "t1":[
+			 "MATH1131"
+		  ],
+		  "t2":[
+			 "BIOC2201"
+		  ],
+		  "t3":[
+			 
+		  ]
+	   },
+	   {
+		  "t1":[
+			 "COMP2041"
+		  ],
+		  "t2":[
+			 
+		  ],
+		  "t3":[
+			 "ENGG1000"
+		  ]
+	   }
+	]
+ }

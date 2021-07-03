@@ -4,7 +4,7 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import DraggableCourse from "./DraggableCourse";
 import { useSelector } from "react-redux";
 
-function TermBox({ name, courses, courseNames, termsOffered, isDragFinished }) {
+function TermBox({ name, courses, courseNames, termsOffered, isDragging }) {
   const term = name.match(/t[0-3]/)[0];
   let isDropDisabled = true;
   if (termsOffered.includes(term)) {
@@ -27,15 +27,15 @@ function TermBox({ name, courses, courseNames, termsOffered, isDragFinished }) {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            backgroundColor: theme === "light" ? "#D170FF" : "#6E45FE",
-            borderColor: theme === "light" ? "#D170FF" : "#6E45FE",
+            backgroundColor: theme === "light" ? "#D170FF" : "#9B53E5",
+            borderColor: theme === "light" ? "#D170FF" : "#9B53E5",
           }}
         >
           <ul
             ref={provided.innerRef}
             {...provided.droppableProps}
             className={
-              !isDropDisabled && !isDragFinished
+              !isDropDisabled && isDragging
                 ? "droppable termBubble"
                 : "termBubble"
             }
