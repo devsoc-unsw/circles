@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Typography } from "antd";
 import { useSpring, animated } from "react-spring";
 import DegreeComponentCard from "./DegreeComponentCard";
 import LiquidProgressChart from "./LiquidProgressChart";
 import SkeletonDashboard from "./SkeletonDashboard";
 
-const Dashboard = ({ loading, degree }) => {
+const Dashboard = ({ isLoading, degree }) => {
   const { Title } = Typography;
   const currYear = new Date().getFullYear();
 
@@ -18,7 +18,7 @@ const Dashboard = ({ loading, degree }) => {
 
   return (
     <div className="container">
-      {loading ? (
+      {isLoading ? (
         <SkeletonDashboard />
       ) : (
         <animated.div className="centered" style={props}>
@@ -36,13 +36,7 @@ const Dashboard = ({ loading, degree }) => {
           </a>
           <div className="cards">
             {degree["concentrations"].map((concentration, index) => (
-              <DegreeComponentCard
-                key={index}
-                title={concentration["name"]}
-                subTitle={concentration["type"]}
-                completedUOC={concentration["completed_UOC"]}
-                totalUOC={concentration["UOC"]}
-              />
+              <DegreeComponentCard key={index} concentration={concentration} />
             ))}
           </div>
         </animated.div>

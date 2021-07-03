@@ -18,13 +18,13 @@ function App() {
     <div>
       {degree == null ? (
         <div>
-          Select your degree, replace with dropdown
+          {/* Select your degree, replace with dropdown
           <Button
             type="primary"
             onClick={() => dispatch(updateDegree("some chosen degree"))}
           >
             UPDATE
-          </Button>
+          </Button> */}
           <ThemeToggle />
           <ProgressionChecker />
         </div>

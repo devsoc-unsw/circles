@@ -5,12 +5,12 @@ import axios from "axios";
 
 const ProgressionChecker = () => {
   const [degree, setDegree] = useState({});
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchDegree = async () => {
     const res = await axios.get("degree.json");
     setDegree(res.data);
-    setLoading(false);
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -20,8 +20,8 @@ const ProgressionChecker = () => {
 
   return (
     <>
-      <Dashboard loading={loading} degree={degree} />
-      <ListView loading={loading} degree={degree} />
+      <Dashboard isLoading={isLoading} degree={degree} />
+      <ListView isLoading={isLoading} degree={degree} />
     </>
   );
 };

@@ -2,12 +2,12 @@ import React from "react";
 import { Typography } from "antd";
 import { Skeleton } from "antd";
 
-const ListView = ({ loading, degree }) => {
+const ListView = ({ isLoading, degree }) => {
   const { Title } = Typography;
 
   return (
     <>
-      {loading ? (
+      {isLoading ? (
         <Skeleton />
       ) : (
         <>

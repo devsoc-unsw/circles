@@ -33,20 +33,6 @@ const LiquidProgressChart = ({ completedUOC, totalUOC }) => {
     textColor = "white";
   }
 
-  // increment percentage from 0 to fillValue
-  useEffect(() => {
-    var data = 0.0;
-    const time = 30;
-    var interval = setInterval(function () {
-      data += 0.01;
-      if (data <= fillValue + 0.01) {
-        setPercent(data);
-      } else {
-        clearInterval(interval);
-      }
-    }, time);
-  }, []);
-
   var config = {
     percent: percent,
     radius: 1,
@@ -75,10 +61,24 @@ const LiquidProgressChart = ({ completedUOC, totalUOC }) => {
     }),
   };
 
+  // increment percentage from 0 to fillValue
+  useEffect(() => {
+    var data = 0.0;
+    const time = 30;
+    var interval = setInterval(function () {
+      data += 0.01;
+      if (data <= fillValue + 0.01) {
+        setPercent(data);
+      } else {
+        clearInterval(interval);
+      }
+    }, time);
+  }, []);
+
   return (
     <div>
-      <ReactTooltip place="bottom">
-        {completedUOC}/{totalUOC} UOC
+      <ReactTooltip place="bottom" type={theme === "dark" && "light"}>
+        {completedUOC} / {totalUOC} UOC
       </ReactTooltip>
       <div data-tip>
         <Liquid {...config} chartRef={(chartRef) => (ref = chartRef)} />

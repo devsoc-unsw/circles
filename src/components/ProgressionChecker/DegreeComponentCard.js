@@ -3,18 +3,24 @@ import { Card, Progress, Typography } from "antd";
 import ReactTooltip from "react-tooltip";
 import { purple } from "@ant-design/colors";
 import { Link } from "react-scroll";
+import { useSelector } from "react-redux";
 
-const DegreeComponentCard = ({ title, subTitle, completedUOC, totalUOC }) => {
+const DegreeComponentCard = ({ concentration }) => {
   const { Title, Text } = Typography;
-  const progress = Math.round((completedUOC / totalUOC) * 100);
+  const { name, type, completed_UOC, UOC } = concentration;
+
+  const progress = Math.round((completed_UOC / UOC) * 100);
+
+  const theme = useSelector((state) => state.theme);
+
   return (
-    <Link to={title} smooth={true} duration={1000}>
+    <Link to={name} smooth={true} duration={1000}>
       <Card className="card text" hoverable bordered={false}>
         <Title className="text" level={5}>
-          {title}
+          {name}
         </Title>
-        <Text className="secondaryText">{subTitle}</Text>
-        <div data-tip data-for={subTitle}>
+        <Text className="secondaryText">{type}</Text>
+        <div data-tip data-for={type}>
           <Progress
             percent={progress}
             trailColor="white"
@@ -22,10 +28,15 @@ const DegreeComponentCard = ({ title, subTitle, completedUOC, totalUOC }) => {
             strokeColor={{ "0%": purple[3], "100%": purple[4] }}
           />
         </div>
-        <ReactTooltip id={subTitle} place="bottom" className="tooltip">
+        <ReactTooltip
+          id={type}
+          place="bottom"
+          className="tooltip"
+          type={theme === "dark" && "light"}
+        >
           <div>{progress}%</div>
           <div>
-            ({completedUOC}/{totalUOC} UOC)
+            ({completed_UOC} / {UOC} UOC)
           </div>
         </ReactTooltip>
       </Card>
