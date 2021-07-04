@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Input } from 'antd';
 import { FilterOutlined } from '@ant-design/icons';
 import classes from './CourseSelector.module.css';
+import SearchCourse from './SearchCourse';
 import CourseMenu from './CourseMenu';
 import CourseDescription from './CourseDescription';
 
@@ -32,7 +33,8 @@ export default function CourseSelector() {
             <h2 className={ `${classes.zero} ${classes.major}` }>{ degree.majors[0].code }</h2>
           </div>
           <div className={ classes.searchCont }>
-            <Search placeholder="Search a course" allowClear /* onSearch={onSearch} */ style={{ width: '20rem', marginRight: '0.5rem' }} />
+            <SearchCourse />
+            {/* <Search placeholder="Search a course" allowClear style={{ width: '20rem', marginRight: '0.5rem' }} /> */}
             <FilterOutlined style={{ cursor: 'pointer', fontSize: '1.3rem' }}/>
           </div>
         </div>
