@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import { Button } from 'antd';
+import { Button, Tag } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import CourseList from './CourseList';
 import classes from './CourseDescription.module.css';
@@ -9,6 +9,7 @@ export default function CourseDescription() {
   const { id } = useParams();
   const [prereq, setPrereq] = useState(['COMP1511', 'DPST1091', 'COMP1917', 'COMP1921']);
   const [nextCourses, setNextCourses] = useState(['COMP2511']);
+  const [terms, setTerms] = useState([1, 3]);
   
   return (
     <div className={ classes.cont }>
@@ -31,7 +32,24 @@ export default function CourseDescription() {
         <CourseList data={ nextCourses }/>
       </div>
       <div>
-        yoo
+        <h3 className={ classes.subhead }>Faculty</h3>
+        <p>Faculty of Engineering</p>
+        <h3 className={ classes.subhead }>School</h3>
+        <p>School of Computer Science and Engineering</p>
+        <h3 className={ classes.subhead }>Study Level</h3>
+        <p>Undergraduate</p>
+        <h3 className={ classes.subhead }>Offering Terms</h3>
+        <div className={ classes.list }>
+          {
+            terms.map(term => {
+              return (
+                <Tag>{ isNaN(term) ? `${term} Term` : `Term ${term}` }</Tag>
+              )
+            })
+          }
+        </div>
+        <h3 className={ classes.subhead }>Campus</h3>
+        <p>Kensington</p>
       </div>
     </div>
   );

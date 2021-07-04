@@ -5,8 +5,8 @@
 }
 
 .contents {
-  margin-right: 2rem;
-  width: 65%;
+  margin-right: 4rem;
+  width: 75%;
 }
 
 .top {
@@ -31,4 +31,8 @@
 
 .btn {
   margin-bottom: 1.1rem;
+}
+
+.list {
+  margin-bottom: 1rem;
 }

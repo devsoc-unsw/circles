@@ -44,7 +44,7 @@ export default function CourseMenu() {
   return (
     <Menu
       onClick={handleClick}
-      style={{ width: 256 }}
+      style={{ width: '70%' }}
       defaultSelectedKeys={['1']}
       defaultOpenKeys={['sub1']}
       mode="inline"
