@@ -1,5 +1,58 @@
-# Getting Started with Create React App
+# Circles 
 
+## MVP Goals for Showcase 1 (FE)
+
+* User can select their degree (single and double), majors and minors
+* User can see all the courses relating to their degree
+* User can search through all available UNSW courses 
+* User can add a degree to their Term Planner, given they have achieved the pre-requisites
+* User can see the courses that a selected degree is required for - "Next courses"
+* User can visualise their term planner in a year form
+* User can drag and drop courses from one term to another term in their year planner
+* User can add or remove a year from their year planner
+* User can see a dashboard with statistics of their degree completion status 
+
+## Our Redux Store Data
+
+```
+"degree": {
+    "name": "",
+    "code": "", 
+    "length": 0,
+    "UOC": 0,
+    "completed_UOC": 0,
+    "concentrations": [ // example
+      {
+        "type": "major",
+        "name": "Cybersecurity",
+        "code": ""
+      },
+      {
+        "type": "specialization",
+        "name": "Software Engineering",
+        "code": ""
+      },
+      {
+        "type": "minor",
+        "name": "Information Systems",
+        "code": ""
+      }
+    ]
+  }
+
+  "selectedCourses": {
+    "COMP1511": { 
+      "name": "",
+      "terms": [],
+      "UOC": 0,
+      "campus": "",
+      "status": ""
+    }
+}
+
+
+
+```
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

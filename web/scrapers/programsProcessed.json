@@ -927,6 +927,14 @@
         "duration": "6 Year(s)",
         "courseList": null
     },
+    "3831": {
+        "title": "Science (Medicine) Honours",
+        "UOC": "48",
+        "studyLevel": "undergraduate",
+        "faculty": "Faculty of Medicine and Health",
+        "duration": "1 Year(s)",
+        "courseList": null
+    },
     "3835": {
         "title": "Commerce / Aviation (Management)",
         "UOC": "192",
@@ -1941,14 +1949,6 @@
         "studyLevel": "undergraduate",
         "faculty": "DVC (Academic) Board of Studies",
         "duration": "0.3 Year(s)",
-        "courseList": null
-    },
-    "3831": {
-        "title": "Science (Medicine) Honours",
-        "UOC": "48",
-        "studyLevel": "undergraduate",
-        "faculty": "Faculty of Medicine and Health",
-        "duration": "1 Year(s)",
         "courseList": null
     }
 }
