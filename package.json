@@ -3,14 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^4.11.3",
+    "@craco/craco": "^6.1.2",
     "@reduxjs/toolkit": "^1.5.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "antd": "^4.16.3",
+    "craco-less": "^1.17.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-flow-renderer": "^9.1.1",
+    "react-icons": "^4.2.0",
     "react-scripts": "4.0.3",
     "redux": "^4.0.5",
     "storybook": "^6.1.21",
@@ -18,9 +21,9 @@
     "yarn": "^1.22.10"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public"
