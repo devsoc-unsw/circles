@@ -1,0 +1,34 @@
+.cont {
+  padding: 1.6rem 2rem 1.6rem 2rem;
+  display: flex;
+  flex-direction: row;
+}
+
+.contents {
+  margin-right: 2rem;
+  width: 65%;
+}
+
+.top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.code {
+  margin-bottom: 0;
+  font-size: 1.1rem;
+}
+
+.name {
+  font-size: 1.5rem;
+}
+
+.subhead {
+  font-size: 1rem;
+}
+
+.btn {
+  margin-bottom: 1.1rem;
+}

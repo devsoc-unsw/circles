@@ -51,7 +51,7 @@ const initialState = {
             status: 'unplanned',
             prereq: ['COMP2521'],
             next: [],
-            type: 'core',
+            type: 'elective',
             level: 'Postgraduate',
             faculty: 'Faculty of Engineering',
             school: 'School of Computer Science and Engineering' 
