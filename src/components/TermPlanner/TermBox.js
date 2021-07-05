@@ -6,51 +6,42 @@ import { useSelector } from "react-redux";
 
 function TermBox({ name, courses, courseNames, termsOffered, isDragging }) {
   const term = name.match(/t[0-3]/)[0];
-  let isDropDisabled = true;
-  if (termsOffered.includes(term)) {
-    isDropDisabled = false;
-  }
+  const isDropAllowed = termsOffered.includes(term);
   const theme = useSelector((state) => {
     return state.theme;
   });
 
+  const badgeStyle = {
+    fontSize: "1rem",
+    width: "2em",
+    height: "2em",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: theme === "light" ? "#D170FF" : "#9B53E5",
+    borderColor: theme === "light" ? "#D170FF" : "#9B53E5",
+  };
+
   return (
-    <Droppable droppableId={name} isDropDisabled={isDropDisabled}>
-      {(provided, snapshot) => (
-        <Badge
-          offset={[-36, 36]}
-          count={12}
-          style={{
-            fontSize: "1rem",
-            width: "2em",
-            height: "2em",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            backgroundColor: theme === "light" ? "#D170FF" : "#9B53E5",
-            borderColor: theme === "light" ? "#D170FF" : "#9B53E5",
-          }}
+    <Droppable droppableId={name} isDropDisabled={!isDropAllowed}>
+      {(provided) => (
+        // <Badge offset={[-30, 30]} count={12} style={badgeStyle}>
+        <ul
+          ref={provided.innerRef}
+          {...provided.droppableProps}
+          className={`termBox ${isDropAllowed && isDragging && "droppable"}  `}
         >
-          <ul
-            ref={provided.innerRef}
-            {...provided.droppableProps}
-            className={
-              !isDropDisabled && isDragging
-                ? "droppable termBubble"
-                : "termBubble"
-            }
-          >
-            {courses.map((course, index) => (
-              <DraggableCourse
-                code={course}
-                index={index}
-                courseNames={courseNames}
-                key={course}
-              />
-            ))}
-            {provided.placeholder}
-          </ul>
-        </Badge>
+          {courses.map((code, index) => (
+            <DraggableCourse
+              key={code}
+              code={code}
+              index={index}
+              courseNames={courseNames}
+            />
+          ))}
+          {provided.placeholder}
+        </ul>
+        // </Badge>
       )}
     </Droppable>
   );

@@ -1,36 +1,49 @@
 import React, { useState, useEffect } from "react";
 
-import { Typography, Button, Drawer, Collapse } from "antd";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { Typography, Button, Drawer, Collapse, notification } from "antd";
+import { DragDropContext } from "react-beautiful-dnd";
 import DraggableCourse from "../components/TermPlanner/DraggableCourse";
 import TermBox from "../components/TermPlanner/TermBox";
 import { RightOutlined } from "@ant-design/icons";
 import axios from "axios";
 import OptionsDrawer from "../components/TermPlanner/OptionsDrawer";
+import SkeletonPlanner from "../components/TermPlanner/SkeletonPlanner";
 
 const TermPlanner = () => {
   const [years, setYears] = useState([{}]);
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [unplanned, setUnplanned] = useState({});
 
   const fetchCourses = async () => {
     const res = await axios.get("data.json");
     setData(res.data);
     setYears(res.data.years);
+    setUnplanned(res.data.Unplanned);
     setIsLoading(false);
+    isAllEmpty() && openNotification();
   };
 
   useEffect(() => {
-    // setTimeout(fetchDegree, 2000);  // testing skeleton
-    fetchCourses();
+    setTimeout(fetchCourses, 1000); // testing skeleton
+    //     fetchCourses();
   }, []);
-  console.log(data);
+
+  const isAllEmpty = () => {
+    for (const year of years) {
+      var termEmpty = Object.keys(year).every((key) => year[key].length === 0);
+      if (!termEmpty) return false;
+    }
+    return true;
+  };
 
   const handleOnDragEnd = (result) => {
     setIsDragging(false);
 
     const { destination, source, draggableId } = result;
-    if (!destination) return; // drag outside of droppable area
+    let newYears = [...years];
+
+    if (!destination) return; // drag outside container
     if (
       destination.droppableId === source.droppableId &&
       destination.index === source.index
@@ -38,18 +51,36 @@ const TermPlanner = () => {
       // drag to same place
       return;
 
+    const destYear = destination.droppableId.match(/[0-9]{4}/)[0];
+    const destTerm = destination.droppableId.match(/t[1-3]/)[0];
+    const destIndex = destYear - data.startYear;
+    const destBox = years[destIndex][destTerm];
+
+    // === move unplanned course to term ===
+    if (source.droppableId.match(/[0-9]{4}/) === null) {
+      // updated unplanned list
+      const type = source.droppableId;
+      const code = unplanned[type][source.index];
+      const unplannedCpy = Object.assign({}, unplanned);
+      unplannedCpy[type] = unplannedCpy[type].filter(
+        (course) => course !== code
+      );
+      setUnplanned(unplannedCpy);
+
+      // update destination term box
+      const destCoursesCpy = Array.from(years[destIndex][destTerm]);
+      destCoursesCpy.splice(destination.index, 0, draggableId);
+      newYears[destIndex][destTerm] = destCoursesCpy;
+      setYears(newYears);
+      return;
+    }
+
     const srcYear = source.droppableId.match(/[0-9]{4}/)[0];
     const srcTerm = source.droppableId.match(/t[1-3]/)[0];
     const srcIndex = srcYear - data.startYear;
     const srcBox = years[srcIndex][srcTerm];
 
-    const destYear = destination.droppableId.match(/[0-9]{4}/)[0];
-    const destTerm = destination.droppableId.match(/t[1-3]/)[0];
-    const destIndex = destYear - data.startYear;
-    const destBox = years[destIndex][destTerm];
-    let newYears = [...years];
-
-    // === move within one list ===
+    // === move within one term ===
     if (srcBox == destBox) {
       const alteredBox = Array.from(srcBox);
       alteredBox.splice(source.index, 1);
@@ -59,7 +90,7 @@ const TermPlanner = () => {
       return;
     }
 
-    // === move from one list to another ===
+    // === move from one term to another ===
     const srcCoursesCpy = Array.from(years[srcIndex][srcTerm]);
     srcCoursesCpy.splice(source.index, 1);
 
@@ -86,7 +117,9 @@ const TermPlanner = () => {
   return (
     <>
       {isLoading ? (
-        <>loading</>
+        <div className="container">
+          <SkeletonPlanner />
+        </div>
       ) : (
         <DragDropContext
           onDragEnd={handleOnDragEnd}
@@ -94,10 +127,11 @@ const TermPlanner = () => {
         >
           <div className="container">
             <Button
+              type="primary"
               icon={<RightOutlined />}
-              ghost
               onClick={() => setVisible(true)}
               shape="circle"
+              ghost
             />
             <div class="gridContainer">
               <div class="gridItem"></div>
@@ -124,13 +158,26 @@ const TermPlanner = () => {
             <OptionsDrawer
               visible={visible}
               setVisible={setVisible}
-              courses={data["courses"]}
+              data={data}
+              unplanned={unplanned}
             />
           </div>
         </DragDropContext>
       )}
     </>
   );
+};
+
+const openNotification = () => {
+  const args = {
+    message: "Your terms are looking a little empty",
+    description:
+      "Open the sidebar on the left to reveal courses that you've added from the course selector",
+    duration: 10,
+    className: "text helpNotif",
+    placement: "topRight",
+  };
+  notification["info"](args);
 };
 
 export default TermPlanner;

@@ -1,14 +1,15 @@
 {
 	"courses":{
-	   "COMP3333":{
+	   "COMP3821":{
 		  "title":"Extended algorithms and programming techniques",
+		  "type": "Core",
 		  "termsOffered":[
-			 "t1",
-			 "t3"
+			 "t1"
 		  ]
 	   },
 	   "ARTS4268":{
 		  "title":"Methodologies in the Social Sciences: Questions and Quandaries",
+		  "type": "General Education",
 		  "termsOffered":[
 			 "t1",
 			 "t2"
@@ -16,6 +17,7 @@
 	   },
 	   "COMP1511":{
 		  "title":"Programming Fundamentals",
+		  "type": "Core",
 		  "termsOffered":[
 			 "t1",
 			 "t2",
@@ -24,6 +26,7 @@
 	   },
 	   "CHEM1011":{
 		  "title":"Chemistry 1A",
+		  "type": "Elective",
 		  "termsOffered":[
 			 "t1",
 			 "t2",
@@ -32,6 +35,7 @@
 	   },
 	   "MATH1131":{
 		  "title":"Mathematics 1A",
+		  "type": "Core", 
 		  "termsOffered":[
 			 "t1",
 			 "t2",
@@ -40,25 +44,28 @@
 	   },
 	   "BIOC2201":{
 		  "title":"Biochemistry",
+		  "type": "Elective", 
 		  "termsOffered":[
-			 "t2"
+			 "t3"
 		  ]
 	   },
 	   "ENGG1000":{
 		  "title":"Introduction to Engineering Design and Innovation",
+		  "type": "Core",
 		  "termsOffered":[
-			 "t3"
+			"t1", "t3" 
 		  ]
 	   },
 	   "COMP2041":{
 		  "title":"Software Construction: Techniques and Tools",
+		  "type": "Core",
 		  "termsOffered":[
-			 "t2",
-			 "t3"
+			 "t1"
 		  ]
 	   },
 	   "COMP4441":{
 		  "title":"Random Course",
+		  "type": "General Education", 
 		  "termsOffered":[
 			 "t1",
 			 "t2",
@@ -67,54 +74,68 @@
 	   },
 	   "COMP3131":{
 		  "title":"Programming Languages and Compilers",
+		  "type": "Elective",
 		  "termsOffered":[
 			 "t3"
 		  ]
 	   },
 	   "COMP3601":{
 		  "title":"Design Project A",
+		  "type": "Elective",
 		  "termsOffered":[
 			 "t1",
 			 "t2"
 		  ]
-	   }
+	   },
+	   "COMP3331":{
+		  "title":"Computer Networks and Applications",
+		  "type": "Core", 
+		  "termsOffered":[
+			 "t1",
+			 "t2",
+			 "t3"
+		  ]
+		},
+		"COMP3311":{
+			"title":"Database Systems",
+			"type": "Core",
+			"termsOffered":[
+			   "t1",
+			   "t3"
+			]
+		  }
 	},
 	"startYear":2021,
 	"numYears":3,
 	"years":[
 	   {
 		  "t1":[
-			 "COMP3333",
-			 "COMP1511"
 		  ],
 		  "t2":[
-			 "ARTS4268"
 		  ],
 		  "t3":[
-			 "CHEM1011"
 		  ]
 	   },
 	   {
 		  "t1":[
-			 "MATH1131"
+			 
 		  ],
 		  "t2":[
-			 "BIOC2201"
+			
 		  ],
 		  "t3":[
-			 
 		  ]
 	   },
 	   {
 		  "t1":[
-			 "COMP2041"
 		  ],
 		  "t2":[
-			 
 		  ],
 		  "t3":[
-			 "ENGG1000"
 		  ]
 	   }
-	]
+	],
+
+	"Unplanned": {"Core": ["COMP1511", "MATH1131", "COMP3331", "ENGG1000", "COMP2041", "COMP3311", "COMP3601"], "Elective": ["BIOC2201", "COMP3821", "CHEM1011"], "General Education": ["ARTS4268" ]}	
+
  }

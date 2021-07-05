@@ -10,6 +10,7 @@
 body {
   margin: 0;
   padding: 2em;
+
   .card {
     // margin-right: 1em;
     width: 20em;
@@ -40,14 +41,15 @@ body {
     text-align: center;
   }
 
-  .termBubble {
+  .termBox {
     margin: 0.5em;
     font-size: 30px;
     min-height: 10em;
+    min-width: 12em;
     color: white;
     list-style: none;
     padding: 1.2em;
-    border-radius: 3em;
+    border-radius: 2em;
     transition: 200ms ease-out;
   }
 
@@ -59,6 +61,7 @@ body {
     padding-left: 1em;
     border-radius: 1em;
     max-width: 20em;
+    min-width: 12em;
     margin-top: 1em;
   }
 
@@ -67,16 +70,38 @@ body {
     align-items: center;
     margin-top: 2em;
   }
+  .panel {
+    max-height: 30em;
+    margin-bottom: 1em;
+    overflow-y: scroll;
+    padding-right: 0.7em;
+  }
+  .skeletonTerm {
+    margin: 0.5em;
+    min-height: 10em;
+    min-width: 12em;
+    padding: 1.2em;
+    // border-radius: 2em;
 
-  //   .badge {
-  //     font-size: 1rem;
-  //     width: 2em;
-  //     height: 2em;
-  //     display: flex;
-  //     align-items: center;
-  //     justify-content: center;
-  //     border-color: #d170ff;
-  //   }
+    // background-image: linear-gradient(
+    //   to right,
+    //   #d9d9d9 0%,
+    //   rgba(0, 0, 0, 0.05) 20%,
+    //   #d9d9d9 40%,
+    //   #d9d9d9 100%
+    // );
+    // background-repeat: no-repeat;
+    // background-size: 100% 100%;
+    // animation: shimmer 1s linear infinite;
+    // @keyframes shimmer {
+    //   0% {
+    //     background-position: -450px 0;
+    //   }
+    //   100% {
+    //     background-position: 450px 0;
+    //   }
+    // }
+  }
 }
 
 .dark {
@@ -92,17 +117,17 @@ body {
     background-color: #17191a;
   }
 
-  .termBubble {
+  .termBox {
     background-color: #242728;
   }
 
   .course {
-    // background-color: #9254de;
-    background: linear-gradient(86.28deg, #7f76fd 4.34%, #4739e0 100%);
+    background-color: #9254de;
+    // background: linear-gradient(86.28deg, #7f76fd 4.34%, #4739e0 100%);
   }
 
   .droppable {
-    background-color: #2b2f30;
+    background-color: #333738;
   }
 
   .plannerDrawer {
@@ -118,10 +143,21 @@ body {
   .ant-collapse-content-box {
     background-color: #26292b;
   }
+
+  .helpNotif {
+    background-color: #151718;
+    .ant-notification-close-icon {
+      color: #ffffff;
+    }
+  }
+  .panel {
+    scrollbar-width: thin;
+    scrollbar-color: #323739 #25292b;
+  }
 }
 
 .light {
-  background-color: #ffffff; //gray-2
+  background-color: #ffffff;
   color: #323739;
   .text {
     color: #323739;
@@ -138,7 +174,7 @@ body {
     // color: white;
   }
 
-  .termBubble {
+  .termBox {
     // background-color: #faf5fc;
     // border: 0.5px solid #e6c3f8;
     border: 0.5px solid #d9d9d9;
@@ -160,5 +196,20 @@ body {
   }
   .ant-collapse-content-box {
     // background-color: #faf5fc;
+  }
+  .helpNotif {
+    background-color: #9685f3;
+    color: #ffffff;
+    .ant-notification-close-icon {
+      color: #ffffff;
+    }
+
+    .anticon-info-circle {
+      color: #ffffff;
+    }
+  }
+  .panel {
+    scrollbar-width: thin;
+    scrollbar-color: #d9d9d9 white;
   }
 }
