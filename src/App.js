@@ -8,6 +8,7 @@ import ThemeToggle from "./components/ThemeToggle";
 import ProgressionChecker from "./pages/ProgressionChecker";
 import TermPlanner from "./pages/TermPlanner";
 import "./progressionChecker.less";
+import "./termPlanner.less";
 
 function App() {
   // Note: You can access the state from any component since it is passed down from root!

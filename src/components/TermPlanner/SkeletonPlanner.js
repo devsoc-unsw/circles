@@ -14,22 +14,22 @@ function SkeletonPlanner() {
 
   return (
     <div className="gridContainer">
-      <div className="gridItem"></div>
+      <div className="gridItem" />
       <div className="gridItem">Term 1</div>
       <div className="gridItem">Term 2</div>
       <div className="gridItem">Term 3</div>
 
-      <div className="gridItem">2021</div>
+      <div className="gridItem" />
       <Skeleton.Button active={true} shape="round" style={skeletonTermStyle} />
       <Skeleton.Button active={true} shape="round" style={skeletonTermStyle} />
       <Skeleton.Button active={true} shape="round" style={skeletonTermStyle} />
 
-      <div className="gridItem">2021</div>
+      <div className="gridItem" />
       <Skeleton.Button active={true} shape="round" style={skeletonTermStyle} />
       <Skeleton.Button active={true} shape="round" style={skeletonTermStyle} />
       <Skeleton.Button active={true} shape="round" style={skeletonTermStyle} />
 
-      <div className="gridItem">2021</div>
+      <div className="gridItem" />
       <Skeleton.Button active={true} shape="round" style={skeletonTermStyle} />
       <Skeleton.Button active={true} shape="round" style={skeletonTermStyle} />
       <Skeleton.Button active={true} shape="round" style={skeletonTermStyle} />

@@ -1,70 +1,9 @@
 @import "~antd/lib/style/themes/default.less";
 @import "~antd/dist/antd.less";
-// @import "~antd/dist/antd.dark.css";
-
-// .ant-collapse-header {
-//   background-color: black;
-//   color: white;
-// }
 
 body {
   margin: 0;
   padding: 2em;
-
-  .gridContainer {
-    display: grid;
-    grid-template-columns: 10em 1fr 1fr 1fr;
-    padding: 10px;
-    align-items: center;
-    max-width: 100em;
-    margin: auto auto;
-  }
-  .gridItem {
-    font-size: 30px;
-    text-align: center;
-  }
-
-  .termBox {
-    margin: 0.5em;
-    font-size: 30px;
-    min-height: 10em;
-    min-width: 12em;
-    color: white;
-    list-style: none;
-    padding: 1.2em;
-    border-radius: 2em;
-    transition: 200ms ease-out;
-  }
-
-  .course {
-    font-size: 0.9rem;
-    cursor: pointer;
-    padding: 0.7em;
-    padding-right: 1em;
-    padding-left: 1em;
-    border-radius: 1em;
-    max-width: 20em;
-    min-width: 12em;
-    margin-top: 1em;
-  }
-
-  .container {
-    display: flex;
-    align-items: center;
-    margin-top: 2em;
-  }
-  .panel {
-    max-height: 30em;
-    margin-bottom: 1em;
-    overflow-y: scroll;
-    padding-right: 0.7em;
-  }
-  .skeletonTerm {
-    margin: 0.5em;
-    min-height: 10em;
-    min-width: 12em;
-    padding: 1.2em;
-  }
 }
 
 .dark {
@@ -76,43 +15,6 @@ body {
   .secondaryText {
     color: #737372;
   }
-  .termBox {
-    background-color: #242728;
-  }
-
-  .course {
-    background-color: #9254de;
-    // background: linear-gradient(86.28deg, #7f76fd 4.34%, #4739e0 100%);
-  }
-
-  .droppable {
-    background-color: #333738;
-  }
-
-  .plannerDrawer {
-    background-color: #17191a;
-  }
-
-  .collapse {
-    background-color: #1d1f20;
-    border: #17191a;
-    margin-bottom: 1em;
-  }
-
-  .ant-collapse-content-box {
-    background-color: #26292b;
-  }
-
-  .helpNotif {
-    background-color: #151718;
-    .ant-notification-close-icon {
-      color: #ffffff;
-    }
-  }
-  .panel {
-    scrollbar-width: thin;
-    scrollbar-color: #323739 #25292b;
-  }
 }
 
 .light {
@@ -123,50 +25,5 @@ body {
   }
   .secondaryText {
     color: #737372;
-  }
-
-  .course {
-    // background-color: #be7df2;
-    background-color: #d9d9d9;
-    // color: white;
-  }
-
-  .termBox {
-    // background-color: #faf5fc;
-    // border: 0.5px solid #e6c3f8;
-    border: 0.5px solid #d9d9d9;
-    // filter: drop-shadow(1px 2px 4px rgba(0, 0, 0, 0.25));
-  }
-
-  .droppable {
-    background-color: #dbffec;
-    border-style: none;
-  }
-
-  .plannerDrawer {
-    background: #ffffff;
-  }
-
-  .collapse {
-    background-color: #9685f3;
-    margin-bottom: 1em;
-  }
-  .ant-collapse-content-box {
-    // background-color: #faf5fc;
-  }
-  .helpNotif {
-    background-color: #9685f3;
-    color: #ffffff;
-    .ant-notification-close-icon {
-      color: #ffffff;
-    }
-
-    .anticon-info-circle {
-      color: #ffffff;
-    }
-  }
-  .panel {
-    scrollbar-width: thin;
-    scrollbar-color: #d9d9d9 white;
   }
 }
