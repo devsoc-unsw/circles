@@ -57,22 +57,6 @@ function App() {
             <ThemeToggle />
           </Menu.Item>
         </Menu>
-        {/* <div>
-          {degree == null ? (
-            <div>
-              Select your degree, replace with dropdown
-              <Button
-                type="primary"
-                onClick={() => dispatch(updateDegree("some chosen degree"))}
-              >
-                UPDATE
-              </Button>
-              <ThemeToggle />
-            </div>
-          ) : (
-            <div>Hello! {degree}</div>
-          )}
-        </div> */}
         <Switch>
           <Route exact path="/">
             <Home />
