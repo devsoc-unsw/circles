@@ -1,0 +1,66 @@
+@import "~antd/lib/style/themes/default.less";
+
+body {
+  .container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .centered {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .textLink {
+    transition: 0.2s;
+    transition-timing-function: ease-in-out;
+    margin-bottom: 0.5em;
+    margin-top: 0.8em;
+    &:hover {
+      color: @purple-4;
+    }
+  }
+
+  .cards {
+    display: flex;
+    gap: 1em;
+    margin-top: 1em;
+  }
+
+  .card {
+    width: 20em;
+  }
+  .skeletonCard {
+    width: 20em;
+    height: 8em;
+  }
+  .listPage {
+    height: 100vh;
+    padding: 2em;
+  }
+  .progressBar {
+    margin-top: 0.5em;
+    color: white;
+  }
+
+  .tooltip {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.dark {
+  .card {
+    background-color: #17191a;
+  }
+}
+
+.light {
+  .card {
+    background-color: #f0f0f0; // gray-4
+  }
+}

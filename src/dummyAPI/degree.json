@@ -1,0 +1,31 @@
+{
+	"name": "Pearson",
+	"code": "3767", 
+	"length": 3,
+	"UOC": 240,
+	"completed_UOC": 108,
+	"concentrations": [ 
+	  {
+		"type": "Specialisation",
+		"name": "Software Engineering",
+		"code": "SENGAH",
+		"UOC": 168,
+		"completed_UOC": 72
+	  },
+	  {
+		"type": "Major",
+		"name": "Statistics",
+		"code": "MATHT1",
+		"UOC": 60,
+		"completed_UOC": 18
+	  },
+	  {
+		"type": "Minor",
+		"name": "Marine Science",
+		"code": "MSCIM1",
+		"UOC": 36,
+		"completed_UOC": 6
+	  }
+	]
+}
+  
