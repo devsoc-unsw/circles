@@ -1,30 +1,65 @@
 import React, { useState, useEffect } from "react";
-import { Liquid, measureTextWidth } from "@ant-design/charts";
+import { Liquid } from "@ant-design/charts";
 import ReactTooltip from "react-tooltip";
 import { useSelector } from "react-redux";
+import {
+  purple,
+  yellow,
+  lightYellow,
+  lightGrey,
+  darkGrey,
+} from "./ChartColors";
 
-function LiquidProgressChart({ completedUOC, totalUOC }) {
+const LiquidProgressChart = ({ completedUOC, totalUOC }) => {
   var [percent, setPercent] = useState(0);
-  var ref;
   var fillValue = completedUOC / totalUOC;
+  var ref;
 
+  // light mode text color varies
   var textColor;
-  // light mode
   if (percent < 0.31) {
-    textColor = "#f9b01e"; // yellow
+    textColor = lightYellow;
   } else if (percent < 0.45) {
-    textColor = "#565652"; // light grey
+    textColor = lightGrey;
   } else if (percent < 0.56) {
-    textColor = "#323739"; // dark grey
+    textColor = darkGrey;
   } else {
-    textColor = "white"; // white
+    textColor = "white";
   }
 
-  // dark mode has consistent white text
+  // dark mode always has white text
   const theme = useSelector((state) => state.theme);
   if (theme === "dark") {
     textColor = "white";
   }
+
+  var config = {
+    percent: percent,
+    radius: 1,
+    width: 320,
+    height: 320,
+    autoFit: false,
+    statistic: {
+      title: {
+        formatter: () => "Progress",
+        style: () => ({
+          fill: textColor,
+        }),
+      },
+      content: {
+        style: () => ({
+          fontSize: 60,
+          lineHeight: 1,
+          fill: textColor,
+        }),
+        formatter: () => (percent * 100).toFixed(0) + "%",
+      },
+    },
+    liquidStyle: () => ({
+      fill: percent > 0.45 ? purple : yellow,
+      stroke: percent > 0.45 ? purple : yellow,
+    }),
+  };
 
   // increment percentage from 0 to fillValue
   useEffect(() => {
@@ -40,54 +75,16 @@ function LiquidProgressChart({ completedUOC, totalUOC }) {
     }, time);
   }, []);
 
-  var config = {
-    percent,
-    radius: 1,
-    width: 320,
-    height: 320,
-    autoFit: false,
-    statistic: {
-      title: {
-        formatter: function formatter() {
-          return "Progress";
-        },
-        style: function style() {
-          return {
-            fill: textColor,
-          };
-        },
-      },
-      content: {
-        style: function style() {
-          return {
-            fontSize: 60,
-            lineHeight: 1,
-            fill: textColor,
-          };
-        },
-        formatter: function formatter() {
-          return (percent * 100).toFixed(0) + "%";
-        },
-      },
-    },
-    liquidStyle: function liquidStyle() {
-      return {
-        fill: percent > 0.45 ? "#9254de" : "#FAAD14",
-        stroke: percent > 0.45 ? "#9254de" : "#FAAD14",
-      };
-    },
-  };
-
   return (
     <div>
-      <ReactTooltip place="bottom">
-        {completedUOC}/{totalUOC} UOC
+      <ReactTooltip place="bottom" type={theme === "dark" && "light"}>
+        {completedUOC} / {totalUOC} UOC
       </ReactTooltip>
       <div data-tip>
         <Liquid {...config} chartRef={(chartRef) => (ref = chartRef)} />
       </div>
     </div>
   );
-}
+};
 
 export default LiquidProgressChart;
