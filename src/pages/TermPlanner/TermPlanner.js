@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 
 import { Typography, Button, Drawer, Collapse, notification } from "antd";
 import { DragDropContext } from "react-beautiful-dnd";
-import DraggableCourse from "../components/TermPlanner/DraggableCourse";
-import TermBox from "../components/TermPlanner/TermBox";
+import DraggableCourse from "../../components/TermPlanner/DraggableCourse";
+import TermBox from "../../components/TermPlanner/TermBox";
 import { RightOutlined } from "@ant-design/icons";
 import axios from "axios";
-import OptionsDrawer from "../components/TermPlanner/OptionsDrawer";
-import SkeletonPlanner from "../components/TermPlanner/SkeletonPlanner";
+import OptionsDrawer from "../../components/TermPlanner/OptionsDrawer";
+import SkeletonPlanner from "../../components/TermPlanner/SkeletonPlanner";
 
 const TermPlanner = () => {
   const [years, setYears] = useState([{}]);

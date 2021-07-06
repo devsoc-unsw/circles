@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Dashboard from "../components/ProgressionChecker/Dashboard";
-import ListView from "../components/ProgressionChecker/ListView";
+import Dashboard from "../../components/ProgressionChecker/Dashboard";
+import ListView from "../../components/ProgressionChecker/ListView";
 import axios from "axios";
 
 const ProgressionChecker = () => {
