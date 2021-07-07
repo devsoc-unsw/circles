@@ -1,62 +1,66 @@
 import React, { useState } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { updateDegree, resetDegree } from "./actions/updateDegree";
 import { appendCourse, deleteCourse } from "./actions/updateCourses";
-import { Button, Menu } from "antd";
-import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
+import { Menu, Layout } from "antd";
 import "./App.less";
 import ThemeToggle from "./components/ThemeToggle";
-import Home from './pages/Home';
+import Home from "./pages/Home";
 import CourseSelector from "./pages/CourseSelector/CourseSelector";
 import DegreeSelector from "./pages/DegreeSelector/DegreeSelector";
 import TermPlanner from "./pages/TermPlanner/TermPlanner";
 import ProgressionChecker from "./pages/ProgressionChecker/ProgressionChecker";
 
 const { SubMenu } = Menu;
+const { Header, Content } = Layout;
 
 function App() {
-  const [current, setCurrent] = useState('mail');
-  // Note: You can access the state from any component since it is passed down from root!
-  const degree = useSelector((state) => {
-    return state.degree;
+  const [current, setCurrent] = useState("home");
+  const theme = useSelector((state) => {
+    return state.theme;
   });
 
-  const dispatch = useDispatch();
-
   const handleClick = (e) => {
-    console.log('click ', e);
+    console.log("click ", e);
     setCurrent(e.key);
   };
 
   return (
-    <>
-      <Router>
-        <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
-          <Menu.Item key="home">
-            <Link to="/">Home</Link>
+    <Router>
+      <Header className="header">
+        <Menu
+          theme={theme}
+          onClick={handleClick}
+          selectedKeys={[current]}
+          mode="horizontal"
+          style={menuStyle}
+        >
+          <Menu.Item key="home" className="text">
+            <span>Home </span>
+            <Link to="/" />
           </Menu.Item>
-          <Menu.Item key="degree">
-            <Link to="/degree-selector">Degree Selector</Link>
+          <Menu.Item key="degree" className="text">
+            <span>Degree Selector </span>
+            <Link to="/degree-selector" />
           </Menu.Item>
-          <Menu.Item key="course">
-            <Link to="/course-selector">Course Selector</Link>
+          <Menu.Item key="course" className="text">
+            <span>Course Selector</span>
+            <Link to="/course-selector" />
           </Menu.Item>
-          <Menu.Item key="progression">
-            <Link to="/progression-checker">Progression Checker</Link>
+          <Menu.Item key="progression" className="text">
+            <span>Progression Checker</span>
+            <Link to="/progression-checker"></Link>
           </Menu.Item>
-          <Menu.Item key="planner">
-            <Link to="/term-planner">Term Planner</Link>
-          </Menu.Item>
-          <Menu.Item key="toggle">
-            <ThemeToggle />
+          <Menu.Item key="planner" className="text">
+            <span>Term Planner</span>
+            <Link to="/term-planner" />
           </Menu.Item>
         </Menu>
+        <ThemeToggle />
+      </Header>
+
+      <Content className="content">
         <Switch>
           <Route exact path="/">
             <Home />
@@ -74,10 +78,14 @@ function App() {
             <ProgressionChecker />
           </Route>
         </Switch>
-      </Router>
-    </>
+      </Content>
+    </Router>
   );
 }
+
+const menuStyle = {
+  backgroundColor: "inherit",
+};
 
 // How I imagine dispatch works
 // dispatch(data) {
