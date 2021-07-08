@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Switch } from "antd";
 import { IoMdMoon } from "react-icons/io";
 import { FaSun } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { toggleTheme } from "../actions/toggleTheme";
 
 function ThemeToggle() {
   const [theme, setTheme] = useState(() => {
@@ -9,8 +11,11 @@ function ThemeToggle() {
     return theme ? JSON.parse(theme) : "light";
   });
 
+  const dispatch = useDispatch();
+
   React.useEffect(() => {
     window.localStorage.setItem("theme", JSON.stringify(theme));
+    dispatch(toggleTheme(theme));
     if (theme === "light") {
       document.body.classList.remove("dark");
       document.body.classList.add("light");

@@ -1,18 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link
 } from 'react-router-dom';
-import './App.less';
+import "./App.less";
+// import ThemeToggle from "./components/ThemeToggle";
 import Home from './pages/Home';
-import CourseSelector from './pages/CourseSelector/CourseSelector';
-import CourseDescription from './pages/CourseSelector/CourseDescription';
-
+import CourseSelector from "./pages/CourseSelector/CourseSelector";
+import DegreeSelector from "./pages/DegreeSelector/DegreeSelector";
+import TermPlanner from "./pages/TermPlanner/TermPlanner";
+import ProgressionChecker from "./pages/ProgressionChecker/main";
 
 function App() {
-  // Note: You can access the state from any component since it is passed down from root!
   return (
     <>
       <Router>
@@ -23,26 +24,19 @@ function App() {
           <Route path="/course-selector">
             <CourseSelector />
           </Route>
+          <Route path="/term-planner">
+            <TermPlanner />
+          </Route>
+          <Route path="/degree-selector">
+            <DegreeSelector />
+          </Route>
+          <Route path="/progression-checker">
+            <ProgressionChecker />
+          </Route>
         </Switch>
       </Router>
     </>
   );
 }
-
-// How I imagine dispatch works
-// dispatch(data) {
-//   for (action in action) {
-//     if data.type = action {
-//       runReducer(data.params);
-//     }
-//   }
-// }
-
-// Click a button
-// Run a function (Reducer)
-// pass in action with information -> action.type  (Action)
-// Run the function which has the same type as action.type ()
-// Update the store (global store) with the next data
-// When any value within the store changes, components which use this value will re-render
 
 export default App;
