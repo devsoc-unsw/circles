@@ -1,12 +1,10 @@
-import updateCoursesReducer from "./updateCourses";
-import degreeReducer from "./degree";
-import degreetypeReducer from "./degreetype";
-import themeReducer from "./themeReducer";
 import { combineReducers } from "redux";
+import themeReducer from "./themeReducer";
+import updateCourses from "./updateCourses";
+import userReducer from "./userReducer";
 const allReducers = combineReducers({
-  degree: degreeReducer,
-  degreetype: degreetypeReducer,
-  updateCourses: updateCoursesReducer,
+  updateCourses: updateCourses,
+  user: userReducer,
   theme: themeReducer,
 });
 
