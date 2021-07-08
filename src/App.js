@@ -35,18 +35,6 @@ function App() {
   };
 
   return (
-    <div>
-      {degree == null ? (
-        <div>
-          <ThemeToggle />
-          <div>
-            <DegreeSelector />
-          </div>
-        </div>
-      ) : ( 
-        <div>Hello! {degree}</div>
-      )}
-    </div>
     <>
       <Router>
         <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
