@@ -37,6 +37,16 @@
 }
 
 .bottomCont {
+  display: grid;
+  grid-template-columns: 25vw 70vw;
+}
+
+.empty {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.emptyText {
+  text-align: center;
 }
