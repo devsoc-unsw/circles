@@ -5,9 +5,10 @@ import { appendCourse, deleteCourse } from "./actions/updateCourses";
 import { Button, Switch } from "antd";
 import "./App.less";
 import ThemeToggle from "./components/ThemeToggle";
+import DegreeSelector from "./components/DegreeSelector/DegreeSelector";
+import DegreeSelectorButton from  "./components/DegreeSelector/DegreeSelectorButton";
 
 function App() {
-  // Note: You can access the state from any component since it is passed down from root!
   const degree = useSelector((state) => {
     return state.degree;
   });
@@ -16,16 +17,12 @@ function App() {
     <div>
       {degree == null ? (
         <div>
-          Select your degree, replace with dropdown
-          <Button
-            type="primary"
-            onClick={() => dispatch(updateDegree("some chosen degree"))}
-          >
-            UPDATE
-          </Button>
           <ThemeToggle />
+          <div>
+            <DegreeSelector />
+          </div>
         </div>
-      ) : (
+      ) : ( 
         <div>Hello! {degree}</div>
       )}
     </div>
