@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import React, { useEffect, useState } from 'react';
-=======
-import React, { useEffect } from 'react';
->>>>>>> dev
 import {
   BrowserRouter as Router,
   Route,
