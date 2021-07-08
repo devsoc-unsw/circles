@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 
 import { Typography, Button, Drawer, Collapse, notification } from "antd";
 import { DragDropContext } from "react-beautiful-dnd";
-import DraggableCourse from "../../components/TermPlanner/DraggableCourse";
-import TermBox from "../../components/TermPlanner/TermBox";
+import DraggableCourse from "./DraggableCourse";
+import TermBox from "./TermBox";
 import { RightOutlined } from "@ant-design/icons";
 import axios from "axios";
-import OptionsDrawer from "../../components/TermPlanner/OptionsDrawer";
-import SkeletonPlanner from "../../components/TermPlanner/SkeletonPlanner";
+import OptionsDrawer from "./OptionsDrawer";
+import SkeletonPlanner from "./SkeletonPlanner";
+import "./main.less";
 
 const TermPlanner = () => {
   const [years, setYears] = useState([{}]);
@@ -19,23 +20,15 @@ const TermPlanner = () => {
     const res = await axios.get("data.json");
     setData(res.data);
     setYears(res.data.years);
-    setUnplanned(res.data.Unplanned);
+    setUnplanned(createUnplannedTypes(res.data));
     setIsLoading(false);
-    isAllEmpty() && openNotification();
+    isAllEmpty(years) && openNotification();
   };
 
   useEffect(() => {
     setTimeout(fetchCourses, 1000); // testing skeleton
     //     fetchCourses();
   }, []);
-
-  const isAllEmpty = () => {
-    for (const year of years) {
-      var termEmpty = Object.keys(year).every((key) => year[key].length === 0);
-      if (!termEmpty) return false;
-    }
-    return true;
-  };
 
   const handleOnDragEnd = (result) => {
     setIsDragging(false);
@@ -178,6 +171,31 @@ const openNotification = () => {
     placement: "topRight",
   };
   notification["info"](args);
+};
+
+// create separate array for each type
+// e.g. courseTypes = { Core: ["COMP1511", "COMP2521"], Elective: ["COMP6881"] }
+const createUnplannedTypes = (data) => {
+  if (data["unplanned"] == null) return {};
+  let courseTypes = {};
+  data["unplanned"].forEach((code) => {
+    const type = data["courses"][code]["type"];
+    if (!courseTypes.hasOwnProperty(type)) {
+      courseTypes[type] = [code];
+    } else {
+      courseTypes[type].push(code);
+    }
+  });
+  return courseTypes;
+};
+
+// checks if no courses have been planned (to display help notification)
+const isAllEmpty = (years) => {
+  for (const year of years) {
+    var termEmpty = Object.keys(year).every((key) => year[key].length === 0);
+    if (!termEmpty) return false;
+  }
+  return true;
 };
 
 export default TermPlanner;

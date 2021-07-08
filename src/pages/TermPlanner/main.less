@@ -1,6 +1,7 @@
-body {
+.content {
   .container {
     display: flex;
+    margin: 1em;
     align-items: center;
   }
   .gridContainer {
@@ -63,6 +64,12 @@ body {
     background-color: #757575; /* color of the scroll thumb */
     border-radius: 1em;
   }
+
+  .noUnplanned {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
 }
 
 .dark {
@@ -115,6 +122,10 @@ body {
       border-radius: 1em;
     }
   }
+
+  .alert {
+    background-color: #242728;
+  }
 }
 
 .light {
@@ -165,6 +176,13 @@ body {
     &::-webkit-scrollbar-thumb {
       background-color: #d9d9d9; /* color of the scroll thumb */
       border-radius: 1em;
+    }
+  }
+
+  .alert {
+    color: #323739;
+    .ant-alert-message {
+      color: #323739;
     }
   }
 }

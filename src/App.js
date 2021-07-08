@@ -1,70 +1,61 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { updateDegree, resetDegree } from "./actions/updateDegree";
-import { appendCourse, deleteCourse } from "./actions/updateCourses";
-import { Button, Menu } from "antd";
-import {
-  MailOutlined,
-  AppstoreOutlined,
-  SettingOutlined,
-} from "@ant-design/icons";
+import { useSelector } from "react-redux";
+import { Menu, Layout, Typography } from "antd";
 import "./App.less";
 import ThemeToggle from "./components/ThemeToggle";
-import "./progressionChecker.less";
-import "./termPlanner.less";
 import Home from "./pages/Home";
 import CourseSelector from "./pages/CourseSelector/CourseSelector";
 import DegreeSelector from "./pages/DegreeSelector/DegreeSelector";
-import TermPlanner from "./pages/TermPlanner/TermPlanner";
-import ProgressionChecker from "./pages/ProgressionChecker/ProgressionChecker";
+import ProgressionChecker from "./pages/ProgressionChecker/main";
+import TermPlanner from "./pages/TermPlanner/main";
+import circlesLogo from "./images/circlesLogo.svg";
 
-const { SubMenu } = Menu;
+const { Header, Content } = Layout;
 
 function App() {
-  const [current, setCurrent] = useState("mail");
-  // Note: You can access the state from any component since it is passed down from root!
-  const degree = useSelector((state) => {
-    return state.degree;
-  });
-
-  const dispatch = useDispatch();
+  const [current, setCurrent] = useState("progression");
 
   const handleClick = (e) => {
-    console.log("click ", e);
     setCurrent(e.key);
   };
 
+  const { Title } = Typography;
   return (
-    <>
-      <Router>
+    <Router>
+      <Header className="header">
+        <img src={circlesLogo} width="40" height="40" />
+        <Title level={3} style={titleStyles}>
+          Circles
+        </Title>
         <Menu
+          theme="dark"
           onClick={handleClick}
-          style={{ backgroundColor: "#1D1F20" }}
           selectedKeys={[current]}
           mode="horizontal"
+          style={menuStyles}
         >
-          <div className="menuItemWrapper">
-            <Menu.Item key="home">
-              <Link to="/">Home</Link>
-            </Menu.Item>
-          </div>
           <Menu.Item key="degree">
-            <Link to="/degree-selector">Degree Selector</Link>
+            <span>Degree Selector </span>
+            <Link to="/degree-selector" />
           </Menu.Item>
           <Menu.Item key="course">
-            <Link to="/course-selector">Course Selector</Link>
+            <span>Course Selector</span>
+            <Link to="/course-selector" />
           </Menu.Item>
           <Menu.Item key="progression">
-            <Link to="/progression-checker">Progression Checker</Link>
+            <span>Progression Checker</span>
+            <Link to="/progression-checker"></Link>
           </Menu.Item>
           <Menu.Item key="planner">
-            <Link to="/term-planner">Term Planner</Link>
-          </Menu.Item>
-          <Menu.Item key="toggle">
-            <ThemeToggle />
+            <span>Term Planner</span>
+            <Link to="/term-planner" />
           </Menu.Item>
         </Menu>
+        <ThemeToggle />
+      </Header>
+
+      <Content className="content">
         <Switch>
           <Route exact path="/">
             <Home />
@@ -82,25 +73,20 @@ function App() {
             <ProgressionChecker />
           </Route>
         </Switch>
-      </Router>
-    </>
+      </Content>
+    </Router>
   );
 }
 
-// How I imagine dispatch works
-// dispatch(data) {
-//   for (action in action) {
-//     if data.type = action {
-//       runReducer(data.params);
-//     }
-//   }
-// }
+const menuStyles = {
+  backgroundColor: "inherit",
+  marginLeft: "auto",
+  marginRight: "2em",
+};
 
-// Click a button
-// Run a function (Reducer)
-// pass in action with information -> action.type  (Action)
-// Run the function which has the same type as action.type ()
-// Update the store (global store) with the next data
-// When any value within the store changes, components which use this value will re-render
+const titleStyles = {
+  marginLeft: "0.3em",
+  marginBottom: "0",
+};
 
 export default App;

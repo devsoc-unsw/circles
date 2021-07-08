@@ -5,7 +5,7 @@ import { purple } from "@ant-design/colors";
 import { Link } from "react-scroll";
 import { useSelector } from "react-redux";
 
-const DegreeComponentCard = ({ concentration }) => {
+const DegreeCard = ({ concentration }) => {
   const { Title, Text } = Typography;
   const { name, type, completed_UOC, UOC } = concentration;
 
@@ -44,4 +44,4 @@ const DegreeComponentCard = ({ concentration }) => {
   );
 };
 
-export default DegreeComponentCard;
+export default DegreeCard;

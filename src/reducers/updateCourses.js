@@ -5,7 +5,7 @@ const updateCoursesReducer = (state = initialState, action) => {
             return state.append(action.payload); 
         case 'DELETE': 
             return state.filter((value, index) => {
-                return value != action.payload; 
+                return value !== action.payload; 
             }); 
         default: 
             return state; 
