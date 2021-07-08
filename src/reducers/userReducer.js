@@ -16,7 +16,7 @@ const initialState = {
     },
     unplanned: []
 }
-export default (state = initialState, action) => { 
+const userReducer = (state = initialState, action) => { 
     switch (action.type) { 
         case 'SET_UNPLANNED':
             // return { ...state, unplanned: action.payload };
@@ -29,3 +29,5 @@ export default (state = initialState, action) => {
             return state;    
     }
 };
+
+export default userReducer
