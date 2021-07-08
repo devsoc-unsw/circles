@@ -19,6 +19,7 @@ export default function SearchCourse(props) {
 
   function onChange(value) {
     console.log(`selected ${value}`);
+    props.setCourseId(value);
     history.push(`/course-selector/${value}`);
   }
   

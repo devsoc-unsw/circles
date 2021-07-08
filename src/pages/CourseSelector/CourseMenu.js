@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { getAllCourses } from '../../actions/updateCourses';
 import { Menu } from 'antd';
 
 const { SubMenu } = Menu;
 
 export default function CourseMenu(props) {
+  const { id } = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
   // const courses = useSelector(state => state.updateCourses.courses);
   const [core, setCore] = useState([]);
   const [electives, setElectives] = useState([]);
   const [genEd, setGenEd] = useState([]);
+  const [courseId, setCourseId] = useState('');
+
+  useEffect(() => {
+    setCourseId(props.courseId);
+  }, [props.courseId]);
 
   // useEffect(() => {
   //   console.log('COURSE MENU');
@@ -51,12 +57,13 @@ export default function CourseMenu(props) {
   return (
     <>
       {
-        core.length > 0 && electives.length > 0 && genEd.length > 0 &&
+        courseId && core.length > 0 && electives.length > 0 && genEd.length > 0 &&
         <Menu
           onClick={handleClick}
           style={{ width: '70%' }}
-          defaultSelectedKeys={[core[0]]}
-          defaultOpenKeys={['sub2']}
+          defaultSelectedKeys={[courseId !== '0' ? courseId : core[0]]}
+          selectedKeys={[courseId]}
+          defaultOpenKeys={['sub2', 'sub4', 'sub5']}
           mode="inline"
         >
           <SubMenu key="sub1" /* icon={<MailOutlined />} */ title="Recently Viewed">
