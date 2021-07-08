@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import { Menu, Layout, Typography } from "antd";
 import "./App.less";
 import ThemeToggle from "./components/ThemeToggle";
-import Home from "./pages/Home";
 import CourseSelector from "./pages/CourseSelector/CourseSelector";
 import DegreeSelector from "./pages/DegreeSelector/DegreeSelector";
 import TermPlanner from "./pages/TermPlanner/TermPlanner";
@@ -58,7 +57,8 @@ function App() {
       <Content className="content">
         <Switch>
           <Route exact path="/">
-            <Home />
+            <DegreeSelector />
+            {/* Change to term planner if user session active */}
           </Route>
           <Route path="/course-selector">
             <CourseSelector />
