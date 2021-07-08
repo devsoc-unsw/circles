@@ -5,21 +5,12 @@ import { Droppable } from "react-beautiful-dnd";
 import DraggableCourse from "./DraggableCourse";
 import { CloseOutlined } from "@ant-design/icons";
 import { useSelector } from "react-redux";
-import { DoubleRightOutlined } from "@ant-design/icons";
-import { Route, Switch } from "react-router-dom";
 
-const OptionsDrawer = ({
-  visible,
-  setVisible,
-  courseNames,
-  unplanned,
-  data,
-}) => {
+const OptionsDrawer = ({ visible, setVisible, unplanned, data }) => {
   const { Title } = Typography;
   const { Panel } = Collapse;
 
   const theme = useSelector((state) => state.theme);
-  console.log(unplanned);
   return (
     <Drawer
       placement="left"
@@ -32,30 +23,21 @@ const OptionsDrawer = ({
       bodyStyle={{
         background: theme === "dark" ? "#151718" : "white",
       }}
-      mask={false}
       width="28em"
+      mask={false}
     >
       <Title class="text">Options</Title>
       <Title level={2} class="text">
         Unplanned Courses
       </Title>
       {Object.keys(unplanned).length === 0 ? (
-        <div className="noUnplanned">
-          <Alert
-            message="Oops!" // might need to change this
-            description="It looks like you haven't added any courses to your term planner. Please do so in the course selector."
-            type="warning"
-            showIcon
-            className="alert"
-          />
-          <Switch>
-            <Route path="course-selector">
-              <Button type="primary" icon={<DoubleRightOutlined />}>
-                Course Selector
-              </Button>
-            </Route>
-          </Switch>
-        </div>
+        <Alert
+          message="Oops!" // might need to change this
+          description="It looks like you haven't added any courses to your term planner. Please do so in the course selector."
+          type="warning"
+          showIcon
+          className="alert"
+        />
       ) : (
         <Collapse className="collapse" ghost={theme === "dark"}>
           {Object.keys(unplanned).map((type, index) => (

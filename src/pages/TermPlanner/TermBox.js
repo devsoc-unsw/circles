@@ -7,25 +7,10 @@ import { useSelector } from "react-redux";
 function TermBox({ name, courses, courseNames, termsOffered, isDragging }) {
   const term = name.match(/t[0-3]/)[0];
   const isDropAllowed = termsOffered.includes(term);
-  const theme = useSelector((state) => {
-    return state.theme;
-  });
-
-  const badgeStyle = {
-    fontSize: "1rem",
-    width: "2em",
-    height: "2em",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: theme === "light" ? "#D170FF" : "#9B53E5",
-    borderColor: theme === "light" ? "#D170FF" : "#9B53E5",
-  };
 
   return (
     <Droppable droppableId={name} isDropDisabled={!isDropAllowed}>
       {(provided) => (
-        // <Badge offset={[-30, 30]} count={12} style={badgeStyle}>
         <ul
           ref={provided.innerRef}
           {...provided.droppableProps}
@@ -41,7 +26,6 @@ function TermBox({ name, courses, courseNames, termsOffered, isDragging }) {
           ))}
           {provided.placeholder}
         </ul>
-        // </Badge>
       )}
     </Droppable>
   );

@@ -26,8 +26,8 @@ const TermPlanner = () => {
   };
 
   useEffect(() => {
-    setTimeout(fetchCourses, 1000); // testing skeleton
-    //     fetchCourses();
+    //     setTimeout(fetchCourses, 1000); // testing skeleton
+    fetchCourses();
   }, []);
 
   const handleOnDragEnd = (result) => {
@@ -110,7 +110,7 @@ const TermPlanner = () => {
   return (
     <>
       {isLoading ? (
-        <div className="container">
+        <div className="plannerContainer">
           <SkeletonPlanner />
         </div>
       ) : (
@@ -118,7 +118,7 @@ const TermPlanner = () => {
           onDragEnd={handleOnDragEnd}
           onDragStart={handleOnDragStart}
         >
-          <div className="container">
+          <div className="plannerContainer">
             <Button
               type="primary"
               icon={<RightOutlined />}

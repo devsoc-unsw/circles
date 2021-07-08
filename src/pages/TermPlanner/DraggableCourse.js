@@ -7,8 +7,7 @@ function DraggableCourse({ code, index, courseNames }) {
   //   let code = course.match(/([A-Z]{4}[0-9]{4}):/)[1];
   const { Text } = Typography;
   const courseName = courseNames[code]["title"];
-  //   let types = [...new Set(courseNames.map((course) => course.type))];
-  //   console.log(types);
+
   return (
     <Draggable draggableId={code} index={index}>
       {(provided) => (
