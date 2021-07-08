@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Input } from 'antd';
 import { FilterOutlined } from '@ant-design/icons';
 import { getAllCourses } from '../../actions/updateCourses';
+import { getUnplannedCourses } from '../../actions/userAction';
 import classes from './CourseSelector.module.css';
 import SearchCourse from './SearchCourse';
 import CourseMenu from './CourseMenu';
@@ -20,11 +21,16 @@ export default function CourseSelector() {
   const dispatch = useDispatch();
   const courses = useSelector(state => state.updateCourses.courses);
   const degree = useSelector(state => state.user.degree);
+  const unplanned = useSelector(state => state.user.unplanned);
   const [courseId, setCourseId] = useState('0');
 
   // useEffect(() => {
   //   dispatch(getDegree());
   // }, []);
+
+  useEffect(() => {
+    dispatch(getUnplannedCourses());
+  }, []);
 
   useEffect(() => {
     console.log('COURSE MENU');
@@ -53,6 +59,7 @@ export default function CourseSelector() {
             <CourseDescription setCourseId={ setCourseId }/>
           </Route>
         </div>
+        {/* UNPLANNED {JSON.stringify(unplanned)} */}
       </div>
     </>
   );

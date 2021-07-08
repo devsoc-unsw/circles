@@ -5,6 +5,7 @@ import { Button, Tag } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import CourseList from './CourseList';
 import { getCourseById } from '../../actions/updateCourses';
+import { addUnplannedCourse, setUnplannedCourses } from '../../actions/userAction';
 import classes from './CourseDescription.module.css';
 
 export default function CourseDescription(props) {
@@ -16,6 +17,11 @@ export default function CourseDescription(props) {
     dispatch(getCourseById(id));
     props.setCourseId(id);
   }, [id]);
+
+  const addToPlanner = () => {
+    // dispatch(addUnplannedCourse(id));
+    dispatch(setUnplannedCourses(id));
+  }
   
   return (
     <div className={ classes.cont }>
@@ -25,7 +31,7 @@ export default function CourseDescription(props) {
             <h2 className={ classes.code }>{ id }</h2>
             <h1 className={ classes.name }>{ course.name }</h1>
           </div>
-          <Button className={ classes.btn } type="primary" icon={<PlusOutlined />}>
+          <Button className={ classes.btn } onClick={ addToPlanner } type="primary" icon={<PlusOutlined />}>
             Add to planner
           </Button>
         </div>

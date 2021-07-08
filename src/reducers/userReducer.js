@@ -13,10 +13,14 @@ const initialState = {
             }
         ],
         minors: []
-    }
+    },
+    unplanned: []
 }
 export default (state = initialState, action) => { 
     switch (action.type) { 
+        case 'SET_UNPLANNED':
+            // return { ...state, unplanned: action.payload };
+            return { ...state, unplanned: state.unplanned.concat(action.payload) };
         case 'UPDATE_DEGREE': 
             return { ...state, degree: action.payload };
         case 'RESET_DEGREE': 
