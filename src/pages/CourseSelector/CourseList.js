@@ -9,7 +9,6 @@ export default function CourseList(props) {
         props.data.map(course => {
           return (
             <Tag>{ course }</Tag>
-
           )
         })
       }
