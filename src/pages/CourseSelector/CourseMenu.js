@@ -1,37 +1,44 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { getAllCourses } from '../../actions/updateCourses';
 import { Menu } from 'antd';
-import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 
 const { SubMenu } = Menu;
 
-export default function CourseMenu() {
+export default function CourseMenu(props) {
   const history = useHistory();
-  const courses = useSelector(state => state.updateCourses.courses);
+  const dispatch = useDispatch();
+  // const courses = useSelector(state => state.updateCourses.courses);
   const [core, setCore] = useState([]);
   const [electives, setElectives] = useState([]);
   const [genEd, setGenEd] = useState([]);
 
+  // useEffect(() => {
+  //   console.log('COURSE MENU');
+  //   dispatch(getAllCourses());
+  // }, []);
+
   useEffect(() => {
-    if (courses) {
-      let currCore = [...core];
-      let currElec = [...electives];
-      let currGenEd = [...genEd];
-      for (const course in courses) {
-        if (courses[course].type === 'core') {
-          currCore.push(course);
-        } else if (courses[course].type === 'elective') {
-          currElec.push(course);
-        } else if (courses[course].type === 'gened') {
-          currGenEd.push(course);
-        }
-      };
-      setCore(currCore);
-      setElectives(currElec);
-      setGenEd(currGenEd);
-    }
-  }, []);
+    setCore([]);
+    setElectives([]);
+    setGenEd([]);
+    let currCore = [...core];
+    let currElec = [...electives];
+    let currGenEd = [...genEd];
+    for (const course in props.courses) {
+      if (props.courses[course].type === 'core') {
+        currCore.push(course);
+      } else if (props.courses[course].type === 'elective') {
+        currElec.push(course);
+      } else if (props.courses[course].type === 'gened') {
+        currGenEd.push(course);
+      }
+    };
+    setCore(currCore);
+    setElectives(currElec);
+    setGenEd(currGenEd);
+  }, [props.courses]);
 
   const handleClick = e => {
     console.log('click ', e);

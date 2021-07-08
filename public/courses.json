@@ -68,5 +68,19 @@
       "level": "Undergraduate",
       "faculty": "Faculty of Arts, Design, and Architecture",
       "school": "School of Arts & Design" 
+  },
+  "COMP1531": {
+    "name": "Introduction to Software Design",
+    "overview": "This course provides an introduction to software engineering principles: basic software lifecycle concepts, modern development methodologies, conceptual modeling and how these activities relate to programming. It also introduces the basic notions of team-based project management via conducting a project to design, build and deploy a simple web-based application. It is typically taken in the term after completing COMP1511, but could be delayed and taken later. It provides essential background for the teamwork and project management required in many later courses.",
+    "terms": [1, 3],
+    "UOC": 6,
+    "campus": "Kensington",
+    "status": "unplanned",
+    "prereq": ["COMP1511", "DPST1091", "COMP1921", "COMP1917"],
+    "next": ["COMP2511"],
+    "type": "core",
+    "level": "Undergraduate",
+    "faculty": "Faculty of Engineering",
+    "school": "School of Computer Science and Engineering" 
   }
 }

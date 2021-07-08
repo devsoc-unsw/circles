@@ -23,6 +23,10 @@ function App() {
           <Route path="/course-selector">
             <CourseSelector />
           </Route>
+          {/* <Route path="/course-selector/:id">
+            <CourseSelector />
+            <CourseDescription />
+          </Route> */}
         </Switch>
       </Router>
     </>
