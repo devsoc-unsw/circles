@@ -1,28 +1,84 @@
-import React from 'react';
+import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
+import { useSelector, useDispatch } from "react-redux";
 import 'antd/dist/antd.css';
-// import './index.css';
 import { Select } from 'antd';
+import { Typography } from 'antd';
+import { Button } from 'antd';
 
-export default function DegreeSelector() {
+function DegreeSelector() {
+  const { Option } = Select;
+  const { Title } = Typography;
+  const degreetype = ['Undergraduate','Postgraduate']
+  const degreeselect = ['Bachelor of Arts', 
+    'Bachelor of Computer Science',
+    'Bachelor of Commerce',
+    'Bachelor of Commerce/Law',
+    'Bachelor of Engineering (Honours)',
+    'Bachelor of Medical Studies/Doctor of Medicine'
+  ]
+  
+  const [degreeState,setdegreeState] = useState('');
+  const [degreetypeState,setdegreetypeState] = useState('');
+
+  const onButtonClick=(e)=>{
+    console.log('Button clicked')
+  }
+
   return (
-    <Select
-    showSearch
-    style={{ width: 200 }}
-    placeholder="Search to Select"
-    optionFilterProp="children"
-    filterOption={(input, option) =>
-      option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-    }
-    filterSort={(optionA, optionB) =>
-      optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
-    }
-  >
-    <Select value="1">Bachelor of Arts</Select>
-    <Select value="2">Bachelor of Commerce</Select>
-    <Select value="3">Bachelor of Computer Science</Select>
-    <Select value="4">Bachelor of Medical Studies/Doctor of Medicine</Select>
-    <Select value="5">Bachelor of Science</Select>
-    <Select value="6">Bachelor of Engineering (Honours)</Select>
-  </Select>
+    <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", height: "100vh" }}>
+      <Title className = "text" align="center">
+        I am an <span></span>
+          <Select
+            placeholder="Undergraduate"
+            onChange={(value)=>{
+              setdegreetypeState(value);
+            }} 
+          >
+            {degreetype.map((degreetype,index)=>{
+              return <Option key={index} value={degreetype}>
+                {degreetype}
+                </Option>
+            })}
+          </Select>
+          <span></span> student <span></span>
+        <p> studying a <span></span>
+          <Select
+            className="degreeSelect"
+            onChange={(value)=>{
+              setdegreeState(value);
+              // console.log(degreeState)
+            }} 
+            showSearch
+            style={{ width: '30%' }}
+            placeholder="Select Degree"
+            optionFilterProp="children"
+            filterOption={(input, option) => 
+              option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+            }
+            filterSort={(optionA, optionB) =>
+              optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
+            }
+          >
+            {degreeselect.map((degreeselect,index)=>{
+              return <Option key={index} value={degreeselect}>
+                {degreeselect}
+                </Option>
+            })}
+          </Select>
+          <span></span> degree
+        </p>
+        <Button type="primary" 
+            shape="round" 
+            size={'large'}
+            onClick={onButtonClick}
+            disabled={degreeState==='' || degreetypeState===''}
+            >
+            Start Planning
+        </Button>
+      </Title>
+    </div>
   );
 }
+
+export default DegreeSelector;
