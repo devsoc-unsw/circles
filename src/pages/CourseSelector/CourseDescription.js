@@ -34,7 +34,7 @@ export default function CourseDescription(props) {
       <div className={ classes.contents }>
         {
           show &&
-          <Alert message={`Yay, you've successfully added ${id} to your planner!` } type="success" className={`${classes.alert}` } showIcon closable afterClose={ hideAlert }/>
+          <Alert message={`Yay, you've successfully added ${id} to your planner!` } type="success" className={`${classes.alert}` } style={{ marginBottom: '1rem'}} showIcon closable afterClose={ hideAlert }/>
         }
         <div className={ classes.top }>
           <div>
@@ -48,9 +48,19 @@ export default function CourseDescription(props) {
         <h3 className={ `${classes.subhead} text` }>Overview</h3>
         <p className={`text`}>{ course.overview }</p>
         <h3 className={ `${classes.subhead} text` }>Prerequisites</h3>
-        <CourseList data={ course.prereq }/>
+        {
+          course.prereq.length > 0 ?
+          <CourseList data={ course.prereq }/>
+          :
+          <p className={`text`}>None</p>
+        }
         <h3 className={ `${classes.subhead} text` }>Unlocks these next courses</h3>
-        <CourseList data={ course.next }/>
+        {
+          course.next.length > 0 ?
+          <CourseList data={ course.next }/>
+          :
+          <p className={`text`}>None</p>
+        }
       </div>
       <div>
         <h3 className={ `${classes.subhead} text` }>Faculty</h3>

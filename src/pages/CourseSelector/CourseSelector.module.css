@@ -38,7 +38,7 @@
 
 .bottomCont {
   display: grid;
-  grid-template-columns: 25vw 70vw;
+  grid-template-columns: 20vw auto;
 }
 
 .empty {

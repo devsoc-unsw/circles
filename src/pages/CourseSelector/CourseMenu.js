@@ -61,14 +61,14 @@ export default function CourseMenu(props) {
         <Menu
           className={"text"}
           onClick={handleClick}
-          style={{ width: '70%' }}
+          style={{ width: '100%' }}
           defaultSelectedKeys={[courseId !== '0' ? courseId : core[0]]}
           selectedKeys={[courseId]}
           defaultOpenKeys={['sub2', 'sub4', 'sub5']}
           mode="inline"
         >
           <SubMenu className={"text"} key="sub1" /* icon={<MailOutlined />} */ title="Recently Viewed">
-            
+            <Menu.Item key={'0'} disabled>No courses here (ㆆ_ㆆ)</Menu.Item>
           </SubMenu>
           <SubMenu key="sub2" /* icon={<AppstoreOutlined />} */ title="Core">
             {
