@@ -26,8 +26,8 @@ const TermPlanner = () => {
   };
 
   useEffect(() => {
-    //     setTimeout(fetchCourses, 1000); // testing skeleton
-    fetchCourses();
+    setTimeout(fetchCourses, 1000); // testing skeleton
+    //     fetchCourses();
   }, []);
 
   const handleOnDragEnd = (result) => {

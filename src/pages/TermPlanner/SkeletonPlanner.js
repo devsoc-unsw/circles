@@ -5,11 +5,11 @@ function SkeletonPlanner() {
   const skeletonTermStyle = {
     //     height: "20em",
     //     width: "85%",
-    width: "25.5em",
-    height: "22em",
+    width: "20em",
+    height: "18em",
     margin: "1em",
     padding: "1.2em",
-    borderRadius: "4em",
+    borderRadius: "2em",
   };
 
   return (
