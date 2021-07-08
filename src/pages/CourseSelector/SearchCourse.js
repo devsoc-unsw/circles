@@ -1,4 +1,5 @@
 import React, { useState, useRef, useMemo, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Select, Spin } from 'antd';
 import debounce from 'lodash/debounce';
@@ -8,6 +9,7 @@ const { Option } = Select;
 
 export default function SearchCourse(props) {
   const dispatch = useDispatch();
+  const history = useHistory();
   // const courses = useSelector(state => state.updateCourses.courses);
 
   // useEffect(() => {
@@ -17,6 +19,7 @@ export default function SearchCourse(props) {
 
   function onChange(value) {
     console.log(`selected ${value}`);
+    history.push(`/course-selector/${value}`);
   }
   
   function onBlur() {

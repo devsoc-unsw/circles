@@ -7,8 +7,7 @@ import CourseList from './CourseList';
 import { getCourseById } from '../../actions/updateCourses';
 import classes from './CourseDescription.module.css';
 
-export default function CourseDescription(props) {
-  console.log(useRouteMatch())
+export default function CourseDescription() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const course = useSelector(state => state.updateCourses.course);
@@ -17,7 +16,6 @@ export default function CourseDescription(props) {
   const [terms, setTerms] = useState([1, 3]);
 
   useEffect(() => {
-    console.log("GET ID", id)
     dispatch(getCourseById(id));
   }, [id]);
   
@@ -52,7 +50,7 @@ export default function CourseDescription(props) {
           <h3 className={ classes.subhead }>Offering Terms</h3>
           <div className={ classes.list }>
             {
-              course.terms.map(term => {
+              course.terms && course.terms.map(term => {
                 return (
                   <Tag>{ isNaN(term) ? `${term} Term` : `Term ${term}` }</Tag>
                 )

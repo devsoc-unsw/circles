@@ -49,43 +49,48 @@ export default function CourseMenu(props) {
   }
 
   return (
-    <Menu
-      onClick={handleClick}
-      style={{ width: '70%' }}
-      defaultSelectedKeys={['1']}
-      defaultOpenKeys={['sub1']}
-      mode="inline"
-    >
-      <SubMenu key="sub1" /* icon={<MailOutlined />} */ title="Recently Viewed">
-
-      </SubMenu>
-      <SubMenu key="sub2" /* icon={<AppstoreOutlined />} */ title="Core">
-        {
-          core.map((course) => {
-            return (
-              <Menu.Item key={ course } onClick={ () => goToCourse(course) }>{ course }</Menu.Item>
-            )
-          })
-        }
-      </SubMenu>
-      <SubMenu key="sub4" /* icon={<SettingOutlined />} */ title="Electives">
-        {
-          electives.map((course) => {
-            return (
-              <Menu.Item key={ course } onClick={ () => goToCourse(course) }>{ course }</Menu.Item>
-            )
-          })
-        }
-      </SubMenu>
-      <SubMenu key="sub5" /* icon={<SettingOutlined />} */ title="General Education">
-        {
-          genEd.map((course) => {
-            return (
-              <Menu.Item key={ course } onClick={ () => goToCourse(course) }>{ course }</Menu.Item>
-            )
-          })
-        }
-      </SubMenu>
-    </Menu>
+    <>
+      {
+        core.length > 0 && electives.length > 0 && genEd.length > 0 &&
+        <Menu
+          onClick={handleClick}
+          style={{ width: '70%' }}
+          defaultSelectedKeys={[core[0]]}
+          defaultOpenKeys={['sub2']}
+          mode="inline"
+        >
+          <SubMenu key="sub1" /* icon={<MailOutlined />} */ title="Recently Viewed">
+            
+          </SubMenu>
+          <SubMenu key="sub2" /* icon={<AppstoreOutlined />} */ title="Core">
+            {
+              core.map((course) => {
+                return (
+                  <Menu.Item key={ course } onClick={ () => goToCourse(course) }>{ course }</Menu.Item>
+                )
+              })
+            }
+          </SubMenu>
+          <SubMenu key="sub4" /* icon={<SettingOutlined />} */ title="Electives">
+            {
+              electives.map((course) => {
+                return (
+                  <Menu.Item key={ course } onClick={ () => goToCourse(course) }>{ course }</Menu.Item>
+                )
+              })
+            }
+          </SubMenu>
+          <SubMenu key="sub5" /* icon={<SettingOutlined />} */ title="General Education">
+            {
+              genEd.map((course) => {
+                return (
+                  <Menu.Item key={ course } onClick={ () => goToCourse(course) }>{ course }</Menu.Item>
+                )
+              })
+            }
+          </SubMenu>
+        </Menu>
+      }
+    </>
   );
 }
