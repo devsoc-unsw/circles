@@ -14,7 +14,7 @@ import "./App.less";
 import ThemeToggle from "./components/ThemeToggle";
 import Home from './pages/Home';
 import CourseSelector from "./pages/CourseSelector/CourseSelector";
-import DegreeSelector from "./pages/DegreeSelector/DegreeSelector";
+import DegreeSelector from "./pages/DegreeSelector/main";
 import TermPlanner from "./pages/TermPlanner/TermPlanner";
 import ProgressionChecker from "./pages/ProgressionChecker/ProgressionChecker";
 
