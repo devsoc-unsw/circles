@@ -19,41 +19,40 @@ export default function CourseDescription(props) {
   useEffect(() => {
     console.log("GET ID", id)
     dispatch(getCourseById(id));
-  }, []);
+  }, [id]);
   
   return (
     <div className={ classes.cont }>
-      ID: {id}
-      <div>
-        {JSON.stringify(course)}
+      {/* ID: {id} */}
+        {/* {JSON.stringify(course)} */}
         <div className={ classes.contents }>
           <div className={ classes.top }>
             <div>
-              <h2 className={ classes.code }>COMP1531</h2>
-              <h1 className={ classes.name }>Introduction to Software Design</h1>
+              <h2 className={ classes.code }>{ id }</h2>
+              <h1 className={ classes.name }>{ course.name }</h1>
             </div>
             <Button className={ classes.btn } type="primary" icon={<PlusOutlined />}>
               Add to planner
             </Button>
           </div>
           <h3 className={ classes.subhead }>Overview</h3>
-          <p>This course provides an introduction to software engineering principles: basic software lifecycle concepts, modern development methodologies, conceptual modeling and how these activities relate to programming. It also introduces the basic notions of team-based project management via conducting a project to design, build and deploy a simple web-based application. It is typically taken in the term after completing COMP1511, but could be delayed and taken later. It provides essential background for the teamwork and project management required in many later courses.</p>
+          <p>{ course.overview }</p>
           <h3 className={ classes.subhead }>Prerequisites</h3>
-          <CourseList data={ prereq }/>
+          <CourseList data={ course.prereq }/>
           <h3 className={ classes.subhead }>Unlocks these next courses</h3>
-          <CourseList data={ nextCourses }/>
+          <CourseList data={ course.next }/>
         </div>
         <div>
           <h3 className={ classes.subhead }>Faculty</h3>
-          <p>Faculty of Engineering</p>
+          <p>{ course.faculty }</p>
           <h3 className={ classes.subhead }>School</h3>
-          <p>School of Computer Science and Engineering</p>
+          <p>{ course.school }</p>
           <h3 className={ classes.subhead }>Study Level</h3>
-          <p>Undergraduate</p>
+          <p>{ course.level }</p>
           <h3 className={ classes.subhead }>Offering Terms</h3>
           <div className={ classes.list }>
             {
-              terms.map(term => {
+              course.terms.map(term => {
                 return (
                   <Tag>{ isNaN(term) ? `${term} Term` : `Term ${term}` }</Tag>
                 )
@@ -61,9 +60,8 @@ export default function CourseDescription(props) {
             }
           </div>
           <h3 className={ classes.subhead }>Campus</h3>
-          <p>Kensington</p>
+          <p>{ course.campus }</p>
         </div>
-      </div>
     </div>
   );
 }

@@ -49,7 +49,7 @@ export default function CourseSelector() {
         <div className={ classes.bottomCont }>
           <CourseMenu courses={ courses } />
           <Route path="/course-selector/:id">
-          <CourseDescription />
+            <CourseDescription />
           </Route>
         </div>
       </div>

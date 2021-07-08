@@ -32,7 +32,7 @@ export const getAllCourses = () => {
     return (dispatch) => {
         axios({
             method: 'get',
-            url: 'courses.json'
+            url: 'http://localhost:3000/courses.json'
         })
         .then(({ data }) => {
             dispatch(setCourses(data));
@@ -46,14 +46,14 @@ export const getCourseById = (id) => {
     return (dispatch) => {
         axios({
             method: 'get',
-            url: 'courses.json'
+            url: 'http://localhost:3000/courses.json'
         })
         .then(({ data }) => {
             console.log('GOT DATA', data)
             Object.keys(data).map(course => {
             
                 if (course === id) {
-                    console.log('YOOO GOT IT')
+                    console.log('YOOO GOT IT', data[course])
                     dispatch(setCourse(data[course]));
                 }
             })
