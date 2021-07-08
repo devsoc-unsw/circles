@@ -25,12 +25,17 @@ function ThemeToggle() {
     }
   }, [theme]);
 
+  const toggleStyle = {
+    backgroundColor: theme === "light" ? "#b37feb" : "#722ed1",
+  };
+
   return (
     <Switch
       checkedChildren={<IoMdMoon display="flex" />}
-      unCheckedChildren={<FaSun display="flex" />}
+      unCheckedChildren={<IoMdMoon display="flex" />}
       defaultChecked={theme === "dark" ? true : false}
       onChange={() => setTheme(theme === "light" ? "dark" : "light")}
+      style={toggleStyle}
     />
   );
 }
