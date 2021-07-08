@@ -3,12 +3,20 @@
 
 body {
   margin: 0;
-  padding: 2em;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  background-color: @purple-5;
+  height: 70px;
 }
 
 .dark {
   background-color: #1d1f20;
   color: white;
+
   .text {
     color: #f0f0f0; // gray-4
   }
@@ -18,8 +26,9 @@ body {
 }
 
 .light {
-  background-color: #ffffff; //gray-2
+  background-color: #ffffff;
   color: #323739;
+
   .text {
     color: #323739;
   }
