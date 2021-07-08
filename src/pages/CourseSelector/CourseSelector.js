@@ -8,7 +8,7 @@ import { Input } from 'antd';
 import { FilterOutlined } from '@ant-design/icons';
 import { getAllCourses } from '../../actions/updateCourses';
 import { getUnplannedCourses } from '../../actions/userAction';
-import classes from './CourseSelectgor.module.css';
+import classes from './CourseSelector.module.css';
 import SearchCourse from './SearchCourse';
 import CourseMenu from './CourseMenu';
 import CourseDescription from './CourseDescription';
