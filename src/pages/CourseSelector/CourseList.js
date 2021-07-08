@@ -6,7 +6,7 @@ export default function CourseList(props) {
   return (
     <div className={ classes.list }>
       {
-        props.data.map(course => {
+        props.data && props.data.map(course => {
           return (
             <Tag>{ course }</Tag>
           )
