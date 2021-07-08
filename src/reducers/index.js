@@ -1,9 +1,11 @@
-import updateCoursesReducer from "./updateCourses"; 
+import { combineReducers } from "redux";
+import themeReducer from "./themeReducer";
+import updateCourses from "./updateCourses";
 import userReducer from "./userReducer";
-import { combineReducers } from 'redux';
-const allReducers = combineReducers({ 
-    user: userReducer,
-    updateCourses: updateCoursesReducer 
+const allReducers = combineReducers({
+  updateCourses: updateCourses,
+  user: userReducer,
+  theme: themeReducer,
 });
 
-export default allReducers; 
+export default allReducers;

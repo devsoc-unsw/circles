@@ -3,15 +3,36 @@
 
 body {
   margin: 0;
-  padding: 0;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  background-color: @purple-5;
+  height: 70px;
 }
 
 .dark {
-  background-color: #262626; //gray-10
+  background-color: #1d1f20;
   color: white;
+
+  .text {
+    color: #f0f0f0; // gray-4
+  }
+  .secondaryText {
+    color: #737372;
+  }
 }
 
 .light {
-  background-color: #f5f5f5; //gray-3
-  color: black;
+  background-color: #ffffff;
+  color: #323739;
+
+  .text {
+    color: #323739;
+  }
+  .secondaryText {
+    color: #737372;
+  }
 }
