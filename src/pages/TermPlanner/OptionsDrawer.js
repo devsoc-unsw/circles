@@ -23,7 +23,7 @@ const OptionsDrawer = ({ visible, setVisible, unplanned, data }) => {
       bodyStyle={{
         background: theme === "dark" ? "#151718" : "white",
       }}
-      width="28em"
+      width="25em"
       mask={false}
     >
       <Title class="text">Options</Title>
