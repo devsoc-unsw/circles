@@ -39,7 +39,7 @@ export default function SearchCourse(props) {
     <Select
       showSearch
       style={{ width: '20rem', marginRight: '0.5rem' }}
-      placeholder="Select a person"
+      placeholder="Find a course"
       optionFilterProp="children"
       onChange={onChange}
       onFocus={onFocus}
@@ -52,7 +52,7 @@ export default function SearchCourse(props) {
       {
         Object.keys(props.courses).map(course => {
           return (
-            <Option value={ course }>{ course }</Option>
+            <Option className={"text"} value={ course }>{ course }</Option>
           )
         })
       }

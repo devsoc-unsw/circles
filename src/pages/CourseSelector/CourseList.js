@@ -8,7 +8,7 @@ export default function CourseList(props) {
       {
         props.data && props.data.map(course => {
           return (
-            <Tag>{ course }</Tag>
+            <Tag className={`text`}>{ course }</Tag>
           )
         })
       }
