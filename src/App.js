@@ -6,8 +6,8 @@ import "./App.less";
 import ThemeToggle from "./components/ThemeToggle";
 import CourseSelector from "./pages/CourseSelector/CourseSelector";
 import DegreeSelector from "./pages/DegreeSelector/main";
-import TermPlanner from "./pages/TermPlanner/TermPlanner";
 import ProgressionChecker from "./pages/ProgressionChecker/main";
+import TermPlanner from "./pages/TermPlanner/main";
 import circlesLogo from "./images/circlesLogo.svg";
 
 const { Header, Content } = Layout;

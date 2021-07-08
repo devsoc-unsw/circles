@@ -135,7 +135,6 @@
 		  ]
 	   }
 	],
-
-	"Unplanned": {"Core": ["COMP1511", "MATH1131", "COMP3331", "ENGG1000", "COMP2041", "COMP3311", "COMP3601"], "Elective": ["BIOC2201", "COMP3821", "CHEM1011"], "General Education": ["ARTS4268" ]}	
+	"unplanned": ["COMP1511", "MATH1131", "COMP3331", "ENGG1000", "COMP2041", "COMP3311", "COMP3601"]
 
  }
