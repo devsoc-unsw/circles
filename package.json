@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "http://csesoc.github.io/Circles",
   "dependencies": {
+    "@ant-design/icons": "^4.6.2",
     "@ant-design/charts": "^1.1.17",
     "@craco/craco": "^6.1.2",
     "@reduxjs/toolkit": "^1.5.0",
