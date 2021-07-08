@@ -42,8 +42,8 @@ export default function CourseSelector() {
         <div className={ classes.topCont }>
         {/* { JSON.stringify(degree) } */}
           <div className={ classes.degreeCont }>
-            <h1 className={ classes.zero }>{ degree.code } - { degree.name }</h1>
-            <h2 className={ `${classes.zero} ${classes.major}` }>{ degree.majors[0].code }</h2>
+            <h1 className={ `${classes.zero} text` }>{ degree.code } - { degree.name }</h1>
+            <h2 className={ `${classes.zero} ${classes.major} text` }>{ degree.majors[0].code }</h2>
           </div>
           <div className={ classes.searchCont }>
             <SearchCourse courses={ courses } setCourseId={ setCourseId } />
@@ -53,6 +53,15 @@ export default function CourseSelector() {
         </div>
         <div className={ classes.bottomCont }>
           <CourseMenu courses={ courses } courseId={ courseId } />
+            {
+              courseId === '0' ?
+
+              <div className={ classes.empty }>
+                <h3 className={`text ${ classes.emptyText }`}>Select a course on the left to view! :)</h3>
+              </div>
+              :
+              <></>
+            }
           <Route path="/course-selector/:id">
             <CourseDescription setCourseId={ setCourseId }/>
           </Route>
