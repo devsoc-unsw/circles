@@ -1,9 +1,10 @@
+
 import React from "react";
 import { Typography } from "antd";
 import { useSpring, animated } from "react-spring";
-import DegreeComponentCard from "./DegreeComponentCard";
-import LiquidProgressChart from "./LiquidProgressChart";
+import DegreeCard from "./DegreeCard";
 import SkeletonDashboard from "./SkeletonDashboard";
+import LiquidProgressChart from "../../components/liquidProgressChart/LiquidProgressChart";
 
 const Dashboard = ({ isLoading, degree }) => {
   const { Title } = Typography;
@@ -36,7 +37,7 @@ const Dashboard = ({ isLoading, degree }) => {
           </a>
           <div className="cards">
             {degree["concentrations"].map((concentration, index) => (
-              <DegreeComponentCard key={index} concentration={concentration} />
+              <DegreeCard key={index} concentration={concentration} />
             ))}
           </div>
         </animated.div>
@@ -44,5 +45,6 @@ const Dashboard = ({ isLoading, degree }) => {
     </div>
   );
 };
+
 
 export default Dashboard;

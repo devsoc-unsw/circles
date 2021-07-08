@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Dashboard from "../components/ProgressionChecker/Dashboard";
-import ListView from "../components/ProgressionChecker/ListView";
+import Dashboard from "./Dashboard";
+import ListView from "./ListView";
 import axios from "axios";
-
+import './main.less';
 const ProgressionChecker = () => {
   const [degree, setDegree] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -27,3 +27,5 @@ const ProgressionChecker = () => {
 };
 
 export default ProgressionChecker;
+
+

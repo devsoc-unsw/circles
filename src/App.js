@@ -5,29 +5,24 @@ import {
   Route,
   Link
 } from 'react-router-dom';
-import { useSelector, useDispatch } from "react-redux";
-import { updateDegree, resetDegree } from "./actions/updateDegree";
-import { appendCourse, deleteCourse } from "./actions/updateCourses";
-import { Button, Menu } from "antd";
-import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
+import { useSelector } from "react-redux";
+import { Menu } from "antd";
 import "./App.less";
 import ThemeToggle from "./components/ThemeToggle";
 import Home from './pages/Home';
 import CourseSelector from "./pages/CourseSelector/CourseSelector";
 import DegreeSelector from "./pages/DegreeSelector/DegreeSelector";
 import TermPlanner from "./pages/TermPlanner/TermPlanner";
-import ProgressionChecker from "./pages/ProgressionChecker/ProgressionChecker";
+import ProgressionChecker from "./pages/ProgressionChecker/main";
 
-const { SubMenu } = Menu;
+// const { SubMenu } = Menu;
 
 function App() {
   const [current, setCurrent] = useState('mail');
   // Note: You can access the state from any component since it is passed down from root!
-  const degree = useSelector((state) => {
-    return state.degree;
-  });
-
-  const dispatch = useDispatch();
+  // const degree = useSelector((state) => {
+  //   return state.degree;
+  // });
 
   const handleClick = (e) => {
     console.log('click ', e);
