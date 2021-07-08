@@ -59,6 +59,7 @@ export default function CourseMenu(props) {
       {
         courseId && core.length > 0 && electives.length > 0 && genEd.length > 0 &&
         <Menu
+          className={"text"}
           onClick={handleClick}
           style={{ width: '70%' }}
           defaultSelectedKeys={[courseId !== '0' ? courseId : core[0]]}
@@ -66,7 +67,7 @@ export default function CourseMenu(props) {
           defaultOpenKeys={['sub2', 'sub4', 'sub5']}
           mode="inline"
         >
-          <SubMenu key="sub1" /* icon={<MailOutlined />} */ title="Recently Viewed">
+          <SubMenu className={"text"} key="sub1" /* icon={<MailOutlined />} */ title="Recently Viewed">
             
           </SubMenu>
           <SubMenu key="sub2" /* icon={<AppstoreOutlined />} */ title="Core">
