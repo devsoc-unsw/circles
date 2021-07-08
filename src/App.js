@@ -1,34 +1,30 @@
 import React, { useState } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Menu } from "antd";
+import { Menu, Layout, Typography } from "antd";
 import "./App.less";
 import ThemeToggle from "./components/ThemeToggle";
 import Home from "./pages/Home";
 import CourseSelector from "./pages/CourseSelector/CourseSelector";
 import DegreeSelector from "./pages/DegreeSelector/DegreeSelector";
 import TermPlanner from "./pages/TermPlanner/TermPlanner";
-import ProgressionChecker from "./pages/ProgressionChecker/ProgressionChecker";
+import ProgressionChecker from "./pages/ProgressionChecker/main";
+import circlesLogo from "./images/circlesLogo.svg";
+
 const { Header, Content } = Layout;
 
 function App() {
-  const [current, setCurrent] = useState("home");
-
+  const [current, setCurrent] = useState("progression");
 
   const handleClick = (e) => {
     setCurrent(e.key);
   };
 
-  const { Title, Text } = Typography;
+  const { Title } = Typography;
   return (
     <Router>
       <Header className="header">
-        <img src="circlesLogo.svg" alt="Circles Logo" width="40" height="40" />
+        <img src={circlesLogo} width="40" height="40" />
         <Title level={3} style={titleStyles}>
           Circles
         </Title>
@@ -92,6 +88,5 @@ const titleStyles = {
   marginLeft: "0.3em",
   marginBottom: "0",
 };
-
 
 export default App;
