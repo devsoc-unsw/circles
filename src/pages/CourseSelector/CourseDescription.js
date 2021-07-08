@@ -49,14 +49,14 @@ export default function CourseDescription(props) {
         <p className={`text`}>{ course.overview }</p>
         <h3 className={ `${classes.subhead} text` }>Prerequisites</h3>
         {
-          course.prereq.length > 0 ?
+          course.prereq && course.prereq.length > 0 ?
           <CourseList data={ course.prereq }/>
           :
           <p className={`text`}>None</p>
         }
         <h3 className={ `${classes.subhead} text` }>Unlocks these next courses</h3>
         {
-          course.next.length > 0 ?
+          course.next && course.next.length > 0 ?
           <CourseList data={ course.next }/>
           :
           <p className={`text`}>None</p>
