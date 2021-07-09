@@ -57,7 +57,7 @@ export default function CourseSelector() {
               courseId === '0' ?
 
               <div className={ classes.empty }>
-                <h3 className={`text ${ classes.emptyText }`}>Select a course on the left to view! :)</h3>
+                <h3 className={`text ${ classes.emptyText }`}>Select a course on the left to view! (っ＾▿＾)۶🍸🌟🍺٩(˘◡˘ )</h3>
               </div>
               :
               <></>

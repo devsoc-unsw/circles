@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
+import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import 'antd/dist/antd.css';
 import { Select } from 'antd';
@@ -18,11 +19,12 @@ function DegreeSelector() {
     'Bachelor of Medical Studies/Doctor of Medicine'
   ]
   
+  const history = useHistory();
   const [degreeState,setdegreeState] = useState('');
   const [degreetypeState,setdegreetypeState] = useState('');
 
   const onButtonClick=(e)=>{
-    console.log('Button clicked')
+    history.push('/course-selector');
   }
 
   return (
