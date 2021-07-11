@@ -1,14 +1,14 @@
-import React, { useState, useRef, useMemo, useEffect } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { Select, Spin } from 'antd';
-import debounce from 'lodash/debounce';
-import { getAllCourses } from '../../actions/updateCourses';
+// import { useDispatch } from 'react-redux';
+import { Select } from 'antd';
+// import debounce from 'lodash/debounce';
+// import { getAllCourses } from '../../actions/updateCourses';
 
 const { Option } = Select;
 
 export default function SearchCourse(props) {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const history = useHistory();
   // const courses = useSelector(state => state.updateCourses.courses);
 

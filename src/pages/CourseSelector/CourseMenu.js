@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
-import { getAllCourses } from '../../actions/updateCourses';
+// import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+// import { getAllCourses } from '../../actions/updateCourses';
 import { Menu } from 'antd';
 
 const { SubMenu } = Menu;
 
 export default function CourseMenu(props) {
-  const { id } = useParams();
   const history = useHistory();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   // const courses = useSelector(state => state.updateCourses.courses);
   const [core, setCore] = useState([]);
   const [electives, setElectives] = useState([]);
@@ -44,6 +43,7 @@ export default function CourseMenu(props) {
     setCore(currCore);
     setElectives(currElec);
     setGenEd(currGenEd);
+    // REVIEW COMMENT: See warning - you have missing dependencies
   }, [props.courses]);
 
   const handleClick = e => {
@@ -59,9 +59,9 @@ export default function CourseMenu(props) {
       {
         courseId && core.length > 0 && electives.length > 0 && genEd.length > 0 &&
         <Menu
-          className={"text"}
+          className={'text'}
           onClick={handleClick}
-          style={{ width: '100%' }}
+          style={{ width: '100%', color: 'black'}}
           defaultSelectedKeys={[courseId !== '0' ? courseId : core[0]]}
           selectedKeys={[courseId]}
           defaultOpenKeys={['sub2', 'sub4', 'sub5']}
@@ -70,29 +70,29 @@ export default function CourseMenu(props) {
           <SubMenu className={"text"} key="sub1" /* icon={<MailOutlined />} */ title="Recently Viewed">
             <Menu.Item key={'0'} disabled>No courses here (ㆆ_ㆆ)</Menu.Item>
           </SubMenu>
-          <SubMenu key="sub2" /* icon={<AppstoreOutlined />} */ title="Core">
+          <SubMenu  className={"text"} key="sub2" /* icon={<AppstoreOutlined />} */ title="Core">
             {
               core.map((course) => {
                 return (
-                  <Menu.Item key={ course } onClick={ () => goToCourse(course) }>{ course }</Menu.Item>
+                  <Menu.Item className={"text"}  key={ course } onClick={ () => goToCourse(course) }>{ course }</Menu.Item>
                 )
               })
             }
           </SubMenu>
-          <SubMenu key="sub4" /* icon={<SettingOutlined />} */ title="Electives">
+          <SubMenu className={"text"} key="sub4" /* icon={<SettingOutlined />} */ title="Electives">
             {
               electives.map((course) => {
                 return (
-                  <Menu.Item key={ course } onClick={ () => goToCourse(course) }>{ course }</Menu.Item>
+                  <Menu.Item className={"text"} key={ course } onClick={ () => goToCourse(course) }>{ course }</Menu.Item>
                 )
               })
             }
           </SubMenu>
-          <SubMenu key="sub5" /* icon={<SettingOutlined />} */ title="General Education">
+          <SubMenu  className={"text"} key="sub5" /* icon={<SettingOutlined />} */ title="General Education">
             {
               genEd.map((course) => {
                 return (
-                  <Menu.Item key={ course } onClick={ () => goToCourse(course) }>{ course }</Menu.Item>
+                  <Menu.Item  className={"text"} key={ course } onClick={ () => goToCourse(course) }>{ course }</Menu.Item>
                 )
               })
             }

@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { Menu, Layout, Typography } from "antd";
 import "./App.less";
 import ThemeToggle from "./components/ThemeToggle";
-import CourseSelector from "./pages/CourseSelector/CourseSelector";
+import CourseSelector from "./pages/CourseSelector/main";
 import DegreeSelector from "./pages/DegreeSelector/main";
 import ProgressionChecker from "./pages/ProgressionChecker/main";
 import TermPlanner from "./pages/TermPlanner/main";
@@ -23,7 +22,7 @@ function App() {
   return (
     <Router>
       <Header className="header">
-        <img src={circlesLogo} width="40" height="40" />
+        <img alt="circles-logo" src={circlesLogo} width="40" height="40" />
         <Title level={3} style={titleStyles}>
           Circles
         </Title>

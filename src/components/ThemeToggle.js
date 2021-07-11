@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Switch } from "antd";
 import { IoMdMoon } from "react-icons/io";
-import { FaSun } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { toggleTheme } from "../actions/toggleTheme";
 

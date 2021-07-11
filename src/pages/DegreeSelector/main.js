@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
 import { useHistory } from 'react-router-dom';
-import { useSelector, useDispatch } from "react-redux";
-import 'antd/dist/antd.css';
 import { Select } from 'antd';
 import { Typography } from 'antd';
 import { Button } from 'antd';
+import './main.less';
 
 function DegreeSelector() {
   const { Option } = Select;
@@ -20,8 +18,8 @@ function DegreeSelector() {
   ]
   
   const history = useHistory();
-  const [degreeState,setdegreeState] = useState('');
-  const [degreetypeState,setdegreetypeState] = useState('');
+  const [degreeState, setdegreeState] = useState('');
+  const [degreetypeState, setdegreetypeState] = useState('');
 
   const onButtonClick=(e)=>{
     history.push('/course-selector');
@@ -29,28 +27,29 @@ function DegreeSelector() {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", height: "100vh" }}>
-      <Title className = "text" align="center">
-        I am an <span></span>
+      <Title className={"text"} align="center">
+        I am a(n) <span></span>
           <Select
+
+            bordered={false}
+            className={'text selector'}
             placeholder="Undergraduate"
             onChange={(value)=>{
               setdegreetypeState(value);
             }} 
           >
-            {degreetype.map((degreetype,index)=>{
-              return <Option key={index} value={degreetype}>
+            {degreetype.map((degreetype,index)=>
+              <Option className={'text option'} key={index} value={degreetype}>
                 {degreetype}
-                </Option>
-            })}
+              </Option>
+            )}
           </Select>
           <span></span> student <span></span>
         <p> studying a <span></span>
           <Select
-            className="degreeSelect"
-            onChange={(value)=>{
-              setdegreeState(value);
-              // console.log(degreeState)
-            }} 
+            bordered={false}
+            className={'text selector'}
+            onChange={ value => setdegreeState(value) } 
             showSearch
             style={{ width: '30%' }}
             placeholder="Select Degree"
@@ -62,11 +61,11 @@ function DegreeSelector() {
               optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
             }
           >
-            {degreeselect.map((degreeselect,index)=>{
-              return <Option key={index} value={degreeselect}>
+            {degreeselect.map((degreeselect,index)=>
+              <Option className={'text option'} key={index} value={degreeselect}>
                 {degreeselect}
-                </Option>
-            })}
+              </Option>
+            )}
           </Select>
           <span></span> degree
         </p>

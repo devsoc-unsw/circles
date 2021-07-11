@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-import { Typography, Button, Drawer, Collapse, notification } from "antd";
+import { Button, notification } from "antd";
 import { DragDropContext } from "react-beautiful-dnd";
-import DraggableCourse from "./DraggableCourse";
 import TermBox from "./TermBox";
 import { RightOutlined } from "@ant-design/icons";
 import axios from "axios";
@@ -25,6 +24,7 @@ const TermPlanner = () => {
     isAllEmpty(years) && openNotification();
   };
 
+  // REVIEW COMMENT: See warning - 'React Hook useEffect has a missing dependency 'fetchCourses.' Either include it or remove the dependency array
   useEffect(() => {
     setTimeout(fetchCourses, 1000); // testing skeleton
     //     fetchCourses();
@@ -74,7 +74,7 @@ const TermPlanner = () => {
     const srcBox = years[srcIndex][srcTerm];
 
     // === move within one term ===
-    if (srcBox == destBox) {
+    if (srcBox === destBox) {
       const alteredBox = Array.from(srcBox);
       alteredBox.splice(source.index, 1);
       alteredBox.splice(destination.index, 0, draggableId);

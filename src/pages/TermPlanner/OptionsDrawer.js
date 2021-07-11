@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Typography, Drawer, Collapse, Alert, Button } from "antd";
+import { Typography, Drawer, Collapse, Alert } from "antd";
 import { Droppable } from "react-beautiful-dnd";
 import DraggableCourse from "./DraggableCourse";
 import { CloseOutlined } from "@ant-design/icons";
