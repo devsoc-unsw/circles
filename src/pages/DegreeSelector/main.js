@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
 import { useHistory } from 'react-router-dom';
-import { useSelector, useDispatch } from "react-redux";
-import 'antd/dist/antd.css';
 import { Select } from 'antd';
 import { Typography } from 'antd';
 import { Button } from 'antd';
