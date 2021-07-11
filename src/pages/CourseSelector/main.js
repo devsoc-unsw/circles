@@ -25,7 +25,6 @@ export default function CourseSelector() {
   }, []);
 
   useEffect(() => {
-    console.log('COURSE MENU');
     dispatch(getAllCourses());
   }, []);
 
