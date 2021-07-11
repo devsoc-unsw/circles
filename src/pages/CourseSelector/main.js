@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-} from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Input } from 'antd';
 import { FilterOutlined } from '@ant-design/icons';
 import { getAllCourses } from '../../actions/updateCourses';
 import { getUnplannedCourses } from '../../actions/userAction';
@@ -13,13 +9,11 @@ import SearchCourse from './SearchCourse';
 import CourseMenu from './CourseMenu';
 import CourseDescription from './CourseDescription';
 
-const { Search } = Input;
-
 export default function CourseSelector() {
   const dispatch = useDispatch();
   const courses = useSelector(state => state.updateCourses.courses);
   const degree = useSelector(state => state.user.degree);
-  const unplanned = useSelector(state => state.user.unplanned);
+  // const unplanned = useSelector(state => state.user.unplanned);
   const [courseId, setCourseId] = useState('0');
 
   // useEffect(() => {

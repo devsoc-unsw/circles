@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
-import { getAllCourses } from '../../actions/updateCourses';
+// import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+// import { getAllCourses } from '../../actions/updateCourses';
 import { Menu } from 'antd';
 
 const { SubMenu } = Menu;
 
 export default function CourseMenu(props) {
-  const { id } = useParams();
   const history = useHistory();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   // const courses = useSelector(state => state.updateCourses.courses);
   const [core, setCore] = useState([]);
   const [electives, setElectives] = useState([]);
@@ -44,6 +43,7 @@ export default function CourseMenu(props) {
     setCore(currCore);
     setElectives(currElec);
     setGenEd(currGenEd);
+    // REVIEW COMMENT: See warning - you have missing dependencies
   }, [props.courses]);
 
   const handleClick = e => {

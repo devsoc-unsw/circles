@@ -1,7 +1,6 @@
 import React from "react";
 import { Typography } from "antd";
 import { Draggable } from "react-beautiful-dnd";
-import { useSelector } from "react-redux";
 
 function DraggableCourse({ code, index, courseNames }) {
   //   let code = course.match(/([A-Z]{4}[0-9]{4}):/)[1];

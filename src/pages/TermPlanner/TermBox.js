@@ -1,8 +1,6 @@
 import React from "react";
-import { Typography, Badge } from "antd";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { Droppable } from "react-beautiful-dnd";
 import DraggableCourse from "./DraggableCourse";
-import { useSelector } from "react-redux";
 
 function TermBox({ name, courses, courseNames, termsOffered, isDragging }) {
   const term = name.match(/t[0-3]/)[0];
