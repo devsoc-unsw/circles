@@ -35,7 +35,6 @@ export default function CourseDescription(props) {
     setShow(false);
   }
 
-  course.prereq.map(x => console.log(x));
   return (
     <div className={ classes.cont }>
       <div className={ classes.contents }>
@@ -56,11 +55,11 @@ export default function CourseDescription(props) {
         <p className={`text`}>{ course.overview }</p>
         <h3 className={ `${classes.subhead} text` }>Prerequisites</h3>
         {
-          course.prereq.length > 0 ?
+          course.prereq && course.prereq.length > 0 ?
           ( 
-            course.prereq.map(courseCode => {
-              <CourseTag name={courseCode}/>
-            })
+            <div className={`text ${classes.flex}`}>
+              { course.prereq.map(courseCode => { return <CourseTag name={courseCode}/> })}
+            </div>
           )
           :
           <p className={`text`}>None</p>

@@ -4,6 +4,12 @@
   flex-direction: row;
 }
 
+.flex {
+  display: flex;
+  flex-direction: row;
+  margin: 10px;
+}
+
 .contents {
   margin-right: 4rem;
   width: 75%;
