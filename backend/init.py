@@ -32,9 +32,9 @@ if __name__ == "__main__":
     db['Specialisations'].drop()
     db['Courses'].drop()
 
-    overwrite_collection('./finalData/programsProcessed.json', db['Programs'])
-    overwrite_collection('./finalData/specialisationsProcessed.json', db['Specialisations'])
-    overwrite_collection('./finalData/coursesProcessed.json', db['Courses'])
+    overwrite_collection('./data/finalData/programsProcessed.json', db['Programs'])
+    overwrite_collection('./data/finalData/specialisationsProcessed.json', db['Specialisations'])
+    overwrite_collection('./data/finalData/coursesProcessed.json', db['Courses'])
 
     print("Finished overwriting collections!")
 
