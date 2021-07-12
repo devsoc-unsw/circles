@@ -6,6 +6,7 @@ const router = express.Router();
  * @param code The code of the course, e.g. COMP1511
  */
 router.get('/getCourse/:code', async (req, res) => {
+    console.log("Router");
     const coursesCOL = req.app.locals.coursesCOL;
     coursesCOL.findOne({
         code: req.params.code

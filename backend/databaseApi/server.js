@@ -1,8 +1,8 @@
-import { URI, EXPRESS_PORT } from './config.js'
-
 const MongoClient = require('mongodb').MongoClient;
 const express = require('express');
 const app = express();
+const config = require('./config.js');
+
 
 // Import routes
 const programsRoute = require('./routes/programs');
@@ -14,9 +14,8 @@ app.use('/programs', programsRoute);
 app.use('/specialisations', specialisationsRoute);
 app.use('/courses', coursesRoute);
 
-
 // Start the connection to the mongoDB server
-MongoClient.connect(URI, {
+MongoClient.connect(config.URI, {
     useUnifiedTopology: true,
     useNewUrlParser: true
 }).then(client => {
@@ -31,7 +30,7 @@ MongoClient.connect(URI, {
     app.locals.specialisationsCOL = specialisationsCOL;
     app.locals.coursesCOL = coursesCOL;
 
-    app.listen(EXPRESS_PORT, () => { console.log("Express Server is listening on", EXPRESS_PORT) });
+    app.listen(config.EXPRESS_PORT, () => { console.log("Express Server is listening on", config.EXPRESS_PORT) });
 })
 
 

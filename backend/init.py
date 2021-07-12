@@ -8,38 +8,34 @@ import pymongo
 #TODO: Set up proper env variables to share with javascript files
 URI = 'mongodb://localhost:27017'
 
-# Connect to the client, writing in:
-# database - Main
-# collections - Programs, Specialisations, Courses
-client = pymongo.MongoClient(URI)
-db = client['Main']
-programs = db['Programs']
-specialisations = db['Specialisations']
-courses = db['Courses']
 
-# Remove any pre-existing collections to overwrite them
-programs.drop()
-specialisations.drop()
-courses.drop()
 
-# Overwrite the collections
-with open('./finalData/programsProcessed.json') as f:
-    file_data = json.load(f)
-    programs.insert_one(file_data)
-
-with open('./finalData/specialisationsProcessed.json') as f:
-    file_data = json.load(f)
-    specialisations.insert_one(file_data)
-
-with open('./finalData/coursesProcessed.json') as f:
-    file_data = json.load(f)
-    courses.insert_one(file_data)
-
-print("Finished overwriting collections!")
-
-client.close()
+''' Overwriting the given collection. Loads from the given file and writes to
+the given collection'''
+def overwrite_collection(file, collection):
+    with open(file) as f:
+        try:
+            file_data = json.load(f)
+            for key in file_data:
+                collection.insert_one(file_data[key])
+        except:
+            print(f"Failed to load and overwrite with {file}")
 
 
 
+if __name__ == "__main__":
+    client = pymongo.MongoClient(URI)
+    db = client['Main']
+        
+    # Remove any pre-existing collections to overwrite them
+    db['Programs'].drop()
+    db['Specialisations'].drop()
+    db['Courses'].drop()
 
+    overwrite_collection('./finalData/programsProcessed.json', db['Programs'])
+    overwrite_collection('./finalData/specialisationsProcessed.json', db['Specialisations'])
+    overwrite_collection('./finalData/coursesProcessed.json', db['Courses'])
 
+    print("Finished overwriting collections!")
+
+    client.close()
