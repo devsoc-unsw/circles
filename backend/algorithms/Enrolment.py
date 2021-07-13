@@ -145,4 +145,53 @@ def parseRequirement(text, isCalled = False, tracedBack = False):
                 bad = True
                 return
                 #print('Unknown type: ', i)
+                # can print or log to error.txt so we can check what to fix
+
     return result
+
+'''
+DATA WILL BE PREPROCESSED IN CONDITIONS:
+- and/or/AND/OR --> && ||
+- Enrolled in Software Engineering --> SENGAH
+- Completing a Bachelor of Computer Science --> 3778
+- Completion of 126UOC --> UOC 126
+- Completion of 72UOC in Computer Science --> UOC 72 COMP
+- MATH1141, MATH1151 with a mark of at least 75 --> GRADE 75 MATH1141, ||, GRADE 75 MATH1151 
+- WAM of 75+ --> WAM 75
+- Don't worry about exclusion courses
+
+EXAMPLES
+    "ACTL2101 and enrolment in program 3587",
+--> [(, ACTL2021, &&, 3587, )]
+
+    "ACCT1501 AND 65+ WAM or COMM1140  AND 65+ WAM",
+--> [(, (, ACCT1501, &&, WAM 65, ), ||, ...)]
+
+    "SENG1031 or COMP1531, and enrolment in a BE or BE(Hons) Software Engineering major.",
+--> [(, SENG1031, ||, COMP1531, &&, SENGAH, )]
+
+
+VALIDATE TAKES IN USERDATA DICTIONARY
+.validate(userData)
+
+- Courses the student has taken
+- Specialisations the student is doing
+- Program student is enrolled in
+- other stuff
+userData = {
+    COMP1511: 1,
+    COMP1521: 1,
+    COMP1531: 1,
+    SENGAH: 1,
+    3707: 1,
+    YEAR: 3,
+    UOC: 126,
+    WAM
+}
+
+
+
+
+
+Pickling later
+'''
