@@ -1,7 +1,7 @@
 const degreeReducer = (state=null, action) => { 
     switch (action.type) { 
-        case 'SELECT': 
-            return state = "Undergraduate"; 
+        case 'updateDegree': 
+            return (state = action.payload); 
         default: 
             return state;    
     }

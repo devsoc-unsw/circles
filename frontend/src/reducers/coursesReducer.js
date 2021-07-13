@@ -1,11 +1,11 @@
 const initialState = {
-    courses: {},
+    initialCourses: {},
     course: {}
 };
-const updateCoursesReducer = (state = initialState, action) => { 
+const courseReudcer = (state = initialState, action) => { 
     switch (action.type) { 
         case 'SET_COURSES':
-            return { ...state, courses: action.payload };
+            return { ...state, initialCourses: action.payload };
         case 'SET_COURSE':
             return { ...state, course: action.payload };
         case 'APPEND': 
@@ -19,4 +19,4 @@ const updateCoursesReducer = (state = initialState, action) => {
     }
 }
 
-export default updateCoursesReducer; 
+export default courseReudcer;

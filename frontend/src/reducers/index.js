@@ -1,9 +1,11 @@
 import { combineReducers } from "redux";
 import themeReducer from "./themeReducer";
-import updateCourses from "./updateCourses";
+import degreeReducer from "./degreeReducer";
 import userReducer from "./userReducer";
+import courseReducer from './coursesReducer';
 const allReducers = combineReducers({
-  updateCourses: updateCourses,
+  courses: courseReducer,
+  degree: degreeReducer,
   user: userReducer,
   theme: themeReducer,
 });
