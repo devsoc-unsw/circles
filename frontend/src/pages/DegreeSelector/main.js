@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { Select } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateDegree } from '../../actions/updateDegree'
-import { courseActions } from '../../actions/courseActions';
+import { courseOptionsActions } from '../../actions/courseOptionsActions';
 import { Typography } from 'antd';
 import { Button } from 'antd';
 import './main.less';
@@ -11,7 +11,6 @@ import './main.less';
 function DegreeSelector() {
   const { Option } = Select;
   const { Title } = Typography;
-  const degreetype = ['Undergraduate','Postgraduate']
   const degreeselect = ['Bachelor of Arts', 
     'Bachelor of Computer Science',
     'Bachelor of Commerce',
@@ -27,7 +26,6 @@ function DegreeSelector() {
 
 
   const handleNext = () => {
-    
     // Updates user degree
     dispatch(updateDegree(degree))
     
@@ -35,7 +33,7 @@ function DegreeSelector() {
     // TODO: Make loading animation whilst this is happening
     // Initiate all core courses for this degree
     const dummyCoreCourses = ['COMP1511', 'COMP1521', 'COMP1531', 'COMP2511'];
-    dispatch(courseActions('SET_CORE_COURSES', dummyCoreCourses))
+    dispatch(courseOptionsActions('SET_CORE_COURSES', dummyCoreCourses))
     history.push('/course-selector');
   }
 

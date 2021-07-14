@@ -17,11 +17,7 @@ export default function CourseSelector() {
       <div className='banner'>
           <h1 className='text'>{ degree.program.code } - { degree.program.name }</h1>
           <h2 className='text'>{ degree.specialisation.code } | { degree.specialisation.name }</h2>
-          <SearchCourse 
-            className={'searchCont'}
-            courses={ courses }
-            setCourseId={ setCourseId }
-          />
+          <SearchCourse />
       </div>
       {/* TODO: Need to fix height of an empty course description */}
       <div className='course-content'>

@@ -11,9 +11,7 @@ function ThemeToggle() {
   });
 
   const dispatch = useDispatch();
-
   React.useEffect(() => {
-    window.localStorage.setItem("theme", JSON.stringify(theme));
     dispatch(toggleTheme(theme));
     if (theme === "light") {
       document.body.classList.remove("dark");

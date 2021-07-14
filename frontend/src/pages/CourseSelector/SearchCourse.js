@@ -1,34 +1,24 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-// import { useDispatch } from 'react-redux';
 import { Select } from 'antd';
+import { getSearchResult } from './courseProvider';
 // import debounce from 'lodash/debounce';
-// import { getAllCourses } from '../../actions/updateCourses';
 
 const { Option } = Select;
 
-export function SearchCourse(props) {
-  // const dispatch = useDispatch();
+export function SearchCourse() {
   const history = useHistory();
-  // const courses = useSelector(state => state.updateCourses.courses);
+  const [input, setInput] = React.useState('')
+  const [courses, setCourses] = React.useState([])
 
-  // useEffect(() => {
-  //   console.log('SEARCH COURSE');
-  //   dispatch(getAllCourses());
-  // }, []);
+  useEffect( () => {
+      const result = getSearchResult(input);
+      setCourses(result);
+  }, [setCourses, input]);
 
   function onChange(value) {
     console.log(`selected ${value}`);
-    props.setCourseId(value);
     history.push(`/course-selector/${value}`);
-  }
-  
-  function onBlur() {
-    console.log('blur');
-  }
-  
-  function onFocus() {
-    console.log('focus');
   }
   
   function onSearch(val) {
@@ -36,27 +26,13 @@ export function SearchCourse(props) {
   }
 
   return (
-    <Select
-      showSearch
+    <Search
+      showSearch={true}
       style={{ width: '20rem', marginRight: '0.5rem' }}
-      placeholder="Find a course"
-      optionFilterProp="children"
       onChange={onChange}
-      onFocus={onFocus}
-      onBlur={onBlur}
       onSearch={onSearch}
-      filterOption={(input, option) =>
-        option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-      }
-    >
-      {
-        Object.keys(props.courses).map(course => {
-          return (
-            <Option className={"text"} value={ course }>{ course }</Option>
-          )
-        })
-      }
-    </Select>
+      data={courses}
+    />
   );
 }
 

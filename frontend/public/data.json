@@ -103,7 +103,7 @@
 			   "t1",
 			   "t3"
 			]
-		  }
+		}
 	},
 	"startYear":2021,
 	"numYears":3,
@@ -136,5 +136,4 @@
 	   }
 	],
 	"unplanned": ["COMP1511", "MATH1131", "COMP3331", "ENGG1000", "COMP2041", "COMP3311", "COMP3601"]
-
- }
+}

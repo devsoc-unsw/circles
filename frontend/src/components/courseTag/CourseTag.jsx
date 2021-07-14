@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { Tag } from 'antd';
 import ReactTooltip from "react-tooltip";
-import classes from './courseTag.module.css';
+import './courseTag.less';
 
 // NOTE: Tooltip not working
 export const CourseTag = ({ name }) => {
@@ -15,7 +15,7 @@ export const CourseTag = ({ name }) => {
   // dark mode always has white text
   const theme = useSelector((state) => state.theme);
   return (
-      <Tag onClick={handleClick} className={`text ${classes.clickable}`}>
+      <Tag onClick={handleClick} className={'text tag'}>
         <ReactTooltip place="bottom" type={theme === "dark" && "light"}>
           See more
         </ReactTooltip>

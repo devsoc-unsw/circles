@@ -10,11 +10,13 @@ import { getCourse } from './courseProvider';
 import './CourseDescription.less';
 
 
-const CourseAttribute = (header, description) => {
+const CourseAttribute = ({ header, description }) => {
+  const upperCaseHeader = header.charAt(0).toUpperCase() + header.slice(1);
   return (
-    <Card title={header} bordered={true}>
-      {description}
-    </Card>
+    <div className='attribute'> 
+      <h3 className='subhead text'>{upperCaseHeader}</h3>
+      <p className='text'>{description}</p>
+    </div>
   )
 }
 export function CourseDescription() {
@@ -28,9 +30,6 @@ export function CourseDescription() {
   // const dispatch = useDispatch();
   const course = getCourse(courseCode);
   console.log(course.attributes);
-  // console.log(Object.keys(course.attributes), course.attributes.type);
-  // (Object.keys(course.attributes)).map(header => console.log(course.attributes[header]);
-
 
   const addToPlanner = () => {
     // dispatch(addUnplannedCourse(id));
@@ -50,7 +49,7 @@ export function CourseDescription() {
             showIcon closable
             afterClose={() => setShowAlert(false)}/>
         }
-        <div className='top'>
+        <div className='description-title'>
           <div>
             <h2 className='code text'>{ courseCode }</h2>
             <h1 className='name text'>{ course.name }</h1>
@@ -83,13 +82,11 @@ export function CourseDescription() {
         }
       </div>
       <div>
-        { Object.entries(course.attributes).map((header, desc) =>  <CourseAttribute header={header} description={desc}/> )}
-        {/* { (Object.keys(course.attributes)).map(header => <CourseAttribute header={header} description={'test'}/>) } */}
-        <div className='list'>
-          { course.terms && course.terms.map(term => <Tag className={`text`}>{ isNaN(term) ? `${term} Term` : `Term ${term}` }</Tag> )}
+        { Object.entries(course.attributes).map(attr => <CourseAttribute header={attr[0]} description={attr[1]}/> )}
+        <div className='terms-attribute'>
+          <h3 className='subhead text'>Terms Available</h3>
+          { course.terms && course.terms.map(term => <Tag className='text'>{ isNaN(term) ? `${term} Term` : `Term ${term}` }</Tag> )}
         </div>
-        <h3 className='subhead text'>Campus</h3>
-        <p className={`text`}>{ course.campus }</p>
       </div>
     </div>
   );
