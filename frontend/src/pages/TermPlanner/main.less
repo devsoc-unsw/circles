@@ -1,68 +1,66 @@
-.content {
-  .plannerContainer {
-    display: flex;
-    align-items: center;
-    margin: 3em;
-  }
-  .gridContainer {
-    display: grid;
-    grid-template-columns: 10em 1fr 1fr 1fr;
-    align-items: center;
-    max-width: 100em;
-    margin: auto auto;
-  }
-  .gridItem {
-    font-size: 1.5rem;
-    text-align: center;
-  }
+.plannerContainer {
+  display: flex;
+  align-items: center;
+  margin: 3em;
+}
+.gridContainer {
+  display: grid;
+  grid-template-columns: 10em 1fr 1fr 1fr;
+  align-items: center;
+  max-width: 100em;
+  margin: auto auto;
+}
+.gridItem {
+  font-size: 1.5rem;
+  text-align: center;
+}
 
-  .termBox {
-    margin: 1em;
-    min-height: 18em;
-    min-width: 20em;
-    color: white;
-    list-style: none;
-    padding: 1.2em;
-    border-radius: 2em;
-    transition: 200ms ease-out;
-  }
+.termBox {
+  margin: 1em;
+  min-height: 18em;
+  min-width: 20em;
+  color: white;
+  list-style: none;
+  padding: 1.2em;
+  border-radius: 2em;
+  transition: 200ms ease-out;
+}
 
-  .course {
-    font-size: 0.8rem;
-    cursor: pointer;
-    padding: 0.7em;
-    padding-right: 1em;
-    padding-left: 1em;
-    border-radius: 1em;
-    max-width: 20em;
-    min-width: 12em;
-    margin-top: 1em;
-  }
+.course {
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 0.7em;
+  padding-right: 1em;
+  padding-left: 1em;
+  border-radius: 1em;
+  max-width: 20em;
+  min-width: 12em;
+  margin-top: 1em;
+}
 
-  .panel {
-    max-height: 30em;
-    margin-bottom: 1em;
-    overflow-y: scroll;
-    padding-right: 0.7em;
-  }
-  .skeletonTerm {
-    margin: 0.5em;
-    min-height: 10em;
-    min-width: 12em;
-    padding: 1.2em;
-  }
+.panel {
+  max-height: 30em;
+  margin-bottom: 1em;
+  overflow-y: scroll;
+  padding-right: 0.7em;
+}
+.skeletonTerm {
+  margin: 0.5em;
+  min-height: 10em;
+  min-width: 12em;
+  padding: 1.2em;
+}
 
-  &::-webkit-scrollbar {
-    width: 0.5em;
-  }
-  &::-webkit-scrollbar-track {
-    background: #2e2e2e; /* color of the tracking area */
-  }
+&::-webkit-scrollbar {
+  width: 0.5em;
+}
+&::-webkit-scrollbar-track {
+  background: #2e2e2e; /* color of the tracking area */
+}
 
-  &::-webkit-scrollbar-thumb {
-    background-color: #757575; /* color of the scroll thumb */
-    border-radius: 1em;
-  }
+&::-webkit-scrollbar-thumb {
+  background-color: #757575; /* color of the scroll thumb */
+  border-radius: 1em;
 }
 
 .dark {

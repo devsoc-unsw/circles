@@ -7,7 +7,7 @@ import { Select } from 'antd';
 
 const { Option } = Select;
 
-export default function SearchCourse(props) {
+export function SearchCourse(props) {
   // const dispatch = useDispatch();
   const history = useHistory();
   // const courses = useSelector(state => state.updateCourses.courses);

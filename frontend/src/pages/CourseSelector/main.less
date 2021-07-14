@@ -1,0 +1,40 @@
+@import "~antd/lib/style/themes/default.less";
+.root {
+  position: relative;
+  display: grid;
+  grid-template-rows: 40vh auto
+}
+
+.banner {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2rem;
+}
+
+.searchCont {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.course-content {
+  display: grid;
+  grid-template-columns: 20vw auto;
+}
+
+.menu-container {
+  min-width: 100px;
+}
+.dark {
+  .banner { 
+    background-color: #722ed0; // Purple-6
+  }
+}
+
+.light { 
+  .banner { 
+    background-color: #efdbff; // Purple-2
+  }
+}

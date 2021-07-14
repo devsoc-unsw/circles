@@ -1,56 +1,54 @@
 @import "~antd/lib/style/themes/default.less";
+.container {
+  height: calc(100vh - 70px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.centered {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
 
-.content {
-  .container {
-    height: calc(100vh - 70px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .centered {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-  }
-
-  .textLink {
-    transition: 0.2s;
-    transition-timing-function: ease-in-out;
-    margin-bottom: 0.5em;
-    margin-top: 0.8em;
-    &:hover {
-      color: @purple-4;
-    }
-  }
-
-  .cards {
-    display: flex;
-    gap: 1em;
-    margin-top: 1em;
-  }
-
-  .card {
-    width: 20em;
-  }
-  .skeletonCard {
-    width: 20em;
-    height: 8em;
-  }
-  .listPage {
-    height: 100vh;
-    padding: 2em;
-  }
-  .progressBar {
-    margin-top: 0.5em;
-    color: white;
-  }
-
-  .tooltip {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.textLink {
+  transition: 0.2s;
+  transition-timing-function: ease-in-out;
+  margin-bottom: 0.5em;
+  margin-top: 0.8em;
+  &:hover {
+    color: @purple-4;
   }
 }
+
+.cards {
+  display: flex;
+  gap: 1em;
+  margin-top: 1em;
+}
+
+.card {
+  width: 20em;
+}
+.skeletonCard {
+  width: 20em;
+  height: 8em;
+}
+.listPage {
+  height: 100vh;
+  padding: 2em;
+}
+.progressBar {
+  margin-top: 0.5em;
+  color: white;
+}
+
+.tooltip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 
 .dark {
   .card {

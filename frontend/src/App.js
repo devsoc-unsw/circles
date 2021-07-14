@@ -53,16 +53,16 @@ function App() {
         <ThemeToggle />
       </Header>
 
-      <Content className="content">
+      <Content>
         <Switch>
           <Route exact path="/">
             <DegreeSelector />
             {/* Change to term planner if user session active */}
           </Route>
-          <Route path="/course-selector">
+          <Route path="/course-selector/:courseCode?" >
             <CourseSelector />
           </Route>
-          <Route path="/term-planner">
+          <Route path="/term-planner/">
             <TermPlanner />
           </Route>
           <Route path="/degree-selector">

@@ -1,0 +1,18 @@
+{
+  "COMP1511": {
+      "name": "Programming Fundamentals",
+      "overview": "An introduction to problem-solving via programming, which aims to have students develop proficiency in using a high level programming language. Topics: algorithms, program structures (statements, sequence, selection, iteration, functions), data types (numeric, character), data structures (arrays, tuples, pointers, lists), storage structures (memory, addresses), introduction to analysis of algorithms, testing, code quality, teamwork, and reflective practice. The course includes extensive practical work in labs and programming projects.",
+      "terms": [1, 2, 3],
+      "status": "planned",
+      "prereq": [],
+      "next": ["COMP1521", "COMP1531", "COMP2511", "COMP2521"],
+      "attributes": {
+        "type": "core",
+        "level": "Undergraduate",
+        "faculty": "Faculty of Engineering",
+        "school": "School of Computer Science and Engineering", 
+        "campus": "Kensington",
+        "UOC": "6"
+      }
+  }
+}

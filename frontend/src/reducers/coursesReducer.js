@@ -1,6 +1,6 @@
 const initialState = {
-    initialCourses: {},
-    course: {}
+    unplanned: new Map(),
+    planned: new Map()
 };
 const courseReudcer = (state = initialState, action) => { 
     switch (action.type) { 
