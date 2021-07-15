@@ -757,7 +757,15 @@
         "studyLevel": "undergraduate",
         "faculty": "Faculty of Engineering",
         "duration": "4 Year(s)",
-        "courseList": null
+        "disciplinary_component": {
+
+        },
+        "discipline_electives": {
+            "credits_to_complete": 12
+        },
+        "general_education": {
+            "credits_to_complete": 12
+        }
     },
     "3761": {
         "title": "Advanced Mathematics (Honours) / Engineering (Honours)",
@@ -853,7 +861,19 @@
         "studyLevel": "undergraduate",
         "faculty": "Faculty of Engineering",
         "duration": "3 Year(s)",
-        "courseList": null
+        "disciplinary_component": {
+            "COMPA1": 1,
+            "COMPD1": 1,
+            etc etc
+        },
+        "free_electives": {
+            "credits_to_complete": 36,
+            "ACCTA2": 1,
+            "FINSA2": 1
+        },
+        "general_education": {
+            "credits_to_complete": 12
+        }
     },
     "3781": {
         "title": "Advanced Mathematics (Honours) / Computer Science",
