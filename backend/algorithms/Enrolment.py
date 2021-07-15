@@ -150,6 +150,12 @@ def parseRequirement(text, isCalled = False, tracedBack = False):
     return result
 
 '''
+comp2511_requirement_class.validate(userData) = True/False
+
+Comp1511_Req_Object = parseRequirements("aklsdfjaksldfjklsadfkjasld")
+
+comp1511_req.validate(userData)
+
 DATA WILL BE PREPROCESSED IN CONDITIONS:
 - and/or/AND/OR --> && ||
 - Enrolled in Software Engineering --> SENGAH

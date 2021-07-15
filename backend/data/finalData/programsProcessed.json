@@ -763,7 +763,7 @@
         "discipline_electives": {
             "credits_to_complete": 12
         },
-        "general_education": {
+        "GE": {
             "credits_to_complete": 12
         }
     },
@@ -861,18 +861,26 @@
         "studyLevel": "undergraduate",
         "faculty": "Faculty of Engineering",
         "duration": "3 Year(s)",
-        "disciplinary_component": {
-            "COMPA1": 1,
-            "COMPD1": 1,
-            etc etc
-        },
-        "free_electives": {
-            "credits_to_complete": 36,
-            "ACCTA2": 1,
-            "FINSA2": 1
-        },
-        "general_education": {
-            "credits_to_complete": 12
+        "components": {
+            "disciplinary_component": {
+                "COMPA1": 1,
+                "COMPD1": 1,
+                "003778": 1
+            },
+            "discipline_elective": {
+
+            },
+            "FE": {
+                "credits_to_complete": 36,
+                "ACCTA2": 1,
+                "FINSA2": 1
+            },
+            "GE": {
+                "credits_to_complete": 12
+            },
+            "limit_rules": {
+                "IR":
+            }
         }
     },
     "3781": {
