@@ -9,10 +9,12 @@ const initalState = {
         'name': 'Database Systems',
     }
 }
+
 const degreeReducer = (state=initalState, action) => { 
     switch (action.type) { 
         case 'updateDegree': 
-            window.localStorage.setItme('degree', JSON.stringify(action.payload));
+            console.log(action.payload)
+            window.localStorage.setItem('degree', JSON.stringify(action.payload));
             return (state = action.payload); 
         default: 
             return state;    

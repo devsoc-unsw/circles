@@ -1,7 +1,5 @@
 const initialState = {
     name: '',
-    year: 0,
-    unplanned: []
 }
 const userReducer = (state = initialState, action) => { 
     switch (action.type) { 

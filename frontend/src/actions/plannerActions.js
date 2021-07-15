@@ -1,9 +1,8 @@
-import axios from 'axios';
-export const courseActions = (action, payload) => {
+export const plannerActions = (action, payload) => {
     switch (action) {
-        case 'APPEND':
+        case 'ADD_UNPLANNED':
             return { 
-                type: 'APPEND', 
+                type: 'ADD_UNPLANNED', 
                 payload: payload
             }
         case 'DELETE':

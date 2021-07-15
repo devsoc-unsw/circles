@@ -19,18 +19,22 @@ const MenuItem = ({ courseCode }) => {
   )
 }
 
-// TODO: Adjust dark theme colours
+// TODO: Fix the highlighting issue for Menu
+// TODO: Need to fix height of an empty course description/make menu min-height reach the bottom of the page.
+
 export function CourseMenu() {
-  const { courseCode } = useParams();
   const theme = useSelector(store => store.theme)
   const courseOptions = useSelector(store => store.courseOptions);
-  const [selectedCourse, setSelected] = React.useState(courseCode);
+  // const [selectedCourse, setSelected] = React.useState(null);
+
+  // React.useEffect(() => {
+  //   setSelected(courseCode);
+  // }, [selectedCourse])
   return (
     <Menu
       className={'text menu-color'}
       theme={theme}
-      // style={{ width: '100%'}}
-      selectedKeys={[ selectedCourse ]}
+      // selectedKeys={selectedCourse}
       defaultOpenKeys={['core']}
       mode="inline"
     >

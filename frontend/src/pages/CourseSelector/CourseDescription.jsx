@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
-// import { useDispatch, useSelector } from 'react-redux';
-import { Button, Tag, Alert, Card } from 'antd';
+import { useDispatch } from 'react-redux';
+import { Button, Tag, Alert } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { CourseTag } from '../../components/courseTag/CourseTag';
-// import { courseActions } from '../../actions/courseActions';
-// import { addUnplannedCourse, setUnplannedCourses } from '../../actions/userAction';
+import { plannerActions } from '../../actions/plannerActions';
 import { getCourse } from './courseProvider';
 import './CourseDescription.less';
 
@@ -20,21 +19,36 @@ const CourseAttribute = ({ header, description }) => {
   )
 }
 export function CourseDescription() {
+  const dispatch = useDispatch();
   const { courseCode } = useParams();
-  const [showAlert, setShowAlert] = useState(false);
+  const [showAlert, setShowAlert] = React.useState(false);
+  
   if (!courseCode) {
     return (
       <h3 className={'text center'}>Select a course on the left to view! (っ＾▿＾)۶🍸🌟🍺٩(˘◡˘ )</h3>
     )
   }
-  // const dispatch = useDispatch();
-  const course = getCourse(courseCode);
-  console.log(course.attributes);
 
+  const course = getCourse(courseCode);
+  if (!course) {
+    return (
+      <h3 className={'text center'}>We don't have this course.</h3>
+    )
+  }
   const addToPlanner = () => {
-    // dispatch(addUnplannedCourse(id));
     setShowAlert(true);
-    // dispatch(setUnplannedCourses(courseCode));
+    const courseObj ={
+      courseCode: courseCode,
+      courseData: {
+        title: course.name,
+        type: course.attributes.type,
+        termsOffered: course.terms
+      }
+    }
+    dispatch(plannerActions('ADD_UNPLANNED', courseObj));
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 3000);
   }
 
   return (

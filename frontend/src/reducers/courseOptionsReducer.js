@@ -4,7 +4,7 @@ const initialState = {
     electives: [],
     genEds: []
 }
-const courseOptionsReudcer = (state = initialState, action) => { 
+const courseOptionsReducer = (state = initialState, action) => { 
     switch (action.type) { 
         case 'SET_CORE_COURSES':
             return {...state, core: action.payload};
@@ -17,4 +17,4 @@ const courseOptionsReudcer = (state = initialState, action) => {
     }
 }
 
-export default courseOptionsReudcer;
+export default courseOptionsReducer;

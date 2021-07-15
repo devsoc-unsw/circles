@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 import { Button, notification } from "antd";
 import { DragDropContext } from "react-beautiful-dnd";
 import TermBox from "./TermBox";
@@ -9,6 +8,9 @@ import OptionsDrawer from "./OptionsDrawer";
 import SkeletonPlanner from "./SkeletonPlanner";
 import "./main.less";
 
+// @Sano This needs to be shorter. Manage ur draggable ourside if u can.
+// Also u can fetch the data with useSelector(store => store.planner); 
+// Checkout the reducer, I tried to make the store similar to ur data.json 
 const TermPlanner = () => {
   const [years, setYears] = useState([{}]);
   const [data, setData] = useState({});
