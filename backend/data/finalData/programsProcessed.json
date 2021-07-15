@@ -867,14 +867,20 @@
                 "COMPD1": 1,
                 "003778": 1
             },
-            "discipline_elective": {
-
-            },
             "FE": {
                 "credits_to_complete": 36,
-                "ACCTA2": 1,
-                "FINSA2": 1
+                "undergrad_minor": {
+                    "ACCTA2": 1,
+                    "FINSA2": 1,
+                    ...
+                }
             },
+            // OLD ONE
+            // "FE": {
+            //     "credits_to_complete": 36,
+            //     "ACCTA2": 1,
+            //     "FINSA2": 1
+            // },
             "GE": {
                 "credits_to_complete": 12
             },
