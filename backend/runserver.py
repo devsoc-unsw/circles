@@ -2,4 +2,4 @@ import sys
 from server import server
 
 if __name__ == "__main__":
-    print("Imported successfully")
+    server
