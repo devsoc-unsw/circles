@@ -1,5 +1,13 @@
 import sys
-from server import server
+from fastapi import FastAPI
+from server.routers import specialisations
 
-if __name__ == "__main__":
-    server
+app = FastAPI()
+
+# app.include_router(programs.router)
+app.include_router(specialisations.router)
+# app.include_router(courses.router)
+
+@app.get('/')
+def index():
+    return "Index of server"
