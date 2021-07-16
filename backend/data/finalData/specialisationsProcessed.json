@@ -97,47 +97,15 @@
         "curriculum": [
             {
                 "courses": {
-                    "ENGG3060": 1,
-                    "ENGG4600": 1,
-                    "ENGG2600": 1,
-                    "ENGG3600": 1,
-                    "COMP3": 1,
-                    "COMP4": 1,
-                    "COMP6": 1,
-                    "COMP9": 1
-                },
-                "title": "Discipline Electives",
-                "credits_to_complete": 24,
-                "type": "elective",
-                "levels": [],
-                "notes": "<br /><br />2 UOC and 3 UOC courses are run over consecutive terms for a final total of 6 UOC."
-            },
-            {
-                "courses": {
-                    "COMP3222": 1,
-                    "COMP3601": 1,
-                    "COMP3211": 1,
-                    "COMP3231": 1
-                },
-                "title": "Level 3 Core Courses",
-                "credits_to_complete": 24,
-                "type": "core",
-                "levels": [
-                    3
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "MATH1141 or MATH1131": 2,
-                    "PHYS1131 or PHYS1121": 2,
+                    "COMP1531": 1,
                     "COMP1521": 1,
                     "ELEC1111": 1,
-                    "COMP1531": 1,
                     "COMP1511": 1,
                     "ENGG1000": 1,
+                    "MATH1141 or MATH1131": 2,
+                    "PHYS1131 or PHYS1121": 2,
                     "PHYS1221 or PHYS1231": 2,
-                    "MATH1241 or MATH1231": 2
+                    "MATH1231 or MATH1241": 2
                 },
                 "title": "Level 1 Core Courses",
                 "credits_to_complete": 54,
@@ -151,8 +119,8 @@
                 "courses": {
                     "COMP4601": 1,
                     "COMP4920": 1,
-                    "COMP4952": 1,
                     "COMP4951": 1,
+                    "COMP4952": 1,
                     "COMP4953": 1
                 },
                 "title": "Level 4 Core Courses",
@@ -165,13 +133,45 @@
             },
             {
                 "courses": {
-                    "ELEC2133": 1,
-                    "ELEC2134": 1,
-                    "COMP2521": 1,
-                    "COMP2511": 1,
-                    "DESN2000": 1,
+                    "ENGG3060": 1,
+                    "ENGG3600": 1,
+                    "ENGG4600": 1,
+                    "ENGG2600": 1,
+                    "COMP3": 1,
+                    "COMP4": 1,
+                    "COMP6": 1,
+                    "COMP9": 1
+                },
+                "title": "Discipline Electives",
+                "credits_to_complete": 24,
+                "type": "elective",
+                "levels": [],
+                "notes": "<br /><br />2 UOC and 3 UOC courses are run over consecutive terms for a final total of 6 UOC."
+            },
+            {
+                "courses": {
+                    "COMP3231": 1,
+                    "COMP3601": 1,
+                    "COMP3211": 1,
+                    "COMP3222": 1
+                },
+                "title": "Level 3 Core Courses",
+                "credits_to_complete": 24,
+                "type": "core",
+                "levels": [
+                    3
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
                     "MATH2069": 1,
-                    "MATH2099": 1
+                    "ELEC2133": 1,
+                    "COMP2511": 1,
+                    "ELEC2134": 1,
+                    "DESN2000": 1,
+                    "MATH2099": 1,
+                    "COMP2521": 1
                 },
                 "title": "Level 2 Core Courses",
                 "credits_to_complete": 42,
@@ -199,38 +199,13 @@
         "curriculum": [
             {
                 "courses": {
-                    "any course": 1
-                },
-                "title": "Free Elective",
-                "credits_to_complete": 6,
-                "type": "elective",
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "COMP3311": 1,
-                    "SENG3011": 1,
-                    "COMP3141": 1,
-                    "COMP3331": 1
-                },
-                "title": "Level 3 Core Courses",
-                "credits_to_complete": 24,
-                "type": "core",
-                "levels": [
-                    3
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "MATH1141 or MATH1131": 2,
-                    "MATH1241 or MATH1231": 2,
                     "MATH1081": 1,
-                    "COMP1531": 1,
                     "COMP1511": 1,
+                    "COMP1531": 1,
                     "ENGG1000": 1,
-                    "COMP1521": 1
+                    "COMP1521": 1,
+                    "MATH1241 or MATH1231": 2,
+                    "MATH1141 or MATH1131": 2
                 },
                 "title": "Level 1 Core Courses",
                 "credits_to_complete": 42,
@@ -242,10 +217,54 @@
             },
             {
                 "courses": {
-                    "ENGG3060": 1,
+                    "any course": 1
+                },
+                "title": "Free Elective",
+                "credits_to_complete": 6,
+                "type": "elective",
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "COMP2521": 1,
+                    "MATH2859": 1,
+                    "SENG2011": 1,
+                    "COMP2041": 1,
+                    "MATH2400": 1,
+                    "SENG2021": 1,
+                    "DESN2000": 1,
+                    "COMP2511": 1
+                },
+                "title": "Level 2 Core Courses",
+                "credits_to_complete": 42,
+                "type": "core",
+                "levels": [
+                    2
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "SENG4920": 1,
+                    "COMP4951": 1,
+                    "COMP4953": 1,
+                    "COMP4952": 1
+                },
+                "title": "Level 4 Core Courses",
+                "credits_to_complete": 18,
+                "type": "core",
+                "levels": [
+                    4
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ENGG2600": 1,
                     "ENGG4600": 1,
                     "ENGG3600": 1,
-                    "ENGG2600": 1,
+                    "ENGG3060": 1,
                     "COMP3": 1,
                     "COMP4": 1,
                     "COMP6": 1,
@@ -268,35 +287,16 @@
             },
             {
                 "courses": {
-                    "COMP4952": 1,
-                    "COMP4951": 1,
-                    "SENG4920": 1,
-                    "COMP4953": 1
+                    "SENG3011": 1,
+                    "COMP3331": 1,
+                    "COMP3311": 1,
+                    "COMP3141": 1
                 },
-                "title": "Level 4 Core Courses",
-                "credits_to_complete": 18,
+                "title": "Level 3 Core Courses",
+                "credits_to_complete": 24,
                 "type": "core",
                 "levels": [
-                    4
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "COMP2041": 1,
-                    "COMP2511": 1,
-                    "DESN2000": 1,
-                    "SENG2011": 1,
-                    "MATH2859": 1,
-                    "SENG2021": 1,
-                    "COMP2521": 1,
-                    "MATH2400": 1
-                },
-                "title": "Level 2 Core Courses",
-                "credits_to_complete": 42,
-                "type": "core",
-                "levels": [
-                    2
+                    3
                 ],
                 "notes": ""
             }
