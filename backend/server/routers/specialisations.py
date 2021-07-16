@@ -9,3 +9,5 @@ router = APIRouter(
 @router.get("/")
 def specialisations_index():
     return "Index of specialisations"
+
+# 
