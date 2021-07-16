@@ -1,13 +1,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { Menu } from 'antd';
 import './CourseMenu.less';
 const { SubMenu } = Menu;
 
 const MenuItem = ({ courseCode }) => {
   const history = useHistory();
-  const planned = useSelector(store => store.courses);
   return (
     <Menu.Item 
       className={"text course-color "} 
@@ -21,15 +20,11 @@ const MenuItem = ({ courseCode }) => {
 
 // TODO: Fix the highlighting issue for Menu
 // TODO: Need to fix height of an empty course description/make menu min-height reach the bottom of the page.
-
 export function CourseMenu() {
   const theme = useSelector(store => store.theme)
   const courseOptions = useSelector(store => store.courseOptions);
   // const [selectedCourse, setSelected] = React.useState(null);
 
-  // React.useEffect(() => {
-  //   setSelected(courseCode);
-  // }, [selectedCourse])
   return (
     <Menu
       className={'text menu-color'}

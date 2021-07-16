@@ -87,12 +87,9 @@ export function CourseDescription() {
         }
         <h3 className='subhead text'>Unlocks these next courses</h3>
         {
-          course.next && course.next.length > 0 ?
-          course.next.map(courseCode => {
-            <CourseTag name={courseCode}/>
-          })
-          :
-          <p className='text'>None</p>
+          course.next && course.next.length > 0 
+          ? course.next.map(courseCode => <CourseTag name={courseCode}/>)
+          : <p className='text'>None</p>
         }
       </div>
       <div>
