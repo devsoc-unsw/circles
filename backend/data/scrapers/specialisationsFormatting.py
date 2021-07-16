@@ -42,12 +42,12 @@ Step in the data's journey:
 
 import requests
 import json
-import dataHelpers
+from data.utility import dataHelpers
 
 def format_spn_data():
     """ Extracts, processes and writes specialisation data to file """
 
-    raw_content = dataHelpers.read_data("specialisationsPureRaw.json")
+    raw_content = dataHelpers.read_data("data/scrapers/specialisationsPureRaw.json")
     specialisations = {}
     for item in raw_content:
         
@@ -77,7 +77,7 @@ def format_spn_data():
             get_structure(specialisations[specCode]["structure"], 
                             curriculum_structure["container"])
 
-    dataHelpers.write_data(specialisations, 'specialisationsFormattedRaw.json')    
+    dataHelpers.write_data(specialisations, 'data/scrapers/specialisationsFormattedRaw.json')    
 
 def initialise_specialisation(item):
     """ Set up dictionary and add data in first level of 'contentLets' """

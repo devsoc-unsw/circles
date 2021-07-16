@@ -11,7 +11,7 @@ Step in the data's journey:
 import requests
 import json
 from datetime import date
-import dataHelpers
+from data.utility import dataHelpers
 
 THIS_YEAR = str(date.today().year) # Ensures request remains up-to-date
 TOTAL_SPNS = 500 # Update if number of specialisations increases
@@ -121,7 +121,7 @@ def scrape_spn_data():
 
     r = requests.post(url, data=json.dumps(PAYLOAD), headers=headers)
 
-    dataHelpers.write_data(r.json()["contentlets"], 'specialisationsPureRaw.json')
+    dataHelpers.write_data(r.json()["contentlets"], 'data/scrapers/specialisationsPureRaw.json')
 
 if __name__ == "__main__":
     scrape_spn_data()
