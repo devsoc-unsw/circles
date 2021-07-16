@@ -1,6 +1,6 @@
 import sys
 from fastapi import FastAPI
-from backend.server.routers import specialisations
+from server.routers import specialisations
 
 app = FastAPI()
 
