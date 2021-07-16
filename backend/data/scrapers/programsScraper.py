@@ -8,11 +8,10 @@ Step in the data's journey:
     [   ] Customise formatted data (programProcessing.py)
 """
 from datetime import date
-from os import SEEK_DATA
 import requests
 import json
 import ast
-import dataHelpers
+import data.utility.dataHelpers
 
 THIS_YEAR = str(date.today().year) # Ensures request remains up-to-date
 TOTAL_PGRMS = 249 # Update if number of programs increases
