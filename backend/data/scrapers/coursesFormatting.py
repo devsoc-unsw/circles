@@ -6,41 +6,13 @@ NB: ignores conditions for enrolment.
 import requests
 import json
 import sys
-# from data.utility import dataHelpers #TODO: add when other branch merged
-
-# TODO: remove when my other branch is merged
-def read_data(file_name):
-    """
-    Reads file with given file_name and returns data
-    """
-    # try:
-    with open(file_name, "r") as INPUT_FILE:
-        return json.load(INPUT_FILE)
-    # except:
-        # print("File not found")
-        # sys.exit(1)
-
-# TODO: remove when my other branch is merged
-def write_data(data, file_name):
-    """
-    Writes data to file with given file_name
-    """
-    if os.path.isfile(file_name):
-        res = input("File name already exists. Enter 'y' to overwrite or 'n' to cancel: ")
-        if res.lower() != "y":
-            print("File not overwritten.")
-            sys.exit(1)
-
-    with open(file_name, "w") as OUTPUT_FILE:
-        json.dump(data, OUTPUT_FILE)
-        print(f"{file_name} successfully created")
-
+from data.utility import dataHelpers
 
 ALL_COURSES = {}
 
 def format_course_data():
     """ Formats the raw course data """
-    raw_content = read_data("coursesRaw.json") # update path when merged
+    raw_content = dataHelpers.read_data("data/scrapers/coursesRaw.json")
 
     for course in raw_content:
         # Add basic details to course dict
@@ -59,8 +31,7 @@ def format_course_data():
 
         ALL_COURSES[course["code"]] = formatted_course
 
-
-    print(json.dumps(ALL_COURSES))
+    dataHelpers.write_data(ALL_COURSES, 'data/scrapers/coursesFormattedRaw.json')
 
 def initialise_course(raw: dict) -> dict:
     """ Retrieves standard details for course """
