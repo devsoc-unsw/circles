@@ -1,24 +1,44 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Menu, Layout, Typography } from "antd";
-import "./App.less";
+import { useDispatch } from "react-redux";
+import { courseOptionsActions } from './actions/courseOptionsActions';
+import { updateDegree } from './actions/updateDegree';
+// import { plannerActions } from "./actions/plannerActions";
 import ThemeToggle from "./components/ThemeToggle";
 import CourseSelector from "./pages/CourseSelector/main";
 import DegreeSelector from "./pages/DegreeSelector/main";
 import ProgressionChecker from "./pages/ProgressionChecker/main";
 import TermPlanner from "./pages/TermPlanner/main";
 import circlesLogo from "./images/circlesLogo.svg";
+import "./App.less";
 
-const { Header, Content } = Layout;
-
+const { Title } = Typography;
+const { Header, Content } = Layout; 
 function App() {
-  const [current, setCurrent] = useState("progression");
+  // TODO: [BUG] Sometimes the path doesn't match up with the navbar selected when we enter via path.
+  const dispatch = useDispatch();
+  const [current, setCurrent] = React.useState("progression");
+  React.useEffect(() => {
+
+    const savedCourseOptions = window.localStorage.getItem('courseOptions') || null;
+    if (savedCourseOptions) dispatch(courseOptionsActions('LOAD_PREV_STATE', savedCourseOptions));
+    
+    const savedDegree = window.localStorage.getItem('degree') || null;
+    if (savedDegree) dispatch(updateDegree(savedDegree))
+  
+    // TODO: Need to be implemented
+    // const savedPlanner = window.localStorage.getItem('planner') || null;
+    // if (savedPlanner) dispatch(plannerActions('LOAD_PREV_STATE', savedPlanner); 
+  
+    // const savedUsername = window.localStorage.getItem('username') || null;
+    // if (savedUsername) dispatch(userActions('LOAD_PREV_STATE', savedUsername));  
+  }, [])
 
   const handleClick = (e) => {
     setCurrent(e.key);
   };
 
-  const { Title } = Typography;
   return (
     <Router>
       <Header className="header">

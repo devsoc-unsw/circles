@@ -23,6 +23,7 @@ const MenuItem = ({ courseCode }) => {
 export function CourseMenu() {
   const theme = useSelector(store => store.theme)
   const courseOptions = useSelector(store => store.courseOptions);
+  if (!courseOptions)
   // const [selectedCourse, setSelected] = React.useState(null);
 
   return (

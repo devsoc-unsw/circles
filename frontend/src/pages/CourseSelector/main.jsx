@@ -1,6 +1,7 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector} from 'react-redux';
 import { SearchCourse } from './SearchCourse';
+
 import { CourseMenu } from './CourseMenu';
 import { CourseDescription } from './CourseDescription';
 import './main.less';
