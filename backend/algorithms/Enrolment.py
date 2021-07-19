@@ -1,3 +1,4 @@
+import re
 class Condition:
     def __init__(self):
         self.selected = []
@@ -39,6 +40,25 @@ class CourseRequirement(Requirement):
         if newLine:
             print()
 
+class WamRequirement(Requirement):
+    def __init__(self, wam = None):
+        self.components = 0
+
+    def addComponent(self, newWam):
+        self.components = newWam
+
+    def validate(self, Condition):
+        if self.components != None:
+            satisfied = self.components >=Condition.Wam
+        else:
+            satisfied = True
+        return satisfied
+    
+    def show(self, newLine = False):
+        print('Wam:' + self.components, end = '')
+        if newLine:
+            print()
+
 class CompositeRequirement(Requirement):
     def __init__(self):
         self.components = []
@@ -64,7 +84,9 @@ class CompositeRequirement(Requirement):
     
     def show(self, newLine = False):
         print('(', end = '')
-        if self.type == 'and':
+        if self.components == []:
+            pass
+        elif self.type == 'and':
             satisfied = True
             for c in self.components[:-1]:
                 c.show()
@@ -79,6 +101,11 @@ class CompositeRequirement(Requirement):
         print(')', end = '')
         if newLine:
             print()
+    
+    def unitize(self):
+        if len(self.components) == 1:
+            return self.components[0]
+        return self
 
 def orLike(text):
     result = False
@@ -96,58 +123,47 @@ def andLike(text):
         result = True
     return result
 
-bad = False
+def isCourse(text):
+    if re.match("[a-zA-Z]{4}\d{4}", text):
+        return True
+    return False
 
-#This function cannot work properly with more than one leading '('s
-#The correct method is to add white spaces on the both side of parentheses and treat them seperately
-#But the data source is simple and here's no such cases, so I remain the code unchanged
-#At least it works well now
-def parseRequirement(text, isCalled = False, tracedBack = False):
-    result = Requirement()
-    #If empty, always True
-    if len(text) == 0:
-        result = Requirement()
-    #If only one element, simply add a CourseRequirement
-    elif len(text) == 1:
-        result = CourseRequirement(text[0])
-    #Add a compositeRequirement instead
-    else:
-        result = CompositeRequirement()
-        for index, i in enumerate(text):
 
-            if tracedBack:
-                if len(i) >= 9 and i[8] == ')':
-                    tracedBack = False
-                continue
+#Not considering and or clauses wihtout parenthesis
+def parseRequirement(text, elapsed = 0):
+    result = CompositeRequirement()
+    move = 0
+    for index, i in enumerate(text):
+        unmatched = True
+        elapsed += 1
+        if move > 0:
+            continue
+        if i == '(':
+            unmatched = False
+            subResult, move = parseRequirement(text[index + 1:], elapsed)
+            result.addComponent(subResult)
+            if move == -1:
+                result = result.unitize()
+                return result, -1
+        if i == ')':
+            unmatched = False
+            result = result.unitize()
+            return result, elapsed
+        if isCourse(i):
+            unmatched = False
+            result.addComponent(CourseRequirement(i))
+        if orLike(i): 
+            unmatched = False
+            result.switchType()
+        if andLike(i):
+            unmatched = False
+        if unmatched:
+            print(i, 'Unmatched')
+            return result, -1
+    result = result.unitize()
+    return result, elapsed
+    
 
-            # Modify later to a more complicated condition
-            if len(i) == 8:
-                newCourse = CourseRequirement(i)
-                result.addComponent(newCourse)
-            elif len(i) >= 9:
-                if i[0] == '(':
-                    if isCalled:
-                        newCourse = CourseRequirement(i[1:])
-                        result.addComponent(newCourse)
-                        isCalled = False
-                    else:
-                        result.addComponent(parseRequirement(text[index:], True))
-                        tracedBack = True
-                elif i[8] == ')':
-                    newCourse = CourseRequirement(i[:8])
-                    result.addComponent(newCourse)
-                    return result
-            elif orLike(i):
-                result.switchType()
-            elif andLike(i):
-                pass
-            else:
-                bad = True
-                return
-                #print('Unknown type: ', i)
-                # can print or log to error.txt so we can check what to fix
-
-    return result
 
 '''
 DATA WILL BE PREPROCESSED IN CONDITIONS:
