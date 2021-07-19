@@ -43,10 +43,11 @@ if args.type == 'all':
     for t in run:
         if args.stage == 'all':
             # Run all the stages from top to bottom
-            print("TODO, running all arguments")
+            for s in run[args.type]:
+                run[t][s]()
         else:
             # Run the specific file
-            
+            run[t][args.type]()
 else:
     if args.stage == 'all':
         # Run all the stages from top to bottom
@@ -55,7 +56,8 @@ else:
     else:
         # Run the specific file
         run[args.type][args.stage]()
-            
+
+
 
 
 
