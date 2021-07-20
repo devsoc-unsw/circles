@@ -103,6 +103,8 @@ class CompositeRequirement(Requirement):
             print()
     
     def unitize(self):
+        if len(self.components) == 0:
+            return Requirement()
         if len(self.components) == 1:
             return self.components[0]
         return self
@@ -136,8 +138,10 @@ def parseRequirement(text, elapsed = 0):
     for index, i in enumerate(text):
         unmatched = True
         elapsed += 1
+        #Skip the contents in the parenthesis
         if move > 0:
             continue
+        #Parse the content int the bracket by calling a sub method
         if i == '(':
             unmatched = False
             subResult, move = parseRequirement(text[index + 1:], elapsed)
@@ -145,6 +149,7 @@ def parseRequirement(text, elapsed = 0):
             if move == -1:
                 result = result.unitize()
                 return result, -1
+        #End this parsing method
         if i == ')':
             unmatched = False
             result = result.unitize()
@@ -160,6 +165,7 @@ def parseRequirement(text, elapsed = 0):
         if unmatched:
             print(i, 'Unmatched')
             return result, -1
+    #Unitize befor any return
     result = result.unitize()
     return result, elapsed
     

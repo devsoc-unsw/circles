@@ -6,6 +6,10 @@ import json
 selectedCourses = ['COMP1531', 'MATH1081']
 # Text is the enrolmentRules
 text = "( MATH1081 and WAM75 and ( COMP1531 or COMP2041 ) )"
+text = "( MATH1081 )"
+text = ""
+#Should return empty
+text = "( ( ( ) ) )"
 
 
 cond = Condition()
