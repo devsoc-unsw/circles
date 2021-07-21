@@ -34,7 +34,7 @@ def process_data():
 
         processedData[programData["code"]] = programData
         
-    dataHelpers.write_data(processedData, "data/finalData/programsProcessedd.json")
+    dataHelpers.write_data(processedData, "data/finalData/programsProcessed.json")
 
 def addComponentData(formatted, programData):
     components = {
