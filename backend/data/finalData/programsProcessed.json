@@ -757,7 +757,15 @@
         "studyLevel": "undergraduate",
         "faculty": "Faculty of Engineering",
         "duration": "4 Year(s)",
-        "courseList": null
+        "disciplinary_component": {
+
+        },
+        "discipline_electives": {
+            "credits_to_complete": 12
+        },
+        "GE": {
+            "credits_to_complete": 12
+        }
     },
     "3761": {
         "title": "Advanced Mathematics (Honours) / Engineering (Honours)",
@@ -849,11 +857,41 @@
     },
     "3778": {
         "title": "Computer Science",
+        "Code": "",
         "UOC": "144",
         "studyLevel": "undergraduate",
         "faculty": "Faculty of Engineering",
         "duration": "3 Year(s)",
-        "courseList": null
+        "components": {
+            "disciplinary_component": {
+                "major" : {
+                    "COMPA1": 1,
+                    "COMPD1": 1,
+                    "003778": 1
+                }
+                }
+
+            "FE": {
+                "credits_to_complete": 36,
+                "minor": {
+                    "ACCTA2": 1,
+                    "FINSA2": 1,
+                    ...
+                }
+            },
+            // OLD ONE
+            // "FE": {
+            //     "credits_to_complete": 36,
+            //     "ACCTA2": 1,
+            //     "FINSA2": 1
+            // },
+            "GE": {
+                "credits_to_complete": 12
+            },
+            "limit_rules": {
+                "IR":
+            }
+        }
     },
     "3781": {
         "title": "Advanced Mathematics (Honours) / Computer Science",
