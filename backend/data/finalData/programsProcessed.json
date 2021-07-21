@@ -857,19 +857,23 @@
     },
     "3778": {
         "title": "Computer Science",
+        "Code": "",
         "UOC": "144",
         "studyLevel": "undergraduate",
         "faculty": "Faculty of Engineering",
         "duration": "3 Year(s)",
         "components": {
             "disciplinary_component": {
-                "COMPA1": 1,
-                "COMPD1": 1,
-                "003778": 1
-            },
+                "major" : {
+                    "COMPA1": 1,
+                    "COMPD1": 1,
+                    "003778": 1
+                }
+                }
+
             "FE": {
                 "credits_to_complete": 36,
-                "undergrad_minor": {
+                "minor": {
                     "ACCTA2": 1,
                     "FINSA2": 1,
                     ...
