@@ -15,18 +15,18 @@ Step in the data's journey:
 
 import re 
 from typing import List, Iterable, Union, Optional 
-import dataHelpers
+from data.utility import dataHelpers
 
 # TODO: add more specialisations as we expand scope of Circles
 TEST_SPNS = ["COMPA1", "COMPAH", "COMPBH", "SENGAH", "COMPD1", "COMPD1", 
              "COMPE1", "COMPI1", "COMPJ1", "COMPN1", "COMPS1", "COMPY1", 
              "COMPZ1"]
 
-CODE_MAPPING = dataHelpers.read_data("programCodeMappings.json")["title_to_code"]
+CODE_MAPPING = dataHelpers.read_data("data/utility/programCodeMappings.json")["title_to_code"]
 
 def customise_spn_data():
 
-    data = dataHelpers.read_data("specialisationsFormattedRaw.json")
+    data = dataHelpers.read_data("data/scrapers/specialisationsFormattedRaw.json")
 
     customised_data = {} # Dictionary for all customised data
     for spn in TEST_SPNS:
@@ -75,7 +75,7 @@ def customise_spn_data():
         customised_data[spn]["curriculum"] = curriculum
         print("Processing complete :)\n")
     
-    dataHelpers.write_data(customised_data, "specialisationsProcessed.json")
+    dataHelpers.write_data(customised_data, "data/finalData/specialisationsProcessed.json")
 
 def get_constraint(constraint_data: dict) -> dict:
     """
