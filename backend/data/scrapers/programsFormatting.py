@@ -19,7 +19,7 @@ Step in the data's journey:
     [   ] Customise formatted data (programProcessing.py)
 """
 import json
-import dataHelpers
+import data.utility.dataHelpers
 
 
 
