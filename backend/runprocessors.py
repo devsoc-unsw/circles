@@ -9,8 +9,8 @@ import argparse
 from data.scrapers.programsScraper import scrape_programs as scrape_prg_data
 from data.scrapers.specialisationsScraper import scrape_spn_data
 
-from data.scrapers.programsFormatting import format_spn_data
-from data.scrapers.specialisationsFormatting import format_data as format_prg_data
+from data.scrapers.programsFormatting import format_data as format_prg_data
+from data.scrapers.specialisationsFormatting import format_spn_data
 
 from data.processors.specialisationsProcessing import customise_spn_data
 
