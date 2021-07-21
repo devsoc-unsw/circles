@@ -95,7 +95,8 @@ def initialise_spn(spn: dict, data: dict) -> None:
     spn["programs"] = data["programs"]
     spn["name"] = data["title"]
     spn["type"] = data["level"]
-    spn["total_credits"] = int(data["credit_points"])
+    spn["UOC"] = int(data["credit_points"])
+    spn["code"] = data["code"]
 
 def get_credits(container: dict) -> str:
     """
