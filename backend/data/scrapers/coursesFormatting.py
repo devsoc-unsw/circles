@@ -21,6 +21,9 @@ def format_course_data():
         # Load value in 'data' string
         course_data = json.loads(course["data"])
         
+        if (formatted_course["title"] == "Data Structures and Algorithms"):
+            print(course_data)
+        
         # Scrape details from 'data' value
         get_faculty(formatted_course, course_data)
         get_offering(formatted_course, course_data)
@@ -28,6 +31,7 @@ def format_course_data():
         get_attributes(formatted_course, course_data)
         get_equivalents(formatted_course, course_data)
         get_exclusions(formatted_course, course_data)
+        get_enrolment_rules(formatted_course, course_data)
 
         ALL_COURSES[course["code"]] = formatted_course
 
@@ -95,6 +99,11 @@ def get_exclusions(formatted: dict, raw: dict) -> None:
     
     for excl in raw["exclusion"]:
         formatted["exclusions"][excl["assoc_code"]] = 1
+
+def get_enrolment_rules(formatted: dict, raw: dict) -> None:
+    """ Retrieves enrolment rules, if any """
+    if raw["enrolment_rules"]:
+        formatted["enrolment_rules"] = raw["enrolment_rules"][0].get("description")
 
 if __name__ == "__main__":
     format_course_data()
