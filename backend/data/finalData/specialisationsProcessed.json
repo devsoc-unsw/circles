@@ -5,7 +5,8 @@
         ],
         "name": "Computer Science",
         "type": "major",
-        "total_credits": 96,
+        "UOC": 96,
+        "code": "COMPA1",
         "course_constraints": [],
         "curriculum": [
             {
@@ -52,7 +53,8 @@
         ],
         "name": "Computer Science",
         "type": "honours",
-        "total_credits": 48,
+        "UOC": 48,
+        "code": "COMPAH",
         "course_constraints": [],
         "curriculum": [
             {
@@ -69,8 +71,8 @@
             },
             {
                 "courses": {
-                    "COMP4963": 1,
                     "COMP4961": 1,
+                    "COMP4963": 1,
                     "COMP4962": 1
                 },
                 "title": "Thesis",
@@ -87,7 +89,8 @@
         ],
         "name": "Computer Engineering",
         "type": "honours",
-        "total_credits": 168,
+        "UOC": 168,
+        "code": "COMPBH",
         "course_constraints": [
             {
                 "title": "Level 4 UOC Minimum",
@@ -97,46 +100,10 @@
         "curriculum": [
             {
                 "courses": {
-                    "COMP1531": 1,
-                    "COMP1521": 1,
-                    "ELEC1111": 1,
-                    "COMP1511": 1,
-                    "ENGG1000": 1,
-                    "MATH1141 or MATH1131": 2,
-                    "PHYS1131 or PHYS1121": 2,
-                    "PHYS1221 or PHYS1231": 2,
-                    "MATH1231 or MATH1241": 2
-                },
-                "title": "Level 1 Core Courses",
-                "credits_to_complete": 54,
-                "type": "core",
-                "levels": [
-                    1
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "COMP4601": 1,
-                    "COMP4920": 1,
-                    "COMP4951": 1,
-                    "COMP4952": 1,
-                    "COMP4953": 1
-                },
-                "title": "Level 4 Core Courses",
-                "credits_to_complete": 24,
-                "type": "core",
-                "levels": [
-                    4
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ENGG3060": 1,
                     "ENGG3600": 1,
-                    "ENGG4600": 1,
                     "ENGG2600": 1,
+                    "ENGG4600": 1,
+                    "ENGG3060": 1,
                     "COMP3": 1,
                     "COMP4": 1,
                     "COMP6": 1,
@@ -150,9 +117,47 @@
             },
             {
                 "courses": {
-                    "COMP3231": 1,
-                    "COMP3601": 1,
+                    "PHYS1131 or PHYS1121": 2,
+                    "MATH1241 or MATH1231": 2,
+                    "PHYS1231 or PHYS1221": 2,
+                    "COMP1521": 1,
+                    "COMP1531": 1,
+                    "COMP1511": 1,
+                    "ENGG1000": 1,
+                    "ELEC1111": 1,
+                    "MATH1131 or MATH1141": 2
+                },
+                "title": "Level 1 Core Courses",
+                "credits_to_complete": 54,
+                "type": "core",
+                "levels": [
+                    1
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "MATH2069": 1,
+                    "ELEC2133": 1,
+                    "MATH2099": 1,
+                    "COMP2511": 1,
+                    "DESN2000": 1,
+                    "COMP2521": 1,
+                    "ELEC2134": 1
+                },
+                "title": "Level 2 Core Courses",
+                "credits_to_complete": 42,
+                "type": "core",
+                "levels": [
+                    2
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
                     "COMP3211": 1,
+                    "COMP3601": 1,
+                    "COMP3231": 1,
                     "COMP3222": 1
                 },
                 "title": "Level 3 Core Courses",
@@ -165,19 +170,17 @@
             },
             {
                 "courses": {
-                    "MATH2069": 1,
-                    "ELEC2133": 1,
-                    "COMP2511": 1,
-                    "ELEC2134": 1,
-                    "DESN2000": 1,
-                    "MATH2099": 1,
-                    "COMP2521": 1
+                    "COMP4951": 1,
+                    "COMP4920": 1,
+                    "COMP4953": 1,
+                    "COMP4601": 1,
+                    "COMP4952": 1
                 },
-                "title": "Level 2 Core Courses",
-                "credits_to_complete": 42,
+                "title": "Level 4 Core Courses",
+                "credits_to_complete": 24,
                 "type": "core",
                 "levels": [
-                    2
+                    4
                 ],
                 "notes": ""
             }
@@ -189,7 +192,8 @@
         ],
         "name": "Software Engineering",
         "type": "honours",
-        "total_credits": 168,
+        "UOC": 168,
+        "code": "SENGAH",
         "course_constraints": [
             {
                 "title": "Level 4 (or higher) COMP UOC Minimum",
@@ -308,7 +312,8 @@
         ],
         "name": "Computer Science (Database Systems)",
         "type": "major",
-        "total_credits": 96,
+        "UOC": 96,
+        "code": "COMPD1",
         "course_constraints": [],
         "curriculum": [
             {
@@ -370,7 +375,8 @@
         ],
         "name": "Computer Science (eCommerce Systems)",
         "type": "major",
-        "total_credits": 96,
+        "UOC": 96,
+        "code": "COMPE1",
         "course_constraints": [],
         "curriculum": [
             {
@@ -431,7 +437,8 @@
         ],
         "name": "Computer Science (Artificial Intelligence)",
         "type": "major",
-        "total_credits": 96,
+        "UOC": 96,
+        "code": "COMPI1",
         "course_constraints": [],
         "curriculum": [
             {
@@ -495,7 +502,8 @@
         ],
         "name": "Computer Science (Programming Languages)",
         "type": "major",
-        "total_credits": 96,
+        "UOC": 96,
+        "code": "COMPJ1",
         "course_constraints": [],
         "curriculum": [
             {
@@ -556,7 +564,8 @@
         ],
         "name": "Computer Science (Computer Networks)",
         "type": "major",
-        "total_credits": 96,
+        "UOC": 96,
+        "code": "COMPN1",
         "course_constraints": [],
         "curriculum": [
             {
@@ -618,7 +627,8 @@
         ],
         "name": "Computer Science (Embedded Systems)",
         "type": "major",
-        "total_credits": 96,
+        "UOC": 96,
+        "code": "COMPS1",
         "course_constraints": [],
         "curriculum": [
             {
@@ -666,7 +676,8 @@
         ],
         "name": "Computer Science (Security Engineering)",
         "type": "major",
-        "total_credits": 96,
+        "UOC": 96,
+        "code": "COMPY1",
         "course_constraints": [
             {
                 "title": "Prescribed Electives Requirement",
@@ -739,7 +750,8 @@
         ],
         "name": "Computational Data Science",
         "type": "major",
-        "total_credits": 66,
+        "UOC": 66,
+        "code": "COMPZ1",
         "course_constraints": [],
         "curriculum": [
             {
