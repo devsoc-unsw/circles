@@ -1,0 +1,38 @@
+{
+    "3778": {
+        "title": "Computer Science",
+        "code": "3778",
+        "duration": 3,
+        "UOC": 144,
+        "faculty": "Faculty of Engineering",
+        "components": {
+            "disciplinary_component": {
+                "credits_to_complete": 96,
+                "Majors": {
+                    "COMPS1": 1,
+                    "COMPJ1": 1,
+                    "COMPE1": 1,
+                    "COMPA1": 1,
+                    "COMPN1": 1,
+                    "COMPI1": 1,
+                    "COMPD1": 1,
+                    "COMPY1": 1
+                }
+            },
+            "FE": {
+                "credits_to_complete": 36,
+                "Minors": {
+                    "INFSA2": 1,
+                    "ACCTA2": 1,
+                    "PSYCM2": 1,
+                    "MARKA2": 1,
+                    "FINSA2": 1,
+                    "MATHC2": 1
+                }
+            },
+            "GE": {
+                "credits_to_complete": 12
+            }
+        }
+    }
+}
