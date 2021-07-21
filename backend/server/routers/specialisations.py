@@ -20,3 +20,15 @@ def getSpecialisation(code):
     del result["_id"]
 
     return result
+
+@router.get("/getProgramCode/{code}")
+def getCode(code):
+    query = { "code" : code }
+    result = specialisationsCOL.find_one(query)
+    return { "programs" : result["programs"] }
+
+@router.get("/getUOC/{code}")
+def getUOC(code):
+    query = { "code" : code }
+    result = specialisationsCOL.find_one(query)
+    return { "UOC" : result["UOC"] }
