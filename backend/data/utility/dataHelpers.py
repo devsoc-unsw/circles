@@ -13,7 +13,7 @@ def read_data(file_name):
         with open(file_name, "r") as INPUT_FILE:
             return json.load(INPUT_FILE)
     except:
-        print("File not found")
+        print(f"File {file_name} not found")
         sys.exit(1)
 
 def write_data(data, file_name):
