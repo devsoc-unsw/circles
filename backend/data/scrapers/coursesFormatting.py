@@ -21,9 +21,6 @@ def format_course_data():
         # Load value in 'data' string
         course_data = json.loads(course["data"])
         
-        if (formatted_course["title"] == "Data Structures and Algorithms"):
-            print(course_data)
-        
         # Scrape details from 'data' value
         get_faculty(formatted_course, course_data)
         get_offering(formatted_course, course_data)
@@ -41,7 +38,8 @@ def initialise_course(raw: dict) -> dict:
     """ Retrieves standard details for course """
     return {
         "title": raw.get("title"),
-        "credit_points": raw.get("creditPoints"),
+        "code": raw.get("code"),
+        "UOC": raw.get("creditPoints"),
         "gen_ed": raw.get("generalEducation"),
         "levels": raw.get("levelNumber"),
         "description": raw.get("description"),
