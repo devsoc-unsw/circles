@@ -22,7 +22,6 @@ import json
 import data.utility.dataHelpers
 
 
-
 def format_data():
     # Get raw data
     raw_content = dataHelpers.read_data("programsRaw.json")
