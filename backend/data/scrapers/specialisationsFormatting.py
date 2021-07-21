@@ -84,6 +84,7 @@ def initialise_specialisation(item):
 
     return {
         "title":  item.get("title"),
+        "code": item.get("code"),
         "study_level": item["studyLevel"].lower(),
         "level":  item.get("level"),
         "credit_points":  item.get("creditPoints"), # Not all specialisations have credit points
