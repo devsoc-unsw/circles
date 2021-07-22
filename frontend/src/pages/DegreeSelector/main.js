@@ -4,6 +4,8 @@ import { Select } from 'antd';
 import { Typography } from 'antd';
 import { Button } from 'antd';
 import './main.less';
+import { useDispatch } from 'react-redux';
+import { updateDegree } from '../../actions/updateDegree';
 
 function DegreeSelector() {
   const { Option } = Select;
@@ -18,10 +20,17 @@ function DegreeSelector() {
   ]
   
   const history = useHistory();
+  const dispatch = useDispatch();
   const [degreeState, setdegreeState] = useState('');
   const [degreetypeState, setdegreetypeState] = useState('');
 
-  const onButtonClick=(e)=>{
+  const onButtonClick= (e) => {
+    // Simulating a change, you still need to implement this 
+    const dummy_degree = {
+      code: "3556", 
+      name: "This is a dummy degree"
+    }
+    dispatch(updateDegree(dummy_degree))
     history.push('/course-selector');
   }
 

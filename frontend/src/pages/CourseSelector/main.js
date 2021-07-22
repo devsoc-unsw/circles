@@ -12,7 +12,7 @@ import CourseDescription from './CourseDescription';
 export default function CourseSelector() {
   const dispatch = useDispatch();
   const courses = useSelector(state => state.updateCourses.courses);
-  const degree = useSelector(state => state.user.degree);
+  const degree = useSelector(state => state.degree);
   // const unplanned = useSelector(state => state.user.unplanned);
   const [courseId, setCourseId] = useState('0');
 
@@ -36,7 +36,8 @@ export default function CourseSelector() {
         {/* { JSON.stringify(degree) } */}
           <div className={ classes.degreeCont }>
             <h1 className={ `${classes.zero} text` }>{ degree.code } - { degree.name }</h1>
-            <h2 className={ `${classes.zero} ${classes.major} text` }>{ degree.majors[0].code }</h2>
+            {/* @Gabriella, you should not assume that there will be a major. Consider working together with Sally to make a data structure for degree. */}
+            {/* <h2 className={ `${classes.zero} ${classes.major} text` }>{ degree.majors[0].code }</h2> */}
           </div>
           <div className={ classes.searchCont }>
             <SearchCourse courses={ courses } setCourseId={ setCourseId } />
