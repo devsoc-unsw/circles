@@ -1,20 +1,23 @@
 @import "~antd/lib/style/themes/default.less";
 
 .header {
-    display: flex;
+    display: flex !important;
+    flex-direction: row !important; 
     justify-content: space-between;
     align-items: center;
     margin-left: auto;
-    background-color: @purple-5;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: @purple-5 !important;
     height: 70px;
   }
-  
-  .header-content {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-  }
-  .logo {
-    display: flex;
-    flex-direction: row;
-  }
+
+.header-content {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+} 
+.logo {
+  display: flex;
+  flex-direction: row;
+}
