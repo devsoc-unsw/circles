@@ -1,6 +1,8 @@
 """
-Formats the raw courses data. 
-NB: ignores conditions for enrolment.
+Step in the course data's journey:
+    [   ] Scrape raw data (coursesScraper.py)
+    [ X ] Format scraped data (coursesFormatting.py)
+    [   ] Customise formatted data (coursesProcessing.py)
 """
 
 import requests
@@ -41,7 +43,7 @@ def initialise_course(raw: dict) -> dict:
         "code": raw.get("code"),
         "UOC": raw.get("creditPoints"),
         "gen_ed": raw.get("generalEducation"),
-        "levels": raw.get("levelNumber"),
+        "level": raw.get("levelNumber"),
         "description": raw.get("description"),
         "study_level": raw.get("studyLevel")
     }
@@ -100,6 +102,7 @@ def get_exclusions(formatted: dict, raw: dict) -> None:
 
 def get_enrolment_rules(formatted: dict, raw: dict) -> None:
     """ Retrieves enrolment rules, if any """
+    formatted["enrolment_rules"] = ""
     if raw["enrolment_rules"]:
         formatted["enrolment_rules"] = raw["enrolment_rules"][0].get("description")
 
