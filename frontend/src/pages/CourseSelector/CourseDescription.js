@@ -23,7 +23,7 @@ export default function CourseDescription(props) {
 
   const addToPlanner = () => {
     const data = {
-      courseCode: course.code,
+      courseCode: id,
       courseData: {
         title: course.name,
         type: course.type,
