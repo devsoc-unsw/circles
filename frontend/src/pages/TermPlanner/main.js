@@ -8,27 +8,35 @@ import axios from "axios";
 import OptionsDrawer from "./OptionsDrawer";
 import SkeletonPlanner from "./SkeletonPlanner";
 import "./main.less";
+import { useSelector, useDispatch } from "react-redux";
+import { plannerActions } from "../../actions/plannerActions";
 
 const TermPlanner = () => {
-  const [years, setYears] = useState([{}]);
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [unplanned, setUnplanned] = useState({});
+  const { years, startYear, courses } = useSelector((state) => {
+    return state.planner;
+  });
+
+  const dispatch = useDispatch();
 
   const fetchCourses = async () => {
     const res = await axios.get("data.json");
     setData(res.data);
-    setYears(res.data.years);
+    //     setYears(res.data.years);
     setUnplanned(createUnplannedTypes(res.data));
     setIsLoading(false);
     isAllEmpty(years) && openNotification();
   };
 
-  // REVIEW COMMENT: See warning - 'React Hook useEffect has a missing dependency 'fetchCourses.' Either include it or remove the dependency array
   useEffect(() => {
     setTimeout(fetchCourses, 1000); // testing skeleton
     //     fetchCourses();
   }, []);
+
+  // visibility for side drawer
+  const [visible, setVisible] = useState(false);
 
   const handleOnDragEnd = (result) => {
     setIsDragging(false);
@@ -46,7 +54,7 @@ const TermPlanner = () => {
 
     const destYear = destination.droppableId.match(/[0-9]{4}/)[0];
     const destTerm = destination.droppableId.match(/t[1-3]/)[0];
-    const destIndex = destYear - data.startYear;
+    const destIndex = destYear - startYear;
     const destBox = years[destIndex][destTerm];
 
     // === move unplanned course to term ===
@@ -64,13 +72,13 @@ const TermPlanner = () => {
       const destCoursesCpy = Array.from(years[destIndex][destTerm]);
       destCoursesCpy.splice(destination.index, 0, draggableId);
       newYears[destIndex][destTerm] = destCoursesCpy;
-      setYears(newYears);
+      dispatch(plannerActions("SET_YEARS", newYears));
       return;
     }
 
     const srcYear = source.droppableId.match(/[0-9]{4}/)[0];
     const srcTerm = source.droppableId.match(/t[1-3]/)[0];
-    const srcIndex = srcYear - data.startYear;
+    const srcIndex = srcYear - startYear;
     const srcBox = years[srcIndex][srcTerm];
 
     // === move within one term ===
@@ -79,7 +87,7 @@ const TermPlanner = () => {
       alteredBox.splice(source.index, 1);
       alteredBox.splice(destination.index, 0, draggableId);
       newYears[srcIndex][srcTerm] = alteredBox;
-      setYears(newYears);
+      dispatch(plannerActions("SET_YEARS", newYears));
       return;
     }
 
@@ -93,7 +101,7 @@ const TermPlanner = () => {
     newYears[srcIndex][srcTerm] = srcCoursesCpy;
     newYears[destIndex][destTerm] = destCoursesCpy;
 
-    setYears(newYears);
+    dispatch(plannerActions("SET_YEARS", newYears));
   };
 
   const [termsOffered, setTermsOffered] = useState([]);
@@ -101,18 +109,14 @@ const TermPlanner = () => {
   const handleOnDragStart = (courseItem) => {
     setIsDragging(true);
     const course = courseItem.draggableId;
-    const terms = data.courses[course]["termsOffered"];
+    const terms = courses[course]["termsOffered"];
     setTermsOffered(terms);
   };
-
-  const [visible, setVisible] = useState(false);
 
   return (
     <>
       {isLoading ? (
-        <div className="plannerContainer">
-          <SkeletonPlanner />
-        </div>
+        <SkeletonPlanner />
       ) : (
         <DragDropContext
           onDragEnd={handleOnDragEnd}
@@ -134,24 +138,25 @@ const TermPlanner = () => {
 
               {years.map((year, index) => (
                 <React.Fragment key={index}>
-                  <div class="gridItem">{data.startYear + index}</div>
-                  {Object.keys(year).map((term) => (
-                    <TermBox
-                      key={data.startYear + index + term}
-                      name={data.startYear + index + term}
-                      courses={year[term]}
-                      courseNames={data.courses}
-                      termsOffered={termsOffered}
-                      isDragging={isDragging}
-                    />
-                  ))}
+                  <div class="gridItem">{startYear + index}</div>
+                  {Object.keys(year).map((term) => {
+                    const key = startYear + index + term;
+                    return (
+                      <TermBox
+                        key={key}
+                        name={key}
+                        courses={year[term]}
+                        termsOffered={termsOffered}
+                        isDragging={isDragging}
+                      />
+                    );
+                  })}
                 </React.Fragment>
               ))}
             </div>
             <OptionsDrawer
               visible={visible}
               setVisible={setVisible}
-              data={data}
               unplanned={unplanned}
             />
           </div>
