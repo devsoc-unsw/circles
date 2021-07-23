@@ -18,5 +18,4 @@ const updateCoursesReducer = (state = initialState, action) => {
             return state; 
     }
 }
-
 export default updateCoursesReducer; 

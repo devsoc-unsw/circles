@@ -6,6 +6,7 @@ import { PlusOutlined } from '@ant-design/icons';
 import { CourseTag } from '../../components/courseTag/CourseTag';
 import { getCourseById } from '../../actions/updateCourses';
 import { addUnplannedCourse, setUnplannedCourses } from '../../actions/userAction';
+import { plannerActions } from '../../actions/plannerActions';
 import classes from './CourseDescription.module.css';
 
 export default function CourseDescription(props) {
@@ -13,11 +14,6 @@ export default function CourseDescription(props) {
   const dispatch = useDispatch();
   
   const course = useSelector(state => state.updateCourses.course);
-  // REVIEW COMMENT: Handle checks for course here instead of inside the component
-  if (!course) {
-    console.log("Need to handle state error here.");
-  }
-
   const [show, setShow] = useState(false);
 
   useEffect(() => {
@@ -26,7 +22,15 @@ export default function CourseDescription(props) {
   }, [id]);
 
   const addToPlanner = () => {
-    // dispatch(addUnplannedCourse(id));
+    const data = {
+      courseCode: id,
+      courseData: {
+        title: course.name,
+        type: course.type,
+        termsOffered: course.terms,
+      }
+    }
+    dispatch(plannerActions("ADD_TO_UNPLANNED", data));
     setShow(true);
     dispatch(setUnplannedCourses(id));
   }
@@ -85,8 +89,11 @@ export default function CourseDescription(props) {
         <div className={ classes.list }>
           {
             course.terms && course.terms.map(term => {
+              let termNo = term.slice(1) ;
               return (
-                <Tag className={`text`}>{ isNaN(term) ? `${term} Term` : `Term ${term}` }</Tag>
+                <Tag className={`text`}> 
+                  {termNo === '0' ? 'Summer' : `Term ${termNo}`}
+                </Tag>
               )
             })
           }
