@@ -12,7 +12,9 @@ from data.scrapers.specialisationsScraper import scrape_spn_data
 from data.scrapers.programsFormatting import format_data as format_prg_data
 from data.scrapers.specialisationsFormatting import format_spn_data
 
+from data.processors.programsProcessing import process_data as process_prg_data
 from data.processors.specialisationsProcessing import customise_spn_data
+
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--type', type=str, help='all, program, specialisation, course or condition')
@@ -23,7 +25,8 @@ args = parser.parse_args()
 run = {
     'program': {
         'scrape': scrape_prg_data,
-        'format': format_prg_data
+        'format': format_prg_data,
+        'process': process_prg_data
     },
     'specialisation': {
         'scrape': scrape_spn_data,
