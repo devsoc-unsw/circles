@@ -17,6 +17,7 @@ dummyMap.set("DEFAULT3000", {
 
 const initialState = {
   unplanned: ["DEFAULT1000", "DEFAULT2000", "DEFAULT3000"],
+  sortedUnplanned: {},
   startYear: 2021,
   numYears: 3,
   years: [
@@ -38,6 +39,24 @@ const plannerReducer = (state = initialState, action) => {
       // Append course code onto unplanned
       state.unplanned.join(courseCode);
       return state;
+    case "SET_YEARS":
+      return { ...state, years: action.payload };
+    case "SET_SORTED_UNPLANNED":
+      const sortedUnplanned = action.payload;
+      let unplanned = [];
+      for (let key in sortedUnplanned) {
+        let type = sortedUnplanned[key];
+        type.forEach((course) => {
+          unplanned.push(course);
+        });
+      }
+      console.log(unplanned);
+
+      return {
+        ...state,
+        sortedUnplanned: action.payload,
+        unplanned: unplanned,
+      };
     default:
       return state;
   }

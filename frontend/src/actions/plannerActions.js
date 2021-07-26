@@ -10,6 +10,11 @@ export const plannerActions = (action, payload) => {
         type: "SET_YEARS",
         payload: payload,
       };
+    case "SET_SORTED_UNPLANNED":
+      return {
+	type: action,
+	payload: payload,
+      }
     default:
       return;
   }

@@ -1,21 +1,28 @@
-import React from "react";
-
+import React, { useEffect } from "react";
+import { plannerActions } from "../../actions/plannerActions";
 import { Typography, Drawer, Collapse, Alert } from "antd";
 import { Droppable } from "react-beautiful-dnd";
 import DraggableCourse from "./DraggableCourse";
 import { CloseOutlined } from "@ant-design/icons";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 const OptionsDrawer = ({ visible, setVisible }) => {
   const { Title } = Typography;
   const { Panel } = Collapse;
 
   const theme = useSelector((state) => state.theme);
-  const { courses, unplanned } = useSelector((state) => {
+  const { courses, unplanned, sortedUnplanned } = useSelector((state) => {
     return state.planner;
   });
 
-  const unplannedByType = createUnplannedTypes(unplanned, courses);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // get unplanned array and store the sorted version
+    dispatch(
+      plannerActions("SET_SORTED_UNPLANNED", sortUnplanned(unplanned, courses))
+    );
+  }, []);
 
   return (
     <Drawer
@@ -36,7 +43,7 @@ const OptionsDrawer = ({ visible, setVisible }) => {
       <Title level={2} class="text">
         Unplanned Courses
       </Title>
-      {Object.keys(unplannedByType).length === 0 ? (
+      {Object.keys(sortedUnplanned).length === 0 ? (
         <Alert
           message="Oops!" // might need to change this
           description="It looks like you haven't added any courses to your term planner. Please do so in the course selector."
@@ -46,7 +53,7 @@ const OptionsDrawer = ({ visible, setVisible }) => {
         />
       ) : (
         <Collapse className="collapse" ghost={theme === "dark"}>
-          {Object.keys(unplannedByType).map((type, index) => (
+          {Object.keys(sortedUnplanned).map((type, index) => (
             <Panel header={type} key={index}>
               <Droppable droppableId={type} isDropDisabled={true}>
                 {(provided) => (
@@ -55,7 +62,7 @@ const OptionsDrawer = ({ visible, setVisible }) => {
                     {...provided.droppableProps}
                     className="panel"
                   >
-                    {unplannedByType[type].map((code, index) => (
+                    {sortedUnplanned[type].map((code, index) => (
                       <DraggableCourse code={code} index={index} key={code} />
                     ))}
                     {provided.placeholder}
@@ -72,7 +79,7 @@ const OptionsDrawer = ({ visible, setVisible }) => {
 
 // create separate array for each type
 // e.g. courseTypes = { Core: ["COMP1511", "COMP2521"], Elective: ["COMP6881"] }
-const createUnplannedTypes = (unplanned, courses) => {
+const sortUnplanned = (unplanned, courses) => {
   if (unplanned == null) return {};
   let courseTypes = {};
   unplanned.forEach((code) => {
