@@ -2,8 +2,7 @@ import { plannerActions } from "../../actions/plannerActions";
 import { useSelector, useDispatch } from "react-redux";
 
 export const handleOnDragEnd = (result, dragEndProps) => {
-  const { setIsDragging, dispatch, sortedUnplanned, years, startYear } =
-    dragEndProps;
+  const { setIsDragging, dispatch, years, startYear } = dragEndProps;
 
   setIsDragging(false);
 
@@ -23,17 +22,20 @@ export const handleOnDragEnd = (result, dragEndProps) => {
   const destRow = destYear - startYear;
   const destBox = years[destRow][destTerm];
 
-  // === move sortedUnplanned course to term ===
+  // === move unplanned course to term ===
   if (source.droppableId.match(/[0-9]{4}/) === null) {
-    // updated sortedUnplanned list
-    const type = source.droppableId;
-    const code = sortedUnplanned[type][source.index];
-    const sortedUnplannedCpy = Object.assign({}, sortedUnplanned);
-    sortedUnplannedCpy[type] = sortedUnplannedCpy[type].filter(
-      (course) => course !== code
-    );
-    // setSortedUnplanned(sortedUnplannedCpy);
-    dispatch(plannerActions("SET_SORTED_UNPLANNED", sortedUnplannedCpy));
+    //     // updated sortedUnplanned list
+    //     const type = source.droppableId;
+    //     const code = sortedUnplanned[type][source.index];
+    //     const sortedUnplannedCpy = Object.assign({}, sortedUnplanned);
+    //     sortedUnplannedCpy[type] = sortedUnplannedCpy[type].filter(
+    //       (course) => course !== code
+    //     );
+    //     console.log(draggableId);
+
+    //     // setSortedUnplanned(sortedUnplannedCpy);
+    //     dispatch(plannerActions("SET_SORTED_UNPLANNED", sortedUnplannedCpy));
+    dispatch(plannerActions("SET_UNPLANNED", draggableId));
 
     // update destination term box
     const destCoursesCpy = Array.from(years[destRow][destTerm]);

@@ -4,23 +4,19 @@ import { Button, notification } from "antd";
 import { DragDropContext } from "react-beautiful-dnd";
 import TermBox from "./TermBox";
 import { RightOutlined } from "@ant-design/icons";
-import axios from "axios";
 import OptionsDrawer from "./OptionsDrawer";
 import SkeletonPlanner from "./SkeletonPlanner";
 import "./main.less";
 import { useSelector, useDispatch } from "react-redux";
-import { plannerActions } from "../../actions/plannerActions";
 import { handleOnDragEnd, handleOnDragStart } from "./DragDropLogic";
 
 const TermPlanner = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [termsOffered, setTermsOffered] = useState([]);
   const [isDragging, setIsDragging] = useState(false);
-  const { years, startYear, courses, sortedUnplanned } = useSelector(
-    (state) => {
-      return state.planner;
-    }
-  );
+  const { years, startYear, courses } = useSelector((state) => {
+    return state.planner;
+  });
   const [visible, setVisible] = useState(false); // visibility for side drawer
   const dispatch = useDispatch();
 
@@ -32,7 +28,6 @@ const TermPlanner = () => {
   const dragEndProps = {
     setIsDragging,
     dispatch,
-    sortedUnplanned,
     years,
     startYear,
   };
