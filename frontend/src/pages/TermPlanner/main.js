@@ -18,9 +18,9 @@ const TermPlanner = () => {
   const { years, startYear, courses } = useSelector((state) => {
     return state.planner;
   });
+  console.log(courses.get("DEFAULT1000"));
 
   const dispatch = useDispatch();
-
   const fetchCourses = async () => {
     const res = await axios.get("data.json");
     setData(res.data);
@@ -32,7 +32,6 @@ const TermPlanner = () => {
 
   useEffect(() => {
     setTimeout(fetchCourses, 1000); // testing skeleton
-    //     fetchCourses();
   }, []);
 
   // visibility for side drawer
@@ -54,8 +53,8 @@ const TermPlanner = () => {
 
     const destYear = destination.droppableId.match(/[0-9]{4}/)[0];
     const destTerm = destination.droppableId.match(/t[1-3]/)[0];
-    const destIndex = destYear - startYear;
-    const destBox = years[destIndex][destTerm];
+    const destRow = destYear - startYear;
+    const destBox = years[destRow][destTerm];
 
     // === move unplanned course to term ===
     if (source.droppableId.match(/[0-9]{4}/) === null) {
@@ -69,37 +68,37 @@ const TermPlanner = () => {
       setUnplanned(unplannedCpy);
 
       // update destination term box
-      const destCoursesCpy = Array.from(years[destIndex][destTerm]);
+      const destCoursesCpy = Array.from(years[destRow][destTerm]);
       destCoursesCpy.splice(destination.index, 0, draggableId);
-      newYears[destIndex][destTerm] = destCoursesCpy;
+      newYears[destRow][destTerm] = destCoursesCpy;
       dispatch(plannerActions("SET_YEARS", newYears));
       return;
     }
 
     const srcYear = source.droppableId.match(/[0-9]{4}/)[0];
     const srcTerm = source.droppableId.match(/t[1-3]/)[0];
-    const srcIndex = srcYear - startYear;
-    const srcBox = years[srcIndex][srcTerm];
+    const srcRow = srcYear - startYear;
+    const srcBox = years[srcRow][srcTerm];
 
     // === move within one term ===
     if (srcBox === destBox) {
       const alteredBox = Array.from(srcBox);
       alteredBox.splice(source.index, 1);
       alteredBox.splice(destination.index, 0, draggableId);
-      newYears[srcIndex][srcTerm] = alteredBox;
+      newYears[srcRow][srcTerm] = alteredBox;
       dispatch(plannerActions("SET_YEARS", newYears));
       return;
     }
 
     // === move from one term to another ===
-    const srcCoursesCpy = Array.from(years[srcIndex][srcTerm]);
+    const srcCoursesCpy = Array.from(years[srcRow][srcTerm]);
     srcCoursesCpy.splice(source.index, 1);
 
-    const destCoursesCpy = Array.from(years[destIndex][destTerm]);
+    const destCoursesCpy = Array.from(years[destRow][destTerm]);
     destCoursesCpy.splice(destination.index, 0, draggableId);
 
-    newYears[srcIndex][srcTerm] = srcCoursesCpy;
-    newYears[destIndex][destTerm] = destCoursesCpy;
+    newYears[srcRow][srcTerm] = srcCoursesCpy;
+    newYears[destRow][destTerm] = destCoursesCpy;
 
     dispatch(plannerActions("SET_YEARS", newYears));
   };
@@ -109,7 +108,7 @@ const TermPlanner = () => {
   const handleOnDragStart = (courseItem) => {
     setIsDragging(true);
     const course = courseItem.draggableId;
-    const terms = courses[course]["termsOffered"];
+    const terms = courses.get(course)["termsOffered"];
     setTermsOffered(terms);
   };
 

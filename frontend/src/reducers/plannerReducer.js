@@ -6,12 +6,17 @@ dummyMap.set("DEFAULT1000", {
 });
 dummyMap.set("DEFAULT2000", {
   title: "Default course 2",
-  type: "Core",
+  type: "Elective",
   termsOffered: ["t1", "t2"],
+});
+dummyMap.set("DEFAULT3000", {
+  title: "Default course 3",
+  type: "General Education",
+  termsOffered: ["t2", "t3"],
 });
 
 const initialState = {
-  unplanned: ["DEFAULT1000", "DEFAULT2000"],
+  unplanned: ["DEFAULT1000", "DEFAULT2000", "DEFAULT3000"],
   startYear: 2021,
   numYears: 3,
   years: [
@@ -32,7 +37,6 @@ const plannerReducer = (state = initialState, action) => {
 
       // Append course code onto unplanned
       state.unplanned.join(courseCode);
-      console.log(state);
       return state;
     default:
       return state;

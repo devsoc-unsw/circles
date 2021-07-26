@@ -9,7 +9,7 @@ function DraggableCourse({ code, index }) {
   const { courses } = useSelector((state) => {
     return state.planner;
   });
-  const courseName = courses[code]["title"];
+  const courseName = courses.get(code)["title"];
 
   return (
     <Draggable draggableId={code} index={index}>

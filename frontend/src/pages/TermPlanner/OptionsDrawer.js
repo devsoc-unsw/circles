@@ -76,7 +76,7 @@ const createUnplannedTypes = (unplanned, courses) => {
   if (unplanned == null) return {};
   let courseTypes = {};
   unplanned.forEach((code) => {
-    const type = courses[code]["type"];
+    const type = courses.get(code)["type"];
     if (!courseTypes.hasOwnProperty(type)) {
       courseTypes[type] = [code];
     } else {
