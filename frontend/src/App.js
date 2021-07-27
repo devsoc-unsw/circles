@@ -33,7 +33,7 @@ function App() {
           mode="horizontal"
           style={menuStyles}
         >
-          <Menu.Item key="degree">
+          <Menu.Item key="degree"> 
             <span>Degree Selector </span>
             <Link to="/degree-selector" />
           </Menu.Item>
