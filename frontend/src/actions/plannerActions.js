@@ -15,11 +15,6 @@ export const plannerActions = (action, payload) => {
         type: action,
         payload: payload,
       };
-    case "UPDATE_PLANNED_COURSES":
-      return {
-        type: action,
-        payload: payload,
-      };
     default:
       return;
   }

@@ -1,36 +1,22 @@
 const dummyMap = new Map();
-
-dummyMap.set("COMP1511", {
-  title: "Programming Fundamentals",
+dummyMap.set("DEFAULT1000", {
+  title: "Default course 1",
   type: "Core",
-  termsOffered: ["t1", "t2", "t3"],
-  prereqs: [],
-});
-dummyMap.set("COMP2521", {
-  title: "Data Structures and Algorithms",
-  type: "Core",
-  termsOffered: ["t1", "t2", "t3"],
-  prereqs: ["COMP1511"],
+  termsOffered: ["t1", "t2"],
 });
 dummyMap.set("DEFAULT2000", {
   title: "Default course 2",
   type: "Elective",
   termsOffered: ["t1", "t2"],
-  prereqs: ["COMP1511"],
 });
 dummyMap.set("DEFAULT3000", {
   title: "Default course 3",
   type: "General Education",
   termsOffered: ["t2", "t3"],
-  prereqs: ["COMP1511"],
 });
 
-const plannedCourses = new Map();
-// plannedCourses.set("COMP2511", "2021t1");
-// plannedCourses.set("COMP1511", "2021t2");
-
 const initialState = {
-  unplanned: ["COMP1511", "COMP2521", "DEFAULT2000", "DEFAULT3000"],
+  unplanned: ["DEFAULT1000", "DEFAULT2000", "DEFAULT3000"],
   startYear: 2021,
   numYears: 3,
   years: [
@@ -39,7 +25,6 @@ const initialState = {
     { t1: [], t2: [], t3: [] },
   ],
   courses: dummyMap,
-  plannedCourses: plannedCourses,
 };
 const plannerReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -62,21 +47,9 @@ const plannerReducer = (state = initialState, action) => {
       state.unplanned.forEach((course) => {
         if (action.payload != course) newUnplanned.push(course);
       });
+      console.log(newUnplanned);
 
       return { ...state, unplanned: newUnplanned };
-
-    case "UPDATE_PLANNED_COURSES":
-      //       let plannedCourses = = [];
-      //       state.unplanned.forEach((course) => {
-      //         if (action.payload != course) newUnplanned.push(course);
-      //       });
-      //       console.log(newUnplanned);
-      const { course, term, warning } = action.payload;
-      const plannedClone = new Map(state.plannedCourses).set(course, {
-        term: term,
-        warning: warning,
-      });
-      return { ...state, plannedCourses: plannedClone };
 
     default:
       return state;

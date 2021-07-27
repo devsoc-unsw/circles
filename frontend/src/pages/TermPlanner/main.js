@@ -14,7 +14,7 @@ const TermPlanner = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [termsOffered, setTermsOffered] = useState([]);
   const [isDragging, setIsDragging] = useState(false);
-  const { years, startYear, courses, plannedCourses } = useSelector((state) => {
+  const { years, startYear, courses } = useSelector((state) => {
     return state.planner;
   });
   const [visible, setVisible] = useState(false); // visibility for side drawer
@@ -30,8 +30,6 @@ const TermPlanner = () => {
     dispatch,
     years,
     startYear,
-    plannedCourses,
-    courses,
   };
 
   return (

@@ -2,8 +2,7 @@ import { plannerActions } from "../../actions/plannerActions";
 import { useSelector, useDispatch } from "react-redux";
 
 export const handleOnDragEnd = (result, dragEndProps) => {
-  const { setIsDragging, dispatch, years, startYear, plannedCourses, courses } =
-    dragEndProps;
+  const { setIsDragging, dispatch, years, startYear } = dragEndProps;
 
   setIsDragging(false);
 
@@ -22,15 +21,6 @@ export const handleOnDragEnd = (result, dragEndProps) => {
   const destTerm = destination.droppableId.match(/t[1-3]/)[0];
   const destRow = destYear - startYear;
   const destBox = years[destRow][destTerm];
-
-  checkPrereq(
-    draggableId,
-    destination,
-    plannedCourses,
-    courses,
-    dispatch,
-    draggableId
-  );
 
   // === move unplanned course to term ===
   if (source.droppableId.match(/[0-9]{4}/) === null) {
@@ -52,7 +42,6 @@ export const handleOnDragEnd = (result, dragEndProps) => {
     destCoursesCpy.splice(destination.index, 0, draggableId);
     newYears[destRow][destTerm] = destCoursesCpy;
     dispatch(plannerActions("SET_YEARS", newYears));
-
     return;
   }
 
@@ -94,37 +83,4 @@ export const handleOnDragStart = (
   const terms = courses.get(course)["termsOffered"];
   setTermsOffered(terms);
   setIsDragging(true);
-};
-
-const checkPrereq = (
-  course,
-  destination,
-  plannedCourses,
-  courses,
-  dispatch,
-  draggableId
-) => {
-  const prereqs = courses.get(course).prereqs;
-  let warning = false;
-
-  prereqs.every((prereq) => {
-    // prereq not present in planned terms
-    if (plannedCourses.get(prereq) == null) {
-      warning = true;
-      return false;
-    }
-    // course placed before (or during) prereq is complete
-    if (destination.droppableId <= plannedCourses.get(prereq)["term"]) {
-      warning = true;
-      return false;
-    }
-  });
-
-  dispatch(
-    plannerActions("UPDATE_PLANNED_COURSES", {
-      course: draggableId,
-      term: destination.droppableId,
-      warning: warning,
-    })
-  );
 };
