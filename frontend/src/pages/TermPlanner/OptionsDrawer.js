@@ -1,16 +1,22 @@
-import React from "react";
-
+import React, { useEffect } from "react";
+import { plannerActions } from "../../actions/plannerActions";
 import { Typography, Drawer, Collapse, Alert } from "antd";
 import { Droppable } from "react-beautiful-dnd";
 import DraggableCourse from "./DraggableCourse";
 import { CloseOutlined } from "@ant-design/icons";
 import { useSelector } from "react-redux";
 
-const OptionsDrawer = ({ visible, setVisible, unplanned, data }) => {
+const OptionsDrawer = ({ visible, setVisible }) => {
   const { Title } = Typography;
   const { Panel } = Collapse;
 
   const theme = useSelector((state) => state.theme);
+  const { courses, unplanned } = useSelector((state) => {
+    return state.planner;
+  });
+
+  const sortedUnplanned = sortUnplanned(unplanned, courses);
+
   return (
     <Drawer
       placement="left"
@@ -30,17 +36,17 @@ const OptionsDrawer = ({ visible, setVisible, unplanned, data }) => {
       <Title level={2} class="text">
         Unplanned Courses
       </Title>
-      {Object.keys(unplanned).length === 0 ? (
+      {Object.keys(sortedUnplanned).length === 0 ? (
         <Alert
-          message="Oops!" // might need to change this
-          description="It looks like you haven't added any courses to your term planner. Please do so in the course selector."
+          message="Oh!"
+          description="It looks like you don't have any more courses to add to your term planner. "
           type="warning"
           showIcon
           className="alert"
         />
       ) : (
         <Collapse className="collapse" ghost={theme === "dark"}>
-          {Object.keys(unplanned).map((type, index) => (
+          {Object.keys(sortedUnplanned).map((type, index) => (
             <Panel header={type} key={index}>
               <Droppable droppableId={type} isDropDisabled={true}>
                 {(provided) => (
@@ -49,13 +55,8 @@ const OptionsDrawer = ({ visible, setVisible, unplanned, data }) => {
                     {...provided.droppableProps}
                     className="panel"
                   >
-                    {unplanned[type].map((code, index) => (
-                      <DraggableCourse
-                        code={code}
-                        index={index}
-                        courseNames={data["courses"]}
-                        key={code}
-                      />
+                    {sortedUnplanned[type].map((code, index) => (
+                      <DraggableCourse code={code} index={index} key={code} />
                     ))}
                     {provided.placeholder}
                   </div>
@@ -67,6 +68,22 @@ const OptionsDrawer = ({ visible, setVisible, unplanned, data }) => {
       )}
     </Drawer>
   );
+};
+
+// create separate array for each type
+// e.g. courseTypes = { Core: ["COMP1511", "COMP2521"], Elective: ["COMP6881"] }
+const sortUnplanned = (unplanned, courses) => {
+  if (unplanned == null) return {};
+  let courseTypes = {};
+  unplanned.forEach((code) => {
+    const type = courses.get(code)["type"];
+    if (!courseTypes.hasOwnProperty(type)) {
+      courseTypes[type] = [code];
+    } else {
+      courseTypes[type].push(code);
+    }
+  });
+  return courseTypes;
 };
 
 export default OptionsDrawer;
