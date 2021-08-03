@@ -46,3 +46,13 @@
 .alert {
   margin-bottom: 2rem;
 }
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.emptyText {
+  text-align: center;
+}

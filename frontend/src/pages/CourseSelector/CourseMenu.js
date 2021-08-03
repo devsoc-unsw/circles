@@ -1,23 +1,20 @@
 import React, { useState, useEffect } from 'react';
 // import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 // import { getAllCourses } from '../../actions/updateCourses';
 import { Menu } from 'antd';
+import './CourseMenu.less';
 
 const { SubMenu } = Menu;
 
 export default function CourseMenu(props) {
   const history = useHistory();
+  const { id } = useParams();
   // const dispatch = useDispatch();
   // const courses = useSelector(state => state.updateCourses.courses);
   const [core, setCore] = useState([]);
   const [electives, setElectives] = useState([]);
   const [genEd, setGenEd] = useState([]);
-  const [courseId, setCourseId] = useState('');
-
-  useEffect(() => {
-    setCourseId(props.courseId);
-  }, [props.courseId]);
 
   // useEffect(() => {
   //   console.log('COURSE MENU');
@@ -55,20 +52,21 @@ export default function CourseMenu(props) {
   }
 
   return (
-    <>
+    <div className='cs-menu-root'>
       {
-        courseId && core.length > 0 && electives.length > 0 && genEd.length > 0 &&
+        core.length > 0 && electives.length > 0 && genEd.length > 0 &&
         <Menu
           className={'text'}
           onClick={handleClick}
           style={{ width: '100%', color: 'black'}}
-          defaultSelectedKeys={[courseId !== '0' ? courseId : core[0]]}
-          selectedKeys={[courseId]}
+          defaultSelectedKeys={[id !== '0' ? id : core[0]]}
+          selectedKeys={[id]}
           defaultOpenKeys={['sub2', 'sub4', 'sub5']}
           mode="inline"
+          id={'this'}
         >
           <SubMenu className={"text"} key="sub1" /* icon={<MailOutlined />} */ title="Recently Viewed">
-            <Menu.Item key={'0'} disabled>No courses here (ㆆ_ㆆ)</Menu.Item>
+            <Menu.Item key={'0'} disabled className="text">No courses here (ㆆ_ㆆ)</Menu.Item>
           </SubMenu>
           <SubMenu  className={"text"} key="sub2" /* icon={<AppstoreOutlined />} */ title="Core">
             {
@@ -99,6 +97,6 @@ export default function CourseMenu(props) {
           </SubMenu>
         </Menu>
       }
-    </>
+    </div>
   );
 }

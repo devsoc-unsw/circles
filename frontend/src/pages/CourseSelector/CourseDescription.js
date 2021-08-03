@@ -9,18 +9,27 @@ import { addUnplannedCourse, setUnplannedCourses } from '../../actions/userActio
 import { plannerActions } from '../../actions/plannerActions';
 import classes from './CourseDescription.module.css';
 
-export default function CourseDescription(props) {
+export default function CourseDescription() {
   const { id } = useParams();
   const dispatch = useDispatch();
+
   
   const course = useSelector(state => state.updateCourses.course);
   const [show, setShow] = useState(false);
-
+  
   useEffect(() => {
     dispatch(getCourseById(id));
-    props.setCourseId(id);
+    // props.setCourseId(id);
   }, [id]);
-
+  
+  if (!id) {
+    return (
+      <div className={ classes.empty }>
+        <h3 className={`text ${ classes.emptyText }`}>Select a course on the left to view! (っ＾▿＾)۶🍸🌟🍺٩(˘◡˘ )</h3>
+      </div>
+    )
+  }
+  
   const addToPlanner = () => {
     const data = {
       courseCode: id,
