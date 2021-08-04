@@ -32,3 +32,56 @@ def getUOC(code):
     query = { "code" : code }
     result = specialisationsCOL.find_one(query)
     return { "UOC" : result["UOC"] }
+
+@router.get("/getType/{code}")
+def getType(code):
+    query = { "code" : code }
+    result = specialisationsCOL.find_one(query)
+    return { "type" : result["type"] }
+
+@router.get("/getCore/{code}")
+def getCore(code):
+    query = { "code" : code }
+    result = specialisationsCOL.find_one(query)
+    coreCourses = {}
+    # for obj in result["curriculum"]:
+    #     if obj["type"] == "core":
+    #         for courses in obj['courses']:
+    #             # print(courses + "\n")
+    #             # coreCourses[courses]
+    for obj in result['curriculum']:
+        if obj['type'] == 'core':
+            coreCourses[obj['title']] = obj
+
+    if (len(coreCourses) == 0):
+        return "none"
+
+    return coreCourses
+
+@router.get("/getElective/{code}")
+def getElective(code):
+    query = { "code" : code }
+    result = specialisationsCOL.find_one(query)
+    elective = {}
+    for obj in result['curriculum']:
+        if obj['type'] == 'elective':
+            elective[obj['title']] = obj
+
+    if (len(elective) == 0):
+        return "none"
+
+    return elective
+
+@router.get("/getOther/{code}")
+def getElective(code):
+    query = { "code" : code }
+    result = specialisationsCOL.find_one(query)
+    other = {}
+    for obj in result['curriculum']:
+        if obj['type'] == 'other':
+            other[obj['title']] = obj
+
+    if (len(other) == 0):
+        return "none"
+
+    return other
