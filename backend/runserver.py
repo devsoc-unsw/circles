@@ -13,4 +13,5 @@ from server.database import overwrite_collection
 if __name__ == "__main__":
     overwrite_collection('Programs')
     overwrite_collection('Specialisations')
+    overwrite_collection('Courses')
     uvicorn.run(app)
