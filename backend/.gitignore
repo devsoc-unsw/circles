@@ -1,2 +1,6 @@
+<<<<<<< HEAD
 *pycache*
+=======
+*.pyc
+>>>>>>> dev
 node_modules/
