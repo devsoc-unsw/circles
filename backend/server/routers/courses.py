@@ -118,4 +118,11 @@ def getTerms(code):
         terms.append(obj)
 
     return { 'terms' : terms }
+
+@router.get("/getDescription/{code}")
+def getDescription(code):
+    query = { "code" : code }
+    result = coursesCOL.find_one(query)
+
+    return { 'description' : result['description'] }
         
