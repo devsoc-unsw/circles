@@ -18,7 +18,7 @@
         "processed_rule": "ACCT1511 || ACCT2511"
     },
     "ACCT2672": {
-        "processed_rule": "ACCT1501 && 65+ WAM || COMM1140 && 65+ WAM"
+        "processed_rule": "ACCT1501 && 65WAM || COMM1140 && 65WAM"
     },
     "ACCT3202": {
         "processed_rule": "Enrolment in ACCT Co-op Major (ACCTB13554)"
@@ -66,13 +66,13 @@
         "processed_rule": "Must be enrolled in program 4501 (ACCT)"
     },
     "ACTL1101": {
-        "processed_rule": "MATH1151 && in ACTL programs."
+        "processed_rule": "MATH1151 && in ACTL programs"
     },
     "ACTL2101": {
         "processed_rule": "Enrolment in Program 3587"
     },
     "ACTL2102": {
-        "processed_rule": "(ACTL2131 || MATH2901) && in Actuarial single || dual degrees."
+        "processed_rule": "(ACTL2131 || MATH2901) && in Actuarial single || dual degrees"
     },
     "ACTL2111": {
         "processed_rule": "MATH1251 && (ACTL1101 || in MATHE1 || MATHM1 || MATHT1 majors)"
@@ -96,28 +96,28 @@
         "processed_rule": "ACTL2111 && ACTL2102"
     },
     "ACTL3191": {
-        "processed_rule": "ECON2101 || (ECON1101 && ACTL1101) || (84UOC && enrolled in a COMM Program)."
+        "processed_rule": "ECON2101 || (ECON1101 && ACTL1101) || (84UOC && enrolled in a COMM Program)"
     },
     "ACTL3192": {
-        "processed_rule": "ECON2101 || (ECON1101 && ACTL1101) || (84UOC && enrolled in a COMM Program)."
+        "processed_rule": "ECON2101 || (ECON1101 && ACTL1101) || (84UOC && enrolled in a COMM Program)"
     },
     "ACTL3202": {
         "processed_rule": "ACTL2101 && enrolment in program 3587"
     },
     "ACTL3301": {
-        "processed_rule": "ACTL2102 && ACTL3162."
+        "processed_rule": "ACTL2102 && ACTL3162"
     },
     "ACTL3303": {
         "processed_rule": "ACTL3202 && enrolment in program 3587"
     },
     "ACTL4001": {
-        "processed_rule": "ACCT1511, ACTL3141, ACTL3182, FINS1613, ACTL3162, ACTL3151, ECON1102, 60+ WAM. Note: Students in 3587 may complete ACTL3141 as a co-requisite"
+        "processed_rule": "ACCT1511, ACTL3141, ACTL3182, FINS1613, ACTL3162, ACTL3151, ECON1102, 60WAM. Note: Students in 3587 may complete ACTL3141 as a co-requisite"
     },
     "ACTL4002": {
         "processed_rule": "ACTL4001"
     },
     "ACTL4003": {
-        "processed_rule": "Students must be in ACTL (Honours)."
+        "processed_rule": "Students must be in ACTL (Honours)"
     },
     "ACTL4010": {
         "processed_rule": ""
@@ -165,7 +165,7 @@
         "processed_rule": "L2 Cross-MDIA"
     },
     "ADAD4001": {
-        "processed_rule": "SART3800, SDES2116, SOMA3616."
+        "processed_rule": "SART3800, SDES2116, SOMA3616"
     },
     "ADAD4010": {
         "processed_rule": "138UOC + ADAD3114"
@@ -285,7 +285,7 @@
         "processed_rule": "ARCH1202 || ARCH1203 && ARCH1261"
     },
     "ARCH1361": {
-        "processed_rule": "ARCH1161."
+        "processed_rule": "ARCH1161"
     },
     "ARCH1481": {
         "processed_rule": ""
@@ -459,187 +459,187 @@
         "processed_rule": ""
     },
     "ARTS2020": {
-        "processed_rule": "24UOC at level 1. Equivalent: ARTS2032"
+        "processed_rule": "24UOC at L1. Equivalent: ARTS2032"
     },
     "ARTS2021": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2031": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2033": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2034": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2035": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2036": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2040": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2041": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2050": {
-        "processed_rule": "12UOC at Level 1 && enrolment in an SARTs && SOSS || ADAD single || dual award program. Excluded: ARTS5503"
+        "processed_rule": "12UOC at L1 && enrolment in an SARTs && SOSS || ADAD single || dual award program. Excluded: ARTS5503"
     },
     "ARTS2061": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2062": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2063": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2064": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2065": {
-        "processed_rule": "24UOC at Level 1 including ARTS1060 || ARTS1062 || ARTS1063 || ARTS1064"
+        "processed_rule": "24UOC at L1 including ARTS1060 || ARTS1062 || ARTS1063 || ARTS1064"
     },
     "ARTS2066": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2091": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2092": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2093": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2094": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2095": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2096": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2120": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2121": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2122": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2123": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2125": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2126": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2127": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2128": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2129": {
-        "processed_rule": "24UOC at Level 1 courses"
+        "processed_rule": "24UOC at L1 courses"
     },
     "ARTS2150": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2210": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2211": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2212": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2213": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2240": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2242": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2243": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2244": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2248": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2249": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2270": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2271": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2272": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2278": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2281": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2282": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2283": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2285": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2303": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2360": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2361": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2362": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2363": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2374": {
-        "processed_rule": "24UOC at Level 1. Excluded: ARTS2366"
+        "processed_rule": "24UOC at L1. Excluded: ARTS2366"
     },
     "ARTS2375": {
-        "processed_rule": "24UOC at Level 1. Excluded: ARTS2366"
+        "processed_rule": "24UOC at L1. Excluded: ARTS2366"
     },
     "ARTS2382": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2383": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2384": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2389": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2450": {
         "processed_rule": "ARTS1451 || language placement approval"
@@ -651,16 +651,16 @@
         "processed_rule": "ARTS3451 || ARTS3452 || ARTS3453 || ARTS3454 || language placement approval"
     },
     "ARTS2453": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2455": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2457": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2458": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2461": {
         "processed_rule": "ARTS1453 || language placement approval"
@@ -669,10 +669,10 @@
         "processed_rule": "ARTS2461 || language placement approval"
     },
     "ARTS2463": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2464": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2469": {
         "processed_rule": ""
@@ -684,19 +684,19 @@
         "processed_rule": "ARTS2480 || language placement approval"
     },
     "ARTS2482": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2484": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2485": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2486": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2487": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2510": {
         "processed_rule": "ARTS1511 || language placement approval"
@@ -705,7 +705,7 @@
         "processed_rule": "ARTS2510 || language placement approval"
     },
     "ARTS2542": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2570": {
         "processed_rule": "ARTS1571 || language placement approval"
@@ -720,7 +720,7 @@
         "processed_rule": "ARTS2630 || language placement approval"
     },
     "ARTS2633": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2660": {
         "processed_rule": "ARTS1661 || language placement approval"
@@ -729,241 +729,241 @@
         "processed_rule": "ARTS2660 || language placement approval"
     },
     "ARTS2662": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2663": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2690": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2692": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2693": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2694": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2696": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2698": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2750": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2751": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2752": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2754": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2755": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2781": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2785": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2788": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2813": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2815": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2816": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2817": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2818": {
-        "processed_rule": "24UOC at Level 1, including ARTS1810. Excluded: ARTS1840"
+        "processed_rule": "24UOC at L1, including ARTS1810. Excluded: ARTS1840"
     },
     "ARTS2819": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2820": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2821": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2845": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2852": {
-        "processed_rule": "24UOC at level 1 && enrolment in a Politics && Philosophy && ECON program || a Politics && IR major || a COMD major"
+        "processed_rule": "24UOC at L1 && enrolment in a Politics && Philosophy && ECON program || a Politics && IR major || a COMD major"
     },
     "ARTS2870": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2871": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2872": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2873": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2874": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2876": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2877": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2900": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2904": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2905": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2906": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2908": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2909": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS3013": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in the following declared streams || MUSC || TPS. || 96UOC && enrolment in a MUSC single/dual degree. Students must have 65WAM."
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in the following declared streams || MUSC || TPS. || 96UOC && enrolment in a MUSC single/dual degree. Students must have 65WAM"
     },
     "ARTS3022": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams || Creative Writing || English Equivalent: ARTS3046"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || Creative Writing || English Equivalent: ARTS3046"
     },
     "ARTS3023": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams || Creative Writing || English Equivalent: ARTS3051"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || Creative Writing || English Equivalent: ARTS3051"
     },
     "ARTS3025": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams || Creative Writing || English"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || Creative Writing || English"
     },
     "ARTS3030": {
-        "processed_rule": "48UOC || including 6UOC at Level 1 in an English Major || Minor"
+        "processed_rule": "48UOC || including 6UOC at L1 in an English Major || Minor"
     },
     "ARTS3039": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams, English"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams, English"
     },
     "ARTS3040": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams, English"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams, English"
     },
     "ARTS3045": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams, English"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams, English"
     },
     "ARTS3047": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams, English"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams, English"
     },
     "ARTS3048": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams, English"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams, English"
     },
     "ARTS3049": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams || English || MDIA, Culture & Technology"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || English || MDIA, Culture & Technology"
     },
     "ARTS3050": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams, English"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams, English"
     },
     "ARTS3054": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams, English"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams, English"
     },
     "ARTS3055": {
-        "processed_rule": "48UOC && including 6UOC at Level 1 && 6UOC at Level 2 in one of the following specialisations, English"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following specialisations, English"
     },
     "ARTS3060": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams || Film Studies || MCT; || ARTS1060/ARTS1090 && at least 6UOC in level 2 Film Studies electives && enrolment in a MDIA single || double degree"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || Film Studies || MCT; || (ARTS1060 || ARTS1090) && at least 6UOC in L2 Film Studies electives && enrolment in a MDIA single || double degree"
     },
     "ARTS3061": {
         "processed_rule": "48UOC || including ARTS1060 || ARTS1064 && ARTS2065. || 66UOC && enrolled in a single || double degree MDIA (Screen && Sound Production) program"
     },
     "ARTS3062": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams, Film Studies"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams, Film Studies"
     },
     "ARTS3063": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams || Film Studies || MDIA, Culture & Technology"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || Film Studies || MDIA, Culture & Technology"
     },
     "ARTS3064": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams || Film Studies || MCT"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || Film Studies || MCT"
     },
     "ARTS3065": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams, Film Studies"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams, Film Studies"
     },
     "ARTS3066": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams || Film Studies || MCT"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || Film Studies || MCT"
     },
     "ARTS3068": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams, Film Studies"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams, Film Studies"
     },
     "ARTS3090": {
-        "processed_rule": "48UOC && including 6UOC at Level 1 && 6UOC at Level 2 in MDIA && Culture && Technology"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in MDIA && Culture && Technology"
     },
     "ARTS3091": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams || MCT. || 6UOC level 1 && 6UOC level 2 MDIA Electives && enrolment in a MDIA single || double degreel program"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || MCT. || 6UOC L1 && 6UOC L2 MDIA Electives && enrolment in a MDIA single || double degreel program"
     },
     "ARTS3092": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams || MCT. || 6UOC level 1 && 6UOC level 2 MDIA Electives && enrolment in a MDIA single || double degreel program"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || MCT. || 6UOC L1 && 6UOC L2 MDIA Electives && enrolment in a MDIA single || double degreel program"
     },
     "ARTS3093": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams || MCT. || 6UOC level 1 && 6UOC level 2 MDIA Electives && enrolment in a MDIA single || double degreel program"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || MCT. || 6UOC L1 && 6UOC L2 MDIA Electives && enrolment in a MDIA single || double degreel program"
     },
     "ARTS3096": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams || MCT. || 6UOC level 1 && 6UOC level 2 MDIA Electives && enrolment in a MDIA single || double degreel program"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || MCT. || 6UOC L1 && 6UOC L2 MDIA Electives && enrolment in a MDIA single || double degreel program"
     },
     "ARTS3097": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams || MCT. || 6UOC level 1 && 6UOC level 2 MDIA Electives && enrolment in a MDIA single || double degreel program"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || MCT. || 6UOC L1 && 6UOC L2 MDIA Electives && enrolment in a MDIA single || double degreel program"
     },
     "ARTS3122": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in the Theatre & Performance Studies Stream"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in the Theatre & Performance Studies Stream"
     },
     "ARTS3123": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams || Dance Studies || Theatre & Performance Studies"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || Dance Studies || Theatre & Performance Studies"
     },
     "ARTS3124": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams, Theatre & Performance Studies"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams, Theatre & Performance Studies"
     },
     "ARTS3125": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following specialisations, MCT or\u00a0Theatre & Performance Studies. || 66UOC && enrolled in a single || dual award MDIA (S&SP) program"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following specialisations, MCT or\u00a0Theatre & Performance Studies. || 66UOC && enrolled in a single || dual award MDIA (S&SP) program"
     },
     "ARTS3130": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams || Dance Studies || Theatre & Performance Studies. || 72UOC && enrolment in an SART & Design program"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || Dance Studies || Theatre & Performance Studies. || 72UOC && enrolment in an SART & Design program"
     },
     "ARTS3131": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams || Australian Studies || Theatre & Performance Studies. Excluded: ARTS2124"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || Australian Studies || Theatre & Performance Studies. Excluded: ARTS2124"
     },
     "ARTS3132": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams && Theatre && Performance Studies"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams && Theatre && Performance Studies"
     },
     "ARTS3212": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams || Asian Studies || COMD || Global Development || History"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || Asian Studies || COMD || Global Development || History"
     },
     "ARTS3216": {
-        "processed_rule": "48UOC including 6UOC at level 1 && 6UOC at level 2 in Asian Studies. || 48UOC including 12UOC in Chinese Studies language courses. || 48UOC && enrolment in an INST single || double degree (2017 onwards)"
+        "processed_rule": "48UOC including 6UOC at L1 && 6UOC at L2 in Asian Studies. || 48UOC including 12UOC in Chinese Studies language courses. || 48UOC && enrolment in an INST single || double degree (2017 onwards)"
     },
     "ARTS3217": {
-        "processed_rule": "48UOC including 6UOC at level 1 && 6UOC at level 2 in Asian Studies || History. || 48UOC incuding 12UOC in Chinese Studies language courses.Or 48UOC && enrolment in an INST single || dual program (2017 onwards)"
+        "processed_rule": "48UOC including 6UOC at L1 && 6UOC at L2 in Asian Studies || History. || 48UOC incuding 12UOC in Chinese Studies language courses.Or 48UOC && enrolment in an INST single || dual program (2017 onwards)"
     },
     "ARTS3218": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams || Asian Studies || Gender Studies || History; || 48UOC , including 12UOC in JAPN Studies language courses"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || Asian Studies || Gender Studies || History; || 48UOC , including 12UOC in JAPN Studies language courses"
     },
     "ARTS3220": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams || Asian Studies || History. || 48UOC && enrolment in an INST single || dual program (2017 onwards)"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || Asian Studies || History. || 48UOC && enrolment in an INST single || dual program (2017 onwards)"
     },
     "ARTS3240": {
         "processed_rule": "72UOC && enrolment in an Environmental HUMS major || minor"
@@ -972,34 +972,34 @@
         "processed_rule": "48UOC including 6UOC at lv 1 && 6UOC at lv 2 in one of the following streams || COMD || Environmental HUMS || Geographical Studies || Global Development. || 48UOC && enrolment in an INST program"
     },
     "ARTS3242": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams || Environmental HUMS || Geographical Studies || History. || 48UOC && enrolment in an INST single || dual program"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || Environmental HUMS || Geographical Studies || History. || 48UOC && enrolment in an INST single || dual program"
     },
     "ARTS3243": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams, Environmental HUMS"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams, Environmental HUMS"
     },
     "ARTS3245": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams || Environmental HUMS || Geographical Studies"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || Environmental HUMS || Geographical Studies"
     },
     "ARTS3270": {
         "processed_rule": "72UOC && including ARTS1270 && enrolment in a History major || minor"
     },
     "ARTS3279": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams || Australian Studies || History"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || Australian Studies || History"
     },
     "ARTS3283": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams, History"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams, History"
     },
     "ARTS3289": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams, History"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams, History"
     },
     "ARTS3290": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams, History"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams, History"
     },
     "ARTS3292": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams || Australian Studies || History. || 48UOC && enrolment in an INST single || dual program (2017 onwards)"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || Australian Studies || History. || 48UOC && enrolment in an INST single || dual program (2017 onwards)"
     },
     "ARTS3295": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams || European Studies || History; || 48UOC , including 12UOC in German Studies language courses"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || European Studies || History; || 48UOC , including 12UOC in German Studies language courses"
     },
     "ARTS3330": {
         "processed_rule": "72UOC && enrolment in a language major stream - Chinese Studies || French Studies || German Studies || JAPN Studies || KORE || Spanish && Latin American Studies"
@@ -1008,19 +1008,19 @@
         "processed_rule": "72UOC && enrolment in a Philosophy major || minor"
     },
     "ARTS3368": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams, Philosophy"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams, Philosophy"
     },
     "ARTS3372": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams, Philosophy"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams, Philosophy"
     },
     "ARTS3373": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams, Philosophy"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams, Philosophy"
     },
     "ARTS3377": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams, Philosophy"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams, Philosophy"
     },
     "ARTS3378": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams, Philosophy"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams, Philosophy"
     },
     "ARTS3450": {
         "processed_rule": "ARTS2451 || ARTS2462 || language placement approval"
@@ -1089,10 +1089,10 @@
         "processed_rule": "ARTS3570 || language placement approval"
     },
     "ARTS3574": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS3576": {
-        "processed_rule": "24UOC at level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS3630": {
         "processed_rule": "ARTS2631 || language placement approval"
@@ -1116,10 +1116,10 @@
         "processed_rule": "ARTS3631 || ARTS3632 || ARTS3633 || language placement approval"
     },
     "ARTS3639": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS3640": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS3641": {
         "processed_rule": "ARTS3631 || ARTS3632 || ARTS3633 || language placement approval"
@@ -1149,76 +1149,76 @@
         "processed_rule": "ARTS3661 || ARTS3662 || ARTS3663 || ARTS3664 || ARTS3665 || language placement approval"
     },
     "ARTS3690": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams, LING"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams, LING"
     },
     "ARTS3695": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams, LING"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams, LING"
     },
     "ARTS3750": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams || COMD || Geographical Studies || Global Development"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || COMD || Geographical Studies || Global Development"
     },
     "ARTS3751": {
         "processed_rule": "72UOC && enrolment in a Global Development major || COMD major"
     },
     "ARTS3755": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams, COMD, Global Development"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams, COMD, Global Development"
     },
     "ARTS3756": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams || COMD || Geographical Studies || Global Development"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || COMD || Geographical Studies || Global Development"
     },
     "ARTS3757": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams || COMD || Global Development"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || COMD || Global Development"
     },
     "ARTS3758": {
         "processed_rule": "ARTS3759 && enrolment with consent"
     },
     "ARTS3759": {
-        "processed_rule": "Enrolment with consent. ARTS3759 is open to UNSW undergraduate students that are also enrolled in an internship (or international field placement course). This needs to be demonstrated prior to enrolment."
+        "processed_rule": "Enrolment with consent. ARTS3759 is open to UNSW undergraduate students that are also enrolled in an internship (or international field placement course). This needs to be demonstrated prior to enrolment"
     },
     "ARTS3780": {
-        "processed_rule": "48UOC including 6UOC at level 1 && 6UOC at level 2 in European Studies || History. || 48UOC including 12UOC in German Studies language courses. || 48UOC && enrolment in an INST single || double degree (2017 onwards)"
+        "processed_rule": "48UOC including 6UOC at L1 && 6UOC at L2 in European Studies || History. || 48UOC including 12UOC in German Studies language courses. || 48UOC && enrolment in an INST single || double degree (2017 onwards)"
     },
     "ARTS3783": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following specialisations && Politics && International Relations"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following specialisations && Politics && International Relations"
     },
     "ARTS3786": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in European Studies || History; || 48UOC || including 12UOC in German Studies language courses. || 48UOC && enrolment in an INST program"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in European Studies || History; || 48UOC || including 12UOC in German Studies language courses. || 48UOC && enrolment in an INST program"
     },
     "ARTS3787": {
         "processed_rule": "24UOC in the European Studies || German Studies stream. Excluded: ARTS2783"
     },
     "ARTS3789": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams; European Studies || History. Excluded: ARTS2786"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams; European Studies || History. Excluded: ARTS2786"
     },
     "ARTS3810": {
         "processed_rule": "72UOC && enrolment in an International Relations || Politics || Politics & International Relations major"
     },
     "ARTS3812": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams || COMD || International Relations || Politics || Politics && International Relations"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || COMD || International Relations || Politics || Politics && International Relations"
     },
     "ARTS3814": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams || Australian Studies || International Relations || Politics || Politics && International Relations"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || Australian Studies || International Relations || Politics || Politics && International Relations"
     },
     "ARTS3816": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams || International Relations || Politics"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || International Relations || Politics"
     },
     "ARTS3817": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams || International Relations || Politics Excluded: ARTS3813"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || International Relations || Politics Excluded: ARTS3813"
     },
     "ARTS3819": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following specialisations && Politics && International Relations"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following specialisations && Politics && International Relations"
     },
     "ARTS3820": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following specialisations && Politics && International Relations"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following specialisations && Politics && International Relations"
     },
     "ARTS3821": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following specialisations && Politics && International Relations"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following specialisations && Politics && International Relations"
     },
     "ARTS3822": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following specialisations && Politics && International Relations"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following specialisations && Politics && International Relations"
     },
     "ARTS3850": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following specialisations && Politics && International Relations"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following specialisations && Politics && International Relations"
     },
     "ARTS3870": {
         "processed_rule": "72UOC && enrolment in a Sociology & Anthropology major || extended minor"
@@ -1227,28 +1227,28 @@
         "processed_rule": "48UOC && including 6UOC lv1 && 6UOC lv2 in one of the following streams, CRIM/S&A; || enrolment in program 3422/4763 && 12UOC lv2 SRAP && 18UOC lv2 CRIM; || enrolment in Program 4034 && 30UOC at lv2 including 12UOC lv2 CRIM"
     },
     "ARTS3872": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams, MDIA, Culture & Technology || Sociology & Anthropology"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams, MDIA, Culture & Technology || Sociology & Anthropology"
     },
     "ARTS3874": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following specialisations || Australian Studies || COMD || Geographical Studies || Global Development || Sociology & Anthropology"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following specialisations || Australian Studies || COMD || Geographical Studies || Global Development || Sociology & Anthropology"
     },
     "ARTS3875": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams || Australian Studies || COMD || Sociology & Anthropology"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || Australian Studies || COMD || Sociology & Anthropology"
     },
     "ARTS3883": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams || Asian Studies || Sociology & Anthropology"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || Asian Studies || Sociology & Anthropology"
     },
     "ARTS3885": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams, Sociology & Anthropology"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams, Sociology & Anthropology"
     },
     "ARTS3886": {
         "processed_rule": "48UOC && including 6UOC lv1 && 6UOC lv2 in one of the following streams, CRIM/S&A; || enrolment in program 3422/4763 && 12UOC lv2 SRAP && 18UOC lv2 CRIM; || enrolment in Program 4034 && 30UOC at lv2 including 12UOC lv2 CRIM"
     },
     "ARTS3900": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams || Gender Studies || History."
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || Gender Studies || History"
     },
     "ARTS3901": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in one of the following streams || Gender Studies || Philosophy. Excluded: ARTS3367"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || Gender Studies || Philosophy. Excluded: ARTS3367"
     },
     "ARTS3991": {
         "processed_rule": "72UOC && enrolment in an SARTs & SOSS major in an SARTs & SOSS single || double degree program. Consent required"
@@ -1500,22 +1500,22 @@
         "processed_rule": ""
     },
     "ATSI2003": {
-        "processed_rule": "30UOC at Level 1"
+        "processed_rule": "30UOC at L1"
     },
     "ATSI2004": {
-        "processed_rule": "30UOC at Level 1"
+        "processed_rule": "30UOC at L1"
     },
     "ATSI2011": {
-        "processed_rule": "30UOC at Level 1"
+        "processed_rule": "30UOC at L1"
     },
     "ATSI2012": {
-        "processed_rule": "30UOC at Level 1"
+        "processed_rule": "30UOC at L1"
     },
     "ATSI2014": {
-        "processed_rule": "30UOC at Level 1"
+        "processed_rule": "30UOC at L1"
     },
     "ATSI2015": {
-        "processed_rule": "30UOC at Level 1"
+        "processed_rule": "30UOC at L1"
     },
     "ATSI3002": {
         "processed_rule": "36UOC"
@@ -1524,7 +1524,7 @@
         "processed_rule": "36UOC"
     },
     "ATSI3005": {
-        "processed_rule": "36UOC."
+        "processed_rule": "36UOC"
     },
     "ATSI3008": {
         "processed_rule": "120UOC && enrolment in a major in Indigenous Studies && enrolled in the final semester of an SARTs Faculty single || dual degree program"
@@ -1638,7 +1638,7 @@
         "processed_rule": ""
     },
     "AVIA3101": {
-        "processed_rule": "AVIA1900 || AVIA2004 || AVIA2014 || 1901 ; Excluded: AVIA3002."
+        "processed_rule": "AVIA1900 || AVIA2004 || AVIA2014 || 1901 ; Excluded: AVIA3002"
     },
     "AVIA3111": {
         "processed_rule": "AVIA2117"
@@ -1671,7 +1671,7 @@
         "processed_rule": "AVIA1850 || 2701"
     },
     "AVIA3900": {
-        "processed_rule": "Minimum 72UOC"
+        "processed_rule": "72UOC"
     },
     "AVIA3910": {
         "processed_rule": ""
@@ -1713,7 +1713,7 @@
         "processed_rule": "BABS1201 || DPST1051"
     },
     "BABS3021": {
-        "processed_rule": "12UOC from MICR2011 || BIOS2021/BABS2204 || BIOS2621/BABS2264 || BIOC2201"
+        "processed_rule": "12UOC from MICR2011 || (BIOS2021 || BABS2204) || (BIOS2621 || BABS2264) || BIOC2201"
     },
     "BABS3031": {
         "processed_rule": "completion of at least 48UOC"
@@ -1755,7 +1755,7 @@
         "processed_rule": "completion of at least 48UOC"
     },
     "BABS4053": {
-        "processed_rule": "144UOC of courses in the 3052 Bachelor of Science (BIOT) program."
+        "processed_rule": "144UOC of courses in the 3052 Bachelor of Science (BIOT) program"
     },
     "BABS4516": {
         "processed_rule": "Enrolled in BABS Honours plan"
@@ -1899,7 +1899,7 @@
         "processed_rule": "96UOC completed"
     },
     "BEIL6013": {
-        "processed_rule": "UG students must be in their third year of study (having 96UOC) to enroll in this course."
+        "processed_rule": "UG students must be in their third year of study (having 96UOC) to enroll in this course"
     },
     "BENV0021": {
         "processed_rule": ""
@@ -1971,7 +1971,7 @@
         "processed_rule": "BABS1201 || DPST1051"
     },
     "BINF3010": {
-        "processed_rule": "BABS2204 || BABS2264 || BIOC2201."
+        "processed_rule": "BABS2204 || BABS2264 || BIOC2201"
     },
     "BINF3020": {
         "processed_rule": ""
@@ -2199,7 +2199,7 @@
         "processed_rule": ""
     },
     "BLDG3012": {
-        "processed_rule": "minimum 96UOC"
+        "processed_rule": "96UOC"
     },
     "BLDG3013": {
         "processed_rule": "BLDG2013 && BLDG2023"
@@ -2214,25 +2214,25 @@
         "processed_rule": ""
     },
     "BLDG4018": {
-        "processed_rule": "Program 4522 || Program 3332 65WAM || over"
+        "processed_rule": "Program 4522 || Program 3332 with 65WAM || over"
     },
     "BLDG4019": {
-        "processed_rule": "Program 4522 || Program 3332 65WAM || over"
+        "processed_rule": "Program 4522 || Program 3332 with 65WAM || over"
     },
     "BLDG4020": {
-        "processed_rule": "Program 4522 || Program 3332 65WAM || over"
+        "processed_rule": "Program 4522 || Program 3332 with 65WAM || over"
     },
     "BLDG4022": {
-        "processed_rule": "Program 4522 || Program 3332 65WAM || over"
+        "processed_rule": "Program 4522 || Program 3332 with 65WAM || over"
     },
     "BLDG4023": {
-        "processed_rule": "Program 4522 || Program 3332 65WAM || over"
+        "processed_rule": "Program 4522 || Program 3332 with 65WAM || over"
     },
     "BLDG4024": {
-        "processed_rule": "Program 4522 || Program 3332 65WAM || over"
+        "processed_rule": "Program 4522 || Program 3332 with 65WAM || over"
     },
     "BLDG4501": {
-        "processed_rule": "Program 4522 || Program 3332 65WAM || over"
+        "processed_rule": "Program 4522 || Program 3332 with 65WAM || over"
     },
     "BLDG4504": {
         "processed_rule": "BLDG4501 || BENV4000"
@@ -2352,19 +2352,19 @@
         "processed_rule": ""
     },
     "CHEM1021": {
-        "processed_rule": "CHEM1011 || CHEM1031."
+        "processed_rule": "CHEM1011 || CHEM1031"
     },
     "CHEM1031": {
         "processed_rule": "Must be enrolled in a program with the option of a CHEM major"
     },
     "CHEM1041": {
-        "processed_rule": "CHEM1031 || CHEM1011 with a credit || above."
+        "processed_rule": "CHEM1031 || CHEM1011 with a credit || above"
     },
     "CHEM1051": {
         "processed_rule": "Enrolment in the Bachelor of Medicinal CHEM (3999 || 3992) || Bachelor of Medicinal CHEM/LAWS program"
     },
     "CHEM1061": {
-        "processed_rule": "Enrolment in the Bachelor of Medicinal CHEM (3992 || 3999) program && completion of CHEM1051 || CHEM1031 || CHEM1011 with a credit || above."
+        "processed_rule": "Enrolment in the Bachelor of Medicinal CHEM (3992 || 3999) program && completion of CHEM1051 || CHEM1031 || CHEM1011 with a credit || above"
     },
     "CHEM1151": {
         "processed_rule": "Enrolment in Medicinal CHEM (3992) || (3999) || 4755"
@@ -2379,7 +2379,7 @@
         "processed_rule": "CHEM1811 Exclusion: CHEM1021 || DPST1032 && CHEM1041 && CHEM1061 && CEIC1001 && MATS1101"
     },
     "CHEM1829": {
-        "processed_rule": "CHEM1011 && enrolment in 3181 || 3182 || 3952 || a VISN major."
+        "processed_rule": "CHEM1011 && enrolment in 3181 || 3182 || 3952 || a VISN major"
     },
     "CHEM1831": {
         "processed_rule": "None"
@@ -2397,7 +2397,7 @@
         "processed_rule": "CHEM1011 || CHEM1031 || CHEM1051 || CHEM1811 || DPST1031 && CHEM1021 || CHEM1041 || CHEM1061 || CHEM1821 || DPST1032 && MATH1031 || MATH1041 || MATH1131 || MATH1141 || MATH1151 || MATH1231 || MATH1241 || MATH1251 || DPST1013 || DPST1014"
     },
     "CHEM2521": {
-        "processed_rule": "This is the main Level 2 Organic CHEM course taught within the School of CHEM. It assumes knowledge of CHEM1011 && CHEM1021 || CHEM1031 && CHEM1041 || CHEM1051 && CHEM1061 && CHEM2041. It is a core element in CHEM major programs. It is also required for industrial chemistry && biochemistry && medicinal chemistry programs."
+        "processed_rule": "This is the main L2 Organic CHEM course taught within the School of CHEM. It assumes knowledge of CHEM1011 && CHEM1021 || CHEM1031 && CHEM1041 || CHEM1051 && CHEM1061 && CHEM2041. It is a core element in CHEM major programs. It is also required for industrial chemistry && biochemistry && medicinal chemistry programs"
     },
     "CHEM2531": {
         "processed_rule": "CHEM2041 Exclusion: CHEM2031, CHEM2828, CHEM2839"
@@ -2409,7 +2409,7 @@
         "processed_rule": "CHEM1011 || DPST1031 || CHEM1031 || CHEM1051 || CHEM1811 && CHEM1021 || DPST1032 || CHEM1041 || CHEM1061 || CHEM1821"
     },
     "CHEM2996": {
-        "processed_rule": "Students must have 75WAM || higher to be eligible for this course && 12UOC of CHEM excluding CHEM1001 && CHEM1151"
+        "processed_rule": "Students must have 75WAM to be eligible for this course && 12UOC of CHEM excluding CHEM1001 && CHEM1151"
     },
     "CHEM2999": {
         "processed_rule": ""
@@ -2517,19 +2517,19 @@
         "processed_rule": ""
     },
     "CODE1234": {
-        "processed_rule": "CODE1231/CODE2132"
+        "processed_rule": "(CODE1231 || CODE2132)"
     },
     "CODE1240": {
-        "processed_rule": "BENV1012 / BENV1010 || eruivalent"
+        "processed_rule": "(BENV1012 || BENV1010) || eruivalent"
     },
     "CODE2120": {
-        "processed_rule": "CODE2132 / CODE2170"
+        "processed_rule": "(CODE2132 || CODE2170)"
     },
     "CODE2121": {
-        "processed_rule": ":BENV1012 / CODE1240"
+        "processed_rule": "(BENV1012 || CODE1240)"
     },
     "CODE2132": {
-        "processed_rule": "BENV1012 / CODE1240 /CODE2121"
+        "processed_rule": "(BENV1012 || CODE1240 || CODE2121)"
     },
     "CODE2170": {
         "processed_rule": ""
@@ -2544,7 +2544,7 @@
         "processed_rule": ""
     },
     "CODE3100": {
-        "processed_rule": "CODE2230 /CODE2250 /CODE 2270"
+        "processed_rule": "(CODE2230 || CODE2250) /CODE 2270"
     },
     "CODE3201": {
         "processed_rule": "CODE3100 & concurrently enrolled in CODE3202"
@@ -2571,28 +2571,28 @@
         "processed_rule": "Students must be in Good Academic Standing"
     },
     "COMM1100": {
-        "processed_rule": "Students who have completed ECON1101 are not permitted to enrol."
+        "processed_rule": "Students who have completed ECON1101 are not permitted to enrol"
     },
     "COMM1110": {
-        "processed_rule": "Only available to single && double degree ZBUS School students in Term 1. It will be offered to non-ZBUS School students in Terms 2 && 3."
+        "processed_rule": "Only available to single && double degree ZBUS School students in Term 1. It will be offered to non-ZBUS School students in Terms 2 && 3"
     },
     "COMM1120": {
-        "processed_rule": "Only available to single && double degree ZBUS School students in Term 1. It will be offered to non-ZBUS School students in Terms 2 && 3."
+        "processed_rule": "Only available to single && double degree ZBUS School students in Term 1. It will be offered to non-ZBUS School students in Terms 2 && 3"
     },
     "COMM1140": {
-        "processed_rule": "Only available to single && double degree ZBUS School students in Term 1. It will be offered to non-ZBUS School students in Terms 2 && 3."
+        "processed_rule": "Only available to single && double degree ZBUS School students in Term 1. It will be offered to non-ZBUS School students in Terms 2 && 3"
     },
     "COMM1150": {
-        "processed_rule": "COMM1100 && excludes MGMT1101. Only available to single && double degree ZBUS School students in Term 2. It will be offered to non-ZBUS School students in Term 3."
+        "processed_rule": "COMM1100 && excludes MGMT1101. Only available to single && double degree ZBUS School students in Term 2. It will be offered to non-ZBUS School students in Term 3"
     },
     "COMM1170": {
-        "processed_rule": "COMM1140. Only available to single && double degree ZBUS School students in Term 2. It will be offered to non-ZBUS School students in Term 3."
+        "processed_rule": "COMM1140. Only available to single && double degree ZBUS School students in Term 2. It will be offered to non-ZBUS School students in Term 3"
     },
     "COMM1180": {
-        "processed_rule": "COMM1140. Only available to single && double degree ZBUS School students in Term 2. It will be offered to non-ZBUS School students in Term 3."
+        "processed_rule": "COMM1140. Only available to single && double degree ZBUS School students in Term 2. It will be offered to non-ZBUS School students in Term 3"
     },
     "COMM1190": {
-        "processed_rule": "COMM1110 || ECON1203 || MATH1041 || MATH1151 || MATH1131 || MATH1141. Only available to single && double degree ZBUS School students in Term 2. It will be offered to non-ZBUS School students in Term 3."
+        "processed_rule": "COMM1110 || ECON1203 || MATH1041 || MATH1151 || MATH1131 || MATH1141. Only available to single && double degree ZBUS School students in Term 2. It will be offered to non-ZBUS School students in Term 3"
     },
     "COMM1822": {
         "processed_rule": ""
@@ -2607,46 +2607,46 @@
         "processed_rule": "COMM2501"
     },
     "COMM2222": {
-        "processed_rule": "In ZBUS degree || COMM6000 Career Accelerator || COMM1999 First Year Portfolio, 65WAM+, minimum 72UOC completed, room in degree for course, Good academic standing. Excluded: Co-op students It is recommended a progression check is completed prior to enrolling."
+        "processed_rule": "In ZBUS degree || COMM6000 Career Accelerator || COMM1999 First Year Portfolio, 65WAM, 72UOC completed, room in degree for course, Good academic standing. Excluded: Co-op students It is recommended a progression check is completed prior to enrolling"
     },
     "COMM2233": {
-        "processed_rule": "48UOC || Good Standing || completed COMM6000 || COMM1999 && have space in degree for course. Its recommended to seek a progression check prior to application. Visit Career Accelerator page on ZBUS School website for more info."
+        "processed_rule": "48UOC || Good Standing || completed COMM6000 || COMM1999 && have space in degree for course. Its recommended to seek a progression check prior to application. Visit Career Accelerator page on ZBUS School website for more info"
     },
     "COMM2244": {
-        "processed_rule": "COMM6000 CA:Essentials || COMM1999 First Year Portfolio && minimum 48UOC && minimum 65 WAM && be in good academic standing. Students who have completed COMM2233 || CDEV3000 (formerly DIPP1510) must not enrol into this course"
+        "processed_rule": "COMM6000 CA:Essentials || COMM1999 First Year Portfolio && 48UOC && 65WAM && be in good academic standing. Students who have completed COMM2233 || CDEV3000 (formerly DIPP1510) must not enrol into this course"
     },
     "COMM2501": {
         "processed_rule": "(ECON1203 || COMM1190 || MATH1151) && COMM1822"
     },
     "COMM3020": {
-        "processed_rule": "65WAM+ || minimum 72UOC || room in degree for this course || good academic standing || completed COMM6000 Career Accelerator: Essentials || COMM1999 First Year Portfolio. This course is by application only. Please visit ZBUS School website for more information"
+        "processed_rule": "65WAM || 72UOC || room in degree for this course || good academic standing || completed COMM6000 Career Accelerator: Essentials || COMM1999 First Year Portfolio. This course is by application only. Please visit ZBUS School website for more information"
     },
     "COMM3030": {
-        "processed_rule": "\u2022\t65WAM; \u2022\thave completed a minimum of 48UOC at the commencement of this course; \u2022\thave room in their degree for this course; \u2022\tare in good academic standing; \u2022\thave completed COMM6000 Career Accelerator: Essentials || COMM1999 First Year Portfolio (ZBUS School students only) This course may count as a ZBUS School Free Elective || as a major elective within some schools. It is recommended a progression check is completed prior to enrolling."
+        "processed_rule": "\u2022\t65WAM; \u2022\thave completed a minimum of 48UOC at the commencement of this course; \u2022\thave room in their degree for this course; \u2022\tare in good academic standing; \u2022\thave completed COMM6000 Career Accelerator: Essentials || COMM1999 First Year Portfolio (ZBUS School students only) This course may count as a ZBUS School Free Elective || as a major elective within some schools. It is recommended a progression check is completed prior to enrolling"
     },
     "COMM3090": {
-        "processed_rule": "Students are expected to be in their final year of a Bachelor of COMM single || dual degree with at least 108UOC completed."
+        "processed_rule": "Students are expected to be in their final year of a Bachelor of COMM single || dual degree with at least 108UOC completed"
     },
     "COMM3101": {
-        "processed_rule": "48UOC. This course is by application only.Please contact the Co-op office for more information. Students who have completed DIPP1510 || COMM2222 || are in ZBUS Co-Op programs are excluded from this course."
+        "processed_rule": "48UOC. This course is by application only.Please contact the Co-op office for more information. Students who have completed DIPP1510 || COMM2222 || are in ZBUS Co-Op programs are excluded from this course"
     },
     "COMM3202": {
-        "processed_rule": "COMM3101 || COMM2101 terms of COMM3101/COMM2101 (12UOC) must be successfully completed. This course is by application only. Please contact the Co-op office for more information. Excluded:DIPP1510, COMM2222, ZBUS Co-Op programs"
+        "processed_rule": "COMM3101 || COMM2101 terms of (COMM3101 || COMM2101) (12UOC) must be successfully completed. This course is by application only. Please contact the Co-op office for more information. Excluded:DIPP1510, COMM2222, ZBUS Co-Op programs"
     },
     "COMM3303": {
-        "processed_rule": "This course is by application only. Please contact the Co-op office for more information."
+        "processed_rule": "This course is by application only. Please contact the Co-op office for more information"
     },
     "COMM3500": {
-        "processed_rule": "COMM1822 || COMM2050 || COMM2501 || ZBUS Analytics Modelling I course (ECON2206 || ECON2209 || RISK2002) && completing the ZBUS Analytics major (COMMJ1). It is recommended students are in their final year when taking this course."
+        "processed_rule": "COMM1822 || COMM2050 || COMM2501 || ZBUS Analytics Modelling I course (ECON2206 || ECON2209 || RISK2002) && completing the ZBUS Analytics major (COMMJ1). It is recommended students are in their final year when taking this course"
     },
     "COMM3501": {
         "processed_rule": "COMM2501"
     },
     "COMM3900": {
-        "processed_rule": "Completed a minimum of 108UOC (including First Year core) && on Good standing && completed Career Accelerator Essentials (COMM6000). It is strongly recommended that students only complete this course within their final 2 terms of study."
+        "processed_rule": "Completed a minimum of 108UOC (including First Year core) && on Good standing && completed Career Accelerator Essentials (COMM6000). It is strongly recommended that students only complete this course within their final 2 terms of study"
     },
     "COMM3999": {
-        "processed_rule": "Completed myBCom First Year Portfolio (COMM1999) && in their final year of a single || double COMM degree (72UOC of ZBUS courses)."
+        "processed_rule": "Completed myBCom First Year Portfolio (COMM1999) && in their final year of a single || double COMM degree (72UOC of ZBUS courses)"
     },
     "COMM4002": {
         "processed_rule": ""
@@ -2697,7 +2697,7 @@
         "processed_rule": "COMP1927 || COMP2521"
     },
     "COMP3151": {
-        "processed_rule": "COMP1927 || (COMP1521/DPST1092 && COMP2521)"
+        "processed_rule": "COMP1927 || ((COMP1521 || DPST1092) && COMP2521)"
     },
     "COMP3153": {
         "processed_rule": "MATH1081"
@@ -2706,7 +2706,7 @@
         "processed_rule": "COMP2521 || COMP1927"
     },
     "COMP3211": {
-        "processed_rule": "COMP3222 || ELEC2141."
+        "processed_rule": "COMP3222 || ELEC2141"
     },
     "COMP3222": {
         "processed_rule": "COMP2121 || COMP1521 || DPST1092"
@@ -2736,22 +2736,22 @@
         "processed_rule": "COMP2121 || DESN2000"
     },
     "COMP3821": {
-        "processed_rule": "A mark of at least 65 in COMP1927 || COMP2521"
+        "processed_rule": "65GRADE in COMP1927 || COMP2521"
     },
     "COMP3891": {
         "processed_rule": "(COMP1521 || DPST1092 || COMP2121) && (COMP2521 || COMP1927) && 75WAM"
     },
     "COMP3900": {
-        "processed_rule": "COMP1531 && COMP2521 || COMP1927 && enrolled in a BSc COMP major with 102UOC."
+        "processed_rule": "COMP1531 && COMP2521 || COMP1927 && enrolled in a BSc COMP major with 102UOC"
     },
     "COMP3901": {
-        "processed_rule": "80+ WAM in COMP || SENG || BINF courses && completion of all first && second year core requirements a CSE program && agreement from a suitable CSE academic supervisor."
+        "processed_rule": "80WAM in COMP || SENG || BINF courses && completion of all first && second year core requirements a CSE program && agreement from a suitable CSE academic supervisor"
     },
     "COMP3902": {
-        "processed_rule": "80+ WAM in COMP || SENG || BINF courses && completion of all first && second year core requirements a CSE program && agreement from a suitable CSE academic supervisor."
+        "processed_rule": "80WAM in COMP || SENG || BINF courses && completion of all first && second year core requirements a CSE program && agreement from a suitable CSE academic supervisor"
     },
     "COMP4121": {
-        "processed_rule": "COMP3121 || COMP3821."
+        "processed_rule": "COMP3121 || COMP3821"
     },
     "COMP4128": {
         "processed_rule": "COMP3821 || (COMP3121 && 75WAM)"
@@ -2763,25 +2763,25 @@
         "processed_rule": "48UOC"
     },
     "COMP4336": {
-        "processed_rule": "COMP3331."
+        "processed_rule": "COMP3331"
     },
     "COMP4337": {
-        "processed_rule": "COMP3331."
+        "processed_rule": "COMP3331"
     },
     "COMP4418": {
         "processed_rule": "COMP3411"
     },
     "COMP4511": {
-        "processed_rule": "a mark of at least 70 in COMP3511 && a mark of at least 65 in COMP2511"
+        "processed_rule": "70GRADE in COMP3511 && 65GRADE in COMP2511"
     },
     "COMP4601": {
-        "processed_rule": "COMP3211 && COMP3601."
+        "processed_rule": "COMP3211 && COMP3601"
     },
     "COMP4920": {
-        "processed_rule": "(COMP2511 || COMP2911) && 96UOC in COMP."
+        "processed_rule": "(COMP2511 || COMP2911) && 96UOC in COMP"
     },
     "COMP4951": {
-        "processed_rule": "Enrolled in a CSE BE (Hons) programs && 126UOC && completion of 3rd year core."
+        "processed_rule": "Enrolled in a CSE BE (Hons) programs && 126UOC && completion of 3rd year core"
     },
     "COMP4952": {
         "processed_rule": "Completion of Research Thesis A (4951)"
@@ -2790,7 +2790,7 @@
         "processed_rule": "Completion of Research Thesis B (4952)"
     },
     "COMP4961": {
-        "processed_rule": "Students enrolled in program 4515 Bachelor of COMP (Hons) || program 3648."
+        "processed_rule": "Students enrolled in program 4515 Bachelor of COMP (Hons) || program 3648"
     },
     "COMP4962": {
         "processed_rule": "COMP4962 Students must successfully complete COMP4951"
@@ -2814,7 +2814,7 @@
         "processed_rule": "COMP3441 || COMP6441 || COMP6841 && COMP3231 || COMP3891"
     },
     "COMP6447": {
-        "processed_rule": "A mark of at least 65 in COMP6841 || a mark of at least 75 in COMP6441 || COMP3441."
+        "processed_rule": "65GRADE in COMP6841 || 75GRADE in COMP6441 || COMP3441"
     },
     "COMP6448": {
         "processed_rule": "COMP6841"
@@ -2835,10 +2835,10 @@
         "processed_rule": "MATH1081 && COMP2521 && (not enrolled in SENGAH)"
     },
     "COMP6733": {
-        "processed_rule": "65 WAM && COMP3331"
+        "processed_rule": "65WAM && COMP3331"
     },
     "COMP6741": {
-        "processed_rule": "COMP3121 || COMP3821."
+        "processed_rule": "COMP3121 || COMP3821"
     },
     "COMP6752": {
         "processed_rule": "MATH1081"
@@ -2856,10 +2856,10 @@
         "processed_rule": "COMP3441 || COMP6441 || COMP6841 && COMP3231 || COMP3891"
     },
     "COMP9242": {
-        "processed_rule": "a mark of at least 75 in COMP3231 || COMP3891."
+        "processed_rule": "75GRADE in COMP3231 || COMP3891"
     },
     "COMP9243": {
-        "processed_rule": "[COMP3231 || COMP3891] && [COMP3331 || TELE3018]."
+        "processed_rule": "(COMP3231 || COMP3891) && (COMP3331 || TELE3018)"
     },
     "COMP9301": {
         "processed_rule": "(COMP6441 || COMP6841) && (6UOC from (COMP6443 && COMP6843 && COMP6445 && COMP6845 && COMP6447)) && enrolled in final term of program"
@@ -2886,13 +2886,13 @@
         "processed_rule": "(COMP1531 || COMP2041) && COMP3311"
     },
     "COMP9322": {
-        "processed_rule": "COMP9321."
+        "processed_rule": "COMP9321"
     },
     "COMP9323": {
-        "processed_rule": "(COMP1531 || COMP2041) && COMP3311 && >65WAM"
+        "processed_rule": "(COMP1531 || COMP2041) && COMP3311 && 65WAM"
     },
     "COMP9332": {
-        "processed_rule": "COMP3331."
+        "processed_rule": "COMP3331"
     },
     "COMP9334": {
         "processed_rule": "COMP1511 || DPST1091 || COMP1917 || COMP1921"
@@ -2901,7 +2901,7 @@
         "processed_rule": "(MATH1081 && (COMP1531 || COMP2041)) || (COMP1927 || COMP2521)"
     },
     "COMP9418": {
-        "processed_rule": "COMP9417."
+        "processed_rule": "COMP9417"
     },
     "COMP9433": {
         "processed_rule": "COMP1531 && COMP2511, COMP9517"
@@ -2913,7 +2913,7 @@
         "processed_rule": "COMP6441 || COMP6841 || COMP3441"
     },
     "COMP9491": {
-        "processed_rule": "Two conditions: 1. Students have taken: 6UOC from the following: COMP3411; && 12UOC from the following: COMP9444/COMP9417/COMP9517/COMP4418 2. Students must have 70WAM || higher"
+        "processed_rule": "Two conditions: 1. Students have taken: 6UOC from the following: COMP3411; && 12UOC from the following: (COMP9444 || COMP9417 || COMP9517 || COMP4418) 2. Students must have 70WAM"
     },
     "COMP9517": {
         "processed_rule": "COMP2521 || COMP1927"
@@ -2928,37 +2928,37 @@
         "processed_rule": ""
     },
     "CRIM2014": {
-        "processed_rule": "24UOC at Level 1 including CRIM1010 && CRIM1011"
+        "processed_rule": "24UOC at L1 including CRIM1010 && CRIM1011"
     },
     "CRIM2020": {
-        "processed_rule": "24UOC at Level 1 including CRIM1010 && CRIM1011; Excluded: Students in all Bachelor of LAWSs double-degree programs"
+        "processed_rule": "24UOC at L1 including CRIM1010 && CRIM1011; Excluded: Students in all Bachelor of LAWSs double-degree programs"
     },
     "CRIM2021": {
         "processed_rule": "CRIM2020, not available to students in Bachelor of LAWSs double-degree programs"
     },
     "CRIM2031": {
-        "processed_rule": "24UOC at Level 1 including CRIM1010 || CRIM1011"
+        "processed_rule": "24UOC at L1 including CRIM1010 || CRIM1011"
     },
     "CRIM2032": {
-        "processed_rule": "24UOC at Level 1 including CRIM1010 || CRIM1011"
+        "processed_rule": "24UOC at L1 including CRIM1010 || CRIM1011"
     },
     "CRIM2034": {
-        "processed_rule": "24UOC at Level 1 including CRIM1010 || CRIM1011"
+        "processed_rule": "24UOC at L1 including CRIM1010 || CRIM1011"
     },
     "CRIM2036": {
-        "processed_rule": "24UOC at Level 1 including CRIM1010 || CRIM1011"
+        "processed_rule": "24UOC at L1 including CRIM1010 || CRIM1011"
     },
     "CRIM2037": {
-        "processed_rule": "24UOC at Level 1 including CRIM1010 || CRIM1011"
+        "processed_rule": "24UOC at L1 including CRIM1010 || CRIM1011"
     },
     "CRIM2038": {
-        "processed_rule": "24UOC at Level 1 including CRIM1010 && CRIM1011"
+        "processed_rule": "24UOC at L1 including CRIM1010 && CRIM1011"
     },
     "CRIM2040": {
-        "processed_rule": "24UOC at Level 1 including CRIM1010 || CRIM1011"
+        "processed_rule": "24UOC at L1 including CRIM1010 || CRIM1011"
     },
     "CRIM2041": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "CRIM2042": {
         "processed_rule": "24UOC || including CRIM1010 || CRIM1011 && enrolment in a single || double degree CRIM && Criminal Justice program || CRIM stream. Equivalent: CRIM3001"
@@ -2967,34 +2967,34 @@
         "processed_rule": "72UOC && enrolment in a CRIM major || a CRIM & CRIM Justice single || dual program"
     },
     "CRIM3011": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in CRIM. || 84UOC && enrolled in 4787 SOCW (Honours)/LAWS"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in CRIM. || 84UOC && enrolled in 4787 SOCW (Honours)/LAWS"
     },
     "CRIM3012": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in CRIM. || 84UOC && enrolled in 4787 SOCW (Honours)/LAWS"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in CRIM. || 84UOC && enrolled in 4787 SOCW (Honours)/LAWS"
     },
     "CRIM3015": {
         "processed_rule": "CRIM2021 || LAWS1022"
     },
     "CRIM3017": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in CRIM. || 84UOC && enrolled in 4787 SOCW (Honours)/LAWS"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in CRIM. || 84UOC && enrolled in 4787 SOCW (Honours)/LAWS"
     },
     "CRIM3018": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in CRIM. || 84UOC && enrolled in 4787 SOCW (Honours)/LAWS"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in CRIM. || 84UOC && enrolled in 4787 SOCW (Honours)/LAWS"
     },
     "CRIM3019": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in CRIM. || 84UOC && enrolled in 4787 SOCW (Honours)/LAWS"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in CRIM. || 84UOC && enrolled in 4787 SOCW (Honours)/LAWS"
     },
     "CRIM3020": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in CRIM. || 84UOC && enrolled in 4787 SOCW (Honours)/LAWS"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in CRIM. || 84UOC && enrolled in 4787 SOCW (Honours)/LAWS"
     },
     "CRIM3022": {
-        "processed_rule": "48UOC && including 6UOC at level 1 && 6UOC at level 2 in CRIM. || 84UOC && enrolled in 4787 SOCW (Honours)/LAWS"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in CRIM. || 84UOC && enrolled in 4787 SOCW (Honours)/LAWS"
     },
     "CRIM3024": {
         "processed_rule": "CRIM2021 || LAWS1022"
     },
     "CRIM3025": {
-        "processed_rule": "96UOC including CRIM1010 && CRIM1011 && CRIM2042 && 75WAM && in the final year of a CRIM major || CRIM & Criminal Justice single || double degree. Students in program 4034 are not eligible to enrol. Consent required."
+        "processed_rule": "96UOC including CRIM1010 && CRIM1011 && CRIM2042 && 75WAM && in the final year of a CRIM major || CRIM & Criminal Justice single || double degree. Students in program 4034 are not eligible to enrol. Consent required"
     },
     "CRIM4001": {
         "processed_rule": "Enrolment in the CRIM honours program"
@@ -3021,13 +3021,13 @@
         "processed_rule": ""
     },
     "CVEN2301": {
-        "processed_rule": "Corequisite: CVEN1300."
+        "processed_rule": "Corequisite: CVEN1300"
     },
     "CVEN2302": {
         "processed_rule": ""
     },
     "CVEN2303": {
-        "processed_rule": "(ENGG1300 && ENGG2400) || (CVEN1300 && CVEN2301) ( only applicable to UG cohort taking this course)."
+        "processed_rule": "(ENGG1300 && ENGG2400) || (CVEN1300 && CVEN2301) ( only applicable to UG cohort taking this course)"
     },
     "CVEN2401": {
         "processed_rule": ""
@@ -3051,7 +3051,7 @@
         "processed_rule": ""
     },
     "CVEN3201": {
-        "processed_rule": "CVEN2201."
+        "processed_rule": "CVEN2201"
     },
     "CVEN3202": {
         "processed_rule": ""
@@ -3063,10 +3063,10 @@
         "processed_rule": "ENGG1300 || CVEN1300 Corequisite: ENGG2400 || CVEN2301"
     },
     "CVEN3303": {
-        "processed_rule": "(ENGG1300 && ENGG2400) || (CVEN1300 && CVEN2301) ( only applicable to UG cohort taking this course)."
+        "processed_rule": "(ENGG1300 && ENGG2400) || (CVEN1300 && CVEN2301) ( only applicable to UG cohort taking this course)"
     },
     "CVEN3304": {
-        "processed_rule": "(ENGG1300 && ENGG2400) || (CVEN1300 && CVEN2301) ( only applicable to UG cohort taking this course)."
+        "processed_rule": "(ENGG1300 && ENGG2400) || (CVEN1300 && CVEN2301) ( only applicable to UG cohort taking this course)"
     },
     "CVEN3401": {
         "processed_rule": ""
@@ -3099,7 +3099,7 @@
         "processed_rule": "132UOC && 80WAM"
     },
     "CVEN4033": {
-        "processed_rule": "CVEN4032."
+        "processed_rule": "CVEN4032"
     },
     "CVEN4040": {
         "processed_rule": "70WAM && 132UOC"
@@ -3114,16 +3114,16 @@
         "processed_rule": "CVEN4050"
     },
     "CVEN4101": {
-        "processed_rule": "CVEN3101."
+        "processed_rule": "CVEN3101"
     },
     "CVEN4102": {
-        "processed_rule": "CVEN3101."
+        "processed_rule": "CVEN3101"
     },
     "CVEN4103": {
-        "processed_rule": "CVEN3101."
+        "processed_rule": "CVEN3101"
     },
     "CVEN4104": {
-        "processed_rule": "CVEN3101."
+        "processed_rule": "CVEN3101"
     },
     "CVEN4106": {
         "processed_rule": "CVEN2101 & CVEN3101"
@@ -3141,7 +3141,7 @@
         "processed_rule": "2303, 3303 & 3304"
     },
     "CVEN4301": {
-        "processed_rule": "CVEN3301 || CVEN2303 && CVEN3302 || CVEN3304."
+        "processed_rule": "CVEN3301 || CVEN2303 && CVEN3302 || CVEN3304"
     },
     "CVEN4305": {
         "processed_rule": "CVEN2302"
@@ -3150,7 +3150,7 @@
         "processed_rule": "CVEN3302"
     },
     "CVEN4308": {
-        "processed_rule": "CVEN3301 || CVEN2303 && CVEN2002 (or equivalent)."
+        "processed_rule": "CVEN3301 || CVEN2303 && CVEN2002 (or equivalent)"
     },
     "CVEN4309": {
         "processed_rule": "CVEN2301 & CVEN2303"
@@ -3159,16 +3159,16 @@
         "processed_rule": "GMAT1110"
     },
     "CVEN4401": {
-        "processed_rule": "CVEN2401 || CVEN3401 || CVEN2402 || CVEN3402."
+        "processed_rule": "CVEN2401 || CVEN3401 || CVEN2402 || CVEN3402"
     },
     "CVEN4402": {
-        "processed_rule": "CVEN2401 || CVEN3401 || CVEN2402 || CVEN3402."
+        "processed_rule": "CVEN2401 || CVEN3401 || CVEN2402 || CVEN3402"
     },
     "CVEN4403": {
-        "processed_rule": "CVEN2401 || CVEN3401 || CVEN2402 || CVEN3402."
+        "processed_rule": "CVEN2401 || CVEN3401 || CVEN2402 || CVEN3402"
     },
     "CVEN4404": {
-        "processed_rule": "CVEN2401 || CVEN3401 || CVEN2402 || CVEN3402."
+        "processed_rule": "CVEN2401 || CVEN3401 || CVEN2402 || CVEN3402"
     },
     "CVEN4405": {
         "processed_rule": ""
@@ -3180,7 +3180,7 @@
         "processed_rule": "(ENGG2500 || CVEN2501) && CVEN3501"
     },
     "CVEN4503": {
-        "processed_rule": "CVEN3501."
+        "processed_rule": "CVEN3501"
     },
     "CVEN4504": {
         "processed_rule": "CVEN3502"
@@ -3195,7 +3195,7 @@
         "processed_rule": ""
     },
     "CVEN4702": {
-        "processed_rule": "CVEN3702."
+        "processed_rule": "CVEN3702"
     },
     "CVEN4703": {
         "processed_rule": "CVEN3502"
@@ -3210,7 +3210,7 @@
         "processed_rule": ""
     },
     "CVEN4951": {
-        "processed_rule": "126UOC 70WAM && completion of 3rd year core"
+        "processed_rule": "126UOC && 70WAM && completion of 3rd year core"
     },
     "CVEN4952": {
         "processed_rule": "CVEN4951"
@@ -3252,7 +3252,7 @@
         "processed_rule": ""
     },
     "CVEN9826": {
-        "processed_rule": ">74 WAM UG students"
+        "processed_rule": "74WAM UG students"
     },
     "CVEN9840": {
         "processed_rule": ""
@@ -3378,7 +3378,7 @@
         "processed_rule": "DART1140"
     },
     "DART2141": {
-        "processed_rule": "SART2818."
+        "processed_rule": "SART2818"
     },
     "DART2150": {
         "processed_rule": "DART1150"
@@ -3420,7 +3420,7 @@
         "processed_rule": "DART2250"
     },
     "DART2252": {
-        "processed_rule": "Students must have 48UOC (in any program) prior to enrolling in this course."
+        "processed_rule": "Students must have 48UOC (in any program) prior to enrolling in this course"
     },
     "DART2310": {
         "processed_rule": ""
@@ -3465,7 +3465,7 @@
         "processed_rule": "DART2150"
     },
     "DART3200": {
-        "processed_rule": "Students must complete 72UOC including two media arts disciplinary sequences prior to enrolling."
+        "processed_rule": "Students must complete 72UOC including two media arts disciplinary sequences prior to enrolling"
     },
     "DART3201": {
         "processed_rule": "DART3200"
@@ -3636,7 +3636,7 @@
         "processed_rule": "Honours Co-requisite"
     },
     "DESN2000": {
-        "processed_rule": "Please refer to the course overview section for information on requirements."
+        "processed_rule": "Please refer to the course overview section for information on requirements"
     },
     "DPBS1001": {
         "processed_rule": "6UOC of any DPGE && DPST && DPBS && enrolled in a Global Diploma program"
@@ -3810,7 +3810,7 @@
         "processed_rule": "conditions: ECON1203 || COMM1190 || ECON2403 || MATH1041 || MATH1231 || MATH1241 || MATH1251"
     },
     "ECON2209": {
-        "processed_rule": "ECON1203 || COMM1190 || MATH1041 || MATH1231 || MATH1241 || MATH1251."
+        "processed_rule": "ECON1203 || COMM1190 || MATH1041 || MATH1231 || MATH1241 || MATH1251"
     },
     "ECON2322": {
         "processed_rule": "(ECON1101 || COMM1100) && (ECON1102 || COMM1150)"
@@ -3903,7 +3903,7 @@
         "processed_rule": "Admission to Econometrics Honours stream (ECONEH4502)"
     },
     "ECON4201": {
-        "processed_rule": "ECON4103 Assumed knowledge: Familiarity with matrix algebra && introductory statistics && econometrics. Prior Knowledge in Statistical software || programming languages will be useful."
+        "processed_rule": "ECON4103 Assumed knowledge: Familiarity with matrix algebra && introductory statistics && econometrics. Prior Knowledge in Statistical software || programming languages will be useful"
     },
     "ECON4202": {
         "processed_rule": "Admission to ECON Honours (program 4502 || stream ECONFH4501)"
@@ -3951,22 +3951,22 @@
         "processed_rule": "72UOC && including EDST1101 && EDST1104 && EDST1108 && EDST2003 && enrolment in an Education program. Students must have passed the Literacy && Numeracy Test for Initial Teacher Education in order to enrol into this course"
     },
     "EDST2003": {
-        "processed_rule": "24UOC at Level 1 including EDST1101 || EDST1104 && enrolment in one of the following teaching Programs 3446 || 3462 || 4053 || 4054 || 4058 || 4059 || 4061 || 4062 || 4076"
+        "processed_rule": "24UOC at L1 including EDST1101 || EDST1104 && enrolment in one of the following teaching Programs 3446 || 3462 || 4053 || 4054 || 4058 || 4059 || 4061 || 4062 || 4076"
     },
     "EDST2032": {
-        "processed_rule": "18UOC at Level 1"
+        "processed_rule": "18UOC at L1"
     },
     "EDST2044": {
-        "processed_rule": "18UOC at Level 1"
+        "processed_rule": "18UOC at L1"
     },
     "EDST2070": {
-        "processed_rule": "18UOC at Level 1"
+        "processed_rule": "18UOC at L1"
     },
     "EDST2091": {
-        "processed_rule": "18UOC at Level 1"
+        "processed_rule": "18UOC at L1"
     },
     "EDST2094": {
-        "processed_rule": "18UOC at Level 1 && enrolment in an Education program. Please contact the School of Education for enrolment"
+        "processed_rule": "18UOC at L1 && enrolment in an Education program. Please contact the School of Education for enrolment"
     },
     "EDST4080": {
         "processed_rule": "78UOC && including EDST2002 && enrolment in an Education program"
@@ -4149,7 +4149,7 @@
         "processed_rule": "EDST2002 && EDST4084 && 12UOC Teaching Method 1 courses && enrolment in an Education program. Students must have passed LANTITE.\u00a0 Students must have sufficient subject content knowledge in their teaching areas"
     },
     "EDST6761": {
-        "processed_rule": "EDST6760 && 12UOC in Teaching Methods courses. Students must have passed the Literacy && Numeracy Test for Initial Teacher Education in order to enrol into this course."
+        "processed_rule": "EDST6760 && 12UOC in Teaching Methods courses. Students must have passed the Literacy && Numeracy Test for Initial Teacher Education in order to enrol into this course"
     },
     "EDST6765": {
         "processed_rule": "EDST4080 && EDST4096 && EDST6760 && 24UOC Teaching Method courses && enrolment in an Education program. Students must have passed LANTITE.\u00a0Students must have sufficient subject content knowledge in their teaching areas.\u00a0Excluded: EDST4081"
@@ -4248,7 +4248,7 @@
         "processed_rule": "(COMP1911 || COMP1917) && ELEC2134"
     },
     "ELEC2911": {
-        "processed_rule": "ELEC1111 && 48UOC. Students should have a good working knowledge of university level physics && circuit theory && mathematics."
+        "processed_rule": "ELEC1111 && 48UOC. Students should have a good working knowledge of university level physics && circuit theory && mathematics"
     },
     "ELEC3104": {
         "processed_rule": "ELEC2134"
@@ -4284,7 +4284,7 @@
         "processed_rule": ""
     },
     "ELEC4445": {
-        "processed_rule": "132UOC."
+        "processed_rule": "132UOC"
     },
     "ELEC4601": {
         "processed_rule": "ELEC3106"
@@ -4371,7 +4371,7 @@
         "processed_rule": "(MATH1131 || DPST1013 || MATH1141) && (PHYS1121 || PHYS1131 || PHYS1141 || DPST1023)"
     },
     "ENGG2600": {
-        "processed_rule": "Please refer to the course overview section for information on requirements."
+        "processed_rule": "Please refer to the course overview section for information on requirements"
     },
     "ENGG2997": {
         "processed_rule": "Successful 72UOC && enrolled in program 3778 || 3061"
@@ -4386,7 +4386,7 @@
         "processed_rule": "66UOC from an engineering degree"
     },
     "ENGG3600": {
-        "processed_rule": "Please refer to the course overview section for information on requirements."
+        "processed_rule": "Please refer to the course overview section for information on requirements"
     },
     "ENGG4060": {
         "processed_rule": "96UOC"
@@ -4398,7 +4398,7 @@
         "processed_rule": "ENGG3001 - Fundamentals of Humanitarian GSOE (UG)"
     },
     "ENGG4600": {
-        "processed_rule": "Please refer to the course overview section for information on requirements."
+        "processed_rule": "Please refer to the course overview section for information on requirements"
     },
     "ENGG4820": {
         "processed_rule": ""
@@ -4419,7 +4419,7 @@
         "processed_rule": ""
     },
     "ENVS2030": {
-        "processed_rule": "ENVS1011."
+        "processed_rule": "ENVS1011"
     },
     "EXCH8033": {
         "processed_rule": ""
@@ -4596,7 +4596,7 @@
         "processed_rule": ""
     },
     "FOOD5400": {
-        "processed_rule": "144UOC."
+        "processed_rule": "144UOC"
     },
     "FOOD6804": {
         "processed_rule": ":CHEM3811or INDC2003"
@@ -4746,7 +4746,7 @@
         "processed_rule": "None"
     },
     "GEOS2131": {
-        "processed_rule": "GEOL1111/GEOS1111 || GEOL1211/GEOS1211 || GEOS1701"
+        "processed_rule": "(GEOL1111 || GEOS1111) || (GEOL1211 || GEOS1211) || GEOS1701"
     },
     "GEOS2181": {
         "processed_rule": ""
@@ -4773,7 +4773,7 @@
         "processed_rule": "BIOS1101 || GEOS1211 || DPST1041"
     },
     "GEOS3141": {
-        "processed_rule": "GEOL1111/GEOS1111 || GEOL1211/GEOS1211 || GEOS1701 || GEOL5321 || GEOL5200."
+        "processed_rule": "(GEOL1111 || GEOS1111) || (GEOL1211 || GEOS1211) || GEOS1701 || GEOL5321 || GEOL5200"
     },
     "GEOS3171": {
         "processed_rule": "(GEOS1111 || GEOS1211) && GEOS2131"
@@ -4818,7 +4818,7 @@
         "processed_rule": "GMAT2500 && GMAT2700"
     },
     "GMAT2130": {
-        "processed_rule": "GMAT1110, Corequisite: GMAT2120, GMAT2500, GMAT2700."
+        "processed_rule": "GMAT1110, Corequisite: GMAT2120, GMAT2500, GMAT2700"
     },
     "GMAT2500": {
         "processed_rule": "GMAT1110"
@@ -4920,7 +4920,7 @@
         "processed_rule": "HESC2452 && NEUR3101"
     },
     "HESC4501": {
-        "processed_rule": "MATH1041 && HESC2501 && 12UOC of Level 3 HESC Courses"
+        "processed_rule": "MATH1041 && HESC2501 && 12UOC of L3 HESC Courses"
     },
     "HESC4502": {
         "processed_rule": "HESC2452 && HESC3532"
@@ -4929,7 +4929,7 @@
         "processed_rule": "MATH1041 && HESC4501"
     },
     "HESC4561": {
-        "processed_rule": "MATH1041, HESC4501 65WAM"
+        "processed_rule": "MATH1041 && HESC4501 && 65WAM"
     },
     "HESC4571": {
         "processed_rule": "HESC4561"
@@ -4950,7 +4950,7 @@
         "processed_rule": ""
     },
     "HUMS1007": {
-        "processed_rule": "24UOC required. In exceptional circumstances, students who are enrolled in, but have yet to complete 24UOC may be considered if they can provide strong evidence of meeting the selection criteria. School consent required."
+        "processed_rule": "24UOC required. In exceptional circumstances, students who are enrolled in, but have yet to complete 24UOC may be considered if they can provide strong evidence of meeting the selection criteria. School consent required"
     },
     "HUMS1008": {
         "processed_rule": ""
@@ -4968,13 +4968,13 @@
         "processed_rule": ""
     },
     "HUMS2000": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "HUMS2003": {
-        "processed_rule": "24UOC at level 1 && on good academic standing. Consent required"
+        "processed_rule": "24UOC at L1 && on good academic standing. Consent required"
     },
     "HUMS2004": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "HUMS2005": {
         "processed_rule": ""
@@ -5064,7 +5064,7 @@
         "processed_rule": ""
     },
     "INFS1609": {
-        "processed_rule": "Students completing COMP degrees || majors (including BINF || COMP || SENG) are excluded from this course."
+        "processed_rule": "Students completing COMP degrees || majors (including BINF || COMP || SENG) are excluded from this course"
     },
     "INFS2101": {
         "processed_rule": "Enrolled in plan (INFSCH3964 || INFSCH3971) && (INFS1609 || INFS2609) && INFS 2603; || Enrolled in plan (INFSB13554) && INFS2603"
@@ -5073,7 +5073,7 @@
         "processed_rule": "(INFS1602 || INFS2602) && INFS1603"
     },
     "INFS2605": {
-        "processed_rule": "INFS1603 && (INFS2609 || INFS1609). Students completing COMP degrees || majors (including BINF || COMP || SENG) are excluded from this course."
+        "processed_rule": "INFS1603 && (INFS2609 || INFS1609). Students completing COMP degrees || majors (including BINF || COMP || SENG) are excluded from this course"
     },
     "INFS2608": {
         "processed_rule": "INFS1603"
@@ -5112,13 +5112,13 @@
         "processed_rule": "INFS1602 || INFS2602"
     },
     "INFS3634": {
-        "processed_rule": "INFS2605 && INFS2608."
+        "processed_rule": "INFS2605 && INFS2608"
     },
     "INFS3830": {
-        "processed_rule": "INFS3603 || (COMM2501 && in ZBUS Analytics major (COMMJ)). Note: Students wishing to meet SAS certification must complete INFS3603. Completion of COMM2501 in lieu of INFS3603 will not be considered equivalent for the certificate."
+        "processed_rule": "INFS3603 || (COMM2501 && in ZBUS Analytics major (COMMJ)). Note: Students wishing to meet SAS certification must complete INFS3603. Completion of COMM2501 in lieu of INFS3603 will not be considered equivalent for the certificate"
     },
     "INFS3873": {
-        "processed_rule": "INFS3603 || (COMM2501 && in ZBUS Analytics major (COMMJ)). Note: Students wishing to meet SAS certification must complete INFS3603. Completion of COMM2501 in lieu of INFS3603 will not be considered equivalent for the certificate."
+        "processed_rule": "INFS3603 || (COMM2501 && in ZBUS Analytics major (COMMJ)). Note: Students wishing to meet SAS certification must complete INFS3603. Completion of COMM2501 in lieu of INFS3603 will not be considered equivalent for the certificate"
     },
     "INFS4800": {
         "processed_rule": ""
@@ -5130,19 +5130,19 @@
         "processed_rule": ""
     },
     "INFS4831": {
-        "processed_rule": "Enrolled in Honours majoring in INFS."
+        "processed_rule": "Enrolled in Honours majoring in INFS"
     },
     "INFS4854": {
-        "processed_rule": "Enrolled in Honours majoring in INFS."
+        "processed_rule": "Enrolled in Honours majoring in INFS"
     },
     "INFS4858": {
         "processed_rule": "Enrolment in Streams: Enrolled in an Honours Program majoring in INFS (INFSAH || INFSBH || INFSCH)"
     },
     "INFS4886": {
-        "processed_rule": "Enrolled in Honours majoring in INFS."
+        "processed_rule": "Enrolled in Honours majoring in INFS"
     },
     "INFS4887": {
-        "processed_rule": "INFS4886 && enrolled in Honours majoring in INFS."
+        "processed_rule": "INFS4886 && enrolled in Honours majoring in INFS"
     },
     "INFS4893": {
         "processed_rule": ""
@@ -5271,7 +5271,7 @@
         "processed_rule": "LAND2121"
     },
     "LAND2142": {
-        "processed_rule": "LAND1141/ BENV1010"
+        "processed_rule": "(LAND1141 || BENV1010)"
     },
     "LAND2151": {
         "processed_rule": ""
@@ -5334,7 +5334,7 @@
         "processed_rule": "LAWS1021 || JURD7121 || LAWS1001 || JURD7101"
     },
     "LAWS1052": {
-        "processed_rule": "This course is strictly for students undertaking LAWS programs only."
+        "processed_rule": "This course is strictly for students undertaking LAWS programs only"
     },
     "LAWS1061": {
         "processed_rule": "LAWS1052 || LAWS1051; JURD7152"
@@ -5343,28 +5343,28 @@
         "processed_rule": "Principles of Private LAWS (any one of LAWS1071 || LAWS1150 || JURD7150 || JURD7171)"
     },
     "LAWS1091": {
-        "processed_rule": "Principles of Private LAWS (LAWS1150 /JURD7150) && Contracts (LAWS1075/JURD7175) && Equity && Trusts (LAWS2385/JURD7285)."
+        "processed_rule": "Principles of Private LAWS ((LAWS1150 || JURD7150)) || Contracts ((LAWS1075 || JURD7175)) && Equity && Trusts ((LAWS2385 || JURD7285))"
     },
     "LAWS1121": {
-        "processed_rule": "Academic program must be 7016, HUMS Pathway Program."
+        "processed_rule": "Academic program must be 7016, HUMS Pathway Program"
     },
     "LAWS1122": {
-        "processed_rule": "Academic program must be 7016, HUMS Pathway Program."
+        "processed_rule": "Academic program must be 7016, HUMS Pathway Program"
     },
     "LAWS1123": {
-        "processed_rule": "Academic program must be 7016, HUMS Pathway Program."
+        "processed_rule": "Academic program must be 7016, HUMS Pathway Program"
     },
     "LAWS1124": {
-        "processed_rule": "Academic program must be 7016, HUMS Pathway Program."
+        "processed_rule": "Academic program must be 7016, HUMS Pathway Program"
     },
     "LAWS1141": {
-        "processed_rule": "24UOC completed in LLB courses including LAWS1052 || 24UOC completed in JURD courses."
+        "processed_rule": "24UOC completed in LLB courses including LAWS1052 || 24UOC completed in JURD courses"
     },
     "LAWS1150": {
         "processed_rule": "LAWS1052 || LAWS1051; JURD7152"
     },
     "LAWS1160": {
-        "processed_rule": "Principles of Public LAWS (LAWS1141/JURD7141) || Public LAWS (LAWS1140/JURD7140)"
+        "processed_rule": "Principles of Public LAWS ((LAWS1141 || JURD7141)) || Public LAWS ((LAWS1140 || JURD7140))"
     },
     "LAWS1213": {
         "processed_rule": ""
@@ -5373,133 +5373,133 @@
         "processed_rule": ""
     },
     "LAWS1230": {
-        "processed_rule": "24UOC completed in LLB courses including LAWS1052 || 24UOC completed in JURD courses."
+        "processed_rule": "24UOC completed in LLB courses including LAWS1052 || 24UOC completed in JURD courses"
     },
     "LAWS2150": {
-        "processed_rule": "Principle of Public LAWS (LAWS1141/JURD7141) && Administrative LAWS (LAWS1160/JURD7160)"
+        "processed_rule": "Principle of Public LAWS ((LAWS1141 || JURD7141)) && Administrative LAWS ((LAWS1160 || JURD7160))"
     },
     "LAWS2270": {
-        "processed_rule": "78UOC in LAWS courses including Equity && Trusts (LAWS2385). This course is open ONLY to the students who commenced their program from 2013."
+        "processed_rule": "78UOC in LAWS courses including Equity && Trusts (LAWS2385). This course is open ONLY to the students who commenced their program from 2013"
     },
     "LAWS2320": {
-        "processed_rule": "24UOC completed in LLB courses || 24UOC completed in JURD courses. JURD students who commenced prior to 2013 need no ."
+        "processed_rule": "24UOC completed in LLB courses || 24UOC completed in JURD courses. JURD students who commenced prior to 2013 need no "
     },
     "LAWS2326": {
-        "processed_rule": "24UOC completed in LLB courses || 24UOC completed in JURD courses. JURD students who commenced prior to 2013 need no ."
+        "processed_rule": "24UOC completed in LLB courses || 24UOC completed in JURD courses. JURD students who commenced prior to 2013 need no "
     },
     "LAWS2351": {
-        "processed_rule": "Crime && Criminal Process (LAWS1021/JURD7121) && Criminal LAWSs (LAWS1022/JURD7122)."
+        "processed_rule": "Crime && Criminal Process ((LAWS1021 || JURD7121)) && Criminal LAWSs ((LAWS1022 || JURD7122))"
     },
     "LAWS2371": {
-        "processed_rule": "Principles of Private LAWS (LAWS1150/JURD7150) && Contracts (LAWS1075/ JURD7175)"
+        "processed_rule": "Principles of Private LAWS ((LAWS1150 || JURD7150)) && Contracts ((LAWS1075 || JURD7175))"
     },
     "LAWS2383": {
-        "processed_rule": "Principles of Private LAWS (LAWS1150 /JURD7150) && Contracts (LAWS1075/JURD7175) && Equity && Trusts (LAWS2385/JURD7285)."
+        "processed_rule": "Principles of Private LAWS ((LAWS1150 || JURD7150)) || Contracts ((LAWS1075 || JURD7175)) && Equity && Trusts ((LAWS2385 || JURD7285))"
     },
     "LAWS2384": {
-        "processed_rule": "24UOC completed in LLB courses || 24UOC completed in JURD courses. JURD students who commenced prior to 2013 need no ."
+        "processed_rule": "24UOC completed in LLB courses || 24UOC completed in JURD courses. JURD students who commenced prior to 2013 need no "
     },
     "LAWS2385": {
-        "processed_rule": "Principles of Private LAWS (LAWS1150/JURD7150) && Contracts (LAWS1075/ JURD7175)"
+        "processed_rule": "Principles of Private LAWS ((LAWS1150 || JURD7150)) && Contracts ((LAWS1075 || JURD7175))"
     },
     "LAWS2820": {
-        "processed_rule": "24UOC completed in LLB courses || 24UOC completed in JURD courses. JURD students who commenced prior to 2013 need no ."
+        "processed_rule": "24UOC completed in LLB courses || 24UOC completed in JURD courses. JURD students who commenced prior to 2013 need no "
     },
     "LAWS3014": {
-        "processed_rule": "78UOC in LAWS courses including ZBUS Associations (LAWS1091)."
+        "processed_rule": "78UOC in LAWS courses including ZBUS Associations (LAWS1091)"
     },
     "LAWS3017": {
-        "processed_rule": "78UOC in LAWS courses including Legal Theory (LAWS2320) && LAWS && Social Theory (LAWS2820) || Theories of LAWS && Justice (LAWS2326)."
+        "processed_rule": "78UOC in LAWS courses including Legal Theory (LAWS2320) && LAWS && Social Theory (LAWS2820) || Theories of LAWS && Justice (LAWS2326)"
     },
     "LAWS3018": {
         "processed_rule": "78UOC in LAWS courses Co-requisite: ZBUS Associations (LAWS1091) && Land LAWS (LAWS2383)"
     },
     "LAWS3019": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3021": {
-        "processed_rule": "78UOC in LAWS courses. Exclusion: LAWS3046/JURD7446 && LAWS3248/JURD7448 && LAWS3523/GENL2323 && LAWS8017/JURD7617"
+        "processed_rule": "78UOC in LAWS courses. Exclusion: (LAWS3046 || JURD7446) || (LAWS3248 || JURD7448) || (LAWS3523 || GENL2323) && (LAWS8017 || JURD7617)"
     },
     "LAWS3022": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3023": {
-        "processed_rule": "78UOC in LAWS courses including ZBUS Associations (LAWS1091)."
+        "processed_rule": "78UOC in LAWS courses including ZBUS Associations (LAWS1091)"
     },
     "LAWS3025": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3028": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3040": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3046": {
-        "processed_rule": "78UOC in LAWS courses. Exclusion: LAWS3021/JURD7321, LAWS3523/GENL2323, LAWS8017/JURD7617"
+        "processed_rule": "78UOC in LAWS courses. Exclusion: (LAWS3021 || JURD7321) || (LAWS3523 || GENL2323) || (LAWS8017 || JURD7617)"
     },
     "LAWS3047": {
         "processed_rule": "78UOC in LAWS courses. Co-requisite: Resolving Civil Disputes (LAWS2371)"
     },
     "LAWS3057": {
-        "processed_rule": "78UOC in LAWS courses. Co-requisite: Foundations of Intellectual Property LAWS (LAWS3021/JURD7321) || Intellectual Property LAWS (LAWS8017/JURD7617)."
+        "processed_rule": "78UOC in LAWS courses. Co-requisite: Foundations of Intellectual Property LAWS ((LAWS3021 || JURD7321)) || Intellectual Property LAWS ((LAWS8017 || JURD7617))"
     },
     "LAWS3060": {
-        "processed_rule": "78UOC in LAWS courses including LAWSyers && Ethics && Justice (LAWS1230) && Resolving Civil Disputes (LAWS2371) && Court Process, Evidence & Proof (LAWS2351)."
+        "processed_rule": "78UOC in LAWS courses including LAWSyers && Ethics && Justice (LAWS1230) && Resolving Civil Disputes (LAWS2371) && Court Process, Evidence & Proof (LAWS2351)"
     },
     "LAWS3064": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3065": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3067": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3070": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3072": {
-        "processed_rule": "78UOC in LAWS courses including Resolving Civil Disputes (LAWS2371)."
+        "processed_rule": "78UOC in LAWS courses including Resolving Civil Disputes (LAWS2371)"
     },
     "LAWS3073": {
-        "processed_rule": "78UOC in LAWS courses including Land LAWS (LAWS2383)."
+        "processed_rule": "78UOC in LAWS courses including Land LAWS (LAWS2383)"
     },
     "LAWS3079": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3080": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3084": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3086": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3087": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3102": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3105": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3115": {
-        "processed_rule": "78UOC in LAWS courses including Land LAWS (LAWS2383)."
+        "processed_rule": "78UOC in LAWS courses including Land LAWS (LAWS2383)"
     },
     "LAWS3123": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3125": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3131": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3133": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3135": {
         "processed_rule": "78UOC in LAWS courses including Equity & Trusts"
@@ -5508,124 +5508,124 @@
         "processed_rule": "78UOC in LAWS courses. Co-requisite: Resolving Civil Disputes (LAWS2371)"
     },
     "LAWS3141": {
-        "processed_rule": "78UOC in LAWS courses including ZBUS Associations (LAWS1091) && Administrative LAWS (LAWS1160)."
+        "processed_rule": "78UOC in LAWS courses including ZBUS Associations (LAWS1091) && Administrative LAWS (LAWS1160)"
     },
     "LAWS3142": {
-        "processed_rule": "78UOC in LAWS courses including Land LAWS (LAWS2383)."
+        "processed_rule": "78UOC in LAWS courses including Land LAWS (LAWS2383)"
     },
     "LAWS3144": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3146": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3147": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3149": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3150": {
-        "processed_rule": "78UOC in LAWS courses including Federal Constitutional LAWS (LAWS2150)."
+        "processed_rule": "78UOC in LAWS courses including Federal Constitutional LAWS (LAWS2150)"
     },
     "LAWS3152": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3155": {
-        "processed_rule": "78UOC in LAWS courses including ZBUS Associations (LAWS1091)."
+        "processed_rule": "78UOC in LAWS courses including ZBUS Associations (LAWS1091)"
     },
     "LAWS3157": {
-        "processed_rule": "78UOC in LAWS courses. Students enrolled after 2013 must have also completed LAWS in the Global Context (LAWS2270) before enrolling in this course."
+        "processed_rule": "78UOC in LAWS courses. Students enrolled after 2013 must have also completed LAWS in the Global Context (LAWS2270) before enrolling in this course"
     },
     "LAWS3159": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3165": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3167": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3170": {
         "processed_rule": "78UOC in LAWS courses including Resolving Civil Disputes (LAWS2371) && LAWSyers && Ethics && Justice (LAWS1230) Co-requisite: Court Process && Evidence && Proof (LAWS2351)"
     },
     "LAWS3181": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3182": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3183": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3185": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3186": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3187": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3188": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3192": {
-        "processed_rule": "78UOC in LAWS courses including ZBUS Associations (LAWS1091)."
+        "processed_rule": "78UOC in LAWS courses including ZBUS Associations (LAWS1091)"
     },
     "LAWS3195": {
         "processed_rule": "78UOC in LAWS courses. Co-requisite: Federal Constitutional LAWS (LAWS2150)"
     },
     "LAWS3196": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3211": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3212": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3216": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3221": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3222": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3231": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3240": {
-        "processed_rule": "78UOC in LAWS courses including LAWSyers && Ethics && Justice (LAWS1230)."
+        "processed_rule": "78UOC in LAWS courses including LAWSyers && Ethics && Justice (LAWS1230)"
     },
     "LAWS3248": {
-        "processed_rule": "78UOC in LAWS courses. Exclusion: LAWS3021/JURD7321, LAWS3523/GENL2323, LAWS8017/JURD7617"
+        "processed_rule": "78UOC in LAWS courses. Exclusion: (LAWS3021 || JURD7321) || (LAWS3523 || GENL2323) || (LAWS8017 || JURD7617)"
     },
     "LAWS3251": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3272": {
-        "processed_rule": "78UOC in LAWS courses including Federal Constitutional LAWS (LAWS2150)."
+        "processed_rule": "78UOC in LAWS courses including Federal Constitutional LAWS (LAWS2150)"
     },
     "LAWS3276": {
-        "processed_rule": "78UOC in LAWS courses including Federal Constitutional LAWS (LAWS2150)."
+        "processed_rule": "78UOC in LAWS courses including Federal Constitutional LAWS (LAWS2150)"
     },
     "LAWS3281": {
         "processed_rule": "78UOC in LAWS courses including Administrative LAWS (LAWS1160). Co-requisite: Resolving Civil Disputes (LAWS2371)"
     },
     "LAWS3282": {
-        "processed_rule": "78UOC in LAWS courses including Administrative LAWS (LAWS1160)."
+        "processed_rule": "78UOC in LAWS courses including Administrative LAWS (LAWS1160)"
     },
     "LAWS3292": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3301": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3302": {
-        "processed_rule": "78UOC in LAWS courses including Administrative LAWS (LAWS1160) && Equity && Trusts (LAWS2385)."
+        "processed_rule": "78UOC in LAWS courses including Administrative LAWS (LAWS1160) && Equity && Trusts (LAWS2385)"
     },
     "LAWS3303": {
         "processed_rule": "78UOC in LAWS courses including LAWSyers && Ethics && Justice (LAWS1230/1210) && Resolving Civil Disputes (LAWS2371/2311)"
@@ -5640,181 +5640,181 @@
         "processed_rule": "78UOC in LAWS courses including LAWSyers && Ethics && Justice (LAWS1230/1210) && Resolving Civil Disputes (LAWS2371/2311)"
     },
     "LAWS3314": {
-        "processed_rule": "78UOC in LAWS courses including Resolving Civil Disputes (LAWS2371)."
+        "processed_rule": "78UOC in LAWS courses including Resolving Civil Disputes (LAWS2371)"
     },
     "LAWS3316": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3319": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3321": {
         "processed_rule": "Restricted to students enrolled in Legal Studies. Academic Program must be 4055 || 3408 || 4054 || 4053"
     },
     "LAWS3326": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3327": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3331": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3332": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3335": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3341": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3345": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3346": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3348": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3350": {
-        "processed_rule": "Restricted to students enrolled in Legal Studies: Academic Program must be 4055 || 3408 || 4054."
+        "processed_rule": "Restricted to students enrolled in Legal Studies: Academic Program must be 4055 || 3408 || 4054"
     },
     "LAWS3351": {
-        "processed_rule": "Restricted to students enrolled in Legal Studies: Academic Program must be 4055 || 3408 || 4054."
+        "processed_rule": "Restricted to students enrolled in Legal Studies: Academic Program must be 4055 || 3408 || 4054"
     },
     "LAWS3352": {
-        "processed_rule": "Restricted to students enrolled in Legal Studies: Academic Program must be 4055 || 3408 || 4054."
+        "processed_rule": "Restricted to students enrolled in Legal Studies: Academic Program must be 4055 || 3408 || 4054"
     },
     "LAWS3354": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3356": {
-        "processed_rule": "Restricted to students enrolled in Legal Studies: Academic Program must be 4055 || 3408 || 4054."
+        "processed_rule": "Restricted to students enrolled in Legal Studies: Academic Program must be 4055 || 3408 || 4054"
     },
     "LAWS3361": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3362": {
         "processed_rule": "Restricted to students enrolled in Legal Studies. Academic Program must be 4055 || 3408 || 4054 || 4053"
     },
     "LAWS3368": {
-        "processed_rule": "Program must be 6001 || 6021."
+        "processed_rule": "Program must be 6001 || 6021"
     },
     "LAWS3381": {
-        "processed_rule": "78UOC in LAWS courses. Students enrolled after 2013 must have also completed LAWS in the Global Context (LAWS2270) before enrolling in this course."
+        "processed_rule": "78UOC in LAWS courses. Students enrolled after 2013 must have also completed LAWS in the Global Context (LAWS2270) before enrolling in this course"
     },
     "LAWS3382": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3383": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3384": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3391": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3392": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3393": {
-        "processed_rule": "78UOC in LAWS courses including Land LAWS (LAWS2383)."
+        "processed_rule": "78UOC in LAWS courses including Land LAWS (LAWS2383)"
     },
     "LAWS3395": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3396": {
-        "processed_rule": "Family LAWS (LAWS3391) && 78UOC in LAWS courses."
+        "processed_rule": "Family LAWS (LAWS3391) && 78UOC in LAWS courses"
     },
     "LAWS3401": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3402": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3412": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3413": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3423": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3427": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3431": {
         "processed_rule": "Restricted to students enrolled in Legal Studies. Academic Program must be 4055 || 3408 || 4054 || 4053"
     },
     "LAWS3434": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3441": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3442": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3445": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3478": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3510": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3512": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3513": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3523": {
         "processed_rule": "Restricted to students enrolled in Legal Studies. Academic Program must be 4055 || 3408 || 4054 || 4053"
     },
     "LAWS3524": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3532": {
         "processed_rule": "Restricted to students enrolled in Legal Studies. Academic Program must be 4055 || 3408 || 4054 || 4053"
     },
     "LAWS3541": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3549": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3555": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3589": {
-        "processed_rule": "78UOC in LAWS courses including Resolving Civil Disputes (LAWS2371)."
+        "processed_rule": "78UOC in LAWS courses including Resolving Civil Disputes (LAWS2371)"
     },
     "LAWS3623": {
-        "processed_rule": "78UOC in LAWS courses including LAWSyers && Ethics && Justice (LAWS1230)."
+        "processed_rule": "78UOC in LAWS courses including LAWSyers && Ethics && Justice (LAWS1230)"
     },
     "LAWS3713": {
-        "processed_rule": "78UOC in LAWS courses including LAWS in the Global Context (LAWS2270) || Public International LAWS (LAWS3381)."
+        "processed_rule": "78UOC in LAWS courses including LAWS in the Global Context (LAWS2270) || Public International LAWS (LAWS3381)"
     },
     "LAWS3751": {
         "processed_rule": "78UOC in LAWS courses. Exclusion: TABL2751"
     },
     "LAWS3758": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3789": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3812": {
-        "processed_rule": "78UOC in LAWS courses."
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3901": {
-        "processed_rule": "This course is strictly for students undertaking LAWS (Honours) programs only."
+        "processed_rule": "This course is strictly for students undertaking LAWS (Honours) programs only"
     },
     "LAWS9801": {
         "processed_rule": "Academic Program must be Environmental Science program (3988 || 3932 || 3965 || 3943)"
@@ -5880,7 +5880,7 @@
         "processed_rule": "Enrolled in plan MARKB13554"
     },
     "MARK3054": {
-        "processed_rule": "ECON1203 || MARK2052. If students can demonstrate they have equivalent statistics knowledge, but haven't completed any of the listed courses, they can seek permission from Program Coordinator by submitting an online form."
+        "processed_rule": "ECON1203 || MARK2052. If students can demonstrate they have equivalent statistics knowledge, but haven't completed any of the listed courses, they can seek permission from Program Coordinator by submitting an online form"
     },
     "MARK3081": {
         "processed_rule": "MARK1012 || MARK2012"
@@ -5889,7 +5889,7 @@
         "processed_rule": "(MARK1012 || MARK2012) && (MARK2051 || MARK2151) && MARK2052"
     },
     "MARK3085": {
-        "processed_rule": "(MARK1012 || MARK2012) || (ECON1203 || COMM1110). If students can demonstrate they have equivalent statistics knowledge, but haven't completed any of the listed courses, they can seek permission from Program Coordinator by submitting an online form."
+        "processed_rule": "(MARK1012 || MARK2012) || (ECON1203 || COMM1110). If students can demonstrate they have equivalent statistics knowledge, but haven't completed any of the listed courses, they can seek permission from Program Coordinator by submitting an online form"
     },
     "MARK3087": {
         "processed_rule": "ECON1203 || INFS1609 || MATH1041 || MATH1231 || MATH1241 || MATH1251 || MARK2052 || COMM2050 || COMM2501 || INFS2605 || INFS2609. Students with equivalent Statistics knowledge can seek waiver via webforms"
@@ -5913,16 +5913,16 @@
         "processed_rule": "MARK2101 && enrolled in plan MARKB13554"
     },
     "MARK4210": {
-        "processed_rule": "Admission to Honours in MARK."
+        "processed_rule": "Admission to Honours in MARK"
     },
     "MARK4211": {
-        "processed_rule": "Admission to Honours in MARK."
+        "processed_rule": "Admission to Honours in MARK"
     },
     "MARK4212": {
-        "processed_rule": "Admission to Honours in MARK."
+        "processed_rule": "Admission to Honours in MARK"
     },
     "MARK4213": {
-        "processed_rule": "Admission to Honours in MARK."
+        "processed_rule": "Admission to Honours in MARK"
     },
     "MARK4214": {
         "processed_rule": ""
@@ -5967,7 +5967,7 @@
         "processed_rule": "65GRADE in MATH1131 || 65GRADE in MATH1141 || 65GRADE in DPST1013"
     },
     "MATH1251": {
-        "processed_rule": "MATH1151."
+        "processed_rule": "MATH1151"
     },
     "MATH2011": {
         "processed_rule": "MATH1231 || DPST1014 || MATH1241 || MATH1251 Exclusion: MATH2019, MATH2049, MATH2069, MATH2100, MATH2110"
@@ -5988,13 +5988,13 @@
         "processed_rule": "MATH1231 || DPST1014 || MATH1241 || MATH1251 Exclusion: MATH2501 && MATH2601"
     },
     "MATH2111": {
-        "processed_rule": "MATH1231 || DPST1014 || MATH1241 || MATH1251 each with a mark of at least 70; Excluded: MATH2019, MATH2049, MATH2069, MATH2100, MATH2110."
+        "processed_rule": "MATH1231 || DPST1014 || MATH1241 || MATH1251 each with 70GRADE; Excluded: MATH2019, MATH2049, MATH2069, MATH2100, MATH2110"
     },
     "MATH2121": {
         "processed_rule": "MATH1231 || DPST1014 || MATH1241 || MATH1251"
     },
     "MATH2221": {
-        "processed_rule": "MATH1231 || DPST1014 || MATH1241 || MATH1251 each with a mark of 70."
+        "processed_rule": "MATH1231 || DPST1014 || MATH1241 || MATH1251 each with a mark of 70"
     },
     "MATH2241": {
         "processed_rule": "MATH1231 || DPST1014 || MATH1241 || MATH1251"
@@ -6015,58 +6015,58 @@
         "processed_rule": "MATH1231 || DPST1014 || MATH1241 || MATH1251 each with a mark of 70 || greater; Exclusion: MATH2099"
     },
     "MATH2621": {
-        "processed_rule": "MATH1231 || DPST1014 || MATH1241 || MATH1251 each with a mark of at least 70; Exclusion: MATH2069"
+        "processed_rule": "MATH1231 || DPST1014 || MATH1241 || MATH1251 each with 70GRADE; Exclusion: MATH2069"
     },
     "MATH2701": {
         "processed_rule": "MATH1231 || DPST1014 || MATH1241 || MATH1251 with at least a CR || enrolment in an advanced maths || advanced science program"
     },
     "MATH2801": {
-        "processed_rule": "MATH1231 || MATH1241 || MATH1251 || DPST1014; Exclusion: MATH2089; MATH2099; MATH2801; MATH2901; BEES2041; BIOS2041;CVEN2002."
+        "processed_rule": "MATH1231 || MATH1241 || MATH1251 || DPST1014; Exclusion: MATH2089; MATH2099; MATH2801; MATH2901; BEES2041; BIOS2041;CVEN2002"
     },
     "MATH2831": {
-        "processed_rule": "MATH2801 || MATH2901."
+        "processed_rule": "MATH2801 || MATH2901"
     },
     "MATH2859": {
-        "processed_rule": "MATH1231 || MATH1241 || MATH1251 || DPST1014; Exclusion: MATH2089; MATH2099; MATH2801; MATH2901; BEES2041; BIOS2041;CVEN2002."
+        "processed_rule": "MATH1231 || MATH1241 || MATH1251 || DPST1014; Exclusion: MATH2089; MATH2099; MATH2801; MATH2901; BEES2041; BIOS2041;CVEN2002"
     },
     "MATH2871": {
-        "processed_rule": "MATH1041 || ECON1203 || ECON2292 || PSYC2001 || MATH1231 || DPST1014 || MATH1241 || MATH1251 || equivalent."
+        "processed_rule": "MATH1041 || ECON1203 || ECON2292 || PSYC2001 || MATH1231 || DPST1014 || MATH1241 || MATH1251 || equivalent"
     },
     "MATH2901": {
-        "processed_rule": "MATH1231 || MATH1241 || MATH1251 || DPST1014; Exclusion: MATH2089; MATH2099; MATH2801; MATH2901; BEES2041; BIOS2041;CVEN2002."
+        "processed_rule": "MATH1231 || MATH1241 || MATH1251 || DPST1014; Exclusion: MATH2089; MATH2099; MATH2801; MATH2901; BEES2041; BIOS2041;CVEN2002"
     },
     "MATH2931": {
         "processed_rule": "MATH2901 || 75GRADE in MATH2801"
     },
     "MATH3000": {
-        "processed_rule": "12UOC in Level 2 Maths courses."
+        "processed_rule": "12UOC in L2 Maths courses"
     },
     "MATH3001": {
-        "processed_rule": "12UOC in Level 2 Maths courses."
+        "processed_rule": "12UOC in L2 Maths courses"
     },
     "MATH3002": {
-        "processed_rule": "12UOC in Level 2 Maths courses."
+        "processed_rule": "12UOC in L2 Maths courses"
     },
     "MATH3041": {
-        "processed_rule": "12UOC in Level 2 Maths courses."
+        "processed_rule": "12UOC in L2 Maths courses"
     },
     "MATH3101": {
-        "processed_rule": "12UOC in Level 2 Math courses including (MATH2011 || MATH2111 && MATH2120 || MATH2130 || MATH2121 || MATH2221) || ( 75GRADE in MATH2019 && MATH2089) || ( 65GRADE in MATH2069 && MATH2099)"
+        "processed_rule": "12UOC in L2 Math courses including (MATH2011 || MATH2111 && MATH2120 || MATH2130 || MATH2121 || MATH2221) || ( 75GRADE in MATH2019 && MATH2089) || ( 65GRADE in MATH2069 && MATH2099)"
     },
     "MATH3121": {
-        "processed_rule": "12UOC in Level 2 Math courses including (MATH2011 || MATH2111) && (MATH2120 || MATH2130 || MATH2121 || MATH2221) || ( 75GRADE in MATH2019 && MATH2089) || ( 75GRADE in MATH2069 && MATH2099)"
+        "processed_rule": "12UOC in L2 Math courses including (MATH2011 || MATH2111) && (MATH2120 || MATH2130 || MATH2121 || MATH2221) || ( 75GRADE in MATH2019 && MATH2089) || ( 75GRADE in MATH2069 && MATH2099)"
     },
     "MATH3161": {
-        "processed_rule": "12UOC in Level 2 MATH courses including MATH2011 || MATH2111 || MATH2510 && MATH2501 || MATH2601 || 75GRADE in MATH2019 && MATH2089 || 65GRADE in MATH2069 && MATH2099."
+        "processed_rule": "12UOC in L2 MATH courses including MATH2011 || MATH2111 || MATH2510 && MATH2501 || MATH2601 || 75GRADE in MATH2019 && MATH2089 || 65GRADE in MATH2069 && MATH2099"
     },
     "MATH3171": {
-        "processed_rule": "(1) [MATH2011 || MATH2111] && [MATH2501 || MATH2601]; || (2) 65GRADE in MATH2069 && MATH2099 ; || (3) [MATH2018 || MATH2019] (DN) && MATH2089 ."
+        "processed_rule": "(1) (MATH2011 || MATH2111) && (MATH2501 || MATH2601); || (2) 65GRADE in MATH2069 && MATH2099 ; || (3) (MATH2018 || MATH2019) (DN) && MATH2089 "
     },
     "MATH3201": {
         "processed_rule": "(MATH2501 || MATH2601 || MATH2089 || MATH2099) && (MATH2011 || MATH2111 || 75GRADE in MATH2018 || 75GRADE in MATH2019 || 65GRADE in MATH2069 || MATH2121 || MATH2221)"
     },
     "MATH3261": {
-        "processed_rule": "12UOC in Level 2 Math courses including (MATH2011 || MATH2111) && (MATH2120 || MATH2130 || MATH2121 || MATH2221) || ( 75GRADE in MATH2019 && MATH2089) || ( 75GRADE in MATH2069 && MATH2099)"
+        "processed_rule": "12UOC in L2 Math courses including (MATH2011 || MATH2111) && (MATH2120 || MATH2130 || MATH2121 || MATH2221) || ( 75GRADE in MATH2019 && MATH2089) || ( 75GRADE in MATH2069 && MATH2099)"
     },
     "MATH3311": {
         "processed_rule": "(MATH2120 || MATH2130 || MATH2121 || MATH2221 || MATH2111) && (MATH2501 || MATH2601) && (MATH2801 || MATH2901 || MATH2871)"
@@ -6075,64 +6075,64 @@
         "processed_rule": "MATH2011 || MATH2111 || 75GRADE in MATH2018 || 75GRADE in MATH2019 || 75GRADE in MATH2069 && MATH2801 || MATH2901 || 75GRADE in MATH2089 || 75GRADE in MATH2099"
     },
     "MATH3411": {
-        "processed_rule": "MATH1081 || 65GRADE in MATH1231 || 65GRADE in DPST1014 || 65GRADE in MATH1241 || 65GRADE in MATH1251 || MATH2099."
+        "processed_rule": "MATH1081 || 65GRADE in MATH1231 || 65GRADE in DPST1014 || 65GRADE in MATH1241 || 65GRADE in MATH1251 || MATH2099"
     },
     "MATH3511": {
-        "processed_rule": "12UOC in Level 2 Math courses"
+        "processed_rule": "12UOC in L2 Math courses"
     },
     "MATH3521": {
-        "processed_rule": "12UOC in Level 2 Math courses."
+        "processed_rule": "12UOC in L2 Math courses"
     },
     "MATH3531": {
-        "processed_rule": "12UOC in Level 2 Math courses including MATH2011 || MATH2111 || MATH2069."
+        "processed_rule": "12UOC in L2 Math courses including MATH2011 || MATH2111 || MATH2069"
     },
     "MATH3560": {
-        "processed_rule": "6UOC in Level 2 Math courses."
+        "processed_rule": "6UOC in L2 Math courses"
     },
     "MATH3570": {
-        "processed_rule": "12UOC in Level 2 Math courses."
+        "processed_rule": "12UOC in L2 Math courses"
     },
     "MATH3611": {
-        "processed_rule": "12UOC of Level 2 MATH with an average mark of at least 70 || including MATH2111 || 65GRADE in MATH2011 || 65GRADE in MATH2510 || permission from the Head of Department."
+        "processed_rule": "12UOC of L2 MATH with an average 70GRADE || including MATH2111 || 65GRADE in MATH2011 || 65GRADE in MATH2510 || permission from the Head of Department"
     },
     "MATH3701": {
-        "processed_rule": "12UOC of Level 2 MATH with an average mark of at least 70 || including MATH2111 || 65GRADE in MATH2011 || 65GRADE in MATH2510 && MATH2601 || 65GRADE in MATH2501 || permission from Head of Department."
+        "processed_rule": "12UOC of L2 MATH with an average 70GRADE || including MATH2111 || 65GRADE in MATH2011 || 65GRADE in MATH2510 && MATH2601 || 65GRADE in MATH2501 || permission from Head of Department"
     },
     "MATH3711": {
-        "processed_rule": "12UOC of Level 2 MATH with an average mark of at least 70 || including MATH2601 || 65GRADE in MATH2501 || permission from the Head of Department."
+        "processed_rule": "12UOC of L2 MATH with an average 70GRADE || including MATH2601 || 65GRADE in MATH2501 || permission from the Head of Department"
     },
     "MATH3801": {
-        "processed_rule": "MATH2501 || MATH2601 && MATH2011 || MATH2111 || MATH2510 || MATH2610 && MATH2801 || MATH2901."
+        "processed_rule": "MATH2501 || MATH2601 && MATH2011 || MATH2111 || MATH2510 || MATH2610 && MATH2801 || MATH2901"
     },
     "MATH3811": {
-        "processed_rule": "MATH2831 || MATH2931."
+        "processed_rule": "MATH2831 || MATH2931"
     },
     "MATH3821": {
         "processed_rule": "MATH2831 || MATH2931"
     },
     "MATH3831": {
-        "processed_rule": "MATH2801 || MATH2901."
+        "processed_rule": "MATH2801 || MATH2901"
     },
     "MATH3841": {
-        "processed_rule": "MATH3811 || MATH3911."
+        "processed_rule": "MATH3811 || MATH3911"
     },
     "MATH3851": {
-        "processed_rule": "MATH2801 || MATH2901 && MATH2831 || MATH2931."
+        "processed_rule": "MATH2801 || MATH2901 && MATH2831 || MATH2931"
     },
     "MATH3871": {
         "processed_rule": "MATH2801 || MATH2901"
     },
     "MATH3901": {
-        "processed_rule": "MATH2901 || 75GRADE in MATH2801 && MATH2501 || MATH2601 && MATH2011 || MATH2111 || MATH2510 || MATH2610."
+        "processed_rule": "MATH2901 || 75GRADE in MATH2801 && MATH2501 || MATH2601 && MATH2011 || MATH2111 || MATH2510 || MATH2610"
     },
     "MATH3911": {
-        "processed_rule": "MATH2931 || 75GRADE in MATH2831."
+        "processed_rule": "MATH2931 || 75GRADE in MATH2831"
     },
     "MATH4001": {
         "processed_rule": "Enrolled in MATH Honours stream"
     },
     "MATH6781": {
-        "processed_rule": "12UOC in Level 2 MATH courses including (MATH2120 || MATH2130 || MATH2121 || MATH2221) || MATH2019 && MATH2089 || MATH2069 && MATH2099"
+        "processed_rule": "12UOC in L2 MATH courses including (MATH2120 || MATH2130 || MATH2121 || MATH2221) || MATH2019 && MATH2089 || MATH2069 && MATH2099"
     },
     "MATS1101": {
         "processed_rule": ""
@@ -6270,34 +6270,34 @@
         "processed_rule": "Enrolment in a single || dual award MDIA program"
     },
     "MDIA2000": {
-        "processed_rule": "24UOC at level 1 || including MDIA1000 || MDIA1005 || ARTS1064"
+        "processed_rule": "24UOC at L1 || including MDIA1000 || MDIA1005 || ARTS1064"
     },
     "MDIA2001": {
-        "processed_rule": "24UOC at level 1 || including MDIA1000 || MDIA1005 || ARTS1064"
+        "processed_rule": "24UOC at L1 || including MDIA1000 || MDIA1005 || ARTS1064"
     },
     "MDIA2002": {
-        "processed_rule": "24UOC at level 1 including MDIA1002 || MDIA1004 || MDIA1007"
+        "processed_rule": "24UOC at L1 including MDIA1002 || MDIA1004 || MDIA1007"
     },
     "MDIA2003": {
-        "processed_rule": "24UOC at level 1 including MDIA1002 || MDIA1004 || MDIA1007"
+        "processed_rule": "24UOC at L1 including MDIA1002 || MDIA1004 || MDIA1007"
     },
     "MDIA2005": {
-        "processed_rule": "24UOC at level 1 including MDIA1002 || MDIA1003"
+        "processed_rule": "24UOC at L1 including MDIA1002 || MDIA1003"
     },
     "MDIA2006": {
-        "processed_rule": "24UOC at level 1 including MDIA1002 || MDIA1003"
+        "processed_rule": "24UOC at L1 including MDIA1002 || MDIA1003"
     },
     "MDIA2007": {
-        "processed_rule": "24UOC at level 1 including MDIA1002 || MDIA1003"
+        "processed_rule": "24UOC at L1 including MDIA1002 || MDIA1003"
     },
     "MDIA2008": {
-        "processed_rule": "24UOC at level 1 && enrolment in a single || dual award MDIA program"
+        "processed_rule": "24UOC at L1 && enrolment in a single || dual award MDIA program"
     },
     "MDIA2010": {
-        "processed_rule": "24UOC at level 1 && enrolment in a single || dual award MDIA program || enrolment in a Creative Writing major || minor. Equivalent: MDIA3001"
+        "processed_rule": "24UOC at L1 && enrolment in a single || dual award MDIA program || enrolment in a Creative Writing major || minor. Equivalent: MDIA3001"
     },
     "MDIA2011": {
-        "processed_rule": "24UOC at level 1 including\u00a0MDIA1002 || MDIA1003. || 24UOC at level 1 && enrolment in a Global Development major"
+        "processed_rule": "24UOC at L1 including\u00a0MDIA1002 || MDIA1003. || 24UOC at L1 && enrolment in a Global Development major"
     },
     "MDIA2012": {
         "processed_rule": "MDIA1002 || MDIA1003; && enrolment in a single || double degree Bachelor of MDIA (PR & Advertising) program"
@@ -6312,7 +6312,7 @@
         "processed_rule": "66UOC || including MDIA2002 || MDIA2003"
     },
     "MDIA3003": {
-        "processed_rule": "66UOC && including 6UOC Level 2 MDIA core courses && enrolment in a MDIA (Communication & Journalism) || MDIA (PR & Advertising) program"
+        "processed_rule": "66UOC && including 6UOC L2 MDIA core courses && enrolment in a MDIA (Communication & Journalism) || MDIA (PR & Advertising) program"
     },
     "MDIA3004": {
         "processed_rule": "66UOC && enrolment in a single || double degree MDIA program"
@@ -6324,7 +6324,7 @@
         "processed_rule": "66UOC || including ARTS2065 || ARTS2066 || MDIA2000 || MDIA2001 || MDIA2010 && enrolment in a single || double degree media program"
     },
     "MDIA3007": {
-        "processed_rule": "48UOC && enrolment in a MDIA program || a Creative Writing || English || FIlm Studies || MCT major || minor. Students must have 65WAM to be eligible for this course."
+        "processed_rule": "48UOC && enrolment in a MDIA program || a Creative Writing || English || FIlm Studies || MCT major || minor. Students must have 65WAM to be eligible for this course"
     },
     "MDIA3008": {
         "processed_rule": "66UOC including MDIA2005 || MDIA2006 || MDIA2012"
@@ -6333,7 +6333,7 @@
         "processed_rule": "66UOC including MDIA2005 || MDIA2006 || MDIA2012"
     },
     "MDIA3010": {
-        "processed_rule": "66UOC || including MDIA2002 || MDIA2003. As a , international exchange students a course at their home university which includes practice-oriented journalistic content creation."
+        "processed_rule": "66UOC || including MDIA2002 || MDIA2003. As a , international exchange students a course at their home university which includes practice-oriented journalistic content creation"
     },
     "MDIA3011": {
         "processed_rule": "66UOC && enrolment in a single || double degree MDIA program"
@@ -6552,7 +6552,7 @@
         "processed_rule": ""
     },
     "MGMT2718": {
-        "processed_rule": "Any first year MGMT course (e.g., MGMT1001, MGMT1002, MGMT1101)."
+        "processed_rule": "Any first year MGMT course (e.g., MGMT1001, MGMT1002, MGMT1101)"
     },
     "MGMT2721": {
         "processed_rule": ""
@@ -6573,7 +6573,7 @@
         "processed_rule": "MGMT1101or COMM1150"
     },
     "MGMT3110": {
-        "processed_rule": "MGMT2102 && 72UOC (if you are enrolled the COMM International [program 3558], completion of the COMM Overseas Program (Exchange) is also required)"
+        "processed_rule": "MGMT2102 && 72UOC (if you are enrolled the COMM International (program 3558), completion of the COMM Overseas Program (Exchange) is also required)"
     },
     "MGMT3701": {
         "processed_rule": "MGMT1001or COMM1170"
@@ -6591,7 +6591,7 @@
         "processed_rule": "MGMT2718"
     },
     "MGMT3728": {
-        "processed_rule": "Any first year MGMT course (e.g., MGMT1001, MGMT1002, MGMT1101)."
+        "processed_rule": "Any first year MGMT course (e.g., MGMT1001, MGMT1002, MGMT1101)"
     },
     "MGMT3729": {
         "processed_rule": "MGMT2718"
@@ -6600,22 +6600,22 @@
         "processed_rule": "MGMT2718 || MGMT2001 || MGMT2102 || any ZBUS Analytics Modelling I course (ECON2206 || ECON2209 || RISK2002)"
     },
     "MGMT4101": {
-        "processed_rule": "Program 4501 && enrolment in the International ZBUS Honours plan is required."
+        "processed_rule": "Program 4501 && enrolment in the International ZBUS Honours plan is required"
     },
     "MGMT4104": {
-        "processed_rule": "Program 4501 && enrolled in the Human Resource MGMT Honours plan."
+        "processed_rule": "Program 4501 && enrolled in the Human Resource MGMT Honours plan"
     },
     "MGMT4500": {
-        "processed_rule": "Program 4501 && enrolment in the International ZBUS Honours plan is required."
+        "processed_rule": "Program 4501 && enrolment in the International ZBUS Honours plan is required"
     },
     "MGMT4501": {
-        "processed_rule": "Program 4501 && enrolment in the International ZBUS Honours plan is required."
+        "processed_rule": "Program 4501 && enrolment in the International ZBUS Honours plan is required"
     },
     "MGMT4738": {
-        "processed_rule": "Program 4501 && enrolled in the Human Resource MGMT Honours plan."
+        "processed_rule": "Program 4501 && enrolled in the Human Resource MGMT Honours plan"
     },
     "MGMT4739": {
-        "processed_rule": "Program 4501 && enrolled in the Human Resource MGMT Honours plan."
+        "processed_rule": "Program 4501 && enrolled in the Human Resource MGMT Honours plan"
     },
     "MICR2011": {
         "processed_rule": "BABS1201 || DPST1051"
@@ -6627,7 +6627,7 @@
         "processed_rule": "MICR2011"
     },
     "MICR3621": {
-        "processed_rule": "12UOC from MICR2011 || BIOS2021/BABS2204 || BIOS2621/BABS2264 || BIOC2201"
+        "processed_rule": "12UOC from MICR2011 || (BIOS2021 || BABS2204) || (BIOS2621 || BABS2264) || BIOC2201"
     },
     "MICR4013": {
         "processed_rule": ""
@@ -6816,55 +6816,55 @@
         "processed_rule": ""
     },
     "MUSC1707": {
-        "processed_rule": "Enrolment in a MUSC program."
+        "processed_rule": "Enrolment in a MUSC program"
     },
     "MUSC1708": {
         "processed_rule": ""
     },
     "MUSC2111": {
-        "processed_rule": "30UOC at Level 1 including MUSC1001 && MUSC1312; Excluded: MUSC1101"
+        "processed_rule": "30UOC at L1 including MUSC1001 && MUSC1312; Excluded: MUSC1101"
     },
     "MUSC2113": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "MUSC2115": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "MUSC2116": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "MUSC2117": {
-        "processed_rule": "30UOC at Level 1"
+        "processed_rule": "30UOC at L1"
     },
     "MUSC2118": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "MUSC2602": {
         "processed_rule": "MUSC1602 && MUSC1603"
     },
     "MUSC2603": {
-        "processed_rule": "24UOC at level 1, including MUSC2602"
+        "processed_rule": "24UOC at L1, including MUSC2602"
     },
     "MUSC2703": {
-        "processed_rule": "Enrolment in a MUSC program && MUSC1701 && MUSC1704 || MUSC1702 && MUSC1705 || MUSC1707 (12UOC)."
+        "processed_rule": "Enrolment in a MUSC program && MUSC1701 && MUSC1704 || MUSC1702 && MUSC1705 || MUSC1707 (12UOC)"
     },
     "MUSC2801": {
         "processed_rule": "Enrolment in the MUSC Creative Practice Stream in a MUSC program"
     },
     "MUSC2802": {
-        "processed_rule": "36UOC at Level 1 && enrolment in the MUSC Pedagogy stream in a MUSC Program. Note: This course is for instrumental || vocal students. Students who entered the music programme as composers may be required to audition."
+        "processed_rule": "36UOC at L1 && enrolment in the MUSC Pedagogy stream in a MUSC Program. Note: This course is for instrumental || vocal students. Students who entered the music programme as composers may be required to audition"
     },
     "MUSC2803": {
-        "processed_rule": "36UOC at level 1 && enrolment a MUSC program || MUSC major || minor"
+        "processed_rule": "36UOC at L1 && enrolment a MUSC program || MUSC major || minor"
     },
     "MUSC2804": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "MUSC3104": {
-        "processed_rule": "24UOC at Level 1"
+        "processed_rule": "24UOC at L1"
     },
     "MUSC3105": {
-        "processed_rule": "24UOC in MUSC courses && including 12 at Level 1 && enrolment in a single || dual MUSC program. || 48UOC && including 6UOC level 1 MUSC && 6UOC level 2 MUSC && enrolment in a MUSC major || minor"
+        "processed_rule": "24UOC in MUSC courses && including 12 at L1 && enrolment in a single || dual MUSC program. || 48UOC && including 6UOC L1 MUSC && 6UOC L2 MUSC && enrolment in a MUSC major || minor"
     },
     "MUSC3162": {
         "processed_rule": "MUSC1602 && MUSC1603 && MUSC1604"
@@ -6873,10 +6873,10 @@
         "processed_rule": "MUSC1602 && MUSC1603 && MUSC1604 && MUSC2116"
     },
     "MUSC3705": {
-        "processed_rule": "MUSC2702 || MUSC2703 (12UOC) && enrolment in a MUSC program."
+        "processed_rule": "MUSC2702 || MUSC2703 (12UOC) && enrolment in a MUSC program"
     },
     "MUSC3706": {
-        "processed_rule": "MUSC2702 || MUSC2703 (12UOC) && enrolment in a MUSC Creative Practice || MUSC Pedagogy stream in a MUSC program."
+        "processed_rule": "MUSC2702 || MUSC2703 (12UOC) && enrolment in a MUSC Creative Practice || MUSC Pedagogy stream in a MUSC program"
     },
     "MUSC3801": {
         "processed_rule": "MUSC2801 && enrolment in the MUSC Creative Practice specialisation in a MUSC single || double degree"
@@ -6885,7 +6885,7 @@
         "processed_rule": "24UOC in MUSC courses && enrolment in one of the following streams || MUSC Creative Practice || MUSC Inquiry || MUSC Pedagogy || MUSCology || Sonic SARTs"
     },
     "MUSC3804": {
-        "processed_rule": "24UOC in MUSC courses && including MUSC2802 && enrolment in the MUSC Pedagogy specialisation in a MUSC single || double degree."
+        "processed_rule": "24UOC in MUSC courses && including MUSC2802 && enrolment in the MUSC Pedagogy specialisation in a MUSC single || double degree"
     },
     "MUSC3805": {
         "processed_rule": "24UOC in MUSC courses && enrolment in a MUSC single || double degree; || 66UOC && enrolment in a single || double degree MDIA (S&SP) program"
@@ -6897,7 +6897,7 @@
         "processed_rule": "24UOC in MUSC courses && enrolment in a MUSC single || dual program"
     },
     "MUSC3808": {
-        "processed_rule": "Enrolment in a MUSC Pedagogy stream in a MUSC program. Note: This course is for instrumental || vocal students. Students who entered the music programme as composers may be required to audition."
+        "processed_rule": "Enrolment in a MUSC Pedagogy stream in a MUSC program. Note: This course is for instrumental || vocal students. Students who entered the music programme as composers may be required to audition"
     },
     "MUSC4009": {
         "processed_rule": "Enrolment in program 4508 MUSC (Honours)"
@@ -6924,25 +6924,25 @@
         "processed_rule": "Enrolment in a single || double MUSC (Honours) program"
     },
     "MUSC4101": {
-        "processed_rule": "Level 1 && 2 && 3 core MUSC courses && enrolment in a MUSC single || dual degree program; || 48UOC including MUSC1602 || MUSC1604 && MUSC2116 && enrolment in a MUSC major in an SARTs program"
+        "processed_rule": "L1 && 2 && 3 core MUSC courses && enrolment in a MUSC single || dual degree program; || 48UOC including MUSC1602 || MUSC1604 && MUSC2116 && enrolment in a MUSC major in an SARTs program"
     },
     "MUSC4102": {
         "processed_rule": "MUSC4101 && enrolment in a MUSC program. || 48UOC including MUSC1602 || MUSC1604 && MUSC2116 && enrolment in a MUSC major in an SARTs program"
     },
     "MUSC4103": {
-        "processed_rule": "30UOC at level 1 including MUSC1603 && MUSC1604"
+        "processed_rule": "30UOC at L1 including MUSC1603 && MUSC1604"
     },
     "MUSC4104": {
         "processed_rule": "MUSC4103"
     },
     "MUSC4705": {
-        "processed_rule": "MUSC3704 || MUSC3706 (12UOC) && enrolment in a MUSC Creative Practice stream in a MUSC program."
+        "processed_rule": "MUSC3704 || MUSC3706 (12UOC) && enrolment in a MUSC Creative Practice stream in a MUSC program"
     },
     "MUSC4706": {
         "processed_rule": "Enrolment in a MUSC || SARTs program"
     },
     "NANO1001": {
-        "processed_rule": "Enrolment in the Bachelor of Science (NANO) (3617) || Nanoscience (Honours) (3618)."
+        "processed_rule": "Enrolment in the Bachelor of Science (NANO) (3617) || Nanoscience (Honours) (3618)"
     },
     "NANO2002": {
         "processed_rule": ""
@@ -7122,7 +7122,7 @@
         "processed_rule": "OPTM8513"
     },
     "PATH2201": {
-        "processed_rule": "ANAT2241 plus any one of ANAT2111, ANAT1521, PHSL2101, BIOC2101, BIOC2181."
+        "processed_rule": "ANAT2241 plus any one of ANAT2111, ANAT1521, PHSL2101, BIOC2101, BIOC2181"
     },
     "PATH2202": {
         "processed_rule": "ANAT2111 || ANAT1551 && BIOC2181 && PHSL2501"
@@ -7140,7 +7140,7 @@
         "processed_rule": "BABS3041. Highly recommended PATH2201 && PATH3205"
     },
     "PHAR2011": {
-        "processed_rule": "6UOC Level 1 Biology (BABS || BIOS ) && 12UOC Level 1 CHEM && 6UOC Level 1 MATH && PHSL 1A (Note: Medicinal CHEM students may substitute BIOC2101 for PHSL 1A) || equivalent DPST courses."
+        "processed_rule": "6UOC L1 Biology (BABS || BIOS ) && 12UOC L1 CHEM && 6UOC L1 MATH && PHSL 1A (Note: Medicinal CHEM students may substitute BIOC2101 for PHSL 1A) || equivalent DPST courses"
     },
     "PHAR3101": {
         "processed_rule": "PHAR2011"
@@ -7155,7 +7155,7 @@
         "processed_rule": "PHAR2011 || NEUR2201"
     },
     "PHAR3251": {
-        "processed_rule": "PHAR2011. Highly recommended PHSL2201 && BIOC 2101 || BIOC2181 || BIOC2201."
+        "processed_rule": "PHAR2011. Highly recommended PHSL2201 && BIOC 2101 || BIOC2181 || BIOC2201"
     },
     "PHAR3306": {
         "processed_rule": "VISN2111, PHSL2101, PHSL2201"
@@ -7191,7 +7191,7 @@
         "processed_rule": ""
     },
     "PHCM3003": {
-        "processed_rule": "It is recommended that the Public Health Capstone be undertaken by students who have completed the first 2 years (full-time equivalent) of the Bachelor of International Public Health && PHCM3007 Applied Public Health Practice."
+        "processed_rule": "It is recommended that the Public Health Capstone be undertaken by students who have completed the first 2 years (full-time equivalent) of the Bachelor of International Public Health && PHCM3007 Applied Public Health Practice"
     },
     "PHCM3004": {
         "processed_rule": "48UOC"
@@ -7200,7 +7200,7 @@
         "processed_rule": ""
     },
     "PHCM3007": {
-        "processed_rule": "It is recommended that Applied Public Health Practice be undertaken by students who have completed the first 2 years (full-time equivalent) of the Bachelor of International Public Health."
+        "processed_rule": "It is recommended that Applied Public Health Practice be undertaken by students who have completed the first 2 years (full-time equivalent) of the Bachelor of International Public Health"
     },
     "PHCM3008": {
         "processed_rule": "48UOC"
@@ -7209,7 +7209,7 @@
         "processed_rule": "HESC3504"
     },
     "PHSL2101": {
-        "processed_rule": "6UOC of level 1 Biology; && 6UOC of Level 1 CHEM; && 6UOC Level 1 MATH || equivalent DPST courses."
+        "processed_rule": "6UOC of L1 Biology; && 6UOC of L1 CHEM; && 6UOC L1 MATH || equivalent DPST courses"
     },
     "PHSL2121": {
         "processed_rule": ""
@@ -7221,10 +7221,10 @@
         "processed_rule": "PHSL2121"
     },
     "PHSL2501": {
-        "processed_rule": "BABS1201 && CHEM1831 && MATH1041."
+        "processed_rule": "BABS1201 && CHEM1831 && MATH1041"
     },
     "PHSL2502": {
-        "processed_rule": "PHSL2501."
+        "processed_rule": "PHSL2501"
     },
     "PHSL3211": {
         "processed_rule": "PHSL2101 || PHSL2121 || PHSL 2501 && PHSL2201 || PHSL2221 || PHSL2502"
@@ -7404,7 +7404,7 @@
         "processed_rule": ""
     },
     "PLAN3032": {
-        "processed_rule": "PLAN3031."
+        "processed_rule": "PLAN3031"
     },
     "PLAN3052": {
         "processed_rule": ""
@@ -7425,7 +7425,7 @@
         "processed_rule": "PLAN4031"
     },
     "PLAN6000": {
-        "processed_rule": "minimum 96UOC"
+        "processed_rule": "96UOC"
     },
     "POLY3000": {
         "processed_rule": "CHEM1821 || CHEM1021 || DPST1032 || CHEM1041"
@@ -7530,7 +7530,7 @@
         "processed_rule": "PSYC2001 && PSYC2061"
     },
     "PSYC3361": {
-        "processed_rule": "Minimum 72UOC in a declared PSYC major && a 80WAM || above"
+        "processed_rule": "72UOC in a declared PSYC major && a current 80WAM || above"
     },
     "PSYC3371": {
         "processed_rule": "PSYC3001"
@@ -7692,7 +7692,7 @@
         "processed_rule": ""
     },
     "SAHT4213": {
-        "processed_rule": "SAHT4211 Thesis A."
+        "processed_rule": "SAHT4211 Thesis A"
     },
     "SART1311": {
         "processed_rule": ""
@@ -7716,7 +7716,7 @@
         "processed_rule": ""
     },
     "SART2361": {
-        "processed_rule": "SART1361."
+        "processed_rule": "SART1361"
     },
     "SART2400": {
         "processed_rule": ""
@@ -7851,16 +7851,16 @@
         "processed_rule": "Enrolment in BSc (Adv. Science) || BAdvSci(Hons) || BSc (Adv. Maths) || BSc(AdvMath)(Hons) || (incl. associated dual degrees) || BMedSci"
     },
     "SCIF2041": {
-        "processed_rule": "Minimum 48UOC completed && 70 WAM"
+        "processed_rule": "48UOC completed && 70WAM"
     },
     "SCIF3041": {
-        "processed_rule": "72UOC 70WAM"
+        "processed_rule": "72UOC completed 70WAM"
     },
     "SCIF3199": {
         "processed_rule": "48UOC. Students must have 65WAM || above to be eligible for this course"
     },
     "SCIF3900": {
-        "processed_rule": "Minimum 72UOC"
+        "processed_rule": "72UOC"
     },
     "SDES1111": {
         "processed_rule": ""
@@ -8010,19 +8010,19 @@
         "processed_rule": "MATH1081"
     },
     "SENG2021": {
-        "processed_rule": "SENG1031 || COMP1531 && enrolment in a BE || BE(Hons) Software GSOE major."
+        "processed_rule": "SENG1031 || COMP1531 && enrolment in a BE || BE(Hons) Software GSOE major"
     },
     "SENG2991": {
-        "processed_rule": "Currently enrolled in Program 3707 in the SENGAH stream && in an approved workplace arrangement && completed COMP1511 && COMP1531 && COMP2521."
+        "processed_rule": "Currently enrolled in Program 3707 in the SENGAH stream && in an approved workplace arrangement && completed COMP1511 && COMP1531 && COMP2521"
     },
     "SENG3011": {
         "processed_rule": "SENG2021"
     },
     "SENG3991": {
-        "processed_rule": "Currently enrolled in Program 3707 in the SENGAH stream && in the Co-op program && completed SENG2011 && SENG2021 && DESN2000 && COMP2511 && COMP2041."
+        "processed_rule": "Currently enrolled in Program 3707 in the SENGAH stream && in the Co-op program && completed SENG2011 && SENG2021 && DESN2000 && COMP2511 && COMP2041"
     },
     "SENG3992": {
-        "processed_rule": "Currently enrolled in Program 3707 in the SENGAH stream && in the Co-op program && completed SENG3011."
+        "processed_rule": "Currently enrolled in Program 3707 in the SENGAH stream && in the Co-op program && completed SENG3011"
     },
     "SENG4920": {
         "processed_rule": "COMP2511"
@@ -8082,7 +8082,7 @@
         "processed_rule": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && enrolment in a SOCW program. || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && enrolment in a SOCW/LAWS program"
     },
     "SOCW4015": {
-        "processed_rule": "168UOC && SOCW4003 && SOCW4011 && SOCW4012 && SOCW4013 && enrolment in a SOCW program && an 70WAM. Corequisite: SOCW4018"
+        "processed_rule": "168UOC && SOCW4003 && SOCW4011 && SOCW4012 && SOCW4013 && enrolment in a SOCW program && an overall 70WAM. Corequisite: SOCW4018"
     },
     "SOCW4016": {
         "processed_rule": "168UOC && including SOCW4003 && SOCW4011 && SOCW4012 && SOCW4013 && enrolment in SOCW program. Corequisite: SOCW4018"
@@ -8220,13 +8220,13 @@
         "processed_rule": "at least 1 L2 course in VSI"
     },
     "SOMA3413": {
-        "processed_rule": "1 x L2 VSI course."
+        "processed_rule": "1 x L2 VSI course"
     },
     "SOMA3414": {
-        "processed_rule": "at least 1 x L2 Video Sound Image course."
+        "processed_rule": "at least 1 x L2 Video Sound Image course"
     },
     "SOMA3415": {
-        "processed_rule": "at least 1 x L2 Video Sound Image course."
+        "processed_rule": "at least 1 x L2 Video Sound Image course"
     },
     "SOMA3416": {
         "processed_rule": "L2 Animation"
@@ -8343,16 +8343,16 @@
         "processed_rule": "Must not be enrolled in LAWS single && dual programs && 18UOC"
     },
     "TABL2712": {
-        "processed_rule": "LEGT1710 || TABL1710 || TABL 2710 || 12UOC offered by the GENC."
+        "processed_rule": "LEGT1710 || TABL1710 || TABL 2710 || 12UOC offered by the GENC"
     },
     "TABL2721": {
         "processed_rule": "LEGT1710 || TABL1710 || TABL2710"
     },
     "TABL2731": {
-        "processed_rule": "LEGT1710 || TABL1710 || TABL2710 || 12UOC offered by the GENC."
+        "processed_rule": "LEGT1710 || TABL1710 || TABL2710 || 12UOC offered by the GENC"
     },
     "TABL2732": {
-        "processed_rule": "LEGT1710 || TABL1710 || TABL2710 || 12UOC offered by the GENC."
+        "processed_rule": "LEGT1710 || TABL1710 || TABL2710 || 12UOC offered by the GENC"
     },
     "TABL2741": {
         "processed_rule": "Not enrolled in LAWS single && dual programs && completion of LEGT1710 || TABL1710 || TABL2710 || (COMM1100 && COMM1150) || COMM1900"
@@ -8367,37 +8367,37 @@
         "processed_rule": ""
     },
     "TABL3007": {
-        "processed_rule": "TABL2751 || LEGT2751 || 48UOC completed in BTax."
+        "processed_rule": "TABL2751 || LEGT2751 || 48UOC completed in BTax"
     },
     "TABL3022": {
-        "processed_rule": "TABL2751 || LEGT2751 || 48UOC completed in BTax."
+        "processed_rule": "TABL2751 || LEGT2751 || 48UOC completed in BTax"
     },
     "TABL3025": {
-        "processed_rule": "TABL2751 || LEGT2751 || 48UOC completed in BTax."
+        "processed_rule": "TABL2751 || LEGT2751 || 48UOC completed in BTax"
     },
     "TABL3028": {
-        "processed_rule": "TABL2751 || LEGT2751 || 48UOC completed in BTax."
+        "processed_rule": "TABL2751 || LEGT2751 || 48UOC completed in BTax"
     },
     "TABL3031": {
-        "processed_rule": "TABL2751 || LEGT2751 || 48UOC completed in BTax."
+        "processed_rule": "TABL2751 || LEGT2751 || 48UOC completed in BTax"
     },
     "TABL3033": {
-        "processed_rule": "TABL2751 && COMM6000 CA:Essentials && 65+ WAM && Good Standing. Note: This course is by application only. Visit Career Accelerator page on ZBUS School website for more information."
+        "processed_rule": "TABL2751 && COMM6000 CA:Essentials && 65WAM && Good Standing. Note: This course is by application only. Visit Career Accelerator page on ZBUS School website for more information"
     },
     "TABL3055": {
         "processed_rule": "(ATAX0611 || TABL3015 || TABL3752) && (ATAX0623 || TABL3023) && (48UOC)"
     },
     "TABL3545": {
-        "processed_rule": "TABL2710 || LEGT1710 || TABL1710 || 12UOC offered by the GENC."
+        "processed_rule": "TABL2710 || LEGT1710 || TABL1710 || 12UOC offered by the GENC"
     },
     "TABL3546": {
-        "processed_rule": "TABL2710 || LEGT1710 || TABL1710 || 12UOC offered by the GENC."
+        "processed_rule": "TABL2710 || LEGT1710 || TABL1710 || 12UOC offered by the GENC"
     },
     "TABL3547": {
-        "processed_rule": "TABL2710 || LEGT1710 || TABL1710 || 12UOC offered by the GENC."
+        "processed_rule": "TABL2710 || LEGT1710 || TABL1710 || 12UOC offered by the GENC"
     },
     "TABL3548": {
-        "processed_rule": "TABL2710 || LEGT1710 || TABL1710 || 12UOC offered by the GENC."
+        "processed_rule": "TABL2710 || LEGT1710 || TABL1710 || 12UOC offered by the GENC"
     },
     "TABL3741": {
         "processed_rule": "LEGT1710 || TABL1710 || TABL2710"
@@ -8412,7 +8412,7 @@
         "processed_rule": "LEGT2751 || TABL2751 || LAWS3147"
     },
     "TABL3761": {
-        "processed_rule": "LEGT1710 || TABL1710 || TABL2710 || 12UOC offered by the GENC."
+        "processed_rule": "LEGT1710 || TABL1710 || TABL2710 || 12UOC offered by the GENC"
     },
     "TABL3781": {
         "processed_rule": "LEGT1710 || TABL1710 || TABL2710 Excluded: TABL3771"
@@ -8580,10 +8580,10 @@
         "processed_rule": ""
     },
     "ZBUS2901": {
-        "processed_rule": "Enrolment in CDF Program (4462)."
+        "processed_rule": "Enrolment in CDF Program (4462)"
     },
     "ZBUS2902": {
-        "processed_rule": "Enrolment in CDF Program (4462)."
+        "processed_rule": "Enrolment in CDF Program (4462)"
     },
     "ZBUS3101": {
         "processed_rule": "ZBUS2101"
@@ -8619,22 +8619,22 @@
         "processed_rule": ""
     },
     "ZBUS3901": {
-        "processed_rule": "Enrolment in CDF Program (4462)."
+        "processed_rule": "Enrolment in CDF Program (4462)"
     },
     "ZBUS3902": {
-        "processed_rule": "Enrolment in CDF Program (4462)."
+        "processed_rule": "Enrolment in CDF Program (4462)"
     },
     "ZBUS4001": {
-        "processed_rule": "Enrolment in ZBUS (Honours) Program 4512."
+        "processed_rule": "Enrolment in ZBUS (Honours) Program 4512"
     },
     "ZBUS4002": {
-        "processed_rule": "Enrolment in ZBUS (Honours) Program 4512."
+        "processed_rule": "Enrolment in ZBUS (Honours) Program 4512"
     },
     "ZBUS4101": {
-        "processed_rule": "Enrolment in ZBUS (Honours) Program 4512."
+        "processed_rule": "Enrolment in ZBUS (Honours) Program 4512"
     },
     "ZBUS4102": {
-        "processed_rule": "Enrolment in ZBUS (Honours) Program 4512."
+        "processed_rule": "Enrolment in ZBUS (Honours) Program 4512"
     },
     "ZEIT1102": {
         "processed_rule": "ZPEM1307"
@@ -9039,16 +9039,16 @@
         "processed_rule": "Enrolment in CDF Program"
     },
     "ZGEN2215": {
-        "processed_rule": "36UOC in Level 1 courses"
+        "processed_rule": "36UOC in L1 courses"
     },
     "ZGEN2222": {
-        "processed_rule": "36UOC in Level 1 courses"
+        "processed_rule": "36UOC in L1 courses"
     },
     "ZGEN2240": {
-        "processed_rule": "36UOC in Level 1 courses"
+        "processed_rule": "36UOC in L1 courses"
     },
     "ZGEN2801": {
-        "processed_rule": "36UOC in Level 1 courses"
+        "processed_rule": "36UOC in L1 courses"
     },
     "ZHSS1101": {
         "processed_rule": ""
@@ -9150,10 +9150,10 @@
         "processed_rule": ""
     },
     "ZHSS2506": {
-        "processed_rule": "Any 2 of ZHSS1102, ZHSS1202, ZHSS1302, ZHSS1304, ZHSS1402, ZPEM1202."
+        "processed_rule": "Any 2 of ZHSS1102, ZHSS1202, ZHSS1302, ZHSS1304, ZHSS1402, ZPEM1202"
     },
     "ZHSS2600": {
-        "processed_rule": "Any 2 of ZHSS1201 || ZHSS1202 || ZHSS1301 || ZHSS1302 || ZHSS1401 || ZHSS1402 || ZBUS1101 || ZBUS1103 || ZGEN2240 with Head of School consent."
+        "processed_rule": "Any 2 of ZHSS1201 || ZHSS1202 || ZHSS1301 || ZHSS1302 || ZHSS1401 || ZHSS1402 || ZBUS1101 || ZBUS1103 || ZGEN2240 with Head of School consent"
     },
     "ZHSS2601": {
         "processed_rule": ""
@@ -9183,7 +9183,7 @@
         "processed_rule": "ZHSS1101 && ZHSS1102"
     },
     "ZHSS3202": {
-        "processed_rule": "24UOC in upper-level History passed at Credit level || higher; Corequisite: 6UOC in upper-level History."
+        "processed_rule": "24UOC in upper-level History passed at Credit level ; Corequisite: 6UOC in upper-level History"
     },
     "ZHSS3211": {
         "processed_rule": "ZHSS1201 && ZHSS1202"
@@ -9255,13 +9255,13 @@
         "processed_rule": ""
     },
     "ZHSS3501": {
-        "processed_rule": "Any 2 of ZHSS1102, ZHSS1202, ZHSS1302, ZHSS1304, ZHSS1402, ZPEM1202."
+        "processed_rule": "Any 2 of ZHSS1102, ZHSS1202, ZHSS1302, ZHSS1304, ZHSS1402, ZPEM1202"
     },
     "ZHSS3502": {
         "processed_rule": ""
     },
     "ZHSS3505": {
-        "processed_rule": "Any 2 of ZHSS1102, ZHSS1202, ZHSS1302, ZHSS1304, ZHSS1402, ZPEM1202."
+        "processed_rule": "Any 2 of ZHSS1102, ZHSS1202, ZHSS1302, ZHSS1304, ZHSS1402, ZPEM1202"
     },
     "ZHSS4001": {
         "processed_rule": ""
@@ -9399,7 +9399,7 @@
         "processed_rule": "ZPEM1301 || ZPEM1303 || ZPEM1302 || ZPEM1304 || ZPEM1501 || ZPEM1502 || ZPEM2302 || ZPEM2309"
     },
     "ZPEM2506": {
-        "processed_rule": "ZPEM1301 || ZPEM1303 || ZPEM1302 || ZPEM1304 || ZPEM1501 || ZPEM1402 || ZPEM1502."
+        "processed_rule": "ZPEM1301 || ZPEM1303 || ZPEM1302 || ZPEM1304 || ZPEM1501 || ZPEM1402 || ZPEM1502"
     },
     "ZPEM2508": {
         "processed_rule": ""
