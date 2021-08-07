@@ -26,7 +26,7 @@ def preprocess_rules():
         rules = {}
 
         # Store original text for debugging
-        # rules["original_rule"] = original
+        rules["original_rule"] = original
         
         processed = original
         processed = delete_HTML(processed)
