@@ -45,6 +45,12 @@ def addComponentData(formatted, programData):
             }
         },
 
+        "PE" : {
+            "credits_to_complete" : 0
+            #To do
+            # add limit rules and science electives
+        },
+
         "FE" : {
             "credits_to_complete" : 0,
             "Minors" : {
