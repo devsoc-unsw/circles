@@ -18,7 +18,7 @@ from data.processors.specialisationsProcessing import customise_spn_data
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--type', type=str, help='all, program, specialisation, course or condition')
-parser.add_argument('--stage', type=str, help='all, scrape, format or process')
+parser.add_argument('--stage', type=str, help='all, scrape, format, process (preprocess or postprocess for condition)')
 
 args = parser.parse_args()
 
@@ -34,10 +34,9 @@ run = {
         'process': customise_spn_data
     },
     'course': {
-
     },
     'condition': {
-
+        'preprocess': preprocess_rules,
     }
 }
 

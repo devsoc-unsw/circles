@@ -19,7 +19,7 @@ from typing import Container, List, Iterable, Union, Optional
 from data.utility import dataHelpers
 
 
-TEST_PROGS = ["3778"]
+TEST_PROGS = ["3778", "3707"]
 
 def process_data():
     data = dataHelpers.read_data("data/scrapers/programsFormattedRaw.json")
@@ -54,6 +54,10 @@ def addComponentData(formatted, programData):
 
         "GE" : {
             "credits_to_complete" : 0
+        },
+
+        "Minors": {
+
         }
     }
     for item in formatted["CurriculumStructure"]:
@@ -66,15 +70,26 @@ def addComponentData(formatted, programData):
         if item["title"] == "Disciplinary Component":
             addDisciplineData(components, item)
 
+        if item["vertical_grouping"]["value"] == "undergrad_minor":
+            addMinorData(components, item)
+
     programData["components"] = components   
                 
+
+def addMinorData(components, item):
+    for minor in item["relationship"]:
+        if minor["academic_item_type"] and minor["academic_item_type"]["value"] == "minor":
+            code = minor["academic_item_code"] 
+            components["Minors"][code] = 1
+
+
 def addDisciplineData(components, item):
     components["disciplinary_component"]["credits_to_complete"] = int(item["credit_points"])
     if "container" in item and item["container"] != []:
         for container in item["container"]:
-            if container["vertical_grouping"]["value"] == "undergrad_major":
+            if container["vertical_grouping"]["value"] == "undergrad_major" or container["vertical_grouping"]["value"] == "honours":
                 for major in container["relationship"]:
-                    if major["academic_item_type"]["value"] == "major":
+                    if major["academic_item_type"]["value"] == "major" or major["academic_item_type"]["value"] == "honours": 
                         code = major["academic_item_code"] 
                         components["disciplinary_component"]["Majors"][code] = 1
 

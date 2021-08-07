@@ -1,1 +1,2 @@
-*pycache*
+*.pyc
+node_modules/
