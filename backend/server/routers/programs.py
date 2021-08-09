@@ -35,7 +35,7 @@ def  getUOC(code):
     query = { "code" : code }
     result = programsCOL.find_one(query)
 
-    return { 'uoc' : result['UOC'] }
+    return { 'UOC' : result['UOC'] }
 
 @router.get("/getFaculty/{code}")
 def  getFaculty(code):
