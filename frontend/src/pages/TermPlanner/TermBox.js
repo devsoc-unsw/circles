@@ -2,7 +2,7 @@ import React from "react";
 import { Droppable } from "react-beautiful-dnd";
 import DraggableCourse from "./DraggableCourse";
 
-function TermBox({ name, courses, courseNames, termsOffered, isDragging }) {
+function TermBox({ name, courses, termsOffered, isDragging }) {
   const term = name.match(/t[0-3]/)[0];
   const isDropAllowed = termsOffered.includes(term);
 
@@ -15,12 +15,7 @@ function TermBox({ name, courses, courseNames, termsOffered, isDragging }) {
           className={`termBox ${isDropAllowed && isDragging && "droppable"}  `}
         >
           {courses.map((code, index) => (
-            <DraggableCourse
-              key={code}
-              code={code}
-              index={index}
-              courseNames={courseNames}
-            />
+            <DraggableCourse key={code} code={code} index={index} />
           ))}
           {provided.placeholder}
         </ul>

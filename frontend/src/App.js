@@ -1,24 +1,16 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { Menu, Layout, Typography } from "antd";
-import "./App.less";
-import ThemeToggle from "./components/ThemeToggle";
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Layout } from "antd";
+import Header from './components/header/Header'
 import CourseSelector from "./pages/CourseSelector/main";
 import DegreeSelector from "./pages/DegreeSelector/main";
 import ProgressionChecker from "./pages/ProgressionChecker/main";
 import TermPlanner from "./pages/TermPlanner/main";
-import circlesLogo from "./images/circlesLogo.svg";
+import "./App.less";
 
-const { Header, Content } = Layout;
+const { Content } = Layout;
 
 function App() {
-  const [current, setCurrent] = useState("progression");
-
-  const handleClick = (e) => {
-    setCurrent(e.key);
-  };
-
-  const { Title } = Typography;
   return (
     <Router>
       <Header className="header">
@@ -51,8 +43,7 @@ function App() {
           </Menu.Item>
         </Menu>
         <ThemeToggle />
-      </Header>
-
+        </Header>
       <Content className="content">
         <Switch>
           <Route exact path="/">
@@ -76,16 +67,5 @@ function App() {
     </Router>
   );
 }
-
-const menuStyles = {
-  backgroundColor: "inherit",
-  marginLeft: "auto",
-  marginRight: "2em",
-};
-
-const titleStyles = {
-  marginLeft: "0.3em",
-  marginBottom: "0",
-};
 
 export default App;

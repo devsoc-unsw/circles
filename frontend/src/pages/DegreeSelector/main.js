@@ -6,6 +6,8 @@ import { DegreeStep } from './steps/DegreeStep';
 import { SpecialisationStep } from './steps/SpecialisationStep';
 import { MinorStep } from './steps/MinorStep';
 import './main.less';
+import { useDispatch } from 'react-redux';
+import { updateDegree } from '../../actions/updateDegree';
 
 const { Step } = Steps;
 function DegreeSelector() {
@@ -30,5 +32,4 @@ function DegreeSelector() {
       </div>
     );
 }
-
 export default DegreeSelector;
