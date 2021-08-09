@@ -33,7 +33,7 @@ def getUOC(code):
     query = { "code" : code }
     result = coursesCOL.find_one(query)
     
-    return { "uoc" : result['uoc'] }
+    return { "UOC" : result['uoc'] }
 
 @router.get("/getLevel/{code}")
 def getUOC(code):
@@ -52,9 +52,9 @@ def getEquivalent(code):
         equivalent[obj] = 1
 
     if (len(equivalent) == 0):
-        return 'none'
+        return { 'equivalent' : 'none' }
 
-    return equivalent
+    return { 'equivalent' : equivalent }
 
 @router.get("/getExclusions/{code}")
 def getExclusion(code):
@@ -66,9 +66,9 @@ def getExclusion(code):
         exclusions[obj] = 1
 
     if (len(exclusions) == 0):
-        return 'none'
+        return { 'exclusions' : 'none' }
 
-    return exclusions
+    return { 'exclusions' : exclusions }
 
 @router.get("/getPathTo/{code}")
 def getPathTo(code):
@@ -80,9 +80,9 @@ def getPathTo(code):
         pathTo[obj] = 1
 
     if (len(pathTo) == 0):
-        return 'none'
+        return { 'pathTo' : 'none' }
 
-    return pathTo
+    return { 'pathTo' : pathTo}
 
 @router.get("/getPathFrom/{code}")
 def getPathFrom(code):
@@ -94,9 +94,9 @@ def getPathFrom(code):
         pathFrom[obj] = 1
 
     if (len(pathFrom) == 0):
-        return 'none'
+        return { 'pathFrom' : 'none' }
 
-    return pathFrom
+    return { 'pathFrom' : pathFrom }
 
 @router.get("/isGenEd/{code}")
 def isGenEd(code):
@@ -104,9 +104,9 @@ def isGenEd(code):
     result = coursesCOL.find_one(query)
 
     if (result['gen_ed'] == 0):
-        return 'false'
+        return { 'isGenEd' : 'false' }
     else:
-        return 'true'
+        return { 'isGenEd' : 'true' }
 
 @router.get("/getTerms/{code}")
 def getTerms(code):

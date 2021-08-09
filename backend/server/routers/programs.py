@@ -28,21 +28,21 @@ def  getDuration(code):
     query = { "code" : code }
     result = programsCOL.find_one(query)
 
-    return result['duration']
+    return { 'duration' : result['duration'] }
 
 @router.get("/getUOC/{code}")
 def  getUOC(code):
     query = { "code" : code }
     result = programsCOL.find_one(query)
 
-    return result['UOC']
+    return { 'uoc' : result['UOC'] }
 
 @router.get("/getFaculty/{code}")
 def  getFaculty(code):
     query = { "code" : code }
     result = programsCOL.find_one(query)
 
-    result['faculty']
+    return { 'faculty' : result['faculty'] }
 
 @router.get("/getDiscipline/{code}")
 def getDiscipline(code):

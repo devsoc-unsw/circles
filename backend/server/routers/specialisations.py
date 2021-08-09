@@ -44,19 +44,14 @@ def getCore(code):
     query = { "code" : code }
     result = specialisationsCOL.find_one(query)
     coreCourses = {}
-    # for obj in result["curriculum"]:
-    #     if obj["type"] == "core":
-    #         for courses in obj['courses']:
-    #             # print(courses + "\n")
-    #             # coreCourses[courses]
     for obj in result['curriculum']:
         if obj['type'] == 'core':
             coreCourses[obj['title']] = obj
 
     if (len(coreCourses) == 0):
-        return "none"
+        return { 'core' : 'none' }
 
-    return coreCourses
+    return { 'core' : coreCourses }
 
 @router.get("/getElective/{code}")
 def getElective(code):
@@ -68,9 +63,9 @@ def getElective(code):
             elective[obj['title']] = obj
 
     if (len(elective) == 0):
-        return "none"
+        return { 'elective' : 'none' }
 
-    return elective
+    return { 'elective' : elective }
 
 @router.get("/getOther/{code}")
 def getElective(code):
@@ -82,6 +77,6 @@ def getElective(code):
             other[obj['title']] = obj
 
     if (len(other) == 0):
-        return "none"
+        return { 'other' : 'none' }
 
-    return other
+    return { 'other' : other }
