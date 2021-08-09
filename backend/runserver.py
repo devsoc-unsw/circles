@@ -7,4 +7,5 @@ from server.server import app
 from server.database import overwrite_collection
 
 if __name__ == "__main__":
+    overwrite_collection("Courses")
     uvicorn.run(app)
