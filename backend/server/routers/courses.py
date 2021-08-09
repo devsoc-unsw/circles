@@ -104,9 +104,9 @@ def isGenEd(code):
     result = coursesCOL.find_one(query)
 
     if (result['gen_ed'] == 0):
-        return { 'isGenEd' : 'false' }
+        return { 'isGenEd' : False }
     else:
-        return { 'isGenEd' : 'true' }
+        return { 'isGenEd' : True }
 
 @router.get("/getTerms/{code}")
 def getTerms(code):
