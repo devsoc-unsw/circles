@@ -35,14 +35,14 @@ def  getUOC(code):
     query = { "code" : code }
     result = programsCOL.find_one(query)
 
-    return { 'uoc' : result['UOC'] }
+    return result['UOC']
 
 @router.get("/getFaculty/{code}")
 def  getFaculty(code):
     query = { "code" : code }
     result = programsCOL.find_one(query)
 
-    return { 'faculty' : result['faculty'] }
+    result['faculty']
 
 @router.get("/getDiscipline/{code}")
 def getDiscipline(code):
@@ -99,7 +99,6 @@ def getMinors(code):
     result = programsCOL.find_one(query)
 
     if (code in flexEd):
-        print("running")
         return result['components']['FE']['Minors']
 
     return result['components']['Minors']  
