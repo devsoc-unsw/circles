@@ -1,13 +1,15 @@
 import React from 'react';
-import './main.less';
 import ParticleBackground from './ParticleBackground';
 import SelectorMenu from './SelectorMenu';
+import { useSelector } from 'react-redux';
+import './main.less';
 
 function DegreeSelector() {
+    const theme = useSelector(store => store.theme);
     return (
         <div>
             <SelectorMenu />
-            <ParticleBackground />
+            { theme === 'dark' && <ParticleBackground />}
         </div>
     );
 }
