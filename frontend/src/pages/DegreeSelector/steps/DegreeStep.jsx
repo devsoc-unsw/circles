@@ -2,7 +2,7 @@ import React from 'react';
 import { Menu, Typography, Button } from 'antd';
 import { degreeActions } from '../../../actions/degreeActions';
 import { useDispatch } from 'react-redux'
-import './degreeStep.less';
+import './steps.less';
 
 const options = [
     'Bachelor of Arts', 
@@ -41,7 +41,8 @@ export const DegreeStep = () => {
             )}
 
             {selected && (
-                <Button 
+                <Button
+                    className='degree-next-btn'
                     type="primary"
                     onClick={() => {
                         dispatch(degreeActions('SET_DEGREE', selected));

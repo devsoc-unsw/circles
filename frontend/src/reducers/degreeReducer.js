@@ -28,7 +28,7 @@ const degreeReducer = (state=initial, action) => {
                 currStep: state.currStep + 1
             }; 
         case 'PREV_STEP': 
-            if (state.currStep == 1) return state;
+            if (state.currStep == 0) return state;
             return {
                 ...state,
                 currStep: state.currStep - 1
