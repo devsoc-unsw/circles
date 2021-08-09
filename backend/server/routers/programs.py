@@ -56,42 +56,36 @@ def getDisciplineUOC(code):
     query = { "code" : code }
     result = programsCOL.find_one(query)
 
-    return result['components']['disciplinary_component']['credits_to_complete']
+    return { 'UOC' : result['components']['disciplinary_component']['credits_to_complete'] }
 
 @router.get("/getMajors/{code}")
 def getMajor(code):
     query = { "code" : code }
     result = programsCOL.find_one(query)
 
-    return result['components']['disciplinary_component']['Majors']
+    return { 'majors' : result['components']['disciplinary_component']['Majors'] }
 
-@router.get("/getFlex/{code}")
+@router.get("/getFreeElectives/{code}")
 def getFlex(code):
     query = { "code" : code }
     result = programsCOL.find_one(query)
 
-    return result['components']['FE']
+    return { 'free_electives' : result['components']['FE'] }
 
-@router.get("/getFlexUOC/{code}")
+@router.get("/getFreeElectivesUOC/{code}")
 def getFlexUOC(code):
     query = { "code" : code }
     result = programsCOL.find_one(query)
 
-    return result['components']['FE']['credits_to_complete']
+    return { 'UOC' : result['components']['FE']['credits_to_complete'] }
 
-# @router.get("/getFlexMinors/{code}")
-# def getMinors(code):
-#     query = { "code" : code }
-#     result = programsCOL.find_one(query)
-
-#     return result['components']['FE']['Minors']
 
 @router.get("/getGenUOC/{code}")
 def getGENUOC(code):
     query = { "code" : code }
     result = programsCOL.find_one(query)
 
-    return result['components']['GE']['credits_to_complete']
+    return { 'UOC' : result['components']['GE']['credits_to_complete'] }
 
 @router.get("/getMinors/{code}")
 def getMinors(code):
@@ -99,6 +93,6 @@ def getMinors(code):
     result = programsCOL.find_one(query)
 
     if (code in flexEd):
-        return result['components']['FE']['Minors']
+        return { 'minors' : result['components']['FE']['Minors'] }
 
-    return result['components']['Minors']  
+    return { 'minors' : result['components']['Minors'] } 
