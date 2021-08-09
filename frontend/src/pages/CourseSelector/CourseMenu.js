@@ -1,47 +1,43 @@
 import React, { useState, useEffect } from 'react';
-// import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-// import { getAllCourses } from '../../actions/updateCourses';
 import { Menu } from 'antd';
+import { courseOptionsActions } from '../../actions/courseOptionsActions';
+import axios from 'axios';
 import './CourseMenu.less';
 
 const { SubMenu } = Menu;
 
-export default function CourseMenu(props) {
+const MenuItem = ({courseCode}) => {
   const history = useHistory();
-  const { id } = useParams();
-  // const dispatch = useDispatch();
-  // const courses = useSelector(state => state.updateCourses.courses);
-  const [core, setCore] = useState([]);
-  const [electives, setElectives] = useState([]);
-  const [genEd, setGenEd] = useState([]);
+  return (
+    <Menu.Item 
+      className={"text"} 
+      key={courseCode}
+      onClick={() => history.push(`/course-selector/${courseCode}`)}
+    >
+      { courseCode }
+    </Menu.Item>
+  )
+}
 
-  // useEffect(() => {
-  //   console.log('COURSE MENU');
-  //   dispatch(getAllCourses());
-  // }, []);
+export default function CourseMenu() {
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const { id } = useParams();
+  const courseOptions = useSelector(store => store.courseOptions);
 
   useEffect(() => {
-    setCore([]);
-    setElectives([]);
-    setGenEd([]);
-    let currCore = [...core];
-    let currElec = [...electives];
-    let currGenEd = [...genEd];
-    for (const course in props.courses) {
-      if (props.courses[course].type === 'core') {
-        currCore.push(course);
-      } else if (props.courses[course].type === 'elective') {
-        currElec.push(course);
-      } else if (props.courses[course].type === 'gened') {
-        currGenEd.push(course);
-      }
-    };
-    setCore(currCore);
-    setElectives(currElec);
-    setGenEd(currGenEd);
-    // REVIEW COMMENT: See warning - you have missing dependencies
-  }, [props.courses]);
+    getCourseOptions();
+  }, []);
+
+  const getCourseOptions = async () => {
+    const res = await axios.get('http://localhost:3000/courseOptions.json');
+    dispatch(courseOptionsActions('SET_RECENTLY_VIEWED_COURSES', res.data.recentlyViewed));
+    dispatch(courseOptionsActions('SET_CORE_COURSES', res.data.core));
+    dispatch(courseOptionsActions('SET_ELECTIVE_COURSES', res.data.electives));
+    dispatch(courseOptionsActions('SET_GENED_COURSES', res.data.genEds));
+  }
 
   const handleClick = e => {
     console.log('click ', e);
@@ -54,45 +50,39 @@ export default function CourseMenu(props) {
   return (
     <div className='cs-menu-root'>
       {
-        core.length > 0 && electives.length > 0 && genEd.length > 0 &&
+        courseOptions.recentlyViewed && courseOptions.core && courseOptions.electives && courseOptions.genEds &&
         <Menu
           className={'text'}
           onClick={handleClick}
-          style={{ width: '100%', color: 'black'}}
-          defaultSelectedKeys={[id !== '0' ? id : core[0]]}
+          style={{ width: '100%'}}
+          defaultSelectedKeys={[id ? id : courseOptions.core[0]]}
           selectedKeys={[id]}
-          defaultOpenKeys={['sub2', 'sub4', 'sub5']}
+          defaultOpenKeys={['recently-viewed', 'core', 'electives']}
           mode="inline"
-          id={'this'}
+          // id={'this'}
         >
-          <SubMenu className={"text"} key="sub1" /* icon={<MailOutlined />} */ title="Recently Viewed">
-            <Menu.Item key={'0'} disabled className="text">No courses here (ㆆ_ㆆ)</Menu.Item>
-          </SubMenu>
-          <SubMenu  className={"text"} key="sub2" /* icon={<AppstoreOutlined />} */ title="Core">
-            {
-              core.map((course) => {
-                return (
-                  <Menu.Item className={"text"}  key={ course } onClick={ () => goToCourse(course) }>{ course }</Menu.Item>
-                )
-              })
+          <SubMenu className={"text"} key="recently-viewed" title="Recently Viewed">
+            { courseOptions.recentlyViewed.length === 0
+              ? <Menu.Item key={'empty-recently-viewed'} disabled> No courses here (ㆆ_ㆆ) </Menu.Item>
+              : courseOptions.recentlyViewed.map(courseCode => <Menu.Item className="text" key={courseCode} onClick={() => goToCourse(courseCode)}>{courseCode}</Menu.Item>) 
             }
           </SubMenu>
-          <SubMenu className={"text"} key="sub4" /* icon={<SettingOutlined />} */ title="Electives">
-            {
-              electives.map((course) => {
-                return (
-                  <Menu.Item className={"text"} key={ course } onClick={ () => goToCourse(course) }>{ course }</Menu.Item>
-                )
-              })
+          <SubMenu  className={"text"} key="core" title="Core">
+            { courseOptions.core.length === 0
+              ? <Menu.Item key={'empty-core'} disabled> No courses here (ㆆ_ㆆ) </Menu.Item>
+              : courseOptions.core.map(courseCode => <Menu.Item className="text" key={courseCode} onClick={() => goToCourse(courseCode)}>{courseCode}</Menu.Item>) 
             }
           </SubMenu>
-          <SubMenu  className={"text"} key="sub5" /* icon={<SettingOutlined />} */ title="General Education">
-            {
-              genEd.map((course) => {
-                return (
-                  <Menu.Item  className={"text"} key={ course } onClick={ () => goToCourse(course) }>{ course }</Menu.Item>
-                )
-              })
+          <SubMenu className={"text"} key="electives" title="Electives">
+            { courseOptions.electives.length === 0
+              ? <Menu.Item key={'empty-electives'} disabled> No courses here (ㆆ_ㆆ) </Menu.Item>
+              : courseOptions.electives.map(courseCode => <Menu.Item className="text" key={courseCode} onClick={() => goToCourse(courseCode)}>{courseCode}</Menu.Item>) 
+            }
+          </SubMenu>
+          <SubMenu  className={"text"} key="general-education" title="General Education">
+            { courseOptions.genEds.length === 0
+              ? <Menu.Item key={'empty-general-education'} disabled> No courses here (ㆆ_ㆆ) </Menu.Item>
+              : courseOptions.genEds.map(courseCode => <Menu.Item className="text" key={courseCode} onClick={() => goToCourse(courseCode)}>{courseCode}</Menu.Item>) 
             }
           </SubMenu>
         </Menu>

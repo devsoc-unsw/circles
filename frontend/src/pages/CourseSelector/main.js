@@ -46,7 +46,7 @@ export default function CourseSelector() {
           {/* </div> */}
         </div>
         <div className='cs-bottom-cont'>
-          <CourseMenu courses={ courses } />
+          <CourseMenu/>
           <CourseDescription />
         </div>
         {/* UNPLANNED {JSON.stringify(unplanned)} */}
