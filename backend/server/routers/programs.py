@@ -28,7 +28,7 @@ def  getDuration(code):
     query = { "code" : code }
     result = programsCOL.find_one(query)
 
-    return { 'duration' : result['duration'] }
+    return result['duration']
 
 @router.get("/getUOC/{code}")
 def  getUOC(code):
