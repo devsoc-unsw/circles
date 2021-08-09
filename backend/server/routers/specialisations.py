@@ -49,7 +49,7 @@ def getCore(code):
             coreCourses[obj['title']] = obj
 
     if (len(coreCourses) == 0):
-        return { 'core' : 'none' }
+        return { 'core' : None }
 
     return { 'core' : coreCourses }
 
@@ -63,7 +63,7 @@ def getElective(code):
             elective[obj['title']] = obj
 
     if (len(elective) == 0):
-        return { 'elective' : 'none' }
+        return { 'elective' : None }
 
     return { 'elective' : elective }
 
@@ -77,6 +77,6 @@ def getElective(code):
             other[obj['title']] = obj
 
     if (len(other) == 0):
-        return { 'other' : 'none' }
+        return { 'other' : None }
 
     return { 'other' : other }
