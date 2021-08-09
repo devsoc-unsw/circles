@@ -17,7 +17,7 @@ function DegreeSelector() {
     return (
       <div className='degree-root-container'>
         <div className='degree-content'>
-          <Steps className='step-style' current={currStep}>
+          <Steps className="step-style" current={currStep}>
             <Step title="Degree" />
             <Step title="Specialisation" />
             <Step title="Minor" />
