@@ -9,6 +9,8 @@ router = APIRouter(
     responses={404: {"description": "Not found"}}
 )
 
+flexEd = ['3778']
+
 @router.get("/")
 def specialisations_index():
     return "Index of programs"
@@ -77,12 +79,12 @@ def getFlexUOC(code):
 
     return result['components']['FE']['credits_to_complete']
 
-@router.get("/getFlexMinors/{code}")
-def getMinors(code):
-    query = { "code" : code }
-    result = programsCOL.find_one(query)
+# @router.get("/getFlexMinors/{code}")
+# def getMinors(code):
+#     query = { "code" : code }
+#     result = programsCOL.find_one(query)
 
-    return result['components']['FE']['Minors']
+#     return result['components']['FE']['Minors']
 
 @router.get("/getGenUOC/{code}")
 def getGENUOC(code):
@@ -95,5 +97,9 @@ def getGENUOC(code):
 def getMinors(code):
     query = { "code" : code }
     result = programsCOL.find_one(query)
+
+    if (code in flexEd):
+        print("running")
+        return result['components']['FE']['Minors']
 
     return result['components']['Minors']  
