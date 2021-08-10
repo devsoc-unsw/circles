@@ -21,6 +21,13 @@ def parse_conditions_logic():
     for code, condition in data.items():
         text = condition["processed_rule"]
 
+        # There are many words with (abcdefgh) where the brackets are attached
+        # too tightly to the word. We first want to separate them like so:
+        # ( abcdefgh ) so that our split can separate them cleanly.
+        text = re.sub(r'\(', r' ( ', text)
+        text = re.sub(r'\)', r' ) ', text)
+        text = re.sub(r' +', r' ', text)
+
         logic = ["("]
 
         # Split on ands/ors and brackets
@@ -28,14 +35,16 @@ def parse_conditions_logic():
         for word in text.split():
             if word in split_key:
                 # End the logical phrase and split on this word
-                logic.append(phrase.strip())
+                if phrase is not "":
+                    logic.append(phrase.strip())
                 logic.append(word)
-                phrase = ""
+                phrase = ""                    
             else:
                 # Keep building the logical phrase
                 phrase += word + " "
-        
-        logic.append(phrase.strip())
+                
+        if phrase is not "":
+            logic.append(phrase.strip())
 
         logic.append(")")
 
@@ -43,3 +52,5 @@ def parse_conditions_logic():
 
     
     dataHelpers.write_data(PARSED_LOGIC, "data/finalData/conditionsParsedLogic.json")
+
+

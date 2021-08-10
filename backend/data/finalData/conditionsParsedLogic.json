@@ -1,7 +1,6 @@
 {
     "ACCT1501": [
         "(",
-        "",
         ")"
     ],
     "ACCT1511": [
@@ -11,7 +10,10 @@
     ],
     "ACCT2101": [
         "(",
-        "Enrolment in ACCT Co-op Major (ACCTB13554)",
+        "Enrolment in ACCT Co-op Major",
+        "(",
+        "ACCTB13554",
+        ")",
         ")"
     ],
     "ACCT2511": [
@@ -46,12 +48,18 @@
     ],
     "ACCT3202": [
         "(",
-        "Enrolment in ACCT Co-op Major (ACCTB13554)",
+        "Enrolment in ACCT Co-op Major",
+        "(",
+        "ACCTB13554",
+        ")",
         ")"
     ],
     "ACCT3303": [
         "(",
-        "Enrolment in ACCT Co-op Major (ACCTB13554)",
+        "Enrolment in ACCT Co-op Major",
+        "(",
+        "ACCTB13554",
+        ")",
         ")"
     ],
     "ACCT3563": [
@@ -90,37 +98,50 @@
     ],
     "ACCT4796": [
         "(",
-        "",
         ")"
     ],
     "ACCT4797": [
         "(",
-        "Must be enrolled in program 4501 (ACCT)",
+        "Must be enrolled in program 4501",
+        "(",
+        "ACCT",
+        ")",
         ")"
     ],
     "ACCT4798": [
         "(",
-        "",
         ")"
     ],
     "ACCT4809": [
         "(",
-        "Must be enrolled in program 4501 (ACCT)",
+        "Must be enrolled in program 4501",
+        "(",
+        "ACCT",
+        ")",
         ")"
     ],
     "ACCT4851": [
         "(",
-        "Must be enrolled in program 4501 (ACCT)",
+        "Must be enrolled in program 4501",
+        "(",
+        "ACCT",
+        ")",
         ")"
     ],
     "ACCT4852": [
         "(",
-        "Must be enrolled in program 4501 (ACCT)",
+        "Must be enrolled in program 4501",
+        "(",
+        "ACCT",
+        ")",
         ")"
     ],
     "ACCT4897": [
         "(",
-        "Must be enrolled in program 4501 (ACCT)",
+        "Must be enrolled in program 4501",
+        "(",
+        "ACCT",
+        ")",
         ")"
     ],
     "ACTL1101": [
@@ -137,9 +158,11 @@
     ],
     "ACTL2102": [
         "(",
-        "(ACTL2131",
+        "(",
+        "ACTL2131",
         "||",
-        "MATH2901)",
+        "MATH2901",
+        ")",
         "&&",
         "in Actuarial single",
         "||",
@@ -150,31 +173,35 @@
         "(",
         "MATH1251",
         "&&",
-        "(ACTL1101",
+        "(",
+        "ACTL1101",
         "||",
         "in MATHE1",
         "||",
         "MATHM1",
         "||",
-        "MATHT1 majors)",
+        "MATHT1 majors",
+        ")",
         ")"
     ],
     "ACTL2131": [
         "(",
         "ACTL1101",
         "&&",
-        "(MATH1251",
+        "(",
+        "MATH1251",
         "||",
         "MATH1241",
         ")",
-        "",
         ")"
     ],
     "ACTL3141": [
         "(",
-        "(ACTL2131",
+        "(",
+        "ACTL2131",
         "||",
-        "MATH2901)",
+        "MATH2901",
+        ")",
         "&&",
         "ACTL2102",
         ")"
@@ -183,15 +210,22 @@
         "(",
         "ACTL2131",
         "||",
-        "(MATH2931",
+        "(",
+        "MATH2931",
         "&&",
         "in B. DATA",
         "&&",
-        "Decisions (3959))",
+        "Decisions",
+        "(",
+        "3959",
+        ")",
+        ")",
         "||",
-        "(MATH2901",
+        "(",
+        "MATH2901",
         "&&",
-        "MATH2931)",
+        "MATH2931",
+        ")",
         ")"
     ],
     "ACTL3151": [
@@ -205,13 +239,15 @@
         "(",
         "ACTL2102",
         "||",
-        "(MATH2901",
+        "(",
+        "MATH2901",
         "&&",
         "MATHE1",
         "||",
         "MATHM1",
         "||",
-        "MATHT1 major)",
+        "MATHT1 major",
+        ")",
         ")"
     ],
     "ACTL3182": [
@@ -225,26 +261,34 @@
         "(",
         "ECON2101",
         "||",
-        "(ECON1101",
+        "(",
+        "ECON1101",
         "&&",
-        "ACTL1101)",
+        "ACTL1101",
+        ")",
         "||",
-        "(84UOC",
+        "(",
+        "84UOC",
         "&&",
-        "enrolled in a COMM Program)",
+        "enrolled in a COMM Program",
+        ")",
         ")"
     ],
     "ACTL3192": [
         "(",
         "ECON2101",
         "||",
-        "(ECON1101",
+        "(",
+        "ECON1101",
         "&&",
-        "ACTL1101)",
+        "ACTL1101",
+        ")",
         "||",
-        "(84UOC",
+        "(",
+        "84UOC",
         "&&",
-        "enrolled in a COMM Program)",
+        "enrolled in a COMM Program",
+        ")",
         ")"
     ],
     "ACTL3202": [
@@ -280,22 +324,22 @@
     ],
     "ACTL4003": [
         "(",
-        "Students must be in ACTL (Honours)",
+        "Students must be in ACTL",
+        "(",
+        "Honours",
+        ")",
         ")"
     ],
     "ACTL4010": [
         "(",
-        "",
         ")"
     ],
     "ACTL4011": [
         "(",
-        "",
         ")"
     ],
     "ACTL4012": [
         "(",
-        "",
         ")"
     ],
     "ACTL4305": [
@@ -305,37 +349,30 @@
     ],
     "ADAD0600": [
         "(",
-        "",
         ")"
     ],
     "ADAD1001": [
         "(",
-        "",
         ")"
     ],
     "ADAD1002": [
         "(",
-        "",
         ")"
     ],
     "ADAD1100": [
         "(",
-        "",
         ")"
     ],
     "ADAD2400": [
         "(",
-        "",
         ")"
     ],
     "ADAD2402": [
         "(",
-        "",
         ")"
     ],
     "ADAD2610": [
         "(",
-        "",
         ")"
     ],
     "ADAD3000": [
@@ -353,7 +390,6 @@
     ],
     "ADAD3114": [
         "(",
-        "",
         ")"
     ],
     "ADAD3400": [
@@ -388,13 +424,17 @@
     ],
     "AERO3110": [
         "(",
-        "(DESN2000",
+        "(",
+        "DESN2000",
         "||",
-        "MMAN2100)",
+        "MMAN2100",
+        ")",
         "&&",
-        "(ENGG2400",
+        "(",
+        "ENGG2400",
         "||",
-        "MMAN2400)",
+        "MMAN2400",
+        ")",
         ")"
     ],
     "AERO3410": [
@@ -415,7 +455,8 @@
     ],
     "AERO3660": [
         "(",
-        "(MMAN1300",
+        "(",
+        "MMAN1300",
         "||",
         "ENGG1300",
         "||",
@@ -423,11 +464,12 @@
         "||",
         "CVEN1300",
         ")",
-        "",
         "&&",
-        "(MMAN2600",
+        "(",
+        "MMAN2600",
         "||",
-        "ENGG2500)",
+        "ENGG2500",
+        ")",
         "&&",
         "MMAN2700",
         ")"
@@ -444,7 +486,6 @@
     ],
     "AERO4500": [
         "(",
-        "",
         ")"
     ],
     "AERO4620": [
@@ -456,24 +497,25 @@
     ],
     "AERO9500": [
         "(",
-        "",
         ")"
     ],
     "AERO9610": [
         "(",
-        "",
         ")"
     ],
     "AERO9660": [
         "(",
-        "",
         ")"
     ],
     "ANAT1521": [
         "(",
         "BABS1201",
         "||",
-        "DPST1051 This course is restricted to students enrolled in SOMS (3991) program",
+        "DPST1051 This course is restricted to students enrolled in SOMS",
+        "(",
+        "3991",
+        ")",
+        "program",
         ")"
     ],
     "ANAT2111": [
@@ -507,7 +549,10 @@
     ],
     "ANAT2241": [
         "(",
-        "BABS1201 (or DPST1051)",
+        "BABS1201",
+        "(",
+        "or DPST1051",
+        ")",
         "&&",
         "30UOC",
         ")"
@@ -533,7 +578,6 @@
     ],
     "ANAT2521": [
         "(",
-        "",
         ")"
     ],
     "ANAT3121": [
@@ -574,12 +618,10 @@
     ],
     "ARCH0006": [
         "(",
-        "",
         ")"
     ],
     "ARCH1080": [
         "(",
-        "",
         ")"
     ],
     "ARCH1101": [
@@ -588,7 +630,10 @@
         "||",
         "3268 CODE",
         "||",
-        "3635 Civil GSOE with ARCH (Hons)",
+        "3635 Civil GSOE with ARCH",
+        "(",
+        "Hons",
+        ")",
         ")"
     ],
     "ARCH1102": [
@@ -598,12 +643,10 @@
     ],
     "ARCH1161": [
         "(",
-        "",
         ")"
     ],
     "ARCH1162": [
         "(",
-        "",
         ")"
     ],
     "ARCH1201": [
@@ -620,7 +663,6 @@
     ],
     "ARCH1222": [
         "(",
-        "",
         ")"
     ],
     "ARCH1261": [
@@ -665,52 +707,42 @@
     ],
     "ARCH1481": [
         "(",
-        "",
         ")"
     ],
     "ARCH1483": [
         "(",
-        "",
         ")"
     ],
     "ARCH2170": [
         "(",
-        "",
         ")"
     ],
     "ARTS1010": [
         "(",
-        "",
         ")"
     ],
     "ARTS1011": [
         "(",
-        "",
         ")"
     ],
     "ARTS1030": [
         "(",
-        "",
         ")"
     ],
     "ARTS1031": [
         "(",
-        "",
         ")"
     ],
     "ARTS1032": [
         "(",
-        "",
         ")"
     ],
     "ARTS1060": [
         "(",
-        "",
         ")"
     ],
     "ARTS1062": [
         "(",
-        "",
         ")"
     ],
     "ARTS1064": [
@@ -720,57 +752,46 @@
     ],
     "ARTS1090": [
         "(",
-        "",
         ")"
     ],
     "ARTS1091": [
         "(",
-        "",
         ")"
     ],
     "ARTS1092": [
         "(",
-        "",
         ")"
     ],
     "ARTS1120": [
         "(",
-        "",
         ")"
     ],
     "ARTS1121": [
         "(",
-        "",
         ")"
     ],
     "ARTS1122": [
         "(",
-        "",
         ")"
     ],
     "ARTS1190": [
         "(",
-        "",
         ")"
     ],
     "ARTS1210": [
         "(",
-        "",
         ")"
     ],
     "ARTS1211": [
         "(",
-        "",
         ")"
     ],
     "ARTS1240": [
         "(",
-        "",
         ")"
     ],
     "ARTS1241": [
         "(",
-        "",
         ")"
     ],
     "ARTS1250": [
@@ -780,32 +801,26 @@
     ],
     "ARTS1270": [
         "(",
-        "",
         ")"
     ],
     "ARTS1271": [
         "(",
-        "",
         ")"
     ],
     "ARTS1360": [
         "(",
-        "",
         ")"
     ],
     "ARTS1361": [
         "(",
-        "",
         ")"
     ],
     "ARTS1362": [
         "(",
-        "",
         ")"
     ],
     "ARTS1450": [
         "(",
-        "",
         ")"
     ],
     "ARTS1451": [
@@ -817,7 +832,6 @@
     ],
     "ARTS1452": [
         "(",
-        "",
         ")"
     ],
     "ARTS1453": [
@@ -845,7 +859,6 @@
     ],
     "ARTS1510": [
         "(",
-        "",
         ")"
     ],
     "ARTS1511": [
@@ -857,7 +870,6 @@
     ],
     "ARTS1540": [
         "(",
-        "",
         ")"
     ],
     "ARTS1541": [
@@ -869,7 +881,6 @@
     ],
     "ARTS1570": [
         "(",
-        "",
         ")"
     ],
     "ARTS1571": [
@@ -881,7 +892,6 @@
     ],
     "ARTS1620": [
         "(",
-        "",
         ")"
     ],
     "ARTS1621": [
@@ -893,7 +903,6 @@
     ],
     "ARTS1630": [
         "(",
-        "",
         ")"
     ],
     "ARTS1631": [
@@ -905,7 +914,6 @@
     ],
     "ARTS1660": [
         "(",
-        "",
         ")"
     ],
     "ARTS1661": [
@@ -917,57 +925,46 @@
     ],
     "ARTS1690": [
         "(",
-        "",
         ")"
     ],
     "ARTS1691": [
         "(",
-        "",
         ")"
     ],
     "ARTS1750": [
         "(",
-        "",
         ")"
     ],
     "ARTS1753": [
         "(",
-        "",
         ")"
     ],
     "ARTS1780": [
         "(",
-        "",
         ")"
     ],
     "ARTS1782": [
         "(",
-        "",
         ")"
     ],
     "ARTS1810": [
         "(",
-        "",
         ")"
     ],
     "ARTS1811": [
         "(",
-        "",
         ")"
     ],
     "ARTS1846": [
         "(",
-        "",
         ")"
     ],
     "ARTS1870": [
         "(",
-        "",
         ")"
     ],
     "ARTS1900": [
         "(",
-        "",
         ")"
     ],
     "ARTS2020": [
@@ -1362,7 +1359,6 @@
     ],
     "ARTS2469": [
         "(",
-        "",
         ")"
     ],
     "ARTS2480": [
@@ -1839,9 +1835,11 @@
         "||",
         "MCT;",
         "||",
-        "(ARTS1060",
+        "(",
+        "ARTS1060",
         "||",
-        "ARTS1090)",
+        "ARTS1090",
+        ")",
         "&&",
         "at least 6UOC in L2 Film Studies electives",
         "&&",
@@ -1864,9 +1862,13 @@
         "&&",
         "enrolled in a single",
         "||",
-        "double degree MDIA (Screen",
+        "double degree MDIA",
+        "(",
+        "Screen",
         "&&",
-        "Sound Production) program",
+        "Sound Production",
+        ")",
+        "program",
         ")"
     ],
     "ARTS3062": [
@@ -2086,7 +2088,11 @@
         "&&",
         "enrolled in a single",
         "||",
-        "dual award MDIA (S&SP) program",
+        "dual award MDIA",
+        "(",
+        "S&SP",
+        ")",
+        "program",
         ")"
     ],
     "ARTS3130": [
@@ -2161,7 +2167,10 @@
         "&&",
         "enrolment in an INST single",
         "||",
-        "double degree (2017 onwards)",
+        "double degree",
+        "(",
+        "2017 onwards",
+        ")",
         ")"
     ],
     "ARTS3217": [
@@ -2176,7 +2185,10 @@
         "&&",
         "enrolment in an INST single",
         "||",
-        "dual program (2017 onwards)",
+        "dual program",
+        "(",
+        "2017 onwards",
+        ")",
         ")"
     ],
     "ARTS3218": [
@@ -2212,7 +2224,10 @@
         "&&",
         "enrolment in an INST single",
         "||",
-        "dual program (2017 onwards)",
+        "dual program",
+        "(",
+        "2017 onwards",
+        ")",
         ")"
     ],
     "ARTS3240": [
@@ -2353,7 +2368,10 @@
         "&&",
         "enrolment in an INST single",
         "||",
-        "dual program (2017 onwards)",
+        "dual program",
+        "(",
+        "2017 onwards",
+        ")",
         ")"
     ],
     "ARTS3295": [
@@ -2934,7 +2952,11 @@
     ],
     "ARTS3759": [
         "(",
-        "Enrolment with consent. ARTS3759 is open to UNSW undergraduate students that are also enrolled in an internship (or international field placement course). This needs to be demonstrated prior to enrolment",
+        "Enrolment with consent. ARTS3759 is open to UNSW undergraduate students that are also enrolled in an internship",
+        "(",
+        "or international field placement course",
+        ")",
+        ". This needs to be demonstrated prior to enrolment",
         ")"
     ],
     "ARTS3780": [
@@ -2951,7 +2973,10 @@
         "&&",
         "enrolment in an INST single",
         "||",
-        "double degree (2017 onwards)",
+        "double degree",
+        "(",
+        "2017 onwards",
+        ")",
         ")"
     ],
     "ARTS3783": [
@@ -3733,22 +3758,18 @@
     ],
     "ATSI0001": [
         "(",
-        "",
         ")"
     ],
     "ATSI0002": [
         "(",
-        "",
         ")"
     ],
     "ATSI1011": [
         "(",
-        "",
         ")"
     ],
     "ATSI1012": [
         "(",
-        "",
         ")"
     ],
     "ATSI2003": [
@@ -3814,52 +3835,42 @@
     ],
     "ATSI4001": [
         "(",
-        "",
         ")"
     ],
     "ATSI4003": [
         "(",
-        "",
         ")"
     ],
     "ATSI4101": [
         "(",
-        "",
         ")"
     ],
     "ATSI7001": [
         "(",
-        "",
         ")"
     ],
     "ATSI7002": [
         "(",
-        "",
         ")"
     ],
     "ATSI7003": [
         "(",
-        "",
         ")"
     ],
     "ATSI7004": [
         "(",
-        "",
         ")"
     ],
     "ATSI7006": [
         "(",
-        "",
         ")"
     ],
     "ATSI7007": [
         "(",
-        "",
         ")"
     ],
     "AVEN1920": [
         "(",
-        "",
         ")"
     ],
     "AVIA1111": [
@@ -3874,17 +3885,14 @@
     ],
     "AVIA1401": [
         "(",
-        "",
         ")"
     ],
     "AVIA1901": [
         "(",
-        "",
         ")"
     ],
     "AVIA1902": [
         "(",
-        "",
         ")"
     ],
     "AVIA2013": [
@@ -3900,17 +3908,14 @@
     ],
     "AVIA2014": [
         "(",
-        "",
         ")"
     ],
     "AVIA2025": [
         "(",
-        "",
         ")"
     ],
     "AVIA2101": [
         "(",
-        "",
         ")"
     ],
     "AVIA2111": [
@@ -3964,27 +3969,22 @@
     ],
     "AVIA2401": [
         "(",
-        "",
         ")"
     ],
     "AVIA2501": [
         "(",
-        "",
         ")"
     ],
     "AVIA2601": [
         "(",
-        "",
         ")"
     ],
     "AVIA2701": [
         "(",
-        "",
         ")"
     ],
     "AVIA2801": [
         "(",
-        "",
         ")"
     ],
     "AVIA2910": [
@@ -3994,17 +3994,14 @@
     ],
     "AVIA2950": [
         "(",
-        "",
         ")"
     ],
     "AVIA3013": [
         "(",
-        "",
         ")"
     ],
     "AVIA3014": [
         "(",
-        "",
         ")"
     ],
     "AVIA3101": [
@@ -4045,12 +4042,10 @@
     ],
     "AVIA3301": [
         "(",
-        "",
         ")"
     ],
     "AVIA3401": [
         "(",
-        "",
         ")"
     ],
     "AVIA3410": [
@@ -4083,7 +4078,6 @@
     ],
     "AVIA3910": [
         "(",
-        "",
         ")"
     ],
     "AVIA4001": [
@@ -4108,22 +4102,18 @@
     ],
     "BABS1111": [
         "(",
-        "",
         ")"
     ],
     "BABS1112": [
         "(",
-        "",
         ")"
     ],
     "BABS1201": [
         "(",
-        "",
         ")"
     ],
     "BABS1202": [
         "(",
-        "",
         ")"
     ],
     "BABS2011": [
@@ -4168,13 +4158,17 @@
         "(",
         "12UOC from MICR2011",
         "||",
-        "(BIOS2021",
+        "(",
+        "BIOS2021",
         "||",
-        "BABS2204)",
+        "BABS2204",
+        ")",
         "||",
-        "(BIOS2621",
+        "(",
+        "BIOS2621",
         "||",
-        "BABS2264)",
+        "BABS2264",
+        ")",
         "||",
         "BIOC2201",
         ")"
@@ -4188,11 +4182,15 @@
         "(",
         "BIOC2101",
         "||",
-        "(BIOC2181and MICR2011)",
+        "(",
+        "BIOC2181and MICR2011",
+        ")",
         "||",
-        "(BIOC2181",
+        "(",
+        "BIOC2181",
         "&&",
-        "BABS2202)",
+        "BABS2202",
+        ")",
         ")"
     ],
     "BABS3061": [
@@ -4204,7 +4202,6 @@
     ],
     "BABS3071": [
         "(",
-        "",
         ")"
     ],
     "BABS3081": [
@@ -4262,7 +4259,6 @@
     ],
     "BABS3301": [
         "(",
-        "",
         ")"
     ],
     "BABS3631": [
@@ -4272,7 +4268,11 @@
     ],
     "BABS4053": [
         "(",
-        "144UOC of courses in the 3052 Bachelor of Science (BIOT) program",
+        "144UOC of courses in the 3052 Bachelor of Science",
+        "(",
+        "BIOT",
+        ")",
+        "program",
         ")"
     ],
     "BABS4516": [
@@ -4287,22 +4287,18 @@
     ],
     "BABS7010": [
         "(",
-        "",
         ")"
     ],
     "BEES0006": [
         "(",
-        "",
         ")"
     ],
     "BEES0010": [
         "(",
-        "",
         ")"
     ],
     "BEES1041": [
         "(",
-        "",
         ")"
     ],
     "BEES2041": [
@@ -4312,7 +4308,6 @@
     ],
     "BEES2051": [
         "(",
-        "",
         ")"
     ],
     "BEES2680": [
@@ -4322,17 +4317,14 @@
     ],
     "BEES2741": [
         "(",
-        "",
         ")"
     ],
     "BEES3041": [
         "(",
-        "",
         ")"
     ],
     "BEES4514": [
         "(",
-        "",
         ")"
     ],
     "BEES4515": [
@@ -4342,7 +4334,6 @@
     ],
     "BEES4516": [
         "(",
-        "",
         ")"
     ],
     "BEES4517": [
@@ -4352,7 +4343,6 @@
     ],
     "BEES4518": [
         "(",
-        "",
         ")"
     ],
     "BEES4523": [
@@ -4362,7 +4352,6 @@
     ],
     "BEES6601": [
         "(",
-        "",
         ")"
     ],
     "BEES6741": [
@@ -4372,12 +4361,10 @@
     ],
     "BEES6761": [
         "(",
-        "",
         ")"
     ],
     "BEES6800": [
         "(",
-        "",
         ")"
     ],
     "BEIL0001": [
@@ -4514,32 +4501,31 @@
     ],
     "BEIL6013": [
         "(",
-        "UG students must be in their third year of study (having 96UOC) to enroll in this course",
+        "UG students must be in their third year of study",
+        "(",
+        "having 96UOC",
+        ")",
+        "to enroll in this course",
         ")"
     ],
     "BENV0021": [
         "(",
-        "",
         ")"
     ],
     "BENV1010": [
         "(",
-        "",
         ")"
     ],
     "BENV1012": [
         "(",
-        "",
         ")"
     ],
     "BENV1015": [
         "(",
-        "",
         ")"
     ],
     "BENV1043": [
         "(",
-        "",
         ")"
     ],
     "BENV1072": [
@@ -4549,17 +4535,14 @@
     ],
     "BENV2000": [
         "(",
-        "",
         ")"
     ],
     "BENV2001": [
         "(",
-        "",
         ")"
     ],
     "BENV2112": [
         "(",
-        "",
         ")"
     ],
     "BENV2137": [
@@ -4569,47 +4552,38 @@
     ],
     "BENV2219": [
         "(",
-        "",
         ")"
     ],
     "BENV2220": [
         "(",
-        "",
         ")"
     ],
     "BENV2255": [
         "(",
-        "",
         ")"
     ],
     "BENV2409": [
         "(",
-        "",
         ")"
     ],
     "BENV2708": [
         "(",
-        "",
         ")"
     ],
     "BENV2930": [
         "(",
-        "",
         ")"
     ],
     "BENV2938": [
         "(",
-        "",
         ")"
     ],
     "BENV2942": [
         "(",
-        "",
         ")"
     ],
     "BENV4000": [
         "(",
-        "",
         ")"
     ],
     "BENV6713": [
@@ -4619,7 +4593,6 @@
     ],
     "BENV6800": [
         "(",
-        "",
         ")"
     ],
     "BENV7814": [
@@ -4645,14 +4618,16 @@
     ],
     "BINF3020": [
         "(",
-        "",
         ")"
     ],
     "BINF6111": [
         "(",
-        "(COMP1531",
+        "(",
+        "COMP1531",
         "||",
-        "COMP2041) Co-requisite: BINF3010",
+        "COMP2041",
+        ")",
+        "Co-requisite: BINF3010",
         ")"
     ],
     "BINF6112": [
@@ -4750,12 +4725,14 @@
     ],
     "BIOC3671": [
         "(",
-        "BIOC2101, BIOC2201. Restricted to Advanced Science programs (3985, 3990, 3962, 3972, 3973, 3986, 3931, 3936)",
+        "BIOC2101, BIOC2201. Restricted to Advanced Science programs",
+        "(",
+        "3985, 3990, 3962, 3972, 3973, 3986, 3931, 3936",
+        ")",
         ")"
     ],
     "BIOM1010": [
         "(",
-        "",
         ")"
     ],
     "BIOM4951": [
@@ -4767,162 +4744,138 @@
     ],
     "BIOM4952": [
         "(",
-        "Completion of Research Thesis A (4951)",
+        "Completion of Research Thesis A",
+        "(",
+        "4951",
+        ")",
         ")"
     ],
     "BIOM4953": [
         "(",
-        "Completion of Research Thesis B (4952)",
+        "Completion of Research Thesis B",
+        "(",
+        "4952",
+        ")",
         ")"
     ],
     "BIOM5001": [
         "(",
-        "",
         ")"
     ],
     "BIOM5930": [
         "(",
-        "",
         ")"
     ],
     "BIOM5932": [
         "(",
-        "",
         ")"
     ],
     "BIOM9020": [
         "(",
-        "",
         ")"
     ],
     "BIOM9021": [
         "(",
-        "",
         ")"
     ],
     "BIOM9027": [
         "(",
-        "",
         ")"
     ],
     "BIOM9311": [
         "(",
-        "",
         ")"
     ],
     "BIOM9332": [
         "(",
-        "",
         ")"
     ],
     "BIOM9333": [
         "(",
-        "",
         ")"
     ],
     "BIOM9410": [
         "(",
-        "",
         ")"
     ],
     "BIOM9420": [
         "(",
-        "",
         ")"
     ],
     "BIOM9450": [
         "(",
-        "",
         ")"
     ],
     "BIOM9541": [
         "(",
-        "",
         ")"
     ],
     "BIOM9551": [
         "(",
-        "",
         ")"
     ],
     "BIOM9561": [
         "(",
-        "",
         ")"
     ],
     "BIOM9621": [
         "(",
-        "",
         ")"
     ],
     "BIOM9640": [
         "(",
-        "",
         ")"
     ],
     "BIOM9650": [
         "(",
-        "",
         ")"
     ],
     "BIOM9660": [
         "(",
-        "",
         ")"
     ],
     "BIOM9701": [
         "(",
-        "",
         ")"
     ],
     "BIOM9711": [
         "(",
-        "",
         ")"
     ],
     "BIOM9914": [
         "(",
-        "",
         ")"
     ],
     "BIOS1101": [
         "(",
-        "",
         ")"
     ],
     "BIOS1301": [
         "(",
-        "",
         ")"
     ],
     "BIOS1501": [
         "(",
-        "",
         ")"
     ],
     "BIOS2011": [
         "(",
-        "",
         ")"
     ],
     "BIOS2031": [
         "(",
-        "",
         ")"
     ],
     "BIOS2051": [
         "(",
-        "",
         ")"
     ],
     "BIOS2061": [
         "(",
-        "",
         ")"
     ],
     "BIOS2091": [
         "(",
-        "",
         ")"
     ],
     "BIOS2123": [
@@ -4932,12 +4885,10 @@
     ],
     "BIOS2500": [
         "(",
-        "",
         ")"
     ],
     "BIOS3011": [
         "(",
-        "",
         ")"
     ],
     "BIOS3061": [
@@ -4952,7 +4903,6 @@
     ],
     "BIOS3123": [
         "(",
-        "",
         ")"
     ],
     "BIOS3161": [
@@ -4966,7 +4916,6 @@
     ],
     "BIOS3171": [
         "(",
-        "",
         ")"
     ],
     "BIOS3221": [
@@ -4988,17 +4937,14 @@
     ],
     "BIOS6671": [
         "(",
-        "",
         ")"
     ],
     "BIOS6692": [
         "(",
-        "",
         ")"
     ],
     "BIOS6723": [
         "(",
-        "",
         ")"
     ],
     "BIOT3081": [
@@ -5008,7 +4954,6 @@
     ],
     "BIOT4073": [
         "(",
-        "",
         ")"
     ],
     "BLDG1011": [
@@ -5053,17 +4998,14 @@
     ],
     "BLDG2011": [
         "(",
-        "",
         ")"
     ],
     "BLDG2012": [
         "(",
-        "",
         ")"
     ],
     "BLDG2013": [
         "(",
-        "",
         ")"
     ],
     "BLDG2021": [
@@ -5080,12 +5022,10 @@
     ],
     "BLDG2023": [
         "(",
-        "",
         ")"
     ],
     "BLDG3011": [
         "(",
-        "",
         ")"
     ],
     "BLDG3012": [
@@ -5116,7 +5056,6 @@
     ],
     "BLDG3023": [
         "(",
-        "",
         ")"
     ],
     "BLDG4018": [
@@ -5191,12 +5130,10 @@
     ],
     "CDEV1112": [
         "(",
-        "",
         ")"
     ],
     "CDEV3000": [
         "(",
-        "",
         ")"
     ],
     "CDEV3001": [
@@ -5211,7 +5148,6 @@
     ],
     "CEIC1000": [
         "(",
-        "",
         ")"
     ],
     "CEIC2000": [
@@ -5253,12 +5189,10 @@
     ],
     "CEIC2007": [
         "(",
-        "",
         ")"
     ],
     "CEIC2009": [
         "(",
-        "",
         ")"
     ],
     "CEIC3000": [
@@ -5269,9 +5203,11 @@
         "&&",
         "MATH2089",
         "&&",
-        "(MATH2019",
+        "(",
+        "MATH2019",
         "||",
-        "MATH2018)",
+        "MATH2018",
+        ")",
         ")"
     ],
     "CEIC3001": [
@@ -5286,7 +5222,6 @@
     ],
     "CEIC3003": [
         "(",
-        "",
         ")"
     ],
     "CEIC3004": [
@@ -5310,37 +5245,39 @@
     ],
     "CEIC3007": [
         "(",
-        "",
         ")"
     ],
     "CEIC4000": [
         "(",
-        "",
         ")"
     ],
     "CEIC4001": [
         "(",
-        "(CEIC3004",
+        "(",
+        "CEIC3004",
         "&&",
-        "CEIC3005)",
+        "CEIC3005",
+        ")",
         "||",
-        "(CEIC3005",
+        "(",
+        "CEIC3005",
         "&&",
-        "CEIC3006)",
+        "CEIC3006",
+        ")",
         "||",
-        "(CEIC3006",
+        "(",
+        "CEIC3006",
         "&&",
-        "CEIC3004)",
+        "CEIC3004",
+        ")",
         ")"
     ],
     "CEIC4007": [
         "(",
-        "",
         ")"
     ],
     "CEIC4008": [
         "(",
-        "",
         ")"
     ],
     "CEIC4951": [
@@ -5352,17 +5289,22 @@
     ],
     "CEIC4952": [
         "(",
-        "Completion of Research Thesis A (4951)",
+        "Completion of Research Thesis A",
+        "(",
+        "4951",
+        ")",
         ")"
     ],
     "CEIC4953": [
         "(",
-        "Completion of Research Thesis B (4952)",
+        "Completion of Research Thesis B",
+        "(",
+        "4952",
+        ")",
         ")"
     ],
     "CEIC4954": [
         "(",
-        "",
         ")"
     ],
     "CEIC6004": [
@@ -5372,7 +5314,8 @@
     ],
     "CEIC6005": [
         "(",
-        "(MATS1101",
+        "(",
+        "MATS1101",
         "||",
         "CHEM1011",
         "||",
@@ -5380,7 +5323,8 @@
         "||",
         "CHEM1021",
         "||",
-        "DPST1032)",
+        "DPST1032",
+        ")",
         "&&",
         "CEIC2000",
         "&&",
@@ -5389,17 +5333,14 @@
     ],
     "CEIC6711": [
         "(",
-        "",
         ")"
     ],
     "CEIC6712": [
         "(",
-        "",
         ")"
     ],
     "CEIC6789": [
         "(",
-        "",
         ")"
     ],
     "CEIC8102": [
@@ -5409,7 +5350,6 @@
     ],
     "CEIC8204": [
         "(",
-        "",
         ")"
     ],
     "CEIC8341": [
@@ -5424,7 +5364,6 @@
     ],
     "CHEM1011": [
         "(",
-        "",
         ")"
     ],
     "CHEM1021": [
@@ -5450,18 +5389,25 @@
     ],
     "CHEM1051": [
         "(",
-        "Enrolment in the Bachelor of Medicinal CHEM (3999",
+        "Enrolment in the Bachelor of Medicinal CHEM",
+        "(",
+        "3999",
         "||",
-        "3992)",
+        "3992",
+        ")",
         "||",
         "Bachelor of Medicinal CHEM/LAWS program",
         ")"
     ],
     "CHEM1061": [
         "(",
-        "Enrolment in the Bachelor of Medicinal CHEM (3992",
+        "Enrolment in the Bachelor of Medicinal CHEM",
+        "(",
+        "3992",
         "||",
-        "3999) program",
+        "3999",
+        ")",
+        "program",
         "&&",
         "completion of CHEM1051",
         "||",
@@ -5474,9 +5420,14 @@
     ],
     "CHEM1151": [
         "(",
-        "Enrolment in Medicinal CHEM (3992)",
+        "Enrolment in Medicinal CHEM",
+        "(",
+        "3992",
+        ")",
         "||",
-        "(3999)",
+        "(",
+        "3999",
+        ")",
         "||",
         "4755",
         ")"
@@ -5490,7 +5441,6 @@
     ],
     "CHEM1811": [
         "(",
-        "",
         ")"
     ],
     "CHEM1821": [
@@ -5687,7 +5637,6 @@
     ],
     "CHEM2999": [
         "(",
-        "",
         ")"
     ],
     "CHEM3011": [
@@ -5741,27 +5690,22 @@
     ],
     "CHEM3998": [
         "(",
-        "",
         ")"
     ],
     "CHEM4003": [
         "(",
-        "",
         ")"
     ],
     "CHEM4004": [
         "(",
-        "",
         ")"
     ],
     "CHEM4005": [
         "(",
-        "",
         ")"
     ],
     "CHEM4006": [
         "(",
-        "",
         ")"
     ],
     "CHEM4501": [
@@ -5771,7 +5715,6 @@
     ],
     "CHEM4502": [
         "(",
-        "",
         ")"
     ],
     "CHEM4503": [
@@ -5781,7 +5724,6 @@
     ],
     "CHEM4506": [
         "(",
-        "",
         ")"
     ],
     "CHEM4512": [
@@ -5796,7 +5738,6 @@
     ],
     "CHEM4524": [
         "(",
-        "",
         ")"
     ],
     "CHEM6041": [
@@ -5816,12 +5757,10 @@
     ],
     "CHEN6701": [
         "(",
-        "",
         ")"
     ],
     "CHEN6703": [
         "(",
-        "",
         ")"
     ],
     "CHEN6706": [
@@ -5840,7 +5779,6 @@
     ],
     "CLIM1001": [
         "(",
-        "",
         ")"
     ],
     "CLIM2001": [
@@ -5872,7 +5810,6 @@
     ],
     "CLIM2002": [
         "(",
-        "",
         ")"
     ],
     "CLIM3001": [
@@ -5888,88 +5825,93 @@
     ],
     "CODE1110": [
         "(",
-        "",
         ")"
     ],
     "CODE1161": [
         "(",
-        "",
         ")"
     ],
     "CODE1210": [
         "(",
-        "",
         ")"
     ],
     "CODE1231": [
         "(",
-        "",
         ")"
     ],
     "CODE1234": [
         "(",
-        "(CODE1231",
+        "(",
+        "CODE1231",
         "||",
-        "CODE2132)",
+        "CODE2132",
+        ")",
         ")"
     ],
     "CODE1240": [
         "(",
-        "(BENV1012",
+        "(",
+        "BENV1012",
         "||",
-        "BENV1010)",
+        "BENV1010",
+        ")",
         "||",
         "eruivalent",
         ")"
     ],
     "CODE2120": [
         "(",
-        "(CODE2132",
+        "(",
+        "CODE2132",
         "||",
-        "CODE2170)",
+        "CODE2170",
+        ")",
         ")"
     ],
     "CODE2121": [
         "(",
-        "(BENV1012",
+        "(",
+        "BENV1012",
         "||",
-        "CODE1240)",
+        "CODE1240",
+        ")",
         ")"
     ],
     "CODE2132": [
         "(",
-        "(BENV1012",
+        "(",
+        "BENV1012",
         "||",
         "CODE1240",
         "||",
-        "CODE2121)",
+        "CODE2121",
+        ")",
         ")"
     ],
     "CODE2170": [
         "(",
-        "",
         ")"
     ],
     "CODE2230": [
         "(",
-        "",
         ")"
     ],
     "CODE2250": [
         "(",
-        "",
         ")"
     ],
     "CODE2270": [
         "(",
-        "",
         ")"
     ],
     "CODE3100": [
         "(",
-        "(CODE2230",
+        "(",
+        "CODE2230",
         "||",
-        "CODE2250) /CODE 2270",
+        "CODE2250",
+        ")",
+        "/CODE 2270",
         ")"
     ],
     "CODE3201": [
@@ -5984,12 +5926,10 @@
     ],
     "CODE4100": [
         "(",
-        "",
         ")"
     ],
     "CODE4200": [
         "(",
-        "",
         ")"
     ],
     "COMM0999": [
@@ -6001,12 +5941,10 @@
     ],
     "COMM1000": [
         "(",
-        "",
         ")"
     ],
     "COMM1001": [
         "(",
-        "",
         ")"
     ],
     "COMM1040": [
@@ -6088,20 +6026,31 @@
     ],
     "COMM1822": [
         "(",
-        "",
         ")"
     ],
     "COMM1900": [
         "(",
-        "Enrolment is only permitted for students in program Actl/Comm (3155)",
+        "Enrolment is only permitted for students in program Actl/Comm",
+        "(",
+        "3155",
+        ")",
         "||",
-        "Comm/Econ (3521). (ECON1101",
+        "Comm/Econ",
+        "(",
+        "3521",
+        ")",
+        ".",
+        "(",
+        "ECON1101",
         "&&",
-        "ECON1102)",
+        "ECON1102",
+        ")",
         "||",
-        "(DPBS1101",
+        "(",
+        "DPBS1101",
         "&&",
-        "DPBS1102)",
+        "DPBS1102",
+        ")",
         ")"
     ],
     "COMM1999": [
@@ -6150,16 +6099,22 @@
         "&&",
         "be in good academic standing. Students who have completed COMM2233",
         "||",
-        "CDEV3000 (formerly DIPP1510) must not enrol into this course",
+        "CDEV3000",
+        "(",
+        "formerly DIPP1510",
+        ")",
+        "must not enrol into this course",
         ")"
     ],
     "COMM2501": [
         "(",
-        "(ECON1203",
+        "(",
+        "ECON1203",
         "||",
         "COMM1190",
         "||",
-        "MATH1151)",
+        "MATH1151",
+        ")",
         "&&",
         "COMM1822",
         ")"
@@ -6183,7 +6138,11 @@
         "(",
         "• 65WAM; • have completed a minimum of 48UOC at the commencement of this course; • have room in their degree for this course; • are in good academic standing; • have completed COMM6000 Career Accelerator: Essentials",
         "||",
-        "COMM1999 First Year Portfolio (ZBUS School students only) This course may count as a ZBUS School Free Elective",
+        "COMM1999 First Year Portfolio",
+        "(",
+        "ZBUS School students only",
+        ")",
+        "This course may count as a ZBUS School Free Elective",
         "||",
         "as a major elective within some schools. It is recommended a progression check is completed prior to enrolling",
         ")"
@@ -6208,9 +6167,16 @@
         "(",
         "COMM3101",
         "||",
-        "COMM2101 terms of (COMM3101",
+        "COMM2101 terms of",
+        "(",
+        "COMM3101",
         "||",
-        "COMM2101) (12UOC) must be successfully completed. This course is by application only. Please contact the Co-op office for more information. Excluded:DIPP1510, COMM2222, ZBUS Co-Op programs",
+        "COMM2101",
+        ")",
+        "(",
+        "12UOC",
+        ")",
+        "must be successfully completed. This course is by application only. Please contact the Co-op office for more information. Excluded:DIPP1510, COMM2222, ZBUS Co-Op programs",
         ")"
     ],
     "COMM3303": [
@@ -6226,13 +6192,20 @@
         "||",
         "COMM2501",
         "||",
-        "ZBUS Analytics Modelling I course (ECON2206",
+        "ZBUS Analytics Modelling I course",
+        "(",
+        "ECON2206",
         "||",
         "ECON2209",
         "||",
-        "RISK2002)",
+        "RISK2002",
+        ")",
         "&&",
-        "completing the ZBUS Analytics major (COMMJ1). It is recommended students are in their final year when taking this course",
+        "completing the ZBUS Analytics major",
+        "(",
+        "COMMJ1",
+        ")",
+        ". It is recommended students are in their final year when taking this course",
         ")"
     ],
     "COMM3501": [
@@ -6242,49 +6215,61 @@
     ],
     "COMM3900": [
         "(",
-        "Completed a minimum of 108UOC (including First Year core)",
+        "Completed a minimum of 108UOC",
+        "(",
+        "including First Year core",
+        ")",
         "&&",
         "on Good standing",
         "&&",
-        "completed Career Accelerator Essentials (COMM6000). It is strongly recommended that students only complete this course within their final 2 terms of study",
+        "completed Career Accelerator Essentials",
+        "(",
+        "COMM6000",
+        ")",
+        ". It is strongly recommended that students only complete this course within their final 2 terms of study",
         ")"
     ],
     "COMM3999": [
         "(",
-        "Completed myBCom First Year Portfolio (COMM1999)",
+        "Completed myBCom First Year Portfolio",
+        "(",
+        "COMM1999",
+        ")",
         "&&",
         "in their final year of a single",
         "||",
-        "double COMM degree (72UOC of ZBUS courses)",
+        "double COMM degree",
+        "(",
+        "72UOC of ZBUS courses",
+        ")",
         ")"
     ],
     "COMM4002": [
         "(",
-        "",
         ")"
     ],
     "COMP1000": [
         "(",
-        "",
         ")"
     ],
     "COMP1010": [
         "(",
-        "",
         ")"
     ],
     "COMP1400": [
         "(",
-        "Enrolment in a non-CSE major (no BINF",
+        "Enrolment in a non-CSE major",
+        "(",
+        "no BINF",
         "||",
         "COMP",
         "||",
-        "SENG)",
+        "SENG",
+        ")",
         ")"
     ],
     "COMP1511": [
         "(",
-        "",
         ")"
     ],
     "COMP1521": [
@@ -6311,11 +6296,14 @@
     ],
     "COMP1911": [
         "(",
-        "Enrolment in a non-CSE major (no BINF",
+        "Enrolment in a non-CSE major",
+        "(",
+        "no BINF",
         "||",
         "COMP",
         "||",
-        "SENG)",
+        "SENG",
+        ")",
         ")"
     ],
     "COMP2041": [
@@ -6333,13 +6321,15 @@
         "(",
         "MATH1081",
         "&&",
-        "(COMP1511",
+        "(",
+        "COMP1511",
         "||",
         "DPST1091",
         "||",
         "COMP1917",
         "||",
-        "COMP1921)",
+        "COMP1921",
+        ")",
         ")"
     ],
     "COMP2121": [
@@ -6356,18 +6346,22 @@
         "||",
         "DPST1092",
         "||",
-        "(COMP1911",
+        "(",
+        "COMP1911",
         "&&",
-        "MTRN2500)",
+        "MTRN2500",
+        ")",
         ")"
     ],
     "COMP2511": [
         "(",
         "COMP1531",
         "&&",
-        "(COMP2521",
+        "(",
+        "COMP2521",
         "||",
-        "COMP1927)",
+        "COMP1927",
+        ")",
         ")"
     ],
     "COMP2521": [
@@ -6406,11 +6400,15 @@
         "(",
         "COMP1927",
         "||",
-        "((COMP1521",
+        "(",
+        "(",
+        "COMP1521",
         "||",
-        "DPST1092)",
+        "DPST1092",
+        ")",
         "&&",
-        "COMP2521)",
+        "COMP2521",
+        ")",
         ")"
     ],
     "COMP3153": [
@@ -6443,17 +6441,21 @@
     ],
     "COMP3231": [
         "(",
-        "(COMP1521",
+        "(",
+        "COMP1521",
         "||",
         "DPST1092",
         "||",
         "COMP2121",
         "||",
-        "ELEC2142)",
+        "ELEC2142",
+        ")",
         "&&",
-        "(COMP2521",
+        "(",
+        "COMP2521",
         "||",
-        "COMP1927)",
+        "COMP1927",
+        ")",
         ")"
     ],
     "COMP3311": [
@@ -6516,15 +6518,19 @@
     ],
     "COMP3891": [
         "(",
-        "(COMP1521",
+        "(",
+        "COMP1521",
         "||",
         "DPST1092",
         "||",
-        "COMP2121)",
+        "COMP2121",
+        ")",
         "&&",
-        "(COMP2521",
+        "(",
+        "COMP2521",
         "||",
-        "COMP1927)",
+        "COMP1927",
+        ")",
         "&&",
         "75WAM",
         ")"
@@ -6581,9 +6587,11 @@
         "(",
         "COMP3821",
         "||",
-        "(COMP3121",
+        "(",
+        "COMP3121",
         "&&",
-        "75WAM)",
+        "75WAM",
+        ")",
         ")"
     ],
     "COMP4141": [
@@ -6631,16 +6639,22 @@
     ],
     "COMP4920": [
         "(",
-        "(COMP2511",
+        "(",
+        "COMP2511",
         "||",
-        "COMP2911)",
+        "COMP2911",
+        ")",
         "&&",
         "96UOC in COMP",
         ")"
     ],
     "COMP4951": [
         "(",
-        "Enrolled in a CSE BE (Hons) programs",
+        "Enrolled in a CSE BE",
+        "(",
+        "Hons",
+        ")",
+        "programs",
         "&&",
         "126UOC",
         "&&",
@@ -6649,17 +6663,26 @@
     ],
     "COMP4952": [
         "(",
-        "Completion of Research Thesis A (4951)",
+        "Completion of Research Thesis A",
+        "(",
+        "4951",
+        ")",
         ")"
     ],
     "COMP4953": [
         "(",
-        "Completion of Research Thesis B (4952)",
+        "Completion of Research Thesis B",
+        "(",
+        "4952",
+        ")",
         ")"
     ],
     "COMP4961": [
         "(",
-        "Students enrolled in program 4515 Bachelor of COMP (Hons)",
+        "Students enrolled in program 4515 Bachelor of COMP",
+        "(",
+        "Hons",
+        ")",
         "||",
         "program 3648",
         ")"
@@ -6678,9 +6701,11 @@
         "(",
         "COMP1531",
         "&&",
-        "(COMP2521",
+        "(",
+        "COMP2521",
         "||",
-        "COMP1927)",
+        "COMP1927",
+        ")",
         ")"
     ],
     "COMP6324": [
@@ -6751,22 +6776,30 @@
         "(",
         "COMP1531",
         "&&",
-        "(COMP2521",
+        "(",
+        "COMP2521",
         "||",
-        "COMP1927)",
+        "COMP1927",
+        ")",
         ")"
     ],
     "COMP6714": [
         "(",
-        "(MATH1081",
+        "(",
+        "MATH1081",
         "&&",
-        "(COMP1531",
+        "(",
+        "COMP1531",
         "||",
-        "COMP2041))",
+        "COMP2041",
+        ")",
+        ")",
         "||",
-        "(COMP1927",
+        "(",
+        "COMP1927",
         "||",
-        "COMP2521)",
+        "COMP2521",
+        ")",
         ")"
     ],
     "COMP6721": [
@@ -6775,7 +6808,9 @@
         "&&",
         "COMP2521",
         "&&",
-        "(not enrolled in SENGAH)",
+        "(",
+        "not enrolled in SENGAH",
+        ")",
         ")"
     ],
     "COMP6733": [
@@ -6844,22 +6879,31 @@
     ],
     "COMP9243": [
         "(",
-        "(COMP3231",
+        "(",
+        "COMP3231",
         "||",
-        "COMP3891)",
+        "COMP3891",
+        ")",
         "&&",
-        "(COMP3331",
+        "(",
+        "COMP3331",
         "||",
-        "TELE3018)",
+        "TELE3018",
+        ")",
         ")"
     ],
     "COMP9301": [
         "(",
-        "(COMP6441",
+        "(",
+        "COMP6441",
         "||",
-        "COMP6841)",
+        "COMP6841",
+        ")",
         "&&",
-        "(6UOC from (COMP6443",
+        "(",
+        "6UOC from",
+        "(",
+        "COMP6443",
         "&&",
         "COMP6843",
         "&&",
@@ -6867,18 +6911,25 @@
         "&&",
         "COMP6845",
         "&&",
-        "COMP6447))",
+        "COMP6447",
+        ")",
+        ")",
         "&&",
         "enrolled in final term of program",
         ")"
     ],
     "COMP9302": [
         "(",
-        "(COMP6441",
+        "(",
+        "COMP6441",
         "||",
-        "COMP6841)",
+        "COMP6841",
+        ")",
         "&&",
-        "(12UOC from (COMP6443",
+        "(",
+        "12UOC from",
+        "(",
+        "COMP6443",
         "&&",
         "COMP6843",
         "&&",
@@ -6886,7 +6937,9 @@
         "&&",
         "COMP6845",
         "&&",
-        "COMP6447))",
+        "COMP6447",
+        ")",
+        ")",
         "&&",
         "enrolled in final term of program",
         ")"
@@ -6920,9 +6973,11 @@
     ],
     "COMP9318": [
         "(",
-        "(COMP2521",
+        "(",
+        "COMP2521",
         "||",
-        "COMP1927)",
+        "COMP1927",
+        ")",
         "&&",
         "COMP3311",
         "&&",
@@ -6938,9 +6993,11 @@
     ],
     "COMP9321": [
         "(",
-        "(COMP1531",
+        "(",
+        "COMP1531",
         "||",
-        "COMP2041)",
+        "COMP2041",
+        ")",
         "&&",
         "COMP3311",
         ")"
@@ -6952,9 +7009,11 @@
     ],
     "COMP9323": [
         "(",
-        "(COMP1531",
+        "(",
+        "COMP1531",
         "||",
-        "COMP2041)",
+        "COMP2041",
+        ")",
         "&&",
         "COMP3311",
         "&&",
@@ -6979,15 +7038,21 @@
     ],
     "COMP9417": [
         "(",
-        "(MATH1081",
+        "(",
+        "MATH1081",
         "&&",
-        "(COMP1531",
+        "(",
+        "COMP1531",
         "||",
-        "COMP2041))",
+        "COMP2041",
+        ")",
+        ")",
         "||",
-        "(COMP1927",
+        "(",
+        "COMP1927",
         "||",
-        "COMP2521)",
+        "COMP2521",
+        ")",
         ")"
     ],
     "COMP9418": [
@@ -7024,13 +7089,17 @@
         "(",
         "Two conditions: 1. Students have taken: 6UOC from the following: COMP3411;",
         "&&",
-        "12UOC from the following: (COMP9444",
+        "12UOC from the following:",
+        "(",
+        "COMP9444",
         "||",
         "COMP9417",
         "||",
         "COMP9517",
         "||",
-        "COMP4418) 2. Students must have 70WAM",
+        "COMP4418",
+        ")",
+        "2. Students must have 70WAM",
         ")"
     ],
     "COMP9517": [
@@ -7053,12 +7122,10 @@
     ],
     "CRIM1010": [
         "(",
-        "",
         ")"
     ],
     "CRIM1011": [
         "(",
-        "",
         ")"
     ],
     "CRIM2014": [
@@ -7172,7 +7239,11 @@
         "||",
         "84UOC",
         "&&",
-        "enrolled in 4787 SOCW (Honours)/LAWS",
+        "enrolled in 4787 SOCW",
+        "(",
+        "Honours",
+        ")",
+        "/LAWS",
         ")"
     ],
     "CRIM3012": [
@@ -7185,7 +7256,11 @@
         "||",
         "84UOC",
         "&&",
-        "enrolled in 4787 SOCW (Honours)/LAWS",
+        "enrolled in 4787 SOCW",
+        "(",
+        "Honours",
+        ")",
+        "/LAWS",
         ")"
     ],
     "CRIM3015": [
@@ -7205,7 +7280,11 @@
         "||",
         "84UOC",
         "&&",
-        "enrolled in 4787 SOCW (Honours)/LAWS",
+        "enrolled in 4787 SOCW",
+        "(",
+        "Honours",
+        ")",
+        "/LAWS",
         ")"
     ],
     "CRIM3018": [
@@ -7218,7 +7297,11 @@
         "||",
         "84UOC",
         "&&",
-        "enrolled in 4787 SOCW (Honours)/LAWS",
+        "enrolled in 4787 SOCW",
+        "(",
+        "Honours",
+        ")",
+        "/LAWS",
         ")"
     ],
     "CRIM3019": [
@@ -7231,7 +7314,11 @@
         "||",
         "84UOC",
         "&&",
-        "enrolled in 4787 SOCW (Honours)/LAWS",
+        "enrolled in 4787 SOCW",
+        "(",
+        "Honours",
+        ")",
+        "/LAWS",
         ")"
     ],
     "CRIM3020": [
@@ -7244,7 +7331,11 @@
         "||",
         "84UOC",
         "&&",
-        "enrolled in 4787 SOCW (Honours)/LAWS",
+        "enrolled in 4787 SOCW",
+        "(",
+        "Honours",
+        ")",
+        "/LAWS",
         ")"
     ],
     "CRIM3022": [
@@ -7257,7 +7348,11 @@
         "||",
         "84UOC",
         "&&",
-        "enrolled in 4787 SOCW (Honours)/LAWS",
+        "enrolled in 4787 SOCW",
+        "(",
+        "Honours",
+        ")",
+        "/LAWS",
         ")"
     ],
     "CRIM3024": [
@@ -7301,24 +7396,27 @@
     ],
     "CVEN1300": [
         "(",
-        "(MATH1131",
+        "(",
+        "MATH1131",
         "||",
         "DPST1013",
         "||",
-        "MATH1141)",
+        "MATH1141",
+        ")",
         "&&",
-        "(PHYS1121",
+        "(",
+        "PHYS1121",
         "||",
         "PHYS1131",
         "||",
         "DPST1023",
         "||",
-        "PHYS1141)",
+        "PHYS1141",
+        ")",
         ")"
     ],
     "CVEN1701": [
         "(",
-        "",
         ")"
     ],
     "CVEN2002": [
@@ -7332,12 +7430,10 @@
     ],
     "CVEN2101": [
         "(",
-        "",
         ")"
     ],
     "CVEN2201": [
         "(",
-        "",
         ")"
     ],
     "CVEN2301": [
@@ -7347,35 +7443,36 @@
     ],
     "CVEN2302": [
         "(",
-        "",
         ")"
     ],
     "CVEN2303": [
         "(",
-        "(ENGG1300",
-        "&&",
-        "ENGG2400)",
-        "||",
-        "(CVEN1300",
-        "&&",
-        "CVEN2301)",
         "(",
-        "only applicable to UG cohort taking this course)",
+        "ENGG1300",
+        "&&",
+        "ENGG2400",
+        ")",
+        "||",
+        "(",
+        "CVEN1300",
+        "&&",
+        "CVEN2301",
+        ")",
+        "(",
+        "only applicable to UG cohort taking this course",
+        ")",
         ")"
     ],
     "CVEN2401": [
         "(",
-        "",
         ")"
     ],
     "CVEN2402": [
         "(",
-        "",
         ")"
     ],
     "CVEN2501": [
         "(",
-        "",
         ")"
     ],
     "CVEN2701": [
@@ -7398,12 +7495,10 @@
     ],
     "CVEN3031": [
         "(",
-        "",
         ")"
     ],
     "CVEN3101": [
         "(",
-        "",
         ")"
     ],
     "CVEN3201": [
@@ -7413,7 +7508,6 @@
     ],
     "CVEN3202": [
         "(",
-        "",
         ")"
     ],
     "CVEN3203": [
@@ -7434,43 +7528,50 @@
     ],
     "CVEN3303": [
         "(",
-        "(ENGG1300",
-        "&&",
-        "ENGG2400)",
-        "||",
-        "(CVEN1300",
-        "&&",
-        "CVEN2301)",
         "(",
-        "only applicable to UG cohort taking this course)",
+        "ENGG1300",
+        "&&",
+        "ENGG2400",
+        ")",
+        "||",
+        "(",
+        "CVEN1300",
+        "&&",
+        "CVEN2301",
+        ")",
+        "(",
+        "only applicable to UG cohort taking this course",
+        ")",
         ")"
     ],
     "CVEN3304": [
         "(",
-        "(ENGG1300",
-        "&&",
-        "ENGG2400)",
-        "||",
-        "(CVEN1300",
-        "&&",
-        "CVEN2301)",
         "(",
-        "only applicable to UG cohort taking this course)",
+        "ENGG1300",
+        "&&",
+        "ENGG2400",
+        ")",
+        "||",
+        "(",
+        "CVEN1300",
+        "&&",
+        "CVEN2301",
+        ")",
+        "(",
+        "only applicable to UG cohort taking this course",
+        ")",
         ")"
     ],
     "CVEN3401": [
         "(",
-        "",
         ")"
     ],
     "CVEN3402": [
         "(",
-        "",
         ")"
     ],
     "CVEN3501": [
         "(",
-        "",
         ")"
     ],
     "CVEN3502": [
@@ -7487,12 +7588,10 @@
     ],
     "CVEN3702": [
         "(",
-        "",
         ")"
     ],
     "CVEN3731": [
         "(",
-        "",
         ")"
     ],
     "CVEN4002": [
@@ -7625,7 +7724,10 @@
         "||",
         "CVEN2303",
         "&&",
-        "CVEN2002 (or equivalent)",
+        "CVEN2002",
+        "(",
+        "or equivalent",
+        ")",
         ")"
     ],
     "CVEN4309": [
@@ -7684,23 +7786,26 @@
     ],
     "CVEN4405": [
         "(",
-        "",
         ")"
     ],
     "CVEN4501": [
         "(",
-        "(ENGG2500",
+        "(",
+        "ENGG2500",
         "||",
-        "CVEN2501)",
+        "CVEN2501",
+        ")",
         "&&",
         "CVEN3501",
         ")"
     ],
     "CVEN4502": [
         "(",
-        "(ENGG2500",
+        "(",
+        "ENGG2500",
         "||",
-        "CVEN2501)",
+        "CVEN2501",
+        ")",
         "&&",
         "CVEN3501",
         ")"
@@ -7717,7 +7822,6 @@
     ],
     "CVEN4505": [
         "(",
-        "",
         ")"
     ],
     "CVEN4507": [
@@ -7727,7 +7831,6 @@
     ],
     "CVEN4701": [
         "(",
-        "",
         ")"
     ],
     "CVEN4702": [
@@ -7747,12 +7850,10 @@
     ],
     "CVEN4706": [
         "(",
-        "",
         ")"
     ],
     "CVEN4800": [
         "(",
-        "",
         ")"
     ],
     "CVEN4951": [
@@ -7776,32 +7877,26 @@
     ],
     "CVEN9405": [
         "(",
-        "",
         ")"
     ],
     "CVEN9415": [
         "(",
-        "",
         ")"
     ],
     "CVEN9612": [
         "(",
-        "",
         ")"
     ],
     "CVEN9620": [
         "(",
-        "",
         ")"
     ],
     "CVEN9640": [
         "(",
-        "",
         ")"
     ],
     "CVEN9806": [
         "(",
-        "",
         ")"
     ],
     "CVEN9809": [
@@ -7811,22 +7906,18 @@
     ],
     "CVEN9818": [
         "(",
-        "",
         ")"
     ],
     "CVEN9820": [
         "(",
-        "",
         ")"
     ],
     "CVEN9822": [
         "(",
-        "",
         ")"
     ],
     "CVEN9824": [
         "(",
-        "",
         ")"
     ],
     "CVEN9826": [
@@ -7836,12 +7927,10 @@
     ],
     "CVEN9840": [
         "(",
-        "",
         ")"
     ],
     "CVEN9881": [
         "(",
-        "",
         ")"
     ],
     "CVEN9884": [
@@ -7851,7 +7940,6 @@
     ],
     "DART1100": [
         "(",
-        "",
         ")"
     ],
     "DART1101": [
@@ -7861,72 +7949,58 @@
     ],
     "DART1110": [
         "(",
-        "",
         ")"
     ],
     "DART1111": [
         "(",
-        "",
         ")"
     ],
     "DART1120": [
         "(",
-        "",
         ")"
     ],
     "DART1121": [
         "(",
-        "",
         ")"
     ],
     "DART1130": [
         "(",
-        "",
         ")"
     ],
     "DART1131": [
         "(",
-        "",
         ")"
     ],
     "DART1140": [
         "(",
-        "",
         ")"
     ],
     "DART1141": [
         "(",
-        "",
         ")"
     ],
     "DART1142": [
         "(",
-        "",
         ")"
     ],
     "DART1150": [
         "(",
-        "",
         ")"
     ],
     "DART1151": [
         "(",
-        "",
         ")"
     ],
     "DART1191": [
         "(",
-        "",
         ")"
     ],
     "DART1192": [
         "(",
-        "",
         ")"
     ],
     "DART1200": [
         "(",
-        "",
         ")"
     ],
     "DART1201": [
@@ -7936,37 +8010,30 @@
     ],
     "DART1210": [
         "(",
-        "",
         ")"
     ],
     "DART1211": [
         "(",
-        "",
         ")"
     ],
     "DART1220": [
         "(",
-        "",
         ")"
     ],
     "DART1230": [
         "(",
-        "",
         ")"
     ],
     "DART1240": [
         "(",
-        "",
         ")"
     ],
     "DART1250": [
         "(",
-        "",
         ")"
     ],
     "DART1300": [
         "(",
-        "",
         ")"
     ],
     "DART1301": [
@@ -7976,27 +8043,22 @@
     ],
     "DART1302": [
         "(",
-        "",
         ")"
     ],
     "DART1303": [
         "(",
-        "",
         ")"
     ],
     "DART1310": [
         "(",
-        "",
         ")"
     ],
     "DART1340": [
         "(",
-        "",
         ")"
     ],
     "DART1350": [
         "(",
-        "",
         ")"
     ],
     "DART1351": [
@@ -8006,7 +8068,6 @@
     ],
     "DART1390": [
         "(",
-        "",
         ")"
     ],
     "DART2100": [
@@ -8051,7 +8112,6 @@
     ],
     "DART2190": [
         "(",
-        "",
         ")"
     ],
     "DART2210": [
@@ -8115,42 +8175,39 @@
     ],
     "DART2252": [
         "(",
-        "Students must have 48UOC (in any program) prior to enrolling in this course",
+        "Students must have 48UOC",
+        "(",
+        "in any program",
+        ")",
+        "prior to enrolling in this course",
         ")"
     ],
     "DART2310": [
         "(",
-        "",
         ")"
     ],
     "DART2311": [
         "(",
-        "",
         ")"
     ],
     "DART2320": [
         "(",
-        "",
         ")"
     ],
     "DART2321": [
         "(",
-        "",
         ")"
     ],
     "DART2330": [
         "(",
-        "",
         ")"
     ],
     "DART2331": [
         "(",
-        "",
         ")"
     ],
     "DART2341": [
         "(",
-        "",
         ")"
     ],
     "DART3100": [
@@ -8200,62 +8257,50 @@
     ],
     "DART3203": [
         "(",
-        "",
         ")"
     ],
     "DART3310": [
         "(",
-        "",
         ")"
     ],
     "DART3320": [
         "(",
-        "",
         ")"
     ],
     "DART3321": [
         "(",
-        "",
         ")"
     ],
     "DART3330": [
         "(",
-        "",
         ")"
     ],
     "DART3331": [
         "(",
-        "",
         ")"
     ],
     "DART3340": [
         "(",
-        "",
         ")"
     ],
     "DART3341": [
         "(",
-        "",
         ")"
     ],
     "DART3342": [
         "(",
-        "",
         ")"
     ],
     "DART3390": [
         "(",
-        "",
         ")"
     ],
     "DART3391": [
         "(",
-        "",
         ")"
     ],
     "DART4101": [
         "(",
-        "",
         ")"
     ],
     "DART4102": [
@@ -8265,7 +8310,6 @@
     ],
     "DART4201": [
         "(",
-        "",
         ")"
     ],
     "DART4202": [
@@ -8275,17 +8319,14 @@
     ],
     "DART4300": [
         "(",
-        "",
         ")"
     ],
     "DART4301": [
         "(",
-        "",
         ")"
     ],
     "DATA1001": [
         "(",
-        "",
         ")"
     ],
     "DATA3001": [
@@ -8295,7 +8336,6 @@
     ],
     "DDES1100": [
         "(",
-        "",
         ")"
     ],
     "DDES1101": [
@@ -8305,37 +8345,30 @@
     ],
     "DDES1110": [
         "(",
-        "",
         ")"
     ],
     "DDES1120": [
         "(",
-        "",
         ")"
     ],
     "DDES1130": [
         "(",
-        "",
         ")"
     ],
     "DDES1140": [
         "(",
-        "",
         ")"
     ],
     "DDES1150": [
         "(",
-        "",
         ")"
     ],
     "DDES1160": [
         "(",
-        "",
         ")"
     ],
     "DDES1200": [
         "(",
-        "",
         ")"
     ],
     "DDES1201": [
@@ -8345,7 +8378,6 @@
     ],
     "DDES1290": [
         "(",
-        "",
         ")"
     ],
     "DDES2100": [
@@ -8360,7 +8392,6 @@
     ],
     "DDES2102": [
         "(",
-        "",
         ")"
     ],
     "DDES2110": [
@@ -8425,7 +8456,6 @@
     ],
     "DDES2180": [
         "(",
-        "",
         ")"
     ],
     "DDES2200": [
@@ -8445,7 +8475,6 @@
     ],
     "DDES3190": [
         "(",
-        "",
         ")"
     ],
     "DDES3200": [
@@ -8455,7 +8484,6 @@
     ],
     "DDES4101": [
         "(",
-        "",
         ")"
     ],
     "DDES4102": [
@@ -8465,7 +8493,6 @@
     ],
     "DDES4103": [
         "(",
-        "",
         ")"
     ],
     "DDES4200": [
@@ -8513,12 +8540,18 @@
     ],
     "DPBS1100": [
         "(",
-        "UNSW Global Diplomas only (7001, 7002, 7003, 7004)",
+        "UNSW Global Diplomas only",
+        "(",
+        "7001, 7002, 7003, 7004",
+        ")",
         ")"
     ],
     "DPBS1101": [
         "(",
-        "UNSW Global Diplomas only (7001, 7002, 7003, 7004)",
+        "UNSW Global Diplomas only",
+        "(",
+        "7001, 7002, 7003, 7004",
+        ")",
         ")"
     ],
     "DPBS1102": [
@@ -8550,7 +8583,10 @@
     ],
     "DPBS1140": [
         "(",
-        "UNSW Global Diplomas only (7001, 7002, 7003, 7004)",
+        "UNSW Global Diplomas only",
+        "(",
+        "7001, 7002, 7003, 7004",
+        ")",
         ")"
     ],
     "DPBS1150": [
@@ -8579,7 +8615,10 @@
     ],
     "DPBS1203": [
         "(",
-        "UNSW Global Diplomas only (7001, 7002, 7003, 7004)",
+        "UNSW Global Diplomas only",
+        "(",
+        "7001, 7002, 7003, 7004",
+        ")",
         ")"
     ],
     "DPBS1501": [
@@ -8655,31 +8694,40 @@
     ],
     "DPGE1001": [
         "(",
-        "UNSW Global Diplomas only (7001, 7002, 7003, 7004)",
+        "UNSW Global Diplomas only",
+        "(",
+        "7001, 7002, 7003, 7004",
+        ")",
         ")"
     ],
     "DPGE1002": [
         "(",
-        "UNSW Global Diplomas only (7001",
+        "UNSW Global Diplomas only",
+        "(",
+        "7001",
         "&&",
         "7002",
         "&&",
         "7003",
         "&&",
-        "7004)",
+        "7004",
+        ")",
         "&&",
         "DPGE1001",
         ")"
     ],
     "DPGE1003": [
         "(",
-        "UNSW Global Diplomas only (7001",
+        "UNSW Global Diplomas only",
+        "(",
+        "7001",
         "&&",
         "7002",
         "&&",
         "7003",
         "&&",
-        "7004)",
+        "7004",
+        ")",
         "&&",
         "DPGE1001",
         "&&",
@@ -8688,44 +8736,56 @@
     ],
     "DPST1013": [
         "(",
-        "UNSW Global Diplomas only (7001, 7002, 7003, 7004)",
+        "UNSW Global Diplomas only",
+        "(",
+        "7001, 7002, 7003, 7004",
+        ")",
         ")"
     ],
     "DPST1014": [
         "(",
-        "UNSW Global Diplomas only (7001",
+        "UNSW Global Diplomas only",
+        "(",
+        "7001",
         "&&",
         "7002",
         "&&",
         "7003",
         "&&",
-        "7004)",
+        "7004",
+        ")",
         "&&",
         "DPST1013",
         ")"
     ],
     "DPST1021": [
         "(",
-        "UNSW Global Diplomas only (7001",
+        "UNSW Global Diplomas only",
+        "(",
+        "7001",
         "&&",
         "7002",
         "&&",
         "7003",
         "&&",
-        "7004)",
+        "7004",
+        ")",
         "&&",
         "corequisite DPST1013",
         ")"
     ],
     "DPST1022": [
         "(",
-        "UNSW Global Diplomas only (7001",
+        "UNSW Global Diplomas only",
+        "(",
+        "7001",
         "||",
         "7002",
         "||",
         "7003",
         "||",
-        "7004)",
+        "7004",
+        ")",
         "||",
         "DPST1021",
         "||",
@@ -8736,84 +8796,119 @@
     ],
     "DPST1023": [
         "(",
-        "UNSW Global Diplomas only (7001",
+        "UNSW Global Diplomas only",
+        "(",
+        "7001",
         "&&",
         "7002",
         "&&",
         "7003",
         "&&",
-        "7004)",
+        "7004",
+        ")",
         "&&",
         "corequisite DPST1013",
         ")"
     ],
     "DPST1024": [
         "(",
-        "UNSW Global Diplomas only (7001",
+        "UNSW Global Diplomas only",
+        "(",
+        "7001",
         "||",
         "7002",
         "||",
         "7003",
         "||",
-        "7004) DPST1023",
+        "7004",
+        ")",
+        "DPST1023",
         "||",
-        "a credit (≥65%) in DPST1021",
+        "a credit",
+        "(",
+        "≥65%",
+        ")",
+        "in DPST1021",
         "&&",
         "corequisite DPST1014",
         ")"
     ],
     "DPST1031": [
         "(",
-        "UNSW Global Diplomas only (7001, 7002, 7003, 7004)",
+        "UNSW Global Diplomas only",
+        "(",
+        "7001, 7002, 7003, 7004",
+        ")",
         ")"
     ],
     "DPST1032": [
         "(",
-        "UNSW Global Diplomas only (7001",
+        "UNSW Global Diplomas only",
+        "(",
+        "7001",
         "&&",
         "7002",
         "&&",
         "7003",
         "&&",
-        "7004)",
+        "7004",
+        ")",
         "&&",
         "DPST1031",
         ")"
     ],
     "DPST1041": [
         "(",
-        "UNSW Global Diplomas only (7001, 7002, 7003, 7004)",
+        "UNSW Global Diplomas only",
+        "(",
+        "7001, 7002, 7003, 7004",
+        ")",
         ")"
     ],
     "DPST1051": [
         "(",
-        "UNSW Global Diplomas only (7001, 7002, 7003, 7004)",
+        "UNSW Global Diplomas only",
+        "(",
+        "7001, 7002, 7003, 7004",
+        ")",
         ")"
     ],
     "DPST1052": [
         "(",
-        "UNSW Global Diplomas only (7001, 7002, 7003, 7004)",
+        "UNSW Global Diplomas only",
+        "(",
+        "7001, 7002, 7003, 7004",
+        ")",
         ")"
     ],
     "DPST1061": [
         "(",
-        "UNSW Global Diplomas only (7001, 7002, 7003, 7004)",
+        "UNSW Global Diplomas only",
+        "(",
+        "7001, 7002, 7003, 7004",
+        ")",
         ")"
     ],
     "DPST1071": [
         "(",
-        "UNSW Global Diplomas only (7001, 7002, 7003, 7004)",
+        "UNSW Global Diplomas only",
+        "(",
+        "7001, 7002, 7003, 7004",
+        ")",
         ")"
     ],
     "DPST1072": [
         "(",
-        "UNSW Global Diplomas only (7001",
+        "UNSW Global Diplomas only",
+        "(",
+        "7001",
         "&&",
         "7002",
         "&&",
         "7003",
         "&&",
-        "7004)",
+        "7004",
+        ")",
         "&&",
         "DPST1013",
         "&&",
@@ -8824,30 +8919,38 @@
     ],
     "DPST1081": [
         "(",
-        "UNSW Global Diplomas only (7001, 7002, 7003, 7004)",
+        "UNSW Global Diplomas only",
+        "(",
+        "7001, 7002, 7003, 7004",
+        ")",
         ")"
     ],
     "DPST1091": [
         "(",
-        "UNSW Global Diplomas only (7001, 7002, 7003, 7004)",
+        "UNSW Global Diplomas only",
+        "(",
+        "7001, 7002, 7003, 7004",
+        ")",
         ")"
     ],
     "DPST1092": [
         "(",
-        "UNSW Global Diplomas only (7001",
+        "UNSW Global Diplomas only",
+        "(",
+        "7001",
         "&&",
         "7002",
         "&&",
         "7003",
         "&&",
-        "7004)",
+        "7004",
+        ")",
         "&&",
         "DPST1091",
         ")"
     ],
     "ECON1101": [
         "(",
-        "",
         ")"
     ],
     "ECON1102": [
@@ -8859,12 +8962,10 @@
     ],
     "ECON1107": [
         "(",
-        "",
         ")"
     ],
     "ECON1202": [
         "(",
-        "",
         ")"
     ],
     "ECON1203": [
@@ -8883,11 +8984,14 @@
     ],
     "ECON2101": [
         "(",
-        "(ECON1101",
+        "(",
+        "ECON1101",
         "||",
-        "COMM1100)",
+        "COMM1100",
+        ")",
         "&&",
-        "(ECON1202",
+        "(",
+        "ECON1202",
         "||",
         "MATH1031",
         "||",
@@ -8895,14 +8999,16 @@
         "||",
         "MATH1141",
         "||",
-        "MATH1151)",
+        "MATH1151",
+        ")",
         ")"
     ],
     "ECON2102": [
         "(",
         "ECON1102",
         "&&",
-        "(ECON1203",
+        "(",
+        "ECON1203",
         "||",
         "COMM1190",
         "||",
@@ -8914,7 +9020,8 @@
         "||",
         "MATH1241",
         "||",
-        "MATH1251)",
+        "MATH1251",
+        ")",
         ")"
     ],
     "ECON2103": [
@@ -8933,11 +9040,14 @@
     ],
     "ECON2107": [
         "(",
-        "(ECON1101",
+        "(",
+        "ECON1101",
         "||",
-        "COMM1100)",
+        "COMM1100",
+        ")",
         "&&",
-        "(ECON1203",
+        "(",
+        "ECON1203",
         "||",
         "COMM1190",
         "||",
@@ -8949,7 +9059,8 @@
         "||",
         "MATH2841",
         "||",
-        "MATH2901)",
+        "MATH2901",
+        ")",
         ")"
     ],
     "ECON2111": [
@@ -8961,11 +9072,14 @@
     ],
     "ECON2112": [
         "(",
-        "(ECON1101",
+        "(",
+        "ECON1101",
         "||",
-        "COMM1100)",
+        "COMM1100",
+        ")",
         "&&",
-        "(ECON1202",
+        "(",
+        "ECON1202",
         "||",
         "MATH1031",
         "||",
@@ -8973,7 +9087,8 @@
         "||",
         "MATH1141",
         "||",
-        "MATH1151)",
+        "MATH1151",
+        ")",
         ")"
     ],
     "ECON2126": [
@@ -9024,13 +9139,17 @@
     ],
     "ECON2322": [
         "(",
-        "(ECON1101",
+        "(",
+        "ECON1101",
         "||",
-        "COMM1100)",
+        "COMM1100",
+        ")",
         "&&",
-        "(ECON1102",
+        "(",
+        "ECON1102",
         "||",
-        "COMM1150)",
+        "COMM1150",
+        ")",
         ")"
     ],
     "ECON2403": [
@@ -9068,9 +9187,11 @@
         "(",
         "ECON2101",
         "&&",
-        "(ECON1102",
+        "(",
+        "ECON1102",
         "||",
-        "COMM1150)",
+        "COMM1150",
+        ")",
         ")"
     ],
     "ECON3116": [
@@ -9127,13 +9248,17 @@
         "(",
         "ECON2206",
         "||",
-        "(In DATAs",
+        "(",
+        "In DATAs",
         "&&",
         "Decisions",
         "&&",
-        "(MATH2831",
+        "(",
+        "MATH2831",
         "||",
-        "MATH2931))",
+        "MATH2931",
+        ")",
+        ")",
         ")"
     ],
     "ECON3209": [
@@ -9150,68 +9275,104 @@
     ],
     "ECON4100": [
         "(",
-        "Admission to ECON Honours (program 4502",
+        "Admission to ECON Honours",
+        "(",
+        "program 4502",
         "||",
-        "stream ECONFH4501)",
+        "stream ECONFH4501",
+        ")",
         ")"
     ],
     "ECON4103": [
         "(",
-        "Admission to ECON Honours (program 4502",
+        "Admission to ECON Honours",
+        "(",
+        "program 4502",
         "||",
-        "stream ECONFH4501)",
+        "stream ECONFH4501",
+        ")",
         ")"
     ],
     "ECON4106": [
         "(",
-        "Admission to ECON Honours (program 4502",
+        "Admission to ECON Honours",
+        "(",
+        "program 4502",
         "||",
-        "stream ECONFH4501)",
+        "stream ECONFH4501",
+        ")",
         ")"
     ],
     "ECON4150": [
         "(",
-        "Currently enrolled in program 4501 COMM (Honours)",
+        "Currently enrolled in program 4501 COMM",
+        "(",
+        "Honours",
+        ")",
         ")"
     ],
     "ECON4151": [
         "(",
-        "Currently enrolled in program 4501 COMM (Honours)",
+        "Currently enrolled in program 4501 COMM",
+        "(",
+        "Honours",
+        ")",
         ")"
     ],
     "ECON4152": [
         "(",
-        "Currently enrolled in program 4501 COMM (Honours)",
+        "Currently enrolled in program 4501 COMM",
+        "(",
+        "Honours",
+        ")",
         ")"
     ],
     "ECON4160": [
         "(",
-        "Admission to ECON Honours stream (ECONAH4502)",
+        "Admission to ECON Honours stream",
+        "(",
+        "ECONAH4502",
+        ")",
         ")"
     ],
     "ECON4161": [
         "(",
-        "Admission to ECON Honours stream (ECONAH4502)",
+        "Admission to ECON Honours stream",
+        "(",
+        "ECONAH4502",
+        ")",
         ")"
     ],
     "ECON4162": [
         "(",
-        "Admission to ECON Honours stream (ECONAH4502)",
+        "Admission to ECON Honours stream",
+        "(",
+        "ECONAH4502",
+        ")",
         ")"
     ],
     "ECON4170": [
         "(",
-        "Admission to Econometrics Honours stream (ECONEH4502)",
+        "Admission to Econometrics Honours stream",
+        "(",
+        "ECONEH4502",
+        ")",
         ")"
     ],
     "ECON4171": [
         "(",
-        "Admission to Econometrics Honours stream (ECONEH4502)",
+        "Admission to Econometrics Honours stream",
+        "(",
+        "ECONEH4502",
+        ")",
         ")"
     ],
     "ECON4172": [
         "(",
-        "Admission to Econometrics Honours stream (ECONEH4502)",
+        "Admission to Econometrics Honours stream",
+        "(",
+        "ECONEH4502",
+        ")",
         ")"
     ],
     "ECON4201": [
@@ -9227,96 +9388,128 @@
     ],
     "ECON4202": [
         "(",
-        "Admission to ECON Honours (program 4502",
+        "Admission to ECON Honours",
+        "(",
+        "program 4502",
         "||",
-        "stream ECONFH4501)",
+        "stream ECONFH4501",
+        ")",
         ")"
     ],
     "ECON4205": [
         "(",
-        "Admission to ECON Honours (program 4502",
+        "Admission to ECON Honours",
+        "(",
+        "program 4502",
         "||",
-        "stream ECONFH4501)",
+        "stream ECONFH4501",
+        ")",
         ")"
     ],
     "ECON4208": [
         "(",
-        "Admission to ECON Honours (program 4502",
+        "Admission to ECON Honours",
+        "(",
+        "program 4502",
         "||",
-        "stream ECONFH4501)",
+        "stream ECONFH4501",
+        ")",
         ")"
     ],
     "ECON4301": [
         "(",
-        "Admission to ECON Honours (program 4502",
+        "Admission to ECON Honours",
+        "(",
+        "program 4502",
         "||",
-        "stream ECONFH4501)",
+        "stream ECONFH4501",
+        ")",
         ")"
     ],
     "ECON4302": [
         "(",
-        "Admission to ECON Honours (program 4502",
+        "Admission to ECON Honours",
+        "(",
+        "program 4502",
         "||",
-        "stream ECONFH4501)",
+        "stream ECONFH4501",
+        ")",
         ")"
     ],
     "ECON4303": [
         "(",
         "ECON4100",
         "&&",
-        "(in ECON Honours (4502)",
+        "(",
+        "in ECON Honours",
+        "(",
+        "4502",
+        ")",
         "||",
-        "in stream ECONFH4501)",
+        "in stream ECONFH4501",
+        ")",
         ")"
     ],
     "ECON4307": [
         "(",
-        "Admission to ECON Honours (program 4502",
+        "Admission to ECON Honours",
+        "(",
+        "program 4502",
         "||",
-        "stream ECONFH4501)",
+        "stream ECONFH4501",
+        ")",
         ")"
     ],
     "ECON4309": [
         "(",
-        "Admission to ECON Honours (program 4502",
+        "Admission to ECON Honours",
+        "(",
+        "program 4502",
         "||",
-        "stream ECONFH4501)",
+        "stream ECONFH4501",
+        ")",
         ")"
     ],
     "ECON4310": [
         "(",
-        "Admission to ECON Honours (program 4502",
+        "Admission to ECON Honours",
+        "(",
+        "program 4502",
         "||",
-        "stream ECONFH4501)",
+        "stream ECONFH4501",
+        ")",
         ")"
     ],
     "ECON4311": [
         "(",
-        "Admission to ECON Honours (program 4502",
+        "Admission to ECON Honours",
+        "(",
+        "program 4502",
         "||",
-        "stream ECONFH4501)",
+        "stream ECONFH4501",
+        ")",
         ")"
     ],
     "ECON4350": [
         "(",
-        "Admission to ECON Honours (program 4502",
+        "Admission to ECON Honours",
+        "(",
+        "program 4502",
         "||",
-        "stream ECONFH4501)",
+        "stream ECONFH4501",
+        ")",
         ")"
     ],
     "EDST1101": [
         "(",
-        "",
         ")"
     ],
     "EDST1104": [
         "(",
-        "",
         ")"
     ],
     "EDST1108": [
         "(",
-        "",
         ")"
     ],
     "EDST2002": [
@@ -10075,38 +10268,41 @@
     ],
     "ELEC0390": [
         "(",
-        "",
         ")"
     ],
     "ELEC1111": [
         "(",
-        "",
         ")"
     ],
     "ELEC1112": [
         "(",
-        "",
         ")"
     ],
     "ELEC2117": [
         "(",
-        "(ELEC1111",
+        "(",
+        "ELEC1111",
         "||",
         "DPST1081",
         "||",
-        "ELEC1112)",
+        "ELEC1112",
+        ")",
         "&&",
-        "(ELEC2141",
+        "(",
+        "ELEC2141",
         "||",
-        "ELEC1041)",
+        "ELEC1041",
+        ")",
         "&&",
-        "(COMP1511",
+        "(",
+        "COMP1511",
         "||",
         "DPST1091",
         "||",
         "COMP1911",
         "||",
-        "COMP1917)",
+        "COMP1917",
+        ")",
         ")"
     ],
     "ELEC2133": [
@@ -10134,9 +10330,11 @@
     ],
     "ELEC2146": [
         "(",
-        "(COMP1911",
+        "(",
+        "COMP1911",
         "||",
-        "COMP1917)",
+        "COMP1917",
+        ")",
         "&&",
         "ELEC2134",
         ")"
@@ -10187,9 +10385,11 @@
         "(",
         "MATH2069",
         "&&",
-        "(PHY1231",
+        "(",
+        "PHY1231",
         "||",
-        "DPST1024)",
+        "DPST1024",
+        ")",
         ")"
     ],
     "ELEC3117": [
@@ -10199,26 +10399,32 @@
     ],
     "ELEC3145": [
         "(",
-        "(comp1911",
+        "(",
+        "comp1911",
         "||",
-        "comp1917)",
+        "comp1917",
+        ")",
         "&&",
-        "(elec2141",
+        "(",
+        "elec2141",
         "||",
         "mtrn3200",
         "||",
-        "comp3222)",
+        "comp3222",
+        ")",
         ")"
     ],
     "ELEC3705": [
         "(",
         ": MATH2099",
         "&&",
-        "(PHYS1231",
+        "(",
+        "PHYS1231",
         "||",
         "DPST1024",
         "||",
-        "PHYS1221)",
+        "PHYS1221",
+        ")",
         ")"
     ],
     "ELEC4122": [
@@ -10228,7 +10434,6 @@
     ],
     "ELEC4123": [
         "(",
-        "",
         ")"
     ],
     "ELEC4445": [
@@ -10325,63 +10530,71 @@
     ],
     "ELEC4952": [
         "(",
-        "Completion of Research Thesis A (4951)",
+        "Completion of Research Thesis A",
+        "(",
+        "4951",
+        ")",
         ")"
     ],
     "ELEC4953": [
         "(",
-        "Completion of Research Thesis B (4952)",
+        "Completion of Research Thesis B",
+        "(",
+        "4952",
+        ")",
         ")"
     ],
     "ENGG0360": [
         "(",
-        "",
         ")"
     ],
     "ENGG1000": [
         "(",
-        "",
         ")"
     ],
     "ENGG1100": [
         "(",
-        "",
         ")"
     ],
     "ENGG1200": [
         "(",
-        "",
         ")"
     ],
     "ENGG1300": [
         "(",
-        "(MATH1131",
+        "(",
+        "MATH1131",
         "||",
         "DPST1013",
         "||",
-        "MATH1141)",
+        "MATH1141",
+        ")",
         "&&",
-        "(PHYS1121",
+        "(",
+        "PHYS1121",
         "||",
         "PHYS1131",
         "||",
         "PHYS1141",
         "||",
-        "DPST1023)",
+        "DPST1023",
+        ")",
         ")"
     ],
     "ENGG1400": [
         "(",
-        "",
         ")"
     ],
     "ENGG1811": [
         "(",
-        "Enrolment in a non-CSE major (no BINF",
+        "Enrolment in a non-CSE major",
+        "(",
+        "no BINF",
         "||",
         "COMP",
         "||",
-        "SENG)",
+        "SENG",
+        ")",
         ")"
     ],
     "ENGG2400": [
@@ -10397,19 +10610,23 @@
     ],
     "ENGG2500": [
         "(",
-        "(MATH1131",
+        "(",
+        "MATH1131",
         "||",
         "DPST1013",
         "||",
-        "MATH1141)",
+        "MATH1141",
+        ")",
         "&&",
-        "(PHYS1121",
+        "(",
+        "PHYS1121",
         "||",
         "PHYS1131",
         "||",
         "PHYS1141",
         "||",
-        "DPST1023)",
+        "DPST1023",
+        ")",
         ")"
     ],
     "ENGG2600": [
@@ -10433,7 +10650,6 @@
     ],
     "ENGG3002": [
         "(",
-        "",
         ")"
     ],
     "ENGG3060": [
@@ -10458,7 +10674,10 @@
     ],
     "ENGG4103": [
         "(",
-        "ENGG3001 - Fundamentals of Humanitarian GSOE (UG)",
+        "ENGG3001 - Fundamentals of Humanitarian GSOE",
+        "(",
+        "UG",
+        ")",
         ")"
     ],
     "ENGG4600": [
@@ -10468,7 +10687,6 @@
     ],
     "ENGG4820": [
         "(",
-        "",
         ")"
     ],
     "ENGG4841": [
@@ -10478,22 +10696,18 @@
     ],
     "ENGG4908": [
         "(",
-        "",
         ")"
     ],
     "ENGG4909": [
         "(",
-        "",
         ")"
     ],
     "ENGG4999": [
         "(",
-        "",
         ")"
     ],
     "ENGG9741": [
         "(",
-        "",
         ")"
     ],
     "ENVS2030": [
@@ -10503,27 +10717,22 @@
     ],
     "EXCH8033": [
         "(",
-        "",
         ")"
     ],
     "EXCH8034": [
         "(",
-        "",
         ")"
     ],
     "EXCH8035": [
         "(",
-        "",
         ")"
     ],
     "FINS1612": [
         "(",
-        "",
         ")"
     ],
     "FINS1613": [
         "(",
-        "",
         ")"
     ],
     "FINS2101": [
@@ -10540,7 +10749,6 @@
     ],
     "FINS2622": [
         "(",
-        "",
         "||",
         "co-requisite:FINS1612",
         "&&",
@@ -10656,18 +10864,28 @@
         "(",
         "FINS1612",
         "||",
-        "(ZBUS Analytics Major (COMMJ1)",
+        "(",
+        "ZBUS Analytics Major",
+        "(",
+        "COMMJ1",
+        ")",
         "&&",
-        "FINS1613)",
+        "FINS1613",
+        ")",
         ")"
     ],
     "FINS3646": [
         "(",
         "FINS1612",
         "||",
-        "(ZBUS Analytics Major (COMMJ1)",
+        "(",
+        "ZBUS Analytics Major",
+        "(",
+        "COMMJ1",
+        ")",
         "&&",
-        "FINS1613)",
+        "FINS1613",
+        ")",
         ")"
     ],
     "FINS3647": [
@@ -10679,11 +10897,13 @@
         "(",
         "FINS1612",
         "&&",
-        "(FINS2624",
+        "(",
+        "FINS2624",
         "||",
         "FINS3630",
         "||",
-        "FINS3623)",
+        "FINS3623",
+        ")",
         ")"
     ],
     "FINS3649": [
@@ -10708,7 +10928,6 @@
     ],
     "FINS4774": [
         "(",
-        "",
         "||",
         "Corequisite: FINS3775",
         "||",
@@ -10728,7 +10947,10 @@
     ],
     "FINS4776": [
         "(",
-        "Corequisite: Must be enrolled in program 4501 (FINS)",
+        "Corequisite: Must be enrolled in program 4501",
+        "(",
+        "FINS",
+        ")",
         "||",
         "FINS3775",
         "||",
@@ -10737,7 +10959,10 @@
     ],
     "FINS4777": [
         "(",
-        "Corequisite: Must be enrolled in program 4501 (FINS)",
+        "Corequisite: Must be enrolled in program 4501",
+        "(",
+        "FINS",
+        ")",
         "||",
         "FINS3775",
         "||",
@@ -10746,7 +10971,10 @@
     ],
     "FINS4779": [
         "(",
-        "Corequisite: Must be enrolled in program 4501 (FINS)",
+        "Corequisite: Must be enrolled in program 4501",
+        "(",
+        "FINS",
+        ")",
         "||",
         "FINS3775",
         "||",
@@ -10755,7 +10983,10 @@
     ],
     "FINS4792": [
         "(",
-        "Corequisite: Must be enrolled in program 4501 (FINS)",
+        "Corequisite: Must be enrolled in program 4501",
+        "(",
+        "FINS",
+        ")",
         "||",
         "FINS3775",
         "||",
@@ -10764,27 +10995,22 @@
     ],
     "FINS4796": [
         "(",
-        "",
         ")"
     ],
     "FINS4797": [
         "(",
-        "",
         ")"
     ],
     "FINS4799": [
         "(",
-        "",
         ")"
     ],
     "FOOD1120": [
         "(",
-        "",
         ")"
     ],
     "FOOD1130": [
         "(",
-        "",
         ")"
     ],
     "FOOD1360": [
@@ -10794,7 +11020,6 @@
     ],
     "FOOD2320": [
         "(",
-        "",
         ")"
     ],
     "FOOD3010": [
@@ -10821,15 +11046,19 @@
     ],
     "FOOD3801": [
         "(",
-        "(FOOD1360",
+        "(",
+        "FOOD1360",
         "&&",
-        "FOOD3010)",
+        "FOOD3010",
+        ")",
         "||",
-        "(CEIC2001",
+        "(",
+        "CEIC2001",
         "&&",
         "CEIC2002",
         "&&",
-        "FOOD3010)",
+        "FOOD3010",
+        ")",
         ")"
     ],
     "FOOD3901": [
@@ -10856,7 +11085,6 @@
     ],
     "FOOD4450": [
         "(",
-        "",
         ")"
     ],
     "FOOD5400": [
@@ -10871,22 +11099,18 @@
     ],
     "FOOD6806": [
         "(",
-        "",
         ")"
     ],
     "FOOD9410": [
         "(",
-        "",
         ")"
     ],
     "FOOD9420": [
         "(",
-        "",
         ")"
     ],
     "FOOD9430": [
         "(",
-        "",
         ")"
     ],
     "GENC2100": [
@@ -10906,57 +11130,46 @@
     ],
     "GENE0050": [
         "(",
-        "",
         ")"
     ],
     "GENE1015": [
         "(",
-        "",
         ")"
     ],
     "GENE1500": [
         "(",
-        "",
         ")"
     ],
     "GENL0231": [
         "(",
-        "",
         ")"
     ],
     "GENL0250": [
         "(",
-        "",
         ")"
     ],
     "GENL0251": [
         "(",
-        "",
         ")"
     ],
     "GENL0252": [
         "(",
-        "",
         ")"
     ],
     "GENL1021": [
         "(",
-        "",
         ")"
     ],
     "GENL1022": [
         "(",
-        "",
         ")"
     ],
     "GENL1062": [
         "(",
-        "",
         ")"
     ],
     "GENL1063": [
         "(",
-        "",
         ")"
     ],
     "GENL2021": [
@@ -10966,7 +11179,6 @@
     ],
     "GENL2022": [
         "(",
-        "",
         ")"
     ],
     "GENL2032": [
@@ -10976,17 +11188,14 @@
     ],
     "GENL2323": [
         "(",
-        "",
         ")"
     ],
     "GENL2456": [
         "(",
-        "",
         ")"
     ],
     "GENL2880": [
         "(",
-        "",
         ")"
     ],
     "GENM0295": [
@@ -11041,12 +11250,10 @@
     ],
     "GENS1112": [
         "(",
-        "",
         ")"
     ],
     "GENS2025": [
         "(",
-        "",
         ")"
     ],
     "GENS4008": [
@@ -11071,27 +11278,22 @@
     ],
     "GENY0001": [
         "(",
-        "",
         ")"
     ],
     "GENY0002": [
         "(",
-        "",
         ")"
     ],
     "GENY0003": [
         "(",
-        "",
         ")"
     ],
     "GEOS1111": [
         "(",
-        "",
         ")"
     ],
     "GEOS1211": [
         "(",
-        "",
         ")"
     ],
     "GEOS1701": [
@@ -11101,7 +11303,6 @@
     ],
     "GEOS2021": [
         "(",
-        "",
         ")"
     ],
     "GEOS2071": [
@@ -11111,25 +11312,27 @@
     ],
     "GEOS2131": [
         "(",
-        "(GEOL1111",
+        "(",
+        "GEOL1111",
         "||",
-        "GEOS1111)",
+        "GEOS1111",
+        ")",
         "||",
-        "(GEOL1211",
+        "(",
+        "GEOL1211",
         "||",
-        "GEOS1211)",
+        "GEOS1211",
+        ")",
         "||",
         "GEOS1701",
         ")"
     ],
     "GEOS2181": [
         "(",
-        "",
         ")"
     ],
     "GEOS2241": [
         "(",
-        "",
         ")"
     ],
     "GEOS2291": [
@@ -11139,7 +11342,6 @@
     ],
     "GEOS2641": [
         "(",
-        "",
         ")"
     ],
     "GEOS2711": [
@@ -11168,13 +11370,17 @@
     ],
     "GEOS3141": [
         "(",
-        "(GEOL1111",
+        "(",
+        "GEOL1111",
         "||",
-        "GEOS1111)",
+        "GEOS1111",
+        ")",
         "||",
-        "(GEOL1211",
+        "(",
+        "GEOL1211",
         "||",
-        "GEOS1211)",
+        "GEOS1211",
+        ")",
         "||",
         "GEOS1701",
         "||",
@@ -11185,9 +11391,11 @@
     ],
     "GEOS3171": [
         "(",
-        "(GEOS1111",
+        "(",
+        "GEOS1111",
         "||",
-        "GEOS1211)",
+        "GEOS1211",
+        ")",
         "&&",
         "GEOS2131",
         ")"
@@ -11199,22 +11407,18 @@
     ],
     "GEOS3611": [
         "(",
-        "",
         ")"
     ],
     "GEOS3721": [
         "(",
-        "",
         ")"
     ],
     "GEOS3731": [
         "(",
-        "",
         ")"
     ],
     "GEOS3733": [
         "(",
-        "",
         ")"
     ],
     "GEOS3761": [
@@ -11234,22 +11438,18 @@
     ],
     "GEOS3911": [
         "(",
-        "",
         ")"
     ],
     "GEOS3921": [
         "(",
-        "",
         ")"
     ],
     "GEOS6733": [
         "(",
-        "",
         ")"
     ],
     "GMAT1110": [
         "(",
-        "",
         ")"
     ],
     "GMAT2120": [
@@ -11309,12 +11509,10 @@
     ],
     "GMAT3500": [
         "(",
-        "",
         ")"
     ],
     "GMAT3600": [
         "(",
-        "",
         ")"
     ],
     "GMAT3700": [
@@ -11326,7 +11524,6 @@
     ],
     "GMAT4009": [
         "(",
-        "",
         ")"
     ],
     "GMAT4150": [
@@ -11346,37 +11543,30 @@
     ],
     "GMAT4450": [
         "(",
-        "",
         ")"
     ],
     "GMAT4900": [
         "(",
-        "",
         ")"
     ],
     "GMAT9300": [
         "(",
-        "",
         ")"
     ],
     "GMAT9600": [
         "(",
-        "",
         ")"
     ],
     "GMAT9606": [
         "(",
-        "",
         ")"
     ],
     "GSOE9712": [
         "(",
-        "",
         ")"
     ],
     "GSOE9740": [
         "(",
-        "",
         ")"
     ],
     "HESC1501": [
@@ -11398,13 +11588,19 @@
     ],
     "HESC2452": [
         "(",
-        "ANAT2451 (or ANAT3131",
+        "ANAT2451",
+        "(",
+        "or ANAT3131",
         "&&",
-        "ANAT3141)",
+        "ANAT3141",
+        ")",
         "&&",
-        "HESC2451 (or BIOM2451",
+        "HESC2451",
+        "(",
+        "or BIOM2451",
         "||",
-        "SESC2451)",
+        "SESC2451",
+        ")",
         ")"
     ],
     "HESC2501": [
@@ -11516,17 +11712,14 @@
     ],
     "HUMS1004": [
         "(",
-        "",
         ")"
     ],
     "HUMS1005": [
         "(",
-        "",
         ")"
     ],
     "HUMS1006": [
         "(",
-        "",
         ")"
     ],
     "HUMS1007": [
@@ -11536,27 +11729,22 @@
     ],
     "HUMS1008": [
         "(",
-        "",
         ")"
     ],
     "HUMS1009": [
         "(",
-        "",
         ")"
     ],
     "HUMS1010": [
         "(",
-        "",
         ")"
     ],
     "HUMS1011": [
         "(",
-        "",
         ")"
     ],
     "HUMS1012": [
         "(",
-        "",
         ")"
     ],
     "HUMS2000": [
@@ -11578,67 +11766,54 @@
     ],
     "HUMS2005": [
         "(",
-        "",
         ")"
     ],
     "HUMS2006": [
         "(",
-        "",
         ")"
     ],
     "HUMS2007": [
         "(",
-        "",
         ")"
     ],
     "IDES1071": [
         "(",
-        "",
         ")"
     ],
     "IDES1211": [
         "(",
-        "",
         ")"
     ],
     "IDES1212": [
         "(",
-        "",
         ")"
     ],
     "IDES1213": [
         "(",
-        "",
         ")"
     ],
     "IDES1262": [
         "(",
-        "",
         ")"
     ],
     "IDES2021": [
         "(",
-        "",
         ")"
     ],
     "IDES2023": [
         "(",
-        "",
         ")"
     ],
     "IDES2072": [
         "(",
-        "",
         ")"
     ],
     "IDES2171": [
         "(",
-        "",
         ")"
     ],
     "IDES2201": [
         "(",
-        "",
         ")"
     ],
     "IDES2221": [
@@ -11666,17 +11841,14 @@
     ],
     "IDES3021": [
         "(",
-        "",
         ")"
     ],
     "IDES3231": [
         "(",
-        "",
         ")"
     ],
     "IDES3235": [
         "(",
-        "",
         ")"
     ],
     "IDES3321": [
@@ -11691,12 +11863,10 @@
     ],
     "IDES4100": [
         "(",
-        "",
         ")"
     ],
     "IDES4111": [
         "(",
-        "",
         ")"
     ],
     "IDES4112": [
@@ -11725,47 +11895,59 @@
     ],
     "INFS1602": [
         "(",
-        "",
         ")"
     ],
     "INFS1603": [
         "(",
-        "",
         ")"
     ],
     "INFS1609": [
         "(",
         "Students completing COMP degrees",
         "||",
-        "majors (including BINF",
+        "majors",
+        "(",
+        "including BINF",
         "||",
         "COMP",
         "||",
-        "SENG) are excluded from this course",
+        "SENG",
+        ")",
+        "are excluded from this course",
         ")"
     ],
     "INFS2101": [
         "(",
-        "Enrolled in plan (INFSCH3964",
+        "Enrolled in plan",
+        "(",
+        "INFSCH3964",
         "||",
-        "INFSCH3971)",
+        "INFSCH3971",
+        ")",
         "&&",
-        "(INFS1609",
+        "(",
+        "INFS1609",
         "||",
-        "INFS2609)",
+        "INFS2609",
+        ")",
         "&&",
         "INFS 2603;",
         "||",
-        "Enrolled in plan (INFSB13554)",
+        "Enrolled in plan",
+        "(",
+        "INFSB13554",
+        ")",
         "&&",
         "INFS2603",
         ")"
     ],
     "INFS2603": [
         "(",
-        "(INFS1602",
+        "(",
+        "INFS1602",
         "||",
-        "INFS2602)",
+        "INFS2602",
+        ")",
         "&&",
         "INFS1603",
         ")"
@@ -11774,15 +11956,22 @@
         "(",
         "INFS1603",
         "&&",
-        "(INFS2609",
+        "(",
+        "INFS2609",
         "||",
-        "INFS1609). Students completing COMP degrees",
+        "INFS1609",
+        ")",
+        ". Students completing COMP degrees",
         "||",
-        "majors (including BINF",
+        "majors",
+        "(",
+        "including BINF",
         "||",
         "COMP",
         "||",
-        "SENG) are excluded from this course",
+        "SENG",
+        ")",
+        "are excluded from this course",
         ")"
     ],
     "INFS2608": [
@@ -11792,13 +11981,17 @@
     ],
     "INFS2621": [
         "(",
-        "(INFS1602",
+        "(",
+        "INFS1602",
         "||",
-        "INFS2602)",
+        "INFS2602",
+        ")",
         "&&",
-        "(INFS1603",
+        "(",
+        "INFS1603",
         "||",
-        "COMM1822)",
+        "COMM1822",
+        ")",
         ")"
     ],
     "INFS2631": [
@@ -11828,22 +12021,28 @@
         "(",
         "INFS2101",
         "&&",
-        "in Plan (INFSB13554",
+        "in Plan",
+        "(",
+        "INFSB13554",
         "||",
         "INFSCH3971",
         "||",
-        "INFSCH3964)",
+        "INFSCH3964",
+        ")",
         ")"
     ],
     "INFS3303": [
         "(",
         "INFS3202",
         "&&",
-        "in (Plan INFSB13554",
+        "in",
+        "(",
+        "Plan INFSB13554",
         "||",
         "INFSCH3964",
         "||",
-        "INFSCH3971)",
+        "INFSCH3971",
+        ")",
         ")"
     ],
     "INFS3603": [
@@ -11852,11 +12051,18 @@
         "||",
         "INFS2602",
         "||",
-        "((in program 3959",
+        "(",
+        "(",
+        "in program 3959",
         "||",
-        "completing ZBUS Analytics major (COMMJ1))",
+        "completing ZBUS Analytics major",
+        "(",
+        "COMMJ1",
+        ")",
+        ")",
         "&&",
-        "48UOC)",
+        "48UOC",
+        ")",
         ")"
     ],
     "INFS3604": [
@@ -11894,33 +12100,42 @@
         "(",
         "INFS3603",
         "||",
-        "(COMM2501",
+        "(",
+        "COMM2501",
         "&&",
-        "in ZBUS Analytics major (COMMJ)). Note: Students wishing to meet SAS certification must complete INFS3603. Completion of COMM2501 in lieu of INFS3603 will not be considered equivalent for the certificate",
+        "in ZBUS Analytics major",
+        "(",
+        "COMMJ",
+        ")",
+        ")",
+        ". Note: Students wishing to meet SAS certification must complete INFS3603. Completion of COMM2501 in lieu of INFS3603 will not be considered equivalent for the certificate",
         ")"
     ],
     "INFS3873": [
         "(",
         "INFS3603",
         "||",
-        "(COMM2501",
+        "(",
+        "COMM2501",
         "&&",
-        "in ZBUS Analytics major (COMMJ)). Note: Students wishing to meet SAS certification must complete INFS3603. Completion of COMM2501 in lieu of INFS3603 will not be considered equivalent for the certificate",
+        "in ZBUS Analytics major",
+        "(",
+        "COMMJ",
+        ")",
+        ")",
+        ". Note: Students wishing to meet SAS certification must complete INFS3603. Completion of COMM2501 in lieu of INFS3603 will not be considered equivalent for the certificate",
         ")"
     ],
     "INFS4800": [
         "(",
-        "",
         ")"
     ],
     "INFS4801": [
         "(",
-        "",
         ")"
     ],
     "INFS4802": [
         "(",
-        "",
         ")"
     ],
     "INFS4831": [
@@ -11935,11 +12150,14 @@
     ],
     "INFS4858": [
         "(",
-        "Enrolment in Streams: Enrolled in an Honours Program majoring in INFS (INFSAH",
+        "Enrolment in Streams: Enrolled in an Honours Program majoring in INFS",
+        "(",
+        "INFSAH",
         "||",
         "INFSBH",
         "||",
-        "INFSCH)",
+        "INFSCH",
+        ")",
         ")"
     ],
     "INFS4886": [
@@ -11956,16 +12174,18 @@
     ],
     "INFS4893": [
         "(",
-        "",
         ")"
     ],
     "INFS4907": [
         "(",
-        "Enrolment in Streams: Enrolled in an Honours Program majoring in INFS (INFSAH",
+        "Enrolment in Streams: Enrolled in an Honours Program majoring in INFS",
+        "(",
+        "INFSAH",
         "||",
         "INFSBH",
         "||",
-        "INFSCH)",
+        "INFSCH",
+        ")",
         ")"
     ],
     "INST1005": [
@@ -11981,25 +12201,33 @@
         "&&",
         "enrolment in an INST single",
         "||",
-        "double degree(2017 onwards)",
+        "double degree",
+        "(",
+        "2017 onwards",
+        ")",
         ")"
     ],
     "INST1007": [
         "(",
-        "",
         ")"
     ],
     "INST2003": [
         "(",
         "Enrolment in an INST program",
         "(",
-        "2017).",
+        "2017",
+        ")",
+        ".",
         "||",
         "INST1005",
         "&&",
         "INST1006",
         "&&",
-        "enrolment in an INST program (2017+).",
+        "enrolment in an INST program",
+        "(",
+        "2017+",
+        ")",
+        ".",
         "||",
         "ARTS1250",
         "&&",
@@ -12019,12 +12247,10 @@
     ],
     "INTA1000": [
         "(",
-        "",
         ")"
     ],
     "INTA1002": [
         "(",
-        "",
         ")"
     ],
     "INTA1003": [
@@ -12039,12 +12265,10 @@
     ],
     "INTA2001": [
         "(",
-        "",
         ")"
     ],
     "INTA2002": [
         "(",
-        "",
         ")"
     ],
     "INTA2003": [
@@ -12059,7 +12283,6 @@
     ],
     "INTA2101": [
         "(",
-        "",
         ")"
     ],
     "INTA2102": [
@@ -12074,7 +12297,6 @@
     ],
     "INTA2202": [
         "(",
-        "",
         ")"
     ],
     "INTA2301": [
@@ -12096,12 +12318,10 @@
     ],
     "INTA3001": [
         "(",
-        "",
         ")"
     ],
     "INTA3002": [
         "(",
-        "",
         ")"
     ],
     "INTA3003": [
@@ -12111,7 +12331,6 @@
     ],
     "INTA3004": [
         "(",
-        "",
         ")"
     ],
     "INTA4000": [
@@ -12121,7 +12340,6 @@
     ],
     "INTA4004": [
         "(",
-        "",
         ")"
     ],
     "INTA5000": [
@@ -12146,7 +12364,6 @@
     ],
     "LAND1141": [
         "(",
-        "",
         ")"
     ],
     "LAND1322": [
@@ -12166,17 +12383,14 @@
     ],
     "LAND1422": [
         "(",
-        "",
         ")"
     ],
     "LAND1482": [
         "(",
-        "",
         ")"
     ],
     "LAND2101": [
         "(",
-        "",
         ")"
     ],
     "LAND2102": [
@@ -12186,7 +12400,6 @@
     ],
     "LAND2121": [
         "(",
-        "",
         ")"
     ],
     "LAND2122": [
@@ -12196,14 +12409,15 @@
     ],
     "LAND2142": [
         "(",
-        "(LAND1141",
+        "(",
+        "LAND1141",
         "||",
-        "BENV1010)",
+        "BENV1010",
+        ")",
         ")"
     ],
     "LAND2151": [
         "(",
-        "",
         ")"
     ],
     "LAND2152": [
@@ -12225,7 +12439,6 @@
     ],
     "LAND2251": [
         "(",
-        "",
         ")"
     ],
     "LAND2271": [
@@ -12331,30 +12544,48 @@
     ],
     "LAWS1075": [
         "(",
-        "Principles of Private LAWS (any one of LAWS1071",
+        "Principles of Private LAWS",
+        "(",
+        "any one of LAWS1071",
         "||",
         "LAWS1150",
         "||",
         "JURD7150",
         "||",
-        "JURD7171)",
+        "JURD7171",
+        ")",
         ")"
     ],
     "LAWS1091": [
         "(",
-        "Principles of Private LAWS ((LAWS1150",
+        "Principles of Private LAWS",
+        "(",
+        "(",
+        "LAWS1150",
         "||",
-        "JURD7150))",
+        "JURD7150",
+        ")",
+        ")",
         "||",
-        "Contracts ((LAWS1075",
+        "Contracts",
+        "(",
+        "(",
+        "LAWS1075",
         "||",
-        "JURD7175))",
+        "JURD7175",
+        ")",
+        ")",
         "&&",
         "Equity",
         "&&",
-        "Trusts ((LAWS2385",
+        "Trusts",
+        "(",
+        "(",
+        "LAWS2385",
         "||",
-        "JURD7285))",
+        "JURD7285",
+        ")",
+        ")",
         ")"
     ],
     "LAWS1121": [
@@ -12393,23 +12624,31 @@
     ],
     "LAWS1160": [
         "(",
-        "Principles of Public LAWS ((LAWS1141",
+        "Principles of Public LAWS",
+        "(",
+        "(",
+        "LAWS1141",
         "||",
-        "JURD7141))",
+        "JURD7141",
+        ")",
+        ")",
         "||",
-        "Public LAWS ((LAWS1140",
+        "Public LAWS",
+        "(",
+        "(",
+        "LAWS1140",
         "||",
-        "JURD7140))",
+        "JURD7140",
+        ")",
+        ")",
         ")"
     ],
     "LAWS1213": [
         "(",
-        "",
         ")"
     ],
     "LAWS1214": [
         "(",
-        "",
         ")"
     ],
     "LAWS1230": [
@@ -12421,20 +12660,34 @@
     ],
     "LAWS2150": [
         "(",
-        "Principle of Public LAWS ((LAWS1141",
+        "Principle of Public LAWS",
+        "(",
+        "(",
+        "LAWS1141",
         "||",
-        "JURD7141))",
+        "JURD7141",
+        ")",
+        ")",
         "&&",
-        "Administrative LAWS ((LAWS1160",
+        "Administrative LAWS",
+        "(",
+        "(",
+        "LAWS1160",
         "||",
-        "JURD7160))",
+        "JURD7160",
+        ")",
+        ")",
         ")"
     ],
     "LAWS2270": [
         "(",
         "78UOC in LAWS courses including Equity",
         "&&",
-        "Trusts (LAWS2385). This course is open ONLY to the students who commenced their program from 2013",
+        "Trusts",
+        "(",
+        "LAWS2385",
+        ")",
+        ". This course is open ONLY to the students who commenced their program from 2013",
         ")"
     ],
     "LAWS2320": [
@@ -12455,41 +12708,76 @@
         "(",
         "Crime",
         "&&",
-        "Criminal Process ((LAWS1021",
+        "Criminal Process",
+        "(",
+        "(",
+        "LAWS1021",
         "||",
-        "JURD7121))",
+        "JURD7121",
+        ")",
+        ")",
         "&&",
-        "Criminal LAWSs ((LAWS1022",
+        "Criminal LAWSs",
+        "(",
+        "(",
+        "LAWS1022",
         "||",
-        "JURD7122))",
+        "JURD7122",
+        ")",
+        ")",
         ")"
     ],
     "LAWS2371": [
         "(",
-        "Principles of Private LAWS ((LAWS1150",
+        "Principles of Private LAWS",
+        "(",
+        "(",
+        "LAWS1150",
         "||",
-        "JURD7150))",
+        "JURD7150",
+        ")",
+        ")",
         "&&",
-        "Contracts ((LAWS1075",
+        "Contracts",
+        "(",
+        "(",
+        "LAWS1075",
         "||",
-        "JURD7175))",
+        "JURD7175",
+        ")",
+        ")",
         ")"
     ],
     "LAWS2383": [
         "(",
-        "Principles of Private LAWS ((LAWS1150",
+        "Principles of Private LAWS",
+        "(",
+        "(",
+        "LAWS1150",
         "||",
-        "JURD7150))",
+        "JURD7150",
+        ")",
+        ")",
         "||",
-        "Contracts ((LAWS1075",
+        "Contracts",
+        "(",
+        "(",
+        "LAWS1075",
         "||",
-        "JURD7175))",
+        "JURD7175",
+        ")",
+        ")",
         "&&",
         "Equity",
         "&&",
-        "Trusts ((LAWS2385",
+        "Trusts",
+        "(",
+        "(",
+        "LAWS2385",
         "||",
-        "JURD7285))",
+        "JURD7285",
+        ")",
+        ")",
         ")"
     ],
     "LAWS2384": [
@@ -12501,13 +12789,23 @@
     ],
     "LAWS2385": [
         "(",
-        "Principles of Private LAWS ((LAWS1150",
+        "Principles of Private LAWS",
+        "(",
+        "(",
+        "LAWS1150",
         "||",
-        "JURD7150))",
+        "JURD7150",
+        ")",
+        ")",
         "&&",
-        "Contracts ((LAWS1075",
+        "Contracts",
+        "(",
+        "(",
+        "LAWS1075",
         "||",
-        "JURD7175))",
+        "JURD7175",
+        ")",
+        ")",
         ")"
     ],
     "LAWS2820": [
@@ -12519,27 +12817,45 @@
     ],
     "LAWS3014": [
         "(",
-        "78UOC in LAWS courses including ZBUS Associations (LAWS1091)",
+        "78UOC in LAWS courses including ZBUS Associations",
+        "(",
+        "LAWS1091",
+        ")",
         ")"
     ],
     "LAWS3017": [
         "(",
-        "78UOC in LAWS courses including Legal Theory (LAWS2320)",
+        "78UOC in LAWS courses including Legal Theory",
+        "(",
+        "LAWS2320",
+        ")",
         "&&",
         "LAWS",
         "&&",
-        "Social Theory (LAWS2820)",
+        "Social Theory",
+        "(",
+        "LAWS2820",
+        ")",
         "||",
         "Theories of LAWS",
         "&&",
-        "Justice (LAWS2326)",
+        "Justice",
+        "(",
+        "LAWS2326",
+        ")",
         ")"
     ],
     "LAWS3018": [
         "(",
-        "78UOC in LAWS courses Co-requisite: ZBUS Associations (LAWS1091)",
+        "78UOC in LAWS courses Co-requisite: ZBUS Associations",
+        "(",
+        "LAWS1091",
+        ")",
         "&&",
-        "Land LAWS (LAWS2383)",
+        "Land LAWS",
+        "(",
+        "LAWS2383",
+        ")",
         ")"
     ],
     "LAWS3019": [
@@ -12549,21 +12865,30 @@
     ],
     "LAWS3021": [
         "(",
-        "78UOC in LAWS courses. Exclusion: (LAWS3046",
+        "78UOC in LAWS courses. Exclusion:",
+        "(",
+        "LAWS3046",
         "||",
-        "JURD7446)",
+        "JURD7446",
+        ")",
         "||",
-        "(LAWS3248",
+        "(",
+        "LAWS3248",
         "||",
-        "JURD7448)",
+        "JURD7448",
+        ")",
         "||",
-        "(LAWS3523",
+        "(",
+        "LAWS3523",
         "||",
-        "GENL2323)",
+        "GENL2323",
+        ")",
         "&&",
-        "(LAWS8017",
+        "(",
+        "LAWS8017",
         "||",
-        "JURD7617)",
+        "JURD7617",
+        ")",
         ")"
     ],
     "LAWS3022": [
@@ -12573,7 +12898,10 @@
     ],
     "LAWS3023": [
         "(",
-        "78UOC in LAWS courses including ZBUS Associations (LAWS1091)",
+        "78UOC in LAWS courses including ZBUS Associations",
+        "(",
+        "LAWS1091",
+        ")",
         ")"
     ],
     "LAWS3025": [
@@ -12593,33 +12921,53 @@
     ],
     "LAWS3046": [
         "(",
-        "78UOC in LAWS courses. Exclusion: (LAWS3021",
+        "78UOC in LAWS courses. Exclusion:",
+        "(",
+        "LAWS3021",
         "||",
-        "JURD7321)",
+        "JURD7321",
+        ")",
         "||",
-        "(LAWS3523",
+        "(",
+        "LAWS3523",
         "||",
-        "GENL2323)",
+        "GENL2323",
+        ")",
         "||",
-        "(LAWS8017",
+        "(",
+        "LAWS8017",
         "||",
-        "JURD7617)",
+        "JURD7617",
+        ")",
         ")"
     ],
     "LAWS3047": [
         "(",
-        "78UOC in LAWS courses. Co-requisite: Resolving Civil Disputes (LAWS2371)",
+        "78UOC in LAWS courses. Co-requisite: Resolving Civil Disputes",
+        "(",
+        "LAWS2371",
+        ")",
         ")"
     ],
     "LAWS3057": [
         "(",
-        "78UOC in LAWS courses. Co-requisite: Foundations of Intellectual Property LAWS ((LAWS3021",
+        "78UOC in LAWS courses. Co-requisite: Foundations of Intellectual Property LAWS",
+        "(",
+        "(",
+        "LAWS3021",
         "||",
-        "JURD7321))",
+        "JURD7321",
+        ")",
+        ")",
         "||",
-        "Intellectual Property LAWS ((LAWS8017",
+        "Intellectual Property LAWS",
+        "(",
+        "(",
+        "LAWS8017",
         "||",
-        "JURD7617))",
+        "JURD7617",
+        ")",
+        ")",
         ")"
     ],
     "LAWS3060": [
@@ -12628,11 +12976,20 @@
         "&&",
         "Ethics",
         "&&",
-        "Justice (LAWS1230)",
+        "Justice",
+        "(",
+        "LAWS1230",
+        ")",
         "&&",
-        "Resolving Civil Disputes (LAWS2371)",
+        "Resolving Civil Disputes",
+        "(",
+        "LAWS2371",
+        ")",
         "&&",
-        "Court Process, Evidence & Proof (LAWS2351)",
+        "Court Process, Evidence & Proof",
+        "(",
+        "LAWS2351",
+        ")",
         ")"
     ],
     "LAWS3064": [
@@ -12657,12 +13014,18 @@
     ],
     "LAWS3072": [
         "(",
-        "78UOC in LAWS courses including Resolving Civil Disputes (LAWS2371)",
+        "78UOC in LAWS courses including Resolving Civil Disputes",
+        "(",
+        "LAWS2371",
+        ")",
         ")"
     ],
     "LAWS3073": [
         "(",
-        "78UOC in LAWS courses including Land LAWS (LAWS2383)",
+        "78UOC in LAWS courses including Land LAWS",
+        "(",
+        "LAWS2383",
+        ")",
         ")"
     ],
     "LAWS3079": [
@@ -12702,7 +13065,10 @@
     ],
     "LAWS3115": [
         "(",
-        "78UOC in LAWS courses including Land LAWS (LAWS2383)",
+        "78UOC in LAWS courses including Land LAWS",
+        "(",
+        "LAWS2383",
+        ")",
         ")"
     ],
     "LAWS3123": [
@@ -12732,19 +13098,31 @@
     ],
     "LAWS3137": [
         "(",
-        "78UOC in LAWS courses. Co-requisite: Resolving Civil Disputes (LAWS2371)",
+        "78UOC in LAWS courses. Co-requisite: Resolving Civil Disputes",
+        "(",
+        "LAWS2371",
+        ")",
         ")"
     ],
     "LAWS3141": [
         "(",
-        "78UOC in LAWS courses including ZBUS Associations (LAWS1091)",
+        "78UOC in LAWS courses including ZBUS Associations",
+        "(",
+        "LAWS1091",
+        ")",
         "&&",
-        "Administrative LAWS (LAWS1160)",
+        "Administrative LAWS",
+        "(",
+        "LAWS1160",
+        ")",
         ")"
     ],
     "LAWS3142": [
         "(",
-        "78UOC in LAWS courses including Land LAWS (LAWS2383)",
+        "78UOC in LAWS courses including Land LAWS",
+        "(",
+        "LAWS2383",
+        ")",
         ")"
     ],
     "LAWS3144": [
@@ -12769,7 +13147,10 @@
     ],
     "LAWS3150": [
         "(",
-        "78UOC in LAWS courses including Federal Constitutional LAWS (LAWS2150)",
+        "78UOC in LAWS courses including Federal Constitutional LAWS",
+        "(",
+        "LAWS2150",
+        ")",
         ")"
     ],
     "LAWS3152": [
@@ -12779,12 +13160,19 @@
     ],
     "LAWS3155": [
         "(",
-        "78UOC in LAWS courses including ZBUS Associations (LAWS1091)",
+        "78UOC in LAWS courses including ZBUS Associations",
+        "(",
+        "LAWS1091",
+        ")",
         ")"
     ],
     "LAWS3157": [
         "(",
-        "78UOC in LAWS courses. Students enrolled after 2013 must have also completed LAWS in the Global Context (LAWS2270) before enrolling in this course",
+        "78UOC in LAWS courses. Students enrolled after 2013 must have also completed LAWS in the Global Context",
+        "(",
+        "LAWS2270",
+        ")",
+        "before enrolling in this course",
         ")"
     ],
     "LAWS3159": [
@@ -12804,17 +13192,27 @@
     ],
     "LAWS3170": [
         "(",
-        "78UOC in LAWS courses including Resolving Civil Disputes (LAWS2371)",
+        "78UOC in LAWS courses including Resolving Civil Disputes",
+        "(",
+        "LAWS2371",
+        ")",
         "&&",
         "LAWSyers",
         "&&",
         "Ethics",
         "&&",
-        "Justice (LAWS1230) Co-requisite: Court Process",
+        "Justice",
+        "(",
+        "LAWS1230",
+        ")",
+        "Co-requisite: Court Process",
         "&&",
         "Evidence",
         "&&",
-        "Proof (LAWS2351)",
+        "Proof",
+        "(",
+        "LAWS2351",
+        ")",
         ")"
     ],
     "LAWS3181": [
@@ -12854,12 +13252,18 @@
     ],
     "LAWS3192": [
         "(",
-        "78UOC in LAWS courses including ZBUS Associations (LAWS1091)",
+        "78UOC in LAWS courses including ZBUS Associations",
+        "(",
+        "LAWS1091",
+        ")",
         ")"
     ],
     "LAWS3195": [
         "(",
-        "78UOC in LAWS courses. Co-requisite: Federal Constitutional LAWS (LAWS2150)",
+        "78UOC in LAWS courses. Co-requisite: Federal Constitutional LAWS",
+        "(",
+        "LAWS2150",
+        ")",
         ")"
     ],
     "LAWS3196": [
@@ -12903,22 +13307,32 @@
         "&&",
         "Ethics",
         "&&",
-        "Justice (LAWS1230)",
+        "Justice",
+        "(",
+        "LAWS1230",
+        ")",
         ")"
     ],
     "LAWS3248": [
         "(",
-        "78UOC in LAWS courses. Exclusion: (LAWS3021",
+        "78UOC in LAWS courses. Exclusion:",
+        "(",
+        "LAWS3021",
         "||",
-        "JURD7321)",
+        "JURD7321",
+        ")",
         "||",
-        "(LAWS3523",
+        "(",
+        "LAWS3523",
         "||",
-        "GENL2323)",
+        "GENL2323",
+        ")",
         "||",
-        "(LAWS8017",
+        "(",
+        "LAWS8017",
         "||",
-        "JURD7617)",
+        "JURD7617",
+        ")",
         ")"
     ],
     "LAWS3251": [
@@ -12928,22 +13342,38 @@
     ],
     "LAWS3272": [
         "(",
-        "78UOC in LAWS courses including Federal Constitutional LAWS (LAWS2150)",
+        "78UOC in LAWS courses including Federal Constitutional LAWS",
+        "(",
+        "LAWS2150",
+        ")",
         ")"
     ],
     "LAWS3276": [
         "(",
-        "78UOC in LAWS courses including Federal Constitutional LAWS (LAWS2150)",
+        "78UOC in LAWS courses including Federal Constitutional LAWS",
+        "(",
+        "LAWS2150",
+        ")",
         ")"
     ],
     "LAWS3281": [
         "(",
-        "78UOC in LAWS courses including Administrative LAWS (LAWS1160). Co-requisite: Resolving Civil Disputes (LAWS2371)",
+        "78UOC in LAWS courses including Administrative LAWS",
+        "(",
+        "LAWS1160",
+        ")",
+        ". Co-requisite: Resolving Civil Disputes",
+        "(",
+        "LAWS2371",
+        ")",
         ")"
     ],
     "LAWS3282": [
         "(",
-        "78UOC in LAWS courses including Administrative LAWS (LAWS1160)",
+        "78UOC in LAWS courses including Administrative LAWS",
+        "(",
+        "LAWS1160",
+        ")",
         ")"
     ],
     "LAWS3292": [
@@ -12958,11 +13388,17 @@
     ],
     "LAWS3302": [
         "(",
-        "78UOC in LAWS courses including Administrative LAWS (LAWS1160)",
+        "78UOC in LAWS courses including Administrative LAWS",
+        "(",
+        "LAWS1160",
+        ")",
         "&&",
         "Equity",
         "&&",
-        "Trusts (LAWS2385)",
+        "Trusts",
+        "(",
+        "LAWS2385",
+        ")",
         ")"
     ],
     "LAWS3303": [
@@ -12971,9 +13407,15 @@
         "&&",
         "Ethics",
         "&&",
-        "Justice (LAWS1230/1210)",
+        "Justice",
+        "(",
+        "LAWS1230/1210",
+        ")",
         "&&",
-        "Resolving Civil Disputes (LAWS2371/2311)",
+        "Resolving Civil Disputes",
+        "(",
+        "LAWS2371/2311",
+        ")",
         ")"
     ],
     "LAWS3304": [
@@ -12982,9 +13424,15 @@
         "&&",
         "Ethics",
         "&&",
-        "Justice (LAWS1230/1210)",
+        "Justice",
+        "(",
+        "LAWS1230/1210",
+        ")",
         "&&",
-        "Resolving Civil Disputes (LAWS2371/2311)",
+        "Resolving Civil Disputes",
+        "(",
+        "LAWS2371/2311",
+        ")",
         ")"
     ],
     "LAWS3305": [
@@ -12993,9 +13441,15 @@
         "&&",
         "Ethics",
         "&&",
-        "Justice (LAWS1230/1210)",
+        "Justice",
+        "(",
+        "LAWS1230/1210",
+        ")",
         "&&",
-        "Resolving Civil Disputes (LAWS2371/2311)",
+        "Resolving Civil Disputes",
+        "(",
+        "LAWS2371/2311",
+        ")",
         ")"
     ],
     "LAWS3309": [
@@ -13004,14 +13458,23 @@
         "&&",
         "Ethics",
         "&&",
-        "Justice (LAWS1230/1210)",
+        "Justice",
+        "(",
+        "LAWS1230/1210",
+        ")",
         "&&",
-        "Resolving Civil Disputes (LAWS2371/2311)",
+        "Resolving Civil Disputes",
+        "(",
+        "LAWS2371/2311",
+        ")",
         ")"
     ],
     "LAWS3314": [
         "(",
-        "78UOC in LAWS courses including Resolving Civil Disputes (LAWS2371)",
+        "78UOC in LAWS courses including Resolving Civil Disputes",
+        "(",
+        "LAWS2371",
+        ")",
         ")"
     ],
     "LAWS3316": [
@@ -13146,7 +13609,11 @@
     ],
     "LAWS3381": [
         "(",
-        "78UOC in LAWS courses. Students enrolled after 2013 must have also completed LAWS in the Global Context (LAWS2270) before enrolling in this course",
+        "78UOC in LAWS courses. Students enrolled after 2013 must have also completed LAWS in the Global Context",
+        "(",
+        "LAWS2270",
+        ")",
+        "before enrolling in this course",
         ")"
     ],
     "LAWS3382": [
@@ -13176,7 +13643,10 @@
     ],
     "LAWS3393": [
         "(",
-        "78UOC in LAWS courses including Land LAWS (LAWS2383)",
+        "78UOC in LAWS courses including Land LAWS",
+        "(",
+        "LAWS2383",
+        ")",
         ")"
     ],
     "LAWS3395": [
@@ -13186,7 +13656,10 @@
     ],
     "LAWS3396": [
         "(",
-        "Family LAWS (LAWS3391)",
+        "Family LAWS",
+        "(",
+        "LAWS3391",
+        ")",
         "&&",
         "78UOC in LAWS courses",
         ")"
@@ -13316,7 +13789,10 @@
     ],
     "LAWS3589": [
         "(",
-        "78UOC in LAWS courses including Resolving Civil Disputes (LAWS2371)",
+        "78UOC in LAWS courses including Resolving Civil Disputes",
+        "(",
+        "LAWS2371",
+        ")",
         ")"
     ],
     "LAWS3623": [
@@ -13325,14 +13801,23 @@
         "&&",
         "Ethics",
         "&&",
-        "Justice (LAWS1230)",
+        "Justice",
+        "(",
+        "LAWS1230",
+        ")",
         ")"
     ],
     "LAWS3713": [
         "(",
-        "78UOC in LAWS courses including LAWS in the Global Context (LAWS2270)",
+        "78UOC in LAWS courses including LAWS in the Global Context",
+        "(",
+        "LAWS2270",
+        ")",
         "||",
-        "Public International LAWS (LAWS3381)",
+        "Public International LAWS",
+        "(",
+        "LAWS3381",
+        ")",
         ")"
     ],
     "LAWS3751": [
@@ -13357,23 +13842,29 @@
     ],
     "LAWS3901": [
         "(",
-        "This course is strictly for students undertaking LAWS (Honours) programs only",
+        "This course is strictly for students undertaking LAWS",
+        "(",
+        "Honours",
+        ")",
+        "programs only",
         ")"
     ],
     "LAWS9801": [
         "(",
-        "Academic Program must be Environmental Science program (3988",
+        "Academic Program must be Environmental Science program",
+        "(",
+        "3988",
         "||",
         "3932",
         "||",
         "3965",
         "||",
-        "3943)",
+        "3943",
+        ")",
         ")"
     ],
     "MANF3100": [
         "(",
-        "",
         ")"
     ],
     "MANF3510": [
@@ -13394,18 +13885,21 @@
     ],
     "MANF4020": [
         "(",
-        "",
         ")"
     ],
     "MANF4100": [
         "(",
-        "(ENGG1000",
+        "(",
+        "ENGG1000",
         "||",
-        "DPST1071)",
+        "DPST1071",
+        ")",
         "&&",
-        "(MMAN1130",
+        "(",
+        "MMAN1130",
         "||",
-        "MMAN2130)",
+        "MMAN2130",
+        ")",
         ")"
     ],
     "MANF4150": [
@@ -13427,22 +13921,18 @@
     ],
     "MANF6860": [
         "(",
-        "",
         ")"
     ],
     "MARK1012": [
         "(",
-        "",
         ")"
     ],
     "MARK1014": [
         "(",
-        "",
         ")"
     ],
     "MARK2012": [
         "(",
-        "",
         ")"
     ],
     "MARK2051": [
@@ -13515,26 +14005,35 @@
     ],
     "MARK3082": [
         "(",
-        "(MARK1012",
+        "(",
+        "MARK1012",
         "||",
-        "MARK2012)",
+        "MARK2012",
+        ")",
         "&&",
-        "(MARK2051",
+        "(",
+        "MARK2051",
         "||",
-        "MARK2151)",
+        "MARK2151",
+        ")",
         "&&",
         "MARK2052",
         ")"
     ],
     "MARK3085": [
         "(",
-        "(MARK1012",
+        "(",
+        "MARK1012",
         "||",
-        "MARK2012)",
+        "MARK2012",
+        ")",
         "||",
-        "(ECON1203",
+        "(",
+        "ECON1203",
         "||",
-        "COMM1110). If students can demonstrate they have equivalent statistics knowledge, but haven't completed any of the listed courses, they can seek permission from Program Coordinator by submitting an online form",
+        "COMM1110",
+        ")",
+        ". If students can demonstrate they have equivalent statistics knowledge, but haven't completed any of the listed courses, they can seek permission from Program Coordinator by submitting an online form",
         ")"
     ],
     "MARK3087": [
@@ -13662,22 +14161,18 @@
     ],
     "MARK4214": [
         "(",
-        "",
         ")"
     ],
     "MARK4300": [
         "(",
-        "",
         ")"
     ],
     "MARK4301": [
         "(",
-        "",
         ")"
     ],
     "MARK4302": [
         "(",
-        "",
         ")"
     ],
     "MATH1011": [
@@ -13701,7 +14196,6 @@
     ],
     "MATH1031": [
         "(",
-        "",
         ")"
     ],
     "MATH1041": [
@@ -13729,17 +14223,14 @@
     ],
     "MATH1131": [
         "(",
-        "",
         ")"
     ],
     "MATH1141": [
         "(",
-        "",
         ")"
     ],
     "MATH1151": [
         "(",
-        "",
         ")"
     ],
     "MATH1231": [
@@ -14074,7 +14565,9 @@
     ],
     "MATH3101": [
         "(",
-        "12UOC in L2 Math courses including (MATH2011",
+        "12UOC in L2 Math courses including",
+        "(",
+        "MATH2011",
         "||",
         "MATH2111",
         "&&",
@@ -14084,46 +14577,52 @@
         "||",
         "MATH2121",
         "||",
-        "MATH2221)",
+        "MATH2221",
+        ")",
         "||",
-        "",
         "(",
         "75GRADE in MATH2019",
         "&&",
-        "MATH2089)",
+        "MATH2089",
+        ")",
         "||",
-        "",
         "(",
         "65GRADE in MATH2069",
         "&&",
-        "MATH2099)",
+        "MATH2099",
+        ")",
         ")"
     ],
     "MATH3121": [
         "(",
-        "12UOC in L2 Math courses including (MATH2011",
+        "12UOC in L2 Math courses including",
+        "(",
+        "MATH2011",
         "||",
-        "MATH2111)",
+        "MATH2111",
+        ")",
         "&&",
-        "(MATH2120",
+        "(",
+        "MATH2120",
         "||",
         "MATH2130",
         "||",
         "MATH2121",
         "||",
-        "MATH2221)",
+        "MATH2221",
+        ")",
         "||",
-        "",
         "(",
         "75GRADE in MATH2019",
         "&&",
-        "MATH2089)",
+        "MATH2089",
+        ")",
         "||",
-        "",
         "(",
         "75GRADE in MATH2069",
         "&&",
-        "MATH2099)",
+        "MATH2099",
+        ")",
         ")"
     ],
     "MATH3161": [
@@ -14149,36 +14648,58 @@
     ],
     "MATH3171": [
         "(",
-        "(1) (MATH2011",
+        "(",
+        "1",
+        ")",
+        "(",
+        "MATH2011",
         "||",
-        "MATH2111)",
+        "MATH2111",
+        ")",
         "&&",
-        "(MATH2501",
+        "(",
+        "MATH2501",
         "||",
-        "MATH2601);",
+        "MATH2601",
+        ")",
+        ";",
         "||",
-        "(2) 65GRADE in MATH2069",
+        "(",
+        "2",
+        ")",
+        "65GRADE in MATH2069",
         "&&",
         "MATH2099 ;",
         "||",
-        "(3) (MATH2018",
+        "(",
+        "3",
+        ")",
+        "(",
+        "MATH2018",
         "||",
-        "MATH2019) (DN)",
+        "MATH2019",
+        ")",
+        "(",
+        "DN",
+        ")",
         "&&",
         "MATH2089",
         ")"
     ],
     "MATH3201": [
         "(",
-        "(MATH2501",
+        "(",
+        "MATH2501",
         "||",
         "MATH2601",
         "||",
         "MATH2089",
         "||",
-        "MATH2099)",
+        "MATH2099",
+        ")",
         "&&",
-        "(MATH2011",
+        "(",
+        "MATH2011",
         "||",
         "MATH2111",
         "||",
@@ -14190,39 +14711,46 @@
         "||",
         "MATH2121",
         "||",
-        "MATH2221)",
+        "MATH2221",
+        ")",
         ")"
     ],
     "MATH3261": [
         "(",
-        "12UOC in L2 Math courses including (MATH2011",
+        "12UOC in L2 Math courses including",
+        "(",
+        "MATH2011",
         "||",
-        "MATH2111)",
+        "MATH2111",
+        ")",
         "&&",
-        "(MATH2120",
+        "(",
+        "MATH2120",
         "||",
         "MATH2130",
         "||",
         "MATH2121",
         "||",
-        "MATH2221)",
+        "MATH2221",
+        ")",
         "||",
-        "",
         "(",
         "75GRADE in MATH2019",
         "&&",
-        "MATH2089)",
+        "MATH2089",
+        ")",
         "||",
-        "",
         "(",
         "75GRADE in MATH2069",
         "&&",
-        "MATH2099)",
+        "MATH2099",
+        ")",
         ")"
     ],
     "MATH3311": [
         "(",
-        "(MATH2120",
+        "(",
+        "MATH2120",
         "||",
         "MATH2130",
         "||",
@@ -14230,17 +14758,22 @@
         "||",
         "MATH2221",
         "||",
-        "MATH2111)",
+        "MATH2111",
+        ")",
         "&&",
-        "(MATH2501",
+        "(",
+        "MATH2501",
         "||",
-        "MATH2601)",
+        "MATH2601",
+        ")",
         "&&",
-        "(MATH2801",
+        "(",
+        "MATH2801",
         "||",
         "MATH2901",
         "||",
-        "MATH2871)",
+        "MATH2871",
+        ")",
         ")"
     ],
     "MATH3361": [
@@ -14447,13 +14980,16 @@
     ],
     "MATH6781": [
         "(",
-        "12UOC in L2 MATH courses including (MATH2120",
+        "12UOC in L2 MATH courses including",
+        "(",
+        "MATH2120",
         "||",
         "MATH2130",
         "||",
         "MATH2121",
         "||",
-        "MATH2221)",
+        "MATH2221",
+        ")",
         "||",
         "MATH2019",
         "&&",
@@ -14466,17 +15002,14 @@
     ],
     "MATS1101": [
         "(",
-        "",
         ")"
     ],
     "MATS1110": [
         "(",
-        "",
         ")"
     ],
     "MATS1192": [
         "(",
-        "",
         ")"
     ],
     "MATS2001": [
@@ -14510,7 +15043,6 @@
     ],
     "MATS2003": [
         "(",
-        "",
         ")"
     ],
     "MATS2004": [
@@ -14524,17 +15056,14 @@
     ],
     "MATS2005": [
         "(",
-        "",
         ")"
     ],
     "MATS2006": [
         "(",
-        "",
         ")"
     ],
     "MATS2007": [
         "(",
-        "",
         ")"
     ],
     "MATS2008": [
@@ -14566,12 +15095,10 @@
     ],
     "MATS3003": [
         "(",
-        "",
         ")"
     ],
     "MATS3004": [
         "(",
-        "",
         ")"
     ],
     "MATS3005": [
@@ -14585,17 +15112,14 @@
     ],
     "MATS3006": [
         "(",
-        "",
         ")"
     ],
     "MATS3007": [
         "(",
-        "",
         ")"
     ],
     "MATS4001": [
         "(",
-        "",
         ")"
     ],
     "MATS4002": [
@@ -14610,12 +15134,10 @@
     ],
     "MATS4004": [
         "(",
-        "",
         ")"
     ],
     "MATS4005": [
         "(",
-        "",
         ")"
     ],
     "MATS4006": [
@@ -14625,7 +15147,6 @@
     ],
     "MATS4007": [
         "(",
-        "",
         ")"
     ],
     "MATS4008": [
@@ -14682,12 +15203,10 @@
     ],
     "MATS5001": [
         "(",
-        "",
         ")"
     ],
     "MATS5002": [
         "(",
-        "",
         ")"
     ],
     "MATS5003": [
@@ -14697,22 +15216,18 @@
     ],
     "MATS6006": [
         "(",
-        "",
         ")"
     ],
     "MATS6007": [
         "(",
-        "",
         ")"
     ],
     "MDCN8001": [
         "(",
-        "",
         ")"
     ],
     "MDCN8002": [
         "(",
-        "",
         ")"
     ],
     "MDIA1000": [
@@ -14859,7 +15374,11 @@
         "&&",
         "enrolment in a single",
         "||",
-        "double degree Bachelor of MDIA (PR & Advertising) program",
+        "double degree Bachelor of MDIA",
+        "(",
+        "PR & Advertising",
+        ")",
+        "program",
         ")"
     ],
     "MDIA2013": [
@@ -14872,7 +15391,10 @@
         "||",
         "MDIA1004 News Fundamentals",
         "||",
-        "(with course convenor approval) at least 6UOC of an audio-visual media production",
+        "(",
+        "with course convenor approval",
+        ")",
+        "at least 6UOC of an audio-visual media production",
         "||",
         "feature writing course",
         ")"
@@ -14901,9 +15423,16 @@
         "&&",
         "including 6UOC L2 MDIA core courses",
         "&&",
-        "enrolment in a MDIA (Communication & Journalism)",
+        "enrolment in a MDIA",
+        "(",
+        "Communication & Journalism",
+        ")",
         "||",
-        "MDIA (PR & Advertising) program",
+        "MDIA",
+        "(",
+        "PR & Advertising",
+        ")",
+        "program",
         ")"
     ],
     "MDIA3004": [
@@ -15020,20 +15549,26 @@
     ],
     "MECH3110": [
         "(",
-        "(MMAN2400",
+        "(",
+        "MMAN2400",
         "||",
-        "ENGG2400)",
+        "ENGG2400",
+        ")",
         "&&",
-        "(MMAN2100",
+        "(",
+        "MMAN2100",
         "||",
-        "DESN2000)",
+        "DESN2000",
+        ")",
         ")"
     ],
     "MECH3610": [
         "(",
-        "(ENGG2500",
+        "(",
+        "ENGG2500",
         "||",
-        "MMAN2600)",
+        "MMAN2600",
+        ")",
         "&&",
         "MMAN2700",
         ")"
@@ -15045,40 +15580,52 @@
     ],
     "MECH4305": [
         "(",
-        "(MATH2019",
+        "(",
+        "MATH2019",
         "||",
-        "MATH2018)",
+        "MATH2018",
+        ")",
         "&&",
-        "(MMAN3300",
+        "(",
+        "MMAN3300",
         "||",
-        "MMAN2300)",
+        "MMAN2300",
+        ")",
         ")"
     ],
     "MECH4320": [
         "(",
-        "(MATH2019",
+        "(",
+        "MATH2019",
         "||",
-        "MATH2018)",
+        "MATH2018",
+        ")",
         "&&",
-        "(MMAN3300",
+        "(",
+        "MMAN3300",
         "||",
-        "MMAN2300)",
+        "MMAN2300",
+        ")",
         ")"
     ],
     "MECH4620": [
         "(",
-        "(ENGG2500",
+        "(",
+        "ENGG2500",
         "||",
-        "MMAN2600)",
+        "MMAN2600",
+        ")",
         "&&",
         "MMAN2700",
         ")"
     ],
     "MECH4880": [
         "(",
-        "(ENGG2500",
+        "(",
+        "ENGG2500",
         "||",
-        "MMAN2600)",
+        "MMAN2600",
+        ")",
         "&&",
         "MMAN2700",
         ")"
@@ -15092,7 +15639,6 @@
     ],
     "MECH9223": [
         "(",
-        "",
         ")"
     ],
     "MECH9325": [
@@ -15118,7 +15664,6 @@
     ],
     "MECH9660": [
         "(",
-        "",
         ")"
     ],
     "MECH9720": [
@@ -15128,21 +15673,21 @@
     ],
     "MECH9761": [
         "(",
-        "",
         ")"
     ],
     "MECH9910": [
         "(",
-        "",
         ")"
     ],
     "MERE4951": [
         "(",
         "126UOC",
         "&&",
-        "(MINE3430",
+        "(",
+        "MINE3430",
         "||",
-        "PTRL3030)",
+        "PTRL3030",
+        ")",
         ")"
     ],
     "MERE4952": [
@@ -15157,72 +15702,58 @@
     ],
     "MFAC1501": [
         "(",
-        "",
         ")"
     ],
     "MFAC1521": [
         "(",
-        "",
         ")"
     ],
     "MFAC1522": [
         "(",
-        "",
         ")"
     ],
     "MFAC1523": [
         "(",
-        "",
         ")"
     ],
     "MFAC1524": [
         "(",
-        "",
         ")"
     ],
     "MFAC1525": [
         "(",
-        "",
         ")"
     ],
     "MFAC1526": [
         "(",
-        "",
         ")"
     ],
     "MFAC1527": [
         "(",
-        "",
         ")"
     ],
     "MFAC1601": [
         "(",
-        "",
         ")"
     ],
     "MFAC2505": [
         "(",
-        "",
         ")"
     ],
     "MFAC2506": [
         "(",
-        "",
         ")"
     ],
     "MFAC2507": [
         "(",
-        "",
         ")"
     ],
     "MFAC2509": [
         "(",
-        "",
         ")"
     ],
     "MFAC2510": [
         "(",
-        "",
         ")"
     ],
     "MFAC2511": [
@@ -15237,82 +15768,66 @@
     ],
     "MFAC2514": [
         "(",
-        "",
         ")"
     ],
     "MFAC2515": [
         "(",
-        "",
         ")"
     ],
     "MFAC2516": [
         "(",
-        "",
         ")"
     ],
     "MFAC3501": [
         "(",
-        "",
         ")"
     ],
     "MFAC3502": [
         "(",
-        "",
         ")"
     ],
     "MFAC3503": [
         "(",
-        "",
         ")"
     ],
     "MFAC3504": [
         "(",
-        "",
         ")"
     ],
     "MFAC3505": [
         "(",
-        "",
         ")"
     ],
     "MFAC3506": [
         "(",
-        "",
         ")"
     ],
     "MFAC3507": [
         "(",
-        "",
         ")"
     ],
     "MFAC3508": [
         "(",
-        "",
         ")"
     ],
     "MFAC3509": [
         "(",
-        "",
         ")"
     ],
     "MFAC3510": [
         "(",
-        "",
         ")"
     ],
     "MFAC3512": [
         "(",
-        "",
         ")"
     ],
     "MFAC3514": [
         "(",
-        "",
         ")"
     ],
     "MFAC3515": [
         "(",
-        "",
         ")"
     ],
     "MFAC3522": [
@@ -15327,27 +15842,22 @@
     ],
     "MFAC4501": [
         "(",
-        "",
         ")"
     ],
     "MFAC4508": [
         "(",
-        "",
         ")"
     ],
     "MFAC4509": [
         "(",
-        "",
         ")"
     ],
     "MFAC4888": [
         "(",
-        "",
         ")"
     ],
     "MGMT1001": [
         "(",
-        "",
         ")"
     ],
     "MGMT1002": [
@@ -15369,17 +15879,14 @@
     ],
     "MGMT2002": [
         "(",
-        "",
         ")"
     ],
     "MGMT2010": [
         "(",
-        "",
         ")"
     ],
     "MGMT2101": [
         "(",
-        "",
         "||",
         "corequisite:MGMT1101or COMM1150 Excluded: IBUS2107",
         ")"
@@ -15391,32 +15898,30 @@
     ],
     "MGMT2106": [
         "(",
-        "",
         ")"
     ],
     "MGMT2705": [
         "(",
-        "",
         ")"
     ],
     "MGMT2718": [
         "(",
-        "Any first year MGMT course (e.g., MGMT1001, MGMT1002, MGMT1101)",
+        "Any first year MGMT course",
+        "(",
+        "e.g., MGMT1001, MGMT1002, MGMT1101",
+        ")",
         ")"
     ],
     "MGMT2721": [
         "(",
-        "",
         ")"
     ],
     "MGMT2725": [
         "(",
-        "",
         ")"
     ],
     "MGMT2726": [
         "(",
-        "",
         ")"
     ],
     "MGMT3001": [
@@ -15442,7 +15947,18 @@
         "(",
         "MGMT2102",
         "&&",
-        "72UOC (if you are enrolled the COMM International (program 3558), completion of the COMM Overseas Program (Exchange) is also required)",
+        "72UOC",
+        "(",
+        "if you are enrolled the COMM International",
+        "(",
+        "program 3558",
+        ")",
+        ", completion of the COMM Overseas Program",
+        "(",
+        "Exchange",
+        ")",
+        "is also required",
+        ")",
         ")"
     ],
     "MGMT3701": [
@@ -15459,12 +15975,10 @@
     ],
     "MGMT3708": [
         "(",
-        "",
         ")"
     ],
     "MGMT3721": [
         "(",
-        "",
         ")"
     ],
     "MGMT3724": [
@@ -15474,7 +15988,10 @@
     ],
     "MGMT3728": [
         "(",
-        "Any first year MGMT course (e.g., MGMT1001, MGMT1002, MGMT1101)",
+        "Any first year MGMT course",
+        "(",
+        "e.g., MGMT1001, MGMT1002, MGMT1101",
+        ")",
         ")"
     ],
     "MGMT3729": [
@@ -15490,11 +16007,14 @@
         "||",
         "MGMT2102",
         "||",
-        "any ZBUS Analytics Modelling I course (ECON2206",
+        "any ZBUS Analytics Modelling I course",
+        "(",
+        "ECON2206",
         "||",
         "ECON2209",
         "||",
-        "RISK2002)",
+        "RISK2002",
+        ")",
         ")"
     ],
     "MGMT4101": [
@@ -15564,25 +16084,27 @@
         "(",
         "12UOC from MICR2011",
         "||",
-        "(BIOS2021",
+        "(",
+        "BIOS2021",
         "||",
-        "BABS2204)",
+        "BABS2204",
+        ")",
         "||",
-        "(BIOS2621",
+        "(",
+        "BIOS2621",
         "||",
-        "BABS2264)",
+        "BABS2264",
+        ")",
         "||",
         "BIOC2201",
         ")"
     ],
     "MICR4013": [
         "(",
-        "",
         ")"
     ],
     "MINE1010": [
         "(",
-        "",
         ")"
     ],
     "MINE2010": [
@@ -15592,7 +16114,6 @@
     ],
     "MINE2610": [
         "(",
-        "",
         ")"
     ],
     "MINE2810": [
@@ -15606,7 +16127,6 @@
     ],
     "MINE3000": [
         "(",
-        "",
         ")"
     ],
     "MINE3220": [
@@ -15669,7 +16189,6 @@
     ],
     "MINE3800": [
         "(",
-        "",
         ")"
     ],
     "MINE3910": [
@@ -15724,7 +16243,6 @@
     ],
     "MINE4820": [
         "(",
-        "",
         ")"
     ],
     "MINE4910": [
@@ -15734,17 +16252,14 @@
     ],
     "MMAN1130": [
         "(",
-        "",
         ")"
     ],
     "MMAN1300": [
         "(",
-        "",
         ")"
     ],
     "MMAN2130": [
         "(",
-        "",
         ")"
     ],
     "MMAN2300": [
@@ -15753,7 +16268,8 @@
         "&&",
         "MECH3300",
         "&&",
-        "(CVEN1300",
+        "(",
+        "CVEN1300",
         "||",
         "MINE1300",
         "||",
@@ -15761,67 +16277,82 @@
         "||",
         "ENGG1300",
         "||",
-        "DPST1072)",
+        "DPST1072",
+        ")",
         "&&",
-        "(MATH2019",
+        "(",
+        "MATH2019",
         "||",
         "MATH2018",
         "||",
-        "(MATH2111",
+        "(",
+        "MATH2111",
         "&&",
-        "MATH2221)",
+        "MATH2221",
+        ")",
         "||",
-        "(MATH2011",
+        "(",
+        "MATH2011",
         "&&",
-        "MATH2121)",
+        "MATH2121",
+        ")",
         "||",
-        "(MATH2069",
+        "(",
+        "MATH2069",
         "&&",
-        "MATH2121))",
+        "MATH2121",
+        ")",
+        ")",
         ")"
     ],
     "MMAN2400": [
         "(",
-        "",
         ")"
     ],
     "MMAN2600": [
         "(",
-        "(MATH1131",
+        "(",
+        "MATH1131",
         "||",
         "DPST1013",
         "||",
-        "MATH1141)",
+        "MATH1141",
+        ")",
         "&&",
-        "(PHYS1121",
+        "(",
+        "PHYS1121",
         "||",
         "PHYS1131",
         "||",
         "DPST1023",
         "||",
-        "PHYS1141)",
+        "PHYS1141",
+        ")",
         ")"
     ],
     "MMAN2700": [
         "(",
-        "(MATH1131",
+        "(",
+        "MATH1131",
         "||",
         "DPST1013",
         "||",
-        "MATH1141)",
+        "MATH1141",
+        ")",
         "&&",
-        "(PHYS1121",
+        "(",
+        "PHYS1121",
         "||",
         "PHYS1131",
         "||",
         "DPST1023",
         "||",
-        "PHYS1141)",
+        "PHYS1141",
+        ")",
         ")"
     ],
     "MMAN3000": [
         "(",
-        "",
         ")"
     ],
     "MMAN3200": [
@@ -15830,24 +16361,31 @@
         "||",
         "MATH2018",
         "&&",
-        "(MMAN1300",
+        "(",
+        "MMAN1300",
         "||",
         "CVEN1300",
         "||",
         "ENGG1300",
         "||",
-        "DPST1072) Exclusion: MECH3211, MTRN3212",
+        "DPST1072",
+        ")",
+        "Exclusion: MECH3211, MTRN3212",
         ")"
     ],
     "MMAN3400": [
         "(",
-        "(MATH2019",
+        "(",
+        "MATH2019",
         "||",
-        "MATH2018)",
+        "MATH2018",
+        ")",
         "&&",
-        "(ENGG2400",
+        "(",
+        "ENGG2400",
         "||",
-        "MMAN2400)",
+        "MMAN2400",
+        ")",
         ")"
     ],
     "MMAN4010": [
@@ -15862,12 +16400,10 @@
     ],
     "MMAN4200": [
         "(",
-        "",
         ")"
     ],
     "MMAN4400": [
         "(",
-        "",
         ")"
     ],
     "MMAN4410": [
@@ -15886,12 +16422,18 @@
     ],
     "MMAN4952": [
         "(",
-        "Completion of Research Thesis A (4951)",
+        "Completion of Research Thesis A",
+        "(",
+        "4951",
+        ")",
         ")"
     ],
     "MMAN4953": [
         "(",
-        "Completion of Research Thesis B (4952)",
+        "Completion of Research Thesis B",
+        "(",
+        "4952",
+        ")",
         ")"
     ],
     "MSCI0501": [
@@ -15901,22 +16443,18 @@
     ],
     "MSCI1001": [
         "(",
-        "",
         ")"
     ],
     "MSCI2060": [
         "(",
-        "",
         ")"
     ],
     "MSCI3001": [
         "(",
-        "",
         ")"
     ],
     "MSCI6681": [
         "(",
-        "",
         ")"
     ],
     "MTRN2500": [
@@ -15942,9 +16480,11 @@
         "&&",
         "MTRN2500",
         "&&",
-        "(MMAN3200",
+        "(",
+        "MMAN3200",
         "||",
-        "ELEC3114)",
+        "ELEC3114",
+        ")",
         ")"
     ],
     "MTRN4030": [
@@ -15958,9 +16498,11 @@
         "&&",
         "ELEC1111",
         "&&",
-        "(MMAN3200",
+        "(",
+        "MMAN3200",
         "||",
-        "ELEC3114)",
+        "ELEC3114",
+        ")",
         ")"
     ],
     "MTRN4230": [
@@ -15969,9 +16511,11 @@
         "&&",
         "MMAN2300",
         "&&",
-        "(MMAN3200",
+        "(",
+        "MMAN3200",
         "||",
-        "ELEC3114)",
+        "ELEC3114",
+        ")",
         ")"
     ],
     "MTRN9400": [
@@ -15992,7 +16536,6 @@
     ],
     "MUSC1602": [
         "(",
-        "",
         ")"
     ],
     "MUSC1603": [
@@ -16002,7 +16545,6 @@
     ],
     "MUSC1604": [
         "(",
-        "",
         ")"
     ],
     "MUSC1707": [
@@ -16012,7 +16554,6 @@
     ],
     "MUSC1708": [
         "(",
-        "",
         ")"
     ],
     "MUSC2111": [
@@ -16071,7 +16612,10 @@
         "&&",
         "MUSC1705",
         "||",
-        "MUSC1707 (12UOC)",
+        "MUSC1707",
+        "(",
+        "12UOC",
+        ")",
         ")"
     ],
     "MUSC2801": [
@@ -16154,7 +16698,10 @@
         "(",
         "MUSC2702",
         "||",
-        "MUSC2703 (12UOC)",
+        "MUSC2703",
+        "(",
+        "12UOC",
+        ")",
         "&&",
         "enrolment in a MUSC program",
         ")"
@@ -16163,7 +16710,10 @@
         "(",
         "MUSC2702",
         "||",
-        "MUSC2703 (12UOC)",
+        "MUSC2703",
+        "(",
+        "12UOC",
+        ")",
         "&&",
         "enrolment in a MUSC Creative Practice",
         "||",
@@ -16219,7 +16769,11 @@
         "&&",
         "enrolment in a single",
         "||",
-        "double degree MDIA (S&SP) program",
+        "double degree MDIA",
+        "(",
+        "S&SP",
+        ")",
+        "program",
         ")"
     ],
     "MUSC3806": [
@@ -16234,7 +16788,11 @@
         "&&",
         "including MDIA1005",
         "&&",
-        "enrolment in MDIA (S&SP) single",
+        "enrolment in MDIA",
+        "(",
+        "S&SP",
+        ")",
+        "single",
         "||",
         "double degree",
         ")"
@@ -16257,52 +16815,81 @@
     ],
     "MUSC4009": [
         "(",
-        "Enrolment in program 4508 MUSC (Honours)",
+        "Enrolment in program 4508 MUSC",
+        "(",
+        "Honours",
+        ")",
         ")"
     ],
     "MUSC4010": [
         "(",
-        "Enrolment in program 4508 MUSC (Honours)",
+        "Enrolment in program 4508 MUSC",
+        "(",
+        "Honours",
+        ")",
         ")"
     ],
     "MUSC4011": [
         "(",
-        "Enrolment in program 4508 MUSC (Honours)",
+        "Enrolment in program 4508 MUSC",
+        "(",
+        "Honours",
+        ")",
         ")"
     ],
     "MUSC4013": [
         "(",
         "Enrolment in a single",
         "||",
-        "double MUSC (Honours) program",
+        "double MUSC",
+        "(",
+        "Honours",
+        ")",
+        "program",
         ")"
     ],
     "MUSC4014": [
         "(",
         "Enrolment in a single",
         "||",
-        "double MUSC (Honours) program",
+        "double MUSC",
+        "(",
+        "Honours",
+        ")",
+        "program",
         ")"
     ],
     "MUSC4015": [
         "(",
         "Enrolment in a single",
         "||",
-        "double MUSC (Honours) program",
+        "double MUSC",
+        "(",
+        "Honours",
+        ")",
+        "program",
         ")"
     ],
     "MUSC4016": [
         "(",
         "Enrolment in a single",
         "||",
-        "double MUSC (Honours) program",
+        "double MUSC",
+        "(",
+        "Honours",
+        ")",
+        "program",
         ")"
     ],
     "MUSC4017": [
         "(",
         "Enrolment in a single",
         "||",
-        "double MUSC (Honours) program",
+        "double MUSC",
+        "(",
+        "Honours",
+        ")",
+        "program",
         ")"
     ],
     "MUSC4101": [
@@ -16357,7 +16944,10 @@
         "(",
         "MUSC3704",
         "||",
-        "MUSC3706 (12UOC)",
+        "MUSC3706",
+        "(",
+        "12UOC",
+        ")",
         "&&",
         "enrolment in a MUSC Creative Practice stream in a MUSC program",
         ")"
@@ -16371,19 +16961,29 @@
     ],
     "NANO1001": [
         "(",
-        "Enrolment in the Bachelor of Science (NANO) (3617)",
+        "Enrolment in the Bachelor of Science",
+        "(",
+        "NANO",
+        ")",
+        "(",
+        "3617",
+        ")",
         "||",
-        "Nanoscience (Honours) (3618)",
+        "Nanoscience",
+        "(",
+        "Honours",
+        ")",
+        "(",
+        "3618",
+        ")",
         ")"
     ],
     "NANO2002": [
         "(",
-        "",
         ")"
     ],
     "NANO3001": [
         "(",
-        "",
         ")"
     ],
     "NANO3002": [
@@ -16400,19 +17000,20 @@
     ],
     "NANO4012": [
         "(",
-        "",
         ")"
     ],
     "NAVL4410": [
         "(",
-        "",
         ")"
     ],
     "NEUR2201": [
         "(",
         "36UOC",
         "||",
-        "which must include 12UOC of BABS / BIOS courses (or equivalent DPST courses)",
+        "which must include 12UOC of BABS / BIOS courses",
+        "(",
+        "or equivalent DPST courses",
+        ")",
         "||",
         "12UOC of PSYC courses",
         ")"
@@ -16516,9 +17117,12 @@
         "&&",
         "VISN2211",
         "&&",
-        "(OPTM2291",
+        "(",
+        "OPTM2291",
         "||",
-        "OPTM2211); Corequisite: VISN3111",
+        "OPTM2211",
+        ")",
+        "; Corequisite: VISN3111",
         ")"
     ],
     "OPTM3131": [
@@ -16769,7 +17373,6 @@
     ],
     "OPTM8514": [
         "(",
-        "",
         ")"
     ],
     "OPTM8521": [
@@ -16849,17 +17452,21 @@
     ],
     "PHAR2011": [
         "(",
-        "6UOC L1 Biology (BABS",
+        "6UOC L1 Biology",
+        "(",
+        "BABS",
         "||",
         "BIOS",
         ")",
-        "",
         "&&",
         "12UOC L1 CHEM",
         "&&",
         "6UOC L1 MATH",
         "&&",
-        "PHSL 1A (Note: Medicinal CHEM students may substitute BIOC2101 for PHSL 1A)",
+        "PHSL 1A",
+        "(",
+        "Note: Medicinal CHEM students may substitute BIOC2101 for PHSL 1A",
+        ")",
         "||",
         "equivalent DPST courses",
         ")"
@@ -16923,37 +17530,30 @@
     ],
     "PHCM2001": [
         "(",
-        "",
         ")"
     ],
     "PHCM2002": [
         "(",
-        "",
         ")"
     ],
     "PHCM2003": [
         "(",
-        "",
         ")"
     ],
     "PHCM2004": [
         "(",
-        "",
         ")"
     ],
     "PHCM2005": [
         "(",
-        "",
         ")"
     ],
     "PHCM2006": [
         "(",
-        "",
         ")"
     ],
     "PHCM2007": [
         "(",
-        "",
         ")"
     ],
     "PHCM2009": [
@@ -16963,12 +17563,15 @@
     ],
     "PHCM3001": [
         "(",
-        "",
         ")"
     ],
     "PHCM3003": [
         "(",
-        "It is recommended that the Public Health Capstone be undertaken by students who have completed the first 2 years (full-time equivalent) of the Bachelor of International Public Health",
+        "It is recommended that the Public Health Capstone be undertaken by students who have completed the first 2 years",
+        "(",
+        "full-time equivalent",
+        ")",
+        "of the Bachelor of International Public Health",
         "&&",
         "PHCM3007 Applied Public Health Practice",
         ")"
@@ -16980,12 +17583,15 @@
     ],
     "PHCM3006": [
         "(",
-        "",
         ")"
     ],
     "PHCM3007": [
         "(",
-        "It is recommended that Applied Public Health Practice be undertaken by students who have completed the first 2 years (full-time equivalent) of the Bachelor of International Public Health",
+        "It is recommended that Applied Public Health Practice be undertaken by students who have completed the first 2 years",
+        "(",
+        "full-time equivalent",
+        ")",
+        "of the Bachelor of International Public Health",
         ")"
     ],
     "PHCM3008": [
@@ -17011,7 +17617,6 @@
     ],
     "PHSL2121": [
         "(",
-        "",
         ")"
     ],
     "PHSL2201": [
@@ -17070,12 +17675,10 @@
     ],
     "PHTN3117": [
         "(",
-        "",
         ")"
     ],
     "PHTN4123": [
         "(",
-        "",
         ")"
     ],
     "PHTN4661": [
@@ -17157,7 +17760,6 @@
     ],
     "PHYS1149": [
         "(",
-        "",
         ")"
     ],
     "PHYS1160": [
@@ -17167,12 +17769,10 @@
     ],
     "PHYS1200": [
         "(",
-        "",
         ")"
     ],
     "PHYS1211": [
         "(",
-        "",
         ")"
     ],
     "PHYS1221": [
@@ -17308,34 +17908,46 @@
     ],
     "PHYS3111": [
         "(",
-        "(MATH2069",
+        "(",
+        "MATH2069",
         "||",
         "MATH2521",
         "||",
-        "MATH2621)",
+        "MATH2621",
+        ")",
         "&&",
-        "(PHYS2111",
+        "(",
+        "PHYS2111",
         "||",
-        "PHYS2110)",
+        "PHYS2110",
+        ")",
         ")"
     ],
     "PHYS3112": [
         "(",
-        "(PHYS2111",
+        "(",
+        "PHYS2111",
         "||",
         "PHYS2113",
         "||",
         "PHYS2114",
         "||",
-        "PHYS2110)",
+        "PHYS2110",
+        ")",
         "&&",
-        "(MATH2089",
+        "(",
+        "MATH2089",
         "||",
-        "(MATH2301",
+        "(",
+        "MATH2301",
         "&&",
-        "(MATH2801",
+        "(",
+        "MATH2801",
         "||",
-        "MATH2901)))",
+        "MATH2901",
+        ")",
+        ")",
+        ")",
         ")"
     ],
     "PHYS3113": [
@@ -17347,37 +17959,48 @@
     ],
     "PHYS3114": [
         "(",
-        "(PHYS2114",
+        "(",
+        "PHYS2114",
         "||",
-        "PHYS2210)",
+        "PHYS2210",
+        ")",
         "&&",
         "PHYS2113. Exclusion: PHYS3011",
         ")"
     ],
     "PHYS3115": [
         "(",
-        "(PHYS2111",
+        "(",
+        "PHYS2111",
         "||",
-        "PHYS2110)",
+        "PHYS2110",
+        ")",
         "&&",
-        "(PHYS2114",
+        "(",
+        "PHYS2114",
         "||",
-        "PHYS2210)",
+        "PHYS2210",
+        ")",
         "&&",
         "PHYS2113",
         ")"
     ],
     "PHYS3116": [
         "(",
-        "(MATH2069",
+        "(",
+        "MATH2069",
         "||",
         "MATH2011",
         "||",
-        "MATH2111)",
+        "MATH2111",
+        ")",
         "&&",
-        "(PHYS2111",
+        "(",
+        "PHYS2111",
         "||",
-        "PHYS2110). Exclusions: PHYS2160, PHYS3160",
+        "PHYS2110",
+        ")",
+        ". Exclusions: PHYS2160, PHYS3160",
         ")"
     ],
     "PHYS3117": [
@@ -17387,9 +18010,11 @@
     ],
     "PHYS3118": [
         "(",
-        "(PHYS2111",
+        "(",
+        "PHYS2111",
         "||",
-        "PHYS2110)",
+        "PHYS2110",
+        ")",
         "&&",
         "PHYS3113. Exclusions: PHYS3021, PHYS3310",
         ")"
@@ -17428,7 +18053,6 @@
     ],
     "PHYS4200": [
         "(",
-        "",
         ")"
     ],
     "PHYS6143": [
@@ -17440,57 +18064,46 @@
     ],
     "PHYS9010": [
         "(",
-        "",
         ")"
     ],
     "PLAN0081": [
         "(",
-        "",
         ")"
     ],
     "PLAN0082": [
         "(",
-        "",
         ")"
     ],
     "PLAN1001": [
         "(",
-        "",
         ")"
     ],
     "PLAN1002": [
         "(",
-        "",
         ")"
     ],
     "PLAN1003": [
         "(",
-        "",
         ")"
     ],
     "PLAN1004": [
         "(",
-        "",
         ")"
     ],
     "PLAN1007": [
         "(",
-        "",
         ")"
     ],
     "PLAN2001": [
         "(",
-        "",
         ")"
     ],
     "PLAN2002": [
         "(",
-        "",
         ")"
     ],
     "PLAN2003": [
         "(",
-        "",
         ")"
     ],
     "PLAN2004": [
@@ -17500,47 +18113,38 @@
     ],
     "PLAN2005": [
         "(",
-        "",
         ")"
     ],
     "PLAN2006": [
         "(",
-        "",
         ")"
     ],
     "PLAN2007": [
         "(",
-        "",
         ")"
     ],
     "PLAN2122": [
         "(",
-        "",
         ")"
     ],
     "PLAN3001": [
         "(",
-        "",
         ")"
     ],
     "PLAN3002": [
         "(",
-        "",
         ")"
     ],
     "PLAN3003": [
         "(",
-        "",
         ")"
     ],
     "PLAN3004": [
         "(",
-        "",
         ")"
     ],
     "PLAN3005": [
         "(",
-        "",
         ")"
     ],
     "PLAN3032": [
@@ -17550,7 +18154,6 @@
     ],
     "PLAN3052": [
         "(",
-        "",
         ")"
     ],
     "PLAN4001": [
@@ -17560,7 +18163,6 @@
     ],
     "PLAN4002": [
         "(",
-        "",
         ")"
     ],
     "PLAN4003": [
@@ -17631,7 +18233,6 @@
     ],
     "PSYC1001": [
         "(",
-        "",
         ")"
     ],
     "PSYC1011": [
@@ -17641,59 +18242,56 @@
     ],
     "PSYC1021": [
         "(",
-        "Restricted to students currently enrolled in program 3632 PSYC (Honours)",
+        "Restricted to students currently enrolled in program 3632 PSYC",
+        "(",
+        "Honours",
+        ")",
         "||",
-        "4721 Bachelor of PSYC (Honours) / LAWS",
+        "4721 Bachelor of PSYC",
+        "(",
+        "Honours",
+        ")",
+        "/ LAWS",
         ")"
     ],
     "PSYC1022": [
         "(",
-        "",
         ")"
     ],
     "PSYC1023": [
         "(",
-        "",
         ")"
     ],
     "PSYC1024": [
         "(",
-        "",
         ")"
     ],
     "PSYC1025": [
         "(",
-        "",
         ")"
     ],
     "PSYC1027": [
         "(",
-        "",
         ")"
     ],
     "PSYC1028": [
         "(",
-        "",
         ")"
     ],
     "PSYC1029": [
         "(",
-        "",
         ")"
     ],
     "PSYC1031": [
         "(",
-        "",
         ")"
     ],
     "PSYC1062": [
         "(",
-        "",
         ")"
     ],
     "PSYC1111": [
         "(",
-        "",
         ")"
     ],
     "PSYC2001": [
@@ -17777,15 +18375,19 @@
     ],
     "PSYC3331": [
         "(",
-        "(PSYC2001",
+        "(",
+        "PSYC2001",
         "||",
         "PSYC2061",
         "||",
-        "PSYC2101)",
+        "PSYC2101",
+        ")",
         "||",
-        "(HESC3504",
+        "(",
+        "HESC3504",
         "&&",
-        "enrolment in Program 3871)",
+        "enrolment in Program 3871",
+        ")",
         ")"
     ],
     "PSYC3341": [
@@ -17821,7 +18423,6 @@
     ],
     "PSYC4083": [
         "(",
-        "",
         ")"
     ],
     "PSYC4093": [
@@ -17836,26 +18437,25 @@
     ],
     "PTRL1001": [
         "(",
-        "",
         ")"
     ],
     "PTRL1010": [
         "(",
-        "",
         ")"
     ],
     "PTRL2010": [
         "(",
-        "",
         ")"
     ],
     "PTRL2018": [
         "(",
-        "(PHYS1121",
+        "(",
+        "PHYS1121",
         "||",
         "PHYS1131",
         "||",
-        "DPST1023)",
+        "DPST1023",
+        ")",
         "&&",
         "PTRL1010",
         ")"
@@ -17876,12 +18476,10 @@
     ],
     "PTRL2030": [
         "(",
-        "",
         ")"
     ],
     "PTRL2114": [
         "(",
-        "",
         ")"
     ],
     "PTRL3001": [
@@ -17901,7 +18499,6 @@
     ],
     "PTRL3015": [
         "(",
-        "",
         ")"
     ],
     "PTRL3022": [
@@ -17916,12 +18513,10 @@
     ],
     "PTRL3025": [
         "(",
-        "",
         ")"
     ],
     "PTRL3030": [
         "(",
-        "",
         ")"
     ],
     "PTRL3040": [
@@ -17992,52 +18587,42 @@
     ],
     "PTRL5119": [
         "(",
-        "",
         ")"
     ],
     "REGZ9000": [
         "(",
-        "",
         ")"
     ],
     "REGZ9070": [
         "(",
-        "",
         ")"
     ],
     "REGZ9072": [
         "(",
-        "",
         ")"
     ],
     "REGZ9073": [
         "(",
-        "",
         ")"
     ],
     "REGZ9075": [
         "(",
-        "",
         ")"
     ],
     "REGZ9076": [
         "(",
-        "",
         ")"
     ],
     "REGZ9077": [
         "(",
-        "",
         ")"
     ],
     "REGZ9078": [
         "(",
-        "",
         ")"
     ],
     "REGZ9255": [
         "(",
-        "",
         ")"
     ],
     "RISK2001": [
@@ -18051,18 +18636,22 @@
         "(",
         "ACCT1501",
         "&&",
-        "(ECON1203",
+        "(",
+        "ECON1203",
         "||",
-        "RISK2001)",
+        "RISK2001",
+        ")",
         ")"
     ],
     "RISK3003": [
         "(",
         "ACCT1501",
         "&&",
-        "(ECON1203",
+        "(",
+        "ECON1203",
         "||",
-        "RISK2001)",
+        "RISK2001",
+        ")",
         ")"
     ],
     "SAED4491": [
@@ -18072,27 +18661,22 @@
     ],
     "SAHT2480": [
         "(",
-        "",
         ")"
     ],
     "SAHT2680": [
         "(",
-        "",
         ")"
     ],
     "SAHT3131": [
         "(",
-        "",
         ")"
     ],
     "SAHT3690": [
         "(",
-        "",
         ")"
     ],
     "SAHT4211": [
         "(",
-        "",
         ")"
     ],
     "SAHT4213": [
@@ -18102,37 +18686,30 @@
     ],
     "SART1311": [
         "(",
-        "",
         ")"
     ],
     "SART1312": [
         "(",
-        "",
         ")"
     ],
     "SART1313": [
         "(",
-        "",
         ")"
     ],
     "SART1314": [
         "(",
-        "",
         ")"
     ],
     "SART1501": [
         "(",
-        "",
         ")"
     ],
     "SART1502": [
         "(",
-        "",
         ")"
     ],
     "SART1641": [
         "(",
-        "",
         ")"
     ],
     "SART2361": [
@@ -18142,107 +18719,86 @@
     ],
     "SART2400": [
         "(",
-        "",
         ")"
     ],
     "SART2401": [
         "(",
-        "",
         ")"
     ],
     "SART2403": [
         "(",
-        "",
         ")"
     ],
     "SART2404": [
         "(",
-        "",
         ")"
     ],
     "SART2405": [
         "(",
-        "",
         ")"
     ],
     "SART2407": [
         "(",
-        "",
         ")"
     ],
     "SART2408": [
         "(",
-        "",
         ")"
     ],
     "SART2410": [
         "(",
-        "",
         ")"
     ],
     "SART2411": [
         "(",
-        "",
         ")"
     ],
     "SART2412": [
         "(",
-        "",
         ")"
     ],
     "SART2413": [
         "(",
-        "",
         ")"
     ],
     "SART2415": [
         "(",
-        "",
         ")"
     ],
     "SART2416": [
         "(",
-        "",
         ")"
     ],
     "SART2417": [
         "(",
-        "",
         ")"
     ],
     "SART2501": [
         "(",
-        "",
         ")"
     ],
     "SART2828": [
         "(",
-        "",
         ")"
     ],
     "SART2829": [
         "(",
-        "",
         ")"
     ],
     "SART2836": [
         "(",
-        "",
         ")"
     ],
     "SART2841": [
         "(",
-        "",
         ")"
     ],
     "SART2842": [
         "(",
-        "",
         ")"
     ],
     "SART2859": [
         "(",
-        "",
         ")"
     ],
     "SART3400": [
@@ -18332,44 +18888,69 @@
     ],
     "SART3703": [
         "(",
-        "",
         ")"
     ],
     "SART3800": [
         "(",
-        "",
         ")"
     ],
     "SART3801": [
         "(",
-        "",
         ")"
     ],
     "SCIF1004": [
         "(",
-        "",
         ")"
     ],
     "SCIF1111": [
         "(",
-        "Enrolment in the Bachelor of SOMS (3991)",
+        "Enrolment in the Bachelor of SOMS",
+        "(",
+        "3991",
+        ")",
         "||",
-        "the Bachelor of Medicinal CHEM (3992)",
+        "the Bachelor of Medicinal CHEM",
+        "(",
+        "3992",
+        ")",
         "||",
-        "the bachelor of Medicinal CHEM (Honours) (3999)",
+        "the bachelor of Medicinal CHEM",
+        "(",
+        "Honours",
+        ")",
+        "(",
+        "3999",
+        ")",
         ")"
     ],
     "SCIF1131": [
         "(",
-        "Enrolment in BSc (Adv. Science)",
+        "Enrolment in BSc",
+        "(",
+        "Adv. Science",
+        ")",
         "||",
-        "BAdvSci(Hons)",
+        "BAdvSci",
+        "(",
+        "Hons",
+        ")",
         "||",
-        "BSc (Adv. Maths)",
+        "BSc",
+        "(",
+        "Adv. Maths",
+        ")",
         "||",
-        "BSc(AdvMath)(Hons)",
+        "BSc",
+        "(",
+        "AdvMath",
+        ")",
+        "(",
+        "Hons",
+        ")",
         "||",
-        "(incl. associated dual degrees)",
+        "(",
+        "incl. associated dual degrees",
+        ")",
         "||",
         "BMedSci",
         ")"
@@ -18400,169 +18981,150 @@
     ],
     "SDES1111": [
         "(",
-        "",
         ")"
     ],
     "SDES1211": [
         "(",
-        "",
         ")"
     ],
     "SDES2116": [
         "(",
-        "SDES2116 is reserved for students in the Bachelor of Design (4802, Faculty of SART & Design)",
+        "SDES2116 is reserved for students in the Bachelor of Design",
+        "(",
+        "4802, Faculty of SART & Design",
+        ")",
         "&&",
-        "Bachelor of Architectural Computing (3267",
+        "Bachelor of Architectural Computing",
+        "(",
+        "3267",
         "&&",
-        "FBE)",
+        "FBE",
+        ")",
         "&&",
-        "Diploma in INOV MGMT (3451",
+        "Diploma in INOV MGMT",
+        "(",
+        "3451",
         "&&",
-        "ASB)",
+        "ASB",
+        ")",
         "&&",
-        "",
         "&&",
-        "Design Honours (4809, Faculty of SART & Design)",
+        "Design Honours",
+        "(",
+        "4809, Faculty of SART & Design",
+        ")",
         ")"
     ],
     "SDES2167": [
         "(",
-        "",
         ")"
     ],
     "SDES2168": [
         "(",
-        "",
         ")"
     ],
     "SDES2170": [
         "(",
-        "",
         ")"
     ],
     "SDES2184": [
         "(",
-        "",
         ")"
     ],
     "SDES2188": [
         "(",
-        "",
         ")"
     ],
     "SDES2201": [
         "(",
-        "",
         ")"
     ],
     "SDES2203": [
         "(",
-        "",
         ")"
     ],
     "SDES2400": [
         "(",
-        "",
         ")"
     ],
     "SDES2401": [
         "(",
-        "",
         ")"
     ],
     "SDES2402": [
         "(",
-        "",
         ")"
     ],
     "SDES2403": [
         "(",
-        "",
         ")"
     ],
     "SDES2405": [
         "(",
-        "",
         ")"
     ],
     "SDES2406": [
         "(",
-        "",
         ")"
     ],
     "SDES2407": [
         "(",
-        "",
         ")"
     ],
     "SDES2408": [
         "(",
-        "",
         ")"
     ],
     "SDES2409": [
         "(",
-        "",
         ")"
     ],
     "SDES2410": [
         "(",
-        "",
         ")"
     ],
     "SDES2411": [
         "(",
-        "",
         ")"
     ],
     "SDES2412": [
         "(",
-        "",
         ")"
     ],
     "SDES2413": [
         "(",
-        "",
         ")"
     ],
     "SDES2414": [
         "(",
-        "",
         ")"
     ],
     "SDES2415": [
         "(",
-        "",
         ")"
     ],
     "SDES2416": [
         "(",
-        "",
         ")"
     ],
     "SDES2463": [
         "(",
-        "",
         ")"
     ],
     "SDES2464": [
         "(",
-        "",
         ")"
     ],
     "SDES3166": [
         "(",
-        "",
         ")"
     ],
     "SDES3172": [
         "(",
-        "",
         ")"
     ],
     "SDES3174": [
         "(",
-        "",
         ")"
     ],
     "SDES3400": [
@@ -18642,12 +19204,10 @@
     ],
     "SDES3801": [
         "(",
-        "",
         ")"
     ],
     "SDES4205": [
         "(",
-        "",
         ")"
     ],
     "SENG2011": [
@@ -18663,7 +19223,11 @@
         "&&",
         "enrolment in a BE",
         "||",
-        "BE(Hons) Software GSOE major",
+        "BE",
+        "(",
+        "Hons",
+        ")",
+        "Software GSOE major",
         ")"
     ],
     "SENG2991": [
@@ -18717,17 +19281,14 @@
     ],
     "SERV9999": [
         "(",
-        "",
         ")"
     ],
     "SOCW1001": [
         "(",
-        "",
         ")"
     ],
     "SOCW1004": [
         "(",
-        "",
         ")"
     ],
     "SOCW2003": [
@@ -18786,7 +19347,11 @@
         "&&",
         "SOCW3013",
         "&&",
-        "enrolment in a SOCW program. Excluded: Students enrolled in 4787 SOCW (Honours)/LAWS",
+        "enrolment in a SOCW program. Excluded: Students enrolled in 4787 SOCW",
+        "(",
+        "Honours",
+        ")",
+        "/LAWS",
         ")"
     ],
     "SOCW3009": [
@@ -19039,22 +19604,18 @@
     ],
     "SOLA1070": [
         "(",
-        "",
         ")"
     ],
     "SOLA2051": [
         "(",
-        "",
         ")"
     ],
     "SOLA2053": [
         "(",
-        "",
         ")"
     ],
     "SOLA2060": [
         "(",
-        "",
         ")"
     ],
     "SOLA2540": [
@@ -19064,7 +19625,6 @@
     ],
     "SOLA3010": [
         "(",
-        "",
         ")"
     ],
     "SOLA3020": [
@@ -19093,12 +19653,18 @@
     ],
     "SOLA4952": [
         "(",
-        "Completion of Research Thesis A (4951)",
+        "Completion of Research Thesis A",
+        "(",
+        "4951",
+        ")",
         ")"
     ],
     "SOLA4953": [
         "(",
-        "Completion of Research Thesis B (4952)",
+        "Completion of Research Thesis B",
+        "(",
+        "4952",
+        ")",
         ")"
     ],
     "SOLA5050": [
@@ -19108,22 +19674,18 @@
     ],
     "SOLA5051": [
         "(",
-        "",
         ")"
     ],
     "SOLA5052": [
         "(",
-        "",
         ")"
     ],
     "SOLA5053": [
         "(",
-        "",
         ")"
     ],
     "SOLA5054": [
         "(",
-        "",
         ")"
     ],
     "SOLA5055": [
@@ -19135,12 +19697,10 @@
     ],
     "SOLA5056": [
         "(",
-        "",
         ")"
     ],
     "SOLA5057": [
         "(",
-        "",
         ")"
     ],
     "SOLA5508": [
@@ -19152,7 +19712,6 @@
     ],
     "SOLA5509": [
         "(",
-        "",
         ")"
     ],
     "SOMA1001": [
@@ -19162,62 +19721,50 @@
     ],
     "SOMA2408": [
         "(",
-        "",
         ")"
     ],
     "SOMA2409": [
         "(",
-        "",
         ")"
     ],
     "SOMA2410": [
         "(",
-        "",
         ")"
     ],
     "SOMA2411": [
         "(",
-        "",
         ")"
     ],
     "SOMA2412": [
         "(",
-        "",
         ")"
     ],
     "SOMA2413": [
         "(",
-        "",
         ")"
     ],
     "SOMA2414": [
         "(",
-        "",
         ")"
     ],
     "SOMA2415": [
         "(",
-        "",
         ")"
     ],
     "SOMA2416": [
         "(",
-        "",
         ")"
     ],
     "SOMA2481": [
         "(",
-        "",
         ")"
     ],
     "SOMA2605": [
         "(",
-        "",
         ")"
     ],
     "SOMA2815": [
         "(",
-        "",
         ")"
     ],
     "SOMA2816": [
@@ -19237,12 +19784,10 @@
     ],
     "SOMA2818": [
         "(",
-        "",
         ")"
     ],
     "SOMA2863": [
         "(",
-        "",
         ")"
     ],
     "SOMA3408": [
@@ -19287,17 +19832,14 @@
     ],
     "SOMA3801": [
         "(",
-        "",
         ")"
     ],
     "SOMS1501": [
         "(",
-        "",
         ")"
     ],
     "SOMS3001": [
         "(",
-        "",
         ")"
     ],
     "SOMS3050": [
@@ -19320,9 +19862,11 @@
         "||",
         "BABS2202",
         "||",
-        "(ANAT2241",
+        "(",
+        "ANAT2241",
         "&&",
-        "PHSL2101)",
+        "PHSL2101",
+        ")",
         ")"
     ],
     "SOMS4001": [
@@ -19332,7 +19876,6 @@
     ],
     "SOMS4002": [
         "(",
-        "",
         ")"
     ],
     "SOMS4884": [
@@ -19347,12 +19890,10 @@
     ],
     "SOSS1000": [
         "(",
-        "",
         ")"
     ],
     "SOSS1001": [
         "(",
-        "",
         ")"
     ],
     "SOSS2001": [
@@ -19413,17 +19954,26 @@
     ],
     "SOSS4051": [
         "(",
-        "Enrolment in 4529 Social Science (Honours)",
+        "Enrolment in 4529 Social Science",
+        "(",
+        "Honours",
+        ")",
         ")"
     ],
     "SOSS4052": [
         "(",
-        "Enrolment in 4529 Social Science (Honours)",
+        "Enrolment in 4529 Social Science",
+        "(",
+        "Honours",
+        ")",
         ")"
     ],
     "SOSS4053": [
         "(",
-        "Enrolment in 4529 Social Science (Honours)",
+        "Enrolment in 4529 Social Science",
+        "(",
+        "Honours",
+        ")",
         ")"
     ],
     "SRAP4051": [
@@ -19443,12 +19993,10 @@
     ],
     "TABL1003": [
         "(",
-        "",
         ")"
     ],
     "TABL1005": [
         "(",
-        "",
         ")"
     ],
     "TABL1006": [
@@ -19465,7 +20013,6 @@
     ],
     "TABL1011": [
         "(",
-        "",
         ")"
     ],
     "TABL1710": [
@@ -19479,13 +20026,17 @@
     ],
     "TABL2015": [
         "(",
-        "(ATAX0005",
+        "(",
+        "ATAX0005",
         "||",
-        "TABL1005)",
+        "TABL1005",
+        ")",
         "&&",
-        "(ATAX0010",
+        "(",
+        "ATAX0010",
         "||",
-        "TABL1010)",
+        "TABL1010",
+        ")",
         ")"
     ],
     "TABL2053": [
@@ -19497,24 +20048,27 @@
     ],
     "TABL2057": [
         "(",
-        "(ATAX0003",
+        "(",
+        "ATAX0003",
         "||",
         "TABL1003",
         ")",
-        "",
         "&&",
-        "(ATAX0010",
+        "(",
+        "ATAX0010",
         "||",
-        "TABL1010)",
+        "TABL1010",
+        ")",
         "&&",
-        "(ATAX0058",
+        "(",
+        "ATAX0058",
         "||",
-        "TABL2058)",
+        "TABL2058",
+        ")",
         ")"
     ],
     "TABL2058": [
         "(",
-        "",
         ")"
     ],
     "TABL2059": [
@@ -19594,9 +20148,11 @@
         "||",
         "TABL2710",
         "||",
-        "(COMM1100",
+        "(",
+        "COMM1100",
         "&&",
-        "COMM1150)",
+        "COMM1150",
+        ")",
         "||",
         "COMM1900",
         ")"
@@ -19611,9 +20167,11 @@
         "||",
         "JURD7152",
         "||",
-        "(COMM1100",
+        "(",
+        "COMM1100",
         "&&",
-        "COMM1150)",
+        "COMM1150",
+        ")",
         "||",
         "COMM1900 Excluded: LAWS3147, LAWS3751",
         ")"
@@ -19633,7 +20191,6 @@
     ],
     "TABL2793": [
         "(",
-        "",
         ")"
     ],
     "TABL3007": [
@@ -19694,17 +20251,23 @@
     ],
     "TABL3055": [
         "(",
-        "(ATAX0611",
+        "(",
+        "ATAX0611",
         "||",
         "TABL3015",
         "||",
-        "TABL3752)",
+        "TABL3752",
+        ")",
         "&&",
-        "(ATAX0623",
+        "(",
+        "ATAX0623",
         "||",
-        "TABL3023)",
+        "TABL3023",
+        ")",
         "&&",
-        "(48UOC)",
+        "(",
+        "48UOC",
+        ")",
         ")"
     ],
     "TABL3545": [
@@ -19809,17 +20372,14 @@
     ],
     "TABL4600": [
         "(",
-        "",
         ")"
     ],
     "TABL4601": [
         "(",
-        "",
         ")"
     ],
     "TABL4602": [
         "(",
-        "",
         ")"
     ],
     "TABL4721": [
@@ -19853,7 +20413,6 @@
     ],
     "TABL5810": [
         "(",
-        "",
         ")"
     ],
     "TELE3113": [
@@ -19887,7 +20446,6 @@
     ],
     "TELE4123": [
         "(",
-        "",
         ")"
     ],
     "TELE4642": [
@@ -19912,12 +20470,10 @@
     ],
     "VISN1101": [
         "(",
-        "",
         ")"
     ],
     "VISN1111": [
         "(",
-        "",
         ")"
     ],
     "VISN1221": [
@@ -20001,32 +20557,26 @@
     ],
     "YMED3001": [
         "(",
-        "",
         ")"
     ],
     "YMED3002": [
         "(",
-        "",
         ")"
     ],
     "YMED3003": [
         "(",
-        "",
         ")"
     ],
     "YMED3004": [
         "(",
-        "",
         ")"
     ],
     "YMED3005": [
         "(",
-        "",
         ")"
     ],
     "YMED3006": [
         "(",
-        "",
         ")"
     ],
     "YMED3007": [
@@ -20036,27 +20586,22 @@
     ],
     "ZBUS1101": [
         "(",
-        "",
         ")"
     ],
     "ZBUS1102": [
         "(",
-        "",
         ")"
     ],
     "ZBUS1103": [
         "(",
-        "",
         ")"
     ],
     "ZBUS1104": [
         "(",
-        "",
         ")"
     ],
     "ZBUS2101": [
         "(",
-        "",
         ")"
     ],
     "ZBUS2202": [
@@ -20066,17 +20611,14 @@
     ],
     "ZBUS2206": [
         "(",
-        "",
         ")"
     ],
     "ZBUS2207": [
         "(",
-        "",
         ")"
     ],
     "ZBUS2208": [
         "(",
-        "",
         ")"
     ],
     "ZBUS2302": [
@@ -20096,17 +20638,22 @@
     ],
     "ZBUS2820": [
         "(",
-        "",
         ")"
     ],
     "ZBUS2901": [
         "(",
-        "Enrolment in CDF Program (4462)",
+        "Enrolment in CDF Program",
+        "(",
+        "4462",
+        ")",
         ")"
     ],
     "ZBUS2902": [
         "(",
-        "Enrolment in CDF Program (4462)",
+        "Enrolment in CDF Program",
+        "(",
+        "4462",
+        ")",
         ")"
     ],
     "ZBUS3101": [
@@ -20116,36 +20663,34 @@
     ],
     "ZBUS3102": [
         "(",
-        "",
         ")"
     ],
     "ZBUS3103": [
         "(",
-        "",
         ")"
     ],
     "ZBUS3104": [
         "(",
-        "ZBUS Program (4405",
+        "ZBUS Program",
+        "(",
+        "4405",
         "||",
-        "4462)",
+        "4462",
+        ")",
         "&&",
         "ZBUS1104",
         ")"
     ],
     "ZBUS3106": [
         "(",
-        "",
         ")"
     ],
     "ZBUS3107": [
         "(",
-        "",
         ")"
     ],
     "ZBUS3108": [
         "(",
-        "",
         ")"
     ],
     "ZBUS3203": [
@@ -20155,47 +20700,66 @@
     ],
     "ZBUS3207": [
         "(",
-        "",
         ")"
     ],
     "ZBUS3208": [
         "(",
-        "",
         ")"
     ],
     "ZBUS3303": [
         "(",
-        "",
         ")"
     ],
     "ZBUS3901": [
         "(",
-        "Enrolment in CDF Program (4462)",
+        "Enrolment in CDF Program",
+        "(",
+        "4462",
+        ")",
         ")"
     ],
     "ZBUS3902": [
         "(",
-        "Enrolment in CDF Program (4462)",
+        "Enrolment in CDF Program",
+        "(",
+        "4462",
+        ")",
         ")"
     ],
     "ZBUS4001": [
         "(",
-        "Enrolment in ZBUS (Honours) Program 4512",
+        "Enrolment in ZBUS",
+        "(",
+        "Honours",
+        ")",
+        "Program 4512",
         ")"
     ],
     "ZBUS4002": [
         "(",
-        "Enrolment in ZBUS (Honours) Program 4512",
+        "Enrolment in ZBUS",
+        "(",
+        "Honours",
+        ")",
+        "Program 4512",
         ")"
     ],
     "ZBUS4101": [
         "(",
-        "Enrolment in ZBUS (Honours) Program 4512",
+        "Enrolment in ZBUS",
+        "(",
+        "Honours",
+        ")",
+        "Program 4512",
         ")"
     ],
     "ZBUS4102": [
         "(",
-        "Enrolment in ZBUS (Honours) Program 4512",
+        "Enrolment in ZBUS",
+        "(",
+        "Honours",
+        ")",
+        "Program 4512",
         ")"
     ],
     "ZEIT1102": [
@@ -20205,7 +20769,6 @@
     ],
     "ZEIT1110": [
         "(",
-        "",
         ")"
     ],
     "ZEIT1190": [
@@ -20227,7 +20790,6 @@
     ],
     "ZEIT1208": [
         "(",
-        "",
         ")"
     ],
     "ZEIT1290": [
@@ -20242,22 +20804,18 @@
     ],
     "ZEIT1501": [
         "(",
-        "",
         ")"
     ],
     "ZEIT1503": [
         "(",
-        "",
         ")"
     ],
     "ZEIT1504": [
         "(",
-        "",
         ")"
     ],
     "ZEIT1600": [
         "(",
-        "",
         ")"
     ],
     "ZEIT1690": [
@@ -20267,7 +20825,6 @@
     ],
     "ZEIT1800": [
         "(",
-        "",
         ")"
     ],
     "ZEIT1901": [
@@ -20294,22 +20851,18 @@
     ],
     "ZEIT2104": [
         "(",
-        "",
         ")"
     ],
     "ZEIT2105": [
         "(",
-        "",
         ")"
     ],
     "ZEIT2106": [
         "(",
-        "",
         ")"
     ],
     "ZEIT2190": [
         "(",
-        "",
         ")"
     ],
     "ZEIT2207": [
@@ -20338,7 +20891,6 @@
     ],
     "ZEIT2501": [
         "(",
-        "",
         ")"
     ],
     "ZEIT2502": [
@@ -20386,12 +20938,10 @@
     ],
     "ZEIT2802": [
         "(",
-        "",
         ")"
     ],
     "ZEIT2803": [
         "(",
-        "",
         ")"
     ],
     "ZEIT2901": [
@@ -20411,17 +20961,14 @@
     ],
     "ZEIT3102": [
         "(",
-        "",
         ")"
     ],
     "ZEIT3111": [
         "(",
-        "",
         ")"
     ],
     "ZEIT3112": [
         "(",
-        "",
         ")"
     ],
     "ZEIT3113": [
@@ -20443,27 +20990,22 @@
     ],
     "ZEIT3119": [
         "(",
-        "",
         ")"
     ],
     "ZEIT3120": [
         "(",
-        "",
         ")"
     ],
     "ZEIT3121": [
         "(",
-        "",
         ")"
     ],
     "ZEIT3190": [
         "(",
-        "",
         ")"
     ],
     "ZEIT3191": [
         "(",
-        "",
         ")"
     ],
     "ZEIT3215": [
@@ -20500,7 +21042,6 @@
     ],
     "ZEIT3302": [
         "(",
-        "",
         ")"
     ],
     "ZEIT3404": [
@@ -20515,7 +21056,6 @@
     ],
     "ZEIT3501": [
         "(",
-        "",
         ")"
     ],
     "ZEIT3502": [
@@ -20536,7 +21076,6 @@
     ],
     "ZEIT3504": [
         "(",
-        "",
         ")"
     ],
     "ZEIT3505": [
@@ -20546,7 +21085,6 @@
     ],
     "ZEIT3506": [
         "(",
-        "",
         ")"
     ],
     "ZEIT3600": [
@@ -20581,7 +21119,6 @@
     ],
     "ZEIT3607": [
         "(",
-        "",
         ")"
     ],
     "ZEIT3700": [
@@ -20606,7 +21143,6 @@
     ],
     "ZEIT3803": [
         "(",
-        "",
         ")"
     ],
     "ZEIT3804": [
@@ -20616,7 +21152,6 @@
     ],
     "ZEIT3805": [
         "(",
-        "",
         ")"
     ],
     "ZEIT3901": [
@@ -20645,7 +21180,6 @@
     ],
     "ZEIT4005": [
         "(",
-        "",
         ")"
     ],
     "ZEIT4006": [
@@ -20665,12 +21199,10 @@
     ],
     "ZEIT4011": [
         "(",
-        "",
         ")"
     ],
     "ZEIT4012": [
         "(",
-        "",
         ")"
     ],
     "ZEIT4013": [
@@ -20680,7 +21212,6 @@
     ],
     "ZEIT4014": [
         "(",
-        "",
         ")"
     ],
     "ZEIT4015": [
@@ -20695,77 +21226,62 @@
     ],
     "ZEIT4101": [
         "(",
-        "",
         ")"
     ],
     "ZEIT4102": [
         "(",
-        "",
         ")"
     ],
     "ZEIT4103": [
         "(",
-        "",
         ")"
     ],
     "ZEIT4104": [
         "(",
-        "",
         ")"
     ],
     "ZEIT4115": [
         "(",
-        "",
         ")"
     ],
     "ZEIT4116": [
         "(",
-        "",
         ")"
     ],
     "ZEIT4117": [
         "(",
-        "",
         ")"
     ],
     "ZEIT4118": [
         "(",
-        "",
         ")"
     ],
     "ZEIT4119": [
         "(",
-        "",
         ")"
     ],
     "ZEIT4120": [
         "(",
-        "",
         ")"
     ],
     "ZEIT4154": [
         "(",
-        "",
         ")"
     ],
     "ZEIT4216": [
         "(",
-        "",
         ")"
     ],
     "ZEIT4217": [
         "(",
-        "",
         ")"
     ],
     "ZEIT4218": [
         "(",
-        "",
         ")"
     ],
     "ZEIT4222": [
         "(",
-        "",
         ")"
     ],
     "ZEIT4224": [
@@ -20775,17 +21291,14 @@
     ],
     "ZEIT4225": [
         "(",
-        "",
         ")"
     ],
     "ZEIT4226": [
         "(",
-        "",
         ")"
     ],
     "ZEIT4227": [
         "(",
-        "",
         ")"
     ],
     "ZEIT4230": [
@@ -20795,17 +21308,14 @@
     ],
     "ZEIT4297": [
         "(",
-        "",
         ")"
     ],
     "ZEIT4500": [
         "(",
-        "",
         ")"
     ],
     "ZEIT4501": [
         "(",
-        "",
         ")"
     ],
     "ZEIT4502": [
@@ -20825,22 +21335,18 @@
     ],
     "ZEIT4505": [
         "(",
-        "",
         ")"
     ],
     "ZEIT4506": [
         "(",
-        "",
         ")"
     ],
     "ZEIT4507": [
         "(",
-        "",
         ")"
     ],
     "ZEIT4600": [
         "(",
-        "",
         ")"
     ],
     "ZEIT4601": [
@@ -20882,12 +21388,10 @@
     ],
     "ZEIT4801": [
         "(",
-        "",
         ")"
     ],
     "ZEIT4802": [
         "(",
-        "",
         ")"
     ],
     "ZEIT4901": [
@@ -20922,27 +21426,22 @@
     ],
     "ZHSS1101": [
         "(",
-        "",
         ")"
     ],
     "ZHSS1102": [
         "(",
-        "",
         ")"
     ],
     "ZHSS1201": [
         "(",
-        "",
         ")"
     ],
     "ZHSS1202": [
         "(",
-        "",
         ")"
     ],
     "ZHSS1301": [
         "(",
-        "",
         ")"
     ],
     "ZHSS1302": [
@@ -20952,7 +21451,6 @@
     ],
     "ZHSS1303": [
         "(",
-        "",
         ")"
     ],
     "ZHSS1304": [
@@ -20962,12 +21460,10 @@
     ],
     "ZHSS1401": [
         "(",
-        "",
         ")"
     ],
     "ZHSS1402": [
         "(",
-        "",
         ")"
     ],
     "ZHSS2108": [
@@ -21028,22 +21524,18 @@
     ],
     "ZHSS2231": [
         "(",
-        "",
         ")"
     ],
     "ZHSS2234": [
         "(",
-        "",
         ")"
     ],
     "ZHSS2235": [
         "(",
-        "",
         ")"
     ],
     "ZHSS2236": [
         "(",
-        "",
         ")"
     ],
     "ZHSS2301": [
@@ -21114,7 +21606,6 @@
     ],
     "ZHSS2428": [
         "(",
-        "",
         ")"
     ],
     "ZHSS2506": [
@@ -21145,17 +21636,22 @@
     ],
     "ZHSS2601": [
         "(",
-        "",
         ")"
     ],
     "ZHSS2901": [
         "(",
-        "Enrolment in CDF Program (4461)",
+        "Enrolment in CDF Program",
+        "(",
+        "4461",
+        ")",
         ")"
     ],
     "ZHSS2902": [
         "(",
-        "Enrolment in CDF Program (4461)",
+        "Enrolment in CDF Program",
+        "(",
+        "4461",
+        ")",
         ")"
     ],
     "ZHSS3104": [
@@ -21262,7 +21758,6 @@
     ],
     "ZHSS3237": [
         "(",
-        "",
         ")"
     ],
     "ZHSS3301": [
@@ -21328,12 +21823,10 @@
     ],
     "ZHSS3433": [
         "(",
-        "",
         ")"
     ],
     "ZHSS3434": [
         "(",
-        "",
         ")"
     ],
     "ZHSS3435": [
@@ -21345,17 +21838,14 @@
     ],
     "ZHSS3436": [
         "(",
-        "",
         ")"
     ],
     "ZHSS3437": [
         "(",
-        "",
         ")"
     ],
     "ZHSS3438": [
         "(",
-        "",
         ")"
     ],
     "ZHSS3501": [
@@ -21365,7 +21855,6 @@
     ],
     "ZHSS3502": [
         "(",
-        "",
         ")"
     ],
     "ZHSS3505": [
@@ -21375,102 +21864,82 @@
     ],
     "ZHSS4001": [
         "(",
-        "",
         ")"
     ],
     "ZHSS4002": [
         "(",
-        "",
         ")"
     ],
     "ZHSS4003": [
         "(",
-        "",
         ")"
     ],
     "ZHSS4004": [
         "(",
-        "",
         ")"
     ],
     "ZHSS4005": [
         "(",
-        "",
         ")"
     ],
     "ZHSS4006": [
         "(",
-        "",
         ")"
     ],
     "ZHSS4007": [
         "(",
-        "",
         ")"
     ],
     "ZHSS4008": [
         "(",
-        "",
         ")"
     ],
     "ZHSS4009": [
         "(",
-        "",
         ")"
     ],
     "ZHSS4010": [
         "(",
-        "",
         ")"
     ],
     "ZHSS4011": [
         "(",
-        "",
         ")"
     ],
     "ZHSS4012": [
         "(",
-        "",
         ")"
     ],
     "ZINT1006": [
         "(",
-        "",
         ")"
     ],
     "ZINT2100": [
         "(",
-        "",
         ")"
     ],
     "ZINT2501": [
         "(",
-        "",
         ")"
     ],
     "ZPEM1101": [
         "(",
-        "",
         ")"
     ],
     "ZPEM1102": [
         "(",
-        "",
         ")"
     ],
     "ZPEM1201": [
         "(",
-        "",
         ")"
     ],
     "ZPEM1202": [
         "(",
-        "",
         ")"
     ],
     "ZPEM1301": [
         "(",
-        "",
         ")"
     ],
     "ZPEM1302": [
@@ -21480,7 +21949,6 @@
     ],
     "ZPEM1303": [
         "(",
-        "",
         ")"
     ],
     "ZPEM1304": [
@@ -21490,22 +21958,18 @@
     ],
     "ZPEM1306": [
         "(",
-        "",
         ")"
     ],
     "ZPEM1307": [
         "(",
-        "",
         ")"
     ],
     "ZPEM1402": [
         "(",
-        "",
         ")"
     ],
     "ZPEM1501": [
         "(",
-        "",
         ")"
     ],
     "ZPEM1502": [
@@ -21539,27 +22003,22 @@
     ],
     "ZPEM2202": [
         "(",
-        "",
         ")"
     ],
     "ZPEM2207": [
         "(",
-        "",
         ")"
     ],
     "ZPEM2209": [
         "(",
-        "",
         ")"
     ],
     "ZPEM2211": [
         "(",
-        "",
         ")"
     ],
     "ZPEM2213": [
         "(",
-        "",
         ")"
     ],
     "ZPEM2302": [
@@ -21651,7 +22110,6 @@
     ],
     "ZPEM2508": [
         "(",
-        "",
         ")"
     ],
     "ZPEM2509": [
@@ -21697,17 +22155,14 @@
     ],
     "ZPEM3202": [
         "(",
-        "",
         ")"
     ],
     "ZPEM3203": [
         "(",
-        "",
         ")"
     ],
     "ZPEM3204": [
         "(",
-        "",
         ")"
     ],
     "ZPEM3208": [
@@ -21719,7 +22174,6 @@
     ],
     "ZPEM3222": [
         "(",
-        "",
         ")"
     ],
     "ZPEM3301": [
@@ -21741,12 +22195,10 @@
     ],
     "ZPEM3313": [
         "(",
-        "",
         ")"
     ],
     "ZPEM3326": [
         "(",
-        "",
         ")"
     ],
     "ZPEM3401": [
@@ -21782,7 +22234,6 @@
     ],
     "ZPEM3532": [
         "(",
-        "",
         ")"
     ],
     "ZPEM3901": [
@@ -21797,77 +22248,66 @@
     ],
     "ZPEM4001": [
         "(",
-        "",
         ")"
     ],
     "ZPEM4002": [
         "(",
-        "",
         ")"
     ],
     "ZPEM4003": [
         "(",
-        "",
         ")"
     ],
     "ZPEM4004": [
         "(",
-        "",
         ")"
     ],
     "ZPEM4101": [
         "(",
-        "",
         ")"
     ],
     "ZPEM4102": [
         "(",
-        "",
         ")"
     ],
     "ZPEM4201": [
         "(",
-        "",
         ")"
     ],
     "ZPEM4202": [
         "(",
-        "",
         ")"
     ],
     "ZPEM4205": [
         "(",
-        "Currently enrolled in 4511 B SARTs (Honours)",
+        "Currently enrolled in 4511 B SARTs",
+        "(",
+        "Honours",
+        ")",
         ")"
     ],
     "ZPEM4301": [
         "(",
-        "",
         ")"
     ],
     "ZPEM4302": [
         "(",
-        "",
         ")"
     ],
     "ZPEM4401": [
         "(",
-        "",
         ")"
     ],
     "ZPEM4402": [
         "(",
-        "",
         ")"
     ],
     "ZPEM4501": [
         "(",
-        "",
         ")"
     ],
     "ZPEM4502": [
         "(",
-        "",
         ")"
     ]
 }
