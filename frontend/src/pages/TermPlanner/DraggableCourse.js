@@ -14,6 +14,8 @@ function DraggableCourse({ code, index, warning }) {
   const courseName = courses.get(code)["title"];
   const prereqs = courses.get(code)["prereqs"];
   //   eval(COMP1511 || COMP1521 && (COMP1531 || COMP1541);
+  const prereqDisplay = prereqs.replaceAll("||", "or").replaceAll("&&", "and")
+  const prereqArray = prereqDisplay.split(" and ")
 
   return (
     <>
@@ -42,9 +44,10 @@ function DraggableCourse({ code, index, warning }) {
       </Draggable>
       <ReactTooltip id={code} place="bottom" className="tooltip">
         <Text strong>Prerequisites: </Text>
-        {prereqs.map((prereq) => (
+		{prereqDisplay}
+        {/* {prereqArray.map((prereq) => (
           <div key={prereq}>• {prereq}</div>
-        ))}
+        ))} */}
       </ReactTooltip>
     </>
   );

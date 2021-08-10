@@ -4,25 +4,25 @@ dummyMap.set("COMP1511", {
   title: "Programming Fundamentals",
   type: "Core",
   termsOffered: ["t1", "t2", "t3"],
-  prereqs: [],
+  prereqs: "",
 });
 dummyMap.set("COMP2521", {
   title: "Data Structures and Algorithms",
   type: "Core",
   termsOffered: ["t1", "t2", "t3"],
-  prereqs: ["COMP1511"],
+  prereqs: "COMP1511 && (COMP1521 || DEFAULT3000)",
 });
-dummyMap.set("DEFAULT2000", {
-  title: "Default course 2",
+dummyMap.set("COMP1521", {
+  title: "Computer Systems Fundamentals",
   type: "Elective",
   termsOffered: ["t1", "t2"],
-  prereqs: ["COMP1511"],
+  prereqs: "COMP1511",
 });
-dummyMap.set("DEFAULT3000", {
-  title: "Default course 3",
+dummyMap.set("COMP6080", {
+  title: "Web Front-End Programming",
   type: "General Education",
   termsOffered: ["t2", "t3"],
-  prereqs: ["COMP1511"],
+  prereqs: "COMP1521 && (COMP2521 || COMP1927)",
 });
 
 const plannedCourses = new Map();
@@ -30,7 +30,7 @@ const plannedCourses = new Map();
 // plannedCourses.set("COMP1511", "2021t2");
 
 const initialState = {
-  unplanned: ["COMP1511", "COMP2521", "DEFAULT2000", "DEFAULT3000"],
+  unplanned: ["COMP1511", "COMP2521", "COMP1521", "COMP6080"],
   startYear: 2021,
   numYears: 3,
   years: [
