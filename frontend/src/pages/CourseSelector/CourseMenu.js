@@ -33,10 +33,23 @@ export default function CourseMenu() {
 
   const getCourseOptions = async () => {
     const res = await axios.get('http://localhost:3000/courseOptions.json');
+    let core = [];
+    let electives = [];
+    let genEds = [];
+    res.data.courseOptions.map(course => {
+      let type = course[Object.keys(course)[0]].type;
+      if (type === 'core') {
+        core.push(course);
+      } else if (type === 'elective') {
+        electives.push(course);
+      } else if (type === 'gened') {
+        genEds.push(course);
+      }
+    });
     dispatch(courseOptionsActions('SET_RECENTLY_VIEWED_COURSES', res.data.recentlyViewed));
-    dispatch(courseOptionsActions('SET_CORE_COURSES', res.data.core));
-    dispatch(courseOptionsActions('SET_ELECTIVE_COURSES', res.data.electives));
-    dispatch(courseOptionsActions('SET_GENED_COURSES', res.data.genEds));
+    dispatch(courseOptionsActions('SET_CORE_COURSES', core));
+    dispatch(courseOptionsActions('SET_ELECTIVE_COURSES', electives));
+    dispatch(courseOptionsActions('SET_GENED_COURSES', genEds));
   }
 
   const handleClick = e => {
@@ -70,19 +83,19 @@ export default function CourseMenu() {
           <SubMenu  className={"text"} key="core" title="Core">
             { courseOptions.core.length === 0
               ? <Menu.Item key={'empty-core'} disabled> No courses here (ㆆ_ㆆ) </Menu.Item>
-              : courseOptions.core.map(courseCode => <Menu.Item className="text" key={courseCode} onClick={() => goToCourse(courseCode)}>{courseCode}</Menu.Item>) 
+              : courseOptions.core.map(course => <Menu.Item className="text" key={Object.keys(course)[0]} onClick={() => goToCourse(Object.keys(course)[0])}>{Object.keys(course)[0]}</Menu.Item>) 
             }
           </SubMenu>
           <SubMenu className={"text"} key="electives" title="Electives">
             { courseOptions.electives.length === 0
               ? <Menu.Item key={'empty-electives'} disabled> No courses here (ㆆ_ㆆ) </Menu.Item>
-              : courseOptions.electives.map(courseCode => <Menu.Item className="text" key={courseCode} onClick={() => goToCourse(courseCode)}>{courseCode}</Menu.Item>) 
+              : courseOptions.electives.map(course => <Menu.Item className="text" key={Object.keys(course)[0]} onClick={() => goToCourse(Object.keys(course)[0])}>{Object.keys(course)[0]}</Menu.Item>) 
             }
           </SubMenu>
           <SubMenu  className={"text"} key="general-education" title="General Education">
             { courseOptions.genEds.length === 0
               ? <Menu.Item key={'empty-general-education'} disabled> No courses here (ㆆ_ㆆ) </Menu.Item>
-              : courseOptions.genEds.map(courseCode => <Menu.Item className="text" key={courseCode} onClick={() => goToCourse(courseCode)}>{courseCode}</Menu.Item>) 
+              : courseOptions.genEds.map(course => <Menu.Item className="text" key={Object.keys(course)[0]} onClick={() => goToCourse(Object.keys(course)[0])}>{Object.keys(course)[0]}</Menu.Item>) 
             }
           </SubMenu>
         </Menu>
