@@ -29,7 +29,8 @@ def process_courses():
             # If this course does not yet have a 'path_to' field, set up
             # dict in anticipation of courses being added
             processed["path_to"] = dict()
-
+        
+        format_types(processed)
         process_terms(processed, course)
         process_gen_ed(processed, course)
         process_enrolment_path(processed, course, data)
@@ -41,6 +42,14 @@ def process_courses():
     dataHelpers.write_data(data, "data/finalData/coursesProcessed.json")
     dataHelpers.write_data(ABSENT_COURSES, "data/finalData/absentCourses.json")
 
+
+def format_types(processed: dict) -> None:
+    """ Converts things like UOC and Level to the right type (String->Int) """
+    if processed["UOC"] is not None:
+        processed["UOC"] = int(processed["UOC"])
+    
+    if processed["level"] is not None:
+        processed["level"] = int(processed["level"])
 
 def process_terms(processed: dict, formatted: dict) -> None:
     """ Processes terms: e.g. 'Summer Term, Term 2' to ["ST", "T2"]. 

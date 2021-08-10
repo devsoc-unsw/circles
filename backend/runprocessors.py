@@ -14,12 +14,14 @@ from data.scrapers.specialisationsFormatting import format_spn_data
 
 from data.processors.programsProcessing import process_data as process_prg_data
 from data.processors.specialisationsProcessing import customise_spn_data
+from data.processors.coursesProcessing import process_courses as process_course_data
 
-from data.processors.conditionsPreprocessing import preprocess_rules
+from data.processors.conditionsPreprocessing import preprocess_rules as preprocess_conditions
+from data.processors.conditionsLogicalParsing import parse_conditions_logic
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--type', type=str, help='all, program, specialisation, course or condition')
-parser.add_argument('--stage', type=str, help='all, scrape, format, process (preprocess or postprocess for condition)')
+parser.add_argument('--stage', type=str, help='all, scrape, format, process (preprocess or postprocess or parse for condition)')
 
 args = parser.parse_args()
 
@@ -35,9 +37,11 @@ run = {
         'process': customise_spn_data
     },
     'course': {
+        'process': process_course_data
     },
     'condition': {
-        'preprocess': preprocess_rules,
+        'preprocess': preprocess_conditions,
+        'parse': parse_conditions_logic
     }
 }
 
