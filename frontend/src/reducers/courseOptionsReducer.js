@@ -18,6 +18,15 @@ const courseOptionsReducer = (state = initialState, action) => {
             return { ...state, genEds: action.payload };
         case 'APPEND_COURSE':
             const type = action.payload[Object.keys(action.payload)[0]].type;
+            let found = false;
+            state[type].filter(course => {
+                if (Object.keys(course)[0] === Object.keys(action.payload)[0]) {
+                    found = true;
+                }
+            });
+            if (found) {
+                return state;
+            }
             const arr = [...state[type]];
             arr.push(action.payload);
             return { ...state, [type]: arr };
