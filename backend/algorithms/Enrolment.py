@@ -109,6 +109,32 @@ class CompositeRequirement(Requirement):
             return self.components[0]
         return self
 
+def WamRequirement(Requirement):
+    def __init__(self, limit = 0, courses = []):
+        self.components = courses
+        self.limit = limit
+    
+    def validate(self, condition):
+        pass
+
+    # Can be used by validate or externally
+    def getWam(self):
+        pass
+
+def UocRequirement(Requirement):
+    # Does or condition exist?
+    def __init__(self, limit = 0,program = []):
+        self.components = program
+        self.limit = limit
+    
+    def validate(self, condition):
+        pass
+
+    # Can be used by validate or externally
+    def getUoc(self):
+        pass
+
+# The field of methods for matching elements
 def orLike(text):
     result = False
     if text.lower() == 'or':
@@ -130,6 +156,23 @@ def isCourse(text):
         return True
     return False
 
+def isWam(text):
+    pass
+
+def getWam(text):
+    pass
+
+def pickCourses(text):
+    pass
+
+def isUoc(text):
+    pass
+
+def getUoc(text):
+    pass
+
+def pickProgram(text):
+    pass
 
 #Not considering and or clauses wihtout parenthesis
 def parseRequirement(text, elapsed = 0):
