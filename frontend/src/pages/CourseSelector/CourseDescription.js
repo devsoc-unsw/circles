@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Tag, Alert } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { CourseTag } from '../../components/courseTag/CourseTag';
-import { getCourseById } from '../../actions/updateCourses';
+import { getCourseById } from './courseProvider';
 import { addUnplannedCourse, setUnplannedCourses } from '../../actions/userAction';
 import { plannerActions } from '../../actions/plannerActions';
 import classes from './CourseDescription.module.css';
@@ -19,7 +19,6 @@ export default function CourseDescription() {
   
   useEffect(() => {
     dispatch(getCourseById(id));
-    // props.setCourseId(id);
   }, [id]);
   
   if (!id) {

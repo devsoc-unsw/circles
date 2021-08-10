@@ -34,6 +34,8 @@ const plannerReducer = (state = initialState, action) => {
             state.unplanned.join(courseCode)
             console.log(state)
             return state;
+        case 'REMOVE_ALL_UNPLANNED':
+            return { ...state, unplanned: action.payload };
         default: 
             return state; 
     }

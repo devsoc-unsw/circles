@@ -1,11 +1,7 @@
 export const courseOptionsActions = (action, payload) => {
+    console.log('ACTUZZz', action);
     switch (action) {
         // NOT IMPLEMENTED IN REDUCER YET.
-        // case 'APPEND':
-        //     return { 
-        //         type: 'APPEND', 
-        //         payload: payload
-        //     }
         // case 'DELETE':
         //     return { 
         //         type: 'DELETE', 
@@ -17,10 +13,10 @@ export const courseOptionsActions = (action, payload) => {
                 payload: payload,
             }
         case 'SET_RECENTLY_VIEWED_COURSES': 
-        return {
-            type: 'SET_RECENTLY_VIEWED_COURSES',
-            payload: payload
-        }
+            return {
+                type: 'SET_RECENTLY_VIEWED_COURSES',
+                payload: payload
+            }
         case 'SET_CORE_COURSES': 
             return {
                 type: 'SET_CORE_COURSES',
@@ -34,6 +30,12 @@ export const courseOptionsActions = (action, payload) => {
         case 'SET_GENED_COURSES': 
             return {
                 type: 'SET_GENED_COURSES',
+                payload: payload
+            }
+        case 'APPEND_COURSE':
+            console.log('APEEEEEND', payload);
+            return {
+                type: 'APPEND_COURSE',
                 payload: payload
             }
         default:

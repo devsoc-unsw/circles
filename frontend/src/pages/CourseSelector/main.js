@@ -39,7 +39,7 @@ export default function CourseSelector() {
   }
 
   const removeAllPlanned = () => {
-
+    dispatch(plannerActions('REMOVE_ALL_UNPLANNED', []));
   }
 
   const resetSelectedCourses = () => {

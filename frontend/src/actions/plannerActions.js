@@ -5,6 +5,11 @@ export const plannerActions = (action, payload) => {
                 type: action,
                 payload: payload,
             }
+        case 'REMOVE_ALL_UNPLANNED':
+            return {
+                type: action,
+                payload
+            }
         default: 
             return;
     }

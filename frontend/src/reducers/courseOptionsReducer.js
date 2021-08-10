@@ -16,6 +16,11 @@ const courseOptionsReducer = (state = initialState, action) => {
             return { ...state, electives: action.payload };
         case 'SET_GENED_COURSES':
             return { ...state, genEds: action.payload };
+        case 'APPEND_COURSE':
+            const type = action.payload[Object.keys(action.payload)[0]].type;
+            const arr = [...state[type]];
+            arr.push(action.payload);
+            return { ...state, [type]: arr };
         // case 'DELETE': 
         //     return state.filter((value, index) => {
         //         return value !== action.payload; 
