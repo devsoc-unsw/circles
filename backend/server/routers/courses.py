@@ -2,6 +2,7 @@ from fastapi import APIRouter
 from server.database import coursesCOL
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
+from pydantic import BaseModel
 
 router = APIRouter(
     prefix='/courses',
@@ -9,11 +10,24 @@ router = APIRouter(
     responses={404: {"description": "Not found"}}
 )
 
+class courses(BaseModel):
+    title: str
+    code: str
+    UOC: int
+    level: int
+    description: str
+    equivalents: dict
+    exclusions: dict
+    path_to: dict
+    terms: list
+    gen_ed: int
+    path_from: dict
+
 @router.get("/")
 def courses_index():
     return "Index of courses"
 
-@router.get("/getCourses/{code}")
+@router.get("/getCourses/{code}", response_model=courses)
 def getCourses(code):
     query = { "code" : code }
     result = coursesCOL.find_one(query)
