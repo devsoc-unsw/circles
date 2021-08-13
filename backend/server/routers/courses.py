@@ -200,62 +200,141 @@ def getEquivalent(code):
 
     return { 'equivalent' : equivalent }
 
-@router.get("/getExclusions/{code}", response_model=exclusions)
+@router.get("/getExclusions/{code}", response_model=exclusions,
+            responses={
+                404:{"model": message, "description": "The course was not found"},
+                200: {
+                    "description": "Exclusion courses requested by code",
+                    "content": {
+                        "application/json": {
+                            "example": {"exclusions": {
+                                        "COMM1140": 1
+                                }}
+                        }
+                    }  
+                }
+            }
+)
 def getExclusion(code):
     query = { "code" : code }
     result = coursesCOL.find_one(query)
+
+    if not result:
+        return JSONResponse(status_code=404, content={"message" : "Course not found"})
 
     exclusions = {}
     for obj in result['exclusions']:
         exclusions[obj] = 1
 
-    if (len(exclusions) == 0):
-        return { 'exclusions' : 'none' }
-
     return { 'exclusions' : exclusions }
 
-@router.get("/getPathTo/{code}", response_model=pathTo)
+@router.get("/getPathTo/{code}", response_model=pathTo,
+            responses={
+                404:{"model": message, "description": "The course was not found"},
+                200: {
+                    "description": "Path to courses requested by code",
+                    "content": {
+                        "application/json": {
+                            "example": {"path_to": {
+                                    "ACCT1511": 1,
+                                    "ACCT2672": 1,
+                                    "RISK2001": 1,
+                                    "RISK2002": 1,
+                                    "RISK3003": 1
+                                }}
+                        }
+                    }  
+                }
+            }
+)
 def getPathTo(code):
     query = { "code" : code }
     result = coursesCOL.find_one(query)
+
+    if not result:
+        return JSONResponse(status_code=404, content={"message" : "Course not found"})
 
     pathTo = {}
     for obj in result['path_to']:
         pathTo[obj] = 1
 
-    if (len(pathTo) == 0):
-        return { 'pathTo' : 'none' }
-
     return { 'pathTo' : pathTo}
 
-@router.get("/getPathFrom/{code}", response_model=pathFrom)
+@router.get("/getPathFrom/{code}", response_model=pathFrom, 
+            responses={
+                404:{"model": message, "description": "The course was not found"},
+                200: {
+                    "description": "Path from courses requested by code",
+                    "content": {
+                        "application/json": {
+                            "example": {"path_from": {
+                                    "ACCT1501": 1
+                                }}
+                        }
+                    }  
+                }
+            }
+)
 def getPathFrom(code):
     query = { "code" : code }
     result = coursesCOL.find_one(query)
+
+    if not result:
+        return JSONResponse(status_code=404, content={"message" : "Course not found"})
 
     pathFrom = {}
     for obj in result['path_from']:
         pathFrom[obj] = 1
 
-    if (len(pathFrom) == 0):
-        return { 'pathFrom' : 'none' }
-
     return { 'pathFrom' : pathFrom }
 
-@router.get("/isGenEd/{code}", response_model=isGenEd)
+@router.get("/isGenEd/{code}", response_model=isGenEd,
+            responses={
+                404:{"model": message, "description": "The course was not found"},
+                200: {
+                    "description": "Checks if the course is a gen ed",
+                    "content": {
+                        "application/json": {
+                            "example": {"gen_ed": {
+                                True
+                                }}
+                        }
+                    }  
+                }
+            }
+)
 def isGenEd(code):
     query = { "code" : code }
     result = coursesCOL.find_one(query)
+
+    if not result:
+        return JSONResponse(status_code=404, content={"message" : "Course not found"})
 
     if (result['gen_ed'] == 0):
         return { 'gen_ed' : False }
     else:
         return { 'gen_ed' : True }
 
-@router.get("/getTerms/{code}", response_model=terms)
+@router.get("/getTerms/{code}", response_model=terms,
+            responses={
+                404:{"model": message, "description": "The course was not found"},
+                200: {
+                    "description": "Terms the course is available in",
+                    "content": {
+                        "application/json": {
+                            "example": {"terms": ['T1', 'ST']
+                                }
+                        }
+                    }  
+                }
+            }
+)
 def getTerms(code):
     query = { "code" : code }
     result = coursesCOL.find_one(query)
+
+    if not result:
+        return JSONResponse(status_code=404, content={"message" : "Course not found"})
 
     terms = []
     for obj in result['terms']:
@@ -263,10 +342,25 @@ def getTerms(code):
 
     return { 'terms' : terms }
 
-@router.get("/getDescription/{code}", response_model=description)
+@router.get("/getDescription/{code}", response_model=description,
+            responses={
+                404:{"model": message, "description": "The course was not found"},
+                200: {
+                    "description": "Description of course requested",
+                    "content": {
+                        "application/json": {
+                            "example": {"description": "<p>The compulsory core accounting unit will have a preparer perspective. It will provide an introduction to basic concepts in accounting and their application for decision making by a wide range of potential users (e.g., shareholders, investment analysts, lenders, managers etc). This unit should benefit students who wish to specialise in accounting, and will also be of value to students whose primary interest lies elsewhere in the field of business.</p>\n<p>On completion, students should have a clear understanding of the accounting process and the language of accounting to enable communication with an accounting professional, understand the relevance of accounting information for informed decision making by a wide range of potential users, and have the ability to analyse and interpret accounting information. Topics covered will include the accounting equation, general purpose financial reports, cash and accrual accounting, adjustments, internal control, financial statement analysis, and interpreting and preparing information for managers to use in planning, decision making and control.</p>"}
+                        }
+                    }  
+                }
+            }
+)
 def getDescription(code):
     query = { "code" : code }
     result = coursesCOL.find_one(query)
+
+    if not result:
+        return JSONResponse(status_code=404, content={"message" : "Course not found"})
 
     return { 'description' : result['description'] }
         
