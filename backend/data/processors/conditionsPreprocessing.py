@@ -222,6 +222,11 @@ def extraneous_phrasing(processed):
     # Remove 'or higher' as XXWAM implies XX minimum
     processed = re.sub("or higher", "", processed)
 
+    processed = re.sub("students? must successfully complete", "", processed, flags=re.IGNORECASE)
+
+    # Remove program language
+    processed = re.sub("(students? enrolled in )?program", "", processed, flags=re.IGNORECASE)
+
     return processed
 
 

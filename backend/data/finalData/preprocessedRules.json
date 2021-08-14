@@ -65,7 +65,7 @@
     },
     "ACCT4797": {
         "original_rule": "Prerequisite: Must be enrolled in program 4501 (Accounting)<br/><br/>",
-        "processed_rule": "Must be enrolled in program 4501 (ACCT)"
+        "processed_rule": "Must be enrolled in 4501 (ACCT)"
     },
     "ACCT4798": {
         "original_rule": "",
@@ -73,27 +73,27 @@
     },
     "ACCT4809": {
         "original_rule": "Prerequisite: Must be enrolled in program 4501 (Accounting)<br/><br/>",
-        "processed_rule": "Must be enrolled in program 4501 (ACCT)"
+        "processed_rule": "Must be enrolled in 4501 (ACCT)"
     },
     "ACCT4851": {
         "original_rule": "Prerequisite: Must be enrolled in program 4501 (Accounting)<br/><br/>",
-        "processed_rule": "Must be enrolled in program 4501 (ACCT)"
+        "processed_rule": "Must be enrolled in 4501 (ACCT)"
     },
     "ACCT4852": {
         "original_rule": "Prerequisite: Must be enrolled in program 4501 (Accounting)<br/><br/>",
-        "processed_rule": "Must be enrolled in program 4501 (ACCT)"
+        "processed_rule": "Must be enrolled in 4501 (ACCT)"
     },
     "ACCT4897": {
         "original_rule": "Prerequisite: Must be enrolled in program 4501 (Accounting)<br/><br/>",
-        "processed_rule": "Must be enrolled in program 4501 (ACCT)"
+        "processed_rule": "Must be enrolled in 4501 (ACCT)"
     },
     "ACTL1101": {
         "original_rule": "Prerequisite: MATH1151 AND in Actuarial Studies programs.<br/><br/>",
-        "processed_rule": "MATH1151 && in ACTL programs"
+        "processed_rule": "MATH1151 && in ACTL s"
     },
     "ACTL2101": {
         "original_rule": "Prerequisite:Enrolment in Program 3587<br/><br/>",
-        "processed_rule": "Enrolment in Program 3587"
+        "processed_rule": "Enrolment in 3587"
     },
     "ACTL2102": {
         "original_rule": "Pre-requisite: (ACTL2131 or MATH2901) and in Actuarial single or dual degrees.<br/><br/>",
@@ -129,15 +129,15 @@
     },
     "ACTL3191": {
         "original_rule": "Pre-requisites: ECON2101 or (ECON1101 and ACTL1101) or (completed at least 84UOC and enrolled in a Commerce Program).<br/><br/>",
-        "processed_rule": "ECON2101 || (ECON1101 && ACTL1101) || (84UOC && enrolled in a COMM Program)"
+        "processed_rule": "ECON2101 || (ECON1101 && ACTL1101) || (84UOC && enrolled in a COMM )"
     },
     "ACTL3192": {
         "original_rule": "Pre-requisites: ECON2101 or (ECON1101 and ACTL1101) or (completed at least 84UOC and enrolled in a Commerce Program).<br/><br/>",
-        "processed_rule": "ECON2101 || (ECON1101 && ACTL1101) || (84UOC && enrolled in a COMM Program)"
+        "processed_rule": "ECON2101 || (ECON1101 && ACTL1101) || (84UOC && enrolled in a COMM )"
     },
     "ACTL3202": {
         "original_rule": "Prerequisite: ACTL2101 and enrolment in program 3587<br/><br/>",
-        "processed_rule": "ACTL2101 && enrolment in program 3587"
+        "processed_rule": "ACTL2101 && enrolment in 3587"
     },
     "ACTL3301": {
         "original_rule": "Prerequisites: ACTL2102 and ACTL3162.<br/><br/>",
@@ -145,7 +145,7 @@
     },
     "ACTL3303": {
         "original_rule": "Prerequisite: ACTL3202 and enrolment in program 3587<br/><br/>",
-        "processed_rule": "ACTL3202 && enrolment in program 3587"
+        "processed_rule": "ACTL3202 && enrolment in 3587"
     },
     "ACTL4001": {
         "original_rule": "Pre-requisite: ACCT1511, ACTL3141, ACTL3182, FINS1613, ACTL3162, ACTL3151, ECON1102, 60+ WAM.<br/>Note: Students in 3587 may complete ACTL3141 as a co-requisite<br/><br/>",
@@ -233,7 +233,7 @@
     },
     "ADAD4100": {
         "original_rule": "Students must be enrolled in an Art & Design Honours Year. Programs 4526, 4527, 4528<br/><br/>",
-        "processed_rule": "Students must be enrolled in an SART & Design Honours Year. Programs 4526, 4527, 4528"
+        "processed_rule": "Students must be enrolled in an SART & Design Honours Year. s 4526, 4527, 4528"
     },
     "AERO3110": {
         "original_rule": "Prerequisite: (DESN2000 or MMAN2100) AND (ENGG2400 OR MMAN2400)<br/><br/>",
@@ -281,7 +281,7 @@
     },
     "ANAT1521": {
         "original_rule": "Prerequisite: BABS1201 or DPST1051<br/>This course is restricted to students enrolled in Medical Science (3991) program<br/><br/>",
-        "processed_rule": "BABS1201 || DPST1051 This course is restricted to students enrolled in SOMS (3991) program"
+        "processed_rule": "BABS1201 || DPST1051 This course is restricted to students enrolled in SOMS (3991)"
     },
     "ANAT2111": {
         "original_rule": "Prerequisite: A pass in BABS1201 or DPST1051 plus either a pass in ANAT2241 or BABS1202 or DPST1052 or BABS2202 or BABS2204 or BIOC2201 or BIOC2291 or BIOS1101 or HESC1501 or PHSL2101 or PHSL2121 or VISN1221<br/><br/>",
@@ -333,7 +333,7 @@
     },
     "ARCH1101": {
         "original_rule": "Currently enrolled in program 3261 Architectural Studies, 3268 Computational Design, or 3635 Civil Engineering with Architecture (Hons)<br/><br/>",
-        "processed_rule": "Currently enrolled in program 3261 Architectural Studies || 3268 CODE || 3635 Civil GSOE with ARCH (Hons)"
+        "processed_rule": "Currently enrolled in 3261 Architectural Studies || 3268 CODE || 3635 Civil GSOE with ARCH (Hons)"
     },
     "ARCH1102": {
         "original_rule": "Prerequisite: ARCH1101<br/><br/>",
@@ -649,7 +649,7 @@
     },
     "ARTS2050": {
         "original_rule": "Prerequisite: 12uoc at Level 1, and enrolment in an Arts and Social Sciences or Art and Design single or dual award program. Excluded: ARTS5503<br/><br/>",
-        "processed_rule": "12UOC at L1 && enrolment in an SARTs && SOSS || ADAD single || dual award program"
+        "processed_rule": "12UOC at L1 && enrolment in an SARTs && SOSS || ADAD single || dual award "
     },
     "ARTS2061": {
         "original_rule": "Prerequisite: 24 units of credit at Level 1<br/><br/>",
@@ -1073,7 +1073,7 @@
     },
     "ARTS2852": {
         "original_rule": "Prerequisite: 24 units of credit at level 1, and enrolment in a Politics, Philosophy, and Economics program or a Politics and IR major or a Development Studies major<br/><br/>",
-        "processed_rule": "24UOC at L1 && enrolment in a Politics && Philosophy && ECON program || a Politics && IR major || a COMD major"
+        "processed_rule": "24UOC at L1 && enrolment in a Politics && Philosophy && ECON || a Politics && IR major || a COMD major"
     },
     "ARTS2870": {
         "original_rule": "Prerequisite: 24 units of credit at Level 1<br/><br/>",
@@ -1189,7 +1189,7 @@
     },
     "ARTS3061": {
         "original_rule": "Prerequisite: 48 UOC overall, including ARTS1060 or ARTS1064, and ARTS2065. Or 66 UOC overall and enrolled in a single or double degree Media (Screen and Sound Production) program<br/><br/>",
-        "processed_rule": "48UOC || including ARTS1060 || ARTS1064 && ARTS2065. || 66UOC && enrolled in a single || double degree MDIA (Screen && Sound Production) program"
+        "processed_rule": "48UOC || including ARTS1060 || ARTS1064 && ARTS2065. || 66UOC && enrolled in a single || double degree MDIA (Screen && Sound Production)"
     },
     "ARTS3062": {
         "original_rule": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Film Studies<br/><br/>",
@@ -1221,23 +1221,23 @@
     },
     "ARTS3091": {
         "original_rule": "Prerequisite: 48 uoc overall, including 6 uoc at level 1 and 6 uoc at level 2 in one of the following streams, MCT. Or 6 uoc  level 1 and 6 uoc level 2 Prescribed Media Electives and enrolment in a Media single or double degreel program<br/><br/>",
-        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || MCT. || 6UOC L1 && 6UOC L2 MDIA Electives && enrolment in a MDIA single || double degreel program"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || MCT. || 6UOC L1 && 6UOC L2 MDIA Electives && enrolment in a MDIA single || double degreel"
     },
     "ARTS3092": {
         "original_rule": "Prerequisite: 48 uoc overall, including 6 uoc at level 1 and 6 uoc at level 2 in one of the following streams, MCT. Or 6 uoc  level 1 and 6 uoc level 2 Prescribed Media Electives and enrolment in a Media single or double degreel program<br/><br/>",
-        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || MCT. || 6UOC L1 && 6UOC L2 MDIA Electives && enrolment in a MDIA single || double degreel program"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || MCT. || 6UOC L1 && 6UOC L2 MDIA Electives && enrolment in a MDIA single || double degreel"
     },
     "ARTS3093": {
         "original_rule": "Prerequisite: 48 uoc overall, including 6 uoc at level 1 and 6 uoc at level 2 in one of the following streams, MCT. Or 6 uoc  level 1 and 6 uoc level 2 Prescribed Media Electives and enrolment in a Media single or double degreel program<br/><br/>",
-        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || MCT. || 6UOC L1 && 6UOC L2 MDIA Electives && enrolment in a MDIA single || double degreel program"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || MCT. || 6UOC L1 && 6UOC L2 MDIA Electives && enrolment in a MDIA single || double degreel"
     },
     "ARTS3096": {
         "original_rule": "Prerequisite: 48 uoc overall, including 6 uoc at level 1 and 6 uoc at level 2 in one of the following streams, MCT. Or 6 uoc  level 1 and 6 uoc level 2 Prescribed Media Electives and enrolment in a Media single or double degreel program<br/><br/>",
-        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || MCT. || 6UOC L1 && 6UOC L2 MDIA Electives && enrolment in a MDIA single || double degreel program"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || MCT. || 6UOC L1 && 6UOC L2 MDIA Electives && enrolment in a MDIA single || double degreel"
     },
     "ARTS3097": {
         "original_rule": "Prerequisite: 48 uoc overall, including 6 uoc at level 1 and 6 uoc at level 2 in one of the following streams, MCT. Or 6 uoc  level 1 and 6 uoc level 2 Prescribed Media Electives and enrolment in a Media single or double degreel program<br/><br/>",
-        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || MCT. || 6UOC L1 && 6UOC L2 MDIA Electives && enrolment in a MDIA single || double degreel program"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || MCT. || 6UOC L1 && 6UOC L2 MDIA Electives && enrolment in a MDIA single || double degreel"
     },
     "ARTS3122": {
         "original_rule": "Prerequisite: 48 uoc overall, including 6 uoc at level 1 and 6 uoc at level 2 in the Theatre & Performance Studies Stream<br/><br/>",
@@ -1253,11 +1253,11 @@
     },
     "ARTS3125": {
         "original_rule": "Prerequisite: 48 uoc overall, including 6 uoc at level 1 and 6 uoc at level 2 in one of the following specialisations, MCT or\u00a0Theatre & Performance Studies. Or 66 uoc overall and enrolled in a single or dual award Media (S&SP) program<br/><br/>",
-        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following specialisations, MCT or\u00a0Theatre & Performance Studies. || 66UOC && enrolled in a single || dual award MDIA (S&SP) program"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following specialisations, MCT or\u00a0Theatre & Performance Studies. || 66UOC && enrolled in a single || dual award MDIA (S&SP)"
     },
     "ARTS3130": {
         "original_rule": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Dance Studies or Theatre & Performance Studies. Or 72 UOC overall and enrolment in an Art & Design program<br/><br/>",
-        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || Dance Studies || Theatre & Performance Studies. || 72UOC && enrolment in an SART & Design program"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || Dance Studies || Theatre & Performance Studies. || 72UOC && enrolment in an SART & Design"
     },
     "ARTS3131": {
         "original_rule": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams,  Australian Studies or Theatre & Performance Studies. Excluded: ARTS2124<br/><br/>",
@@ -1277,7 +1277,7 @@
     },
     "ARTS3217": {
         "original_rule": "Prerequisite: 48 UOC including 6 UOC at level 1 and 6 UOC at level 2 in Asian Studies or History. Or 48 UOC incuding 12 UOC in Chinese Studies language courses.Or 48 UOC and enrolment in an International Studies single or dual program (2017 onwards)<br/><br/>",
-        "processed_rule": "48UOC including 6UOC at L1 && 6UOC at L2 in Asian Studies || History. || 48UOC incuding 12UOC in Chinese Studies language courses.Or 48UOC && enrolment in an INST single || dual program (2017 onwards)"
+        "processed_rule": "48UOC including 6UOC at L1 && 6UOC at L2 in Asian Studies || History. || 48UOC incuding 12UOC in Chinese Studies language courses.Or 48UOC && enrolment in an INST single || dual (2017 onwards)"
     },
     "ARTS3218": {
         "original_rule": "Prerequisiste: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Asian Studies, Gender Studies, or History; or 48 UOC overall, including 12 UOC in Japanese Studies language courses<br/><br/>",
@@ -1285,7 +1285,7 @@
     },
     "ARTS3220": {
         "original_rule": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Asian Studies or History. Or 48 UOC overall and enrolment in an International Studies single or dual program (2017 onwards)<br/><br/>",
-        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || Asian Studies || History. || 48UOC && enrolment in an INST single || dual program (2017 onwards)"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || Asian Studies || History. || 48UOC && enrolment in an INST single || dual (2017 onwards)"
     },
     "ARTS3240": {
         "original_rule": "Prerequisite: 72 uoc overall and enrolment in an Environmental Humanities major or minor<br/><br/>",
@@ -1293,11 +1293,11 @@
     },
     "ARTS3241": {
         "original_rule": "Prerequisite: 48 UOC including 6 UOC at lv 1 and 6 UOC at lv 2 in one of the following streams, Development Studies, Environmental Humanities, Geographical Studies or Global Development. Or 48 UOC and enrolment in an International Studies program<br/><br/>",
-        "processed_rule": "48UOC including 6UOC at lv 1 && 6UOC at lv 2 in one of the following streams || COMD || Environmental HUMS || Geographical Studies || Global Development. || 48UOC && enrolment in an INST program"
+        "processed_rule": "48UOC including 6UOC at lv 1 && 6UOC at lv 2 in one of the following streams || COMD || Environmental HUMS || Geographical Studies || Global Development. || 48UOC && enrolment in an INST"
     },
     "ARTS3242": {
         "original_rule": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Environmental Humanities, Geographical Studies or History. Or 48 UOC overall and enrolment in an International Studies single or dual program<br/><br/>",
-        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || Environmental HUMS || Geographical Studies || History. || 48UOC && enrolment in an INST single || dual program"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || Environmental HUMS || Geographical Studies || History. || 48UOC && enrolment in an INST single || dual"
     },
     "ARTS3243": {
         "original_rule": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Environmental Humanities<br/><br/>",
@@ -1329,7 +1329,7 @@
     },
     "ARTS3292": {
         "original_rule": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Australian Studies or History. Or 48 UOC and enrolment in an International Studies single or dual program (2017 onwards)<br/><br/>",
-        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || Australian Studies || History. || 48UOC && enrolment in an INST single || dual program (2017 onwards)"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || Australian Studies || History. || 48UOC && enrolment in an INST single || dual (2017 onwards)"
     },
     "ARTS3295": {
         "original_rule": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, European Studies or History; or 48 UOC overall, including 12 UOC in German Studies language courses<br/><br/>",
@@ -1577,7 +1577,7 @@
     },
     "ARTS3786": {
         "original_rule": "Prerequisite: 48UOC overall, including 6UOC at level 1 and 6UOC at level 2 in European Studies or History; or 48UOC overall, including 12UOC in German Studies language courses. Or 48UOC and enrolment in an International Studies program<br/><br/>",
-        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in European Studies || History; || 48UOC || including 12UOC in German Studies language courses. || 48UOC && enrolment in an INST program"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in European Studies || History; || 48UOC || including 12UOC in German Studies language courses. || 48UOC && enrolment in an INST"
     },
     "ARTS3787": {
         "original_rule": "Prerequisite: 24 units of credit in either the European Studies or German Studies stream.<br/>Excluded: ARTS2783<br/><br/>",
@@ -1633,7 +1633,7 @@
     },
     "ARTS3871": {
         "original_rule": "Prerequisite: 48UOC overall, including 6UOC lv1 and 6UOC lv2 in one of the following streams, Criminology/S&A; or enrolment in program 3422/4763 and 12UOC lv2 SRAP and 18UOC lv2 CRIM; or enrolment in Program 4034 and 30UOC at lv2 including 12UOC lv2 CRIM<br/><br/>",
-        "processed_rule": "48UOC && including 6UOC lv1 && 6UOC lv2 in one of the following streams, CRIM/S&A; || enrolment in program 3422/4763 && 12UOC lv2 SRAP && 18UOC lv2 CRIM; || enrolment in Program 4034 && 30UOC at lv2 including 12UOC lv2 CRIM"
+        "processed_rule": "48UOC && including 6UOC lv1 && 6UOC lv2 in one of the following streams, CRIM/S&A; || enrolment in 3422/4763 && 12UOC lv2 SRAP && 18UOC lv2 CRIM; || enrolment in 4034 && 30UOC at lv2 including 12UOC lv2 CRIM"
     },
     "ARTS3872": {
         "original_rule": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Media, Culture & Technology or Sociology & Anthropology<br/><br/>",
@@ -1657,7 +1657,7 @@
     },
     "ARTS3886": {
         "original_rule": "Prerequisite: 48UOC overall, including 6UOC lv1 and 6UOC lv2 in one of the following streams, Criminology/S&A; or enrolment in program 3422/4763 and 12UOC lv2 SRAP and 18UOC lv2 CRIM; or enrolment in Program 4034 and 30UOC at lv2 including 12UOC lv2 CRIM<br/><br/>",
-        "processed_rule": "48UOC && including 6UOC lv1 && 6UOC lv2 in one of the following streams, CRIM/S&A; || enrolment in program 3422/4763 && 12UOC lv2 SRAP && 18UOC lv2 CRIM; || enrolment in Program 4034 && 30UOC at lv2 including 12UOC lv2 CRIM"
+        "processed_rule": "48UOC && including 6UOC lv1 && 6UOC lv2 in one of the following streams, CRIM/S&A; || enrolment in 3422/4763 && 12UOC lv2 SRAP && 18UOC lv2 CRIM; || enrolment in 4034 && 30UOC at lv2 including 12UOC lv2 CRIM"
     },
     "ARTS3900": {
         "original_rule": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Gender Studies or History.<br/><br/>",
@@ -1669,319 +1669,319 @@
     },
     "ARTS3991": {
         "original_rule": "Prerequisite: 72 uoc overall, and enrolment in an Arts & Social Sciences major in an Arts & Social Sciences single or double degree program. Consent required<br/><br/>",
-        "processed_rule": "72UOC && enrolment in an SARTs & SOSS major in an SARTs & SOSS single || double degree program. Consent required"
+        "processed_rule": "72UOC && enrolment in an SARTs & SOSS major in an SARTs & SOSS single || double degree . Consent required"
     },
     "ARTS4100": {
         "original_rule": "Prerequisite: Enrolment in a School of the Arts and Media honours program<br/><br/>",
-        "processed_rule": "Enrolment in a School of the STAM honours program"
+        "processed_rule": "Enrolment in a School of the STAM honours"
     },
     "ARTS4202": {
         "original_rule": "Prerequisite: Enrolment in a School of the Arts and Media honours program<br/><br/>",
-        "processed_rule": "Enrolment in a School of the STAM honours program"
+        "processed_rule": "Enrolment in a School of the STAM honours"
     },
     "ARTS4247": {
         "original_rule": "Prerequisite: Enrolment in a School of Humanities and Languages honours program<br/><br/>",
-        "processed_rule": "Enrolment in a School of HUMS && Languages honours program"
+        "processed_rule": "Enrolment in a School of HUMS && Languages honours"
     },
     "ARTS4249": {
         "original_rule": "Prerequisite: Enrolment in a School of Humanities and Languages honours program<br/><br/>",
-        "processed_rule": "Enrolment in a School of HUMS && Languages honours program"
+        "processed_rule": "Enrolment in a School of HUMS && Languages honours"
     },
     "ARTS4266": {
         "original_rule": "Prerequisite: Enrolment in  a School of Social Sciences, Asian Studies or European Studies honours program<br/><br/>",
-        "processed_rule": "Enrolment in a School of SOSS || Asian Studies || European Studies honours program"
+        "processed_rule": "Enrolment in a School of SOSS || Asian Studies || European Studies honours"
     },
     "ARTS4268": {
         "original_rule": "Prerequisite: Enrolment in  a School of Social Sciences, Asian Studies or European Studies honours program<br/><br/>",
-        "processed_rule": "Enrolment in a School of SOSS || Asian Studies || European Studies honours program"
+        "processed_rule": "Enrolment in a School of SOSS || Asian Studies || European Studies honours"
     },
     "ARTS4600": {
         "original_rule": "Prerequisite: Enrolment in the Dance Studies honours program<br/><br/>",
-        "processed_rule": "Enrolment in the Dance Studies honours program"
+        "processed_rule": "Enrolment in the Dance Studies honours"
     },
     "ARTS4601": {
         "original_rule": "Prerequisite: Enrolment in the Dance Studies honours program<br/><br/>",
-        "processed_rule": "Enrolment in the Dance Studies honours program"
+        "processed_rule": "Enrolment in the Dance Studies honours"
     },
     "ARTS4602": {
         "original_rule": "Prerequisite: Enrolment in the Dance Studies honours program<br/><br/>",
-        "processed_rule": "Enrolment in the Dance Studies honours program"
+        "processed_rule": "Enrolment in the Dance Studies honours"
     },
     "ARTS4604": {
         "original_rule": "Prerequisite: Enrolment in the English honours program<br/><br/>",
-        "processed_rule": "Enrolment in the English honours program"
+        "processed_rule": "Enrolment in the English honours"
     },
     "ARTS4605": {
         "original_rule": "Prerequisite: Enrolment in the English honours program<br/><br/>",
-        "processed_rule": "Enrolment in the English honours program"
+        "processed_rule": "Enrolment in the English honours"
     },
     "ARTS4606": {
         "original_rule": "Prerequisite: Enrolment in the English honours program<br/><br/>",
-        "processed_rule": "Enrolment in the English honours program"
+        "processed_rule": "Enrolment in the English honours"
     },
     "ARTS4608": {
         "original_rule": "Prerequisite: Enrolment in the Film Studies honours program<br/><br/>",
-        "processed_rule": "Enrolment in the Film Studies honours program"
+        "processed_rule": "Enrolment in the Film Studies honours"
     },
     "ARTS4609": {
         "original_rule": "Prerequisite: Enrolment in the Film Studies honours program<br/><br/>",
-        "processed_rule": "Enrolment in the Film Studies honours program"
+        "processed_rule": "Enrolment in the Film Studies honours"
     },
     "ARTS4610": {
         "original_rule": "Prerequisite: Enrolment in the Film Studies honours program<br/><br/>",
-        "processed_rule": "Enrolment in the Film Studies honours program"
+        "processed_rule": "Enrolment in the Film Studies honours"
     },
     "ARTS4612": {
         "original_rule": "Prerequisite: Enrolment in Media, Culture and Technology honours program<br/><br/>",
-        "processed_rule": "Enrolment in MDIA && Culture && Technology honours program"
+        "processed_rule": "Enrolment in MDIA && Culture && Technology honours"
     },
     "ARTS4613": {
         "original_rule": "Prerequisite: Enrolment in Media, Culture and Technology honours program<br/><br/>",
-        "processed_rule": "Enrolment in MDIA && Culture && Technology honours program"
+        "processed_rule": "Enrolment in MDIA && Culture && Technology honours"
     },
     "ARTS4614": {
         "original_rule": "Prerequisite: Enrolment in Media, Culture and Technology honours program<br/><br/>",
-        "processed_rule": "Enrolment in MDIA && Culture && Technology honours program"
+        "processed_rule": "Enrolment in MDIA && Culture && Technology honours"
     },
     "ARTS4616": {
         "original_rule": "Prerequisite: Enrolment in Theatre and Performance Studies honours program<br/><br/>",
-        "processed_rule": "Enrolment in Theatre && Performance Studies honours program"
+        "processed_rule": "Enrolment in Theatre && Performance Studies honours"
     },
     "ARTS4617": {
         "original_rule": "Prerequisite: Enrolment in Theatre and Performance Studies honours program<br/><br/>",
-        "processed_rule": "Enrolment in Theatre && Performance Studies honours program"
+        "processed_rule": "Enrolment in Theatre && Performance Studies honours"
     },
     "ARTS4618": {
         "original_rule": "Prerequisite: Enrolment in Theatre and Performance Studies honours program<br/><br/>",
-        "processed_rule": "Enrolment in Theatre && Performance Studies honours program"
+        "processed_rule": "Enrolment in Theatre && Performance Studies honours"
     },
     "ARTS4620": {
         "original_rule": "Prerequisite: Enrolment in a Creative Writing honours program<br/><br/>",
-        "processed_rule": "Enrolment in a Creative Writing honours program"
+        "processed_rule": "Enrolment in a Creative Writing honours"
     },
     "ARTS4621": {
         "original_rule": "Prerequisite: Enrolment in a Creative Writing honours program<br/><br/>",
-        "processed_rule": "Enrolment in a Creative Writing honours program"
+        "processed_rule": "Enrolment in a Creative Writing honours"
     },
     "ARTS4622": {
         "original_rule": "Prerequisite: Enrolment in a Creative Writing honours program<br/><br/>",
-        "processed_rule": "Enrolment in a Creative Writing honours program"
+        "processed_rule": "Enrolment in a Creative Writing honours"
     },
     "ARTS4700": {
         "original_rule": "Prerequisite: Enrolment in Environmental Humanities honours program<br/><br/>",
-        "processed_rule": "Enrolment in Environmental HUMS honours program"
+        "processed_rule": "Enrolment in Environmental HUMS honours"
     },
     "ARTS4701": {
         "original_rule": "Prerequisite: Enrolment in Environmental Humanities honours program<br/><br/>",
-        "processed_rule": "Enrolment in Environmental HUMS honours program"
+        "processed_rule": "Enrolment in Environmental HUMS honours"
     },
     "ARTS4702": {
         "original_rule": "Prerequisite: Enrolment in Environmental Humanities honours program<br/><br/>",
-        "processed_rule": "Enrolment in Environmental HUMS honours program"
+        "processed_rule": "Enrolment in Environmental HUMS honours"
     },
     "ARTS4704": {
         "original_rule": "Prerequisite: Enrolment in the History honours program<br/><br/>",
-        "processed_rule": "Enrolment in the History honours program"
+        "processed_rule": "Enrolment in the History honours"
     },
     "ARTS4705": {
         "original_rule": "Prerequisite: Enrolment in the History honours program<br/><br/>",
-        "processed_rule": "Enrolment in the History honours program"
+        "processed_rule": "Enrolment in the History honours"
     },
     "ARTS4706": {
         "original_rule": "Prerequisite: Enrolment in the History honours program<br/><br/>",
-        "processed_rule": "Enrolment in the History honours program"
+        "processed_rule": "Enrolment in the History honours"
     },
     "ARTS4712": {
         "original_rule": "Prerequisite: Enrolment in the Philosophy honours program<br/><br/>",
-        "processed_rule": "Enrolment in the Philosophy honours program"
+        "processed_rule": "Enrolment in the Philosophy honours"
     },
     "ARTS4713": {
         "original_rule": "Prerequisite: Enrolment in the Philosophy honours program<br/><br/>",
-        "processed_rule": "Enrolment in the Philosophy honours program"
+        "processed_rule": "Enrolment in the Philosophy honours"
     },
     "ARTS4714": {
         "original_rule": "Prerequisite: Enrolment in the Philosophy honours program<br/><br/>",
-        "processed_rule": "Enrolment in the Philosophy honours program"
+        "processed_rule": "Enrolment in the Philosophy honours"
     },
     "ARTS4810": {
         "original_rule": "Prerequisite: Enrolment in the Asian Studies honours program<br/><br/>",
-        "processed_rule": "Enrolment in the Asian Studies honours program"
+        "processed_rule": "Enrolment in the Asian Studies honours"
     },
     "ARTS4811": {
         "original_rule": "Prerequisite: Enrolment in the Asian Studies honours program<br/><br/>",
-        "processed_rule": "Enrolment in the Asian Studies honours program"
+        "processed_rule": "Enrolment in the Asian Studies honours"
     },
     "ARTS4812": {
         "original_rule": "Prerequisite: Enrolment in the Asian Studies honours program<br/><br/>",
-        "processed_rule": "Enrolment in the Asian Studies honours program"
+        "processed_rule": "Enrolment in the Asian Studies honours"
     },
     "ARTS4814": {
         "original_rule": "Prerequisite: Enrolment in the Chinese Studies honours program<br/><br/>",
-        "processed_rule": "Enrolment in the Chinese Studies honours program"
+        "processed_rule": "Enrolment in the Chinese Studies honours"
     },
     "ARTS4815": {
         "original_rule": "Prerequisite: Enrolment in the Chinese Studies honours program<br/><br/>",
-        "processed_rule": "Enrolment in the Chinese Studies honours program"
+        "processed_rule": "Enrolment in the Chinese Studies honours"
     },
     "ARTS4816": {
         "original_rule": "Prerequisite: Enrolment in the Chinese Studies honours program<br/><br/>",
-        "processed_rule": "Enrolment in the Chinese Studies honours program"
+        "processed_rule": "Enrolment in the Chinese Studies honours"
     },
     "ARTS4818": {
         "original_rule": "Prerequisite: Enrolment in the French Studies honours program<br/><br/>",
-        "processed_rule": "Enrolment in the French Studies honours program"
+        "processed_rule": "Enrolment in the French Studies honours"
     },
     "ARTS4819": {
         "original_rule": "Prerequisite: Enrolment in the French Studies honours program<br/><br/>",
-        "processed_rule": "Enrolment in the French Studies honours program"
+        "processed_rule": "Enrolment in the French Studies honours"
     },
     "ARTS4820": {
         "original_rule": "Prerequisite: Enrolment in the French Studies honours program<br/><br/>",
-        "processed_rule": "Enrolment in the French Studies honours program"
+        "processed_rule": "Enrolment in the French Studies honours"
     },
     "ARTS4822": {
         "original_rule": "Prerequisite: Enrolment in the Spanish and Latin American Studies honours program<br/><br/>",
-        "processed_rule": "Enrolment in the Spanish && Latin American Studies honours program"
+        "processed_rule": "Enrolment in the Spanish && Latin American Studies honours"
     },
     "ARTS4823": {
         "original_rule": "Prerequisite: Enrolment in the Spanish and Latin American Studies honours program<br/><br/>",
-        "processed_rule": "Enrolment in the Spanish && Latin American Studies honours program"
+        "processed_rule": "Enrolment in the Spanish && Latin American Studies honours"
     },
     "ARTS4824": {
         "original_rule": "Prerequisite: Enrolment in the Spanish and Latin American Studies honours program<br/><br/>",
-        "processed_rule": "Enrolment in the Spanish && Latin American Studies honours program"
+        "processed_rule": "Enrolment in the Spanish && Latin American Studies honours"
     },
     "ARTS4826": {
         "original_rule": "Prerequisite: Enrolment in the Japanese Studies honours program<br/><br/>",
-        "processed_rule": "Enrolment in the JAPN Studies honours program"
+        "processed_rule": "Enrolment in the JAPN Studies honours"
     },
     "ARTS4827": {
         "original_rule": "Prerequisite: Enrolment in the Japanese Studies honours program<br/><br/>",
-        "processed_rule": "Enrolment in the JAPN Studies honours program"
+        "processed_rule": "Enrolment in the JAPN Studies honours"
     },
     "ARTS4828": {
         "original_rule": "Prerequisite: Enrolment in the Japanese Studies honours program<br/><br/>",
-        "processed_rule": "Enrolment in the JAPN Studies honours program"
+        "processed_rule": "Enrolment in the JAPN Studies honours"
     },
     "ARTS4830": {
         "original_rule": "Prerequisite: Enrolment in the Korean Studies honours program<br/><br/>",
-        "processed_rule": "Enrolment in the KORE honours program"
+        "processed_rule": "Enrolment in the KORE honours"
     },
     "ARTS4831": {
         "original_rule": "Prerequisite: Enrolment in the Korean Studies honours program<br/><br/>",
-        "processed_rule": "Enrolment in the KORE honours program"
+        "processed_rule": "Enrolment in the KORE honours"
     },
     "ARTS4832": {
         "original_rule": "Prerequisite: Enrolment in the Korean Studies honours program<br/><br/>",
-        "processed_rule": "Enrolment in the KORE honours program"
+        "processed_rule": "Enrolment in the KORE honours"
     },
     "ARTS4834": {
         "original_rule": "Prerequisite: Enrolment in the Linguistics honours program<br/><br/>",
-        "processed_rule": "Enrolment in the LING honours program"
+        "processed_rule": "Enrolment in the LING honours"
     },
     "ARTS4835": {
         "original_rule": "Prerequisite: Enrolment in the Linguistics honours program<br/><br/>",
-        "processed_rule": "Enrolment in the LING honours program"
+        "processed_rule": "Enrolment in the LING honours"
     },
     "ARTS4836": {
         "original_rule": "Prerequisite: Enrolment in the Linguistics honours program<br/><br/>",
-        "processed_rule": "Enrolment in the LING honours program"
+        "processed_rule": "Enrolment in the LING honours"
     },
     "ARTS4838": {
         "original_rule": "Prerequisite: Enrolment in the German Studies honours program<br/><br/>",
-        "processed_rule": "Enrolment in the German Studies honours program"
+        "processed_rule": "Enrolment in the German Studies honours"
     },
     "ARTS4839": {
         "original_rule": "Prerequisite: Enrolment in the German Studies honours program<br/><br/>",
-        "processed_rule": "Enrolment in the German Studies honours program"
+        "processed_rule": "Enrolment in the German Studies honours"
     },
     "ARTS4840": {
         "original_rule": "Prerequisite: Enrolment in the German Studies honours program<br/><br/>",
-        "processed_rule": "Enrolment in the German Studies honours program"
+        "processed_rule": "Enrolment in the German Studies honours"
     },
     "ARTS4900": {
         "original_rule": "Prerequisite: Enrolment in the Development Studies honours program<br/><br/>",
-        "processed_rule": "Enrolment in the COMD honours program"
+        "processed_rule": "Enrolment in the COMD honours"
     },
     "ARTS4901": {
         "original_rule": "Prerequisite: Enrolment in the Development Studies honours program<br/><br/>",
-        "processed_rule": "Enrolment in the COMD honours program"
+        "processed_rule": "Enrolment in the COMD honours"
     },
     "ARTS4902": {
         "original_rule": "Prerequisite: Enrolment in the Development Studies honours program<br/><br/>",
-        "processed_rule": "Enrolment in the COMD honours program"
+        "processed_rule": "Enrolment in the COMD honours"
     },
     "ARTS4904": {
         "original_rule": "Prerequisite: Enrolment in the European Studies honours program<br/><br/>",
-        "processed_rule": "Enrolment in the European Studies honours program"
+        "processed_rule": "Enrolment in the European Studies honours"
     },
     "ARTS4905": {
         "original_rule": "Prerequisite: Enrolment in the European Studies honours program<br/><br/>",
-        "processed_rule": "Enrolment in the European Studies honours program"
+        "processed_rule": "Enrolment in the European Studies honours"
     },
     "ARTS4906": {
         "original_rule": "Prerequisite: Enrolment in the European Studies honours program<br/><br/>",
-        "processed_rule": "Enrolment in the European Studies honours program"
+        "processed_rule": "Enrolment in the European Studies honours"
     },
     "ARTS4912": {
         "original_rule": "Prerequisite: Enrolment in the International Relations honours program<br/><br/>",
-        "processed_rule": "Enrolment in the International Relations honours program"
+        "processed_rule": "Enrolment in the International Relations honours"
     },
     "ARTS4913": {
         "original_rule": "Prerequisite: Enrolment in the International Relations honours program<br/><br/>",
-        "processed_rule": "Enrolment in the International Relations honours program"
+        "processed_rule": "Enrolment in the International Relations honours"
     },
     "ARTS4914": {
         "original_rule": "Prerequisite: Enrolment in the International Relations honours program<br/><br/>",
-        "processed_rule": "Enrolment in the International Relations honours program"
+        "processed_rule": "Enrolment in the International Relations honours"
     },
     "ARTS4916": {
         "original_rule": "Prerequisite: Enrolment in the Politics honours program<br/><br/>",
-        "processed_rule": "Enrolment in the Politics honours program"
+        "processed_rule": "Enrolment in the Politics honours"
     },
     "ARTS4917": {
         "original_rule": "Prerequisite: Enrolment in the Politics honours program<br/><br/>",
-        "processed_rule": "Enrolment in the Politics honours program"
+        "processed_rule": "Enrolment in the Politics honours"
     },
     "ARTS4918": {
         "original_rule": "Prerequisite: Enrolment in the Politics honours program<br/><br/>",
-        "processed_rule": "Enrolment in the Politics honours program"
+        "processed_rule": "Enrolment in the Politics honours"
     },
     "ARTS4920": {
         "original_rule": "Prerequisite: Enrolment in the Sociology and Anthropology honours program<br/><br/>",
-        "processed_rule": "Enrolment in the Sociology && Anthropology honours program"
+        "processed_rule": "Enrolment in the Sociology && Anthropology honours"
     },
     "ARTS4921": {
         "original_rule": "Prerequisite: Enrolment in the Sociology and Anthropology honours program<br/><br/>",
-        "processed_rule": "Enrolment in the Sociology && Anthropology honours program"
+        "processed_rule": "Enrolment in the Sociology && Anthropology honours"
     },
     "ARTS4922": {
         "original_rule": "Prerequisite: Enrolment in the Sociology and Anthropology honours program<br/><br/>",
-        "processed_rule": "Enrolment in the Sociology && Anthropology honours program"
+        "processed_rule": "Enrolment in the Sociology && Anthropology honours"
     },
     "ARTS4924": {
         "original_rule": "Prerequisite: Enrolment in the Politics and International Relations honours program<br/><br/>",
-        "processed_rule": "Enrolment in the Politics && International Relations honours program"
+        "processed_rule": "Enrolment in the Politics && International Relations honours"
     },
     "ARTS4925": {
         "original_rule": "Prerequisite: Enrolment in the Politics and International Relations honours program<br/><br/>",
-        "processed_rule": "Enrolment in the Politics && International Relations honours program"
+        "processed_rule": "Enrolment in the Politics && International Relations honours"
     },
     "ARTS4926": {
         "original_rule": "Prerequisite: Enrolment in the Politics and International Relations honours program<br/><br/>",
-        "processed_rule": "Enrolment in the Politics && International Relations honours program"
+        "processed_rule": "Enrolment in the Politics && International Relations honours"
     },
     "ARTS4927": {
         "original_rule": "Prerequisite: Enrolment in the Global Development honours program<br/><br/>",
-        "processed_rule": "Enrolment in the Global Development honours program"
+        "processed_rule": "Enrolment in the Global Development honours"
     },
     "ARTS4928": {
         "original_rule": "Prerequisite: Enrolment in the Global Development honours program<br/><br/>",
-        "processed_rule": "Enrolment in the Global Development honours program"
+        "processed_rule": "Enrolment in the Global Development honours"
     },
     "ARTS4929": {
         "original_rule": "Prerequisite: Enrolment  in the Global Development honours program<br/><br/>",
-        "processed_rule": "Enrolment in the Global Development honours program"
+        "processed_rule": "Enrolment in the Global Development honours"
     },
     "ATSI0001": {
         "original_rule": "",
@@ -2037,7 +2037,7 @@
     },
     "ATSI3008": {
         "original_rule": "Prerequisite: 120 units of credit overall, enrolment in a major in Indigenous Studies and enrolled in the final semester of an Arts Faculty single or dual degree program<br/><br/>",
-        "processed_rule": "120UOC && enrolment in a major in Indigenous Studies && enrolled in the final semester of an SARTs Faculty single || dual degree program"
+        "processed_rule": "120UOC && enrolment in a major in Indigenous Studies && enrolled in the final semester of an SARTs Faculty single || dual degree"
     },
     "ATSI3017": {
         "original_rule": "Prerequisite: 36 units of credit<br/><br/>",
@@ -2085,7 +2085,7 @@
     },
     "AVIA1111": {
         "original_rule": "Prerequisite: Enrolled in Aviation Program<br/><br/>",
-        "processed_rule": "Enrolled in AVEN Program"
+        "processed_rule": "Enrolled in AVEN"
     },
     "AVIA1321": {
         "original_rule": "None<br/><br/>",
@@ -2341,7 +2341,7 @@
     },
     "BABS4053": {
         "original_rule": "Prerequisite: Completion of 144 UOC of courses in the 3052 Bachelor of Science (Biotechnology) program.<br/><br/>",
-        "processed_rule": "144UOC of courses in the 3052 Bachelor of Science (BIOT) program"
+        "processed_rule": "144UOC of courses in the 3052 Bachelor of Science (BIOT) "
     },
     "BABS4516": {
         "original_rule": "Pre: Enrolled in BABS Honours plan<br/><br/>",
@@ -2525,7 +2525,7 @@
     },
     "BEIL6010": {
         "original_rule": "96 UOC and enrolment in FBE  Design program<br/><br/>",
-        "processed_rule": "96UOC && enrolment in FBE Design program"
+        "processed_rule": "96UOC && enrolment in FBE Design"
     },
     "BEIL6011": {
         "original_rule": "Prerequisite: 96 unit of credits completed<br/><br/>",
@@ -2669,7 +2669,7 @@
     },
     "BIOC3671": {
         "original_rule": "Prerequisite: BIOC2101, BIOC2201. Restricted to Advanced Science programs (3985, 3990, 3962, 3972, 3973, 3986, 3931, 3936)<br/><br/>",
-        "processed_rule": "BIOC2101, BIOC2201. Restricted to Advanced Science programs (3985, 3990, 3962, 3972, 3973, 3986, 3931, 3936)"
+        "processed_rule": "BIOC2101, BIOC2201. Restricted to Advanced Science s (3985, 3990, 3962, 3972, 3973, 3986, 3931, 3936)"
     },
     "BIOM1010": {
         "original_rule": "",
@@ -2873,19 +2873,19 @@
     },
     "BLDG1011": {
         "original_rule": "Program 3331 3332<br/><br/>",
-        "processed_rule": "Program 3331 3332"
+        "processed_rule": "3331 3332"
     },
     "BLDG1012": {
         "original_rule": "Program 3331 3332<br/><br/>",
-        "processed_rule": "Program 3331 3332"
+        "processed_rule": "3331 3332"
     },
     "BLDG1013": {
         "original_rule": "Program 3331 3332<br/><br/>",
-        "processed_rule": "Program 3331 3332"
+        "processed_rule": "3331 3332"
     },
     "BLDG1014": {
         "original_rule": "Program 3331 3332<br/><br/>",
-        "processed_rule": "Program 3331 3332"
+        "processed_rule": "3331 3332"
     },
     "BLDG1021": {
         "original_rule": "Prerequisite: BLDG1011<br/><br/>",
@@ -2893,15 +2893,15 @@
     },
     "BLDG1022": {
         "original_rule": "Program 3331 3332<br/><br/>",
-        "processed_rule": "Program 3331 3332"
+        "processed_rule": "3331 3332"
     },
     "BLDG1023": {
         "original_rule": "Program 3331 3332<br/><br/>",
-        "processed_rule": "Program 3331 3332"
+        "processed_rule": "3331 3332"
     },
     "BLDG1024": {
         "original_rule": "Program 3331 3332<br/><br/>",
-        "processed_rule": "Program 3331 3332"
+        "processed_rule": "3331 3332"
     },
     "BLDG2011": {
         "original_rule": "",
@@ -2953,31 +2953,31 @@
     },
     "BLDG4018": {
         "original_rule": "Program Prerequisite:4522 or Program 3332 with WAM of 65 or over<br/><br/>",
-        "processed_rule": "Program 4522 || Program 3332 with 65WAM || over"
+        "processed_rule": "4522 || 3332 with 65WAM || over"
     },
     "BLDG4019": {
         "original_rule": "Program Prerequisite:4522 or Program 3332 with WAM of 65 or over<br/><br/>",
-        "processed_rule": "Program 4522 || Program 3332 with 65WAM || over"
+        "processed_rule": "4522 || 3332 with 65WAM || over"
     },
     "BLDG4020": {
         "original_rule": "Program Prerequisite:4522 or Program 3332 with WAM of 65 or over<br/><br/>",
-        "processed_rule": "Program 4522 || Program 3332 with 65WAM || over"
+        "processed_rule": "4522 || 3332 with 65WAM || over"
     },
     "BLDG4022": {
         "original_rule": "Program Prerequisite:4522 or Program 3332 with WAM of 65 or over<br/><br/>",
-        "processed_rule": "Program 4522 || Program 3332 with 65WAM || over"
+        "processed_rule": "4522 || 3332 with 65WAM || over"
     },
     "BLDG4023": {
         "original_rule": "Program Prerequisite:4522 or Program 3332 with WAM of 65 or over<br/><br/>",
-        "processed_rule": "Program 4522 || Program 3332 with 65WAM || over"
+        "processed_rule": "4522 || 3332 with 65WAM || over"
     },
     "BLDG4024": {
         "original_rule": "Program Prerequisite:4522 or Program 3332 with WAM of 65 or over<br/><br/>",
-        "processed_rule": "Program 4522 || Program 3332 with 65WAM || over"
+        "processed_rule": "4522 || 3332 with 65WAM || over"
     },
     "BLDG4501": {
         "original_rule": "Program Prerequisite:4522 or Program 3332 with WAM of 65 or over<br/><br/>",
-        "processed_rule": "Program 4522 || Program 3332 with 65WAM || over"
+        "processed_rule": "4522 || 3332 with 65WAM || over"
     },
     "BLDG4504": {
         "original_rule": "Prerequisite: BLDG4501 or BENV4000<br/><br/>",
@@ -3141,7 +3141,7 @@
     },
     "CHEM1031": {
         "original_rule": "Prerequisite: Must be enrolled in a program with the option of a CHEM major<br/><br/>",
-        "processed_rule": "Must be enrolled in a program with the option of a CHEM major"
+        "processed_rule": "Must be enrolled in a with the option of a CHEM major"
     },
     "CHEM1041": {
         "original_rule": "Prerequisite: CHEM1031, or CHEM1011 with a credit or above.<br/><br/>",
@@ -3149,11 +3149,11 @@
     },
     "CHEM1051": {
         "original_rule": "Prerequisite: Enrolment in the Bachelor of Medicinal Chemistry (3999 or 3992) or Bachelor of Medicinal Chemistry/Law program<br/><br/>",
-        "processed_rule": "Enrolment in the Bachelor of Medicinal CHEM (3999 || 3992) || Bachelor of Medicinal CHEM/LAWS program"
+        "processed_rule": "Enrolment in the Bachelor of Medicinal CHEM (3999 || 3992) || Bachelor of Medicinal CHEM/LAWS"
     },
     "CHEM1061": {
         "original_rule": "Prerequisite: Enrolment in the Bachelor of Medicinal Chemistry (3992 or 3999) program and completion of either CHEM1051 or CHEM1031 or CHEM1011 with a credit or above.<br/><br/>",
-        "processed_rule": "Enrolment in the Bachelor of Medicinal CHEM (3992 || 3999) program && completion of CHEM1051 || CHEM1031 || CHEM1011 with a credit || above"
+        "processed_rule": "Enrolment in the Bachelor of Medicinal CHEM (3992 || 3999) && completion of CHEM1051 || CHEM1031 || CHEM1011 with a credit || above"
     },
     "CHEM1151": {
         "original_rule": "Enrolment in Medicinal Chemistry (3992) or (3999) or 4755<br/><br/>",
@@ -3197,7 +3197,7 @@
     },
     "CHEM2521": {
         "original_rule": "This is the main Level 2 Organic Chemistry course taught within the School of Chemistry.<br/>It assumes knowledge of CHEM1011 and CHEM1021 or CHEM1031 and CHEM1041 or CHEM1051 and CHEM1061, AND CHEM2041. It is a core element in Chemistry major programs. It is also required for industrial chemistry, biochemistry and medicinal chemistry programs.<br/><br/>",
-        "processed_rule": "This is the main L2 Organic CHEM course taught within the School of CHEM. It assumes knowledge of CHEM1011 && CHEM1021 || CHEM1031 && CHEM1041 || CHEM1051 && CHEM1061 && CHEM2041. It is a core element in CHEM major programs. It is also required for industrial chemistry && biochemistry && medicinal chemistry programs"
+        "processed_rule": "This is the main L2 Organic CHEM course taught within the School of CHEM. It assumes knowledge of CHEM1011 && CHEM1021 || CHEM1031 && CHEM1041 || CHEM1051 && CHEM1061 && CHEM2041. It is a core element in CHEM major s. It is also required for industrial chemistry && biochemistry && medicinal chemistry s"
     },
     "CHEM2531": {
         "original_rule": "Prerequisite: CHEM2041 Exclusion: CHEM2031, CHEM2828, CHEM2839<br/><br/>",
@@ -3465,7 +3465,7 @@
     },
     "COMM1900": {
         "original_rule": "Enrolment is only permitted for students in program Actl/Comm (3155) or Comm/Econ (3521).<br/>Pre-req: (ECON1101 and ECON1102) or (DPBS1101 and DPBS1102)<br/><br/>",
-        "processed_rule": "Enrolment is only permitted for students in program Actl/Comm (3155) || Comm/Econ (3521). (ECON1101 && ECON1102) || (DPBS1101 && DPBS1102)"
+        "processed_rule": "Enrolment is only permitted for students in Actl/Comm (3155) || Comm/Econ (3521). (ECON1101 && ECON1102) || (DPBS1101 && DPBS1102)"
     },
     "COMM1999": {
         "original_rule": "Pre-requisite: COMM0999 AND completed 30 UOC of Integrated First Year Core<br/><br/>",
@@ -3505,7 +3505,7 @@
     },
     "COMM3101": {
         "original_rule": "Pre-requisite: Completion of 48 UOC.<br/>This course is by application only.Please contact the Co-op office for more information.<br/>Students who have completed DIPP1510 or COMM2222 or are in Business Co-Op programs are excluded from this course.<br/><br/>",
-        "processed_rule": "48UOC. This course is by application only.Please contact the Co-op office for more information. Students who have completed DIPP1510 || COMM2222 || are in ZBUS Co-Op programs are"
+        "processed_rule": "48UOC. This course is by application only.Please contact the Co-op office for more information. Students who have completed DIPP1510 || COMM2222 || are in ZBUS Co-Op s are"
     },
     "COMM3202": {
         "original_rule": "Pre-requisite: COMM3101 or COMM2101<br/>Both terms of COMM3101/COMM2101 (12 UOC) must be successfully completed. <br/>This course is by application only. Please contact the Co-op office for more information.<br/>Excluded:DIPP1510, COMM2222, Business Co-Op programs<br/><br/>",
@@ -3661,11 +3661,11 @@
     },
     "COMP3901": {
         "original_rule": "Prerequisite: 80+ WAM in COMP, SENG or BINF courses, completion of all first and second year core requirements a CSE program, and agreement from a suitable CSE academic supervisor.<br/><br/>",
-        "processed_rule": "80WAM in COMP || SENG || BINF courses && completion of all first && second year core requirements a CSE program && agreement from a suitable CSE academic supervisor"
+        "processed_rule": "80WAM in COMP || SENG || BINF courses && completion of all first && second year core requirements a CSE && agreement from a suitable CSE academic supervisor"
     },
     "COMP3902": {
         "original_rule": "Prerequisite: 80+ WAM in COMP, SENG or BINF courses, completion of all first and second year core requirements a CSE program, and agreement from a suitable CSE academic supervisor.<br/><br/>",
-        "processed_rule": "80WAM in COMP || SENG || BINF courses && completion of all first && second year core requirements a CSE program && agreement from a suitable CSE academic supervisor"
+        "processed_rule": "80WAM in COMP || SENG || BINF courses && completion of all first && second year core requirements a CSE && agreement from a suitable CSE academic supervisor"
     },
     "COMP4121": {
         "original_rule": "Prerequisite: COMP3121 or  COMP3821.<br/><br/>",
@@ -3709,7 +3709,7 @@
     },
     "COMP4951": {
         "original_rule": "Prerequisite: Enrolled in a CSE BE (Hons) programs, completion of 126 UOC and completion of 3rd year core.<br/><br/>",
-        "processed_rule": "Enrolled in a CSE BE (Hons) programs && 126UOC && completion of 3rd year core"
+        "processed_rule": "Enrolled in a CSE BE (Hons) s && 126UOC && completion of 3rd year core"
     },
     "COMP4952": {
         "original_rule": "Prerequisite: Completion of Research Thesis A (4951)<br/><br/>",
@@ -3721,15 +3721,15 @@
     },
     "COMP4961": {
         "original_rule": "Prerequisite: Students enrolled in program 4515 Bachelor of Computer Science (Hons) or program 3648.<br/><br/>",
-        "processed_rule": "Students enrolled in program 4515 Bachelor of COMP (Hons) || program 3648"
+        "processed_rule": "4515 Bachelor of COMP (Hons) || 3648"
     },
     "COMP4962": {
         "original_rule": "COMP4962 Prerequisite: Students must successfully complete COMP4951<br/><br/>",
-        "processed_rule": "COMP4962 Students must successfully complete COMP4951"
+        "processed_rule": "COMP4962 COMP4951"
     },
     "COMP4963": {
         "original_rule": "COMP4963 Prerequisite: Student must successfully complete COMP4962<br/><br/>",
-        "processed_rule": "COMP4963 Student must successfully complete COMP4962"
+        "processed_rule": "COMP4963 COMP4962"
     },
     "COMP6080": {
         "original_rule": "Prerequisite: COMP1531 AND (COMP2521 OR COMP1927)<br/><br/>",
@@ -3817,11 +3817,11 @@
     },
     "COMP9301": {
         "original_rule": "(COMP6441 OR COMP6841) AND (6 UOC from  (COMP6443, COMP6843, COMP6445, COMP6845, COMP6447)) AND enrolled in final term of program<br/><br/>",
-        "processed_rule": "(COMP6441 || COMP6841) && (6UOC from (COMP6443 && COMP6843 && COMP6445 && COMP6845 && COMP6447)) && enrolled in final term of program"
+        "processed_rule": "(COMP6441 || COMP6841) && (6UOC from (COMP6443 && COMP6843 && COMP6445 && COMP6845 && COMP6447)) && enrolled in final term of"
     },
     "COMP9302": {
         "original_rule": "(COMP6441 OR COMP6841) AND (12 UOC from (COMP6443, COMP6843, COMP6445, COMP6845, COMP6447)) AND enrolled in final term of program<br/><br/>",
-        "processed_rule": "(COMP6441 || COMP6841) && (12UOC from (COMP6443 && COMP6843 && COMP6445 && COMP6845 && COMP6447)) && enrolled in final term of program"
+        "processed_rule": "(COMP6441 || COMP6841) && (12UOC from (COMP6443 && COMP6843 && COMP6445 && COMP6845 && COMP6447)) && enrolled in final term of"
     },
     "COMP9312": {
         "original_rule": "Prerequisite: COMP1927 or COMP2521, and COMP3311<br/><br/>",
@@ -3913,7 +3913,7 @@
     },
     "CRIM2021": {
         "original_rule": "Prerequisite: CRIM2020, not available to students in Bachelor of Laws double-degree programs<br/><br/>",
-        "processed_rule": "CRIM2020, not available to students in Bachelor of LAWSs double-degree programs"
+        "processed_rule": "CRIM2020, not available to students in Bachelor of LAWSs double-degree s"
     },
     "CRIM2031": {
         "original_rule": "Prerequisite: 24 units of credit at Level 1 including CRIM1010 or CRIM1011<br/><br/>",
@@ -3949,11 +3949,11 @@
     },
     "CRIM2042": {
         "original_rule": "Prerequisite: 24 units of credit overall, including CRIM1010 or CRIM1011, and enrolment in a single or double degree Criminology and Criminal Justice program, or Criminology stream. Equivalent: CRIM3001<br/><br/>",
-        "processed_rule": "24UOC || including CRIM1010 || CRIM1011 && enrolment in a single || double degree CRIM && Criminal Justice program || CRIM stream. Equivalent: CRIM3001"
+        "processed_rule": "24UOC || including CRIM1010 || CRIM1011 && enrolment in a single || double degree CRIM && Criminal Justice || CRIM stream. Equivalent: CRIM3001"
     },
     "CRIM3000": {
         "original_rule": "Prerequisite: 72 units of credit overall, and enrolment in a Criminology major or a Criminology & Criminology Justice single or dual program<br/><br/>",
-        "processed_rule": "72UOC && enrolment in a CRIM major || a CRIM & CRIM Justice single || dual program"
+        "processed_rule": "72UOC && enrolment in a CRIM major || a CRIM & CRIM Justice single || dual"
     },
     "CRIM3011": {
         "original_rule": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in Criminology. Or 84 uoc and enrolled in 4787 Social Work (Honours)/Law<br/><br/>",
@@ -3993,19 +3993,19 @@
     },
     "CRIM3025": {
         "original_rule": "Prerequisite: 96 uoc including CRIM1010, CRIM1011 and CRIM2042, WAM 75, and in the final year of a Criminology major or Criminology & Criminal Justice single or double degree. Students in program 4034 are not eligible to enrol. Consent required.<br/><br/>",
-        "processed_rule": "96UOC including CRIM1010 && CRIM1011 && CRIM2042 && 75WAM && in the final year of a CRIM major || CRIM & Criminal Justice single || double degree. Students in program 4034 are not eligible to enrol. Consent required"
+        "processed_rule": "96UOC including CRIM1010 && CRIM1011 && CRIM2042 && 75WAM && in the final year of a CRIM major || CRIM & Criminal Justice single || double degree. Students in 4034 are not eligible to enrol. Consent required"
     },
     "CRIM4001": {
         "original_rule": "Prerequisite: Enrolment in the Criminology honours program<br/><br/>",
-        "processed_rule": "Enrolment in the CRIM honours program"
+        "processed_rule": "Enrolment in the CRIM honours"
     },
     "CRIM4002": {
         "original_rule": "Prerequisite: Enrolment in the Criminology honours program<br/><br/>",
-        "processed_rule": "Enrolment in the CRIM honours program"
+        "processed_rule": "Enrolment in the CRIM honours"
     },
     "CRIM4003": {
         "original_rule": "Prerequisite: Enrolment in the Criminology honours program<br/><br/>",
-        "processed_rule": "Enrolment in the CRIM honours program"
+        "processed_rule": "Enrolment in the CRIM honours"
     },
     "CVEN1300": {
         "original_rule": "Prerequisite: (MATH1131 or DPST1013 or MATH1141) and (PHYS1121 or PHYS1131 or DPST1023 or PHYS1141)<br/><br/>",
@@ -4145,7 +4145,7 @@
     },
     "CVEN4050": {
         "original_rule": "Prerequisite: 132 UOCs needed to enrol into this course and BE Hons Programs only<br/><br/>",
-        "processed_rule": "132UOCs needed to enrol into this course && BE Hons Programs only"
+        "processed_rule": "132UOCs needed to enrol into this course && BE Hons s only"
     },
     "CVEN4051": {
         "original_rule": "Prerequisite CVEN4050<br/><br/>",
@@ -4561,7 +4561,7 @@
     },
     "DART2252": {
         "original_rule": "Students must have completed 48 UOC (in any program) prior to enrolling in this course.<br/><br/>",
-        "processed_rule": "Students must have 48UOC (in any program) prior to enrolling in this course"
+        "processed_rule": "Students must have 48UOC (in any ) prior to enrolling in this course"
     },
     "DART2310": {
         "original_rule": "",
@@ -4701,7 +4701,7 @@
     },
     "DATA3001": {
         "original_rule": "Prerequisite: Enrolment in 3959 Data Science program<br/><br/>",
-        "processed_rule": "Enrolment in 3959 DATA program"
+        "processed_rule": "Enrolment in 3959 DATA"
     },
     "DDES1100": {
         "original_rule": "",
@@ -4853,15 +4853,15 @@
     },
     "DPBS1001": {
         "original_rule": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-        "processed_rule": "6UOC of any DPGE && DPST && DPBS && enrolled in a Global Diploma program"
+        "processed_rule": "6UOC of any DPGE && DPST && DPBS && enrolled in a Global Diploma"
     },
     "DPBS1002": {
         "original_rule": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-        "processed_rule": "6UOC of any DPGE && DPST && DPBS && enrolled in a Global Diploma program"
+        "processed_rule": "6UOC of any DPGE && DPST && DPBS && enrolled in a Global Diploma"
     },
     "DPBS1012": {
         "original_rule": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-        "processed_rule": "6UOC of any DPGE && DPST && DPBS && enrolled in a Global Diploma program"
+        "processed_rule": "6UOC of any DPGE && DPST && DPBS && enrolled in a Global Diploma"
     },
     "DPBS1100": {
         "original_rule": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
@@ -4873,15 +4873,15 @@
     },
     "DPBS1102": {
         "original_rule": "Prereq: DPBS1101 + 6UOC GLDIP + enrolment in a Global Diploma program<br/><br/>",
-        "processed_rule": "DPBS1101 + 6UOC GLDIP + enrolment in a Global Diploma program"
+        "processed_rule": "DPBS1101 + 6UOC GLDIP + enrolment in a Global Diploma"
     },
     "DPBS1110": {
         "original_rule": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-        "processed_rule": "6UOC of any DPGE && DPST && DPBS && enrolled in a Global Diploma program"
+        "processed_rule": "6UOC of any DPGE && DPST && DPBS && enrolled in a Global Diploma"
     },
     "DPBS1120": {
         "original_rule": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-        "processed_rule": "6UOC of any DPGE && DPST && DPBS && enrolled in a Global Diploma program"
+        "processed_rule": "6UOC of any DPGE && DPST && DPBS && enrolled in a Global Diploma"
     },
     "DPBS1140": {
         "original_rule": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
@@ -4889,19 +4889,19 @@
     },
     "DPBS1150": {
         "original_rule": "Prereq: DPBS1100 or DPBS1101, 6UoC GLDIP + enrolment in a Global Diploma program<br/><br/>",
-        "processed_rule": "DPBS1100 || DPBS1101, 6UOC GLDIP + enrolment in a Global Diploma program"
+        "processed_rule": "DPBS1100 || DPBS1101, 6UOC GLDIP + enrolment in a Global Diploma"
     },
     "DPBS1170": {
         "original_rule": "Prereq: DPBS1140 6UoC GLDIP + enrolment in a Global Diploma program<br/><br/>",
-        "processed_rule": "DPBS1140 6UOC GLDIP + enrolment in a Global Diploma program"
+        "processed_rule": "DPBS1140 6UOC GLDIP + enrolment in a Global Diploma"
     },
     "DPBS1180": {
         "original_rule": "Prereq: DPBS1140 6UoC GLDIP + enrolment in a Global Diploma program<br/><br/>",
-        "processed_rule": "DPBS1140 6UOC GLDIP + enrolment in a Global Diploma program"
+        "processed_rule": "DPBS1140 6UOC GLDIP + enrolment in a Global Diploma"
     },
     "DPBS1190": {
         "original_rule": "Prereq: DPBS1110 or DPBS1203,6UoC GLDIP + enrolment in a Global Diploma program<br/><br/>",
-        "processed_rule": "DPBS1110 || DPBS1203,6UOC GLDIP + enrolment in a Global Diploma program"
+        "processed_rule": "DPBS1110 || DPBS1203,6UOC GLDIP + enrolment in a Global Diploma"
     },
     "DPBS1203": {
         "original_rule": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
@@ -4909,31 +4909,31 @@
     },
     "DPBS1501": {
         "original_rule": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-        "processed_rule": "6UOC of any DPGE && DPST && DPBS && enrolled in a Global Diploma program"
+        "processed_rule": "6UOC of any DPGE && DPST && DPBS && enrolled in a Global Diploma"
     },
     "DPBS1511": {
         "original_rule": "Prereq: DPBS1501 + 6UoC GLDIP + enrolment in a Global Diploma program<br/><br/>",
-        "processed_rule": "DPBS1501 + 6UOC GLDIP + enrolment in a Global Diploma program"
+        "processed_rule": "DPBS1501 + 6UOC GLDIP + enrolment in a Global Diploma"
     },
     "DPBS1602": {
         "original_rule": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-        "processed_rule": "6UOC of any DPGE && DPST && DPBS && enrolled in a Global Diploma program"
+        "processed_rule": "6UOC of any DPGE && DPST && DPBS && enrolled in a Global Diploma"
     },
     "DPBS1603": {
         "original_rule": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-        "processed_rule": "6UOC of any DPGE && DPST && DPBS && enrolled in a Global Diploma program"
+        "processed_rule": "6UOC of any DPGE && DPST && DPBS && enrolled in a Global Diploma"
     },
     "DPBS1609": {
         "original_rule": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-        "processed_rule": "6UOC of any DPGE && DPST && DPBS && enrolled in a Global Diploma program"
+        "processed_rule": "6UOC of any DPGE && DPST && DPBS && enrolled in a Global Diploma"
     },
     "DPBS1613": {
         "original_rule": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-        "processed_rule": "6UOC of any DPGE && DPST && DPBS && enrolled in a Global Diploma program"
+        "processed_rule": "6UOC of any DPGE && DPST && DPBS && enrolled in a Global Diploma"
     },
     "DPBS1710": {
         "original_rule": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-        "processed_rule": "6UOC of any DPGE && DPST && DPBS && enrolled in a Global Diploma program"
+        "processed_rule": "6UOC of any DPGE && DPST && DPBS && enrolled in a Global Diploma"
     },
     "DPGE1001": {
         "original_rule": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
@@ -5033,7 +5033,7 @@
     },
     "ECON1203": {
         "original_rule": "Excluded: MATH2841, MATH2801, MATH2901, MATH2099, ACTL2002 & ACTL2131. <br/>Prerequisite: Must not be enrolled in Program 3715 or 3764<br/><br/>",
-        "processed_rule": "Must not be enrolled in Program 3715 || 3764"
+        "processed_rule": "Must not be enrolled in 3715 || 3764"
     },
     "ECON1401": {
         "original_rule": "Prerequisite: ECON1101 or COMM1100<br/><br/>",
@@ -5089,7 +5089,7 @@
     },
     "ECON2403": {
         "original_rule": "Prerequisites: PPEC1001 AND ECON1202 AND in program 3478 or 4797<br/><br/>",
-        "processed_rule": "PPEC1001 && ECON1202 && in program 3478 || 4797"
+        "processed_rule": "PPEC1001 && ECON1202 && in 3478 || 4797"
     },
     "ECON3101": {
         "original_rule": "Prerequisite: ECON2101<br/><br/>",
@@ -5157,27 +5157,27 @@
     },
     "ECON4100": {
         "original_rule": "Admission to Economics Honours (program 4502 or stream ECONFH4501)<br/><br/>",
-        "processed_rule": "Admission to ECON Honours (program 4502 || stream ECONFH4501)"
+        "processed_rule": "Admission to ECON Honours ( 4502 || stream ECONFH4501)"
     },
     "ECON4103": {
         "original_rule": "Admission to Economics Honours (program 4502 or stream ECONFH4501)<br/><br/>",
-        "processed_rule": "Admission to ECON Honours (program 4502 || stream ECONFH4501)"
+        "processed_rule": "Admission to ECON Honours ( 4502 || stream ECONFH4501)"
     },
     "ECON4106": {
         "original_rule": "Admission to Economics Honours (program 4502 or stream ECONFH4501)<br/><br/>",
-        "processed_rule": "Admission to ECON Honours (program 4502 || stream ECONFH4501)"
+        "processed_rule": "Admission to ECON Honours ( 4502 || stream ECONFH4501)"
     },
     "ECON4150": {
         "original_rule": "Currently enrolled in program 4501 Commerce (Honours)<br/><br/>",
-        "processed_rule": "Currently enrolled in program 4501 COMM (Honours)"
+        "processed_rule": "Currently enrolled in 4501 COMM (Honours)"
     },
     "ECON4151": {
         "original_rule": "Currently enrolled in program 4501 Commerce (Honours)<br/><br/>",
-        "processed_rule": "Currently enrolled in program 4501 COMM (Honours)"
+        "processed_rule": "Currently enrolled in 4501 COMM (Honours)"
     },
     "ECON4152": {
         "original_rule": "Currently enrolled in program 4501 Commerce (Honours)<br/><br/>",
-        "processed_rule": "Currently enrolled in program 4501 COMM (Honours)"
+        "processed_rule": "Currently enrolled in 4501 COMM (Honours)"
     },
     "ECON4160": {
         "original_rule": "Admission to Economics Honours stream (ECONAH4502)<br/><br/>",
@@ -5205,27 +5205,27 @@
     },
     "ECON4201": {
         "original_rule": "Pre-requisite: ECON4103<br/>Assumed knowledge: Familiarity with matrix algebra, introductory statistics and econometrics. Prior Knowledge in Statistical software or programming languages will be useful.<br/><br/>",
-        "processed_rule": "ECON4103 Assumed knowledge: Familiarity with matrix algebra && introductory statistics && econometrics. Prior Knowledge in Statistical software || programming languages will be useful"
+        "processed_rule": "ECON4103 Assumed knowledge: Familiarity with matrix algebra && introductory statistics && econometrics. Prior Knowledge in Statistical software || ming languages will be useful"
     },
     "ECON4202": {
         "original_rule": "Admission to Economics Honours (program 4502 or stream ECONFH4501)<br/><br/>",
-        "processed_rule": "Admission to ECON Honours (program 4502 || stream ECONFH4501)"
+        "processed_rule": "Admission to ECON Honours ( 4502 || stream ECONFH4501)"
     },
     "ECON4205": {
         "original_rule": "Admission to Economics Honours (program 4502 or stream ECONFH4501)<br/><br/>",
-        "processed_rule": "Admission to ECON Honours (program 4502 || stream ECONFH4501)"
+        "processed_rule": "Admission to ECON Honours ( 4502 || stream ECONFH4501)"
     },
     "ECON4208": {
         "original_rule": "Admission to Economics Honours (program 4502 or stream ECONFH4501)<br/><br/>",
-        "processed_rule": "Admission to ECON Honours (program 4502 || stream ECONFH4501)"
+        "processed_rule": "Admission to ECON Honours ( 4502 || stream ECONFH4501)"
     },
     "ECON4301": {
         "original_rule": "Admission to Economics Honours (program 4502 or stream ECONFH4501)<br/><br/>",
-        "processed_rule": "Admission to ECON Honours (program 4502 || stream ECONFH4501)"
+        "processed_rule": "Admission to ECON Honours ( 4502 || stream ECONFH4501)"
     },
     "ECON4302": {
         "original_rule": "Admission to Economics Honours (program 4502 or stream ECONFH4501)<br/><br/>",
-        "processed_rule": "Admission to ECON Honours (program 4502 || stream ECONFH4501)"
+        "processed_rule": "Admission to ECON Honours ( 4502 || stream ECONFH4501)"
     },
     "ECON4303": {
         "original_rule": "Pre-requisite: ECON4100 AND (in Economics Honours (4502) or in stream ECONFH4501)<br/><br/>",
@@ -5233,23 +5233,23 @@
     },
     "ECON4307": {
         "original_rule": "Admission to Economics Honours (program 4502 or stream ECONFH4501)<br/><br/>",
-        "processed_rule": "Admission to ECON Honours (program 4502 || stream ECONFH4501)"
+        "processed_rule": "Admission to ECON Honours ( 4502 || stream ECONFH4501)"
     },
     "ECON4309": {
         "original_rule": "Admission to Economics Honours (program 4502 or stream ECONFH4501)<br/><br/>",
-        "processed_rule": "Admission to ECON Honours (program 4502 || stream ECONFH4501)"
+        "processed_rule": "Admission to ECON Honours ( 4502 || stream ECONFH4501)"
     },
     "ECON4310": {
         "original_rule": "Admission to Economics Honours (program 4502 or stream ECONFH4501)<br/><br/>",
-        "processed_rule": "Admission to ECON Honours (program 4502 || stream ECONFH4501)"
+        "processed_rule": "Admission to ECON Honours ( 4502 || stream ECONFH4501)"
     },
     "ECON4311": {
         "original_rule": "Admission to Economics Honours (program 4502 or stream ECONFH4501)<br/><br/>",
-        "processed_rule": "Admission to ECON Honours (program 4502 || stream ECONFH4501)"
+        "processed_rule": "Admission to ECON Honours ( 4502 || stream ECONFH4501)"
     },
     "ECON4350": {
         "original_rule": "Admission to Economics Honours (program 4502 or stream ECONFH4501)<br/><br/>",
-        "processed_rule": "Admission to ECON Honours (program 4502 || stream ECONFH4501)"
+        "processed_rule": "Admission to ECON Honours ( 4502 || stream ECONFH4501)"
     },
     "EDST1101": {
         "original_rule": "",
@@ -5265,11 +5265,11 @@
     },
     "EDST2002": {
         "original_rule": "Prerequisite: 72 uoc overall, including EDST1101, EDST1104, EDST1108, and EDST2003, and enrolment in an Education program. Students must have passed the Literacy and Numeracy Test for Initial Teacher Education in order to enrol into this course<br/><br/>",
-        "processed_rule": "72UOC && including EDST1101 && EDST1104 && EDST1108 && EDST2003 && enrolment in an Education program. Students must have passed the Literacy && Numeracy Test for Initial Teacher Education in order to enrol into this course"
+        "processed_rule": "72UOC && including EDST1101 && EDST1104 && EDST1108 && EDST2003 && enrolment in an Education . Students must have passed the Literacy && Numeracy Test for Initial Teacher Education in order to enrol into this course"
     },
     "EDST2003": {
         "original_rule": "Prerequisite: 24 units of credit at Level 1 including EDST1101 or EDST1104 and enrolment in one of the following teaching Programs 3446, 3462, 4053, 4054, 4058, 4059, 4061, 4062 or 4076<br/><br/>",
-        "processed_rule": "24UOC at L1 including EDST1101 || EDST1104 && enrolment in one of the following teaching Programs 3446 || 3462 || 4053 || 4054 || 4058 || 4059 || 4061 || 4062 || 4076"
+        "processed_rule": "24UOC at L1 including EDST1101 || EDST1104 && enrolment in one of the following teaching s 3446 || 3462 || 4053 || 4054 || 4058 || 4059 || 4061 || 4062 || 4076"
     },
     "EDST2032": {
         "original_rule": "Prerequisite: 18 units of credit at Level 1<br/><br/>",
@@ -5289,143 +5289,143 @@
     },
     "EDST2094": {
         "original_rule": "Prerequisite: 18 units of credit at Level 1, and enrolment in an Education program. Please contact the School of Education for enrolment<br/><br/>",
-        "processed_rule": "18UOC at L1 && enrolment in an Education program. Please contact the School of Education for enrolment"
+        "processed_rule": "18UOC at L1 && enrolment in an Education . Please contact the School of Education for enrolment"
     },
     "EDST4080": {
         "original_rule": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in an Education program<br/><br/>",
-        "processed_rule": "78UOC && including EDST2002 && enrolment in an Education program"
+        "processed_rule": "78UOC && including EDST2002 && enrolment in an Education"
     },
     "EDST4084": {
         "original_rule": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in an Education program<br/><br/>",
-        "processed_rule": "78UOC && including EDST2002 && enrolment in an Education program"
+        "processed_rule": "78UOC && including EDST2002 && enrolment in an Education"
     },
     "EDST4096": {
         "original_rule": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in an Education program<br/><br/>",
-        "processed_rule": "78UOC && including EDST2002 && enrolment in an Education program"
+        "processed_rule": "78UOC && including EDST2002 && enrolment in an Education"
     },
     "EDST4501": {
         "original_rule": "Prerequisite: Enrolment in the Education honours program<br/><br/>",
-        "processed_rule": "Enrolment in the Education honours program"
+        "processed_rule": "Enrolment in the Education honours"
     },
     "EDST4502": {
         "original_rule": "Prerequisite: Enrolment in the Education honours program<br/><br/>",
-        "processed_rule": "Enrolment in the Education honours program"
+        "processed_rule": "Enrolment in the Education honours"
     },
     "EDST4503": {
         "original_rule": "Prerequisite: Enrolment in the Education honours program<br/><br/>",
-        "processed_rule": "Enrolment in the Education honours program"
+        "processed_rule": "Enrolment in the Education honours"
     },
     "EDST4505": {
         "original_rule": "Prerequisite: Enrolment in the Education honours program<br/><br/>",
-        "processed_rule": "Enrolment in the Education honours program"
+        "processed_rule": "Enrolment in the Education honours"
     },
     "EDST4506": {
         "original_rule": "Prerequisite: Enrolment in the Education honours program<br/><br/>",
-        "processed_rule": "Enrolment in the Education honours program"
+        "processed_rule": "Enrolment in the Education honours"
     },
     "EDST4507": {
         "original_rule": "Prerequisite: Enrolment in the Education honours program<br/><br/>",
-        "processed_rule": "Enrolment in the Education honours program"
+        "processed_rule": "Enrolment in the Education honours"
     },
     "EDST6700": {
         "original_rule": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053 or 4054<br/><br/>",
-        "processed_rule": "78UOC && including EDST2002 && enrolment in program 4053 || 4054"
+        "processed_rule": "78UOC && including EDST2002 && enrolment in 4053 || 4054"
     },
     "EDST6701": {
         "original_rule": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053 or 4054<br/><br/>",
-        "processed_rule": "78UOC && including EDST2002 && enrolment in program 4053 || 4054"
+        "processed_rule": "78UOC && including EDST2002 && enrolment in 4053 || 4054"
     },
     "EDST6702": {
         "original_rule": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053 or 4054<br/><br/>",
-        "processed_rule": "78UOC && including EDST2002 && enrolment in program 4053 || 4054"
+        "processed_rule": "78UOC && including EDST2002 && enrolment in 4053 || 4054"
     },
     "EDST6704": {
         "original_rule": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053 or 4054<br/><br/>",
-        "processed_rule": "78UOC && including EDST2002 && enrolment in program 4053 || 4054"
+        "processed_rule": "78UOC && including EDST2002 && enrolment in 4053 || 4054"
     },
     "EDST6705": {
         "original_rule": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053 or 4054<br/><br/>",
-        "processed_rule": "78UOC && including EDST2002 && enrolment in program 4053 || 4054"
+        "processed_rule": "78UOC && including EDST2002 && enrolment in 4053 || 4054"
     },
     "EDST6706": {
         "original_rule": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053, 4054, or 4076<br/><br/>",
-        "processed_rule": "78UOC && including EDST2002 && enrolment in program 4053 || 4054 || 4076"
+        "processed_rule": "78UOC && including EDST2002 && enrolment in 4053 || 4054 || 4076"
     },
     "EDST6707": {
         "original_rule": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053 or 4054<br/><br/>",
-        "processed_rule": "78UOC && including EDST2002 && enrolment in program 4053 || 4054"
+        "processed_rule": "78UOC && including EDST2002 && enrolment in 4053 || 4054"
     },
     "EDST6708": {
         "original_rule": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053 or 4054<br/><br/>",
-        "processed_rule": "78UOC && including EDST2002 && enrolment in program 4053 || 4054"
+        "processed_rule": "78UOC && including EDST2002 && enrolment in 4053 || 4054"
     },
     "EDST6710": {
         "original_rule": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053 or 4054<br/><br/>",
-        "processed_rule": "78UOC && including EDST2002 && enrolment in program 4053 || 4054"
+        "processed_rule": "78UOC && including EDST2002 && enrolment in 4053 || 4054"
     },
     "EDST6711": {
         "original_rule": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053 or 4054<br/><br/>",
-        "processed_rule": "78UOC && including EDST2002 && enrolment in program 4053 || 4054"
+        "processed_rule": "78UOC && including EDST2002 && enrolment in 4053 || 4054"
     },
     "EDST6713": {
         "original_rule": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4076<br/><br/>",
-        "processed_rule": "78UOC && including EDST2002 && enrolment in program 4076"
+        "processed_rule": "78UOC && including EDST2002 && enrolment in 4076"
     },
     "EDST6714": {
         "original_rule": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053 or 4054<br/><br/>",
-        "processed_rule": "78UOC && including EDST2002 && enrolment in program 4053 || 4054"
+        "processed_rule": "78UOC && including EDST2002 && enrolment in 4053 || 4054"
     },
     "EDST6715": {
         "original_rule": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 3462 or 4058<br/><br/>",
-        "processed_rule": "78UOC && including EDST2002 && enrolment in program 3462 || 4058"
+        "processed_rule": "78UOC && including EDST2002 && enrolment in 3462 || 4058"
     },
     "EDST6716": {
         "original_rule": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 3462, 4054, or 4058<br/><br/>",
-        "processed_rule": "78UOC && including EDST2002 && enrolment in program 3462 || 4054 || 4058"
+        "processed_rule": "78UOC && including EDST2002 && enrolment in 3462 || 4054 || 4058"
     },
     "EDST6717": {
         "original_rule": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053 or 4054<br/><br/>",
-        "processed_rule": "78UOC && including EDST2002 && enrolment in program 4053 || 4054"
+        "processed_rule": "78UOC && including EDST2002 && enrolment in 4053 || 4054"
     },
     "EDST6718": {
         "original_rule": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053 or 4054<br/><br/>",
-        "processed_rule": "78UOC && including EDST2002 && enrolment in program 4053 || 4054"
+        "processed_rule": "78UOC && including EDST2002 && enrolment in 4053 || 4054"
     },
     "EDST6719": {
         "original_rule": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053 or 4054<br/><br/>",
-        "processed_rule": "78UOC && including EDST2002 && enrolment in program 4053 || 4054"
+        "processed_rule": "78UOC && including EDST2002 && enrolment in 4053 || 4054"
     },
     "EDST6720": {
         "original_rule": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4054<br/><br/>",
-        "processed_rule": "78UOC && including EDST2002 && enrolment in program 4054"
+        "processed_rule": "78UOC && including EDST2002 && enrolment in 4054"
     },
     "EDST6722": {
         "original_rule": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053 or 4054<br/><br/>",
-        "processed_rule": "78UOC && including EDST2002 && enrolment in program 4053 || 4054"
+        "processed_rule": "78UOC && including EDST2002 && enrolment in 4053 || 4054"
     },
     "EDST6723": {
         "original_rule": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053 or 4054<br/><br/>",
-        "processed_rule": "78UOC && including EDST2002 && enrolment in program 4053 || 4054"
+        "processed_rule": "78UOC && including EDST2002 && enrolment in 4053 || 4054"
     },
     "EDST6724": {
         "original_rule": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053 or 4054<br/><br/>",
-        "processed_rule": "78UOC && including EDST2002 && enrolment in program 4053 || 4054"
+        "processed_rule": "78UOC && including EDST2002 && enrolment in 4053 || 4054"
     },
     "EDST6725": {
         "original_rule": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4076<br/><br/>",
-        "processed_rule": "78UOC && including EDST2002 && enrolment in program 4076"
+        "processed_rule": "78UOC && including EDST2002 && enrolment in 4076"
     },
     "EDST6726": {
         "original_rule": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4076<br/><br/>",
-        "processed_rule": "78UOC && including EDST2002 && enrolment in program 4076"
+        "processed_rule": "78UOC && including EDST2002 && enrolment in 4076"
     },
     "EDST6727": {
         "original_rule": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in one of the following programs, 3426, 3446, 3470, 4053 or 4054<br/><br/>",
-        "processed_rule": "78UOC && including EDST2002 && enrolment in one of the following programs || 3426 || 3446 || 3470 || 4053 || 4054"
+        "processed_rule": "78UOC && including EDST2002 && enrolment in one of the following s || 3426 || 3446 || 3470 || 4053 || 4054"
     },
     "EDST6728": {
         "original_rule": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 3446 or 3470<br/><br/>",
-        "processed_rule": "78UOC && including EDST2002 && enrolment in program 3446 || 3470"
+        "processed_rule": "78UOC && including EDST2002 && enrolment in 3446 || 3470"
     },
     "EDST6730": {
         "original_rule": "Prerequisite: EDST6700. Corerequisite: EDST6760<br/><br/>",
@@ -5529,7 +5529,7 @@
     },
     "EDST6760": {
         "original_rule": "Prerequisite: EDST2002, EDST4084, 12 uoc Teaching Method 1 courses, and enrolment in an Education program. Students must have passed LANTITE.\u00a0 Students must have sufficient subject content knowledge in their teaching areas<br/><br/>",
-        "processed_rule": "EDST2002 && EDST4084 && 12UOC Teaching Method 1 courses && enrolment in an Education program. Students must have passed LANTITE.\u00a0 Students must have sufficient subject content knowledge in their teaching areas"
+        "processed_rule": "EDST2002 && EDST4084 && 12UOC Teaching Method 1 courses && enrolment in an Education . Students must have passed LANTITE.\u00a0 Students must have sufficient subject content knowledge in their teaching areas"
     },
     "EDST6761": {
         "original_rule": "Prerequisite: EDST6760 and 12 units of credit in Teaching Methods courses. Students must have passed the Literacy and Numeracy Test for Initial Teacher Education in order to enrol into this course.<br/><br/>",
@@ -5537,11 +5537,11 @@
     },
     "EDST6765": {
         "original_rule": "Prerequisite: EDST4080, EDST4096, EDST6760, 24 uoc Teaching Method courses, and enrolment in an Education program. Students must have passed LANTITE.\u00a0Students must have sufficient subject content knowledge in their teaching areas.\u00a0Excluded: EDST4081<br/><br/>",
-        "processed_rule": "EDST4080 && EDST4096 && EDST6760 && 24UOC Teaching Method courses && enrolment in an Education program. Students must have passed LANTITE.\u00a0Students must have sufficient subject content knowledge in their teaching areas"
+        "processed_rule": "EDST4080 && EDST4096 && EDST6760 && 24UOC Teaching Method courses && enrolment in an Education . Students must have passed LANTITE.\u00a0Students must have sufficient subject content knowledge in their teaching areas"
     },
     "EDST6771": {
         "original_rule": "Prerequisite: 78 UOC overall, including EDST2002, and enrolment in program 4059, 4061, 4062, 4064, or 4066<br/><br/>",
-        "processed_rule": "78UOC && including EDST2002 && enrolment in program 4059 || 4061 || 4062 || 4064 || 4066"
+        "processed_rule": "78UOC && including EDST2002 && enrolment in 4059 || 4061 || 4062 || 4064 || 4066"
     },
     "EDST6772": {
         "original_rule": "Prerequisite: EDST6771. Corerequisite: EDST6760<br/><br/>",
@@ -5549,7 +5549,7 @@
     },
     "EDST6775": {
         "original_rule": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4059, 4061, 4062, 4063, 4064, or 4066<br/><br/>",
-        "processed_rule": "78UOC && including EDST2002 && enrolment in program 4059 || 4061 || 4062 || 4063 || 4064 || 4066"
+        "processed_rule": "78UOC && including EDST2002 && enrolment in 4059 || 4061 || 4062 || 4063 || 4064 || 4066"
     },
     "EDST6776": {
         "original_rule": "Prerequisite: EDST6775. Corerequisite: EDST6760<br/><br/>",
@@ -5557,7 +5557,7 @@
     },
     "EDST6777": {
         "original_rule": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4059, 4061, 4063, or 4066<br/><br/>",
-        "processed_rule": "78UOC && including EDST2002 && enrolment in program 4059 || 4061 || 4063 || 4066"
+        "processed_rule": "78UOC && including EDST2002 && enrolment in 4059 || 4061 || 4063 || 4066"
     },
     "EDST6778": {
         "original_rule": "Prerequisite: EDST6777. Corerequisite: EDST6760<br/><br/>",
@@ -5565,35 +5565,35 @@
     },
     "EDST6920": {
         "original_rule": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053 or 4054<br/><br/>",
-        "processed_rule": "78UOC && including EDST2002 && enrolment in program 4053 || 4054"
+        "processed_rule": "78UOC && including EDST2002 && enrolment in 4053 || 4054"
     },
     "EDST6921": {
         "original_rule": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053 or 4054<br/><br/>",
-        "processed_rule": "78UOC && including EDST2002 && enrolment in program 4053 || 4054"
+        "processed_rule": "78UOC && including EDST2002 && enrolment in 4053 || 4054"
     },
     "EDST6922": {
         "original_rule": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4076<br/><br/>",
-        "processed_rule": "78UOC && including EDST2002 && enrolment in program 4076"
+        "processed_rule": "78UOC && including EDST2002 && enrolment in 4076"
     },
     "EDST6923": {
         "original_rule": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4076<br/><br/>",
-        "processed_rule": "78UOC && including EDST2002 && enrolment in program 4076"
+        "processed_rule": "78UOC && including EDST2002 && enrolment in 4076"
     },
     "EDST6924": {
         "original_rule": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4076<br/><br/>",
-        "processed_rule": "78UOC && including EDST2002 && enrolment in program 4076"
+        "processed_rule": "78UOC && including EDST2002 && enrolment in 4076"
     },
     "EDST6925": {
         "original_rule": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4076<br/><br/>",
-        "processed_rule": "78UOC && including EDST2002 && enrolment in program 4076"
+        "processed_rule": "78UOC && including EDST2002 && enrolment in 4076"
     },
     "EDST6926": {
         "original_rule": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4076<br/><br/>",
-        "processed_rule": "78UOC && including EDST2002 && enrolment in program 4076"
+        "processed_rule": "78UOC && including EDST2002 && enrolment in 4076"
     },
     "EDST6927": {
         "original_rule": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4076<br/><br/>",
-        "processed_rule": "78UOC && including EDST2002 && enrolment in program 4076"
+        "processed_rule": "78UOC && including EDST2002 && enrolment in 4076"
     },
     "EDST6950": {
         "original_rule": "Prerequisite: EDST6724 or EDST6920. Corerequisite: EDST6760<br/><br/>",
@@ -5833,7 +5833,7 @@
     },
     "ENGG2997": {
         "original_rule": "Successful completion of 72 UOC and enrolled in program 3778 or 3061<br/><br/>",
-        "processed_rule": "Successful 72UOC && enrolled in program 3778 || 3061"
+        "processed_rule": "Successful 72UOC && enrolled in 3778 || 3061"
     },
     "ENGG3001": {
         "original_rule": "Prerequisite: Completion of 96UOC<br/><br/>",
@@ -6045,19 +6045,19 @@
     },
     "FINS4776": {
         "original_rule": "Corequisite: Must be enrolled in program 4501 (Finance) or FINS3775 or FINS4775<br/><br/>",
-        "processed_rule": "Corequisite: Must be enrolled in program 4501 (FINS) || FINS3775 || FINS4775"
+        "processed_rule": "Corequisite: Must be enrolled in 4501 (FINS) || FINS3775 || FINS4775"
     },
     "FINS4777": {
         "original_rule": "Corequisite: Must be enrolled in program 4501 (Finance) or FINS3775 or FINS4775<br/><br/>",
-        "processed_rule": "Corequisite: Must be enrolled in program 4501 (FINS) || FINS3775 || FINS4775"
+        "processed_rule": "Corequisite: Must be enrolled in 4501 (FINS) || FINS3775 || FINS4775"
     },
     "FINS4779": {
         "original_rule": "Corequisite: Must be enrolled in program 4501 (Finance) or FINS3775 or FINS4775<br/><br/>",
-        "processed_rule": "Corequisite: Must be enrolled in program 4501 (FINS) || FINS3775 || FINS4775"
+        "processed_rule": "Corequisite: Must be enrolled in 4501 (FINS) || FINS3775 || FINS4775"
     },
     "FINS4792": {
         "original_rule": "Corequisite: Must be enrolled in program 4501 (Finance) or FINS3775 or FINS4775<br/><br/>",
-        "processed_rule": "Corequisite: Must be enrolled in program 4501 (FINS) || FINS3775 || FINS4775"
+        "processed_rule": "Corequisite: Must be enrolled in 4501 (FINS) || FINS3775 || FINS4775"
     },
     "FINS4796": {
         "original_rule": "",
@@ -6513,7 +6513,7 @@
     },
     "HESC1501": {
         "original_rule": "Prerequisite: 3871 program<br/><br/>",
-        "processed_rule": "3871 program"
+        "processed_rule": "3871"
     },
     "HESC1511": {
         "original_rule": "Pre req: HESC1501 and PSYC1001<br/><br/>",
@@ -6521,7 +6521,7 @@
     },
     "HESC2451": {
         "original_rule": "Prerequisite program 3871<br/><br/>",
-        "processed_rule": "program 3871"
+        "processed_rule": "3871"
     },
     "HESC2452": {
         "original_rule": "Prerequisites: ANAT2451 (or both ANAT3131 and ANAT3141) and HESC2451 (or BIOM2451 or SESC2451)<br/><br/>",
@@ -6797,7 +6797,7 @@
     },
     "INFS3603": {
         "original_rule": "Pre-requisite: INFS1602 OR INFS2602 OR ((in program 3959 or completing Business Analytics major (COMMJ1)) AND completed 48 UOC)<br/><br/>",
-        "processed_rule": "INFS1602 || INFS2602 || ((in program 3959 || completing ZBUS Analytics major (COMMJ1)) && 48UOC)"
+        "processed_rule": "INFS1602 || INFS2602 || ((in 3959 || completing ZBUS Analytics major (COMMJ1)) && 48UOC)"
     },
     "INFS3604": {
         "original_rule": "Pre-requisite: INFS2603<br/><br/>",
@@ -6849,7 +6849,7 @@
     },
     "INFS4858": {
         "original_rule": "Enrolment in Streams: Enrolled in an Honours Program majoring in Information Systems (INFSAH OR INFSBH OR INFSCH)<br/><br/>",
-        "processed_rule": "Enrolment in Streams: Enrolled in an Honours Program majoring in INFS (INFSAH || INFSBH || INFSCH)"
+        "processed_rule": "Enrolment in Streams: Enrolled in an Honours majoring in INFS (INFSAH || INFSBH || INFSCH)"
     },
     "INFS4886": {
         "original_rule": "Prerequisite: Enrolled in Honours majoring in Information Systems.<br/><br/>",
@@ -6865,7 +6865,7 @@
     },
     "INFS4907": {
         "original_rule": "Enrolment in Streams: Enrolled in an Honours Program majoring in Information Systems (INFSAH OR INFSBH OR INFSCH)<br/><br/>",
-        "processed_rule": "Enrolment in Streams: Enrolled in an Honours Program majoring in INFS (INFSAH || INFSBH || INFSCH)"
+        "processed_rule": "Enrolment in Streams: Enrolled in an Honours majoring in INFS (INFSAH || INFSBH || INFSCH)"
     },
     "INST1005": {
         "original_rule": "Prerequisite: Enrolment in an International Studies single or double degree<br/><br/>",
@@ -6881,11 +6881,11 @@
     },
     "INST2003": {
         "original_rule": "Prerequisite: Enrolment in an International Studies program (pre 2017). Or INST1005 and INST1006 and enrolment in an International Studies program (2017+). Or ARTS1250 and enrolment in a Geographical Studies major or minor<br/><br/>",
-        "processed_rule": "Enrolment in an INST program ( 2017). || INST1005 && INST1006 && enrolment in an INST program (2017+). || ARTS1250 && enrolment in a Geographical Studies major || minor"
+        "processed_rule": "Enrolment in an INST ( 2017). || INST1005 && INST1006 && enrolment in an INST (2017+). || ARTS1250 && enrolment in a Geographical Studies major || minor"
     },
     "INST3900": {
         "original_rule": "Prerequisite: 96 units of credit and enrolment in an International Studies single or double degree program<br/><br/>",
-        "processed_rule": "96UOC && enrolment in an INST single || double degree program"
+        "processed_rule": "96UOC && enrolment in an INST single || double degree"
     },
     "INTA1000": {
         "original_rule": "",
@@ -7113,7 +7113,7 @@
     },
     "LAWS1052": {
         "original_rule": "This course is strictly for students undertaking Law programs only.<br/><br/>",
-        "processed_rule": "This course is strictly for students undertaking LAWS programs only"
+        "processed_rule": "This course is strictly for students undertaking LAWS s only"
     },
     "LAWS1061": {
         "original_rule": "Prerequisite: Prerequisite: LAWS1052 or LAWS1051; JURD7152<br/><br/>",
@@ -7129,19 +7129,19 @@
     },
     "LAWS1121": {
         "original_rule": "Prerequisite: Academic program must be 7016, Humanities Pathway Program.<br/><br/>",
-        "processed_rule": "Academic program must be 7016, HUMS Pathway Program"
+        "processed_rule": "Academic must be 7016, HUMS Pathway "
     },
     "LAWS1122": {
         "original_rule": "Prerequisite: Academic program must be 7016, Humanities Pathway Program.<br/><br/>",
-        "processed_rule": "Academic program must be 7016, HUMS Pathway Program"
+        "processed_rule": "Academic must be 7016, HUMS Pathway "
     },
     "LAWS1123": {
         "original_rule": "Prerequisite: Academic program must be 7016, Humanities Pathway Program.<br/><br/>",
-        "processed_rule": "Academic program must be 7016, HUMS Pathway Program"
+        "processed_rule": "Academic must be 7016, HUMS Pathway "
     },
     "LAWS1124": {
         "original_rule": "Prerequisite: Academic program must be 7016, Humanities Pathway Program.<br/><br/>",
-        "processed_rule": "Academic program must be 7016, HUMS Pathway Program"
+        "processed_rule": "Academic must be 7016, HUMS Pathway "
     },
     "LAWS1141": {
         "original_rule": "Pre-requisite: 24 UOC completed in LLB courses including LAWS1052 or 24 UOC completed in Juris Doctor courses.<br/><br/>",
@@ -7173,7 +7173,7 @@
     },
     "LAWS2270": {
         "original_rule": "Prerequisite:Completion of 78 UOC in LAWS courses including Equity and Trusts (LAWS2385). This course is open ONLY to the students who commenced their program from 2013.<br/><br/>",
-        "processed_rule": "78UOC in LAWS courses including Equity && Trusts (LAWS2385). This course is open ONLY to the students who commenced their program from 2013"
+        "processed_rule": "78UOC in LAWS courses including Equity && Trusts (LAWS2385). This course is open ONLY to the students who commenced their from 2013"
     },
     "LAWS2320": {
         "original_rule": "Pre-requisite: 24 UOC completed in LLB courses or 24 UOC completed in Juris Doctor courses. Juris Doctor students who commenced prior to 2013 need no pre-requisites.<br/><br/>",
@@ -7533,7 +7533,7 @@
     },
     "LAWS3321": {
         "original_rule": "Prerequisite: Restricted to students enrolled in Legal Studies. Academic Program must be either 4055 or 3408 or 4054 or 4053<br/><br/>",
-        "processed_rule": "Restricted to students enrolled in Legal Studies. Academic Program must be 4055 || 3408 || 4054 || 4053"
+        "processed_rule": "Restricted to students enrolled in Legal Studies. Academic must be 4055 || 3408 || 4054 || 4053"
     },
     "LAWS3326": {
         "original_rule": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
@@ -7573,15 +7573,15 @@
     },
     "LAWS3350": {
         "original_rule": "Restricted to students enrolled in Legal Studies:<br/>Prerequisite: Academic Program must be either 4055 or 3408 or 4054.<br/><br/>",
-        "processed_rule": "Restricted to students enrolled in Legal Studies: Academic Program must be 4055 || 3408 || 4054"
+        "processed_rule": "Restricted to students enrolled in Legal Studies: Academic must be 4055 || 3408 || 4054"
     },
     "LAWS3351": {
         "original_rule": "Restricted to students enrolled in Legal Studies:<br/>Prerequisite: Academic Program must be either 4055 or 3408 or 4054.<br/><br/>",
-        "processed_rule": "Restricted to students enrolled in Legal Studies: Academic Program must be 4055 || 3408 || 4054"
+        "processed_rule": "Restricted to students enrolled in Legal Studies: Academic must be 4055 || 3408 || 4054"
     },
     "LAWS3352": {
         "original_rule": "Restricted to students enrolled in Legal Studies:<br/>Prerequisite: Academic Program must be either 4055 or 3408 or 4054.<br/><br/>",
-        "processed_rule": "Restricted to students enrolled in Legal Studies: Academic Program must be 4055 || 3408 || 4054"
+        "processed_rule": "Restricted to students enrolled in Legal Studies: Academic must be 4055 || 3408 || 4054"
     },
     "LAWS3354": {
         "original_rule": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
@@ -7589,7 +7589,7 @@
     },
     "LAWS3356": {
         "original_rule": "Restricted to students enrolled in Legal Studies:<br/>Prerequisite: Academic Program must be either 4055 or 3408 or 4054.<br/><br/>",
-        "processed_rule": "Restricted to students enrolled in Legal Studies: Academic Program must be 4055 || 3408 || 4054"
+        "processed_rule": "Restricted to students enrolled in Legal Studies: Academic must be 4055 || 3408 || 4054"
     },
     "LAWS3361": {
         "original_rule": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
@@ -7597,11 +7597,11 @@
     },
     "LAWS3362": {
         "original_rule": "Prerequisite: Restricted to students enrolled in Legal Studies. Academic Program must be either 4055 or 3408 or 4054 or 4053<br/><br/>",
-        "processed_rule": "Restricted to students enrolled in Legal Studies. Academic Program must be 4055 || 3408 || 4054 || 4053"
+        "processed_rule": "Restricted to students enrolled in Legal Studies. Academic must be 4055 || 3408 || 4054 || 4053"
     },
     "LAWS3368": {
         "original_rule": "Prerequisite: Program must be either 6001 or 6021.<br/><br/>",
-        "processed_rule": "Program must be 6001 || 6021"
+        "processed_rule": "must be 6001 || 6021"
     },
     "LAWS3381": {
         "original_rule": "Prerequisite: Completion of 78 UOC in LAWS courses. Students enrolled after 2013 must have also completed Law in the Global Context (LAWS2270) before enrolling in this course.<br/><br/>",
@@ -7665,7 +7665,7 @@
     },
     "LAWS3431": {
         "original_rule": "Prerequisite: Restricted to students enrolled in Legal Studies. Academic Program must be either 4055 or 3408 or 4054 or 4053<br/><br/>",
-        "processed_rule": "Restricted to students enrolled in Legal Studies. Academic Program must be 4055 || 3408 || 4054 || 4053"
+        "processed_rule": "Restricted to students enrolled in Legal Studies. Academic must be 4055 || 3408 || 4054 || 4053"
     },
     "LAWS3434": {
         "original_rule": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
@@ -7701,7 +7701,7 @@
     },
     "LAWS3523": {
         "original_rule": "Prerequisite: Restricted to students enrolled in Legal Studies. Academic Program must be either 4055 or 3408 or 4054 or 4053<br/><br/>",
-        "processed_rule": "Restricted to students enrolled in Legal Studies. Academic Program must be 4055 || 3408 || 4054 || 4053"
+        "processed_rule": "Restricted to students enrolled in Legal Studies. Academic must be 4055 || 3408 || 4054 || 4053"
     },
     "LAWS3524": {
         "original_rule": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
@@ -7709,7 +7709,7 @@
     },
     "LAWS3532": {
         "original_rule": "Prerequisite: Restricted to students enrolled in Legal Studies. Academic Program must be either 4055 or 3408 or 4054 or 4053<br/><br/>",
-        "processed_rule": "Restricted to students enrolled in Legal Studies. Academic Program must be 4055 || 3408 || 4054 || 4053"
+        "processed_rule": "Restricted to students enrolled in Legal Studies. Academic must be 4055 || 3408 || 4054 || 4053"
     },
     "LAWS3541": {
         "original_rule": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
@@ -7753,11 +7753,11 @@
     },
     "LAWS3901": {
         "original_rule": "This course is strictly for students undertaking Law (Honours) programs only.<br/><br/>",
-        "processed_rule": "This course is strictly for students undertaking LAWS (Honours) programs only"
+        "processed_rule": "This course is strictly for students undertaking LAWS (Honours) s only"
     },
     "LAWS9801": {
         "original_rule": "Prerequisite: Academic Program must be Environmental Science program (3988, 3932, 3965 or 3943)<br/><br/>",
-        "processed_rule": "Academic Program must be Environmental Science program (3988 || 3932 || 3965 || 3943)"
+        "processed_rule": "Academic must be Environmental Science (3988 || 3932 || 3965 || 3943)"
     },
     "MANF3100": {
         "original_rule": "",
@@ -7841,7 +7841,7 @@
     },
     "MARK3054": {
         "original_rule": "Pre-requisite: ECON1203 or MARK2052. If students can demonstrate they have equivalent statistics knowledge, but haven't completed any of the listed pre-requisite courses, they can seek permission from Program Coordinator by submitting an online form.<br/><br/>",
-        "processed_rule": "ECON1203 || MARK2052. If students can demonstrate they have equivalent statistics knowledge, but haven't completed any of the listed courses, they can seek permission from Program Coordinator by submitting an online form"
+        "processed_rule": "ECON1203 || MARK2052. If students can demonstrate they have equivalent statistics knowledge, but haven't completed any of the listed courses, they can seek permission from Coordinator by submitting an online form"
     },
     "MARK3081": {
         "original_rule": "Prerequisite: MARK1012 OR MARK2012<br/><br/>",
@@ -7853,7 +7853,7 @@
     },
     "MARK3085": {
         "original_rule": "Pre-requisite: (MARK1012 OR MARK2012) or (ECON1203 OR COMM1110). If students can demonstrate they have equivalent statistics knowledge, but haven't completed any of the listed pre-requisite courses, they can seek permission from Program Coordinator by submitting an online form.<br/><br/>",
-        "processed_rule": "(MARK1012 || MARK2012) || (ECON1203 || COMM1110). If students can demonstrate they have equivalent statistics knowledge, but haven't completed any of the listed courses, they can seek permission from Program Coordinator by submitting an online form"
+        "processed_rule": "(MARK1012 || MARK2012) || (ECON1203 || COMM1110). If students can demonstrate they have equivalent statistics knowledge, but haven't completed any of the listed courses, they can seek permission from Coordinator by submitting an online form"
     },
     "MARK3087": {
         "original_rule": "Pre-requisite: ECON1203 or INFS1609 or MATH1041 or MATH1231 or MATH1241 or MATH1251 or MARK2052 or COMM2050 or COMM2501 or INFS2605 or INFS2609.<br/>Students with equivalent Statistics knowledge can seek pre-requisite waiver via webforms<br/><br/>",
@@ -8025,7 +8025,7 @@
     },
     "MATH2701": {
         "original_rule": "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251 with at least a CR, enrolment in an advanced maths or advanced science program<br/><br/>",
-        "processed_rule": "MATH1231 || DPST1014 || MATH1241 || MATH1251 with at least a CR || enrolment in an advanced maths || advanced science program"
+        "processed_rule": "MATH1231 || DPST1014 || MATH1241 || MATH1251 with at least a CR || enrolment in an advanced maths || advanced science"
     },
     "MATH2801": {
         "original_rule": "Prerequisite: MATH1231 or MATH1241 or MATH1251 or DPST1014; Exclusion: MATH2089; MATH2099; MATH2801; MATH2901; BEES2041; BIOS2041;CVEN2002.<br/><br/>",
@@ -8337,27 +8337,27 @@
     },
     "MDIA1000": {
         "original_rule": "Prerequisite: Enrolment in a single or dual award Media program<br/><br/>",
-        "processed_rule": "Enrolment in a single || dual award MDIA program"
+        "processed_rule": "Enrolment in a single || dual award MDIA"
     },
     "MDIA1002": {
         "original_rule": "Prerequisite: Enrolment in a single or dual award Media program<br/><br/>",
-        "processed_rule": "Enrolment in a single || dual award MDIA program"
+        "processed_rule": "Enrolment in a single || dual award MDIA"
     },
     "MDIA1003": {
         "original_rule": "Prerequisite: Enrolment in a single or dual award Media program<br/><br/>",
-        "processed_rule": "Enrolment in a single || dual award MDIA program"
+        "processed_rule": "Enrolment in a single || dual award MDIA"
     },
     "MDIA1004": {
         "original_rule": "Prerequisite: Enrolment in a Media program or Creative Writing Major<br/><br/>",
-        "processed_rule": "Enrolment in a MDIA program || Creative Writing Major"
+        "processed_rule": "Enrolment in a MDIA || Creative Writing Major"
     },
     "MDIA1005": {
         "original_rule": "Prerequisite: Enrolment in a single or dual award Media program<br/><br/>",
-        "processed_rule": "Enrolment in a single || dual award MDIA program"
+        "processed_rule": "Enrolment in a single || dual award MDIA"
     },
     "MDIA1007": {
         "original_rule": "Prerequisite: Enrolment in a single or dual award Media program<br/><br/>",
-        "processed_rule": "Enrolment in a single || dual award MDIA program"
+        "processed_rule": "Enrolment in a single || dual award MDIA"
     },
     "MDIA2000": {
         "original_rule": "Prerequisite: 24 units of credit at level 1, including MDIA1000 or MDIA1005 or ARTS1064<br/><br/>",
@@ -8389,11 +8389,11 @@
     },
     "MDIA2008": {
         "original_rule": "Prerequisite: 24 units of credit at level 1, and enrolment in a single or dual award Media program<br/><br/>",
-        "processed_rule": "24UOC at L1 && enrolment in a single || dual award MDIA program"
+        "processed_rule": "24UOC at L1 && enrolment in a single || dual award MDIA"
     },
     "MDIA2010": {
         "original_rule": "Prerequisite: 24 units of credit at level 1, and enrolment in a single or dual award Media program or enrolment in a Creative Writing major or minor. Equivalent: MDIA3001<br/><br/>",
-        "processed_rule": "24UOC at L1 && enrolment in a single || dual award MDIA program || enrolment in a Creative Writing major || minor. Equivalent: MDIA3001"
+        "processed_rule": "24UOC at L1 && enrolment in a single || dual award MDIA || enrolment in a Creative Writing major || minor. Equivalent: MDIA3001"
     },
     "MDIA2011": {
         "original_rule": "Prerequisite: 24 units of credit at level 1 including\u00a0MDIA1002 or MDIA1003. Or 24 units of credit at level 1 and enrolment  in a Global Development major<br/><br/>",
@@ -8401,7 +8401,7 @@
     },
     "MDIA2012": {
         "original_rule": "Prerequisite: MDIA1002 or MDIA1003; and enrolment in a single or double degree Bachelor of Media (PR & Advertising) program<br/><br/>",
-        "processed_rule": "MDIA1002 || MDIA1003; && enrolment in a single || double degree Bachelor of MDIA (PR & Advertising) program"
+        "processed_rule": "MDIA1002 || MDIA1003; && enrolment in a single || double degree Bachelor of MDIA (PR & Advertising)"
     },
     "MDIA2013": {
         "original_rule": "Prerequisite: 24 uoc overall, including MDIA1006 Mediated Storytelling or ARTS1064 Screen Production I, or MDIA1004 News Fundamentals or (with course convenor approval) at least 6 UOC of an audio-visual media production or feature writing course<br/><br/>",
@@ -8417,11 +8417,11 @@
     },
     "MDIA3003": {
         "original_rule": "Prerequisite: 66 units of credit overall, including 6 units of credit Level 2 MDIA core courses and enrolment in a Media (Communication & Journalism) or Media (PR & Advertising) program<br/><br/>",
-        "processed_rule": "66UOC && including 6UOC L2 MDIA core courses && enrolment in a MDIA (Communication & Journalism) || MDIA (PR & Advertising) program"
+        "processed_rule": "66UOC && including 6UOC L2 MDIA core courses && enrolment in a MDIA (Communication & Journalism) || MDIA (PR & Advertising)"
     },
     "MDIA3004": {
         "original_rule": "Prerequisite: 66 units of credit overall, and enrolment in a single or double degree Media program<br/><br/>",
-        "processed_rule": "66UOC && enrolment in a single || double degree MDIA program"
+        "processed_rule": "66UOC && enrolment in a single || double degree MDIA"
     },
     "MDIA3005": {
         "original_rule": "Prerequisite: 66 units of credit overall including MDIA2005 or MDIA2006 or MDIA2012<br/><br/>",
@@ -8429,11 +8429,11 @@
     },
     "MDIA3006": {
         "original_rule": "Prerequisite: 66 units of credit overall, including ARTS2065 or ARTS2066 or MDIA2000 or MDIA2001 or MDIA2010, and enrolment in a single or double degree media program<br/><br/>",
-        "processed_rule": "66UOC || including ARTS2065 || ARTS2066 || MDIA2000 || MDIA2001 || MDIA2010 && enrolment in a single || double degree media program"
+        "processed_rule": "66UOC || including ARTS2065 || ARTS2066 || MDIA2000 || MDIA2001 || MDIA2010 && enrolment in a single || double degree media"
     },
     "MDIA3007": {
         "original_rule": "Prerequisite: 48 units of credit overall, and enrolment in a Media program, or a Creative Writing, English, FIlm Studies or MCT major or minor. Students must have a WAM of 65 to be eligible for this course.<br/><br/>",
-        "processed_rule": "48UOC && enrolment in a MDIA program || a Creative Writing || English || FIlm Studies || MCT major || minor. Students must have 65WAM to be eligible for this course"
+        "processed_rule": "48UOC && enrolment in a MDIA || a Creative Writing || English || FIlm Studies || MCT major || minor. Students must have 65WAM to be eligible for this course"
     },
     "MDIA3008": {
         "original_rule": "Prerequisite: 66 units of credit overall including MDIA2005 or MDIA2006 or MDIA2012<br/><br/>",
@@ -8449,7 +8449,7 @@
     },
     "MDIA3011": {
         "original_rule": "Prerequisites: 66 units of credit overall and enrolment in a single or double degree Media program<br/><br/>",
-        "processed_rule": "66UOC && enrolment in a single || double degree MDIA program"
+        "processed_rule": "66UOC && enrolment in a single || double degree MDIA"
     },
     "MDIA3012": {
         "original_rule": "Prerequisite: 66 units of credit overall including MDIA2005 or MDIA2006<br/><br/>",
@@ -8457,15 +8457,15 @@
     },
     "MDIA4000": {
         "original_rule": "Prerequisite: Enrolment in the Media honours program<br/><br/>",
-        "processed_rule": "Enrolment in the MDIA honours program"
+        "processed_rule": "Enrolment in the MDIA honours"
     },
     "MDIA4001": {
         "original_rule": "Prerequisite: Enrolment in the Media honours program<br/><br/>",
-        "processed_rule": "Enrolment in the MDIA honours program"
+        "processed_rule": "Enrolment in the MDIA honours"
     },
     "MDIA4002": {
         "original_rule": "Prerequisite: Enrolment in the Media honours program<br/><br/>",
-        "processed_rule": "Enrolment in the MDIA honours program"
+        "processed_rule": "Enrolment in the MDIA honours"
     },
     "MECH3110": {
         "original_rule": "Pre: (MMAN2400 or ENGG2400) and (MMAN2100 or DESN2000)<br/><br/>",
@@ -8765,7 +8765,7 @@
     },
     "MGMT3110": {
         "original_rule": "MGMT2102 and completion of 72 UOC (if you are enrolled the Commerce International [program 3558], completion of the Commerce Overseas Program (Exchange) is also required)<br/><br/>",
-        "processed_rule": "MGMT2102 && 72UOC (if you are enrolled the COMM International (program 3558), completion of the COMM Overseas Program (Exchange) is also required)"
+        "processed_rule": "MGMT2102 && 72UOC (if you are enrolled the COMM International ( 3558), completion of the COMM Overseas (Exchange) is also required)"
     },
     "MGMT3701": {
         "original_rule": "Prerequisite: MGMT1001or COMM1170<br/><br/>",
@@ -8801,27 +8801,27 @@
     },
     "MGMT4101": {
         "original_rule": "Prerequisite: Program 4501 and enrolment in the International Business Honours plan is required.<br/><br/>",
-        "processed_rule": "Program 4501 && enrolment in the International ZBUS Honours plan is required"
+        "processed_rule": "4501 && enrolment in the International ZBUS Honours plan is required"
     },
     "MGMT4104": {
         "original_rule": "Prerequisite: Program 4501 and enrolled in the Human Resource Management Honours plan.<br/><br/>",
-        "processed_rule": "Program 4501 && enrolled in the Human Resource MGMT Honours plan"
+        "processed_rule": "4501 && enrolled in the Human Resource MGMT Honours plan"
     },
     "MGMT4500": {
         "original_rule": "Prerequisite: Program 4501 and enrolment in the International Business Honours plan is required.<br/><br/>",
-        "processed_rule": "Program 4501 && enrolment in the International ZBUS Honours plan is required"
+        "processed_rule": "4501 && enrolment in the International ZBUS Honours plan is required"
     },
     "MGMT4501": {
         "original_rule": "Prerequisite: Program 4501 and enrolment in the International Business Honours plan is required.<br/><br/>",
-        "processed_rule": "Program 4501 && enrolment in the International ZBUS Honours plan is required"
+        "processed_rule": "4501 && enrolment in the International ZBUS Honours plan is required"
     },
     "MGMT4738": {
         "original_rule": "Prerequisite: Program 4501 and enrolled in the Human Resource Management Honours plan.<br/><br/>",
-        "processed_rule": "Program 4501 && enrolled in the Human Resource MGMT Honours plan"
+        "processed_rule": "4501 && enrolled in the Human Resource MGMT Honours plan"
     },
     "MGMT4739": {
         "original_rule": "Prerequisite: Program 4501 and enrolled in the Human Resource Management Honours plan.<br/><br/>",
-        "processed_rule": "Program 4501 && enrolled in the Human Resource MGMT Honours plan"
+        "processed_rule": "4501 && enrolled in the Human Resource MGMT Honours plan"
     },
     "MICR2011": {
         "original_rule": "Prerequisite: BABS1201 or DPST1051<br/><br/>",
@@ -9089,7 +9089,7 @@
     },
     "MUSC1707": {
         "original_rule": "Prerequisite: Enrolment in a Music program.<br/><br/>",
-        "processed_rule": "Enrolment in a MUSC program"
+        "processed_rule": "Enrolment in a MUSC "
     },
     "MUSC1708": {
         "original_rule": "",
@@ -9129,19 +9129,19 @@
     },
     "MUSC2703": {
         "original_rule": "Prerequisite: Enrolment in a Music program and either MUSC1701 and MUSC1704, or MUSC1702 and MUSC1705, or MUSC1707 (12 uoc).<br/><br/>",
-        "processed_rule": "Enrolment in a MUSC program && MUSC1701 && MUSC1704 || MUSC1702 && MUSC1705 || MUSC1707 (12UOC)"
+        "processed_rule": "Enrolment in a MUSC && MUSC1701 && MUSC1704 || MUSC1702 && MUSC1705 || MUSC1707 (12UOC)"
     },
     "MUSC2801": {
         "original_rule": "Prerequisite: Enrolment in the Music Creative Practice Stream in a Music program<br/><br/>",
-        "processed_rule": "Enrolment in the MUSC Creative Practice Stream in a MUSC program"
+        "processed_rule": "Enrolment in the MUSC Creative Practice Stream in a MUSC"
     },
     "MUSC2802": {
         "original_rule": "Prerequisite: 36uoc at Level 1 and enrolment in the Music Pedagogy stream in a Music Program. Note: This course is for instrumental or vocal students. Students who entered the music programme as composers may be required to audition.<br/><br/>",
-        "processed_rule": "36UOC at L1 && enrolment in the MUSC Pedagogy stream in a MUSC Program. Note: This course is for instrumental || vocal students. Students who entered the music programme as composers may be required to audition"
+        "processed_rule": "36UOC at L1 && enrolment in the MUSC Pedagogy stream in a MUSC . Note: This course is for instrumental || vocal students. Students who entered the music me as composers may be required to audition"
     },
     "MUSC2803": {
         "original_rule": "Prerequisites: 36uoc at level 1 and enrolment a Music program, or Music major or minor<br/><br/>",
-        "processed_rule": "36UOC at L1 && enrolment a MUSC program || MUSC major || minor"
+        "processed_rule": "36UOC at L1 && enrolment a MUSC || MUSC major || minor"
     },
     "MUSC2804": {
         "original_rule": "Prerequisite: 24 units of credit at Level 1<br/><br/>",
@@ -9153,7 +9153,7 @@
     },
     "MUSC3105": {
         "original_rule": "Prerequisite: 24 units of credit in Music courses, including 12 at Level 1 and enrolment in a single or dual Music program. Or 48 UOC overall, including 6 UOC level 1 Music and 6 UOC level 2 Music and enrolment in a Music major or minor<br/><br/>",
-        "processed_rule": "24UOC in MUSC courses && including 12 at L1 && enrolment in a single || dual MUSC program. || 48UOC && including 6UOC L1 MUSC && 6UOC L2 MUSC && enrolment in a MUSC major || minor"
+        "processed_rule": "24UOC in MUSC courses && including 12 at L1 && enrolment in a single || dual MUSC . || 48UOC && including 6UOC L1 MUSC && 6UOC L2 MUSC && enrolment in a MUSC major || minor"
     },
     "MUSC3162": {
         "original_rule": "Prerequisite: MUSC1602, MUSC1603, and MUSC1604<br/><br/>",
@@ -9165,11 +9165,11 @@
     },
     "MUSC3705": {
         "original_rule": "Prerequisite: MUSC2702 or MUSC2703 (12 uoc), and enrolment in a Music program.<br/><br/>",
-        "processed_rule": "MUSC2702 || MUSC2703 (12UOC) && enrolment in a MUSC program"
+        "processed_rule": "MUSC2702 || MUSC2703 (12UOC) && enrolment in a MUSC "
     },
     "MUSC3706": {
         "original_rule": "Prerequisite: MUSC2702 or MUSC2703 (12 uoc), and enrolment in a Music Creative Practice or Music Pedagogy stream in a Music program.<br/><br/>",
-        "processed_rule": "MUSC2702 || MUSC2703 (12UOC) && enrolment in a MUSC Creative Practice || MUSC Pedagogy stream in a MUSC program"
+        "processed_rule": "MUSC2702 || MUSC2703 (12UOC) && enrolment in a MUSC Creative Practice || MUSC Pedagogy stream in a MUSC "
     },
     "MUSC3801": {
         "original_rule": "Prerequisite: MUSC2801 and enrolment in the Music Creative Practice specialisation in a Music single or double degree<br/><br/>",
@@ -9185,7 +9185,7 @@
     },
     "MUSC3805": {
         "original_rule": "Prerequisite: 24uoc in MUSC courses and enrolment in a Music single or double degree; or 66 uoc overall and enrolment in a single or double degree Media (S&SP) program<br/><br/>",
-        "processed_rule": "24UOC in MUSC courses && enrolment in a MUSC single || double degree; || 66UOC && enrolment in a single || double degree MDIA (S&SP) program"
+        "processed_rule": "24UOC in MUSC courses && enrolment in a MUSC single || double degree; || 66UOC && enrolment in a single || double degree MDIA (S&SP)"
     },
     "MUSC3806": {
         "original_rule": "Prerequisite: MUSC2803 and enrolment in the Sonic Arts stream in a Music single or double degree; or 66 uoc overall, including MDIA1005 and enrolment in Media (S&SP) single or double degree<br/><br/>",
@@ -9193,51 +9193,51 @@
     },
     "MUSC3807": {
         "original_rule": "Prerequisite: 24uoc in MUSC courses, and enrolment in a Music single or dual program<br/><br/>",
-        "processed_rule": "24UOC in MUSC courses && enrolment in a MUSC single || dual program"
+        "processed_rule": "24UOC in MUSC courses && enrolment in a MUSC single || dual"
     },
     "MUSC3808": {
         "original_rule": "Prerequisite: Enrolment in a Music Pedagogy stream in a Music program. Note: This course is for instrumental or vocal students. Students who entered the music programme as composers may be required to audition.<br/><br/>",
-        "processed_rule": "Enrolment in a MUSC Pedagogy stream in a MUSC program. Note: This course is for instrumental || vocal students. Students who entered the music programme as composers may be required to audition"
+        "processed_rule": "Enrolment in a MUSC Pedagogy stream in a MUSC . Note: This course is for instrumental || vocal students. Students who entered the music me as composers may be required to audition"
     },
     "MUSC4009": {
         "original_rule": "Prerequisite: Enrolment in program 4508 Music (Honours)<br/><br/>",
-        "processed_rule": "Enrolment in program 4508 MUSC (Honours)"
+        "processed_rule": "Enrolment in 4508 MUSC (Honours)"
     },
     "MUSC4010": {
         "original_rule": "Prerequisite: Enrolment in program 4508 Music (Honours)<br/><br/>",
-        "processed_rule": "Enrolment in program 4508 MUSC (Honours)"
+        "processed_rule": "Enrolment in 4508 MUSC (Honours)"
     },
     "MUSC4011": {
         "original_rule": "Prerequisite: Enrolment in program 4508 Music (Honours)<br/><br/>",
-        "processed_rule": "Enrolment in program 4508 MUSC (Honours)"
+        "processed_rule": "Enrolment in 4508 MUSC (Honours)"
     },
     "MUSC4013": {
         "original_rule": "Prerequisite: Enrolment in a single or double Music (Honours) program<br/><br/>",
-        "processed_rule": "Enrolment in a single || double MUSC (Honours) program"
+        "processed_rule": "Enrolment in a single || double MUSC (Honours)"
     },
     "MUSC4014": {
         "original_rule": "Prerequisite: Enrolment in a single or double Music (Honours) program<br/><br/>",
-        "processed_rule": "Enrolment in a single || double MUSC (Honours) program"
+        "processed_rule": "Enrolment in a single || double MUSC (Honours)"
     },
     "MUSC4015": {
         "original_rule": "Prerequisite: Enrolment in a single or double Music (Honours) program<br/><br/>",
-        "processed_rule": "Enrolment in a single || double MUSC (Honours) program"
+        "processed_rule": "Enrolment in a single || double MUSC (Honours)"
     },
     "MUSC4016": {
         "original_rule": "Prerequisite: Enrolment in a single or double Music (Honours) program<br/><br/>",
-        "processed_rule": "Enrolment in a single || double MUSC (Honours) program"
+        "processed_rule": "Enrolment in a single || double MUSC (Honours)"
     },
     "MUSC4017": {
         "original_rule": "Prerequisite: Enrolment in a single or double Music (Honours) program<br/><br/>",
-        "processed_rule": "Enrolment in a single || double MUSC (Honours) program"
+        "processed_rule": "Enrolment in a single || double MUSC (Honours)"
     },
     "MUSC4101": {
         "original_rule": "Prerequisite: Level 1, 2 and 3 core Music courses and enrolment in a Music single or dual degree program; or 48 UoC overall including MUSC1602 or MUSC1604, and MUSC2116 and enrolment in a Music major in an Arts program<br/><br/>",
-        "processed_rule": "L1 && 2 && 3 core MUSC courses && enrolment in a MUSC single || dual degree program; || 48UOC including MUSC1602 || MUSC1604 && MUSC2116 && enrolment in a MUSC major in an SARTs program"
+        "processed_rule": "L1 && 2 && 3 core MUSC courses && enrolment in a MUSC single || dual degree ; || 48UOC including MUSC1602 || MUSC1604 && MUSC2116 && enrolment in a MUSC major in an SARTs"
     },
     "MUSC4102": {
         "original_rule": "Prerequisite: MUSC4101, and enrolment in a Music program. Or 48 uoc overall including MUSC1602 or MUSC1604, and MUSC2116 and enrolment in a Music major in an Arts program<br/><br/>",
-        "processed_rule": "MUSC4101 && enrolment in a MUSC program. || 48UOC including MUSC1602 || MUSC1604 && MUSC2116 && enrolment in a MUSC major in an SARTs program"
+        "processed_rule": "MUSC4101 && enrolment in a MUSC . || 48UOC including MUSC1602 || MUSC1604 && MUSC2116 && enrolment in a MUSC major in an SARTs"
     },
     "MUSC4103": {
         "original_rule": "Prerequisite: 30uoc at level 1 including MUSC1603 and MUSC1604<br/><br/>",
@@ -9249,11 +9249,11 @@
     },
     "MUSC4705": {
         "original_rule": "Prerequisite: MUSC3704 or MUSC3706 (12 uoc), and enrolment in a Music Creative Practice stream in a Music program.<br/><br/>",
-        "processed_rule": "MUSC3704 || MUSC3706 (12UOC) && enrolment in a MUSC Creative Practice stream in a MUSC program"
+        "processed_rule": "MUSC3704 || MUSC3706 (12UOC) && enrolment in a MUSC Creative Practice stream in a MUSC "
     },
     "MUSC4706": {
         "original_rule": "Prerequisite: Enrolment in a Music or Arts program<br/><br/>",
-        "processed_rule": "Enrolment in a MUSC || SARTs program"
+        "processed_rule": "Enrolment in a MUSC || SARTs"
     },
     "NANO1001": {
         "original_rule": "Enrolment in the Bachelor of Science (Nanotechnology) (3617) or Nanoscience (Honours) (3618).<br/><br/>",
@@ -9333,7 +9333,7 @@
     },
     "OPTM2291": {
         "original_rule": "Prerequisites: OPTM2190, VISN2111, PHSL2101 and enrolment in program 3952; Co-requisite: VISN2211<br/><br/>",
-        "processed_rule": "OPTM2190 && VISN2111 && PHSL2101 && enrolment in program 3952; Co-requisite: VISN2211"
+        "processed_rule": "OPTM2190 && VISN2111 && PHSL2101 && enrolment in 3952; Co-requisite: VISN2211"
     },
     "OPTM3105": {
         "original_rule": "Prerequisite: VISN2111<br/><br/>",
@@ -9465,7 +9465,7 @@
     },
     "OPTM6424": {
         "original_rule": "Prerequisite:  OPTM6412 and OPTM6411 and OPTM6400 and enrolment in program 3182 or 8095. Exclusion: OPTM4271<br/><br/>",
-        "processed_rule": "OPTM6412 && OPTM6411 && OPTM6400 && enrolment in program 3182 || 8095"
+        "processed_rule": "OPTM6412 && OPTM6411 && OPTM6400 && enrolment in 3182 || 8095"
     },
     "OPTM8511": {
         "original_rule": "Prerequisite: OPTM6422<br/><br/>",
@@ -9549,7 +9549,7 @@
     },
     "PHCM1001": {
         "original_rule": "Currently enrolled in program 3880 Bachelor of International Public Health<br/><br/>",
-        "processed_rule": "Currently enrolled in program 3880 Bachelor of International Public Health"
+        "processed_rule": "Currently enrolled in 3880 Bachelor of International Public Health"
     },
     "PHCM2001": {
         "original_rule": "",
@@ -9909,15 +9909,15 @@
     },
     "PPEC1001": {
         "original_rule": "Prerequisite: Enrolment in a Politics, Philosophy and Economics program<br/><br/>",
-        "processed_rule": "Enrolment in a Politics && Philosophy && ECON program"
+        "processed_rule": "Enrolment in a Politics && Philosophy && ECON"
     },
     "PPEC2001": {
         "original_rule": "Prerequisite: 24 units of credit overall, including PPEC1001, and enrolment in a Politics, Philosophy and Economics program<br/><br/>",
-        "processed_rule": "24UOC && including PPEC1001 && enrolment in a Politics && Philosophy && ECON program"
+        "processed_rule": "24UOC && including PPEC1001 && enrolment in a Politics && Philosophy && ECON"
     },
     "PPEC3001": {
         "original_rule": "Prerequisite: 72 units of credit overall, including PPEC2001, and enrolment in a Politics, Philosophy and Economics program<br/><br/>",
-        "processed_rule": "72UOC && including PPEC2001 && enrolment in a Politics && Philosophy && ECON program"
+        "processed_rule": "72UOC && including PPEC2001 && enrolment in a Politics && Philosophy && ECON"
     },
     "PSYC1001": {
         "original_rule": "",
@@ -9929,7 +9929,7 @@
     },
     "PSYC1021": {
         "original_rule": "Restricted to students currently enrolled in program 3632 Psychology (Honours) or 4721 Bachelor of Psychology (Honours) / Law<br/><br/>",
-        "processed_rule": "Restricted to students currently enrolled in program 3632 PSYC (Honours) || 4721 Bachelor of PSYC (Honours) / LAWS"
+        "processed_rule": "Restricted to students currently enrolled in 3632 PSYC (Honours) || 4721 Bachelor of PSYC (Honours) / LAWS"
     },
     "PSYC1022": {
         "original_rule": "",
@@ -10033,7 +10033,7 @@
     },
     "PSYC3331": {
         "original_rule": "Prerequisite: (PSYC2001 , PSYC2061 or PSYC2101) or (HESC3504 and enrolment in Program 3871)<br/><br/>",
-        "processed_rule": "(PSYC2001 || PSYC2061 || PSYC2101) || (HESC3504 && enrolment in Program 3871)"
+        "processed_rule": "(PSYC2001 || PSYC2061 || PSYC2101) || (HESC3504 && enrolment in 3871)"
     },
     "PSYC3341": {
         "original_rule": "Prerequisite: PSYC2001 and PSYC2061<br/><br/>",
@@ -10685,7 +10685,7 @@
     },
     "SENG2991": {
         "original_rule": "Currently enrolled in Program 3707 in the SENGAH stream <br/>and in an approved workplace arrangement <br/>and completed COMP1511, COMP1531 and COMP2521.<br/><br/>",
-        "processed_rule": "Currently enrolled in Program 3707 in the SENGAH stream && in an approved workplace arrangement && completed COMP1511 && COMP1531 && COMP2521"
+        "processed_rule": "Currently enrolled in 3707 in the SENGAH stream && in an approved workplace arrangement && completed COMP1511 && COMP1531 && COMP2521"
     },
     "SENG3011": {
         "original_rule": "Prerequisite: SENG2021<br/><br/>",
@@ -10693,11 +10693,11 @@
     },
     "SENG3991": {
         "original_rule": "Currently enrolled in Program 3707 in the SENGAH stream and in the Co-op program<br/>and completed SENG2011 and SENG2021 and DESN2000 and COMP2511 and COMP2041.<br/><br/>",
-        "processed_rule": "Currently enrolled in Program 3707 in the SENGAH stream && in the Co-op program && completed SENG2011 && SENG2021 && DESN2000 && COMP2511 && COMP2041"
+        "processed_rule": "Currently enrolled in 3707 in the SENGAH stream && in the Co-op && completed SENG2011 && SENG2021 && DESN2000 && COMP2511 && COMP2041"
     },
     "SENG3992": {
         "original_rule": "Currently enrolled in Program 3707 in the SENGAH stream and in the Co-op program<br/>and completed SENG3011.<br/><br/>",
-        "processed_rule": "Currently enrolled in Program 3707 in the SENGAH stream && in the Co-op program && completed SENG3011"
+        "processed_rule": "Currently enrolled in 3707 in the SENGAH stream && in the Co-op && completed SENG3011"
     },
     "SENG4920": {
         "original_rule": "Prerequisite: COMP2511<br/><br/>",
@@ -10717,23 +10717,23 @@
     },
     "SOCW2003": {
         "original_rule": "Prerequisite: SOCW1001 and SOCW1004, and enrolment in a Social Work program<br/><br/>",
-        "processed_rule": "SOCW1001 && SOCW1004 && enrolment in a SOCW program"
+        "processed_rule": "SOCW1001 && SOCW1004 && enrolment in a SOCW"
     },
     "SOCW2006": {
         "original_rule": "Prerequisite: SOCW1001 and enrolment in a Social Work Program<br/><br/>",
-        "processed_rule": "SOCW1001 && enrolment in a SOCW Program"
+        "processed_rule": "SOCW1001 && enrolment in a SOCW"
     },
     "SOCW2008": {
         "original_rule": "Prerequisite: SOCW1001 and SOCW1004, and enrolment in a Social Work program<br/><br/>",
-        "processed_rule": "SOCW1001 && SOCW1004 && enrolment in a SOCW program"
+        "processed_rule": "SOCW1001 && SOCW1004 && enrolment in a SOCW"
     },
     "SOCW2009": {
         "original_rule": "Prerequisite: SOCW2003 and enrolment in a Social Work Program<br/><br/>",
-        "processed_rule": "SOCW2003 && enrolment in a SOCW Program"
+        "processed_rule": "SOCW2003 && enrolment in a SOCW"
     },
     "SOCW2100": {
         "original_rule": "Prerequisite: SOCW1001 and enrolment in a Social Work Program<br/><br/>",
-        "processed_rule": "SOCW1001 && enrolment in a SOCW Program"
+        "processed_rule": "SOCW1001 && enrolment in a SOCW"
     },
     "SOCW3001": {
         "original_rule": "Prerequisite: SOCW1001, SOCW1003, SOCW2003, SOCW2006; Corequisite: SOCW3002<br/><br/>",
@@ -10741,55 +10741,55 @@
     },
     "SOCW3006": {
         "original_rule": "Prerequisite: SOCW3009 and SOCW3011, or SOCW3009, SOCW3012 and SOCW3013, and enrolment in a Social Work program.  Excluded: Students enrolled in 4787 Social Work (Honours)/Law<br/><br/>",
-        "processed_rule": "SOCW3009 && SOCW3011 || SOCW3009 && SOCW3012 && SOCW3013 && enrolment in a SOCW program"
+        "processed_rule": "SOCW3009 && SOCW3011 || SOCW3009 && SOCW3012 && SOCW3013 && enrolment in a SOCW "
     },
     "SOCW3009": {
         "original_rule": "Prerequisite: ARTS1753 or ARTS1870 or ARTS1871 and PSYC1001, SOCW2006, SOCW2008, SOCW2009, SOCW2100, SOSS/SRAP1000, SOSS/SRAP1001, ARTS2871 or SRAP2002, and enrolment in a Social Work program. Corequisite: SOCW3012<br/><br/>",
-        "processed_rule": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOSS/SRAP1000 || SOSS/SRAP1001 || ARTS2871 || SRAP2002 && enrolment in a SOCW program. Corequisite: SOCW3012"
+        "processed_rule": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOSS/SRAP1000 || SOSS/SRAP1001 || ARTS2871 || SRAP2002 && enrolment in a SOCW . Corequisite: SOCW3012"
     },
     "SOCW3010": {
         "original_rule": "Prerequisite: SOCW3009 and SOCW3011, or SOCW3009, SOCW3012 and SOCW3013, and enrolment in a Social Work program<br/><br/>",
-        "processed_rule": "SOCW3009 && SOCW3011 || SOCW3009 && SOCW3012 && SOCW3013 && enrolment in a SOCW program"
+        "processed_rule": "SOCW3009 && SOCW3011 || SOCW3009 && SOCW3012 && SOCW3013 && enrolment in a SOCW"
     },
     "SOCW3012": {
         "original_rule": "Prerequisite: ARTS1753 or ARTS1870 or ARTS1871 and PSYC1001, SOCW2006, SOCW2008, SOCW2009, SOCW2100, SOSS/SRAP1000, SOSS/SRAP1001,  ARTS2871 or SOSS/SRAP2002, and enrolment in a Social Work program. Corerequisite: SOCW3009. Equivalent: SOCW3001 and SOCW3011<br/><br/>",
-        "processed_rule": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOSS/SRAP1000 || SOSS/SRAP1001 || ARTS2871 || SOSS/SRAP2002 && enrolment in a SOCW program. Corerequisite: SOCW3009. Equivalent: SOCW3001 && SOCW3011"
+        "processed_rule": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOSS/SRAP1000 || SOSS/SRAP1001 || ARTS2871 || SOSS/SRAP2002 && enrolment in a SOCW . Corerequisite: SOCW3009. Equivalent: SOCW3001 && SOCW3011"
     },
     "SOCW3013": {
         "original_rule": "Prerequisite: ARTS1753 or ARTS1870 or ARTS1871 and PSYC1001, SOCW2006, SOCW2008, SOCW2009, SOCW2100, SOSS/SRAP1000, SOSS/SRAP1001,  ARTS2871 or SOSS/SRAP2002, and enrolment in a Social Work program. Equivalent: SOCW3001 and SOCW3011<br/><br/>",
-        "processed_rule": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOSS/SRAP1000 || SOSS/SRAP1001 || ARTS2871 || SOSS/SRAP2002 && enrolment in a SOCW program. Equivalent: SOCW3001 && SOCW3011"
+        "processed_rule": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOSS/SRAP1000 || SOSS/SRAP1001 || ARTS2871 || SOSS/SRAP2002 && enrolment in a SOCW . Equivalent: SOCW3001 && SOCW3011"
     },
     "SOCW4003": {
         "original_rule": "Prerequisite: SOCW3006, SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work program. Or SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work/Law program<br/><br/>",
-        "processed_rule": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && enrolment in a SOCW program. || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && enrolment in a SOCW/LAWS program"
+        "processed_rule": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && enrolment in a SOCW . || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && enrolment in a SOCW/LAWS"
     },
     "SOCW4011": {
         "original_rule": "Prerequisite: SOCW3006, SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work program. Or SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work/Law program<br/><br/>",
-        "processed_rule": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && enrolment in a SOCW program. || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && enrolment in a SOCW/LAWS program"
+        "processed_rule": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && enrolment in a SOCW . || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && enrolment in a SOCW/LAWS"
     },
     "SOCW4012": {
         "original_rule": "Prerequisite: SOCW3006, SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work program. Or SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work/Law program<br/><br/>",
-        "processed_rule": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && enrolment in a SOCW program. || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && enrolment in a SOCW/LAWS program"
+        "processed_rule": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && enrolment in a SOCW . || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && enrolment in a SOCW/LAWS"
     },
     "SOCW4013": {
         "original_rule": "Prerequisite: SOCW3006, SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work program. Or SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work/Law program<br/><br/>",
-        "processed_rule": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && enrolment in a SOCW program. || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && enrolment in a SOCW/LAWS program"
+        "processed_rule": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && enrolment in a SOCW . || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && enrolment in a SOCW/LAWS"
     },
     "SOCW4015": {
         "original_rule": "Prerequisite: 168 UOC overall, SOCW4003, SOCW4011, SOCW4012, SOCW4013, enrolment in a Social Work program and an overall WAM of 70. Corequisite: SOCW4018<br/><br/>",
-        "processed_rule": "168UOC && SOCW4003 && SOCW4011 && SOCW4012 && SOCW4013 && enrolment in a SOCW program && an overall 70WAM. Corequisite: SOCW4018"
+        "processed_rule": "168UOC && SOCW4003 && SOCW4011 && SOCW4012 && SOCW4013 && enrolment in a SOCW && an overall 70WAM. Corequisite: SOCW4018"
     },
     "SOCW4016": {
         "original_rule": "Prerequisite: 168 units of credit overall, including SOCW4003, SOCW4011, SOCW4012, and SOCW4013, and enrolment in Social Work program. Corequisite: SOCW4018<br/><br/>",
-        "processed_rule": "168UOC && including SOCW4003 && SOCW4011 && SOCW4012 && SOCW4013 && enrolment in SOCW program. Corequisite: SOCW4018"
+        "processed_rule": "168UOC && including SOCW4003 && SOCW4011 && SOCW4012 && SOCW4013 && enrolment in SOCW . Corequisite: SOCW4018"
     },
     "SOCW4017": {
         "original_rule": "Prerequisite: SOCW4003, SOCW4011, SOCW4012, and enrolment in a Social Work program. Corequisite: SOCW4013. Equivalent: SOCW4014, SOCW4001<br/><br/>",
-        "processed_rule": "SOCW4003 && SOCW4011 && SOCW4012 && enrolment in a SOCW program. Corequisite: SOCW4013. Equivalent: SOCW4014, SOCW4001"
+        "processed_rule": "SOCW4003 && SOCW4011 && SOCW4012 && enrolment in a SOCW . Corequisite: SOCW4013. Equivalent: SOCW4014, SOCW4001"
     },
     "SOCW4018": {
         "original_rule": "Prerequisite: SOCW4003, SOCW4011, SOCW4012, SOCW4013 and enrolment in a Social Work program. Corequisite: SOCW4015 or SOCW4016. Equivalent: SOCW4014, SOCW4001<br/><br/>",
-        "processed_rule": "SOCW4003 && SOCW4011 && SOCW4012 && SOCW4013 && enrolment in a SOCW program. Corequisite: SOCW4015 || SOCW4016. Equivalent: SOCW4014, SOCW4001"
+        "processed_rule": "SOCW4003 && SOCW4011 && SOCW4012 && SOCW4013 && enrolment in a SOCW . Corequisite: SOCW4015 || SOCW4016. Equivalent: SOCW4014, SOCW4001"
     },
     "SOLA1070": {
         "original_rule": "",
@@ -11041,11 +11041,11 @@
     },
     "SOSS3006": {
         "original_rule": "Prerequisite: SOSS/SRAP1000, SOSS/SRAP1001, SOSS/SRAP2001, DIPP1112 or CDEV1112, and enrolment in a Social Science or Social Research and Policy program.<br/>Equivalent: SRAP3006<br/><br/>",
-        "processed_rule": "SOSS/SRAP1000 || SOSS/SRAP1001 || SOSS/SRAP2001 || DIPP1112 || CDEV1112 && enrolment in a Social Science || SRAP program. Equivalent: SRAP3006"
+        "processed_rule": "SOSS/SRAP1000 || SOSS/SRAP1001 || SOSS/SRAP2001 || DIPP1112 || CDEV1112 && enrolment in a Social Science || SRAP . Equivalent: SRAP3006"
     },
     "SOSS3007": {
         "original_rule": "Prerequisite: SOSS1001 and enrolment in a Social Science or Social Research and Policy program<br/><br/>",
-        "processed_rule": "SOSS1001 && enrolment in a Social Science || SRAP program"
+        "processed_rule": "SOSS1001 && enrolment in a Social Science || SRAP"
     },
     "SOSS4051": {
         "original_rule": "Prerequisite: Enrolment in 4529 Social Science (Honours)<br/><br/>",
@@ -11061,15 +11061,15 @@
     },
     "SRAP4051": {
         "original_rule": "Prerequisite: Enrolment in the Social Research and Policy honours program<br/><br/>",
-        "processed_rule": "Enrolment in the SRAP honours program"
+        "processed_rule": "Enrolment in the SRAP honours"
     },
     "SRAP4052": {
         "original_rule": "Prerequisite: Enrolment in the Social Research and Policy honours program<br/><br/>",
-        "processed_rule": "Enrolment in the SRAP honours program"
+        "processed_rule": "Enrolment in the SRAP honours"
     },
     "SRAP4053": {
         "original_rule": "Prerequisite: Enrolment in the Social Research and Policy honours program<br/><br/>",
-        "processed_rule": "Enrolment in the SRAP honours program"
+        "processed_rule": "Enrolment in the SRAP honours"
     },
     "TABL1003": {
         "original_rule": "",
@@ -11093,7 +11093,7 @@
     },
     "TABL1710": {
         "original_rule": "Prerequisite: Must not be enrolled in Law single and dual programs and completion of 18UOC<br/><br/>",
-        "processed_rule": "Must not be enrolled in LAWS single && dual programs && 18UOC"
+        "processed_rule": "Must not be enrolled in LAWS single && dual s && 18UOC"
     },
     "TABL2015": {
         "original_rule": "Prerequisite: (ATAX0005 or TABL1005) and (ATAX0010 or TABL1010)<br/><br/>",
@@ -11121,7 +11121,7 @@
     },
     "TABL2710": {
         "original_rule": "Prerequisite: Must not be enrolled in Law single and dual programs and completion of 18UOC<br/><br/>",
-        "processed_rule": "Must not be enrolled in LAWS single && dual programs && 18UOC"
+        "processed_rule": "Must not be enrolled in LAWS single && dual s && 18UOC"
     },
     "TABL2712": {
         "original_rule": "Prerequisite:LEGT1710 or TABL1710 or TABL 2710 or 12 UOC offered by the UNSW Business School.<br/><br/>",
@@ -11141,7 +11141,7 @@
     },
     "TABL2741": {
         "original_rule": "Prerequisite: Not enrolled in Law single and dual programs, and completion of LEGT1710 or TABL1710 or TABL2710 or (COMM1100 and COMM1150) or COMM1900<br/><br/>",
-        "processed_rule": "Not enrolled in LAWS single && dual programs && completion of LEGT1710 || TABL1710 || TABL2710 || (COMM1100 && COMM1150) || COMM1900"
+        "processed_rule": "Not enrolled in LAWS single && dual s && completion of LEGT1710 || TABL1710 || TABL2710 || (COMM1100 && COMM1150) || COMM1900"
     },
     "TABL2751": {
         "original_rule": "Prerequisite: TABL1710 or TABL2710 or LAWS1052 or JURD7152 or (COMM1100 and COMM1150) or COMM1900<br/>Excluded: LAWS3147, LAWS3751<br/><br/>",
@@ -11245,7 +11245,7 @@
     },
     "TABL5805": {
         "original_rule": "Restricted to students enrolled in Program 9245, 9255, 9257 or Stream TABLBS9250, TABLDS9250, TABLAH4501<br/><br/>",
-        "processed_rule": "Restricted to students enrolled in Program 9245 || 9255 || 9257 || Stream TABLBS9250, TABLDS9250, TABLAH4501"
+        "processed_rule": "Restricted to 9245 || 9255 || 9257 || Stream TABLBS9250, TABLDS9250, TABLAH4501"
     },
     "TABL5810": {
         "original_rule": "",
@@ -11333,31 +11333,31 @@
     },
     "YMED1001": {
         "original_rule": "Currently enrolled in program 3880 Bachelor of International Public Health<br/><br/>",
-        "processed_rule": "Currently enrolled in program 3880 Bachelor of International Public Health"
+        "processed_rule": "Currently enrolled in 3880 Bachelor of International Public Health"
     },
     "YMED1002": {
         "original_rule": "Currently enrolled in program 3880 Bachelor of International Public Health<br/><br/>",
-        "processed_rule": "Currently enrolled in program 3880 Bachelor of International Public Health"
+        "processed_rule": "Currently enrolled in 3880 Bachelor of International Public Health"
     },
     "YMED1003": {
         "original_rule": "Currently enrolled in program 3880 Bachelor of International Public Health<br/><br/>",
-        "processed_rule": "Currently enrolled in program 3880 Bachelor of International Public Health"
+        "processed_rule": "Currently enrolled in 3880 Bachelor of International Public Health"
     },
     "YMED1004": {
         "original_rule": "Currently enrolled in program 3880 Bachelor of International Public Health<br/><br/>",
-        "processed_rule": "Currently enrolled in program 3880 Bachelor of International Public Health"
+        "processed_rule": "Currently enrolled in 3880 Bachelor of International Public Health"
     },
     "YMED1005": {
         "original_rule": "Currently enrolled in program 3880 Bachelor of International Public Health<br/><br/>",
-        "processed_rule": "Currently enrolled in program 3880 Bachelor of International Public Health"
+        "processed_rule": "Currently enrolled in 3880 Bachelor of International Public Health"
     },
     "YMED1006": {
         "original_rule": "Currently enrolled in program 3880 Bachelor of International Public Health<br/><br/>",
-        "processed_rule": "Currently enrolled in program 3880 Bachelor of International Public Health"
+        "processed_rule": "Currently enrolled in 3880 Bachelor of International Public Health"
     },
     "YMED1008": {
         "original_rule": "Currently enrolled in program 3880 Bachelor of International Public Health<br/><br/>",
-        "processed_rule": "Currently enrolled in program 3880 Bachelor of International Public Health"
+        "processed_rule": "Currently enrolled in 3880 Bachelor of International Public Health"
     },
     "YMED3001": {
         "original_rule": "",
@@ -11385,7 +11385,7 @@
     },
     "YMED3007": {
         "original_rule": "Currently enrolled in program 3880 Bachelor of International Public Health<br/><br/>",
-        "processed_rule": "Currently enrolled in program 3880 Bachelor of International Public Health"
+        "processed_rule": "Currently enrolled in 3880 Bachelor of International Public Health"
     },
     "ZBUS1101": {
         "original_rule": "",
@@ -11441,11 +11441,11 @@
     },
     "ZBUS2901": {
         "original_rule": "Prerequisite: Enrolment in CDF Program (4462).<br/><br/>",
-        "processed_rule": "Enrolment in CDF Program (4462)"
+        "processed_rule": "Enrolment in CDF (4462)"
     },
     "ZBUS2902": {
         "original_rule": "Prerequisite: Enrolment in CDF Program (4462).<br/><br/>",
-        "processed_rule": "Enrolment in CDF Program (4462)"
+        "processed_rule": "Enrolment in CDF (4462)"
     },
     "ZBUS3101": {
         "original_rule": "Prerequisite ZBUS2101<br/><br/>",
@@ -11461,7 +11461,7 @@
     },
     "ZBUS3104": {
         "original_rule": "Business Program (4405 or 4462) and ZBUS1104<br/><br/>",
-        "processed_rule": "ZBUS Program (4405 || 4462) && ZBUS1104"
+        "processed_rule": "ZBUS (4405 || 4462) && ZBUS1104"
     },
     "ZBUS3106": {
         "original_rule": "",
@@ -11493,27 +11493,27 @@
     },
     "ZBUS3901": {
         "original_rule": "Prerequisite: Enrolment in CDF Program (4462).<br/><br/>",
-        "processed_rule": "Enrolment in CDF Program (4462)"
+        "processed_rule": "Enrolment in CDF (4462)"
     },
     "ZBUS3902": {
         "original_rule": "Prerequisite: Enrolment in CDF Program (4462).<br/><br/>",
-        "processed_rule": "Enrolment in CDF Program (4462)"
+        "processed_rule": "Enrolment in CDF (4462)"
     },
     "ZBUS4001": {
         "original_rule": "Enrolment in Business (Honours) Program 4512.<br/><br/>",
-        "processed_rule": "Enrolment in ZBUS (Honours) Program 4512"
+        "processed_rule": "Enrolment in ZBUS (Honours) 4512"
     },
     "ZBUS4002": {
         "original_rule": "Enrolment in Business (Honours) Program 4512.<br/><br/>",
-        "processed_rule": "Enrolment in ZBUS (Honours) Program 4512"
+        "processed_rule": "Enrolment in ZBUS (Honours) 4512"
     },
     "ZBUS4101": {
         "original_rule": "Enrolment in Business (Honours) Program 4512.<br/><br/>",
-        "processed_rule": "Enrolment in ZBUS (Honours) Program 4512"
+        "processed_rule": "Enrolment in ZBUS (Honours) 4512"
     },
     "ZBUS4102": {
         "original_rule": "Enrolment in Business (Honours) Program 4512.<br/><br/>",
-        "processed_rule": "Enrolment in ZBUS (Honours) Program 4512"
+        "processed_rule": "Enrolment in ZBUS (Honours) 4512"
     },
     "ZEIT1102": {
         "original_rule": "Prerequisite: ZPEM1307<br/><br/>",
@@ -11525,11 +11525,11 @@
     },
     "ZEIT1190": {
         "original_rule": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-        "processed_rule": "Enrolment in CDF Program"
+        "processed_rule": "Enrolment in CDF"
     },
     "ZEIT1191": {
         "original_rule": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-        "processed_rule": "Enrolment in CDF Program"
+        "processed_rule": "Enrolment in CDF"
     },
     "ZEIT1206": {
         "original_rule": "Prerequisite ZEIT1208 and ZPEM1303<br/><br/>",
@@ -11541,11 +11541,11 @@
     },
     "ZEIT1290": {
         "original_rule": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-        "processed_rule": "Enrolment in CDF Program"
+        "processed_rule": "Enrolment in CDF"
     },
     "ZEIT1291": {
         "original_rule": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-        "processed_rule": "Enrolment in CDF Program"
+        "processed_rule": "Enrolment in CDF"
     },
     "ZEIT1501": {
         "original_rule": "",
@@ -11565,7 +11565,7 @@
     },
     "ZEIT1690": {
         "original_rule": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-        "processed_rule": "Enrolment in CDF Program"
+        "processed_rule": "Enrolment in CDF"
     },
     "ZEIT1800": {
         "original_rule": "",
@@ -11573,11 +11573,11 @@
     },
     "ZEIT1901": {
         "original_rule": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-        "processed_rule": "Enrolment in CDF Program"
+        "processed_rule": "Enrolment in CDF"
     },
     "ZEIT1902": {
         "original_rule": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-        "processed_rule": "Enrolment in CDF Program"
+        "processed_rule": "Enrolment in CDF"
     },
     "ZEIT2102": {
         "original_rule": "Prerequisite: ZEIT1102<br/><br/>",
@@ -11661,11 +11661,11 @@
     },
     "ZEIT2901": {
         "original_rule": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-        "processed_rule": "Enrolment in CDF Program"
+        "processed_rule": "Enrolment in CDF"
     },
     "ZEIT2902": {
         "original_rule": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-        "processed_rule": "Enrolment in CDF Program"
+        "processed_rule": "Enrolment in CDF"
     },
     "ZEIT3101": {
         "original_rule": "Prerequisite: ZEIT3118<br/><br/>",
@@ -11833,11 +11833,11 @@
     },
     "ZEIT3901": {
         "original_rule": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-        "processed_rule": "Enrolment in CDF Program"
+        "processed_rule": "Enrolment in CDF"
     },
     "ZEIT3902": {
         "original_rule": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-        "processed_rule": "Enrolment in CDF Program"
+        "processed_rule": "Enrolment in CDF"
     },
     "ZEIT4003": {
         "original_rule": "Prerequisite: ZEIT2500 and ZEIT2503 or ZEIT2602<br/><br/>",
@@ -12045,11 +12045,11 @@
     },
     "ZEIT4901": {
         "original_rule": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-        "processed_rule": "Enrolment in CDF Program"
+        "processed_rule": "Enrolment in CDF"
     },
     "ZEIT4902": {
         "original_rule": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-        "processed_rule": "Enrolment in CDF Program"
+        "processed_rule": "Enrolment in CDF"
     },
     "ZGEN2215": {
         "original_rule": "Prerequisite: 36 Units of Credit in Level 1 courses<br/><br/>",
@@ -12213,11 +12213,11 @@
     },
     "ZHSS2901": {
         "original_rule": "Prerequisite: Enrolment in CDF Program (4461)<br/><br/>",
-        "processed_rule": "Enrolment in CDF Program (4461)"
+        "processed_rule": "Enrolment in CDF (4461)"
     },
     "ZHSS2902": {
         "original_rule": "Prerequisite: Enrolment in CDF Program (4461)<br/><br/>",
-        "processed_rule": "Enrolment in CDF Program (4461)"
+        "processed_rule": "Enrolment in CDF (4461)"
     },
     "ZHSS3104": {
         "original_rule": "Prerequisite: ZHSS1101 and ZHSS1102<br/><br/>",
@@ -12465,7 +12465,7 @@
     },
     "ZPEM1901": {
         "original_rule": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-        "processed_rule": "Enrolment in CDF Program"
+        "processed_rule": "Enrolment in CDF"
     },
     "ZPEM2102": {
         "original_rule": "Prerequisite: ZPEM1101 and ZPEM1102<br/><br/>",
@@ -12545,7 +12545,7 @@
     },
     "ZPEM2901": {
         "original_rule": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-        "processed_rule": "Enrolment in CDF Program"
+        "processed_rule": "Enrolment in CDF"
     },
     "ZPEM3103": {
         "original_rule": "Prerequisite: ZPEM1301, ZPEM1302, ZPEM2113 or ZPEM2502<br/><br/>",
@@ -12625,11 +12625,11 @@
     },
     "ZPEM3901": {
         "original_rule": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-        "processed_rule": "Enrolment in CDF Program"
+        "processed_rule": "Enrolment in CDF"
     },
     "ZPEM3902": {
         "original_rule": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-        "processed_rule": "Enrolment in CDF Program"
+        "processed_rule": "Enrolment in CDF"
     },
     "ZPEM4001": {
         "original_rule": "",
