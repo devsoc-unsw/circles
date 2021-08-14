@@ -30,6 +30,7 @@ def process_courses():
             # dict in anticipation of courses being added
             processed["path_to"] = dict()
 
+        process_description(processed, course)
         process_terms(processed, course)
         process_gen_ed(processed, course)
         process_enrolment_path(processed, course, data)
@@ -42,6 +43,10 @@ def process_courses():
     dataHelpers.write_data(data, "data/finalData/coursesProcessed.json")
     dataHelpers.write_data(ABSENT_COURSES, "data/finalData/absentCourses.json")
 
+def process_description(processed: dict, formatted: dict) -> None:
+    """ Removes HTML tags from descriptions """
+    if formatted["description"]:
+        processed["description"] = re.sub(r"<[^>]*?>", "", formatted["description"])
 
 def process_terms(processed: dict, formatted: dict) -> None:
     """ Processes terms: e.g. 'Summer Term, Term 2' to ["ST", "T2"]. 
