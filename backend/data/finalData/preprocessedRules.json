@@ -301,7 +301,7 @@
     },
     "ANAT2511": {
         "original_rule": "Excluded: ANAT2111, ANAT2151, ANAT2200, ANAT2241<br/><br/>",
-        "processed_rule": "Excluded: ANAT2111, ANAT2151, ANAT2200, ANAT2241"
+        "processed_rule": ""
     },
     "ANAT2521": {
         "original_rule": "",
@@ -473,7 +473,7 @@
     },
     "ARTS1250": {
         "original_rule": "Excluded: ARTS2247<br/><br/>",
-        "processed_rule": "Excluded: ARTS2247"
+        "processed_rule": ""
     },
     "ARTS1270": {
         "original_rule": "",
@@ -513,7 +513,7 @@
     },
     "ARTS1480": {
         "original_rule": "Excluded: HSC Beginners, Continuers or Extension French, FREN1000, FREN1101, GENT0425<br/><br/>",
-        "processed_rule": "Excluded: HSC Beginners || Continuers || Extension French, FREN1000, FREN1101, GENT0425"
+        "processed_rule": ""
     },
     "ARTS1481": {
         "original_rule": "Prerequisite: ARTS1480  or language placement approval<br/><br/>",
@@ -649,7 +649,7 @@
     },
     "ARTS2050": {
         "original_rule": "Prerequisite: 12uoc at Level 1, and enrolment in an Arts and Social Sciences or Art and Design single or dual award program. Excluded: ARTS5503<br/><br/>",
-        "processed_rule": "12UOC at L1 && enrolment in an SARTs && SOSS || ADAD single || dual award program. Excluded: ARTS5503"
+        "processed_rule": "12UOC at L1 && enrolment in an SARTs && SOSS || ADAD single || dual award program"
     },
     "ARTS2061": {
         "original_rule": "Prerequisite: 24 units of credit at Level 1<br/><br/>",
@@ -833,11 +833,11 @@
     },
     "ARTS2374": {
         "original_rule": "Prerequisite: 24 units of credit at Level 1. Excluded: ARTS2366<br/><br/>",
-        "processed_rule": "24UOC at L1. Excluded: ARTS2366"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2375": {
         "original_rule": "Prerequisite: 24 units of credit at Level 1. Excluded: ARTS2366<br/><br/>",
-        "processed_rule": "24UOC at L1. Excluded: ARTS2366"
+        "processed_rule": "24UOC at L1"
     },
     "ARTS2382": {
         "original_rule": "Prerequisite: 24 units of credit at Level 1<br/><br/>",
@@ -1053,7 +1053,7 @@
     },
     "ARTS2818": {
         "original_rule": "Prerequisite: 24 units of credit at Level 1, including ARTS1810. Excluded: ARTS1840<br/><br/>",
-        "processed_rule": "24UOC at L1, including ARTS1810. Excluded: ARTS1840"
+        "processed_rule": "24UOC at L1, including ARTS1810"
     },
     "ARTS2819": {
         "original_rule": "Prerequisite: 24 units of credit at Level 1<br/><br/>",
@@ -1252,8 +1252,8 @@
         "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams, Theatre & Performance Studies"
     },
     "ARTS3125": {
-        "original_rule": "Prerequisite: 48 uoc overall, including 6 uoc at level 1 and 6 uoc at level 2 in one of the following specialisations, MCT or Theatre & Performance Studies. Or 66 uoc overall and enrolled in a single or dual award Media (S&SP) program<br/><br/>",
-        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following specialisations, MCT or Theatre & Performance Studies. || 66UOC && enrolled in a single || dual award MDIA (S&SP) program"
+        "original_rule": "Prerequisite: 48 uoc overall, including 6 uoc at level 1 and 6 uoc at level 2 in one of the following specialisations, MCT or\u00a0Theatre & Performance Studies. Or 66 uoc overall and enrolled in a single or dual award Media (S&SP) program<br/><br/>",
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following specialisations, MCT or\u00a0Theatre & Performance Studies. || 66UOC && enrolled in a single || dual award MDIA (S&SP) program"
     },
     "ARTS3130": {
         "original_rule": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Dance Studies or Theatre & Performance Studies. Or 72 UOC overall and enrolment in an Art & Design program<br/><br/>",
@@ -1261,7 +1261,7 @@
     },
     "ARTS3131": {
         "original_rule": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams,  Australian Studies or Theatre & Performance Studies. Excluded: ARTS2124<br/><br/>",
-        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || Australian Studies || Theatre & Performance Studies. Excluded: ARTS2124"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || Australian Studies || Theatre & Performance Studies"
     },
     "ARTS3132": {
         "original_rule": "Prerequisites: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Theatre and Performance Studies<br/><br/>",
@@ -1380,16 +1380,16 @@
         "processed_rule": "ARTS3452 || language placement approval"
     },
     "ARTS3454": {
-        "original_rule": "Prerequisite: ARTS2452 or ARTS3451 or ARTS3452 or ARTS3453 or language placement approval<br/><br/>",
-        "processed_rule": "ARTS2452 || ARTS3451 || ARTS3452 || ARTS3453 or language placement approval"
+        "original_rule": "Prerequisite: ARTS2452 or ARTS3451 or ARTS3452 or ARTS3453 or\u00a0language placement approval<br/><br/>",
+        "processed_rule": "ARTS2452 || ARTS3451 || ARTS3452 || ARTS3453 or\u00a0language placement approval"
     },
     "ARTS3455": {
         "original_rule": "Prerequisite: ARTS2452 or ARTS3451 or ARTS3452 or ARTS3453 or ARTS3454 or language placement approval<br/><br/>",
         "processed_rule": "ARTS2452 || ARTS3451 || ARTS3452 || ARTS3453 || ARTS3454 || language placement approval"
     },
     "ARTS3456": {
-        "original_rule": "Prerequisite: ARTS2452 or ARTS3451 or ARTS3452 or ARTS3453 or ARTS3454 or language placement approval<br/><br/>",
-        "processed_rule": "ARTS2452 || ARTS3451 || ARTS3452 || ARTS3453 || ARTS3454 or language placement approval"
+        "original_rule": "Prerequisite: ARTS2452 or ARTS3451 or ARTS3452 or ARTS3453 or ARTS3454 or\u00a0language placement approval<br/><br/>",
+        "processed_rule": "ARTS2452 || ARTS3451 || ARTS3452 || ARTS3453 || ARTS3454 or\u00a0language placement approval"
     },
     "ARTS3458": {
         "original_rule": "Prerequisite: 72uoc overall, including ARTS3453, ARTS2452, or ARTS3454  and enrolment in an Advanced Chinese Studies major/minor; or 72uoc overall, including ARTS2451 or ARTS2462 and enrolment in a Chinese Studies major/minor<br/><br/>",
@@ -1581,11 +1581,11 @@
     },
     "ARTS3787": {
         "original_rule": "Prerequisite: 24 units of credit in either the European Studies or German Studies stream.<br/>Excluded: ARTS2783<br/><br/>",
-        "processed_rule": "24UOC in the European Studies || German Studies stream. Excluded: ARTS2783"
+        "processed_rule": "24UOC in the European Studies || German Studies stream"
     },
     "ARTS3789": {
         "original_rule": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams; European Studies or History. Excluded: ARTS2786<br/><br/>",
-        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams; European Studies || History. Excluded: ARTS2786"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams; European Studies || History"
     },
     "ARTS3810": {
         "original_rule": "Prerequisite: 72 units of credit overall, and  enrolment in an International Relations, Politics, or Politics & International Relations major<br/><br/>",
@@ -1605,7 +1605,7 @@
     },
     "ARTS3817": {
         "original_rule": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, International Relations or Politics    <br/>Excluded: ARTS3813<br/><br/>",
-        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || International Relations || Politics Excluded: ARTS3813"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || International Relations || Politics"
     },
     "ARTS3819": {
         "original_rule": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Politics and International Relations<br/><br/>",
@@ -1665,7 +1665,7 @@
     },
     "ARTS3901": {
         "original_rule": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Gender Studies or Philosophy.<br/>Excluded: ARTS3367<br/><br/>",
-        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || Gender Studies || Philosophy. Excluded: ARTS3367"
+        "processed_rule": "48UOC && including 6UOC at L1 && 6UOC at L2 in one of the following streams || Gender Studies || Philosophy"
     },
     "ARTS3991": {
         "original_rule": "Prerequisite: 72 uoc overall, and enrolment in an Arts & Social Sciences major in an Arts & Social Sciences single or double degree program. Consent required<br/><br/>",
@@ -2185,7 +2185,7 @@
     },
     "AVIA3101": {
         "original_rule": "Prerequisite: AVIA1900,  AVIA2004,  AVIA2014 or 1901 ; Excluded: AVIA3002.<br/><br/>",
-        "processed_rule": "AVIA1900 || AVIA2004 || AVIA2014 || 1901 ; Excluded: AVIA3002"
+        "processed_rule": "AVIA1900 || AVIA2004 || AVIA2014 || 1901 ;"
     },
     "AVIA3111": {
         "original_rule": "Prerequisite: AVIA2117<br/><br/>",
@@ -2221,7 +2221,7 @@
     },
     "AVIA3710": {
         "original_rule": "Excl: PROF3001, AVIA3700 and 90 Units of Credit<br/><br/>",
-        "processed_rule": "Excl: PROF3001 && AVIA3700 && 90UOC"
+        "processed_rule": ""
     },
     "AVIA3851": {
         "original_rule": "Prerequisite: AVIA1850 or 2701<br/><br/>",
@@ -2369,7 +2369,7 @@
     },
     "BEES2041": {
         "original_rule": "Exclusion: MATH2099 & PSYC2001<br/><br/>",
-        "processed_rule": "Exclusion: MATH2099 & PSYC2001"
+        "processed_rule": ""
     },
     "BEES2051": {
         "original_rule": "",
@@ -2377,7 +2377,7 @@
     },
     "BEES2680": {
         "original_rule": "Exclusion: BEES6800<br/><br/>",
-        "processed_rule": "Exclusion: BEES6800"
+        "processed_rule": ""
     },
     "BEES2741": {
         "original_rule": "",
@@ -3129,7 +3129,7 @@
     },
     "CHEM1001": {
         "original_rule": "Exclusion: CHEM1011, CHEM1031, CHEM1051, CHEM1831<br/><br/>",
-        "processed_rule": "Exclusion: CHEM1011, CHEM1031, CHEM1051, CHEM1831"
+        "processed_rule": ""
     },
     "CHEM1011": {
         "original_rule": "",
@@ -3161,7 +3161,7 @@
     },
     "CHEM1521": {
         "original_rule": "Pre-req of Prerequisite: CHEM1011 Chemistry 1A or equivalent. Exclusion: CHEM1021<br/><br/>",
-        "processed_rule": "of CHEM1011 CHEM 1A || equivalent. Exclusion: CHEM1021"
+        "processed_rule": "of CHEM1011 CHEM 1A || equivalent"
     },
     "CHEM1811": {
         "original_rule": "",
@@ -3169,7 +3169,7 @@
     },
     "CHEM1821": {
         "original_rule": "Prerequisite: CHEM1811 Exclusion: CHEM1021 or DPST1032 and CHEM1041 and CHEM1061 and CEIC1001 and MATS1101<br/><br/>",
-        "processed_rule": "CHEM1811 Exclusion: CHEM1021 || DPST1032 && CHEM1041 && CHEM1061 && CEIC1001 && MATS1101"
+        "processed_rule": "CHEM1811"
     },
     "CHEM1829": {
         "original_rule": "Prerequisite: CHEM1011, and enrolment in 3181, 3182, 3952 or a Vision Science major.<br/><br/>",
@@ -3201,7 +3201,7 @@
     },
     "CHEM2531": {
         "original_rule": "Prerequisite: CHEM2041 Exclusion: CHEM2031, CHEM2828, CHEM2839<br/><br/>",
-        "processed_rule": "CHEM2041 Exclusion: CHEM2031, CHEM2828, CHEM2839"
+        "processed_rule": "CHEM2041"
     },
     "CHEM2541": {
         "original_rule": "Prerequisite: CHEM1011 or CHEM1031 or CHEM1051 or CHEM1811 or DPST1031 and CHEM1021 or CHEM1041 or CHEM1061 or CHEM1821 or DPST1032 and MATH1031 or MATH1041 or MATH1131 or MATH1141 or MATH1151 or MATH1231 or MATH1241 or MATH1251 or DPST1013 or DPST1014<br/><br/>",
@@ -3213,7 +3213,7 @@
     },
     "CHEM2996": {
         "original_rule": "Prerequisite: Students must have a WAM of 75 or higher to be eligible for this course and 12UOC of CHEM excluding CHEM1001 and CHEM1151<br/><br/>",
-        "processed_rule": "Students must have 75WAM to be eligible for this course && 12UOC of CHEM excluding CHEM1001 && CHEM1151"
+        "processed_rule": "Students must have 75WAM to be eligible for this course && 12UOC of CHEM"
     },
     "CHEM2999": {
         "original_rule": "",
@@ -3445,7 +3445,7 @@
     },
     "COMM1150": {
         "original_rule": "Pre-requisite: COMM1100 and excludes MGMT1101. Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Term 3.<br/><br/>",
-        "processed_rule": "COMM1100 && excludes MGMT1101. Only available to single && double degree ZBUS School students in Term 2. It will be offered to non-ZBUS School students in Term 3"
+        "processed_rule": "COMM1100 &&"
     },
     "COMM1170": {
         "original_rule": "Pre-requisite: COMM1140. Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Term 3.<br/><br/>",
@@ -3477,7 +3477,7 @@
     },
     "COMM2222": {
         "original_rule": "Pre-requisite: In Business degree, COMM6000 Career Accelerator or COMM1999 First Year Portfolio, WAM 65+, minimum 72 UOC completed, room in degree for course, Good academic standing.<br/>Excluded: Co-op students<br/>It is recommended a progression check is completed prior to enrolling.<br/><br/>",
-        "processed_rule": "In ZBUS degree || COMM6000 Career Accelerator || COMM1999 First Year Portfolio, 65WAM, 72UOC completed, room in degree for course, Good academic standing. Excluded: Co-op students It is recommended a progression check is completed prior to enrolling"
+        "processed_rule": "In ZBUS degree || COMM6000 Career Accelerator || COMM1999 First Year Portfolio, 65WAM, 72UOC completed, room in degree for course, Good academic standing"
     },
     "COMM2233": {
         "original_rule": "Completed 48 UOC, Good Standing, completed COMM6000 or COMM1999, and have space in degree for course.<br/>Its recommended to seek a progression check prior to application. Visit Career Accelerator page on Business School website for more info.<br/><br/>",
@@ -3496,8 +3496,8 @@
         "processed_rule": "65WAM || 72UOC || room in degree for this course || good academic standing || completed COMM6000 Career Accelerator: Essentials || COMM1999 First Year Portfolio. This course is by application only. Please visit ZBUS School website for more information"
     },
     "COMM3030": {
-        "original_rule": "•\tminimum WAM of 65;<br/>•\thave completed a minimum of 48 UOC at the commencement of this course;<br/>•\thave room in their degree for this course;<br/>•\tare in good academic standing;<br/>•\thave completed COMM6000 Career Accelerator: Essentials or COMM1999 First Year Portfolio (Business School students only)<br/>This course may count as a Business School Free Elective, OR as a major elective within some schools. It is recommended a progression check is completed prior to enrolling.<br/><br/>",
-        "processed_rule": "•\t65WAM; •\thave completed a minimum of 48UOC at the commencement of this course; •\thave room in their degree for this course; •\tare in good academic standing; •\thave completed COMM6000 Career Accelerator: Essentials || COMM1999 First Year Portfolio (ZBUS School students only) This course may count as a ZBUS School Free Elective || as a major elective within some schools. It is recommended a progression check is completed prior to enrolling"
+        "original_rule": "\u2022\tminimum WAM of 65;<br/>\u2022\thave completed a minimum of 48 UOC at the commencement of this course;<br/>\u2022\thave room in their degree for this course;<br/>\u2022\tare in good academic standing;<br/>\u2022\thave completed COMM6000 Career Accelerator: Essentials or COMM1999 First Year Portfolio (Business School students only)<br/>This course may count as a Business School Free Elective, OR as a major elective within some schools. It is recommended a progression check is completed prior to enrolling.<br/><br/>",
+        "processed_rule": "\u2022\t65WAM; \u2022\thave completed a minimum of 48UOC at the commencement of this course; \u2022\thave room in their degree for this course; \u2022\tare in good academic standing; \u2022\thave completed COMM6000 Career Accelerator: Essentials || COMM1999 First Year Portfolio (ZBUS School students only) This course may count as a ZBUS School Free Elective || as a major elective within some schools. It is recommended a progression check is completed prior to enrolling"
     },
     "COMM3090": {
         "original_rule": "Students are expected to be in their final year of a Bachelor of Commerce single or dual degree with at least 108 UOC completed.<br/><br/>",
@@ -3505,11 +3505,11 @@
     },
     "COMM3101": {
         "original_rule": "Pre-requisite: Completion of 48 UOC.<br/>This course is by application only.Please contact the Co-op office for more information.<br/>Students who have completed DIPP1510 or COMM2222 or are in Business Co-Op programs are excluded from this course.<br/><br/>",
-        "processed_rule": "48UOC. This course is by application only.Please contact the Co-op office for more information. Students who have completed DIPP1510 || COMM2222 || are in ZBUS Co-Op programs are excluded from this course"
+        "processed_rule": "48UOC. This course is by application only.Please contact the Co-op office for more information. Students who have completed DIPP1510 || COMM2222 || are in ZBUS Co-Op programs are"
     },
     "COMM3202": {
         "original_rule": "Pre-requisite: COMM3101 or COMM2101<br/>Both terms of COMM3101/COMM2101 (12 UOC) must be successfully completed. <br/>This course is by application only. Please contact the Co-op office for more information.<br/>Excluded:DIPP1510, COMM2222, Business Co-Op programs<br/><br/>",
-        "processed_rule": "COMM3101 || COMM2101 terms of (COMM3101 || COMM2101) (12UOC) must be successfully completed. This course is by application only. Please contact the Co-op office for more information. Excluded:DIPP1510, COMM2222, ZBUS Co-Op programs"
+        "processed_rule": "COMM3101 || COMM2101 terms of (COMM3101 || COMM2101) (12UOC) must be successfully completed. This course is by application only. Please contact the Co-op office for more information"
     },
     "COMM3303": {
         "original_rule": "Pre-requisite: This course is by application only. Please contact the Co-op office for more information.<br/><br/>",
@@ -3909,7 +3909,7 @@
     },
     "CRIM2020": {
         "original_rule": "Prerequisite: 24units of credit at Level 1 including CRIM1010 and CRIM1011; Excluded: Students in all Bachelor of Laws double-degree programs<br/><br/>",
-        "processed_rule": "24UOC at L1 including CRIM1010 && CRIM1011; Excluded: Students in all Bachelor of LAWSs double-degree programs"
+        "processed_rule": "24UOC at L1 including CRIM1010 && CRIM1011;"
     },
     "CRIM2021": {
         "original_rule": "Prerequisite: CRIM2020, not available to students in Bachelor of Laws double-degree programs<br/><br/>",
@@ -4269,7 +4269,7 @@
     },
     "CVEN4705": {
         "original_rule": "Exclusion: CVEN9888<br/><br/>",
-        "processed_rule": "Exclusion: CVEN9888"
+        "processed_rule": ""
     },
     "CVEN4706": {
         "original_rule": "",
@@ -4349,7 +4349,7 @@
     },
     "CVEN9884": {
         "original_rule": "Exclusion: BIOS1301<br/><br/>",
-        "processed_rule": "Exclusion: BIOS1301"
+        "processed_rule": ""
     },
     "DART1100": {
         "original_rule": "",
@@ -4968,8 +4968,8 @@
         "processed_rule": "UNSW Global Diplomas only (7001 && 7002 && 7003 && 7004) && corequisite DPST1013"
     },
     "DPST1024": {
-        "original_rule": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) prerequisite DPST1023 OR a credit (≥65%) in DPST1021 and corequisite DPST1014<br/><br/>",
-        "processed_rule": "UNSW Global Diplomas only (7001 || 7002 || 7003 || 7004) DPST1023 || a credit (≥65%) in DPST1021 && corequisite DPST1014"
+        "original_rule": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) prerequisite DPST1023 OR a credit (\u226565%) in DPST1021 and corequisite DPST1014<br/><br/>",
+        "processed_rule": "UNSW Global Diplomas only (7001 || 7002 || 7003 || 7004) DPST1023 || a credit (\u226565%) in DPST1021 && corequisite DPST1014"
     },
     "DPST1031": {
         "original_rule": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
@@ -5033,7 +5033,7 @@
     },
     "ECON1203": {
         "original_rule": "Excluded: MATH2841, MATH2801, MATH2901, MATH2099, ACTL2002 & ACTL2131. <br/>Prerequisite: Must not be enrolled in Program 3715 or 3764<br/><br/>",
-        "processed_rule": "Excluded: MATH2841, MATH2801, MATH2901, MATH2099, ACTL2002 & ACTL2131. Must not be enrolled in Program 3715 || 3764"
+        "processed_rule": "Must not be enrolled in Program 3715 || 3764"
     },
     "ECON1401": {
         "original_rule": "Prerequisite: ECON1101 or COMM1100<br/><br/>",
@@ -5528,16 +5528,16 @@
         "processed_rule": "EDST6728. Corerequisite: EDST6760"
     },
     "EDST6760": {
-        "original_rule": "Prerequisite: EDST2002, EDST4084, 12 uoc Teaching Method 1 courses, and enrolment in an Education program. Students must have passed LANTITE.  Students must have sufficient subject content knowledge in their teaching areas<br/><br/>",
-        "processed_rule": "EDST2002 && EDST4084 && 12UOC Teaching Method 1 courses && enrolment in an Education program. Students must have passed LANTITE.  Students must have sufficient subject content knowledge in their teaching areas"
+        "original_rule": "Prerequisite: EDST2002, EDST4084, 12 uoc Teaching Method 1 courses, and enrolment in an Education program. Students must have passed LANTITE.\u00a0 Students must have sufficient subject content knowledge in their teaching areas<br/><br/>",
+        "processed_rule": "EDST2002 && EDST4084 && 12UOC Teaching Method 1 courses && enrolment in an Education program. Students must have passed LANTITE.\u00a0 Students must have sufficient subject content knowledge in their teaching areas"
     },
     "EDST6761": {
         "original_rule": "Prerequisite: EDST6760 and 12 units of credit in Teaching Methods courses. Students must have passed the Literacy and Numeracy Test for Initial Teacher Education in order to enrol into this course.<br/><br/>",
         "processed_rule": "EDST6760 && 12UOC in Teaching Methods courses. Students must have passed the Literacy && Numeracy Test for Initial Teacher Education in order to enrol into this course"
     },
     "EDST6765": {
-        "original_rule": "Prerequisite: EDST4080, EDST4096, EDST6760, 24 uoc Teaching Method courses, and enrolment in an Education program. Students must have passed LANTITE. Students must have sufficient subject content knowledge in their teaching areas. Excluded: EDST4081<br/><br/>",
-        "processed_rule": "EDST4080 && EDST4096 && EDST6760 && 24UOC Teaching Method courses && enrolment in an Education program. Students must have passed LANTITE. Students must have sufficient subject content knowledge in their teaching areas. Excluded: EDST4081"
+        "original_rule": "Prerequisite: EDST4080, EDST4096, EDST6760, 24 uoc Teaching Method courses, and enrolment in an Education program. Students must have passed LANTITE.\u00a0Students must have sufficient subject content knowledge in their teaching areas.\u00a0Excluded: EDST4081<br/><br/>",
+        "processed_rule": "EDST4080 && EDST4096 && EDST6760 && 24UOC Teaching Method courses && enrolment in an Education program. Students must have passed LANTITE.\u00a0Students must have sufficient subject content knowledge in their teaching areas"
     },
     "EDST6771": {
         "original_rule": "Prerequisite: 78 UOC overall, including EDST2002, and enrolment in program 4059, 4061, 4062, 4064, or 4066<br/><br/>",
@@ -6153,15 +6153,15 @@
     },
     "GENC2100": {
         "original_rule": "Excluded:All UG Business programs<br/><br/>",
-        "processed_rule": "Excluded:All UG ZBUS programs"
+        "processed_rule": ""
     },
     "GENC3004": {
         "original_rule": "Excluded:All UG Business programs<br/><br/>",
-        "processed_rule": "Excluded:All UG ZBUS programs"
+        "processed_rule": ""
     },
     "GENC5031": {
         "original_rule": "Excluded:All UG Business programs<br/><br/>",
-        "processed_rule": "Excluded:All UG ZBUS programs"
+        "processed_rule": ""
     },
     "GENE0050": {
         "original_rule": "",
@@ -6209,7 +6209,7 @@
     },
     "GENL2021": {
         "original_rule": "Exclusion: enrolment in program 3502, 3543, 3571, 3979, 3971<br/><br/>",
-        "processed_rule": "Exclusion: enrolment in program 3502, 3543, 3571, 3979, 3971"
+        "processed_rule": ""
     },
     "GENL2022": {
         "original_rule": "",
@@ -6217,7 +6217,7 @@
     },
     "GENL2032": {
         "original_rule": "Exclusion: enrolment in program 3502, 3543, 3571, 3979, 3971<br/><br/>",
-        "processed_rule": "Exclusion: enrolment in program 3502, 3543, 3571, 3979, 3971"
+        "processed_rule": ""
     },
     "GENL2323": {
         "original_rule": "",
@@ -6233,43 +6233,43 @@
     },
     "GENM0295": {
         "original_rule": "Excluded: Not available to Undergraduate Faculty of Medicine single/dual program students<br/><br/>",
-        "processed_rule": "Excluded: Not available to Undergraduate Faculty of MDCN single/dual program students"
+        "processed_rule": ""
     },
     "GENM0510": {
         "original_rule": "Excluded: Not available to Undergraduate Faculty of Medicine single/dual program students<br/><br/>",
-        "processed_rule": "Excluded: Not available to Undergraduate Faculty of MDCN single/dual program students"
+        "processed_rule": ""
     },
     "GENM0518": {
         "original_rule": "Excluded: Not available to Undergraduate Faculty of Medicine single/dual program students<br/><br/>",
-        "processed_rule": "Excluded: Not available to Undergraduate Faculty of MDCN single/dual program students"
+        "processed_rule": ""
     },
     "GENM0519": {
         "original_rule": "Excluded: Not available to Undergraduate Faculty of Medicine single/dual program students<br/><br/>",
-        "processed_rule": "Excluded: Not available to Undergraduate Faculty of MDCN single/dual program students"
+        "processed_rule": ""
     },
     "GENM0520": {
         "original_rule": "Excluded: Not available to Undergraduate Faculty of Medicine single/dual program students<br/><br/>",
-        "processed_rule": "Excluded: Not available to Undergraduate Faculty of MDCN single/dual program students"
+        "processed_rule": ""
     },
     "GENM0703": {
         "original_rule": "Excluded: Not available to Undergraduate Faculty of Medicine single/dual program students<br/><br/>",
-        "processed_rule": "Excluded: Not available to Undergraduate Faculty of MDCN single/dual program students"
+        "processed_rule": ""
     },
     "GENM0707": {
         "original_rule": "Excluded: Not available to Undergraduate Faculty of Medicine single/dual program students<br/><br/>",
-        "processed_rule": "Excluded: Not available to Undergraduate Faculty of MDCN single/dual program students"
+        "processed_rule": ""
     },
     "GENM0708": {
         "original_rule": "Excluded: Not available to Undergraduate Faculty of Medicine single/dual program students<br/><br/>",
-        "processed_rule": "Excluded: Not available to Undergraduate Faculty of MDCN single/dual program students"
+        "processed_rule": ""
     },
     "GENS0401": {
         "original_rule": "Exclusion: All SCI Undergraduate Programs<br/><br/>",
-        "processed_rule": "Exclusion: All SCI Undergraduate Programs"
+        "processed_rule": ""
     },
     "GENS1111": {
         "original_rule": "Exclusion: All SCI Undergraduate Programs<br/><br/>",
-        "processed_rule": "Exclusion: All SCI Undergraduate Programs"
+        "processed_rule": ""
     },
     "GENS1112": {
         "original_rule": "",
@@ -6281,19 +6281,19 @@
     },
     "GENS4008": {
         "original_rule": "Exclusion: All SCI Undergraduate Programs<br/><br/>",
-        "processed_rule": "Exclusion: All SCI Undergraduate Programs"
+        "processed_rule": ""
     },
     "GENS4015": {
         "original_rule": "Exclusion: All SCI Undergraduate Programs<br/><br/>",
-        "processed_rule": "Exclusion: All SCI Undergraduate Programs"
+        "processed_rule": ""
     },
     "GENS5003": {
         "original_rule": "Exclusion: All SCI Undergraduate Programs<br/><br/>",
-        "processed_rule": "Exclusion: All SCI Undergraduate Programs"
+        "processed_rule": ""
     },
     "GENS5013": {
         "original_rule": "Exclusion: All SCI Undergraduate Programs<br/><br/>",
-        "processed_rule": "Exclusion: All SCI Undergraduate Programs"
+        "processed_rule": ""
     },
     "GENY0001": {
         "original_rule": "",
@@ -6357,7 +6357,7 @@
     },
     "GEOS2821": {
         "original_rule": "Excl: GEOG2821, GEOS2811<br/><br/>",
-        "processed_rule": "Excl: GEOG2821, GEOS2811"
+        "processed_rule": ""
     },
     "GEOS3071": {
         "original_rule": "Prerequisite: BIOS1101 or GEOS1211 or DPST1041<br/><br/>",
@@ -6733,7 +6733,7 @@
     },
     "INDC2003": {
         "original_rule": "Pre-requisites: CHEM1021 OR DPST1032 OR CHEM1041, AND/OR CEIC1001<br/>Exclusions: CEIC2003<br/><br/>",
-        "processed_rule": "CHEM1021 || DPST1032 || CHEM1041, AND/OR CEIC1001 Exclusions: CEIC2003"
+        "processed_rule": "CHEM1021 || DPST1032 || CHEM1041, AND/OR CEIC1001"
     },
     "INDC3001": {
         "original_rule": "Pre-requisites: CEIC2000, CHEM2021, MATH2089<br/><br/>",
@@ -6753,7 +6753,7 @@
     },
     "INFS1609": {
         "original_rule": "Students completing Computer Science degrees or majors (including BINF, COMP, or SENG) are excluded from this course.<br/><br/>",
-        "processed_rule": "Students completing COMP degrees || majors (including BINF || COMP || SENG) are excluded from this course"
+        "processed_rule": "Students completing COMP degrees || majors (including BINF || COMP || SENG) are"
     },
     "INFS2101": {
         "original_rule": "Enrolled in plan (INFSCH3964 OR INFSCH3971) AND (INFS1609 OR INFS2609) AND INFS 2603; OR Enrolled in plan (INFSB13554) AND INFS2603<br/><br/>",
@@ -6765,7 +6765,7 @@
     },
     "INFS2605": {
         "original_rule": "Prerequisite: INFS1603 AND (INFS2609 or INFS1609).<br/>Students completing Computer Science degrees or majors (including BINF, COMP, or SENG) are excluded from this course.<br/><br/>",
-        "processed_rule": "INFS1603 && (INFS2609 || INFS1609). Students completing COMP degrees || majors (including BINF || COMP || SENG) are excluded from this course"
+        "processed_rule": "INFS1603 && (INFS2609 || INFS1609). Students completing COMP degrees || majors (including BINF || COMP || SENG) are"
     },
     "INFS2608": {
         "original_rule": "Prerequisite: INFS1603<br/><br/>",
@@ -7225,7 +7225,7 @@
     },
     "LAWS3021": {
         "original_rule": "Prerequisite: Completion of 78 UOC in LAWS courses. <br/>Exclusion: LAWS3046/JURD7446, LAWS3248/JURD7448, LAWS3523/GENL2323 and LAWS8017/JURD7617<br/><br/>",
-        "processed_rule": "78UOC in LAWS courses. Exclusion: (LAWS3046 || JURD7446) || (LAWS3248 || JURD7448) || (LAWS3523 || GENL2323) && (LAWS8017 || JURD7617)"
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3022": {
         "original_rule": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
@@ -7249,7 +7249,7 @@
     },
     "LAWS3046": {
         "original_rule": "Prerequisite: Completion of 78 UOC in LAWS courses. <br/>Exclusion: LAWS3021/JURD7321, LAWS3523/GENL2323, LAWS8017/JURD7617<br/><br/>",
-        "processed_rule": "78UOC in LAWS courses. Exclusion: (LAWS3021 || JURD7321) || (LAWS3523 || GENL2323) || (LAWS8017 || JURD7617)"
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3047": {
         "original_rule": "Prerequisite: Completion of 78 UOC in LAWS courses. <br/>Co-requisite: Resolving Civil Disputes (LAWS2371)<br/><br/>",
@@ -7469,7 +7469,7 @@
     },
     "LAWS3248": {
         "original_rule": "Prerequisite: Completion of 78 UOC in LAWS courses. <br/>Exclusion: LAWS3021/JURD7321, LAWS3523/GENL2323, LAWS8017/JURD7617<br/><br/>",
-        "processed_rule": "78UOC in LAWS courses. Exclusion: (LAWS3021 || JURD7321) || (LAWS3523 || GENL2323) || (LAWS8017 || JURD7617)"
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3251": {
         "original_rule": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
@@ -7737,7 +7737,7 @@
     },
     "LAWS3751": {
         "original_rule": "Prerequisite: Completion of 78 UOC in LAWS courses. Exclusion: TABL2751<br/><br/>",
-        "processed_rule": "78UOC in LAWS courses. Exclusion: TABL2751"
+        "processed_rule": "78UOC in LAWS courses"
     },
     "LAWS3758": {
         "original_rule": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
@@ -7917,7 +7917,7 @@
     },
     "MATH1011": {
         "original_rule": "Exclusion: Not enrolled in 3991 or any UNSW Business Program and must not have completed MATH1031, 1131, 1141, 1151, ECON1202 or DPST1013<br/><br/>",
-        "processed_rule": "Exclusion: Not enrolled in 3991 || any UNSW ZBUS Program && must not have completed MATH1031 || 1131 || 1141 || 1151 || ECON1202 || DPST1013"
+        "processed_rule": ""
     },
     "MATH1031": {
         "original_rule": "",
@@ -7925,7 +7925,7 @@
     },
     "MATH1041": {
         "original_rule": "Excluded: MATH2841<br/><br/>",
-        "processed_rule": "Excluded: MATH2841"
+        "processed_rule": ""
     },
     "MATH1081": {
         "original_rule": "Corequisite: MATH1131 or DPST1013 or MATH1141 or MATH1151<br/><br/>",
@@ -7961,7 +7961,7 @@
     },
     "MATH2011": {
         "original_rule": "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251 Exclusion: MATH2019, MATH2049, MATH2069, MATH2100, MATH2110<br/><br/>",
-        "processed_rule": "MATH1231 || DPST1014 || MATH1241 || MATH1251 Exclusion: MATH2019, MATH2049, MATH2069, MATH2100, MATH2110"
+        "processed_rule": "MATH1231 || DPST1014 || MATH1241 || MATH1251"
     },
     "MATH2018": {
         "original_rule": "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251<br/><br/>",
@@ -7973,19 +7973,19 @@
     },
     "MATH2069": {
         "original_rule": "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251; Exclusion: MATH2011, MATH2111, MATH2510, MATH2610, MATH2520 & MATH2620<br/><br/>",
-        "processed_rule": "MATH1231 || DPST1014 || MATH1241 || MATH1251; Exclusion: MATH2011, MATH2111, MATH2510, MATH2610, MATH2520 & MATH2620"
+        "processed_rule": "MATH1231 || DPST1014 || MATH1241 || MATH1251;"
     },
     "MATH2089": {
         "original_rule": "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251. Exclusion: CVEN2002, CVEN2025, CVEN2702,ECON3209, MATH2049, MATH2829, MATH2839, MATH2899, and MINE2700<br/><br/>",
-        "processed_rule": "MATH1231 || DPST1014 || MATH1241 || MATH1251. Exclusion: CVEN2002 && CVEN2025 && CVEN2702 && ECON3209 && MATH2049 && MATH2829 && MATH2839 && MATH2899 && MINE2700"
+        "processed_rule": "MATH1231 || DPST1014 || MATH1241 || MATH1251"
     },
     "MATH2099": {
         "original_rule": "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251 Exclusion: MATH2501 and MATH2601<br/><br/>",
-        "processed_rule": "MATH1231 || DPST1014 || MATH1241 || MATH1251 Exclusion: MATH2501 && MATH2601"
+        "processed_rule": "MATH1231 || DPST1014 || MATH1241 || MATH1251"
     },
     "MATH2111": {
         "original_rule": "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251 each with a mark of at least 70; Excluded: MATH2019, MATH2049, MATH2069, MATH2100, MATH2110.<br/><br/>",
-        "processed_rule": "MATH1231 || DPST1014 || MATH1241 || MATH1251 each with 70GRADE; Excluded: MATH2019, MATH2049, MATH2069, MATH2100, MATH2110"
+        "processed_rule": "MATH1231 || DPST1014 || MATH1241 || MATH1251 each with 70GRADE;"
     },
     "MATH2121": {
         "original_rule": "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251<br/><br/>",
@@ -8001,7 +8001,7 @@
     },
     "MATH2301": {
         "original_rule": "Prerequisite: MATH1031 (CR) or MATH1231 or or DPST1014 or MATH1241 or MATH1251. Exclusions: MATH2089, CVEN2002, and CVEN2702<br/><br/>",
-        "processed_rule": "65GRADE in MATH1031 || MATH1231 || or DPST1014 || MATH1241 || MATH1251. Exclusions: MATH2089 && CVEN2002 && CVEN2702"
+        "processed_rule": "65GRADE in MATH1031 || MATH1231 || or DPST1014 || MATH1241 || MATH1251"
     },
     "MATH2400": {
         "original_rule": "Prerequisite: MATH1081 or MATH1231 or DPST1014 or MATH1241 or MATH1251<br/><br/>",
@@ -8009,19 +8009,19 @@
     },
     "MATH2501": {
         "original_rule": "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251; Exclusion: MATH2099<br/><br/>",
-        "processed_rule": "MATH1231 || DPST1014 || MATH1241 || MATH1251; Exclusion: MATH2099"
+        "processed_rule": "MATH1231 || DPST1014 || MATH1241 || MATH1251;"
     },
     "MATH2521": {
         "original_rule": "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251; Exclusion: MATH2069<br/><br/>",
-        "processed_rule": "MATH1231 || DPST1014 || MATH1241 || MATH1251; Exclusion: MATH2069"
+        "processed_rule": "MATH1231 || DPST1014 || MATH1241 || MATH1251;"
     },
     "MATH2601": {
         "original_rule": "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251 each with a mark of 70 or greater; Exclusion: MATH2099<br/><br/>",
-        "processed_rule": "MATH1231 || DPST1014 || MATH1241 || MATH1251 each with a mark of 70 || greater; Exclusion: MATH2099"
+        "processed_rule": "MATH1231 || DPST1014 || MATH1241 || MATH1251 each with a mark of 70 || greater;"
     },
     "MATH2621": {
         "original_rule": "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251 each with a mark of at least 70; Exclusion: MATH2069<br/><br/>",
-        "processed_rule": "MATH1231 || DPST1014 || MATH1241 || MATH1251 each with 70GRADE; Exclusion: MATH2069"
+        "processed_rule": "MATH1231 || DPST1014 || MATH1241 || MATH1251 each with 70GRADE;"
     },
     "MATH2701": {
         "original_rule": "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251 with at least a CR, enrolment in an advanced maths or advanced science program<br/><br/>",
@@ -8029,7 +8029,7 @@
     },
     "MATH2801": {
         "original_rule": "Prerequisite: MATH1231 or MATH1241 or MATH1251 or DPST1014; Exclusion: MATH2089; MATH2099; MATH2801; MATH2901; BEES2041; BIOS2041;CVEN2002.<br/><br/>",
-        "processed_rule": "MATH1231 || MATH1241 || MATH1251 || DPST1014; Exclusion: MATH2089; MATH2099; MATH2801; MATH2901; BEES2041; BIOS2041;CVEN2002"
+        "processed_rule": "MATH1231 || MATH1241 || MATH1251 || DPST1014;"
     },
     "MATH2831": {
         "original_rule": "Prerequisite: MATH2801 or MATH2901.<br/><br/>",
@@ -8037,7 +8037,7 @@
     },
     "MATH2859": {
         "original_rule": "Prerequisite: MATH1231 or MATH1241 or MATH1251 or DPST1014; Exclusion: MATH2089; MATH2099; MATH2801; MATH2901; BEES2041; BIOS2041;CVEN2002.<br/><br/>",
-        "processed_rule": "MATH1231 || MATH1241 || MATH1251 || DPST1014; Exclusion: MATH2089; MATH2099; MATH2801; MATH2901; BEES2041; BIOS2041;CVEN2002"
+        "processed_rule": "MATH1231 || MATH1241 || MATH1251 || DPST1014;"
     },
     "MATH2871": {
         "original_rule": "Prerequisite: MATH1041 or ECON1203 or ECON2292 or PSYC2001 or MATH1231 or DPST1014 or MATH1241 or MATH1251 or equivalent.<br/><br/>",
@@ -8045,7 +8045,7 @@
     },
     "MATH2901": {
         "original_rule": "Prerequisite: MATH1231 or MATH1241 or MATH1251 or DPST1014; Exclusion: MATH2089; MATH2099; MATH2801; MATH2901; BEES2041; BIOS2041;CVEN2002.<br/><br/>",
-        "processed_rule": "MATH1231 || MATH1241 || MATH1251 || DPST1014; Exclusion: MATH2089; MATH2099; MATH2801; MATH2901; BEES2041; BIOS2041;CVEN2002"
+        "processed_rule": "MATH1231 || MATH1241 || MATH1251 || DPST1014;"
     },
     "MATH2931": {
         "original_rule": "Prerequisite: MATH2901 or MATH2801(DN)<br/><br/>",
@@ -8396,8 +8396,8 @@
         "processed_rule": "24UOC at L1 && enrolment in a single || dual award MDIA program || enrolment in a Creative Writing major || minor. Equivalent: MDIA3001"
     },
     "MDIA2011": {
-        "original_rule": "Prerequisite: 24 units of credit at level 1 including MDIA1002 or MDIA1003. Or 24 units of credit at level 1 and enrolment  in a Global Development major<br/><br/>",
-        "processed_rule": "24UOC at L1 including MDIA1002 || MDIA1003. || 24UOC at L1 && enrolment in a Global Development major"
+        "original_rule": "Prerequisite: 24 units of credit at level 1 including\u00a0MDIA1002 or MDIA1003. Or 24 units of credit at level 1 and enrolment  in a Global Development major<br/><br/>",
+        "processed_rule": "24UOC at L1 including\u00a0MDIA1002 || MDIA1003. || 24UOC at L1 && enrolment in a Global Development major"
     },
     "MDIA2012": {
         "original_rule": "Prerequisite: MDIA1002 or MDIA1003; and enrolment in a single or double degree Bachelor of Media (PR & Advertising) program<br/><br/>",
@@ -8705,7 +8705,7 @@
     },
     "MGMT1101": {
         "original_rule": "Excludes COMM1150<br/><br/>",
-        "processed_rule": "Excludes COMM1150"
+        "processed_rule": ""
     },
     "MGMT2001": {
         "original_rule": "Prerequisite: MGMT1001or COMM1170<br/><br/>",
@@ -8721,7 +8721,7 @@
     },
     "MGMT2101": {
         "original_rule": "Prerequisite or corequisite:MGMT1101or COMM1150  Excluded: IBUS2107<br/><br/>",
-        "processed_rule": "|| corequisite:MGMT1101or COMM1150 Excluded: IBUS2107"
+        "processed_rule": "|| corequisite:MGMT1101or COMM1150"
     },
     "MGMT2102": {
         "original_rule": "Prerequisite: 48 units of credit<br/><br/>",
@@ -8961,7 +8961,7 @@
     },
     "MMAN2300": {
         "original_rule": "Exclusion: MECH2300, MECH3300 AND<br/>Prerequisite: (CVEN1300 or MINE1300 or MMAN1300 or ENGG1300 or DPST1072) AND <br/>(MATH2019 or MATH2018 or (MATH2111 and MATH2221) or (MATH2011 and MATH2121) or (MATH2069 and MATH2121))<br/><br/>",
-        "processed_rule": "Exclusion: MECH2300 && MECH3300 && (CVEN1300 || MINE1300 || MMAN1300 || ENGG1300 || DPST1072) && (MATH2019 || MATH2018 || (MATH2111 && MATH2221) || (MATH2011 && MATH2121) || (MATH2069 && MATH2121))"
+        "processed_rule": "(CVEN1300 || MINE1300 || MMAN1300 || ENGG1300 || DPST1072) && (MATH2019 || MATH2018 || (MATH2111 && MATH2221) || (MATH2011 && MATH2121) || (MATH2069 && MATH2121))"
     },
     "MMAN2400": {
         "original_rule": "",
@@ -8981,7 +8981,7 @@
     },
     "MMAN3200": {
         "original_rule": "Prerequisite: MATH2019 or MATH2018 AND (MMAN1300 or CVEN1300 or ENGG1300 or DPST1072)  Exclusion: MECH3211, MTRN3212<br/><br/>",
-        "processed_rule": "MATH2019 || MATH2018 && (MMAN1300 || CVEN1300 || ENGG1300 || DPST1072) Exclusion: MECH3211, MTRN3212"
+        "processed_rule": "MATH2019 || MATH2018 && (MMAN1300 || CVEN1300 || ENGG1300 || DPST1072)"
     },
     "MMAN3400": {
         "original_rule": "Prerequisite: (MATH2019 OR MATH2018) AND (ENGG2400 OR MMAN2400)<br/><br/>",
@@ -9021,7 +9021,7 @@
     },
     "MSCI0501": {
         "original_rule": "Excluded: GENS4625, MSCI2001,GENB5001<br/>Not available to students in Science Programs<br/><br/>",
-        "processed_rule": "Excluded: GENS4625, MSCI2001,GENB5001 Not available to students in Science Programs"
+        "processed_rule": ""
     },
     "MSCI1001": {
         "original_rule": "",
@@ -9073,7 +9073,7 @@
     },
     "MUSC1101": {
         "original_rule": "Excluded: MUSC1001 and MUSC2111<br/><br/>",
-        "processed_rule": "Excluded: MUSC1001 && MUSC2111"
+        "processed_rule": ""
     },
     "MUSC1602": {
         "original_rule": "",
@@ -9097,7 +9097,7 @@
     },
     "MUSC2111": {
         "original_rule": "Prerequisite: 30 uoc at Level 1 including MUSC1001 and MUSC1312; Excluded: MUSC1101<br/><br/>",
-        "processed_rule": "30UOC at L1 including MUSC1001 && MUSC1312; Excluded: MUSC1101"
+        "processed_rule": "30UOC at L1 including MUSC1001 && MUSC1312;"
     },
     "MUSC2113": {
         "original_rule": "Prerequisite: 24 units of credit at Level 1<br/><br/>",
@@ -9321,7 +9321,7 @@
     },
     "OPTM2133": {
         "original_rule": "Prerequisite: VISN1111 and VISN1221 and VISN1101 and VISN2111 Exclusion: OPTM2190<br/><br/>",
-        "processed_rule": "VISN1111 && VISN1221 && VISN1101 && VISN2111 Exclusion: OPTM2190"
+        "processed_rule": "VISN1111 && VISN1221 && VISN1101 && VISN2111"
     },
     "OPTM2190": {
         "original_rule": "Prerequisites: VISN1111, VISN1101, VISN1221; Co-requisite: VISN2111<br/><br/>",
@@ -9357,7 +9357,7 @@
     },
     "OPTM3205": {
         "original_rule": "Prerequisite: OPTM3105 Exclusion: OPTM3231<br/><br/>",
-        "processed_rule": "OPTM3105 Exclusion: OPTM3231"
+        "processed_rule": "OPTM3105"
     },
     "OPTM3211": {
         "original_rule": "Pre-requisites: VISN3111, OPTM3111, OPTM3131 Co-requisites: OPTM3231, VISN3211, PHAR3306<br/><br/>",
@@ -9453,7 +9453,7 @@
     },
     "OPTM6421": {
         "original_rule": "Prerequisite: OPTM6400, Corequisite: OPTM6412, Exclusion:OPTM4211<br/><br/>",
-        "processed_rule": "OPTM6400, Corequisite: OPTM6412, Exclusion:OPTM4211"
+        "processed_rule": "OPTM6400, Corequisite: OPTM6412,"
     },
     "OPTM6422": {
         "original_rule": "Prerequisite: OPTM6412 and OPTM6411, OPTM6413 and OPTM6421<br/><br/>",
@@ -9465,7 +9465,7 @@
     },
     "OPTM6424": {
         "original_rule": "Prerequisite:  OPTM6412 and OPTM6411 and OPTM6400 and enrolment in program 3182 or 8095. Exclusion: OPTM4271<br/><br/>",
-        "processed_rule": "OPTM6412 && OPTM6411 && OPTM6400 && enrolment in program 3182 || 8095. Exclusion: OPTM4271"
+        "processed_rule": "OPTM6412 && OPTM6411 && OPTM6400 && enrolment in program 3182 || 8095"
     },
     "OPTM8511": {
         "original_rule": "Prerequisite: OPTM6422<br/><br/>",
@@ -9661,11 +9661,11 @@
     },
     "PHYS1110": {
         "original_rule": "Exclusion: PHYS1121, PHYS1131 or DPST1023, PHYS1221, PHYS1231 or DPST1024, PHYS1241, PHYS1211, PHYS1141<br/><br/>",
-        "processed_rule": "Exclusion: PHYS1121 || PHYS1131 || DPST1023 || PHYS1221 || PHYS1231 || DPST1024, PHYS1241, PHYS1211, PHYS1141"
+        "processed_rule": ""
     },
     "PHYS1111": {
         "original_rule": "Exclusion: PHYS0001, PHYS1121, PHYS1131 or DPST1023, PHYS1141, PHYS1149<br/><br/>",
-        "processed_rule": "Exclusion: PHYS0001 || PHYS1121 || PHYS1131 || DPST1023, PHYS1141, PHYS1149"
+        "processed_rule": ""
     },
     "PHYS1121": {
         "original_rule": "Corequisite: MATH1131 or DPST1013 or MATH1141 or MATH1151 or MATH1011<br/><br/>",
@@ -9685,7 +9685,7 @@
     },
     "PHYS1160": {
         "original_rule": "Exclusion: GENS4001 & GENS4003<br/><br/>",
-        "processed_rule": "Exclusion: GENS4001 & GENS4003"
+        "processed_rule": ""
     },
     "PHYS1200": {
         "original_rule": "",
@@ -9733,11 +9733,11 @@
     },
     "PHYS3113": {
         "original_rule": "Prerequisite: PHYS2111 or PHYS2110 Exclusion: PHYS2210, PHYS3021<br/><br/>",
-        "processed_rule": "PHYS2111 || PHYS2110 Exclusion: PHYS2210, PHYS3021"
+        "processed_rule": "PHYS2111 || PHYS2110"
     },
     "PHYS3114": {
         "original_rule": "Prerequisite: (PHYS2114 or PHYS2210) and PHYS2113. Exclusion: PHYS3011<br/><br/>",
-        "processed_rule": "(PHYS2114 || PHYS2210) && PHYS2113. Exclusion: PHYS3011"
+        "processed_rule": "(PHYS2114 || PHYS2210) && PHYS2113"
     },
     "PHYS3115": {
         "original_rule": "Prerequisite: (PHYS2111 or PHYS2110) and (PHYS2114 or PHYS2210) and PHYS2113<br/><br/>",
@@ -9745,7 +9745,7 @@
     },
     "PHYS3116": {
         "original_rule": "Prerequisite: (MATH2069 or MATH2011 or MATH2111) and (PHYS2111 or PHYS2110). Exclusions: PHYS2160, PHYS3160<br/><br/>",
-        "processed_rule": "(MATH2069 || MATH2011 || MATH2111) && (PHYS2111 || PHYS2110). Exclusions: PHYS2160, PHYS3160"
+        "processed_rule": "(MATH2069 || MATH2011 || MATH2111) && (PHYS2111 || PHYS2110)"
     },
     "PHYS3117": {
         "original_rule": "Prerequisite: PHYS3112<br/><br/>",
@@ -9753,7 +9753,7 @@
     },
     "PHYS3118": {
         "original_rule": "Prerequisite: (PHYS2111 or PHYS2110) and PHYS3113. Exclusions: PHYS3021, PHYS3310<br/><br/>",
-        "processed_rule": "(PHYS2111 || PHYS2110) && PHYS3113. Exclusions: PHYS3021, PHYS3310"
+        "processed_rule": "(PHYS2111 || PHYS2110) && PHYS3113"
     },
     "PHYS4141": {
         "original_rule": "Prerequisite: Enrolment in Physics Honours<br/><br/>",
@@ -9973,7 +9973,7 @@
     },
     "PSYC2001": {
         "original_rule": "Prerequisite: PSYC1001, PSYC1011, PSYC1111: Exclusion: GENS9003, GENS9004, GENS9005, GENS9007, GENS0005<br/><br/>",
-        "processed_rule": "PSYC1001, PSYC1011, PSYC1111: Exclusion: GENS9003, GENS9004, GENS9005, GENS9007, GENS0005"
+        "processed_rule": "PSYC1001, PSYC1011, PSYC1111:"
     },
     "PSYC2061": {
         "original_rule": "Pre: PSYC1001, PSYC1011<br/><br/>",
@@ -9989,7 +9989,7 @@
     },
     "PSYC2101": {
         "original_rule": "Prerequisite: PSYC1001; Exclusion: GENS9003, GENS9004, GENS9005, GENS9007, GENS0005<br/><br/>",
-        "processed_rule": "PSYC1001; Exclusion: GENS9003, GENS9004, GENS9005, GENS9007, GENS0005"
+        "processed_rule": "PSYC1001;"
     },
     "PSYC3001": {
         "original_rule": "Prerequisite: PSYC2001<br/><br/>",
@@ -10741,7 +10741,7 @@
     },
     "SOCW3006": {
         "original_rule": "Prerequisite: SOCW3009 and SOCW3011, or SOCW3009, SOCW3012 and SOCW3013, and enrolment in a Social Work program.  Excluded: Students enrolled in 4787 Social Work (Honours)/Law<br/><br/>",
-        "processed_rule": "SOCW3009 && SOCW3011 || SOCW3009 && SOCW3012 && SOCW3013 && enrolment in a SOCW program. Excluded: Students enrolled in 4787 SOCW (Honours)/LAWS"
+        "processed_rule": "SOCW3009 && SOCW3011 || SOCW3009 && SOCW3012 && SOCW3013 && enrolment in a SOCW program"
     },
     "SOCW3009": {
         "original_rule": "Prerequisite: ARTS1753 or ARTS1870 or ARTS1871 and PSYC1001, SOCW2006, SOCW2008, SOCW2009, SOCW2100, SOSS/SRAP1000, SOSS/SRAP1001, ARTS2871 or SRAP2002, and enrolment in a Social Work program. Corequisite: SOCW3012<br/><br/>",
@@ -11081,7 +11081,7 @@
     },
     "TABL1006": {
         "original_rule": "Excluded: TABL3006, TABL5506<br/><br/>",
-        "processed_rule": "Excluded: TABL3006, TABL5506"
+        "processed_rule": ""
     },
     "TABL1010": {
         "original_rule": "Prerequisite: ATAX0005 OR TABL1005<br/><br/>",
@@ -11145,7 +11145,7 @@
     },
     "TABL2751": {
         "original_rule": "Prerequisite: TABL1710 or TABL2710 or LAWS1052 or JURD7152 or (COMM1100 and COMM1150) or COMM1900<br/>Excluded: LAWS3147, LAWS3751<br/><br/>",
-        "processed_rule": "TABL1710 || TABL2710 || LAWS1052 || JURD7152 || (COMM1100 && COMM1150) || COMM1900 Excluded: LAWS3147, LAWS3751"
+        "processed_rule": "TABL1710 || TABL2710 || LAWS1052 || JURD7152 || (COMM1100 && COMM1150) || COMM1900"
     },
     "TABL2756": {
         "original_rule": "Prerequisite: LEGT1710 or TABL1710 or  TABL2710 or LAWS1052 or JURD7152<br/><br/>",
@@ -11221,7 +11221,7 @@
     },
     "TABL3781": {
         "original_rule": "Prerequisite: LEGT1710 or TABL1710 or TABL2710 <br/>Excluded: TABL3771<br/><br/>",
-        "processed_rule": "LEGT1710 || TABL1710 || TABL2710 Excluded: TABL3771"
+        "processed_rule": "LEGT1710 || TABL1710 || TABL2710"
     },
     "TABL4600": {
         "original_rule": "",
@@ -12517,7 +12517,7 @@
     },
     "ZPEM2312": {
         "original_rule": "Exclusion: ZPEM1302, ZPEM1304, ZPEM2302, and ZPEM2310<br/><br/>",
-        "processed_rule": "Exclusion: ZPEM1302 && ZPEM1304 && ZPEM2302 && ZPEM2310"
+        "processed_rule": ""
     },
     "ZPEM2313": {
         "original_rule": "Prerequisite: ZPEM1302 or ZPEM1304<br/><br/>",

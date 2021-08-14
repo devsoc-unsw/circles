@@ -29,6 +29,7 @@ def preprocess_rules():
         rules["original_rule"] = original
         
         processed = original
+        processed = delete_exclusions(processed)
         processed = delete_HTML(processed)
         processed = convert_program_codes(processed)
         processed = convert_square_brackets(processed)
@@ -43,7 +44,6 @@ def preprocess_rules():
         processed = handle_comma_logic(processed)
         processed = strip_spaces(processed)
         processed = delete_trailing_punc(processed)
-
         # processed = surround_brackets(processed)
         
         # At the end, remove remaining lowercase prepositions
@@ -53,6 +53,20 @@ def preprocess_rules():
         PREPROCESSED_RULES[code] = rules
         
     dataHelpers.write_data(PREPROCESSED_RULES, "data/finalData/preprocessedRules.json")
+
+def delete_exclusions(processed):
+    """ Removes exclusions from enrolment rules """
+
+    # Remove exclusion string which appears before prerequisite plaintext
+    excl_string = re.search(r"(excl.*?:.*?)(pre)", processed, flags=re.IGNORECASE)
+    if excl_string:
+        processed = re.sub(excl_string.group(1), "", processed)
+
+    # Remove exclusion string appearing after prerequisite plaintext, typically
+    # at the end of the enrolment rule
+    processed = re.sub(r"excl.*", "", processed, flags=re.IGNORECASE)
+
+    return processed
 
 def delete_HTML(processed):
     """ Remove HTML tags """

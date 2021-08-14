@@ -1475,7 +1475,9 @@
             "ANAT1551": 1,
             "ANAT1521": 1,
             "ANAT2151": 1,
-            "ANAT2111": 1
+            "ANAT2111": 1,
+            "ANAT2200": 1,
+            "ANAT2241": 1
         },
         "path_to": {
             "ANAT3121": 1,
@@ -2237,7 +2239,9 @@
         "level": "1",
         "description": "<p>The discipline of human geography explores the entangled relationships between people, environment and places in the world. In this course, you will develop a foundational understanding of how cultural, social, political and economic dynamics shape landscapes, these being rural, urban, in transitions or \u2018natural. You will garner a theoretical expertise for interpreting and making sense of different places, and how there are shaped by multiple dynamics across scales (from the local to the global). The course context is informed by contemporary and pioneering research in human geography, and you will critically explore research case studies that are drawn from a mix of Australian and international examples.</p>\n",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "ARTS2247": 1
+        },
         "path_to": {
             "INST2003": 1
         },
@@ -2431,7 +2435,12 @@
         "level": "1",
         "description": "<p>Why not join the rich, vibrant and diverse community of French speakers around the world and become a global citizen? The French-speaking world represents one of the biggest international linguistic zones in the world with an estimated 274 million speakers spread on all 5 continents.\u00a0</p>\n<p>This course will take you through the basics of language acquisition and introduce you to elements of French culture: you will gain the basic competencies necessary to speak and write about yourself, your family, your friends and your personal preferences, and teach you how to introduce yourself and interact appropriately in a professional environment.</p>\n<p>By the end of this course, you will be able to order dinner in Paris, introduce yourself to your new French-speaking colleagues or make friends with Francophone citizens from all over the world. You will also be given the essential tools to further your discovery of the language and embark on a learning journey that may never stop... Fall in love with the language and culture and start dreaming about your next holiday or your future work assignment, we are here to help you achieve your goals.</p>\n<p>This course is a beginners-level language course. All students who have had some experience with the language, either as a heritage language or through previous instruction, must fill in the placement questionnaire available at <a href=\"https://www.arts.unsw.edu.au/hal/study-us/resources-support/language-placements\" rel=\"nofollow\">https://www.arts.unsw.edu.au/hal/study-us/resources-support/language-placements</a>. You will not be permitted to enrol in a language course that is too easy for you. If this occurs, you will be requested to change your enrolment.</p>",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "FREN1000": 1,
+            "FREN1101": 1,
+            "GENT0425": 1,
+            "leftover_plaintext": "HSC Beginners, Continuers or Extension French"
+        },
         "path_to": {
             "ARTS1481": 1
         },
@@ -3830,7 +3839,9 @@
         "level": "2",
         "description": "<p>The understanding we have of our nature as reasoning beings is a fascinating topic which has captivated thinkers for thousands of years. In this course we will chart its history and focus on the developments in the recent past. This course aims to introduce you to and to develop some key skills involved in critically assessing and developing arguments. More broadly, the course aims to develop skills and abilities that are essential for dealing discursively with open intellectual questions and complex practical issues and problems of many kinds, and it is expected that to successfully complete the course, you will have improved your ability to think for yourself in a wide variety of contexts. In particular, you will develop the skills of identifying and analysing arguments; of being able to identify presuppositions of questions.</p>\n",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "ARTS2366": 1
+        },
         "path_to": {},
         "terms": [
             "ST"
@@ -3847,7 +3858,9 @@
         "level": "2",
         "description": "<p>Logic is a wonderful achievement of the human mind. The development of logic as the study of argument and the way premises support conclusions was part and parcel of the development of philosophy. Logic is our attempt at reflecting on how we think, and our attempt to describe what it is like to think well. The idea that human consciousness became self conscious in this way a little over two millennia ago is an inspiring and daunting realisation. This subject introduces you to an important, enduring and growing part of philosophy. You are not assumed to have any background in logic or philosophy.</p>\n",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "ARTS2366": 1
+        },
         "path_to": {},
         "terms": [
             "T1"
@@ -5651,7 +5664,9 @@
         "equivalents": {
             "AUST2027": 1
         },
-        "exclusions": {},
+        "exclusions": {
+            "ARTS2124": 1
+        },
         "path_to": {},
         "terms": [
             ""
@@ -7165,7 +7180,9 @@
         "level": "3",
         "description": "<p>Whether in public or academic discourse the notions of \u2018modernity\u2019 and \u2018modern\u2019 are ubiquitous. Yet what they mean is often far from clear. They designate a period, which extends to our own present, but the terms also refer to a set of concepts and contentious issues. Chief among these are the ideas of novelty and innovation, of rationalisation and secularism, but also of critique and disillusionment. Narratives of progress and emancipation compete with more somber analyses, frequently tinged by a nostalgia for what has been lost in the modern age. Taking its cue from Max Weber\u2019s suggestion to think of the processes of modernisation as leading to the disenchantment of the world, the course looks at a series of prominent concepts that have been used to reflect on the idea of modernity and its implications. Readings will include the sociologist Max Weber on science, and on the Protestant ethic and capitalism; political theorists Carl Schmitt and Hannah Arendt on sovereignty, authority, and totalitarianism; the intellectual historian Reinhart Koselleck on the ideas of revolution and historical time; and the philosopher Peter Sloterdijk on the Nietzschean notion of \u2018ressentiment\u2019 \u2013 to name just a few.</p>\n",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "ARTS2783": 1
+        },
         "path_to": {},
         "terms": [
             ""
@@ -7182,7 +7199,9 @@
         "level": "3",
         "description": "<p>This course examines interethnic and interfaith relations in Europe in the last two centuries. You will learn about the historical sources of the ethnic and cultural diversities in modern and contemporary Europe. You will discuss selected case studies from the two centuries after the birth of liberalism and tolerance at the end of the 18th century and after the rise of ethnic nationalism in the 19th century. You will analyse the mutual ideological, social and cultural perceptions and constructions of \u2018otherness\u2019 between the minorities and the majority societies. You will acquire in-depth knowledge of key issues, developments and examples from the French revolution through to the present, such as the Emancipation of the Jews in the 19th century, the Pale of Settlement, anti-Semitism, Armenian genocide, Communist ideology, Romani minorities, and Muslim minorities in contemporary Europe.</p>\n",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "ARTS2786": 1
+        },
         "path_to": {},
         "terms": [
             ""
@@ -7264,7 +7283,9 @@
         "level": "3",
         "description": "<p>This course will encourage you to examine the way in which international law and the Middle East interact. This includes study of the way in which international law has influenced the development of newly emergent states in the region. The promotion of human rights, issues of the use of force, the rule of law and the role of international law in promoting the integration of the Middle East into the broader international community are among the topics you will have the opportunity to address. You will be involved in analysis of the role of the United Nations, especially the UN Security Council and the International Court of Justice, in the politics of the Middle East. You will also undertake specific case studies such as the Palestine-Israel question, Iran, the problem of nuclear proliferation throughout the region and the relationship between Judaism, Islam and international law.</p>\n",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "ARTS3813": 1
+        },
         "path_to": {},
         "terms": [
             ""
@@ -7493,7 +7514,9 @@
         "level": "3",
         "description": "<p>We often understand knowledge as a neutral, disinterested point of view: as purely rational, untainted by partiality or prejudice, and detached from the social and political entanglements that cloud objectivity. In recent decades, however, theoretical feminism, critical race theory, and postcolonial theory have questioned this view of knowledge. In this course you will consider how race and gender is expressed in modes and styles of theorising. By claiming to be neutral, does a philosophy or theory exclude certain positions marked by social difference? If western traditions of thought are typically \u2018masculine\u2019 and \u2018white,\u2019 then (how) can academic philosophy accommodate the experiences of women and non-Europeans? How have philosophers historically represented racial and sexual difference? And what contributions can philosophy make to theorising race and gender in the contemporary world?</p>\n",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "ARTS3367": 1
+        },
         "path_to": {},
         "terms": [
             ""
@@ -9676,7 +9699,9 @@
         "level": "3",
         "description": "This course considers the main facets of corporate airline management, and begins with airline organisational practice, management&#39;s visions and objective setting. It proceeds with the main corporate processes of business planning, schedule planning, fleet planning and external relationships such as outsourcing. Financial aspects and global alliance matters are introduced.",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "AVIA3002": 1
+        },
         "path_to": {
             "AVIA3201": 1
         },
@@ -9838,7 +9863,11 @@
         "level": "3",
         "description": "<p>Basic research skills are important to the aviation industry. The course coaches students through a basic research and report writing process in the context of aviation. Each student undertakes a structured, supervised research project on an aviation safety issue, with specific reference to human, organisational and technical factors.</p>\n",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "PROF3001": 1,
+            "AVIA3700": 1,
+            "leftover_plaintext": "and 90UOC"
+        },
         "path_to": {},
         "terms": [
             "T2"
@@ -10549,7 +10578,8 @@
             "MATH2859": 1,
             "MATH2089": 1,
             "MATH2901": 1,
-            "MATH2099": 1
+            "MATH2099": 1,
+            "PSYC2001": 1
         },
         "path_to": {
             "MATH2801": 1,
@@ -10588,7 +10618,9 @@
         "level": "2",
         "description": "<p>Successful scientists - whether in the university environment or the outside workplace - have to be effective communicators. They have to craft their messages into different shapes for different audiences, whether writing a lecture, a report or research paper, or presenting to peers or public audiences.<br /><br />This course seeks to provide science students with the opportunity to gain a solid foundation in necessary science communication skills. These include active listening, reading critically, writing succinctly in the narrative, descriptive and academic styles, the steps in essay writing for science topics, using grammar effectively, the anatomy of a compelling presentation in science and effective teamwork in group assignments.<br /><br />Students also learn how to research science topics, including searching for and evaluating primary literature and in identifying academic-quality sources from non-academic sources on the internet.<br /><br />For those students wishing to add a science communicator career option to their science degree, this course is also a foundation for the third level course BEES6800 The Science of Science Communication.</p>",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "BEES6800": 1
+        },
         "path_to": {},
         "terms": [
             "T1"
@@ -13870,7 +13902,12 @@
         "level": "1",
         "description": "<p>Introductory Chemistry is designed for students entering University with little or no previous background in Chemistry. The course will provide basic descriptions of atomic and molecular structure, nomenclature, the Periodic Table, stoichiometry, equilibrium, kinetics, common reaction types, acids and bases, and the fundamentals of organic chemistry. Note: Enrolment in CHEM1001 is not recommended for students who have already achieved an adequate performance in HSC Chemistry (or equivalent).CHEM1001 does not qualify as a prerequisite for any UNSW course, and students intending to progress to Level II Chemistry must subsequently complete, in sequence, CHEM1011/CHEM1021, or CHEM1031/1041. Students who complete CHEM1001 can count this course as a Level 1 course towards the total units of credit (UoC) for the Science component of their degree. Students who are currently enrolled in, or have already completed, any CHEM course, or MATS1101, or an equivalent course, are not eligible to enrol in CHEM1001.</p>\n",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "CHEM1011": 1,
+            "CHEM1031": 1,
+            "CHEM1051": 1,
+            "CHEM1831": 1
+        },
         "path_to": {
             "CHEM2996": 1
         },
@@ -14186,7 +14223,9 @@
             "DPST1032": 1,
             "CHEM1061": 1,
             "CHEM1021": 1,
-            "CHEM1041": 1
+            "CHEM1041": 1,
+            "CEIC1001": 1,
+            "MATS1101": 1
         },
         "path_to": {
             "BIOC2101": 1,
@@ -15749,7 +15788,8 @@
         "equivalents": {},
         "exclusions": {
             "COMM3101": 1,
-            "COMM2233": 1
+            "COMM2233": 1,
+            "leftover_plaintext": "Co-op studentsIt is recommended a progression check is completed prior to enrolling"
         },
         "path_to": {
             "COMM3101": 1
@@ -15928,7 +15968,11 @@
         "level": "3",
         "description": "<p>The main aims of this course\u00a0are to provide students with practical experience that complements their academic studies, and to give Sponsors enthusiastic and talented young achievers who may wish to work with them upon graduation. This is\u00a0second of two\u00a0fully-assessable industry placements courses. It builds on skills and experience gained in COMM3101.</p>\n\n<p>The broad objectives are:</p>\n\n<ul><li>Provide scholars with knowledge and practical experience within the business environment that cannot be provided at university.</li><li>Instil an appreciation of\u00a0business processes and management while at the same time learning about company cultures and work ethics.</li><li>Help develop the scholars\u2019 professional skills. Specifically, scholars should develop their intellectual, technical, personal, interpersonal, communication, and business management skills while on placement.</li><li>Apply theory and skills learnt across the scholars degree in a real-world environment.</li><li>Through progressive self-reflection scholars should become more confident in their strenghts and increase their self-perception.</li><li>Provide sponsors with a stream of highly talented, motivated young professionals who are dynamic and add value to the company.</li></ul>\n\n<p><strong>Note:\u00a0NOT available to UNSW Business School Co-op Scholars. Students will be enrolled across two terms for a total of 12UOC and must apply for this course through the Coop office\u00a0<a href=\"https://www.coop.unsw.edu.au/vacancies\" rel=\"nofollow\">here</a>.\u00a0</strong></p>\n",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "DIPP1510": 1,
+            "COMM2222": 1,
+            "leftover_plaintext": "Business Co-Op programs"
+        },
         "path_to": {},
         "terms": [
             "T1",
@@ -18120,7 +18164,8 @@
         "description": "<p>Subject Area: <em>Criminology\u00a0</em></p>\n<p>CRIM2020 introduces you to fundamental aspects of criminal justice and process. Woven through the course is a critical examination of the interaction between the criminal justice system and the criminal law: specifically, that application of the law is shaped by and dependent on decisions made by criminal justice actors including police, prosecutors and judicial officers. Specific areas of focus include: why some activities are criminalised and others not; the use and misuse of discretion; the impact of the reliance on summary justice; the significance of pre-trial processes such as arrest and bail; and the over-representation of Indigenous people and other vulnerable groups.</p>",
         "equivalents": {},
         "exclusions": {
-            "LAWS8090": 1
+            "LAWS8090": 1,
+            "leftover_plaintext": "Students in all Bachelor of Laws double-degree programs"
         },
         "path_to": {
             "CRIM2021": 1
@@ -19940,7 +19985,8 @@
         "equivalents": {},
         "exclusions": {
             "CVEN1701": 1,
-            "CVEN9892": 1
+            "CVEN9892": 1,
+            "CVEN9888": 1
         },
         "path_to": {},
         "terms": [
@@ -20275,7 +20321,8 @@
         "equivalents": {},
         "exclusions": {
             "CVEN2701": 1,
-            "ENVS1011": 1
+            "ENVS1011": 1,
+            "BIOS1301": 1
         },
         "path_to": {},
         "terms": [
@@ -23651,7 +23698,13 @@
         },
         "exclusions": {
             "COMM1110": 1,
-            "MATH1041": 1
+            "MATH1041": 1,
+            "MATH2841": 1,
+            "MATH2801": 1,
+            "MATH2901": 1,
+            "MATH2099": 1,
+            "ACTL2002": 1,
+            "ACTL2131": 1
         },
         "path_to": {
             "COMM1190": 1,
@@ -26122,7 +26175,8 @@
         "description": "<p><em>This is a hybrid course. It is available to both undergraduate and postgraduate students. The course content, delivery and assessment will be identical for both groups of students.</em></p>\n\n<p>Subject Area<em>: Education</em></p>\n\n<p>In this course you will complete your final 9-week (45 days) professional experience block in a NSW school which you have not been involved with previously. During your placement you will be provided with increasing opportunities for autonomy, responsibility and accountability through a gradual shift from direct in-class supervision to program supervision by the Supervising Teacher(s) as you move into the internship phase of the course.</p>\n",
         "equivalents": {},
         "exclusions": {
-            "EDST6761": 1
+            "EDST6761": 1,
+            "EDST4081": 1
         },
         "path_to": {},
         "terms": [
@@ -29085,7 +29139,9 @@
         "level": "2",
         "description": "<p></p>\n<p>The General Education Course in Global Finance will equip students\u00a0 with a broad understanding of global finance, current international financial developments and global financial risk management, so that they can apply this learning and understanding \u00a0in their future careers. </p>\n<p>In the course, students will gain a practical understanding of factors contributing to foreign exchange rate risk, Asian capital markets, global tax management, global investment strategies and global financial risk management.\u00a0 The course also provides analysis of multinational banks, investment banks and the funds management industry. Students will learn how companies can survive and expand their objectives in a global financial market that is subject to uncertainty. The course also provides analysis of multinational banks, investment banks and the funds management industry.</p>",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "leftover_plaintext": "All UG Business programs"
+        },
         "path_to": {},
         "terms": [
             ""
@@ -29100,7 +29156,9 @@
         "level": "3",
         "description": "<p>The course introduces students from a non-financial background to the principles of accumulating, managing and protecting wealth. The course covers the topics of tracking expenses and preparing budgets, savings, buying on credit, securing a good job, buying a home, paying off mortgages faster, protecting yourself through using insurance, building wealth using superannuation, paying appropriate levels of tax and avoiding investment mistakes.\u00a0</p>",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "leftover_plaintext": "All UG Business programs"
+        },
         "path_to": {},
         "terms": [
             "ST",
@@ -29118,7 +29176,9 @@
         "level": "5",
         "description": "Taxation affects all aspects of employment and business for graduates as they enter their profession. This course will provide students with an understanding of basic taxation issues, including superannuation and fringe benefits tax that will assist them in commencing employment.  The course will also introduce the basics of business taxation issues to assist the student who may choose to set up business as a self-employed contractor or professional.  The ethics of taxation and the role of the Australian Taxation Office will also be discussed.  On the completion of this course students should be able to manage simple taxation affairs personally, and know when to seek professional advice.",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "leftover_plaintext": "All UG Business programs"
+        },
         "path_to": {},
         "terms": [
             ""
@@ -29306,7 +29366,13 @@
         "level": "2",
         "description": "<p></p>\n<p>Different legal systems have evolved in different parts of the world. Australia is a common law country \u2013 its legal system is based on the English common law system. This course offers students a comprehensive introduction to the Australian legal system, a common law system, and contrasts it with the civil law system.</p>\n<p><br />The course will examine the historical origins of the Australian legal system, some of the principles underpinning our legal system, including the importance of the concept of the rule of law. It also covers the operation of the principal institutions of the legal system, the legislative and executive arms of government and the judiciary and courts. This will include the jurisdiction of Australian courts, the process by which cases are decided and the doctrine of precedent, consideration of alternative methods of dispute resolution and an examination of the role of the legal profession. There will also be an overview of the main branches of law.</p>\n<p><br />Aboriginal customary law will be looked at and there will be a critical analysis of the circumstances of the adoption of the common law in Australia and the effect on the indigenous people. There will also be examination of the recognition of customary law and native title.</p>\n<p><br />No prior knowledge of the Australian legal system is required. A major focus of the course is the social relevance of law in our daily lives and in today\u2019s society.</p>\n<p><strong>Main Topics</strong></p>\n<ul><li>The Rule of Law</li><li>The Common Law Legal System</li><li>Other Types of Legal Systems</li><li>The Separation of Powers</li><li>The Federal Constitution</li><li>Parliamentary Sovereignty</li><li>Legislation by Parliament</li><li>Hierarchy of Courts</li><li>The Doctrine of Precedent</li><li>The Legal Profession</li><li>Alternative Forms of Dispute Resolution</li><li>Tribunals</li><li>Common Law and Equity</li><li>Contract Law</li><li>Tort Law</li><li>Criminal Law</li><li>Settlement/Invasion - The Impact on the Indigenous Inhabitants</li><li>The Mabo decision The Native Title Act 1993 (Cth)</li><li>The Wik decision and amendments to the Native Title Act 1993</li></ul>",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "3502": 1,
+            "3543": 1,
+            "3571": 1,
+            "3979": 1,
+            "3971": 1
+        },
         "path_to": {},
         "terms": [
             "T1",
@@ -29337,7 +29403,13 @@
         "level": "2",
         "description": "<p>This course will focus on the regulation of the online world and its social and cultural expression, and will explore these ideas from the viewpoint of users, community members, creators, citizens and consumers, particularly those engaging with Social Media and other \u2018user generated content\u2019 services. Cyberspace Law 2.0 GENL2032 is a General Education elective subject for non-law- students, while LAWS3532 is available for certain law students.</p>\n<p>It provides a good grounding for understanding how the legal and regulatory world interacts with online ones, especially from the perspective of the socially and culturally active individual. (While there are elements of market regulation and consumer protection considered, these are not the main focus.)</p>\n<p><strong>Main Topics</strong></p>\n<p>The Cyberspace Law 2.0 course aims to assist you to:</p>\n<ul><li>appreciate how the online social and cultural environment is similar and different from the physical world from a regulatory perspective;</li></ul>\n<ul><li>become familiar with reading and understanding court case judgments, how they are constructed, how arguments are won and lost;</li></ul>\n<ul><li>be able to take a systematic approach to analysing the legal issues involved in various problems and conflicts commonly encountered in online social and cultural scenarios;</li></ul>\n<ul><li>develop an understanding of the implications of different countries and jurisdictions having different laws, while many online services cover the world;</li></ul>\n<ul><li>understand the range of options which may be available for dealing with online disputes, in particular between individuals or between individuals and their cyberspace or online community services, and how to choose amongst them.</li></ul>\n<p>\u00a0</p>\n<p>\u00a0</p>",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "3502": 1,
+            "3543": 1,
+            "3571": 1,
+            "3979": 1,
+            "3971": 1
+        },
         "path_to": {},
         "terms": [
             "T3"
@@ -29399,7 +29471,9 @@
         "level": null,
         "description": "<p>The last 10-15 years have yielded significant and rapid advances in our understanding of the human genome, and the impact on human health &amp; clinical practice is already being widely felt. This course will discuss both the potential benefits and possible controversies surrounding the genetic revolution as it relates to healthcare. Students will learn how genetic testing is currently used to guide treatment across a range of diseases including cancer, neurological diseases, autoimmune disorders, cardiovascular disease, and respiratory disease. In addition, students will explore the power of genetics to impact disease prevention and diagnosis, and the social, legal, political and ethical implications of this new knowledge.</p>",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "leftover_plaintext": "Not available to Undergraduate Faculty of Medicine single/dual program students"
+        },
         "path_to": {},
         "terms": [
             "T3"
@@ -29414,7 +29488,9 @@
         "level": null,
         "description": "<p><em><strong>This course is offered in two modes: either face to face (on-campus) and fully online.</strong></em></p>\n\n<p>This exciting course provides an introductory overview of contemporary trends in mass media and the key concepts necessary to understand what media is and how to contextualise news. The course has a specific focus on engaging with media to promote health and social wellness issues, highlight health issues and challenges through media advocacy, and to raise awareness and mobilise for social change. The course provides opportunities to engage with inspirational people from across all aspects of media, from print to social media and in between. The current Australian media landscape is examined through analysis of readings and special guest lectures from different media outlets providing a close insight into their industry, how to best choose the best channel and how to tailor the message for it. The second half of the course gives practical instruction and training on developing content for mass media, providing the students with tools to tailor content, to writing for media, planning, developing a strategy and managing journalists.\u00a0</p>\n",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "leftover_plaintext": "Not available to Undergraduate Faculty of Medicine single/dual program students"
+        },
         "path_to": {},
         "terms": [
             ""
@@ -29429,7 +29505,9 @@
         "level": null,
         "description": "<p>Australia spends $100 billion a year on health care and its average health indicators are among the best in the world. None the less, some Australians are much less healthy than others. In exploring the question of why this is so, the course examines concepts of power and health in society and how the distribution of wealth is reflected in the health status of different social classes and ethnic groups. It also traces trends in understandings of health and public health, the challenge of alternative models of health, how the internet is bringing about changes in power relationships in the health field and explores controversies over childbirth. For further Information see SPHCM General Education Timetables</p>",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "leftover_plaintext": "Not available to Undergraduate Faculty of Medicine single/dual program students"
+        },
         "path_to": {},
         "terms": [
             ""
@@ -29444,7 +29522,9 @@
         "level": null,
         "description": "<p>Pandemics, and infectious disease outbreaks more generally, are a growing source of public concern and controversy. The media are continually accused of exaggerating concerns, and the actions of public health authorities are constantly publically scrutinised. What questions should the public be asking of public health responses to infectious disease, and what can public health authorities do to connect with the general public and gain their trust? This course will introduce you to social scientific research with relevance to the social and political aspects of infectious disease control. You will be introduced to some key social scientific concepts used to understand the challenges public health authorities face in trying to garner public trust; and you will be introduced to social scientific research that can inform responses to actual and potential pandemics. You will draw on these concepts and this research to critically engage with media and public discussion of pandemics.</p>\n<p>\u00a0</p>",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "leftover_plaintext": "Not available to Undergraduate Faculty of Medicine single/dual program students"
+        },
         "path_to": {},
         "terms": [
             ""
@@ -29459,7 +29539,9 @@
         "level": null,
         "description": "<p><em><strong>This course is offered in two modes: either face to face (on-campus) and fully online.</strong></em></p>\n\n<p><strong>Do you visualise a society without social problems? Do you have a curiosity about how to make difference by offering solution(s) for social problems? Do you have the zeal to be a socially responsible entrepreneur in the healthcare settings?</strong></p>\n\n<p>The emerging field of social business comes against the backdrop of unleashing human ingenuity in which the market-driven approach for solving social problem (s) in health, education, environment etc stands as the primary objective. In this course, we will develop the skills and perspective that enable you to identify and understand a social problem, to generate creative ideas to address it, and to build a realistic social business plan.</p>\n\n<p>The focus in the class shifts from the theoretical understanding of social business to the practical approach of planning, organising, leading and monitoring a social business. You will explore case studies, scenerious and real-time experiences from a largest Global academic and professional network of social business (i.e. Noble Laureate Professor Yunus Social business in 16 countries, 31 universities, 12 academic programs) and meet successful social business entrepreneurs to move your social business plan to market.</p>\n\n<p>\u00a0</p>\n",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "leftover_plaintext": "Not available to Undergraduate Faculty of Medicine single/dual program students"
+        },
         "path_to": {},
         "terms": [
             ""
@@ -29474,7 +29556,9 @@
         "level": null,
         "description": "<p>In this course, you will learn about how the human body moves and the relationships between physical activity or <em>in</em>activity and health and disease.</p>\n\n<p>There is confusing information in our modern world regarding physical activity and health. This course uses evidence-based medicine to explain physical activity-related subjects using the latest scientific evidence. Some topics covered include: the physiology of movement, effects of physical activity on the body, physical activity public health, physical activity requirements and needs for different population groups, and use of technology.</p>\n\n<p>You will be encouraged to look at your movement habits - and those of the wider public - in a new way that will hopefully improve your health (and that of your loved ones) now, and in the years to come.</p>\n",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "leftover_plaintext": "Not available to Undergraduate Faculty of Medicine single/dual program students"
+        },
         "path_to": {},
         "terms": [
             ""
@@ -29489,7 +29573,9 @@
         "level": null,
         "description": "<p>Nutrition is relevant to everybody, every day. What, how and why\u00a0you eat and drink are questions you may not have contemplated in any depth, but adequate nutrition is key to both\u00a0good physical and mental health. In exploring the mechanisms and determinants of nutrition behaviours, this course offers an opportunity to understand what nutrients your body needs, how your body processes\u00a0nutrients, how to analyse your own diet, and how poor nutrition can influence individual and population health.\u00a0</p>\n",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "leftover_plaintext": "Not available to Undergraduate Faculty of Medicine single/dual program students"
+        },
         "path_to": {},
         "terms": [
             ""
@@ -29504,7 +29590,9 @@
         "level": null,
         "description": "<p><em><strong>This course is offered in two modes: either face to face (on-campus) and fully online.</strong></em></p>\n\n<p>This is a six-unit general education course. It is designed to provide students from a range of disciplines with: (1) an understanding of theories and models of behaviour change; and (2) the opportunity to practice skills and strategies that impact health behavioural change. Particular emphasis is placed on improving competency in communication and decision-making to assist self and others with health concerns. With progressthrough the course, students will develop a more sophisticated level of knowledge, attitudes, values, and skills to address health issues and play an active role in enhancing their own health and that of their community. More specifically, students will gain the social, problem-solving, and communication skills necessary to manage their own health in a variety of situations. \u00a0This course is action-oriented; as such, students will be encouraged to implement and evaluate their own lifestyle choices and inspire others to optimise their wellbeing. Classes will combine lecture, discussion of the readings, case studies, real-life scenarios, presentations, small group exercises, and audiovisual materials.</p>\n\n<p>\u00a0</p>\n\n<p>\u00a0</p>\n",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "leftover_plaintext": "Not available to Undergraduate Faculty of Medicine single/dual program students"
+        },
         "path_to": {},
         "terms": [
             ""
@@ -29521,7 +29609,9 @@
         "equivalents": {
             "CLIM1001": 1
         },
-        "exclusions": {},
+        "exclusions": {
+            "leftover_plaintext": "All SCI Undergraduate Programs"
+        },
         "path_to": {},
         "terms": [
             "T2",
@@ -29540,7 +29630,8 @@
         "exclusions": {
             "BABS1111": 1,
             "BABS1201": 1,
-            "DPST1051": 1
+            "DPST1051": 1,
+            "leftover_plaintext": "All SCI Undergraduate Programs"
         },
         "path_to": {},
         "terms": [
@@ -29591,7 +29682,9 @@
         "level": "4",
         "description": "<p>Students are invited to study and discuss various questions concerning nuclear weapons, and the more general problem of preventing war. We look at the international political system, warfare and the arms race. We ask how a nuclear bomb actually works, and what its effects are likely to be. The associated issues of nuclear safeguards and the nuclear power industry are treated briefly. We study nuclear strategies, and then review attempts to control nuclear arms, particularly the Non Proliferation Treaty. We discuss institutions of collective security aimed at preserving peace, including the European Union and the United Nations. Finally, we discuss steps towards improved governance at the global level, through which we may eventually remove the threat of nuclear weapons entirely.</p>",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "leftover_plaintext": "All SCI Undergraduate Programs"
+        },
         "path_to": {},
         "terms": [
             "T2"
@@ -29606,7 +29699,9 @@
         "level": "4",
         "description": "<p>This wholly Internet-delivered course aims to give a big picture overview of the physical sciences at the dawn of the 21st century and beyond. The most common interface between the general public and science is often through science fiction; hence, science fiction is used as a teaching aid to stimulate student interest and as a starting point from which to communicate the science, and its likely future development. This course also examines the interaction between science and society, encouraging students to consider how culture influences science and vice versa. This course aims to provide students with the level of scientific and technological literacy required to take an informed part in debate on important scientific issues.</p>\n<p>The areas covered are: the physics of space and time; astronomy; space travel and exploration; astrobiology: life in the Universe; computers &amp; robotics, artificial intelligence &amp; human intelligence; the future of the human race; the future of planet Earth, including an examination of the physics of climate change; a brief look at the place of physics in popular culture is included.</p>\n<p><strong>Note:</strong> Students enrolled in a Faculty of Science program should not take this course.</p>",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "leftover_plaintext": "All SCI Undergraduate Programs"
+        },
         "path_to": {},
         "terms": [
             "T1"
@@ -29622,7 +29717,8 @@
         "description": "<p>Aviation is a high-profile industry that influences modern society at many levels. The aviation system comprises a complex array of human and mechanical interactions - known as a sociotechnical system - providing a myriad of social and technical challenges. Additionally, many seemingly unrelated industries and groups are influenced by aviation. This course provides the opportunity for students to challenge industry dogmas and consider solutions to the problems facing contemporary aviation. By utilising the variety of skills and backgounds that General Studies courses bring together, students develop an understanding of the main issues in complex, highly reliable mass-transport systems. The course also allows students to investigate how the key issues interrelate both within the industry and with entities external to aviation; this course does not simply focus on problems for the industry, but collates the issues that affect the providers, users and third parties involved in the system. The course provides an explicit treatment of subsectors often overshadowed by the airline livery, namely, aircraft maintenance, repair and overhaul (MRO), airports, online/off-line travel agents, and global distribution systems (GDS). The contemporary issues are organised around four major areas: competition, capacity, safety and the future.\u00a0</p>\n<p><strong>Note</strong>: Students enrolled in a Faculty of Science program should not take this course.</p>",
         "equivalents": {},
         "exclusions": {
-            "GENS5002": 1
+            "GENS5002": 1,
+            "leftover_plaintext": "All SCI Undergraduate Programs"
         },
         "path_to": {},
         "terms": [
@@ -29640,7 +29736,8 @@
         "equivalents": {},
         "exclusions": {
             "GENS8005": 1,
-            "GENS8003": 1
+            "GENS8003": 1,
+            "leftover_plaintext": "All SCI Undergraduate Programs"
         },
         "path_to": {},
         "terms": [
@@ -29927,7 +30024,10 @@
         "level": "2",
         "description": "<p><em>There has been a rapid growth in the use of digital spatial data in many areas of resource management and the environmental sciences. The aim of this course is to provide both a solid theoretical understanding and a comprehensive practical introduction to the use of geographic information systems and remote sensing in the analysis of digital spatial data, simple modelling using digital spatial data, and in decision support using commercially available software. Topics covered in the course provide an overview of the use of digital geographic information and earth-resource imagery for a wide range of environmental applications including geology, vegetation and forestry, agriculture, oceanographic and regional and urban analysis. </em></p>\n<p><em>This course will be conducted through a combination of lectures, computer laboratories and field work.</em></p>\n<p><strong>Note:This course was previously offered as GEOG2821 Introduction to Geographic Information Systems.</strong></p>",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "GEOG2821": 1,
+            "GEOS2811": 1
+        },
         "path_to": {},
         "terms": [
             "T2"
@@ -31588,7 +31688,9 @@
         "level": "2",
         "description": "<p>Instrumental analysis. The course will address the fundamental principles and applications of modern instrumental analysis relevant for chemical engineering, industrial chemistry and food science students. The subject consists of a series of interrelated lectures, tutorials and lab classes. The analytical techniques covered range from spectroscopy, chromatography, electrophoresis, electro-analytics to thermal analysis as well as mass spectrometry. The lecture components will address the underpinning physical principles of each analytical technique in-detail and also include an introduction to statistical data analysis. At the completion of the course, the student will have developed a firm understanding of the analytical methods employed in his or her field of study and also gained experience in carrying out analytical experiments.</p><p>Satisfactory completion of nominated laboratory safety training is required to pass this course.<br /></p>",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "CEIC2003": 1
+        },
         "path_to": {
             "FOOD6804": 1
         },
@@ -34110,7 +34212,16 @@
         "equivalents": {
             "JURD7321": 1
         },
-        "exclusions": {},
+        "exclusions": {
+            "LAWS3046": 1,
+            "JURD7446": 1,
+            "LAWS3248": 1,
+            "JURD7448": 1,
+            "LAWS3523": 1,
+            "GENL2323": 1,
+            "LAWS8017": 1,
+            "JURD7617": 1
+        },
         "path_to": {
             "LAWS3046": 1,
             "LAWS3057": 1,
@@ -34221,7 +34332,14 @@
         "equivalents": {
             "JURD7446": 1
         },
-        "exclusions": {},
+        "exclusions": {
+            "LAWS3021": 1,
+            "JURD7321": 1,
+            "LAWS3523": 1,
+            "GENL2323": 1,
+            "LAWS8017": 1,
+            "JURD7617": 1
+        },
         "path_to": {
             "LAWS3021": 1
         },
@@ -35255,7 +35373,14 @@
         "equivalents": {
             "JURD7448": 1
         },
-        "exclusions": {},
+        "exclusions": {
+            "LAWS3021": 1,
+            "JURD7321": 1,
+            "LAWS3523": 1,
+            "GENL2323": 1,
+            "LAWS8017": 1,
+            "JURD7617": 1
+        },
         "path_to": {
             "LAWS3021": 1
         },
@@ -36511,7 +36636,8 @@
             "LAWS3147": 1,
             "JURD7458": 1,
             "JURD7351": 1,
-            "LAWS3058": 1
+            "LAWS3058": 1,
+            "TABL2751": 1
         },
         "path_to": {},
         "terms": [
@@ -37405,7 +37531,14 @@
         "description": "<p>Functions (and their inverses), limits, asymptotes, continuity; differentiation and applications; integration, the definite integral and applications; inverse trigonometric functions; the logarithmic and exponential functions and applications; sequences and series; mathematical induction; the binomial theorem and applications; introduction to probability theory; introduction to 3-dimensional geometry; introduction to linear algebra.</p>\n\n<p>Assumed knowledge: A level of knowledge equivalent to achieving a mark of at least 60 in HSC Mathematics. Students who have taken General Mathematics will not have achieved the level of knowledge which is assumed in this course.</p>\n\n<p><strong>Note</strong>: This course is not intended for students who propose to study a substantial amount of Mathematics beyond first year level. Many later year courses in Mathematics have completion of MATH1231, MATH1241 or MATH1251 as a prerequisite. This course can be taken as a preparatory course by students who need to take MATH1131 but do not meet the assumed knowledge requirement.\u00a0</p>\n\n<p>This course is not available as a General Education Course or as an Elective where students have met the assumed knowledge of Mathematics and Mathematics Extension 1.</p>\n",
         "equivalents": {},
         "exclusions": {
-            "MATH1031": 1
+            "MATH1031": 1,
+            "MATH1131": 1,
+            "MATH1141": 1,
+            "MATH1151": 1,
+            "ECON1202": 1,
+            "DPST1013": 1,
+            "3991": 1,
+            "leftover_plaintext": "Not enrolled in  or any UNSW Business Program and must not have completed  or"
         },
         "path_to": {
             "CLIM2001": 1,
@@ -37459,7 +37592,8 @@
         "equivalents": {},
         "exclusions": {
             "COMM1110": 1,
-            "ECON1203": 1
+            "ECON1203": 1,
+            "MATH2841": 1
         },
         "path_to": {
             "AVIA2013": 1,
@@ -37867,7 +38001,12 @@
             "MATH2111": 1,
             "MATH2610": 1,
             "MATH2039": 1,
-            "MATH2510": 1
+            "MATH2510": 1,
+            "MATH2019": 1,
+            "MATH2049": 1,
+            "MATH2069": 1,
+            "MATH2100": 1,
+            "MATH2110": 1
         },
         "path_to": {
             "MATH2069": 1,
@@ -38001,7 +38140,14 @@
         "level": "2",
         "description": "<p>Several Variable Calculus:Vectors, differential calculus of curves in R3 and  surfaces, Taylor series for functions of two variables, critical points, local maxima and minima.  Lagrange multipliers, integral calculus for  functions of several variables using various co-ordinate systems, conservative vector fields and line integrals, Green&#39;s Theorem in the plane, divergence and curl, surface integrals, Stokes&#39; Theorem, Gauss&#39; divergence Theorem.Complex Analysis:Complex numbers, simple mapping problems, differentiation theory for complex functions, Cauchy Riemann equations, analytic functions, the elementary functions, Integration Theory for complex functions, Cauchy&#39;s Theorem and the Cauchy integral formulae, Taylor series and Laurent Series, residues, evaluating real integrals and trigonometric integrals using residues. Note: Available only to students for whom it is specifically required as part of their program</p>",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "MATH2011": 1,
+            "MATH2111": 1,
+            "MATH2510": 1,
+            "MATH2610": 1,
+            "MATH2520": 1,
+            "MATH2620": 1
+        },
         "path_to": {
             "ELEC3115": 1,
             "MATH2011": 1,
@@ -38048,7 +38194,16 @@
             "MATH2901": 1,
             "MATH2859": 1,
             "MATH2099": 1,
-            "BEES2041": 1
+            "BEES2041": 1,
+            "CVEN2002": 1,
+            "CVEN2025": 1,
+            "CVEN2702": 1,
+            "ECON3209": 1,
+            "MATH2049": 1,
+            "MATH2829": 1,
+            "MATH2839": 1,
+            "MATH2899": 1,
+            "MINE2700": 1
         },
         "path_to": {
             "CEIC2005": 1,
@@ -38102,7 +38257,9 @@
             "MATH2901": 1,
             "MATH2089": 1,
             "MATH2859": 1,
-            "BEES2041": 1
+            "BEES2041": 1,
+            "MATH2501": 1,
+            "MATH2601": 1
         },
         "path_to": {
             "BEES2041": 1,
@@ -38144,7 +38301,12 @@
             "MATH2011": 1,
             "MATH2039": 1,
             "MATH2610": 1,
-            "MATH2510": 1
+            "MATH2510": 1,
+            "MATH2019": 1,
+            "MATH2049": 1,
+            "MATH2069": 1,
+            "MATH2100": 1,
+            "MATH2110": 1
         },
         "path_to": {
             "MATH3101": 1,
@@ -38281,7 +38443,11 @@
         "level": "2",
         "description": "An introduction to mathematical computing, programming and visualization using Matlab, with a focus on mathematical modelling and simulation. Introduction to Matlab, floating point arithmetic, difference equations, nonlinear equations, numerical differentiation and integration, initial value problems.",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "MATH2089": 1,
+            "CVEN2002": 1,
+            "CVEN2702": 1
+        },
         "path_to": {
             "CEIC2005": 1,
             "PHYS3112": 1
@@ -38330,7 +38496,8 @@
         "equivalents": {},
         "exclusions": {
             "MATH2601": 1,
-            "MATH2509": 1
+            "MATH2509": 1,
+            "MATH2099": 1
         },
         "path_to": {
             "MATH2099": 1,
@@ -38365,7 +38532,8 @@
         "exclusions": {
             "MATH2520": 1,
             "MATH2620": 1,
-            "MATH2621": 1
+            "MATH2621": 1,
+            "MATH2069": 1
         },
         "path_to": {
             "PHYS3111": 1
@@ -38391,7 +38559,8 @@
         "equivalents": {},
         "exclusions": {
             "MATH2509": 1,
-            "MATH2501": 1
+            "MATH2501": 1,
+            "MATH2099": 1
         },
         "path_to": {
             "MATH2099": 1,
@@ -38426,7 +38595,8 @@
         "exclusions": {
             "MATH2520": 1,
             "MATH2521": 1,
-            "MATH2620": 1
+            "MATH2620": 1,
+            "MATH2069": 1
         },
         "path_to": {
             "PHYS3111": 1
@@ -38472,7 +38642,13 @@
         "equivalents": {},
         "exclusions": {
             "CVEN2002": 1,
-            "ECON3209": 1
+            "ECON3209": 1,
+            "MATH2089": 1,
+            "MATH2099": 1,
+            "MATH2801": 1,
+            "MATH2901": 1,
+            "BEES2041": 1,
+            "BIOS2041": 1
         },
         "path_to": {
             "ECON2107": 1,
@@ -38544,7 +38720,9 @@
             "BEES2041": 1,
             "MATH2901": 1,
             "BIOS2041": 1,
-            "MATH2099": 1
+            "MATH2099": 1,
+            "MATH2801": 1,
+            "CVEN2002": 1
         },
         "path_to": {},
         "terms": [
@@ -38600,7 +38778,10 @@
             "MATH2089": 1,
             "MATH2099": 1,
             "BIOS2041": 1,
-            "BEES2041": 1
+            "BEES2041": 1,
+            "MATH2801": 1,
+            "MATH2901": 1,
+            "CVEN2002": 1
         },
         "path_to": {
             "ACTL2102": 1,
@@ -42956,7 +43137,9 @@
         "description": "<p>This course covers the practical application of engineering mechanics and mechanical vibrations. Topics include the following: Plane kinematics and kinetics of rigid bodies; equations of motion, work and energy; Introduction to mechanical vibration; Free and forced responses of single degree-of-freedom spring-mass-damper systems, vibration isolation; Harmonic analysis; Linear vibrations of multi-degree-of-freedom systems.</p>",
         "equivalents": {},
         "exclusions": {
-            "MMAN3300": 1
+            "MMAN3300": 1,
+            "MECH2300": 1,
+            "MECH3300": 1
         },
         "path_to": {
             "MECH4305": 1,
@@ -43098,7 +43281,10 @@
             "ELEC3014": 1,
             "ELEC3114": 1
         },
-        "exclusions": {},
+        "exclusions": {
+            "MECH3211": 1,
+            "MTRN3212": 1
+        },
         "path_to": {
             "AERO4620": 1,
             "MTRN3020": 1,
@@ -43298,7 +43484,11 @@
         },
         "exclusions": {
             "MSCI1001": 1,
-            "GENS0501": 1
+            "GENS0501": 1,
+            "GENS4625": 1,
+            "MSCI2001": 1,
+            "GENB5001": 1,
+            "leftover_plaintext": "Not available to students in Science Programs"
         },
         "path_to": {},
         "terms": [
@@ -43542,7 +43732,10 @@
         "level": "1",
         "description": "<p>In this course you will engage with the \u2018reinvention\u2019 of music in two ways. You will examine a period of profound change in Western classical music: from 1890 (Mahler) to 1945 (Shostakovich). You will assess the contribution of figures such as Debussy, Stravinsky, and Bartok, as well as lesser known composers, noting how political and artistic contexts shape their work and its reception. Shifts in the social practice of music will be outlined. Concurrently, through ethnomusicology\u2014a subdiscipline that has always required the \u2018reinvention\u2019 of some of our own assumptions and thinking, you will engage with a vast range of ideas about music found in the world\u2019s cultures. This course provides a foundation for further studies in music and musicology.</p>\n<p>Assumed knowledge: A satisfactory standard in HSC music,\u00a0or 5th grade theory or musicianship.</p>\n<p>\u00a0</p>",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "MUSC1001": 1,
+            "MUSC2111": 1
+        },
         "path_to": {
             "MUSC2111": 1
         },
@@ -43669,7 +43862,9 @@
         "level": "2",
         "description": "<p>This course offers an introduction to musicology, the systematic study of music. This is undertaken through the detailed study of European concert music of the period 1890-1940, and through engagement with the challenges offered by Ethnomusicology, the ethnographically informed study of Music. It aims to develop students\u2019 critical thinking in areas of historiography, musical meaning, and aesthetics.</p>\n\n<p>It applies students developing skills in Musicianship, particularly those of analysis and aural perception, and introduces further methodologies employed in upper level courses in Music. It develops student knowledge of exemplary works of Western classical music and jazz, and how to critically discuss such music within the disciplinary conventions of musicology.</p>\n\n<p>The course will develop the skills involved in scholarly enquiry in Music, and the capacity for analytical and critical thinking and for creative problem solving, both in general and in a manner specific to the discipline.</p>\n",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "MUSC1101": 1
+        },
         "path_to": {
             "MUSC1101": 1
         },
@@ -44675,7 +44870,9 @@
         "level": "2",
         "description": "<p>This course will extend your problem-solving skills by applying the basic optics and visual optics studied thus far into real world scenarios. This will be achieved through hands-on experiences as well as further theoretical studies. Building on the foundations of ocular anatomy and physiology, &#39;The Clinical Environment&#39; will also introduce you to a number of key techniques in the consulting room and stimulate your understanding of the interrelationships that drive successful clinical outcomes.</p>\n\n<p>You will be invited to recognise the range of people seeking eye care, including those with vision impairment, and the effects that your personal communications skills and reflective practice have upon their welfare. Spectacles are a common outcome of an eye examination: you will learn the impact of this need upon the person and how lack of access to spectacles places an enormous burden on an individual and their community, particularly in developing countries. During this course, your preparedness to take on social responsibility and global citizenship will be piqued. Most importantly, your capability to self-audit, to solve problems and to work either independently or as part of a team will be developed.</p>\n\n<p>\u00a0</p>\n",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "OPTM2190": 1
+        },
         "path_to": {
             "OPTM3133": 1
         },
@@ -44868,7 +45065,9 @@
         "level": "3",
         "description": "<p>This course provides an overview of disease processes with particular application to the pathophysiology, epidemiology and clinical features of eye diseases. It follows on from OPTM3105 and will cover metabolic, degenerative, inherited, developmental and inflammatory ocular disease as well as neoplasia. Participants will gain an understanding of the pathological processes underlying disease as well as a solid knowledge of the epidemiology, signs symptoms and clinical presentation of ocular disease. This will equip students with the knowledge necessary for differentially diagnosing ocular disease.</p>",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "OPTM3231": 1
+        },
         "path_to": {
             "OPTM6400": 1,
             "OPTM6413": 1
@@ -45408,7 +45607,9 @@
         "level": null,
         "description": "<p>OPTM6421 will further develop the integration of student knowledge of the basic sciences with clinical competency in the areas of binocular vision, low vision and paediatrics.\u00a0 Students will be introduced to the care and assessment of paediatric patients and patients with strabismus, amblyopia, nystagmus, and/or low vision or severe visual impairment. Students will need to apply knowledge from earlier courses such as ocular disease, physiology and optics in order to prescribe visual aids which best alleviate the detrimental effects of visual deficits. The course will be delivered using lectures, tutorials, practical classes and self-directed learning.</p>\n\n<p>Brief Curriculum:\u00a0 Binocular vision: amblyopia, comitant and noncomitant strabismus. Low vision \u2013 aids, current low vision aids, adaptive technology, the multidisciplinary mode of practice. Children&#39;s vision: examining children, vision therapy, introduction to behavioural (neuro-developmental) optometry, near point stress, optometric management of learning difficulties, special needs patients, child abuse.</p>\n",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "OPTM4211": 1
+        },
         "path_to": {
             "OPTM6422": 1,
             "OPTM8512": 1,
@@ -45478,7 +45679,9 @@
         "level": null,
         "description": "<p><strong>Objectives:</strong> A major focus in optometric education is to produce eye care professionals who offer complete patient care. This course is designed to prepare future optometrists to manage a private practice successfully as well as showcase other opportunities within the profession including those in industry, academia, research, government and public health.</p>\n<p><strong>Brief Curriculum:</strong><br /></p>\n<p>The course will focus on the needs of small business operators by providing a solid foundation in the key business disciplines. This will reflect issues that can arise in the strategic management and development of an optometric practice. Topics will include human resources management, ethics, business planning and development, accounting/finance administration, microeconomics, personal finance, marketing, operations management, entrepreneurial skills, leadership, personal development and business law. The teaching approach will provide a stimulating and interactive environment for students to develop their business, leadership and teamwork skills in order to become a successful optometrist within the profession.</p>\n<p></p>",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "OPTM4271": 1
+        },
         "path_to": {
             "OPTM8512": 1,
             "OPTM8522": 1
@@ -46426,7 +46629,16 @@
         "exclusions": {
             "PHYS9110": 1,
             "PHYS1111": 1,
-            "PHYS1149": 1
+            "PHYS1149": 1,
+            "PHYS1121": 1,
+            "PHYS1131": 1,
+            "DPST1023": 1,
+            "PHYS1221": 1,
+            "PHYS1231": 1,
+            "DPST1024": 1,
+            "PHYS1241": 1,
+            "PHYS1211": 1,
+            "PHYS1141": 1
         },
         "path_to": {},
         "terms": [
@@ -46457,7 +46669,12 @@
         "exclusions": {
             "PHYS1110": 1,
             "PHYS9110": 1,
-            "PHYS1149": 1
+            "PHYS1149": 1,
+            "PHYS0001": 1,
+            "PHYS1121": 1,
+            "PHYS1131": 1,
+            "DPST1023": 1,
+            "PHYS1141": 1
         },
         "path_to": {
             "FOOD1360": 1
@@ -46974,7 +47191,8 @@
         "description": "<p></p>\n<p>Thermal physics and statistical mechanics is concerned with the study of macroscopic and mesoscopic systems. \u00a0Both aim to understand the properties of systems and processes that occur in such systems. Statistical mechanics links mesoscopic and macroscopic properties of systems of matter and radiation with the fundamental microscopic physics (classical and quantum mechanics).\u00a0\u00a0It puts the concepts of thermodynamics on a firm foundation of\u00a0\u00a0mechanics.\u00a0\u00a0Its importance in the development of modern physics, from\u00a0\u00a0the\u00a0\u00a0understanding\u00a0\u00a0of stars to the smallest transistor, cannot be overestimated. \u00a0Topics to be covered include:\u00a0Classical thermodynamics. Kinetic theory of gases, ideal gas, van der Waals gas. First law of thermodynamics.\u00a0 Heat engines, Carnot cycle, Carnot\u2019s theorem.\u00a0 Classical entropy, second law of thermodynamics. Third law of thermodynamics. Postulate approach to classical thermodynamics, fundamental 1\u00b0 equation and its consequences. Alternative formulations, thermodynamic potentials, Legendre transforms, Maxwell\u2019s relations. Phase transitions stability criteria, Clausius-Clapeyron equation, Gibbs phase rule. Thermodynamic probability, Boltzmann entropy. Boltzmann distribution, Fermi-Dirac and Bose-Einstein distributions. Partition function. Micro-canonical, canonical and grand canonical ensembles. Heat capacity of diatomics, Einstein and Debye models, phonons. Paramagnetism. Blackbody radiation. Bose-Einstein condensation, liquid helium. Fermi energy, free electrons and the Fermi gas.</p>",
         "equivalents": {},
         "exclusions": {
-            "PHYS3021": 1
+            "PHYS3021": 1,
+            "PHYS2210": 1
         },
         "path_to": {
             "PHYS3118": 1
@@ -46996,7 +47214,9 @@
         "level": "3",
         "description": "<p></p>\n<p>Classical electrodynamics is important from both the fundamental and applied viewpoints.\u00a0\u00a0This course aims to provide students with an introduction to the principles and behaviours of dynamical electric and magnetic systems, and a theoretical foundation in classical field theory.\u00a0\u00a0The course will begin with the application of electromagnetic theory to study optical phenomena, before moving on to more formal topics.\u00a0\u00a0It will finish with an introduction to relativistic electrodynamics and its covariant formulation, paving the way for a quantum field theory of electrodynamics (QED). \u00a0Topics to be covered include:\u00a0Scalar diffraction theory. Image formation and Fourier Optics, Coherence. Electromagnetic fields in dispersive media. Scattering. Maxwell\u2019s equations potential formulation. Gauge transformation. Poynting\u2019s theorem, conservation laws. Green\u2019s function solution of static problems. Inhomogeneous wave equation and Green\u2019s function solution. Dipole radiation. Emission of radiation from accelerating and decelerating charges. Relativistic electrodynamics. Covariant formulation.</p>",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "PHYS3011": 1
+        },
         "path_to": {},
         "terms": [
             "T3"
@@ -47038,7 +47258,8 @@
         "description": "<p></p>\n<p>The stars form the basic building blocks of our Galaxy, and make up one\u00a0of the fundamental scales on which structure is\u00a0found in the Universe.\u00a0\u00a0This course provides an introduction to the physics of stars, galaxies and\u00a0the universe.\u00a0\u00a0The aim is to give students an introduction to our state of knowledge about these fundamental astronomical objects, what they contain, their physical parameters, how they function and how they evolve. The basic mathematical formalism governing the physics of is presented, though the detailed solution of the equations is not attempted. \u00a0Topics to be covered include:\u00a0Galaxies, their composition. The distance scale. Large-scale structure of the universe. Galaxy evolution. Stellar radiation, spectra classification. Hertzsprung Russell diagrams, determination of stellar masses and radii. \u00a0Equations of stellar structure. Energy sources in star: nuclear reaction cycles, energy transport, equations of state, degeneracy, opacity. Properties of main sequence stars: stellar evolution, structure of red giants and white dwarfs. The solar atmosphere.</p>",
         "equivalents": {},
         "exclusions": {
-            "PHYS2160": 1
+            "PHYS2160": 1,
+            "PHYS3160": 1
         },
         "path_to": {},
         "terms": [
@@ -47078,7 +47299,10 @@
         "level": "3",
         "description": "<p><br />Quantum mechanics plays an important role in the properties of solids, and will be central to new generations of <br />electronic devices across the coming decades, e.g., quantum computers. Existing devices, such as laser diodes and superconducting quantum interference devices (SQUIDs), also exploit quantum phenomena for their operation. This course covers three main areas. The first is &#39;The Quantum Physics of Solids&#39;, with topics including crystal structure, phonons as quantum oscillations, electrons as quantum particles in solids, band structure and unconventional materials. The second is &#39;Interactions in Quantum Systems&#39;, with topics including paramagnetism, diamagnetism and ferromagnetism, electron-electron interactions and their role in screening and plasmonic effects, and superconductivity. The third is &#39;From Semiconductors to Quantum Devices&#39;, with topics including charge carriers in semiconductors, p-n junctions and diodes, finite solids and heterojunctions, quantum confinement and low-dimensional devices, nanoelectronics. The course will appeal to those seeking a better contextual understanding of quantum mechanics and to learn about its real world applications: past, present and future.</p>",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "PHYS3021": 1,
+            "PHYS3310": 1
+        },
         "path_to": {},
         "terms": [
             "T2"
@@ -48023,7 +48247,13 @@
         "equivalents": {
             "PSYC4111": 1
         },
-        "exclusions": {},
+        "exclusions": {
+            "GENS9003": 1,
+            "GENS9004": 1,
+            "GENS9005": 1,
+            "GENS9007": 1,
+            "GENS0005": 1
+        },
         "path_to": {
             "MATH2871": 1,
             "PSYC3001": 1,
@@ -48114,7 +48344,13 @@
         "level": "2",
         "description": "<p>This course is an introduction to psychological assessment, personality, and psychopathology. The assessment portion of the course will include key concepts related to personality and intelligence testing. The psychopathology portion of the course is an introduction to the study of maladaptive behaviour and mental disorders. The course will provide an overview of common mental disorders, including anxiety, mood, eating, childhood, and psychotic disorders. Emphasis will be placed on diagnostic criteria, contemporary theories of psychopathology, and empirically supported approaches to treating mental disorders.</p>\n",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "GENS9003": 1,
+            "GENS9004": 1,
+            "GENS9005": 1,
+            "GENS9007": 1,
+            "GENS0005": 1
+        },
         "path_to": {
             "PSYC3011": 1,
             "PSYC3331": 1
@@ -51249,7 +51485,10 @@
         "level": "3",
         "description": "<p>In this course \u00a0you will explore the legal, professional, and ethical opportunities and constraints of social work practice. Drawing on practice informed case studies, lectures and tutorials will provide the opportunity for you to consider the tensions and dilemmas of socio-legal practice through an examination of social work interventions in select settings. Attention is paid to legal systems, legal concepts, lawmaking processes, sources of socio-legal assistance and interactions between social workers and lawyers.</p>\n",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "4787": 1,
+            "leftover_plaintext": "Students enrolled in  Social Work (Honours)/Law"
+        },
         "path_to": {
             "SOCW4003": 1,
             "SOCW4011": 1,
@@ -52801,7 +53040,9 @@
         "description": "<p>This course focuses on the key policy and practical aspects of the administration of the Commonwealth&#39;s &#39;self-assessment&#39; income taxation regime. The materials also provide a broad perspective on the challenges all parties (the Tax Office, taxpayers, tax advisors, tribunals and the courts, Inspector-General, Ombudsman, etc) face in meeting their various obligations under taxation and administrative laws. This broad perspective is important when considering (for example) the transparency of the Tax Office&#39;s decision-making practices, and the appropriateness of its compliance strategies and payment enforcement practices. Similarly, a broad perspective is required when considering the appropriateness of the dispute resolution avenues taxpayers have available to them. Correspondingly, a major theme running through the study materials is that all parties are part of a &#39;mass decision-making&#39; tax regime, which requires an appropriate set of roles, obligations and &#39;checks and balances&#39; on decision-making to ensure that both the underlying policy intent of the Commonwealth&#39;s taxation laws and &#39;procedural justice&#39; are achieved.</p>",
         "equivalents": {},
         "exclusions": {
-            "TABL5906": 1
+            "TABL5906": 1,
+            "TABL3006": 1,
+            "TABL5506": 1
         },
         "path_to": {},
         "terms": [
@@ -53162,7 +53403,9 @@
         "equivalents": {},
         "exclusions": {
             "LEGT3751": 1,
-            "LEGT7751": 1
+            "LEGT7751": 1,
+            "LAWS3147": 1,
+            "LAWS3751": 1
         },
         "path_to": {
             "LAWS3751": 1,
@@ -53584,7 +53827,8 @@
         "exclusions": {
             "LAWS8017": 1,
             "JURD7617": 1,
-            "TABL5517": 1
+            "TABL5517": 1,
+            "TABL3771": 1
         },
         "path_to": {},
         "terms": [
@@ -59226,7 +59470,12 @@
         "level": "2",
         "description": "<p>This course provides a foundation for quantitative methods applicable to students in their future careers. It teaches the fundamentals of data analysis with emphasis on the analysis of data arising from real-life situations across the disciplines. It focuses on the understanding of the concepts of statistics without overemphasizing the mathematical detail.</p>\n\n<p>The course teaches the principles of good experimental design, as well as the interpretation and critical evaluation of statistical information presented in the media and in reports published by organisations. It introduces a computer software package, Excel, which is used for data exploration, presentation and analysis.</p>\n\n<p>Main topics covered include: gathering, organising and summarising data; using graphical techniques to present statistical information; measures of location and spread; probability distributions such as the normal distribution; confidence intervals and hypothesis tests for a single sample; correlation and simple linear regression.</p>\n",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "ZPEM1302": 1,
+            "ZPEM1304": 1,
+            "ZPEM2302": 1,
+            "ZPEM2310": 1
+        },
         "path_to": {},
         "terms": [
             "S1"
