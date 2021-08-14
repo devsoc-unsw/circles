@@ -39,12 +39,12 @@ def preprocess_rules():
         processed = convert_level(processed)
         processed = convert_fslash(processed)
         processed = extraneous_phrasing(processed)
+        processed = joining_terms(processed)
         processed = convert_AND_OR(processed)
         processed = delete_prereq_label(processed)
         processed = handle_comma_logic(processed)
         processed = strip_spaces(processed)
         processed = delete_trailing_punc(processed)
-        # processed = surround_brackets(processed)
         
         # At the end, remove remaining lowercase prepositions
 
@@ -129,16 +129,17 @@ def convert_WAM(processed):
 
     return processed
 
-'''Converts mark/grade requirements, usually relating to a specific course.
-NOTE: We prefer to use 'GRADE' here because 'MARK' could interfere with Marketing
-courses'''
 def convert_GRADE(processed):
+    '''Converts mark/grade requirements, usually relating to a specific course.
+    NOTE: We prefer to use 'GRADE' here because 'MARK' could interfere with Marketing
+    courses'''
 
     # Converts "mark of at least XX to XXGRADE"
     processed = re.sub(r"(a )?mark of at least (\d\d)", r"\2GRADE", processed, flags=re.IGNORECASE)
 
     # Further handle CR and DN. These usually follow a course code  
     # MATH1141 (CR) ==> 65WAM MATH1141
+    # Use "in" as a joining word"
     processed = re.sub(r'([A-Z]{4}[\d]{4})\s?\(CR\)', r'65GRADE in \1', processed)
     processed = re.sub(r'([A-Z]{4}[\d]{4})\s?\(DN\)', r'75GRADE in \1', processed)
     return processed
@@ -166,6 +167,16 @@ def convert_AND_OR(processed):
     """ Convert 'and' to '&&' and 'or' to '||' """
     processed = re.sub(" and ", " && ", processed, flags=re.IGNORECASE)
     processed = re.sub(" or ", " || ", processed, flags=re.IGNORECASE)
+    return processed
+
+def joining_terms(processed):
+    '''Currently, we aim to use "in" as a joining term'''
+    # UOC at LX ==> UOC in LX
+    processed = re.sub(r'UOC at (L\d)', r'UOC in \1', processed)
+    
+    # UOC of LX ==> UOC in LX
+    processed = re.sub(r'UOC of (L\d)', r'UOC in \1', processed)
+    
     return processed
 
 def delete_trailing_punc(processed):
@@ -208,8 +219,8 @@ def handle_comma_logic(processed):
     
     return processed
 
-'''Sometimes there's extraneous phrasing which needs to be handled'''
 def extraneous_phrasing(processed):
+    '''Sometimes there's extraneous phrasing which needs to be handled'''
     # Must have completed COMP1511 ==> COMP1511
     processed = re.sub("Must have completed ", "", processed, flags=re.IGNORECASE)
     
