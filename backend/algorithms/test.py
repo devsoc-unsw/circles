@@ -17,7 +17,19 @@ data = json.load(f)
 f.close()
 unmatched = []
 
+def isUoc(text):
+    if 'UOC' in text:
+        return True
+    pass
 for i in data:
+    skip = True
+    #Filter Uoc
+    for tk in data[i]:
+        if isUoc(tk):
+            skip = False
+    if skip:
+        continue
+
     result, errCode = parseRequirement(data[i])
     if errCode == -1:
         unmatched.append(i)

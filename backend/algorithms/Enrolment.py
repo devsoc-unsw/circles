@@ -166,10 +166,12 @@ def pickCourses(text):
     pass
 
 def isUoc(text):
+    if 'UOC' in text:
+        return True
     pass
 
-def getUoc(text):
-    pass
+def getUoc(text, ith = 0):
+    return re.findall(r"(\d+)UOC", text)[ith]
 
 def pickProgram(text):
     pass
@@ -200,6 +202,13 @@ def parseRequirement(text, elapsed = 0):
         if isCourse(i):
             unmatched = False
             result.addComponent(CourseRequirement(i))
+        if isUoc(i):
+            unmatched = False
+            uoc = getUoc(i)
+            if 'in' in i:
+                unmatched = True
+            print(uoc)
+            
         if orLike(i): 
             unmatched = False
             result.switchType()
