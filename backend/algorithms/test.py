@@ -25,11 +25,11 @@ for i in data:
     skip = True
     #Filter Uoc
     for tk in data[i]:
-        if isUoc(tk):
+        if isUoc(tk) and 'in' in tk:
             skip = False
     if skip:
         continue
-
+    
     result, errCode = parseRequirement(data[i])
     if errCode == -1:
         unmatched.append(i)

@@ -1,3 +1,5 @@
+from json import dump
+import json
 import re
 class Condition:
     def __init__(self):
@@ -109,30 +111,23 @@ class CompositeRequirement(Requirement):
             return self.components[0]
         return self
 
-def WamRequirement(Requirement):
-    def __init__(self, limit = 0, courses = []):
-        self.components = courses
-        self.limit = limit
-    
-    def validate(self, condition):
-        pass
-
-    # Can be used by validate or externally
-    def getWam(self):
-        pass
-
-def UocRequirement(Requirement):
+class UocRequirement(Requirement):
     # Does or condition exist?
-    def __init__(self, limit = 0,program = []):
+    def __init__(self, uoc = 0, program = []):
         self.components = program
-        self.limit = limit
+        self.uoc = uoc
     
     def validate(self, condition):
         pass
 
     # Can be used by validate or externally
     def getUoc(self):
-        pass
+        return self.uoc
+        
+    def show(self, newLine = False):
+        print(self.uoc, 'UOC', end = '')
+        if newLine:
+            print()
 
 # The field of methods for matching elements
 def orLike(text):
@@ -152,7 +147,7 @@ def andLike(text):
     return result
 
 def isCourse(text):
-    if re.match("[a-zA-Z]{4}\d{4}", text):
+    if re.match("[a-zA-Z]{4}\s*\d{4}", text):
         return True
     return False
 
@@ -175,6 +170,8 @@ def getUoc(text, ith = 0):
 
 def pickProgram(text):
     pass
+
+dumping = []
 
 #Not considering and or clauses wihtout parenthesis
 def parseRequirement(text, elapsed = 0):
@@ -205,9 +202,17 @@ def parseRequirement(text, elapsed = 0):
         if isUoc(i):
             unmatched = False
             uoc = getUoc(i)
-            if 'in' in i:
+            program = []
+            if 'by' in i or 'at' in i or 'of' in i:
                 unmatched = True
-            print(uoc)
+            if ' in ' in i and 'course' in i and not 'WAM' in i:
+                dumping.append(i)
+                unmatched = json.dumps(dumping, sort_keys=True, indent=4, separators=(',', ':'))
+                fp = open('in.json', "w", encoding='utf-8')
+                fp.write(unmatched)
+                fp.close()
+                unmatched = True
+            result.addComponent(UocRequirement(uoc, program))
             
         if orLike(i): 
             unmatched = False
