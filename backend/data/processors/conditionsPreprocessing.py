@@ -31,7 +31,7 @@ def preprocess_rules():
         processed = original
         processed = delete_exclusions(processed)
         processed = delete_HTML(processed)
-        processed = convert_program_codes(processed)
+        # processed = convert_program_codes(processed)
         processed = convert_square_brackets(processed)
         processed = convert_UOC(processed)
         processed = convert_WAM(processed)
@@ -74,15 +74,17 @@ def delete_HTML(processed):
     # so "and<br/>12 UOC" would turn into and12 UOC
     return re.sub("<[a-z]*/>", " ", processed, flags=re.IGNORECASE)
 
-def convert_program_codes(processed):
-    """ Converts program codes to their code mappings: e.g. 'Computer Science' 
-        to 'COMP' """
-    # Query: is there a more efficient way to do this?
-    for program in CODE_MAPPING:
-        if program in processed:
-            processed = re.sub(program, CODE_MAPPING[program], processed)
+# def convert_program_codes(processed):
+#     """ Converts program codes to their code mappings: e.g. 'Computer Science' 
+#         to 'COMP' """
+#     # Query: is there a more efficient way to do this?
+#     matches = []
+#     for program in CODE_MAPPING:
+#         if program in processed:
+#             matches
+#             processed = re.sub(program, CODE_MAPPING[program], processed)
     
-    return processed
+#     return processed
 
 def convert_square_brackets(processed):
     """ Converts '[' to '(' and ']' to ')' """
@@ -181,7 +183,7 @@ def joining_terms(processed):
 
 def delete_trailing_punc(processed):
     """ Deletes any trailing punctuation """
-    return re.sub("\.$", "", processed)
+    return re.sub(r"(\.|;)$", "", processed)
 
 def delete_prereq_label(processed):
     """ Removes 'prerequisite' and variations """
