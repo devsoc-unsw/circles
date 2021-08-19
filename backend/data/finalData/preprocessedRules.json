@@ -1565,7 +1565,7 @@
     },
     "ARTS3759": {
         "original_rule": "Prerequisite: Enrolment with consent. ARTS3759 is open to UNSW undergraduate students that are also enrolled in an internship (or international field placement course). This needs to be demonstrated prior to enrolment.<br/><br/>",
-        "processed_rule": "Enrolment with consent. ARTS3759 is open to UNSW undergraduate students that are also enrolled in an internship (or international field placement course). This needs to be demonstrated prior to enrolment"
+        "processed_rule": "Enrolment with consent. is open to UNSW undergraduate students that are also enrolled in an internship (or international field placement course). This needs to be demonstrated prior to enrolment"
     },
     "ARTS3780": {
         "original_rule": "Prerequisite: 48 UOC including 6 UOC at level 1 and 6 UOC at level 2 in European Studies or History. Or 48 UOC including 12 UOC in German Studies language courses. Or 48 UOC and enrolment in an International Studies single or double degree (2017 onwards)<br/><br/>",
@@ -3401,7 +3401,7 @@
     },
     "CODE3202": {
         "original_rule": "Prerequisite: CODE3100 & concurrently enrolled in CODE3202<br/><br/>",
-        "processed_rule": "CODE3100 & concurrently enrolled in CODE3202"
+        "processed_rule": "CODE3100 & concurrently enrolled in"
     },
     "CODE4100": {
         "original_rule": "",
@@ -3725,11 +3725,11 @@
     },
     "COMP4962": {
         "original_rule": "COMP4962 Prerequisite: Students must successfully complete COMP4951<br/><br/>",
-        "processed_rule": "COMP4962 COMP4951"
+        "processed_rule": "COMP4951"
     },
     "COMP4963": {
         "original_rule": "COMP4963 Prerequisite: Student must successfully complete COMP4962<br/><br/>",
-        "processed_rule": "COMP4963 COMP4962"
+        "processed_rule": "COMP4962"
     },
     "COMP6080": {
         "original_rule": "Prerequisite: COMP1531 AND (COMP2521 OR COMP1927)<br/><br/>",
@@ -10493,7 +10493,7 @@
     },
     "SDES2116": {
         "original_rule": "SDES2116 is reserved for students in the Bachelor of Design (4802, Faculty of Art & Design), Bachelor of Architectural Computing (3267, FBE), Diploma in Innovation Management (3451, ASB),  and Design Honours (4809, Faculty of Art & Design)<br/><br/>",
-        "processed_rule": "SDES2116 is reserved for students in the Bachelor of Design (4802, Faculty of Art & Design) && Bachelor of Architectural Computing (3267 && FBE) && Diploma in Innovation Management (3451 && ASB) && && Design Honours (4809, Faculty of Art & Design)"
+        "processed_rule": "is reserved for students in the Bachelor of Design (4802, Faculty of Art & Design) && Bachelor of Architectural Computing (3267 && FBE) && Diploma in Innovation Management (3451 && ASB) && && Design Honours (4809, Faculty of Art & Design)"
     },
     "SDES2167": {
         "original_rule": "",
