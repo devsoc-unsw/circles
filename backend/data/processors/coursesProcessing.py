@@ -31,6 +31,7 @@ def process_courses():
             processed["path_to"] = dict()
 
         process_description(processed, course)
+        format_types(processed)
         process_terms(processed, course)
         process_gen_ed(processed, course)
         process_enrolment_path(processed, course, data)
@@ -47,6 +48,14 @@ def process_description(processed: dict, formatted: dict) -> None:
     """ Removes HTML tags from descriptions """
     if formatted["description"]:
         processed["description"] = re.sub(r"<[^>]*?>", "", formatted["description"])
+
+def format_types(processed: dict) -> None:
+    """ Converts things like UOC and Level to the right type (String->Int) """
+    if processed["UOC"] is not None:
+        processed["UOC"] = int(processed["UOC"])
+    
+    if processed["level"] is not None:
+        processed["level"] = int(processed["level"])
 
 def process_terms(processed: dict, formatted: dict) -> None:
     """ Processes terms: e.g. 'Summer Term, Term 2' to ["ST", "T2"]. 
