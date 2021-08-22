@@ -14,6 +14,36 @@ dummyMap.set("DEFAULT3000", {
   type: "General Education",
   termsOffered: ["t2", "t3"],
 });
+dummyMap.set("DEFAULT4000", {
+  title: "Default course 1",
+  type: "Core",
+  termsOffered: ["t1", "t2"],
+});
+dummyMap.set("DEFAULT5000", {
+  title: "Default course 2",
+  type: "Elective",
+  termsOffered: ["t1", "t2"],
+});
+dummyMap.set("DEFAULT6000", {
+  title: "Default course 3",
+  type: "General Education",
+  termsOffered: ["t2", "t3"],
+});
+dummyMap.set("DEFAULT7000", {
+  title: "Default course 1",
+  type: "Core",
+  termsOffered: ["t1", "t2"],
+});
+dummyMap.set("DEFAULT8000", {
+  title: "Default course 2",
+  type: "Elective",
+  termsOffered: ["t1", "t2"],
+});
+dummyMap.set("DEFAULT9000", {
+  title: "Default course 3",
+  type: "General Education",
+  termsOffered: ["t2", "t3"],
+});
 
 const initialState = {
   unplanned: ["DEFAULT1000", "DEFAULT2000", "DEFAULT3000"],
@@ -51,7 +81,6 @@ const plannerReducer = (state = initialState, action) => {
 
       return { ...state, unplanned: newUnplanned };
 
-<<<<<<< HEAD
             // Append course code onto unplanned
             state.unplanned.join(courseCode)
             console.log(state)
@@ -62,11 +91,5 @@ const plannerReducer = (state = initialState, action) => {
             return state; 
     }
 }
-=======
-    default:
-      return state;
-  }
-};
->>>>>>> fe/dev
 
 export default plannerReducer;

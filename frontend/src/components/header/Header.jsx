@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from 'react-router-dom'
 import { useSelector } from "react-redux";
 import { Menu, Layout, Typography } from "antd";
+import { PlannerCart } from '../plannerCart/PlannerCart'
 import ThemeToggle from "../ThemeToggle";
 import circlesLogo from "../../images/circlesLogo.svg"
 import "./header.less"
@@ -57,6 +58,7 @@ const Header = () => {
                   </Menu.Item>
               </Menu>
             )} 
+            <PlannerCart/>
             <ThemeToggle />
           </div>
         </Layout>

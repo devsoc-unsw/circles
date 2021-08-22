@@ -1,5 +1,6 @@
 const initialState = {
     name: '',
+    email: '', // For google auth verification
     year: 0,
     degree: {
         name: 'Computer Science',
