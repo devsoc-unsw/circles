@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState, useMemo, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
-// import { useDispatch } from 'react-redux';
-import { Select } from 'antd';
-// import debounce from 'lodash/debounce';
+import { useDispatch, useSelector } from 'react-redux';
+import { Select, Spin } from 'antd';
+import debounce from 'lodash/debounce';
+import { courseOptionsActions } from '../../actions/courseOptionsActions';
+import { getCourseById } from './courseProvider';
 // import { getAllCourses } from '../../actions/updateCourses';
 
 const { Option } = Select;
 
 export default function SearchCourse(props) {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const history = useHistory();
   // const courses = useSelector(state => state.updateCourses.courses);
 
@@ -17,9 +19,16 @@ export default function SearchCourse(props) {
   //   dispatch(getAllCourses());
   // }, []);
 
-  function onChange(value) {
-    console.log(`selected ${value}`);
-    props.setCourseId(value);
+  function onChange(value, { data }) {
+    dispatch(courseOptionsActions('APPEND_COURSE', {
+      [value]: {
+        title: data.name,
+        type: data.type,
+        termsOffered: data.terms,
+        prereq: data.prereq
+      }
+    }));
+    console.log(`selected ${value}`, data);
     history.push(`/course-selector/${value}`);
   }
   
@@ -38,6 +47,7 @@ export default function SearchCourse(props) {
   return (
     <Select
       showSearch
+      className="text"
       style={{ width: '20rem', marginRight: '0.5rem' }}
       placeholder="Find a course"
       optionFilterProp="children"
@@ -52,7 +62,7 @@ export default function SearchCourse(props) {
       {
         Object.keys(props.courses).map(course => {
           return (
-            <Option className={"text"} value={ course }>{ course }</Option>
+            <Option className={"text"} value={ course } data={ props.courses[course] }>{ course }</Option>
           )
         })
       }
@@ -98,15 +108,15 @@ export default function SearchCourse(props) {
 
 
 
-// export default function SearchCourse() {
+// export default function SearchCourse(props) {
 //   const [value, setValue] = useState([]);
 
 //   const dispatch = useDispatch();
-//   const courses = useSelector(state => state.updateCourses.courses);
+//   // const courses = useSelector(state => state.updateCourses.courses);
 
-//   useEffect(() => {
-//     dispatch(getAllCourses());
-//   }, []);
+//   // useEffect(() => {
+//   //   dispatch(getAllCourses());
+//   // }, []);
 
 //   async function fetchUserList(username) {
 //     // console.log('fetching user', username);
@@ -118,7 +128,7 @@ export default function SearchCourse(props) {
 //     //       value: user.login.username,
 //     //     })),
 //     //   );
-//     return Object.keys(courses).map(course => ({
+//     return Object.keys(props.courses).map(course => ({
 //       label: course,
 //       value: course
 //     }));

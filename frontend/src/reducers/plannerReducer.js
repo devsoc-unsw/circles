@@ -51,9 +51,22 @@ const plannerReducer = (state = initialState, action) => {
 
       return { ...state, unplanned: newUnplanned };
 
+<<<<<<< HEAD
+            // Append course code onto unplanned
+            state.unplanned.join(courseCode)
+            console.log(state)
+            return state;
+        case 'REMOVE_ALL_UNPLANNED':
+            return { ...state, unplanned: action.payload };
+        default: 
+            return state; 
+    }
+}
+=======
     default:
       return state;
   }
 };
+>>>>>>> fe/dev
 
 export default plannerReducer;

@@ -1,0 +1,46 @@
+{
+  "recentlyViewed": [],
+  "courseOptions": [
+    {
+      "COMP1511": {
+        "title": "Programming Fundamentals",
+        "type": "core",
+        "termsOffered": ["t1", "t2", "t3"],
+        "prereq": []
+      }
+    },
+    {
+
+      "COMP1531": {
+        "title": "Introduction to Software Design",
+        "type": "core",
+        "termsOffered": ["t1", "t3"],
+        "prereq": ["COMP1511"]
+      } 
+    },
+    {
+      "COMP1521": {
+        "title": "Computer Systems Fundamentals",
+        "type": "core",
+        "termsOffered": ["t2", "t3"],
+        "prereq": ["COMP1511"]
+      }
+    },
+    {
+      "COMP6441": {
+        "title": "Security Engineering and Cyber Security",
+        "type": "elective",
+        "termsOffered": ["t1"],
+        "prereq": ["COMP2521"]
+      }
+    },
+    {
+      "DDES1140": {
+        "title": "Graphics 1: Image and Type",
+        "type": "gened",
+        "termsOffered": ["t0", "t1", "t2", "t3"],
+        "prereq": []
+      }
+    }
+  ]
+}
