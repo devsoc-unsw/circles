@@ -64,11 +64,6 @@ const plannerReducer = (state = initialState, action) => {
       let newUnplanned = state.unplanned.filter(course => course != action.payload);
       console.log(newUnplanned);
       return { ...state, unplanned: newUnplanned };
-
-            // Append course code onto unplanned
-            state.unplanned.join(courseCode)
-            console.log(state)
-            return state;
     case 'REMOVE_ALL_UNPLANNED':
         return { ...state, unplanned: action.payload };
     case 'REMOVE_COURSE':
@@ -113,6 +108,12 @@ const plannerReducer = (state = initialState, action) => {
           return state; 
     };
  
+}
+        case 'REMOVE_ALL_UNPLANNED':
+            return { ...state, unplanned: action.payload };
+        default: 
+            return state; 
+    }
 }
 
 export default plannerReducer;

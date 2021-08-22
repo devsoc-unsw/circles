@@ -34,6 +34,19 @@ export default function CourseSelector() {
     dispatch(getAllCourses());
   }, []);
 
+  const addAllCoreToPlan = () => {
+    courseOptions.core.map(course => dispatch(plannerActions('ADD_TO_UNPLANNED', Object.keys(course)[0], course)));
+  }
+
+  const removeAllPlanned = () => {
+    dispatch(plannerActions('REMOVE_ALL_UNPLANNED', []));
+  }
+
+  const resetSelectedCourses = () => {
+    dispatch(courseOptionsActions('SET_ELECTIVE_COURSES', []));
+    dispatch(courseOptionsActions('SET_GENED_COURSES', []));
+  }
+
   return (
     <>
     {/* {JSON.stringify(courses)} */}
