@@ -1,13 +1,17 @@
 import React from 'react';
 import { Divider, Tooltip, Button, Typography } from 'antd';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { ReactComponent as PlannerIcon } from '../assets/planner-icon.svg';
 import { DeleteOutlined } from '@ant-design/icons';
+import { plannerActions } from '../../actions/plannerActions';
 import './plannerCart.less';
 
 const { Text, Title } = Typography;   
 const CourseCard = ({ code, title }) => {
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
+    const deleteCourse = () => {
+        dispatch(plannerActions("REMOVE_COURSE", code));
+    }
     return (
         <div className="planner-cart-course-card">
             <Divider /> 
@@ -19,9 +23,7 @@ const CourseCard = ({ code, title }) => {
                 <div className="planner-cart-card-actions">
                     <Tooltip title={`Remove ${code} from your planner`}>
                         <Button danger size="small" shape="circle" icon={<DeleteOutlined />}
-                            onClick={() => {
-                                
-                            }}
+                            onClick={deleteCourse}
                         />
                     </Tooltip>
                 </div>
@@ -32,6 +34,7 @@ const CourseCard = ({ code, title }) => {
 export const PlannerCart = () => {
     const [openMenu, setOpenMenu] = React.useState(false);
     const courses = useSelector(store => store.planner.courses);
+    console.log(courses);
     return (
         <div className='planner-cart-root'>
             <Tooltip title="Your courses">
