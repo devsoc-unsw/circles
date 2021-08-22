@@ -10,7 +10,17 @@ export const plannerActions = (action, payload) => {
                 type: action,
                 payload
             }
+        case "SET_YEARS":
+          return {
+            type: "SET_YEARS",
+            payload: payload,
+          };
+        case "SET_UNPLANNED":
+          return {
+            type: action,
+            payload: payload,
+        };
         default: 
             return;
     }
-}
+};

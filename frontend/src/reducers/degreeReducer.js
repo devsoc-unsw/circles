@@ -1,15 +1,40 @@
-/// FOR DEBUGGING REASONS, I've set initial state
-const dummy_degree = {
-  code: "3526", 
-  name: "This is a dummy degree (From Reducer)"
+const initial = {
+    currStep: 0, 
+    program: "",
+    specialisation: "",
+    minor: "",
 }
-const degreeReducer = (state = dummy_degree, action) => {
-    switch (action.type) {
-      case "SET_DEGREE":
-        return (state = action.payload);
-      default:
-        return state;
+const degreeReducer = (state=initial, action) => { 
+    switch (action.type) { 
+        case 'SET_DEGREE': 
+            return {
+                ...state, 
+                program: action.payload
+            }; 
+        case 'SET_SPECIALISATION': 
+            return {
+                ...state, 
+                specialisation: action.payload
+            };  
+        case 'SET_MINOR':  
+            return {
+                ...state,
+                minor: action.payload
+            }; 
+        case 'NEXT_STEP': 
+            if (state.currStep >= 3) return state; 
+            return {
+                ...state,
+                currStep: state.currStep + 1
+            }; 
+        case 'PREV_STEP': 
+            if (state.currStep == 0) return state;
+            return {
+                ...state,
+                currStep: state.currStep - 1
+            };
+        default: 
+            return state;    
     }
-  };
-  export default degreeReducer;
-  
+}
+export default degreeReducer; 
