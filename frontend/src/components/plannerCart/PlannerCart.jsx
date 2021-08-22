@@ -34,7 +34,11 @@ const CourseCard = ({ code, title }) => {
 export const PlannerCart = () => {
     const [openMenu, setOpenMenu] = React.useState(false);
     const courses = useSelector(store => store.planner.courses);
-    console.log(courses);
+    const years = useSelector(store => store.planner.years);
+    const dispatch = useDispatch();
+    const deleteAllCourses = () => {
+        dispatch(plannerActions('REMOVE_ALL_COURSES'))
+    }
     return (
         <div className='planner-cart-root'>
             <Tooltip title="Your courses">
@@ -49,6 +53,10 @@ export const PlannerCart = () => {
                     { [...courses.keys()].reverse().map((courseCode) => 
                          <CourseCard code={courseCode} title={courses.get(courseCode).title}/>
                     )}
+                    { courses.size > 0 
+                        ? <Button danger onClick={deleteAllCourses}>Delete all courses</Button> 
+                        : <Text className='text'> You have not selected any courses. Find them in our course selector</Text>
+                    }
                 </div>
             )}
         </div>

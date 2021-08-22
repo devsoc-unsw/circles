@@ -34,19 +34,6 @@ export default function CourseSelector() {
     dispatch(getAllCourses());
   }, []);
 
-  const addAllCoreToPlan = () => {
-    courseOptions.core.map(course => dispatch(plannerActions('ADD_TO_UNPLANNED', Object.keys(course)[0], course)));
-  }
-
-  const removeAllPlanned = () => {
-    dispatch(plannerActions('REMOVE_ALL_UNPLANNED', []));
-  }
-
-  const resetSelectedCourses = () => {
-    dispatch(courseOptionsActions('SET_ELECTIVE_COURSES', []));
-    dispatch(courseOptionsActions('SET_GENED_COURSES', []));
-  }
-
   return (
     <>
     {/* {JSON.stringify(courses)} */}
@@ -55,18 +42,8 @@ export default function CourseSelector() {
         {/* { JSON.stringify(degree) } */}
           <div className='cs-degree-cont'>
             <h1 className='text'>{ degree.code } - { degree.name }</h1>
-            {/* @Gabriella, you should not assume that there will be a major. Consider working together with Sally to make a data structure for degree. */}
-            {/* <h2 className={ `${classes.zero} ${classes.major} text` }>{ degree.majors[0].code }</h2> */}
           </div>
-          {/* <div className={ classes.searchCont }> */}
           <SearchCourse courses={ courses } />
-          <div className='cs-buttons'>
-            <Button type="primary" style={{ marginRight: '0.5rem'}} onClick={ addAllCoreToPlan }>Add all core to plan</Button>
-            <Button type="primary" style={{ marginRight: '0.5rem'}} onClick={ removeAllPlanned }>Remove unplanned from planner</Button>
-            <Button type="primary" onClick={ resetSelectedCourses }>Reset selected courses</Button>
-          </div>
-            {/* <FilterOutlined style={{ cursor: 'pointer', fontSize: '1.3rem' }}/> */}
-          {/* </div> */}
         </div>
         <div className='cs-bottom-cont'>
           <CourseMenu/>

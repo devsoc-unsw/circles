@@ -25,6 +25,11 @@ export const plannerActions = (action, payload) => {
                 type: action, 
                 payload: payload,
             }
+        case "REMOVE_ALL_COURSES":
+            return {
+                type: action, 
+                payload: null,
+            }
         default: 
             return;
     }

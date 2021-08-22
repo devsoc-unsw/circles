@@ -17,6 +17,7 @@ const TermPlanner = () => {
   const { years, startYear, courses } = useSelector((state) => {
     return state.planner;
   });
+  console.log(years, courses);
   const [visible, setVisible] = useState(false); // visibility for side drawer
   const dispatch = useDispatch();
 

@@ -6,9 +6,8 @@ import { useSelector } from "react-redux";
 function DraggableCourse({ code, index }) {
   //   let code = course.match(/([A-Z]{4}[0-9]{4}):/)[1];
   const { Text } = Typography;
-  const { courses } = useSelector((state) => {
-    return state.planner;
-  });
+  const { courses } = useSelector(state => state.planner);
+  console.log(code);
   const courseName = courses.get(code)["title"];
 
   return (
