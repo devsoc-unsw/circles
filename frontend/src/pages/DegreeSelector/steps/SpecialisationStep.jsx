@@ -16,7 +16,7 @@ export const SpecialisationStep = () => {
     // Fetch the minors
     const [selected, setSelected] = React.useState("Select Specialisation"); 
     return (
-        <div>
+        <div className='steps-root-container'>
             <Title level={3} className="text">
                 specialising in 
             </Title>
@@ -39,24 +39,18 @@ export const SpecialisationStep = () => {
                 </option>
             )}
             </select>
-            <div className='steps-action-container'>
-                <Button onClick={() => {
-                    dispatch(degreeActions('PREV_STEP'));
+            {selected !== "Select Specialisation" && (
+                <Button 
+                    className='steps-next-btn'
+                    type="primary"
+                    onClick={() => {
+                        dispatch(degreeActions('SET_MINOR', selected));
+                        dispatch(degreeActions('NEXT_STEP', selected));
                 }}>
-                    Back
+                    Next 
+                    {/* if no minors */}
                 </Button>
-                {selected !== "Select Specialisation" && (
-                    <Button 
-                        type="primary"
-                        onClick={() => {
-                            dispatch(degreeActions('SET_MINOR', selected));
-                            dispatch(degreeActions('NEXT_STEP', selected));
-                    }}>
-                        Next 
-                        {/* if no minors */}
-                    </Button>
-                )}
-            </div>
+            )}
         </div>
        
     )

@@ -10,6 +10,12 @@ const options = [
     'Bachelor of Commerce',
     'Bachelor of Commerce/Law',
     'Bachelor of Engineering (Honours)',
+    'Bachelor of Medical Studies/Doctor of Medicine',
+    'Bachelor of Arts', 
+    'Bachelor of Computer Science',
+    'Bachelor of Commerce',
+    'Bachelor of Commerce/Law',
+    'Bachelor of Engineering (Honours)',
     'Bachelor of Medical Studies/Doctor of Medicine'
 ]
 const { Title } = Typography;
@@ -18,12 +24,12 @@ export const DegreeStep = () => {
     const [input, setInput] = React.useState('')
     const [selected, setSelected] = React.useState(null);
     return (
-        <div className='degree-step-root'>
+        <div className='steps-root-container'>
             <Title level={3} className="text">
                 I am studying 
             </Title>
             <input 
-                className='degree-search-input'
+                className='steps-search-input'
                 type="text"
                 value={input}
                 placeholder="Search Degree"
@@ -35,14 +41,14 @@ export const DegreeStep = () => {
                     mode="inline"
                 >
                     { options.map(option => 
-                    <Menu.Item key={option}>{option}</Menu.Item>
+                    <Menu.Item className='text' key={option}>{option}</Menu.Item>
                     )}  
                 </Menu>
             )}
 
-            {selected && (
+            {(selected && input !== "") && (
                 <Button
-                    className='degree-next-btn'
+                    className='steps-next-btn'
                     type="primary"
                     onClick={() => {
                         dispatch(degreeActions('SET_DEGREE', selected));
