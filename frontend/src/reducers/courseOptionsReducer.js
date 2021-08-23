@@ -19,7 +19,7 @@ const courseOptionsReducer = (state = initialState, action) => {
         case 'APPEND_COURSE':
             const type = action.payload[Object.keys(action.payload)[0]].type;
             let found = false;
-            state[type].filter(course => {
+            state[type].forEach(course => {
                 if (Object.keys(course)[0] === Object.keys(action.payload)[0]) {
                     found = true;
                 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Typography } from 'antd';
 import { degreeActions } from '../../../actions/degreeActions';
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import './steps.less';
 const options = [
     'SPECIALISATION 1', 
@@ -12,7 +12,7 @@ const options = [
 const { Title } = Typography;
 export const SpecialisationStep = () => {
     const dispatch = useDispatch();
-    const program = useSelector(store => store.degree.program);
+    // const program = useSelector(store => store.degree.program);
     // Fetch the minors
     const [selected, setSelected] = React.useState("Select Specialisation"); 
     return (

@@ -1,8 +1,7 @@
 import React from 'react';
 import { Button, Typography } from 'antd';
-import { useHistory } from 'react-router-dom';
 import { degreeActions } from '../../../actions/degreeActions';
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import './steps.less';
 const options = [
     'MINOR 1', 
@@ -14,8 +13,7 @@ const options = [
 const { Title } = Typography;
 export const MinorStep = () => {
     const dispatch = useDispatch();
-    const history = useHistory();  
-    const program = useSelector(store => store.degree.program);
+    // const program = useSelector(store => store.degree.program);
     // Fetch the minors
     const [selected, setSelected] = React.useState("Select Minor"); 
     return (
@@ -45,7 +43,10 @@ export const MinorStep = () => {
             </select>
 
             <Button type="primary" className='steps-next-btn'
-                onClick={() => dispatch(degreeActions('SET_MINOR', selected))}
+                onClick={() => {
+                    dispatch(degreeActions('SET_MINOR', selected));
+                    dispatch(degreeActions('NEXT_STEP'))
+                }}
             >
                 Next
             </Button>

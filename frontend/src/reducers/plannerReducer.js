@@ -25,7 +25,7 @@ dummyMap.set("DEFAULT4000", {
 });
 
 const generateEmptyYears = (nYears) => {
-  let res = new Array();
+  let res = [];
   for (let i = 0; i < nYears; ++i) {
     const year = { t1: [], t2: [], t3: [] };
     res.push(year);
@@ -61,7 +61,7 @@ const plannerReducer = (state = initialState, action) => {
       return { ...state, years: action.payload };
 
     case "SET_UNPLANNED":
-      let newUnplanned = state.unplanned.filter(course => course != action.payload);
+      let newUnplanned = state.unplanned.filter(course => course !== action.payload);
       console.log(newUnplanned);
       return { ...state, unplanned: newUnplanned };
     case 'REMOVE_ALL_UNPLANNED':
@@ -77,7 +77,7 @@ const plannerReducer = (state = initialState, action) => {
         // Example plannedTerm: '2021t2'
         const yearIndex = parseInt(plannedTerm.slice(0, 4)) - state.startYear ;
         const term = plannedTerm.slice(4);
-        const newTerm = state.years[yearIndex][term].filter(course => course != action.payload);  
+        const newTerm = state.years[yearIndex][term].filter(course => course !== action.payload);  
         const newYear = new Object(state.years[yearIndex]);
         newYear[term] = newTerm; 
         const newYears = new Object(state.years);
@@ -90,7 +90,7 @@ const plannerReducer = (state = initialState, action) => {
       } else {
         return {
           ...state,
-          unplanned: state.unplanned.filter(course => course != action.payload),
+          unplanned: state.unplanned.filter(course => course !== action.payload),
           courses: newCourses,
         }
       }

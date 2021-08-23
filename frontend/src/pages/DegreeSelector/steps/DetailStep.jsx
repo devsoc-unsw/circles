@@ -18,26 +18,32 @@ export const DetailStep = () => {
     const [outOfDateError, setOutOfDateError] = React.useState(false);
     const handleStartYear = (e) => {
         const input = parseInt(e.target.value);
+        setYearStart(input);
         // Our website may be out of date for the user
         setOutOfDateError(input < currYear - 10);
 
         // Starting year cannot be after ending year
         setYearStartError(input >= yearEnd);
 
-        // No errors
-        if (!yearStartError) setYearStart(input);
+        (outOfDateError || yearStartError) 
+        ? e.target.classlist.add('steps-input-warning') 
+        : e.target.classlist.remove('steps-input-warning');
     }
 
     const handleEndYear = (e) => {
         const input = parseInt(e.target.value);
+        setYearEnd(input);
+        
         // Our website may be out of date for the user
         setOutOfDateError(input > currYear + 10)
-
+        
         // Ending year cannot be before starting year
         setYearEndError(input <= yearStart);
+        
+        (outOfDateError || yearEndError) 
+        ? e.target.classlist.add('steps-input-warning') 
+        : e.target.classlist.remove('steps-input-warning');
 
-        // No errors 
-        if (!yearEndError) setYearEnd(input);
     }
     return (
         <div className='steps-root-container'>
@@ -57,7 +63,7 @@ export const DetailStep = () => {
                 className='steps-search-input'
                 type='number'
                 value={yearEnd}
-                onChange={(e) =>    handleEndYear(e)}
+                onChange={(e) => handleEndYear(e)}
             />
 
             {(!yearStartError && !yearEndError ) && (

@@ -10,7 +10,6 @@ const allReducers = combineReducers({
   courseOptions: courseOptionsReducer,
   updateCourses: updateCoursesReducer,
   planner: plannerReducer,
-  degree: degreeReducer,
   user: userReducer,
   theme: themeReducer,
 });
