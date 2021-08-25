@@ -1,9 +1,10 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { Typography, Button, Modal } from 'antd';
+import { Typography, Button, Modal, Alert } from 'antd';
 import { plannerActions } from '../../../actions/plannerActions';
 import './steps.less';
+import { CheckOutlined } from '@ant-design/icons';
 
 
 // TODO: Add to unplanned with extra information
@@ -27,47 +28,20 @@ export const DetailStep = () => {
     const history = useHistory();
     const currYear = parseInt(new Date().getFullYear());
     const [yearStart, setYearStart] = React.useState(currYear);
-    const [yearStartError, setYearStartError] = React.useState(false);
-    // Adjust this when be is linked
-    const [yearEnd, setYearEnd] = React.useState(currYear + 3);
-    const [yearEndError, setYearEndError] = React.useState(false);
-
-    const [outOfDateError, setOutOfDateError] = React.useState(false);
+    // Use be results for this
+    const [duration, setDuration] = React.useState(5);
     const [openModal, setOpenModal] = React.useState(false);
     const [loading, setLoading] = React.useState(false);
+    const [completed, setCompleted] = React.useState(false);
     const handleStartYear = (e) => {
         const input = parseInt(e.target.value);
         setYearStart(input);
-        // Our website may be out of date for the user
-        setOutOfDateError(input < currYear - 10);
-
-        // Starting year cannot be after ending year
-        setYearStartError(input >= yearEnd);
-
-        (outOfDateError || yearStartError) 
-        ? e.target.classlist.add('steps-input-warning') 
-        : e.target.classlist.remove('steps-input-warning');
-    }
-
-    const handleEndYear = (e) => {
-        const input = parseInt(e.target.value);
-        setYearEnd(input);
-        
-        // Our website may be out of date for the user
-        setOutOfDateError(input > currYear + 10)
-        
-        // Ending year cannot be before starting year
-        setYearEndError(input <= yearStart);
-        
-        (outOfDateError || yearEndError) 
-        ? e.target.classlist.add('steps-input-warning') 
-        : e.target.classlist.remove('steps-input-warning');
-
     }
 
     const handleNoCoreCourses = () => {
         history.push('/course-selector');
     }
+
     const handleAddCoreCoures = () => {
         setLoading(true);
         // Do fetch call here.
@@ -75,9 +49,11 @@ export const DetailStep = () => {
         setTimeout(() => {
             setLoading(false);
             setOpenModal(false);
+            setCompleted(true);
             history.push('/course-selector');
-        }, 3000);
-      };
+        }, 1500);
+    };
+
     return (
         <div className='steps-root-container'>
             <Title level={3} className='text'>
@@ -92,26 +68,29 @@ export const DetailStep = () => {
             <Title level={3} className='text'>
                 and complete my degree in
             </Title>
-            <input 
-                className='steps-search-input'
-                type='number'
-                value={yearEnd}
-                onChange={(e) => handleEndYear(e)}
-            />
+            <select className='steps-dropdown text'
+                name="Number of years"
+                value={duration}
+                onChange={e => setDuration(e.target.value)}
+            >
+                <option className='text' key={0} value={3}>3 Years</option>
+                <option className='text' key={1} value={4}>4 Years</option>
+                <option className='text' key={2} value={5}>5 Years</option>
+                <option className='text' key={3} value={6}>6 Years</option>
+                <option className='text' key={4} value={7}>7 Years</option>
+                <option className='text' key={5} value={8}>8 Years</option>
+            </select>
 
-            {(!yearStartError && !yearEndError ) && (
-                <Button
-                    className='steps-next-btn'
-                    type="primary"
-                    onClick={() => {
-                        const degreeLength = yearEnd - yearStart;
-                        dispatch(plannerActions('SET_YEAR_START', yearStart));
-                        dispatch(plannerActions('SET_DEGREE_LENGTH', degreeLength))
-                        setOpenModal(true);
-                }}>
-                    Start browsing courses
-                </Button>
-            )}
+            <Button
+                className='steps-next-btn'
+                type="primary"
+                onClick={() => {
+                    dispatch(plannerActions('SET_YEAR_START', yearStart));
+                    dispatch(plannerActions('SET_DEGREE_LENGTH', duration))
+                    setOpenModal(true);
+            }}>
+                Start browsing courses
+            </Button>
 
             <Modal className='step-modal' title="One last step!" 
                 onCancel={() => setOpenModal(false)}
@@ -123,10 +102,15 @@ export const DetailStep = () => {
                     </Button>,
                     <Button key="yes-core-courses" type="primary" 
                         loading={loading} onClick={handleAddCoreCoures}>
-                        Yes 
+                        Yes
                     </Button>
-                  ]}>
-                <p>Would you like to automatically add compulsory courses to your planner? </p>
+                ]}
+            >
+                {loading 
+                    ? <><CheckOutlined/> Adding your compulsory courses...</> 
+                    : <p>Would you like to automatically add compulsory courses to your planner? </p>
+                }
+                
             </Modal>
         </div>
     )

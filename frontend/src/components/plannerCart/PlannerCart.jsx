@@ -17,7 +17,7 @@ const CourseCard = ({ code, title }) => {
             <Divider /> 
             <div className='planner-cart-card-content'>
                 <div>
-                    <Title className='text' level={5}>{code}</Title>
+                    <Text className='text' strong>{code}: </Text>
                     <Text className='text' >{title}</Text>
                 </div>
                 <div className="planner-cart-card-actions">
@@ -54,7 +54,7 @@ export const PlannerCart = () => {
                          <CourseCard code={courseCode} title={courses.get(courseCode).title}/>
                     )}
                     { courses.size > 0 
-                        ? <Button danger block onClick={deleteAllCourses}>Delete all courses</Button> 
+                        ? <Button danger block  onClick={deleteAllCourses}>Delete all courses</Button> 
                         : <Text className='text'> You have not selected any courses. Find them in our course selector</Text>
                     }
                 </div>
