@@ -1,26 +1,25 @@
 import React from 'react';
 import { Button, Typography } from 'antd';
-import { useHistory } from 'react-router-dom';
 import { degreeActions } from '../../../actions/degreeActions';
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import './steps.less';
 const options = [
     'MINOR 1', 
     'MINOR 2', 
     'MINOR 3', 
     'MINOR 4', 
+    'No minors',
 ];  
 const { Title } = Typography;
 export const MinorStep = () => {
     const dispatch = useDispatch();
-    const history = useHistory();  
-    const program = useSelector(store => store.degree.program);
+    // const program = useSelector(store => store.degree.program);
     // Fetch the minors
     const [selected, setSelected] = React.useState("Select Minor"); 
     return (
-        <div>
+        <div className="steps-root-container">
              <Title level={3} className="text">
-                and minoring in 
+                and minoring in (optional)
             </Title>
             <select 
                 className='steps-dropdown'
@@ -42,21 +41,16 @@ export const MinorStep = () => {
                     </option>
                 )}
             </select>
-            <div className='steps-action-container'>
-                <Button onClick={() => {
-                    dispatch(degreeActions('PREV_STEP'));
-                }}>
-                    Back
-                </Button>
-                {selected !== "Select Minor" && (
-                    <Button type="primary" onClick={() => {
-                        dispatch(degreeActions('SET_MINOR', selected));
-                        history.push('/course-selector');
-                    }}>
-                        Start planning your courses
-                    </Button>
-                )}
-            </div>
+
+            <Button type="primary" className='steps-next-btn'
+                onClick={() => {
+                    dispatch(degreeActions('SET_MINOR', selected));
+                    dispatch(degreeActions('NEXT_STEP'))
+                }}
+            >
+                Next
+            </Button>
+            
         </div>
         
        

@@ -22,13 +22,14 @@ const degreeReducer = (state=initial, action) => {
                 minor: action.payload
             }; 
         case 'NEXT_STEP': 
-            if (state.currStep >= 3) return state; 
+            console.log('currStep', state.currStep)
+            if (state.currStep > 5) return state; 
             return {
                 ...state,
                 currStep: state.currStep + 1
             }; 
         case 'PREV_STEP': 
-            if (state.currStep == 0) return state;
+            if (state.currStep === 0) return state;
             return {
                 ...state,
                 currStep: state.currStep - 1

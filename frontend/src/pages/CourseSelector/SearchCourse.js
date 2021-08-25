@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useMemo, useRef } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { Select, Spin } from 'antd';
-import debounce from 'lodash/debounce';
+import { useDispatch } from 'react-redux';
+import { Select } from 'antd';
+// import debounce from 'lodash/debounce';
 import { courseOptionsActions } from '../../actions/courseOptionsActions';
-import { getCourseById } from './courseProvider';
+// import { getCourseById } from './courseProvider';
 // import { getAllCourses } from '../../actions/updateCourses';
 
 const { Option } = Select;

@@ -22,7 +22,7 @@ function ThemeToggle() {
       document.body.classList.remove("light");
       document.body.classList.add("dark");
     }
-  }, [theme]);
+  }, [theme, dispatch]);
 
   const toggleStyle = {
     backgroundColor: theme === "light" ? "#b37feb" : "#722ed1",

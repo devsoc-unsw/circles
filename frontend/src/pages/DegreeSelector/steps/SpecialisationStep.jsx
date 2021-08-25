@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Typography } from 'antd';
 import { degreeActions } from '../../../actions/degreeActions';
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import './steps.less';
 const options = [
     'SPECIALISATION 1', 
@@ -12,11 +12,11 @@ const options = [
 const { Title } = Typography;
 export const SpecialisationStep = () => {
     const dispatch = useDispatch();
-    const program = useSelector(store => store.degree.program);
+    // const program = useSelector(store => store.degree.program);
     // Fetch the minors
     const [selected, setSelected] = React.useState("Select Specialisation"); 
     return (
-        <div>
+        <div className='steps-root-container'>
             <Title level={3} className="text">
                 specialising in 
             </Title>
@@ -39,24 +39,18 @@ export const SpecialisationStep = () => {
                 </option>
             )}
             </select>
-            <div className='steps-action-container'>
-                <Button onClick={() => {
-                    dispatch(degreeActions('PREV_STEP'));
+            {selected !== "Select Specialisation" && (
+                <Button 
+                    className='steps-next-btn'
+                    type="primary"
+                    onClick={() => {
+                        dispatch(degreeActions('SET_MINOR', selected));
+                        dispatch(degreeActions('NEXT_STEP', selected));
                 }}>
-                    Back
+                    Next 
+                    {/* if no minors */}
                 </Button>
-                {selected !== "Select Specialisation" && (
-                    <Button 
-                        type="primary"
-                        onClick={() => {
-                            dispatch(degreeActions('SET_MINOR', selected));
-                            dispatch(degreeActions('NEXT_STEP', selected));
-                    }}>
-                        Next 
-                        {/* if no minors */}
-                    </Button>
-                )}
-            </div>
+            )}
         </div>
        
     )

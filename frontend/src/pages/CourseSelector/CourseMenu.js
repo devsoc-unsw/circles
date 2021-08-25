@@ -12,7 +12,7 @@ const MenuItem = ({courseCode}) => {
   const history = useHistory();
   return (
     <Menu.Item 
-      className={"text"} 
+      className='text'
       key={courseCode}
       onClick={() => history.push(`/course-selector/${courseCode}`)}
     >
@@ -77,25 +77,25 @@ export default function CourseMenu() {
           <SubMenu className={"text"} key="recently-viewed" title="Recently Viewed">
             { courseOptions.recentlyViewed.length === 0
               ? <Menu.Item key={'empty-recently-viewed'} disabled> No courses here (ㆆ_ㆆ) </Menu.Item>
-              : courseOptions.recentlyViewed.map(courseCode => <Menu.Item className="text" key={courseCode} onClick={() => goToCourse(courseCode)}>{courseCode}</Menu.Item>) 
+              : courseOptions.recentlyViewed.map(course => <MenuItem courseCode={course}/>) 
             }
           </SubMenu>
           <SubMenu  className={"text"} key="core" title="Core">
             { courseOptions.core.length === 0
               ? <Menu.Item key={'empty-core'} disabled> No courses here (ㆆ_ㆆ) </Menu.Item>
-              : courseOptions.core.map(course => <Menu.Item className="text" key={Object.keys(course)[0]} onClick={() => goToCourse(Object.keys(course)[0])}>{Object.keys(course)[0]}</Menu.Item>) 
+              : courseOptions.core.map(course => <MenuItem courseCode={Object.keys(course)[0]}/>) 
             }
           </SubMenu>
           <SubMenu className={"text"} key="electives" title="Electives">
             { courseOptions.electives.length === 0
               ? <Menu.Item key={'empty-electives'} disabled> No courses here (ㆆ_ㆆ) </Menu.Item>
-              : courseOptions.electives.map(course => <Menu.Item className="text" key={Object.keys(course)[0]} onClick={() => goToCourse(Object.keys(course)[0])}>{Object.keys(course)[0]}</Menu.Item>) 
+              : courseOptions.electives.map(course => <MenuItem courseCode={Object.keys(course)[0]}/>) 
             }
           </SubMenu>
           <SubMenu  className={"text"} key="general-education" title="General Education">
             { courseOptions.genEds.length === 0
               ? <Menu.Item key={'empty-general-education'} disabled> No courses here (ㆆ_ㆆ) </Menu.Item>
-              : courseOptions.genEds.map(course => <Menu.Item className="text" key={Object.keys(course)[0]} onClick={() => goToCourse(Object.keys(course)[0])}>{Object.keys(course)[0]}</Menu.Item>) 
+              : courseOptions.genEds.map(course => <MenuItem courseCode={Object.keys(course)[0]}/>) 
             }
           </SubMenu>
         </Menu>

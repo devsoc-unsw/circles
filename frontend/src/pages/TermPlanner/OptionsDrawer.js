@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { plannerActions } from "../../actions/plannerActions";
+import React from "react";
 import { Typography, Drawer, Collapse, Alert } from "antd";
 import { Droppable } from "react-beautiful-dnd";
 import DraggableCourse from "./DraggableCourse";
