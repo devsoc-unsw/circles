@@ -1,13 +1,14 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { Typography, Button } from 'antd';
-import { plannerActions } from '../../../actions/plannerActions'
-import { degreeActions } from '../../../actions/degreeActions'
+import { plannerActions } from '../../../actions/plannerActions';
 import './steps.less';
 
 const { Title } = Typography;
 export const DetailStep = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const currYear = parseInt(new Date().getFullYear());
     const [yearStart, setYearStart] = React.useState(currYear);
     const [yearStartError, setYearStartError] = React.useState(false);
@@ -72,11 +73,11 @@ export const DetailStep = () => {
                     type="primary"
                     onClick={() => {
                         const degreeLength = yearEnd - yearStart;
-                        dispatch(plannerActions('YEAR_START', yearStart));
+                        dispatch(plannerActions('SET_YEAR_START', yearStart));
                         dispatch(plannerActions('SET_DEGREE_LENGTH', degreeLength))
-                        dispatch(degreeActions('NEXT_STEP'));
+                        history.push('/course-selector');
                 }}>
-                    Next
+                    Start browsing courses
                 </Button>
             )}
         </div>
