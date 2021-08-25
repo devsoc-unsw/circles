@@ -1,6 +1,8 @@
 """
 Apply heavy manual fixes to processed rules in preprocessedRules.json so that
 they can be fed into algorithms.
+
+Run this code after running conditionsPreprocessing.py
 """
 
 from data.utility import dataHelpers
@@ -10,12 +12,12 @@ PRO_RULE = "processed_rule"
 
 COURSES = dataHelpers.read_data("data/finalData/coursesProcessed.json")
 
-# TODO: create utility file with these mappings?
+# TODO: create utility file with these mappings in future?
 SPN_MAP = {
     "CSE_MAJORS": ["COMPA1", "COMPD1", "COMPD1", "COMPE1", "COMPI1", "COMPJ1", 
                    "COMPN1", "COMPS1", "COMPY1", "COMPZ1", "BINFB1"],
     "COMP_MAJORS": ["COMPA1", "COMPD1", "COMPD1", "COMPE1", "COMPI1", 
-                    "COMPJ1", "COMPN1", "COMPS1", "COMPY1", "COMPZ1"]
+                    "COMPJ1", "COMPN1", "COMPS1", "COMPY1", "COMPZ1"],
 }
 
 def fix_conditions():
@@ -31,12 +33,19 @@ def fix_conditions():
 
     RULES["COMP4920"][PRO_RULE] = COMP_4920()
 
-    RULES["COMP4951"][PRO_RULE] = COMP_4951()
+    RULES["COMP4951"] = COMP_4951(RULES["COMP4951"])
 
     RULES["COMP4952"][PRO_RULE] = COMP_4952()
     RULES["COMP4953"][PRO_RULE] = COMP_4953()
 
     RULES["COMP4961"][PRO_RULE] = COMP_4961()
+
+    RULES["COMP6721"][PRO_RULE] = COMP_6721("COMP6721")
+
+    RULES["COMP9301"] = COMP_9301(RULES["COMP9301"])
+    RULES["COMP9302"] = COMP_9302(RULES["COMP9302"])
+
+    RULES["COMP9491"][PRO_RULE] = COMP_9491()
 
     dataHelpers.write_data(RULES, "data/finalData/preprocessedRules.json")
     dataHelpers.write_data(COURSES, "data/finalData/coursesProcessed.json")
@@ -100,14 +109,20 @@ def COMP_4920():
 
     return "(COMP2511 || COMP2911) && 96UOC in COMP"
 
-def COMP_4951():
+def COMP_4951(rules):
     """
     "original_rule": "Prerequisite: Enrolled in a CSE BE (Hons) programs, completion of 126 UOC and completion of 3rd year core.<br/><br/>"
 
-    "processed_rule": "Enrolled in a CSE BE (Hons) s && 126UOC && completion of 3rd year core"
+    "processed_rule": "126UOC"
+
+    "warning": "You must be enrolled in a CSE BE (Hons) program and complete all third year core requirements to enrol in this course."
     """
-    # TODO
-    pass 
+    # FIXME: What is included in CSE BE (Hons)?
+    return {
+        "original_rule": rules["original_rule"],
+        "processed_rule": "126UOC",
+        "warning": "You must be enrolled in a CSE BE (Hons) program and complete all third year core requirements to enrol in this course."
+    }
 
 def COMP_4952():
     """
@@ -132,6 +147,51 @@ def COMP_4961():
     "processed_rule": "4515 Bachelor of Computer Science (Hons) || 3648"
     """
     return "4515 || 3648"
+
+def COMP_6721(code):
+    """
+    "original_rule": "Pre-requisite: MATH1081 AND COMP2521 AND (not enrolled in SENGAH)<br/><br/>"
+
+    "processed_rule": "MATH1081 && COMP2521"
+    """
+    COURSES[code]["exclusions"]["SENGAH"] = 1
+    return "MATH1081 && COMP2521"
+
+def COMP_9301(rules):
+    """
+    "original_rule": "(COMP6441 OR COMP6841) AND (6 UOC from  (COMP6443, COMP6843, COMP6445, COMP6845, COMP6447)) AND enrolled in final term of program<br/><br/>",
+
+    "processed_rule": "(COMP6441 || COMP6841) && (6UOC from (COMP6443 && COMP6843 && COMP6445 && COMP6845 && COMP6447))",
+
+    "warning": "This course can only be taken in the final term of your program."
+    """
+    return {
+        "original_rule": rules["original_rule"],
+        "processed_rule": "(COMP6441 || COMP6841) && (6UOC from (COMP6443 && COMP6843 && COMP6445 && COMP6845 && COMP6447))",
+        "warning": "This course can only be taken in the final term of your program."      
+    }
+
+def COMP_9302(rules):
+    """
+    "original_rule": "(COMP6441 OR COMP6841) AND (12 UOC from (COMP6443, COMP6843, COMP6445, COMP6845, COMP6447)) AND enrolled in final term of program<br/><br/>",
+
+    "processed_rule": "(COMP6441 || COMP6841) && (12UOC from (COMP6443 && COMP6843 && COMP6445 && COMP6845 && COMP6447))",
+
+    "warning": "This course can only be taken in the final term of your program."
+    """
+    return {
+        "original_rule": rules["original_rule"],
+        "processed_rule": "(COMP6441 || COMP6841) && (12UOC from (COMP6443 && COMP6843 && COMP6445 && COMP6845 && COMP6447))",
+        "warning": "This course can only be taken in the final term of your program."      
+    }    
+
+def COMP_9491():
+    """
+    "original_rule": "Two prerequisite conditions:<br/>1. Students have taken:<br/>6 UOC from the following: COMP3411; and<br/>12 UOC from the following: COMP9444/COMP9417/COMP9517/COMP4418<br/>2. Students must have a WAM of 70 or higher<br/><br/>",
+
+    "processed_rule": "Two conditions: 1. Students have taken: 6UOC from the following: COMP3411; && 12UOC from the following: (COMP9444 || COMP9417 || COMP9517 || COMP4418) 2. Students must have 70WAM"
+    """
+    return "COMP3411 && 70WAM && 12UOC from (COMP9444 || COMP9417 || COMP9517 || COMP4418)"
 
 if __name__ == "__main__":
     fix_conditions()
