@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllCourses } from '../../actions/updateCourses';
 import { getUnplannedCourses } from '../../actions/userAction';
@@ -11,18 +11,13 @@ export default function CourseSelector() {
   const dispatch = useDispatch();
   const courses = useSelector(state => state.updateCourses.courses);
   const degree = useSelector(state => state.degree);
-
+  
   useEffect(() => {
     dispatch(getUnplannedCourses());
-  }, []);
-
-  useEffect(() => {
     dispatch(getAllCourses());
   }, []);
 
   return (
-    <>
-    {/* {JSON.stringify(courses)} */}
       <div className='cs-root'>
         <div className='cs-top-cont'>
         {/* { JSON.stringify(degree) } */}
@@ -36,7 +31,9 @@ export default function CourseSelector() {
           <CourseDescription />
         </div>
         {/* UNPLANNED {JSON.stringify(unplanned)} */}
+
+        {/* Notify users that core courses were added to the planner */}
+
       </div>
-    </>
   );
 }

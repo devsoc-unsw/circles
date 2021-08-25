@@ -21,8 +21,6 @@ const options = [
 const { Title } = Typography;
 export const DegreeStep = () => {
     const dispatch = useDispatch();
-    const currYear = new Date().getFullYear();
-    const yearOptions = [];
     const [input, setInput] = React.useState('')
     const [selected, setSelected] = React.useState(null);
     return (

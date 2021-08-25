@@ -1,5 +1,6 @@
 const initial = {
     currStep: 0, 
+    hasUpdatedDegree: false,
     program: "",
     specialisation: "",
     minor: "",
@@ -34,6 +35,12 @@ const degreeReducer = (state=initial, action) => {
                 ...state,
                 currStep: state.currStep - 1
             };
+        case 'TOGGLE_UPDATED_DEGREE': 
+            const currState = state.hasUpdatedDegree;
+            return {
+                ...state,
+                hasUpdatedDegree: !currState
+            }
         default: 
             return state;    
     }
