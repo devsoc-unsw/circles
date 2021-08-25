@@ -74,10 +74,6 @@ export default function CourseDescription() {
       setShow(false);
     }, 4000)
   }
-  
-  const hideAlert = () => {
-    setShow(false);
-  }
 
   return (
     <div className="cs-description-root">
@@ -85,15 +81,15 @@ export default function CourseDescription() {
         { (show && courseInPlanner) &&
            <Alert message={`Successfully added ${id} to your planner!` } 
               type="success" style={{ marginBottom: '1rem'}} 
-              showIcon closable afterClose={ hideAlert }
+              showIcon closable afterClose={() => setShow(false)}
             />
         }
          { (show && !courseInPlanner) &&
            <Alert message={`Successfully removed ${id} from your planner!` } 
               type="success" style={{ marginBottom: '1rem'}} 
-              showIcon closable afterClose={ hideAlert }
+              showIcon closable afterClose={() => setShow(false)}
             />
-        }
+        } 
         <div className="cs-desc-title-bar">
           <Title level={2} className="text">{ id } - { course.name }</Title>
           { courseInPlanner ? (
