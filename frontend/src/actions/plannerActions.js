@@ -1,9 +1,15 @@
 export const plannerActions = (action, payload) => {
     switch (action) {
+        // Takes 
         case 'ADD_TO_UNPLANNED':
             return {
                 type: action,
                 payload: payload,
+            }
+        case 'ADD_CORE_COURSES':
+            return {
+                type: action,
+                payload: payload
             }
         case 'REMOVE_ALL_UNPLANNED':
             return {

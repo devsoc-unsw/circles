@@ -56,7 +56,12 @@ const plannerReducer = (state = initialState, action) => {
       // Append course code onto unplanned
       state.unplanned.join(courseCode);
       return state;
-
+    case "ADD_CORE_COURSES": 
+      console.log(new Map([...state.courses, ...action.payload]));
+      return {
+        ...state,
+        courses: new Map([...state.courses, ...action.payload])
+      }
     case "SET_YEARS":
       return { ...state, years: action.payload };
 

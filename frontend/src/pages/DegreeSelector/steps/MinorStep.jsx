@@ -22,7 +22,7 @@ export const MinorStep = () => {
                 and minoring in (optional)
             </Title>
             <select 
-                className='steps-dropdown'
+                className='steps-dropdown text'
                 name="Select Minor"
                 onChange={value => setSelected(value)} 
             >

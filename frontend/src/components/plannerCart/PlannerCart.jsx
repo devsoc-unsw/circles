@@ -1,43 +1,68 @@
 import React from 'react';
-import { Divider, Tooltip, Button, Typography } from 'antd';
+import { Tooltip, Button, Typography, Popconfirm, Alert } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { ReactComponent as PlannerIcon } from '../assets/planner-icon.svg';
 import { DeleteOutlined } from '@ant-design/icons';
 import { plannerActions } from '../../actions/plannerActions';
 import './plannerCart.less';
 
 const { Text, Title } = Typography;   
-const CourseCard = ({ code, title }) => {
+const CourseCard = ({ code, title, showAlert }) => {
     const dispatch = useDispatch();
-    const deleteCourse = () => {
+    const [loading, setLoading] = React.useState(false); 
+    const confirmDelete = () => {
         dispatch(plannerActions("REMOVE_COURSE", code));
+        setLoading(true);
+        setTimeout(() => {
+            showAlert(code);
+            setLoading(false);
+        }, 700);
     }
     return (
-        <div className="planner-cart-course-card">
-            <Divider /> 
-            <div className='planner-cart-card-content'>
-                <div>
-                    <Title className='text' level={5}>{code}</Title>
-                    <Text className='text' >{title}</Text>
-                </div>
-                <div className="planner-cart-card-actions">
-                    <Tooltip title={`Remove ${code} from your planner`}>
-                        <Button danger size="small" shape="circle" icon={<DeleteOutlined />}
-                            onClick={deleteCourse}
-                        />
-                    </Tooltip>
-                </div>
+        <div className='planner-cart-card'>
+            <div>
+                <Text className='text' strong>{code}: </Text>
+                <Text className='text' >{title}</Text>
             </div>
-        </div>   
+            <div className="planner-cart-card-actions">
+            <Popconfirm
+                placement="bottomRight"
+                title={"Remove this course from your planner?"}
+                onConfirm={confirmDelete}
+                style={{ width: "200px" }}
+                okText="Yes"
+                cancelText="No"
+            >
+                <Tooltip title={`Remove ${code}`}>
+                    <Button danger size="small" shape="circle"
+                        icon={<DeleteOutlined />} loading={loading}
+                    />
+                </Tooltip>
+            </Popconfirm>
+                
+            </div>
+        </div>
     )
 }
 export const PlannerCart = () => {
-    const [openMenu, setOpenMenu] = React.useState(false);
-    const courses = useSelector(store => store.planner.courses);
-    const years = useSelector(store => store.planner.years);
     const dispatch = useDispatch();
+    const history = useHistory();
+    const courses = useSelector(store => store.planner.courses);
+    const [openMenu, setOpenMenu] = React.useState(false);
+    const [show, setShow] = React.useState(false);
+    const [code, setCode] = React.useState('');
     const deleteAllCourses = () => {
         dispatch(plannerActions('REMOVE_ALL_COURSES'))
+    }
+    const showAlert = (code) => {
+        setShow(false)
+        setCode(code);
+        setShow(true); 
+        setTimeout(() => {
+            setShow(false); 
+            setCode('');
+        }, 3500);
     }
     return (
         <div className='planner-cart-root'>
@@ -48,14 +73,36 @@ export const PlannerCart = () => {
             </Tooltip>
             { openMenu && (
                 <div className='planner-cart-menu'>
-                    <Title className='text' level={4}>Your selected courses</Title>
-                    {/* Reversed map to show the most recently added courses first */}
-                    { [...courses.keys()].reverse().map((courseCode) => 
-                         <CourseCard code={courseCode} title={courses.get(courseCode).title}/>
+                    <Title className='text' level={4}>
+                        Your selected courses
+                    </Title>
+                    { show && (
+                        <Alert message={`Successfully removed ${code} from planner`}
+                            type="success" style={{ margin: '10px'}} banner
+                            showIcon closable afterClose={() => setShow(false) }
+                        />      
                     )}
-                    { courses.size > 0 
-                        ? <Button danger onClick={deleteAllCourses}>Delete all courses</Button> 
-                        : <Text className='text'> You have not selected any courses. Find them in our course selector</Text>
+                    { courses.size > 0 ? (
+                        <div className='planner-cart-content'>
+                            {/* Reversed map to show the most recently added courses first */}
+                            { [...courses.keys()].reverse().map((courseCode) => 
+                                <CourseCard code={courseCode} title={courses.get(courseCode).title} showAlert={showAlert}/>
+                            )}
+                        </div>
+                    ):(
+                        <div className='planner-cart-empty-cont'>
+                            <Text className='text'> You have not selected any courses. Find them in our course selector</Text>
+                            <Button type="secondary" shape="round" className="planner-cart-link-to-cs"
+                                onClick={() => history.push('/course-selector')}>
+                                Go to course selector
+                            </Button>
+                        </div>
+                    )}
+                    {/* Hacky solution so prevent overflow.. help  */}
+                    {(!show && courses.size > 0) && 
+                        <Button danger className="planner-cart-delete-all-btn"
+                            icon={<DeleteOutlined/>}
+                            onClick={deleteAllCourses}>Delete all courses</Button> 
                     }
                 </div>
             )}

@@ -4,27 +4,57 @@
     margin: 10px;
     position: relative;
     z-index: 10;
-    // overflow: hidden;
 }
 
 .planner-cart-menu {
-    padding: 10px;
-    overflow-y: scroll;
+    padding-top: 20px;
+    padding-left: 20px;
     position: absolute;
     min-height: 200px;
+    height: 380px;
     width: 300px;
     top: 35px;
     right: 0px;
     border-radius: 3px;
-    padding: 10px;
 }
 
-.planner-cart-card-content {
+.planner-cart-content {
+    padding: 5px;
+    padding-left: 0px;
+    overflow-y: scroll;
+    height: 70%;
+    border-top:  #f4f4f4 solid 1px;
+}
+
+.planner-cart-card {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    padding: 10px;
+
 }
 
+.planner-cart-delete-all-btn { 
+    margin-top: 15px;
+    margin-left: 15px !important;
+    width: 270px;
+}
+
+.planner-cart-card:hover {
+    background-color: #fbfbfb;
+}
+
+.planner-cart-empty-cont{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.planner-cart-link-to-cs {
+    margin-top: 70px;
+    margin: 30px;
+    margin-left: 20px;
+}
 .light {
     .planner-cart-menu {
         background-color: #ffffff;
