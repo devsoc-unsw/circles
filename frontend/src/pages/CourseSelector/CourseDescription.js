@@ -115,7 +115,7 @@ export default function CourseDescription() {
         }
         <Title level={4} className="text">Unlocks these next courses</Title>
         { course.next && course.next.length > 0 
-          ? course.next.map(courseCode => <CourseTag name={courseCode}/>)
+          ? course.next.map((courseCode, index) => <CourseTag key={index} name={courseCode}/>)
           : <p className={`text`}>None</p>
         }
       </div>
@@ -125,10 +125,10 @@ export default function CourseDescription() {
         <CourseAttribute title="Study Level" content={course.level}/>
         <CourseAttribute title="Campus" content={course.campus}/>
         <Title level={4} className='text cs-final-attr'>Offering Terms</Title>
-        { course.terms && course.terms.map(term => {
+        { course.terms && course.terms.map((term, index) => {
           let termNo = term.slice(1);
             return (
-              <Tag className={`text`}> 
+              <Tag key={index} className={`text`}> 
                 {termNo === '0' ? 'Summer' : `Term ${termNo}`}
               </Tag>
             )
