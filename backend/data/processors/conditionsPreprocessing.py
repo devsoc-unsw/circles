@@ -31,6 +31,7 @@ def preprocess_rules():
         processed = original
         processed = delete_exclusions(processed)
         processed = delete_HTML(processed)
+        processed = delete_self_referencing(code, processed)
         # processed = convert_program_codes(processed)
         processed = convert_square_brackets(processed)
         processed = convert_UOC(processed)
@@ -85,6 +86,14 @@ def delete_HTML(processed):
 #             processed = re.sub(program, CODE_MAPPING[program], processed)
     
 #     return processed
+
+def delete_self_referencing(code, processed):
+    """ Remove any references to this course """
+
+    # E.g. "COMP4962: {
+    #     "processed_rule": "COMP4962 COMP4951"
+    # } "
+    return re.sub(code, "", processed)
 
 def convert_square_brackets(processed):
     """ Converts '[' to '(' and ']' to ')' """
