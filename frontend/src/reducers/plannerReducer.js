@@ -141,7 +141,6 @@ const plannerReducer = (state = initialState, action) => {
       courseInfo["plannedFor"] = term;
       courseInfo["warning"] = warning;
       let updatedCourses = new Map(state.courses).set(course, courseInfo);
-      console.log(updatedCourses);
 
       return { ...state, courses: updatedCourses };
 

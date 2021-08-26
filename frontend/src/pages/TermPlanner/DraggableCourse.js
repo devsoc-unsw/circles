@@ -11,12 +11,11 @@ function DraggableCourse({ code, index }) {
   const { courses } = useSelector((state) => {
     return state.planner;
   });
+  const theme = useSelector((state) => state.theme);
   const courseName = courses.get(code)["title"];
   const prereqs = courses.get(code)["prereqs"];
   const prereqDisplay = prereqs.replaceAll("||", "or").replaceAll("&&", "and");
   const warning = courses.get(code)["warning"];
-
-  console.log(courseName + warning);
 
   return (
     <>
@@ -33,7 +32,12 @@ function DraggableCourse({ code, index }) {
             data-tip
             data-for={warning && code}
           >
-            {warning && <IoWarningOutline size="2.5em" color="#DC9930" />}
+            {warning && (
+              <IoWarningOutline
+                size="2.5em"
+                color={theme === "light" ? "#DC9930" : "white"}
+              />
+            )}
             <div>
               <Text strong className="text">
                 {code}
