@@ -3707,7 +3707,7 @@
     },
     "COMP4920": {
         "original_rule": "Prerequisite: (COMP2511 or COMP2911) and completion of 96 UOC in Computer Science.<br/><br/>",
-        "processed_rule": "(COMP2511 || COMP2911) && 96UOC in Computer Science"
+        "processed_rule": "(COMP2511 || COMP2911) && 96UOC in COMP"
     },
     "COMP4951": {
         "original_rule": "Prerequisite: Enrolled in a CSE BE (Hons) programs, completion of 126 UOC and completion of 3rd year core.<br/><br/>",
@@ -3724,7 +3724,7 @@
     },
     "COMP4961": {
         "original_rule": "Prerequisite: Students enrolled in program 4515 Bachelor of Computer Science (Hons) or program 3648.<br/><br/>",
-        "processed_rule": "4515 Bachelor of Computer Science (Hons) || 3648"
+        "processed_rule": "4515 || 3648"
     },
     "COMP4962": {
         "original_rule": "COMP4962 Prerequisite: Students must successfully complete COMP4951<br/><br/>",

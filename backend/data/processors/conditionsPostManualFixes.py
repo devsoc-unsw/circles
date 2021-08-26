@@ -67,7 +67,6 @@ def COMP_1400_1911(code):
 def COMP_3900():
     """
     "original_rule": "Prerequisite: COMP1531, and COMP2521 or COMP1927, and enrolled in a BSc Computer Science major with completion of 102 uoc.<br/><br/>"
-    
 
     "processed_rule": "COMP1531 && COMP2521 || COMP1927 && 102UOC in (COMPA1 || COMPD1 || COMPD1 || COMPE1 || COMPI1 || COMPJ1 || COMPN1 || COMPS1 || COMPY1 || COMPZ1)"
     """
