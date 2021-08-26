@@ -3545,7 +3545,7 @@
     },
     "COMP1400": {
         "original_rule": "Prerequisite: Enrolment in a non-CSE major (no BINF, COMP, or SENG)<br/><br/>",
-        "processed_rule": "Enrolment in a non-CSE major (no BINF || COMP || SENG)"
+        "processed_rule": ""
     },
     "COMP1511": {
         "original_rule": "",
@@ -3561,7 +3561,7 @@
     },
     "COMP1911": {
         "original_rule": "Prerequisite: Enrolment in a non-CSE major (no BINF, COMP, or SENG)<br/><br/>",
-        "processed_rule": "Enrolment in a non-CSE major (no BINF || COMP || SENG)"
+        "processed_rule": ""
     },
     "COMP2041": {
         "original_rule": "Prerequisite: COMP1511 OR DPST1091 OR COMP1917 OR COMP1921<br/><br/>",
@@ -3657,15 +3657,17 @@
     },
     "COMP3900": {
         "original_rule": "Prerequisite: COMP1531, and COMP2521 or COMP1927, and enrolled in a BSc Computer Science major with completion of 102 uoc.<br/><br/>",
-        "processed_rule": "COMP1531 && COMP2521 || COMP1927 && enrolled in a BSc Computer Science major with 102UOC"
+        "processed_rule": "COMP1531 && COMP2521 || COMP1927 && 102UOC in (COMPA1 || COMPD1 || COMPD1 || COMPE1 || COMPI1 || COMPJ1 || COMPN1 || COMPS1 || COMPY1 || COMPZ1)"
     },
     "COMP3901": {
         "original_rule": "Prerequisite: 80+ WAM in COMP, SENG or BINF courses, completion of all first and second year core requirements a CSE program, and agreement from a suitable CSE academic supervisor.<br/><br/>",
-        "processed_rule": "80WAM in COMP || SENG || BINF courses && completion of all first && second year core requirements a CSE && agreement from a suitable CSE academic supervisor"
+        "processed_rule": "80WAM in COMP || SENG || BINF",
+        "warning": "You must complete all first and second year core requirements of a CSE program and obtain agreement from a suitable CSE academic supervisor to enrol in this course."
     },
     "COMP3902": {
         "original_rule": "Prerequisite: 80+ WAM in COMP, SENG or BINF courses, completion of all first and second year core requirements a CSE program, and agreement from a suitable CSE academic supervisor.<br/><br/>",
-        "processed_rule": "80WAM in COMP || SENG || BINF courses && completion of all first && second year core requirements a CSE && agreement from a suitable CSE academic supervisor"
+        "processed_rule": "80WAM in COMP || SENG || BINF",
+        "warning": "You must complete all first and second year core requirements of a CSE program and obtain agreement from a suitable CSE academic supervisor to enrol in this course."
     },
     "COMP4121": {
         "original_rule": "Prerequisite: COMP3121 or  COMP3821.<br/><br/>",
@@ -3705,23 +3707,24 @@
     },
     "COMP4920": {
         "original_rule": "Prerequisite: (COMP2511 or COMP2911) and completion of 96 UOC in Computer Science.<br/><br/>",
-        "processed_rule": "(COMP2511 || COMP2911) && 96UOC in Computer Science"
+        "processed_rule": "(COMP2511 || COMP2911) && 96UOC in COMP"
     },
     "COMP4951": {
         "original_rule": "Prerequisite: Enrolled in a CSE BE (Hons) programs, completion of 126 UOC and completion of 3rd year core.<br/><br/>",
-        "processed_rule": "Enrolled in a CSE BE (Hons) s && 126UOC && completion of 3rd year core"
+        "processed_rule": "126UOC",
+        "warning": "You must be enrolled in a CSE BE (Hons) program and complete all third year core requirements to enrol in this course."
     },
     "COMP4952": {
         "original_rule": "Prerequisite: Completion of Research Thesis A (4951)<br/><br/>",
-        "processed_rule": "Completion of Research Thesis A (4951)"
+        "processed_rule": "COMP4951"
     },
     "COMP4953": {
         "original_rule": "Prerequisite: Completion of Research Thesis B (4952)<br/><br/>",
-        "processed_rule": "Completion of Research Thesis B (4952)"
+        "processed_rule": "COMP4952"
     },
     "COMP4961": {
         "original_rule": "Prerequisite: Students enrolled in program 4515 Bachelor of Computer Science (Hons) or program 3648.<br/><br/>",
-        "processed_rule": "4515 Bachelor of Computer Science (Hons) || 3648"
+        "processed_rule": "4515 || 3648"
     },
     "COMP4962": {
         "original_rule": "COMP4962 Prerequisite: Students must successfully complete COMP4951<br/><br/>",
@@ -3777,7 +3780,7 @@
     },
     "COMP6721": {
         "original_rule": "Pre-requisite: MATH1081 AND COMP2521 AND (not enrolled in SENGAH)<br/><br/>",
-        "processed_rule": "MATH1081 && COMP2521 && (not enrolled in SENGAH)"
+        "processed_rule": "MATH1081 && COMP2521"
     },
     "COMP6733": {
         "original_rule": "Prerequisite: 65 WAM and COMP3331<br/><br/>",
@@ -3817,11 +3820,13 @@
     },
     "COMP9301": {
         "original_rule": "(COMP6441 OR COMP6841) AND (6 UOC from  (COMP6443, COMP6843, COMP6445, COMP6845, COMP6447)) AND enrolled in final term of program<br/><br/>",
-        "processed_rule": "(COMP6441 || COMP6841) && (6UOC from (COMP6443 && COMP6843 && COMP6445 && COMP6845 && COMP6447)) && enrolled in final term of"
+        "processed_rule": "(COMP6441 || COMP6841) && (6UOC from (COMP6443 && COMP6843 && COMP6445 && COMP6845 && COMP6447))",
+        "warning": "This course can only be taken in the final term of your program."
     },
     "COMP9302": {
         "original_rule": "(COMP6441 OR COMP6841) AND (12 UOC from (COMP6443, COMP6843, COMP6445, COMP6845, COMP6447)) AND enrolled in final term of program<br/><br/>",
-        "processed_rule": "(COMP6441 || COMP6841) && (12UOC from (COMP6443 && COMP6843 && COMP6445 && COMP6845 && COMP6447)) && enrolled in final term of"
+        "processed_rule": "(COMP6441 || COMP6841) && (12UOC from (COMP6443 && COMP6843 && COMP6445 && COMP6845 && COMP6447))",
+        "warning": "This course can only be taken in the final term of your program."
     },
     "COMP9312": {
         "original_rule": "Prerequisite: COMP1927 or COMP2521, and COMP3311<br/><br/>",
@@ -3885,7 +3890,7 @@
     },
     "COMP9491": {
         "original_rule": "Two prerequisite conditions:<br/>1. Students have taken:<br/>6 UOC from the following: COMP3411; and<br/>12 UOC from the following: COMP9444/COMP9417/COMP9517/COMP4418<br/>2. Students must have a WAM of 70 or higher<br/><br/>",
-        "processed_rule": "Two conditions: 1. Students have taken: 6UOC from the following: COMP3411; && 12UOC from the following: (COMP9444 || COMP9417 || COMP9517 || COMP4418) 2. Students must have 70WAM"
+        "processed_rule": "COMP3411 && 70WAM && 12UOC from (COMP9444 || COMP9417 || COMP9517 || COMP4418)"
     },
     "COMP9517": {
         "original_rule": "Prerequisite: COMP2521 or COMP1927<br/><br/>",
