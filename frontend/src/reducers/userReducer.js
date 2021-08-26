@@ -14,8 +14,7 @@ const initialState = {
             }
         ],
         minors: []
-    },
-    unplanned: []
+    }
 }
 const userReducer = (state = initialState, action) => { 
     switch (action.type) { 
