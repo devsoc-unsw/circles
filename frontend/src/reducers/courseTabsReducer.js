@@ -1,39 +1,51 @@
 const initial = {
-    tabs: ["explore"], 
-    active: "explore"
+    tabs: ["explore"],
+    activeIndex: 0,
 }
 const courseTabsReducer = (state=initial, action) => { 
     switch (action.type) { 
         case "ADD_TAB":
-            return {
-                ...state,
-                tabs: [...state.tabs, action.payload]
-            }
-        case "REMOVE_TAB":
-            // Payload gives index
-            const { index } = action.payload;
-            let newTabs = [...state.tabs];
-            console.log(newTabs);
-            newTabs.splice(index, 1); 
-            const currActiveIndex = state.tabs.indexOf(state.active);
-            console.log('curr active', state.active);
-            console.log('index of active', state.tabs.indexOf(state.active));
-            console.log('index to delete', index);
-            // console.log(newTabs, currActiveIndex, index);
-            if (currActiveIndex === index && newTabs.length) {
+            const tabName = action.payload
+            // If tabName is search, add search and set active to new search 
+            if (tabName === 'search') {
                 return {
-                    tabs: newTabs, 
-                    active: newTabs[index]
+                    tabs: [...state.tabs, "search"], 
+                    active: state.tabs.length
                 }
             }
-            // Only update the tabs, active tab will not change
+            // If tabName is not search  && already exists 
+            const newActive = state.tabs.indexOf(tabName);
+            if (state.tabs.find(tab => tab === tabName)) {
+                return { 
+                    ...state,
+                    active: newActive
+                }
+            }
+
+            // Add new tab but don't change active
+            return {
+                tabs: [...state.tabs, tabName],
+                active: state.tabs.length,
+            }
+        case "REMOVE_TAB":
+            const index = action.payload;
+            let newTabs = [...state.tabs];
+            newTabs.splice(index, 1); 
+            // If only one left, set active to 'explore'
+            if (newTabs.length === 1) {
+                return {
+                    tabs: newTabs, 
+                    active: 0
+                }
+            } else {
+                return {
+                    ...state,
+                    tabs: newTabs
+                }
+            }
+        case "SET_ACTIVE_TAB": 
             return {
                 ...state,
-                tabs: newTabs
-            }
-        case "SET_ACTIVE_TAB":
-            return {
-                ...state, 
                 active: action.payload
             }
         default: 

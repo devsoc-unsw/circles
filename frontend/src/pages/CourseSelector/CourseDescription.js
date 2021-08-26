@@ -19,19 +19,21 @@ const CourseAttribute = ({ title, content }) => {
   );
 }
 export default function CourseDescription() {
-  const { id } = useParams();
   const dispatch = useDispatch();
+  const { active, tabs } = useSelector(state => state.tabs);
+  let id = tabs[active];
   // Course needs to be replaced with a fetch 
   const course = useSelector(state => state.updateCourses.course);
   const coursesInPlanner = useSelector(state => state.planner.courses);
   const courseInPlanner = coursesInPlanner.has(id);
   const [show, setShow] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
-  
   React.useEffect(() => {
     dispatch(getCourseById(id));
   }, [id]);
-  
+
+  if (id === 'explore') return (<div>This is the explore page</div>)
+  if (id === 'search') return (<div>This is the search page</div>)
   if (!id) {
     return (
       <div className="empty">

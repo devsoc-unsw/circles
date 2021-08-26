@@ -20,7 +20,7 @@ function App() {
             <DegreeSelector />
             {/* Change to term planner if user session active */}
           </Route>
-          <Route path="/course-selector/:id?">
+          <Route path="/course-selector">
             <CourseSelector />
           </Route>
           <Route path="/term-planner">

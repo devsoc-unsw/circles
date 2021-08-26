@@ -1,30 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
 import { Menu } from 'antd';
 import { courseOptionsActions } from '../../actions/courseOptionsActions';
+import { courseTabActions } from '../../actions/courseTabActions';
 import axios from 'axios';
 import './CourseMenu.less';
 
 const { SubMenu } = Menu;
 
 const MenuItem = ({courseCode}) => {
-  const history = useHistory();
+  const dispatch = useDispatch();
+  const handleClick = () => {
+      dispatch(courseTabActions("ADD_TAB", courseCode));
+  }
   return (
-    <Menu.Item 
-      className='text'
-      key={courseCode}
-      onClick={() => history.push(`/course-selector/${courseCode}`)}
-    >
+    <Menu.Item className='text' key={courseCode} onClick={handleClick}>
       { courseCode }
     </Menu.Item>
   )
 }
 
 export default function CourseMenu() {
-  const history = useHistory();
   const dispatch = useDispatch();
-  const { id } = useParams();
+  const { active, tabs } = useSelector(state => state.tabs);
+  let id = tabs[active];
+  // Exception tabs
+  if (id === 'explore' || id === 'search') id = null;
   const courseOptions = useSelector(store => store.courseOptions);
 
   useEffect(() => {
@@ -56,10 +57,6 @@ export default function CourseMenu() {
     console.log('click ', e);
   };
 
-  const goToCourse = (id) => {
-    history.push(`/course-selector/${id}`);
-  }
-
   return (
     <div className='cs-menu-root'>
       {
@@ -69,10 +66,9 @@ export default function CourseMenu() {
           onClick={handleClick}
           style={{ width: '100%'}}
           defaultSelectedKeys={[id ? id : courseOptions.core[0]]}
-          selectedKeys={[id]}
+          selectedKeys={[]}
           defaultOpenKeys={['recently-viewed', 'core', 'electives']}
           mode="inline"
-          // id={'this'}
         >
           <SubMenu className={"text"} key="recently-viewed" title="Recently Viewed">
             { courseOptions.recentlyViewed.length === 0
