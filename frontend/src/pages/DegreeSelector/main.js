@@ -1,94 +1,48 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { Select } from 'antd';
-import { Typography } from 'antd';
-import { Button } from 'antd';
-import './main.less';
+import React from 'react';
+import ParticleBackground from './ParticleBackground';
+import { Steps, Button } from 'antd';
+import { useSelector } from 'react-redux';
+import { DegreeStep } from './steps/DegreeStep';
+import { SpecialisationStep } from './steps/SpecialisationStep';
+import { MinorStep } from './steps/MinorStep';
+import { DetailStep } from './steps/DetailStep';
 import { useDispatch } from 'react-redux';
-import { updateDegree } from '../../actions/updateDegree';
+import { degreeActions } from '../../actions/degreeActions';
+import { LeftOutlined } from '@ant-design/icons';
+import './main.less';
 
+const { Step } = Steps;
 function DegreeSelector() {
-  const { Option } = Select;
-  const { Title } = Typography;
-  const degreetype = ['Undergraduate','Postgraduate']
-  const degreeselect = ['Bachelor of Arts', 
-    'Bachelor of Computer Science',
-    'Bachelor of Commerce',
-    'Bachelor of Commerce/Law',
-    'Bachelor of Engineering (Honours)',
-    'Bachelor of Medical Studies/Doctor of Medicine'
-  ]
-  
-  const history = useHistory();
-  const dispatch = useDispatch();
-  const [degreeState, setdegreeState] = useState('');
-  const [degreetypeState, setdegreetypeState] = useState('');
-
-  const onButtonClick= (e) => {
-    // Simulating a change, you still need to implement this 
-    const dummy_degree = {
-      code: "3556", 
-      name: "This is a dummy degree"
-    }
-    dispatch(updateDegree(dummy_degree))
-    history.push('/course-selector');
-  }
-
-  return (
-    <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", height: "100vh" }}>
-      <Title className={"text"} align="center">
-        I am a(n) <span></span>
-          <Select
-
-            bordered={false}
-            className={'text selector'}
-            placeholder="Undergraduate"
-            onChange={(value)=>{
-              setdegreetypeState(value);
-            }} 
-          >
-            {degreetype.map((degreetype,index)=>
-              <Option className={'text option'} key={index} value={degreetype}>
-                {degreetype}
-              </Option>
-            )}
-          </Select>
-          <span></span> student <span></span>
-        <p> studying a <span></span>
-          <Select
-            bordered={false}
-            className={'text selector'}
-            onChange={ value => setdegreeState(value) } 
-            showSearch
-            style={{ width: '30%' }}
-            placeholder="Select Degree"
-            optionFilterProp="children"
-            filterOption={(input, option) => 
-              option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-            }
-            filterSort={(optionA, optionB) =>
-              optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
-            }
-          >
-            {degreeselect.map((degreeselect,index)=>
-              <Option className={'text option'} key={index} value={degreeselect}>
-                {degreeselect}
-              </Option>
-            )}
-          </Select>
-          <span></span> degree
-        </p>
-        <Button type="primary" 
-            shape="round" 
-            size={'large'}
-            onClick={onButtonClick}
-            disabled={degreeState==='' || degreetypeState===''}
+    const dispatch = useDispatch();
+    const theme = useSelector(store => store.theme);
+    const currStep = useSelector(store => store.degree.currStep);
+    return (
+      <div className='degree-root-container'>
+        <div className='degree-content'>
+          <Steps className="step-style" current={currStep}>
+            <Step title="Degree" />
+            <Step title="Specialisation" />
+            <Step title="Minor" />
+            <Step title="Duration" />
+          </Steps> 
+          { currStep !== 0 && (
+            <Button 
+              className='steps-back-btn'
+              icon={<LeftOutlined/>}
+              onClick={() => dispatch(degreeActions('PREV_STEP'))}
             >
-            Start Planning
-        </Button>
-      </Title>
-    </div>
-  );
+             Back 
+            </Button> 
+          )}
+          <div className='step-content'>
+            {currStep === 0 && <DegreeStep/> }
+            {currStep === 1 && <SpecialisationStep/>}
+            {currStep === 2 && <MinorStep/>}
+            {currStep === 3 && <DetailStep/>}
+          </div>
+        </div>
+        { theme === 'dark' && <ParticleBackground />}
+      </div>
+    );
 }
-
 export default DegreeSelector;

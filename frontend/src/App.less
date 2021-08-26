@@ -19,7 +19,7 @@ body {
 
 .light {
   background-color: #ffffff;
-  color: #323739;
+  color: #323739 !important;
 
   .text {
     color: #323739;
@@ -31,7 +31,33 @@ body {
     color: #1d1f20;
   }
 
-  .ant-picker {
-	color: #1d1f20;
+  
+  .ant-btn-primary {
+    color: white !important; 
   }
+
+  .ant-modal-title {
+    color: #1d1f20;
+  }
+}
+
+// Scrollbar settings
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #efdbff; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
 }

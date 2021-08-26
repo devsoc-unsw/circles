@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { IoWarningOutline } from "react-icons/io5";
 import ReactTooltip from "react-tooltip";
 
-function DraggableCourse({ code, index, warning }) {
+function DraggableCourse({ code, index }) {
   //   let code = course.match(/([A-Z]{4}[0-9]{4}):/)[1];
   const { Text } = Typography;
   const { courses } = useSelector((state) => {
@@ -13,9 +13,10 @@ function DraggableCourse({ code, index, warning }) {
   });
   const courseName = courses.get(code)["title"];
   const prereqs = courses.get(code)["prereqs"];
-  //   eval(COMP1511 || COMP1521 && (COMP1531 || COMP1541);
-  const prereqDisplay = prereqs.replaceAll("||", "or").replaceAll("&&", "and")
-  const prereqArray = prereqDisplay.split(" and ")
+  const prereqDisplay = prereqs.replaceAll("||", "or").replaceAll("&&", "and");
+  const warning = courses.get(code)["warning"];
+
+  console.log(courseName + warning);
 
   return (
     <>
@@ -43,11 +44,8 @@ function DraggableCourse({ code, index, warning }) {
         )}
       </Draggable>
       <ReactTooltip id={code} place="bottom" className="tooltip">
-        <Text strong>Prerequisites: </Text>
-		{prereqDisplay}
-        {/* {prereqArray.map((prereq) => (
-          <div key={prereq}>• {prereq}</div>
-        ))} */}
+        <div style={{ fontWeight: "bold" }}>Prerequisites:</div>
+        {prereqDisplay}
       </ReactTooltip>
     </>
   );

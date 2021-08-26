@@ -7,9 +7,9 @@ function TermBox({ name, courses, termsOffered, isDragging }) {
   const term = name.match(/t[0-3]/)[0];
   const isDropAllowed = termsOffered.includes(term);
 
-  const { plannedCourses } = useSelector((state) => {
-    return state.planner;
-  });
+//   const { courses } = useSelector((state) => {
+//     return state.planner;
+//   });
 
   return (
     <Droppable droppableId={name} isDropDisabled={!isDropAllowed}>
@@ -20,13 +20,13 @@ function TermBox({ name, courses, termsOffered, isDragging }) {
           className={`termBox ${isDropAllowed && isDragging && "droppable"}  `}
         >
           {courses.map((code, index) => {
-            const warning = plannedCourses.get(code)["warning"];
+            // const warning = courses.get(code)["warning"];
             return (
               <DraggableCourse
                 key={code}
                 code={code}
                 index={index}
-                warning={warning}
+                // warning={warning}
               />
             );
           })}

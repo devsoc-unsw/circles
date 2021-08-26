@@ -52,7 +52,6 @@ export const handleOnDragEnd = (result, dragEndProps) => {
     destCoursesCpy.splice(destination.index, 0, draggableId);
     newYears[destRow][destTerm] = destCoursesCpy;
     dispatch(plannerActions("SET_YEARS", newYears));
-
     return;
   }
 
@@ -105,54 +104,48 @@ const checkPrereq = (
   draggableId
 ) => {
   const prereqs = courses.get(course).prereqs;
-
-//   prereqs.every((prereq) => {
-//     // prereq not present in planned terms
-//     if (plannedCourses.get(prereq) == null) {
-//       warning = true;
-//       return false;
-//     }
-//     // course placed before (or during) prereq is complete
-//     if (destination.droppableId <= plannedCourses.get(prereq)["term"]) {
-//       warning = true;
-//       return false;
-//     }
-//   });
-//   console.log(prereqs)
-
-
-//   const expr = "isComplete.get(COMP1511 || COMP1521 && (COMP1531 || COMP1541)";
+  let isPrereqComplete = false;
+  // for example, expr can be: (COMP1511 || COMP1521 && (COMP1531 || COMP1541);
   const expr = prereqs;
-  let warning = true;
   if (expr === "") {
-//   console.log(expr);
-	warning = false;
-} else {
-	const exprArray = expr.replace(/ \|\|| \&\&|\(|\)/g,'').split(" ");
-	const isComplete = new Map();
-	exprArray.forEach(elem => {
-		 if (plannedCourses.get(elem) == null) {
-		  // prereq not present in planned terms
-		  isComplete.set(elem, false);
-		} else if	  (destination.droppableId <= plannedCourses.get(elem)["term"]) {
-			// course placed before (or during) prereq is complete
-		  isComplete.set(elem, false);
-		} else {
-		  isComplete.set(elem, true);
-		}
-	});
-	const exprWithMap = expr.replace(/([A-Z]+[0-9]+)/g, 'isComplete.get("$1")');
-	 warning = !eval(exprWithMap)
-}
-//   console.log(exprWithMap);
-//   console.log(eval(exprWithMap))
-
+    isPrereqComplete = true;
+  } else {
+    const exprArray = expr.replace(/ \|\|| \&\&|\(|\)/g, "").split(" ");
+    // from above example, exprArray is: [COMP1511, COMP1521, COMP1531, COMP1541]
+    const isComplete = new Map();
+    exprArray.forEach((elem) => {
+      if (courses.get(elem) == null) {
+        // prereq not in term planner
+        isComplete.set(elem, false);
+      } else if (courses.get(elem)["plannedFor"] == null) {
+        // prereq in unplanned
+        isComplete.set(elem, false);
+      } else if (destination.droppableId <= courses.get(elem)["plannedFor"]) {
+        // course placed before (or during) prereq is complete
+        isComplete.set(elem, false);
+      } else {
+        // if it gets to this point, that means prereq has been complete
+        isComplete.set(elem, true);
+      }
+    });
+    const exprWithMap = expr.replace(/([A-Z]+[0-9]+)/g, 'isComplete.get("$1")');
+    // from above example, exprWithMap is: (isComplete.get(COMP1511) || ...)
+    isPrereqComplete = eval(exprWithMap);
+  }
 
   dispatch(
-    plannerActions("UPDATE_PLANNED_COURSES", {
+    plannerActions("MOVE_COURSE", {
       course: draggableId,
       term: destination.droppableId,
-      warning: warning,
+      warning: !isPrereqComplete,
     })
   );
+
+  //   dispatch(
+  //     plannerActions("UPDATE_PLANNED_COURSES", {
+  //       course: draggableId,
+  //       term: destination.droppableId,
+  //       warning: warning,
+  //     })
+  //   );
 };
