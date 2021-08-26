@@ -4,8 +4,9 @@ use on the frontend. See 'specialisationsProcessed.json' for output.
 
 NOTE: "spn" == "specialisation"
 
-Status: Currently works for all COMP specialisations and SENGAH. Query next
-        set of specialisations to include.
+Status: Currently works for all COMP specialisations and SENGAH. May need
+        manual fixes for the "notes" fields (if they are to appear as
+        text pop-ups).
 
 Step in the data's journey:
     [   ] Scrape raw data (specialisationScraper.py)
@@ -20,7 +21,8 @@ from data.utility import dataHelpers
 # TODO: add more specialisations as we expand scope of Circles
 TEST_SPNS = ["COMPA1", "COMPAH", "COMPBH", "SENGAH", "COMPD1", "COMPD1", 
              "COMPE1", "COMPI1", "COMPJ1", "COMPN1", "COMPS1", "COMPY1", 
-             "COMPZ1"]
+             "COMPZ1", "ACCTA2", "FINSA2", "INFSA2", "MARKA2", "MATHC2", 
+             "PSYCM2"]
 
 CODE_MAPPING = dataHelpers.read_data("data/utility/programCodeMappings.json")["title_to_code"]
 
@@ -43,7 +45,7 @@ def customise_spn_data():
             # Build curriculum data and locate any constraints within curriculum
 
             if container["description"] and not container["courses"] and not container["structure"]:
-                # If container lists not courses and has no nested curriculum
+                # If container lists no courses and has no nested curriculum
                 # 'structure', then there is likely to be a constraint in the
                 # 'description' field
                 constraints.append(get_constraint(container))
@@ -134,6 +136,14 @@ def get_levels(title: str) -> List[int]:
     res = re.search("[Ll]evels? (\d[^ ]*)", title)
 
     if res:
+        if "/" in res.group(1):
+            # E.g. "Level 2/3 Mathematics Electives"
+            multi_lvls = res.group(1).split("/")
+            multi_lvls = [int(lvl) for lvl in multi_lvls]
+            levels.extend(multi_lvls)
+            return levels 
+
+        # Otherwise single level is present
         found_level = int(res.group(1))
         levels.append(found_level)
 
@@ -151,7 +161,7 @@ def get_notes(description: str) -> str:
     is only possible if etc.' """
 
     # Non-greedy search to catch anything after first matching line
-    res = re.search("Students must.*?following courses\.(.+)", description)
+    res = re.search(r"Students must.*?following courses\.?([^.].+)", description)
     if res: # Unique notes found
         return res.group(1)
     else:
