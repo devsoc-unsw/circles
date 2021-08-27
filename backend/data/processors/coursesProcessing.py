@@ -9,8 +9,9 @@ import re
 from data.utility import dataHelpers
 
 # Fields to keep in the processed file without modification from coursesFormattedRaw.json
-KEEP_UNEDITED = ["title", "code", "UOC", "level", "description", 
-                "equivalents", "exclusions", "path_to"]
+KEEP_UNEDITED = ["title", "code", "UOC", "level", "description", "study_level",
+                 "school", "faculty", "campus", "equivalents", "exclusions", 
+                 "path_to"]
 
 PROCESSED_COURSES = {}
 ABSENT_COURSES = {} # Courses that appear in enrolment rules but do not exist
