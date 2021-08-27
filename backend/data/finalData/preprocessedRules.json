@@ -129,11 +129,11 @@
     },
     "ACTL3191": {
         "original_rule": "Pre-requisites: ECON2101 or (ECON1101 and ACTL1101) or (completed at least 84UOC and enrolled in a Commerce Program).<br/><br/>",
-        "processed_rule": "ECON2101 || (ECON1101 && ACTL1101) || ( at least 84UOC && a Commerce Program)"
+        "processed_rule": "ECON2101 || (ECON1101 && ACTL1101) || ( 84UOC && a Commerce Program)"
     },
     "ACTL3192": {
         "original_rule": "Pre-requisites: ECON2101 or (ECON1101 and ACTL1101) or (completed at least 84UOC and enrolled in a Commerce Program).<br/><br/>",
-        "processed_rule": "ECON2101 || (ECON1101 && ACTL1101) || ( at least 84UOC && a Commerce Program)"
+        "processed_rule": "ECON2101 || (ECON1101 && ACTL1101) || ( 84UOC && a Commerce Program)"
     },
     "ACTL3202": {
         "original_rule": "Prerequisite: ACTL2101 and enrolment in program 3587<br/><br/>",
@@ -1185,7 +1185,7 @@
     },
     "ARTS3060": {
         "original_rule": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Film Studies or MCT; or ARTS1060/ARTS1090, at least 6uoc in level 2  Film Studies electives and enrolment in a Media single or double degree<br/><br/>",
-        "processed_rule": "48UOC && including 6UOC in L1 && 6UOC in L2 in one of the following streams || Film Studies || MCT; || (ARTS1060 || ARTS1090) && at least 6UOC in L2 Film Studies electives && enrolment in a Media single || double degree"
+        "processed_rule": "48UOC && including 6UOC in L1 && 6UOC in L2 in one of the following streams || Film Studies || MCT; || (ARTS1060 || ARTS1090) && 6UOC in L2 Film Studies electives && enrolment in a Media single || double degree"
     },
     "ARTS3061": {
         "original_rule": "Prerequisite: 48 UOC overall, including ARTS1060 or ARTS1064, and ARTS2065. Or 66 UOC overall and enrolled in a single or double degree Media (Screen and Sound Production) program<br/><br/>",
@@ -2185,7 +2185,7 @@
     },
     "AVIA3101": {
         "original_rule": "Prerequisite: AVIA1900,  AVIA2004,  AVIA2014 or 1901 ; Excluded: AVIA3002.<br/><br/>",
-        "processed_rule": "AVIA1900 || AVIA2004 || AVIA2014 || 1901 "
+        "processed_rule": "AVIA1900 || AVIA2004 || AVIA2014 || 1901"
     },
     "AVIA3111": {
         "original_rule": "Prerequisite: AVIA2117<br/><br/>",
@@ -2289,7 +2289,7 @@
     },
     "BABS3031": {
         "original_rule": "Prerequisite: completion of at least 48 UoC<br/><br/>",
-        "processed_rule": "at least 48UOC"
+        "processed_rule": "48UOC"
     },
     "BABS3041": {
         "original_rule": "Prerequisite: BIOC2101 or (BIOC2181and MICR2011) or (BIOC2181 and BABS2202)<br/><br/>",
@@ -2337,7 +2337,7 @@
     },
     "BABS3631": {
         "original_rule": "Prerequisite: completion of at least 48 UoC<br/><br/>",
-        "processed_rule": "at least 48UOC"
+        "processed_rule": "48UOC"
     },
     "BABS4053": {
         "original_rule": "Prerequisite: Completion of 144 UOC of courses in the 3052 Bachelor of Science (Biotechnology) program.<br/><br/>",
@@ -3497,11 +3497,11 @@
     },
     "COMM3030": {
         "original_rule": "\u2022\tminimum WAM of 65;<br/>\u2022\thave completed a minimum of 48 UOC at the commencement of this course;<br/>\u2022\thave room in their degree for this course;<br/>\u2022\tare in good academic standing;<br/>\u2022\thave completed COMM6000 Career Accelerator: Essentials or COMM1999 First Year Portfolio (Business School students only)<br/>This course may count as a Business School Free Elective, OR as a major elective within some schools. It is recommended a progression check is completed prior to enrolling.<br/><br/>",
-        "processed_rule": "\u2022\t65WAM; \u2022\thave a minimum of 48UOC at the commencement of this course; \u2022\thave room in their degree for this course; \u2022\tare in good academic standing; \u2022\thave COMM6000 Career Accelerator: Essentials || COMM1999 First Year Portfolio (Business School only) This course may count as a Business School Free Elective || as a major elective within some schools. It is recommended a progression check is prior to enrolling"
+        "processed_rule": "\u2022\t65WAM; \u2022\thave a minimum 48UOC at the commencement of this course; \u2022\thave room in their degree for this course; \u2022\tare in good academic standing; \u2022\thave COMM6000 Career Accelerator: Essentials || COMM1999 First Year Portfolio (Business School only) This course may count as a Business School Free Elective || as a major elective within some schools. It is recommended a progression check is prior to enrolling"
     },
     "COMM3090": {
         "original_rule": "Students are expected to be in their final year of a Bachelor of Commerce single or dual degree with at least 108 UOC completed.<br/><br/>",
-        "processed_rule": "are expected to be in their final year of a Bachelor of Commerce single || dual degree with at least 108UOC "
+        "processed_rule": "are expected to be in their final year of a Bachelor of Commerce single || dual degree with 108UOC"
     },
     "COMM3101": {
         "original_rule": "Pre-requisite: Completion of 48 UOC.<br/>This course is by application only.Please contact the Co-op office for more information.<br/>Students who have completed DIPP1510 or COMM2222 or are in Business Co-Op programs are excluded from this course.<br/><br/>",
@@ -3509,7 +3509,7 @@
     },
     "COMM3202": {
         "original_rule": "Pre-requisite: COMM3101 or COMM2101<br/>Both terms of COMM3101/COMM2101 (12 UOC) must be successfully completed. <br/>This course is by application only. Please contact the Co-op office for more information.<br/>Excluded:DIPP1510, COMM2222, Business Co-Op programs<br/><br/>",
-        "processed_rule": "COMM3101 || COMM2101 terms of (COMM3101 || COMM2101) (12UOC) must be successfully . This course is by application only. Please contact the Co-op office for more information"
+        "processed_rule": "COMM3101 || COMM2101 terms of (COMM3101 || COMM2101) ( 12UOC) must be successfully . This course is by application only. Please contact the Co-op office for more information"
     },
     "COMM3303": {
         "original_rule": "Pre-requisite: This course is by application only. Please contact the Co-op office for more information.<br/><br/>",
@@ -3525,11 +3525,11 @@
     },
     "COMM3900": {
         "original_rule": "Pre-requisite: Completed a minimum of 108 UOC (including First Year core), on Good standing and completed Career Accelerator Essentials (COMM6000).<br/>It is strongly recommended that students only complete this course within their final 2 terms of study.<br/><br/>",
-        "processed_rule": "a minimum of 108UOC (including First Year core) && on Good standing && Career Accelerator Essentials (COMM6000). It is strongly recommended that only complete this course within their final 2 terms of study"
+        "processed_rule": "a minimum 108UOC (including First Year core) && on Good standing && Career Accelerator Essentials (COMM6000). It is strongly recommended that only complete this course within their final 2 terms of study"
     },
     "COMM3999": {
         "original_rule": "Pre-requisite: Completed myBCom First Year Portfolio (COMM1999) and in their final year of a single or double Commerce degree (completed at least 72 UOC of Business courses).<br/><br/>",
-        "processed_rule": "myBCom First Year Portfolio (COMM1999) && in their final year of a single || double Commerce degree ( at least 72UOC of Business courses)"
+        "processed_rule": "myBCom First Year Portfolio (COMM1999) && in their final year of a single || double Commerce degree ( 72UOC of Business courses)"
     },
     "COMM4002": {
         "original_rule": "",
@@ -4906,7 +4906,7 @@
     },
     "DPBS1190": {
         "original_rule": "Prereq: DPBS1110 or DPBS1203,6UoC GLDIP + enrolment in a Global Diploma program<br/><br/>",
-        "processed_rule": "DPBS1110 || DPBS1203,6UOC GLDIP + enrolment in a Global Diploma program"
+        "processed_rule": "DPBS1110 || DPBS1203, 6UOC GLDIP + enrolment in a Global Diploma program"
     },
     "DPBS1203": {
         "original_rule": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
@@ -7182,11 +7182,11 @@
     },
     "LAWS2320": {
         "original_rule": "Pre-requisite: 24 UOC completed in LLB courses or 24 UOC completed in Juris Doctor courses. Juris Doctor students who commenced prior to 2013 need no pre-requisites.<br/><br/>",
-        "processed_rule": "24UOC in LLB courses || 24UOC in Juris Doctor courses. Juris Doctor who commenced prior to 2013 need no "
+        "processed_rule": "24UOC in LLB courses || 24UOC in Juris Doctor courses. Juris Doctor who commenced prior to 2013 need no"
     },
     "LAWS2326": {
         "original_rule": "Pre-requisite: 24 UOC completed in LLB courses or 24 UOC completed in Juris Doctor courses. Juris Doctor students who commenced prior to 2013 need no pre-requisites.<br/><br/>",
-        "processed_rule": "24UOC in LLB courses || 24UOC in Juris Doctor courses. Juris Doctor who commenced prior to 2013 need no "
+        "processed_rule": "24UOC in LLB courses || 24UOC in Juris Doctor courses. Juris Doctor who commenced prior to 2013 need no"
     },
     "LAWS2351": {
         "original_rule": "Prerequisite: Crime and Criminal Process (LAWS1021/JURD7121) and Criminal Laws (LAWS1022/JURD7122).<br/><br/>",
@@ -7202,7 +7202,7 @@
     },
     "LAWS2384": {
         "original_rule": "Pre-requisite: 24 UOC completed in LLB courses or 24 UOC completed in Juris Doctor courses. Juris Doctor students who commenced prior to 2013 need no pre-requisites.<br/><br/>",
-        "processed_rule": "24UOC in LLB courses || 24UOC in Juris Doctor courses. Juris Doctor who commenced prior to 2013 need no "
+        "processed_rule": "24UOC in LLB courses || 24UOC in Juris Doctor courses. Juris Doctor who commenced prior to 2013 need no"
     },
     "LAWS2385": {
         "original_rule": "Prerequisite: Principles of Private Law (LAWS1150/JURD7150) and Contracts (LAWS1075/ JURD7175)<br/><br/>",
@@ -7210,7 +7210,7 @@
     },
     "LAWS2820": {
         "original_rule": "Pre-requisite: 24 UOC completed in LLB courses or 24 UOC completed in Juris Doctor courses. Juris Doctor students who commenced prior to 2013 need no pre-requisites.<br/><br/>",
-        "processed_rule": "24UOC in LLB courses || 24UOC in Juris Doctor courses. Juris Doctor who commenced prior to 2013 need no "
+        "processed_rule": "24UOC in LLB courses || 24UOC in Juris Doctor courses. Juris Doctor who commenced prior to 2013 need no"
     },
     "LAWS3014": {
         "original_rule": "Prerequisite: Completion of 78 UOC in LAWS courses including Business Associations (LAWS1091).<br/><br/>",
@@ -8086,7 +8086,7 @@
     },
     "MATH3171": {
         "original_rule": "(1) [MATH2011 or MATH2111] and [MATH2501 or MATH2601]; or (2) both MATH2069 (CR) and MATH2099 ; or (3) both [MATH2018 or MATH2019] (DN) and MATH2089 .<br/><br/>",
-        "processed_rule": "(1) (MATH2011 || MATH2111) && (MATH2501 || MATH2601); || (2) 65GRADE in MATH2069 && MATH2099 ; || (3) (MATH2018 || MATH2019) (DN) && MATH2089 "
+        "processed_rule": "(1) (MATH2011 || MATH2111) && (MATH2501 || MATH2601); || (2) 65GRADE in MATH2069 && MATH2099 ; || (3) (MATH2018 || MATH2019) (DN) && MATH2089"
     },
     "MATH3201": {
         "original_rule": "Prerequisite: (MATH2501 or MATH2601 or MATH2089 or MATH2099) and (MATH2011 or MATH2111 or MATH2018 (DN) or MATH2019 (DN) or MATH2069 (CR) or MATH2121 or MATH2221)<br/><br/>",
@@ -8410,7 +8410,7 @@
     },
     "MDIA2013": {
         "original_rule": "Prerequisite: 24 uoc overall, including MDIA1006 Mediated Storytelling or ARTS1064 Screen Production I, or MDIA1004 News Fundamentals or (with course convenor approval) at least 6 UOC of an audio-visual media production or feature writing course<br/><br/>",
-        "processed_rule": "24UOC || including MDIA1006 Mediated Storytelling || ARTS1064 Screen Production I || MDIA1004 News Fundamentals || (with course convenor approval) at least 6UOC of an audio-visual media production || feature writing course"
+        "processed_rule": "24UOC || including MDIA1006 Mediated Storytelling || ARTS1064 Screen Production I || MDIA1004 News Fundamentals || (with course convenor approval) 6UOC of an audio-visual media production || feature writing course"
     },
     "MDIA3000": {
         "original_rule": "Prerequisite: 66 units of credit overall including MDIA2005 or MDIA2006 or MDIA2012<br/><br/>",
@@ -9134,7 +9134,7 @@
     },
     "MUSC2703": {
         "original_rule": "Prerequisite: Enrolment in a Music program and either MUSC1701 and MUSC1704, or MUSC1702 and MUSC1705, or MUSC1707 (12 uoc).<br/><br/>",
-        "processed_rule": "Enrolment in a Music program && MUSC1701 && MUSC1704 || MUSC1702 && MUSC1705 || MUSC1707 (12UOC)"
+        "processed_rule": "Enrolment in a Music program && MUSC1701 && MUSC1704 || MUSC1702 && MUSC1705 || MUSC1707 ( 12UOC)"
     },
     "MUSC2801": {
         "original_rule": "Prerequisite: Enrolment in the Music Creative Practice Stream in a Music program<br/><br/>",
@@ -9170,11 +9170,11 @@
     },
     "MUSC3705": {
         "original_rule": "Prerequisite: MUSC2702 or MUSC2703 (12 uoc), and enrolment in a Music program.<br/><br/>",
-        "processed_rule": "MUSC2702 || MUSC2703 (12UOC) && enrolment in a Music program"
+        "processed_rule": "MUSC2702 || MUSC2703 ( 12UOC) && enrolment in a Music program"
     },
     "MUSC3706": {
         "original_rule": "Prerequisite: MUSC2702 or MUSC2703 (12 uoc), and enrolment in a Music Creative Practice or Music Pedagogy stream in a Music program.<br/><br/>",
-        "processed_rule": "MUSC2702 || MUSC2703 (12UOC) && enrolment in a Music Creative Practice || Music Pedagogy stream in a Music program"
+        "processed_rule": "MUSC2702 || MUSC2703 ( 12UOC) && enrolment in a Music Creative Practice || Music Pedagogy stream in a Music program"
     },
     "MUSC3801": {
         "original_rule": "Prerequisite: MUSC2801 and enrolment in the Music Creative Practice specialisation in a Music single or double degree<br/><br/>",
@@ -9254,7 +9254,7 @@
     },
     "MUSC4705": {
         "original_rule": "Prerequisite: MUSC3704 or MUSC3706 (12 uoc), and enrolment in a Music Creative Practice stream in a Music program.<br/><br/>",
-        "processed_rule": "MUSC3704 || MUSC3706 (12UOC) && enrolment in a Music Creative Practice stream in a Music program"
+        "processed_rule": "MUSC3704 || MUSC3706 ( 12UOC) && enrolment in a Music Creative Practice stream in a Music program"
     },
     "MUSC4706": {
         "original_rule": "Prerequisite: Enrolment in a Music or Arts program<br/><br/>",
