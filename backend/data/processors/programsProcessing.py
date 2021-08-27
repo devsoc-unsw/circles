@@ -40,7 +40,7 @@ def process_data():
         # Append processed program data to final data
         processedData[programData["code"]] = programData
         
-    dataHelpers.write_data(processedData, "data/finalData/programsProcessedCompare.json")
+    dataHelpers.write_data(processedData, "data/finalData/programsProcessedFinal.json")
 
 def addComponentData(formatted, programData):
     components = {
@@ -128,7 +128,7 @@ def addDisciplineData(components, item):
                 if container["relationship"] != []:
                     for course in container["relationship"]:
                         PE[course["academic_item_code"]] = 1
-                    SpecialisationData[container["title"]] = PE
+                    NonSpecialisationData[container["title"]] = PE
                 else:
                     for course in container["dynamic_relationship"]:
                         PE[course["description"]] = 1
@@ -143,7 +143,7 @@ def addDisciplineData(components, item):
                 for course in container["relationship"]:
                     CC[course["academic_item_code"]] = 1
 
-                NonSpecialisationData["CoreCourses"] = CC    
+                NonSpecialisationData[title] = CC    
 
     components["SpecialisationData"] = SpecialisationData
     components["NonSpecialisationData"] = NonSpecialisationData

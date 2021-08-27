@@ -37,10 +37,10 @@ run = {
     'course': {
         'process': process_course_data
     },
-    'condition': {
-        'preprocess': preprocess_conditions,
-        'parse': parse_conditions_logic
-    }
+    # 'condition': {
+    #     'preprocess': preprocess_conditions,
+    #     'parse': parse_conditions_logic
+    # }
 }
 
 if args.type == 'all':
