@@ -16,8 +16,6 @@ from data.processors.programsProcessing import process_data as process_prg_data
 from data.processors.specialisationsProcessing import customise_spn_data
 from data.processors.coursesProcessing import process_courses as process_course_data
 
-from data.processors.conditionsPreprocessing import preprocess_rules as preprocess_conditions
-from data.processors.conditionsLogicalParsing import parse_conditions_logic
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--type', type=str, help='all, program, specialisation, course or condition')
