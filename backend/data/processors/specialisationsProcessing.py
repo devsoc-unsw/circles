@@ -87,8 +87,14 @@ def get_constraint(constraint_data: dict) -> dict:
     """
     return {
         "title": constraint_data["title"],
-        "description": constraint_data["description"]
+        "description": strip_tags(constraint_data["description"])
     }
+
+def strip_tags(text):
+    """ Strips HTML tags """
+    text = re.sub(r"<[^>]*?/>", " ", text)
+    text = re.sub(r" +", " ", text)
+    return text.strip()
 
 def initialise_spn(spn: dict, data: dict) -> None:
     """
@@ -163,7 +169,7 @@ def get_notes(description: str) -> str:
     # Non-greedy search to catch anything after first matching line
     res = re.search(r"Students must.*?following courses\.?([^.].+)", description)
     if res: # Unique notes found
-        return res.group(1)
+        return strip_tags(res.group(1))
     else:
         return ""
 
