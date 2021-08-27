@@ -16140,7 +16140,17 @@
         "equivalents": {},
         "exclusions": {
             "INFS1609": 1,
-            "INFS2609": 1
+            "INFS2609": 1,
+            "COMPA1": 1,
+            "COMPD1": 1,
+            "COMPE1": 1,
+            "COMPI1": 1,
+            "COMPJ1": 1,
+            "COMPN1": 1,
+            "COMPS1": 1,
+            "COMPY1": 1,
+            "COMPZ1": 1,
+            "BINFB1": 1
         },
         "path_to": {},
         "terms": [
@@ -16258,7 +16268,18 @@
         "level": 1,
         "description": "This course introduces students to the basics of programming. The objective of the course is for students to develop proficiency in program design and construction using a high-level programming language. Topics covered include: fundamental programming concepts, the C programming language, programming style, program design and organisation, program testing and debugging. Practical experience of these topics is supplied\u00a0through laboratory exercises and programming assignments.\nAdditional Information:\nThis course is designed for non-computing majors who want a solid introduction to programming, with the aim of using computers as part of some other discipline. It does not assume any prior background in programming.\nElectrical Engineering, Telecommunications, Mechanical Engineering, and Mechatronic Engineering specify this as the standard first year computing course. COMP1911 and the following course COMP1521 provide a solid introduction to programming an computer systems concepts for all of these students.\nStudents with an interest in computing or who wish to be extended might want to consider COMP1511 as an alternative, especially if they plan to study more computing as part of their future study. Students from all degrees are permitted to take COMP1511 instead of COMP1911.\nNote: Because of significant content overlap, students cannot take both COMP1911 and COMP1511.",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "COMPA1": 1,
+            "COMPD1": 1,
+            "COMPE1": 1,
+            "COMPI1": 1,
+            "COMPJ1": 1,
+            "COMPN1": 1,
+            "COMPS1": 1,
+            "COMPY1": 1,
+            "COMPZ1": 1,
+            "BINFB1": 1
+        },
         "path_to": {
             "COMP1521": 1,
             "COMP2121": 1,
@@ -17470,7 +17491,9 @@
         "level": null,
         "description": "(In-)Formal Methods\u00a0are practical structuring and design patterns that encourage programming that is easy to understand and to maintain. They are only a part of the large body of \u201cgood programming practices,\u201d distinguished from that larger set because \u2013for the methods we consider\u2013 the computer-science community has determined the\u00a0science\u00a0behind the structures: we know why they are effective.\r\nUnusually, this course does not take the traditional route of teaching that science first, and then turning it into practical programming \u201ctools-of-thought.\u201d Instead, we teach the mental tools first, try them on examples and only then, once their effectiveness has been demonstrated, will we look behind the scenes to see where they come from.\r\nInitially the material will deal with conventional programs, those that must \u201cgive the right output.\u201d (This is known as\u00a0functional\u00a0correctness, and a sorting program is a simple example.) Later in the course we will look at additional correctness criteria, such as\u00a0security\u00a0(perform this calculation in a way that keeps part of the answer hidden) and\u00a0randomisation\u00a0(implement over-the-internet protocols that depend intrinsically on coin-flipping). Those last two topics will draw on up-to-the-minute research.",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "SENGAH": 1
+        },
         "path_to": {},
         "terms": [
             "T2"
