@@ -8,7 +8,6 @@ router = APIRouter(
     prefix='/courses',
     tags=['courses'],
     responses={404: {"description": "Not found"}}
-    # responses={404: {"model": message, "description": "The course was not found"}}
 )
 
 class message(BaseModel):
