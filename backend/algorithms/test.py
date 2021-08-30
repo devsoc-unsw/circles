@@ -5,13 +5,42 @@ import json
 # put selected Courses here
 selectedCourses = ['COMP1531', 'MATH1081']
 # Text is the enrolmentRules
+'''
 text = "( MATH1081 and WAM75 and ( COMP1531 or COMP2041 ) )"
 text = "( MATH1081 )"
 text = ""
 #Should return empty
 text = "( ( ( ) ) )"
+'''
+f = open('../data/finalData/conditionsParsedLogic.json', 'rb')
+data = json.load(f)
+f.close()
+unmatched = []
+
+def isUoc(text):
+    if 'UOC' in text:
+        return True
+    pass
+for i in data:
+    skip = True
+    #Filter Uoc
+    for tk in data[i]:
+        if isUoc(tk) and 'in' in tk:
+            skip = False
+    if skip:
+        continue
+    
+    result, errCode = parseRequirement(data[i])
+    if errCode == -1:
+        unmatched.append(i)
+print(len(unmatched), "of", len(data), "Requirements unmatched")
+unmatched = json.dumps(unmatched, sort_keys=True, indent=4, separators=(',', ':'))
+fp = open('unmatched.json', "w", encoding='utf-8')
+fp.write(unmatched)
+fp.close()
 
 
+'''
 cond = Condition()
 cond.select(selectedCourses)
 
@@ -24,6 +53,7 @@ else:
     data.show()
     data = data.validate(cond)
     print(data)
+'''
 
 
 
