@@ -19,3 +19,9 @@ def test_basic():
         data.show()
         assert data.validate(cond) == True
         
+
+
+def test_COMP1511():
+    '''No Prerequisite'''
+    user = User()
+    user = 
