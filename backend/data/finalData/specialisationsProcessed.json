@@ -43,7 +43,7 @@
                 "credits_to_complete": 30,
                 "type": "elective",
                 "levels": [],
-                "notes": "<br />NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. <br />2 UOC courses are run over consecutive terms for a final total of 6 UOC."
+                "notes": "NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. 2 UOC courses are run over consecutive terms for a final total of 6 UOC."
             }
         ]
     },
@@ -94,7 +94,7 @@
         "course_constraints": [
             {
                 "title": "Level 4 UOC Minimum",
-                "description": "Students must complete a minimum of 36 UOC of Level 4 courses including core courses and at least 12 UOC of Level 4 Discipline Electives, including:<br /><br />COMP4601 - Design Project B<br />COMP4920 - Management and Ethics<br />COMP4951 - Research Thesis A<br />COMP4952 - Research Thesis B<br />COMP4953 - Research Thesis C<br />any level 4 course offered by School of Computer Science and Engineering<br />"
+                "description": "Students must complete a minimum of 36 UOC of Level 4 courses including core courses and at least 12 UOC of Level 4 Discipline Electives, including: COMP4601 - Design Project B COMP4920 - Management and Ethics COMP4951 - Research Thesis A COMP4952 - Research Thesis B COMP4953 - Research Thesis C any level 4 course offered by School of Computer Science and Engineering"
             }
         ],
         "curriculum": [
@@ -113,7 +113,7 @@
                 "credits_to_complete": 24,
                 "type": "elective",
                 "levels": [],
-                "notes": "<br /><br />2 UOC and 3 UOC courses are run over consecutive terms for a final total of 6 UOC."
+                "notes": "2 UOC and 3 UOC courses are run over consecutive terms for a final total of 6 UOC."
             },
             {
                 "courses": {
@@ -197,7 +197,7 @@
         "course_constraints": [
             {
                 "title": "Level 4 (or higher) COMP UOC Minimum",
-                "description": "Students must complete a minimum of 30 UOC of the following courses.<br /><br />COMP4920 - Management and Ethics<br />any level 4 Computer Science (COMP) course<br />any level 6 Computer Science (COMP) course<br />any level 9 Computer Science (COMP) course<br />COMP4951 - Research Thesis A<br />COMP4952 - Research Thesis B<br />COMP4953 - Research Thesis C<br />"
+                "description": "Students must complete a minimum of 30 UOC of the following courses. COMP4920 - Management and Ethics any level 4 Computer Science (COMP) course any level 6 Computer Science (COMP) course any level 9 Computer Science (COMP) course COMP4951 - Research Thesis A COMP4952 - Research Thesis B COMP4953 - Research Thesis C"
             }
         ],
         "curriculum": [
@@ -365,7 +365,7 @@
                 "credits_to_complete": 6,
                 "type": "elective",
                 "levels": [],
-                "notes": "<br />NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. <br />2 UOC courses are run over consecutive terms for a final total of 6 UOC."
+                "notes": "NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. 2 UOC courses are run over consecutive terms for a final total of 6 UOC."
             }
         ]
     },
@@ -393,7 +393,7 @@
                 "credits_to_complete": 6,
                 "type": "elective",
                 "levels": [],
-                "notes": "<br />NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. <br />2 UOC courses are run over consecutive terms for a final total of 6 UOC."
+                "notes": "NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. 2 UOC courses are run over consecutive terms for a final total of 6 UOC."
             },
             {
                 "courses": {
@@ -471,7 +471,7 @@
                 "credits_to_complete": 6,
                 "type": "elective",
                 "levels": [],
-                "notes": "<br />NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. <br />2 UOC courses are run over consecutive terms for a final total of 6 UOC."
+                "notes": "NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. 2 UOC courses are run over consecutive terms for a final total of 6 UOC."
             },
             {
                 "courses": {
@@ -554,7 +554,7 @@
                 "credits_to_complete": 6,
                 "type": "elective",
                 "levels": [],
-                "notes": "<br />NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. <br />2 UOC courses are run over consecutive terms for a final total of 6 UOC."
+                "notes": "NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. 2 UOC courses are run over consecutive terms for a final total of 6 UOC."
             }
         ]
     },
@@ -582,7 +582,7 @@
                 "credits_to_complete": 6,
                 "type": "elective",
                 "levels": [],
-                "notes": "<br />NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. <br />2 UOC courses are run over consecutive terms for a final total of 6 UOC."
+                "notes": "NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. 2 UOC courses are run over consecutive terms for a final total of 6 UOC."
             },
             {
                 "courses": {
@@ -681,7 +681,7 @@
         "course_constraints": [
             {
                 "title": "Prescribed Electives Requirement",
-                "description": "Students must complete a minimum of 6 UOC of the following courses.<br /><br />COMP6445 - Digital Forensics<br />COMP6845 - Extended Digital Forensics and Incident Response<br />COMP6447 - System and Software Security Assessment<br />COMP6449 - Security Engineering Professional Practice<br />"
+                "description": "Students must complete a minimum of 6 UOC of the following courses. COMP6445 - Digital Forensics COMP6845 - Extended Digital Forensics and Incident Response COMP6447 - System and Software Security Assessment COMP6449 - Security Engineering Professional Practice"
             }
         ],
         "curriculum": [
@@ -719,7 +719,7 @@
                 "credits_to_complete": 6,
                 "type": "elective",
                 "levels": [],
-                "notes": "<br />NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. <br />2 UOC courses are run over consecutive terms for a final total of 6 UOC."
+                "notes": "NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. 2 UOC courses are run over consecutive terms for a final total of 6 UOC."
             },
             {
                 "courses": {
@@ -842,6 +842,334 @@
                 "credits_to_complete": 18,
                 "type": "elective",
                 "levels": [],
+                "notes": ""
+            }
+        ]
+    },
+    "ACCTA2": {
+        "programs": [
+            "3543",
+            "3502",
+            "3587",
+            "3778",
+            "3554",
+            "3558",
+            "3586"
+        ],
+        "name": "Accounting",
+        "type": "minor",
+        "UOC": 30,
+        "code": "ACCTA2",
+        "course_constraints": [],
+        "curriculum": [
+            {
+                "courses": {
+                    "ACCT2511": 1,
+                    "COMM1140": 1
+                },
+                "title": "Core Courses",
+                "credits_to_complete": 12,
+                "type": "core",
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ACCT3601": 1,
+                    "ACCT3708": 1,
+                    "ACCT2522": 1,
+                    "ACCT2507": 1,
+                    "ACCT3583": 1,
+                    "ACCT2542": 1,
+                    "TABL2741": 1,
+                    "ACCT3625": 1,
+                    "ACCT3610": 1,
+                    "ACCT3563": 1
+                },
+                "title": "Prescribed Electives",
+                "credits_to_complete": 18,
+                "type": "elective",
+                "levels": [],
+                "notes": ""
+            }
+        ]
+    },
+    "FINSA2": {
+        "programs": [
+            "3543",
+            "3502",
+            "3587",
+            "3778",
+            "3554",
+            "3558",
+            "3586"
+        ],
+        "name": "Finance",
+        "type": "minor",
+        "UOC": 30,
+        "code": "FINSA2",
+        "course_constraints": [],
+        "curriculum": [
+            {
+                "courses": {
+                    "FINS3616": 1,
+                    "FINS3634": 1,
+                    "FINS3625": 1,
+                    "FINS3633": 1,
+                    "FINS3641": 1,
+                    "FINS3640": 1,
+                    "FINS3644": 1,
+                    "FINS3647": 1,
+                    "FINS3775": 1,
+                    "FINS2622": 1,
+                    "FINS3646": 1,
+                    "FINS3636": 1,
+                    "FINS3623": 1,
+                    "FINS3635": 1,
+                    "FINS3637": 1,
+                    "FINS3666": 1,
+                    "FINS3630": 1,
+                    "FINS3626": 1,
+                    "FINS3650": 1,
+                    "FINS2643": 1,
+                    "FINS3648": 1,
+                    "FINS3655": 1,
+                    "FINS3631": 1,
+                    "FINS2624": 1,
+                    "FINS3645": 1
+                },
+                "title": "Prescribed Electives",
+                "credits_to_complete": 12,
+                "type": "elective",
+                "levels": [],
+                "notes": "and may only count ONE Financial Technology course (FINS3645, FINS3646, FINS3647 or FINS3648) towards their minor in Finance."
+            },
+            {
+                "courses": {
+                    "FINS2613": 1,
+                    "COMM1180": 1,
+                    "FINS1612": 1
+                },
+                "title": "Core Courses",
+                "credits_to_complete": 18,
+                "type": "core",
+                "levels": [],
+                "notes": ""
+            }
+        ]
+    },
+    "INFSA2": {
+        "programs": [
+            "3543",
+            "3502",
+            "3587",
+            "3778",
+            "3554",
+            "3558",
+            "3586"
+        ],
+        "name": "Information Systems",
+        "type": "minor",
+        "UOC": 30,
+        "code": "INFSA2",
+        "course_constraints": [],
+        "curriculum": [
+            {
+                "courses": {
+                    "INFS3604": 1,
+                    "INFS1603": 1,
+                    "INFS2602": 1,
+                    "INFS2603": 1,
+                    "COMM1190": 1
+                },
+                "title": "Core Courses",
+                "credits_to_complete": 30,
+                "type": "core",
+                "levels": [],
+                "notes": "Students in Actuarial degrees should complete MATH1151 or MATH1251 instead of COMM1190. All other students should complete COMM1190. Please note: Courses completed under a minor cannot form part of a nominated major."
+            }
+        ]
+    },
+    "MARKA2": {
+        "programs": [
+            "3543",
+            "3502",
+            "3778",
+            "3554",
+            "3558",
+            "3586"
+        ],
+        "name": "Marketing",
+        "type": "minor",
+        "UOC": 30,
+        "code": "MARKA2",
+        "course_constraints": [],
+        "curriculum": [
+            {
+                "courses": {
+                    "COMM1100": 1,
+                    "MARK2012": 1
+                },
+                "title": "Core Course",
+                "credits_to_complete": 12,
+                "type": "core",
+                "levels": [],
+                "notes": "Students in Comm/Econ and Comm/Actl should take COMM1900 instead of COMM1100. Students in Econ and Actl should take ECON1101. All other students should complete COMM1100"
+            },
+            {
+                "courses": {
+                    "MARK3090": 1,
+                    "MARK3092": 1,
+                    "MARK3089": 1,
+                    "MARK3087": 1,
+                    "MARK3081": 1,
+                    "MARK2060": 1,
+                    "MARK3088": 1,
+                    "MARK3054": 1,
+                    "MARK2053": 1,
+                    "MARK2085": 1,
+                    "MARK2055": 1,
+                    "MARK2051": 1,
+                    "MARK3091": 1,
+                    "MARK2071": 1,
+                    "MARK3085": 1,
+                    "MARK2052": 1
+                },
+                "title": "Prescribed Electives",
+                "credits_to_complete": 18,
+                "type": "elective",
+                "levels": [],
+                "notes": "At least one of the elective courses must be at level 3 (i.e. MARK3XXX)). The minor does not form part of the nominated major."
+            }
+        ]
+    },
+    "MATHC2": {
+        "programs": [
+            "3543",
+            "3962",
+            "3970",
+            "3778"
+        ],
+        "name": "Mathematics",
+        "type": "minor",
+        "UOC": 36,
+        "code": "MATHC2",
+        "course_constraints": [
+            {
+                "title": "Level 2/3 Mathematics Electives",
+                "description": "Students must complete a minimum of 6 UOC of the following courses. any level 3 Mathematics (MATH) course any level 5 Mathematics (MATH) course any level 6 Mathematics (MATH) course"
+            },
+            {
+                "title": "Non-statistics Mathematics Courses",
+                "description": "Students may not undertake any of the following higher statistics mathematics courses. any course matching the pattern MATH58## any course matching the pattern MATH59##"
+            }
+        ],
+        "curriculum": [
+            {
+                "courses": {
+                    "MATH2521": 1,
+                    "MATH3711": 1,
+                    "MATH3411": 1,
+                    "MATH3041": 1,
+                    "MATH3701": 1,
+                    "MATH3261": 1,
+                    "MATH2621": 1,
+                    "MATH3101": 1,
+                    "MATH2601": 1,
+                    "MATH2011": 1,
+                    "MATH2241": 1,
+                    "MATH2301": 1,
+                    "MATH3611": 1,
+                    "MATH2121": 1,
+                    "MATH3161": 1,
+                    "MATH3201": 1,
+                    "MATH3521": 1,
+                    "MATH2019": 1,
+                    "MATH3570": 1,
+                    "MATH3311": 1,
+                    "MATH3121": 1,
+                    "MATH3560": 1,
+                    "MATH2089": 1,
+                    "MATH2400": 1,
+                    "MATH2701": 1,
+                    "MATH2069": 1,
+                    "MATH2111": 1,
+                    "MATH2501": 1,
+                    "MATH2221": 1,
+                    "MATH3531": 1,
+                    "MATH3511": 1,
+                    "MATH2099": 1,
+                    "MATH5": 1
+                },
+                "title": "Level 2/3 Mathematics Electives",
+                "credits_to_complete": 24,
+                "type": "elective",
+                "levels": [
+                    2,
+                    3
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "MATH1131 or MATH1141": 2,
+                    "MATH1231 or MATH1241": 2
+                },
+                "title": "Level 1 Core Courses",
+                "credits_to_complete": 12,
+                "type": "core",
+                "levels": [
+                    1
+                ],
+                "notes": ""
+            }
+        ]
+    },
+    "PSYCM2": {
+        "programs": [
+            "3543",
+            "3962",
+            "3970",
+            "3434",
+            "3778",
+            "3454",
+            "3429",
+            "3453",
+            "3438",
+            "3409"
+        ],
+        "name": "Psychology",
+        "type": "minor",
+        "UOC": 36,
+        "code": "PSYCM2",
+        "course_constraints": [],
+        "curriculum": [
+            {
+                "courses": {
+                    "PSYC2101": 1,
+                    "PSYC2071": 1,
+                    "PSYC2061": 1,
+                    "PSYC2081": 1
+                },
+                "title": "Level 2 Core Courses",
+                "credits_to_complete": 24,
+                "type": "core",
+                "levels": [
+                    2
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "PSYC1011": 1,
+                    "PSYC1001": 1
+                },
+                "title": "Level 1 Core Courses",
+                "credits_to_complete": 12,
+                "type": "core",
+                "levels": [
+                    1
+                ],
                 "notes": ""
             }
         ]
