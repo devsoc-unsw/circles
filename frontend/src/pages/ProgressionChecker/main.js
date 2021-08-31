@@ -6,6 +6,7 @@ import './main.less';
 const ProgressionChecker = () => {
   const [degree, setDegree] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [courses, setCourses] = useState({});
 
   const fetchDegree = async () => {
     const res = await axios.get("degree.json");
@@ -13,15 +14,22 @@ const ProgressionChecker = () => {
     setIsLoading(false);
   };
 
+  const fetchCourses = async () => {
+    const res = await axios.get("checkercourses.json");
+    setDegree(res.data);
+    setIsLoading(false);
+  };
+
   useEffect(() => {
     // setTimeout(fetchDegree, 2000);  // testing skeleton
     fetchDegree();
+    fetchCourses();
   }, []);
 
   return (
     <>
-      <Dashboard isLoading={isLoading} degree={degree} />
-      <ListView isLoading={isLoading} degree={degree} />
+      <Dashboard isLoading={isLoading} degree={degree} courses={courses}/>
+      <ListView isLoading={isLoading} degree={degree} courses={courses}/>
     </>
   );
 };

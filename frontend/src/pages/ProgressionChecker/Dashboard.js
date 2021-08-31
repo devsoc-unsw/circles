@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Typography } from "antd";
 import { useSpring, animated } from "react-spring";
@@ -16,6 +15,7 @@ const Dashboard = ({ isLoading, degree }) => {
     reset: true,
     config: { tension: 80, friction: 60 },
   });
+console.log(degree.concentrations)
 
   return (
     <div className="container">
@@ -36,7 +36,7 @@ const Dashboard = ({ isLoading, degree }) => {
             <Title className="text textLink">{degree["name"]}</Title>
           </a>
           <div className="cards">
-            {degree["concentrations"].map((concentration, index) => (
+            {degree["concentrations"]&&degree["concentrations"].map((concentration, index) => (
               <DegreeCard key={index} concentration={concentration} />
             ))}
           </div>

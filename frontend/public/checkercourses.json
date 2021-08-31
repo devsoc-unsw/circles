@@ -1,0 +1,109 @@
+{
+	"corecourses": [ 
+	  {
+		"faculty": "UNSW Business School",
+		"name": "COMM 1100: Business Decision Making",
+		"UOC": 6,
+		"state": "Completed"
+	  },
+	  {
+		"faculty": "UNSW Business School",
+		"name": "COMM 1110: Evidence-Based Problem Solving",
+		"UOC": 6,
+		"state": "Completed"
+	  },
+	  {
+		"faculty": "UNSW Business School",
+		"name": "COMM 1120: Collaboration and Innovation in Business",
+		"UOC": 6,
+		"state": "Planned"
+	  },
+	  {
+		"faculty": "UNSW Business School",
+		"name": "COMM 1140: Financial Management",
+		"UOC": 6,
+		"state": "Completed"
+	  },
+	  {
+		"faculty": "UNSW Business School",
+		"name": "COMM 1150: Global Business Environments",
+		"UOC": 6,
+		"state": "Unplanned"
+	  },
+	  {
+		"faculty": "UNSW Business School",
+		"name": "COMM 1170: Organisational Resources",
+		"UOC": 6,
+		"state": "Planned"
+	  },
+	  {
+		"faculty": "UNSW Business School",
+		"name": "COMM 1180: Value Creation",
+		"UOC": 6,
+		"state": "Planned"
+	  },
+	  {
+		"faculty": "UNSW Business School",
+		"name": "COMM 1190: Data, Insights and Decisions",
+		"UOC": 6,
+		"state": "Completed"
+	  }
+	],
+	"disciplineelectives": [ 
+		{
+		  "faculty": "UNSW Business School",
+		  "name": "FINS 1612: Capital Markets and Institutions",
+		  "UOC": 6,
+		  "state": "Unplanned"
+		},
+		{
+		  "faculty": "UNSW Business School",
+		  "name": "FINS 3645: Financial Market Data Design and Analysis",
+		  "UOC": 6,
+		  "state": "Unplanned"
+		},
+		{
+		  "faculty": "UNSW Business School",
+		  "name": "FINS 3646: Toolkit for Finance",
+		  "UOC": 6,
+		  "state": "Unplanned"
+		},
+		{
+		  "faculty": "UNSW Business School",
+		  "name": "FINS 3647: Bitcoin and Decentralised Finance",
+		  "UOC": 6,
+		  "state": "Unplanned"
+		},
+		{
+		  "faculty": "UNSW Business School",
+		  "name": "FINS 3648: Banking, Finance and Technology",
+		  "UOC": 6,
+		  "state": "Unplanned"
+		},
+		{
+		  "faculty": "UNSW Business School",
+		  "name": "FINS 2613: Intermediate Business Finance",
+		  "UOC": 6,
+		  "state": "Unplanned"
+		},
+		{
+		  "faculty": "UNSW Business School",
+		  "name": "FINS 2624: Portfolio Management",
+		  "UOC": 6,
+		  "state": "Unplanned"
+		},
+		{
+		  "faculty": "UNSW Business School",
+		  "name": "FINS 3623: Venture Capital",
+		  "UOC": 6,
+		  "state": "Unplanned"
+		},
+		{
+		"faculty": "UNSW Business School",
+		"name": "FINS 3630: Bank Financial Management",
+		"UOC": 6,
+		"state": "Unplanned"
+		}
+	  ]
+}
+  
