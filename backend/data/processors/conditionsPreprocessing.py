@@ -43,6 +43,7 @@ def preprocess_rules():
         processed = convert_GRADE(processed)
         processed = convert_level(processed)
         processed = convert_fslash(processed)
+        processed = convert_including(processed)
         processed = convert_AND_OR(processed)
         processed = convert_coreqs(processed)
 
@@ -206,6 +207,10 @@ def convert_fslash(processed):
 
     return processed
 
+def convert_including(processed):
+    """ Convert 'including' to && """
+    return re.sub("including", "&&", processed)
+
 def convert_AND_OR(processed):
     """ Convert 'and' to '&&' and 'or' to '||' """
     processed = re.sub(" and ", " && ", processed, flags=re.IGNORECASE)
@@ -213,16 +218,13 @@ def convert_AND_OR(processed):
     return processed
 
 def convert_coreqs(processed):
-    """ Puts co-requisites inside square brackets """
-    coreq = re.search(r"co-?requisite:?\s?(.*)", processed, flags=re.IGNORECASE)
-    if coreq:
-        print(f"Pre: {processed}")
-        print(f"Post: {processed}")
+    """ Puts co-requisites inside square brackets """    
+    processed = processed.rstrip()
+    return re.sub(r"co-?requisites?;?:?\s?(.*)", r"[\1]", processed, flags=re.IGNORECASE)
 
 # -----------------------------------------------------------------------------
 # Phase 3: Algo logic
 # -------------------
-# TODO: needs more work for 'in', comma and brackets logic
 
 def joining_terms(processed):
     '''Currently, we aim to use "in" as a joining term'''
