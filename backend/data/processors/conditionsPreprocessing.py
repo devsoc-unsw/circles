@@ -18,22 +18,21 @@ def preprocess_rules():
 
     for code, course in data.items():
         # if not course["enrolment_rules"]:
-            # Store it as empty rule
-            # continue
+        #     # Store it as empty rule
+        #     continue
         
         original = course["enrolment_rules"]
-        
         rules = {}
 
         # Store original text for debugging
         rules["original_rule"] = original
         processed = original
-        
+
         # Phase 1: Deletions
         processed = delete_exclusions(processed)
         processed = delete_HTML(processed)
         processed = delete_self_referencing(code, processed)
-        processed = extraneous_phrasing(processed)
+        processed = delete_extraneous_phrasing(processed)
         processed = delete_prereq_label(processed)
         processed = delete_trailing_punc(processed)
 
@@ -45,6 +44,7 @@ def preprocess_rules():
         processed = convert_level(processed)
         processed = convert_fslash(processed)
         processed = convert_AND_OR(processed)
+        processed = convert_coreqs(processed)
 
         # Phase 3: Algo logic
         processed = joining_terms(processed)
@@ -88,7 +88,7 @@ def delete_self_referencing(code, processed):
     # } "
     return re.sub(code, "", processed)
 
-def extraneous_phrasing(processed):
+def delete_extraneous_phrasing(processed):
     '''Sometimes there's extraneous phrasing which needs to be handled'''
     # Must have completed COMP1511 ==> COMP1511
     # processed = re.sub("Must have completed ", "", processed, flags=re.IGNORECASE)
@@ -211,6 +211,13 @@ def convert_AND_OR(processed):
     processed = re.sub(" and ", " && ", processed, flags=re.IGNORECASE)
     processed = re.sub(" or ", " || ", processed, flags=re.IGNORECASE)
     return processed
+
+def convert_coreqs(processed):
+    """ Puts co-requisites inside square brackets """
+    coreq = re.search(r"co-?requisite:?\s?(.*)", processed, flags=re.IGNORECASE)
+    if coreq:
+        print(f"Pre: {processed}")
+        print(f"Post: {processed}")
 
 # -----------------------------------------------------------------------------
 # Phase 3: Algo logic
