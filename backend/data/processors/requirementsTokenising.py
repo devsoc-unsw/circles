@@ -18,11 +18,13 @@ PARSED_LOGIC = {}
 split_key = ["(", ")", "&&", "||"]
 
 '''Converts the text condition into a json list'''
-def parse_conditions_logic():
+
+
+def parse_requirements_logic():
     data = dataHelpers.read_data("data/finalData/preprocessedRules.json")
-    
-    for code, condition in data.items():
-        text = condition["processed_rule"]
+
+    for code, requirement in data.items():
+        text = requirement["processed_rule"]
 
         # There are many words with (abcdefgh) where the brackets are attached
         # too tightly to the word. We first want to separate them like so:
@@ -41,11 +43,11 @@ def parse_conditions_logic():
                 if phrase is not "":
                     logic.append(phrase.strip())
                 logic.append(word)
-                phrase = ""                    
+                phrase = ""
             else:
                 # Keep building the logical phrase
                 phrase += word + " "
-                
+
         if phrase is not "":
             logic.append(phrase.strip())
 
@@ -53,7 +55,5 @@ def parse_conditions_logic():
 
         PARSED_LOGIC[code] = logic
 
-    
-    dataHelpers.write_data(PARSED_LOGIC, "data/finalData/conditionsParsedLogic.json")
-
-
+    dataHelpers.write_data(
+        PARSED_LOGIC, "data/finalData/requirementsTokenised.json")
