@@ -1,4 +1,5 @@
 export const plannerActions = (action, payload) => {
+
     switch (action) {
         // Takes 
         case 'ADD_TO_UNPLANNED':
@@ -41,6 +42,21 @@ export const plannerActions = (action, payload) => {
                 type: action, 
                 payload: null,
             }
+		case "SET_YEARS":
+ 	    	return {
+        	type: "SET_YEARS",
+        	payload: payload,
+    	};
+		case "UPDATE_PLANNED_COURSES":
+			return {
+			  type: action,
+			  payload: payload,
+			};
+		case "MOVE_COURSE":
+			return {
+				type: action,
+				payload: payload,
+			}
         default: 
             return;
     }

@@ -1,27 +1,37 @@
 const dummyMap = new Map();
-dummyMap.set("DEFAULT1000", {
-  title: "Default course 1",
+
+const plannedCourses = new Map();
+dummyMap.set("COMP2521", {
+  title: "Data Structures and Algorithms",
   type: "Core",
-  termsOffered: ["t1", "t2"],
-  plannedFor: '2023t1',
+  termsOffered: ["t1", "t2", "t3"],
+  prereqs: "COMP1511 && (COMP1521 || DEFAULT3000)",
+  plannedFor: null,
+  warning: false,
 });
-dummyMap.set("DEFAULT2000", {
-  title: "Default course 2",
+dummyMap.set("COMP1521", {
+  title: "Computer Systems Fundamentals",
   type: "Elective",
   termsOffered: ["t1", "t2"],
-  plannedFor: '2022t2',
+  prereqs: "COMP1511",
+  plannedFor: "2022t2",
+  warning: false,
 });
-dummyMap.set("DEFAULT3000", {
-  title: "Default course 3",
-  type: "General Education",
-  termsOffered: ["t2", "t3"],
-  plannedFor: '2021t3',
-});
-dummyMap.set("DEFAULT4000", {
-  title: "Default course 1",
+dummyMap.set("COMP1511", {
+  title: "Programming Fundamentals",
   type: "Core",
-  termsOffered: ["t1", "t2"],
-  plannedFor: null,
+  termsOffered: ["t1", "t2", "t3"],
+  prereqs: "",
+  plannedFor: "2021t3",
+  warning: false,
+});
+dummyMap.set("COMP6080", {
+  title: "Web Front-End Programming",
+  type: "General Education",
+  termsOffered: ["t1", "t3"],
+  prereqs: "COMP1521 && (COMP2521 || COMP1927)",
+  plannedFor: "2022t3",
+  warning: false,
 });
 
 const generateEmptyYears = (nYears) => {
@@ -31,18 +41,19 @@ const generateEmptyYears = (nYears) => {
     res.push(year);
   }
   return res;
-}
+};
 
 const initialState = {
-  unplanned: ["DEFAULT4000"],
+  unplanned: ["COMP2521"],
   startYear: 2021,
   numYears: 3,
   years: [
-    { t1: [], t2: [], t3: ['DEFAULT3000'] },
-    { t1: [], t2: ['DEFAULT2000'], t3: [] },
-    { t1: ['DEFAULT1000'], t2: [], t3: [] },
+    { t1: [], t2: [], t3: ["COMP1511"] },
+    { t1: [], t2: ["COMP1521"], t3: [] },
+    { t1: [], t2: [], t3: ["COMP6080"] },
   ],
   courses: dummyMap,
+  plannedCourses: plannedCourses,
 };
 const plannerReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -56,22 +67,24 @@ const plannerReducer = (state = initialState, action) => {
       // Append course code onto unplanned
       state.unplanned.join(courseCode);
       return state;
-    case "ADD_CORE_COURSES": 
+    case "ADD_CORE_COURSES":
       return {
         ...state,
-        courses: new Map([...state.courses, ...action.payload])
-      }
+        courses: new Map([...state.courses, ...action.payload]),
+      };
     case "SET_YEARS":
       return { ...state, years: action.payload };
 
     case "SET_UNPLANNED":
-      let newUnplanned = state.unplanned.filter(course => course !== action.payload);
+      let newUnplanned = state.unplanned.filter(
+        (course) => course !== action.payload
+      );
       console.log(newUnplanned);
       return { ...state, unplanned: newUnplanned };
-    case 'REMOVE_ALL_UNPLANNED':
-        return { ...state, unplanned: action.payload };
-    
-        case 'REMOVE_COURSE':
+    case "REMOVE_ALL_UNPLANNED":
+      return { ...state, unplanned: action.payload };
+
+    case "REMOVE_COURSE":
       // Remove courses from years and courses
       const plannedTerm = state.courses.get(action.payload).plannedFor;
       let newCourses = new Map(state.courses);
@@ -79,37 +92,60 @@ const plannerReducer = (state = initialState, action) => {
       Object.assign(state.courses, newCourses);
       if (plannedTerm) {
         // Example plannedTerm: '2021t2'
-        const yearIndex = parseInt(plannedTerm.slice(0, 4)) - state.startYear ;
+        const yearIndex = parseInt(plannedTerm.slice(0, 4)) - state.startYear;
         const term = plannedTerm.slice(4);
-        const newTerm = state.years[yearIndex][term].filter(course => course !== action.payload);  
+        const newTerm = state.years[yearIndex][term].filter(
+          (course) => course !== action.payload
+        );
         const newYear = new Object(state.years[yearIndex]);
-        newYear[term] = newTerm; 
+        newYear[term] = newTerm;
         const newYears = new Object(state.years);
         newYears[yearIndex] = newYear;
         return {
           ...state,
           years: newYears,
           courses: newCourses,
-        }
+        };
       } else {
         return {
           ...state,
-          unplanned: state.unplanned.filter(course => course !== action.payload),
+          unplanned: state.unplanned.filter(
+            (course) => course !== action.payload
+          ),
           courses: newCourses,
-        }
+        };
       }
-    case 'REMOVE_ALL_COURSES':
+    case "REMOVE_ALL_COURSES":
       const newYears = generateEmptyYears(state.numYears);
       const emptyMap = new Map();
       return {
-        ...state, 
+        ...state,
         years: newYears,
-        courses: emptyMap, 
-        unplanned: []
-      }
-      default: 
-          return state; 
+        courses: emptyMap,
+        unplanned: [],
+      };
+
+    // case "UPDATE_PLANNED_COURSES":
+    // 	const { course, term, warning } = action.payload;
+    // 	console.log(term)
+    // 	const plannedClone = new Map(state.plannedCourses).set(course, {
+    // 		term: term,
+    // 		warning: warning,
+    // 	});
+    // 	return { ...state, plannedCourses: plannedClone };
+
+    case "MOVE_COURSE":
+      const { course, term, warning } = action.payload;
+      const courseInfo = state.courses.get(course);
+      courseInfo["plannedFor"] = term;
+      courseInfo["warning"] = warning;
+      let updatedCourses = new Map(state.courses).set(course, courseInfo);
+
+      return { ...state, courses: updatedCourses };
+
+    default:
+      return state;
   }
-}
+};
 
 export default plannerReducer;

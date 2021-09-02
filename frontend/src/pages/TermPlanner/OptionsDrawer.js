@@ -1,20 +1,31 @@
-import React from "react";
-import { Typography, Drawer, Collapse, Alert } from "antd";
+import React, { useEffect } from "react";
+import { updateDegreeLength } from "../../actions/userAction";
+import { Typography, Drawer, Collapse, Alert, DatePicker, Select } from "antd";
 import { Droppable } from "react-beautiful-dnd";
 import DraggableCourse from "./DraggableCourse";
 import { CloseOutlined } from "@ant-design/icons";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 const OptionsDrawer = ({ visible, setVisible }) => {
   const { Title } = Typography;
   const { Panel } = Collapse;
-
+  const { Option } = Select;
   const theme = useSelector((state) => state.theme);
   const { courses, unplanned } = useSelector((state) => {
     return state.planner;
   });
-
+  const dispatch = useDispatch();
   const sortedUnplanned = sortUnplanned(unplanned, courses);
+
+  function onChange(date, dateString) {
+    console.log(date, dateString);
+  }
+
+  function handleChange(value) {
+    dispatch(updateDegreeLength(value));
+  }
+
+  const years = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (
     <Drawer
@@ -65,6 +76,18 @@ const OptionsDrawer = ({ visible, setVisible }) => {
           ))}
         </Collapse>
       )}
+      <Title level={2} class="text">
+        Start Year
+      </Title>
+      <DatePicker onChange={onChange} picker="year" />
+      <Title level={2} class="text" style={{ marginTop: "0.5em" }}>
+        Degree Length
+      </Title>
+      <Select defaultValue="3" style={{ width: 120 }} onChange={handleChange}>
+        {years.map((num) => (
+          <Option value={num}>{num}</Option>
+        ))}
+      </Select>
     </Drawer>
   );
 };
