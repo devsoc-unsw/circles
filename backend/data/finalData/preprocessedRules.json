@@ -1252,8 +1252,8 @@
         "processed_rule": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Theatre & Performance Studies"
     },
     "ARTS3125": {
-        "original_rule": "Prerequisite: 48 uoc overall, including 6 uoc at level 1 and 6 uoc at level 2 in one of the following specialisations, MCT or\u00a0Theatre & Performance Studies. Or 66 uoc overall and enrolled in a single or dual award Media (S&SP) program<br/><br/>",
-        "processed_rule": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, MCT or\u00a0Theatre & Performance Studies. || 66UOC && a single || dual award Media (S&SP) program"
+        "original_rule": "Prerequisite: 48 uoc overall, including 6 uoc at level 1 and 6 uoc at level 2 in one of the following specialisations, MCT or Theatre & Performance Studies. Or 66 uoc overall and enrolled in a single or dual award Media (S&SP) program<br/><br/>",
+        "processed_rule": "48UOC && including 6UOC in L1 && 6UOC in L2 in one of the following specialisations, MCT or Theatre & Performance Studies. || 66UOC && enrolled in a single || dual award Media (S&SP)"
     },
     "ARTS3130": {
         "original_rule": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Dance Studies or Theatre & Performance Studies. Or 72 UOC overall and enrolment in an Art & Design program<br/><br/>",
@@ -1380,16 +1380,16 @@
         "processed_rule": "ARTS3452 || language placement approval"
     },
     "ARTS3454": {
-        "original_rule": "Prerequisite: ARTS2452 or ARTS3451 or ARTS3452 or ARTS3453 or\u00a0language placement approval<br/><br/>",
-        "processed_rule": "ARTS2452 || ARTS3451 || ARTS3452 || ARTS3453 or\u00a0language placement approval"
+        "original_rule": "Prerequisite: ARTS2452 or ARTS3451 or ARTS3452 or ARTS3453 or language placement approval<br/><br/>",
+        "processed_rule": "ARTS2452 || ARTS3451 || ARTS3452 || ARTS3453 or language placement approval"
     },
     "ARTS3455": {
         "original_rule": "Prerequisite: ARTS2452 or ARTS3451 or ARTS3452 or ARTS3453 or ARTS3454 or language placement approval<br/><br/>",
         "processed_rule": "ARTS2452 || ARTS3451 || ARTS3452 || ARTS3453 || ARTS3454 || language placement approval"
     },
     "ARTS3456": {
-        "original_rule": "Prerequisite: ARTS2452 or ARTS3451 or ARTS3452 or ARTS3453 or ARTS3454 or\u00a0language placement approval<br/><br/>",
-        "processed_rule": "ARTS2452 || ARTS3451 || ARTS3452 || ARTS3453 || ARTS3454 or\u00a0language placement approval"
+        "original_rule": "Prerequisite: ARTS2452 or ARTS3451 or ARTS3452 or ARTS3453 or ARTS3454 or language placement approval<br/><br/>",
+        "processed_rule": "ARTS2452 || ARTS3451 || ARTS3452 || ARTS3453 || ARTS3454 or language placement approval"
     },
     "ARTS3458": {
         "original_rule": "Prerequisite: 72uoc overall, including ARTS3453, ARTS2452, or ARTS3454  and enrolment in an Advanced Chinese Studies major/minor; or 72uoc overall, including ARTS2451 or ARTS2462 and enrolment in a Chinese Studies major/minor<br/><br/>",
@@ -3496,8 +3496,8 @@
         "processed_rule": "65WAM || 72UOC || room in degree for this course || good academic standing || COMM6000 Career Accelerator: Essentials || COMM1999 First Year Portfolio. This course is by application only. Please visit Business School website for more information"
     },
     "COMM3030": {
-        "original_rule": "\u2022\tminimum WAM of 65;<br/>\u2022\thave completed a minimum of 48 UOC at the commencement of this course;<br/>\u2022\thave room in their degree for this course;<br/>\u2022\tare in good academic standing;<br/>\u2022\thave completed COMM6000 Career Accelerator: Essentials or COMM1999 First Year Portfolio (Business School students only)<br/>This course may count as a Business School Free Elective, OR as a major elective within some schools. It is recommended a progression check is completed prior to enrolling.<br/><br/>",
-        "processed_rule": "\u2022\t65WAM; \u2022\thave a minimum 48UOC at the commencement of this course; \u2022\thave room in their degree for this course; \u2022\tare in good academic standing; \u2022\thave COMM6000 Career Accelerator: Essentials || COMM1999 First Year Portfolio (Business School only) This course may count as a Business School Free Elective || as a major elective within some schools. It is recommended a progression check is prior to enrolling"
+        "original_rule": "•\tminimum WAM of 65;<br/>•\thave completed a minimum of 48 UOC at the commencement of this course;<br/>•\thave room in their degree for this course;<br/>•\tare in good academic standing;<br/>•\thave completed COMM6000 Career Accelerator: Essentials or COMM1999 First Year Portfolio (Business School students only)<br/>This course may count as a Business School Free Elective, OR as a major elective within some schools. It is recommended a progression check is completed prior to enrolling.<br/><br/>",
+        "processed_rule": "•\t65WAM; •\thave completed a minimum of 48UOC at the commencement of this course; •\thave room in their degree for this course; •\tare in good academic standing; •\thave completed COMM6000 Career Accelerator: Essentials || COMM1999 First Year Portfolio (Business School students only) This course may count as a Business School Free Elective || as a major elective within some schools. It is recommended a progression check is completed prior to enrolling"
     },
     "COMM3090": {
         "original_rule": "Students are expected to be in their final year of a Bachelor of Commerce single or dual degree with at least 108 UOC completed.<br/><br/>",
@@ -3545,7 +3545,7 @@
     },
     "COMP1400": {
         "original_rule": "Prerequisite: Enrolment in a non-CSE major (no BINF, COMP, or SENG)<br/><br/>",
-        "processed_rule": ""
+        "processed_rule": "Enrolment in a non-CSE major (no BINF || COMP || SENG)"
     },
     "COMP1511": {
         "original_rule": "",
@@ -3561,7 +3561,7 @@
     },
     "COMP1911": {
         "original_rule": "Prerequisite: Enrolment in a non-CSE major (no BINF, COMP, or SENG)<br/><br/>",
-        "processed_rule": ""
+        "processed_rule": "Enrolment in a non-CSE major (no BINF || COMP || SENG)"
     },
     "COMP2041": {
         "original_rule": "Prerequisite: COMP1511 OR DPST1091 OR COMP1917 OR COMP1921<br/><br/>",
@@ -3657,17 +3657,15 @@
     },
     "COMP3900": {
         "original_rule": "Prerequisite: COMP1531, and COMP2521 or COMP1927, and enrolled in a BSc Computer Science major with completion of 102 uoc.<br/><br/>",
-        "processed_rule": "COMP1531 && COMP2521 || COMP1927 && 102UOC in (COMPA1 || COMPD1 || COMPD1 || COMPE1 || COMPI1 || COMPJ1 || COMPN1 || COMPS1 || COMPY1 || COMPZ1)"
+        "processed_rule": "COMP1531 && COMP2521 || COMP1927 && enrolled in a BSc Computer Science major with 102UOC"
     },
     "COMP3901": {
         "original_rule": "Prerequisite: 80+ WAM in COMP, SENG or BINF courses, completion of all first and second year core requirements a CSE program, and agreement from a suitable CSE academic supervisor.<br/><br/>",
-        "processed_rule": "80WAM in COMP || SENG || BINF",
-        "warning": "You must complete all first and second year core requirements of a CSE program and obtain agreement from a suitable CSE academic supervisor to enrol in this course."
+        "processed_rule": "80WAM in COMP || SENG || BINF courses && completion of all first && second year core requirements a CSE && agreement from a suitable CSE academic supervisor"
     },
     "COMP3902": {
         "original_rule": "Prerequisite: 80+ WAM in COMP, SENG or BINF courses, completion of all first and second year core requirements a CSE program, and agreement from a suitable CSE academic supervisor.<br/><br/>",
-        "processed_rule": "80WAM in COMP || SENG || BINF",
-        "warning": "You must complete all first and second year core requirements of a CSE program and obtain agreement from a suitable CSE academic supervisor to enrol in this course."
+        "processed_rule": "80WAM in COMP || SENG || BINF courses && completion of all first && second year core requirements a CSE && agreement from a suitable CSE academic supervisor"
     },
     "COMP4121": {
         "original_rule": "Prerequisite: COMP3121 or  COMP3821.<br/><br/>",
@@ -3707,24 +3705,23 @@
     },
     "COMP4920": {
         "original_rule": "Prerequisite: (COMP2511 or COMP2911) and completion of 96 UOC in Computer Science.<br/><br/>",
-        "processed_rule": "(COMP2511 || COMP2911) && 96UOC in COMP"
+        "processed_rule": "(COMP2511 || COMP2911) && 96UOC in Computer Science"
     },
     "COMP4951": {
         "original_rule": "Prerequisite: Enrolled in a CSE BE (Hons) programs, completion of 126 UOC and completion of 3rd year core.<br/><br/>",
-        "processed_rule": "126UOC",
-        "warning": "You must be enrolled in a CSE BE (Hons) program and complete all third year core requirements to enrol in this course."
+        "processed_rule": "Enrolled in a CSE BE (Hons) s && 126UOC && completion of 3rd year core"
     },
     "COMP4952": {
         "original_rule": "Prerequisite: Completion of Research Thesis A (4951)<br/><br/>",
-        "processed_rule": "COMP4951"
+        "processed_rule": "Completion of Research Thesis A (4951)"
     },
     "COMP4953": {
         "original_rule": "Prerequisite: Completion of Research Thesis B (4952)<br/><br/>",
-        "processed_rule": "COMP4952"
+        "processed_rule": "Completion of Research Thesis B (4952)"
     },
     "COMP4961": {
         "original_rule": "Prerequisite: Students enrolled in program 4515 Bachelor of Computer Science (Hons) or program 3648.<br/><br/>",
-        "processed_rule": "4515 || 3648"
+        "processed_rule": "4515 Bachelor of Computer Science (Hons) || 3648"
     },
     "COMP4962": {
         "original_rule": "COMP4962 Prerequisite: Students must successfully complete COMP4951<br/><br/>",
@@ -3780,7 +3777,7 @@
     },
     "COMP6721": {
         "original_rule": "Pre-requisite: MATH1081 AND COMP2521 AND (not enrolled in SENGAH)<br/><br/>",
-        "processed_rule": "MATH1081 && COMP2521"
+        "processed_rule": "MATH1081 && COMP2521 && (not enrolled in SENGAH)"
     },
     "COMP6733": {
         "original_rule": "Prerequisite: 65 WAM and COMP3331<br/><br/>",
@@ -3820,13 +3817,11 @@
     },
     "COMP9301": {
         "original_rule": "(COMP6441 OR COMP6841) AND (6 UOC from  (COMP6443, COMP6843, COMP6445, COMP6845, COMP6447)) AND enrolled in final term of program<br/><br/>",
-        "processed_rule": "(COMP6441 || COMP6841) && (6UOC from (COMP6443 && COMP6843 && COMP6445 && COMP6845 && COMP6447))",
-        "warning": "This course can only be taken in the final term of your program."
+        "processed_rule": "(COMP6441 || COMP6841) && (6UOC from (COMP6443 && COMP6843 && COMP6445 && COMP6845 && COMP6447)) && enrolled in final term of"
     },
     "COMP9302": {
         "original_rule": "(COMP6441 OR COMP6841) AND (12 UOC from (COMP6443, COMP6843, COMP6445, COMP6845, COMP6447)) AND enrolled in final term of program<br/><br/>",
-        "processed_rule": "(COMP6441 || COMP6841) && (12UOC from (COMP6443 && COMP6843 && COMP6445 && COMP6845 && COMP6447))",
-        "warning": "This course can only be taken in the final term of your program."
+        "processed_rule": "(COMP6441 || COMP6841) && (12UOC from (COMP6443 && COMP6843 && COMP6445 && COMP6845 && COMP6447)) && enrolled in final term of"
     },
     "COMP9312": {
         "original_rule": "Prerequisite: COMP1927 or COMP2521, and COMP3311<br/><br/>",
@@ -3890,7 +3885,7 @@
     },
     "COMP9491": {
         "original_rule": "Two prerequisite conditions:<br/>1. Students have taken:<br/>6 UOC from the following: COMP3411; and<br/>12 UOC from the following: COMP9444/COMP9417/COMP9517/COMP4418<br/>2. Students must have a WAM of 70 or higher<br/><br/>",
-        "processed_rule": "COMP3411 && 70WAM && 12UOC from (COMP9444 || COMP9417 || COMP9517 || COMP4418)"
+        "processed_rule": "Two conditions: 1. Students have taken: 6UOC from the following: COMP3411; && 12UOC from the following: (COMP9444 || COMP9417 || COMP9517 || COMP4418) 2. Students must have 70WAM"
     },
     "COMP9517": {
         "original_rule": "Prerequisite: COMP2521 or COMP1927<br/><br/>",
@@ -4973,8 +4968,8 @@
         "processed_rule": "UNSW Global Diplomas only (7001 && 7002 && 7003 && 7004) && [DPST1013]"
     },
     "DPST1024": {
-        "original_rule": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) prerequisite DPST1023 OR a credit (\u226565%) in DPST1021 and corequisite DPST1014<br/><br/>",
-        "processed_rule": "UNSW Global Diplomas only (7001 || 7002 || 7003 || 7004) DPST1023 || a credit (\u226565%) in DPST1021 && [DPST1014]"
+        "original_rule": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) prerequisite DPST1023 OR a credit (≥65%) in DPST1021 and corequisite DPST1014<br/><br/>",
+        "processed_rule": "UNSW Global Diplomas only (7001 || 7002 || 7003 || 7004) DPST1023 || a credit (≥65%) in DPST1021 && corequisite DPST1014"
     },
     "DPST1031": {
         "original_rule": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
@@ -5533,16 +5528,16 @@
         "processed_rule": "EDST6728. Corerequisite: EDST6760"
     },
     "EDST6760": {
-        "original_rule": "Prerequisite: EDST2002, EDST4084, 12 uoc Teaching Method 1 courses, and enrolment in an Education program. Students must have passed LANTITE.\u00a0 Students must have sufficient subject content knowledge in their teaching areas<br/><br/>",
-        "processed_rule": "EDST2002 && EDST4084 && 12UOC Teaching Method 1 courses && enrolment in an Education program. must have passed LANTITE.\u00a0 must have sufficient subject content knowledge in their teaching areas"
+        "original_rule": "Prerequisite: EDST2002, EDST4084, 12 uoc Teaching Method 1 courses, and enrolment in an Education program. Students must have passed LANTITE.  Students must have sufficient subject content knowledge in their teaching areas<br/><br/>",
+        "processed_rule": "EDST2002 && EDST4084 && 12UOC Teaching Method 1 courses && enrolment in an Education . Students must have passed LANTITE.  Students must have sufficient subject content knowledge in their teaching areas"
     },
     "EDST6761": {
         "original_rule": "Prerequisite: EDST6760 and 12 units of credit in Teaching Methods courses. Students must have passed the Literacy and Numeracy Test for Initial Teacher Education in order to enrol into this course.<br/><br/>",
         "processed_rule": "EDST6760 && 12UOC in Teaching Methods courses. must have passed the Literacy && Numeracy Test for Initial Teacher Education in order to enrol into this course"
     },
     "EDST6765": {
-        "original_rule": "Prerequisite: EDST4080, EDST4096, EDST6760, 24 uoc Teaching Method courses, and enrolment in an Education program. Students must have passed LANTITE.\u00a0Students must have sufficient subject content knowledge in their teaching areas.\u00a0Excluded: EDST4081<br/><br/>",
-        "processed_rule": "EDST4080 && EDST4096 && EDST6760 && 24UOC Teaching Method courses && enrolment in an Education program. must have passed LANTITE.\u00a0 must have sufficient subject content knowledge in their teaching areas"
+        "original_rule": "Prerequisite: EDST4080, EDST4096, EDST6760, 24 uoc Teaching Method courses, and enrolment in an Education program. Students must have passed LANTITE. Students must have sufficient subject content knowledge in their teaching areas. Excluded: EDST4081<br/><br/>",
+        "processed_rule": "EDST4080 && EDST4096 && EDST6760 && 24UOC Teaching Method courses && enrolment in an Education . Students must have passed LANTITE. Students must have sufficient subject content knowledge in their teaching areas"
     },
     "EDST6771": {
         "original_rule": "Prerequisite: 78 UOC overall, including EDST2002, and enrolment in program 4059, 4061, 4062, 4064, or 4066<br/><br/>",
@@ -8401,8 +8396,8 @@
         "processed_rule": "24UOC in L1 && enrolment in a single || dual award Media program || enrolment in a Creative Writing major || minor. Equivalent: MDIA3001"
     },
     "MDIA2011": {
-        "original_rule": "Prerequisite: 24 units of credit at level 1 including\u00a0MDIA1002 or MDIA1003. Or 24 units of credit at level 1 and enrolment  in a Global Development major<br/><br/>",
-        "processed_rule": "24UOC in L1 &&\u00a0MDIA1002 || MDIA1003. || 24UOC in L1 && enrolment in a Global Development major"
+        "original_rule": "Prerequisite: 24 units of credit at level 1 including MDIA1002 or MDIA1003. Or 24 units of credit at level 1 and enrolment  in a Global Development major<br/><br/>",
+        "processed_rule": "24UOC in L1 including MDIA1002 || MDIA1003. || 24UOC in L1 && enrolment in a Global Development major"
     },
     "MDIA2012": {
         "original_rule": "Prerequisite: MDIA1002 or MDIA1003; and enrolment in a single or double degree Bachelor of Media (PR & Advertising) program<br/><br/>",

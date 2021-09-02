@@ -1,4 +1,7 @@
-'''Turns the processed conditions into a list, separated into logical blocks.
+'''
+DOCUMENTATION: https://github.com/csesoc/Circles/wiki/Tokenising-Conditions
+
+Turns the processed conditions into a list, separated into logical blocks.
 For example:
 "COMP1511 || DPST1091 || COMP1911 || COMP1917"
 ==> [(, COMP1511, ||, DPST1091, ||, COMP1911, ||, COMP1917, )]
