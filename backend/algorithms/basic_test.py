@@ -3,32 +3,16 @@
 - And/Or conditions
 '''
 
-import Enrolment
+from requirements import *
 import pytest
 
 
-# def test_basic():
-#     # put selected Courses here
-#     selectedCourses = ['COMP1531', 'MATH1081']
-#     # Text is the enrolmentRules
-#     text = "( MATH1081 && ( COMP1531 || COMP2041 ) )"
-#     #Should return empty
-#     cond = Enrolment.Condition()
-#     cond.select(selectedCourses)
-
-#     data = text.split()
-#     data, errCode = Enrolment.parseRequirement(data)
-#     if errCode == -1:
-#         data.show()
-#     else:
-#         data.show()
-#         assert data.validate(cond) == True
-        
 def create_student_3707_COMPA1():
     user = User()
     user.add_program("3707")
     user.add_specialisation("COMPA1")
     return user
+
 
 def test_no_req_simple():
     '''No Prerequisite. Anyone in all of UNSW should be able to take'''
@@ -42,6 +26,7 @@ def test_no_req_simple():
 
     math1141_req = create_requirement("MATH1141")
     assert math1141_req.validate(user) == True
+
 
 def test_no_req_existing_courses():
     '''Even if the student has taken existing courses, they should be able to enrol'''
@@ -57,6 +42,7 @@ def test_no_req_existing_courses():
     math1141_req = create_requirement("MATH1141")
     assert math1141_req.validate(user) == True
 
+
 def test_no_req_duplicates():
     '''Cannot retake a course'''
     user = create_student_3707_COMPA1()
@@ -71,6 +57,7 @@ def test_no_req_duplicates():
     # Cannot take exclusion
     math1141_req = create_requirement("MATH1141")
     assert math1141_req.validate(user) == True
+
 
 def test_and_or_courses():
     '''Simple and/or conditions involving only courses'''

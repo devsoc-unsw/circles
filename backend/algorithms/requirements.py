@@ -149,10 +149,6 @@ def create_requirement(tokens):
     # Start off as a composite requirement
     result = CompositeRequirement()
 
-    # ( a ( b ( c ( d . . . ) ) ) )
-    #           0 1 2 3 4 5 6 7
-    #               0 1 2 3 4
-
     it = enumerate(tokens)
     for index, token in it:
         if token == '(':
