@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from server.database import specialisationsCOL
+from server.database import specialisationsCOL, programsCOL, coursesCOL
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
 
@@ -13,13 +13,38 @@ router = APIRouter(
 def specialisations_index():
     return "Index of specialisations"
 
-@router.get("/getSpecialisation/{code}")
-def getSpecialisation(code):
-    query = { "code" : code }
-    result = specialisationsCOL.find_one(query)
-    del result["_id"]
+@router.get("/getPrograms/")
+def getPrograms():
+    query = programsCOL.find();
+    result = {}
+    for i in query:
+        result[i['code']] = i['title']
 
-    return result
+    return {'programs' : result}
+
+@router.get("/getMajor/{code}")
+def getSpecialisations(code):
+    query = {'code' : code}
+    result = programsCOL.find_one(query)
+    specialisations = {}
+    specialisations = result['components']['disciplinary_component']['Majors']
+
+    for i in specialisations:
+        query2 = {'code' : i}
+        result2 = specialisationsCOL.find_one(query2)
+
+        if (result2):
+            specialisations[i] = result2['name']
+
+    return {'majors' : specialisations}
+
+# @router.get("/getSpecialisation/{code}")
+# def getSpecialisation(code):
+#     query = { "code" : code }
+#     result = specialisationsCOL.find_one(query)
+#     del result["_id"]
+
+#     return result
 
 @router.get("/getProgramCode/{code}")
 def getCode(code):
@@ -80,3 +105,9 @@ def getElective(code):
         return { 'other' : None }
 
     return { 'other' : other }
+
+
+# Programs -> Specialisations -> Courses
+
+# Select Program 3778 Computer Science
+# Chose COMPA1
