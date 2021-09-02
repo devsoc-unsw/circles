@@ -5,8 +5,10 @@ import degreeReducer from "./degreeReducer";
 import plannerReducer from "./plannerReducer";
 import updateCoursesReducer from "./updateCourses"
 import courseOptionsReducer from "./courseOptionsReducer";
+import courseTabsReducer from "./courseTabsReducer";
 const allReducers = combineReducers({
   degree: degreeReducer,
+  tabs: courseTabsReducer,
   courseOptions: courseOptionsReducer,
   updateCourses: updateCoursesReducer,
   planner: plannerReducer,

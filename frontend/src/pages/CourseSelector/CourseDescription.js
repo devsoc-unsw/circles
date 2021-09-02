@@ -19,19 +19,21 @@ const CourseAttribute = ({ title, content }) => {
   );
 }
 export default function CourseDescription() {
-  const { id } = useParams();
   const dispatch = useDispatch();
+  const { active, tabs } = useSelector(state => state.tabs);
+  let id = tabs[active];
   // Course needs to be replaced with a fetch 
   const course = useSelector(state => state.updateCourses.course);
   const coursesInPlanner = useSelector(state => state.planner.courses);
   const courseInPlanner = coursesInPlanner.has(id);
   const [show, setShow] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
-  
   React.useEffect(() => {
     dispatch(getCourseById(id));
   }, [id]);
-  
+
+  if (id === 'explore') return (<div>This is the explore page</div>)
+  if (id === 'search') return (<div>This is the search page</div>)
   if (!id) {
     return (
       <div className="empty">
@@ -115,7 +117,7 @@ export default function CourseDescription() {
         }
         <Title level={4} className="text">Unlocks these next courses</Title>
         { course.next && course.next.length > 0 
-          ? course.next.map(courseCode => <CourseTag name={courseCode}/>)
+          ? course.next.map((courseCode, index) => <CourseTag key={index} name={courseCode}/>)
           : <p className={`text`}>None</p>
         }
       </div>
@@ -125,10 +127,10 @@ export default function CourseDescription() {
         <CourseAttribute title="Study Level" content={course.level}/>
         <CourseAttribute title="Campus" content={course.campus}/>
         <Title level={4} className='text cs-final-attr'>Offering Terms</Title>
-        { course.terms && course.terms.map(term => {
+        { course.terms && course.terms.map((term, index) => {
           let termNo = term.slice(1);
             return (
-              <Tag className={`text`}> 
+              <Tag key={index} className={`text`}> 
                 {termNo === '0' ? 'Summer' : `Term ${termNo}`}
               </Tag>
             )
