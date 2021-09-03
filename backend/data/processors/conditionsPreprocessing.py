@@ -1,5 +1,5 @@
 '''
-Preprocessing the conditions and logging to enrolmentRules.json
+Preprocessing the conditions and logging to conditionsProcessed.json
 Some examples of preprocessing are:
 - Getting rid of "Prerequisite:" or similar at start of line
 - Fixing extra white space
@@ -7,25 +7,27 @@ Some examples of preprocessing are:
 - Converting specialisation and program names to corresponding codes
 '''
 
-import re 
+import re
 from data.utility import dataHelpers
 
-PREPROCESSED_RULES = {}
-CODE_MAPPING = dataHelpers.read_data("data/utility/programCodeMappings.json")["title_to_code"]
+PREPROCESSED_CONDITIONS = {}
+CODE_MAPPING = dataHelpers.read_data(
+    "data/utility/programCodeMappings.json")["title_to_code"]
 
-def preprocess_rules():
+
+def preprocess_conditions():
     data = dataHelpers.read_data("data/scrapers/coursesFormattedRaw.json")
 
     for code, course in data.items():
         # if not course["enrolment_rules"]:
         #     # Store it as empty rule
         #     continue
-        
+
         original = course["enrolment_rules"]
-        rules = {}
+        conditions = {}
 
         # Store original text for debugging
-        rules["original_rule"] = original
+        conditions["original"] = original
         processed = original
 
         # Phase 1: Deletions
@@ -54,19 +56,23 @@ def preprocess_rules():
         # Phase 4: Final touches
         processed = strip_spaces(processed)
 
-        rules["processed_rule"] = processed
+        conditions["processed"] = processed
 
-        PREPROCESSED_RULES[code] = rules
-        
-    dataHelpers.write_data(PREPROCESSED_RULES, "data/finalData/preprocessedRules.json")
+        PREPROCESSED_CONDITIONS[code] = conditions
+
+    dataHelpers.write_data(
+        PREPROCESSED_CONDITIONS, "data/finalData/conditionsProcessed.json")
 
 # -----------------------------------------------------------------------------
 # Phase 1: Deletions
 # -------------------
+
+
 def delete_exclusions(processed):
-    """ Removes exclusions from enrolment rules """
+    """ Removes exclusions from enrolment conditions """
     # Remove exclusion string which appears before prerequisite plaintext
-    excl_string = re.search(r"(excl.*?:.*?)(pre)", processed, flags=re.IGNORECASE)
+    excl_string = re.search(r"(excl.*?:.*?)(pre)",
+                            processed, flags=re.IGNORECASE)
     if excl_string:
         processed = re.sub(excl_string.group(1), "", processed)
 
@@ -76,11 +82,13 @@ def delete_exclusions(processed):
 
     return processed
 
+
 def delete_HTML(processed):
     """ Remove HTML tags """
     # Will replace with a space because they sometimes appear in the middle of the text
     # so "and<br/>12 UOC" would turn into and12 UOC
     return re.sub("<[a-z]*/>", " ", processed, flags=re.IGNORECASE)
+
 
 def delete_self_referencing(code, processed):
     """ Remove any references to this course """
@@ -89,11 +97,12 @@ def delete_self_referencing(code, processed):
     # } "
     return re.sub(code, "", processed)
 
+
 def delete_extraneous_phrasing(processed):
     '''Sometimes there's extraneous phrasing which needs to be handled'''
     # Must have completed COMP1511 ==> COMP1511
     # processed = re.sub("Must have completed ", "", processed, flags=re.IGNORECASE)
-    
+
     # Remove 'Either' as it usually preceeds handled logical phrases
     processed = re.sub("Either", "", processed, flags=re.IGNORECASE)
 
@@ -110,17 +119,19 @@ def delete_extraneous_phrasing(processed):
     processed = re.sub("enrolled in", "", processed, flags=re.IGNORECASE)
 
     # Remove completion language
-    completion_text = ["completion of", "must successfully complete", 
+    completion_text = ["completion of", "must successfully complete",
                        "must have completed", "completing", "completed"]
     for text in completion_text:
         processed = re.sub(text, "", processed, flags=re.IGNORECASE)
 
     return processed
 
+
 def delete_prereq_label(processed):
     """ Removes 'prerequisite' and variations """
     # variations incude ["prerequisite", "pre-requisite", "prer-requisite"]
     return re.sub(r"[Pp]re[A-Za-z/_-]*:*", "", processed)
+
 
 def delete_trailing_punc(processed):
     """ Deletes any trailing punctuation """
@@ -129,49 +140,61 @@ def delete_trailing_punc(processed):
 # -----------------------------------------------------------------------------
 # Phase 2: Conversions
 # -------------------
+
+
 def convert_square_brackets(processed):
     """ Converts '[' to '(' and ']' to ')' """
     processed = re.sub(r"\[", r"(", processed)
     processed = re.sub(r"]", r")", processed)
     return processed
 
+
 def convert_UOC(processed):
     """ Converts to XXUOC """
     # Converts unit(s) of credit(s) to UOC and removes spacing
-    processed = re.sub(r'\s?units? of credits?', "UOC", processed, flags=re.IGNORECASE)
+    processed = re.sub(r'\s?units? of credits?', "UOC",
+                       processed, flags=re.IGNORECASE)
 
     # Places UOC right next to the numbers
     processed = re.sub("\s?UOC", "UOC", processed, flags=re.IGNORECASE)
 
     # After UOC has been mainly converted, remove some extraneous phrasing
-    processed = re.sub(r'(of|at least)?\s?(\d+UOC)', r' \2', processed, flags=re.IGNORECASE)
-    processed = re.sub(r'(\d+UOC)(\s?overall\s?)', r'\1 ', processed, flags=re.IGNORECASE)
+    processed = re.sub(r'(of|at least)?\s?(\d+UOC)', r' \2',
+                       processed, flags=re.IGNORECASE)
+    processed = re.sub(r'(\d+UOC)(\s?overall\s?)', r'\1 ',
+                       processed, flags=re.IGNORECASE)
 
     # Remove 'minimum' since it is implied
-    processed = re.sub(r"minimum (\d\dUOC)", r"\1", processed, flags=re.IGNORECASE)
+    processed = re.sub(r"minimum (\d\dUOC)", r"\1",
+                       processed, flags=re.IGNORECASE)
 
     return processed
+
 
 def convert_WAM(processed):
     """ Converts WAM requirements. WAM refers to overall mark. """
     # Look for integer within 3 words after 'WAM' or 'mark', e.g.:
     #    - "WAM of 65" -> "65WAM"
     #    - "WAM of at least 65" -> "65WAM"
-    processed = re.sub(r"WAM ([a-z]* ){0,3}(\d\d)", r"\2WAM", processed, flags=re.IGNORECASE)
+    processed = re.sub(
+        r"WAM ([a-z]* ){0,3}(\d\d)", r"\2WAM", processed, flags=re.IGNORECASE)
 
     # Then delete any superfluous preceding words, chars or spaces, e.g.:
     #    - "minimum 65WAM" -> "65WAM"
     #    - "A 65WAM" -> "65WAM"
-    processed = re.sub(r"[a|minimum]+ (\d\d)\s?WAM", r"\1WAM", processed, flags=re.IGNORECASE)
+    processed = re.sub(r"[a|minimum]+ (\d\d)\s?WAM",
+                       r"\1WAM", processed, flags=re.IGNORECASE)
 
     # Compress any remaining spaces between digits and WAM and remove misc chars
     # like '+' and '>', e.g.:
     #    - ">65WAM" -> "65WAM"
     #    - "65+ WAM" -> "65WAM"
     #    - "65WAM+" -> "65WAM"
-    processed = re.sub(r">?(\d\d)\+?\s?WAM\+?", r"\1WAM", processed, flags=re.IGNORECASE)
+    processed = re.sub(r">?(\d\d)\+?\s?WAM\+?", r"\1WAM",
+                       processed, flags=re.IGNORECASE)
 
     return processed
+
 
 def convert_GRADE(processed):
     '''Converts mark/grade requirements, usually relating to a specific course.
@@ -179,27 +202,33 @@ def convert_GRADE(processed):
     courses'''
 
     # Converts "mark of at least XX to XXGRADE"
-    processed = re.sub(r"(a )?mark of at least (\d\d)", r"\2GRADE", processed, flags=re.IGNORECASE)
+    processed = re.sub(r"(a )?mark of at least (\d\d)",
+                       r"\2GRADE", processed, flags=re.IGNORECASE)
 
-    # Further handle CR and DN. These usually follow a course code  
+    # Further handle CR and DN. These usually follow a course code
     # MATH1141 (CR) ==> 65WAM MATH1141
     # Use "in" as a joining word"
-    processed = re.sub(r'([A-Z]{4}[\d]{4})\s?\(CR\)', r'65GRADE in \1', processed)
-    processed = re.sub(r'([A-Z]{4}[\d]{4})\s?\(DN\)', r'75GRADE in \1', processed)
+    processed = re.sub(r'([A-Z]{4}[\d]{4})\s?\(CR\)',
+                       r'65GRADE in \1', processed)
+    processed = re.sub(r'([A-Z]{4}[\d]{4})\s?\(DN\)',
+                       r'75GRADE in \1', processed)
 
     return processed
+
 
 def convert_level(processed):
     """ Converts level X to LX """
     return re.sub(r"level (\d)", r"L\1", processed, flags=re.IGNORECASE)
 
+
 def convert_fslash(processed):
     """ Converts forward slashes to || and surrounds in brackets """
-    # E.g.: 
+    # E.g.:
     #    - "(COMP1521/DPST1092 && COMP2521)" -> "((COMP1521 || DPST1092) && COMP2521)"
     #    - "COMP9444 / COMP9417 / COMP9517/COMP4418" -> "(COMP9444 || COMP9417 || COMP9517 || COMP4418)"
-    matches = re.findall(r"[A-Z]{4}[\d]{4}(?:\s?/\s?[A-Z]{4}[\d]{4})+", processed)
-    
+    matches = re.findall(
+        r"[A-Z]{4}[\d]{4}(?:\s?/\s?[A-Z]{4}[\d]{4})+", processed)
+
     for match in matches:
         subbed_phrase = re.sub(r"/", r" || ", match)
         subbed_phrase = f"({subbed_phrase})"
@@ -207,9 +236,11 @@ def convert_fslash(processed):
 
     return processed
 
+
 def convert_including(processed):
     """ Convert 'including' to && """
     return re.sub("including", "&&", processed)
+
 
 def convert_AND_OR(processed):
     """ Convert 'and' to '&&' and 'or' to '||' """
@@ -217,8 +248,9 @@ def convert_AND_OR(processed):
     processed = re.sub(" or ", " || ", processed, flags=re.IGNORECASE)
     return processed
 
+
 def convert_coreqs(processed):
-    """ Puts co-requisites inside square brackets """    
+    """ Puts co-requisites inside square brackets """
     processed = processed.rstrip()
     return re.sub(r"co-?requisites?;?:?\s?(.*)", r"[\1]", processed, flags=re.IGNORECASE)
 
@@ -226,15 +258,17 @@ def convert_coreqs(processed):
 # Phase 3: Algo logic
 # -------------------
 
+
 def joining_terms(processed):
     '''Currently, we aim to use "in" as a joining term'''
     # UOC at LX ==> UOC in LX
     processed = re.sub(r'UOC at (L\d)', r'UOC in \1', processed)
-    
+
     # UOC of LX ==> UOC in LX
     processed = re.sub(r'UOC of (L\d)', r'UOC in \1', processed)
-    
+
     return processed
+
 
 def handle_comma_logic(processed):
     '''Handles commas and either removes or converts into AND/OR
@@ -243,7 +277,7 @@ def handle_comma_logic(processed):
     A, B, && C ==> , becomes &&
     A, B, || C ==> , becomes ||
     A, B, C ==> , becomes &&
-    NOTE: This logic will mishandle some rules where its ambiguous,
+    NOTE: This logic will mishandle some conditions where its ambiguous,
     e.g. COMP1531, and COMP2521 or COMP1927 ??????????
     --> we turn it into COMP1531 && COMP2521 || COMP1927 < YO BUT THIS EVALUATES PROPERLY AHAHAHAHA
     '''
@@ -264,12 +298,13 @@ def handle_comma_logic(processed):
         escaped_phrase = re.escape(match[0])
 
         processed = re.sub(escaped_phrase, subbed_phrase, processed)
-    
+
     return processed
 
 # -----------------------------------------------------------------------------
 # Phase 4: Final touches
 # -------------------
+
 
 def strip_spaces(processed):
     """ Strip multiple repeated whitespace """
@@ -280,7 +315,7 @@ def strip_spaces(processed):
 
 # '''Converts majors and minors into their respective specialisation codes.
 # E.g. Bsc COMP major '''
-# def 
+# def
 
 # '''
 # Maybe don't need here, put it in another file at the end.
@@ -292,5 +327,6 @@ def strip_spaces(processed):
 # def surround_brackets(processed):
 #     return "(" + processed + ")"
 
+
 if __name__ == "__main__":
-    preprocess_rules()
+    preprocess_conditions()
