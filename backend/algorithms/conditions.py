@@ -78,8 +78,8 @@ class CourseCondition(Condition):
         return user.has_taken_course(self.course)
 
 
-class UOCRequirement(Requirement):
-    '''UOC requirements such as "24UOC in COMP"'''
+class UOCCondition(Condition):
+    '''UOC conditions such as "24UOC in COMP"'''
 
     def __init__(self, uoc, connector=None):
         self.uoc = uoc
@@ -110,8 +110,8 @@ class UOCRequirement(Requirement):
             return True
 
 
-class WAMRequirement(Requirement):
-    '''Handles WAM requirements such as 65WAM and 80WAM in'''
+class WAMCondition(Condition):
+    '''Handles WAM conditions such as 65WAM and 80WAM in'''
 
     def __init__(self, wam):
         self.wam = wam
@@ -130,7 +130,7 @@ class WAMRequirement(Requirement):
             return False
 
         if not self.categories:
-            # Simple WAM requirement
+            # Simple WAM condition
             return user.wam >= self.wam
         else:
             # If a single WAM conditional is met, we return true
@@ -143,8 +143,8 @@ class WAMRequirement(Requirement):
             return False
 
 
-class CompositeRequirement(Requirement):
-    '''Handles AND/OR clauses comprised of requirement objects.
+class CompositeCondition(Condition):
+    '''Handles AND/OR clauses comprised of condition objects.
     NOTE: This will not handle clauses including BOTH && and || as it is assumed
     that brackets will have been used to prevent ambiguity'''
 
@@ -234,13 +234,13 @@ def create_condition(tokens):
                     return None, index
                 else:
                     # Add the category to the uoc and adjust the current index position
-                    uoc_req.set_uoc_category(uoc_category)
+                    uoc_cond.set_uoc_category(uoc_category)
                     [next(it) for _ in range(sub_index + 1)]
             else:
                 # No connector. Simple UOC condition
                 uoc_cond = UOCCondition(uoc)
 
-            result.add_requirement(uoc_req)
+            result.add_condition(uoc_cond)
         elif is_wam(token):
             wam = get_wam(token)
         else:
