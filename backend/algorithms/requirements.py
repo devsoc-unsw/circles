@@ -268,7 +268,7 @@ def is_uoc(text):
 
 
 def get_uoc(text):
-    '''Given a text in the format of \dUOC, will extract the uoc and return as an int'''
+    '''Given a text in the format of \d+UOC, will extract the uoc and return as an int'''
     uoc_str = re.match(r'^(\d+)UOC$', text, flags=re.IGNORECASE).group(1)
 
     return int(uoc_str)
@@ -280,10 +280,11 @@ def is_wam(text):
         return True
     return False
 
+
 def get_wam(text):
-    '''Given a text in the format of \dWAM, will extract the wam and return as a int'''
+    '''Given a text in the format of \d+WAM, will extract the wam and return as a int'''
     wam_str = re.match(r'^(\d+)WAM$', text, flags=re.IGNORECASE).group(1)
-1
+
     return int(wam_str)
 
 # tokens = ["(", "COMP1511", "&&", "(", "COMP1521", "||", "COMP1531", ")", ")"]
