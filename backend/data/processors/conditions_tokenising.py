@@ -20,11 +20,19 @@ split_key = ["(", ")", "&&", "||"]
 '''Converts the text condition into a json list'''
 
 
+<<<<<<< HEAD:backend/data/processors/conditions_tokenising.py
 def tokenise_conditions():
     data = dataHelpers.read_data("data/finalData/conditionsProcessed.json")
 
     for code, condition in data.items():
         text = condition["processed"]
+=======
+def parse_requirements_logic():
+    data = dataHelpers.read_data("data/finalData/preprocessedRules.json")
+
+    for code, requirement in data.items():
+        text = requirement["processed_rule"]
+>>>>>>> algorithms:backend/data/processors/requirementsTokenising.py
 
         # There are many words with (abcdefgh) where the brackets are attached
         # too tightly to the word. We first want to separate them like so:
@@ -56,4 +64,8 @@ def tokenise_conditions():
         PARSED_LOGIC[code] = logic
 
     dataHelpers.write_data(
+<<<<<<< HEAD:backend/data/processors/conditions_tokenising.py
         PARSED_LOGIC, "data/finalData/conditionsTokens.json")
+=======
+        PARSED_LOGIC, "data/finalData/requirementsTokenised.json")
+>>>>>>> algorithms:backend/data/processors/requirementsTokenising.py
