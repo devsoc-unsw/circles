@@ -32,7 +32,7 @@ class User:
         total_wam = self.wam * self.uoc
 
         # Update the uoc and carefully update the wam for all the new given courses
-        for course, (uoc, grade) in courses.item():
+        for course, (uoc, grade) in courses.items():
             self.uoc += uoc
 
             if grade != None:
