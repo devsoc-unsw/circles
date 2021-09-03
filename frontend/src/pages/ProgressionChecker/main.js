@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Dashboard from "./Dashboard";
 import ListView from "./ListView";
+// import ListView2 from "./ListView2";
 import axios from "axios";
 import './main.less';
 const ProgressionChecker = () => {
@@ -9,27 +10,24 @@ const ProgressionChecker = () => {
   const [courses, setCourses] = useState({});
 
   const fetchDegree = async () => {
-    const res = await axios.get("degree.json");
+    let res = await axios.get("degree.json");
     setDegree(res.data);
-    setIsLoading(false);
-  };
-
-  const fetchCourses = async () => {
-    const res = await axios.get("checkercourses.json");
-    setDegree(res.data);
+    res = await axios.get("checkercourses.json");
+    console.log(res.data)
+    setCourses(res.data);
     setIsLoading(false);
   };
 
   useEffect(() => {
     // setTimeout(fetchDegree, 2000);  // testing skeleton
     fetchDegree();
-    fetchCourses();
+    // fetchCourses();
   }, []);
 
   return (
     <>
-      <Dashboard isLoading={isLoading} degree={degree} courses={courses}/>
-      <ListView isLoading={isLoading} degree={degree} courses={courses}/>
+      <Dashboard isLoading={isLoading} degree={degree}/>
+      <ListView isLoading={isLoading} degree={degree} checkercourses={courses}/>
     </>
   );
 };

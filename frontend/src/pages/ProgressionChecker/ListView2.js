@@ -4,14 +4,14 @@ import { Skeleton } from "antd";
 
 const ListView = ({ isLoading, degree, checkercourses }) => {
   const { Title } = Typography;
-
+  console.log(checkercourses)
   return (
     <>
       {isLoading ? (
         <Skeleton />
       ) : (
         <>
-          {degree["concentrations"].map((concentration) => (
+          {degree["concentrations"]&&degree["concentrations"].map((concentration) => (
             <div
               className="listPage"
               id={concentration["name"]}
@@ -21,9 +21,10 @@ const ListView = ({ isLoading, degree, checkercourses }) => {
               
               <Title className="text" level={3}>Core Courses</Title> 
                 <Space size={[20, 20]} wrap>
-                
-                </Space>
-              <div className="space"></div>
+                    {checkercourses["corecourses"]&&checkercourses["corecourses"].map((course) => (          
+                        <Button className="checkerButton" type="primary">{course["name"]}</Button>
+                    ))}                  
+                  </Space>
               <Title className="text" level={3}>Discipline Electives</Title>
 
               
