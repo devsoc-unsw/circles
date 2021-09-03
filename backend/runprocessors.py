@@ -18,6 +18,7 @@ from data.processors.specialisationsProcessing import customise_spn_data
 from data.processors.coursesProcessing import process_courses as process_course_data
 
 from data.processors.conditionsPreprocessing import preprocess_conditions
+from data.processors.conditionsManualFixes import fix_conditions
 from data.processors.conditions_tokenising import tokenise_conditions
 
 parser = argparse.ArgumentParser()
@@ -44,11 +45,12 @@ run = {
         'process': customise_spn_data
     },
     'course': {
-        'process': process_course_data,
-        'format': format_course_data
+        'format': format_course_data,
+        'process': process_course_data
     },
     'condition': {
         'process': preprocess_conditions,
+        'manual': fix_conditions,
         'tokenise': tokenise_conditions
     }
 }

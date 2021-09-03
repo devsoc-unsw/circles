@@ -7,7 +7,7 @@ Run this code after running conditionsPreprocessing.py
 
 from data.utility import dataHelpers
 
-CONDITIONS = dataHelpers.read_data("data/finalData/conditionsTokens.json")
+CONDITIONS = dataHelpers.read_data("data/finalData/conditionsProcessed.json")
 PROCESSED = "processed"
 
 COURSES = dataHelpers.read_data("data/finalData/coursesProcessed.json")
