@@ -1,0 +1,18 @@
+#Simple patterns
+"65WAM"
+"74WAM UG"
+"80WAM in COMP"
+"72UOC 70WAM"
+"Program 3332 with 65WAM"
+"an overall 70WAM. [SOCW4018]"
+
+#Confusing items
+"48UOC. must have 65WAM"
+"minor. must have 65WAM to be eligible for this course"
+"enrolment in a Music single/dual degree. must have 65WAM"
+
+
+"• 65WAM; • have a minimum 48UOC at the commencement of this course; • have room in their degree for this course; • are in good academic standing; • have COMM6000 Career Accelerator: Essentials"
+"COMM1999 First Year Portfolio, 65WAM, 72UOC , room in degree for course, Good academic standing"
+"ACCT1511, ACTL3141, ACTL3182, FINS1613, ACTL3162, ACTL3151, ECON1102, 60WAM. Note: in 3587 may complete ACTL3141 as a []"
+
