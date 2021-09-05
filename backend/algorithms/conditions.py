@@ -145,6 +145,41 @@ class WAMCondition(Condition):
                     return True
             return False
 
+# TODO complete this
+class GRADECondition(Condition):
+    '''Handles WAM conditions such as 65WAM and 80WAM in'''
+
+    def __init__(self, wam):
+        self.wam = wam
+
+        # The conditional wam category attached to this object. If the connector is in,
+        # then the WAM must be from within this conditional. E.g.
+        # 80WAM in (COMP || BINH || SENG)
+        # NOTE: For now we assume OR condition
+        self.categories = []
+
+    def set_wam_category(self, category):
+        self.categories.append(category)
+
+    def validate(self, user):
+        # TODO: Make this return some warning in the future so WAM conditions do
+        # not gate keep the user
+        if user.wam == None:
+            # Default is False
+            return False
+
+        if not self.categories:
+            # Simple WAM condition
+            return user.wam >= self.wam
+        else:
+            # If a single WAM conditional is met, we return true
+            for category in self.categories:
+                category_wam = category.wam(user)
+                if category_wam == None:
+                    continue
+                elif category_wam >= self.wam:
+                    return True
+            return False
 
 class CompositeCondition(Condition):
     '''Handles AND/OR clauses comprised of condition objects.
@@ -268,6 +303,13 @@ def create_condition(tokens):
 
             result.add_condition(wam_cond)
 
+        # TODO complete this
+        elif is_grade(token):
+            grade = get_grade(token)
+            grade_cond = GRADECondition(grade)
+
+            result.add_condition(grade_cond)
+
         else:
             # Unmatched token. Error
             return None, index
@@ -312,6 +354,18 @@ def get_wam(text):
 
     return int(wam_str)
 
+def is_grade(text):
+    '''If the text is GRADE'''
+    if re.match(r'^\d+GRADE$', text, flags=re.IGNORECASE):
+        return True
+    return False
+
+
+def get_grade(text):
+    '''Given a text in the format of \d+GRADE, will extract the grade and return as a int'''
+    grade_str = re.match(r'^(\d+)GRADE$', text, flags=re.IGNORECASE).group(1)
+
+    return int(grade_str)
 # tokens = ["(", "COMP1511", "&&", "(", "COMP1521", "||", "COMP1531", ")", ")"]
 # user = User()
 # user.add_courses(["COMP1511", "COMP1531"])

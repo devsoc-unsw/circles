@@ -61,8 +61,7 @@ class CourseCategory(Category):
             return None
 
         return total_wam / total_uoc
-
-
+        
 def create_category(tokens, n_parsed=0):
     '''Given a list of tokens starting from after the connector keyword, create
     and return the category object matching the category, as well as the current index
@@ -72,6 +71,12 @@ def create_category(tokens, n_parsed=0):
     if re.match(r'^[A-Z]{4}$', tokens[0], flags=re.IGNORECASE):
         # Course type
         return CourseCategory(tokens[0]), 0
+
+    # UG requirement
+    # TODO Implement later
+    if tokens[0] == 'UG':
+        pass
+        return 
 
     # TODO: Levels (e.g. L2 MATH, SPECIALISATIONS, PROGRAM)
 
