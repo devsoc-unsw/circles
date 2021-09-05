@@ -59,7 +59,8 @@ export const SpecialisationStep = () => {
                     className='steps-next-btn'
                     type="primary"
                     onClick={() => {
-                        dispatch(degreeActions('SET_SPECIALIZATION', selected));
+                        // console.log('HIIIIIIII', selected);
+                        dispatch(degreeActions('SET_SPECIALISATION', selected));
                         dispatch(degreeActions('NEXT_STEP', selected));
                 }}>
                     Next 
