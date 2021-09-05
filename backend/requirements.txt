@@ -1,22 +1,22 @@
-apturl==0.5.2
+# apturl==0.5.2
 asgiref==3.4.1
 attrs==21.2.0
 autopep8==1.5.7
 bcrypt==3.1.7
 blinker==1.4
-Brlapi==0.8.2
+# Brlapi==0.8.2
 certifi==2020.6.20
 chardet==4.0.0
-chrome-gnome-shell==0.0.0
+# chrome-gnome-shell==0.0.0
 click==7.1.2
 colorama==0.4.4
-command-not-found==0.3
+# command-not-found==0.3
 cryptography==3.3.2
-cupshelpers==1.0
+# cupshelpers==1.0
 dbus-python==1.2.16
-defer==1.0.6
+# defer==1.0.6
 distro==1.5.0
-distro-info==1.0
+# distro-info==1.0
 duplicity==0.8.17
 fastapi==0.66.1
 fasteners==0.14.1
