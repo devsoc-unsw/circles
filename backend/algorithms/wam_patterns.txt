@@ -2,9 +2,10 @@
 "65WAM"
 "74WAM UG"
 "80WAM in COMP"
-"72UOC 70WAM"
 "Program 3332 with 65WAM"
 "an overall 70WAM. [SOCW4018]"
+
+"72UOC 70WAM"
 
 #Confusing items
 "48UOC. must have 65WAM"

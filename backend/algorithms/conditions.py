@@ -122,6 +122,9 @@ class WAMCondition(Condition):
         # NOTE: For now we assume OR condition
         self.categories = []
 
+    def set_wam_category(self, category):
+        self.categories.append(category)
+
     def validate(self, user):
         # TODO: Make this return some warning in the future so WAM conditions do
         # not gate keep the user
@@ -201,7 +204,7 @@ def create_condition(tokens):
                 # Error. Return None
                 return None, sub_index
             else:
-                # Adjust the current position to scan the next token after this sub result
+                # Adjust the cur/rent position to scan the next token after this sub result
                 result.add_condition(sub_result)
                 [next(it) for _ in range(sub_index + 1)]
         elif token == ')':
@@ -243,6 +246,28 @@ def create_condition(tokens):
             result.add_condition(uoc_cond)
         elif is_wam(token):
             wam = get_wam(token)
+            wam_cond = WAMCondition(wam)
+
+            # Logic branches for categories
+            # TODO check implementation of UG category
+            if tokens[index + 1] == "UG":
+                wam_category, sub_index = create_category(tokens[index + 1:])
+
+            # Create category according to the token after 'in'
+            if tokens[index + 1] == "in":
+                wam_category, sub_index = create_category(tokens[index + 2:])
+                next(it)
+
+            # If can't parse the category, return None(raise an error)
+            if wam_category == None:
+                return None, index
+            
+            # Set category and Skip
+            wam_cond.set_wam_category(wam_category)
+            [next(it) for _ in range(sub_index + 1)]
+
+            result.add_condition(wam_cond)
+
         else:
             # Unmatched token. Error
             return None, index
