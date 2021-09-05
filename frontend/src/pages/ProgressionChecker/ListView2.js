@@ -2,9 +2,24 @@ import React from "react";
 import { Typography, Button, Space} from "antd";
 import { Skeleton } from "antd";
 
-const ListView = ({ isLoading, degree, checkercourses }) => {
+
+
+
+const ListView = ({ isLoading, degree, checkercourses}) => {
   const { Title } = Typography;
-  console.log(checkercourses)
+
+  function buttonstyle (checkercourses) {
+    console.log("hello", checkercourses)
+    if (checkercourses["state"] === "Completed"){
+      return '"primary"';
+    } else if (checkercourses["state"] === "Planned") {
+      return '"primary"'; 
+    } else if (checkercourses["state"] === "Unplanned") {
+      return '"default"';
+    }
+  }
+
+  // console.log(checkercourses)
   return (
     <>
       {isLoading ? (
@@ -22,14 +37,19 @@ const ListView = ({ isLoading, degree, checkercourses }) => {
               <Title className="text" level={3}>Core Courses</Title> 
                 <Space size={[20, 20]} wrap>
                     {checkercourses["corecourses"]&&checkercourses["corecourses"].map((course) => (          
-                        <Button className="checkerButton" type="primary">{course["name"]}</Button>
+                        <Button className="checkerButton" type={()=>buttonstyle(checkercourses)}>{course["name"]}</Button>
                     ))}                  
                   </Space>
+                  <div className="space"/>
               <Title className="text" level={3}>Discipline Electives</Title>
-
-              
-              <div className="space"></div>
+                <Space size={[20, 20]} wrap>
+                    {checkercourses["disciplineelectives"]&&checkercourses["disciplineelectives"].map((course) => (          
+                        <Button className="checkerButton" type="primary" ghost>{course["name"]}</Button>
+                    ))}                  
+                  </Space>
+                <div className="space"></div>
               <Title className="text" level={3}>Free Electives</Title>
+
             </div>
           ))}
         </>
