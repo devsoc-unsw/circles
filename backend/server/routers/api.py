@@ -347,3 +347,12 @@ def getCourse(courseCode):
     del result['_id']
 
     return {'course' : result}
+
+@router.get("/getStructure/{programCode}/{major}/{minor}")
+@router.get("/getStructure/{programCode}/{major}")
+@router.get("/getStructure/{programCode}")
+def getStructure(programCode, major="Default", minor="Default"):
+    print(programCode)
+    print(major)
+    print(minor)
+    return True

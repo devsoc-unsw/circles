@@ -19,7 +19,7 @@ from typing import Container, List, Iterable, Union, Optional
 from data.utility import dataHelpers
 from collections import OrderedDict
 
-TEST_PROGS = ["3778", "3707", "3970", "3502"]
+TEST_PROGS = ["3778", "3707", "3970", "3502", "3053"]
 
 def process_data():
     # Read in ProgramsFormattedRaw File
@@ -140,10 +140,24 @@ def addDisciplineData(components, item):
                 CC["type"] = "core"
                 if container["credit_points"] != "":
                     CC["credits_to_complete"] = container["credit_points"]
-                for course in container["relationship"]:
-                    CC[course["academic_item_code"]] = 1
 
+                if container["container"] != []:
+                    for item in container["container"]:
+                        if item["vertical_grouping"]["value"] == "one_of_the_following":
+                            for course in item["relationship"]:
+                                CC[course["academic_item_code"]] = 1
+                                
+                        elif item["vertical_grouping"]["value"] == "CC":
+                            for course in item["relationship"]:
+                                CC[course["academic_item_code"]] = 1      
+                else:
+                    for course in container["relationship"]:
+                        CC[course["academic_item_code"]] = 1
                 NonSpecialisationData[title] = CC    
+                
+            
+
+
 
     components["SpecialisationData"] = SpecialisationData
     components["NonSpecialisationData"] = NonSpecialisationData
