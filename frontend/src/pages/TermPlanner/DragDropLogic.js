@@ -13,11 +13,17 @@ export const handleOnDragEnd = (result, dragEndProps) => {
   if (!destination) return; // drag outside container
 
   // check if prereqs are complete, and trigger warning if not
-  const arePrereqsCompleted = checkPrereq(
+  let arePrereqsCompleted = checkPrereq(
     draggableId,
     destination.droppableId,
     courses
   );
+  // courses.get(draggableId)["plannedFor"] = destination.droppableId;
+  // courses.get(draggableId)["warning"] = checkPrereq(
+  //   draggableId,
+  //   destination.droppableId,
+  //   courses
+  // );
   dispatch(
     // might need to change name
     plannerActions("MOVE_COURSE", {
@@ -59,6 +65,7 @@ export const handleOnDragEnd = (result, dragEndProps) => {
     destCoursesCpy.splice(destination.index, 0, draggableId);
     newYears[destRow][destTerm] = destCoursesCpy;
     dispatch(plannerActions("SET_YEARS", newYears));
+
     return;
   }
 
@@ -86,8 +93,8 @@ export const handleOnDragEnd = (result, dragEndProps) => {
 
   newYears[srcRow][srcTerm] = srcCoursesCpy;
   newYears[destRow][destTerm] = destCoursesCpy;
-
   dispatch(plannerActions("SET_YEARS", newYears));
+  // updateWarnings(newYears, startYear, courses, dispatch);
 };
 
 export const handleOnDragStart = (
@@ -111,6 +118,7 @@ const checkPrereq = (course, term, courses) => {
     return true;
   } else {
     const exprArray = expr.replace(/ \|\|| \&\&|\(|\)/g, "").split(" ");
+    console.log(exprArray);
     // from above example, exprArray is: [COMP1511, COMP1521, COMP1531, COMP1541]
     const isComplete = new Map();
     exprArray.forEach((elem) => {
@@ -133,4 +141,25 @@ const checkPrereq = (course, term, courses) => {
     arePrereqsCompleted = eval(exprWithMap);
     return arePrereqsCompleted;
   }
+};
+
+export const updateWarnings = (years, startYear, courses, dispatch) => {
+  let i = startYear;
+  years.forEach((year) => {
+    for (const term in year) {
+      year[term].forEach((course) => {
+        let termTag = i + term;
+        let arePrereqsCompleted = checkPrereq(course, termTag, courses);
+        // console.log(`${course}: ${!arePrereqsCompleted}`);
+        dispatch(
+          plannerActions("MOVE_COURSE", {
+            course: course,
+            term: termTag,
+            warning: !arePrereqsCompleted,
+          })
+        );
+      });
+    }
+    i += 1;
+  });
 };

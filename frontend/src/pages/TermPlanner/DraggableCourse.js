@@ -28,9 +28,9 @@ function DraggableCourse({ code, index }) {
             style={{
               ...provided.draggableProps.style,
             }}
-            className={`course ${warning && "warning"}`}
+            className={`course ${warning && " warning"}`}
             data-tip
-            data-for={warning && code}
+            data-for={code}
           >
             {warning && (
               <IoWarningOutline
@@ -47,10 +47,12 @@ function DraggableCourse({ code, index }) {
           </li>
         )}
       </Draggable>
-      <ReactTooltip id={code} place="bottom" className="tooltip">
-        <div style={{ fontWeight: "bold" }}>Prerequisites:</div>
-        {prereqDisplay}
-      </ReactTooltip>
+      {prereqDisplay != "" && (
+        <ReactTooltip id={code} place="bottom" className="tooltip">
+          <div style={{ fontWeight: "bold" }}>Prerequisites:</div>
+          {prereqDisplay}{" "}
+        </ReactTooltip>
+      )}
     </>
   );
 }
