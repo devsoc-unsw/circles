@@ -47,7 +47,7 @@ def test_course_condition():
     assert single_cond.validate(user) == True
 
 
-def test_composite_condition_simple():
+def test_composite_condition_course():
     '''AND/OR conditions with only course requirements'''
     user = create_student_3707_COMPA1()
 
@@ -89,3 +89,67 @@ def test_composite_condition_simple():
         "COMP2041": (6, None)
     })
     assert and_or_cond.validate(user) == True
+
+
+def test_wam_condition_simple():
+    '''Testing simple wam condition without complex keywords'''
+    user = create_student_3707_COMPA1()
+    user.add_courses({
+        "COMP1511": (6, None),
+        "COMP1521": (6, None)
+    })
+
+    # Pass on None WAM
+    cond1 = create_condition(["(", "70WAM", ")"])[0]
+    assert cond1.validate(user) == True
+
+    user1 = create_student_3707_COMPA1()
+    user1.add_courses({
+        "COMP1511": (6, 80),
+        "COMP1521": (6, 90),
+        "COMP1531": (6, 100)
+    })
+    assert cond1.validate(user) == True
+
+    cond2 = create_condition((["(", "90WAM", ")"]))[0]
+    assert cond2.validate(user) == True
+
+    cond3 = create_condition((["(", "90WAM", ")"]))[0]
+    assert cond3.validate(user) == True
+
+    cond4 = create_condition((["(", "100WAM", ")"]))[0]
+    assert cond2.validate(user) == False
+
+
+def test_wam_condition_complex():
+    '''Testing wam condition including keywords'''
+    user = create_student_3707_COMPA1()
+    user.add_courses({
+        "COMP1511": (6, None),
+        "COMP1521": (6, None),
+        "MATH1131": (6, None),
+        "MATH1141": (6, None),
+    })
+
+    # Pass on None WAM
+    comp_cond_70 = create_condition(["(", "70WAM", "in", "COMP", ")"])[0]
+    assert comp_cond_70.validate(user) == True
+
+    math_cond_70 = create_condition(["(", "70WAM", "in", "MATH", ")"])[0]
+    assert math_cond_70.validate(user) == True
+
+    comp_math_cond_70 = create_condition(
+        ["(", "70WAM", "in", "(", "COMP", "||" "MATH", ")"])[0]
+    assert comp_math_cond_70.validate(user) == True
+
+    user1 = create_student_3707_COMPA1()
+    user1.add_courses({
+        "COMP1511": (6, 65),
+        "COMP1521": (6, 80),
+        "MATH1131": (6, 50),
+        "MATH1141": (6, 50),
+    })
+
+    assert comp_cond_70.validate(user1) == True
+    assert math_cond_70.validate(user1) == False
+    assert comp_math_cond_70.validate(user1) == True
