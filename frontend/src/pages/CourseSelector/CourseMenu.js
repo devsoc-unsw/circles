@@ -71,7 +71,7 @@ console.log(specialisation)
   return (
     <div className='cs-menu-root'>
       {
-        courseOptions.recentlyViewed && courseOptions.core && courseOptions.electives && courseOptions.genEds &&
+        courseOptions.core && courseOptions.electives && courseOptions.genEds &&
         <Menu
           className={'text'}
           onClick={handleClick}
@@ -81,12 +81,6 @@ console.log(specialisation)
           defaultOpenKeys={['recently-viewed', 'core', 'electives']}
           mode="inline"
         >
-          <SubMenu className={"text"} key="recently-viewed" title="Recently Viewed">
-            { courseOptions.recentlyViewed.length === 0
-              ? <Menu.Item key={'empty-recently-viewed'} disabled> No courses here (ㆆ_ㆆ) </Menu.Item>
-              : courseOptions.recentlyViewed.map(course => <MenuItem courseCode={course}/>) 
-            }
-          </SubMenu>
           <SubMenu  className={"text"} key="core" title="Core">
             { courseOptions.core.length === 0
               ? <Menu.Item key={'empty-core'} disabled> No courses here (ㆆ_ㆆ) </Menu.Item>
