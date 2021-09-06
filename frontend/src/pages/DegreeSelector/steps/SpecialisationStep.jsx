@@ -1,20 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import axios from 'axios';
 import { Button, Typography } from 'antd';
 import { degreeActions } from '../../../actions/degreeActions';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import './steps.less';
-const options = [
-    'SPECIALISATION 1', 
-    'SPECIALISATION 2', 
-    'SPECIALISATION 3', 
-    'SPECIALISATION 4', 
-];
+// const options = [
+//     'SPECIALISATION 1', 
+//     'SPECIALISATION 2', 
+//     'SPECIALISATION 3', 
+//     'SPECIALISATION 4', 
+// ];
 const { Title } = Typography;
 export const SpecialisationStep = () => {
     const dispatch = useDispatch();
-    // const program = useSelector(store => store.degree.program);
+    const program = useSelector(store => store.degree.program);
     // Fetch the minors
     const [selected, setSelected] = React.useState("Select Specialisation"); 
+    const [options, setOptions] = React.useState(null);
+
+    const fetchAllSpecializations = async () => {
+        const res = await axios.get(`http://localhost:8000/api/getMajors/${program}`);
+        setOptions(res.data["majors"]);
+        // setDegree(res.data);
+        // setIsLoading(false);
+      };
+    
+    useEffect(() => {
+        // setTimeout(fetchDegree, 2000);  // testing skeleton
+        fetchAllSpecializations();
+    }, []);
+
     return (
         <div className='steps-root-container'>
             <Title level={3} className="text">
@@ -30,12 +45,12 @@ export const SpecialisationStep = () => {
             >
                 Select Specialisation
             </option>
-            {options.map((option, index) =>
+            {options && Object.keys(options).map((key, index) =>
                 <option
                     key={index + 1}
-                    value={option}
+                    value={key}
                 >
-                    {option}
+                    {key} {options[key]}
                 </option>
             )}
             </select>
@@ -44,7 +59,8 @@ export const SpecialisationStep = () => {
                     className='steps-next-btn'
                     type="primary"
                     onClick={() => {
-                        dispatch(degreeActions('SET_MINOR', selected));
+                        // console.log('HIIIIIIII', selected);
+                        dispatch(degreeActions('SET_SPECIALISATION', selected));
                         dispatch(degreeActions('NEXT_STEP', selected));
                 }}>
                     Next 

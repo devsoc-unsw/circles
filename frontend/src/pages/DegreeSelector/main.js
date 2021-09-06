@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ParticleBackground from './ParticleBackground';
 import { Steps, Button } from 'antd';
 import { useSelector } from 'react-redux';
@@ -16,6 +16,7 @@ function DegreeSelector() {
     const dispatch = useDispatch();
     const theme = useSelector(store => store.theme);
     const currStep = useSelector(store => store.degree.currStep);
+
     return (
       <div className='degree-root-container'>
         <div className='degree-content'>

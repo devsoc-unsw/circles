@@ -1,28 +1,43 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import axios from 'axios';
 import { Menu, Typography, Button } from 'antd';
 import { degreeActions } from '../../../actions/degreeActions';
 import { useDispatch } from 'react-redux'
 import './steps.less';
 
-const options = [
-    'Bachelor of Arts', 
-    'Bachelor of Computer Science',
-    'Bachelor of Commerce',
-    'Bachelor of Commerce/Law',
-    'Bachelor of Engineering (Honours)',
-    'Bachelor of Medical Studies/Doctor of Medicine',
-    'Bachelor of Arts', 
-    'Bachelor of Computer Science',
-    'Bachelor of Commerce',
-    'Bachelor of Commerce/Law',
-    'Bachelor of Engineering (Honours)',
-    'Bachelor of Medical Studies/Doctor of Medicine'
-]
+// const options = [
+//     'Bachelor of Arts', 
+//     'Bachelor of Computer Science',
+//     'Bachelor of Commerce',
+//     'Bachelor of Commerce/Law',
+//     'Bachelor of Engineering (Honours)',
+//     'Bachelor of Medical Studies/Doctor of Medicine',
+//     'Bachelor of Arts', 
+//     'Bachelor of Computer Science',
+//     'Bachelor of Commerce',
+//     'Bachelor of Commerce/Law',
+//     'Bachelor of Engineering (Honours)',
+//     'Bachelor of Medical Studies/Doctor of Medicine'
+// ]
 const { Title } = Typography;
 export const DegreeStep = () => {
     const dispatch = useDispatch();
     const [input, setInput] = React.useState('')
     const [selected, setSelected] = React.useState(null);
+    const [options, setOptions] = React.useState(null);
+
+    const fetchAllDegrees = async () => {
+        const res = await axios.get("http://localhost:8000/api/getPrograms");
+        setOptions(res.data["programs"]);
+        // setDegree(res.data);
+        // setIsLoading(false);
+      };
+    
+    useEffect(() => {
+        // setTimeout(fetchDegree, 2000);  // testing skeleton
+        fetchAllDegrees();
+    }, []);
+
     return (
         <div className='steps-root-container'>
             <Title level={3} className="text">
@@ -34,15 +49,15 @@ export const DegreeStep = () => {
                 value={input}
                 placeholder="Search Degree"
                 onChange={(e) => setInput(e.target.value)} />
-            { input !== '' && (
+            { input !== '' && options && (
                 <Menu className='degree-search-results'
                     onClick={(e) => setSelected(e.key)}
                     selectedKeys={[selected]}
                     mode="inline"
                 >
-                    { options.map(option => 
-                    <Menu.Item className='text' key={option}>{option}</Menu.Item>
-                    )}  
+                    { Object.keys(options).map((key) => 
+                    <Menu.Item className='text' key={key}>{key} &nbsp; Bachelor of {options[key]}</Menu.Item>
+                )}  
                 </Menu>
             )}
 
@@ -51,6 +66,7 @@ export const DegreeStep = () => {
                     className='steps-next-btn'
                     type="primary"
                     onClick={() => {
+                        console.log('THIS', selected)
                         dispatch(degreeActions('SET_DEGREE', selected));
                         dispatch(degreeActions('NEXT_STEP'));
                 }}>

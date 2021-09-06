@@ -27,26 +27,37 @@ export default function CourseMenu() {
   // Exception tabs
   if (id === 'explore' || id === 'search') id = null;
   const courseOptions = useSelector(store => store.courseOptions);
-
+  const specialisation = useSelector(store => store.degree.specialisation);
+console.log(specialisation)
   useEffect(() => {
     getCourseOptions();
   }, []);
 
   const getCourseOptions = async () => {
     const res = await axios.get('http://localhost:3000/courseOptions.json');
-    let core = [];
+    // let core = [];
     let electives = [];
     let genEds = [];
     res.data.courseOptions.map(course => {
       let type = course[Object.keys(course)[0]].type;
-      if (type === 'core') {
-        core.push(course);
-      } else if (type === 'elective') {
+      // if (type === 'core') {
+      //   core.push(course);
+      if (type === 'elective') {
         electives.push(course);
       } else if (type === 'gened') {
         genEds.push(course);
       }
     });
+
+    const coreData = await axios.get(`http://localhost:8000/api/getCoreCourses/COMPA1`);
+    let core = [];
+    Object.keys(coreData.data['core']).map((key, index) => {
+      // console.log(key);
+      core.push(key);
+    })
+
+    console.log('THIS ONEE', core)
+
     dispatch(courseOptionsActions('SET_RECENTLY_VIEWED_COURSES', res.data.recentlyViewed));
     dispatch(courseOptionsActions('SET_CORE_COURSES', core));
     dispatch(courseOptionsActions('SET_ELECTIVE_COURSES', electives));
@@ -79,7 +90,7 @@ export default function CourseMenu() {
           <SubMenu  className={"text"} key="core" title="Core">
             { courseOptions.core.length === 0
               ? <Menu.Item key={'empty-core'} disabled> No courses here (ㆆ_ㆆ) </Menu.Item>
-              : courseOptions.core.map(course => <MenuItem courseCode={Object.keys(course)[0]}/>) 
+              : courseOptions.core.map(course => <MenuItem courseCode={course}/>) 
             }
           </SubMenu>
           <SubMenu className={"text"} key="electives" title="Electives">
