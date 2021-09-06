@@ -4,17 +4,28 @@ import { Menu, Item, Separator, theme } from "react-contexify";
 import { plannerActions } from "../../actions/plannerActions";
 import "react-contexify/dist/ReactContexify.css";
 
-const ContextMenu = ({ code }) => {
+const ContextMenu = ({ code, plannedFor }) => {
   const dispatch = useDispatch();
   const handleDelete = () => {
     console.log(code);
     dispatch(plannerActions("REMOVE_COURSE", code));
   };
+
+  const handleUnschedule = () => {
+    console.log(code);
+    dispatch(plannerActions("UNSCHEDULE", code));
+  };
   const id = `${code}-context`;
+
   return (
     <Menu id={id} theme={theme.dark}>
-      <Item>Unschedule</Item>
-      <Item onClick={handleDelete}>Delete</Item>
+      {plannedFor && (
+        <>
+          <Item onClick={handleUnschedule}>Unschedule</Item>
+          <Item onClick={handleDelete}>Delete</Item>
+        </>
+      )}
+      <Item>Info</Item>
     </Menu>
   );
 };

@@ -18,6 +18,7 @@ function DraggableCourse({ code, index }) {
   const prereqs = courses.get(code)["prereqs"];
   const prereqDisplay = prereqs.replaceAll("||", "or").replaceAll("&&", "and");
   const warning = courses.get(code)["warning"];
+  const plannedFor = courses.get(code)["plannedFor"];
 
   const { show } = useContextMenu({
     id: `${code}-context`,
@@ -54,7 +55,7 @@ function DraggableCourse({ code, index }) {
           </li>
         )}
       </Draggable>
-      <ContextMenu code={code} />
+      <ContextMenu code={code} plannedFor={plannedFor} />
       {prereqDisplay != "" && (
         <ReactTooltip id={code} place="bottom" className="tooltip">
           <div style={{ fontWeight: "bold" }}>Prerequisites:</div>
