@@ -36,37 +36,41 @@ Now you should have `(venv)` at the beginning of your terminal. This indicates y
 pip3 install -r requirements.txt
 ```
 
-### Connecting to the Database (LOCAL) READ & WRITE - RECOMMENDED FOR BACKEND DEVELOPMENT
-1. Download MongoCompass (The desktop GUI for MongoDB) at https://www.mongodb.com/try/download/compass and perform the necessary installation steps for your system.
-> HARDEST STEP. MESSAGE DISCORD FOR HELP.
+### Connecting to the Database (LOCAL) READ & WRITE - RECOMMENDED
+1. Download MongoCompass (The desktop GUI for MongoDB) at https://www.mongodb.com/try/download/compass and perform the necessary installation steps for your system. The end result is to be able to open MongoCompass on your computer... **WARNING: This varies on different systems so message discord for help if needed**
 
-2. Run the server from the backend/ directory
-> python3 runserver.py
+2. Run the server from the backend/ directory```python3 runserver.py```.
 
-This will start a local server reading from your local database
+You can use: ```python3 runserver.py --overwrite=True``` to overwrite the existing database with the latest up to date data. This should also be used on your first time setting up the database to populate it with data.
 
-TODO: An overwrite option which should populate your MongoDB withall the necessary, up to date data
-TODO: API Documentation port
-TODO: How to view the API
+A server will start on http://127.0.0.1:8000. The API documentation can be viewed at http://127.0.0.1:8000/docs
 
-3. You can view the data by pasting your connection string into the MongoDB Compass and clicking connect. This should be:
+3. You can view the database by pasting your connection string into the MongoDB Compass and clicking connect. Your connection string should be:
 
 ```mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false```
 
 
-### Connecting to the Database (CLOUD) READ ONLY - RECOMMENDED FOR FRONTEND
+### Connecting to the Database (CLOUD) READ ONLY - ALTERNATIVE if you can't get Mongo working on your system
+You might not be able to get MongoCompass on your local system due to installation issues. In the event this occurs, we have provided an online alternative.
+
 1. Get username and password for our Mongo Cloud from admin (Either @Jwen00 or @JamesyJi)
 2. Determine your connection string (URI). It should be in this format:
 
 ```
 mongodb+srv://<username>:<password>@circles-db.jbk5a.mongodb.net/test
 ```
-> Remember to remove the angle brackets!==
 
-3. You can view the data by pasting your connection string into the MongoDB Compass and clicking connect (or by TODO: atlas)
+So if my username was james and my password was password, my URI should be:
 
-4. Run the server from the backend/ directory.
+```
+mongodb+srv://james:hello123@circles-db.jbk5a.mongodb.net/test
+```
+
+3. **Temporary Workaround**: Inside the backend/server/config.py file, replace the local URI with your own URI (make sure to keep track of the local URI somewhere!!!). **Make sure you replace the URI when you are done. Do not push your own credentials.**
+
+4. Run the server from the backend/ directory and make calls from http://127.0.0.1:8000 as normal.
 
 ```python3 runserver.py```
+
 
 TODO: Pipeline for local vs cloud so don't have to go and manually change the URI
