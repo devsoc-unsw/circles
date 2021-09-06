@@ -57,8 +57,6 @@ console.log(specialisation)
     })
 
     console.log('THIS ONEE', core)
-
-    dispatch(courseOptionsActions('SET_RECENTLY_VIEWED_COURSES', res.data.recentlyViewed));
     dispatch(courseOptionsActions('SET_CORE_COURSES', core));
     dispatch(courseOptionsActions('SET_ELECTIVE_COURSES', electives));
     dispatch(courseOptionsActions('SET_GENED_COURSES', genEds));
@@ -78,7 +76,7 @@ console.log(specialisation)
           style={{ width: '100%'}}
           defaultSelectedKeys={[id ? id : courseOptions.core[0]]}
           selectedKeys={[]}
-          defaultOpenKeys={['recently-viewed', 'core', 'electives']}
+          defaultOpenKeys={['core', 'electives']}
           mode="inline"
         >
           <SubMenu  className={"text"} key="core" title="Core">

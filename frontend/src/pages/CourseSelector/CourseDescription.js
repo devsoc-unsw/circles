@@ -133,11 +133,14 @@ export default function CourseDescription() {
             </div>
             <Title level={4} className="text">Overview</Title>
             <Space direction="vertical" style={{ marginBottom: '1rem' }}>
-            {
+            {/* {
               parsedDescription.map((text, index) => 
                 <Text className="text" key={index}>{text}</Text>
               )
-            }
+            } */}
+            <Text>
+              <div dangerouslySetInnerHTML={{ __html: course.description }} />
+            </Text>
             </Space>
             <Title level={4} className="text">Prerequisites</Title>
             { course.path_from && Object.keys(course.path_from).length > 0
