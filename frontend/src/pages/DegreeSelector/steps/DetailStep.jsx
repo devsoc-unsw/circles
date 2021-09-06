@@ -6,22 +6,6 @@ import { plannerActions } from '../../../actions/plannerActions';
 import './steps.less';
 import { CheckOutlined } from '@ant-design/icons';
 
-
-// TODO: Add to unplanned with extra information
-const coreCourses = new Map();
-coreCourses.set('COMP1511', {
-    title: "Programming fundamentals",
-    type: "Core",
-    termsOffered: ["t1", "t2"],
-    plannedFor: null,
-});
-coreCourses.set('COMP1521', {
-    title: "Systems fundamentals",
-    type: "Core",
-    termsOffered: ["t1", "t2"],
-    plannedFor: null,
-})
-
 const { Title } = Typography;
 export const DetailStep = () => {
     const dispatch = useDispatch();
@@ -30,7 +14,6 @@ export const DetailStep = () => {
     const [yearStart, setYearStart] = React.useState(currYear);
     // Use be results for this
     const [duration, setDuration] = React.useState(5);
-    const [openModal, setOpenModal] = React.useState(false);
     const [loading, setLoading] = React.useState(false);
     const [completed, setCompleted] = React.useState(false);
     const handleStartYear = (e) => {
@@ -41,18 +24,6 @@ export const DetailStep = () => {
     const handleNoCoreCourses = () => {
         history.push('/course-selector');
     }
-
-    const handleAddCoreCoures = () => {
-        setLoading(true);
-        // Do fetch call here.
-        dispatch(plannerActions('ADD_CORE_COURSES', coreCourses));
-        setTimeout(() => {
-            setLoading(false);
-            setOpenModal(false);
-            setCompleted(true);
-            history.push('/course-selector');
-        }, 1500);
-    };
 
     return (
         <div className='steps-root-container'>
@@ -86,32 +57,10 @@ export const DetailStep = () => {
                 type="primary"
                 onClick={() => {
                     dispatch(plannerActions('SET_YEAR_START', yearStart));
-                    dispatch(plannerActions('SET_DEGREE_LENGTH', duration))
-                    setOpenModal(true);
+                    dispatch(plannerActions('SET_DEGREE_LENGTH', duration));
             }}>
                 Start browsing courses
             </Button>
-
-            <Modal className='step-modal' title="One last step!" 
-                onCancel={() => setOpenModal(false)}
-                visible={openModal} 
-                footer={[
-                    <Button className='text' key="no-core-courses" 
-                        onClick={handleNoCoreCourses}>
-                        No thanks
-                    </Button>,
-                    <Button key="yes-core-courses" type="primary" 
-                        loading={loading} onClick={handleAddCoreCoures}>
-                        Yes
-                    </Button>
-                ]}
-            >
-                {loading 
-                    ? <><CheckOutlined/> Adding your compulsory courses...</> 
-                    : <p>Would you like to automatically add compulsory courses to your planner? </p>
-                }
-                
-            </Modal>
         </div>
     )
 }

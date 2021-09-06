@@ -56,9 +56,6 @@ console.log(specialisation)
       core.push(key);
     })
 
-    console.log('THIS ONEE', core)
-
-    dispatch(courseOptionsActions('SET_RECENTLY_VIEWED_COURSES', res.data.recentlyViewed));
     dispatch(courseOptionsActions('SET_CORE_COURSES', core));
     dispatch(courseOptionsActions('SET_ELECTIVE_COURSES', electives));
     dispatch(courseOptionsActions('SET_GENED_COURSES', genEds));
@@ -71,22 +68,16 @@ console.log(specialisation)
   return (
     <div className='cs-menu-root'>
       {
-        courseOptions.recentlyViewed && courseOptions.core && courseOptions.electives && courseOptions.genEds &&
+        courseOptions.core && courseOptions.electives && courseOptions.genEds &&
         <Menu
           className={'text'}
           onClick={handleClick}
           style={{ width: '100%'}}
           defaultSelectedKeys={[id ? id : courseOptions.core[0]]}
           selectedKeys={[]}
-          defaultOpenKeys={['recently-viewed', 'core', 'electives']}
+          defaultOpenKeys={['core', 'electives']}
           mode="inline"
         >
-          <SubMenu className={"text"} key="recently-viewed" title="Recently Viewed">
-            { courseOptions.recentlyViewed.length === 0
-              ? <Menu.Item key={'empty-recently-viewed'} disabled> No courses here (ㆆ_ㆆ) </Menu.Item>
-              : courseOptions.recentlyViewed.map(course => <MenuItem courseCode={course}/>) 
-            }
-          </SubMenu>
           <SubMenu  className={"text"} key="core" title="Core">
             { courseOptions.core.length === 0
               ? <Menu.Item key={'empty-core'} disabled> No courses here (ㆆ_ㆆ) </Menu.Item>

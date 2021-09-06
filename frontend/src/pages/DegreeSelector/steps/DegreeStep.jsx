@@ -5,20 +5,6 @@ import { degreeActions } from '../../../actions/degreeActions';
 import { useDispatch } from 'react-redux'
 import './steps.less';
 
-// const options = [
-//     'Bachelor of Arts', 
-//     'Bachelor of Computer Science',
-//     'Bachelor of Commerce',
-//     'Bachelor of Commerce/Law',
-//     'Bachelor of Engineering (Honours)',
-//     'Bachelor of Medical Studies/Doctor of Medicine',
-//     'Bachelor of Arts', 
-//     'Bachelor of Computer Science',
-//     'Bachelor of Commerce',
-//     'Bachelor of Commerce/Law',
-//     'Bachelor of Engineering (Honours)',
-//     'Bachelor of Medical Studies/Doctor of Medicine'
-// ]
 const { Title } = Typography;
 export const DegreeStep = () => {
     const dispatch = useDispatch();
@@ -29,7 +15,6 @@ export const DegreeStep = () => {
     const fetchAllDegrees = async () => {
         const res = await axios.get("http://localhost:8000/api/getPrograms");
         setOptions(res.data["programs"]);
-        // setDegree(res.data);
         // setIsLoading(false);
       };
     

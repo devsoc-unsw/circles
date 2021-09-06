@@ -4,13 +4,7 @@ import { Button, Typography } from 'antd';
 import { degreeActions } from '../../../actions/degreeActions';
 import { useDispatch, useSelector } from 'react-redux'
 import './steps.less';
-// const options = [
-//     'MINOR 1', 
-//     'MINOR 2', 
-//     'MINOR 3', 
-//     'MINOR 4', 
-//     'No minors',
-// ];  
+
 const { Title } = Typography;
 export const MinorStep = () => {
     const dispatch = useDispatch();
@@ -22,7 +16,6 @@ export const MinorStep = () => {
     const fetchAllMinors = async () => {
         const res = await axios.get(`http://localhost:8000/api/getMinors/${program}`);
         setOptions(res.data["minors"]);
-        // setDegree(res.data);
         // setIsLoading(false);
       };
     
@@ -67,8 +60,6 @@ export const MinorStep = () => {
             </Button>
             
         </div>
-        
-       
     )
 
 }
