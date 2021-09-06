@@ -24,9 +24,11 @@ class User:
     def add_courses(self, courses):
         '''Given a dictionary of courses mapping course code to a (uoc, grade) tuple,
         adds the course to the user and updates the uoc/grade at the same time.
-        NOTE: It is assumed that the user has not taken any of these courses yet
+        NOTE: For now, this does not do anything for courses which the user has already taken
         '''
-        self.courses = courses.copy()
+        for course in courses:
+            if course not in self.courses:
+                self.courses[course] = courses[course]
 
         # Determine the total wam (wam * uoc) of the user
         total_wam = self.wam * self.uoc
@@ -146,6 +148,8 @@ class WAMCondition(Condition):
             return False
 
 # TODO complete this
+
+
 class GRADECondition(Condition):
     '''Handles WAM conditions such as 65WAM and 80WAM in'''
 
@@ -180,6 +184,7 @@ class GRADECondition(Condition):
                 elif category_wam >= self.wam:
                     return True
             return False
+
 
 class CompositeCondition(Condition):
     '''Handles AND/OR clauses comprised of condition objects.
@@ -296,7 +301,7 @@ def create_condition(tokens):
             # If can't parse the category, return None(raise an error)
             if wam_category == None:
                 return None, index
-            
+
             # Set category and Skip
             wam_cond.set_wam_category(wam_category)
             [next(it) for _ in range(sub_index + 1)]
@@ -335,7 +340,7 @@ def is_uoc(text):
 
 
 def get_uoc(text):
-    '''Given a text in the format of \d+UOC, will extract the uoc and return as an int'''
+    '''Given a text in the format of ???UOC, will extract the uoc and return as an int'''
     uoc_str = re.match(r'^(\d+)UOC$', text, flags=re.IGNORECASE).group(1)
 
     return int(uoc_str)
@@ -349,10 +354,11 @@ def is_wam(text):
 
 
 def get_wam(text):
-    '''Given a text in the format of \d+WAM, will extract the wam and return as a int'''
+    '''Given a text in the format of ???WAM, will extract the wam and return as a int'''
     wam_str = re.match(r'^(\d+)WAM$', text, flags=re.IGNORECASE).group(1)
 
     return int(wam_str)
+
 
 def is_grade(text):
     '''If the text is GRADE'''
@@ -362,7 +368,7 @@ def is_grade(text):
 
 
 def get_grade(text):
-    '''Given a text in the format of \d+GRADE, will extract the grade and return as a int'''
+    '''Given a text in the format of ???GRADE, will extract the grade and return as a int'''
     grade_str = re.match(r'^(\d+)GRADE$', text, flags=re.IGNORECASE).group(1)
 
     return int(grade_str)

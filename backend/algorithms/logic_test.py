@@ -52,7 +52,7 @@ def test_composite_condition_simple():
     user = create_student_3707_COMPA1()
 
     and_cond = create_condition(
-        ["(", "COMP1511", "&&", "COMP1521", "&&", "COMP1531", ")"])
+        ["(", "COMP1511", "&&", "COMP1521", "&&", "COMP1531", ")"])[0]
     assert and_cond.validate(user) == False
 
     user.add_courses({
@@ -68,10 +68,24 @@ def test_composite_condition_simple():
     assert and_cond.validate(user) == True
 
     or_cond = create_condition(
-        ["(", "MATH1081", "||", "MATH1151", "||", "MATH1241", ")"])
+        ["(", "MATH1081", "||", "MATH1151", "||", "MATH1241", ")"])[0]
     assert or_cond.validate(user) == False
 
     user.add_courses({
         "MATH1151": (6, 90),
     })
     assert or_cond.validate(user) == True
+
+    and_or_cond = create_condition(["(", "(", "COMP1511", "||", "COMP1521", ")", "&&",
+                                   "(", "MATH1141", "&&", "MATH1151", ")", "&&", "(", "COMP2041", "&&", "COMP1531", ")", ")"])[0]
+    assert and_or_cond.validate(user) == False
+
+    user.add_courses({
+        "COMP1141": (6, None)
+    })
+    assert and_or_cond.validate(user) == False
+
+    user.add_courses({
+        "COMP2041": (6, None)
+    })
+    assert and_or_cond.validate(user) == True
