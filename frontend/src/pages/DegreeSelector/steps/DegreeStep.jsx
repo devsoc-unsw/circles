@@ -11,12 +11,6 @@ const options = [
     'Bachelor of Commerce/Law',
     'Bachelor of Engineering (Honours)',
     'Bachelor of Medical Studies/Doctor of Medicine',
-    'Bachelor of Arts', 
-    'Bachelor of Computer Science',
-    'Bachelor of Commerce',
-    'Bachelor of Commerce/Law',
-    'Bachelor of Engineering (Honours)',
-    'Bachelor of Medical Studies/Doctor of Medicine'
 ]
 const { Title } = Typography;
 export const DegreeStep = () => {

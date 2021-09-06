@@ -23,7 +23,6 @@ const degreeReducer = (state=initial, action) => {
                 minor: action.payload
             }; 
         case 'NEXT_STEP': 
-            console.log('currStep', state.currStep)
             if (state.currStep > 5) return state; 
             return {
                 ...state,

@@ -4,8 +4,9 @@ import { Steps, Button } from 'antd';
 import { useSelector } from 'react-redux';
 import { DegreeStep } from './steps/DegreeStep';
 import { SpecialisationStep } from './steps/SpecialisationStep';
+import { PreviousCoursesStep } from './steps/PreviousCoursesStep';
 import { MinorStep } from './steps/MinorStep';
-import { DetailStep } from './steps/DetailStep';
+import { DurationStep } from './steps/DurationStep';
 import { useDispatch } from 'react-redux';
 import { degreeActions } from '../../actions/degreeActions';
 import { LeftOutlined } from '@ant-design/icons';
@@ -24,6 +25,7 @@ function DegreeSelector() {
             <Step title="Specialisation" />
             <Step title="Minor" />
             <Step title="Duration" />
+            <Step title="Courses" />
           </Steps> 
           { currStep !== 0 && (
             <Button 
@@ -38,7 +40,8 @@ function DegreeSelector() {
             {currStep === 0 && <DegreeStep/> }
             {currStep === 1 && <SpecialisationStep/>}
             {currStep === 2 && <MinorStep/>}
-            {currStep === 3 && <DetailStep/>}
+            {currStep === 3 && <DurationStep/>}
+            {currStep === 4 && <PreviousCoursesStep/>}
           </div>
         </div>
         { theme === 'dark' && <ParticleBackground />}

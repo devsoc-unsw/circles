@@ -3,8 +3,8 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Typography, Button, Modal, Alert } from 'antd';
 import { plannerActions } from '../../../actions/plannerActions';
+import { degreeActions } from '../../../actions/degreeActions';
 import './steps.less';
-import { CheckOutlined } from '@ant-design/icons';
 
 
 // TODO: Add to unplanned with extra information
@@ -23,7 +23,7 @@ coreCourses.set('COMP1521', {
 })
 
 const { Title } = Typography;
-export const DetailStep = () => {
+export const DurationStep = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const currYear = parseInt(new Date().getFullYear());
@@ -86,13 +86,14 @@ export const DetailStep = () => {
                 type="primary"
                 onClick={() => {
                     dispatch(plannerActions('SET_YEAR_START', yearStart));
-                    dispatch(plannerActions('SET_DEGREE_LENGTH', duration))
-                    setOpenModal(true);
+                    dispatch(plannerActions('SET_DEGREE_LENGTH', duration));
+                    dispatch(degreeActions('NEXT_STEP'));
+                    // setOpenModal(true);
             }}>
-                Start browsing courses
+                Next
             </Button>
 
-            <Modal className='step-modal' title="One last step!" 
+            {/* <Modal className='step-modal' title="One last step!" 
                 onCancel={() => setOpenModal(false)}
                 visible={openModal} 
                 footer={[
@@ -111,7 +112,7 @@ export const DetailStep = () => {
                     : <p>Would you like to automatically add compulsory courses to your planner? </p>
                 }
                 
-            </Modal>
+            </Modal> */}
         </div>
     )
 }
