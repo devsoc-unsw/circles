@@ -1,6 +1,8 @@
 ''' The central point from where we will run our server. It will open up the 
 api and also run the files'''
 import sys
+import argparse
+
 import uvicorn
 import argparse
 

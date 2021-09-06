@@ -17,7 +17,6 @@ coursesCOL = db["Courses"]
 
 
 '''Helper functions'''
-
 # Give it the collection name to overwrite: 'Programs', 'Specialisations', 'Courses'
 
 
