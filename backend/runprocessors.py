@@ -48,11 +48,18 @@ run = {
         'format': format_course_data,
         'process': process_course_data
     },
+    << << << < HEAD
     'condition': {
         'process': preprocess_conditions,
         'manual': fix_conditions,
         'tokenise': tokenise_conditions
     }
+    == == == =
+    # 'condition': {
+    #     'preprocess': preprocess_conditions,
+    #     'parse': parse_conditions_logic
+    # }
+    >>>>>> > fe/dev
 }
 
 if args.type == 'all':

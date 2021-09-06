@@ -40,22 +40,3 @@ export const getAllCourses = () => {
         .catch(console.log);
     }
 }
-
-export const getCourseById = (id) => {
-    return (dispatch) => {
-        axios({
-            method: 'get',
-            url: 'http://localhost:3000/courses.json'
-        })
-        .then(({ data }) => {
-            // REVIEW COMMENT: You should use .filter here because .map expects a return value.
-            Object.keys(data).map(course => {
-                if (course === id) {
-                    dispatch(setCourse(data[course]));
-                }
-                return;
-            })
-        })
-        .catch(console.log);
-    }
-}

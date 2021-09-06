@@ -11,7 +11,7 @@ module.exports = {
             modifyVars: {
               "@primary-color": "#9254de", // purple-5
               "@heading-color": "white",
-              "@text-color": "white",
+              "@text-color": "black",
             },
             javascriptEnabled: true,
           },

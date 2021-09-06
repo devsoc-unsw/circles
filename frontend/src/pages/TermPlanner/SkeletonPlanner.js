@@ -13,27 +13,65 @@ function SkeletonPlanner() {
   };
 
   return (
-    <div className="gridContainer">
-      <div className="gridItem" />
-      <div className="gridItem">Term 1</div>
-      <div className="gridItem">Term 2</div>
-      <div className="gridItem">Term 3</div>
+    <div className="plannerContainer">
+      <div className="gridContainer">
+        <div className="gridItem" />
+        <div className="gridItem">Term 1</div>
+        <div className="gridItem">Term 2</div>
+        <div className="gridItem">Term 3</div>
 
-      <div className="gridItem" />
-      <Skeleton.Button active={true} shape="round" style={skeletonTermStyle} />
-      <Skeleton.Button active={true} shape="round" style={skeletonTermStyle} />
-      <Skeleton.Button active={true} shape="round" style={skeletonTermStyle} />
+        <div className="gridItem" />
+        <Skeleton.Button
+          active={true}
+          shape="round"
+          style={skeletonTermStyle}
+        />
+        <Skeleton.Button
+          active={true}
+          shape="round"
+          style={skeletonTermStyle}
+        />
+        <Skeleton.Button
+          active={true}
+          shape="round"
+          style={skeletonTermStyle}
+        />
 
-      <div className="gridItem" />
-      <Skeleton.Button active={true} shape="round" style={skeletonTermStyle} />
-      <Skeleton.Button active={true} shape="round" style={skeletonTermStyle} />
-      <Skeleton.Button active={true} shape="round" style={skeletonTermStyle} />
+        <div className="gridItem" />
+        <Skeleton.Button
+          active={true}
+          shape="round"
+          style={skeletonTermStyle}
+        />
+        <Skeleton.Button
+          active={true}
+          shape="round"
+          style={skeletonTermStyle}
+        />
+        <Skeleton.Button
+          active={true}
+          shape="round"
+          style={skeletonTermStyle}
+        />
 
-      <div className="gridItem" />
-      <Skeleton.Button active={true} shape="round" style={skeletonTermStyle} />
-      <Skeleton.Button active={true} shape="round" style={skeletonTermStyle} />
-      <Skeleton.Button active={true} shape="round" style={skeletonTermStyle} />
-      {/* <Skeleton.Button style={skeletonTermStyle} className="termBox" /> */}
+        <div className="gridItem" />
+        <Skeleton.Button
+          active={true}
+          shape="round"
+          style={skeletonTermStyle}
+        />
+        <Skeleton.Button
+          active={true}
+          shape="round"
+          style={skeletonTermStyle}
+        />
+        <Skeleton.Button
+          active={true}
+          shape="round"
+          style={skeletonTermStyle}
+        />
+        {/* <Skeleton.Button style={skeletonTermStyle} className="termBox" /> */}
+      </div>
     </div>
   );
 }

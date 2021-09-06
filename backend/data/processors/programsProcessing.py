@@ -81,7 +81,6 @@ def addComponentData(formatted, programData):
             GE = {}
             GE["credits_to_complete"] = int(item["credit_points"])
             components["GE"] = GE
-
         if item["title"] == "Disciplinary Component":
             addDisciplineData(components, item)
 
@@ -161,6 +160,9 @@ def addDisciplineData(components, item):
     components["SpecialisationData"] = SpecialisationData
     components["NonSpecialisationData"] = NonSpecialisationData
 
+    components["SpecialisationData"] = SpecialisationData
+    components["NonSpecialisationData"] = NonSpecialisationData
+
 
 def addFEData(components, item):
     FE = {}
@@ -169,7 +171,6 @@ def addFEData(components, item):
     else:
         FE["credits_to_complete"] = int(item["credit_points_max"])
     title = ""
-
     if item["container"] != []:
         title = "FE"
         for container in item["container"]:
