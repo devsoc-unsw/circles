@@ -56,7 +56,6 @@ console.log(specialisation)
       core.push(key);
     })
 
-    console.log('THIS ONEE', core)
     dispatch(courseOptionsActions('SET_CORE_COURSES', core));
     dispatch(courseOptionsActions('SET_ELECTIVE_COURSES', electives));
     dispatch(courseOptionsActions('SET_GENED_COURSES', genEds));
