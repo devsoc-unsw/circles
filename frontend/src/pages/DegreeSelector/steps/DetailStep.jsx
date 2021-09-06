@@ -6,22 +6,6 @@ import { plannerActions } from '../../../actions/plannerActions';
 import './steps.less';
 import { CheckOutlined } from '@ant-design/icons';
 
-
-// TODO: Add to unplanned with extra information
-const coreCourses = new Map();
-coreCourses.set('COMP1511', {
-    title: "Programming fundamentals",
-    type: "Core",
-    termsOffered: ["t1", "t2"],
-    plannedFor: null,
-});
-coreCourses.set('COMP1521', {
-    title: "Systems fundamentals",
-    type: "Core",
-    termsOffered: ["t1", "t2"],
-    plannedFor: null,
-})
-
 const { Title } = Typography;
 export const DetailStep = () => {
     const dispatch = useDispatch();
