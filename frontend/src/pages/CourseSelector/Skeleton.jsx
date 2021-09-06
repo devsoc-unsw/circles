@@ -3,17 +3,31 @@ import { Skeleton } from "antd";
 
 const SkeletonCourse = () => {
   return (
-    <div className="centered">
-      <Skeleton.Avatar style={{ width: 320, height: 320 }} active={true} />
+    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', width: '65vw' }}>
+      {/* title */}
       <Skeleton.Input
         className="textLink"
-        style={{ width: 400, height: 40 }}
+        style={{ width: '60%', height: 80 }}
         active={true}
       />
-      {/* <div className="cards">
-        <SkeletonCard />
-        <SkeletonCard />
-      </div> */}
+      {/* overview */}
+      <Skeleton.Input
+        className="textLink"
+        style={{ width: '20%', height: 30 }}
+        active={true}
+      />
+      {/* description */}
+      <Skeleton.Input
+        className="textLink"
+        style={{ width: '80%', height: 250 }}
+        active={true}
+      />
+      {/* prereq */}
+      <Skeleton.Input
+        className="textLink"
+        style={{ width: '80%', height: 100 }}
+        active={true}
+      />
     </div>
   );
 };
