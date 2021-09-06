@@ -21,16 +21,19 @@ The local server should open on port 3000 now.
 ## Setting up BE on your local machine
 
 ### Environment Setup
-1. Create a virtual environment inside the backend folder called venv (Think of a virtual environment as a separate container where we can control the versions of modules separately from your own computer)
+The following commands are work on MacOS. For different systems, google the respective commands. If you cannot get it working, message someone on discord.
+
+1. Create a virtual environment inside the backend folder called venv. Make sure it is called venv or else it will not be gitignored.
 ```
 cd backend
-python3 -m venv venv # Example for mac. Command might be different for you
+python3 -m venv venv
 ```
 2. Activate the virtual environment
 ```
-source venv/bin/activate # Example for mac. Command might be different for you
+source venv/bin/activate
 ```
 Now you should have `(venv)` at the beginning of your terminal. This indicates you are inside the virtual environment called venv.
+
 3. Install all necessary modules
 ```
 pip3 install -r requirements.txt
@@ -45,7 +48,7 @@ You can use: ```python3 runserver.py --overwrite=True``` to overwrite the existi
 
 A server will start on http://127.0.0.1:8000. The API documentation can be viewed at http://127.0.0.1:8000/docs
 
-3. You can view the database by pasting your connection string into the MongoDB Compass and clicking connect. Your connection string should be:
+3. You can view the database by pasting your connection string into MongoDB Compass and clicking the green connect button. Your connection string should be:
 
 ```mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false```
 
@@ -60,7 +63,7 @@ You might not be able to get MongoCompass on your local system due to installati
 mongodb+srv://<username>:<password>@circles-db.jbk5a.mongodb.net/test
 ```
 
-So if my username was james and my password was password, my URI should be:
+So if my username was james and my password was hello123, my URI should be:
 
 ```
 mongodb+srv://james:hello123@circles-db.jbk5a.mongodb.net/test
