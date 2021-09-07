@@ -96,6 +96,7 @@ const OptionsDrawer = ({ visible, setVisible }) => {
           Summer Term
         </Title>
         <Switch
+          defaultChecked={isSummerEnabled}
           onChange={handleSummerToggle}
           checkedChildren={<CheckOutlined />}
           unCheckedChildren={<CloseOutlined />}

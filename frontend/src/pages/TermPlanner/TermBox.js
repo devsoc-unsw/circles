@@ -18,7 +18,7 @@ function TermBox({ name, courses, termsOffered, isDragging }) {
           ref={provided.innerRef}
           {...provided.droppableProps}
           className={`termBox ${isDropAllowed && isDragging && "droppable "} ${
-            isSummerEnabled && "summer"
+            isSummerEnabled && "summerTermBox"
           }`}
         >
           {courses.map((code, index) => {
