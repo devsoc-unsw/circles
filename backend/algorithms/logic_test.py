@@ -91,6 +91,56 @@ def test_composite_condition_course():
     assert and_or_cond.validate(user) == True
 
 
+def test_uoc_condition_simple():
+    '''Testing simple uoc condition without complex keywords'''
+    user = create_student_3707_COMPA1()
+    user.add_courses({
+        "COMP1511": (6, None),
+        "COMP1521": (6, None),
+        "COMP1531": (6, None),
+        "MATH2859": (3, None)
+    })
+
+    cond_12 = create_condition(["(", "12UOC", ")"])[0]
+    cond_21 = create_condition(["(", "21UOC", ")"])[0]
+    cond_30 = create_condition(["(", "30UOC", ")"])[0]
+
+    assert cond_12.validate(user) == True
+    assert cond_21.validate(user) == True
+    assert cond_30.validate(user) == False
+
+
+def test_uoc_condition_complex():
+    '''Testing uoc condition including keywords'''
+    user = create_student_3707_COMPA1()
+    user.add_courses({
+        "COMP1511": (6, None),
+        "COMP1521": (6, None),
+        "COMP1531": (6, None),
+        "MATH1141": (6, 90),
+        "MATH1151": (6, 90),
+        "MATH2400": (3, 90),
+    })
+
+    cond_12_comp = create_condition(["(", "12UOC", "in", "COMP", ")"])[0]
+    cond_12_math = create_condition(["(", "12UOC", "in", "MATH", ")"])[0]
+    cond_18_comp = create_condition(["(", "18UOC", "in", "COMP", ")"])[0]
+    cond_15_math = create_condition(["(", "15UOC", "in", "MATH", ")"])[0]
+    cond_30_comp = create_condition(["(", "30UOC", "in", "COMP", ")"])[0]
+    cond_30_math = create_condition(["(", "30UOC", "in", "MATH", ")"])[0]
+
+    assert cond_12_comp.validate(user) == True
+    assert cond_12_math.validate(user) == True
+    assert cond_18_comp.validate(user) == True
+    assert cond_15_math.validate(user) == True
+    assert cond_30_comp.validate(user) == False
+    assert cond_30_math.validate(user) == False
+
+    # Nonexistent categories shouldn't work...
+    cond_12_engg = create_condition(["(", "12UOC", "in", "ENGG", ")"])[0]
+    assert cond_12_engg.validate(user) == False
+
+
 def test_wam_condition_simple():
     '''Testing simple wam condition without complex keywords'''
     user = create_student_3707_COMPA1()
