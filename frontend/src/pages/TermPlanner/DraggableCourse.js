@@ -46,7 +46,7 @@ function DraggableCourse({ code, index }) {
                 color={theme === "light" ? "#DC9930" : "white"}
               />
             )}
-            <div style={{ fontSize: isSummerEnabled && "0.7rem" }}>
+            <div className={isSummerEnabled && "summerViewCourse"}>
               <Text strong className="text">
                 {code}
               </Text>
