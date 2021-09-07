@@ -48,9 +48,9 @@ const OptionsDrawer = ({ visible, setVisible }) => {
       </Title>
       {Object.keys(sortedUnplanned).length === 0 ? (
         <Alert
-          message="Oh!"
-          description="It looks like you don't have any more courses to add to your term planner. "
-          type="warning"
+          message="No more courses..."
+          description="You can add more courses via the course selector"
+          type="info"
           showIcon
           className="alert"
         />
