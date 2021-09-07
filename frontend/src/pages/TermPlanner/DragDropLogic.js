@@ -118,7 +118,6 @@ const checkPrereq = (course, term, courses) => {
     return true;
   } else {
     const exprArray = expr.replace(/ \|\|| \&\&|\(|\)/g, "").split(" ");
-    console.log(exprArray);
     // from above example, exprArray is: [COMP1511, COMP1521, COMP1531, COMP1541]
     const isComplete = new Map();
     exprArray.forEach((elem) => {
@@ -137,6 +136,7 @@ const checkPrereq = (course, term, courses) => {
       }
     });
     const exprWithMap = expr.replace(/([A-Z]+[0-9]+)/g, 'isComplete.get("$1")');
+
     // from above example, exprWithMap is: (isComplete.get(COMP1511) || ...)
     arePrereqsCompleted = eval(exprWithMap);
     return arePrereqsCompleted;

@@ -88,6 +88,7 @@ const plannerReducer = (state = initialState, action) => {
       // Remove courses from years and courses
       const plannedTerm = state.courses.get(action.payload).plannedFor;
       let newCourses = new Map(state.courses);
+      newCourses.get(action.payload).plannedFor = null;
       newCourses.delete(action.payload);
       Object.assign(state.courses, newCourses);
       if (plannedTerm) {
