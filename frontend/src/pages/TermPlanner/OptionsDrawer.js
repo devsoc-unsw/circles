@@ -1,9 +1,18 @@
 import React, { useEffect } from "react";
 import { updateDegreeLength } from "../../actions/userAction";
-import { Typography, Drawer, Collapse, Alert, DatePicker, Select } from "antd";
+import { plannerActions } from "../../actions/plannerActions";
+import {
+  Typography,
+  Drawer,
+  Collapse,
+  Alert,
+  DatePicker,
+  Select,
+  Switch,
+} from "antd";
 import { Droppable } from "react-beautiful-dnd";
 import DraggableCourse from "./DraggableCourse";
-import { CloseOutlined } from "@ant-design/icons";
+import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 
 const OptionsDrawer = ({ visible, setVisible }) => {
@@ -11,7 +20,7 @@ const OptionsDrawer = ({ visible, setVisible }) => {
   const { Panel } = Collapse;
   const { Option } = Select;
   const theme = useSelector((state) => state.theme);
-  const { courses, unplanned } = useSelector((state) => {
+  const { courses, unplanned, isSummerEnabled } = useSelector((state) => {
     return state.planner;
   });
   const dispatch = useDispatch();
@@ -23,6 +32,10 @@ const OptionsDrawer = ({ visible, setVisible }) => {
 
   function handleChange(value) {
     dispatch(updateDegreeLength(value));
+  }
+
+  function handleSummerToggle() {
+    dispatch(plannerActions("TOGGLE_SUMMER"));
   }
 
   const years = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -78,6 +91,16 @@ const OptionsDrawer = ({ visible, setVisible }) => {
             ))}
         </Collapse>
       )}
+      <div className="summerToggleBox">
+        <Title level={2} class="text" style={{ marginBottom: "0em" }}>
+          Summer Term
+        </Title>
+        <Switch
+          onChange={handleSummerToggle}
+          checkedChildren={<CheckOutlined />}
+          unCheckedChildren={<CloseOutlined />}
+        />
+      </div>
       <Title level={2} class="text">
         Start Year
       </Title>

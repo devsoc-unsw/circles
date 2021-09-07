@@ -41,7 +41,7 @@ export const handleOnDragEnd = (result, dragEndProps) => {
     return;
 
   const destYear = destination.droppableId.match(/[0-9]{4}/)[0];
-  const destTerm = destination.droppableId.match(/t[1-3]/)[0];
+  const destTerm = destination.droppableId.match(/t[0-3]/)[0];
   const destRow = destYear - startYear;
   const destBox = years[destRow][destTerm];
 
@@ -70,7 +70,7 @@ export const handleOnDragEnd = (result, dragEndProps) => {
   }
 
   const srcYear = source.droppableId.match(/[0-9]{4}/)[0];
-  const srcTerm = source.droppableId.match(/t[1-3]/)[0];
+  const srcTerm = source.droppableId.match(/t[0-3]/)[0];
   const srcRow = srcYear - startYear;
   const srcBox = years[srcRow][srcTerm];
 

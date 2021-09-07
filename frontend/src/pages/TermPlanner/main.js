@@ -64,6 +64,7 @@ const TermPlanner = () => {
           <div className="plannerContainer">
             <div class="gridContainer">
               <div class="gridItem"></div>
+              <div class="gridItem">Summer Term</div>
               <div class="gridItem">Term 1</div>
               <div class="gridItem">Term 2</div>
               <div class="gridItem">Term 3</div>
