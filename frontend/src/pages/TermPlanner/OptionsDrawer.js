@@ -56,24 +56,26 @@ const OptionsDrawer = ({ visible, setVisible }) => {
         />
       ) : (
         <Collapse className="collapse" ghost={theme === "dark"}>
-          {Object.keys(sortedUnplanned).map((type, index) => (
-            <Panel header={type} key={index}>
-              <Droppable droppableId={type} isDropDisabled={true}>
-                {(provided) => (
-                  <div
-                    ref={provided.innerRef}
-                    {...provided.droppableProps}
-                    className="panel"
-                  >
-                    {sortedUnplanned[type].map((code, index) => (
-                      <DraggableCourse code={code} index={index} key={code} />
-                    ))}
-                    {provided.placeholder}
-                  </div>
-                )}
-              </Droppable>
-            </Panel>
-          ))}
+          {Object.keys(sortedUnplanned)
+            .sort()
+            .map((type, index) => (
+              <Panel header={type} key={index}>
+                <Droppable droppableId={type} isDropDisabled={true}>
+                  {(provided) => (
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.droppableProps}
+                      className="panel"
+                    >
+                      {sortedUnplanned[type].map((code, index) => (
+                        <DraggableCourse code={code} index={index} key={code} />
+                      ))}
+                      {provided.placeholder}
+                    </div>
+                  )}
+                </Droppable>
+              </Panel>
+            ))}
         </Collapse>
       )}
       <Title level={2} class="text">

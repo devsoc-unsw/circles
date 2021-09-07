@@ -25,12 +25,8 @@ const ContextMenu = ({ code, plannedFor }) => {
 
   return (
     <Menu id={id} theme={theme.dark}>
-      {plannedFor && (
-        <>
-          <Item onClick={handleUnschedule}>Unschedule</Item>
-          <Item onClick={handleDelete}>Delete</Item>
-        </>
-      )}
+      {plannedFor && <Item onClick={handleUnschedule}>Unschedule</Item>}
+      <Item onClick={handleDelete}>Delete</Item>
       <Item onClick={handleInfo}>Info</Item>
     </Menu>
   );
