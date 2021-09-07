@@ -75,6 +75,9 @@ class CourseCondition(Condition):
     def __init__(self, course):
         self.course = course
 
+    def get_course(self):
+        return self.course
+
     def validate(self, user):
         '''Returns true if the user has taken this course before'''
         return user.has_taken_course(self.course)
@@ -147,9 +150,8 @@ class WAMCondition(Condition):
                     return True
             return False
 
-# TODO complete this
-
-
+# TODO Fix the category related function
+# examine whether selected before calculating grade
 class GRADECondition(Condition):
     '''Handles WAM conditions such as 65WAM and 80WAM in'''
 
@@ -198,6 +200,9 @@ class CompositeCondition(Condition):
     def add_condition(self, condition_classobj):
         '''Adds a condition object'''
         self.conditions.append(condition_classobj)
+
+    def get_condition(self):
+        return self.conditions
 
     def set_logic(self, logic):
         '''AND or OR'''
@@ -308,17 +313,27 @@ def create_condition(tokens):
         elif is_grade(token):
             grade = get_grade(token)
             grade_cond = GRADECondition(grade)
+            categories = []
 
             # Create category according to the token after 'in'
             if tokens[index + 1] == "in":
                 grade_category, sub_index = create_category(tokens[index + 2:])
+                categories.append(grade_category)
                 next(it)
 
+            # If meet 'each', create a grade condition to each course occured
             if 'each' in token:
-                
+                for course in result.get_condition():
+                    if isinstance(course, CourseCondition):
+                        # add square brackets to fit the parameter format of create_cat
+                        grade_category, _ = create_category([course.get_course()])
+                        categories.append(grade_category)
+                    pass
                 pass
             
-            grade_cond.set_grade_category(grade_category)
+
+            for cate in categories:
+                grade_cond.set_grade_category(cate)
             [next(it) for _ in range(sub_index + 1)]
             result.add_condition(grade_cond)
 
