@@ -18,9 +18,10 @@ const TermPlanner = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [termsOffered, setTermsOffered] = useState([]);
   const [isDragging, setIsDragging] = useState(false);
-  const { years, startYear, courses, plannedCourses } = useSelector((state) => {
-    return state.planner;
-  });
+  const { years, startYear, courses, plannedCourses, isSummerEnabled } =
+    useSelector((state) => {
+      return state.planner;
+    });
   const [visible, setVisible] = useState(false); // visibility for side drawer
   const dispatch = useDispatch();
 
@@ -62,9 +63,9 @@ const TermPlanner = () => {
             style={{ position: "sticky", top: "50vh", left: "1em" }}
           />
           <div className="plannerContainer">
-            <div class="gridContainer">
+            <div class={`gridContainer ${isSummerEnabled && "summerGrid"}`}>
               <div class="gridItem"></div>
-              <div class="gridItem">Summer Term</div>
+              {isSummerEnabled && <div class="gridItem">Summer Term</div>}
               <div class="gridItem">Term 1</div>
               <div class="gridItem">Term 2</div>
               <div class="gridItem">Term 3</div>
@@ -74,15 +75,16 @@ const TermPlanner = () => {
                   <div class="gridItem">{startYear + index}</div>
                   {Object.keys(year).map((term) => {
                     const key = startYear + index + term;
-                    return (
-                      <TermBox
-                        key={key}
-                        name={key}
-                        courses={year[term]}
-                        termsOffered={termsOffered}
-                        isDragging={isDragging}
-                      />
-                    );
+                    if ((!isSummerEnabled && term != "t0") || isSummerEnabled)
+                      return (
+                        <TermBox
+                          key={key}
+                          name={key}
+                          courses={year[term]}
+                          termsOffered={termsOffered}
+                          isDragging={isDragging}
+                        />
+                      );
                   })}
                 </React.Fragment>
               ))}

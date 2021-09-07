@@ -10,7 +10,7 @@ import ContextMenu from "./ContextMenu";
 function DraggableCourse({ code, index }) {
   //   let code = course.match(/([A-Z]{4}[0-9]{4}):/)[1];
   const { Text } = Typography;
-  const { courses } = useSelector((state) => {
+  const { courses, isSummerEnabled } = useSelector((state) => {
     return state.planner;
   });
   const theme = useSelector((state) => state.theme);
@@ -46,7 +46,7 @@ function DraggableCourse({ code, index }) {
                 color={theme === "light" ? "#DC9930" : "white"}
               />
             )}
-            <div>
+            <div style={{ fontSize: isSummerEnabled && "0.7rem" }}>
               <Text strong className="text">
                 {code}
               </Text>
