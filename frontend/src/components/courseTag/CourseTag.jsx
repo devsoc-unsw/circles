@@ -1,24 +1,20 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { courseTabActions } from '../../actions/courseTabActions';
 import { Tag } from 'antd';
-import ReactTooltip from "react-tooltip";
-import classes from './courseTag.module.css';
+import './courseTag.less'
 
 // NOTE: Tooltip not working
 export const CourseTag = ({ name }) => {
-  const history = useHistory();
+  const dispatch = useDispatch();
   const handleClick = () => {
-    history.push(`/course-selector/${name}`);
+    dispatch(courseTabActions("ADD_TAB", name));
   }
 
   // dark mode always has white text
   const theme = useSelector((state) => state.theme);
   return (
-      <Tag onClick={handleClick} className={`text ${classes.clickable}`}>
-        <ReactTooltip place="bottom" type={theme === "dark" && "light"}>
-          See more
-        </ReactTooltip>
+      <Tag onClick={handleClick} className={'text tag'}>
         { name }
       </Tag>
   );
