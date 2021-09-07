@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Menu, Item, Separator, theme } from "react-contexify";
 import { plannerActions } from "../../actions/plannerActions";
+import { courseTabActions } from "../../actions/courseTabActions";
 import "react-contexify/dist/ReactContexify.css";
 import { useHistory } from "react-router-dom";
 import { updateWarnings } from "./DragDropLogic";
@@ -30,7 +31,9 @@ const ContextMenu = ({ code, plannedFor }) => {
   const id = `${code}-context`;
 
   const handleInfo = () => {
-    history.push(`/course-selector/${code}`);
+    history.push(`/course-selector`);
+    // dispatch(courseTabActions("SET_ACTIVE_TAB", 1));
+    dispatch(courseTabActions("ADD_TAB", code));
   };
 
   return (

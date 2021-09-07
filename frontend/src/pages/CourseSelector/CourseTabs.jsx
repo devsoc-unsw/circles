@@ -9,6 +9,7 @@ export const CourseTabs = () => {
   const dispatch = useDispatch();
   const { tabs, active } = useSelector(state => state.tabs);
   const handleChange = (activeKey) => {
+	  console.log(activeKey);
     dispatch(courseTabActions("SET_ACTIVE_TAB", activeKey));
   };
 
