@@ -30,6 +30,7 @@ const TermPlanner = () => {
     isAllEmpty(years) && openNotification();
     updateWarnings(years, startYear, courses, dispatch);
   }, []);
+  const currYear = new Date().getFullYear();
 
   const dragEndProps = {
     setIsDragging,
@@ -72,7 +73,13 @@ const TermPlanner = () => {
 
               {years.map((year, index) => (
                 <React.Fragment key={index}>
-                  <div class="gridItem">{startYear + index}</div>
+                  <div
+                    class={`gridItem ${
+                      currYear === startYear + index && "currYear"
+                    }`}
+                  >
+                    {startYear + index}
+                  </div>
                   {Object.keys(year).map((term) => {
                     const key = startYear + index + term;
                     if ((!isSummerEnabled && term != "t0") || isSummerEnabled)

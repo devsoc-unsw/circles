@@ -47,7 +47,7 @@ const initialState = {
   unplanned: ["COMP2521"],
   startYear: 2021,
   numYears: 3,
-  isSummerEnabled: true,
+  isSummerEnabled: false,
   years: [
     { t0: [], t1: [], t2: [], t3: ["COMP1511"] },
     { t0: [], t1: [], t2: ["COMP1521"], t3: [] },
