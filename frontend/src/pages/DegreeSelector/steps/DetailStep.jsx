@@ -14,12 +14,16 @@ coreCourses.set('COMP1511', {
     type: "Core",
     termsOffered: ["t1", "t2"],
     plannedFor: null,
+	prereqs: "",
+	warning: false, 
 });
 coreCourses.set('COMP1521', {
     title: "Systems fundamentals",
     type: "Core",
     termsOffered: ["t1", "t2"],
     plannedFor: null,
+	prereqs: "",
+	warning: false, 
 })
 
 const { Title } = Typography;

@@ -114,6 +114,7 @@ const checkPrereq = (course, term, courses) => {
   let arePrereqsCompleted = false;
   // for example, expr can be: (COMP1511 || COMP1521 && (COMP1531 || COMP1541);
   const expr = prereqs;
+  if (expr == null) return true;
   if (expr === "") {
     return true;
   } else {
