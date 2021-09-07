@@ -162,7 +162,7 @@ class GRADECondition(Condition):
         # NOTE: For now we assume OR condition
         self.categories = []
 
-    def set_wam_category(self, category):
+    def set_grade_category(self, category):
         self.categories.append(category)
 
     def validate(self, user):
@@ -289,10 +289,6 @@ def create_condition(tokens):
             wam_cond = WAMCondition(wam)
 
             # Logic branches for categories
-            # TODO check implementation of UG category
-            if tokens[index + 1] == "UG":
-                wam_category, sub_index = create_category(tokens[index + 1:])
-
             # Create category according to the token after 'in'
             if tokens[index + 1] == "in":
                 wam_category, sub_index = create_category(tokens[index + 2:])
@@ -313,6 +309,17 @@ def create_condition(tokens):
             grade = get_grade(token)
             grade_cond = GRADECondition(grade)
 
+            # Create category according to the token after 'in'
+            if tokens[index + 1] == "in":
+                grade_category, sub_index = create_category(tokens[index + 2:])
+                next(it)
+
+            if 'each' in token:
+                
+                pass
+            
+            grade_cond.set_grade_category(grade_category)
+            [next(it) for _ in range(sub_index + 1)]
             result.add_condition(grade_cond)
 
         else:

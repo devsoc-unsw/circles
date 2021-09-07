@@ -1,3 +1,7 @@
 "65GRADE in COMP1927"
+
 "MATH1251 each with 70GRADE"
+
+
+# Average of all L2 Mathematics or average of two courses?
 "12UOC in L2 Mathematics with an average 70GRADE"
