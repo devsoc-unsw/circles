@@ -44,11 +44,11 @@ const ContextMenu = ({ code, plannedFor }) => {
         </Item>
       )}
       <Item onClick={handleDelete}>
-        <FaTrash className="contextMenuIcon" /> Delete
+        <FaTrash className="contextMenuIcon" /> Delete from Planner
       </Item>
       <Item onClick={handleInfo}>
         <FaInfoCircle className="contextMenuIcon" />
-        Info
+        View Info
       </Item>
     </Menu>
   );
