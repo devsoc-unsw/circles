@@ -27,27 +27,35 @@ export default function CourseMenu() {
   // Exception tabs
   if (id === 'explore' || id === 'search') id = null;
   const courseOptions = useSelector(store => store.courseOptions);
-
+  const specialisation = useSelector(store => store.degree.specialisation);
+console.log(specialisation)
   useEffect(() => {
     getCourseOptions();
   }, []);
 
   const getCourseOptions = async () => {
     const res = await axios.get('http://localhost:3000/courseOptions.json');
-    let core = [];
+    // let core = [];
     let electives = [];
     let genEds = [];
     res.data.courseOptions.map(course => {
       let type = course[Object.keys(course)[0]].type;
-      if (type === 'core') {
-        core.push(course);
-      } else if (type === 'elective') {
+      // if (type === 'core') {
+      //   core.push(course);
+      if (type === 'elective') {
         electives.push(course);
       } else if (type === 'gened') {
         genEds.push(course);
       }
     });
-    dispatch(courseOptionsActions('SET_RECENTLY_VIEWED_COURSES', res.data.recentlyViewed));
+
+    const coreData = await axios.get(`http://localhost:8000/api/getCoreCourses/COMPA1`);
+    let core = [];
+    Object.keys(coreData.data['core']).map((key, index) => {
+      // console.log(key);
+      core.push(key);
+    })
+
     dispatch(courseOptionsActions('SET_CORE_COURSES', core));
     dispatch(courseOptionsActions('SET_ELECTIVE_COURSES', electives));
     dispatch(courseOptionsActions('SET_GENED_COURSES', genEds));
@@ -60,26 +68,20 @@ export default function CourseMenu() {
   return (
     <div className='cs-menu-root'>
       {
-        courseOptions.recentlyViewed && courseOptions.core && courseOptions.electives && courseOptions.genEds &&
+        courseOptions.core && courseOptions.electives && courseOptions.genEds &&
         <Menu
           className={'text'}
           onClick={handleClick}
           style={{ width: '100%'}}
           defaultSelectedKeys={[id ? id : courseOptions.core[0]]}
           selectedKeys={[]}
-          defaultOpenKeys={['recently-viewed', 'core', 'electives']}
+          defaultOpenKeys={['core', 'electives']}
           mode="inline"
         >
-          <SubMenu className={"text"} key="recently-viewed" title="Recently Viewed">
-            { courseOptions.recentlyViewed.length === 0
-              ? <Menu.Item key={'empty-recently-viewed'} disabled> No courses here (ㆆ_ㆆ) </Menu.Item>
-              : courseOptions.recentlyViewed.map(course => <MenuItem courseCode={course}/>) 
-            }
-          </SubMenu>
           <SubMenu  className={"text"} key="core" title="Core">
             { courseOptions.core.length === 0
               ? <Menu.Item key={'empty-core'} disabled> No courses here (ㆆ_ㆆ) </Menu.Item>
-              : courseOptions.core.map(course => <MenuItem courseCode={Object.keys(course)[0]}/>) 
+              : courseOptions.core.map(course => <MenuItem courseCode={course}/>) 
             }
           </SubMenu>
           <SubMenu className={"text"} key="electives" title="Electives">
