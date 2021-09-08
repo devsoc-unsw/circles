@@ -8,7 +8,11 @@ import OptionsDrawer from "./OptionsDrawer";
 import SkeletonPlanner from "./SkeletonPlanner";
 import "./main.less";
 import { useSelector, useDispatch } from "react-redux";
-import { handleOnDragEnd, handleOnDragStart } from "./DragDropLogic";
+import {
+  handleOnDragEnd,
+  handleOnDragStart,
+  updateWarnings,
+} from "./DragDropLogic";
 
 const TermPlanner = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -23,6 +27,7 @@ const TermPlanner = () => {
   useEffect(() => {
     setIsLoading(false);
     isAllEmpty(years) && openNotification();
+    updateWarnings(years, startYear, courses, dispatch);
   }, []);
 
   const dragEndProps = {
@@ -40,7 +45,10 @@ const TermPlanner = () => {
         <SkeletonPlanner />
       ) : (
         <DragDropContext
-          onDragEnd={(result) => handleOnDragEnd(result, dragEndProps)}
+          onDragEnd={(result) => {
+            handleOnDragEnd(result, dragEndProps);
+            updateWarnings(years, startYear, courses, dispatch);
+          }}
           onDragStart={(result) =>
             handleOnDragStart(result, courses, setTermsOffered, setIsDragging)
           }
