@@ -114,7 +114,7 @@ def addDisciplineData(components, item):
                 for major in container["relationship"]:
                     if major["academic_item_type"]["value"] == "major" or major["academic_item_type"]["value"] == "honours":
                         code = major["academic_item_code"]
-                        majorData[code] = 1
+                        majorData[code] = major["academic_item_name"]
                 SpecialisationData["Majors"] = majorData
 
             if container["vertical_grouping"]["value"] == "undergrad_minor":
@@ -122,7 +122,7 @@ def addDisciplineData(components, item):
                 for minor in container["relationship"]:
                     if minor["academic_item_type"]["value"] == "minor":
                         code = minor["academic_item_code"]
-                        minorData[code] = 1
+                        minorData[code] = minor["academic_item_name"]
                 SpecialisationData["Minors"] = minorData
 
             if container["vertical_grouping"]["value"] == "PE":
@@ -148,14 +148,14 @@ def addDisciplineData(components, item):
                     for item in container["container"]:
                         if item["vertical_grouping"]["value"] == "one_of_the_following":
                             for course in item["relationship"]:
-                                CC[course["academic_item_code"]] = 1
+                                CC[course["academic_item_code"]] = course["academic_item_name"]
 
                         elif item["vertical_grouping"]["value"] == "CC":
                             for course in item["relationship"]:
-                                CC[course["academic_item_code"]] = 1
+                                CC[course["academic_item_code"]] = course["academic_item_name"]
                 else:
                     for course in container["relationship"]:
-                        CC[course["academic_item_code"]] = 1
+                        CC[course["academic_item_code"]] = course["academic_item_name"]
                 NonSpecialisationData[title] = CC
 
     components["SpecialisationData"] = SpecialisationData
@@ -178,7 +178,7 @@ def addFEData(components, item):
                 for minor in container["relationship"]:
                     if minor["academic_item_type"] and minor["academic_item_type"]["value"] == "minor":
                         code = minor["academic_item_code"]
-                        minorData[code] = 1
+                        minorData[code] = minor["academic_item_name"]
                 FE["Minors"] = minorData
 
     elif item["relationship"] != []:
