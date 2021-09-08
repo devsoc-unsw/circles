@@ -48,32 +48,34 @@ const OptionsDrawer = ({ visible, setVisible }) => {
       </Title>
       {Object.keys(sortedUnplanned).length === 0 ? (
         <Alert
-          message="Oh!"
-          description="It looks like you don't have any more courses to add to your term planner. "
-          type="warning"
+          message="No more courses..."
+          description="You can add more courses via the course selector"
+          type="info"
           showIcon
           className="alert"
         />
       ) : (
         <Collapse className="collapse" ghost={theme === "dark"}>
-          {Object.keys(sortedUnplanned).map((type, index) => (
-            <Panel header={type} key={index}>
-              <Droppable droppableId={type} isDropDisabled={true}>
-                {(provided) => (
-                  <div
-                    ref={provided.innerRef}
-                    {...provided.droppableProps}
-                    className="panel"
-                  >
-                    {sortedUnplanned[type].map((code, index) => (
-                      <DraggableCourse code={code} index={index} key={code} />
-                    ))}
-                    {provided.placeholder}
-                  </div>
-                )}
-              </Droppable>
-            </Panel>
-          ))}
+          {Object.keys(sortedUnplanned)
+            .sort()
+            .map((type, index) => (
+              <Panel header={type} key={index}>
+                <Droppable droppableId={type} isDropDisabled={true}>
+                  {(provided) => (
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.droppableProps}
+                      className="panel"
+                    >
+                      {sortedUnplanned[type].map((code, index) => (
+                        <DraggableCourse code={code} index={index} key={code} />
+                      ))}
+                      {provided.placeholder}
+                    </div>
+                  )}
+                </Droppable>
+              </Panel>
+            ))}
         </Collapse>
       )}
       <Title level={2} class="text">

@@ -9,6 +9,7 @@ export const CourseTabs = () => {
   const dispatch = useDispatch();
   const { tabs, active } = useSelector(state => state.tabs);
   const handleChange = (activeKey) => {
+	  console.log(activeKey);
     dispatch(courseTabActions("SET_ACTIVE_TAB", activeKey));
   };
 
@@ -27,13 +28,13 @@ export const CourseTabs = () => {
       <Tabs
         type="editable-card"
         onChange={handleChange}
-        // activeKey={active} 
+        activeKey={`${active}`}
         onEdit={handleEdit}
       >
         {tabs.map((tab, key) => (
           <TabPane 
             tab={tab} key={key} 
-            className={key === active && 'cs-tabs-root-active'} 
+            // className={key === active && 'cs-tabs-root-active'} 
             closable={!(tab === 'explore')}
           />
         ))}

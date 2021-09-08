@@ -4,6 +4,8 @@ import { Draggable } from "react-beautiful-dnd";
 import { useSelector } from "react-redux";
 import { IoWarningOutline } from "react-icons/io5";
 import ReactTooltip from "react-tooltip";
+import { useContextMenu } from "react-contexify";
+import ContextMenu from "./ContextMenu";
 
 function DraggableCourse({ code, index }) {
   //   let code = course.match(/([A-Z]{4}[0-9]{4}):/)[1];
@@ -16,6 +18,11 @@ function DraggableCourse({ code, index }) {
   const prereqs = courses.get(code)["prereqs"];
   const prereqDisplay = prereqs.replaceAll("||", "or").replaceAll("&&", "and");
   const warning = courses.get(code)["warning"];
+  const plannedFor = courses.get(code)["plannedFor"];
+
+  const { show } = useContextMenu({
+    id: `${code}-context`,
+  });
 
   return (
     <>
@@ -31,6 +38,7 @@ function DraggableCourse({ code, index }) {
             className={`course ${warning && " warning"}`}
             data-tip
             data-for={code}
+            onContextMenu={show}
           >
             {warning && (
               <IoWarningOutline
@@ -47,6 +55,7 @@ function DraggableCourse({ code, index }) {
           </li>
         )}
       </Draggable>
+      <ContextMenu code={code} plannedFor={plannedFor} />
       {prereqDisplay != "" && (
         <ReactTooltip id={code} place="bottom" className="tooltip">
           <div style={{ fontWeight: "bold" }}>Prerequisites:</div>

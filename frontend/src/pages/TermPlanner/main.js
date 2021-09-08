@@ -53,14 +53,15 @@ const TermPlanner = () => {
             handleOnDragStart(result, courses, setTermsOffered, setIsDragging)
           }
         >
+          <Button
+            type="primary"
+            icon={<RightOutlined />}
+            onClick={() => setVisible(true)}
+            shape="circle"
+            ghost
+            style={{ position: "sticky", top: "50vh", left: "1em" }}
+          />
           <div className="plannerContainer">
-            <Button
-              type="primary"
-              icon={<RightOutlined />}
-              onClick={() => setVisible(true)}
-              shape="circle"
-              ghost
-            />
             <div class="gridContainer">
               <div class="gridItem"></div>
               <div class="gridItem">Term 1</div>
