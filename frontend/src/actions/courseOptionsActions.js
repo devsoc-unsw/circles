@@ -12,11 +12,6 @@ export const courseOptionsActions = (action, payload) => {
                 type: 'LOAD_PREV_STATE', 
                 payload: payload,
             }
-        case 'SET_RECENTLY_VIEWED_COURSES': 
-            return {
-                type: 'SET_RECENTLY_VIEWED_COURSES',
-                payload: payload
-            }
         case 'SET_CORE_COURSES': 
             return {
                 type: 'SET_CORE_COURSES',

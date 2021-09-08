@@ -1,21 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import axios from 'axios';
 import { Button, Typography } from 'antd';
 import { degreeActions } from '../../../actions/degreeActions';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import './steps.less';
-const options = [
-    'MINOR 1', 
-    'MINOR 2', 
-    'MINOR 3', 
-    'MINOR 4', 
-    'No minors',
-];  
+
 const { Title } = Typography;
 export const MinorStep = () => {
     const dispatch = useDispatch();
-    // const program = useSelector(store => store.degree.program);
+    const program = useSelector(store => store.degree.program);
     // Fetch the minors
     const [selected, setSelected] = React.useState("Select Minor"); 
+    const [options, setOptions] = React.useState(null);
+
+    const fetchAllMinors = async () => {
+        const res = await axios.get(`http://localhost:8000/api/getMinors/${program}`);
+        setOptions(res.data["minors"]);
+        // setIsLoading(false);
+      };
+    
+    useEffect(() => {
+        // setTimeout(fetchDegree, 2000);  // testing skeleton
+        fetchAllMinors();
+    }, []);
+
     return (
         <div className="steps-root-container">
              <Title level={3} className="text">
@@ -32,12 +40,12 @@ export const MinorStep = () => {
                 >
                     Select Minor
                 </option>
-                {options.map((option, index) =>
+                {options && Object.keys(options).map((key, index) =>
                     <option
                         key={index}
-                        value={option}
+                        value={key}
                     >
-                        {option}
+                        {key} {options[key]}
                     </option>
                 )}
             </select>
@@ -52,8 +60,6 @@ export const MinorStep = () => {
             </Button>
             
         </div>
-        
-       
     )
 
 }

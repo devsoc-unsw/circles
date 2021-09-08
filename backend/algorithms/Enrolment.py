@@ -1,3 +1,5 @@
+from json import dump
+import json
 import re
 class Condition:
     def __init__(self):
@@ -109,6 +111,25 @@ class CompositeRequirement(Requirement):
             return self.components[0]
         return self
 
+class UocRequirement(Requirement):
+    # Does or condition exist?
+    def __init__(self, uoc = 0, program = []):
+        self.components = program
+        self.uoc = uoc
+    
+    def validate(self, condition):
+        pass
+
+    # Can be used by validate or externally
+    def getUoc(self):
+        return self.uoc
+        
+    def show(self, newLine = False):
+        print(self.uoc, 'UOC', end = '')
+        if newLine:
+            print()
+
+# The field of methods for matching elements
 def orLike(text):
     result = False
     if text.lower() == 'or':
@@ -126,10 +147,31 @@ def andLike(text):
     return result
 
 def isCourse(text):
-    if re.match("[a-zA-Z]{4}\d{4}", text):
+    if re.match("[a-zA-Z]{4}\s*\d{4}", text):
         return True
     return False
 
+def isWam(text):
+    pass
+
+def getWam(text):
+    pass
+
+def pickCourses(text):
+    pass
+
+def isUoc(text):
+    if 'UOC' in text:
+        return True
+    pass
+
+def getUoc(text, ith = 0):
+    return re.findall(r"(\d+)UOC", text)[ith]
+
+def pickProgram(text):
+    pass
+
+dumping = []
 
 #Not considering and or clauses wihtout parenthesis
 def parseRequirement(text, elapsed = 0):
@@ -157,6 +199,21 @@ def parseRequirement(text, elapsed = 0):
         if isCourse(i):
             unmatched = False
             result.addComponent(CourseRequirement(i))
+        if isUoc(i):
+            unmatched = False
+            uoc = getUoc(i)
+            program = []
+            if 'by' in i or 'at' in i or 'of' in i:
+                unmatched = True
+            if ' in ' in i and 'course' in i and not 'WAM' in i:
+                dumping.append(i)
+                unmatched = json.dumps(dumping, sort_keys=True, indent=4, separators=(',', ':'))
+                fp = open('in.json', "w", encoding='utf-8')
+                fp.write(unmatched)
+                fp.close()
+                unmatched = True
+            result.addComponent(UocRequirement(uoc, program))
+            
         if orLike(i): 
             unmatched = False
             result.switchType()
