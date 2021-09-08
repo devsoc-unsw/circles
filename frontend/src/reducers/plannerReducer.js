@@ -88,6 +88,7 @@ const plannerReducer = (state = initialState, action) => {
       // Remove courses from years and courses
       const plannedTerm = state.courses.get(action.payload).plannedFor;
       let newCourses = new Map(state.courses);
+      newCourses.get(action.payload).plannedFor = null;
       newCourses.delete(action.payload);
       Object.assign(state.courses, newCourses);
       if (plannedTerm) {
@@ -142,7 +143,33 @@ const plannerReducer = (state = initialState, action) => {
       let updatedCourses = new Map(state.courses).set(course, courseInfo);
 
       return { ...state, courses: updatedCourses };
+    case "UNSCHEDULE":
+      let updatedUnplanned = state.unplanned;
+      updatedUnplanned.push(action.payload);
+      const termTag = state.courses.get(action.payload).plannedFor;
 
+      const yearI = parseInt(termTag.slice(0, 4)) - state.startYear;
+      const termI = termTag.slice(4);
+
+      const nTerm = new Object(
+        state.years[yearI][termI].filter((course) => course !== action.payload)
+      );
+      const nYear = new Object(state.years[yearI]);
+      nYear[termI] = nTerm;
+      const nYears = new Object(state.years);
+      nYears[yearI] = nYear;
+      // console.log(nYears);
+
+      const nCourses = new Object(state.courses);
+      nCourses.get(action.payload).plannedFor = null;
+      nCourses.get(action.payload).warning = false;
+
+      return {
+        ...state,
+        unplanned: updatedUnplanned,
+        // years: nYears,
+        // courses: nCourses,
+      };
     default:
       return state;
   }
