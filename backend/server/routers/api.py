@@ -50,13 +50,13 @@ class courseDetails (BaseModel):
 class course (BaseModel):
     course: courseDetails
 
+class Structure (BaseModel):
+    structure: dict
+
 def addSpecialisation(structure, code, type):
     query = {'code': code}
     spnResult = specialisationsCOL.find_one(query)
             
-    if not spnResult:
-        return JSONResponse(status_code=404, content={"message" : "Specialisation code was not found"})
-    
     structure[type] = {}
     for container in spnResult['curriculum']:
 
@@ -67,7 +67,7 @@ def addSpecialisation(structure, code, type):
 
         # TODO: complete
         # item['core'] = container['core'] 
-        # item['levels] = container['levels']
+        # item['levels'] = container['levels']
 
         courseList = []
         for course in container['courses']:
@@ -387,9 +387,136 @@ def getCourse(courseCode):
 
 
 
-@router.get("/getStructure/{programCode}/{major}/{minor}")
-@router.get("/getStructure/{programCode}/{major}")
-@router.get("/getStructure/{programCode}")
+@router.get("/getStructure/{programCode}/{major}/{minor}", response_model=Structure,
+            responses={
+                404: {"model": message, "description": "Uh oh you broke me"},
+                200: {
+                    "description": "Returns the program structure",
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                "Major": {
+                                    "Core Courses": {
+                                        "UOC": 66,
+                                        "courses": {
+                                            "COMP3821": "Extended Algorithms and Programming Techniques",
+                                            "COMP3121": "Algorithms and Programming Techniques",
+                                        }
+                                    },
+                                    "Computing Electives": {
+                                        "UOC": 30,
+                                        "courses": {
+                                            "ENGG4600": "Engineering Vertically Integrated Project",
+                                            "ENGG2600": "Engineering Vertically Integrated Project",
+                                        }
+                                    }
+                                },
+                                "Minor": {
+                                    "Prescribed Electives": {
+                                        "UOC": 12,
+                                        "courses": {
+                                            "FINS3616": "International Business Finance",
+                                            "FINS3634": "Credit Analysis and Lending",
+                                        }
+                                    },
+                                    "Core Courses": {
+                                        "UOC": 18,
+                                        "courses": {
+                                            "FINS2613": "Intermediate Business Finance",
+                                            "COMM1180": "Value Creation",
+                                            "FINS1612": "Capital Markets and Institutions"
+                                        }
+                                    }
+                                },
+                                "General": {
+                                    "GeneralEducation": {
+                                        "UOC": 12
+                                    },
+                                    "FlexEducation": {
+                                        "UOC": 6
+                                    },
+                                    "BusinessCoreCourses": {
+                                        "UOC": 6,
+                                        "courses": {
+                                            "BUSI9999": "How To Business"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            })
+@router.get("/getStructure/{programCode}/{major}", response_model=Structure,
+            responses={
+                404: {"model": message, "description": "Uh oh you broke me"},
+                200: {
+                    "description": "Returns the program structure",
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                "Major": {
+                                    "Core Courses": {
+                                        "UOC": 66,
+                                        "courses": {
+                                            "COMP3821": "Extended Algorithms and Programming Techniques",
+                                            "COMP3121": "Algorithms and Programming Techniques",
+                                        }
+                                    },
+                                    "Computing Electives": {
+                                        "UOC": 30,
+                                        "courses": {
+                                            "ENGG4600": "Engineering Vertically Integrated Project",
+                                            "ENGG2600": "Engineering Vertically Integrated Project",
+                                        }
+                                    }
+                                },
+                                "General": {
+                                    "GeneralEducation": {
+                                        "UOC": 12
+                                    },
+                                    "FlexEducation": {
+                                        "UOC": 6
+                                    },
+                                    "BusinessCoreCourses": {
+                                        "UOC": 6,
+                                        "courses": {
+                                            "BUSI9999": "How To Business"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            })
+@router.get("/getStructure/{programCode}", response_model=Structure,
+            responses={
+                404: {"model": message, "description": "Uh oh you broke me"},
+                200: {
+                    "description": "Returns the program structure",
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                "General": {
+                                    "GeneralEducation": {
+                                        "UOC": 12
+                                    },
+                                    "FlexEducation": {
+                                        "UOC": 6
+                                    },
+                                    "BusinessCoreCourses": {
+                                        "UOC": 6,
+                                        "courses": {
+                                            "BUSI9999": "How To Business"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            })
 def getStructure(programCode, major="Default", minor="Default"):
     structure = {}
 
@@ -399,8 +526,19 @@ def getStructure(programCode, major="Default", minor="Default"):
         return JSONResponse(status_code=404, content={"message" : "Program code was not found"})
 
     if major != 'Default':
+        query = {'code': major}
+        spnResult = specialisationsCOL.find_one(query)
+        if not spnResult:
+            return JSONResponse(status_code=404, content={"message" : "Major code was not found"})
+
         addSpecialisation(structure, major, 'Major')
+
     if minor != 'Default':
+        query = {'code': minor}
+        spnResult = specialisationsCOL.find_one(query)
+        if not spnResult:
+            return JSONResponse(status_code=404, content={"message" : "Minor code was not found"})
+
         addSpecialisation(structure, minor, 'Minor')
 
     structure['General'] = {}
@@ -428,4 +566,4 @@ def getStructure(programCode, major="Default", minor="Default"):
         if 'GE' in programsResult['components']:
             structure['General']['GeneralEducation'] = {'UOC': programsResult['components']['GE']['credits_to_complete']}
 
-    return structure
+    return {'structure': structure}
