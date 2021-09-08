@@ -8,12 +8,7 @@ const { TabPane } = Tabs;
 export const CourseTabs = () => {
   const dispatch = useDispatch();
   const { tabs, active } = useSelector(state => state.tabs);
-  React.useEffect(() => {
-    setActiveTab(active)
-    console.log(activeTab);
-  }, [active])
   const handleChange = (activeKey) => {
-	  console.log(activeKey);
     dispatch(courseTabActions("SET_ACTIVE_TAB", activeKey));
   };
 
@@ -38,7 +33,6 @@ export const CourseTabs = () => {
         {tabs.map((tab, key) => (
           <TabPane 
             tab={tab} key={key} 
-            // className={key === active && 'cs-tabs-root-active'} 
             closable={!(tab === 'explore')}
           />
         ))}
