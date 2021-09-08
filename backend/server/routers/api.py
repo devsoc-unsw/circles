@@ -3,7 +3,7 @@ from server.database import specialisationsCOL, programsCOL, coursesCOL
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel, create_model
-
+import re
 
 router = APIRouter(
     prefix='/api',
@@ -63,7 +63,7 @@ def addSpecialisation(structure, code, type):
         structure[type][container['title']] = {}
         item = structure[type][container['title']]
 
-        item['uoc'] = container['credits_to_complete']
+        item['UOC'] = container['credits_to_complete']
 
         # TODO: complete
         # item['core'] = container['core'] 
@@ -399,8 +399,33 @@ def getStructure(programCode, major="Default", minor="Default"):
         return JSONResponse(status_code=404, content={"message" : "Program code was not found"})
 
     if major != 'Default':
-        addSpecialisation(structure, major, 'major')
+        addSpecialisation(structure, major, 'Major')
     if minor != 'Default':
-        addSpecialisation(structure, minor, 'minor')
+        addSpecialisation(structure, minor, 'Minor')
+
+    structure['General'] = {}
+    for container in programsResult['components']['NonSpecialisationData']:
+
+        structure['General'][container] = {}
+
+        if "credits_to_complete" in programsResult['components']['NonSpecialisationData'][container]:
+            structure['General'][container]['UOC'] = programsResult['components']['NonSpecialisationData'][container]['credits_to_complete']
+        else:
+            structure['General'][container]['UOC'] = -1
+        
+        for course in programsResult['components']['NonSpecialisationData'][container]:
+            if re.search(r'[A-Z]{4}\d{4}', course):
+                query = {'code': course}
+                courseResult = coursesCOL.find_one(query)
+                
+                if courseResult:
+                    structure['General'][container][course] = courseResult['title']
+                else:
+                    structure['General'][container][course] = 1
+
+        if 'FE' in programsResult['components']:
+            structure['General']['FlexEducation'] = {'UOC': programsResult['components']['FE']['credits_to_complete']}
+        if 'GE' in programsResult['components']:
+            structure['General']['GeneralEducation'] = {'UOC': programsResult['components']['GE']['credits_to_complete']}
 
     return structure
