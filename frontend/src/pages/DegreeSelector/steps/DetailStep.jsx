@@ -1,10 +1,11 @@
 import React from 'react';
+import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { Typography, Button, Modal, Alert } from 'antd';
+import { Typography, Button } from 'antd';
 import { plannerActions } from '../../../actions/plannerActions';
+import { setStructure } from '../../../actions/setStructure';
 import './steps.less';
-import { CheckOutlined } from '@ant-design/icons';
 
 const { Title } = Typography;
 export const DetailStep = () => {
@@ -21,8 +22,18 @@ export const DetailStep = () => {
         setYearStart(input);
     }
 
-    const handleNoCoreCourses = () => {
-        history.push('/course-selector');
+    const handleOnComplete = async () => {
+        dispatch(plannerActions('SET_YEAR_START', yearStart));
+        dispatch(plannerActions('SET_DEGREE_LENGTH', duration));
+        try {
+          const structure = await axios.get('http://localhost:3000/structure.json');
+          dispatch(setStructure(structure));   
+          // Uncomment when DB is working
+          // const coreData = await axios.get(`http://localhost:8000/api/getCoreCourses/${programCode}/${specialisation}/${minor}`);
+            history.push('/course-selector');
+        } catch { 
+            console.log('Something went wrong with our servers');
+        }
     }
 
     return (
@@ -55,10 +66,8 @@ export const DetailStep = () => {
             <Button
                 className='steps-next-btn'
                 type="primary"
-                onClick={() => {
-                    dispatch(plannerActions('SET_YEAR_START', yearStart));
-                    dispatch(plannerActions('SET_DEGREE_LENGTH', duration));
-            }}>
+                onClick={handleOnComplete}
+            >
                 Start browsing courses
             </Button>
         </div>
