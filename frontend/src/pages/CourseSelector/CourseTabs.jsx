@@ -8,6 +8,11 @@ const { TabPane } = Tabs;
 export const CourseTabs = () => {
   const dispatch = useDispatch();
   const { tabs, active } = useSelector(state => state.tabs);
+  const [activeTab, setActiveTab] = React.useState(active);
+  React.useEffect(() => {
+    setActiveTab(active)
+    console.log(activeTab);
+  }, [active])
   const handleChange = (activeKey) => {
     dispatch(courseTabActions("SET_ACTIVE_TAB", activeKey));
   };
@@ -27,7 +32,7 @@ export const CourseTabs = () => {
       <Tabs
         type="editable-card"
         onChange={handleChange}
-        // activeKey={active} 
+        activeKey={activeTab} 
         onEdit={handleEdit}
       >
         {tabs.map((tab, key) => (

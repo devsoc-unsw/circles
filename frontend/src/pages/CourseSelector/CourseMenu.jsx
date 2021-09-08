@@ -6,8 +6,6 @@ import { courseTabActions } from '../../actions/courseTabActions';
 import axios from 'axios';
 import './CourseMenu.less';
 
-const { SubMenu } = Menu;
-
 const MenuItem = ({courseCode}) => {
   const dispatch = useDispatch();
   const handleClick = () => {
@@ -17,49 +15,27 @@ const MenuItem = ({courseCode}) => {
     <Menu.Item className='text' key={courseCode} onClick={handleClick}>
       { courseCode }
     </Menu.Item>
-  )
+  )``
 }
 
 export default function CourseMenu() {
   const dispatch = useDispatch();
   const { active, tabs } = useSelector(state => state.tabs);
+
   let id = tabs[active];
   // Exception tabs
   if (id === 'explore' || id === 'search') id = null;
+
   const courseOptions = useSelector(store => store.courseOptions);
-  const specialisation = useSelector(store => store.degree.specialisation);
-console.log(specialisation)
-  useEffect(() => {
-    getCourseOptions();
-  }, []);
+  const coreData = await axios.get(`http://localhost:8000/api/getCoreCourses/COMPA1`);
+  let core = [];
+  Object.keys(coreData.data['core']).map((key, index) => {
+    core.push(key);
+  })
 
-  const getCourseOptions = async () => {
-    const res = await axios.get('http://localhost:3000/courseOptions.json');
-    // let core = [];
-    let electives = [];
-    let genEds = [];
-    res.data.courseOptions.map(course => {
-      let type = course[Object.keys(course)[0]].type;
-      // if (type === 'core') {
-      //   core.push(course);
-      if (type === 'elective') {
-        electives.push(course);
-      } else if (type === 'gened') {
-        genEds.push(course);
-      }
-    });
-
-    const coreData = await axios.get(`http://localhost:8000/api/getCoreCourses/COMPA1`);
-    let core = [];
-    Object.keys(coreData.data['core']).map((key, index) => {
-      // console.log(key);
-      core.push(key);
-    })
-
-    dispatch(courseOptionsActions('SET_CORE_COURSES', core));
-    dispatch(courseOptionsActions('SET_ELECTIVE_COURSES', electives));
-    dispatch(courseOptionsActions('SET_GENED_COURSES', genEds));
-  }
+  dispatch(courseOptionsActions('SET_CORE_COURSES', core));
+  dispatch(courseOptionsActions('SET_ELECTIVE_COURSES', electives));
+  dispatch(courseOptionsActions('SET_GENED_COURSES', genEds));
 
   const handleClick = e => {
     console.log('click ', e);
