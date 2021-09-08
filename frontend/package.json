@@ -16,6 +16,7 @@
     "craco-less": "^1.17.1",
     "react": "^17.0.1",
     "react-beautiful-dnd": "^13.1.0",
+    "react-contexify": "^5.0.0",
     "react-dom": "^17.0.1",
     "react-flow-renderer": "^9.1.1",
     "react-icons": "^4.2.0",
@@ -37,9 +38,7 @@
     "test": "craco test",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "eject": "react-scripts eject",
-    "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [

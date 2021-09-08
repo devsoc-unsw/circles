@@ -8,22 +8,26 @@ import OptionsDrawer from "./OptionsDrawer";
 import SkeletonPlanner from "./SkeletonPlanner";
 import "./main.less";
 import { useSelector, useDispatch } from "react-redux";
-import { handleOnDragEnd, handleOnDragStart } from "./DragDropLogic";
+import {
+  handleOnDragEnd,
+  handleOnDragStart,
+  updateWarnings,
+} from "./DragDropLogic";
 
 const TermPlanner = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [termsOffered, setTermsOffered] = useState([]);
   const [isDragging, setIsDragging] = useState(false);
-  const { years, startYear, courses } = useSelector((state) => {
+  const { years, startYear, courses, plannedCourses } = useSelector((state) => {
     return state.planner;
   });
-  console.log(years, courses);
   const [visible, setVisible] = useState(false); // visibility for side drawer
   const dispatch = useDispatch();
 
   useEffect(() => {
     setIsLoading(false);
     isAllEmpty(years) && openNotification();
+    updateWarnings(years, startYear, courses, dispatch);
   }, []);
 
   const dragEndProps = {
@@ -31,6 +35,8 @@ const TermPlanner = () => {
     dispatch,
     years,
     startYear,
+    plannedCourses,
+    courses,
   };
 
   return (
@@ -39,19 +45,23 @@ const TermPlanner = () => {
         <SkeletonPlanner />
       ) : (
         <DragDropContext
-          onDragEnd={(result) => handleOnDragEnd(result, dragEndProps)}
+          onDragEnd={(result) => {
+            handleOnDragEnd(result, dragEndProps);
+            updateWarnings(years, startYear, courses, dispatch);
+          }}
           onDragStart={(result) =>
             handleOnDragStart(result, courses, setTermsOffered, setIsDragging)
           }
         >
+          <Button
+            type="primary"
+            icon={<RightOutlined />}
+            onClick={() => setVisible(true)}
+            shape="circle"
+            ghost
+            style={{ position: "sticky", top: "50vh", left: "1em" }}
+          />
           <div className="plannerContainer">
-            <Button
-              type="primary"
-              icon={<RightOutlined />}
-              onClick={() => setVisible(true)}
-              shape="circle"
-              ghost
-            />
             <div class="gridContainer">
               <div class="gridItem"></div>
               <div class="gridItem">Term 1</div>
