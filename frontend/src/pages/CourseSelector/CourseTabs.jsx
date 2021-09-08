@@ -8,6 +8,10 @@ const { TabPane } = Tabs;
 export const CourseTabs = () => {
   const dispatch = useDispatch();
   const { tabs, active } = useSelector(state => state.tabs);
+  React.useEffect(() => {
+    setActiveTab(active)
+    console.log(activeTab);
+  }, [active])
   const handleChange = (activeKey) => {
 	  console.log(activeKey);
     dispatch(courseTabActions("SET_ACTIVE_TAB", activeKey));

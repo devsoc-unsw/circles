@@ -1,13 +1,12 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Tag, Alert, Typography, Space } from 'antd';
 import { PlusOutlined, StopOutlined } from '@ant-design/icons';
-import { CourseTag } from '../../components/courseTag/CourseTag';
-import { getCourseById } from './courseProvider';
-import { setUnplannedCourses } from '../../actions/userAction';
-import { plannerActions } from '../../actions/plannerActions';
-import SkeletonCourse from './Skeleton';
+import { CourseTag } from '../../../components/courseTag/CourseTag';
+import { getCourseById } from './../courseProvider';
+import { setUnplannedCourses } from '../../../actions/userAction';
+import { plannerActions } from '../../../actions/plannerActions';
+import { Loading } from './Loading';
 import './courseDescription.less';
 
 const { Title, Text } = Typography;
@@ -23,15 +22,20 @@ export default function CourseDescription() {
   const dispatch = useDispatch();
   const { active, tabs } = useSelector(state => state.tabs);
   let id = tabs[active];
-  // Course needs to be replaced with a fetch 
+  console.log(active, tabs);
+
   const course = useSelector(state => state.updateCourses.course);
-  console.log('HEHEHEH', course)
   const coursesInPlanner = useSelector(state => state.planner.courses);
   const courseInPlanner = coursesInPlanner.has(id);
   const [show, setShow] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [pageLoaded, setpageLoaded] = React.useState(false);
+
+
+
   React.useEffect(() => {
+    console.log(id);
+    if (id === 'explore' || id === 'search') return;
     dispatch(getCourseById(id));
     setTimeout(() => {
       setpageLoaded(true);
@@ -40,16 +44,7 @@ export default function CourseDescription() {
 
   if (id === 'explore') return (<div>This is the explore page</div>)
   if (id === 'search') return (<div>This is the search page</div>)
-  if (!id) {
-    return (
-      <div className="empty">
-        <Title level={5} className="text">
-          Select a course on the left to view! (っ＾▿＾)۶🍸🌟🍺٩(˘◡˘ )
-        </Title>
-      </div>
-    )
-  }
-  
+
   const addToPlanner = () => {
     const data = {
       courseCode: id,
@@ -83,27 +78,11 @@ export default function CourseDescription() {
     }, 4000)
   }
 
-  const parseString = (text) => {
-    const res = text.split('<p>').map(sentence => {
-      sentence = sentence.slice(0, -5);
-      return sentence;
-    });
-
-    res.shift();
-    return res;
-  }
-
-  let parsedDescription = [];
-
-  if (course.description) {
-    parsedDescription = parseString(course.description);
-  }
-
   return (
     <div className="cs-description-root">
-      {
-        !pageLoaded ? <SkeletonCourse /> : 
-        <>
+      { !pageLoaded 
+        ? <Loading /> 
+        : (<>
           <div className="cs-description-content">
             { (show && courseInPlanner) &&
               <Alert message={`Successfully added ${id} to your planner!` } 
@@ -133,11 +112,6 @@ export default function CourseDescription() {
             </div>
             <Title level={4} className="text">Overview</Title>
             <Space direction="vertical" style={{ marginBottom: '1rem' }}>
-            {/* {
-              parsedDescription.map((text, index) => 
-                <Text className="text" key={index}>{text}</Text>
-              )
-            } */}
             <Text>
               <div dangerouslySetInnerHTML={{ __html: course.description }} />
             </Text>
@@ -172,7 +146,7 @@ export default function CourseDescription() {
             }
           </div>
         </>
-      }
+        )}
     </div>
   );
 }

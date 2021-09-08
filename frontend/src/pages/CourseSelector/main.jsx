@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import CourseMenu from './CourseMenu';
-import CourseDescription from './CourseDescription';
+import CourseMenu from './courseMenu/CourseMenu';
+import CourseDescription from './courseDescription/CourseDescription';
 import { CourseTabs } from './CourseTabs';
 import './main.less';
 
