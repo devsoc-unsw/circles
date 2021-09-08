@@ -1,7 +1,7 @@
 import React from "react";
 import { Skeleton } from "antd";
 
-const SkeletonCourse = () => {
+export const Loading = () => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', width: '65vw' }}>
       {/* title */}
@@ -31,5 +31,3 @@ const SkeletonCourse = () => {
     </div>
   );
 };
-
-export default SkeletonCourse;
