@@ -50,6 +50,42 @@ class courseDetails (BaseModel):
 class course (BaseModel):
     course: courseDetails
 
+def addSpecialisation(structure, code, type):
+    query = {'code': code}
+    spnResult = specialisationsCOL.find_one(query)
+            
+    if not spnResult:
+        return JSONResponse(status_code=404, content={"message" : "Specialisation code was not found"})
+    
+    structure[type] = {}
+    for container in spnResult['curriculum']:
+
+        structure[type][container['title']] = {}
+        item = structure[type][container['title']]
+
+        item['uoc'] = container['credits_to_complete']
+
+        # TODO: complete
+        # item['core'] = container['core'] 
+        # item['levels] = container['levels']
+
+        courseList = []
+        for course in container['courses']:
+            if ' or ' in course:
+                courseList.extend(course.split(' or '))
+            else:
+                courseList.append(course)
+        
+        item['courses'] = {}
+        print(item)
+        for course in courseList:
+            query = {'code': course}
+            courseResult = coursesCOL.find_one(query)
+
+            if not courseResult:
+                item['courses'][course] = 1
+            else:
+                item['courses'][course] = courseResult['title']
 
 @router.get("/")
 def specialisations_index():
@@ -348,11 +384,23 @@ def getCourse(courseCode):
 
     return {'course' : result}
 
+
+
+
 @router.get("/getStructure/{programCode}/{major}/{minor}")
 @router.get("/getStructure/{programCode}/{major}")
 @router.get("/getStructure/{programCode}")
 def getStructure(programCode, major="Default", minor="Default"):
-    print(programCode)
-    print(major)
-    print(minor)
-    return True
+    structure = {}
+
+    query = {'code': programCode}
+    programsResult = programsCOL.find_one(query)
+    if not programsResult:
+        return JSONResponse(status_code=404, content={"message" : "Program code was not found"})
+
+    if major != 'Default':
+        addSpecialisation(structure, major, 'major')
+    if minor != 'Default':
+        addSpecialisation(structure, minor, 'minor')
+
+    return structure
