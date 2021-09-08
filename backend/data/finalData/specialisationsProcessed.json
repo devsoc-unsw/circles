@@ -25,7 +25,7 @@
                 },
                 "title": "Core Courses",
                 "credits_to_complete": 66,
-                "type": "core",
+                "core": true,
                 "levels": [],
                 "notes": ""
             },
@@ -41,7 +41,7 @@
                 },
                 "title": "Computing Electives",
                 "credits_to_complete": 30,
-                "type": "elective",
+                "core": false,
                 "levels": [],
                 "notes": "NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. 2 UOC courses are run over consecutive terms for a final total of 6 UOC."
             }
@@ -65,7 +65,7 @@
                 },
                 "title": "Coursework",
                 "credits_to_complete": 30,
-                "type": "other",
+                "core": false,
                 "levels": [],
                 "notes": ""
             },
@@ -77,7 +77,7 @@
                 },
                 "title": "Thesis",
                 "credits_to_complete": 18,
-                "type": "other",
+                "core": false,
                 "levels": [],
                 "notes": ""
             }
@@ -111,7 +111,7 @@
                 },
                 "title": "Discipline Electives",
                 "credits_to_complete": 24,
-                "type": "elective",
+                "core": false,
                 "levels": [],
                 "notes": "2 UOC and 3 UOC courses are run over consecutive terms for a final total of 6 UOC."
             },
@@ -129,7 +129,7 @@
                 },
                 "title": "Level 1 Core Courses",
                 "credits_to_complete": 54,
-                "type": "core",
+                "core": true,
                 "levels": [
                     1
                 ],
@@ -147,7 +147,7 @@
                 },
                 "title": "Level 2 Core Courses",
                 "credits_to_complete": 42,
-                "type": "core",
+                "core": true,
                 "levels": [
                     2
                 ],
@@ -162,7 +162,7 @@
                 },
                 "title": "Level 3 Core Courses",
                 "credits_to_complete": 24,
-                "type": "core",
+                "core": true,
                 "levels": [
                     3
                 ],
@@ -178,7 +178,7 @@
                 },
                 "title": "Level 4 Core Courses",
                 "credits_to_complete": 24,
-                "type": "core",
+                "core": true,
                 "levels": [
                     4
                 ],
@@ -213,7 +213,7 @@
                 },
                 "title": "Level 1 Core Courses",
                 "credits_to_complete": 42,
-                "type": "core",
+                "core": true,
                 "levels": [
                     1
                 ],
@@ -225,7 +225,7 @@
                 },
                 "title": "Free Elective",
                 "credits_to_complete": 6,
-                "type": "elective",
+                "core": false,
                 "levels": [],
                 "notes": ""
             },
@@ -242,7 +242,7 @@
                 },
                 "title": "Level 2 Core Courses",
                 "credits_to_complete": 42,
-                "type": "core",
+                "core": true,
                 "levels": [
                     2
                 ],
@@ -257,7 +257,7 @@
                 },
                 "title": "Level 4 Core Courses",
                 "credits_to_complete": 18,
-                "type": "core",
+                "core": true,
                 "levels": [
                     4
                 ],
@@ -285,7 +285,7 @@
                 },
                 "title": "Discipline Electives",
                 "credits_to_complete": 36,
-                "type": "elective",
+                "core": false,
                 "levels": [],
                 "notes": ""
             },
@@ -298,7 +298,7 @@
                 },
                 "title": "Level 3 Core Courses",
                 "credits_to_complete": 24,
-                "type": "core",
+                "core": true,
                 "levels": [
                     3
                 ],
@@ -326,7 +326,7 @@
                 },
                 "title": "Database Systems Prescribed Electives",
                 "credits_to_complete": 18,
-                "type": "elective",
+                "core": false,
                 "levels": [],
                 "notes": ""
             },
@@ -347,7 +347,7 @@
                 },
                 "title": "Core Courses",
                 "credits_to_complete": 72,
-                "type": "core",
+                "core": true,
                 "levels": [],
                 "notes": ""
             },
@@ -363,7 +363,7 @@
                 },
                 "title": "Computing Elective",
                 "credits_to_complete": 6,
-                "type": "elective",
+                "core": false,
                 "levels": [],
                 "notes": "NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. 2 UOC courses are run over consecutive terms for a final total of 6 UOC."
             }
@@ -391,7 +391,7 @@
                 },
                 "title": "Computing Electives",
                 "credits_to_complete": 6,
-                "type": "elective",
+                "core": false,
                 "levels": [],
                 "notes": "NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. 2 UOC courses are run over consecutive terms for a final total of 6 UOC."
             },
@@ -412,7 +412,7 @@
                 },
                 "title": "Core Courses",
                 "credits_to_complete": 72,
-                "type": "core",
+                "core": true,
                 "levels": [],
                 "notes": ""
             },
@@ -425,7 +425,7 @@
                 },
                 "title": "Discipline Electives",
                 "credits_to_complete": 18,
-                "type": "elective",
+                "core": false,
                 "levels": [],
                 "notes": ""
             }
@@ -453,7 +453,7 @@
                 },
                 "title": "Artificial Intelligence Prescribed Electives",
                 "credits_to_complete": 18,
-                "type": "elective",
+                "core": false,
                 "levels": [],
                 "notes": ""
             },
@@ -469,7 +469,7 @@
                 },
                 "title": "Computing Electives",
                 "credits_to_complete": 6,
-                "type": "elective",
+                "core": false,
                 "levels": [],
                 "notes": "NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. 2 UOC courses are run over consecutive terms for a final total of 6 UOC."
             },
@@ -490,7 +490,7 @@
                 },
                 "title": "Core Courses",
                 "credits_to_complete": 72,
-                "type": "core",
+                "core": true,
                 "levels": [],
                 "notes": ""
             }
@@ -515,7 +515,7 @@
                 },
                 "title": "Discipline Electives",
                 "credits_to_complete": 18,
-                "type": "elective",
+                "core": false,
                 "levels": [],
                 "notes": ""
             },
@@ -536,7 +536,7 @@
                 },
                 "title": "Core Course",
                 "credits_to_complete": 72,
-                "type": "core",
+                "core": true,
                 "levels": [],
                 "notes": ""
             },
@@ -552,7 +552,7 @@
                 },
                 "title": "Computing Electives",
                 "credits_to_complete": 6,
-                "type": "elective",
+                "core": false,
                 "levels": [],
                 "notes": "NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. 2 UOC courses are run over consecutive terms for a final total of 6 UOC."
             }
@@ -580,7 +580,7 @@
                 },
                 "title": "Computing Electives",
                 "credits_to_complete": 6,
-                "type": "elective",
+                "core": false,
                 "levels": [],
                 "notes": "NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. 2 UOC courses are run over consecutive terms for a final total of 6 UOC."
             },
@@ -594,7 +594,7 @@
                 },
                 "title": "Discipline Electives",
                 "credits_to_complete": 18,
-                "type": "elective",
+                "core": false,
                 "levels": [],
                 "notes": ""
             },
@@ -615,7 +615,7 @@
                 },
                 "title": "Core Courses",
                 "credits_to_complete": 72,
-                "type": "core",
+                "core": true,
                 "levels": [],
                 "notes": ""
             }
@@ -642,7 +642,7 @@
                 },
                 "title": "Prescribed Electives",
                 "credits_to_complete": 18,
-                "type": "elective",
+                "core": false,
                 "levels": [],
                 "notes": ""
             },
@@ -664,7 +664,7 @@
                 },
                 "title": "Core Courses",
                 "credits_to_complete": 78,
-                "type": "core",
+                "core": true,
                 "levels": [],
                 "notes": ""
             }
@@ -701,7 +701,7 @@
                 },
                 "title": "Security Engineering Prescribed Electives",
                 "credits_to_complete": 18,
-                "type": "elective",
+                "core": false,
                 "levels": [],
                 "notes": ""
             },
@@ -717,7 +717,7 @@
                 },
                 "title": "Computing Elective",
                 "credits_to_complete": 6,
-                "type": "elective",
+                "core": false,
                 "levels": [],
                 "notes": "NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. 2 UOC courses are run over consecutive terms for a final total of 6 UOC."
             },
@@ -738,7 +738,7 @@
                 },
                 "title": "Core Courses",
                 "credits_to_complete": 72,
-                "type": "core",
+                "core": true,
                 "levels": [],
                 "notes": ""
             }
@@ -762,7 +762,7 @@
                 },
                 "title": "Level 3 Core Courses",
                 "credits_to_complete": 18,
-                "type": "core",
+                "core": true,
                 "levels": [
                     3
                 ],
@@ -775,7 +775,7 @@
                 },
                 "title": "Level 2 Core Courses",
                 "credits_to_complete": 12,
-                "type": "core",
+                "core": true,
                 "levels": [
                     2
                 ],
@@ -789,7 +789,7 @@
                 },
                 "title": "Level 1 Core Courses",
                 "credits_to_complete": 18,
-                "type": "core",
+                "core": true,
                 "levels": [
                     1
                 ],
@@ -840,7 +840,7 @@
                 },
                 "title": "Prescribed Electives",
                 "credits_to_complete": 18,
-                "type": "elective",
+                "core": false,
                 "levels": [],
                 "notes": ""
             }
@@ -869,7 +869,7 @@
                 },
                 "title": "Core Courses",
                 "credits_to_complete": 12,
-                "type": "core",
+                "core": true,
                 "levels": [],
                 "notes": ""
             },
@@ -888,7 +888,7 @@
                 },
                 "title": "Prescribed Electives",
                 "credits_to_complete": 18,
-                "type": "elective",
+                "core": false,
                 "levels": [],
                 "notes": ""
             }
@@ -940,7 +940,7 @@
                 },
                 "title": "Prescribed Electives",
                 "credits_to_complete": 12,
-                "type": "elective",
+                "core": false,
                 "levels": [],
                 "notes": "and may only count ONE Financial Technology course (FINS3645, FINS3646, FINS3647 or FINS3648) towards their minor in Finance."
             },
@@ -952,7 +952,7 @@
                 },
                 "title": "Core Courses",
                 "credits_to_complete": 18,
-                "type": "core",
+                "core": true,
                 "levels": [],
                 "notes": ""
             }
@@ -984,7 +984,7 @@
                 },
                 "title": "Core Courses",
                 "credits_to_complete": 30,
-                "type": "core",
+                "core": true,
                 "levels": [],
                 "notes": "Students in Actuarial degrees should complete MATH1151 or MATH1251 instead of COMM1190. All other students should complete COMM1190. Please note: Courses completed under a minor cannot form part of a nominated major."
             }
@@ -1012,7 +1012,7 @@
                 },
                 "title": "Core Course",
                 "credits_to_complete": 12,
-                "type": "core",
+                "core": true,
                 "levels": [],
                 "notes": "Students in Comm/Econ and Comm/Actl should take COMM1900 instead of COMM1100. Students in Econ and Actl should take ECON1101. All other students should complete COMM1100"
             },
@@ -1037,7 +1037,7 @@
                 },
                 "title": "Prescribed Electives",
                 "credits_to_complete": 18,
-                "type": "elective",
+                "core": false,
                 "levels": [],
                 "notes": "At least one of the elective courses must be at level 3 (i.e. MARK3XXX)). The minor does not form part of the nominated major."
             }
@@ -1103,7 +1103,7 @@
                 },
                 "title": "Level 2/3 Mathematics Electives",
                 "credits_to_complete": 24,
-                "type": "elective",
+                "core": false,
                 "levels": [
                     2,
                     3
@@ -1117,7 +1117,7 @@
                 },
                 "title": "Level 1 Core Courses",
                 "credits_to_complete": 12,
-                "type": "core",
+                "core": true,
                 "levels": [
                     1
                 ],
@@ -1153,7 +1153,7 @@
                 },
                 "title": "Level 2 Core Courses",
                 "credits_to_complete": 24,
-                "type": "core",
+                "core": true,
                 "levels": [
                     2
                 ],
@@ -1166,7 +1166,7 @@
                 },
                 "title": "Level 1 Core Courses",
                 "credits_to_complete": 12,
-                "type": "core",
+                "core": true,
                 "levels": [
                     1
                 ],
