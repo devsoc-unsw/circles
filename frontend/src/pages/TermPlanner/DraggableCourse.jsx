@@ -6,11 +6,12 @@ import { IoWarningOutline } from "react-icons/io5";
 import ReactTooltip from "react-tooltip";
 import { useContextMenu } from "react-contexify";
 import ContextMenu from "./ContextMenu";
+import useMediaQuery from "../../hooks/useMediaQuery";
 
 function DraggableCourse({ code, index }) {
   //   let code = course.match(/([A-Z]{4}[0-9]{4}):/)[1];
   const { Text } = Typography;
-  const { courses } = useSelector((state) => {
+  const { courses, isSummerEnabled } = useSelector((state) => {
     return state.planner;
   });
   const theme = useSelector((state) => state.theme);
@@ -24,6 +25,7 @@ function DraggableCourse({ code, index }) {
     id: `${code}-context`,
   });
 
+  const isSmall = useMediaQuery("(max-width: 1400px)");
   return (
     <>
       <Draggable draggableId={code} index={index}>
@@ -35,22 +37,28 @@ function DraggableCourse({ code, index }) {
             style={{
               ...provided.draggableProps.style,
             }}
-            className={`course ${warning && " warning"}`}
+            className={`course ${warning && " warning"} ${
+              isSummerEnabled && "summerViewCourse"
+            }`}
             data-tip
             data-for={code}
             onContextMenu={show}
           >
             {warning && (
               <IoWarningOutline
-                size="2.5em"
+                size={isSmall ? "1.5em" : "2.5em"}
                 color={theme === "light" ? "#DC9930" : "white"}
               />
             )}
             <div>
-              <Text strong className="text">
-                {code}
-              </Text>
-              <Text className="text">: {courseName} </Text>
+              { isSmall ? (
+                 <Text className="text">{code}</Text>
+              ) : (
+                <>
+                  <Text strong className="text">{code}</Text>
+                  <Text className="text">: {courseName} </Text>
+                </>
+              )}
             </div>
           </li>
         )}
