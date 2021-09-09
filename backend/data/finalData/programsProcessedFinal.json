@@ -1,4 +1,74 @@
 {
+    "3053": {
+        "title": "Biotechnology (Honours)",
+        "code": "3053",
+        "duration": 4,
+        "UOC": 192,
+        "faculty": "Faculty of Science",
+        "components": {
+            "GE": {
+                "credits_to_complete": 12
+            },
+            "FE": {
+                "credits_to_complete": 12
+            },
+            "SpecialisationData": {},
+            "NonSpecialisationData": {
+                "Level 1 Core Courses": {
+                    "type": "core",
+                    "credits_to_complete": "36",
+                    "MATH1141": 1,
+                    "MATH1131": 1,
+                    "MATH1031": 1,
+                    "MATH1231": 1,
+                    "MATH1241": 1,
+                    "MATH1041": 1,
+                    "CHEM1011": 1,
+                    "CHEM1021": 1,
+                    "BABS1201": 1,
+                    "BABS1202": 1
+                },
+                "Level 3 Core Courses": {
+                    "type": "core",
+                    "credits_to_complete": "24",
+                    "BABS3061": 1,
+                    "BABS3200": 1,
+                    "BABS3031": 1,
+                    "BABS3071": 1
+                },
+                "Level 2 and Level 3 Electives": {
+                    "type": "elective",
+                    "any level 2 Pharmacology course": 1,
+                    "any level 2 Biotechnology & Biomolecular Sciences course": 1,
+                    "any level 3 Chemistry course": 1,
+                    "any level 3 Faculty of Science course": 1,
+                    "any level 3 Microbiology course": 1,
+                    "any level 3 Biochemistry course": 1,
+                    "any level 2 Faculty of Science course": 1,
+                    "any level 2 Medical Science course": 1,
+                    "any level 2 Bioinformatics course": 1,
+                    "any level 2 Chemistry course": 1,
+                    "any level 3 Medical Science course": 1,
+                    "any level 3 Bioinformatics course": 1,
+                    "any level 3 Pharmacology course": 1,
+                    "any level 3 Biotechnology & Biomolecular Sciences course": 1
+                },
+                "Level 4 Core Course": {
+                    "type": "core",
+                    "credits_to_complete": "48",
+                    "BABS4516": 1
+                },
+                "Level 2 Core Courses": {
+                    "type": "core",
+                    "credits_to_complete": "24",
+                    "MICR2011": 1,
+                    "BIOC2101": 1,
+                    "BABS2011": 1,
+                    "BIOC2201": 1
+                }
+            }
+        }
+    },
     "3502": {
         "title": "Commerce",
         "code": "3502",

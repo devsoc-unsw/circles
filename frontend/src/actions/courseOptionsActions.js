@@ -1,21 +1,10 @@
 export const courseOptionsActions = (action, payload) => {
     console.log('ACTUZZz', action);
     switch (action) {
-        // NOT IMPLEMENTED IN REDUCER YET.
-        // case 'DELETE':
-        //     return { 
-        //         type: 'DELETE', 
-        //         payload: payload, 
-        //     }
         case 'LOAD_PREV_STATE': 
             return {
                 type: 'LOAD_PREV_STATE', 
                 payload: payload,
-            }
-        case 'SET_RECENTLY_VIEWED_COURSES': 
-            return {
-                type: 'SET_RECENTLY_VIEWED_COURSES',
-                payload: payload
             }
         case 'SET_CORE_COURSES': 
             return {
