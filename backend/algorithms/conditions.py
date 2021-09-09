@@ -152,44 +152,27 @@ class WAMCondition(Condition):
             else:
                 return category_wam >= self.wam
 
-# TODO Fix the category related function
-# examine whether selected before calculating grade
-
 
 class GRADECondition(Condition):
-    '''Handles WAM conditions such as 65WAM and 80WAM in'''
+    '''Handles GRADE conditions such as 65GRADE and 80GRADE in [A-Z]{4}[0-9]{4}'''
 
-    def __init__(self, wam):
-        self.wam = wam
+    def __init__(self, grade, course):
+        self.grade = grade
 
-        # The conditional wam category attached to this object. If the connector is in,
-        # then the WAM must be from within this conditional. E.g.
-        # 80WAM in (COMP || BINH || SENG)
-        # NOTE: For now we assume OR condition
-        self.categories = []
-
-    def set_grade_category(self, category):
-        self.categories.append(category)
+        # Course code
+        self.course = course
 
     def validate(self, user):
-        # TODO: Make this return some warning in the future so WAM conditions do
+        # TODO: Make this return some warning in the future so GRADE conditions do
         # not gate keep the user
-        if user.wam == None:
-            # Default is False
+        if self.course not in user.courses:
+            # They have not taken the course
             return False
-
-        if not self.categories:
-            # Simple WAM condition
-            return user.wam >= self.wam
+        elif user.courses[self.course][1] == None:
+            # TODO: Make this return a warning as well. Return True for now
+            return True
         else:
-            # If a single WAM conditional is met, we return true
-            for category in self.categories:
-                category_wam = category.wam(user)
-                if category_wam == None:
-                    continue
-                elif category_wam >= self.wam:
-                    return True
-            return False
+            return user.courses[self.course][1] >= self.grade
 
 
 class CompositeCondition(Condition):
@@ -269,6 +252,7 @@ def create_condition(tokens):
             # Condition for a single course
             result.add_condition(CourseCondition(token))
         elif is_uoc(token):
+            # Condition for UOC requirement
             uoc = get_uoc(token)
             uoc_cond = UOCCondition(uoc)
 
@@ -290,6 +274,7 @@ def create_condition(tokens):
 
             result.add_condition(uoc_cond)
         elif is_wam(token):
+            # Condition for WAM requirement
             wam = get_wam(token)
             wam_cond = WAMCondition(wam)
 
@@ -308,32 +293,37 @@ def create_condition(tokens):
 
             result.add_condition(wam_cond)
         elif is_grade(token):
-            # TODO complete this
+            # Condition for GRADE requirement (mark in a single course)
             grade = get_grade(token)
-            grade_cond = GRADECondition(grade)
-            categories = []
 
-            # Create category according to the token after 'in'
             if tokens[index + 1] == "in":
-                grade_category, sub_index = create_category(tokens[index + 2:])
-                categories.append(grade_category)
-                next(it)
+                # Next token is "in" or else there has been an error
+                next(it)  # Skip "in" keyword
 
-            # If meet 'each', create a grade condition to each course occured
-            if 'each' in token:
-                for course in result.get_condition():
-                    if isinstance(course, CourseCondition):
-                        # add square brackets to fit the parameter format of create_cat
-                        grade_category, _ = create_category(
-                            [course.get_course()])
-                        categories.append(grade_category)
-                    pass
-                pass
+                result.add_condition(Grade(grade, tokens[index + 2]))
 
-            for cate in categories:
-                grade_cond.set_grade_category(cate)
-            [next(it) for _ in range(sub_index + 1)]
-            result.add_condition(grade_cond)
+                # NOTE: Don't need to create a category since I think grade ONLY applies to coursecode
+                # grade_category, sub_index = create_category(tokens[index + 2:])
+                # categories.append(grade_category)
+            else:
+                # Error
+                return None, index
+
+            # # If meet 'each', create a grade condition to each course occured
+            # if 'each' in token:
+            #     for course in result.get_condition():
+            #         if isinstance(course, CourseCondition):
+            #             # add square brackets to fit the parameter format of create_cat
+            #             grade_category, _ = create_category(
+            #                 [course.get_course()])
+            #             categories.append(grade_category)
+            #         pass
+            #     pass
+
+            # for cate in categories:
+            #     grade_cond.set_grade_category(cate)
+            # [next(it) for _ in range(sub_index + 1)]
+            # result.add_condition(grade_cond)
 
         else:
             # Unmatched token. Error

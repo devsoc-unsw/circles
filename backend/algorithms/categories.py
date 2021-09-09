@@ -10,11 +10,6 @@ class Category:
     def __init__(self):
         return
 
-    def same_category(self, key):
-        '''Given a specific key, determine if this key belongs to this category'''
-        # Default value is true
-        return True
-
     def uoc(self, user):
         '''Given a user, returns the number of units they have taken for this uoc category'''
         # Default is 1000 to ensure requirement is always met on error
@@ -31,11 +26,6 @@ class CourseCategory(Category):
 
     def __init__(self, code):
         self.code = code
-
-    def same_category(self, key):
-        if key.startswith(self.code):
-            return True
-        return False
 
     def uoc(self, user):
         '''The number of uoc belonging to courses matching the code'''
@@ -59,7 +49,7 @@ class CourseCategory(Category):
         # Either no courses matched this or no wam was entered for those courses
         if total_uoc == 0:
             return None
-        print(f"Total wam returned for {self.code} is {total_wam / total_uoc}")
+
         return total_wam / total_uoc
 
 
