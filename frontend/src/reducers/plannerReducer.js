@@ -4,7 +4,7 @@ const plannedCourses = new Map();
 dummyMap.set("COMP2521", {
   title: "Data Structures and Algorithms",
   type: "Core",
-  termsOffered: ["t1", "t2", "t3"],
+  termsOffered: ["t0", "t1", "t2", "t3"],
   prereqs: "COMP1511 && (COMP1521 || DEFAULT3000)",
   plannedFor: null,
   warning: false,
@@ -12,7 +12,7 @@ dummyMap.set("COMP2521", {
 dummyMap.set("COMP1521", {
   title: "Computer Systems Fundamentals",
   type: "Elective",
-  termsOffered: ["t1", "t2"],
+  termsOffered: ["t0", "t1", "t2"],
   prereqs: "COMP1511",
   plannedFor: "2022t2",
   warning: false,
@@ -20,7 +20,7 @@ dummyMap.set("COMP1521", {
 dummyMap.set("COMP1511", {
   title: "Programming Fundamentals",
   type: "Core",
-  termsOffered: ["t1", "t2", "t3"],
+  termsOffered: ["t0", "t1", "t2", "t3"],
   prereqs: "",
   plannedFor: "2021t3",
   warning: false,
@@ -37,7 +37,7 @@ dummyMap.set("COMP6080", {
 const generateEmptyYears = (nYears) => {
   let res = [];
   for (let i = 0; i < nYears; ++i) {
-    const year = { t1: [], t2: [], t3: [] };
+    const year = { t0: [], t1: [], t2: [], t3: [] };
     res.push(year);
   }
   return res;
@@ -47,10 +47,11 @@ const initialState = {
   unplanned: ["COMP2521"],
   startYear: 2021,
   numYears: 3,
+  isSummerEnabled: false,
   years: [
-    { t1: [], t2: [], t3: ["COMP1511"] },
-    { t1: [], t2: ["COMP1521"], t3: [] },
-    { t1: [], t2: [], t3: ["COMP6080"] },
+    { t0: [], t1: [], t2: [], t3: ["COMP1511"] },
+    { t0: [], t1: [], t2: ["COMP1521"], t3: [] },
+    { t0: [], t1: [], t2: [], t3: ["COMP6080"] },
   ],
   courses: dummyMap,
   plannedCourses: plannedCourses,
@@ -88,6 +89,7 @@ const plannerReducer = (state = initialState, action) => {
       // Remove courses from years and courses
       const plannedTerm = state.courses.get(action.payload).plannedFor;
       let newCourses = new Map(state.courses);
+      newCourses.get(action.payload).plannedFor = null;
       newCourses.delete(action.payload);
       Object.assign(state.courses, newCourses);
       if (plannedTerm) {
@@ -142,7 +144,35 @@ const plannerReducer = (state = initialState, action) => {
       let updatedCourses = new Map(state.courses).set(course, courseInfo);
 
       return { ...state, courses: updatedCourses };
+    case "UNSCHEDULE":
+      let updatedUnplanned = state.unplanned;
+      updatedUnplanned.push(action.payload);
+      const termTag = state.courses.get(action.payload).plannedFor;
 
+      const yearI = parseInt(termTag.slice(0, 4)) - state.startYear;
+      const termI = termTag.slice(4);
+
+      const nTerm = new Object(
+        state.years[yearI][termI].filter((course) => course !== action.payload)
+      );
+      const nYear = new Object(state.years[yearI]);
+      nYear[termI] = nTerm;
+      const nYears = new Object(state.years);
+      nYears[yearI] = nYear;
+      // console.log(nYears);
+
+      const nCourses = new Object(state.courses);
+      nCourses.get(action.payload).plannedFor = null;
+      nCourses.get(action.payload).warning = false;
+
+      return {
+        ...state,
+        unplanned: updatedUnplanned,
+        // years: nYears,
+        // courses: nCourses,
+      };
+    case "TOGGLE_SUMMER":
+      return { ...state, isSummerEnabled: !state.isSummerEnabled };
     default:
       return state;
   }
