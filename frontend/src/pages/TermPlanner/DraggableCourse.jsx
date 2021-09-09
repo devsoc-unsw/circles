@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography } from "antd";
+import { Typography, Badge } from "antd";
 import { Draggable } from "react-beautiful-dnd";
 import { useSelector } from "react-redux";
 import { IoWarningOutline } from "react-icons/io5";
@@ -48,6 +48,7 @@ function DraggableCourse({ code, index }) {
               <IoWarningOutline
                 size={isSmall ? "1.5em" : "2.5em"}
                 color={theme === "light" ? "#DC9930" : "white"}
+				style={isSmall && {position:"absolute", marginRight: "8em"}}
               />
             )}
             <div>
