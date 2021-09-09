@@ -39,14 +39,12 @@ const UnplannedColumn = ({ visible, setVisible }) => {
   const years = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (
-    <div className="unplannedColumn">
-      <div className="gridItem" style={{ marginBottom: "0.5em" }}>
-        Unplanned
-      </div>
-      <div>
-        {Object.keys(sortedUnplanned).length === 0 ? (
-          <></>
-        ) : (
+    <>
+      {Object.keys(sortedUnplanned).length != 0 && (
+        <div className="unplannedColumn">
+          <div className="gridItem" style={{ marginBottom: "0.5em" }}>
+            Unplanned
+          </div>
           <Collapse className="collapse" ghost={theme === "dark"}>
             {Object.keys(sortedUnplanned)
               .sort()
@@ -73,9 +71,9 @@ const UnplannedColumn = ({ visible, setVisible }) => {
                 </Panel>
               ))}
           </Collapse>
-        )}
-      </div>
-    </div>
+        </div>
+      )}
+    </>
   );
 };
 
