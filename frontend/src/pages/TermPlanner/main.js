@@ -13,6 +13,7 @@ import {
   handleOnDragStart,
   updateWarnings,
 } from "./DragDropLogic";
+import UnplannedColumn from "./UnplannedColumn";
 
 const TermPlanner = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -66,7 +67,7 @@ const TermPlanner = () => {
           <div className="plannerContainer">
             <div class={`gridContainer ${isSummerEnabled && "summerGrid"}`}>
               <div class="gridItem"></div>
-              {isSummerEnabled && <div class="gridItem">Summer Term</div>}
+              {isSummerEnabled && <div class="gridItem">Summer</div>}
               <div class="gridItem">Term 1</div>
               <div class="gridItem">Term 2</div>
               <div class="gridItem">Term 3</div>
@@ -96,6 +97,7 @@ const TermPlanner = () => {
                 </React.Fragment>
               ))}
             </div>
+            <UnplannedColumn />
             <OptionsDrawer visible={visible} setVisible={setVisible} />
           </div>
         </DragDropContext>

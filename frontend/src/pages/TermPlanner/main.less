@@ -1,20 +1,43 @@
+html,body {
+    height:100%;
+}
+
+
 .content {
 	@small: ~"(max-width: 1400px)";
 
-  .plannerContainer {
-    display: flex;
-    align-items: center;
-    margin: 3em;
-	margin-top: 1em;
-  }
-  .gridContainer {
-    display: grid;
-    grid-template-columns: 10em 1fr 1fr 1fr;
-    align-items: center;
-    max-width: 100em;
-    margin: auto auto;
-  }
+	.plannerContainer {
+		display: flex;
+		// align-items: center;
+		margin-top: 2em;
+		justify-content: center;
+    margin-left: 1em;
+    margin-right: 1em;
+	
+	}
+	.unplannedColumn {
+		max-width: 25.4em;
+		margin-left: 1em;
+    margin-right: 1em;
+		align-self: stretch; 
+		flex: 1;
+    @media @small {
+      max-width: 19em;
+    }
+	}
+	.gridContainer {
+		display: grid;
+		grid-template-columns: 7em 1fr 1fr 1fr;
+		align-items: center;
+		max-width: 100em;
+	  }
 
+	.unplannedBox {
+		padding: 1.5em;
+		border: 0.5px solid #d9d9d9;
+		border-radius: 2em;
+		height: calc(100% - (1.5rem + 0.5em + 1.5em + 0.6em));
+	}
 
   .gridItem {
     font-size: 1.5rem;
@@ -36,24 +59,31 @@
     padding: 1.2em;
     border-radius: 2em;
     transition: 200ms ease-out;
+    padding-top: 0.5em;
+    @media @small {
+      min-width: 12em;
+      min-height: 14em;
+      border-radius: 1em;
+    }
 	// background-color: #f7f6f6;
   }
 
+ 
+
   .summerGrid {
-    grid-template-columns: 10em 1fr 1fr 1fr 1fr;
+    grid-template-columns: 7em 1fr 1fr 1fr 1fr;
   }
   .summerTermBox {
-	margin: 0.5em;
-    min-height: 17em;
+	  margin: 0.5em;
+    min-height: 18em;
     min-width: 15em;
     padding: 1em;
+    padding-top: 0.5em;
     border-radius: 1em;
-  }
-
-  .summerViewCourse {
-	@media @small {
-		font-size: 0.7rem;
-	}
+    @media @small {
+      min-height: 13.5em;
+      min-width: 13em;
+    }
   }
 
   .course {
@@ -66,10 +96,21 @@
     max-width: 20em;
     min-width: 12em;
     margin-top: 1em;
+    display: flex;
+    justify-content: center;
+    gap: 0.7em;
+    align-items: center;
+    @media @small {
+      border-radius: 2em;
+      padding: 0.8em;
+      // padding: 0.5em 0.7em 0.5em 0.7em;
+    }
+  }
 
-	display: flex;
-	gap: 0.7em;
-	align-items: center;
+  .summerViewCourse {
+    @media @small {
+      width: 8em;
+    }
   }
 
   .alert {
