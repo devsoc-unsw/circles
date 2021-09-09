@@ -48,7 +48,7 @@ function DraggableCourse({ code, index }) {
               <IoWarningOutline
                 size={isSmall ? "1.5em" : "2.5em"}
                 color={theme === "light" ? "#DC9930" : "white"}
-				style={{position:"absolute", marginRight: "8em"}}
+				style={isSmall && {position:"absolute", marginRight: "8em"}}
               />
             )}
             <div>
