@@ -69,6 +69,59 @@
             }
         }
     },
+    "3181": {
+        "title": "Vision Science",
+        "code": "3181",
+        "duration": 3,
+        "UOC": 144,
+        "faculty": "Faculty of Medicine and Health",
+        "components": {
+            "GE": {
+                "credits_to_complete": 12
+            },
+            "SpecialisationData": {},
+            "NonSpecialisationData": {
+                "Level 1 Core Courses": {
+                    "type": "core",
+                    "credits_to_complete": "48",
+                    "CHEM1011": "Chemistry 1A: Atoms, Molecules and Energy",
+                    "CHEM1829": "Biological Chemistry for Optometry Students",
+                    "VISN1101": "Seeing the World: Perspectives from Vision Science",
+                    "VISN1221": "Visual Optics",
+                    "BABS1201": "Molecules, Cells and Genes",
+                    "VISN1111": "Geometrical and Physical Optics",
+                    "PHYS1121": "Physics 1A",
+                    "PHYS1131": "Higher Physics 1A",
+                    "PHYS1111": "Fundamentals of Physics",
+                    "MATH1131": "Mathematics 1A",
+                    "MATH1031": "Mathematics for Life Sciences",
+                    "MATH1141": "Higher Mathematics 1A"
+                },
+                "Level 3 Core Courses": {
+                    "type": "core",
+                    "credits_to_complete": "42",
+                    "VISN3111": "Development and Aging of the Visual System",
+                    "OPTM3205": "Disease Processes of the Eye 2",
+                    "OPTM3201": "Ocular Imaging & Applied Vision Science",
+                    "OPTM3233": "Working in the Clinical Environment",
+                    "OPTM3105": "Disease Processes of the Eye 1",
+                    "OPTM3133": "Vision Science in the Consulting Room",
+                    "PHAR3306": "Pharmacology for Optometry"
+                },
+                "Level 2 Core Courses": {
+                    "type": "core",
+                    "credits_to_complete": "42",
+                    "PHSL2201": "Physiology 1B",
+                    "OPTM2133": "The Clinical Environment",
+                    "OPTM2233": "Optical Dispensing",
+                    "VISN2211": "Organisation and Function of the Visual System",
+                    "ANAT2111": "Introductory Anatomy",
+                    "VISN2111": "Ocular Anatomy and Physiology",
+                    "PHSL2101": "Physiology 1A"
+                }
+            }
+        }
+    },
     "3502": {
         "title": "Commerce",
         "code": "3502",
@@ -153,13 +206,108 @@
                 },
                 "Prescribed Work Integrated Learning (WIL) Course": {
                     "type": "elective",
-                    "COMM3020": 1,
-                    "COMM2233": 1,
-                    "COMM2244": 1,
-                    "COMM2222": 1,
-                    "CDEV3000": 1,
-                    "COMM3030": 1
+                    "COMM3020": "Global Business Practicum",
+                    "COMM2233": "Industry Consulting Project",
+                    "COMM2244": "Adaptive Futures",
+                    "COMM2222": "Industry Experience Program",
+                    "CDEV3000": "Practice of Work",
+                    "COMM3030": "Social Entrepreneurship Practicum"
                 }
+            }
+        }
+    },
+    "3543": {
+        "title": "Economics",
+        "code": "3543",
+        "duration": 3,
+        "UOC": 144,
+        "faculty": "UNSW Business School",
+        "components": {
+            "SpecialisationData": {
+                "Majors": {
+                    "ECONA1": "Economics",
+                    "ECONE1": "Econometrics",
+                    "ECONJ1": "Financial Economics"
+                }
+            },
+            "NonSpecialisationData": {
+                "UNSW Business Electives": {
+                    "type": "elective",
+                    "any course offered by UNSW Business School": 1
+                },
+                "Economics Core Course": {
+                    "type": "core",
+                    "credits_to_complete": "6",
+                    "ECON1401": "Economic Perspectives"
+                },
+                "Introductory Business Course": {
+                    "type": "elective",
+                    "COMM1190": "Data, Insights and Decisions",
+                    "COMM1180": "Value Creation",
+                    "COMM1900": "Organisations in Their Environment",
+                    "COMM1170": "Organisational Resources",
+                    "COMM1140": "Financial Management"
+                },
+                "Economics Electives": {
+                    "type": "elective"
+                }
+            },
+            "GE": {
+                "credits_to_complete": 12
+            },
+            "FE": {
+                "credits_to_complete": 36
+            }
+        }
+    },
+    "3586": {
+        "title": "Actuarial Studies",
+        "code": "3586",
+        "duration": 3,
+        "UOC": 144,
+        "faculty": "UNSW Business School",
+        "components": {
+            "SpecialisationData": {},
+            "NonSpecialisationData": {
+                "Level 3 Actuarial Electives": {
+                    "type": "elective",
+                    "ACTL3191": "Superannuation and Retirement Benefits",
+                    "ACTL3192": "Retirement Saving and Spending Over the Lifecycle",
+                    "ACTL3162": "General Insurance Techniques",
+                    "ACTL3142": "Actuarial Data and Analysis",
+                    "ACTL3182": "Asset-Liability and Derivative Models",
+                    "ACTL3151": "Life Contingencies",
+                    "ACTL3141": "Actuarial Models and Statistics"
+                },
+                "Level 1 Core Courses": {
+                    "type": "core",
+                    "credits_to_complete": "48",
+                    "COMM1180": "Value Creation",
+                    "COMM1140": "Financial Management",
+                    "ECON1102": "Macroeconomics 1",
+                    "ECON1101": "Microeconomics 1",
+                    "MATH1251": "Mathematics for Actuarial Studies and Finance 1B",
+                    "COMM1170": "Organisational Resources",
+                    "ACTL1101": "Introduction to Actuarial Studies",
+                    "MATH1151": "Mathematics for Actuarial Studies and Finance 1A"
+                },
+                "Business Elective": {
+                    "type": "elective",
+                    "any course offered by UNSW Business School": 1
+                },
+                "Level 2 Core Courses": {
+                    "type": "core",
+                    "credits_to_complete": "18",
+                    "ACTL2131": "Probability and Mathematical Statistics",
+                    "ACTL2111": "Financial Mathematics for Actuaries",
+                    "ACTL2102": "Foundations of Actuarial Models"
+                }
+            },
+            "FE": {
+                "credits_to_complete": 36
+            },
+            "GE": {
+                "credits_to_complete": 12
             }
         }
     },
@@ -174,7 +322,7 @@
                 "credits_to_complete": 12
             },
             "SpecialisationData": {
-                "Majors": {
+                "Honours": {
                     "MTRNAH": "Mechatronic Engineering",
                     "GMATEH": "Geospatial Engineering",
                     "SOLABH": "Renewable Energy Engineering",
@@ -237,6 +385,262 @@
             "NonSpecialisationData": {},
             "GE": {
                 "credits_to_complete": 12
+            }
+        }
+    },
+    "3805": {
+        "title": "Medicine",
+        "code": "3805",
+        "duration": 6,
+        "UOC": 288,
+        "faculty": "Faculty of Medicine and Health",
+        "components": {
+            "SpecialisationData": {},
+            "NonSpecialisationData": {
+                "Stage 2 Core Courses": {
+                    "type": "core",
+                    "credits_to_complete": "84",
+                    "MFAC4888": "Independent Learning Project",
+                    "MFAC2515": "Integrated Clinical Studies 2",
+                    "MFAC2516": "Integrated Clinical Studies 3",
+                    "MFAC2507": "Clinical Transition",
+                    "MFAC2514": "Integrated Clinical Studies 1",
+                    "MFAC2512": "Phase 2 Integrated Clinical Assessment",
+                    "MFAC2511": "Phase 2 Portfolio Examination"
+                },
+                "Stage 3 Core Courses": {
+                    "type": "core",
+                    "credits_to_complete": "96",
+                    "MFAC3509": "Selective",
+                    "MFAC3505": "Obstetrics and Gynaecology",
+                    "MFAC3523": "Phase 3 Integrated Clinical Examination",
+                    "MFAC3502": "Surgery",
+                    "MFAC3512": "Phase 3 Biomedical Sciences Viva",
+                    "MFAC3501": "Medicine",
+                    "MFAC3515": "Preparation for Internship (PRINT)",
+                    "MFAC3504": "Primary Care",
+                    "MFAC3522": "Phase 3 Portfolio Examination",
+                    "MFAC3506": "Children's Health (Paediatrics)",
+                    "MFAC3514": "Elective",
+                    "MFAC3508": "Emergency / Selective",
+                    "MFAC3503": "Psychiatry"
+                },
+                "Stage 1 Core Courses": {
+                    "type": "core",
+                    "credits_to_complete": "96",
+                    "MFAC1523": "Health Maintenance A",
+                    "MFAC1513": "Phase 1 Clinical and Communications Skills Examination",
+                    "MFAC1521": "Beginnings, Growth and Development A",
+                    "MFAC1512": "Phase 1 End-of-Phase Examination",
+                    "MFAC1526": "Ageing and Endings B",
+                    "MFAC1524": "Health Maintenance B",
+                    "MFAC1522": "Beginnings, Growth and Development B",
+                    "MFAC1501": "Foundations",
+                    "MFAC1511": "Phase 1 Portfolio Examination",
+                    "MFAC1527": "Society and Health",
+                    "MFAC1525": "Ageing and Endings A"
+                }
+            },
+            "GE": {
+                "credits_to_complete": 12
+            }
+        }
+    },
+    "3871": {
+        "title": "Exercise Physiology",
+        "code": "3871",
+        "duration": 4,
+        "UOC": 192,
+        "faculty": "Faculty of Medicine and Health",
+        "components": {
+            "SpecialisationData": {},
+            "NonSpecialisationData": {
+                "Electives": {
+                    "type": "elective",
+                    "NEUR3221": "Neurophysiology",
+                    "ANAT3121": "Visceral Anatomy",
+                    "BEIL0011": "Healthy Planning",
+                    "PSYC1023": "Abnormal Psychology",
+                    "MATH1031": "Mathematics for Life Sciences",
+                    "BIOC3261": "Human Biochemistry",
+                    "PATH3207": "Musculoskeletal Diseases",
+                    "PSYC1024": "Clinical Perspectives on Anxiety, Mood and Stress",
+                    "PHYS1121": "Physics 1A",
+                    "ANAT3411": "Neuroanatomy",
+                    "PHSL3221": "Endocrine, Reproductive and Developmental Physiology",
+                    "PHSL3211": "Cardiovascular Physiology and Pathophysiology",
+                    "FOOD4403": "Advanced Nutrition",
+                    "BIOM9551": "Biomechanics of Physical Rehabilitation",
+                    "FOOD3220": "Nutrition",
+                    "MATH1131": "Mathematics 1A",
+                    "HESC4571": "Research Internship B",
+                    "PSYC1022": "The Psychology of Addiction"
+                },
+                "Level 3 Core Courses": {
+                    "type": "core",
+                    "credits_to_complete": "48",
+                    "HESC3541": "Clinical Exercise Physiology",
+                    "HESC3501": "Advanced Exercise Science",
+                    "HESC3511": "Health, Exercise and Sport Psychology",
+                    "HESC3504": "Physical Activity and Health",
+                    "HESC3592": "Neuromuscular Rehabilitation",
+                    "HESC3532": "Movement Rehabilitation",
+                    "NEUR3101": "Muscle and Motor Control",
+                    "PHAR3111": "Clinical Pharmacology for Health and Exercise Science"
+                },
+                "Level 1 Core Courses": {
+                    "type": "core",
+                    "credits_to_complete": "42",
+                    "HESC1501": "Introductory Exercise Science",
+                    "ANAT2111": "Introductory Anatomy",
+                    "HESC1511": "Exercise Programs and Behaviour",
+                    "MATH1041": "Statistics for Life and Social Sciences",
+                    "PSYC1001": "Psychology 1A",
+                    "CHEM1831": "Chemistry for Exercise Physiology",
+                    "BABS1201": "Molecules, Cells and Genes"
+                },
+                "Level 4 Core Courses": {
+                    "type": "core",
+                    "credits_to_complete": "36",
+                    "HESC4551": "Research Project",
+                    "HESC4561": "Research Internship A",
+                    "HESC3581": "Exercise Prescription in Diverse Populations",
+                    "HESC4611": "Clinical Practicum A",
+                    "HESC4622": "Clinical Practicum B",
+                    "HESC4501": "Exercise Physiology Research Seminars",
+                    "HESC4502": "Workplace Assessment and Rehabilitation"
+                },
+                "Level 2 Core Courses": {
+                    "type": "core",
+                    "credits_to_complete": "48",
+                    "BIOC2181": "Fundamentals of Biochemistry",
+                    "PHSL2501": "Human Physiology A",
+                    "HESC2501": "Exercise Physiology",
+                    "HESC2452": "Movement Assessment and Instruction",
+                    "HESC2451": "Biomechanics",
+                    "ANAT2451": "Functional Anatomy for Health and Exercise Science",
+                    "PATH2202": "Processes in Disease for Health and Exercise Science",
+                    "PHSL2502": "Human Physiology B"
+                }
+            },
+            "GE": {
+                "credits_to_complete": 12
+            }
+        }
+    },
+    "3956": {
+        "title": "Advanced Mathematics (Honours)",
+        "code": "3956",
+        "duration": 4,
+        "UOC": 192,
+        "faculty": "Faculty of Science",
+        "components": {
+            "FE": {
+                "credits_to_complete": 36
+            },
+            "GE": {
+                "credits_to_complete": 12
+            },
+            "SpecialisationData": {
+                "Majors": {
+                    "MATHA1": "Applied Mathematics",
+                    "MATHU1": "Advanced Statistics",
+                    "MATHP1": "Pure Mathematics"
+                },
+                "Honours": {
+                    "MATHTH": "Statistics",
+                    "MATHAH": "Applied Mathematics",
+                    "MATHPH": "Pure Mathematics"
+                }
+            },
+            "NonSpecialisationData": {
+                "Level 1 Core Course": {
+                    "type": "core",
+                    "credits_to_complete": "6",
+                    "SCIF1131": "Introductory Skills for Science"
+                },
+                "Science Electives": {
+                    "type": "elective",
+                    "any Faculty of Science course": 1,
+                    "any Medical Science course": 1,
+                    "any Aviation course": 1,
+                    "any Climate Science course": 1,
+                    "any Data Science course": 1,
+                    "any Materials Science and Engineering course": 1,
+                    "any Neuroscience course": 1,
+                    "any Biochemistry course": 1,
+                    "any Biotechnology course": 1,
+                    "any Computer Science course": 1,
+                    "any Physiology course": 1,
+                    "any Psychology course": 1,
+                    "any Biological, Earth & Environmental Science course": 1,
+                    "any Vision Science course": 1,
+                    "any Mathematics course": 1,
+                    "any Anatomy course": 1,
+                    "any Pharmacology course": 1,
+                    "any Biological Science course": 1,
+                    "any Chemistry course": 1,
+                    "any Marine Science course": 1,
+                    "any Physics course": 1,
+                    "any Optometry course": 1,
+                    "any Geoscience course": 1,
+                    "any Biotechnology & Biomolecular Sciences course": 1,
+                    "any Microbiology course": 1,
+                    "any Pathology course": 1,
+                    "any Food Technology course": 1
+                }
+            }
+        }
+    },
+    "3959": {
+        "title": "Data Science and Decisions",
+        "code": "3959",
+        "duration": 3,
+        "UOC": 144,
+        "faculty": "Faculty of Science",
+        "components": {
+            "GE": {
+                "credits_to_complete": 12
+            },
+            "FE": {
+                "credits_to_complete": 12
+            },
+            "SpecialisationData": {
+                "Majors": {
+                    "MATHE1": "Quantitative Data Science",
+                    "ECONL1": "Business Data Science",
+                    "COMPZ1": "Computational Data Science"
+                }
+            },
+            "NonSpecialisationData": {
+                "Level 1 Core Courses": {
+                    "type": "core",
+                    "credits_to_complete": "36",
+                    "MATH1141": "Higher Mathematics 1A",
+                    "MATH1131": "Mathematics 1A",
+                    "MATH1231": "Mathematics 1B",
+                    "MATH1241": "Higher Mathematics 1B",
+                    "COMP1511": "Programming Fundamentals",
+                    "COMP2521": "Data Structures and Algorithms",
+                    "ECON1101": "Microeconomics 1",
+                    "DATA1001": "Introduction to Data Science and Decisions"
+                },
+                "Level 3 Core Courses": {
+                    "type": "core",
+                    "credits_to_complete": "18",
+                    "ECON3203": "Econometric Theory and Methods",
+                    "DATA3001": "Data Science and Decisions in Practice",
+                    "COMP3311": "Database Systems"
+                },
+                "Level 2 Core Courses": {
+                    "type": "core",
+                    "credits_to_complete": "18",
+                    "ECON2112": "Game Theory and Business Strategy",
+                    "MATH2501": "Linear Algebra",
+                    "MATH2601": "Higher Linear Algebra",
+                    "MATH2801": "Theory of Statistics",
+                    "MATH2901": "Higher Theory of Statistics"
+                }
             }
         }
     },
@@ -364,6 +768,60 @@
                     "any Pathology course": 1,
                     "any Vision Science course": 1,
                     "any Aviation course": 1
+                }
+            }
+        }
+    },
+    "3979": {
+        "title": "Information Systems",
+        "code": "3979",
+        "duration": 3,
+        "UOC": 144,
+        "faculty": "UNSW Business School",
+        "components": {
+            "Level 2 and 3 Prescribed Electives": {
+                "credits_to_complete": 12,
+                "INFS2848": "Information Systems Project Management",
+                "INFS2822": "Programming for Data Analytics",
+                "INFS3020": "International Information Systems and Technology Practicum",
+                "INFS3632": "Service and Quality Management",
+                "INFS3873": "Business Analytics Methods",
+                "INFS3830": "Social Media and Analytics",
+                "INFS2631": "Innovation and Technology Management"
+            },
+            "FE": {
+                "credits_to_complete": 24
+            },
+            "GE": {
+                "credits_to_complete": 12
+            },
+            "SpecialisationData": {},
+            "NonSpecialisationData": {
+                "Information Systems core courses": {
+                    "type": "core",
+                    "credits_to_complete": "72",
+                    "INFS3617": "Networking & Cyber Security",
+                    "INFS1603": "Introduction to Business Databases",
+                    "INFS3603": "Introduction to Business Analytics",
+                    "INFS2608": "Database Management & Big Data Infrastructures",
+                    "INFS3605": "Information Systems Innovation & Transformation",
+                    "INFS3634": "Mobile Applications Development",
+                    "INFS2605": "Intermediate Business Programming",
+                    "INFS3604": "Business Process Management",
+                    "INFS2603": "Business Analysis",
+                    "INFS1609": "Fundamentals of Business Programming",
+                    "INFS1602": "Digital Transformation in Business",
+                    "INFS2621": "Enterprise Systems"
+                },
+                "Business Core Courses": {
+                    "type": "core",
+                    "credits_to_complete": "24",
+                    "ACCT1501": "Accounting and Financial Management 1A",
+                    "MGMT1001": "Managing Organisations and People",
+                    "MATH1041": "Statistics for Life and Social Sciences",
+                    "ECON1203": "Business and Economic Statistics",
+                    "ECON1101": "Microeconomics 1",
+                    "ACCT1511": "Accounting and Financial Management 1B"
                 }
             }
         }

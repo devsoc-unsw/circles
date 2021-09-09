@@ -19,7 +19,7 @@ from typing import Container, List, Iterable, Union, Optional
 from data.utility import dataHelpers
 from collections import OrderedDict
 
-TEST_PROGS = ["3778", "3707", "3970", "3502", "3053"]
+TEST_PROGS = ["3778", "3707", "3970", "3502", "3053", "3979", "3959", "3181", "3543", "3586", "3805", "3871", "3956"]
 
 
 def process_data():
@@ -109,13 +109,21 @@ def addDisciplineData(components, item):
     if "container" in item and item["container"] != []:
 
         for container in item["container"]:
-            if container["vertical_grouping"]["value"] == "undergrad_major" or container["vertical_grouping"]["value"] == "honours":
+            if container["vertical_grouping"]["value"] == "undergrad_major":
                 majorData = {}
                 for major in container["relationship"]:
                     if major["academic_item_type"]["value"] == "major" or major["academic_item_type"]["value"] == "honours":
                         code = major["academic_item_code"]
                         majorData[code] = major["academic_item_name"]
                 SpecialisationData["Majors"] = majorData
+
+            if container["vertical_grouping"]["value"] == "honours":
+                honoursData = {}
+                for major in container["relationship"]:
+                    if major["academic_item_type"]["value"] == "major" or major["academic_item_type"]["value"] == "honours":
+                        code = major["academic_item_code"]
+                        honoursData[code] = major["academic_item_name"]
+                SpecialisationData["Honours"] = honoursData
 
             if container["vertical_grouping"]["value"] == "undergrad_minor":
                 minorData = {}
@@ -130,7 +138,7 @@ def addDisciplineData(components, item):
                 PE["type"] = "elective"
                 if container["relationship"] != []:
                     for course in container["relationship"]:
-                        PE[course["academic_item_code"]] = 1
+                        PE[course["academic_item_code"]] = course["academic_item_name"]
                     NonSpecialisationData[container["title"]] = PE
                 else:
                     for course in container["dynamic_relationship"]:
@@ -184,7 +192,7 @@ def addFEData(components, item):
     elif item["relationship"] != []:
         title = item["title"]
         for elective in item['relationship']:
-            FE[elective["academic_item_code"]] = 1
+            FE[elective["academic_item_code"]] = elective["academic_item_name"]
 
     elif item["dynamic_relationship"] != []:
         # Below if statement is an indication that it's not a real free elective
