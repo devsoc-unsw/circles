@@ -43,7 +43,7 @@ const UnplannedColumn = ({ visible, setVisible }) => {
       <div className="gridItem" style={{ marginBottom: "0.5em" }}>
         Unplanned
       </div>
-      <div className="unplannedBox">
+      <div>
         {Object.keys(sortedUnplanned).length === 0 ? (
           <></>
         ) : (

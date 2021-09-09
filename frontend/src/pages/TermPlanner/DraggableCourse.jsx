@@ -51,10 +51,14 @@ function DraggableCourse({ code, index }) {
               />
             )}
             <div>
-              <Text strong className="text">
-                {code}
-              </Text>
-              {!isSmall && <Text className="text">: {courseName} </Text>}
+              { isSmall ? (
+                 <Text className="text">{code}</Text>
+              ) : (
+                <>
+                  <Text strong className="text">{code}</Text>
+                  <Text className="text">: {courseName} </Text>
+                </>
+              )}
             </div>
           </li>
         )}
