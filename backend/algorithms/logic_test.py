@@ -149,8 +149,9 @@ def test_wam_condition_simple():
         "COMP1521": (6, None)
     })
 
-    # Pass on None WAM
+    # TODO: None WAM should pass (with warning) we return just True for now
     cond1 = create_condition(["(", "70WAM", ")"])[0]
+    print(f"User wam is {user.wam}")
     assert cond1.validate(user) == True
 
     user1 = create_student_3707_COMPA1()
@@ -159,16 +160,16 @@ def test_wam_condition_simple():
         "COMP1521": (6, 90),
         "COMP1531": (6, 100)
     })
-    assert cond1.validate(user) == True
+    assert cond1.validate(user1) == True
 
     cond2 = create_condition((["(", "90WAM", ")"]))[0]
-    assert cond2.validate(user) == True
+    assert cond2.validate(user1) == True
 
     cond3 = create_condition((["(", "90WAM", ")"]))[0]
-    assert cond3.validate(user) == True
+    assert cond3.validate(user1) == True
 
     cond4 = create_condition((["(", "100WAM", ")"]))[0]
-    assert cond2.validate(user) == False
+    assert cond4.validate(user1) == False
 
 
 def test_wam_condition_complex():
@@ -181,7 +182,7 @@ def test_wam_condition_complex():
         "MATH1141": (6, None),
     })
 
-    # Pass on None WAM
+    # TODO: None WAM should pass (with warning) we return just True for now
     comp_cond_70 = create_condition(["(", "70WAM", "in", "COMP", ")"])[0]
     assert comp_cond_70.validate(user) == True
 
@@ -189,7 +190,7 @@ def test_wam_condition_complex():
     assert math_cond_70.validate(user) == True
 
     comp_math_cond_70 = create_condition(
-        ["(", "70WAM", "in", "(", "COMP", "||" "MATH", ")"])[0]
+        ["(", "70WAM", "in", "COMP", "||", "70WAM", "in", "MATH", ")"])[0]
     assert comp_math_cond_70.validate(user) == True
 
     user1 = create_student_3707_COMPA1()
@@ -200,6 +201,7 @@ def test_wam_condition_complex():
         "MATH1141": (6, 50),
     })
 
+    print("HERE")
     assert comp_cond_70.validate(user1) == True
     assert math_cond_70.validate(user1) == False
     assert comp_math_cond_70.validate(user1) == True

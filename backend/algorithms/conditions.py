@@ -7,7 +7,6 @@ from categories import *
 '''Keywords'''
 AND = 1
 OR = 2
-IN = 3
 
 
 class User:
@@ -18,7 +17,7 @@ class User:
         self.program = None  # NOTE: For now this is only single degree
         self.specialisations = {}
         self.uoc = 0
-        self.wam = 0
+        self.wam = None
         self.year = 0  # TODO
 
     def add_courses(self, courses):
@@ -31,16 +30,22 @@ class User:
                 self.courses[course] = courses[course]
 
         # Determine the total wam (wam * uoc) of the user
-        total_wam = self.wam * self.uoc
+        if self.wam != None:
+            total_wam = self.wam * self.uoc
+        else:
+            total_wam = 0
 
         # Update the uoc and carefully update the wam for all the new given courses
+        no_wam = True  # Flag to determine if the user has chosen to upload any wam
         for course, (uoc, grade) in courses.items():
             self.uoc += uoc
 
             if grade != None:
+                no_wam = False
                 total_wam += uoc * grade
 
-        self.wam = total_wam / self.uoc
+        if no_wam == False:
+            self.wam = total_wam / self.uoc
 
     def add_program(self, program):
         '''Adds a program to this user'''
@@ -86,33 +91,29 @@ class CourseCondition(Condition):
 class UOCCondition(Condition):
     '''UOC conditions such as "24UOC in COMP"'''
 
-    def __init__(self, uoc, connector=None):
+    def __init__(self, uoc):
         self.uoc = uoc
-        self.connector = connector  # Could be IN (only IN for now)
 
-        # The conditional uoc category attached to this object. If the connector is IN, then
-        # UOC must be from within this conditional. E.g.
+        # The conditional uoc category attached to this object.
+        # If there is a cateogry, UOC must be from within this category. E.g.
         # COMPA1 - courses within COMPA1
         # SENG - course codes starting with SENG
         # L4 - level 4 courses
         # L2 MATH - level 2 courses starting with MATH
         # CORE - core courses
         # And more...
-        self.uoc_category = None
+        self.category = None
 
-    def set_uoc_category(self, uoc_category_classobj):
-        self.uoc_category = uoc_category_classobj
+    def set_category(self, category_classobj):
+        self.category = category_classobj
 
     def validate(self, user):
-        if self.connector == None:
-            # Determine if the user has taken enough units
+        if self.category == None:
+            # Simple UOC condition
             return user.uoc >= self.uoc
-        elif self.connector == IN:
-            # The user must have taken enough UOC in the given conditional
-            return self.uoc_category.uoc(user) >= self.uoc
         else:
-            # NOTE: No case for this but let's just return true for now
-            return True
+            # The user must have taken enough uoc in the given category
+            return self.category.uoc(user) >= self.uoc
 
 
 class WAMCondition(Condition):
@@ -121,37 +122,40 @@ class WAMCondition(Condition):
     def __init__(self, wam):
         self.wam = wam
 
-        # The conditional wam category attached to this object. If the connector is in,
-        # then the WAM must be from within this conditional. E.g.
-        # 80WAM in (COMP || BINH || SENG)
-        # NOTE: For now we assume OR condition
-        self.categories = []
+        # The conditional wam category attached to this object.
+        # If a category is attached, then the WAM must be from within this category. E.g.
+        # 80WAM in COMP
+        # NOTE: We will convert 80WAM in (COMP || BINH || SENG) to:
+        # 80WAM in COMP || 80WAM in BINH || 80WAM in SENG
+        # so that only one category is attached to this wam condition
+        self.category = None
 
-    def set_wam_category(self, category):
-        self.categories.append(category)
+    def set_category(self, category_classobj):
+        self.category = category_classobj
 
     def validate(self, user):
+        # Returns true if the wam condition is met for a single category.
+        # Returns true if all applicable WAM is None
         # TODO: Make this return some warning in the future so WAM conditions do
         # not gate keep the user
         if user.wam == None:
-            # Default is False
-            return False
-
-        if not self.categories:
+            # Default is True
+            return True
+        elif self.category == None:
             # Simple WAM condition
             return user.wam >= self.wam
         else:
-            # If a single WAM conditional is met, we return true
-            for category in self.categories:
-                category_wam = category.wam(user)
-                if category_wam == None:
-                    continue
-                elif category_wam >= self.wam:
-                    return True
-            return False
+            # The user must have a high enough wam in the given category
+            category_wam = self.category.wam(user)
+            if category_wam == None:
+                return True  # TODO: Make this a warning
+            else:
+                return category_wam >= self.wam
 
 # TODO Fix the category related function
 # examine whether selected before calculating grade
+
+
 class GRADECondition(Condition):
     '''Handles WAM conditions such as 65WAM and 80WAM in'''
 
@@ -266,51 +270,45 @@ def create_condition(tokens):
             result.add_condition(CourseCondition(token))
         elif is_uoc(token):
             uoc = get_uoc(token)
-            # Check the next word to determine logic. NOTE: This will never go
-            # out of bounds since the last token is always a ')'
+            uoc_cond = UOCCondition(uoc)
+
             if tokens[index + 1] == "in":
-                # In connector
-                uoc_cond = UOCCondition(uoc, IN)
+                # Create category according to the token after 'in'
                 next(it)  # Skip "in" keyword
 
                 # Get the category of the uoc condition
-                uoc_category, sub_index = create_category(tokens[index + 2:])
+                category, sub_index = create_category(tokens[index + 2:])
 
-                if uoc_category == None:
+                if category == None:
                     # Error. Return None. (Could also potentially set the uoc category
                     # to just the default Category which returns true and 1000 uoc taken)
                     return None, index
                 else:
                     # Add the category to the uoc and adjust the current index position
-                    uoc_cond.set_uoc_category(uoc_category)
+                    uoc_cond.set_category(category)
                     [next(it) for _ in range(sub_index + 1)]
-            else:
-                # No connector. Simple UOC condition
-                uoc_cond = UOCCondition(uoc)
 
             result.add_condition(uoc_cond)
         elif is_wam(token):
             wam = get_wam(token)
             wam_cond = WAMCondition(wam)
 
-            # Logic branches for categories
-            # Create category according to the token after 'in'
             if tokens[index + 1] == "in":
-                wam_category, sub_index = create_category(tokens[index + 2:])
-                next(it)
+                # Create category according to the token after 'in'
+                next(it)  # Skip "in" keyword
+                category, sub_index = create_category(tokens[index + 2:])
 
-            # If can't parse the category, return None(raise an error)
-            if wam_category == None:
-                return None, index
-
-            # Set category and Skip
-            wam_cond.set_wam_category(wam_category)
-            [next(it) for _ in range(sub_index + 1)]
+                if category == None:
+                    # If can't parse the category, return None(raise an error)
+                    return None, index
+                else:
+                    # Add the category and adjust the current index position
+                    wam_cond.set_category(category)
+                    [next(it) for _ in range(sub_index + 1)]
 
             result.add_condition(wam_cond)
-
-        # TODO complete this
         elif is_grade(token):
+            # TODO complete this
             grade = get_grade(token)
             grade_cond = GRADECondition(grade)
             categories = []
@@ -326,11 +324,11 @@ def create_condition(tokens):
                 for course in result.get_condition():
                     if isinstance(course, CourseCondition):
                         # add square brackets to fit the parameter format of create_cat
-                        grade_category, _ = create_category([course.get_course()])
+                        grade_category, _ = create_category(
+                            [course.get_course()])
                         categories.append(grade_category)
                     pass
                 pass
-            
 
             for cate in categories:
                 grade_cond.set_grade_category(cate)
