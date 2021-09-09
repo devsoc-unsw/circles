@@ -14,8 +14,15 @@ export const MinorStep = () => {
     const [options, setOptions] = React.useState(null);
 
     const fetchAllMinors = async () => {
-        const res = await axios.get(`http://localhost:8000/api/getMinors/${program}`);
-        setOptions(res.data["minors"]);
+        // const res = await axios.get(`http://localhost:8000/api/getMinors/${program}`);
+        // setOptions(res.data["minors"]);
+        setOptions({
+            "1": "Minor1",
+            "2": "Minor1",
+            "3": "Minor1",
+            "4": "Minor1",
+            "5": "Minor1",
+        })
         // setIsLoading(false);
       };
     

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Modal } from 'antd';
+import { Typography, Modal, Button } from 'antd';
 import { useSelector } from 'react-redux';
 import './steps.less';
 
@@ -7,19 +7,17 @@ const { Title } = Typography;
 const TermBox = ({ yearIndex, termNo, courses }) => {
     const [open, setOpen] = React.useState(false);
     const [loading, setLoading] = React.useState(false);
-    const handleSave
+    const handleSave = () => {
+        console.log('temp');
+    };
     return (
         <>
         <div className="termBox">
-            {courses.length === 0 && (
-
-            )}
             Term Box! {yearIndex} {termNo}
-            
         </div>
             <Modal className='step-modal' title='Add courses'
                 onCancel={() => setOpen(false)}
-                visible={openModal}
+                visible={open}
                 footer={[
                     <Button className='text' key="cancel" 
                         onClick={() => setOpen(false)}>
@@ -30,6 +28,7 @@ const TermBox = ({ yearIndex, termNo, courses }) => {
                         Save
                     </Button>
                 ]}
+            />
         </>
     )
 }

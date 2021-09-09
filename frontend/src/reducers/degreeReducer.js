@@ -1,9 +1,10 @@
 const initial = {
-    currStep: 0, 
+    currStep: 0,
     hasUpdatedDegree: false,
     program: "",
     specialisation: "",
     minor: "",
+
 }
 const degreeReducer = (state=initial, action) => { 
     switch (action.type) { 

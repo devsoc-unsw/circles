@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import { Menu, Typography, Button } from 'antd';
 import { degreeActions } from '../../../actions/degreeActions';
+import { Link } from 'react-scroll';
 import { useDispatch } from 'react-redux'
 import './steps.less';
 
@@ -13,8 +14,18 @@ export const DegreeStep = () => {
     const [options, setOptions] = React.useState(null);
 
     const fetchAllDegrees = async () => {
-        const res = await axios.get("http://localhost:8000/api/getPrograms");
-        setOptions(res.data["programs"]);
+        // const res = await axios.get("http://localhost:8000/api/getPrograms");
+        // setOptions(res.data["programs"]);
+        setOptions({
+            "3778": "Computer Science", 
+            "3779": "Computer Science",
+            "3777": "Computer Science",
+            "3775": "Computer Science",
+            "3774": "Computer Science",
+            "3772": "Computer Science",
+            "3771": "Computer Science",
+            "3771": "Computer Science",
+        })
         // setIsLoading(false);
       };
     
@@ -47,16 +58,18 @@ export const DegreeStep = () => {
             )}
 
             {(selected && input !== "") && (
-                <Button
-                    className='steps-next-btn'
-                    type="primary"
-                    onClick={() => {
-                        console.log('THIS', selected)
-                        dispatch(degreeActions('SET_DEGREE', selected));
-                        dispatch(degreeActions('NEXT_STEP'));
-                }}>
-                    Next
-                </Button>
+                <Link to={"Specialisation"} smooth={true} duration={1000}>
+                    <Button
+                        className='steps-next-btn'
+                        type="primary"
+                        onClick={() => {
+                            console.log('THIS', selected)
+                            dispatch(degreeActions('SET_DEGREE', selected));
+                            dispatch(degreeActions('NEXT_STEP'));
+                        }}>
+                        Next
+                    </Button>
+                </Link>
             )}
         </div>
        

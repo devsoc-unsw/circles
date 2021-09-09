@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import ParticleBackground from './ParticleBackground';
-import { Steps, Button } from 'antd';
+import { Button, Timeline } from 'antd';
 import { useSelector } from 'react-redux';
 import { DegreeStep } from './steps/DegreeStep';
 import { SpecialisationStep } from './steps/SpecialisationStep';
@@ -9,42 +9,40 @@ import { MinorStep } from './steps/MinorStep';
 import { DurationStep } from './steps/DurationStep';
 import { useDispatch } from 'react-redux';
 import { degreeActions } from '../../actions/degreeActions';
-import { LeftOutlined } from '@ant-design/icons';
+import { useSpring, animated } from 'react-spring';
 import './main.less';
 
-const { Step } = Steps;
 function DegreeSelector() {
     const dispatch = useDispatch();
     const theme = useSelector(store => store.theme);
     const currStep = useSelector(store => store.degree.currStep);
+    const steps = ["Degree", "Specialisation", "Minor", "Duration", "Previous Courses"];
+
+    const props = useSpring({
+      from: { opacity: 0 },
+      to: { opacity: 1 },
+      reset: true,
+      config: { tension: 80, friction: 60 },
+    });
 
     return (
       <div className='degree-root-container'>
-        <div className='degree-content'>
-          <Steps className="step-style" current={currStep}>
-            <Step title="Degree" />
-            <Step title="Specialisation" />
-            <Step title="Minor" />
-            <Step title="Duration" />
-            <Step title="Courses" />
-          </Steps> 
-          { currStep !== 0 && (
-            <Button 
-              className='steps-back-btn'
-              icon={<LeftOutlined/>}
-              onClick={() => dispatch(degreeActions('PREV_STEP'))}
-            >
-             Back 
-            </Button> 
-          )}
-          <div className='step-content'>
-            {currStep === 0 && <DegreeStep/> }
-            {currStep === 1 && <SpecialisationStep/>}
-            {currStep === 2 && <MinorStep/>}
-            {currStep === 3 && <DurationStep/>}
-            {currStep === 4 && <PreviousCoursesStep/>}
+        <Timeline className="steps-timeline-cont">
+          { steps.map((step) => {
+            console.log(step, currStep)
+            if (step !== steps[currStep]) return <Timeline.Item color='grey'>{step}</Timeline.Item> 
+            else return <Timeline.Item color='green'>{step}</Timeline.Item>
+          })} 
+        </Timeline>
+        <animated.div style={props}> 
+          <div>
+            <div className="step-content" id={"Degree"}><DegreeStep/></div>
+            <div className="step-content" id={"Specialisation"}><SpecialisationStep/></div>
+            <div className="step-content" id={"Minor"}><MinorStep/></div>
+            <div className="step-content" id={"Duration"}><DurationStep/></div>
+            <div className="step-content" id={"Previous Courses"}><PreviousCoursesStep/></div>
           </div>
-        </div>
+        </animated.div>
         { theme === 'dark' && <ParticleBackground />}
       </div>
     );

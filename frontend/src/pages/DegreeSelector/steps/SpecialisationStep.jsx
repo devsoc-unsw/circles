@@ -14,9 +14,16 @@ export const SpecialisationStep = () => {
     const [options, setOptions] = React.useState(null);
 
     const fetchAllSpecializations = async () => {
-        const res = await axios.get(`http://localhost:8000/api/getMajors/${program}`);
-        setOptions(res.data["majors"]);
+        // const res = await axios.get(`http://localhost:8000/api/getMajors/${program}`);
+        // setOptions(res.data["majors"]);
         // setIsLoading(false);
+         setOptions({
+            "1": "major",
+            "2": "major",
+            "3": "major",
+            "4": "major",
+            "5": "major",
+        })
       };
     
     useEffect(() => {
