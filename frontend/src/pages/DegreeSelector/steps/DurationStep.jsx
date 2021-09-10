@@ -1,8 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import { Typography, Button } from 'antd';
+import { Link } from 'react-scroll';
 import { plannerActions } from '../../../actions/plannerActions';
 import { setStructure } from '../../../actions/setStructure';
 import './steps.less';
@@ -10,7 +10,6 @@ import './steps.less';
 const { Title } = Typography;
 export const DurationStep = () => {
     const dispatch = useDispatch();
-    const history = useHistory();
     const currYear = parseInt(new Date().getFullYear());
     const [yearStart, setYearStart] = React.useState(currYear);
     // Use be results for this
@@ -30,7 +29,6 @@ export const DurationStep = () => {
           dispatch(setStructure(structure));   
           // Uncomment when DB is working
           // const coreData = await axios.get(`http://localhost:8000/api/getCoreCourses/${programCode}/${specialisation}/${minor}`);
-            history.push('/course-selector');
         } catch { 
             console.log('Something went wrong with our servers');
         }
@@ -62,14 +60,15 @@ export const DurationStep = () => {
                 <option className='text' key={4} value={7}>7 Years</option>
                 <option className='text' key={5} value={8}>8 Years</option>
             </select>
-
-            <Button
-                className='steps-next-btn'
-                type="primary"
-                onClick={handleOnComplete}
-            >
-                Start browsing courses
-            </Button>
+            <Link to="Previous Courses" smooth={true} duration={1000}>
+                <Button
+                    className='steps-next-btn'
+                    type="primary"
+                    onClick={handleOnComplete}
+                >
+                    Next
+                </Button>
+            </Link>
         </div>
     )
 }

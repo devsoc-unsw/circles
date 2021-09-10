@@ -13,10 +13,7 @@ import { useSpring, animated } from 'react-spring';
 import './main.less';
 
 function DegreeSelector() {
-    const dispatch = useDispatch();
     const theme = useSelector(store => store.theme);
-    const currStep = useSelector(store => store.degree.currStep);
-    const steps = ["Degree", "Specialisation", "Minor", "Duration", "Previous Courses"];
 
     const props = useSpring({
       from: { opacity: 0 },
@@ -27,13 +24,6 @@ function DegreeSelector() {
 
     return (
       <div className='degree-root-container'>
-        <Timeline className="steps-timeline-cont">
-          { steps.map((step) => {
-            console.log(step, currStep)
-            if (step !== steps[currStep]) return <Timeline.Item color='grey'>{step}</Timeline.Item> 
-            else return <Timeline.Item color='green'>{step}</Timeline.Item>
-          })} 
-        </Timeline>
         <animated.div style={props}> 
           <div>
             <div className="step-content" id={"Degree"}><DegreeStep/></div>

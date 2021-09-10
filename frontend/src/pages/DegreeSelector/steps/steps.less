@@ -1,9 +1,12 @@
 .steps-root-container {
   position: relative;
-  padding-top: 5em;
-  padding-left: 2em;
+  padding-top: 11em;
 }
 
+.steps-root-container-first {
+  position: relative;
+  padding-top: 5em;
+}
 .steps-dropdown {
   font-size: 24px;
   border: #919191 solid 1px; //grey-5
@@ -28,15 +31,13 @@
 }
 
 .steps-next-btn {
-  position: absolute !important;
-  right: 0px;
-  top: 5em;
+  margin-top: 3em;
 }
 
 .step-content {
-  top: 300px;
   height: 90vh;
   padding: 2em;
+  position: relative;
 }
 .steps-search-input {
   font-size: 24px;
@@ -75,7 +76,7 @@
 
 .steps-grid-cont {
   display: grid;
-  grid-template-columns: 10em 1fr 1fr 1fr;
+  grid-template-columns: 10em 1fr 1fr 1fr 1fr;
   align-items: center;
   max-width: 100em;
   margin: auto auto;
@@ -84,6 +85,16 @@
 .steps-grid-item {
   font-size: 1.5rem;
   text-align: center;
+}
+
+.steps-term {
+  position: relative;
+}
+
+.steps-term-edit-btn {
+  position: absolute !important;
+  top: 1em;
+  right: 1em;
 }
 
 .light {

@@ -52,6 +52,7 @@ export default function CourseDescription() {
         title: course.name,
         type: course.type,
         termsOffered: course.terms,
+        // TODO: Need to add pre-reqs
       }
     } 
     dispatch(plannerActions("ADD_TO_UNPLANNED", data));

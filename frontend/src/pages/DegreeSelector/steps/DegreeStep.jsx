@@ -3,14 +3,14 @@ import React, { useEffect } from 'react';
 import { Menu, Typography, Button } from 'antd';
 import { degreeActions } from '../../../actions/degreeActions';
 import { Link } from 'react-scroll';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import './steps.less';
 
 const { Title } = Typography;
 export const DegreeStep = () => {
     const dispatch = useDispatch();
+    const program = useSelector(store => store.degree.program)
     const [input, setInput] = React.useState('')
-    const [selected, setSelected] = React.useState(null);
     const [options, setOptions] = React.useState(null);
 
     const fetchAllDegrees = async () => {
@@ -35,7 +35,7 @@ export const DegreeStep = () => {
     }, []);
 
     return (
-        <div className='steps-root-container'>
+        <div className='steps-root-container-first'>
             <Title level={3} className="text">
                 I am studying 
             </Title>
@@ -47,8 +47,8 @@ export const DegreeStep = () => {
                 onChange={(e) => setInput(e.target.value)} />
             { input !== '' && options && (
                 <Menu className='degree-search-results'
-                    onClick={(e) => setSelected(e.key)}
-                    selectedKeys={[selected]}
+                    onClick={(e) => dispatch(degreeActions('SET_DEGREE', e.key))}
+                    selectedKeys={program && [program]}
                     mode="inline"
                 >
                     { Object.keys(options).map((key) => 
@@ -57,16 +57,12 @@ export const DegreeStep = () => {
                 </Menu>
             )}
 
-            {(selected && input !== "") && (
+            { program && (
                 <Link to={"Specialisation"} smooth={true} duration={1000}>
                     <Button
                         className='steps-next-btn'
                         type="primary"
-                        onClick={() => {
-                            console.log('THIS', selected)
-                            dispatch(degreeActions('SET_DEGREE', selected));
-                            dispatch(degreeActions('NEXT_STEP'));
-                        }}>
+                    >
                         Next
                     </Button>
                 </Link>
