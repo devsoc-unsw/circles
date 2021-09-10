@@ -14,6 +14,12 @@ import {
   updateWarnings,
 } from "./DragDropLogic";
 import UnplannedColumn from "./UnplannedColumn";
+import SettingsMenu from "./SettingsMenu";
+import { IoIosSettings } from "react-icons/io";
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css";
+import "tippy.js/themes/light.css";
+import { SettingOutlined } from "@ant-design/icons";
 
 const TermPlanner = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -23,6 +29,9 @@ const TermPlanner = () => {
     useSelector((state) => {
       return state.planner;
     });
+
+  const theme = useSelector((state) => state.theme);
+
   const [visible, setVisible] = useState(false); // visibility for side drawer
   const dispatch = useDispatch();
 
@@ -56,17 +65,26 @@ const TermPlanner = () => {
             handleOnDragStart(result, courses, setTermsOffered, setIsDragging)
           }
         >
-          <Button
-            type="primary"
-            icon={<RightOutlined />}
-            onClick={() => setVisible(true)}
-            shape="circle"
-            ghost
-            style={{ position: "sticky", top: "50vh", left: "1em" }}
-          />
           <div className="plannerContainer">
             <div class={`gridContainer ${isSummerEnabled && "summerGrid"}`}>
-              <div class="gridItem"></div>
+              <div class="gridItem">
+                <Tippy
+                  content={<SettingsMenu />}
+                  arrow={false}
+                  moveTransition="transform 0.2s ease-out"
+                  interactive={true}
+                  hideOnClick="toggle"
+                  trigger="click"
+                  theme={theme === "light" && "light"}
+                  zIndex={1}
+                >
+                  <Button
+                    type="primary"
+                    shape="circle"
+                    icon={<SettingOutlined />}
+                  />
+                </Tippy>
+              </div>
               {isSummerEnabled && <div class="gridItem">Summer</div>}
               <div class="gridItem">Term 1</div>
               <div class="gridItem">Term 2</div>
@@ -98,7 +116,6 @@ const TermPlanner = () => {
               ))}
             </div>
             <UnplannedColumn />
-            <OptionsDrawer visible={visible} setVisible={setVisible} />
           </div>
         </DragDropContext>
       )}
