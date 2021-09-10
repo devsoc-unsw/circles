@@ -9,6 +9,7 @@ import './steps.less';
 const { Title } = Typography;
 export const MinorStep = () => {
     const dispatch = useDispatch();
+    const minor = useSelector(store => store.degree.minor);
     // Fetch the minors
     const [selected, setSelected] = React.useState("Select Minor"); 
     const [options, setOptions] = React.useState({
@@ -39,7 +40,7 @@ export const MinorStep = () => {
             </Title>
             <Menu className='degree-minors'
                 onClick={(e) => dispatch(degreeActions('SET_MINOR', e.key))}
-                selectedKeys={selected && [selected]}
+                selectedKeys={minor && [minor]}
                 mode="inline"
             >
                 { Object.keys(options).map((key) => 

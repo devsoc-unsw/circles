@@ -45,7 +45,7 @@ const generateEmptyYears = (nYears) => {
 
 const initialState = {
   unplanned: ["COMP2521"],
-  startYear: 2021,
+  startYear: parseInt(new Date().getFullYear()),
   numYears: 3,
   isSummerEnabled: false,
   years: [
@@ -57,6 +57,7 @@ const initialState = {
   plannedCourses: plannedCourses,
 };
 const plannerReducer = (state = initialState, action) => {
+  console.log(state.startYear, state.numYears);
   switch (action.type) {
     case "ADD_TO_UNPLANNED":
       const { courseCode, courseData } = action.payload;
