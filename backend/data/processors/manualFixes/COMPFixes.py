@@ -1,8 +1,13 @@
 """
-Apply manual COMP fixes to processed conditions in conditionsProcessed.json so that
-they can be fed into algorithms.
+Apply manual COMP fixes to processed conditions in conditionsProcessed.json so 
+that they can be fed into algorithms.
 
-Run this code after running conditionsPreprocessing.py
+If you make a mistake and need to regenerate conditionsProcessed.json, then you
+can run:
+    python3 -m data.processors.conditionsPreprocessing
+
+To then run this file:
+    python3 -m data.processors.manualFixes.COMPFixes
 """
 
 from data.utility import dataHelpers
