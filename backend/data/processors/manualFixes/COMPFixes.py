@@ -1,4 +1,6 @@
 """
+https://github.com/csesoc/Circles/wiki/Manual-Fixes-to-Course-Prerequisites
+
 Apply manual COMP fixes to processed conditions in conditionsProcessed.json so 
 that they can be fed into algorithms.
 
