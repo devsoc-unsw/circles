@@ -53,9 +53,7 @@ const TermPlanner = () => {
 
   return (
     <>
-      <div className="settingsHeader">
         <SettingsButton />
-      </div>
       {isLoading ? (
         <SkeletonPlanner />
       ) : (
