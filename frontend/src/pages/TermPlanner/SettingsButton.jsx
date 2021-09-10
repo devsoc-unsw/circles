@@ -25,19 +25,23 @@ import SettingsMenu from "./SettingsMenu";
 const SettingsButton = ({ visible, setVisible }) => {
   const theme = useSelector((state) => state.theme);
 
+  const [isOpen, setIsOpen] = React.useState(false);
 
   return (
     <Tippy
       content={<SettingsMenu />}
       moveTransition="transform 0.2s ease-out"
       interactive={true}
-      // hideOnClick="toggle"
+      hideOnClick="toggle"
       trigger="click"
       theme={theme === "light" && "light"}
       zIndex={1}
       placement="bottom-start"
     >
-      <button className="settingsButton">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className={`settingsButton ${isOpen && "clicked"}`}
+      >
         <IoCogSharp
           size="1.2em"
           style={{ fontSize: "1.5em", color: "#303539" }}
