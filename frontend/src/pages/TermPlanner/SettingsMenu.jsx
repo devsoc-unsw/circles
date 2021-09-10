@@ -15,11 +15,13 @@ import { Droppable } from "react-beautiful-dnd";
 import DraggableCourse from "./DraggableCourse";
 import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
+import { IoCogSharp } from "react-icons/io5";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
-import { SettingOutlined } from "@ant-design/icons";
+import "tippy.js/themes/light.css";
+import { SettingFilled } from "@ant-design/icons";
 
-const SettingsMenu = ({ visible, setVisible }) => {
+const SettingsMenu = () => {
   const { Title } = Typography;
   const { Panel } = Collapse;
   const { Option } = Select;
@@ -29,7 +31,6 @@ const SettingsMenu = ({ visible, setVisible }) => {
   });
 
   const dispatch = useDispatch();
-  const sortedUnplanned = sortUnplanned(unplanned, courses);
 
   function onChange(date, dateString) {
     console.log(date, dateString);
@@ -46,28 +47,15 @@ const SettingsMenu = ({ visible, setVisible }) => {
   const years = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (
-    <div
-      style={{
-        padding: "1em",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "flex-start",
-        gap: "0.5em",
-      }}
-    >
-      <div style={{ width: "14em" }}>
-        <Title
-          level={2}
-          class="text"
-          strong
-          style={{ marginBottom: "0em", textAlign: "left" }}
-        >
+    <div className="settingsMenu">
+      <div className="settingsTitleContainer">
+        <Title level={2} class="text" strong className="settingsTitle">
           Settings
         </Title>
-        <Divider style={{ marginTop: "0.5em", marginBottom: "0.5em" }} />
+        <Divider className="settingsDivider" />
       </div>
-      <div className="summerToggleBox">
-        <Title level={3} class="text" style={{ marginBottom: "0em" }}>
+      <div className="settingsEntry">
+        <Title level={3} class="text settingsSubtitle">
           Summer Term
         </Title>
         <Switch
@@ -77,15 +65,14 @@ const SettingsMenu = ({ visible, setVisible }) => {
           unCheckedChildren={<CloseOutlined />}
         />
       </div>
-      <div className="summerToggleBox">
-        <Title level={3} class="text" style={{ marginBottom: "0em" }}>
+      <div className="settingsEntry">
+        <Title level={3} class="text settingsSubtitle">
           Start Year
         </Title>
         <DatePicker onChange={onChange} picker="year" style={{ width: 105 }} />
       </div>
-
-      <div className="summerToggleBox">
-        <Title level={3} class="text" style={{ marginBottom: "0em" }}>
+      <div className="settingsEntry">
+        <Title level={3} class="text settingsSubtitle">
           Degree Length
         </Title>
         <Select defaultValue="3" style={{ width: 70 }} onChange={handleChange}>
@@ -96,22 +83,6 @@ const SettingsMenu = ({ visible, setVisible }) => {
       </div>
     </div>
   );
-};
-
-// create separate array for each type
-// e.g. courseTypes = { Core: ["COMP1511", "COMP2521"], Elective: ["COMP6881"] }
-const sortUnplanned = (unplanned, courses) => {
-  if (unplanned == null) return {};
-  let courseTypes = {};
-  unplanned.forEach((code) => {
-    const type = courses.get(code)["type"];
-    if (!courseTypes.hasOwnProperty(type)) {
-      courseTypes[type] = [code];
-    } else {
-      courseTypes[type].push(code);
-    }
-  });
-  return courseTypes;
 };
 
 export default SettingsMenu;

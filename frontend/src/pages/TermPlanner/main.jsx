@@ -14,12 +14,12 @@ import {
   updateWarnings,
 } from "./DragDropLogic";
 import UnplannedColumn from "./UnplannedColumn";
-import SettingsMenu from "./SettingsMenu";
-import { IoIosSettings } from "react-icons/io";
+import SettingsButton from "./SettingsButton";
+import { IoCogSharp } from "react-icons/io5";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
-import { SettingOutlined } from "@ant-design/icons";
+import { SettingFilled } from "@ant-design/icons";
 
 const TermPlanner = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -53,6 +53,7 @@ const TermPlanner = () => {
 
   return (
     <>
+      <SettingsButton />
       {isLoading ? (
         <SkeletonPlanner />
       ) : (
@@ -67,24 +68,7 @@ const TermPlanner = () => {
         >
           <div className="plannerContainer">
             <div class={`gridContainer ${isSummerEnabled && "summerGrid"}`}>
-              <div class="gridItem">
-                <Tippy
-                  content={<SettingsMenu />}
-                  arrow={false}
-                  moveTransition="transform 0.2s ease-out"
-                  interactive={true}
-                  hideOnClick="toggle"
-                  trigger="click"
-                  theme={theme === "light" && "light"}
-                  zIndex={1}
-                >
-                  <Button
-                    type="primary"
-                    shape="circle"
-                    icon={<SettingOutlined />}
-                  />
-                </Tippy>
-              </div>
+              <div class="gridItem"></div>
               {isSummerEnabled && <div class="gridItem">Summer</div>}
               <div class="gridItem">Term 1</div>
               <div class="gridItem">Term 2</div>
