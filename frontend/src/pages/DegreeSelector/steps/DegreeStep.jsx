@@ -60,7 +60,7 @@ export const DegreeStep = () => {
             { program && (
                 <Link to={"Specialisation"} smooth={true} duration={1000}>
                     <Button
-                        className='steps-next-btn'
+                        className='steps-next-btn-first'
                         type="primary"
                     >
                         Next

@@ -25,7 +25,7 @@ function DegreeSelector() {
     return (
       <div className='degree-root-container'>
         <animated.div style={props}> 
-          <div>
+          <div className="step-container">
             <div className="step-content" id={"Degree"}><DegreeStep/></div>
             <div className="step-content" id={"Specialisation"}><SpecialisationStep/></div>
             <div className="step-content" id={"Minor"}><MinorStep/></div>

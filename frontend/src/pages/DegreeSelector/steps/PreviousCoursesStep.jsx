@@ -76,7 +76,7 @@ export const PreviousCoursesStep = () => {
                 Courses that I've planned so far
             </Title>
             {/* Add info button */}
-            <div className="steps-grid-cont">
+            <div className="steps-grid-cont" style={{marginTop: "100px"}}>
                 <div className="steps-grid-item"></div>
                 <div className="steps-grid-item">Summer</div>
                 <div className="steps-grid-item">Term 1</div>
