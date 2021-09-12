@@ -304,7 +304,7 @@ def COMM_3999(conditions):
 
     return {
         "original": conditions["original"],
-        "processed": "COMM1999 && 72UOC && COMM",
+        "processed": "COMM1999 && 72UOC && COMM#",
         "warning": "Studetns must be in their final year"
     }
 
