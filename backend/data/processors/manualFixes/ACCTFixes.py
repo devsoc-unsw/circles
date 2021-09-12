@@ -38,7 +38,7 @@ def fix_conditions():
 
     codes = ["ACCT4797", "ACCT4809", "ACCT4851", "ACCT4852", "ACCT4897"]
     for code in codes:
-        CONDITIONS[code][PROCESSED] = ACCT_4797_4851_4852_4897()
+        CONDITIONS[code][PROCESSED] = ACCT_4797_4809_4851_4852_4897()
 
     # Updates the files with the modified dictionaries
     dataHelpers.write_data(
@@ -75,11 +75,11 @@ def ACCT_3708(condition):
         "warning": "You need approval from the School of Accounting, Auditing and Taxation to enrol in this course."
     }
 
-def ACCT_4797_4851_4852_4897():
+def ACCT_4797_4809_4851_4852_4897():
     """
     "original": "Prerequisite: Must be enrolled in program 4501 (Accounting)<br/><br/>",
     
-    "processed": "Must be program 4501 (Accounting)"    
+    "processed": "4501"    
     """
     return "4501"
 
