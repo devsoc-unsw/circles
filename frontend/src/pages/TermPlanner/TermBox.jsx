@@ -26,7 +26,6 @@ function TermBox({ name, courses, termsOffered, isDragging }) {
 
   //   console.log(completedTerms.get(name));
   const isCompleted = completedTerms.get(name);
-  console.log(completedTerms);
 
   const isDropAllowed = termsOffered.includes(term) && !isCompleted;
 

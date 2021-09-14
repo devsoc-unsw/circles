@@ -11,7 +11,7 @@ import useMediaQuery from "../../hooks/useMediaQuery";
 function DraggableCourse({ code, index }) {
   //   let code = course.match(/([A-Z]{4}[0-9]{4}):/)[1];
   const { Text } = Typography;
-  const { courses, isSummerEnabled } = useSelector((state) => {
+  const { courses, isSummerEnabled, completedTerms } = useSelector((state) => {
     return state.planner;
   });
   const theme = useSelector((state) => state.theme);
@@ -26,9 +26,16 @@ function DraggableCourse({ code, index }) {
   });
 
   const isSmall = useMediaQuery("(max-width: 1400px)");
+
+  const isDragDisabled = completedTerms.get(plannedFor);
+
   return (
     <>
-      <Draggable draggableId={code} index={index}>
+      <Draggable
+        isDragDisabled={isDragDisabled}
+        draggableId={code}
+        index={index}
+      >
         {(provided) => (
           <li
             {...provided.draggableProps}
@@ -48,15 +55,17 @@ function DraggableCourse({ code, index }) {
               <IoWarningOutline
                 size={isSmall ? "1.5em" : "2.5em"}
                 color={theme === "light" ? "#DC9930" : "white"}
-				style={isSmall && {position:"absolute", marginRight: "8em"}}
+                style={isSmall && { position: "absolute", marginRight: "8em" }}
               />
             )}
             <div>
-              { isSmall ? (
-                 <Text className="text">{code}</Text>
+              {isSmall ? (
+                <Text className="text">{code}</Text>
               ) : (
                 <>
-                  <Text strong className="text">{code}</Text>
+                  <Text strong className="text">
+                    {code}
+                  </Text>
                   <Text className="text">: {courseName} </Text>
                 </>
               )}
