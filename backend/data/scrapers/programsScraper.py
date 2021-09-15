@@ -13,17 +13,17 @@ import json
 import ast
 import data.utility.dataHelpers
 
-THIS_YEAR = str(date.today().year) # Ensures request remains up-to-date
-TOTAL_PGRMS = 249 # Update if number of programs increases
+THIS_YEAR = str(date.today().year)  # Ensures request remains up-to-date
+TOTAL_PGRMS = 249  # Update if number of programs increases
 
 PAYLOAD = {
     "query": {
         "bool": {
             "must": [{
-                    "term": {
-                        "live": True
-                    }
-                },
+                "term": {
+                    "live": True
+                }
+            },
                 [{
                     "bool": {
                         "minimum_should_match": "100%",
@@ -81,16 +81,17 @@ PAYLOAD = {
 '''
 Retrieves data for all undergraduate programs 
 '''
+
+
 def scrape_programs():
     url = "https://www.handbook.unsw.edu.au/api/es/search"
     headers = {
         "content-type": "application/json",
     }
     r = requests.post(url, data=json.dumps(PAYLOAD), headers=headers)
-    dataHelpers.write_data(r.json()["contentlets"], 'programsRaw.json')
+    dataHelpers.write_data(
+        r.json()["contentlets"], 'data/scrapers/programsPureRaw.json')
 
 
 if __name__ == "__main__":
     scrape_programs()
-    
-
