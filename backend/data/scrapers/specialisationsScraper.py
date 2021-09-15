@@ -3,7 +3,7 @@ Program extracts raw data for specialisations and place data in file
 'specialisationsPureRaw.json', ready for formatting.
 
 Step in the data's journey:
-    [ X ] Scrape raw data (specialisationScraper.py)
+    [ X ] Scrape raw data (specialisationsScraper.py)
     [   ] Format scraped data (specialisationFormatting.py)
     [   ] Customise formatted data (specialisationProcessing.py)
 """
