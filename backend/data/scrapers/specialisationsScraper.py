@@ -10,10 +10,9 @@ Step in the data's journey:
 
 import requests
 import json
-from datetime import date
 from data.utility import dataHelpers
 
-THIS_YEAR = str(date.today().year) # Ensures request remains up-to-date
+THIS_YEAR = "2022" 
 TOTAL_SPNS = 500 # Update if number of specialisations increases
 
 # Note as at May 2021, there are 365 specialisations
