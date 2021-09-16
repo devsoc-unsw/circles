@@ -10,10 +10,9 @@ Step in the data's journey:
 
 import requests
 import json
-from datetime import date
 from data.utility import dataHelpers
 
-THIS_YEAR = str(date.today().year)
+THIS_YEAR = "2022"
 TOTAL_COURSES = 10000
 
 PAYLOAD = {
