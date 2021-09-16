@@ -55,6 +55,10 @@ def preprocess_conditions():
 
         # Phase 4: Final touches
         processed = strip_spaces(processed)
+        processed = strip_bracket_spaces(processed)
+
+        # Phase 5: Common patterns
+        processed = uoc_in_business_school(processed)
 
         conditions["processed"] = processed
 
@@ -313,6 +317,14 @@ def strip_spaces(processed):
     # Get rid of white spaces at start and end of word
     return processed.strip()
 
+
+def strip_bracket_spaces(processed):
+    """Strips spaces immediately before and after brackets"""
+    processed = re.sub(r'([([]) ', r'\1', processed)
+    processed = re.sub(r' ([)]])', r'\1', processed)
+
+    return processed
+
 # '''Converts majors and minors into their respective specialisation codes.
 # E.g. Bsc COMP major '''
 # def
@@ -326,6 +338,16 @@ def strip_spaces(processed):
 # '''
 # def surround_brackets(processed):
 #     return "(" + processed + ")"
+
+
+# -----------------------------------------------------------------------------
+# Phase 4: Common patterns
+# -------------------
+def uoc_in_business_school(processed):
+    '''Converts \d+UOC offered by the UNSW Business School to \d+UOC in S Business'''
+    processed = re.sub(
+        r'(\d+UOC) offered by the UNSW Business School', r'\1 in S Business', processed)
+    return processed
 
 
 if __name__ == "__main__":
