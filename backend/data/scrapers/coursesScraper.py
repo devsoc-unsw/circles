@@ -1,58 +1,114 @@
-# Scraping courses data and putting it inside coursesRaw.json
-import Linking as nt
-from Courses import *
+"""
+Program extracts raw data for Programs and place data in file
+'coursesPureRaw.json', ready for formatting.
+
+Step in the data's journey:
+    [ X ] Scrape raw data (coursesScraper.py)
+    [   ] Format scraped data (coursesFormatting.py)
+    [   ] Customise formatted data (coursesProcessing.py)
+"""
+
+import requests
 import json
+from datetime import date
 
-#data = runTheTest()
-#print(data)
+from data.utility import dataHelpers
+from data.config import LIVE_YEAR
+
+TOTAL_COURSES = 10000
+
+PAYLOAD = {
+    "query": {
+        "bool": {
+            "must": [
+                {
+                    "term": {
+                        "live": True
+                    }
+                },
+                [
+                    {
+                        "bool": {
+                            "minimum_should_match": "100%",
+                            "should": [
+                                {
+                                    "query_string": {
+                                        "fields": ["unsw_psubject.implementationYear"],
+                                        "query":f"*{LIVE_YEAR}*"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "bool": {
+                            "minimum_should_match": "100%",
+                            "should": [
+                                {
+                                    "query_string": {
+                                        "fields": [
+                                            "unsw_psubject.studyLevelValue"
+                                        ],
+                                        "query":"*ugrd*"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "bool": {
+                            "minimum_should_match": "100%",
+                            "should": [
+                                {
+                                    "query_string": {
+                                        "fields": ["unsw_psubject.active"],
+                                        "query":"*1*"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            ],
+            "filter": [
+                {
+                    "terms": {
+                        "contenttype": ["unsw_psubject"]
+                    }
+                }
+            ]
+        }
+    },
+    "sort": [
+        {
+            "unsw_psubject.code_dotraw": {
+                "order": "asc"
+            }
+        }
+    ],
+    "from": 0,
+    "size": TOTAL_COURSES,
+    "track_scores": True,
+    "_source": {
+        "includes": ["*.code", "*.name", "*.award_titles", "*.keywords", "urlmap", "contenttype"],
+        "excludes": ["", None]
+    }
+}
 
 '''
-data = getCourses()
-
-data = nt.json2string(data)
-nt.write(data, 'coursesRaw.json')
-
-
-data = getCourseData()
-
-data = nt.json2string(data)
-nt.write(data, 'coursesProcessed.json')
-
-data = getERList()
-
-data = nt.json2string(data)
-nt.write(data, 'enrolmentRules.json')
+Retrieves data for all undergraduate courses
 '''
 
-data = getEnrolmentRules()
 
-for i,v in enumerate(data):
-    if v is None:
-        continue
-    if "enrolled in" in data[i]:
-        data[i] = ""
-    if "Enrolment in" in data[i]:
-        data[i] = ""
-    if "language placement approval" in data[i]:
-        data[i] = ""
-    if "Completed 72 UOC" in data[i]:
-        data[i] = ""
-    if "24 units of credit at Level 1" in data[i]:
-        data[i] = ""
-    if "96 unit of credits completed" in data[i]:
-        data[i] = ""
-    '''
-    data[i] = data[i].replace('Completed 72 UOC', '')
-    data[i] = data[i].replace('24 units of credit at Level 1', '')
-    data[i] = data[i].replace('96 unit of credits completed', '')
-    '''
-    data[i] = data[i].strip()
+def scrape_courses():
+    url = "https://www.handbook.unsw.edu.au/api/es/search"
+    headers = {
+        "content-type": "application/json",
+    }
+    r = requests.post(url, data=json.dumps(PAYLOAD), headers=headers)
+    dataHelpers.write_data(
+        r.json()["contentlets"], "data/scrapers/coursesPureRaw.json")
 
-old_data = data
-data = []
-for i,v in enumerate(old_data):
-    if v is not None and v != "":
-        data.append(v)
 
-data = nt.json2string(data)
-nt.write(data, 'enrolmentRules.json')
+if __name__ == "__main__":
+    scrape_courses()
