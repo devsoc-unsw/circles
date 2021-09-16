@@ -11,10 +11,11 @@ from datetime import date
 import requests
 import json
 import ast
-import data.utility.dataHelpers
 
-THIS_YEAR = str(date.today().year)  # Ensures request remains up-to-date
-TOTAL_PGRMS = 249  # Update if number of programs increases
+import data.utility.dataHelpers
+from data.config import LIVE_YEAR
+
+TOTAL_PGRMS = 1000
 
 PAYLOAD = {
     "query": {
@@ -40,7 +41,7 @@ PAYLOAD = {
                         "should": [{
                             "query_string": {
                                 "fields": ["unsw_pcourse.implementationYear"],
-                                "query":f"*{THIS_YEAR}*"
+                                "query":f"*{LIVE_YEAR}*"
                             }
                         }]
                     }
