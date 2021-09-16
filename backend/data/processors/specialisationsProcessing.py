@@ -236,7 +236,6 @@ def process_any_level(unprocessed_course: str) -> str:
     """
     # group 1 contains level number and group 2 contains program title
     # Note '?:' means inner parentheses is non-capturing group
-    print(unprocessed_course)
     res = re.search("level (\d) ((?:[^ ]+ )+)course", unprocessed_course)
     course_level = res.group(1).strip()
     program_title = res.group(2).strip()
