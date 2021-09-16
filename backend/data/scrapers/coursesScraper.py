@@ -10,9 +10,11 @@ Step in the data's journey:
 
 import requests
 import json
-from data.utility import dataHelpers
+from datetime import date
 
-THIS_YEAR = "2022"
+from data.utility import dataHelpers
+from data.config import LIVE_YEAR
+
 TOTAL_COURSES = 10000
 
 PAYLOAD = {
@@ -32,7 +34,7 @@ PAYLOAD = {
                                 {
                                     "query_string": {
                                         "fields": ["unsw_psubject.implementationYear"],
-                                        "query":f"*{THIS_YEAR}*"
+                                        "query":f"*{LIVE_YEAR}*"
                                     }
                                 }
                             ]
