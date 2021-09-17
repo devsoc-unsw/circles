@@ -1,30 +1,29 @@
 """
 Program extracts raw data for Programs and place data in file
-'programsRaw.json', ready for formatting.
+'programsPureRaw.json', ready for formatting.
 
 Step in the data's journey:
     [ X ] Scrape raw data (programScraper.py)
     [   ] Format scraped data (programFormatting.py)
     [   ] Customise formatted data (programProcessing.py)
 """
-from datetime import date
-from os import SEEK_DATA
+
 import requests
 import json
-import ast
-import dataHelpers
+from datetime import date
+from data.utility import dataHelpers
 
-THIS_YEAR = str(date.today().year) # Ensures request remains up-to-date
-TOTAL_PGRMS = 249 # Update if number of programs increases
+THIS_YEAR = str(date.today().year)  # Ensures request remains up-to-date
+TOTAL_PGRMS = 249  # Update if number of programs increases
 
 PAYLOAD = {
     "query": {
         "bool": {
             "must": [{
-                    "term": {
-                        "live": True
-                    }
-                },
+                "term": {
+                    "live": True
+                }
+            },
                 [{
                     "bool": {
                         "minimum_should_match": "100%",
@@ -82,16 +81,17 @@ PAYLOAD = {
 '''
 Retrieves data for all undergraduate programs 
 '''
+
+
 def scrape_programs():
     url = "https://www.handbook.unsw.edu.au/api/es/search"
     headers = {
         "content-type": "application/json",
     }
     r = requests.post(url, data=json.dumps(PAYLOAD), headers=headers)
-    dataHelpers.write_data(r.json()["contentlets"], 'programsRaw.json')
+    dataHelpers.write_data(
+        r.json()["contentlets"], 'data/scrapers/programsPureRaw.json')
 
 
 if __name__ == "__main__":
     scrape_programs()
-    
-

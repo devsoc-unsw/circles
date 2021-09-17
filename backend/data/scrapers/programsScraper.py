@@ -11,19 +11,20 @@ from datetime import date
 import requests
 import json
 import ast
-import data.utility.dataHelpers
 
-THIS_YEAR = str(date.today().year) # Ensures request remains up-to-date
-TOTAL_PGRMS = 249 # Update if number of programs increases
+import data.utility.dataHelpers
+from data.config import LIVE_YEAR
+
+TOTAL_PGRMS = 1000
 
 PAYLOAD = {
     "query": {
         "bool": {
             "must": [{
-                    "term": {
-                        "live": True
-                    }
-                },
+                "term": {
+                    "live": True
+                }
+            },
                 [{
                     "bool": {
                         "minimum_should_match": "100%",
@@ -40,7 +41,7 @@ PAYLOAD = {
                         "should": [{
                             "query_string": {
                                 "fields": ["unsw_pcourse.implementationYear"],
-                                "query":f"*{THIS_YEAR}*"
+                                "query":f"*{LIVE_YEAR}*"
                             }
                         }]
                     }
@@ -81,16 +82,17 @@ PAYLOAD = {
 '''
 Retrieves data for all undergraduate programs 
 '''
+
+
 def scrape_programs():
     url = "https://www.handbook.unsw.edu.au/api/es/search"
     headers = {
         "content-type": "application/json",
     }
     r = requests.post(url, data=json.dumps(PAYLOAD), headers=headers)
-    dataHelpers.write_data(r.json()["contentlets"], 'programsRaw.json')
+    dataHelpers.write_data(
+        r.json()["contentlets"], 'data/scrapers/programsPureRaw.json')
 
 
 if __name__ == "__main__":
     scrape_programs()
-    
-
