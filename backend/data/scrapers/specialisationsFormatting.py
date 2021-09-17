@@ -146,7 +146,7 @@ def get_structure(structure, curr_container):
             for course in element["relationship"]:
                 if "academic_item_code" in course:
                     # Note use of '-1' to access last (i.e. current) dictionary in 'structure'
-                    structure[-1]["courses"].append(course["academic_item_code"])
+                    structure[-1]["courses"].append({course["academic_item_code"]: course["academic_item_name"]})
                 elif "description" in course and course["description"] != "":
                     # Course info may be provided as a plaintext description if 
                     # not provided as academic_item_code (e.g. 'any level 3 Finance course')
