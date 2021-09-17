@@ -195,14 +195,16 @@ def get_one_of_courses(container_courses: List[str], curriculum_courses: dict) -
     """
     one_of_courses = ""
     course_added = False # Flag value to identify where 'or' needs to be added
+    titles = []
     for course in container_courses:
-        if course_added:
-            one_of_courses += " or "
+        for code, title in course.items():
+            if course_added:
+                one_of_courses += " or "
 
-        one_of_courses += course
-        course_added = True
-    
-    curriculum_courses[one_of_courses] = 2
+            one_of_courses += code
+            titles.append(title)
+            course_added = True
+    curriculum_courses[one_of_courses] = titles
 
 def get_courses(curriculum_courses: dict, container_courses: List[str], 
                 description: str) -> None:
@@ -213,9 +215,11 @@ def get_courses(curriculum_courses: dict, container_courses: List[str],
         if "any level" in course: 
             # e.g. modify "any level 4 COMP course" to "COMP4"
             course = process_any_level(course) 
-        curriculum_courses[course] = 1
+        if "any course" in course:
+            course = {"any course": 1}
+        curriculum_courses.update(course)
 
-    # TODO: Below is the old code parsing description for course codes. It
+    # Below is the old code parsing description for course codes. It
     # may come in handy later, but if not then delete
     # Captures course codes and strings like 'any level X course offered by ... ' 
         # if not container_courses:
@@ -230,28 +234,21 @@ def process_any_level(unprocessed_course: str) -> str:
     """
     Processes 'any level X PROGRAM NAME course' into 'CODEX'
     """
-    try:
-        # group 1 contains level number and group 2 contains program title
-        # Note ?: means inner parentheses is non-capturing group
-        res = re.search("level (\d) ((?:[^ ]+ )+)course", unprocessed_course)
-        course_level = res.group(1).strip()
-        program_title = res.group(2).strip()
+    # group 1 contains level number and group 2 contains program title
+    # Note '?:' means inner parentheses is non-capturing group
+    res = re.search("level (\d) ((?:[^ ]+ )+)course", unprocessed_course)
+    course_level = res.group(1).strip()
+    program_title = res.group(2).strip()
 
-        # Removes any "(CODE)" text in program title 
-        # e.g. changes "Computer Science (COMP) "
-        program_title = re.sub("\([A-Z]{4}\)", "", program_title)
+    # Removes any "(CODE)" text in program title 
+    # e.g. changes "Computer Science (COMP) "
+    program_title = re.sub("\([A-Z]{4}\)", "", program_title)
 
-        # Find CODE mapping; if unsuccessful, do nothing
-        program_code = CODE_MAPPING.get(program_title, program_title)
-        processed_course = program_code + course_level
+    # Find CODE mapping; if unsuccessful, do nothing
+    program_code = CODE_MAPPING.get(program_title, program_title)
+    processed_course = program_code + course_level
 
-        return processed_course
-    except:
-        # plaintext does not fit above pattern; e.g. it might say "any level 4
-        # course offered by School of Computer Science and Engineering". In that
-        # case, do not process. Manual customisation may be needed.
-        print(f"Unable to process course: {unprocessed_course}")
-        return unprocessed_course
+    return {processed_course: unprocessed_course}
 
 if __name__ == "__main__":
     customise_spn_data()

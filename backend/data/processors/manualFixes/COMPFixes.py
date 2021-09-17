@@ -22,8 +22,7 @@ COURSES = dataHelpers.read_data("data/finalData/coursesProcessed.json")
 def fix_conditions():
     """ Functions to apply manual fixes """
 
-    CONDITIONS["COMP1400"][PROCESSED] = COMP_1400_1911("COMP1400")
-    CONDITIONS["COMP1911"][PROCESSED] = COMP_1400_1911("COMP1911")
+    CONDITIONS["COMP1911"][PROCESSED] = COMP_1911("COMP1911")
     CONDITIONS["COMP3431"][PROCESSED] = COMP_3431()
     CONDITIONS["COMP3821"][PROCESSED] = COMP_3821()
     CONDITIONS["COMP3900"][PROCESSED] = COMP_3900()
@@ -48,7 +47,6 @@ def fix_conditions():
     for code in codes:
         CONDITIONS[code][PROCESSED] = COMP_9312_5()
 
-    CONDITIONS["COMP9433"][PROCESSED] = COMP_9433()
     CONDITIONS["COMP9491"][PROCESSED] = COMP_9491()
     CONDITIONS["COMP9844"][PROCESSED] = COMP_9844()
 
@@ -57,7 +55,7 @@ def fix_conditions():
     dataHelpers.write_data(COURSES, "data/finalData/coursesProcessed.json")
 
 
-def COMP_1400_1911(code):
+def COMP_1911(code):
     """ 
     "original": "Prerequisite: Enrolment in a non-CSE major (no BINF, COMP, or SENG)<br/><br/>"
     
@@ -261,14 +259,6 @@ def COMP_9312_5():
     "processed": "(COMP1927 || COMP2521) && COMP3311"    
     """
     return "(COMP1927 || COMP2521) && COMP3311"
-
-def COMP_9433():
-    """
-    "original": "COMP1531 and COMP2511, COMP9517<br/><br/>"
-
-    "processed": "COMP1531 && COMP2511 && COMP9517"
-    """
-    return "COMP1531 && COMP2511 && COMP9517"  
 
 def COMP_9491():
     """
