@@ -324,7 +324,6 @@ def create_condition(tokens):
                 # Error
                 return None, index
         elif is_program(token):
-            # TODO: How will legacy programs be handled? Such as those with 5 letters and 4 numbers
             result.add_condition(ProgramCondition(token))
         else:
             # Unmatched token. Error
@@ -387,9 +386,7 @@ def get_grade(text):
 
 def is_program(text):
     '''Determines if the text is a program code'''
-    # TODO: How will legacy program codes be handled? Currently I think we should parse them as programs as well
-
-    if re.match(r'^\d+', text):
+    if re.match(r'^\d{4}', text):
         return True
     return False
 
