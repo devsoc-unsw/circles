@@ -208,14 +208,14 @@ def test_wam_condition_complex():
 
 def test_grade_condition():
     user = create_student_3707_COMPA1()
-    user.add_course({
+    user.add_courses({
         "COMP1511": (6, None),
         "MATH1131": (6, None)
     })
 
-    comp1511_70 = create_condition(["(", "70GRADE", "in", "COMP1511", ")"])
-    comp1521_70 = create_condition(["(", "70GRADE", "in", "COMP1521", ")"])
-    math1131_70 = create_condition(["(", "70GRADE", "in", "COMP1131", ")"])
+    comp1511_70 = create_condition(["(", "70GRADE", "in", "COMP1511", ")"])[0]
+    comp1521_70 = create_condition(["(", "70GRADE", "in", "COMP1521", ")"])[0]
+    math1131_70 = create_condition(["(", "70GRADE", "in", "MATH1131", ")"])[0]
 
     # TODO: None grades should pass (with warning) we just return True for now
     assert comp1511_70.validate(user) == True
@@ -224,44 +224,45 @@ def test_grade_condition():
     # Has not taken the course. Should be false
     assert comp1521_70.validate(user) == False
 
-    comp1511_60 = create_condition(["(", "85GRADE", "in", "COMP1511", ")"])
+    comp1511_60 = create_condition(["(", "60GRADE", "in", "COMP1511", ")"])[0]
 
-    comp1511_90 = create_condition(["(", "90GRADE", "in", "COMP1511", ")"])
-    comp1521_90 = create_condition(["(", "90GRADE", "in", "COMP1521", ")"])
-    math1131_90 = create_condition(["(", "90GRADE", "in", "COMP1131", ")"])
+    comp1511_90 = create_condition(["(", "90GRADE", "in", "COMP1511", ")"])[0]
+    comp1521_90 = create_condition(["(", "90GRADE", "in", "COMP1521", ")"])[0]
+    math1131_90 = create_condition(["(", "90GRADE", "in", "COMP1131", ")"])[0]
 
     user1 = create_student_3707_COMPA1()
-    user1.add_course({
+    user1.add_courses({
         "COMP1511": (6, 70),
         "MATH1131": (6, 70),
     })
 
-    assert comp1511_60.validate(user1) == False
+    assert comp1511_60.validate(user1) == True
     assert comp1511_70.validate(user1) == True
     assert comp1521_70.validate(user1) == False
     assert math1131_70.validate(user1) == True
-    assert comp1511_90.validate(user1) == True
+    assert comp1511_90.validate(user1) == False
     assert comp1521_90.validate(user1) == False
-    assert math1131_90.validate(user1) == True
+    assert math1131_90.validate(user1) == False
 
     # Test complex grade conditions
     user2 = create_student_3707_COMPA1()
-    user2.add_course({
+    user2.add_courses({
         "ENGG1000": (6, 50),
         "COMP1511": (6, 65),
         "COMP1521": (6, 85),
         "COMP1531": (6, 90),
     })
 
+    print("100GRADE")
     complex_cond_100 = create_condition(
-        ["(", "100GRADE", "in", "ENGG1000", "||", "100GRADE", "in", "COMP1511", "||", "100GRADE", "in", "COMP1521", ")"])
+        ["(", "100GRADE", "in", "ENGG1000", "||", "100GRADE", "in", "COMP1511", "||", "100GRADE", "in", "COMP1521", ")"])[0]
     assert complex_cond_100.validate(user2) == False
 
     complex_cond_60 = create_condition(
-        ["(", "60GRADE", "in", "ENGG1000", "||", "60GRADE", "in", "COMP1511", "||", "60GRADE", "in", "COMP1521", ")"])
+        ["(", "60GRADE", "in", "ENGG1000", "||", "60GRADE", "in", "COMP1511", "||", "60GRADE", "in", "COMP1521", ")"])[0]
     assert complex_cond_60.validate(user2) == True
 
     # Some courses are not even taken
     complex_cond_70_not_taken = create_condition(
-        ["(", "70GRADE", "in", "MATH1081", "||", "70GRADE", "in", "MATH1131", "||", "70GRADE", "in", "COMP1511", ")"])
-    assert complex_cond_70_not_taken.validate(user2) == True
+        ["(", "70GRADE", "in", "MATH1081", "||", "70GRADE", "in", "MATH1131", "||", "70GRADE", "in", "COMP1511", ")"])[0]
+    assert complex_cond_70_not_taken.validate(user2) == False

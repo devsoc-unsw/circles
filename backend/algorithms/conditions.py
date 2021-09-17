@@ -59,6 +59,10 @@ class User:
         '''Determines if the user has taken this course'''
         return course in self.courses
 
+    def in_program(self, program):
+        '''Determines if the user is in this program code'''
+        return self.program == program
+
 
 class Condition:
     '''The base condition object from which other conditions stem from'''
@@ -173,6 +177,16 @@ class GRADECondition(Condition):
             return True
         else:
             return user.courses[self.course][1] >= self.grade
+
+
+class ProgramCondition(Condition):
+    '''Handles Program conditions such as 3707'''
+
+    def __init__(self, program):
+        self.program = program
+
+    def validate(self, user):
+        return user.in_program(self.program)
 
 
 class CompositeCondition(Condition):
@@ -298,9 +312,10 @@ def create_condition(tokens):
 
             if tokens[index + 1] == "in":
                 # Next token is "in" or else there has been an error
-                next(it)  # Skip "in" keyword
+                next(it)  # Skip "in" keyword and course code
+                next(it)
 
-                result.add_condition(Grade(grade, tokens[index + 2]))
+                result.add_condition(GRADECondition(grade, tokens[index + 2]))
 
                 # NOTE: Don't need to create a category since I think grade ONLY applies to coursecode
                 # grade_category, sub_index = create_category(tokens[index + 2:])
@@ -308,23 +323,9 @@ def create_condition(tokens):
             else:
                 # Error
                 return None, index
-
-            # # If meet 'each', create a grade condition to each course occured
-            # if 'each' in token:
-            #     for course in result.get_condition():
-            #         if isinstance(course, CourseCondition):
-            #             # add square brackets to fit the parameter format of create_cat
-            #             grade_category, _ = create_category(
-            #                 [course.get_course()])
-            #             categories.append(grade_category)
-            #         pass
-            #     pass
-
-            # for cate in categories:
-            #     grade_cond.set_grade_category(cate)
-            # [next(it) for _ in range(sub_index + 1)]
-            # result.add_condition(grade_cond)
-
+        elif is_program(token):
+            # TODO: How will legacy programs be handled? Such as those with 5 letters and 4 numbers
+            result.add_condition(ProgramCondition(token))
         else:
             # Unmatched token. Error
             return None, index
@@ -382,6 +383,16 @@ def get_grade(text):
     grade_str = re.match(r'^(\d+)GRADE$', text, flags=re.IGNORECASE).group(1)
 
     return int(grade_str)
+
+
+def is_program(text):
+    '''Determines if the text is a program code'''
+    # TODO: How will legacy program codes be handled? Currently I think we should parse them as programs as well
+
+    if re.match(r'^\d+', text):
+        return True
+    return False
+
 # tokens = ["(", "COMP1511", "&&", "(", "COMP1521", "||", "COMP1531", ")", ")"]
 # user = User()
 # user.add_courses(["COMP1511", "COMP1531"])
