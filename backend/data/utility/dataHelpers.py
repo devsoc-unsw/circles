@@ -21,9 +21,9 @@ def write_data(data, file_name):
     Writes data to file with given file_name
     """
     if os.path.isfile(file_name):
-        res = input("File name already exists. Enter 'y' to overwrite or 'n' to cancel: ")
+        res = input(f"File {file_name} already exists. Enter 'y' to overwrite or 'n' to cancel: ")
         if res.lower() != "y":
-            print("File not overwritten.")
+            print(f"File {file_name} not overwritten.")
             sys.exit(1)
 
     with open(file_name, "w") as OUTPUT_FILE:

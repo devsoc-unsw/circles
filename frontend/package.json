@@ -24,6 +24,7 @@
     "react-scroll": "^1.8.2",
     "react-spring": "^9.2.3",
     "react-tooltip": "^4.2.21",
+    "react-tsparticles": "^1.33.2",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "tslib": "^2.3.0",

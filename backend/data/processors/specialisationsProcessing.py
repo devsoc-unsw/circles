@@ -58,7 +58,7 @@ def customise_spn_data():
                     "title": container["title"],
                 }
                 curriculum_item["credits_to_complete"] = int(get_credits(container))
-                curriculum_item["type"] = get_type(curriculum_item["title"].lower())
+                curriculum_item["core"] = is_core(curriculum_item["title"].lower())
                 curriculum_item["levels"] = get_levels(curriculum_item["title"].lower())
                 curriculum_item["notes"] = get_notes(container["description"])
 
@@ -120,17 +120,13 @@ def get_credits(container: dict) -> str:
         credits = re.search("(\d+) UOC|[cC]redit", container["description"])
         return credits.group(1)
 
-def get_type(title: str) -> str:
+def is_core(title: str) -> bool:
     """ 
-    Parses 'title' to get curriculum type of specialisation item .
-    Curriculum type is one of {"elective", "core", "other"}.
+    Returns whether container is core.
     """
-    if "elective" in title:
-        return "elective"
-    elif "core" in title:
-        return "core"
-    else:
-        return "other"
+    if "core" in title:
+        return True
+    return False
 
 def get_levels(title: str) -> List[int]:
     """
