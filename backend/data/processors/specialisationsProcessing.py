@@ -210,10 +210,13 @@ def get_courses(curriculum_courses: dict, container_courses: List[str],
     Adds courses from container to the customised curriculum course dict.
     """
     for course in container_courses:
+        
         if "any level" in course: 
             # e.g. modify "any level 4 COMP course" to "COMP4"
             course = process_any_level(course) 
-        curriculum_courses[course] = 1
+            curriculum_courses[course] = 1
+        else:
+            curriculum_courses[course] = container_courses[course]
 
     # TODO: Below is the old code parsing description for course codes. It
     # may come in handy later, but if not then delete

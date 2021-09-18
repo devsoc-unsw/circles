@@ -135,7 +135,7 @@ def get_structure(structure, curr_container):
             "title": element["title"],
             "description": element.get("description"),
             "credit_points": element.get("credit_points"),
-            "courses": [],
+            "courses": {},
             "structure": [], # Structure contains required courses for a 
             # specialisation, and is represented as a list of dicitonaries
         })
@@ -146,16 +146,19 @@ def get_structure(structure, curr_container):
             for course in element["relationship"]:
                 if "academic_item_code" in course:
                     # Note use of '-1' to access last (i.e. current) dictionary in 'structure'
-                    structure[-1]["courses"].append(course["academic_item_code"])
+                        # structure[-1]["courses"].append(course["academic_item_code"])
+                    structure[-1]["courses"][course["academic_item_code"]] = course["academic_item_name"]
                 elif "description" in course and course["description"] != "":
                     # Course info may be provided as a plaintext description if 
                     # not provided as academic_item_code (e.g. 'any level 3 Finance course')
-                    structure[-1]["courses"].append(course["description"])
+                    structure[-1]["courses"][course["description"]] = 1
+                        # structure[-1]["courses"].append(course["description"])
 
         elif "dynamic_relationship" in element and element["dynamic_relationship"] != []:
             for course in element["dynamic_relationship"]:
                 # dynamic_relationship provides course info as a plaintext description
-                structure[-1]["courses"].append(course["description"])
+                    # structure[-1]["courses"].append(course["description"])
+                structure[-1]["courses"][course["description"]] = 1
 
         elif "container" in element and element["container"] != []:
             # Course info in deeper container level, so recurse and repeat
