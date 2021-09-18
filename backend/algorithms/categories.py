@@ -10,11 +10,6 @@ class Category:
     def __init__(self):
         return
 
-    def same_category(self, key):
-        '''Given a specific key, determine if this key belongs to this category'''
-        # Default value is true
-        return True
-
     def uoc(self, user):
         '''Given a user, returns the number of units they have taken for this uoc category'''
         # Default is 1000 to ensure requirement is always met on error
@@ -31,11 +26,6 @@ class CourseCategory(Category):
 
     def __init__(self, code):
         self.code = code
-
-    def same_category(self, key):
-        if key.startswith(self.code):
-            return True
-        return False
 
     def uoc(self, user):
         '''The number of uoc belonging to courses matching the code'''
@@ -54,7 +44,7 @@ class CourseCategory(Category):
             for course, (uoc, grade) in user.courses.items():
                 if grade != None and re.match(rf'{self.code}\d{{4}}', course):
                     total_uoc += uoc
-                    total_wam += grade
+                    total_wam += uoc * grade
 
         # Either no courses matched this or no wam was entered for those courses
         if total_uoc == 0:
@@ -63,7 +53,7 @@ class CourseCategory(Category):
         return total_wam / total_uoc
 
 
-def create_category(tokens, n_parsed=0):
+def create_category(tokens):
     '''Given a list of tokens starting from after the connector keyword, create
     and return the category object matching the category, as well as the current index
     of the token list.'''

@@ -6,14 +6,30 @@
         "UOC": 192,
         "faculty": "Faculty of Science",
         "components": {
-            "GE": {
+            "FE": {
                 "credits_to_complete": 12
             },
-            "FE": {
+            "GE": {
                 "credits_to_complete": 12
             },
             "SpecialisationData": {},
             "NonSpecialisationData": {
+                "Level 3 Core Courses": {
+                    "type": "core",
+                    "credits_to_complete": "24",
+                    "BABS3200": 1,
+                    "BABS3071": 1,
+                    "BABS3031": 1,
+                    "BABS3061": 1
+                },
+                "Level 2 Core Courses": {
+                    "type": "core",
+                    "credits_to_complete": "24",
+                    "MICR2011": 1,
+                    "BIOC2201": 1,
+                    "BIOC2101": 1,
+                    "BABS2011": 1
+                },
                 "Level 1 Core Courses": {
                     "type": "core",
                     "credits_to_complete": "36",
@@ -39,19 +55,19 @@
                 "Level 2 and Level 3 Electives": {
                     "type": "elective",
                     "any level 2 Pharmacology course": 1,
-                    "any level 2 Biotechnology & Biomolecular Sciences course": 1,
-                    "any level 3 Chemistry course": 1,
-                    "any level 3 Faculty of Science course": 1,
                     "any level 3 Microbiology course": 1,
+                    "any level 3 Biotechnology & Biomolecular Sciences course": 1,
                     "any level 3 Biochemistry course": 1,
-                    "any level 2 Faculty of Science course": 1,
                     "any level 2 Medical Science course": 1,
                     "any level 2 Bioinformatics course": 1,
-                    "any level 2 Chemistry course": 1,
                     "any level 3 Medical Science course": 1,
                     "any level 3 Bioinformatics course": 1,
+                    "any level 2 Biotechnology & Biomolecular Sciences course": 1,
+                    "any level 3 Chemistry course": 1,
                     "any level 3 Pharmacology course": 1,
-                    "any level 3 Biotechnology & Biomolecular Sciences course": 1
+                    "any level 2 Faculty of Science course": 1,
+                    "any level 3 Faculty of Science course": 1,
+                    "any level 2 Chemistry course": 1
                 },
                 "Level 4 Core Course": {
                     "type": "core",
@@ -129,12 +145,6 @@
         "UOC": 144,
         "faculty": "UNSW Business School",
         "components": {
-            "FE": {
-                "credits_to_complete": 36
-            },
-            "GE": {
-                "credits_to_complete": 12
-            },
             "SpecialisationData": {
                 "Minors": {
                     "GERSF2": "German Studies",
@@ -318,9 +328,6 @@
         "UOC": 192,
         "faculty": "Faculty of Engineering",
         "components": {
-            "GE": {
-                "credits_to_complete": 12
-            },
             "SpecialisationData": {
                 "Honours": {
                     "MTRNAH": "Mechatronic Engineering",
@@ -347,6 +354,9 @@
                 }
             },
             "NonSpecialisationData": {},
+            "GE": {
+                "credits_to_complete": 12
+            },
             "Minors": {
                 "ENGGA2": 1
             }
@@ -370,6 +380,9 @@
                     "MATHC2": "Mathematics"
                 }
             },
+            "GE": {
+                "credits_to_complete": 12
+            },
             "SpecialisationData": {
                 "Majors": {
                     "COMPS1": "Computer Science (Embedded Systems)",
@@ -382,10 +395,7 @@
                     "COMPY1": "Computer Science (Security Engineering)"
                 }
             },
-            "NonSpecialisationData": {},
-            "GE": {
-                "credits_to_complete": 12
-            }
+            "NonSpecialisationData": {}
         }
     },
     "3805": {
@@ -651,11 +661,43 @@
         "UOC": 144,
         "faculty": "Faculty of Science",
         "components": {
-            "FE": {
-                "credits_to_complete": 24
+            "Science Elective Courses": {
+                "credits_to_complete": 12,
+                "courses": {
+                    "any Climate Science course": 1,
+                    "any Pathology course": 1,
+                    "any Vision Science course": 1,
+                    "any Biochemistry course": 1,
+                    "any Geoscience course": 1,
+                    "any Pharmacology course": 1,
+                    "any Neuroscience course": 1,
+                    "any Biological, Earth & Environmental Science course": 1,
+                    "any Biological Science course": 1,
+                    "any Computer Science course": 1,
+                    "any Microbiology course": 1,
+                    "any Biotechnology course": 1,
+                    "any Faculty of Science course": 1,
+                    "any Materials Science and Engineering course": 1,
+                    "any Anatomy course": 1,
+                    "any Food Technology course": 1,
+                    "any Aviation course": 1,
+                    "any Chemistry course": 1,
+                    "any Medical Science course": 1,
+                    "any Physiology course": 1,
+                    "any Data Science course": 1,
+                    "any Optometry course": 1,
+                    "any Biotechnology & Biomolecular Sciences course": 1,
+                    "any Psychology course": 1,
+                    "any Physics course": 1,
+                    "any Mathematics course": 1,
+                    "any Marine Science course": 1
+                }
             },
             "GE": {
                 "credits_to_complete": 12
+            },
+            "FE": {
+                "credits_to_complete": 24
             },
             "SpecialisationData": {
                 "Minors": {
@@ -710,64 +752,32 @@
             "NonSpecialisationData": {
                 "Science Electives": {
                     "type": "elective",
-                    "any Chemistry course": 1,
-                    "any Faculty of Science course": 1,
-                    "any Psychology course": 1,
-                    "any Computer Science course": 1,
-                    "any Biological Science course": 1,
-                    "any Biotechnology & Biomolecular Sciences course": 1,
-                    "any Geoscience course": 1,
-                    "any Climate Science course": 1,
-                    "any Physics course": 1,
-                    "any Food Technology course": 1,
-                    "any Anatomy course": 1,
-                    "any Biological, Earth & Environmental Science course": 1,
-                    "any Aviation course": 1,
                     "any Mathematics course": 1,
-                    "any Optometry course": 1,
-                    "any Materials Science and Engineering course": 1,
                     "any Pharmacology course": 1,
-                    "any Neuroscience course": 1,
-                    "any Physiology course": 1,
-                    "any Vision Science course": 1,
-                    "any Biochemistry course": 1,
-                    "any Microbiology course": 1,
-                    "any Biotechnology course": 1,
-                    "any Pathology course": 1,
-                    "any Medical Science course": 1,
-                    "any Marine Science course": 1
-                }
-            },
-            "Science Elective Courses": {
-                "credits_to_complete": 12,
-                "courses": {
-                    "any Optometry course": 1,
-                    "any Physics course": 1,
-                    "any Computer Science course": 1,
-                    "any Chemistry course": 1,
-                    "any Climate Science course": 1,
-                    "any Psychology course": 1,
                     "any Food Technology course": 1,
+                    "any Physics course": 1,
+                    "any Materials Science and Engineering course": 1,
+                    "any Climate Science course": 1,
+                    "any Biotechnology & Biomolecular Sciences course": 1,
+                    "any Medical Science course": 1,
                     "any Physiology course": 1,
+                    "any Faculty of Science course": 1,
                     "any Marine Science course": 1,
-                    "any Mathematics course": 1,
-                    "any Materials Science and Engineering course": 1,
-                    "any Biotechnology course": 1,
-                    "any Biological Science course": 1,
-                    "any Data Science course": 1,
-                    "any Biochemistry course": 1,
-                    "any Neuroscience course": 1,
-                    "any Anatomy course": 1,
-                    "any Biological, Earth & Environmental Science course": 1,
-                    "any Faculty of Science course": 1,
-                    "any Pharmacology course": 1,
-                    "any Medical Science course": 1,
-                    "any Microbiology course": 1,
-                    "any Biotechnology & Biomolecular Sciences course": 1,
                     "any Geoscience course": 1,
-                    "any Pathology course": 1,
+                    "any Biological, Earth & Environmental Science course": 1,
+                    "any Psychology course": 1,
                     "any Vision Science course": 1,
-                    "any Aviation course": 1
+                    "any Neuroscience course": 1,
+                    "any Aviation course": 1,
+                    "any Anatomy course": 1,
+                    "any Pathology course": 1,
+                    "any Biotechnology course": 1,
+                    "any Chemistry course": 1,
+                    "any Microbiology course": 1,
+                    "any Computer Science course": 1,
+                    "any Biochemistry course": 1,
+                    "any Biological Science course": 1,
+                    "any Optometry course": 1
                 }
             }
         }

@@ -7,7 +7,6 @@ from categories import *
 '''Keywords'''
 AND = 1
 OR = 2
-IN = 3
 
 
 class User:
@@ -18,27 +17,35 @@ class User:
         self.program = None  # NOTE: For now this is only single degree
         self.specialisations = {}
         self.uoc = 0
-        self.wam = 0
+        self.wam = None
         self.year = 0  # TODO
 
     def add_courses(self, courses):
         '''Given a dictionary of courses mapping course code to a (uoc, grade) tuple,
         adds the course to the user and updates the uoc/grade at the same time.
-        NOTE: It is assumed that the user has not taken any of these courses yet
+        NOTE: For now, this does not do anything for courses which the user has already taken
         '''
-        self.courses = courses.copy()
+        for course in courses:
+            if course not in self.courses:
+                self.courses[course] = courses[course]
 
         # Determine the total wam (wam * uoc) of the user
-        total_wam = self.wam * self.uoc
+        if self.wam != None:
+            total_wam = self.wam * self.uoc
+        else:
+            total_wam = 0
 
         # Update the uoc and carefully update the wam for all the new given courses
-        for course, (uoc, grade) in courses.item():
+        no_wam = True  # Flag to determine if the user has chosen to upload any wam
+        for course, (uoc, grade) in courses.items():
             self.uoc += uoc
 
             if grade != None:
+                no_wam = False
                 total_wam += uoc * grade
 
-        self.wam = total_wam / self.uoc
+        if no_wam == False:
+            self.wam = total_wam / self.uoc
 
     def add_program(self, program):
         '''Adds a program to this user'''
@@ -51,6 +58,10 @@ class User:
     def has_taken_course(self, course):
         '''Determines if the user has taken this course'''
         return course in self.courses
+
+    def in_program(self, program):
+        '''Determines if the user is in this program code'''
+        return self.program == program
 
 
 class Condition:
@@ -73,6 +84,9 @@ class CourseCondition(Condition):
     def __init__(self, course):
         self.course = course
 
+    def get_course(self):
+        return self.course
+
     def validate(self, user):
         '''Returns true if the user has taken this course before'''
         return user.has_taken_course(self.course)
@@ -81,33 +95,29 @@ class CourseCondition(Condition):
 class UOCCondition(Condition):
     '''UOC conditions such as "24UOC in COMP"'''
 
-    def __init__(self, uoc, connector=None):
+    def __init__(self, uoc):
         self.uoc = uoc
-        self.connector = connector  # Could be IN (only IN for now)
 
-        # The conditional uoc category attached to this object. If the connector is IN, then
-        # UOC must be from within this conditional. E.g.
+        # The conditional uoc category attached to this object.
+        # If there is a cateogry, UOC must be from within this category. E.g.
         # COMPA1 - courses within COMPA1
         # SENG - course codes starting with SENG
         # L4 - level 4 courses
         # L2 MATH - level 2 courses starting with MATH
         # CORE - core courses
         # And more...
-        self.uoc_category = None
+        self.category = None
 
-    def set_uoc_category(self, uoc_category_classobj):
-        self.uoc_category = uoc_category_classobj
+    def set_category(self, category_classobj):
+        self.category = category_classobj
 
     def validate(self, user):
-        if self.connector == None:
-            # Determine if the user has taken enough units
+        if self.category == None:
+            # Simple UOC condition
             return user.uoc >= self.uoc
-        elif self.connector == IN:
-            # The user must have taken enough UOC in the given conditional
-            return self.uoc_category.uoc(user) >= self.uoc
         else:
-            # NOTE: No case for this but let's just return true for now
-            return True
+            # The user must have taken enough uoc in the given category
+            return self.category.uoc(user) >= self.uoc
 
 
 class WAMCondition(Condition):
@@ -116,31 +126,67 @@ class WAMCondition(Condition):
     def __init__(self, wam):
         self.wam = wam
 
-        # The conditional wam category attached to this object. If the connector is in,
-        # then the WAM must be from within this conditional. E.g.
-        # 80WAM in (COMP || BINH || SENG)
-        # NOTE: For now we assume OR condition
-        self.categories = []
+        # The conditional wam category attached to this object.
+        # If a category is attached, then the WAM must be from within this category. E.g.
+        # 80WAM in COMP
+        # NOTE: We will convert 80WAM in (COMP || BINH || SENG) to:
+        # 80WAM in COMP || 80WAM in BINH || 80WAM in SENG
+        # so that only one category is attached to this wam condition
+        self.category = None
+
+    def set_category(self, category_classobj):
+        self.category = category_classobj
 
     def validate(self, user):
+        # Returns true if the wam condition is met for a single category.
+        # Returns true if all applicable WAM is None
         # TODO: Make this return some warning in the future so WAM conditions do
         # not gate keep the user
         if user.wam == None:
-            # Default is False
-            return False
-
-        if not self.categories:
+            # Default is True
+            return True
+        elif self.category == None:
             # Simple WAM condition
             return user.wam >= self.wam
         else:
-            # If a single WAM conditional is met, we return true
-            for category in self.categories:
-                category_wam = category.wam(user)
-                if category_wam == None:
-                    continue
-                elif category_wam >= self.wam:
-                    return True
+            # The user must have a high enough wam in the given category
+            category_wam = self.category.wam(user)
+            if category_wam == None:
+                return True  # TODO: Make this a warning
+            else:
+                return category_wam >= self.wam
+
+
+class GRADECondition(Condition):
+    '''Handles GRADE conditions such as 65GRADE and 80GRADE in [A-Z]{4}[0-9]{4}'''
+
+    def __init__(self, grade, course):
+        self.grade = grade
+
+        # Course code
+        self.course = course
+
+    def validate(self, user):
+        # TODO: Make this return some warning in the future so GRADE conditions do
+        # not gate keep the user
+        if self.course not in user.courses:
+            # They have not taken the course
             return False
+        elif user.courses[self.course][1] == None:
+            # TODO: Make this return a warning as well. Return True for now
+            return True
+        else:
+            return user.courses[self.course][1] >= self.grade
+
+
+class ProgramCondition(Condition):
+    '''Handles Program conditions such as 3707'''
+
+    def __init__(self, program):
+        self.program = program
+
+    def validate(self, user):
+        return user.in_program(self.program)
 
 
 class CompositeCondition(Condition):
@@ -155,6 +201,9 @@ class CompositeCondition(Condition):
     def add_condition(self, condition_classobj):
         '''Adds a condition object'''
         self.conditions.append(condition_classobj)
+
+    def get_condition(self):
+        return self.conditions
 
     def set_logic(self, logic):
         '''AND or OR'''
@@ -201,7 +250,7 @@ def create_condition(tokens):
                 # Error. Return None
                 return None, sub_index
             else:
-                # Adjust the current position to scan the next token after this sub result
+                # Adjust the cur/rent position to scan the next token after this sub result
                 result.add_condition(sub_result)
                 [next(it) for _ in range(sub_index + 1)]
         elif token == ')':
@@ -217,32 +266,65 @@ def create_condition(tokens):
             # Condition for a single course
             result.add_condition(CourseCondition(token))
         elif is_uoc(token):
+            # Condition for UOC requirement
             uoc = get_uoc(token)
-            # Check the next word to determine logic. NOTE: This will never go
-            # out of bounds since the last token is always a ')'
+            uoc_cond = UOCCondition(uoc)
+
             if tokens[index + 1] == "in":
-                # In connector
-                uoc_cond = UOCCondition(uoc, IN)
+                # Create category according to the token after 'in'
                 next(it)  # Skip "in" keyword
 
                 # Get the category of the uoc condition
-                uoc_category, sub_index = create_category(tokens[index + 2:])
+                category, sub_index = create_category(tokens[index + 2:])
 
-                if uoc_category == None:
+                if category == None:
                     # Error. Return None. (Could also potentially set the uoc category
                     # to just the default Category which returns true and 1000 uoc taken)
                     return None, index
                 else:
                     # Add the category to the uoc and adjust the current index position
-                    uoc_cond.set_uoc_category(uoc_category)
+                    uoc_cond.set_category(category)
                     [next(it) for _ in range(sub_index + 1)]
-            else:
-                # No connector. Simple UOC condition
-                uoc_cond = UOCCondition(uoc)
 
             result.add_condition(uoc_cond)
         elif is_wam(token):
+            # Condition for WAM requirement
             wam = get_wam(token)
+            wam_cond = WAMCondition(wam)
+
+            if tokens[index + 1] == "in":
+                # Create category according to the token after 'in'
+                next(it)  # Skip "in" keyword
+                category, sub_index = create_category(tokens[index + 2:])
+
+                if category == None:
+                    # If can't parse the category, return None(raise an error)
+                    return None, index
+                else:
+                    # Add the category and adjust the current index position
+                    wam_cond.set_category(category)
+                    [next(it) for _ in range(sub_index + 1)]
+
+            result.add_condition(wam_cond)
+        elif is_grade(token):
+            # Condition for GRADE requirement (mark in a single course)
+            grade = get_grade(token)
+
+            if tokens[index + 1] == "in":
+                # Next token is "in" or else there has been an error
+                next(it)  # Skip "in" keyword and course code
+                next(it)
+
+                result.add_condition(GRADECondition(grade, tokens[index + 2]))
+
+                # NOTE: Don't need to create a category since I think grade ONLY applies to coursecode
+                # grade_category, sub_index = create_category(tokens[index + 2:])
+                # categories.append(grade_category)
+            else:
+                # Error
+                return None, index
+        elif is_program(token):
+            result.add_condition(ProgramCondition(token))
         else:
             # Unmatched token. Error
             return None, index
@@ -268,7 +350,7 @@ def is_uoc(text):
 
 
 def get_uoc(text):
-    '''Given a text in the format of \d+UOC, will extract the uoc and return as an int'''
+    '''Given a text in the format of ???UOC, will extract the uoc and return as an int'''
     uoc_str = re.match(r'^(\d+)UOC$', text, flags=re.IGNORECASE).group(1)
 
     return int(uoc_str)
@@ -282,10 +364,31 @@ def is_wam(text):
 
 
 def get_wam(text):
-    '''Given a text in the format of \d+WAM, will extract the wam and return as a int'''
+    '''Given a text in the format of ???WAM, will extract the wam and return as a int'''
     wam_str = re.match(r'^(\d+)WAM$', text, flags=re.IGNORECASE).group(1)
 
     return int(wam_str)
+
+
+def is_grade(text):
+    '''If the text is GRADE'''
+    if re.match(r'^\d+GRADE$', text, flags=re.IGNORECASE):
+        return True
+    return False
+
+
+def get_grade(text):
+    '''Given a text in the format of ???GRADE, will extract the grade and return as a int'''
+    grade_str = re.match(r'^(\d+)GRADE$', text, flags=re.IGNORECASE).group(1)
+
+    return int(grade_str)
+
+
+def is_program(text):
+    '''Determines if the text is a program code'''
+    if re.match(r'^\d{4}', text):
+        return True
+    return False
 
 # tokens = ["(", "COMP1511", "&&", "(", "COMP1521", "||", "COMP1531", ")", ")"]
 # user = User()

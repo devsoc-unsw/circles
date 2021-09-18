@@ -1,0 +1,17 @@
+"65GRADE in COMP1927"
+
+"MATH1231 || DPST1014 || MATH1241 || MATH1251 each with 70GRADE"
+--> 70GRADE in (MATH1231 || DPST1014 || MATH1241 || MATH1251)
+UPDATE: I am gonna change this to:
+70GRADE in MATH1231 || 70GRADE in DPST1014 || 70GRADE in MATH1241 || 70GRADE in MATH1251
+for now cause way easier to code... 
+In the future we might do something with multiple categories
+
+
+
+Average of 2 Level 2 MATH courses
+"12UOC in L2 Mathematics with an average 70GRADE"
+--> 70GRADE in (12UOC in L2 MATH)
+... This is kind of hard... I can try to code it when you're gone and if I can't
+do it by the time you come back, we can discuss
+UPDATE: LOL LET'S NOT BOTHER WITH THIS
