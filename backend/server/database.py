@@ -17,10 +17,11 @@ coursesCOL = db["Courses"]
 
 
 '''Helper functions'''
-# Give it the collection name to overwrite: 'Programs', 'Specialisations', 'Courses'
 
 
 def overwrite_collection(collection_name):
+    """Overwrites the specific database via reading from the json files.
+    Collection names can be: Programs, Specialisations, Courses"""
     file_name = FINAL_DATA_PATH + collection_name.lower() + "Processed.json"
 
     with open(file_name) as f:
