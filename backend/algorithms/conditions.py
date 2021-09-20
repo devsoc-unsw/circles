@@ -15,7 +15,7 @@ class User:
     def __init__(self):
         self.courses = {}
         self.program = None  # NOTE: For now this is only single degree
-        self.specialisations = {}
+        self.specialisations = []
         self.uoc = 0
         self.wam = None
         self.year = 0  # TODO
@@ -62,6 +62,10 @@ class User:
     def in_program(self, program):
         '''Determines if the user is in this program code'''
         return self.program == program
+
+    def in_specialisation(self, specialisation):
+        '''Determines if the user is in the specialisation'''
+        return specialisation in self.specialisations
 
 
 class Condition:
@@ -187,6 +191,16 @@ class ProgramCondition(Condition):
 
     def validate(self, user):
         return user.in_program(self.program)
+
+
+class SpecialisationCondition(Condition):
+    '''Handles Specialisation conditions such as COMPA1'''
+
+    def __init__(self, specialisation):
+        self.specialisation = specialisation
+
+    def validate(self, user):
+        return user.in_specialisation(self.specialisation)
 
 
 class CompositeCondition(Condition):
@@ -325,6 +339,8 @@ def create_condition(tokens):
                 return None, index
         elif is_program(token):
             result.add_condition(ProgramCondition(token))
+        elif is_specialisation(token):
+            result.add_condition(SpecialisationCondition(token))
         else:
             # Unmatched token. Error
             return None, index
@@ -387,6 +403,13 @@ def get_grade(text):
 def is_program(text):
     '''Determines if the text is a program code'''
     if re.match(r'^\d{4}', text):
+        return True
+    return False
+
+
+def is_specialisation(text):
+    '''Determines if the text is a specialisation code'''
+    if re.match(r'^[A-Z]{4}\d{2}', text, flags=re.IGNORECASE):
         return True
     return False
 
