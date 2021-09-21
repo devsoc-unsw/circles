@@ -66,11 +66,11 @@ if args.stage == 'all':
             f"Careful. You are about to run all stages of {args.type} INCLUDING the scrapers... Enter 'y' if you wish to proceed or 'n' to cancel: ")
         if res == 'y':
             for s in run[args.type]:
-                run[args.stage][s]()
+                run[args.type][s]()
     else:
         # Conditions
         for s in run[args.type]:
-            run[args.stage][s]
+            run[args.type][s]()
 else:
     # Run the specific process
     run[args.type][args.stage]()
