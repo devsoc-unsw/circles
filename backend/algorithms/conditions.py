@@ -15,7 +15,7 @@ class User:
     def __init__(self):
         self.courses = {}
         self.program = None  # NOTE: For now this is only single degree
-        self.specialisations = []
+        self.specialisations = {}
         self.uoc = 0
         self.wam = None
         self.year = 0  # TODO
