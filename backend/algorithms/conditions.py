@@ -68,21 +68,8 @@ class User:
         return specialisation in self.specialisations
 
 
-class Condition:
-    '''The base condition object from which other conditions stem from'''
 
-    def __init__(self):
-        return
-
-    def validate(self, user):
-        '''Default value is true for something with no prerequisites'''
-        return True
-
-    def show(self):
-        print("empty!")
-
-
-class CourseCondition(Condition):
+class CourseCondition():
     '''Condition that the student has completed this course'''
 
     def __init__(self, course):
@@ -96,7 +83,7 @@ class CourseCondition(Condition):
         return user.has_taken_course(self.course)
 
 
-class UOCCondition(Condition):
+class UOCCondition():
     '''UOC conditions such as "24UOC in COMP"'''
 
     def __init__(self, uoc):
@@ -124,7 +111,7 @@ class UOCCondition(Condition):
             return self.category.uoc(user) >= self.uoc
 
 
-class WAMCondition(Condition):
+class WAMCondition():
     '''Handles WAM conditions such as 65WAM and 80WAM in'''
 
     def __init__(self, wam):
@@ -161,7 +148,7 @@ class WAMCondition(Condition):
                 return category_wam >= self.wam
 
 
-class GRADECondition(Condition):
+class GRADECondition():
     '''Handles GRADE conditions such as 65GRADE and 80GRADE in [A-Z]{4}[0-9]{4}'''
 
     def __init__(self, grade, course):
@@ -183,7 +170,7 @@ class GRADECondition(Condition):
             return user.courses[self.course][1] >= self.grade
 
 
-class ProgramCondition(Condition):
+class ProgramCondition():
     '''Handles Program conditions such as 3707'''
 
     def __init__(self, program):
@@ -193,7 +180,7 @@ class ProgramCondition(Condition):
         return user.in_program(self.program)
 
 
-class SpecialisationCondition(Condition):
+class SpecialisationCondition():
     '''Handles Specialisation conditions such as COMPA1'''
 
     def __init__(self, specialisation):
@@ -203,7 +190,7 @@ class SpecialisationCondition(Condition):
         return user.in_specialisation(self.specialisation)
 
 
-class CompositeCondition(Condition):
+class CompositeCondition():
     '''Handles AND/OR clauses comprised of condition objects.
     NOTE: This will not handle clauses including BOTH && and || as it is assumed
     that brackets will have been used to prevent ambiguity'''
@@ -222,16 +209,6 @@ class CompositeCondition(Condition):
     def set_logic(self, logic):
         '''AND or OR'''
         self.logic = logic
-
-    def simplify(self):
-        '''Simplifies unnecessary nesting'''
-        if not self.conditions:
-            return Condition()
-
-        if len(self.conditions) == 1:
-            return self.conditions[0]
-
-        return self
 
     def validate(self, user):
         if self.logic == AND:
@@ -345,8 +322,7 @@ def create_condition(tokens):
             # Unmatched token. Error
             return None, index
 
-    # Simplify the result and return it
-    return result.simplify(), index
+    return result, index
 
 
 '''HELPER FUNCTIONS TO DETERMINE THE TYPE OF A GIVEN TEXT'''
