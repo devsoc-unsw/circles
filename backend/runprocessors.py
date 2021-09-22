@@ -1,8 +1,6 @@
 '''The driver for our procsesors. Provide the relevant command line arguments
 in order to run the relevant drivers'''
 
-# TODO: import courseScraper
-
 import sys
 import argparse
 import glob
@@ -22,11 +20,19 @@ from data.processors.coursesProcessing import process_courses as process_course_
 from data.processors.conditionsPreprocessing import preprocess_conditions
 from data.processors.conditions_tokenising import tokenise_conditions
 
+from algorithms.cache.cache import cache_exclusions
+
 parser = argparse.ArgumentParser()
 parser.add_argument('--type', type=str,
-                    help='program, specialisation, course or condition')
+                    help='program, specialisation, course, condition, algorithm')
 parser.add_argument('--stage', type=str,
-                    help='all, scrape, format, process (or manual/tokenise for conditions manual fixes)')
+                    help=
+                    '''
+                    (any) --> all
+                    program/specialisation/course --> scrape, format, process
+                    condition --> process, manual, tokenise
+                    algorithm --> exclusion
+                    ''')
 
 try:
     args = parser.parse_args()
@@ -54,6 +60,9 @@ run = {
         'process': preprocess_conditions,
         # 'manual': fix_conditions
         'tokenise': tokenise_conditions
+    },
+    'algorithm': {
+        'exclusion': cache_exclusions
     }
 }
 
