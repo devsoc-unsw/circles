@@ -131,8 +131,9 @@ def create_category(tokens):
     and return the category object matching the category, as well as the current index
     of the token list.'''
 
-
     # At most we will only parse 1 or 2 tokens so no need for an iterator
+    # NOTE: There will always be at least 2 tokens due to a closing ")" bracket
+    # so it is safe to check tokens[1]
     if re.match(r'^[A-Z]{4}$', tokens[0], flags=re.IGNORECASE):
         # Course type
         return CourseCategory(tokens[0]), 0
@@ -141,10 +142,7 @@ def create_category(tokens):
         level = int(re.match(r'^L([0-9])$', tokens[0],
                     flags=re.IGNORECASE).group(1))
 
-        if len(tokens) == 1:
-            # There are no tokens after this. Simple level category
-            return LevelCategory(level), 0
-        elif re.match(r'^[A-Z]{4}$', tokens[1], flags=re.IGNORECASE):
+        if re.match(r'^[A-Z]{4}$', tokens[1], flags=re.IGNORECASE):
             # Level Course Category. e.g. L2 MATH
             course_code = re.match(r'^([A-Z]{4})$', tokens[1], flags=re.IGNORECASE).group(1)
 
