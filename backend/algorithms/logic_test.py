@@ -267,6 +267,31 @@ def test_grade_condition():
     assert complex_cond_70_not_taken.validate(user2) == False
 
 
+def test_specialisation_condition_simple():
+    """Testing simple specialisation condition such as enrolled in COMPA1"""
+    user = create_student_3707_COMPA1()
+    user.add_specialisation("ACCTA2")
+    
+    compa1_cond = create_condition(["(", "COMPA1", ")"])[0]
+    accta2_cond = create_condition(["(", "ACCTA2", ")"])[0]
+    finsa2_cond = create_condition(["(", "FINSA2", ")"])[0]
+
+    assert compa1_cond.validate(user) == True
+    assert accta2_cond.validate(user) == True
+    assert finsa2_cond.validate(user) == False
+
+
+def test_program_condition_simple():
+    """Testing simple program condition such as enrolled in 3707"""
+    user = create_student_3707_COMPA1()
+    
+    cond_3707 = create_condition(["(", "3707", ")"])[0]
+    cond_3778 = create_condition(["(", "3778", ")"])[0]
+
+    assert cond_3707.validate(user) == True
+    assert cond_3778.validate(user) == False
+
+
 def test_level_course_condition():
     '''Testing level conditions with course category such as L2 MATH'''
     user = create_student_3707_COMPA1()

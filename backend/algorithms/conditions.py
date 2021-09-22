@@ -49,7 +49,7 @@ class User:
 
     def add_program(self, program):
         '''Adds a program to this user'''
-        self.program  # TODO: This should update to reflect UOC of user
+        self.program = program # TODO: This should update to reflect UOC of user
 
     def add_specialisation(self, specialisation):
         '''Adds a specialisation to this user'''
@@ -409,7 +409,7 @@ def is_program(text):
 
 def is_specialisation(text):
     '''Determines if the text is a specialisation code'''
-    if re.match(r'^[A-Z]{4}\d{2}', text, flags=re.IGNORECASE):
+    if re.match(r'^[A-Z]{5}\d$', text, flags=re.IGNORECASE):
         return True
     return False
 
