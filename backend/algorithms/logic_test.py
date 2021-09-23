@@ -253,7 +253,6 @@ def test_grade_condition():
         "COMP1531": (6, 90),
     })
 
-    print("100GRADE")
     complex_cond_100 = create_condition(
         ["(", "100GRADE", "in", "ENGG1000", "||", "100GRADE", "in", "COMP1511", "||", "100GRADE", "in", "COMP1521", ")"])[0]
     assert complex_cond_100.validate(user2) == False
@@ -266,3 +265,158 @@ def test_grade_condition():
     complex_cond_70_not_taken = create_condition(
         ["(", "70GRADE", "in", "MATH1081", "||", "70GRADE", "in", "MATH1131", "||", "70GRADE", "in", "COMP1511", ")"])[0]
     assert complex_cond_70_not_taken.validate(user2) == False
+
+
+def test_specialisation_condition_simple():
+    """Testing simple specialisation condition such as enrolled in COMPA1"""
+    user = create_student_3707_COMPA1()
+    user.add_specialisation("ACCTA2")
+
+    compa1_cond = create_condition(["(", "COMPA1", ")"])[0]
+    accta2_cond = create_condition(["(", "ACCTA2", ")"])[0]
+    finsa2_cond = create_condition(["(", "FINSA2", ")"])[0]
+
+    assert compa1_cond.validate(user) == True
+    assert accta2_cond.validate(user) == True
+    assert finsa2_cond.validate(user) == False
+
+
+def test_program_condition_simple():
+    """Testing simple program condition such as enrolled in 3707"""
+    user = create_student_3707_COMPA1()
+
+    cond_3707 = create_condition(["(", "3707", ")"])[0]
+    cond_3778 = create_condition(["(", "3778", ")"])[0]
+
+    assert cond_3707.validate(user) == True
+    assert cond_3778.validate(user) == False
+
+
+def test_level_condition_simple():
+    '''Testing simple levl conditions with levels such as 24UOC in L1 or 70WAM in L2'''
+    user = create_student_3707_COMPA1()
+    user.add_courses({
+        "COMP1511": (6, None),
+        "COMP1521": (6, None),
+        "MATH1081": (6, None),
+        "COMP2521": (6, None),
+        "MATH2931": (6, None),
+        "SENG3011": (6, None)
+    })
+
+    # UOC conditions
+    l1_6uoc_cond = create_condition(["(", "6UOC", "in", "L1", ")"])[0]
+    l1_18uoc_cond = create_condition(["(", "18UOC", "in", "L1", ")"])[0]
+    l1_30uoc_cond = create_condition(["(", "30UOC", "in", "L1", ")"])[0]
+    l2_6uoc_cond = create_condition(["(", "6UOC", "in", "L2", ")"])[0]
+    l2_12uoc_cond = create_condition(["(", "12UOC", "in", "L2", ")"])[0]
+    l2_18uoc_cond = create_condition(["(", "18UOC", "in", "L2", ")"])[0]
+    l3_6uoc_cond = create_condition(["(", "6UOC", "in", "L3", ")"])[0]
+    l3_12uoc_cond = create_condition(["(", "12UOC", "in", "L3", ")"])[0]
+
+    assert l1_6uoc_cond.validate(user) == True
+    assert l1_18uoc_cond.validate(user) == True
+    assert l1_30uoc_cond.validate(user) == False
+    assert l2_6uoc_cond.validate(user) == True
+    assert l2_12uoc_cond.validate(user) == True
+    assert l2_18uoc_cond.validate(user) == False
+    assert l3_6uoc_cond.validate(user) == True
+    assert l3_12uoc_cond.validate(user) == False
+
+    # WAM conditions
+    l1_70wam_cond = create_condition(["(", "70WAM", "in", "L1", ")"])[0]
+    l1_90wam_cond = create_condition(["(", "90WAM", "in", "L1", ")"])[0]
+    l2_70wam_cond = create_condition(["(", "70WAM", "in", "L2", ")"])[0]
+    l2_90wam_cond = create_condition(["(", "90WAM", "in", "L2", ")"])[0]
+    l3_90wam_cond = create_condition(["(", "90WAM", "in", "L3", ")"])[0]
+
+
+    # TODO: None grades should pass (with warning) we just return True for now
+    assert l1_70wam_cond.validate(user) == True
+    assert l1_90wam_cond.validate(user) == True
+    assert l2_70wam_cond.validate(user) == True
+    assert l2_90wam_cond.validate(user) == True
+    assert l3_90wam_cond.validate(user) == True
+
+    user1 = create_student_3707_COMPA1()
+    user1.add_courses({
+        "COMP1511": (6, 70),
+        "COMP1521": (6, 80),
+        "MATH1081": (6, 90),
+        "COMP2521": (6, 90),
+        "MATH2931": (6, 100),
+        "SENG3011": (6, 60)
+    })
+
+    assert l1_70wam_cond.validate(user1) == True
+    assert l1_90wam_cond.validate(user1) == False
+    assert l2_70wam_cond.validate(user1) == True
+    assert l2_90wam_cond.validate(user1) == True
+    assert l3_90wam_cond.validate(user1) == False
+
+
+def test_level_course_condition():
+    '''Testing level conditions with course category such as L2 MATH'''
+    user = create_student_3707_COMPA1()
+    user.add_courses({
+        "COMP1511": (6, None),
+        "MATH1131": (6, None),
+        "MATH1151": (6, None),
+        "MATH2400": (3, None),
+        "MATH2859": (3, None),
+        "MATH2931": (6, None),
+    })
+
+    # UOC conditions
+    l1_comp_6uoc_cond = create_condition(["(", "6UOC", "in", "L1", "COMP", ")"])[0]
+    l1_comp_12uoc_cond = create_condition(["(", "12UOC", "in", "L1", "COMP", ")"])[0]
+    l1_math_6uoc_cond = create_condition(["(", "6UOC", "in", "L1", "MATH", ")"])[0]
+    l2_math_12uoc_cond = create_condition(["(", "12UOC", "in", "L2", "MATH", ")"])[0]
+    l2_math_18uoc_cond = create_condition(["(", "18UOC", "in", "L2", "MATH", ")"])[0]
+
+    assert l1_comp_6uoc_cond.validate(user) == True
+    assert l1_comp_12uoc_cond.validate(user) == False
+    assert l1_math_6uoc_cond.validate(user) == True
+    assert l2_math_12uoc_cond.validate(user) == True
+    assert l2_math_18uoc_cond.validate(user) == False
+
+    # WAM conditions
+    l1_comp_70wam_cond = create_condition(["(", "70WAM", "in", "L1", "COMP", ")"])[0]
+    l1_comp_90wam_cond = create_condition(["(", "90WAM", "in", "L1", "COMP", ")"])[0]
+    l2_comp_70wam_cond = create_condition(["(", "70WAM", "in", "L2", "COMP", ")"])[0]
+    l2_comp_90wam_cond = create_condition(["(", "90WAM", "in", "L2", "COMP", ")"])[0]
+    l1_math_70wam_cond = create_condition(["(", "70WAM", "in", "L1", "MATH", ")"])[0]
+    l1_math_90wam_cond = create_condition(["(", "90WAM", "in", "L1", "MATH", ")"])[0]
+    l2_math_70wam_cond = create_condition(["(", "70WAM", "in", "L2", "MATH", ")"])[0]
+    l2_math_90wam_cond = create_condition(["(", "90WAM", "in", "L2", "MATH", ")"])[0]
+
+    # TODO: None grades should pass (with warning) we just return True for now
+    assert l1_comp_70wam_cond.validate(user) == True
+    assert l1_comp_90wam_cond.validate(user) == True
+    assert l2_comp_70wam_cond.validate(user) == True
+    assert l2_comp_90wam_cond.validate(user) == True
+    assert l1_math_70wam_cond.validate(user) == True
+    assert l1_math_90wam_cond.validate(user) == True
+    assert l2_math_70wam_cond.validate(user) == True
+    assert l2_math_90wam_cond.validate(user) == True
+
+    user1 = create_student_3707_COMPA1()
+    user1.add_courses({
+        "COMP1511": (6, 80),
+        "MATH1131": (6, 100),
+        "MATH1151": (6, 100),
+        "MATH2400": (3, 70),
+        "MATH2859": (3, 70),
+        "MATH2931": (6, 70)
+    })
+
+    assert l1_comp_70wam_cond.validate(user1) == True
+    assert l1_comp_90wam_cond.validate(user1) == False
+
+    # TODO: How to deal with this? None grade but we haven't even taken the courses...
+    assert l2_comp_70wam_cond.validate(user1) == True
+    assert l2_comp_90wam_cond.validate(user1) == True
+    assert l1_math_70wam_cond.validate(user1) == True
+    assert l1_math_90wam_cond.validate(user1) == True
+    assert l2_math_70wam_cond.validate(user1) == True
+    assert l2_math_90wam_cond.validate(user1) == False

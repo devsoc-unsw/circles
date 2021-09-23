@@ -3,11 +3,6 @@
         "(",
         ")"
     ],
-    "ACCT1511": [
-        "(",
-        "ACCT1501",
-        ")"
-    ],
     "ACCT2101": [
         "(",
         "Enrolment in Accounting Co-op Major",
@@ -19,6 +14,8 @@
     "ACCT2511": [
         "(",
         "COMM1140",
+        "||",
+        "ACCT1501",
         ")"
     ],
     "ACCT2522": [
@@ -203,6 +200,12 @@
         "MATH2901",
         ")",
         "&&",
+        "(",
+        "ACTL3142",
+        "||",
+        "MATH2931",
+        ")",
+        "&&",
         "ACTL2102",
         ")"
     ],
@@ -226,6 +229,11 @@
         "&&",
         "MATH2931",
         ")",
+        ")"
+    ],
+    "ACTL3143": [
+        "(",
+        "ACTL3142",
         ")"
     ],
     "ACTL3151": [
@@ -289,6 +297,8 @@
         "&&",
         "a Commerce Program",
         ")",
+        "&&",
+        "be in good academic standing",
         ")"
     ],
     "ACTL3202": [
@@ -301,8 +311,6 @@
     "ACTL3301": [
         "(",
         "ACTL2102",
-        "&&",
-        "ACTL3162",
         ")"
     ],
     "ACTL3303": [
@@ -314,7 +322,17 @@
     ],
     "ACTL4001": [
         "(",
-        "ACCT1511, ACTL3141, ACTL3182, FINS1613, ACTL3162, ACTL3151, ECON1102, 60WAM. Note: in 3587 may complete ACTL3141 as a []",
+        "ACCT1511",
+        "||",
+        "COMM1140",
+        "||",
+        "ACTL3141",
+        "||",
+        "ACTL3182",
+        "||",
+        "FINS1613",
+        "||",
+        "COMM1180, ACTL3162, ACTL3151, ECON1102, 60WAM. Note: in 3587 may complete ACTL3141 as a []",
         ")"
     ],
     "ACTL4002": [
@@ -476,7 +494,7 @@
     ],
     "AERO4110": [
         "(",
-        "AERO3110",
+        "At least 144 Units in AEROAH stream. AERO3110",
         ")"
     ],
     "AERO4120": [
@@ -492,7 +510,11 @@
         "(",
         "AERO3660",
         "&&",
+        "(",
         "MMAN3200",
+        "||",
+        "ELEC3114",
+        ")",
         ")"
     ],
     "AERO9500": [
@@ -883,17 +905,6 @@
         "language placement approval",
         ")"
     ],
-    "ARTS1620": [
-        "(",
-        ")"
-    ],
-    "ARTS1621": [
-        "(",
-        "ARTS1620",
-        "||",
-        "language placement approval",
-        ")"
-    ],
     "ARTS1630": [
         "(",
         ")"
@@ -1005,6 +1016,11 @@
         "24UOC in L1",
         ")"
     ],
+    "ARTS2042": [
+        "(",
+        "24UOC in L1",
+        ")"
+    ],
     "ARTS2050": [
         "(",
         "12UOC in L1",
@@ -1054,6 +1070,11 @@
         ")"
     ],
     "ARTS2066": [
+        "(",
+        "24UOC in L1",
+        ")"
+    ],
+    "ARTS2068": [
         "(",
         "24UOC in L1",
         ")"
@@ -1354,6 +1375,11 @@
         "24UOC in L1",
         ")"
     ],
+    "ARTS2465": [
+        "(",
+        "24UOC in L1",
+        ")"
+    ],
     "ARTS2469": [
         "(",
         ")"
@@ -1377,11 +1403,6 @@
         "24UOC in L1",
         ")"
     ],
-    "ARTS2484": [
-        "(",
-        "24UOC in L1",
-        ")"
-    ],
     "ARTS2485": [
         "(",
         "24UOC in L1",
@@ -1393,6 +1414,11 @@
         ")"
     ],
     "ARTS2487": [
+        "(",
+        "24UOC in L1",
+        ")"
+    ],
+    "ARTS2488": [
         "(",
         "24UOC in L1",
         ")"
@@ -1652,11 +1678,6 @@
         "24UOC in L1",
         ")"
     ],
-    "ARTS2905": [
-        "(",
-        "24UOC in L1",
-        ")"
-    ],
     "ARTS2906": [
         "(",
         "24UOC in L1",
@@ -1813,15 +1834,6 @@
         "6UOC in L2 in one of the following streams, English",
         ")"
     ],
-    "ARTS3055": [
-        "(",
-        "48UOC",
-        "&&",
-        "6UOC in L1",
-        "&&",
-        "6UOC in L2 in one of the following specialisations, English",
-        ")"
-    ],
     "ARTS3060": [
         "(",
         "48UOC",
@@ -1925,15 +1937,6 @@
         "Film Studies",
         "||",
         "MCT",
-        ")"
-    ],
-    "ARTS3068": [
-        "(",
-        "48UOC",
-        "&&",
-        "6UOC in L1",
-        "&&",
-        "6UOC in L2 in one of the following streams, Film Studies",
         ")"
     ],
     "ARTS3090": [
@@ -2143,7 +2146,7 @@
         "&&",
         "6UOC in L1",
         "&&",
-        "6UOC in L2 in one of the following streams",
+        "6UOC in L2 in one of the following specialisations",
         "||",
         "Asian Studies",
         "||",
@@ -2151,7 +2154,11 @@
         "||",
         "Global Development",
         "||",
-        "History",
+        "History.",
+        "||",
+        "48UOC",
+        "&&",
+        "enrolment in an International Studies program",
         ")"
     ],
     "ARTS3216": [
@@ -2414,9 +2421,7 @@
         "||",
         "Korean Studies",
         "||",
-        "Spanish",
-        "&&",
-        "Latin American Studies",
+        "Spanish Studies",
         ")"
     ],
     "ARTS3360": [
@@ -2620,7 +2625,7 @@
     ],
     "ARTS3483": [
         "(",
-        "ARTS3482",
+        "ARTS3481",
         "||",
         "language placement approval",
         ")"
@@ -2632,15 +2637,8 @@
         "ARTS3482",
         "||",
         "ARTS3483",
-        ")"
-    ],
-    "ARTS3486": [
-        "(",
-        "ARTS3481",
         "||",
-        "ARTS3482",
-        "||",
-        "ARTS3483",
+        "language placement approval",
         ")"
     ],
     "ARTS3487": [
@@ -2653,6 +2651,32 @@
         ")"
     ],
     "ARTS3488": [
+        "(",
+        "ARTS3481",
+        "||",
+        "ARTS3482",
+        "||",
+        "ARTS3483",
+        "||",
+        "language placement approval",
+        ")"
+    ],
+    "ARTS3490": [
+        "(",
+        "one of the following - ARTS2481",
+        "||",
+        "ARTS3480",
+        "||",
+        "ARTS3481",
+        "||",
+        "ARTS3482",
+        "||",
+        "ARTS3483",
+        "||",
+        "language placement approval",
+        ")"
+    ],
+    "ARTS3491": [
         "(",
         "ARTS3481",
         "||",
@@ -2701,6 +2725,15 @@
         "24UOC in L1",
         ")"
     ],
+    "ARTS3577": [
+        "(",
+        "ARTS3571",
+        "||",
+        "written language placement approval",
+        "&&",
+        "interview",
+        ")"
+    ],
     "ARTS3630": [
         "(",
         "ARTS2631",
@@ -2731,11 +2764,7 @@
     ],
     "ARTS3634": [
         "(",
-        "ARTS3631",
-        "||",
         "ARTS3632",
-        "||",
-        "ARTS3633",
         "||",
         "language placement approval",
         ")"
@@ -2757,11 +2786,7 @@
     ],
     "ARTS3638": [
         "(",
-        "ARTS3631",
-        "||",
         "ARTS3632",
-        "||",
-        "ARTS3633",
         "||",
         "language placement approval",
         ")"
@@ -2778,22 +2803,14 @@
     ],
     "ARTS3641": [
         "(",
-        "ARTS3631",
-        "||",
         "ARTS3632",
-        "||",
-        "ARTS3633",
         "||",
         "language placement approval",
         ")"
     ],
     "ARTS3643": [
         "(",
-        "ARTS3631",
-        "||",
         "ARTS3632",
-        "||",
-        "ARTS3633",
         "||",
         "language placement approval",
         ")"
@@ -2899,13 +2916,17 @@
         "&&",
         "6UOC in L1",
         "&&",
-        "6UOC in L2 in one of the following streams",
+        "6UOC in L2 in one of the following specialisations",
         "||",
         "Development Studies",
         "||",
         "Geographical Studies",
         "||",
-        "Global Development",
+        "Global Development.",
+        "||",
+        "48UOC",
+        "&&",
+        "enrolment in an International Studies program",
         ")"
     ],
     "ARTS3751": [
@@ -2923,7 +2944,17 @@
         "&&",
         "6UOC in L1",
         "&&",
-        "6UOC in L2 in one of the following streams, Development Studies, Global Development",
+        "6UOC in L2 in one of the following specialisations",
+        "||",
+        "Development Studies",
+        "||",
+        "Geographical Studies",
+        "||",
+        "Global Development.",
+        "||",
+        "48UOC",
+        "&&",
+        "enrolment in an International Studies program",
         ")"
     ],
     "ARTS3756": [
@@ -2932,13 +2963,17 @@
         "&&",
         "6UOC in L1",
         "&&",
-        "6UOC in L2 in one of the following streams",
+        "6UOC in L2 in one of the following specialisations",
         "||",
         "Development Studies",
         "||",
         "Geographical Studies",
         "||",
-        "Global Development",
+        "Global Development.",
+        "||",
+        "48UOC",
+        "&&",
+        "enrolment in an International Studies program",
         ")"
     ],
     "ARTS3757": [
@@ -2976,9 +3011,7 @@
         "&&",
         "6UOC in L1",
         "&&",
-        "6UOC in L2 in European Studies",
-        "||",
-        "History.",
+        "6UOC in L2 in European Studies.",
         "||",
         "48UOC",
         "&&",
@@ -3004,7 +3037,11 @@
         "&&",
         "Politics",
         "&&",
-        "International Relations",
+        "International Relations.",
+        "||",
+        "48UOC",
+        "&&",
+        "enrolment in an International Studies program",
         ")"
     ],
     "ARTS3786": [
@@ -3055,55 +3092,21 @@
         "Politics & International Relations major",
         ")"
     ],
-    "ARTS3812": [
-        "(",
-        "48UOC",
-        "&&",
-        "6UOC in L1",
-        "&&",
-        "6UOC in L2 in one of the following streams",
-        "||",
-        "Development Studies",
-        "||",
-        "International Relations",
-        "||",
-        "Politics",
-        "||",
-        "Politics",
-        "&&",
-        "International Relations",
-        ")"
-    ],
-    "ARTS3814": [
-        "(",
-        "48UOC",
-        "&&",
-        "6UOC in L1",
-        "&&",
-        "6UOC in L2 in one of the following streams",
-        "||",
-        "Australian Studies",
-        "||",
-        "International Relations",
-        "||",
-        "Politics",
-        "||",
-        "Politics",
-        "&&",
-        "International Relations",
-        ")"
-    ],
     "ARTS3816": [
         "(",
         "48UOC",
         "&&",
         "6UOC in L1",
         "&&",
-        "6UOC in L2 in one of the following streams",
+        "6UOC in L2 in one of the following specialisations",
         "||",
         "International Relations",
         "||",
-        "Politics",
+        "Politics.",
+        "||",
+        "48UOC",
+        "&&",
+        "enrolment in an International Studies program",
         ")"
     ],
     "ARTS3817": [
@@ -3112,11 +3115,15 @@
         "&&",
         "6UOC in L1",
         "&&",
-        "6UOC in L2 in one of the following streams",
+        "6UOC in L2 in one of the following specialisations",
         "||",
         "International Relations",
         "||",
-        "Politics",
+        "Politics.",
+        "||",
+        "48UOC",
+        "&&",
+        "enrolment in an International Studies program",
         ")"
     ],
     "ARTS3819": [
@@ -3129,7 +3136,11 @@
         "&&",
         "Politics",
         "&&",
-        "International Relations",
+        "International Relations.",
+        "||",
+        "48UOC",
+        "&&",
+        "enrolment in an International Studies program",
         ")"
     ],
     "ARTS3820": [
@@ -3220,9 +3231,13 @@
         "&&",
         "6UOC in L1",
         "&&",
-        "6UOC in L2 in one of the following streams, Media, Culture & Technology",
+        "6UOC in L2 in one of the following specialisations, Media, Culture & Technology",
         "||",
-        "Sociology & Anthropology",
+        "Sociology & Anthropology.",
+        "||",
+        "48UOC",
+        "&&",
+        "enrolment in an International Studies program",
         ")"
     ],
     "ARTS3874": [
@@ -3278,28 +3293,24 @@
         "&&",
         "6UOC in L1",
         "&&",
-        "6UOC in L2 in one of the following streams, Sociology & Anthropology",
+        "6UOC in L2 in one of the following specialisations, Sociology & Anthropology.",
+        "||",
+        "48UOC",
+        "&&",
+        "enrolment in an International Studies program",
         ")"
     ],
     "ARTS3886": [
         "(",
         "48UOC",
         "&&",
-        "6UOC lv1",
+        "6UOC L1",
         "&&",
-        "6UOC lv2 in one of the following streams, Criminology/S&A;",
+        "6UOC L2 in one of the following streams, Criminology/S&A.",
         "||",
-        "enrolment in program 3422/4763",
+        "48UOC",
         "&&",
-        "12UOC lv2 SRAP",
-        "&&",
-        "18UOC lv2 CRIM;",
-        "||",
-        "enrolment in Program 4034",
-        "&&",
-        "30UOC at lv2",
-        "&&",
-        "12UOC lv2 CRIM",
+        "enrolment in an International Studies program",
         ")"
     ],
     "ARTS3900": [
@@ -3583,23 +3594,17 @@
     ],
     "ARTS4822": [
         "(",
-        "Enrolment in the Spanish",
-        "&&",
-        "Latin American Studies honours program",
+        "Enrolment in the Spanish Studies honours program",
         ")"
     ],
     "ARTS4823": [
         "(",
-        "Enrolment in the Spanish",
-        "&&",
-        "Latin American Studies honours program",
+        "Enrolment in the Spanish Studies honours program",
         ")"
     ],
     "ARTS4824": [
         "(",
-        "Enrolment in the Spanish",
-        "&&",
-        "Latin American Studies honours program",
+        "Enrolment in the Spanish Studies honours program",
         ")"
     ],
     "ARTS4826": [
@@ -4607,10 +4612,6 @@
         "96UOC in Built Environment",
         ")"
     ],
-    "BENV6800": [
-        "(",
-        ")"
-    ],
     "BENV7814": [
         "(",
         "96UOC",
@@ -4634,6 +4635,9 @@
     ],
     "BINF3020": [
         "(",
+        "COMP2041",
+        "&&",
+        "BINF2010",
         ")"
     ],
     "BINF6111": [
@@ -4812,6 +4816,7 @@
     ],
     "BIOM9410": [
         "(",
+        "96UOC",
         ")"
     ],
     "BIOM9420": [
@@ -5022,6 +5027,9 @@
     ],
     "BLDG2013": [
         "(",
+        "BLDG1011",
+        "&&",
+        "BLDG1014",
         ")"
     ],
     "BLDG2021": [
@@ -5144,8 +5152,9 @@
         "BENV4000",
         ")"
     ],
-    "CDEV1112": [
+    "CDEV2000": [
         "(",
+        "30UOC in order to enrol",
         ")"
     ],
     "CDEV3000": [
@@ -5160,6 +5169,11 @@
     "CDEV3100": [
         "(",
         "is 30UOC",
+        ")"
+    ],
+    "CDEV3101": [
+        "(",
+        "are required to have a minimum 30UOC to enrol in this course",
         ")"
     ],
     "CEIC1000": [
@@ -5178,6 +5192,16 @@
         "PHYS1121",
         "||",
         "PHY1131",
+        "||",
+        "DPST1021",
+        "||",
+        "DPST1023 MATH1231",
+        "||",
+        "MATH1241",
+        "||",
+        "MATH1251",
+        "||",
+        "DPST1014",
         ")"
     ],
     "CEIC2002": [
@@ -5261,6 +5285,13 @@
     ],
     "CEIC3007": [
         "(",
+        "[CEIC3006 CEIC2007",
+        "&&",
+        "CEIC3001",
+        "&&",
+        "CEIC3005",
+        "&&",
+        "MATH2089]",
         ")"
     ],
     "CEIC4000": [
@@ -5390,7 +5421,6 @@
     ],
     "CHEM1031": [
         "(",
-        "Must be a program with the option of a CHEM major",
         ")"
     ],
     "CHEM1041": [
@@ -5399,7 +5429,7 @@
         "||",
         "CHEM1011 with a credit",
         "||",
-        "above",
+        "above. Must be a program with the option of a CHEM major",
         ")"
     ],
     "CHEM1051": [
@@ -5447,11 +5477,20 @@
         "4755",
         ")"
     ],
+    "CHEM1511": [
+        "(",
+        ")"
+    ],
     "CHEM1521": [
         "(",
         "of CHEM1011 Chemistry 1A",
         "||",
         "equivalent",
+        ")"
+    ],
+    "CHEM1777": [
+        "(",
+        "knowledge is Year 10 General Science",
         ")"
     ],
     "CHEM1811": [
@@ -5478,7 +5517,10 @@
     ],
     "CHEM1831": [
         "(",
-        "None",
+        "None Must be Exercise Physiology",
+        "(",
+        "3871",
+        ")",
         ")"
     ],
     "CHEM2011": [
@@ -5608,6 +5650,11 @@
         "DPST1014",
         ")"
     ],
+    "CHEM2701": [
+        "(",
+        "First year chemistry is a . One of the following courses must have been prior to enrolment: - CHEM1021 -- Chemistry 1B - CHEM1041/1061 -- Higher Chemistry 1B - CHEM1821 -- Engineering Chemistry 1B - CHEM1829 -- Biological Chemistry for Optometry",
+        ")"
+    ],
     "CHEM2921": [
         "(",
         "CHEM1011",
@@ -5665,7 +5712,7 @@
     ],
     "CHEM3051": [
         "(",
-        "CHEM3021",
+        "Must be Program 3999 CHEM3021",
         ")"
     ],
     "CHEM3061": [
@@ -5957,34 +6004,41 @@
     ],
     "COMM1100": [
         "(",
-        "who have ECON1101 are not permitted to enrol",
+        "Actuarial Studies",
+        "||",
+        "Economics programs",
+        "(",
+        "in single",
+        "||",
+        "double degree mode",
+        ")",
+        "are not permitted to enrol",
         ")"
     ],
     "COMM1110": [
         "(",
-        "Only available to single",
+        "3764",
+        "(",
+        "Eng/Comm",
+        ")",
+        "||",
+        "Actuarial Studies",
+        "||",
+        "Economics programs",
+        "(",
+        "in single",
         "&&",
-        "double degree Business School in Term 1. It will be offered to non-Business School in Terms 2",
-        "&&",
-        "3",
+        "double degree mode",
+        ")",
+        "are not permitted to enrol",
         ")"
     ],
     "COMM1120": [
         "(",
-        "Only available to single",
-        "&&",
-        "double degree Business School in Term 1. It will be offered to non-Business School in Terms 2",
-        "&&",
-        "3",
         ")"
     ],
     "COMM1140": [
         "(",
-        "Only available to single",
-        "&&",
-        "double degree Business School in Term 1. It will be offered to non-Business School in Terms 2",
-        "&&",
-        "3",
         ")"
     ],
     "COMM1150": [
@@ -5995,16 +6049,12 @@
     ],
     "COMM1170": [
         "(",
-        "COMM1140. Only available to single",
-        "&&",
-        "double degree Business School in Term 2. It will be offered to non-Business School in Term 3",
+        "COMM1140",
         ")"
     ],
     "COMM1180": [
         "(",
-        "COMM1140. Only available to single",
-        "&&",
-        "double degree Business School in Term 2. It will be offered to non-Business School in Term 3",
+        "COMM1140",
         ")"
     ],
     "COMM1190": [
@@ -6013,15 +6063,15 @@
         "||",
         "ECON1203",
         "||",
-        "MATH1041",
+        "MATH1031",
         "||",
-        "MATH1151",
+        "MATH1041",
         "||",
         "MATH1131",
         "||",
-        "MATH1141. Only available to single",
-        "&&",
-        "double degree Business School in Term 2. It will be offered to non-Business School in Term 3",
+        "MATH1141",
+        "||",
+        "MATH1151",
         ")"
     ],
     "COMM1822": [
@@ -6030,16 +6080,6 @@
     ],
     "COMM1900": [
         "(",
-        "Enrolment is only permitted for in program Actl/Comm",
-        "(",
-        "3155",
-        ")",
-        "||",
-        "Comm/Econ",
-        "(",
-        "3521",
-        ")",
-        ".",
         "(",
         "ECON1101",
         "&&",
@@ -6071,7 +6111,7 @@
         "||",
         "COMM6000 Career Accelerator",
         "||",
-        "COMM1999 First Year Portfolio, 65WAM, 72UOC , room in degree for course, Good academic standing",
+        "COMM1999 First Year Portfolio, 72UOC , room in degree for course, Good academic standing",
         ")"
     ],
     "COMM2233": [
@@ -6095,8 +6135,6 @@
         "&&",
         "48UOC",
         "&&",
-        "65WAM",
-        "&&",
         "be in good academic standing. who have COMM2233",
         "||",
         "CDEV3000",
@@ -6114,15 +6152,21 @@
         "COMM1190",
         "||",
         "MATH1151",
+        "||",
+        "MATH1141",
+        "||",
+        "MATH1131",
         ")",
         "&&",
+        "(",
         "COMM1822",
+        "||",
+        "ACTL1101",
+        ")",
         ")"
     ],
     "COMM3020": [
         "(",
-        "65WAM",
-        "||",
         "72UOC",
         "||",
         "room in degree for this course",
@@ -6136,7 +6180,7 @@
     ],
     "COMM3030": [
         "(",
-        "• 65WAM; • have a minimum 48UOC at the commencement of this course; • have room in their degree for this course; • are in good academic standing; • have COMM6000 Career Accelerator: Essentials",
+        "• have a minimum 48UOC at the commencement of this course; • have room in their degree for this course; • are in good academic standing; • have COMM6000 Career Accelerator: Essentials",
         "||",
         "COMM1999 First Year Portfolio",
         "(",
@@ -6181,7 +6225,7 @@
     ],
     "COMM3303": [
         "(",
-        "This course is by application only. Please contact the Co-op office for more information",
+        "This course is by application only",
         ")"
     ],
     "COMM3500": [
@@ -6249,15 +6293,12 @@
         "(",
         ")"
     ],
-    "COMP1000": [
+    "COMM6700": [
         "(",
+        "undergraduate 72UOC",
         ")"
     ],
     "COMP1010": [
-        "(",
-        ")"
-    ],
-    "COMP1400": [
         "(",
         ")"
     ],
@@ -6289,6 +6330,14 @@
     ],
     "COMP1911": [
         "(",
+        "Enrolment in a non-CSE major",
+        "(",
+        "no BINF",
+        "||",
+        "COMP",
+        "||",
+        "SENG",
+        ")",
         ")"
     ],
     "COMP2041": [
@@ -6528,28 +6577,7 @@
         "||",
         "COMP1927",
         "&&",
-        "102UOC in",
-        "(",
-        "COMPA1",
-        "||",
-        "COMPD1",
-        "||",
-        "COMPD1",
-        "||",
-        "COMPE1",
-        "||",
-        "COMPI1",
-        "||",
-        "COMPJ1",
-        "||",
-        "COMPN1",
-        "||",
-        "COMPS1",
-        "||",
-        "COMPY1",
-        "||",
-        "COMPZ1",
-        ")",
+        "a BSc Computer Science major with 102UOC",
         ")"
     ],
     "COMP3901": [
@@ -6558,7 +6586,13 @@
         "||",
         "SENG",
         "||",
-        "BINF",
+        "BINF courses",
+        "&&",
+        "all first",
+        "&&",
+        "second year core requirements a CSE program",
+        "&&",
+        "agreement from a suitable CSE academic supervisor",
         ")"
     ],
     "COMP3902": [
@@ -6567,7 +6601,13 @@
         "||",
         "SENG",
         "||",
-        "BINF",
+        "BINF courses",
+        "&&",
+        "all first",
+        "&&",
+        "second year core requirements a CSE program",
+        "&&",
+        "agreement from a suitable CSE academic supervisor",
         ")"
     ],
     "COMP4121": [
@@ -6639,29 +6679,46 @@
         "COMP2911",
         ")",
         "&&",
-        "96UOC in COMP",
+        "96UOC in Computer Science",
         ")"
     ],
     "COMP4951": [
         "(",
+        "a CSE BE",
+        "(",
+        "Hons",
+        ")",
+        "programs",
+        "&&",
         "126UOC",
+        "&&",
+        "3rd year core",
         ")"
     ],
     "COMP4952": [
         "(",
-        "COMP4951",
+        "Research Thesis A",
+        "(",
+        "4951",
+        ")",
         ")"
     ],
     "COMP4953": [
         "(",
-        "COMP4952",
+        "Research Thesis B",
+        "(",
+        "4952",
+        ")",
         ")"
     ],
     "COMP4961": [
         "(",
-        "4515",
+        "program 4515 Bachelor of Computer Science",
+        "(",
+        "Hons",
+        ")",
         "||",
-        "3648",
+        "program 3648",
         ")"
     ],
     "COMP4962": [
@@ -6683,13 +6740,6 @@
         "||",
         "COMP1927",
         ")",
-        ")"
-    ],
-    "COMP6324": [
-        "(",
-        "COMP1531",
-        "&&",
-        "COMP2041",
         ")"
     ],
     "COMP6441": [
@@ -6784,6 +6834,10 @@
         "MATH1081",
         "&&",
         "COMP2521",
+        "&&",
+        "(",
+        "not SENGAH",
+        ")",
         ")"
     ],
     "COMP6733": [
@@ -6887,6 +6941,8 @@
         "COMP6447",
         ")",
         ")",
+        "&&",
+        "final term of program",
         ")"
     ],
     "COMP9302": [
@@ -6911,6 +6967,8 @@
         "COMP6447",
         ")",
         ")",
+        "&&",
+        "final term of program",
         ")"
     ],
     "COMP9312": [
@@ -7026,14 +7084,9 @@
     ],
     "COMP9418": [
         "(",
+        "MATH5836",
+        "||",
         "COMP9417",
-        ")"
-    ],
-    "COMP9433": [
-        "(",
-        "COMP1531",
-        "&&",
-        "COMP2511, COMP9517",
         ")"
     ],
     "COMP9444": [
@@ -7056,11 +7109,9 @@
     ],
     "COMP9491": [
         "(",
-        "COMP3411",
+        "Two conditions: 1. have taken: 6UOC from the following: COMP3411;",
         "&&",
-        "70WAM",
-        "&&",
-        "12UOC from",
+        "12UOC from the following:",
         "(",
         "COMP9444",
         "||",
@@ -7070,6 +7121,7 @@
         "||",
         "COMP4418",
         ")",
+        "2. must have 70WAM",
         ")"
     ],
     "COMP9517": [
@@ -8098,6 +8150,16 @@
         "DART1150",
         ")"
     ],
+    "DART2151": [
+        "(",
+        "72UOC in 4821 Bachelor of Fine Arts",
+        "||",
+        "4814 Bachelor of Fine Arts",
+        "(",
+        "Honours",
+        ")",
+        ")"
+    ],
     "DART2190": [
         "(",
         ")"
@@ -8119,6 +8181,13 @@
         "4816",
         "&&",
         "48UOC",
+        ")"
+    ],
+    "DART2213": [
+        "(",
+        "DART1210",
+        "||",
+        "DDES1110",
         ")"
     ],
     "DART2220": [
@@ -8247,6 +8316,9 @@
     ],
     "DART3203": [
         "(",
+        "72UOC in a Media Arts single",
+        "||",
+        "double degree program",
         ")"
     ],
     "DART3310": [
@@ -8382,6 +8454,11 @@
     ],
     "DDES2102": [
         "(",
+        "DDES1100",
+        "&&",
+        "DDES1101",
+        "&&",
+        "DDES2100",
         ")"
     ],
     "DDES2110": [
@@ -8490,9 +8567,28 @@
         "Honours []",
         ")"
     ],
+    "DESN1000": [
+        "(",
+        ")"
+    ],
     "DESN2000": [
         "(",
         "Please refer to the course overview section for information on requirements",
+        ")"
+    ],
+    "DESN3000": [
+        "(",
+        "(",
+        "DESN1000",
+        "&&",
+        "DESN2000",
+        ")",
+        "||",
+        "(",
+        "96UOC",
+        "&&",
+        "MGMTJ1",
+        ")",
         ")"
     ],
     "DPBS1001": [
@@ -8682,6 +8778,65 @@
         "a Global Diploma program",
         ")"
     ],
+    "DPDE1001": [
+        "(",
+        "Enrolment in 7006 UNSW Global Diploma in Architecture Program",
+        ")"
+    ],
+    "DPDE1002": [
+        "(",
+        "Enrolment in 7006 UNSW Global Diploma in Architecture Program",
+        ")"
+    ],
+    "DPDE1003": [
+        "(",
+        "Enrolment in 7006 UNSW Global Diploma in Architecture Program",
+        ")"
+    ],
+    "DPDE1004": [
+        "(",
+        "DPDE1001",
+        "&&",
+        "DPDE1005 Enrolment in 7006 UNSW Global Diploma in Architecture Program",
+        ")"
+    ],
+    "DPDE1005": [
+        "(",
+        "DPDE1002 Enrolment in 7006 UNSW Global Diploma in Architecture Program",
+        ")"
+    ],
+    "DPDE1006": [
+        "(",
+        "Enrolment in 7006 UNSW Global Diploma in Architecture Program",
+        ")"
+    ],
+    "DPDE1007": [
+        "(",
+        "Enrolment in 7006 UNSW Global Diploma in Architecture Program",
+        ")"
+    ],
+    "DPDE1008": [
+        "(",
+        "DPDE1003 Enrolment in 7006 UNSW Global Diploma in Architecture Program",
+        ")"
+    ],
+    "DPDE1009": [
+        "(",
+        "DPDE1001 Enrolment in 7006 UNSW Global Diploma in Architecture Program",
+        ")"
+    ],
+    "DPDE1010": [
+        "(",
+        "Enrolment in 7006 UNSW Global Diploma in Architecture Program",
+        ")"
+    ],
+    "DPDE1011": [
+        "(",
+        "DPDE1001",
+        "&&",
+        "DPDE1005. Enrolment in 7006 UNSW Global Diploma in Architecture Program",
+        ")"
+    ],
     "DPGE1001": [
         "(",
         "UNSW Global Diplomas only",
@@ -8722,6 +8877,62 @@
         "DPGE1001",
         "&&",
         "DPGE1002",
+        ")"
+    ],
+    "DPHU1001": [
+        "(",
+        "Enrolment in 7005 UNSW Global Diploma in Media",
+        "&&",
+        "Communication Program",
+        ")"
+    ],
+    "DPHU1002": [
+        "(",
+        "Enrolment in 7005 UNSW Global Diploma in Media",
+        "&&",
+        "Communication Program",
+        ")"
+    ],
+    "DPHU1003": [
+        "(",
+        "Enrolment in 7005 UNSW Global Diploma in Media",
+        "&&",
+        "Communication Program",
+        ")"
+    ],
+    "DPHU1004": [
+        "(",
+        "Enrolment in 7005 UNSW Global Diploma in Media",
+        "&&",
+        "Communication Program",
+        ")"
+    ],
+    "DPHU1005": [
+        "(",
+        "Enrolment in 7005 UNSW Global Diploma in Media",
+        "&&",
+        "Communication Program",
+        ")"
+    ],
+    "DPHU1006": [
+        "(",
+        "Enrolment in 7005 UNSW Global Diploma in Media",
+        "&&",
+        "Communication Program",
+        ")"
+    ],
+    "DPHU1007": [
+        "(",
+        "Enrolment in 7005 UNSW Global Diploma in Media",
+        "&&",
+        "Communication Program",
+        ")"
+    ],
+    "DPHU1008": [
+        "(",
+        "Enrolment in 7005 UNSW Global Diploma in Media",
+        "&&",
+        "Communication Program",
         ")"
     ],
     "DPST1013": [
@@ -8960,9 +9171,6 @@
     ],
     "ECON1203": [
         "(",
-        "Must not be Program 3715",
-        "||",
-        "3764",
         ")"
     ],
     "ECON1401": [
@@ -8995,22 +9203,22 @@
     ],
     "ECON2102": [
         "(",
+        "(",
         "ECON1102",
+        "||",
+        "COMM1150",
+        ")",
         "&&",
         "(",
-        "ECON1203",
+        "ECON1202",
         "||",
-        "COMM1190",
+        "MATH1031",
         "||",
-        "ECON2403",
+        "MATH1131",
         "||",
-        "MATH1041",
+        "MATH1141",
         "||",
-        "MATH1231",
-        "||",
-        "MATH1241",
-        "||",
-        "MATH1251",
+        "MATH1151",
         ")",
         ")"
     ],
@@ -9019,13 +9227,6 @@
         "ECON1101",
         "||",
         "COMM1100",
-        ")"
-    ],
-    "ECON2104": [
-        "(",
-        "ECON1102",
-        "||",
-        "COMM1150",
         ")"
     ],
     "ECON2107": [
@@ -9082,13 +9283,6 @@
         ")"
     ],
     "ECON2126": [
-        "(",
-        "ECON1101",
-        "||",
-        "COMM1100",
-        ")"
-    ],
-    "ECON2127": [
         "(",
         "ECON1101",
         "||",
@@ -9153,6 +9347,11 @@
         "4797",
         ")"
     ],
+    "ECON3000": [
+        "(",
+        "at least one of the following: ECON2112, ECON2206, ECON2209, FINS2624, RISK2002, MARK3087, MARK3054, MARK3088, MARK3089",
+        ")"
+    ],
     "ECON3101": [
         "(",
         "ECON2101",
@@ -9204,6 +9403,8 @@
     "ECON3124": [
         "(",
         "ECON2101",
+        "||",
+        "ECON2112",
         ")"
     ],
     "ECON3125": [
@@ -9211,6 +9412,11 @@
         "ECON2101",
         "&&",
         "ECON2206",
+        ")"
+    ],
+    "ECON3127": [
+        "(",
+        "ECON2101",
         ")"
     ],
     "ECON3202": [
@@ -9271,6 +9477,11 @@
         "||",
         "stream ECONFH4501",
         ")",
+        "||",
+        "Actuarial Honours",
+        "(",
+        "program 4520",
+        ")",
         ")"
     ],
     "ECON4103": [
@@ -9281,6 +9492,11 @@
         "||",
         "stream ECONFH4501",
         ")",
+        "||",
+        "Actuarial Honours",
+        "(",
+        "program 4520",
+        ")",
         ")"
     ],
     "ECON4106": [
@@ -9290,6 +9506,11 @@
         "program 4502",
         "||",
         "stream ECONFH4501",
+        ")",
+        "||",
+        "Actuarial Honours",
+        "(",
+        "program 4520",
         ")",
         ")"
     ],
@@ -9384,6 +9605,11 @@
         "||",
         "stream ECONFH4501",
         ")",
+        "||",
+        "Actuarial Honours",
+        "(",
+        "program 4520",
+        ")",
         ")"
     ],
     "ECON4205": [
@@ -9393,6 +9619,11 @@
         "program 4502",
         "||",
         "stream ECONFH4501",
+        ")",
+        "||",
+        "Actuarial Honours",
+        "(",
+        "program 4520",
         ")",
         ")"
     ],
@@ -9404,6 +9635,11 @@
         "||",
         "stream ECONFH4501",
         ")",
+        "||",
+        "Actuarial Honours",
+        "(",
+        "program 4520",
+        ")",
         ")"
     ],
     "ECON4301": [
@@ -9414,6 +9650,11 @@
         "||",
         "stream ECONFH4501",
         ")",
+        "||",
+        "Actuarial Honours",
+        "(",
+        "program 4520",
+        ")",
         ")"
     ],
     "ECON4302": [
@@ -9423,6 +9664,11 @@
         "program 4502",
         "||",
         "stream ECONFH4501",
+        ")",
+        "||",
+        "Actuarial Honours",
+        "(",
+        "program 4520",
         ")",
         ")"
     ],
@@ -9448,6 +9694,11 @@
         "||",
         "stream ECONFH4501",
         ")",
+        "||",
+        "Actuarial Honours",
+        "(",
+        "program 4520",
+        ")",
         ")"
     ],
     "ECON4309": [
@@ -9457,6 +9708,11 @@
         "program 4502",
         "||",
         "stream ECONFH4501",
+        ")",
+        "||",
+        "Actuarial Honours",
+        "(",
+        "program 4520",
         ")",
         ")"
     ],
@@ -9468,6 +9724,11 @@
         "||",
         "stream ECONFH4501",
         ")",
+        "||",
+        "Actuarial Honours",
+        "(",
+        "program 4520",
+        ")",
         ")"
     ],
     "ECON4311": [
@@ -9478,6 +9739,11 @@
         "||",
         "stream ECONFH4501",
         ")",
+        "||",
+        "Actuarial Honours",
+        "(",
+        "program 4520",
+        ")",
         ")"
     ],
     "ECON4350": [
@@ -9487,6 +9753,11 @@
         "program 4502",
         "||",
         "stream ECONFH4501",
+        ")",
+        "||",
+        "Actuarial Honours",
+        "(",
+        "program 4520",
         ")",
         ")"
     ],
@@ -10320,17 +10591,6 @@
         "ELEC1112]",
         ")"
     ],
-    "ELEC2146": [
-        "(",
-        "(",
-        "COMP1911",
-        "||",
-        "COMP1917",
-        ")",
-        "&&",
-        "ELEC2134",
-        ")"
-    ],
     "ELEC2911": [
         "(",
         "ELEC1111",
@@ -10406,6 +10666,17 @@
         ")",
         ")"
     ],
+    "ELEC3146": [
+        "(",
+        "(",
+        "COMP1911",
+        "||",
+        "COMP1511",
+        ")",
+        "&&",
+        "ELEC2134",
+        ")"
+    ],
     "ELEC3705": [
         "(",
         ": MATH2099",
@@ -10451,6 +10722,8 @@
     "ELEC4604": [
         "(",
         "ELEC3106",
+        "&&",
+        "ELEC3115",
         ")"
     ],
     "ELEC4605": [
@@ -10480,7 +10753,7 @@
     ],
     "ELEC4617": [
         "(",
-        "elec4612",
+        "ELEC3105",
         ")"
     ],
     "ELEC4621": [
@@ -10511,6 +10784,8 @@
     "ELEC4633": [
         "(",
         "ELEC3114",
+        "||",
+        "ELEC3145",
         ")"
     ],
     "ELEC4951": [
@@ -10537,10 +10812,6 @@
         ")"
     ],
     "ENGG0360": [
-        "(",
-        ")"
-    ],
-    "ENGG1000": [
         "(",
         ")"
     ],
@@ -10617,6 +10888,8 @@
         "||",
         "PHYS1141",
         "||",
+        "DPST1021",
+        "||",
         "DPST1023",
         ")",
         ")"
@@ -10646,7 +10919,7 @@
     ],
     "ENGG3060": [
         "(",
-        "66UOC from an engineering degree",
+        "66UOC",
         ")"
     ],
     "ENGG3600": [
@@ -10719,6 +10992,11 @@
         "(",
         ")"
     ],
+    "FADA6700": [
+        "(",
+        "48UOC . must be in good academic standing. Consent from ADA WIL Team required",
+        ")"
+    ],
     "FINS1612": [
         "(",
         ")"
@@ -10749,7 +11027,13 @@
     ],
     "FINS2624": [
         "(",
-        "FINS1613",
+        "COMM1180",
+        "||",
+        "(",
+        "COMM1140",
+        "&&",
+        "ECON1102",
+        ")",
         ")"
     ],
     "FINS2643": [
@@ -10783,6 +11067,8 @@
     "FINS3623": [
         "(",
         "FINS1613",
+        "||",
+        "COMM1180",
         ")"
     ],
     "FINS3625": [
@@ -10792,12 +11078,18 @@
     ],
     "FINS3626": [
         "(",
-        "ACCT1511, FINS1613",
+        "COMM1140",
+        "||",
+        "ACCT1511",
+        "&&",
+        "COMM1180",
+        "||",
+        "FINS1613",
         ")"
     ],
     "FINS3630": [
         "(",
-        "FINS1612, FINS1613",
+        "FINS1612, COMM1180",
         ")"
     ],
     "FINS3631": [
@@ -10862,8 +11154,9 @@
         "COMMJ1",
         ")",
         "&&",
+        "COMM1180",
+        "||",
         "FINS1613",
-        ")",
         ")"
     ],
     "FINS3646": [
@@ -10876,8 +11169,9 @@
         "COMMJ1",
         ")",
         "&&",
+        "COMM1180",
+        "||",
         "FINS1613",
-        ")",
         ")"
     ],
     "FINS3647": [
@@ -10910,6 +11204,8 @@
     ],
     "FINS3655": [
         "(",
+        "COMM1180",
+        "||",
         "FINS1613",
         ")"
     ],
@@ -10920,12 +11216,15 @@
     ],
     "FINS4774": [
         "(",
+        "Must be specialisation FINSAH4501",
         "||",
-        "[FINS3775",
+        "FINSBH3565;",
+        "||",
+        "program 4520. [FINS3775",
         "||",
         "FINS4775",
         "||",
-        "stream FINSAH4501]",
+        "FINS4779]",
         ")"
     ],
     "FINS4775": [
@@ -10935,52 +11234,58 @@
         "greater in FINS2624",
         "&&",
         "ECON1203",
+        "||",
+        "specialisation FINSAH4501",
+        "||",
+        "FINSBH3565",
+        "||",
+        "program 4520",
         ")"
     ],
     "FINS4776": [
         "(",
-        "[Must be program 4501",
-        "(",
-        "Finance",
-        ")",
+        "Must be specialisation FINSAH4501",
         "||",
-        "FINS3775",
+        "FINSBH3565;",
         "||",
-        "FINS4775]",
+        "program 4520. [FINS3775",
+        "||",
+        "FINS4775",
+        "||",
+        "FINS4779]",
         ")"
     ],
     "FINS4777": [
         "(",
-        "[Must be program 4501",
-        "(",
-        "Finance",
-        ")",
+        "Must be specialisation FINSAH4501",
         "||",
-        "FINS3775",
+        "FINSBH3565;",
         "||",
-        "FINS4775]",
+        "program 4520. [FINS3775",
+        "||",
+        "FINS4775",
+        "||",
+        "FINS4779]",
         ")"
     ],
     "FINS4779": [
         "(",
-        "[Must be program 4501",
-        "(",
-        "Finance",
-        ")",
+        "Must be specialisation FINSAH4501",
         "||",
-        "FINS3775",
+        "FINSBH3565;",
         "||",
-        "FINS4775]",
+        "program 4520. [FINS3775",
+        "||",
+        "FINS4775 ||]",
         ")"
     ],
     "FINS4792": [
         "(",
-        "[Must be program 4501",
-        "(",
-        "Finance",
-        ")",
+        "Must be specialisation FINSAH4501",
         "||",
-        "FINS3775",
+        "FINSBH3565;",
+        "||",
+        "program 4520. [ FINS3775",
         "||",
         "FINS4775]",
         ")"
@@ -11005,11 +11310,6 @@
         "(",
         ")"
     ],
-    "FOOD1360": [
-        "(",
-        "PHYS1111, MATH1031, MATH1041",
-        ")"
-    ],
     "FOOD2320": [
         "(",
         ")"
@@ -11029,6 +11329,11 @@
         "FOOD2320, FOOD3010",
         ")"
     ],
+    "FOOD3060": [
+        "(",
+        "PHYS1111, MATH1031, MATH1041",
+        ")"
+    ],
     "FOOD3220": [
         "(",
         "BIOC2181",
@@ -11039,7 +11344,7 @@
     "FOOD3801": [
         "(",
         "(",
-        "FOOD1360",
+        "FOOD3060",
         "&&",
         "FOOD3010",
         ")",
@@ -11233,10 +11538,6 @@
         "(",
         ")"
     ],
-    "GENS4008": [
-        "(",
-        ")"
-    ],
     "GENS4015": [
         "(",
         ")"
@@ -11310,7 +11611,6 @@
     ],
     "GEOS2291": [
         "(",
-        "None",
         ")"
     ],
     "GEOS2641": [
@@ -11329,6 +11629,7 @@
     ],
     "GEOS2821": [
         "(",
+        "must have 12UOC in the following: GEOS1111; GEOS1211; GEOS1701",
         ")"
     ],
     "GEOS3071": [
@@ -11719,11 +12020,6 @@
         "(",
         ")"
     ],
-    "HUMS2000": [
-        "(",
-        "24UOC in L1",
-        ")"
-    ],
     "HUMS2003": [
         "(",
         "24UOC in L1",
@@ -11889,6 +12185,10 @@
         "are",
         ")"
     ],
+    "INFS1701": [
+        "(",
+        ")"
+    ],
     "INFS2101": [
         "(",
         "plan",
@@ -11914,15 +12214,13 @@
         "INFS2603",
         ")"
     ],
+    "INFS2602": [
+        "(",
+        ")"
+    ],
     "INFS2603": [
         "(",
-        "(",
         "INFS1602",
-        "||",
-        "INFS2602",
-        ")",
-        "&&",
-        "INFS1603",
         ")"
     ],
     "INFS2605": [
@@ -11951,6 +12249,12 @@
     "INFS2608": [
         "(",
         "INFS1603",
+        "||",
+        "COMM1822",
+        ")"
+    ],
+    "INFS2609": [
+        "(",
         ")"
     ],
     "INFS2621": [
@@ -11975,20 +12279,33 @@
         "INFS2602",
         ")"
     ],
+    "INFS2701": [
+        "(",
+        "INFS1701",
+        ")"
+    ],
+    "INFS2702": [
+        "(",
+        "INFS1602",
+        "||",
+        "INFS2602",
+        ")"
+    ],
     "INFS2822": [
+        "(",
+        "Any of the following: COMM1190",
+        "||",
         "(",
         "INFS1603",
         "||",
         "COMM1822",
+        ")",
         "||",
+        "(",
         "INFS1609",
         "||",
         "INFS2609",
-        ")"
-    ],
-    "INFS2848": [
-        "(",
-        "INFS1602",
+        ")",
         ")"
     ],
     "INFS3202": [
@@ -12066,8 +12383,26 @@
     "INFS3634": [
         "(",
         "INFS2605",
-        "&&",
-        "INFS2608",
+        ")"
+    ],
+    "INFS3700": [
+        "(",
+        "INFS2603",
+        ")"
+    ],
+    "INFS3701": [
+        "(",
+        "INFS2701",
+        ")"
+    ],
+    "INFS3703": [
+        "(",
+        "INFS2603",
+        ")"
+    ],
+    "INFS3822": [
+        "(",
+        "INFS2822",
         ")"
     ],
     "INFS3830": [
@@ -12234,7 +12569,6 @@
     ],
     "INTA2000": [
         "(",
-        "Co-Req: BENV0001",
         ")"
     ],
     "INTA2001": [
@@ -12261,12 +12595,12 @@
     ],
     "INTA2102": [
         "(",
-        "INTA2101, [BENV0001]",
+        "INTA2101",
         ")"
     ],
     "INTA2201": [
         "(",
-        "INTA2101, INTA2102, BENV0001",
+        "INTA2101, INTA2102",
         ")"
     ],
     "INTA2202": [
@@ -12287,7 +12621,7 @@
     ],
     "INTA3000": [
         "(",
-        "INTA1000, INTA2000, INTA2101, INTA2102, BENV0001",
+        "INTA1000, INTA2000, INTA2101, INTA2102",
         ")"
     ],
     "INTA3001": [
@@ -12300,7 +12634,7 @@
     ],
     "INTA3003": [
         "(",
-        "INTA3121, INTA3122",
+        "BENV1015, INTA3002",
         ")"
     ],
     "INTA3004": [
@@ -12309,7 +12643,7 @@
     ],
     "INTA4000": [
         "(",
-        "INTA1000, INTA2000, INTA2101, INTA2102, BENV0001",
+        "INTA1000, INTA2000, INTA2101, INTA2102",
         ")"
     ],
     "INTA4004": [
@@ -12347,7 +12681,7 @@
     ],
     "LAND1351": [
         "(",
-        "LAND2152",
+        "Please add LAND2251 LAND2152",
         ")"
     ],
     "LAND1421": [
@@ -12507,6 +12841,11 @@
     "LAWS1052": [
         "(",
         "This course is strictly for undertaking Law programs only",
+        ")"
+    ],
+    "LAWS1055": [
+        "(",
+        "[with LAWS1052. To be able to be separately in subsequent term if LAWS1052 successfully]",
         ")"
     ],
     "LAWS1061": [
@@ -13294,6 +13633,11 @@
         "78UOC in LAWS courses",
         ")"
     ],
+    "LAWS3250": [
+        "(",
+        "78UOC in LAWS Courses",
+        ")"
+    ],
     "LAWS3251": [
         "(",
         "78UOC in LAWS courses",
@@ -13878,7 +14222,7 @@
     "MANF4100": [
         "(",
         "(",
-        "ENGG1000",
+        "DESN1000",
         "||",
         "DPST1071",
         ")",
@@ -13909,6 +14253,13 @@
     ],
     "MANF6860": [
         "(",
+        ")"
+    ],
+    "MANF9550": [
+        "(",
+        "Successful 96UOC",
+        "&&",
+        "65WAM%",
         ")"
     ],
     "MARK1012": [
@@ -14513,6 +14864,17 @@
         "12UOC in L2 Maths courses",
         ")"
     ],
+    "MATH3051": [
+        "(",
+        "12UOC of second year mathematics courses",
+        "&&",
+        "MATH2011",
+        "||",
+        "MATH2111",
+        "||",
+        "75GRADE in MATH2069",
+        ")"
+    ],
     "MATH3101": [
         "(",
         "12UOC in L2 Math courses",
@@ -14750,6 +15112,17 @@
         "75GRADE in MATH2089",
         "||",
         "75GRADE in MATH2099",
+        ")"
+    ],
+    "MATH3371": [
+        "(",
+        "MATH2501",
+        "||",
+        "MATH2601",
+        "||",
+        "75GRADE in MATH2019",
+        "||",
+        "65GRADE in MATH2099",
         ")"
     ],
     "MATH3411": [
@@ -15180,12 +15553,94 @@
         "(",
         ")"
     ],
+    "MDCN8000": [
+        "(",
+        ")"
+    ],
     "MDCN8001": [
         "(",
         ")"
     ],
     "MDCN8002": [
         "(",
+        ")"
+    ],
+    "MDCN8888": [
+        "(",
+        "with a WAM of ≥ 65",
+        "(",
+        "see WAM calculation below",
+        ")",
+        "&&",
+        "have 12UOC",
+        "(",
+        "UOC",
+        ")",
+        "General Education before Term 1 in year 4",
+        "&&",
+        "are eligible to apply. WAM Calculation The WAM is calculated from the following courses: 1. MFAC 1521 Beginnings",
+        "&&",
+        "Growth",
+        "&&",
+        "Development A 2. MFAC 1522 Beginnings",
+        "&&",
+        "Growth",
+        "&&",
+        "Development B 3. MFAC 1523 Health Maintenance A 4. MFAC 1524 Health Maintenance B 5. MFAC 1525 Ageing",
+        "&&",
+        "Endings A 6. MFAC 1526 Ageing",
+        "&&",
+        "Endings B 7. MFAC 1527 Society & Health In addition",
+        "&&",
+        "are required to pass the following courses",
+        "(",
+        "&&",
+        "passing subsequent supplementary exams",
+        "&&",
+        "but if a fails a course then they will be ineligible",
+        ")",
+        ": 1. MFAC 1501 Foundations 2. MFAC 1511 Phase 1 Portfolio 3. MFAC 1512 End of Phase Examination 4. MFAC 1513 Clinical",
+        "&&",
+        "Communication Skills Examination 5. MFAC 2514 Integrated Clinical Studies 1 6. MFAC 2515 Integrated Clinical Studies 2 7. MFAC 2516 Integrated Clinical Studies 3 8. MFAC 2511 Phase 2 Portfolio 9. MFAC 2512 Integrated Clinical Examination",
+        ")"
+    ],
+    "MDCN8889": [
+        "(",
+        "with a WAM of ≥ 65",
+        "(",
+        "see WAM calculation below",
+        ")",
+        "&&",
+        "have 12UOC",
+        "(",
+        "UOC",
+        ")",
+        "General Education before Term 1 in year 4",
+        "&&",
+        "are eligible to apply. WAM Calculation The WAM is calculated from the following courses: 1. MFAC 1521 Beginnings",
+        "&&",
+        "Growth",
+        "&&",
+        "Development A 2. MFAC 1522 Beginnings",
+        "&&",
+        "Growth",
+        "&&",
+        "Development B 3. MFAC 1523 Health Maintenance A 4. MFAC 1524 Health Maintenance B 5. MFAC 1525 Ageing",
+        "&&",
+        "Endings A 6. MFAC 1526 Ageing",
+        "&&",
+        "Endings B 7. MFAC 1527 Society & Health In addition",
+        "&&",
+        "are required to pass the following courses",
+        "(",
+        "&&",
+        "passing subsequent supplementary exams",
+        "&&",
+        "but if a fails a course then they will be ineligible",
+        ")",
+        ": 1. MFAC 1501 Foundations 2. MFAC 1511 Phase 1 Portfolio 3. MFAC 1512 End of Phase Examination 4. MFAC 1513 Clinical",
+        "&&",
+        "Communication Skills Examination 5. MFAC 2514 Integrated Clinical Studies 1 6. MFAC 2515 Integrated Clinical Studies 2 7. MFAC 2516 Integrated Clinical Studies 3 8. MFAC 2511 Phase 2 Portfolio 9. MFAC 2512 Integrated Clinical Examination",
         ")"
     ],
     "MDIA1000": [
@@ -15659,6 +16114,14 @@
         "(",
         ")"
     ],
+    "MERE2001": [
+        "(",
+        ")"
+    ],
+    "MERE2002": [
+        "(",
+        ")"
+    ],
     "MERE4951": [
         "(",
         "126UOC",
@@ -15820,6 +16283,10 @@
         "MFAC2512, MFAC2511",
         ")"
     ],
+    "MFAC4001": [
+        "(",
+        ")"
+    ],
     "MFAC4501": [
         "(",
         ")"
@@ -15836,8 +16303,9 @@
         "(",
         ")"
     ],
-    "MGMT1001": [
+    "MFAC4999": [
         "(",
+        "who have Year 3 clinical coursework requirements are eligible for enrolment",
         ")"
     ],
     "MGMT1002": [
@@ -15845,15 +16313,21 @@
         "MGMT1001",
         "||",
         "COMM1170",
-        ")"
-    ],
-    "MGMT1101": [
-        "(",
+        "||",
+        "COMM1100",
+        "||",
+        "COMM1120",
         ")"
     ],
     "MGMT2001": [
         "(",
-        "MGMT1001or COMM1170",
+        "MGMT1001",
+        "||",
+        "COMM1170",
+        "||",
+        "COMM1100",
+        "||",
+        "COMM1120",
         ")"
     ],
     "MGMT2002": [
@@ -15885,10 +16359,18 @@
     ],
     "MGMT2718": [
         "(",
-        "Any first year MGMT course",
-        "(",
-        "e.g., MGMT1001, MGMT1002, MGMT1101",
-        ")",
+        "||",
+        "[MGMT1001",
+        "||",
+        "MGMT1101",
+        "||",
+        "MGMT1002",
+        "||",
+        "COMM1100",
+        "||",
+        "COMM1150",
+        "||",
+        "COMM1170]",
         ")"
     ],
     "MGMT2721": [
@@ -15905,9 +16387,20 @@
     ],
     "MGMT3001": [
         "(",
-        "MGMT1001or COMM1170",
+        "MGMT1001or COMM1100",
+        "||",
+        "COMM1120",
+        "||",
+        "COMM1170",
         "||",
         "12UOC in Business courses",
+        ")"
+    ],
+    "MGMT3004": [
+        "(",
+        "96UOC",
+        "&&",
+        "in good standing",
         ")"
     ],
     "MGMT3101": [
@@ -15942,7 +16435,15 @@
     ],
     "MGMT3701": [
         "(",
-        "MGMT1001or COMM1170",
+        "MGMT1001",
+        "||",
+        "COMM1100",
+        "||",
+        "COMM1170",
+        "||",
+        "COMM1120",
+        "||",
+        "MGMT2718",
         ")"
     ],
     "MGMT3702": [
@@ -15967,10 +16468,8 @@
     ],
     "MGMT3728": [
         "(",
-        "Any first year MGMT course",
-        "(",
-        "e.g., MGMT1001, MGMT1002, MGMT1101",
-        ")",
+        "||",
+        "[: MGMT2718]",
         ")"
     ],
     "MGMT3729": [
@@ -16345,6 +16844,8 @@
         "||",
         "DPST1072",
         ")",
+        "&&",
+        "ELEC1111",
         ")"
     ],
     "MMAN3400": [
@@ -17430,6 +17931,13 @@
         "PATH3205",
         ")"
     ],
+    "PATH3210": [
+        "(",
+        "72UOC",
+        "&&",
+        "one of these courses: ANAT2111/1521/2241/2521/2341/2511, BABS2011/2202/2204, BIOC2181/2101, MICR2011, NEUR2201, PATH2201, PHAR2011, PHSL2101/2121/2201/2221, CHEM2041, NANO2002",
+        ")"
+    ],
     "PHAR2011": [
         "(",
         "6UOC L1 Biology",
@@ -18434,14 +18942,6 @@
         "PTRL2019",
         ")"
     ],
-    "PTRL2030": [
-        "(",
-        ")"
-    ],
-    "PTRL2114": [
-        "(",
-        ")"
-    ],
     "PTRL3001": [
         "(",
         "PTRL2019",
@@ -18594,9 +19094,15 @@
     ],
     "RISK2002": [
         "(",
+        "(",
+        "COMM1140",
+        "||",
         "ACCT1501",
+        ")",
         "&&",
         "(",
+        "COMM1190",
+        "||",
         "ECON1203",
         "||",
         "RISK2001",
@@ -18796,11 +19302,6 @@
         "L2 Printmaking",
         ")"
     ],
-    "SART3408": [
-        "(",
-        "L2 SPI",
-        ")"
-    ],
     "SART3409": [
         "(",
         "L2 SPI",
@@ -18920,6 +19421,17 @@
         "48UOC",
         "&&",
         "70WAM",
+        ")"
+    ],
+    "SCIF3000": [
+        "(",
+        "a science program",
+        "(",
+        "single",
+        "||",
+        "dual",
+        ")",
+        ". Good standing. 60UOC. 65WAM",
         ")"
     ],
     "SCIF3041": [
@@ -19222,7 +19734,13 @@
         "&&",
         "COMP2511",
         "&&",
-        "COMP2041",
+        "COMP2041. Successful SEN2991",
+        "&&",
+        "attendance of IT Reflection Workshop",
+        "(",
+        "facilitated by Co-op Program",
+        ")",
+        "are a for this course",
         ")"
     ],
     "SENG3992": [
@@ -19231,12 +19749,20 @@
         "&&",
         "in the Co-op program",
         "&&",
-        "SENG3011",
+        "SENG3011. Successful SEN2991",
+        "&&",
+        "SENG3991are a for this course",
         ")"
     ],
     "SENG4920": [
         "(",
-        "COMP2511",
+        "COMP2511 more than",
+        "||",
+        "equal to 144UOC in SENGAH",
+        "||",
+        "BINFAH",
+        "||",
+        "COMPBH",
         ")"
     ],
     "SERV9999": [
@@ -19328,6 +19854,8 @@
         "||",
         "SOCW2100",
         "||",
+        "SOCW3012",
+        "||",
         "SOSS/SRAP1000",
         "||",
         "SOSS/SRAP1001",
@@ -19336,7 +19864,7 @@
         "||",
         "SRAP2002",
         "&&",
-        "enrolment in a Social Work program. [SOCW3012]",
+        "enrolment in a Social Work program. [SOCW3013]",
         ")"
     ],
     "SOCW3010": [
@@ -19380,7 +19908,7 @@
         "||",
         "SOSS/SRAP2002",
         "&&",
-        "enrolment in a Social Work program. Corerequisite: SOCW3009. Equivalent: SOCW3001",
+        "enrolment in a Social Work program. Equivalent: SOCW3001",
         "&&",
         "SOCW3011",
         ")"
@@ -19403,17 +19931,19 @@
         "||",
         "SOCW2100",
         "||",
-        "SOSS/SRAP1000",
+        "SOCW3012",
         "||",
-        "SOSS/SRAP1001",
+        "SOSS1000",
+        "||",
+        "SOSS1001",
         "||",
         "ARTS2871",
         "||",
-        "SOSS/SRAP2002",
+        "SOSS2002",
         "&&",
         "enrolment in a Social Work program. Equivalent: SOCW3001",
         "&&",
-        "SOCW3011",
+        "SOCW3011. [SOCW3009]",
         ")"
     ],
     "SOCW4003": [
@@ -19723,21 +20253,6 @@
         "(",
         ")"
     ],
-    "SOMA2816": [
-        "(",
-        "Intro to Motion Graphics - SOMA2410",
-        "||",
-        "SOMA2408",
-        "||",
-        "SOMA3410",
-        "||",
-        "SOMA3408",
-        "||",
-        "SOMA2411",
-        "||",
-        "SOMA3411",
-        ")"
-    ],
     "SOMA2818": [
         "(",
         ")"
@@ -19796,6 +20311,7 @@
     ],
     "SOMS3001": [
         "(",
+        "75WAM",
         ")"
     ],
     "SOMS3050": [
@@ -19803,11 +20319,24 @@
         "72UOC of courses",
         ")"
     ],
-    "SOMS3212": [
+    "SOMS3199": [
         "(",
-        "72UOC",
+        "3991 program",
+        "||",
+        "in a Science program",
+        "(",
+        "single",
+        "||",
+        "dual",
+        ")",
         "&&",
-        "one of these courses: ANAT2111/1521/2241/2521/2341/2511, BABS2011/2202/2204, BIOC2181/2101, MICR2011, NEUR2201, PATH2201, PHAR2011, PHSL2101/2121/2201/2221, CHEM2041, NANO2002",
+        "majoring in a SOMS major. Must complete for WIL mini-modules prior to enrolment. Placement must be related to the ’s major",
+        "||",
+        "specialisation",
+        "&&",
+        "approved by SOMS prior to enrolment. 48UOC",
+        "&&",
+        "a 65WAM",
         ")"
     ],
     "SOMS3232": [
@@ -19827,13 +20356,12 @@
         ")",
         ")"
     ],
-    "SOMS4001": [
+    "SOMS3299": [
         "(",
-        "SOMS Hons Plan",
-        ")"
-    ],
-    "SOMS4002": [
+        "SOMS3199",
         "(",
+        "multi-term course",
+        ")",
         ")"
     ],
     "SOMS4884": [
@@ -20304,7 +20832,7 @@
         "LEGT2751",
         "||",
         "TABL2751",
-        "||",
+        "&&",
         "LAWS3147",
         ")"
     ],
@@ -20406,11 +20934,6 @@
         "TELE3118",
         ")"
     ],
-    "TELE4121": [
-        "(",
-        "TELE4120",
-        ")"
-    ],
     "TELE4123": [
         "(",
         ")"
@@ -20433,6 +20956,13 @@
     "TELE4653": [
         "(",
         "TELE3113",
+        ")"
+    ],
+    "TELE9757": [
+        "(",
+        "UG should have 65WAM",
+        "||",
+        "be ELECCH major",
         ")"
     ],
     "VISN1101": [
@@ -20598,6 +21128,10 @@
         "ZBUS1103",
         ")"
     ],
+    "ZBUS2333": [
+        "(",
+        ")"
+    ],
     "ZBUS2401": [
         "(",
         "ZBUS1103",
@@ -20645,7 +21179,10 @@
         "4462",
         ")",
         "&&",
-        "ZBUS1104",
+        "ZBUS1104 ZBUS3108 Business Strategy Implementation is assumed prior to undertaking Business Capstone",
+        "(",
+        "Work Practice Project",
+        ")",
         ")"
     ],
     "ZBUS3106": [
@@ -20674,6 +21211,14 @@
         ")"
     ],
     "ZBUS3303": [
+        "(",
+        ")"
+    ],
+    "ZBUS3310": [
+        "(",
+        ")"
+    ],
+    "ZBUS3378": [
         "(",
         ")"
     ],
@@ -21066,7 +21611,7 @@
     ],
     "ZEIT3602": [
         "(",
-        "ZEIT1500",
+        "ZEIT2601",
         ")"
     ],
     "ZEIT3603": [
@@ -21096,6 +21641,27 @@
     "ZEIT3701": [
         "(",
         "ZEIT2503",
+        ")"
+    ],
+    "ZEIT3750": [
+        "(",
+        ")"
+    ],
+    "ZEIT3751": [
+        "(",
+        "ZEIT3750",
+        ")"
+    ],
+    "ZEIT3752": [
+        "(",
+        "ZEIT3501",
+        "&&",
+        "ZEIT2504",
+        ")"
+    ],
+    "ZEIT3753": [
+        "(",
+        "ZEIT3750",
         ")"
     ],
     "ZEIT3801": [
@@ -21231,6 +21797,22 @@
         "(",
         ")"
     ],
+    "ZEIT4150": [
+        "(",
+        ")"
+    ],
+    "ZEIT4151": [
+        "(",
+        ")"
+    ],
+    "ZEIT4152": [
+        "(",
+        ")"
+    ],
+    "ZEIT4153": [
+        "(",
+        ")"
+    ],
     "ZEIT4154": [
         "(",
         ")"
@@ -21351,6 +21933,28 @@
     "ZEIT4705": [
         "(",
         "ZEIT1502",
+        ")"
+    ],
+    "ZEIT4750": [
+        "(",
+        "ZEIT3751",
+        "&&",
+        "ZEIT3752",
+        "&&",
+        "ZEIT3753",
+        "||",
+        "ZEIT3902",
+        ")"
+    ],
+    "ZEIT4751": [
+        "(",
+        "ZEIT4750",
+        "&&",
+        "ZEIT4752",
+        ")"
+    ],
+    "ZEIT4752": [
+        "(",
         ")"
     ],
     "ZEIT4801": [
@@ -21727,6 +22331,10 @@
         "(",
         ")"
     ],
+    "ZHSS3238": [
+        "(",
+        ")"
+    ],
     "ZHSS3301": [
         "(",
         "ZHSS2302",
@@ -21827,6 +22435,10 @@
     "ZHSS3505": [
         "(",
         "Any 2 of ZHSS1102, ZHSS1202, ZHSS1302, ZHSS1304, ZHSS1402, ZPEM1202",
+        ")"
+    ],
+    "ZHSS3750": [
+        "(",
         ")"
     ],
     "ZHSS4001": [
@@ -21941,7 +22553,16 @@
     ],
     "ZPEM1502": [
         "(",
-        "ZPEM1501 Physics 1A",
+        "ZPEM1501",
+        ")"
+    ],
+    "ZPEM1503": [
+        "(",
+        ")"
+    ],
+    "ZPEM1504": [
+        "(",
+        "ZPEM1503",
         ")"
     ],
     "ZPEM1901": [
@@ -22030,6 +22651,10 @@
         "ZPEM1501",
         "&&",
         "ZPEM1502",
+        ")"
+    ],
+    "ZPEM2405": [
+        "(",
         ")"
     ],
     "ZPEM2502": [
@@ -22268,6 +22893,44 @@
     ],
     "ZPEM4502": [
         "(",
+        ")"
+    ],
+    "ARTS3812": [
+        "(",
+        "48UOC",
+        "&&",
+        "6UOC in L1",
+        "&&",
+        "6UOC in L2 in one of the following specialisations",
+        "||",
+        "Development Studies",
+        "||",
+        "Politics",
+        "&&",
+        "International Relations.",
+        "||",
+        "48UOC",
+        "&&",
+        "enrolment in an International Studies program",
+        ")"
+    ],
+    "ARTS3814": [
+        "(",
+        "48UOC",
+        "&&",
+        "6UOC in L1",
+        "&&",
+        "6UOC in L2 in one of the following streams",
+        "||",
+        "Australian Studies",
+        "||",
+        "International Relations",
+        "||",
+        "Politics",
+        "||",
+        "Politics",
+        "&&",
+        "International Relations",
         ")"
     ]
 }

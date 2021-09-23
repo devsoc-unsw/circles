@@ -1,8 +1,6 @@
 '''The driver for our procsesors. Provide the relevant command line arguments
 in order to run the relevant drivers'''
 
-# TODO: import courseScraper
-
 import sys
 import argparse
 import glob
@@ -24,11 +22,19 @@ from data.processors.conditions_tokenising import tokenise_conditions
 
 from data.processors.run_manual_fixes import run_fixes
 
+from algorithms.cache.cache import cache_exclusions
+
 parser = argparse.ArgumentParser()
 parser.add_argument('--type', type=str,
-                    help='program, specialisation, course or condition')
+                    help='program, specialisation, course, condition, algorithm')
 parser.add_argument('--stage', type=str,
-                    help='all, scrape, format, process (or manual/tokenise for conditions manual fixes)')
+                    help=
+                    '''
+                    (any) --> all
+                    program/specialisation/course --> scrape, format, process
+                    condition --> process, manual, tokenise
+                    algorithm --> exclusion
+                    ''')
 
 try:
     args = parser.parse_args()
@@ -56,6 +62,9 @@ run = {
         'process': preprocess_conditions,
         'manual': run_fixes,
         'tokenise': tokenise_conditions
+    },
+    'algorithm': {
+        'exclusion': cache_exclusions
     }
 }
 
@@ -68,11 +77,11 @@ if args.stage == 'all':
             f"Careful. You are about to run all stages of {args.type} INCLUDING the scrapers... Enter 'y' if you wish to proceed or 'n' to cancel: ")
         if res == 'y':
             for s in run[args.type]:
-                run[args.stage][s]()
+                run[args.type][s]()
     else:
         # Conditions
         for s in run[args.type]:
-            run[args.stage][s]
+            run[args.type][s]()
 else:
     # Run the specific process
     run[args.type][args.stage]()

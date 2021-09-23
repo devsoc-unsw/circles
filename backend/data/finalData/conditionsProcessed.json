@@ -253,8 +253,8 @@
         "processed": "(MMAN1300 || ENGG1300 || DPST1072 || CVEN1300 ) && (MMAN2600 || ENGG2500) && MMAN2700"
     },
     "AERO4110": {
-        "original": "Prerequisite: At least 144 Units completed in AEROAH stream.<br/><br/>",
-        "processed": "At least 144 Units in AEROAH stream"
+        "original": "Prerequisite: At least 144 Units completed in AEROAH stream.<br/><br/>Prerequisite: AERO3110<br/><br/>",
+        "processed": "At least 144 Units in AEROAH stream. AERO3110"
     },
     "AERO4120": {
         "original": "Prerequisite: AERO4110<br/><br/>",
@@ -1245,8 +1245,8 @@
         "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Theatre & Performance Studies"
     },
     "ARTS3125": {
-        "original": "Prerequisite: 48 uoc overall, including 6 uoc at level 1 and 6 uoc at level 2 in one of the following specialisations, MCT or\u00a0Theatre & Performance Studies. Or 66 uoc overall and enrolled in a single or dual award Media (S&SP) program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, MCT or\u00a0Theatre & Performance Studies. || 66UOC && a single || dual award Media (S&SP) program"
+        "original": "Prerequisite: 48 uoc overall, including 6 uoc at level 1 and 6 uoc at level 2 in one of the following specialisations, MCT or Theatre & Performance Studies. Or 66 uoc overall and enrolled in a single or dual award Media (S&SP) program<br/><br/>",
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, MCT or Theatre & Performance Studies. || 66UOC && a single || dual award Media (S&SP) program"
     },
     "ARTS3130": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Dance Studies or Theatre & Performance Studies. Or 72 UOC overall and enrolment in an Art & Design program<br/><br/>",
@@ -1373,16 +1373,16 @@
         "processed": "ARTS3452 || language placement approval"
     },
     "ARTS3454": {
-        "original": "Prerequisite: ARTS2452 or ARTS3451 or ARTS3452 or ARTS3453 or\u00a0language placement approval<br/><br/>",
-        "processed": "ARTS2452 || ARTS3451 || ARTS3452 || ARTS3453 or\u00a0language placement approval"
+        "original": "Prerequisite: ARTS2452 or ARTS3451 or ARTS3452 or ARTS3453 or language placement approval<br/><br/>",
+        "processed": "ARTS2452 || ARTS3451 || ARTS3452 || ARTS3453 or language placement approval"
     },
     "ARTS3455": {
         "original": "Prerequisite: ARTS2452 or ARTS3451 or ARTS3452 or ARTS3453 or ARTS3454 or language placement approval<br/><br/>",
         "processed": "ARTS2452 || ARTS3451 || ARTS3452 || ARTS3453 || ARTS3454 || language placement approval"
     },
     "ARTS3456": {
-        "original": "Prerequisite: ARTS2452 or ARTS3451 or ARTS3452 or ARTS3453 or ARTS3454 or\u00a0language placement approval<br/><br/>",
-        "processed": "ARTS2452 || ARTS3451 || ARTS3452 || ARTS3453 || ARTS3454 or\u00a0language placement approval"
+        "original": "Prerequisite: ARTS2452 or ARTS3451 or ARTS3452 or ARTS3453 or ARTS3454 or language placement approval<br/><br/>",
+        "processed": "ARTS2452 || ARTS3451 || ARTS3452 || ARTS3453 || ARTS3454 or language placement approval"
     },
     "ARTS3458": {
         "original": "Prerequisite: 72uoc overall, including ARTS3453, ARTS2452, or ARTS3454  and enrolment in an Advanced Chinese Studies major/minor; or 72uoc overall, including ARTS2451 or ARTS2462 and enrolment in a Chinese Studies major/minor<br/><br/>",
@@ -3001,8 +3001,8 @@
         "processed": "PHYS1121 || PHY1131"
     },
     "CEIC2001": {
-        "original": "Pre-requisites:  PHYS1121 or PHY1131 or DPST1021 or DPST1023<br/><br/>",
-        "processed": "PHYS1121 || PHY1131 || DPST1021 || DPST1023"
+        "original": "Pre-requisites:  PHYS1121 or PHY1131 or DPST1021 or DPST1023<br/><br/>Pre-requisites:  MATH1231 or MATH1241 or MATH1251 or DPST1014<br/><br/>",
+        "processed": "PHYS1121 || PHY1131 || DPST1021 || DPST1023 MATH1231 || MATH1241 || MATH1251 || DPST1014"
     },
     "CEIC2002": {
         "original": "Prerequisite:CEIC2001<br/><br/>",
@@ -3053,8 +3053,8 @@
         "processed": "CEIC2000 || MATH2018 || MATH2019, MATH2089"
     },
     "CEIC3007": {
-        "original": "Co-requisite: CEIC3006<br/><br/>",
-        "processed": "[CEIC3006]"
+        "original": "Co-requisite: CEIC3006<br/><br/>Pre-requisite: CEIC2007 and CEIC3001 and CEIC3005 and MATH2089<br/><br/>",
+        "processed": "[CEIC3006 CEIC2007 && CEIC3001 && CEIC3005 && MATH2089]"
     },
     "CEIC4000": {
         "original": "",
@@ -3121,7 +3121,7 @@
         "processed": "CEIC2001, CEIC2002"
     },
     "CHEM1001": {
-        "original": "Exclusion: CHEM1011, CHEM1031, CHEM1051, CHEM1831<br/><br/>",
+        "original": "Exclusion: CHEM1011, CHEM1031, CHEM1051, CHEM1831<br/><br/>Exclusion: CHEM1811<br/><br/>",
         "processed": ""
     },
     "CHEM1011": {
@@ -3137,8 +3137,8 @@
         "processed": ""
     },
     "CHEM1041": {
-        "original": "Prerequisite: CHEM1031, or CHEM1011 with a credit or above.<br/><br/>",
-        "processed": "CHEM1031 || CHEM1011 with a credit || above"
+        "original": "Prerequisite: CHEM1031, or CHEM1011 with a credit or above.<br/><br/>Prerequisite: Must be enrolled in a program with the option of a CHEM major<br/><br/>",
+        "processed": "CHEM1031 || CHEM1011 with a credit || above. Must be a program with the option of a CHEM major"
     },
     "CHEM1051": {
         "original": "Prerequisite: Enrolment in the Bachelor of Medicinal Chemistry (3999 or 3992) or Bachelor of Medicinal Chemistry/Law program<br/><br/>",
@@ -3177,8 +3177,8 @@
         "processed": "CHEM1011 && enrolment in 3181 || 3182 || 3952 || a Vision Science major"
     },
     "CHEM1831": {
-        "original": "None<br/><br/>",
-        "processed": "None"
+        "original": "None<br/><br/>Must be enrolled in Exercise Physiology (3871) <br/><br/>",
+        "processed": "None Must be Exercise Physiology (3871)"
     },
     "CHEM2011": {
         "original": "Prerequisite: CHEM2041<br/><br/>",
@@ -3237,8 +3237,8 @@
         "processed": "CHEM2031 || CHEM2839"
     },
     "CHEM3051": {
-        "original": "Must be enrolled in Program 3999<br/><br/>",
-        "processed": "Must be Program 3999"
+        "original": "Must be enrolled in Program 3999<br/><br/>Pre-requisite: CHEM3021<br/><br/>",
+        "processed": "Must be Program 3999 CHEM3021"
     },
     "CHEM3061": {
         "original": "Prerequisite: CHEM2011<br/><br/>",
@@ -3501,8 +3501,8 @@
         "processed": "72UOC || room in degree for this course || good academic standing || COMM6000 Career Accelerator: Essentials || COMM1999 First Year Portfolio. This course is by application only. Please visit Business School website for more information"
     },
     "COMM3030": {
-        "original": "\u2022\thave completed a minimum of 48 UOC at the commencement of this course;<br/>\u2022\thave room in their degree for this course;<br/>\u2022\tare in good academic standing;<br/>\u2022\thave completed COMM6000 Career Accelerator: Essentials or COMM1999 First Year Portfolio (Business School students only)<br/>This course may count as a Business School Free Elective, OR as a major elective within some schools. It is recommended a progression check is completed prior to enrolling.<br/><br/>",
-        "processed": "\u2022\thave a minimum 48UOC at the commencement of this course; \u2022\thave room in their degree for this course; \u2022\tare in good academic standing; \u2022\thave COMM6000 Career Accelerator: Essentials || COMM1999 First Year Portfolio (Business School only) This course may count as a Business School Free Elective || as a major elective within some schools. It is recommended a progression check is prior to enrolling"
+        "original": "•\thave completed a minimum of 48 UOC at the commencement of this course;<br/>•\thave room in their degree for this course;<br/>•\tare in good academic standing;<br/>•\thave completed COMM6000 Career Accelerator: Essentials or COMM1999 First Year Portfolio (Business School students only)<br/>This course may count as a Business School Free Elective, OR as a major elective within some schools. It is recommended a progression check is completed prior to enrolling.<br/><br/>",
+        "processed": "•\thave a minimum 48UOC at the commencement of this course; •\thave room in their degree for this course; •\tare in good academic standing; •\thave COMM6000 Career Accelerator: Essentials || COMM1999 First Year Portfolio (Business School only) This course may count as a Business School Free Elective || as a major elective within some schools. It is recommended a progression check is prior to enrolling"
     },
     "COMM3090": {
         "original": "Students are expected to be in their final year of a Bachelor of Commerce single or dual degree with at least 108 UOC completed.<br/><br/>",
@@ -4962,12 +4962,12 @@
         "processed": "Enrolment in 7006 UNSW Global Diploma in Architecture Program"
     },
     "DPDE1004": {
-        "original": "Prerequisites: DPDE1001 and DPDE1005 <br/><br/>",
-        "processed": "DPDE1001 && DPDE1005"
+        "original": "Prerequisites: DPDE1001 and DPDE1005 <br/><br/>Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>",
+        "processed": "DPDE1001 && DPDE1005 Enrolment in 7006 UNSW Global Diploma in Architecture Program"
     },
     "DPDE1005": {
-        "original": "Prerequisite: DPDE1002<br/><br/>",
-        "processed": "DPDE1002"
+        "original": "Prerequisite: DPDE1002<br/><br/>Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>",
+        "processed": "DPDE1002 Enrolment in 7006 UNSW Global Diploma in Architecture Program"
     },
     "DPDE1006": {
         "original": "Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>",
@@ -4978,20 +4978,20 @@
         "processed": "Enrolment in 7006 UNSW Global Diploma in Architecture Program"
     },
     "DPDE1008": {
-        "original": "Prerequisite: DPDE1003<br/><br/>",
-        "processed": "DPDE1003"
+        "original": "Prerequisite: DPDE1003<br/><br/>Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>",
+        "processed": "DPDE1003 Enrolment in 7006 UNSW Global Diploma in Architecture Program"
     },
     "DPDE1009": {
-        "original": "Prerequisite: DPDE1001 <br/><br/>",
-        "processed": "DPDE1001"
+        "original": "Prerequisite: DPDE1001 <br/><br/>Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>",
+        "processed": "DPDE1001 Enrolment in 7006 UNSW Global Diploma in Architecture Program"
     },
     "DPDE1010": {
         "original": "Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>",
         "processed": "Enrolment in 7006 UNSW Global Diploma in Architecture Program"
     },
     "DPDE1011": {
-        "original": "Prerequisite: DPDE1001 and DPDE1005.<br/><br/>",
-        "processed": "DPDE1001 && DPDE1005"
+        "original": "Prerequisite: DPDE1001 and DPDE1005.<br/><br/>Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>",
+        "processed": "DPDE1001 && DPDE1005. Enrolment in 7006 UNSW Global Diploma in Architecture Program"
     },
     "DPGE1001": {
         "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
@@ -5058,8 +5058,8 @@
         "processed": "UNSW Global Diplomas only (7001 && 7002 && 7003 && 7004) && [DPST1013]"
     },
     "DPST1024": {
-        "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) prerequisite DPST1023 OR a credit (\u226565%) in DPST1021 and corequisite DPST1014<br/><br/>",
-        "processed": "UNSW Global Diplomas only (7001 || 7002 || 7003 || 7004) DPST1023 || a credit (\u226565%) in DPST1021 && [DPST1014]"
+        "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) prerequisite DPST1023 OR a credit (≥65%) in DPST1021 and corequisite DPST1014<br/><br/>",
+        "processed": "UNSW Global Diplomas only (7001 || 7002 || 7003 || 7004) DPST1023 || a credit (≥65%) in DPST1021 && [DPST1014]"
     },
     "DPST1031": {
         "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
@@ -5618,16 +5618,16 @@
         "processed": "EDST6728. Corerequisite: EDST6760"
     },
     "EDST6760": {
-        "original": "Prerequisite: EDST2002, EDST4084, 12 uoc Teaching Method 1 courses, and enrolment in an Education program. Students must have passed LANTITE.\u00a0 Students must have sufficient subject content knowledge in their teaching areas<br/><br/>",
-        "processed": "EDST2002 && EDST4084 && 12UOC Teaching Method 1 courses && enrolment in an Education program. must have passed LANTITE.\u00a0 must have sufficient subject content knowledge in their teaching areas"
+        "original": "Prerequisite: EDST2002, EDST4084, 12 uoc Teaching Method 1 courses, and enrolment in an Education program. Students must have passed LANTITE.  Students must have sufficient subject content knowledge in their teaching areas<br/><br/>",
+        "processed": "EDST2002 && EDST4084 && 12UOC Teaching Method 1 courses && enrolment in an Education program. must have passed LANTITE.  must have sufficient subject content knowledge in their teaching areas"
     },
     "EDST6761": {
         "original": "Prerequisite: EDST6760 and 12 units of credit in Teaching Methods courses. Students must have passed the Literacy and Numeracy Test for Initial Teacher Education in order to enrol into this course.<br/><br/>",
         "processed": "EDST6760 && 12UOC in Teaching Methods courses. must have passed the Literacy && Numeracy Test for Initial Teacher Education in order to enrol into this course"
     },
     "EDST6765": {
-        "original": "Prerequisite: EDST4080, EDST4096, EDST6760, 24 uoc Teaching Method courses, and enrolment in an Education program. Students must have passed LANTITE.\u00a0Students must have sufficient subject content knowledge in their teaching areas.\u00a0Excluded: EDST4081<br/><br/>",
-        "processed": "EDST4080 && EDST4096 && EDST6760 && 24UOC Teaching Method courses && enrolment in an Education program. must have passed LANTITE.\u00a0 must have sufficient subject content knowledge in their teaching areas"
+        "original": "Prerequisite: EDST4080, EDST4096, EDST6760, 24 uoc Teaching Method courses, and enrolment in an Education program. Students must have passed LANTITE. Students must have sufficient subject content knowledge in their teaching areas. Excluded: EDST4081<br/><br/>",
+        "processed": "EDST4080 && EDST4096 && EDST6760 && 24UOC Teaching Method courses && enrolment in an Education program. must have passed LANTITE.  must have sufficient subject content knowledge in their teaching areas"
     },
     "EDST6771": {
         "original": "Prerequisite: 78 UOC overall, including EDST2002, and enrolment in program 4059, 4061, 4062, 4064, or 4066<br/><br/>",
@@ -7110,8 +7110,8 @@
         "processed": "LAND2272"
     },
     "LAND1351": {
-        "original": "Please add pre-rec: LAND2251<br/><br/>",
-        "processed": "Please add LAND2251"
+        "original": "Please add pre-rec: LAND2251<br/><br/>Pre-requisite: LAND2152<br/><br/>",
+        "processed": "Please add LAND2251 LAND2152"
     },
     "LAND1421": {
         "original": "Prerequisite: LAND1322<br/><br/>",
@@ -8474,12 +8474,12 @@
         "processed": ""
     },
     "MDCN8888": {
-        "original": "Students with a WAM of \u2265 65 (see WAM calculation below) and have completed 12 Units of Credit (UOC) General Education before Term 1 in year 4, are eligible to apply.<br/>WAM Calculation<br/>The WAM is calculated from the following courses:<br/>1.\tMFAC 1521 Beginnings, Growth and Development A<br/>2.\tMFAC 1522 Beginnings, Growth and Development B<br/>3.\tMFAC 1523 Health Maintenance A<br/>4.\tMFAC 1524 Health Maintenance B<br/>5.\tMFAC 1525 Ageing and Endings A<br/>6.\tMFAC 1526 Ageing and Endings B<br/>7.\tMFAC 1527 Society & Health<br/>In addition, students are required to pass the following courses (including passing subsequent supplementary exams, but if a student fails a course then they will be ineligible):<br/>1.\tMFAC 1501 Foundations<br/>2.\tMFAC 1511 Phase 1 Portfolio<br/>3.\tMFAC 1512 End of Phase Examination<br/>4.\tMFAC 1513 Clinical and Communication Skills Examination<br/>5.\tMFAC 2514 Integrated Clinical Studies 1<br/>6.\tMFAC 2515 Integrated Clinical Studies 2<br/>7.\tMFAC 2516 Integrated Clinical Studies 3<br/>8.\tMFAC 2511 Phase 2 Portfolio<br/>9.\tMFAC 2512 Integrated Clinical Examination<br/><br/>",
-        "processed": "with a WAM of \u2265 65 (see WAM calculation below) && have 12UOC (UOC) General Education before Term 1 in year 4 && are eligible to apply. WAM Calculation The WAM is calculated from the following courses: 1.\tMFAC 1521 Beginnings && Growth && Development A 2.\tMFAC 1522 Beginnings && Growth && Development B 3.\tMFAC 1523 Health Maintenance A 4.\tMFAC 1524 Health Maintenance B 5.\tMFAC 1525 Ageing && Endings A 6.\tMFAC 1526 Ageing && Endings B 7.\tMFAC 1527 Society & Health In addition && are required to pass the following courses (&& passing subsequent supplementary exams && but if a fails a course then they will be ineligible): 1.\tMFAC 1501 Foundations 2.\tMFAC 1511 Phase 1 Portfolio 3.\tMFAC 1512 End of Phase Examination 4.\tMFAC 1513 Clinical && Communication Skills Examination 5.\tMFAC 2514 Integrated Clinical Studies 1 6.\tMFAC 2515 Integrated Clinical Studies 2 7.\tMFAC 2516 Integrated Clinical Studies 3 8.\tMFAC 2511 Phase 2 Portfolio 9.\tMFAC 2512 Integrated Clinical Examination"
+        "original": "Students with a WAM of ≥ 65 (see WAM calculation below) and have completed 12 Units of Credit (UOC) General Education before Term 1 in year 4, are eligible to apply.<br/>WAM Calculation<br/>The WAM is calculated from the following courses:<br/>1.\tMFAC 1521 Beginnings, Growth and Development A<br/>2.\tMFAC 1522 Beginnings, Growth and Development B<br/>3.\tMFAC 1523 Health Maintenance A<br/>4.\tMFAC 1524 Health Maintenance B<br/>5.\tMFAC 1525 Ageing and Endings A<br/>6.\tMFAC 1526 Ageing and Endings B<br/>7.\tMFAC 1527 Society & Health<br/>In addition, students are required to pass the following courses (including passing subsequent supplementary exams, but if a student fails a course then they will be ineligible):<br/>1.\tMFAC 1501 Foundations<br/>2.\tMFAC 1511 Phase 1 Portfolio<br/>3.\tMFAC 1512 End of Phase Examination<br/>4.\tMFAC 1513 Clinical and Communication Skills Examination<br/>5.\tMFAC 2514 Integrated Clinical Studies 1<br/>6.\tMFAC 2515 Integrated Clinical Studies 2<br/>7.\tMFAC 2516 Integrated Clinical Studies 3<br/>8.\tMFAC 2511 Phase 2 Portfolio<br/>9.\tMFAC 2512 Integrated Clinical Examination<br/><br/>",
+        "processed": "with a WAM of ≥ 65 (see WAM calculation below) && have 12UOC (UOC) General Education before Term 1 in year 4 && are eligible to apply. WAM Calculation The WAM is calculated from the following courses: 1.\tMFAC 1521 Beginnings && Growth && Development A 2.\tMFAC 1522 Beginnings && Growth && Development B 3.\tMFAC 1523 Health Maintenance A 4.\tMFAC 1524 Health Maintenance B 5.\tMFAC 1525 Ageing && Endings A 6.\tMFAC 1526 Ageing && Endings B 7.\tMFAC 1527 Society & Health In addition && are required to pass the following courses (&& passing subsequent supplementary exams && but if a fails a course then they will be ineligible): 1.\tMFAC 1501 Foundations 2.\tMFAC 1511 Phase 1 Portfolio 3.\tMFAC 1512 End of Phase Examination 4.\tMFAC 1513 Clinical && Communication Skills Examination 5.\tMFAC 2514 Integrated Clinical Studies 1 6.\tMFAC 2515 Integrated Clinical Studies 2 7.\tMFAC 2516 Integrated Clinical Studies 3 8.\tMFAC 2511 Phase 2 Portfolio 9.\tMFAC 2512 Integrated Clinical Examination"
     },
     "MDCN8889": {
-        "original": "Students with a WAM of \u2265 65 (see WAM calculation below) and have completed 12 Units of Credit (UOC) General Education before Term 1 in year 4, are eligible to apply.<br/>WAM Calculation<br/>The WAM is calculated from the following courses:<br/>1. MFAC 1521 Beginnings, Growth and Development A<br/>2. MFAC 1522 Beginnings, Growth and Development B<br/>3. MFAC 1523 Health Maintenance A<br/>4. MFAC 1524 Health Maintenance B<br/>5. MFAC 1525 Ageing and Endings A<br/>6. MFAC 1526 Ageing and Endings B<br/>7. MFAC 1527 Society & Health<br/>In addition, students are required to pass the following courses (including passing subsequent supplementary exams, but if a student fails a course then they will be ineligible):<br/>1. MFAC 1501 Foundations<br/>2. MFAC 1511 Phase 1 Portfolio<br/>3. MFAC 1512 End of Phase Examination<br/>4. MFAC 1513 Clinical and Communication Skills Examination<br/>5. MFAC 2514 Integrated Clinical Studies 1<br/>6. MFAC 2515 Integrated Clinical Studies 2<br/>7. MFAC 2516 Integrated Clinical Studies 3<br/>8. MFAC 2511 Phase 2 Portfolio<br/>9. MFAC 2512 Integrated Clinical Examination<br/><br/>",
-        "processed": "with a WAM of \u2265 65 (see WAM calculation below) && have 12UOC (UOC) General Education before Term 1 in year 4 && are eligible to apply. WAM Calculation The WAM is calculated from the following courses: 1. MFAC 1521 Beginnings && Growth && Development A 2. MFAC 1522 Beginnings && Growth && Development B 3. MFAC 1523 Health Maintenance A 4. MFAC 1524 Health Maintenance B 5. MFAC 1525 Ageing && Endings A 6. MFAC 1526 Ageing && Endings B 7. MFAC 1527 Society & Health In addition && are required to pass the following courses (&& passing subsequent supplementary exams && but if a fails a course then they will be ineligible): 1. MFAC 1501 Foundations 2. MFAC 1511 Phase 1 Portfolio 3. MFAC 1512 End of Phase Examination 4. MFAC 1513 Clinical && Communication Skills Examination 5. MFAC 2514 Integrated Clinical Studies 1 6. MFAC 2515 Integrated Clinical Studies 2 7. MFAC 2516 Integrated Clinical Studies 3 8. MFAC 2511 Phase 2 Portfolio 9. MFAC 2512 Integrated Clinical Examination"
+        "original": "Students with a WAM of ≥ 65 (see WAM calculation below) and have completed 12 Units of Credit (UOC) General Education before Term 1 in year 4, are eligible to apply.<br/>WAM Calculation<br/>The WAM is calculated from the following courses:<br/>1. MFAC 1521 Beginnings, Growth and Development A<br/>2. MFAC 1522 Beginnings, Growth and Development B<br/>3. MFAC 1523 Health Maintenance A<br/>4. MFAC 1524 Health Maintenance B<br/>5. MFAC 1525 Ageing and Endings A<br/>6. MFAC 1526 Ageing and Endings B<br/>7. MFAC 1527 Society & Health<br/>In addition, students are required to pass the following courses (including passing subsequent supplementary exams, but if a student fails a course then they will be ineligible):<br/>1. MFAC 1501 Foundations<br/>2. MFAC 1511 Phase 1 Portfolio<br/>3. MFAC 1512 End of Phase Examination<br/>4. MFAC 1513 Clinical and Communication Skills Examination<br/>5. MFAC 2514 Integrated Clinical Studies 1<br/>6. MFAC 2515 Integrated Clinical Studies 2<br/>7. MFAC 2516 Integrated Clinical Studies 3<br/>8. MFAC 2511 Phase 2 Portfolio<br/>9. MFAC 2512 Integrated Clinical Examination<br/><br/>",
+        "processed": "with a WAM of ≥ 65 (see WAM calculation below) && have 12UOC (UOC) General Education before Term 1 in year 4 && are eligible to apply. WAM Calculation The WAM is calculated from the following courses: 1. MFAC 1521 Beginnings && Growth && Development A 2. MFAC 1522 Beginnings && Growth && Development B 3. MFAC 1523 Health Maintenance A 4. MFAC 1524 Health Maintenance B 5. MFAC 1525 Ageing && Endings A 6. MFAC 1526 Ageing && Endings B 7. MFAC 1527 Society & Health In addition && are required to pass the following courses (&& passing subsequent supplementary exams && but if a fails a course then they will be ineligible): 1. MFAC 1501 Foundations 2. MFAC 1511 Phase 1 Portfolio 3. MFAC 1512 End of Phase Examination 4. MFAC 1513 Clinical && Communication Skills Examination 5. MFAC 2514 Integrated Clinical Studies 1 6. MFAC 2515 Integrated Clinical Studies 2 7. MFAC 2516 Integrated Clinical Studies 3 8. MFAC 2511 Phase 2 Portfolio 9. MFAC 2512 Integrated Clinical Examination"
     },
     "MDIA1000": {
         "original": "Prerequisite: Enrolment in a single or dual award Media program<br/><br/>",
@@ -8542,8 +8542,8 @@
         "processed": "24UOC in L1 && enrolment in a single || dual award Media program || enrolment in a Creative Writing major || minor. Equivalent: MDIA3001"
     },
     "MDIA2011": {
-        "original": "Prerequisite: 24 units of credit at level 1 including\u00a0MDIA1002 or MDIA1003. Or 24 units of credit at level 1 and enrolment  in a Global Development major<br/><br/>",
-        "processed": "24UOC in L1 &&\u00a0MDIA1002 || MDIA1003. || 24UOC in L1 && enrolment in a Global Development major"
+        "original": "Prerequisite: 24 units of credit at level 1 including MDIA1002 or MDIA1003. Or 24 units of credit at level 1 and enrolment  in a Global Development major<br/><br/>",
+        "processed": "24UOC in L1 && MDIA1002 || MDIA1003. || 24UOC in L1 && enrolment in a Global Development major"
     },
     "MDIA2012": {
         "original": "Prerequisite: MDIA1002 or MDIA1003; and enrolment in a single or double degree Bachelor of Media (PR & Advertising) program<br/><br/>",
@@ -10846,16 +10846,16 @@
         "processed": "SENG2021"
     },
     "SENG3991": {
-        "original": "Currently enrolled in Program 3707 in the SENGAH stream and in the Co-op program<br/>and completed SENG2011 and SENG2021 and DESN2000 and COMP2511 and COMP2041.<br/><br/>",
-        "processed": "Currently Program 3707 in the SENGAH stream && in the Co-op program && SENG2011 && SENG2021 && DESN2000 && COMP2511 && COMP2041"
+        "original": "Currently enrolled in Program 3707 in the SENGAH stream and in the Co-op program<br/>and completed SENG2011 and SENG2021 and DESN2000 and COMP2511 and COMP2041.<br/><br/>Successful completion of SEN2991 and attendance of IT Reflection Workshop (facilitated by Co-op Program) are a<br/>prerequisite for this course.<br/><br/>",
+        "processed": "Currently Program 3707 in the SENGAH stream && in the Co-op program && SENG2011 && SENG2021 && DESN2000 && COMP2511 && COMP2041. Successful SEN2991 && attendance of IT Reflection Workshop (facilitated by Co-op Program) are a for this course"
     },
     "SENG3992": {
-        "original": "Currently enrolled in Program 3707 in the SENGAH stream and in the Co-op program<br/>and completed SENG3011.<br/><br/>",
-        "processed": "Currently Program 3707 in the SENGAH stream && in the Co-op program && SENG3011"
+        "original": "Currently enrolled in Program 3707 in the SENGAH stream and in the Co-op program<br/>and completed SENG3011.<br/><br/>Successful completion of SEN2991 and SENG3991are a prerequisite for this course<br/><br/>",
+        "processed": "Currently Program 3707 in the SENGAH stream && in the Co-op program && SENG3011. Successful SEN2991 && SENG3991are a for this course"
     },
     "SENG4920": {
-        "original": "Prerequisite: COMP2511<br/><br/>",
-        "processed": "COMP2511"
+        "original": "Prerequisite: COMP2511<br/><br/><br/>Completed more than or equal to 144 UOC in SENGAH, BINFAH or COMPBH<br/><br/>",
+        "processed": "COMP2511 more than || equal to 144UOC in SENGAH || BINFAH || COMPBH"
     },
     "SERV9999": {
         "original": "",
@@ -11142,8 +11142,8 @@
         "processed": "72UOC of courses"
     },
     "SOMS3199": {
-        "original": "Prerequisite: enrolled in 3991 program, or in a Science program (single or dual) and majoring in a SOMS major. Must complete preparation for WIL mini-modules prior to enrolment. Placement must be related to the student\u2019s major or specialisation, and approved by SOMS prior to enrolment.  <br/>Pre-requisite of 48 units of credit and a minimum 65 WAM.  <br/><br/>",
-        "processed": "3991 program || in a Science program (single || dual) && majoring in a SOMS major. Must complete for WIL mini-modules prior to enrolment. Placement must be related to the \u2019s major || specialisation && approved by SOMS prior to enrolment. 48UOC && a 65WAM"
+        "original": "Prerequisite: enrolled in 3991 program, or in a Science program (single or dual) and majoring in a SOMS major. Must complete preparation for WIL mini-modules prior to enrolment. Placement must be related to the student’s major or specialisation, and approved by SOMS prior to enrolment.  <br/>Pre-requisite of 48 units of credit and a minimum 65 WAM.  <br/><br/>",
+        "processed": "3991 program || in a Science program (single || dual) && majoring in a SOMS major. Must complete for WIL mini-modules prior to enrolment. Placement must be related to the ’s major || specialisation && approved by SOMS prior to enrolment. 48UOC && a 65WAM"
     },
     "SOMS3232": {
         "original": "Prerequisite: ANAT3231 or BIOC2101  or BIOC2181 or BABS2202 or (ANAT2241 and PHSL2101)<br/><br/>",
@@ -11610,8 +11610,8 @@
         "processed": ""
     },
     "ZBUS3104": {
-        "original": "Business Program (4405 or 4462) and ZBUS1104<br/><br/>",
-        "processed": "Business Program (4405 || 4462) && ZBUS1104"
+        "original": "Business Program (4405 or 4462) and ZBUS1104<br/><br/>Completion of ZBUS3108 Business Strategy Implementation is assumed prior to undertaking ZBUS3104 Business Capstone (Work Practice Project). <br/><br/>",
+        "processed": "Business Program (4405 || 4462) && ZBUS1104 ZBUS3108 Business Strategy Implementation is assumed prior to undertaking Business Capstone (Work Practice Project)"
     },
     "ZBUS3106": {
         "original": "",
