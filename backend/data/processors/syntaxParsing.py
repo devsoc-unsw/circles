@@ -1,0 +1,98 @@
+import re
+import sys 
+from data.utility import dataHelpers
+
+CONDITIONS = dataHelpers.read_data("data/finalData/conditionsProcessed.json")
+
+KNOWN_WORDS = {"&&", "||", "in"}
+
+PROCESSED = "processed"
+
+# Conditions that have had manual fixes applied
+FINAL_CONDITIONS = ["ACCT", "COMP"]
+
+def parse_syntax():
+
+    res = input("Type 'y' to print errors to file syntaxErrors.txt or any other key for stdout: ")
+
+    orig_stdout = sys.stdout
+    if res == 'y':
+        f = open('syntaxErrors.txt', 'w')
+        sys.stdout = f 
+
+    for course, condition in CONDITIONS.items():
+
+        if course[:4] not in FINAL_CONDITIONS:
+            continue 
+
+        if not do_brackets_match(condition[PROCESSED]):
+            print(f"Failed bracket match!");
+            print(f"{course}: {condition[PROCESSED]}\n")
+
+        unknown = find_unknown_words(condition[PROCESSED])
+        if unknown:
+            print(f"Unknown word(s) in condition");
+            print(f"{course}: {condition[PROCESSED]}")
+            print(f"Unknown: {unknown}\n")
+
+    sys.stdout = orig_stdout
+
+def find_unknown_words(processed):
+    """
+    Checks whether words in processed condition are known to the algorithm.
+    Returns a list of all unknown words.
+    """
+    unknown = []
+    words = processed.split(" ")
+
+    for word in words:
+        # Remove formatting
+        word = re.sub(r"[,.\)\(\[\]]", "", word)
+        
+        if re.search(r"[A-Z]{4,5}\d{0,5}", word):
+            # Ignore course codes: e.g. COMP, COMP1511, ACTB13554
+            continue
+        if re.search(r"\d{4}", word):
+            # Ignore program codes
+            continue
+        if re.search(r"\d{1,2}(WAM|UOC|GRADE)", word):
+            # Ignore WAM, GRADE, and UOC words
+            continue
+    
+        if word and word not in KNOWN_WORDS:
+            unknown.append(word)
+
+    return unknown
+
+def do_brackets_match(processed):
+    """
+    Checks whether brackets are valid and matching.
+    """
+
+    bracket_map = {"(": ")", "[": "]"}
+    closing = {")", "]"}
+    stack = []
+
+    for char in processed:
+
+        if char in bracket_map:
+            # Opening brackets
+            stack.append(char)
+        
+        elif char in closing:
+            # Closing brackets
+            if len(stack) == 0:
+                return False
+
+            popped = stack.pop()
+            if char != bracket_map[popped]:
+                return False
+            
+    if len(stack) != 0:
+        # Stack should be empty in the end
+        return False
+    
+    return True
+
+if __name__ == "__main__":
+    parse_syntax()
