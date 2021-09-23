@@ -5,7 +5,7 @@
     },
     "ACCT2101": {
         "original": "Prerequisite: Enrolment in Accounting Co-op Major (ACCTB13554)<br/><br/>",
-        "processed": "Enrolment in Accounting Co-op Major (ACCTB13554)"
+        "processed": "ACCTB13554"
     },
     "ACCT2511": {
         "original": "Pre-requisite: COMM1140 or ACCT1501<br/><br/>",
@@ -21,15 +21,15 @@
     },
     "ACCT2672": {
         "original": "Pre-requisite: ACCT1501 AND 65+ WAM or <br/>COMM1140  AND 65+ WAM<br/><br/>",
-        "processed": "ACCT1501 && 65WAM || COMM1140 && 65WAM"
+        "processed": "(ACCT1501 && 65WAM) || (COMM1140 && 65WAM)"
     },
     "ACCT3202": {
         "original": "Prerequisite: Enrolment in Accounting Co-op Major (ACCTB13554)<br/><br/>",
-        "processed": "Enrolment in Accounting Co-op Major (ACCTB13554)"
+        "processed": "ACCTB13554"
     },
     "ACCT3303": {
         "original": "Prerequisite: Enrolment in Accounting Co-op Major (ACCTB13554)<br/><br/>",
-        "processed": "Enrolment in Accounting Co-op Major (ACCTB13554)"
+        "processed": "ACCTB13554"
     },
     "ACCT3563": {
         "original": "Prerequisite:ACCT2542<br/><br/>",
@@ -53,7 +53,8 @@
     },
     "ACCT3708": {
         "original": "Prerequisite: ACCT2542 or approval from the School<br/><br/>",
-        "processed": "ACCT2542 || approval from the School"
+        "processed": "ACCT2542",
+        "warning": "You need approval from the School of Accounting, Auditing and Taxation to enrol in this course."
     },
     "ACCT4796": {
         "original": "",
@@ -61,7 +62,7 @@
     },
     "ACCT4797": {
         "original": "Prerequisite: Must be enrolled in program 4501 (Accounting)<br/><br/>",
-        "processed": "Must be program 4501 (Accounting)"
+        "processed": "4501"
     },
     "ACCT4798": {
         "original": "",
@@ -69,19 +70,19 @@
     },
     "ACCT4809": {
         "original": "Prerequisite: Must be enrolled in program 4501 (Accounting)<br/><br/>",
-        "processed": "Must be program 4501 (Accounting)"
+        "processed": "4501"
     },
     "ACCT4851": {
         "original": "Prerequisite: Must be enrolled in program 4501 (Accounting)<br/><br/>",
-        "processed": "Must be program 4501 (Accounting)"
+        "processed": "4501"
     },
     "ACCT4852": {
         "original": "Prerequisite: Must be enrolled in program 4501 (Accounting)<br/><br/>",
-        "processed": "Must be program 4501 (Accounting)"
+        "processed": "4501"
     },
     "ACCT4897": {
         "original": "Prerequisite: Must be enrolled in program 4501 (Accounting)<br/><br/>",
-        "processed": "Must be program 4501 (Accounting)"
+        "processed": "4501"
     },
     "ACTL1101": {
         "original": "Prerequisite: MATH1151 AND in Actuarial Studies programs.<br/><br/>",
@@ -3561,7 +3562,7 @@
     },
     "COMP1911": {
         "original": "Prerequisite: Enrolment in a non-CSE major (no BINF, COMP, or SENG)<br/><br/>",
-        "processed": "Enrolment in a non-CSE major (no BINF || COMP || SENG)"
+        "processed": ""
     },
     "COMP2041": {
         "original": "Prerequisite: COMP1511 OR DPST1091 OR COMP1917 OR COMP1921<br/><br/>",
@@ -3637,7 +3638,7 @@
     },
     "COMP3431": {
         "original": "Prerequisite: COMP2521 or COMP1927, and a WAM of at least 70<br/><br/>",
-        "processed": "COMP2521 || COMP1927 && 70WAM"
+        "processed": "(COMP2521 || COMP1927) && 70WAM"
     },
     "COMP3511": {
         "original": "Prerequisite: Completion of 48 UOC<br/><br/>",
@@ -3649,7 +3650,7 @@
     },
     "COMP3821": {
         "original": "Prerequisite: A mark of at least 65 in COMP1927 or COMP2521<br/><br/>",
-        "processed": "65GRADE in COMP1927 || COMP2521"
+        "processed": "65GRADE in (COMP1927 || COMP2521)"
     },
     "COMP3891": {
         "original": "Prerequisite: (COMP1521 or DPST1092 or COMP2121) and (COMP2521 or COMP1927) and a WAM of at least 75<br/><br/>",
@@ -3657,15 +3658,17 @@
     },
     "COMP3900": {
         "original": "Prerequisite: COMP1531, and COMP2521 or COMP1927, and enrolled in a BSc Computer Science major with completion of 102 uoc.<br/><br/>",
-        "processed": "COMP1531 && COMP2521 || COMP1927 && a BSc Computer Science major with 102UOC"
+        "processed": "COMP1531 && (COMP2521 || COMP1927) && 102UOC in (COMP?1 || COMPBH)"
     },
     "COMP3901": {
         "original": "Prerequisite: 80+ WAM in COMP, SENG or BINF courses, completion of all first and second year core requirements a CSE program, and agreement from a suitable CSE academic supervisor.<br/><br/>",
-        "processed": "80WAM in COMP || SENG || BINF courses && all first && second year core requirements a CSE program && agreement from a suitable CSE academic supervisor"
+        "processed": "80WAM in (COMP || SENG || BINF)",
+        "warning": "You must complete all first and second year core requirements of a CSE program and obtain agreement from a suitable CSE academic supervisor to enrol in this course."
     },
     "COMP3902": {
         "original": "Prerequisite: 80+ WAM in COMP, SENG or BINF courses, completion of all first and second year core requirements a CSE program, and agreement from a suitable CSE academic supervisor.<br/><br/>",
-        "processed": "80WAM in COMP || SENG || BINF courses && all first && second year core requirements a CSE program && agreement from a suitable CSE academic supervisor"
+        "processed": "80WAM in (COMP || SENG || BINF)",
+        "warning": "You must complete all first and second year core requirements of a CSE program and obtain agreement from a suitable CSE academic supervisor to enrol in this course."
     },
     "COMP4121": {
         "original": "Prerequisite: COMP3121 or  COMP3821.<br/><br/>",
@@ -3677,7 +3680,7 @@
     },
     "COMP4141": {
         "original": "Prerequisite: MATH1081, and COMP1927 or COMP2521<br/><br/>",
-        "processed": "MATH1081 && COMP1927 || COMP2521"
+        "processed": "MATH1081 && (COMP1927 || COMP2521)"
     },
     "COMP4161": {
         "original": "Prerequisite: Completion of 48 UOC<br/><br/>",
@@ -3705,23 +3708,24 @@
     },
     "COMP4920": {
         "original": "Prerequisite: (COMP2511 or COMP2911) and completion of 96 UOC in Computer Science.<br/><br/>",
-        "processed": "(COMP2511 || COMP2911) && 96UOC in Computer Science"
+        "processed": "(COMP2511 || COMP2911) && 96UOC in COMP"
     },
     "COMP4951": {
         "original": "Prerequisite: Enrolled in a CSE BE (Hons) programs, completion of 126 UOC and completion of 3rd year core.<br/><br/>",
-        "processed": "a CSE BE (Hons) programs && 126UOC && 3rd year core"
+        "processed": "126UOC && (BINF?H || SENGAH || COMP?H)",
+        "warning": "You must be enrolled in a CSE BE (Hons) program and complete all third year core requirements to enrol in this course."
     },
     "COMP4952": {
         "original": "Prerequisite: Completion of Research Thesis A (4951)<br/><br/>",
-        "processed": "Research Thesis A (4951)"
+        "processed": "COMP4951"
     },
     "COMP4953": {
         "original": "Prerequisite: Completion of Research Thesis B (4952)<br/><br/>",
-        "processed": "Research Thesis B (4952)"
+        "processed": "COMP4952"
     },
     "COMP4961": {
         "original": "Prerequisite: Students enrolled in program 4515 Bachelor of Computer Science (Hons) or program 3648.<br/><br/>",
-        "processed": "program 4515 Bachelor of Computer Science (Hons) || program 3648"
+        "processed": "4515 || 3648"
     },
     "COMP4962": {
         "original": "COMP4962 Prerequisite: Students must successfully complete COMP4951<br/><br/>",
@@ -3745,11 +3749,11 @@
     },
     "COMP6445": {
         "original": "Prerequisite: COMP3441 or COMP6441 or COMP6841, and COMP3231 or COMP3891<br/><br/>",
-        "processed": "COMP3441 || COMP6441 || COMP6841 && COMP3231 || COMP3891"
+        "processed": "(COMP3441 || COMP6441 || COMP6841) && (COMP3231 || COMP3891)"
     },
     "COMP6447": {
         "original": "Prerequisite: A mark of at least 65 in COMP6841, or a mark of at least 75 in COMP6441 or COMP3441.<br/><br/>",
-        "processed": "65GRADE in COMP6841 || 75GRADE in COMP6441 || COMP3441"
+        "processed": "65GRADE in COMP6841 || 75GRADE in (COMP6441 || COMP3441)"
     },
     "COMP6448": {
         "original": "Prerequisite: COMP6841<br/><br/>",
@@ -3773,7 +3777,7 @@
     },
     "COMP6721": {
         "original": "Pre-requisite: MATH1081 AND COMP2521 AND (not enrolled in SENGAH)<br/><br/>",
-        "processed": "MATH1081 && COMP2521 && (not SENGAH)"
+        "processed": "MATH1081 && COMP2521"
     },
     "COMP6733": {
         "original": "Prerequisite: 65 WAM and COMP3331<br/><br/>",
@@ -3793,7 +3797,7 @@
     },
     "COMP6841": {
         "original": "Prerequisite: Completion of 48 UOC, and COMP1927 or COMP2521<br/><br/>",
-        "processed": "48UOC && COMP1927 || COMP2521"
+        "processed": "48UOC && (COMP1927 || COMP2521)"
     },
     "COMP6843": {
         "original": "Prerequisite: COMP6441 or COMP6841 or COMP3441<br/><br/>",
@@ -3801,11 +3805,11 @@
     },
     "COMP6845": {
         "original": "Prerequisite: COMP3441 or COMP6441 or COMP6841, and COMP3231 or COMP3891<br/><br/>",
-        "processed": "COMP3441 || COMP6441 || COMP6841 && COMP3231 || COMP3891"
+        "processed": "(COMP3441 || COMP6441 || COMP6841) && (COMP3231 || COMP3891)"
     },
     "COMP9242": {
         "original": "Prerequisite: a mark of at least 75 in either COMP3231 or COMP3891.<br/><br/>",
-        "processed": "75GRADE in COMP3231 || COMP3891"
+        "processed": "75GRADE in (COMP3231 || COMP3891)"
     },
     "COMP9243": {
         "original": "Prerequisite: [COMP3231 or COMP3891] and [COMP3331 or TELE3018].<br/><br/>",
@@ -3813,23 +3817,25 @@
     },
     "COMP9301": {
         "original": "(COMP6441 OR COMP6841) AND (6 UOC from  (COMP6443, COMP6843, COMP6445, COMP6845, COMP6447)) AND enrolled in final term of program<br/><br/>",
-        "processed": "(COMP6441 || COMP6841) && ( 6UOC from (COMP6443 && COMP6843 && COMP6445 && COMP6845 && COMP6447)) && final term of program"
+        "processed": "(COMP6441 || COMP6841) && (COMP6443 || COMP6843 || COMP6445 || COMP6845 || COMP6447)",
+        "warning": "This course can only be taken in the final term of your program."
     },
     "COMP9302": {
         "original": "(COMP6441 OR COMP6841) AND (12 UOC from (COMP6443, COMP6843, COMP6445, COMP6845, COMP6447)) AND enrolled in final term of program<br/><br/>",
-        "processed": "(COMP6441 || COMP6841) && ( 12UOC from (COMP6443 && COMP6843 && COMP6445 && COMP6845 && COMP6447)) && final term of program"
+        "processed": "(COMP6441 || COMP6841) && (12UOC in (COMP6443 || COMP6843 || COMP6445 || COMP6845 || COMP6447))",
+        "warning": "This course can only be taken in the final term of your program."
     },
     "COMP9312": {
         "original": "Prerequisite: COMP1927 or COMP2521, and COMP3311<br/><br/>",
-        "processed": "COMP1927 || COMP2521 && COMP3311"
+        "processed": "(COMP1927 || COMP2521) && COMP3311"
     },
     "COMP9313": {
         "original": "Prerequisite: COMP1927 or COMP2521, and COMP3311<br/><br/>",
-        "processed": "COMP1927 || COMP2521 && COMP3311"
+        "processed": "(COMP1927 || COMP2521) && COMP3311"
     },
     "COMP9315": {
         "original": "Prerequisite: COMP1927 or COMP2521, and COMP3311<br/><br/>",
-        "processed": "COMP1927 || COMP2521 && COMP3311"
+        "processed": "(COMP1927 || COMP2521) && COMP3311"
     },
     "COMP9318": {
         "original": "Prerequisite: (COMP2521 or COMP1927) and COMP3311 and MATH1081<br/><br/>",
@@ -3877,7 +3883,7 @@
     },
     "COMP9491": {
         "original": "Two prerequisite conditions:<br/>1. Students have taken:<br/>6 UOC from the following: COMP3411; and<br/>12 UOC from the following: COMP9444/COMP9417/COMP9517/COMP4418<br/>2. Students must have a WAM of 70 or higher<br/><br/>",
-        "processed": "Two conditions: 1. have taken: 6UOC from the following: COMP3411; && 12UOC from the following: (COMP9444 || COMP9417 || COMP9517 || COMP4418) 2. must have 70WAM"
+        "processed": "COMP3411 && 70WAM && 12UOC in (COMP9444 || COMP9417 || COMP9517 || COMP4418)"
     },
     "COMP9517": {
         "original": "Prerequisite: COMP2521 or COMP1927<br/><br/>",
@@ -3885,7 +3891,7 @@
     },
     "COMP9844": {
         "original": "Prerequisite: COMP2521 or COMP1927 or MTRN3500, and a WAM of at least 70<br/><br/>",
-        "processed": "COMP2521 || COMP1927 || MTRN3500 && 70WAM"
+        "processed": "(COMP2521 || COMP1927 || MTRN3500) && 70WAM"
     },
     "CRIM1010": {
         "original": "",

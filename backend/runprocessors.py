@@ -22,6 +22,8 @@ from data.processors.coursesProcessing import process_courses as process_course_
 from data.processors.conditionsPreprocessing import preprocess_conditions
 from data.processors.conditions_tokenising import tokenise_conditions
 
+from data.processors.run_manual_fixes import run_fixes
+
 parser = argparse.ArgumentParser()
 parser.add_argument('--type', type=str,
                     help='program, specialisation, course or condition')
@@ -52,7 +54,7 @@ run = {
     },
     'condition': {
         'process': preprocess_conditions,
-        # 'manual': fix_conditions
+        'manual': run_fixes,
         'tokenise': tokenise_conditions
     }
 }
