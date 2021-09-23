@@ -109,7 +109,7 @@ def ACTL_3192(condition):
     """
     return {
         "original": condition["original"],
-        "processed": "ECON2101 || (ECON1101 && ACTL1101) || ( 84UOC && COMM#)",
+        "processed": "ECON2101 || (ECON1101 && ACTL1101) || (84UOC && COMM#)",
         "warning": "You must be in good academic standing to enroll in this course."
     }
 
