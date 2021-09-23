@@ -4,6 +4,7 @@ in order to run the relevant drivers'''
 import sys
 import argparse
 import glob
+import subprocess 
 
 from data.scrapers.programsScraper import scrape_programs as scrape_prg_data
 from data.scrapers.specialisationsScraper import scrape_spn_data
@@ -58,7 +59,7 @@ run = {
     },
     'condition': {
         'process': preprocess_conditions,
-        # 'manual': fix_conditions
+        'manual': '',
         'tokenise': tokenise_conditions
     },
     'algorithm': {
@@ -80,6 +81,9 @@ if args.stage == 'all':
         # Conditions
         for s in run[args.type]:
             run[args.type][s]()
+if args.stage == 'manual':
+    # External shell script to run manual fix files
+    subprocess.run(['data/processors/manualFixes/runManualFixes.sh'])
 else:
     # Run the specific process
     run[args.type][args.stage]()
