@@ -20,7 +20,7 @@ from data.processors.coursesProcessing import process_courses as process_course_
 from data.processors.conditionsPreprocessing import preprocess_conditions
 from data.processors.conditions_tokenising import tokenise_conditions
 
-from data.processors.run_manual_fixes import run_fixes
+from data.processors.runManualFixes import run_fixes
 
 from algorithms.cache.cache import cache_exclusions
 
