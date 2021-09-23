@@ -67,8 +67,7 @@ def FINS_2622():
     "processed": "|| [FINS1612 && FINS2624]"
     """
 
-    # BOTH prerequisite and corequisite
-    return "(FINS1612 && FINS2624) || [FINS1612 && FINS2624]"
+    return "[FINS1612 && FINS2624]"
 
 
 def FINS_3202_3303():
@@ -139,7 +138,7 @@ def FINS_4776_7_9():
     "processed": "Must be specialisation FINSAH4501 || FINSBH3565; || program 4520. [FINS3775 || FINS4775 ||]"
     """
 
-    return "(FINSAH4501 || FINSBH3565 || 4520) && ([FINS3775] || [FINS4775] || [FINS4779])"
+    return "(FINSAH4501 || FINSBH3565 || 4520) && ([FINS3775 || FINS4775 || FINS4779])"
 
 
 def FINS_4792():
