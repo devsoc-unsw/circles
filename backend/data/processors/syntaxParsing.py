@@ -48,14 +48,16 @@ def find_unknown_words(processed):
     for word in words:
         # Remove formatting
         word = re.sub(r"[,.\)\(\[\]]", "", word)
-        
-        if re.search(r"[A-Z]{4,5}\d{0,5}", word):
+        if re.match(r"^[A-Z]{4,5}\d{0,5}$", word):
             # Ignore course codes: e.g. COMP, COMP1511, ACTB13554
             continue
-        if re.search(r"\d{4}", word):
+        if re.match(r"^[A-Z]{4}\??(1|2|H|#)$", word):
+            # Ignore mapping codes: e.g. COMP?1, COMP#
+            continue
+        if re.match(r"^\d{4}$", word):
             # Ignore program codes
             continue
-        if re.search(r"\d{1,2}(WAM|UOC|GRADE)", word):
+        if re.match(r"^\d{1,3}(WAM|UOC|GRADE)$", word):
             # Ignore WAM, GRADE, and UOC words
             continue
     
