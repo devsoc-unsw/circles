@@ -108,7 +108,7 @@ def FINS_3645_6():
     "processed": "FINS1612 || (Business Analytics Major (COMMJ1) && COMM1180 || FINS1613"
     """
 
-    return "FINS1612 || FINS1613 || (COMMJ1 && COMM1180)"
+    return "FINS1612 || (COMMJ1 && (COMM1180 || FINS1613))"
 
 
 def FINS_4774():
