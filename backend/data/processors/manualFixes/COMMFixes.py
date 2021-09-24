@@ -28,28 +28,30 @@ def fix_conditions():
     """ Functions to apply manual fixes """
 
     CONDITIONS["COMM0999"][PROCESSED] = COMM_0999()
-    CONDITIONS["COMM1100"][PROCESSED] = COMM_1100()
+    CONDITIONS["COMM1100"] = COMM_1100(CONDITIONS["COMM1100"])
     CONDITIONS["COMM1110"] = COMM_1110(CONDITIONS["COMM1110"])
-    CONDITIONS["COMM1120"] = COMM_1120(CONDITIONS["COMM1120"])
-    CONDITIONS["COMM1140"] = COMM_1140(CONDITIONS["COMM1140"])
+    # CONDITIONS["COMM1120"] = COMM_1120(CONDITIONS["COMM1120"])
+    # CONDITIONS["COMM1140"] = COMM_1140(CONDITIONS["COMM1140"])
     CONDITIONS["COMM1150"] = COMM_1150(CONDITIONS["COMM1150"])
-    CONDITIONS["COMM1170"] = COMM_1170(CONDITIONS["COMM1170"])
-    CONDITIONS["COMM1180"] = COMM_1180(CONDITIONS["COMM1180"])
-    CONDITIONS["COMM1190"] = COMM_1190(CONDITIONS["COMM1190"])
-    CONDITIONS["COMM1900"] = COMM_1900()
+    # CONDITIONS["COMM1170"] = COMM_1170(CONDITIONS["COMM1170"])
+    # CONDITIONS["COMM1180"] = COMM_1180(CONDITIONS["COMM1180"])
+    # CONDITIONS["COMM1190"] = COMM_1190(CONDITIONS["COMM1190"])
+    # CONDITIONS["COMM1900"][PROCESSED] = COMM_1900()
     CONDITIONS["COMM1999"] = COMM_1999(CONDITIONS["COMM1999"])
     CONDITIONS["COMM2222"] = COMM_2222(CONDITIONS["COMM2222"])
-    CONDITIONS["COMM2233"] = COMM_2233()
-    CONDITIONS["COMM2244"] = COMM_2244()
+    CONDITIONS["COMM2233"][PROCESSED] = COMM_2233()
+    CONDITIONS["COMM2244"][PROCESSED] = COMM_2244()
     CONDITIONS["COMM3020"] = COMM_2222(CONDITIONS["COMM3020"])
-    CONDITIONS["COMM3030"] = COMM_3030()
+    CONDITIONS["COMM3030"][PROCESSED] = COMM_3030()
     CONDITIONS["COMM3090"] = COMM_3090(CONDITIONS["COMM3090"])
     CONDITIONS["COMM3101"] = COMM_3101(CONDITIONS["COMM3101"])
     CONDITIONS["COMM3202"] = COMM_3202(CONDITIONS["COMM3202"])
     CONDITIONS["COMM3303"] = COMM_3303(CONDITIONS["COMM3303"])
-    CONDITIONS["COMM3500"] = COMM_3500()
+    CONDITIONS["COMM3500"][PROCESSED] = COMM_3500()
     CONDITIONS["COMM3900"] = COMM_3900(CONDITIONS["COMM3900"])
     CONDITIONS["COMM3999"] = COMM_3999(CONDITIONS["COMM3999"])
+    CONDITIONS["COMM1040"][PROCESSED] = COMM_1040()
+    CONDITIONS["COMM6700"][PROCESSED] = COMM_6700()
 
     # Updates the files with the modified dictionaries
     dataHelpers.write_data(
@@ -64,14 +66,24 @@ def COMM_0999():
     """
     return "COMM#"
 
-def COMM_1100():
+def COMM_1040():
+    """
+        "original": "Prerequisite: Students must be in Good Academic Standing<br/><br/>",
+        "processed": "must be in Good Academic Standing"
+    """
+    return ""
+
+def COMM_1100(conditions):
     """
         "original": "Students who have completed ECON1101 are not permitted to enrol. <br/><br/>",
 
         "processed": "who have ECON1101 are not permitted to enrol"
     """
-    COURSES["COMM1100"]["exclusions"]["ECON1101"] = 1
-    return ""
+    return {
+        "original": conditions["original"],
+        "processed": "",
+        "warning": "Students enrolled in Actuarial Studies or Economics programs (in single or double degree mode) are not permitted to enrol."
+    }
 
 def COMM_1110(conditions):
     """
@@ -81,11 +93,11 @@ def COMM_1110(conditions):
 
     return {
         "original": conditions["original"],
-        "processed": conditions["processed"],
-        "warning": "Only available to single and double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 and 3."
+        "processed": "",
+        "warning": "Students enrolled in 3764 (Eng/Comm), Actuarial Studies or Economics programs (in both single and double degree mode) are not permitted to enrol."
     }
 
-def COMM_1120(conditions):
+# def COMM_1120(conditions):
     """
         "original": "Only available to single and double degree Business School students in Term 1. It will be offered to non-Business School students in Terms 2 and 3.<br/><br/>",
         "processed": "Only available to single && double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 && 3"
@@ -97,7 +109,7 @@ def COMM_1120(conditions):
         "warning": "Only available to single and double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 and 3."
     }
 
-def COMM_1140(conditions):
+# def COMM_1140(conditions):
     """
         "original": "Only available to single and double degree Business School students in Term 1. It will be offered to non-Business School students in Terms 2 and 3.<br/><br/>",
         "processed": "Only available to single && double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 && 3"
@@ -119,10 +131,9 @@ def COMM_1150(conditions):
     return {
         "original": conditions["original"],
         "processed": "COMM1100",
-        "warning": "Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Term 3."
     }
 
-def COMM_1170(conditions):
+# def COMM_1170(conditions):
     """
         "original": "Pre-requisite: COMM1140. Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Term 3.<br/><br/>",
         "processed": "COMM1140. Only available to single && double degree Business School in Term 2. It will be offered to non-Business School in Term 3"
@@ -134,7 +145,7 @@ def COMM_1170(conditions):
         "warning": "Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Term 3."
     }
 
-def COMM_1180(conditions):
+# def COMM_1180(conditions):
     """
         "original": "Pre-requisite: COMM1140. Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Term 3.<br/><br/>",
         "processed": "COMM1140. Only available to single && double degree Business School in Term 2. It will be offered to non-Business School in Term 3"
@@ -146,7 +157,7 @@ def COMM_1180(conditions):
         "warning": "Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Term 3."
     }
 
-def COMM_1190(conditions):
+# def COMM_1190(conditions):
     """
         "original": "Pre-requisite: COMM1110 or ECON1203 or MATH1041 or MATH1151 or MATH1131 or MATH1141. Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Term 3.<br/><br/>",
         "processed": "COMM1110 || ECON1203 || MATH1041 || MATH1151 || MATH1131 || MATH1141. Only available to single && double degree Business School in Term 2. It will be offered to non-Business School in Term 3"
@@ -159,7 +170,7 @@ def COMM_1190(conditions):
 
     }
 
-def COMM_1900():
+# def COMM_1900():
     """
         "original": "Enrolment is only permitted for students in program Actl/Comm (3155) or Comm/Econ (3521).<br/>Pre-req: (ECON1101 and ECON1102) or (DPBS1101 and DPBS1102)<br/><br/>",
         "processed": "Enrolment is only permitted for in program Actl/Comm (3155) || Comm/Econ (3521). (ECON1101 && ECON1102) || (DPBS1101 && DPBS1102)"
@@ -187,7 +198,7 @@ def COMM_2222(conditions):
 
     return  {
         "original": conditions["original"],
-        "processed": "(COMM6000 || COMM1999 || ZBUS) && 65WAM && 72UOC"
+        "processed": "(COMM6000 || COMM1999) && ZBUS && 65WAM && 72UOC"
     }
 
 def COMM_2233():
@@ -203,6 +214,9 @@ def COMM_2244():
         "original": "Must have completed COMM6000 CA:Essentials or COMM1999 First Year Portfolio, minimum 48 UoC, minimum 65 WAM, and be in good academic standing. Students who have completed COMM2233 or CDEV3000 (formerly DIPP1510) must not enrol into this course<br/><br/>",
         "processed": "COMM6000 CA:Essentials || COMM1999 First Year Portfolio && 48UOC && 65WAM && be in good academic standing. who have COMM2233 || CDEV3000 (formerly DIPP1510) must not enrol into this course"
     """
+    COURSES["COMM1150"]["exclusions"]["COMM2233"] = 1
+    COURSES["COMM1150"]["exclusions"]["CDEV3000"] = 1
+    COURSES["COMM1150"]["exclusions"]["DIPP1510"] = 1
 
     return "(COMM6000 || COMM1999) && 65WAM && 48 UOC"
 
@@ -234,7 +248,7 @@ def COMM_3090(conditions):
 
     return {
         "original": conditions["original"],
-        "processed": "",
+        "processed": "108UOC",
         "warning": "Students are expected to be in their final year of a Bachelor of Commerce single or dual degree with at least 108 UOC completed."
     }
 
@@ -308,6 +322,12 @@ def COMM_3999(conditions):
         "warning": "Studetns must be in their final year"
     }
 
+def COMM_6700():
+    """
+        "original": "Prerequisite: undergraduate students must have completed 72 units of credit <br/><br/>",
+        "processed": "undergraduate 72UOC"
+    """
+    return "72UOC"
 
 if __name__ == "__main__":
     fix_conditions()
