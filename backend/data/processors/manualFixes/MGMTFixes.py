@@ -32,6 +32,7 @@ def fix_conditions():
     CONDITIONS["MGMT2101"][PROCESSED] = MGMT_2101()
     CONDITIONS["MGMT2718"][PROCESSED] = MGMT_2718()
     CONDITIONS["MGMT3001"][PROCESSED] = MGMT_3001()
+    CONDITIONS["MGMT3004"] = MGMT_3004()
     CONDITIONS["MGMT3102"][PROCESSED] = MGMT_3102()
     CONDITIONS["MGMT3110"] = MGMT_3110()
     CONDITIONS["MGMT3728"][PROCESSED] = MGMT_3728()
@@ -45,8 +46,8 @@ def fix_conditions():
     
     # Updates the files with the modified dictionaries
     dataHelpers.write_data(
-        CONDITIONS, "../../../data/finalData/conditionsProcessedt.json")
-    dataHelpers.write_data(COURSES, "../../../data/finalData/coursesProcessedt.json")
+        CONDITIONS, "../../../data/finalData/conditionsProcessed.json")
+    dataHelpers.write_data(COURSES, "../../../data/finalData/coursesProcessed.json")
 
 # TODO: implement your functions here
 
@@ -58,7 +59,14 @@ def MGMT_2718():
     return "[MGMT1001 || MGMT1101 || MGMT1002 || COMM1100 || COMM1150 || COMM1170]"
 
 def MGMT_3001():
-    return "MGMT1001 || COMM1100 || COMM1120 || COMM1170 || 12UOC in Business courses"
+    return "MGMT1001 || COMM1100 || COMM1120 || COMM1170 || 12UOC F Business"
+
+def MGMT_3004():
+    return {
+        "original": CONDITIONS["MGMT3004"]["original"],
+        "processed": "96UOC",
+        "warning": "Students must be in good standing"
+    }
 
 def MGMT_3102():
     return "MGMT1101 || COMM1150"
