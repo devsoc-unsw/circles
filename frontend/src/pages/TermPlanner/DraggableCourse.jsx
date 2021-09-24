@@ -44,9 +44,10 @@ function DraggableCourse({ code, index }) {
             style={{
               ...provided.draggableProps.style,
             }}
-            className={`course ${warning && " warning"} ${
-              isSummerEnabled && "summerViewCourse"
-            }`}
+            className={`course ${isSummerEnabled && "summerViewCourse"} 
+			${isDragDisabled && " dragDisabledCourse"} 
+			${isDragDisabled && warning && " disabledWarning"}
+			${warning && " warning"}`}
             data-tip
             data-for={code}
             onContextMenu={show}

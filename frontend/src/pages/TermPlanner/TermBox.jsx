@@ -36,20 +36,18 @@ function TermBox({ name, courses, termsOffered, isDragging }) {
           count={
             <RiCheckboxCircleFill
               size="1.5em"
-              className={`checkboxTerm ${isCompleted && "checkedTerm"}`}
+              className={`termCheckbox ${isCompleted && "checkedTerm"}`}
               onClick={handleCompleteTerm}
-              //   style={{ paddingBottom: "0.2em" }} // lock
             />
           }
-          offset={[-22, 22]} // top right
-          //   offset={[-23, 19]} // lock
+          offset={[-22, 22]}
         >
           <ul
             ref={provided.innerRef}
             {...provided.droppableProps}
             className={`termBox ${
               isDropAllowed && isDragging && "droppable "
-            } ${isSummerEnabled && "summerTermBox"}`}
+            } ${isSummerEnabled && "summerTermBox"} `}
           >
             {courses.map((code, index) => {
               // const warning = courses.get(code)["warning"];
