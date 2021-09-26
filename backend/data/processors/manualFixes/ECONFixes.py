@@ -28,7 +28,8 @@ def fix_conditions():
     """ Functions to apply manual fixes """
 
     # TODO: call your functions here
-    CONDITIONS["ECON1203"][PROCESSED] = ECON_1203()
+    CONDITIONS["ECON1101"][PROCESSED] = ECON_1101("ECON1101") # NOT SURE HOW THIS WORKS (FOR THE EXCEPT PART)
+    CONDITIONS["ECON1203"][PROCESSED] = ECON_1203("ECON1203") # NOT SURE HOW THIS WORKS (FOR THE EXCEPT PART)
     CONDITIONS["ECON2206"][PROCESSED] = ECON_2206()
     CONDITIONS["ECON2403"][PROCESSED] = ECON_2403()
     CONDITIONS["ECON3000"][PROCESSED] = ECON_3000()
@@ -64,15 +65,35 @@ def fix_conditions():
     dataHelpers.write_data(COURSES, "data/finalData/coursesProcessed.json")
 
 # TODO: implement your functions here
-def ECON_1203():
+# NOT SURE HOW THIS WORKS (FOR THE EXCEPT PART)
+def ECON_1101(code):
     """
-    "original": "Excluded: MATH2841, MATH2801, MATH2901, MATH2099, ACTL2002 & ACTL2131. <br/>Prerequisite: Must not be enrolled in Program 3715 or 3764<br/><br/>"
+    "original": "Excluded: Students in BCom single or double-degree programs, except for 3155 Actl/Comm and 3521 Comm/Econ, are not allowed to enrol in this course. <br/><br/>"
+    
+    "processed": ""
+    """
+
+    COURSES[code]["exclusions"]["COMM#"] = 1
+    
+    return ""
+
+# NOT SURE HOW THIS WORKS (FOR THE EXCEPT PART)
+def ECON_1203(code):
+    """
+    "original": "Excluded: MATH2841, MATH2801, MATH2901, MATH2099, ACTL2002 & ACTL2131. <br/>Also, must not be enrolled in a BCom single or double degree (except 3155 Actl/Comm or 3521 Comm/Econ), or program 3715 or 3764<br/><br/>"
     
     "processed": "Must not be Program 3715 || 3764"
     """
-
-    COURSES["ECON1203"]["exclusions"]["3715"] = 1
-    COURSES["ECON1203"]["exclusions"]["3764"] = 1
+    
+    COURSES[code]["exclusions"]["MATH2841"] = 1
+    COURSES[code]["exclusions"]["MATH2801"] = 1
+    COURSES[code]["exclusions"]["MATH2901"] = 1
+    COURSES[code]["exclusions"]["MATH2099"] = 1
+    COURSES[code]["exclusions"]["ACTL2002"] = 1
+    COURSES[code]["exclusions"]["ACTL2131"] = 1
+    COURSES[code]["exclusions"]["COMM#"] = 1
+    COURSES[code]["exclusions"]["3715"] = 1
+    COURSES[code]["exclusions"]["3764"] = 1
 
     return ""
 
