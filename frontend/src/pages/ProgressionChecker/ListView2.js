@@ -7,18 +7,6 @@ import { Skeleton } from "antd";
 
 const ListView = ({ isLoading, degree, checkercourses}) => {
   const { Title } = Typography;
-
-  function buttonstyle (checkercourses) {
-    console.log("hello", checkercourses)
-    if (checkercourses["state"] === "Completed"){
-      return '"primary"';
-    } else if (checkercourses["state"] === "Planned") {
-      return '"primary"'; 
-    } else if (checkercourses["state"] === "Unplanned") {
-      return '"default"';
-    }
-  }
-
   // console.log(checkercourses)
   return (
     <>
@@ -33,11 +21,11 @@ const ListView = ({ isLoading, degree, checkercourses}) => {
               key={concentration["name"]}
             >
               <Title className="text">{concentration["name"]}</Title>
-              
+
               <Title className="text" level={3}>Core Courses</Title> 
                 <Space size={[20, 20]} wrap>
                     {checkercourses["corecourses"]&&checkercourses["corecourses"].map((course) => (          
-                        <Button className="checkerButton" type={()=>buttonstyle(checkercourses)}>{course["name"]}</Button>
+                        <Button className="checkerButton" type="primary">{course["name"]}</Button>
                     ))}                  
                   </Space>
                   <div className="space"/>
