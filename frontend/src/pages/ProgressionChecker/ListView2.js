@@ -2,9 +2,6 @@ import React from "react";
 import { Typography, Button, Space} from "antd";
 import { Skeleton } from "antd";
 
-
-
-
 const ListView = ({ isLoading, degree, checkercourses}) => {
   const { Title } = Typography;
   // console.log(checkercourses)
