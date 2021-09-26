@@ -5,9 +5,11 @@ in order to run the relevant drivers'''
 
 import sys
 import argparse
+import glob
 
 from data.scrapers.programsScraper import scrape_programs as scrape_prg_data
 from data.scrapers.specialisationsScraper import scrape_spn_data
+from data.scrapers.coursesScraper import scrape_courses as scrape_course_data
 
 from data.scrapers.programsFormatting import format_data as format_prg_data
 from data.scrapers.specialisationsFormatting import format_spn_data
@@ -18,8 +20,8 @@ from data.processors.specialisationsProcessing import customise_spn_data
 from data.processors.coursesProcessing import process_courses as process_course_data
 
 from data.processors.conditionsPreprocessing import preprocess_conditions
-# from data.processors.conditionsManualFixes import fix_conditions
 from data.processors.conditions_tokenising import tokenise_conditions
+
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--type', type=str,
@@ -45,12 +47,13 @@ run = {
         'process': customise_spn_data
     },
     'course': {
+        'scrape': scrape_course_data,
         'format': format_course_data,
         'process': process_course_data
     },
     'condition': {
         'process': preprocess_conditions,
-        # 'manual': fix_conditions,
+        # 'manual': fix_conditions
         'tokenise': tokenise_conditions
     }
 }
