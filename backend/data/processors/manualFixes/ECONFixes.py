@@ -30,6 +30,7 @@ def fix_conditions():
     # TODO: call your functions here
     CONDITIONS["ECON1203"][PROCESSED] = ECON_1203()
     CONDITIONS["ECON2206"][PROCESSED] = ECON_2206()
+    CONDITIONS["ECON2403"][PROCESSED] = ECON_2403()
     CONDITIONS["ECON3000"][PROCESSED] = ECON_3000()
     CONDITIONS["ECON3208"][PROCESSED] = ECON_3208()
     CONDITIONS["ECON4100"][PROCESSED] = ECON_4100_3_6_4202_5_8_4301_2_7_9_11_50()
@@ -83,6 +84,14 @@ def ECON_2206():
     """
 
     return "ECON1203 || COMM1190 || ECON2403 || MATH1041 || MATH1231 || MATH1241 || MATH1251"
+
+def ECON_2403():
+    """
+    "original": "Prerequisites: PPEC1001 AND ECON1202 AND in program 3478 or 4797<br/><br/>"
+    "processed": "PPEC1001 && ECON1202 && in program 3478 || 4797"
+    """
+
+    return "PPEC1001 && ECON1202 && 3478 || 4797"
 
 def ECON_3000():
     """
