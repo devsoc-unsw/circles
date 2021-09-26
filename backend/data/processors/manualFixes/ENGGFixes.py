@@ -58,6 +58,7 @@ def ENGG_1811():
 
     return ""
 
+# CHECK COURSE OVERVIEW
 def ENGG_2_4600(code):
     """
     """
