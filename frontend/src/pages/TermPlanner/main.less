@@ -87,16 +87,11 @@ body {
     justify-content: center;
     gap: 0.7em;
     align-items: center;
-    transition: 200ms ease all;
 
     @media @small {
       border-radius: 2em;
       padding: 0.8em;
       width: 10em;
-    }
-
-    &:hover {
-      transform: translateY(-3px);
     }
   }
 
@@ -150,6 +145,7 @@ body {
     // background-color: red;
     animation: shake 0.25s;
     transform: none;
+    cursor: url("../../images/notAllowed.ico"), default;
   }
 
   @keyframes shake {
