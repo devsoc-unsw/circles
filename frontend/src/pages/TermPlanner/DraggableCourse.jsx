@@ -25,6 +25,10 @@ function DraggableCourse({ code, index }) {
     id: `${code}-context`,
   });
 
+  const displayContextMenu = (e) => {
+    if (!isDragDisabled) show(e);
+  };
+
   const isSmall = useMediaQuery("(max-width: 1400px)");
 
   const isDragDisabled = completedTerms.get(plannedFor);
@@ -50,7 +54,8 @@ function DraggableCourse({ code, index }) {
 			${warning && " warning"}`}
             data-tip
             data-for={code}
-            onContextMenu={show}
+            id={code}
+            onContextMenu={displayContextMenu}
           >
             {warning && (
               <IoWarningOutline

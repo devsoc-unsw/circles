@@ -75,7 +75,7 @@ body {
   .course {
     user-select: none;
     font-size: 0.8rem;
-    cursor: pointer;
+    cursor: grab;
     padding: 0.9em;
     padding-right: 1.1em;
     padding-left: 1.1em;
@@ -93,6 +93,10 @@ body {
       border-radius: 2em;
       padding: 0.8em;
       width: 10em;
+    }
+
+    &:hover {
+      transform: translateY(-3px);
     }
   }
 
@@ -140,6 +144,34 @@ body {
     align-items: center;
     gap: 1em;
     margin-bottom: 0.7em;
+  }
+
+  .dragDisabledCourse:hover {
+    // background-color: red;
+    animation: shake 0.25s;
+    transform: none;
+  }
+
+  @keyframes shake {
+    0% {
+      transform: rotate(1deg);
+    }
+
+    25% {
+      transform: rotate(-1deg);
+    }
+
+    50% {
+      transform: rotate(0deg);
+    }
+
+    75% {
+      transform: rotate(1deg);
+    }
+
+    100% {
+      transform: rotate(0deg);
+    }
   }
 }
 
