@@ -227,32 +227,42 @@ class CompositeCondition():
         '''Adds a condition object'''
         self.conditions.append(condition_classobj)
 
-    def get_condition(self):
-        return self.conditions
-
     def set_logic(self, logic):
         '''AND or OR'''
         self.logic = logic
 
-    def validate(self, user):
-        if self.logic == AND:
-            # All conditions must be true
-            for cond in self.conditions:
-                if cond.validate(user) == False:
-                    return False
-            return True
-        elif self.logic == OR:
-            # Only a single condition needs to be true
-            for cond in self.conditions:
-                if cond.validate(user) == True:
-                    return True
-            return False
+    def validate(self, user, warnings=[]):
+        # Ensure we add all the warnings. 
+        # NOTE: Remember that warnings are only returned
+        # along with True by validate() method. In other words, checking a warning 
+        # is != None is the equivalent of checking that validate() returned True
+        satisfied = False
+
+        for cond in self.conditions:
+            if isinstance(cond, (GradeCondition, WamCondition)):
+                # Special type of condition which can return warnings
+                unlocked, warning = cond.validate(user)
+
+                if warning != None:
+                    parent_warnings.append(warning)
+            elif isinstance(cond, CompositeCondition):
+                # Need to pass in the warnings list to collate all the warnings
+                unlocked = cond.validate(user, warnings)
+            else:
+                unlocked = cond.validate(user)
+            
+            if self.logic == AND:
+                satisfied = satisfied and unlocked
+            else:
+                satisfied = satisfied or unlocked
+
+        return satisfied
 
 
-class FirstCompositeCondition(CompositeCondition):
-    '''The top layer composite condition which will have some additional special validation'''
-    def validate(self, user):
-        if self.logic == AND:
+# class FirstCompositeCondition(CompositeCondition):
+#     '''The top layer composite condition which will have some additional special validation'''
+#     def validate(self, user):
+#         if self.logic == AND:
             
 
 
