@@ -73,7 +73,9 @@ class User:
         '''Determines if the user is in the specialisation'''
         return specialisation in self.specialisations
 
-
+    def get_grade(self, course):
+        '''Given a course which the student has taken, returns their grade (or None for no grade'''
+        return self.courses[course][1]
 
 class CourseCondition():
     '''Condition that the student has completed this course'''
@@ -135,24 +137,31 @@ class WAMCondition():
         self.category = category_classobj
 
     def validate(self, user):
-        # Returns true if the wam condition is met for a single category.
-        # Returns true if all applicable WAM is None
-        # TODO: Make this return some warning in the future so WAM conditions do
-        # not gate keep the user
-        if user.wam == None:
-            # Default is True
-            return True
-        elif self.category == None:
-            # Simple WAM condition
-            return user.wam >= self.wam
-        else:
-            # The user must have a high enough wam in the given category
-            category_wam = self.category.wam(user)
-            if category_wam == None:
-                return True  # TODO: Make this a warning
-            else:
-                return category_wam >= self.wam
+        '''
+        Determines if the user has met the WAM condition for this category.
 
+        Will always return True and a warning since WAM can fluctuate
+        '''
+
+        if self.category == None:
+            # Simple wam condition
+            return True, self.get_warning(user.wam)        
+        
+        # Otherwise, get the wam for that category and return a warning accordingly
+        category_wam = self.category.wam(user)
+        return True, self.get_warning(category_wam)
+
+    def get_warning(self, applicable_wam):
+        if self.category == None:
+            if applicable_wam == None:
+                return f"Requires {self.wam} WAM. Your WAM is currently non-existent"
+            else:
+                return f"Requires {self.wam} WAM. Your WAM is currently {applicable_wam}"
+        else:
+            if applicable_wam == None:
+                return f"Requires a {self.wam} WAM in {self.category}. Your WAM in {self.category} is non-existent"
+            else:
+                return f"Requires {self.wam} WAM in {self.category}. Your WAM in {self.category} is currently {applicable_wam}"
 
 class GRADECondition():
     '''Handles GRADE conditions such as 65GRADE and 80GRADE in [A-Z]{4}[0-9]{4}'''
@@ -164,17 +173,26 @@ class GRADECondition():
         self.course = course
 
     def validate(self, user):
-        # TODO: Make this return some warning in the future so GRADE conditions do
-        # not gate keep the user
+        '''
+        Determines if the user has met the GRADE condition for this course.\n
+        Not taken the course - Return False\n
+        Taken the course but no mark provided - Return True and add warning\n
+        Taken the course but mark too low - Return False\n
+        Taken the course and sufficient mark - Return True\n
+        '''
         if self.course not in user.courses:
-            # They have not taken the course
-            return False
-        elif user.courses[self.course][1] == None:
-            # TODO: Make this return a warning as well. Return True for now
-            return True
+            return False, None
+        
+        user_grade = user.get_grade(self.course)
+        if user_grade == None:
+            return True, self.get_warning()
+        elif user_grade < self.grade:
+            return False, None
         else:
-            return user.courses[self.course][1] >= self.grade
+            return True, None
 
+    def get_warning(self):
+        return f"Requires {self.grade} mark in {self.course}"
 
 class ProgramCondition():
     '''Handles Program conditions such as 3707'''
@@ -229,6 +247,13 @@ class CompositeCondition():
                 if cond.validate(user) == True:
                     return True
             return False
+
+
+class FirstCompositeCondition(CompositeCondition):
+    '''The top layer composite condition which will have some additional special validation'''
+    def validate(self, user):
+        if self.logic == AND:
+            
 
 
 def create_condition(tokens):
@@ -332,7 +357,6 @@ def create_condition(tokens):
 
 
 '''HELPER FUNCTIONS TO DETERMINE THE TYPE OF A GIVEN TEXT'''
-
 
 def is_course(text):
     if re.match(r'^[A-Z]{4}\d{4}$', text, flags=re.IGNORECASE):
