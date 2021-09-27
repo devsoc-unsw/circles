@@ -1,12 +1,18 @@
-from json import dump
+import sys
 import json
 import re
+
+from json import dump
 
 from categories import *
 
 '''Keywords'''
 AND = 1
 OR = 2
+
+
+'''CACHED'''
+
 
 
 class User:
@@ -388,6 +394,20 @@ def is_specialisation(text):
     if re.match(r'^[A-Z]{5}\d$', text, flags=re.IGNORECASE):
         return True
     return False
+
+
+'''HELPER FUNCTIONS FOR UTILITY PURPOSES'''
+
+
+def read_data(file_name):
+    '''Reads data from a json file and returns it'''
+    try:
+        with open(file_name, "r") as input_file:
+            return json.load(input_file)
+    except:
+        print(f"File {file_name} not found")
+        sys.exit(1)
+        
 
 # tokens = ["(", "COMP1511", "&&", "(", "COMP1521", "||", "COMP1531", ")", ")"]
 # user = User()
