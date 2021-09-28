@@ -55,6 +55,7 @@ const initialState = {
   ],
   courses: dummyMap,
   plannedCourses: plannedCourses,
+  completedTerms: new Map(),
 };
 const plannerReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -173,6 +174,13 @@ const plannerReducer = (state = initialState, action) => {
       };
     case "TOGGLE_SUMMER":
       return { ...state, isSummerEnabled: !state.isSummerEnabled };
+    case "TOGGLE_TERM_COMPLETE":
+      const clonedCompletedTerms = new Map(state.completedTerms);
+      let isCompleted = clonedCompletedTerms.get(action.payload);
+      // if it doesnt exist in map, then the term is not completed
+      if (isCompleted == null) isCompleted = false;
+      clonedCompletedTerms.set(action.payload, !isCompleted);
+      return { ...state, completedTerms: clonedCompletedTerms };
     default:
       return state;
   }
