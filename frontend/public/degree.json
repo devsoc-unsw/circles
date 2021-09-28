@@ -6,22 +6,15 @@
 	"completed_UOC": 136,
 	"concentrations": [ 
 	  {
-		"type": "Specialisation",
-		"name": "Software Engineering",
+		"type": "Major",
+		"name": "Database Systems",
 		"code": "SENGAH",
 		"UOC": 168,
 		"completed_UOC": 80
 	  },
 	  {
-		"type": "Major",
-		"name": "Statistics",
-		"code": "MATHT1",
-		"UOC": 60,
-		"completed_UOC": 36
-	  },
-	  {
 		"type": "Minor",
-		"name": "Marine Science",
+		"name": "Finance",
 		"code": "MSCIM1",
 		"UOC": 36,
 		"completed_UOC": 6

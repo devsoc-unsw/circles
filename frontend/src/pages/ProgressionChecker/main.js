@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Dashboard from "./Dashboard";
-import ListView from "./ListView";
+import ListView3 from "./ListView3";
 import axios from "axios";
 import './main.less';
 const ProgressionChecker = () => {
@@ -26,7 +26,7 @@ const ProgressionChecker = () => {
   return (
     <>
       <Dashboard isLoading={isLoading} degree={degree}/>
-      <ListView isLoading={isLoading} degree={degree} checkercourses={courses}/>
+      <ListView3 isLoading={isLoading} degree={degree} progressioncourses={courses}/>
     </>
   );
 };
