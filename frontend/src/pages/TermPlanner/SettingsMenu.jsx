@@ -10,6 +10,8 @@ import {
   Select,
   Switch,
   Divider,
+  Modal,
+  Button,
 } from "antd";
 import { Droppable } from "react-beautiful-dnd";
 import DraggableCourse from "./DraggableCourse";
@@ -26,14 +28,23 @@ const SettingsMenu = () => {
   const { Panel } = Collapse;
   const { Option } = Select;
   const theme = useSelector((state) => state.theme);
-  const { courses, unplanned, isSummerEnabled } = useSelector((state) => {
-    return state.planner;
-  });
+  const { courses, unplanned, isSummerEnabled, startYear, numYears } =
+    useSelector((state) => {
+      return state.planner;
+    });
 
   const dispatch = useDispatch();
 
-  function onChange(date, dateString) {
-    console.log(date, dateString);
+  function updateStartYear(date, dateString) {
+    // if (dateString + numYears > startYear) {
+    //   setVisible(true);
+    //   let years = "";
+    //   for (let i = dateString; i < startYear + numYears; i++) {
+    //     if (i > startYear) years += ` ${i}`;
+    //   }
+    //   console.log(years);
+    // } else
+    dispatch(plannerActions("SET_START_YEAR", dateString));
   }
 
   function handleChange(value) {
@@ -45,6 +56,12 @@ const SettingsMenu = () => {
   }
 
   const years = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+  //   const handleOk = () => {};
+
+  //   const handleCancel = () => {
+  //     setVisible(false);
+  //   };
 
   return (
     <div className="settingsMenu">
@@ -69,7 +86,11 @@ const SettingsMenu = () => {
         <Title level={3} class="text settingsSubtitle">
           Start Year
         </Title>
-        <DatePicker onChange={onChange} picker="year" style={{ width: 105 }} />
+        <DatePicker
+          onChange={updateStartYear}
+          picker="year"
+          style={{ width: 105 }}
+        />
       </div>
       <div className="settingsEntry">
         <Title level={3} class="text settingsSubtitle">
@@ -81,6 +102,23 @@ const SettingsMenu = () => {
           ))}
         </Select>
       </div>
+      {/* <Modal
+        visible={visible}
+        title="⚠️  Are you sure?"
+        onOk={handleOk}
+        onCancel={handleCancel}
+        footer={[
+          <Button key="back" onClick={handleCancel}>
+            Cancel
+          </Button>,
+          <Button key="submit" type="primary" onClick={handleOk}>
+            Confirm
+          </Button>,
+        ]}
+      >
+        <p>The years will be removed</p>
+        <p>All courses in this year will be unscheduled.</p>
+      </Modal> */}
     </div>
   );
 };

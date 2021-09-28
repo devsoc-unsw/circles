@@ -174,6 +174,7 @@ const plannerReducer = (state = initialState, action) => {
       };
     case "TOGGLE_SUMMER":
       return { ...state, isSummerEnabled: !state.isSummerEnabled };
+
     case "TOGGLE_TERM_COMPLETE":
       const clonedCompletedTerms = new Map(state.completedTerms);
       let isCompleted = clonedCompletedTerms.get(action.payload);
@@ -181,6 +182,40 @@ const plannerReducer = (state = initialState, action) => {
       if (isCompleted == null) isCompleted = false;
       clonedCompletedTerms.set(action.payload, !isCompleted);
       return { ...state, completedTerms: clonedCompletedTerms };
+
+    case "SET_START_YEAR":
+      const currEndYear = state.startYear + state.numYears - 1;
+      const newStartYear = Number(action.payload);
+      let updatedYears = [];
+      let updatedUnplan = [...state.unplanned];
+
+      for (let i = 0; i < state.numYears; i++) {
+        const yearVisiting = i + newStartYear;
+        if (yearVisiting <= currEndYear && yearVisiting >= state.startYear) {
+          updatedYears.push(state.years[yearVisiting - state.startYear]);
+        } else {
+          updatedYears.push({ t0: [], t1: [], t2: [], t3: [] });
+          // unschedule the courses that are in the year which will be removed
+          const yearToBeRemoved = state.years[state.numYears - i - 1];
+          console.log(yearToBeRemoved);
+          for (let term in yearToBeRemoved) {
+            yearToBeRemoved[term].forEach((course) => {
+              console.log(course);
+              updatedUnplan.push(course);
+              state.courses.get(course).plannedFor = null;
+              state.courses.get(course).warning = false;
+            });
+          }
+        }
+      }
+      console.log(state.courses);
+
+      return {
+        ...state,
+        startYear: newStartYear,
+        years: updatedYears,
+        unplanned: updatedUnplan,
+      };
     default:
       return state;
   }

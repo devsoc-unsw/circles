@@ -70,6 +70,11 @@ export const plannerActions = (action, payload) => {
         type: action,
         payload: payload,
       };
+    case "SET_START_YEAR":
+      return {
+        type: action,
+        payload: payload,
+      };
     default:
       return;
   }
