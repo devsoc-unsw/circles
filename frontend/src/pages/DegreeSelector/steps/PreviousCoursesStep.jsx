@@ -3,6 +3,7 @@ import { Tooltip, Typography, Modal, Button } from 'antd';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { EditOutlined } from '@ant-design/icons';
+import DebouncingSelect from './DebouncingSelect';
 import './steps.less';
 
 const { Title } = Typography; 
@@ -62,6 +63,7 @@ const TermBox = ({ yearIndex, termNo }) => {
             >
                 {/* { planner[yearIndex][termNo].map((course) => <div>{course}</div>) } */}
                 {/* @Gabriella add search here. Show result onclick. and be able to delete */}
+                <DebouncingSelect/>
             </Modal>
         </>
     )
