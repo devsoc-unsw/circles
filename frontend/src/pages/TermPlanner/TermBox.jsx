@@ -40,7 +40,7 @@ function TermBox({ name, courses, termsOffered, isDragging }) {
               onClick={handleCompleteTerm}
             />
           }
-          offset={[-22, 22]}
+          offset={isSummerEnabled ? [-13, 13] : [-22, 22]}
         >
           <ul
             ref={provided.innerRef}

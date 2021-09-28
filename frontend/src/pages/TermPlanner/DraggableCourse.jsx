@@ -80,10 +80,12 @@ function DraggableCourse({ code, index }) {
         )}
       </Draggable>
       <ContextMenu code={code} plannedFor={plannedFor} />
-      {prereqDisplay != "" && (
+      {/* display prereq tooltip for all courses. However, if a term is marked as complete 
+	  and the course has no warning, then disable the tooltip */}
+      {prereqDisplay != "" && (!isDragDisabled || warning) && (
         <ReactTooltip id={code} place="bottom" className="tooltip">
-          <div style={{ fontWeight: "bold" }}>Prerequisites:</div>
-          {prereqDisplay}{" "}
+          <div className="prereqsTooltip">Prerequisites:</div>
+          {prereqDisplay}
         </ReactTooltip>
       )}
     </>
