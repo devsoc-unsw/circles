@@ -31,13 +31,6 @@ body {
     max-width: 100em;
   }
 
-  // .unplannedBox {
-  //   padding: 1.5em;
-  //   border: 0.5px solid #d9d9d9;
-  //   border-radius: 2em;
-  //   height: calc(100% - (1.5rem + 0.5em + 1.5em + 0.6em));
-  // }
-
   .gridItem {
     font-size: 1.5rem;
     text-align: center;
@@ -56,13 +49,11 @@ body {
     padding: 1.2em;
     border-radius: 2em;
     transition: 200ms ease-out;
-    padding-top: 0.5em;
     @media @small {
       min-width: 12em;
       min-height: 14em;
       border-radius: 1em;
     }
-    // background-color: #f7f6f6;
   }
 
   .summerGrid {
@@ -82,8 +73,9 @@ body {
   }
 
   .course {
+    user-select: none;
     font-size: 0.8rem;
-    cursor: pointer;
+    cursor: grab;
     padding: 0.9em;
     padding-right: 1.1em;
     padding-left: 1.1em;
@@ -95,13 +87,11 @@ body {
     justify-content: center;
     gap: 0.7em;
     align-items: center;
-    // margin-left: auto;
-    // margin-right: auto;
+
     @media @small {
       border-radius: 2em;
       padding: 0.8em;
       width: 10em;
-      // padding: 0.5em 0.7em 0.5em 0.7em;
     }
   }
 
@@ -193,6 +183,35 @@ body {
   .settingsSubtitle {
     margin-bottom: 0;
   }
+
+  .dragDisabledCourse:hover {
+    // background-color: red;
+    animation: shake 0.25s;
+    transform: none;
+    cursor: url("../../images/notAllowed.ico"), default;
+  }
+
+  @keyframes shake {
+    0% {
+      transform: rotate(1deg);
+    }
+
+    25% {
+      transform: rotate(-1deg);
+    }
+
+    50% {
+      transform: rotate(0deg);
+    }
+
+    75% {
+      transform: rotate(1deg);
+    }
+
+    100% {
+      transform: rotate(0deg);
+    }
+  }
 }
 
 .dark {
@@ -202,17 +221,13 @@ body {
 
   .course {
     // background-color: #9254de;
-    backdrop-filter: blur(12px) saturate(169%);
-    -webkit-backdrop-filter: blur(12px) saturate(169%);
-    background-color: rgba(146, 84, 222, 0.53);
+    backdrop-filter: blur(9px) saturate(95%);
+    -webkit-backdrop-filter: blur(9px) saturate(95%);
+    background-color: rgba(146, 84, 222, 0.6);
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.125);
   }
   .warning {
-    background-color: #fea652;
-    // border-color: #D89615;
-    // border-style: solid;
-    // border-width: 1.5px;
     backdrop-filter: blur(9px) saturate(95%);
     -webkit-backdrop-filter: blur(9px) saturate(95%);
     background-color: rgba(254, 166, 82, 0.33);
@@ -265,6 +280,34 @@ body {
 
   .alert {
     background-color: #242728;
+  }
+
+  .termCheckbox {
+    color: #373a3a;
+    background-color: #1d1f20;
+    transition: all 200ms ease;
+
+    &:hover {
+      color: #bfbbbb;
+    }
+  }
+
+  .checkedTerm {
+    color: #9685f3;
+    &:hover {
+      color: #b4a9f4;
+    }
+  }
+
+  .dragDisabledCourse {
+    background-color: rgba(146, 84, 222, 0.4);
+    .text {
+      color: #d2d2d2;
+    }
+  }
+
+  .disabledWarning {
+    background-color: rgba(186, 132, 81, 0.33);
   }
 }
 
@@ -339,5 +382,33 @@ body {
 
   .ant-btn .anticon-right {
     color: #9254de;
+  }
+
+  .termCheckbox {
+    color: #e4e3e3;
+    background-color: white;
+    transition: all 200ms ease;
+
+    &:hover {
+      color: #bfbbbb;
+    }
+  }
+
+  .checkedTerm {
+    color: #9685f3;
+    &:hover {
+      color: #b4a9f4;
+    }
+  }
+
+  .dragDisabledCourse {
+    background-color: #eee;
+    .text {
+      color: #6c6c6c;
+    }
+  }
+
+  .disabledWarning {
+    background-color: #fff3e0;
   }
 }
