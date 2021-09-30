@@ -19,16 +19,23 @@ import { IoCogSharp } from "react-icons/io5";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
+import { AiFillEyeInvisible } from "react-icons/ai";
 import { SettingFilled } from "@ant-design/icons";
 
 const TermPlanner = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [termsOffered, setTermsOffered] = useState([]);
   const [isDragging, setIsDragging] = useState(false);
-  const { years, startYear, courses, plannedCourses, isSummerEnabled } =
-    useSelector((state) => {
-      return state.planner;
-    });
+  const {
+    years,
+    startYear,
+    numYears,
+    courses,
+    plannedCourses,
+    isSummerEnabled,
+  } = useSelector((state) => {
+    return state.planner;
+  });
 
   const theme = useSelector((state) => state.theme);
 
@@ -50,10 +57,28 @@ const TermPlanner = () => {
     plannedCourses,
     courses,
   };
+  const [hidden, setHidden] = React.useState(() => {
+    const hiddenMap = new Map();
+    for (let i = 0; i < numYears; i++) {
+      hiddenMap.set(startYear + i, false);
+    }
+    return hiddenMap;
+  });
+
+  const hideYear = (year) => {
+    const tempHidden = new Map(hidden);
+    let isHidden = false;
+    if (tempHidden.get(year)) isHidden = tempHidden.get(year);
+    tempHidden.set(year, !isHidden);
+    setHidden(tempHidden);
+
+    // console.log(year);
+  };
+  console.log(hidden);
 
   return (
     <>
-        <SettingsButton />
+      <SettingsButton />
       {isLoading ? (
         <SkeletonPlanner />
       ) : (
@@ -74,30 +99,59 @@ const TermPlanner = () => {
               <div class="gridItem">Term 2</div>
               <div class="gridItem">Term 3</div>
 
-              {years.map((year, index) => (
-                <React.Fragment key={index}>
-                  <div
-                    class={`gridItem ${
-                      currYear === startYear + index && "currYear"
-                    }`}
-                  >
-                    {startYear + index}
-                  </div>
-                  {Object.keys(year).map((term) => {
-                    const key = startYear + index + term;
-                    if ((!isSummerEnabled && term != "t0") || isSummerEnabled)
-                      return (
-                        <TermBox
-                          key={key}
-                          name={key}
-                          courses={year[term]}
-                          termsOffered={termsOffered}
-                          isDragging={isDragging}
-                        />
-                      );
-                  })}
-                </React.Fragment>
-              ))}
+              {years.map((year, index) => {
+                if (!hidden.get(startYear + index)) {
+                  return (
+                    <React.Fragment key={index}>
+                      <div className={`yearContainer gridItem`}>
+                        <div
+                          className={`year ${
+                            currYear === startYear + index && "currYear"
+                          }`}
+                        >
+                          {startYear + index}
+                        </div>
+                        <div
+                          className="eye"
+                          onClick={() => hideYear(startYear + index)}
+                        >
+                          <AiFillEyeInvisible color="#b0b0b0" />
+                        </div>
+                      </div>
+
+                      {Object.keys(year).map((term) => {
+                        const key = startYear + index + term;
+                        if (
+                          (!isSummerEnabled && term != "t0") ||
+                          isSummerEnabled
+                        )
+                          return (
+                            <TermBox
+                              key={key}
+                              name={key}
+                              courses={year[term]}
+                              termsOffered={termsOffered}
+                              isDragging={isDragging}
+                            />
+                          );
+                      })}
+                    </React.Fragment>
+                  );
+                }
+                // else
+                //   return (
+                //     <React.Fragment>
+                //       <div className="unhideEye">
+                //         <AiFillEyeInvisible color="#b0b0b0" />
+                //       </div>
+                //       <div
+                //         className={`yearLine ${
+                //           isSummerEnabled && "yearLineWithSummer"
+                //         }`}
+                //       ></div>
+                //     </React.Fragment>
+                //   );
+              })}
             </div>
             <UnplannedColumn />
           </div>

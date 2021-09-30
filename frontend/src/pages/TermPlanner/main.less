@@ -220,6 +220,44 @@ body {
   .tooltip {
     padding: 1em;
   }
+  .eye {
+    display: none;
+  }
+  .yearContainer {
+    cursor: pointer;
+    &:hover {
+      .eye {
+        display: block;
+      }
+      .year {
+        display: none;
+      }
+    }
+  }
+
+  //   .yearLineContainer {
+  //   }
+  //   .yearLine {
+  //     // border-bottom: 1px solid #d9d9d9;
+  //     grid-column: 1/ 5;
+  //     background-color: #d9d9d9;
+  //     height: 1px;
+  //     margin: 2em;
+  //     cursor: pointer;
+  //     &:hover {
+  //       grid-column: 2 / 5;
+  //       .unhideEye {
+  //         display: block;
+  //       }
+  //     }
+  //   }
+  //   .yearLineWithSummer {
+  //     grid-column: 1 / 6;
+  //   }
+
+  //   .unhideEye {
+  //     display: none;
+  //   }
 }
 
 .dark {
