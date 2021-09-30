@@ -231,6 +231,19 @@ class CompositeCondition():
         '''AND or OR'''
         self.logic = logic
 
+    def is_unlocked(self, user):
+        '''The first level check which returns the result and a warning. Call this
+        with the appropriate user data to determine if a course is unlocked or not.
+        Will return an object containing the result and a warning'''
+        warnings = []
+        
+        res = self.validate(user, warnings)
+
+        return {
+            "result": res,
+            "warnings": warnings
+        }
+
     def validate(self, user, warnings=[]):
         # Ensure we add all the warnings. 
         # NOTE: Remember that warnings are only returned
@@ -244,7 +257,7 @@ class CompositeCondition():
                 unlocked, warning = cond.validate(user)
 
                 if warning != None:
-                    parent_warnings.append(warning)
+                    warnings.append(warning)
             elif isinstance(cond, CompositeCondition):
                 # Need to pass in the warnings list to collate all the warnings
                 unlocked = cond.validate(user, warnings)
@@ -259,11 +272,6 @@ class CompositeCondition():
         return satisfied
 
 
-# class FirstCompositeCondition(CompositeCondition):
-#     '''The top layer composite condition which will have some additional special validation'''
-#     def validate(self, user):
-#         if self.logic == AND:
-            
 
 
 def create_condition(tokens):
