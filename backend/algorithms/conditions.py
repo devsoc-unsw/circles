@@ -219,7 +219,9 @@ class CompositeCondition():
     NOTE: This will not handle clauses including BOTH && and || as it is assumed
     that brackets will have been used to prevent ambiguity'''
 
-    def __init__(self, logic=AND):
+    def __init__(self, logic=OR):
+        # NOTE: By default, logic should be OR. This will ensure that empty conditions
+        # evaluate as True due to the way we implement validate
         self.conditions = []
         self.logic = logic
 
@@ -237,22 +239,29 @@ class CompositeCondition():
         Will return an object containing the result and a warning'''
         warnings = []
         
-        res = self.validate(user, warnings)
-
-        return {
-            "result": res,
+        unlocked = self.validate(user, warnings)
+        print(f"Unlocked is {unlocked}")
+        result = {
+            "result": unlocked,
             "warnings": warnings
         }
+        
+        return result
 
     def validate(self, user, warnings=[]):
         # Ensure we add all the warnings. 
         # NOTE: Remember that warnings are only returned
         # along with True by validate() method. In other words, checking a warning 
         # is != None is the equivalent of checking that validate() returned True
+        
+        if self.conditions == []:
+            # Empty condition returns True by default
+            return True
+        
         satisfied = False
 
         for cond in self.conditions:
-            if isinstance(cond, (GradeCondition, WamCondition)):
+            if isinstance(cond, (GRADECondition, WAMCondition)):
                 # Special type of condition which can return warnings
                 unlocked, warning = cond.validate(user)
 
@@ -263,7 +272,7 @@ class CompositeCondition():
                 unlocked = cond.validate(user, warnings)
             else:
                 unlocked = cond.validate(user)
-            
+
             if self.logic == AND:
                 satisfied = satisfied and unlocked
             else:
@@ -297,10 +306,10 @@ def create_condition(tokens):
             # End parsing and go up one layer
             return result, index
         elif token == "&&":
-            # AND type logic. We will set it for clarity even though it is default
+            # AND type logic
             result.set_logic(AND)
         elif token == "||":
-            # Change logic to ||
+            # OR type logic
             result.set_logic(OR)
         elif is_course(token):
             # Condition for a single course
