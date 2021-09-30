@@ -19,7 +19,7 @@ import { IoCogSharp } from "react-icons/io5";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
-import { AiFillEyeInvisible } from "react-icons/ai";
+import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { SettingFilled } from "@ant-design/icons";
 
 const TermPlanner = () => {
@@ -67,14 +67,27 @@ const TermPlanner = () => {
 
   const hideYear = (year) => {
     const tempHidden = new Map(hidden);
-    let isHidden = false;
-    if (tempHidden.get(year)) isHidden = tempHidden.get(year);
-    tempHidden.set(year, !isHidden);
+    let i = 0;
+    for (const [key, value] of tempHidden.entries()) {
+      if (value) i++;
+    }
+    console.log(i);
+    if (i === numYears - 1) return;
+    tempHidden.set(year, true);
     setHidden(tempHidden);
-
-    // console.log(year);
+    setAreYearsHidden(true);
   };
-  console.log(hidden);
+
+  const unhideAll = () => {
+    const tempHidden = new Map(hidden);
+    for (const [key, value] of tempHidden.entries()) {
+      tempHidden.set(key, false);
+      // console.log(key, value);
+    }
+    setHidden(tempHidden);
+    setAreYearsHidden(false);
+  };
+  const [areYearsHidden, setAreYearsHidden] = React.useState(false);
 
   return (
     <>
@@ -93,7 +106,13 @@ const TermPlanner = () => {
         >
           <div className="plannerContainer">
             <div class={`gridContainer ${isSummerEnabled && "summerGrid"}`}>
-              <div class="gridItem"></div>
+              <div class="gridItem">
+                {areYearsHidden && (
+                  <div onClick={unhideAll}>
+                    <AiFillEye className="unhideEye" />
+                  </div>
+                )}
+              </div>
               {isSummerEnabled && <div class="gridItem">Summer</div>}
               <div class="gridItem">Term 1</div>
               <div class="gridItem">Term 2</div>
