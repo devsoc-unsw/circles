@@ -75,6 +75,11 @@ export const plannerActions = (action, payload) => {
         type: action,
         payload: payload,
       };
+    case "SET_DEGREE_LENGTH":
+      return {
+        type: action,
+        payload: payload,
+      };
     default:
       return;
   }
