@@ -1,7 +1,7 @@
 import sys
 import json
 import re
-
+import json
 from json import dump
 
 from categories import *
@@ -23,7 +23,7 @@ class User:
         self.program = None  # NOTE: For now this is only single degree
         self.specialisations = {}
         self.uoc = 0
-        self.wam = None
+        self.wam = 0
         self.year = 0  # TODO
 
     def add_courses(self, courses):
@@ -73,6 +73,28 @@ class User:
         '''Determines if the user is in the specialisation'''
         return specialisation in self.specialisations
 
+    def load_json(self, path='./userdatatemplate.json'):
+        '''Reads userdata from path'''
+        with open(path) as f:
+            data = json.load(f)
+        
+        self.program = data['program']
+        self.specialisations = data['specialisations']
+        self.courses = data['courses']
+        self.year = data['year']
+
+        '''calculate wam and uoc'''
+        # Subtract uoc of the courses without mark when dividing
+        uocfixer = 0
+        for c in self.courses:
+            self.uoc += self.courses[c][0]
+            if type(self.courses[c][1]) != type(1):
+                uocfixer += self.courses[c][0]
+                continue
+            self.wam += self.courses[c][0] * self.courses[c][1]
+        self.wam /= (self.uoc - uocfixer)
+
+        return
 
 
 class CourseCondition():
