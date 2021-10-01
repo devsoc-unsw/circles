@@ -73,10 +73,8 @@ class User:
         '''Determines if the user is in the specialisation'''
         return specialisation in self.specialisations
 
-    def load_json(self, path='./userdatatemplate.json'):
+    def load_json(self, data):
         '''Reads userdata from path'''
-        with open(path) as f:
-            data = json.load(f)
         
         self.program = data['program']
         self.specialisations = data['specialisations']
@@ -93,7 +91,7 @@ class User:
                 continue
             self.wam += self.courses[c][0] * self.courses[c][1]
         self.wam /= (self.uoc - uocfixer)
-
+        
         return
 
 
