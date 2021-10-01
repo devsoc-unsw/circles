@@ -143,25 +143,30 @@ class WAMCondition():
         Will always return True and a warning since WAM can fluctuate
         '''
 
+        # Determine the wam we must figure out (whether it is the user's overall wam or a specific category)
         if self.category == None:
-            # Simple wam condition
-            return True, self.get_warning(user.wam)        
+            applicable_wam = user.wam
+        else:
+            applicable_wam = self.category.wam(user)
         
-        # Otherwise, get the wam for that category and return a warning accordingly
-        category_wam = self.category.wam(user)
-        return True, self.get_warning(category_wam)
+        return True, self.get_warning(applicable_wam)
 
     def get_warning(self, applicable_wam):
+        '''Returns an appropriate warning message or None if not needed'''
         if self.category == None:
             if applicable_wam == None:
-                return f"Requires {self.wam} WAM. Your WAM is currently non-existent"
-            else:
-                return f"Requires {self.wam} WAM. Your WAM is currently {applicable_wam}"
+                return f"Requires {self.wam} WAM. Your WAM has not been recorded"
+            elif applicable_wam >= self.wam:
+                return None
+            else: 
+                return f"Requires {self.wam} WAM. Your WAM is currently {applicable_wam:.3f}"
         else:
             if applicable_wam == None:
-                return f"Requires a {self.wam} WAM in {self.category}. Your WAM in {self.category} is non-existent"
+                return f"Requires {self.wam} WAM in {self.category}. Your WAM in {self.category} has not been recorded"
+            elif applicable_wam >= self.wam:
+                return None
             else:
-                return f"Requires {self.wam} WAM in {self.category}. Your WAM in {self.category} is currently {applicable_wam}"
+                return f"Requires {self.wam} WAM in {self.category}. Your WAM in {self.category} is currently {applicable_wam:.3f}"
 
 class GRADECondition():
     '''Handles GRADE conditions such as 65GRADE and 80GRADE in [A-Z]{4}[0-9]{4}'''
@@ -215,11 +220,9 @@ class SpecialisationCondition():
 
 
 class CompositeCondition():
-    '''Handles AND/OR clauses comprised of condition objects.
-    NOTE: This will not handle clauses including BOTH && and || as it is assumed
-    that brackets will have been used to prevent ambiguity'''
+    '''Handles AND/OR clauses comprised of condition objects.'''
 
-    def __init__(self, logic=OR):
+    def __init__(self, logic=AND):
         # NOTE: By default, logic should be OR. This will ensure that empty conditions
         # evaluate as True due to the way we implement validate
         self.conditions = []
@@ -240,7 +243,6 @@ class CompositeCondition():
         warnings = []
         
         unlocked = self.validate(user, warnings)
-        print(f"Unlocked is {unlocked}")
         result = {
             "result": unlocked,
             "warnings": warnings
@@ -258,7 +260,10 @@ class CompositeCondition():
             # Empty condition returns True by default
             return True
         
-        satisfied = False
+        if self.logic == AND:
+            satisfied = True
+        else:
+            satisfied = False
 
         for cond in self.conditions:
             if isinstance(cond, (GRADECondition, WAMCondition)):
@@ -281,11 +286,20 @@ class CompositeCondition():
         return satisfied
 
 
-
-
 def create_condition(tokens):
-    '''Given the parsed logical tokens list, (assuming starting and ending bracket),
-    return the condition object and the index of that (sub) token list'''
+    '''
+    The main wrapper for make_condition so we don't get 2 returns.
+    Given the parsed logical tokens list (assuming starting and ending bracket),
+    Returns the condition
+    '''
+    return make_condition(tokens)[0]
+
+def make_condition(tokens):
+    '''
+    To be called by create_condition
+    Given the parsed logical tokens list, (assuming starting and ending bracket),
+    return the condition object and the index of that (sub) token list
+    '''
 
     # Start off as a composite condition
     result = CompositeCondition()
@@ -294,7 +308,7 @@ def create_condition(tokens):
     for index, token in it:
         if token == '(':
             # Parse content in bracket 1 layer deeper
-            sub_result, sub_index = create_condition(tokens[index + 1:])
+            sub_result, sub_index = make_condition(tokens[index + 1:])
             if sub_result == None:
                 # Error. Return None
                 return None, sub_index
