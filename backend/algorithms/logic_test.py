@@ -264,15 +264,21 @@ def test_grade_condition():
     comp1521_70 = create_condition(["(", "70GRADE", "in", "COMP1521", ")"])
     math1131_70 = create_condition(["(", "70GRADE", "in", "MATH1131", ")"])
 
-    # TODO: None grades should pass (with warning) we just return True for now
-    assert (comp1511_70.is_unlocked(user))["result"] == True
-    assert (math1131_70.is_unlocked(user))["result"] == True
+    comp1511_70_user_unlocked = comp1511_70.is_unlocked(user)
+    assert comp1511_70_user_unlocked["result"] == True
+    assert len(comp1511_70_user_unlocked["warnings"]) == 1
+    assert "Requires 70 mark in COMP1511. Your mark has not been recorded"
+
+    math1131_70_user_unlocked = math1131_70.is_unlocked(user)
+    assert math1131_70_user_unlocked["result"] == True
+    assert len(math1131_70_user_unlocked["warnings"]) == 1
+    assert "Requires 70 mark in MATH1131. Your mark has not been recorded"
 
     # Has not taken the course. Should be false
     assert (comp1521_70.is_unlocked(user))["result"] == False
-
+    assert len((comp1521_70.is_unlocked(user))["warnings"]) == 0
+    
     comp1511_60 = create_condition(["(", "60GRADE", "in", "COMP1511", ")"])
-
     comp1511_90 = create_condition(["(", "90GRADE", "in", "COMP1511", ")"])
     comp1521_90 = create_condition(["(", "90GRADE", "in", "COMP1521", ")"])
     math1131_90 = create_condition(["(", "90GRADE", "in", "COMP1131", ")"])

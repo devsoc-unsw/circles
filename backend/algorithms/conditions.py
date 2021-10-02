@@ -197,7 +197,7 @@ class GRADECondition():
             return True, None
 
     def get_warning(self):
-        return f"Requires {self.grade} mark in {self.course}"
+        return f"Requires {self.grade} mark in {self.course}. You mark has not been recorded"
 
 class ProgramCondition():
     '''Handles Program conditions such as 3707'''
@@ -239,7 +239,7 @@ class CompositeCondition():
     def is_unlocked(self, user):
         '''The first level check which returns the result and a warning. Call this
         with the appropriate user data to determine if a course is unlocked or not.
-        Will return an object containing the result and a warning'''
+        Will return an object containing the result and a list of warnings'''
         warnings = []
         
         unlocked = self.validate(user, warnings)
