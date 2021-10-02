@@ -293,7 +293,7 @@ class FirstCompositeCondition(CompositeCondition):
         
         if self.course is not None:
             for exclusion in CACHED_EXCLUSIONS[self.course].keys():
-                if is_course(exclusion) and user.has_taken(exclusion):
+                if is_course(exclusion) and user.has_taken_course(exclusion):
                     return {
                         "result": False,
                         "warnings": warnings
