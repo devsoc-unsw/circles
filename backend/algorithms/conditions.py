@@ -18,13 +18,19 @@ OR = 2
 class User:
     '''A user and their data which will be used to determine if they can take a course'''
 
-    def __init__(self):
+    def __init__(self, data=None):
+        # Will load the data if any was given
         self.courses = {}
         self.program = None  # NOTE: For now this is only single degree
         self.specialisations = {}
         self.uoc = 0
         self.wam = 0
         self.year = 0  # TODO
+
+        if data != None:
+            # Data was provided
+            self.load_json(data)
+
 
     def add_courses(self, courses):
         '''Given a dictionary of courses mapping course code to a (uoc, grade) tuple,
@@ -74,7 +80,7 @@ class User:
         return specialisation in self.specialisations
 
     def load_json(self, data):
-        '''Reads userdata from path'''
+        '''Given the user data, correctly loads it into this user class'''
         
         self.program = data['program']
         self.specialisations = data['specialisations']
