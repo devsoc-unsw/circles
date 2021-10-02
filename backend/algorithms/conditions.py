@@ -12,7 +12,9 @@ OR = 2
 
 
 '''CACHED'''
-
+with open("./cache/exclusions.json") as f:
+    CACHED_EXCLUSIONS = json.load(f)
+    f.close()
 
 
 class User:
@@ -236,21 +238,9 @@ class CompositeCondition():
         '''AND or OR'''
         self.logic = logic
 
-    def is_unlocked(self, user):
-        '''The first level check which returns the result and a warning. Call this
-        with the appropriate user data to determine if a course is unlocked or not.
-        Will return an object containing the result and a list of warnings'''
-        warnings = []
-        
-        unlocked = self.validate(user, warnings)
-        result = {
-            "result": unlocked,
-            "warnings": warnings
-        }
-        
-        return result
-
     def validate(self, user, warnings=[]):
+        '''A helper function to be called by is_unlocked. The purpose of separating
+        them is for easy warning implementation'''
         # Ensure we add all the warnings. 
         # NOTE: Remember that warnings are only returned
         # along with True by validate() method. In other words, checking a warning 
@@ -286,23 +276,60 @@ class CompositeCondition():
         return satisfied
 
 
-def create_condition(tokens):
+class FirstCompositeCondition(CompositeCondition):
+    '''The highest level composite condition (the outermost one). This is given
+    special treatment as this is the "entry point" to our algorithm'''
+    def __init__(self, logic=AND, course=None):
+        # The course which this condition applies to. Default value is None for testing purposes
+        self.course = course 
+        super(CompositeCondition, self).__init__(logic)
+
+    def is_unlocked(self, user):
+        '''The highest level check which returns the result and a warning. Call this
+        with the appropriate user data to determine if a course is unlocked or not.
+        Will return an object containing the result and a list of warnings'''
+        warnings = []
+        
+        if self.course is not None:
+            for exclusion in CACHED_EXCLUSIONS[self.course].keys():
+                if is_course(exclusion) and user.has_taken(exclusion):
+                    return {
+                        "result": False,
+                        "warnings": warnings
+                    }
+                else:
+                    # Not able to parse this type of  exclusion
+                    continue
+        
+        unlocked = self.validate(user, warnings)
+        
+        return {
+            "result": unlocked,
+            "warnings": warnings
+        }
+
+
+def create_condition(tokens, course=None):
     '''
     The main wrapper for make_condition so we don't get 2 returns.
     Given the parsed logical tokens list (assuming starting and ending bracket),
+    and optionally a course for which this condition applies to,
     Returns the condition
     '''
-    return make_condition(tokens)[0]
+    return make_condition(tokens, True, course)[0]
 
-def make_condition(tokens):
+def make_condition(tokens, first=False, course=None):
     '''
     To be called by create_condition
     Given the parsed logical tokens list, (assuming starting and ending bracket),
     return the condition object and the index of that (sub) token list
     '''
 
-    # Start off as a composite condition
-    result = CompositeCondition()
+    # Everything is wrapped in a CompositeCondition
+    if first == True:
+        result = FirstCompositeCondition(course)
+    else:
+        result = CompositeCondition()
 
     it = enumerate(tokens)
     for index, token in it:
@@ -473,24 +500,3 @@ def read_data(file_name):
         print(f"File {file_name} not found")
         sys.exit(1)
         
-
-# tokens = ["(", "COMP1511", "&&", "(", "COMP1521", "||", "COMP1531", ")", ")"]
-# user = User()
-# user.add_courses(["COMP1511", "COMP1531"])
-
-# cond, index = create_condition(tokens)
-# # print(cond.to_str())
-# print(cond.validate(user))
-
-# user.uoc = 12
-# user.courses = {
-#     "COMP1511": 6,
-#     "COMP1521": 6,
-#     "COMP1531": 6
-# }
-
-# tokens = ["(", "12UOC", "in", "MATH", ")"]
-
-# cond, index = create_condition(tokens)
-
-# print(cond.validate(user))
