@@ -4,8 +4,8 @@
   "private": true,
   "homepage": "http://csesoc.github.io/Circles",
   "dependencies": {
-    "@ant-design/icons": "^4.6.2",
     "@ant-design/charts": "^1.1.17",
+    "@ant-design/icons": "^4.6.2",
     "@craco/craco": "^6.1.2",
     "@reduxjs/toolkit": "^1.5.0",
     "@testing-library/jest-dom": "^5.11.4",
@@ -16,6 +16,7 @@
     "craco-less": "^1.17.1",
     "react": "^17.0.1",
     "react-beautiful-dnd": "^13.1.0",
+    "react-contexify": "^5.0.0",
     "react-dom": "^17.0.1",
     "react-flow-renderer": "^9.1.1",
     "react-icons": "^4.2.0",
@@ -24,6 +25,7 @@
     "react-scroll": "^1.8.2",
     "react-spring": "^9.2.3",
     "react-tooltip": "^4.2.21",
+    "react-tsparticles": "^1.33.2",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "tslib": "^2.3.0",
@@ -36,9 +38,7 @@
     "test": "craco test",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "eject": "react-scripts eject",
-    "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
