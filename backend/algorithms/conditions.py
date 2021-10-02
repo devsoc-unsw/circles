@@ -12,7 +12,8 @@ OR = 2
 
 
 '''CACHED'''
-with open("./cache/exclusions.json") as f:
+CACHED_EXCLUSIONS_PATH = "./cache/exclusions.json"
+with open(CACHED_EXCLUSIONS_PATH) as f:
     CACHED_EXCLUSIONS = json.load(f)
     f.close()
 
@@ -279,10 +280,10 @@ class CompositeCondition():
 class FirstCompositeCondition(CompositeCondition):
     '''The highest level composite condition (the outermost one). This is given
     special treatment as this is the "entry point" to our algorithm'''
-    def __init__(self, logic=AND, course=None):
+    def __init__(self, course=None, logic=AND):
         # The course which this condition applies to. Default value is None for testing purposes
         self.course = course 
-        super(CompositeCondition, self).__init__(logic)
+        super().__init__()
 
     def is_unlocked(self, user):
         '''The highest level check which returns the result and a warning. Call this
@@ -327,7 +328,7 @@ def make_condition(tokens, first=False, course=None):
 
     # Everything is wrapped in a CompositeCondition
     if first == True:
-        result = FirstCompositeCondition(course)
+        result = FirstCompositeCondition(course=course)
     else:
         result = CompositeCondition()
 
