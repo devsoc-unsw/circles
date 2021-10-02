@@ -292,12 +292,16 @@ class FirstCompositeCondition(CompositeCondition):
         warnings = []
         
         if self.course is not None:
+            result = {
+                "result": False,
+                "warnings": warnings
+            }
             for exclusion in CACHED_EXCLUSIONS[self.course].keys():
+                
                 if is_course(exclusion) and user.has_taken_course(exclusion):
-                    return {
-                        "result": False,
-                        "warnings": warnings
-                    }
+                    return result
+                elif is_program(exclusion) and user.in_program(exclusion):
+                    return result
                 else:
                     # Not able to parse this type of  exclusion
                     continue

@@ -423,4 +423,10 @@ def test_exclusion():
     dpst1092_cond = create_condition(["(", "COMP1511", ")"], "DPST1092")
     assert (dpst1092_cond.is_unlocked(user))["result"] == False
 
-    # TODO: Test exclusion for programs and other types of exclusion
+    # ECON1101 should exclude 3155 and 3521
+    user1 = User()
+    user1.add_program("3155")
+    econ1011_cond = create_condition(["(", ")"], "ECON1101")
+    assert (econ1011_cond.is_unlocked(user1))["result"] == False
+    
+    # TODO: Test exclusion for other types
