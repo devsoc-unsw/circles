@@ -37,7 +37,7 @@ const SettingsMenu = () => {
   const dispatch = useDispatch();
 
   function updateStartYear(date, dateString) {
-    dispatch(plannerActions("SET_START_YEAR", dateString));
+    dispatch(plannerActions("UPDATE_START_YEAR", dateString));
   }
 
   function updateDegreeLength(value) {

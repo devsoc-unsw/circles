@@ -182,7 +182,7 @@ const plannerReducer = (state = initialState, action) => {
       clonedCompletedTerms.set(action.payload, !isCompleted);
       return { ...state, completedTerms: clonedCompletedTerms };
 
-    case "SET_START_YEAR":
+    case "UPDATE_START_YEAR":
       const currEndYear = state.startYear + state.numYears - 1;
       const newStartYear = Number(action.payload);
       let updatedYears = [];
