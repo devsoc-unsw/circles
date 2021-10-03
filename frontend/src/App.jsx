@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Layout } from "antd";
+import { FeedbackFab } from './components/feedbackFab/FeedbackFab';
 import Header from './components/header/Header'
 import CourseSelector from "./pages/CourseSelector/main";
 import DegreeSelector from "./pages/DegreeSelector/main";
@@ -14,7 +15,7 @@ function App() {
   return (
     <Router>
       <Header />
-      <Content className="content">
+      <Content className="app-root content">
         <Switch>
           <Route exact path="/">
             <DegreeSelector />
@@ -33,6 +34,7 @@ function App() {
             <ProgressionChecker />
           </Route>
         </Switch>
+        <FeedbackFab/>
       </Content>
     </Router>
   );
