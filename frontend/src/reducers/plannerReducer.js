@@ -45,7 +45,7 @@ const generateEmptyYears = (nYears) => {
 
 const initialState = {
   unplanned: ["COMP2521"],
-  startYear: 2021,
+  startYear: parseInt(new Date().getFullYear()),
   numYears: 3,
   isSummerEnabled: false,
   years: [
@@ -74,6 +74,9 @@ const plannerReducer = (state = initialState, action) => {
         ...state,
         courses: new Map([...state.courses, ...action.payload]),
       };
+
+    case "SET_NUM_YEARS":
+      return { ...state, numYears: action.payload };
     case "SET_YEARS":
       return { ...state, years: action.payload };
 

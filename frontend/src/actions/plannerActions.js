@@ -21,6 +21,11 @@ export const plannerActions = (action, payload) => {
         type: "SET_YEAR_START",
         payload: payload,
       };
+    case "SET_NUM_YEARS":
+      return {
+        type: "SET_NUM_YEARS",
+        payload: payload,
+      };
     case "SET_DEGREE_LENGTH":
       return {
         type: "SET_DEGREE_LENGTH",
