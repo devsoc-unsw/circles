@@ -125,12 +125,10 @@ const TermPlanner = () => {
                         >
                           {startYear + index}
                         </div>
-                        <div
+                        <IoIosEyeOff
                           className="eye"
                           onClick={() => hideYear(startYear + index)}
-                        >
-                          <IoIosEyeOff />
-                        </div>
+                        />
                       </div>
 
                       {Object.keys(year).map((term) => {
