@@ -12,8 +12,7 @@ export default function CourseSelector() {
       <div className='cs-root'>
         <div className='cs-top-cont'>
           <div className='cs-degree-cont'>
-            <h1 className='text'>{ degree.code } - { degree.name }</h1>
-            <SearchCourse />
+            <h1 className='text'>{ degree.programCode } - { degree.programName }</h1>
           </div>
         </div>
           <CourseTabs/>

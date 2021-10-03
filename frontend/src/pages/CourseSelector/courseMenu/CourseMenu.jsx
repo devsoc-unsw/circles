@@ -37,7 +37,7 @@ export default function CourseMenu() {
     // const coreData = await axios.get(`http://localhost:8000/api/getCoreCourses/${programCode}/${specialisation}/${minor}`);
     dispatch(setStructure(res.data));
   }
-  if (structure === null) fetchProgression();
+  if (!structure) fetchProgression();
   return (
     <div className='cs-menu-root'>
       { structure === null 

@@ -46,6 +46,11 @@ export const plannerActions = (action, payload) => {
         type: "SET_YEARS",
         payload: payload,
       };
+    case "SET_START_YEAR":
+      return {
+        type: "SET_START_YEAR",
+        payload: payload,
+      };
     case "UPDATE_PLANNED_COURSES":
       return {
         type: action,
@@ -64,6 +69,11 @@ export const plannerActions = (action, payload) => {
     case "TOGGLE_SUMMER":
       return {
         type: action,
+      };
+    case "TOGGLE_TERM_COMPLETE":
+      return {
+        type: action,
+        payload: payload,
       };
     default:
       return;
