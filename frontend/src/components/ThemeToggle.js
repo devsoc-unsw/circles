@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Switch } from "antd";
-import { IoMdMoon } from "react-icons/io";
+import { IoMdMoon, IoIosSunny } from "react-icons/io";
 import { useDispatch } from "react-redux";
 import { toggleTheme } from "../actions/toggleTheme";
 
@@ -31,7 +31,7 @@ function ThemeToggle() {
   return (
     <Switch
       checkedChildren={<IoMdMoon display="flex" />}
-      unCheckedChildren={<IoMdMoon display="flex" />}
+      unCheckedChildren={<IoIosSunny display="flex" />}
       defaultChecked={theme === "dark" ? true : false}
       onChange={() => setTheme(theme === "light" ? "dark" : "light")}
       style={toggleStyle}

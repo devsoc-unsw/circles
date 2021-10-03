@@ -1,11 +1,20 @@
 import React from "react";
 import { Link } from 'react-router-dom'
-import { useSelector } from "react-redux";
-import { Menu, Layout, Typography } from "antd";
-import { PlannerCart } from '../plannerCart/PlannerCart'
+import {
+  Menu,
+  Layout,
+  Typography,
+  Button,
+  Tooltip, 
+  Drawer,
+} from "antd";
+import { DrawerContent } from './DrawerContent';
+import { PlannerCart } from '../plannerCart/PlannerCart';
 import ThemeToggle from "../ThemeToggle";
-import circlesLogo from "../../images/circlesLogo.svg"
-import "./header.less"
+import { BarsOutlined } from "@ant-design/icons";
+import useMediaQuery from "../../hooks/useMediaQuery";
+import circlesLogo from "../../images/circlesLogo.svg";
+import "./header.less";
 
 const menuStyles = {
   backgroundColor: "inherit",
@@ -20,21 +29,32 @@ const titleStyles = {
 
 const { Title } = Typography
 const Header = () => {
-    const degree = useSelector(store => store.degree);
+    const isSmall = useMediaQuery("(max-width: 1400px)");
+    const [showDrawer, setShowDrawer] = React.useState(false);
     const [current, setCurrent] = React.useState(() => {
       const validPaths = new Set(['course-selector', 'progression-checker', 'degree-selector', 'term-planner']);
       const menuPath = window.location.pathname.split('/')[1]
       if (validPaths.has(menuPath)) return menuPath;
-      return 'progression-checker'
+      return null;
     });
+
+
     return (
-        <Layout className="header">
-          <div className="logo">
-            <img alt="circles-logo" src={circlesLogo} width="40" height="40" />
-            <Title level={3} style={titleStyles}>
-              Circles
-            </Title>
-          </div>
+      <Layout className="header">
+        <div className="logo">
+          <img alt="circles-logo" src={circlesLogo} width="40" height="40" />
+          <Title level={3} style={titleStyles}>
+            Circles
+          </Title>
+        </div>
+        { isSmall ? (
+          <Tooltip title="Tabs">
+            <Button type="primary"
+              onClick={() => setShowDrawer(true)}
+              icon={<BarsOutlined style={{color: '#fff', fontSize: '2em'}} />}
+            />
+          </Tooltip>
+        ) : (
           <div className='header-content'> 
             <Menu
               theme="dark"
@@ -59,7 +79,16 @@ const Header = () => {
             <PlannerCart/>
             <ThemeToggle />
           </div>
-        </Layout>
+          )}
+        
+        <Drawer
+          onClose={() => setShowDrawer(false)}
+          visible={showDrawer}
+          className={'flex-col'}
+        > 
+          <DrawerContent onCloseDrawer={() => setShowDrawer(false)} />
+        </Drawer>
+      </Layout>
     )
 }
 
