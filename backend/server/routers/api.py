@@ -71,13 +71,16 @@ def addSpecialisation(structure, code, type):
         # item['levels'] = container['levels']
 
         courseList = []
+        item['courses'] = {}
         for course in container['courses']:
             if ' or ' in course:
                 courseList.extend(course.split(' or '))
+            elif re.search(r'[A-Z]{4}\d{1}', course):
+                item['courses'][course] = container['courses'][course]
             else:
                 courseList.append(course)
         
-        item['courses'] = {}
+        # item['courses'] = {}
         print(item)
         for course in courseList:
             query = {'code': course}
