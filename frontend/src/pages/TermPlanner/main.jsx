@@ -61,12 +61,13 @@ const TermPlanner = () => {
   const [hidden, setHidden] = React.useState(() => {
     const hiddenMap = new Map();
     for (let i = 0; i < numYears; i++) {
-      hiddenMap.set(startYear + i, false);
+      hiddenMap.set(parseInt(startYear) + parseInt(i), false);
     }
     return hiddenMap;
   });
 
   const hideYear = (year) => {
+    console.log(hideYear);
     const tempHidden = new Map(hidden);
     let i = 0;
     for (const [key, value] of tempHidden.entries()) {
@@ -115,7 +116,7 @@ const TermPlanner = () => {
 
               {years.map((year, index) => {
                 const iYear = parseInt(startYear) + parseInt(index);
-                if (!hidden.get(startYear + index)) {
+                if (!hidden.get(iYear)) {
                   return (
                     <React.Fragment key={index}>
                       <div className={`yearContainer gridItem`}>
@@ -124,10 +125,9 @@ const TermPlanner = () => {
                         >
                           {iYear}
                         </div>
-                        <IoIosEyeOff
-                          className="eye"
-                          onClick={() => hideYear(iYear)}
-                        />
+                        <div className="eye">
+                          <IoIosEyeOff onClick={() => hideYear(iYear)} />
+                        </div>
                       </div>
 
                       {Object.keys(year).map((term) => {
