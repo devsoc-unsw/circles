@@ -14,13 +14,14 @@ import {
   updateWarnings,
 } from "./DragDropLogic";
 import UnplannedColumn from "./UnplannedColumn";
-import SettingsButton from "./SettingsButton";
+import OptionsHeader from "./OptionsHeader";
 import { IoCogSharp } from "react-icons/io5";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { SettingFilled } from "@ant-design/icons";
+import { IoIosEyeOff } from "react-icons/io";
 
 const TermPlanner = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -91,7 +92,7 @@ const TermPlanner = () => {
 
   return (
     <>
-      <SettingsButton />
+      <OptionsHeader areYearsHidden={areYearsHidden} unhideAll={unhideAll} />
       {isLoading ? (
         <SkeletonPlanner />
       ) : (
@@ -106,13 +107,7 @@ const TermPlanner = () => {
         >
           <div className="plannerContainer">
             <div class={`gridContainer ${isSummerEnabled && "summerGrid"}`}>
-              <div class="gridItem">
-                {areYearsHidden && (
-                  <div onClick={unhideAll}>
-                    <AiFillEye className="unhideEye" />
-                  </div>
-                )}
-              </div>
+              <div class="gridItem"></div>
               {isSummerEnabled && <div class="gridItem">Summer</div>}
               <div class="gridItem">Term 1</div>
               <div class="gridItem">Term 2</div>
@@ -134,7 +129,7 @@ const TermPlanner = () => {
                           className="eye"
                           onClick={() => hideYear(startYear + index)}
                         >
-                          <AiFillEyeInvisible color="#b0b0b0" />
+                          <IoIosEyeOff />
                         </div>
                       </div>
 
@@ -157,19 +152,6 @@ const TermPlanner = () => {
                     </React.Fragment>
                   );
                 }
-                // else
-                //   return (
-                //     <React.Fragment>
-                //       <div className="unhideEye">
-                //         <AiFillEyeInvisible color="#b0b0b0" />
-                //       </div>
-                //       <div
-                //         className={`yearLine ${
-                //           isSummerEnabled && "yearLineWithSummer"
-                //         }`}
-                //       ></div>
-                //     </React.Fragment>
-                //   );
               })}
             </div>
             <UnplannedColumn />
