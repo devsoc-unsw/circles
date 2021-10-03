@@ -15,7 +15,7 @@ function App() {
   return (
     <Router>
       <Header />
-      <Content className="app-root">
+      <Content className="app-root content">
         <Switch>
           <Route exact path="/">
             <DegreeSelector />
