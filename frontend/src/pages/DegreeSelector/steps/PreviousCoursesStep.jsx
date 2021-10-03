@@ -33,7 +33,6 @@ const TermBox = ({ yearIndex, termNo }) => {
         }, 2000)
     };
 
-    console.log(planner[yearIndex], termNo);
     return (
         <>
         <div className="termBox steps-term">

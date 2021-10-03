@@ -76,8 +76,9 @@ const plannerReducer = (state = initialState, action) => {
         courses: new Map([...state.courses, ...action.payload]),
       };
     case "SET_YEARS":
-      return { ...state, years: action.payload };
-
+      return { ...state, numYears: action.payload };
+    case "SET_START_YEAR":
+      return { ...state, startYear: action.payload };
     case "SET_UNPLANNED":
       let newUnplanned = state.unplanned.filter(
         (course) => course !== action.payload
