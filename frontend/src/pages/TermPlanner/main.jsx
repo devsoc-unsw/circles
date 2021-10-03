@@ -125,8 +125,8 @@ const TermPlanner = () => {
                         >
                           {iYear}
                         </div>
-                        <div className="eye">
-                          <IoIosEyeOff onClick={() => hideYear(iYear)} />
+                        <div className="eye" onClick={() => hideYear(iYear)}>
+                          <IoIosEyeOff />
                         </div>
                       </div>
 
