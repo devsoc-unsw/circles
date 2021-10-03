@@ -114,25 +114,24 @@ const TermPlanner = () => {
               <div class="gridItem">Term 3</div>
 
               {years.map((year, index) => {
+                const iYear = parseInt(startYear) + parseInt(index);
                 if (!hidden.get(startYear + index)) {
                   return (
                     <React.Fragment key={index}>
                       <div className={`yearContainer gridItem`}>
                         <div
-                          className={`year ${
-                            currYear === startYear + index && "currYear"
-                          }`}
+                          className={`year ${currYear === iYear && "currYear"}`}
                         >
-                          {startYear + index}
+                          {iYear}
                         </div>
                         <IoIosEyeOff
                           className="eye"
-                          onClick={() => hideYear(startYear + index)}
+                          onClick={() => hideYear(iYear)}
                         />
                       </div>
 
                       {Object.keys(year).map((term) => {
-                        const key = startYear + index + term;
+                        const key = iYear + term;
                         if (
                           (!isSummerEnabled && term != "t0") ||
                           isSummerEnabled

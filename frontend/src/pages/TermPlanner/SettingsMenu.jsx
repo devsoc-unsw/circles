@@ -41,7 +41,6 @@ const SettingsMenu = () => {
   }
 
   function updateDegreeLength(value) {
-    // console.log(value);
     dispatch(plannerActions("SET_DEGREE_LENGTH", value));
   }
 
