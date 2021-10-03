@@ -47,7 +47,7 @@ export const MinorStep = () => {
                     <Menu.Item className='text' key={key}>{key} {options[key]}</Menu.Item>
                 )}  
             </Menu>
-            <Link to="Duration" smooth={true} duration={1000}>
+            <Link to="Previous Courses" smooth={true} duration={1000}>
                 <Button type="primary" className='steps-next-btn'>
                     Next
                 </Button>

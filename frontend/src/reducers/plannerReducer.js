@@ -83,7 +83,6 @@ const plannerReducer = (state = initialState, action) => {
       let newUnplanned = state.unplanned.filter(
         (course) => course !== action.payload
       );
-      console.log(newUnplanned);
       return { ...state, unplanned: newUnplanned };
     case "REMOVE_ALL_UNPLANNED":
       return { ...state, unplanned: action.payload };
@@ -162,7 +161,6 @@ const plannerReducer = (state = initialState, action) => {
       nYear[termI] = nTerm;
       const nYears = new Object(state.years);
       nYears[yearI] = nYear;
-      // console.log(nYears);
 
       const nCourses = new Object(state.courses);
       nCourses.get(action.payload).plannedFor = null;

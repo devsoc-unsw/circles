@@ -1,15 +1,17 @@
 const initial = {
-    program: "",
-    specialisation: "",
-    minor: "",
+    programCode: "",
+    programName: "",
+    majors: [],
+    minor: [],
 
 }
 const degreeReducer = (state=initial, action) => {
     switch (action.type) { 
-        case 'SET_DEGREE': 
+        case 'SET_PROGRAM': 
             return {
                 ...state, 
-                program: action.payload
+                programCode: action.payload.programCode,
+                programName: action.payload.programName,
             }; 
         case 'SET_SPECIALISATION': 
             return {

@@ -12,7 +12,6 @@ const TermBox = ({ yearIndex, termNo }) => {
     const [loading, setLoading] = React.useState(false);
 
     const handleSave = () => {
-        console.log('temp');
         setLoading(true);
         // dispatch 
         // promise.all to get all the information about each added course 
