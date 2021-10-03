@@ -4,7 +4,7 @@ const plannedCourses = new Map();
 dummyMap.set("COMP2521", {
   title: "Data Structures and Algorithms",
   type: "Core",
-  termsOffered: ["t1", "t2", "t3"],
+  termsOffered: ["t0", "t1", "t2", "t3"],
   prereqs: "COMP1511 && (COMP1521 || DEFAULT3000)",
   plannedFor: null,
   warning: false,
@@ -12,7 +12,7 @@ dummyMap.set("COMP2521", {
 dummyMap.set("COMP1521", {
   title: "Computer Systems Fundamentals",
   type: "Elective",
-  termsOffered: ["t1", "t2"],
+  termsOffered: ["t0", "t1", "t2"],
   prereqs: "COMP1511",
   plannedFor: "2022t2",
   warning: false,
@@ -20,7 +20,7 @@ dummyMap.set("COMP1521", {
 dummyMap.set("COMP1511", {
   title: "Programming Fundamentals",
   type: "Core",
-  termsOffered: ["t1", "t2", "t3"],
+  termsOffered: ["t0", "t1", "t2", "t3"],
   prereqs: "",
   plannedFor: "2021t3",
   warning: false,
@@ -37,7 +37,7 @@ dummyMap.set("COMP6080", {
 const generateEmptyYears = (nYears) => {
   let res = [];
   for (let i = 0; i < nYears; ++i) {
-    const year = { t1: [], t2: [], t3: [] };
+    const year = { t0: [], t1: [], t2: [], t3: [] };
     res.push(year);
   }
   return res;
@@ -47,13 +47,15 @@ const initialState = {
   unplanned: ["COMP2521"],
   startYear: 2021,
   numYears: 3,
+  isSummerEnabled: false,
   years: [
-    { t1: [], t2: [], t3: ["COMP1511"] },
-    { t1: [], t2: ["COMP1521"], t3: [] },
-    { t1: [], t2: [], t3: ["COMP6080"] },
+    { t0: [], t1: [], t2: [], t3: ["COMP1511"] },
+    { t0: [], t1: [], t2: ["COMP1521"], t3: [] },
+    { t0: [], t1: [], t2: [], t3: ["COMP6080"] },
   ],
   courses: dummyMap,
   plannedCourses: plannedCourses,
+  completedTerms: new Map(),
 };
 const plannerReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -170,6 +172,15 @@ const plannerReducer = (state = initialState, action) => {
         // years: nYears,
         // courses: nCourses,
       };
+    case "TOGGLE_SUMMER":
+      return { ...state, isSummerEnabled: !state.isSummerEnabled };
+    case "TOGGLE_TERM_COMPLETE":
+      const clonedCompletedTerms = new Map(state.completedTerms);
+      let isCompleted = clonedCompletedTerms.get(action.payload);
+      // if it doesnt exist in map, then the term is not completed
+      if (isCompleted == null) isCompleted = false;
+      clonedCompletedTerms.set(action.payload, !isCompleted);
+      return { ...state, completedTerms: clonedCompletedTerms };
     default:
       return state;
   }

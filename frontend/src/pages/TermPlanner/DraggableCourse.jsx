@@ -1,16 +1,17 @@
 import React from "react";
-import { Typography } from "antd";
+import { Typography, Badge } from "antd";
 import { Draggable } from "react-beautiful-dnd";
 import { useSelector } from "react-redux";
 import { IoWarningOutline } from "react-icons/io5";
 import ReactTooltip from "react-tooltip";
 import { useContextMenu } from "react-contexify";
 import ContextMenu from "./ContextMenu";
+import useMediaQuery from "../../hooks/useMediaQuery";
 
 function DraggableCourse({ code, index }) {
   //   let code = course.match(/([A-Z]{4}[0-9]{4}):/)[1];
   const { Text } = Typography;
-  const { courses } = useSelector((state) => {
+  const { courses, isSummerEnabled, completedTerms } = useSelector((state) => {
     return state.planner;
   });
   const theme = useSelector((state) => state.theme);
@@ -24,9 +25,21 @@ function DraggableCourse({ code, index }) {
     id: `${code}-context`,
   });
 
+  const displayContextMenu = (e) => {
+    if (!isDragDisabled) show(e);
+  };
+
+  const isSmall = useMediaQuery("(max-width: 1400px)");
+
+  const isDragDisabled = completedTerms.get(plannedFor);
+
   return (
     <>
-      <Draggable draggableId={code} index={index}>
+      <Draggable
+        isDragDisabled={isDragDisabled}
+        draggableId={code}
+        index={index}
+      >
         {(provided) => (
           <li
             {...provided.draggableProps}
@@ -35,22 +48,33 @@ function DraggableCourse({ code, index }) {
             style={{
               ...provided.draggableProps.style,
             }}
-            className={`course ${warning && " warning"}`}
+            className={`course ${isSummerEnabled && "summerViewCourse"} 
+			${isDragDisabled && " dragDisabledCourse"} 
+			${isDragDisabled && warning && " disabledWarning"}
+			${warning && " warning"}`}
             data-tip
             data-for={code}
-            onContextMenu={show}
+            id={code}
+            onContextMenu={displayContextMenu}
           >
             {warning && (
               <IoWarningOutline
-                size="2.5em"
+                size={isSmall ? "1.5em" : "2.5em"}
                 color={theme === "light" ? "#DC9930" : "white"}
+                style={isSmall && { position: "absolute", marginRight: "8em" }}
               />
             )}
             <div>
-              <Text strong className="text">
-                {code}
-              </Text>
-              <Text className="text">: {courseName} </Text>
+              {isSmall ? (
+                <Text className="text">{code}</Text>
+              ) : (
+                <>
+                  <Text strong className="text">
+                    {code}
+                  </Text>
+                  <Text className="text">: {courseName} </Text>
+                </>
+              )}
             </div>
           </li>
         )}

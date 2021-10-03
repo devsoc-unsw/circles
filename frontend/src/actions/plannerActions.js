@@ -61,6 +61,15 @@ export const plannerActions = (action, payload) => {
         type: action,
         payload: payload,
       };
+    case "TOGGLE_SUMMER":
+      return {
+        type: action,
+      };
+    case "TOGGLE_TERM_COMPLETE":
+      return {
+        type: action,
+        payload: payload,
+      };
     default:
       return;
   }
