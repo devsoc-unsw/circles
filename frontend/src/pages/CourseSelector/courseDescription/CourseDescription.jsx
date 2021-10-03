@@ -5,6 +5,8 @@ import { PlusOutlined, StopOutlined } from '@ant-design/icons';
 import { CourseTag } from '../../../components/courseTag/CourseTag';
 import { getCourseById } from './../courseProvider';
 import { setUnplannedCourses } from '../../../actions/userAction';
+import SearchCourse from '../SearchCourse';
+
 import { plannerActions } from '../../../actions/plannerActions';
 import { Loading } from './Loading';
 import './courseDescription.less';
@@ -43,7 +45,7 @@ export default function CourseDescription() {
   }, [id]);
 
   if (id === 'explore') return (<div>This is the explore page</div>)
-  if (id === 'search') return (<div>This is the search page</div>)
+  if (id === 'search') return <SearchCourse/>;
 
   const addToPlanner = () => {
     const data = {

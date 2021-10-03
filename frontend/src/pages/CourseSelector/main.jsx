@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import CourseMenu from './courseMenu/CourseMenu';
 import CourseDescription from './courseDescription/CourseDescription';
 import { CourseTabs } from './CourseTabs';
-import SearchCourse from './SearchCourse';
 import './main.less';
 
 export default function CourseSelector() {
