@@ -58,7 +58,7 @@ def addSpecialisation(structure, code, type):
     query = {'code': code}
     spnResult = specialisationsCOL.find_one(query)
             
-    structure[type] = {}
+    structure[type] = {'name': spnResult['name']}
     for container in spnResult['curriculum']:
 
         structure[type][container['title']] = {}
@@ -84,7 +84,15 @@ def addSpecialisation(structure, code, type):
             courseResult = coursesCOL.find_one(query)
 
             if not courseResult:
-                item['courses'][course] = 1
+                # This is new code
+                if len(course) == 5:
+                    coursesList = []
+                    pat = re.compile(r'{}'.format(course), re.I)
+                    result = coursesCOL.find({'code': {'$regex': pat}})
+                    for i in result:
+                        item['courses'][i['code']] = i['title']
+                # This is old code
+                # item['courses'][course] = 1
             else:
                 item['courses'][course] = courseResult['title']
 
@@ -563,14 +571,16 @@ def getStructure(programCode, major="Default", minor="Default"):
                     structure['General'][container][course] = 1
 
         if 'FE' in programsResult['components']:
-            structure['General']['FlexEducation'] = {'UOC': programsResult['components']['FE']['credits_to_complete']}
+            structure['General']['FlexEducation'] = {'UOC': programsResult['components']['FE']['credits_to_complete'],
+                                                     'description': 'students can take a maximunm of {} UOC of free electives'.format(programsResult['components']['FE']['credits_to_complete'])}
         if 'GE' in programsResult['components']:
-            structure['General']['GeneralEducation'] = {'UOC': programsResult['components']['GE']['credits_to_complete']}
+            structure['General']['GeneralEducation'] = {'UOC': programsResult['components']['GE']['credits_to_complete'],
+                                                        'description': 'any general education course'}
 
     return {'structure': structure}
 
-@router.get("/search/{string}")
-def search(string):
+@router.get("/searchCourse/{string}")
+def searchCourse(string):
     dictionary = {}
     pat = re.compile(r'{}'.format(string), re.I)
     result = coursesCOL.find({'code': {'$regex': pat}})
