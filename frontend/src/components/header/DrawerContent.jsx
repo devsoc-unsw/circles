@@ -1,30 +1,26 @@
-import { IoMdMoon, IoIosSunny } from "react-icons/io";
 import React from "react";
-import {
-    Menu,
-    Divider,
-} from "antd";
-import { useSelector, useDispatch } from 'react-redux';
+// import { IoMdMoon, IoIosSunny } from "react-icons/io";
+// import { toggleTheme } from "../../actions/toggleTheme";
+// import { useSelector, useDispatch } from 'react-redux';
+import { Menu } from "antd";
 import { useHistory } from "react-router";
-import { toggleTheme } from "../../actions/toggleTheme";
 
 
 
 export const DrawerContent = ({ onCloseDrawer }) => {
-    const theme = useSelector(state => state.theme);
+    // const theme = useSelector(state => state.theme);
     const history = useHistory();
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const handlePush = (url) => {
         history.push(url);
         onCloseDrawer();
     } 
-    const handleThemeToggle = () => {
-        console.log('is this run?')
-        dispatch(toggleTheme(theme === "light" ? "dark" : "light"));
-        onCloseDrawer();
-    }
+    // const handleThemeToggle = () => {
+    //     dispatch(toggleTheme(theme === "light" ? "dark" : "light"));
+    //     onCloseDrawer();
+    // }
     return (
-        <Menu mode="vertical" style={{ width: 230 }}>
+        <Menu mode="vertical" style={{ width: 230, marginTop: "2em" }}>
             <Menu.Item key="1" 
                 onClick={() => handlePush('/course-selector')}
             >
@@ -40,14 +36,14 @@ export const DrawerContent = ({ onCloseDrawer }) => {
             >
             Term Planner
             </Menu.Item>
-            <Menu.ItemGroup key="customisation" title="Customisation">
+            {/* <Menu.ItemGroup key="customisation" title="Customisation">
                 <Menu.Item key="4" 
-                    onClick={() => handleThemeToggle}
+                    onClick={() => handleThemeToggle()}
                     icon={theme === "light" ? <IoMdMoon/> : <IoIosSunny/> }
                 >
                     Change to {theme === "light" ? "dark" : "light"} theme
                 </Menu.Item>
-            </Menu.ItemGroup>
+            </Menu.ItemGroup> */}
         </Menu>
     )
 }

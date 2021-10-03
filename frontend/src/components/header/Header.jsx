@@ -5,7 +5,6 @@ import {
   Layout,
   Typography,
   Button,
-  Tooltip, 
   Drawer,
 } from "antd";
 import { DrawerContent } from './DrawerContent';
@@ -48,12 +47,10 @@ const Header = () => {
           </Title>
         </div>
         { isSmall ? (
-          <Tooltip title="Tabs">
-            <Button type="primary"
-              onClick={() => setShowDrawer(true)}
-              icon={<BarsOutlined style={{color: '#fff', fontSize: '2em'}} />}
-            />
-          </Tooltip>
+          <Button type="primary"
+            onClick={() => setShowDrawer(true)}
+            icon={<BarsOutlined style={{color: '#fff', fontSize: '1.7em'}} />}
+          />
         ) : (
           <div className='header-content'> 
             <Menu

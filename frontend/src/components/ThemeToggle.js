@@ -14,7 +14,7 @@ function ThemeToggle() {
 
   React.useEffect(() => {
     window.localStorage.setItem("theme", JSON.stringify(theme));
-    dispatch(toggleTheme(theme));
+    dispatch(toggleTheme("light"));
     if (theme === "light") {
       document.body.classList.remove("dark");
       document.body.classList.add("light");
@@ -29,13 +29,15 @@ function ThemeToggle() {
   };
 
   return (
-    <Switch
-      checkedChildren={<IoMdMoon display="flex" />}
-      unCheckedChildren={<IoIosSunny display="flex" />}
-      defaultChecked={theme === "dark" ? true : false}
-      onChange={() => setTheme(theme === "light" ? "dark" : "light")}
-      style={toggleStyle}
-    />
+    // Disabled because too many dark features are not adjusted
+    <></>
+    // <Switch
+    //   checkedChildren={<IoMdMoon display="flex" />}
+    //   unCheckedChildren={<IoIosSunny display="flex" />}
+    //   defaultChecked={theme === "dark" ? true : false}
+    //   onChange={() => setTheme(theme === "light" ? "dark" : "light")}
+    //   style={toggleStyle}
+    // />
   );
 }
 
