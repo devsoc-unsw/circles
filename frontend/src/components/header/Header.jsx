@@ -20,7 +20,7 @@ const titleStyles = {
 
 const { Title } = Typography
 const Header = () => {
-    const userDegree = useSelector(store => store.degree);
+    const degree = useSelector(store => store.degree);
     const [current, setCurrent] = React.useState(() => {
       const validPaths = new Set(['course-selector', 'progression-checker', 'degree-selector', 'term-planner']);
       const menuPath = window.location.pathname.split('/')[1]
@@ -35,29 +35,27 @@ const Header = () => {
               Circles
             </Title>
           </div>
-          <div className='header-content'>
-            { userDegree !== null && ( 
-              <Menu
-                theme="dark"
-                onClick={(e) => setCurrent(e.key)}
-                selectedKeys={[current]}
-                mode="horizontal"
-                style={menuStyles}
-                >
-                  <Menu.Item key="course-selector">
-                    <span>Course Selector</span>
-                    <Link to="/course-selector" />
-                  </Menu.Item>
-                  <Menu.Item key="progression-checker">
-                    <span>Progression Checker</span>
-                    <Link to="/progression-checker"></Link>
-                  </Menu.Item>
-                  <Menu.Item key="term-planner">
-                    <span>Term Planner</span>
-                    <Link to="/term-planner" />
-                  </Menu.Item>
-              </Menu>
-            )} 
+          <div className='header-content'> 
+            <Menu
+              theme="dark"
+              onClick={(e) => setCurrent(e.key)}
+              selectedKeys={[current]}
+              mode="horizontal"
+              style={menuStyles}
+            >
+              <Menu.Item key="course-selector">
+                <span>Course Selector</span>
+                <Link to="/course-selector" />
+              </Menu.Item>
+              <Menu.Item key="progression-checker">
+                <span>Progression Checker</span>
+                <Link to="/progression-checker"></Link>
+              </Menu.Item>
+              <Menu.Item key="term-planner">
+                <span>Term Planner</span>
+                <Link to="/term-planner" />
+              </Menu.Item>
+            </Menu>
             <PlannerCart/>
             <ThemeToggle />
           </div>
