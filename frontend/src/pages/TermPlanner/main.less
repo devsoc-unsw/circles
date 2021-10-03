@@ -220,6 +220,35 @@ body {
   .tooltip {
     padding: 1em;
   }
+
+  .dragDisabledCourse:hover {
+    // background-color: red;
+    animation: shake 0.25s;
+    transform: none;
+    cursor: url("../../images/notAllowed.ico"), default;
+  }
+
+  @keyframes shake {
+    0% {
+      transform: rotate(1deg);
+    }
+
+    25% {
+      transform: rotate(-1deg);
+    }
+
+    50% {
+      transform: rotate(0deg);
+    }
+
+    75% {
+      transform: rotate(1deg);
+    }
+
+    100% {
+      transform: rotate(0deg);
+    }
+  }
 }
 
 .dark {

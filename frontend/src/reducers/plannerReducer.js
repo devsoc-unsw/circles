@@ -45,7 +45,7 @@ const generateEmptyYears = (nYears) => {
 
 const initialState = {
   unplanned: ["COMP2521"],
-  startYear: 2021,
+  startYear: parseInt(new Date().getFullYear()),
   numYears: 3,
   isSummerEnabled: false,
   years: [
@@ -58,6 +58,7 @@ const initialState = {
   completedTerms: new Map(),
 };
 const plannerReducer = (state = initialState, action) => {
+  console.log(state.startYear, state.numYears);
   switch (action.type) {
     case "ADD_TO_UNPLANNED":
       const { courseCode, courseData } = action.payload;
@@ -75,13 +76,13 @@ const plannerReducer = (state = initialState, action) => {
         courses: new Map([...state.courses, ...action.payload]),
       };
     case "SET_YEARS":
-      return { ...state, years: action.payload };
-
+      return { ...state, numYears: action.payload };
+    case "SET_START_YEAR":
+      return { ...state, startYear: action.payload };
     case "SET_UNPLANNED":
       let newUnplanned = state.unplanned.filter(
         (course) => course !== action.payload
       );
-      console.log(newUnplanned);
       return { ...state, unplanned: newUnplanned };
     case "REMOVE_ALL_UNPLANNED":
       return { ...state, unplanned: action.payload };
@@ -160,7 +161,6 @@ const plannerReducer = (state = initialState, action) => {
       nYear[termI] = nTerm;
       const nYears = new Object(state.years);
       nYears[yearI] = nYear;
-      // console.log(nYears);
 
       const nCourses = new Object(state.courses);
       nCourses.get(action.payload).plannedFor = null;
@@ -174,7 +174,6 @@ const plannerReducer = (state = initialState, action) => {
       };
     case "TOGGLE_SUMMER":
       return { ...state, isSummerEnabled: !state.isSummerEnabled };
-
     case "TOGGLE_TERM_COMPLETE":
       const clonedCompletedTerms = new Map(state.completedTerms);
       let isCompleted = clonedCompletedTerms.get(action.payload);
