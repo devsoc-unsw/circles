@@ -46,22 +46,18 @@ const OptionsHeader = ({ areYearsHidden, unhideAll }) => {
           className={`settingsButton ${isOpen && "clicked"}`}
         >
           <IoCogSharp
+            className="settingsIcon"
+            size="1.5em"
             style={{
-              fontSize: "1.5em",
-              color: theme === "light" ? "#303539" : "#3e3f3f",
+              color: theme === "light" ? "#303539" : "#3b3e3e",
             }}
           />
         </button>
       </Tippy>
 
-      {/* {areYearsHidden && (
-                  <div >
-                    <AiFillEye className="unhideEye" />
-                  </div>
-                )} */}
       {areYearsHidden && (
         <button className="settingsButton " onClick={unhideAll}>
-          <IoIosEye size="1.5em" className="unhideEye " />
+          <IoIosEye size="1.5em" className="settingsIcon" />
         </button>
       )}
     </div>
