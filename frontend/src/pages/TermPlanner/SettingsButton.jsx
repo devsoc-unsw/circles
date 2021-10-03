@@ -44,7 +44,10 @@ const SettingsButton = ({ visible, setVisible }) => {
       >
         <IoCogSharp
           size="1.2em"
-          style={{ fontSize: "1.5em", color: "#303539" }}
+          style={{
+            fontSize: "1.5em",
+            color: theme === "light" ? "#303539" : "#3e3f3f",
+          }}
         />
       </button>
     </Tippy>
