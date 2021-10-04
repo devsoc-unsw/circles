@@ -1,35 +1,28 @@
-import React, { useEffect } from "react";
-import { updateDegreeLength } from "../../actions/userAction";
+import React from "react";
 import { plannerActions } from "../../actions/plannerActions";
 import {
   Typography,
-  Drawer,
-  Collapse,
-  Alert,
   DatePicker,
   Select,
   Switch,
   Divider,
-  Modal,
-  Button,
 } from "antd";
-import { Droppable } from "react-beautiful-dnd";
-import DraggableCourse from "./DraggableCourse";
 import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
-import { IoCogSharp } from "react-icons/io5";
-import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
-import { SettingFilled } from "@ant-design/icons";
-import { RiContactsBookUploadLine } from "react-icons/ri";
 
 const SettingsMenu = () => {
   const { Title } = Typography;
-  const { Panel } = Collapse;
   const { Option } = Select;
-  const theme = useSelector((state) => state.theme);
-  const { courses, unplanned, isSummerEnabled, startYear, numYears } =
+  // const theme = useSelector((state) => state.theme);
+  const { 
+    // courses,
+    // unplanned,
+    isSummerEnabled,
+    // startYear,
+    // numYears
+  } =
     useSelector((state) => {
       return state.planner;
     });

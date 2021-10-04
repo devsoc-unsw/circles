@@ -4,7 +4,7 @@ import React from "react";
 import { Collapse } from "antd";
 import { Droppable } from "react-beautiful-dnd";
 import DraggableCourse from "./DraggableCourse";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const UnplannedColumn = ({ visible, setVisible }) => {
   const { Panel } = Collapse;
@@ -15,7 +15,6 @@ const UnplannedColumn = ({ visible, setVisible }) => {
     // isSummerEnabled
   } = useSelector(state => state.planner);
 
-  const dispatch = useDispatch();
   const sortedUnplanned = sortUnplanned(unplanned, courses);
 
   // function onChange(date, dateString) {
@@ -34,7 +33,7 @@ const UnplannedColumn = ({ visible, setVisible }) => {
 
   return (
     <>
-      {Object.keys(sortedUnplanned).length != 0 && (
+      {Object.keys(sortedUnplanned).length !== 0 && (
         <div className="unplannedColumn">
           <div className="gridItem" style={{ marginBottom: "0.5em" }}>
             Unplanned

@@ -84,18 +84,18 @@ const OptionsDrawer = ({ visible, setVisible }) => {
 
 // create separate array for each type
 // e.g. courseTypes = { Core: ["COMP1511", "COMP2521"], Elective: ["COMP6881"] }
-const sortUnplanned = (unplanned, courses) => {
-  if (unplanned == null) return {};
-  let courseTypes = {};
-  unplanned.forEach((code) => {
-    const type = courses.get(code)["type"];
-    if (!courseTypes.hasOwnProperty(type)) {
-      courseTypes[type] = [code];
-    } else {
-      courseTypes[type].push(code);
-    }
-  });
-  return courseTypes;
-};
+// const sortUnplanned = (unplanned, courses) => {
+//   if (unplanned == null) return {};
+//   let courseTypes = {};
+//   unplanned.forEach((code) => {
+//     const type = courses.get(code)["type"];
+//     if (!courseTypes.hasOwnProperty(type)) {
+//       courseTypes[type] = [code];
+//     } else {
+//       courseTypes[type].push(code);
+//     }
+//   });
+//   return courseTypes;
+// };
 
 export default OptionsDrawer;

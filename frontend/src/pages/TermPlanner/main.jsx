@@ -80,7 +80,7 @@ const TermPlanner = () => {
                   </div>
                   {Object.keys(year).map((term) => {
                     const key = startYear + index + term;
-                    if ((!isSummerEnabled && term != "t0") || isSummerEnabled)
+                    if ((!isSummerEnabled && term !== "t0") || isSummerEnabled)
                       return (
                         <TermBox
                           key={key}
