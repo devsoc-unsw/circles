@@ -80,7 +80,6 @@ export const plannerActions = (action, payload) => {
         type: action,
         payload: payload,
       };
-
     default:
       return;
   }
