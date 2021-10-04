@@ -49,7 +49,7 @@ export default function CourseMenu() {
             // style={{ width: '100%'}}
             defaultSelectedKeys={[]}
             selectedKeys={[]}
-            defaultOpenKeys={[]}
+            defaultOpenKeys={[[...Object.keys(structure)][0]]}
             mode="inline"
           > 
           { [...Object.keys(structure)].map(category => 
