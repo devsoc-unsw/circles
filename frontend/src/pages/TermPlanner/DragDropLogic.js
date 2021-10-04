@@ -1,5 +1,4 @@
 import { plannerActions } from "../../actions/plannerActions";
-import { useSelector, useDispatch } from "react-redux";
 
 export const handleOnDragEnd = (result, dragEndProps) => {
   const { setIsDragging, dispatch, years, startYear, plannedCourses, courses } =
@@ -151,7 +150,6 @@ export const updateWarnings = (years, startYear, courses, dispatch) => {
       year[term].forEach((course) => {
         let termTag = i + term;
         let arePrereqsCompleted = checkPrereq(course, termTag, courses);
-        // console.log(`${course}: ${!arePrereqsCompleted}`);
         dispatch(
           plannerActions("MOVE_COURSE", {
             course: course,

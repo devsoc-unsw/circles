@@ -1,6 +1,5 @@
 export const courseOptionsActions = (action, payload) => {
-    console.log('ACTUZZz', action);
-    switch (action) {
+   switch (action) {
         case 'LOAD_PREV_STATE': 
             return {
                 type: 'LOAD_PREV_STATE', 

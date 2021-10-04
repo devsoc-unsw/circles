@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Switch } from "antd";
-import { IoMdMoon, IoIosSunny } from "react-icons/io";
+// import { Switch } from "antd";
+// import { IoMdMoon, IoIosSunny } from "react-icons/io";
 import { useDispatch } from "react-redux";
 import { toggleTheme } from "../actions/toggleTheme";
 
@@ -24,9 +24,9 @@ function ThemeToggle() {
     }
   }, [theme, dispatch]);
 
-  const toggleStyle = {
-    backgroundColor: theme === "light" ? "#b37feb" : "#722ed1",
-  };
+  // const toggleStyle = {
+  //   backgroundColor: theme === "light" ? "#b37feb" : "#722ed1",
+  // };
 
   return (
     // Disabled because too many dark features are not adjusted

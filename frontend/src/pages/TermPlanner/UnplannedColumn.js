@@ -1,19 +1,10 @@
-import React, { useEffect } from "react";
-import { updateDegreeLength } from "../../actions/userAction";
-import { plannerActions } from "../../actions/plannerActions";
-import {
-  Typography,
-  Drawer,
-  Collapse,
-  Alert,
-  DatePicker,
-  Select,
-  Switch,
-} from "antd";
+import React from "react";
+// import { updateDegreeLength } from "../../actions/userAction";
+// import { plannerActions } from "../../actions/plannerActions";
+import { Collapse } from "antd";
 import { Droppable } from "react-beautiful-dnd";
 import DraggableCourse from "./DraggableCourse";
-import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const UnplannedColumn = ({ visible, setVisible }) => {
   const { Panel } = Collapse;
@@ -21,26 +12,26 @@ const UnplannedColumn = ({ visible, setVisible }) => {
   const { courses, unplanned, isSummerEnabled } = useSelector((state) => {
     return state.planner;
   });
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const sortedUnplanned = sortUnplanned(unplanned, courses);
 
-  function onChange(date, dateString) {
-    console.log(date, dateString);
-  }
+  // function onChange(date, dateString) {
+  //   console.log(date, dateString);
+  // }
 
-  function handleChange(value) {
-    dispatch(updateDegreeLength(value));
-  }
+  // function handleChange(value) {
+  //   dispatch(updateDegreeLength(value));
+  // }
 
-  function handleSummerToggle() {
-    dispatch(plannerActions("TOGGLE_SUMMER"));
-  }
+  // function handleSummerToggle() {
+  //   dispatch(plannerActions("TOGGLE_SUMMER"));
+  // }
 
-  const years = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  // const years = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (
     <>
-      {Object.keys(sortedUnplanned).length != 0 && (
+      {Object.keys(sortedUnplanned).length !== 0 && (
         <div className="unplannedColumn">
           <div className="gridItem" style={{ marginBottom: "0.5em" }}>
             Unplanned

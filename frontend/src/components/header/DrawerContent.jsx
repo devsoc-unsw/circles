@@ -6,7 +6,6 @@ import { BugOutlined } from "@ant-design/icons";
 import { Menu } from "antd";
 import { useHistory } from "react-router";
 import useMediaQuery from '../../hooks/useMediaQuery';
-import { FeedbackBtn } from "../feedbackBtn/FeedbackBtn";
 
 
 export const DrawerContent = ({ onCloseDrawer }) => {

@@ -1,30 +1,25 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { updateDegreeLength } from "../../actions/userAction";
 import { plannerActions } from "../../actions/plannerActions";
 import {
   Typography,
   Drawer,
-  Collapse,
-  Alert,
   DatePicker,
   Select,
   Switch,
 } from "antd";
-import { Droppable } from "react-beautiful-dnd";
-import DraggableCourse from "./DraggableCourse";
 import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 
 const OptionsDrawer = ({ visible, setVisible }) => {
   const { Title } = Typography;
-  const { Panel } = Collapse;
   const { Option } = Select;
   const theme = useSelector((state) => state.theme);
   const { courses, unplanned, isSummerEnabled } = useSelector((state) => {
     return state.planner;
   });
   const dispatch = useDispatch();
-  const sortedUnplanned = sortUnplanned(unplanned, courses);
+  // const sortedUnplanned = sortUnplanned(unplanned, courses);
 
   function onChange(date, dateString) {
     console.log(date, dateString);

@@ -58,7 +58,6 @@ const initialState = {
   completedTerms: new Map(),
 };
 const plannerReducer = (state = initialState, action) => {
-  console.log(state.startYear, state.numYears);
   switch (action.type) {
     case "ADD_TO_UNPLANNED":
       const { courseCode, courseData } = action.payload;

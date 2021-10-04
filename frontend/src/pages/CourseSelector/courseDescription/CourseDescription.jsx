@@ -22,7 +22,6 @@ export default function CourseDescription() {
   const dispatch = useDispatch();
   const { active, tabs } = useSelector(state => state.tabs);
   let id = tabs[active];
-  console.log(active, tabs);
 
   const course = useSelector(state => state.updateCourses.course);
   const coursesInPlanner = useSelector(state => state.planner.courses);
@@ -34,7 +33,6 @@ export default function CourseDescription() {
 
 
   React.useEffect(() => {
-    console.log(id);
     if (id === 'explore' || id === 'search') return;
     dispatch(getCourseById(id));
     setTimeout(() => {
@@ -46,7 +44,6 @@ export default function CourseDescription() {
   if (id === 'search') return (<div>This is the search page</div>)
 
   const addToPlanner = () => {
-    console.log(course);
     const data = {
       courseCode: id,
       courseData: {

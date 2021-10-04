@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import axios from 'axios';
 import { Menu, Button, Typography } from 'antd';
 import { Link } from 'react-scroll';
@@ -10,14 +10,13 @@ const { Title } = Typography;
 export const SpecialisationStep = () => {
     const dispatch = useDispatch();
     const specialisation = useSelector(store => store.degree.specialisation);
-    const [selected, setSelected] = React.useState("Select Specialisation"); 
-    const [options, setOptions] = React.useState({
+    const options ={
         "1": "major",
         "2": "major",
         "3": "major",
         "4": "major",
         "5": "major",
-    });
+    };
 
     // const fetchAllSpecializations = async () => {
         // const res = await axios.get(`http://localhost:8000/api/getMajors/${program}`);
