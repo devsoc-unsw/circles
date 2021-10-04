@@ -143,10 +143,6 @@ body {
     border: none;
     border-radius: 0.5em;
     padding: 0.5em 0.7em 0.3em 0.7em;
-    background-color: #e8e8e8;
-    &:hover {
-      background-color: #cecece;
-    }
   }
 
   .clicked {
@@ -220,34 +216,24 @@ body {
   .tooltip {
     padding: 1em;
   }
+  .eye {
+    display: none;
+  }
+  .yearContainer {
+    cursor: pointer;
+    &:hover {
+      .eye {
+        display: block;
+      }
 
-  .dragDisabledCourse:hover {
-    // background-color: red;
-    animation: shake 0.25s;
-    transform: none;
-    cursor: url("../../images/notAllowed.ico"), default;
+      .year {
+        display: none;
+      }
+    }
   }
 
-  @keyframes shake {
-    0% {
-      transform: rotate(1deg);
-    }
-
-    25% {
-      transform: rotate(-1deg);
-    }
-
-    50% {
-      transform: rotate(0deg);
-    }
-
-    75% {
-      transform: rotate(1deg);
-    }
-
-    100% {
-      transform: rotate(0deg);
-    }
+  .optionsHeader {
+    display: flex;
   }
 }
 
@@ -345,6 +331,24 @@ body {
 
   .disabledWarning {
     background-color: rgba(186, 132, 81, 0.33);
+  }
+
+  .settingsButton {
+    background-color: #161818;
+    &:hover {
+      background-color: #242728;
+    }
+  }
+
+  .clicked {
+    background-color: #242728;
+  }
+  .eye {
+    color: #373a3a;
+  }
+
+  .settingsIcon {
+    color: #3b3e3e;
   }
 }
 
@@ -447,5 +451,16 @@ body {
 
   .disabledWarning {
     background-color: #fff3e0;
+  }
+
+  .settingsButton {
+    background-color: #e8e8e8;
+    &:hover {
+      background-color: #cecece;
+    }
+  }
+
+  .settingsIcon {
+    color: #303539;
   }
 }

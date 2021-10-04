@@ -16,9 +16,19 @@ export const plannerActions = (action, payload) => {
         type: action,
         payload,
       };
-    case "SET_YEAR_START":
+    case "SET_START_YEAR":
       return {
-        type: "SET_YEAR_START",
+        type: "SET_START_YEAR",
+        payload: payload,
+      };
+    case "SET_NUM_YEARS":
+      return {
+        type: "SET_NUM_YEARS",
+        payload: payload,
+      };
+    case "SET_DEGREE_LENGTH":
+      return {
+        type: "SET_DEGREE_LENGTH",
         payload: payload,
       };
     case "SET_UNPLANNED":
@@ -65,16 +75,12 @@ export const plannerActions = (action, payload) => {
         type: action,
         payload: payload,
       };
-    case "SET_START_YEAR":
+    case "UPDATE_START_YEAR":
       return {
         type: action,
         payload: payload,
       };
-    case "SET_DEGREE_LENGTH":
-      return {
-        type: action,
-        payload: payload,
-      };
+
     default:
       return;
   }

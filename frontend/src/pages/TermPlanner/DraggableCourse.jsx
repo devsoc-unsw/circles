@@ -9,7 +9,6 @@ import ContextMenu from "./ContextMenu";
 import useMediaQuery from "../../hooks/useMediaQuery";
 
 function DraggableCourse({ code, index }) {
-  //   let code = course.match(/([A-Z]{4}[0-9]{4}):/)[1];
   const { Text } = Typography;
   const { courses, isSummerEnabled, completedTerms } = useSelector((state) => {
     return state.planner;
