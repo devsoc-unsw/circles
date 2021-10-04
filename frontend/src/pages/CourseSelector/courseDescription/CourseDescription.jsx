@@ -46,12 +46,14 @@ export default function CourseDescription() {
   if (id === 'search') return (<div>This is the search page</div>)
 
   const addToPlanner = () => {
+    console.log(course);
     const data = {
       courseCode: id,
       courseData: {
         title: course.name,
         type: course.type,
         termsOffered: course.terms,
+        uoc: course.uoc,
         // TODO: Need to add prereqs
       }
     } 
