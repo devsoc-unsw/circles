@@ -22,6 +22,7 @@ const menuStyles = {
 };
 
 const titleStyles = {
+  color: "white",
   marginLeft: "0.3em",
   marginBottom: "0",
 };
