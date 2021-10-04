@@ -582,7 +582,7 @@ def getStructure(programCode, major="Default", minor="Default"):
 
     return {'structure': structure}
 
-@router.get("/search/{string}")
+@router.get("/searchCourse/{string}")
 def search(string):
     dictionary = {}
     pat = re.compile(r'{}'.format(string), re.I)
