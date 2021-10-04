@@ -10,6 +10,7 @@ import {
   Select,
   Switch,
   Divider,
+  Tooltip
 } from "antd";
 import { Droppable } from "react-beautiful-dnd";
 import DraggableCourse from "./DraggableCourse";
@@ -56,9 +57,11 @@ const OptionsHeader = ({ areYearsHidden, unhideAll }) => {
       </Tippy>
 
       {areYearsHidden && (
-        <button className="settingsButton " onClick={unhideAll}>
-          <IoIosEye size="1.5em" className="settingsIcon" />
-        </button>
+        <Tooltip title="Show all hidden years">
+          <button className="settingsButton " onClick={unhideAll}>
+            <IoIosEye size="1.5em" className="settingsIcon" />
+          </button>
+        </Tooltip>
       )}
     </div>
   );

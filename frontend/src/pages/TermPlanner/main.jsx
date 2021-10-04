@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { Button, notification } from "antd";
+import { Button, notification, Tooltip } from "antd";
 import { DragDropContext } from "react-beautiful-dnd";
 import TermBox from "./TermBox";
 import { RightOutlined } from "@ant-design/icons";
@@ -43,6 +43,15 @@ const TermPlanner = () => {
   const [visible, setVisible] = useState(false); // visibility for side drawer
   const dispatch = useDispatch();
 
+  const showCannotHideAllYearsNotification = () => {
+    notification.open({
+      type: "error",
+      message: "Something's not right",  
+      description: "You cannot hide all years in your term planner",
+      duration: 2,
+    });
+  };
+
   useEffect(() => {
     setIsLoading(false);
     isAllEmpty(years) && openNotification();
@@ -74,7 +83,10 @@ const TermPlanner = () => {
       if (value) i++;
     }
     console.log(i);
-    if (i === numYears - 1) return;
+    if (i === numYears - 1) {
+      showCannotHideAllYearsNotification();
+      return; 
+    }
     tempHidden.set(year, true);
     setHidden(tempHidden);
     setAreYearsHidden(true);
@@ -125,9 +137,11 @@ const TermPlanner = () => {
                         >
                           {iYear}
                         </div>
-                        <div className="eye" onClick={() => hideYear(iYear)}>
-                          <IoIosEyeOff />
-                        </div>
+                        <Tooltip title="Hide year">
+                          <div className="eye" onClick={() => hideYear(iYear)}>
+                            <IoIosEyeOff />
+                          </div>
+                        </Tooltip>
                       </div>
 
                       {Object.keys(year).map((term) => {
