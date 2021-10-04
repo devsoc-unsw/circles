@@ -586,11 +586,23 @@ def getStructure(programCode, major="Default", minor="Default"):
 def searchCourse(string):
     dictionary = {}
     pat = re.compile(r'{}'.format(string), re.I)
+
+    """
+        $or: [
+        {'the_key': 'value1'},
+        {`the_key': 'value2'}
+    ]
+    """
+
+    # result = coursesCOL.find({ '$or': [{'code': {'$regex': pat}},
+    #                                     {'title': {'$regex': pat}}]})
     result = coursesCOL.find({'code': {'$regex': pat}})
+    # Add in the code matches first 
     for i in result:
         dictionary[i['code']] = i['title']
-    result = coursesCOL.find({'title': {'$regex': pat}})
 
+    # Add in the title matches next
+    result = coursesCOL.find({'title': {'$regex': pat}})
     for i in result:
         if i['code'] not in dictionary:
             dictionary[i['code']] = i['title']
