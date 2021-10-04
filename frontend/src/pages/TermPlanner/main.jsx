@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-import { Button, notification } from "antd";
+import { notification } from "antd";
 import { DragDropContext } from "react-beautiful-dnd";
 import TermBox from "./TermBox";
-import { RightOutlined } from "@ant-design/icons";
-import OptionsDrawer from "./OptionsDrawer";
 import SkeletonPlanner from "./SkeletonPlanner";
 import "./main.less";
 import { useSelector, useDispatch } from "react-redux";
@@ -15,11 +13,8 @@ import {
 } from "./DragDropLogic";
 import UnplannedColumn from "./UnplannedColumn";
 import SettingsButton from "./SettingsButton";
-import { IoCogSharp } from "react-icons/io5";
-import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
-import { SettingFilled } from "@ant-design/icons";
 
 const TermPlanner = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -30,9 +25,9 @@ const TermPlanner = () => {
       return state.planner;
     });
 
-  const theme = useSelector((state) => state.theme);
+  // const theme = useSelector((state) => state.theme);
 
-  const [visible, setVisible] = useState(false); // visibility for side drawer
+  // const [visible, setVisible] = useState(false); // visibility for side drawer
   const dispatch = useDispatch();
 
   useEffect(() => {

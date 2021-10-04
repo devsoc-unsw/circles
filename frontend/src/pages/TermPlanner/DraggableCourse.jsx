@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Badge } from "antd";
+import { Typography } from "antd";
 import { Draggable } from "react-beautiful-dnd";
 import { useSelector } from "react-redux";
 import { IoWarningOutline } from "react-icons/io5";
@@ -82,7 +82,7 @@ function DraggableCourse({ code, index }) {
       <ContextMenu code={code} plannedFor={plannedFor} />
       {/* display prereq tooltip for all courses. However, if a term is marked as complete 
 	  and the course has no warning, then disable the tooltip */}
-      {prereqDisplay != "" && (!isDragDisabled || warning) && (
+      {prereqDisplay !== "" && (!isDragDisabled || warning) && (
         <ReactTooltip id={code} place="bottom" className="tooltip">
           <div className="prereqsTooltip">Prerequisites:</div>
           {prereqDisplay}

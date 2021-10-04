@@ -3,13 +3,7 @@ import { Droppable } from "react-beautiful-dnd";
 import DraggableCourse from "./DraggableCourse";
 import { useSelector, useDispatch } from "react-redux";
 import { Badge } from "antd";
-import {
-  RiCheckboxBlankCircleFill,
-  RiCheckboxCircleFill,
-  RiLock2Fill,
-} from "react-icons/ri";
-import { BsLockFill } from "react-icons/bs";
-import { IconContext } from "react-icons";
+import { RiCheckboxCircleFill } from "react-icons/ri";
 import { plannerActions } from "../../actions/plannerActions";
 
 function TermBox({ name, courses, termsOffered, isDragging }) {

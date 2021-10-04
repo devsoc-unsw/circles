@@ -1,8 +1,14 @@
 import { plannerActions } from "../../actions/plannerActions";
-import { useSelector, useDispatch } from "react-redux";
 
 export const handleOnDragEnd = (result, dragEndProps) => {
-  const { setIsDragging, dispatch, years, startYear, plannedCourses, courses } =
+  const { 
+    setIsDragging,
+    dispatch,
+    years,
+    startYear,
+    // plannedCourses,
+    courses 
+  } =
     dragEndProps;
 
   setIsDragging(false);
