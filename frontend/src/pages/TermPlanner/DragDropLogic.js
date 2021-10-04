@@ -1,9 +1,7 @@
 import { plannerActions } from "../../actions/plannerActions";
-import { useSelector, useDispatch } from "react-redux";
 
 export const handleOnDragEnd = (result, dragEndProps) => {
-  const { setIsDragging, dispatch, years, startYear, plannedCourses, courses } =
-    dragEndProps;
+  const { setIsDragging, dispatch, years, startYear, courses } = dragEndProps;
 
   setIsDragging(false);
 
@@ -18,12 +16,7 @@ export const handleOnDragEnd = (result, dragEndProps) => {
     destination.droppableId,
     courses
   );
-  // courses.get(draggableId)["plannedFor"] = destination.droppableId;
-  // courses.get(draggableId)["warning"] = checkPrereq(
-  //   draggableId,
-  //   destination.droppableId,
-  //   courses
-  // );
+
   dispatch(
     // might need to change name
     plannerActions("MOVE_COURSE", {

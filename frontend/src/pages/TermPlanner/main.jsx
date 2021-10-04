@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-import { Button, notification, Tooltip } from "antd";
+import { notification, Tooltip } from "antd";
 import { DragDropContext } from "react-beautiful-dnd";
 import TermBox from "./TermBox";
-import { RightOutlined } from "@ant-design/icons";
-import OptionsDrawer from "./OptionsDrawer";
 import SkeletonPlanner from "./SkeletonPlanner";
 import "./main.less";
 import { useSelector, useDispatch } from "react-redux";
@@ -15,12 +13,8 @@ import {
 } from "./DragDropLogic";
 import UnplannedColumn from "./UnplannedColumn";
 import OptionsHeader from "./OptionsHeader";
-import { IoCogSharp } from "react-icons/io5";
-import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
-import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
-import { SettingFilled } from "@ant-design/icons";
 import { IoIosEyeOff } from "react-icons/io";
 
 const TermPlanner = () => {
@@ -38,15 +32,15 @@ const TermPlanner = () => {
     return state.planner;
   });
 
-  const theme = useSelector((state) => state.theme);
+  // const theme = useSelector((state) => state.theme);
 
-  const [visible, setVisible] = useState(false); // visibility for side drawer
+  // const [visible, setVisible] = useState(false); // visibility for side drawer
   const dispatch = useDispatch();
 
   const showCannotHideAllYearsNotification = () => {
     notification.open({
       type: "error",
-      message: "Something's not right",  
+      message: "Something's not right",
       description: "You cannot hide all years in your term planner",
       duration: 2,
     });
@@ -85,7 +79,7 @@ const TermPlanner = () => {
     console.log(i);
     if (i === numYears - 1) {
       showCannotHideAllYearsNotification();
-      return; 
+      return;
     }
     tempHidden.set(year, true);
     setHidden(tempHidden);

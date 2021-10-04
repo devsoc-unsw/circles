@@ -1,28 +1,11 @@
-import React, { useEffect } from "react";
-import { updateDegreeLength } from "../../actions/userAction";
-import { plannerActions } from "../../actions/plannerActions";
-import {
-  Typography,
-  Drawer,
-  Collapse,
-  Alert,
-  DatePicker,
-  Select,
-  Switch,
-  Divider,
-  Tooltip
-} from "antd";
-import { Droppable } from "react-beautiful-dnd";
-import DraggableCourse from "./DraggableCourse";
-import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
+import { Tooltip } from "antd";
+import { useSelector } from "react-redux";
 import { IoCogSharp } from "react-icons/io5";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
-import { SettingFilled } from "@ant-design/icons";
 import SettingsMenu from "./SettingsMenu";
-import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { IoIosEye } from "react-icons/io";
 
 const OptionsHeader = ({ areYearsHidden, unhideAll }) => {

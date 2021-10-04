@@ -11,7 +11,7 @@ export const FeedbackBtn = () => {
     const openFeedbackLink = () => {
         window.open(FORM_LINK, '_blank')
     }
-    {/* Move this to the drawer if the screen is too small */}
+    // Move this to the drawer if the screen is too small
     if (isTablet) return <></>
     return (
         <div className="feedbackFab-root">
