@@ -4,6 +4,7 @@ from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel, create_model
 import re
+import collections
 
 router = APIRouter(
     prefix='/api',
@@ -580,3 +581,19 @@ def getStructure(programCode, major="Default", minor="Default"):
                                                         'description': 'any general education course'}
 
     return {'structure': structure}
+
+@router.get("/search/{string}")
+def search(string):
+    dictionary = {}
+    pat = re.compile(r'{}'.format(string), re.I)
+    result = coursesCOL.find({'code': {'$regex': pat}})
+    for i in result:
+        dictionary[i['code']] = i['title']
+    result = coursesCOL.find({'title': {'$regex': pat}})
+
+    for i in result:
+        if i['code'] not in dictionary:
+            dictionary[i['code']] = i['title']
+
+    # dictionary = collections.OrderedDict(sorted(dictionary.items()))
+    return dictionary
