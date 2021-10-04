@@ -14,6 +14,12 @@ import {
   updateWarnings,
 } from "./DragDropLogic";
 import UnplannedColumn from "./UnplannedColumn";
+import SettingsButton from "./SettingsButton";
+import { IoCogSharp } from "react-icons/io5";
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css";
+import "tippy.js/themes/light.css";
+import { SettingFilled } from "@ant-design/icons";
 
 const TermPlanner = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -23,6 +29,9 @@ const TermPlanner = () => {
     useSelector((state) => {
       return state.planner;
     });
+
+  const theme = useSelector((state) => state.theme);
+
   const [visible, setVisible] = useState(false); // visibility for side drawer
   const dispatch = useDispatch();
 
@@ -44,6 +53,7 @@ const TermPlanner = () => {
 
   return (
     <>
+        <SettingsButton />
       {isLoading ? (
         <SkeletonPlanner />
       ) : (
@@ -56,14 +66,6 @@ const TermPlanner = () => {
             handleOnDragStart(result, courses, setTermsOffered, setIsDragging)
           }
         >
-          <Button
-            type="primary"
-            icon={<RightOutlined />}
-            onClick={() => setVisible(true)}
-            shape="circle"
-            ghost
-            style={{ position: "sticky", top: "50vh", left: "1em" }}
-          />
           <div className="plannerContainer">
             <div class={`gridContainer ${isSummerEnabled && "summerGrid"}`}>
               <div class="gridItem"></div>
@@ -98,7 +100,6 @@ const TermPlanner = () => {
               ))}
             </div>
             <UnplannedColumn />
-            <OptionsDrawer visible={visible} setVisible={setVisible} />
           </div>
         </DragDropContext>
       )}

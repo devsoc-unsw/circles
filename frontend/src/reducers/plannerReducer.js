@@ -181,6 +181,76 @@ const plannerReducer = (state = initialState, action) => {
       if (isCompleted == null) isCompleted = false;
       clonedCompletedTerms.set(action.payload, !isCompleted);
       return { ...state, completedTerms: clonedCompletedTerms };
+
+    case "SET_START_YEAR":
+      const currEndYear = state.startYear + state.numYears - 1;
+      const newStartYear = Number(action.payload);
+      let updatedYears = [];
+      let updatedUnplan = [...state.unplanned];
+
+      for (let i = 0; i < state.numYears; i++) {
+        const yearVisiting = i + newStartYear;
+        if (yearVisiting <= currEndYear && yearVisiting >= state.startYear) {
+          // add existing year
+          updatedYears.push(state.years[yearVisiting - state.startYear]);
+        } else {
+          // add empty year
+          updatedYears.push({ t0: [], t1: [], t2: [], t3: [] });
+          // unschedule the courses that are in the year which will be removed
+          const yearToBeRemoved = state.years[state.numYears - i - 1];
+          for (let term in yearToBeRemoved) {
+            yearToBeRemoved[term].forEach((course) => {
+              updatedUnplan.push(course);
+              state.courses.get(course).plannedFor = null;
+              state.courses.get(course).warning = false;
+            });
+          }
+        }
+      }
+
+      return {
+        ...state,
+        startYear: newStartYear,
+        years: updatedYears,
+        unplanned: updatedUnplan,
+      };
+
+    case "SET_DEGREE_LENGTH":
+      const newNumYears = action.payload;
+      let dupYears = new Object(state.years);
+      let newUnplan = [...state.unplanned];
+      if (newNumYears === state.numYears) return state;
+      else if (newNumYears > state.numYears) {
+        // add empty years to the end
+        const diff = newNumYears - state.numYears;
+        for (let i = 0; i < diff; i++) {
+          dupYears.push({ t0: [], t1: [], t2: [], t3: [] });
+        }
+      } else {
+        // remove extra years
+        for (let i = state.numYears; i >= 1; i--) {
+          if (i > newNumYears) {
+            // unschedule  courses in year
+            const yearToBeRemoved = state.years[i - 1];
+            for (let term in yearToBeRemoved) {
+              yearToBeRemoved[term].forEach((course) => {
+                newUnplan.push(course);
+                state.courses.get(course).plannedFor = null;
+                state.courses.get(course).warning = false;
+              });
+            }
+            // remove year
+            dupYears.splice(i - 1, 1);
+          }
+        }
+      }
+
+      return {
+        ...state,
+        years: dupYears,
+        numYears: newNumYears,
+        unplanned: newUnplan,
+      };
     default:
       return state;
   }

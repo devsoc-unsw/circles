@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Switch } from "antd";
-import { IoMdMoon } from "react-icons/io";
+import { IoMdMoon, IoIosSunny } from "react-icons/io";
 import { useDispatch } from "react-redux";
 import { toggleTheme } from "../actions/toggleTheme";
 
@@ -14,7 +14,7 @@ function ThemeToggle() {
 
   React.useEffect(() => {
     window.localStorage.setItem("theme", JSON.stringify(theme));
-    dispatch(toggleTheme(theme));
+    dispatch(toggleTheme("light"));
     if (theme === "light") {
       document.body.classList.remove("dark");
       document.body.classList.add("light");
@@ -29,13 +29,15 @@ function ThemeToggle() {
   };
 
   return (
-    <Switch
-      checkedChildren={<IoMdMoon display="flex" />}
-      unCheckedChildren={<IoMdMoon display="flex" />}
-      defaultChecked={theme === "dark" ? true : false}
-      onChange={() => setTheme(theme === "light" ? "dark" : "light")}
-      style={toggleStyle}
-    />
+    // Disabled because too many dark features are not adjusted
+    <></>
+    // <Switch
+    //   checkedChildren={<IoMdMoon display="flex" />}
+    //   unCheckedChildren={<IoIosSunny display="flex" />}
+    //   defaultChecked={theme === "dark" ? true : false}
+    //   onChange={() => setTheme(theme === "light" ? "dark" : "light")}
+    //   style={toggleStyle}
+    // />
   );
 }
 

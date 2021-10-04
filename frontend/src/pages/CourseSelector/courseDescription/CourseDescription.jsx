@@ -52,6 +52,7 @@ export default function CourseDescription() {
         title: course.name,
         type: course.type,
         termsOffered: course.terms,
+        uoc: course.uoc,
         // TODO: Need to add prereqs
       }
     } 

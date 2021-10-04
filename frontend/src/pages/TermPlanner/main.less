@@ -9,7 +9,7 @@ body {
   .plannerContainer {
     display: flex;
     // align-items: center;
-    margin-top: 2em;
+    margin-top: 0.5em;
     justify-content: center;
     margin-left: 1em;
     margin-right: 1em;
@@ -105,6 +105,9 @@ body {
     margin-bottom: 1em;
   }
 
+  .ant-picker-dropdown {
+    z-index: 10;
+  }
   .panel {
     max-height: 30em;
     margin-bottom: 1em;
@@ -134,11 +137,88 @@ body {
     margin-right: 0.5em;
   }
 
-  .summerToggleBox {
+  .settingsButton {
+    margin-left: 1em;
+    margin-top: 1em;
+    border: none;
+    border-radius: 0.5em;
+    padding: 0.5em 0.7em 0.3em 0.7em;
+    background-color: #e8e8e8;
+    &:hover {
+      background-color: #cecece;
+    }
+  }
+
+  .clicked {
+    background-color: #bfbfbf;
+  }
+
+  .settingsMenu {
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5em;
+  }
+  .settingsTitleContainer {
+    width: 14em;
+  }
+
+  .settingsTitle {
+    margin-bottom: 0;
+    text-align: left;
+  }
+
+  .settingsDivider {
+    margin: 0.5em 0 0.5em 0;
+  }
+
+  .settingsEntry {
     display: flex;
     align-items: center;
     gap: 1em;
-    margin-bottom: 0.7em;
+    margin-bottom: 1em;
+  }
+
+  .settingsSubtitle {
+    margin-bottom: 0;
+  }
+
+  .dragDisabledCourse:hover {
+    // background-color: red;
+    animation: shake 0.25s;
+    transform: none;
+    cursor: url("../../images/notAllowed.ico"), default;
+  }
+
+  @keyframes shake {
+    0% {
+      transform: rotate(1deg);
+    }
+
+    25% {
+      transform: rotate(-1deg);
+    }
+
+    50% {
+      transform: rotate(0deg);
+    }
+
+    75% {
+      transform: rotate(1deg);
+    }
+
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+
+  .prereqsTooltip {
+    font-weight: bold;
+    margin-bottom: 0.5em;
+  }
+  .tooltip {
+    padding: 1em;
   }
 
   .dragDisabledCourse:hover {
@@ -201,7 +281,7 @@ body {
   }
 
   .collapse {
-    background-color: #1d1f20;
+    background-color: #9254de;
     border: #17191a;
     margin-bottom: 1em;
     width: 300px;
