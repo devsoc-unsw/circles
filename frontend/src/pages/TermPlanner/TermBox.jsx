@@ -18,7 +18,6 @@ function TermBox({ name, courses, termsOffered, isDragging }) {
     dispatch(plannerActions("TOGGLE_TERM_COMPLETE", name));
   };
 
-  //   console.log(completedTerms.get(name));
   const isCompleted = completedTerms.get(name);
 
   const isDropAllowed = termsOffered.includes(term) && !isCompleted;
@@ -44,15 +43,7 @@ function TermBox({ name, courses, termsOffered, isDragging }) {
             } ${isSummerEnabled && "summerTermBox"} `}
           >
             {courses.map((code, index) => {
-              // const warning = courses.get(code)["warning"];
-              return (
-                <DraggableCourse
-                  key={code}
-                  code={code}
-                  index={index}
-                  // warning={warning}
-                />
-              );
+              return <DraggableCourse key={code} code={code} index={index} />;
             })}
             {provided.placeholder}
           </ul>

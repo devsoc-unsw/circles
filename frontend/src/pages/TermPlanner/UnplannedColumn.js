@@ -1,6 +1,4 @@
 import React from "react";
-// import { updateDegreeLength } from "../../actions/userAction";
-// import { plannerActions } from "../../actions/plannerActions";
 import { Collapse } from "antd";
 import { Droppable } from "react-beautiful-dnd";
 import DraggableCourse from "./DraggableCourse";
@@ -9,27 +7,9 @@ import { useSelector } from "react-redux";
 const UnplannedColumn = ({ visible, setVisible }) => {
   const { Panel } = Collapse;
   const theme = useSelector((state) => state.theme);
-  const { 
-    courses,
-    unplanned,
-    // isSummerEnabled
-  } = useSelector(state => state.planner);
+  const { courses, unplanned } = useSelector((state) => state.planner);
 
   const sortedUnplanned = sortUnplanned(unplanned, courses);
-
-  // function onChange(date, dateString) {
-  //   console.log(date, dateString);
-  // }
-
-  // function handleChange(value) {
-  //   dispatch(updateDegreeLength(value));
-  // }
-
-  // function handleSummerToggle() {
-  //   dispatch(plannerActions("TOGGLE_SUMMER"));
-  // }
-
-  // const years = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (
     <>

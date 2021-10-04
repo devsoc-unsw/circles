@@ -16,7 +16,6 @@ const ContextMenu = ({ code, plannedFor }) => {
   });
 
   const handleDelete = () => {
-    // console.log(code);
     dispatch(plannerActions("REMOVE_COURSE", code));
     console.log(courses);
     updateWarnings(years, startYear, courses, dispatch);

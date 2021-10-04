@@ -1,12 +1,6 @@
 import React from "react";
 import { plannerActions } from "../../actions/plannerActions";
-import {
-  Typography,
-  DatePicker,
-  Select,
-  Switch,
-  Divider,
-} from "antd";
+import { Typography, DatePicker, Select, Switch, Divider } from "antd";
 import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import "tippy.js/dist/tippy.css";
@@ -15,17 +9,9 @@ import "tippy.js/themes/light.css";
 const SettingsMenu = () => {
   const { Title } = Typography;
   const { Option } = Select;
-  // const theme = useSelector((state) => state.theme);
-  const { 
-    // courses,
-    // unplanned,
-    isSummerEnabled,
-    // startYear,
-    // numYears
-  } =
-    useSelector((state) => {
-      return state.planner;
-    });
+  const { isSummerEnabled } = useSelector((state) => {
+    return state.planner;
+  });
 
   const dispatch = useDispatch();
 

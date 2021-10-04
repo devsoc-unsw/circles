@@ -131,15 +131,6 @@ const plannerReducer = (state = initialState, action) => {
         unplanned: [],
       };
 
-    // case "UPDATE_PLANNED_COURSES":
-    // 	const { course, term, warning } = action.payload;
-    // 	console.log(term)
-    // 	const plannedClone = new Map(state.plannedCourses).set(course, {
-    // 		term: term,
-    // 		warning: warning,
-    // 	});
-    // 	return { ...state, plannedCourses: plannedClone };
-
     case "MOVE_COURSE":
       const { course, term, warning } = action.payload;
       const courseInfo = state.courses.get(course);
