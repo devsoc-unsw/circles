@@ -7,7 +7,7 @@ import './steps.less';
 
 const { Title } = Typography; 
 const TermBox = ({ yearIndex, termNo }) => {
-    const planner = useSelector(store => store.planner.years);
+    // const planner = useSelector(store => store.planner.years);
     const [open, setOpen] = React.useState(false);
     const [loading, setLoading] = React.useState(false);
 
