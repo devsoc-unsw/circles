@@ -151,7 +151,7 @@
     "ACTL1101": {
         "condition": {
             "original": "Prerequisite: MATH1151 AND in Actuarial Studies programs.<br/><br/>",
-            "processed": "MATH1151 && in Actuarial Studies programs"
+            "processed": "MATH1151 && ACTL#"
         },
         "tokens": [
             "(",
@@ -165,7 +165,7 @@
     "ACTL2101": {
         "condition": {
             "original": "Prerequisite:Enrolment in Program 3587<br/><br/>",
-            "processed": "Enrolment in Program 3587"
+            "processed": "3587"
         },
         "tokens": [
             "(",
@@ -177,7 +177,7 @@
     "ACTL2102": {
         "condition": {
             "original": "Pre-requisite: (ACTL2131 or MATH2901) and in Actuarial single or dual degrees.<br/><br/>",
-            "processed": "(ACTL2131 || MATH2901) && in Actuarial single || dual degrees"
+            "processed": "(ACTL2131 || MATH2901) && ACTL#"
         },
         "tokens": [
             "(",
@@ -197,7 +197,7 @@
     "ACTL2111": {
         "condition": {
             "original": "Pre-requsite: MATH1251 AND (ACTL1101 OR in MATHE1, MATHM1 or MATHT1 majors)<br/><br/>",
-            "processed": "MATH1251 && (ACTL1101 || in MATHE1 || MATHM1 || MATHT1 majors)"
+            "processed": "MATH1251 && (ACTL1101 || (MATHE1 || MATHM1 || MATHT1))"
         },
         "tokens": [
             "(",
@@ -219,7 +219,7 @@
     "ACTL3142": {
         "condition": {
             "original": "Pre-requisite: ACTL2131 OR (MATH2931 and in B. Data Science and Decisions (3959)) OR (MATH2901 and MATH2931)<br/><br/>",
-            "processed": "ACTL2131 || (MATH2931 && in B. Data Science && Decisions (3959)) || (MATH2901 && MATH2931)"
+            "processed": "ACTL2131 || (MATH2931 && 3959) || (MATH2901 && MATH2931)"
         },
         "tokens": [
             "(",
@@ -248,7 +248,7 @@
     "ACTL3162": {
         "condition": {
             "original": "Pre-requisite: ACTL2102 or (MATH2901 AND MATHE1, MATHM1 or MATHT1 major)<br/><br/>",
-            "processed": "ACTL2102 || (MATH2901 && MATHE1 || MATHM1 || MATHT1 major)"
+            "processed": "ACTL2102 || (MATH2901 && (MATHE1 || MATHM1 || MATHT1))"
         },
         "tokens": [
             "(",
@@ -270,7 +270,7 @@
     "ACTL3191": {
         "condition": {
             "original": "Pre-requisites: ECON2101 or (ECON1101 and ACTL1101) or (completed at least 84UOC and enrolled in a Commerce Program).<br/><br/>",
-            "processed": "ECON2101 || (ECON1101 && ACTL1101) || ( 84UOC && a Commerce Program)"
+            "processed": "ECON2101 || (ECON1101 && ACTL1101) || (84UOC && COMM#)"
         },
         "tokens": [
             "(",
@@ -294,7 +294,8 @@
     "ACTL3192": {
         "condition": {
             "original": "Pre-requisites: ECON2101 or (ECON1101 and ACTL1101) or (completed at least 84UOC and enrolled in a Commerce Program) and be in good academic standing.<br/><br/>",
-            "processed": "ECON2101 || (ECON1101 && ACTL1101) || ( 84UOC && a Commerce Program) && be in good academic standing"
+            "processed": "ECON2101 || (ECON1101 && ACTL1101) || (84UOC && COMM#)",
+            "warning": "You must be in good academic standing to enroll in this course."
         },
         "tokens": [
             "(",
@@ -320,7 +321,7 @@
     "ACTL3202": {
         "condition": {
             "original": "Prerequisite: ACTL2101 and enrolment in program 3587<br/><br/>",
-            "processed": "ACTL2101 && enrolment in program 3587"
+            "processed": "ACTL2101 && 3587"
         },
         "tokens": [
             "(",
@@ -334,7 +335,7 @@
     "ACTL3303": {
         "condition": {
             "original": "Prerequisite: ACTL3202 and enrolment in program 3587<br/><br/>",
-            "processed": "ACTL3202 && enrolment in program 3587"
+            "processed": "ACTL3202 && 3587"
         },
         "tokens": [
             "(",
@@ -348,7 +349,8 @@
     "ACTL4001": {
         "condition": {
             "original": "Pre-requisite: ACCT1511 or COMM1140, ACTL3141, ACTL3182, FINS1613 or COMM1180, ACTL3162, ACTL3151, ECON1102, 60+ WAM.<br/>Note: Students in 3587 may complete ACTL3141 as a co-requisite<br/><br/>",
-            "processed": "ACCT1511 || COMM1140 || ACTL3141 || ACTL3182 || FINS1613 || COMM1180, ACTL3162, ACTL3151, ECON1102, 60WAM. Note: in 3587 may complete ACTL3141 as a []"
+            "processed": "(ACCT1511 || COMM1140) && ACTL3141 && ACTL3182 && (FINS1613 || COMM1180) && ACTL3162 && ACTL3151 && ECON1102 && 60WAM",
+            "warning": "Students in 3587 may complete ACTL3141 as a co-requisite."
         },
         "tokens": [
             "(",
@@ -370,7 +372,7 @@
     "ACTL4003": {
         "condition": {
             "original": "Students must be in Actuarial Studies (Honours).<br/><br/>",
-            "processed": "must be in Actuarial Studies (Honours)"
+            "processed": "4520"
         },
         "tokens": [
             "(",
@@ -11832,7 +11834,7 @@
     "FINS2101": {
         "condition": {
             "original": "Enrolled in plan FINSD13554 or in FINSBH3565<br/><br/>",
-            "processed": "plan FINSD13554 || in FINSBH3565"
+            "processed": "FINSD13554 || FINSBH3565"
         },
         "tokens": [
             "(",
@@ -11846,7 +11848,7 @@
     "FINS2622": {
         "condition": {
             "original": "Prerequisite or co-requisite:FINS1612 and FINS2624<br/><br/>",
-            "processed": "|| [FINS1612 && FINS2624]"
+            "processed": "[FINS1612 && FINS2624]"
         },
         "tokens": [
             "(",
@@ -11861,7 +11863,7 @@
     "FINS3202": {
         "condition": {
             "original": "Prerequisite: FINS2101 and enrolled in plan FINSD13554 or FINSBH3565<br/><br/>",
-            "processed": "FINS2101 && plan FINSD13554 || FINSBH3565"
+            "processed": "FINS2101 && (FINSD13554 || FINSBH3565)"
         },
         "tokens": [
             "(",
@@ -11877,7 +11879,7 @@
     "FINS3303": {
         "condition": {
             "original": "Prerequisite: FINS3202 and enrolled in plan FINSD13554 or FINSBH3565<br/><br/>",
-            "processed": "FINS3202 && plan FINSD13554 || FINSBH3565"
+            "processed": "FINS2101 && (FINSD13554 || FINSBH3565)"
         },
         "tokens": [
             "(",
@@ -11893,7 +11895,7 @@
     "FINS3630": {
         "condition": {
             "original": "Prerequisite: FINS1612, COMM1180<br/><br/>",
-            "processed": "FINS1612, COMM1180"
+            "processed": "FINS1612 && COMM1180"
         },
         "tokens": [
             "(",
@@ -11905,7 +11907,7 @@
     "FINS3645": {
         "condition": {
             "original": "Pre-requisite: FINS1612 OR (Business Analytics Major (COMMJ1) and COMM1180 OR FINS1613<br/><br/>",
-            "processed": "FINS1612 || (Business Analytics Major (COMMJ1) && COMM1180 || FINS1613"
+            "processed": "FINS1612 || (COMMJ1 && (COMM1180 || FINS1613))"
         },
         "tokens": [
             "(",
@@ -11927,7 +11929,7 @@
     "FINS3646": {
         "condition": {
             "original": "Pre-requisite: FINS1612 OR (Business Analytics Major (COMMJ1) and COMM1180 OR FINS1613<br/><br/>",
-            "processed": "FINS1612 || (Business Analytics Major (COMMJ1) && COMM1180 || FINS1613"
+            "processed": "FINS1612 || (COMMJ1 && (COMM1180 || FINS1613))"
         },
         "tokens": [
             "(",
@@ -11949,7 +11951,7 @@
     "FINS4774": {
         "condition": {
             "original": "Prerequisite: Must be enrolled in specialisation FINSAH4501 or FINSBH3565; or program 4520. <br/>Corequisite: FINS3775 or FINS4775 or FINS4779<br/><br/>",
-            "processed": "Must be specialisation FINSAH4501 || FINSBH3565; || program 4520. [FINS3775 || FINS4775 || FINS4779]"
+            "processed": "(FINSAH4501 || FINSBH3565 || 4520) && [FINS3775 || FINS4775 || FINS4779]"
         },
         "tokens": [
             "(",
@@ -11969,7 +11971,7 @@
     "FINS4775": {
         "condition": {
             "original": "Prerequisite:70% or greater in FINS2624 and ECON1203 or enrolled in specialisation FINSAH4501 or FINSBH3565 or program 4520<br/><br/>",
-            "processed": "70% || greater in FINS2624 && ECON1203 || specialisation FINSAH4501 || FINSBH3565 || program 4520"
+            "processed": "(70GRADE in FINS2624 && 70GRADE in ECON1203) || (FINSAH4501 || FINSBH3565 || 4520)"
         },
         "tokens": [
             "(",
@@ -11991,7 +11993,7 @@
     "FINS4776": {
         "condition": {
             "original": "Prerequisite: Must be enrolled in specialisation FINSAH4501 or FINSBH3565; or program 4520.<br/>Corequisite: FINS3775 or FINS4775 or FINS4779 <br/><br/>",
-            "processed": "Must be specialisation FINSAH4501 || FINSBH3565; || program 4520. [FINS3775 || FINS4775 || FINS4779]"
+            "processed": "(FINSAH4501 || FINSBH3565 || 4520) && ([FINS3775 || FINS4775 || FINS4779])"
         },
         "tokens": [
             "(",
@@ -12011,7 +12013,7 @@
     "FINS4777": {
         "condition": {
             "original": "Prerequisite: Must be enrolled in specialisation FINSAH4501 or FINSBH3565; or program 4520.<br/>Corequisite: FINS3775 or FINS4775 or FINS4779 <br/><br/>",
-            "processed": "Must be specialisation FINSAH4501 || FINSBH3565; || program 4520. [FINS3775 || FINS4775 || FINS4779]"
+            "processed": "(FINSAH4501 || FINSBH3565 || 4520) && ([FINS3775 || FINS4775 || FINS4779])"
         },
         "tokens": [
             "(",
@@ -12031,7 +12033,7 @@
     "FINS4779": {
         "condition": {
             "original": "Prerequisite: Must be enrolled in specialisation FINSAH4501 or FINSBH3565; or program 4520.<br/>Corequisite: FINS3775 or FINS4775 or FINS4779 <br/><br/>",
-            "processed": "Must be specialisation FINSAH4501 || FINSBH3565; || program 4520. [FINS3775 || FINS4775 ||]"
+            "processed": "(FINSAH4501 || FINSBH3565 || 4520) && ([FINS3775 || FINS4775 || FINS4779])"
         },
         "tokens": [
             "(",
@@ -12049,7 +12051,7 @@
     "FINS4792": {
         "condition": {
             "original": "Prerequisite: Must be enrolled in specialisation FINSAH4501 or FINSBH3565;  or program 4520. <br/>Corequisite:  FINS3775 or FINS4775<br/><br/>",
-            "processed": "Must be specialisation FINSAH4501 || FINSBH3565; || program 4520. [ FINS3775 || FINS4775]"
+            "processed": "(FINSAH4501 || FINSBH3565 || 4520) && [FINS3775 || FINS4775]"
         },
         "tokens": [
             "(",
@@ -15515,7 +15517,7 @@
     "MARK2101": {
         "condition": {
             "original": "Enrolled in plan MARKB13554<br/><br/>",
-            "processed": "plan MARKB13554"
+            "processed": "MARKB13554"
         },
         "tokens": [
             "(",
@@ -15527,7 +15529,8 @@
     "MARK3054": {
         "condition": {
             "original": "Pre-requisite: ECON1203 or MARK2052. If students can demonstrate they have equivalent statistics knowledge, but haven't completed any of the listed pre-requisite courses, they can seek permission from Program Coordinator by submitting an online form.<br/><br/>",
-            "processed": "ECON1203 || MARK2052. If can demonstrate they have equivalent statistics knowledge, but haven't any of the listed courses, they can seek permission from Program Coordinator by submitting an online form"
+            "processed": "ECON1203 || MARK2052",
+            "warning": "If students can demonstrate they have equivalent statistics knowledge, but haven't completed any of the listed pre-requisite courses, they can seek permission from Program Coordinator by submitting an online form"
         },
         "tokens": [
             "(",
@@ -15541,7 +15544,8 @@
     "MARK3085": {
         "condition": {
             "original": "Pre-requisite: (MARK1012 OR MARK2012) or (ECON1203 OR COMM1110). If students can demonstrate they have equivalent statistics knowledge, but haven't completed any of the listed pre-requisite courses, they can seek permission from Program Coordinator by submitting an online form.<br/><br/>",
-            "processed": "(MARK1012 || MARK2012) || (ECON1203 || COMM1110). If can demonstrate they have equivalent statistics knowledge, but haven't any of the listed courses, they can seek permission from Program Coordinator by submitting an online form"
+            "processed": "(MARK1012 || MARK2012) || (ECON1203 || COMM1110)",
+            "warning": "If students can demonstrate they have equivalent statistics knowledge, but haven't completed any of the listed pre-requisite courses, they can seek permission from Program Coordinator by submitting an online form"
         },
         "tokens": [
             "(",
@@ -15564,7 +15568,8 @@
     "MARK3087": {
         "condition": {
             "original": "Pre-requisite: ECON1203 or INFS1609 or MATH1041 or MATH1231 or MATH1241 or MATH1251 or MARK2052 or COMM2050 or COMM2501 or INFS2605 or INFS2609.<br/>Students with equivalent Statistics knowledge can seek pre-requisite waiver via webforms<br/><br/>",
-            "processed": "ECON1203 || INFS1609 || MATH1041 || MATH1231 || MATH1241 || MATH1251 || MARK2052 || COMM2050 || COMM2501 || INFS2605 || INFS2609. with equivalent Statistics knowledge can seek waiver via webforms"
+            "processed": "ECON1203 || INFS1609 || MATH1041 || MATH1231 || MATH1241 || MATH1251 || MARK2052 || COMM2050 || COMM2501 || INFS2605 || INFS2609",
+            "warning": "Students with equivalent Statistics knowledge can seek pre-requisite waiver via webforms"
         },
         "tokens": [
             "(",
@@ -15596,7 +15601,8 @@
     "MARK3088": {
         "condition": {
             "original": "Pre-requisite: ECON1203 or INFS1609 or MATH1041 or MATH1231 or MATH1241 or MATH1251 or MARK2052 or COMM2050 or COMM2501 or INFS2605 or INFS2609.<br/>Students with equivalent Statistics knowledge can seek pre-requisite waiver via webforms<br/><br/>",
-            "processed": "ECON1203 || INFS1609 || MATH1041 || MATH1231 || MATH1241 || MATH1251 || MARK2052 || COMM2050 || COMM2501 || INFS2605 || INFS2609. with equivalent Statistics knowledge can seek waiver via webforms"
+            "processed": "ECON1203 || INFS1609 || MATH1041 || MATH1231 || MATH1241 || MATH1251 || MARK2052 || COMM2050 || COMM2501 || INFS2605 || INFS2609",
+            "warning": "Students with equivalent Statistics knowledge can seek pre-requisite waiver via webforms"
         },
         "tokens": [
             "(",
@@ -15628,7 +15634,8 @@
     "MARK3089": {
         "condition": {
             "original": "Pre-requisite: ECON1203 or INFS1609 or MATH1041 or MATH1231 or MATH1241 or MATH1251 or MARK2052 or COMM2050 or COMM2501 or INFS2605 or INFS2609.<br/>Students with equivalent Statistics knowledge can seek pre-requisite waiver via webforms<br/><br/>",
-            "processed": "ECON1203 || INFS1609 || MATH1041 || MATH1231 || MATH1241 || MATH1251 || MARK2052 || COMM2050 || COMM2501 || INFS2605 || INFS2609. with equivalent Statistics knowledge can seek waiver via webforms"
+            "processed": "ECON1203 || INFS1609 || MATH1041 || MATH1231 || MATH1241 || MATH1251 || MARK2052 || COMM2050 || COMM2501 || INFS2605 || INFS2609",
+            "warning": "Students with equivalent Statistics knowledge can seek pre-requisite waiver via webforms"
         },
         "tokens": [
             "(",
@@ -15660,7 +15667,7 @@
     "MARK3202": {
         "condition": {
             "original": "Prerequisite: MARK2101 and enrolled in plan MARKB13554<br/><br/>",
-            "processed": "MARK2101 && plan MARKB13554"
+            "processed": "MARK2101 && MARKB13554"
         },
         "tokens": [
             "(",
@@ -15674,7 +15681,7 @@
     "MARK3303": {
         "condition": {
             "original": "Prerequisite: MARK2101 and enrolled in plan MARKB13554<br/><br/>",
-            "processed": "MARK2101 && plan MARKB13554"
+            "processed": "MARK2101 && MARKB13554"
         },
         "tokens": [
             "(",
@@ -15688,7 +15695,8 @@
     "MARK4210": {
         "condition": {
             "original": "Prerequisite: Admission to Honours in Marketing.<br/><br/>",
-            "processed": "Admission to Honours in Marketing"
+            "processed": "",
+            "warning": "Requires Admission to Honours in Marketing"
         },
         "tokens": [
             "(",
@@ -15700,7 +15708,8 @@
     "MARK4211": {
         "condition": {
             "original": "Prerequisite: Admission to Honours in Marketing.<br/><br/>",
-            "processed": "Admission to Honours in Marketing"
+            "processed": "",
+            "warning": "Requires Admission to Honours in Marketing"
         },
         "tokens": [
             "(",
@@ -15712,7 +15721,8 @@
     "MARK4212": {
         "condition": {
             "original": "Prerequisite: Admission to Honours in Marketing.<br/><br/>",
-            "processed": "Admission to Honours in Marketing"
+            "processed": "",
+            "warning": "Requires Admission to Honours in Marketing"
         },
         "tokens": [
             "(",
@@ -15724,7 +15734,8 @@
     "MARK4213": {
         "condition": {
             "original": "Prerequisite: Admission to Honours in Marketing.<br/><br/>",
-            "processed": "Admission to Honours in Marketing"
+            "processed": "",
+            "warning": "Requires Admission to Honours in Marketing"
         },
         "tokens": [
             "(",
