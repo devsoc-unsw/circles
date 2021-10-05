@@ -12,10 +12,10 @@ import requests
 import json
 import ast
 
-import data.utility.dataHelpers
+from data.utility import dataHelpers
 from data.config import LIVE_YEAR
 
-TOTAL_PGRMS = 1000
+TOTAL_PGRMS = 249
 
 PAYLOAD = {
     "query": {
