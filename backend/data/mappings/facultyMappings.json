@@ -1,17 +1,65 @@
 {
     "F Engineering": "Faculty of Engineering",
+    "Faculty of Engineering": "F Engineering",
+    
     "S Engineering": "School of Mechanical and Manufacturing Engineering",
+    "School of Mechanical and Manufacturing Engineering": "S Engineering",
+
     "F Art": "Faculty of Arts, Design and Architecture",
+    "Faculty of Arts, Design and Architecture": "F Art",
+    
     "S Art": "School of Art and Design",
+    "School of Art and Design": "S Art",
+
     "F Law": "Faculty of Law and Justice",
+    "Faculty of Law and Justice": "F Law",
+
     "S Law": "School of Law, Society and Criminology",
+    "School of Law, Society and Criminology": "S Law",
+
     "F Med": "Faculty of Medicine and Health",
+    "Faculty of Medicine and Health": "F Med",
+
     "S Med": "School of Medical Sciences",
+    "School of Medical Sciences": "S Med",
+
     "F Science": "Faculty of Science",
+    "Faculty of Science": "F Science",
+
     "S Science": "School of Mathematics & Statistics",
+    "School of Mathematics & Statistics": "S Science",
+
     "F Business": "UNSW Business School",
+    "UNSW Business School": "F Business", 
+
     "S Business": "School of Accounting, Auditing and Taxation",
+    "School of Accounting, Auditing and Taxation": "S Business",
+
     "F Canberra": "UNSW Canberra at ADFA",
-    "S Canberra": "UC School of Business"
+    "UNSW Canberra at ADFA": "F Canberra",
+
+    "S Canberra": "UC School of Business",
+    "UC School of Business": "S Canberra", 
+
+    "S Biomed": "Graduate School of Biomedical Engineering",
+    "Graduate School of Biomedical Engineering": "S Biomed",
+
+    "School of Chemistry": "S Chemistry",
+    "S Chemistry": "School of Chemistry",
+
+    "School of Civil and Environmental Engineering": "S Civil Engineering",
+    "S Civil Engineering": "School of Civil and Environmental Engineering",
+
+    "School of Computer Science and Engineering": "S Comp",
+    "S Comp": "School of Computer Science and Engineering",
+
+    "School of Electrical Engineering & Telecommunications": "S Elec",
+    "S Elec": "School of Electrical Engineering & Telecommunications",
+
+    "S Minerals": "School of Minerals & Energy Resources Engineering",
+    "School of Minerals & Energy Resources Engineering": "S Minerals",
+
+    "S Photovoltaic": "School of Photovoltaic and Renewable Engineering",
+    "School of Photovoltaic and Renewable Engineering": "S Photovoltaic"
 
 }
