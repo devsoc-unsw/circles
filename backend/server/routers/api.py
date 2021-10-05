@@ -56,8 +56,7 @@ class Structure (BaseModel):
 
 def addSpecialisation(structure, code, type):
     query = {'code': code}
-    spnResult = specialisationsCOL.find_one(query)
-            
+    spnResult = specialisationsCOL.find_one(query)    
     structure[type] = {'name': spnResult['name']}
     for container in spnResult['curriculum']:
 
@@ -66,38 +65,13 @@ def addSpecialisation(structure, code, type):
 
         item['UOC'] = container['credits_to_complete']
 
-        # TODO: complete
-        # item['core'] = container['core'] 
-        # item['levels'] = container['levels']
-
         courseList = []
         item['courses'] = {}
         for course in container['courses']:
             if ' or ' in course:
                 courseList.extend(course.split(' or '))
-            elif re.search(r'[A-Z]{4}\d{1}', course):
+            else:
                 item['courses'][course] = container['courses'][course]
-            else:
-                courseList.append(course)
-        
-        # item['courses'] = {}
-        print(item)
-        for course in courseList:
-            query = {'code': course}
-            courseResult = coursesCOL.find_one(query)
-
-            if not courseResult:
-                # This is new code
-                if len(course) == 5:
-                    coursesList = []
-                    pat = re.compile(r'{}'.format(course), re.I)
-                    result = coursesCOL.find({'code': {'$regex': pat}})
-                    for i in result:
-                        item['courses'][i['code']] = i['title']
-                # This is old code
-                # item['courses'][course] = 1
-            else:
-                item['courses'][course] = courseResult['title']
 
 @router.get("/")
 def specialisations_index():
@@ -561,17 +535,14 @@ def getStructure(programCode, major="Default", minor="Default"):
         if "credits_to_complete" in programsResult['components']['NonSpecialisationData'][container]:
             structure['General'][container]['UOC'] = programsResult['components']['NonSpecialisationData'][container]['credits_to_complete']
         else:
+            # Not all program containers have credit points associated with them
             structure['General'][container]['UOC'] = -1
         
-        for course in programsResult['components']['NonSpecialisationData'][container]:
-            if re.search(r'[A-Z]{4}\d{4}', course):
-                query = {'code': course}
-                courseResult = coursesCOL.find_one(query)
-                
-                if courseResult:
-                    structure['General'][container][course] = courseResult['title']
-                else:
-                    structure['General'][container][course] = 1
+        for course, title in programsResult['components']['NonSpecialisationData'][container].items():
+            # Add course data: e.g. { "COMP1511": "Programming Fundamentals"  }
+            if course == "type" or course == "credits_to_complete":
+                continue
+            structure['General'][container][course] = title
 
         if 'FE' in programsResult['components']:
             structure['General']['FlexEducation'] = {'UOC': programsResult['components']['FE']['credits_to_complete'],
