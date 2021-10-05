@@ -1,12 +1,18 @@
-from json import dump
+import sys
 import json
 import re
+
+from json import dump
 
 from categories import *
 
 '''Keywords'''
 AND = 1
 OR = 2
+
+
+'''CACHED'''
+
 
 
 class User:
@@ -49,7 +55,7 @@ class User:
 
     def add_program(self, program):
         '''Adds a program to this user'''
-        self.program  # TODO: This should update to reflect UOC of user
+        self.program = program # TODO: This should update to reflect UOC of user
 
     def add_specialisation(self, specialisation):
         '''Adds a specialisation to this user'''
@@ -63,22 +69,15 @@ class User:
         '''Determines if the user is in this program code'''
         return self.program == program
 
+    def in_specialisation(self, specialisation):
+        '''Determines if the user is in the specialisation'''
+        return specialisation in self.specialisations
 
-class Condition:
-    '''The base condition object from which other conditions stem from'''
+    def get_grade(self, course):
+        '''Given a course which the student has taken, returns their grade (or None for no grade'''
+        return self.courses[course][1]
 
-    def __init__(self):
-        return
-
-    def validate(self, user):
-        '''Default value is true for something with no prerequisites'''
-        return True
-
-    def show(self):
-        print("empty!")
-
-
-class CourseCondition(Condition):
+class CourseCondition():
     '''Condition that the student has completed this course'''
 
     def __init__(self, course):
@@ -92,7 +91,7 @@ class CourseCondition(Condition):
         return user.has_taken_course(self.course)
 
 
-class UOCCondition(Condition):
+class UOCCondition():
     '''UOC conditions such as "24UOC in COMP"'''
 
     def __init__(self, uoc):
@@ -120,7 +119,7 @@ class UOCCondition(Condition):
             return self.category.uoc(user) >= self.uoc
 
 
-class WAMCondition(Condition):
+class WAMCondition():
     '''Handles WAM conditions such as 65WAM and 80WAM in'''
 
     def __init__(self, wam):
@@ -138,26 +137,38 @@ class WAMCondition(Condition):
         self.category = category_classobj
 
     def validate(self, user):
-        # Returns true if the wam condition is met for a single category.
-        # Returns true if all applicable WAM is None
-        # TODO: Make this return some warning in the future so WAM conditions do
-        # not gate keep the user
-        if user.wam == None:
-            # Default is True
-            return True
-        elif self.category == None:
-            # Simple WAM condition
-            return user.wam >= self.wam
+        '''
+        Determines if the user has met the WAM condition for this category.
+
+        Will always return True and a warning since WAM can fluctuate
+        '''
+
+        # Determine the wam we must figure out (whether it is the user's overall wam or a specific category)
+        if self.category == None:
+            applicable_wam = user.wam
         else:
-            # The user must have a high enough wam in the given category
-            category_wam = self.category.wam(user)
-            if category_wam == None:
-                return True  # TODO: Make this a warning
+            applicable_wam = self.category.wam(user)
+        
+        return True, self.get_warning(applicable_wam)
+
+    def get_warning(self, applicable_wam):
+        '''Returns an appropriate warning message or None if not needed'''
+        if self.category == None:
+            if applicable_wam == None:
+                return f"Requires {self.wam} WAM. Your WAM has not been recorded"
+            elif applicable_wam >= self.wam:
+                return None
+            else: 
+                return f"Requires {self.wam} WAM. Your WAM is currently {applicable_wam:.3f}"
+        else:
+            if applicable_wam == None:
+                return f"Requires {self.wam} WAM in {self.category}. Your WAM in {self.category} has not been recorded"
+            elif applicable_wam >= self.wam:
+                return None
             else:
-                return category_wam >= self.wam
+                return f"Requires {self.wam} WAM in {self.category}. Your WAM in {self.category} is currently {applicable_wam:.3f}"
 
-
-class GRADECondition(Condition):
+class GRADECondition():
     '''Handles GRADE conditions such as 65GRADE and 80GRADE in [A-Z]{4}[0-9]{4}'''
 
     def __init__(self, grade, course):
@@ -167,19 +178,28 @@ class GRADECondition(Condition):
         self.course = course
 
     def validate(self, user):
-        # TODO: Make this return some warning in the future so GRADE conditions do
-        # not gate keep the user
+        '''
+        Determines if the user has met the GRADE condition for this course.\n
+        Not taken the course - Return False\n
+        Taken the course but no mark provided - Return True and add warning\n
+        Taken the course but mark too low - Return False\n
+        Taken the course and sufficient mark - Return True\n
+        '''
         if self.course not in user.courses:
-            # They have not taken the course
-            return False
-        elif user.courses[self.course][1] == None:
-            # TODO: Make this return a warning as well. Return True for now
-            return True
+            return False, None
+        
+        user_grade = user.get_grade(self.course)
+        if user_grade == None:
+            return True, self.get_warning()
+        elif user_grade < self.grade:
+            return False, None
         else:
-            return user.courses[self.course][1] >= self.grade
+            return True, None
 
+    def get_warning(self):
+        return f"Requires {self.grade} mark in {self.course}. You mark has not been recorded"
 
-class ProgramCondition(Condition):
+class ProgramCondition():
     '''Handles Program conditions such as 3707'''
 
     def __init__(self, program):
@@ -189,12 +209,22 @@ class ProgramCondition(Condition):
         return user.in_program(self.program)
 
 
-class CompositeCondition(Condition):
-    '''Handles AND/OR clauses comprised of condition objects.
-    NOTE: This will not handle clauses including BOTH && and || as it is assumed
-    that brackets will have been used to prevent ambiguity'''
+class SpecialisationCondition():
+    '''Handles Specialisation conditions such as COMPA1'''
+
+    def __init__(self, specialisation):
+        self.specialisation = specialisation
+
+    def validate(self, user):
+        return user.in_specialisation(self.specialisation)
+
+
+class CompositeCondition():
+    '''Handles AND/OR clauses comprised of condition objects.'''
 
     def __init__(self, logic=AND):
+        # NOTE: By default, logic should be OR. This will ensure that empty conditions
+        # evaluate as True due to the way we implement validate
         self.conditions = []
         self.logic = logic
 
@@ -202,41 +232,74 @@ class CompositeCondition(Condition):
         '''Adds a condition object'''
         self.conditions.append(condition_classobj)
 
-    def get_condition(self):
-        return self.conditions
-
     def set_logic(self, logic):
         '''AND or OR'''
         self.logic = logic
 
-    def simplify(self):
-        '''Simplifies unnecessary nesting'''
-        if not self.conditions:
-            return Condition()
+    def is_unlocked(self, user):
+        '''The first level check which returns the result and a warning. Call this
+        with the appropriate user data to determine if a course is unlocked or not.
+        Will return an object containing the result and a list of warnings'''
+        warnings = []
+        
+        unlocked = self.validate(user, warnings)
+        result = {
+            "result": unlocked,
+            "warnings": warnings
+        }
+        
+        return result
 
-        if len(self.conditions) == 1:
-            return self.conditions[0]
-
-        return self
-
-    def validate(self, user):
-        if self.logic == AND:
-            # All conditions must be true
-            for cond in self.conditions:
-                if cond.validate(user) == False:
-                    return False
+    def validate(self, user, warnings=[]):
+        # Ensure we add all the warnings. 
+        # NOTE: Remember that warnings are only returned
+        # along with True by validate() method. In other words, checking a warning 
+        # is != None is the equivalent of checking that validate() returned True
+        
+        if self.conditions == []:
+            # Empty condition returns True by default
             return True
-        elif self.logic == OR:
-            # Only a single condition needs to be true
-            for cond in self.conditions:
-                if cond.validate(user) == True:
-                    return True
-            return False
+        
+        if self.logic == AND:
+            satisfied = True
+        else:
+            satisfied = False
+
+        for cond in self.conditions:
+            if isinstance(cond, (GRADECondition, WAMCondition)):
+                # Special type of condition which can return warnings
+                unlocked, warning = cond.validate(user)
+
+                if warning != None:
+                    warnings.append(warning)
+            elif isinstance(cond, CompositeCondition):
+                # Need to pass in the warnings list to collate all the warnings
+                unlocked = cond.validate(user, warnings)
+            else:
+                unlocked = cond.validate(user)
+
+            if self.logic == AND:
+                satisfied = satisfied and unlocked
+            else:
+                satisfied = satisfied or unlocked
+
+        return satisfied
 
 
 def create_condition(tokens):
-    '''Given the parsed logical tokens list, (assuming starting and ending bracket),
-    return the condition object and the index of that (sub) token list'''
+    '''
+    The main wrapper for make_condition so we don't get 2 returns.
+    Given the parsed logical tokens list (assuming starting and ending bracket),
+    Returns the condition
+    '''
+    return make_condition(tokens)[0]
+
+def make_condition(tokens):
+    '''
+    To be called by create_condition
+    Given the parsed logical tokens list, (assuming starting and ending bracket),
+    return the condition object and the index of that (sub) token list
+    '''
 
     # Start off as a composite condition
     result = CompositeCondition()
@@ -245,7 +308,7 @@ def create_condition(tokens):
     for index, token in it:
         if token == '(':
             # Parse content in bracket 1 layer deeper
-            sub_result, sub_index = create_condition(tokens[index + 1:])
+            sub_result, sub_index = make_condition(tokens[index + 1:])
             if sub_result == None:
                 # Error. Return None
                 return None, sub_index
@@ -257,10 +320,10 @@ def create_condition(tokens):
             # End parsing and go up one layer
             return result, index
         elif token == "&&":
-            # AND type logic. We will set it for clarity even though it is default
+            # AND type logic
             result.set_logic(AND)
         elif token == "||":
-            # Change logic to ||
+            # OR type logic
             result.set_logic(OR)
         elif is_course(token):
             # Condition for a single course
@@ -325,16 +388,16 @@ def create_condition(tokens):
                 return None, index
         elif is_program(token):
             result.add_condition(ProgramCondition(token))
+        elif is_specialisation(token):
+            result.add_condition(SpecialisationCondition(token))
         else:
             # Unmatched token. Error
             return None, index
 
-    # Simplify the result and return it
-    return result.simplify(), index
+    return result, index
 
 
 '''HELPER FUNCTIONS TO DETERMINE THE TYPE OF A GIVEN TEXT'''
-
 
 def is_course(text):
     if re.match(r'^[A-Z]{4}\d{4}$', text, flags=re.IGNORECASE):
@@ -389,6 +452,27 @@ def is_program(text):
     if re.match(r'^\d{4}', text):
         return True
     return False
+
+
+def is_specialisation(text):
+    '''Determines if the text is a specialisation code'''
+    if re.match(r'^[A-Z]{5}\d$', text, flags=re.IGNORECASE):
+        return True
+    return False
+
+
+'''HELPER FUNCTIONS FOR UTILITY PURPOSES'''
+
+
+def read_data(file_name):
+    '''Reads data from a json file and returns it'''
+    try:
+        with open(file_name, "r") as input_file:
+            return json.load(input_file)
+    except:
+        print(f"File {file_name} not found")
+        sys.exit(1)
+        
 
 # tokens = ["(", "COMP1511", "&&", "(", "COMP1521", "||", "COMP1531", ")", ")"]
 # user = User()
