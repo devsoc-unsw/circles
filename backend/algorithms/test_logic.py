@@ -4,7 +4,7 @@ ensure our algorithms work as expected.
 If these tests work, we can expect that the core logic works.
 '''
 
-from conditions import *
+from .conditions import *
 import pytest
 
 

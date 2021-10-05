@@ -4,7 +4,7 @@ import re
 
 from json import dump
 
-from categories import *
+from algorithms.categories import *
 
 '''Keywords'''
 AND = 1
@@ -303,7 +303,7 @@ def make_condition(tokens):
 
     # Start off as a composite condition
     result = CompositeCondition()
-
+    
     it = enumerate(tokens)
     for index, token in it:
         if token == '(':
@@ -394,7 +394,8 @@ def make_condition(tokens):
             # Unmatched token. Error
             return None, index
 
-    return result, index
+    # Reaching here means a ")" was missing as we should only terminate in the ")" case
+    return None, 0
 
 
 '''HELPER FUNCTIONS TO DETERMINE THE TYPE OF A GIVEN TEXT'''
