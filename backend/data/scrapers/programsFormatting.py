@@ -19,12 +19,12 @@ Step in the data's journey:
     [   ] Customise formatted data (programProcessing.py)
 """
 import json
-import data.utility.dataHelpers
+from data.utility import dataHelpers
 
 
 def format_data():
     # Get raw data
-    raw_content = dataHelpers.read_data("programsRaw.json")
+    raw_content = dataHelpers.read_data("data/scrapers/programsPureRaw.json")
     programsFormatted = {}
     for program in raw_content:
         # Load and process strings for further manipulation
@@ -35,7 +35,7 @@ def format_data():
         courseCode = initialiseProgram(programsFormatted, data)
         addData(programsFormatted, courseCode, program, data, curriculumStructure)
 
-    dataHelpers.write_data(programsFormatted, 'programsFormattedRaw.json')
+    dataHelpers.write_data(programsFormatted, 'data/scrapers/programsFormattedRaw.json')
 
 
 '''
