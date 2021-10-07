@@ -6,13 +6,10 @@
         },
         "tokens": [
             "(",
-            "Enrolment in Accounting Co-op Major",
-            "(",
             "ACCTB13554",
-            ")",
             ")"
         ],
-        "broke at": "Index 1, Enrolment in Accounting Co-op Major"
+        "broke at": "Index 1, ACCTB13554"
     },
     "ACCT2522": {
         "condition": {
@@ -35,13 +32,10 @@
         },
         "tokens": [
             "(",
-            "Enrolment in Accounting Co-op Major",
-            "(",
             "ACCTB13554",
-            ")",
             ")"
         ],
-        "broke at": "Index 1, Enrolment in Accounting Co-op Major"
+        "broke at": "Index 1, ACCTB13554"
     },
     "ACCT3303": {
         "condition": {
@@ -50,103 +44,10 @@
         },
         "tokens": [
             "(",
-            "Enrolment in Accounting Co-op Major",
-            "(",
             "ACCTB13554",
-            ")",
             ")"
         ],
-        "broke at": "Index 1, Enrolment in Accounting Co-op Major"
-    },
-    "ACCT3708": {
-        "condition": {
-            "original": "Prerequisite: ACCT2542 or approval from the School<br/><br/>",
-            "processed": "ACCT2542",
-            "warning": "You need approval from the School of Accounting, Auditing and Taxation to enrol in this course."
-        },
-        "tokens": [
-            "(",
-            "ACCT2542",
-            "||",
-            "approval from the School",
-            ")"
-        ],
-        "broke at": "Index 3, approval from the School"
-    },
-    "ACCT4797": {
-        "condition": {
-            "original": "Prerequisite: Must be enrolled in program 4501 (Accounting)<br/><br/>",
-            "processed": "4501"
-        },
-        "tokens": [
-            "(",
-            "Must be program 4501",
-            "(",
-            "Accounting",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 1, Must be program 4501"
-    },
-    "ACCT4809": {
-        "condition": {
-            "original": "Prerequisite: Must be enrolled in program 4501 (Accounting)<br/><br/>",
-            "processed": "4501"
-        },
-        "tokens": [
-            "(",
-            "Must be program 4501",
-            "(",
-            "Accounting",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 1, Must be program 4501"
-    },
-    "ACCT4851": {
-        "condition": {
-            "original": "Prerequisite: Must be enrolled in program 4501 (Accounting)<br/><br/>",
-            "processed": "4501"
-        },
-        "tokens": [
-            "(",
-            "Must be program 4501",
-            "(",
-            "Accounting",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 1, Must be program 4501"
-    },
-    "ACCT4852": {
-        "condition": {
-            "original": "Prerequisite: Must be enrolled in program 4501 (Accounting)<br/><br/>",
-            "processed": "4501"
-        },
-        "tokens": [
-            "(",
-            "Must be program 4501",
-            "(",
-            "Accounting",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 1, Must be program 4501"
-    },
-    "ACCT4897": {
-        "condition": {
-            "original": "Prerequisite: Must be enrolled in program 4501 (Accounting)<br/><br/>",
-            "processed": "4501"
-        },
-        "tokens": [
-            "(",
-            "Must be program 4501",
-            "(",
-            "Accounting",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 1, Must be program 4501"
+        "broke at": "Index 1, ACCTB13554"
     },
     "ACTL1101": {
         "condition": {
@@ -157,22 +58,10 @@
             "(",
             "MATH1151",
             "&&",
-            "in Actuarial Studies programs",
+            "ACTL#",
             ")"
         ],
-        "broke at": "Index 3, in Actuarial Studies programs"
-    },
-    "ACTL2101": {
-        "condition": {
-            "original": "Prerequisite:Enrolment in Program 3587<br/><br/>",
-            "processed": "3587"
-        },
-        "tokens": [
-            "(",
-            "Enrolment in Program 3587",
-            ")"
-        ],
-        "broke at": "Index 1, Enrolment in Program 3587"
+        "broke at": "Index 3, ACTL#"
     },
     "ACTL2102": {
         "condition": {
@@ -187,85 +76,10 @@
             "MATH2901",
             ")",
             "&&",
-            "in Actuarial single",
-            "||",
-            "dual degrees",
+            "ACTL#",
             ")"
         ],
-        "broke at": "Index 7, in Actuarial single"
-    },
-    "ACTL2111": {
-        "condition": {
-            "original": "Pre-requsite: MATH1251 AND (ACTL1101 OR in MATHE1, MATHM1 or MATHT1 majors)<br/><br/>",
-            "processed": "MATH1251 && (ACTL1101 || (MATHE1 || MATHM1 || MATHT1))"
-        },
-        "tokens": [
-            "(",
-            "MATH1251",
-            "&&",
-            "(",
-            "ACTL1101",
-            "||",
-            "in MATHE1",
-            "||",
-            "MATHM1",
-            "||",
-            "MATHT1 majors",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 3, ("
-    },
-    "ACTL3142": {
-        "condition": {
-            "original": "Pre-requisite: ACTL2131 OR (MATH2931 and in B. Data Science and Decisions (3959)) OR (MATH2901 and MATH2931)<br/><br/>",
-            "processed": "ACTL2131 || (MATH2931 && 3959) || (MATH2901 && MATH2931)"
-        },
-        "tokens": [
-            "(",
-            "ACTL2131",
-            "||",
-            "(",
-            "MATH2931",
-            "&&",
-            "in B. Data Science",
-            "&&",
-            "Decisions",
-            "(",
-            "3959",
-            ")",
-            ")",
-            "||",
-            "(",
-            "MATH2901",
-            "&&",
-            "MATH2931",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 3, ("
-    },
-    "ACTL3162": {
-        "condition": {
-            "original": "Pre-requisite: ACTL2102 or (MATH2901 AND MATHE1, MATHM1 or MATHT1 major)<br/><br/>",
-            "processed": "ACTL2102 || (MATH2901 && (MATHE1 || MATHM1 || MATHT1))"
-        },
-        "tokens": [
-            "(",
-            "ACTL2102",
-            "||",
-            "(",
-            "MATH2901",
-            "&&",
-            "MATHE1",
-            "||",
-            "MATHM1",
-            "||",
-            "MATHT1 major",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 7, ||"
+        "broke at": "Index 7, ACTL#"
     },
     "ACTL3191": {
         "condition": {
@@ -285,7 +99,7 @@
             "(",
             "84UOC",
             "&&",
-            "a Commerce Program",
+            "COMM#",
             ")",
             ")"
         ],
@@ -310,79 +124,11 @@
             "(",
             "84UOC",
             "&&",
-            "a Commerce Program",
+            "COMM#",
             ")",
-            "&&",
-            "be in good academic standing",
             ")"
         ],
         "broke at": "Index 3, ("
-    },
-    "ACTL3202": {
-        "condition": {
-            "original": "Prerequisite: ACTL2101 and enrolment in program 3587<br/><br/>",
-            "processed": "ACTL2101 && 3587"
-        },
-        "tokens": [
-            "(",
-            "ACTL2101",
-            "&&",
-            "enrolment in program 3587",
-            ")"
-        ],
-        "broke at": "Index 3, enrolment in program 3587"
-    },
-    "ACTL3303": {
-        "condition": {
-            "original": "Prerequisite: ACTL3202 and enrolment in program 3587<br/><br/>",
-            "processed": "ACTL3202 && 3587"
-        },
-        "tokens": [
-            "(",
-            "ACTL3202",
-            "&&",
-            "enrolment in program 3587",
-            ")"
-        ],
-        "broke at": "Index 3, enrolment in program 3587"
-    },
-    "ACTL4001": {
-        "condition": {
-            "original": "Pre-requisite: ACCT1511 or COMM1140, ACTL3141, ACTL3182, FINS1613 or COMM1180, ACTL3162, ACTL3151, ECON1102, 60+ WAM.<br/>Note: Students in 3587 may complete ACTL3141 as a co-requisite<br/><br/>",
-            "processed": "(ACCT1511 || COMM1140) && ACTL3141 && ACTL3182 && (FINS1613 || COMM1180) && ACTL3162 && ACTL3151 && ECON1102 && 60WAM",
-            "warning": "Students in 3587 may complete ACTL3141 as a co-requisite."
-        },
-        "tokens": [
-            "(",
-            "ACCT1511",
-            "||",
-            "COMM1140",
-            "||",
-            "ACTL3141",
-            "||",
-            "ACTL3182",
-            "||",
-            "FINS1613",
-            "||",
-            "COMM1180, ACTL3162, ACTL3151, ECON1102, 60WAM. Note: in 3587 may complete ACTL3141 as a []",
-            ")"
-        ],
-        "broke at": "Index 11, COMM1180, ACTL3162, ACTL3151, ECON1102, 60WAM. Note: in 3587 may complete ACTL3141 as a []"
-    },
-    "ACTL4003": {
-        "condition": {
-            "original": "Students must be in Actuarial Studies (Honours).<br/><br/>",
-            "processed": "4520"
-        },
-        "tokens": [
-            "(",
-            "must be in Actuarial Studies",
-            "(",
-            "Honours",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 1, must be in Actuarial Studies"
     },
     "ADAD3400": {
         "condition": {
@@ -7526,25 +7272,6 @@
         ],
         "broke at": "Index 1, undergraduate 72UOC"
     },
-    "COMP1911": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in a non-CSE major (no BINF, COMP, or SENG)<br/><br/>",
-            "processed": ""
-        },
-        "tokens": [
-            "(",
-            "Enrolment in a non-CSE major",
-            "(",
-            "no BINF",
-            "||",
-            "COMP",
-            "||",
-            "SENG",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 1, Enrolment in a non-CSE major"
-    },
     "COMP3821": {
         "condition": {
             "original": "Prerequisite: A mark of at least 65 in COMP1927 or COMP2521<br/><br/>",
@@ -7552,12 +7279,15 @@
         },
         "tokens": [
             "(",
-            "65GRADE in COMP1927",
+            "65GRADE in",
+            "(",
+            "COMP1927",
             "||",
             "COMP2521",
+            ")",
             ")"
         ],
-        "broke at": "Index 1, 65GRADE in COMP1927"
+        "broke at": "Index 1, 65GRADE in"
     },
     "COMP3900": {
         "condition": {
@@ -7568,14 +7298,21 @@
             "(",
             "COMP1531",
             "&&",
+            "(",
             "COMP2521",
             "||",
             "COMP1927",
+            ")",
             "&&",
-            "a BSc Computer Science major with 102UOC",
+            "102UOC in",
+            "(",
+            "COMP?1",
+            "||",
+            "COMPBH",
+            ")",
             ")"
         ],
-        "broke at": "Index 7, a BSc Computer Science major with 102UOC"
+        "broke at": "Index 9, 102UOC in"
     },
     "COMP3901": {
         "condition": {
@@ -7585,20 +7322,17 @@
         },
         "tokens": [
             "(",
-            "80WAM in COMP",
+            "80WAM in",
+            "(",
+            "COMP",
             "||",
             "SENG",
             "||",
-            "BINF courses",
-            "&&",
-            "all first",
-            "&&",
-            "second year core requirements a CSE program",
-            "&&",
-            "agreement from a suitable CSE academic supervisor",
+            "BINF",
+            ")",
             ")"
         ],
-        "broke at": "Index 1, 80WAM in COMP"
+        "broke at": "Index 1, 80WAM in"
     },
     "COMP3902": {
         "condition": {
@@ -7608,20 +7342,17 @@
         },
         "tokens": [
             "(",
-            "80WAM in COMP",
+            "80WAM in",
+            "(",
+            "COMP",
             "||",
             "SENG",
             "||",
-            "BINF courses",
-            "&&",
-            "all first",
-            "&&",
-            "second year core requirements a CSE program",
-            "&&",
-            "agreement from a suitable CSE academic supervisor",
+            "BINF",
+            ")",
             ")"
         ],
-        "broke at": "Index 1, 80WAM in COMP"
+        "broke at": "Index 1, 80WAM in"
     },
     "COMP4511": {
         "condition": {
@@ -7650,10 +7381,10 @@
             "COMP2911",
             ")",
             "&&",
-            "96UOC in Computer Science",
+            "96UOC in COMP",
             ")"
         ],
-        "broke at": "Index 7, 96UOC in Computer Science"
+        "broke at": "Index 7, 96UOC in COMP"
     },
     "COMP4951": {
         "condition": {
@@ -7663,65 +7394,18 @@
         },
         "tokens": [
             "(",
-            "a CSE BE",
-            "(",
-            "Hons",
-            ")",
-            "programs",
-            "&&",
             "126UOC",
             "&&",
-            "3rd year core",
-            ")"
-        ],
-        "broke at": "Index 1, a CSE BE"
-    },
-    "COMP4952": {
-        "condition": {
-            "original": "Prerequisite: Completion of Research Thesis A (4951)<br/><br/>",
-            "processed": "COMP4951"
-        },
-        "tokens": [
             "(",
-            "Research Thesis A",
-            "(",
-            "4951",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 1, Research Thesis A"
-    },
-    "COMP4953": {
-        "condition": {
-            "original": "Prerequisite: Completion of Research Thesis B (4952)<br/><br/>",
-            "processed": "COMP4952"
-        },
-        "tokens": [
-            "(",
-            "Research Thesis B",
-            "(",
-            "4952",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 1, Research Thesis B"
-    },
-    "COMP4961": {
-        "condition": {
-            "original": "Prerequisite: Students enrolled in program 4515 Bachelor of Computer Science (Hons) or program 3648.<br/><br/>",
-            "processed": "4515 || 3648"
-        },
-        "tokens": [
-            "(",
-            "program 4515 Bachelor of Computer Science",
-            "(",
-            "Hons",
-            ")",
+            "BINF?H",
             "||",
-            "program 3648",
+            "SENGAH",
+            "||",
+            "COMP?H",
+            ")",
             ")"
         ],
-        "broke at": "Index 1, program 4515 Bachelor of Computer Science"
+        "broke at": "Index 1, 126UOC"
     },
     "COMP6447": {
         "condition": {
@@ -7732,30 +7416,15 @@
             "(",
             "65GRADE in COMP6841",
             "||",
-            "75GRADE in COMP6441",
+            "75GRADE in",
+            "(",
+            "COMP6441",
             "||",
             "COMP3441",
-            ")"
-        ],
-        "broke at": "Index 1, 65GRADE in COMP6841"
-    },
-    "COMP6721": {
-        "condition": {
-            "original": "Pre-requisite: MATH1081 AND COMP2521 AND (not enrolled in SENGAH)<br/><br/>",
-            "processed": "MATH1081 && COMP2521"
-        },
-        "tokens": [
-            "(",
-            "MATH1081",
-            "&&",
-            "COMP2521",
-            "&&",
-            "(",
-            "not SENGAH",
             ")",
             ")"
         ],
-        "broke at": "Index 1, MATH1081"
+        "broke at": "Index 1, 65GRADE in COMP6841"
     },
     "COMP9242": {
         "condition": {
@@ -7764,46 +7433,15 @@
         },
         "tokens": [
             "(",
-            "75GRADE in COMP3231",
+            "75GRADE in",
+            "(",
+            "COMP3231",
             "||",
             "COMP3891",
+            ")",
             ")"
         ],
-        "broke at": "Index 1, 75GRADE in COMP3231"
-    },
-    "COMP9301": {
-        "condition": {
-            "original": "(COMP6441 OR COMP6841) AND (6 UOC from  (COMP6443, COMP6843, COMP6445, COMP6845, COMP6447)) AND enrolled in final term of program<br/><br/>",
-            "processed": "(COMP6441 || COMP6841) && (COMP6443 || COMP6843 || COMP6445 || COMP6845 || COMP6447)",
-            "warning": "This course can only be taken in the final term of your program."
-        },
-        "tokens": [
-            "(",
-            "(",
-            "COMP6441",
-            "||",
-            "COMP6841",
-            ")",
-            "&&",
-            "(",
-            "6UOC from",
-            "(",
-            "COMP6443",
-            "&&",
-            "COMP6843",
-            "&&",
-            "COMP6445",
-            "&&",
-            "COMP6845",
-            "&&",
-            "COMP6447",
-            ")",
-            ")",
-            "&&",
-            "final term of program",
-            ")"
-        ],
-        "broke at": "Index 1, ("
+        "broke at": "Index 1, 75GRADE in"
     },
     "COMP9302": {
         "condition": {
@@ -7820,21 +7458,19 @@
             ")",
             "&&",
             "(",
-            "12UOC from",
+            "12UOC in",
             "(",
             "COMP6443",
-            "&&",
+            "||",
             "COMP6843",
-            "&&",
+            "||",
             "COMP6445",
-            "&&",
+            "||",
             "COMP6845",
-            "&&",
+            "||",
             "COMP6447",
             ")",
             ")",
-            "&&",
-            "final term of program",
             ")"
         ],
         "broke at": "Index 1, ("
@@ -7846,9 +7482,11 @@
         },
         "tokens": [
             "(",
-            "Two conditions: 1. have taken: 6UOC from the following: COMP3411;",
+            "COMP3411",
             "&&",
-            "12UOC from the following:",
+            "70WAM",
+            "&&",
+            "12UOC in",
             "(",
             "COMP9444",
             "||",
@@ -7858,10 +7496,9 @@
             "||",
             "COMP4418",
             ")",
-            "2. must have 70WAM",
             ")"
         ],
-        "broke at": "Index 1, Two conditions: 1. have taken: 6UOC from the following: COMP3411;"
+        "broke at": "Index 5, 12UOC in"
     },
     "CRIM2014": {
         "condition": {
@@ -11838,12 +11475,12 @@
         },
         "tokens": [
             "(",
-            "plan FINSD13554",
+            "FINSD13554",
             "||",
-            "in FINSBH3565",
+            "FINSBH3565",
             ")"
         ],
-        "broke at": "Index 1, plan FINSD13554"
+        "broke at": "Index 1, FINSD13554"
     },
     "FINS2622": {
         "condition": {
@@ -11852,13 +11489,12 @@
         },
         "tokens": [
             "(",
-            "||",
             "[FINS1612",
             "&&",
             "FINS2624]",
             ")"
         ],
-        "broke at": "Index 2, [FINS1612"
+        "broke at": "Index 1, [FINS1612"
     },
     "FINS3202": {
         "condition": {
@@ -11869,12 +11505,14 @@
             "(",
             "FINS2101",
             "&&",
-            "plan FINSD13554",
+            "(",
+            "FINSD13554",
             "||",
             "FINSBH3565",
+            ")",
             ")"
         ],
-        "broke at": "Index 3, plan FINSD13554"
+        "broke at": "Index 1, FINS2101"
     },
     "FINS3303": {
         "condition": {
@@ -11883,70 +11521,16 @@
         },
         "tokens": [
             "(",
-            "FINS3202",
+            "FINS2101",
             "&&",
-            "plan FINSD13554",
+            "(",
+            "FINSD13554",
             "||",
             "FINSBH3565",
-            ")"
-        ],
-        "broke at": "Index 3, plan FINSD13554"
-    },
-    "FINS3630": {
-        "condition": {
-            "original": "Prerequisite: FINS1612, COMM1180<br/><br/>",
-            "processed": "FINS1612 && COMM1180"
-        },
-        "tokens": [
-            "(",
-            "FINS1612, COMM1180",
-            ")"
-        ],
-        "broke at": "Index 1, FINS1612, COMM1180"
-    },
-    "FINS3645": {
-        "condition": {
-            "original": "Pre-requisite: FINS1612 OR (Business Analytics Major (COMMJ1) and COMM1180 OR FINS1613<br/><br/>",
-            "processed": "FINS1612 || (COMMJ1 && (COMM1180 || FINS1613))"
-        },
-        "tokens": [
-            "(",
-            "FINS1612",
-            "||",
-            "(",
-            "Business Analytics Major",
-            "(",
-            "COMMJ1",
             ")",
-            "&&",
-            "COMM1180",
-            "||",
-            "FINS1613",
             ")"
         ],
-        "broke at": "Index 1, FINS1612"
-    },
-    "FINS3646": {
-        "condition": {
-            "original": "Pre-requisite: FINS1612 OR (Business Analytics Major (COMMJ1) and COMM1180 OR FINS1613<br/><br/>",
-            "processed": "FINS1612 || (COMMJ1 && (COMM1180 || FINS1613))"
-        },
-        "tokens": [
-            "(",
-            "FINS1612",
-            "||",
-            "(",
-            "Business Analytics Major",
-            "(",
-            "COMMJ1",
-            ")",
-            "&&",
-            "COMM1180",
-            "||",
-            "FINS1613",
-            ")"
-        ],
-        "broke at": "Index 1, FINS1612"
+        "broke at": "Index 1, FINS2101"
     },
     "FINS4774": {
         "condition": {
@@ -11955,18 +11539,22 @@
         },
         "tokens": [
             "(",
-            "Must be specialisation FINSAH4501",
+            "(",
+            "FINSAH4501",
             "||",
-            "FINSBH3565;",
+            "FINSBH3565",
             "||",
-            "program 4520. [FINS3775",
+            "4520",
+            ")",
+            "&&",
+            "[FINS3775",
             "||",
             "FINS4775",
             "||",
             "FINS4779]",
             ")"
         ],
-        "broke at": "Index 1, Must be specialisation FINSAH4501"
+        "broke at": "Index 1, ("
     },
     "FINS4775": {
         "condition": {
@@ -11975,20 +11563,22 @@
         },
         "tokens": [
             "(",
-            "70%",
-            "||",
-            "greater in FINS2624",
+            "(",
+            "70GRADE in FINS2624",
             "&&",
-            "ECON1203",
+            "70GRADE in ECON1203",
+            ")",
             "||",
-            "specialisation FINSAH4501",
+            "(",
+            "FINSAH4501",
             "||",
             "FINSBH3565",
             "||",
-            "program 4520",
+            "4520",
+            ")",
             ")"
         ],
-        "broke at": "Index 1, 70%"
+        "broke at": "Index 1, ("
     },
     "FINS4776": {
         "condition": {
@@ -11997,18 +11587,24 @@
         },
         "tokens": [
             "(",
-            "Must be specialisation FINSAH4501",
+            "(",
+            "FINSAH4501",
             "||",
-            "FINSBH3565;",
+            "FINSBH3565",
             "||",
-            "program 4520. [FINS3775",
+            "4520",
+            ")",
+            "&&",
+            "(",
+            "[FINS3775",
             "||",
             "FINS4775",
             "||",
             "FINS4779]",
+            ")",
             ")"
         ],
-        "broke at": "Index 1, Must be specialisation FINSAH4501"
+        "broke at": "Index 1, ("
     },
     "FINS4777": {
         "condition": {
@@ -12017,18 +11613,24 @@
         },
         "tokens": [
             "(",
-            "Must be specialisation FINSAH4501",
+            "(",
+            "FINSAH4501",
             "||",
-            "FINSBH3565;",
+            "FINSBH3565",
             "||",
-            "program 4520. [FINS3775",
+            "4520",
+            ")",
+            "&&",
+            "(",
+            "[FINS3775",
             "||",
             "FINS4775",
             "||",
             "FINS4779]",
+            ")",
             ")"
         ],
-        "broke at": "Index 1, Must be specialisation FINSAH4501"
+        "broke at": "Index 1, ("
     },
     "FINS4779": {
         "condition": {
@@ -12037,16 +11639,24 @@
         },
         "tokens": [
             "(",
-            "Must be specialisation FINSAH4501",
+            "(",
+            "FINSAH4501",
             "||",
-            "FINSBH3565;",
+            "FINSBH3565",
             "||",
-            "program 4520. [FINS3775",
+            "4520",
+            ")",
+            "&&",
+            "(",
+            "[FINS3775",
             "||",
-            "FINS4775 ||]",
+            "FINS4775",
+            "||",
+            "FINS4779]",
+            ")",
             ")"
         ],
-        "broke at": "Index 1, Must be specialisation FINSAH4501"
+        "broke at": "Index 1, ("
     },
     "FINS4792": {
         "condition": {
@@ -12055,16 +11665,20 @@
         },
         "tokens": [
             "(",
-            "Must be specialisation FINSAH4501",
+            "(",
+            "FINSAH4501",
             "||",
-            "FINSBH3565;",
+            "FINSBH3565",
             "||",
-            "program 4520. [ FINS3775",
+            "4520",
+            ")",
+            "&&",
+            "[FINS3775",
             "||",
             "FINS4775]",
             ")"
         ],
-        "broke at": "Index 1, Must be specialisation FINSAH4501"
+        "broke at": "Index 1, ("
     },
     "FOOD3010": {
         "condition": {
@@ -15521,148 +15135,10 @@
         },
         "tokens": [
             "(",
-            "plan MARKB13554",
+            "MARKB13554",
             ")"
         ],
-        "broke at": "Index 1, plan MARKB13554"
-    },
-    "MARK3054": {
-        "condition": {
-            "original": "Pre-requisite: ECON1203 or MARK2052. If students can demonstrate they have equivalent statistics knowledge, but haven't completed any of the listed pre-requisite courses, they can seek permission from Program Coordinator by submitting an online form.<br/><br/>",
-            "processed": "ECON1203 || MARK2052",
-            "warning": "If students can demonstrate they have equivalent statistics knowledge, but haven't completed any of the listed pre-requisite courses, they can seek permission from Program Coordinator by submitting an online form"
-        },
-        "tokens": [
-            "(",
-            "ECON1203",
-            "||",
-            "MARK2052. If can demonstrate they have equivalent statistics knowledge, but haven't any of the listed courses, they can seek permission from Program Coordinator by submitting an online form",
-            ")"
-        ],
-        "broke at": "Index 3, MARK2052. If can demonstrate they have equivalent statistics knowledge, but haven't any of the listed courses, they can seek permission from Program Coordinator by submitting an online form"
-    },
-    "MARK3085": {
-        "condition": {
-            "original": "Pre-requisite: (MARK1012 OR MARK2012) or (ECON1203 OR COMM1110). If students can demonstrate they have equivalent statistics knowledge, but haven't completed any of the listed pre-requisite courses, they can seek permission from Program Coordinator by submitting an online form.<br/><br/>",
-            "processed": "(MARK1012 || MARK2012) || (ECON1203 || COMM1110)",
-            "warning": "If students can demonstrate they have equivalent statistics knowledge, but haven't completed any of the listed pre-requisite courses, they can seek permission from Program Coordinator by submitting an online form"
-        },
-        "tokens": [
-            "(",
-            "(",
-            "MARK1012",
-            "||",
-            "MARK2012",
-            ")",
-            "||",
-            "(",
-            "ECON1203",
-            "||",
-            "COMM1110",
-            ")",
-            ". If can demonstrate they have equivalent statistics knowledge, but haven't any of the listed courses, they can seek permission from Program Coordinator by submitting an online form",
-            ")"
-        ],
-        "broke at": "Index 12, . If can demonstrate they have equivalent statistics knowledge, but haven't any of the listed courses, they can seek permission from Program Coordinator by submitting an online form"
-    },
-    "MARK3087": {
-        "condition": {
-            "original": "Pre-requisite: ECON1203 or INFS1609 or MATH1041 or MATH1231 or MATH1241 or MATH1251 or MARK2052 or COMM2050 or COMM2501 or INFS2605 or INFS2609.<br/>Students with equivalent Statistics knowledge can seek pre-requisite waiver via webforms<br/><br/>",
-            "processed": "ECON1203 || INFS1609 || MATH1041 || MATH1231 || MATH1241 || MATH1251 || MARK2052 || COMM2050 || COMM2501 || INFS2605 || INFS2609",
-            "warning": "Students with equivalent Statistics knowledge can seek pre-requisite waiver via webforms"
-        },
-        "tokens": [
-            "(",
-            "ECON1203",
-            "||",
-            "INFS1609",
-            "||",
-            "MATH1041",
-            "||",
-            "MATH1231",
-            "||",
-            "MATH1241",
-            "||",
-            "MATH1251",
-            "||",
-            "MARK2052",
-            "||",
-            "COMM2050",
-            "||",
-            "COMM2501",
-            "||",
-            "INFS2605",
-            "||",
-            "INFS2609. with equivalent Statistics knowledge can seek waiver via webforms",
-            ")"
-        ],
-        "broke at": "Index 21, INFS2609. with equivalent Statistics knowledge can seek waiver via webforms"
-    },
-    "MARK3088": {
-        "condition": {
-            "original": "Pre-requisite: ECON1203 or INFS1609 or MATH1041 or MATH1231 or MATH1241 or MATH1251 or MARK2052 or COMM2050 or COMM2501 or INFS2605 or INFS2609.<br/>Students with equivalent Statistics knowledge can seek pre-requisite waiver via webforms<br/><br/>",
-            "processed": "ECON1203 || INFS1609 || MATH1041 || MATH1231 || MATH1241 || MATH1251 || MARK2052 || COMM2050 || COMM2501 || INFS2605 || INFS2609",
-            "warning": "Students with equivalent Statistics knowledge can seek pre-requisite waiver via webforms"
-        },
-        "tokens": [
-            "(",
-            "ECON1203",
-            "||",
-            "INFS1609",
-            "||",
-            "MATH1041",
-            "||",
-            "MATH1231",
-            "||",
-            "MATH1241",
-            "||",
-            "MATH1251",
-            "||",
-            "MARK2052",
-            "||",
-            "COMM2050",
-            "||",
-            "COMM2501",
-            "||",
-            "INFS2605",
-            "||",
-            "INFS2609. with equivalent Statistics knowledge can seek waiver via webforms",
-            ")"
-        ],
-        "broke at": "Index 21, INFS2609. with equivalent Statistics knowledge can seek waiver via webforms"
-    },
-    "MARK3089": {
-        "condition": {
-            "original": "Pre-requisite: ECON1203 or INFS1609 or MATH1041 or MATH1231 or MATH1241 or MATH1251 or MARK2052 or COMM2050 or COMM2501 or INFS2605 or INFS2609.<br/>Students with equivalent Statistics knowledge can seek pre-requisite waiver via webforms<br/><br/>",
-            "processed": "ECON1203 || INFS1609 || MATH1041 || MATH1231 || MATH1241 || MATH1251 || MARK2052 || COMM2050 || COMM2501 || INFS2605 || INFS2609",
-            "warning": "Students with equivalent Statistics knowledge can seek pre-requisite waiver via webforms"
-        },
-        "tokens": [
-            "(",
-            "ECON1203",
-            "||",
-            "INFS1609",
-            "||",
-            "MATH1041",
-            "||",
-            "MATH1231",
-            "||",
-            "MATH1241",
-            "||",
-            "MATH1251",
-            "||",
-            "MARK2052",
-            "||",
-            "COMM2050",
-            "||",
-            "COMM2501",
-            "||",
-            "INFS2605",
-            "||",
-            "INFS2609. with equivalent Statistics knowledge can seek waiver via webforms",
-            ")"
-        ],
-        "broke at": "Index 21, INFS2609. with equivalent Statistics knowledge can seek waiver via webforms"
+        "broke at": "Index 1, MARKB13554"
     },
     "MARK3202": {
         "condition": {
@@ -15673,10 +15149,10 @@
             "(",
             "MARK2101",
             "&&",
-            "plan MARKB13554",
+            "MARKB13554",
             ")"
         ],
-        "broke at": "Index 3, plan MARKB13554"
+        "broke at": "Index 3, MARKB13554"
     },
     "MARK3303": {
         "condition": {
@@ -15687,62 +15163,10 @@
             "(",
             "MARK2101",
             "&&",
-            "plan MARKB13554",
+            "MARKB13554",
             ")"
         ],
-        "broke at": "Index 3, plan MARKB13554"
-    },
-    "MARK4210": {
-        "condition": {
-            "original": "Prerequisite: Admission to Honours in Marketing.<br/><br/>",
-            "processed": "",
-            "warning": "Requires Admission to Honours in Marketing"
-        },
-        "tokens": [
-            "(",
-            "Admission to Honours in Marketing",
-            ")"
-        ],
-        "broke at": "Index 1, Admission to Honours in Marketing"
-    },
-    "MARK4211": {
-        "condition": {
-            "original": "Prerequisite: Admission to Honours in Marketing.<br/><br/>",
-            "processed": "",
-            "warning": "Requires Admission to Honours in Marketing"
-        },
-        "tokens": [
-            "(",
-            "Admission to Honours in Marketing",
-            ")"
-        ],
-        "broke at": "Index 1, Admission to Honours in Marketing"
-    },
-    "MARK4212": {
-        "condition": {
-            "original": "Prerequisite: Admission to Honours in Marketing.<br/><br/>",
-            "processed": "",
-            "warning": "Requires Admission to Honours in Marketing"
-        },
-        "tokens": [
-            "(",
-            "Admission to Honours in Marketing",
-            ")"
-        ],
-        "broke at": "Index 1, Admission to Honours in Marketing"
-    },
-    "MARK4213": {
-        "condition": {
-            "original": "Prerequisite: Admission to Honours in Marketing.<br/><br/>",
-            "processed": "",
-            "warning": "Requires Admission to Honours in Marketing"
-        },
-        "tokens": [
-            "(",
-            "Admission to Honours in Marketing",
-            ")"
-        ],
-        "broke at": "Index 1, Admission to Honours in Marketing"
+        "broke at": "Index 3, MARKB13554"
     },
     "MATH1081": {
         "condition": {
