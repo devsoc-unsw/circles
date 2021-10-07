@@ -24,7 +24,7 @@ class User:
         self.program = None  # NOTE: For now this is only single degree
         self.specialisations = {}
         self.uoc = 0
-        self.wam = 0
+        self.wam = None
         self.year = 0  # TODO
 
         if data != None:
@@ -95,8 +95,11 @@ class User:
             if type(self.courses[c][1]) != type(1):
                 uocfixer += self.courses[c][0]
                 continue
+            if self.wam is None:
+                self.wam = 0
             self.wam += self.courses[c][0] * self.courses[c][1]
-        self.wam /= (self.uoc - uocfixer)
+        if self.wam is not None:
+            self.wam /= (self.uoc - uocfixer)
         
         return
 
