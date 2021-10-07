@@ -45,8 +45,8 @@ def fix_conditions():
     
     # Updates the files with the modified dictionaries
     dataHelpers.write_data(
-        CONDITIONS, "../../../data/finalData/conditionsProcessed.json")
-    dataHelpers.write_data(COURSES, "../../../data/finalData/coursesProcessed.json")
+        CONDITIONS, "data/finalData/conditionsProcessed.json")
+    dataHelpers.write_data(COURSES, "data/finalData/coursesProcessed.json")
 
 # TODO: implement your functions here
 
