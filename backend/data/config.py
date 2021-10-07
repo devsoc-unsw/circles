@@ -8,6 +8,8 @@
 # The latest current handbook year that we will maintain all the algorithms for
 LIVE_YEAR = 2022
 
+# The years for which we have archived
+ARCHIVED_YEARS = [2019, 2020, 2021, 2022]
 
 # TODO: Consider adding file paths to this file so we don't have to type out
 # the exact path to write to every time

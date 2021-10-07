@@ -44,10 +44,10 @@ def initialise_course(raw: dict) -> dict:
     return {
         "title": raw.get("title"),
         "code": raw.get("code"),
-        "UOC": raw.get("creditPoints"),
+        "UOC": raw.get("creditPoints", 0),
         "gen_ed": raw.get("generalEducation"),
         "level": raw.get("levelNumber"),
-        "description": raw.get("description"),
+        "description": raw.get("description", ""),
         "study_level": raw.get("studyLevel")
     }
 
@@ -114,9 +114,12 @@ def get_enrolment_rules(formatted: dict, raw: dict) -> None:
     """ Retrieves enrolment rules, if any """
     formatted["enrolment_rules"] = ""
     if raw["enrolment_rules"]:
-        formatted["enrolment_rules"] = raw["enrolment_rules"][0].get(
-            "description")
-
+        # There could potentially be multiple enrolment rules (e.g. SENG4920)
+        formatted_rule = ""
+        for rule in raw["enrolment_rules"]:
+            formatted_rule += rule.get("description")
+        
+        formatted["enrolment_rules"] = formatted_rule
 
 if __name__ == "__main__":
     format_course_data()
