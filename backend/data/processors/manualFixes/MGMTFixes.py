@@ -71,7 +71,7 @@ def MGMT_3001():
     "original": "Prerequisite: MGMT1001or COMM1100 or COMM1120 or COMM1170 or 12 units of credit in Business courses<br/><br/>",
     "processed": "MGMT1001or COMM1100 || COMM1120 || COMM1170 || 12UOC in Business courses"
     """
-    return "MGMT1001 || COMM1100 || COMM1120 || COMM1170 || 12UOC F Business"
+    return "MGMT1001 || COMM1100 || COMM1120 || COMM1170 || 12UOC in F Business"
 
 def MGMT_3004():
     return {
