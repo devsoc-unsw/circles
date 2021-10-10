@@ -2,22 +2,13 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Select } from 'antd';
-// import debounce from 'lodash/debounce';
 import { courseOptionsActions } from '../../actions/courseOptionsActions';
-// import { getCourseById } from './courseProvider';
-// import { getAllCourses } from '../../actions/updateCourses';
 
 const { Option } = Select;
 
 export default function SearchCourse(props) {
   const dispatch = useDispatch();
   const history = useHistory();
-  // const courses = useSelector(state => state.updateCourses.courses);
-
-  // useEffect(() => {
-  //   console.log('SEARCH COURSE');
-  //   dispatch(getAllCourses());
-  // }, []);
 
   function onChange(value, { data }) {
     dispatch(courseOptionsActions('APPEND_COURSE', {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import CourseMenu from './CourseMenu';
-import CourseDescription from './CourseDescription';
+import CourseMenu from './courseMenu/CourseMenu';
+import CourseDescription from './courseDescription/CourseDescription';
 import { CourseTabs } from './CourseTabs';
 import './main.less';
 
@@ -11,7 +11,7 @@ export default function CourseSelector() {
       <div className='cs-root'>
         <div className='cs-top-cont'>
           <div className='cs-degree-cont'>
-            <h1 className='text'>{ degree.code } - { degree.name }</h1>
+            <h1 className='text'>{ degree.programCode } - { degree.programName }</h1>
           </div>
         </div>
           <CourseTabs/>

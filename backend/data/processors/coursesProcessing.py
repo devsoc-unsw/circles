@@ -64,6 +64,7 @@ def format_types(processed: dict) -> None:
     else:
         processed["level"] = int(processed["code"][4])
 
+
 def process_terms(processed: dict, formatted: dict) -> None:
     """ Processes terms: e.g. 'Summer Term, Term 2' to ["ST", "T2"]. 
     Terms that do not conform to this (e.g. 'Summer Canberra') are left
