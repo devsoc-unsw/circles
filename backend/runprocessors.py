@@ -41,6 +41,9 @@ except:
     parser.print_help()
     sys.exit(0)
 
+def run_manual_fixes():
+    subprocess.run(['data/processors/manualFixes/runManualFixes.sh'])
+
 run = {
     'program': {
         'scrape': scrape_prg_data,
@@ -59,7 +62,7 @@ run = {
     },
     'condition': {
         'process': preprocess_conditions,
-        'manual': '',
+        'manual': run_manual_fixes,
         'tokenise': tokenise_conditions
     },
     'algorithm': {
@@ -81,9 +84,8 @@ if args.stage == 'all':
         # Conditions
         for s in run[args.type]:
             run[args.type][s]()
-if args.stage == 'manual':
-    # External shell script to run manual fix files
-    subprocess.run(['data/processors/manualFixes/runManualFixes.sh'])
 else:
     # Run the specific process
     run[args.type][args.stage]()
+
+

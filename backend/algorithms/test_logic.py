@@ -4,7 +4,7 @@ ensure our algorithms work as expected.
 If these tests work, we can expect that the core logic works.
 '''
 
-from conditions import *
+from .conditions import *
 import pytest
 
 
@@ -405,3 +405,28 @@ def test_level_course_condition():
     assert (l1_math_6uoc_cond.is_unlocked(user))["result"] == True
     assert (l2_math_12uoc_cond.is_unlocked(user))["result"] == True
     assert (l2_math_18uoc_cond.is_unlocked(user))["result"] == False
+
+
+def test_exclusion():
+    '''Testing that you are properly blocked from taking exclusion courses'''
+    user = create_student_3707_COMPA1()
+    user.add_courses({
+        "COMP1511": (6, None),
+        "COMP1521": (6, None),
+    })
+
+    # Excludes COMP1511
+    comp1010_cond = create_condition(["(", ")"], "COMP1010")
+    assert (comp1010_cond.is_unlocked(user))["result"] == False
+
+    # Excludes COMP1521
+    dpst1092_cond = create_condition(["(", "COMP1511", ")"], "DPST1092")
+    assert (dpst1092_cond.is_unlocked(user))["result"] == False
+
+    # ECON1101 should exclude 3155 and 3521
+    user1 = User()
+    user1.add_program("3155")
+    econ1011_cond = create_condition(["(", ")"], "ECON1101")
+    assert (econ1011_cond.is_unlocked(user1))["result"] == False
+    
+    # TODO: Test exclusion for other types
