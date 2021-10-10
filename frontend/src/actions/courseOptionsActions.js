@@ -1,6 +1,12 @@
 export const courseOptionsActions = (action, payload) => {
     console.log('ACTUZZz', action);
     switch (action) {
+        // NOT IMPLEMENTED IN REDUCER YET.
+        // case 'DELETE':
+        //     return { 
+        //         type: 'DELETE', 
+        //         payload: payload, 
+        //     }
         case 'LOAD_PREV_STATE': 
             return {
                 type: 'LOAD_PREV_STATE', 

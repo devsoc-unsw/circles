@@ -56,12 +56,7 @@ class Structure (BaseModel):
 
 def addSpecialisation(structure, code, type):
     query = {'code': code}
-<<<<<<< HEAD
     spnResult = specialisationsCOL.find_one(query)    
-=======
-    spnResult = specialisationsCOL.find_one(query)
-            
->>>>>>> main
     structure[type] = {'name': spnResult['name']}
     for container in spnResult['curriculum']:
 
@@ -70,46 +65,13 @@ def addSpecialisation(structure, code, type):
 
         item['UOC'] = container['credits_to_complete']
 
-<<<<<<< HEAD
-=======
-        # TODO: complete
-        # item['core'] = container['core'] 
-        # item['levels'] = container['levels']
-
->>>>>>> main
         courseList = []
         item['courses'] = {}
         for course in container['courses']:
             if ' or ' in course:
                 courseList.extend(course.split(' or '))
-<<<<<<< HEAD
             else:
                 item['courses'][course] = container['courses'][course]
-=======
-            elif re.search(r'[A-Z]{4}\d{1}', course):
-                item['courses'][course] = container['courses'][course]
-            else:
-                courseList.append(course)
-        
-        # item['courses'] = {}
-        print(item)
-        for course in courseList:
-            query = {'code': course}
-            courseResult = coursesCOL.find_one(query)
-
-            if not courseResult:
-                # This is new code
-                if len(course) == 5:
-                    coursesList = []
-                    pat = re.compile(r'{}'.format(course), re.I)
-                    result = coursesCOL.find({'code': {'$regex': pat}})
-                    for i in result:
-                        item['courses'][i['code']] = i['title']
-                # This is old code
-                # item['courses'][course] = 1
-            else:
-                item['courses'][course] = courseResult['title']
->>>>>>> main
 
 @router.get("/")
 def specialisations_index():

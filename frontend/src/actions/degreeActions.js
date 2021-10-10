@@ -1,8 +1,8 @@
 export const degreeActions = (action, payload) => {
     switch (action) {
-        case 'SET_PROGRAM': 
+        case 'SET_DEGREE': 
             return {
-                type: 'SET_PROGRAM', 
+                type: 'SET_DEGREE', 
                 payload: payload
             }
         case 'SET_SPECIALISATION': 

@@ -4,12 +4,12 @@ import userReducer from "./userReducer";
 import degreeReducer from "./degreeReducer";
 import plannerReducer from "./plannerReducer";
 import updateCoursesReducer from "./updateCourses"
-import progressionReducer from "./progressionReducer";
+import courseOptionsReducer from "./courseOptionsReducer";
 import courseTabsReducer from "./courseTabsReducer";
 const allReducers = combineReducers({
   degree: degreeReducer,
   tabs: courseTabsReducer,
-  structure: progressionReducer,
+  courseOptions: courseOptionsReducer,
   updateCourses: updateCoursesReducer,
   planner: plannerReducer,
   user: userReducer,
