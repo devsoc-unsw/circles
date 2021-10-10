@@ -34,9 +34,8 @@ export default function CourseDescription() {
 
 
   React.useEffect(() => {
-    console.log(id);
     if (id === 'explore' || id === 'search') return;
-    dispatch(getCourseById(id));
+    // dispatch(getCourseById(id));
     setTimeout(() => {
       setpageLoaded(true);
     }, 5000);

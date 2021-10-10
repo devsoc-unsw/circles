@@ -10,6 +10,6 @@ export const getCourseById = (id) => {
         .then(({ data }) => {
             dispatch(setCourse(data.course));
         })
-        .catch(console.log("Server is broken! TODO: SHow error"));
+        .catch(console.log("Server is broken! TODO: Show error"));
     }
 }

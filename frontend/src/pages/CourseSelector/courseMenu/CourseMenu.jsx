@@ -46,14 +46,13 @@ export default function CourseMenu() {
           <Menu
             className={'text'}
             onClick={() => {}}
-            // style={{ width: '100%'}}
             defaultSelectedKeys={[]}
             selectedKeys={[]}
             defaultOpenKeys={[[...Object.keys(structure)][0]]}
             mode="inline"
           > 
           { [...Object.keys(structure)].map(category => 
-              // Major, Minor, GeneralX
+              // Major, Minor, General
               <SubMenu key={category} title={category}>
               {/* Business core, Flexible core etc */}
               { Object.keys(structure[category]).map(subCategory => 
