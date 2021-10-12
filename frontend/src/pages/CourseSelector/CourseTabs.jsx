@@ -27,13 +27,12 @@ export const CourseTabs = () => {
       <Tabs
         type="editable-card"
         onChange={handleChange}
-        // activeKey={active} 
+        activeKey={`${active}`}
         onEdit={handleEdit}
       >
         {tabs.map((tab, key) => (
           <TabPane 
             tab={tab} key={key} 
-            className={key === active && 'cs-tabs-root-active'} 
             closable={!(tab === 'explore')}
           />
         ))}

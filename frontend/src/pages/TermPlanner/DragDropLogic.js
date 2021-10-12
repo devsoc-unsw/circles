@@ -1,9 +1,7 @@
 import { plannerActions } from "../../actions/plannerActions";
-import { useSelector, useDispatch } from "react-redux";
 
 export const handleOnDragEnd = (result, dragEndProps) => {
-  const { setIsDragging, dispatch, years, startYear, plannedCourses, courses } =
-    dragEndProps;
+  const { setIsDragging, dispatch, years, startYear, courses } = dragEndProps;
 
   setIsDragging(false);
 
@@ -11,6 +9,23 @@ export const handleOnDragEnd = (result, dragEndProps) => {
   let newYears = [...years];
 
   if (!destination) return; // drag outside container
+
+  // check if prereqs are complete, and trigger warning if not
+  let arePrereqsCompleted = checkPrereq(
+    draggableId,
+    destination.droppableId,
+    courses
+  );
+
+  dispatch(
+    // might need to change name
+    plannerActions("MOVE_COURSE", {
+      course: draggableId,
+      term: destination.droppableId,
+      warning: !arePrereqsCompleted,
+    })
+  );
+
   if (
     destination.droppableId === source.droppableId &&
     destination.index === source.index
@@ -19,18 +34,9 @@ export const handleOnDragEnd = (result, dragEndProps) => {
     return;
 
   const destYear = destination.droppableId.match(/[0-9]{4}/)[0];
-  const destTerm = destination.droppableId.match(/t[1-3]/)[0];
+  const destTerm = destination.droppableId.match(/t[0-3]/)[0];
   const destRow = destYear - startYear;
   const destBox = years[destRow][destTerm];
-
-  checkPrereq(
-    draggableId,
-    destination,
-    plannedCourses,
-    courses,
-    dispatch,
-    draggableId
-  );
 
   // === move unplanned course to term ===
   if (source.droppableId.match(/[0-9]{4}/) === null) {
@@ -52,11 +58,12 @@ export const handleOnDragEnd = (result, dragEndProps) => {
     destCoursesCpy.splice(destination.index, 0, draggableId);
     newYears[destRow][destTerm] = destCoursesCpy;
     dispatch(plannerActions("SET_YEARS", newYears));
+
     return;
   }
 
   const srcYear = source.droppableId.match(/[0-9]{4}/)[0];
-  const srcTerm = source.droppableId.match(/t[1-3]/)[0];
+  const srcTerm = source.droppableId.match(/t[0-3]/)[0];
   const srcRow = srcYear - startYear;
   const srcBox = years[srcRow][srcTerm];
 
@@ -79,8 +86,8 @@ export const handleOnDragEnd = (result, dragEndProps) => {
 
   newYears[srcRow][srcTerm] = srcCoursesCpy;
   newYears[destRow][destTerm] = destCoursesCpy;
-
   dispatch(plannerActions("SET_YEARS", newYears));
+  // updateWarnings(newYears, startYear, courses, dispatch);
 };
 
 export const handleOnDragStart = (
@@ -95,20 +102,14 @@ export const handleOnDragStart = (
   setIsDragging(true);
 };
 
-const checkPrereq = (
-  course,
-  destination,
-  plannedCourses,
-  courses,
-  dispatch,
-  draggableId
-) => {
+const checkPrereq = (course, term, courses) => {
   const prereqs = courses.get(course).prereqs;
-  let isPrereqComplete = false;
+  let arePrereqsCompleted = false;
   // for example, expr can be: (COMP1511 || COMP1521 && (COMP1531 || COMP1541);
   const expr = prereqs;
+  if (expr == null) return true;
   if (expr === "") {
-    isPrereqComplete = true;
+    return true;
   } else {
     const exprArray = expr.replace(/ \|\|| \&\&|\(|\)/g, "").split(" ");
     // from above example, exprArray is: [COMP1511, COMP1521, COMP1531, COMP1541]
@@ -120,7 +121,7 @@ const checkPrereq = (
       } else if (courses.get(elem)["plannedFor"] == null) {
         // prereq in unplanned
         isComplete.set(elem, false);
-      } else if (destination.droppableId <= courses.get(elem)["plannedFor"]) {
+      } else if (term <= courses.get(elem)["plannedFor"]) {
         // course placed before (or during) prereq is complete
         isComplete.set(elem, false);
       } else {
@@ -129,23 +130,30 @@ const checkPrereq = (
       }
     });
     const exprWithMap = expr.replace(/([A-Z]+[0-9]+)/g, 'isComplete.get("$1")');
+
     // from above example, exprWithMap is: (isComplete.get(COMP1511) || ...)
-    isPrereqComplete = eval(exprWithMap);
+    arePrereqsCompleted = eval(exprWithMap);
+    return arePrereqsCompleted;
   }
+};
 
-  dispatch(
-    plannerActions("MOVE_COURSE", {
-      course: draggableId,
-      term: destination.droppableId,
-      warning: !isPrereqComplete,
-    })
-  );
-
-  //   dispatch(
-  //     plannerActions("UPDATE_PLANNED_COURSES", {
-  //       course: draggableId,
-  //       term: destination.droppableId,
-  //       warning: warning,
-  //     })
-  //   );
+export const updateWarnings = (years, startYear, courses, dispatch) => {
+  let i = startYear;
+  years.forEach((year) => {
+    for (const term in year) {
+      year[term].forEach((course) => {
+        let termTag = i + term;
+        let arePrereqsCompleted = checkPrereq(course, termTag, courses);
+        // console.log(`${course}: ${!arePrereqsCompleted}`);
+        dispatch(
+          plannerActions("MOVE_COURSE", {
+            course: course,
+            term: termTag,
+            warning: !arePrereqsCompleted,
+          })
+        );
+      });
+    }
+    i += 1;
+  });
 };

@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 export const appendCourse = (payload) => { 
     return { 
         type: 'APPEND', 
@@ -25,18 +23,5 @@ export const setCourse = (payload) => {
     return {
         type: 'SET_COURSE',
         payload: payload
-    }
-}
-
-export const getAllCourses = () => {
-    return (dispatch) => {
-        axios({
-            method: 'get',
-            url: 'http://localhost:3000/courses.json'
-        })
-        .then(({ data }) => {
-            dispatch(setCourses(data));
-        })
-        .catch(console.log);
     }
 }

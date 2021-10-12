@@ -44,10 +44,10 @@ def initialise_course(raw: dict) -> dict:
     return {
         "title": raw.get("title"),
         "code": raw.get("code"),
-        "UOC": raw.get("creditPoints"),
+        "UOC": raw.get("creditPoints", 0),
         "gen_ed": raw.get("generalEducation"),
         "level": raw.get("levelNumber"),
-        "description": raw.get("description"),
+        "description": raw.get("description", ""),
         "study_level": raw.get("studyLevel")
     }
 

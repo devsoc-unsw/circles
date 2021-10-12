@@ -4,7 +4,7 @@ import re
 
 from json import dump
 
-from categories import *
+from algorithms.categories import *
 
 '''Keywords'''
 AND = 1
@@ -12,7 +12,7 @@ OR = 2
 
 
 '''CACHED'''
-CACHED_EXCLUSIONS_PATH = "./cache/exclusions.json"
+CACHED_EXCLUSIONS_PATH = "./algorithms/cache/exclusions.json"
 with open(CACHED_EXCLUSIONS_PATH) as f:
     CACHED_EXCLUSIONS = json.load(f)
     f.close()

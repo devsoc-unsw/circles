@@ -4,6 +4,7 @@ from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel, create_model
 import re
+import collections
 
 router = APIRouter(
     prefix='/api',
@@ -55,9 +56,8 @@ class Structure (BaseModel):
 
 def addSpecialisation(structure, code, type):
     query = {'code': code}
-    spnResult = specialisationsCOL.find_one(query)
-            
-    structure[type] = {}
+    spnResult = specialisationsCOL.find_one(query)    
+    structure[type] = {'name': spnResult['name']}
     for container in spnResult['curriculum']:
 
         structure[type][container['title']] = {}
@@ -65,27 +65,13 @@ def addSpecialisation(structure, code, type):
 
         item['UOC'] = container['credits_to_complete']
 
-        # TODO: complete
-        # item['core'] = container['core'] 
-        # item['levels'] = container['levels']
-
         courseList = []
+        item['courses'] = {}
         for course in container['courses']:
             if ' or ' in course:
                 courseList.extend(course.split(' or '))
             else:
-                courseList.append(course)
-        
-        item['courses'] = {}
-        print(item)
-        for course in courseList:
-            query = {'code': course}
-            courseResult = coursesCOL.find_one(query)
-
-            if not courseResult:
-                item['courses'][course] = 1
-            else:
-                item['courses'][course] = courseResult['title']
+                item['courses'][course] = container['courses'][course]
 
 @router.get("/")
 def specialisations_index():
@@ -549,21 +535,36 @@ def getStructure(programCode, major="Default", minor="Default"):
         if "credits_to_complete" in programsResult['components']['NonSpecialisationData'][container]:
             structure['General'][container]['UOC'] = programsResult['components']['NonSpecialisationData'][container]['credits_to_complete']
         else:
+            # Not all program containers have credit points associated with them
             structure['General'][container]['UOC'] = -1
         
-        for course in programsResult['components']['NonSpecialisationData'][container]:
-            if re.search(r'[A-Z]{4}\d{4}', course):
-                query = {'code': course}
-                courseResult = coursesCOL.find_one(query)
-                
-                if courseResult:
-                    structure['General'][container][course] = courseResult['title']
-                else:
-                    structure['General'][container][course] = 1
+        for course, title in programsResult['components']['NonSpecialisationData'][container].items():
+            # Add course data: e.g. { "COMP1511": "Programming Fundamentals"  }
+            if course == "type" or course == "credits_to_complete":
+                continue
+            structure['General'][container][course] = title
 
         if 'FE' in programsResult['components']:
-            structure['General']['FlexEducation'] = {'UOC': programsResult['components']['FE']['credits_to_complete']}
+            structure['General']['FlexEducation'] = {'UOC': programsResult['components']['FE']['credits_to_complete'],
+                                                     'description': 'students can take a maximunm of {} UOC of free electives'.format(programsResult['components']['FE']['credits_to_complete'])}
         if 'GE' in programsResult['components']:
-            structure['General']['GeneralEducation'] = {'UOC': programsResult['components']['GE']['credits_to_complete']}
+            structure['General']['GeneralEducation'] = {'UOC': programsResult['components']['GE']['credits_to_complete'],
+                                                        'description': 'any general education course'}
 
     return {'structure': structure}
+
+@router.get("/searchCourse/{string}")
+def search(string):
+    dictionary = {}
+    pat = re.compile(r'{}'.format(string), re.I)
+    result = coursesCOL.find({'code': {'$regex': pat}})
+    for i in result:
+        dictionary[i['code']] = i['title']
+    result = coursesCOL.find({'title': {'$regex': pat}})
+
+    for i in result:
+        if i['code'] not in dictionary:
+            dictionary[i['code']] = i['title']
+
+    # dictionary = collections.OrderedDict(sorted(dictionary.items()))
+    return dictionary

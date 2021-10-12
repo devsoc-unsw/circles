@@ -3,8 +3,6 @@ import { Skeleton } from "antd";
 
 function SkeletonPlanner() {
   const skeletonTermStyle = {
-    //     height: "20em",
-    //     width: "85%",
     width: "20em",
     height: "18em",
     margin: "1em",
@@ -70,7 +68,6 @@ function SkeletonPlanner() {
           shape="round"
           style={skeletonTermStyle}
         />
-        {/* <Skeleton.Button style={skeletonTermStyle} className="termBox" /> */}
       </div>
     </div>
   );

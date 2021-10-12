@@ -61,7 +61,8 @@ def format_types(processed: dict) -> None:
 
     if processed["level"] is not None:
         processed["level"] = int(processed["level"])
-
+    else:
+        processed["level"] = int(processed["code"][4])
 
 def process_terms(processed: dict, formatted: dict) -> None:
     """ Processes terms: e.g. 'Summer Term, Term 2' to ["ST", "T2"]. 
