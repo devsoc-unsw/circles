@@ -5,6 +5,9 @@ from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel, create_model
 import re
 import collections
+import pickle 
+from algorithms.conditions import User
+from typing import Dict 
 
 router = APIRouter(
     prefix='/api',
@@ -58,7 +61,20 @@ class UserData(BaseModel):
     program: str 
     specialisations: list
     courses: dict
-    year: int 
+    year: int
+
+class CourseState (BaseModel):
+    is_accurate: bool 
+    unlocked: bool
+    handbook_note: str 
+    warnings: list
+
+class CoursesState (BaseModel):
+    courses_state: Dict[str, CourseState] = {}
+
+CONDITIONS_PATH = "algorithms/conditions.pkl"
+with open(CONDITIONS_PATH, "rb") as file:
+    conditions = pickle.load(file)
 
 def addSpecialisation(structure, code, type):
     query = {'code': code}
@@ -575,25 +591,46 @@ def search(string):
     # dictionary = collections.OrderedDict(sorted(dictionary.items()))
     return dictionary
 
-@router.get("/getAllUnlocked/", response_model=minors,
+@router.post("/getAllUnlocked/", response_model=CoursesState,
             responses={
                 404: {"model": message, "description": "You broke it"},
                 200: {
-                    "description": "Returns all minors to the given code",
+                    "description": "Returns all unlocked courses for the user",
                     "content": {
                         "application/json": {
                             "example": {
-                                "minors": {
-                                    "INFSA2": 1,
-                                    "ACCTA2": 1,
-                                    "PSYCM2": 1,
-                                    "MARKA2": 1,
-                                    "FINSA2": 1,
-                                    "MATHC2": 1
+                                "COMP9302": {
+                                    "is_accurate": True,
+                                    "unlocked": True,
+                                    "handbook_note": "This course can only be taken in the final term of your program.",
+                                    "warnings": []
                                 }
                             }
                         }
                     }
                 }
             })
-def getAllUnlocked(user: UserData):
+def getAllUnlocked(userData: UserData):
+    user = User(userData.dict())
+
+    coursesState = {}
+    
+    for course, condition in conditions.items():
+        if condition:
+            isAccurate = True
+            state = condition.is_unlocked(user)
+            unlocked = state['result']
+            warnings = state['warnings']
+        else: 
+            isAccurate = False 
+            unlocked = True 
+            warnings = []
+
+        coursesState[course] = {
+            "is_accurate": isAccurate,
+            "unlocked": unlocked,
+            "handbook_note": "",
+            "warnings": warnings          
+        }
+
+    return {'courses_state': coursesState}
