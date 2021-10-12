@@ -54,6 +54,12 @@ class course (BaseModel):
 class Structure (BaseModel):
     structure: dict
 
+class UserData(BaseModel):
+    program: str 
+    specialisations: list
+    courses: dict
+    year: int 
+
 def addSpecialisation(structure, code, type):
     query = {'code': code}
     spnResult = specialisationsCOL.find_one(query)    
@@ -568,3 +574,26 @@ def search(string):
 
     # dictionary = collections.OrderedDict(sorted(dictionary.items()))
     return dictionary
+
+@router.get("/getAllUnlocked/", response_model=minors,
+            responses={
+                404: {"model": message, "description": "You broke it"},
+                200: {
+                    "description": "Returns all minors to the given code",
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                "minors": {
+                                    "INFSA2": 1,
+                                    "ACCTA2": 1,
+                                    "PSYCM2": 1,
+                                    "MARKA2": 1,
+                                    "FINSA2": 1,
+                                    "MATHC2": 1
+                                }
+                            }
+                        }
+                    }
+                }
+            })
+def getAllUnlocked(user: UserData):
