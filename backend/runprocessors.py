@@ -4,6 +4,7 @@ in order to run the relevant drivers'''
 import sys
 import argparse
 import glob
+import subprocess 
 
 from data.scrapers.programsScraper import scrape_programs as scrape_prg_data
 from data.scrapers.specialisationsScraper import scrape_spn_data
@@ -40,6 +41,9 @@ except:
     parser.print_help()
     sys.exit(0)
 
+def run_manual_fixes():
+    subprocess.run(['data/processors/manualFixes/runManualFixes.sh'])
+
 run = {
     'program': {
         'scrape': scrape_prg_data,
@@ -58,7 +62,7 @@ run = {
     },
     'condition': {
         'process': preprocess_conditions,
-        # 'manual': fix_conditions
+        'manual': run_manual_fixes,
         'tokenise': tokenise_conditions
     },
     'algorithm': {
@@ -75,11 +79,13 @@ if args.stage == 'all':
             f"Careful. You are about to run all stages of {args.type} INCLUDING the scrapers... Enter 'y' if you wish to proceed or 'n' to cancel: ")
         if res == 'y':
             for s in run[args.type]:
-                run[args.stage][s]()
+                run[args.type][s]()
     else:
         # Conditions
         for s in run[args.type]:
-            run[args.stage][s]
+            run[args.type][s]()
 else:
     # Run the specific process
     run[args.type][args.stage]()
+
+
