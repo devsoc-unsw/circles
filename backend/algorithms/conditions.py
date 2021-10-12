@@ -14,7 +14,6 @@ from .categories import *
 AND = 1
 OR = 2
 
-
 '''CACHED'''
 CACHED_EXCLUSIONS_PATH = "./algorithms/cache/exclusions.json"
 with open(CACHED_EXCLUSIONS_PATH) as f:
