@@ -4,7 +4,7 @@ import re
 
 from json import dump
 
-from algorithms.categories import *
+from .categories import *
 
 '''Keywords'''
 AND = 1
