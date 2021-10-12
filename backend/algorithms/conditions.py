@@ -5,7 +5,7 @@ from their logical tokens.
 import sys
 import json
 import re
-
+import json
 from json import dump
 
 from .categories import *
@@ -23,13 +23,19 @@ with open(CACHED_EXCLUSIONS_PATH) as f:
 class User:
     '''A user and their data which will be used to determine if they can take a course'''
 
-    def __init__(self):
+    def __init__(self, data=None):
+        # Will load the data if any was given
         self.courses = {}
         self.program = None  # NOTE: For now this is only single degree
         self.specialisations = {}
         self.uoc = 0
         self.wam = None
         self.year = 0  # TODO
+
+        if data != None:
+            # Data was provided
+            self.load_json(data)
+
 
     def add_courses(self, courses):
         '''Given a dictionary of courses mapping course code to a (uoc, grade) tuple,
@@ -77,6 +83,30 @@ class User:
     def in_specialisation(self, specialisation):
         '''Determines if the user is in the specialisation'''
         return specialisation in self.specialisations
+
+    def load_json(self, data):
+        '''Given the user data, correctly loads it into this user class'''
+        
+        self.program = data['program']
+        self.specialisations = data['specialisations']
+        self.courses = data['courses']
+        self.year = data['year']
+
+        '''calculate wam and uoc'''
+        # Subtract uoc of the courses without mark when dividing
+        uocfixer = 0
+        for c in self.courses:
+            self.uoc += self.courses[c][0]
+            if type(self.courses[c][1]) != type(1):
+                uocfixer += self.courses[c][0]
+                continue
+            if self.wam is None:
+                self.wam = 0
+            self.wam += self.courses[c][0] * self.courses[c][1]
+        if self.wam is not None:
+            self.wam /= (self.uoc - uocfixer)
+        
+        return
 
     def get_grade(self, course):
         '''Given a course which the student has taken, returns their grade (or None for no grade'''
