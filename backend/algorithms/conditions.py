@@ -1,22 +1,24 @@
+'''
+Contains the User and Conditions classes as well as the function to create Conditions
+from their logical tokens.
+'''
 import sys
 import json
 import re
 
 from json import dump
 
-from algorithms.categories import *
+from .categories import *
 
 '''Keywords'''
 AND = 1
 OR = 2
-
 
 '''CACHED'''
 CACHED_EXCLUSIONS_PATH = "./algorithms/cache/exclusions.json"
 with open(CACHED_EXCLUSIONS_PATH) as f:
     CACHED_EXCLUSIONS = json.load(f)
     f.close()
-
 
 class User:
     '''A user and their data which will be used to determine if they can take a course'''
@@ -504,4 +506,4 @@ def read_data(file_name):
     except:
         print(f"File {file_name} not found")
         sys.exit(1)
-        
+    
