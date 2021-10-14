@@ -113,13 +113,23 @@ class User:
         return self.courses[course][1]
 
     def unselect_course(self, target):
+        """Given a course to unselect, removes all the courses which would be affected by it
+        and returns all the courses remaining in the aftermath"""
         if target not in self.courses:
+            # Can't unselect a course which we haven't taken...
             return self.courses
-        self.courses = self.courses.remove(target)
-        for i in self.courses:
-            cond = condition_of_i from database
-            if cond.validate(self) is False:
-                self.courses = self.unselect_course(i)
+        
+        # First remove this course from our database (updating overall UOC and WAM)
+        affected = []
+        del self.courses[target]
+    
+
+        # Go through all the courses and if we find a course which is now no longer valid, we unselect it
+        for course in self.courses:
+            cond =
+            if (cond.is_unlocked(self))["result"] is False:
+                self.unselect_course(course)
+
         return self.courses
 
 class CourseCondition():
