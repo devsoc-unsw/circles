@@ -112,6 +112,16 @@ class User:
         '''Given a course which the student has taken, returns their grade (or None for no grade'''
         return self.courses[course][1]
 
+    def unselect_course(self, target):
+        if target not in self.courses:
+            return self.courses
+        self.courses = self.courses.remove(target)
+        for i in self.courses:
+            cond = condition_of_i from database
+            if cond.validate(self) is False:
+                self.courses = self.unselect_course(i)
+        return self.courses
+
 class CourseCondition():
     '''Condition that the student has completed this course'''
 
