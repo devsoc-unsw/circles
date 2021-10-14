@@ -6,7 +6,7 @@ import sys
 import json
 import re
 import json
-from json import dump
+import pickle
 
 from .categories import *
 
@@ -15,10 +15,18 @@ AND = 1
 OR = 2
 
 '''CACHED'''
+# Load in cached exclusions
 CACHED_EXCLUSIONS_PATH = "./algorithms/cache/exclusions.json"
 with open(CACHED_EXCLUSIONS_PATH) as f:
     CACHED_EXCLUSIONS = json.load(f)
     f.close()
+
+# Load in cached condition objects
+CACHED_CONDITIONS_PATH = "./algorithms/conditions.pkl"
+with open(CACHED_CONDITIONS_PATH, "rb") as f:
+    CACHED_CONDITIONS = pickle.load(f)
+    f.close()
+
 
 class User:
     '''A user and their data which will be used to determine if they can take a course'''
@@ -112,23 +120,55 @@ class User:
         '''Given a course which the student has taken, returns their grade (or None for no grade'''
         return self.courses[course][1]
 
+    def update_wam_uoc(self):
+        """Calculates and sets the overall wam and uoc of the user from their courses. 
+        NOTE: This actually changes the user's wam, not simply a getter method"""
+        if not self.courses:
+            # No courses
+            self.wam = None
+            self.uoc = 0
+            return
+        
+        total_wam = 0
+        eligible_uoc = 0 # uoc which counts towards wam
+        self.uoc = 0 # Resets the uoc
+        for course, (uoc, grade) in self.courses.items():
+            # Update the uoc as we go whils getting the total and eligible uoc
+            self.uoc += uoc
+            if total_wam is not None:
+                eligible_uoc += uoc
+                total_wam += uoc * grade
+        
+        if eligible_uoc == 0:
+            self.wam = None
+        else:
+            # Divide to get the overall wam
+            self.wam = total_wam / eligible_uoc
+
+
     def unselect_course(self, target):
-        """Given a course to unselect, removes all the courses which would be affected by it
-        and returns all the courses remaining in the aftermath"""
-        if target not in self.courses:
+        """Given a course to unselect, removes it and all the courses which would 
+        be affected by it and returns all the courses remaining in the aftermath"""
+        if not self.has_taken_course(target):
             # Can't unselect a course which we haven't taken...
             return self.courses
         
         # First remove this course from our database (updating overall UOC and WAM)
         affected = []
         del self.courses[target]
-    
+        self.update_wam_uoc()
 
         # Go through all the courses and if we find a course which is now no longer valid, we unselect it
         for course in self.courses:
-            cond =
-            if (cond.is_unlocked(self))["result"] is False:
-                self.unselect_course(course)
+            if course in CACHED_CONDITIONS and CACHED_CONDITIONS[course] != None:
+                # Get the condition and recursively unselect the course
+                cond = CACHED_CONDITIONS[course]
+                if (cond.is_unlocked(self))["result"] is False:
+                    self.unselect_course(course)
+            else:
+                # NOTE: We either do not have a condition for this course or our 
+                # algorithm could not parse this condition object properly
+                continue
 
         return self.courses
 
