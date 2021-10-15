@@ -55,6 +55,7 @@ const initialState = {
   ],
   courses: dummyMap,
   plannedCourses: plannedCourses,
+  completedTerms: new Map(),
 };
 const plannerReducer = (state = initialState, action) => {
   console.log(state.startYear, state.numYears);
@@ -75,13 +76,13 @@ const plannerReducer = (state = initialState, action) => {
         courses: new Map([...state.courses, ...action.payload]),
       };
     case "SET_YEARS":
-      return { ...state, years: action.payload };
-
+      return { ...state, numYears: action.payload };
+    case "SET_START_YEAR":
+      return { ...state, startYear: action.payload };
     case "SET_UNPLANNED":
       let newUnplanned = state.unplanned.filter(
         (course) => course !== action.payload
       );
-      console.log(newUnplanned);
       return { ...state, unplanned: newUnplanned };
     case "REMOVE_ALL_UNPLANNED":
       return { ...state, unplanned: action.payload };
@@ -160,7 +161,6 @@ const plannerReducer = (state = initialState, action) => {
       nYear[termI] = nTerm;
       const nYears = new Object(state.years);
       nYears[yearI] = nYear;
-      // console.log(nYears);
 
       const nCourses = new Object(state.courses);
       nCourses.get(action.payload).plannedFor = null;
@@ -174,6 +174,13 @@ const plannerReducer = (state = initialState, action) => {
       };
     case "TOGGLE_SUMMER":
       return { ...state, isSummerEnabled: !state.isSummerEnabled };
+    case "TOGGLE_TERM_COMPLETE":
+      const clonedCompletedTerms = new Map(state.completedTerms);
+      let isCompleted = clonedCompletedTerms.get(action.payload);
+      // if it doesnt exist in map, then the term is not completed
+      if (isCompleted == null) isCompleted = false;
+      clonedCompletedTerms.set(action.payload, !isCompleted);
+      return { ...state, completedTerms: clonedCompletedTerms };
     default:
       return state;
   }

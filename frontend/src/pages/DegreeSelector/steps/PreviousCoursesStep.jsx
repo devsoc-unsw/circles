@@ -14,7 +14,6 @@ const TermBox = ({ yearIndex, termNo }) => {
     const [courses, setCourses] = React.useState([]);
 
     const handleSave = () => {
-        console.log('temp');
         setLoading(true);
         // dispatch 
         // promise.all to get all the information about each added course 
@@ -35,7 +34,6 @@ const TermBox = ({ yearIndex, termNo }) => {
         }, 2000)
     };
 
-    console.log(planner[yearIndex], termNo);
     return (
         <>
         <div className="termBox steps-term">
