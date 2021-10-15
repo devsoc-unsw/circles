@@ -44,7 +44,9 @@ const TermBox = ({ yearIndex, termNo }) => {
                     onClick={() => setOpen(true)}    
                 />
             </Tooltip>
-            { courses.map((course) => <div className="text">{course.value}</div>) }
+            <div className="steps-term-box">
+                { courses.map((course) => <div className="text course">{course.value}</div>) }
+            </div>
             {/* Term Box! {yearIndex} {termNo} */}
         </div>
             <Modal className='step-modal' title='Add courses'
