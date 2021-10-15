@@ -44,8 +44,9 @@ const DebounceSelect = ({ fetchOptions, debounceTimeout = 800, ...props }) => {
 } // Usage of DebounceSelect
 
 
-export default function DebouncingSelect() {
+export default function DebouncingSelect({ setPlannedCourses }) {
   const [value, setValue] = useState([]);
+  setPlannedCourses(value);
 
   const dispatch = useDispatch();
   const courses = useSelector(state => state.updateCourses.courses);

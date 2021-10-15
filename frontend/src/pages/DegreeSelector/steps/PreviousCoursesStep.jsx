@@ -11,6 +11,7 @@ const TermBox = ({ yearIndex, termNo }) => {
     const planner = useSelector(store => store.planner.years);
     const [open, setOpen] = React.useState(false);
     const [loading, setLoading] = React.useState(false);
+    const [courses, setCourses] = React.useState([]);
 
     const handleSave = () => {
         console.log('temp');
@@ -45,7 +46,8 @@ const TermBox = ({ yearIndex, termNo }) => {
                     onClick={() => setOpen(true)}    
                 />
             </Tooltip>
-            Term Box! {yearIndex} {termNo}
+            { courses.map((course) => <div className="text">{course.value}</div>) }
+            {/* Term Box! {yearIndex} {termNo} */}
         </div>
             <Modal className='step-modal' title='Add courses'
                 onCancel={() => setOpen(false)}
@@ -61,9 +63,11 @@ const TermBox = ({ yearIndex, termNo }) => {
                     </Button>
                 ]}
             >
+                {JSON.stringify(planner)}
+                {yearIndex}-{termNo}
                 {/* { planner[yearIndex][termNo].map((course) => <div>{course}</div>) } */}
                 {/* @Gabriella add search here. Show result onclick. and be able to delete */}
-                <DebouncingSelect/>
+                <DebouncingSelect setPlannedCourses={setCourses}/>
             </Modal>
         </>
     )
@@ -90,7 +94,7 @@ export const PreviousCoursesStep = () => {
                     <div className="steps-grid-item">{parseInt(startYear) + yearNo}</div>
                     {[...Array(4)].map((_, termNo) => {
                         // Get the courses in the term 
-                        const term = 't' + (termNo + 1).toString();
+                        const term = 't' + (termNo).toString();
                         return <TermBox yearIndex={yearNo} termNo={term}/>
                     })}
                 </div>
