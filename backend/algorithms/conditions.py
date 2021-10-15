@@ -599,7 +599,10 @@ def get_grade(text):
 
 def is_program(text):
     '''Determines if the text is a program code'''
-    if re.match(r'^\d{4}', text):
+    if re.match(r'^\d{4}', text) or re.match(r'^[A-Z]{5}\d{5}', text):
+        # Matches standard program codes such as 3707 and also co-op program codes
+        # which we most likely won't be dealing with but I've included here so
+        # it at least creates the condition object instead of erroring
         return True
     return False
 
