@@ -4,49 +4,57 @@
 		"faculty": "UNSW Business School",
 		"name": "COMM 1100: Business Decision Making",
 		"UOC": 6,
-		"state": "Completed"
+		"state": "Completed",
+		"time": "2021 T1"
 	  },
 	  {
 		"faculty": "UNSW Business School",
 		"name": "COMM 1110: Evidence-Based Problem Solving",
 		"UOC": 6,
-		"state": "Completed"
+		"state": "Completed",
+		"time": "2021 T1"
 	  },
 	  {
 		"faculty": "UNSW Business School",
 		"name": "COMM 1120: Collaboration and Innovation in Business",
 		"UOC": 6,
-		"state": "Planned"
+		"state": "Planned",
+		"time": "2022 T2"
 	  },
 	  {
-		"faculty": "UNSW Business School",
+		"faculty": "School of Computer Science and Engineering",
 		"name": "COMM 1140: Financial Management",
 		"UOC": 6,
-		"state": "Completed"
+		"state": "Completed",
+		"time": "2021 T2"
 	  },
 	  {
 		"faculty": "UNSW Business School",
 		"name": "COMM 1150: Global Business Environments",
 		"UOC": 6,
-		"state": "Unplanned"
+		"state": "Unplanned",
+		"time": "-"
 	  },
 	  {
-		"faculty": "UNSW Business School",
+		"faculty": "School of Computer Science and Engineering",
 		"name": "COMM 1170: Organisational Resources",
 		"UOC": 6,
-		"state": "Planned"
+		"state": "Planned",
+		"time": "2022 T3"
 	  },
 	  {
 		"faculty": "UNSW Business School",
 		"name": "COMM 1180: Value Creation",
 		"UOC": 6,
-		"state": "Planned"
+		"state": "Planned",
+		"time": "2022 T3"
 	  },
 	  {
-		"faculty": "UNSW Business School",
+		"faculty": "School of Computer Science and Engineering",
 		"name": "COMM 1190: Data, Insights and Decisions",
 		"UOC": 6,
-		"state": "Completed"
+		"state": "Completed",
+		"time": "2021 T2"
 	  }
 	],
 	"disciplineelectives": [ 
