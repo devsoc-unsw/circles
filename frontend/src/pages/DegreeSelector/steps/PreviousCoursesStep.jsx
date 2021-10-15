@@ -61,8 +61,6 @@ const TermBox = ({ yearIndex, termNo }) => {
                     </Button>
                 ]}
             >
-                {JSON.stringify(planner)}
-                {yearIndex}-{termNo}
                 {/* { planner[yearIndex][termNo].map((course) => <div>{course}</div>) } */}
                 {/* @Gabriella add search here. Show result onclick. and be able to delete */}
                 <DebouncingSelect setPlannedCourses={setCourses}/>
