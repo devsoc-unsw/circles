@@ -21,11 +21,20 @@ with open(CACHED_EXCLUSIONS_PATH) as f:
     CACHED_EXCLUSIONS = json.load(f)
     f.close()
 
-# Load in cached condition objects
-CACHED_CONDITIONS_PATH = "./algorithms/conditions.pkl"
-with open(CACHED_CONDITIONS_PATH, "rb") as f:
-    CACHED_CONDITIONS = pickle.load(f)
+CACHED_CONDITIONS_TOKENS_PATH = "./data/finalData/conditionsTokens.json"
+with open(CACHED_CONDITIONS_TOKENS_PATH) as f:
+    CACHED_CONDITIONS_TOKENS = json.load(f)
     f.close()
+
+
+# Load in cached condition objects
+# NOTE: Does not work due to how pickle works with imports
+# Instead, we will load the condition tokens, then load the necessary condition
+# objects inside our functions
+# CACHED_CONDITIONS_PATH = "./algorithms/conditions.pkl"
+# with open(CACHED_CONDITIONS_PATH, "rb") as f:
+#     CACHED_CONDITIONS = pickle.load(f)
+#     f.close()
 
 
 class User:
@@ -146,31 +155,48 @@ class User:
             self.wam = total_wam / eligible_uoc
 
 
-    def unselect_course(self, target):
-        """Given a course to unselect, removes it and all the courses which would 
-        be affected by it and returns all the courses remaining in the aftermath"""
+    def unselect_course(self, target, locked):
+        """Given a course to unselect and a list of locked courses, remove the courses
+        from the user and return a list of courses which would be affected by the unselection"""
         if not self.has_taken_course(target):
-            # Can't unselect a course which we haven't taken...
-            return self.courses
-        
+            # Nothing would be affected by unselecting this course since we never
+            # took this course in the first place...
+            return []
+
+        # Load all the necessary conditions
+        cached_conditions = {} # Mapping course to condition object
+        for course in self.courses:
+            if course in locked:
+                # Do not bother creating condition for a locked course
+                continue
+            else:
+                cached_conditions[course] = create_condition(CACHED_CONDITIONS_TOKENS[course], course)
+                
         # First remove this course from our database (updating overall UOC and WAM)
-        affected = []
         del self.courses[target]
         self.update_wam_uoc()
 
-        # Go through all the courses and if we find a course which is now no longer valid, we unselect it
-        for course in self.courses:
-            if course in CACHED_CONDITIONS and CACHED_CONDITIONS[course] != None:
-                # Get the condition and recursively unselect the course
-                cond = CACHED_CONDITIONS[course]
-                if (cond.is_unlocked(self))["result"] is False:
-                    self.unselect_course(course)
-            else:
-                # NOTE: We either do not have a condition for this course or our 
-                # algorithm could not parse this condition object properly
-                continue
+        affected_courses = []
+        # Brute force loop through all courses and if we find a course which is
+        # no longer unlocked, we unselect it, add it to the affected course list,
+        # then restart loop.
 
-        return self.courses
+        while True:
+            for course in self.courses:
+                if course in cached_conditions and cached_conditions[course] != None:
+                    # The course is not locked and there exists a condition
+                    cond = cached_conditions[course]
+                    if (cond.is_unlocked(self))["result"] is False:
+                        # This course is no longer selectable due to our unselection
+                        affected_courses.append(course)
+                        del self.courses[course]
+                        self.update_wam_uoc()
+                        break
+            # Reaching this point means all the courses remaining are either locked
+            # courses or can still be selected.
+            break
+        
+        return affected_courses.sort()
 
 class CourseCondition():
     '''Condition that the student has completed this course'''
