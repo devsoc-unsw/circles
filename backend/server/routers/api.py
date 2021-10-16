@@ -5,6 +5,9 @@ from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel, create_model
 import re
 import collections
+import pickle 
+from algorithms.conditions import User
+from typing import Dict 
 
 router = APIRouter(
     prefix='/api',
@@ -53,6 +56,25 @@ class course (BaseModel):
 
 class Structure (BaseModel):
     structure: dict
+
+class UserData(BaseModel):
+    program: str 
+    specialisations: list
+    courses: dict
+    year: int
+
+class CourseState (BaseModel):
+    is_accurate: bool 
+    unlocked: bool
+    handbook_note: str 
+    warnings: list
+
+class CoursesState (BaseModel):
+    courses_state: Dict[str, CourseState] = {}
+
+CONDITIONS_PATH = "algorithms/conditions.pkl"
+with open(CONDITIONS_PATH, "rb") as file:
+    conditions = pickle.load(file)
 
 def addSpecialisation(structure, code, type):
     query = {'code': code}
@@ -568,3 +590,60 @@ def search(string):
 
     # dictionary = collections.OrderedDict(sorted(dictionary.items()))
     return dictionary
+
+
+@router.post("/getAllUnlocked/", response_model=CoursesState,
+            responses={
+                404: {"model": message, "description": "Uh oh you broke me"},
+                200: {
+                    "description": "Returns the state of all the courses",
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                "COMP9302": {
+                                    "is_accurate": True,
+                                    "unlocked": True,
+                                    "handbook_note": "This course can only be taken in the final term of your program.",
+                                    "warnings": []
+                                }
+                            }
+                        }
+                    }
+                }
+            })
+def getAllUnlocked(userData: UserData, lockedCourses: list):
+    """Given the userData and a list of locked courses, returns the state of all
+    the courses. Note that locked courses always return as True with no warnings
+    since it doesn't make sense for us to tell the user they can't take a course
+    that they have already completed"""
+    user = User(userData.dict())
+
+    coursesState = {}
+    
+    for course, condition in conditions.items():
+        if course in lockedCourses:
+            # Always True
+            isAccurate = True
+            unlocked = True
+            warnings = []
+        elif condition:
+            # Condition object exists for this course
+            isAccurate = True
+            state = condition.is_unlocked(user)
+            unlocked = state['result']
+            warnings = state['warnings']
+        else: 
+            # Condition object does not exist for this course. True by default
+            # but warn the user the info might be inaccurate
+            isAccurate = False 
+            unlocked = True 
+            warnings = []
+
+        coursesState[course] = {
+            "is_accurate": isAccurate,
+            "unlocked": unlocked,
+            "handbook_note": "", # TODO: Cache handbook notes
+            "warnings": warnings          
+        }
+
+    return {'courses_state': coursesState}

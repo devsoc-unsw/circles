@@ -6,7 +6,6 @@ import sys
 import json
 import re
 import json
-import pickle
 
 from .categories import *
 
