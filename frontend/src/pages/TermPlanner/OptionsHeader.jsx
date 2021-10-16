@@ -13,8 +13,6 @@ import { TiDownload } from "react-icons/ti";
 const OptionsHeader = ({ areYearsHidden, unhideAll, plannerRef }) => {
   const theme = useSelector((state) => state.theme);
 
-  const [menu, setMenu] = React.useState("");
-
   return (
     <div className="optionsHeader">
       <Tippy
@@ -26,7 +24,7 @@ const OptionsHeader = ({ areYearsHidden, unhideAll, plannerRef }) => {
         zIndex={1}
         placement="bottom-start"
       >
-        <button onClick={() => setMenu("settings")} className="settingsButton">
+        <button className="settingsButton">
           <IoCogSharp
             className="settingsIcon"
             size="1.5em"
@@ -46,7 +44,7 @@ const OptionsHeader = ({ areYearsHidden, unhideAll, plannerRef }) => {
         zIndex={1}
         placement="bottom-start"
       >
-        <button onClick={() => setMenu("export")} className="settingsButton">
+        <button className="settingsButton">
           <TiDownload
             className="settingsIcon"
             size="1.5em"
