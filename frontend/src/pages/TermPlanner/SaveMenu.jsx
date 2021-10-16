@@ -24,10 +24,11 @@ const SaveMenu = ({ plannerRef }) => {
     if (format === "png")
       exportComponentAsPNG(plannerRef, {
         fileName: "Term Planner",
-        x: 100,
-        y: 100,
       });
-    if (format === "jpg") exportComponentAsJPEG(plannerRef);
+    if (format === "jpg")
+      exportComponentAsJPEG(plannerRef, {
+        fileName: "Term Planner",
+      });
   };
 
   return (
