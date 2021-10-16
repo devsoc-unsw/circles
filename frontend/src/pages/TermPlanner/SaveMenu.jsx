@@ -15,9 +15,6 @@ import {
 const SaveMenu = ({ plannerRef }) => {
   const { Title } = Typography;
   const { Option } = Select;
-  const { isSummerEnabled } = useSelector((state) => {
-    return state.planner;
-  });
 
   const exportFormats = ["png", "jpg"];
 
