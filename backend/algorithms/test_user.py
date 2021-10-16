@@ -1,11 +1,11 @@
 '''Testing the user class to ensure that the user data is accurately imported and updated'''
 
-from conditions import User
+from .conditions import User
 from math import isclose
 import pytest
 import json
 
-PATH = "./exampleUsers.json"
+PATH = "./algorithms/exampleUsers.json"
 
 
 with open(PATH) as f:

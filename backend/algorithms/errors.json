@@ -1,16 +1,4 @@
 {
-    "ACCT2101": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in Accounting Co-op Major (ACCTB13554)<br/><br/>",
-            "processed": "ACCTB13554"
-        },
-        "tokens": [
-            "(",
-            "ACCTB13554",
-            ")"
-        ],
-        "broke at": "Index 1, ACCTB13554"
-    },
     "ACCT2522": {
         "condition": {
             "original": "Prerequisite: ACCT1511 or Corequisite: ACCT2511<br/><br/>",
@@ -24,30 +12,6 @@
             ")"
         ],
         "broke at": "Index 3, [ACCT2511]"
-    },
-    "ACCT3202": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in Accounting Co-op Major (ACCTB13554)<br/><br/>",
-            "processed": "ACCTB13554"
-        },
-        "tokens": [
-            "(",
-            "ACCTB13554",
-            ")"
-        ],
-        "broke at": "Index 1, ACCTB13554"
-    },
-    "ACCT3303": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in Accounting Co-op Major (ACCTB13554)<br/><br/>",
-            "processed": "ACCTB13554"
-        },
-        "tokens": [
-            "(",
-            "ACCTB13554",
-            ")"
-        ],
-        "broke at": "Index 1, ACCTB13554"
     },
     "ACTL1101": {
         "condition": {
@@ -11480,7 +11444,7 @@
             "FINSBH3565",
             ")"
         ],
-        "broke at": "Index 1, FINSD13554"
+        "broke at": "Index 3, FINSBH3565"
     },
     "FINS2622": {
         "condition": {
@@ -11512,7 +11476,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, FINS2101"
+        "broke at": "Index 3, ("
     },
     "FINS3303": {
         "condition": {
@@ -11530,7 +11494,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, FINS2101"
+        "broke at": "Index 3, ("
     },
     "FINS4774": {
         "condition": {
@@ -15127,46 +15091,6 @@
             ")"
         ],
         "broke at": "Index 1, Successful 96UOC"
-    },
-    "MARK2101": {
-        "condition": {
-            "original": "Enrolled in plan MARKB13554<br/><br/>",
-            "processed": "MARKB13554"
-        },
-        "tokens": [
-            "(",
-            "MARKB13554",
-            ")"
-        ],
-        "broke at": "Index 1, MARKB13554"
-    },
-    "MARK3202": {
-        "condition": {
-            "original": "Prerequisite: MARK2101 and enrolled in plan MARKB13554<br/><br/>",
-            "processed": "MARK2101 && MARKB13554"
-        },
-        "tokens": [
-            "(",
-            "MARK2101",
-            "&&",
-            "MARKB13554",
-            ")"
-        ],
-        "broke at": "Index 3, MARKB13554"
-    },
-    "MARK3303": {
-        "condition": {
-            "original": "Prerequisite: MARK2101 and enrolled in plan MARKB13554<br/><br/>",
-            "processed": "MARK2101 && MARKB13554"
-        },
-        "tokens": [
-            "(",
-            "MARK2101",
-            "&&",
-            "MARKB13554",
-            ")"
-        ],
-        "broke at": "Index 3, MARKB13554"
     },
     "MATH1081": {
         "condition": {
