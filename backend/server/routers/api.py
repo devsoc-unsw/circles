@@ -591,11 +591,12 @@ def search(string):
     # dictionary = collections.OrderedDict(sorted(dictionary.items()))
     return dictionary
 
+
 @router.post("/getAllUnlocked/", response_model=CoursesState,
             responses={
-                404: {"model": message, "description": "You broke it"},
+                404: {"model": message, "description": "Uh oh you broke me"},
                 200: {
-                    "description": "Returns all unlocked courses for the user",
+                    "description": "Returns the state of all the courses",
                     "content": {
                         "application/json": {
                             "example": {
@@ -610,18 +611,30 @@ def search(string):
                     }
                 }
             })
-def getAllUnlocked(userData: UserData):
+def getAllUnlocked(userData: UserData, lockedCourses: list):
+    """Given the userData and a list of locked courses, returns the state of all
+    the courses. Note that locked courses always return as True with no warnings
+    since it doesn't make sense for us to tell the user they can't take a course
+    that they have already completed"""
     user = User(userData.dict())
 
     coursesState = {}
     
     for course, condition in conditions.items():
-        if condition:
+        if course in lockedCourses:
+            # Always True
+            isAccurate = True
+            unlocked = True
+            warnings = []
+        elif condition:
+            # Condition object exists for this course
             isAccurate = True
             state = condition.is_unlocked(user)
             unlocked = state['result']
             warnings = state['warnings']
         else: 
+            # Condition object does not exist for this course. True by default
+            # but warn the user the info might be inaccurate
             isAccurate = False 
             unlocked = True 
             warnings = []
@@ -629,7 +642,7 @@ def getAllUnlocked(userData: UserData):
         coursesState[course] = {
             "is_accurate": isAccurate,
             "unlocked": unlocked,
-            "handbook_note": "",
+            "handbook_note": "", # TODO: Cache handbook notes
             "warnings": warnings          
         }
 
