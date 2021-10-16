@@ -624,4 +624,8 @@ def read_data(file_name):
     except:
         print(f"File {file_name} not found")
         sys.exit(1)
+<<<<<<< HEAD
     
+=======
+        
+>>>>>>> main
