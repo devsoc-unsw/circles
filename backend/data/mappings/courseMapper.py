@@ -34,9 +34,9 @@ def process_data():
         mapCourse(course, schoolMappings, facultyMappings)
 
     dataHelpers.write_data(
-            finalSchoolMappings, "data/mappings/processedSchoolMappings.json")
+            finalSchoolMappings, "data/mappings/schoolCourseMappings.json")
     dataHelpers.write_data(
-            finalFacultyMappings, "data/mappings/processedFacultyMappings.json")
+            finalFacultyMappings, "data/mappings/facultyCourseMappings.json")
 
 def initialiseData(schoolMappings, facultyMappings):
     for school in schoolMappings:   
