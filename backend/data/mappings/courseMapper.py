@@ -5,20 +5,20 @@ from collections import OrderedDict
 
 # Final Data for all courses
 # NOTE ONLY DO SCHOOL ONES
-finalMappings = {}
+finalSchoolMappings = {}
+finalFacultyMappings = {}
 
 
-def mapCourse(course, schoolMappings):
+def mapCourse(course, schoolMappings, facultyMappings):
 
     courseCode = course['code']
+    courseFaculty = course['faculty']
     if 'school' in course:
         courseSchool = course['school']
-        finalMappings[schoolMappings[courseSchool]][courseCode] = 1
-    courseFaculty = course['faculty']
+        finalSchoolMappings[schoolMappings[courseSchool]][courseCode] = 1
 
-    # courseMapping = {}
-    # courseMapping['school'] = schoolMappings[courseSchool]
-    # courseMapping['faculty'] = facultyMappings[courseFaculty]
+    finalFacultyMappings[facultyMappings[courseFaculty]][courseCode] = 1
+   
 
     
 
@@ -26,21 +26,27 @@ def mapCourse(course, schoolMappings):
 def process_data():
     # Read in coursesProcessed File
     courseData = dataHelpers.read_data("data/finalData/coursesProcessed.json")
-    # facultyMappings = dataHelpers.read_data("data/mappings/facultyMappings.json")
+    facultyMappings = dataHelpers.read_data("data/mappings/facultyMappings.json")
     schoolMappings = dataHelpers.read_data("data/mappings/schoolMappings.json")
 
-    initialiseData(schoolMappings)
+    initialiseData(schoolMappings, facultyMappings)
     for course in courseData.values():
-        mapCourse(course, schoolMappings)
+        mapCourse(course, schoolMappings, facultyMappings)
 
     dataHelpers.write_data(
-            finalMappings, "data/mappings/processedMappings.json")
+            finalSchoolMappings, "data/mappings/processedSchoolMappings.json")
+    dataHelpers.write_data(
+            finalFacultyMappings, "data/mappings/processedFacultyMappings.json")
 
-def initialiseData(schoolMappings):
+def initialiseData(schoolMappings, facultyMappings):
     for school in schoolMappings:   
         first_word = school.split()[0]
         if len(first_word) == 1:
-            finalMappings[school] = {}
+            finalSchoolMappings[school] = {}
+    for faculty in facultyMappings:   
+        first_word = faculty.split()[0]
+        if len(first_word) == 1:
+            finalFacultyMappings[faculty] = {}
     
 
 

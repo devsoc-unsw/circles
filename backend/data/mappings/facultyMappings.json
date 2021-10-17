@@ -28,10 +28,13 @@
 
 
     "F Canberra": "UNSW Canberra at ADFA",
-    "UNSW Canberra at ADFA": "F Canberra"
+    "UNSW Canberra at ADFA": "F Canberra",
 
 
+    "F UNSWGlobal": "UNSW Global",
+    "UNSW Global": "F UNSWGlobal",
 
-
+    "F DVC": "DVC (Academic) Board of Studies",
+    "DVC (Academic) Board of Studies": "F DVC"
 
 }
