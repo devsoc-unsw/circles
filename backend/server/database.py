@@ -4,7 +4,7 @@ initialisation.
 
 NOTE: The helper functions must be run from the backend directory due to their paths
 '''
-import sys
+
 import json
 from pymongo import MongoClient
 from server.config import URI, FINAL_DATA_PATH, ARCHIVED_DATA_PATH
@@ -19,7 +19,6 @@ specialisationsCOL = db["Specialisations"]
 coursesCOL = db["Courses"]
 
 archivesDB = client["Archives"]
-
 
 def overwrite_collection(collection_name):
     """Overwrites the specific database via reading from the json files.
@@ -56,10 +55,11 @@ def overwrite_archives():
             except:
                 print(f"Failed to load and overwrite {year} archive")
 
-
 def overwrite_all():
     """Singular execution point to overwrite the entire database including the archives"""
     overwrite_collection("Courses")
     overwrite_collection("Specialisations")
     overwrite_collection("Programs")
     overwrite_archives()
+
+
