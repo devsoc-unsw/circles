@@ -17,3 +17,6 @@ def test_user1():
     user = User(USERS["user1"])
     user.unselect_course("COMP1511", [])
     assert user.has_taken_course("COMP1511") == False
+    assert user.has_taken_course("COMP1521") == False
+    assert user.has_taken_course("MATH2400") == True
+
