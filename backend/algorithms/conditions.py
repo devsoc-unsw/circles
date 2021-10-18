@@ -152,7 +152,7 @@ class User:
         for course, (uoc, grade) in self.courses.items():
             # Update the uoc as we go whils getting the total and eligible uoc
             self.uoc += uoc
-            if total_wam is not None:
+            if total_wam is not None and grade is not None:
                 eligible_uoc += uoc
                 total_wam += uoc * grade
         
