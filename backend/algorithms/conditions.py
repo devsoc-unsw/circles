@@ -42,6 +42,7 @@ class User:
     def __init__(self, data=None):
         # Will load the data if any was given
         self.courses = {}
+        self.cur_courses = [] # Courses the user is taking in the current term
         self.program = None  # NOTE: For now this is only single degree
         self.specialisations = {}
         self.uoc = 0
@@ -80,6 +81,10 @@ class User:
         if no_wam == False:
             self.wam = total_wam / self.uoc
 
+    def add_current_course(self, course):
+        """Given a course the user is taking in their current term, adds it to their cur_courses"""
+        self.cur_courses.append(course)
+
     def add_program(self, program):
         '''Adds a program to this user'''
         self.program = program # TODO: This should update to reflect UOC of user
@@ -91,6 +96,10 @@ class User:
     def has_taken_course(self, course):
         '''Determines if the user has taken this course'''
         return course in self.courses
+    
+    def is_taking_course(self, course):
+        """Determines if the user is taking this course this term"""
+        return course in self.cur_courses
 
     def in_program(self, program):
         '''Determines if the user is in this program code'''
@@ -198,7 +207,7 @@ class User:
         return affected_courses.sort()
 
 class CourseCondition():
-    '''Condition that the student has completed this course'''
+    '''Condition that the student has completed this course before the current term'''
 
     def __init__(self, course):
         self.course = course
@@ -209,6 +218,41 @@ class CourseCondition():
     def validate(self, user):
         '''Returns true if the user has taken this course before'''
         return user.has_taken_course(self.course)
+
+
+class CoreqCoursesCondition():
+    """Condition that the student has completed the course/s in or before the current term"""
+
+    def __init__(self):
+        # An example corequisite is [COMP1511 || COMP1521 || COMP1531]. The user
+        # must have taken one of these courses either before or in the current term
+        self.courses = []
+        self.logic = AND # by default it'll be AND
+    
+    def add_course(self, course):
+        self.courses.append(course)
+
+    def set_logic(self, logic):
+        self.logic = logic
+    
+    def validate(self, user):
+        """Returns true if the user is taking these courses in the same term"""
+        if self.logic == AND:
+            # They must meet all the coreqs
+            for course in self.courses:
+                if not (user.has_taken_course(course) or user.is_taking_course(course)):
+                    print(f"They did not take {course}")
+                    return False
+                print(f"They took {course}")
+            return True
+        elif self.logic == OR:
+            for course in self.courses:
+                if user.has_taken_course(course) or user.is_taking_course(course):
+                    return True
+            return False
+        
+        # Error, logic should either be AND or OR
+        return True
 
 
 class UOCCondition():
@@ -474,6 +518,28 @@ def make_condition(tokens, first=False, course=None):
         elif token == "||":
             # OR type logic
             result.set_logic(OR)
+        elif token == "[":
+            # Beginning of co-requisite. Parse courses and logical operators until closing "]"
+            coreq_cond = CoreqCoursesCondition()
+            
+            i = 1 # Helps track our index offset to parse this co-requisite
+            while tokens[index + i] != "]":
+                if is_course(tokens[index + i]):
+                    coreq_cond.add_course(tokens[index + i])
+                elif tokens[index + i] == "&&":
+                    coreq_cond.set_logic(AND)
+                elif tokens[index + i] == "||":
+                    coreq_cond.set_logic(OR)
+                else:
+                    # Error, bad token processed. Return None
+                    return None, index + i
+                i += 1
+                next(it)
+            
+            result.add_condition(coreq_cond)
+
+            # Skip the closing "]" so the iterator will continue with the next token
+            next(it)
         elif is_course(token):
             # Condition for a single course
             result.add_condition(CourseCondition(token))
@@ -598,10 +664,11 @@ def get_grade(text):
 
 def is_program(text):
     '''Determines if the text is a program code'''
-    if re.match(r'^\d{4}', text) or re.match(r'^[A-Z]{5}\d{5}', text):
-        # Matches standard program codes such as 3707 and also co-op program codes
-        # which we most likely won't be dealing with but I've included here so
-        # it at least creates the condition object instead of erroring
+    if re.match(r'^\d{4}', text) or re.match(r'^[A-Z]{5}\d{5}', text) or re.match(r'^[A-Z]{6}\d{4}', text):
+        # Matches standard program codes like 3707.
+        # NOTE: Also matches co-op program codes and streams and stuff which I've
+        # included here but we most likely won't be dealing with them. I included
+        # so at least it creates the condition object instead of erroring.
         return True
     return False
 
@@ -624,4 +691,3 @@ def read_data(file_name):
     except:
         print(f"File {file_name} not found")
         sys.exit(1)
-    

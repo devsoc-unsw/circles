@@ -430,3 +430,41 @@ def test_exclusion():
     assert (econ1011_cond.is_unlocked(user1))["result"] == False
     
     # TODO: Test exclusion for other types
+
+
+def test_coreq_condition():
+    """Testing corequisite conditions"""
+    user = create_student_3707_COMPA1()
+    user.add_courses({
+        "COMP1511": (6, None),
+        "COMP1521": (6, None),
+    })
+    user.add_current_course("COMP1531")
+
+    # Testing simple co-requisite conditions
+    coreq_cond1 = create_condition(["(", "[", "COMP1531", "]", ")"])
+    coreq_cond2 = create_condition(["(", "[", "COMP1511", "]", ")"])
+    coreq_cond3 = create_condition(["(", "[", "COMP1521", "]", ")"])
+    coreq_cond4 = create_condition(["(", "[", "COMP1541", "]", ")"])
+
+    assert (coreq_cond1.is_unlocked(user))["result"] == True
+    assert (coreq_cond2.is_unlocked(user))["result"] == True
+    assert (coreq_cond3.is_unlocked(user))["result"] == True
+    assert (coreq_cond4.is_unlocked(user))["result"] == False
+
+    user.add_current_course("COMP1541")
+
+    # Testing more complex co-requisite conditions
+    complex_coreq_cond1 = create_condition(["(", "[", "COMP1521", "&&", "COMP1531", "&&", "COMP1541", "]", ")"])
+    complex_coreq_cond2 = create_condition(["(", "[", "COMP1511", "||", "COMP1551", "]", ")"])
+    complex_coreq_cond3 = create_condition(["(", "COMP1511", "&&", "[", "COMP1531", "&&", "COMP1541", "]", "&&", "COMP1521", ")"])
+    complex_coreq_cond4 = create_condition(["(", "[", "COMP1521", "&&", "COMP1531", "&&", "COMP9999", "]", ")"])
+    complex_coreq_cond5 = create_condition(["(", "[", "COMP7777", "||", "COMP1511", "||", "COMP9999", "]", ")"])
+    complex_coreq_cond6 = create_condition(["(", "[", "COMP7777", "||", "COMP8888", "||", "COMP9999", "]", ")"])
+
+    assert (complex_coreq_cond1.is_unlocked(user))["result"] == True
+    assert (complex_coreq_cond2.is_unlocked(user))["result"] == True
+    assert (complex_coreq_cond3.is_unlocked(user))["result"] == True
+    assert (complex_coreq_cond4.is_unlocked(user))["result"] == False
+    assert (complex_coreq_cond5.is_unlocked(user))["result"] == True
+    assert (complex_coreq_cond6.is_unlocked(user))["result"] == False
