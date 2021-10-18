@@ -14,6 +14,10 @@ COURSES_PROCESSED_FILE = "./data/finalData/coursesProcessed.json"
 
 CACHED_EXCLUSIONS_FILE = "./algorithms/cache/exclusions.json"
 
+CONDITIONS_PROCESSED_FILE = "./data/finalData/conditionsProcessed.json"
+
+CACHED_WARNINGS_FILE = "./algorithms/cache/warnings.json"
+
 def cache_exclusions():
     """
     Reads from processed courses and stores the exclusions in a map mapping
@@ -35,3 +39,22 @@ def cache_exclusions():
         cached_exclusions[course] = data["exclusions"]
     
     write_data(cached_exclusions, CACHED_EXCLUSIONS_FILE)
+
+def cache_warnings():
+    """
+    Reads from processed conditions and stores the warnings in a map mapping
+    COURSE: WARNING
+    
+    NOTE: Condition warnings are created during the manual fix stage, so this 
+    will need to be re-run as more conditions are manually fixed.
+    """
+
+    conditions = read_data(CONDITIONS_PROCESSED_FILE)
+
+    cached_warnings = {}
+
+    for course, data in conditions.items():
+        if "warning" in data:
+            cached_warnings[course] = data["warning"]
+    
+    write_data(cached_warnings, CACHED_WARNINGS_FILE)
