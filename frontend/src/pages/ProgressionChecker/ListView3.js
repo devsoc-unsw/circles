@@ -1,11 +1,13 @@
 import React from "react";
 import { Typography, Button, Space} from "antd";
 import { Skeleton } from "antd";
+import CourseComponents from "./CourseComponents.js"
 import { map } from "@antv/util";
 
 const ListView = ({ isLoading, degree, progressioncourses}) => {
   const { Title } = Typography;
-    
+  console.log(progressioncourses);
+
   return (
     <>
       {isLoading ? (
@@ -18,24 +20,9 @@ const ListView = ({ isLoading, degree, progressioncourses}) => {
               id={concentration["name"]}
               key={concentration["name"]}
             >
-            <Title className="text">{concentration["type"]} ({concentration["name"]})</Title>
+            <Title className="text">{concentration["type"].charAt(0).toUpperCase()+concentration["type"].slice(1)} ({concentration["name"]})</Title>
 
-            {Object.entries(progressioncourses["Major"]&&progressioncourses["Major"]).map(([key, value]) => (       
-                // console.log(Object.keys(value["courses"]), Object.values(value["courses"]))
-                <div>
-                <Title className="text" level={3} key={key}>{key}</Title>
-                <Title className="text" level={5} key={key}>{value["uoc"]} UOC of the following courses</Title>
-
-                <Space size={[20, 20]} wrap>
-                    {Object.entries(value["courses"]).map(([coursekey, coursevalue]) => (
-                        <Button className="checkerButton" type="primary" key={coursekey}>
-                            {coursekey}: {coursevalue}
-                        </Button>
-                    ))}
-                </Space>
-                <div className="space"/>
-                </div>
-            ))}
+            <CourseComponents progressioncourses = {progressioncourses} type = {concentration["type"]}/>
             
             </div>
           ))}

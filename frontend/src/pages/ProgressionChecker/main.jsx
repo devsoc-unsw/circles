@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Dashboard from "./Dashboard";
-// import ListView3 from "./ListView3";
-import TableView from "./TableView";
+import ListView3 from "./ListView3";
+// import TableView from "./TableView";
 import axios from "axios";
 import './main.less';
 const ProgressionChecker = () => {
@@ -15,7 +15,7 @@ const ProgressionChecker = () => {
     res = await axios.get("progressioncourses.json");
     console.log(res.data)
 
-    res = await axios.get("checkercourses.json");
+    // res = await axios.get("checkercourses.json");
     setCourses(res.data);
     setIsLoading(false);
   };
@@ -29,8 +29,8 @@ const ProgressionChecker = () => {
   return (
     <>
       <Dashboard isLoading={isLoading} degree={degree}/>
-      {/* <ListView3 isLoading={isLoading} degree={degree} progressioncourses={courses}/> */}
-      <TableView checkercourses={courses}/>
+      <ListView3 isLoading={isLoading} degree={degree} progressioncourses={courses}/>
+      {/* <TableView checkercourses={courses}/> */}
     </>
   );
 };
