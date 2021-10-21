@@ -28,9 +28,10 @@
         "program": "3707",
         "specialisations": ["COMPA1", "ACCTA2"],
         "courses": {
+            "COMP1531": [6, 57],
             "COMP1511": [6, 84],
             "COMP1521": [6, 57],
-            "MATH2400": [3, null]
+            "MATH1081": [6, 57]
         },
         "year": 3
     }
