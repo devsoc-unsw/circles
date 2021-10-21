@@ -181,6 +181,7 @@ class User:
         # then restart loop.
 
         while True:
+            changed = False
             for course in self.courses:
                 if course in cached_conditions and cached_conditions[course] != None:
                     # The course is not locked and there exists a condition
@@ -188,14 +189,17 @@ class User:
                     if (cond.is_unlocked(self))["result"] is False:
                         # This course is no longer selectable due to our unselection
                         affected_courses.append(course)
+                        changed = True
                         del self.courses[course]
                         self.update_wam_uoc()
                         break
             # Reaching this point means all the courses remaining are either locked
             # courses or can still be selected.
+            if changed:
+                continue
             break
-        
-        return affected_courses.sort()
+        affected_courses.sort()
+        return affected_courses
 
 class CourseCondition():
     '''Condition that the student has completed this course'''

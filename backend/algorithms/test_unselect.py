@@ -16,10 +16,19 @@ f.close()
 def test_user1():
     user = User(USERS["user1"])
     # Consequence of Deleting a course
-    user.unselect_course("COMP1511", [])
+    data = user.unselect_course("COMP1511", [])
     assert user.has_taken_course("COMP1511") == False
     assert user.has_taken_course("COMP1521") == False
-    assert user.has_taken_course("MATH2400") == True
+    assert user.has_taken_course("MATH2400") == False
+    assert data == ['COMP1521', 'MATH2400']
     # Delete a non-existing course
     user.unselect_course("COMP1511", [])
 
+def test_user4():
+    user = User(USERS["user4"])
+    # Consequence of Deleting a course
+    data = user.unselect_course("COMP1511", [])
+    assert user.has_taken_course("COMP1511") == False
+    assert user.has_taken_course("COMP1521") == False
+    assert user.has_taken_course("COMP1531") == False
+    assert data == ['COMP1521', 'COMP1531']
