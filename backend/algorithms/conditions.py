@@ -190,10 +190,8 @@ class User:
         # then restart loop.
 
         while True:
-<<<<<<< HEAD
             changed = False
-=======
->>>>>>> main
+
             for course in self.courses:
                 if course in cached_conditions and cached_conditions[course] != None:
                     # The course is not locked and there exists a condition
@@ -201,7 +199,6 @@ class User:
                     if (cond.is_unlocked(self))["result"] is False:
                         # This course is no longer selectable due to our unselection
                         affected_courses.append(course)
-<<<<<<< HEAD
                         changed = True
                         del self.courses[course]
                         self.update_wam_uoc()
@@ -210,18 +207,8 @@ class User:
             # If no new courses were affected, we do not need to loop again
             if not changed:
                 break
-            
+             
         return sorted(affected_courses)
-=======
-                        del self.courses[course]
-                        self.update_wam_uoc()
-                        break
-            # Reaching this point means all the courses remaining are either locked
-            # courses or can still be selected.
-            break
-        
-        return affected_courses.sort()
->>>>>>> main
 
 class CourseCondition():
     '''Condition that the student has completed this course before the current term'''
@@ -681,18 +668,11 @@ def get_grade(text):
 
 def is_program(text):
     '''Determines if the text is a program code'''
-<<<<<<< HEAD
     if re.match(r'^\d{4}', text) or re.match(r'^[A-Z]{5}\d{5}', text) or re.match(r'^[A-Z]{6}\d{4}', text):
         # Matches standard program codes like 3707.
         # NOTE: Also matches co-op program codes and streams and stuff which I've
         # included here but we most likely won't be dealing with them. I included
         # so at least it creates the condition object instead of erroring.
-=======
-    if re.match(r'^\d{4}', text) or re.match(r'^[A-Z]{5}\d{5}', text):
-        # Matches standard program codes such as 3707 and also co-op program codes
-        # which we most likely won't be dealing with but I've included here so
-        # it at least creates the condition object instead of erroring
->>>>>>> main
         return True
     return False
 
@@ -715,7 +695,3 @@ def read_data(file_name):
     except:
         print(f"File {file_name} not found")
         sys.exit(1)
-<<<<<<< HEAD
-=======
-    
->>>>>>> main
