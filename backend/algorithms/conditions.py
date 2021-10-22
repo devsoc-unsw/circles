@@ -191,6 +191,7 @@ class User:
 
         while True:
             changed = False
+
             for course in self.courses:
                 if course in cached_conditions and cached_conditions[course] != None:
                     # The course is not locked and there exists a condition
@@ -206,7 +207,7 @@ class User:
             # If no new courses were affected, we do not need to loop again
             if not changed:
                 break
-            
+             
         return sorted(affected_courses)
 
 class CourseCondition():
