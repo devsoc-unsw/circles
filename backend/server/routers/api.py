@@ -670,7 +670,7 @@ def unselectCourse(userData: UserData, lockedCourses: list, unselectedCourse: st
 
     return {'affected_courses': affectedCourses}
 
-@router.post("/validateTermPlanner/")
+@router.post("/validateTermPlanner/", response_model=CoursesState)
 async def validateTermPlanner(plannerData: PlannerData = Body(
     ...,
     example={
@@ -725,10 +725,13 @@ async def validateTermPlanner(plannerData: PlannerData = Body(
     }
 )):
     """
-    Will iteratively go through the term planner data whilst "building up" the
-    user. E.g. To evaluate T1, we create an empty user. Then we add T1's courses
-    to the user and evaluate T2. Then we add T2's courses to the user and evaluate
-    T3, etc...
+    Will iteratveily go through the term planner data whilst "building up" the user.
+    Starting from 1st year ST, we will create an empty user and evaluate the courses.
+    Then we will add ST courses to the user and evaluate T1. Then we will add T1
+    courses and evaluate T2. Then add T2 and evaluate T3. Then add T3 and evaluate
+    2nd year ST... and so on.
+
+    Returns the state of all the courses on the term planner
     """
     data = plannerData.dict()
     emptyUserData = {
