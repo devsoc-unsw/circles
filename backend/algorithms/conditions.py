@@ -207,8 +207,7 @@ class User:
             if not changed:
                 break
             
-        affected_courses.sort()
-        return affected_courses
+        return sorted(affected_courses)
 
 class CourseCondition():
     '''Condition that the student has completed this course before the current term'''
