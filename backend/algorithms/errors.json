@@ -1,18 +1,4 @@
 {
-    "ACCT2522": {
-        "condition": {
-            "original": "Prerequisite: ACCT1511 or Corequisite: ACCT2511<br/><br/>",
-            "processed": "ACCT1511 || [ACCT2511]"
-        },
-        "tokens": [
-            "(",
-            "ACCT1511",
-            "||",
-            "[ACCT2511]",
-            ")"
-        ],
-        "broke at": "Index 3, [ACCT2511]"
-    },
     "ACTL1101": {
         "condition": {
             "original": "Prerequisite: MATH1151 AND in Actuarial Studies programs.<br/><br/>",
@@ -5981,23 +5967,6 @@
         ],
         "broke at": "Index 1, 96UOC in Built Environment"
     },
-    "BINF6111": {
-        "condition": {
-            "original": "Prerequisite: (COMP1531 or COMP2041) <br/>Co-requisite: BINF3010<br/><br/>",
-            "processed": "(COMP1531 || COMP2041) [BINF3010]"
-        },
-        "tokens": [
-            "(",
-            "(",
-            "COMP1531",
-            "||",
-            "COMP2041",
-            ")",
-            "[BINF3010]",
-            ")"
-        ],
-        "broke at": "Index 6, [BINF3010]"
-    },
     "BIOC3111": {
         "condition": {
             "original": "Prerequisites: BIOC2101 or LIFE2101, BIOC2201<br/><br/>",
@@ -6405,20 +6374,6 @@
         ],
         "broke at": "Index 3, PHY1131"
     },
-    "CEIC2005": {
-        "condition": {
-            "original": "Prerequisite: CEIC2000<br/>Co-requisite: MATH2089 or MATH2301<br/><br/>",
-            "processed": "CEIC2000 [MATH2089 || MATH2301]"
-        },
-        "tokens": [
-            "(",
-            "CEIC2000 [MATH2089",
-            "||",
-            "MATH2301]",
-            ")"
-        ],
-        "broke at": "Index 1, CEIC2000 [MATH2089"
-    },
     "CEIC3001": {
         "condition": {
             "original": "Pre-requisites: CEIC2000, CEIC2001, CEIC2002, CEIC2005<br/><br/>",
@@ -6490,16 +6445,18 @@
         },
         "tokens": [
             "(",
-            "[CEIC3006 CEIC2007",
+            "[",
+            "CEIC3006 CEIC2007",
             "&&",
             "CEIC3001",
             "&&",
             "CEIC3005",
             "&&",
-            "MATH2089]",
+            "MATH2089",
+            "]",
             ")"
         ],
-        "broke at": "Index 1, [CEIC3006 CEIC2007"
+        "broke at": "Index 2, CEIC3006 CEIC2007"
     },
     "CEIC4951": {
         "condition": {
@@ -7904,18 +7861,6 @@
         ],
         "broke at": "Index 1, Enrolment in the Criminology honours program"
     },
-    "CVEN2301": {
-        "condition": {
-            "original": "Corequisite: CVEN1300.<br/><br/>",
-            "processed": "[CVEN1300]"
-        },
-        "tokens": [
-            "(",
-            "[CVEN1300]",
-            ")"
-        ],
-        "broke at": "Index 1, [CVEN1300]"
-    },
     "CVEN2303": {
         "condition": {
             "original": "Prerequisites: (ENGG1300 AND ENGG2400) OR (CVEN1300 AND CVEN2301)<br/>(Pre-requisite only applicable to UG cohort taking this course).<br/><br/>",
@@ -7940,22 +7885,6 @@
             ")"
         ],
         "broke at": "Index 1, ("
-    },
-    "CVEN3301": {
-        "condition": {
-            "original": "Prerequisite: ENGG1300 OR CVEN1300<br/>Corequisite: ENGG2400 OR CVEN2301<br/><br/>",
-            "processed": "ENGG1300 || CVEN1300 [ENGG2400 || CVEN2301]"
-        },
-        "tokens": [
-            "(",
-            "ENGG1300",
-            "||",
-            "CVEN1300 [ENGG2400",
-            "||",
-            "CVEN2301]",
-            ")"
-        ],
-        "broke at": "Index 3, CVEN1300 [ENGG2400"
     },
     "CVEN3303": {
         "condition": {
@@ -8268,10 +8197,12 @@
         },
         "tokens": [
             "(",
-            "Honours []",
+            "Honours",
+            "[",
+            "]",
             ")"
         ],
-        "broke at": "Index 1, Honours []"
+        "broke at": "Index 1, Honours"
     },
     "DESN2000": {
         "condition": {
@@ -8986,7 +8917,9 @@
             "7004",
             ")",
             "&&",
-            "[DPST1013]",
+            "[",
+            "DPST1013",
+            "]",
             ")"
         ],
         "broke at": "Index 1, UNSW Global Diplomas only"
@@ -9013,7 +8946,9 @@
             "||",
             "DPST1023",
             "&&",
-            "[DPST1014]",
+            "[",
+            "DPST1014",
+            "]",
             ")"
         ],
         "broke at": "Index 1, UNSW Global Diplomas only"
@@ -9036,7 +8971,9 @@
             "7004",
             ")",
             "&&",
-            "[DPST1013]",
+            "[",
+            "DPST1013",
+            "]",
             ")"
         ],
         "broke at": "Index 1, UNSW Global Diplomas only"
@@ -9066,7 +9003,9 @@
             ")",
             "in DPST1021",
             "&&",
-            "[DPST1014]",
+            "[",
+            "DPST1014",
+            "]",
             ")"
         ],
         "broke at": "Index 1, UNSW Global Diplomas only"
@@ -11202,38 +11141,6 @@
         ],
         "broke at": "Index 1, EDST6922. Corerequisite: EDST6760"
     },
-    "ELEC2134": {
-        "condition": {
-            "original": "Co-Requisite: ELEC1111 OR DPST1081 OR ELEC1112<br/><br/>",
-            "processed": "[ELEC1111 || DPST1081 || ELEC1112]"
-        },
-        "tokens": [
-            "(",
-            "[ELEC1111",
-            "||",
-            "DPST1081",
-            "||",
-            "ELEC1112]",
-            ")"
-        ],
-        "broke at": "Index 1, [ELEC1111"
-    },
-    "ELEC2141": {
-        "condition": {
-            "original": "Co-requisite: ELEC1111 OR DPST1081 OR ELEC1112<br/><br/>",
-            "processed": "[ELEC1111 || DPST1081 || ELEC1112]"
-        },
-        "tokens": [
-            "(",
-            "[ELEC1111",
-            "||",
-            "DPST1081",
-            "||",
-            "ELEC1112]",
-            ")"
-        ],
-        "broke at": "Index 1, [ELEC1111"
-    },
     "ELEC2911": {
         "condition": {
             "original": "Prerequisite: ELEC1111 and 48 UoC. Students should have a good working knowledge of university level physics, circuit theory and mathematics.<br/><br/>",
@@ -11432,94 +11339,6 @@
         ],
         "broke at": "Index 1, 48UOC . must be in good academic standing. Consent from ADA WIL Team required"
     },
-    "FINS2101": {
-        "condition": {
-            "original": "Enrolled in plan FINSD13554 or in FINSBH3565<br/><br/>",
-            "processed": "FINSD13554 || FINSBH3565"
-        },
-        "tokens": [
-            "(",
-            "FINSD13554",
-            "||",
-            "FINSBH3565",
-            ")"
-        ],
-        "broke at": "Index 3, FINSBH3565"
-    },
-    "FINS2622": {
-        "condition": {
-            "original": "Prerequisite or co-requisite:FINS1612 and FINS2624<br/><br/>",
-            "processed": "[FINS1612 && FINS2624]"
-        },
-        "tokens": [
-            "(",
-            "[FINS1612",
-            "&&",
-            "FINS2624]",
-            ")"
-        ],
-        "broke at": "Index 1, [FINS1612"
-    },
-    "FINS3202": {
-        "condition": {
-            "original": "Prerequisite: FINS2101 and enrolled in plan FINSD13554 or FINSBH3565<br/><br/>",
-            "processed": "FINS2101 && (FINSD13554 || FINSBH3565)"
-        },
-        "tokens": [
-            "(",
-            "FINS2101",
-            "&&",
-            "(",
-            "FINSD13554",
-            "||",
-            "FINSBH3565",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 3, ("
-    },
-    "FINS3303": {
-        "condition": {
-            "original": "Prerequisite: FINS3202 and enrolled in plan FINSD13554 or FINSBH3565<br/><br/>",
-            "processed": "FINS2101 && (FINSD13554 || FINSBH3565)"
-        },
-        "tokens": [
-            "(",
-            "FINS2101",
-            "&&",
-            "(",
-            "FINSD13554",
-            "||",
-            "FINSBH3565",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 3, ("
-    },
-    "FINS4774": {
-        "condition": {
-            "original": "Prerequisite: Must be enrolled in specialisation FINSAH4501 or FINSBH3565; or program 4520. <br/>Corequisite: FINS3775 or FINS4775 or FINS4779<br/><br/>",
-            "processed": "(FINSAH4501 || FINSBH3565 || 4520) && [FINS3775 || FINS4775 || FINS4779]"
-        },
-        "tokens": [
-            "(",
-            "(",
-            "FINSAH4501",
-            "||",
-            "FINSBH3565",
-            "||",
-            "4520",
-            ")",
-            "&&",
-            "[FINS3775",
-            "||",
-            "FINS4775",
-            "||",
-            "FINS4779]",
-            ")"
-        ],
-        "broke at": "Index 1, ("
-    },
     "FINS4775": {
         "condition": {
             "original": "Prerequisite:70% or greater in FINS2624 and ECON1203 or enrolled in specialisation FINSAH4501 or FINSBH3565 or program 4520<br/><br/>",
@@ -11544,106 +11363,6 @@
         ],
         "broke at": "Index 1, ("
     },
-    "FINS4776": {
-        "condition": {
-            "original": "Prerequisite: Must be enrolled in specialisation FINSAH4501 or FINSBH3565; or program 4520.<br/>Corequisite: FINS3775 or FINS4775 or FINS4779 <br/><br/>",
-            "processed": "(FINSAH4501 || FINSBH3565 || 4520) && ([FINS3775 || FINS4775 || FINS4779])"
-        },
-        "tokens": [
-            "(",
-            "(",
-            "FINSAH4501",
-            "||",
-            "FINSBH3565",
-            "||",
-            "4520",
-            ")",
-            "&&",
-            "(",
-            "[FINS3775",
-            "||",
-            "FINS4775",
-            "||",
-            "FINS4779]",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 1, ("
-    },
-    "FINS4777": {
-        "condition": {
-            "original": "Prerequisite: Must be enrolled in specialisation FINSAH4501 or FINSBH3565; or program 4520.<br/>Corequisite: FINS3775 or FINS4775 or FINS4779 <br/><br/>",
-            "processed": "(FINSAH4501 || FINSBH3565 || 4520) && ([FINS3775 || FINS4775 || FINS4779])"
-        },
-        "tokens": [
-            "(",
-            "(",
-            "FINSAH4501",
-            "||",
-            "FINSBH3565",
-            "||",
-            "4520",
-            ")",
-            "&&",
-            "(",
-            "[FINS3775",
-            "||",
-            "FINS4775",
-            "||",
-            "FINS4779]",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 1, ("
-    },
-    "FINS4779": {
-        "condition": {
-            "original": "Prerequisite: Must be enrolled in specialisation FINSAH4501 or FINSBH3565; or program 4520.<br/>Corequisite: FINS3775 or FINS4775 or FINS4779 <br/><br/>",
-            "processed": "(FINSAH4501 || FINSBH3565 || 4520) && ([FINS3775 || FINS4775 || FINS4779])"
-        },
-        "tokens": [
-            "(",
-            "(",
-            "FINSAH4501",
-            "||",
-            "FINSBH3565",
-            "||",
-            "4520",
-            ")",
-            "&&",
-            "(",
-            "[FINS3775",
-            "||",
-            "FINS4775",
-            "||",
-            "FINS4779]",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 1, ("
-    },
-    "FINS4792": {
-        "condition": {
-            "original": "Prerequisite: Must be enrolled in specialisation FINSAH4501 or FINSBH3565;  or program 4520. <br/>Corequisite:  FINS3775 or FINS4775<br/><br/>",
-            "processed": "(FINSAH4501 || FINSBH3565 || 4520) && [FINS3775 || FINS4775]"
-        },
-        "tokens": [
-            "(",
-            "(",
-            "FINSAH4501",
-            "||",
-            "FINSBH3565",
-            "||",
-            "4520",
-            ")",
-            "&&",
-            "[FINS3775",
-            "||",
-            "FINS4775]",
-            ")"
-        ],
-        "broke at": "Index 1, ("
-    },
     "FOOD3010": {
         "condition": {
             "original": "Pre-requisites:FOOD1120,FOOD2320,CHEM2921<br/><br/>",
@@ -11663,10 +11382,13 @@
         },
         "tokens": [
             "(",
-            "FOOD1120, CHEM2921 [FOOD3010]",
+            "FOOD1120, CHEM2921",
+            "[",
+            "FOOD3010",
+            "]",
             ")"
         ],
-        "broke at": "Index 1, FOOD1120, CHEM2921 [FOOD3010]"
+        "broke at": "Index 1, FOOD1120, CHEM2921"
     },
     "FOOD3030": {
         "condition": {
@@ -11795,10 +11517,13 @@
         },
         "tokens": [
             "(",
-            "GMAT1110, [GMAT2120, GMAT2500, GMAT2700]",
+            "GMAT1110,",
+            "[",
+            "GMAT2120, GMAT2500, GMAT2700",
+            "]",
             ")"
         ],
-        "broke at": "Index 1, GMAT1110, [GMAT2120, GMAT2500, GMAT2700]"
+        "broke at": "Index 1, GMAT1110,"
     },
     "HESC1511": {
         "condition": {
@@ -12614,10 +12339,12 @@
         },
         "tokens": [
             "(",
-            "[with LAWS1052. To be able to be separately in subsequent term if LAWS1052 successfully]",
+            "[",
+            "with LAWS1052. To be able to be separately in subsequent term if LAWS1052 successfully",
+            "]",
             ")"
         ],
-        "broke at": "Index 1, [with LAWS1052. To be able to be separately in subsequent term if LAWS1052 successfully]"
+        "broke at": "Index 2, with LAWS1052. To be able to be separately in subsequent term if LAWS1052 successfully"
     },
     "LAWS1061": {
         "condition": {
@@ -13099,7 +12826,9 @@
         },
         "tokens": [
             "(",
-            "78UOC in LAWS courses [Business Associations",
+            "78UOC in LAWS courses",
+            "[",
+            "Business Associations",
             "(",
             "LAWS1091",
             ")",
@@ -13111,7 +12840,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 1, 78UOC in LAWS courses [Business Associations"
+        "broke at": "Index 1, 78UOC in LAWS courses"
     },
     "LAWS3019": {
         "condition": {
@@ -13221,14 +12950,16 @@
         },
         "tokens": [
             "(",
-            "78UOC in LAWS courses. [Resolving Civil Disputes",
+            "78UOC in LAWS courses.",
+            "[",
+            "Resolving Civil Disputes",
             "(",
             "LAWS2371",
             ")",
             "]",
             ")"
         ],
-        "broke at": "Index 1, 78UOC in LAWS courses. [Resolving Civil Disputes"
+        "broke at": "Index 1, 78UOC in LAWS courses."
     },
     "LAWS3057": {
         "condition": {
@@ -13237,7 +12968,9 @@
         },
         "tokens": [
             "(",
-            "78UOC in LAWS courses. [Foundations of Intellectual Property Law",
+            "78UOC in LAWS courses.",
+            "[",
+            "Foundations of Intellectual Property Law",
             "(",
             "(",
             "LAWS3021",
@@ -13257,7 +12990,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 1, 78UOC in LAWS courses. [Foundations of Intellectual Property Law"
+        "broke at": "Index 1, 78UOC in LAWS courses."
     },
     "LAWS3060": {
         "condition": {
@@ -13542,14 +13275,16 @@
         },
         "tokens": [
             "(",
-            "78UOC in LAWS courses. [Resolving Civil Disputes",
+            "78UOC in LAWS courses.",
+            "[",
+            "Resolving Civil Disputes",
             "(",
             "LAWS2371",
             ")",
             "]",
             ")"
         ],
-        "broke at": "Index 1, 78UOC in LAWS courses. [Resolving Civil Disputes"
+        "broke at": "Index 1, 78UOC in LAWS courses."
     },
     "LAWS3141": {
         "condition": {
@@ -13758,7 +13493,8 @@
             "(",
             "LAWS1230",
             ")",
-            "[Court Process",
+            "[",
+            "Court Process",
             "&&",
             "Evidence",
             "&&",
@@ -13879,14 +13615,16 @@
         },
         "tokens": [
             "(",
-            "78UOC in LAWS courses. [Federal Constitutional Law",
+            "78UOC in LAWS courses.",
+            "[",
+            "Federal Constitutional Law",
             "(",
             "LAWS2150",
             ")",
             "]",
             ")"
         ],
-        "broke at": "Index 1, 78UOC in LAWS courses. [Federal Constitutional Law"
+        "broke at": "Index 1, 78UOC in LAWS courses."
     },
     "LAWS3196": {
         "condition": {
@@ -14076,7 +13814,9 @@
             "(",
             "LAWS1160",
             ")",
-            ". [Resolving Civil Disputes",
+            ".",
+            "[",
+            "Resolving Civil Disputes",
             "(",
             "LAWS2371",
             ")",
@@ -15091,24 +14831,6 @@
             ")"
         ],
         "broke at": "Index 1, Successful 96UOC"
-    },
-    "MATH1081": {
-        "condition": {
-            "original": "Corequisite: MATH1131 or DPST1013 or MATH1141 or MATH1151<br/><br/>",
-            "processed": "[MATH1131 || DPST1013 || MATH1141 || MATH1151]"
-        },
-        "tokens": [
-            "(",
-            "[MATH1131",
-            "||",
-            "DPST1013",
-            "||",
-            "MATH1141",
-            "||",
-            "MATH1151]",
-            ")"
-        ],
-        "broke at": "Index 1, [MATH1131"
     },
     "MATH1099": {
         "condition": {
@@ -16595,33 +16317,12 @@
         "tokens": [
             "(",
             "||",
-            "[MGMT1101or COMM1150]",
+            "[",
+            "MGMT1101or COMM1150",
+            "]",
             ")"
         ],
-        "broke at": "Index 2, [MGMT1101or COMM1150]"
-    },
-    "MGMT2718": {
-        "condition": {
-            "original": "Prerequisite or Co-requisite: MGMT1001 OR MGMT1101 OR MGMT1002 OR COMM1100 OR COMM1150 OR COMM1170<br/><br/>",
-            "processed": "|| [MGMT1001 || MGMT1101 || MGMT1002 || COMM1100 || COMM1150 || COMM1170]"
-        },
-        "tokens": [
-            "(",
-            "||",
-            "[MGMT1001",
-            "||",
-            "MGMT1101",
-            "||",
-            "MGMT1002",
-            "||",
-            "COMM1100",
-            "||",
-            "COMM1150",
-            "||",
-            "COMM1170]",
-            ")"
-        ],
-        "broke at": "Index 2, [MGMT1001"
+        "broke at": "Index 3, MGMT1101or COMM1150"
     },
     "MGMT3001": {
         "condition": {
@@ -16700,10 +16401,12 @@
         "tokens": [
             "(",
             "||",
-            "[: MGMT2718]",
+            "[",
+            ": MGMT2718",
+            "]",
             ")"
         ],
-        "broke at": "Index 2, [: MGMT2718]"
+        "broke at": "Index 3, : MGMT2718"
     },
     "MGMT3730": {
         "condition": {
@@ -17683,10 +17386,13 @@
         },
         "tokens": [
             "(",
-            "VISN1111, VISN1101, VISN1221; [VISN2111]",
+            "VISN1111, VISN1101, VISN1221;",
+            "[",
+            "VISN2111",
+            "]",
             ")"
         ],
-        "broke at": "Index 1, VISN1111, VISN1101, VISN1221; [VISN2111]"
+        "broke at": "Index 1, VISN1111, VISN1101, VISN1221;"
     },
     "OPTM2291": {
         "condition": {
@@ -17701,10 +17407,13 @@
             "&&",
             "PHSL2101",
             "&&",
-            "enrolment in program 3952; [VISN2211]",
+            "enrolment in program 3952;",
+            "[",
+            "VISN2211",
+            "]",
             ")"
         ],
-        "broke at": "Index 7, enrolment in program 3952; [VISN2211]"
+        "broke at": "Index 7, enrolment in program 3952;"
     },
     "OPTM3111": {
         "condition": {
@@ -17722,10 +17431,13 @@
             "||",
             "OPTM2211",
             ")",
-            "; [VISN3111]",
+            ";",
+            "[",
+            "VISN3111",
+            "]",
             ")"
         ],
-        "broke at": "Index 10, ; [VISN3111]"
+        "broke at": "Index 10, ;"
     },
     "OPTM3131": {
         "condition": {
@@ -17734,10 +17446,13 @@
         },
         "tokens": [
             "(",
-            "VISN2231; [VISN3111]",
+            "VISN2231;",
+            "[",
+            "VISN3111",
+            "]",
             ")"
         ],
-        "broke at": "Index 1, VISN2231; [VISN3111]"
+        "broke at": "Index 1, VISN2231;"
     },
     "OPTM3211": {
         "condition": {
@@ -17746,10 +17461,13 @@
         },
         "tokens": [
             "(",
-            "VISN3111, OPTM3111, OPTM3131 [OPTM3231, VISN3211, PHAR3306]",
+            "VISN3111, OPTM3111, OPTM3131",
+            "[",
+            "OPTM3231, VISN3211, PHAR3306",
+            "]",
             ")"
         ],
-        "broke at": "Index 1, VISN3111, OPTM3111, OPTM3131 [OPTM3231, VISN3211, PHAR3306]"
+        "broke at": "Index 1, VISN3111, OPTM3111, OPTM3131"
     },
     "OPTM4110": {
         "condition": {
@@ -17758,10 +17476,13 @@
         },
         "tokens": [
             "(",
-            "OPTM3211, OPTM3231, VISN3211; [OPTM4131, OPTM4151]",
+            "OPTM3211, OPTM3231, VISN3211;",
+            "[",
+            "OPTM4131, OPTM4151",
+            "]",
             ")"
         ],
-        "broke at": "Index 1, OPTM3211, OPTM3231, VISN3211; [OPTM4131, OPTM4151]"
+        "broke at": "Index 1, OPTM3211, OPTM3231, VISN3211;"
     },
     "OPTM4131": {
         "condition": {
@@ -17770,10 +17491,13 @@
         },
         "tokens": [
             "(",
-            "OPTM3211, OPTM3231, VISN3211, PHAR3306, [OPTM4110, OPTM4151]",
+            "OPTM3211, OPTM3231, VISN3211, PHAR3306,",
+            "[",
+            "OPTM4110, OPTM4151",
+            "]",
             ")"
         ],
-        "broke at": "Index 1, OPTM3211, OPTM3231, VISN3211, PHAR3306, [OPTM4110, OPTM4151]"
+        "broke at": "Index 1, OPTM3211, OPTM3231, VISN3211, PHAR3306,"
     },
     "OPTM4151": {
         "condition": {
@@ -17782,10 +17506,13 @@
         },
         "tokens": [
             "(",
-            "PHAR3306, OPTM3131, OPTM3231; [OPTM4131]",
+            "PHAR3306, OPTM3131, OPTM3231;",
+            "[",
+            "OPTM4131",
+            "]",
             ")"
         ],
-        "broke at": "Index 1, PHAR3306, OPTM3131, OPTM3231; [OPTM4131]"
+        "broke at": "Index 1, PHAR3306, OPTM3131, OPTM3231;"
     },
     "OPTM4211": {
         "condition": {
@@ -17794,10 +17521,13 @@
         },
         "tokens": [
             "(",
-            "OPTM4110, OPTM4131, OPTM4151, ; [OPTM4231, OPTM4251, OPTM4271]",
+            "OPTM4110, OPTM4131, OPTM4151, ;",
+            "[",
+            "OPTM4231, OPTM4251, OPTM4271",
+            "]",
             ")"
         ],
-        "broke at": "Index 1, OPTM4110, OPTM4131, OPTM4151, ; [OPTM4231, OPTM4251, OPTM4271]"
+        "broke at": "Index 1, OPTM4110, OPTM4131, OPTM4151, ;"
     },
     "OPTM4231": {
         "condition": {
@@ -17806,10 +17536,13 @@
         },
         "tokens": [
             "(",
-            "OPTM4110, OPTM4131, OPTM4151, [OPTM4211, OPTM4251, OPTM4271,]",
+            "OPTM4110, OPTM4131, OPTM4151,",
+            "[",
+            "OPTM4211, OPTM4251, OPTM4271,",
+            "]",
             ")"
         ],
-        "broke at": "Index 1, OPTM4110, OPTM4131, OPTM4151, [OPTM4211, OPTM4251, OPTM4271,]"
+        "broke at": "Index 1, OPTM4110, OPTM4131, OPTM4151,"
     },
     "OPTM4251": {
         "condition": {
@@ -17818,10 +17551,13 @@
         },
         "tokens": [
             "(",
-            "OPTM4151; [OPTM4231]",
+            "OPTM4151;",
+            "[",
+            "OPTM4231",
+            "]",
             ")"
         ],
-        "broke at": "Index 1, OPTM4151; [OPTM4231]"
+        "broke at": "Index 1, OPTM4151;"
     },
     "OPTM4271": {
         "condition": {
@@ -17830,10 +17566,13 @@
         },
         "tokens": [
             "(",
-            "req; OPTM4110, OPTM4131, OPTM4151, [OPTM4211, OPTM4231, OPTM4251]",
+            "req; OPTM4110, OPTM4131, OPTM4151,",
+            "[",
+            "OPTM4211, OPTM4231, OPTM4251",
+            "]",
             ")"
         ],
-        "broke at": "Index 1, req; OPTM4110, OPTM4131, OPTM4151, [OPTM4211, OPTM4231, OPTM4251]"
+        "broke at": "Index 1, req; OPTM4110, OPTM4131, OPTM4151,"
     },
     "OPTM5111": {
         "condition": {
@@ -17854,10 +17593,13 @@
         },
         "tokens": [
             "(",
-            "OPTM4110, OPTM4131, OPTM4151, OPTM4211, OPTM4231, OPTM4251, OPTM4271, OPTM4291.[OPTM5111, OPTM5151]",
+            "OPTM4110, OPTM4131, OPTM4151, OPTM4211, OPTM4231, OPTM4251, OPTM4271, OPTM4291.",
+            "[",
+            "OPTM5111, OPTM5151",
+            "]",
             ")"
         ],
-        "broke at": "Index 1, OPTM4110, OPTM4131, OPTM4151, OPTM4211, OPTM4231, OPTM4251, OPTM4271, OPTM4291.[OPTM5111, OPTM5151]"
+        "broke at": "Index 1, OPTM4110, OPTM4131, OPTM4151, OPTM4211, OPTM4231, OPTM4251, OPTM4271, OPTM4291."
     },
     "OPTM5151": {
         "condition": {
@@ -17902,7 +17644,10 @@
             "&&",
             "PHAR3306",
             "&&",
-            "VISN3211 [OPTM6412]",
+            "VISN3211",
+            "[",
+            "OPTM6412",
+            "]",
             ")"
         ],
         "broke at": "Index 5, or"
@@ -17914,10 +17659,13 @@
         },
         "tokens": [
             "(",
-            "OPTM6400, [OPTM6412,]",
+            "OPTM6400,",
+            "[",
+            "OPTM6412,",
+            "]",
             ")"
         ],
-        "broke at": "Index 1, OPTM6400, [OPTM6412,]"
+        "broke at": "Index 1, OPTM6400,"
     },
     "OPTM6424": {
         "condition": {
@@ -18139,66 +17887,6 @@
         ],
         "broke at": "Index 5, PHSL 2501"
     },
-    "PHYS1121": {
-        "condition": {
-            "original": "Corequisite: MATH1131 or DPST1013 or MATH1141 or MATH1151 or MATH1011<br/><br/>",
-            "processed": "[MATH1131 || DPST1013 || MATH1141 || MATH1151 || MATH1011]"
-        },
-        "tokens": [
-            "(",
-            "[MATH1131",
-            "||",
-            "DPST1013",
-            "||",
-            "MATH1141",
-            "||",
-            "MATH1151",
-            "||",
-            "MATH1011]",
-            ")"
-        ],
-        "broke at": "Index 1, [MATH1131"
-    },
-    "PHYS1131": {
-        "condition": {
-            "original": "Corequisite: MATH1131 or DPST1013 or MATH1141 or MATH1151 or MATH1011<br/><br/>",
-            "processed": "[MATH1131 || DPST1013 || MATH1141 || MATH1151 || MATH1011]"
-        },
-        "tokens": [
-            "(",
-            "[MATH1131",
-            "||",
-            "DPST1013",
-            "||",
-            "MATH1141",
-            "||",
-            "MATH1151",
-            "||",
-            "MATH1011]",
-            ")"
-        ],
-        "broke at": "Index 1, [MATH1131"
-    },
-    "PHYS1141": {
-        "condition": {
-            "original": "Corequisite: MATH1131 or DPST1013 or MATH1141 or MATH1151 or MATH1011<br/><br/>",
-            "processed": "[MATH1131 || DPST1013 || MATH1141 || MATH1151 || MATH1011]"
-        },
-        "tokens": [
-            "(",
-            "[MATH1131",
-            "||",
-            "DPST1013",
-            "||",
-            "MATH1141",
-            "||",
-            "MATH1151",
-            "||",
-            "MATH1011]",
-            ")"
-        ],
-        "broke at": "Index 1, [MATH1131"
-    },
     "PHYS1221": {
         "condition": {
             "original": "Prerequisite: PHYS1121 or PHYS1131 or DPST1023 or PHYS1141; Corequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251<br/><br/>",
@@ -18212,16 +17900,19 @@
             "||",
             "DPST1023",
             "||",
-            "PHYS1141; [MATH1231",
+            "PHYS1141;",
+            "[",
+            "MATH1231",
             "||",
             "DPST1014",
             "||",
             "MATH1241",
             "||",
-            "MATH1251]",
+            "MATH1251",
+            "]",
             ")"
         ],
-        "broke at": "Index 7, PHYS1141; [MATH1231"
+        "broke at": "Index 7, PHYS1141;"
     },
     "PHYS1231": {
         "condition": {
@@ -18238,13 +17929,16 @@
             "||",
             "a mark of 65",
             "||",
-            "above in PHYS1121; [MATH1231",
+            "above in PHYS1121;",
+            "[",
+            "MATH1231",
             "||",
             "DPST1014",
             "||",
             "MATH1241",
             "||",
-            "MATH1251]",
+            "MATH1251",
+            "]",
             ")"
         ],
         "broke at": "Index 7, a mark of 65"
@@ -18260,16 +17954,19 @@
             "||",
             "DPST1023",
             "||",
-            "PHYS1141; [MATH1231",
+            "PHYS1141;",
+            "[",
+            "MATH1231",
             "||",
             "DPST1014",
             "||",
             "MATH1241",
             "||",
-            "MATH1251]",
+            "MATH1251",
+            "]",
             ")"
         ],
-        "broke at": "Index 5, PHYS1141; [MATH1231"
+        "broke at": "Index 5, PHYS1141;"
     },
     "PHYS4141": {
         "condition": {
@@ -19431,10 +19128,13 @@
         },
         "tokens": [
             "(",
-            "SOCW1001, SOCW1003, SOCW2003, SOCW2006; [SOCW3002]",
+            "SOCW1001, SOCW1003, SOCW2003, SOCW2006;",
+            "[",
+            "SOCW3002",
+            "]",
             ")"
         ],
-        "broke at": "Index 1, SOCW1001, SOCW1003, SOCW2003, SOCW2006; [SOCW3002]"
+        "broke at": "Index 1, SOCW1001, SOCW1003, SOCW2003, SOCW2006;"
     },
     "SOCW3006": {
         "condition": {
@@ -19491,7 +19191,10 @@
             "||",
             "SRAP2002",
             "&&",
-            "enrolment in a Social Work program. [SOCW3013]",
+            "enrolment in a Social Work program.",
+            "[",
+            "SOCW3013",
+            "]",
             ")"
         ],
         "broke at": "Index 19, SOSS/SRAP1000"
@@ -19591,7 +19294,10 @@
             "&&",
             "enrolment in a Social Work program. Equivalent: SOCW3001",
             "&&",
-            "SOCW3011. [SOCW3009]",
+            "SOCW3011.",
+            "[",
+            "SOCW3009",
+            "]",
             ")"
         ],
         "broke at": "Index 27, enrolment in a Social Work program. Equivalent: SOCW3001"
@@ -19727,7 +19433,10 @@
             "&&",
             "enrolment in a Social Work program",
             "&&",
-            "an overall 70WAM. [SOCW4018]",
+            "an overall 70WAM.",
+            "[",
+            "SOCW4018",
+            "]",
             ")"
         ],
         "broke at": "Index 11, enrolment in a Social Work program"
@@ -19749,10 +19458,13 @@
             "&&",
             "SOCW4013",
             "&&",
-            "enrolment in Social Work program. [SOCW4018]",
+            "enrolment in Social Work program.",
+            "[",
+            "SOCW4018",
+            "]",
             ")"
         ],
-        "broke at": "Index 11, enrolment in Social Work program. [SOCW4018]"
+        "broke at": "Index 11, enrolment in Social Work program."
     },
     "SOCW4017": {
         "condition": {
@@ -19767,10 +19479,13 @@
             "&&",
             "SOCW4012",
             "&&",
-            "enrolment in a Social Work program. [SOCW4013. Equivalent: SOCW4014, SOCW4001]",
+            "enrolment in a Social Work program.",
+            "[",
+            "SOCW4013. Equivalent: SOCW4014, SOCW4001",
+            "]",
             ")"
         ],
-        "broke at": "Index 7, enrolment in a Social Work program. [SOCW4013. Equivalent: SOCW4014, SOCW4001]"
+        "broke at": "Index 7, enrolment in a Social Work program."
     },
     "SOCW4018": {
         "condition": {
@@ -19787,12 +19502,15 @@
             "&&",
             "SOCW4013",
             "&&",
-            "enrolment in a Social Work program. [SOCW4015",
+            "enrolment in a Social Work program.",
+            "[",
+            "SOCW4015",
             "||",
-            "SOCW4016. Equivalent: SOCW4014, SOCW4001]",
+            "SOCW4016. Equivalent: SOCW4014, SOCW4001",
+            "]",
             ")"
         ],
-        "broke at": "Index 9, enrolment in a Social Work program. [SOCW4015"
+        "broke at": "Index 9, enrolment in a Social Work program."
     },
     "SOLA4951": {
         "condition": {
@@ -21190,10 +20908,13 @@
         },
         "tokens": [
             "(",
-            "24UOC in upper-level History passed at Credit level ; [6UOC in upper-level History]",
+            "24UOC in upper-level History passed at Credit level ;",
+            "[",
+            "6UOC in upper-level History",
+            "]",
             ")"
         ],
-        "broke at": "Index 1, 24UOC in upper-level History passed at Credit level ; [6UOC in upper-level History]"
+        "broke at": "Index 1, 24UOC in upper-level History passed at Credit level ;"
     },
     "ZHSS3231": {
         "condition": {
