@@ -21,9 +21,8 @@ def test_user1():
     assert user.in_specialisation("ACCTA2")
     assert user.has_taken_course("COMP1511")
     assert user.has_taken_course("COMP1521")
-    assert user.has_taken_course("MATH2400")
     assert isclose(user.wam, 70.5)
-    assert user.uoc == 15
+    assert user.uoc == 12
     assert user.year == 3
     
 def test_user2():
@@ -32,9 +31,10 @@ def test_user2():
     assert user.in_program("3707")
     assert user.in_specialisation("COMPA1")
     assert user.has_taken_course("COMP1511")
+    assert user.has_taken_course("MATH1131")
     assert user.has_taken_course("MATH1081")
     assert user.wam == None
-    assert user.uoc == 12
+    assert user.uoc == 18
     assert user.year == 1
 
 def test_user3():

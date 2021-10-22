@@ -136,6 +136,8 @@ def addDisciplineData(components, item):
             if container["vertical_grouping"]["value"] == "PE":
                 PE = {}
                 PE["type"] = "elective"
+                if container["credit_points"] != "":
+                    PE["credits_to_complete"] = container["credit_points"]
                 if container["relationship"] != []:
                     for course in container["relationship"]:
                         PE[course["academic_item_code"]] = course["academic_item_name"]
