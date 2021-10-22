@@ -647,3 +647,20 @@ def getAllUnlocked(userData: UserData, lockedCourses: list):
         }
 
     return {'courses_state': coursesState}
+
+@router.post("/unselectCourse/")
+def unselectCourse(userData: UserData, lockedCourses: list, unselectedCourse: str):
+    '''
+        Creates a new user class and returns all the courses affected from the course that was unselected in sorted order
+    '''
+    user = User(userData.dict())
+    affectedCourses =  user.unselect_course(unselectedCourse, lockedCourses)
+
+    return {'affectedCourses' :affectedCourses}
+
+# @router.post("/validateTermPlanner/")
+# def validateTermPlanner(userData: UserData, terms: list)
+
+
+
+

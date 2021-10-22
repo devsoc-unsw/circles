@@ -195,7 +195,8 @@ class User:
             # courses or can still be selected.
             break
         
-        return affected_courses.sort()
+        # return affected_courses.sort()
+        return sorted(affected_courses)
 
 class CourseCondition():
     '''Condition that the student has completed this course'''
