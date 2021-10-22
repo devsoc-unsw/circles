@@ -15,7 +15,7 @@ from data.utility import dataHelpers
 
 PARSED_LOGIC = {}
 
-split_key = ["(", ")", "&&", "||", "[", "]"]
+split_key = ["(", ")", "&&", "||", "[", "]", "in"]
 
 '''Converts the text condition into a json list'''
 
