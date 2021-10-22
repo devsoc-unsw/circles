@@ -4,8 +4,7 @@
         "specialisations": ["COMPA1", "ACCTA2"],
         "courses": {
             "COMP1511": [6, 84],
-            "COMP1521": [6, 57],
-            "MATH2400": [3, null]
+            "COMP1521": [6, 57]
         },
         "year": 3
     },
@@ -14,6 +13,7 @@
         "specialisations": ["COMPA1"],
         "courses": {
             "COMP1511": [6, null],
+            "MATH1131": [6, null],
             "MATH1081": [6, null]
         },
         "year": 1
@@ -31,6 +31,7 @@
             "COMP1531": [6, 57],
             "COMP1511": [6, 84],
             "COMP1521": [6, 57],
+            "MATH1141": [6, 80],
             "MATH1081": [6, 57]
         },
         "year": 3

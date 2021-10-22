@@ -19,8 +19,7 @@ def test_user1():
     data = user.unselect_course("COMP1511", [])
     assert user.has_taken_course("COMP1511") == False
     assert user.has_taken_course("COMP1521") == False
-    assert user.has_taken_course("MATH2400") == False
-    assert data == ['COMP1521', 'MATH2400']
+    assert data == ['COMP1521']
     # Delete a non-existing course
     user.unselect_course("COMP1511", [])
 

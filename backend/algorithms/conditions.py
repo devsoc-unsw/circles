@@ -202,11 +202,11 @@ class User:
                         del self.courses[course]
                         self.update_wam_uoc()
                         break
-            # Reaching this point means all the courses remaining are either locked
-            # courses or can still be selected.
-            if changed:
-                continue
-            break
+                        
+            # If no new courses were affected, we do not need to loop again
+            if not changed:
+                break
+            
         affected_courses.sort()
         return affected_courses
 
