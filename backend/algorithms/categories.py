@@ -137,7 +137,7 @@ def create_category(tokens):
     if re.match(r'^[A-Z]{4}$', tokens[0], flags=re.IGNORECASE):
         # Course type
         return CourseCategory(tokens[0]), 0
-    elif re.match(r'^L[0-9]', tokens[0], flags=re.IGNORECASE):
+    elif re.match(r'^L[0-9]$', tokens[0], flags=re.IGNORECASE):
         # Level category. Get the level, then determine next token if there is one
         level = int(re.match(r'^L([0-9])$', tokens[0],
                     flags=re.IGNORECASE).group(1))

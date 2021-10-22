@@ -85,6 +85,11 @@ class User:
         """Given a course the user is taking in their current term, adds it to their cur_courses"""
         self.cur_courses.append(course)
 
+    def empty_current_courses(self):
+        """Empty all the current courses. Helps with moving on to the next term
+        in the term planner api"""
+        self.cur_courses = []
+
     def add_program(self, program):
         '''Adds a program to this user'''
         self.program = program # TODO: This should update to reflect UOC of user
@@ -358,6 +363,7 @@ class GRADECondition():
         
         user_grade = user.get_grade(self.course)
         if user_grade == None:
+            print(f"No wam recorded for {self.course} which required {self.grade} grade")
             return True, self.get_warning()
         elif user_grade < self.grade:
             return False, None
