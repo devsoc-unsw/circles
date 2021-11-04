@@ -26,17 +26,17 @@ def mapCourse(course, schoolMappings, facultyMappings):
 def process_data():
     # Read in coursesProcessed File
     courseData = dataHelpers.read_data("data/finalData/coursesProcessed.json")
-    facultyMappings = dataHelpers.read_data("algorithms/cache/mappings/facultyMappings.json")
-    schoolMappings = dataHelpers.read_data("algorithms/cache/mappings/schoolMappings.json")
+    facultyMappings = dataHelpers.read_data("data/mappings/facultyMappings.json")
+    schoolMappings = dataHelpers.read_data("data/mappings/schoolMappings.json")
 
     initialiseData(schoolMappings, facultyMappings)
     for course in courseData.values():
         mapCourse(course, schoolMappings, facultyMappings)
 
     dataHelpers.write_data(
-            finalSchoolMappings, "algorithms/cache/mappings/schoolCourseMappings.json")
+            finalSchoolMappings, "data/mappings/schoolCourseMappings.json")
     dataHelpers.write_data(
-            finalFacultyMappings, "algorithms/cache/mappings/facultyCourseMappings.json")
+            finalFacultyMappings, "data/mappings/facultyCourseMappings.json")
 
 def initialiseData(schoolMappings, facultyMappings):
     for school in schoolMappings:   
