@@ -33,7 +33,8 @@ const OptionsHeader = ({ areYearsHidden, unhideAll, plannerRef }) => {
           />
         </button>
       </Tippy>
-
+          
+      { theme === "light" && 
       <Tippy
         content={<SaveMenu plannerRef={plannerRef} />}
         moveTransition="transform 0.2s ease-out"
@@ -53,6 +54,7 @@ const OptionsHeader = ({ areYearsHidden, unhideAll, plannerRef }) => {
           />
         </button>
       </Tippy>
+      }
 
       {areYearsHidden && (
         <Tooltip title="Show all hidden years">
