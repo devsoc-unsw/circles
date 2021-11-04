@@ -18,6 +18,10 @@ CONDITIONS_PROCESSED_FILE = "./data/finalData/conditionsProcessed.json"
 
 CACHED_WARNINGS_FILE = "./algorithms/cache/warnings.json"
 
+MAPPINGS_FILE = "./algorithms/cache/mappings.json"
+
+COURSE_MAPPINGS_FILE = "./algorithms/cache/courseMappings.json"
+
 def cache_exclusions():
     """
     Reads from processed courses and stores the exclusions in a map mapping
@@ -58,3 +62,28 @@ def cache_warnings():
             cached_warnings[course] = data["warning"]
     
     write_data(cached_warnings, CACHED_WARNINGS_FILE)
+
+
+def cache_mappings():
+    """
+    Reads from courses and mappings to map course to a school/faculty
+    """
+    finalMappings = {}
+    courses = read_data(COURSES_PROCESSED_FILE)
+    mappings = read_data(MAPPINGS_FILE)
+    # Initialise keys in final file
+    for mapping in mappings:
+        first_word = mapping.split()[0]
+        if len(first_word) == 1:
+            finalMappings[mapping] = {}
+    # Map courses to keys
+    for course in courses.values():
+        courseCode = course['code']
+        courseFaculty = course['faculty']
+        if 'school' in course:
+            courseSchool = course['school']
+            finalMappings[mappings[courseSchool]][courseCode] = 1
+
+        finalMappings[mappings[courseFaculty]][courseCode] = 1
+
+    write_data(finalMappings, COURSE_MAPPINGS_FILE)
