@@ -468,3 +468,32 @@ def test_coreq_condition():
     assert (complex_coreq_cond4.is_unlocked(user))["result"] == False
     assert (complex_coreq_cond5.is_unlocked(user))["result"] == True
     assert (complex_coreq_cond6.is_unlocked(user))["result"] == False
+
+
+def test_school_condition():
+    """Testing school conditions such as 12UOC in S Comp"""
+    user = create_student_3707_COMPA1()
+    user.add_courses({
+        "COMP1511": (6, None),
+        "COMP1521": (6, None),
+    })
+
+    comp_12uoc_cond = create_condition(["(", "12UOC", "in", "S", "Comp", ")"])
+    comp_18uoc_cond = create_condition(["(", "18UOC", "in", "S", "Comp", ")"])
+
+    assert (comp_12uoc_cond.is_unlocked(user))["result"] == True
+    assert (comp_18uoc_cond.is_unlocked(user))["result"] == False
+
+def test_faculty_condition():
+    """Testing faculty conditions such as 12UOC in F Engineering"""
+    user = create_student_3707_COMPA1()
+    user.add_courses({
+        "COMP1511": (6, None),
+        "COMP1521": (6, None),
+    })
+
+    comp_12uoc_cond = create_condition(["(", "12UOC", "in", "F", "Engineering", ")"])
+    comp_18uoc_cond = create_condition(["(", "18UOC", "in", "F", "Engineering", ")"])
+
+    assert (comp_12uoc_cond.is_unlocked(user))["result"] == True
+    assert (comp_18uoc_cond.is_unlocked(user))["result"] == False
