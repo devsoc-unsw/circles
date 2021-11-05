@@ -15,8 +15,6 @@ from data.utility import dataHelpers
 
 PARSED_LOGIC = {}
 
-split_key = ["(", ")", "&&", "||", "[", "]", "in"]
-
 '''Converts the text condition into a json list'''
 
 
@@ -37,22 +35,10 @@ def tokenise_conditions():
         
         logic = ["("]
 
-        # Split on ands/ors and brackets
-        phrase = ""
+        # Split on white space
         for word in text.split():
-            if word in split_key:
-                # End the logical phrase and split on this word
-                if phrase is not "":
-                    logic.append(phrase.strip())
-                logic.append(word)
-                phrase = ""
-            else:
-                # Keep building the logical phrase
-                phrase += word + " "
-
-        if phrase is not "":
-            logic.append(phrase.strip())
-
+            logic.append(word)
+        
         logic.append(")")
 
         PARSED_LOGIC[code] = logic
