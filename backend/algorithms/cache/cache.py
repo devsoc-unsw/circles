@@ -22,6 +22,8 @@ MAPPINGS_FILE = "./algorithms/cache/mappings.json"
 
 COURSE_MAPPINGS_FILE = "./algorithms/cache/courseMappings.json"
 
+COURSE_CODE_MAPPINGS = "./algorithms/cache/courseCodeMappings.json"
+
 def cache_exclusions():
     """
     Reads from processed courses and stores the exclusions in a map mapping
@@ -86,4 +88,26 @@ def cache_mappings():
 
         finalMappings[mappings[courseFaculty]][courseCode] = 1
 
+    write_data(finalMappings, COURSE_MAPPINGS_FILE)
+
+def cache_course_codes():
+    """
+    Reads from courses and maps all numbers to relevant course code
+    """
+
+    finalMappings = {}
+    courses = read_data(COURSES_PROCESSED_FILE)
+    # Assumes courses are read in alphabetical order
+    
+    courseCodeLetters = None
+    for course in courses.values():
+        courseNumbers = course['code'][-4:]
+        # If first 4 letters of code are same as one before
+        if course['code'][:4] == courseCodeLetters:
+            finalMappings[courseCodeLetters][courseNumbers] = 1
+        # First 4 letters different
+        else:
+            courseCodeLetters = course['code'][:4]
+            finalMappings[courseCodeLetters] = {}
+            finalMappings[courseCodeLetters][courseNumbers] = 1
     write_data(finalMappings, COURSE_MAPPINGS_FILE)
