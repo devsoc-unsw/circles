@@ -1,26 +1,26 @@
 {
 
 
-    "S Mech": "School of Mechanical and Manufacturing Engineering",
-    "School of Mechanical and Manufacturing Engineering": "S Mech",
+    "S MechEng": "School of Mechanical and Manufacturing Engineering",
+    "School of Mechanical and Manufacturing Engineering": "S MechEng",
 
-    "S Biomed": "Graduate School of Biomedical Engineering",
-    "Graduate School of Biomedical Engineering": "S Biomed",
+    "S BiomedEng": "Graduate School of Biomedical Engineering",
+    "Graduate School of Biomedical Engineering": "S BiomedEng",
 
-    "School of Civil and Environmental Engineering": "S Civil Engineering",
-    "S Civil Engineering": "School of Civil and Environmental Engineering",
+    "S CivEng": "School of Civil and Environmental Engineering",
+    "School of Civil and Environmental Engineering": "S CivEng",
 
+    "S Comp": "School of Computer Science and Engineering",    
     "School of Computer Science and Engineering": "S Comp",
-    "S Comp": "School of Computer Science and Engineering",
 
-    "School of Electrical Engineering & Telecommunications": "S Elec",
-    "S Elec": "School of Electrical Engineering & Telecommunications",
+    "S ElecEng": "School of Electrical Engineering & Telecommunications",
+    "School of Electrical Engineering & Telecommunications": "S ElecEng",
 
-    "S Minerals": "School of Minerals & Energy Resources Engineering",
-    "School of Minerals & Energy Resources Engineering": "S Minerals",
+    "S MinEng": "School of Minerals & Energy Resources Engineering",
+    "School of Minerals & Energy Resources Engineering": "S MinEng",
 
-    "S Photovoltaic": "School of Photovoltaic and Renewable Engineering",
-    "School of Photovoltaic and Renewable Engineering": "S Photovoltaic",
+    "S PhotoEng": "School of Photovoltaic and Renewable Engineering",
+    "School of Photovoltaic and Renewable Engineering": "S PhotoEng",
 
     "S ChemEng": "School of Chemical Engineering",
     "School of Chemical Engineering": "S ChemEng",
@@ -39,11 +39,11 @@
     "S Bio": "School of Biological, Earth and Environmental Sciences",
     "School of Biological, Earth and Environmental Sciences": "S Bio",
 
-    "S Chemistry": "School of Chemistry",
-    "School of Chemistry": "S Chemistry",
+    "S Chem": "School of Chemistry",
+    "School of Chemistry": "S Chem",
 
-    "S Mat Science": "School of Materials Science & Engineering",
-    "School of Materials Science & Engineering": "S Mat Science",
+    "S MatScience": "School of Materials Science & Engineering",
+    "School of Materials Science & Engineering": "S MatScience",
 
     "S Optom": "School of Optometry and Vision Science",
     "School of Optometry and Vision Science": "S Optom",
@@ -62,7 +62,7 @@
     "School of Art & Design": "S Design",
 
     "S Art": "School of the Arts and Media",
-    "School of the Arts and Media": "S Design",
+    "School of the Arts and Media": "S Art",
 
     "S Built": "School of Built Environment",
     "School of Built Environment": "S Built",
@@ -70,8 +70,8 @@
     "S Edu": "School of Education",
     "School of Education": "S Edu",
 
-    "S Language": "School of Humanities and Languages",
-    "School of Humanities and Languages": "S Language",
+    "S Humanities": "School of Humanities and Languages",
+    "School of Humanities and Languages": "S Humanities",
 
     "S Social": "School of Social Sciences",
     "School of Social Sciences": "S Social",
@@ -150,14 +150,14 @@
     "S HealthSciences": "School of Health Sciences",
     "School of Health Sciences": "S HealthSciences",
 
-    "S UC Engineering": "UC Engineering & Information Technology",
-    "UC Engineering & Information Technology": "S UC Engineering",
+    "S UCEngineering": "UC Engineering & Information Technology",
+    "UC Engineering & Information Technology": "S UCEngineering",
 
-    "S UC Humanities": "UC School of Humanities and Social Sciences",
-    "UC School of Humanities and Social Sciences": "S UC Humanities",
+    "S UCHumanities": "UC School of Humanities and Social Sciences",
+    "UC School of Humanities and Social Sciences": "S UCHumanities",
 
-    "S UC Science": "UC Science",
-    "UC Science": "S UC Science",
+    "S UCScience": "UC Science",
+    "UC Science": "S UCScience",
 
 
 
