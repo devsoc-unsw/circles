@@ -5,8 +5,11 @@ to create an overall score for each course and return the top X courses.
 NOTE: For now, we will access the data inside the ./finalData folder. Later on,
 we will cache the relevant data inside our algorithms/cache.
 
-For now, run inside backend folder with python3 -m algorithms.recommendations
-ENSURE YOU HAVE BRANCHED OFF!!!
+NOTE: For now, run inside backend folder with python3 -m algorithms.recommendations
+
+NOTE: ENSURE YOU HAVE BRANCHED OFF!!!
+
+NOTE: For sample user data, look at exampleUsers.json to get an idea of the structure
 """
 
 def get_unlocked_courses(user):
