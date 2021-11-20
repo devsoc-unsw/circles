@@ -4,7 +4,7 @@ on:
   push:
     branches: [ dev, main ]
   pull_request:
-    branches: [ adam/continuous-integration, dev, main ]
+    branches: [ dev, main ]
 
 jobs:
   build:
