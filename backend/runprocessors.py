@@ -46,7 +46,7 @@ except:
 
 def run_manual_fixes():
     subprocess.run(['data/processors/manualFixes/runManualFixes.sh'])
-
+ 
 run = {
     'program': {
         'scrape': scrape_prg_data,
