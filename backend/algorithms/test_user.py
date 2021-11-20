@@ -13,7 +13,7 @@ with open(PATH) as f:
 f.close()
 
 
-def test_user1():
+def test_user1(): 
     user = User(USERS["user1"])
 
     assert user.in_program("37w07")
