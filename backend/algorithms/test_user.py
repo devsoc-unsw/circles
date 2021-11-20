@@ -16,7 +16,7 @@ f.close()
 def test_user1(): 
     user = User(USERS["user1"])
 
-    assert user.in_program("37w07")
+    assert user.in_program("37w0s7")
     assert user.in_specialisation("COMPA1")
     assert user.in_specialisation("ACCTA2")
     assert user.has_taken_course("COMP1511")
