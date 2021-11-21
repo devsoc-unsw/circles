@@ -11,7 +11,8 @@ NOTE: ENSURE YOU HAVE BRANCHED OFF!!!
 
 NOTE: For sample user data, look at exampleUsers.json to get an idea of the structure
 """
-
+from .conditions import User, create_condition, CACHED_CONDITIONS_TOKENS
+import json
 def get_unlocked_courses(user):
     """
     Given a user's data, returns a list of all the unlocked courses which are
@@ -19,6 +20,29 @@ def get_unlocked_courses(user):
 
     OUTPUT: [COMP1511, COMP1521, COMP1531...]
     """
+
+    COURSE_PATH = "./data/finalData/conditionsTokens.json"
+    PICKLE_FILE = "./algorithms/conditions.pkl"
+    course_list = {}
+    result = []
+    with open(COURSE_PATH, encoding='UTF-8') as f:
+        course_list = json.load(f)
+        f.close()
+    
+    # Load all the necessary conditions
+    cached_conditions = {} # Mapping course to condition object
+    for course in course_list:
+        cached_conditions[course] = create_condition(CACHED_CONDITIONS_TOKENS[course], course)
+
+    for course in course_list:
+        if course in cached_conditions and cached_conditions[course] != None:
+            # The course is not locked and there exists a condition
+            cond = cached_conditions[course]
+            if (cond.is_unlocked(user))["result"] is False:
+                result.append(course)
+
+    return result
+
     pass
 
 def get_courses_path_to():
