@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from fastapi.params import Body
-from server.database import specialisationsCOL, programsCOL, coursesCOL
+from server.database import specialisationsCOL, programsCOL, coursesCOL, archivesDB
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel, create_model
@@ -131,7 +131,7 @@ def specialisations_index():
                 }
             })
 def getPrograms():
-    query = programsCOL.find();
+    query = programsCOL.find()
     result = {}
     for i in query:
         result[i['code']] = i['title']
@@ -659,6 +659,18 @@ def getAllUnlocked(userData: UserData, lockedCourses: list):
         }
 
     return {'courses_state': coursesState}
+
+@router.get("/getLegacyCourses/{year}/{term}")
+def getLegacyCourses(year, term):
+    db = archivesDB[year]
+    query = db.find()
+    result = {} 
+    for i in query:
+        if term in i['terms']:
+            result[i['code']] = i['title'] 
+
+    return {'courses' : result}
+
 
 @router.post("/unselectCourse/")
 def unselectCourse(userData: UserData, lockedCourses: list, unselectedCourse: str):
