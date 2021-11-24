@@ -21,7 +21,7 @@ with open(CACHED_EXCLUSIONS_PATH) as f:
     f.close()
 
 CACHED_CONDITIONS_TOKENS_PATH = "./data/finalData/conditionsTokens.json"
-with open(CACHED_CONDITIONS_TOKENS_PATH) as f:
+with open(CACHED_CONDITIONS_TOKENS_PATH, encoding='UTF-8') as f:
     CACHED_CONDITIONS_TOKENS = json.load(f)
     f.close()
 

@@ -11,6 +11,28 @@ NOTE: ENSURE YOU HAVE BRANCHED OFF!!!
 
 NOTE: For sample user data, look at exampleUsers.json to get an idea of the structure
 """
+from algorithms.conditions import User, create_condition, CACHED_CONDITIONS_TOKENS
+import json
+
+cached_conditions = None
+cached_course_list = None
+
+def load_condition_courselist():
+    global cached_conditions
+    global cached_course_list
+    if cached_conditions is not None:
+        return cached_conditions, cached_course_list
+    COURSE_PATH = "./data/finalData/conditionsTokens.json"
+    course_list = {}
+    with open(COURSE_PATH, encoding='UTF-8') as f:
+        cached_course_list = json.load(f)
+        f.close()
+    
+    # Load all the necessary conditions
+    cached_conditions = {} # Mapping course to condition object
+    for course in cached_course_list:
+        cached_conditions[course] = create_condition(CACHED_CONDITIONS_TOKENS[course], course)
+    return cached_conditions, cached_course_list
 
 def get_unlocked_courses(user):
     """
@@ -19,7 +41,16 @@ def get_unlocked_courses(user):
 
     OUTPUT: [COMP1511, COMP1521, COMP1531...]
     """
-    pass
+    result = []
+    conditions, course_list = load_condition_courselist()
+    for course in course_list:
+        if course in conditions and conditions[course] != None:
+            # The course is not locked and there exists a condition
+            cond = conditions[course]
+            if (cond.is_unlocked(user))["result"] is True:
+                result.append(course)
+
+    return result
 
 def get_courses_path_to():
     """
