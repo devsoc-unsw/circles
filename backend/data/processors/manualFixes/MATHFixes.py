@@ -58,7 +58,7 @@ def MATH_1011(code):
     "processed": ""
     """
     COURSES[code]["exclusions"]["3991"] = 1
-    COURSES[code]["exclusions"]["BUSI#"] = 1
+    COURSES[code]["exclusions"]["BUSN#"] = 1
     COURSES[code]["exclusions"]["MATH1031"] = 1
     COURSES[code]["exclusions"]["MATH1131"] = 1
     COURSES[code]["exclusions"]["MATH1141"] = 1
@@ -88,7 +88,7 @@ def MATH_3171():
     "original": "(1) [MATH2011 or MATH2111] and [MATH2501 or MATH2601]; or (2) both MATH2069 (CR) and MATH2099 ; or (3) both [MATH2018 or MATH2019] (DN) and MATH2089 .<br/><br/>",
     "processed": "((MATH2011 || MATH2111) && (MATH2501 || MATH2601)) || ((65GRADE in MATH2069) && MATH2099) || ((MATH2018 || 75GRADE in MATH2019) && MATH2089)"
     """
-    return "((MATH2011 || MATH2111) && (MATH2501 || MATH2601)) || ((65GRADE in MATH2069) && MATH2099) || ((MATH2018 || 75GRADE in MATH2019) && MATH2089)"
+    return "((MATH2011 || MATH2111) && (MATH2501 || MATH2601)) || (65GRADE in MATH2069 && MATH2099) || ((75GRADE in MATH2018 || 75GRADE in MATH2019) && MATH2089)"
 
 
 if __name__ == "__main__":
