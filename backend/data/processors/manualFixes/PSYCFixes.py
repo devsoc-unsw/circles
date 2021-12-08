@@ -9,7 +9,7 @@ can run:
     python3 -m data.processors.conditionsPreprocessing
 
 To then run this file:
-    python3 -m data.processors.manualFixes.COMPFixes
+    python3 -m data.processors.manualFixes.PSYCFixes
 """
 
 from data.utility import dataHelpers
