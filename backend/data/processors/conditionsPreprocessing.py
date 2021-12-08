@@ -59,6 +59,7 @@ def preprocess_conditions():
 
         # Phase 5: Common patterns
         processed = uoc_in_business_school(processed)
+        processed = l2_math_courses(processed)
 
         conditions["processed"] = processed
 
@@ -349,6 +350,11 @@ def uoc_in_business_school(processed):
         r'(\d+UOC) offered by the UNSW Business School', r'\1 in S Business', processed)
     return processed
 
+def l2_math_courses(processed):
+    '''Converts L2 Maths courses to L@ MATH'''
+    processed = re.sub(r'L2 Maths? courses', r'L2 MATH', processed, flags=re.IGNORECASE)
+    processed = re.sub(r'L2 Mathematics? courses', r'L2 MATH', processed, flags=re.IGNORECASE)
+    return processed
 
 if __name__ == "__main__":
     preprocess_conditions()

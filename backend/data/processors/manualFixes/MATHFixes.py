@@ -39,13 +39,15 @@ def fix_conditions():
     CONDITIONS["MATH3121"][PROCESSED] = MATH_3101_3121()
     CONDITIONS["MATH3161"][PROCESSED] = MATH_3161()
     CONDITIONS["MATH3171"][PROCESSED] = MATH_3171()
-
     CONDITIONS["MATH3261"][PROCESSED] = MATH_3261()
-
+    CONDITIONS["MATH3361"][PROCESSED] = MATH_3361()
     CONDITIONS["MATH3531"][PROCESSED] = MATH_3531()
-    CONDITIONS["MATH3611"][PROCESSED] = MATH_3611()
-    CONDITIONS["MATH3701"][PROCESSED] = MATH_3701()
+    CONDITIONS["MATH3611"] = MATH_3611_3701(CONDITIONS["MATH3611"])
+    CONDITIONS["MATH3701"] = MATH_3611_3701(CONDITIONS["MATH3701"])
     CONDITIONS["MATH3711"][PROCESSED] = MATH_3711()
+    CONDITIONS["MATH3801"][PROCESSED] = MATH_3801()
+    CONDITIONS["MATH3851"][PROCESSED] = MATH_3851()
+    CONDITIONS["MATH3901"][PROCESSED] = MATH_3901()
     CONDITIONS["MATH4001"][PROCESSED] = MATH_4001()
     CONDITIONS["MATH6781"][PROCESSED] = MATH_6781()
 
@@ -135,7 +137,95 @@ def MATH_3171():
 def MATH_3261():
     """
     "original": "Prerequisite: 12 units of credit in Level 2 Math courses including (MATH2011 or MATH2111) and (MATH2120 or MATH2130 or MATH2121 or MATH2221), or (both MATH2019 (DN) and MATH2089), or (both MATH2069 (DN) and MATH2099)<br/><br/>",
-    "processed": "12UOC in L2 Math courses && (MATH2011 || MATH2111) && (MATH2120 || MATH2130 || MATH2121 || MATH2221) || (75GRADE in MATH2019 && MATH2089) || (75GRADE in MATH2069 && MATH2099)"
+    
+    "processed": "12UOC in L2 MATH && ((MATH2011 || MATH2111) && (MATH2120 || MATH2130 || MATH2121 || MATH2221)) || (75GRADE in MATH2019 && MATH2089) || (75GRADE in MATH2069 && MATH2099)"
     """
+
+    return "12UOC in L2 MATH && ((MATH2011 || MATH2111) && (MATH2120 || MATH2130 || MATH2121 || MATH2221)) || (75GRADE in MATH2019 && MATH2089) || (75GRADE in MATH2069 && MATH2099)"
+
+def MATH_3361():
+    """
+    "original": "Prerequisite: MATH2011 or MATH2111 or MATH2018 (DN) or MATH2019(DN) or MATH2069(DN) and MATH2801 or MATH2901 or MATH2089(DN) or MATH2099(DN)<br/><br/>",
+
+    "processed": "(MATH2011 || MATH2111 || 75GRADE in MATH2018 || 75GRADE in MATH2019 || 75GRADE in MATH2069) && (MATH2801 || MATH2901 || 75GRADE in MATH2089 || 75GRADE in MATH2099)"
+    """
+
+    return "(MATH2011 || MATH2111 || 75GRADE in MATH2018 || 75GRADE in MATH2019 || 75GRADE in MATH2069) && (MATH2801 || MATH2901 || 75GRADE in MATH2089 || 75GRADE in MATH2099)"
+
+def MATH_3531():
+    """
+    "original": "Prerequisite: 12 units of credit in Level 2 Math courses including MATH2011 or MATH2111 or MATH2069.<br/><br/>",
+    
+    "processed": "12UOC in L2 MATH && (MATH2011 || MATH2111 || MATH2069)"
+    """
+
+    return "12UOC in L2 MATH && (MATH2011 || MATH2111 || MATH2069)"
+
+def MATH_3611_3701(condition):
+    """
+    "original": "Prerequisite: 12 UOC of Level 2 Mathematics with an average mark of at least 70, including MATH2111 or MATH2011 (CR) or MATH2510 (CR), or permission from the Head of Department.<br/><br/>",
+
+    "processed": "12UOC in L2 Mathematics with an average 70GRADE && MATH2111 || 65GRADE in MATH2011 || 65GRADE in MATH2510 || permission from the Head of Department" 
+    
+    "warning": "Can circumvent prerequisites with permission from Head of Department"
+    """
+    return {
+        "original": condition["original"],
+        "processed": "12UOC in L2 MATH && 70GRADE in L2 MATH && (MATH2111 || 65GRADE in MATH2011 || 65GRADE in MATH2510)",
+        "warning": "Can circumvent prerequisites with permission from Head of Department"
+    }
+
+def MATH_3711(condition):
+    """
+    "original": "Prerequisite: 12 UOC of Level 2 Mathematics with an average mark of at least 70, including MATH2601 or MATH2501 (CR), or permission from the Head of Department.<br/><br/>",
+
+    "processed": "12UOC in L2 MATH && 70GRADE in L2 MATH && (MATH2601 || 65GRADE in MATH2501)"
+    """
+    return {
+        "original": condition["original"],
+        "processed": "12UOC in L2 MATH && 70GRADE in L2 MATH && (MATH2601 || 65GRADE in MATH2501)",
+        "warning": "Can circumvent prerequisites with permission from Head of Department"
+    }
+
+def MATH_3801():
+    """
+    "original": "Prerequisite: MATH2501 or MATH2601 and MATH2011 or MATH2111 or MATH2510 or MATH2610 and MATH2801 or MATH2901.<br/><br/>",
+
+    "processed": "(MATH2501 || MATH2601) && (MATH2011 || MATH2111 || MATH2510 || MATH2610) && (MATH2801 || MATH2901)"
+    """
+    return "(MATH2501 || MATH2601) && (MATH2011 || MATH2111 || MATH2510 || MATH2610) && (MATH2801 || MATH2901)"
+
+def MATH_3851():
+    """
+    "original": "Prerequisite: MATH2801 OR MATH2901 AND MATH2831 OR MATH2931.<br/><br/>",
+
+    "processed": "(MATH2801 || MATH2901) && (MATH2831 || MATH2931)"
+    """
+    return "(MATH2801 || MATH2901) && (MATH2831 || MATH2931)"
+
+def MATH_3901():
+    """
+    "original": "Prerequisite: MATH2901 or MATH2801(DN) and MATH2501 or MATH2601 and MATH2011 or MATH2111 or MATH2510 or MATH2610.<br/><br/>",
+
+    "processed": "(MATH2901 || 75GRADE in MATH2801) && (MATH2501 || MATH2601) && (MATH2011 || MATH2111 || MATH2510 || MATH2610)"
+    """
+    return "(MATH2901 || 75GRADE in MATH2801) && (MATH2501 || MATH2601) && (MATH2011 || MATH2111 || MATH2510 || MATH2610)"
+
+def MATH_4001():
+    """
+    "original": "Prerequisite: Enrolled in MATH Honours stream<br/><br/>",
+
+    "processed": "MATH?H"
+    """
+    return "MATH?H"
+
+def MATH_6781():
+    """
+    "original": "12 units of credit in Level 2 Mathematics courses including (MATH2120 or MATH2130 or MATH2121 or MATH2221), or both MATH2019 and MATH2089, or both MATH2069 and MATH2099<br/><br/>",
+    
+    "processed": "12UOC in L2 MATH && ((MATH2120 || MATH2130 || MATH2121 || MATH2221) || (MATH2019 && MATH2089) || (MATH2069 && MATH2099))"
+    """
+    return "12UOC in L2 MATH && ((MATH2120 || MATH2130 || MATH2121 || MATH2221) || (MATH2019 && MATH2089) || (MATH2069 && MATH2099))"
+
 if __name__ == "__main__":
     fix_conditions()

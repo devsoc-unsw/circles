@@ -5897,7 +5897,7 @@
     },
     "ENGG1811": {
         "original": "Prerequisite: Enrolment in a non-CSE major (no BINF, COMP, or SENG)<br/><br/>",
-        "processed": ""
+        "processed": "Enrolment in a non-CSE major (no BINF || COMP || SENG)"
     },
     "ENGG2400": {
         "original": "Prerequisite: ENGG1300 OR DPST1072 OR CVEN1300 OR MMAN1300<br/><br/>",
@@ -5909,12 +5909,11 @@
     },
     "ENGG2600": {
         "original": "Please refer to the course overview section for information on prerequisite requirements.<br/><br/>",
-        "processed": "",
-        "warning": "Please refer to the course overview section for information on requirements"
+        "processed": "Please refer to the course overview section for information on requirements"
     },
     "ENGG2997": {
         "original": "Successful completion of 72 UOC and enrolled in program 3778 or 3061<br/><br/>",
-        "processed": "72UOC && (3778 || 3061)"
+        "processed": "Successful 72UOC && program 3778 || 3061"
     },
     "ENGG3001": {
         "original": "Prerequisite: Completion of 96UOC<br/><br/>",
@@ -5926,12 +5925,11 @@
     },
     "ENGG3060": {
         "original": "Pre-requisite: Completion of 66 UOC<br/><br/>",
-        "processed": "66UOC in ENGG#"
+        "processed": "66UOC"
     },
     "ENGG3600": {
         "original": "Please refer to the course overview section for information on prerequisite requirements.<br/><br/>",
-        "processed": "",
-        "warning": "Please refer to the course overview section for information on requirements"
+        "processed": "Please refer to the course overview section for information on requirements"
     },
     "ENGG4060": {
         "original": "Prerequisite 96 UOC<br/><br/>",
@@ -5943,12 +5941,11 @@
     },
     "ENGG4103": {
         "original": "ENGG3001 - Fundamentals of Humanitarian Engineering (UG)\t<br/><br/>",
-        "processed": "ENGG3001"
+        "processed": "ENGG3001 - Fundamentals of Humanitarian Engineering (UG)"
     },
     "ENGG4600": {
         "original": "Please refer to the course overview section for information on prerequisite requirements.<br/><br/>",
-        "processed": "",
-        "warning": "Please refer to the course overview section for information on requirements"
+        "processed": "Please refer to the course overview section for information on requirements"
     },
     "ENGG4820": {
         "original": "",
@@ -6004,7 +6001,7 @@
     },
     "FINS2101": {
         "original": "Enrolled in plan FINSD13554 or in FINSBH3565<br/><br/>",
-        "processed": "FINSD13554 || FINSBH3565"
+        "processed": "plan FINSD13554 || in FINSBH3565"
     },
     "FINS2613": {
         "original": "Prerequisite: COMM1180<br/><br/>",
@@ -6012,7 +6009,7 @@
     },
     "FINS2622": {
         "original": "Prerequisite or co-requisite:FINS1612 and FINS2624<br/><br/>",
-        "processed": "[FINS1612 && FINS2624]"
+        "processed": "|| [FINS1612 && FINS2624]"
     },
     "FINS2624": {
         "original": "Prerequisite: COMM1180 or (COMM1140 and ECON1102)<br/><br/>",
@@ -6024,11 +6021,11 @@
     },
     "FINS3202": {
         "original": "Prerequisite: FINS2101 and enrolled in plan FINSD13554 or FINSBH3565<br/><br/>",
-        "processed": "FINS2101 && (FINSD13554 || FINSBH3565)"
+        "processed": "FINS2101 && plan FINSD13554 || FINSBH3565"
     },
     "FINS3303": {
         "original": "Prerequisite: FINS3202 and enrolled in plan FINSD13554 or FINSBH3565<br/><br/>",
-        "processed": "FINS2101 && (FINSD13554 || FINSBH3565)"
+        "processed": "FINS3202 && plan FINSD13554 || FINSBH3565"
     },
     "FINS3616": {
         "original": "Prerequisite: FINS2624<br/><br/>",
@@ -6044,11 +6041,11 @@
     },
     "FINS3626": {
         "original": "Prerequisite: COMM1140 or ACCT1511 and COMM1180 or FINS1613<br/><br/>",
-        "processed": "(COMM1140 || ACCT1511) && (COMM1180 || FINS1613)"
+        "processed": "COMM1140 || ACCT1511 && COMM1180 || FINS1613"
     },
     "FINS3630": {
         "original": "Prerequisite: FINS1612, COMM1180<br/><br/>",
-        "processed": "FINS1612 && COMM1180"
+        "processed": "FINS1612, COMM1180"
     },
     "FINS3631": {
         "original": "Pre-requisite: FINS1612<br/><br/>",
@@ -6092,11 +6089,11 @@
     },
     "FINS3645": {
         "original": "Pre-requisite: FINS1612 OR (Business Analytics Major (COMMJ1) and COMM1180 OR FINS1613<br/><br/>",
-        "processed": "FINS1612 || (COMMJ1 && (COMM1180 || FINS1613))"
+        "processed": "FINS1612 || (Business Analytics Major (COMMJ1) && COMM1180 || FINS1613"
     },
     "FINS3646": {
         "original": "Pre-requisite: FINS1612 OR (Business Analytics Major (COMMJ1) and COMM1180 OR FINS1613<br/><br/>",
-        "processed": "FINS1612 || (COMMJ1 && (COMM1180 || FINS1613))"
+        "processed": "FINS1612 || (Business Analytics Major (COMMJ1) && COMM1180 || FINS1613"
     },
     "FINS3647": {
         "original": "Pre-requisite: FINS1612<br/><br/>",
@@ -6124,27 +6121,27 @@
     },
     "FINS4774": {
         "original": "Prerequisite: Must be enrolled in specialisation FINSAH4501 or FINSBH3565; or program 4520. <br/>Corequisite: FINS3775 or FINS4775 or FINS4779<br/><br/>",
-        "processed": "(FINSAH4501 || FINSBH3565 || 4520) && [FINS3775 || FINS4775 || FINS4779]"
+        "processed": "Must be specialisation FINSAH4501 || FINSBH3565; || program 4520. [FINS3775 || FINS4775 || FINS4779]"
     },
     "FINS4775": {
         "original": "Prerequisite:70% or greater in FINS2624 and ECON1203 or enrolled in specialisation FINSAH4501 or FINSBH3565 or program 4520<br/><br/>",
-        "processed": "(70GRADE in FINS2624 && 70GRADE in ECON1203) || (FINSAH4501 || FINSBH3565 || 4520)"
+        "processed": "70% || greater in FINS2624 && ECON1203 || specialisation FINSAH4501 || FINSBH3565 || program 4520"
     },
     "FINS4776": {
         "original": "Prerequisite: Must be enrolled in specialisation FINSAH4501 or FINSBH3565; or program 4520.<br/>Corequisite: FINS3775 or FINS4775 or FINS4779 <br/><br/>",
-        "processed": "(FINSAH4501 || FINSBH3565 || 4520) && ([FINS3775 || FINS4775 || FINS4779])"
+        "processed": "Must be specialisation FINSAH4501 || FINSBH3565; || program 4520. [FINS3775 || FINS4775 || FINS4779]"
     },
     "FINS4777": {
         "original": "Prerequisite: Must be enrolled in specialisation FINSAH4501 or FINSBH3565; or program 4520.<br/>Corequisite: FINS3775 or FINS4775 or FINS4779 <br/><br/>",
-        "processed": "(FINSAH4501 || FINSBH3565 || 4520) && ([FINS3775 || FINS4775 || FINS4779])"
+        "processed": "Must be specialisation FINSAH4501 || FINSBH3565; || program 4520. [FINS3775 || FINS4775 || FINS4779]"
     },
     "FINS4779": {
         "original": "Prerequisite: Must be enrolled in specialisation FINSAH4501 or FINSBH3565; or program 4520.<br/>Corequisite: FINS3775 or FINS4775 or FINS4779 <br/><br/>",
-        "processed": "(FINSAH4501 || FINSBH3565 || 4520) && ([FINS3775 || FINS4775 || FINS4779])"
+        "processed": "Must be specialisation FINSAH4501 || FINSBH3565; || program 4520. [FINS3775 || FINS4775 ||]"
     },
     "FINS4792": {
         "original": "Prerequisite: Must be enrolled in specialisation FINSAH4501 or FINSBH3565;  or program 4520. <br/>Corequisite:  FINS3775 or FINS4775<br/><br/>",
-        "processed": "(FINSAH4501 || FINSBH3565 || 4520) && [FINS3775 || FINS4775]"
+        "processed": "Must be specialisation FINSAH4501 || FINSBH3565; || program 4520. [FINS3775 || FINS4775]"
     },
     "FINS4796": {
         "original": "",
@@ -8176,19 +8173,19 @@
     },
     "MATH3000": {
         "original": "Prerequisite: 12 units of credit in Level 2 Maths courses.<br/><br/>",
-        "processed": "12UOC in L2 Maths courses"
+        "processed": "12UOC in L2 MATH"
     },
     "MATH3001": {
         "original": "Prerequisite: 12 units of credit in Level 2 Maths courses.<br/><br/>",
-        "processed": "12UOC in L2 Maths courses"
+        "processed": "12UOC in L2 MATH"
     },
     "MATH3002": {
         "original": "Prerequisite: 12 units of credit in Level 2 Maths courses.<br/><br/>",
-        "processed": "12UOC in L2 Maths courses"
+        "processed": "12UOC in L2 MATH"
     },
     "MATH3041": {
         "original": "Prerequisite: 12 units of credit in Level 2 Maths courses.<br/><br/>",
-        "processed": "12UOC in L2 Maths courses"
+        "processed": "12UOC in L2 MATH"
     },
     "MATH3051": {
         "original": "Prerequisite: 12UOC of second year mathematics courses, including MATH2011 or MATH2111 or MATH2069(DN).<br/><br/>",
@@ -8196,11 +8193,11 @@
     },
     "MATH3101": {
         "original": "Prerequisite: 12 units of credit in Level 2 Math courses including (MATH2011 or MATH2111 and MATH2120 or MATH2130 or MATH2121 or MATH2221), or (both MATH2019 (DN) and MATH2089), or (both MATH2069 (CR) and MATH2099)<br/><br/>",
-        "processed": "12UOC in L2 Math courses && (MATH2011 || MATH2111 && MATH2120 || MATH2130 || MATH2121 || MATH2221) || (75GRADE in MATH2019 && MATH2089) || (65GRADE in MATH2069 && MATH2099)"
+        "processed": "12UOC in L2 MATH && (MATH2011 || MATH2111 && MATH2120 || MATH2130 || MATH2121 || MATH2221) || (75GRADE in MATH2019 && MATH2089) || (65GRADE in MATH2069 && MATH2099)"
     },
     "MATH3121": {
         "original": "Prerequisite: 12 units of credit in Level 2 Math courses including (MATH2011 or MATH2111) and (MATH2120 or MATH2130 or MATH2121 or MATH2221), or (both MATH2019 (DN) and MATH2089), or (both MATH2069 (DN) and MATH2099)<br/><br/>",
-        "processed": "12UOC in L2 Math courses && (MATH2011 || MATH2111) && (MATH2120 || MATH2130 || MATH2121 || MATH2221) || (75GRADE in MATH2019 && MATH2089) || (75GRADE in MATH2069 && MATH2099)"
+        "processed": "12UOC in L2 MATH && (MATH2011 || MATH2111) && (MATH2120 || MATH2130 || MATH2121 || MATH2221) || (75GRADE in MATH2019 && MATH2089) || (75GRADE in MATH2069 && MATH2099)"
     },
     "MATH3161": {
         "original": "Prerequisite: 12 units of credit in Level 2 Mathematics courses including MATH2011 or MATH2111 or MATH2510, and MATH2501 or MATH2601, or both MATH2019(DN) and MATH2089, or both MATH2069(CR) and MATH2099.<br/><br/>",
@@ -8216,7 +8213,7 @@
     },
     "MATH3261": {
         "original": "Prerequisite: 12 units of credit in Level 2 Math courses including (MATH2011 or MATH2111) and (MATH2120 or MATH2130 or MATH2121 or MATH2221), or (both MATH2019 (DN) and MATH2089), or (both MATH2069 (DN) and MATH2099)<br/><br/>",
-        "processed": "12UOC in L2 Math courses && (MATH2011 || MATH2111) && (MATH2120 || MATH2130 || MATH2121 || MATH2221) || (75GRADE in MATH2019 && MATH2089) || (75GRADE in MATH2069 && MATH2099)"
+        "processed": "12UOC in L2 MATH && (MATH2011 || MATH2111) && (MATH2120 || MATH2130 || MATH2121 || MATH2221) || (75GRADE in MATH2019 && MATH2089) || (75GRADE in MATH2069 && MATH2099)"
     },
     "MATH3311": {
         "original": "Prerequisite: (MATH2120 or MATH2130 or MATH2121 or MATH2221 or MATH2111) and (MATH2501 or MATH2601) and (MATH2801 or MATH2901 or MATH2871)<br/><br/>",
@@ -8236,23 +8233,23 @@
     },
     "MATH3511": {
         "original": "Prerequisite: 12 units of credit in Level 2 Math courses<br/><br/>",
-        "processed": "12UOC in L2 Math courses"
+        "processed": "12UOC in L2 MATH"
     },
     "MATH3521": {
         "original": "Prerequisite: 12 units of credit in Level 2 Math courses.<br/><br/>",
-        "processed": "12UOC in L2 Math courses"
+        "processed": "12UOC in L2 MATH"
     },
     "MATH3531": {
         "original": "Prerequisite: 12 units of credit in Level 2 Math courses including MATH2011 or MATH2111 or MATH2069.<br/><br/>",
-        "processed": "12UOC in L2 Math courses && MATH2011 || MATH2111 || MATH2069"
+        "processed": "12UOC in L2 MATH && MATH2011 || MATH2111 || MATH2069"
     },
     "MATH3560": {
         "original": "Prerequisite: 6 units of credit in Level 2 Math courses.<br/><br/>",
-        "processed": "6UOC in L2 Math courses"
+        "processed": "6UOC in L2 MATH"
     },
     "MATH3570": {
         "original": "Prerequisite: 12 units of credit in Level 2 Math courses.<br/><br/>",
-        "processed": "12UOC in L2 Math courses"
+        "processed": "12UOC in L2 MATH"
     },
     "MATH3611": {
         "original": "Prerequisite: 12 UOC of Level 2 Mathematics with an average mark of at least 70, including MATH2111 or MATH2011 (CR) or MATH2510 (CR), or permission from the Head of Department.<br/><br/>",
@@ -8872,7 +8869,7 @@
     },
     "MGMT2101": {
         "original": "Prerequisite or corequisite:MGMT1101or COMM1150  Excluded: IBUS2107<br/><br/>",
-        "processed": "[MGMT1101 || COMM1150]"
+        "processed": "|| [MGMT1101or COMM1150]"
     },
     "MGMT2102": {
         "original": "Prerequisite: 48 units of credit<br/><br/>",
@@ -8888,7 +8885,7 @@
     },
     "MGMT2718": {
         "original": "Prerequisite or Co-requisite: MGMT1001 OR MGMT1101 OR MGMT1002 OR COMM1100 OR COMM1150 OR COMM1170<br/><br/>",
-        "processed": "[MGMT1001 || MGMT1101 || MGMT1002 || COMM1100 || COMM1150 || COMM1170]"
+        "processed": "|| [MGMT1001 || MGMT1101 || MGMT1002 || COMM1100 || COMM1150 || COMM1170]"
     },
     "MGMT2721": {
         "original": "",
@@ -8904,12 +8901,11 @@
     },
     "MGMT3001": {
         "original": "Prerequisite: MGMT1001or COMM1100 or COMM1120 or COMM1170 or 12 units of credit in Business courses<br/><br/>",
-        "processed": "MGMT1001 || COMM1100 || COMM1120 || COMM1170 || 12UOC in F Business"
+        "processed": "MGMT1001or COMM1100 || COMM1120 || COMM1170 || 12UOC in Business courses"
     },
     "MGMT3004": {
         "original": "Prerequisite: Completion of 96 UOC and in good standing. <br/><br/>",
-        "processed": "96UOC",
-        "warning": "Students must be in good standing"
+        "processed": "96UOC && in good standing"
     },
     "MGMT3101": {
         "original": "Prerequisite: MGMT2001 or MGMT2101<br/><br/>",
@@ -8917,12 +8913,11 @@
     },
     "MGMT3102": {
         "original": "Prerequisite: MGMT1101or COMM1150<br/><br/>",
-        "processed": "MGMT1101 || COMM1150"
+        "processed": "MGMT1101or COMM1150"
     },
     "MGMT3110": {
         "original": "MGMT2102 and completion of 72 UOC (if you are enrolled the Commerce International [program 3558], completion of the Commerce Overseas Program (Exchange) is also required)<br/><br/>",
-        "processed": "MGMT2102 && 72UOC",
-        "warning": "If you are enrolled the Commerce International (program 3558), the Commerce Overseas Program (Exchange) is also required"
+        "processed": "MGMT2102 && 72UOC (if you are enrolled the Commerce International (program 3558), the Commerce Overseas Program (Exchange) is also required)"
     },
     "MGMT3701": {
         "original": "Prerequisite: MGMT1001 or COMM1100 or COMM1170 or COMM1120 or MGMT2718<br/><br/>",
@@ -8946,7 +8941,7 @@
     },
     "MGMT3728": {
         "original": "Prerequisite or Corequisite : MGMT2718<br/><br/>",
-        "processed": "[MGMT2718]"
+        "processed": "|| [: MGMT2718]"
     },
     "MGMT3729": {
         "original": "Prerequisite: MGMT2718<br/><br/>",
@@ -8954,37 +8949,31 @@
     },
     "MGMT3730": {
         "original": "Pre-requisite: MGMT2718 OR MGMT2001 OR MGMT2102 OR any Business Analytics Modelling I course (ECON2206, ECON2209 or RISK2002)<br/><br/>",
-        "processed": "MGMT2718 || MGMT2001 || MGMT2102 || ECON2206 || ECON2209 || RISK2002"
+        "processed": "MGMT2718 || MGMT2001 || MGMT2102 || any Business Analytics Modelling I course (ECON2206 || ECON2209 || RISK2002)"
     },
     "MGMT4101": {
-        "original": "MGMT2102 and completion of 72 UOC (if you are enrolled the Commerce International [program 3558], completion of the Commerce Overseas Program (Exchange) is also required)<br/><br/>",
-        "processed": "4501",
-        "warning": "enrolment in the International Business Honours plan is required"
+        "original": "Prerequisite: Program 4501 and enrolment in the International Business Honours plan is required.<br/><br/>",
+        "processed": "Program 4501 && enrolment in the International Business Honours plan is required"
     },
     "MGMT4104": {
-        "original": "MGMT2102 and completion of 72 UOC (if you are enrolled the Commerce International [program 3558], completion of the Commerce Overseas Program (Exchange) is also required)<br/><br/>",
-        "processed": "4501",
-        "warning": "enrolment in the Human Resource Management Honours plan is required"
+        "original": "Prerequisite: Program 4501 and enrolled in the Human Resource Management Honours plan.<br/><br/>",
+        "processed": "Program 4501 && the Human Resource Management Honours plan"
     },
     "MGMT4500": {
-        "original": "MGMT2102 and completion of 72 UOC (if you are enrolled the Commerce International [program 3558], completion of the Commerce Overseas Program (Exchange) is also required)<br/><br/>",
-        "processed": "4501",
-        "warning": "enrolment in the International Business Honours plan is required"
+        "original": "Prerequisite: Program 4501 and enrolment in the International Business Honours plan is required.<br/><br/>",
+        "processed": "Program 4501 && enrolment in the International Business Honours plan is required"
     },
     "MGMT4501": {
-        "original": "MGMT2102 and completion of 72 UOC (if you are enrolled the Commerce International [program 3558], completion of the Commerce Overseas Program (Exchange) is also required)<br/><br/>",
-        "processed": "4501",
-        "warning": "enrolment in the International Business Honours plan is required"
+        "original": "Prerequisite: Program 4501 and enrolment in the International Business Honours plan is required.<br/><br/>",
+        "processed": "Program 4501 && enrolment in the International Business Honours plan is required"
     },
     "MGMT4738": {
-        "original": "MGMT2102 and completion of 72 UOC (if you are enrolled the Commerce International [program 3558], completion of the Commerce Overseas Program (Exchange) is also required)<br/><br/>",
-        "processed": "4501",
-        "warning": "enrolment in the Human Resource Management Honours plan is required"
+        "original": "Prerequisite: Program 4501 and enrolled in the Human Resource Management Honours plan.<br/><br/>",
+        "processed": "Program 4501 && the Human Resource Management Honours plan"
     },
     "MGMT4739": {
-        "original": "MGMT2102 and completion of 72 UOC (if you are enrolled the Commerce International [program 3558], completion of the Commerce Overseas Program (Exchange) is also required)<br/><br/>",
-        "processed": "4501",
-        "warning": "enrolment in the Human Resource Management Honours plan is required"
+        "original": "Prerequisite: Program 4501 and enrolled in the Human Resource Management Honours plan.<br/><br/>",
+        "processed": "Program 4501 && the Human Resource Management Honours plan"
     },
     "MICR2011": {
         "original": "Prerequisite: BABS1201 or DPST1051<br/><br/>",
