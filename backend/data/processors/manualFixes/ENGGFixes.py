@@ -80,7 +80,7 @@ def ENGG_2997():
     "processed": "Successful 72UOC && program 3778 || 3061"
     """
 
-    return "72UOC in 3778 || 3061"
+    return "72UOC && (3778 || 3061)"
 
 def ENGG_3060():
     """
