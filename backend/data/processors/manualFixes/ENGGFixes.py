@@ -12,7 +12,7 @@ can run:
     python3 -m data.processors.conditionsPreprocessing
 
 To then run this file:
-    python3 -m data.processors.manualFixes.[CODE]Fixes
+    python3 -m data.processors.manualFixes.ENGGFixes
 """
 
 from data.utility import dataHelpers
@@ -29,13 +29,13 @@ def fix_conditions():
 
     # TODO: call your functions here
     CONDITIONS["ENGG1811"][PROCESSED] = ENGG_1811()
-    CONDITIONS["ENGG2600"][PROCESSED] = ENGG_2_4600("ENGG2600") # HELP
     CONDITIONS["ENGG2997"][PROCESSED] = ENGG_2997()
     CONDITIONS["ENGG3060"][PROCESSED] = ENGG_3060()
     CONDITIONS["ENGG3060"][PROCESSED] = ENGG_3060()
-    CONDITIONS["ENGG3600"][PROCESSED] = ENGG_2_4600("ENGG3600") # HELP
     CONDITIONS["ENGG4103"][PROCESSED] = ENGG_4103()
-    CONDITIONS["ENGG4600"][PROCESSED] = ENGG_2_4600("ENGG4600") # HELP
+
+    for course in ["ENGG2600", "ENGG3600", "ENGG4600"]:
+        CONDITIONS[course] = ENGG_2_4600(CONDITIONS[course])
 
     # Updates the files with the modified dictionaries
     dataHelpers.write_data(
@@ -58,12 +58,20 @@ def ENGG_1811():
 
     return ""
 
-# CHECK COURSE OVERVIEW
-def ENGG_2_4600(code):
+def ENGG_2_4600(conditions):
     """
+    "original": "Please refer to the course overview section for information on prerequisite requirements.<br/><br/>"
+
+    "processed": ""
+
+    "warning": "Please refer to the course overview section for information on requirements"
     """
-    # HELP???
-    return
+
+    return {
+        "original": conditions["original"],
+        "processed": "",
+        "warning": "Please refer to the course overview section for information on requirements"
+    }
 
 def ENGG_2997():
     """
