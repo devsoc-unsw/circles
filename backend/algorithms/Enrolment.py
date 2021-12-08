@@ -238,7 +238,7 @@ DATA WILL BE PREPROCESSED IN CONDITIONS:
 - MATH1141, MATH1151 with a mark of at least 75 --> GRADE 75 MATH1141, ||, GRADE 75 MATH1151 
 - WAM of 75+ --> WAM 75
 - Don't worry about exclusion courses
-
+    
 EXAMPLES
     "ACTL2101 and enrolment in program 3587",
 --> [(, ACTL2021, &&, 3587, )]

@@ -8,7 +8,7 @@ import argparse
 
 from server import server
 from server.server import app
-from server.database import overwrite_collection
+from server.database import overwrite_all
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--overwrite', default=False, type=bool,
@@ -22,8 +22,6 @@ if __name__ == "__main__":
         sys.exit(0)
 
     if args.overwrite:
-        overwrite_collection("Courses")
-        overwrite_collection("Specialisations")
-        overwrite_collection("Programs")
+        overwrite_all()
 
     uvicorn.run(app)
