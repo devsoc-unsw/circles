@@ -1,10 +1,14 @@
 from fastapi import APIRouter
-from server.database import specialisationsCOL, programsCOL, coursesCOL
+from fastapi.params import Body
+from server.database import specialisationsCOL, programsCOL, coursesCOL, archivesDB
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel, create_model
 import re
 import collections
+import pickle 
+from algorithms.conditions import User
+from typing import Dict, List 
 
 router = APIRouter(
     prefix='/api',
@@ -54,6 +58,36 @@ class course (BaseModel):
 class Structure (BaseModel):
     structure: dict
 
+class UserData(BaseModel):
+    program: str 
+    specialisations: list
+    courses: dict
+    year: int
+
+class CourseState (BaseModel):
+    is_accurate: bool 
+    unlocked: bool
+    handbook_note: str 
+    warnings: list
+
+class CoursesState (BaseModel):
+    courses_state: Dict[str, CourseState] = {}
+
+
+class PlannerTerm (BaseModel):
+    locked: bool
+    courses: dict
+
+class PlannerData (BaseModel):
+    program: str
+    specialisations: List[str]
+    year: int
+    plan: List[List[PlannerTerm]]
+
+CONDITIONS_PATH = "algorithms/conditions.pkl"
+with open(CONDITIONS_PATH, "rb") as file:
+    CONDITIONS = pickle.load(file)
+
 def addSpecialisation(structure, code, type):
     query = {'code': code}
     spnResult = specialisationsCOL.find_one(query)    
@@ -97,7 +131,7 @@ def specialisations_index():
                 }
             })
 def getPrograms():
-    query = programsCOL.find();
+    query = programsCOL.find()
     result = {}
     for i in query:
         result[i['code']] = i['title']
@@ -568,3 +602,248 @@ def search(string):
 
     # dictionary = collections.OrderedDict(sorted(dictionary.items()))
     return dictionary
+
+
+@router.post("/getAllUnlocked/", response_model=CoursesState,
+            responses={
+                404: {"model": message, "description": "Uh oh you broke me"},
+                200: {
+                    "description": "Returns the state of all the courses",
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                "COMP9302": {
+                                    "is_accurate": True,
+                                    "unlocked": True,
+                                    "handbook_note": "This course can only be taken in the final term of your program.",
+                                    "warnings": []
+                                }
+                            }
+                        }
+                    }
+                }
+            })
+def getAllUnlocked(userData: UserData, lockedCourses: list):
+    """Given the userData and a list of locked courses, returns the state of all
+    the courses. Note that locked courses always return as True with no warnings
+    since it doesn't make sense for us to tell the user they can't take a course
+    that they have already completed"""
+    user = User(userData.dict())
+
+    coursesState = {}
+    
+    for course, condition in CONDITIONS.items():
+        if course in lockedCourses:
+            # Always True
+            isAccurate = True
+            unlocked = True
+            warnings = []
+        elif condition:
+            # Condition object exists for this course
+            isAccurate = True
+            state = condition.is_unlocked(user)
+            unlocked = state['result']
+            warnings = state['warnings']
+        else: 
+            # Condition object does not exist for this course. True by default
+            # but warn the user the info might be inaccurate
+            isAccurate = False 
+            unlocked = True 
+            warnings = []
+
+        coursesState[course] = {
+            "is_accurate": isAccurate,
+            "unlocked": unlocked,
+            "handbook_note": "", # TODO: Cache handbook notes
+            "warnings": warnings          
+        }
+
+    return {'courses_state': coursesState}
+
+@router.get("/getLegacyCourses/{year}/{term}", response_model=programCourses,
+            responses={
+                404: {"model": message, "description": "Year or Term input is incorrect"},
+                200: {
+                    "description": "Returns the program structure",
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                "courses": {
+                                    "ACCT1511": "Accounting and Financial Management 1B",
+                                    "ACCT2542": "Corporate Financial Reporting and Analysis",
+                                    "ACCT3202": "Industry Placement 2",
+                                    "ACCT3303": "Industry Placement 3",
+                                    "ACCT3610": "Business Analysis and Valuation",
+                                    "ACCT4797": "Thesis (Accounting) B",
+                                    "ACCT4809": "Current Developments in Auditing Research",
+                                    "ACCT4852": "Current Developments in Accounting Research - Managerial",
+                                    "ACCT4897": "Seminar in Research Methodology",
+                                    "ACTL1101": "Introduction to Actuarial Studies",
+                                    "ACTL2101": "Industry Placement 1",
+                                    "ACTL2102": "Foundations of Actuarial Models",
+                                    "ACTL3142": "Actuarial Data and Analysis"
+                                }
+                            }
+                        }
+                    }
+                }
+            })
+def getLegacyCourses(year, term):
+    db = archivesDB[year]
+    query = db.find()
+    result = {} 
+    for i in query:
+        if term in i['terms']:
+            result[i['code']] = i['title'] 
+
+    return {'courses' : result}
+
+
+@router.post("/unselectCourse/")
+def unselectCourse(userData: UserData, lockedCourses: list, unselectedCourse: str):
+    '''
+        Creates a new user class and returns all the courses affected from the course that was unselected in sorted order
+    '''
+    user = User(userData.dict())
+    affectedCourses =  user.unselect_course(unselectedCourse, lockedCourses)
+
+    return {'affected_courses': affectedCourses}
+
+@router.post("/validateTermPlanner/", response_model=CoursesState)
+async def validateTermPlanner(plannerData: PlannerData = Body(
+    ...,
+    example={
+        "program": "3707",
+        "specialisations": ["COMPA1"],
+        "year": 1,
+        "plan": [
+            [
+                {
+                    "locked": False,
+                    "courses": {}
+                },
+                {
+                    "locked": False,
+                    "courses": {
+                        "COMP1511": [6, None],
+                        "MATH1141": [6, None],
+                        "MATH1081": [6, None],
+                    }
+                },
+                {
+                    "locked": False,
+                    "courses": {
+                        "COMP1521": [6, None],
+                        "COMP9444": [6, None],
+                    }
+                },
+                {
+                    "locked": False,
+                    "courses": {
+                        "COMP2521": [6, None],
+                        "MATH1241": [6, None],
+                        "COMP3331": [6, None]
+                    }
+                }
+            ],
+            [
+                {
+                    "locked": False,
+                    "courses": {}
+                },
+                {
+                    "locked": False,
+                    "courses": {
+                        "COMP1531": [6, None],
+                        "COMP6080": [6, None],
+                        "COMP3821": [6, None]
+                    }
+                }
+            ]
+        ]
+    }
+)):
+    """
+    Will iteratveily go through the term planner data whilst "building up" the user.
+    Starting from 1st year ST, we will create an empty user and evaluate the courses.
+    Then we will add ST courses to the user and evaluate T1. Then we will add T1
+    courses and evaluate T2. Then add T2 and evaluate T3. Then add T3 and evaluate
+    2nd year ST... and so on.
+
+    Returns the state of all the courses on the term planner
+    """
+    data = plannerData.dict()
+    emptyUserData = {
+        "program": data["program"],
+        "specialisations": data["specialisations"],
+        "year": 1, # Start off as a first year
+        "courses": {} # Start off the user with an empty year
+    }
+    user = User(emptyUserData)
+
+    # State of courses on the term planner
+    coursesState = {}
+
+    for year in data["plan"]:
+        # Go through all the years
+        for term in year:
+            # Go through all the terms. Do not bother evaluating locked terms
+            if term["locked"]:
+                for course in term["courses"]:
+                    coursesState[course] = {
+                        "is_accurate": True,
+                        "unlocked": True,
+                        "handbook_note": "", # TODO: Cache handbook notes
+                        "warnings": []
+                    }
+                continue
+            
+            # Otherwise, we will evaluate all the courses in the current term.
+            for course in term["courses"]:
+                user.add_current_course(course) # Helpful for corequisite conditions
+
+            # Evaluate the courses
+            for course in term["courses"]:
+                if course not in CONDITIONS:
+                    # Error check in case we do not have the condition item
+                    coursesState[course] = {
+                        "is_accurate": False,
+                        "unlocked": True,
+                        "handbook_note": "",
+                        "warnings": []
+                    }
+                    continue
+                    
+                # We do have the course for this condition...
+                condition = CONDITIONS[course]
+                if condition is None:
+                    # Our algorithm could not parse it :(
+                    coursesState[course] = {
+                        "is_accurate": False,
+                        "unlocked": True,
+                        "handbook_note": "", # TODO: Cache handbook notes
+                        "warnings": []
+                    }
+                else:
+                    # Evaluate the condition accordingly
+                    res = condition.is_unlocked(user)
+                    coursesState[course] = {
+                        "is_accurate": True,
+                        "unlocked": res["result"],
+                        "handbook_note": "", # TODO: Cache handbook notes
+                        "warnings": res["warnings"]
+                    }
+            
+            # Add all these courses to the user in preparation for the next term
+            user.empty_current_courses()
+            user.add_courses(term["courses"])
+
+        # Onto the next year...
+        user.year += 1
+
+    return {"courses_state": coursesState}
+
+
+
+
+

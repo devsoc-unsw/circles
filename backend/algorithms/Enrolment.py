@@ -1,16 +1,6 @@
 from json import dump
 import json
 import re
-class Condition:
-    def __init__(self):
-        self.selected = []
-        self.Program = []
-        self.UoC = 0
-        self.WaM = 0
-        return
-    
-    def select(self, course):
-        self.selected += course
 
 class Requirement:
     def __init__(self):

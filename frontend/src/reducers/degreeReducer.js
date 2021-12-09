@@ -1,16 +1,17 @@
 const initial = {
-    currStep: 0, 
-    hasUpdatedDegree: false,
-    program: "",
-    specialisation: "",
-    minor: "",
+    programCode: "",
+    programName: "",
+    majors: [],
+    minor: [],
+
 }
-const degreeReducer = (state=initial, action) => { 
+const degreeReducer = (state=initial, action) => {
     switch (action.type) { 
-        case 'SET_DEGREE': 
+        case 'SET_PROGRAM': 
             return {
                 ...state, 
-                program: action.payload
+                programCode: action.payload.programCode,
+                programName: action.payload.programName,
             }; 
         case 'SET_SPECIALISATION': 
             return {
@@ -22,19 +23,6 @@ const degreeReducer = (state=initial, action) => {
                 ...state,
                 minor: action.payload
             }; 
-        case 'NEXT_STEP': 
-            console.log('currStep', state.currStep)
-            if (state.currStep > 5) return state; 
-            return {
-                ...state,
-                currStep: state.currStep + 1
-            }; 
-        case 'PREV_STEP': 
-            if (state.currStep === 0) return state;
-            return {
-                ...state,
-                currStep: state.currStep - 1
-            };
         case 'TOGGLE_UPDATED_DEGREE': 
             const currState = state.hasUpdatedDegree;
             return {

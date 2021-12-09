@@ -15,7 +15,7 @@ from data.utility import dataHelpers
 
 PARSED_LOGIC = {}
 
-split_key = ["(", ")", "&&", "||"]
+split_key = ["(", ")", "&&", "||", "[", "]", "in"]
 
 '''Converts the text condition into a json list'''
 
@@ -31,8 +31,10 @@ def tokenise_conditions():
         # ( abcdefgh ) so that our split can separate them cleanly.
         text = re.sub(r'\(', r' ( ', text)
         text = re.sub(r'\)', r' ) ', text)
+        text = re.sub(r'\]', r' ] ', text)
+        text = re.sub(r'\[', r' [ ', text)
         text = re.sub(r' +', r' ', text)
-
+        
         logic = ["("]
 
         # Split on ands/ors and brackets

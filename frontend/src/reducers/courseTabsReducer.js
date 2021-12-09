@@ -1,6 +1,6 @@
 const initial = {
     tabs: ["explore"],
-    activeIndex: 0,
+    active: 0,
 }
 const courseTabsReducer = (state=initial, action) => { 
     switch (action.type) { 

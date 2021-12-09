@@ -1,33 +1,58 @@
+'''
+Contains the User and Conditions classes as well as the function to create Conditions
+from their logical tokens.
+'''
 import sys
 import json
 import re
+import json
 
-from json import dump
-
-from algorithms.categories import *
+from .categories import *
 
 '''Keywords'''
 AND = 1
 OR = 2
 
-
 '''CACHED'''
+# Load in cached exclusions
 CACHED_EXCLUSIONS_PATH = "./algorithms/cache/exclusions.json"
 with open(CACHED_EXCLUSIONS_PATH) as f:
     CACHED_EXCLUSIONS = json.load(f)
     f.close()
 
+CACHED_CONDITIONS_TOKENS_PATH = "./data/finalData/conditionsTokens.json"
+with open(CACHED_CONDITIONS_TOKENS_PATH) as f:
+    CACHED_CONDITIONS_TOKENS = json.load(f)
+    f.close()
+
+
+# Load in cached condition objects
+# NOTE: Does not work due to how pickle works with imports
+# Instead, we will load the condition tokens, then load the necessary condition
+# objects inside our functions
+# CACHED_CONDITIONS_PATH = "./algorithms/conditions.pkl"
+# with open(CACHED_CONDITIONS_PATH, "rb") as f:
+#     CACHED_CONDITIONS = pickle.load(f)
+#     f.close()
+
 
 class User:
     '''A user and their data which will be used to determine if they can take a course'''
 
-    def __init__(self):
+    def __init__(self, data=None):
+        # Will load the data if any was given
         self.courses = {}
+        self.cur_courses = [] # Courses the user is taking in the current term
         self.program = None  # NOTE: For now this is only single degree
         self.specialisations = {}
         self.uoc = 0
         self.wam = None
         self.year = 0  # TODO
+
+        if data != None:
+            # Data was provided
+            self.load_json(data)
+
 
     def add_courses(self, courses):
         '''Given a dictionary of courses mapping course code to a (uoc, grade) tuple,
@@ -56,6 +81,15 @@ class User:
         if no_wam == False:
             self.wam = total_wam / self.uoc
 
+    def add_current_course(self, course):
+        """Given a course the user is taking in their current term, adds it to their cur_courses"""
+        self.cur_courses.append(course)
+
+    def empty_current_courses(self):
+        """Empty all the current courses. Helps with moving on to the next term
+        in the term planner api"""
+        self.cur_courses = []
+
     def add_program(self, program):
         '''Adds a program to this user'''
         self.program = program # TODO: This should update to reflect UOC of user
@@ -67,6 +101,10 @@ class User:
     def has_taken_course(self, course):
         '''Determines if the user has taken this course'''
         return course in self.courses
+    
+    def is_taking_course(self, course):
+        """Determines if the user is taking this course this term"""
+        return course in self.cur_courses
 
     def in_program(self, program):
         '''Determines if the user is in this program code'''
@@ -76,12 +114,109 @@ class User:
         '''Determines if the user is in the specialisation'''
         return specialisation in self.specialisations
 
+    def load_json(self, data):
+        '''Given the user data, correctly loads it into this user class'''
+        
+        self.program = data['program']
+        self.specialisations = data['specialisations']
+        self.courses = data['courses']
+        self.year = data['year']
+
+        '''calculate wam and uoc'''
+        # Subtract uoc of the courses without mark when dividing
+        uocfixer = 0
+        for c in self.courses:
+            self.uoc += self.courses[c][0]
+            if type(self.courses[c][1]) != type(1):
+                uocfixer += self.courses[c][0]
+                continue
+            if self.wam is None:
+                self.wam = 0
+            self.wam += self.courses[c][0] * self.courses[c][1]
+        if self.wam is not None:
+            self.wam /= (self.uoc - uocfixer)
+        
+        return
+
     def get_grade(self, course):
         '''Given a course which the student has taken, returns their grade (or None for no grade'''
         return self.courses[course][1]
 
+    def update_wam_uoc(self):
+        """Calculates and sets the overall wam and uoc of the user from their courses. 
+        NOTE: This actually changes the user's wam, not simply a getter method"""
+        if not self.courses:
+            # No courses
+            self.wam = None
+            self.uoc = 0
+            return
+        
+        total_wam = 0
+        eligible_uoc = 0 # uoc which counts towards wam
+        self.uoc = 0 # Resets the uoc
+        for course, (uoc, grade) in self.courses.items():
+            # Update the uoc as we go whils getting the total and eligible uoc
+            self.uoc += uoc
+            if total_wam is not None and grade is not None:
+                eligible_uoc += uoc
+                total_wam += uoc * grade
+        
+        if eligible_uoc == 0:
+            self.wam = None
+        else:
+            # Divide to get the overall wam
+            self.wam = total_wam / eligible_uoc
+
+
+    def unselect_course(self, target, locked):
+        """Given a course to unselect and a list of locked courses, remove the courses
+        from the user and return a list of courses which would be affected by the unselection"""
+        if not self.has_taken_course(target):
+            # Nothing would be affected by unselecting this course since we never
+            # took this course in the first place...
+            return []
+
+        # Load all the necessary conditions
+        cached_conditions = {} # Mapping course to condition object
+        for course in self.courses:
+            if course in locked:
+                # Do not bother creating condition for a locked course
+                continue
+            else:
+                cached_conditions[course] = create_condition(CACHED_CONDITIONS_TOKENS[course], course)
+                
+        # First remove this course from our database (updating overall UOC and WAM)
+        del self.courses[target]
+        self.update_wam_uoc()
+
+        affected_courses = []
+        # Brute force loop through all courses and if we find a course which is
+        # no longer unlocked, we unselect it, add it to the affected course list,
+        # then restart loop.
+
+        while True:
+            changed = False
+
+            for course in self.courses:
+                if course in cached_conditions and cached_conditions[course] != None:
+                    # The course is not locked and there exists a condition
+                    cond = cached_conditions[course]
+                    if (cond.is_unlocked(self))["result"] is False:
+                        # This course is no longer selectable due to our unselection
+                        affected_courses.append(course)
+                        changed = True
+                        del self.courses[course]
+                        self.update_wam_uoc()
+                        break
+                        
+            # If no new courses were affected, we do not need to loop again
+            if not changed:
+                break
+             
+        return sorted(affected_courses)
+
 class CourseCondition():
-    '''Condition that the student has completed this course'''
+    '''Condition that the student has completed this course before the current term'''
 
     def __init__(self, course):
         self.course = course
@@ -92,6 +227,41 @@ class CourseCondition():
     def validate(self, user):
         '''Returns true if the user has taken this course before'''
         return user.has_taken_course(self.course)
+
+
+class CoreqCoursesCondition():
+    """Condition that the student has completed the course/s in or before the current term"""
+
+    def __init__(self):
+        # An example corequisite is [COMP1511 || COMP1521 || COMP1531]. The user
+        # must have taken one of these courses either before or in the current term
+        self.courses = []
+        self.logic = AND # by default it'll be AND
+    
+    def add_course(self, course):
+        self.courses.append(course)
+
+    def set_logic(self, logic):
+        self.logic = logic
+    
+    def validate(self, user):
+        """Returns true if the user is taking these courses in the same term"""
+        if self.logic == AND:
+            # They must meet all the coreqs
+            for course in self.courses:
+                if not (user.has_taken_course(course) or user.is_taking_course(course)):
+                    print(f"They did not take {course}")
+                    return False
+                print(f"They took {course}")
+            return True
+        elif self.logic == OR:
+            for course in self.courses:
+                if user.has_taken_course(course) or user.is_taking_course(course):
+                    return True
+            return False
+        
+        # Error, logic should either be AND or OR
+        return True
 
 
 class UOCCondition():
@@ -193,6 +363,7 @@ class GRADECondition():
         
         user_grade = user.get_grade(self.course)
         if user_grade == None:
+            print(f"No wam recorded for {self.course} which required {self.grade} grade")
             return True, self.get_warning()
         elif user_grade < self.grade:
             return False, None
@@ -357,6 +528,28 @@ def make_condition(tokens, first=False, course=None):
         elif token == "||":
             # OR type logic
             result.set_logic(OR)
+        elif token == "[":
+            # Beginning of co-requisite. Parse courses and logical operators until closing "]"
+            coreq_cond = CoreqCoursesCondition()
+            
+            i = 1 # Helps track our index offset to parse this co-requisite
+            while tokens[index + i] != "]":
+                if is_course(tokens[index + i]):
+                    coreq_cond.add_course(tokens[index + i])
+                elif tokens[index + i] == "&&":
+                    coreq_cond.set_logic(AND)
+                elif tokens[index + i] == "||":
+                    coreq_cond.set_logic(OR)
+                else:
+                    # Error, bad token processed. Return None
+                    return None, index + i
+                i += 1
+                next(it)
+            
+            result.add_condition(coreq_cond)
+
+            # Skip the closing "]" so the iterator will continue with the next token
+            next(it)
         elif is_course(token):
             # Condition for a single course
             result.add_condition(CourseCondition(token))
@@ -481,7 +674,11 @@ def get_grade(text):
 
 def is_program(text):
     '''Determines if the text is a program code'''
-    if re.match(r'^\d{4}', text):
+    if re.match(r'^\d{4}', text) or re.match(r'^[A-Z]{5}\d{5}', text) or re.match(r'^[A-Z]{6}\d{4}', text):
+        # Matches standard program codes like 3707.
+        # NOTE: Also matches co-op program codes and streams and stuff which I've
+        # included here but we most likely won't be dealing with them. I included
+        # so at least it creates the condition object instead of erroring.
         return True
     return False
 
@@ -504,4 +701,3 @@ def read_data(file_name):
     except:
         print(f"File {file_name} not found")
         sys.exit(1)
-        
