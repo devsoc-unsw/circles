@@ -6,6 +6,7 @@ import TermBox from "./TermBox";
 import SkeletonPlanner from "./SkeletonPlanner";
 import "./main.less";
 import { useSelector, useDispatch } from "react-redux";
+import { plannerActions } from "../../actions/plannerActions";
 import {
   handleOnDragEnd,
   handleOnDragStart,
@@ -32,8 +33,8 @@ const TermPlanner = () => {
     return state.planner;
   });
 
-  // const theme = useSelector((state) => state.theme);
 
+  // const theme = useSelector((state) => state.theme);
   // const [visible, setVisible] = useState(false); // visibility for side drawer
   const dispatch = useDispatch();
 
@@ -46,11 +47,14 @@ const TermPlanner = () => {
     });
   };
 
+
+
   useEffect(() => {
     setIsLoading(false);
     isAllEmpty(years) && openNotification();
     updateWarnings(years, startYear, courses, dispatch);
   }, []);
+
   const currYear = new Date().getFullYear();
 
   const dragEndProps = {
