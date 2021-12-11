@@ -56,33 +56,6 @@ const OptionsHeader = ({ areYearsHidden, unhideAll, plannerRef }) => {
       </Tippy>
       }
 
-      <Tippy
-        content={<SaveMenu plannerRef={plannerRef} />}
-        moveTransition="transform 0.2s ease-out"
-        interactive={true}
-        trigger="click"
-        theme={theme === "light" && "light"}
-        zIndex={1}
-        placement="bottom-start"
-      >
-        <button className="settingsButton">
-          <TiDownload
-            className="settingsIcon"
-            size="1.5em"
-            style={{
-              color: theme === "light" ? "#303539" : "#3b3e3e",
-            }}
-          />
-        </button>
-      </Tippy>
-
-      {areYearsHidden && (
-        <Tooltip title="Show all hidden years">
-          <button className="settingsButton " onClick={unhideAll}>
-            <IoIosEye size="1.5em" className="settingsIcon" />
-          </button>
-        </Tooltip>
-      )}
     </div>
   );
 };
