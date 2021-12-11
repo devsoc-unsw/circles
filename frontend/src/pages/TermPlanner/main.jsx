@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import { notification, Tooltip } from "antd";
 import { DragDropContext } from "react-beautiful-dnd";
@@ -97,9 +97,15 @@ const TermPlanner = () => {
   };
   const [areYearsHidden, setAreYearsHidden] = React.useState(false);
 
+  const plannerPic = useRef();
+
   return (
     <>
-      <OptionsHeader areYearsHidden={areYearsHidden} unhideAll={unhideAll} />
+      <OptionsHeader
+        areYearsHidden={areYearsHidden}
+        unhideAll={unhideAll}
+        plannerRef={plannerPic}
+      />
       {isLoading ? (
         <SkeletonPlanner />
       ) : (
@@ -113,7 +119,10 @@ const TermPlanner = () => {
           }
         >
           <div className="plannerContainer">
-            <div class={`gridContainer ${isSummerEnabled && "summerGrid"}`}>
+            <div
+              class={`gridContainer ${isSummerEnabled && "summerGrid"}`}
+              ref={plannerPic}
+            >
               <div class="gridItem"></div>
               {isSummerEnabled && <div class="gridItem">Summer</div>}
               <div class="gridItem">Term 1</div>

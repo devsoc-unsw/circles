@@ -6,12 +6,12 @@ import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
 import SettingsMenu from "./SettingsMenu";
+import SaveMenu from "./SaveMenu";
 import { IoIosEye } from "react-icons/io";
+import { TiDownload } from "react-icons/ti";
 
-const OptionsHeader = ({ areYearsHidden, unhideAll }) => {
+const OptionsHeader = ({ areYearsHidden, unhideAll, plannerRef }) => {
   const theme = useSelector((state) => state.theme);
-
-  const [isOpen, setIsOpen] = React.useState(false);
 
   return (
     <div className="optionsHeader">
@@ -19,17 +19,33 @@ const OptionsHeader = ({ areYearsHidden, unhideAll }) => {
         content={<SettingsMenu />}
         moveTransition="transform 0.2s ease-out"
         interactive={true}
-        hideOnClick="toggle"
         trigger="click"
         theme={theme === "light" && "light"}
         zIndex={1}
         placement="bottom-start"
       >
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className={`settingsButton ${isOpen && "clicked"}`}
-        >
+        <button className="settingsButton">
           <IoCogSharp
+            className="settingsIcon"
+            size="1.5em"
+            style={{
+              color: theme === "light" ? "#303539" : "#3b3e3e",
+            }}
+          />
+        </button>
+      </Tippy>
+
+      <Tippy
+        content={<SaveMenu plannerRef={plannerRef} />}
+        moveTransition="transform 0.2s ease-out"
+        interactive={true}
+        trigger="click"
+        theme={theme === "light" && "light"}
+        zIndex={1}
+        placement="bottom-start"
+      >
+        <button className="settingsButton">
+          <TiDownload
             className="settingsIcon"
             size="1.5em"
             style={{
