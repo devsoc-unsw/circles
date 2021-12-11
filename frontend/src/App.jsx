@@ -19,6 +19,7 @@ function App() {
       description:
         'Circles is still in beta testing and not ready for use.',
       duration: 0,
+      className: "text helpNotif",
     };
     notification.open(args);
   };

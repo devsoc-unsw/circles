@@ -12,7 +12,6 @@ import { TiDownload } from "react-icons/ti";
 
 const OptionsHeader = ({ areYearsHidden, unhideAll, plannerRef }) => {
   const theme = useSelector((state) => state.theme);
-
   return (
     <div className="optionsHeader">
       <Tippy
@@ -20,7 +19,7 @@ const OptionsHeader = ({ areYearsHidden, unhideAll, plannerRef }) => {
         moveTransition="transform 0.2s ease-out"
         interactive={true}
         trigger="click"
-        theme={theme === "light" && "light"}
+        theme={theme === "light" ? "light" : "dark"}
         zIndex={1}
         placement="bottom-start"
       >
@@ -29,18 +28,19 @@ const OptionsHeader = ({ areYearsHidden, unhideAll, plannerRef }) => {
             className="settingsIcon"
             size="1.5em"
             style={{
-              color: theme === "light" ? "#303539" : "#3b3e3e",
+              color: theme === "light" ? "#303539" : "white",
             }}
           />
         </button>
       </Tippy>
-
+          
+      { theme === "light" && 
       <Tippy
         content={<SaveMenu plannerRef={plannerRef} />}
         moveTransition="transform 0.2s ease-out"
         interactive={true}
         trigger="click"
-        theme={theme === "light" && "light"}
+        theme={theme === "light" ? "light" : "dark"}
         zIndex={1}
         placement="bottom-start"
       >
@@ -49,11 +49,12 @@ const OptionsHeader = ({ areYearsHidden, unhideAll, plannerRef }) => {
             className="settingsIcon"
             size="1.5em"
             style={{
-              color: theme === "light" ? "#303539" : "#3b3e3e",
+              color: theme === "light" ? "#303539" : "white",
             }}
           />
         </button>
       </Tippy>
+      }
 
       {areYearsHidden && (
         <Tooltip title="Show all hidden years">
