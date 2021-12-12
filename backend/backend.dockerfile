@@ -17,4 +17,4 @@ EXPOSE 8000
 # ENV OVERWRITE='False'
 
 # Run the server
-ENTRYPOINT ["python3", "-u", "runserver.py"]
+ENTRYPOINT ["python3", "-u", "runserver.py", "--overwrite=True"]
