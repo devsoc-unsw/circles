@@ -6,12 +6,18 @@ NOTE: The helper functions must be run from the backend directory due to their p
 '''
 
 import json
+import os
 from pymongo import MongoClient
 from server.config import URI, FINAL_DATA_PATH, ARCHIVED_DATA_PATH
 from data.config import ARCHIVED_YEARS
 
 '''Export these as needed'''
-client = MongoClient(URI)
+try:
+    client = MongoClient(f'mongodb://{os.environ["MONGODB_USERNAME"]}:{os.environ["MONGODB_PASSWORD"]}@mongodb:27017')
+    print('Connected to database.')
+except:
+    print("Unable to connect to database.")
+    exit(1)
 
 db = client["Main"]
 programsCOL = db["Programs"]
