@@ -56,6 +56,13 @@ const OptionsHeader = ({ areYearsHidden, unhideAll, plannerRef }) => {
       </Tippy>
       }
 
+      {areYearsHidden && (
+        <Tooltip title="Show all hidden years">
+          <button className="settingsButton " onClick={unhideAll}>
+            <IoIosEye size="1.5em" className="settingsIcon" />
+          </button>
+        </Tooltip>
+      )}
     </div>
   );
 };
