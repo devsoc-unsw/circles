@@ -16,6 +16,7 @@ import json
 
 cached_conditions = None
 cached_course_list = None
+courses = None
 
 def load_condition_courselist():
     global cached_conditions
@@ -23,7 +24,7 @@ def load_condition_courselist():
     if cached_conditions is not None:
         return cached_conditions, cached_course_list
     COURSE_PATH = "./data/finalData/conditionsTokens.json"
-    course_list = {}
+    
     with open(COURSE_PATH, encoding='UTF-8') as f:
         cached_course_list = json.load(f)
         f.close()
@@ -33,6 +34,17 @@ def load_condition_courselist():
     for course in cached_course_list:
         cached_conditions[course] = create_condition(CACHED_CONDITIONS_TOKENS[course], course)
     return cached_conditions, cached_course_list
+
+def load_courses_processed():
+    global courses
+    if courses is not None:
+        return courses
+    COURSES_PATH_TO = "./data/finalData/coursesProcessed.json"
+    with open(COURSES_PATH_TO, encoding='UTF-8') as f:
+        courses = json.load(f)
+        f.close()
+    return courses
+
 
 def get_unlocked_courses(user):
     """
@@ -54,6 +66,9 @@ def get_unlocked_courses(user):
 
 # TODO Do we need to return user-specific path_to?
 # Like substract the result by already unlocked courses?
+# NOTE I want to modify this method so that it can take
+#      a user and course list as argument. 
+# The course list may play the role of "filter"
 def get_courses_path_to():
     """
     Returns a dictionary mapping courses to how many courses
@@ -65,9 +80,7 @@ def get_courses_path_to():
         "ACCT2522": 1
     }
     """
-    COURSES_PATH_TO = "./data/finalData/coursesProcessed.json"
-    with open(COURSES_PATH_TO, encoding='UTF-8') as f:
-        courses = json.load(f)
+    courses = load_courses_processed()
     result = {}
     for c in courses:
         result[c] = len(courses[c]['path_to'])
@@ -108,4 +121,6 @@ def get_course_by_level(level):
     pass
 
 if __name__ == "__main__":
+    data = get_courses_path_to()
+    print(data)
     pass
