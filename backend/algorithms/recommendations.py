@@ -52,6 +52,8 @@ def get_unlocked_courses(user):
 
     return result
 
+# TODO Do we need to return user-specific path_to?
+# Like substract the result by already unlocked courses?
 def get_courses_path_to():
     """
     Returns a dictionary mapping courses to how many courses
@@ -63,7 +65,13 @@ def get_courses_path_to():
         "ACCT2522": 1
     }
     """
-    pass
+    COURSES_PATH_TO = "./data/finalData/coursesProcessed.json"
+    with open(COURSES_PATH_TO, encoding='UTF-8') as f:
+        courses = json.load(f)
+    result = {}
+    for c in courses:
+        result[c] = len(courses[c]['path_to'])
+    return result
 
 def get_courses_in_faculty(user):
     """
