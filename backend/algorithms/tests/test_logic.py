@@ -4,7 +4,9 @@ ensure our algorithms work as expected.
 If these tests work, we can expect that the core logic works.
 '''
 
-from .conditions import *
+from backend.algorithms.create import create_condition
+from backend.algorithms.objects.conditions import *
+from backend.algorithms.objects.user import User
 import pytest
 
 
