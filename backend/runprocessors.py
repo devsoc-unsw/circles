@@ -24,7 +24,6 @@ from data.processors.conditions_tokenising import tokenise_conditions
 from algorithms.cache.cache import cache_exclusions
 from algorithms.cache.cache import cache_warnings
 from algorithms.cache.cache import cache_mappings
-from algorithms.cache.cache import cache_course_codes
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--type', type=str,
@@ -72,7 +71,6 @@ run = {
         'exclusion': cache_exclusions,
         'warnings': cache_warnings,
         'mapping': cache_mappings,
-        'code': cache_course_codes
     }
 }
 
