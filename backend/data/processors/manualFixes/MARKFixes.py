@@ -12,7 +12,7 @@ can run:
     python3 -m data.processors.conditionsPreprocessing
 
 To then run this file:
-    python3 -m data.processors.manualFixes.[CODE]Fixes
+    python3 -m data.processors.manualFixes.MARKFixes
 """
 
 from data.utility import dataHelpers

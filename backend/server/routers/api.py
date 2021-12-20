@@ -1,13 +1,13 @@
 from fastapi import APIRouter
 from fastapi.params import Body
-from server.database import specialisationsCOL, programsCOL, coursesCOL
+from server.database import specialisationsCOL, programsCOL, coursesCOL, archivesDB
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel, create_model
 import re
 import collections
 import pickle 
-from algorithms.conditions import User
+from algorithms.objects import User
 from typing import Dict, List 
 
 router = APIRouter(
@@ -131,7 +131,7 @@ def specialisations_index():
                 }
             })
 def getPrograms():
-    query = programsCOL.find();
+    query = programsCOL.find()
     result = {}
     for i in query:
         result[i['code']] = i['title']
@@ -659,6 +659,45 @@ def getAllUnlocked(userData: UserData, lockedCourses: list):
         }
 
     return {'courses_state': coursesState}
+
+@router.get("/getLegacyCourses/{year}/{term}", response_model=programCourses,
+            responses={
+                404: {"model": message, "description": "Year or Term input is incorrect"},
+                200: {
+                    "description": "Returns the program structure",
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                "courses": {
+                                    "ACCT1511": "Accounting and Financial Management 1B",
+                                    "ACCT2542": "Corporate Financial Reporting and Analysis",
+                                    "ACCT3202": "Industry Placement 2",
+                                    "ACCT3303": "Industry Placement 3",
+                                    "ACCT3610": "Business Analysis and Valuation",
+                                    "ACCT4797": "Thesis (Accounting) B",
+                                    "ACCT4809": "Current Developments in Auditing Research",
+                                    "ACCT4852": "Current Developments in Accounting Research - Managerial",
+                                    "ACCT4897": "Seminar in Research Methodology",
+                                    "ACTL1101": "Introduction to Actuarial Studies",
+                                    "ACTL2101": "Industry Placement 1",
+                                    "ACTL2102": "Foundations of Actuarial Models",
+                                    "ACTL3142": "Actuarial Data and Analysis"
+                                }
+                            }
+                        }
+                    }
+                }
+            })
+def getLegacyCourses(year, term):
+    db = archivesDB[year]
+    query = db.find()
+    result = {} 
+    for i in query:
+        if term in i['terms']:
+            result[i['code']] = i['title'] 
+
+    return {'courses' : result}
+
 
 @router.post("/unselectCourse/")
 def unselectCourse(userData: UserData, lockedCourses: list, unselectedCourse: str):

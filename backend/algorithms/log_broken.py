@@ -1,8 +1,13 @@
 """Logs all broken conditions to backend/algorithms/errors.txt
 
+This file calls a secondary function make_condition() instead of the main
+create_condition(). This is because our main focus is not on exclusions or such,
+it is just to see if the condition is parsed properly. We also need the index
+for debugging purposes.
+
 Run from the backend directory with python3 -m algorithms.log_broken
 """
-from algorithms.conditions import make_condition
+from algorithms.create import make_condition
 import json
 
 CONDITIONS_TOKENS_FILE = "./data/finalData/conditionsTokens.json"

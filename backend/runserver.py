@@ -24,4 +24,4 @@ if __name__ == "__main__":
     if args.overwrite:
         overwrite_all()
 
-    uvicorn.run(app)
+    uvicorn.run(app, host='backend')
