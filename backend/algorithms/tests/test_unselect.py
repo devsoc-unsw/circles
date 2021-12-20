@@ -1,8 +1,9 @@
 '''Testing unselect course for User class'''
 
-from .conditions import User
+from backend.algorithms.create import create_condition
+from backend.algorithms.objects.conditions import *
+from backend.algorithms.objects.user import User
 from math import isclose
-import pytest
 import json
 
 PATH = "./algorithms/exampleUsers.json"
