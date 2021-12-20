@@ -30,8 +30,14 @@ def create_category(tokens):
         else:
             # There are no tokens after this. Simple level category
             return LevelCategory(level), 0
+    elif re.match(r'^S$', tokens[0], flags = re.IGNORECASE):
+         # School category
+         return SchoolCategory(f"{tokens[0]} {tokens[1]}"), 1
+    elif re.match(r'^F$', tokens[0], flags=re.IGNORECASE):
+         # Faculty category
+         return FacultyCategory(f"{tokens[0]} {tokens[1]}"), 1
 
-    # TODO: Levels (e.g. L2 MATH, SPECIALISATIONS, PROGRAM)
+    # TODO: Levels (e.g. SPECIALISATIONS, PROGRAM)
 
     # Did not match any category. Return None and assume only 1 token was consumed
     return None, 0
