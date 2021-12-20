@@ -2,6 +2,14 @@
 specific cateogry'''
 
 import re
+import json
+
+# Preload the mappings to school and faculty
+CACHED_MAPPINGS = {}
+
+with open("./algorithms/cache/courseMappings.json") as f:
+    CACHED_MAPPINGS = json.load(f)
+    f.close()
 
 
 class Category:
@@ -40,11 +48,10 @@ class CourseCategory(Category):
         or no courses matched'''
         total_wam = 0
         total_uoc = 0
-        for course, uoc in user.courses.items():
-            for course, (uoc, grade) in user.courses.items():
-                if grade != None and re.match(rf'{self.code}\d{{4}}', course):
-                    total_uoc += uoc
-                    total_wam += uoc * grade
+        for course, (uoc, grade) in user.courses.items():
+            if grade != None and re.match(rf'{self.code}\d{{4}}', course):
+                total_uoc += uoc
+                total_wam += uoc * grade
 
         # Either no courses matched this or no wam was entered for those courses
         if total_uoc == 0:
@@ -73,11 +80,10 @@ class LevelCategory(Category):
         no courses matched'''
         total_wam = 0
         total_uoc = 0
-        for course, uoc in user.courses.items():
-            for course, (uoc, grade) in user.courses.items():
-                if grade != None and course[4] == str(self.level):
-                    total_uoc += uoc
-                    total_wam += uoc * grade
+        for course, (uoc, grade) in user.courses.items():
+            if grade != None and course[4] == str(self.level):
+                total_uoc += uoc
+                total_wam += uoc * grade
 
         # Either no courses matched this level or no wam was entered for those courses
         if total_uoc == 0:
@@ -104,7 +110,6 @@ class LevelCourseCategory(Category):
                 # The first 4 letters match the code and the level is correct:
                 result += uoc
         
-        print(f"UOC in {self.level} {self.code} is {result}")
         return result
 
     def wam(self, user):
@@ -112,14 +117,74 @@ class LevelCourseCategory(Category):
         or no courses matched'''
         total_wam = 0
         total_uoc = 0
-        for course, uoc in user.courses.items():
-            for course, (uoc, grade) in user.courses.items():
-                if grade != None and re.match(rf'{self.code}\d{{4}}', course) and course[4] == str(self.level):
-                    # There exists a grade and the first 4 letters match the code and the level is correct
-                    total_uoc += uoc
-                    total_wam += uoc * grade
+        for course, (uoc, grade) in user.courses.items():
+            if grade != None and re.match(rf'{self.code}\d{{4}}', course) and course[4] == str(self.level):
+                # There exists a grade and the first 4 letters match the code and the level is correct
+                total_uoc += uoc
+                total_wam += uoc * grade
 
         # Either no courses matched this or no wam was entered for those courses
+        if total_uoc == 0:
+            return None
+
+        return total_wam / total_uoc
+
+
+class SchoolCategory(Category):
+    '''Category for courses belonging to a school (e.g. S Mech)'''
+    def __init__(self, school):
+        self.school = school # The code for the school (S Mech)
+
+    def uoc(self, user):
+        """The number of uoc belonging to courses in this school"""
+        result = 0
+        for course, (uoc, grade) in user.courses.items():
+            if course in CACHED_MAPPINGS[self.school]:
+                result += uoc
+        
+        return result
+    
+
+    def wam(self, user):
+        """The overall wam belongining to courses in this school"""
+        total_wam = 0
+        total_uoc = 0
+        for course, (uoc, grade) in user.courses.items():
+            if course in CACHED_MAPPINGS[self.school]:
+                if grade != None:
+                    total_uoc += uoc
+                    total_wam += uoc * grade
+        
+        if total_uoc == 0:
+            return None
+
+        return total_wam / total_uoc
+
+class FacultyCategory(Category):
+    '''Category for courses belonging to a faculty (e.g. F Business)'''
+    def __init__(self, faculty):
+        self.faculty = faculty # The code for the faculty (F Business)
+
+    def uoc(self, user):
+        """The number of uoc belonging to courses in this faculty"""
+        result = 0
+        for course, (uoc, grade) in user.courses.items():
+            if course in CACHED_MAPPINGS[self.faculty]:
+                result += uoc
+        
+        return result
+    
+
+    def wam(self, user):
+        """The overall wam belongining to courses in this faculty"""
+        total_wam = 0
+        total_uoc = 0
+        for course, (uoc, grade) in user.courses.items():
+            if course in CACHED_MAPPINGS[self.faculty]:
+                if grade != None:
+                    total_uoc += uoc
+                    total_wam += uoc * grade
+        
         if total_uoc == 0:
             return None
 
