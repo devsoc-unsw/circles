@@ -135,8 +135,8 @@ class User:
         from the user and return a list of courses which would be affected by the unselection"""
 
         # Resolving circular imports
-        from backend.algorithms.create import create_condition
-        from backend.algorithms.objects.conditions import CACHED_CONDITIONS_TOKENS
+        from algorithms.create import create_condition
+        from algorithms.objects.conditions import CACHED_CONDITIONS_TOKENS
     
         if not self.has_taken_course(target):
             # Nothing would be affected by unselecting this course since we never
