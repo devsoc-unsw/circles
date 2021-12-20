@@ -1,7 +1,7 @@
-from backend.algorithms.objects.categories import *
-from backend.algorithms.objects.conditions import *
-from backend.algorithms.objects.user import User
-from backend.algorithms.objects.helper import *
+from algorithms.objects.categories import *
+from algorithms.objects.conditions import *
+from algorithms.objects.user import User
+from algorithms.objects.helper import *
 
 
 import re

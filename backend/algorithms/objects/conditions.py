@@ -6,7 +6,7 @@ import json
 import re
 import json
 
-from backend.algorithms.objects.helper import is_course, is_program
+from algorithms.objects.helper import is_course, is_program
 
 from .categories import *
 
