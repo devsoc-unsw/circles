@@ -12,7 +12,7 @@ can run:
     python3 -m data.processors.conditionsPreprocessing
 
 To then run this file:
-    python3 -m data.processors.manualFixes.[CODE]Fixes
+    python3 -m data.processors.manualFixes.COMMFixes
 """
 
 from data.utility import dataHelpers
@@ -28,6 +28,7 @@ def fix_conditions():
     """ Functions to apply manual fixes """
 
     CONDITIONS["COMM0999"][PROCESSED] = COMM_0999()
+    CONDITIONS["COMM1040"] = COMM_1040(CONDITIONS["COMM1040"])
     CONDITIONS["COMM1100"] = COMM_1100(CONDITIONS["COMM1100"])
     CONDITIONS["COMM1110"] = COMM_1110(CONDITIONS["COMM1110"])
     # CONDITIONS["COMM1120"] = COMM_1120(CONDITIONS["COMM1120"])
@@ -39,7 +40,7 @@ def fix_conditions():
     # CONDITIONS["COMM1900"][PROCESSED] = COMM_1900()
     CONDITIONS["COMM1999"] = COMM_1999(CONDITIONS["COMM1999"])
     CONDITIONS["COMM2222"] = COMM_2222(CONDITIONS["COMM2222"])
-    CONDITIONS["COMM2233"][PROCESSED] = COMM_2233()
+    CONDITIONS["COMM2233"] = COMM_2233(CONDITIONS["COMM2233"])
     CONDITIONS["COMM2244"][PROCESSED] = COMM_2244()
     CONDITIONS["COMM3020"] = COMM_2222(CONDITIONS["COMM3020"])
     CONDITIONS["COMM3030"][PROCESSED] = COMM_3030()
@@ -66,12 +67,19 @@ def COMM_0999():
     """
     return "COMM#"
 
-def COMM_1040():
+def COMM_1040(conditions):
     """
-        "original": "Prerequisite: Students must be in Good Academic Standing<br/><br/>",
-        "processed": "must be in Good Academic Standing"
+    "original": "Prerequisite: Students must be in Good Academic Standing<br/><br/>",
+    
+    "processed": "",
+
+    "warning": "Students must be in Good Academic Standing"
     """
-    return ""
+    return {
+        "original": conditions["original"],
+        "processed": "",
+        "warning": "Students must be in Good Academic Standing"
+    }
 
 def COMM_1100(conditions):
     """
@@ -97,30 +105,6 @@ def COMM_1110(conditions):
         "warning": "Students enrolled in 3764 (Eng/Comm), Actuarial Studies or Economics programs (in both single and double degree mode) are not permitted to enrol."
     }
 
-# def COMM_1120(conditions):
-    """
-        "original": "Only available to single and double degree Business School students in Term 1. It will be offered to non-Business School students in Terms 2 and 3.<br/><br/>",
-        "processed": "Only available to single && double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 && 3"
-    """
-
-    return {
-        "original": conditions["original"],
-        "processed": conditions["processed"],
-        "warning": "Only available to single and double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 and 3."
-    }
-
-# def COMM_1140(conditions):
-    """
-        "original": "Only available to single and double degree Business School students in Term 1. It will be offered to non-Business School students in Terms 2 and 3.<br/><br/>",
-        "processed": "Only available to single && double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 && 3"
-    """
-
-    return {
-        "original": conditions["original"],
-        "processed": conditions["processed"],
-        "warning": "Only available to single and double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 and 3."
-    }
-
 def COMM_1150(conditions):
     """
         "original": "Pre-requisite: COMM1100 and excludes MGMT1101. Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Term 3.<br/><br/>",
@@ -131,52 +115,8 @@ def COMM_1150(conditions):
     return {
         "original": conditions["original"],
         "processed": "COMM1100",
+        "warning": "Only available to single and double degree Business School students in Term 2. Offered to non-Business School students in Term 3."
     }
-
-# def COMM_1170(conditions):
-    """
-        "original": "Pre-requisite: COMM1140. Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Term 3.<br/><br/>",
-        "processed": "COMM1140. Only available to single && double degree Business School in Term 2. It will be offered to non-Business School in Term 3"
-    """
-
-    return {
-        "original": conditions["original"],
-        "processed": "COMM1140",
-        "warning": "Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Term 3."
-    }
-
-# def COMM_1180(conditions):
-    """
-        "original": "Pre-requisite: COMM1140. Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Term 3.<br/><br/>",
-        "processed": "COMM1140. Only available to single && double degree Business School in Term 2. It will be offered to non-Business School in Term 3"
-    """
-
-    return {
-        "original": conditions["original"],
-        "processed": "COMM1140",
-        "warning": "Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Term 3."
-    }
-
-# def COMM_1190(conditions):
-    """
-        "original": "Pre-requisite: COMM1110 or ECON1203 or MATH1041 or MATH1151 or MATH1131 or MATH1141. Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Term 3.<br/><br/>",
-        "processed": "COMM1110 || ECON1203 || MATH1041 || MATH1151 || MATH1131 || MATH1141. Only available to single && double degree Business School in Term 2. It will be offered to non-Business School in Term 3"
-    """
-    
-    return {
-        "original": conditions["original"],
-        "processed": "COMM1110 || ECON1203 || MATH1041 || MATH1151 || MATH1131 || MATH1141",
-        "warning": "Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Term 3."
-
-    }
-
-# def COMM_1900():
-    """
-        "original": "Enrolment is only permitted for students in program Actl/Comm (3155) or Comm/Econ (3521).<br/>Pre-req: (ECON1101 and ECON1102) or (DPBS1101 and DPBS1102)<br/><br/>",
-        "processed": "Enrolment is only permitted for in program Actl/Comm (3155) || Comm/Econ (3521). (ECON1101 && ECON1102) || (DPBS1101 && DPBS1102)"
-    """
-
-    return "(3155 || 3521) && ((ECON1101 && ECON1102) || (DPBS1101 && DPBS1102))"
 
 def COMM_1999(conditions):
     """
@@ -193,21 +133,27 @@ def COMM_1999(conditions):
 def COMM_2222(conditions):
     """
         "original": "Pre-requisite: In Business degree, COMM6000 Career Accelerator or COMM1999 First Year Portfolio, WAM 65+, minimum 72 UOC completed, room in degree for course, Good academic standing.<br/>Excluded: Co-op students<br/>It is recommended a progression check is completed prior to enrolling.<br/><br/>",
-        "processed": "In Business degree || COMM6000 Career Accelerator || COMM1999 First Year Portfolio, 65WAM, 72UOC , room in degree for course, Good academic standing"
+        "processed": "(COMM6000 || COMM1999) && ZBUS# && 65WAM && 72UOC",
+        "warning": "Good Academic Standing. Co-op students are excluded. It is recommended to do a progression check prior to enrolling"
     """
 
     return  {
         "original": conditions["original"],
-        "processed": "(COMM6000 || COMM1999) && ZBUS && 65WAM && 72UOC"
+        "processed": "(COMM6000 || COMM1999) && ZBUS# && 65WAM && 72UOC",
+        "warning": "Good Academic Standing. Co-op students are excluded. It is recommended to do a progression check prior to enrolling"
     }
 
-def COMM_2233():
+def COMM_2233(conditions):
     """
         "original": "Completed 48 UOC, Good Standing, completed COMM6000 or COMM1999, and have space in degree for course.<br/>Its recommended to seek a progression check prior to application. Visit Career Accelerator page on Business School website for more info.<br/><br/>",
         "processed": "48UOC || Good Standing || COMM6000 || COMM1999 && have space in degree for course. Its recommended to seek a progression check prior to application. Visit Career Accelerator page on Business School website for more info"
     """
 
-    return "(COMM6000 || COMM1999) && 48UOC"
+    return {
+        "original": conditions["original"],
+        "processed": "(COMM6000 || COMM1999) && 48UOC",
+        "warning": "It is recommended to do a progression check prior to enrolling."
+    }
 
 def COMM_2244():
     """
@@ -238,18 +184,19 @@ def COMM_3030():
         "processed": "\u2022\t65WAM; \u2022\thave a minimum 48UOC at the commencement of this course; \u2022\thave room in their degree for this course; \u2022\tare in good academic standing; \u2022\thave COMM6000 Career Accelerator: Essentials || COMM1999 First Year Portfolio (Business School only) This course may count as a Business School Free Elective || as a major elective within some schools. It is recommended a progression check is prior to enrolling"
     """
 
-    return "(COMM6000 || COMM1999) && 65WAM && 72UOC"
+    return "(COMM6000 || COMM1999) && 65WAM && 48UOC"
 
 def COMM_3090(conditions):
     """
         "original": "Students are expected to be in their final year of a Bachelor of Commerce single or dual degree with at least 108 UOC completed.<br/><br/>",
-        "processed": "are expected to be in their final year of a Bachelor of Commerce single || dual degree with 108UOC"
+        "processed": "108UOC",
+        "warning": "Students are expected to be in their final year of a Bachelor of Commerce single or dual degree with at least 108 UOC completed."
     """
 
     return {
         "original": conditions["original"],
         "processed": "108UOC",
-        "warning": "Students are expected to be in their final year of a Bachelor of Commerce single or dual degree with at least 108 UOC completed."
+        "warning": "Students are expected to be in their final year of a Bachelor of Commerce single or dual degree"
     }
 
 def COMM_3101(conditions):
@@ -258,6 +205,9 @@ def COMM_3101(conditions):
         "processed": "48UOC. This course is by application only.Please contact the Co-op office for more information. who have DIPP1510 || COMM2222 || are in Business Co-Op programs are"
     """
 
+    COURSES["COMM3101"]["exclusions"]["DIPP1510"] = 1
+    COURSES["COMM3101"]["exclusions"]["COMM222"] = 1
+    
     return {
         "original": conditions["original"],
         "processed": "48UOC",
@@ -271,7 +221,7 @@ def COMM_3202(conditions):
     """
 
     COURSES["COMM3202"]["exclusions"]["DIPP1510"] = 1
-    COURSES["COMM3202"]["exclusions"]["COMM222"] = 1
+    COURSES["COMM3202"]["exclusions"]["COMM2222"] = 1
     return {
         "original": conditions["original"],
         "processed": "COMM3101 || COMM2101",
@@ -318,7 +268,7 @@ def COMM_3999(conditions):
 
     return {
         "original": conditions["original"],
-        "processed": "COMM1999 && 72UOC && COMM#",
+        "processed": "COMM1999 && 72UOC in ZBUS && COMM#",
         "warning": "Studetns must be in their final year"
     }
 
