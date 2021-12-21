@@ -4,7 +4,7 @@ const plannedCourses = new Map();
 dummyMap.set("COMP2521", {
   title: "Data Structures and Algorithms",
   type: "Core",
-  termsOffered: ["t0", "t1", "t2", "t3"],
+  termsOffered: ["T0", "T1", "T2", "T3"],
   prereqs: "COMP1511 && (COMP1521 || DEFAULT3000)",
   plannedFor: null,
   warning: false,
@@ -12,7 +12,7 @@ dummyMap.set("COMP2521", {
 dummyMap.set("COMP1521", {
   title: "Computer Systems Fundamentals",
   type: "Core",
-  termsOffered: ["t0", "t1", "t2"],
+  termsOffered: ["T0", "T1", "T2"],
   prereqs: "COMP1511",
   plannedFor: null,
   warning: false,
@@ -20,7 +20,7 @@ dummyMap.set("COMP1521", {
 dummyMap.set("COMP1511", {
   title: "Programming Fundamentals",
   type: "Core",
-  termsOffered: ["t0", "t1", "t2", "t3"],
+  termsOffered: ["T0", "T1", "T2", "T3"],
   prereqs: "",
   plannedFor: null,
   warning: false,
@@ -28,7 +28,7 @@ dummyMap.set("COMP1511", {
 dummyMap.set("COMP6080", {
   title: "Web Front-End Programming",
   type: "Elective",
-  termsOffered: ["t1", "t3"],
+  termsOffered: ["T1", "T3"],
   prereqs: "COMP1521 && (COMP2521 || COMP1927)",
   plannedFor: null,
   warning: false,
@@ -36,7 +36,7 @@ dummyMap.set("COMP6080", {
 dummyMap.set("ARTS1240", {
   title: "Environment and Society",
   type: "General Education",
-  termsOffered: ["t0", "t1", "t2"],
+  termsOffered: ["T0", "T1", "T2"],
   prereqs: "",
   plannedFor: null,
   warning: false,
@@ -45,7 +45,7 @@ dummyMap.set("ARTS1240", {
 const generateEmptyYears = (nYears) => {
   let res = [];
   for (let i = 0; i < nYears; ++i) {
-    const year = { t0: [], t1: [], t2: [], t3: [] };
+    const year = { T0: [], T1: [], T2: [], T3: [] };
     res.push(year);
   }
   return res;
@@ -57,9 +57,9 @@ let initialState = {
   numYears: 3,
   isSummerEnabled: false,
   years: [
-    { t0: [], t1: [], t2: [], t3: [] },
-    { t0: [], t1: [], t2: [], t3: [] },
-    { t0: [], t1: [], t2: [], t3: [] },
+    { T0: [], T1: [], T2: [], T3: [] },
+    { T0: [], T1: [], T2: [], T3: [] },
+    { T0: [], T1: [], T2: [], T3: [] },
   ],
   courses: dummyMap,
   plannedCourses: plannedCourses,
@@ -97,14 +97,15 @@ const plannerReducer = (state = initialState, action) => {
   switch (action.type) {
     case "ADD_TO_UNPLANNED":
       const { courseCode, courseData } = action.payload;
+
       // Add course data to courses
       if (!state.courses[courseCode]) {
         state.courses.set(courseCode, courseData);
       }
 
       // Append course code onto unplanned
-      state.unplanned.join(courseCode);
-      setInLocalStorage(stateCopy);
+
+      state.unplanned.push(courseCode);
       return state;
 
     case "ADD_CORE_COURSES":
@@ -255,7 +256,7 @@ const plannerReducer = (state = initialState, action) => {
           updatedYears.push(state.years[yearVisiting - state.startYear]);
         } else {
           // add empty year
-          updatedYears.push({ t0: [], t1: [], t2: [], t3: [] });
+          updatedYears.push({ T0: [], T1: [], T2: [], T3: [] });
           // unschedule the courses that are in the year which will be removed
           const yearToBeRemoved = state.years[state.numYears - i - 1];
           for (let term in yearToBeRemoved) {
@@ -285,7 +286,7 @@ const plannerReducer = (state = initialState, action) => {
         // add empty years to the end
         const diff = newNumYears - state.numYears;
         for (let i = 0; i < diff; i++) {
-          dupYears.push({ t0: [], t1: [], t2: [], t3: [] });
+          dupYears.push({ T0: [], T1: [], T2: [], T3: [] });
         }
       } else {
         // remove extra years

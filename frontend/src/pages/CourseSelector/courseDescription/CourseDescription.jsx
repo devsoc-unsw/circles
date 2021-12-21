@@ -22,7 +22,7 @@ export default function CourseDescription() {
   const dispatch = useDispatch();
   const { active, tabs } = useSelector(state => state.tabs);
   let id = tabs[active];
-  console.log(active, tabs);
+  // console.log(active, tabs);
 
   const course = useSelector(state => state.updateCourses.course);
   const coursesInPlanner = useSelector(state => state.planner.courses);
@@ -46,18 +46,22 @@ export default function CourseDescription() {
   if (id === 'search') return (<div>This is the search page</div>)
 
   const addToPlanner = () => {
+    console.log(course)
     const data = {
-      courseCode: id,
+      courseCode: course.code,
       courseData: {
-        title: course.name,
-        type: course.type,
+        title: course.title,
+        type: "No type", // TODO: add type
         termsOffered: course.terms,
         uoc: course.uoc,
+        plannedFor: null,
+        warning: false,
+        prereqs: ""
         // TODO: Need to add prereqs
       }
     } 
     dispatch(plannerActions("ADD_TO_UNPLANNED", data));
-    dispatch(setUnplannedCourses(id));
+    // dispatch(setUnplannedCourses(id));
     setLoading(true)
     setTimeout(() => {
       setShow(true);
