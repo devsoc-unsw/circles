@@ -18,29 +18,26 @@ services:
     container_name: backend
     ports:
       - '8000:8000'
-    volumes:
-      # Bind mount volume for live backend updates while developing
-      - ./backend/:/backend
     env_file:
       - ./env/backend.env
     depends_on:
       - mongodb
     networks:
       - circles-net
-  frontend:
-    build: ./frontend
-    container_name: frontend
-    ports:
-      - '3000:3000'
-    volumes:
-      # Bind mount volume for live frontend updates while developing
-      - ./frontend/src:/client/src
-    stdin_open: true
-    tty: true
-    depends_on:
-      - backend
-    networks:
-      - circles-net
+  # frontend:
+  #   build: ./frontend
+  #   container_name: frontend
+  #   ports:
+  #     - '3000:3000'
+  #   volumes:
+  #     # Bind mount volume for live frontend updates while developing
+  #     - ./frontend/src:/client/src
+  #   stdin_open: true
+  #   tty: true
+  #   depends_on:
+  #     - backend
+  #   networks:
+  #     - circles-net
 
 # Note only named volumes need to be listed here for persistance.
 volumes:

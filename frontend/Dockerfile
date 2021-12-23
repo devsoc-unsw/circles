@@ -19,9 +19,7 @@ COPY . .
 EXPOSE 3000
 
 # Give the deploy script permissions
-# RUN ["chmod", "+x", "/client/scripts/deploy.sh"]
+RUN ["chmod", "+x", "/client/scripts/deploy.sh"]
 
 # Run the server
-# ENTRYPOINT [ "/client/scripts/deploy.sh" ]
-
-ENTRYPOINT ["npm", "start"]
+ENTRYPOINT [ "/client/scripts/deploy.sh" ]
