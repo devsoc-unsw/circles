@@ -4,6 +4,7 @@ services:
   mongodb:
     image: mongo
     volumes:
+      # Named volume to persist database
       - data:/data/db
     env_file:
       - ./env/mongodb.env
@@ -17,6 +18,18 @@ services:
       - ./env/backend.env
     depends_on:
       - mongodb
+  frontend:
+    build: ./frontend
+    ports:
+      - '3000:3000'
+    volumes:
+      # Bind mount volume for live frontend updates while developing
+      - ./frontend/src:/client/src
+    stdin_open: true
+    tty: true
+    depends_on:
+      - backend
 
+# Note only named volumes need to be listed here for persistance.
 volumes:
   data:

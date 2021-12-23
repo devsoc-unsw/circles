@@ -1,5 +1,5 @@
-# Grab the latest Node base image
-FROM node:12.22.6
+# Node v17 causing digital envelope routines error as at Dec '21.
+FROM node:16.13.0
 
 # Install serve
 RUN npm install -g serve
@@ -18,5 +18,10 @@ COPY . .
 
 EXPOSE 3000
 
+# Give the deploy script permissions
+# RUN ["chmod", "+x", "/client/scripts/deploy.sh"]
+
 # Run the server
-ENTRYPOINT [ "/client/scripts/deploy.sh" ]
+# ENTRYPOINT [ "/client/scripts/deploy.sh" ]
+
+ENTRYPOINT ["npm", "start"]
