@@ -19,7 +19,7 @@ In `backend.env`, add the environment variables:
 - `MONGODB_PASSWORD=...`
 - `MONGODB_URL=mongodb`
 
-In `mongodb.env', add:
+In `mongodb.env`, add:
 - `MONGO_INITDB_ROOT_USERNAME=...`
 - `MONGO_INITDB_ROOT_PASSWORD=...`
 
@@ -27,7 +27,7 @@ Replace the ellipses with a username and password. The username and password in 
 
 ### Running Circles with Docker
 
-If you have made changes to the backend codebase or any of the dockerfiles, run `docker-compose build --no-cache`. This will rebuild the docker images with the updated code. You can run `docker images` to see what images exist on your machine. Note the `docker rmi <image>` command deletes an image.
+The first time you run Circles, or if you have made changes to the backend codebase or any of the dockerfiles, run `docker-compose build --no-cache`. This will rebuild the docker images with the updated code. You can run `docker images` to see what images exist on your machine. Note the `docker rmi <image>` command deletes an image.
 
 To then run the whole application (frontend, backend and database), use `docker-compose up`. You can include the `-d` option if you wish to run it in detached mode. 
 
