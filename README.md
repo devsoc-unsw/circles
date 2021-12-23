@@ -10,6 +10,21 @@ Circles uses `docker` for development. This means you do not need to install any
 
 We use docker to build 'images' for the backend, frontend, and mongodb. These `images` can then be used to run `containers`. An image is a blueprint for a container and a container contains everything we need to run an application. All dependencies for code exist within these containers, and via `docker-compose`, these containers can talk to each other.
 
+### Creating Environment Variables
+
+MongoDB and the backend require a few environment variables to get started. In the root folder, create a folder called `env` and add two files: `backend.env` and `mongodb.env`. 
+
+In `backend.env`, add the environment variables:
+- `MONGODB_USERNAME=...`
+- `MONGODB_PASSWORD=...`
+- `MONGODB_URL=mongodb`
+
+In `mongodb.env', add:
+- `MONGO_INITDB_ROOT_USERNAME=...`
+- `MONGO_INITDB_ROOT_PASSWORD=...`
+
+Replace the ellipses with a username and password. The username and password in `backend.env` must match the values in `mongodb.env`. The `env` folder has been added to `.gitignore` and will not be committed to the repo. 
+
 ### Running Circles with Docker
 
 If you have made changes to the backend codebase or any of the dockerfiles, run `docker-compose build --no-cache`. This will rebuild the docker images with the updated code. You can run `docker images` to see what images exist on your machine. Note the `docker rmi <image>` command deletes an image.
