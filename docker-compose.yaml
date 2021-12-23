@@ -3,23 +3,33 @@ version: '3.8'
 services:
   mongodb:
     image: mongo
+    container_name: mongodb
     volumes:
       # Named volume to persist database
       - data:/data/db
     env_file:
       - ./env/mongodb.env
+    networks:
+      - circles-net
   backend:
     build:
       context: ./backend
       dockerfile: backend.dockerfile
+    container_name: backend
     ports:
       - '8000:8000'
+    volumes:
+      # Bind mount volume for live backend updates while developing
+      - ./backend/:/backend
     env_file:
       - ./env/backend.env
     depends_on:
       - mongodb
+    networks:
+      - circles-net
   frontend:
     build: ./frontend
+    container_name: frontend
     ports:
       - '3000:3000'
     volumes:
@@ -29,7 +39,12 @@ services:
     tty: true
     depends_on:
       - backend
+    networks:
+      - circles-net
 
 # Note only named volumes need to be listed here for persistance.
 volumes:
   data:
+
+networks:
+  circles-net:
