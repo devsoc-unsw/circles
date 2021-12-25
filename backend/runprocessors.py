@@ -15,6 +15,7 @@ from data.scrapers.specialisationsFormatting import format_spn_data
 from data.scrapers.coursesFormatting import format_course_data
 
 from data.processors.programsProcessing import process_data as process_prg_data
+from data.processors.programsProcessingSimple import process_data as process_prg_data_simple
 from data.processors.specialisationsProcessing import customise_spn_data
 from data.processors.coursesProcessing import process_courses as process_course_data
 
@@ -51,7 +52,8 @@ run = {
     'program': {
         'scrape': scrape_prg_data,
         'format': format_prg_data,
-        'process': process_prg_data
+        'process': process_prg_data,
+        'processSimple': process_prg_data_simple
     },
     'specialisation': {
         'scrape': scrape_spn_data,
