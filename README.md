@@ -27,8 +27,6 @@ Replace the ellipses with a username and password. The username and password in 
 
 The first time you run Circles, or if you have made changes to the backend codebase or any of the dockerfiles, run `docker-compose build --no-cache`. This will rebuild the docker images with the updated code. You can run `docker images` to see what images exist on your machine. Note the `docker rmi <image>` command deletes an image.
 
-Next, to populate the database, run `docker-compose run init-mongo`. This will create a utility container that connects to the database and writes in data. You can also run it whenever you want to overwrite the data.
-
 To run the whole application (frontend, backend and database), use `docker-compose up frontend`. You can include the `-d` option if you wish to run it in detached mode. 
 
 You will now have the backend API available on `localhost:8000/docs` and the frontend on `localhost:3000`. Since we use `docker-compose`, the backend, frontend and database can talk to each other in their own special docker network (called `circles-net`).
@@ -36,6 +34,10 @@ You will now have the backend API available on `localhost:8000/docs` and the fro
 Note that changes to the frontend React code will be visible live while developing due to the bind mount in the docker-compose file (see line 37). It is not necessary to rebuild the images to view the frontend changes.
 
 To see what containers are running, use `docker ps`. To see all containers, including stopped containers, add option `-a`. You can remove a particular container using `docker rm <container>`. Another handy command is `docker logs <containerName>` to view a container's output.
+
+### Populating the Database
+
+The first time you compose the application, or whenever you need to overwrite mongodb data, run `docker-compose run init-mongo`. This will create a utility container that connects to the database and writes in data scraped from the handbook.
 
 ### Running Only the Backend
 
