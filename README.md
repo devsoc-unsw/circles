@@ -25,7 +25,7 @@ Replace the ellipses with a username and password. The username and password in 
 
 ### Running Circles with Docker
 
-The first time you run Circles, or if you have made changes to the backend codebase or any of the dockerfiles, run `docker-compose build --no-cache`. This will rebuild the docker images with the updated code. You can run `docker images` to see what images exist on your machine. Note the `docker rmi <image>` command deletes an image.
+The first time you run Circles, or if you have made changes to the backend codebase, run `docker-compose build`. Add the flag `--no-cache` if you have made changes to the dockerfiles. This will rebuild the docker images with the updated code. You can run `docker images` to see what images exist on your machine. Note the `docker rmi <image>` command deletes an image.
 
 To run the whole application (frontend, backend and database), use `docker-compose up frontend`. You can include the `-d` option if you wish to run it in detached mode. 
 
@@ -37,7 +37,7 @@ To see what containers are running, use `docker ps`. To see all containers, incl
 
 ### Populating the Database
 
-The first time you compose the application, or whenever you need to overwrite mongodb data, run `docker-compose run init-mongo`. This will create a utility container that connects to the database and writes in data scraped from the handbook.
+The first time you compose the application, or whenever you need to overwrite mongodb data, run `docker-compose run --rm init-mongo`. This will create a utility container that connects to the database and writes in data scraped from the handbook. The container will be automatically removed after the overwriting process due to the `--rm` flag.
 
 ### Running Only the Backend
 

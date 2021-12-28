@@ -1,4 +1,4 @@
-# Sets up the backend, without writing data into the database.
+# Dockerfile for production. A new container will overwrite the database automatically.
 
 # Latest python image
 FROM python:3
@@ -16,5 +16,5 @@ COPY . .
 # Expose port 8000 to the outside world
 EXPOSE 8000
 
-# Run the server
-ENTRYPOINT ["python3", "-u", "runserver.py"]
+# Run the server with overwrite flag
+CMD ["python3", "-u", "runserver.py", "--overwrite"]
