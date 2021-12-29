@@ -25,7 +25,7 @@ Replace the ellipses with a username and password. The username and password in 
 
 ### Running Circles with Docker
 
-The first time you run Circles, or if you have made changes to the backend codebase, run `docker-compose build`. Add the flag `--no-cache` if you have made changes to the dockerfiles. This will rebuild the docker images with the updated code. You can run `docker images` to see what images exist on your machine. Note the `docker rmi <image>` command deletes an image.
+The first time you run Circles, or if you have made changes to the backend codebase, run `docker-compose build`. You can run `docker images` to see what images exist on your machine. Note the `docker rmi <image>` command deletes an image. If you find you are building up a lot of `<none>` images, the `docker image prune` command will remove all 'dangling' images (those that are not related to named images and serve no purpose).
 
 To run the whole application (frontend, backend and database), use `docker-compose up frontend`. You can include the `-d` option if you wish to run it in detached mode. 
 
