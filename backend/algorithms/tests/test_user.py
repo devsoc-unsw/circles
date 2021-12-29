@@ -1,8 +1,8 @@
 '''Testing the user class to ensure that the user data is accurately imported and updated'''
 
-from .conditions import User
+from backend.algorithms.create import create_condition
+from backend.algorithms.objects.user import User
 from math import isclose
-import pytest
 import json
 
 PATH = "./algorithms/exampleUsers.json"

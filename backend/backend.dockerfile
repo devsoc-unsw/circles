@@ -16,5 +16,7 @@ COPY . .
 # Expose port 8000 to the outside world
 EXPOSE 8000
 
+# ENV OVERWRITE='False'
+
 # Run the server
 ENTRYPOINT ["python3", "-u", "runserver.py"]
