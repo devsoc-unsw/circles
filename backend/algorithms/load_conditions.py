@@ -4,7 +4,7 @@ folder with python3 -m algorithms.load_conditions
 '''
 import pickle
 import json
-from algorithms.conditions import create_condition
+from algorithms.create import create_condition
 # Load in all the courses and their conditions list
 ALL_CONDITION_TOKENS_FILE = "./data/finalData/conditionsTokens.json"
 PICKLE_FILE = "./algorithms/conditions.pkl"

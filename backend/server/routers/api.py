@@ -7,7 +7,7 @@ from pydantic import BaseModel, create_model
 import re
 import collections
 import pickle 
-from algorithms.conditions import User
+from algorithms.objects.user import User
 from typing import Dict, List 
 
 router = APIRouter(

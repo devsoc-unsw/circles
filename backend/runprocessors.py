@@ -24,7 +24,7 @@ from data.processors.conditions_tokenising import tokenise_conditions
 from algorithms.cache.cache import cache_exclusions
 from algorithms.cache.cache import cache_warnings
 from algorithms.cache.cache import cache_mappings
-from algorithms.cache.cache import cache_course_codes
+from algorithms.cache.cache import cache_program_mappings
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--type', type=str,
@@ -35,7 +35,7 @@ parser.add_argument('--stage', type=str,
                     (any) --> all
                     program/specialisation/course --> scrape, format, process
                     condition --> process, manual, tokenise
-                    algorithm --> exclusion, warning, mapping, code
+                    cache --> exclusion, warning, mapping, program
                     ''')
 
 try:
@@ -68,11 +68,11 @@ run = {
         'manual': run_manual_fixes,
         'tokenise': tokenise_conditions
     },
-    'algorithm': {
+    'cache': {
         'exclusion': cache_exclusions,
         'warnings': cache_warnings,
         'mapping': cache_mappings,
-        'code': cache_course_codes
+        "program": cache_program_mappings
     }
 }
 
