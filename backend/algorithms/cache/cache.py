@@ -5,22 +5,31 @@ for faster algorithms performance.
 This should be run from the backend directory or via runprocessors
 """
 
+from os import write
 import sys
 import json
+import re
 
 from data.utility.dataHelpers import read_data, write_data
 
+# INPUT SOURCES
 COURSES_PROCESSED_FILE = "./data/finalData/coursesProcessed.json"
+
+PROGRAMS_FORMATTED_FILE = "./data/scrapers/programsFormattedRaw.json"
 
 CACHED_EXCLUSIONS_FILE = "./algorithms/cache/exclusions.json"
 
 CONDITIONS_PROCESSED_FILE = "./data/finalData/conditionsProcessed.json"
 
+
+# OUTPUT SOURCES
 CACHED_WARNINGS_FILE = "./algorithms/cache/warnings.json"
 
 MAPPINGS_FILE = "./algorithms/cache/mappings.json"
 
 COURSE_MAPPINGS_FILE = "./algorithms/cache/courseMappings.json"
+
+PROGRAM_MAPPINGS_FILE = "./algorithms/cache/programMappings.json"
 
 def cache_exclusions():
     """
@@ -87,3 +96,35 @@ def cache_mappings():
         finalMappings[mappings[courseFaculty]][courseCode] = 1
 
     write_data(finalMappings, COURSE_MAPPINGS_FILE)
+
+def cache_program_mappings():
+    """
+    Maps CODE# to programs, e.g.
+    {
+        "ACTL#": {
+            "3586": 1,
+            "4520": 1,
+        }
+    }
+
+    Achieves this by looking for a keyword in the program's title
+    """
+
+    # Initialise mappings with all the mapping codes
+    mappings = {}
+    mappings["ACTL#"] = {}
+    mappings["BUSN#"] = {}
+    mappings["COMM#"] = {}
+    # TODO: Add any more mappings. Look into updating manual-fixes wiki page?
+
+    programs = read_data(PROGRAMS_FORMATTED_FILE)        
+
+    for program in programs.values():
+        if re.match(r"actuarial", program["title"], flags=re.IGNORECASE):
+            mappings["ACTL#"][program["code"]] = 1
+        elif re.match(r"business", program["title"], flags=re.IGNORECASE):
+            mappings["BUSN#"][program["code"]] = 1
+        elif re.match(r"commerce", program["title"], flags=re.IGNORECASE):
+            mappings["COMM#"][program["code"]] = 1
+
+    write_data(mappings, PROGRAM_MAPPINGS_FILE)
