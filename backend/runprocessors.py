@@ -75,23 +75,20 @@ run = {
         "program": cache_program_mappings
     }
 }
-
-
-if args.stage == 'all':
-    # Run all the stages from top to bottom
-    if args.type in ["program", "specialisation", "course"]:
-        # NOTE: Be careful when using this as this will rerun the scrapers
-        res = input(
-            f"Careful. You are about to run all stages of {args.type} INCLUDING the scrapers... Enter 'y' if you wish to proceed or 'n' to cancel: ")
-        if res == 'y':
+if __name__ == '__main__':
+    if args.stage == 'all':
+        # Run all the stages from top to bottom
+        if args.type in ["program", "specialisation", "course"]:
+            # NOTE: Be careful when using this as this will rerun the scrapers
+            res = input(
+                f"Careful. You are about to run all stages of {args.type} INCLUDING the scrapers... Enter 'y' if you wish to proceed or 'n' to cancel: ")
+            if res == 'y':
+                for s in run[args.type]:
+                    run[args.type][s]()
+        else:
+            # Conditions
             for s in run[args.type]:
                 run[args.type][s]()
     else:
-        # Conditions
-        for s in run[args.type]:
-            run[args.type][s]()
-else:
-    # Run the specific process
-    run[args.type][args.stage]()
-
-
+        # Run the specific process
+        run[args.type][args.stage]()
