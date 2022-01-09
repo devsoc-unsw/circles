@@ -10,6 +10,9 @@ NOTE: For now, run inside backend folder with python3 -m algorithms.recommendati
 NOTE: ENSURE YOU HAVE BRANCHED OFF!!!
 
 NOTE: For sample user data, look at exampleUsers.json to get an idea of the structure
+
+NOTE:run by
+python -m algorithms.recommendations
 """
 from algorithms.conditions import User, create_condition, CACHED_CONDITIONS_TOKENS
 import json
@@ -86,6 +89,7 @@ def get_courses_path_to():
         result[c] = len(courses[c]['path_to'])
     return result
 
+# Double degree?
 def get_courses_in_faculty(user):
     """
     Given a user's data, determine the faculty of their program/specialisations 
