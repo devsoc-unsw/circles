@@ -27,7 +27,7 @@ def tokenise_conditions():
         # There are many words with (abcdefgh) where the brackets are attached
         # too tightly to the word. We first want to separate them like so:
         # ( abcdefgh ) so that our split can separate them cleanly.
-        text = re.sub(r'\(', r' ( ', text)
+        text = re.sub(r'\(', r' \( ', text)
         text = re.sub(r'\)', r' ) ', text)
         text = re.sub(r'\]', r' ] ', text)
         text = re.sub(r'\[', r' [ ', text)

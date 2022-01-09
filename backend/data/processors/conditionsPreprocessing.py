@@ -125,7 +125,7 @@ def delete_extraneous_phrasing(processed):
 
     # Remove completion language
     completion_text = ["completion of", "must successfully complete",
-                       "must have completed", "completing", "completed"]
+                       "must have completed", "completing", "completed", "a pass in"]
     for text in completion_text:
         processed = re.sub(text, "", processed, flags=re.IGNORECASE)
 
@@ -206,8 +206,8 @@ def convert_GRADE(processed):
     courses'''
 
     # Converts "mark of at least XX to XXGRADE"
-    processed = re.sub(r"(a )?mark of at least (\d\d)",
-                       r"\2GRADE", processed, flags=re.IGNORECASE)
+    processed = re.sub(r"(a )?(minimum )?mark of (at least )?(\d\d)( or (greater|above))?",
+                       r"\4GRADE", processed, flags=re.IGNORECASE)
 
     # Further handle CR and DN. These usually follow a course code
     # MATH1141 (CR) ==> 65WAM MATH1141
@@ -249,6 +249,7 @@ def convert_including(processed):
 def convert_AND_OR(processed):
     """ Convert 'and' to '&&' and 'or' to '||' """
     processed = re.sub(" and ", " && ", processed, flags=re.IGNORECASE)
+    processed = re.sub(" plus ", " && ", processed, flags=re.IGNORECASE)
     processed = re.sub(" or ", " || ", processed, flags=re.IGNORECASE)
     return processed
 
