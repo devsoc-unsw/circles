@@ -125,7 +125,7 @@ def delete_extraneous_phrasing(processed):
 
     # Remove completion language
     completion_text = ["completion of", "must successfully complete",
-                       "must have completed", "completing", "completed"]
+                       "must have completed", "completing", "completed", "a pass in"]
     for text in completion_text:
         processed = re.sub(text, "", processed, flags=re.IGNORECASE)
 
@@ -250,6 +250,7 @@ def convert_including(processed):
 def convert_AND_OR(processed):
     """ Convert 'and' to '&&' and 'or' to '||' """
     processed = re.sub(" and ", " && ", processed, flags=re.IGNORECASE)
+    processed = re.sub(" plus ", " && ", processed, flags=re.IGNORECASE)
     processed = re.sub(" or ", " || ", processed, flags=re.IGNORECASE)
     return processed
 
