@@ -324,7 +324,7 @@
     },
     "ANAT3411": {
         "original": "Prerequisite: ANAT1521 or a minimum mark of 55 in ANAT2111 or  ANAT2511<br/><br/>",
-        "processed": "ANAT1521 || a minimum mark of 55 in ANAT2111 || ANAT2511"
+        "processed": "ANAT1521 || 55GRADE in ANAT2111 || ANAT2511"
     },
     "ARCH0006": {
         "original": "",
@@ -8153,7 +8153,7 @@
     },
     "MATH2221": {
         "original": "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251 each with a mark of 70.<br/><br/>",
-        "processed": "MATH1231 || DPST1014 || MATH1241 || MATH1251 each with a mark of 70"
+        "processed": "MATH1231 || DPST1014 || MATH1241 || MATH1251 each with 70GRADE"
     },
     "MATH2241": {
         "original": "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251<br/><br/>",
@@ -8177,7 +8177,7 @@
     },
     "MATH2601": {
         "original": "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251 each with a mark of 70 or greater; Exclusion: MATH2099<br/><br/>",
-        "processed": "MATH1231 || DPST1014 || MATH1241 || MATH1251 each with a mark of 70 || greater"
+        "processed": "MATH1231 || DPST1014 || MATH1241 || MATH1251 each with 70GRADE"
     },
     "MATH2621": {
         "original": "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251 each with a mark of at least 70; Exclusion: MATH2069<br/><br/>",
@@ -9700,7 +9700,7 @@
     },
     "PATH2201": {
         "original": "Prerequisite: ANAT2241 plus any one of ANAT2111, ANAT1521, PHSL2101, BIOC2101, BIOC2181.<br/><br/>",
-        "processed": "ANAT2241 plus any one of ANAT2111, ANAT1521, PHSL2101, BIOC2101, BIOC2181"
+        "processed": "ANAT2241 && any one of ANAT2111, ANAT1521, PHSL2101, BIOC2101, BIOC2181"
     },
     "PATH2202": {
         "original": "Prerequisite: ANAT2111 or ANAT1551 and BIOC2181 and PHSL2501<br/><br/>",
@@ -9908,7 +9908,7 @@
     },
     "PHYS1231": {
         "original": "Prerequisite: PHYS1131 or DPST1023 or PHYS1141 or a mark of 65 or above in PHYS1121; Corequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251<br/><br/>",
-        "processed": "PHYS1131 || DPST1023 || PHYS1141 || a mark of 65 || above in PHYS1121; [MATH1231 || DPST1014 || MATH1241 || MATH1251]"
+        "processed": "PHYS1131 || DPST1023 || PHYS1141 || 65GRADE in PHYS1121; [MATH1231 || DPST1014 || MATH1241 || MATH1251]"
     },
     "PHYS1241": {
         "original": "Prerequisites: PHYS1131 or DPST1023 or PHYS1141; Co-requisites: MATH1231 or DPST1014 or MATH1241 or MATH1251<br/><br/>",
