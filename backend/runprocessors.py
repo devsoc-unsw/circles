@@ -15,6 +15,7 @@ from data.scrapers.specialisationsFormatting import format_spn_data
 from data.scrapers.coursesFormatting import format_course_data
 
 from data.processors.programsProcessing import process_data as process_prg_data
+from data.processors.programsProcessingType1 import process_data as process_prg_data_type1
 from data.processors.specialisationsProcessing import customise_spn_data
 from data.processors.coursesProcessing import process_courses as process_course_data
 
@@ -33,7 +34,7 @@ parser.add_argument('--stage', type=str,
                     help=
                     '''
                     (any) --> all
-                    program/specialisation/course --> scrape, format, process
+                    program/specialisation/course --> scrape, format, process, type1
                     condition --> process, manual, tokenise
                     cache --> exclusion, warning, mapping, program
                     ''')
@@ -51,7 +52,8 @@ run = {
     'program': {
         'scrape': scrape_prg_data,
         'format': format_prg_data,
-        'process': process_prg_data
+        'process': process_prg_data,
+        'type1': process_prg_data_type1
     },
     'specialisation': {
         'scrape': scrape_spn_data,
