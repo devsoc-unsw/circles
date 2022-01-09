@@ -38,7 +38,7 @@ def tokenise_conditions():
         # Split on white space
         for word in text.split():
             logic.append(word)
-        
+
         logic.append(")")
 
         PARSED_LOGIC[code] = logic

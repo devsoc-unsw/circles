@@ -2,8 +2,6 @@
 Program processes the formatted data by editing and customising the data for 
 use on the frontend. See 'programsProcessed.json' for output.
 
-NOTE: "program" == "program"
-
 Status: Currently works for all COMP programs and SENGAH. Query next
         set of programs to include.
 
@@ -14,8 +12,6 @@ Step in the data's journey:
 """
 
 import re
-import sys
-from typing import Container, List, Iterable, Union, Optional
 from data.utility import dataHelpers
 from collections import OrderedDict
 

@@ -141,9 +141,8 @@ class SchoolCategory(Category):
         for course, (uoc, grade) in user.courses.items():
             if course in CACHED_MAPPINGS[self.school]:
                 result += uoc
-        
+
         return result
-    
 
     def wam(self, user):
         """The overall wam belongining to courses in this school"""
@@ -171,9 +170,8 @@ class FacultyCategory(Category):
         for course, (uoc, grade) in user.courses.items():
             if course in CACHED_MAPPINGS[self.faculty]:
                 result += uoc
-        
+
         return result
-    
 
     def wam(self, user):
         """The overall wam belongining to courses in this faculty"""
@@ -184,9 +182,8 @@ class FacultyCategory(Category):
                 if grade != None:
                     total_uoc += uoc
                     total_wam += uoc * grade
-        
+
         if total_uoc == 0:
             return None
 
         return total_wam / total_uoc
-
