@@ -157,7 +157,7 @@ def convert_square_brackets(processed):
 def convert_UOC(processed):
     """ Converts to XXUOC """
     # Converts unit(s) of credit(s) to UOC and removes spacing
-    processed = re.sub(r'\s?units? of (credits?|completed?)', "UOC",
+    processed = re.sub(r'\s?units? (of credits?|completed?)', "UOC",
                        processed, flags=re.IGNORECASE)
     # Places UOC right next to the numbers
     processed = re.sub("\s?UOC", "UOC", processed, flags=re.IGNORECASE)
