@@ -644,7 +644,7 @@ def getAllUnlocked(userData: UserData, lockedCourses: list):
             state = condition.is_unlocked(user)
             unlocked = state['result']
             warnings = state['warnings']
-        else: 
+        else:
             # Condition object does not exist for this course. True by default
             # but warn the user the info might be inaccurate
             isAccurate = False 
@@ -655,7 +655,7 @@ def getAllUnlocked(userData: UserData, lockedCourses: list):
             "is_accurate": isAccurate,
             "unlocked": unlocked,
             "handbook_note": "", # TODO: Cache handbook notes
-            "warnings": warnings          
+            "warnings": warnings
         }
 
     return {'courses_state': coursesState}

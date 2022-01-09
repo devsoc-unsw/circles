@@ -205,8 +205,8 @@ def COMM_3101(conditions):
     """
 
     COURSES["COMM3101"]["exclusions"]["DIPP1510"] = 1
-    COURSES["COMM3101"]["exclusions"]["COMM222"] = 1
-    
+    COURSES["COMM3101"]["exclusions"]["COMM2222"] = 1
+
     return {
         "original": conditions["original"],
         "processed": "48UOC",

@@ -151,7 +151,7 @@ class User:
                 continue
             else:
                 cached_conditions[course] = create_condition(CACHED_CONDITIONS_TOKENS[course], course)
-                
+
         # First remove this course from our database (updating overall UOC and WAM)
         del self.courses[target]
         self.update_wam_uoc()
