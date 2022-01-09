@@ -43,7 +43,7 @@ def process_data():
         processedData[programData["code"]] = programData
 
     dataHelpers.write_data(
-        processedData, "data/finalData/programsProcessedSimple.json")
+        processedData, "data/finalData/programsProcessedType1.json")
 
 
 def addComponentData(formatted, programData):
