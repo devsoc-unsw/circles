@@ -14,12 +14,12 @@ from data.scrapers.programsFormatting import format_data as format_prg_data
 from data.scrapers.specialisationsFormatting import format_spn_data
 from data.scrapers.coursesFormatting import format_course_data
 
-from data.processors.programsProcessing import process_data as process_prg_data
-from data.processors.programsProcessingType1 import process_data as process_prg_data_type1
-from data.processors.specialisationsProcessing import customise_spn_data
-from data.processors.coursesProcessing import process_courses as process_course_data
+from backend.data.processors.programs_processing import process_data as process_prg_data
+from backend.data.processors.programs_processing_type1 import process_data as process_prg_data_type1
+from backend.data.processors.specialisations_processing import customise_spn_data
+from backend.data.processors.courses_processing import process_courses as process_course_data
 
-from data.processors.conditionsPreprocessing import preprocess_conditions
+from backend.data.processors.conditions_preprocessing import preprocess_conditions
 from data.processors.conditions_tokenising import tokenise_conditions
 
 from algorithms.cache.cache import cache_exclusions

@@ -1,6 +1,5 @@
 from algorithms.objects.categories import *
 from algorithms.objects.conditions import *
-from algorithms.objects.user import User
 from algorithms.objects.helper import *
 
 
@@ -173,6 +172,8 @@ def make_condition(tokens, first=False, course=None):
             result.add_condition(ProgramCondition(token))
         elif is_specialisation(token):
             result.add_condition(SpecialisationCondition(token))
+        elif is_program_type(token):
+            result.add_condition(ProgramTypeCondition(token))
         else:
             # Unmatched token. Error
             return None, index
