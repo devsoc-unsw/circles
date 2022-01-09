@@ -15,8 +15,6 @@ from data.utility import dataHelpers
 
 PARSED_LOGIC = {}
 
-split_key = ["(", ")", "&&", "||", "[", "]", "in"]
-
 '''Converts the text condition into a json list'''
 
 
@@ -29,7 +27,7 @@ def tokenise_conditions():
         # There are many words with (abcdefgh) where the brackets are attached
         # too tightly to the word. We first want to separate them like so:
         # ( abcdefgh ) so that our split can separate them cleanly.
-        text = re.sub(r'\(', r' ( ', text)
+        text = re.sub(r'\(', r' \( ', text)
         text = re.sub(r'\)', r' ) ', text)
         text = re.sub(r'\]', r' ] ', text)
         text = re.sub(r'\[', r' [ ', text)
@@ -37,21 +35,9 @@ def tokenise_conditions():
         
         logic = ["("]
 
-        # Split on ands/ors and brackets
-        phrase = ""
+        # Split on white space
         for word in text.split():
-            if word in split_key:
-                # End the logical phrase and split on this word
-                if phrase is not "":
-                    logic.append(phrase.strip())
-                logic.append(word)
-                phrase = ""
-            else:
-                # Keep building the logical phrase
-                phrase += word + " "
-
-        if phrase is not "":
-            logic.append(phrase.strip())
+            logic.append(word)
 
         logic.append(")")
 

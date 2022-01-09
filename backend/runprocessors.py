@@ -25,7 +25,7 @@ from data.processors.conditions_tokenising import tokenise_conditions
 from algorithms.cache.cache import cache_exclusions
 from algorithms.cache.cache import cache_warnings
 from algorithms.cache.cache import cache_mappings
-from algorithms.cache.cache import cache_course_codes
+from algorithms.cache.cache import cache_program_mappings
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--type', type=str,
@@ -36,7 +36,7 @@ parser.add_argument('--stage', type=str,
                     (any) --> all
                     program/specialisation/course --> scrape, format, process
                     condition --> process, manual, tokenise
-                    algorithm --> exclusion, warning, mapping, code
+                    cache --> exclusion, warning, mapping, program
                     ''')
 
 try:
@@ -70,30 +70,27 @@ run = {
         'manual': run_manual_fixes,
         'tokenise': tokenise_conditions
     },
-    'algorithm': {
+    'cache': {
         'exclusion': cache_exclusions,
         'warnings': cache_warnings,
         'mapping': cache_mappings,
-        'code': cache_course_codes
+        "program": cache_program_mappings
     }
 }
-
-
-if args.stage == 'all':
-    # Run all the stages from top to bottom
-    if args.type in ["program", "specialisation", "course"]:
-        # NOTE: Be careful when using this as this will rerun the scrapers
-        res = input(
-            f"Careful. You are about to run all stages of {args.type} INCLUDING the scrapers... Enter 'y' if you wish to proceed or 'n' to cancel: ")
-        if res == 'y':
+if __name__ == '__main__':
+    if args.stage == 'all':
+        # Run all the stages from top to bottom
+        if args.type in ["program", "specialisation", "course"]:
+            # NOTE: Be careful when using this as this will rerun the scrapers
+            res = input(
+                f"Careful. You are about to run all stages of {args.type} INCLUDING the scrapers... Enter 'y' if you wish to proceed or 'n' to cancel: ")
+            if res == 'y':
+                for s in run[args.type]:
+                    run[args.type][s]()
+        else:
+            # Conditions
             for s in run[args.type]:
                 run[args.type][s]()
     else:
-        # Conditions
-        for s in run[args.type]:
-            run[args.type][s]()
-else:
-    # Run the specific process
-    run[args.type][args.stage]()
-
-
+        # Run the specific process
+        run[args.type][args.stage]()

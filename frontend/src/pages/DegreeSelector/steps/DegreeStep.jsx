@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 import { Menu, Typography, Button } from 'antd';
 import { degreeActions } from '../../../actions/degreeActions';
 import { Link } from 'react-scroll';
@@ -14,14 +14,14 @@ export const DegreeStep = () => {
     const [options, setOptions] = React.useState(null);
 
     const fetchAllDegrees = async () => {
-        // const res = await axios.get("http://localhost:8000/api/getPrograms");
-        // setOptions(res.data["programs"]);
-        setOptions({
-            "3778": "Bachelor Computer Science", 
-            "3779": "Bachelor of Science",
-            "3777": "Bachelor of Arts",
-            "3775": "Bachelor of Commerce/Law",
-        })
+        const res = await axios.get("http://localhost:8000/api/getPrograms");
+        setOptions(res.data["programs"]);
+        // setOptions({
+        //     "3778": "Bachelor Computer Science", 
+        //     "3779": "Bachelor of Science",
+        //     "3777": "Bachelor of Arts",
+        //     "3775": "Bachelor of Commerce/Law",
+        // })
         // setIsLoading(false);
       };
     
