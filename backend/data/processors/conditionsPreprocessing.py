@@ -207,8 +207,8 @@ def convert_GRADE(processed):
     courses'''
 
     # Converts "mark of at least XX to XXGRADE"
-    processed = re.sub(r"(a )?mark of at least (\d\d)",
-                       r"\2GRADE", processed, flags=re.IGNORECASE)
+    processed = re.sub(r"(a )?(minimum )?mark of (at least )?(\d\d)( or (greater|above))?",
+                       r"\4GRADE", processed, flags=re.IGNORECASE)
 
     # Further handle CR and DN. These usually follow a course code
     # MATH1141 (CR) ==> 65WAM MATH1141
