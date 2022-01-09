@@ -228,7 +228,7 @@ def convert_level(processed):
 def convert_program_type(processed):
     """ Converts complex phrases into something of the form CODE# for specifying a program type """
     # TODO: make this more generic
-    processed = map_word_to_program_type(processed, r"actuarial (studies )?", "ACTL#")
+    processed = map_word_to_program_type(processed, r"actuarial( studies)?", "ACTL#")
     processed = map_word_to_program_type(processed, r"business", "BUSN#")
     processed = map_word_to_program_type(processed, r"commerce", "COMM#")
     return processed
@@ -365,7 +365,7 @@ def l2_math_courses(processed):
     return processed
 
 def map_word_to_program_type(processed, regex_word, type):
-    return re.sub(rf'in {regex_word}?(programs|single or dual degrees?)',
+    return re.sub(rf'in {regex_word} (programs?|single or dual degrees?)',
             type,  processed, flags=re.IGNORECASE) # hard to capture a generic case?
 
 if __name__ == "__main__":
