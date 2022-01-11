@@ -1,26 +1,35 @@
 '''Contains all the database and collection instances which can be exported to
 other files. Also contains helper functions to read and write from db upon
-initialisation'''
-import sys
-import json
-from pymongo import MongoClient
-from server.config import URI, FINAL_DATA_PATH
+initialisation.
 
+NOTE: The helper functions must be run from the backend directory due to their paths
+'''
+
+import json
+import os
+from pymongo import MongoClient
+from server.config import URI, FINAL_DATA_PATH, ARCHIVED_DATA_PATH
+from data.config import ARCHIVED_YEARS
 
 '''Export these as needed'''
-client = MongoClient(URI)
+try:
+    # client = MongoClient("mongodb://localhost:27017/")
+    client = MongoClient(f'mongodb://{os.environ["MONGODB_DEV_USERNAME"]}:{os.environ["MONGODB_DEV_PASSWORD"]}@{os.environ["MONGODB_DEV_DATABASE"]}:27017')
+    print('Connected to database.')
+except:
+    print("Unable to connect to database.")
+    exit(1)
 
 db = client["Main"]
 programsCOL = db["Programs"]
 specialisationsCOL = db["Specialisations"]
 coursesCOL = db["Courses"]
 
-
-'''Helper functions'''
-# Give it the collection name to overwrite: 'Programs', 'Specialisations', 'Courses'
-
+archivesDB = client["Archives"]
 
 def overwrite_collection(collection_name):
+    """Overwrites the specific database via reading from the json files.
+    Collection names can be: Programs, Specialisations, Courses"""
     file_name = FINAL_DATA_PATH + collection_name.lower() + "Processed.json"
 
     with open(file_name) as f:
@@ -34,3 +43,30 @@ def overwrite_collection(collection_name):
             print(f"Finished overwriting {collection_name}")
         except:
             print(f"Failed to load and overwrite {collection_name}")
+
+
+def overwrite_archives():
+    """Overwrite all the archived data for all the years that we have archived"""
+    for year in ARCHIVED_YEARS:
+        file_name = ARCHIVED_DATA_PATH + str(year) + ".json"
+
+        with open(file_name) as f:
+            try:
+                archivesDB[str(year)].drop()
+
+                file_data = json.load(f)
+                for key in file_data:
+                    archivesDB[str(year)].insert_one(file_data[key])
+
+                print(f"Finished overwriting {year} archive")
+            except:
+                print(f"Failed to load and overwrite {year} archive")
+
+def overwrite_all():
+    """Singular execution point to overwrite the entire database including the archives"""
+    overwrite_collection("Courses")
+    overwrite_collection("Specialisations")
+    overwrite_collection("Programs")
+    overwrite_archives()
+
+

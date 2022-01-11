@@ -10,11 +10,11 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
 
 origins = [
-    "http://localhost",
-    "http://localhost:8080",
-    "http://localhost:8000",
-    "http://localhost:3000",
-    "http://localhost:3001"
+    "http://host.docker.internal",
+    "http://host.docker.internal:8080",
+    "http://host.docker.internal:8000",
+    "http://host.docker.internal:3000",
+    "http://host.docker.internal:3001"
 ]
 
 app.add_middleware(
