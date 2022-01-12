@@ -15,7 +15,7 @@ MongoDB and the backend require a few environment variables to get started. In t
 In `backend.env`, add the environment variables:
 - `MONGODB_USERNAME=...`
 - `MONGODB_PASSWORD=...`
-- `MONGODB_URL=mongodb`
+- `MONGODB_DATABASE=mongodb`
 
 In `mongodb.env`, add:
 - `MONGO_INITDB_ROOT_USERNAME=...`
