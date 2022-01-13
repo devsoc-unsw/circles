@@ -15,6 +15,7 @@ from data.scrapers.specialisationsFormatting import format_spn_data
 from data.scrapers.coursesFormatting import format_course_data
 
 from data.processors.programsProcessing import process_data as process_prg_data
+from data.processors.programsProcessingType1 import process_data as process_prg_data_type1
 from data.processors.specialisationsProcessing import customise_spn_data
 from data.processors.coursesProcessing import process_courses as process_course_data
 
@@ -23,6 +24,8 @@ from data.processors.conditions_tokenising import tokenise_conditions
 
 from algorithms.cache.cache import cache_exclusions
 from algorithms.cache.cache import cache_warnings
+from algorithms.cache.cache import cache_mappings
+from algorithms.cache.cache import cache_program_mappings
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--type', type=str,
@@ -31,9 +34,9 @@ parser.add_argument('--stage', type=str,
                     help=
                     '''
                     (any) --> all
-                    program/specialisation/course --> scrape, format, process
+                    program/specialisation/course --> scrape, format, process, type1
                     condition --> process, manual, tokenise
-                    algorithm --> exclusion
+                    cache --> exclusion, warning, mapping, program
                     ''')
 
 try:
@@ -49,7 +52,8 @@ run = {
     'program': {
         'scrape': scrape_prg_data,
         'format': format_prg_data,
-        'process': process_prg_data
+        'process': process_prg_data,
+        'type1': process_prg_data_type1
     },
     'specialisation': {
         'scrape': scrape_spn_data,
@@ -66,28 +70,27 @@ run = {
         'manual': run_manual_fixes,
         'tokenise': tokenise_conditions
     },
-    'algorithm': {
+    'cache': {
         'exclusion': cache_exclusions,
-        'warnings': cache_warnings
+        'warnings': cache_warnings,
+        'mapping': cache_mappings,
+        "program": cache_program_mappings
     }
 }
-
-
-if args.stage == 'all':
-    # Run all the stages from top to bottom
-    if args.type in ["program", "specialisation", "course"]:
-        # NOTE: Be careful when using this as this will rerun the scrapers
-        res = input(
-            f"Careful. You are about to run all stages of {args.type} INCLUDING the scrapers... Enter 'y' if you wish to proceed or 'n' to cancel: ")
-        if res == 'y':
+if __name__ == '__main__':
+    if args.stage == 'all':
+        # Run all the stages from top to bottom
+        if args.type in ["program", "specialisation", "course"]:
+            # NOTE: Be careful when using this as this will rerun the scrapers
+            res = input(
+                f"Careful. You are about to run all stages of {args.type} INCLUDING the scrapers... Enter 'y' if you wish to proceed or 'n' to cancel: ")
+            if res == 'y':
+                for s in run[args.type]:
+                    run[args.type][s]()
+        else:
+            # Conditions
             for s in run[args.type]:
                 run[args.type][s]()
     else:
-        # Conditions
-        for s in run[args.type]:
-            run[args.type][s]()
-else:
-    # Run the specific process
-    run[args.type][args.stage]()
-
-
+        # Run the specific process
+        run[args.type][args.stage]()
