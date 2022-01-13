@@ -50,9 +50,9 @@ export default function CourseDescription() {
     //   })
     //   .catch(console.log("Server is broken! TODO: SHow error"));
 
-    // setTimeout(() => {
-    //   setpageLoaded(true);
-    // }, 5000);
+    setTimeout(() => {
+      setpageLoaded(true);
+    }, 5000);
   }, [id]);
 
   if (id === "explore") return <div>This is the explore page</div>;
