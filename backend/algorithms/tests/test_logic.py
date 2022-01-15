@@ -4,9 +4,9 @@ ensure our algorithms work as expected.
 If these tests work, we can expect that the core logic works.
 '''
 
-from backend.algorithms.create import create_condition
-from backend.algorithms.objects.conditions import *
-from backend.algorithms.objects.user import User
+from algorithms.create import create_condition
+from algorithms.objects.conditions import *
+from algorithms.objects.user import User
 
 
 def create_student_3707_COMPA1():
