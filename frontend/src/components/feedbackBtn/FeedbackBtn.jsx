@@ -3,8 +3,10 @@ import { Button, Tooltip } from "antd";
 import { BugOutlined } from "@ant-design/icons";
 import "./feedbackBtn.less";
 import useMediaQuery from "../../hooks/useMediaQuery";
+import { useSelector } from "react-redux";
 
 export const FeedbackBtn = () => {
+  const theme = useSelector((store) => store.theme);
   // Feedback form
   const FORM_LINK = "https://forms.gle/b3b8CrZsz9h5sZ3v9";
   const isTablet = useMediaQuery("(max-width: 1000px)");
@@ -18,6 +20,7 @@ export const FeedbackBtn = () => {
       <Tooltip title="Report a bug!">
         <Button
           shape="circle"
+          ghost={theme === "dark"}
           icon={<BugOutlined />}
           size="large"
           onClick={() => openFeedbackLink()}

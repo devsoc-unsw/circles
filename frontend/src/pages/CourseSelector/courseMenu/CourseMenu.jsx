@@ -54,7 +54,7 @@ export default function CourseMenu() {
           > 
           { [...Object.keys(structure)].map(category => 
               // Major, Minor, GeneralX
-              <SubMenu key={category} title={category}>
+              <SubMenu key={category} title={category} >
               {/* Business core, Flexible core etc */}
               { Object.keys(structure[category]).map(subCategory => 
                 <Menu.ItemGroup key={subCategory} title={subCategory}>
