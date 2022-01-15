@@ -44,6 +44,7 @@ def preprocess_conditions():
         processed = convert_WAM(processed)
         processed = convert_GRADE(processed)
         processed = convert_level(processed)
+        processed = convert_program_type(processed)
         processed = convert_fslash(processed)
         processed = convert_including(processed)
         processed = convert_AND_OR(processed)
@@ -224,6 +225,13 @@ def convert_level(processed):
     """ Converts level X to LX """
     return re.sub(r"level (\d)", r"L\1", processed, flags=re.IGNORECASE)
 
+def convert_program_type(processed):
+    """ Converts complex phrases into something of the form CODE# for specifying a program type """
+    # TODO: make this more generic
+    processed = map_word_to_program_type(processed, r"actuarial( studies)?", "ACTL#")
+    processed = map_word_to_program_type(processed, r"business", "BUSN#")
+    processed = map_word_to_program_type(processed, r"commerce", "COMM#")
+    return processed
 
 def convert_fslash(processed):
     """ Converts forward slashes to || and surrounds in brackets """
@@ -355,6 +363,10 @@ def l2_math_courses(processed):
     processed = re.sub(r'L2 Maths? courses', r'L2 MATH', processed, flags=re.IGNORECASE)
     processed = re.sub(r'L2 Mathematics? courses', r'L2 MATH', processed, flags=re.IGNORECASE)
     return processed
+
+def map_word_to_program_type(processed, regex_word, type):
+    return re.sub(rf'in {regex_word} (programs?|single or dual degrees?)',
+            type,  processed, flags=re.IGNORECASE) # hard to capture a generic case?
 
 if __name__ == "__main__":
     preprocess_conditions()

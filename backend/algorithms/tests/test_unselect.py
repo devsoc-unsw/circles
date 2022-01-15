@@ -1,8 +1,7 @@
 '''Testing unselect course for User class'''
 
-from backend.algorithms.create import create_condition
-from backend.algorithms.objects.conditions import *
-from backend.algorithms.objects.user import User
+from algorithms.objects.conditions import *
+from algorithms.objects.user import User
 from math import isclose
 import json
 

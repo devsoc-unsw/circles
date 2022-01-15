@@ -4,10 +4,9 @@ ensure our algorithms work as expected.
 If these tests work, we can expect that the core logic works.
 '''
 
-from backend.algorithms.create import create_condition
-from backend.algorithms.objects.conditions import *
-from backend.algorithms.objects.user import User
-import pytest
+from algorithms.create import create_condition
+from algorithms.objects.conditions import *
+from algorithms.objects.user import User
 
 
 def create_student_3707_COMPA1():
@@ -499,3 +498,15 @@ def test_faculty_condition():
 
     assert (comp_12uoc_cond.is_unlocked(user))["result"] == True
     assert (comp_18uoc_cond.is_unlocked(user))["result"] == False
+
+def test_program_type():
+    """Testing program type conditions such as ACTL#
+    Refer to the cache programMappings.json
+    """
+    comp_user = create_student_3707_COMPA1()
+    actl_user = User()
+    actl_user.add_program("3154")
+
+    actl_program_cond = create_condition(["(", "ACTL#", ")"], "COMP1511")
+    assert (actl_program_cond.is_unlocked(comp_user))["result"] == False
+    assert (actl_program_cond.is_unlocked(actl_user))["result"] == True

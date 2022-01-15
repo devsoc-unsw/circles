@@ -83,7 +83,6 @@ class User:
         self.specialisations = data['specialisations']
         self.courses = data['courses']
         self.year = data['year']
-
         '''calculate wam and uoc'''
         # Subtract uoc of the courses without mark when dividing
         uocfixer = 0
