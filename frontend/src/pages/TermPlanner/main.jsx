@@ -29,10 +29,10 @@ const TermPlanner = () => {
     courses,
     plannedCourses,
     isSummerEnabled,
+    completedTerms,
   } = useSelector((state) => {
     return state.planner;
   });
-
 
   // const theme = useSelector((state) => state.theme);
   // const [visible, setVisible] = useState(false); // visibility for side drawer
@@ -46,8 +46,6 @@ const TermPlanner = () => {
       duration: 2,
     });
   };
-
-
 
   useEffect(() => {
     setIsLoading(false);
@@ -64,6 +62,7 @@ const TermPlanner = () => {
     startYear,
     plannedCourses,
     courses,
+    completedTerms,
   };
   const [hidden, setHidden] = React.useState(() => {
     const hiddenMap = new Map();

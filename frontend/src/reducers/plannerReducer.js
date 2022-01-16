@@ -29,7 +29,7 @@ dummyMap.set("COMP6080", {
   title: "Web Front-End Programming",
   type: "Elective",
   termsOffered: ["T1", "T3"],
-  prereqs: "COMP1521 && (COMP2521 || COMP1927)",
+  prereqs: "COMP1531 && (COMP2521 || COMP1927)",
   plannedFor: null,
   warning: false,
 });
@@ -123,8 +123,25 @@ const plannerReducer = (state = initialState, action) => {
 
     case "SET_YEARS":
       stateCopy = { ...state, years: action.payload };
+
+      // const coursesWithUpdatedWarnings = validateTermPlanner(
+      //   payload,
+      //   stateCopy.courses
+      // );
+      // stateCopy = { ...stateCopy, courses: coursesWithUpdatedWarnings };
+      // console.log(stateCopy);
+
       setInLocalStorage(stateCopy);
       return stateCopy;
+
+    case "TOGGLE_WARNINGS":
+      let coursesCpy = new Map(state.courses);
+      console.log(action.payload);
+      for (const course in action.payload) {
+        // coursesCpy.set(course, !data.courses_state[course].unlocked);
+        coursesCpy.get(course).warning = !action.payload[course].unlocked;
+      }
+      return { ...state, courses: coursesCpy };
 
     case "SET_UNPLANNED":
       let newUnplanned = state.unplanned.filter(
@@ -193,7 +210,7 @@ const plannerReducer = (state = initialState, action) => {
       const { course, term, warning } = action.payload;
       const courseInfo = state.courses.get(course);
       courseInfo["plannedFor"] = term;
-      courseInfo["warning"] = warning;
+      // courseInfo["warning"] = warning;
       let updatedCourses = new Map(state.courses).set(course, courseInfo);
       stateCopy = { ...state, courses: updatedCourses };
       setInLocalStorage(stateCopy);
