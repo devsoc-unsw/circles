@@ -123,14 +123,6 @@ const plannerReducer = (state = initialState, action) => {
 
     case "SET_YEARS":
       stateCopy = { ...state, years: action.payload };
-
-      // const coursesWithUpdatedWarnings = validateTermPlanner(
-      //   payload,
-      //   stateCopy.courses
-      // );
-      // stateCopy = { ...stateCopy, courses: coursesWithUpdatedWarnings };
-      // console.log(stateCopy);
-
       setInLocalStorage(stateCopy);
       return stateCopy;
 

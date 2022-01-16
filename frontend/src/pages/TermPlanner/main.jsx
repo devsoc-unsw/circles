@@ -7,11 +7,8 @@ import SkeletonPlanner from "./SkeletonPlanner";
 import "./main.less";
 import { useSelector, useDispatch } from "react-redux";
 import { plannerActions } from "../../actions/plannerActions";
-import {
-  handleOnDragEnd,
-  handleOnDragStart,
-  updateWarnings,
-} from "./DragDropLogic";
+import { handleOnDragEnd, handleOnDragStart } from "./DragDropLogic";
+import { updateAllWarnings } from "./ValidateTermPlanner";
 import UnplannedColumn from "./UnplannedColumn";
 import OptionsHeader from "./OptionsHeader";
 import "tippy.js/dist/tippy.css";
@@ -50,7 +47,7 @@ const TermPlanner = () => {
   useEffect(() => {
     setIsLoading(false);
     isAllEmpty(years) && openNotification();
-    updateWarnings(years, startYear, courses, dispatch);
+    updateAllWarnings(dispatch, { years, startYear, completedTerms });
   }, []);
 
   const currYear = new Date().getFullYear();
@@ -115,7 +112,7 @@ const TermPlanner = () => {
         <DragDropContext
           onDragEnd={(result) => {
             handleOnDragEnd(result, dragEndProps);
-            updateWarnings(years, startYear, courses, dispatch);
+            updateAllWarnings(dispatch, { years, startYear, completedTerms });
           }}
           onDragStart={(result) =>
             handleOnDragStart(result, courses, setTermsOffered, setIsDragging)
