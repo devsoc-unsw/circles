@@ -18,7 +18,6 @@ function DraggableCourse({ code, index }) {
   const prereqs = courses.get(code)["prereqs"];
   const prereqDisplay = prereqs.replaceAll("||", "or").replaceAll("&&", "and");
   const warning = courses.get(code)["warning"];
-  console.log(warning);
   const plannedFor = courses.get(code)["plannedFor"];
 
   const { show } = useContextMenu({
