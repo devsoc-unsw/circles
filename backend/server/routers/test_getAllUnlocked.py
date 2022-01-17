@@ -1,7 +1,6 @@
 # Sanity test of API getAllUnlocked
 
-import requests 
-import json 
+import requests
 
 user = { "userData": {
     "program": "3778",
