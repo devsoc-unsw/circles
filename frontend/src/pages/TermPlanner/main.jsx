@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import { notification, Tooltip } from "antd";
 import { DragDropContext } from "react-beautiful-dnd";
@@ -6,11 +6,9 @@ import TermBox from "./TermBox";
 import SkeletonPlanner from "./SkeletonPlanner";
 import "./main.less";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  handleOnDragEnd,
-  handleOnDragStart,
-  updateWarnings,
-} from "./DragDropLogic";
+import { plannerActions } from "../../actions/plannerActions";
+import { handleOnDragEnd, handleOnDragStart } from "./DragDropLogic";
+import { updateAllWarnings } from "./ValidateTermPlanner";
 import UnplannedColumn from "./UnplannedColumn";
 import OptionsHeader from "./OptionsHeader";
 import "tippy.js/dist/tippy.css";
@@ -28,12 +26,12 @@ const TermPlanner = () => {
     courses,
     plannedCourses,
     isSummerEnabled,
+    completedTerms,
   } = useSelector((state) => {
     return state.planner;
   });
 
   // const theme = useSelector((state) => state.theme);
-
   // const [visible, setVisible] = useState(false); // visibility for side drawer
   const dispatch = useDispatch();
 
@@ -49,8 +47,9 @@ const TermPlanner = () => {
   useEffect(() => {
     setIsLoading(false);
     isAllEmpty(years) && openNotification();
-    updateWarnings(years, startYear, courses, dispatch);
+    updateAllWarnings(dispatch, { years, startYear, completedTerms });
   }, []);
+
   const currYear = new Date().getFullYear();
 
   const dragEndProps = {
@@ -60,6 +59,7 @@ const TermPlanner = () => {
     startYear,
     plannedCourses,
     courses,
+    completedTerms,
   };
   const [hidden, setHidden] = React.useState(() => {
     const hiddenMap = new Map();
@@ -97,23 +97,32 @@ const TermPlanner = () => {
   };
   const [areYearsHidden, setAreYearsHidden] = React.useState(false);
 
+  const plannerPic = useRef();
+
   return (
     <>
-      <OptionsHeader areYearsHidden={areYearsHidden} unhideAll={unhideAll} />
+      <OptionsHeader
+        areYearsHidden={areYearsHidden}
+        unhideAll={unhideAll}
+        plannerRef={plannerPic}
+      />
       {isLoading ? (
         <SkeletonPlanner />
       ) : (
         <DragDropContext
           onDragEnd={(result) => {
             handleOnDragEnd(result, dragEndProps);
-            updateWarnings(years, startYear, courses, dispatch);
+            updateAllWarnings(dispatch, { years, startYear, completedTerms });
           }}
           onDragStart={(result) =>
             handleOnDragStart(result, courses, setTermsOffered, setIsDragging)
           }
         >
           <div className="plannerContainer">
-            <div class={`gridContainer ${isSummerEnabled && "summerGrid"}`}>
+            <div
+              class={`gridContainer ${isSummerEnabled && "summerGrid"}`}
+              ref={plannerPic}
+            >
               <div class="gridItem"></div>
               {isSummerEnabled && <div class="gridItem">Summer</div>}
               <div class="gridItem">Term 1</div>
@@ -141,7 +150,7 @@ const TermPlanner = () => {
                       {Object.keys(year).map((term) => {
                         const key = iYear + term;
                         if (
-                          (!isSummerEnabled && term != "t0") ||
+                          (!isSummerEnabled && term != "T0") ||
                           isSummerEnabled
                         )
                           return (
@@ -171,7 +180,7 @@ const openNotification = () => {
   const args = {
     message: "Your terms are looking a little empty",
     description:
-      "Open the sidebar on the left to reveal courses that you've added from the course selector",
+      "Open the drawers on the right to reveal courses you've added from the course selector",
     duration: 10,
     className: "text helpNotif",
     placement: "topRight",
