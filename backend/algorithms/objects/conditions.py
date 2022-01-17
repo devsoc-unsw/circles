@@ -289,7 +289,7 @@ class FirstCompositeCondition(CompositeCondition):
         self.course = course 
         super().__init__()
 
-    def is_unlocked(self, user):
+    def is_unlocked(self, user) -> dict:
         '''The highest level check which returns the result and a warning. Call this
         with the appropriate user data to determine if a course is unlocked or not.
         Will return an object containing the result and a list of warnings'''

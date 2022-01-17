@@ -1,7 +1,5 @@
 from fastapi import APIRouter
-from server.database import specialisationsCOL, programsCOL, coursesCOL
-from fastapi.responses import JSONResponse
-from fastapi.encoders import jsonable_encoder
+from server.database import specialisationsCOL, programsCOL
 
 router = APIRouter(
     prefix='/specialisations',
@@ -15,7 +13,7 @@ def specialisations_index():
 
 @router.get("/getPrograms/")
 def getPrograms():
-    query = programsCOL.find();
+    query = programsCOL.find()
     result = {}
     for i in query:
         result[i['code']] = i['title']
@@ -30,7 +28,7 @@ def getSpecialisations(code):
     specialisations = result['components']['disciplinary_component']['Majors']
 
     for i in specialisations:
-        query2 = {'code' : i}
+        query2 = { 'code' : i }
         result2 = specialisationsCOL.find_one(query2)
 
         if (result2):
