@@ -1,7 +1,6 @@
 '''Testing the user class to ensure that the user data is accurately imported and updated'''
 
-from backend.algorithms.create import create_condition
-from backend.algorithms.objects.user import User
+from algorithms.objects.user import User
 from math import isclose
 import json
 

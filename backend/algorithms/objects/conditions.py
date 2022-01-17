@@ -1,9 +1,6 @@
 '''
 Contains the Conditions classes
 '''
-import sys
-import json
-import re
 import json
 
 from algorithms.objects.helper import is_course, is_program
@@ -26,6 +23,11 @@ with open(CACHED_CONDITIONS_TOKENS_PATH) as f:
     CACHED_CONDITIONS_TOKENS = json.load(f)
     f.close()
 
+
+CACHED_PRGORAM_MAPPINGS_FILE = "./algorithms/cache/programMappings.json"
+with open(CACHED_PRGORAM_MAPPINGS_FILE) as f:
+    CACHED_PRGORAM_MAPPINGS = json.load(f)
+    f.close()
 
 # Load in cached condition objects
 # NOTE: Does not work due to how pickle works with imports
@@ -192,7 +194,7 @@ class GRADECondition():
             return True, None
 
     def get_warning(self):
-        return f"Requires {self.grade} mark in {self.course}. You mark has not been recorded"
+        return f"Requires {self.grade} mark in {self.course}. Your mark has not been recorded"
 
 class ProgramCondition():
     '''Handles Program conditions such as 3707'''
@@ -203,6 +205,16 @@ class ProgramCondition():
     def validate(self, user):
         return user.in_program(self.program)
 
+class ProgramTypeCondition():
+    '''
+    Handles program type conditions, which specify that your program has to be some collection of programs.\n
+    for example - be enrolled in Actuarial studies implies that your program must be any one of a few programs (actl + double degree codes).\n
+    '''
+    def __init__(self, programType):
+        self.programType = programType
+    
+    def validate(self, user):
+        return user.program in CACHED_PRGORAM_MAPPINGS[self.programType]
 
 class SpecialisationCondition():
     '''Handles Specialisation conditions such as COMPA1'''
