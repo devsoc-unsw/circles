@@ -10,7 +10,7 @@ const validateTermPlanner = (payload) => {
   return (dispatch) => {
     axios
       .post(
-        `http://localhost:8000/api/validateTermPlanner/`,
+        `http://localhost:8000/planner/validateTermPlanner/`,
         JSON.stringify(payload),
         {
           headers: {
