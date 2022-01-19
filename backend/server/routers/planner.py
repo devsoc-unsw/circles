@@ -96,12 +96,13 @@ async def validateTermPlanner(plannerData: PlannerData = Body(
 
             for course in term["courses"]:
                 is_answer_accurate = CONDITIONS.get(course) is not None
-                res = CONDITIONS[course].is_unlocked(user) if is_answer_accurate else {"unlocked": True, "warnings": []}
+                res = CONDITIONS[course].is_unlocked(user) if is_answer_accurate else {"result": True, "warnings": []}
                 coursesState[course] = {
                     "is_accurate": is_answer_accurate,
                     "handbook_note": "", # TODO: Cache handbook notes
-                } | res
-            
+                    "unlocked": res["result"],
+                    "warnings": res["warnings"]
+                }
             # Add all these courses to the user in preparation for the next term
             user.empty_current_courses()
             user.add_courses(term["courses"])
