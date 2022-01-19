@@ -6,12 +6,13 @@ import { courseOptionsActions } from "../../actions/courseOptionsActions";
 import { setCourses } from "../../actions/updateCourses";
 import debounce from "lodash/debounce";
 import axios from "axios";
+import { courseTabActions } from "../../actions/courseTabActions";
 
 const DebounceSelect = ({ fetchOptions, debounceTimeout = 100, ...props }) => {
   const [fetching, setFetching] = useState(false);
   const [options, setOptions] = useState([]);
   const fetchRef = useRef(0);
-
+  const dispatch = useDispatch();
   const debounceFetcher = useMemo(() => {
     const loadOptions = (value) => {
       fetchRef.current += 1;
@@ -35,6 +36,10 @@ const DebounceSelect = ({ fetchOptions, debounceTimeout = 100, ...props }) => {
     return debounce(loadOptions, debounceTimeout);
   }, [fetchOptions, debounceTimeout]);
 
+  const handleSelect = (courseCode) => {
+    dispatch(courseTabActions("ADD_TAB", courseCode.value));
+  };
+
   return (
     <Select
       showSearch
@@ -44,6 +49,8 @@ const DebounceSelect = ({ fetchOptions, debounceTimeout = 100, ...props }) => {
       notFoundContent={fetching ? <Spin size="small" /> : null}
       {...props}
       options={options}
+      size="large"
+      onSelect={handleSelect}
     />
   );
 }; // Usage of DebounceSelect
@@ -94,7 +101,7 @@ export default function SearchCourse() {
       onChange={(newValue) => {
         setValue(newValue);
       }}
-      style={{ width: "20rem", marginRight: "0.5rem" }}
+      style={{ width: "25rem", marginRight: "0.5rem" }}
     />
   );
 }
