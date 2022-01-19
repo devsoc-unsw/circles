@@ -1,8 +1,8 @@
 import { plannerActions } from "../../actions/plannerActions";
-import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
 
 export const handleOnDragEnd = (result, dragEndProps) => {
-  const { setIsDragging, dispatch, years, startYear, plannedCourses, courses } =
+  const { setIsDragging, dispatch, years, startYear, courses, completedTerms } =
     dragEndProps;
 
   setIsDragging(false);
@@ -18,12 +18,7 @@ export const handleOnDragEnd = (result, dragEndProps) => {
     destination.droppableId,
     courses
   );
-  // courses.get(draggableId)["plannedFor"] = destination.droppableId;
-  // courses.get(draggableId)["warning"] = checkPrereq(
-  //   draggableId,
-  //   destination.droppableId,
-  //   courses
-  // );
+
   dispatch(
     // might need to change name
     plannerActions("MOVE_COURSE", {
@@ -41,7 +36,7 @@ export const handleOnDragEnd = (result, dragEndProps) => {
     return;
 
   const destYear = destination.droppableId.match(/[0-9]{4}/)[0];
-  const destTerm = destination.droppableId.match(/t[0-3]/)[0];
+  const destTerm = destination.droppableId.match(/T[0-3]/)[0];
   const destRow = destYear - startYear;
   const destBox = years[destRow][destTerm];
 
@@ -70,7 +65,7 @@ export const handleOnDragEnd = (result, dragEndProps) => {
   }
 
   const srcYear = source.droppableId.match(/[0-9]{4}/)[0];
-  const srcTerm = source.droppableId.match(/t[0-3]/)[0];
+  const srcTerm = source.droppableId.match(/T[0-3]/)[0];
   const srcRow = srcYear - startYear;
   const srcBox = years[srcRow][srcTerm];
 
@@ -142,25 +137,4 @@ const checkPrereq = (course, term, courses) => {
     arePrereqsCompleted = eval(exprWithMap);
     return arePrereqsCompleted;
   }
-};
-
-export const updateWarnings = (years, startYear, courses, dispatch) => {
-  let i = startYear;
-  years.forEach((year) => {
-    for (const term in year) {
-      year[term].forEach((course) => {
-        let termTag = i + term;
-        let arePrereqsCompleted = checkPrereq(course, termTag, courses);
-        // console.log(`${course}: ${!arePrereqsCompleted}`);
-        dispatch(
-          plannerActions("MOVE_COURSE", {
-            course: course,
-            term: termTag,
-            warning: !arePrereqsCompleted,
-          })
-        );
-      });
-    }
-    i += 1;
-  });
 };

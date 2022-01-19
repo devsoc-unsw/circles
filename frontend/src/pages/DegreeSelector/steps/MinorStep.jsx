@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
+// import axios from 'axios';
 import { Menu, Button, Typography } from 'antd';
 import { degreeActions } from '../../../actions/degreeActions';
 import { Link } from 'react-scroll';
@@ -11,14 +11,13 @@ export const MinorStep = () => {
     const dispatch = useDispatch();
     const minor = useSelector(store => store.degree.minor);
     // Fetch the minors
-    const [selected, setSelected] = React.useState("Select Minor"); 
-    const [options, setOptions] = React.useState({
-            "1": "Minor1",
-            "2": "Minor1",
-            "3": "Minor1",
-            "4": "Minor1",
-            "5": "Minor1",
-        });
+    const options = {
+        "1": "Minor1",
+        "2": "Minor1",
+        "3": "Minor1",
+        "4": "Minor1",
+        "5": "Minor1",
+    };
 
     // const fetchAllMinors = async () => {
     //     const res = await axios.get(`http://localhost:8000/api/getMinors/${program}`);

@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Layout } from "antd";
+import { Layout, notification } from "antd";
+import { FeedbackBtn } from './components/feedbackBtn/FeedbackBtn';
 import Header from './components/header/Header'
 import CourseSelector from "./pages/CourseSelector/main";
 import DegreeSelector from "./pages/DegreeSelector/main";
@@ -11,10 +12,25 @@ import "./App.less";
 const { Content } = Layout;
 
 function App() {
+  const openDisclaimer = () => {
+    const args = {
+      type: "warning",  
+      message: "Hey there!", 
+      description:
+        'Circles is still in beta testing and not ready for use.',
+      duration: 0,
+      className: "text helpNotif",
+    };
+    notification.open(args);
+  };
+
+  React.useEffect(() => {
+    openDisclaimer();
+  }, [])
   return (
     <Router>
       <Header />
-      <Content className="content">
+      <Content className="app-root content">
         <Switch>
           <Route exact path="/">
             <DegreeSelector />
@@ -33,6 +49,7 @@ function App() {
             <ProgressionChecker />
           </Route>
         </Switch>
+        <FeedbackBtn/>
       </Content>
     </Router>
   );

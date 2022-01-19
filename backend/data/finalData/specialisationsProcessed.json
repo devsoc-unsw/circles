@@ -11,46 +11,53 @@
         "curriculum": [
             {
                 "courses": {
-                    "COMP3821 or COMP3121": 2,
-                    "COMP1521": 1,
-                    "COMP3900": 1,
-                    "COMP1511": 1,
-                    "MATH1081": 1,
-                    "COMP4920": 1,
-                    "COMP1531": 1,
-                    "COMP2521": 1,
-                    "COMP2511": 1,
-                    "MATH1231 or MATH1241": 2,
-                    "MATH1131 or MATH1141": 2
+                    "COMP1511": "Programming Fundamentals",
+                    "COMP2521": "Data Structures and Algorithms",
+                    "COMP1521": "Computer Systems Fundamentals",
+                    "COMP3900": "Computer Science Project",
+                    "COMP2511": "Object-Oriented Design & Programming",
+                    "COMP4920": "Professional Issues and Ethics in Information Technology",
+                    "MATH1081": "Discrete Mathematics",
+                    "COMP1531": "Software Engineering Fundamentals",
+                    "MATH1231 or MATH1241": [
+                        "Mathematics 1B",
+                        "Higher Mathematics 1B"
+                    ],
+                    "COMP3121 or COMP3821": [
+                        "Algorithms and Programming Techniques",
+                        "Extended Algorithms and Programming Techniques"
+                    ],
+                    "MATH1131 or MATH1141": [
+                        "Mathematics 1A",
+                        "Higher Mathematics 1A"
+                    ]
                 },
                 "title": "Core Courses",
                 "credits_to_complete": 66,
-                "type": "core",
+                "core": true,
                 "levels": [],
                 "notes": ""
             },
             {
                 "courses": {
-                    "ENGG4600": 1,
-                    "ENGG2600": 1,
-                    "ENGG3600": 1,
-                    "COMP3": 1,
-                    "COMP4": 1,
-                    "COMP6": 1,
-                    "COMP9": 1
+                    "ENGG2600": "Engineering Vertically Integrated Project",
+                    "ENGG3600": "Engineering Vertically Integrated Project",
+                    "ENGG4600": "Engineering Vertically Integrated Project",
+                    "COMP3": "any level 3 Computer Science course",
+                    "COMP4": "any level 4 Computer Science course",
+                    "COMP6": "any level 6 Computer Science course",
+                    "COMP9": "any level 9 Computer Science course"
                 },
                 "title": "Computing Electives",
                 "credits_to_complete": 30,
-                "type": "elective",
+                "core": false,
                 "levels": [],
                 "notes": "NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. 2 UOC courses are run over consecutive terms for a final total of 6 UOC."
             }
         ]
     },
     "COMPAH": {
-        "programs": [
-            "4515"
-        ],
+        "programs": [],
         "name": "Computer Science",
         "type": "honours",
         "UOC": 48,
@@ -59,34 +66,32 @@
         "curriculum": [
             {
                 "courses": {
-                    "COMP4": 1,
-                    "COMP9": 1,
-                    "COMP6": 1
+                    "COMP4962": "Computer Science Thesis B",
+                    "COMP4961": "Computer Science Thesis A",
+                    "COMP4963": "Computer Science Thesis C"
                 },
-                "title": "Coursework",
-                "credits_to_complete": 30,
-                "type": "other",
+                "title": "Thesis",
+                "credits_to_complete": 18,
+                "core": false,
                 "levels": [],
                 "notes": ""
             },
             {
                 "courses": {
-                    "COMP4961": 1,
-                    "COMP4963": 1,
-                    "COMP4962": 1
+                    "COMP6": "any level 6 Computer Science course",
+                    "COMP9": "any level 9 Computer Science course",
+                    "COMP4": "any level 4 Computer Science course"
                 },
-                "title": "Thesis",
-                "credits_to_complete": 18,
-                "type": "other",
+                "title": "Coursework",
+                "credits_to_complete": 30,
+                "core": false,
                 "levels": [],
                 "notes": ""
             }
         ]
     },
     "COMPBH": {
-        "programs": [
-            "3707"
-        ],
+        "programs": [],
         "name": "Computer Engineering",
         "type": "honours",
         "UOC": 168,
@@ -94,75 +99,20 @@
         "course_constraints": [
             {
                 "title": "Level 4 UOC Minimum",
-                "description": "Students must complete a minimum of 36 UOC of Level 4 courses including core courses and at least 12 UOC of Level 4 Discipline Electives, including: COMP4601 - Design Project B COMP4920 - Management and Ethics COMP4951 - Research Thesis A COMP4952 - Research Thesis B COMP4953 - Research Thesis C any level 4 course offered by School of Computer Science and Engineering"
+                "description": "Students must complete a minimum of 36 UOC of Level 4 courses including core courses and at least 12 UOC of Level 4 Discipline Electives, including: COMP4601 - Design Project B COMP4920 - Professional Issues and Ethics in Information Technology COMP4951 - Research Thesis A COMP4952 - Research Thesis B COMP4953 - Research Thesis C any level 4 course offered by School of Computer Science and Engineering"
             }
         ],
         "curriculum": [
             {
                 "courses": {
-                    "ENGG3600": 1,
-                    "ENGG2600": 1,
-                    "ENGG4600": 1,
-                    "ENGG3060": 1,
-                    "COMP3": 1,
-                    "COMP4": 1,
-                    "COMP6": 1,
-                    "COMP9": 1
-                },
-                "title": "Discipline Electives",
-                "credits_to_complete": 24,
-                "type": "elective",
-                "levels": [],
-                "notes": "2 UOC and 3 UOC courses are run over consecutive terms for a final total of 6 UOC."
-            },
-            {
-                "courses": {
-                    "PHYS1131 or PHYS1121": 2,
-                    "MATH1241 or MATH1231": 2,
-                    "PHYS1231 or PHYS1221": 2,
-                    "COMP1521": 1,
-                    "COMP1531": 1,
-                    "COMP1511": 1,
-                    "ENGG1000": 1,
-                    "ELEC1111": 1,
-                    "MATH1131 or MATH1141": 2
-                },
-                "title": "Level 1 Core Courses",
-                "credits_to_complete": 54,
-                "type": "core",
-                "levels": [
-                    1
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "MATH2069": 1,
-                    "ELEC2133": 1,
-                    "MATH2099": 1,
-                    "COMP2511": 1,
-                    "DESN2000": 1,
-                    "COMP2521": 1,
-                    "ELEC2134": 1
-                },
-                "title": "Level 2 Core Courses",
-                "credits_to_complete": 42,
-                "type": "core",
-                "levels": [
-                    2
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "COMP3211": 1,
-                    "COMP3601": 1,
-                    "COMP3231": 1,
-                    "COMP3222": 1
+                    "COMP3222": "Digital Circuits and Systems",
+                    "COMP3601": "Design Project A",
+                    "COMP3211": "Computer Architecture",
+                    "COMP3231": "Operating Systems"
                 },
                 "title": "Level 3 Core Courses",
                 "credits_to_complete": 24,
-                "type": "core",
+                "core": true,
                 "levels": [
                     3
                 ],
@@ -170,26 +120,91 @@
             },
             {
                 "courses": {
-                    "COMP4951": 1,
-                    "COMP4920": 1,
-                    "COMP4953": 1,
-                    "COMP4601": 1,
-                    "COMP4952": 1
+                    "ENGG3600": "Engineering Vertically Integrated Project",
+                    "ENGG2600": "Engineering Vertically Integrated Project",
+                    "ENGG4600": "Engineering Vertically Integrated Project",
+                    "ENGG3060": "Rehabilitation and Assistive Technology ",
+                    "COMP3": "any level 3 Computer Science course",
+                    "COMP4": "any level 4 Computer Science course",
+                    "COMP6": "any level 6 Computer Science course",
+                    "COMP9": "any level 9 Computer Science course"
+                },
+                "title": "Discipline Electives",
+                "credits_to_complete": 24,
+                "core": false,
+                "levels": [],
+                "notes": "2 UOC and 3 UOC courses are run over consecutive terms for a final total of 6 UOC."
+            },
+            {
+                "courses": {
+                    "PHYS1221 or PHYS1231": [
+                        "Physics 1B",
+                        "Higher Physics 1B"
+                    ],
+                    "COMP1521": "Computer Systems Fundamentals",
+                    "ELEC1111": "Electrical Circuit Fundamentals",
+                    "COMP1511": "Programming Fundamentals",
+                    "COMP1531": "Software Engineering Fundamentals",
+                    "DESN1000": "Introduction to Engineering Design and Innovation",
+                    "MATH1231 or MATH1241": [
+                        "Mathematics 1B",
+                        "Higher Mathematics 1B"
+                    ],
+                    "MATH1131 or MATH1141": [
+                        "Mathematics 1A",
+                        "Higher Mathematics 1A"
+                    ],
+                    "PHYS1121 or PHYS1131": [
+                        "Physics 1A",
+                        "Higher Physics 1A"
+                    ]
+                },
+                "title": "Level 1 Core Courses",
+                "credits_to_complete": 54,
+                "core": true,
+                "levels": [
+                    1
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "COMP4920": "Professional Issues and Ethics in Information Technology",
+                    "COMP4952": "Research Thesis B",
+                    "COMP4951": "Research Thesis A",
+                    "COMP4953": "Research Thesis C",
+                    "COMP4601": "Design Project B"
                 },
                 "title": "Level 4 Core Courses",
                 "credits_to_complete": 24,
-                "type": "core",
+                "core": true,
                 "levels": [
                     4
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ELEC2134": "Circuits and Signals",
+                    "MATH2099": "Mathematics 2B",
+                    "DESN2000": "Engineering Design and Professional Practice",
+                    "MATH2069": "Mathematics 2A",
+                    "COMP2511": "Object-Oriented Design & Programming",
+                    "COMP2521": "Data Structures and Algorithms",
+                    "ELEC2133": "Analogue Electronics"
+                },
+                "title": "Level 2 Core Courses",
+                "credits_to_complete": 42,
+                "core": true,
+                "levels": [
+                    2
                 ],
                 "notes": ""
             }
         ]
     },
     "SENGAH": {
-        "programs": [
-            "3707"
-        ],
+        "programs": [],
         "name": "Software Engineering",
         "type": "honours",
         "UOC": 168,
@@ -197,25 +212,106 @@
         "course_constraints": [
             {
                 "title": "Level 4 (or higher) COMP UOC Minimum",
-                "description": "Students must complete a minimum of 30 UOC of the following courses. COMP4920 - Management and Ethics any level 4 Computer Science (COMP) course any level 6 Computer Science (COMP) course any level 9 Computer Science (COMP) course COMP4951 - Research Thesis A COMP4952 - Research Thesis B COMP4953 - Research Thesis C"
+                "description": "Students must complete a minimum of 30 UOC of the following courses. COMP4920 - Professional Issues and Ethics in Information Technology any level 4 Computer Science (COMP) course any level 6 Computer Science (COMP) course any level 9 Computer Science (COMP) course COMP4951 - Research Thesis A COMP4952 - Research Thesis B COMP4953 - Research Thesis C"
             }
         ],
         "curriculum": [
             {
                 "courses": {
-                    "MATH1081": 1,
-                    "COMP1511": 1,
-                    "COMP1531": 1,
-                    "ENGG1000": 1,
-                    "COMP1521": 1,
-                    "MATH1241 or MATH1231": 2,
-                    "MATH1141 or MATH1131": 2
+                    "MATH1141 or MATH1131": [
+                        "Higher Mathematics 1A",
+                        "Mathematics 1A"
+                    ],
+                    "MATH1241 or MATH1231": [
+                        "Higher Mathematics 1B",
+                        "Mathematics 1B"
+                    ],
+                    "COMP1531": "Software Engineering Fundamentals",
+                    "MATH1081": "Discrete Mathematics",
+                    "COMP1511": "Programming Fundamentals",
+                    "DESN1000": "Introduction to Engineering Design and Innovation",
+                    "COMP1521": "Computer Systems Fundamentals"
                 },
                 "title": "Level 1 Core Courses",
                 "credits_to_complete": 42,
-                "type": "core",
+                "core": true,
                 "levels": [
                     1
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "COMP3141": "Software System Design and Implementation",
+                    "COMP3331": "Computer Networks and Applications",
+                    "COMP3311": "Database Systems",
+                    "SENG3011": "Software Engineering Workshop 3"
+                },
+                "title": "Level 3 Core Courses",
+                "credits_to_complete": 24,
+                "core": true,
+                "levels": [
+                    3
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ENGG3060": "Rehabilitation and Assistive Technology ",
+                    "ENGG4600": "Engineering Vertically Integrated Project",
+                    "ENGG3600": "Engineering Vertically Integrated Project",
+                    "ENGG2600": "Engineering Vertically Integrated Project",
+                    "COMP3": "any level 3 Computer Science course",
+                    "COMP4": "any level 4 Computer Science course",
+                    "COMP6": "any level 6 Computer Science course",
+                    "COMP9": "any level 9 Computer Science course",
+                    "INFS3": "any level 3 Information Systems course",
+                    "INFS4": "any level 4 Information Systems course",
+                    "MATH3": "any level 3 Mathematics course",
+                    "MATH4": "any level 4 Mathematics course",
+                    "MATH6": "any level 6 Mathematics course",
+                    "ELEC3": "any level 3 Electrical Engineering course",
+                    "ELEC4": "any level 4 Electrical Engineering course",
+                    "TELE3": "any level 3 Telecommunications course",
+                    "TELE4": "any level 4 Telecommunications course"
+                },
+                "title": "Discipline Electives",
+                "credits_to_complete": 36,
+                "core": false,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "SENG2011": "Workshop on Reasoning about Programs",
+                    "COMP2041": "Software Construction: Techniques and Tools",
+                    "COMP2521": "Data Structures and Algorithms",
+                    "MATH2400": "Finite Mathematics",
+                    "SENG2021": "Requirements and Design Workshop",
+                    "COMP2511": "Object-Oriented Design & Programming",
+                    "DESN2000": "Engineering Design and Professional Practice",
+                    "MATH2859": "Probability, Statistics and Information"
+                },
+                "title": "Level 2 Core Courses",
+                "credits_to_complete": 42,
+                "core": true,
+                "levels": [
+                    2
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "COMP4952": "Research Thesis B",
+                    "SENG4920": "Ethics and Management",
+                    "COMP4953": "Research Thesis C",
+                    "COMP4951": "Research Thesis A"
+                },
+                "title": "Level 4 Core Courses",
+                "credits_to_complete": 18,
+                "core": true,
+                "levels": [
+                    4
                 ],
                 "notes": ""
             },
@@ -225,83 +321,8 @@
                 },
                 "title": "Free Elective",
                 "credits_to_complete": 6,
-                "type": "elective",
+                "core": false,
                 "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "COMP2521": 1,
-                    "MATH2859": 1,
-                    "SENG2011": 1,
-                    "COMP2041": 1,
-                    "MATH2400": 1,
-                    "SENG2021": 1,
-                    "DESN2000": 1,
-                    "COMP2511": 1
-                },
-                "title": "Level 2 Core Courses",
-                "credits_to_complete": 42,
-                "type": "core",
-                "levels": [
-                    2
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "SENG4920": 1,
-                    "COMP4951": 1,
-                    "COMP4953": 1,
-                    "COMP4952": 1
-                },
-                "title": "Level 4 Core Courses",
-                "credits_to_complete": 18,
-                "type": "core",
-                "levels": [
-                    4
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ENGG2600": 1,
-                    "ENGG4600": 1,
-                    "ENGG3600": 1,
-                    "ENGG3060": 1,
-                    "COMP3": 1,
-                    "COMP4": 1,
-                    "COMP6": 1,
-                    "COMP9": 1,
-                    "INFS3": 1,
-                    "INFS4": 1,
-                    "MATH3": 1,
-                    "MATH4": 1,
-                    "MATH6": 1,
-                    "ELEC3": 1,
-                    "ELEC4": 1,
-                    "TELE3": 1,
-                    "TELE4": 1
-                },
-                "title": "Discipline Electives",
-                "credits_to_complete": 36,
-                "type": "elective",
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "SENG3011": 1,
-                    "COMP3331": 1,
-                    "COMP3311": 1,
-                    "COMP3141": 1
-                },
-                "title": "Level 3 Core Courses",
-                "credits_to_complete": 24,
-                "type": "core",
-                "levels": [
-                    3
-                ],
                 "notes": ""
             }
         ]
@@ -318,54 +339,63 @@
         "curriculum": [
             {
                 "courses": {
-                    "COMP9319": 1,
-                    "COMP9313": 1,
-                    "COMP9315": 1,
-                    "COMP6714": 1,
-                    "COMP9318": 1
-                },
-                "title": "Database Systems Prescribed Electives",
-                "credits_to_complete": 18,
-                "type": "elective",
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "COMP4920": 1,
-                    "COMP2521": 1,
-                    "COMP1511": 1,
-                    "COMP3900": 1,
-                    "COMP1521": 1,
-                    "COMP1531": 1,
-                    "MATH1081": 1,
-                    "COMP2511": 1,
-                    "COMP3311": 1,
-                    "COMP3121 or COMP3821": 2,
-                    "MATH1231 or MATH1241": 2,
-                    "MATH1131 or MATH1141": 2
-                },
-                "title": "Core Courses",
-                "credits_to_complete": 72,
-                "type": "core",
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ENGG4600": 1,
-                    "ENGG3600": 1,
-                    "ENGG2600": 1,
-                    "COMP3": 1,
-                    "COMP4": 1,
-                    "COMP6": 1,
-                    "COMP9": 1
+                    "ENGG3600": "Engineering Vertically Integrated Project",
+                    "ENGG2600": "Engineering Vertically Integrated Project",
+                    "ENGG4600": "Engineering Vertically Integrated Project",
+                    "COMP3": "any level 3 Computer Science course",
+                    "COMP4": "any level 4 Computer Science course",
+                    "COMP6": "any level 6 Computer Science course",
+                    "COMP9": "any level 9 Computer Science course"
                 },
                 "title": "Computing Elective",
                 "credits_to_complete": 6,
-                "type": "elective",
+                "core": false,
                 "levels": [],
                 "notes": "NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. 2 UOC courses are run over consecutive terms for a final total of 6 UOC."
+            },
+            {
+                "courses": {
+                    "MATH1241 or MATH1231": [
+                        "Higher Mathematics 1B",
+                        "Mathematics 1B"
+                    ],
+                    "COMP3311": "Database Systems",
+                    "COMP2511": "Object-Oriented Design & Programming",
+                    "COMP4920": "Professional Issues and Ethics in Information Technology",
+                    "COMP2521": "Data Structures and Algorithms",
+                    "COMP1511": "Programming Fundamentals",
+                    "COMP1531": "Software Engineering Fundamentals",
+                    "MATH1081": "Discrete Mathematics",
+                    "COMP1521": "Computer Systems Fundamentals",
+                    "COMP3900": "Computer Science Project",
+                    "MATH1131 or MATH1141": [
+                        "Mathematics 1A",
+                        "Higher Mathematics 1A"
+                    ],
+                    "COMP3121 or COMP3821": [
+                        "Algorithms and Programming Techniques",
+                        "Extended Algorithms and Programming Techniques"
+                    ]
+                },
+                "title": "Core Courses",
+                "credits_to_complete": 72,
+                "core": true,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "COMP6714": "Information Retrieval and Web Search",
+                    "COMP9313": "Big Data Management",
+                    "COMP9315": "Database Systems Implementation",
+                    "COMP9318": "Data Warehousing and Data Mining",
+                    "COMP9319": "Web Data Compression and Search"
+                },
+                "title": "Database Systems Prescribed Electives",
+                "credits_to_complete": 18,
+                "core": false,
+                "levels": [],
+                "notes": ""
             }
         ]
     },
@@ -381,53 +411,62 @@
         "curriculum": [
             {
                 "courses": {
-                    "ENGG2600": 1,
-                    "ENGG4600": 1,
-                    "ENGG3600": 1,
-                    "COMP3": 1,
-                    "COMP4": 1,
-                    "COMP6": 1,
-                    "COMP9": 1
-                },
-                "title": "Computing Electives",
-                "credits_to_complete": 6,
-                "type": "elective",
-                "levels": [],
-                "notes": "NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. 2 UOC courses are run over consecutive terms for a final total of 6 UOC."
-            },
-            {
-                "courses": {
-                    "COMP3311": 1,
-                    "COMP1531": 1,
-                    "COMP4920": 1,
-                    "COMP1511": 1,
-                    "COMP2511": 1,
-                    "COMP1521": 1,
-                    "COMP3900": 1,
-                    "MATH1081": 1,
-                    "COMP2521": 1,
-                    "MATH1241 or MATH1231": 2,
-                    "COMP3121 or COMP3821": 2,
-                    "MATH1131 or MATH1141": 2
+                    "MATH1241 or MATH1231": [
+                        "Higher Mathematics 1B",
+                        "Mathematics 1B"
+                    ],
+                    "MATH1081": "Discrete Mathematics",
+                    "COMP1531": "Software Engineering Fundamentals",
+                    "COMP1521": "Computer Systems Fundamentals",
+                    "COMP2511": "Object-Oriented Design & Programming",
+                    "COMP2521": "Data Structures and Algorithms",
+                    "COMP3900": "Computer Science Project",
+                    "COMP1511": "Programming Fundamentals",
+                    "COMP3311": "Database Systems",
+                    "COMP4920": "Professional Issues and Ethics in Information Technology",
+                    "COMP3821 or COMP3121": [
+                        "Extended Algorithms and Programming Techniques",
+                        "Algorithms and Programming Techniques"
+                    ],
+                    "MATH1141 or MATH1131": [
+                        "Higher Mathematics 1A",
+                        "Mathematics 1A"
+                    ]
                 },
                 "title": "Core Courses",
                 "credits_to_complete": 72,
-                "type": "core",
+                "core": true,
                 "levels": [],
                 "notes": ""
             },
             {
                 "courses": {
-                    "COMP9323": 1,
-                    "COMP9322": 1,
-                    "COMP3511": 1,
-                    "COMP9321": 1
+                    "COMP9322": "Software Service Design and Engineering",
+                    "COMP3511": "Human Computer Interaction",
+                    "COMP9323": "Software as a Service Project",
+                    "COMP9321": "Data Services Engineering"
                 },
                 "title": "Discipline Electives",
                 "credits_to_complete": 18,
-                "type": "elective",
+                "core": false,
                 "levels": [],
                 "notes": ""
+            },
+            {
+                "courses": {
+                    "ENGG4600": "Engineering Vertically Integrated Project",
+                    "ENGG2600": "Engineering Vertically Integrated Project",
+                    "ENGG3600": "Engineering Vertically Integrated Project",
+                    "COMP3": "any level 3 Computer Science course",
+                    "COMP4": "any level 4 Computer Science course",
+                    "COMP6": "any level 6 Computer Science course",
+                    "COMP9": "any level 9 Computer Science course"
+                },
+                "title": "Computing Electives",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [],
+                "notes": "NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. 2 UOC courses are run over consecutive terms for a final total of 6 UOC."
             }
         ]
     },
@@ -443,54 +482,63 @@
         "curriculum": [
             {
                 "courses": {
-                    "COMP9417": 1,
-                    "COMP9444": 1,
-                    "COMP4418": 1,
-                    "COMP9318": 1,
-                    "COMP9517": 1,
-                    "COMP3431": 1,
-                    "COMP9418": 1
-                },
-                "title": "Artificial Intelligence Prescribed Electives",
-                "credits_to_complete": 18,
-                "type": "elective",
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ENGG4600": 1,
-                    "ENGG2600": 1,
-                    "ENGG3600": 1,
-                    "COMP3": 1,
-                    "COMP4": 1,
-                    "COMP6": 1,
-                    "COMP9": 1
+                    "ENGG4600": "Engineering Vertically Integrated Project",
+                    "ENGG2600": "Engineering Vertically Integrated Project",
+                    "ENGG3600": "Engineering Vertically Integrated Project",
+                    "COMP3": "any level 3 Computer Science course",
+                    "COMP4": "any level 4 Computer Science course",
+                    "COMP6": "any level 6 Computer Science course",
+                    "COMP9": "any level 9 Computer Science course"
                 },
                 "title": "Computing Electives",
                 "credits_to_complete": 6,
-                "type": "elective",
+                "core": false,
                 "levels": [],
                 "notes": "NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. 2 UOC courses are run over consecutive terms for a final total of 6 UOC."
             },
             {
                 "courses": {
-                    "MATH1241 or MATH1231": 2,
-                    "MATH1131 or MATH1141": 2,
-                    "COMP2511": 1,
-                    "COMP3411": 1,
-                    "COMP1531": 1,
-                    "COMP3900": 1,
-                    "COMP1511": 1,
-                    "COMP2521": 1,
-                    "COMP1521": 1,
-                    "COMP4920": 1,
-                    "MATH1081": 1,
-                    "COMP3121 or COMP3821": 2
+                    "MATH1241 or MATH1231": [
+                        "Higher Mathematics 1B",
+                        "Mathematics 1B"
+                    ],
+                    "COMP3821 or COMP3121": [
+                        "Extended Algorithms and Programming Techniques",
+                        "Algorithms and Programming Techniques"
+                    ],
+                    "COMP1511": "Programming Fundamentals",
+                    "MATH1081": "Discrete Mathematics",
+                    "COMP1521": "Computer Systems Fundamentals",
+                    "COMP1531": "Software Engineering Fundamentals",
+                    "COMP2511": "Object-Oriented Design & Programming",
+                    "COMP3900": "Computer Science Project",
+                    "COMP4920": "Professional Issues and Ethics in Information Technology",
+                    "COMP3411": "Artificial Intelligence",
+                    "COMP2521": "Data Structures and Algorithms",
+                    "MATH1131 or MATH1141": [
+                        "Mathematics 1A",
+                        "Higher Mathematics 1A"
+                    ]
                 },
                 "title": "Core Courses",
                 "credits_to_complete": 72,
-                "type": "core",
+                "core": true,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "COMP9418": "Advanced Topics in Statistical Machine Learning",
+                    "COMP4418": "Knowledge Representation and Reasoning",
+                    "COMP9318": "Data Warehousing and Data Mining",
+                    "COMP9417": "Machine Learning and Data Mining",
+                    "COMP3431": "Robotic Software Architecture",
+                    "COMP9444": "Neural Networks and Deep Learning",
+                    "COMP9517": "Computer Vision"
+                },
+                "title": "Artificial Intelligence Prescribed Electives",
+                "credits_to_complete": 18,
+                "core": false,
                 "levels": [],
                 "notes": ""
             }
@@ -508,53 +556,59 @@
         "curriculum": [
             {
                 "courses": {
-                    "COMP3141": 1,
-                    "COMP6771": 1,
-                    "COMP3151": 1,
-                    "COMP3131": 1
+                    "COMP3141": "Software System Design and Implementation",
+                    "COMP3151": "Foundations of Concurrency",
+                    "COMP6771": "Advanced C++ Programming",
+                    "COMP3131": "Programming Languages and Compilers"
                 },
                 "title": "Discipline Electives",
                 "credits_to_complete": 18,
-                "type": "elective",
+                "core": false,
                 "levels": [],
                 "notes": ""
             },
             {
                 "courses": {
-                    "COMP1521": 1,
-                    "COMP2511": 1,
-                    "MATH1081": 1,
-                    "COMP3121": 1,
-                    "COMP4920": 1,
-                    "COMP1531": 1,
-                    "COMP3161": 1,
-                    "COMP2521": 1,
-                    "COMP1511": 1,
-                    "COMP3900": 1,
-                    "MATH1131 or MATH1141": 2,
-                    "MATH1241 or MATH1231": 2
-                },
-                "title": "Core Course",
-                "credits_to_complete": 72,
-                "type": "core",
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ENGG2600": 1,
-                    "ENGG3600": 1,
-                    "ENGG4600": 1,
-                    "COMP3": 1,
-                    "COMP4": 1,
-                    "COMP6": 1,
-                    "COMP9": 1
+                    "ENGG3600": "Engineering Vertically Integrated Project",
+                    "ENGG2600": "Engineering Vertically Integrated Project",
+                    "ENGG4600": "Engineering Vertically Integrated Project",
+                    "COMP3": "any level 3 Computer Science course",
+                    "COMP4": "any level 4 Computer Science course",
+                    "COMP6": "any level 6 Computer Science course",
+                    "COMP9": "any level 9 Computer Science course"
                 },
                 "title": "Computing Electives",
                 "credits_to_complete": 6,
-                "type": "elective",
+                "core": false,
                 "levels": [],
                 "notes": "NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. 2 UOC courses are run over consecutive terms for a final total of 6 UOC."
+            },
+            {
+                "courses": {
+                    "MATH1231 or MATH1241": [
+                        "Mathematics 1B",
+                        "Higher Mathematics 1B"
+                    ],
+                    "MATH1131 or MATH1141": [
+                        "Mathematics 1A",
+                        "Higher Mathematics 1A"
+                    ],
+                    "COMP3121": "Algorithms and Programming Techniques",
+                    "COMP2511": "Object-Oriented Design & Programming",
+                    "COMP3161": "Concepts of Programming Languages",
+                    "COMP4920": "Professional Issues and Ethics in Information Technology",
+                    "COMP3900": "Computer Science Project",
+                    "MATH1081": "Discrete Mathematics",
+                    "COMP1531": "Software Engineering Fundamentals",
+                    "COMP1511": "Programming Fundamentals",
+                    "COMP2521": "Data Structures and Algorithms",
+                    "COMP1521": "Computer Systems Fundamentals"
+                },
+                "title": "Core Course",
+                "credits_to_complete": 72,
+                "core": true,
+                "levels": [],
+                "notes": ""
             }
         ]
     },
@@ -570,52 +624,61 @@
         "curriculum": [
             {
                 "courses": {
-                    "ENGG2600": 1,
-                    "ENGG4600": 1,
-                    "ENGG3600": 1,
-                    "COMP3": 1,
-                    "COMP4": 1,
-                    "COMP6": 1,
-                    "COMP9": 1
-                },
-                "title": "Computing Electives",
-                "credits_to_complete": 6,
-                "type": "elective",
-                "levels": [],
-                "notes": "NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. 2 UOC courses are run over consecutive terms for a final total of 6 UOC."
-            },
-            {
-                "courses": {
-                    "COMP9332": 1,
-                    "COMP6733": 1,
-                    "COMP9334": 1,
-                    "COMP4336": 1,
-                    "COMP4337": 1
+                    "COMP6733": "Internet of Things Experimental Design Studio",
+                    "COMP4337": "Securing Fixed and Wireless Networks",
+                    "COMP9334": "Capacity Planning of Computer Systems and Networks",
+                    "COMP4336": "Mobile Data Networking",
+                    "COMP9332": "Network Routing and Switching"
                 },
                 "title": "Discipline Electives",
                 "credits_to_complete": 18,
-                "type": "elective",
+                "core": false,
                 "levels": [],
                 "notes": ""
             },
             {
                 "courses": {
-                    "MATH1081": 1,
-                    "COMP3900": 1,
-                    "COMP4920": 1,
-                    "COMP2511": 1,
-                    "COMP1531": 1,
-                    "COMP1511": 1,
-                    "COMP2521": 1,
-                    "COMP1521": 1,
-                    "COMP3331": 1,
-                    "COMP3821 or COMP3121": 2,
-                    "MATH1131 or MATH1141": 2,
-                    "MATH1231 or MATH1241": 2
+                    "ENGG4600": "Engineering Vertically Integrated Project",
+                    "ENGG2600": "Engineering Vertically Integrated Project",
+                    "ENGG3600": "Engineering Vertically Integrated Project",
+                    "COMP3": "any level 3 Computer Science course",
+                    "COMP4": "any level 4 Computer Science course",
+                    "COMP6": "any level 6 Computer Science course",
+                    "COMP9": "any level 9 Computer Science course"
+                },
+                "title": "Computing Electives",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [],
+                "notes": "NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. 2 UOC courses are run over consecutive terms for a final total of 6 UOC."
+            },
+            {
+                "courses": {
+                    "MATH1241 or MATH1231": [
+                        "Higher Mathematics 1B",
+                        "Mathematics 1B"
+                    ],
+                    "COMP3821 or COMP3121": [
+                        "Extended Algorithms and Programming Techniques",
+                        "Algorithms and Programming Techniques"
+                    ],
+                    "COMP2511": "Object-Oriented Design & Programming",
+                    "COMP2521": "Data Structures and Algorithms",
+                    "COMP3900": "Computer Science Project",
+                    "COMP4920": "Professional Issues and Ethics in Information Technology",
+                    "COMP3331": "Computer Networks and Applications",
+                    "COMP1531": "Software Engineering Fundamentals",
+                    "COMP1511": "Programming Fundamentals",
+                    "COMP1521": "Computer Systems Fundamentals",
+                    "MATH1081": "Discrete Mathematics",
+                    "MATH1131 or MATH1141": [
+                        "Mathematics 1A",
+                        "Higher Mathematics 1A"
+                    ]
                 },
                 "title": "Core Courses",
                 "credits_to_complete": 72,
-                "type": "core",
+                "core": true,
                 "levels": [],
                 "notes": ""
             }
@@ -633,38 +696,47 @@
         "curriculum": [
             {
                 "courses": {
-                    "COMP3601": 1,
-                    "COMP4601": 1,
-                    "COMP3211": 1,
-                    "COMP3231": 1,
-                    "COMP9242": 1,
-                    "COMP9517": 1
+                    "COMP4601": "Design Project B",
+                    "COMP9242": "Advanced Operating Systems",
+                    "COMP9517": "Computer Vision",
+                    "COMP3231": "Operating Systems",
+                    "COMP3211": "Computer Architecture",
+                    "COMP3601": "Design Project A"
                 },
                 "title": "Prescribed Electives",
                 "credits_to_complete": 18,
-                "type": "elective",
+                "core": false,
                 "levels": [],
                 "notes": ""
             },
             {
                 "courses": {
-                    "MATH1231 or MATH1241": 2,
-                    "COMP3222": 1,
-                    "COMP1531": 1,
-                    "COMP4920": 1,
-                    "MATH1081": 1,
-                    "COMP1511": 1,
-                    "COMP2521": 1,
-                    "COMP1521": 1,
-                    "COMP2511": 1,
-                    "COMP2121": 1,
-                    "COMP3900": 1,
-                    "COMP3121 or COMP3821": 2,
-                    "MATH1141 or MATH1131": 2
+                    "COMP3121 or COMP3821": [
+                        "Algorithms and Programming Techniques",
+                        "Extended Algorithms and Programming Techniques"
+                    ],
+                    "MATH1131 or MATH1141": [
+                        "Mathematics 1A",
+                        "Higher Mathematics 1A"
+                    ],
+                    "MATH1241 or MATH1231": [
+                        "Higher Mathematics 1B",
+                        "Mathematics 1B"
+                    ],
+                    "COMP1511": "Programming Fundamentals",
+                    "COMP2521": "Data Structures and Algorithms",
+                    "COMP2511": "Object-Oriented Design & Programming",
+                    "COMP1521": "Computer Systems Fundamentals",
+                    "COMP2121": "Microprocessors and Interfacing",
+                    "MATH1081": "Discrete Mathematics",
+                    "COMP3900": "Computer Science Project",
+                    "COMP3222": "Digital Circuits and Systems",
+                    "COMP1531": "Software Engineering Fundamentals",
+                    "COMP4920": "Professional Issues and Ethics in Information Technology"
                 },
                 "title": "Core Courses",
                 "credits_to_complete": 78,
-                "type": "core",
+                "core": true,
                 "levels": [],
                 "notes": ""
             }
@@ -687,58 +759,67 @@
         "curriculum": [
             {
                 "courses": {
-                    "COMP6845": 1,
-                    "COMP6443": 1,
-                    "COMP6449": 1,
-                    "COMP6448": 1,
-                    "COMP6843": 1,
-                    "MATH3411": 1,
-                    "COMP9447": 1,
-                    "COMP4337": 1,
-                    "COMP6445": 1,
-                    "COMP6447": 1,
-                    "TELE3119": 1
+                    "COMP6441 or COMP6841": [
+                        "Security Engineering and Cyber Security",
+                        "Extended Security Engineering and Cyber Security"
+                    ],
+                    "MATH1231 or MATH1241": [
+                        "Mathematics 1B",
+                        "Higher Mathematics 1B"
+                    ],
+                    "COMP4920": "Professional Issues and Ethics in Information Technology",
+                    "COMP2521": "Data Structures and Algorithms",
+                    "COMP3121": "Algorithms and Programming Techniques",
+                    "COMP2511": "Object-Oriented Design & Programming",
+                    "MATH1081": "Discrete Mathematics",
+                    "COMP1531": "Software Engineering Fundamentals",
+                    "COMP1511": "Programming Fundamentals",
+                    "COMP1521": "Computer Systems Fundamentals",
+                    "COMP3900": "Computer Science Project",
+                    "MATH1141 or MATH1131": [
+                        "Higher Mathematics 1A",
+                        "Mathematics 1A"
+                    ]
                 },
-                "title": "Security Engineering Prescribed Electives",
-                "credits_to_complete": 18,
-                "type": "elective",
+                "title": "Core Courses",
+                "credits_to_complete": 72,
+                "core": true,
                 "levels": [],
                 "notes": ""
             },
             {
                 "courses": {
-                    "ENGG2600": 1,
-                    "ENGG4600": 1,
-                    "ENGG3600": 1,
-                    "COMP3": 1,
-                    "COMP4": 1,
-                    "COMP6": 1,
-                    "COMP9": 1
+                    "ENGG3600": "Engineering Vertically Integrated Project",
+                    "ENGG4600": "Engineering Vertically Integrated Project",
+                    "ENGG2600": "Engineering Vertically Integrated Project",
+                    "COMP3": "any level 3 Computer Science course",
+                    "COMP4": "any level 4 Computer Science course",
+                    "COMP6": "any level 6 Computer Science course",
+                    "COMP9": "any level 9 Computer Science course"
                 },
                 "title": "Computing Elective",
                 "credits_to_complete": 6,
-                "type": "elective",
+                "core": false,
                 "levels": [],
                 "notes": "NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. 2 UOC courses are run over consecutive terms for a final total of 6 UOC."
             },
             {
                 "courses": {
-                    "MATH1131 or MATH1141": 2,
-                    "COMP1511": 1,
-                    "COMP4920": 1,
-                    "COMP1521": 1,
-                    "COMP2511": 1,
-                    "COMP2521": 1,
-                    "MATH1081": 1,
-                    "COMP3121": 1,
-                    "COMP3900": 1,
-                    "COMP1531": 1,
-                    "COMP6441 or COMP6841": 2,
-                    "MATH1231 or MATH1241": 2
+                    "COMP6443": "Web Application Security and Testing",
+                    "MATH3411": "Information, Codes and Ciphers",
+                    "COMP6445": "Digital Forensics",
+                    "COMP6449": "Security Engineering Professional Practice",
+                    "COMP6448": "Security Engineering Masterclass",
+                    "TELE3119": "Trusted Networks",
+                    "COMP6845": "Extended Digital Forensics and Incident Response",
+                    "COMP6447": "System and Software Security Assessment",
+                    "COMP6843": "Extended Web Application Security and Testing",
+                    "COMP9447": "Security Engineering Workshop",
+                    "COMP4337": "Securing Fixed and Wireless Networks"
                 },
-                "title": "Core Courses",
-                "credits_to_complete": 72,
-                "type": "core",
+                "title": "Security Engineering Prescribed Electives",
+                "credits_to_complete": 18,
+                "core": false,
                 "levels": [],
                 "notes": ""
             }
@@ -756,40 +837,62 @@
         "curriculum": [
             {
                 "courses": {
-                    "COMP9313": 1,
-                    "COMP9417": 1,
-                    "COMP3121": 1
+                    "ECON3107": "Economics of Finance",
+                    "ACTL3142": "Statistical Machine Learning for Risk and Actuarial Applications",
+                    "COMP6714": "Information Retrieval and Web Search",
+                    "ECON3208": "Applied Econometric Methods",
+                    "ECON1102": "Macroeconomics 1",
+                    "ECON2104": "Applied Macroeconomics",
+                    "ACTL3141": "Modelling and Prediction of Life and Health Related Risks",
+                    "MATH3041": "Mathematical Modelling for Real World Systems",
+                    "COMP6771": "Advanced C++ Programming",
+                    "ECON3130": "Real Estate Economics and Public Policy",
+                    "INFS3603": "Introduction to Business Analytics",
+                    "ECON2111": "Introduction to Economic Development",
+                    "COMP3411": "Artificial Intelligence",
+                    "COMP9418": "Advanced Topics in Statistical Machine Learning",
+                    "COMP9318": "Data Warehousing and Data Mining",
+                    "ECON3206": "Financial Econometrics",
+                    "COMP4418": "Knowledge Representation and Reasoning",
+                    "ECON2209": "Business Forecasting",
+                    "ECON2101": "Microeconomics 2",
+                    "MATH3821": "Statistical Modelling and Computing",
+                    "COMP9319": "Web Data Compression and Search",
+                    "ECON3123": "Organisational Economics",
+                    "MARK1012": "Marketing Fundamentals",
+                    "MATH5836": "Data Mining and its Business Applications",
+                    "COMP6441": "Security Engineering and Cyber Security",
+                    "MARK3054": "Marketing Analytics and Big Data",
+                    "MARK3085": "Digital Marketing and Web Analytics",
+                    "MATH2111": "Higher Several Variable Calculus",
+                    "MATH3411": "Information, Codes and Ciphers",
+                    "MATH2831": "Linear Models",
+                    "ECON2206": "Introductory Econometrics ",
+                    "COMP6841": "Extended Security Engineering and Cyber Security",
+                    "MATH3161": "Optimization",
+                    "COMP4121": "Advanced Algorithms",
+                    "COMP9315": "Database Systems Implementation",
+                    "MATH2871": "Data Management for Statistical Analysis",
+                    "MATH3871": "Bayesian Inference and Computation",
+                    "INFS1602": "Digital Transformation in Business",
+                    "MATH2011": "Several Variable Calculus",
+                    "MATH2931": "Higher Linear Models"
                 },
-                "title": "Level 3 Core Courses",
+                "title": "Prescribed Electives",
                 "credits_to_complete": 18,
-                "type": "core",
-                "levels": [
-                    3
-                ],
+                "core": false,
+                "levels": [],
                 "notes": ""
             },
             {
                 "courses": {
-                    "COMP2041": 1,
-                    "COMP2521": 1
-                },
-                "title": "Level 2 Core Courses",
-                "credits_to_complete": 12,
-                "type": "core",
-                "levels": [
-                    2
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "MATH1081": 1,
-                    "COMP1511": 1,
-                    "MATH1131": 1
+                    "MATH1081": "Discrete Mathematics",
+                    "MATH1131": "Mathematics 1A",
+                    "COMP1511": "Programming Fundamentals"
                 },
                 "title": "Level 1 Core Courses",
                 "credits_to_complete": 18,
-                "type": "core",
+                "core": true,
                 "levels": [
                     1
                 ],
@@ -797,64 +900,42 @@
             },
             {
                 "courses": {
-                    "MATH3161": 1,
-                    "COMP4121": 1,
-                    "MATH2931": 1,
-                    "MATH5836": 1,
-                    "ACTL3141": 1,
-                    "COMP3411": 1,
-                    "MATH3871": 1,
-                    "COMP4418": 1,
-                    "COMP6441": 1,
-                    "ECON3107": 1,
-                    "MATH3411": 1,
-                    "MARK3085": 1,
-                    "ECON2101": 1,
-                    "ECON2206": 1,
-                    "MATH3041": 1,
-                    "ECON3123": 1,
-                    "COMP9319": 1,
-                    "ACTL3142": 1,
-                    "ECON2111": 1,
-                    "MATH2011": 1,
-                    "INFS1602": 1,
-                    "MATH3821": 1,
-                    "ECON2104": 1,
-                    "COMP9418": 1,
-                    "COMP6714": 1,
-                    "COMP9315": 1,
-                    "COMP6841": 1,
-                    "ECON3206": 1,
-                    "MATH2871": 1,
-                    "ECON2209": 1,
-                    "MARK3054": 1,
-                    "COMP6771": 1,
-                    "INFS3603": 1,
-                    "ECON3208": 1,
-                    "ECON3130": 1,
-                    "MARK1012": 1,
-                    "MATH2111": 1,
-                    "COMP9318": 1,
-                    "ECON1102": 1,
-                    "MATH2831": 1
+                    "COMP2041": "Software Construction: Techniques and Tools",
+                    "COMP2521": "Data Structures and Algorithms"
                 },
-                "title": "Prescribed Electives",
+                "title": "Level 2 Core Courses",
+                "credits_to_complete": 12,
+                "core": true,
+                "levels": [
+                    2
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "COMP3121": "Algorithms and Programming Techniques",
+                    "COMP9417": "Machine Learning and Data Mining",
+                    "COMP9313": "Big Data Management"
+                },
+                "title": "Level 3 Core Courses",
                 "credits_to_complete": 18,
-                "type": "elective",
-                "levels": [],
+                "core": true,
+                "levels": [
+                    3
+                ],
                 "notes": ""
             }
         ]
     },
     "ACCTA2": {
         "programs": [
-            "3543",
-            "3502",
-            "3587",
             "3778",
             "3554",
             "3558",
-            "3586"
+            "3543",
+            "3586",
+            "3502",
+            "3587"
         ],
         "name": "Accounting",
         "type": "minor",
@@ -864,31 +945,31 @@
         "curriculum": [
             {
                 "courses": {
-                    "ACCT2511": 1,
-                    "COMM1140": 1
+                    "COMM1140": "Financial Management",
+                    "ACCT2511": "Financial Accounting Fundamentals"
                 },
                 "title": "Core Courses",
                 "credits_to_complete": 12,
-                "type": "core",
+                "core": true,
                 "levels": [],
                 "notes": ""
             },
             {
                 "courses": {
-                    "ACCT3601": 1,
-                    "ACCT3708": 1,
-                    "ACCT2522": 1,
-                    "ACCT2507": 1,
-                    "ACCT3583": 1,
-                    "ACCT2542": 1,
-                    "TABL2741": 1,
-                    "ACCT3625": 1,
-                    "ACCT3610": 1,
-                    "ACCT3563": 1
+                    "ACCT3708": "Auditing and Assurance Services",
+                    "ACCT3601": "Global Financial Reporting and Analysis",
+                    "ACCT3583": "Management Accounting 2",
+                    "ACCT3610": "Business Analysis and Valuation",
+                    "ACCT2507": "Introduction to Accounting Research",
+                    "ACCT3625": "Integrated Reporting, Integrated Thinking and Value Creation",
+                    "ACCT3563": "Issues in Financial Reporting and Analysis",
+                    "ACCT2522": "Management Accounting 1",
+                    "ACCT2542": "Corporate Financial Reporting and Analysis",
+                    "TABL2741": "Business Entities"
                 },
                 "title": "Prescribed Electives",
                 "credits_to_complete": 18,
-                "type": "elective",
+                "core": false,
                 "levels": [],
                 "notes": ""
             }
@@ -896,13 +977,13 @@
     },
     "FINSA2": {
         "programs": [
-            "3543",
-            "3502",
-            "3587",
             "3778",
             "3554",
             "3558",
-            "3586"
+            "3543",
+            "3586",
+            "3502",
+            "3587"
         ],
         "name": "Finance",
         "type": "minor",
@@ -912,47 +993,47 @@
         "curriculum": [
             {
                 "courses": {
-                    "FINS3616": 1,
-                    "FINS3634": 1,
-                    "FINS3625": 1,
-                    "FINS3633": 1,
-                    "FINS3641": 1,
-                    "FINS3640": 1,
-                    "FINS3644": 1,
-                    "FINS3647": 1,
-                    "FINS3775": 1,
-                    "FINS2622": 1,
-                    "FINS3646": 1,
-                    "FINS3636": 1,
-                    "FINS3623": 1,
-                    "FINS3635": 1,
-                    "FINS3637": 1,
-                    "FINS3666": 1,
-                    "FINS3630": 1,
-                    "FINS3626": 1,
-                    "FINS3650": 1,
-                    "FINS2643": 1,
-                    "FINS3648": 1,
-                    "FINS3655": 1,
-                    "FINS3631": 1,
-                    "FINS2624": 1,
-                    "FINS3645": 1
+                    "FINS3636": "Interest Rate Risk Management",
+                    "FINS2622": "Asia-Pacific Capital Markets",
+                    "FINS3648": "Banking, Finance and Technology",
+                    "FINS3655": "Behavioural Finance",
+                    "FINS3634": "Credit Analysis and Lending",
+                    "FINS3644": "Sustainable and Responsible Investing",
+                    "FINS3650": "International Banking",
+                    "FINS3775": "Research Methods in Finance 1",
+                    "FINS3625": "Applied Corporate Finance",
+                    "FINS3633": "Real Estate Finance",
+                    "FINS3626": "International Corporate Governance",
+                    "FINS3647": "Bitcoin and Decentralised Finance",
+                    "FINS3623": "Venture Capital",
+                    "FINS2624": "Portfolio Management",
+                    "FINS3635": "Options, Futures and Risk Management",
+                    "FINS3630": "Bank Financial Management",
+                    "FINS3666": "Trading and Market Making",
+                    "FINS3640": "Investment Management Modeling",
+                    "FINS3637": "Wealth Management Advice and Ethics",
+                    "FINS3631": "Personal Risk, Insurance, and Superannuation for Financial Planning ",
+                    "FINS3641": "Security Analysis and Valuation",
+                    "FINS3645": "Financial Market Data Design and Analysis",
+                    "FINS2643": "Wealth Management and Client Engagement",
+                    "FINS3616": "International Business Finance",
+                    "FINS3646": "Toolkit for Finance"
                 },
                 "title": "Prescribed Electives",
                 "credits_to_complete": 12,
-                "type": "elective",
+                "core": false,
                 "levels": [],
                 "notes": "and may only count ONE Financial Technology course (FINS3645, FINS3646, FINS3647 or FINS3648) towards their minor in Finance."
             },
             {
                 "courses": {
-                    "FINS2613": 1,
-                    "COMM1180": 1,
-                    "FINS1612": 1
+                    "FINS1612": "Capital Markets and Institutions",
+                    "FINS2613": "Intermediate Business Finance",
+                    "COMM1180": "Value Creation"
                 },
                 "title": "Core Courses",
                 "credits_to_complete": 18,
-                "type": "core",
+                "core": true,
                 "levels": [],
                 "notes": ""
             }
@@ -960,13 +1041,13 @@
     },
     "INFSA2": {
         "programs": [
-            "3543",
-            "3502",
-            "3587",
             "3778",
             "3554",
             "3558",
-            "3586"
+            "3543",
+            "3586",
+            "3502",
+            "3587"
         ],
         "name": "Information Systems",
         "type": "minor",
@@ -976,15 +1057,15 @@
         "curriculum": [
             {
                 "courses": {
-                    "INFS3604": 1,
-                    "INFS1603": 1,
-                    "INFS2602": 1,
-                    "INFS2603": 1,
-                    "COMM1190": 1
+                    "COMM1190": "Data, Insights and Decisions",
+                    "INFS1603": "Introduction to Business Databases",
+                    "INFS2603": "Business Analysis and Agile Product Management",
+                    "INFS2602": "Managing Information Systems",
+                    "INFS3604": "Business Process Management"
                 },
                 "title": "Core Courses",
                 "credits_to_complete": 30,
-                "type": "core",
+                "core": true,
                 "levels": [],
                 "notes": "Students in Actuarial degrees should complete MATH1151 or MATH1251 instead of COMM1190. All other students should complete COMM1190. Please note: Courses completed under a minor cannot form part of a nominated major."
             }
@@ -992,12 +1073,12 @@
     },
     "MARKA2": {
         "programs": [
-            "3543",
-            "3502",
             "3778",
             "3554",
             "3558",
-            "3586"
+            "3543",
+            "3586",
+            "3502"
         ],
         "name": "Marketing",
         "type": "minor",
@@ -1007,48 +1088,48 @@
         "curriculum": [
             {
                 "courses": {
-                    "COMM1100": 1,
-                    "MARK2012": 1
-                },
-                "title": "Core Course",
-                "credits_to_complete": 12,
-                "type": "core",
-                "levels": [],
-                "notes": "Students in Comm/Econ and Comm/Actl should take COMM1900 instead of COMM1100. Students in Econ and Actl should take ECON1101. All other students should complete COMM1100"
-            },
-            {
-                "courses": {
-                    "MARK3090": 1,
-                    "MARK3092": 1,
-                    "MARK3089": 1,
-                    "MARK3087": 1,
-                    "MARK3081": 1,
-                    "MARK2060": 1,
-                    "MARK3088": 1,
-                    "MARK3054": 1,
-                    "MARK2053": 1,
-                    "MARK2085": 1,
-                    "MARK2055": 1,
-                    "MARK2051": 1,
-                    "MARK3091": 1,
-                    "MARK2071": 1,
-                    "MARK3085": 1,
-                    "MARK2052": 1
+                    "MARK2051": "Consumer Behaviour",
+                    "MARK2055": "Service Marketing and Management",
+                    "MARK3092": "Brand Management",
+                    "MARK2060": "Event Management and Marketing",
+                    "MARK3087": "Customer Analytics",
+                    "MARK3088": "Product Analytics",
+                    "MARK3054": "Marketing Analytics and Big Data",
+                    "MARK3090": "Marketing Decision Analysis",
+                    "MARK3085": "Digital Marketing and Web Analytics",
+                    "MARK3091": "New Product and New Service Development",
+                    "MARK3081": "Distribution Strategy and Retail Channels",
+                    "MARK2071": "International and Global Marketing",
+                    "MARK3089": "Pricing Analytics",
+                    "MARK2052": "Marketing Research",
+                    "MARK2085": "Consumer Centric Innovation",
+                    "MARK2053": "Marketing Communications and Promotions Management"
                 },
                 "title": "Prescribed Electives",
                 "credits_to_complete": 18,
-                "type": "elective",
+                "core": false,
                 "levels": [],
                 "notes": "At least one of the elective courses must be at level 3 (i.e. MARK3XXX)). The minor does not form part of the nominated major."
+            },
+            {
+                "courses": {
+                    "COMM1100": "Business Decision Making",
+                    "MARK2012": "Marketing Fundamentals"
+                },
+                "title": "Core Course",
+                "credits_to_complete": 12,
+                "core": true,
+                "levels": [],
+                "notes": "Students in Comm/Econ and Comm/Actl should take COMM1900 instead of COMM1100. Students in Econ and Actl should take ECON1101. All other students should complete COMM1100"
             }
         ]
     },
     "MATHC2": {
         "programs": [
+            "3778",
             "3543",
-            "3962",
             "3970",
-            "3778"
+            "3962"
         ],
         "name": "Mathematics",
         "type": "minor",
@@ -1067,59 +1148,65 @@
         "curriculum": [
             {
                 "courses": {
-                    "MATH2521": 1,
-                    "MATH3711": 1,
-                    "MATH3411": 1,
-                    "MATH3041": 1,
-                    "MATH3701": 1,
-                    "MATH3261": 1,
-                    "MATH2621": 1,
-                    "MATH3101": 1,
-                    "MATH2601": 1,
-                    "MATH2011": 1,
-                    "MATH2241": 1,
-                    "MATH2301": 1,
-                    "MATH3611": 1,
-                    "MATH2121": 1,
-                    "MATH3161": 1,
-                    "MATH3201": 1,
-                    "MATH3521": 1,
-                    "MATH2019": 1,
-                    "MATH3570": 1,
-                    "MATH3311": 1,
-                    "MATH3121": 1,
-                    "MATH3560": 1,
-                    "MATH2089": 1,
-                    "MATH2400": 1,
-                    "MATH2701": 1,
-                    "MATH2069": 1,
-                    "MATH2111": 1,
-                    "MATH2501": 1,
-                    "MATH2221": 1,
-                    "MATH3531": 1,
-                    "MATH3511": 1,
-                    "MATH2099": 1,
-                    "MATH5": 1
+                    "MATH1231 or MATH1241": [
+                        "Mathematics 1B",
+                        "Higher Mathematics 1B"
+                    ],
+                    "MATH1141 or MATH1131": [
+                        "Higher Mathematics 1A",
+                        "Mathematics 1A"
+                    ]
                 },
-                "title": "Level 2/3 Mathematics Electives",
-                "credits_to_complete": 24,
-                "type": "elective",
+                "title": "Level 1 Core Courses",
+                "credits_to_complete": 12,
+                "core": true,
                 "levels": [
-                    2,
-                    3
+                    1
                 ],
                 "notes": ""
             },
             {
                 "courses": {
-                    "MATH1131 or MATH1141": 2,
-                    "MATH1231 or MATH1241": 2
+                    "MATH2241": "Introduction to Atmosphere and Ocean Dynamics",
+                    "MATH2501": "Linear Algebra",
+                    "MATH2111": "Higher Several Variable Calculus",
+                    "MATH2601": "Higher Linear Algebra",
+                    "MATH3041": "Mathematical Modelling for Real World Systems",
+                    "MATH3121": "Mathematical Methods and Partial Differential Equations",
+                    "MATH2301": "Mathematical Computing",
+                    "MATH3261": "Fluids, Oceans and Climate",
+                    "MATH2400": "Finite Mathematics",
+                    "MATH3701": "Higher Topology and Differential Geometry",
+                    "MATH2089": "Numerical Methods and Statistics",
+                    "MATH3521": "Algebraic Techniques in Number Theory",
+                    "MATH3560": "History of Mathematics",
+                    "MATH3101": "Computational Mathematics for Science and Engineering",
+                    "MATH2701": "Abstract Algebra and Fundamental Analysis",
+                    "MATH3311": "Computational Mathematics for Finance",
+                    "MATH3411": "Information, Codes and Ciphers",
+                    "MATH3570": "Foundations of Calculus",
+                    "MATH2121": "Theory and Applications of Differential Equations",
+                    "MATH2019": "Engineering Mathematics 2E",
+                    "MATH3711": "Higher Algebra",
+                    "MATH2221": "Higher Theory and Applications of Differential Equations",
+                    "MATH3201": "Dynamical Systems and Chaos",
+                    "MATH2099": "Mathematics 2B",
+                    "MATH3161": "Optimization",
+                    "MATH3511": "Transformations, Groups and Geometry",
+                    "MATH2069": "Mathematics 2A",
+                    "MATH3531": "Topology and Differential Geometry",
+                    "MATH3611": "Higher Analysis",
+                    "MATH2621": "Higher Complex Analysis",
+                    "MATH2521": "Complex Analysis",
+                    "MATH2011": "Several Variable Calculus",
+                    "MATH5": "any level 5 Mathematics course"
                 },
-                "title": "Level 1 Core Courses",
-                "credits_to_complete": 12,
-                "type": "core",
+                "title": "Level 2/3 Mathematics Electives",
+                "credits_to_complete": 24,
+                "core": false,
                 "levels": [
-                    1
+                    2,
+                    3
                 ],
                 "notes": ""
             }
@@ -1127,16 +1214,16 @@
     },
     "PSYCM2": {
         "programs": [
-            "3543",
-            "3962",
-            "3970",
-            "3434",
-            "3778",
-            "3454",
-            "3429",
-            "3453",
             "3438",
-            "3409"
+            "3454",
+            "3778",
+            "3429",
+            "3434",
+            "3409",
+            "3453",
+            "3543",
+            "3970",
+            "3962"
         ],
         "name": "Psychology",
         "type": "minor",
@@ -1146,29 +1233,29 @@
         "curriculum": [
             {
                 "courses": {
-                    "PSYC2101": 1,
-                    "PSYC2071": 1,
-                    "PSYC2061": 1,
-                    "PSYC2081": 1
+                    "PSYC1001": "Psychology 1A",
+                    "PSYC1011": "Psychology 1B"
                 },
-                "title": "Level 2 Core Courses",
-                "credits_to_complete": 24,
-                "type": "core",
+                "title": "Level 1 Core Courses",
+                "credits_to_complete": 12,
+                "core": true,
                 "levels": [
-                    2
+                    1
                 ],
                 "notes": ""
             },
             {
                 "courses": {
-                    "PSYC1011": 1,
-                    "PSYC1001": 1
+                    "PSYC2101": "Assessment, Personality and Psychopathology",
+                    "PSYC2061": "Social and Developmental Psychology",
+                    "PSYC2081": "Learning and Physiological Psychology",
+                    "PSYC2071": "Perception and Cognition"
                 },
-                "title": "Level 1 Core Courses",
-                "credits_to_complete": 12,
-                "type": "core",
+                "title": "Level 2 Core Courses",
+                "credits_to_complete": 24,
+                "core": true,
                 "levels": [
-                    1
+                    2
                 ],
                 "notes": ""
             }

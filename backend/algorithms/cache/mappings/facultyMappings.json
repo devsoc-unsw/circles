@@ -1,0 +1,40 @@
+{
+    "F Engineering": "Faculty of Engineering",
+    "Faculty of Engineering": "F Engineering",
+    
+
+
+    "F Art": "Faculty of Arts, Design and Architecture",
+    "Faculty of Arts, Design and Architecture": "F Art",
+    
+
+
+    "F Law": "Faculty of Law and Justice",
+    "Faculty of Law and Justice": "F Law",
+
+
+
+    "F Med": "Faculty of Medicine and Health",
+    "Faculty of Medicine and Health": "F Med",
+
+
+
+    "F Science": "Faculty of Science",
+    "Faculty of Science": "F Science",
+
+
+    "F Business": "UNSW Business School",
+    "UNSW Business School": "F Business", 
+
+
+    "F Canberra": "UNSW Canberra at ADFA",
+    "UNSW Canberra at ADFA": "F Canberra",
+
+
+    "F UNSWGlobal": "UNSW Global",
+    "UNSW Global": "F UNSWGlobal",
+
+    "F DVC": "DVC (Academic) Board of Studies",
+    "DVC (Academic) Board of Studies": "F DVC"
+
+}
