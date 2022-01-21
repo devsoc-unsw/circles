@@ -11,7 +11,6 @@ Within 'contentLets', relevant info includes:
  - data (see below)
  - CurriculumStructure (see below)
  - additionalInfo
- - hb_enrolment_rules (i.e. constraints such as a maturity rule)
  
 Step in the data's journey:
     [   ] Scrape raw data (programscraper.py)
@@ -19,23 +18,25 @@ Step in the data's journey:
     [   ] Customise formatted data (programProcessing.py)
 """
 import json
-import data.utility.dataHelpers
+from data.utility import dataHelpers
 
 
 def format_data():
     # Get raw data
-    raw_content = dataHelpers.read_data("programsRaw.json")
+    raw_content = dataHelpers.read_data("data/scrapers/programsPureRaw.json")
+    # Initialise formatted data
     programsFormatted = {}
     for program in raw_content:
-        # Load and process strings for further manipulation
+        # Load summary infomation about program
         data = json.loads(program["data"]) 
+        # Load infomation about program structure
         curriculumStructure = json.loads(program["CurriculumStructure"])
 
         # Setup dictionary and add data
         courseCode = initialiseProgram(programsFormatted, data)
         addData(programsFormatted, courseCode, program, data, curriculumStructure)
 
-    dataHelpers.write_data(programsFormatted, 'programsFormattedRaw.json')
+    dataHelpers.write_data(programsFormatted, 'data/scrapers/programsFormattedRaw.json')
 
 
 '''
@@ -52,7 +53,9 @@ def initialiseProgram(programsFormatted, data):
         'duration': None,
         'CurriculumStructure': []
     }
+    # Get course code
     courseCode = data['course_code']
+    # Map course code to content
     programsFormatted[courseCode] = content
     return courseCode
 
@@ -60,14 +63,16 @@ def initialiseProgram(programsFormatted, data):
 Assign values to dictionary
 '''
 def addData(programsFormatted, courseCode, program, data, curriculumStructure):
+    # Get program info via code
     prog = programsFormatted[courseCode]
-    
+    # Assign summary infomation from raw data
     prog['title'] = data.get('title')
     prog['code'] = data.get('course_code')
     prog['UOC'] = data.get('credit_points')
     prog['studyLevel'] = program.get('studyLevelURL')
     prog['faculty'] = data['parent_academic_org']['value']
     prog['duration'] = data.get('full_time_duration')  
+    # Assign infomation about program cirriculum
     format_curriculum(prog['CurriculumStructure'], curriculumStructure["container"])
 
 
@@ -99,7 +104,7 @@ def format_curriculum(CurriculumStructure, currcontainer):
                 item["academic_item_type"] = course.get( "academic_item_type")
                 item["parent_record"] = course["parent_record"]["value"]
                 info["relationship"].append(item)
-
+        # Otherwise if it is in 'dynamic_relationship' key
         elif "dynamic_relationship" in item and item["dynamic_relationship"] != []:
             for course in item["dynamic_relationship"]:
                 item = {}
@@ -111,6 +116,7 @@ def format_curriculum(CurriculumStructure, currcontainer):
             # Course info in deeper container level, so recurse and repeat
             format_curriculum(info["container"], item["container"])
         
+        # Append data to cirrculum structure
         CurriculumStructure.append(info)
 
     return CurriculumStructure

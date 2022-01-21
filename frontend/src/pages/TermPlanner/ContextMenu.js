@@ -1,32 +1,31 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Menu, Item, Separator, theme } from "react-contexify";
+import { Menu, Item, theme } from "react-contexify";
 import { plannerActions } from "../../actions/plannerActions";
 import { courseTabActions } from "../../actions/courseTabActions";
 import "react-contexify/dist/ReactContexify.css";
 import { useHistory } from "react-router-dom";
-import { updateWarnings } from "./DragDropLogic";
-import { FaCalendarTimes, FaTrash, FaInfoCircle, FaInfo } from "react-icons/fa";
+import { updateAllWarnings } from "./ValidateTermPlanner";
+import { FaCalendarTimes, FaTrash, FaInfoCircle } from "react-icons/fa";
 
 const ContextMenu = ({ code, plannedFor }) => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { years, startYear, courses } = useSelector((state) => {
+  const { years, startYear, courses, completedTerms } = useSelector((state) => {
     return state.planner;
   });
 
   const handleDelete = () => {
-    // console.log(code);
     dispatch(plannerActions("REMOVE_COURSE", code));
     console.log(courses);
-    updateWarnings(years, startYear, courses, dispatch);
+    updateAllWarnings(dispatch, { years, startYear, completedTerms });
   };
 
   const handleUnschedule = () => {
     // console.log(code);
     dispatch(plannerActions("UNSCHEDULE", code));
     console.log(courses);
-    updateWarnings(years, startYear, courses, dispatch);
+    updateAllWarnings(dispatch, { years, startYear, completedTerms });
   };
   const id = `${code}-context`;
 

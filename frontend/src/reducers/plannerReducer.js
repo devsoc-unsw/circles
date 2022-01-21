@@ -4,88 +4,150 @@ const plannedCourses = new Map();
 dummyMap.set("COMP2521", {
   title: "Data Structures and Algorithms",
   type: "Core",
-  termsOffered: ["t0", "t1", "t2", "t3"],
+  termsOffered: ["T0", "T1", "T2", "T3"],
   prereqs: "COMP1511 && (COMP1521 || DEFAULT3000)",
   plannedFor: null,
   warning: false,
 });
 dummyMap.set("COMP1521", {
   title: "Computer Systems Fundamentals",
-  type: "Elective",
-  termsOffered: ["t0", "t1", "t2"],
+  type: "Core",
+  termsOffered: ["T0", "T1", "T2"],
   prereqs: "COMP1511",
-  plannedFor: "2022t2",
+  plannedFor: null,
   warning: false,
 });
 dummyMap.set("COMP1511", {
   title: "Programming Fundamentals",
   type: "Core",
-  termsOffered: ["t0", "t1", "t2", "t3"],
+  termsOffered: ["T0", "T1", "T2", "T3"],
   prereqs: "",
-  plannedFor: "2021t3",
+  plannedFor: null,
   warning: false,
 });
 dummyMap.set("COMP6080", {
   title: "Web Front-End Programming",
+  type: "Elective",
+  termsOffered: ["T1", "T3"],
+  prereqs: "COMP1531 && (COMP2521 || COMP1927)",
+  plannedFor: null,
+  warning: false,
+});
+dummyMap.set("ARTS1240", {
+  title: "Environment and Society",
   type: "General Education",
-  termsOffered: ["t1", "t3"],
-  prereqs: "COMP1521 && (COMP2521 || COMP1927)",
-  plannedFor: "2022t3",
+  termsOffered: ["T0", "T1", "T2"],
+  prereqs: "",
+  plannedFor: null,
   warning: false,
 });
 
 const generateEmptyYears = (nYears) => {
   let res = [];
   for (let i = 0; i < nYears; ++i) {
-    const year = { t0: [], t1: [], t2: [], t3: [] };
+    const year = { T0: [], T1: [], T2: [], T3: [] };
     res.push(year);
   }
   return res;
 };
 
-const initialState = {
-  unplanned: ["COMP2521"],
+let initialState = {
+  unplanned: ["COMP1511", "COMP1521", "COMP2521", "ARTS1240", "COMP6080"],
   startYear: parseInt(new Date().getFullYear()),
   numYears: 3,
   isSummerEnabled: false,
   years: [
-    { t0: [], t1: [], t2: [], t3: ["COMP1511"] },
-    { t0: [], t1: [], t2: ["COMP1521"], t3: [] },
-    { t0: [], t1: [], t2: [], t3: ["COMP6080"] },
+    { T0: [], T1: [], T2: [], T3: [] },
+    { T0: [], T1: [], T2: [], T3: [] },
+    { T0: [], T1: [], T2: [], T3: [] },
   ],
   courses: dummyMap,
   plannedCourses: plannedCourses,
   completedTerms: new Map(),
 };
+
+let stateCopy = "";
+
+const setInLocalStorage = (state) => {
+  let stateCopy = Object.assign({}, state);
+  const jsonCourses = Array.from(state.courses.entries());
+  const jsonPlannedCourses = Array.from(state.plannedCourses.entries());
+  const jsonCompletedTerms = Array.from(state.completedTerms.entries());
+  stateCopy["courses"] = jsonCourses;
+  stateCopy["plannedCourses"] = jsonPlannedCourses;
+  stateCopy["completedTerms"] = jsonCompletedTerms;
+  localStorage.setItem("planner", JSON.stringify(stateCopy));
+};
+
+const extractFromLocalStorage = (planner) => {
+  let plannerCpy = Object.assign({}, planner);
+  const coursesCpy = new Map(planner.courses);
+  const plannedCoursesCpy = new Map(planner.plannedCourses);
+  const completedTermsCpy = new Map(planner.completedTerms);
+  plannerCpy.courses = coursesCpy;
+  plannerCpy.plannerCourses = plannedCoursesCpy;
+  plannerCpy.completedTerms = completedTermsCpy;
+  return plannerCpy;
+};
+
+const planner = JSON.parse(localStorage.getItem("planner"));
+if (planner) initialState = extractFromLocalStorage(planner);
+
 const plannerReducer = (state = initialState, action) => {
   console.log(state.startYear, state.numYears);
   switch (action.type) {
     case "ADD_TO_UNPLANNED":
       const { courseCode, courseData } = action.payload;
+
       // Add course data to courses
       if (!state.courses[courseCode]) {
         state.courses.set(courseCode, courseData);
       }
 
       // Append course code onto unplanned
-      state.unplanned.join(courseCode);
+
+      state.unplanned.push(courseCode);
       return state;
+
     case "ADD_CORE_COURSES":
-      return {
+      stateCopy = {
         ...state,
         courses: new Map([...state.courses, ...action.payload]),
       };
+      setInLocalStorage(stateCopy);
+      return stateCopy;
+
+    case "SET_NUM_YEARS":
+      stateCopy = { ...state, numYears: action.payload };
+      setInLocalStorage(stateCopy);
+      return stateCopy;
+
     case "SET_YEARS":
-      return { ...state, numYears: action.payload };
-    case "SET_START_YEAR":
-      return { ...state, startYear: action.payload };
+      stateCopy = { ...state, years: action.payload };
+      setInLocalStorage(stateCopy);
+      return stateCopy;
+
+    case "TOGGLE_WARNINGS":
+      let coursesCpy = new Map(state.courses);
+      for (const course in action.payload) {
+        // coursesCpy.set(course, !data.courses_state[course].unlocked);
+        coursesCpy.get(course).warning = !action.payload[course].unlocked;
+      }
+      return { ...state, courses: coursesCpy };
+
     case "SET_UNPLANNED":
       let newUnplanned = state.unplanned.filter(
         (course) => course !== action.payload
       );
-      return { ...state, unplanned: newUnplanned };
+      console.log(newUnplanned);
+      stateCopy = { ...state, unplanned: newUnplanned };
+      setInLocalStorage(stateCopy);
+      return stateCopy;
+
     case "REMOVE_ALL_UNPLANNED":
-      return { ...state, unplanned: action.payload };
+      stateCopy = { ...state, unplanned: action.payload };
+      setInLocalStorage(stateCopy);
+      return stateCopy;
 
     case "REMOVE_COURSE":
       // Remove courses from years and courses
@@ -105,47 +167,47 @@ const plannerReducer = (state = initialState, action) => {
         newYear[term] = newTerm;
         const newYears = new Object(state.years);
         newYears[yearIndex] = newYear;
-        return {
+        stateCopy = {
           ...state,
           years: newYears,
           courses: newCourses,
         };
+        setInLocalStorage(stateCopy);
+        return stateCopy;
       } else {
-        return {
+        stateCopy = {
           ...state,
           unplanned: state.unplanned.filter(
             (course) => course !== action.payload
           ),
           courses: newCourses,
         };
+        setInLocalStorage(stateCopy);
+        return stateCopy;
       }
     case "REMOVE_ALL_COURSES":
       const newYears = generateEmptyYears(state.numYears);
       const emptyMap = new Map();
-      return {
+
+      stateCopy = {
         ...state,
         years: newYears,
         courses: emptyMap,
         unplanned: [],
       };
-
-    // case "UPDATE_PLANNED_COURSES":
-    // 	const { course, term, warning } = action.payload;
-    // 	console.log(term)
-    // 	const plannedClone = new Map(state.plannedCourses).set(course, {
-    // 		term: term,
-    // 		warning: warning,
-    // 	});
-    // 	return { ...state, plannedCourses: plannedClone };
+      setInLocalStorage(stateCopy);
+      return stateCopy;
 
     case "MOVE_COURSE":
       const { course, term, warning } = action.payload;
       const courseInfo = state.courses.get(course);
       courseInfo["plannedFor"] = term;
-      courseInfo["warning"] = warning;
+      // courseInfo["warning"] = warning;
       let updatedCourses = new Map(state.courses).set(course, courseInfo);
+      stateCopy = { ...state, courses: updatedCourses };
+      setInLocalStorage(stateCopy);
+      return stateCopy;
 
-      return { ...state, courses: updatedCourses };
     case "UNSCHEDULE":
       let updatedUnplanned = state.unplanned;
       updatedUnplanned.push(action.payload);
@@ -166,21 +228,103 @@ const plannerReducer = (state = initialState, action) => {
       nCourses.get(action.payload).plannedFor = null;
       nCourses.get(action.payload).warning = false;
 
-      return {
+      stateCopy = {
         ...state,
         unplanned: updatedUnplanned,
-        // years: nYears,
-        // courses: nCourses,
       };
+      setInLocalStorage(stateCopy);
+      return stateCopy;
+
     case "TOGGLE_SUMMER":
-      return { ...state, isSummerEnabled: !state.isSummerEnabled };
+      stateCopy = { ...state, isSummerEnabled: !state.isSummerEnabled };
+      setInLocalStorage(stateCopy);
+      return stateCopy;
+
     case "TOGGLE_TERM_COMPLETE":
       const clonedCompletedTerms = new Map(state.completedTerms);
       let isCompleted = clonedCompletedTerms.get(action.payload);
       // if it doesnt exist in map, then the term is not completed
       if (isCompleted == null) isCompleted = false;
       clonedCompletedTerms.set(action.payload, !isCompleted);
-      return { ...state, completedTerms: clonedCompletedTerms };
+
+      stateCopy = { ...state, completedTerms: clonedCompletedTerms };
+      setInLocalStorage(stateCopy);
+      return stateCopy;
+
+    case "UPDATE_START_YEAR":
+      const currEndYear = state.startYear + state.numYears - 1;
+      const newStartYear = Number(action.payload);
+      let updatedYears = [];
+      let updatedUnplan = [...state.unplanned];
+
+      for (let i = 0; i < state.numYears; i++) {
+        const yearVisiting = i + newStartYear;
+        if (yearVisiting <= currEndYear && yearVisiting >= state.startYear) {
+          // add existing year
+          updatedYears.push(state.years[yearVisiting - state.startYear]);
+        } else {
+          // add empty year
+          updatedYears.push({ T0: [], T1: [], T2: [], T3: [] });
+          // unschedule the courses that are in the year which will be removed
+          const yearToBeRemoved = state.years[state.numYears - i - 1];
+          for (let term in yearToBeRemoved) {
+            yearToBeRemoved[term].forEach((course) => {
+              updatedUnplan.push(course);
+              state.courses.get(course).plannedFor = null;
+              state.courses.get(course).warning = false;
+            });
+          }
+        }
+      }
+      stateCopy = {
+        ...state,
+        startYear: newStartYear,
+        years: updatedYears,
+        unplanned: updatedUnplan,
+      };
+      setInLocalStorage(stateCopy);
+      return stateCopy;
+
+    case "SET_DEGREE_LENGTH":
+      const newNumYears = action.payload;
+      let dupYears = new Object(state.years);
+      let newUnplan = [...state.unplanned];
+      if (newNumYears === state.numYears) return state;
+      else if (newNumYears > state.numYears) {
+        // add empty years to the end
+        const diff = newNumYears - state.numYears;
+        for (let i = 0; i < diff; i++) {
+          dupYears.push({ T0: [], T1: [], T2: [], T3: [] });
+        }
+      } else {
+        // remove extra years
+        for (let i = state.numYears; i >= 1; i--) {
+          if (i > newNumYears) {
+            // unschedule  courses in year
+            const yearToBeRemoved = state.years[i - 1];
+            for (let term in yearToBeRemoved) {
+              yearToBeRemoved[term].forEach((course) => {
+                newUnplan.push(course);
+                state.courses.get(course).plannedFor = null;
+                state.courses.get(course).warning = false;
+              });
+            }
+            // remove year
+            dupYears.splice(i - 1, 1);
+          }
+        }
+      }
+      stateCopy = {
+        ...state,
+        years: dupYears,
+        numYears: newNumYears,
+        unplanned: newUnplan,
+      };
+      setInLocalStorage(stateCopy);
+      return stateCopy;
+    case "LOAD_PLANNER":
+      const prevSessionState = action.payload;
+      return prevSessionState;
     default:
       return state;
   }

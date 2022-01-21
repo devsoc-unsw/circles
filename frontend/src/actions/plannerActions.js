@@ -16,9 +16,14 @@ export const plannerActions = (action, payload) => {
         type: action,
         payload,
       };
-    case "SET_YEAR_START":
+    case "SET_START_YEAR":
       return {
-        type: "SET_YEAR_START",
+        type: "SET_START_YEAR",
+        payload: payload,
+      };
+    case "SET_NUM_YEARS":
+      return {
+        type: "SET_NUM_YEARS",
         payload: payload,
       };
     case "SET_DEGREE_LENGTH":
@@ -49,6 +54,10 @@ export const plannerActions = (action, payload) => {
     case "SET_START_YEAR":
       return {
         type: "SET_START_YEAR",
+      };
+    case "TOGGLE_WARNINGS":
+      return {
+        type: action,
         payload: payload,
       };
     case "UPDATE_PLANNED_COURSES":
@@ -71,6 +80,16 @@ export const plannerActions = (action, payload) => {
         type: action,
       };
     case "TOGGLE_TERM_COMPLETE":
+      return {
+        type: action,
+        payload: payload,
+      };
+    case "UPDATE_START_YEAR":
+      return {
+        type: action,
+        payload: payload,
+      };
+    case "LOAD_PLANNER":
       return {
         type: action,
         payload: payload,

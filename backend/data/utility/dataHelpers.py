@@ -21,11 +21,13 @@ def write_data(data, file_name):
     Writes data to file with given file_name
     """
     if os.path.isfile(file_name):
-        res = input("File name already exists. Enter 'y' to overwrite or 'n' to cancel: ")
-        if res.lower() != "y":
-            print("File not overwritten.")
-            sys.exit(1)
-
-    with open(file_name, "w") as OUTPUT_FILE:
-        json.dump(data, OUTPUT_FILE)
-        print(f"{file_name} successfully created")
+        res = input(f"File {file_name} already exists. Enter 'y' to overwrite or 'n' to cancel: ")
+        if res.lower() == "y":
+            with open(file_name, "w") as OUTPUT_FILE:
+                json.dump(data, OUTPUT_FILE)
+                print(f"{file_name} successfully created")
+        else:
+            print(f"File {file_name} not overwritten.")
+    else:
+        print(f"File {file_name} not found")
+        sys.exit(1)
