@@ -57,7 +57,7 @@ def ACTL_2101():
     """
     "original": "Prerequisite:Enrolment in Program 3587<br/><br/>",
 
-    "processed": "Enrolment in Program 3587"    
+    "processed": "Enrolment in Program 3587"
     """
     return "3587"
 

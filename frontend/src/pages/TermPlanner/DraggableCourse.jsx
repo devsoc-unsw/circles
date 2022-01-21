@@ -50,7 +50,7 @@ function DraggableCourse({ code, index }) {
             className={`course ${isSummerEnabled && "summerViewCourse"} 
 			${isDragDisabled && " dragDisabledCourse"} 
 			${isDragDisabled && warning && " disabledWarning"}
-			${warning && " warning"}`}
+			${warning === true && " warning"}`}
             data-tip
             data-for={code}
             id={code}

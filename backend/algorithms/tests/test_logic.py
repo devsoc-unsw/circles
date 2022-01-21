@@ -4,8 +4,9 @@ ensure our algorithms work as expected.
 If these tests work, we can expect that the core logic works.
 '''
 
-from conditions import *
-import pytest
+from algorithms.create import create_condition
+from algorithms.objects.conditions import *
+from algorithms.objects.user import User
 
 
 def create_student_3707_COMPA1():
@@ -405,3 +406,107 @@ def test_level_course_condition():
     assert (l1_math_6uoc_cond.is_unlocked(user))["result"] == True
     assert (l2_math_12uoc_cond.is_unlocked(user))["result"] == True
     assert (l2_math_18uoc_cond.is_unlocked(user))["result"] == False
+
+
+def test_exclusion():
+    '''Testing that you are properly blocked from taking exclusion courses'''
+    user = create_student_3707_COMPA1()
+    user.add_courses({
+        "COMP1511": (6, None),
+        "COMP1521": (6, None),
+    })
+
+    # Excludes COMP1511
+    comp1010_cond = create_condition(["(", ")"], "COMP1010")
+    assert (comp1010_cond.is_unlocked(user))["result"] == False
+
+    # Excludes COMP1521
+    dpst1092_cond = create_condition(["(", "COMP1511", ")"], "DPST1092")
+    assert (dpst1092_cond.is_unlocked(user))["result"] == False
+
+    # ECON1101 should exclude 3155 and 3521
+    user1 = User()
+    user1.add_program("3155")
+    econ1011_cond = create_condition(["(", ")"], "ECON1101")
+    assert (econ1011_cond.is_unlocked(user1))["result"] == False
+    
+    # TODO: Test exclusion for other types
+
+
+def test_coreq_condition():
+    """Testing corequisite conditions"""
+    user = create_student_3707_COMPA1()
+    user.add_courses({
+        "COMP1511": (6, None),
+        "COMP1521": (6, None),
+    })
+    user.add_current_course("COMP1531")
+
+    # Testing simple co-requisite conditions
+    coreq_cond1 = create_condition(["(", "[", "COMP1531", "]", ")"])
+    coreq_cond2 = create_condition(["(", "[", "COMP1511", "]", ")"])
+    coreq_cond3 = create_condition(["(", "[", "COMP1521", "]", ")"])
+    coreq_cond4 = create_condition(["(", "[", "COMP1541", "]", ")"])
+
+    assert (coreq_cond1.is_unlocked(user))["result"] == True
+    assert (coreq_cond2.is_unlocked(user))["result"] == True
+    assert (coreq_cond3.is_unlocked(user))["result"] == True
+    assert (coreq_cond4.is_unlocked(user))["result"] == False
+
+    user.add_current_course("COMP1541")
+
+    # Testing more complex co-requisite conditions
+    complex_coreq_cond1 = create_condition(["(", "[", "COMP1521", "&&", "COMP1531", "&&", "COMP1541", "]", ")"])
+    complex_coreq_cond2 = create_condition(["(", "[", "COMP1511", "||", "COMP1551", "]", ")"])
+    complex_coreq_cond3 = create_condition(["(", "COMP1511", "&&", "[", "COMP1531", "&&", "COMP1541", "]", "&&", "COMP1521", ")"])
+    complex_coreq_cond4 = create_condition(["(", "[", "COMP1521", "&&", "COMP1531", "&&", "COMP9999", "]", ")"])
+    complex_coreq_cond5 = create_condition(["(", "[", "COMP7777", "||", "COMP1511", "||", "COMP9999", "]", ")"])
+    complex_coreq_cond6 = create_condition(["(", "[", "COMP7777", "||", "COMP8888", "||", "COMP9999", "]", ")"])
+
+    assert (complex_coreq_cond1.is_unlocked(user))["result"] == True
+    assert (complex_coreq_cond2.is_unlocked(user))["result"] == True
+    assert (complex_coreq_cond3.is_unlocked(user))["result"] == True
+    assert (complex_coreq_cond4.is_unlocked(user))["result"] == False
+    assert (complex_coreq_cond5.is_unlocked(user))["result"] == True
+    assert (complex_coreq_cond6.is_unlocked(user))["result"] == False
+
+
+def test_school_condition():
+    """Testing school conditions such as 12UOC in S Comp"""
+    user = create_student_3707_COMPA1()
+    user.add_courses({
+        "COMP1511": (6, None),
+        "COMP1521": (6, None),
+    })
+
+    comp_12uoc_cond = create_condition(["(", "12UOC", "in", "S", "Comp", ")"])
+    comp_18uoc_cond = create_condition(["(", "18UOC", "in", "S", "Comp", ")"])
+
+    assert (comp_12uoc_cond.is_unlocked(user))["result"] == True
+    assert (comp_18uoc_cond.is_unlocked(user))["result"] == False
+
+def test_faculty_condition():
+    """Testing faculty conditions such as 12UOC in F Engineering"""
+    user = create_student_3707_COMPA1()
+    user.add_courses({
+        "COMP1511": (6, None),
+        "COMP1521": (6, None),
+    })
+
+    comp_12uoc_cond = create_condition(["(", "12UOC", "in", "F", "Engineering", ")"])
+    comp_18uoc_cond = create_condition(["(", "18UOC", "in", "F", "Engineering", ")"])
+
+    assert (comp_12uoc_cond.is_unlocked(user))["result"] == True
+    assert (comp_18uoc_cond.is_unlocked(user))["result"] == False
+
+def test_program_type():
+    """Testing program type conditions such as ACTL#
+    Refer to the cache programMappings.json
+    """
+    comp_user = create_student_3707_COMPA1()
+    actl_user = User()
+    actl_user.add_program("3154")
+
+    actl_program_cond = create_condition(["(", "ACTL#", ")"], "COMP1511")
+    assert (actl_program_cond.is_unlocked(comp_user))["result"] == False
+    assert (actl_program_cond.is_unlocked(actl_user))["result"] == True

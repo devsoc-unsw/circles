@@ -1,60 +1,14 @@
 from fastapi import APIRouter
 from server.database import coursesCOL
 from fastapi.responses import JSONResponse
-from fastapi.encoders import jsonable_encoder
-from pydantic import BaseModel
 
+from server.routers.model import *
+# TODO: I hate this file - talk to frontend team to fetch a course as a whole instead of piecemeal.
 router = APIRouter(
     prefix='/courses',
     tags=['courses'],
     responses={404: {"description": "Not found"}}
 )
-
-class message(BaseModel):
-    message: str
-
-class course(BaseModel):
-    title: str
-    code: str
-    UOC: int
-    level: int
-    description: str
-    equivalents: dict
-    exclusions: dict
-    path_to: dict
-    terms: list
-    gen_ed: int
-    path_from: dict
-
-class title(BaseModel):
-    title: str
-
-class UOC(BaseModel):
-    UOC: int
-
-class level(BaseModel):
-    level: int
-
-class equivalent(BaseModel):
-    equivalent: dict
-
-class exclusions(BaseModel):
-    exclusions: dict
-
-class pathTo(BaseModel):
-    path_to: dict
-
-class pathFrom(BaseModel):
-    path_from: dict
-
-class terms(BaseModel):
-    terms: list
-
-class description(BaseModel):
-    description: str
-
-class isGenEd(BaseModel):
-    gen_ed: bool
 
 @router.get("/")
 def courses_index():
@@ -120,12 +74,8 @@ def getCourses(code):
             }
 )
 def getTitle(code):
-    query = { "code" : code }
-    result = coursesCOL.find_one(query)
-    if result:
-        return { "title" : result['title'] }
-    else:
-        return JSONResponse(status_code=404, content={"message" : "Course not found"})
+    result = coursesCOL.find_one({ "code" : code })
+    return { "title" : result['title'] } if result else JSONResponse(status_code=404, content={"message" : "Course not found"})
 
 @router.get("/getUOC/{code}", response_model=UOC,
             responses={

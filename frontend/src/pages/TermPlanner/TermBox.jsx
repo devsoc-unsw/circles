@@ -7,7 +7,7 @@ import { RiCheckboxCircleFill } from "react-icons/ri";
 import { plannerActions } from "../../actions/plannerActions";
 
 function TermBox({ name, courses, termsOffered, isDragging }) {
-  const term = name.match(/t[0-3]/)[0];
+  const term = name.match(/T[0-3]/)[0];
 
   const { isSummerEnabled, completedTerms } = useSelector((state) => {
     return state.planner;

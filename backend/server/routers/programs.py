@@ -1,7 +1,6 @@
 from fastapi import APIRouter
 from server.database import programsCOL
-from fastapi.responses import JSONResponse
-from fastapi.encoders import jsonable_encoder
+from server.routers.model import flexEd
 
 router = APIRouter(
     prefix='/programs',
@@ -9,7 +8,6 @@ router = APIRouter(
     responses={404: {"description": "Not found"}}
 )
 
-flexEd = ['3778']
 
 @router.get("/")
 def specialisations_index():

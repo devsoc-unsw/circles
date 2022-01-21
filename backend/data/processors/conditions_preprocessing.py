@@ -44,6 +44,7 @@ def preprocess_conditions():
         processed = convert_WAM(processed)
         processed = convert_GRADE(processed)
         processed = convert_level(processed)
+        processed = convert_program_type(processed)
         processed = convert_fslash(processed)
         processed = convert_including(processed)
         processed = convert_AND_OR(processed)
@@ -55,6 +56,11 @@ def preprocess_conditions():
 
         # Phase 4: Final touches
         processed = strip_spaces(processed)
+        processed = strip_bracket_spaces(processed)
+
+        # Phase 5: Common patterns
+        processed = uoc_in_business_school(processed)
+        processed = l2_math_courses(processed)
 
         conditions["processed"] = processed
 
@@ -120,7 +126,7 @@ def delete_extraneous_phrasing(processed):
 
     # Remove completion language
     completion_text = ["completion of", "must successfully complete",
-                       "must have completed", "completing", "completed"]
+                       "must have completed", "completing", "completed", "a pass in"]
     for text in completion_text:
         processed = re.sub(text, "", processed, flags=re.IGNORECASE)
 
@@ -152,9 +158,8 @@ def convert_square_brackets(processed):
 def convert_UOC(processed):
     """ Converts to XXUOC """
     # Converts unit(s) of credit(s) to UOC and removes spacing
-    processed = re.sub(r'\s?units? of credits?', "UOC",
+    processed = re.sub(r'\s?units? (of credits?|completed?)', "UOC",
                        processed, flags=re.IGNORECASE)
-
     # Places UOC right next to the numbers
     processed = re.sub("\s?UOC", "UOC", processed, flags=re.IGNORECASE)
 
@@ -165,7 +170,7 @@ def convert_UOC(processed):
                        processed, flags=re.IGNORECASE)
 
     # Remove 'minimum' since it is implied
-    processed = re.sub(r"minimum (\d\dUOC)", r"\1",
+    processed = re.sub(r"minimum (\d+UOC)", r"\1",
                        processed, flags=re.IGNORECASE)
 
     return processed
@@ -202,8 +207,8 @@ def convert_GRADE(processed):
     courses'''
 
     # Converts "mark of at least XX to XXGRADE"
-    processed = re.sub(r"(a )?mark of at least (\d\d)",
-                       r"\2GRADE", processed, flags=re.IGNORECASE)
+    processed = re.sub(r"(a )?(minimum )?mark of (at least )?(\d\d)( or (greater|above))?",
+                       r"\4GRADE", processed, flags=re.IGNORECASE)
 
     # Further handle CR and DN. These usually follow a course code
     # MATH1141 (CR) ==> 65WAM MATH1141
@@ -220,6 +225,13 @@ def convert_level(processed):
     """ Converts level X to LX """
     return re.sub(r"level (\d)", r"L\1", processed, flags=re.IGNORECASE)
 
+def convert_program_type(processed):
+    """ Converts complex phrases into something of the form CODE# for specifying a program type """
+    # TODO: make this more generic
+    processed = map_word_to_program_type(processed, r"actuarial( studies)?", "ACTL#")
+    processed = map_word_to_program_type(processed, r"business", "BUSN#")
+    processed = map_word_to_program_type(processed, r"commerce", "COMM#")
+    return processed
 
 def convert_fslash(processed):
     """ Converts forward slashes to || and surrounds in brackets """
@@ -245,6 +257,7 @@ def convert_including(processed):
 def convert_AND_OR(processed):
     """ Convert 'and' to '&&' and 'or' to '||' """
     processed = re.sub(" and ", " && ", processed, flags=re.IGNORECASE)
+    processed = re.sub(" plus ", " && ", processed, flags=re.IGNORECASE)
     processed = re.sub(" or ", " || ", processed, flags=re.IGNORECASE)
     return processed
 
@@ -313,6 +326,14 @@ def strip_spaces(processed):
     # Get rid of white spaces at start and end of word
     return processed.strip()
 
+
+def strip_bracket_spaces(processed):
+    """Strips spaces immediately before and after brackets"""
+    processed = re.sub(r'([([]) ', r'\1', processed)
+    processed = re.sub(r' ([)]])', r'\1', processed)
+
+    return processed
+
 # '''Converts majors and minors into their respective specialisation codes.
 # E.g. Bsc COMP major '''
 # def
@@ -327,6 +348,25 @@ def strip_spaces(processed):
 # def surround_brackets(processed):
 #     return "(" + processed + ")"
 
+
+# -----------------------------------------------------------------------------
+# Phase 4: Common patterns
+# -------------------
+def uoc_in_business_school(processed):
+    '''Converts \d+UOC offered by the UNSW Business School to \d+UOC in S Business'''
+    processed = re.sub(
+        r'(\d+UOC) offered by the UNSW Business School', r'\1 in S Business', processed)
+    return processed
+
+def l2_math_courses(processed):
+    '''Converts L2 Maths courses to L@ MATH'''
+    processed = re.sub(r'L2 Maths? courses', r'L2 MATH', processed, flags=re.IGNORECASE)
+    processed = re.sub(r'L2 Mathematics? courses', r'L2 MATH', processed, flags=re.IGNORECASE)
+    return processed
+
+def map_word_to_program_type(processed, regex_word, type):
+    return re.sub(rf'in {regex_word} (programs?|single or dual degrees?)',
+            type,  processed, flags=re.IGNORECASE) # hard to capture a generic case?
 
 if __name__ == "__main__":
     preprocess_conditions()

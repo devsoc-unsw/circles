@@ -6,6 +6,7 @@ body {
 .content {
   @small: ~"(max-width: 1400px)";
 
+
   .plannerContainer {
     display: flex;
     // align-items: center;
@@ -111,7 +112,7 @@ body {
   .panel {
     max-height: 30em;
     margin-bottom: 1em;
-    overflow-y: scroll;
+    overflow-y: auto;
     padding-right: 0.7em;
   }
   .skeletonTerm {
@@ -235,9 +236,15 @@ body {
   .optionsHeader {
     display: flex;
   }
+
+
+  .ant-collapse-header {
+    color: white !important;
+  }
 }
 
 .dark {
+
   .termBox {
     background-color: #242728;
   }
@@ -334,7 +341,7 @@ body {
   }
 
   .settingsButton {
-    background-color: #161818;
+    background-color: #0f1010;
     &:hover {
       background-color: #242728;
     }
@@ -350,6 +357,9 @@ body {
   .settingsIcon {
     color: #3b3e3e;
   }
+
+
+
 }
 
 .light {
@@ -382,17 +392,7 @@ body {
     // background-color: none;
   }
 
-  .helpNotif {
-    background-color: #9685f3;
-    color: #ffffff;
-    .ant-notification-close-icon {
-      color: #ffffff;
-    }
 
-    .anticon-info-circle {
-      color: #ffffff;
-    }
-  }
   .panel {
     scrollbar-width: thin;
     scrollbar-color: #d9d9d9 white;

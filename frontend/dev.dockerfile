@@ -1,8 +1,5 @@
-# Grab the latest Node base image
-FROM node:12.22.6
-
-# Install serve
-RUN npm install -g serve
+# Node v17 causing digital envelope routines error as at Dec '21.
+FROM node:16.13.0
 
 # Set the current working directory inside the container
 WORKDIR /client
@@ -19,4 +16,4 @@ COPY . .
 EXPOSE 3000
 
 # Run the server
-ENTRYPOINT [ "/client/scripts/deploy.sh" ]
+ENTRYPOINT [ "npm", "start" ]
