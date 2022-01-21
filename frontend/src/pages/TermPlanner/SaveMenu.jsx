@@ -1,11 +1,8 @@
 import React from "react";
 import { plannerActions } from "../../actions/plannerActions";
 import { Typography, DatePicker, Select, Switch, Divider, Button } from "antd";
-import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
-import { useSelector, useDispatch } from "react-redux";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
-import { AiOutlineFileImage, AiOutlineFilePdf } from "react-icons/ai";
 import {
   exportComponentAsJPEG,
   exportComponentAsPDF,
