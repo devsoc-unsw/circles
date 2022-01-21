@@ -1,33 +1,9 @@
-<<<<<<< HEAD
 import React from "react";
 import { useSelector } from "react-redux";
-=======
-import React, { useEffect } from "react";
-import { updateDegreeLength } from "../../actions/userAction";
-import { plannerActions } from "../../actions/plannerActions";
-import {
-  Typography,
-  Drawer,
-  Collapse,
-  Alert,
-  DatePicker,
-  Select,
-  Switch,
-  Divider,
-} from "antd";
-import { Droppable } from "react-beautiful-dnd";
-import DraggableCourse from "./DraggableCourse";
-import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
-import { useSelector, useDispatch } from "react-redux";
->>>>>>> main
 import { IoCogSharp } from "react-icons/io5";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
-<<<<<<< HEAD
-=======
-import { SettingFilled } from "@ant-design/icons";
->>>>>>> main
 import SettingsMenu from "./SettingsMenu";
 
 const SettingsButton = ({ visible, setVisible }) => {
