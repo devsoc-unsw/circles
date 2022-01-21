@@ -39,12 +39,15 @@ const Header = () => {
 
   return (
     <Layout className="header">
-      <div className="logo">
-        <img alt="circles-logo" src={circlesLogo} width="40" height="40" />
-        <Title level={3} style={titleStyles}>
-          Circles
-        </Title>
-      </div>
+      <Link to="">
+        <div className="logo">
+          <img alt="circles-logo" src={circlesLogo} width="40" height="40" />
+          <Title level={3} style={titleStyles}>
+            Circles
+          </Title>
+        </div>
+      </Link>
+
       {isSmall ? (
         <Button
           type="primary"

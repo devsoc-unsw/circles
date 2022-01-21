@@ -6,6 +6,11 @@ export const plannerActions = (action, payload) => {
         type: action,
         payload: payload,
       };
+    case "ADD_TO_PLANNED":
+      return {
+        type: action,
+        payload: payload,
+      };
     case "ADD_CORE_COURSES":
       return {
         type: action,

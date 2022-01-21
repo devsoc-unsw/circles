@@ -95,18 +95,29 @@ if (planner) initialState = extractFromLocalStorage(planner);
 
 const plannerReducer = (state = initialState, action) => {
   console.log(state.startYear, state.numYears);
+  let courseCode, courseData;
   switch (action.type) {
     case "ADD_TO_UNPLANNED":
       const { courseCode, courseData } = action.payload;
-
       // Add course data to courses
       if (!state.courses[courseCode]) {
         state.courses.set(courseCode, courseData);
       }
-
       // Append course code onto unplanned
-
       state.unplanned.push(courseCode);
+      return state;
+
+    case "ADD_TO_PLANNED":
+      const { code, data, position } = action.payload;
+      const [yearNum, termNum] = position;
+      if (!state.courses[code]) {
+        state.courses.set(code, data);
+      }
+
+      console.log(state.courses.get(code));
+      state.years[yearNum][termNum].push(code);
+      // Add course data to courses
+
       return state;
 
     case "ADD_CORE_COURSES":
@@ -153,6 +164,7 @@ const plannerReducer = (state = initialState, action) => {
       // Remove courses from years and courses
       const plannedTerm = state.courses.get(action.payload).plannedFor;
       let newCourses = new Map(state.courses);
+      console.log(newCourses.get(action.payload));
       newCourses.get(action.payload).plannedFor = null;
       newCourses.delete(action.payload);
       Object.assign(state.courses, newCourses);

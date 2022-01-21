@@ -1,11 +1,11 @@
-import React, { useState, useRef, useMemo, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { Select, Spin } from 'antd';
-import { setCourses } from '../../../actions/updateCourses';
-import debounce from 'lodash/debounce';
-import axios from 'axios';
+import React, { useState, useRef, useMemo, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Select, Spin } from "antd";
+import { setCourses } from "../../../actions/updateCourses";
+import debounce from "lodash/debounce";
+import axios from "axios";
 
-const DebounceSelect = ({ fetchOptions, debounceTimeout = 800, ...props }) => {
+const DebounceSelect = ({ fetchOptions, debounceTimeout = 100, ...props }) => {
   const [fetching, setFetching] = useState(false);
   const [options, setOptions] = useState([]);
   const fetchRef = useRef(0);
@@ -21,7 +21,10 @@ const DebounceSelect = ({ fetchOptions, debounceTimeout = 800, ...props }) => {
           // for fetch callback order
           return;
         }
-        const filteredOptions = newOptions.filter(option => option.value.toLowerCase().indexOf(value.toLowerCase()) >= 0);
+        const filteredOptions = newOptions.filter(
+          (option) =>
+            option.value.toLowerCase().indexOf(value.toLowerCase()) >= 0
+        );
         setOptions(filteredOptions);
         setFetching(false);
       });
@@ -41,29 +44,28 @@ const DebounceSelect = ({ fetchOptions, debounceTimeout = 800, ...props }) => {
       options={options}
     />
   );
-} // Usage of DebounceSelect
-
+}; // Usage of DebounceSelect
 
 export default function DebouncingSelect({ setPlannedCourses }) {
   const [value, setValue] = useState([]);
   setPlannedCourses(value);
 
   const dispatch = useDispatch();
-  const courses = useSelector(state => state.updateCourses.courses);
+  const courses = useSelector((state) => state.updateCourses.courses);
 
   useEffect(() => {
     fetchCourses();
   }, []);
 
   const fetchCourses = async () => {
-    const res = await axios.get('http://localhost:3000/courses.json');
+    const res = await axios.get("http://localhost:3000/courses.json");
     dispatch(setCourses(res.data));
-  }
+  };
 
   async function fetchUserList() {
-    return Object.keys(courses).map(course => ({
+    return Object.keys(courses).map((course) => ({
       label: course,
-      value: course
+      value: course,
     }));
   }
 
@@ -76,7 +78,7 @@ export default function DebouncingSelect({ setPlannedCourses }) {
       onChange={(newValue) => {
         setValue(newValue);
       }}
-      style={{ width: '20rem', marginRight: '0.5rem' }}
+      style={{ width: "20rem", marginRight: "0.5rem" }}
     />
   );
 }

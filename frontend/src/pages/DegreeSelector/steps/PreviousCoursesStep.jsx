@@ -1,33 +1,54 @@
 import React from "react";
 import { Tooltip, Typography, Modal, Button } from "antd";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { plannerActions } from "../../../actions/plannerActions";
 import { useHistory } from "react-router-dom";
 import { EditOutlined } from "@ant-design/icons";
 import DebouncingSelect from "./DebouncingSelect";
 import "./steps.less";
+import axios from "axios";
 
 const { Title } = Typography;
 const TermBox = ({ yearIndex, termNo }) => {
-  const planner = useSelector((store) => store.planner.years);
+  const planner = useSelector((store) => store.planner);
   const [open, setOpen] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [courses, setCourses] = React.useState([]);
+  const dispatch = useDispatch();
 
-  const handleSave = () => {
+  const handleSave = async () => {
     setLoading(true);
-    // dispatch
-    // promise.all to get all the information about each added course
-    // If course in store.planner.courses, don't need to fetch
-    //  const data = {
-    //     courseCode: id,
-    //     courseData: {
-    //         title: course.name,
-    //         type: course.type,
-    //         termsOffered: course.terms,
-    //         prereqs
-    //     }
-    // }
-    // dispatch(plannerActions("ADD_TO_UNPLANNED", data))
+    console.log(courses);
+    console.log(yearIndex, termNo);
+
+    try {
+      const courseInfoList = await Promise.all(
+        courses.map((course) =>
+          axios.get(`http://localhost:8000/courses/getCourses/${course.value}`)
+        )
+      );
+      for (let course of courseInfoList) {
+        const info = course.data;
+        const data = {
+          code: info.code,
+          data: {
+            title: info.title,
+            type: "Uncategorised", // TODO: add type
+            termsOffered: info.terms,
+            uoc: info.uoc,
+            plannedFor: `${yearIndex + planner.startYear}${termNo}`,
+            warning: false,
+            prereqs: "",
+          },
+          position: [yearIndex, termNo],
+        };
+        dispatch(plannerActions("ADD_TO_PLANNED", data));
+      }
+    } catch (err) {
+      console.log(err);
+      setLoading(false);
+    }
+
     setTimeout(() => {
       setLoading(false);
       setOpen(false);
@@ -70,8 +91,6 @@ const TermBox = ({ yearIndex, termNo }) => {
           </Button>,
         ]}
       >
-        {/* { planner[yearIndex][termNo].map((course) => <div>{course}</div>) } */}
-        {/* @Gabriella add search here. Show result onclick. and be able to delete */}
         <DebouncingSelect setPlannedCourses={setCourses} />
       </Modal>
     </>
@@ -99,7 +118,7 @@ export const PreviousCoursesStep = () => {
           <div className="steps-grid-item">{parseInt(startYear) + yearNo}</div>
           {[...Array(4)].map((_, termNo) => {
             // Get the courses in the term
-            const term = "t" + termNo.toString();
+            const term = "T" + termNo.toString();
             return <TermBox yearIndex={yearNo} termNo={term} />;
           })}
         </div>
