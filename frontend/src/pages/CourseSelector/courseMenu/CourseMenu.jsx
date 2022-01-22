@@ -43,31 +43,33 @@ export default function CourseMenu() {
       {structure === null ? (
         <Loading />
       ) : (
-        <Menu
-          className={"text"}
-          onClick={() => {}}
-          // style={{ width: '100%'}}
-          defaultSelectedKeys={[]}
-          selectedKeys={[]}
-          defaultOpenKeys={[[...Object.keys(structure)][0]]}
-          mode="inline"
-        >
-          {[...Object.keys(structure)].map((category) => (
-            // Major, Minor, GeneralX
-            <SubMenu key={category} title={category}>
-              {/* Business core, Flexible core etc */}
-              {Object.keys(structure[category]).map((subCategory) => (
-                <Menu.ItemGroup key={subCategory} title={subCategory}>
-                  {Object.keys(structure[category][subCategory]["courses"]).map(
-                    (courseCode) => (
+        <>
+          <Menu
+            className={"text"}
+            onClick={() => {}}
+            // style={{ width: '100%'}}
+            defaultSelectedKeys={[]}
+            selectedKeys={[]}
+            defaultOpenKeys={[[...Object.keys(structure)][0]]}
+            mode="inline"
+          >
+            {[...Object.keys(structure)].map((category) => (
+              // Major, Minor, GeneralX
+              <SubMenu key={category} title={category}>
+                {/* Business core, Flexible core etc */}
+                {Object.keys(structure[category]).map((subCategory) => (
+                  <Menu.ItemGroup key={subCategory} title={subCategory}>
+                    {Object.keys(
+                      structure[category][subCategory]["courses"]
+                    ).map((courseCode) => (
                       <MenuItem courseCode={courseCode} />
-                    )
-                  )}
-                </Menu.ItemGroup>
-              ))}
-            </SubMenu>
-          ))}
-        </Menu>
+                    ))}
+                  </Menu.ItemGroup>
+                ))}
+              </SubMenu>
+            ))}
+          </Menu>
+        </>
       )}
     </div>
   );

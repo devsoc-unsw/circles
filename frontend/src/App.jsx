@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Layout, notification } from "antd";
-import { FeedbackBtn } from './components/feedbackBtn/FeedbackBtn';
-import Header from './components/header/Header'
+import { FeedbackBtn } from "./components/feedbackBtn/FeedbackBtn";
+import Header from "./components/header/Header";
 import CourseSelector from "./pages/CourseSelector/main";
 import DegreeSelector from "./pages/DegreeSelector/main";
 import ProgressionChecker from "./pages/ProgressionChecker/main";
@@ -14,10 +14,9 @@ const { Content } = Layout;
 function App() {
   const openDisclaimer = () => {
     const args = {
-      type: "warning",  
-      message: "Hey there!", 
-      description:
-        'Circles is still in beta testing and not ready for use.',
+      type: "warning",
+      message: "Hey there!",
+      description: "Circles is still in beta testing and not ready for use.",
       duration: 0,
       className: "text helpNotif",
     };
@@ -26,7 +25,7 @@ function App() {
 
   React.useEffect(() => {
     openDisclaimer();
-  }, [])
+  }, []);
   return (
     <Router>
       <Header />
@@ -49,7 +48,7 @@ function App() {
             <ProgressionChecker />
           </Route>
         </Switch>
-        <FeedbackBtn/>
+        <FeedbackBtn />
       </Content>
     </Router>
   );
