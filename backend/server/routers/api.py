@@ -324,7 +324,7 @@ def getCourse(courseCode):
 
     del result['_id']
 
-    return {'course' : result}
+    return result
 
 
 
