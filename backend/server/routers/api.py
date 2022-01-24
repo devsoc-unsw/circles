@@ -523,7 +523,7 @@ def search(string):
     return dictionary
 
 
-@router.post("/getAllUnlocked/", response_model=CoursesState,
+@router.post("/getAllUnlocked/", response_model=CoursesTypeState,
             responses={
                 404: {"model": message, "description": "Uh oh you broke me"},
                 200: {
@@ -549,17 +549,23 @@ def getAllUnlocked(userData: UserData):
     that they have already completed"""
 
     coursesState = {}
-    
+    user = User(userData.dict())
+    specialisations = [specialisationsCOL.find_one({'code': specialisation})['curriculum'] for specialisation in user.specialisations]
     for course, condition in CONDITIONS.items():
+        course_type = []
+        for specialisation in specialisations:
+            for type in specialisation:
+                if course in type['courses'].keys() or any(regex in course for regex in type['courses'].keys()):
+                    course_type.append(type['title'])
 
         # Condition object exists for this course
-        state = condition.is_unlocked(User(userData.dict())) if condition else {'result': True, 'warnings': []}
-
+        state = condition.is_unlocked(user) if condition else {'result': True, 'warnings': []}
         coursesState[course] = {
             "is_accurate": bool(condition),
             "unlocked": state['result'],
             "handbook_note": "", # TODO: Cache handbook notes
-            "warnings": state['warnings']
+            "warnings": state['warnings'],
+            "course_type": course_type
         }
 
     return {'courses_state': coursesState}
