@@ -253,7 +253,6 @@ def getCoreCourses(specialisationCode):
                 else:
                     if ' or ' in course:
                         courseList = course.split(' or ')
-                        print(courseList)
                         for j in courseList:
                             courses[j] = 1
 
@@ -317,7 +316,6 @@ def getCoreCourses(specialisationCode):
 def getCourse(courseCode):
     query = {'code' : courseCode}
     result = coursesCOL.find_one(query)
-    print(result)
     if not result:
         return JSONResponse(status_code=404, content={"message" : "Course code was not found"})
 

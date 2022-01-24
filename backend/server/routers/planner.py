@@ -24,46 +24,28 @@ async def validateTermPlanner(plannerData: PlannerData = Body(
         "year": 1,
         "plan": [
             [
+                {},
                 {
-                    "locked": False,
-                    "courses": {}
+                    "COMP1511": [6, None],
+                    "MATH1141": [6, None],
+                    "MATH1081": [6, None],
                 },
                 {
-                    "locked": False,
-                    "courses": {
-                        "COMP1511": [6, None],
-                        "MATH1141": [6, None],
-                        "MATH1081": [6, None],
-                    }
+                    "COMP1521": [6, None],
+                    "COMP9444": [6, None],
                 },
                 {
-                    "locked": False,
-                    "courses": {
-                        "COMP1521": [6, None],
-                        "COMP9444": [6, None],
-                    }
-                },
-                {
-                    "locked": False,
-                    "courses": {
-                        "COMP2521": [6, None],
-                        "MATH1241": [6, None],
-                        "COMP3331": [6, None]
-                    }
+                    "COMP2521": [6, None],
+                    "MATH1241": [6, None],
+                    "COMP3331": [6, None]
                 }
             ],
             [
+                {},
                 {
-                    "locked": False,
-                    "courses": {}
-                },
-                {
-                    "locked": False,
-                    "courses": {
-                        "COMP1531": [6, None],
-                        "COMP6080": [6, None],
-                        "COMP3821": [6, None]
-                    }
+                    "COMP1531": [6, None],
+                    "COMP6080": [6, None],
+                    "COMP3821": [6, None]
                 }
             ]
         ]
@@ -92,9 +74,9 @@ async def validateTermPlanner(plannerData: PlannerData = Body(
     for year in data["plan"]:
         # Go through all the years
         for term in year:
-            user.add_current_courses(term["courses"])
+            user.add_current_courses(term)
 
-            for course in term["courses"]:
+            for course in term:
                 is_answer_accurate = CONDITIONS.get(course) is not None
                 res = CONDITIONS[course].is_unlocked(user) if is_answer_accurate else {"result": True, "warnings": []}
                 coursesState[course] = {
@@ -105,7 +87,7 @@ async def validateTermPlanner(plannerData: PlannerData = Body(
                 }
             # Add all these courses to the user in preparation for the next term
             user.empty_current_courses()
-            user.add_courses(term["courses"])
+            user.add_courses(term)
 
         user.year += 1
 
