@@ -85,7 +85,12 @@ class course(BaseModel):
     code: str
     UOC: int
     level: int
+    study_level: str
+    school: str
+    faculty: str
+    campus: str
     description: str
+    raw_requirements: str
     equivalents: dict
     exclusions: dict
     path_to: dict
