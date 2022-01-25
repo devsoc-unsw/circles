@@ -146,7 +146,15 @@ export default function CourseDescription() {
               </Text>
             </Space>
             <Title level={4} className="text">
-              Prerequisites
+              Requirements
+            </Title>
+            <Space direction="vertical" style={{ marginBottom: "1rem" }}>
+              <Text>
+                <div dangerouslySetInnerHTML={{ __html: course.raw_requirements }} />
+              </Text>
+            </Space>
+            <Title level={4} className="text">
+              Courses you have done to unlock this course
             </Title>
             {course.path_from && Object.keys(course.path_from).length > 0 ? (
               <div className={"text course-tag-cont"}>

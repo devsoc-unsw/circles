@@ -107,11 +107,8 @@ export default function SearchCourse() {
 }
 
 const payload = {
-  userData: {
-    program: "3778",
-    specialisations: [],
-    courses: {},
-    year: 0,
-  },
-  lockedCourses: [],
-};
+  program: "3778",
+  specialisations: ["COMPA1"],
+  courses: {},
+  year: 0,
+}
