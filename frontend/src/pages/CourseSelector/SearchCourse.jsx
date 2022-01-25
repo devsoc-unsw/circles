@@ -108,7 +108,7 @@ export default function SearchCourse() {
 
 const payload = {
   program: "3778",
-  specialisations: [],
+  specialisations: ["COMPA1"],
   courses: {},
   year: 0,
 }
