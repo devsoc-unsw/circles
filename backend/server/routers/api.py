@@ -555,7 +555,7 @@ def getAllUnlocked(userData: UserData):
         course_type = []
         for specialisation in specialisations:
             for type in specialisation:
-                if course in type['courses'].keys() or any(regex in course for regex in type['courses'].keys()):
+                if any((regex in course) or (course in regex) for regex in type['courses'].keys()):
                     course_type.append(type['title'])
 
         # Condition object exists for this course
