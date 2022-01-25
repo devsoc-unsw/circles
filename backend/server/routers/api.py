@@ -253,7 +253,6 @@ def getCoreCourses(specialisationCode):
                 else:
                     if ' or ' in course:
                         courseList = course.split(' or ')
-                        print(courseList)
                         for j in courseList:
                             courses[j] = 1
 
@@ -274,42 +273,41 @@ def getCoreCourses(specialisationCode):
                     "content": {
                         "application/json": {
                             "example": {
-                                "course": {
-                                    "title": "Programming Fundamentals",
-                                    "code": "COMP1511",
-                                    "UOC": 6,
-                                    "level": 1,
-                                    "description": "<p>An introduction to problem-solving via programming, which aims to have students develop proficiency in using a high level programming language. Topics: algorithms, program structures (statements, sequence, selection, iteration, functions), data types (numeric, character), data structures (arrays, tuples, pointers, lists), storage structures (memory, addresses), introduction to analysis of algorithms, testing, code quality, teamwork, and reflective practice. The course includes extensive practical work in labs and programming projects.</p>\n<p>Additional Information</p>\n<p>This course should be taken by all CSE majors, and any other students who have an interest in computing or who wish to be extended. It does not require any prior computing knowledge or experience.</p>\n<p>COMP1511 leads on to COMP1521, COMP1531, COMP2511 and COMP2521, which form the core of the study of computing at UNSW and which are pre-requisites for the full range of further computing courses.</p>\n<p>Due to overlapping material, students who complete COMP1511 may not also enrol in COMP1911 or COMP1921. </p>",
-                                    "study_level": "Undergraduate",
-                                    "school": "School of Computer Science and Engineering",
-                                    "faculty": "Faculty of Engineering",
-                                    "campus": "Sydney",
-                                    "equivalents": {
-                                        "DPST1091": 1,
-                                        "COMP1917": 1
-                                    },
-                                    "exclusions": {
-                                        "DPST1091": 1
-                                    },
-                                    "path_to": {
-                                        "COMP1521": 1,
-                                        "COMP1531": 1,
-                                        "COMP2041": 1,
-                                        "COMP2111": 1,
-                                        "COMP2121": 1,
-                                        "COMP2521": 1,
-                                        "COMP9334": 1,
-                                        "ELEC2117": 1,
-                                        "SENG2991": 1
-                                    },
-                                    "terms": [
-                                        "T1",
-                                        "T2",
-                                        "T3"
-                                    ],
-                                    "gen_ed": 1,
-                                    "path_from": {}
-                                }
+                                "title": "Programming Fundamentals",
+                                "code": "COMP1511",
+                                "UOC": 6,
+                                "level": 1,
+                                "description": "An introduction to problem-solving via programming, which aims to have students develop proficiency in using a high level programming language. Topics: algorithms, program structures (statements, sequence, selection, iteration, functions), data types (numeric, character), data structures (arrays, tuples, pointers, lists), storage structures (memory, addresses), introduction to analysis of algorithms, testing, code quality, teamwork, and reflective practice. The course includes extensive practical work in labs and programming projects.</p>\n<p>Additional Information</p>\n<p>This course should be taken by all CSE majors, and any other students who have an interest in computing or who wish to be extended. It does not require any prior computing knowledge or experience.</p>\n<p>COMP1511 leads on to COMP1521, COMP1531, COMP2511 and COMP2521, which form the core of the study of computing at UNSW and which are pre-requisites for the full range of further computing courses.</p>\n<p>Due to overlapping material, students who complete COMP1511 may not also enrol in COMP1911 or COMP1921. </p>",
+                                "study_level": "Undergraduate",
+                                "school": "School of Computer Science and Engineering",
+                                "faculty": "Faculty of Engineering",
+                                "campus": "Sydney",
+                                "equivalents": {
+                                    "DPST1091": 1,
+                                    "COMP1917": 1
+                                },
+                                "exclusions": {
+                                    "DPST1091": 1
+                                },
+                                "path_to": {
+                                    "COMP1521": 1,
+                                    "COMP1531": 1,
+                                    "COMP2041": 1,
+                                    "COMP2111": 1,
+                                    "COMP2121": 1,
+                                    "COMP2521": 1,
+                                    "COMP9334": 1,
+                                    "ELEC2117": 1,
+                                    "SENG2991": 1
+                                },
+                                "terms": [
+                                    "T1",
+                                    "T2",
+                                    "T3"
+                                ],
+                                "raw_requirements" : "",
+                                "gen_ed": 1,
+                                "path_from": {}
                             }
                         }
                     }
@@ -318,13 +316,12 @@ def getCoreCourses(specialisationCode):
 def getCourse(courseCode):
     query = {'code' : courseCode}
     result = coursesCOL.find_one(query)
-
     if not result:
         return JSONResponse(status_code=404, content={"message" : "Course code was not found"})
 
     del result['_id']
 
-    return {'course' : result}
+    return result
 
 
 
@@ -545,39 +542,24 @@ def search(string):
                     }
                 }
             })
-def getAllUnlocked(userData: UserData, lockedCourses: list):
+def getAllUnlocked(userData: UserData):
     """Given the userData and a list of locked courses, returns the state of all
     the courses. Note that locked courses always return as True with no warnings
     since it doesn't make sense for us to tell the user they can't take a course
     that they have already completed"""
-    user = User(userData.dict())
 
     coursesState = {}
     
     for course, condition in CONDITIONS.items():
-        if course in lockedCourses:
-            # Always True
-            isAccurate = True
-            unlocked = True
-            warnings = []
-        elif condition:
-            # Condition object exists for this course
-            isAccurate = True
-            state = condition.is_unlocked(user)
-            unlocked = state['result']
-            warnings = state['warnings']
-        else:
-            # Condition object does not exist for this course. True by default
-            # but warn the user the info might be inaccurate
-            isAccurate = False 
-            unlocked = True 
-            warnings = []
+
+        # Condition object exists for this course
+        state = condition.is_unlocked(User(userData.dict())) if condition else {'result': True, 'warnings': []}
 
         coursesState[course] = {
-            "is_accurate": isAccurate,
-            "unlocked": unlocked,
+            "is_accurate": bool(condition),
+            "unlocked": state['result'],
             "handbook_note": "", # TODO: Cache handbook notes
-            "warnings": warnings
+            "warnings": state['warnings']
         }
 
     return {'courses_state': coursesState}

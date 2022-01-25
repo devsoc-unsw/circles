@@ -58,16 +58,11 @@ class CourseState (BaseModel):
 class CoursesState (BaseModel):
     courses_state: dict[str, CourseState] = {}
 
-
-class PlannerTerm (BaseModel):
-    locked: bool
-    courses: dict
-
 class PlannerData (BaseModel):
     program: str
     specialisations: list[str]
     year: int
-    plan: list[list[PlannerTerm]]
+    plan: list[list[dict]]
 
 
 minorInFE = ['3778']
@@ -85,7 +80,12 @@ class course(BaseModel):
     code: str
     UOC: int
     level: int
+    study_level: str
+    school: str
+    faculty: str
+    campus: str
     description: str
+    raw_requirements: str
     equivalents: dict
     exclusions: dict
     path_to: dict
