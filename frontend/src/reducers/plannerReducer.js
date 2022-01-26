@@ -94,8 +94,6 @@ const planner = JSON.parse(localStorage.getItem("planner"));
 if (planner) initialState = extractFromLocalStorage(planner);
 
 const plannerReducer = (state = initialState, action) => {
-  // console.log(state.startYear, state.numYears);
-  let courseCode, courseData;
   switch (action.type) {
     case "ADD_TO_UNPLANNED":
       const { courseCode, courseData } = action.payload;
@@ -336,6 +334,24 @@ const plannerReducer = (state = initialState, action) => {
       };
       setInLocalStorage(stateCopy);
       return stateCopy;
+    case "RESET_PLANNER":
+      const init = {
+        unplanned: [],
+        startYear: parseInt(new Date().getFullYear()),
+        numYears: 3,
+        isSummerEnabled: false,
+        years: [
+          { T0: [], T1: [], T2: [], T3: [] },
+          { T0: [], T1: [], T2: [], T3: [] },
+          { T0: [], T1: [], T2: [], T3: [] },
+        ],
+        courses: new Map(),
+        plannedCourses: new Map(),
+        completedTerms: new Map(),
+      };
+      setInLocalStorage(init);
+      return init;
+
     case "LOAD_PLANNER":
       const prevSessionState = action.payload;
       return prevSessionState;

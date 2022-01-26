@@ -18,8 +18,6 @@ const TermBox = ({ yearIndex, termNo }) => {
 
   const handleSave = async () => {
     setLoading(true);
-    // console.log(courses);
-    // console.log(yearIndex, termNo);
 
     try {
       const courseInfoList = await Promise.all(
@@ -99,11 +97,7 @@ const TermBox = ({ yearIndex, termNo }) => {
 export const PreviousCoursesStep = () => {
   const history = useHistory();
   const planner = useSelector((state) => state.planner);
-  console.log(planner.startYear);
-
-  // console.log(planner.startYear + planner.numYears - 1);
   const numYears = new Date().getFullYear() - planner.startYear + 1; // Inclusive
-  // console.log(years);
   return (
     <div className="steps-root-container">
       <Title level={3} className="text">

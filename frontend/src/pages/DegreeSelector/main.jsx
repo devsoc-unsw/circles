@@ -15,14 +15,21 @@ const { RangePicker } = DatePicker;
 function DegreeSelector() {
   const theme = useSelector((store) => store.theme);
   const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    // TODO: Warning dialog before planner is reset.
+
+    // Degree selector needs to reset to prevent identical courses in a term
+    dispatch(plannerActions("RESET_PLANNER"));
+  }, []);
+
+  const [isYearsSet, setIsYearsSet] = React.useState(false);
+
   const handleYearChange = (_, [startYear, endYear]) => {
-    console.log(startYear, endYear);
     const numYears = endYear - startYear + 1;
     dispatch(plannerActions("SET_DEGREE_LENGTH", numYears));
-    // dispatch(plannerActions("UPDATE_START_YEAR", startYear));
     dispatch(plannerActions("UPDATE_START_YEAR", startYear));
-
-    // dispatch(plannerActions("SET_YEARS", endYear - startYear));
+    setIsYearsSet(true);
   };
   const props = useSpring({
     from: { opacity: 0 },
@@ -39,7 +46,7 @@ function DegreeSelector() {
       <animated.div style={props}>
         <div className="step-container">
           <div className="step-content" id={"Degree"}>
-            <DegreeStep />
+            <DegreeStep isYearsSet={isYearsSet} />
           </div>
           <div className="step-content" id={"Specialisation"}>
             <SpecialisationStep />

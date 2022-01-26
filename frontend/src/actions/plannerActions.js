@@ -94,6 +94,10 @@ export const plannerActions = (action, payload) => {
         type: action,
         payload: payload,
       };
+    case "RESET_PLANNER":
+      return {
+        type: action,
+      };
     case "LOAD_PLANNER":
       return {
         type: action,
