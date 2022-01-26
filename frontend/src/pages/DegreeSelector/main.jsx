@@ -17,8 +17,12 @@ function DegreeSelector() {
   const dispatch = useDispatch();
   const handleYearChange = (_, [startYear, endYear]) => {
     console.log(startYear, endYear);
-    dispatch(plannerActions("SET_START_YEAR", startYear));
-    dispatch(plannerActions("SET_YEARS", endYear - startYear));
+    const numYears = endYear - startYear + 1;
+    dispatch(plannerActions("SET_DEGREE_LENGTH", numYears));
+    // dispatch(plannerActions("UPDATE_START_YEAR", startYear));
+    dispatch(plannerActions("UPDATE_START_YEAR", startYear));
+
+    // dispatch(plannerActions("SET_YEARS", endYear - startYear));
   };
   const props = useSpring({
     from: { opacity: 0 },

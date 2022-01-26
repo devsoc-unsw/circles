@@ -18,13 +18,13 @@ const TermBox = ({ yearIndex, termNo }) => {
 
   const handleSave = async () => {
     setLoading(true);
-    console.log(courses);
-    console.log(yearIndex, termNo);
+    // console.log(courses);
+    // console.log(yearIndex, termNo);
 
     try {
       const courseInfoList = await Promise.all(
         courses.map((course) =>
-          axios.get(`http://localhost:8000/courses/getCourses/${course.value}`)
+          axios.get(`http://localhost:8000/api/getCourse/${course.value}`)
         )
       );
       for (let course of courseInfoList) {
@@ -52,7 +52,7 @@ const TermBox = ({ yearIndex, termNo }) => {
     setTimeout(() => {
       setLoading(false);
       setOpen(false);
-    }, 2000);
+    }, 1000);
   };
 
   return (
@@ -98,12 +98,16 @@ const TermBox = ({ yearIndex, termNo }) => {
 };
 export const PreviousCoursesStep = () => {
   const history = useHistory();
-  const startYear = useSelector((state) => state.planner.startYear);
-  const years = new Date().getFullYear() - startYear + 1; // Inclusive
+  const planner = useSelector((state) => state.planner);
+  console.log(planner.startYear);
+
+  // console.log(planner.startYear + planner.numYears - 1);
+  const numYears = new Date().getFullYear() - planner.startYear + 1; // Inclusive
+  // console.log(years);
   return (
     <div className="steps-root-container">
       <Title level={3} className="text">
-        Courses that I've planned so far
+        Completed Courses
       </Title>
       {/* Add info button */}
       <div className="steps-grid-cont" style={{ marginTop: "100px" }}>
@@ -113,9 +117,11 @@ export const PreviousCoursesStep = () => {
         <div className="steps-grid-item">Term 2</div>
         <div className="steps-grid-item">Term 3</div>
       </div>
-      {[...Array(parseInt(years))].map((_, yearNo) => (
+      {[...Array(parseInt(numYears))].map((_, yearNo) => (
         <div className="steps-grid-cont">
-          <div className="steps-grid-item">{parseInt(startYear) + yearNo}</div>
+          <div className="steps-grid-item">
+            {parseInt(planner.startYear) + yearNo}
+          </div>
           {[...Array(4)].map((_, termNo) => {
             // Get the courses in the term
             const term = "T" + termNo.toString();

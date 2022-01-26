@@ -58,8 +58,20 @@ export default function DebouncingSelect({ setPlannedCourses }) {
   }, []);
 
   const fetchCourses = async () => {
-    const res = await axios.get("http://localhost:3000/courses.json");
-    dispatch(setCourses(res.data));
+    try {
+      const res = await axios.post(
+        `http://localhost:8000/api/getAllUnlocked/`,
+        JSON.stringify(payload),
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      dispatch(setCourses(res.data.courses_state));
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   async function fetchUserList() {
@@ -82,3 +94,10 @@ export default function DebouncingSelect({ setPlannedCourses }) {
     />
   );
 }
+
+const payload = {
+  program: "3778",
+  specialisations: ["COMPA1"],
+  courses: {},
+  year: 0,
+};
