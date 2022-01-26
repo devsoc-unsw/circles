@@ -97,15 +97,25 @@ const plannerReducer = (state = initialState, action) => {
   switch (action.type) {
     case "ADD_TO_UNPLANNED":
       const { courseCode, courseData } = action.payload;
-
       // Add course data to courses
       if (!state.courses[courseCode]) {
         state.courses.set(courseCode, courseData);
       }
-
       // Append course code onto unplanned
-
       state.unplanned.push(courseCode);
+      return state;
+
+    case "ADD_TO_PLANNED":
+      const { code, data, position } = action.payload;
+      const [yearNum, termNum] = position;
+      if (!state.courses[code]) {
+        state.courses.set(code, data);
+      }
+
+      // console.log(state.courses.get(code));
+      state.years[yearNum][termNum].push(code);
+      // Add course data to courses
+
       return state;
 
     case "ADD_CORE_COURSES":
@@ -138,7 +148,7 @@ const plannerReducer = (state = initialState, action) => {
       let newUnplanned = state.unplanned.filter(
         (course) => course !== action.payload
       );
-      console.log(newUnplanned);
+      // console.log(newUnplanned);
       stateCopy = { ...state, unplanned: newUnplanned };
       setInLocalStorage(stateCopy);
       return stateCopy;
@@ -152,6 +162,7 @@ const plannerReducer = (state = initialState, action) => {
       // Remove courses from years and courses
       const plannedTerm = state.courses.get(action.payload).plannedFor;
       let newCourses = new Map(state.courses);
+      // console.log(newCourses.get(action.payload));
       newCourses.get(action.payload).plannedFor = null;
       newCourses.delete(action.payload);
       Object.assign(state.courses, newCourses);
@@ -222,7 +233,6 @@ const plannerReducer = (state = initialState, action) => {
       nYear[termI] = nTerm;
       const nYears = new Object(state.years);
       nYears[yearI] = nYear;
-      // console.log(nYears);
 
       const nCourses = new Object(state.courses);
       nCourses.get(action.payload).plannedFor = null;
@@ -289,6 +299,8 @@ const plannerReducer = (state = initialState, action) => {
       const newNumYears = action.payload;
       let dupYears = new Object(state.years);
       let newUnplan = [...state.unplanned];
+      console.log(newNumYears);
+
       if (newNumYears === state.numYears) return state;
       else if (newNumYears > state.numYears) {
         // add empty years to the end
@@ -322,6 +334,24 @@ const plannerReducer = (state = initialState, action) => {
       };
       setInLocalStorage(stateCopy);
       return stateCopy;
+    case "RESET_PLANNER":
+      const init = {
+        unplanned: [],
+        startYear: parseInt(new Date().getFullYear()),
+        numYears: 3,
+        isSummerEnabled: false,
+        years: [
+          { T0: [], T1: [], T2: [], T3: [] },
+          { T0: [], T1: [], T2: [], T3: [] },
+          { T0: [], T1: [], T2: [], T3: [] },
+        ],
+        courses: new Map(),
+        plannedCourses: new Map(),
+        completedTerms: new Map(),
+      };
+      setInLocalStorage(init);
+      return init;
+
     case "LOAD_PLANNER":
       const prevSessionState = action.payload;
       return prevSessionState;
