@@ -26,26 +26,20 @@ const validateTermPlanner = (payload) => {
 };
 
 const prepareCoursesForValidation = (plannerInfo) => {
-  const { years, startYear, completedTerms } = plannerInfo;
+  const { years, startYear, _ } = plannerInfo;
 
   let plan = [];
   let currYear = startYear;
   for (const year of years) {
     const formattedYear = [];
-    // console.log(year);
     let termNum = 0;
     for (const term in year) {
-      const yearTerm = `${currYear}T${termNum}`;
       let courses = {};
       for (const course of year[term]) {
         courses[course] = [6, null];
       }
-      const formattedTerm = {
-        locked: completedTerms.get(yearTerm) === true ? true : false,
-        courses: courses,
-      };
 
-      formattedYear.push(formattedTerm);
+      formattedYear.push(courses);
       termNum++;
     }
     plan.push(formattedYear);

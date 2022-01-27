@@ -1,7 +1,4 @@
 from fastapi import FastAPI
-from server.routers import specialisations
-from server.routers import programs
-from server.routers import courses
 from server.routers import api
 from server.routers import planner
 from fastapi.middleware.cors import CORSMiddleware
@@ -34,10 +31,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(specialisations.router)
-app.include_router(programs.router)
 app.include_router(planner.router)
-app.include_router(courses.router)
 app.include_router(api.router)
 
 @app.get('/')

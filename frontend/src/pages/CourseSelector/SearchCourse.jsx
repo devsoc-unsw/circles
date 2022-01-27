@@ -68,7 +68,6 @@ export default function SearchCourse() {
   const fetchCourses = async () => {
     // const res = await axios.get("http://localhost:3000/courses.json");
     // dispatch(setCourses(res.data));
-    console.log("new request");
     try {
       const res = await axios.post(
         `http://localhost:8000/api/getAllUnlocked/`,
@@ -107,11 +106,8 @@ export default function SearchCourse() {
 }
 
 const payload = {
-  userData: {
-    program: "3778",
-    specialisations: [],
-    courses: {},
-    year: 0,
-  },
-  lockedCourses: [],
+  program: "3778",
+  specialisations: ["COMPA1"],
+  courses: {},
+  year: 0,
 };

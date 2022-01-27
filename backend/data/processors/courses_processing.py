@@ -39,6 +39,7 @@ def process_courses():
         process_enrolment_path(processed, course, data)
         # process_attributes(processed, course)
         process_exclusions(processed, course)
+        process_enrolment_rules(processed, course)
 
         # Overwrite data file entry with the newly processed info
         data[code] = processed
@@ -175,6 +176,9 @@ def process_exclusions(processed: dict, formatted: dict) -> None:
             "or", "", no_conjunctions, flags=re.IGNORECASE)
         if re.search(r"[A-Za-z]", no_conjunctions):
             processed["exclusions"]["leftover_plaintext"] = exclusion_str
+
+def process_enrolment_rules(processed: dict, course: dict):
+    processed['raw_requirements'] = re.sub("<br/><br/>", "", course['enrolment_rules'])
 
 
 if __name__ == "__main__":
