@@ -52,6 +52,16 @@ class CourseState (BaseModel):
 class CoursesState (BaseModel):
     courses_state: dict[str, CourseState] = {}
 
+class CourseTypeState (BaseModel):
+    is_accurate: bool 
+    unlocked: bool
+    handbook_note: str 
+    warnings: list
+    course_type: list[str]
+
+class CoursesTypeState (BaseModel):
+    courses_state: dict[str, CourseTypeState] = {}
+
 class PlannerData (BaseModel):
     program: str
     specialisations: list[str]

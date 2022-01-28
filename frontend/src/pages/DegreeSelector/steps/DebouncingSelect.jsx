@@ -1,18 +1,15 @@
-import React, { useEffect, useState, useMemo, useRef } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState, useRef, useMemo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Select, Spin } from "antd";
-import { courseOptionsActions } from "../../actions/courseOptionsActions";
-import { setCourses } from "../../actions/updateCourses";
+import { setCourses } from "../../../actions/updateCourses";
 import debounce from "lodash/debounce";
 import axios from "axios";
-import { courseTabActions } from "../../actions/courseTabActions";
 
 const DebounceSelect = ({ fetchOptions, debounceTimeout = 100, ...props }) => {
   const [fetching, setFetching] = useState(false);
   const [options, setOptions] = useState([]);
   const fetchRef = useRef(0);
-  const dispatch = useDispatch();
+
   const debounceFetcher = useMemo(() => {
     const loadOptions = (value) => {
       fetchRef.current += 1;
@@ -36,10 +33,6 @@ const DebounceSelect = ({ fetchOptions, debounceTimeout = 100, ...props }) => {
     return debounce(loadOptions, debounceTimeout);
   }, [fetchOptions, debounceTimeout]);
 
-  const handleSelect = (courseCode) => {
-    dispatch(courseTabActions("ADD_TAB", courseCode.value));
-  };
-
   return (
     <Select
       showSearch
@@ -49,28 +42,25 @@ const DebounceSelect = ({ fetchOptions, debounceTimeout = 100, ...props }) => {
       notFoundContent={fetching ? <Spin size="small" /> : null}
       {...props}
       options={options}
-      size="large"
-      onSelect={handleSelect}
     />
   );
 }; // Usage of DebounceSelect
 
-export default function SearchCourse() {
+export default function DebouncingSelect({ setPlannedCourses }) {
   const [value, setValue] = useState([]);
+  setPlannedCourses(value);
 
   const dispatch = useDispatch();
-  const [courses, setCourses] = React.useState([]);
+  const courses = useSelector((state) => state.updateCourses.courses);
 
   useEffect(() => {
     fetchCourses();
   }, []);
 
   const fetchCourses = async () => {
-    // const res = await axios.get("http://localhost:3000/courses.json");
-    // dispatch(setCourses(res.data));
     try {
       const res = await axios.post(
-        `http://localhost:8000/courses/getAllUnlocked/`,
+        `http://localhost:8000/api/getAllUnlocked/`,
         JSON.stringify(payload),
         {
           headers: {
@@ -78,7 +68,7 @@ export default function SearchCourse() {
           },
         }
       );
-      setCourses(res.data.courses_state);
+      dispatch(setCourses(res.data.courses_state));
     } catch (err) {
       console.log(err);
     }
@@ -93,14 +83,14 @@ export default function SearchCourse() {
 
   return (
     <DebounceSelect
-      // mode="multiple"
+      mode="multiple"
       value={value}
       placeholder="Search a course"
       fetchOptions={fetchUserList}
       onChange={(newValue) => {
         setValue(newValue);
       }}
-      style={{ width: "25rem", marginRight: "0.5rem" }}
+      style={{ width: "20rem", marginRight: "0.5rem" }}
     />
   );
 }
