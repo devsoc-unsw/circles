@@ -70,20 +70,12 @@ class CoreqCoursesCondition():
     def validate(self, user):
         """Returns true if the user is taking these courses in the same term"""
         if self.logic == AND:
-            # They must meet all the coreqs
-            for course in self.courses:
-                if not (user.has_taken_course(course) or user.is_taking_course(course)):
-                    print(f"They did not take {course}")
-                    return False
-                print(f"They took {course}")
-            return True
+            return all(user.has_taken_course(course) or user.is_taking_course(course) for course in self.courses)
         elif self.logic == OR:
-            for course in self.courses:
-                if user.has_taken_course(course) or user.is_taking_course(course):
-                    return True
-            return False
+            return any(user.has_taken_course(course) or user.is_taking_course(course) for course in self.courses)
         
         # Error, logic should either be AND or OR
+        print("Conditions Error: validation was not of type AND or OR")
         return True
 
 
@@ -154,7 +146,7 @@ class WAMCondition():
                 return f"Requires {self.wam} WAM. Your WAM has not been recorded"
             elif applicable_wam >= self.wam:
                 return None
-            else: 
+            else:
                 return f"Requires {self.wam} WAM. Your WAM is currently {applicable_wam:.3f}"
         else:
             if applicable_wam == None:
@@ -183,10 +175,9 @@ class GRADECondition():
         '''
         if self.course not in user.courses:
             return False, None
-        
+
         user_grade = user.get_grade(self.course)
         if user_grade == None:
-            print(f"No wam recorded for {self.course} which required {self.grade} grade")
             return True, self.get_warning()
         elif user_grade < self.grade:
             return False, None
@@ -294,14 +285,14 @@ class FirstCompositeCondition(CompositeCondition):
         with the appropriate user data to determine if a course is unlocked or not.
         Will return an object containing the result and a list of warnings'''
         warnings = []
-        
+
         if self.course is not None:
             result = {
                 "result": False,
                 "warnings": warnings
             }
             for exclusion in CACHED_EXCLUSIONS[self.course].keys():
-                
+
                 if is_course(exclusion) and user.has_taken_course(exclusion):
                     return result
                 elif is_program(exclusion) and user.in_program(exclusion):
@@ -309,9 +300,9 @@ class FirstCompositeCondition(CompositeCondition):
                 else:
                     # Not able to parse this type of  exclusion
                     continue
-        
+
         unlocked = self.validate(user, warnings)
-        
+
         return {
             "result": unlocked,
             "warnings": warnings

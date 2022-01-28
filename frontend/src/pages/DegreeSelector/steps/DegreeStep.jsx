@@ -14,7 +14,7 @@ export const DegreeStep = () => {
     const [options, setOptions] = React.useState(null);
 
     const fetchAllDegrees = async () => {
-        // const res = await axios.get("http://localhost:8000/api/getPrograms");
+        // const res = await axios.get("http://localhost:8000/programs/getPrograms");
         // setOptions(res.data["programs"]);
         setOptions({
             "3778": "Bachelor Computer Science", 

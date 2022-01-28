@@ -10,11 +10,6 @@ router = APIRouter(
     responses={404: {"description": "Not found"}}
 )
 
-@router.get("/")
-def planner_index():
-    return "Index of planner"
-
-
 @router.post("/validateTermPlanner/", response_model=CoursesState)
 async def validateTermPlanner(plannerData: PlannerData = Body(
     ...,

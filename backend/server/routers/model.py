@@ -18,9 +18,6 @@ class minors (BaseModel):
 class programCourses (BaseModel):
     courses: dict
 
-class core (BaseModel):
-    core: dict
-
 class courseDetails (BaseModel):
     title: str
     code: str
@@ -37,13 +34,10 @@ class courseDetails (BaseModel):
     gen_ed: int
     path_from: dict
 
-class course (BaseModel):
-    course: courseDetails
-
-class Structure (BaseModel):
+class Structure (BaseModel): # this is a copout - we should avoid this
     structure: dict
 
-class UserData(BaseModel):
+class UserData (BaseModel):
     program: str 
     specialisations: list
     courses: dict
@@ -57,16 +51,6 @@ class CourseState (BaseModel):
 
 class CoursesState (BaseModel):
     courses_state: dict[str, CourseState] = {}
-
-class CourseTypeState (BaseModel):
-    is_accurate: bool 
-    unlocked: bool
-    handbook_note: str 
-    warnings: list
-    course_type: list[str]
-
-class CoursesTypeState (BaseModel):
-    courses_state: dict[str, CourseTypeState] = {}
 
 class PlannerData (BaseModel):
     program: str
@@ -85,50 +69,5 @@ with open(CONDITIONS_PATH, "rb") as file:
 
 flexEd = ['3778']
 
-class course(BaseModel):
-    title: str
-    code: str
-    UOC: int
-    level: int
-    study_level: str
-    school: str
-    faculty: str
-    campus: str
-    description: str
-    raw_requirements: str
-    equivalents: dict
-    exclusions: dict
-    path_to: dict
-    terms: list
-    gen_ed: int
-    path_from: dict
-
-class title(BaseModel):
-    title: str
-
-class UOC(BaseModel):
-    UOC: int
-
-class level(BaseModel):
-    level: int
-
-class equivalent(BaseModel):
-    equivalent: dict
-
-class exclusions(BaseModel):
-    exclusions: dict
-
-class pathTo(BaseModel):
-    path_to: dict
-
-class pathFrom(BaseModel):
-    path_from: dict
-
-class terms(BaseModel):
-    terms: list
-
 class description(BaseModel):
     description: str
-
-class isGenEd(BaseModel):
-    gen_ed: bool
