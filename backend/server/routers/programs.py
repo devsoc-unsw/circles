@@ -9,6 +9,11 @@ router = APIRouter(
     tags=['programs'],
 )
 
+
+@router.get("/")
+def programsIndex():
+    return "Index of programs"
+
 @router.get("/getPrograms", response_model=programs,
             responses={
                 404: {"model": message, "description": "Something very wrong happened"},
