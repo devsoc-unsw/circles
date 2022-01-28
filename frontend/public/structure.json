@@ -1,48 +1,25 @@
 {
-  "Major": {
-    "Core Courses": {
-      "uoc": 66,
-      "courses": {
-        "COMP3821": "Extended Algorithms and Programming Techniques",
-        "COMP3121": "Algorithms and Programming Techniques",
-        "COMP1521": "Computer Systems Fundamentals",
-        "COMP1531": "Software Engineering Fundamentals"
-      }
-    },
-    "Computing Electives": {
-      "uoc": 30,
-      "courses": {
-        "ENGG4600": "Engineering Vertically Integrated Project",
-        "ENGG2600": "Engineering Vertically Integrated Project",
-        "ENGG3600": "Engineering Vertically Integrated Project",
-        "COMP3": "Any level 3 Computer Science course",
-        "COMP6080": "Frontend"
-      }
-    }
-  },
-  "Minor": {
-    "Database Systems Prescribed Electives": {
-      "uoc": 18,
-      "courses": {
-        "COMP9319": "Web Data Compression and Search",
-        "COMP9313": "Big Data Management"
-      }
-    },
-    "Core Courses": {
-      "uoc": 72,
-      "courses": {
-        "COMP4920": "Professional Issues and Ethics in Information Technology",
-        "COMP2521": "Data Structures and Algorithms",
-        "COMP1511": "Programming Fundamentals"
-      }
-    },
-    "Computing Elective": {
-      "uoc": 6,
-      "courses": {
-        "ENGG4600": "Engineering Vertically Integrated Project",
-        "ENGG3600": "Engineering Vertically Integrated Project",
-        "ENGG2600": "Engineering Vertically Integrated Project",
-        "COMP3": "Any level 3 Computer Science course"
+  "structure": {
+    "Major": {
+      "name": "Computer Science",
+      "Core Courses": {
+        "UOC": 66,
+        "courses": {
+          "COMP3821": "Extended Algorithms and Programming Techniques",
+          "COMP3121": "Algorithms and Programming Techniques",
+          "COMP1521": "Computer Systems Fundamentals",
+          "COMP1531": "Software Engineering Fundamentals"
+        }
+      },
+      "Computing Electives": {
+        "UOC": 30,
+        "courses": {
+          "ENGG4600": "Engineering Vertically Integrated Project",
+          "ENGG2600": "Engineering Vertically Integrated Project",
+          "ENGG3600": "Engineering Vertically Integrated Project",
+          "COMP3": "Any level 3 Computer Science course",
+          "COMP6080": "Frontend"
+        }
       }
     }
   }

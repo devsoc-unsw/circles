@@ -87,115 +87,126 @@ export default function CourseDescription() {
   };
 
   return (
-    <div className="cs-description-root">
-      {!pageLoaded ? (
-        <Loading />
-      ) : (
-        <>
-          <div className="cs-description-content">
-            {show && courseInPlanner && (
-              <Alert
-                message={`Successfully added ${id} to your planner!`}
-                type="success"
-                style={{ marginBottom: "1rem" }}
-                showIcon
-                closable
-                afterClose={() => setShow(false)}
-              />
-            )}
-            {show && !courseInPlanner && (
-              <Alert
-                message={`Successfully removed ${id} from your planner!`}
-                type="success"
-                style={{ marginBottom: "1rem" }}
-                showIcon
-                closable
-                afterClose={() => setShow(false)}
-              />
-            )}
-            <div className="cs-desc-title-bar">
-              <Title level={2} className="text">
-                {id} - {course.title}
+    <div>
+      <div className="cs-description-root">
+        {!pageLoaded ? (
+          <Loading />
+        ) : (
+          <>
+            <div className="cs-description-content">
+              {show && courseInPlanner && (
+                <Alert
+                  message={`Successfully added ${id} to your planner!`}
+                  type="success"
+                  style={{ marginBottom: "1rem" }}
+                  showIcon
+                  closable
+                  afterClose={() => setShow(false)}
+                />
+              )}
+              {show && !courseInPlanner && (
+                <Alert
+                  message={`Successfully removed ${id} from your planner!`}
+                  type="success"
+                  style={{ marginBottom: "1rem" }}
+                  showIcon
+                  closable
+                  afterClose={() => setShow(false)}
+                />
+              )}
+              <div className="cs-desc-title-bar">
+                <Title level={2} className="text">
+                  {id} - {course.title}
+                </Title>
+                {courseInPlanner ? (
+                  <Button
+                    type="secondary"
+                    loading={loading}
+                    onClick={removeFromPlanner}
+                    icon={<StopOutlined />}
+                  >
+                    Remove from planner
+                  </Button>
+                ) : (
+                  <Button
+                    type="primary"
+                    loading={loading}
+                    onClick={addToPlanner}
+                    icon={<PlusOutlined />}
+                  >
+                    Add to planner
+                  </Button>
+                )}
+              </div>
+              <Title level={4} className="text">
+                Overview
               </Title>
-              {courseInPlanner ? (
-                <Button
-                  type="secondary"
-                  loading={loading}
-                  onClick={removeFromPlanner}
-                  icon={<StopOutlined />}
-                >
-                  Remove from planner
-                </Button>
+              <Space direction="vertical" style={{ marginBottom: "1rem" }}>
+                <Text>
+                  <div
+                    dangerouslySetInnerHTML={{ __html: course.description }}
+                  />
+                </Text>
+              </Space>
+              <Title level={4} className="text">
+                Requirements
+              </Title>
+              <Space direction="vertical" style={{ marginBottom: "1rem" }}>
+                <Text>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: course.raw_requirements,
+                    }}
+                  />
+                </Text>
+              </Space>
+              <Title level={4} className="text">
+                Courses you have done to unlock this course
+              </Title>
+              {course.path_from && Object.keys(course.path_from).length > 0 ? (
+                <div className={"text course-tag-cont"}>
+                  {Object.keys(course.path_from).map((courseCode) => (
+                    <CourseTag name={courseCode} />
+                  ))}
+                </div>
               ) : (
-                <Button
-                  type="primary"
-                  loading={loading}
-                  onClick={addToPlanner}
-                  icon={<PlusOutlined />}
-                >
-                  Add to planner
-                </Button>
+                <p className={`text`}>None</p>
+              )}
+              <Title level={4} className="text">
+                Unlocks these next courses
+              </Title>
+              {course.path_to && Object.keys(course.path_to).length > 0 ? (
+                Object.keys(course.path_to).map((courseCode) => (
+                  <CourseTag key={courseCode} name={courseCode} />
+                ))
+              ) : (
+                <p className={`text`}>None</p>
               )}
             </div>
-            <Title level={4} className="text">
-              Overview
-            </Title>
-            <Space direction="vertical" style={{ marginBottom: "1rem" }}>
-              <Text>
-                <div dangerouslySetInnerHTML={{ __html: course.description }} />
-              </Text>
-            </Space>
-            <Title level={4} className="text">
-              Requirements
-            </Title>
-            <Space direction="vertical" style={{ marginBottom: "1rem" }}>
-              <Text>
-                <div dangerouslySetInnerHTML={{ __html: course.raw_requirements }} />
-              </Text>
-            </Space>
-            <Title level={4} className="text">
-              Courses you have done to unlock this course
-            </Title>
-            {course.path_from && Object.keys(course.path_from).length > 0 ? (
-              <div className={"text course-tag-cont"}>
-                {Object.keys(course.path_from).map((courseCode) => (
-                  <CourseTag name={courseCode} />
-                ))}
-              </div>
-            ) : (
-              <p className={`text`}>None</p>
-            )}
-            <Title level={4} className="text">
-              Unlocks these next courses
-            </Title>
-            {course.path_to && Object.keys(course.path_to).length > 0 ? (
-              Object.keys(course.path_to).map((courseCode) => (
-                <CourseTag key={courseCode} name={courseCode} />
-              ))
-            ) : (
-              <p className={`text`}>None</p>
-            )}
-          </div>
-          <div>
-            <CourseAttribute title="Faculty" content={course.faculty} />
-            <CourseAttribute title="School" content={course.school} />
-            <CourseAttribute title="Study Level" content={course.study_level} />
-            <CourseAttribute title="Campus" content={course.campus} />
-            <Title level={4} className="text cs-final-attr">
-              Offering Terms
-            </Title>
-            {course.terms &&
-              course.terms.map((term, index) => {
-                let termNo = term.slice(1);
-                return (
-                  <Tag key={index} className={`text`}>
-                    {course.terms === "Summer" ? "Summer" : `Term ${termNo}`}
-                  </Tag>
-                );
-              })}
-          </div>
-        </>
-      )}
+            <div>
+              <CourseAttribute title="Faculty" content={course.faculty} />
+              <CourseAttribute title="School" content={course.school} />
+              <CourseAttribute
+                title="Study Level"
+                content={course.study_level}
+              />
+              <CourseAttribute title="Campus" content={course.campus} />
+              <Title level={4} className="text cs-final-attr">
+                Offering Terms
+              </Title>
+              {course.terms &&
+                course.terms.map((term, index) => {
+                  let termNo = term.slice(1);
+                  return (
+                    <Tag key={index} className={`text`}>
+                      {course.terms === "Summer" ? "Summer" : `Term ${termNo}`}
+                    </Tag>
+                  );
+                })}
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 }
