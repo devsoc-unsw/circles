@@ -10,9 +10,9 @@ const ProgressionChecker = () => {
   const [courses, setCourses] = useState({});
 
   const fetchDegree = async () => {
-    let res = await axios.get("degree.json");
+    let res = await axios.get("http://localhost:3000/degree.json");
     setDegree(res.data);
-    res = await axios.get("progressioncourses.json");
+    res = await axios.get("http://localhost:3000/progressioncourses.json");
     console.log(res.data)
 
     // res = await axios.get("checkercourses.json");

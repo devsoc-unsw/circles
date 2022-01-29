@@ -6,13 +6,6 @@ import TermBox from "./TermBox";
 import SkeletonPlanner from "./SkeletonPlanner";
 import "./main.less";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  handleOnDragEnd,
-  handleOnDragStart,
-  updateWarnings,
-} from "./DragDropLogic";
-import UnplannedColumn from "./UnplannedColumn";
-import { plannerActions } from "../../actions/plannerActions";
 import { handleOnDragEnd, handleOnDragStart } from "./DragDropLogic";
 import { updateAllWarnings } from "./ValidateTermPlanner";
 import UnplannedColumn from "./UnplannedColumn";
