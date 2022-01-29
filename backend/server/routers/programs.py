@@ -131,11 +131,11 @@ def addSpecialisation(structure: dict, code: str, type: str):
 
         item['UOC'] = container['credits_to_complete']
 
-        courseList = []
         item['courses'] = {}
         for course in container['courses']:
             if ' or ' in course:
-                courseList.extend(course.split(' or '))
+                for index, c in enumerate(course.split(' or ')):
+                    item['courses'][c] = container['courses'][course][index]
             else:
                 item['courses'][course] = container['courses'][course]
 

@@ -115,6 +115,11 @@ def cache_program_mappings():
     mappings["ACTL#"] = {}
     mappings["BUSN#"] = {}
     mappings["COMM#"] = {}
+    mappings["ECON#"] = {}
+    mappings["INFS#"] = {}
+    mappings["ZBUS#"] = {}
+    mappings["DATA#"] = {}
+    mappings["COMP#"] = {}
     # TODO: Add any more mappings. Look into updating manual-fixes wiki page?
 
     programs = read_data(PROGRAMS_FORMATTED_FILE)        
@@ -122,9 +127,22 @@ def cache_program_mappings():
     for program in programs.values():
         if re.match(r"actuarial", program["title"], flags=re.IGNORECASE):
             mappings["ACTL#"][program["code"]] = 1
+            mappings["ZBUS#"][program["code"]] = 1
         elif re.match(r"business", program["title"], flags=re.IGNORECASE):
             mappings["BUSN#"][program["code"]] = 1
+            mappings["ZBUS#"][program["code"]] = 1
         elif re.match(r"commerce", program["title"], flags=re.IGNORECASE):
             mappings["COMM#"][program["code"]] = 1
-
+            mappings["ZBUS#"][program["code"]] = 1
+        elif re.match(r"economics", program["title"], flags=re.IGNORECASE):
+            mappings["ECON#"][program["code"]] = 1
+            mappings["ZBUS#"][program["code"]] = 1
+        elif re.match(r"information systems", program["title"], flags=re.IGNORECASE):
+            mappings["INFS#"][program["code"]] = 1
+            mappings["ZBUS#"][program["code"]] = 1
+        elif re.match(r"data science and decisions",program["title"], flags=re.IGNORECASE):
+            mappings["DATA#"][program["code"]] = 1
+        elif re.match(r"computer science",program["title"], flags=re.IGNORECASE):
+            mappings["COMP#"][program["code"]] = 1
+        
     write_data(mappings, PROGRAM_MAPPINGS_FILE)
