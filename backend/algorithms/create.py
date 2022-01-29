@@ -35,7 +35,7 @@ def create_category(tokens):
     elif re.match(r'^F$', tokens[0], flags=re.IGNORECASE):
          # Faculty category
          return FacultyCategory(f"{tokens[0]} {tokens[1]}"), 1
-    
+
     # TODO: Levels (e.g. SPECIALISATIONS, PROGRAM)
 
     # Did not match any category. Return None and assume only 1 token was consumed
