@@ -1,7 +1,7 @@
 '''Supporting classes for Requirements which have some condition attached to a
 specific cateogry'''
 
-import abc
+from abc import ABC, abstractmethod
 import re
 import json
 # Preload the mappings to school and faculty
@@ -11,9 +11,9 @@ with open("./algorithms/cache/courseMappings.json") as f:
     CACHED_MAPPINGS = json.load(f)
     f.close()
 
-class Category:
+class Category(ABC):
     '''The base Category class from which more detailed Category classes stem from'''
-    @abc.abstractmethod
+    @abstractmethod
     def match_definition(self, course):
         pass
 
@@ -37,7 +37,7 @@ class Category:
 class CourseCategory(Category):
     '''A 4 letter course category, e.g. COMP, SENG, MATH, ENGG'''
 
-    def __init__(self, code):
+    def __init__(self, code: str):
         self.code = code
 
     def match_definition(self, course):
@@ -46,11 +46,11 @@ class CourseCategory(Category):
 class LevelCategory(Category):
     '''A simple level category. e.g. L2'''
 
-    def __init__(self, level):
+    def __init__(self, level: int):
         # A number representing the level
         self.level = level
 
-    def match_definition(self, course):
+    def match_definition(self, course: str):
         return course[4] == str(self.level)
 
 class LevelCourseCategory(Category):
@@ -60,7 +60,7 @@ class LevelCourseCategory(Category):
         self.level = level
         self.code = code
 
-    def match_definition(self, course):
+    def match_definition(self, course) -> bool:
         return re.match(rf'{self.code}\d{{4}}', course) and course[4] == str(self.level)
 
 class SchoolCategory(Category):

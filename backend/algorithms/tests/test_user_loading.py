@@ -38,7 +38,7 @@ def test_user2():
 
 def test_user3():
     user = User(USERS["user3"])
-    
+
     assert user.in_program("3707")
     assert user.in_specialisation("COMPA1")
     assert user.wam == None

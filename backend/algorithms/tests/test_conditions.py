@@ -8,16 +8,14 @@ from algorithms.create import create_condition
 from algorithms.objects.conditions import *
 from algorithms.objects.user import User
 
+PATH = "./algorithms/exampleUsers.json"
 
-def create_student_3707_COMPA1():
-    user = User()
-    user.add_program("3707")
-    user.add_specialisation("COMPA1")
-    return user
-
+with open(PATH) as f:
+    USERS = json.load(f)
+f.close()
 
 def test_no_condition():
-    user = create_student_3707_COMPA1()
+    user = User(USERS["user3"])
 
     no_cond = create_condition(["(", ")"])
     assert (no_cond.is_unlocked(user))["result"] == True
@@ -32,7 +30,7 @@ def test_no_condition():
 
 
 def test_course_condition():
-    user = create_student_3707_COMPA1()
+    user = User(USERS["user3"])
 
     single_cond = create_condition(["(", "COMP1511", ")"])
     assert (single_cond.is_unlocked(user))["result"] == False
@@ -50,7 +48,7 @@ def test_course_condition():
 
 def test_composite_condition_course():
     '''AND/OR conditions with only course requirements'''
-    user = create_student_3707_COMPA1()
+    user = User(USERS["user3"])
 
     and_cond = create_condition(["(", "COMP1511", "&&", "COMP1521", "&&", "COMP1531", ")"])
     assert (and_cond.is_unlocked(user))["result"] == False
@@ -92,7 +90,7 @@ def test_composite_condition_course():
 
 def test_composite_condition_course():
     '''AND/OR conditions with only course requirements'''
-    user = create_student_3707_COMPA1()
+    user = User(USERS["user3"])
 
     and_cond = create_condition(
         ["(", "COMP1511", "&&", "COMP1521", "&&", "COMP1531", ")"])
@@ -136,7 +134,7 @@ def test_composite_condition_course():
 
 def test_uoc_condition_simple():
     '''Testing simple uoc condition without complex keywords'''
-    user = create_student_3707_COMPA1()
+    user = User(USERS["user3"])
     user.add_courses({
         "COMP1511": (6, None),
         "COMP1521": (6, None),
@@ -155,7 +153,7 @@ def test_uoc_condition_simple():
 
 def test_uoc_condition_complex():
     '''Testing uoc condition including keywords'''
-    user = create_student_3707_COMPA1()
+    user = User(USERS["user3"])
     user.add_courses({
         "COMP1511": (6, None),
         "COMP1521": (6, None),
@@ -187,7 +185,7 @@ def test_uoc_condition_complex():
 def test_wam_condition_simple():
     '''Testing simple wam condition without complex keywords. We must check for
     warnings since we will return True by default'''
-    user = create_student_3707_COMPA1()
+    user = User(USERS["user3"])
     user.add_courses({
         "COMP1511": (6, None),
         "COMP1521": (6, None)
@@ -199,7 +197,7 @@ def test_wam_condition_simple():
     assert len(cond1_user_unlocked["warnings"]) == 1
     assert "Requires 70 WAM. Your WAM has not been recorded" in cond1_user_unlocked["warnings"]
 
-    user1 = create_student_3707_COMPA1()
+    user1 = User(USERS["user3"])
     user1.add_courses({
         "COMP1511": (6, 80),
         "COMP1521": (6, 90),
@@ -223,7 +221,7 @@ def test_wam_condition_simple():
 
 def test_wam_condition_complex():
     '''Testing wam condition including keywords'''
-    user = create_student_3707_COMPA1()
+    user = User(USERS["user3"])
     user.add_courses({
         "COMP1511": (6, None),
         "COMP1521": (6, None),
@@ -241,7 +239,7 @@ def test_wam_condition_complex():
         ["(", "70WAM", "in", "COMP", "||", "70WAM", "in", "MATH", ")"])
     assert (comp_math_cond_70.is_unlocked(user))["result"] == True
 
-    user1 = create_student_3707_COMPA1()
+    user1 = User(USERS["user3"])
     user1.add_courses({
         "COMP1511": (6, 65),
         "COMP1521": (6, 80),
@@ -255,7 +253,7 @@ def test_wam_condition_complex():
 
 
 def test_grade_condition():
-    user = create_student_3707_COMPA1()
+    user = User(USERS["user3"])
     user.add_courses({
         "COMP1511": (6, None),
         "MATH1131": (6, None)
@@ -284,7 +282,7 @@ def test_grade_condition():
     comp1521_90 = create_condition(["(", "90GRADE", "in", "COMP1521", ")"])
     math1131_90 = create_condition(["(", "90GRADE", "in", "COMP1131", ")"])
 
-    user1 = create_student_3707_COMPA1()
+    user1 = User(USERS["user3"])
     user1.add_courses({
         "COMP1511": (6, 70),
         "MATH1131": (6, 70),
@@ -299,7 +297,7 @@ def test_grade_condition():
     assert (math1131_90.is_unlocked(user1))["result"] == False
 
     # Test complex grade conditions
-    user2 = create_student_3707_COMPA1()
+    user2 = User(USERS["user3"])
     user2.add_courses({
         "ENGG1000": (6, 50),
         "COMP1511": (6, 65),
@@ -323,9 +321,8 @@ def test_grade_condition():
 
 def test_specialisation_condition_simple():
     """Testing simple specialisation condition such as enrolled in COMPA1"""
-    user = create_student_3707_COMPA1()
+    user = User(USERS["user3"])
     user.add_specialisation("ACCTA2")
-
     compa1_cond = create_condition(["(", "COMPA1", ")"])
     accta2_cond = create_condition(["(", "ACCTA2", ")"])
     finsa2_cond = create_condition(["(", "FINSA2", ")"])
@@ -337,7 +334,7 @@ def test_specialisation_condition_simple():
 
 def test_program_condition_simple():
     """Testing simple program condition such as enrolled in 3707"""
-    user = create_student_3707_COMPA1()
+    user = User(USERS["user3"])
 
     cond_3707 = create_condition(["(", "3707", ")"])
     cond_3778 = create_condition(["(", "3778", ")"])
@@ -350,7 +347,7 @@ def test_level_condition_simple():
     '''Testing simple level conditions with levels such as 24UOC in L1
     NOTE: Only UOC conditions realistically exist for this
     '''
-    user = create_student_3707_COMPA1()
+    user = User(USERS["user3"])
     user.add_courses({
         "COMP1511": (6, None),
         "COMP1521": (6, None),
@@ -384,7 +381,7 @@ def test_level_course_condition():
     '''Testing level conditions with course category such as L2 MATH
     NOTE: Only UOC conditions realistically exist for this
     '''
-    user = create_student_3707_COMPA1()
+    user = User(USERS["user3"])
     user.add_courses({
         "COMP1511": (6, None),
         "MATH1131": (6, None),
@@ -410,7 +407,7 @@ def test_level_course_condition():
 
 def test_exclusion():
     '''Testing that you are properly blocked from taking exclusion courses'''
-    user = create_student_3707_COMPA1()
+    user = User(USERS["user3"])
     user.add_courses({
         "COMP1511": (6, None),
         "COMP1521": (6, None),
@@ -435,7 +432,7 @@ def test_exclusion():
 
 def test_coreq_condition():
     """Testing corequisite conditions"""
-    user = create_student_3707_COMPA1()
+    user = User(USERS["user3"])
     user.add_courses({
         "COMP1511": (6, None),
         "COMP1521": (6, None),
@@ -473,7 +470,7 @@ def test_coreq_condition():
 
 def test_school_condition():
     """Testing school conditions such as 12UOC in S Comp"""
-    user = create_student_3707_COMPA1()
+    user = User(USERS["user3"])
     user.add_courses({
         "COMP1511": (6, None),
         "COMP1521": (6, None),
@@ -487,7 +484,7 @@ def test_school_condition():
 
 def test_faculty_condition():
     """Testing faculty conditions such as 12UOC in F Engineering"""
-    user = create_student_3707_COMPA1()
+    user = User(USERS["user3"])
     user.add_courses({
         "COMP1511": (6, None),
         "COMP1521": (6, None),
@@ -503,7 +500,7 @@ def test_program_type():
     """Testing program type conditions such as ACTL#
     Refer to the cache programMappings.json
     """
-    comp_user = create_student_3707_COMPA1()
+    comp_user = User(USERS["user3"])
     actl_user = User()
     actl_user.add_program("3154")
 

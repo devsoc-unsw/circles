@@ -32,9 +32,9 @@ export default function CourseMenu() {
 
   const fetchProgression = async () => {
     // Local Development Testing
-    const res = await axios.get("http://localhost:3000/structure.json");
+    //const res = await axios.get("http://localhost:3000/structure.json");
     // Uncomment when DB is working
-    // const coreData = await axios.get(`http://localhost:8000/programs/getStructure/${programCode}/${specialisation}/${minor}`);
+    const res = await axios.get(`http://localhost:8000/programs/getStructure/${programCode}/${specialisation}/${minor}`);
     dispatch(setStructure(res.data));
   };
   if (!structure) fetchProgression();

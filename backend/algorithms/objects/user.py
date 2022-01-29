@@ -1,3 +1,6 @@
+import copy
+
+
 class User:
     '''A user and their data which will be used to determine if they can take a course'''
 
@@ -42,7 +45,7 @@ class User:
         '''Adds a program to this user'''
         self.program = program # TODO: This should update to reflect UOC of user
 
-    def add_specialisation(self, specialisation):
+    def add_specialisation(self, specialisation: str):
         '''Adds a specialisation to this user'''
         self.specialisations[specialisation] = 1  # TODO: This should update to reflect UOC of user
 
@@ -64,11 +67,11 @@ class User:
 
     def load_json(self, data):
         '''Given the user data, correctly loads it into this user class'''
-        
-        self.program = data['program']
-        self.specialisations = data['specialisations']
-        self.courses = data['courses']
-        self.year = data['year']
+
+        self.program = copy.deepcopy(data['program'])
+        self.specialisations = copy.deepcopy(data['specialisations'])
+        self.courses = copy.deepcopy(data['courses'])
+        self.year = copy.deepcopy(data['year'])
         '''calculate wam and uoc'''
         # Subtract uoc of the courses without mark when dividing
         uocfixer = 0
