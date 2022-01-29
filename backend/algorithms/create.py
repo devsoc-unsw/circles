@@ -179,15 +179,3 @@ def make_condition(tokens, first=False, course=None):
             return None, index
 
     return result, index
-
-if __name__ == '__main__':
-    make_condition([
-        "102UOC",
-        "in",
-        "(",
-        "COMP?1",
-        "||",
-        "COMPBH",
-        ")",
-        ")"
-    ])
