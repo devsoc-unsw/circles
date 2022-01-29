@@ -21,7 +21,7 @@ export const MinorStep = () => {
   });
 
   // const fetchAllMinors = async () => {
-  //     const res = await axios.get(`http://localhost:8000/api/getMinors/${program}`);
+  //     const res = await axios.get(`http://localhost:8000/programs/getMinors/${program}`);
   //     setOptions(res.data["minors"]);
 
   //     // setIsLoading(false);

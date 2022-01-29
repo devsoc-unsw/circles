@@ -96,7 +96,7 @@ def COMP_3900():
     """
 
     # Note COMPBH is studied as a major stream in the BE(Hons)
-    return "COMP1531 && (COMP2521 || COMP1927) && 102UOC in (COMP?1 || COMPBH)"
+    return "COMP1531 && (COMP2521 || COMP1927) && COMP# && 102UOC"
 
 
 def COMP_3901_2(conditions):

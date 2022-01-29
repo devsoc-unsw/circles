@@ -14,6 +14,6 @@ user = { "userData": {
   ]
 }
 
-x = requests.post('http://127.0.0.1:8000/api/getAllUnlocked', json=user)
+x = requests.post('http://127.0.0.1:8000/courses/getAllUnlocked', json=user)
 data = x.json()
 print(data)
