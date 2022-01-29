@@ -9,7 +9,6 @@ import ContextMenu from "./ContextMenu";
 import useMediaQuery from "../../hooks/useMediaQuery";
 
 function DraggableCourse({ code, index }) {
-  //   let code = course.match(/([A-Z]{4}[0-9]{4}):/)[1];
   const { Text } = Typography;
   const { courses, isSummerEnabled, completedTerms } = useSelector((state) => {
     return state.planner;
@@ -51,7 +50,7 @@ function DraggableCourse({ code, index }) {
             className={`course ${isSummerEnabled && "summerViewCourse"} 
 			${isDragDisabled && " dragDisabledCourse"} 
 			${isDragDisabled && warning && " disabledWarning"}
-			${warning && " warning"}`}
+			${warning === true && " warning"}`}
             data-tip
             data-for={code}
             id={code}
@@ -80,10 +79,12 @@ function DraggableCourse({ code, index }) {
         )}
       </Draggable>
       <ContextMenu code={code} plannedFor={plannedFor} />
-      {prereqDisplay != "" && (
+      {/* display prereq tooltip for all courses. However, if a term is marked as complete 
+	  and the course has no warning, then disable the tooltip */}
+      {prereqDisplay !== "" && (!isDragDisabled || warning) && (
         <ReactTooltip id={code} place="bottom" className="tooltip">
-          <div style={{ fontWeight: "bold" }}>Prerequisites:</div>
-          {prereqDisplay}{" "}
+          <div className="prereqsTooltip">Prerequisites:</div>
+          {prereqDisplay}
         </ReactTooltip>
       )}
     </>

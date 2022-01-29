@@ -6,10 +6,11 @@ body {
 .content {
   @small: ~"(max-width: 1400px)";
 
+
   .plannerContainer {
     display: flex;
     // align-items: center;
-    margin-top: 2em;
+    margin-top: 0.5em;
     justify-content: center;
     margin-left: 1em;
     margin-right: 1em;
@@ -105,10 +106,13 @@ body {
     margin-bottom: 1em;
   }
 
+  .ant-picker-dropdown {
+    z-index: 10;
+  }
   .panel {
     max-height: 30em;
     margin-bottom: 1em;
-    overflow-y: scroll;
+    overflow-y: auto;
     padding-right: 0.7em;
   }
   .skeletonTerm {
@@ -140,6 +144,48 @@ body {
     gap: 1em;
     margin-bottom: 0.7em;
   }
+  .settingsButton {
+    margin-left: 1em;
+    margin-top: 1em;
+    border: none;
+    border-radius: 0.5em;
+    padding: 0.5em 0.7em 0.3em 0.7em;
+  }
+
+  .clicked {
+    background-color: #bfbfbf;
+  }
+
+  .settingsMenu {
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5em;
+  }
+  .settingsTitleContainer {
+    width: 14em;
+  }
+
+  .settingsTitle {
+    margin-bottom: 0;
+    text-align: left;
+  }
+
+  .settingsDivider {
+    margin: 0.5em 0 0.5em 0;
+  }
+
+  .settingsEntry {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    margin-bottom: 1em;
+  }
+
+  .settingsSubtitle {
+    margin-bottom: 0;
+  }
 
   .dragDisabledCourse:hover {
     // background-color: red;
@@ -169,9 +215,42 @@ body {
       transform: rotate(0deg);
     }
   }
+
+  .prereqsTooltip {
+    font-weight: bold;
+    margin-bottom: 0.5em;
+  }
+  .tooltip {
+    padding: 1em;
+  }
+  .eye {
+    display: none;
+  }
+  .yearContainer {
+    cursor: pointer;
+    &:hover {
+      .eye {
+        display: block;
+      }
+
+      .year {
+        display: none;
+      }
+    }
+  }
+
+  .optionsHeader {
+    display: flex;
+  }
+
+
+  .ant-collapse-header {
+    color: white !important;
+  }
 }
 
 .dark {
+
   .termBox {
     background-color: #242728;
   }
@@ -201,7 +280,7 @@ body {
   }
 
   .collapse {
-    background-color: #1d1f20;
+    background-color: #9254de;
     border: #17191a;
     margin-bottom: 1em;
     width: 300px;
@@ -266,6 +345,27 @@ body {
   .disabledWarning {
     background-color: rgba(186, 132, 81, 0.33);
   }
+
+  .settingsButton {
+    background-color: #0f1010;
+    &:hover {
+      background-color: #242728;
+    }
+  }
+
+  .clicked {
+    background-color: #242728;
+  }
+  .eye {
+    color: #373a3a;
+  }
+
+  .settingsIcon {
+    color: #3b3e3e;
+  }
+
+
+
 }
 
 .light {
@@ -298,17 +398,7 @@ body {
     // background-color: none;
   }
 
-  .helpNotif {
-    background-color: #9685f3;
-    color: #ffffff;
-    .ant-notification-close-icon {
-      color: #ffffff;
-    }
 
-    .anticon-info-circle {
-      color: #ffffff;
-    }
-  }
   .panel {
     scrollbar-width: thin;
     scrollbar-color: #d9d9d9 white;
@@ -367,5 +457,16 @@ body {
 
   .disabledWarning {
     background-color: #fff3e0;
+  }
+
+  .settingsButton {
+    background-color: #e8e8e8;
+    &:hover {
+      background-color: #cecece;
+    }
+  }
+
+  .settingsIcon {
+    color: #303539;
   }
 }
