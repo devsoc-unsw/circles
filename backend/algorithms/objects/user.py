@@ -130,10 +130,9 @@ class User:
         for course in self.courses:
             if not course in locked:
                 cached_conditions[course] = create_condition(CACHED_CONDITIONS_TOKENS[course], course)
-
+        print(CACHED_CONDITIONS_TOKENS["MATH1081"])
         del self.courses[target]
         self.update_wam_uoc()
-
         affected_courses = []
         # Brute force loop through all courses and if we find a course which is
         # no longer unlocked, we unselect it, add it to the affected course list,

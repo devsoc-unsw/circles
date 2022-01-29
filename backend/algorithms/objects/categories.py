@@ -41,7 +41,7 @@ class CourseCategory(Category):
         self.code = code
 
     def match_definition(self, course):
-        return re.match(rf'{self.code}\d{{4}}', course)
+        return bool(re.match(rf'^{self.code}\d{{4}}$', course))
 
 class LevelCategory(Category):
     '''A simple level category. e.g. L2'''
@@ -51,7 +51,7 @@ class LevelCategory(Category):
         self.level = level
 
     def match_definition(self, course: str):
-        return course[4] == str(self.level)
+        return bool(course[4] == str(self.level))
 
 class LevelCourseCategory(Category):
     '''A level category for a certain type of course (e.g. L2 MATH)'''
@@ -61,7 +61,7 @@ class LevelCourseCategory(Category):
         self.code = code
 
     def match_definition(self, course) -> bool:
-        return re.match(rf'{self.code}\d{{4}}', course) and course[4] == str(self.level)
+        return bool(re.match(rf'{self.code}\d{{4}}', course) and course[4] == str(self.level))
 
 class SchoolCategory(Category):
     '''Category for courses belonging to a school (e.g. S Mech)'''

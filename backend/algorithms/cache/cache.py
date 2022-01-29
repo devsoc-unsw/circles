@@ -6,8 +6,6 @@ This should be run from the backend directory or via runprocessors
 """
 
 from os import write
-import sys
-import json
 import re
 
 from data.utility.dataHelpers import read_data, write_data

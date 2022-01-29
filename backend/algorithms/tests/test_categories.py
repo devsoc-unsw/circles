@@ -44,14 +44,14 @@ def test_course_category_match_definition():
     assert not courseCategory.match_definition("PAIN12345")
 
 def test_level_category_match_definition():
-    level1 = CourseCategory(1)
+    level1 = LevelCategory(1)
     assert level1.match_definition("COMP1000")
     assert level1.match_definition("ENGG1100")
     assert not level1.match_definition("ENGG3100")
 
-def test_leve_course_category_match_definition():
+def test_level_course_category_match_definition():
     level1comp = LevelCourseCategory(1, "COMP")
     assert level1comp.match_definition("COMP1000")
-    assert level1comp.match_definition("COMP3000")
+    assert not level1comp.match_definition("COMP3000")
     assert not level1comp.match_definition("ENGG1100")
     assert not level1comp.match_definition("ENGG3100")
