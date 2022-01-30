@@ -12,25 +12,20 @@ const ProgressionChecker = () => {
   const fetchDegree = async () => {
     let res = await axios.get("http://localhost:3000/degree.json");
     setDegree(res.data);
-    res = await axios.get("http://localhost:3000/progressioncourses.json");
-    console.log(res.data)
+    res = await axios.get(`http://localhost:8000/programs/getStructure/3778/${res.data.concentrations[0].code}/${res.data.concentrations[1].code}`);
 
-    // res = await axios.get("checkercourses.json");
-    setCourses(res.data);
+    setCourses(res.data.structure);
     setIsLoading(false);
   };
 
   useEffect(() => {
-    // setTimeout(fetchDegree, 2000);  // testing skeleton
     fetchDegree();
-    // fetchCourses();
   }, []);
 
   return (
     <>
       <Dashboard isLoading={isLoading} degree={degree}/>
       <ListView3 isLoading={isLoading} degree={degree} progressioncourses={courses}/>
-      {/* <TableView checkercourses={courses}/> */}
     </>
   );
 };

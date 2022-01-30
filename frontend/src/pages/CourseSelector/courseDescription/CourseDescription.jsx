@@ -26,7 +26,6 @@ export default function CourseDescription() {
   const dispatch = useDispatch();
   const { active, tabs } = useSelector((state) => state.tabs);
   let id = tabs[active];
-  // console.log(active, tabs);
 
   const course = useSelector((state) => state.updateCourses.course);
   const coursesInPlanner = useSelector((state) => state.planner.courses);
@@ -48,7 +47,6 @@ export default function CourseDescription() {
   if (id === "search") return <SearchCourse />;
 
   const addToPlanner = () => {
-    console.log(course);
     const data = {
       courseCode: course.code,
       courseData: {

@@ -1,32 +1,31 @@
 import React from "react";
-import { Typography, Button, Space} from "antd";
+import { Typography } from "antd";
 import { Skeleton } from "antd";
-import CourseComponents from "./CourseComponents.js"
-import { map } from "@antv/util";
+import CourseComponents from "./CourseComponents.js";
 
 const ListView = ({ isLoading, degree, progressioncourses}) => {
   const { Title } = Typography;
-  console.log(progressioncourses);
 
   return (
     <>
       {isLoading ? (
         <Skeleton />
       ) : (
-        <>
-          {degree["concentrations"]&&degree["concentrations"].map((concentration) => (
+        <div>
+          {degree.concentrations && 
+            degree.concentrations.map((concentration) => (
             <div
               className="listPage"
-              id={concentration["name"]}
-              key={concentration["name"]}
+              id={concentration.name}
+              key={concentration.name}
             >
-            <Title className="text">{concentration["type"].charAt(0).toUpperCase()+concentration["type"].slice(1)} ({concentration["name"]})</Title>
+            <Title className="text">{concentration.type.charAt(0).toUpperCase() + concentration.type.slice(1)} ({concentration.name})</Title>
 
-            <CourseComponents progressioncourses = {progressioncourses} type = {concentration["type"]}/>
+            <CourseComponents progressioncourses = {progressioncourses} type = {concentration.type}/>
             
             </div>
           ))}
-        </>
+        </div>
       )}
     </>
   );
