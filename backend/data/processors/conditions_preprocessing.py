@@ -258,6 +258,7 @@ def convert_AND_OR(processed):
     """ Convert 'and' to '&&' and 'or' to '||' """
     processed = re.sub(" and ", " && ", processed, flags=re.IGNORECASE)
     processed = re.sub(" plus ", " && ", processed, flags=re.IGNORECASE)
+    processed = re.sub(r" \+ ", " && ", processed, flags=re.IGNORECASE)
     processed = re.sub(" or ", " || ", processed, flags=re.IGNORECASE)
     return processed
 

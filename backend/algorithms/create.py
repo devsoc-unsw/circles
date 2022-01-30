@@ -115,7 +115,7 @@ def make_condition(tokens, first=False, course=None):
             uoc = get_uoc(token)
             uoc_cond = UOCCondition(uoc)
 
-            if tokens[index + 1] == "in":
+            if index + 1 < len(tokens) and tokens[index + 1] == "in":
                 # Create category according to the token after 'in'
                 next(it)  # Skip "in" keyword
 
@@ -137,7 +137,7 @@ def make_condition(tokens, first=False, course=None):
             wam = get_wam(token)
             wam_cond = WAMCondition(wam)
 
-            if tokens[index + 1] == "in":
+            if index + 1 < len(tokens) and tokens[index + 1] == "in":
                 # Create category according to the token after 'in'
                 next(it)  # Skip "in" keyword
                 category, sub_index = create_category(tokens[index + 2:])
@@ -155,7 +155,7 @@ def make_condition(tokens, first=False, course=None):
             # Condition for GRADE requirement (mark in a single course)
             grade = get_grade(token)
 
-            if tokens[index + 1] == "in":
+            if index + 1 < len(tokens) and tokens[index + 1] == "in":
                 # Next token is "in" or else there has been an error
                 next(it)  # Skip "in" keyword and course code
                 next(it)

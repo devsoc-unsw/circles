@@ -70,7 +70,7 @@ export default function SearchCourse() {
     // dispatch(setCourses(res.data));
     try {
       const res = await axios.post(
-        `http://localhost:8000/api/getAllUnlocked/`,
+        `http://localhost:8000/courses/getAllUnlocked/`,
         JSON.stringify(payload),
         {
           headers: {

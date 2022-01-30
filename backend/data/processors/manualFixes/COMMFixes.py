@@ -163,7 +163,7 @@ def COMM_2244():
     COURSES["COMM1150"]["exclusions"]["CDEV3000"] = 1
     COURSES["COMM1150"]["exclusions"]["DIPP1510"] = 1
 
-    return "(COMM6000 || COMM1999) && 65WAM && 48 UOC"
+    return "(COMM6000 || COMM1999) && 65WAM && 48UOC"
 
 def COMM_3020(conditions):
     """
