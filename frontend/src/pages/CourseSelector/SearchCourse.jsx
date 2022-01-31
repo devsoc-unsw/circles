@@ -66,8 +66,6 @@ export default function SearchCourse() {
   }, []);
 
   const fetchCourses = async () => {
-    // const res = await axios.get("http://localhost:3000/courses.json");
-    // dispatch(setCourses(res.data));
     try {
       const res = await axios.post(
         `http://localhost:8000/courses/getAllUnlocked/`,
