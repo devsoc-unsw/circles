@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 // import axios from 'axios';
 import { Menu, Typography, Button } from "antd";
 import { degreeActions } from "../../../actions/degreeActions";
-import { Link, animateScroll } from "react-scroll";
+import { Link } from "react-scroll";
 import { useDispatch, useSelector } from "react-redux";
 import "./steps.less";
 

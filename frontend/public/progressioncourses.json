@@ -1,0 +1,86 @@
+{
+  "major": {
+    "Core Courses": {
+      "uoc": 72,
+      "courses": {
+        "COMP3821": "Extended Algorithms and Programming Techniques",
+        "COMP3121": "Algorithms and Programming Techniques",
+        "COMP1521": "Computer Systems Fundamentals",
+        "COMP1511": "Programming Fundamentals",
+        "COMP1531": "Software Engineering Fundamentals",
+        "COMP2511": "Object-Oriented Design & Programming",
+        "COMP2521": "Data Structures and Algorithms",
+        "COMP3161": "Concepts of Programming Languages",
+        "COMP3900": "Computer Science Project",
+        "COMP4920": "Professional Issues and Ethics in Information Technology",
+        "MATH1081": "Discrete Mathematics"
+      }
+    },
+    "Computing Electives": {
+      "uoc": 30,
+      "courses": {
+        "ENGG4600": "Engineering Vertically Integrated Project",
+        "ENGG2600": "Engineering Vertically Integrated Project",
+        "ENGG3600": "Engineering Vertically Integrated Project",
+        "COMP3": 1,
+        "COMP4": 1,
+        "COMP6": 1,
+        "COMP9": 1
+      }
+    },
+    "Database Systems Prescribed Electives": {
+      "uoc": 18,
+      "courses": {
+        "COMP9319": "Web Data Compression and Search",
+        "COMP9313": "Big Data Management",
+        "COMP9315": "Database Systems Implementation",
+        "COMP6714": "Information Retrieval and Web Search",
+        "COMP9318": "Data Warehousing and Data Mining"
+      }
+    },
+    "Programming Languages Prescribed Electives": {
+      "uoc": 18,
+      "courses": {
+        "COMP3131": "Programming Languages and Compilers",
+        "COMP3141": "Software System Design and Implementation",
+        "COMP3151": "Foundations of Concurrency",
+        "COMP6771": "Advanced C++ Programming"
+      }
+    }
+  },
+  "minor": {
+    "Finance Core Courses": {
+      "uoc": 12,
+      "courses": {
+        "FINS1613": "Business Finance",
+        "FINS1612": "Capital Markets and Institutions"
+      }
+    },
+    "Finance Prescribed Electives": {
+      "uoc": 18,
+      "courses": {
+        "FINS3650": "International Banking",
+        "FINS3775": "Research Methods in Finance 1",
+        "FINS2624": "Portfolio Management",
+        "FINS3625": "Applied Corporate Finance",
+        "FINS3633": "Real Estate Finance",
+        "FINS3637": "Wealth Management Advice",
+        "FINS3666": "Trading and Market Making",
+        "FINS3644": "Sustainable and Responsible Investing",
+        "FINS2622": "Asia-Pacific Capital Markets",
+        "FINS3631": "Risk and Insurance",
+        "FINS3623": "Venture Capital",
+        "FINS3636": "Interest Rate Risk Management",
+        "FINS3655": "Behavioural Finance",
+        "FINS3616": "International Business Finance",
+        "FINS3630": "Bank Financial Management",
+        "FINS3641": "Security Analysis and Valuation",
+        "FINS3635": "Options, Futures and Risk Management",
+        "FINS2643": "Wealth Management",
+        "FINS3626": "International Corporate Governance",
+        "FINS3634": "Credit Analysis and Lending",
+        "FINS3640": "Investment Management Modelling"
+      }
+    }
+  }
+}
