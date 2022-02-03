@@ -6,7 +6,7 @@ import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
 import SettingsMenu from "./SettingsMenu";
 
-const SettingsButton = ({ visible, setVisible }) => {
+const SettingsButton = () => {
   const theme = useSelector((state) => state.theme);
 
   const [isOpen, setIsOpen] = React.useState(false);

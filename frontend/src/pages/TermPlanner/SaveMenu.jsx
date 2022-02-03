@@ -1,11 +1,9 @@
 import React from "react";
-import { plannerActions } from "../../actions/plannerActions";
-import { Typography, DatePicker, Select, Switch, Divider, Button } from "antd";
+import { Typography, Select, Button } from "antd";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
 import {
   exportComponentAsJPEG,
-  exportComponentAsPDF,
   exportComponentAsPNG,
 } from "react-component-export-image";
 
