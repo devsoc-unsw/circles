@@ -27,7 +27,7 @@ export default function CourseDescription() {
   const { active, tabs } = useSelector((state) => state.tabs);
   let id = tabs[active];
 
-  const course = useSelector((state) => state.updateCourses.course);
+  const course = useSelector((state) => state.courses.course);
   const coursesInPlanner = useSelector((state) => state.planner.courses);
   const courseInPlanner = coursesInPlanner.has(id);
   const [show, setShow] = React.useState(false);

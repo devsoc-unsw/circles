@@ -1,7 +1,7 @@
 import React, { useState, useRef, useMemo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Select, Spin } from "antd";
-import { setCourses } from "../../../actions/updateCourses";
+import { setCourses } from "../../../actions/coursesActions";
 import debounce from "lodash/debounce";
 import axios from "axios";
 

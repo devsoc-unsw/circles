@@ -1,4 +1,4 @@
-import { setCourse } from "../../actions/updateCourses";
+import { setCourse } from "../../actions/coursesActions";
 import axios from "axios";
 
 export const getCourseById = (id) => {

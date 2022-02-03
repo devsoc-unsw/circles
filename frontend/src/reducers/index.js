@@ -3,12 +3,12 @@ import themeReducer from "./themeReducer";
 import userReducer from "./userReducer";
 import degreeReducer from "./degreeReducer";
 import plannerReducer from "./plannerReducer";
-import updateCoursesReducer from "./updateCourses";
+import coursesReducer from "./coursesReducer";
 import courseTabsReducer from "./courseTabsReducer";
 const allReducers = combineReducers({
   degree: degreeReducer,
   tabs: courseTabsReducer,
-  updateCourses: updateCoursesReducer,
+  courses: coursesReducer,
   planner: plannerReducer,
   user: userReducer,
   theme: themeReducer,
