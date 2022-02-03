@@ -130,7 +130,6 @@ class User:
         for course in self.courses:
             if not course in locked:
                 cached_conditions[course] = create_condition(CACHED_CONDITIONS_TOKENS[course], course)
-        print(CACHED_CONDITIONS_TOKENS["MATH1081"])
         del self.courses[target]
         self.update_wam_uoc()
         affected_courses = []
@@ -141,10 +140,9 @@ class User:
         while True:
             courses_to_delete = [
                 course for course in self.courses
-                if cached_conditions.get(course) is not None
-                and not (cached_conditions[course].is_unlocked(self))["result"]
+                if cached_conditions.get(course) is not None # course is in conditions
+                and not (cached_conditions[course].is_unlocked(self))["result"] # not unlocked anymore
             ]
-            # these courses are no longer selectable due to our unselection
             affected_courses.extend(courses_to_delete)
             for course in courses_to_delete:
                 del self.courses[course]
