@@ -30,15 +30,15 @@ export default function CourseMenu() {
         "http://localhost:8000/programs/getStructure/3778/COMPA1"
       );
       setStructure(res1.data.structure);
-      await fetchNewUnlocked(res1.data.structure);
     } catch (err) {
       console.log(err);
     }
   };
 
   // get all courses
-  const fetchNewUnlocked = async (structure) => {
+  React.useEffect(async () => {
     try {
+      console.log("hello");
       const res = await axios.post(
         `http://localhost:8000/courses/getAllUnlocked/`,
         JSON.stringify(payload),
@@ -49,14 +49,16 @@ export default function CourseMenu() {
         }
       );
       dispatch(setCourses(res.data.courses_state));
-      generateMenuData(res.data.courses_state, structure);
+      generateMenuData(res.data.courses_state);
     } catch (err) {
       console.log(err);
     }
-  };
+  }, [structure]);
+
+  const fetchAllCourses = () => {};
 
   // generate menu content
-  const generateMenuData = (courses, structure) => {
+  const generateMenuData = (courses) => {
     let newMenu = {};
     // Example groups: Major, Minor, General
     for (const group in structure) {

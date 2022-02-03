@@ -5,7 +5,6 @@ import { PlusOutlined, StopOutlined } from "@ant-design/icons";
 import { CourseTag } from "../../../components/courseTag/CourseTag";
 import { getCourseById } from "./../courseProvider";
 import SearchCourse from "../SearchCourse";
-
 import { plannerActions } from "../../../actions/plannerActions";
 import { Loading } from "./Loading";
 import "./courseDescription.less";

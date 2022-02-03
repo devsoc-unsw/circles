@@ -67,13 +67,13 @@ const Header = () => {
               <span>Course Selector</span>
               <Link to="/course-selector" />
             </Menu.Item>
-            <Menu.Item key="progression-checker">
-              <span>Progression Checker</span>
-              <Link to="/progression-checker"></Link>
-            </Menu.Item>
             <Menu.Item key="term-planner">
               <span>Term Planner</span>
               <Link to="/term-planner" />
+            </Menu.Item>
+            <Menu.Item key="progression-checker">
+              <span>Progression Checker</span>
+              <Link to="/progression-checker"></Link>
             </Menu.Item>
           </Menu>
           <PlannerCart />
