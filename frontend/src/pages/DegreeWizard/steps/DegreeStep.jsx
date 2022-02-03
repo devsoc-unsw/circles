@@ -14,14 +14,14 @@ export const DegreeStep = ({ isYearsSet }) => {
   const [options, setOptions] = React.useState(null);
 
   const fetchAllDegrees = async () => {
-    const res = await axios.get("http://localhost:8000/programs/getPrograms");
-    setOptions(res.data["programs"]);
-    // setOptions({
-    //   3778: "Bachelor Computer Science",
-    //   3779: "Bachelor of Science",
-    //   3777: "Bachelor of Arts",
-    //   3775: "Bachelor of Commerce/Law",
-    // });
+    // const res = await axios.get("http://localhost:8000/programs/getPrograms");
+    // setOptions(res.data["programs"]);
+    setOptions({
+      3778: "Computer Science",
+      3502: "Commerce",
+      3970: "Science",
+      3543: "Economics",
+    });
     // setIsLoading(false);
   };
 
