@@ -32,7 +32,7 @@ function App() {
       <Content className="app-root content">
         <Switch>
           <Route exact path="/">
-            <DegreeWizard />
+            <CourseSelector />
             {/* Change to term planner if user session active */}
           </Route>
           <Route path="/course-selector">

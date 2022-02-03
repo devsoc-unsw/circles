@@ -9,7 +9,7 @@ import "./steps.less";
 const { Title } = Typography;
 export const SpecialisationStep = () => {
   const dispatch = useDispatch();
-  const specialisation = useSelector((store) => store.degree.specialisation);
+  const { programCode, specialisation } = useSelector((store) => store.degree);
   const [selected, setSelected] = React.useState("Select Specialisation");
   const [options, setOptions] = React.useState({
     1: "major",
@@ -19,21 +19,24 @@ export const SpecialisationStep = () => {
     5: "major",
   });
 
-  // const fetchAllSpecializations = async () => {
-  // const res = await axios.get(`http://localhost:8000/programs/getMajors/${program}`);
-  // setOptions(res.data["majors"]);
-  // setIsLoading(false);
-  //   };
+  const fetchAllSpecializations = async () => {
+    const res = await axios.get(
+      `http://localhost:8000/programs/getMajors/${programCode}`
+    );
+    console.log(res.data);
+    setOptions(res.data["majors"]);
+    // setIsLoading(false);
+  };
 
-  // useEffect(() => {
-  // setTimeout(fetchDegree, 2000);  // testing skeleton
-  // fetchAllSpecializations();
-  // }, []);
+  useEffect(() => {
+    // setTimeout(fetchDegree, 2000); // testing skeleton
+    fetchAllSpecializations();
+  }, [programCode]);
 
   return (
     <div className="steps-root-container">
       <Title level={3} className="text">
-        specialising in
+        What are you specialising in?
       </Title>
       <Menu
         className="degree-specialisations"
@@ -41,11 +44,15 @@ export const SpecialisationStep = () => {
         selectedKeys={specialisation && [specialisation]}
         mode="inline"
       >
-        {Object.keys(options).map((key) => (
-          <Menu.Item className="text" key={key}>
-            {key} {options[key]}
-          </Menu.Item>
-        ))}
+        {programCode ? (
+          Object.keys(options).map((key) => (
+            <Menu.Item className="text" key={key}>
+              {key} {options[key]}
+            </Menu.Item>
+          ))
+        ) : (
+          <div>Please select a degree first...</div>
+        )}
       </Menu>
       {specialisation !== null && (
         <Link to="Minor" smooth={true} duration={1000}>

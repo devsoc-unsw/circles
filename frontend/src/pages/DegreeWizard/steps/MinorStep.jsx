@@ -9,33 +9,28 @@ import "./steps.less";
 const { Title } = Typography;
 export const MinorStep = () => {
   const dispatch = useDispatch();
-  const minor = useSelector((store) => store.degree.minor);
+  const { minor, programCode } = useSelector((store) => store.degree);
   // Fetch the minors
   const [selected, setSelected] = React.useState("Select Minor");
-  const [options, setOptions] = React.useState({
-    1: "Minor1",
-    2: "Minor1",
-    3: "Minor1",
-    4: "Minor1",
-    5: "Minor1",
-  });
+  const [options, setOptions] = React.useState({});
 
-  // const fetchAllMinors = async () => {
-  //     const res = await axios.get(`http://localhost:8000/programs/getMinors/${program}`);
-  //     setOptions(res.data["minors"]);
+  const fetchAllMinors = async () => {
+    const res = await axios.get(
+      `http://localhost:8000/programs/getMinors/${programCode}`
+    );
+    setOptions(res.data["minors"]);
 
-  //     // setIsLoading(false);
-  //   };
+    // setIsLoading(false);
+  };
 
-  // useEffect(() => {
-  //     setTimeout(fetchDegree, 2000);  // testing skeleton
-  //     fetchAllMinors();
-  // }, []);
+  useEffect(() => {
+    fetchAllMinors();
+  }, [programCode]);
 
   return (
     <div className="steps-root-container">
       <Title level={3} className="text">
-        and minoring in (optional)
+        What is your minor (if any)?
       </Title>
       <Menu
         className="degree-minors"
@@ -43,11 +38,15 @@ export const MinorStep = () => {
         selectedKeys={minor && [minor]}
         mode="inline"
       >
-        {Object.keys(options).map((key) => (
-          <Menu.Item className="text" key={key}>
-            {key} {options[key]}
-          </Menu.Item>
-        ))}
+        {programCode ? (
+          Object.keys(options).map((key) => (
+            <Menu.Item className="text" key={key}>
+              {key} {options[key]}
+            </Menu.Item>
+          ))
+        ) : (
+          <div>Please select a degree first</div>
+        )}
       </Menu>
       <Link to="Previous Courses" smooth={true} duration={1000}>
         <Button type="primary" className="steps-next-btn">

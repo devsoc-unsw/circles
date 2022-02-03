@@ -43,7 +43,7 @@ function DegreeWizard() {
       <div className={"step-duration"}>
         <RangePicker picker="year" size="large" onChange={handleYearChange} />
       </div>
-      <animated.div style={props}>
+      <div>
         <div className="step-container">
           <div className="step-content" id={"Degree"}>
             <DegreeStep isYearsSet={isYearsSet} />
@@ -58,7 +58,7 @@ function DegreeWizard() {
             <PreviousCoursesStep />
           </div>
         </div>
-      </animated.div>
+      </div>
       {theme === "dark" && <ParticleBackground />}
     </div>
   );

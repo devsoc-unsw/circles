@@ -101,7 +101,7 @@ export const PreviousCoursesStep = () => {
   return (
     <div className="steps-root-container">
       <Title level={3} className="text">
-        Completed Courses
+        What courses have you completed?
       </Title>
       {/* Add info button */}
       <div className="steps-grid-cont" style={{ marginTop: "100px" }}>
