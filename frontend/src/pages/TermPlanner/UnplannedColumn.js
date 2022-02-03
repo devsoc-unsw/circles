@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { updateDegreeLength } from "../../actions/userAction";
 import { plannerActions } from "../../actions/plannerActions";
 import {
   Typography,
@@ -23,14 +22,6 @@ const UnplannedColumn = ({ visible, setVisible }) => {
   });
   const dispatch = useDispatch();
   const sortedUnplanned = sortUnplanned(unplanned, courses);
-
-  function onChange(date, dateString) {
-    console.log(date, dateString);
-  }
-
-  function handleChange(value) {
-    dispatch(updateDegreeLength(value));
-  }
 
   function handleSummerToggle() {
     dispatch(plannerActions("TOGGLE_SUMMER"));

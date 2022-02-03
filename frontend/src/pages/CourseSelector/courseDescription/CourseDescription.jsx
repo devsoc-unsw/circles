@@ -4,7 +4,6 @@ import { Button, Tag, Alert, Typography, Space } from "antd";
 import { PlusOutlined, StopOutlined } from "@ant-design/icons";
 import { CourseTag } from "../../../components/courseTag/CourseTag";
 import { getCourseById } from "./../courseProvider";
-import { setUnplannedCourses } from "../../../actions/userAction";
 import SearchCourse from "../SearchCourse";
 
 import { plannerActions } from "../../../actions/plannerActions";
