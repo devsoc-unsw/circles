@@ -1,5 +1,4 @@
 export const courseOptionsActions = (action, payload) => {
-    console.log('ACTUZZz', action);
     switch (action) {
         case 'LOAD_PREV_STATE': 
             return {
@@ -22,7 +21,6 @@ export const courseOptionsActions = (action, payload) => {
                 payload: payload
             }
         case 'APPEND_COURSE':
-            console.log('APEEEEEND', payload);
             return {
                 type: 'APPEND_COURSE',
                 payload: payload

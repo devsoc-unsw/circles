@@ -39,6 +39,10 @@
   .listPage {
     height: 100vh;
     padding: 2em;
+    max-width: 1200px;
+    min-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
   }
   .progressBar {
     margin-top: 0.5em;
@@ -50,6 +54,23 @@
     flex-direction: column;
     align-items: center;
   }
+  .checkerButton {
+    border-radius: 10px;
+    display:flex;
+    align-items:center;
+    width: 271px;
+    height: 60px;
+    white-space: normal;
+    padding: 20px 20px;
+  }
+
+  .space {
+    padding: 2.5em;
+  }
+  .space2 {
+    padding: 1.5em;
+  }
+
 }
 
 .dark {
@@ -57,6 +78,24 @@
     background-color: #17191a;
   }
 
+  //Change header text and background color 
+  .ant-table-thead > tr >th{
+    color: white !important;
+    background: #17191a !important;
+  }
+
+  //Modify list text and background color  
+  .ant-table-tbody > tr >th{
+    color: white !important;
+    background: #17191a !important;
+    }
+
+  .table-striped-rows tr:nth-child(2n) td {
+      background-color: #17191a;
+    }
+  .table-striped-rows thead {
+        background-color: #373b3d;
+    }
   .ant-notification-notice-message {
     color: white !important;
   }
@@ -66,6 +105,25 @@
   .card {
     background-color: #f0f0f0; // gray-4
   }
+
+  //Change header text and background color 
+  .ant-table-thead > tr >th{
+    color: black !important;
+    background: #f0f0f0 !important;
+  }
+
+  //Modify list text and background color  
+  .ant-table-tbody > tr >th{
+    color: black !important;
+    background: #f0f0f0 !important;
+    }
+
+  .table-striped-rows tr:nth-child(2n) td {
+      background-color: #fbfbfb;
+    }
+  .table-striped-rows thead {
+        background-color: #f1f1f1;
+    }
 }
 
 

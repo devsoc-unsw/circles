@@ -5,7 +5,7 @@ export const getCourseById = (id) => {
   return (dispatch) => {
     axios({
       method: "get",
-      url: `http://localhost:8000/api/getCourse/${id}`,
+      url: `http://localhost:8000/courses/getCourse/${id}`,
     })
       .then(({ data }) => {
         dispatch(setCourse(data));

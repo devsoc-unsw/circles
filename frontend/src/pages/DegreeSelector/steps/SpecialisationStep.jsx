@@ -20,7 +20,7 @@ export const SpecialisationStep = () => {
   });
 
   // const fetchAllSpecializations = async () => {
-  // const res = await axios.get(`http://localhost:8000/api/getMajors/${program}`);
+  // const res = await axios.get(`http://localhost:8000/programs/getMajors/${program}`);
   // setOptions(res.data["majors"]);
   // setIsLoading(false);
   //   };

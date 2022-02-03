@@ -31,23 +31,31 @@ export default function CourseMenu() {
   // Exception tabs
   if (id === "explore" || id === "search") id = null;
 
-  const [coursesState, setCoursesState] = React.useState({});
+  // const [coursesState, setCoursesState] = React.useState({});
+  const coursesState = useSelector((state) => state.updateCourses.courses);
+  console.log(coursesState);
 
   const fetchProgression = async () => {
     // Local Development Testing
-    // const res = await axios.get("http://localhost:3000/structure.json");
-    // console.log(res.data);
     const res1 = await axios.get(
-      "http://localhost:8000/api/getStructure/3778/COMPA1"
+      "http://localhost:8000/programs/getStructure/3778/COMPA1"
     );
     // console.log(res1);
     // Uncomment when DB is working
     // const coreData = await axios.get(`http://localhost:8000/api/getCoreCourses/${programCode}/${specialisation}/${minor}`);
     dispatch(setStructure(res1.data.structure));
 
+    await fetchNewUnlocked();
+  };
+
+  React.useEffect(() => {
+    fetchProgression();
+  }, []);
+
+  const fetchNewUnlocked = async () => {
     try {
       const res = await axios.post(
-        `http://localhost:8000/api/getAllUnlocked/`,
+        `http://localhost:8000/courses/getAllUnlocked/`,
         JSON.stringify(payload),
         {
           headers: {
@@ -55,14 +63,11 @@ export default function CourseMenu() {
           },
         }
       );
-      setCoursesState(res.data.courses_state);
+      dispatch(setCourses(res.data.courses_state));
     } catch (err) {
       console.log(err);
     }
   };
-  React.useEffect(() => {
-    fetchProgression();
-  }, []);
 
   return (
     <div className="cs-menu-root">
@@ -84,12 +89,6 @@ export default function CourseMenu() {
               <SubMenu key={category} title={category}>
                 {/* Business core, Flexible core etc */}
                 {Object.keys(structure[category]).map((subCategory) => {
-                  // let regex = courses.join("|");
-                  // for (const course in courses_state) {
-                  //   if (course.match(regex)) {
-                  //     console.log(course);
-                  //   }
-                  // }
                   if (typeof structure[category][subCategory] !== "string") {
                     const subCourses = Object.keys(
                       structure[category][subCategory].courses
@@ -98,7 +97,11 @@ export default function CourseMenu() {
                     return (
                       <Menu.ItemGroup key={subCategory} title={subCategory}>
                         {Object.keys(coursesState).map((courseCode) => {
-                          if (courseCode.match(regex))
+                          if (
+                            courseCode.match(regex) &&
+                            coursesState[courseCode].is_accurate &&
+                            coursesState[courseCode].unlocked
+                          )
                             return <MenuItem courseCode={courseCode} />;
                         })}
                       </Menu.ItemGroup>

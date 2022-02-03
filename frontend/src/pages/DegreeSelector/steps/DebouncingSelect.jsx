@@ -50,8 +50,7 @@ export default function DebouncingSelect({ setPlannedCourses }) {
   const [value, setValue] = useState([]);
   setPlannedCourses(value);
 
-  const dispatch = useDispatch();
-  const courses = useSelector((state) => state.updateCourses.courses);
+  const [courses, setCourses] = React.useState({});
 
   useEffect(() => {
     fetchCourses();
@@ -60,7 +59,7 @@ export default function DebouncingSelect({ setPlannedCourses }) {
   const fetchCourses = async () => {
     try {
       const res = await axios.post(
-        `http://localhost:8000/api/getAllUnlocked/`,
+        `http://localhost:8000/courses/getAllUnlocked/`,
         JSON.stringify(payload),
         {
           headers: {
@@ -68,7 +67,7 @@ export default function DebouncingSelect({ setPlannedCourses }) {
           },
         }
       );
-      dispatch(setCourses(res.data.courses_state));
+      setCourses(res.data.courses_state);
     } catch (err) {
       console.log(err);
     }

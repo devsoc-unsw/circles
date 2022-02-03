@@ -3,7 +3,6 @@ in order to run the relevant drivers'''
 
 import sys
 import argparse
-import glob
 import subprocess 
 
 from data.scrapers.programsScraper import scrape_programs as scrape_prg_data

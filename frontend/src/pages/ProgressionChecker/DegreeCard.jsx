@@ -19,7 +19,7 @@ const DegreeCard = ({ concentration }) => {
         <Title className="text" level={5}>
           {name}
         </Title>
-        <Text className="secondaryText">{type}</Text>
+        <Text className="secondaryText">{type.charAt(0).toUpperCase()+type.slice(1)}</Text>
         <div data-tip data-for={type}>
           <Progress
             percent={progress}

@@ -1,31 +1,23 @@
 {
-	"name": "Engineering (Hons) / Science",
-	"code": "3767", 
+	"name": "Computer Science",
+	"code": "3778", 
 	"length": 3,
-	"UOC": 240,
-	"completed_UOC": 136,
+	"UOC": 144,
+	"completed_UOC": 54,
 	"concentrations": [ 
 	  {
-		"type": "Specialisation",
-		"name": "Software Engineering",
-		"code": "SENGAH",
-		"UOC": 168,
-		"completed_UOC": 80
-	  },
-	  {
 		"type": "Major",
-		"name": "Statistics",
-		"code": "MATHT1",
-		"UOC": 60,
-		"completed_UOC": 36
+		"name": "Database Systems",
+		"code": "COMPD1",
+		"UOC": 96,
+		"completed_UOC": 48
 	  },
 	  {
 		"type": "Minor",
-		"name": "Marine Science",
-		"code": "MSCIM1",
-		"UOC": 36,
+		"name": "Finance",
+		"code": "FINSA2",
+		"UOC": 30,
 		"completed_UOC": 6
 	  }
 	]
 }
-  

@@ -1,7 +1,4 @@
-export const toggleTheme = (payload) => {
-  console.log(payload);
-  return {
-    type: "toggleTheme",
-    payload: payload,
-  };
-};
+export const toggleTheme = (payload) => ({
+  type: "toggleTheme",
+  payload: payload,
+});
