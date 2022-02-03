@@ -1,5 +1,4 @@
 import { plannerActions } from "../../actions/plannerActions";
-import axios from "axios";
 
 export const handleOnDragEnd = (result, dragEndProps) => {
   const { setIsDragging, dispatch, years, startYear, courses, completedTerms } =
@@ -13,18 +12,17 @@ export const handleOnDragEnd = (result, dragEndProps) => {
   if (!destination) return; // drag outside container
 
   // check if prereqs are complete, and trigger warning if not
-  let arePrereqsCompleted = checkPrereq(
-    draggableId,
-    destination.droppableId,
-    courses
-  );
+  // let arePrereqsCompleted = checkPrereq(
+  //   draggableId,
+  //   destination.droppableId,
+  //   courses
+  // );
 
   dispatch(
-    // might need to change name
     plannerActions("MOVE_COURSE", {
       course: draggableId,
       term: destination.droppableId,
-      warning: !arePrereqsCompleted,
+      // warning: !arePrereqsCompleted,
     })
   );
 
@@ -42,17 +40,6 @@ export const handleOnDragEnd = (result, dragEndProps) => {
 
   // === move unplanned course to term ===
   if (source.droppableId.match(/[0-9]{4}/) === null) {
-    //     // updated sortedUnplanned list
-    //     const type = source.droppableId;
-    //     const code = sortedUnplanned[type][source.index];
-    //     const sortedUnplannedCpy = Object.assign({}, sortedUnplanned);
-    //     sortedUnplannedCpy[type] = sortedUnplannedCpy[type].filter(
-    //       (course) => course !== code
-    //     );
-    //     console.log(draggableId);
-
-    //     // setSortedUnplanned(sortedUnplannedCpy);
-    //     dispatch(plannerActions("SET_SORTED_UNPLANNED", sortedUnplannedCpy));
     dispatch(plannerActions("SET_UNPLANNED", draggableId));
 
     // update destination term box
@@ -104,37 +91,38 @@ export const handleOnDragStart = (
   setIsDragging(true);
 };
 
-const checkPrereq = (course, term, courses) => {
-  const prereqs = courses.get(course).prereqs;
-  let arePrereqsCompleted = false;
-  // for example, expr can be: (COMP1511 || COMP1521 && (COMP1531 || COMP1541);
-  const expr = prereqs;
-  if (expr == null) return true;
-  if (expr === "") {
-    return true;
-  } else {
-    const exprArray = expr.replace(/ \|\|| \&\&|\(|\)/g, "").split(" ");
-    // from above example, exprArray is: [COMP1511, COMP1521, COMP1531, COMP1541]
-    const isComplete = new Map();
-    exprArray.forEach((elem) => {
-      if (courses.get(elem) == null) {
-        // prereq not in term planner
-        isComplete.set(elem, false);
-      } else if (courses.get(elem)["plannedFor"] == null) {
-        // prereq in unplanned
-        isComplete.set(elem, false);
-      } else if (term <= courses.get(elem)["plannedFor"]) {
-        // course placed before (or during) prereq is complete
-        isComplete.set(elem, false);
-      } else {
-        // if it gets to this point, that means prereq has been complete
-        isComplete.set(elem, true);
-      }
-    });
-    const exprWithMap = expr.replace(/([A-Z]+[0-9]+)/g, 'isComplete.get("$1")');
+// === MANUALLY CHECKING PREREQS (before backend was ready) ===
+// const checkPrereq = (course, term, courses) => {
+//   const prereqs = courses.get(course).prereqs;
+//   let arePrereqsCompleted = false;
+//   // for example, expr can be: (COMP1511 || COMP1521 && (COMP1531 || COMP1541);
+//   const expr = prereqs;
+//   if (expr == null) return true;
+//   if (expr === "") {
+//     return true;
+//   } else {
+//     const exprArray = expr.replace(/ \|\|| \&\&|\(|\)/g, "").split(" ");
+//     // from above example, exprArray is: [COMP1511, COMP1521, COMP1531, COMP1541]
+//     const isComplete = new Map();
+//     exprArray.forEach((elem) => {
+//       if (courses.get(elem) == null) {
+//         // prereq not in term planner
+//         isComplete.set(elem, false);
+//       } else if (courses.get(elem)["plannedFor"] == null) {
+//         // prereq in unplanned
+//         isComplete.set(elem, false);
+//       } else if (term <= courses.get(elem)["plannedFor"]) {
+//         // course placed before (or during) prereq is complete
+//         isComplete.set(elem, false);
+//       } else {
+//         // if it gets to this point, that means prereq has been complete
+//         isComplete.set(elem, true);
+//       }
+//     });
+//     const exprWithMap = expr.replace(/([A-Z]+[0-9]+)/g, 'isComplete.get("$1")');
 
-    // from above example, exprWithMap is: (isComplete.get(COMP1511) || ...)
-    arePrereqsCompleted = eval(exprWithMap);
-    return arePrereqsCompleted;
-  }
-};
+//     // from above example, exprWithMap is: (isComplete.get(COMP1511) || ...)
+//     arePrereqsCompleted = eval(exprWithMap);
+//     return arePrereqsCompleted;
+//   }
+// };
