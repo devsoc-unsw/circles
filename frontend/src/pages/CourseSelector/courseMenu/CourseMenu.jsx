@@ -3,7 +3,6 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { Menu } from "antd";
 import { courseTabActions } from "../../../actions/courseTabActions";
-import { setStructure } from "../../../actions/setStructure";
 import { Loading } from "./Loading";
 import "./CourseMenu.less";
 import { setCourses } from "../../../actions/updateCourses";
@@ -24,32 +23,26 @@ const MenuItem = ({ courseCode }) => {
 
 export default function CourseMenu() {
   const dispatch = useDispatch();
-  const structure = useSelector((state) => state.structure);
+  const [structure, setStructure] = React.useState({});
   const { active, tabs } = useSelector((state) => state.tabs);
   let id = tabs[active];
 
   // Exception tabs
   if (id === "explore" || id === "search") id = null;
 
-  // const [coursesState, setCoursesState] = React.useState({});
   const coursesState = useSelector((state) => state.updateCourses.courses);
-  console.log(coursesState);
 
-  const fetchProgression = async () => {
-    // Local Development Testing
+  const fetchStructure = async () => {
     const res1 = await axios.get(
       "http://localhost:8000/programs/getStructure/3778/COMPA1"
     );
-    // console.log(res1);
-    // Uncomment when DB is working
-    // const coreData = await axios.get(`http://localhost:8000/api/getCoreCourses/${programCode}/${specialisation}/${minor}`);
-    dispatch(setStructure(res1.data.structure));
+    setStructure(res1.data.structure);
 
     await fetchNewUnlocked();
   };
 
   React.useEffect(() => {
-    fetchProgression();
+    fetchStructure();
   }, []);
 
   const fetchNewUnlocked = async () => {
