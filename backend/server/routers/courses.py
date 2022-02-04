@@ -15,6 +15,15 @@ router = APIRouter(
 def apiIndex():
     return "Index of api"
 
+def fixUserData(userData: dict):
+    ''' updates and returns the userData with the UOC of a course '''
+    coursesWithoutUoc = [course for course in userData["courses"] if type(userData["courses"][course]) is int]
+    filledInCourses = {course : [getCourse(course)["UOC"], userData["courses"][course]] for course in coursesWithoutUoc}
+    if any(type(courseValues[1]) is JSONResponse for courseValues in filledInCourses.values()):
+        return JSONResponse(status_code=400, content={"message": "a course supplied could not be found"})
+    userData["courses"].update(filledInCourses)
+    return userData
+
 @router.get("/getCourse/{courseCode}", response_model=courseDetails,
             responses={
                 400: {"model": message, "description": "The given course code could not be found in the database"},
@@ -107,14 +116,7 @@ def getAllUnlocked(userData: UserData):
 
     coursesState = {}
 
-    data = userData.dict()
-    coursesWithoutUoc = [course for course in data["courses"] if type(data["courses"][course]) is int]
-    filledInCourses = {course : [getCourse(course)["UOC"], data["courses"][course]] for course in coursesWithoutUoc}
-    if any(type(courseValues[1]) is JSONResponse for courseValues in filledInCourses.values()):
-        return JSONResponse(status_code=400, content={"message": "a course supplied could not be found"})
-    data["courses"].update(filledInCourses)
-
-    user = User(data)
+    user = User(fixUserData(userData))
     for course, condition in CONDITIONS.items():
         # Condition object exists for this course
         state = condition.is_unlocked(user) if condition else {'result': True, 'warnings': []}
@@ -168,6 +170,6 @@ def unselectCourse(userData: UserData, lockedCourses: list, unselectedCourse: st
         Creates a new user class and returns all the courses
         affected from the course that was unselected in sorted order
     '''
-    affectedCourses = User(userData.dict()).unselect_course(unselectedCourse, lockedCourses)
+    affectedCourses = User(fixUserData(userData.dict())).unselect_course(unselectedCourse, lockedCourses)
 
     return {'affected_courses': affectedCourses}
