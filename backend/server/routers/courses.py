@@ -126,7 +126,7 @@ def getAllUnlocked(userData: UserData):
 
     coursesState = {}
 
-    user = User(fixUserData(userData))
+    user = User(fixUserData(userData.dict()))
     for course, condition in CONDITIONS.items():
         # Condition object exists for this course
         state = condition.is_unlocked(user) if condition else {'result': True, 'warnings': []}
