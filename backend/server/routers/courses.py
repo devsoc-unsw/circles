@@ -36,7 +36,17 @@ def fixUserData(userData: dict):
                                 "code": "COMP1511",
                                 "UOC": 6,
                                 "level": 1,
-                                "description": "An introduction to problem-solving via programming, which aims to have students develop proficiency in using a high level programming language. Topics: algorithms, program structures (statements, sequence, selection, iteration, functions), data types (numeric, character), data structures (arrays, tuples, pointers, lists), storage structures (memory, addresses), introduction to analysis of algorithms, testing, code quality, teamwork, and reflective practice. The course includes extensive practical work in labs and programming projects.</p>\n<p>Additional Information</p>\n<p>This course should be taken by all CSE majors, and any other students who have an interest in computing or who wish to be extended. It does not require any prior computing knowledge or experience.</p>\n<p>COMP1511 leads on to COMP1521, COMP1531, COMP2511 and COMP2521, which form the core of the study of computing at UNSW and which are pre-requisites for the full range of further computing courses.</p>\n<p>Due to overlapping material, students who complete COMP1511 may not also enrol in COMP1911 or COMP1921. </p>",
+                                "description": """An introduction to problem-solving via programming, which aims to have students develop
+                                    proficiency in using a high level programming language. Topics: algorithms, program structures 
+                                    (statements, sequence, selection, iteration, functions), data types (numeric, character), data structures 
+                                    (arrays, tuples, pointers, lists), storage structures (memory, addresses), introduction to analysis of 
+                                    algorithms, testing, code quality, teamwork, and reflective practice. The course includes extensive practical
+                                    work in labs and programming projects.</p>\n<p>Additional Information</p>\n<p>This course should be taken by 
+                                    all CSE majors, and any other students who have an interest in computing or who wish to be extended. 
+                                    It does not require any prior computing knowledge or experience.</p>\n
+                                    <p>COMP1511 leads on to COMP1521, COMP1531, COMP2511 and COMP2521, which form the core of the study of 
+                                    computing at UNSW and which are pre-requisites for the full range of further computing courses.</p>\n<p>Due to
+                                    overlapping material, students who complete COMP1511 may not also enrol in COMP1911 or COMP1921. </p>""",
                                 "study_level": "Undergraduate",
                                 "school": "School of Computer Science and Engineering",
                                 "faculty": "Faculty of Engineering",

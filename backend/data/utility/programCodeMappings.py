@@ -36,7 +36,7 @@ def write_to_file(code_to_title, title_to_code):
     }
 
     with open('data/utility/programCodeMappings.json', 'w') as FILE:
-        json.dump(mappings, FILE)
+        json.dump(mappings, FILE, indent=4)
 
 if __name__ == "__main__":
     get_mappings()
