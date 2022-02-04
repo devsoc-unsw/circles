@@ -17,7 +17,7 @@ def apiIndex():
 
 @router.get("/getCourse/{courseCode}", response_model=courseDetails,
             responses={
-                404: {"model": message, "description": "The given course code could not be found in the database"},
+                400: {"model": message, "description": "The given course code could not be found in the database"},
                 200: {
                     "description": "Returns all course details to given code",
                     "content": {
@@ -66,7 +66,7 @@ def apiIndex():
 def getCourse(courseCode):
     result = coursesCOL.find_one({'code' : courseCode})
     if not result:
-        return JSONResponse(status_code=404, content={"message" : "Course code was not found"})
+        return JSONResponse(status_code=400, content={"message" : f"Course code {courseCode} was not found"})
 
     del result['_id']
 
@@ -106,9 +106,16 @@ def getAllUnlocked(userData: UserData):
     that they have already completed"""
 
     coursesState = {}
-    user = User(userData.dict())
-    for course, condition in CONDITIONS.items():
 
+    data = userData.dict()
+    coursesWithoutUoc = [course for course in data["courses"] if type(data["courses"][course]) is int]
+    filledInCourses = {course : [getCourse(course)["UOC"], data["courses"][course]] for course in coursesWithoutUoc}
+    if any(type(courseValues[1]) is JSONResponse for courseValues in filledInCourses.values()):
+        return JSONResponse(status_code=400, content={"message": "a course supplied could not be found"})
+    data["courses"].update(filledInCourses)
+
+    user = User(data)
+    for course, condition in CONDITIONS.items():
         # Condition object exists for this course
         state = condition.is_unlocked(user) if condition else {'result': True, 'warnings': []}
         coursesState[course] = {
