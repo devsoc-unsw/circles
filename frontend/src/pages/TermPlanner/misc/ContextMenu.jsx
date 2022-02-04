@@ -1,11 +1,11 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Menu, Item, theme } from "react-contexify";
-import { plannerActions } from "../../actions/plannerActions";
-import { courseTabActions } from "../../actions/courseTabActions";
+import { plannerActions } from "../../../actions/plannerActions";
+import { courseTabActions } from "../../../actions/courseTabActions";
 import "react-contexify/dist/ReactContexify.css";
 import { useHistory } from "react-router-dom";
-import { updateAllWarnings } from "./ValidateTermPlanner";
+import { updateAllWarnings } from "../ValidateTermPlanner";
 import { FaCalendarTimes, FaTrash, FaInfoCircle } from "react-icons/fa";
 
 const ContextMenu = ({ code, plannedFor }) => {

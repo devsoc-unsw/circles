@@ -2,16 +2,16 @@ import React, { useState, useEffect, useRef } from "react";
 import { notification } from "antd";
 import { DragDropContext } from "react-beautiful-dnd";
 import TermBox from "./TermBox";
-import SkeletonPlanner from "./SkeletonPlanner";
+import SkeletonPlanner from "./misc/SkeletonPlanner";
 import "./main.less";
 import { useSelector, useDispatch } from "react-redux";
 import { handleOnDragEnd, handleOnDragStart } from "./DragDropLogic";
 import { updateAllWarnings } from "./ValidateTermPlanner";
 import UnplannedColumn from "./UnplannedColumn";
-import OptionsHeader from "./OptionsHeader";
+import OptionsHeader from "./optionsHeader/main";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
-import HideYearTooltip from "./HideYearTooltip";
+import HideYearTooltip from "./misc/HideYearTooltip";
 
 const TermPlanner = () => {
   const [isLoading, setIsLoading] = useState(true);

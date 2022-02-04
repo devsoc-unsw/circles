@@ -9,7 +9,7 @@ import SettingsMenu from "./SettingsMenu";
 import SaveMenu from "./SaveMenu";
 import { IoIosEye } from "react-icons/io";
 import { TiDownload } from "react-icons/ti";
-import { plannerActions } from "../../actions/plannerActions";
+import { plannerActions } from "../../../actions/plannerActions";
 
 const OptionsHeader = ({ plannerRef }) => {
   const theme = useSelector((state) => state.theme);
