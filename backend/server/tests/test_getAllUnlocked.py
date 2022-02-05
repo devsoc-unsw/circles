@@ -16,13 +16,13 @@ def test_size():
 
 def test_fix_wam_only_unlock_given_course():
   x = requests.post('http://127.0.0.1:8000/courses/getAllUnlocked', json=USERS["user5"])
-  print(USERS["user5"])
   assert x.status_code != 500
   assert x.json()["courses_state"]["COMP1521"]["unlocked"] == True
   assert x.json()["courses_state"]["COMP1521"]["is_accurate"] == True
 
 def test_unlock_dependant_course():
   x = requests.post('http://127.0.0.1:8000/courses/getAllUnlocked', json=USERS["user2"])
+  print(x.text)
   assert x.status_code != 500
   assert x.json()["courses_state"]["MATH1231"]["unlocked"] == True
   assert x.json()["courses_state"]["MATH1231"]["is_accurate"] == True
