@@ -1,7 +1,5 @@
-from http.client import HTTPException
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from server.database import coursesCOL, archivesDB
-from fastapi.responses import JSONResponse
 import re
 from algorithms.objects.user import User
 from server.routers.model import *
@@ -20,8 +18,6 @@ def fixUserData(userData: dict):
     ''' updates and returns the userData with the UOC of a course '''
     coursesWithoutUoc = [course for course in userData["courses"] if type(userData["courses"][course]) is int]
     filledInCourses = {course : [getCourse(course)["UOC"], userData["courses"][course]] for course in coursesWithoutUoc}
-    if any(type(courseValues[1]) is JSONResponse for courseValues in filledInCourses.values()):
-        raise HTTPException(status_code=400, detail="a course supplied could not be found, or the database is empty")
     userData["courses"].update(filledInCourses)
     return userData
 
@@ -73,7 +69,7 @@ def fixUserData(userData: dict):
                     }
                 }
             })
-def getCourse(courseCode):
+def getCourse(courseCode: str):
     result = coursesCOL.find_one({'code' : courseCode})
     if not result:
         raise HTTPException(status_code=400, detail=f"Course code {courseCode} was not found")
@@ -90,7 +86,7 @@ def search(string):
 
     return { course['code']: course['title'] for course in chain(code_query, title_query) }
 
-@router.post("/getAllUnlocked/", response_model=CourseState,
+@router.post("/getAllUnlocked/", response_model=CoursesState,
             responses={
                 404: {"model": message, "description": "Uh oh you broke me"},
                 200: {
@@ -116,8 +112,7 @@ def getAllUnlocked(userData: UserData):
     that they have already completed"""
 
     coursesState = {}
-    data = fixUserData(userData.dict())
-    user = User(data)
+    user = User(fixUserData(userData.dict()))
     for course, condition in CONDITIONS.items():
         # Condition object exists for this course
         state = condition.is_unlocked(user) if condition else {'result': True, 'warnings': []}
