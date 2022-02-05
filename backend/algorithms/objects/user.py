@@ -97,7 +97,6 @@ class User:
 
         self.wam = None if eligible_uoc == 0 else total_wam / eligible_uoc
 
-
     def unselect_course(self, target, locked) -> list[str]:
         """Given a course to unselect and a list of locked courses, remove the courses
         from the user and return a list of courses which would be affected by the unselection"""
