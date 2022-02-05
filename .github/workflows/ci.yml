@@ -10,7 +10,7 @@ jobs:
   build:
     name: Algorithm CI Testing
 
-    runs-on: tmaier/docker-compose:latest
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checking out repository
