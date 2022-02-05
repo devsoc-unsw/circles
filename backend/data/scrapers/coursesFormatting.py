@@ -5,9 +5,7 @@ Step in the course data's journey:
     [   ] Customise formatted data (coursesProcessing.py)
 """
 
-import requests
 import json
-import sys
 from data.utility import dataHelpers
 
 ALL_COURSES = {}
