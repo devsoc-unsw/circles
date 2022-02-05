@@ -116,8 +116,7 @@ def getAllUnlocked(userData: UserData):
 
     coursesState = {}
     data = fixUserData(userData.dict())
-    if type(data) is JSONResponse:
-        return userData
+    return data
     user = User(data)
     for course, condition in CONDITIONS.items():
         # Condition object exists for this course
