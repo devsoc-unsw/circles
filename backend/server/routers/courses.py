@@ -18,8 +18,9 @@ def apiIndex():
 def fixUserData(userData: dict):
     ''' updates and returns the userData with the UOC of a course '''
     coursesWithoutUoc = [course for course in userData["courses"] if type(userData["courses"][course]) is int]
-    return "got here"
+    return getCourse(coursesWithoutUoc[0])
     filledInCourses = {course : [getCourse(course)["UOC"], userData["courses"][course]] for course in coursesWithoutUoc}
+    return "got here"
     if any(type(courseValues[1]) is JSONResponse for courseValues in filledInCourses.values()):
         return JSONResponse(status_code=400, content={"message": "a course supplied could not be found"})
     userData["courses"].update(filledInCourses)
