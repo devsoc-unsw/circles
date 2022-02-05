@@ -16,7 +16,7 @@ def test_size():
 
 def test_fix_wam_only_unlock_given_course():
   x = requests.post('http://127.0.0.1:8000/courses/getAllUnlocked', json=USERS["user5"])
-  print(x.text)
+  print(x.reason)
   assert x.status_code != 500
   assert x.json()["courses_state"]["COMP1521"]["unlocked"] == True
   assert x.json()["courses_state"]["COMP1521"]["is_accurate"] == True
