@@ -28,12 +28,15 @@ jobs:
     - name: set up docker compose
       run: |
         mkdir env
-        echo "MONGODB_USERNAME=github-ci\nMONGODB_PASSWORD=github-ci\nMONGODB_DATABASE=mongodb" > env/backend.env
-        echo "MONGO_INITDB_ROOT_USERNAME=github-ci\nMONGO_INITDB_ROOT_PASSWORD=github-ci" > env/mongodb.env
+        echo "MONGODB_USERNAME=github-ci" >> env/backend.env
+        echo "MONGODB_PASSWORD=github-ci" >> env/backend.env
+        echo "MONGODB_DATABASE=mongodb" >> env/backend.env
+        echo "MONGO_INITDB_ROOT_USERNAME=github-ci" >> env/mongodb.env
+        echo "MONGO_INITDB_ROOT_PASSWORD=github-ci" >> env/mongodb.env
         docker compose build backend
         docker compose up backend
 
-    - name: Test algorithm with pytest and docker compose
+    - name: Test algorithm with pytest
       run: |
         cd backend
         python3 -m pytest algorithms
