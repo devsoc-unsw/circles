@@ -97,7 +97,7 @@ export default function DebouncingSelect({ setPlannedCourses }) {
 
 const payload = {
   program: "3778",
-  specialisations: ["COMPA1"],
+  specialisations: {"COMPA1": 1},
   courses: {},
   year: 0,
 };

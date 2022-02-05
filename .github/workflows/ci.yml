@@ -10,7 +10,7 @@ jobs:
   build:
     name: Algorithm CI Testing
 
-    runs-on: ubuntu-latest
+    runs-on: tmaier/docker-compose:latest
 
     steps:
     - name: Checking out repository
@@ -26,7 +26,10 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r backend/requirements.txt
 
-    - name: Test algorithm with pytest
+    - name: Test algorithm with pytest and docker compose
       run: |
+        docker compose build
+        docker compose up backend
         cd backend
         python3 -m pytest algorithms
+        python3 -m pytest server
