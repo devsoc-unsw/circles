@@ -40,4 +40,5 @@ jobs:
       run: |
         cd backend
         python3 -m pytest algorithms
+        sleep 2
         python3 -m pytest server
