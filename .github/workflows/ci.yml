@@ -28,6 +28,8 @@ jobs:
 
     - name: Test algorithm with pytest and docker compose
       run: |
+        mkdir env
+        echo "MONGODB_USERNAME=github-ci\nMONGODB_PASSWORD=github-ci\nMONGODB_DATABASE=mongodb" > env/backend.env
         docker compose build
         docker compose up backend
         cd backend
