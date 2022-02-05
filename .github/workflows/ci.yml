@@ -35,6 +35,7 @@ jobs:
         echo "MONGO_INITDB_ROOT_PASSWORD=github-ci" >> env/mongodb.env
         docker compose build backend
         docker compose up backend -d
+        docker compose run init-mongo
 
     - name: Test algorithm with pytest
       run: |
