@@ -115,8 +115,10 @@ def getAllUnlocked(userData: UserData):
     that they have already completed"""
 
     coursesState = {}
-
-    user = User(fixUserData(userData.dict()))
+    data = fixUserData(userData.dict())
+    if type(data) is JSONResponse:
+        return userData
+    user = User(data)
     for course, condition in CONDITIONS.items():
         # Condition object exists for this course
         state = condition.is_unlocked(user) if condition else {'result': True, 'warnings': []}
