@@ -16,8 +16,8 @@ def apiIndex():
     return "Index of api"
 
 def fixUserData(userData: dict):
+    return "got here"
     ''' updates and returns the userData with the UOC of a course '''
-    return "i got to user data"
     coursesWithoutUoc = [course for course in userData["courses"] if type(userData["courses"][course]) is int]
     filledInCourses = {course : [getCourse(course)["UOC"], userData["courses"][course]] for course in coursesWithoutUoc}
     if any(type(courseValues[1]) is JSONResponse for courseValues in filledInCourses.values()):
@@ -90,7 +90,7 @@ def search(string):
 
     return { course['code']: course['title'] for course in chain(code_query, title_query) }
 
-@router.post("/getAllUnlocked/", response_model=CoursesState,
+@router.post("/getAllUnlocked/",
             responses={
                 404: {"model": message, "description": "Uh oh you broke me"},
                 200: {
