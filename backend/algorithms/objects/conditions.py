@@ -2,11 +2,9 @@
 Contains the Conditions classes
 '''
 import json
-from unicodedata import category
-
 from algorithms.objects.helper import is_course, is_program
+from algorithms.objects.categories import AnyCategory
 
-from .categories import *
 
 '''Keywords'''
 AND = 1
@@ -29,15 +27,6 @@ CACHED_PRGORAM_MAPPINGS_FILE = "./algorithms/cache/programMappings.json"
 with open(CACHED_PRGORAM_MAPPINGS_FILE) as f:
     CACHED_PRGORAM_MAPPINGS = json.load(f)
     f.close()
-
-# Load in cached condition objects
-# NOTE: Does not work due to how pickle works with imports
-# Instead, we will load the condition tokens, then load the necessary condition
-# objects inside our functions
-# CACHED_CONDITIONS_PATH = "./algorithms/conditions.pkl"
-# with open(CACHED_CONDITIONS_PATH, "rb") as f:
-#     CACHED_CONDITIONS = pickle.load(f)
-#     f.close()
 
 class CourseCondition():
     '''Condition that the student has completed this course before the current term'''
@@ -125,7 +114,6 @@ class WAMCondition():
 
         Will always return True and a warning since WAM can fluctuate
         '''
-    
         return True, self.get_warning(user.wam(self.category))
 
     def get_warning(self, applicable_wam):

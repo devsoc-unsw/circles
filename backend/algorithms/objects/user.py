@@ -10,7 +10,7 @@ class User:
         # Will load the data if any was given
         self.courses: dict[str, (int, int)] = {}
         self.cur_courses: list[str, (int, int)] = [] # Courses the user is taking in the current term
-        self.program: str = None  # NOTE: For now this is only single degree
+        self.program: str = None
         self.specialisations: dict[str, int] = {}
         self.year = 0
 
@@ -105,7 +105,7 @@ class User:
         }
 
         affected_courses = []
-        # Brute force loop through all courses and if we find a course which is
+        # Brute force loop through all taken courses and if we find a course which is
         # no longer unlocked, we unselect it, add it to the affected course list,
         # then restart loop.
         courses_to_delete = [target]

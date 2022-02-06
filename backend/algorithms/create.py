@@ -161,10 +161,6 @@ def make_condition(tokens, first=False, course=None):
                 next(it)
 
                 result.add_condition(GRADECondition(grade, tokens[index + 2]))
-
-                # NOTE: Don't need to create a category since I think grade ONLY applies to coursecode
-                # grade_category, sub_index = create_category(tokens[index + 2:])
-                # categories.append(grade_category)
             else:
                 # Error
                 return None, index
