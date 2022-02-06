@@ -2,6 +2,7 @@
 Contains the Conditions classes
 '''
 import json
+from unicodedata import category
 
 from algorithms.objects.helper import is_course, is_program
 
@@ -93,19 +94,13 @@ class UOCCondition():
         # L2 MATH - level 2 courses starting with MATH
         # CORE - core courses
         # And more...
-        self.category = None
+        self.category = AnyCategory()
 
     def set_category(self, category_classobj):
         self.category = category_classobj
 
     def validate(self, user):
-        if self.category == None:
-            # Simple UOC condition
-            return user.uoc >= self.uoc
-        else:
-            # The user must have taken enough uoc in the given category
-            return self.category.uoc(user) >= self.uoc
-
+            return user.uoc(self.category) >= self.uoc
 
 class WAMCondition():
     '''Handles WAM conditions such as 65WAM and 80WAM in'''
@@ -119,7 +114,7 @@ class WAMCondition():
         # NOTE: We will convert 80WAM in (COMP || BINH || SENG) to:
         # 80WAM in COMP || 80WAM in BINH || 80WAM in SENG
         # so that only one category is attached to this wam condition
-        self.category = None
+        self.category = AnyCategory()
 
     def set_category(self, category_classobj):
         self.category = category_classobj
@@ -130,18 +125,12 @@ class WAMCondition():
 
         Will always return True and a warning since WAM can fluctuate
         '''
-
-        # Determine the wam we must figure out (whether it is the user's overall wam or a specific category)
-        if self.category == None:
-            applicable_wam = user.wam
-        else:
-            applicable_wam = self.category.wam(user)
-        
-        return True, self.get_warning(applicable_wam)
+    
+        return True, self.get_warning(user.wam(self.category))
 
     def get_warning(self, applicable_wam):
         '''Returns an appropriate warning message or None if not needed'''
-        if self.category == None:
+        if type(self.category) is AnyCategory:
             if applicable_wam == None:
                 return f"Requires {self.wam} WAM. Your WAM has not been recorded"
             elif applicable_wam >= self.wam:
