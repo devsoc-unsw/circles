@@ -94,7 +94,7 @@ export default function CourseDescription() {
                 <Alert
                   message={`Successfully added ${id} to your planner!`}
                   type="success"
-                  style={{ marginBottom: "1rem" }}
+                  className="cs-alert"
                   showIcon
                   closable
                   afterClose={() => setShow(false)}
@@ -104,8 +104,7 @@ export default function CourseDescription() {
                 <Alert
                   message={`Successfully removed ${id} from your planner!`}
                   type="success"
-                  className="cs-remove-alert"
-                  style={{ marginBottom: "1rem" }}
+                  className="cs-alert"
                   showIcon
                   closable
                   afterClose={() => setShow(false)}
