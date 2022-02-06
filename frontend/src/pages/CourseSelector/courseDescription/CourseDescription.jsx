@@ -104,6 +104,7 @@ export default function CourseDescription() {
                 <Alert
                   message={`Successfully removed ${id} from your planner!`}
                   type="success"
+                  className="cs-remove-alert"
                   style={{ marginBottom: "1rem" }}
                   showIcon
                   closable

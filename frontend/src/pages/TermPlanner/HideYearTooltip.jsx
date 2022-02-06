@@ -20,7 +20,7 @@ function HideYearTooltip({ year }) {
 
   const hideYear = (year) => {
     let i = 0;
-    for (const [key, value] of Object.entries(hidden)) if (value) i++;
+    for (const value of Object.values(hidden)) if (value) i++;
     if (i === numYears - 1) showCannotHideAllYearsNotification();
     else {
       dispatch(plannerActions("HIDE_YEAR", year));
