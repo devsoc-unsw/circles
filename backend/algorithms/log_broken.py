@@ -37,7 +37,7 @@ def log_broken_conditions():
             }
     
     with open(ERROR_OUTPUT_FILE, "w") as out:
-        json.dump(output, out)
+        json.dump(output, out, indent=4)
 
 if __name__ == "__main__":
     log_broken_conditions()

@@ -1,4 +1,39 @@
 {
+    "3778": {
+        "title": "Computer Science",
+        "code": "3778",
+        "duration": 3,
+        "UOC": 144,
+        "faculty": "Faculty of Engineering",
+        "components": {
+            "FE": {
+                "credits_to_complete": 36,
+                "Minors": {
+                    "INFSA2": "Information Systems",
+                    "MARKA2": "Marketing",
+                    "ACCTA2": "Accounting",
+                    "FINSA2": "Finance",
+                    "MATHC2": "Mathematics",
+                    "PSYCM2": "Psychology"
+                }
+            },
+            "GE": {
+                "credits_to_complete": 12
+            },
+            "DisciplineData": {
+                "Majors": {
+                    "COMPD1": "Computer Science (Database Systems)",
+                    "COMPS1": "Computer Science (Embedded Systems)",
+                    "COMPA1": "Computer Science",
+                    "COMPN1": "Computer Science (Computer Networks)",
+                    "COMPJ1": "Computer Science (Programming Languages)",
+                    "COMPY1": "Computer Science (Security Engineering)",
+                    "COMPI1": "Computer Science (Artificial Intelligence)",
+                    "COMPE1": "Computer Science (eCommerce Systems)"
+                }
+            }
+        }
+    },
     "3707": {
         "title": "Engineering (Honours)",
         "code": "3707",
@@ -36,41 +71,6 @@
             },
             "Minors": {
                 "ENGGA2": 1
-            }
-        }
-    },
-    "3778": {
-        "title": "Computer Science",
-        "code": "3778",
-        "duration": 3,
-        "UOC": 144,
-        "faculty": "Faculty of Engineering",
-        "components": {
-            "FE": {
-                "credits_to_complete": 36,
-                "Minors": {
-                    "INFSA2": "Information Systems",
-                    "MARKA2": "Marketing",
-                    "ACCTA2": "Accounting",
-                    "FINSA2": "Finance",
-                    "MATHC2": "Mathematics",
-                    "PSYCM2": "Psychology"
-                }
-            },
-            "GE": {
-                "credits_to_complete": 12
-            },
-            "DisciplineData": {
-                "Majors": {
-                    "COMPD1": "Computer Science (Database Systems)",
-                    "COMPS1": "Computer Science (Embedded Systems)",
-                    "COMPA1": "Computer Science",
-                    "COMPN1": "Computer Science (Computer Networks)",
-                    "COMPJ1": "Computer Science (Programming Languages)",
-                    "COMPY1": "Computer Science (Security Engineering)",
-                    "COMPI1": "Computer Science (Artificial Intelligence)",
-                    "COMPE1": "Computer Science (eCommerce Systems)"
-                }
             }
         }
     }

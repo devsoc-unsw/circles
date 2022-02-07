@@ -72,29 +72,14 @@ class User:
         self.specialisations = copy.deepcopy(data['specialisations'])
         self.courses = copy.deepcopy(data['courses'])
         self.year = copy.deepcopy(data['year'])
-        '''calculate wam and uoc'''
-        # Subtract uoc of the courses without mark when dividing
-        uocfixer = 0
-        for c in self.courses:
-            self.uoc += self.courses[c][0]
-            if type(self.courses[c][1]) != type(1):
-                uocfixer += self.courses[c][0]
-                continue
-            if self.wam is None:
-                self.wam = 0
-            self.wam += self.courses[c][0] * self.courses[c][1]
-        if self.wam is not None:
-            self.wam /= (self.uoc - uocfixer)
-        
-        return
+        self.update_wam_uoc()
 
     def get_grade(self, course):
         '''Given a course which the student has taken, returns their grade (or None for no grade)'''
         return self.courses[course][1]
 
     def update_wam_uoc(self):
-        """Calculates and sets the overall wam and uoc of the user from their courses. 
-        NOTE: This actually changes the user's wam, not simply a getter method"""
+        """Calculates and sets the overall wam and uoc of the user from their courses """
         if not self.courses:
             self.wam = None
             self.uoc = 0
@@ -130,7 +115,6 @@ class User:
         for course in self.courses:
             if not course in locked:
                 cached_conditions[course] = create_condition(CACHED_CONDITIONS_TOKENS[course], course)
-        print(CACHED_CONDITIONS_TOKENS["MATH1081"])
         del self.courses[target]
         self.update_wam_uoc()
         affected_courses = []
@@ -141,10 +125,9 @@ class User:
         while True:
             courses_to_delete = [
                 course for course in self.courses
-                if cached_conditions.get(course) is not None
-                and not (cached_conditions[course].is_unlocked(self))["result"]
+                if cached_conditions.get(course) is not None # course is in conditions
+                and not (cached_conditions[course].is_unlocked(self))["result"] # not unlocked anymore
             ]
-            # these courses are no longer selectable due to our unselection
             affected_courses.extend(courses_to_delete)
             for course in courses_to_delete:
                 del self.courses[course]
