@@ -1,60 +1,23 @@
+import {
+  setInLocalStorage,
+  extractFromLocalStorage,
+  generateEmptyYears,
+} from "./plannerHelper";
+
 const dummyMap = new Map();
-
 const plannedCourses = new Map();
-dummyMap.set("COMP2521", {
-  title: "Data Structures and Algorithms",
-  type: "Core",
-  termsOffered: ["T0", "T1", "T2", "T3"],
-  prereqs: "COMP1511 && (COMP1521 || DEFAULT3000)",
-  plannedFor: null,
-  warning: false,
-});
-dummyMap.set("COMP1521", {
-  title: "Computer Systems Fundamentals",
-  type: "Core",
-  termsOffered: ["T0", "T1", "T2"],
-  prereqs: "COMP1511",
-  plannedFor: null,
-  warning: false,
-});
-dummyMap.set("COMP1511", {
-  title: "Programming Fundamentals",
-  type: "Core",
-  termsOffered: ["T0", "T1", "T2", "T3"],
-  prereqs: "",
-  plannedFor: null,
-  warning: false,
-});
-dummyMap.set("COMP6080", {
-  title: "Web Front-End Programming",
-  type: "Elective",
-  termsOffered: ["T1", "T3"],
-  prereqs: "COMP1531 && (COMP2521 || COMP1927)",
-  plannedFor: null,
-  warning: false,
-});
-dummyMap.set("ARTS1240", {
-  title: "Environment and Society",
-  type: "General Education",
-  termsOffered: ["T0", "T1", "T2"],
-  prereqs: "",
-  plannedFor: null,
-  warning: false,
-});
-
-const generateEmptyYears = (nYears) => {
-  let res = [];
-  for (let i = 0; i < nYears; ++i) {
-    const year = { T0: [], T1: [], T2: [], T3: [] };
-    res.push(year);
-  }
-  return res;
-};
+const startYear = parseInt(new Date().getFullYear());
+const numYears = 3;
+// set up hidden object
+const hidden = {};
+for (let i = 0; i < numYears; i++) {
+  hidden[parseInt(startYear) + parseInt(i)] = false;
+}
 
 let initialState = {
-  unplanned: ["COMP1511", "COMP1521", "COMP2521", "ARTS1240", "COMP6080"],
-  startYear: parseInt(new Date().getFullYear()),
-  numYears: 3,
+  unplanned: [],
+  startYear: startYear,
+  numYears: numYears,
   isSummerEnabled: false,
   years: [
     { T0: [], T1: [], T2: [], T3: [] },
@@ -64,36 +27,17 @@ let initialState = {
   courses: dummyMap,
   plannedCourses: plannedCourses,
   completedTerms: new Map(),
+  hidden: hidden,
+  areYearsHidden: false,
 };
 
-let stateCopy = "";
-
-const setInLocalStorage = (state) => {
-  let stateCopy = Object.assign({}, state);
-  const jsonCourses = Array.from(state.courses.entries());
-  const jsonPlannedCourses = Array.from(state.plannedCourses.entries());
-  const jsonCompletedTerms = Array.from(state.completedTerms.entries());
-  stateCopy["courses"] = jsonCourses;
-  stateCopy["plannedCourses"] = jsonPlannedCourses;
-  stateCopy["completedTerms"] = jsonCompletedTerms;
-  localStorage.setItem("planner", JSON.stringify(stateCopy));
-};
-
-const extractFromLocalStorage = (planner) => {
-  let plannerCpy = Object.assign({}, planner);
-  const coursesCpy = new Map(planner.courses);
-  const plannedCoursesCpy = new Map(planner.plannedCourses);
-  const completedTermsCpy = new Map(planner.completedTerms);
-  plannerCpy.courses = coursesCpy;
-  plannerCpy.plannerCourses = plannedCoursesCpy;
-  plannerCpy.completedTerms = completedTermsCpy;
-  return plannerCpy;
-};
+let stateCopy;
 
 const planner = JSON.parse(localStorage.getItem("planner"));
 if (planner) initialState = extractFromLocalStorage(planner);
 
 const plannerReducer = (state = initialState, action) => {
+  let hidden, areYearsHidden;
   switch (action.type) {
     case "ADD_TO_UNPLANNED":
       const { courseCode, courseData } = action.payload;
@@ -112,7 +56,6 @@ const plannerReducer = (state = initialState, action) => {
         state.courses.set(code, data);
       }
 
-      // console.log(state.courses.get(code));
       state.years[yearNum][termNum].push(code);
       // Add course data to courses
 
@@ -286,11 +229,19 @@ const plannerReducer = (state = initialState, action) => {
           }
         }
       }
+
+      hidden = new Map();
+      for (let i = 0; i < state.numYears; i++) {
+        // hidden[parseInt(newStartYear) + parseInt(i)] = false;
+        hidden.set(parseInt(newStartYear) + parseInt(i), false);
+      }
+
       stateCopy = {
         ...state,
         startYear: newStartYear,
         years: updatedYears,
         unplanned: updatedUnplan,
+        hidden: hidden,
       };
       setInLocalStorage(stateCopy);
       return stateCopy;
@@ -299,7 +250,6 @@ const plannerReducer = (state = initialState, action) => {
       const newNumYears = action.payload;
       let dupYears = new Object(state.years);
       let newUnplan = [...state.unplanned];
-      console.log(newNumYears);
 
       if (newNumYears === state.numYears) return state;
       else if (newNumYears > state.numYears) {
@@ -326,15 +276,56 @@ const plannerReducer = (state = initialState, action) => {
           }
         }
       }
+
+      hidden = new Map();
+      for (let i = 0; i < newNumYears; i++) {
+        // hidden[parseInt(state.startYear) + parseInt(i)] = false;
+        hidden.set(parseInt(state.startYear) + parseInt(i), false);
+      }
+
       stateCopy = {
         ...state,
         years: dupYears,
         numYears: newNumYears,
         unplanned: newUnplan,
+        hidden: hidden,
       };
       setInLocalStorage(stateCopy);
       return stateCopy;
+
+    case "HIDE_YEAR":
+      hidden = Object.assign({}, state.hidden);
+      hidden[action.payload] = true;
+      areYearsHidden = true;
+
+      stateCopy = {
+        ...state,
+        hidden: hidden,
+        areYearsHidden: areYearsHidden,
+      };
+      setInLocalStorage(stateCopy);
+      return stateCopy;
+
+    case "UNHIDE_ALL_YEARS":
+      hidden = Object.assign({}, state.hidden);
+
+      for (const key in hidden) {
+        hidden[key] = false;
+      }
+
+      stateCopy = {
+        ...state,
+        hidden: hidden,
+        areYearsHidden: false,
+      };
+      setInLocalStorage(stateCopy);
+      return stateCopy;
+
     case "RESET_PLANNER":
+      hidden = {};
+      for (let i = 0; i < numYears; i++) {
+        hidden[parseInt(startYear) + parseInt(i)] = false;
+      }
       const init = {
         unplanned: [],
         startYear: parseInt(new Date().getFullYear()),
@@ -348,6 +339,8 @@ const plannerReducer = (state = initialState, action) => {
         courses: new Map(),
         plannedCourses: new Map(),
         completedTerms: new Map(),
+        hidden: hidden,
+        areYearsHidden: false,
       };
       setInLocalStorage(init);
       return init;
@@ -361,3 +354,12 @@ const plannerReducer = (state = initialState, action) => {
 };
 
 export default plannerReducer;
+
+// dummyMap.set("COMP2521", {
+//   title: "Data Structures and Algorithms",
+//   type: "Core",
+//   termsOffered: ["T0", "T1", "T2", "T3"],
+//   prereqs: "COMP1511 && (COMP1521 || DEFAULT3000)",
+//   plannedFor: null,
+//   warning: false,
+// });

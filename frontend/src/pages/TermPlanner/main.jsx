@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-
-import { notification, Tooltip } from "antd";
+import { notification } from "antd";
 import { DragDropContext } from "react-beautiful-dnd";
 import TermBox from "./TermBox";
 import SkeletonPlanner from "./SkeletonPlanner";
@@ -12,7 +11,7 @@ import UnplannedColumn from "./UnplannedColumn";
 import OptionsHeader from "./OptionsHeader";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
-import { IoIosEyeOff } from "react-icons/io";
+import HideYearTooltip from "./HideYearTooltip";
 
 const TermPlanner = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -21,27 +20,17 @@ const TermPlanner = () => {
   const {
     years,
     startYear,
-    numYears,
     courses,
     plannedCourses,
     isSummerEnabled,
     completedTerms,
+    hidden,
+    areYearsHidden,
   } = useSelector((state) => {
     return state.planner;
   });
 
-  // const theme = useSelector((state) => state.theme);
-  // const [visible, setVisible] = useState(false); // visibility for side drawer
   const dispatch = useDispatch();
-
-  const showCannotHideAllYearsNotification = () => {
-    notification.open({
-      type: "error",
-      message: "Something's not right",
-      description: "You cannot hide all years in your term planner",
-      duration: 2,
-    });
-  };
 
   useEffect(() => {
     setIsLoading(false);
@@ -59,51 +48,12 @@ const TermPlanner = () => {
     courses,
     completedTerms,
   };
-  const [hidden, setHidden] = React.useState(() => {
-    const hiddenMap = new Map();
-    for (let i = 0; i < numYears; i++) {
-      hiddenMap.set(parseInt(startYear) + parseInt(i), false);
-    }
-    return hiddenMap;
-  });
-
-  const hideYear = (year) => {
-    console.log(hideYear);
-    const tempHidden = new Map(hidden);
-    let i = 0;
-    for (const [key, value] of tempHidden.entries()) {
-      if (value) i++;
-    }
-    console.log(i);
-    if (i === numYears - 1) {
-      showCannotHideAllYearsNotification();
-      return;
-    }
-    tempHidden.set(year, true);
-    setHidden(tempHidden);
-    setAreYearsHidden(true);
-  };
-
-  const unhideAll = () => {
-    const tempHidden = new Map(hidden);
-    for (const [key, value] of tempHidden.entries()) {
-      tempHidden.set(key, false);
-      // console.log(key, value);
-    }
-    setHidden(tempHidden);
-    setAreYearsHidden(false);
-  };
-  const [areYearsHidden, setAreYearsHidden] = React.useState(false);
 
   const plannerPic = useRef();
 
   return (
     <>
-      <OptionsHeader
-        areYearsHidden={areYearsHidden}
-        unhideAll={unhideAll}
-        plannerRef={plannerPic}
-      />
+      <OptionsHeader areYearsHidden={areYearsHidden} plannerRef={plannerPic} />
       {isLoading ? (
         <SkeletonPlanner />
       ) : (
@@ -129,7 +79,7 @@ const TermPlanner = () => {
 
               {years.map((year, index) => {
                 const iYear = parseInt(startYear) + parseInt(index);
-                if (!hidden.get(iYear)) {
+                if (!hidden[iYear]) {
                   return (
                     <React.Fragment key={index}>
                       <div className={`yearContainer gridItem`}>
@@ -138,11 +88,7 @@ const TermPlanner = () => {
                         >
                           {iYear}
                         </div>
-                        <Tooltip title="Hide year">
-                          <div className="eye" onClick={() => hideYear(iYear)}>
-                            <IoIosEyeOff />
-                          </div>
-                        </Tooltip>
+                        <HideYearTooltip year={iYear} />
                       </div>
 
                       {Object.keys(year).map((term) => {

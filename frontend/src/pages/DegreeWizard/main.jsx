@@ -12,7 +12,7 @@ import { DatePicker } from "antd";
 import "./main.less";
 
 const { RangePicker } = DatePicker;
-function DegreeSelector() {
+function DegreeWizard() {
   const theme = useSelector((store) => store.theme);
   const dispatch = useDispatch();
 
@@ -63,4 +63,4 @@ function DegreeSelector() {
     </div>
   );
 }
-export default DegreeSelector;
+export default DegreeWizard;
