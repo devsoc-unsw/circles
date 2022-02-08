@@ -1,9 +1,6 @@
 import React, { useEffect, useState, useMemo, useRef } from "react";
-import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Select, Spin } from "antd";
-import { courseOptionsActions } from "../../actions/courseOptionsActions";
-import { setCourses } from "../../actions/updateCourses";
 import debounce from "lodash/debounce";
 import axios from "axios";
 import { courseTabActions } from "../../actions/courseTabActions";

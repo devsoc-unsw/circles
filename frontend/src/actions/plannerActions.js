@@ -1,6 +1,5 @@
 export const plannerActions = (action, payload) => {
   switch (action) {
-    // Takes
     case "ADD_TO_UNPLANNED":
       return {
         type: action,
@@ -90,6 +89,16 @@ export const plannerActions = (action, payload) => {
         payload: payload,
       };
     case "UPDATE_START_YEAR":
+      return {
+        type: action,
+        payload: payload,
+      };
+    case "HIDE_YEAR":
+      return {
+        type: action,
+        payload: payload,
+      };
+    case "UNHIDE_ALL_YEARS":
       return {
         type: action,
         payload: payload,

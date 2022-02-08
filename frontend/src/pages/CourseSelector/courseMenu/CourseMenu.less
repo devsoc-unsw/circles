@@ -1,12 +1,21 @@
 @import "~antd/lib/style/themes/default.less";
 
+.cs-menu-root {
+  overflow: auto;
+  // height: 100%;
+}
+
 .dark {
+  .cs-menu-root {
+    border-right: 1px solid #434343;
+  }
+
   .cs-menu-root .ant-menu-root {
       background-color: #1d1f20 !important; // grey-12
   }
 
   .cs-menu-root .ant-menu-inline {
-    border-right: 1px solid #434343 !important;
+    border-right: 0px;
   }
 
   .cs-menu-root .ant-menu-sub.ant-menu-inline {
@@ -33,5 +42,8 @@
 .light {
   .ant-menu-submenu-expand-icon, .ant-menu-submenu-arrow {
     color: #323739;
+  }
+  .cs-menu-root {
+    border-right: 1px solid #F0F0F0;
   }
 }

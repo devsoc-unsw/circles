@@ -1,7 +1,7 @@
 import React, { useState, useRef, useMemo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Select, Spin } from "antd";
-import { setCourses } from "../../../actions/updateCourses";
+import { setCourses } from "../../../actions/coursesActions";
 import debounce from "lodash/debounce";
 import axios from "axios";
 
@@ -50,8 +50,7 @@ export default function DebouncingSelect({ setPlannedCourses }) {
   const [value, setValue] = useState([]);
   setPlannedCourses(value);
 
-  const dispatch = useDispatch();
-  const courses = useSelector((state) => state.updateCourses.courses);
+  const [courses, setCourses] = React.useState({});
 
   useEffect(() => {
     fetchCourses();
@@ -68,7 +67,7 @@ export default function DebouncingSelect({ setPlannedCourses }) {
           },
         }
       );
-      dispatch(setCourses(res.data.courses_state));
+      setCourses(res.data.courses_state);
     } catch (err) {
       console.log(err);
     }
