@@ -213,15 +213,13 @@ def get_one_of_courses(container_courses: dict[str, str], curriculum_courses: di
     """
     one_of_courses = ""
     course_added = False  # Flag value to identify where 'or' needs to be added
-    titles = []
-    for code, title in container_courses.items():
+    for code in container_courses:
         if course_added:
             one_of_courses += " or "
 
         one_of_courses += code
-        titles.append(title)
         course_added = True
-    curriculum_courses[one_of_courses] = titles
+    curriculum_courses[one_of_courses] = list(container_courses.values())
 
 
 def get_courses(curriculum_courses: dict, container_courses: List[str],

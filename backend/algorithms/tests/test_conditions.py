@@ -376,7 +376,6 @@ def test_level_condition_simple():
     assert (l3_6uoc_cond.is_unlocked(user))["result"] == True
     assert (l3_12uoc_cond.is_unlocked(user))["result"] == False
 
-
 def test_level_course_condition():
     '''Testing level conditions with course category such as L2 MATH
     NOTE: Only UOC conditions realistically exist for this

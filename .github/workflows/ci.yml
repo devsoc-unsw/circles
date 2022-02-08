@@ -25,8 +25,19 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r backend/requirements.txt
+    - name: set up docker compose
+      run: |
+        mkdir env
+        echo "MONGODB_USERNAME=github-ci" >> env/backend.env
+        echo "MONGODB_PASSWORD=github-ci" >> env/backend.env
+        echo "MONGODB_DATABASE=mongodb" >> env/backend.env
+        echo "MONGO_INITDB_ROOT_USERNAME=github-ci" >> env/mongodb.env
+        echo "MONGO_INITDB_ROOT_PASSWORD=github-ci" >> env/mongodb.env
+        docker compose up backend -d --build
+        docker compose run init-mongo
 
     - name: Test algorithm with pytest
       run: |
         cd backend
         python3 -m pytest algorithms
+        python3 -m pytest server

@@ -1,6 +1,5 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from server.database import coursesCOL, archivesDB
-from fastapi.responses import JSONResponse
 import re
 from algorithms.objects.user import User
 from server.routers.model import *
@@ -19,8 +18,6 @@ def fixUserData(userData: dict):
     ''' updates and returns the userData with the UOC of a course '''
     coursesWithoutUoc = [course for course in userData["courses"] if type(userData["courses"][course]) is int]
     filledInCourses = {course : [getCourse(course)["UOC"], userData["courses"][course]] for course in coursesWithoutUoc}
-    if any(type(courseValues[1]) is JSONResponse for courseValues in filledInCourses.values()):
-        return JSONResponse(status_code=400, content={"message": "a course supplied could not be found"})
     userData["courses"].update(filledInCourses)
     return userData
 
@@ -82,10 +79,10 @@ def fixUserData(userData: dict):
                     }
                 }
             })
-def getCourse(courseCode):
+def getCourse(courseCode: str):
     result = coursesCOL.find_one({'code' : courseCode})
     if not result:
-        return JSONResponse(status_code=400, content={"message" : f"Course code {courseCode} was not found"})
+        raise HTTPException(status_code=400, detail=f"Course code {courseCode} was not found")
 
     del result['_id']
 
@@ -125,7 +122,6 @@ def getAllUnlocked(userData: UserData):
     that they have already completed"""
 
     coursesState = {}
-
     user = User(fixUserData(userData.dict()))
     for course, condition in CONDITIONS.items():
         # Condition object exists for this course

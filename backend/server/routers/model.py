@@ -39,7 +39,7 @@ class Structure (BaseModel): # this is a copout - we should avoid this
 
 class UserData (BaseModel):
     program: str 
-    specialisations: list
+    specialisations: dict
     courses: dict
     year: int
 
