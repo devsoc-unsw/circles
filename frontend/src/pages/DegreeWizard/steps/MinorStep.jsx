@@ -5,9 +5,11 @@ import { degreeActions } from "../../../actions/degreeActions";
 import { Link } from "react-scroll";
 import { useDispatch, useSelector } from "react-redux";
 import "./steps.less";
+import { useSpring, animated } from "react-spring";
+import { springProps } from "../spring";
 
 const { Title } = Typography;
-export const MinorStep = () => {
+export const MinorStep = ({ incrementStep, currStep }) => {
   const dispatch = useDispatch();
   const { minor, programCode } = useSelector((store) => store.degree);
   // Fetch the minors
@@ -24,14 +26,28 @@ export const MinorStep = () => {
   };
 
   useEffect(() => {
-    fetchAllMinors();
+    if (programCode !== "") fetchAllMinors();
   }, [programCode]);
 
+  const props = useSpring(springProps);
+
   return (
-    <div className="steps-root-container">
-      <Title level={3} className="text">
-        What is your minor (if any)?
-      </Title>
+    <animated.div style={props} className="steps-root-container">
+      <div className="steps-heading-container">
+        <Title level={4} className="text">
+          What is your minor (if any)?
+        </Title>
+        {currStep === 4 && (
+          <Button
+            onClick={incrementStep}
+            type="primary"
+            className="steps-next-btn"
+          >
+            Next
+          </Button>
+        )}
+      </div>
+
       <Menu
         className="degree-minors"
         onClick={(e) => dispatch(degreeActions("SET_MINOR", e.key))}
@@ -45,14 +61,9 @@ export const MinorStep = () => {
             </Menu.Item>
           ))
         ) : (
-          <div>Please select a degree first</div>
+          <div>Please select a degree first...</div>
         )}
       </Menu>
-      <Link to="Previous Courses" smooth={true} duration={1000}>
-        <Button type="primary" className="steps-next-btn">
-          Next
-        </Button>
-      </Link>
-    </div>
+    </animated.div>
   );
 };

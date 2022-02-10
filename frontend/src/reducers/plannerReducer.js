@@ -13,7 +13,6 @@ const hidden = {};
 for (let i = 0; i < numYears; i++) {
   hidden[parseInt(startYear) + parseInt(i)] = false;
 }
-
 let initialState = {
   unplanned: [],
   startYear: startYear,

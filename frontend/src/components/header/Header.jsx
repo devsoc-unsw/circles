@@ -77,7 +77,7 @@ const Header = () => {
             </Menu.Item>
           </Menu>
           <PlannerCart />
-          <ThemeToggle />
+          {/* <ThemeToggle /> */}
         </div>
       )}
 

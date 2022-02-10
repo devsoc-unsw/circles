@@ -5,18 +5,15 @@ import { Link } from "react-scroll";
 import { degreeActions } from "../../../actions/degreeActions";
 import { useDispatch, useSelector } from "react-redux";
 import "./steps.less";
+import { useSpring, animated } from "react-spring";
+import { springProps } from "../spring";
 
 const { Title } = Typography;
-export const SpecialisationStep = () => {
+export const SpecialisationStep = ({ incrementStep, currStep }) => {
   const dispatch = useDispatch();
   const { programCode, specialisation } = useSelector((store) => store.degree);
-  const [selected, setSelected] = React.useState("Select Specialisation");
   const [options, setOptions] = React.useState({
     1: "major",
-    2: "major",
-    3: "major",
-    4: "major",
-    5: "major",
   });
 
   const fetchAllSpecializations = async () => {
@@ -25,19 +22,27 @@ export const SpecialisationStep = () => {
     );
     console.log(res.data);
     setOptions(res.data["majors"]);
-    // setIsLoading(false);
   };
 
   useEffect(() => {
-    // setTimeout(fetchDegree, 2000); // testing skeleton
-    fetchAllSpecializations();
+    if (programCode !== "") fetchAllSpecializations();
   }, [programCode]);
 
+  const props = useSpring(springProps);
+
   return (
-    <div className="steps-root-container">
-      <Title level={3} className="text">
-        What are you specialising in?
-      </Title>
+    <animated.div style={props} className="steps-root-container">
+      <div className="steps-heading-container">
+        <Title level={4} className="text">
+          What are you specialising in?
+        </Title>
+        {specialisation !== null && currStep === 3 && (
+          <Button type="primary" onClick={incrementStep}>
+            Next
+          </Button>
+        )}
+      </div>
+
       <Menu
         className="degree-specialisations"
         onClick={(e) => dispatch(degreeActions("SET_SPECIALISATION", e.key))}
@@ -54,13 +59,6 @@ export const SpecialisationStep = () => {
           <div>Please select a degree first...</div>
         )}
       </Menu>
-      {specialisation !== null && (
-        <Link to="Minor" smooth={true} duration={1000}>
-          <Button className="steps-next-btn" type="primary">
-            Next
-          </Button>
-        </Link>
-      )}
-    </div>
+    </animated.div>
   );
 };

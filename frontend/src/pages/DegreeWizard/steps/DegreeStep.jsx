@@ -1,13 +1,15 @@
 import React, { useEffect } from "react";
 import axios from "axios";
-import { Menu, Typography, Button } from "antd";
+import { Menu, Typography, Button, Input } from "antd";
 import { degreeActions } from "../../../actions/degreeActions";
 import { Link } from "react-scroll";
 import { useDispatch, useSelector } from "react-redux";
 import "./steps.less";
+import { useSpring, animated } from "react-spring";
+import { springProps } from "../spring";
 
 const { Title } = Typography;
-export const DegreeStep = ({ isYearsSet }) => {
+export const DegreeStep = ({ incrementStep, currStep }) => {
   const dispatch = useDispatch();
   const programCode = useSelector((store) => store.degree.programCode);
   const [input, setInput] = React.useState("");
@@ -18,9 +20,6 @@ export const DegreeStep = ({ isYearsSet }) => {
     // setOptions(res.data["programs"]);
     setOptions({
       3778: "Computer Science",
-      3502: "Commerce",
-      3970: "Science",
-      3543: "Economics",
     });
     // setIsLoading(false);
   };
@@ -40,13 +39,23 @@ export const DegreeStep = ({ isYearsSet }) => {
     );
   };
 
+  const props = useSpring(springProps);
+
   return (
-    <div className="steps-root-container-first">
-      <Title level={3} className="text">
-        What are you studying?
-      </Title>
-      <input
-        className="steps-search-input"
+    <animated.div style={props}>
+      <div className="steps-heading-container">
+        <Title level={4} className="text">
+          What are you studying?
+        </Title>
+        {programCode && currStep === 2 && (
+          <Button type="primary" onClick={incrementStep}>
+            Next
+          </Button>
+        )}
+      </div>
+
+      <Input
+        size="large"
         type="text"
         value={input}
         placeholder="Search Degree"
@@ -66,14 +75,6 @@ export const DegreeStep = ({ isYearsSet }) => {
           ))}
         </Menu>
       )}
-
-      {programCode && (
-        <Link to={"Specialisation"} smooth={true} duration={1000}>
-          <Button className="steps-next-btn-first" type="primary">
-            Next
-          </Button>
-        </Link>
-      )}
-    </div>
+    </animated.div>
   );
 };

@@ -1,12 +1,25 @@
 .steps-root-container {
   position: relative;
-  padding-top: 11em;
 }
 
-.steps-root-container-first {
-  position: relative;
-  padding-top: 5em;
+.steps-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
 }
+
+
+.steps-heading-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.step-duration {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
 .steps-dropdown {
   font-size: 24px;
   border: #919191 solid 1px; //grey-5
@@ -30,42 +43,15 @@
   height: 10rem;
 }
 
-.steps-next-btn {
-  position: absolute !important;
-  top: 11em;
-  right: 5px;
-}
-
-.steps-next-btn-first {
-  position: absolute !important;
-  top: 5em;
-  right: 5px;
-}
 
 .step-content {
-  min-height: 90vh;
-  padding: 2em;
   position: relative;
-}
-.steps-search-input {
-  font-size: 24px;
-  border-radius: 5px;
-  width: 100%;
-  padding: 8px;
-  padding-left: 15px;
-  border: #919191 solid 1px; //grey-5
-  margin-top: 3px;
-}
-
-.steps-search-input:focus {
-  outline: none !important;
-  border: #9254de solid 1px;
+  justify-content: center;
 }
 
 .degree-search-results {
   margin-top: 10px;
   margin-bottom: 10px;
-  min-height: 200px;
 }
 .degree-option {
   border: none;
@@ -88,6 +74,7 @@
   align-items: center;
   max-width: 100em;
   margin: auto auto;
+  margin-top: 3em;
 }
 
 .steps-grid-item {

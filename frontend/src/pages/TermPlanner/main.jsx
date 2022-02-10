@@ -125,7 +125,7 @@ const openNotification = () => {
     message: "Your terms are looking a little empty",
     description:
       "Open the drawers on the right to reveal courses you've added from the course selector",
-    duration: 10,
+    duration: 3,
     className: "text helpNotif",
     placement: "topRight",
   };
