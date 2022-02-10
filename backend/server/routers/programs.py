@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from server.database import specialisationsCOL, programsCOL
 from fastapi.responses import JSONResponse
 from server.routers.model import *
@@ -65,7 +65,7 @@ def getMajors(programCode: str):
     result = programsCOL.find_one({'code' : programCode})
 
     if not result:
-        return JSONResponse(status_code=404, content={"message" : "Program code was not found"})
+        raise HTTPException(status_code=400, detail="Program code was not found")
 
     majors = result['components']['SpecialisationData']['Majors']
 
@@ -103,7 +103,7 @@ def getMinors(programCode):
     result = programsCOL.find_one({'code' : programCode})
 
     if not result:
-        return JSONResponse(status_code=404, content={"message" : "Program code was not found"})
+        raise HTTPException(status_code=404, detail="Program code was not found")
 
     if programCode in minorInFE:
         minors = result['components']['FE']['Minors']
@@ -123,6 +123,8 @@ def getMinors(programCode):
 
 def addSpecialisation(structure: dict, code: str, type: str):
     spnResult = specialisationsCOL.find_one({'code': code})
+    if not spnResult:
+        raise HTTPException(status_code=404, detail=f"{code} of type {type} not found")
     structure[type] = {'name': spnResult['name']}
     for container in spnResult['curriculum']:
 
@@ -270,47 +272,40 @@ def addSpecialisation(structure: dict, code: str, type: str):
                     }
                 }
             })
-def getStructure(programCode, major="Default", minor="Default"):
+def getStructure(programCode, major=None, minor=None):
     structure = {}
-    programsResult = programsCOL.find_one({'code': programCode})
-    if not programsResult:
-        return JSONResponse(status_code=404, content={"message" : "Program code was not found"})
 
-    if major != 'Default':
-        spnResult = specialisationsCOL.find_one({'code': major})
-        if not spnResult:
-            return JSONResponse(status_code=404, content={"message" : "Major code was not found"})
-
+    if major:
         addSpecialisation(structure, major, 'Major')
 
-    if minor != 'Default':
-        spnResult = specialisationsCOL.find_one({'code': minor})
-        if not spnResult:
-            return JSONResponse(status_code=404, content={"message" : "Minor code was not found"})
-
+    if minor:
         addSpecialisation(structure, minor, 'Minor')
 
+    # add details for program code
+    programsResult = programsCOL.find_one({'code': programCode})
+    if not programsResult:
+        raise HTTPException(status_code=404, detail="Program code was not found")
+
     structure['General'] = {}
-    for container in programsResult['components']['NonSpecialisationData']:
+    for container, containerObeject in programsResult['components']['NonSpecialisationData'].items():
 
         structure['General'][container] = {}
+        myContainer = structure['General'][container]
 
-        if "credits_to_complete" in programsResult['components']['NonSpecialisationData'][container]:
-            structure['General'][container]['UOC'] = programsResult['components']['NonSpecialisationData'][container]['credits_to_complete']
-        else:
-            # Not all program containers have credit points associated with them
-            structure['General'][container]['UOC'] = -1
-        
+        # Not all program containers have credit points associated with them
+        myContainer['UOC'] = containerObeject['credits_to_complete'] if "credits_to_complete" in containerObeject else -1
+
         for course, title in programsResult['components']['NonSpecialisationData'][container].items():
             # Add course data: e.g. { "COMP1511": "Programming Fundamentals"  }
             if course == "type" or course == "credits_to_complete":
                 continue
-            structure['General'][container][course] = title
-        if 'FE' in programsResult['components']:
-            structure['General']['FlexEducation'] = {'UOC': programsResult['components']['FE']['credits_to_complete'],
-                                                     'description': 'students can take a maximum of {} UOC of free electives'.format(programsResult['components']['FE']['credits_to_complete'])}
-        if 'GE' in programsResult['components']:
-            structure['General']['GeneralEducation'] = {'UOC': programsResult['components']['GE']['credits_to_complete'],
-                                                        'description': 'any general education course'}
+            myContainer[course] = title
+
+    if 'FE' in programsResult['components']:
+        structure['General']['FlexEducation'] = {'UOC': programsResult['components']['FE']['credits_to_complete'],
+                                                    'description': f'students can take a maximum of {programsResult["components"]["FE"]["credits_to_complete"]} UOC of free electives'}
+    if 'GE' in programsResult['components']:
+        structure['General']['GeneralEducation'] = {'UOC': programsResult['components']['GE']['credits_to_complete'],
+                                                    'description': 'any general education course'}
 
     return {'structure': structure}
