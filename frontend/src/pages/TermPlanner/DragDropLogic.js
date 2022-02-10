@@ -11,13 +11,6 @@ export const handleOnDragEnd = (result, dragEndProps) => {
 
   if (!destination) return; // drag outside container
 
-  // check if prereqs are complete, and trigger warning if not
-  // let arePrereqsCompleted = checkPrereq(
-  //   draggableId,
-  //   destination.droppableId,
-  //   courses
-  // );
-
   dispatch(
     plannerActions("MOVE_COURSE", {
       course: draggableId,
@@ -90,39 +83,3 @@ export const handleOnDragStart = (
   setTermsOffered(terms);
   setIsDragging(true);
 };
-
-// === MANUALLY CHECKING PREREQS (before backend was ready) ===
-// const checkPrereq = (course, term, courses) => {
-//   const prereqs = courses.get(course).prereqs;
-//   let arePrereqsCompleted = false;
-//   // for example, expr can be: (COMP1511 || COMP1521 && (COMP1531 || COMP1541);
-//   const expr = prereqs;
-//   if (expr == null) return true;
-//   if (expr === "") {
-//     return true;
-//   } else {
-//     const exprArray = expr.replace(/ \|\|| \&\&|\(|\)/g, "").split(" ");
-//     // from above example, exprArray is: [COMP1511, COMP1521, COMP1531, COMP1541]
-//     const isComplete = new Map();
-//     exprArray.forEach((elem) => {
-//       if (courses.get(elem) == null) {
-//         // prereq not in term planner
-//         isComplete.set(elem, false);
-//       } else if (courses.get(elem)["plannedFor"] == null) {
-//         // prereq in unplanned
-//         isComplete.set(elem, false);
-//       } else if (term <= courses.get(elem)["plannedFor"]) {
-//         // course placed before (or during) prereq is complete
-//         isComplete.set(elem, false);
-//       } else {
-//         // if it gets to this point, that means prereq has been complete
-//         isComplete.set(elem, true);
-//       }
-//     });
-//     const exprWithMap = expr.replace(/([A-Z]+[0-9]+)/g, 'isComplete.get("$1")');
-
-//     // from above example, exprWithMap is: (isComplete.get(COMP1511) || ...)
-//     arePrereqsCompleted = eval(exprWithMap);
-//     return arePrereqsCompleted;
-//   }
-// };

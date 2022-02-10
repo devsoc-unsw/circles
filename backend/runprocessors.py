@@ -1,9 +1,14 @@
-'''The driver for our procsesors. Provide the relevant command line arguments
-in order to run the relevant drivers'''
+'''
+The driver for our procsesors. Provide the relevant command line arguments
+in order to run the relevant drivers
+if you need to  bash this, use python3 -m runprocessors --type data-fix --stage all
+'''
 
 import sys
 import argparse
-import subprocess 
+import subprocess
+from algorithms.load_conditions import cache_conditions_pkl_file
+from algorithms.log_broken import log_broken_conditions 
 
 from data.scrapers.programsScraper import scrape_programs as scrape_prg_data
 from data.scrapers.specialisationsScraper import scrape_spn_data
@@ -70,14 +75,22 @@ run = {
         'tokenise': tokenise_conditions
     },
     'cache': {
+        'conditions': cache_conditions_pkl_file,
         'exclusion': cache_exclusions,
         'warnings': cache_warnings,
         'mapping': cache_mappings,
-        "program": cache_program_mappings
+        'program': cache_program_mappings,
+        'parsingErrors': log_broken_conditions
     }
 }
 if __name__ == '__main__':
-    if args.stage == 'all':
+    if args.type == 'data-fix' and args.stage == 'all':
+        '''run all the things except for the scrapers and formatters to deal with code changes'''
+        for t in run:
+            for stage in run[t]:
+                if stage != 'scrape':
+                    run[t][stage]()
+    elif args.stage == 'all':
         # Run all the stages from top to bottom
         if args.type in ["program", "specialisation", "course"]:
             # NOTE: Be careful when using this as this will rerun the scrapers

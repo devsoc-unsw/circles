@@ -11,7 +11,7 @@ import UnplannedColumn from "./UnplannedColumn";
 import OptionsHeader from "./optionsHeader/main";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
-import HideYearTooltip from "./misc/HideYearTooltip";
+import HideYearTooltip from "./HideYearTooltip";
 
 const TermPlanner = () => {
   const [isLoading, setIsLoading] = useState(true);

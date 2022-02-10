@@ -16,24 +16,15 @@ class Category(ABC):
     @abstractmethod
     def match_definition(self, course):
         pass
+    @abstractmethod
+    def __str__(self) -> str:
+        return super().__str__()
 
-    def uoc(self, user):
-        '''Given a user, returns the number of units they have taken for this uoc category'''
-        return sum(uoc for course, (uoc, _) in user.courses.items() if self.match_definition(course))
-
-    def wam(self, user):
-        '''The wam of courses matching the code or None if no wams were entered
-        or no courses matched'''
-        total_wam, total_uoc = 0, 0
-
-        for course, (uoc, grade) in user.courses.items():
-            if grade != None and self.match_definition(course):
-                total_uoc += uoc
-                total_wam += uoc * grade
-
-        return None if total_uoc == 0 else total_wam / total_uoc
-
-
+class AnyCategory(Category):
+    def match_definition(self, course):
+        return True
+    def __str__(self) -> str:
+        return "any course"
 class CourseCategory(Category):
     '''A 4 letter course category, e.g. COMP, SENG, MATH, ENGG'''
 
@@ -42,6 +33,9 @@ class CourseCategory(Category):
 
     def match_definition(self, course):
         return bool(re.match(rf'^{self.code}\d{{4}}$', course))
+    
+    def __str__(self) -> str:
+        return f"{self.code} courses"
 
 class LevelCategory(Category):
     '''A simple level category. e.g. L2'''
@@ -53,6 +47,9 @@ class LevelCategory(Category):
     def match_definition(self, course: str):
         return bool(course[4] == str(self.level))
 
+    def __str__(self) -> str:
+        return f"level {self.level} courses"
+
 class LevelCourseCategory(Category):
     '''A level category for a certain type of course (e.g. L2 MATH)'''
 
@@ -62,6 +59,9 @@ class LevelCourseCategory(Category):
 
     def match_definition(self, course) -> bool:
         return bool(re.match(rf'{self.code}\d{{4}}', course) and course[4] == str(self.level))
+    
+    def __str__(self) -> str:
+        return f"Level {self.level} {self.code} courses"
 
 class SchoolCategory(Category):
     '''Category for courses belonging to a school (e.g. S Mech)'''
@@ -70,6 +70,9 @@ class SchoolCategory(Category):
 
     def match_definition(self, course):
         return course in CACHED_MAPPINGS[self.school]
+    
+    def __str__(self) -> str:
+        return self.school
 
 class FacultyCategory(Category):
     '''Category for courses belonging to a faculty (e.g. F Business)'''
@@ -78,3 +81,6 @@ class FacultyCategory(Category):
 
     def match_definition(self, course):
         return course in CACHED_MAPPINGS[self.faculty]
+
+    def __str__(self) -> str:
+        return self.faculty

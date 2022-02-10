@@ -204,7 +204,7 @@ def get_nested_data(container: dict, curriculum_item: dict) -> None:
                         sub_container["description"])
 
 
-def get_one_of_courses(container_courses: List[str], curriculum_courses: dict) -> None:
+def get_one_of_courses(container_courses: dict[str, str], curriculum_courses: dict) -> None:
     """
     Since tuples are not supported by JSON, current approach to 'one of
     the following' courses is to convert to key-value pair
@@ -213,16 +213,13 @@ def get_one_of_courses(container_courses: List[str], curriculum_courses: dict) -
     """
     one_of_courses = ""
     course_added = False  # Flag value to identify where 'or' needs to be added
-    titles = []
-    for course in container_courses:
-        for code, title in course.items():
-            if course_added:
-                one_of_courses += " or "
+    for code in container_courses:
+        if course_added:
+            one_of_courses += " or "
 
-            one_of_courses += code
-            titles.append(title)
-            course_added = True
-    curriculum_courses[one_of_courses] = titles
+        one_of_courses += code
+        course_added = True
+    curriculum_courses[one_of_courses] = list(container_courses.values())
 
 
 def get_courses(curriculum_courses: dict, container_courses: List[str],
@@ -230,13 +227,15 @@ def get_courses(curriculum_courses: dict, container_courses: List[str],
     """ 
     Adds courses from container to the customised curriculum course dict.
     """
-    for course in container_courses:
+    for course, title in container_courses.items():
 
-        if "any level" in course:
-            # e.g. modify "any level 4 COMP course" to "COMP4"
-            course = process_any_level(course)
         if "any course" in course:
             course = {"any course": 1}
+        elif "any level" in course:
+            # e.g. modify "any level 4 COMP course" to "COMP4"
+            course = process_any_level(course)
+        else:
+            course = {course: title}
         curriculum_courses.update(course)
 
     # Below is the old code parsing description for course codes. It

@@ -53,8 +53,8 @@ def TABL_1710_2710():
     "processed": "Must not be Law single && dual programs && 18UOC"
     """
 
-    COURSES["TABL1710"]["exclusions"] = "LAWS#"
-    COURSES["TABL2710"]["exclusions"] = "LAWS#"
+    COURSES["TABL1710"]["exclusions"] ={"LAWS#": 1}
+    COURSES["TABL2710"]["exclusions"] = {"LAWS#": 1}
 
     return "18UOC"
 
@@ -66,7 +66,7 @@ def TABL_2741():
     "processed": "Not Law single && dual programs && LEGT1710 || TABL1710 || TABL2710 || (COMM1100 && COMM1150) || COMM1900"
     """
 
-    COURSES["TABL2741"]["exclusions"] = "LAWS#"
+    COURSES["TABL2741"]["exclusions"] = {"LAWS#": 1}
 
     return "LEGT1710 || TABL1710 || TABL2710 || (COMM1100 && COMM1150) || COMM1900"
 

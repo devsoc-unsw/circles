@@ -1,6 +1,5 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from server.database import coursesCOL, archivesDB
-from fastapi.responses import JSONResponse
 import re
 from algorithms.objects.user import User
 from server.routers.model import *
@@ -15,9 +14,16 @@ router = APIRouter(
 def apiIndex():
     return "Index of api"
 
+def fixUserData(userData: dict):
+    ''' updates and returns the userData with the UOC of a course '''
+    coursesWithoutUoc = [course for course in userData["courses"] if type(userData["courses"][course]) is int]
+    filledInCourses = {course : [getCourse(course)["UOC"], userData["courses"][course]] for course in coursesWithoutUoc}
+    userData["courses"].update(filledInCourses)
+    return userData
+
 @router.get("/getCourse/{courseCode}", response_model=courseDetails,
             responses={
-                404: {"model": message, "description": "The given course code could not be found in the database"},
+                400: {"model": message, "description": "The given course code could not be found in the database"},
                 200: {
                     "description": "Returns all course details to given code",
                     "content": {
@@ -27,7 +33,17 @@ def apiIndex():
                                 "code": "COMP1511",
                                 "UOC": 6,
                                 "level": 1,
-                                "description": "An introduction to problem-solving via programming, which aims to have students develop proficiency in using a high level programming language. Topics: algorithms, program structures (statements, sequence, selection, iteration, functions), data types (numeric, character), data structures (arrays, tuples, pointers, lists), storage structures (memory, addresses), introduction to analysis of algorithms, testing, code quality, teamwork, and reflective practice. The course includes extensive practical work in labs and programming projects.</p>\n<p>Additional Information</p>\n<p>This course should be taken by all CSE majors, and any other students who have an interest in computing or who wish to be extended. It does not require any prior computing knowledge or experience.</p>\n<p>COMP1511 leads on to COMP1521, COMP1531, COMP2511 and COMP2521, which form the core of the study of computing at UNSW and which are pre-requisites for the full range of further computing courses.</p>\n<p>Due to overlapping material, students who complete COMP1511 may not also enrol in COMP1911 or COMP1921. </p>",
+                                "description": """An introduction to problem-solving via programming, which aims to have students develop
+                                    proficiency in using a high level programming language. Topics: algorithms, program structures 
+                                    (statements, sequence, selection, iteration, functions), data types (numeric, character), data structures 
+                                    (arrays, tuples, pointers, lists), storage structures (memory, addresses), introduction to analysis of 
+                                    algorithms, testing, code quality, teamwork, and reflective practice. The course includes extensive practical
+                                    work in labs and programming projects.</p>\n<p>Additional Information</p>\n<p>This course should be taken by 
+                                    all CSE majors, and any other students who have an interest in computing or who wish to be extended. 
+                                    It does not require any prior computing knowledge or experience.</p>\n
+                                    <p>COMP1511 leads on to COMP1521, COMP1531, COMP2511 and COMP2521, which form the core of the study of 
+                                    computing at UNSW and which are pre-requisites for the full range of further computing courses.</p>\n<p>Due to
+                                    overlapping material, students who complete COMP1511 may not also enrol in COMP1911 or COMP1921. </p>""",
                                 "study_level": "Undergraduate",
                                 "school": "School of Computer Science and Engineering",
                                 "faculty": "Faculty of Engineering",
@@ -63,10 +79,10 @@ def apiIndex():
                     }
                 }
             })
-def getCourse(courseCode):
+def getCourse(courseCode: str):
     result = coursesCOL.find_one({'code' : courseCode})
     if not result:
-        return JSONResponse(status_code=404, content={"message" : "Course code was not found"})
+        raise HTTPException(status_code=400, detail=f"Course code {courseCode} was not found")
 
     del result['_id']
 
@@ -106,9 +122,8 @@ def getAllUnlocked(userData: UserData):
     that they have already completed"""
 
     coursesState = {}
-    user = User(userData.dict())
+    user = User(fixUserData(userData.dict()))
     for course, condition in CONDITIONS.items():
-
         # Condition object exists for this course
         state = condition.is_unlocked(user) if condition else {'result': True, 'warnings': []}
         coursesState[course] = {
@@ -161,6 +176,6 @@ def unselectCourse(userData: UserData, lockedCourses: list, unselectedCourse: st
         Creates a new user class and returns all the courses
         affected from the course that was unselected in sorted order
     '''
-    affectedCourses = User(userData.dict()).unselect_course(unselectedCourse, lockedCourses)
+    affectedCourses = User(fixUserData(userData.dict())).unselect_course(unselectedCourse, lockedCourses)
 
     return {'affected_courses': affectedCourses}

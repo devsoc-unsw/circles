@@ -1495,7 +1495,11 @@
     },
     "COMM1150": {
         "ECON1104": 1,
-        "ECON1102": 1
+        "ECON1102": 1,
+        "MGMT1101": 1,
+        "COMM2233": 1,
+        "CDEV3000": 1,
+        "DIPP1510": 1
     },
     "COMM1170": {},
     "COMM1180": {},
@@ -1526,7 +1530,8 @@
     "COMM3090": {},
     "COMM3101": {
         "COMM2233": 1,
-        "COMM2222": 1
+        "COMM2222": 1,
+        "DIPP1510": 1
     },
     "COMM3202": {
         "DIPP1510": 1,
@@ -1561,7 +1566,13 @@
         "SENG1010": 1,
         "SENG1020": 1
     },
-    "COMP1911": {},
+    "COMP1911": {
+        "COMP?1": 1,
+        "COMP?H": 1,
+        "BINF?1": 1,
+        "BINF?H": 1,
+        "SENGAH": 1
+    },
     "COMP2041": {},
     "COMP2111": {
         "COMP2110": 1
@@ -1660,7 +1671,9 @@
     "COMP6451": {},
     "COMP6452": {},
     "COMP6714": {},
-    "COMP6721": {},
+    "COMP6721": {
+        "SENGAH": 1
+    },
     "COMP6733": {
         "COMP9335": 1,
         "COMP4335": 1
@@ -2509,7 +2522,12 @@
     },
     "ENGG1400": {},
     "ENGG1811": {
-        "COMP1010": 1
+        "COMP1010": 1,
+        "COMP?1": 1,
+        "COMP?H": 1,
+        "BINF?1": 1,
+        "BINF?H": 1,
+        "SENGAH": 1
     },
     "ENGG2400": {},
     "ENGG2500": {},
@@ -2849,7 +2867,9 @@
     },
     "INFS1609": {
         "INFS2609": 1,
-        "COMP1400": 1
+        "COMP1400": 1,
+        "COMP#": 1,
+        "COMP?1": 1
     },
     "INFS1701": {},
     "INFS2101": {},
@@ -3548,7 +3568,8 @@
         "ECON1202": 1,
         "DPST1013": 1,
         "3991": 1,
-        "leftover_plaintext": "Not enrolled in  or any UNSW Business Program and must not have completed  or"
+        "leftover_plaintext": "Not enrolled in  or any UNSW Business Program and must not have completed  or",
+        "BUSN#": 1
     },
     "MATH1031": {
         "MATH1011": 1
@@ -4927,8 +4948,7 @@
         "TABL5911": 1
     },
     "TABL1710": {
-        "TABL2710": 1,
-        "DPBS1710": 1
+        "LAWS#": 1
     },
     "TABL2015": {
         "TABL5915": 1
@@ -4941,8 +4961,7 @@
     "TABL2059": {},
     "TABL2060": {},
     "TABL2710": {
-        "DPBS1710": 1,
-        "TABL1710": 1
+        "LAWS#": 1
     },
     "TABL2712": {
         "TABL5916": 1,
@@ -4959,7 +4978,7 @@
         "LEGT1733": 1
     },
     "TABL2741": {
-        "LEGT7741": 1
+        "LAWS#": 1
     },
     "TABL2751": {
         "LEGT7751": 1,

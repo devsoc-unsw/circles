@@ -363,37 +363,3 @@ export default plannerReducer;
 //   plannedFor: null,
 //   warning: false,
 // });
-// dummyMap.set("COMP1521", {
-//   title: "Computer Systems Fundamentals",
-//   type: "Core",
-//   termsOffered: ["T0", "T1", "T2"],
-//   prereqs: "COMP1511",
-//   plannedFor: null,
-//   warning: false,
-// });
-// dummyMap.set("COMP1511", {
-//   title: "Programming Fundamentals",
-//   type: "Core",
-//   termsOffered: ["T0", "T1", "T2", "T3"],
-//   prereqs: "",
-//   plannedFor: null,
-//   warning: false,
-// });
-// dummyMap.set("COMP6080", {
-//   title: "Web Front-End Programming",
-//   type: "Elective",
-//   termsOffered: ["T1", "T3"],
-//   prereqs: "COMP1531 && (COMP2521 || COMP1927)",
-//   plannedFor: null,
-//   warning: false,
-// });
-// dummyMap.set("ARTS1240", {
-//   title: "Environment and Society",
-//   type: "General Education",
-//   termsOffered: ["T0", "T1", "T2"],
-//   prereqs: "",
-//   plannedFor: null,
-//   warning: false,
-// });
-
-// unplanned: ["COMP1511", "COMP1521", "COMP2521", "ARTS1240", "COMP6080"],
