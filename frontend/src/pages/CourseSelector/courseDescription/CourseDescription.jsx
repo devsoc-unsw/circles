@@ -7,6 +7,7 @@ import { getCourseById } from "./../courseProvider";
 import SearchCourse from "../SearchCourse";
 import { plannerActions } from "../../../actions/plannerActions";
 import { Loading } from "./Loading";
+import { selectCourse } from "../../../actions/coursesActions";
 import "./courseDescription.less";
 
 const { Title, Text } = Typography;
@@ -43,7 +44,6 @@ export default function CourseDescription() {
 
   if (id === "explore") return <div>This is the explore page</div>;
   if (id === "search") return <SearchCourse />;
-
   const addToPlanner = () => {
     const data = {
       courseCode: course.code,
@@ -51,7 +51,7 @@ export default function CourseDescription() {
         title: course.title,
         type: "Uncategorised", // TODO: add type
         termsOffered: course.terms,
-        uoc: course.uoc,
+        UOC: course.UOC,
         plannedFor: null,
         warning: false,
         prereqs: "",

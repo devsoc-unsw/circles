@@ -13,6 +13,7 @@ export default function CourseMenu() {
   const dispatch = useDispatch();
   const [structure, setStructure] = React.useState({});
   const [menuData, setMenuData] = React.useState({});
+  const [coursesUnits, setCoursesUnits] = React.useState({});
   const { active, tabs } = useSelector((state) => state.tabs);
   let id = tabs[active];
 
@@ -26,7 +27,6 @@ export default function CourseMenu() {
   const { programCode, specialisation, minor } = useSelector(
     (state) => state.degree
   );
-  console.log(minor);
 
   // get structure of degree
   const fetchStructure = async () => {
@@ -42,13 +42,21 @@ export default function CourseMenu() {
     }
   };
 
+  // get courses in planner
+  const planner = useSelector((state) => state.planner);
+  const coursesInPlanner = planner.courses;
+  let selectedCourses = {};
+  for (const course of coursesInPlanner.keys()) {
+    selectedCourses[course] = 70;
+  }
+
   const { startYear } = useSelector((state) => state.planner);
   const majors = {};
   majors[specialisation] = 1;
   const payload = {
     program: programCode,
     specialisations: majors,
-    courses: {},
+    courses: selectedCourses,
     year: new Date().getFullYear() - startYear,
   };
 
@@ -69,19 +77,29 @@ export default function CourseMenu() {
     } catch (err) {
       console.log(err);
     }
-  }, [structure]);
-
-  const fetchAllCourses = () => {};
+  }, [structure, coursesInPlanner]);
 
   // generate menu content
   const generateMenuData = (courses) => {
     let newMenu = {};
+    let newCoursesUnits = {};
+
     // Example groups: Major, Minor, General
     for (const group in structure) {
       newMenu[group] = {};
       // Example subGroup: Core Courses, Computing Electives
+
+      newCoursesUnits[group] = {};
+
       for (const subGroup in structure[group]) {
+        // console.log(structure[group][subGroup]);
+        // console.log(subGroup);
         if (typeof structure[group][subGroup] !== "string") {
+          newCoursesUnits[group][subGroup] = {};
+          newCoursesUnits[group][subGroup].total =
+            structure[group][subGroup].UOC;
+          newCoursesUnits[group][subGroup].curr = 0;
+
           newMenu[group][subGroup] = [];
           const subCourses = Object.keys(structure[group][subGroup].courses); // e.g. [ "COMP3", "COMP4" ]
           const regex = subCourses.join("|"); // e.g. "COMP3|COMP4"
@@ -92,12 +110,18 @@ export default function CourseMenu() {
               courses[courseCode].unlocked
             ) {
               newMenu[group][subGroup].push(courseCode);
+              // add UOC to curr
+              if (coursesInPlanner.get(courseCode))
+                newCoursesUnits[group][subGroup].curr +=
+                  coursesInPlanner.get(courseCode).UOC;
+              // console.log(coursesInPlanner.get(courseCode));
             }
           }
         }
       }
     }
     setMenuData(newMenu);
+    setCoursesUnits(newCoursesUnits);
   };
 
   return (
@@ -117,9 +141,21 @@ export default function CourseMenu() {
             {Object.keys(menuData).map((group) => (
               <SubMenu key={group} title={group}>
                 {Object.keys(menuData[group]).map((subGroup) => (
-                  <Menu.ItemGroup key={subGroup} title={subGroup}>
+                  <Menu.ItemGroup
+                    key={subGroup}
+                    title={
+                      <SubgroupContainer
+                        subGroup={subGroup}
+                        group={group}
+                        coursesUnits={coursesUnits}
+                      />
+                    }
+                  >
                     {menuData[group][subGroup].map((courseCode) => (
-                      <MenuItem courseCode={courseCode} />
+                      <MenuItem
+                        selected={coursesInPlanner.get(courseCode)}
+                        courseCode={courseCode}
+                      />
                     ))}
                   </Menu.ItemGroup>
                 ))}
@@ -132,14 +168,31 @@ export default function CourseMenu() {
   );
 }
 
-const MenuItem = ({ courseCode }) => {
+const MenuItem = ({ selected, courseCode }) => {
   const dispatch = useDispatch();
   const handleClick = () => {
     dispatch(courseTabActions("ADD_TAB", courseCode));
   };
+
   return (
-    <Menu.Item className="text" key={courseCode} onClick={handleClick}>
+    <Menu.Item
+      className={`text menuItemText ${selected !== undefined && "bold"}`}
+      key={courseCode}
+      onClick={handleClick}
+    >
       {courseCode}
     </Menu.Item>
+  );
+};
+
+const SubgroupContainer = ({ subGroup, group, coursesUnits }) => {
+  const { curr, total } = coursesUnits[group][subGroup];
+  return (
+    <div className="subgroupContainer">
+      <div>{subGroup}</div>
+      <div className="uocBadge">
+        {curr} / {total}
+      </div>
+    </div>
   );
 };
