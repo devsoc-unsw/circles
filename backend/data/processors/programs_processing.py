@@ -16,8 +16,6 @@ from data.utility import dataHelpers
 from collections import OrderedDict
 
 # Set of current course codes in programs_processed.json
-TEST_PROGS = ["3778", "3707", "3970", "3502", "3053", "3979", "3959", "3181", "3543", "3586", "3805", "3871", "3956"]
-
 
 def process_data():
     # Read in ProgramsFormattedRaw File
@@ -25,7 +23,7 @@ def process_data():
     # Final Data for all programs
     processedData = {}
 
-    for program in TEST_PROGS:
+    for program in data:
         # Get program specific data
         formattedData = data[program]
         # Initialise Processed data
@@ -78,7 +76,11 @@ def addComponentData(formatted, programData):
         # If item is general education
         if item["vertical_grouping"]["value"] == "GE":
             GE = {}
-            GE["credits_to_complete"] = int(item["credit_points"])
+            try:
+                GE["credits_to_complete"] = int(item["credit_points"])
+            except ValueError:
+                GE["credits_to_complete"] = int(item["credit_points_max"])
+            
             components["GE"] = GE
         # If item is part of core disciplinary
         if item["title"] == "Disciplinary Component":
