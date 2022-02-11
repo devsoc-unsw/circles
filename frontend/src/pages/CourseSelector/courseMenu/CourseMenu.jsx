@@ -23,16 +23,33 @@ export default function CourseMenu() {
     fetchStructure();
   }, []);
 
+  const { programCode, specialisation, minor } = useSelector(
+    (state) => state.degree
+  );
+  console.log(minor);
+
   // get structure of degree
   const fetchStructure = async () => {
     try {
       const res1 = await axios.get(
-        "http://localhost:8000/programs/getStructure/3778/COMPA1"
+        `http://localhost:8000/programs/getStructure/${programCode}/${specialisation}/${
+          minor !== "" && minor
+        }`
       );
       setStructure(res1.data.structure);
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const { startYear } = useSelector((state) => state.planner);
+  const majors = {};
+  majors[specialisation] = 1;
+  const payload = {
+    program: programCode,
+    specialisations: majors,
+    courses: {},
+    year: new Date().getFullYear() - startYear,
   };
 
   // get all courses
@@ -125,11 +142,4 @@ const MenuItem = ({ courseCode }) => {
       {courseCode}
     </Menu.Item>
   );
-};
-
-const payload = {
-  program: "3778",
-  specialisations: { COMPA1: 1 },
-  courses: {},
-  year: 0,
 };
