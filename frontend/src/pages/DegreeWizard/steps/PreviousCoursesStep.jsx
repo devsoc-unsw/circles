@@ -76,9 +76,6 @@ const TermBox = ({ yearIndex, termNo }) => {
         onCancel={() => setOpen(false)}
         visible={open}
         footer={[
-          <Button className="text" key="cancel" onClick={() => setOpen(false)}>
-            Cancel
-          </Button>,
           <Button
             key="save"
             type="primary"
@@ -115,7 +112,7 @@ export const PreviousCoursesStep = () => {
     <div className="steps-root-container">
       <div className="steps-heading-container">
         <Title level={4} className="text">
-          What courses have you completed?
+          What courses have you already completed?
         </Title>
 
         <Button

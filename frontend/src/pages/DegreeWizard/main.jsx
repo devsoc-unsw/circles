@@ -13,7 +13,7 @@ import "./main.less";
 import { springProps } from "./spring";
 import { scroller } from "react-scroll";
 
-const { Title, Text } = Typography;
+const { Title } = Typography;
 const { RangePicker } = DatePicker;
 
 function DegreeWizard() {
