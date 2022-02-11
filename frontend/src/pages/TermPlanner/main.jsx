@@ -2,13 +2,13 @@ import React, { useState, useEffect, useRef } from "react";
 import { notification } from "antd";
 import { DragDropContext } from "react-beautiful-dnd";
 import TermBox from "./TermBox";
-import SkeletonPlanner from "./SkeletonPlanner";
+import SkeletonPlanner from "./misc/SkeletonPlanner";
 import "./main.less";
 import { useSelector, useDispatch } from "react-redux";
 import { handleOnDragEnd, handleOnDragStart } from "./DragDropLogic";
 import { updateAllWarnings } from "./ValidateTermPlanner";
 import UnplannedColumn from "./UnplannedColumn";
-import OptionsHeader from "./OptionsHeader";
+import OptionsHeader from "./optionsHeader/main";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
 import HideYearTooltip from "./HideYearTooltip";
@@ -125,7 +125,7 @@ const openNotification = () => {
     message: "Your terms are looking a little empty",
     description:
       "Open the drawers on the right to reveal courses you've added from the course selector",
-    duration: 10,
+    duration: 3,
     className: "text helpNotif",
     placement: "topRight",
   };

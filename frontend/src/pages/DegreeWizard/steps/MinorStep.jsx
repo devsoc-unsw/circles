@@ -5,55 +5,65 @@ import { degreeActions } from "../../../actions/degreeActions";
 import { Link } from "react-scroll";
 import { useDispatch, useSelector } from "react-redux";
 import "./steps.less";
+import { useSpring, animated } from "react-spring";
+import { springProps } from "../spring";
 
 const { Title } = Typography;
-export const MinorStep = () => {
+export const MinorStep = ({ incrementStep, currStep }) => {
   const dispatch = useDispatch();
-  const minor = useSelector((store) => store.degree.minor);
+  const { minor, programCode } = useSelector((store) => store.degree);
   // Fetch the minors
   const [selected, setSelected] = React.useState("Select Minor");
-  const [options, setOptions] = React.useState({
-    1: "Minor1",
-    2: "Minor1",
-    3: "Minor1",
-    4: "Minor1",
-    5: "Minor1",
-  });
+  const [options, setOptions] = React.useState({});
 
-  // const fetchAllMinors = async () => {
-  //     const res = await axios.get(`http://localhost:8000/programs/getMinors/${program}`);
-  //     setOptions(res.data["minors"]);
+  const fetchAllMinors = async () => {
+    const res = await axios.get(
+      `http://localhost:8000/programs/getMinors/${programCode}`
+    );
+    setOptions(res.data["minors"]);
 
-  //     // setIsLoading(false);
-  //   };
+    // setIsLoading(false);
+  };
 
-  // useEffect(() => {
-  //     setTimeout(fetchDegree, 2000);  // testing skeleton
-  //     fetchAllMinors();
-  // }, []);
+  useEffect(() => {
+    if (programCode !== "") fetchAllMinors();
+  }, [programCode]);
+
+  const props = useSpring(springProps);
 
   return (
-    <div className="steps-root-container">
-      <Title level={3} className="text">
-        and minoring in (optional)
-      </Title>
+    <animated.div style={props} className="steps-root-container">
+      <div className="steps-heading-container">
+        <Title level={4} className="text">
+          What is your minor (if any)?
+        </Title>
+        {currStep === 4 && (
+          <Button
+            onClick={incrementStep}
+            type="primary"
+            className="steps-next-btn"
+          >
+            Next
+          </Button>
+        )}
+      </div>
+
       <Menu
         className="degree-minors"
         onClick={(e) => dispatch(degreeActions("SET_MINOR", e.key))}
         selectedKeys={minor && [minor]}
         mode="inline"
       >
-        {Object.keys(options).map((key) => (
-          <Menu.Item className="text" key={key}>
-            {key} {options[key]}
-          </Menu.Item>
-        ))}
+        {programCode ? (
+          Object.keys(options).map((key) => (
+            <Menu.Item className="text" key={key}>
+              {key} {options[key]}
+            </Menu.Item>
+          ))
+        ) : (
+          <div>Please select a degree first...</div>
+        )}
       </Menu>
-      <Link to="Previous Courses" smooth={true} duration={1000}>
-        <Button type="primary" className="steps-next-btn">
-          Next
-        </Button>
-      </Link>
-    </div>
+    </animated.div>
   );
 };

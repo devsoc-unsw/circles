@@ -68,6 +68,7 @@ export default function DebouncingSelect({ setPlannedCourses }) {
         }
       );
       setCourses(res.data.courses_state);
+      console.log(res.data);
     } catch (err) {
       console.log(err);
     }
@@ -96,7 +97,7 @@ export default function DebouncingSelect({ setPlannedCourses }) {
 
 const payload = {
   program: "3778",
-  specialisations: {"COMPA1": 1},
+  specialisations: { COMPA1: 1 },
   courses: {},
   year: 0,
 };

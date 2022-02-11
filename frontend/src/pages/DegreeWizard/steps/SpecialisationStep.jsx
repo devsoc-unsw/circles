@@ -5,55 +5,60 @@ import { Link } from "react-scroll";
 import { degreeActions } from "../../../actions/degreeActions";
 import { useDispatch, useSelector } from "react-redux";
 import "./steps.less";
+import { useSpring, animated } from "react-spring";
+import { springProps } from "../spring";
 
 const { Title } = Typography;
-export const SpecialisationStep = () => {
+export const SpecialisationStep = ({ incrementStep, currStep }) => {
   const dispatch = useDispatch();
-  const specialisation = useSelector((store) => store.degree.specialisation);
-  const [selected, setSelected] = React.useState("Select Specialisation");
+  const { programCode, specialisation } = useSelector((store) => store.degree);
   const [options, setOptions] = React.useState({
     1: "major",
-    2: "major",
-    3: "major",
-    4: "major",
-    5: "major",
   });
 
-  // const fetchAllSpecializations = async () => {
-  // const res = await axios.get(`http://localhost:8000/programs/getMajors/${program}`);
-  // setOptions(res.data["majors"]);
-  // setIsLoading(false);
-  //   };
+  const fetchAllSpecializations = async () => {
+    const res = await axios.get(
+      `http://localhost:8000/programs/getMajors/${programCode}`
+    );
+    console.log(res.data);
+    setOptions(res.data["majors"]);
+  };
 
-  // useEffect(() => {
-  // setTimeout(fetchDegree, 2000);  // testing skeleton
-  // fetchAllSpecializations();
-  // }, []);
+  useEffect(() => {
+    if (programCode !== "") fetchAllSpecializations();
+  }, [programCode]);
+
+  const props = useSpring(springProps);
 
   return (
-    <div className="steps-root-container">
-      <Title level={3} className="text">
-        specialising in
-      </Title>
+    <animated.div style={props} className="steps-root-container">
+      <div className="steps-heading-container">
+        <Title level={4} className="text">
+          What are you specialising in?
+        </Title>
+        {specialisation !== null && currStep === 3 && (
+          <Button type="primary" onClick={incrementStep}>
+            Next
+          </Button>
+        )}
+      </div>
+
       <Menu
         className="degree-specialisations"
         onClick={(e) => dispatch(degreeActions("SET_SPECIALISATION", e.key))}
         selectedKeys={specialisation && [specialisation]}
         mode="inline"
       >
-        {Object.keys(options).map((key) => (
-          <Menu.Item className="text" key={key}>
-            {key} {options[key]}
-          </Menu.Item>
-        ))}
+        {programCode ? (
+          Object.keys(options).map((key) => (
+            <Menu.Item className="text" key={key}>
+              {key} {options[key]}
+            </Menu.Item>
+          ))
+        ) : (
+          <div>Please select a degree first...</div>
+        )}
       </Menu>
-      {specialisation !== null && (
-        <Link to="Minor" smooth={true} duration={1000}>
-          <Button className="steps-next-btn" type="primary">
-            Next
-          </Button>
-        </Link>
-      )}
-    </div>
+    </animated.div>
   );
 };
