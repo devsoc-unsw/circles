@@ -34,7 +34,7 @@ export default function CourseMenu() {
     try {
       const res1 = await axios.get(
         `http://localhost:8000/programs/getStructure/${programCode}/${specialisation}/${
-          minor !== "" && minor
+          minor !== "" ? minor : ""
         }`
       );
       setStructure(res1.data.structure);
@@ -54,7 +54,7 @@ export default function CourseMenu() {
   const { startYear } = useSelector((state) => state.planner);
   const specialisations = {};
   specialisations[specialisation] = 1;
-  specialisations[minor] = 1;
+  if (minor !== "") specialisations[minor] = 1;
   const payload = {
     program: programCode,
     specialisations: specialisations,

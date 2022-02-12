@@ -2,7 +2,7 @@ let initial = {
   programCode: "",
   programName: "",
   majors: [],
-  minor: [],
+  minor: "",
   specialisation: "",
 };
 

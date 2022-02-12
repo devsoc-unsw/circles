@@ -1,7 +1,6 @@
 const initialState = {
   courses: {},
   course: {},
-  selectedCourses: [],
 };
 const coursesReducer = (state = initialState, action) => {
   switch (action.type) {
