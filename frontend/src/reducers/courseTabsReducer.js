@@ -1,5 +1,5 @@
 const initial = {
-  tabs: ["explore"],
+  tabs: [],
   active: 0,
 };
 const courseTabsReducer = (state = initial, action) => {
@@ -29,15 +29,27 @@ const courseTabsReducer = (state = initial, action) => {
       };
     case "REMOVE_TAB":
       const index = action.payload;
+      console.log(index);
       let newTabs = [...state.tabs];
       newTabs.splice(index, 1);
+      console.log(newTabs.length);
+
       // If only one left, set active to 'explore'
       if (newTabs.length === 1) {
         return {
           tabs: newTabs,
           active: 0,
         };
+      }
+      // deleting tab before/equal to active tab
+      if (index <= state.active) {
+        console.log("yo");
+        return {
+          tabs: newTabs,
+          active: state.active - 1,
+        };
       } else {
+        // deleting tab after active tab
         return {
           ...state,
           tabs: newTabs,

@@ -14,6 +14,7 @@ export default function CourseMenu() {
   const [structure, setStructure] = React.useState({});
   const [menuData, setMenuData] = React.useState({});
   const [coursesUnits, setCoursesUnits] = React.useState({});
+  const [activeCourse, setActiveCourse] = React.useState("");
   const { active, tabs } = useSelector((state) => state.tabs);
   let id = tabs[active];
 
@@ -155,6 +156,8 @@ export default function CourseMenu() {
                       <MenuItem
                         selected={coursesInPlanner.get(courseCode)}
                         courseCode={courseCode}
+                        setActiveCourse={setActiveCourse}
+                        activeCourse={activeCourse}
                       />
                     ))}
                   </Menu.ItemGroup>
@@ -168,15 +171,17 @@ export default function CourseMenu() {
   );
 }
 
-const MenuItem = ({ selected, courseCode }) => {
+const MenuItem = ({ selected, courseCode, activeCourse, setActiveCourse }) => {
   const dispatch = useDispatch();
   const handleClick = () => {
     dispatch(courseTabActions("ADD_TAB", courseCode));
+    setActiveCourse(courseCode);
   };
 
   return (
     <Menu.Item
-      className={`text menuItemText ${selected !== undefined && "bold"}`}
+      className={`text menuItemText ${selected !== undefined && "bold"} 
+      ${activeCourse === courseCode && "activeCourse"}`}
       key={courseCode}
       onClick={handleClick}
     >

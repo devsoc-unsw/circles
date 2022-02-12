@@ -50,20 +50,17 @@ body {
 // Scrollbar settings
 /* width */
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 12px;               /* width of the entire scrollbar */
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
-  background: #efdbff; 
-}
- 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #888; 
+  background: #FAFAFA;        /* color of the tracking area */
 }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555; 
+::-webkit-scrollbar-thumb {
+  background-color: #C2C2C2;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid #FAFAFA;  /* creates padding around scroll thumb */
 }
+
+

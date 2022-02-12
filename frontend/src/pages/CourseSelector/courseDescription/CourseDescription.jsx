@@ -42,6 +42,7 @@ export default function CourseDescription() {
     }, 2000);
   }, [id]);
 
+  if (tabs.length === 0) return <div></div>;
   if (id === "explore") return <div>This is the explore page</div>;
   if (id === "search") return <SearchCourse />;
   const addToPlanner = () => {

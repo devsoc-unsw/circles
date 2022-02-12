@@ -3,7 +3,8 @@
 .cs-menu-root {
   overflow: auto;
   overflow-x: hidden;
-  // height: 100%;
+  height: calc(100vh - 35vh);
+  scrollbar-width: thin; 
 }
 
 .subgroupContainer {
@@ -21,12 +22,18 @@
 }
 
 .menuItemText {
+  margin-left: 0px !important;
   font-size: small !important;
-  margin-left: 1.5em !important;
+  padding-left: 40px !important;
 }
 
 .bold {
-  font-weight: 600;
+  font-weight: 700;
+}
+
+.activeCourse {
+  color: #8044ca !important;
+  background-color: #EFDBFF;
 }
 
 .dark {
@@ -71,3 +78,6 @@
     border-right: 1px solid #F0F0F0;
   }
 }
+
+
+
