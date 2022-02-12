@@ -46,7 +46,6 @@ const plannerReducer = (state = initialState, action) => {
       if (!state.courses[courseCode]) {
         newCourses.set(courseCode, courseData);
       }
-      console.log(newCourses.get(courseCode));
       // Append course code onto unplanned
       state.unplanned.push(courseCode);
       stateCopy = { ...state, courses: newCourses };

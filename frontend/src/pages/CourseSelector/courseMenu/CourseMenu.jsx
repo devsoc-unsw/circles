@@ -52,11 +52,12 @@ export default function CourseMenu() {
   }
 
   const { startYear } = useSelector((state) => state.planner);
-  const majors = {};
-  majors[specialisation] = 1;
+  const specialisations = {};
+  specialisations[specialisation] = 1;
+  specialisations[minor] = 1;
   const payload = {
     program: programCode,
-    specialisations: majors,
+    specialisations: specialisations,
     courses: selectedCourses,
     year: new Date().getFullYear() - startYear,
   };
@@ -64,6 +65,7 @@ export default function CourseMenu() {
   // get all courses
   React.useEffect(async () => {
     try {
+      console.log(JSON.stringify(payload));
       const res = await axios.post(
         `http://localhost:8000/courses/getAllUnlocked/`,
         JSON.stringify(payload),
