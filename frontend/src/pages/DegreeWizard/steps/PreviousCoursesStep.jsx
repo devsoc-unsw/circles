@@ -33,7 +33,7 @@ const TermBox = ({ yearIndex, termNo }) => {
             title: info.title,
             type: "Uncategorised", // TODO: add type
             termsOffered: info.terms,
-            uoc: info.uoc,
+            UOC: info.UOC,
             plannedFor: `${yearIndex + planner.startYear}${termNo}`,
             warning: false,
             prereqs: "",
