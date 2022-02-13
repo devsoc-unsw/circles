@@ -1,28 +1,23 @@
 import React, { useEffect } from "react";
-// import axios from 'axios';
-import { Menu, Typography, Button } from "antd";
+import axios from "axios";
+import { Menu, Typography, Button, Input } from "antd";
 import { degreeActions } from "../../../actions/degreeActions";
 import { Link } from "react-scroll";
 import { useDispatch, useSelector } from "react-redux";
 import "./steps.less";
+import { useSpring, animated } from "react-spring";
+import { springProps } from "../spring";
 
 const { Title } = Typography;
-export const DegreeStep = ({ isYearsSet }) => {
+export const DegreeStep = ({ incrementStep, currStep }) => {
   const dispatch = useDispatch();
   const programCode = useSelector((store) => store.degree.programCode);
   const [input, setInput] = React.useState("");
   const [options, setOptions] = React.useState(null);
 
   const fetchAllDegrees = async () => {
-    // const res = await axios.get("http://localhost:8000/api/getPrograms");
-    // setOptions(res.data["programs"]);
-    setOptions({
-      3778: "Bachelor Computer Science",
-      3779: "Bachelor of Science",
-      3777: "Bachelor of Arts",
-      3775: "Bachelor of Commerce/Law",
-    });
-    // setIsLoading(false);
+    const res = await axios.get("http://localhost:8000/programs/getPrograms");
+    setOptions(res.data["programs"]);
   };
 
   useEffect(() => {
@@ -40,13 +35,23 @@ export const DegreeStep = ({ isYearsSet }) => {
     );
   };
 
+  const props = useSpring(springProps);
+
   return (
-    <div className="steps-root-container-first">
-      <Title level={3} className="text">
-        I am studying
-      </Title>
-      <input
-        className="steps-search-input"
+    <animated.div style={props}>
+      <div className="steps-heading-container">
+        <Title level={4} className="text">
+          What are you studying?
+        </Title>
+        {programCode && currStep === 2 && (
+          <Button type="primary" onClick={incrementStep}>
+            Next
+          </Button>
+        )}
+      </div>
+
+      <Input
+        size="large"
         type="text"
         value={input}
         placeholder="Search Degree"
@@ -66,14 +71,6 @@ export const DegreeStep = ({ isYearsSet }) => {
           ))}
         </Menu>
       )}
-
-      {programCode && isYearsSet && (
-        <Link to={"Specialisation"} smooth={true} duration={1000}>
-          <Button className="steps-next-btn-first" type="primary">
-            Next
-          </Button>
-        </Link>
-      )}
-    </div>
+    </animated.div>
   );
 };

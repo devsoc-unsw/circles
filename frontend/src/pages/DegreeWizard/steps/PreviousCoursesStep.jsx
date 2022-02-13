@@ -1,5 +1,5 @@
 import React from "react";
-import { Tooltip, Typography, Modal, Button } from "antd";
+import { Tooltip, Typography, Modal, Button, notification } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { plannerActions } from "../../../actions/plannerActions";
 import { useHistory } from "react-router-dom";
@@ -76,9 +76,6 @@ const TermBox = ({ yearIndex, termNo }) => {
         onCancel={() => setOpen(false)}
         visible={open}
         footer={[
-          <Button className="text" key="cancel" onClick={() => setOpen(false)}>
-            Cancel
-          </Button>,
           <Button
             key="save"
             type="primary"
@@ -98,19 +95,45 @@ export const PreviousCoursesStep = () => {
   const history = useHistory();
   const planner = useSelector((state) => state.planner);
   const numYears = new Date().getFullYear() - planner.startYear + 1; // Inclusive
+
+  const degree = useSelector((state) => state.degree);
+  const saveUserSettings = () => {
+    if (degree.programCode === "") {
+      openNotification("Please select a degree");
+    } else if (degree.specialisation === "") {
+      openNotification("Please select a specialisation");
+    } else {
+      localStorage.setItem("degree", JSON.stringify(degree));
+      history.push("/course-selector");
+    }
+  };
+
   return (
     <div className="steps-root-container">
-      <Title level={3} className="text">
-        Completed Courses
-      </Title>
+      <div className="steps-heading-container">
+        <Title level={4} className="text">
+          What courses have you already completed?
+        </Title>
+
+        <Button
+          className="steps-next-btn"
+          type="primary"
+          onClick={saveUserSettings}
+        >
+          Start browsing courses!
+        </Button>
+      </div>
+
       {/* Add info button */}
-      <div className="steps-grid-cont" style={{ marginTop: "100px" }}>
+
+      <div className="steps-grid-cont">
         <div className="steps-grid-item"></div>
         <div className="steps-grid-item">Summer</div>
         <div className="steps-grid-item">Term 1</div>
         <div className="steps-grid-item">Term 2</div>
         <div className="steps-grid-item">Term 3</div>
       </div>
+
       {[...Array(parseInt(numYears))].map((_, yearNo) => (
         <div className="steps-grid-cont">
           <div className="steps-grid-item">
@@ -123,14 +146,16 @@ export const PreviousCoursesStep = () => {
           })}
         </div>
       ))}
-
-      <Button
-        className="steps-next-btn"
-        type="primary"
-        onClick={() => history.push("/course-selector")}
-      >
-        Start browsing courses!
-      </Button>
     </div>
   );
+};
+
+const openNotification = (msg) => {
+  const args = {
+    message: msg,
+    duration: 2,
+    className: "text helpNotif",
+    placement: "topRight",
+  };
+  notification["error"](args);
 };
