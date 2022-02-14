@@ -34,6 +34,7 @@ def programsIndex():
             })
 def getPrograms():
     """ fetch all the programs the backend knows about in the format of { code: title }"""
+    return {'programs': {'3778': "Computer Science"}}
     return { 'programs' : {q['code']: q['title'] for q in programsCOL.find()} }
 
 @router.get("/getMajors/{programCode}", response_model=majors,
