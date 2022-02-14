@@ -281,9 +281,8 @@ def getStructure(programCode, major=None, minor=None):
             del containerObject["type"]
             del containerObject["credits_to_complete"]
         structure['General'][container] = containerObject
-
     with contextlib.suppress(KeyError):
-        structure['General']['Flexible Education']['UOC'] = programsResult['components']['FE']['credits_to_complete']
-        structure['General']['General Education']['UOC'] = programsResult['components']['GE']['credits_to_complete']
+        structure['General']['Flexible Education'] = {'UOC': programsResult['components']['FE']['credits_to_complete']}
+        structure['General']['General Education'] = {'UOC': programsResult['components']['GE']['credits_to_complete']}
 
     return {'structure': structure}
