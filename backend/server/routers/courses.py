@@ -83,7 +83,7 @@ def getCourse(courseCode: str):
     result = coursesCOL.find_one({'code' : courseCode})
     if not result:
         raise HTTPException(status_code=400, detail=f"Course code {courseCode} was not found")
-
+    result.setdefault("school", None)
     del result['_id']
 
     return result

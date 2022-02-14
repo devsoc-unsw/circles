@@ -1,3 +1,4 @@
+from typing import Optional
 from pydantic import BaseModel
 from pickle import load
 
@@ -25,7 +26,7 @@ class courseDetails (BaseModel):
     level: int
     description: str
     study_level: str
-    school: str
+    school: Optional[str]
     campus: str
     equivalents: dict
     raw_requirements: str
