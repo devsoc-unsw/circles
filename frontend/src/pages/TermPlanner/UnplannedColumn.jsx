@@ -4,7 +4,7 @@ import { Droppable } from "react-beautiful-dnd";
 import DraggableCourse from "./DraggableCourse";
 import { useSelector } from "react-redux";
 
-const UnplannedColumn = ({ visible, setVisible }) => {
+const UnplannedColumn = () => {
   const { Panel } = Collapse;
   const theme = useSelector((state) => state.theme);
   const { courses, unplanned } = useSelector((state) => state.planner);

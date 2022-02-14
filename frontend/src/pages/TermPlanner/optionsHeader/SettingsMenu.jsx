@@ -1,5 +1,5 @@
 import React from "react";
-import { plannerActions } from "../../actions/plannerActions";
+import { plannerActions } from "../../../actions/plannerActions";
 import { Typography, DatePicker, Select, Switch, Divider } from "antd";
 import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";

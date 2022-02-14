@@ -39,7 +39,7 @@ const Header = () => {
 
   return (
     <Layout className="header">
-      <Link to="">
+      <Link to="degree-wizard">
         <div className="logo">
           <img alt="circles-logo" src={circlesLogo} width="40" height="40" />
           <Title level={3} style={titleStyles}>
@@ -77,7 +77,7 @@ const Header = () => {
             </Menu.Item>
           </Menu>
           <PlannerCart />
-          <ThemeToggle />
+          {/* <ThemeToggle /> */}
         </div>
       )}
 

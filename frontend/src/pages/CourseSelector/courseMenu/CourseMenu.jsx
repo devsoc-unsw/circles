@@ -38,7 +38,6 @@ export default function CourseMenu() {
   // get all courses
   React.useEffect(async () => {
     try {
-      console.log("hello");
       const res = await axios.post(
         `http://localhost:8000/courses/getAllUnlocked/`,
         JSON.stringify(payload),
@@ -130,7 +129,7 @@ const MenuItem = ({ courseCode }) => {
 
 const payload = {
   program: "3778",
-  specialisations: ["COMPA1"],
+  specialisations: { COMPA1: 1 },
   courses: {},
   year: 0,
 };

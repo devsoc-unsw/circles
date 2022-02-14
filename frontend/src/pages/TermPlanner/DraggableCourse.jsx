@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { IoWarningOutline } from "react-icons/io5";
 import ReactTooltip from "react-tooltip";
 import { useContextMenu } from "react-contexify";
-import ContextMenu from "./ContextMenu";
+import ContextMenu from "./misc/ContextMenu";
 import useMediaQuery from "../../hooks/useMediaQuery";
 
 function DraggableCourse({ code, index }) {
