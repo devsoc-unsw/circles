@@ -1,6 +1,6 @@
-from fastapi import APIRouter
+import contextlib
+from fastapi import APIRouter, HTTPException
 from server.database import specialisationsCOL, programsCOL
-from fastapi.responses import JSONResponse
 from server.routers.model import *
 
 
@@ -16,7 +16,6 @@ def programsIndex():
 
 @router.get("/getPrograms", response_model=programs,
             responses={
-                404: {"model": message, "description": "Something very wrong happened"},
                 200: {
                     "description": "Returns all programs",
                     "content": {
@@ -35,11 +34,12 @@ def programsIndex():
             })
 def getPrograms():
     """ fetch all the programs the backend knows about in the format of { code: title }"""
+    return {'programs': {'3778': "Computer Science"}}
     return { 'programs' : {q['code']: q['title'] for q in programsCOL.find()} }
 
 @router.get("/getMajors/{programCode}", response_model=majors,
             responses={
-                404: {"model": message, "description": "The given program code could not be found in the database"},
+                400: {"model": message, "description": "The given program code could not be found in the database"},
                 200: {
                     "description": "Returns all majors to the given code",
                     "content": {
@@ -65,21 +65,13 @@ def getMajors(programCode: str):
     result = programsCOL.find_one({'code' : programCode})
 
     if not result:
-        return JSONResponse(status_code=404, content={"message" : "Program code was not found"})
+        raise HTTPException(status_code=400, detail="Program code was not found")
 
-    majors = result['components']['SpecialisationData']['Majors']
-
-    for major in majors:
-        major_details = specialisationsCOL.find_one({'code' : major})
-
-        if major_details:
-            majors[major] = major_details['name']
-
-    return {'majors' : majors}
+    return {'majors' : result['components']['SpecialisationData']['Majors']}
 
 @router.get("/getMinors/{programCode}", response_model=minors,
             responses={
-                404: {"model": message, "description": "The given program code could not be found in the database"},
+                400: {"model": message, "description": "The given program code could not be found in the database"},
                 200: {
                     "description": "Returns all minors to the given code",
                     "content": {
@@ -103,7 +95,7 @@ def getMinors(programCode):
     result = programsCOL.find_one({'code' : programCode})
 
     if not result:
-        return JSONResponse(status_code=404, content={"message" : "Program code was not found"})
+        raise HTTPException(status_code=400, detail="Program code was not found")
 
     if programCode in minorInFE:
         minors = result['components']['FE']['Minors']
@@ -112,17 +104,13 @@ def getMinors(programCode):
     else:
         minors = result['components']['Minors']
 
-    for minor in minors:
-        minor_details = specialisationsCOL.find_one({'code' : minor})
-
-        if minor_details:
-            minors[minor] = minor_details['name']
-
     return {'minors' : minors}
 
 
 def addSpecialisation(structure: dict, code: str, type: str):
     spnResult = specialisationsCOL.find_one({'code': code})
+    if not spnResult:
+        raise HTTPException(status_code=400, detail=f"{code} of type {type} not found")
     structure[type] = {'name': spnResult['name']}
     for container in spnResult['curriculum']:
 
@@ -132,17 +120,18 @@ def addSpecialisation(structure: dict, code: str, type: str):
         item['UOC'] = container['credits_to_complete']
 
         item['courses'] = {}
-        for course in container['courses']:
+        for course, courseObject in container['courses'].items():
             if ' or ' in course:
-                for index, c in enumerate(course.split(' or ')):
-                    item['courses'][c] = container['courses'][course][index]
+                for index, c in enumerate(course.split('or')):
+                    c = c.strip()
+                    item['courses'][c] = courseObject[index]
             else:
-                item['courses'][course] = container['courses'][course]
+                item['courses'][course] = courseObject
 
 
 @router.get("/getStructure/{programCode}/{major}/{minor}", response_model=Structure,
             responses={
-                404: {"model": message, "description": "Uh oh you broke me"},
+                400: {"model": message, "description": "Uh oh you broke me"},
                 200: {
                     "description": "Returns the program structure",
                     "content": {
@@ -202,7 +191,7 @@ def addSpecialisation(structure: dict, code: str, type: str):
             })
 @router.get("/getStructure/{programCode}/{major}", response_model=Structure,
             responses={
-                404: {"model": message, "description": "Uh oh you broke me"},
+                400: {"model": message, "description": "Uh oh you broke me"},
                 200: {
                     "description": "Returns the program structure",
                     "content": {
@@ -245,7 +234,7 @@ def addSpecialisation(structure: dict, code: str, type: str):
             })
 @router.get("/getStructure/{programCode}", response_model=Structure,
             responses={
-                404: {"model": message, "description": "Uh oh you broke me"},
+                400: {"model": message, "description": "Uh oh you broke me"},
                 200: {
                     "description": "Returns the program structure",
                     "content": {
@@ -270,47 +259,30 @@ def addSpecialisation(structure: dict, code: str, type: str):
                     }
                 }
             })
-def getStructure(programCode, major="Default", minor="Default"):
+def getStructure(programCode, major=None, minor=None):
     structure = {}
-    programsResult = programsCOL.find_one({'code': programCode})
-    if not programsResult:
-        return JSONResponse(status_code=404, content={"message" : "Program code was not found"})
 
-    if major != 'Default':
-        spnResult = specialisationsCOL.find_one({'code': major})
-        if not spnResult:
-            return JSONResponse(status_code=404, content={"message" : "Major code was not found"})
-
+    if major:
         addSpecialisation(structure, major, 'Major')
 
-    if minor != 'Default':
-        spnResult = specialisationsCOL.find_one({'code': minor})
-        if not spnResult:
-            return JSONResponse(status_code=404, content={"message" : "Minor code was not found"})
-
+    if minor:
         addSpecialisation(structure, minor, 'Minor')
 
+    # add details for program code
+    programsResult = programsCOL.find_one({'code': programCode})
+    if not programsResult:
+        raise HTTPException(status_code=400, detail="Program code was not found")
+
     structure['General'] = {}
-    for container in programsResult['components']['NonSpecialisationData']:
+    for container, containerObject in programsResult['components']['NonSpecialisationData'].items():
+        containerObject['UOC'] = containerObject['credits_to_complete'] if "credits_to_complete" in containerObject else -1
 
-        structure['General'][container] = {}
-
-        if "credits_to_complete" in programsResult['components']['NonSpecialisationData'][container]:
-            structure['General'][container]['UOC'] = programsResult['components']['NonSpecialisationData'][container]['credits_to_complete']
-        else:
-            # Not all program containers have credit points associated with them
-            structure['General'][container]['UOC'] = -1
-        
-        for course, title in programsResult['components']['NonSpecialisationData'][container].items():
-            # Add course data: e.g. { "COMP1511": "Programming Fundamentals"  }
-            if course == "type" or course == "credits_to_complete":
-                continue
-            structure['General'][container][course] = title
-        if 'FE' in programsResult['components']:
-            structure['General']['FlexEducation'] = {'UOC': programsResult['components']['FE']['credits_to_complete'],
-                                                     'description': 'students can take a maximum of {} UOC of free electives'.format(programsResult['components']['FE']['credits_to_complete'])}
-        if 'GE' in programsResult['components']:
-            structure['General']['GeneralEducation'] = {'UOC': programsResult['components']['GE']['credits_to_complete'],
-                                                        'description': 'any general education course'}
+        with contextlib.suppress(KeyError):
+            del containerObject["type"]
+            del containerObject["credits_to_complete"]
+        structure['General'][container] = containerObject
+    with contextlib.suppress(KeyError):
+        structure['General']['Flexible Education'] = {'UOC': programsResult['components']['FE']['credits_to_complete']}
+        structure['General']['General Education'] = {'UOC': programsResult['components']['GE']['credits_to_complete']}
 
     return {'structure': structure}

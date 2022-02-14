@@ -12,7 +12,7 @@ router = APIRouter(
 
 @router.get("/")
 def apiIndex():
-    return "Index of api"
+    return "Index of courses"
 
 def fixUserData(userData: dict):
     ''' updates and returns the userData with the UOC of a course '''
@@ -83,7 +83,7 @@ def getCourse(courseCode: str):
     result = coursesCOL.find_one({'code' : courseCode})
     if not result:
         raise HTTPException(status_code=400, detail=f"Course code {courseCode} was not found")
-
+    result.setdefault("school", None)
     del result['_id']
 
     return result
@@ -98,7 +98,7 @@ def search(string):
 
 @router.post("/getAllUnlocked/", response_model=CoursesState,
             responses={
-                404: {"model": message, "description": "Uh oh you broke me"},
+                400: {"model": message, "description": "Uh oh you broke me"},
                 200: {
                     "description": "Returns the state of all the courses",
                     "content": {
@@ -137,7 +137,7 @@ def getAllUnlocked(userData: UserData):
 
 @router.get("/getLegacyCourses/{year}/{term}", response_model=programCourses,
             responses={
-                404: {"model": message, "description": "Year or Term input is incorrect"},
+                400: {"model": message, "description": "Year or Term input is incorrect"},
                 200: {
                     "description": "Returns the program structure",
                     "content": {
@@ -165,8 +165,7 @@ def getAllUnlocked(userData: UserData):
             })
 def getLegacyCourses(year, term):
     """ gets all the courses that were offered in that term for that year """
-    query = archivesDB[year].find()
-    result = {c['code']: c['title'] for c in query if term in c['terms']} 
+    result = {c['code']: c['title'] for c in archivesDB[year].find() if term in c['terms']} 
 
     return {'courses' : result}
 
