@@ -28,6 +28,7 @@ class courseDetails (BaseModel):
     school: str
     campus: str
     equivalents: dict
+    raw_requirements: str
     exclusions: dict
     path_to: dict
     terms: list
