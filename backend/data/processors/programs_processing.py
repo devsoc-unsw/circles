@@ -78,10 +78,14 @@ def addComponentData(formatted, programData):
         # If item is general education
         if item["vertical_grouping"]["value"] == "GE":
             GE = {}
-            GE["credits_to_complete"] = int(item["credit_points"])
+            try:
+                GE["credits_to_complete"] = int(item["credit_points"])
+            except ValueError:
+                GE["credits_to_complete"] = int(item["credit_points_max"])
+            
             components["GE"] = GE
         # If item is part of core disciplinary
-        if item["title"] == "Disciplinary Component":
+        if "Disciplinary Component" in item["title"]:
             addDisciplineData(components, item)
         # If item is part of minor
         if item["vertical_grouping"]["value"] == "undergrad_minor":

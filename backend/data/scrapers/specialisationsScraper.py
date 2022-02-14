@@ -10,7 +10,6 @@ Step in the data's journey:
 
 import requests
 import json
-from datetime import date
 
 from data.utility import dataHelpers
 from data.config import LIVE_YEAR

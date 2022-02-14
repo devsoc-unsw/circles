@@ -40,7 +40,6 @@ Step in the data's journey:
     [   ] Customise formatted data (specialisationProcessing.py)
 """
 
-import requests
 import json
 from data.utility import dataHelpers
 
