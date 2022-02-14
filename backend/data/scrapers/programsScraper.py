@@ -7,10 +7,8 @@ Step in the data's journey:
     [   ] Format scraped data (programFormatting.py)
     [   ] Customise formatted data (programProcessing.py)
 """
-from datetime import date
 import requests
 import json
-import ast
 
 from data.utility import dataHelpers
 from data.config import LIVE_YEAR

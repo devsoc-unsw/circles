@@ -33,7 +33,6 @@ jobs:
         echo "MONGODB_DATABASE=mongodb" >> env/backend.env
         echo "MONGO_INITDB_ROOT_USERNAME=github-ci" >> env/mongodb.env
         echo "MONGO_INITDB_ROOT_PASSWORD=github-ci" >> env/mongodb.env
-        docker compose up backend -d --build
         docker compose run init-mongo
 
     - name: Test algorithm with pytest

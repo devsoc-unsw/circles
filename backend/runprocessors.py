@@ -33,7 +33,7 @@ from algorithms.cache.cache import cache_program_mappings
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--type', type=str,
-                    help='program, specialisation, course, condition, algorithm')
+                    help='program, specialisation, course, condition, algorithm, data-fix')
 parser.add_argument('--stage', type=str,
                     help=
                     '''
