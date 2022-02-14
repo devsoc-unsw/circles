@@ -2,7 +2,38 @@
 
 .cs-menu-root {
   overflow: auto;
-  // height: 100%;
+  overflow-x: hidden;
+  height: calc(100vh - 35vh);
+  scrollbar-width: thin; 
+}
+
+.subgroupContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+.uocBadge {
+  border-radius: 1em;
+  background-color: #EFDBFF;
+  padding: 0.5em;
+  font-size: smaller;
+}
+
+.menuItemText {
+  margin-left: 0px !important;
+  font-size: small !important;
+  padding-left: 40px !important;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.activeCourse {
+  color: #8044ca !important;
+  background-color: #EFDBFF;
 }
 
 .dark {
@@ -47,3 +78,6 @@
     border-right: 1px solid #F0F0F0;
   }
 }
+
+
+
