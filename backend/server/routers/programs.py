@@ -90,7 +90,7 @@ def getMajors(programCode: str):
                     }
                 }
             })
-def getMinors(programCode):
+def getMinors(programCode: str):
     """ fetch all the minors known for a specific program """
     result = programsCOL.find_one({'code' : programCode})
 
@@ -259,7 +259,7 @@ def addSpecialisation(structure: dict, code: str, type: str):
                     }
                 }
             })
-def getStructure(programCode, major=None, minor=None):
+def getStructure(programCode: str, major: Optional[str] = None, minor: Optional[str] = None):
     structure = {}
 
     if major:
