@@ -93,7 +93,6 @@ export default function CourseMenu() {
       // Example subGroup: Core Courses, Computing Electives
 
       newCoursesUnits[group] = {};
-      console.log(structure[group]);
       for (const subGroup in structure[group]) {
         // console.log(structure[group][subGroup]);
         // console.log(subGroup);
