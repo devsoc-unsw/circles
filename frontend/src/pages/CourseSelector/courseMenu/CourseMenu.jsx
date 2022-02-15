@@ -93,7 +93,6 @@ export default function CourseMenu() {
       // Example subGroup: Core Courses, Computing Electives
 
       newCoursesUnits[group] = {};
-
       for (const subGroup in structure[group]) {
         // console.log(structure[group][subGroup]);
         // console.log(subGroup);
@@ -104,20 +103,22 @@ export default function CourseMenu() {
           newCoursesUnits[group][subGroup].curr = 0;
 
           newMenu[group][subGroup] = [];
-          const subCourses = Object.keys(structure[group][subGroup].courses); // e.g. [ "COMP3", "COMP4" ]
-          const regex = subCourses.join("|"); // e.g. "COMP3|COMP4"
-          for (const courseCode in courses) {
-            if (
-              courseCode.match(regex) &&
-              courses[courseCode].is_accurate &&
-              courses[courseCode].unlocked
-            ) {
-              newMenu[group][subGroup].push(courseCode);
-              // add UOC to curr
-              if (coursesInPlanner.get(courseCode))
-                newCoursesUnits[group][subGroup].curr +=
-                  coursesInPlanner.get(courseCode).UOC;
-              // console.log(coursesInPlanner.get(courseCode));
+          // only consider disciplinary component courses
+          if (structure[group][subGroup].courses) {
+            const subCourses = Object.keys(structure[group][subGroup].courses); // e.g. [ "COMP3", "COMP4" ]
+            const regex = subCourses.join("|"); // e.g. "COMP3|COMP4"
+            for (const courseCode in courses) {
+              if (
+                courseCode.match(regex) &&
+                courses[courseCode].is_accurate &&
+                courses[courseCode].unlocked
+              ) {
+                newMenu[group][subGroup].push(courseCode);
+                // add UOC to curr
+                if (coursesInPlanner.get(courseCode))
+                  newCoursesUnits[group][subGroup].curr +=
+                    coursesInPlanner.get(courseCode).UOC;
+              }
             }
           }
         }
