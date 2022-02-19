@@ -43,9 +43,6 @@ def fix_conditions():
 
 # TODO: implement your functions here
 
-if __name__ == "__main__":
-    fix_conditions()
-
 def ELEC_2911():
     """
     "original": "Prerequisite: ELEC1111 and 48 UoC. Students should have a good working knowledge of university level physics, circuit theory and mathematics.<br/><br/>",
@@ -99,3 +96,6 @@ def ELEC_4953():
     """
 
     return "ELEC4952"
+
+if __name__ == "__main__":
+    fix_conditions()
