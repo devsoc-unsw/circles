@@ -227,5 +227,75 @@ def MATH_6781():
     """
     return "12UOC in L2 MATH && ((MATH2120 || MATH2130 || MATH2121 || MATH2221) || (MATH2019 && MATH2089) || (MATH2069 && MATH2099))"
 
+# JOEL: New fixes
+def MATH_2111():
+    """
+    "original": "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251 each with a mark of at least 70; Excluded: MATH2019, MATH2049, MATH2069, MATH2100, MATH2110.<br/><br/>",
+    "processed": "MATH1231 || DPST1014 || MATH1241 || MATH1251 each with 70GRADE"
+    """
+    
+    COURSES["MATH2111"]["exclusions"]["MATH2019"] = 1
+    COURSES["MATH2111"]["exclusions"]["MATH2049"] = 1
+    COURSES["MATH2111"]["exclusions"]["MATH2069"] = 1
+    COURSES["MATH2111"]["exclusions"]["MATH2100"] = 1
+    COURSES["MATH2111"]["exclusions"]["MATH2110"] = 1
+    
+    return "70GRADE in MATH1231 || 70GRADE in DPST1014 || 70GRADE in MATH1241 || 70GRADE in MATH1251"
+
+def MATH_2221():
+    """
+    "original": "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251 each with a mark of 70.<br/><br/>",
+    "processed": "MATH1231 || DPST1014 || MATH1241 || MATH1251 each with 70GRADE"
+    """
+    
+    return "70GRADE in MATH1231 || 70GRADE in DPST1014 || 70GRADE in MATH1241 || 70GRADE in MATH1251"
+
+def MATH_2301():
+    """
+    "original": "Prerequisite: MATH1031 (CR) or MATH1231 or or DPST1014 or MATH1241 or MATH1251. Exclusions: MATH2089, CVEN2002, and CVEN2702<br/><br/>",
+    "processed": "65GRADE in MATH1031 || MATH1231 || or DPST1014 || MATH1241 || MATH1251"
+    """
+
+    COURSES["MATH2301"]["exclusions"]["MATH2089"] = 1
+    COURSES["MATH2301"]["exclusions"]["CVEN2002"] = 1
+    COURSES["MATH2301"]["exclusions"]["CVEN2702"] = 1
+
+    return "65GRADE in MATH1031 || MATH1231 || DPST1014 || MATH1241 || MATH1251"
+
+def MATH_2601():
+    """
+    "original": "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251 each with a mark of 70 or greater; Exclusion: MATH2099<br/><br/>",
+    "processed": "MATH1231 || DPST1014 || MATH1241 || MATH1251 each with 70GRADE"
+    """
+
+    COURSES["MATH2601"]["exclusions"]["MATH2099"] = 1
+
+    return "70GRADE in MATH1231 || 70GRADE in DPST1014 || 70GRADE in MATH1241 || 70GRADE in MATH1251"
+
+def MATH_2621():
+    """
+    "original": "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251 each with a mark of at least 70; Exclusion: MATH2069<br/><br/>",
+    "processed": "MATH1231 || DPST1014 || MATH1241 || MATH1251 each with 70GRADE"
+    """
+
+    COURSES["MATH2621"]["exclusions"]["MATH2069"] = 1
+
+    return "70GRADE in MATH1231 || 70GRADE in DPST1014 || 70GRADE in MATH1241 || 70GRADE in MATH1251"
+
+def MATH_2701():
+    """
+    "original": "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251 with at least a CR, enrolment in an advanced maths or advanced science program<br/><br/>",
+    "processed": "MATH1231 || DPST1014 || MATH1241 || MATH1251 with at least a CR || enrolment in an advanced maths || advanced science program"
+    """
+    # JOEL: I read this as CR in any of them?
+    # The other option is that CR applies to just MATH1251, but that doesn't make as much sense.
+
+    # Also is this the correct syntax for the enrolment in advanced maths?
+    # I just got these codes from these searches under 'program':
+    # https://www.handbook.unsw.edu.au/search?q=advanced%20mathematics
+    # https://www.handbook.unsw.edu.au/search?q=advanced%20science
+    return "(65GRADE in MATH1231 || 65GRADE in DPST1014 || 65GRADE in MATH1241 || 65GRADE in MATH1251) && (3956 || 3523 || 3998 || 3564 || 3949 || 3781 || 3589 || 3761 || 3962 || 3782 || 3323 || 3566 || 3458 || 3997 || 3948 || 3593 || 3957 || 3762 || 3472)"
+
+
 if __name__ == "__main__":
     fix_conditions()
