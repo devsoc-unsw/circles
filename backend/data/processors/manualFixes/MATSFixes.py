@@ -1,10 +1,10 @@
 """
 https://github.com/csesoc/Circles/wiki/Manual-Fixes-to-Course-Prerequisites
 
-Copy this into a new file for the relevant faculty's fixes: 
+Copy this into a new file for the relevant faculty's fixes:
 e.g. COMPFixes.py, ACCTFixes.py, PSYCFixes.py
 
-Apply manual [code] fixes to processed conditions in conditionsProcessed.json so 
+Apply manual [code] fixes to processed conditions in conditionsProcessed.json so
 that they can be fed into algorithms.
 
 If you make a mistake and need to regenerate conditionsProcessed.json, then you
@@ -30,7 +30,7 @@ def fix_conditions():
     # TODO: call your functions here
     for course in ("MATS4500", "MATS4501", "MATS4503", "MATS4504", "MATS4505"):
         CONDITIONS[course][PROCESSED] = MATS_4500_4501_4503_4504_4505()
-    
+
 
     CONDITIONS["MATS5003"][PROCESSED] = MATS_5003()
 
