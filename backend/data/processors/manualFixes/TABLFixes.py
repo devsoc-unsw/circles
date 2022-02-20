@@ -82,7 +82,7 @@ def TABL_3007_22_25_28_31(condition):
     return {
         "original": condition["original"],
         "processed": "TABL2751 || LEGT2751",
-        "warning": "48UOC in BTax"
+        "handbook_note": "48UOC in BTax"
     }
 
 
@@ -96,7 +96,7 @@ def TABL_3033(condition):
     return {
         "original": condition["original"],
         "processed": "TABL2751 && COMM6000 && 65WAM",
-        "warning": "CA:Essentials and Good Standing. Note: This course is by application only. Visit Career Accelerator page on Business School website for more information"
+        "handbook_note": "CA:Essentials and Good Standing. Note: This course is by application only. Visit Career Accelerator page on Business School website for more information"
     }
 
 

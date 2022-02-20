@@ -77,7 +77,7 @@ def MGMT_3004():
     return {
         "original": CONDITIONS["MGMT3004"]["original"],
         "processed": "96UOC",
-        "warning": "Students must be in good standing"
+        "handbook_note": "Students must be in good standing"
     }
 
 def MGMT_3102():
@@ -95,7 +95,7 @@ def MGMT_3110():
     return {
         "original": CONDITIONS["MGMT3110"]["original"],
         "processed": "MGMT2102 && 72UOC",
-        "warning": "If you are enrolled the Commerce International (program 3558), the Commerce Overseas Program (Exchange) is also required"
+        "handbook_note": "If you are enrolled the Commerce International (program 3558), the Commerce Overseas Program (Exchange) is also required"
     }
 
 def MGMT_3728():
@@ -122,7 +122,7 @@ def MGMT_4101_4500_4501():
     return {
         "original": CONDITIONS["MGMT3110"]["original"],
         "processed": "4501",
-        "warning": "enrolment in the International Business Honours plan is required"
+        "handbook_note": "enrolment in the International Business Honours plan is required"
     }
 
 def MGMT_4104_4738_4739():
@@ -134,7 +134,7 @@ def MGMT_4104_4738_4739():
     return {
         "original": CONDITIONS["MGMT3110"]["original"],
         "processed": "4501",
-        "warning": "enrolment in the Human Resource Management Honours plan is required"
+        "handbook_note": "enrolment in the Human Resource Management Honours plan is required"
     }
 
 

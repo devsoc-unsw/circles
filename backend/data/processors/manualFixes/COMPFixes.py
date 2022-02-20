@@ -105,7 +105,7 @@ def COMP_3901_2(conditions):
 
     "processed": "80WAM in (COMP || SENG || BINF)"
 
-    "warning": "You must complete all first and second year core requirements of
+    "handbook_note": "You must complete all first and second year core requirements of
     a CSE program and obtain agreement from a suitable CSE academic supervisor
     to enrol in this course."
     """
@@ -113,7 +113,7 @@ def COMP_3901_2(conditions):
     return {
         "original": conditions["original"],
         "processed": "80WAM in (COMP || SENG || BINF)",
-        "warning": "You must complete all first and second year core requirements of a CSE program and obtain agreement from a suitable CSE academic supervisor to enrol in this course."
+        "handbook_note": "You must complete all first and second year core requirements of a CSE program and obtain agreement from a suitable CSE academic supervisor to enrol in this course."
     }
 
 def COMP_4141():
@@ -139,13 +139,13 @@ def COMP_4951(conditions):
 
     "processed": "126UOC"
 
-    "warning": "You must be enrolled in a CSE BE (Hons) program and complete all third year core requirements to enrol in this course."
+    "handbook_note": "You must be enrolled in a CSE BE (Hons) program and complete all third year core requirements to enrol in this course."
     """
 
     return {
         "original": conditions["original"],
         "processed": "126UOC && (BINF?H || SENGAH || COMP?H)",
-        "warning": "You must be enrolled in a CSE BE (Hons) program and complete all third year core requirements to enrol in this course."
+        "handbook_note": "You must be enrolled in a CSE BE (Hons) program and complete all third year core requirements to enrol in this course."
     }
 
 
@@ -229,12 +229,12 @@ def COMP_9301(conditions):
 
     "processed": "(COMP6441 || COMP6841) && (COMP6443 || COMP6843 || COMP6445 || COMP6845 || COMP6447)",
 
-    "warning": "This course can only be taken in the final term of your program."
+    "handbook_note": "This course can only be taken in the final term of your program."
     """
     return {
         "original": conditions["original"],
         "processed": "(COMP6441 || COMP6841) && (COMP6443 || COMP6843 || COMP6445 || COMP6845 || COMP6447)",
-        "warning": "This course can only be taken in the final term of your program."
+        "handbook_note": "This course can only be taken in the final term of your program."
     }
 
 
@@ -244,12 +244,12 @@ def COMP_9302(conditions):
 
     "processed": "(COMP6441 || COMP6841) && (12UOC in (COMP6443 || COMP6843 || COMP6445 || COMP6845 || COMP6447))",
 
-    "warning": "This course can only be taken in the final term of your program."
+    "handbook_note": "This course can only be taken in the final term of your program."
     """
     return {
         "original": conditions["original"],
         "processed": "(COMP6441 || COMP6841) && (12UOC in (COMP6443 || COMP6843 || COMP6445 || COMP6845 || COMP6447))",
-        "warning": "This course can only be taken in the final term of your program."
+        "handbook_note": "This course can only be taken in the final term of your program."
     }
 
 def COMP_9312_5():
