@@ -80,3 +80,4 @@ To remove all containers and the docker network, run `docker-compose down`. Add 
 
 To stop a docker containers that is running, run `docker-compose stop <containerName>`. This will not remove the container.
 
+[![GitHub Super-Linter](https://github.com/csesoc/Circles/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter)
