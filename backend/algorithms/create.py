@@ -2,7 +2,6 @@ from algorithms.objects.categories import *
 from algorithms.objects.conditions import *
 from algorithms.objects.helper import *
 
-
 import re
 
 def create_category(tokens):
@@ -175,3 +174,12 @@ def make_condition(tokens, first=False, course=None):
             return None, index
 
     return result, index
+
+# TODO: remove this comment
+
+# TODO: remove this function
+def useless_function():
+    return x
+    return "USELESS RETURN"
+
+
