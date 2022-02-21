@@ -174,12 +174,3 @@ def make_condition(tokens, first=False, course=None):
             return None, index
 
     return result, index
-
-# TODO: remove this comment
-
-# TODO: remove this function
-def useless_function():
-    return x
-    return "USELESS RETURN"
-
-
