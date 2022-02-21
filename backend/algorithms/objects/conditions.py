@@ -39,7 +39,10 @@ class CourseCondition():
 
     def validate(self, user):
         '''Returns true if the user has taken this course before'''
-        return user.has_taken_course(self.course)
+        return {
+            "result": user.has_taken_course(self.course),
+            "warnings": []
+        }
 
 
 class CoreqCoursesCondition():
@@ -60,13 +63,17 @@ class CoreqCoursesCondition():
     def validate(self, user):
         """Returns true if the user is taking these courses in the same term"""
         if self.logic == AND:
-            return all(user.has_taken_course(course) or user.is_taking_course(course) for course in self.courses)
+            return { "result" : all(user.has_taken_course(course) or user.is_taking_course(course) for course in self.courses), "warnings": [] }
         elif self.logic == OR:
-            return any(user.has_taken_course(course) or user.is_taking_course(course) for course in self.courses)
+            return { "result": any(user.has_taken_course(course) or user.is_taking_course(course) for course in self.courses), "warnings": [] }
         
-        # Error, logic should either be AND or OR
+        # Error, logic should either be AND or OR 
+        # TODO: should this be included in warnings?
         print("Conditions Error: validation was not of type AND or OR")
-        return True
+        return {
+            "result": True,
+            "warnings": []
+        }
 
 
 class UOCCondition():
@@ -89,7 +96,10 @@ class UOCCondition():
         self.category = category_classobj
 
     def validate(self, user):
-            return user.uoc(self.category) >= self.uoc
+            return {
+                "result" : user.uoc(self.category) >= self.uoc,
+                "warnings": []
+            }
 
 class WAMCondition():
     '''Handles WAM conditions such as 65WAM and 80WAM in'''
@@ -114,7 +124,11 @@ class WAMCondition():
 
         Will always return True and a warning since WAM can fluctuate
         '''
-        return True, self.get_warning(user.wam(self.category))
+        warning = self.get_warning(user.wam(self.category))
+        if warning == None:
+            return {"result" : True, "warnings": []}
+        else:
+            return {"result": True, "warnings": [warning]}
 
     def get_warning(self, applicable_wam):
         '''Returns an appropriate warning message or None if not needed'''
@@ -151,15 +165,15 @@ class GRADECondition():
         Taken the course and sufficient mark - Return True\n
         '''
         if self.course not in user.courses:
-            return False, None
+            return { "result": False, "warnings": [] }
 
         user_grade = user.get_grade(self.course)
         if user_grade == None:
-            return True, self.get_warning()
+            return { "result" : True, "warnings": [self.get_warning()] }
         elif user_grade < self.grade:
-            return False, None
+            return { "result": False, "warnings": [] }
         else:
-            return True, None
+            return { "result": True, "warnings": [] }
 
     def get_warning(self):
         return f"Requires {self.grade} mark in {self.course}. Your mark has not been recorded"
@@ -171,7 +185,10 @@ class ProgramCondition():
         self.program = program
 
     def validate(self, user):
-        return user.in_program(self.program)
+        return {
+            "result": user.in_program(self.program),
+            "warnings": []
+        }
 
 class ProgramTypeCondition():
     '''
@@ -182,7 +199,10 @@ class ProgramTypeCondition():
         self.programType = programType
     
     def validate(self, user):
-        return user.program in CACHED_PRGORAM_MAPPINGS[self.programType]
+        return {
+            "result": user.program in CACHED_PRGORAM_MAPPINGS[self.programType],
+            "warnings": []
+        }
 
 class SpecialisationCondition():
     '''Handles Specialisation conditions such as COMPA1'''
@@ -191,7 +211,10 @@ class SpecialisationCondition():
         self.specialisation = specialisation
 
     def validate(self, user):
-        return user.in_specialisation(self.specialisation)
+        return {
+            "result": user.in_specialisation(self.specialisation),
+            "warnings": [] 
+        }
 
 
 class CompositeCondition():
@@ -211,17 +234,18 @@ class CompositeCondition():
         '''AND or OR'''
         self.logic = logic
 
-    def validate(self, user, warnings=[]):
+    def validate(self, user):
         '''A helper function to be called by is_unlocked. The purpose of separating
         them is for easy warning implementation'''
         # Ensure we add all the warnings. 
         # NOTE: Remember that warnings are only returned
         # along with True by validate() method. In other words, checking a warning 
         # is != None is the equivalent of checking that validate() returned True
+        warnings = []
         
         if self.conditions == []:
             # Empty condition returns True by default
-            return True
+            return { "result" : True, "warnings": []}
         
         if self.logic == AND:
             satisfied = True
@@ -229,24 +253,18 @@ class CompositeCondition():
             satisfied = False
 
         for cond in self.conditions:
-            if isinstance(cond, (GRADECondition, WAMCondition)):
-                # Special type of condition which can return warnings
-                unlocked, warning = cond.validate(user)
-
-                if warning != None:
-                    warnings.append(warning)
-            elif isinstance(cond, CompositeCondition):
-                # Need to pass in the warnings list to collate all the warnings
-                unlocked = cond.validate(user, warnings)
-            else:
-                unlocked = cond.validate(user)
+            unlocked = cond.validate(user)["result"]
+            warnings.extend(cond.validate(user)["warnings"])
 
             if self.logic == AND:
                 satisfied = satisfied and unlocked
             else:
                 satisfied = satisfied or unlocked
 
-        return satisfied
+        return {
+            "result": satisfied,
+            "warnings": warnings 
+        }
 
 
 class FirstCompositeCondition(CompositeCondition):
@@ -278,11 +296,11 @@ class FirstCompositeCondition(CompositeCondition):
                     # Not able to parse this type of  exclusion
                     continue
 
-        unlocked = self.validate(user, warnings)
+        unlocked = self.validate(user)["result"]
+        warnings.extend(self.validate(user)["warnings"])
 
         return {
             "result": unlocked,
             "warnings": warnings
         }
-
 
