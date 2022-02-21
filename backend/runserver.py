@@ -21,3 +21,5 @@ if __name__ == "__main__":
         overwrite_all()
 
     uvicorn.run(app, host='backend')
+
+

@@ -98,3 +98,4 @@ def do_brackets_match(processed):
 
 if __name__ == "__main__":
     parse_syntax()
+

@@ -44,3 +44,4 @@ def test_user3():
     assert user.wam() == None
     assert user.uoc() == 0
     assert user.year == 1
+

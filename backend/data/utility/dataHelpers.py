@@ -23,3 +23,5 @@ def write_data(data, file_name):
     with open(file_name, "w") as OUTPUT_FILE:
         json.dump(data, OUTPUT_FILE, indent=4)
         print(f"{file_name} successfully created")
+
+

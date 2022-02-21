@@ -178,3 +178,5 @@ def unselectCourse(userData: UserData, lockedCourses: list, unselectedCourse: st
     affectedCourses = User(fixUserData(userData.dict())).unselect_course(unselectedCourse, lockedCourses)
 
     return {'affected_courses': affectedCourses}
+
+

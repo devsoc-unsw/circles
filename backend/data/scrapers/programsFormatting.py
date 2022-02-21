@@ -124,3 +124,5 @@ def format_curriculum(CurriculumStructure, currcontainer):
 
 if __name__ == "__main__":
     format_data()
+
+

@@ -183,3 +183,5 @@ def process_enrolment_rules(processed: dict, course: dict):
 
 if __name__ == "__main__":
     process_courses()
+
+

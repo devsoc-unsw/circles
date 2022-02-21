@@ -31,3 +31,5 @@ def test_user4():
     assert user.has_taken_course("COMP1521") == False
     assert user.has_taken_course("COMP1531") == False
     assert data == ["COMP1511", 'COMP1521', 'COMP1531']
+
+

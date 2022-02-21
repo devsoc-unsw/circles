@@ -506,3 +506,5 @@ def test_program_type():
     actl_program_cond = create_condition(["(", "ACTL#", ")"], "COMP1511")
     assert (actl_program_cond.is_unlocked(comp_user))["result"] == False
     assert (actl_program_cond.is_unlocked(actl_user))["result"] == True
+
+

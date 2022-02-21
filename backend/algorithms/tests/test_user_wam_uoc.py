@@ -29,3 +29,5 @@ def test_course_category_produces_correct_uoc():
     assert user.uoc(comp) == 18
     user.add_courses( {"COMP1069": (2, 69)} )
     assert user.uoc(comp) == 20
+
+

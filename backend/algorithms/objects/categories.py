@@ -84,3 +84,4 @@ class FacultyCategory(Category):
 
     def __str__(self) -> str:
         return self.faculty
+

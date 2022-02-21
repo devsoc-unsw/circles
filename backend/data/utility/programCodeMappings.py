@@ -40,3 +40,4 @@ def write_to_file(code_to_title, title_to_code):
 
 if __name__ == "__main__":
     get_mappings()
+

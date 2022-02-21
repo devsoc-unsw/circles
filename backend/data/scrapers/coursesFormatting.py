@@ -121,3 +121,5 @@ def get_enrolment_rules(formatted: dict, raw: dict) -> None:
 
 if __name__ == "__main__":
     format_course_data()
+
+
