@@ -10,24 +10,26 @@ We use docker to build 'images' for the backend, frontend, and mongodb. These `i
 
 ### Creating Environment Variables
 
-MongoDB and the backend require a few environment variables to get started. In the root folder, create a folder called `env` and add two files: `backend.env` and `mongodb.env`. 
+MongoDB and the backend require a few environment variables to get started. In the root folder, create a folder called `env` and add two files: `backend.env` and `mongodb.env`.
 
 In `backend.env`, add the environment variables:
+
 - `MONGODB_USERNAME=...`
 - `MONGODB_PASSWORD=...`
 - `MONGODB_DATABASE=mongodb`
 
 In `mongodb.env`, add:
+
 - `MONGO_INITDB_ROOT_USERNAME=...`
 - `MONGO_INITDB_ROOT_PASSWORD=...`
 
-Replace the ellipses with a username and password. The username and password in `backend.env` must match the values in `mongodb.env`. The `env` folder has been added to `.gitignore` and will not be committed to the repo. 
+Replace the ellipses with a username and password. The username and password in `backend.env` must match the values in `mongodb.env`. The `env` folder has been added to `.gitignore` and will not be committed to the repo.
 
 ### Running Circles with Docker
 
 The first time you run Circles, or if you have made changes to the backend codebase, run `docker-compose build`. You can run `docker images` to see what images exist on your machine. Note the `docker rmi <image>` command deletes an image. If you find you are building up a lot of `<none>` images, the `docker image prune` command will remove all 'dangling' images (those that are not related to named images and serve no purpose).
 
-To run the whole application (frontend, backend and database), use `docker-compose up frontend`. You can include the `-d` option if you wish to run it in detached mode. 
+To run the whole application (frontend, backend and database), use `docker-compose up frontend`. You can include the `-d` option if you wish to run it in detached mode.
 
 You will now have the backend API available on `localhost:8000/docs` and the frontend on `localhost:3000`. Since we use `docker-compose`, the backend, frontend and database can talk to each other in their own special docker network (called `circles-net`).
 
@@ -41,25 +43,30 @@ The first time you compose the application, or whenever you need to overwrite mo
 
 ### Running Only the Backend
 
-If you are just working on the backend, you can run only the backend and mongodb containers via `docker-compose up backend` (with `-d` for detached if you wish). The backend container depends on the mongodb container, so this command will launch both. The API will now be available on `localhost:8000/docs`. 
+If you are just working on the backend, you can run only the backend and mongodb containers via `docker-compose up backend` (with `-d` for detached if you wish). The backend container depends on the mongodb container, so this command will launch both. The API will now be available on `localhost:8000/docs`.
 
 You can stop a particular container with `docker-compose stop <containerName>`. For example, say I want to run the backend to test the API and don't need the frontend container. Assuming I have already built the images, I will run `docker-compose up -d backend` which will start just the backend and mongodb containers. When I am done, I will run `docker-compose stop backend mongodb` to stop both containers. Both containers will still exist (see `docker ps -a`) but will no longer be running.
 
 Note if working on particular files or functions, you can still just run `python3 <fileName>`. This can be faster than starting and stopping docker containers. Ensure you have the requisite dependencies by following the below steps:
 
 1. Create a virtual environment inside the backend folder called venv. Make sure it is called venv or else it will not be gitignored.
-```
+
+```zsh
 cd backend
 python3 -m venv venv
 ```
+
 2. Activate the virtual environment
-```
+
+```zsh
 source venv/bin/activate
 ```
+
 Now you should have `(venv)` at the beginning of your terminal. This indicates you are inside the virtual environment called venv.
 
 3. Install all necessary modules
-```
+
+```zsh
 pip3 install -r requirements.txt
 ```
 
@@ -69,6 +76,7 @@ If you are doing superficial work with the frontend and do not need to communica
 
 ### Removing Docker Containers
 
-To remove all containers and the docker network, run `docker-compose down`. Add the option `-v` to also remove persistant volumes: that is, the mongoDB data. I tend to run this before I rebuild if I have made changes to the backend code to keep everything clean on my system.
+To remove all containers and the docker network, run `docker-compose down`. Add the option `-v` to also remove persistent volumes: that is, the mongoDB data. I tend to run this before I rebuild if I have made changes to the backend code to keep everything clean on my system.
 
 To stop a docker containers that is running, run `docker-compose stop <containerName>`. This will not remove the container.
+
