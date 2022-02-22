@@ -18,7 +18,7 @@ def test_no_condition():
     user = User(USERS["user3"])
 
     no_cond = create_condition(["(", ")"])
-    assert (no_cond.is_unlocked(user))["result"] == True
+    assert (no_cond.validate(user))[0] == True
 
     # Should work even if the user has taken courses already
     user.add_courses({
@@ -26,24 +26,24 @@ def test_no_condition():
         "COMP1521": (6, 80)
     })
 
-    assert (no_cond.is_unlocked(user))["result"] == True
+    assert (no_cond.validate(user))[0] == True
 
 
 def test_course_condition():
     user = User(USERS["user3"])
 
     single_cond = create_condition(["(", "COMP1511", ")"])
-    assert (single_cond.is_unlocked(user))["result"] == False
+    assert (single_cond.validate(user))[0] == False
 
     user.add_courses({
         "MATH1141": (6, 80)
     })
-    assert (single_cond.is_unlocked(user))["result"] == False
+    assert (single_cond.validate(user))[0] == False
 
     user.add_courses({
         "COMP1511": (6, 80)
     })
-    assert (single_cond.is_unlocked(user))["result"] == True
+    assert (single_cond.validate(user))[0] == True
 
 
 def test_composite_condition_course():
@@ -51,41 +51,41 @@ def test_composite_condition_course():
     user = User(USERS["user3"])
 
     and_cond = create_condition(["(", "COMP1511", "&&", "COMP1521", "&&", "COMP1531", ")"])
-    assert (and_cond.is_unlocked(user))["result"] == False
+    assert (and_cond.validate(user))[0] == False
 
     user.add_courses({
         "COMP1511": (6, 80),
         "COMP1531": (6, None),
         "MATH1141": (6, None)
     })
-    assert (and_cond.is_unlocked(user))["result"] == False
+    assert (and_cond.validate(user))[0] == False
 
     user.add_courses({
         "COMP1521": (6, None)
     })
-    assert (and_cond.is_unlocked(user))["result"] == True
+    assert (and_cond.validate(user))[0] == True
 
     or_cond = create_condition(["(", "MATH1081", "||", "MATH1151", "||", "MATH1241", ")"])
-    assert (or_cond.is_unlocked(user))["result"] == False
+    assert (or_cond.validate(user))[0] == False
 
     user.add_courses({
         "MATH1151": (6, 90),
     })
-    assert (or_cond.is_unlocked(user))["result"] == True
+    assert (or_cond.validate(user))[0] == True
 
     and_or_cond = create_condition(["(", "(", "COMP1511", "||", "COMP1521", ")", "&&",
                                    "(", "MATH1141", "&&", "MATH1151", ")", "&&", "(", "COMP2041", "&&", "COMP1531", ")", ")"])
-    assert (and_or_cond.is_unlocked(user))["result"] == False
+    assert (and_or_cond.validate(user))[0] == False
 
     user.add_courses({
         "COMP1141": (6, None)
     })
-    assert (and_or_cond.is_unlocked(user))["result"] == False
+    assert (and_or_cond.validate(user))[0] == False
 
     user.add_courses({
         "COMP2041": (6, None)
     })
-    assert (and_or_cond.is_unlocked(user))["result"] == True
+    assert (and_or_cond.validate(user))[0] == True
 
 
 def test_composite_condition_course():
@@ -94,42 +94,42 @@ def test_composite_condition_course():
 
     and_cond = create_condition(
         ["(", "COMP1511", "&&", "COMP1521", "&&", "COMP1531", ")"])
-    assert (and_cond.is_unlocked(user))["result"] == False
+    assert (and_cond.validate(user))[0] == False
 
     user.add_courses({
         "COMP1511": (6, 80),
         "COMP1531": (6, None),
         "MATH1141": (6, None)
     })
-    assert (and_cond.is_unlocked(user))["result"] == False
+    assert (and_cond.validate(user))[0] == False
 
     user.add_courses({
         "COMP1521": (6, None)
     })
-    assert (and_cond.is_unlocked(user))["result"] == True
+    assert (and_cond.validate(user))[0] == True
 
     or_cond = create_condition(
         ["(", "MATH1081", "||", "MATH1151", "||", "MATH1241", ")"])
-    assert (or_cond.is_unlocked(user))["result"] == False
+    assert (or_cond.validate(user))[0] == False
 
     user.add_courses({
         "MATH1151": (6, 90),
     })
-    assert (or_cond.is_unlocked(user))["result"] == True
+    assert (or_cond.validate(user))[0] == True
 
     and_or_cond = create_condition(["(", "(", "COMP1511", "||", "COMP1521", ")", "&&",
                                    "(", "MATH1141", "&&", "MATH1151", ")", "&&", "(", "COMP2041", "&&", "COMP1531", ")", ")"])
-    assert (and_or_cond.is_unlocked(user))["result"] == False
+    assert (and_or_cond.validate(user))[0] == False
 
     user.add_courses({
         "COMP1141": (6, None)
     })
-    assert (and_or_cond.is_unlocked(user))["result"] == False
+    assert (and_or_cond.validate(user))[0] == False
 
     user.add_courses({
         "COMP2041": (6, None)
     })
-    assert (and_or_cond.is_unlocked(user))["result"] == True
+    assert (and_or_cond.validate(user))[0] == True
 
 
 def test_uoc_condition_simple():
@@ -146,9 +146,9 @@ def test_uoc_condition_simple():
     cond_21 = create_condition(["(", "21UOC", ")"])
     cond_30 = create_condition(["(", "30UOC", ")"])
 
-    assert (cond_12.is_unlocked(user))["result"] == True
-    assert (cond_21.is_unlocked(user))["result"] == True
-    assert (cond_30.is_unlocked(user))["result"] == False
+    assert (cond_12.validate(user))[0] == True
+    assert (cond_21.validate(user))[0] == True
+    assert (cond_30.validate(user))[0] == False
 
 
 def test_uoc_condition_complex():
@@ -170,16 +170,16 @@ def test_uoc_condition_complex():
     cond_30_comp = create_condition(["(", "30UOC", "in", "COMP", ")"])
     cond_30_math = create_condition(["(", "30UOC", "in", "MATH", ")"])
 
-    assert (cond_12_comp.is_unlocked(user))["result"] == True
-    assert (cond_12_math.is_unlocked(user))["result"] == True
-    assert (cond_18_comp.is_unlocked(user))["result"] == True
-    assert (cond_15_math.is_unlocked(user))["result"] == True
-    assert (cond_30_comp.is_unlocked(user))["result"] == False
-    assert (cond_30_math.is_unlocked(user))["result"] == False
+    assert (cond_12_comp.validate(user))[0] == True
+    assert (cond_12_math.validate(user))[0] == True
+    assert (cond_18_comp.validate(user))[0] == True
+    assert (cond_15_math.validate(user))[0] == True
+    assert (cond_30_comp.validate(user))[0] == False
+    assert (cond_30_math.validate(user))[0] == False
 
     # Nonexistent categories shouldn't work...
     cond_12_engg = create_condition(["(", "12UOC", "in", "ENGG", ")"])
-    assert (cond_12_engg.is_unlocked(user))["result"] == False
+    assert (cond_12_engg.validate(user))[0] == False
 
 
 def test_wam_condition_simple():
@@ -192,10 +192,10 @@ def test_wam_condition_simple():
     })
 
     cond1 = create_condition(["(", "70WAM", ")"])
-    cond1_user_unlocked = cond1.is_unlocked(user)
-    assert cond1_user_unlocked["result"] == True
-    assert len(cond1_user_unlocked["warnings"]) == 1
-    assert "Requires 70 WAM. Your WAM has not been recorded" in cond1_user_unlocked["warnings"]
+    cond1_user_unlocked = cond1.validate(user)
+    assert cond1_user_unlocked[0] == True
+    assert len(cond1_user_unlocked[1]) == 1
+    assert "Requires 70 WAM. Your WAM has not been recorded" in cond1_user_unlocked[1]
 
     user1 = User(USERS["user3"])
     user1.add_courses({
@@ -203,21 +203,21 @@ def test_wam_condition_simple():
         "COMP1521": (6, 90),
         "COMP1531": (6, 100)
     })
-    cond1_user1_unlocked = cond1.is_unlocked(user1)
-    assert cond1_user1_unlocked["result"] == True
-    assert len(cond1_user1_unlocked["warnings"]) == 0
+    cond1_user1_unlocked = cond1.validate(user1)
+    assert cond1_user1_unlocked[0] == True
+    assert len(cond1_user1_unlocked[1]) == 0
 
     cond2 = create_condition((["(", "90WAM", ")"]))
-    cond2_user1_unlocked = cond2.is_unlocked(user1)
-    assert cond2_user1_unlocked["result"] == True
-    assert len(cond2_user1_unlocked["warnings"]) == 0
+    cond2_user1_unlocked = cond2.validate(user1)
+    assert cond2_user1_unlocked[0] == True
+    assert len(cond2_user1_unlocked[1]) == 0
 
 
     cond4 = create_condition((["(", "100WAM", ")"]))
-    cond4_user1_unlocked = cond4.is_unlocked(user1)
-    assert cond4_user1_unlocked["result"] == True
-    assert len(cond4_user1_unlocked["warnings"]) == 1
-    assert "Requires 100 WAM. Your WAM is currently 90.000" in cond4_user1_unlocked["warnings"]
+    cond4_user1_unlocked = cond4.validate(user1)
+    assert cond4_user1_unlocked[0] == True
+    assert len(cond4_user1_unlocked[1]) == 1
+    assert "Requires 100 WAM. Your WAM is currently 90.000" in cond4_user1_unlocked[1]
 
 def test_wam_condition_complex():
     '''Testing wam condition including keywords'''
@@ -230,14 +230,14 @@ def test_wam_condition_complex():
     })
 
     comp_cond_70 = create_condition(["(", "70WAM", "in", "COMP", ")"])
-    assert (comp_cond_70.is_unlocked(user))["result"] == True
+    assert (comp_cond_70.validate(user))[0] == True
 
     math_cond_70 = create_condition(["(", "70WAM", "in", "MATH", ")"])
-    assert (math_cond_70.is_unlocked(user))["result"] == True
+    assert (math_cond_70.validate(user))[0] == True
 
     comp_math_cond_70 = create_condition(
         ["(", "70WAM", "in", "COMP", "||", "70WAM", "in", "MATH", ")"])
-    assert (comp_math_cond_70.is_unlocked(user))["result"] == True
+    assert (comp_math_cond_70.validate(user))[0] == True
 
     user1 = User(USERS["user3"])
     user1.add_courses({
@@ -247,9 +247,9 @@ def test_wam_condition_complex():
         "MATH1141": (6, 50),
     })
 
-    assert (comp_cond_70.is_unlocked(user1))["result"] == True
-    assert (math_cond_70.is_unlocked(user1))["result"] == True
-    assert (comp_math_cond_70.is_unlocked(user1))["result"] == True
+    assert (comp_cond_70.validate(user1))[0] == True
+    assert (math_cond_70.validate(user1))[0] == True
+    assert (comp_math_cond_70.validate(user1))[0] == True
 
 
 def test_grade_condition():
@@ -263,19 +263,19 @@ def test_grade_condition():
     comp1521_70 = create_condition(["(", "70GRADE", "in", "COMP1521", ")"])
     math1131_70 = create_condition(["(", "70GRADE", "in", "MATH1131", ")"])
 
-    comp1511_70_user_unlocked = comp1511_70.is_unlocked(user)
-    assert comp1511_70_user_unlocked["result"] == True
-    assert len(comp1511_70_user_unlocked["warnings"]) == 1
+    comp1511_70_user_unlocked = comp1511_70.validate(user)
+    assert comp1511_70_user_unlocked[0] == True
+    assert len(comp1511_70_user_unlocked[1]) == 1
     assert "Requires 70 mark in COMP1511. Your mark has not been recorded"
 
-    math1131_70_user_unlocked = math1131_70.is_unlocked(user)
-    assert math1131_70_user_unlocked["result"] == True
-    assert len(math1131_70_user_unlocked["warnings"]) == 1
+    math1131_70_user_unlocked = math1131_70.validate(user)
+    assert math1131_70_user_unlocked[0] == True
+    assert len(math1131_70_user_unlocked[1]) == 1
     assert "Requires 70 mark in MATH1131. Your mark has not been recorded"
 
     # Has not taken the course. Should be false
-    assert (comp1521_70.is_unlocked(user))["result"] == False
-    assert len((comp1521_70.is_unlocked(user))["warnings"]) == 0
+    assert (comp1521_70.validate(user))[0] == False
+    assert len((comp1521_70.validate(user))[1]) == 0
     
     comp1511_60 = create_condition(["(", "60GRADE", "in", "COMP1511", ")"])
     comp1511_90 = create_condition(["(", "90GRADE", "in", "COMP1511", ")"])
@@ -288,13 +288,13 @@ def test_grade_condition():
         "MATH1131": (6, 70),
     })
 
-    assert (comp1511_60.is_unlocked(user1))["result"] == True
-    assert (comp1511_70.is_unlocked(user1))["result"] == True
-    assert (comp1521_70.is_unlocked(user1))["result"] == False
-    assert (math1131_70.is_unlocked(user1))["result"] == True
-    assert (comp1511_90.is_unlocked(user1))["result"] == False
-    assert (comp1521_90.is_unlocked(user1))["result"] == False
-    assert (math1131_90.is_unlocked(user1))["result"] == False
+    assert (comp1511_60.validate(user1))[0] == True
+    assert (comp1511_70.validate(user1))[0] == True
+    assert (comp1521_70.validate(user1))[0] == False
+    assert (math1131_70.validate(user1))[0] == True
+    assert (comp1511_90.validate(user1))[0] == False
+    assert (comp1521_90.validate(user1))[0] == False
+    assert (math1131_90.validate(user1))[0] == False
 
     # Test complex grade conditions
     user2 = User(USERS["user3"])
@@ -307,16 +307,16 @@ def test_grade_condition():
 
     complex_cond_100 = create_condition(
         ["(", "100GRADE", "in", "ENGG1000", "||", "100GRADE", "in", "COMP1511", "||", "100GRADE", "in", "COMP1521", ")"])
-    assert (complex_cond_100.is_unlocked(user2))["result"] == False
+    assert (complex_cond_100.validate(user2))[0] == False
 
     complex_cond_60 = create_condition(
         ["(", "60GRADE", "in", "ENGG1000", "||", "60GRADE", "in", "COMP1511", "||", "60GRADE", "in", "COMP1521", ")"])
-    assert (complex_cond_60.is_unlocked(user2))["result"] == True
+    assert (complex_cond_60.validate(user2))[0] == True
 
     # Some courses are not even taken
     complex_cond_70_not_taken = create_condition(
         ["(", "70GRADE", "in", "MATH1081", "||", "70GRADE", "in", "MATH1131", "||", "70GRADE", "in", "COMP1511", ")"])
-    assert (complex_cond_70_not_taken.is_unlocked(user2))["result"] == False
+    assert (complex_cond_70_not_taken.validate(user2))[0] == False
 
 
 def test_specialisation_condition_simple():
@@ -327,9 +327,9 @@ def test_specialisation_condition_simple():
     accta2_cond = create_condition(["(", "ACCTA2", ")"])
     finsa2_cond = create_condition(["(", "FINSA2", ")"])
 
-    assert (compa1_cond.is_unlocked(user))["result"] == True
-    assert (accta2_cond.is_unlocked(user))["result"] == True
-    assert (finsa2_cond.is_unlocked(user))["result"] == False
+    assert (compa1_cond.validate(user))[0] == True
+    assert (accta2_cond.validate(user))[0] == True
+    assert (finsa2_cond.validate(user))[0] == False
 
 
 def test_program_condition_simple():
@@ -339,8 +339,8 @@ def test_program_condition_simple():
     cond_3707 = create_condition(["(", "3707", ")"])
     cond_3778 = create_condition(["(", "3778", ")"])
 
-    assert (cond_3707.is_unlocked(user))["result"] == True
-    assert (cond_3778.is_unlocked(user))["result"] == False
+    assert (cond_3707.validate(user))[0] == True
+    assert (cond_3778.validate(user))[0] == False
 
 
 def test_level_condition_simple():
@@ -367,14 +367,14 @@ def test_level_condition_simple():
     l3_6uoc_cond = create_condition(["(", "6UOC", "in", "L3", ")"])
     l3_12uoc_cond = create_condition(["(", "12UOC", "in", "L3", ")"])
 
-    assert (l1_6uoc_cond.is_unlocked(user))["result"] == True
-    assert (l1_18uoc_cond.is_unlocked(user))["result"] == True
-    assert (l1_30uoc_cond.is_unlocked(user))["result"] == False
-    assert (l2_6uoc_cond.is_unlocked(user))["result"] == True
-    assert (l2_12uoc_cond.is_unlocked(user))["result"] == True
-    assert (l2_18uoc_cond.is_unlocked(user))["result"] == False
-    assert (l3_6uoc_cond.is_unlocked(user))["result"] == True
-    assert (l3_12uoc_cond.is_unlocked(user))["result"] == False
+    assert (l1_6uoc_cond.validate(user))[0] == True
+    assert (l1_18uoc_cond.validate(user))[0] == True
+    assert (l1_30uoc_cond.validate(user))[0] == False
+    assert (l2_6uoc_cond.validate(user))[0] == True
+    assert (l2_12uoc_cond.validate(user))[0] == True
+    assert (l2_18uoc_cond.validate(user))[0] == False
+    assert (l3_6uoc_cond.validate(user))[0] == True
+    assert (l3_12uoc_cond.validate(user))[0] == False
 
 def test_level_course_condition():
     '''Testing level conditions with course category such as L2 MATH
@@ -397,11 +397,11 @@ def test_level_course_condition():
     l2_math_12uoc_cond = create_condition(["(", "12UOC", "in", "L2", "MATH", ")"])
     l2_math_18uoc_cond = create_condition(["(", "18UOC", "in", "L2", "MATH", ")"])
 
-    assert (l1_comp_6uoc_cond.is_unlocked(user))["result"] == True
-    assert (l1_comp_12uoc_cond.is_unlocked(user))["result"] == False
-    assert (l1_math_6uoc_cond.is_unlocked(user))["result"] == True
-    assert (l2_math_12uoc_cond.is_unlocked(user))["result"] == True
-    assert (l2_math_18uoc_cond.is_unlocked(user))["result"] == False
+    assert (l1_comp_6uoc_cond.validate(user))[0] == True
+    assert (l1_comp_12uoc_cond.validate(user))[0] == False
+    assert (l1_math_6uoc_cond.validate(user))[0] == True
+    assert (l2_math_12uoc_cond.validate(user))[0] == True
+    assert (l2_math_18uoc_cond.validate(user))[0] == False
 
 
 def test_exclusion():
@@ -414,17 +414,17 @@ def test_exclusion():
 
     # Excludes COMP1511
     comp1010_cond = create_condition(["(", ")"], "COMP1010")
-    assert (comp1010_cond.is_unlocked(user))["result"] == False
+    assert (comp1010_cond.validate(user))[0] == False
 
     # Excludes COMP1521
     dpst1092_cond = create_condition(["(", "COMP1511", ")"], "DPST1092")
-    assert (dpst1092_cond.is_unlocked(user))["result"] == False
+    assert (dpst1092_cond.validate(user))[0] == False
 
     # ECON1101 should exclude 3155 and 3521
     user1 = User()
     user1.add_program("3155")
     econ1011_cond = create_condition(["(", ")"], "ECON1101")
-    assert (econ1011_cond.is_unlocked(user1))["result"] == False
+    assert (econ1011_cond.validate(user1))[0] == False
     
     # TODO: Test exclusion for other types
 
@@ -444,10 +444,10 @@ def test_coreq_condition():
     coreq_cond3 = create_condition(["(", "[", "COMP1521", "]", ")"])
     coreq_cond4 = create_condition(["(", "[", "COMP1541", "]", ")"])
 
-    assert (coreq_cond1.is_unlocked(user))["result"] == True
-    assert (coreq_cond2.is_unlocked(user))["result"] == True
-    assert (coreq_cond3.is_unlocked(user))["result"] == True
-    assert (coreq_cond4.is_unlocked(user))["result"] == False
+    assert (coreq_cond1.validate(user))[0] == True
+    assert (coreq_cond2.validate(user))[0] == True
+    assert (coreq_cond3.validate(user))[0] == True
+    assert (coreq_cond4.validate(user))[0] == False
 
     user.add_current_course("COMP1541")
 
@@ -459,12 +459,12 @@ def test_coreq_condition():
     complex_coreq_cond5 = create_condition(["(", "[", "COMP7777", "||", "COMP1511", "||", "COMP9999", "]", ")"])
     complex_coreq_cond6 = create_condition(["(", "[", "COMP7777", "||", "COMP8888", "||", "COMP9999", "]", ")"])
 
-    assert (complex_coreq_cond1.is_unlocked(user))["result"] == True
-    assert (complex_coreq_cond2.is_unlocked(user))["result"] == True
-    assert (complex_coreq_cond3.is_unlocked(user))["result"] == True
-    assert (complex_coreq_cond4.is_unlocked(user))["result"] == False
-    assert (complex_coreq_cond5.is_unlocked(user))["result"] == True
-    assert (complex_coreq_cond6.is_unlocked(user))["result"] == False
+    assert (complex_coreq_cond1.validate(user))[0] == True
+    assert (complex_coreq_cond2.validate(user))[0] == True
+    assert (complex_coreq_cond3.validate(user))[0] == True
+    assert (complex_coreq_cond4.validate(user))[0] == False
+    assert (complex_coreq_cond5.validate(user))[0] == True
+    assert (complex_coreq_cond6.validate(user))[0] == False
 
 
 def test_school_condition():
@@ -478,8 +478,8 @@ def test_school_condition():
     comp_12uoc_cond = create_condition(["(", "12UOC", "in", "S", "Comp", ")"])
     comp_18uoc_cond = create_condition(["(", "18UOC", "in", "S", "Comp", ")"])
 
-    assert (comp_12uoc_cond.is_unlocked(user))["result"] == True
-    assert (comp_18uoc_cond.is_unlocked(user))["result"] == False
+    assert (comp_12uoc_cond.validate(user))[0] == True
+    assert (comp_18uoc_cond.validate(user))[0] == False
 
 def test_faculty_condition():
     """Testing faculty conditions such as 12UOC in F Engineering"""
@@ -492,8 +492,8 @@ def test_faculty_condition():
     comp_12uoc_cond = create_condition(["(", "12UOC", "in", "F", "Engineering", ")"])
     comp_18uoc_cond = create_condition(["(", "18UOC", "in", "F", "Engineering", ")"])
 
-    assert (comp_12uoc_cond.is_unlocked(user))["result"] == True
-    assert (comp_18uoc_cond.is_unlocked(user))["result"] == False
+    assert (comp_12uoc_cond.validate(user))[0] == True
+    assert (comp_18uoc_cond.validate(user))[0] == False
 
 def test_program_type():
     """Testing program type conditions such as ACTL#
@@ -504,5 +504,5 @@ def test_program_type():
     actl_user.add_program("3154")
 
     actl_program_cond = create_condition(["(", "ACTL#", ")"], "COMP1511")
-    assert (actl_program_cond.is_unlocked(comp_user))["result"] == False
-    assert (actl_program_cond.is_unlocked(actl_user))["result"] == True
+    assert (actl_program_cond.validate(comp_user))[0] == False
+    assert (actl_program_cond.validate(actl_user))[0] == True

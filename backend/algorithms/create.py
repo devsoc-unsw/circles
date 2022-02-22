@@ -5,6 +5,11 @@ from algorithms.objects.helper import *
 
 import re
 
+# Load in cached exclusions
+CACHED_EXCLUSIONS_PATH = "./algorithms/cache/exclusions.json"
+with open(CACHED_EXCLUSIONS_PATH) as f:
+    CACHED_EXCLUSIONS = json.load(f)
+
 def create_category(tokens):
     '''Given a list of tokens starting from after the connector keyword, create
     and return the category object matching the category, as well as the current index
@@ -59,10 +64,15 @@ def make_condition(tokens, first=False, course=None):
     '''
 
     # Everything is wrapped in a CompositeCondition
-    if first == True:
-        result = FirstCompositeCondition(course=course)
-    else:
-        result = CompositeCondition()
+    result = CompositeCondition()
+    # add exclusions
+    if first and CACHED_EXCLUSIONS.get(course):
+        # NOTE: we dont check for broken exclusions
+        for exclusion in CACHED_EXCLUSIONS[course].keys():
+            if is_course(exclusion):
+                result.add_condition(CourseExclusionCondition(exclusion))
+            elif is_program(exclusion):
+                result.add_condition(ProgramExclusionCondition(exclusion))
 
     it = enumerate(tokens)
     for index, token in it:
@@ -88,7 +98,6 @@ def make_condition(tokens, first=False, course=None):
         elif token == "[":
             # Beginning of co-requisite. Parse courses and logical operators until closing "]"
             coreq_cond = CoreqCoursesCondition()
-            
             i = 1 # Helps track our index offset to parse this co-requisite
             while tokens[index + i] != "]":
                 if is_course(tokens[index + i]):
@@ -134,8 +143,7 @@ def make_condition(tokens, first=False, course=None):
             result.add_condition(uoc_cond)
         elif is_wam(token):
             # Condition for WAM requirement
-            wam = get_wam(token)
-            wam_cond = WAMCondition(wam)
+            wam_cond = WAMCondition(get_wam(token))
 
             if index + 1 < len(tokens) and tokens[index + 1] == "in":
                 # Create category according to the token after 'in'

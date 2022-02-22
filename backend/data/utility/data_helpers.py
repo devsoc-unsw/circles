@@ -3,7 +3,6 @@ Contains helper functions to assist with reading and writing data.
 """
 import sys
 import json
-import os.path
 
 def read_data(file_name):
     """

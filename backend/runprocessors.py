@@ -10,13 +10,13 @@ import subprocess
 from algorithms.load_conditions import cache_conditions_pkl_file
 from algorithms.log_broken import log_broken_conditions 
 
-from data.scrapers.programsScraper import scrape_programs as scrape_prg_data
-from data.scrapers.specialisationsScraper import scrape_spn_data
-from data.scrapers.coursesScraper import scrape_courses as scrape_course_data
+from data.scrapers.programs_scraper import scrape_programs as scrape_prg_data
+from data.scrapers.specialisations_scraper import scrape_spn_data
+from data.scrapers.courses_scraper import scrape_courses as scrape_course_data
 
-from data.scrapers.programsFormatting import format_data as format_prg_data
-from data.scrapers.specialisationsFormatting import format_spn_data
-from data.scrapers.coursesFormatting import format_course_data
+from data.scrapers.programs_formatting import format_data as format_prg_data
+from data.scrapers.specialisations_formatting import format_spn_data
+from data.scrapers.courses_formatting import format_course_data
 
 from data.processors.programs_processing import process_data as process_prg_data
 from data.processors.programs_processing_type1 import process_data as process_prg_data_type1
@@ -50,7 +50,7 @@ except:
     sys.exit(0)
 
 def run_manual_fixes():
-    subprocess.run(['data/processors/manualFixes/runManualFixes.sh'])
+    subprocess.run(['data/processors/manual_fixes/run_manual_fixes.sh'])
 
 run = {
     'program': {

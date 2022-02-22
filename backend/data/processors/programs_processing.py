@@ -12,7 +12,7 @@ Step in the data's journey:
 """
 
 import re
-from data.utility import dataHelpers
+from data.utility import data_helpers
 from collections import OrderedDict
 
 # Set of current course codes in programs_processed.json
@@ -21,7 +21,7 @@ TEST_PROGS = ["3778", "3707", "3970", "3502", "3053", "3979", "3959", "3181", "3
 
 def process_data():
     # Read in ProgramsFormattedRaw File
-    data = dataHelpers.read_data("data/scrapers/programsFormattedRaw.json")
+    data = data_helpers.read_data("data/scrapers/programsFormattedRaw.json")
     # Final Data for all programs
     processedData = {}
 
@@ -38,8 +38,8 @@ def process_data():
         # Append processed program data to final data
         processedData[programData["code"]] = programData
 
-    dataHelpers.write_data(
-        processedData, "data/finalData/programsProcessed.json")
+    data_helpers.write_data(
+        processedData, "data/final_data/programsProcessed.json")
 
 
 def addComponentData(formatted, programData):
