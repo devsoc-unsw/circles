@@ -19,7 +19,7 @@ from collections import OrderedDict
 TEST_PROGS = ["3778", "3707", "3970", "3502", "3053", "3979", "3959", "3181", "3543", "3586", "3805", "3871", "3956"]
 
 
-def process_data():
+def process_prg_data():
     # Read in ProgramsFormattedRaw File
     data = data_helpers.read_data("data/scrapers/programsFormattedRaw.json")
     # Final Data for all programs
@@ -246,4 +246,4 @@ def initialise_program(program):
 
 
 if __name__ == "__main__":
-    process_data()
+    process_prg_data()

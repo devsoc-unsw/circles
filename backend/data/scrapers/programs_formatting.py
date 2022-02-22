@@ -21,7 +21,7 @@ import json
 from data.utility import data_helpers
 
 
-def format_data():
+def format_prg_data():
     # Get raw data
     raw_content = data_helpers.read_data("data/scrapers/programsPureRaw.json")
     # Initialise formatted data
@@ -123,4 +123,4 @@ def format_curriculum(CurriculumStructure, currcontainer):
 
 
 if __name__ == "__main__":
-    format_data()
+    format_prg_data()

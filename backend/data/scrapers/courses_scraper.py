@@ -99,7 +99,7 @@ Retrieves data for all undergraduate courses
 '''
 
 
-def scrape_courses():
+def scrape_course_data():
     url = "https://www.handbook.unsw.edu.au/api/es/search"
     headers = {
         "content-type": "application/json",
@@ -110,4 +110,4 @@ def scrape_courses():
 
 
 if __name__ == "__main__":
-    scrape_courses()
+    scrape_course_data()

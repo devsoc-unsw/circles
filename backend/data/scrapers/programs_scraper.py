@@ -82,7 +82,7 @@ Retrieves data for all undergraduate programs
 '''
 
 
-def scrape_programs():
+def scrape_prg_data():
     url = "https://www.handbook.unsw.edu.au/api/es/search"
     headers = {
         "content-type": "application/json",
@@ -93,4 +93,4 @@ def scrape_programs():
 
 
 if __name__ == "__main__":
-    scrape_programs()
+    scrape_prg_data()

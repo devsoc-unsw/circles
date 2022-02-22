@@ -20,7 +20,7 @@ from data.utility import data_helpers
 TEST_PROGS = ["3778", "3707"]
 
 
-def process_data():
+def process_prg_data_type1():
     # Read in ProgramsFormattedRaw File
     data = data_helpers.read_data("data/scrapers/programsFormattedRaw.json")
     # Final Data for all programs
@@ -175,4 +175,4 @@ def initialise_program(program):
 
 
 if __name__ == "__main__":
-    process_data()
+    process_prg_data_type1()

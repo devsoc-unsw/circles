@@ -20,7 +20,7 @@ ABSENT_COURSES = {}  # Courses that appear in enrolment rules but do not exist
 # a postgraduate course
 
 
-def process_courses():
+def process_course_data():
 
     data = data_helpers.read_data("data/scrapers/coursesFormattedRaw.json")
 
@@ -182,4 +182,4 @@ def process_enrolment_rules(processed: dict, course: dict):
 
 
 if __name__ == "__main__":
-    process_courses()
+    process_course_data()

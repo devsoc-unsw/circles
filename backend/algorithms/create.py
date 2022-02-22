@@ -91,10 +91,10 @@ def make_condition(tokens, first=False, course=None):
             return result, index
         elif token == "&&":
             # AND type logic
-            result.set_logic(AND)
+            result.set_logic(Logic.AND)
         elif token == "||":
             # OR type logic
-            result.set_logic(OR)
+            result.set_logic(Logic.OR)
         elif token == "[":
             # Beginning of co-requisite. Parse courses and logical operators until closing "]"
             coreq_cond = CoreqCoursesCondition()
@@ -103,9 +103,9 @@ def make_condition(tokens, first=False, course=None):
                 if is_course(tokens[index + i]):
                     coreq_cond.add_course(tokens[index + i])
                 elif tokens[index + i] == "&&":
-                    coreq_cond.set_logic(AND)
+                    coreq_cond.set_logic(Logic.AND)
                 elif tokens[index + i] == "||":
-                    coreq_cond.set_logic(OR)
+                    coreq_cond.set_logic(Logic.OR)
                 else:
                     # Error, bad token processed. Return None
                     return None, index + i
