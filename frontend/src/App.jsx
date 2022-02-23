@@ -66,3 +66,4 @@ const notifArgs = {
   duration: 2,
   className: "text helpNotif",
 };
+
