@@ -11,7 +11,7 @@ For example:
 '''
 
 import re
-from data.utility import dataHelpers
+from data.utility import data_helpers
 
 PARSED_LOGIC = {}
 
@@ -19,7 +19,7 @@ PARSED_LOGIC = {}
 
 
 def tokenise_conditions():
-    data = dataHelpers.read_data("data/finalData/conditionsProcessed.json")
+    data = data_helpers.read_data("data/final_data/conditionsProcessed.json")
 
     for code, condition in data.items():
         text = condition["processed"]
@@ -43,5 +43,5 @@ def tokenise_conditions():
 
         PARSED_LOGIC[code] = logic
 
-    dataHelpers.write_data(
-        PARSED_LOGIC, "data/finalData/conditionsTokens.json")
+    data_helpers.write_data(
+        PARSED_LOGIC, "data/final_data/conditionsTokens.json")

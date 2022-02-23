@@ -5,19 +5,18 @@ for faster algorithms performance.
 This should be run from the backend directory or via runprocessors
 """
 
-from os import write
 import re
 
-from data.utility.dataHelpers import read_data, write_data
+from data.utility.data_helpers import read_data, write_data
 
 # INPUT SOURCES
-COURSES_PROCESSED_FILE = "./data/finalData/coursesProcessed.json"
+COURSES_PROCESSED_FILE = "./data/final_data/coursesProcessed.json"
 
 PROGRAMS_FORMATTED_FILE = "./data/scrapers/programsFormattedRaw.json"
 
 CACHED_EXCLUSIONS_FILE = "./algorithms/cache/exclusions.json"
 
-CONDITIONS_PROCESSED_FILE = "./data/finalData/conditionsProcessed.json"
+CONDITIONS_PROCESSED_FILE = "./data/final_data/conditionsProcessed.json"
 
 
 # OUTPUT SOURCES

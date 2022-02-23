@@ -6,7 +6,7 @@ Step in the course data's journey:
 """
 
 import re
-from data.utility import dataHelpers
+from data.utility import data_helpers
 
 # Fields to keep in the processed file without modification from coursesFormattedRaw.json
 KEEP_UNEDITED = ["title", "code", "UOC", "level", "description", "study_level",
@@ -20,9 +20,9 @@ ABSENT_COURSES = {}  # Courses that appear in enrolment rules but do not exist
 # a postgraduate course
 
 
-def process_courses():
+def process_course_data():
 
-    data = dataHelpers.read_data("data/scrapers/coursesFormattedRaw.json")
+    data = data_helpers.read_data("data/scrapers/coursesFormattedRaw.json")
 
     for code, course in data.items():
         processed = {k: v for k, v in course.items() if k in KEEP_UNEDITED}
@@ -44,8 +44,8 @@ def process_courses():
         # Overwrite data file entry with the newly processed info
         data[code] = processed
 
-    dataHelpers.write_data(data, "data/finalData/coursesProcessed.json")
-    dataHelpers.write_data(ABSENT_COURSES, "data/finalData/absentCourses.json")
+    data_helpers.write_data(data, "data/final_data/coursesProcessed.json")
+    data_helpers.write_data(ABSENT_COURSES, "data/final_data/absentCourses.json")
 
 
 def process_description(processed: dict, formatted: dict) -> None:
@@ -182,4 +182,4 @@ def process_enrolment_rules(processed: dict, course: dict):
 
 
 if __name__ == "__main__":
-    process_courses()
+    process_course_data()

@@ -2,7 +2,7 @@ from typing import Optional
 from pydantic import BaseModel
 from pickle import load
 
-from algorithms.objects.conditions import FirstCompositeCondition 
+from algorithms.objects.conditions import CompositeCondition 
 
 class message (BaseModel):
     message: str
@@ -77,7 +77,7 @@ minorInSpecialisation = ['3502', '3970']
 
 CONDITIONS_PATH = "algorithms/conditions.pkl"
 with open(CONDITIONS_PATH, "rb") as file:
-    CONDITIONS: dict[str, FirstCompositeCondition] = load(file)
+    CONDITIONS: dict[str, CompositeCondition] = load(file)
 
 flexEd = ['3778']
 

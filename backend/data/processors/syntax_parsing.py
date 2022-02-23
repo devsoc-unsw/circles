@@ -1,8 +1,8 @@
 import re
 import sys 
-from data.utility import dataHelpers
+from data.utility import data_helpers
 
-CONDITIONS = dataHelpers.read_data("data/finalData/conditionsProcessed.json")
+CONDITIONS = data_helpers.read_data("data/final_data/conditionsProcessed.json")
 
 KNOWN_WORDS = {"&&", "||", "in"}
 
