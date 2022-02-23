@@ -182,3 +182,4 @@ def make_condition(tokens, first=False, course=None):
             return None, index
 
     return result, index
+
