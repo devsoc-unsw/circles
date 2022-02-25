@@ -19,6 +19,9 @@ const OptionsHeader = ({ plannerRef }) => {
   const unhideAll = () => {
     dispatch(plannerActions("UNHIDE_ALL_YEARS"));
   };
+  const unscheduleAll = () => {
+    dispatch(plannerActions("UNSCHEDULE_ALL"));
+  }
 
   return (
     <div className="optionsHeader">
@@ -65,7 +68,7 @@ const OptionsHeader = ({ plannerRef }) => {
       )}
 
       <Tooltip title="Unschedule all courses">
-        <button className="settingsButton">
+        <button className="settingsButton" onClick={unscheduleAll}>
           <FaRegCalendarTimes size="1.5em" className="settingsIcon" />
         </button>
       </Tooltip>
