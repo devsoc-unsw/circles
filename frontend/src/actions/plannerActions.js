@@ -79,6 +79,11 @@ export const plannerActions = (action, payload) => {
         type: action,
         payload: payload,
       };
+    case "UNSCHEDULE_ALL":
+      return {
+        type: action,
+        payload: payload,
+      };
     case "TOGGLE_SUMMER":
       return {
         type: action,
