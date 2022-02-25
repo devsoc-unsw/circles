@@ -38,6 +38,35 @@ if (planner) initialState = extractFromLocalStorage(planner);
 
 const plannerReducer = (state = initialState, action) => {
   let hidden, areYearsHidden;
+
+  const unscheduleCourse = (code) => {
+    let updatedUnplanned = state.unplanned;
+    updatedUnplanned.push(code);
+    const termTag = state.courses.get(code).plannedFor;
+
+    const yearI = parseInt(termTag.slice(0, 4)) - state.startYear;
+    const termI = termTag.slice(4);
+
+    const nTerm = new Object(
+      state.years[yearI][termI].filter((course) => course !== code)
+    );
+    const nYear = new Object(state.years[yearI]);
+    nYear[termI] = nTerm;
+    const nYears = new Object(state.years);
+    nYears[yearI] = nYear;
+
+    const nCourses = new Object(state.courses);
+    nCourses.get(code).plannedFor = null;
+    nCourses.get(code).warning = false;
+
+    stateCopy = {
+      ...state,
+      unplanned: updatedUnplanned,
+    };
+    setInLocalStorage(stateCopy);
+    return stateCopy;
+  };
+
   switch (action.type) {
     case "ADD_TO_UNPLANNED":
       const { courseCode, courseData } = action.payload;
@@ -165,31 +194,7 @@ const plannerReducer = (state = initialState, action) => {
       return stateCopy;
 
     case "UNSCHEDULE":
-      let updatedUnplanned = state.unplanned;
-      updatedUnplanned.push(action.payload);
-      const termTag = state.courses.get(action.payload).plannedFor;
-
-      const yearI = parseInt(termTag.slice(0, 4)) - state.startYear;
-      const termI = termTag.slice(4);
-
-      const nTerm = new Object(
-        state.years[yearI][termI].filter((course) => course !== action.payload)
-      );
-      const nYear = new Object(state.years[yearI]);
-      nYear[termI] = nTerm;
-      const nYears = new Object(state.years);
-      nYears[yearI] = nYear;
-
-      const nCourses = new Object(state.courses);
-      nCourses.get(action.payload).plannedFor = null;
-      nCourses.get(action.payload).warning = false;
-
-      stateCopy = {
-        ...state,
-        unplanned: updatedUnplanned,
-      };
-      setInLocalStorage(stateCopy);
-      return stateCopy;
+      return unscheduleCourse(action.payload);
 
     case "TOGGLE_SUMMER":
       stateCopy = { ...state, isSummerEnabled: !state.isSummerEnabled };
