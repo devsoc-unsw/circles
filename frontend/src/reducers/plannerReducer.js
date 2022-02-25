@@ -195,7 +195,15 @@ const plannerReducer = (state = initialState, action) => {
 
     case "UNSCHEDULE":
       return unscheduleCourse(action.payload);
-
+    
+    case "UNSCHEDULE_ALL":
+      state.courses.forEach( (desc, code) => {
+        if (desc.plannedFor !== null) {
+          stateCopy = unscheduleCourse(code);
+        }
+      });
+      return stateCopy;  
+    
     case "TOGGLE_SUMMER":
       stateCopy = { ...state, isSummerEnabled: !state.isSummerEnabled };
       setInLocalStorage(stateCopy);
