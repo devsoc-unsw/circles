@@ -1,82 +1,74 @@
 '''
 Contains the Conditions classes
 '''
+import abc
+from enum import Enum, auto
 import json
-from algorithms.objects.helper import is_course, is_program
 from algorithms.objects.categories import AnyCategory
 
-
 '''Keywords'''
-AND = 1
-OR = 2
+class Logic(Enum):
+    AND = auto()
+    OR = auto()
 
 '''CACHED'''
-# Load in cached exclusions
-CACHED_EXCLUSIONS_PATH = "./algorithms/cache/exclusions.json"
-with open(CACHED_EXCLUSIONS_PATH) as f:
-    CACHED_EXCLUSIONS = json.load(f)
-    f.close()
-
-CACHED_CONDITIONS_TOKENS_PATH = "./data/finalData/conditionsTokens.json"
+CACHED_CONDITIONS_TOKENS_PATH = "./data/final_data/conditionsTokens.json"
 with open(CACHED_CONDITIONS_TOKENS_PATH) as f:
     CACHED_CONDITIONS_TOKENS = json.load(f)
-    f.close()
 
 
 CACHED_PRGORAM_MAPPINGS_FILE = "./algorithms/cache/programMappings.json"
 with open(CACHED_PRGORAM_MAPPINGS_FILE) as f:
     CACHED_PRGORAM_MAPPINGS = json.load(f)
-    f.close()
 
-class CourseCondition():
+class Condition():
+    @abc.abstractmethod
+    def validate(self, user) -> tuple[bool, list[str]]:
+        '''
+        returns a tuple first containing whether or not the course is unlocked,
+        and second any warnings about the course's unlocked state - eg that the course
+        needs some wam that the student has not entered.
+        '''
+        pass
+
+class CourseCondition(Condition):
     '''Condition that the student has completed this course before the current term'''
 
     def __init__(self, course):
         self.course = course
 
-    def get_course(self):
-        return self.course
-
-    def validate(self, user):
-        '''Returns true if the user has taken this course before'''
-        return {
-            "result": user.has_taken_course(self.course),
-            "warnings": []
-        }
+    def validate(self, user) -> tuple[bool, list[str]]:
+        return user.has_taken_course(self.course), []
 
 
-class CoreqCoursesCondition():
+class CoreqCoursesCondition(Condition):
     """Condition that the student has completed the course/s in or before the current term"""
 
-    def __init__(self):
+    def __init__(self, logic: Logic=Logic.AND):
         # An example corequisite is [COMP1511 || COMP1521 || COMP1531]. The user
         # must have taken one of these courses either before or in the current term
-        self.courses = []
-        self.logic = AND # by default it'll be AND
-    
-    def add_course(self, course):
+        self.courses: list[str] = []
+        self.logic: Logic = logic
+
+    def add_course(self, course: str):
         self.courses.append(course)
 
-    def set_logic(self, logic):
+    def set_logic(self, logic: Logic):
         self.logic = logic
-    
-    def validate(self, user):
+
+    def validate(self, user) -> tuple[bool, list[str]]:
         """Returns true if the user is taking these courses in the same term"""
-        if self.logic == AND:
-            return { "result" : all(user.has_taken_course(course) or user.is_taking_course(course) for course in self.courses), "warnings": [] }
-        elif self.logic == OR:
-            return { "result": any(user.has_taken_course(course) or user.is_taking_course(course) for course in self.courses), "warnings": [] }
-        
-        # Error, logic should either be AND or OR 
-        # TODO: should this be included in warnings?
+        match self.logic:
+            case Logic.AND:
+                return all(user.has_taken_course(course) or user.is_taking_course(course) for course in self.courses), []
+            case Logic.OR:
+                return any(user.has_taken_course(course) or user.is_taking_course(course) for course in self.courses), []
+
         print("Conditions Error: validation was not of type AND or OR")
-        return {
-            "result": True,
-            "warnings": []
-        }
+        return True, []
 
 
-class UOCCondition():
+class UOCCondition(Condition):
     '''UOC conditions such as "24UOC in COMP"'''
 
     def __init__(self, uoc):
@@ -95,13 +87,10 @@ class UOCCondition():
     def set_category(self, category_classobj):
         self.category = category_classobj
 
-    def validate(self, user):
-            return {
-                "result" : user.uoc(self.category) >= self.uoc,
-                "warnings": []
-            }
+    def validate(self, user) -> tuple[bool, list[str]]:
+            return user.uoc(self.category) >= self.uoc, []
 
-class WAMCondition():
+class WAMCondition(Condition):
     '''Handles WAM conditions such as 65WAM and 80WAM in'''
 
     def __init__(self, wam):
@@ -118,17 +107,14 @@ class WAMCondition():
     def set_category(self, category_classobj):
         self.category = category_classobj
 
-    def validate(self, user):
+    def validate(self, user) -> tuple[bool, list[str]]:
         '''
         Determines if the user has met the WAM condition for this category.
 
         Will always return True and a warning since WAM can fluctuate
         '''
         warning = self.get_warning(user.wam(self.category))
-        if warning == None:
-            return {"result" : True, "warnings": []}
-        else:
-            return {"result": True, "warnings": [warning]}
+        return True, [warning] if warning else []
 
     def get_warning(self, applicable_wam):
         '''Returns an appropriate warning message or None if not needed'''
@@ -147,7 +133,7 @@ class WAMCondition():
             else:
                 return f"Requires {self.wam} WAM in {self.category}. Your WAM in {self.category} is currently {applicable_wam:.3f}"
 
-class GRADECondition():
+class GRADECondition(Condition):
     '''Handles GRADE conditions such as 65GRADE and 80GRADE in [A-Z]{4}[0-9]{4}'''
 
     def __init__(self, grade, course):
@@ -156,41 +142,31 @@ class GRADECondition():
         # Course code
         self.course = course
 
-    def validate(self, user):
-        '''
-        Determines if the user has met the GRADE condition for this course.\n
-        Not taken the course - Return False\n
-        Taken the course but no mark provided - Return True and add warning\n
-        Taken the course but mark too low - Return False\n
-        Taken the course and sufficient mark - Return True\n
-        '''
+    def validate(self, user) -> tuple[bool, list[str]]:
         if self.course not in user.courses:
-            return { "result": False, "warnings": [] }
+            return False, []
 
         user_grade = user.get_grade(self.course)
         if user_grade == None:
-            return { "result" : True, "warnings": [self.get_warning()] }
+            return True, [self.get_warning()]
         elif user_grade < self.grade:
-            return { "result": False, "warnings": [] }
+            return False, []
         else:
-            return { "result": True, "warnings": [] }
+            return True, []
 
     def get_warning(self):
         return f"Requires {self.grade} mark in {self.course}. Your mark has not been recorded"
 
-class ProgramCondition():
+class ProgramCondition(Condition):
     '''Handles Program conditions such as 3707'''
 
     def __init__(self, program):
         self.program = program
 
-    def validate(self, user):
-        return {
-            "result": user.in_program(self.program),
-            "warnings": []
-        }
+    def validate(self, user) -> tuple[bool, list[str]]:
+        return user.in_program(self.program), []
 
-class ProgramTypeCondition():
+class ProgramTypeCondition(Condition):
     '''
     Handles program type conditions, which specify that your program has to be some collection of programs.\n
     for example - be enrolled in Actuarial studies implies that your program must be any one of a few programs (actl + double degree codes).\n
@@ -198,109 +174,54 @@ class ProgramTypeCondition():
     def __init__(self, programType):
         self.programType = programType
     
-    def validate(self, user):
-        return {
-            "result": user.program in CACHED_PRGORAM_MAPPINGS[self.programType],
-            "warnings": []
-        }
+    def validate(self, user) -> tuple[bool, list[str]]:
+        return user.program in CACHED_PRGORAM_MAPPINGS[self.programType], []
 
-class SpecialisationCondition():
+class SpecialisationCondition(Condition):
     '''Handles Specialisation conditions such as COMPA1'''
 
     def __init__(self, specialisation):
         self.specialisation = specialisation
 
-    def validate(self, user):
-        return {
-            "result": user.in_specialisation(self.specialisation),
-            "warnings": [] 
-        }
+    def validate(self, user) -> tuple[bool, list[str]]:
+        return user.in_specialisation(self.specialisation), []
 
+class CourseExclusionCondition(Condition):
+    ''' Handles when you cant take a certain course. Eg Exclusion: MATH1131 for MATH1141'''
+    def __init__(self, exclusion):
+        self.exclusion = exclusion
+    def validate(self, user) -> tuple[bool, list[str]]:
+        return not user.has_taken_course(self.exclusion), []
 
-class CompositeCondition():
+class ProgramExclusionCondition(Condition):
+    ''' Handles when you cant be in a program to take a course, such as taking a genEd course in your own faculty'''
+    def __init__(self, exclusion):
+        self.exclusion = exclusion
+    def validate(self, user) -> tuple[bool, list[str]]:
+        return not user.in_program(self.exclusion), []
+
+class CompositeCondition(Condition):
     '''Handles AND/OR clauses comprised of condition objects.'''
 
-    def __init__(self, logic=AND):
-        # NOTE: By default, logic should be OR. This will ensure that empty conditions
-        # evaluate as True due to the way we implement validate
-        self.conditions = []
+    def __init__(self, logic: Logic = Logic.AND):
+        self.conditions: list[Condition] = []
         self.logic = logic
 
-    def add_condition(self, condition_classobj):
+    def add_condition(self, condition_classobj: Condition):
         '''Adds a condition object'''
         self.conditions.append(condition_classobj)
 
-    def set_logic(self, logic):
+    def set_logic(self, logic: Logic):
         '''AND or OR'''
         self.logic = logic
 
-    def validate(self, user):
-        '''A helper function to be called by is_unlocked. The purpose of separating
-        them is for easy warning implementation'''
-        # Ensure we add all the warnings. 
-        # NOTE: Remember that warnings are only returned
-        # along with True by validate() method. In other words, checking a warning 
-        # is != None is the equivalent of checking that validate() returned True
-        warnings = []
-        
+    def validate(self, user) -> tuple[bool, list[str]]:
         if self.conditions == []:
-            # Empty condition returns True by default
-            return { "result" : True, "warnings": []}
-        
-        if self.logic == AND:
-            satisfied = True
-        else:
-            satisfied = False
+            return True, []
 
-        for cond in self.conditions:
-            unlocked = cond.validate(user)["result"]
-            warnings.extend(cond.validate(user)["warnings"])
+        validations = [cond.validate(user) for cond in self.conditions]
+        # unzips a zipped list - https://www.geeksforgeeks.org/python-unzip-a-list-of-tuples/
+        unlocked, warnings = list(zip(*validations))
+        satisfied = all(unlocked) if self.logic == Logic.AND else any(unlocked)
 
-            if self.logic == AND:
-                satisfied = satisfied and unlocked
-            else:
-                satisfied = satisfied or unlocked
-
-        return {
-            "result": satisfied,
-            "warnings": warnings 
-        }
-
-
-class FirstCompositeCondition(CompositeCondition):
-    '''The highest level composite condition (the outermost one). This is given
-    special treatment as this is the "entry point" to our algorithm'''
-    def __init__(self, course=None, logic=AND):
-        # The course which this condition applies to. Default value is None for testing purposes
-        self.course = course 
-        super().__init__()
-
-    def is_unlocked(self, user) -> dict:
-        '''The highest level check which returns the result and a warning. Call this
-        with the appropriate user data to determine if a course is unlocked or not.
-        Will return an object containing the result and a list of warnings'''
-        warnings = []
-
-        if self.course is not None:
-            result = {
-                "result": False,
-                "warnings": warnings
-            }
-            for exclusion in CACHED_EXCLUSIONS[self.course].keys():
-
-                if is_course(exclusion) and user.has_taken_course(exclusion):
-                    return result
-                elif is_program(exclusion) and user.in_program(exclusion):
-                    return result
-                else:
-                    # Not able to parse this type of  exclusion
-                    continue
-
-        unlocked = self.validate(user)["result"]
-        warnings.extend(self.validate(user)["warnings"])
-
-        return {
-            "result": unlocked,
-            "warnings": warnings
-        }
-
+        return satisfied, sum(warnings, []) # warnings are flattened

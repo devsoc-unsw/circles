@@ -15,14 +15,14 @@ To then run this file:
     python3 -m data.processors.manualFixes.INFSFixes
 """
 
-from data.utility import dataHelpers
+from data.utility import data_helpers
 
 # Reads conditionsProcessed dictionary into 'CONDITIONS'
-CONDITIONS = dataHelpers.read_data("data/finalData/conditionsProcessed.json")
+CONDITIONS = data_helpers.read_data("data/final_data/conditionsProcessed.json")
 PROCESSED = "processed"
 
 # Reads coursesProcessed dictionary into 'COURSES' (for updating exclusions)
-COURSES = dataHelpers.read_data("data/finalData/coursesProcessed.json")
+COURSES = data_helpers.read_data("data/final_data/coursesProcessed.json")
 
 def fix_conditions():
     """ Functions to apply manual fixes """
@@ -52,9 +52,9 @@ def fix_conditions():
     
 
     # Updates the files with the modified dictionaries
-    dataHelpers.write_data(
-        CONDITIONS, "data/finalData/conditionsProcessed.json")
-    dataHelpers.write_data(COURSES, "data/finalData/coursesProcessed.json")
+    data_helpers.write_data(
+        CONDITIONS, "data/final_data/conditionsProcessed.json")
+    data_helpers.write_data(COURSES, "data/final_data/coursesProcessed.json")
 
 
 # PROBLEM FUNCTION

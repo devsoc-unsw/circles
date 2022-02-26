@@ -6,7 +6,7 @@ import pickle
 import json
 from algorithms.create import create_condition
 # Load in all the courses and their conditions list
-ALL_CONDITION_TOKENS_FILE = "./data/finalData/conditionsTokens.json"
+ALL_CONDITION_TOKENS_FILE = "./data/final_data/conditionsTokens.json"
 PICKLE_FILE = "./algorithms/conditions.pkl"
 
 with open(ALL_CONDITION_TOKENS_FILE) as f:

@@ -12,12 +12,12 @@ To then run this file:
     python3 -m data.processors.manualFixes.SENGFixes
 """
 
-from data.utility import dataHelpers
+from data.utility import data_helpers
 
-CONDITIONS = dataHelpers.read_data("data/finalData/conditionsProcessed.json")
+CONDITIONS = data_helpers.read_data("data/final_data/conditionsProcessed.json")
 PROCESSED = "processed"
 
-COURSES = dataHelpers.read_data("data/finalData/coursesProcessed.json")
+COURSES = data_helpers.read_data("data/final_data/coursesProcessed.json")
 
 def fix_conditions():
     """ Functions to apply manual fixes """
@@ -28,9 +28,9 @@ def fix_conditions():
     CONDITIONS["SENG3992"] = SENG_3992(CONDITIONS["SENG3992"])
     CONDITIONS["SENG4920"][PROCESSED] = SENG_4920()
 
-    dataHelpers.write_data(
-        CONDITIONS, "data/finalData/conditionsProcessed.json")
-    dataHelpers.write_data(COURSES, "data/finalData/coursesProcessed.json")
+    data_helpers.write_data(
+        CONDITIONS, "data/final_data/conditionsProcessed.json")
+    data_helpers.write_data(COURSES, "data/final_data/coursesProcessed.json")
 
 
 def SENG_2021():
