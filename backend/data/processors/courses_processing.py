@@ -7,6 +7,7 @@ Step in the course data's journey:
 
 import re
 from data.utility import data_helpers
+from server.server import courses
 
 # Fields to keep in the processed file without modification from coursesFormattedRaw.json
 KEEP_UNEDITED = ["title", "code", "UOC", "level", "description", "study_level",
@@ -123,7 +124,8 @@ def process_enrolment_path(processed: dict, formatted: dict, data: dict) -> None
             if "path_to" not in data[prereq]:
                 # Set up dict if not yet added
                 data[prereq]["path_to"] = dict()
-            data[prereq]["path_to"][processed["code"]] = 1
+            # data[prereq]["path_to"][processed["code"]] = 1
+            data[prereq]["path_to"] = courses.coursesUnlockedWhenTaken(prereq)
         else:
             # prereq not in data and is therefore absent from undergrad handbook
             ABSENT_COURSES[prereq] = 1

@@ -188,7 +188,7 @@ def coursesUnlockedWhenTaken(userData: UserData, courseToBeTaken: str):
     ## initial state
     courses_initially_unlocked = getAllUnlocked(userData)
     
-    ## add course to the user, assume grade of 75
+    ## add course to the user
     courseToAdd = {courseToBeTaken: (getCourse(courseToBeTaken), None)}
     user.add_courses(courseToAdd)
     
