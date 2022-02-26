@@ -150,11 +150,7 @@ export default function CourseDescription() {
               </Title>
               <Space direction="vertical" style={{ marginBottom: "1rem" }}>
                 <Text>
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: course.raw_requirements,
-                    }}
-                  />
+                  {course.raw_requirements || 'None'}
                 </Text>
               </Space>
               <Title level={4} className="text">
@@ -163,7 +159,7 @@ export default function CourseDescription() {
               {course.path_from && Object.keys(course.path_from).length > 0 ? (
                 <div className={"text course-tag-cont"}>
                   {Object.keys(course.path_from).map((courseCode) => (
-                    <CourseTag name={courseCode} />
+                    <CourseTag key={courseCode} name={courseCode} />
                   ))}
                 </div>
               ) : (
