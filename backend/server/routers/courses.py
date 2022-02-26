@@ -178,3 +178,35 @@ def unselectCourse(userData: UserData, lockedCourses: list, unselectedCourse: st
     affectedCourses = User(fixUserData(userData.dict())).unselect_course(unselectedCourse, lockedCourses)
 
     return {'affected_courses': affectedCourses}
+
+def coursesUnlockedWhenTaken(userData: UserData, courseToBeTaken: str):
+    """ Returns all courses which are unlocked when given course is taken """
+    
+    ## define the user object with user data
+    user = User(fixUserData(userData.dict()))
+    
+    ## initial state
+    courses_initially_unlocked = getAllUnlocked(userData)
+    
+    ## add course to the user, assume grade of 75
+    courseToAdd = {courseToBeTaken: (getCourse(courseToBeTaken), None)}
+    user.add_courses(courseToAdd)
+    
+    ## final state
+    courses_now_unlocked = getAllUnlocked(user.get_user_data())
+    
+    ## compare 
+    before = []
+    after = []
+    course_keys = list(courses_initially_unlocked.keys())
+    for course in course_keys:
+        if courses_initially_unlocked[course]['is_unlocked']:
+            before.append(course)
+    course_keys = list(courses_now_unlocked.keys())
+    for course in course_keys:
+        if courses_now_unlocked[course]['is_unlocked']:
+            after.append(course)
+    
+    return {
+        "courses_unlocked_when_taken" : sorted([i for i in before + after if i not in before or i not in after])
+    }
