@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Tag, Alert, Typography, Space } from "antd";
+import { Button, Tag, Alert, Typography, Space, Menu, Dropdown } from "antd";
 import { PlusOutlined, StopOutlined } from "@ant-design/icons";
 import { CourseTag } from "../../../components/courseTag/CourseTag";
 import { getCourseById } from "./../courseProvider";
@@ -21,6 +21,7 @@ const CourseAttribute = ({ title, content }) => {
     </div>
   );
 };
+
 export default function CourseDescription() {
   const dispatch = useDispatch();
   const { active, tabs } = useSelector((state) => state.tabs);
@@ -45,12 +46,12 @@ export default function CourseDescription() {
   if (tabs.length === 0) return <div></div>;
   if (id === "explore") return <div>This is the explore page</div>;
   if (id === "search") return <SearchCourse />;
-  const addToPlanner = () => {
+  const addToPlanner = (type) => {
     const data = {
       courseCode: course.code,
       courseData: {
         title: course.title,
-        type: "Uncategorised", // TODO: add type
+        type, // TODO: add type
         termsOffered: course.terms,
         UOC: course.UOC,
         plannedFor: null,
@@ -82,6 +83,18 @@ export default function CourseDescription() {
       setShow(false);
     }, 4000);
   };
+
+  const PlannerDropdown = (
+    <Menu>
+      <Menu.Item onClick={() => {addToPlanner("General Education")}}>
+        Add as Gen-Ed
+      </Menu.Item>
+      <Menu.Item onClick={() => {addToPlanner("Free Elective")}}>
+        Add as Free Elective
+      </Menu.Item>
+    </Menu>
+  );
+  
 
   return (
     <div>
@@ -125,14 +138,15 @@ export default function CourseDescription() {
                     Remove from planner
                   </Button>
                 ) : (
-                  <Button
-                    type="primary"
+                  <Dropdown.Button
+                    overlay={PlannerDropdown}
                     loading={loading}
-                    onClick={addToPlanner}
-                    icon={<PlusOutlined />}
+                    onClick={() => {addToPlanner("Uncategorised")}}
+                    type="primary"
                   >
+                    <PlusOutlined />
                     Add to planner
-                  </Button>
+                  </Dropdown.Button>
                 )}
               </div>
               <Title level={4} className="text">
