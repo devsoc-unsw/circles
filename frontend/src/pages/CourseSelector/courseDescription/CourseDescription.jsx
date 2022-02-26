@@ -150,7 +150,9 @@ export default function CourseDescription() {
               </Title>
               <Space direction="vertical" style={{ marginBottom: "1rem" }}>
                 <Text>
-                  {course.raw_requirements || 'None'}
+                  <div
+                    dangerouslySetInnerHTML={{ __html: course.raw_requirements || 'None' }}
+                  />
                 </Text>
               </Space>
               <Title level={4} className="text">
