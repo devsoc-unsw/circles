@@ -100,7 +100,7 @@ class User:
 
         # Load all the necessary conditions
         cached_conditions = {
-            course : create_condition(CACHED_CONDITIONS_TOKENS[course], course)
+            course : create_condition(CACHED_CONDITIONS_TOKENS[course]["condition"], course)
             for course in self.courses if not course in locked
         }
 
