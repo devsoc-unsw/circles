@@ -129,7 +129,7 @@ def getAllUnlocked(userData: UserData):
         coursesState[course] = {
             "is_accurate": bool(condition),
             "unlocked": result,
-            "handbook_note": CACHED_HANDBOOK_NOTE[course] if course in CACHED_HANDBOOK_NOTE.keys() else "", 
+            "handbook_note": CACHED_HANDBOOK_NOTE.get(course, ""),
             "warnings": warnings
         }
 
