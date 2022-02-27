@@ -15,8 +15,7 @@ Step in the data's journey:
 """
 
 import re
-from typing import List, Iterable, Union, Optional
-from data.utility import dataHelpers
+from data.utility import data_helpers
 
 # TODO: add more specialisations as we expand scope of Circles
 TEST_SPNS = ["COMPA1", "COMPAH", "COMPBH", "SENGAH", "COMPD1", "COMPD1",
@@ -24,13 +23,13 @@ TEST_SPNS = ["COMPA1", "COMPAH", "COMPBH", "SENGAH", "COMPD1", "COMPD1",
              "COMPZ1", "ACCTA2", "FINSA2", "INFSA2", "MARKA2", "MATHC2",
              "PSYCM2"]
 
-CODE_MAPPING = dataHelpers.read_data(
+CODE_MAPPING = data_helpers.read_data(
     "data/utility/programCodeMappings.json")["title_to_code"]
 
 
 def customise_spn_data():
 
-    data = dataHelpers.read_data(
+    data = data_helpers.read_data(
         "data/scrapers/specialisationsFormattedRaw.json")
 
     customised_data = {}  # Dictionary for all customised data
@@ -83,8 +82,8 @@ def customise_spn_data():
         customised_data[spn]["curriculum"] = curriculum
         print("Processing complete :)\n")
 
-    dataHelpers.write_data(
-        customised_data, "data/finalData/specialisationsProcessed.json")
+    data_helpers.write_data(
+        customised_data, "data/final_data/specialisationsProcessed.json")
 
 
 def get_constraint(constraint_data: dict) -> dict:
@@ -141,7 +140,7 @@ def is_core(title: str) -> bool:
     return False
 
 
-def get_levels(title: str) -> List[int]:
+def get_levels(title: str) -> list[int]:
     """
     Parses 'title' to get curriculum levels of specialisation item.
     Level can be any combination of {1, 2, 3, 4, 5, 6, 7, 8, 9}.
@@ -222,7 +221,7 @@ def get_one_of_courses(container_courses: dict[str, str], curriculum_courses: di
     curriculum_courses[one_of_courses] = list(container_courses.values())
 
 
-def get_courses(curriculum_courses: dict, container_courses: List[str],
+def get_courses(curriculum_courses: dict, container_courses: list[str],
                 description: str) -> None:
     """ 
     Adds courses from container to the customised curriculum course dict.

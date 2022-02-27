@@ -11,7 +11,7 @@ Step in the data's journey:
 import requests
 import json
 
-from data.utility import dataHelpers
+from data.utility import data_helpers
 from data.config import LIVE_YEAR
 
 TOTAL_SPNS = 1000
@@ -122,7 +122,7 @@ def scrape_spn_data():
 
     r = requests.post(url, data=json.dumps(PAYLOAD), headers=headers)
 
-    dataHelpers.write_data(
+    data_helpers.write_data(
         r.json()["contentlets"], 'data/scrapers/specialisationsPureRaw.json')
 
 

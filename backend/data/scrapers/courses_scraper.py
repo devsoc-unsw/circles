@@ -10,9 +10,8 @@ Step in the data's journey:
 
 import requests
 import json
-from datetime import date
 
-from data.utility import dataHelpers
+from data.utility import data_helpers
 from data.config import LIVE_YEAR
 
 TOTAL_COURSES = 10000
@@ -100,15 +99,15 @@ Retrieves data for all undergraduate courses
 '''
 
 
-def scrape_courses():
+def scrape_course_data():
     url = "https://www.handbook.unsw.edu.au/api/es/search"
     headers = {
         "content-type": "application/json",
     }
     r = requests.post(url, data=json.dumps(PAYLOAD), headers=headers)
-    dataHelpers.write_data(
+    data_helpers.write_data(
         r.json()["contentlets"], "data/scrapers/coursesPureRaw.json")
 
 
 if __name__ == "__main__":
-    scrape_courses()
+    scrape_course_data()
