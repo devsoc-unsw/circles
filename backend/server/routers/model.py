@@ -1,6 +1,7 @@
 from typing import Optional
 from pydantic import BaseModel
 from pickle import load
+import json
 
 from algorithms.objects.conditions import CompositeCondition 
 
@@ -78,6 +79,9 @@ minorInSpecialisation = ['3502', '3970']
 CONDITIONS_PATH = "algorithms/conditions.pkl"
 with open(CONDITIONS_PATH, "rb") as file:
     CONDITIONS: dict[str, CompositeCondition] = load(file)
+
+with open("algorithms/cache/handbook_note.json", "r") as file:
+    CACHED_HANDBOOK_NOTE: dict[str, str] = json.load(file)
 
 flexEd = ['3778']
 
