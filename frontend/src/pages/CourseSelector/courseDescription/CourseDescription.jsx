@@ -51,7 +51,7 @@ export default function CourseDescription() {
       courseCode: course.code,
       courseData: {
         title: course.title,
-        type, // TODO: add type
+        type,
         termsOffered: course.terms,
         UOC: course.UOC,
         plannedFor: null,
@@ -89,7 +89,7 @@ export default function CourseDescription() {
       <Menu.Item onClick={() => {addToPlanner("General Education")}}>
         Add as Gen-Ed
       </Menu.Item>
-      <Menu.Item onClick={() => {addToPlanner("Free Elective")}}>
+      <Menu.Item onClick={() => {addToPlanner("Flexible Education")}}>
         Add as Free Elective
       </Menu.Item>
     </Menu>
@@ -165,9 +165,7 @@ export default function CourseDescription() {
               <Space direction="vertical" style={{ marginBottom: "1rem" }}>
                 <Text>
                   <div
-                    dangerouslySetInnerHTML={{
-                      __html: course.raw_requirements,
-                    }}
+                    dangerouslySetInnerHTML={{ __html: course.raw_requirements || 'None' }}
                   />
                 </Text>
               </Space>
@@ -177,7 +175,7 @@ export default function CourseDescription() {
               {course.path_from && Object.keys(course.path_from).length > 0 ? (
                 <div className={"text course-tag-cont"}>
                   {Object.keys(course.path_from).map((courseCode) => (
-                    <CourseTag name={courseCode} />
+                    <CourseTag key={courseCode} name={courseCode} />
                   ))}
                 </div>
               ) : (
