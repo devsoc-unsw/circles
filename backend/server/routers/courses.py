@@ -179,7 +179,20 @@ def unselectCourse(userData: UserData, lockedCourses: list, unselectedCourse: st
 
     return {'affected_courses': affectedCourses}
 
-@router.post("/coursesUnlockedWhenTaken/{courseToBeTaken}")
+@router.post("/coursesUnlockedWhenTaken/{courseToBeTaken}",response_model=CoursesState,
+            responses={
+                400: {"model": message, "description": "Uh oh you broke me"},
+                200: {
+                    "description": "Returns the courses which are unlocked when this course is taken",
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                "COMP1511": ["COMP1521"]
+                            }
+                        }
+                    }
+                }
+            })
 def coursesUnlockedWhenTaken(userData: UserData, courseToBeTaken: str):
     """ Returns all courses which are unlocked when given course is taken """
     
@@ -199,6 +212,7 @@ def coursesUnlockedWhenTaken(userData: UserData, courseToBeTaken: str):
     ## compare 
     before = [course for course in list(courses_initially_unlocked.keys()) if courses_initially_unlocked[course]['is_unlocked']]
     after = [course for course in list(courses_now_unlocked.keys()) if courses_now_unlocked[course]['is_unlocked']]
+    
     return {
         "courses_unlocked_when_taken" : list(set(before + after))
     }
