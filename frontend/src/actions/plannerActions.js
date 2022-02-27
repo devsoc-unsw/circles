@@ -55,10 +55,6 @@ export const plannerActions = (action, payload) => {
         type: "SET_YEARS",
         payload: payload,
       };
-    case "SET_START_YEAR":
-      return {
-        type: "SET_START_YEAR",
-      };
     case "TOGGLE_WARNINGS":
       return {
         type: action,
