@@ -23,6 +23,7 @@ def tokenise_conditions():
 
     for code, condition in data.items():
         text = condition["processed"]
+        handbook_note = condition["handbook_note"] if "handbook_note" in condition.keys() else ""
 
         # There are many words with (abcdefgh) where the brackets are attached
         # too tightly to the word. We first want to separate them like so:
@@ -41,7 +42,10 @@ def tokenise_conditions():
 
         logic.append(")")
 
-        PARSED_LOGIC[code] = logic
+        PARSED_LOGIC[code] = { 
+            "condition": logic, 
+            "handbook_note": handbook_note
+        }
 
     data_helpers.write_data(
         PARSED_LOGIC, "data/final_data/conditionsTokens.json")

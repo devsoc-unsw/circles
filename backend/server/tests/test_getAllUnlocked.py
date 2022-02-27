@@ -20,8 +20,10 @@ def test_fix_wam_only_unlock_given_course():
   assert x.json()["courses_state"]["COMP1521"]["unlocked"] == True
   assert x.json()["courses_state"]["COMP1521"]["is_accurate"] == True
 
+
 def test_unlock_dependant_course():
   x = requests.post('http://127.0.0.1:8000/courses/getAllUnlocked', json=USERS["user2"])
   assert x.status_code != 500
   assert x.json()["courses_state"]["MATH1231"]["unlocked"] == True
   assert x.json()["courses_state"]["MATH1231"]["is_accurate"] == True
+  assert "final term" in x.json()["courses_state"]["COMP9302"]["handbook_note"]
