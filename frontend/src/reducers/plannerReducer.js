@@ -47,15 +47,13 @@ const plannerReducer = (state = initialState, action) => {
     const yearI = parseInt(termTag.slice(0, 4)) - state.startYear;
     const termI = termTag.slice(4);
 
-    const nTerm = new Object(
-      state.years[yearI][termI].filter((course) => course !== code)
-    );
-    const nYear = new Object(state.years[yearI]);
+    const nTerm = state.years[yearI][termI].filter((course) => course !== code);
+    const nYear = state.years[yearI];
     nYear[termI] = nTerm;
-    const nYears = new Object(state.years);
+    const nYears = state.years;
     nYears[yearI] = nYear;
 
-    const nCourses = new Object(state.courses);
+    const nCourses = state.courses;
     nCourses.get(code).plannedFor = null;
     nCourses.get(code).warning = false;
 
@@ -148,9 +146,9 @@ const plannerReducer = (state = initialState, action) => {
         const newTerm = state.years[yearIndex][term].filter(
           (course) => course !== action.payload
         );
-        const newYear = new Object(state.years[yearIndex]);
+        const newYear = state.years[yearIndex];
         newYear[term] = newTerm;
-        const newYears = new Object(state.years);
+        const newYears = state.years;
         newYears[yearIndex] = newYear;
         stateCopy = {
           ...state,
@@ -264,7 +262,7 @@ const plannerReducer = (state = initialState, action) => {
 
     case "SET_DEGREE_LENGTH":
       const newNumYears = action.payload;
-      let dupYears = new Object(state.years);
+      let dupYears = state.years;
       let newUnplan = [...state.unplanned];
 
       if (newNumYears === state.numYears) return state;
