@@ -15,10 +15,7 @@ with open(ALL_CONDITION_TOKENS_FILE) as f:
 ALL_OBJECTS = {}
 def cache_conditions_pkl_file():
     for course, tokens in ALL_CONDITIONS_TOKENS.items():
-        ALL_OBJECTS[course] = {
-            "handbook_note": tokens["handbook_note"],
-            "condition": create_condition(tokens["condition"], course)
-        }
+        ALL_OBJECTS[course] = create_condition(tokens, course)
 
     with open(PICKLE_FILE, "wb") as outp:
         pickle.dump(ALL_OBJECTS, outp, pickle.HIGHEST_PROTOCOL)
