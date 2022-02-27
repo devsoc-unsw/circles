@@ -179,6 +179,7 @@ def unselectCourse(userData: UserData, lockedCourses: list, unselectedCourse: st
 
     return {'affected_courses': affectedCourses}
 
+@router.post("/coursesUnlockedWhenTaken/{courseToBeTaken}")
 def coursesUnlockedWhenTaken(userData: UserData, courseToBeTaken: str):
     """ Returns all courses which are unlocked when given course is taken """
     
@@ -189,24 +190,15 @@ def coursesUnlockedWhenTaken(userData: UserData, courseToBeTaken: str):
     courses_initially_unlocked = getAllUnlocked(userData)
     
     ## add course to the user
-    courseToAdd = {courseToBeTaken: (getCourse(courseToBeTaken), None)}
+    courseToAdd = {courseToBeTaken: [getCourse(courseToBeTaken)['UOC'], None]}
     user.add_courses(courseToAdd)
     
     ## final state
     courses_now_unlocked = getAllUnlocked(user.get_user_data())
     
     ## compare 
-    before = []
-    after = []
-    course_keys = list(courses_initially_unlocked.keys())
-    for course in course_keys:
-        if courses_initially_unlocked[course]['is_unlocked']:
-            before.append(course)
-    course_keys = list(courses_now_unlocked.keys())
-    for course in course_keys:
-        if courses_now_unlocked[course]['is_unlocked']:
-            after.append(course)
-    
+    before = [course for course in list(courses_initially_unlocked.keys()) if courses_initially_unlocked[course]['is_unlocked']]
+    after = [course for course in list(courses_now_unlocked.keys()) if courses_now_unlocked[course]['is_unlocked']]
     return {
-        "courses_unlocked_when_taken" : sorted([i for i in before + after if i not in before or i not in after])
+        "courses_unlocked_when_taken" : list(set(before + after))
     }

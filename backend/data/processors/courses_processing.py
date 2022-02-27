@@ -124,8 +124,7 @@ def process_enrolment_path(processed: dict, formatted: dict, data: dict) -> None
             if "path_to" not in data[prereq]:
                 # Set up dict if not yet added
                 data[prereq]["path_to"] = dict()
-            # data[prereq]["path_to"][processed["code"]] = 1
-            data[prereq]["path_to"] = courses.coursesUnlockedWhenTaken(prereq)
+            data[prereq]["path_to"][processed["code"]] = 1
         else:
             # prereq not in data and is therefore absent from undergrad handbook
             ABSENT_COURSES[prereq] = 1

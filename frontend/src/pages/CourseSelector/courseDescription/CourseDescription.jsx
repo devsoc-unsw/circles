@@ -7,8 +7,9 @@ import { getCourseById } from "./../courseProvider";
 import SearchCourse from "../SearchCourse";
 import { plannerActions } from "../../../actions/plannerActions";
 import { Loading } from "./Loading";
-import { selectCourse } from "../../../actions/coursesActions";
+import { selectCourse, setCourses } from "../../../actions/coursesActions";
 import "./courseDescription.less";
+import axios from "axios";
 
 const { Title, Text } = Typography;
 const CourseAttribute = ({ title, content }) => {
@@ -33,11 +34,25 @@ export default function CourseDescription() {
   const [show, setShow] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [pageLoaded, setpageLoaded] = React.useState(false);
+  const [coursesPathTo, setCoursesPathTo] = React.useState({});
+
+  const getPathToCoursesById = (id) => {
+    return (dispatch) => {
+      axios ({
+        method: "get",
+        url: `http://localhost:8000/courses/coursesUnlockedWhenTaken/${id}`
+      })
+        .then(({data}) => {
+            setCoursesPathTo(data)
+        })
+        .catch((err) => console.log(err));
+    };
+  };
 
   React.useEffect(() => {
     if (id === "explore" || id === "search") return;
     dispatch(getCourseById(id));
-
+    getPathToCoursesById(id);
     setTimeout(() => {
       setpageLoaded(true);
     }, 2000);
@@ -184,8 +199,8 @@ export default function CourseDescription() {
               <Title level={4} className="text">
                 Unlocks these next courses
               </Title>
-              {course.path_to && Object.keys(course.path_to).length > 0 ? (
-                Object.keys(course.path_to).map((courseCode) => (
+              {coursesPathTo && Object.values(coursesPathTo).length > 0 ? (
+                Object.values(coursesPathTo).map((courseCode) => (
                   <CourseTag key={courseCode} name={courseCode} />
                 ))
               ) : (
