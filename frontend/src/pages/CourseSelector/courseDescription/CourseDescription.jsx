@@ -8,6 +8,7 @@ import SearchCourse from "../SearchCourse";
 import { plannerActions } from "../../../actions/plannerActions";
 import { Loading } from "./Loading";
 import "./courseDescription.less";
+import { prepareUserPayload } from "../helper";
 import axios from "axios";
 
 const { Title, Text } = Typography;
@@ -30,22 +31,28 @@ export default function CourseDescription() {
   const course = useSelector((state) => state.courses.course);
   const coursesInPlanner = useSelector((state) => state.planner.courses);
   const courseInPlanner = coursesInPlanner.has(id);
+  const planner = useSelector((state) => state.planner);
+  const degree = useSelector((state) => state.degree);
   const [show, setShow] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [pageLoaded, setpageLoaded] = React.useState(false);
   const [coursesPathTo, setCoursesPathTo] = React.useState({});
 
-  const getPathToCoursesById = (id) => {
-    return (dispatch) => {
-      axios ({
-        method: "get",
-        url: `http://localhost:8000/courses/coursesUnlockedWhenTaken/${id}`
-      })
-        .then(({data}) => {
-            setCoursesPathTo(data)
-        })
-        .catch((err) => console.log(err));
-    };
+const getPathToCoursesById = async (id) => {
+  try {
+    const res = await axios.post(
+      `http://localhost:8000/courses/coursesUnlockedWhenTaken/${id}`,
+      JSON.stringify(prepareUserPayload(degree, planner)),
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+    );
+    dispatch(setCoursesPathTo(res.data.courses_unlocked_when_taken));
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   React.useEffect(() => {
