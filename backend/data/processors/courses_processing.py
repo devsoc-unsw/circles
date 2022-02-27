@@ -7,7 +7,6 @@ Step in the course data's journey:
 
 import re
 from data.utility import data_helpers
-from server.server import courses
 
 # Fields to keep in the processed file without modification from coursesFormattedRaw.json
 KEEP_UNEDITED = ["title", "code", "UOC", "level", "description", "study_level",

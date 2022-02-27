@@ -7,7 +7,6 @@ import { getCourseById } from "./../courseProvider";
 import SearchCourse from "../SearchCourse";
 import { plannerActions } from "../../../actions/plannerActions";
 import { Loading } from "./Loading";
-import { selectCourse, setCourses } from "../../../actions/coursesActions";
 import "./courseDescription.less";
 import axios from "axios";
 
