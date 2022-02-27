@@ -26,14 +26,16 @@ def log_broken_conditions():
     for course, tokens in all_tokens.items():
         # Use make_condition instead of create_condition since it gives us more
         # information on the index
-        res = make_condition(tokens, True)
+        print(course)
+        print(tokens)
+        res = make_condition(tokens["condition"], True)
         if res[0] == None:
             bad_index = res[1] + 1
             # Something went wrong with parsing this condition...
             output[course] = {
                 "condition": conditions[course],
-                "tokens": tokens,
-                "broke at": f"Index {bad_index}, {'exclusions' if bad_index == -1 else tokens[bad_index]}"
+                "tokens": tokens["condition"],
+                "broke at": f"Index {bad_index}, {'exclusions' if bad_index == -1 else tokens['condition'][bad_index]}"
             }
     
     with open(ERROR_OUTPUT_FILE, "w") as out:
