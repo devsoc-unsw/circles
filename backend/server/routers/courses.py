@@ -123,13 +123,13 @@ def getAllUnlocked(userData: UserData):
 
     coursesState = {}
     user = User(fixUserData(userData.dict()))
-    for course, value in CONDITIONS.items():
+    for course, condition in CONDITIONS.items():
         # Condition object exists for this course
-        result, warnings = value["condition"].validate(user) if value["condition"] else (True, [])
+        result, warnings = condition.validate(user) if condition else (True, [])
         coursesState[course] = {
-            "is_accurate": bool(value["condition"]),
+            "is_accurate": bool(condition),
             "unlocked": result,
-            "handbook_note": value["handbook_note"], # TODO: Cache handbook notes
+            "handbook_note": "", # TODO: Cache handbook notes
             "warnings": warnings
         }
 

@@ -7444,7 +7444,7 @@
         "condition": {
             "original": "Prerequisite: 80+ WAM in COMP, SENG or BINF courses, completion of all first and second year core requirements a CSE program, and agreement from a suitable CSE academic supervisor.<br/><br/>",
             "processed": "80WAM in (COMP || SENG || BINF)",
-            "handbook_note": "You must complete all first and second year core requirements of a CSE program and obtain agreement from a suitable CSE academic supervisor to enrol in this course."
+            "warning": "You must complete all first and second year core requirements of a CSE program and obtain agreement from a suitable CSE academic supervisor to enrol in this course."
         },
         "tokens": [
             "(",
@@ -7465,7 +7465,7 @@
         "condition": {
             "original": "Prerequisite: 80+ WAM in COMP, SENG or BINF courses, completion of all first and second year core requirements a CSE program, and agreement from a suitable CSE academic supervisor.<br/><br/>",
             "processed": "80WAM in (COMP || SENG || BINF)",
-            "handbook_note": "You must complete all first and second year core requirements of a CSE program and obtain agreement from a suitable CSE academic supervisor to enrol in this course."
+            "warning": "You must complete all first and second year core requirements of a CSE program and obtain agreement from a suitable CSE academic supervisor to enrol in this course."
         },
         "tokens": [
             "(",
@@ -7486,7 +7486,7 @@
         "condition": {
             "original": "Prerequisite: Enrolled in a CSE BE (Hons) programs, completion of 126 UOC and completion of 3rd year core.<br/><br/>",
             "processed": "126UOC && (BINF?H || SENGAH || COMP?H)",
-            "handbook_note": "You must be enrolled in a CSE BE (Hons) program and complete all third year core requirements to enrol in this course."
+            "warning": "You must be enrolled in a CSE BE (Hons) program and complete all third year core requirements to enrol in this course."
         },
         "tokens": [
             "(",
@@ -7507,7 +7507,7 @@
         "condition": {
             "original": "(COMP6441 OR COMP6841) AND (12 UOC from (COMP6443, COMP6843, COMP6445, COMP6845, COMP6447)) AND enrolled in final term of program<br/><br/>",
             "processed": "(COMP6441 || COMP6841) && (12UOC in (COMP6443 || COMP6843 || COMP6445 || COMP6845 || COMP6447))",
-            "handbook_note": "This course can only be taken in the final term of your program."
+            "warning": "This course can only be taken in the final term of your program."
         },
         "tokens": [
             "(",
@@ -12132,7 +12132,7 @@
         "condition": {
             "original": "Pre-requisite: INFS3603 or (COMM2501 and in Business Analytics major (COMMJ)).<br/>Note: Students wishing to meet SAS certification must complete INFS3603. Completion of COMM2501 in lieu of INFS3603 will not be considered equivalent for the certificate.<br/><br/>",
             "processed": "INFS3603 || (COMM2501 && COMMJ)",
-            "handbook_note": "Students wishing to meet SAS certification must complete INFS3603. Completion of COMM2501 in lieu of INFS3603 will not be considered equivalent for the certificate"
+            "warning": "Students wishing to meet SAS certification must complete INFS3603. Completion of COMM2501 in lieu of INFS3603 will not be considered equivalent for the certificate"
         },
         "tokens": [
             "(",
@@ -12151,7 +12151,7 @@
         "condition": {
             "original": "Pre-requisite: INFS3603 or (COMM2501 and in Business Analytics major (COMMJ)).<br/>Note: Students wishing to meet SAS certification must complete INFS3603. Completion of COMM2501 in lieu of INFS3603 will not be considered equivalent for the certificate.<br/><br/>",
             "processed": "INFS3603 || (COMM2501 && COMMJ)",
-            "handbook_note": "Students wishing to meet SAS certification must complete INFS3603. Completion of COMM2501 in lieu of INFS3603 will not be considered equivalent for the certificate"
+            "warning": "Students wishing to meet SAS certification must complete INFS3603. Completion of COMM2501 in lieu of INFS3603 will not be considered equivalent for the certificate"
         },
         "tokens": [
             "(",
@@ -15998,7 +15998,7 @@
         "condition": {
             "original": "Prerequisite: 12 UOC of Level 2 Mathematics with an average mark of at least 70, including MATH2111 or MATH2011 (CR) or MATH2510 (CR), or permission from the Head of Department.<br/><br/>",
             "processed": "12UOC in L2 MATH && 70GRADE in L2 MATH && (MATH2111 || 65GRADE in MATH2011 || 65GRADE in MATH2510)",
-            "handbook_note": "Can circumvent prerequisites with permission from Head of Department"
+            "warning": "Can circumvent prerequisites with permission from Head of Department"
         },
         "tokens": [
             "(",
@@ -16031,7 +16031,7 @@
         "condition": {
             "original": "Prerequisite: 12 UOC of Level 2 Mathematics with an average mark of at least 70, including MATH2111 or MATH2011 (CR) or MATH2510 (CR) and MATH2601 or MATH2501 (CR), or permission from Head of Department.<br/><br/>",
             "processed": "12UOC in L2 MATH && 70GRADE in L2 MATH && (MATH2111 || 65GRADE in MATH2011 || 65GRADE in MATH2510)",
-            "handbook_note": "Can circumvent prerequisites with permission from Head of Department"
+            "warning": "Can circumvent prerequisites with permission from Head of Department"
         },
         "tokens": [
             "(",
@@ -16064,7 +16064,7 @@
         "condition": {
             "original": "Prerequisite: 12 UOC of Level 2 Mathematics with an average mark of at least 70, including MATH2601 or MATH2501 (CR), or permission from the Head of Department.<br/><br/>",
             "processed": "12UOC in L2 MATH && 70GRADE in L2 MATH && (MATH2601 || 65GRADE in MATH2501)",
-            "handbook_note": "Can circumvent prerequisites with permission from Head of Department"
+            "warning": "Can circumvent prerequisites with permission from Head of Department"
         },
         "tokens": [
             "(",
@@ -19981,7 +19981,7 @@
         "condition": {
             "original": "Currently enrolled in Program 3707 in the SENGAH stream <br/>and in an approved workplace arrangement <br/>and completed COMP1511, COMP1531 and COMP2521.<br/><br/>",
             "processed": "COMP1511 && COMP1531 && COMP2521 && 3707 && SENGAH",
-            "handbook_note": "Must be in an approved workplace arrangement"
+            "warning": "Must be in an approved workplace arrangement"
         },
         "tokens": [
             "(",
@@ -20002,7 +20002,7 @@
         "condition": {
             "original": "Currently enrolled in Program 3707 in the SENGAH stream and in the Co-op program<br/>and completed SENG2011 and SENG2021 and DESN2000 and COMP2511 and COMP2041.<br/><br/>Successful completion of SEN2991 and attendance of IT Reflection Workshop (facilitated by Co-op Program) are a<br/>prerequisite for this course.<br/><br/>",
             "processed": "3707 && SENGAH && SENG2011 && SENG2021 && DESN2000 && COMP2511 && COMP2041 && SENG2991",
-            "handbook_note": "Must currently be enrolled in the Co-op program and completed attendance of IT Reflection Workshop (facilitated by Co-op Program)"
+            "warning": "Must currently be enrolled in the Co-op program and completed attendance of IT Reflection Workshop (facilitated by Co-op Program)"
         },
         "tokens": [
             "(",
@@ -20029,7 +20029,7 @@
         "condition": {
             "original": "Currently enrolled in Program 3707 in the SENGAH stream and in the Co-op program<br/>and completed SENG3011.<br/><br/>Successful completion of SEN2991 and SENG3991are a prerequisite for this course<br/><br/>",
             "processed": "3707 && SENGAH && SENG3011 && SENG2991 && SENG3991",
-            "handbook_note": "Must currently be enrolled in the Co-op program"
+            "warning": "Must currently be enrolled in the Co-op program"
         },
         "tokens": [
             "(",
