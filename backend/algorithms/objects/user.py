@@ -116,7 +116,7 @@ class User:
             courses_to_delete = [
                 course for course in self.courses
                 if cached_conditions.get(course) is not None # course is in conditions
-                and not (cached_conditions[course].is_unlocked(self))["result"] # not unlocked anymore
+                and not (cached_conditions[course].validate(self))[0] # not unlocked anymore
             ]
 
         return list(sorted(affected_courses))
