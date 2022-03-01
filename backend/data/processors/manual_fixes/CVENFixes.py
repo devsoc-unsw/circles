@@ -15,14 +15,14 @@ To then run this file:
     python3 -m data.processors.manualFixes.[CODE]Fixes
 """
 
-from data.utility import dataHelpers
+from data.utility import data_helpers
 
 # Reads conditionsProcessed dictionary into 'CONDITIONS'
-CONDITIONS = dataHelpers.read_data("data/finalData/conditionsProcessed.json")
+CONDITIONS = data_helpers.read_data("data/final_data/conditionsProcessed.json")
 PROCESSED = "processed"
 
 # Reads coursesProcessed dictionary into 'COURSES' (for updating exclusions)
-COURSES = dataHelpers.read_data("data/finalData/coursesProcessed.json")
+COURSES = data_helpers.read_data("data/final_data/coursesProcessed.json")
 
 def fix_conditions():
     """ Functions to apply manual fixes """
@@ -48,9 +48,9 @@ def fix_conditions():
     CONDITIONS["CVEN9826"] = CVEN_9826()
 
     # Updates the files with the modified dictionaries
-    dataHelpers.write_data(
-        CONDITIONS, "data/finalData/conditionsProcessed.json")
-    dataHelpers.write_data(COURSES, "data/finalData/coursesProcessed.json")
+    data_helpers.write_data(
+        CONDITIONS, "data/final_data/conditionsProcessed.json")
+    data_helpers.write_data(COURSES, "data/final_data/coursesProcessed.json")
 
 # TODO: implement your functions here
 def CVEN_2303_3303_3304():
