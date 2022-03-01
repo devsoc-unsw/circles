@@ -44,7 +44,8 @@ def MATS_4500_4501_4503_4504_4505():
     "original": "Prerequisite: Enrolled in Materials Science Honours Plan<br/><br/>",
     "processed": "Materials Science Honours Plan"
     """
-    # TODO: JOEL: Similar to one of the the MATHFixes.py function, it doesn't like this
+    # TODO: JOEL: Similar to one of the the MATHFixes.py function, it doesn't like this.
+    # Doesn't recognise the MATS?H major I guess?
     return "MATS?H"
 
 def MATS_5003():
