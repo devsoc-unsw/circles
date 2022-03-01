@@ -105,7 +105,7 @@ def CVEN_4300():
     "original": "Pre-requisite: 2303, 3303 & 3304<br/><br/>",
     "processed": "2303, 3303 & 3304"
     """
-    # JOEL: Assume is means CVEN for all of these
+
     return "CVEN2303 && CVEN3303 && CVEN3304"
 
 def CVEN_4308():

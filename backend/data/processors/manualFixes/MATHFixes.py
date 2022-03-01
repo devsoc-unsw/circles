@@ -161,11 +161,7 @@ def MATH_2701():
     "original": "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251 with at least a CR, enrolment in an advanced maths or advanced science program<br/><br/>",
     "processed": "MATH1231 || DPST1014 || MATH1241 || MATH1251 with at least a CR || enrolment in an advanced maths || advanced science program"
     """
-    # JOEL: I read this as CR in any of them?
-    # The other option is that CR applies to just MATH1251, but that doesn't make as much sense.
-
-    # Also is this the correct syntax for the enrolment in advanced maths?
-    # I just got these codes from these searches under 'program':
+    # JOEL: Got these codes from these searches under 'program':
     # https://www.handbook.unsw.edu.au/search?q=advanced%20mathematics
     # https://www.handbook.unsw.edu.au/search?q=advanced%20science
     return "(65GRADE in MATH1231 || 65GRADE in DPST1014 || 65GRADE in MATH1241 || 65GRADE in MATH1251) && (3956 || 3523 || 3998 || 3564 || 3949 || 3781 || 3589 || 3761 || 3962 || 3782 || 3323 || 3566 || 3458 || 3997 || 3948 || 3593 || 3957 || 3762 || 3472)"
@@ -175,7 +171,7 @@ def MATH_2871():
     "original": "Prerequisite: MATH1041 or ECON1203 or ECON2292 or PSYC2001 or MATH1231 or DPST1014 or MATH1241 or MATH1251 or equivalent.<br/><br/>",
     "processed": "MATH1041 || ECON1203 || ECON2292 || PSYC2001 || MATH1231 || DPST1014 || MATH1241 || MATH1251 || equivalent"
     """
-    # JOEL: Got rid of the || equiv, the list is already exhaustive
+    
     return "MATH1041 || ECON1203 || ECON2292 || PSYC2001 || MATH1231 || DPST1014 || MATH1241 || MATH1251"
 
 def MATH_3000_8():
