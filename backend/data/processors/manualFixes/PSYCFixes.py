@@ -53,6 +53,28 @@ def fix_conditions():
         CONDITIONS, "data/finalData/conditionsProcessed.json")
     dataHelpers.write_data(COURSES, "data/finalData/coursesProcessed.json")
 
+def PSYC_1011():
+    "original": "None<br/><br/>",
+    "processed": "None"
+
+    return ""
+
+def PSYC_1021():
+    """
+    "original": "Restricted to students currently enrolled in program 3632 Psychology (Honours) or 4721 Bachelor of Psychology (Honours) / Law<br/><br/>",
+    "processed": "Restricted to currently program 3632 Psychology (Honours) || 4721 Bachelor of Psychology (Honours) / Law"
+    """
+
+    return "3632 || 4721"
+
+def PSYC_2001():
+    """
+    "original": "Prerequisite: PSYC1001, PSYC1011, PSYC1111: Exclusion: GENS9003, GENS9004, GENS9005, GENS9007, GENS0005<br/><br/>",
+    "processed": "PSYC1001, PSYC1011, PSYC1111:"
+    """
+
+    return "PSYC1001 && PSYC1011 && PSYC1111"
+
 def PSYC_2061_2081():
 	return "PSYC1001 && PSYC1011"
 
@@ -67,6 +89,19 @@ def PSYC3051_PSYC3241():
 
 def PSYC3121_PSYC3301():
     return "PSYC2001 && PSYC2061"
+
+def PSYC_3202():
+    """
+    "original": "Prereq: PSYCs 2101, 2081, 2001<br/><br/>",
+    "processed": "PSYCs 2101, 2081, 2001"
+    """
+
+    return "PSYC2101 && PSYC2081 && PSYC2001"
+
+
+# TODO: JOEL: Another common case is where they have commas instead of &&.
+# E.g. "PTRL3001,GEOS3321" or "PSYC2001 , PSYC2071" are examples
+# Also, for PSYC specifically, "PSYCAH" isn't recognised?
 
 def PSYC3211_PSYC3221_PSYC3311():
     return "PSYC2001 && PSYC2071"

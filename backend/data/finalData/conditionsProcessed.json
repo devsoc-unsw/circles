@@ -4051,7 +4051,8 @@
     },
     "CVEN2303": {
         "original": "Prerequisites: (ENGG1300 AND ENGG2400) OR (CVEN1300 AND CVEN2301)<br/>(Pre-requisite only applicable to UG cohort taking this course).<br/><br/>",
-        "processed": "(ENGG1300 && ENGG2400) || (CVEN1300 && CVEN2301) (only applicable to UG cohort taking this course)"
+        "processed": "(ENGG1300 && ENGG2400) || (CVEN1300 && CVEN2301)",
+        "warning": "Requirements only applicable to undergrads"
     },
     "CVEN2401": {
         "original": "",
@@ -4099,11 +4100,13 @@
     },
     "CVEN3303": {
         "original": "Prerequisites: (ENGG1300 AND ENGG2400) OR (CVEN1300 AND CVEN2301)<br/>(Pre-requisite only applicable to UG cohort taking this course).<br/><br/>",
-        "processed": "(ENGG1300 && ENGG2400) || (CVEN1300 && CVEN2301) (only applicable to UG cohort taking this course)"
+        "processed": "(ENGG1300 && ENGG2400) || (CVEN1300 && CVEN2301)",
+        "warning": "Requirements only applicable to undergrads"
     },
     "CVEN3304": {
         "original": "Prerequisites: (ENGG1300 AND ENGG2400) OR (CVEN1300 AND CVEN2301)<br/>(Pre-requisite only applicable to UG cohort taking this course).<br/><br/>",
-        "processed": "(ENGG1300 && ENGG2400) || (CVEN1300 && CVEN2301) (only applicable to UG cohort taking this course)"
+        "processed": "(ENGG1300 && ENGG2400) || (CVEN1300 && CVEN2301)",
+        "warning": "Requirements only applicable to undergrads"
     },
     "CVEN3401": {
         "original": "",
@@ -4135,11 +4138,11 @@
     },
     "CVEN4002": {
         "original": "Pre Req: 132UOC<br/><br/>",
-        "processed": "Req: 132UOC"
+        "processed": "132UOC"
     },
     "CVEN4003": {
         "original": "Pre Req: 132UOC<br/><br/>",
-        "processed": "Req: 132UOC"
+        "processed": "132UOC"
     },
     "CVEN4032": {
         "original": "Pre: 132UOC and Minimum WAM of 80<br/><br/>",
@@ -4159,7 +4162,7 @@
     },
     "CVEN4050": {
         "original": "Prerequisite: 132 UOCs needed to enrol into this course and BE Hons Programs only<br/><br/>",
-        "processed": "132UOCs needed to enrol into this course && BE Hons Programs only"
+        "processed": "132UOC && (AEROAH || BINFAH || CEICAH || CEICDH || COMPBH || CVENAH || CVENBH || ELECAH || ELECCH || GMATDH || MANFBH || MECHAH || MINEAH || MTRNAH || PETRAH || SENGAH || SOLAAH || SOLABH || TELEAH)"
     },
     "CVEN4051": {
         "original": "Prerequisite CVEN4050<br/><br/>",
@@ -4183,23 +4186,23 @@
     },
     "CVEN4106": {
         "original": "Prerequisite: CVEN2101 & CVEN3101<br/><br/>",
-        "processed": "CVEN2101 & CVEN3101"
+        "processed": "CVEN2101 && CVEN3101"
     },
     "CVEN4201": {
         "original": "Prerequisite/s: CVEN2201 OR CVEN3202 & CVEN3201 OR CVEN3203<br/><br/>",
-        "processed": "CVEN2201 || CVEN3202 & CVEN3201 || CVEN3203"
+        "processed": "(CVEN2201 || CVEN3202) && (CVEN3201 || CVEN3203)"
     },
     "CVEN4202": {
         "original": "Prerequisite/s: CVEN2201 OR CVEN3202 & CVEN3201 OR CVEN3203<br/><br/>",
-        "processed": "CVEN2201 || CVEN3202 & CVEN3201 || CVEN3203"
+        "processed": "(CVEN2201 || CVEN3202) && (CVEN3201 || CVEN3203)"
     },
     "CVEN4204": {
         "original": "Prerequisite/s: CVEN2201 OR CVEN3202 & CVEN3201 OR CVEN3203<br/><br/>",
-        "processed": "CVEN2201 || CVEN3202 & CVEN3201 || CVEN3203"
+        "processed": "(CVEN2201 || CVEN3202) && (CVEN3201 || CVEN3203)"
     },
     "CVEN4300": {
         "original": "Pre-requisite: 2303, 3303 & 3304<br/><br/>",
-        "processed": "2303, 3303 & 3304"
+        "processed": "CVEN2303 && CVEN3303 && CVEN3304"
     },
     "CVEN4301": {
         "original": "Prerequisite/s: CVEN3301 OR CVEN2303 AND CVEN3302 OR CVEN3304.<br/><br/>",
@@ -4215,11 +4218,11 @@
     },
     "CVEN4308": {
         "original": "Prerequisites: CVEN3301 OR CVEN2303 and CVEN2002 (or equivalent).<br/><br/>",
-        "processed": "CVEN3301 || CVEN2303 && CVEN2002 (or equivalent)"
+        "processed": "(CVEN3301 || CVEN2303) && CVEN2002"
     },
     "CVEN4309": {
         "original": "Pre: CVEN2301 & CVEN2303<br/><br/>",
-        "processed": "CVEN2301 & CVEN2303"
+        "processed": "CVEN2301 && CVEN2303"
     },
     "CVEN4310": {
         "original": "Prerequisites: GMAT1110<br/><br/>",
@@ -4267,7 +4270,7 @@
     },
     "CVEN4507": {
         "original": "Prerequisites: CVEN2501, CVEN3501, CVEN3502<br/><br/>",
-        "processed": "CVEN2501, CVEN3501, CVEN3502"
+        "processed": "CVEN2501 && CVEN3501 && CVEN3502"
     },
     "CVEN4701": {
         "original": "",
@@ -4295,7 +4298,8 @@
     },
     "CVEN4951": {
         "original": "Prerequisite: completion of 126 UOC and 70WAM and completion of 3rd year core<br/><br/>",
-        "processed": "126UOC && 70WAM && 3rd year core"
+        "processed": "126UOC && 70WAM",
+        "warning": "Must have completed 3rd year core"
     },
     "CVEN4952": {
         "original": "Pre-req: CVEN4951<br/><br/>",
@@ -4350,8 +4354,9 @@
         "processed": ""
     },
     "CVEN9826": {
-        "original": ">74 WAM UG students<br/><br/>",
-        "processed": "74WAM UG"
+        "original": "Prerequisite: completion of 126 UOC and 70WAM and completion of 3rd year core<br/><br/>",
+        "processed": "",
+        "warning": "Undergraduate students must have a 74 WAM or higher"
     },
     "CVEN9840": {
         "original": "",
@@ -5770,7 +5775,7 @@
     },
     "ELEC2911": {
         "original": "Prerequisite: ELEC1111 and 48 UoC. Students should have a good working knowledge of university level physics, circuit theory and mathematics.<br/><br/>",
-        "processed": "ELEC1111 && 48UOC. should have a good working knowledge of university level physics && circuit theory && mathematics"
+        "processed": "ELEC1111 && 48UOC"
     },
     "ELEC3104": {
         "original": "Prerequisite: ELEC2134<br/><br/>",
@@ -5810,7 +5815,7 @@
     },
     "ELEC3705": {
         "original": "Pre-requisite : MATH2099 AND (PHYS1231 OR DPST1024 OR PHYS1221)<br/><br/>",
-        "processed": ": MATH2099 && (PHYS1231 || DPST1024 || PHYS1221)"
+        "processed": "MATH2099 && (PHYS1231 || DPST1024 || PHYS1221)"
     },
     "ELEC4122": {
         "original": "Prerequisite: 120 units of credit<br/><br/>",
@@ -5890,15 +5895,16 @@
     },
     "ELEC4951": {
         "original": "Prerequisite: Completion of 126 UOC and completion of 3rd year core<br/><br/>",
-        "processed": "126UOC && 3rd year core"
+        "processed": "126UOC",
+        "warning": "Completion of ELEC 3rd year core is required"
     },
     "ELEC4952": {
         "original": "Prerequisite: Completion of Research Thesis A (4951)<br/><br/>",
-        "processed": "Research Thesis A (4951)"
+        "processed": "ELEC4951"
     },
     "ELEC4953": {
         "original": "Prerequisite: Completion of Research Thesis B (4952)<br/><br/>",
-        "processed": "Research Thesis B (4952)"
+        "processed": "ELEC4952"
     },
     "ENGG0360": {
         "original": "",
@@ -8145,7 +8151,7 @@
     },
     "MATH2111": {
         "original": "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251 each with a mark of at least 70; Excluded: MATH2019, MATH2049, MATH2069, MATH2100, MATH2110.<br/><br/>",
-        "processed": "MATH1231 || DPST1014 || MATH1241 || MATH1251 each with 70GRADE"
+        "processed": "70GRADE in MATH1231 || 70GRADE in DPST1014 || 70GRADE in MATH1241 || 70GRADE in MATH1251"
     },
     "MATH2121": {
         "original": "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251<br/><br/>",
@@ -8153,7 +8159,7 @@
     },
     "MATH2221": {
         "original": "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251 each with a mark of 70.<br/><br/>",
-        "processed": "MATH1231 || DPST1014 || MATH1241 || MATH1251 each with 70GRADE"
+        "processed": "70GRADE in MATH1231 || 70GRADE in DPST1014 || 70GRADE in MATH1241 || 70GRADE in MATH1251"
     },
     "MATH2241": {
         "original": "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251<br/><br/>",
@@ -8161,7 +8167,7 @@
     },
     "MATH2301": {
         "original": "Prerequisite: MATH1031 (CR) or MATH1231 or or DPST1014 or MATH1241 or MATH1251. Exclusions: MATH2089, CVEN2002, and CVEN2702<br/><br/>",
-        "processed": "65GRADE in MATH1031 || MATH1231 || or DPST1014 || MATH1241 || MATH1251"
+        "processed": "65GRADE in MATH1031 || MATH1231 || DPST1014 || MATH1241 || MATH1251"
     },
     "MATH2400": {
         "original": "Prerequisite: MATH1081 or MATH1231 or DPST1014 or MATH1241 or MATH1251<br/><br/>",
@@ -8177,15 +8183,15 @@
     },
     "MATH2601": {
         "original": "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251 each with a mark of 70 or greater; Exclusion: MATH2099<br/><br/>",
-        "processed": "MATH1231 || DPST1014 || MATH1241 || MATH1251 each with 70GRADE"
+        "processed": "70GRADE in MATH1231 || 70GRADE in DPST1014 || 70GRADE in MATH1241 || 70GRADE in MATH1251"
     },
     "MATH2621": {
         "original": "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251 each with a mark of at least 70; Exclusion: MATH2069<br/><br/>",
-        "processed": "MATH1231 || DPST1014 || MATH1241 || MATH1251 each with 70GRADE"
+        "processed": "70GRADE in MATH1231 || 70GRADE in DPST1014 || 70GRADE in MATH1241 || 70GRADE in MATH1251"
     },
     "MATH2701": {
         "original": "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251 with at least a CR, enrolment in an advanced maths or advanced science program<br/><br/>",
-        "processed": "MATH1231 || DPST1014 || MATH1241 || MATH1251 with at least a CR || enrolment in an advanced maths || advanced science program"
+        "processed": "(65GRADE in MATH1231 || 65GRADE in DPST1014 || 65GRADE in MATH1241 || 65GRADE in MATH1251) && (3956 || 3523 || 3998 || 3564 || 3949 || 3781 || 3589 || 3761 || 3962 || 3782 || 3323 || 3566 || 3458 || 3997 || 3948 || 3593 || 3957 || 3762 || 3472)"
     },
     "MATH2801": {
         "original": "Prerequisite: MATH1231 or MATH1241 or MATH1251 or DPST1014; Exclusion: MATH2089; MATH2099; MATH2801; MATH2901; BEES2041; BIOS2041;CVEN2002.<br/><br/>",
@@ -8201,7 +8207,7 @@
     },
     "MATH2871": {
         "original": "Prerequisite: MATH1041 or ECON1203 or ECON2292 or PSYC2001 or MATH1231 or DPST1014 or MATH1241 or MATH1251 or equivalent.<br/><br/>",
-        "processed": "MATH1041 || ECON1203 || ECON2292 || PSYC2001 || MATH1231 || DPST1014 || MATH1241 || MATH1251 || equivalent"
+        "processed": "MATH1041 || ECON1203 || ECON2292 || PSYC2001 || MATH1231 || DPST1014 || MATH1241 || MATH1251"
     },
     "MATH2901": {
         "original": "Prerequisite: MATH1231 or MATH1241 or MATH1251 or DPST1014; Exclusion: MATH2089; MATH2099; MATH2801; MATH2901; BEES2041; BIOS2041;CVEN2002.<br/><br/>",
@@ -8460,23 +8466,23 @@
     },
     "MATS4500": {
         "original": "Prerequisite: Enrolled in Materials Science Honours Plan<br/><br/>",
-        "processed": "Materials Science Honours Plan"
+        "processed": "MATS?H"
     },
     "MATS4501": {
         "original": "Prerequisite: Enrolled in Materials Science Honours Plan<br/><br/>",
-        "processed": "Materials Science Honours Plan"
+        "processed": "MATS?H"
     },
     "MATS4503": {
         "original": "Prerequisite: Enrolled in Materials Science Honours Plan<br/><br/>",
-        "processed": "Materials Science Honours Plan"
+        "processed": "MATS?H"
     },
     "MATS4504": {
         "original": "Prerequisite: Enrolled in Materials Science Honours Plan<br/><br/>",
-        "processed": "Materials Science Honours Plan"
+        "processed": "MATS?H"
     },
     "MATS4505": {
         "original": "Prerequisite: Enrolled in Materials Science Honours Plan<br/><br/>",
-        "processed": "Materials Science Honours Plan"
+        "processed": "MATS?H"
     },
     "MATS5001": {
         "original": "",
@@ -8488,7 +8494,7 @@
     },
     "MATS5003": {
         "original": "Prerequisite : MATS5001<br/><br/>",
-        "processed": ": MATS5001"
+        "processed": "MATS5001"
     },
     "MATS6006": {
         "original": "",

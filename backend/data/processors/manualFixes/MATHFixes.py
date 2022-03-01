@@ -161,7 +161,7 @@ def MATH_2701():
     "original": "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251 with at least a CR, enrolment in an advanced maths or advanced science program<br/><br/>",
     "processed": "MATH1231 || DPST1014 || MATH1241 || MATH1251 with at least a CR || enrolment in an advanced maths || advanced science program"
     """
-    # JOEL: Got these codes from these searches under 'program':
+    # TODO: JOEL: Got these codes from these searches under 'program':
     # https://www.handbook.unsw.edu.au/search?q=advanced%20mathematics
     # https://www.handbook.unsw.edu.au/search?q=advanced%20science
     return "(65GRADE in MATH1231 || 65GRADE in DPST1014 || 65GRADE in MATH1241 || 65GRADE in MATH1251) && (3956 || 3523 || 3998 || 3564 || 3949 || 3781 || 3589 || 3761 || 3962 || 3782 || 3323 || 3566 || 3458 || 3997 || 3948 || 3593 || 3957 || 3762 || 3472)"
@@ -249,7 +249,7 @@ def MATH_3611_3701(condition):
     "warning": "Can circumvent prerequisites with permission from Head of Department"
     """
 
-    # JOEL: This doesn't actually work?? It doesn't like index 9 'MATH'
+    # TODO: JOEL: This doesn't actually work?? It doesn't like index 9 'MATH'
     # I think it just doesn't like '70GRADE in LX XXXX' since it's 2 words. So what's the fix?
     return {
         "original": condition["original"],
@@ -263,7 +263,7 @@ def MATH_3711(condition):
     "processed": "12UOC in L2 MATH && 70GRADE in L2 MATH && (MATH2601 || 65GRADE in MATH2501)"
     """
 
-    # JOEL: Same deal as above in MATH_3611_3701
+    # TODO: JOEL: Same deal as above in MATH_3611_3701
     return {
         "original": condition["original"],
         "processed": "12UOC in L2 MATH && 70GRADE in L2 MATH && (MATH2601 || 65GRADE in MATH2501)",
@@ -301,7 +301,7 @@ def MATH_4001():
     "processed": "MATH?H"
     """
 
-    # JOEL: This doesn't work?? Why? It just doesn't know what 'MATH?H'means?
+    # TODO: JOEL: This doesn't work?? Why? It just doesn't know what 'MATH?H'means?
     return "MATH?H"
 
 def MATH_6781():

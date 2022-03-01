@@ -7968,312 +7968,57 @@
         ],
         "broke at": "Index 1, Enrolment"
     },
-    "CVEN2303": {
-        "condition": {
-            "original": "Prerequisites: (ENGG1300 AND ENGG2400) OR (CVEN1300 AND CVEN2301)<br/>(Pre-requisite only applicable to UG cohort taking this course).<br/><br/>",
-            "processed": "(ENGG1300 && ENGG2400) || (CVEN1300 && CVEN2301) (only applicable to UG cohort taking this course)"
-        },
-        "tokens": [
-            "(",
-            "(",
-            "ENGG1300",
-            "&&",
-            "ENGG2400",
-            ")",
-            "||",
-            "(",
-            "CVEN1300",
-            "&&",
-            "CVEN2301",
-            ")",
-            "(",
-            "only",
-            "applicable",
-            "to",
-            "UG",
-            "cohort",
-            "taking",
-            "this",
-            "course",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 1, ("
-    },
-    "CVEN3303": {
-        "condition": {
-            "original": "Prerequisites: (ENGG1300 AND ENGG2400) OR (CVEN1300 AND CVEN2301)<br/>(Pre-requisite only applicable to UG cohort taking this course).<br/><br/>",
-            "processed": "(ENGG1300 && ENGG2400) || (CVEN1300 && CVEN2301) (only applicable to UG cohort taking this course)"
-        },
-        "tokens": [
-            "(",
-            "(",
-            "ENGG1300",
-            "&&",
-            "ENGG2400",
-            ")",
-            "||",
-            "(",
-            "CVEN1300",
-            "&&",
-            "CVEN2301",
-            ")",
-            "(",
-            "only",
-            "applicable",
-            "to",
-            "UG",
-            "cohort",
-            "taking",
-            "this",
-            "course",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 1, ("
-    },
-    "CVEN3304": {
-        "condition": {
-            "original": "Prerequisites: (ENGG1300 AND ENGG2400) OR (CVEN1300 AND CVEN2301)<br/>(Pre-requisite only applicable to UG cohort taking this course).<br/><br/>",
-            "processed": "(ENGG1300 && ENGG2400) || (CVEN1300 && CVEN2301) (only applicable to UG cohort taking this course)"
-        },
-        "tokens": [
-            "(",
-            "(",
-            "ENGG1300",
-            "&&",
-            "ENGG2400",
-            ")",
-            "||",
-            "(",
-            "CVEN1300",
-            "&&",
-            "CVEN2301",
-            ")",
-            "(",
-            "only",
-            "applicable",
-            "to",
-            "UG",
-            "cohort",
-            "taking",
-            "this",
-            "course",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 1, ("
-    },
-    "CVEN4002": {
-        "condition": {
-            "original": "Pre Req: 132UOC<br/><br/>",
-            "processed": "Req: 132UOC"
-        },
-        "tokens": [
-            "(",
-            "Req:",
-            "132UOC",
-            ")"
-        ],
-        "broke at": "Index 1, Req:"
-    },
-    "CVEN4003": {
-        "condition": {
-            "original": "Pre Req: 132UOC<br/><br/>",
-            "processed": "Req: 132UOC"
-        },
-        "tokens": [
-            "(",
-            "Req:",
-            "132UOC",
-            ")"
-        ],
-        "broke at": "Index 1, Req:"
-    },
     "CVEN4050": {
         "condition": {
             "original": "Prerequisite: 132 UOCs needed to enrol into this course and BE Hons Programs only<br/><br/>",
-            "processed": "132UOCs needed to enrol into this course && BE Hons Programs only"
+            "processed": "132UOC && (AEROAH || BINFAH || CEICAH || CEICDH || COMPBH || CVENAH || CVENBH || ELECAH || ELECCH || GMATDH || MANFBH || MECHAH || MINEAH || MTRNAH || PETRAH || SENGAH || SOLAAH || SOLABH || TELEAH)"
         },
         "tokens": [
             "(",
-            "132UOCs",
-            "needed",
-            "to",
-            "enrol",
-            "into",
-            "this",
-            "course",
+            "132UOC",
             "&&",
-            "BE",
-            "Hons",
-            "Programs",
-            "only",
-            ")"
-        ],
-        "broke at": "Index 1, 132UOCs"
-    },
-    "CVEN4106": {
-        "condition": {
-            "original": "Prerequisite: CVEN2101 & CVEN3101<br/><br/>",
-            "processed": "CVEN2101 & CVEN3101"
-        },
-        "tokens": [
             "(",
-            "CVEN2101",
-            "&",
-            "CVEN3101",
-            ")"
-        ],
-        "broke at": "Index 2, &"
-    },
-    "CVEN4201": {
-        "condition": {
-            "original": "Prerequisite/s: CVEN2201 OR CVEN3202 & CVEN3201 OR CVEN3203<br/><br/>",
-            "processed": "CVEN2201 || CVEN3202 & CVEN3201 || CVEN3203"
-        },
-        "tokens": [
-            "(",
-            "CVEN2201",
+            "AEROAH",
             "||",
-            "CVEN3202",
-            "&",
-            "CVEN3201",
+            "BINFAH",
             "||",
-            "CVEN3203",
-            ")"
-        ],
-        "broke at": "Index 4, &"
-    },
-    "CVEN4202": {
-        "condition": {
-            "original": "Prerequisite/s: CVEN2201 OR CVEN3202 & CVEN3201 OR CVEN3203<br/><br/>",
-            "processed": "CVEN2201 || CVEN3202 & CVEN3201 || CVEN3203"
-        },
-        "tokens": [
-            "(",
-            "CVEN2201",
+            "CEICAH",
             "||",
-            "CVEN3202",
-            "&",
-            "CVEN3201",
+            "CEICDH",
             "||",
-            "CVEN3203",
-            ")"
-        ],
-        "broke at": "Index 4, &"
-    },
-    "CVEN4204": {
-        "condition": {
-            "original": "Prerequisite/s: CVEN2201 OR CVEN3202 & CVEN3201 OR CVEN3203<br/><br/>",
-            "processed": "CVEN2201 || CVEN3202 & CVEN3201 || CVEN3203"
-        },
-        "tokens": [
-            "(",
-            "CVEN2201",
+            "COMPBH",
             "||",
-            "CVEN3202",
-            "&",
-            "CVEN3201",
+            "CVENAH",
             "||",
-            "CVEN3203",
-            ")"
-        ],
-        "broke at": "Index 4, &"
-    },
-    "CVEN4300": {
-        "condition": {
-            "original": "Pre-requisite: 2303, 3303 & 3304<br/><br/>",
-            "processed": "2303, 3303 & 3304"
-        },
-        "tokens": [
-            "(",
-            "2303,",
-            "3303",
-            "&",
-            "3304",
-            ")"
-        ],
-        "broke at": "Index 1, 2303,"
-    },
-    "CVEN4308": {
-        "condition": {
-            "original": "Prerequisites: CVEN3301 OR CVEN2303 and CVEN2002 (or equivalent).<br/><br/>",
-            "processed": "CVEN3301 || CVEN2303 && CVEN2002 (or equivalent)"
-        },
-        "tokens": [
-            "(",
-            "CVEN3301",
+            "CVENBH",
             "||",
-            "CVEN2303",
-            "&&",
-            "CVEN2002",
-            "(",
-            "or",
-            "equivalent",
+            "ELECAH",
+            "||",
+            "ELECCH",
+            "||",
+            "GMATDH",
+            "||",
+            "MANFBH",
+            "||",
+            "MECHAH",
+            "||",
+            "MINEAH",
+            "||",
+            "MTRNAH",
+            "||",
+            "PETRAH",
+            "||",
+            "SENGAH",
+            "||",
+            "SOLAAH",
+            "||",
+            "SOLABH",
+            "||",
+            "TELEAH",
             ")",
             ")"
         ],
-        "broke at": "Index 1, CVEN3301"
-    },
-    "CVEN4309": {
-        "condition": {
-            "original": "Pre: CVEN2301 & CVEN2303<br/><br/>",
-            "processed": "CVEN2301 & CVEN2303"
-        },
-        "tokens": [
-            "(",
-            "CVEN2301",
-            "&",
-            "CVEN2303",
-            ")"
-        ],
-        "broke at": "Index 2, &"
-    },
-    "CVEN4507": {
-        "condition": {
-            "original": "Prerequisites: CVEN2501, CVEN3501, CVEN3502<br/><br/>",
-            "processed": "CVEN2501, CVEN3501, CVEN3502"
-        },
-        "tokens": [
-            "(",
-            "CVEN2501,",
-            "CVEN3501,",
-            "CVEN3502",
-            ")"
-        ],
-        "broke at": "Index 1, CVEN2501,"
-    },
-    "CVEN4951": {
-        "condition": {
-            "original": "Prerequisite: completion of 126 UOC and 70WAM and completion of 3rd year core<br/><br/>",
-            "processed": "126UOC && 70WAM && 3rd year core"
-        },
-        "tokens": [
-            "(",
-            "126UOC",
-            "&&",
-            "70WAM",
-            "&&",
-            "3rd",
-            "year",
-            "core",
-            ")"
-        ],
-        "broke at": "Index 5, 3rd"
-    },
-    "CVEN9826": {
-        "condition": {
-            "original": ">74 WAM UG students<br/><br/>",
-            "processed": "74WAM UG"
-        },
-        "tokens": [
-            "(",
-            "74WAM",
-            "UG",
-            ")"
-        ],
-        "broke at": "Index 2, UG"
+        "broke at": "Index 1, 132UOC"
     },
     "DART2151": {
         "condition": {
@@ -11509,35 +11254,6 @@
         ],
         "broke at": "Index 1, EDST6922."
     },
-    "ELEC2911": {
-        "condition": {
-            "original": "Prerequisite: ELEC1111 and 48 UoC. Students should have a good working knowledge of university level physics, circuit theory and mathematics.<br/><br/>",
-            "processed": "ELEC1111 && 48UOC. should have a good working knowledge of university level physics && circuit theory && mathematics"
-        },
-        "tokens": [
-            "(",
-            "ELEC1111",
-            "&&",
-            "48UOC.",
-            "should",
-            "have",
-            "a",
-            "good",
-            "working",
-            "knowledge",
-            "of",
-            "university",
-            "level",
-            "physics",
-            "&&",
-            "circuit",
-            "theory",
-            "&&",
-            "mathematics",
-            ")"
-        ],
-        "broke at": "Index 3, 48UOC."
-    },
     "ELEC3115": {
         "condition": {
             "original": "Pre-requisite: MATH2069 AND (PHY1231 OR DPST1024)<br/><br/>",
@@ -11555,77 +11271,6 @@
             ")"
         ],
         "broke at": "Index 1, MATH2069"
-    },
-    "ELEC3705": {
-        "condition": {
-            "original": "Pre-requisite : MATH2099 AND (PHYS1231 OR DPST1024 OR PHYS1221)<br/><br/>",
-            "processed": ": MATH2099 && (PHYS1231 || DPST1024 || PHYS1221)"
-        },
-        "tokens": [
-            "(",
-            ":",
-            "MATH2099",
-            "&&",
-            "(",
-            "PHYS1231",
-            "||",
-            "DPST1024",
-            "||",
-            "PHYS1221",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 1, :"
-    },
-    "ELEC4951": {
-        "condition": {
-            "original": "Prerequisite: Completion of 126 UOC and completion of 3rd year core<br/><br/>",
-            "processed": "126UOC && 3rd year core"
-        },
-        "tokens": [
-            "(",
-            "126UOC",
-            "&&",
-            "3rd",
-            "year",
-            "core",
-            ")"
-        ],
-        "broke at": "Index 3, 3rd"
-    },
-    "ELEC4952": {
-        "condition": {
-            "original": "Prerequisite: Completion of Research Thesis A (4951)<br/><br/>",
-            "processed": "Research Thesis A (4951)"
-        },
-        "tokens": [
-            "(",
-            "Research",
-            "Thesis",
-            "A",
-            "(",
-            "4951",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 1, Research"
-    },
-    "ELEC4953": {
-        "condition": {
-            "original": "Prerequisite: Completion of Research Thesis B (4952)<br/><br/>",
-            "processed": "Research Thesis B (4952)"
-        },
-        "tokens": [
-            "(",
-            "Research",
-            "Thesis",
-            "B",
-            "(",
-            "4952",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 1, Research"
     },
     "ENGG3060": {
         "condition": {
@@ -15826,174 +15471,6 @@
         ],
         "broke at": "Index 1, Successful"
     },
-    "MATH2111": {
-        "condition": {
-            "original": "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251 each with a mark of at least 70; Excluded: MATH2019, MATH2049, MATH2069, MATH2100, MATH2110.<br/><br/>",
-            "processed": "MATH1231 || DPST1014 || MATH1241 || MATH1251 each with 70GRADE"
-        },
-        "tokens": [
-            "(",
-            "MATH1231",
-            "||",
-            "DPST1014",
-            "||",
-            "MATH1241",
-            "||",
-            "MATH1251",
-            "each",
-            "with",
-            "70GRADE",
-            ")"
-        ],
-        "broke at": "Index 8, each"
-    },
-    "MATH2221": {
-        "condition": {
-            "original": "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251 each with a mark of 70.<br/><br/>",
-            "processed": "MATH1231 || DPST1014 || MATH1241 || MATH1251 each with 70GRADE"
-        },
-        "tokens": [
-            "(",
-            "MATH1231",
-            "||",
-            "DPST1014",
-            "||",
-            "MATH1241",
-            "||",
-            "MATH1251",
-            "each",
-            "with",
-            "70GRADE",
-            ")"
-        ],
-        "broke at": "Index 8, each"
-    },
-    "MATH2301": {
-        "condition": {
-            "original": "Prerequisite: MATH1031 (CR) or MATH1231 or or DPST1014 or MATH1241 or MATH1251. Exclusions: MATH2089, CVEN2002, and CVEN2702<br/><br/>",
-            "processed": "65GRADE in MATH1031 || MATH1231 || or DPST1014 || MATH1241 || MATH1251"
-        },
-        "tokens": [
-            "(",
-            "65GRADE",
-            "in",
-            "MATH1031",
-            "||",
-            "MATH1231",
-            "||",
-            "or",
-            "DPST1014",
-            "||",
-            "MATH1241",
-            "||",
-            "MATH1251",
-            ")"
-        ],
-        "broke at": "Index 7, or"
-    },
-    "MATH2601": {
-        "condition": {
-            "original": "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251 each with a mark of 70 or greater; Exclusion: MATH2099<br/><br/>",
-            "processed": "MATH1231 || DPST1014 || MATH1241 || MATH1251 each with 70GRADE"
-        },
-        "tokens": [
-            "(",
-            "MATH1231",
-            "||",
-            "DPST1014",
-            "||",
-            "MATH1241",
-            "||",
-            "MATH1251",
-            "each",
-            "with",
-            "70GRADE",
-            ")"
-        ],
-        "broke at": "Index 8, each"
-    },
-    "MATH2621": {
-        "condition": {
-            "original": "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251 each with a mark of at least 70; Exclusion: MATH2069<br/><br/>",
-            "processed": "MATH1231 || DPST1014 || MATH1241 || MATH1251 each with 70GRADE"
-        },
-        "tokens": [
-            "(",
-            "MATH1231",
-            "||",
-            "DPST1014",
-            "||",
-            "MATH1241",
-            "||",
-            "MATH1251",
-            "each",
-            "with",
-            "70GRADE",
-            ")"
-        ],
-        "broke at": "Index 8, each"
-    },
-    "MATH2701": {
-        "condition": {
-            "original": "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251 with at least a CR, enrolment in an advanced maths or advanced science program<br/><br/>",
-            "processed": "MATH1231 || DPST1014 || MATH1241 || MATH1251 with at least a CR || enrolment in an advanced maths || advanced science program"
-        },
-        "tokens": [
-            "(",
-            "MATH1231",
-            "||",
-            "DPST1014",
-            "||",
-            "MATH1241",
-            "||",
-            "MATH1251",
-            "with",
-            "at",
-            "least",
-            "a",
-            "CR",
-            "||",
-            "enrolment",
-            "in",
-            "an",
-            "advanced",
-            "maths",
-            "||",
-            "advanced",
-            "science",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 8, with"
-    },
-    "MATH2871": {
-        "condition": {
-            "original": "Prerequisite: MATH1041 or ECON1203 or ECON2292 or PSYC2001 or MATH1231 or DPST1014 or MATH1241 or MATH1251 or equivalent.<br/><br/>",
-            "processed": "MATH1041 || ECON1203 || ECON2292 || PSYC2001 || MATH1231 || DPST1014 || MATH1241 || MATH1251 || equivalent"
-        },
-        "tokens": [
-            "(",
-            "MATH1041",
-            "||",
-            "ECON1203",
-            "||",
-            "ECON2292",
-            "||",
-            "PSYC2001",
-            "||",
-            "MATH1231",
-            "||",
-            "DPST1014",
-            "||",
-            "MATH1241",
-            "||",
-            "MATH1251",
-            "||",
-            "equivalent",
-            ")"
-        ],
-        "broke at": "Index 17, equivalent"
-    },
     "MATH3611": {
         "condition": {
             "original": "Prerequisite: 12 UOC of Level 2 Mathematics with an average mark of at least 70, including MATH2111 or MATH2011 (CR) or MATH2510 (CR), or permission from the Head of Department.<br/><br/>",
@@ -16104,90 +15581,62 @@
     "MATS4500": {
         "condition": {
             "original": "Prerequisite: Enrolled in Materials Science Honours Plan<br/><br/>",
-            "processed": "Materials Science Honours Plan"
+            "processed": "MATS?H"
         },
         "tokens": [
             "(",
-            "Materials",
-            "Science",
-            "Honours",
-            "Plan",
+            "MATS?H",
             ")"
         ],
-        "broke at": "Index 1, Materials"
+        "broke at": "Index 1, MATS?H"
     },
     "MATS4501": {
         "condition": {
             "original": "Prerequisite: Enrolled in Materials Science Honours Plan<br/><br/>",
-            "processed": "Materials Science Honours Plan"
+            "processed": "MATS?H"
         },
         "tokens": [
             "(",
-            "Materials",
-            "Science",
-            "Honours",
-            "Plan",
+            "MATS?H",
             ")"
         ],
-        "broke at": "Index 1, Materials"
+        "broke at": "Index 1, MATS?H"
     },
     "MATS4503": {
         "condition": {
             "original": "Prerequisite: Enrolled in Materials Science Honours Plan<br/><br/>",
-            "processed": "Materials Science Honours Plan"
+            "processed": "MATS?H"
         },
         "tokens": [
             "(",
-            "Materials",
-            "Science",
-            "Honours",
-            "Plan",
+            "MATS?H",
             ")"
         ],
-        "broke at": "Index 1, Materials"
+        "broke at": "Index 1, MATS?H"
     },
     "MATS4504": {
         "condition": {
             "original": "Prerequisite: Enrolled in Materials Science Honours Plan<br/><br/>",
-            "processed": "Materials Science Honours Plan"
+            "processed": "MATS?H"
         },
         "tokens": [
             "(",
-            "Materials",
-            "Science",
-            "Honours",
-            "Plan",
+            "MATS?H",
             ")"
         ],
-        "broke at": "Index 1, Materials"
+        "broke at": "Index 1, MATS?H"
     },
     "MATS4505": {
         "condition": {
             "original": "Prerequisite: Enrolled in Materials Science Honours Plan<br/><br/>",
-            "processed": "Materials Science Honours Plan"
+            "processed": "MATS?H"
         },
         "tokens": [
             "(",
-            "Materials",
-            "Science",
-            "Honours",
-            "Plan",
+            "MATS?H",
             ")"
         ],
-        "broke at": "Index 1, Materials"
-    },
-    "MATS5003": {
-        "condition": {
-            "original": "Prerequisite : MATS5001<br/><br/>",
-            "processed": ": MATS5001"
-        },
-        "tokens": [
-            "(",
-            ":",
-            "MATS5001",
-            ")"
-        ],
-        "broke at": "Index 1, :"
+        "broke at": "Index 1, MATS?H"
     },
     "MDCN8888": {
         "condition": {

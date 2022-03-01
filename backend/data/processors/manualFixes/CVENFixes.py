@@ -78,7 +78,7 @@ def CVEN_4050():
     "original": "Prerequisite: 132 UOCs needed to enrol into this course and BE Hons Programs only<br/><br/>",
     "processed": "132UOCs needed to enrol into this course && BE Hons Programs only"
     """
-    # JOEL: How to say 'BE Hons Programs only", without listing them like this??
+    # TODO: JOEL: How to say 'BE Hons Programs only", without listing them like this??
     # Got it from majors here: https://www.handbook.unsw.edu.au/undergraduate/programs/2022/3707?year=2022
 
     # Additionally it still fails because I haven't said '132UOC in XXXX', what's the command for that???
@@ -150,7 +150,7 @@ def CVEN_9826():
     "original": ">74 WAM UG students<br/><br/>",
     "processed": "74WAM UG"
     """
-    # JOEL: This one is very strange, it's a PG course so the requirements are wack,
+    # TODO: JOEL: This one is very strange, it's a PG course so the requirements are wack,
     # so I went to the handbook page and don't see the prerequsites quoted here?
     # Link: https://www.handbook.unsw.edu.au/research/courses/2022/CVEN9826?year=2022
     return {
