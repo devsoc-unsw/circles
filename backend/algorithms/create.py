@@ -1,8 +1,23 @@
-from algorithms.objects.categories import *
-from algorithms.objects.conditions import *
-from algorithms.objects.helper import *
-
+import json
 import re
+
+from algorithms.objects.categories import (CourseCategory, FacultyCategory,
+                                           LevelCategory, LevelCourseCategory,
+                                           SchoolCategory)
+from algorithms.objects.conditions import (CompositeCondition,
+                                           CoreqCoursesCondition,
+                                           CourseCondition,
+                                           CourseExclusionCondition,
+                                           GRADECondition, Logic,
+                                           ProgramCondition,
+                                           ProgramExclusionCondition,
+                                           ProgramTypeCondition,
+                                           SpecialisationCondition,
+                                           UOCCondition, WAMCondition)
+from algorithms.objects.helper import (get_grade, get_uoc, get_wam, is_course,
+                                       is_grade, is_program, is_program_type,
+                                       is_specialisation, is_uoc, is_wam)
+
 
 # Load in cached exclusions
 CACHED_EXCLUSIONS_PATH = "./algorithms/cache/exclusions.json"
@@ -21,7 +36,8 @@ def create_category(tokens):
     if re.match(r"^[A-Z]{4}$", tokens[0], flags=re.IGNORECASE):
         # Course type
         return CourseCategory(tokens[0]), 0
-    elif re.match(r"^L[0-9]$", tokens[0], flags=re.IGNORECASE):
+
+    if re.match(r"^L[0-9]$", tokens[0], flags=re.IGNORECASE):
         # Level category. Get the level, then determine next token if there is one
         level = int(re.match(r"^L([0-9])$", tokens[0], flags=re.IGNORECASE).group(1))
 
