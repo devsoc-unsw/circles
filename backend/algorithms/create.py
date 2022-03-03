@@ -9,36 +9,38 @@ CACHED_EXCLUSIONS_PATH = "./algorithms/cache/exclusions.json"
 with open(CACHED_EXCLUSIONS_PATH) as f:
     CACHED_EXCLUSIONS = json.load(f)
 
+
 def create_category(tokens):
-    '''Given a list of tokens starting from after the connector keyword, create
+    """Given a list of tokens starting from after the connector keyword, create
     and return the category object matching the category, as well as the current index
-    of the token list.'''
+    of the token list."""
 
     # At most we will only parse 1 or 2 tokens so no need for an iterator
     # NOTE: There will always be at least 2 tokens due to a closing ")" bracket
     # so it is safe to check tokens[1]
-    if re.match(r'^[A-Z]{4}$', tokens[0], flags=re.IGNORECASE):
+    if re.match(r"^[A-Z]{4}$", tokens[0], flags=re.IGNORECASE):
         # Course type
         return CourseCategory(tokens[0]), 0
-    elif re.match(r'^L[0-9]$', tokens[0], flags=re.IGNORECASE):
+    elif re.match(r"^L[0-9]$", tokens[0], flags=re.IGNORECASE):
         # Level category. Get the level, then determine next token if there is one
-        level = int(re.match(r'^L([0-9])$', tokens[0],
-                    flags=re.IGNORECASE).group(1))
+        level = int(re.match(r"^L([0-9])$", tokens[0], flags=re.IGNORECASE).group(1))
 
-        if re.match(r'^[A-Z]{4}$', tokens[1], flags=re.IGNORECASE):
+        if re.match(r"^[A-Z]{4}$", tokens[1], flags=re.IGNORECASE):
             # Level Course Category. e.g. L2 MATH
-            course_code = re.match(r'^([A-Z]{4})$', tokens[1], flags=re.IGNORECASE).group(1)
+            course_code = re.match(
+                r"^([A-Z]{4})$", tokens[1], flags=re.IGNORECASE
+            ).group(1)
 
             return LevelCourseCategory(level, course_code), 1
         else:
             # There are no tokens after this. Simple level category
             return LevelCategory(level), 0
-    elif re.match(r'^S$', tokens[0], flags = re.IGNORECASE):
-         # School category
-         return SchoolCategory(f"{tokens[0]} {tokens[1]}"), 1
-    elif re.match(r'^F$', tokens[0], flags=re.IGNORECASE):
-         # Faculty category
-         return FacultyCategory(f"{tokens[0]} {tokens[1]}"), 1
+    elif re.match(r"^S$", tokens[0], flags=re.IGNORECASE):
+        # School category
+        return SchoolCategory(f"{tokens[0]} {tokens[1]}"), 1
+    elif re.match(r"^F$", tokens[0], flags=re.IGNORECASE):
+        # Faculty category
+        return FacultyCategory(f"{tokens[0]} {tokens[1]}"), 1
 
     # TODO: Levels (e.g. SPECIALISATIONS, PROGRAM)
 
@@ -47,20 +49,21 @@ def create_category(tokens):
 
 
 def create_condition(tokens, course=None):
-    '''
+    """
     The main wrapper for make_condition so we don't get 2 returns.
     Given the parsed logical tokens list (assuming starting and ending bracket),
     and optionally a course for which this condition applies to,
     Returns the condition
-    '''
+    """
     return make_condition(tokens, True, course)[0]
 
+
 def make_condition(tokens, first=False, course=None):
-    '''
+    """
     To be called by create_condition
     Given the parsed logical tokens list, (assuming starting and ending bracket),
     return the condition object and the index of that (sub) token list
-    '''
+    """
 
     # Everything is wrapped in a CompositeCondition
     result = CompositeCondition()
@@ -75,9 +78,9 @@ def make_condition(tokens, first=False, course=None):
 
     it = enumerate(tokens)
     for index, token in it:
-        if token == '(':
+        if token == "(":
             # Parse content in bracket 1 layer deeper
-            sub_result, sub_index = make_condition(tokens[index + 1:])
+            sub_result, sub_index = make_condition(tokens[index + 1 :])
             if sub_result == None:
                 # Error. Return None
                 return None, sub_index
@@ -85,7 +88,7 @@ def make_condition(tokens, first=False, course=None):
                 # Adjust the cur/rent position to scan the next token after this sub result
                 result.add_condition(sub_result)
                 [next(it) for _ in range(sub_index + 1)]
-        elif token == ')':
+        elif token == ")":
             # End parsing and go up one layer
             return result, index
         elif token == "&&":
@@ -97,7 +100,7 @@ def make_condition(tokens, first=False, course=None):
         elif token == "[":
             # Beginning of co-requisite. Parse courses and logical operators until closing "]"
             coreq_cond = CoreqCoursesCondition()
-            i = 1 # Helps track our index offset to parse this co-requisite
+            i = 1  # Helps track our index offset to parse this co-requisite
             while tokens[index + i] != "]":
                 if is_course(tokens[index + i]):
                     coreq_cond.add_course(tokens[index + i])
@@ -110,7 +113,7 @@ def make_condition(tokens, first=False, course=None):
                     return None, index + i
                 i += 1
                 next(it)
-            
+
             result.add_condition(coreq_cond)
 
             # Skip the closing "]" so the iterator will continue with the next token
@@ -128,7 +131,7 @@ def make_condition(tokens, first=False, course=None):
                 next(it)  # Skip "in" keyword
 
                 # Get the category of the uoc condition
-                category, sub_index = create_category(tokens[index + 2:])
+                category, sub_index = create_category(tokens[index + 2 :])
 
                 if category == None:
                     # Error. Return None. (Could also potentially set the uoc category
@@ -147,7 +150,7 @@ def make_condition(tokens, first=False, course=None):
             if index + 1 < len(tokens) and tokens[index + 1] == "in":
                 # Create category according to the token after 'in'
                 next(it)  # Skip "in" keyword
-                category, sub_index = create_category(tokens[index + 2:])
+                category, sub_index = create_category(tokens[index + 2 :])
 
                 if category == None:
                     # If can't parse the category, return None(raise an error)
@@ -182,4 +185,3 @@ def make_condition(tokens, first=False, course=None):
             return None, index
 
     return result, index
-
