@@ -1,4 +1,5 @@
 import json
+from nis import cat
 import re
 
 from algorithms.objects.categories import (CourseCategory, FacultyCategory,
@@ -28,7 +29,12 @@ with open(CACHED_EXCLUSIONS_PATH) as f:
 def create_category(tokens):
     """Given a list of tokens starting from after the connector keyword, create
     and return the category object matching the category, as well as the current index
-    of the token list."""
+    of the token list.
+
+    Returns:
+        Category, : Category object matching the category list
+        int: The current index of the the token list
+    """
 
     # At most we will only parse 1 or 2 tokens so no need for an iterator
     # NOTE: There will always be at least 2 tokens due to a closing ")" bracket
@@ -39,7 +45,8 @@ def create_category(tokens):
 
     if re.match(r"^L[0-9]$", tokens[0], flags=re.IGNORECASE):
         # Level category. Get the level, then determine next token if there is one
-        level = int(re.match(r"^L([0-9])$", tokens[0], flags=re.IGNORECASE).group(1))
+        level = int(re.match(r"^L([0-9])$", tokens[0],
+                    flags=re.IGNORECASE).group(1))
 
         if re.match(r"^[A-Z]{4}$", tokens[1], flags=re.IGNORECASE):
             # Level Course Category. e.g. L2 MATH
@@ -48,17 +55,18 @@ def create_category(tokens):
             ).group(1)
 
             return LevelCourseCategory(level, course_code), 1
-        else:
-            # There are no tokens after this. Simple level category
-            return LevelCategory(level), 0
-    elif re.match(r"^S$", tokens[0], flags=re.IGNORECASE):
+
+        # There are no tokens after this. Simple level category
+        return LevelCategory(level), 0
+
+    if re.match(r"^S$", tokens[0], flags=re.IGNORECASE):
         # School category
         return SchoolCategory(f"{tokens[0]} {tokens[1]}"), 1
-    elif re.match(r"^F$", tokens[0], flags=re.IGNORECASE):
+    if re.match(r"^F$", tokens[0], flags=re.IGNORECASE):
         # Faculty category
         return FacultyCategory(f"{tokens[0]} {tokens[1]}"), 1
 
-    # TODO: Levels (e.g. SPECIALISATIONS, PROGRAM)
+    # TODO Levels (e.g. SPECIALISATIONS, PROGRAM)
 
     # Did not match any category. Return None and assume only 1 token was consumed
     return None, 0
@@ -79,6 +87,8 @@ def make_condition(tokens, first=False, course=None):
     To be called by create_condition
     Given the parsed logical tokens list, (assuming starting and ending bracket),
     return the condition object and the index of that (sub) token list
+
+    Note: 
     """
 
     # Everything is wrapped in a CompositeCondition
@@ -92,18 +102,18 @@ def make_condition(tokens, first=False, course=None):
             elif is_program(exclusion):
                 result.add_condition(ProgramExclusionCondition(exclusion))
 
-    it = enumerate(tokens)
-    for index, token in it:
+    item = enumerate(tokens)
+    for index, token in item:
         if token == "(":
             # Parse content in bracket 1 layer deeper
-            sub_result, sub_index = make_condition(tokens[index + 1 :])
-            if sub_result == None:
+            sub_result, sub_index = make_condition(tokens[index + 1:])
+            if sub_result is None:
                 # Error. Return None
                 return None, sub_index
-            else:
-                # Adjust the cur/rent position to scan the next token after this sub result
-                result.add_condition(sub_result)
-                [next(it) for _ in range(sub_index + 1)]
+
+            # Adjust the cur/rent position to scan the next token after this sub result
+            result.add_condition(sub_result)
+            [next(item) for _ in range(sub_index + 1)]
         elif token == ")":
             # End parsing and go up one layer
             return result, index
@@ -128,36 +138,25 @@ def make_condition(tokens, first=False, course=None):
                     # Error, bad token processed. Return None
                     return None, index + i
                 i += 1
-                next(it)
+                next(item)
 
             result.add_condition(coreq_cond)
 
             # Skip the closing "]" so the iterator will continue with the next token
-            next(it)
+            next(item)
         elif is_course(token):
             # Condition for a single course
             result.add_condition(CourseCondition(token))
         elif is_uoc(token):
             # Condition for UOC requirement
-            uoc = get_uoc(token)
-            uoc_cond = UOCCondition(uoc)
+            uoc_cond, category, sub_index = handle_uoc_condition(
+                token, tokens, item, index)
 
-            if index + 1 < len(tokens) and tokens[index + 1] == "in":
-                # Create category according to the token after 'in'
-                next(it)  # Skip "in" keyword
+            if category is None:
+                # Error - category cannot be created
+                return None, index
 
-                # Get the category of the uoc condition
-                category, sub_index = create_category(tokens[index + 2 :])
-
-                if category == None:
-                    # Error. Return None. (Could also potentially set the uoc category
-                    # to just the default Category which returns true and 1000 uoc taken)
-                    return None, index
-                else:
-                    # Add the category to the uoc and adjust the current index position
-                    uoc_cond.set_category(category)
-                    [next(it) for _ in range(sub_index + 1)]
-
+            [next(item) for _ in range(sub_index + 1)]
             result.add_condition(uoc_cond)
         elif is_wam(token):
             # Condition for WAM requirement
@@ -165,16 +164,16 @@ def make_condition(tokens, first=False, course=None):
 
             if index + 1 < len(tokens) and tokens[index + 1] == "in":
                 # Create category according to the token after 'in'
-                next(it)  # Skip "in" keyword
-                category, sub_index = create_category(tokens[index + 2 :])
+                next(item)  # Skip "in" keyword
+                category, sub_index = create_category(tokens[index + 2:])
 
-                if category == None:
+                if category is None:
                     # If can't parse the category, return None(raise an error)
                     return None, index
                 else:
                     # Add the category and adjust the current index position
                     wam_cond.set_category(category)
-                    [next(it) for _ in range(sub_index + 1)]
+                    [next(item) for _ in range(sub_index + 1)]
 
             result.add_condition(wam_cond)
         elif is_grade(token):
@@ -183,8 +182,8 @@ def make_condition(tokens, first=False, course=None):
 
             if index + 1 < len(tokens) and tokens[index + 1] == "in":
                 # Next token is "in" or else there has been an error
-                next(it)  # Skip "in" keyword and course code
-                next(it)
+                next(item)  # Skip "in" keyword and course code
+                next(item)
 
                 result.add_condition(GRADECondition(grade, tokens[index + 2]))
             else:
@@ -201,3 +200,40 @@ def make_condition(tokens, first=False, course=None):
             return None, index
 
     return result, index
+
+
+def handle_uoc_condition(token, tokens, item, index):
+    """Condition for the UOC requirement
+
+    Args:
+        token (str): current token being operated one
+        tokens ([string]): complete list of tokens
+        item (enumerate(tokens)): enumerated version of tokens
+        index (int): index of the current tokens
+
+    Returns:
+        uoc_cond (UOCCondition): uoc category condition
+        category (Category): category of the uoc condition
+        sub_index (int): index after the category parsing is done
+    """
+    uoc = get_uoc(token)
+    uoc_cond = UOCCondition(uoc)
+
+    # cannot parse. end of tokens or, next token is not "in"
+    if index + 1 >= len(tokens) and tokens[index + 1] != "in":
+        return uoc_cond, None, index
+
+    # Create category according to the token after 'in'
+    next(item)  # Skip "in" keyword
+
+    # Get the category of the uoc condition
+    category, sub_index = create_category(tokens[index + 2:])
+
+    if category is None:
+        # Error. Return None. (Could also potentially set the uoc category
+        # to just the default Category which returns true and 1000 uoc taken)
+        return uoc_cond, None, index
+
+    # Add the category to the uoc
+    uoc_cond.set_category(category)
+    return uoc_cond, category, sub_index
