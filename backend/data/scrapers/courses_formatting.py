@@ -6,14 +6,14 @@ Step in the course data's journey:
 """
 
 import json
-from data.utility import dataHelpers
+from data.utility import data_helpers
 
 ALL_COURSES = {}
 
 
 def format_course_data():
     """ Formats the raw course data """
-    raw_content = dataHelpers.read_data("data/scrapers/coursesPureRaw.json")
+    raw_content = data_helpers.read_data("data/scrapers/coursesPureRaw.json")
 
     for course in raw_content:
         # Add basic details to course dict
@@ -33,7 +33,7 @@ def format_course_data():
 
         ALL_COURSES[course["code"]] = formatted_course
 
-    dataHelpers.write_data(
+    data_helpers.write_data(
         ALL_COURSES, 'data/scrapers/coursesFormattedRaw.json')
 
 

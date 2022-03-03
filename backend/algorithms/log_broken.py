@@ -10,8 +10,8 @@ Run from the backend directory with python3 -m algorithms.log_broken
 from algorithms.create import make_condition
 import json
 
-CONDITIONS_TOKENS_FILE = "./data/finalData/conditionsTokens.json"
-CONDITIONS_PROCESSED_FILE = "./data/finalData/conditionsProcessed.json"
+CONDITIONS_TOKENS_FILE = "./data/final_data/conditionsTokens.json"
+CONDITIONS_PROCESSED_FILE = "./data/final_data/conditionsProcessed.json"
 ERROR_OUTPUT_FILE = "./algorithms/errors.json"
 
 def log_broken_conditions():
@@ -33,7 +33,7 @@ def log_broken_conditions():
             output[course] = {
                 "condition": conditions[course],
                 "tokens": tokens,
-                "broke at": f"Index {bad_index}, {tokens[bad_index]}"
+                "broke at": f"Index {bad_index}, {'exclusions' if bad_index == -1 else tokens[bad_index]}"
             }
     
     with open(ERROR_OUTPUT_FILE, "w") as out:

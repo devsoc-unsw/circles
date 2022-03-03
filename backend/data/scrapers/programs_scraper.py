@@ -10,7 +10,7 @@ Step in the data's journey:
 import requests
 import json
 
-from data.utility import dataHelpers
+from data.utility import data_helpers
 from data.config import LIVE_YEAR
 
 TOTAL_PGRMS = 249
@@ -82,17 +82,15 @@ Retrieves data for all undergraduate programs
 '''
 
 
-def scrape_programs():
+def scrape_prg_data():
     url = "https://www.handbook.unsw.edu.au/api/es/search"
     headers = {
         "content-type": "application/json",
     }
     r = requests.post(url, data=json.dumps(PAYLOAD), headers=headers)
-    dataHelpers.write_data(
+    data_helpers.write_data(
         r.json()["contentlets"], 'data/scrapers/programsPureRaw.json')
 
 
 if __name__ == "__main__":
-    scrape_programs()
-
-
+    scrape_prg_data()

@@ -1,7 +1,4 @@
-import re
-import sys
-from data.utility import dataHelpers
-from collections import OrderedDict
+from data.utility import data_helpers
 
 # Final Data for all courses
 # NOTE ONLY DO SCHOOL ONES
@@ -25,17 +22,17 @@ def mapCourse(course, schoolMappings, facultyMappings):
 
 def process_data():
     # Read in coursesProcessed File
-    courseData = dataHelpers.read_data("data/finalData/coursesProcessed.json")
-    facultyMappings = dataHelpers.read_data("algorithms/cache/mappings/facultyMappings.json")
-    schoolMappings = dataHelpers.read_data("algorithms/cache/mappings/schoolMappings.json")
+    courseData = data_helpers.read_data("data/final_data/coursesProcessed.json")
+    facultyMappings = data_helpers.read_data("algorithms/cache/mappings/facultyMappings.json")
+    schoolMappings = data_helpers.read_data("algorithms/cache/mappings/schoolMappings.json")
 
     initialiseData(schoolMappings, facultyMappings)
     for course in courseData.values():
         mapCourse(course, schoolMappings, facultyMappings)
 
-    dataHelpers.write_data(
+    data_helpers.write_data(
             finalSchoolMappings, "algorithms/cache/mappings/schoolCourseMappings.json")
-    dataHelpers.write_data(
+    data_helpers.write_data(
             finalFacultyMappings, "algorithms/cache/mappings/facultyCourseMappings.json")
 
 def initialiseData(schoolMappings, facultyMappings):

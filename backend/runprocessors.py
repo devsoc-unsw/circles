@@ -10,18 +10,18 @@ import subprocess
 from algorithms.load_conditions import cache_conditions_pkl_file
 from algorithms.log_broken import log_broken_conditions 
 
-from data.scrapers.programsScraper import scrape_programs as scrape_prg_data
-from data.scrapers.specialisationsScraper import scrape_spn_data
-from data.scrapers.coursesScraper import scrape_courses as scrape_course_data
+from data.scrapers.programs_scraper import scrape_prg_data
+from data.scrapers.specialisations_scraper import scrape_spn_data
+from data.scrapers.courses_scraper import scrape_course_data
 
-from data.scrapers.programsFormatting import format_data as format_prg_data
-from data.scrapers.specialisationsFormatting import format_spn_data
-from data.scrapers.coursesFormatting import format_course_data
+from data.scrapers.programs_formatting import format_prg_data
+from data.scrapers.specialisations_formatting import format_spn_data
+from data.scrapers.courses_formatting import format_course_data
 
-from data.processors.programs_processing import process_data as process_prg_data
-from data.processors.programs_processing_type1 import process_data as process_prg_data_type1
+from data.processors.programs_processing import process_prg_data
+from data.processors.programs_processing_type1 import process_prg_data_type1
 from data.processors.specialisations_processing import customise_spn_data
-from data.processors.courses_processing import process_courses as process_course_data
+from data.processors.courses_processing import process_course_data
 
 from data.processors.conditions_preprocessing import preprocess_conditions
 from data.processors.conditions_tokenising import tokenise_conditions
@@ -50,7 +50,7 @@ except:
     sys.exit(0)
 
 def run_manual_fixes():
-    subprocess.run(['data/processors/manualFixes/runManualFixes.sh'])
+    subprocess.run(['data/processors/manual_fixes/run_manual_fixes.sh'])
 
 run = {
     'program': {
@@ -72,7 +72,8 @@ run = {
     'condition': {
         'process': preprocess_conditions,
         'manual': run_manual_fixes,
-        'tokenise': tokenise_conditions
+        'tokenise': tokenise_conditions,
+        'parsingErrors': log_broken_conditions
     },
     'cache': {
         'conditions': cache_conditions_pkl_file,
@@ -80,10 +81,17 @@ run = {
         'warnings': cache_warnings,
         'mapping': cache_mappings,
         'program': cache_program_mappings,
-        'parsingErrors': log_broken_conditions
     }
 }
 if __name__ == '__main__':
+    if args.type == None and args.stage == None:
+        res = input("did you mean to run all data fixes? [y/N] ")
+        if 'y' == res:
+            args.type = 'data-fix'
+            args.stage = 'all'
+        else:
+            parser.print_help()
+            exit()
     if args.type == 'data-fix' and args.stage == 'all':
         '''run all the things except for the scrapers and formatters to deal with code changes'''
         for t in run:

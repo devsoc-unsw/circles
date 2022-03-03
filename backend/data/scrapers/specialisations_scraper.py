@@ -1,22 +1,22 @@
 """
-Program extracts raw data for Programs and place data in file
-'coursesPureRaw.json', ready for formatting.
+Program extracts raw data for specialisations and place data in file
+'specialisationsPureRaw.json', ready for formatting.
 
 Step in the data's journey:
-    [ X ] Scrape raw data (coursesScraper.py)
-    [   ] Format scraped data (coursesFormatting.py)
-    [   ] Customise formatted data (coursesProcessing.py)
+    [ X ] Scrape raw data (specialisationsScraper.py)
+    [   ] Format scraped data (specialisationFormatting.py)
+    [   ] Customise formatted data (specialisationProcessing.py)
 """
 
 import requests
 import json
-from datetime import date
 
-from data.utility import dataHelpers
+from data.utility import data_helpers
 from data.config import LIVE_YEAR
 
-TOTAL_COURSES = 10000
+TOTAL_SPNS = 1000
 
+# Note as at May 2021, there are 365 specialisations
 PAYLOAD = {
     "query": {
         "bool": {
@@ -33,7 +33,9 @@ PAYLOAD = {
                             "should": [
                                 {
                                     "query_string": {
-                                        "fields": ["unsw_psubject.implementationYear"],
+                                        "fields": [
+                                            "unsw_paos.implementationYear"
+                                        ],
                                         "query":f"*{LIVE_YEAR}*"
                                     }
                                 }
@@ -47,7 +49,7 @@ PAYLOAD = {
                                 {
                                     "query_string": {
                                         "fields": [
-                                            "unsw_psubject.studyLevelValue"
+                                            "unsw_paos.studyLevelValue"
                                         ],
                                         "query":"*ugrd*"
                                     }
@@ -61,7 +63,9 @@ PAYLOAD = {
                             "should": [
                                 {
                                     "query_string": {
-                                        "fields": ["unsw_psubject.active"],
+                                        "fields": [
+                                            "unsw_paos.active"
+                                        ],
                                         "query":"*1*"
                                     }
                                 }
@@ -73,7 +77,9 @@ PAYLOAD = {
             "filter": [
                 {
                     "terms": {
-                        "contenttype": ["unsw_psubject"]
+                        "contenttype": [
+                            "unsw_paos"
+                        ]
                     }
                 }
             ]
@@ -81,36 +87,46 @@ PAYLOAD = {
     },
     "sort": [
         {
-            "unsw_psubject.code_dotraw": {
+            "unsw_paos.code_dotraw": {
                 "order": "asc"
             }
         }
     ],
     "from": 0,
-    "size": TOTAL_COURSES,
+    "size": TOTAL_SPNS,
     "track_scores": True,
     "_source": {
-        "includes": ["*.code", "*.name", "*.award_titles", "*.keywords", "urlmap", "contenttype"],
-        "excludes": ["", None]
+        "includes": [
+            "*.code",
+            "*.name",
+            "*.award_titles",
+            "*.keywords",
+            "urlmap",
+            "contenttype"
+        ],
+        "excludes": [
+            "",
+            None
+        ]
     }
 }
 
-'''
-Retrieves data for all undergraduate courses
-'''
 
+def scrape_spn_data():
+    """ Retrieves data for all undergraduate specialisations """
 
-def scrape_courses():
     url = "https://www.handbook.unsw.edu.au/api/es/search"
     headers = {
         "content-type": "application/json",
     }
+
     r = requests.post(url, data=json.dumps(PAYLOAD), headers=headers)
-    dataHelpers.write_data(
-        r.json()["contentlets"], "data/scrapers/coursesPureRaw.json")
+
+    data_helpers.write_data(
+        r.json()["contentlets"], 'data/scrapers/specialisationsPureRaw.json')
 
 
 if __name__ == "__main__":
-    scrape_courses()
+    scrape_spn_data()
 
 

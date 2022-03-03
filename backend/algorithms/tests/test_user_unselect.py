@@ -2,7 +2,6 @@
 
 from algorithms.objects.conditions import *
 from algorithms.objects.user import User
-from math import isclose
 import json
 
 PATH = "./algorithms/exampleUsers.json"

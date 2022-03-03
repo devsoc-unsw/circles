@@ -8,15 +8,15 @@ Some examples of preprocessing are:
 '''
 
 import re
-from data.utility import dataHelpers
+from data.utility import data_helpers
 
 PREPROCESSED_CONDITIONS = {}
-CODE_MAPPING = dataHelpers.read_data(
+CODE_MAPPING = data_helpers.read_data(
     "data/utility/programCodeMappings.json")["title_to_code"]
 
 
 def preprocess_conditions():
-    data = dataHelpers.read_data("data/scrapers/coursesFormattedRaw.json")
+    data = data_helpers.read_data("data/scrapers/coursesFormattedRaw.json")
 
     for code, course in data.items():
         # if not course["enrolment_rules"]:
@@ -66,8 +66,8 @@ def preprocess_conditions():
 
         PREPROCESSED_CONDITIONS[code] = conditions
 
-    dataHelpers.write_data(
-        PREPROCESSED_CONDITIONS, "data/finalData/conditionsProcessed.json")
+    data_helpers.write_data(
+        PREPROCESSED_CONDITIONS, "data/final_data/conditionsProcessed.json")
 
 # -----------------------------------------------------------------------------
 # Phase 1: Deletions
