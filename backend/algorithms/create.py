@@ -2,22 +2,39 @@ import json
 from nis import cat
 import re
 
-from algorithms.objects.categories import (CourseCategory, FacultyCategory,
-                                           LevelCategory, LevelCourseCategory,
-                                           SchoolCategory)
-from algorithms.objects.conditions import (CompositeCondition,
-                                           CoreqCoursesCondition,
-                                           CourseCondition,
-                                           CourseExclusionCondition,
-                                           GRADECondition, Logic,
-                                           ProgramCondition,
-                                           ProgramExclusionCondition,
-                                           ProgramTypeCondition,
-                                           SpecialisationCondition,
-                                           UOCCondition, WAMCondition)
-from algorithms.objects.helper import (get_grade, get_uoc, get_wam, is_course,
-                                       is_grade, is_program, is_program_type,
-                                       is_specialisation, is_uoc, is_wam)
+from algorithms.objects.categories import (
+    CourseCategory,
+    FacultyCategory,
+    LevelCategory,
+    LevelCourseCategory,
+    SchoolCategory,
+)
+from algorithms.objects.conditions import (
+    CompositeCondition,
+    CoreqCoursesCondition,
+    CourseCondition,
+    CourseExclusionCondition,
+    GRADECondition,
+    Logic,
+    ProgramCondition,
+    ProgramExclusionCondition,
+    ProgramTypeCondition,
+    SpecialisationCondition,
+    UOCCondition,
+    WAMCondition,
+)
+from algorithms.objects.helper import (
+    get_grade,
+    get_uoc,
+    get_wam,
+    is_course,
+    is_grade,
+    is_program,
+    is_program_type,
+    is_specialisation,
+    is_uoc,
+    is_wam,
+)
 
 
 # Load in cached exclusions
@@ -45,8 +62,7 @@ def create_category(tokens):
 
     if re.match(r"^L[0-9]$", tokens[0], flags=re.IGNORECASE):
         # Level category. Get the level, then determine next token if there is one
-        level = int(re.match(r"^L([0-9])$", tokens[0],
-                    flags=re.IGNORECASE).group(1))
+        level = int(re.match(r"^L([0-9])$", tokens[0], flags=re.IGNORECASE).group(1))
 
         if re.match(r"^[A-Z]{4}$", tokens[1], flags=re.IGNORECASE):
             # Level Course Category. e.g. L2 MATH
@@ -88,7 +104,7 @@ def make_condition(tokens, first=False, course=None):
     Given the parsed logical tokens list, (assuming starting and ending bracket),
     return the condition object and the index of that (sub) token list
 
-    Note: 
+    Note:
     """
 
     # Everything is wrapped in a CompositeCondition
@@ -106,7 +122,7 @@ def make_condition(tokens, first=False, course=None):
     for index, token in item:
         if token == "(":
             # Parse content in bracket 1 layer deeper
-            sub_result, sub_index = make_condition(tokens[index + 1:])
+            sub_result, sub_index = make_condition(tokens[index + 1 :])
             if sub_result is None:
                 # Error. Return None
                 return None, sub_index
@@ -150,7 +166,8 @@ def make_condition(tokens, first=False, course=None):
         elif is_uoc(token):
             # Condition for UOC requirement
             uoc_cond, category, sub_index = handle_uoc_condition(
-                token, tokens, item, index)
+                token, tokens, item, index
+            )
 
             if category is None:
                 # Error - category cannot be created
@@ -165,7 +182,7 @@ def make_condition(tokens, first=False, course=None):
             if index + 1 < len(tokens) and tokens[index + 1] == "in":
                 # Create category according to the token after 'in'
                 next(item)  # Skip "in" keyword
-                category, sub_index = create_category(tokens[index + 2:])
+                category, sub_index = create_category(tokens[index + 2 :])
 
                 if category is None:
                     # If can't parse the category, return None(raise an error)
@@ -227,7 +244,7 @@ def handle_uoc_condition(token, tokens, item, index):
     next(item)  # Skip "in" keyword
 
     # Get the category of the uoc condition
-    category, sub_index = create_category(tokens[index + 2:])
+    category, sub_index = create_category(tokens[index + 2 :])
 
     if category is None:
         # Error. Return None. (Could also potentially set the uoc category
