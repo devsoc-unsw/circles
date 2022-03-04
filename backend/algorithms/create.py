@@ -1,5 +1,4 @@
 import json
-from nis import cat
 import re
 
 from algorithms.objects.categories import (
@@ -7,7 +6,7 @@ from algorithms.objects.categories import (
     FacultyCategory,
     LevelCategory,
     LevelCourseCategory,
-    SchoolCategory,
+    SchoolCategory
 )
 from algorithms.objects.conditions import (
     CompositeCondition,
@@ -21,7 +20,7 @@ from algorithms.objects.conditions import (
     ProgramTypeCondition,
     SpecialisationCondition,
     UOCCondition,
-    WAMCondition,
+    WAMCondition
 )
 from algorithms.objects.helper import (
     get_grade,
@@ -33,7 +32,7 @@ from algorithms.objects.helper import (
     is_program_type,
     is_specialisation,
     is_uoc,
-    is_wam,
+    is_wam
 )
 
 
@@ -122,7 +121,7 @@ def make_condition(tokens, first=False, course=None):
     for index, token in item:
         if token == "(":
             # Parse content in bracket 1 layer deeper
-            sub_result, sub_index = make_condition(tokens[index + 1 :])
+            sub_result, sub_index = make_condition(tokens[index + 1:])
             if sub_result is None:
                 # Error. Return None
                 return None, sub_index
