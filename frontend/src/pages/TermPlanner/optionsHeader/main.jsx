@@ -12,9 +12,10 @@ import { IoIosEye } from "react-icons/io";
 import { TiDownload } from "react-icons/ti";
 import { plannerActions } from "../../../actions/plannerActions";
 
-const OptionsHeader = ({ plannerRef }) => {
+const OptionsHeader = ({ plannerRef, isAllEmpty }) => {
   const theme = useSelector((state) => state.theme);
   const { areYearsHidden } = useSelector((state) => state.planner);
+  const { years } = useSelector((state) => state.planner);
   const dispatch = useDispatch();
   const unhideAll = () => {
     dispatch(plannerActions("UNHIDE_ALL_YEARS"));
@@ -66,12 +67,17 @@ const OptionsHeader = ({ plannerRef }) => {
           </button>
         </Tippy>
       )}
-
-      <Tooltip title="Unschedule all courses">
-        <button className="settingsButton" onClick={unscheduleAll}>
-          <FaRegCalendarTimes size="1.5em" className="settingsIcon" />
-        </button>
-      </Tooltip>
+      
+      {!isAllEmpty(years) && (
+        <Tooltip title="Unschedule all courses">
+          <button 
+            className="settingsButton" 
+            onClick={unscheduleAll}
+          >
+            <FaRegCalendarTimes size="1.5em" className="settingsIcon" />
+          </button>
+        </Tooltip>
+      )}
 
       {areYearsHidden && (
         <Tooltip title="Show all hidden years">
