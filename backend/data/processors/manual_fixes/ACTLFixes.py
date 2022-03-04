@@ -110,7 +110,7 @@ def ACTL_3192(condition):
     return {
         "original": condition["original"],
         "processed": "ECON2101 || (ECON1101 && ACTL1101) || (84UOC && COMM#)",
-        "warning": "You must be in good academic standing to enroll in this course."
+        "handbook_note": "You must be in good academic standing to enroll in this course."
     }
 
 def ACTL_3202():
@@ -138,7 +138,7 @@ def ACTL_4001(condition):
     return {
         "original": condition["original"],
         "processed": "(ACCT1511 || COMM1140) && ACTL3141 && ACTL3182 && (FINS1613 || COMM1180) && ACTL3162 && ACTL3151 && ECON1102 && 60WAM",
-        "warning": "Students in 3587 may complete ACTL3141 as a co-requisite."
+        "handbook_note": "Students in 3587 may complete ACTL3141 as a co-requisite."
     }
 
 def ACTL_4003():

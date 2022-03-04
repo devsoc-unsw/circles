@@ -27,7 +27,7 @@ from data.processors.conditions_preprocessing import preprocess_conditions
 from data.processors.conditions_tokenising import tokenise_conditions
 
 from algorithms.cache.cache import cache_exclusions
-from algorithms.cache.cache import cache_warnings
+from algorithms.cache.cache import cache_handbook_note
 from algorithms.cache.cache import cache_mappings
 from algorithms.cache.cache import cache_program_mappings
 
@@ -78,7 +78,7 @@ run = {
     'cache': {
         'conditions': cache_conditions_pkl_file,
         'exclusion': cache_exclusions,
-        'warnings': cache_warnings,
+        'handbook_note': cache_handbook_note,
         'mapping': cache_mappings,
         'program': cache_program_mappings,
     }
