@@ -224,7 +224,7 @@
     },
     "ADAD4001": {
         "original": "Must have completed either SART3800, SDES2116, SOMA3616.<br/><br/>",
-        "processed": "SART3800, SDES2116, SOMA3616"
+        "processed": "SART3800 && SDES2116 && SOMA3616"
     },
     "ADAD4010": {
         "original": "Completed 138UOC + ADAD3114<br/><br/>",
@@ -236,7 +236,7 @@
     },
     "ADAD4100": {
         "original": "Students must be enrolled in an Art & Design Honours Year. Programs 4526, 4527, 4528<br/><br/>",
-        "processed": "must be an Art & Design Honours Year. Programs 4526, 4527, 4528"
+        "processed": "must be an Art && Design Honours Year. Programs 4526, 4527, 4528"
     },
     "AERO3110": {
         "original": "Prerequisite: (DESN2000 or MMAN2100) AND (ENGG2400 OR MMAN2400)<br/><br/>",
@@ -1172,7 +1172,7 @@
     },
     "ARTS3049": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, English or Media, Culture & Technology<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || English || Media, Culture & Technology"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || English || Media && Culture && Technology"
     },
     "ARTS3050": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, English<br/><br/>",
@@ -1196,7 +1196,7 @@
     },
     "ARTS3063": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Film Studies or Media, Culture & Technology<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Film Studies || Media, Culture & Technology"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Film Studies || Media && Culture && Technology"
     },
     "ARTS3064": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Film Studies or MCT<br/><br/>",
@@ -1236,27 +1236,27 @@
     },
     "ARTS3122": {
         "original": "Prerequisite: 48 uoc overall, including 6 uoc at level 1 and 6 uoc at level 2 in the Theatre & Performance Studies Stream<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in the Theatre & Performance Studies Stream"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in the Theatre && Performance Studies Stream"
     },
     "ARTS3123": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Dance Studies or Theatre & Performance Studies<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Dance Studies || Theatre & Performance Studies"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Dance Studies || Theatre && Performance Studies"
     },
     "ARTS3124": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Theatre & Performance Studies<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Theatre & Performance Studies"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams && Theatre && Performance Studies"
     },
     "ARTS3125": {
         "original": "Prerequisite: 48 uoc overall, including 6 uoc at level 1 and 6 uoc at level 2 in one of the following specialisations, MCT or\u00a0Theatre & Performance Studies. Or 66 uoc overall and enrolled in a single or dual award Media (S&SP) program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, MCT or\u00a0Theatre & Performance Studies. || 66UOC && a single || dual award Media (S&SP) program"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations && MCT or\u00a0Theatre && Performance Studies. || 66UOC && a single || dual award Media (S&SP) program"
     },
     "ARTS3130": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Dance Studies or Theatre & Performance Studies. Or 72 UOC overall and enrolment in an Art & Design program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Dance Studies || Theatre & Performance Studies. || 72UOC && enrolment in an Art & Design program"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Dance Studies || Theatre && Performance Studies. || 72UOC && enrolment in an Art && Design program"
     },
     "ARTS3131": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams,  Australian Studies or Theatre & Performance Studies. Excluded: ARTS2124<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Australian Studies || Theatre & Performance Studies"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Australian Studies || Theatre && Performance Studies"
     },
     "ARTS3132": {
         "original": "Prerequisites: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Theatre and Performance Studies<br/><br/>",
@@ -1592,7 +1592,7 @@
     },
     "ARTS3810": {
         "original": "Prerequisite: 72 units of credit overall, and  enrolment in an International Relations, Politics, or Politics & International Relations major<br/><br/>",
-        "processed": "72UOC && enrolment in an International Relations || Politics || Politics & International Relations major"
+        "processed": "72UOC && enrolment in an International Relations || Politics || Politics && International Relations major"
     },
     "ARTS3816": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, International Relations or Politics. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
@@ -1624,7 +1624,7 @@
     },
     "ARTS3870": {
         "original": "Prerequisite: 72 units of credit overall, and enrolment in a Sociology & Anthropology major or extended minor<br/><br/>",
-        "processed": "72UOC && enrolment in a Sociology & Anthropology major || extended minor"
+        "processed": "72UOC && enrolment in a Sociology && Anthropology major || extended minor"
     },
     "ARTS3871": {
         "original": "Prerequisite: 48UOC overall, including 6UOC lv1 and 6UOC lv2 in one of the following streams, Criminology/S&A; or enrolment in program 3422/4763 and 12UOC lv2 SRAP and 18UOC lv2 CRIM; or enrolment in Program 4034 and 30UOC at lv2 including 12UOC lv2 CRIM<br/><br/>",
@@ -1632,23 +1632,23 @@
     },
     "ARTS3872": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Media, Culture & Technology or Sociology & Anthropology. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Media, Culture & Technology || Sociology & Anthropology. || 48UOC && enrolment in an International Studies program"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations && Media && Culture && Technology || Sociology && Anthropology. || 48UOC && enrolment in an International Studies program"
     },
     "ARTS3874": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Australian Studies, Development Studies, Geographical Studies, Global Development, or Sociology & Anthropology<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations || Australian Studies || Development Studies || Geographical Studies || Global Development || Sociology & Anthropology"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations || Australian Studies || Development Studies || Geographical Studies || Global Development || Sociology && Anthropology"
     },
     "ARTS3875": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Australian Studies, Development Studies, or Sociology & Anthropology<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Australian Studies || Development Studies || Sociology & Anthropology"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Australian Studies || Development Studies || Sociology && Anthropology"
     },
     "ARTS3883": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Asian Studies or Sociology & Anthropology<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Asian Studies || Sociology & Anthropology"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Asian Studies || Sociology && Anthropology"
     },
     "ARTS3885": {
         "original": "Prerequisites: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Sociology & Anthropology. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Sociology & Anthropology. || 48UOC && enrolment in an International Studies program"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations && Sociology && Anthropology. || 48UOC && enrolment in an International Studies program"
     },
     "ARTS3886": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC level 1 and 6 UOC level 2 in one of the following streams, Criminology/S&A. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
@@ -1664,7 +1664,7 @@
     },
     "ARTS3991": {
         "original": "Prerequisite: 72 uoc overall, and enrolment in an Arts & Social Sciences major in an Arts & Social Sciences single or double degree program. Consent required<br/><br/>",
-        "processed": "72UOC && enrolment in an Arts & Social Sciences major in an Arts & Social Sciences single || double degree program. Consent required"
+        "processed": "72UOC && enrolment in an Arts && Social Sciences major in an Arts && Social Sciences single || double degree program. Consent required"
     },
     "ARTS4100": {
         "original": "Prerequisite: Enrolment in a School of the Arts and Media honours program<br/><br/>",
@@ -2652,15 +2652,15 @@
     },
     "BIOC3261": {
         "original": "Prerequisite: BIOC2101, BIOC2201<br/><br/>",
-        "processed": "BIOC2101, BIOC2201"
+        "processed": "BIOC2101 && BIOC2201"
     },
     "BIOC3271": {
         "original": "Prerequisite: BIOC2101, BIOC2201<br/><br/>",
-        "processed": "BIOC2101, BIOC2201"
+        "processed": "BIOC2101 && BIOC2201"
     },
     "BIOC3671": {
         "original": "Prerequisite: BIOC2101, BIOC2201. Restricted to Advanced Science programs (3985, 3990, 3962, 3972, 3973, 3986, 3931, 3936)<br/><br/>",
-        "processed": "BIOC2101, BIOC2201. Restricted to Advanced Science programs (3985, 3990, 3962, 3972, 3973, 3986, 3931, 3936)"
+        "processed": "BIOC2101 && BIOC2201. Restricted to Advanced Science programs (3985, 3990, 3962, 3972, 3973, 3986, 3931, 3936)"
     },
     "BIOM1010": {
         "original": "",
@@ -3032,11 +3032,11 @@
     },
     "CEIC3001": {
         "original": "Pre-requisites: CEIC2000, CEIC2001, CEIC2002, CEIC2005<br/><br/>",
-        "processed": "CEIC2000, CEIC2001, CEIC2002, CEIC2005"
+        "processed": "CEIC2000 && CEIC2001 && CEIC2002 && CEIC2005"
     },
     "CEIC3002": {
         "original": "Prerequisite: CEIC2000,CEIC2005,CEIC3003<br/><br/>",
-        "processed": "CEIC2000,CEIC2005,CEIC3003"
+        "processed": "CEIC2000 && CEIC2005 && CEIC3003"
     },
     "CEIC3003": {
         "original": "",
@@ -3044,11 +3044,11 @@
     },
     "CEIC3004": {
         "original": "Pre-requisites: CEIC2000, CEIC2001, CEIC2002, CEIC3001<br/><br/>",
-        "processed": "CEIC2000, CEIC2001, CEIC2002, CEIC3001"
+        "processed": "CEIC2000 && CEIC2001 && CEIC2002 && CEIC3001"
     },
     "CEIC3005": {
         "original": "Pre-requisites: CEIC2000, CEIC2001, CEIC2002<br/><br/>",
-        "processed": "CEIC2000, CEIC2001, CEIC2002"
+        "processed": "CEIC2000 && CEIC2001 && CEIC2002"
     },
     "CEIC3006": {
         "original": "Pre-requisites: CEIC2000, MATH2018 or MATH2019, MATH2089<br/><br/>",
@@ -3120,7 +3120,7 @@
     },
     "CEIC8341": {
         "original": "Prerequisites: CEIC2001, CEIC2002<br/><br/>",
-        "processed": "CEIC2001, CEIC2002"
+        "processed": "CEIC2001 && CEIC2002"
     },
     "CHEM1001": {
         "original": "Exclusion: CHEM1011, CHEM1031, CHEM1051, CHEM1831<br/><br/>Exclusion: CHEM1811<br/><br/>",
@@ -3312,7 +3312,7 @@
     },
     "CHEM6701": {
         "original": "12 UOC of CHEM2011, CHEM2021, CHEM2031, CHEM2839, CHEM2041 & CHEM2828<br/><br/>",
-        "processed": "12UOC of CHEM2011, CHEM2021, CHEM2031, CHEM2839, CHEM2041 & CHEM2828"
+        "processed": "12UOC of CHEM2011 && CHEM2021 && CHEM2031 && CHEM2839 && CHEM2041 && CHEM2828"
     },
     "CHEN6701": {
         "original": "",
@@ -3324,7 +3324,7 @@
     },
     "CHEN6706": {
         "original": "Pre-requisites: CEIC2001, CEIC2002, MATH2019, CEIC3000<br/><br/>",
-        "processed": "CEIC2001, CEIC2002, MATH2019, CEIC3000"
+        "processed": "CEIC2001 && CEIC2002 && MATH2019 && CEIC3000"
     },
     "CHEN6710": {
         "original": "Prerequisite: CEIC3004 and CEIC3005 and CEIC3006<br/><br/>",
@@ -3404,11 +3404,11 @@
     },
     "CODE3201": {
         "original": "Prerequisite: CODE3100 & concurrently enrolled in CODE3202<br/><br/>",
-        "processed": "CODE3100 & concurrently CODE3202"
+        "processed": "CODE3100 && concurrently CODE3202"
     },
     "CODE3202": {
         "original": "Prerequisite: CODE3100 & concurrently enrolled in CODE3202<br/><br/>",
-        "processed": "CODE3100 & concurrently"
+        "processed": "CODE3100 && concurrently"
     },
     "CODE4100": {
         "original": "",
@@ -3967,7 +3967,7 @@
     },
     "CRIM3000": {
         "original": "Prerequisite: 72 units of credit overall, and enrolment in a Criminology major or a Criminology & Criminology Justice single or dual program<br/><br/>",
-        "processed": "72UOC && enrolment in a Criminology major || a Criminology & Criminology Justice single || dual program"
+        "processed": "72UOC && enrolment in a Criminology major || a Criminology && Criminology Justice single || dual program"
     },
     "CRIM3011": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in Criminology. Or 84 uoc and enrolled in 4787 Social Work (Honours)/Law<br/><br/>",
@@ -4007,7 +4007,7 @@
     },
     "CRIM3025": {
         "original": "Prerequisite: 96 uoc including CRIM1010, CRIM1011 and CRIM2042, WAM 75, and in the final year of a Criminology major or Criminology & Criminal Justice single or double degree. Students in program 4034 are not eligible to enrol. Consent required.<br/><br/>",
-        "processed": "96UOC && CRIM1010 && CRIM1011 && CRIM2042 && 75WAM && in the final year of a Criminology major || Criminology & Criminal Justice single || double degree. in program 4034 are not eligible to enrol. Consent required"
+        "processed": "96UOC && CRIM1010 && CRIM1011 && CRIM2042 && 75WAM && in the final year of a Criminology major || Criminology && Criminal Justice single || double degree. in program 4034 are not eligible to enrol. Consent required"
     },
     "CRIM4001": {
         "original": "Prerequisite: Enrolment in the Criminology honours program<br/><br/>",
@@ -6203,19 +6203,19 @@
     },
     "FOOD3010": {
         "original": "Pre-requisites:FOOD1120,FOOD2320,CHEM2921<br/><br/>",
-        "processed": "FOOD1120,FOOD2320,CHEM2921"
+        "processed": "FOOD1120 && FOOD2320 && CHEM2921"
     },
     "FOOD3020": {
         "original": "Pre-Requisites:FOOD1120, CHEM2921<br/>Co-requisite: FOOD3010<br/><br/>",
-        "processed": "FOOD1120, CHEM2921 [FOOD3010]"
+        "processed": "FOOD1120 && CHEM2921 [FOOD3010]"
     },
     "FOOD3030": {
         "original": "Prerequisites: FOOD2320, FOOD3010<br/><br/>",
-        "processed": "FOOD2320, FOOD3010"
+        "processed": "FOOD2320 && FOOD3010"
     },
     "FOOD3060": {
         "original": "Prerequisites: PHYS1111, MATH1031, MATH1041<br/><br/>",
-        "processed": "PHYS1111, MATH1031, MATH1041"
+        "processed": "PHYS1111 && MATH1031 && MATH1041"
     },
     "FOOD3220": {
         "original": "Prerequisite: BIOC2181 or BIOC2101<br/><br/>",
@@ -6539,7 +6539,7 @@
     },
     "GMAT2130": {
         "original": "Prerequisite: GMAT1110, Corequisite: GMAT2120, GMAT2500, GMAT2700.<br/><br/>",
-        "processed": "GMAT1110, [GMAT2120, GMAT2500, GMAT2700]"
+        "processed": "GMAT1110, [GMAT2120 && GMAT2500 && GMAT2700]"
     },
     "GMAT2500": {
         "original": "Prerequisites: GMAT1110<br/><br/>",
@@ -6667,7 +6667,7 @@
     },
     "HESC3581": {
         "original": "Prerequisites: HESC3541, HESC3504<br/><br/>",
-        "processed": "HESC3541, HESC3504"
+        "processed": "HESC3541 && HESC3504"
     },
     "HESC3592": {
         "original": "Prerequisites: HESC2452 and NEUR3101<br/><br/>",
@@ -6695,7 +6695,7 @@
     },
     "HESC4611": {
         "original": "Prerequisites:  HESC3501, HESC3504, HESC3541, HESC3532, HESC3592<br/><br/>",
-        "processed": "HESC3501, HESC3504, HESC3541, HESC3532, HESC3592"
+        "processed": "HESC3501 && HESC3504 && HESC3541 && HESC3532 && HESC3592"
     },
     "HESC4622": {
         "original": "Prerequisite: HESC4611<br/><br/>",
@@ -6799,7 +6799,7 @@
     },
     "IDES2221": {
         "original": "Prerequisites: IDES1211, IDES1212, IDES1213<br/><br/>",
-        "processed": "IDES1211, IDES1212, IDES1213"
+        "processed": "IDES1211 && IDES1212 && IDES1213"
     },
     "IDES2222": {
         "original": "IDES1211, IDES1212, and IDES1213<br/><br/>",
@@ -6823,11 +6823,11 @@
     },
     "IDES3321": {
         "original": "Pre-requisites: IDES2221, IDES2222, IDES2223<br/><br/>",
-        "processed": "IDES2221, IDES2222, IDES2223"
+        "processed": "IDES2221 && IDES2222 && IDES2223"
     },
     "IDES3322": {
         "original": "Pre-requisites: IDES2221, IDES2222, IDES2223<br/><br/>",
-        "processed": "IDES2221, IDES2222, IDES2223"
+        "processed": "IDES2221 && IDES2222 && IDES2223"
     },
     "IDES4100": {
         "original": "",
@@ -6847,11 +6847,11 @@
     },
     "INDC3001": {
         "original": "Pre-requisites: CEIC2000, CHEM2021, MATH2089<br/><br/>",
-        "processed": "CEIC2000, CHEM2021, MATH2089"
+        "processed": "CEIC2000 && CHEM2021 && MATH2089"
     },
     "INDC3002": {
         "original": "Pre-requisites: CHEM2021, CEIC2000<br/><br/>",
-        "processed": "CHEM2021, CEIC2000"
+        "processed": "CHEM2021 && CEIC2000"
     },
     "INFS1602": {
         "original": "",
@@ -7041,7 +7041,7 @@
     },
     "INTA1003": {
         "original": "Pre-requisites: INTA1001,  INTA1002<br/><br/>",
-        "processed": "INTA1001, INTA1002"
+        "processed": "INTA1001 && INTA1002"
     },
     "INTA2000": {
         "original": "",
@@ -7057,7 +7057,7 @@
     },
     "INTA2003": {
         "original": "Pre-requisites: INTA2001, INTA2002<br/><br/>",
-        "processed": "INTA2001, INTA2002"
+        "processed": "INTA2001 && INTA2002"
     },
     "INTA2004": {
         "original": "Pre-requisite courses: INTA2001, INTA2002<br/><br/>",
@@ -7073,7 +7073,7 @@
     },
     "INTA2201": {
         "original": "Prerequisites: INTA2101, INTA2102<br/><br/>",
-        "processed": "INTA2101, INTA2102"
+        "processed": "INTA2101 && INTA2102"
     },
     "INTA2202": {
         "original": "",
@@ -7081,7 +7081,7 @@
     },
     "INTA2301": {
         "original": "Prerequisite: INTA2201, INTA2202<br/><br/>",
-        "processed": "INTA2201, INTA2202"
+        "processed": "INTA2201 && INTA2202"
     },
     "INTA2411": {
         "original": "Prerequisite: INTA3003 and INTA3004<br/><br/>",
@@ -7089,7 +7089,7 @@
     },
     "INTA3000": {
         "original": "Prerequisites: INTA1000, INTA2000, INTA2101, INTA2102<br/><br/>",
-        "processed": "INTA1000, INTA2000, INTA2101, INTA2102"
+        "processed": "INTA1000 && INTA2000 && INTA2101 && INTA2102"
     },
     "INTA3001": {
         "original": "",
@@ -7101,7 +7101,7 @@
     },
     "INTA3003": {
         "original": "Prerequisite: BENV1015, INTA3002<br/><br/>",
-        "processed": "BENV1015, INTA3002"
+        "processed": "BENV1015 && INTA3002"
     },
     "INTA3004": {
         "original": "",
@@ -7109,7 +7109,7 @@
     },
     "INTA4000": {
         "original": "Prerequisites: INTA1000, INTA2000, INTA2101, INTA2102<br/><br/>",
-        "processed": "INTA1000, INTA2000, INTA2101, INTA2102"
+        "processed": "INTA1000 && INTA2000 && INTA2101 && INTA2102"
     },
     "INTA4004": {
         "original": "",
@@ -7117,11 +7117,11 @@
     },
     "INTA5000": {
         "original": "Prerequisites: INTA3000, INTA4000, INTA2201, INTA2202<br/><br/>",
-        "processed": "INTA3000, INTA4000, INTA2201, INTA2202"
+        "processed": "INTA3000 && INTA4000 && INTA2201 && INTA2202"
     },
     "INTA6000": {
         "original": "Prerequisite: INTA2301, INTA5000<br/><br/>",
-        "processed": "INTA2301, INTA5000"
+        "processed": "INTA2301 && INTA5000"
     },
     "INTA7000": {
         "original": "Prerequisite: INTA6000<br/><br/>",
@@ -7189,7 +7189,7 @@
     },
     "LAND2202": {
         "original": "Prerequisite: LAND2201, LAND2271<br/><br/>",
-        "processed": "LAND2201, LAND2271"
+        "processed": "LAND2201 && LAND2271"
     },
     "LAND2251": {
         "original": "",
@@ -7225,11 +7225,11 @@
     },
     "LAND2401": {
         "original": "Prerequisite: LAND2302, LAND1322<br/><br/>",
-        "processed": "LAND2302, LAND1322"
+        "processed": "LAND2302 && LAND1322"
     },
     "LAND2402": {
         "original": "Prerequisite: LAND2401, LAND2421<br/><br/>",
-        "processed": "LAND2401, LAND2421"
+        "processed": "LAND2401 && LAND2421"
     },
     "LAND2411": {
         "original": "Prerequisite: LAND2313<br/><br/>",
@@ -7409,7 +7409,7 @@
     },
     "LAWS3060": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Lawyers, Ethics and Justice (LAWS1230),  Resolving Civil Disputes (LAWS2371) and Court Process, Evidence & Proof (LAWS2351).<br/><br/>",
-        "processed": "78UOC in LAWS courses && Lawyers && Ethics && Justice (LAWS1230) && Resolving Civil Disputes (LAWS2371) && Court Process, Evidence & Proof (LAWS2351)"
+        "processed": "78UOC in LAWS courses && Lawyers && Ethics && Justice (LAWS1230) && Resolving Civil Disputes (LAWS2371) && Court Process && Evidence && Proof (LAWS2351)"
     },
     "LAWS3064": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
@@ -7485,7 +7485,7 @@
     },
     "LAWS3135": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Equity & Trusts<br/><br/>",
-        "processed": "78UOC in LAWS courses && Equity & Trusts"
+        "processed": "78UOC in LAWS courses && Equity && Trusts"
     },
     "LAWS3137": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses. <br/>Co-requisite: Resolving Civil Disputes (LAWS2371)<br/><br/>",
@@ -8518,11 +8518,11 @@
     },
     "MDCN8888": {
         "original": "Students with a WAM of \u2265 65 (see WAM calculation below) and have completed 12 Units of Credit (UOC) General Education before Term 1 in year 4, are eligible to apply.<br/>WAM Calculation<br/>The WAM is calculated from the following courses:<br/>1.\tMFAC 1521 Beginnings, Growth and Development A<br/>2.\tMFAC 1522 Beginnings, Growth and Development B<br/>3.\tMFAC 1523 Health Maintenance A<br/>4.\tMFAC 1524 Health Maintenance B<br/>5.\tMFAC 1525 Ageing and Endings A<br/>6.\tMFAC 1526 Ageing and Endings B<br/>7.\tMFAC 1527 Society & Health<br/>In addition, students are required to pass the following courses (including passing subsequent supplementary exams, but if a student fails a course then they will be ineligible):<br/>1.\tMFAC 1501 Foundations<br/>2.\tMFAC 1511 Phase 1 Portfolio<br/>3.\tMFAC 1512 End of Phase Examination<br/>4.\tMFAC 1513 Clinical and Communication Skills Examination<br/>5.\tMFAC 2514 Integrated Clinical Studies 1<br/>6.\tMFAC 2515 Integrated Clinical Studies 2<br/>7.\tMFAC 2516 Integrated Clinical Studies 3<br/>8.\tMFAC 2511 Phase 2 Portfolio<br/>9.\tMFAC 2512 Integrated Clinical Examination<br/><br/>",
-        "processed": "with a WAM of \u2265 65 (see WAM calculation below) && have 12UOC (UOC) General Education before Term 1 in year 4 && are eligible to apply. WAM Calculation The WAM is calculated from the following courses: 1.\tMFAC 1521 Beginnings && Growth && Development A 2.\tMFAC 1522 Beginnings && Growth && Development B 3.\tMFAC 1523 Health Maintenance A 4.\tMFAC 1524 Health Maintenance B 5.\tMFAC 1525 Ageing && Endings A 6.\tMFAC 1526 Ageing && Endings B 7.\tMFAC 1527 Society & Health In addition && are required to pass the following courses (&& passing subsequent supplementary exams && but if a fails a course then they will be ineligible): 1.\tMFAC 1501 Foundations 2.\tMFAC 1511 Phase 1 Portfolio 3.\tMFAC 1512 End of Phase Examination 4.\tMFAC 1513 Clinical && Communication Skills Examination 5.\tMFAC 2514 Integrated Clinical Studies 1 6.\tMFAC 2515 Integrated Clinical Studies 2 7.\tMFAC 2516 Integrated Clinical Studies 3 8.\tMFAC 2511 Phase 2 Portfolio 9.\tMFAC 2512 Integrated Clinical Examination"
+        "processed": "with a WAM of \u2265 65 (see WAM calculation below) && have 12UOC (UOC) General Education before Term 1 in year 4 && are eligible to apply. WAM Calculation The WAM is calculated from the following courses: 1.\tMFAC 1521 Beginnings && Growth && Development A 2.\tMFAC 1522 Beginnings && Growth && Development B 3.\tMFAC 1523 Health Maintenance A 4.\tMFAC 1524 Health Maintenance B 5.\tMFAC 1525 Ageing && Endings A 6.\tMFAC 1526 Ageing && Endings B 7.\tMFAC 1527 Society && Health In addition && are required to pass the following courses (&& passing subsequent supplementary exams && but if a fails a course then they will be ineligible): 1.\tMFAC 1501 Foundations 2.\tMFAC 1511 Phase 1 Portfolio 3.\tMFAC 1512 End of Phase Examination 4.\tMFAC 1513 Clinical && Communication Skills Examination 5.\tMFAC 2514 Integrated Clinical Studies 1 6.\tMFAC 2515 Integrated Clinical Studies 2 7.\tMFAC 2516 Integrated Clinical Studies 3 8.\tMFAC 2511 Phase 2 Portfolio 9.\tMFAC 2512 Integrated Clinical Examination"
     },
     "MDCN8889": {
         "original": "Students with a WAM of \u2265 65 (see WAM calculation below) and have completed 12 Units of Credit (UOC) General Education before Term 1 in year 4, are eligible to apply.<br/>WAM Calculation<br/>The WAM is calculated from the following courses:<br/>1. MFAC 1521 Beginnings, Growth and Development A<br/>2. MFAC 1522 Beginnings, Growth and Development B<br/>3. MFAC 1523 Health Maintenance A<br/>4. MFAC 1524 Health Maintenance B<br/>5. MFAC 1525 Ageing and Endings A<br/>6. MFAC 1526 Ageing and Endings B<br/>7. MFAC 1527 Society & Health<br/>In addition, students are required to pass the following courses (including passing subsequent supplementary exams, but if a student fails a course then they will be ineligible):<br/>1. MFAC 1501 Foundations<br/>2. MFAC 1511 Phase 1 Portfolio<br/>3. MFAC 1512 End of Phase Examination<br/>4. MFAC 1513 Clinical and Communication Skills Examination<br/>5. MFAC 2514 Integrated Clinical Studies 1<br/>6. MFAC 2515 Integrated Clinical Studies 2<br/>7. MFAC 2516 Integrated Clinical Studies 3<br/>8. MFAC 2511 Phase 2 Portfolio<br/>9. MFAC 2512 Integrated Clinical Examination<br/><br/>",
-        "processed": "with a WAM of \u2265 65 (see WAM calculation below) && have 12UOC (UOC) General Education before Term 1 in year 4 && are eligible to apply. WAM Calculation The WAM is calculated from the following courses: 1. MFAC 1521 Beginnings && Growth && Development A 2. MFAC 1522 Beginnings && Growth && Development B 3. MFAC 1523 Health Maintenance A 4. MFAC 1524 Health Maintenance B 5. MFAC 1525 Ageing && Endings A 6. MFAC 1526 Ageing && Endings B 7. MFAC 1527 Society & Health In addition && are required to pass the following courses (&& passing subsequent supplementary exams && but if a fails a course then they will be ineligible): 1. MFAC 1501 Foundations 2. MFAC 1511 Phase 1 Portfolio 3. MFAC 1512 End of Phase Examination 4. MFAC 1513 Clinical && Communication Skills Examination 5. MFAC 2514 Integrated Clinical Studies 1 6. MFAC 2515 Integrated Clinical Studies 2 7. MFAC 2516 Integrated Clinical Studies 3 8. MFAC 2511 Phase 2 Portfolio 9. MFAC 2512 Integrated Clinical Examination"
+        "processed": "with a WAM of \u2265 65 (see WAM calculation below) && have 12UOC (UOC) General Education before Term 1 in year 4 && are eligible to apply. WAM Calculation The WAM is calculated from the following courses: 1. MFAC 1521 Beginnings && Growth && Development A 2. MFAC 1522 Beginnings && Growth && Development B 3. MFAC 1523 Health Maintenance A 4. MFAC 1524 Health Maintenance B 5. MFAC 1525 Ageing && Endings A 6. MFAC 1526 Ageing && Endings B 7. MFAC 1527 Society && Health In addition && are required to pass the following courses (&& passing subsequent supplementary exams && but if a fails a course then they will be ineligible): 1. MFAC 1501 Foundations 2. MFAC 1511 Phase 1 Portfolio 3. MFAC 1512 End of Phase Examination 4. MFAC 1513 Clinical && Communication Skills Examination 5. MFAC 2514 Integrated Clinical Studies 1 6. MFAC 2515 Integrated Clinical Studies 2 7. MFAC 2516 Integrated Clinical Studies 3 8. MFAC 2511 Phase 2 Portfolio 9. MFAC 2512 Integrated Clinical Examination"
     },
     "MDIA1000": {
         "original": "Prerequisite: Enrolment in a single or dual award Media program<br/><br/>",
@@ -8590,7 +8590,7 @@
     },
     "MDIA2012": {
         "original": "Prerequisite: MDIA1002 or MDIA1003; and enrolment in a single or double degree Bachelor of Media (PR & Advertising) program<br/><br/>",
-        "processed": "MDIA1002 || MDIA1003; && enrolment in a single || double degree Bachelor of Media (PR & Advertising) program"
+        "processed": "MDIA1002 || MDIA1003; && enrolment in a single || double degree Bachelor of Media (PR && Advertising) program"
     },
     "MDIA2013": {
         "original": "Prerequisite: 24 uoc overall, including MDIA1006 Mediated Storytelling or ARTS1064 Screen Production I, or MDIA1004 News Fundamentals or (with course convenor approval) at least 6 UOC of an audio-visual media production or feature writing course<br/><br/>",
@@ -8606,7 +8606,7 @@
     },
     "MDIA3003": {
         "original": "Prerequisite: 66 units of credit overall, including 6 units of credit Level 2 MDIA core courses and enrolment in a Media (Communication & Journalism) or Media (PR & Advertising) program<br/><br/>",
-        "processed": "66UOC && 6UOC L2 MDIA core courses && enrolment in a Media (Communication & Journalism) || Media (PR & Advertising) program"
+        "processed": "66UOC && 6UOC L2 MDIA core courses && enrolment in a Media (Communication && Journalism) || Media (PR && Advertising) program"
     },
     "MDIA3004": {
         "original": "Prerequisite: 66 units of credit overall, and enrolment in a single or double degree Media program<br/><br/>",
@@ -8798,11 +8798,11 @@
     },
     "MFAC2511": {
         "original": "Prerequisite: MFAC1511,MFAC1512,MFAC1513<br/><br/>",
-        "processed": "MFAC1511,MFAC1512,MFAC1513"
+        "processed": "MFAC1511 && MFAC1512 && MFAC1513"
     },
     "MFAC2512": {
         "original": "Prerequisite: MFAC1511,MFAC1512,MFAC1513<br/><br/>",
-        "processed": "MFAC1511,MFAC1512,MFAC1513"
+        "processed": "MFAC1511 && MFAC1512 && MFAC1513"
     },
     "MFAC2514": {
         "original": "",
@@ -8870,11 +8870,11 @@
     },
     "MFAC3522": {
         "original": "Prerequisite: MFAC2512, MFAC2511<br/><br/>",
-        "processed": "MFAC2512, MFAC2511"
+        "processed": "MFAC2512 && MFAC2511"
     },
     "MFAC3523": {
         "original": "Prerequisite: MFAC2512, MFAC2511<br/><br/>",
-        "processed": "MFAC2512, MFAC2511"
+        "processed": "MFAC2512 && MFAC2511"
     },
     "MFAC4001": {
         "original": "",
@@ -9534,7 +9534,7 @@
     },
     "OPTM2190": {
         "original": "Prerequisites: VISN1111, VISN1101, VISN1221; Co-requisite: VISN2111<br/><br/>",
-        "processed": "VISN1111, VISN1101, VISN1221; [VISN2111]"
+        "processed": "VISN1111 && VISN1101 && VISN1221; [VISN2111]"
     },
     "OPTM2233": {
         "original": "Prerequisite: VISN1111 and VISN1221<br/><br/>",
@@ -9570,7 +9570,7 @@
     },
     "OPTM3211": {
         "original": "Pre-requisites: VISN3111, OPTM3111, OPTM3131 Co-requisites: OPTM3231, VISN3211, PHAR3306<br/><br/>",
-        "processed": "VISN3111, OPTM3111, OPTM3131 [OPTM3231, VISN3211, PHAR3306]"
+        "processed": "VISN3111 && OPTM3111 && OPTM3131 [OPTM3231 && VISN3211 && PHAR3306]"
     },
     "OPTM3231": {
         "original": "Prerequisite: OPTM3131<br/><br/>",
@@ -9582,23 +9582,23 @@
     },
     "OPTM4110": {
         "original": "Prerequisites: OPTM3211, OPTM3231, VISN3211; Corequisites: OPTM4131, OPTM4151<br/><br/>",
-        "processed": "OPTM3211, OPTM3231, VISN3211; [OPTM4131, OPTM4151]"
+        "processed": "OPTM3211 && OPTM3231 && VISN3211; [OPTM4131 && OPTM4151]"
     },
     "OPTM4131": {
         "original": "Prerequisites: OPTM3211, OPTM3231, VISN3211, PHAR3306, Corequisites: OPTM4110, OPTM4151<br/><br/>",
-        "processed": "OPTM3211, OPTM3231, VISN3211, PHAR3306, [OPTM4110, OPTM4151]"
+        "processed": "OPTM3211 && OPTM3231 && VISN3211 && PHAR3306, [OPTM4110 && OPTM4151]"
     },
     "OPTM4151": {
         "original": "Prerequisites: PHAR3306, OPTM3131, OPTM3231; Corequisite: OPTM4131<br/><br/>",
-        "processed": "PHAR3306, OPTM3131, OPTM3231; [OPTM4131]"
+        "processed": "PHAR3306 && OPTM3131 && OPTM3231; [OPTM4131]"
     },
     "OPTM4211": {
         "original": "Prerequisites: OPTM4110, OPTM4131, OPTM4151, ; Corequisites: OPTM4231, OPTM4251, OPTM4271<br/><br/>",
-        "processed": "OPTM4110, OPTM4131, OPTM4151, ; [OPTM4231, OPTM4251, OPTM4271]"
+        "processed": "OPTM4110 && OPTM4131 && OPTM4151, ; [OPTM4231 && OPTM4251 && OPTM4271]"
     },
     "OPTM4231": {
         "original": "Prerequisites: OPTM4110, OPTM4131, OPTM4151,  Corequisites: OPTM4211, OPTM4251, OPTM4271,<br/><br/>",
-        "processed": "OPTM4110, OPTM4131, OPTM4151, [OPTM4211, OPTM4251, OPTM4271,]"
+        "processed": "OPTM4110 && OPTM4131 && OPTM4151, [OPTM4211 && OPTM4251 && OPTM4271,]"
     },
     "OPTM4251": {
         "original": "Prerequisite: OPTM4151; Corequisite: OPTM4231<br/><br/>",
@@ -9614,19 +9614,19 @@
     },
     "OPTM5111": {
         "original": "Prerequisites: OPTM4211, OPTM4231, OPTM4251, OPTM4271, PSYC4111, PHAR3306<br/><br/>",
-        "processed": "OPTM4211, OPTM4231, OPTM4251, OPTM4271, PSYC4111, PHAR3306"
+        "processed": "OPTM4211 && OPTM4231 && OPTM4251 && OPTM4271 && PSYC4111 && PHAR3306"
     },
     "OPTM5131": {
         "original": "Prerequisites: OPTM4110, OPTM4131, OPTM4151, OPTM4211, OPTM4231, OPTM4251, OPTM4271, OPTM4291.Co-requisites: OPTM5111, OPTM5151<br/><br/>",
-        "processed": "OPTM4110, OPTM4131, OPTM4151, OPTM4211, OPTM4231, OPTM4251, OPTM4271, OPTM4291.[OPTM5111, OPTM5151]"
+        "processed": "OPTM4110 && OPTM4131 && OPTM4151 && OPTM4211 && OPTM4231 && OPTM4251 && OPTM4271 && OPTM4291.[OPTM5111 && OPTM5151]"
     },
     "OPTM5151": {
         "original": "Prerequisites: OPTM4231, OPTM4251, VISN2231, PHPH3306<br/><br/>",
-        "processed": "OPTM4231, OPTM4251, VISN2231, PHPH3306"
+        "processed": "OPTM4231 && OPTM4251 && VISN2231 && PHPH3306"
     },
     "OPTM5171": {
         "original": "Prerequisite: OPTM4211, OPTM4231, PSYC4111<br/><br/>",
-        "processed": "OPTM4211, OPTM4231, PSYC4111"
+        "processed": "OPTM4211 && OPTM4231 && PSYC4111"
     },
     "OPTM5211": {
         "original": "Prerequisite: OPTM5111<br/><br/>",
@@ -9758,7 +9758,7 @@
     },
     "PHAR3306": {
         "original": "Prerequisite: VISN2111, PHSL2101, PHSL2201<br/><br/>",
-        "processed": "VISN2111, PHSL2101, PHSL2201"
+        "processed": "VISN2111 && PHSL2101 && PHSL2201"
     },
     "PHCM1001": {
         "original": "Currently enrolled in program 3880 Bachelor of International Public Health<br/><br/>",
@@ -10106,7 +10106,7 @@
     },
     "PLAN4031": {
         "original": "Prerequisite: PLAN0081, PLAN0082, PLAN3032, PLAN3015<br/><br/>",
-        "processed": "PLAN0081, PLAN0082, PLAN3032, PLAN3015"
+        "processed": "PLAN0081 && PLAN0082 && PLAN3032 && PLAN3015"
     },
     "PLAN4132": {
         "original": "Prerequisite: PLAN4031<br/><br/>",
@@ -10226,11 +10226,11 @@
     },
     "PSYC3211": {
         "original": "Prerequisite: PSYC2001 , PSYC2071<br/><br/>",
-        "processed": "PSYC2001 , PSYC2071"
+        "processed": "PSYC2001 && PSYC2071"
     },
     "PSYC3221": {
         "original": "Prerequisite: PSYC2001, PSYC2071<br/><br/>",
-        "processed": "PSYC2001, PSYC2071"
+        "processed": "PSYC2001 && PSYC2071"
     },
     "PSYC3241": {
         "original": "Prerequisites:PSYC2001, PSYC2081<br/><br/>",
@@ -10242,7 +10242,7 @@
     },
     "PSYC3311": {
         "original": "Prerequisite: PSYC2001 , PSYC2071<br/><br/>",
-        "processed": "PSYC2001 , PSYC2071"
+        "processed": "PSYC2001 && PSYC2071"
     },
     "PSYC3331": {
         "original": "Prerequisite: (PSYC2001 , PSYC2061 or PSYC2101) or (HESC3504 and enrolment in Program 3871)<br/><br/>",
@@ -10310,7 +10310,7 @@
     },
     "PTRL3002": {
         "original": "Prerequisite:PTRL3001,GEOS3321<br/><br/>",
-        "processed": "PTRL3001,GEOS3321"
+        "processed": "PTRL3001 && GEOS3321"
     },
     "PTRL3003": {
         "original": "Prerequisite:GEOS3321<br/><br/>",
@@ -10370,7 +10370,7 @@
     },
     "PTRL4024": {
         "original": "Prerequisite:PTRL3003,PTRL3015<br/><br/>",
-        "processed": "PTRL3003,PTRL3015"
+        "processed": "PTRL3003 && PTRL3015"
     },
     "PTRL4040": {
         "original": "Minimum WAM of 70 and completion of 132UOC<br/><br/>",
@@ -10698,7 +10698,7 @@
     },
     "SDES2116": {
         "original": "SDES2116 is reserved for students in the Bachelor of Design (4802, Faculty of Art & Design), Bachelor of Architectural Computing (3267, FBE), Diploma in Innovation Management (3451, ASB),  and Design Honours (4809, Faculty of Art & Design)<br/><br/>",
-        "processed": "is reserved for in the Bachelor of Design (4802, Faculty of Art & Design) && Bachelor of Architectural Computing (3267 && FBE) && Diploma in Innovation Management (3451 && ASB) && && Design Honours (4809, Faculty of Art & Design)"
+        "processed": "is reserved for in the Bachelor of Design (4802 && Faculty of Art && Design) && Bachelor of Architectural Computing (3267 && FBE) && Diploma in Innovation Management (3451 && ASB) && && Design Honours (4809 && Faculty of Art && Design)"
     },
     "SDES2167": {
         "original": "",
@@ -10945,7 +10945,7 @@
     },
     "SOCW3001": {
         "original": "Prerequisite: SOCW1001, SOCW1003, SOCW2003, SOCW2006; Corequisite: SOCW3002<br/><br/>",
-        "processed": "SOCW1001, SOCW1003, SOCW2003, SOCW2006; [SOCW3002]"
+        "processed": "SOCW1001 && SOCW1003 && SOCW2003 && SOCW2006; [SOCW3002]"
     },
     "SOCW3006": {
         "original": "Prerequisite: SOCW3009 and SOCW3011, or SOCW3009, SOCW3012 and SOCW3013, and enrolment in a Social Work program.  Excluded: Students enrolled in 4787 Social Work (Honours)/Law<br/><br/>",
@@ -11935,7 +11935,7 @@
     },
     "ZEIT3215": {
         "original": "Prerequisite: ZEIT2207, ZPEM2309, ZPEM2310<br/><br/>",
-        "processed": "ZEIT2207, ZPEM2309, ZPEM2310"
+        "processed": "ZEIT2207 && ZPEM2309 && ZPEM2310"
     },
     "ZEIT3216": {
         "original": "Prerequisite: ZEIT2207<br/><br/>",
@@ -11943,11 +11943,11 @@
     },
     "ZEIT3218": {
         "original": "Pre: ZEIT3215, ZPEM2309, ZPEM2310<br/><br/>",
-        "processed": "ZEIT3215, ZPEM2309, ZPEM2310"
+        "processed": "ZEIT3215 && ZPEM2309 && ZPEM2310"
     },
     "ZEIT3220": {
         "original": "Prerequisite: ZPEM2502, ZPEM2309, ZPEM2310<br/><br/>",
-        "processed": "ZPEM2502, ZPEM2309, ZPEM2310"
+        "processed": "ZPEM2502 && ZPEM2309 && ZPEM2310"
     },
     "ZEIT3221": {
         "original": "Prerequisite: ZEIT3215 and ZEIT3222<br/><br/>",
@@ -11955,7 +11955,7 @@
     },
     "ZEIT3222": {
         "original": "Pre: ZPEM2309, ZPEM2310<br/><br/>",
-        "processed": "ZPEM2309, ZPEM2310"
+        "processed": "ZPEM2309 && ZPEM2310"
     },
     "ZEIT3302": {
         "original": "",
@@ -11975,7 +11975,7 @@
     },
     "ZEIT3502": {
         "original": "Pre: ZPEM2309, ZPEM2310<br/><br/>",
-        "processed": "ZPEM2309, ZPEM2310"
+        "processed": "ZPEM2309 && ZPEM2310"
     },
     "ZEIT3503": {
         "original": "Prerequisite: ZEIT2500, ZEIT2503, ZPEM2309 and ZPEM2310<br/><br/>",
@@ -12107,7 +12107,7 @@
     },
     "ZEIT4013": {
         "original": "Prerequisite: ZEIT2500, ZEIT2503<br/><br/>",
-        "processed": "ZEIT2500, ZEIT2503"
+        "processed": "ZEIT2500 && ZEIT2503"
     },
     "ZEIT4014": {
         "original": "",
@@ -12199,7 +12199,7 @@
     },
     "ZEIT4224": {
         "original": "Pre: ZEIT1206, ZEIT3215<br/><br/>",
-        "processed": "ZEIT1206, ZEIT3215"
+        "processed": "ZEIT1206 && ZEIT3215"
     },
     "ZEIT4225": {
         "original": "",
@@ -12215,7 +12215,7 @@
     },
     "ZEIT4230": {
         "original": "Prerequisite: ZEIT3216, ZEIT3218<br/><br/>",
-        "processed": "ZEIT3216, ZEIT3218"
+        "processed": "ZEIT3216 && ZEIT3218"
     },
     "ZEIT4297": {
         "original": "",
@@ -12259,7 +12259,7 @@
     },
     "ZEIT4601": {
         "original": "Prerequisite: ZEIT3600, ZEIT4600<br/><br/>",
-        "processed": "ZEIT3600, ZEIT4600"
+        "processed": "ZEIT3600 && ZEIT4600"
     },
     "ZEIT4603": {
         "original": "Prerequisite: ZEIT3500 or ZEIT3600<br/><br/>",
@@ -12891,7 +12891,7 @@
     },
     "ZPEM3503": {
         "original": "Prerequisites: ZPEM2502, ZPEM2506<br/><br/>",
-        "processed": "ZPEM2502, ZPEM2506"
+        "processed": "ZPEM2502 && ZPEM2506"
     },
     "ZPEM3524": {
         "original": "Prerequisite: ZPEM2401 or ZPEM2502, ZPEM2506<br/><br/>",
@@ -12899,7 +12899,7 @@
     },
     "ZPEM3528": {
         "original": "Prerequisites: ZPEM2502, ZPEM2506<br/><br/>",
-        "processed": "ZPEM2502, ZPEM2506"
+        "processed": "ZPEM2502 && ZPEM2506"
     },
     "ZPEM3532": {
         "original": "",
