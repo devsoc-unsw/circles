@@ -164,16 +164,27 @@ def make_condition(tokens, first=False, course=None):
             result.add_condition(CourseCondition(token))
         elif is_uoc(token):
             # Condition for UOC requirement
-            uoc_cond, category, sub_index = handle_uoc_condition(
-                token, tokens, item, index
-            )
+            uoc = get_uoc(token)
+            uoc_cond = UOCCondition(uoc)
 
-            if category is None:
-                # Error - category cannot be created
-                return None, index
+            if index + 1 < len(tokens) and tokens[index + 1] == "in":
+                # Create category according to the token after 'in'
+                next(it)  # Skip "in" keyword
 
-            [next(item) for _ in range(sub_index + 1)]
+                # Get the category of the uoc condition
+                category, sub_index = create_category(tokens[index + 2:])
+
+                if category == None:
+                    # Error. Return None. (Could also potentially set the uoc category
+                    # to just the default Category which returns true and 1000 uoc taken)
+                    return None, index
+                else:
+                    # Add the category to the uoc and adjust the current index position
+                    uoc_cond.set_category(category)
+                    [next(it) for _ in range(sub_index + 1)]
+
             result.add_condition(uoc_cond)
+            
         elif is_wam(token):
             # Condition for WAM requirement
             wam_cond = WAMCondition(get_wam(token))
