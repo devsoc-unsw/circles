@@ -94,9 +94,8 @@ export default function CourseMenu() {
       // Example subGroup: Core Courses, Computing Electives
 
       newCoursesUnits[group] = {};
+
       for (const subGroup in structure[group]) {
-        // console.log(structure[group][subGroup]);
-        // console.log(subGroup);
         if (typeof structure[group][subGroup] !== "string") {
           newCoursesUnits[group][subGroup] = {};
           newCoursesUnits[group][subGroup].total =
@@ -121,6 +120,15 @@ export default function CourseMenu() {
                 if (coursesInPlanner.get(courseCode))
                   newCoursesUnits[group][subGroup].curr +=
                     coursesInPlanner.get(courseCode).UOC;
+              }
+            }
+          } else {
+            for (const courseCode of coursesInPlanner.keys()) {
+              const courseData = coursesInPlanner.get(courseCode)
+              if (courseData && courseData.type === subGroup) {
+                newMenu[group][subGroup].push(courseCode);
+                // add UOC to curr
+                newCoursesUnits[group][subGroup].curr += courseData.UOC;
               }
             }
           }
