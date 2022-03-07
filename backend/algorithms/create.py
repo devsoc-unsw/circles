@@ -169,7 +169,7 @@ def make_condition(tokens, first=False, course=None):
 
             if index + 1 < len(tokens) and tokens[index + 1] == "in":
                 # Create category according to the token after 'in'
-                next(it)  # Skip "in" keyword
+                next(item)  # Skip "in" keyword
 
                 # Get the category of the uoc condition
                 category, sub_index = create_category(tokens[index + 2:])
@@ -181,7 +181,7 @@ def make_condition(tokens, first=False, course=None):
                 else:
                     # Add the category to the uoc and adjust the current index position
                     uoc_cond.set_category(category)
-                    [next(it) for _ in range(sub_index + 1)]
+                    [next(item) for _ in range(sub_index + 1)]
 
             result.add_condition(uoc_cond)
             
