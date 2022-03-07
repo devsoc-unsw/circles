@@ -1,7 +1,7 @@
 # assumes that getPrograms, getMajors, and getMinors isnt borked.
 import requests
 from hypothesis import given
-from hypothesis.strategies import DrawFn, sampled_from, composite
+from hypothesis.strategies import DrawFn, composite, sampled_from
 
 programs = [
     *requests.get("http://127.0.0.1:8000/programs/getPrograms")
