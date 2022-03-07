@@ -1,6 +1,6 @@
 import json
-import requests
 
+import requests
 from server.routers.model import CONDITIONS
 
 PATH = "algorithms/exampleUsers.json"
@@ -23,8 +23,8 @@ def test_fix_wam_only_unlock_given_course():
         "http://127.0.0.1:8000/courses/getAllUnlocked", json=USERS["user5"]
     )
     assert x.status_code != 500
-    assert x.json()["courses_state"]["COMP1521"]["unlocked"] == True
-    assert x.json()["courses_state"]["COMP1521"]["is_accurate"] == True
+    assert x.json()["courses_state"]["COMP1521"]["unlocked"] is True
+    assert x.json()["courses_state"]["COMP1521"]["is_accurate"] is True
     assert "final term" in x.json()["courses_state"]["COMP9302"]["handbook_note"]
 
 
@@ -33,6 +33,6 @@ def test_unlock_dependant_course():
         "http://127.0.0.1:8000/courses/getAllUnlocked", json=USERS["user2"]
     )
     assert x.status_code != 500
-    assert x.json()["courses_state"]["MATH1231"]["unlocked"] == True
-    assert x.json()["courses_state"]["MATH1231"]["is_accurate"] == True
+    assert x.json()["courses_state"]["MATH1231"]["unlocked"] is True
+    assert x.json()["courses_state"]["MATH1231"]["is_accurate"] is True
     assert "more information" in x.json()["courses_state"]["TABL3033"]["handbook_note"]
