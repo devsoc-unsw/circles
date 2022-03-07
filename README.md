@@ -23,13 +23,13 @@ In `mongodb.env`, add:
 - `MONGO_INITDB_ROOT_USERNAME=...`
 - `MONGO_INITDB_ROOT_PASSWORD=...`
 
-Replace the ellipses with a username and password. The username and password in `backend.env` must match the values in `mongodb.env`. The `env` folder has been added to `.gitignore` and will not be committed to the repo.
+Replace the ellipses with a username and password. The username and password in `backend.env` must match the values in `mongodb.env`. The `env` folder has been added to `.gitignore` and will not be committed to the repository.
 
 ### Running Circles with Docker
 
-The first time you run Circles, or if you have made changes to the backend codebase, run `docker-compose build`. You can run `docker images` to see what images exist on your machine. Note the `docker rmi <image>` command deletes an image. If you find you are building up a lot of `<none>` images, the `docker image prune` command will remove all 'dangling' images (those that are not related to named images and serve no purpose).
+The first time you run Circles, or if you have made changes to the backend codebase, run `docker compose build`. If you find you are building up a lot of `<none>` images or docker is starting to consume space, the `docker system prune` command will remove all docker data.
 
-To run the whole application (frontend, backend and database), use `docker-compose up frontend`. You can include the `-d` option if you wish to run it in detached mode.
+To run the whole application (frontend, backend and database), use `docker compose up frontend`. You can include the `-d` option if you wish to run it in detached mode.
 
 You will now have the backend API available on `localhost:8000/docs` and the frontend on `localhost:3000`. Since we use `docker-compose`, the backend, frontend and database can talk to each other in their own special docker network (called `circles-net`).
 
@@ -39,13 +39,13 @@ To see what containers are running, use `docker ps`. To see all containers, incl
 
 ### Populating the Database
 
-The first time you compose the application, or whenever you need to overwrite mongodb data, run `docker-compose run --rm init-mongo`. This will create a utility container that connects to the database and writes in data scraped from the handbook. The container will be automatically removed after the overwriting process due to the `--rm` flag.
+The first time you compose the application, or whenever you need to overwrite mongodb data, run `docker compose run --rm init-mongo`. This will create a utility container that connects to the database and writes in data scraped from the handbook. The container will be automatically removed after the overwriting process due to the `--rm` flag.
 
 ### Running Only the Backend
 
-If you are just working on the backend, you can run only the backend and mongodb containers via `docker-compose up backend` (with `-d` for detached if you wish). The backend container depends on the mongodb container, so this command will launch both. The API will now be available on `localhost:8000/docs`.
+If you are just working on the backend, you can run only the backend and mongodb containers via `docker compose up backend` (with `-d` for detached if you wish). The backend container depends on the mongodb container, so this command will launch both. The API will now be available on `localhost:8000/docs`.
 
-You can stop a particular container with `docker-compose stop <containerName>`. For example, say I want to run the backend to test the API and don't need the frontend container. Assuming I have already built the images, I will run `docker-compose up -d backend` which will start just the backend and mongodb containers. When I am done, I will run `docker-compose stop backend mongodb` to stop both containers. Both containers will still exist (see `docker ps -a`) but will no longer be running.
+You can stop a particular container with `docker compose stop <containerName>`. In the backend example, running `docker-compose stop backend mongodb` to stop both containers. Both containers will still exist (see `docker ps -a`) but will no longer be running.
 
 Note if working on particular files or functions, you can still just run `python3 <fileName>`. This can be faster than starting and stopping docker containers. Ensure you have the requisite dependencies by following the below steps:
 

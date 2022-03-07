@@ -1,9 +1,9 @@
-'''Contains all the database and collection instances which can be exported to
+"""Contains all the database and collection instances which can be exported to
 other files. Also contains helper functions to read and write from db upon
 initialisation.
 
 NOTE: The helper functions must be run from the backend directory due to their paths
-'''
+"""
 
 import json
 import os
@@ -11,11 +11,13 @@ from pymongo import MongoClient
 from server.config import URI, FINAL_DATA_PATH, ARCHIVED_DATA_PATH
 from data.config import ARCHIVED_YEARS
 
-'''Export these as needed'''
+"""Export these as needed"""
 try:
     # client = MongoClient("mongodb://localhost:27017/")
-    client = MongoClient(f'mongodb://{os.environ["MONGODB_USERNAME"]}:{os.environ["MONGODB_PASSWORD"]}@{os.environ["MONGODB_DATABASE"]}:27017')
-    print('Connected to database.')
+    client = MongoClient(
+        f'mongodb://{os.environ["MONGODB_USERNAME"]}:{os.environ["MONGODB_PASSWORD"]}@{os.environ["MONGODB_DATABASE"]}:27017'
+    )
+    print("Connected to database.")
 except:
     print("Unable to connect to database.")
     exit(1)
@@ -26,6 +28,7 @@ specialisationsCOL = db["Specialisations"]
 coursesCOL = db["Courses"]
 
 archivesDB = client["Archives"]
+
 
 def overwrite_collection(collection_name):
     """Overwrites the specific database via reading from the json files.
@@ -62,11 +65,10 @@ def overwrite_archives():
             except:
                 print(f"Failed to load and overwrite {year} archive")
 
+
 def overwrite_all():
     """Singular execution point to overwrite the entire database including the archives"""
     overwrite_collection("Courses")
     overwrite_collection("Specialisations")
     overwrite_collection("Programs")
     overwrite_archives()
-
-

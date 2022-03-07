@@ -6,7 +6,7 @@ from algorithms.objects.categories import (
     FacultyCategory,
     LevelCategory,
     LevelCourseCategory,
-    SchoolCategory
+    SchoolCategory,
 )
 from algorithms.objects.conditions import (
     CompositeCondition,
@@ -20,7 +20,7 @@ from algorithms.objects.conditions import (
     ProgramTypeCondition,
     SpecialisationCondition,
     UOCCondition,
-    WAMCondition
+    WAMCondition,
 )
 from algorithms.objects.helper import (
     get_grade,
@@ -32,7 +32,7 @@ from algorithms.objects.helper import (
     is_program_type,
     is_specialisation,
     is_uoc,
-    is_wam
+    is_wam,
 )
 
 
@@ -121,7 +121,7 @@ def make_condition(tokens, first=False, course=None):
     for index, token in item:
         if token == "(":
             # Parse content in bracket 1 layer deeper
-            sub_result, sub_index = make_condition(tokens[index + 1:])
+            sub_result, sub_index = make_condition(tokens[index + 1 :])
             if sub_result is None:
                 # Error. Return None
                 return None, sub_index
@@ -172,7 +172,7 @@ def make_condition(tokens, first=False, course=None):
                 next(item)  # Skip "in" keyword
 
                 # Get the category of the uoc condition
-                category, sub_index = create_category(tokens[index + 2:])
+                category, sub_index = create_category(tokens[index + 2 :])
 
                 if category == None:
                     # Error. Return None. (Could also potentially set the uoc category
@@ -184,7 +184,7 @@ def make_condition(tokens, first=False, course=None):
                     [next(item) for _ in range(sub_index + 1)]
 
             result.add_condition(uoc_cond)
-            
+
         elif is_wam(token):
             # Condition for WAM requirement
             wam_cond = WAMCondition(get_wam(token))

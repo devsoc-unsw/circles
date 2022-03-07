@@ -14,10 +14,11 @@ CONDITIONS_TOKENS_FILE = "./data/final_data/conditionsTokens.json"
 CONDITIONS_PROCESSED_FILE = "./data/final_data/conditionsProcessed.json"
 ERROR_OUTPUT_FILE = "./algorithms/errors.json"
 
+
 def log_broken_conditions():
     with open(CONDITIONS_TOKENS_FILE, "r") as conditions_tokens:
         all_tokens = json.load(conditions_tokens)
-    
+
     with open(CONDITIONS_PROCESSED_FILE, "r") as conditions_processed:
         conditions = json.load(conditions_processed)
 
@@ -33,13 +34,12 @@ def log_broken_conditions():
             output[course] = {
                 "condition": conditions[course],
                 "tokens": tokens,
-                "broke at": f"Index {bad_index}, {'exclusions' if bad_index == -1 else tokens[bad_index]}"
+                "broke at": f"Index {bad_index}, {'exclusions' if bad_index == -1 else tokens[bad_index]}",
             }
-    
+
     with open(ERROR_OUTPUT_FILE, "w") as out:
         json.dump(output, out, indent=4)
 
+
 if __name__ == "__main__":
     log_broken_conditions()
-
-

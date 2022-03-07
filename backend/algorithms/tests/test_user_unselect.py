@@ -1,6 +1,5 @@
-'''Testing unselect course for User class'''
+"""Testing unselect course for User class"""
 
-from algorithms.objects.conditions import *
 from algorithms.objects.user import User
 import json
 

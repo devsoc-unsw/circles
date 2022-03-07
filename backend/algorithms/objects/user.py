@@ -4,12 +4,12 @@ from algorithms.objects.categories import AnyCategory, Category
 
 
 class User:
-    '''A user and their data which will be used to determine if they can take a course'''
+    """A user and their data which will be used to determine if they can take a course"""
 
     def __init__(self, data=None):
         # Will load the data if any was given
         self.courses: dict[str, (int, int)] = {}
-        self.cur_courses: list[str, (int, int)] = [] # Courses the user is taking in the current term
+        self.cur_courses: list[str, (int, int)] = [] # Courses in the current term
         self.program: str = None
         self.specialisations: dict[str, int] = {}
         self.year = 0
@@ -19,10 +19,11 @@ class User:
             self.load_json(data)
 
     def add_courses(self, courses: dict[str, (int, int)]):
-        '''Given a dictionary of courses mapping course code to a (uoc, grade) tuple,
+        """
+        Given a dictionary of courses mapping course code to a (uoc, grade) tuple,
         adds the course to the user and updates the uoc/grade at the same time.
         this will update the data if the course has been taken already
-        '''
+        """
         self.courses.update(courses)
 
     def add_current_course(self, course: str):
@@ -38,15 +39,15 @@ class User:
         self.cur_courses.clear()
 
     def add_program(self, program: str):
-        '''Adds a program to this user'''
+        """Adds a program to this user"""
         self.program = program
 
     def add_specialisation(self, specialisation: str):
-        '''Adds a specialisation to this user'''
+        """Adds a specialisation to this user"""
         self.specialisations[specialisation] = 1
 
     def has_taken_course(self, course: str):
-        '''Determines if the user has taken this course'''
+        """Determines if the user has taken this course"""
         return course in self.courses
 
     def is_taking_course(self, course: str):
@@ -54,23 +55,23 @@ class User:
         return course in self.cur_courses
 
     def in_program(self, program: str):
-        '''Determines if the user is in this program code'''
+        """Determines if the user is in this program code"""
         return self.program == program
 
     def in_specialisation(self, specialisation: str):
-        '''Determines if the user is in the specialisation'''
+        """Determines if the user is in the specialisation"""
         return specialisation in self.specialisations
 
     def load_json(self, data):
-        '''Given the user data, correctly loads it into this user class'''
+        """Given the user data, correctly loads it into this user class"""
 
-        self.program = copy.deepcopy(data['program'])
-        self.specialisations = copy.deepcopy(data['specialisations'])
-        self.courses = copy.deepcopy(data['courses'])
-        self.year = copy.deepcopy(data['year'])
+        self.program = copy.deepcopy(data["program"])
+        self.specialisations = copy.deepcopy(data["specialisations"])
+        self.courses = copy.deepcopy(data["courses"])
+        self.year = copy.deepcopy(data["year"])
 
     def get_grade(self, course: str):
-        '''Given a course which the student has taken, returns their grade (or None for no grade)'''
+        """Given a course which the student has taken, returns their grade (or None for no grade)"""
         return self.courses[course][1]
 
     def wam(self, category: Category = AnyCategory()):
@@ -84,8 +85,12 @@ class User:
         return None if total_uoc == 0 else total_wam / total_uoc
 
     def uoc(self, category: Category = AnyCategory()):
-        '''Given a user, returns the number of units they have taken for this uoc category'''
-        return sum(uoc for course, (uoc, _) in self.courses.items() if category.match_definition(course))
+        """Given a user, returns the number of units they have taken for this uoc category"""
+        return sum(
+            uoc
+            for course, (uoc, _) in self.courses.items()
+            if category.match_definition(course)
+        )
 
 
     def unselect_course(self, target, locked) -> list[str]:
@@ -100,8 +105,9 @@ class User:
 
         # Load all the necessary conditions
         cached_conditions = {
-            course : create_condition(CACHED_CONDITIONS_TOKENS[course], course)
-            for course in self.courses if not course in locked
+            course: create_condition(CACHED_CONDITIONS_TOKENS[course], course)
+            for course in self.courses
+            if not course in locked
         }
 
         affected_courses = []
@@ -114,11 +120,10 @@ class User:
             for course in courses_to_delete:
                 del self.courses[course]
             courses_to_delete = [
-                course for course in self.courses
-                if cached_conditions.get(course) is not None # course is in conditions
-                and not (cached_conditions[course].validate(self))[0] # not unlocked anymore
+                c
+                for c in self.courses
+                if cached_conditions.get(c) is not None  # course is in conditions
+                and not (cached_conditions[c].validate(self))[0]  # not unlocked anymore
             ]
 
         return list(sorted(affected_courses))
-
-

@@ -19,7 +19,7 @@ origins = [
     "http://frontend:8080",
     "http://frontend:8000",
     "http://frontend:3000",
-    "http://frontend:3001"
+    "http://frontend:3001",
 ]
 
 app.add_middleware(
@@ -34,8 +34,7 @@ app.include_router(planner.router)
 app.include_router(courses.router)
 app.include_router(programs.router)
 
-@app.get('/')
+
+@app.get("/")
 async def index():
     return "At index inside server.py"
-
-
