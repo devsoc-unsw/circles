@@ -71,6 +71,8 @@ class PlannerData (BaseModel):
     year: int
     plan: list[list[dict]]
 
+class AffectedCourses (BaseModel):
+    affected_courses: list[str]
 
 minorInFE = ['3778']
 minorInSpecialisation = ['3502', '3970']
