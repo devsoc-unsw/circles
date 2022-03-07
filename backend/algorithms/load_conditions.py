@@ -3,8 +3,9 @@ Will pickle all the conditions into a dictionary. Run this file from the backend
 folder with python3 -m algorithms.load_conditions
 """
 
-import pickle
 import json
+import pickle
+
 from algorithms.create import create_condition
 
 # Load in all the courses and their conditions list
@@ -18,6 +19,12 @@ ALL_OBJECTS = {}
 
 
 def cache_conditions_pkl_file():
+    """
+    Loads all conditions objects and dumps them as a pickled file
+
+    Input: None
+    Returns: None
+    """
     for course, tokens in ALL_CONDITIONS_TOKENS.items():
         ALL_OBJECTS[course] = create_condition(tokens, course)
 
