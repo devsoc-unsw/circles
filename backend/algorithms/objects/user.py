@@ -1,4 +1,5 @@
 import copy
+from typing import Optional
 
 from algorithms.objects.categories import AnyCategory, Category
 
@@ -6,16 +7,15 @@ from algorithms.objects.categories import AnyCategory, Category
 class User:
     '''A user and their data which will be used to determine if they can take a course'''
 
-    def __init__(self, data=None):
+    def __init__(self, data = None):
         # Will load the data if any was given
         self.courses: dict[str, (int, int)] = {}
         self.cur_courses: list[str, (int, int)] = [] # Courses the user is taking in the current term
         self.program: str = None
         self.specialisations: dict[str, int] = {}
-        self.year = 0
+        self.year: int = 0
 
-        if data != None:
-            # Data was provided
+        if data:
             self.load_json(data)
 
     def add_courses(self, courses: dict[str, (int, int)]):
@@ -73,7 +73,7 @@ class User:
         '''Given a course which the student has taken, returns their grade (or None for no grade)'''
         return self.courses[course][1]
 
-    def wam(self, category: Category = AnyCategory()):
+    def wam(self, category: Category = AnyCategory()) -> Optional[float]:
         total_wam, total_uoc = 0, 0
 
         for course, (uoc, grade) in self.courses.items():
@@ -83,7 +83,7 @@ class User:
 
         return None if total_uoc == 0 else total_wam / total_uoc
 
-    def uoc(self, category: Category = AnyCategory()):
+    def uoc(self, category: Category = AnyCategory()) -> int:
         '''Given a user, returns the number of units they have taken for this uoc category'''
         return sum(uoc for course, (uoc, _) in self.courses.items() if category.match_definition(course))
 
@@ -91,8 +91,6 @@ class User:
     def unselect_course(self, target, locked) -> list[str]:
         """Given a course to unselect and a list of locked courses, remove the courses
         from the user and return a list of courses which would be affected by the unselection"""
-        if not self.has_taken_course(target):
-            return []
 
         # Resolving circular imports
         from algorithms.create import create_condition
@@ -112,7 +110,9 @@ class User:
         while courses_to_delete:
             affected_courses.extend(courses_to_delete)
             for course in courses_to_delete:
-                del self.courses[course]
+                if course in self.courses:
+                    del self.courses[course]
+
             courses_to_delete = [
                 course for course in self.courses
                 if cached_conditions.get(course) is not None # course is in conditions
