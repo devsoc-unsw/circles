@@ -22,11 +22,11 @@ class minors(BaseModel):
     minors: dict
 
 
-class programCourses(BaseModel):
+class ProgramCourses(BaseModel):
     courses: dict
 
 
-class courseDetails(BaseModel):
+class CourseDetails(BaseModel):
     title: str
     code: str
     UOC: int

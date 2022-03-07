@@ -18,6 +18,7 @@ class Category(ABC):
     @abstractmethod
     def match_definition(self, course):
         pass
+
     @abstractmethod
     def __str__(self) -> str:
         return super().__str__()
@@ -26,6 +27,7 @@ class Category(ABC):
 class AnyCategory(Category):
     def match_definition(self, course):
         return True
+
     def __str__(self) -> str:
         return "any course"
 
@@ -37,7 +39,7 @@ class CourseCategory(Category):
         self.code = code
 
     def match_definition(self, course):
-        return bool(re.match(rf'^{self.code}\d{{4}}$', course))
+        return bool(re.match(rf"^{self.code}\d{{4}}$", course))
 
     def __str__(self) -> str:
         return f"{self.code} courses"
@@ -66,7 +68,7 @@ class LevelCourseCategory(Category):
 
     def match_definition(self, course) -> bool:
         return bool(
-            re.match(rf'{self.code}\d{{4}}', course) and course[4] == str(self.level)
+            re.match(rf"{self.code}\d{{4}}", course) and course[4] == str(self.level)
         )
 
     def __str__(self) -> str:
