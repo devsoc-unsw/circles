@@ -183,7 +183,7 @@ def unselectCourse(userData: UserData, lockedCourses: list, unselectedCourse: st
             responses={
                 400: {"model": message, "description": "Uh oh you broke me"},
                 200: {
-                    "description": "Returns all ",
+                    "description": "Returns all courses which are unlocked when this course is taken",
                     "content": {
                         "application/json": {
                             "example": {
