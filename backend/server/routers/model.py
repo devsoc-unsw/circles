@@ -55,6 +55,9 @@ class CourseState (BaseModel):
 class CoursesState (BaseModel):
     courses_state: dict[str, CourseState] = {}
 
+class CoursesUnlockedWhenTaken (BaseModel):
+    courses_unlocked_when_taken: list
+
 class CourseTypeState (BaseModel):
     is_accurate: bool 
     unlocked: bool

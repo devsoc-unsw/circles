@@ -179,7 +179,20 @@ def unselectCourse(userData: UserData, lockedCourses: list, unselectedCourse: st
 
     return {'affected_courses': affectedCourses}
 
-@router.post("/coursesUnlockedWhenTaken/{courseToBeTaken}")
+@router.post("/coursesUnlockedWhenTaken/{courseToBeTaken}", response_model=CoursesUnlockedWhenTaken,
+            responses={
+                400: {"model": message, "description": "Uh oh you broke me"},
+                200: {
+                    "description": "Returns all ",
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                "courses_unlocked_when_taken": ["COMP2511, COMP3311"]
+                            }
+                        }
+                    }
+                }
+            })
 def coursesUnlockedWhenTaken(userData: UserData, courseToBeTaken: str):
     """ Returns all courses which are unlocked when given course is taken """
     # define the user object with user data
