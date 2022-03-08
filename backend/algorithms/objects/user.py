@@ -120,12 +120,3 @@ class User:
             ]
 
         return list(sorted(affected_courses))
-    
-    def get_user_data(self) -> dict[str: object] :
-        """Returns the data defining the user in the form of a dict object"""
-        return {
-            "program" : self.program,
-            "specialisations" : self.specialisations,
-            "courses" : self.courses,
-            "year" : self.year
-        }
