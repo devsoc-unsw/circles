@@ -49,8 +49,8 @@ const getPathToCoursesById = async (id) => {
           },
         }
     );
-    dispatch(setCoursesPathTo(res.data.courses_unlocked_when_taken));
-    } catch (err) {
+    setCoursesPathTo(res.data.courses_unlocked_when_taken);
+  } catch (err) {
       console.log(err);
     }
   };
