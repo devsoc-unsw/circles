@@ -7,8 +7,9 @@ import { getCourseById } from "./../courseProvider";
 import SearchCourse from "../SearchCourse";
 import { plannerActions } from "../../../actions/plannerActions";
 import { Loading } from "./Loading";
-import { selectCourse } from "../../../actions/coursesActions";
 import "./courseDescription.less";
+import { prepareUserPayload } from "../helper";
+import axios from "axios";
 
 const { Title, Text } = Typography;
 const CourseAttribute = ({ title, content }) => {
@@ -30,14 +31,34 @@ export default function CourseDescription() {
   const course = useSelector((state) => state.courses.course);
   const coursesInPlanner = useSelector((state) => state.planner.courses);
   const courseInPlanner = coursesInPlanner.has(id);
+  const planner = useSelector((state) => state.planner);
+  const degree = useSelector((state) => state.degree);
   const [show, setShow] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [pageLoaded, setpageLoaded] = React.useState(false);
+  const [coursesPathTo, setCoursesPathTo] = React.useState({});
+
+const getPathToCoursesById = async (id) => {
+  try {
+    const res = await axios.post(
+      `http://localhost:8000/courses/coursesUnlockedWhenTaken/${id}`,
+      JSON.stringify(prepareUserPayload(degree, planner)),
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+    );
+    setCoursesPathTo(res.data.courses_unlocked_when_taken);
+  } catch (err) {
+      console.log(err);
+    }
+  };
 
   React.useEffect(() => {
     if (id === "explore" || id === "search") return;
     dispatch(getCourseById(id));
-
+    getPathToCoursesById(id);
     setTimeout(() => {
       setpageLoaded(true);
     }, 2000);
@@ -184,8 +205,8 @@ export default function CourseDescription() {
               <Title level={4} className="text">
                 Unlocks these next courses
               </Title>
-              {course.path_to && Object.keys(course.path_to).length > 0 ? (
-                Object.keys(course.path_to).map((courseCode) => (
+              {coursesPathTo && Object.values(coursesPathTo).length > 0 ? (
+                Object.values(coursesPathTo).map((courseCode) => (
                   <CourseTag key={courseCode} name={courseCode} />
                 ))
               ) : (

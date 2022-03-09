@@ -34,14 +34,14 @@ def fixUserData(userData: dict):
                                 "UOC": 6,
                                 "level": 1,
                                 "description": """An introduction to problem-solving via programming, which aims to have students develop
-                                    proficiency in using a high level programming language. Topics: algorithms, program structures 
-                                    (statements, sequence, selection, iteration, functions), data types (numeric, character), data structures 
-                                    (arrays, tuples, pointers, lists), storage structures (memory, addresses), introduction to analysis of 
+                                    proficiency in using a high level programming language. Topics: algorithms, program structures
+                                    (statements, sequence, selection, iteration, functions), data types (numeric, character), data structures
+                                    (arrays, tuples, pointers, lists), storage structures (memory, addresses), introduction to analysis of
                                     algorithms, testing, code quality, teamwork, and reflective practice. The course includes extensive practical
-                                    work in labs and programming projects.</p>\n<p>Additional Information</p>\n<p>This course should be taken by 
-                                    all CSE majors, and any other students who have an interest in computing or who wish to be extended. 
+                                    work in labs and programming projects.</p>\n<p>Additional Information</p>\n<p>This course should be taken by
+                                    all CSE majors, and any other students who have an interest in computing or who wish to be extended.
                                     It does not require any prior computing knowledge or experience.</p>\n
-                                    <p>COMP1511 leads on to COMP1521, COMP1531, COMP2511 and COMP2521, which form the core of the study of 
+                                    <p>COMP1511 leads on to COMP1521, COMP1531, COMP2511 and COMP2521, which form the core of the study of
                                     computing at UNSW and which are pre-requisites for the full range of further computing courses.</p>\n<p>Due to
                                     overlapping material, students who complete COMP1511 may not also enrol in COMP1911 or COMP1921. </p>""",
                                 "study_level": "Undergraduate",
@@ -122,7 +122,7 @@ def getAllUnlocked(userData: UserData):
     that they have already completed"""
 
     coursesState = {}
-    user = User(fixUserData(userData.dict()))
+    user = User(fixUserData(userData.dict())) if type(userData) != User else userData
     for course, condition in CONDITIONS.items():
         # Condition object exists for this course
         result, warnings = condition.validate(user) if condition else (True, [])
@@ -165,7 +165,7 @@ def getAllUnlocked(userData: UserData):
             })
 def getLegacyCourses(year, term):
     """ gets all the courses that were offered in that term for that year """
-    result = {c['code']: c['title'] for c in archivesDB[year].find() if term in c['terms']} 
+    result = {c['code']: c['title'] for c in archivesDB[year].find() if term in c['terms']}
 
     return {'courses' : result}
 
@@ -178,3 +178,38 @@ def unselectCourse(userData: UserData, lockedCourses: list, unselectedCourse: st
     affectedCourses = User(fixUserData(userData.dict())).unselect_course(unselectedCourse, lockedCourses)
 
     return {'affected_courses': affectedCourses}
+
+@router.post("/coursesUnlockedWhenTaken/{courseToBeTaken}", response_model=CoursesUnlockedWhenTaken,
+            responses={
+                400: {"model": message, "description": "Uh oh you broke me"},
+                200: {
+                    "description": "Returns all courses which are unlocked when this course is taken",
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                "courses_unlocked_when_taken": ["COMP2511, COMP3311"]
+                            }
+                        }
+                    }
+                }
+            })
+def coursesUnlockedWhenTaken(userData: UserData, courseToBeTaken: str):
+    """ Returns all courses which are unlocked when given course is taken """
+    # define the user object with user data
+    user = User(fixUserData(userData.dict()))
+
+    ## initial state
+    courses_initially_unlocked = getAllUnlocked(user)
+
+    ## add course to the user
+    courseToAdd = {courseToBeTaken: [getCourse(courseToBeTaken)['UOC'], None]}
+    user.add_courses(courseToAdd)
+
+    ## final state
+    courses_now_unlocked = getAllUnlocked(user)
+
+    ## compare
+    before = [course for course in list(courses_initially_unlocked['courses_state'].keys()) if courses_initially_unlocked['courses_state'][course]['unlocked']]
+    after = [course for course in list(courses_now_unlocked['courses_state'].keys()) if courses_now_unlocked['courses_state'][course]['unlocked']]
+
+    return{'courses_unlocked_when_taken' : [course for course in after if course not in before]}
