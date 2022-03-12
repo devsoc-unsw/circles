@@ -1,6 +1,6 @@
+import re
 from fastapi import APIRouter, HTTPException
 from server.database import coursesCOL, archivesDB
-import re
 from algorithms.objects.user import User
 from server.routers.model import *
 from itertools import chain
@@ -15,7 +15,9 @@ def apiIndex():
     return "Index of courses"
 
 def fixUserData(userData: dict):
-    ''' updates and returns the userData with the UOC of a course '''
+    """
+        dates and returns the userData with the UOC of a course
+    """
     coursesWithoutUoc = [course for course in userData["courses"] if type(userData["courses"][course]) is int]
     filledInCourses = {course : [getCourse(course)["UOC"], userData["courses"][course]] for course in coursesWithoutUoc}
     userData["courses"].update(filledInCourses)
@@ -116,10 +118,12 @@ def search(string):
                 }
             })
 def getAllUnlocked(userData: UserData):
-    """Given the userData and a list of locked courses, returns the state of all
-    the courses. Note that locked courses always return as True with no warnings
-    since it doesn't make sense for us to tell the user they can't take a course
-    that they have already completed"""
+    """
+        Given the userData and a list of locked courses, returns the state of all
+        the courses. Note that locked courses always return as True with no warnings
+        since it doesn't make sense for us to tell the user they can't take a course
+        that they have already completed
+    """
 
     coursesState = {}
     user = User(fixUserData(userData.dict())) if type(userData) != User else userData
@@ -164,17 +168,37 @@ def getAllUnlocked(userData: UserData):
                 }
             })
 def getLegacyCourses(year, term):
-    """ gets all the courses that were offered in that term for that year """
-    result = {c['code']: c['title'] for c in archivesDB[year].find() if term in c['terms']}
+    """
+        gets all the courses that were offered in that term for that year
+    """
+    result = {c['code']: c['title'] for c in archivesDB[year].find() if term in c['terms']} 
 
     return {'courses' : result}
 
-@router.post("/unselectCourse/")
+@router.post("/unselectCourse/", response_model=AffectedCourses,
+            responses={
+                422: {"model": message, "description": "Unselected course query is required"},
+                400: {"model": message, "description": "Uh oh you broke me"},
+                200: {
+                    "description": "Returns the state of all the courses",
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                 "affected_courses": [
+                                     "COMP1521",
+                                     "COMP1531",
+                                     "COMP3121"
+                                 ]
+                             }
+                         }
+                     }
+                 }
+            })
 def unselectCourse(userData: UserData, lockedCourses: list, unselectedCourse: str):
-    '''
+    """
         Creates a new user class and returns all the courses
         affected from the course that was unselected in sorted order
-    '''
+    """
     affectedCourses = User(fixUserData(userData.dict())).unselect_course(unselectedCourse, lockedCourses)
 
     return {'affected_courses': affectedCourses}
