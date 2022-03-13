@@ -3404,11 +3404,11 @@
     },
     "CODE3201": {
         "original": "Prerequisite: CODE3100 & concurrently enrolled in CODE3202<br/><br/>",
-        "processed": "CODE3100 && concurrently CODE3202"
+        "processed": "CODE3100 && [CODE3202]"
     },
     "CODE3202": {
         "original": "Prerequisite: CODE3100 & concurrently enrolled in CODE3202<br/><br/>",
-        "processed": "CODE3100 && concurrently"
+        "processed": "CODE3100 && []"
     },
     "CODE4100": {
         "original": "",

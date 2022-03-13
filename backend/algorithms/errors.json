@@ -7299,35 +7299,6 @@
         ],
         "broke at": "Index 6, /CODE"
     },
-    "CODE3201": {
-        "condition": {
-            "original": "Prerequisite: CODE3100 & concurrently enrolled in CODE3202<br/><br/>",
-            "processed": "CODE3100 && concurrently CODE3202"
-        },
-        "tokens": [
-            "(",
-            "CODE3100",
-            "&&",
-            "concurrently",
-            "CODE3202",
-            ")"
-        ],
-        "broke at": "Index 3, concurrently"
-    },
-    "CODE3202": {
-        "condition": {
-            "original": "Prerequisite: CODE3100 & concurrently enrolled in CODE3202<br/><br/>",
-            "processed": "CODE3100 && concurrently"
-        },
-        "tokens": [
-            "(",
-            "CODE3100",
-            "&&",
-            "concurrently",
-            ")"
-        ],
-        "broke at": "Index 3, concurrently"
-    },
     "COMP3901": {
         "condition": {
             "original": "Prerequisite: 80+ WAM in COMP, SENG or BINF courses, completion of all first and second year core requirements a CSE program, and agreement from a suitable CSE academic supervisor.<br/><br/>",
