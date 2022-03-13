@@ -1,6 +1,6 @@
+import re
 from fastapi import APIRouter, HTTPException
 from server.database import coursesCOL, archivesDB
-import re
 from algorithms.objects.user import User
 from server.routers.model import *
 from itertools import chain
@@ -15,7 +15,9 @@ def apiIndex():
     return "Index of courses"
 
 def fixUserData(userData: dict):
-    ''' updates and returns the userData with the UOC of a course '''
+    """
+        dates and returns the userData with the UOC of a course
+    """
     coursesWithoutUoc = [course for course in userData["courses"] if type(userData["courses"][course]) is int]
     filledInCourses = {course : [getCourse(course)["UOC"], userData["courses"][course]] for course in coursesWithoutUoc}
     userData["courses"].update(filledInCourses)
@@ -34,14 +36,14 @@ def fixUserData(userData: dict):
                                 "UOC": 6,
                                 "level": 1,
                                 "description": """An introduction to problem-solving via programming, which aims to have students develop
-                                    proficiency in using a high level programming language. Topics: algorithms, program structures 
-                                    (statements, sequence, selection, iteration, functions), data types (numeric, character), data structures 
-                                    (arrays, tuples, pointers, lists), storage structures (memory, addresses), introduction to analysis of 
+                                    proficiency in using a high level programming language. Topics: algorithms, program structures
+                                    (statements, sequence, selection, iteration, functions), data types (numeric, character), data structures
+                                    (arrays, tuples, pointers, lists), storage structures (memory, addresses), introduction to analysis of
                                     algorithms, testing, code quality, teamwork, and reflective practice. The course includes extensive practical
-                                    work in labs and programming projects.</p>\n<p>Additional Information</p>\n<p>This course should be taken by 
-                                    all CSE majors, and any other students who have an interest in computing or who wish to be extended. 
+                                    work in labs and programming projects.</p>\n<p>Additional Information</p>\n<p>This course should be taken by
+                                    all CSE majors, and any other students who have an interest in computing or who wish to be extended.
                                     It does not require any prior computing knowledge or experience.</p>\n
-                                    <p>COMP1511 leads on to COMP1521, COMP1531, COMP2511 and COMP2521, which form the core of the study of 
+                                    <p>COMP1511 leads on to COMP1521, COMP1531, COMP2511 and COMP2521, which form the core of the study of
                                     computing at UNSW and which are pre-requisites for the full range of further computing courses.</p>\n<p>Due to
                                     overlapping material, students who complete COMP1511 may not also enrol in COMP1911 or COMP1921. </p>""",
                                 "study_level": "Undergraduate",
@@ -116,20 +118,22 @@ def search(string):
                 }
             })
 def getAllUnlocked(userData: UserData):
-    """Given the userData and a list of locked courses, returns the state of all
-    the courses. Note that locked courses always return as True with no warnings
-    since it doesn't make sense for us to tell the user they can't take a course
-    that they have already completed"""
+    """
+        Given the userData and a list of locked courses, returns the state of all
+        the courses. Note that locked courses always return as True with no warnings
+        since it doesn't make sense for us to tell the user they can't take a course
+        that they have already completed
+    """
 
     coursesState = {}
-    user = User(fixUserData(userData.dict()))
+    user = User(fixUserData(userData.dict())) if type(userData) != User else userData
     for course, condition in CONDITIONS.items():
         # Condition object exists for this course
         result, warnings = condition.validate(user) if condition else (True, [])
         coursesState[course] = {
             "is_accurate": bool(condition),
             "unlocked": result,
-            "handbook_note": "", # TODO: Cache handbook notes
+            "handbook_note": CACHED_HANDBOOK_NOTE.get(course, ""),
             "warnings": warnings
         }
 
@@ -164,17 +168,72 @@ def getAllUnlocked(userData: UserData):
                 }
             })
 def getLegacyCourses(year, term):
-    """ gets all the courses that were offered in that term for that year """
+    """
+        gets all the courses that were offered in that term for that year
+    """
     result = {c['code']: c['title'] for c in archivesDB[year].find() if term in c['terms']} 
 
     return {'courses' : result}
 
-@router.post("/unselectCourse/")
+@router.post("/unselectCourse/", response_model=AffectedCourses,
+            responses={
+                422: {"model": message, "description": "Unselected course query is required"},
+                400: {"model": message, "description": "Uh oh you broke me"},
+                200: {
+                    "description": "Returns the state of all the courses",
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                 "affected_courses": [
+                                     "COMP1521",
+                                     "COMP1531",
+                                     "COMP3121"
+                                 ]
+                             }
+                         }
+                     }
+                 }
+            })
 def unselectCourse(userData: UserData, lockedCourses: list, unselectedCourse: str):
-    '''
+    """
         Creates a new user class and returns all the courses
         affected from the course that was unselected in sorted order
-    '''
+    """
     affectedCourses = User(fixUserData(userData.dict())).unselect_course(unselectedCourse, lockedCourses)
 
     return {'affected_courses': affectedCourses}
+
+@router.post("/coursesUnlockedWhenTaken/{courseToBeTaken}", response_model=CoursesUnlockedWhenTaken,
+            responses={
+                400: {"model": message, "description": "Uh oh you broke me"},
+                200: {
+                    "description": "Returns all courses which are unlocked when this course is taken",
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                "courses_unlocked_when_taken": ["COMP2511, COMP3311"]
+                            }
+                        }
+                    }
+                }
+            })
+def coursesUnlockedWhenTaken(userData: UserData, courseToBeTaken: str):
+    """ Returns all courses which are unlocked when given course is taken """
+    # define the user object with user data
+    user = User(fixUserData(userData.dict()))
+
+    ## initial state
+    courses_initially_unlocked = getAllUnlocked(user)
+
+    ## add course to the user
+    courseToAdd = {courseToBeTaken: [getCourse(courseToBeTaken)['UOC'], None]}
+    user.add_courses(courseToAdd)
+
+    ## final state
+    courses_now_unlocked = getAllUnlocked(user)
+
+    ## compare
+    before = [course for course in list(courses_initially_unlocked['courses_state'].keys()) if courses_initially_unlocked['courses_state'][course]['unlocked']]
+    after = [course for course in list(courses_now_unlocked['courses_state'].keys()) if courses_now_unlocked['courses_state'][course]['unlocked']]
+
+    return{'courses_unlocked_when_taken' : [course for course in after if course not in before]}

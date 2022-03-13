@@ -124,7 +124,7 @@ def INFS_3830_3873(condition):
     return {
         "original": condition["original"],
         "processed": "INFS3603 || (COMM2501 && COMMJ)",
-        "warning": "Students wishing to meet SAS certification must complete INFS3603. Completion of COMM2501 in lieu of INFS3603 will not be considered equivalent for the certificate"
+        "handbook_note": "Students wishing to meet SAS certification must complete INFS3603. Completion of COMM2501 in lieu of INFS3603 will not be considered equivalent for the certificate"
     }
 
 def INFS_4831_4854_4886():

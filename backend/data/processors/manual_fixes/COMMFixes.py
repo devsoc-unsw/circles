@@ -72,12 +72,12 @@ def COMM_1040(conditions):
     
     "processed": "",
 
-    "warning": "Students must be in Good Academic Standing"
+    "handbook_note": "Students must be in Good Academic Standing"
     """
     return {
         "original": conditions["original"],
         "processed": "",
-        "warning": "Students must be in Good Academic Standing"
+        "handbook_note": "Students must be in Good Academic Standing"
     }
 
 def COMM_1100(conditions):
@@ -89,7 +89,7 @@ def COMM_1100(conditions):
     return {
         "original": conditions["original"],
         "processed": "",
-        "warning": "Students enrolled in Actuarial Studies or Economics programs (in single or double degree mode) are not permitted to enrol."
+        "handbook_note": "Students enrolled in Actuarial Studies or Economics programs (in single or double degree mode) are not permitted to enrol."
     }
 
 def COMM_1110(conditions):
@@ -101,7 +101,7 @@ def COMM_1110(conditions):
     return {
         "original": conditions["original"],
         "processed": "",
-        "warning": "Students enrolled in 3764 (Eng/Comm), Actuarial Studies or Economics programs (in both single and double degree mode) are not permitted to enrol."
+        "handbook_note": "Students enrolled in 3764 (Eng/Comm), Actuarial Studies or Economics programs (in both single and double degree mode) are not permitted to enrol."
     }
 
 def COMM_1150(conditions):
@@ -114,7 +114,7 @@ def COMM_1150(conditions):
     return {
         "original": conditions["original"],
         "processed": "COMM1100",
-        "warning": "Only available to single and double degree Business School students in Term 2. Offered to non-Business School students in Term 3."
+        "handbook_note": "Only available to single and double degree Business School students in Term 2. Offered to non-Business School students in Term 3."
     }
 
 def COMM_1999(conditions):
@@ -126,20 +126,20 @@ def COMM_1999(conditions):
     return {
         "original": conditions["original"],
         "processed": "COMM0999",
-        "warning": "You must have completed 30UOC of Integrated First Year Core"
+        "handbook_note": "You must have completed 30UOC of Integrated First Year Core"
     }
 
 def COMM_2222(conditions):
     """
         "original": "Pre-requisite: In Business degree, COMM6000 Career Accelerator or COMM1999 First Year Portfolio, WAM 65+, minimum 72 UOC completed, room in degree for course, Good academic standing.<br/>Excluded: Co-op students<br/>It is recommended a progression check is completed prior to enrolling.<br/><br/>",
         "processed": "(COMM6000 || COMM1999) && ZBUS# && 65WAM && 72UOC",
-        "warning": "Good Academic Standing. Co-op students are excluded. It is recommended to do a progression check prior to enrolling"
+        "handbook_note": "Good Academic Standing. Co-op students are excluded. It is recommended to do a progression check prior to enrolling"
     """
 
     return  {
         "original": conditions["original"],
         "processed": "(COMM6000 || COMM1999) && ZBUS# && 65WAM && 72UOC",
-        "warning": "Good Academic Standing. Co-op students are excluded. It is recommended to do a progression check prior to enrolling"
+        "handbook_note": "Good Academic Standing. Co-op students are excluded. It is recommended to do a progression check prior to enrolling"
     }
 
 def COMM_2233(conditions):
@@ -151,7 +151,7 @@ def COMM_2233(conditions):
     return {
         "original": conditions["original"],
         "processed": "(COMM6000 || COMM1999) && 48UOC",
-        "warning": "It is recommended to do a progression check prior to enrolling."
+        "handbook_note": "It is recommended to do a progression check prior to enrolling."
     }
 
 def COMM_2244():
@@ -174,7 +174,7 @@ def COMM_3020(conditions):
     return {
         "original": conditions["original"],
         "processed": "(COMM6000 || COMM1999) && 65WAM && 72UOC",
-        "warning": "This course is by application only. Please visit Business School website for more information."
+        "handbook_note": "This course is by application only. Please visit Business School website for more information."
     }
 
 def COMM_3030():
@@ -189,13 +189,13 @@ def COMM_3090(conditions):
     """
         "original": "Students are expected to be in their final year of a Bachelor of Commerce single or dual degree with at least 108 UOC completed.<br/><br/>",
         "processed": "108UOC",
-        "warning": "Students are expected to be in their final year of a Bachelor of Commerce single or dual degree with at least 108 UOC completed."
+        "handbook_note": "Students are expected to be in their final year of a Bachelor of Commerce single or dual degree with at least 108 UOC completed."
     """
 
     return {
         "original": conditions["original"],
         "processed": "108UOC",
-        "warning": "Students are expected to be in their final year of a Bachelor of Commerce single or dual degree"
+        "handbook_note": "Students are expected to be in their final year of a Bachelor of Commerce single or dual degree"
     }
 
 def COMM_3101(conditions):
@@ -210,7 +210,7 @@ def COMM_3101(conditions):
     return {
         "original": conditions["original"],
         "processed": "48UOC",
-        "warning": "This course is by application only.Please contact the Co-op office for more information. Students who have completed DIPP1510 or COMM2222 or are in Business Co-Op programs are excluded from this course."
+        "handbook_note": "This course is by application only.Please contact the Co-op office for more information. Students who have completed DIPP1510 or COMM2222 or are in Business Co-Op programs are excluded from this course."
     }
 
 def COMM_3202(conditions):
@@ -224,7 +224,7 @@ def COMM_3202(conditions):
     return {
         "original": conditions["original"],
         "processed": "COMM3101 || COMM2101",
-        "warning": "This course is by application only. Please contact the Co-op office for more information. Excluded:DIPP1510, COMM2222, Business Co-Op programs."
+        "handbook_note": "This course is by application only. Please contact the Co-op office for more information. Excluded:DIPP1510, COMM2222, Business Co-Op programs."
     }
 
 def COMM_3303(conditions):
@@ -236,7 +236,7 @@ def COMM_3303(conditions):
     return {
         "original": conditions["original"],
         "processed": "",
-        "warning": "This course is by application only. Please contact the Co-op office for more information."
+        "handbook_note": "This course is by application only. Please contact the Co-op office for more information."
     }
 
 def COMM_3500():
@@ -256,7 +256,7 @@ def COMM_3900(conditions):
     return {
         "original": conditions["original"],
         "processed": "COMM6000 && 108UOC",
-        "warning": "You must have completed all First Year core"
+        "handbook_note": "You must have completed all First Year core"
     }
 
 def COMM_3999(conditions):
@@ -268,7 +268,7 @@ def COMM_3999(conditions):
     return {
         "original": conditions["original"],
         "processed": "COMM1999 && 72UOC in ZBUS && COMM#",
-        "warning": "Studetns must be in their final year"
+        "handbook_note": "Studetns must be in their final year"
     }
 
 def COMM_6700():
