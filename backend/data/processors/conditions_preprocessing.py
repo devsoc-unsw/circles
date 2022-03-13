@@ -268,6 +268,7 @@ def convert_AND_OR(processed):
 def convert_coreqs(processed):
     """ Puts co-requisites inside square brackets """
     processed = processed.rstrip()
+    processed = re.sub(r"concurrently?;?:?\s?(.*)", r"[\1]", processed, flags=re.IGNORECASE)
     return re.sub(r"co-?requisites?;?:?\s?(.*)", r"[\1]", processed, flags=re.IGNORECASE)
 
 # -----------------------------------------------------------------------------
