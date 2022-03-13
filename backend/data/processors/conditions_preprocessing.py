@@ -135,7 +135,7 @@ def delete_extraneous_phrasing(processed):
 
 def delete_prereq_label(processed):
     """ Removes 'prerequisite' and variations """
-    # variations incude ["prerequisite", "pre-requisite", "prer-requisite"]
+    # variations incude ["prerequisite:", "pre-requisite:", "prer-requisite:", "Pre-requisite :", "Pre Req:"]
     return re.sub(r"pre\s*[a-z/_-]*\s*:*", "", processed, flags=re.IGNORECASE)
 
 
