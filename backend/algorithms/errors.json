@@ -11202,15 +11202,15 @@
     "FOOD6804": {
         "condition": {
             "original": "Prerequsite :CHEM3811or INDC2003<br/><br/>",
-            "processed": ":CHEM3811or INDC2003"
+            "processed": "CHEM3811or INDC2003"
         },
         "tokens": [
             "(",
-            ":CHEM3811or",
+            "CHEM3811or",
             "INDC2003",
             ")"
         ],
-        "broke at": "Index 1, :CHEM3811or"
+        "broke at": "Index 1, CHEM3811or"
     },
     "GEOS1701": {
         "condition": {
@@ -11335,21 +11335,6 @@
             ")"
         ],
         "broke at": "Index 2, program"
-    },
-    "HESC1511": {
-        "condition": {
-            "original": "Pre req: HESC1501 and PSYC1001<br/><br/>",
-            "processed": "req: HESC1501 && PSYC1001"
-        },
-        "tokens": [
-            "(",
-            "req:",
-            "HESC1501",
-            "&&",
-            "PSYC1001",
-            ")"
-        ],
-        "broke at": "Index 1, req:"
     },
     "HESC2451": {
         "condition": {
@@ -11491,24 +11476,6 @@
             ")"
         ],
         "broke at": "Index 5, on"
-    },
-    "INDC2003": {
-        "condition": {
-            "original": "Pre-requisites: CHEM1021 OR DPST1032 OR CHEM1041, AND/OR CEIC1001<br/>Exclusions: CEIC2003<br/><br/>",
-            "processed": "CHEM1021 || DPST1032 || CHEM1041, AND/OR CEIC1001"
-        },
-        "tokens": [
-            "(",
-            "CHEM1021",
-            "||",
-            "DPST1032",
-            "||",
-            "CHEM1041,",
-            "AND/OR",
-            "CEIC1001",
-            ")"
-        ],
-        "broke at": "Index 5, CHEM1041,"
     },
     "INFS3830": {
         "condition": {
@@ -17404,11 +17371,11 @@
     "OPTM4271": {
         "condition": {
             "original": "Pre req; OPTM4110, OPTM4131, OPTM4151, Corequisites; OPTM4211, OPTM4231, OPTM4251<br/><br/>",
-            "processed": "req; OPTM4110, OPTM4131, OPTM4151, [OPTM4211, OPTM4231, OPTM4251]"
+            "processed": "; OPTM4110, OPTM4131, OPTM4151, [OPTM4211, OPTM4231, OPTM4251]"
         },
         "tokens": [
             "(",
-            "req;",
+            ";",
             "OPTM4110,",
             "OPTM4131,",
             "OPTM4151,",
@@ -17419,7 +17386,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 1, req;"
+        "broke at": "Index 1, ;"
     },
     "OPTM5131": {
         "condition": {
@@ -17948,19 +17915,6 @@
             ")"
         ],
         "broke at": "Index 1, Enrolment"
-    },
-    "PLAN4001": {
-        "condition": {
-            "original": "Prerequisite : 120 unit of credits<br/><br/>",
-            "processed": ": 120UOC"
-        },
-        "tokens": [
-            "(",
-            ":",
-            "120UOC",
-            ")"
-        ],
-        "broke at": "Index 1, :"
     },
     "PPEC1001": {
         "condition": {

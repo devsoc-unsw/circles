@@ -136,7 +136,7 @@ def delete_extraneous_phrasing(processed):
 def delete_prereq_label(processed):
     """ Removes 'prerequisite' and variations """
     # variations incude ["prerequisite", "pre-requisite", "prer-requisite"]
-    return re.sub(r"[Pp]re[A-Za-z/_-]*:*", "", processed)
+    return re.sub(r"pre\s*[a-z/_-]*\s*:*", "", processed, flags=re.IGNORECASE)
 
 
 def delete_trailing_punc(processed):
@@ -256,10 +256,9 @@ def convert_including(processed):
 
 def convert_AND_OR(processed):
     """ Convert 'and' to '&&' and 'or' to '||' """
-    if ' & ' in processed:
-        print(processed)
     processed = re.sub(" and ", " && ", processed, flags=re.IGNORECASE)
     processed = re.sub(" & ", " && ", processed, flags=re.IGNORECASE)
+    processed = re.sub(" and/or ", " || ", processed, flags=re.IGNORECASE)
     processed = re.sub(" plus ", " && ", processed, flags=re.IGNORECASE)
     processed = re.sub(r" \+ ", " && ", processed, flags=re.IGNORECASE)
     processed = re.sub(" or ", " || ", processed, flags=re.IGNORECASE)

@@ -6251,7 +6251,7 @@
     },
     "FOOD6804": {
         "original": "Prerequsite :CHEM3811or INDC2003<br/><br/>",
-        "processed": ":CHEM3811or INDC2003"
+        "processed": "CHEM3811or INDC2003"
     },
     "FOOD6806": {
         "original": "",
@@ -6631,7 +6631,7 @@
     },
     "HESC1511": {
         "original": "Pre req: HESC1501 and PSYC1001<br/><br/>",
-        "processed": "req: HESC1501 && PSYC1001"
+        "processed": "HESC1501 && PSYC1001"
     },
     "HESC2451": {
         "original": "Prerequisite program 3871<br/><br/>",
@@ -6843,7 +6843,7 @@
     },
     "INDC2003": {
         "original": "Pre-requisites: CHEM1021 OR DPST1032 OR CHEM1041, AND/OR CEIC1001<br/>Exclusions: CEIC2003<br/><br/>",
-        "processed": "CHEM1021 || DPST1032 || CHEM1041, AND/OR CEIC1001"
+        "processed": "CHEM1021 || DPST1032 || CHEM1041 || CEIC1001"
     },
     "INDC3001": {
         "original": "Pre-requisites: CEIC2000, CHEM2021, MATH2089<br/><br/>",
@@ -9606,7 +9606,7 @@
     },
     "OPTM4271": {
         "original": "Pre req; OPTM4110, OPTM4131, OPTM4151, Corequisites; OPTM4211, OPTM4231, OPTM4251<br/><br/>",
-        "processed": "req; OPTM4110, OPTM4131, OPTM4151, [OPTM4211, OPTM4231, OPTM4251]"
+        "processed": "; OPTM4110, OPTM4131, OPTM4151, [OPTM4211, OPTM4231, OPTM4251]"
     },
     "OPTM4291": {
         "original": "Prerequisite: OPTM3231<br/><br/>",
@@ -10094,7 +10094,7 @@
     },
     "PLAN4001": {
         "original": "Prerequisite : 120 unit of credits<br/><br/>",
-        "processed": ": 120UOC"
+        "processed": "120UOC"
     },
     "PLAN4002": {
         "original": "",
