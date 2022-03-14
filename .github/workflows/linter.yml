@@ -48,3 +48,5 @@ jobs:
           # may be worth changing this to master / main
           DEFAULT_BRANCH: dev
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # For pylint
+          PYTHON_PYLINT_CONFIG_FILE: .pylintrc
