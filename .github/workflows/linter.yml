@@ -17,10 +17,7 @@ on:
     paths:
       # Add specific files / filetypes here.
       # Use `**` to wildcard through multiply paths
-      - "/backend/algorithms/create.py"
-      - "/backend/algorithms/objects/user.py"
-      - "/backend/algorithms/log_broken.py"
-      # - "**.py"
+      - "**.py"
     # [un]-comment the following line to toggle for push to master
     # branches-ignore: [master, main]
 
