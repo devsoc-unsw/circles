@@ -178,7 +178,7 @@ def make_condition(tokens, first=False, course=None):
                 next(item)  # Skip "in" keyword
 
                 # Get the category of the uoc condition
-                category, sub_index = create_category(tokens[index + 2:])
+                category, sub_index = create_category(tokens[index + 2 :])
 
                 if category is None:
                     # Error. Return None. (Could also potentially set the uoc category
@@ -197,7 +197,7 @@ def make_condition(tokens, first=False, course=None):
             if index + 1 < len(tokens) and tokens[index + 1] == "in":
                 # Create category according to the token after 'in'
                 next(item)  # Skip "in" keyword
-                category, sub_index = create_category(tokens[index + 2:])
+                category, sub_index = create_category(tokens[index + 2 :])
 
                 if category is None:
                     # If can't parse the category, return None(raise an error)
