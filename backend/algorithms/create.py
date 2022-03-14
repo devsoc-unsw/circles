@@ -105,7 +105,6 @@ def make_condition(tokens, first=False, course=None):
 
     Note:
     """
-
     # Everything is wrapped in a CompositeCondition
     result = CompositeCondition()
     # add exclusions
@@ -116,6 +115,7 @@ def make_condition(tokens, first=False, course=None):
                 result.add_condition(CourseExclusionCondition(exclusion))
             elif is_program(exclusion):
                 result.add_condition(ProgramExclusionCondition(exclusion))
+
 
     item = enumerate(tokens)
     for index, token in item:
@@ -264,4 +264,3 @@ def handle_uoc_condition(token, tokens, item, index):
     # Add the category to the uoc
     uoc_cond.set_category(category)
     return uoc_cond, category, sub_index
-
