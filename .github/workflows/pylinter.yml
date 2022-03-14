@@ -35,8 +35,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -45,11 +44,11 @@ jobs:
       run: |
         pylint $(git ls-files '*.py')
 
-      env:
-        # false := lint only the files that have changes
-        VALIDATE_ALL_CODEBASE: false
-        # may be worth changing this to master / main
-        DEFAULT_BRANCH: dev
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        # For pylint's settings
-        PYTHON_PYLINT_CONFIG_FILE: .pylintrc
+      # env:
+      #   # false := lint only the files that have changes
+      #   VALIDATE_ALL_CODEBASE: false
+      #   # may be worth changing this to master / main
+      #   DEFAULT_BRANCH: dev
+      #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   # For pylint's settings
+      #   PYTHON_PYLINT_CONFIG_FILE: .pylintrc
