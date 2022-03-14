@@ -260,6 +260,7 @@ def handle_uoc_condition(token, tokens, item, index):
         # to just the default Category which returns true and 1000 uoc taken)
         return uoc_cond, None, index
 
+
     # Add the category to the uoc
     uoc_cond.set_category(category)
     return uoc_cond, category, sub_index
