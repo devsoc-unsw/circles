@@ -255,7 +255,6 @@ def handle_uoc_condition(token, tokens, item, index):
     # Get the category of the uoc condition
     category, sub_index = create_category(tokens[index + 2 :])
 
-
     if category is None:
         # Error. Return None. (Could also potentially set the uoc category
         # to just the default Category which returns true and 1000 uoc taken)
