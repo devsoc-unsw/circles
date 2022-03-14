@@ -1,3 +1,8 @@
+"""
+This module allows for the conversion from strings / tokens of strings
+to actual condition objects.
+"""
+
 import json
 import re
 
@@ -6,7 +11,7 @@ from algorithms.objects.categories import (
     FacultyCategory,
     LevelCategory,
     LevelCourseCategory,
-    SchoolCategory
+    SchoolCategory,
 )
 from algorithms.objects.conditions import (
     CompositeCondition,
@@ -20,7 +25,7 @@ from algorithms.objects.conditions import (
     ProgramTypeCondition,
     SpecialisationCondition,
     UOCCondition,
-    WAMCondition
+    WAMCondition,
 )
 from algorithms.objects.helper import (
     get_grade,
@@ -32,9 +37,8 @@ from algorithms.objects.helper import (
     is_program_type,
     is_specialisation,
     is_uoc,
-    is_wam
+    is_wam,
 )
-
 
 # Load in cached exclusions
 CACHED_EXCLUSIONS_PATH = "./algorithms/cache/exclusions.json"
@@ -116,7 +120,8 @@ def make_condition(tokens, first=False, course=None):
             elif is_program(exclusion):
                 result.add_condition(ProgramExclusionCondition(exclusion))
 
-
+    # Define index before loop to prevent undefined return
+    index = 0
     item = enumerate(tokens)
     for index, token in item:
         if token == "(":
@@ -139,7 +144,8 @@ def make_condition(tokens, first=False, course=None):
             # OR type logic
             result.set_logic(Logic.OR)
         elif token == "[":
-            # Beginning of co-requisite. Parse courses and logical operators until closing "]"
+            # Beginning of co-requisite. Parse courses and logical
+            # operators until closing "]"
             coreq_cond = CoreqCoursesCondition()
             i = 1  # Helps track our index offset to parse this co-requisite
             while tokens[index + i] != "]":
@@ -174,14 +180,13 @@ def make_condition(tokens, first=False, course=None):
                 # Get the category of the uoc condition
                 category, sub_index = create_category(tokens[index + 2 :])
 
-                if category == None:
+                if category is None:
                     # Error. Return None. (Could also potentially set the uoc category
                     # to just the default Category which returns true and 1000 uoc taken)
                     return None, index
-                else:
-                    # Add the category to the uoc and adjust the current index position
-                    uoc_cond.set_category(category)
-                    [next(item) for _ in range(sub_index + 1)]
+                # Add the category to the uoc and adjust the current index position
+                uoc_cond.set_category(category)
+                [next(item) for _ in range(sub_index + 1)]
 
             result.add_condition(uoc_cond)
 
@@ -197,10 +202,10 @@ def make_condition(tokens, first=False, course=None):
                 if category is None:
                     # If can't parse the category, return None(raise an error)
                     return None, index
-                else:
-                    # Add the category and adjust the current index position
-                    wam_cond.set_category(category)
-                    [next(item) for _ in range(sub_index + 1)]
+
+                # Add the category and adjust the current index position
+                wam_cond.set_category(category)
+                [next(item) for _ in range(sub_index + 1)]
 
             result.add_condition(wam_cond)
         elif is_grade(token):
@@ -227,40 +232,3 @@ def make_condition(tokens, first=False, course=None):
             return None, index
 
     return result, index
-
-def handle_uoc_condition(token, tokens, item, index):
-    """Condition for the UOC requirement
-
-    Args:
-        token (str): current token being operated one
-        tokens ([string]): complete list of tokens
-        item (enumerate(tokens)): enumerated version of tokens
-        index (int): index of the current tokens
-
-    Returns:
-        uoc_cond (UOCCondition): uoc category condition
-        category (Category): category of the uoc condition
-        sub_index (int): index after the category parsing is done
-    """
-    uoc = get_uoc(token)
-    uoc_cond = UOCCondition(uoc)
-
-    # cannot parse. end of tokens or, next token is not "in"
-    if index + 1 >= len(tokens) and tokens[index + 1] != "in":
-        return uoc_cond, None, index
-
-    # Create category according to the token after 'in'
-    next(item)  # Skip "in" keyword
-
-    # Get the category of the uoc condition
-    category, sub_index = create_category(tokens[index + 2 :])
-
-    if category is None:
-        # Error. Return None. (Could also potentially set the uoc category
-        # to just the default Category which returns true and 1000 uoc taken)
-        return uoc_cond, None, index
-
-
-    # Add the category to the uoc
-    uoc_cond.set_category(category)
-    return uoc_cond, category, sub_index
