@@ -1,0 +1,53 @@
+# ---------------------------------------#
+# ---------------------------------------#
+# --- PYLINTER - Github Actions -----#
+# ---------------------------------------#
+# ---------------------------------------#
+name: Pylint
+#
+# Documentation:
+# https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions
+#
+# Find super linter at:
+# https://github.com/github/super-linter
+
+on:
+  push:
+    paths:
+      # Add specific files / filetypes here.
+      # Use `**` to wildcard through multiply paths
+      - "**.py"
+    # [un]-comment the following line to toggle for push to master
+    # branches-ignore: [master, main]
+
+  # This will only work when this workflow is on default branch
+  # TODO: Uncomment when merging
+  # pull_requests:
+  #   branches: [dev, master, main]
+
+jobs:
+  build:
+    name: Pylint
+    # Works on most linux
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+        with:
+          # Do not change this number. Full depth needed to filter changed
+          # files
+          fetch-depth: 0
+
+      # Actually run the linter
+      - name: GitHub Action for pylint
+        uses: cclauss/GitHub-Action-for-pylint@0.7.0
+
+        env:
+          # false := lint only the files that have changes
+          VALIDATE_ALL_CODEBASE: false
+          # may be worth changing this to master / main
+          DEFAULT_BRANCH: dev
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # For pylint's settings
+          PYTHON_PYLINT_CONFIG_FILE: .pylintrc
