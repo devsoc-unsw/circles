@@ -15,9 +15,9 @@ def mapCourse(course, schoolMappings, facultyMappings):
         finalSchoolMappings[schoolMappings[courseSchool]][courseCode] = 1
 
     finalFacultyMappings[facultyMappings[courseFaculty]][courseCode] = 1
-   
 
-    
+
+
 
 
 def process_data():
@@ -36,15 +36,15 @@ def process_data():
             finalFacultyMappings, "algorithms/cache/mappings/facultyCourseMappings.json")
 
 def initialiseData(schoolMappings, facultyMappings):
-    for school in schoolMappings:   
+    for school in schoolMappings:
         first_word = school.split()[0]
         if len(first_word) == 1:
             finalSchoolMappings[school] = {}
-    for faculty in facultyMappings:   
+    for faculty in facultyMappings:
         first_word = faculty.split()[0]
         if len(first_word) == 1:
             finalFacultyMappings[faculty] = {}
-    
+
 
 
 if __name__ == "__main__":
