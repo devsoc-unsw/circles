@@ -228,7 +228,6 @@ def make_condition(tokens, first=False, course=None):
 
     return result, index
 
-
 def handle_uoc_condition(token, tokens, item, index):
     """Condition for the UOC requirement
 
