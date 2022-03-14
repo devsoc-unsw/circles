@@ -6,7 +6,7 @@ from algorithms.objects.categories import (
     FacultyCategory,
     LevelCategory,
     LevelCourseCategory,
-    SchoolCategory,
+    SchoolCategory
 )
 from algorithms.objects.conditions import (
     CompositeCondition,
@@ -20,7 +20,7 @@ from algorithms.objects.conditions import (
     ProgramTypeCondition,
     SpecialisationCondition,
     UOCCondition,
-    WAMCondition,
+    WAMCondition
 )
 from algorithms.objects.helper import (
     get_grade,
@@ -32,7 +32,7 @@ from algorithms.objects.helper import (
     is_program_type,
     is_specialisation,
     is_uoc,
-    is_wam,
+    is_wam
 )
 
 
