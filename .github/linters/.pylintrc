@@ -575,7 +575,8 @@ max-public-methods=20
 max-returns=6
 
 # Maximum number of statements in function / method body.
-# TODO: SHORTEN!
+# This should be set to 50. Overwritten because of create.py. 
+# FIXME: SHORTEN! when create.py is refactored
 max-statements=200
 
 # Minimum number of public methods for a class (see R0903).
