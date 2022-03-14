@@ -264,3 +264,4 @@ def handle_uoc_condition(token, tokens, item, index):
     # Add the category to the uoc
     uoc_cond.set_category(category)
     return uoc_cond, category, sub_index
+

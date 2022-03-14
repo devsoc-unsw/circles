@@ -1,15 +1,13 @@
-# ---------------------------------------#
-# ---------------------------------------#
-# --- PYLINTER - Github Actions -----#
-# ---------------------------------------#
-# ---------------------------------------#
 name: Pylint
-#
-# Documentation:
-# https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions
-#
-# Find super linter at:
-# https://github.com/github/super-linter
+# ---------------------------------------#
+# ---------------------------------------#
+# ---   PYLINTER - Github Actions   -----#
+# ---------------------------------------#
+# ---------------------------------------#
+# Pylint for github actions. Runs seperate to superlinter
+
+# Documentation and source:
+# https://github.com/cclauss/GitHub-Action-for-pylint
 
 on:
   push:
