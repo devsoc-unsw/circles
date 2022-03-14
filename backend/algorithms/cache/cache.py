@@ -1,7 +1,6 @@
-""" 
-Loads cached data such as exclusions, program mappings, etc, into local JSON files
-for faster algorithms performance.
-
+"""
+Loads cached data such as exclusions, program mappings, etc, into local
+JSON files for faster algorithms performance.
 This should be run from the backend directory or via runprocessors
 """
 
@@ -28,15 +27,15 @@ COURSE_MAPPINGS_FILE = "./algorithms/cache/courseMappings.json"
 
 PROGRAM_MAPPINGS_FILE = "./algorithms/cache/programMappings.json"
 
+
 def cache_exclusions():
     """
     Reads from processed courses and stores the exclusions in a map mapping
     COURSE: {
         EXCLUSION_1: 1,
         EXCLUSION_2: 1,
-        EXCLUSION_3: 1 
+        EXCLUSION_3: 1
     }
-
     NOTE: Should run this after all the conditions have been processed as sometimes
     exclusions are included inside the conditions text
     """
@@ -47,26 +46,27 @@ def cache_exclusions():
 
     for course, data in courses.items():
         cached_exclusions[course] = data["exclusions"]
-    
+
     write_data(cached_exclusions, CACHED_EXCLUSIONS_FILE)
+
 
 def cache_handbook_note():
     """
     Reads from processed conditions and stores the warnings in a map mapping
     COURSE: WARNING
-    
-    NOTE: Condition warnings are created during the manual fix stage, so this 
+
+    NOTE: Condition warnings are created during the manual fix stage, so this
     will need to be re-run as more conditions are manually fixed.
     """
 
     conditions = read_data(CONDITIONS_PROCESSED_FILE)
 
-    cached_handbook_note= {}
+    cached_handbook_note = {}
 
     for course, data in conditions.items():
         if "handbook_note" in data:
             cached_handbook_note[course] = data["handbook_note"]
-    
+
     write_data(cached_handbook_note, CACHED_WARNINGS_FILE)
 
 
@@ -74,25 +74,26 @@ def cache_mappings():
     """
     Reads from courses and mappings to map course to a school/faculty
     """
-    finalMappings = {}
+    final_mappings = {}
     courses = read_data(COURSES_PROCESSED_FILE)
     mappings = read_data(MAPPINGS_FILE)
     # Initialise keys in final file
     for mapping in mappings:
         first_word = mapping.split()[0]
         if len(first_word) == 1:
-            finalMappings[mapping] = {}
+            final_mappings[mapping] = {}
     # Map courses to keys
     for course in courses.values():
-        courseCode = course['code']
-        courseFaculty = course['faculty']
-        if 'school' in course:
-            courseSchool = course['school']
-            finalMappings[mappings[courseSchool]][courseCode] = 1
+        course_code = course["code"]
+        course_faculty = course["faculty"]
+        if "school" in course:
+            course_school = course["school"]
+            final_mappings[mappings[course_school]][course_code] = 1
 
-        finalMappings[mappings[courseFaculty]][courseCode] = 1
+        final_mappings[mappings[course_faculty]][course_code] = 1
 
-    write_data(finalMappings, COURSE_MAPPINGS_FILE)
+    write_data(final_mappings, COURSE_MAPPINGS_FILE)
+
 
 def cache_program_mappings():
     """
@@ -119,7 +120,7 @@ def cache_program_mappings():
     mappings["COMP#"] = {}
     # TODO: Add any more mappings. Look into updating manual-fixes wiki page?
 
-    programs = read_data(PROGRAMS_FORMATTED_FILE)        
+    programs = read_data(PROGRAMS_FORMATTED_FILE)
 
     for program in programs.values():
         if re.match(r"actuarial", program["title"], flags=re.IGNORECASE):
@@ -137,9 +138,11 @@ def cache_program_mappings():
         elif re.match(r"information systems", program["title"], flags=re.IGNORECASE):
             mappings["INFS#"][program["code"]] = 1
             mappings["ZBUS#"][program["code"]] = 1
-        elif re.match(r"data science and decisions",program["title"], flags=re.IGNORECASE):
+        elif re.match(
+            r"data science and decisions", program["title"], flags=re.IGNORECASE
+        ):
             mappings["DATA#"][program["code"]] = 1
-        elif re.match(r"computer science",program["title"], flags=re.IGNORECASE):
+        elif re.match(r"computer science", program["title"], flags=re.IGNORECASE):
             mappings["COMP#"][program["code"]] = 1
-        
+
     write_data(mappings, PROGRAM_MAPPINGS_FILE)

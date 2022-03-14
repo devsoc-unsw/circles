@@ -42,7 +42,7 @@ from algorithms.objects.helper import (
 
 # Load in cached exclusions
 CACHED_EXCLUSIONS_PATH = "./algorithms/cache/exclusions.json"
-with open(CACHED_EXCLUSIONS_PATH) as f:
+with open(CACHED_EXCLUSIONS_PATH, "r", encoding="utf8") as f:
     CACHED_EXCLUSIONS = json.load(f)
 
 
