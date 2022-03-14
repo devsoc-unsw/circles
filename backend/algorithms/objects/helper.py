@@ -6,6 +6,7 @@ from sys import exit
 
 
 def is_course(text) -> bool:
+    """If the text is a course"""
     return bool(re.match(r"^[A-Z]{4}\d{4}$", text, flags=re.IGNORECASE))
 
 
@@ -57,14 +58,17 @@ def is_specialisation(text):
     return bool(re.match(r"^[A-Z]{5}\d$", text, flags=re.IGNORECASE))
 
 
-"""HELPER FUNCTIONS FOR UTILITY PURPOSES"""
+
+# ======================================================== #
+# ========= HELPER FUNCTIONS FOR UTILITY PURPOSES ======== #
+# ======================================================== #
 
 
 def read_data(file_name):
     """Reads data from a json file and returns it"""
     try:
-        with open(file_name, "r") as input_file:
+        with open(file_name, "r", encoding="utf8") as input_file:
             return json.load(input_file)
-    except:
+    except (IOError, OSError):
         print(f"File {file_name} not found")
         exit(1)

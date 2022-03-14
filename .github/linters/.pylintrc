@@ -64,8 +64,10 @@ disable=print-statement,
         import-error,               # allow import from folder.file instead of backend.folder.file
         fixme,                      # allow for TODO and FIXME to be pushed to dev
         expression-not-assigned,    # allow for expressions to be evaluated without assignment. - used in create.py for fastforwarding indexes with list comprehension
-        invalid-name                # dont enforce variables to be snake_case
-      #   parameter-unpacking,
+        invalid-name,               # dont enforce variables to be snake_case
+        redefined-builtin,          # allow builtins to be redefined. particularly `exit()`
+        import-outside-toplevel     # allow non-top level imports. used to prevent circular dependencies
+      #   parameter-unpacking,      
       #   unpacking-in-except,
       #   old-raise-syntax,
       #   backtick,

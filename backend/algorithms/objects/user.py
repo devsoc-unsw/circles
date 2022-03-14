@@ -34,7 +34,10 @@ class User:
         self.courses.update(courses)
 
     def add_current_course(self, course: str):
-        """Given a course the user is taking in their current term, adds it to their cur_courses"""
+        """
+        Given a course the user is taking in their current term,
+        adds it to their cur_courses
+        """
         self.cur_courses.append(course)
 
     def add_current_courses(self, courses: list[str]):
@@ -82,7 +85,10 @@ class User:
         self.year = copy.deepcopy(data["year"])
 
     def get_grade(self, course: str):
-        """Given a course which the student has taken, returns their grade (or None for no grade)"""
+        """
+        Given a course which the student has taken, returns their
+        grade (or None for no grade)
+        """
         return self.courses[course][1]
 
     def wam(self, category: Category = AnyCategory()) -> Optional[float]:
@@ -109,8 +115,11 @@ class User:
         )
 
     def unselect_course(self, target, locked) -> list[str]:
-        """Given a course to unselect and a list of locked courses, remove the courses
-        from the user and return a list of courses which would be affected by the unselection"""
+        """
+        Given a course to unselect and a list of locked courses, remove the
+        courses from the user and return a list of courses which would be
+        affected by the unselection
+        """
 
         if not self.has_taken_course(target):
             return []
@@ -145,6 +154,3 @@ class User:
             ]
 
         return list(sorted(affected_courses))
-
-
-

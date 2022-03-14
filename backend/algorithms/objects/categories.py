@@ -1,4 +1,7 @@
-"""Supporting classes for Requirements which have some condition attached to a specific cateogry"""
+"""
+Supporting classes for Requirements which have some condition attached
+to a specific category
+"""
 
 from abc import ABC, abstractmethod
 import re
@@ -7,10 +10,8 @@ import json
 # Preload the mappings to school and faculty
 CACHED_MAPPINGS = {}
 
-with open("./algorithms/cache/courseMappings.json") as f:
+with open("./algorithms/cache/courseMappings.json", "r", encoding="utf8") as f:
     CACHED_MAPPINGS = json.load(f)
-    f.close()
-
 
 class Category(ABC):
     """The base Category class from which more detailed Category classes stem from"""
