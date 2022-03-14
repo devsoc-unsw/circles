@@ -10,7 +10,6 @@ from typing import Optional
 
 from algorithms.objects.categories import AnyCategory, Category
 
-
 class User:
     """A user and their data which will be used to determine if they can take a course"""
 

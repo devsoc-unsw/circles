@@ -45,7 +45,7 @@ jobs:
         uses: github/super-linter@v4
         env:
           # false := lint only the files that have changes
-          VALIDATE_ALL_CODEBASE: true
+          VALIDATE_ALL_CODEBASE: false
           # may be worth changing this to master / main
           DEFAULT_BRANCH: dev
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
