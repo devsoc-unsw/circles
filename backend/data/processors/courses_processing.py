@@ -144,7 +144,6 @@ def process_enrolment_path(processed: dict, formatted: dict, data: dict) -> None
             data[prereq]["path_to"][processed["code"]] = 1
         else:
             # prereq not in data and is therefore absent from undergrad handbook
-            global ABSENT_COURSES
             ABSENT_COURSES[prereq] = 1
 
 

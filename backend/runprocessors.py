@@ -104,7 +104,8 @@ if __name__ == "__main__":
         for t, runner in run.items():
             for stage in runner:
                 if stage != "scrape":
-                    run[t][stage]()
+                    runner()
+
     elif args.stage == "all":
         # Run all the stages from top to bottom
         if args.type in ["program", "specialisation", "course"]:

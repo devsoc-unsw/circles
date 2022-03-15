@@ -75,8 +75,8 @@ disable=print-statement,
         anomalous-backslash-in-string,# allow backslashes in strings to allow regex expressions to be used in docstrings
         global-statement,           # allow use of globals. Used for filepaths and configs
         missing-function-docstring, # TODO: REMOVE BEOFRE PUSH
-        too-few-public-methods      # need classes with zero public methods as abstract objects
-
+        too-few-public-methods,     # need classes with zero public methods as abstract objects
+        duplicate-code,             # Code duplication due to progtype1. TODO: Fix on complete refactor
       #   parameter-unpacking,      
       #   unpacking-in-except,
       #   old-raise-syntax,

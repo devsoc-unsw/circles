@@ -40,8 +40,9 @@ def programsIndex():
 )
 def getPrograms():
     """fetch all the programs the backend knows about in the format of { code: title }"""
+    # return {"programs": {q["code"]: q["title"] for q in programsCOL.find()}}
+    # TODO On deployment, DELETE RETURN BELOW and replace with the return above
     return {"programs": {"3778": "Computer Science"}}
-    return {"programs": {q["code"]: q["title"] for q in programsCOL.find()}}
 
 
 @router.get(
@@ -78,7 +79,8 @@ def getMajors(programCode: str):
     result = programsCOL.find_one({"code": programCode})
 
     if not result:
-        raise HTTPException(status_code=400, detail="Program code was not found")
+        raise HTTPException(
+            status_code=400, detail="Program code was not found")
 
     return {"majors": result["components"]["SpecialisationData"]["Majors"]}
 
@@ -115,22 +117,26 @@ def getMinors(programCode: str):
     result = programsCOL.find_one({"code": programCode})
 
     if not result:
-        raise HTTPException(status_code=400, detail="Program code was not found")
+        raise HTTPException(
+            status_code=400, detail="Program code was not found")
 
+    # NOTE: DO NOT RENAME THE VARIABLE TO `minors` as it attempts to create
+    # a redefinition of the `minors` class
     if programCode in minorInFE:
-        minors = result["components"]["FE"]["Minors"]
+        minrs = result["components"]["FE"]["Minors"]
     elif programCode in minorInSpecialisation:
-        minors = result["components"]["SpecialisationData"]["Minors"]
+        minrs = result["components"]["SpecialisationData"]["Minors"]
     else:
-        minors = result["components"]["Minors"]
+        minrs = result["components"]["Minors"]
 
-    return {"minors": minors}
+    return {"minors": minrs}
 
 
 def addSpecialisation(structure: dict, code: str, type: str):
     spnResult = specialisationsCOL.find_one({"code": code})
     if not spnResult:
-        raise HTTPException(status_code=400, detail=f"{code} of type {type} not found")
+        raise HTTPException(
+            status_code=400, detail=f"{code} of type {type} not found")
     structure[type] = {"name": spnResult["name"]}
     for container in spnResult["curriculum"]:
 
@@ -225,7 +231,8 @@ def getStructure(
     # add details for program code
     programsResult = programsCOL.find_one({"code": programCode})
     if not programsResult:
-        raise HTTPException(status_code=400, detail="Program code was not found")
+        raise HTTPException(
+            status_code=400, detail="Program code was not found")
 
     structure["General"] = {}
     for name, data in programsResult["components"]["NonSpecialisationData"].items():
