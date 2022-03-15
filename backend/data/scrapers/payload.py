@@ -16,7 +16,7 @@ def create_payload(size, content_type):
     """Create a payload of the given size
     content_type will be used as a prefix for the query fields
     Note: If changing any of the keys and passing them in as an argument,
-    ensure that you add a default value for the argument so as to not 
+    ensure that you add a default value for the argument so as to not
     break the payload for the other files
     """
 
