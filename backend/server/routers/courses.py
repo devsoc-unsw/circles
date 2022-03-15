@@ -103,7 +103,10 @@ def getCourse(courseCode: str):
 
 @router.get("/searchCourse/{string}")
 def search(string):
-    pat = re.compile(r"{}".format(string), re.I)
+    # Note: backslashes may need to be dealt with in future
+    # Note: may deal with this by removing regex and refactoring to
+    # string matching
+    pat = re.compile(string, re.I)
     code_query = coursesCOL.find({"code": {"$regex": pat}})
     title_query = coursesCOL.find({"title": {"$regex": pat}})
 
