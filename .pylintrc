@@ -330,7 +330,7 @@ expected-line-ending-format=
 # Second regex is for string assignments. Allows returning or assignment
 # of error messages on line
 ignore-long-lines=^\s*(# )?<?https?://\S+>?$,
-                  ^\s*(# )?<?https?://\S+>?$|^\s*(\w*\s*=\s*)?(\"|\').*(\"|\'),?\s*$
+                  ^\s*(# )?<?https?://\S+>?$|^\s*(\w*\s*=\s*)?(\"|\').*(\"|\'),?\s*$,
 
 
 # Number of spaces of indent required inside a hanging or continued line.
