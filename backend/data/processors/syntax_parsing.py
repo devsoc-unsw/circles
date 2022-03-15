@@ -1,3 +1,6 @@
+"""
+
+"""
 import re
 import sys
 from data.utility import data_helpers
@@ -29,12 +32,12 @@ def parse_syntax():
             continue
 
         if not do_brackets_match(condition[PROCESSED]):
-            print(f"Failed bracket match!")
+            print("Failed bracket match!")
             print(f"{course}: {condition[PROCESSED]}\n")
 
         unknown = find_unknown_words(condition[PROCESSED])
         if unknown:
-            print(f"Unknown word(s) in condition")
+            print("Unknown word(s) in condition")
             print(f"{course}: {condition[PROCESSED]}")
             print(f"Unknown: {unknown}\n")
 

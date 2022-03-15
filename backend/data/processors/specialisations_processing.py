@@ -1,5 +1,5 @@
 """
-Program processes the formatted data by editing and customising the data for 
+Program processes the formatted data by editing and customising the data for
 use on the frontend. See 'specialisationsProcessed.json' for output.
 
 NOTE: "spn" == "specialisation"
@@ -40,7 +40,8 @@ TEST_SPNS = [
     "PSYCM2",
 ]
 
-CODE_MAPPING = read_data("data/utility/programCodeMappings.json")["title_to_code"]
+CODE_MAPPING = read_data(
+    "data/utility/programCodeMappings.json")["title_to_code"]
 
 
 def customise_spn_data():
@@ -78,9 +79,12 @@ def customise_spn_data():
                     "courses": {},
                     "title": container["title"],
                 }
-                curriculum_item["credits_to_complete"] = int(get_credits(container))
-                curriculum_item["core"] = is_core(curriculum_item["title"].lower())
-                curriculum_item["levels"] = get_levels(curriculum_item["title"].lower())
+                curriculum_item["credits_to_complete"] = int(
+                    get_credits(container))
+                curriculum_item["core"] = is_core(
+                    curriculum_item["title"].lower())
+                curriculum_item["levels"] = get_levels(
+                    curriculum_item["title"].lower())
                 curriculum_item["notes"] = get_notes(container["description"])
 
                 if container["structure"]:
@@ -142,11 +146,11 @@ def get_credits(container: dict) -> str:
     """
     if container["credit_points"]:
         return container["credit_points"]
-    else:
-        # No data in "credit_points" field, so parse plaintext "description"
-        # Catches XX UOC, XX credits, XX Credit, etc.
-        credits = re.search("(\d+) UOC|[cC]redit", container["description"])
-        return credits.group(1)
+
+    # No data in "credit_points" field, so parse plaintext "description"
+    # Catches XX UOC, XX credits, XX Credit, etc.
+    credits = re.search("(\d+) UOC|[cC]redit", container["description"])
+    return credits.group(1)
 
 
 def is_core(title: str) -> bool:
@@ -194,11 +198,11 @@ def get_notes(description: str) -> str:
     is only possible if etc.'"""
 
     # Non-greedy search to catch anything after first matching line
-    res = re.search(r"Students must.*?following courses\.?([^.].+)", description)
+    res = re.search(
+        r"Students must.*?following courses\.?([^.].+)", description)
     if res:  # Unique notes found
         return strip_tags(res.group(1))
-    else:
-        return ""
+    return ""
 
 
 def get_nested_data(container: dict, curriculum_item: dict) -> None:
@@ -210,7 +214,8 @@ def get_nested_data(container: dict, curriculum_item: dict) -> None:
 
         # Student may choose one of two courses
         if sub_container["title"] == "One of the following:":
-            get_one_of_courses(sub_container["courses"], curriculum_item["courses"])
+            get_one_of_courses(
+                sub_container["courses"], curriculum_item["courses"])
 
         # Sub container title matches parent container title, so simply
         # extract courses to put into your curriculum dict
@@ -249,6 +254,7 @@ def get_courses(
     Adds courses from container to the customised curriculum course dict.
     """
     for course, title in container_courses.items():
+        description = description + "" # prevent unused variable error
 
         if "any course" in course:
             course = {"any course": 1}

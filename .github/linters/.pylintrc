@@ -75,7 +75,8 @@ disable=print-statement,
         unnecessary-pass,           # allows def func(): pass. useful for abstract functions and superclasses
         anomalous-backslash-in-string,# allow backslashes in strings to allow regex expressions to be used in docstrings
         global-statement,           # allow use of globals. Used for filepaths and configs
-        missing-function-docstring  # TODO: REMOVE BEOFRE PUSH
+        missing-function-docstring, # TODO: REMOVE BEOFRE PUSH
+        unnecessary-comprehension
 
       #   parameter-unpacking,      
       #   unpacking-in-except,

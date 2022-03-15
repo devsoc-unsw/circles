@@ -46,7 +46,7 @@ def process_course_data():
         if "path_to" not in processed:
             # If this course does not yet have a 'path_to' field, set up
             # dict in anticipation of courses being added
-            processed["path_to"] = dict()
+            processed["path_to"] = {}
 
         process_description(processed, course)
         format_types(processed)
@@ -125,7 +125,7 @@ def process_enrolment_path(processed: dict, formatted: dict, data: dict) -> None
     allows for courses to be processed in one iteration through the data"""
     global ABSENT_COURSES
 
-    processed["path_from"] = dict()
+    processed["path_from"] = {}
     prereqs = re.findall(r"\W([A-Z]{4}\d{4})\W*",
                          formatted["enrolment_rules"], re.ASCII)
     for prereq in prereqs:
