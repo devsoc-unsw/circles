@@ -6,7 +6,7 @@
 extension-pkg-whitelist=
 
 # Specify a score threshold to be exceeded before program exits with error.
-fail-under=10.0
+fail-under=9.5
 
 # Add files or directories to the blacklist. They should be base names, not
 # paths.
@@ -74,7 +74,6 @@ disable=print-statement,
         unnecessary-pass,                 # allows def func(): pass. useful for abstract functions and superclasses
         anomalous-backslash-in-string,    # allow backslashes in strings to allow regex expressions to be used in docstrings
         global-statement,                 # allow use of globals. Used for filepaths and configs
-        missing-function-docstring,       # TODO: REMOVE BEOFRE PUSH
         too-few-public-methods,           # need classes with zero public methods as abstract objects
         duplicate-code                    # Code duplication due to progtype1. TODO: Fix on complete refactor
       #   parameter-unpacking,      
