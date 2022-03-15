@@ -1,13 +1,13 @@
-'''
+"""
 Contains the Conditions classes
-'''
+"""
 import abc
 import json
 from enum import Enum, auto
 
 from algorithms.objects.categories import AnyCategory
 
-'''Keywords'''
+"""Keywords"""
 
 
 class Logic(Enum):
@@ -15,7 +15,7 @@ class Logic(Enum):
     OR = auto()
 
 
-'''CACHED'''
+"""CACHED"""
 CACHED_CONDITIONS_TOKENS_PATH = "./data/final_data/conditionsTokens.json"
 with open(CACHED_CONDITIONS_TOKENS_PATH) as f:
     CACHED_CONDITIONS_TOKENS = json.load(f)
@@ -39,7 +39,7 @@ class Condition():
 
 
 class CourseCondition(Condition):
-    '''Condition that the student has completed this course before the current term'''
+    """Condition that the student has completed this course before the current term"""
 
     def __init__(self, course):
         self.course = course
@@ -84,7 +84,7 @@ class CoreqCoursesCondition(Condition):
 
 
 class UOCCondition(Condition):
-    '''UOC conditions such as "24UOC in COMP"'''
+    """UOC conditions such as "24UOC in COMP""""
 
     def __init__(self, uoc):
         self.uoc = uoc
@@ -107,7 +107,7 @@ class UOCCondition(Condition):
 
 
 class WAMCondition(Condition):
-    '''Handles WAM conditions such as 65WAM and 80WAM in'''
+    """Handles WAM conditions such as 65WAM and 80WAM in"""
 
     def __init__(self, wam):
         self.wam = wam
@@ -121,19 +121,20 @@ class WAMCondition(Condition):
         self.category = AnyCategory()
 
     def set_category(self, category_classobj):
+        """Set own category to the one given"""
         self.category = category_classobj
 
     def validate(self, user) -> tuple[bool, list[str]]:
-        '''
+        """
         Determines if the user has met the WAM condition for this category.
 
         Will always return True and a warning since WAM can fluctuate
-        '''
+        """
         warning = self.get_warning(user.wam(self.category))
         return True, [warning] if warning else []
 
     def get_warning(self, applicable_wam):
-        '''Returns an appropriate warning message or None if not needed'''
+        """Returns an appropriate warning message or None if not needed"""
         if type(self.category) is AnyCategory:
             if applicable_wam == None:
                 return f"Requires {self.wam} WAM. Your WAM has not been recorded"
@@ -151,7 +152,7 @@ class WAMCondition(Condition):
 
 
 class GRADECondition(Condition):
-    '''Handles GRADE conditions such as 65GRADE and 80GRADE in [A-Z]{4}[0-9]{4}'''
+    """Handles GRADE conditions such as 65GRADE and 80GRADE in [A-Z]{4}[0-9]{4}"""
 
     def __init__(self, grade, course):
         self.grade = grade
@@ -172,11 +173,12 @@ class GRADECondition(Condition):
             return True, []
 
     def get_warning(self):
+        """Return warning string for grade condition error"""
         return f"Requires {self.grade} mark in {self.course}. Your mark has not been recorded"
 
 
 class ProgramCondition(Condition):
-    '''Handles Program conditions such as 3707'''
+    """Handles Program conditions such as 3707"""
 
     def __init__(self, program):
         self.program = program
@@ -186,12 +188,12 @@ class ProgramCondition(Condition):
 
 
 class ProgramTypeCondition(Condition):
-    '''
+    """
     Handles program type conditions, which specify that your program has to
     be some collection of programs.
     for example - be enrolled in Actuarial studies implies that your
     program must be any one of a few programs (actl + double degree codes).
-    '''
+    """
 
     def __init__(self, programType):
         self.programType = programType
@@ -201,7 +203,7 @@ class ProgramTypeCondition(Condition):
 
 
 class SpecialisationCondition(Condition):
-    '''Handles Specialisation conditions such as COMPA1'''
+    """Handles Specialisation conditions such as COMPA1"""
 
     def __init__(self, specialisation):
         self.specialisation = specialisation
@@ -211,7 +213,7 @@ class SpecialisationCondition(Condition):
 
 
 class CourseExclusionCondition(Condition):
-    ''' Handles when you cant take a certain course. Eg Exclusion: MATH1131 for MATH1141'''
+    """ Handles when you cant take a certain course. Eg Exclusion: MATH1131 for MATH1141"""
 
     def __init__(self, exclusion):
         self.exclusion = exclusion
@@ -241,14 +243,18 @@ class CompositeCondition(Condition):
         self.logic = logic
 
     def add_condition(self, condition_classobj: Condition):
-        '''Adds a condition object'''
+        """Adds a condition object"""
         self.conditions.append(condition_classobj)
 
     def set_logic(self, logic: Logic):
-        '''AND or OR'''
+        """AND or OR"""
         self.logic = logic
 
     def validate(self, user) -> tuple[bool, list[str]]:
+        """
+        Validate user conditions and return the validated conditions and
+        warnings
+        """
         if self.conditions == []:
             return True, []
 
