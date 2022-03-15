@@ -27,7 +27,7 @@ def create_payload(size, sort_key, content_type, implementation_year_field, stud
                                 "should": [
                                     {
                                         "query_string": {
-                                            "fields": [implementation_year_field],
+                                            "fields": [f"{content_type}.implementationYear"],
                                             "query": f"*{LIVE_YEAR}*",
                                         }
                                     }
@@ -40,7 +40,7 @@ def create_payload(size, sort_key, content_type, implementation_year_field, stud
                                 "should": [
                                     {
                                         "query_string": {
-                                            "fields": [study_level_value],
+                                            "fields": [f"{content_type}.studyLevelValue"],
                                             "query": "*ugrd*",
                                         }
                                     }
@@ -53,7 +53,7 @@ def create_payload(size, sort_key, content_type, implementation_year_field, stud
                                 "should": [
                                     {
                                         "query_string": {
-                                            "fields": [active_field],
+                                            "fields": [f"{content_type}.active"],
                                             "query": "*1*",
                                         }
                                     }
@@ -65,7 +65,7 @@ def create_payload(size, sort_key, content_type, implementation_year_field, stud
                 "filter": [{"terms": {"contenttype": [content_type]}}],
             }
         },
-        "sort": [{sort_key: {"order": "asc"}}],
+        "sort": [{f"{content_type}.code_dotraw": {"order": "asc"}}],
         "from": 0,
         "size": size,
         "track_scores": True,
