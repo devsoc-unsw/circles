@@ -15,7 +15,7 @@ class Logic(Enum):
     OR = auto()
 
 
-"""CACHED"""
+# CACHED
 CACHED_CONDITIONS_TOKENS_PATH = "./data/final_data/conditionsTokens.json"
 with open(CACHED_CONDITIONS_TOKENS_PATH, "r", encoding="utf8") as f:
     CACHED_CONDITIONS_TOKENS = json.load(f)
@@ -143,18 +143,18 @@ class WAMCondition(Condition):
 
     def get_warning(self, applicable_wam):
         """Returns an appropriate warning message or None if not needed"""
-        if type(self.category) is AnyCategory:
+        if isinstance(self.category, AnyCategory):
             if applicable_wam is None:
                 return f"Requires {self.wam} WAM. Your WAM has not been recorded"
-            elif applicable_wam >= self.wam:
+            if applicable_wam >= self.wam:
                 return None
             return f"Requires {self.wam} WAM. Your WAM is currently {applicable_wam:.3f}"
-        else:
-            if applicable_wam is None:
-                return f"Requires {self.wam} WAM in {self.category}. Your WAM in {self.category} has not been recorded"
-            elif applicable_wam >= self.wam:
-                return None
-            return f"Requires {self.wam} WAM in {self.category}. Your WAM in {self.category} is currently {applicable_wam:.3f}"
+
+        if applicable_wam is None:
+            return f"Requires {self.wam} WAM in {self.category}. Your WAM in {self.category} has not been recorded"
+        if applicable_wam >= self.wam:
+            return None
+        return f"Requires {self.wam} WAM in {self.category}. Your WAM in {self.category} is currently {applicable_wam:.3f}"
 
 
 class GRADECondition(Condition):
@@ -261,7 +261,7 @@ class CompositeCondition(Condition):
         Validate user conditions and return the validated conditions and
         warnings
         """
-        if self.conditions == []:
+        if not self.conditions:
             return True, []
 
         validations = [cond.validate(user) for cond in self.conditions]
