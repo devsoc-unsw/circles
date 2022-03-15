@@ -48,7 +48,6 @@ suggestion-mode=yes
 unsafe-load-any-extension=no
 
 
-
 [MESSAGES CONTROL]
 
 # Only show warnings with the listed confidence levels. Leave empty to show
