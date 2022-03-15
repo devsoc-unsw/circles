@@ -3,9 +3,9 @@ Supporting classes for Requirements which have some condition attached
 to a specific category
 """
 
-from abc import ABC, abstractmethod
-import re
 import json
+import re
+from abc import ABC, abstractmethod
 
 # Preload the mappings to school and faculty
 CACHED_MAPPINGS = {}

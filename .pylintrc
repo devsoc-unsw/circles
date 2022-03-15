@@ -44,6 +44,9 @@ suggestion-mode=yes
 # active Python interpreter and may run arbitrary code.
 unsafe-load-any-extension=no
 
+# Ignore `test_foo` and `foo_test` files for linting
+ignore-patterns=(.)*_test\.py,test_(.)*\.py
+
 
 [MESSAGES CONTROL]
 
@@ -608,3 +611,4 @@ min-public-methods=2
 # "BaseException, Exception".
 overgeneral-exceptions=BaseException,
                        Exception
+
