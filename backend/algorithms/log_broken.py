@@ -29,7 +29,6 @@ def log_broken_conditions():
         conditions = json.load(conditions_processed)
 
     output = {}
-
     for course, tokens in all_tokens.items():
         # Use make_condition instead of create_condition since it gives us more
         # information on the index
