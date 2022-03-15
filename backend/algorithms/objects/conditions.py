@@ -84,7 +84,7 @@ class CoreqCoursesCondition(Condition):
 
 
 class UOCCondition(Condition):
-    """UOC conditions such as "24UOC in COMP""""
+    """UOC conditions such as '24UOC in COMP'"""
 
     def __init__(self, uoc):
         self.uoc = uoc
