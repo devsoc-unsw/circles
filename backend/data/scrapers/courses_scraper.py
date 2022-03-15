@@ -29,11 +29,7 @@ def scrape_course_data():
     }
     r = requests.post(url, data=json.dumps(create_payload(
         TOTAL_COURSES,
-        sort_key="unsw_psubject.code_dotraw",
-        content_type="unsw_psubject",
-        implementation_year_field="unsw_psubject.implementationYear",
-        study_level_value="unsw_psubject.studyLevelValue",
-        active_field="unsw_psubject.active"
+        content_type="unsw_psubject"
     )), headers=headers)
     data_helpers.write_data(
         r.json()["contentlets"], "data/scrapers/coursesPureRaw.json"
