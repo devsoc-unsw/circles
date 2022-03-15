@@ -113,6 +113,7 @@ def getMajors(programCode: str):
     },
 )
 
+
 def getMinors(programCode: str):
     """fetch all the minors known for a specific program"""
     result = programsCOL.find_one({"code": programCode})
@@ -131,7 +132,6 @@ def getMinors(programCode: str):
         minrs = result["components"]["Minors"]
 
     return {"minors": minrs}
-
 
 def addSpecialisation(structure: dict, code: str, type: str):
     spnResult = specialisationsCOL.find_one({"code": code})
