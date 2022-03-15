@@ -10,7 +10,8 @@ fail-under=10.0
 
 # Add files or directories to the blacklist. They should be base names, not
 # paths.
-ignore=CVS
+# Dont lint __init__.py - allow it to be empty / contain trailing whitespace
+ignore=CVS, __init__.py
 
 # Add files or directories matching the regex patterns to the blacklist. The
 # regex matches against base names, not paths.

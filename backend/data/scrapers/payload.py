@@ -1,0 +1,83 @@
+"""
+The payload dict object is used by the course, program and specialisation
+scraper and is (so far) the exact same between all three files, except
+for the size of the payload. This module centralises creation of the payload
+"""
+
+from sys import implementation
+from data.config import LIVE_YEAR
+
+
+def create_payload(size, sort_key, content_type, implementation_year_field, study_level_value, active_field):
+    """Create a payload of the given size
+    Note: If changing any of the keys and passing them in as an argument,
+    ensure that you add a default value for the argument so as to not 
+    break the payload for the other files
+    """
+
+    return {
+        "query": {
+            "bool": {
+                "must": [
+                    {"term": {"live": True}},
+                    [
+                        {
+                            "bool": {
+                                "minimum_should_match": "100%",
+                                "should": [
+                                    {
+                                        "query_string": {
+                                            "fields": [implementation_year_field],
+                                            "query": f"*{LIVE_YEAR}*",
+                                        }
+                                    }
+                                ],
+                            }
+                        },
+                        {
+                            "bool": {
+                                "minimum_should_match": "100%",
+                                "should": [
+                                    {
+                                        "query_string": {
+                                            "fields": [study_level_value],
+                                            "query": "*ugrd*",
+                                        }
+                                    }
+                                ],
+                            }
+                        },
+                        {
+                            "bool": {
+                                "minimum_should_match": "100%",
+                                "should": [
+                                    {
+                                        "query_string": {
+                                            "fields": [active_field],
+                                            "query": "*1*",
+                                        }
+                                    }
+                                ],
+                            }
+                        },
+                    ],
+                ],
+                "filter": [{"terms": {"contenttype": [content_type]}}],
+            }
+        },
+        "sort": [{sort_key: {"order": "asc"}}],
+        "from": 0,
+        "size": size,
+        "track_scores": True,
+        "_source": {
+            "includes": [
+                "*.code",
+                "*.name",
+                "*.award_titles",
+                "*.keywords",
+                "urlmap",
+                "contenttype",
+            ],
+            "excludes": ["", None],
+        },
+    }
