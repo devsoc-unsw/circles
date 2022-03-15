@@ -2,14 +2,19 @@
 The payload dict object is used by the course, program and specialisation
 scraper and is (so far) the exact same between all three files, except
 for the size of the payload. This module centralises creation of the payload
+The module also defines the url and headers for the scrapers
 """
 
-from sys import implementation
 from data.config import LIVE_YEAR
 
+URL = "https://www.handbook.unsw.edu.au/api/es/search"
+HEADERS = {
+    "content-type": "application/json",
+}
 
-def create_payload(size, sort_key, content_type, implementation_year_field, study_level_value, active_field):
+def create_payload(size, content_type):
     """Create a payload of the given size
+    content_type will be used as a prefix for the query fields
     Note: If changing any of the keys and passing them in as an argument,
     ensure that you add a default value for the argument so as to not 
     break the payload for the other files
