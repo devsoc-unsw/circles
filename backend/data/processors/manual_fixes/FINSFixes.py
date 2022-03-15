@@ -1,10 +1,10 @@
 """
 https://github.com/csesoc/Circles/wiki/Manual-Fixes-to-Course-Prerequisites
 
-Copy this into a new file for the relevant faculty's fixes: 
+Copy this into a new file for the relevant faculty's fixes:
 e.g. COMPFixes.py, ACCTFixes.py, PSYCFixes.py
 
-Apply manual FINS fixes to processed conditions in conditionsProcessed.json so 
+Apply manual FINS fixes to processed conditions in conditionsProcessed.json so
 that they can be fed into algorithms.
 
 If you make a mistake and need to regenerate conditionsProcessed.json, then you
@@ -50,7 +50,7 @@ def fix_conditions():
 
 
 def FINS_2101():
-    """ 
+    """
     "original": "Enrolled in plan FINSD13554 or in FINSBH3565<br/><br/>",
 
     "processed": "plan FINSD13554 || in FINSBH3565"

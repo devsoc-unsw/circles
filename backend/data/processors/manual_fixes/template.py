@@ -1,10 +1,10 @@
 """
 https://github.com/csesoc/Circles/wiki/Manual-Fixes-to-Course-Prerequisites
 
-Copy this into a new file for the relevant faculty's fixes: 
+Copy this into a new file for the relevant faculty's fixes:
 e.g. COMPFixes.py, ACCTFixes.py, PSYCFixes.py
 
-Apply manual [code] fixes to processed conditions in conditionsProcessed.json so 
+Apply manual [code] fixes to processed conditions in conditionsProcessed.json so
 that they can be fed into algorithms.
 
 If you make a mistake and need to regenerate conditionsProcessed.json, then you
@@ -24,6 +24,7 @@ PROCESSED = "processed"
 # Reads coursesProcessed dictionary into 'COURSES' (for updating exclusions)
 COURSES = data_helpers.read_data("data/final_data/coursesProcessed.json")
 
+
 def fix_conditions():
     """ Functions to apply manual fixes """
 
@@ -35,6 +36,7 @@ def fix_conditions():
     data_helpers.write_data(COURSES, "data/final_data/coursesProcessed.json")
 
 # TODO: implement your functions here
+
 
 if __name__ == "__main__":
     fix_conditions()

@@ -1,7 +1,7 @@
 """
 https://github.com/csesoc/Circles/wiki/Manual-Fixes-to-Course-Prerequisites
 
-Apply manual COMP fixes to processed conditions in conditionsProcessed.json so 
+Apply manual COMP fixes to processed conditions in conditionsProcessed.json so
 that they can be fed into algorithms.
 
 If you make a mistake and need to regenerate conditionsProcessed.json, then you
@@ -18,6 +18,7 @@ CONDITIONS = data_helpers.read_data("data/final_data/conditionsProcessed.json")
 PROCESSED = "processed"
 
 COURSES = data_helpers.read_data("data/final_data/coursesProcessed.json")
+
 
 def fix_conditions():
     """ Functions to apply manual fixes """
@@ -42,7 +43,7 @@ def fix_conditions():
     CONDITIONS["COMP9242"][PROCESSED] = COMP_9242()
     CONDITIONS["COMP9301"] = COMP_9301(CONDITIONS["COMP9301"])
     CONDITIONS["COMP9302"] = COMP_9302(CONDITIONS["COMP9302"])
-    
+
     codes = ["COMP9312", "COMP9313", "COMP9315"]
     for code in codes:
         CONDITIONS[code][PROCESSED] = COMP_9312_5()
@@ -56,9 +57,9 @@ def fix_conditions():
 
 
 def COMP_1911(code):
-    """ 
+    """
     "original": "Prerequisite: Enrolment in a non-CSE major (no BINF, COMP, or SENG)<br/><br/>"
-    
+
     "processed": ""
     """
 
@@ -73,6 +74,7 @@ def COMP_1911(code):
     # Then delete
     return ""
 
+
 def COMP_3431():
     """
     "original": "Prerequisite: COMP2521 or COMP1927, and a WAM of at least 70<br/><br/>"
@@ -81,12 +83,14 @@ def COMP_3431():
     """
     return "(COMP2521 || COMP1927) && 70WAM"
 
+
 def COMP_3821():
     """
     "original": "Prerequisite: A mark of at least 65 in COMP1927 or COMP2521<br/><br/>",
-    "processed": "65GRADE in (COMP1927 || COMP2521)"    
+    "processed": "65GRADE in (COMP1927 || COMP2521)"
     """
     return "65GRADE in (COMP1927 || COMP2521)"
+
 
 def COMP_3900():
     """
@@ -116,12 +120,14 @@ def COMP_3901_2(conditions):
         "handbook_note": "You must complete all first and second year core requirements of a CSE program and obtain agreement from a suitable CSE academic supervisor to enrol in this course."
     }
 
+
 def COMP_4141():
     """
     "original": "Prerequisite: MATH1081, and COMP1927 or COMP2521<br/><br/>",
-    "processed": "MATH1081 && (COMP1927 || COMP2521)"    
+    "processed": "MATH1081 && (COMP1927 || COMP2521)"
     """
     return "MATH1081 && (COMP1927 || COMP2521)"
+
 
 def COMP_4920():
     """
@@ -175,20 +181,23 @@ def COMP_4961():
     """
     return "4515 || 3648"
 
+
 def COMP_6445():
     """
     "original": "Prerequisite: COMP3441 or COMP6441 or COMP6841, and COMP3231 or COMP3891<br/><br/>",
-    "processed": "(COMP3441 || COMP6441 || COMP6841) && (COMP3231 || COMP3891)"  
+    "processed": "(COMP3441 || COMP6441 || COMP6841) && (COMP3231 || COMP3891)"
     """
     return "(COMP3441 || COMP6441 || COMP6841) && (COMP3231 || COMP3891)"
+
 
 def COMP_6447():
     """
     "original": "Prerequisite: A mark of at least 65 in COMP6841, or a mark of at least 75 in COMP6441 or COMP3441.<br/><br/>",
 
-    "processed": "65GRADE in COMP6841 || 75GRADE in COMP6441 || COMP3441"    
+    "processed": "65GRADE in COMP6841 || 75GRADE in COMP6441 || COMP3441"
     """
-    return "65GRADE in COMP6841 || 75GRADE in (COMP6441 || COMP3441)"   
+    return "65GRADE in COMP6841 || 75GRADE in (COMP6441 || COMP3441)"
+
 
 def COMP_6721(code):
     """
@@ -199,21 +208,24 @@ def COMP_6721(code):
     COURSES[code]["exclusions"]["SENGAH"] = 1
     return "MATH1081 && COMP2521"
 
+
 def COMP_6841():
     """
     "original": "Prerequisite: Completion of 48 UOC, and COMP1927 or COMP2521<br/><br/>",
 
-    "processed": "48UOC && (COMP1927 || COMP2521)"   
+    "processed": "48UOC && (COMP1927 || COMP2521)"
     """
-    return "48UOC && (COMP1927 || COMP2521)"  
+    return "48UOC && (COMP1927 || COMP2521)"
+
 
 def COMP_6845():
     """
     "original": "Prerequisite: COMP3441 or COMP6441 or COMP6841, and COMP3231 or COMP3891<br/><br/>"
 
-    "processed": "(COMP3441 || COMP6441 || COMP6841) && (COMP3231 || COMP3891)" 
+    "processed": "(COMP3441 || COMP6441 || COMP6841) && (COMP3231 || COMP3891)"
     """
     return "(COMP3441 || COMP6441 || COMP6841) && (COMP3231 || COMP3891)"
+
 
 def COMP_9242():
     """
@@ -222,6 +234,7 @@ def COMP_9242():
     "processed": "75GRADE in (COMP3231 || COMP3891)"
     """
     return "75GRADE in (COMP3231 || COMP3891)"
+
 
 def COMP_9301(conditions):
     """
@@ -252,13 +265,15 @@ def COMP_9302(conditions):
         "handbook_note": "This course can only be taken in the final term of your program."
     }
 
+
 def COMP_9312_5():
     """
     "original": "Prerequisite: COMP1927 or COMP2521, and COMP3311<br/><br/>"
 
-    "processed": "(COMP1927 || COMP2521) && COMP3311"    
+    "processed": "(COMP1927 || COMP2521) && COMP3311"
     """
     return "(COMP1927 || COMP2521) && COMP3311"
+
 
 def COMP_9491():
     """
@@ -268,13 +283,15 @@ def COMP_9491():
     """
     return "COMP3411 && 70WAM && 12UOC in (COMP9444 || COMP9417 || COMP9517 || COMP4418)"
 
+
 def COMP_9844():
     """
     "original": "Prerequisite: COMP2521 or COMP1927 or MTRN3500, and a WAM of at least 70<br/><br/>"
 
-    "processed": "(COMP2521 || COMP1927 || MTRN3500) && 70WAM"    
+    "processed": "(COMP2521 || COMP1927 || MTRN3500) && 70WAM"
     """
     return "(COMP2521 || COMP1927 || MTRN3500) && 70WAM"
+
 
 if __name__ == "__main__":
     fix_conditions()
