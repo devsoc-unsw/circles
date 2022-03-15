@@ -326,7 +326,12 @@ redefining-builtins-modules=six.moves,past.builtins,future.builtins,builtins,io
 expected-line-ending-format=
 
 # Regexp for a line that is allowed to be longer than the limit.
-ignore-long-lines=^\s*(# )?<?https?://\S+>?$
+# First regex is just for urls
+# Second regex is for string assignments. Allows returning or assignment
+# of error messages on line
+ignore-long-lines=^\s*(# )?<?https?://\S+>?$,
+                  ^\s*(# )?<?https?://\S+>?$|^\s*(\w*\s*=\s*)?(\"|\').*(\"|\'),?\s*$
+
 
 # Number of spaces of indent required inside a hanging or continued line.
 indent-after-paren=4

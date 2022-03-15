@@ -14,7 +14,10 @@ with open("./algorithms/cache/courseMappings.json", "r", encoding="utf8") as f:
     CACHED_MAPPINGS = json.load(f)
 
 class Category(ABC):
-    """The base Category class from which more detailed Category classes stem from"""
+    """
+    The base Category class from which more detailed Category classes
+    stem from
+    """
 
     @abstractmethod
     def match_definition(self, course):
@@ -26,6 +29,7 @@ class Category(ABC):
 
 
 class AnyCategory(Category):
+    """Wildcard category `*` that matches to anything"""
     def match_definition(self, course):
         return True
 

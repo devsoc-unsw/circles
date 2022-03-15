@@ -22,10 +22,10 @@ def log_broken_conditions():
     Write broken conditions to a ERROR_OUTPUT_FILE with accompanying
     information such as the condition, and location of break
     """
-    with open(CONDITIONS_TOKENS_FILE, "r") as conditions_tokens:
+    with open(CONDITIONS_TOKENS_FILE, "r", encoding="utf8") as conditions_tokens:
         all_tokens = json.load(conditions_tokens)
 
-    with open(CONDITIONS_PROCESSED_FILE, "r") as conditions_processed:
+    with open(CONDITIONS_PROCESSED_FILE, "r", encoding="utf8") as conditions_processed:
         conditions = json.load(conditions_processed)
 
     output = {}
@@ -43,7 +43,7 @@ def log_broken_conditions():
                 "broke at": report_index_string(tokens, bad_index),
             }
 
-    with open(ERROR_OUTPUT_FILE, "w") as out:
+    with open(ERROR_OUTPUT_FILE, "w", encoding="utf8") as out:
         json.dump(output, out, indent=4)
 
 

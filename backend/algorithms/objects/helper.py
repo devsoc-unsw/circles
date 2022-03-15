@@ -50,6 +50,9 @@ def is_program(text):
 
 
 def is_program_type(program: str):
+    """
+    Determines if the input is of type `program`.
+    """
     return bool(re.match(r"^[A-Z]{4}#$", program, flags=re.IGNORECASE))
 
 
