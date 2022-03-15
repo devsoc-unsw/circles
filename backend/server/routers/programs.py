@@ -113,6 +113,7 @@ def getMajors(programCode: str):
     },
 )
 
+
 def getMinors(programCode: str):
     """fetch all the minors known for a specific program"""
     result = programsCOL.find_one({"code": programCode})
