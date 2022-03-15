@@ -7,26 +7,31 @@ from enum import Enum, auto
 
 from algorithms.objects.categories import AnyCategory
 
-"""Keywords"""
 
 
 class Logic(Enum):
+    """Logic Keywords"""
     AND = auto()
     OR = auto()
 
 
 """CACHED"""
 CACHED_CONDITIONS_TOKENS_PATH = "./data/final_data/conditionsTokens.json"
-with open(CACHED_CONDITIONS_TOKENS_PATH) as f:
+with open(CACHED_CONDITIONS_TOKENS_PATH, "r", encoding="utf8") as f:
     CACHED_CONDITIONS_TOKENS = json.load(f)
 
 
 CACHED_PRGORAM_MAPPINGS_FILE = "./algorithms/cache/programMappings.json"
-with open(CACHED_PRGORAM_MAPPINGS_FILE) as f:
+with open(CACHED_PRGORAM_MAPPINGS_FILE, "r", encoding="utf8") as f:
     CACHED_PRGORAM_MAPPINGS = json.load(f)
 
 
 class Condition():
+    """
+    Superclass for condition subclasses to inherit. Instances of
+    `Condition` classes are representations of specific types of
+    requirements / conditions from the handbook
+    """
     @abc.abstractmethod
     def validate(self, user) -> tuple[bool, list[str]]:
         """
@@ -39,7 +44,10 @@ class Condition():
 
 
 class CourseCondition(Condition):
-    """Condition that the student has completed this course before the current term"""
+    """
+    Condition that the student has completed this course before
+    the current term
+    """
 
     def __init__(self, course):
         self.course = course
@@ -136,19 +144,17 @@ class WAMCondition(Condition):
     def get_warning(self, applicable_wam):
         """Returns an appropriate warning message or None if not needed"""
         if type(self.category) is AnyCategory:
-            if applicable_wam == None:
+            if applicable_wam is None:
                 return f"Requires {self.wam} WAM. Your WAM has not been recorded"
             elif applicable_wam >= self.wam:
                 return None
-            else:
-                return f"Requires {self.wam} WAM. Your WAM is currently {applicable_wam:.3f}"
+            return f"Requires {self.wam} WAM. Your WAM is currently {applicable_wam:.3f}"
         else:
-            if applicable_wam == None:
+            if applicable_wam is None:
                 return f"Requires {self.wam} WAM in {self.category}. Your WAM in {self.category} has not been recorded"
             elif applicable_wam >= self.wam:
                 return None
-            else:
-                return f"Requires {self.wam} WAM in {self.category}. Your WAM in {self.category} is currently {applicable_wam:.3f}"
+            return f"Requires {self.wam} WAM in {self.category}. Your WAM in {self.category} is currently {applicable_wam:.3f}"
 
 
 class GRADECondition(Condition):
@@ -165,7 +171,7 @@ class GRADECondition(Condition):
             return False, []
 
         user_grade = user.get_grade(self.course)
-        if user_grade == None:
+        if user_grade is None:
             return True, [self.get_warning()]
         elif user_grade < self.grade:
             return False, []
