@@ -1,5 +1,5 @@
 """
-Program processes the formatted data by editing and customising the data for 
+Program processes the formatted data by editing and customising the data for
 use on the frontend. See 'programsProcessed.json' for output.
 
 NOTE: "program" == "program"

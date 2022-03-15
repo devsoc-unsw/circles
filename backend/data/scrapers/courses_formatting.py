@@ -67,7 +67,7 @@ def get_offering(formatted: dict, raw: dict) -> None:
 def get_attributes(formatted: dict, raw: dict) -> None:
     """Retrieves course attributes and creates a dictionary containing
     the type of attribute and its description"""
-    formatted["attributes"] = list()
+    formatted["attributes"] = []
     if not raw["attributes"]:
         # Not all courses have attributes, so this might be an empty list
         return
@@ -89,7 +89,7 @@ def get_field(formatted: dict, raw: dict) -> None:
 def get_equivalents(formatted: dict, raw: dict) -> None:
     """Retrieves equivalent courses, if any, and puts their code in a dict with
     an arbitrary value (to make it hashable). For example, "DPST1091": 1"""
-    formatted["equivalents"] = dict()
+    formatted["equivalents"] = {}
     if not raw["eqivalents"]:
         # NB: handbook has typo 'eqivalents' for equivalents key for all courses
         return
@@ -101,7 +101,7 @@ def get_equivalents(formatted: dict, raw: dict) -> None:
 def get_exclusions(formatted: dict, raw: dict) -> None:
     """Retrieves exclusion courses, if any, and puts their code in a dict with
     an arbitrary value (to make it hashable). For example, "DPST1091": 1"""
-    formatted["exclusions"] = dict()
+    formatted["exclusions"] = {}
     if not raw["exclusion"]:
         return
 

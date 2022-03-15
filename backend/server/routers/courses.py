@@ -1,17 +1,12 @@
-from fastapi import APIRouter, HTTPException
-from server.database import coursesCOL, archivesDB
 import re
-from algorithms.objects.user import User
-from server.routers.model import (
-    CourseDetails,
-    message,
-    CoursesState,
-    UserData,
-    CONDITIONS,
-    CACHED_HANDBOOK_NOTE,
-    ProgramCourses,
-)
 from itertools import chain
+
+from algorithms.objects.user import User
+from fastapi import APIRouter, HTTPException
+from server.database import archivesDB, coursesCOL
+from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS,
+                                  CourseDetails, CoursesState, ProgramCourses,
+                                  UserData, message)
 
 router = APIRouter(
     prefix="/courses",
@@ -29,7 +24,7 @@ def fixUserData(userData: dict):
     coursesWithoutUoc = [
         course
         for course in userData["courses"]
-        if type(userData["courses"][course]) is int
+        if isinstance(userData["courses"][course], int)
     ]
     filledInCourses = {
         course: [getCourse(course)["UOC"], userData["courses"][course]]

@@ -1,6 +1,7 @@
 """
 
 """
+
 import re
 import sys
 from data.utility import data_helpers
@@ -23,8 +24,8 @@ def parse_syntax():
 
     orig_stdout = sys.stdout
     if res == "y":
-        f = open("syntaxErrors.txt", "w")
-        sys.stdout = f
+        with open("syntaxErrors.txt", "w", encoding="utf8") as f:
+            sys.stdout = f
 
     for course, condition in CONDITIONS.items():
 
