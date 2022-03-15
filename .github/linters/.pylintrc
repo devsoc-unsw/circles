@@ -75,8 +75,8 @@ disable=print-statement,
         unnecessary-pass,           # allows def func(): pass. useful for abstract functions and superclasses
         anomalous-backslash-in-string,# allow backslashes in strings to allow regex expressions to be used in docstrings
         global-statement,           # allow use of globals. Used for filepaths and configs
-        missing-function-docstring  # TODO: REMOVE BEOFRE PUSH
-
+        missing-function-docstring, # TODO: REMOVE BEOFRE PUSH
+        bare-except                 # excepts not used much in code othe than mongoDB connections
       #   parameter-unpacking,      
       #   unpacking-in-except,
       #   old-raise-syntax,
@@ -612,7 +612,9 @@ max-statements=100
 
 # Minimum number of public methods for a class (see R0903).
 # default: 2
-min-public-methods=1
+# We set to zero because we need classes just represent structures and
+# don't need a method
+min-public-methods=0
 
 
 [EXCEPTIONS]
