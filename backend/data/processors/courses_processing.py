@@ -32,6 +32,11 @@ ABSENT_COURSES = {}  # Courses that appear in enrolment rules but do not exist
 
 
 def process_course_data():
+    """
+    Read data from coursesFormattedRaw.json and process each course, noting
+    their properties and write the final data to coursesProcessed.json
+    Any missing courses will be written to absentCourses.json
+    """
 
     data = data_helpers.read_data("data/scrapers/coursesFormattedRaw.json")
 
@@ -56,13 +61,15 @@ def process_course_data():
         data[code] = processed
 
     data_helpers.write_data(data, "data/final_data/coursesProcessed.json")
-    data_helpers.write_data(ABSENT_COURSES, "data/final_data/absentCourses.json")
+    data_helpers.write_data(
+        ABSENT_COURSES, "data/final_data/absentCourses.json")
 
 
 def process_description(processed: dict, formatted: dict) -> None:
     """Removes HTML tags from descriptions"""
     if formatted["description"]:
-        processed["description"] = re.sub(r"<[^>]*?>", "", formatted["description"])
+        processed["description"] = re.sub(
+            r"<[^>]*?>", "", formatted["description"])
 
 
 def format_types(processed: dict) -> None:
@@ -119,7 +126,8 @@ def process_enrolment_path(processed: dict, formatted: dict, data: dict) -> None
     global ABSENT_COURSES
 
     processed["path_from"] = dict()
-    prereqs = re.findall("\W([A-Z]{4}\d{4})\W*", formatted["enrolment_rules"], re.ASCII)
+    prereqs = re.findall(r"\W([A-Z]{4}\d{4})\W*",
+                         formatted["enrolment_rules"], re.ASCII)
     for prereq in prereqs:
         # Add each course code to 'path_from'
         processed["path_from"][prereq] = 1
@@ -144,7 +152,8 @@ def process_exclusions(processed: dict, formatted: dict) -> None:
     """Parses exclusion string from enrolment rules"""
 
     # Extract exclusion string
-    res = re.search(r"Excl.*?:(.*)", formatted["enrolment_rules"], flags=re.IGNORECASE)
+    res = re.search(r"Excl.*?:(.*)",
+                    formatted["enrolment_rules"], flags=re.IGNORECASE)
     if res:
         exclusion_str = res.group(1)
 
@@ -175,7 +184,8 @@ def process_exclusions(processed: dict, formatted: dict) -> None:
         )
 
         # Clean and add any remaining plaintext to 'exclusions' field
-        patterns = ["<br/>", " ,", "[.,]\s*$", "^[.,]", "^and$", "enrolment in program"]
+        patterns = ["<br/>", " ,", "[.,]\s*$",
+                    "^[.,]", "^and$", "enrolment in program"]
         exclusion_str = exclusion_str.strip()
         for pattern in patterns:
             exclusion_str = re.sub(pattern, "", exclusion_str)
@@ -183,13 +193,15 @@ def process_exclusions(processed: dict, formatted: dict) -> None:
 
         # Leftover conjunctions should not be added
         no_conjunctions = re.sub("and", "", exclusion_str, flags=re.IGNORECASE)
-        no_conjunctions = re.sub("or", "", no_conjunctions, flags=re.IGNORECASE)
+        no_conjunctions = re.sub(
+            "or", "", no_conjunctions, flags=re.IGNORECASE)
         if re.search(r"[A-Za-z]", no_conjunctions):
             processed["exclusions"]["leftover_plaintext"] = exclusion_str
 
 
 def process_enrolment_rules(processed: dict, course: dict):
-    processed["raw_requirements"] = re.sub("<br/><br/>", "", course["enrolment_rules"])
+    processed["raw_requirements"] = re.sub(
+        "<br/><br/>", "", course["enrolment_rules"])
 
 
 if __name__ == "__main__":

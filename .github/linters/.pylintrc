@@ -71,7 +71,10 @@ disable=print-statement,
         redefined-builtin,          # allow builtins to be redefined. particularly `exit()`
         import-outside-toplevel,    # allow non-top level imports. used to prevent circular dependencies
         line-too-long,              # disable enforcing max line width
-        unnecessary-pass            # allows def func(): pass. useful for abstract functions and superclasses
+        unnecessary-pass,           # allows def func(): pass. useful for abstract functions and superclasses
+        anomalous-backslash-in-string,# allow backslashes in strings to allow regex expressions to be used in docstrings
+        global-statement,           # allow use of globals. Used for filepaths and configs
+        missing-function-docstring  # TODO: REMOVE BEOFRE PUSH
 
       #   parameter-unpacking,      
       #   unpacking-in-except,
