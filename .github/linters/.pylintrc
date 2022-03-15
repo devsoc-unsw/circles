@@ -68,7 +68,10 @@ disable=print-statement,
         expression-not-assigned,    # allow for expressions to be evaluated without assignment. - used in create.py for fastforwarding indexes with list comprehension
         invalid-name,               # dont enforce variables to be snake_case
         redefined-builtin,          # allow builtins to be redefined. particularly `exit()`
-        import-outside-toplevel     # allow non-top level imports. used to prevent circular dependencies
+        import-outside-toplevel,    # allow non-top level imports. used to prevent circular dependencies
+        line-too-long,              # disable enforcing max line width
+        unnecessary-pass            # allows def func(): pass. useful for abstract functions and superclasses
+
       #   parameter-unpacking,      
       #   unpacking-in-except,
       #   old-raise-syntax,
@@ -601,7 +604,8 @@ max-returns=8
 max-statements=100
 
 # Minimum number of public methods for a class (see R0903).
-min-public-methods=2
+# default: 2
+min-public-methods=1
 
 
 [EXCEPTIONS]
