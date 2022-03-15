@@ -19,6 +19,11 @@ PARSED_LOGIC = {}
 
 
 def tokenise_conditions():
+    """
+    Convert the processed conditions in conditionsProcessed.json into
+    a list of string tokens, split on whitespaces and brackets/parenthesis.
+    Add in logic and, write to conditionsTokens.json
+    """
     data = data_helpers.read_data("data/final_data/conditionsProcessed.json")
 
     for code, condition in data.items():

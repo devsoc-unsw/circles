@@ -1,3 +1,6 @@
+"""
+Configuration file for Data
+"""
 # NOTE: UNSW releases next year's handbook during the T2 holidays. However, it's
 # assumed that circles will only stably update to this new handbook a few weeks
 # into T3. In this case, all the students will have already locked in all their

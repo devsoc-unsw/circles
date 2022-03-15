@@ -173,10 +173,9 @@ class GRADECondition(Condition):
         user_grade = user.get_grade(self.course)
         if user_grade is None:
             return True, [self.get_warning()]
-        elif user_grade < self.grade:
+        if user_grade < self.grade:
             return False, []
-        else:
-            return True, []
+        return True, []
 
     def get_warning(self):
         """Return warning string for grade condition error"""

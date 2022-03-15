@@ -15,6 +15,11 @@ CODE_MAPPING = read_data("data/utility/programCodeMappings.json")["title_to_code
 
 
 def preprocess_conditions():
+    """
+    As title says. Preprocess conditions. Clean HTMl to something readable,
+    convert symbols like brackets, grades, etc to their objects. Also
+    process logical operators, logic and fix spacing and brackets.
+    """
     data = read_data("data/scrapers/coursesFormattedRaw.json")
 
     for code, course in data.items():
@@ -167,7 +172,7 @@ def convert_UOC(processed):
         r"\s?units? (of credits?|completed?)", "UOC", processed, flags=re.IGNORECASE
     )
     # Places UOC right next to the numbers
-    processed = re.sub("\s?UOC", "UOC", processed, flags=re.IGNORECASE)
+    processed = re.sub(r"\s?UOC", "UOC", processed, flags=re.IGNORECASE)
 
     # After UOC has been mainly converted, remove some extraneous phrasing
     processed = re.sub(
@@ -372,7 +377,7 @@ def strip_bracket_spaces(processed):
 # Phase 4: Common patterns
 # -------------------
 def uoc_in_business_school(processed):
-    """Converts \d+UOC offered by the UNSW Business School to \d+UOC in F Business"""
+    """Converts \ d+UOC offered by the UNSW Business School to \ d+UOC in F Business"""
     processed = re.sub(
         r"(\d+UOC) offered by the UNSW Business School", r"\1 in F Business", processed
     )
