@@ -2,14 +2,18 @@
 Contains the Conditions classes
 '''
 import abc
-from enum import Enum, auto
 import json
+from enum import Enum, auto
+
 from algorithms.objects.categories import AnyCategory
 
 '''Keywords'''
+
+
 class Logic(Enum):
     AND = auto()
     OR = auto()
+
 
 '''CACHED'''
 CACHED_CONDITIONS_TOKENS_PATH = "./data/final_data/conditionsTokens.json"
@@ -21,15 +25,18 @@ CACHED_PRGORAM_MAPPINGS_FILE = "./algorithms/cache/programMappings.json"
 with open(CACHED_PRGORAM_MAPPINGS_FILE) as f:
     CACHED_PRGORAM_MAPPINGS = json.load(f)
 
+
 class Condition():
     @abc.abstractmethod
     def validate(self, user) -> tuple[bool, list[str]]:
-        '''
-        returns a tuple first containing whether or not the course is unlocked,
-        and second any warnings about the course's unlocked state - eg that the course
-        needs some wam that the student has not entered.
-        '''
+        """
+        returns a tuple first containing whether or not the course is
+        unlocked, and second any warnings about the course's unlocked state
+        - eg that the course needs some wam that the student has not
+        entered.
+        """
         pass
+
 
 class CourseCondition(Condition):
     '''Condition that the student has completed this course before the current term'''
@@ -44,7 +51,7 @@ class CourseCondition(Condition):
 class CoreqCoursesCondition(Condition):
     """Condition that the student has completed the course/s in or before the current term"""
 
-    def __init__(self, logic: Logic=Logic.AND):
+    def __init__(self, logic: Logic = Logic.AND):
         # An example corequisite is [COMP1511 || COMP1521 || COMP1531]. The user
         # must have taken one of these courses either before or in the current term
         self.courses: list[str] = []
@@ -60,9 +67,17 @@ class CoreqCoursesCondition(Condition):
         """Returns true if the user is taking these courses in the same term"""
         match self.logic:
             case Logic.AND:
-                return all(user.has_taken_course(course) or user.is_taking_course(course) for course in self.courses), []
+                return all(
+                    user.has_taken_course(course)
+                    or user.is_taking_course(course)
+                    for course in self.courses
+                ), []
             case Logic.OR:
-                return any(user.has_taken_course(course) or user.is_taking_course(course) for course in self.courses), []
+                return any(
+                    user.has_taken_course(course)
+                    or user.is_taking_course(course)
+                    for course in self.courses
+                ), []
 
         print("Conditions Error: validation was not of type AND or OR")
         return True, []
@@ -88,7 +103,8 @@ class UOCCondition(Condition):
         self.category = category_classobj
 
     def validate(self, user) -> tuple[bool, list[str]]:
-            return user.uoc(self.category) >= self.uoc, []
+        return user.uoc(self.category) >= self.uoc, []
+
 
 class WAMCondition(Condition):
     '''Handles WAM conditions such as 65WAM and 80WAM in'''
@@ -133,6 +149,7 @@ class WAMCondition(Condition):
             else:
                 return f"Requires {self.wam} WAM in {self.category}. Your WAM in {self.category} is currently {applicable_wam:.3f}"
 
+
 class GRADECondition(Condition):
     '''Handles GRADE conditions such as 65GRADE and 80GRADE in [A-Z]{4}[0-9]{4}'''
 
@@ -157,6 +174,7 @@ class GRADECondition(Condition):
     def get_warning(self):
         return f"Requires {self.grade} mark in {self.course}. Your mark has not been recorded"
 
+
 class ProgramCondition(Condition):
     '''Handles Program conditions such as 3707'''
 
@@ -166,16 +184,21 @@ class ProgramCondition(Condition):
     def validate(self, user) -> tuple[bool, list[str]]:
         return user.in_program(self.program), []
 
+
 class ProgramTypeCondition(Condition):
     '''
-    Handles program type conditions, which specify that your program has to be some collection of programs.\n
-    for example - be enrolled in Actuarial studies implies that your program must be any one of a few programs (actl + double degree codes).\n
+    Handles program type conditions, which specify that your program has to
+    be some collection of programs.
+    for example - be enrolled in Actuarial studies implies that your
+    program must be any one of a few programs (actl + double degree codes).
     '''
+
     def __init__(self, programType):
         self.programType = programType
-    
+
     def validate(self, user) -> tuple[bool, list[str]]:
         return user.program in CACHED_PRGORAM_MAPPINGS[self.programType], []
+
 
 class SpecialisationCondition(Condition):
     '''Handles Specialisation conditions such as COMPA1'''
@@ -186,22 +209,32 @@ class SpecialisationCondition(Condition):
     def validate(self, user) -> tuple[bool, list[str]]:
         return user.in_specialisation(self.specialisation), []
 
+
 class CourseExclusionCondition(Condition):
     ''' Handles when you cant take a certain course. Eg Exclusion: MATH1131 for MATH1141'''
+
     def __init__(self, exclusion):
         self.exclusion = exclusion
+
     def validate(self, user) -> tuple[bool, list[str]]:
         return not user.has_taken_course(self.exclusion), []
 
+
 class ProgramExclusionCondition(Condition):
-    ''' Handles when you cant be in a program to take a course, such as taking a genEd course in your own faculty'''
+    """
+    Handles when you cant be in a program to take a course, such as
+    taking a genEd course in your own faculty
+    """
+
     def __init__(self, exclusion):
         self.exclusion = exclusion
+
     def validate(self, user) -> tuple[bool, list[str]]:
         return not user.in_program(self.exclusion), []
 
+
 class CompositeCondition(Condition):
-    '''Handles AND/OR clauses comprised of condition objects.'''
+    """Handles AND/OR clauses comprised of condition objects."""
 
     def __init__(self, logic: Logic = Logic.AND):
         self.conditions: list[Condition] = []
@@ -224,4 +257,4 @@ class CompositeCondition(Condition):
         unlocked, warnings = list(zip(*validations))
         satisfied = all(unlocked) if self.logic == Logic.AND else any(unlocked)
 
-        return satisfied, sum(warnings, []) # warnings are flattened
+        return satisfied, sum(warnings, [])  # warnings are flattened
