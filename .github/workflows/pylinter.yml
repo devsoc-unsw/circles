@@ -42,7 +42,7 @@ jobs:
         pip install pylint
     - name: Analysing the code with pylint
       run: |
-        pylint $(git ls-files '*.py') ----rcfile="/.github/linters/.pylintrc"
+        pylint $(git ls-files '*.py') --rcfile="/.github/linters/.pylintrc"
 
       env:
         # may be worth changing this to master / main in future
