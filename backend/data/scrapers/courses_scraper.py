@@ -11,7 +11,7 @@ Step in the data's journey:
 import json
 
 import requests
-from data.scrapers.payload import create_payload
+from data.scrapers.payload import create_payload, URL, HEADERS
 from data.utility import data_helpers
 
 TOTAL_COURSES = 10000
@@ -23,14 +23,11 @@ def scrape_course_data():
     Makes the request to the handbook, scrape the data and calls
     write_data to dump the json to an OUTPUT_FILE
     """
-    url = "https://www.handbook.unsw.edu.au/api/es/search"
-    headers = {
-        "content-type": "application/json",
-    }
-    r = requests.post(url, data=json.dumps(create_payload(
+
+    r = requests.post(URL, data=json.dumps(create_payload(
         TOTAL_COURSES,
         content_type="unsw_psubject"
-    )), headers=headers)
+    )), headers=HEADERS)
     data_helpers.write_data(
         r.json()["contentlets"], "data/scrapers/coursesPureRaw.json"
     )
