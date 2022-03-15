@@ -185,7 +185,7 @@ def get_levels(title: str) -> list[int]:
 
         # Looks for 'higher' within 0 - 2 words of the level
         if re.match("[Ll]evels? (\d[^ ]*) ([^ ]+ ){0,2}higher", title):
-            seq = [num for num in range(found_level + 1, 10)]
+            seq = list(range(found_level + 1, 10))
             levels.extend(seq)
 
     return levels
