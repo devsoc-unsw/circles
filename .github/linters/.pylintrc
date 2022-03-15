@@ -64,19 +64,19 @@ confidence=
 # no Warning level messages displayed, use "--disable=all --enable=classes
 # --disable=W".
 disable=print-statement,
-        import-error,               # allow import from folder.file instead of backend.folder.file
-        fixme,                      # allow for TODO and FIXME to be pushed to dev
-        expression-not-assigned,    # allow for expressions to be evaluated without assignment. - used in create.py for fastforwarding indexes with list comprehension
-        invalid-name,               # dont enforce variables to be snake_case
-        redefined-builtin,          # allow builtins to be redefined. particularly `exit()`
-        import-outside-toplevel,    # allow non-top level imports. used to prevent circular dependencies
-        line-too-long,              # disable enforcing max line width
-        unnecessary-pass,           # allows def func(): pass. useful for abstract functions and superclasses
-        anomalous-backslash-in-string, # allow backslashes in strings to allow regex expressions to be used in docstrings
-        global-statement,           # allow use of globals. Used for filepaths and configs
-        missing-function-docstring, # TODO: REMOVE BEOFRE PUSH
-        too-few-public-methods,     # need classes with zero public methods as abstract objects
-        duplicate-code              # Code duplication due to progtype1. TODO: Fix on complete refactor
+        import-error,                     # allow import from folder.file instead of backend.folder.file
+        fixme,                            # allow for TODO and FIXME to be pushed to dev
+        expression-not-assigned,          # allow for expressions to be evaluated without assignment. - used in create.py for fastforwarding indexes with list comprehension
+        invalid-name,                     # dont enforce variables to be snake_case
+        redefined-builtin,                # allow builtins to be redefined. particularly `exit()`
+        import-outside-toplevel,          # allow non-top level imports. used to prevent circular dependencies
+        line-too-long,                    # disable enforcing max line width
+        unnecessary-pass,                 # allows def func(): pass. useful for abstract functions and superclasses
+        anomalous-backslash-in-string,    # allow backslashes in strings to allow regex expressions to be used in docstrings
+        global-statement,                 # allow use of globals. Used for filepaths and configs
+        missing-function-docstring,       # TODO: REMOVE BEOFRE PUSH
+        too-few-public-methods,           # need classes with zero public methods as abstract objects
+        duplicate-code                    # Code duplication due to progtype1. TODO: Fix on complete refactor
       #   parameter-unpacking,      
       #   unpacking-in-except,
       #   old-raise-syntax,
@@ -380,13 +380,13 @@ ignore-docstrings=yes
 ignore-imports=yes
 
 # Minimum lines number of a similarity.
-min-similarity-lines=4
+# default: 4
+min-similarity-lines=40000
 
 
 [BASIC]
 
 # Naming style matching correct argument names.
-# Go take your camelCase to an inferior language
 argument-naming-style=snake_case
 
 # Regular expression matching correct argument names. Overrides argument-
