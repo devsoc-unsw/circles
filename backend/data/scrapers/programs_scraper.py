@@ -7,11 +7,11 @@ Step in the data's journey:
     [   ] Format scraped data (programFormatting.py)
     [   ] Customise formatted data (programProcessing.py)
 """
-import requests
 import json
 
-from data.utility import data_helpers
+import requests
 from data.config import LIVE_YEAR
+from data.utility import data_helpers
 
 TOTAL_PGRMS = 249
 
@@ -83,12 +83,10 @@ PAYLOAD = {
 }
 
 
-"""
-Retrieves data for all undergraduate programs 
-"""
-
-
 def scrape_prg_data():
+    """
+    Retrieves data for all undergraduate programs
+    """
     url = "https://www.handbook.unsw.edu.au/api/es/search"
     headers = {
         "content-type": "application/json",

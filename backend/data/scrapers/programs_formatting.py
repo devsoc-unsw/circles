@@ -1,5 +1,5 @@
 """
-Program formats scraped / raw data by filtering out superfluous fields and 
+Program formats scraped / raw data by filtering out superfluous fields and
 applying minor formatting to relevant fields. It creates the file
 'programFormattedRaw.json'.
 
@@ -11,7 +11,7 @@ Within 'contentLets', relevant info includes:
  - data (see below)
  - CurriculumStructure (see below)
  - additionalInfo
- 
+
 Step in the data's journey:
     [   ] Scrape raw data (programscraper.py)
     [ X ] Format scraped data (programFormatting.py)
@@ -22,6 +22,10 @@ from data.utility import data_helpers
 
 
 def format_prg_data():
+    """
+    Get raw data for a program, format it and dump the output to
+    programsFormatterRaw.json
+    """
     # Get raw data
     raw_content = data_helpers.read_data("data/scrapers/programsPureRaw.json")
     # Initialise formatted data
@@ -41,13 +45,12 @@ def format_prg_data():
     )
 
 
-"""
-Initialises dictionary and assigns it to main programs dictionary
-"""
 
 
 def initialiseProgram(programsFormatted, data):
-
+    """
+    Initialises dictionary and assigns it to main programs dictionary
+    """
     content = {
         "title": None,
         "code": None,
@@ -64,12 +67,11 @@ def initialiseProgram(programsFormatted, data):
     return courseCode
 
 
-"""
-Assign values to dictionary
-"""
 
 
 def addData(programsFormatted, courseCode, program, data, curriculumStructure):
+    """Assign values from raw data to dictionary"""
+
     # Get program info via code
     prog = programsFormatted[courseCode]
     # Assign summary infomation from raw data
@@ -83,13 +85,13 @@ def addData(programsFormatted, courseCode, program, data, curriculumStructure):
     format_curriculum(prog["CurriculumStructure"], curriculumStructure["container"])
 
 
-"""
-Filters through curiculum structure of program and saves neccesary infomation. Purpose of this
-is to make the information more readable 
-"""
 
 
 def format_curriculum(CurriculumStructure, currcontainer):
+    """
+    Filters through curiculum structure of program and saves neccesary
+    infomation. Purpose of this is to make the information more readable
+    """
     for item in currcontainer:
         # Information that we want to filter out
         info = {

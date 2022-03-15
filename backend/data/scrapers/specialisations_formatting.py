@@ -1,5 +1,5 @@
 """
-Program formats scraped / raw data by filtering out superfluous fields and 
+Program formats scraped / raw data by filtering out superfluous fields and
 applying minor formatting to relevant fields. It creates the file
 'specialisationFormattedRaw.json'.
 
@@ -21,23 +21,23 @@ Within 'contentLets', relevant info includes:
  - programs that the specialisation is available in
  - specialisation constraints (e.g. maturity rule)
 
-'curriculumStructure' sets out the courses required to satisfy the specialisation.
-Relevant info is located in a list of dictionaries titled 'container'. Each of 
-these dictionaries includes:
+'curriculumStructure' sets out the courses required to satisfy the
+specialisation. Relevant info is located in a list of dictionaries titled
+'container'. Each of these dictionaries includes:
  - title
  - description
  - relationship
  - dynamic_relationship
- - container 
+ - container
 
-The required courses are either in 'relationship', 'dynamic_relationship', or 
-in deeper levels of 'container' (which has been accessed via recursion in
-the below code). 
+The required courses are either in 'relationship', 'dynamic_relationship',
+or in deeper levels of 'container' (which has been accessed via recursion
+in the below code).
 
 Step in the data's journey:
-    [   ] Scrape raw data (specialisationScraper.py)
-    [ X ] Format scraped data (specialisationFormatting.py)
-    [   ] Customise formatted data (specialisationProcessing.py)
+    [   ] Scrape raw data (specialisationScraper.py) [ X ] Format scraped
+    data (specialisationFormatting.py) [   ] Customise formatted data
+    (specialisationProcessing.py)
 """
 
 import json
