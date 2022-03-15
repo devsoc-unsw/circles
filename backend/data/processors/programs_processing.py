@@ -14,6 +14,7 @@ Step in the data's journey:
 import re
 from collections import OrderedDict
 
+
 from data.utility.data_helpers import read_data, write_data
 
 # Set of current course codes in programs_processed.json
@@ -32,7 +33,6 @@ TEST_PROGS = [
     "3871",
     "3956",
 ]
-
 
 def process_prg_data():
     """
