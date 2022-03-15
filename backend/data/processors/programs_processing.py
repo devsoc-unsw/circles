@@ -1,5 +1,5 @@
 """
-Program processes the formatted data by editing and customising the data for 
+Program processes the formatted data by editing and customising the data for
 use on the frontend. See 'programsProcessed.json' for output.
 
 Status: Currently works for all COMP programs and SENGAH. Query next
@@ -12,8 +12,9 @@ Step in the data's journey:
 """
 
 import re
-from data.utility.data_helpers import read_data, write_data
 from collections import OrderedDict
+
+from data.utility.data_helpers import read_data, write_data
 
 # Set of current course codes in programs_processed.json
 TEST_PROGS = [
@@ -34,6 +35,10 @@ TEST_PROGS = [
 
 
 def process_prg_data():
+    """
+    Read in programsFormattedRaw.json, process them and write to
+    programsProcessed.json
+    """
     # Read in ProgramsFormattedRaw File
     data = read_data("data/scrapers/programsFormattedRaw.json")
     # Final Data for all programs

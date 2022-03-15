@@ -377,7 +377,7 @@ def strip_bracket_spaces(processed):
 # Phase 4: Common patterns
 # -------------------
 def uoc_in_business_school(processed):
-    """Converts \ d+UOC offered by the UNSW Business School to \ d+UOC in F Business"""
+    r"""Converts \d+UOC offered by the UNSW Business School to \d+UOC in F Business"""
     processed = re.sub(
         r"(\d+UOC) offered by the UNSW Business School", r"\1 in F Business", processed
     )
