@@ -14,7 +14,8 @@ ignore=CVS
 
 # Add files or directories matching the regex patterns to the blacklist. The
 # regex matches against base names, not paths.
-ignore-patterns=
+# Current pattern will ignore all `test_` and `_test` files
+ignore-patterns=(.)*_test\.py,test_(.)*\.py
 
 # Python code to execute, usually for sys.path manipulation such as
 # pygtk.require().
@@ -44,8 +45,6 @@ suggestion-mode=yes
 # active Python interpreter and may run arbitrary code.
 unsafe-load-any-extension=no
 
-# Ignore `test_foo` and `foo_test` files for linting
-ignore-patterns=(.)*_test\.py,test_(.)*\.py
 
 
 [MESSAGES CONTROL]
