@@ -1,7 +1,6 @@
 import json 
 import requests 
 
-from server.routers.model import CONDITIONS
 
 def test_search_course():
     x = requests.get('http://127.0.0.1:8000/courses/searchCourse/COMP1')
