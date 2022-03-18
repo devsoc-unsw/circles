@@ -306,33 +306,32 @@ def handle_comma_logic(processed):
     # the commas with that
     # e.g. phrase, phrase || phrase ==> phrase || phrase || phrase
     # e.g. phrase, phrase && phrase ==> phrase && phrase && phrase
-    matches = re.findall(r'([^&|]+,\s?[^&|]+\s?)(&&|\|\|)', processed)
+    if bool(re.match(r'^\s*[A-Z]{4}[0-9]{4}', processed)):
+        matches = re.findall(r'([^&|]+,\s?[^&|]+\s?)(&&|\|\|)', processed)
 
-    for match in matches:
-        # Substitute the commas in the phrase with their respective logic operators
-        subbed_phrase = re.sub(r',\s?', f" {match[1]} ", match[0])
-
-        # Escape the matched phrase so regex doesn't misintrepret unclosed brackets, etc
-        escaped_phrase = re.escape(match[0])
-
-        processed = re.sub(escaped_phrase, subbed_phrase, processed)
-
-    # Check if there were only commas in between course codes. If work has already been done DO NOTHING.
-    # E.g, "72UOC , room in degree for course, Good academic standing" -> considered but no changes
-    # "2303, 3303 && 3304" -> Not considered
-    # "CEIC2001, CEIC2002, MATH2019, CEIC3000" -> "CEIC2001 && CEIC2002 && MATH2019 && CEIC3000"
-    # "at least one of the following: ECON2112, ECON2206, ..." -> Not considered
-
-    # JOEL: There are these cases still... before = "OPTM4110, OPTM4131, OPTM4151,  [OPTM4211, OPTM4251, OPTM4271,]" after = "OPTM4110 &&  OPTM4131 &&  OPTM4151,  [OPTM4211 &&  OPTM4251 &&  OPTM4271,]"
-
-    # If && and || not in processed and it starts with a course code
-    if ',' in processed and '&&' not in processed and '||' not in processed and bool(re.match(r'^(\s*[A-Z]{4}[0-9]{4})', processed)):
-        matches = re.findall(r'(?=([A-Z]{4}[0-9]{4}\s*,\s*[A-Z]{4}[0-9]{4}))', processed)
         for match in matches:
-            # Replace each ' , ' with ' && ', where the amount
-            # of whitespace on either side of the comma doesn't matter
-            replacement = match.split(',')
-            processed = re.sub(match, f'{replacement[0]} && {replacement[1]}', processed)
+            # Substitute the commas in the phrase with their respective logic operators
+            subbed_phrase = re.sub(r',\s?', f" {match[1]} ", match[0])
+
+            # Escape the matched phrase so regex doesn't misintrepret unclosed brackets, etc
+            escaped_phrase = re.escape(match[0])
+
+            processed = re.sub(escaped_phrase, subbed_phrase, processed)
+
+        # Check if there were only commas in between course codes. If work has already been done DO NOTHING.
+        # E.g, "72UOC , room in degree for course, Good academic standing" -> considered but no changes
+        # "2303, 3303 && 3304" -> Not considered
+        # "CEIC2001, CEIC2002, MATH2019, CEIC3000" -> "CEIC2001 && CEIC2002 && MATH2019 && CEIC3000"
+        # "at least one of the following: ECON2112, ECON2206, ..." -> Not considered
+
+        # If there are no &&s and ||s between course codes, just replace them with &&s.
+        if '&&' not in processed and '||' not in processed:
+            matches = re.findall(r'(?=([A-Z]{4}[0-9]{4}\s*,\s*[A-Z]{4}[0-9]{4}))', processed)
+            for match in matches:
+                # Replace each ' , ' with ' && ', where the amount
+                # of whitespace on either side of the comma doesn't matter
+                replacement = match.split(',')
+                processed = re.sub(match, f'{replacement[0]} && {replacement[1]}', processed)
 
     return processed
 
@@ -347,7 +346,6 @@ def strip_spaces(processed):
 
     # Get rid of white spaces at start and end of word
     return processed.strip()
-
 
 def strip_bracket_spaces(processed):
     """Strips spaces immediately before and after brackets"""

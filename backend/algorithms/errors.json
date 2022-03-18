@@ -93,7 +93,7 @@
     "ARCH1101": {
         "condition": {
             "original": "Currently enrolled in program 3261 Architectural Studies, 3268 Computational Design, or 3635 Civil Engineering with Architecture (Hons)<br/><br/>",
-            "processed": "Currently program 3261 Architectural Studies || 3268 Computational Design || 3635 Civil Engineering with Architecture (Hons)"
+            "processed": "Currently program 3261 Architectural Studies, 3268 Computational Design || 3635 Civil Engineering with Architecture (Hons)"
         },
         "tokens": [
             "(",
@@ -101,8 +101,7 @@
             "program",
             "3261",
             "Architectural",
-            "Studies",
-            "||",
+            "Studies,",
             "3268",
             "Computational",
             "Design",
@@ -571,7 +570,7 @@
     "ARTS2852": {
         "condition": {
             "original": "Prerequisite: 24 units of credit at level 1, and enrolment in a Politics, Philosophy, and Economics program or a Politics and IR major or a Development Studies major<br/><br/>",
-            "processed": "24UOC in L1 && enrolment in a Politics && Philosophy && Economics program || a Politics && IR major || a Development Studies major"
+            "processed": "24UOC in L1 && enrolment in a Politics, Philosophy && Economics program || a Politics && IR major || a Development Studies major"
         },
         "tokens": [
             "(",
@@ -582,8 +581,7 @@
             "enrolment",
             "in",
             "a",
-            "Politics",
-            "&&",
+            "Politics,",
             "Philosophy",
             "&&",
             "Economics",
@@ -606,7 +604,7 @@
     "ARTS3013": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in the following declared streams, Music or TPS. Or 96 UOC overall and enrolment in a Music single/dual degree. Students must have a WAM of at least 65.<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in the following declared streams || Music || TPS. || 96UOC && enrolment in a Music single/dual degree. must have 65WAM"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in the following declared streams, Music || TPS. || 96UOC && enrolment in a Music single/dual degree. must have 65WAM"
         },
         "tokens": [
             "(",
@@ -623,8 +621,7 @@
             "the",
             "following",
             "declared",
-            "streams",
-            "||",
+            "streams,",
             "Music",
             "||",
             "TPS.",
@@ -647,7 +644,7 @@
     "ARTS3022": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Creative Writing or English<br/>Equivalent: ARTS3046<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Creative Writing || English Equivalent: ARTS3046"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Creative Writing || English Equivalent: ARTS3046"
         },
         "tokens": [
             "(",
@@ -665,8 +662,7 @@
             "of",
             "the",
             "following",
-            "streams",
-            "||",
+            "streams,",
             "Creative",
             "Writing",
             "||",
@@ -680,7 +676,7 @@
     "ARTS3023": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Creative Writing or English<br/>Equivalent: ARTS3051<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Creative Writing || English Equivalent: ARTS3051"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Creative Writing || English Equivalent: ARTS3051"
         },
         "tokens": [
             "(",
@@ -698,8 +694,7 @@
             "of",
             "the",
             "following",
-            "streams",
-            "||",
+            "streams,",
             "Creative",
             "Writing",
             "||",
@@ -713,7 +708,7 @@
     "ARTS3025": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Creative Writing or English<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Creative Writing || English"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Creative Writing || English"
         },
         "tokens": [
             "(",
@@ -731,8 +726,7 @@
             "of",
             "the",
             "following",
-            "streams",
-            "||",
+            "streams,",
             "Creative",
             "Writing",
             "||",
@@ -901,7 +895,7 @@
     "ARTS3049": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, English or Media, Culture & Technology<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || English || Media && Culture && Technology"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, English || Media, Culture && Technology"
         },
         "tokens": [
             "(",
@@ -919,12 +913,10 @@
             "of",
             "the",
             "following",
-            "streams",
-            "||",
+            "streams,",
             "English",
             "||",
-            "Media",
-            "&&",
+            "Media,",
             "Culture",
             "&&",
             "Technology",
@@ -989,7 +981,7 @@
     "ARTS3060": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Film Studies or MCT; or ARTS1060/ARTS1090, at least 6uoc in level 2  Film Studies electives and enrolment in a Media single or double degree<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Film Studies || MCT; || (ARTS1060 || ARTS1090) && 6UOC in L2 Film Studies electives && enrolment in a Media single || double degree"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Film Studies || MCT; || (ARTS1060 || ARTS1090), 6UOC in L2 Film Studies electives && enrolment in a Media single || double degree"
         },
         "tokens": [
             "(",
@@ -1007,8 +999,7 @@
             "of",
             "the",
             "following",
-            "streams",
-            "||",
+            "streams,",
             "Film",
             "Studies",
             "||",
@@ -1019,7 +1010,7 @@
             "||",
             "ARTS1090",
             ")",
-            "&&",
+            ",",
             "6UOC",
             "in",
             "L2",
@@ -1104,7 +1095,7 @@
     "ARTS3063": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Film Studies or Media, Culture & Technology<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Film Studies || Media && Culture && Technology"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Film Studies || Media, Culture && Technology"
         },
         "tokens": [
             "(",
@@ -1122,13 +1113,11 @@
             "of",
             "the",
             "following",
-            "streams",
-            "||",
+            "streams,",
             "Film",
             "Studies",
             "||",
-            "Media",
-            "&&",
+            "Media,",
             "Culture",
             "&&",
             "Technology",
@@ -1139,7 +1128,7 @@
     "ARTS3064": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Film Studies or MCT<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Film Studies || MCT"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Film Studies || MCT"
         },
         "tokens": [
             "(",
@@ -1157,8 +1146,7 @@
             "of",
             "the",
             "following",
-            "streams",
-            "||",
+            "streams,",
             "Film",
             "Studies",
             "||",
@@ -1198,7 +1186,7 @@
     "ARTS3066": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Film Studies or MCT<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Film Studies || MCT"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Film Studies || MCT"
         },
         "tokens": [
             "(",
@@ -1216,8 +1204,7 @@
             "of",
             "the",
             "following",
-            "streams",
-            "||",
+            "streams,",
             "Film",
             "Studies",
             "||",
@@ -1229,7 +1216,7 @@
     "ARTS3090": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 uoc at Level 1 and 6 uoc at Level 2 in Media, Culture and Technology<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in Media && Culture && Technology"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in Media, Culture && Technology"
         },
         "tokens": [
             "(",
@@ -1243,8 +1230,7 @@
             "in",
             "L2",
             "in",
-            "Media",
-            "&&",
+            "Media,",
             "Culture",
             "&&",
             "Technology",
@@ -1255,7 +1241,7 @@
     "ARTS3091": {
         "condition": {
             "original": "Prerequisite: 48 uoc overall, including 6 uoc at level 1 and 6 uoc at level 2 in one of the following streams, MCT. Or 6 uoc  level 1 and 6 uoc level 2 Prescribed Media Electives and enrolment in a Media single or double degreel program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || MCT. || 6UOC L1 && 6UOC L2 Media Electives && enrolment in a Media single || double degreel program"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, MCT. || 6UOC L1 && 6UOC L2 Media Electives && enrolment in a Media single || double degreel program"
         },
         "tokens": [
             "(",
@@ -1273,8 +1259,7 @@
             "of",
             "the",
             "following",
-            "streams",
-            "||",
+            "streams,",
             "MCT.",
             "||",
             "6UOC",
@@ -1301,7 +1286,7 @@
     "ARTS3092": {
         "condition": {
             "original": "Prerequisite: 48 uoc overall, including 6 uoc at level 1 and 6 uoc at level 2 in one of the following streams, MCT. Or 6 uoc  level 1 and 6 uoc level 2 Prescribed Media Electives and enrolment in a Media single or double degreel program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || MCT. || 6UOC L1 && 6UOC L2 Media Electives && enrolment in a Media single || double degreel program"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, MCT. || 6UOC L1 && 6UOC L2 Media Electives && enrolment in a Media single || double degreel program"
         },
         "tokens": [
             "(",
@@ -1319,8 +1304,7 @@
             "of",
             "the",
             "following",
-            "streams",
-            "||",
+            "streams,",
             "MCT.",
             "||",
             "6UOC",
@@ -1347,7 +1331,7 @@
     "ARTS3093": {
         "condition": {
             "original": "Prerequisite: 48 uoc overall, including 6 uoc at level 1 and 6 uoc at level 2 in one of the following streams, MCT. Or 6 uoc  level 1 and 6 uoc level 2 Prescribed Media Electives and enrolment in a Media single or double degreel program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || MCT. || 6UOC L1 && 6UOC L2 Media Electives && enrolment in a Media single || double degreel program"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, MCT. || 6UOC L1 && 6UOC L2 Media Electives && enrolment in a Media single || double degreel program"
         },
         "tokens": [
             "(",
@@ -1365,8 +1349,7 @@
             "of",
             "the",
             "following",
-            "streams",
-            "||",
+            "streams,",
             "MCT.",
             "||",
             "6UOC",
@@ -1393,7 +1376,7 @@
     "ARTS3096": {
         "condition": {
             "original": "Prerequisite: 48 uoc overall, including 6 uoc at level 1 and 6 uoc at level 2 in one of the following streams, MCT. Or 6 uoc  level 1 and 6 uoc level 2 Prescribed Media Electives and enrolment in a Media single or double degreel program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || MCT. || 6UOC L1 && 6UOC L2 Media Electives && enrolment in a Media single || double degreel program"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, MCT. || 6UOC L1 && 6UOC L2 Media Electives && enrolment in a Media single || double degreel program"
         },
         "tokens": [
             "(",
@@ -1411,8 +1394,7 @@
             "of",
             "the",
             "following",
-            "streams",
-            "||",
+            "streams,",
             "MCT.",
             "||",
             "6UOC",
@@ -1439,7 +1421,7 @@
     "ARTS3097": {
         "condition": {
             "original": "Prerequisite: 48 uoc overall, including 6 uoc at level 1 and 6 uoc at level 2 in one of the following streams, MCT. Or 6 uoc  level 1 and 6 uoc level 2 Prescribed Media Electives and enrolment in a Media single or double degreel program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || MCT. || 6UOC L1 && 6UOC L2 Media Electives && enrolment in a Media single || double degreel program"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, MCT. || 6UOC L1 && 6UOC L2 Media Electives && enrolment in a Media single || double degreel program"
         },
         "tokens": [
             "(",
@@ -1457,8 +1439,7 @@
             "of",
             "the",
             "following",
-            "streams",
-            "||",
+            "streams,",
             "MCT.",
             "||",
             "6UOC",
@@ -1512,7 +1493,7 @@
     "ARTS3123": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Dance Studies or Theatre & Performance Studies<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Dance Studies || Theatre && Performance Studies"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Dance Studies || Theatre && Performance Studies"
         },
         "tokens": [
             "(",
@@ -1530,8 +1511,7 @@
             "of",
             "the",
             "following",
-            "streams",
-            "||",
+            "streams,",
             "Dance",
             "Studies",
             "||",
@@ -1546,7 +1526,7 @@
     "ARTS3124": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Theatre & Performance Studies<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams && Theatre && Performance Studies"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Theatre && Performance Studies"
         },
         "tokens": [
             "(",
@@ -1564,8 +1544,7 @@
             "of",
             "the",
             "following",
-            "streams",
-            "&&",
+            "streams,",
             "Theatre",
             "&&",
             "Performance",
@@ -1577,7 +1556,7 @@
     "ARTS3125": {
         "condition": {
             "original": "Prerequisite: 48 uoc overall, including 6 uoc at level 1 and 6 uoc at level 2 in one of the following specialisations, MCT or\u00a0Theatre & Performance Studies. Or 66 uoc overall and enrolled in a single or dual award Media (S&SP) program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations && MCT or\u00a0Theatre && Performance Studies. || 66UOC && a single || dual award Media (S&SP) program"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, MCT or\u00a0Theatre && Performance Studies. || 66UOC && a single || dual award Media (S&SP) program"
         },
         "tokens": [
             "(",
@@ -1595,8 +1574,7 @@
             "of",
             "the",
             "following",
-            "specialisations",
-            "&&",
+            "specialisations,",
             "MCT",
             "or",
             "Theatre",
@@ -1623,7 +1601,7 @@
     "ARTS3130": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Dance Studies or Theatre & Performance Studies. Or 72 UOC overall and enrolment in an Art & Design program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Dance Studies || Theatre && Performance Studies. || 72UOC && enrolment in an Art && Design program"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Dance Studies || Theatre && Performance Studies. || 72UOC && enrolment in an Art && Design program"
         },
         "tokens": [
             "(",
@@ -1641,8 +1619,7 @@
             "of",
             "the",
             "following",
-            "streams",
-            "||",
+            "streams,",
             "Dance",
             "Studies",
             "||",
@@ -1667,7 +1644,7 @@
     "ARTS3131": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams,  Australian Studies or Theatre & Performance Studies. Excluded: ARTS2124<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Australian Studies || Theatre && Performance Studies"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Australian Studies || Theatre && Performance Studies"
         },
         "tokens": [
             "(",
@@ -1685,8 +1662,7 @@
             "of",
             "the",
             "following",
-            "streams",
-            "||",
+            "streams,",
             "Australian",
             "Studies",
             "||",
@@ -1701,7 +1677,7 @@
     "ARTS3132": {
         "condition": {
             "original": "Prerequisites: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Theatre and Performance Studies<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams && Theatre && Performance Studies"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Theatre && Performance Studies"
         },
         "tokens": [
             "(",
@@ -1719,8 +1695,7 @@
             "of",
             "the",
             "following",
-            "streams",
-            "&&",
+            "streams,",
             "Theatre",
             "&&",
             "Performance",
@@ -1732,7 +1707,7 @@
     "ARTS3212": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Asian Studies, Development Studies, Global Development or History. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations || Asian Studies || Development Studies || Global Development || History. || 48UOC && enrolment in an International Studies program"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Asian Studies, Development Studies, Global Development || History. || 48UOC && enrolment in an International Studies program"
         },
         "tokens": [
             "(",
@@ -1750,14 +1725,11 @@
             "of",
             "the",
             "following",
-            "specialisations",
-            "||",
+            "specialisations,",
             "Asian",
-            "Studies",
-            "||",
+            "Studies,",
             "Development",
-            "Studies",
-            "||",
+            "Studies,",
             "Global",
             "Development",
             "||",
@@ -1875,7 +1847,7 @@
     "ARTS3218": {
         "condition": {
             "original": "Prerequisiste: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Asian Studies, Gender Studies, or History; or 48 UOC overall, including 12 UOC in Japanese Studies language courses<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Asian Studies || Gender Studies || History; || 48UOC && 12UOC in Japanese Studies language courses"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Asian Studies, Gender Studies || History; || 48UOC && 12UOC in Japanese Studies language courses"
         },
         "tokens": [
             "(",
@@ -1893,11 +1865,9 @@
             "of",
             "the",
             "following",
-            "streams",
-            "||",
+            "streams,",
             "Asian",
-            "Studies",
-            "||",
+            "Studies,",
             "Gender",
             "Studies",
             "||",
@@ -1918,7 +1888,7 @@
     "ARTS3220": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Asian Studies or History. Or 48 UOC overall and enrolment in an International Studies single or dual program (2017 onwards)<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Asian Studies || History. || 48UOC && enrolment in an International Studies single || dual program (2017 onwards)"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Asian Studies || History. || 48UOC && enrolment in an International Studies single || dual program (2017 onwards)"
         },
         "tokens": [
             "(",
@@ -1936,8 +1906,7 @@
             "of",
             "the",
             "following",
-            "streams",
-            "||",
+            "streams,",
             "Asian",
             "Studies",
             "||",
@@ -1986,7 +1955,7 @@
     "ARTS3241": {
         "condition": {
             "original": "Prerequisite: 48 UOC including 6 UOC at lv 1 and 6 UOC at lv 2 in one of the following streams, Development Studies, Environmental Humanities, Geographical Studies or Global Development. Or 48 UOC and enrolment in an International Studies program<br/><br/>",
-            "processed": "48UOC && 6UOC at lv 1 && 6UOC at lv 2 in one of the following streams || Development Studies || Environmental Humanities || Geographical Studies || Global Development. || 48UOC && enrolment in an International Studies program"
+            "processed": "48UOC && 6UOC at lv 1 && 6UOC at lv 2 in one of the following streams, Development Studies, Environmental Humanities, Geographical Studies || Global Development. || 48UOC && enrolment in an International Studies program"
         },
         "tokens": [
             "(",
@@ -2006,14 +1975,11 @@
             "of",
             "the",
             "following",
-            "streams",
-            "||",
+            "streams,",
             "Development",
-            "Studies",
-            "||",
+            "Studies,",
             "Environmental",
-            "Humanities",
-            "||",
+            "Humanities,",
             "Geographical",
             "Studies",
             "||",
@@ -2035,7 +2001,7 @@
     "ARTS3242": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Environmental Humanities, Geographical Studies or History. Or 48 UOC overall and enrolment in an International Studies single or dual program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Environmental Humanities || Geographical Studies || History. || 48UOC && enrolment in an International Studies single || dual program"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Environmental Humanities, Geographical Studies || History. || 48UOC && enrolment in an International Studies single || dual program"
         },
         "tokens": [
             "(",
@@ -2053,11 +2019,9 @@
             "of",
             "the",
             "following",
-            "streams",
-            "||",
+            "streams,",
             "Environmental",
-            "Humanities",
-            "||",
+            "Humanities,",
             "Geographical",
             "Studies",
             "||",
@@ -2109,7 +2073,7 @@
     "ARTS3245": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Environmental Humanities or Geographical Studies<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Environmental Humanities || Geographical Studies"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Environmental Humanities || Geographical Studies"
         },
         "tokens": [
             "(",
@@ -2127,8 +2091,7 @@
             "of",
             "the",
             "following",
-            "streams",
-            "||",
+            "streams,",
             "Environmental",
             "Humanities",
             "||",
@@ -2163,7 +2126,7 @@
     "ARTS3279": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Australian Studies or History<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Australian Studies || History"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Australian Studies || History"
         },
         "tokens": [
             "(",
@@ -2181,8 +2144,7 @@
             "of",
             "the",
             "following",
-            "streams",
-            "||",
+            "streams,",
             "Australian",
             "Studies",
             "||",
@@ -2275,7 +2237,7 @@
     "ARTS3292": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Australian Studies or History. Or 48 UOC and enrolment in an International Studies single or dual program (2017 onwards)<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Australian Studies || History. || 48UOC && enrolment in an International Studies single || dual program (2017 onwards)"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Australian Studies || History. || 48UOC && enrolment in an International Studies single || dual program (2017 onwards)"
         },
         "tokens": [
             "(",
@@ -2293,8 +2255,7 @@
             "of",
             "the",
             "following",
-            "streams",
-            "||",
+            "streams,",
             "Australian",
             "Studies",
             "||",
@@ -2322,7 +2283,7 @@
     "ARTS3295": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, European Studies or History; or 48 UOC overall, including 12 UOC in German Studies language courses<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || European Studies || History; || 48UOC && 12UOC in German Studies language courses"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, European Studies || History; || 48UOC && 12UOC in German Studies language courses"
         },
         "tokens": [
             "(",
@@ -2340,8 +2301,7 @@
             "of",
             "the",
             "following",
-            "streams",
-            "||",
+            "streams,",
             "European",
             "Studies",
             "||",
@@ -2362,7 +2322,7 @@
     "ARTS3330": {
         "condition": {
             "original": "Prerequisite: 72 units of credit overall, and enrolment in a language major stream - Chinese Studies, French Studies, German Studies, Japanese Studies, Korean Studies, or Spanish Studies<br/><br/>",
-            "processed": "72UOC && enrolment in a language major stream - Chinese Studies || French Studies || German Studies || Japanese Studies || Korean Studies || Spanish Studies"
+            "processed": "72UOC && enrolment in a language major stream - Chinese Studies, French Studies, German Studies, Japanese Studies, Korean Studies || Spanish Studies"
         },
         "tokens": [
             "(",
@@ -2376,17 +2336,13 @@
             "stream",
             "-",
             "Chinese",
-            "Studies",
-            "||",
+            "Studies,",
             "French",
-            "Studies",
-            "||",
+            "Studies,",
             "German",
-            "Studies",
-            "||",
+            "Studies,",
             "Japanese",
-            "Studies",
-            "||",
+            "Studies,",
             "Korean",
             "Studies",
             "||",
@@ -2690,14 +2646,13 @@
     "ARTS3458": {
         "condition": {
             "original": "Prerequisite: 72uoc overall, including ARTS3453, ARTS2452, or ARTS3454  and enrolment in an Advanced Chinese Studies major/minor; or 72uoc overall, including ARTS2451 or ARTS2462 and enrolment in a Chinese Studies major/minor<br/><br/>",
-            "processed": "72UOC && ARTS3453 || ARTS2452 || ARTS3454 && enrolment in an Advanced Chinese Studies major/minor; || 72UOC && ARTS2451 || ARTS2462 && enrolment in a Chinese Studies major/minor"
+            "processed": "72UOC && ARTS3453, ARTS2452 || ARTS3454 && enrolment in an Advanced Chinese Studies major/minor; || 72UOC && ARTS2451 || ARTS2462 && enrolment in a Chinese Studies major/minor"
         },
         "tokens": [
             "(",
             "72UOC",
             "&&",
-            "ARTS3453",
-            "||",
+            "ARTS3453,",
             "ARTS2452",
             "||",
             "ARTS3454",
@@ -2724,7 +2679,7 @@
             "major/minor",
             ")"
         ],
-        "broke at": "Index 9, enrolment"
+        "broke at": "Index 3, ARTS3453,"
     },
     "ARTS3462": {
         "condition": {
@@ -2886,7 +2841,7 @@
     "ARTS3490": {
         "condition": {
             "original": "Prerequisite: Completion of one of the following - ARTS2481, ARTS3480, ARTS3481, ARTS3482, or ARTS3483, or language placement approval<br/><br/>",
-            "processed": "one of the following - ARTS2481 || ARTS3480 || ARTS3481 || ARTS3482 || ARTS3483 || language placement approval"
+            "processed": "one of the following - ARTS2481, ARTS3480, ARTS3481, ARTS3482 || ARTS3483 || language placement approval"
         },
         "tokens": [
             "(",
@@ -2895,12 +2850,9 @@
             "the",
             "following",
             "-",
-            "ARTS2481",
-            "||",
-            "ARTS3480",
-            "||",
-            "ARTS3481",
-            "||",
+            "ARTS2481,",
+            "ARTS3480,",
+            "ARTS3481,",
             "ARTS3482",
             "||",
             "ARTS3483",
@@ -3333,7 +3285,7 @@
     "ARTS3750": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Development Studies, Geographical Studies or Global Development. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations || Development Studies || Geographical Studies || Global Development. || 48UOC && enrolment in an International Studies program"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Development Studies, Geographical Studies || Global Development. || 48UOC && enrolment in an International Studies program"
         },
         "tokens": [
             "(",
@@ -3351,11 +3303,9 @@
             "of",
             "the",
             "following",
-            "specialisations",
-            "||",
+            "specialisations,",
             "Development",
-            "Studies",
-            "||",
+            "Studies,",
             "Geographical",
             "Studies",
             "||",
@@ -3400,7 +3350,7 @@
     "ARTS3755": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Development Studies, Geographical Studies or Global Development. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations || Development Studies || Geographical Studies || Global Development. || 48UOC && enrolment in an International Studies program"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Development Studies, Geographical Studies || Global Development. || 48UOC && enrolment in an International Studies program"
         },
         "tokens": [
             "(",
@@ -3418,11 +3368,9 @@
             "of",
             "the",
             "following",
-            "specialisations",
-            "||",
+            "specialisations,",
             "Development",
-            "Studies",
-            "||",
+            "Studies,",
             "Geographical",
             "Studies",
             "||",
@@ -3444,7 +3392,7 @@
     "ARTS3756": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Development Studies, Geographical Studies or Global Development. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations || Development Studies || Geographical Studies || Global Development. || 48UOC && enrolment in an International Studies program"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Development Studies, Geographical Studies || Global Development. || 48UOC && enrolment in an International Studies program"
         },
         "tokens": [
             "(",
@@ -3462,11 +3410,9 @@
             "of",
             "the",
             "following",
-            "specialisations",
-            "||",
+            "specialisations,",
             "Development",
-            "Studies",
-            "||",
+            "Studies,",
             "Geographical",
             "Studies",
             "||",
@@ -3488,7 +3434,7 @@
     "ARTS3757": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Development Studies or Global Development<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Development Studies || Global Development"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Development Studies || Global Development"
         },
         "tokens": [
             "(",
@@ -3506,8 +3452,7 @@
             "of",
             "the",
             "following",
-            "streams",
-            "||",
+            "streams,",
             "Development",
             "Studies",
             "||",
@@ -3624,7 +3569,7 @@
     "ARTS3783": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Politics and International Relations. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations && Politics && International Relations. || 48UOC && enrolment in an International Studies program"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Politics && International Relations. || 48UOC && enrolment in an International Studies program"
         },
         "tokens": [
             "(",
@@ -3642,8 +3587,7 @@
             "of",
             "the",
             "following",
-            "specialisations",
-            "&&",
+            "specialisations,",
             "Politics",
             "&&",
             "International",
@@ -3757,7 +3701,7 @@
     "ARTS3810": {
         "condition": {
             "original": "Prerequisite: 72 units of credit overall, and  enrolment in an International Relations, Politics, or Politics & International Relations major<br/><br/>",
-            "processed": "72UOC && enrolment in an International Relations || Politics || Politics && International Relations major"
+            "processed": "72UOC && enrolment in an International Relations, Politics || Politics && International Relations major"
         },
         "tokens": [
             "(",
@@ -3767,8 +3711,7 @@
             "in",
             "an",
             "International",
-            "Relations",
-            "||",
+            "Relations,",
             "Politics",
             "||",
             "Politics",
@@ -3783,7 +3726,7 @@
     "ARTS3816": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, International Relations or Politics. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations || International Relations || Politics. || 48UOC && enrolment in an International Studies program"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, International Relations || Politics. || 48UOC && enrolment in an International Studies program"
         },
         "tokens": [
             "(",
@@ -3801,8 +3744,7 @@
             "of",
             "the",
             "following",
-            "specialisations",
-            "||",
+            "specialisations,",
             "International",
             "Relations",
             "||",
@@ -3823,7 +3765,7 @@
     "ARTS3817": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, International Relations or Politics. Or 48 UOC overall and enrolment in an International Studies program.    <br/>Excluded: ARTS3813<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations || International Relations || Politics. || 48UOC && enrolment in an International Studies program"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, International Relations || Politics. || 48UOC && enrolment in an International Studies program"
         },
         "tokens": [
             "(",
@@ -3841,8 +3783,7 @@
             "of",
             "the",
             "following",
-            "specialisations",
-            "||",
+            "specialisations,",
             "International",
             "Relations",
             "||",
@@ -3863,7 +3804,7 @@
     "ARTS3819": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Politics and International Relations. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations && Politics && International Relations. || 48UOC && enrolment in an International Studies program"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Politics && International Relations. || 48UOC && enrolment in an International Studies program"
         },
         "tokens": [
             "(",
@@ -3881,8 +3822,7 @@
             "of",
             "the",
             "following",
-            "specialisations",
-            "&&",
+            "specialisations,",
             "Politics",
             "&&",
             "International",
@@ -3903,7 +3843,7 @@
     "ARTS3820": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Politics and International Relations<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations && Politics && International Relations"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Politics && International Relations"
         },
         "tokens": [
             "(",
@@ -3921,8 +3861,7 @@
             "of",
             "the",
             "following",
-            "specialisations",
-            "&&",
+            "specialisations,",
             "Politics",
             "&&",
             "International",
@@ -3934,7 +3873,7 @@
     "ARTS3821": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Politics and International Relations<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations && Politics && International Relations"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Politics && International Relations"
         },
         "tokens": [
             "(",
@@ -3952,8 +3891,7 @@
             "of",
             "the",
             "following",
-            "specialisations",
-            "&&",
+            "specialisations,",
             "Politics",
             "&&",
             "International",
@@ -3965,7 +3903,7 @@
     "ARTS3822": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Politics and International Relations<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations && Politics && International Relations"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Politics && International Relations"
         },
         "tokens": [
             "(",
@@ -3983,8 +3921,7 @@
             "of",
             "the",
             "following",
-            "specialisations",
-            "&&",
+            "specialisations,",
             "Politics",
             "&&",
             "International",
@@ -3996,7 +3933,7 @@
     "ARTS3850": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Politics and International Relations<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations && Politics && International Relations"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Politics && International Relations"
         },
         "tokens": [
             "(",
@@ -4014,8 +3951,7 @@
             "of",
             "the",
             "following",
-            "specialisations",
-            "&&",
+            "specialisations,",
             "Politics",
             "&&",
             "International",
@@ -4101,7 +4037,7 @@
     "ARTS3872": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Media, Culture & Technology or Sociology & Anthropology. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations && Media && Culture && Technology || Sociology && Anthropology. || 48UOC && enrolment in an International Studies program"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Media, Culture && Technology || Sociology && Anthropology. || 48UOC && enrolment in an International Studies program"
         },
         "tokens": [
             "(",
@@ -4119,10 +4055,8 @@
             "of",
             "the",
             "following",
-            "specialisations",
-            "&&",
-            "Media",
-            "&&",
+            "specialisations,",
+            "Media,",
             "Culture",
             "&&",
             "Technology",
@@ -4146,7 +4080,7 @@
     "ARTS3874": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Australian Studies, Development Studies, Geographical Studies, Global Development, or Sociology & Anthropology<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations || Australian Studies || Development Studies || Geographical Studies || Global Development || Sociology && Anthropology"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Australian Studies, Development Studies, Geographical Studies, Global Development || Sociology && Anthropology"
         },
         "tokens": [
             "(",
@@ -4164,17 +4098,13 @@
             "of",
             "the",
             "following",
-            "specialisations",
-            "||",
+            "specialisations,",
             "Australian",
-            "Studies",
-            "||",
+            "Studies,",
             "Development",
-            "Studies",
-            "||",
+            "Studies,",
             "Geographical",
-            "Studies",
-            "||",
+            "Studies,",
             "Global",
             "Development",
             "||",
@@ -4188,7 +4118,7 @@
     "ARTS3875": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Australian Studies, Development Studies, or Sociology & Anthropology<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Australian Studies || Development Studies || Sociology && Anthropology"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Australian Studies, Development Studies || Sociology && Anthropology"
         },
         "tokens": [
             "(",
@@ -4206,11 +4136,9 @@
             "of",
             "the",
             "following",
-            "streams",
-            "||",
+            "streams,",
             "Australian",
-            "Studies",
-            "||",
+            "Studies,",
             "Development",
             "Studies",
             "||",
@@ -4224,7 +4152,7 @@
     "ARTS3883": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Asian Studies or Sociology & Anthropology<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Asian Studies || Sociology && Anthropology"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Asian Studies || Sociology && Anthropology"
         },
         "tokens": [
             "(",
@@ -4242,8 +4170,7 @@
             "of",
             "the",
             "following",
-            "streams",
-            "||",
+            "streams,",
             "Asian",
             "Studies",
             "||",
@@ -4257,7 +4184,7 @@
     "ARTS3885": {
         "condition": {
             "original": "Prerequisites: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Sociology & Anthropology. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations && Sociology && Anthropology. || 48UOC && enrolment in an International Studies program"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Sociology && Anthropology. || 48UOC && enrolment in an International Studies program"
         },
         "tokens": [
             "(",
@@ -4275,8 +4202,7 @@
             "of",
             "the",
             "following",
-            "specialisations",
-            "&&",
+            "specialisations,",
             "Sociology",
             "&&",
             "Anthropology.",
@@ -4330,7 +4256,7 @@
     "ARTS3900": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Gender Studies or History.<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Gender Studies || History"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Gender Studies || History"
         },
         "tokens": [
             "(",
@@ -4348,8 +4274,7 @@
             "of",
             "the",
             "following",
-            "streams",
-            "||",
+            "streams,",
             "Gender",
             "Studies",
             "||",
@@ -4361,7 +4286,7 @@
     "ARTS3901": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Gender Studies or Philosophy.<br/>Excluded: ARTS3367<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Gender Studies || Philosophy"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Gender Studies || Philosophy"
         },
         "tokens": [
             "(",
@@ -4379,8 +4304,7 @@
             "of",
             "the",
             "following",
-            "streams",
-            "||",
+            "streams,",
             "Gender",
             "Studies",
             "||",
@@ -4512,7 +4436,7 @@
     "ARTS4266": {
         "condition": {
             "original": "Prerequisite: Enrolment in  a School of Social Sciences, Asian Studies or European Studies honours program<br/><br/>",
-            "processed": "Enrolment in a School of Social Sciences || Asian Studies || European Studies honours program"
+            "processed": "Enrolment in a School of Social Sciences, Asian Studies || European Studies honours program"
         },
         "tokens": [
             "(",
@@ -4522,8 +4446,7 @@
             "School",
             "of",
             "Social",
-            "Sciences",
-            "||",
+            "Sciences,",
             "Asian",
             "Studies",
             "||",
@@ -4538,7 +4461,7 @@
     "ARTS4268": {
         "condition": {
             "original": "Prerequisite: Enrolment in  a School of Social Sciences, Asian Studies or European Studies honours program<br/><br/>",
-            "processed": "Enrolment in a School of Social Sciences || Asian Studies || European Studies honours program"
+            "processed": "Enrolment in a School of Social Sciences, Asian Studies || European Studies honours program"
         },
         "tokens": [
             "(",
@@ -4548,8 +4471,7 @@
             "School",
             "of",
             "Social",
-            "Sciences",
-            "||",
+            "Sciences,",
             "Asian",
             "Studies",
             "||",
@@ -4723,14 +4645,13 @@
     "ARTS4612": {
         "condition": {
             "original": "Prerequisite: Enrolment in Media, Culture and Technology honours program<br/><br/>",
-            "processed": "Enrolment in Media && Culture && Technology honours program"
+            "processed": "Enrolment in Media, Culture && Technology honours program"
         },
         "tokens": [
             "(",
             "Enrolment",
             "in",
-            "Media",
-            "&&",
+            "Media,",
             "Culture",
             "&&",
             "Technology",
@@ -4743,14 +4664,13 @@
     "ARTS4613": {
         "condition": {
             "original": "Prerequisite: Enrolment in Media, Culture and Technology honours program<br/><br/>",
-            "processed": "Enrolment in Media && Culture && Technology honours program"
+            "processed": "Enrolment in Media, Culture && Technology honours program"
         },
         "tokens": [
             "(",
             "Enrolment",
             "in",
-            "Media",
-            "&&",
+            "Media,",
             "Culture",
             "&&",
             "Technology",
@@ -4763,14 +4683,13 @@
     "ARTS4614": {
         "condition": {
             "original": "Prerequisite: Enrolment in Media, Culture and Technology honours program<br/><br/>",
-            "processed": "Enrolment in Media && Culture && Technology honours program"
+            "processed": "Enrolment in Media, Culture && Technology honours program"
         },
         "tokens": [
             "(",
             "Enrolment",
             "in",
-            "Media",
-            "&&",
+            "Media,",
             "Culture",
             "&&",
             "Technology",
@@ -5860,12 +5779,12 @@
     "ATSI3008": {
         "condition": {
             "original": "Prerequisite: 120 units of credit overall, enrolment in a major in Indigenous Studies and enrolled in the final semester of an Arts Faculty single or dual degree program<br/><br/>",
-            "processed": "120UOC && enrolment in a major in Indigenous Studies && the final semester of an Arts Faculty single || dual degree program"
+            "processed": "120UOC , enrolment in a major in Indigenous Studies && the final semester of an Arts Faculty single || dual degree program"
         },
         "tokens": [
             "(",
             "120UOC",
-            "&&",
+            ",",
             "enrolment",
             "in",
             "a",
@@ -5888,7 +5807,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 3, enrolment"
+        "broke at": "Index 2, ,"
     },
     "AVIA1111": {
         "condition": {
@@ -5918,16 +5837,14 @@
     "AVIA2013": {
         "condition": {
             "original": "Prerequisite: 18 UOC from either AVIA1401, AVIA1901, MATH1041 or PHYS1211<br/><br/>",
-            "processed": "18UOC from AVIA1401 || AVIA1901 || MATH1041 || PHYS1211"
+            "processed": "18UOC from AVIA1401, AVIA1901, MATH1041 || PHYS1211"
         },
         "tokens": [
             "(",
             "18UOC",
             "from",
-            "AVIA1401",
-            "||",
-            "AVIA1901",
-            "||",
+            "AVIA1401,",
+            "AVIA1901,",
             "MATH1041",
             "||",
             "PHYS1211",
@@ -7031,7 +6948,7 @@
     "CHEM2521": {
         "condition": {
             "original": "This is the main Level 2 Organic Chemistry course taught within the School of Chemistry.<br/>It assumes knowledge of CHEM1011 and CHEM1021 or CHEM1031 and CHEM1041 or CHEM1051 and CHEM1061, AND CHEM2041. It is a core element in Chemistry major programs. It is also required for industrial chemistry, biochemistry and medicinal chemistry programs.<br/><br/>",
-            "processed": "This is the main L2 Organic Chemistry course taught within the School of Chemistry. It assumes knowledge of CHEM1011 && CHEM1021 || CHEM1031 && CHEM1041 || CHEM1051 && CHEM1061 && CHEM2041. It is a core element in Chemistry major programs. It is also required for industrial chemistry && biochemistry && medicinal chemistry programs"
+            "processed": "This is the main L2 Organic Chemistry course taught within the School of Chemistry. It assumes knowledge of CHEM1011 && CHEM1021 || CHEM1031 && CHEM1041 || CHEM1051 && CHEM1061 && CHEM2041. It is a core element in Chemistry major programs. It is also required for industrial chemistry, biochemistry && medicinal chemistry programs"
         },
         "tokens": [
             "(",
@@ -7081,8 +6998,7 @@
             "required",
             "for",
             "industrial",
-            "chemistry",
-            "&&",
+            "chemistry,",
             "biochemistry",
             "&&",
             "medicinal",
@@ -7242,20 +7158,16 @@
     "CHEM6701": {
         "condition": {
             "original": "12 UOC of CHEM2011, CHEM2021, CHEM2031, CHEM2839, CHEM2041 & CHEM2828<br/><br/>",
-            "processed": "12UOC of CHEM2011 && CHEM2021 && CHEM2031 && CHEM2839 && CHEM2041 && CHEM2828"
+            "processed": "12UOC of CHEM2011, CHEM2021, CHEM2031, CHEM2839, CHEM2041 && CHEM2828"
         },
         "tokens": [
             "(",
             "12UOC",
             "of",
-            "CHEM2011",
-            "&&",
-            "CHEM2021",
-            "&&",
-            "CHEM2031",
-            "&&",
-            "CHEM2839",
-            "&&",
+            "CHEM2011,",
+            "CHEM2021,",
+            "CHEM2031,",
+            "CHEM2839,",
             "CHEM2041",
             "&&",
             "CHEM2828",
@@ -7731,18 +7643,16 @@
     "CRIM3025": {
         "condition": {
             "original": "Prerequisite: 96 uoc including CRIM1010, CRIM1011 and CRIM2042, WAM 75, and in the final year of a Criminology major or Criminology & Criminal Justice single or double degree. Students in program 4034 are not eligible to enrol. Consent required.<br/><br/>",
-            "processed": "96UOC && CRIM1010 && CRIM1011 && CRIM2042 && 75WAM && in the final year of a Criminology major || Criminology && Criminal Justice single || double degree. in program 4034 are not eligible to enrol. Consent required"
+            "processed": "96UOC && CRIM1010, CRIM1011 && CRIM2042, 75WAM && in the final year of a Criminology major || Criminology && Criminal Justice single || double degree. in program 4034 are not eligible to enrol. Consent required"
         },
         "tokens": [
             "(",
             "96UOC",
             "&&",
-            "CRIM1010",
-            "&&",
+            "CRIM1010,",
             "CRIM1011",
             "&&",
-            "CRIM2042",
-            "&&",
+            "CRIM2042,",
             "75WAM",
             "&&",
             "in",
@@ -7774,7 +7684,7 @@
             "required",
             ")"
         ],
-        "broke at": "Index 11, in"
+        "broke at": "Index 3, CRIM1010,"
     },
     "CRIM4001": {
         "condition": {
@@ -8044,17 +7954,15 @@
     "DPBS1001": {
         "condition": {
             "original": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-            "processed": "6UOC of any DPGE && DPST && DPBS && a Global Diploma program"
+            "processed": "6UOC of any DPGE, DPST, DPBS && a Global Diploma program"
         },
         "tokens": [
             "(",
             "6UOC",
             "of",
             "any",
-            "DPGE",
-            "&&",
-            "DPST",
-            "&&",
+            "DPGE,",
+            "DPST,",
             "DPBS",
             "&&",
             "a",
@@ -8068,17 +7976,15 @@
     "DPBS1002": {
         "condition": {
             "original": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-            "processed": "6UOC of any DPGE && DPST && DPBS && a Global Diploma program"
+            "processed": "6UOC of any DPGE, DPST, DPBS && a Global Diploma program"
         },
         "tokens": [
             "(",
             "6UOC",
             "of",
             "any",
-            "DPGE",
-            "&&",
-            "DPST",
-            "&&",
+            "DPGE,",
+            "DPST,",
             "DPBS",
             "&&",
             "a",
@@ -8092,17 +7998,15 @@
     "DPBS1012": {
         "condition": {
             "original": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-            "processed": "6UOC of any DPGE && DPST && DPBS && a Global Diploma program"
+            "processed": "6UOC of any DPGE, DPST, DPBS && a Global Diploma program"
         },
         "tokens": [
             "(",
             "6UOC",
             "of",
             "any",
-            "DPGE",
-            "&&",
-            "DPST",
-            "&&",
+            "DPGE,",
+            "DPST,",
             "DPBS",
             "&&",
             "a",
@@ -8180,17 +8084,15 @@
     "DPBS1110": {
         "condition": {
             "original": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-            "processed": "6UOC of any DPGE && DPST && DPBS && a Global Diploma program"
+            "processed": "6UOC of any DPGE, DPST, DPBS && a Global Diploma program"
         },
         "tokens": [
             "(",
             "6UOC",
             "of",
             "any",
-            "DPGE",
-            "&&",
-            "DPST",
-            "&&",
+            "DPGE,",
+            "DPST,",
             "DPBS",
             "&&",
             "a",
@@ -8204,17 +8106,15 @@
     "DPBS1120": {
         "condition": {
             "original": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-            "processed": "6UOC of any DPGE && DPST && DPBS && a Global Diploma program"
+            "processed": "6UOC of any DPGE, DPST, DPBS && a Global Diploma program"
         },
         "tokens": [
             "(",
             "6UOC",
             "of",
             "any",
-            "DPGE",
-            "&&",
-            "DPST",
-            "&&",
+            "DPGE,",
+            "DPST,",
             "DPBS",
             "&&",
             "a",
@@ -8360,17 +8260,15 @@
     "DPBS1501": {
         "condition": {
             "original": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-            "processed": "6UOC of any DPGE && DPST && DPBS && a Global Diploma program"
+            "processed": "6UOC of any DPGE, DPST, DPBS && a Global Diploma program"
         },
         "tokens": [
             "(",
             "6UOC",
             "of",
             "any",
-            "DPGE",
-            "&&",
-            "DPST",
-            "&&",
+            "DPGE,",
+            "DPST,",
             "DPBS",
             "&&",
             "a",
@@ -8406,17 +8304,15 @@
     "DPBS1602": {
         "condition": {
             "original": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-            "processed": "6UOC of any DPGE && DPST && DPBS && a Global Diploma program"
+            "processed": "6UOC of any DPGE, DPST, DPBS && a Global Diploma program"
         },
         "tokens": [
             "(",
             "6UOC",
             "of",
             "any",
-            "DPGE",
-            "&&",
-            "DPST",
-            "&&",
+            "DPGE,",
+            "DPST,",
             "DPBS",
             "&&",
             "a",
@@ -8430,17 +8326,15 @@
     "DPBS1603": {
         "condition": {
             "original": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-            "processed": "6UOC of any DPGE && DPST && DPBS && a Global Diploma program"
+            "processed": "6UOC of any DPGE, DPST, DPBS && a Global Diploma program"
         },
         "tokens": [
             "(",
             "6UOC",
             "of",
             "any",
-            "DPGE",
-            "&&",
-            "DPST",
-            "&&",
+            "DPGE,",
+            "DPST,",
             "DPBS",
             "&&",
             "a",
@@ -8454,17 +8348,15 @@
     "DPBS1609": {
         "condition": {
             "original": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-            "processed": "6UOC of any DPGE && DPST && DPBS && a Global Diploma program"
+            "processed": "6UOC of any DPGE, DPST, DPBS && a Global Diploma program"
         },
         "tokens": [
             "(",
             "6UOC",
             "of",
             "any",
-            "DPGE",
-            "&&",
-            "DPST",
-            "&&",
+            "DPGE,",
+            "DPST,",
             "DPBS",
             "&&",
             "a",
@@ -8478,17 +8370,15 @@
     "DPBS1613": {
         "condition": {
             "original": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-            "processed": "6UOC of any DPGE && DPST && DPBS && a Global Diploma program"
+            "processed": "6UOC of any DPGE, DPST, DPBS && a Global Diploma program"
         },
         "tokens": [
             "(",
             "6UOC",
             "of",
             "any",
-            "DPGE",
-            "&&",
-            "DPST",
-            "&&",
+            "DPGE,",
+            "DPST,",
             "DPBS",
             "&&",
             "a",
@@ -8502,17 +8392,15 @@
     "DPBS1710": {
         "condition": {
             "original": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-            "processed": "6UOC of any DPGE && DPST && DPBS && a Global Diploma program"
+            "processed": "6UOC of any DPGE, DPST, DPBS && a Global Diploma program"
         },
         "tokens": [
             "(",
             "6UOC",
             "of",
             "any",
-            "DPGE",
-            "&&",
-            "DPST",
-            "&&",
+            "DPGE,",
+            "DPST,",
             "DPBS",
             "&&",
             "a",
@@ -8776,7 +8664,7 @@
     "DPGE1002": {
         "condition": {
             "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) and DPGE1001<br/><br/>",
-            "processed": "UNSW Global Diplomas only (7001 && 7002 && 7003 && 7004) && DPGE1001"
+            "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) && DPGE1001"
         },
         "tokens": [
             "(",
@@ -8785,12 +8673,9 @@
             "Diplomas",
             "only",
             "(",
-            "7001",
-            "&&",
-            "7002",
-            "&&",
-            "7003",
-            "&&",
+            "7001,",
+            "7002,",
+            "7003,",
             "7004",
             ")",
             "&&",
@@ -8802,7 +8687,7 @@
     "DPGE1003": {
         "condition": {
             "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004), DPGE1001 and DPGE1002<br/><br/>",
-            "processed": "UNSW Global Diplomas only (7001 && 7002 && 7003 && 7004) && DPGE1001 && DPGE1002"
+            "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004), DPGE1001 && DPGE1002"
         },
         "tokens": [
             "(",
@@ -8811,15 +8696,12 @@
             "Diplomas",
             "only",
             "(",
-            "7001",
-            "&&",
-            "7002",
-            "&&",
-            "7003",
-            "&&",
+            "7001,",
+            "7002,",
+            "7003,",
             "7004",
             ")",
-            "&&",
+            ",",
             "DPGE1001",
             "&&",
             "DPGE1002",
@@ -9027,7 +8909,7 @@
     "DPST1014": {
         "condition": {
             "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) and prerequisite DPST1013<br/><br/>",
-            "processed": "UNSW Global Diplomas only (7001 && 7002 && 7003 && 7004) && DPST1013"
+            "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) && DPST1013"
         },
         "tokens": [
             "(",
@@ -9036,12 +8918,9 @@
             "Diplomas",
             "only",
             "(",
-            "7001",
-            "&&",
-            "7002",
-            "&&",
-            "7003",
-            "&&",
+            "7001,",
+            "7002,",
+            "7003,",
             "7004",
             ")",
             "&&",
@@ -9053,7 +8932,7 @@
     "DPST1021": {
         "condition": {
             "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) and corequisite DPST1013<br/><br/>",
-            "processed": "UNSW Global Diplomas only (7001 && 7002 && 7003 && 7004) && [DPST1013]"
+            "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) && [DPST1013]"
         },
         "tokens": [
             "(",
@@ -9062,12 +8941,9 @@
             "Diplomas",
             "only",
             "(",
-            "7001",
-            "&&",
-            "7002",
-            "&&",
-            "7003",
-            "&&",
+            "7001,",
+            "7002,",
+            "7003,",
             "7004",
             ")",
             "&&",
@@ -9081,7 +8957,7 @@
     "DPST1022": {
         "condition": {
             "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004), prerequisite DPST1021 OR DPST1023 and corequisite DPST1014<br/><br/>",
-            "processed": "UNSW Global Diplomas only (7001 || 7002 || 7003 || 7004) || DPST1021 || DPST1023 && [DPST1014]"
+            "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004), DPST1021 || DPST1023 && [DPST1014]"
         },
         "tokens": [
             "(",
@@ -9090,15 +8966,12 @@
             "Diplomas",
             "only",
             "(",
-            "7001",
-            "||",
-            "7002",
-            "||",
-            "7003",
-            "||",
+            "7001,",
+            "7002,",
+            "7003,",
             "7004",
             ")",
-            "||",
+            ",",
             "DPST1021",
             "||",
             "DPST1023",
@@ -9113,7 +8986,7 @@
     "DPST1023": {
         "condition": {
             "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) and corequisite DPST1013 <br/><br/>",
-            "processed": "UNSW Global Diplomas only (7001 && 7002 && 7003 && 7004) && [DPST1013]"
+            "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) && [DPST1013]"
         },
         "tokens": [
             "(",
@@ -9122,12 +8995,9 @@
             "Diplomas",
             "only",
             "(",
-            "7001",
-            "&&",
-            "7002",
-            "&&",
-            "7003",
-            "&&",
+            "7001,",
+            "7002,",
+            "7003,",
             "7004",
             ")",
             "&&",
@@ -9141,7 +9011,7 @@
     "DPST1024": {
         "condition": {
             "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) prerequisite DPST1023 OR a credit (\u226565%) in DPST1021 and corequisite DPST1014<br/><br/>",
-            "processed": "UNSW Global Diplomas only (7001 || 7002 || 7003 || 7004) DPST1023 || a credit (\u226565%) in DPST1021 && [DPST1014]"
+            "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) DPST1023 || a credit (\u226565%) in DPST1021 && [DPST1014]"
         },
         "tokens": [
             "(",
@@ -9150,12 +9020,9 @@
             "Diplomas",
             "only",
             "(",
-            "7001",
-            "||",
-            "7002",
-            "||",
-            "7003",
-            "||",
+            "7001,",
+            "7002,",
+            "7003,",
             "7004",
             ")",
             "DPST1023",
@@ -9199,7 +9066,7 @@
     "DPST1032": {
         "condition": {
             "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) and DPST1031<br/><br/>",
-            "processed": "UNSW Global Diplomas only (7001 && 7002 && 7003 && 7004) && DPST1031"
+            "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) && DPST1031"
         },
         "tokens": [
             "(",
@@ -9208,12 +9075,9 @@
             "Diplomas",
             "only",
             "(",
-            "7001",
-            "&&",
-            "7002",
-            "&&",
-            "7003",
-            "&&",
+            "7001,",
+            "7002,",
+            "7003,",
             "7004",
             ")",
             "&&",
@@ -9330,7 +9194,7 @@
     "DPST1072": {
         "condition": {
             "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004), DPST1013 and DPST1021 OR DPST1023<br/><br/>",
-            "processed": "UNSW Global Diplomas only (7001 && 7002 && 7003 && 7004) && DPST1013 && DPST1021 || DPST1023"
+            "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004), DPST1013 && DPST1021 || DPST1023"
         },
         "tokens": [
             "(",
@@ -9339,15 +9203,12 @@
             "Diplomas",
             "only",
             "(",
-            "7001",
-            "&&",
-            "7002",
-            "&&",
-            "7003",
-            "&&",
+            "7001,",
+            "7002,",
+            "7003,",
             "7004",
             ")",
-            "&&",
+            ",",
             "DPST1013",
             "&&",
             "DPST1021",
@@ -9402,7 +9263,7 @@
     "DPST1092": {
         "condition": {
             "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) and DPST1091<br/><br/>",
-            "processed": "UNSW Global Diplomas only (7001 && 7002 && 7003 && 7004) && DPST1091"
+            "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) && DPST1091"
         },
         "tokens": [
             "(",
@@ -9411,12 +9272,9 @@
             "Diplomas",
             "only",
             "(",
-            "7001",
-            "&&",
-            "7002",
-            "&&",
-            "7003",
-            "&&",
+            "7001,",
+            "7002,",
+            "7003,",
             "7004",
             ")",
             "&&",
@@ -9425,19 +9283,92 @@
         ],
         "broke at": "Index 1, UNSW"
     },
+    "ECON2101": {
+        "condition": {
+            "original": "Prerequisite: (ECON1101 or COMM1100) and (ECON1202, MATH1031, MATH1131, MATH1141 or MATH1151)<br/><br/>",
+            "processed": "(ECON1101 || COMM1100) && (ECON1202, MATH1031, MATH1131, MATH1141 || MATH1151)"
+        },
+        "tokens": [
+            "(",
+            "(",
+            "ECON1101",
+            "||",
+            "COMM1100",
+            ")",
+            "&&",
+            "(",
+            "ECON1202,",
+            "MATH1031,",
+            "MATH1131,",
+            "MATH1141",
+            "||",
+            "MATH1151",
+            ")",
+            ")"
+        ],
+        "broke at": "Index 1, ("
+    },
+    "ECON2102": {
+        "condition": {
+            "original": "Prerequisite: (ECON1102 or COMM1150) and (ECON1202, MATH1031, MATH1131, MATH1141 or MATH1151)<br/><br/>",
+            "processed": "(ECON1102 || COMM1150) && (ECON1202, MATH1031, MATH1131, MATH1141 || MATH1151)"
+        },
+        "tokens": [
+            "(",
+            "(",
+            "ECON1102",
+            "||",
+            "COMM1150",
+            ")",
+            "&&",
+            "(",
+            "ECON1202,",
+            "MATH1031,",
+            "MATH1131,",
+            "MATH1141",
+            "||",
+            "MATH1151",
+            ")",
+            ")"
+        ],
+        "broke at": "Index 1, ("
+    },
+    "ECON2112": {
+        "condition": {
+            "original": "Prerequisite: (ECON1101 or COMM1100) and (ECON1202, MATH1031, MATH1131, MATH1141 or MATH1151)<br/><br/>",
+            "processed": "(ECON1101 || COMM1100) && (ECON1202, MATH1031, MATH1131, MATH1141 || MATH1151)"
+        },
+        "tokens": [
+            "(",
+            "(",
+            "ECON1101",
+            "||",
+            "COMM1100",
+            ")",
+            "&&",
+            "(",
+            "ECON1202,",
+            "MATH1031,",
+            "MATH1131,",
+            "MATH1141",
+            "||",
+            "MATH1151",
+            ")",
+            ")"
+        ],
+        "broke at": "Index 1, ("
+    },
     "EDST2002": {
         "condition": {
             "original": "Prerequisite: 72 uoc overall, including EDST1101, EDST1104, EDST1108, and EDST2003, and enrolment in an Education program. Students must have passed the Literacy and Numeracy Test for Initial Teacher Education in order to enrol into this course<br/><br/>",
-            "processed": "72UOC && EDST1101 && EDST1104 && EDST1108 && EDST2003 && enrolment in an Education program. must have passed the Literacy && Numeracy Test for Initial Teacher Education in order to enrol into this course"
+            "processed": "72UOC && EDST1101, EDST1104, EDST1108 && EDST2003 && enrolment in an Education program. must have passed the Literacy && Numeracy Test for Initial Teacher Education in order to enrol into this course"
         },
         "tokens": [
             "(",
             "72UOC",
             "&&",
-            "EDST1101",
-            "&&",
-            "EDST1104",
-            "&&",
+            "EDST1101,",
+            "EDST1104,",
             "EDST1108",
             "&&",
             "EDST2003",
@@ -9468,12 +9399,12 @@
             "course",
             ")"
         ],
-        "broke at": "Index 11, enrolment"
+        "broke at": "Index 3, EDST1101,"
     },
     "EDST2003": {
         "condition": {
             "original": "Prerequisite: 24 units of credit at Level 1 including EDST1101 or EDST1104 and enrolment in one of the following teaching Programs 3446, 3462, 4053, 4054, 4058, 4059, 4061, 4062 or 4076<br/><br/>",
-            "processed": "24UOC in L1 && EDST1101 || EDST1104 && enrolment in one of the following teaching Programs 3446 || 3462 || 4053 || 4054 || 4058 || 4059 || 4061 || 4062 || 4076"
+            "processed": "24UOC in L1 && EDST1101 || EDST1104 && enrolment in one of the following teaching Programs 3446, 3462, 4053, 4054, 4058, 4059, 4061, 4062 || 4076"
         },
         "tokens": [
             "(",
@@ -9493,20 +9424,13 @@
             "following",
             "teaching",
             "Programs",
-            "3446",
-            "||",
-            "3462",
-            "||",
-            "4053",
-            "||",
-            "4054",
-            "||",
-            "4058",
-            "||",
-            "4059",
-            "||",
-            "4061",
-            "||",
+            "3446,",
+            "3462,",
+            "4053,",
+            "4054,",
+            "4058,",
+            "4059,",
+            "4061,",
             "4062",
             "||",
             "4076",
@@ -9812,7 +9736,7 @@
     "EDST6706": {
         "condition": {
             "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053, 4054, or 4076<br/><br/>",
-            "processed": "78UOC && EDST2002 && enrolment in program 4053 || 4054 || 4076"
+            "processed": "78UOC && EDST2002 && enrolment in program 4053, 4054 || 4076"
         },
         "tokens": [
             "(",
@@ -9823,8 +9747,7 @@
             "enrolment",
             "in",
             "program",
-            "4053",
-            "||",
+            "4053,",
             "4054",
             "||",
             "4076",
@@ -9980,7 +9903,7 @@
     "EDST6716": {
         "condition": {
             "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 3462, 4054, or 4058<br/><br/>",
-            "processed": "78UOC && EDST2002 && enrolment in program 3462 || 4054 || 4058"
+            "processed": "78UOC && EDST2002 && enrolment in program 3462, 4054 || 4058"
         },
         "tokens": [
             "(",
@@ -9991,8 +9914,7 @@
             "enrolment",
             "in",
             "program",
-            "3462",
-            "||",
+            "3462,",
             "4054",
             "||",
             "4058",
@@ -10186,7 +10108,7 @@
     "EDST6727": {
         "condition": {
             "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in one of the following programs, 3426, 3446, 3470, 4053 or 4054<br/><br/>",
-            "processed": "78UOC && EDST2002 && enrolment in one of the following programs || 3426 || 3446 || 3470 || 4053 || 4054"
+            "processed": "78UOC && EDST2002 && enrolment in one of the following programs, 3426, 3446, 3470, 4053 || 4054"
         },
         "tokens": [
             "(",
@@ -10200,14 +10122,10 @@
             "of",
             "the",
             "following",
-            "programs",
-            "||",
-            "3426",
-            "||",
-            "3446",
-            "||",
-            "3470",
-            "||",
+            "programs,",
+            "3426,",
+            "3446,",
+            "3470,",
             "4053",
             "||",
             "4054",
@@ -10707,7 +10625,7 @@
     "EDST6771": {
         "condition": {
             "original": "Prerequisite: 78 UOC overall, including EDST2002, and enrolment in program 4059, 4061, 4062, 4064, or 4066<br/><br/>",
-            "processed": "78UOC && EDST2002 && enrolment in program 4059 || 4061 || 4062 || 4064 || 4066"
+            "processed": "78UOC && EDST2002 && enrolment in program 4059, 4061, 4062, 4064 || 4066"
         },
         "tokens": [
             "(",
@@ -10718,12 +10636,9 @@
             "enrolment",
             "in",
             "program",
-            "4059",
-            "||",
-            "4061",
-            "||",
-            "4062",
-            "||",
+            "4059,",
+            "4061,",
+            "4062,",
             "4064",
             "||",
             "4066",
@@ -10748,7 +10663,7 @@
     "EDST6775": {
         "condition": {
             "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4059, 4061, 4062, 4063, 4064, or 4066<br/><br/>",
-            "processed": "78UOC && EDST2002 && enrolment in program 4059 || 4061 || 4062 || 4063 || 4064 || 4066"
+            "processed": "78UOC && EDST2002 && enrolment in program 4059, 4061, 4062, 4063, 4064 || 4066"
         },
         "tokens": [
             "(",
@@ -10759,14 +10674,10 @@
             "enrolment",
             "in",
             "program",
-            "4059",
-            "||",
-            "4061",
-            "||",
-            "4062",
-            "||",
-            "4063",
-            "||",
+            "4059,",
+            "4061,",
+            "4062,",
+            "4063,",
             "4064",
             "||",
             "4066",
@@ -10791,7 +10702,7 @@
     "EDST6777": {
         "condition": {
             "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4059, 4061, 4063, or 4066<br/><br/>",
-            "processed": "78UOC && EDST2002 && enrolment in program 4059 || 4061 || 4063 || 4066"
+            "processed": "78UOC && EDST2002 && enrolment in program 4059, 4061, 4063 || 4066"
         },
         "tokens": [
             "(",
@@ -10802,10 +10713,8 @@
             "enrolment",
             "in",
             "program",
-            "4059",
-            "||",
-            "4061",
-            "||",
+            "4059,",
+            "4061,",
             "4063",
             "||",
             "4066",
@@ -11793,7 +11702,7 @@
     "LAWS1075": {
         "condition": {
             "original": "Pre-requisite: Principles of Private Law (any one of LAWS1071, LAWS1150, JURD7150, or JURD7171)<br/><br/>",
-            "processed": "Principles of Private Law (any one of LAWS1071 || LAWS1150 || JURD7150 || JURD7171)"
+            "processed": "Principles of Private Law (any one of LAWS1071, LAWS1150, JURD7150 || JURD7171)"
         },
         "tokens": [
             "(",
@@ -11805,10 +11714,8 @@
             "any",
             "one",
             "of",
-            "LAWS1071",
-            "||",
-            "LAWS1150",
-            "||",
+            "LAWS1071,",
+            "LAWS1150,",
             "JURD7150",
             "||",
             "JURD7171",
@@ -11820,7 +11727,7 @@
     "LAWS1091": {
         "condition": {
             "original": "Prerequisite: Principles of Private Law (LAWS1150 /JURD7150), Contracts (LAWS1075/JURD7175) and Equity and Trusts (LAWS2385/JURD7285).<br/><br/>",
-            "processed": "Principles of Private Law ((LAWS1150 || JURD7150)) || Contracts ((LAWS1075 || JURD7175)) && Equity && Trusts ((LAWS2385 || JURD7285))"
+            "processed": "Principles of Private Law ((LAWS1150 || JURD7150)), Contracts ((LAWS1075 || JURD7175)) && Equity && Trusts ((LAWS2385 || JURD7285))"
         },
         "tokens": [
             "(",
@@ -11835,7 +11742,7 @@
             "JURD7150",
             ")",
             ")",
-            "||",
+            ",",
             "Contracts",
             "(",
             "(",
@@ -12222,7 +12129,7 @@
     "LAWS2383": {
         "condition": {
             "original": "Prerequisite: Principles of Private Law (LAWS1150 /JURD7150), Contracts (LAWS1075/JURD7175) and Equity and Trusts (LAWS2385/JURD7285).<br/><br/>",
-            "processed": "Principles of Private Law ((LAWS1150 || JURD7150)) || Contracts ((LAWS1075 || JURD7175)) && Equity && Trusts ((LAWS2385 || JURD7285))"
+            "processed": "Principles of Private Law ((LAWS1150 || JURD7150)), Contracts ((LAWS1075 || JURD7175)) && Equity && Trusts ((LAWS2385 || JURD7285))"
         },
         "tokens": [
             "(",
@@ -12237,7 +12144,7 @@
             "JURD7150",
             ")",
             ")",
-            "||",
+            ",",
             "Contracts",
             "(",
             "(",
@@ -12376,7 +12283,7 @@
     "LAWS3017": {
         "condition": {
             "original": "Prerequisite: Completion of 78 UOC in LAWS courses including either Legal Theory (LAWS2320), Law and Social Theory (LAWS2820) or Theories of Law and Justice (LAWS2326).<br/><br/>",
-            "processed": "78UOC in LAWS courses && Legal Theory (LAWS2320) && Law && Social Theory (LAWS2820) || Theories of Law && Justice (LAWS2326)"
+            "processed": "78UOC in LAWS courses && Legal Theory (LAWS2320), Law && Social Theory (LAWS2820) || Theories of Law && Justice (LAWS2326)"
         },
         "tokens": [
             "(",
@@ -12390,7 +12297,7 @@
             "(",
             "LAWS2320",
             ")",
-            "&&",
+            ",",
             "Law",
             "&&",
             "Social",
@@ -12631,7 +12538,7 @@
     "LAWS3060": {
         "condition": {
             "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Lawyers, Ethics and Justice (LAWS1230),  Resolving Civil Disputes (LAWS2371) and Court Process, Evidence & Proof (LAWS2351).<br/><br/>",
-            "processed": "78UOC in LAWS courses && Lawyers && Ethics && Justice (LAWS1230) && Resolving Civil Disputes (LAWS2371) && Court Process && Evidence && Proof (LAWS2351)"
+            "processed": "78UOC in LAWS courses && Lawyers, Ethics && Justice (LAWS1230), Resolving Civil Disputes (LAWS2371) && Court Process, Evidence && Proof (LAWS2351)"
         },
         "tokens": [
             "(",
@@ -12640,15 +12547,14 @@
             "LAWS",
             "courses",
             "&&",
-            "Lawyers",
-            "&&",
+            "Lawyers,",
             "Ethics",
             "&&",
             "Justice",
             "(",
             "LAWS1230",
             ")",
-            "&&",
+            ",",
             "Resolving",
             "Civil",
             "Disputes",
@@ -12657,8 +12563,7 @@
             ")",
             "&&",
             "Court",
-            "Process",
-            "&&",
+            "Process,",
             "Evidence",
             "&&",
             "Proof",
@@ -13248,7 +13153,7 @@
     "LAWS3170": {
         "condition": {
             "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Resolving Civil Disputes (LAWS2371) and Lawyers, Ethics and Justice (LAWS1230)<br/>Co-requisite: Court Process, Evidence and Proof (LAWS2351)<br/><br/>",
-            "processed": "78UOC in LAWS courses && Resolving Civil Disputes (LAWS2371) && Lawyers && Ethics && Justice (LAWS1230) [Court Process && Evidence && Proof (LAWS2351)]"
+            "processed": "78UOC in LAWS courses && Resolving Civil Disputes (LAWS2371) && Lawyers, Ethics && Justice (LAWS1230) [Court Process, Evidence && Proof (LAWS2351)]"
         },
         "tokens": [
             "(",
@@ -13264,8 +13169,7 @@
             "LAWS2371",
             ")",
             "&&",
-            "Lawyers",
-            "&&",
+            "Lawyers,",
             "Ethics",
             "&&",
             "Justice",
@@ -13274,8 +13178,7 @@
             ")",
             "[",
             "Court",
-            "Process",
-            "&&",
+            "Process,",
             "Evidence",
             "&&",
             "Proof",
@@ -13544,7 +13447,7 @@
     "LAWS3240": {
         "condition": {
             "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Lawyers, Ethics and Justice (LAWS1230).<br/><br/>",
-            "processed": "78UOC in LAWS courses && Lawyers && Ethics && Justice (LAWS1230)"
+            "processed": "78UOC in LAWS courses && Lawyers, Ethics && Justice (LAWS1230)"
         },
         "tokens": [
             "(",
@@ -13553,8 +13456,7 @@
             "LAWS",
             "courses",
             "&&",
-            "Lawyers",
-            "&&",
+            "Lawyers,",
             "Ethics",
             "&&",
             "Justice",
@@ -13766,7 +13668,7 @@
     "LAWS3303": {
         "condition": {
             "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Lawyers, Ethics and Justice (LAWS1230/1210) and Resolving Civil Disputes (LAWS2371/2311)<br/><br/>",
-            "processed": "78UOC in LAWS courses && Lawyers && Ethics && Justice (LAWS1230/1210) && Resolving Civil Disputes (LAWS2371/2311)"
+            "processed": "78UOC in LAWS courses && Lawyers, Ethics && Justice (LAWS1230/1210) && Resolving Civil Disputes (LAWS2371/2311)"
         },
         "tokens": [
             "(",
@@ -13775,8 +13677,7 @@
             "LAWS",
             "courses",
             "&&",
-            "Lawyers",
-            "&&",
+            "Lawyers,",
             "Ethics",
             "&&",
             "Justice",
@@ -13797,7 +13698,7 @@
     "LAWS3304": {
         "condition": {
             "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Lawyers, Ethics and Justice (LAWS1230/1210) and Resolving Civil Disputes (LAWS2371/2311)<br/><br/>",
-            "processed": "78UOC in LAWS courses && Lawyers && Ethics && Justice (LAWS1230/1210) && Resolving Civil Disputes (LAWS2371/2311)"
+            "processed": "78UOC in LAWS courses && Lawyers, Ethics && Justice (LAWS1230/1210) && Resolving Civil Disputes (LAWS2371/2311)"
         },
         "tokens": [
             "(",
@@ -13806,8 +13707,7 @@
             "LAWS",
             "courses",
             "&&",
-            "Lawyers",
-            "&&",
+            "Lawyers,",
             "Ethics",
             "&&",
             "Justice",
@@ -13828,7 +13728,7 @@
     "LAWS3305": {
         "condition": {
             "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Lawyers, Ethics and Justice (LAWS1230/1210) and Resolving Civil Disputes (LAWS2371/2311)<br/><br/>",
-            "processed": "78UOC in LAWS courses && Lawyers && Ethics && Justice (LAWS1230/1210) && Resolving Civil Disputes (LAWS2371/2311)"
+            "processed": "78UOC in LAWS courses && Lawyers, Ethics && Justice (LAWS1230/1210) && Resolving Civil Disputes (LAWS2371/2311)"
         },
         "tokens": [
             "(",
@@ -13837,8 +13737,7 @@
             "LAWS",
             "courses",
             "&&",
-            "Lawyers",
-            "&&",
+            "Lawyers,",
             "Ethics",
             "&&",
             "Justice",
@@ -13859,7 +13758,7 @@
     "LAWS3309": {
         "condition": {
             "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Lawyers, Ethics and Justice (LAWS1230/1210) and Resolving Civil Disputes (LAWS2371/2311)<br/><br/>",
-            "processed": "78UOC in LAWS courses && Lawyers && Ethics && Justice (LAWS1230/1210) && Resolving Civil Disputes (LAWS2371/2311)"
+            "processed": "78UOC in LAWS courses && Lawyers, Ethics && Justice (LAWS1230/1210) && Resolving Civil Disputes (LAWS2371/2311)"
         },
         "tokens": [
             "(",
@@ -13868,8 +13767,7 @@
             "LAWS",
             "courses",
             "&&",
-            "Lawyers",
-            "&&",
+            "Lawyers,",
             "Ethics",
             "&&",
             "Justice",
@@ -14808,7 +14706,7 @@
     "LAWS3623": {
         "condition": {
             "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Lawyers, Ethics and Justice (LAWS1230).<br/><br/>",
-            "processed": "78UOC in LAWS courses && Lawyers && Ethics && Justice (LAWS1230)"
+            "processed": "78UOC in LAWS courses && Lawyers, Ethics && Justice (LAWS1230)"
         },
         "tokens": [
             "(",
@@ -14817,8 +14715,7 @@
             "LAWS",
             "courses",
             "&&",
-            "Lawyers",
-            "&&",
+            "Lawyers,",
             "Ethics",
             "&&",
             "Justice",
@@ -14946,7 +14843,7 @@
     "LAWS9801": {
         "condition": {
             "original": "Prerequisite: Academic Program must be Environmental Science program (3988, 3932, 3965 or 3943)<br/><br/>",
-            "processed": "Academic Program must be Environmental Science program (3988 || 3932 || 3965 || 3943)"
+            "processed": "Academic Program must be Environmental Science program (3988, 3932, 3965 || 3943)"
         },
         "tokens": [
             "(",
@@ -14958,10 +14855,8 @@
             "Science",
             "program",
             "(",
-            "3988",
-            "||",
-            "3932",
-            "||",
+            "3988,",
+            "3932,",
             "3965",
             "||",
             "3943",
@@ -15155,7 +15050,7 @@
     "MDCN8888": {
         "condition": {
             "original": "Students with a WAM of \u2265 65 (see WAM calculation below) and have completed 12 Units of Credit (UOC) General Education before Term 1 in year 4, are eligible to apply.<br/>WAM Calculation<br/>The WAM is calculated from the following courses:<br/>1.\tMFAC 1521 Beginnings, Growth and Development A<br/>2.\tMFAC 1522 Beginnings, Growth and Development B<br/>3.\tMFAC 1523 Health Maintenance A<br/>4.\tMFAC 1524 Health Maintenance B<br/>5.\tMFAC 1525 Ageing and Endings A<br/>6.\tMFAC 1526 Ageing and Endings B<br/>7.\tMFAC 1527 Society & Health<br/>In addition, students are required to pass the following courses (including passing subsequent supplementary exams, but if a student fails a course then they will be ineligible):<br/>1.\tMFAC 1501 Foundations<br/>2.\tMFAC 1511 Phase 1 Portfolio<br/>3.\tMFAC 1512 End of Phase Examination<br/>4.\tMFAC 1513 Clinical and Communication Skills Examination<br/>5.\tMFAC 2514 Integrated Clinical Studies 1<br/>6.\tMFAC 2515 Integrated Clinical Studies 2<br/>7.\tMFAC 2516 Integrated Clinical Studies 3<br/>8.\tMFAC 2511 Phase 2 Portfolio<br/>9.\tMFAC 2512 Integrated Clinical Examination<br/><br/>",
-            "processed": "with a WAM of \u2265 65 (see WAM calculation below) && have 12UOC (UOC) General Education before Term 1 in year 4 && are eligible to apply. WAM Calculation The WAM is calculated from the following courses: 1.\tMFAC 1521 Beginnings && Growth && Development A 2.\tMFAC 1522 Beginnings && Growth && Development B 3.\tMFAC 1523 Health Maintenance A 4.\tMFAC 1524 Health Maintenance B 5.\tMFAC 1525 Ageing && Endings A 6.\tMFAC 1526 Ageing && Endings B 7.\tMFAC 1527 Society && Health In addition && are required to pass the following courses (&& passing subsequent supplementary exams && but if a fails a course then they will be ineligible): 1.\tMFAC 1501 Foundations 2.\tMFAC 1511 Phase 1 Portfolio 3.\tMFAC 1512 End of Phase Examination 4.\tMFAC 1513 Clinical && Communication Skills Examination 5.\tMFAC 2514 Integrated Clinical Studies 1 6.\tMFAC 2515 Integrated Clinical Studies 2 7.\tMFAC 2516 Integrated Clinical Studies 3 8.\tMFAC 2511 Phase 2 Portfolio 9.\tMFAC 2512 Integrated Clinical Examination"
+            "processed": "with a WAM of \u2265 65 (see WAM calculation below) && have 12UOC (UOC) General Education before Term 1 in year 4, are eligible to apply. WAM Calculation The WAM is calculated from the following courses: 1.\tMFAC 1521 Beginnings, Growth && Development A 2.\tMFAC 1522 Beginnings, Growth && Development B 3.\tMFAC 1523 Health Maintenance A 4.\tMFAC 1524 Health Maintenance B 5.\tMFAC 1525 Ageing && Endings A 6.\tMFAC 1526 Ageing && Endings B 7.\tMFAC 1527 Society && Health In addition, are required to pass the following courses (&& passing subsequent supplementary exams, but if a fails a course then they will be ineligible): 1.\tMFAC 1501 Foundations 2.\tMFAC 1511 Phase 1 Portfolio 3.\tMFAC 1512 End of Phase Examination 4.\tMFAC 1513 Clinical && Communication Skills Examination 5.\tMFAC 2514 Integrated Clinical Studies 1 6.\tMFAC 2515 Integrated Clinical Studies 2 7.\tMFAC 2516 Integrated Clinical Studies 3 8.\tMFAC 2511 Phase 2 Portfolio 9.\tMFAC 2512 Integrated Clinical Examination"
         },
         "tokens": [
             "(",
@@ -15184,8 +15079,7 @@
             "1",
             "in",
             "year",
-            "4",
-            "&&",
+            "4,",
             "are",
             "eligible",
             "to",
@@ -15203,8 +15097,7 @@
             "1.",
             "MFAC",
             "1521",
-            "Beginnings",
-            "&&",
+            "Beginnings,",
             "Growth",
             "&&",
             "Development",
@@ -15212,8 +15105,7 @@
             "2.",
             "MFAC",
             "1522",
-            "Beginnings",
-            "&&",
+            "Beginnings,",
             "Growth",
             "&&",
             "Development",
@@ -15251,8 +15143,7 @@
             "&&",
             "Health",
             "In",
-            "addition",
-            "&&",
+            "addition,",
             "are",
             "required",
             "to",
@@ -15265,8 +15156,7 @@
             "passing",
             "subsequent",
             "supplementary",
-            "exams",
-            "&&",
+            "exams,",
             "but",
             "if",
             "a",
@@ -15345,7 +15235,7 @@
     "MDCN8889": {
         "condition": {
             "original": "Students with a WAM of \u2265 65 (see WAM calculation below) and have completed 12 Units of Credit (UOC) General Education before Term 1 in year 4, are eligible to apply.<br/>WAM Calculation<br/>The WAM is calculated from the following courses:<br/>1. MFAC 1521 Beginnings, Growth and Development A<br/>2. MFAC 1522 Beginnings, Growth and Development B<br/>3. MFAC 1523 Health Maintenance A<br/>4. MFAC 1524 Health Maintenance B<br/>5. MFAC 1525 Ageing and Endings A<br/>6. MFAC 1526 Ageing and Endings B<br/>7. MFAC 1527 Society & Health<br/>In addition, students are required to pass the following courses (including passing subsequent supplementary exams, but if a student fails a course then they will be ineligible):<br/>1. MFAC 1501 Foundations<br/>2. MFAC 1511 Phase 1 Portfolio<br/>3. MFAC 1512 End of Phase Examination<br/>4. MFAC 1513 Clinical and Communication Skills Examination<br/>5. MFAC 2514 Integrated Clinical Studies 1<br/>6. MFAC 2515 Integrated Clinical Studies 2<br/>7. MFAC 2516 Integrated Clinical Studies 3<br/>8. MFAC 2511 Phase 2 Portfolio<br/>9. MFAC 2512 Integrated Clinical Examination<br/><br/>",
-            "processed": "with a WAM of \u2265 65 (see WAM calculation below) && have 12UOC (UOC) General Education before Term 1 in year 4 && are eligible to apply. WAM Calculation The WAM is calculated from the following courses: 1. MFAC 1521 Beginnings && Growth && Development A 2. MFAC 1522 Beginnings && Growth && Development B 3. MFAC 1523 Health Maintenance A 4. MFAC 1524 Health Maintenance B 5. MFAC 1525 Ageing && Endings A 6. MFAC 1526 Ageing && Endings B 7. MFAC 1527 Society && Health In addition && are required to pass the following courses (&& passing subsequent supplementary exams && but if a fails a course then they will be ineligible): 1. MFAC 1501 Foundations 2. MFAC 1511 Phase 1 Portfolio 3. MFAC 1512 End of Phase Examination 4. MFAC 1513 Clinical && Communication Skills Examination 5. MFAC 2514 Integrated Clinical Studies 1 6. MFAC 2515 Integrated Clinical Studies 2 7. MFAC 2516 Integrated Clinical Studies 3 8. MFAC 2511 Phase 2 Portfolio 9. MFAC 2512 Integrated Clinical Examination"
+            "processed": "with a WAM of \u2265 65 (see WAM calculation below) && have 12UOC (UOC) General Education before Term 1 in year 4, are eligible to apply. WAM Calculation The WAM is calculated from the following courses: 1. MFAC 1521 Beginnings, Growth && Development A 2. MFAC 1522 Beginnings, Growth && Development B 3. MFAC 1523 Health Maintenance A 4. MFAC 1524 Health Maintenance B 5. MFAC 1525 Ageing && Endings A 6. MFAC 1526 Ageing && Endings B 7. MFAC 1527 Society && Health In addition, are required to pass the following courses (&& passing subsequent supplementary exams, but if a fails a course then they will be ineligible): 1. MFAC 1501 Foundations 2. MFAC 1511 Phase 1 Portfolio 3. MFAC 1512 End of Phase Examination 4. MFAC 1513 Clinical && Communication Skills Examination 5. MFAC 2514 Integrated Clinical Studies 1 6. MFAC 2515 Integrated Clinical Studies 2 7. MFAC 2516 Integrated Clinical Studies 3 8. MFAC 2511 Phase 2 Portfolio 9. MFAC 2512 Integrated Clinical Examination"
         },
         "tokens": [
             "(",
@@ -15374,8 +15264,7 @@
             "1",
             "in",
             "year",
-            "4",
-            "&&",
+            "4,",
             "are",
             "eligible",
             "to",
@@ -15393,8 +15282,7 @@
             "1.",
             "MFAC",
             "1521",
-            "Beginnings",
-            "&&",
+            "Beginnings,",
             "Growth",
             "&&",
             "Development",
@@ -15402,8 +15290,7 @@
             "2.",
             "MFAC",
             "1522",
-            "Beginnings",
-            "&&",
+            "Beginnings,",
             "Growth",
             "&&",
             "Development",
@@ -15441,8 +15328,7 @@
             "&&",
             "Health",
             "In",
-            "addition",
-            "&&",
+            "addition,",
             "are",
             "required",
             "to",
@@ -15455,8 +15341,7 @@
             "passing",
             "subsequent",
             "supplementary",
-            "exams",
-            "&&",
+            "exams,",
             "but",
             "if",
             "a",
@@ -15906,7 +15791,7 @@
     "MDIA3007": {
         "condition": {
             "original": "Prerequisite: 48 units of credit overall, and enrolment in a Media program, or a Creative Writing, English, FIlm Studies or MCT major or minor. Students must have a WAM of 65 to be eligible for this course.<br/><br/>",
-            "processed": "48UOC && enrolment in a Media program || a Creative Writing || English || FIlm Studies || MCT major || minor. must have 65WAM to be eligible for this course"
+            "processed": "48UOC && enrolment in a Media program || a Creative Writing, English, FIlm Studies || MCT major || minor. must have 65WAM to be eligible for this course"
         },
         "tokens": [
             "(",
@@ -15920,10 +15805,8 @@
             "||",
             "a",
             "Creative",
-            "Writing",
-            "||",
-            "English",
-            "||",
+            "Writing,",
+            "English,",
             "FIlm",
             "Studies",
             "||",
@@ -16459,7 +16342,7 @@
     "MUSC3802": {
         "condition": {
             "original": "Prerequisite: 24uoc in MUSC courses and enrolment in one of the following streams, Music Creative Practice, Music Inquiry, Music Pedagogy, Musicology, or Sonic Arts<br/><br/>",
-            "processed": "24UOC in MUSC courses && enrolment in one of the following streams || Music Creative Practice || Music Inquiry || Music Pedagogy || Musicology || Sonic Arts"
+            "processed": "24UOC in MUSC courses && enrolment in one of the following streams, Music Creative Practice, Music Inquiry, Music Pedagogy, Musicology || Sonic Arts"
         },
         "tokens": [
             "(",
@@ -16474,18 +16357,14 @@
             "of",
             "the",
             "following",
-            "streams",
-            "||",
+            "streams,",
             "Music",
             "Creative",
-            "Practice",
-            "||",
+            "Practice,",
             "Music",
-            "Inquiry",
-            "||",
+            "Inquiry,",
             "Music",
-            "Pedagogy",
-            "||",
+            "Pedagogy,",
             "Musicology",
             "||",
             "Sonic",
@@ -16841,12 +16720,11 @@
     "MUSC4101": {
         "condition": {
             "original": "Prerequisite: Level 1, 2 and 3 core Music courses and enrolment in a Music single or dual degree program; or 48 UoC overall including MUSC1602 or MUSC1604, and MUSC2116 and enrolment in a Music major in an Arts program<br/><br/>",
-            "processed": "L1 && 2 && 3 core Music courses && enrolment in a Music single || dual degree program; || 48UOC && MUSC1602 || MUSC1604 && MUSC2116 && enrolment in a Music major in an Arts program"
+            "processed": "L1, 2 && 3 core Music courses && enrolment in a Music single || dual degree program; || 48UOC && MUSC1602 || MUSC1604 && MUSC2116 && enrolment in a Music major in an Arts program"
         },
         "tokens": [
             "(",
-            "L1",
-            "&&",
+            "L1,",
             "2",
             "&&",
             "3",
@@ -16883,7 +16761,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, L1"
+        "broke at": "Index 1, L1,"
     },
     "MUSC4102": {
         "condition": {
@@ -17033,12 +16911,11 @@
     "NEUR2201": {
         "condition": {
             "original": "Prerequisites: 36 UOC, which must include 12 UOC of BABS / BIOS courses (or equivalent DPST courses) OR 12 UOC of PSYC courses<br/><br/>",
-            "processed": "36UOC || which must include 12UOC of BABS / BIOS courses (or equivalent DPST courses) || 12UOC of PSYC courses"
+            "processed": "36UOC, which must include 12UOC of BABS / BIOS courses (or equivalent DPST courses) || 12UOC of PSYC courses"
         },
         "tokens": [
             "(",
-            "36UOC",
-            "||",
+            "36UOC,",
             "which",
             "must",
             "include",
@@ -17061,7 +16938,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 3, which"
+        "broke at": "Index 1, 36UOC,"
     },
     "NEUR4411": {
         "condition": {
@@ -17523,7 +17400,7 @@
     "PHAR2011": {
         "condition": {
             "original": "Prerequisite: 6 UOC Level 1 Biology (BABS or BIOS ), 12 UOC Level 1 Chemistry, 6 UOC Level 1 Mathematics and Physiology 1A (Note: Medicinal Chemistry students may substitute BIOC2101 for Physiology 1A) or equivalent DPST courses.<br/><br/>",
-            "processed": "6UOC L1 Biology (BABS || BIOS ) && 12UOC L1 Chemistry && 6UOC L1 Mathematics && Physiology 1A (Note: Medicinal Chemistry may substitute BIOC2101 for Physiology 1A) || equivalent DPST courses"
+            "processed": "6UOC L1 Biology (BABS || BIOS ), 12UOC L1 Chemistry, 6UOC L1 Mathematics && Physiology 1A (Note: Medicinal Chemistry may substitute BIOC2101 for Physiology 1A) || equivalent DPST courses"
         },
         "tokens": [
             "(",
@@ -17535,11 +17412,10 @@
             "||",
             "BIOS",
             ")",
-            "&&",
+            ",",
             "12UOC",
             "L1",
-            "Chemistry",
-            "&&",
+            "Chemistry,",
             "6UOC",
             "L1",
             "Mathematics",
@@ -17890,15 +17766,14 @@
     "PPEC1001": {
         "condition": {
             "original": "Prerequisite: Enrolment in a Politics, Philosophy and Economics program<br/><br/>",
-            "processed": "Enrolment in a Politics && Philosophy && Economics program"
+            "processed": "Enrolment in a Politics, Philosophy && Economics program"
         },
         "tokens": [
             "(",
             "Enrolment",
             "in",
             "a",
-            "Politics",
-            "&&",
+            "Politics,",
             "Philosophy",
             "&&",
             "Economics",
@@ -17910,7 +17785,7 @@
     "PPEC2001": {
         "condition": {
             "original": "Prerequisite: 24 units of credit overall, including PPEC1001, and enrolment in a Politics, Philosophy and Economics program<br/><br/>",
-            "processed": "24UOC && PPEC1001 && enrolment in a Politics && Philosophy && Economics program"
+            "processed": "24UOC && PPEC1001 && enrolment in a Politics, Philosophy && Economics program"
         },
         "tokens": [
             "(",
@@ -17921,8 +17796,7 @@
             "enrolment",
             "in",
             "a",
-            "Politics",
-            "&&",
+            "Politics,",
             "Philosophy",
             "&&",
             "Economics",
@@ -17934,7 +17808,7 @@
     "PPEC3001": {
         "condition": {
             "original": "Prerequisite: 72 units of credit overall, including PPEC2001, and enrolment in a Politics, Philosophy and Economics program<br/><br/>",
-            "processed": "72UOC && PPEC2001 && enrolment in a Politics && Philosophy && Economics program"
+            "processed": "72UOC && PPEC2001 && enrolment in a Politics, Philosophy && Economics program"
         },
         "tokens": [
             "(",
@@ -17945,8 +17819,7 @@
             "enrolment",
             "in",
             "a",
-            "Politics",
-            "&&",
+            "Politics,",
             "Philosophy",
             "&&",
             "Economics",
@@ -18293,7 +18166,7 @@
     "SCIF1131": {
         "condition": {
             "original": "Enrolment in BSc (Adv. Science), BAdvSci(Hons), BSc (Adv. Maths), BSc(AdvMath)(Hons), (incl. associated dual degrees), or BMedSci<br/><br/>",
-            "processed": "Enrolment in BSc (Adv. Science) || BAdvSci(Hons) || BSc (Adv. Maths) || BSc(AdvMath)(Hons) || (incl. associated dual degrees) || BMedSci"
+            "processed": "Enrolment in BSc (Adv. Science), BAdvSci(Hons), BSc (Adv. Maths), BSc(AdvMath)(Hons), (incl. associated dual degrees) || BMedSci"
         },
         "tokens": [
             "(",
@@ -18304,18 +18177,18 @@
             "Adv.",
             "Science",
             ")",
-            "||",
+            ",",
             "BAdvSci",
             "(",
             "Hons",
             ")",
-            "||",
+            ",",
             "BSc",
             "(",
             "Adv.",
             "Maths",
             ")",
-            "||",
+            ",",
             "BSc",
             "(",
             "AdvMath",
@@ -18323,7 +18196,7 @@
             "(",
             "Hons",
             ")",
-            "||",
+            ",",
             "(",
             "incl.",
             "associated",
@@ -18399,7 +18272,7 @@
     "SDES2116": {
         "condition": {
             "original": "SDES2116 is reserved for students in the Bachelor of Design (4802, Faculty of Art & Design), Bachelor of Architectural Computing (3267, FBE), Diploma in Innovation Management (3451, ASB),  and Design Honours (4809, Faculty of Art & Design)<br/><br/>",
-            "processed": "is reserved for in the Bachelor of Design (4802 && Faculty of Art && Design) && Bachelor of Architectural Computing (3267 && FBE) && Diploma in Innovation Management (3451 && ASB) && && Design Honours (4809 && Faculty of Art && Design)"
+            "processed": "is reserved for in the Bachelor of Design (4802, Faculty of Art && Design), Bachelor of Architectural Computing (3267, FBE), Diploma in Innovation Management (3451, ASB), && Design Honours (4809, Faculty of Art && Design)"
         },
         "tokens": [
             "(",
@@ -18412,41 +18285,37 @@
             "of",
             "Design",
             "(",
-            "4802",
-            "&&",
+            "4802,",
             "Faculty",
             "of",
             "Art",
             "&&",
             "Design",
             ")",
-            "&&",
+            ",",
             "Bachelor",
             "of",
             "Architectural",
             "Computing",
             "(",
-            "3267",
-            "&&",
+            "3267,",
             "FBE",
             ")",
-            "&&",
+            ",",
             "Diploma",
             "in",
             "Innovation",
             "Management",
             "(",
-            "3451",
-            "&&",
+            "3451,",
             "ASB",
             ")",
-            "&&",
+            ",",
             "&&",
             "Design",
             "Honours",
             "(",
-            "4809",
-            "&&",
+            "4809,",
             "Faculty",
             "of",
             "Art",
@@ -19237,20 +19106,16 @@
     "SOCW4015": {
         "condition": {
             "original": "Prerequisite: 168 UOC overall, SOCW4003, SOCW4011, SOCW4012, SOCW4013, enrolment in a Social Work program and an overall WAM of 70. Corequisite: SOCW4018<br/><br/>",
-            "processed": "168UOC && SOCW4003 && SOCW4011 && SOCW4012 && SOCW4013 && enrolment in a Social Work program && an overall 70WAM. [SOCW4018]"
+            "processed": "168UOC , SOCW4003, SOCW4011, SOCW4012, SOCW4013, enrolment in a Social Work program && an overall 70WAM. [SOCW4018]"
         },
         "tokens": [
             "(",
             "168UOC",
-            "&&",
-            "SOCW4003",
-            "&&",
-            "SOCW4011",
-            "&&",
-            "SOCW4012",
-            "&&",
-            "SOCW4013",
-            "&&",
+            ",",
+            "SOCW4003,",
+            "SOCW4011,",
+            "SOCW4012,",
+            "SOCW4013,",
             "enrolment",
             "in",
             "a",
@@ -19266,21 +19131,19 @@
             "]",
             ")"
         ],
-        "broke at": "Index 11, enrolment"
+        "broke at": "Index 2, ,"
     },
     "SOCW4016": {
         "condition": {
             "original": "Prerequisite: 168 units of credit overall, including SOCW4003, SOCW4011, SOCW4012, and SOCW4013, and enrolment in Social Work program. Corequisite: SOCW4018<br/><br/>",
-            "processed": "168UOC && SOCW4003 && SOCW4011 && SOCW4012 && SOCW4013 && enrolment in Social Work program. [SOCW4018]"
+            "processed": "168UOC && SOCW4003, SOCW4011, SOCW4012 && SOCW4013 && enrolment in Social Work program. [SOCW4018]"
         },
         "tokens": [
             "(",
             "168UOC",
             "&&",
-            "SOCW4003",
-            "&&",
-            "SOCW4011",
-            "&&",
+            "SOCW4003,",
+            "SOCW4011,",
             "SOCW4012",
             "&&",
             "SOCW4013",
@@ -19295,7 +19158,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 11, enrolment"
+        "broke at": "Index 3, SOCW4003,"
     },
     "SOCW4017": {
         "condition": {
@@ -19680,14 +19543,12 @@
     "SOSS3002": {
         "condition": {
             "original": "Prerequisite: SOSS/SRAP1000, SOSS/SRAP1001,  SOSS/SRAP2001, and either ARTS2871 or SRAP2002.<br/>Equivalent SRAP3002<br/><br/>",
-            "processed": "SOSS/SRAP1000 && SOSS/SRAP1001 && SOSS/SRAP2001 && ARTS2871 || SRAP2002. Equivalent SRAP3002"
+            "processed": "SOSS/SRAP1000, SOSS/SRAP1001, SOSS/SRAP2001 && ARTS2871 || SRAP2002. Equivalent SRAP3002"
         },
         "tokens": [
             "(",
-            "SOSS/SRAP1000",
-            "&&",
-            "SOSS/SRAP1001",
-            "&&",
+            "SOSS/SRAP1000,",
+            "SOSS/SRAP1001,",
             "SOSS/SRAP2001",
             "&&",
             "ARTS2871",
@@ -19697,7 +19558,7 @@
             "SRAP3002",
             ")"
         ],
-        "broke at": "Index 1, SOSS/SRAP1000"
+        "broke at": "Index 1, SOSS/SRAP1000,"
     },
     "SOSS3003": {
         "condition": {
@@ -19718,16 +19579,13 @@
     "SOSS3006": {
         "condition": {
             "original": "Prerequisite: SOSS/SRAP1000, SOSS/SRAP1001, SOSS/SRAP2001, DIPP1112 or CDEV1112, and enrolment in a Social Science or Social Research and Policy program.<br/>Equivalent: SRAP3006<br/><br/>",
-            "processed": "SOSS/SRAP1000 || SOSS/SRAP1001 || SOSS/SRAP2001 || DIPP1112 || CDEV1112 && enrolment in a Social Science || Social Research && Policy program. Equivalent: SRAP3006"
+            "processed": "SOSS/SRAP1000, SOSS/SRAP1001, SOSS/SRAP2001, DIPP1112 || CDEV1112 && enrolment in a Social Science || Social Research && Policy program. Equivalent: SRAP3006"
         },
         "tokens": [
             "(",
-            "SOSS/SRAP1000",
-            "||",
-            "SOSS/SRAP1001",
-            "||",
-            "SOSS/SRAP2001",
-            "||",
+            "SOSS/SRAP1000,",
+            "SOSS/SRAP1001,",
+            "SOSS/SRAP2001,",
             "DIPP1112",
             "||",
             "CDEV1112",
@@ -19747,7 +19605,7 @@
             "SRAP3006",
             ")"
         ],
-        "broke at": "Index 1, SOSS/SRAP1000"
+        "broke at": "Index 1, SOSS/SRAP1000,"
     },
     "SOSS3007": {
         "condition": {
@@ -20592,27 +20450,20 @@
     "ZHSS2600": {
         "condition": {
             "original": "Prerequisite: Any 2 of ZHSS1201, ZHSS1202, ZHSS1301, ZHSS1302, ZHSS1401, ZHSS1402, ZBUS1101, ZBUS1103 or ZGEN2240 with Head of School consent.<br/><br/>",
-            "processed": "Any 2 of ZHSS1201 || ZHSS1202 || ZHSS1301 || ZHSS1302 || ZHSS1401 || ZHSS1402 || ZBUS1101 || ZBUS1103 || ZGEN2240 with Head of School consent"
+            "processed": "Any 2 of ZHSS1201, ZHSS1202, ZHSS1301, ZHSS1302, ZHSS1401, ZHSS1402, ZBUS1101, ZBUS1103 || ZGEN2240 with Head of School consent"
         },
         "tokens": [
             "(",
             "Any",
             "2",
             "of",
-            "ZHSS1201",
-            "||",
-            "ZHSS1202",
-            "||",
-            "ZHSS1301",
-            "||",
-            "ZHSS1302",
-            "||",
-            "ZHSS1401",
-            "||",
-            "ZHSS1402",
-            "||",
-            "ZBUS1101",
-            "||",
+            "ZHSS1201,",
+            "ZHSS1202,",
+            "ZHSS1301,",
+            "ZHSS1302,",
+            "ZHSS1401,",
+            "ZHSS1402,",
+            "ZBUS1101,",
             "ZBUS1103",
             "||",
             "ZGEN2240",
@@ -20881,7 +20732,7 @@
     "ARTS3812": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Development Studies, or Politics and International Relations. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations || Development Studies || Politics && International Relations. || 48UOC && enrolment in an International Studies program"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Development Studies || Politics && International Relations. || 48UOC && enrolment in an International Studies program"
         },
         "tokens": [
             "(",
@@ -20899,8 +20750,7 @@
             "of",
             "the",
             "following",
-            "specialisations",
-            "||",
+            "specialisations,",
             "Development",
             "Studies",
             "||",
@@ -20924,7 +20774,7 @@
     "ARTS3814": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Australian Studies, International Relations, Politics, or Politics and International Relations<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Australian Studies || International Relations || Politics || Politics && International Relations"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Australian Studies, International Relations, Politics || Politics && International Relations"
         },
         "tokens": [
             "(",
@@ -20942,14 +20792,11 @@
             "of",
             "the",
             "following",
-            "streams",
-            "||",
+            "streams,",
             "Australian",
-            "Studies",
-            "||",
+            "Studies,",
             "International",
-            "Relations",
-            "||",
+            "Relations,",
             "Politics",
             "||",
             "Politics",

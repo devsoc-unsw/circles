@@ -336,7 +336,7 @@
     },
     "ARCH1101": {
         "original": "Currently enrolled in program 3261 Architectural Studies, 3268 Computational Design, or 3635 Civil Engineering with Architecture (Hons)<br/><br/>",
-        "processed": "Currently program 3261 Architectural Studies || 3268 Computational Design || 3635 Civil Engineering with Architecture (Hons)"
+        "processed": "Currently program 3261 Architectural Studies, 3268 Computational Design || 3635 Civil Engineering with Architecture (Hons)"
     },
     "ARCH1102": {
         "original": "Prerequisite: ARCH1101<br/><br/>",
@@ -1080,7 +1080,7 @@
     },
     "ARTS2852": {
         "original": "Prerequisite: 24 units of credit at level 1, and enrolment in a Politics, Philosophy, and Economics program or a Politics and IR major or a Development Studies major<br/><br/>",
-        "processed": "24UOC in L1 && enrolment in a Politics && Philosophy && Economics program || a Politics && IR major || a Development Studies major"
+        "processed": "24UOC in L1 && enrolment in a Politics, Philosophy && Economics program || a Politics && IR major || a Development Studies major"
     },
     "ARTS2870": {
         "original": "Prerequisite: 24 units of credit at Level 1<br/><br/>",
@@ -1132,19 +1132,19 @@
     },
     "ARTS3013": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in the following declared streams, Music or TPS. Or 96 UOC overall and enrolment in a Music single/dual degree. Students must have a WAM of at least 65.<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in the following declared streams || Music || TPS. || 96UOC && enrolment in a Music single/dual degree. must have 65WAM"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in the following declared streams, Music || TPS. || 96UOC && enrolment in a Music single/dual degree. must have 65WAM"
     },
     "ARTS3022": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Creative Writing or English<br/>Equivalent: ARTS3046<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Creative Writing || English Equivalent: ARTS3046"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Creative Writing || English Equivalent: ARTS3046"
     },
     "ARTS3023": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Creative Writing or English<br/>Equivalent: ARTS3051<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Creative Writing || English Equivalent: ARTS3051"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Creative Writing || English Equivalent: ARTS3051"
     },
     "ARTS3025": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Creative Writing or English<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Creative Writing || English"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Creative Writing || English"
     },
     "ARTS3030": {
         "original": "Prerequisite: 48 UOC, including 6 UOC at Level 1 in an English Major or Minor<br/><br/>",
@@ -1172,7 +1172,7 @@
     },
     "ARTS3049": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, English or Media, Culture & Technology<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || English || Media && Culture && Technology"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, English || Media, Culture && Technology"
     },
     "ARTS3050": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, English<br/><br/>",
@@ -1184,7 +1184,7 @@
     },
     "ARTS3060": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Film Studies or MCT; or ARTS1060/ARTS1090, at least 6uoc in level 2  Film Studies electives and enrolment in a Media single or double degree<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Film Studies || MCT; || (ARTS1060 || ARTS1090) && 6UOC in L2 Film Studies electives && enrolment in a Media single || double degree"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Film Studies || MCT; || (ARTS1060 || ARTS1090), 6UOC in L2 Film Studies electives && enrolment in a Media single || double degree"
     },
     "ARTS3061": {
         "original": "Prerequisite: 48 UOC overall, including ARTS1060 or ARTS1064, and ARTS2065. Or 66 UOC overall and enrolled in a single or double degree Media (Screen and Sound Production) program<br/><br/>",
@@ -1196,11 +1196,11 @@
     },
     "ARTS3063": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Film Studies or Media, Culture & Technology<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Film Studies || Media && Culture && Technology"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Film Studies || Media, Culture && Technology"
     },
     "ARTS3064": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Film Studies or MCT<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Film Studies || MCT"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Film Studies || MCT"
     },
     "ARTS3065": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Film Studies<br/><br/>",
@@ -1208,31 +1208,31 @@
     },
     "ARTS3066": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Film Studies or MCT<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Film Studies || MCT"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Film Studies || MCT"
     },
     "ARTS3090": {
         "original": "Prerequisite: 48 UOC overall, including 6 uoc at Level 1 and 6 uoc at Level 2 in Media, Culture and Technology<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in Media && Culture && Technology"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in Media, Culture && Technology"
     },
     "ARTS3091": {
         "original": "Prerequisite: 48 uoc overall, including 6 uoc at level 1 and 6 uoc at level 2 in one of the following streams, MCT. Or 6 uoc  level 1 and 6 uoc level 2 Prescribed Media Electives and enrolment in a Media single or double degreel program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || MCT. || 6UOC L1 && 6UOC L2 Media Electives && enrolment in a Media single || double degreel program"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, MCT. || 6UOC L1 && 6UOC L2 Media Electives && enrolment in a Media single || double degreel program"
     },
     "ARTS3092": {
         "original": "Prerequisite: 48 uoc overall, including 6 uoc at level 1 and 6 uoc at level 2 in one of the following streams, MCT. Or 6 uoc  level 1 and 6 uoc level 2 Prescribed Media Electives and enrolment in a Media single or double degreel program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || MCT. || 6UOC L1 && 6UOC L2 Media Electives && enrolment in a Media single || double degreel program"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, MCT. || 6UOC L1 && 6UOC L2 Media Electives && enrolment in a Media single || double degreel program"
     },
     "ARTS3093": {
         "original": "Prerequisite: 48 uoc overall, including 6 uoc at level 1 and 6 uoc at level 2 in one of the following streams, MCT. Or 6 uoc  level 1 and 6 uoc level 2 Prescribed Media Electives and enrolment in a Media single or double degreel program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || MCT. || 6UOC L1 && 6UOC L2 Media Electives && enrolment in a Media single || double degreel program"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, MCT. || 6UOC L1 && 6UOC L2 Media Electives && enrolment in a Media single || double degreel program"
     },
     "ARTS3096": {
         "original": "Prerequisite: 48 uoc overall, including 6 uoc at level 1 and 6 uoc at level 2 in one of the following streams, MCT. Or 6 uoc  level 1 and 6 uoc level 2 Prescribed Media Electives and enrolment in a Media single or double degreel program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || MCT. || 6UOC L1 && 6UOC L2 Media Electives && enrolment in a Media single || double degreel program"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, MCT. || 6UOC L1 && 6UOC L2 Media Electives && enrolment in a Media single || double degreel program"
     },
     "ARTS3097": {
         "original": "Prerequisite: 48 uoc overall, including 6 uoc at level 1 and 6 uoc at level 2 in one of the following streams, MCT. Or 6 uoc  level 1 and 6 uoc level 2 Prescribed Media Electives and enrolment in a Media single or double degreel program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || MCT. || 6UOC L1 && 6UOC L2 Media Electives && enrolment in a Media single || double degreel program"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, MCT. || 6UOC L1 && 6UOC L2 Media Electives && enrolment in a Media single || double degreel program"
     },
     "ARTS3122": {
         "original": "Prerequisite: 48 uoc overall, including 6 uoc at level 1 and 6 uoc at level 2 in the Theatre & Performance Studies Stream<br/><br/>",
@@ -1240,31 +1240,31 @@
     },
     "ARTS3123": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Dance Studies or Theatre & Performance Studies<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Dance Studies || Theatre && Performance Studies"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Dance Studies || Theatre && Performance Studies"
     },
     "ARTS3124": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Theatre & Performance Studies<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams && Theatre && Performance Studies"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Theatre && Performance Studies"
     },
     "ARTS3125": {
         "original": "Prerequisite: 48 uoc overall, including 6 uoc at level 1 and 6 uoc at level 2 in one of the following specialisations, MCT or\u00a0Theatre & Performance Studies. Or 66 uoc overall and enrolled in a single or dual award Media (S&SP) program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations && MCT or\u00a0Theatre && Performance Studies. || 66UOC && a single || dual award Media (S&SP) program"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, MCT or\u00a0Theatre && Performance Studies. || 66UOC && a single || dual award Media (S&SP) program"
     },
     "ARTS3130": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Dance Studies or Theatre & Performance Studies. Or 72 UOC overall and enrolment in an Art & Design program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Dance Studies || Theatre && Performance Studies. || 72UOC && enrolment in an Art && Design program"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Dance Studies || Theatre && Performance Studies. || 72UOC && enrolment in an Art && Design program"
     },
     "ARTS3131": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams,  Australian Studies or Theatre & Performance Studies. Excluded: ARTS2124<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Australian Studies || Theatre && Performance Studies"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Australian Studies || Theatre && Performance Studies"
     },
     "ARTS3132": {
         "original": "Prerequisites: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Theatre and Performance Studies<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams && Theatre && Performance Studies"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Theatre && Performance Studies"
     },
     "ARTS3212": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Asian Studies, Development Studies, Global Development or History. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations || Asian Studies || Development Studies || Global Development || History. || 48UOC && enrolment in an International Studies program"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Asian Studies, Development Studies, Global Development || History. || 48UOC && enrolment in an International Studies program"
     },
     "ARTS3216": {
         "original": "Prerequisite: 48 UOC including 6 UOC at level 1 and 6 UOC at level 2 in Asian Studies. Or 48 UOC including 12 UOC in Chinese Studies language courses. Or 48 UOC and enrolment in an International Studies single or double degree (2017 onwards)<br/><br/>",
@@ -1276,11 +1276,11 @@
     },
     "ARTS3218": {
         "original": "Prerequisiste: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Asian Studies, Gender Studies, or History; or 48 UOC overall, including 12 UOC in Japanese Studies language courses<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Asian Studies || Gender Studies || History; || 48UOC && 12UOC in Japanese Studies language courses"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Asian Studies, Gender Studies || History; || 48UOC && 12UOC in Japanese Studies language courses"
     },
     "ARTS3220": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Asian Studies or History. Or 48 UOC overall and enrolment in an International Studies single or dual program (2017 onwards)<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Asian Studies || History. || 48UOC && enrolment in an International Studies single || dual program (2017 onwards)"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Asian Studies || History. || 48UOC && enrolment in an International Studies single || dual program (2017 onwards)"
     },
     "ARTS3240": {
         "original": "Prerequisite: 72 uoc overall and enrolment in an Environmental Humanities major or minor<br/><br/>",
@@ -1288,11 +1288,11 @@
     },
     "ARTS3241": {
         "original": "Prerequisite: 48 UOC including 6 UOC at lv 1 and 6 UOC at lv 2 in one of the following streams, Development Studies, Environmental Humanities, Geographical Studies or Global Development. Or 48 UOC and enrolment in an International Studies program<br/><br/>",
-        "processed": "48UOC && 6UOC at lv 1 && 6UOC at lv 2 in one of the following streams || Development Studies || Environmental Humanities || Geographical Studies || Global Development. || 48UOC && enrolment in an International Studies program"
+        "processed": "48UOC && 6UOC at lv 1 && 6UOC at lv 2 in one of the following streams, Development Studies, Environmental Humanities, Geographical Studies || Global Development. || 48UOC && enrolment in an International Studies program"
     },
     "ARTS3242": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Environmental Humanities, Geographical Studies or History. Or 48 UOC overall and enrolment in an International Studies single or dual program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Environmental Humanities || Geographical Studies || History. || 48UOC && enrolment in an International Studies single || dual program"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Environmental Humanities, Geographical Studies || History. || 48UOC && enrolment in an International Studies single || dual program"
     },
     "ARTS3243": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Environmental Humanities<br/><br/>",
@@ -1300,7 +1300,7 @@
     },
     "ARTS3245": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Environmental Humanities or Geographical Studies<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Environmental Humanities || Geographical Studies"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Environmental Humanities || Geographical Studies"
     },
     "ARTS3270": {
         "original": "Prerequisite: 72uoc overall, including ARTS1270 and enrolment in a History major or minor<br/><br/>",
@@ -1308,7 +1308,7 @@
     },
     "ARTS3279": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Australian Studies or History<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Australian Studies || History"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Australian Studies || History"
     },
     "ARTS3283": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, History<br/><br/>",
@@ -1324,15 +1324,15 @@
     },
     "ARTS3292": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Australian Studies or History. Or 48 UOC and enrolment in an International Studies single or dual program (2017 onwards)<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Australian Studies || History. || 48UOC && enrolment in an International Studies single || dual program (2017 onwards)"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Australian Studies || History. || 48UOC && enrolment in an International Studies single || dual program (2017 onwards)"
     },
     "ARTS3295": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, European Studies or History; or 48 UOC overall, including 12 UOC in German Studies language courses<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || European Studies || History; || 48UOC && 12UOC in German Studies language courses"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, European Studies || History; || 48UOC && 12UOC in German Studies language courses"
     },
     "ARTS3330": {
         "original": "Prerequisite: 72 units of credit overall, and enrolment in a language major stream - Chinese Studies, French Studies, German Studies, Japanese Studies, Korean Studies, or Spanish Studies<br/><br/>",
-        "processed": "72UOC && enrolment in a language major stream - Chinese Studies || French Studies || German Studies || Japanese Studies || Korean Studies || Spanish Studies"
+        "processed": "72UOC && enrolment in a language major stream - Chinese Studies, French Studies, German Studies, Japanese Studies, Korean Studies || Spanish Studies"
     },
     "ARTS3360": {
         "original": "Prerequisite: 72 units of credit overall and enrolment in a Philosophy major or minor<br/><br/>",
@@ -1388,7 +1388,7 @@
     },
     "ARTS3458": {
         "original": "Prerequisite: 72uoc overall, including ARTS3453, ARTS2452, or ARTS3454  and enrolment in an Advanced Chinese Studies major/minor; or 72uoc overall, including ARTS2451 or ARTS2462 and enrolment in a Chinese Studies major/minor<br/><br/>",
-        "processed": "72UOC && ARTS3453 || ARTS2452 || ARTS3454 && enrolment in an Advanced Chinese Studies major/minor; || 72UOC && ARTS2451 || ARTS2462 && enrolment in a Chinese Studies major/minor"
+        "processed": "72UOC && ARTS3453, ARTS2452 || ARTS3454 && enrolment in an Advanced Chinese Studies major/minor; || 72UOC && ARTS2451 || ARTS2462 && enrolment in a Chinese Studies major/minor"
     },
     "ARTS3462": {
         "original": "Prerequisite: ARTS2452 or ARTS3451 or ARTS3452 or ARTS3453 or ARTS3454 or ARTS3463 or language placement approval<br/><br/>",
@@ -1428,7 +1428,7 @@
     },
     "ARTS3490": {
         "original": "Prerequisite: Completion of one of the following - ARTS2481, ARTS3480, ARTS3481, ARTS3482, or ARTS3483, or language placement approval<br/><br/>",
-        "processed": "one of the following - ARTS2481 || ARTS3480 || ARTS3481 || ARTS3482 || ARTS3483 || language placement approval"
+        "processed": "one of the following - ARTS2481, ARTS3480, ARTS3481, ARTS3482 || ARTS3483 || language placement approval"
     },
     "ARTS3491": {
         "original": "Prerequisite: ARTS3481 or ARTS3482 or ARTS3483 or language placement approval<br/><br/>",
@@ -1544,7 +1544,7 @@
     },
     "ARTS3750": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Development Studies, Geographical Studies or Global Development. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations || Development Studies || Geographical Studies || Global Development. || 48UOC && enrolment in an International Studies program"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Development Studies, Geographical Studies || Global Development. || 48UOC && enrolment in an International Studies program"
     },
     "ARTS3751": {
         "original": "Prerequisite: 72 units of credit overall, and enrolment in a Global Development major or Development Studies major<br/><br/>",
@@ -1552,15 +1552,15 @@
     },
     "ARTS3755": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Development Studies, Geographical Studies or Global Development. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations || Development Studies || Geographical Studies || Global Development. || 48UOC && enrolment in an International Studies program"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Development Studies, Geographical Studies || Global Development. || 48UOC && enrolment in an International Studies program"
     },
     "ARTS3756": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Development Studies, Geographical Studies or Global Development. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations || Development Studies || Geographical Studies || Global Development. || 48UOC && enrolment in an International Studies program"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Development Studies, Geographical Studies || Global Development. || 48UOC && enrolment in an International Studies program"
     },
     "ARTS3757": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Development Studies or Global Development<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Development Studies || Global Development"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Development Studies || Global Development"
     },
     "ARTS3758": {
         "original": "Prerequisite: ARTS3759 and enrolment with consent<br/><br/>",
@@ -1576,7 +1576,7 @@
     },
     "ARTS3783": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Politics and International Relations. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations && Politics && International Relations. || 48UOC && enrolment in an International Studies program"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Politics && International Relations. || 48UOC && enrolment in an International Studies program"
     },
     "ARTS3786": {
         "original": "Prerequisite: 48UOC overall, including 6UOC at level 1 and 6UOC at level 2 in European Studies or History; or 48UOC overall, including 12UOC in German Studies language courses. Or 48UOC and enrolment in an International Studies program<br/><br/>",
@@ -1592,35 +1592,35 @@
     },
     "ARTS3810": {
         "original": "Prerequisite: 72 units of credit overall, and  enrolment in an International Relations, Politics, or Politics & International Relations major<br/><br/>",
-        "processed": "72UOC && enrolment in an International Relations || Politics || Politics && International Relations major"
+        "processed": "72UOC && enrolment in an International Relations, Politics || Politics && International Relations major"
     },
     "ARTS3816": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, International Relations or Politics. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations || International Relations || Politics. || 48UOC && enrolment in an International Studies program"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, International Relations || Politics. || 48UOC && enrolment in an International Studies program"
     },
     "ARTS3817": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, International Relations or Politics. Or 48 UOC overall and enrolment in an International Studies program.    <br/>Excluded: ARTS3813<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations || International Relations || Politics. || 48UOC && enrolment in an International Studies program"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, International Relations || Politics. || 48UOC && enrolment in an International Studies program"
     },
     "ARTS3819": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Politics and International Relations. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations && Politics && International Relations. || 48UOC && enrolment in an International Studies program"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Politics && International Relations. || 48UOC && enrolment in an International Studies program"
     },
     "ARTS3820": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Politics and International Relations<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations && Politics && International Relations"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Politics && International Relations"
     },
     "ARTS3821": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Politics and International Relations<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations && Politics && International Relations"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Politics && International Relations"
     },
     "ARTS3822": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Politics and International Relations<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations && Politics && International Relations"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Politics && International Relations"
     },
     "ARTS3850": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Politics and International Relations<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations && Politics && International Relations"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Politics && International Relations"
     },
     "ARTS3870": {
         "original": "Prerequisite: 72 units of credit overall, and enrolment in a Sociology & Anthropology major or extended minor<br/><br/>",
@@ -1632,23 +1632,23 @@
     },
     "ARTS3872": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Media, Culture & Technology or Sociology & Anthropology. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations && Media && Culture && Technology || Sociology && Anthropology. || 48UOC && enrolment in an International Studies program"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Media, Culture && Technology || Sociology && Anthropology. || 48UOC && enrolment in an International Studies program"
     },
     "ARTS3874": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Australian Studies, Development Studies, Geographical Studies, Global Development, or Sociology & Anthropology<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations || Australian Studies || Development Studies || Geographical Studies || Global Development || Sociology && Anthropology"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Australian Studies, Development Studies, Geographical Studies, Global Development || Sociology && Anthropology"
     },
     "ARTS3875": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Australian Studies, Development Studies, or Sociology & Anthropology<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Australian Studies || Development Studies || Sociology && Anthropology"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Australian Studies, Development Studies || Sociology && Anthropology"
     },
     "ARTS3883": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Asian Studies or Sociology & Anthropology<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Asian Studies || Sociology && Anthropology"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Asian Studies || Sociology && Anthropology"
     },
     "ARTS3885": {
         "original": "Prerequisites: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Sociology & Anthropology. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations && Sociology && Anthropology. || 48UOC && enrolment in an International Studies program"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Sociology && Anthropology. || 48UOC && enrolment in an International Studies program"
     },
     "ARTS3886": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC level 1 and 6 UOC level 2 in one of the following streams, Criminology/S&A. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
@@ -1656,11 +1656,11 @@
     },
     "ARTS3900": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Gender Studies or History.<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Gender Studies || History"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Gender Studies || History"
     },
     "ARTS3901": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Gender Studies or Philosophy.<br/>Excluded: ARTS3367<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Gender Studies || Philosophy"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Gender Studies || Philosophy"
     },
     "ARTS3991": {
         "original": "Prerequisite: 72 uoc overall, and enrolment in an Arts & Social Sciences major in an Arts & Social Sciences single or double degree program. Consent required<br/><br/>",
@@ -1684,11 +1684,11 @@
     },
     "ARTS4266": {
         "original": "Prerequisite: Enrolment in  a School of Social Sciences, Asian Studies or European Studies honours program<br/><br/>",
-        "processed": "Enrolment in a School of Social Sciences || Asian Studies || European Studies honours program"
+        "processed": "Enrolment in a School of Social Sciences, Asian Studies || European Studies honours program"
     },
     "ARTS4268": {
         "original": "Prerequisite: Enrolment in  a School of Social Sciences, Asian Studies or European Studies honours program<br/><br/>",
-        "processed": "Enrolment in a School of Social Sciences || Asian Studies || European Studies honours program"
+        "processed": "Enrolment in a School of Social Sciences, Asian Studies || European Studies honours program"
     },
     "ARTS4600": {
         "original": "Prerequisite: Enrolment in the Dance Studies honours program<br/><br/>",
@@ -1728,15 +1728,15 @@
     },
     "ARTS4612": {
         "original": "Prerequisite: Enrolment in Media, Culture and Technology honours program<br/><br/>",
-        "processed": "Enrolment in Media && Culture && Technology honours program"
+        "processed": "Enrolment in Media, Culture && Technology honours program"
     },
     "ARTS4613": {
         "original": "Prerequisite: Enrolment in Media, Culture and Technology honours program<br/><br/>",
-        "processed": "Enrolment in Media && Culture && Technology honours program"
+        "processed": "Enrolment in Media, Culture && Technology honours program"
     },
     "ARTS4614": {
         "original": "Prerequisite: Enrolment in Media, Culture and Technology honours program<br/><br/>",
-        "processed": "Enrolment in Media && Culture && Technology honours program"
+        "processed": "Enrolment in Media, Culture && Technology honours program"
     },
     "ARTS4616": {
         "original": "Prerequisite: Enrolment in Theatre and Performance Studies honours program<br/><br/>",
@@ -2032,7 +2032,7 @@
     },
     "ATSI3008": {
         "original": "Prerequisite: 120 units of credit overall, enrolment in a major in Indigenous Studies and enrolled in the final semester of an Arts Faculty single or dual degree program<br/><br/>",
-        "processed": "120UOC && enrolment in a major in Indigenous Studies && the final semester of an Arts Faculty single || dual degree program"
+        "processed": "120UOC , enrolment in a major in Indigenous Studies && the final semester of an Arts Faculty single || dual degree program"
     },
     "ATSI3017": {
         "original": "Prerequisite: 36 units of credit<br/><br/>",
@@ -2100,7 +2100,7 @@
     },
     "AVIA2013": {
         "original": "Prerequisite: 18 UOC from either AVIA1401, AVIA1901, MATH1041 or PHYS1211<br/><br/>",
-        "processed": "18UOC from AVIA1401 || AVIA1901 || MATH1041 || PHYS1211"
+        "processed": "18UOC from AVIA1401, AVIA1901, MATH1041 || PHYS1211"
     },
     "AVIA2014": {
         "original": "",
@@ -3200,7 +3200,7 @@
     },
     "CHEM2521": {
         "original": "This is the main Level 2 Organic Chemistry course taught within the School of Chemistry.<br/>It assumes knowledge of CHEM1011 and CHEM1021 or CHEM1031 and CHEM1041 or CHEM1051 and CHEM1061, AND CHEM2041. It is a core element in Chemistry major programs. It is also required for industrial chemistry, biochemistry and medicinal chemistry programs.<br/><br/>",
-        "processed": "This is the main L2 Organic Chemistry course taught within the School of Chemistry. It assumes knowledge of CHEM1011 && CHEM1021 || CHEM1031 && CHEM1041 || CHEM1051 && CHEM1061 && CHEM2041. It is a core element in Chemistry major programs. It is also required for industrial chemistry && biochemistry && medicinal chemistry programs"
+        "processed": "This is the main L2 Organic Chemistry course taught within the School of Chemistry. It assumes knowledge of CHEM1011 && CHEM1021 || CHEM1031 && CHEM1041 || CHEM1051 && CHEM1061 && CHEM2041. It is a core element in Chemistry major programs. It is also required for industrial chemistry, biochemistry && medicinal chemistry programs"
     },
     "CHEM2531": {
         "original": "Prerequisite: CHEM2041 Exclusion: CHEM2031, CHEM2828, CHEM2839<br/><br/>",
@@ -3312,7 +3312,7 @@
     },
     "CHEM6701": {
         "original": "12 UOC of CHEM2011, CHEM2021, CHEM2031, CHEM2839, CHEM2041 & CHEM2828<br/><br/>",
-        "processed": "12UOC of CHEM2011 && CHEM2021 && CHEM2031 && CHEM2839 && CHEM2041 && CHEM2828"
+        "processed": "12UOC of CHEM2011, CHEM2021, CHEM2031, CHEM2839, CHEM2041 && CHEM2828"
     },
     "CHEN6701": {
         "original": "",
@@ -4007,7 +4007,7 @@
     },
     "CRIM3025": {
         "original": "Prerequisite: 96 uoc including CRIM1010, CRIM1011 and CRIM2042, WAM 75, and in the final year of a Criminology major or Criminology & Criminal Justice single or double degree. Students in program 4034 are not eligible to enrol. Consent required.<br/><br/>",
-        "processed": "96UOC && CRIM1010 && CRIM1011 && CRIM2042 && 75WAM && in the final year of a Criminology major || Criminology && Criminal Justice single || double degree. in program 4034 are not eligible to enrol. Consent required"
+        "processed": "96UOC && CRIM1010, CRIM1011 && CRIM2042, 75WAM && in the final year of a Criminology major || Criminology && Criminal Justice single || double degree. in program 4034 are not eligible to enrol. Consent required"
     },
     "CRIM4001": {
         "original": "Prerequisite: Enrolment in the Criminology honours program<br/><br/>",
@@ -4888,15 +4888,15 @@
     },
     "DPBS1001": {
         "original": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-        "processed": "6UOC of any DPGE && DPST && DPBS && a Global Diploma program"
+        "processed": "6UOC of any DPGE, DPST, DPBS && a Global Diploma program"
     },
     "DPBS1002": {
         "original": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-        "processed": "6UOC of any DPGE && DPST && DPBS && a Global Diploma program"
+        "processed": "6UOC of any DPGE, DPST, DPBS && a Global Diploma program"
     },
     "DPBS1012": {
         "original": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-        "processed": "6UOC of any DPGE && DPST && DPBS && a Global Diploma program"
+        "processed": "6UOC of any DPGE, DPST, DPBS && a Global Diploma program"
     },
     "DPBS1100": {
         "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
@@ -4912,11 +4912,11 @@
     },
     "DPBS1110": {
         "original": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-        "processed": "6UOC of any DPGE && DPST && DPBS && a Global Diploma program"
+        "processed": "6UOC of any DPGE, DPST, DPBS && a Global Diploma program"
     },
     "DPBS1120": {
         "original": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-        "processed": "6UOC of any DPGE && DPST && DPBS && a Global Diploma program"
+        "processed": "6UOC of any DPGE, DPST, DPBS && a Global Diploma program"
     },
     "DPBS1140": {
         "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
@@ -4944,7 +4944,7 @@
     },
     "DPBS1501": {
         "original": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-        "processed": "6UOC of any DPGE && DPST && DPBS && a Global Diploma program"
+        "processed": "6UOC of any DPGE, DPST, DPBS && a Global Diploma program"
     },
     "DPBS1511": {
         "original": "Prereq: DPBS1501 + 6UoC GLDIP + enrolment in a Global Diploma program<br/><br/>",
@@ -4952,23 +4952,23 @@
     },
     "DPBS1602": {
         "original": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-        "processed": "6UOC of any DPGE && DPST && DPBS && a Global Diploma program"
+        "processed": "6UOC of any DPGE, DPST, DPBS && a Global Diploma program"
     },
     "DPBS1603": {
         "original": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-        "processed": "6UOC of any DPGE && DPST && DPBS && a Global Diploma program"
+        "processed": "6UOC of any DPGE, DPST, DPBS && a Global Diploma program"
     },
     "DPBS1609": {
         "original": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-        "processed": "6UOC of any DPGE && DPST && DPBS && a Global Diploma program"
+        "processed": "6UOC of any DPGE, DPST, DPBS && a Global Diploma program"
     },
     "DPBS1613": {
         "original": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-        "processed": "6UOC of any DPGE && DPST && DPBS && a Global Diploma program"
+        "processed": "6UOC of any DPGE, DPST, DPBS && a Global Diploma program"
     },
     "DPBS1710": {
         "original": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
-        "processed": "6UOC of any DPGE && DPST && DPBS && a Global Diploma program"
+        "processed": "6UOC of any DPGE, DPST, DPBS && a Global Diploma program"
     },
     "DPDE1001": {
         "original": "Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>",
@@ -5020,11 +5020,11 @@
     },
     "DPGE1002": {
         "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) and DPGE1001<br/><br/>",
-        "processed": "UNSW Global Diplomas only (7001 && 7002 && 7003 && 7004) && DPGE1001"
+        "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) && DPGE1001"
     },
     "DPGE1003": {
         "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004), DPGE1001 and DPGE1002<br/><br/>",
-        "processed": "UNSW Global Diplomas only (7001 && 7002 && 7003 && 7004) && DPGE1001 && DPGE1002"
+        "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004), DPGE1001 && DPGE1002"
     },
     "DPHU1001": {
         "original": "Enrolment in 7005 UNSW Global Diploma in Media and Communication Program.<br/><br/>",
@@ -5064,23 +5064,23 @@
     },
     "DPST1014": {
         "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) and prerequisite DPST1013<br/><br/>",
-        "processed": "UNSW Global Diplomas only (7001 && 7002 && 7003 && 7004) && DPST1013"
+        "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) && DPST1013"
     },
     "DPST1021": {
         "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) and corequisite DPST1013<br/><br/>",
-        "processed": "UNSW Global Diplomas only (7001 && 7002 && 7003 && 7004) && [DPST1013]"
+        "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) && [DPST1013]"
     },
     "DPST1022": {
         "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004), prerequisite DPST1021 OR DPST1023 and corequisite DPST1014<br/><br/>",
-        "processed": "UNSW Global Diplomas only (7001 || 7002 || 7003 || 7004) || DPST1021 || DPST1023 && [DPST1014]"
+        "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004), DPST1021 || DPST1023 && [DPST1014]"
     },
     "DPST1023": {
         "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) and corequisite DPST1013 <br/><br/>",
-        "processed": "UNSW Global Diplomas only (7001 && 7002 && 7003 && 7004) && [DPST1013]"
+        "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) && [DPST1013]"
     },
     "DPST1024": {
         "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) prerequisite DPST1023 OR a credit (\u226565%) in DPST1021 and corequisite DPST1014<br/><br/>",
-        "processed": "UNSW Global Diplomas only (7001 || 7002 || 7003 || 7004) DPST1023 || a credit (\u226565%) in DPST1021 && [DPST1014]"
+        "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) DPST1023 || a credit (\u226565%) in DPST1021 && [DPST1014]"
     },
     "DPST1031": {
         "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
@@ -5088,7 +5088,7 @@
     },
     "DPST1032": {
         "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) and DPST1031<br/><br/>",
-        "processed": "UNSW Global Diplomas only (7001 && 7002 && 7003 && 7004) && DPST1031"
+        "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) && DPST1031"
     },
     "DPST1041": {
         "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
@@ -5112,7 +5112,7 @@
     },
     "DPST1072": {
         "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004), DPST1013 and DPST1021 OR DPST1023<br/><br/>",
-        "processed": "UNSW Global Diplomas only (7001 && 7002 && 7003 && 7004) && DPST1013 && DPST1021 || DPST1023"
+        "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004), DPST1013 && DPST1021 || DPST1023"
     },
     "DPST1081": {
         "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
@@ -5124,7 +5124,7 @@
     },
     "DPST1092": {
         "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) and DPST1091<br/><br/>",
-        "processed": "UNSW Global Diplomas only (7001 && 7002 && 7003 && 7004) && DPST1091"
+        "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) && DPST1091"
     },
     "ECON1101": {
         "original": "Excluded: Students in BCom single or double-degree programs, except for 3155 Actl/Comm and 3521 Comm/Econ, are not allowed to enrol in this course. <br/><br/>",
@@ -5154,11 +5154,11 @@
     },
     "ECON2101": {
         "original": "Prerequisite: (ECON1101 or COMM1100) and (ECON1202, MATH1031, MATH1131, MATH1141 or MATH1151)<br/><br/>",
-        "processed": "(ECON1101 || COMM1100) && (ECON1202 || MATH1031 || MATH1131 || MATH1141 || MATH1151)"
+        "processed": "(ECON1101 || COMM1100) && (ECON1202, MATH1031, MATH1131, MATH1141 || MATH1151)"
     },
     "ECON2102": {
         "original": "Prerequisite: (ECON1102 or COMM1150) and (ECON1202, MATH1031, MATH1131, MATH1141 or MATH1151)<br/><br/>",
-        "processed": "(ECON1102 || COMM1150) && (ECON1202 || MATH1031 || MATH1131 || MATH1141 || MATH1151)"
+        "processed": "(ECON1102 || COMM1150) && (ECON1202, MATH1031, MATH1131, MATH1141 || MATH1151)"
     },
     "ECON2103": {
         "original": "Prerequisite: ECON1101 or COMM1100<br/><br/>",
@@ -5174,7 +5174,7 @@
     },
     "ECON2112": {
         "original": "Prerequisite: (ECON1101 or COMM1100) and (ECON1202, MATH1031, MATH1131, MATH1141 or MATH1151)<br/><br/>",
-        "processed": "(ECON1101 || COMM1100) && (ECON1202 || MATH1031 || MATH1131 || MATH1141 || MATH1151)"
+        "processed": "(ECON1101 || COMM1100) && (ECON1202, MATH1031, MATH1131, MATH1141 || MATH1151)"
     },
     "ECON2126": {
         "original": "Prerequisite: ECON1101 or COMM1100<br/><br/>",
@@ -5379,11 +5379,11 @@
     },
     "EDST2002": {
         "original": "Prerequisite: 72 uoc overall, including EDST1101, EDST1104, EDST1108, and EDST2003, and enrolment in an Education program. Students must have passed the Literacy and Numeracy Test for Initial Teacher Education in order to enrol into this course<br/><br/>",
-        "processed": "72UOC && EDST1101 && EDST1104 && EDST1108 && EDST2003 && enrolment in an Education program. must have passed the Literacy && Numeracy Test for Initial Teacher Education in order to enrol into this course"
+        "processed": "72UOC && EDST1101, EDST1104, EDST1108 && EDST2003 && enrolment in an Education program. must have passed the Literacy && Numeracy Test for Initial Teacher Education in order to enrol into this course"
     },
     "EDST2003": {
         "original": "Prerequisite: 24 units of credit at Level 1 including EDST1101 or EDST1104 and enrolment in one of the following teaching Programs 3446, 3462, 4053, 4054, 4058, 4059, 4061, 4062 or 4076<br/><br/>",
-        "processed": "24UOC in L1 && EDST1101 || EDST1104 && enrolment in one of the following teaching Programs 3446 || 3462 || 4053 || 4054 || 4058 || 4059 || 4061 || 4062 || 4076"
+        "processed": "24UOC in L1 && EDST1101 || EDST1104 && enrolment in one of the following teaching Programs 3446, 3462, 4053, 4054, 4058, 4059, 4061, 4062 || 4076"
     },
     "EDST2032": {
         "original": "Prerequisite: 18 units of credit at Level 1<br/><br/>",
@@ -5463,7 +5463,7 @@
     },
     "EDST6706": {
         "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053, 4054, or 4076<br/><br/>",
-        "processed": "78UOC && EDST2002 && enrolment in program 4053 || 4054 || 4076"
+        "processed": "78UOC && EDST2002 && enrolment in program 4053, 4054 || 4076"
     },
     "EDST6707": {
         "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053 or 4054<br/><br/>",
@@ -5495,7 +5495,7 @@
     },
     "EDST6716": {
         "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 3462, 4054, or 4058<br/><br/>",
-        "processed": "78UOC && EDST2002 && enrolment in program 3462 || 4054 || 4058"
+        "processed": "78UOC && EDST2002 && enrolment in program 3462, 4054 || 4058"
     },
     "EDST6717": {
         "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053 or 4054<br/><br/>",
@@ -5535,7 +5535,7 @@
     },
     "EDST6727": {
         "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in one of the following programs, 3426, 3446, 3470, 4053 or 4054<br/><br/>",
-        "processed": "78UOC && EDST2002 && enrolment in one of the following programs || 3426 || 3446 || 3470 || 4053 || 4054"
+        "processed": "78UOC && EDST2002 && enrolment in one of the following programs, 3426, 3446, 3470, 4053 || 4054"
     },
     "EDST6728": {
         "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 3446 or 3470<br/><br/>",
@@ -5655,7 +5655,7 @@
     },
     "EDST6771": {
         "original": "Prerequisite: 78 UOC overall, including EDST2002, and enrolment in program 4059, 4061, 4062, 4064, or 4066<br/><br/>",
-        "processed": "78UOC && EDST2002 && enrolment in program 4059 || 4061 || 4062 || 4064 || 4066"
+        "processed": "78UOC && EDST2002 && enrolment in program 4059, 4061, 4062, 4064 || 4066"
     },
     "EDST6772": {
         "original": "Prerequisite: EDST6771. Corerequisite: EDST6760<br/><br/>",
@@ -5663,7 +5663,7 @@
     },
     "EDST6775": {
         "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4059, 4061, 4062, 4063, 4064, or 4066<br/><br/>",
-        "processed": "78UOC && EDST2002 && enrolment in program 4059 || 4061 || 4062 || 4063 || 4064 || 4066"
+        "processed": "78UOC && EDST2002 && enrolment in program 4059, 4061, 4062, 4063, 4064 || 4066"
     },
     "EDST6776": {
         "original": "Prerequisite: EDST6775. Corerequisite: EDST6760<br/><br/>",
@@ -5671,7 +5671,7 @@
     },
     "EDST6777": {
         "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4059, 4061, 4063, or 4066<br/><br/>",
-        "processed": "78UOC && EDST2002 && enrolment in program 4059 || 4061 || 4063 || 4066"
+        "processed": "78UOC && EDST2002 && enrolment in program 4059, 4061, 4063 || 4066"
     },
     "EDST6778": {
         "original": "Prerequisite: EDST6777. Corerequisite: EDST6760<br/><br/>",
@@ -7269,11 +7269,11 @@
     },
     "LAWS1075": {
         "original": "Pre-requisite: Principles of Private Law (any one of LAWS1071, LAWS1150, JURD7150, or JURD7171)<br/><br/>",
-        "processed": "Principles of Private Law (any one of LAWS1071 || LAWS1150 || JURD7150 || JURD7171)"
+        "processed": "Principles of Private Law (any one of LAWS1071, LAWS1150, JURD7150 || JURD7171)"
     },
     "LAWS1091": {
         "original": "Prerequisite: Principles of Private Law (LAWS1150 /JURD7150), Contracts (LAWS1075/JURD7175) and Equity and Trusts (LAWS2385/JURD7285).<br/><br/>",
-        "processed": "Principles of Private Law ((LAWS1150 || JURD7150)) || Contracts ((LAWS1075 || JURD7175)) && Equity && Trusts ((LAWS2385 || JURD7285))"
+        "processed": "Principles of Private Law ((LAWS1150 || JURD7150)), Contracts ((LAWS1075 || JURD7175)) && Equity && Trusts ((LAWS2385 || JURD7285))"
     },
     "LAWS1121": {
         "original": "Prerequisite: Academic program must be 7016, Humanities Pathway Program.<br/><br/>",
@@ -7341,7 +7341,7 @@
     },
     "LAWS2383": {
         "original": "Prerequisite: Principles of Private Law (LAWS1150 /JURD7150), Contracts (LAWS1075/JURD7175) and Equity and Trusts (LAWS2385/JURD7285).<br/><br/>",
-        "processed": "Principles of Private Law ((LAWS1150 || JURD7150)) || Contracts ((LAWS1075 || JURD7175)) && Equity && Trusts ((LAWS2385 || JURD7285))"
+        "processed": "Principles of Private Law ((LAWS1150 || JURD7150)), Contracts ((LAWS1075 || JURD7175)) && Equity && Trusts ((LAWS2385 || JURD7285))"
     },
     "LAWS2384": {
         "original": "Pre-requisite: 24 UOC completed in LLB courses or 24 UOC completed in Juris Doctor courses. Juris Doctor students who commenced prior to 2013 need no pre-requisites.<br/><br/>",
@@ -7361,7 +7361,7 @@
     },
     "LAWS3017": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses including either Legal Theory (LAWS2320), Law and Social Theory (LAWS2820) or Theories of Law and Justice (LAWS2326).<br/><br/>",
-        "processed": "78UOC in LAWS courses && Legal Theory (LAWS2320) && Law && Social Theory (LAWS2820) || Theories of Law && Justice (LAWS2326)"
+        "processed": "78UOC in LAWS courses && Legal Theory (LAWS2320), Law && Social Theory (LAWS2820) || Theories of Law && Justice (LAWS2326)"
     },
     "LAWS3018": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses<br/>Co-requisite: Business Associations (LAWS1091) and Land Law (LAWS2383)<br/><br/>",
@@ -7409,7 +7409,7 @@
     },
     "LAWS3060": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Lawyers, Ethics and Justice (LAWS1230),  Resolving Civil Disputes (LAWS2371) and Court Process, Evidence & Proof (LAWS2351).<br/><br/>",
-        "processed": "78UOC in LAWS courses && Lawyers && Ethics && Justice (LAWS1230) && Resolving Civil Disputes (LAWS2371) && Court Process && Evidence && Proof (LAWS2351)"
+        "processed": "78UOC in LAWS courses && Lawyers, Ethics && Justice (LAWS1230), Resolving Civil Disputes (LAWS2371) && Court Process, Evidence && Proof (LAWS2351)"
     },
     "LAWS3064": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
@@ -7545,7 +7545,7 @@
     },
     "LAWS3170": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Resolving Civil Disputes (LAWS2371) and Lawyers, Ethics and Justice (LAWS1230)<br/>Co-requisite: Court Process, Evidence and Proof (LAWS2351)<br/><br/>",
-        "processed": "78UOC in LAWS courses && Resolving Civil Disputes (LAWS2371) && Lawyers && Ethics && Justice (LAWS1230) [Court Process && Evidence && Proof (LAWS2351)]"
+        "processed": "78UOC in LAWS courses && Resolving Civil Disputes (LAWS2371) && Lawyers, Ethics && Justice (LAWS1230) [Court Process, Evidence && Proof (LAWS2351)]"
     },
     "LAWS3181": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses.<br/><br/>",
@@ -7613,7 +7613,7 @@
     },
     "LAWS3240": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Lawyers, Ethics and Justice (LAWS1230).<br/><br/>",
-        "processed": "78UOC in LAWS courses && Lawyers && Ethics && Justice (LAWS1230)"
+        "processed": "78UOC in LAWS courses && Lawyers, Ethics && Justice (LAWS1230)"
     },
     "LAWS3248": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses. <br/>Exclusion: LAWS3021/JURD7321, LAWS3523/GENL2323, LAWS8017/JURD7617<br/><br/>",
@@ -7657,19 +7657,19 @@
     },
     "LAWS3303": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Lawyers, Ethics and Justice (LAWS1230/1210) and Resolving Civil Disputes (LAWS2371/2311)<br/><br/>",
-        "processed": "78UOC in LAWS courses && Lawyers && Ethics && Justice (LAWS1230/1210) && Resolving Civil Disputes (LAWS2371/2311)"
+        "processed": "78UOC in LAWS courses && Lawyers, Ethics && Justice (LAWS1230/1210) && Resolving Civil Disputes (LAWS2371/2311)"
     },
     "LAWS3304": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Lawyers, Ethics and Justice (LAWS1230/1210) and Resolving Civil Disputes (LAWS2371/2311)<br/><br/>",
-        "processed": "78UOC in LAWS courses && Lawyers && Ethics && Justice (LAWS1230/1210) && Resolving Civil Disputes (LAWS2371/2311)"
+        "processed": "78UOC in LAWS courses && Lawyers, Ethics && Justice (LAWS1230/1210) && Resolving Civil Disputes (LAWS2371/2311)"
     },
     "LAWS3305": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Lawyers, Ethics and Justice (LAWS1230/1210) and Resolving Civil Disputes (LAWS2371/2311)<br/><br/>",
-        "processed": "78UOC in LAWS courses && Lawyers && Ethics && Justice (LAWS1230/1210) && Resolving Civil Disputes (LAWS2371/2311)"
+        "processed": "78UOC in LAWS courses && Lawyers, Ethics && Justice (LAWS1230/1210) && Resolving Civil Disputes (LAWS2371/2311)"
     },
     "LAWS3309": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Lawyers, Ethics and Justice (LAWS1230/1210) and Resolving Civil Disputes (LAWS2371/2311)<br/><br/>",
-        "processed": "78UOC in LAWS courses && Lawyers && Ethics && Justice (LAWS1230/1210) && Resolving Civil Disputes (LAWS2371/2311)"
+        "processed": "78UOC in LAWS courses && Lawyers, Ethics && Justice (LAWS1230/1210) && Resolving Civil Disputes (LAWS2371/2311)"
     },
     "LAWS3314": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Resolving Civil Disputes (LAWS2371).<br/><br/>",
@@ -7881,7 +7881,7 @@
     },
     "LAWS3623": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Lawyers, Ethics and Justice (LAWS1230).<br/><br/>",
-        "processed": "78UOC in LAWS courses && Lawyers && Ethics && Justice (LAWS1230)"
+        "processed": "78UOC in LAWS courses && Lawyers, Ethics && Justice (LAWS1230)"
     },
     "LAWS3713": {
         "original": "Prerequisite: Completion of 78 UOC in LAWS courses including either Law in the Global Context (LAWS2270) or Public International Law (LAWS3381).<br/><br/>",
@@ -7909,7 +7909,7 @@
     },
     "LAWS9801": {
         "original": "Prerequisite: Academic Program must be Environmental Science program (3988, 3932, 3965 or 3943)<br/><br/>",
-        "processed": "Academic Program must be Environmental Science program (3988 || 3932 || 3965 || 3943)"
+        "processed": "Academic Program must be Environmental Science program (3988, 3932, 3965 || 3943)"
     },
     "MANF3100": {
         "original": "",
@@ -8518,11 +8518,11 @@
     },
     "MDCN8888": {
         "original": "Students with a WAM of \u2265 65 (see WAM calculation below) and have completed 12 Units of Credit (UOC) General Education before Term 1 in year 4, are eligible to apply.<br/>WAM Calculation<br/>The WAM is calculated from the following courses:<br/>1.\tMFAC 1521 Beginnings, Growth and Development A<br/>2.\tMFAC 1522 Beginnings, Growth and Development B<br/>3.\tMFAC 1523 Health Maintenance A<br/>4.\tMFAC 1524 Health Maintenance B<br/>5.\tMFAC 1525 Ageing and Endings A<br/>6.\tMFAC 1526 Ageing and Endings B<br/>7.\tMFAC 1527 Society & Health<br/>In addition, students are required to pass the following courses (including passing subsequent supplementary exams, but if a student fails a course then they will be ineligible):<br/>1.\tMFAC 1501 Foundations<br/>2.\tMFAC 1511 Phase 1 Portfolio<br/>3.\tMFAC 1512 End of Phase Examination<br/>4.\tMFAC 1513 Clinical and Communication Skills Examination<br/>5.\tMFAC 2514 Integrated Clinical Studies 1<br/>6.\tMFAC 2515 Integrated Clinical Studies 2<br/>7.\tMFAC 2516 Integrated Clinical Studies 3<br/>8.\tMFAC 2511 Phase 2 Portfolio<br/>9.\tMFAC 2512 Integrated Clinical Examination<br/><br/>",
-        "processed": "with a WAM of \u2265 65 (see WAM calculation below) && have 12UOC (UOC) General Education before Term 1 in year 4 && are eligible to apply. WAM Calculation The WAM is calculated from the following courses: 1.\tMFAC 1521 Beginnings && Growth && Development A 2.\tMFAC 1522 Beginnings && Growth && Development B 3.\tMFAC 1523 Health Maintenance A 4.\tMFAC 1524 Health Maintenance B 5.\tMFAC 1525 Ageing && Endings A 6.\tMFAC 1526 Ageing && Endings B 7.\tMFAC 1527 Society && Health In addition && are required to pass the following courses (&& passing subsequent supplementary exams && but if a fails a course then they will be ineligible): 1.\tMFAC 1501 Foundations 2.\tMFAC 1511 Phase 1 Portfolio 3.\tMFAC 1512 End of Phase Examination 4.\tMFAC 1513 Clinical && Communication Skills Examination 5.\tMFAC 2514 Integrated Clinical Studies 1 6.\tMFAC 2515 Integrated Clinical Studies 2 7.\tMFAC 2516 Integrated Clinical Studies 3 8.\tMFAC 2511 Phase 2 Portfolio 9.\tMFAC 2512 Integrated Clinical Examination"
+        "processed": "with a WAM of \u2265 65 (see WAM calculation below) && have 12UOC (UOC) General Education before Term 1 in year 4, are eligible to apply. WAM Calculation The WAM is calculated from the following courses: 1.\tMFAC 1521 Beginnings, Growth && Development A 2.\tMFAC 1522 Beginnings, Growth && Development B 3.\tMFAC 1523 Health Maintenance A 4.\tMFAC 1524 Health Maintenance B 5.\tMFAC 1525 Ageing && Endings A 6.\tMFAC 1526 Ageing && Endings B 7.\tMFAC 1527 Society && Health In addition, are required to pass the following courses (&& passing subsequent supplementary exams, but if a fails a course then they will be ineligible): 1.\tMFAC 1501 Foundations 2.\tMFAC 1511 Phase 1 Portfolio 3.\tMFAC 1512 End of Phase Examination 4.\tMFAC 1513 Clinical && Communication Skills Examination 5.\tMFAC 2514 Integrated Clinical Studies 1 6.\tMFAC 2515 Integrated Clinical Studies 2 7.\tMFAC 2516 Integrated Clinical Studies 3 8.\tMFAC 2511 Phase 2 Portfolio 9.\tMFAC 2512 Integrated Clinical Examination"
     },
     "MDCN8889": {
         "original": "Students with a WAM of \u2265 65 (see WAM calculation below) and have completed 12 Units of Credit (UOC) General Education before Term 1 in year 4, are eligible to apply.<br/>WAM Calculation<br/>The WAM is calculated from the following courses:<br/>1. MFAC 1521 Beginnings, Growth and Development A<br/>2. MFAC 1522 Beginnings, Growth and Development B<br/>3. MFAC 1523 Health Maintenance A<br/>4. MFAC 1524 Health Maintenance B<br/>5. MFAC 1525 Ageing and Endings A<br/>6. MFAC 1526 Ageing and Endings B<br/>7. MFAC 1527 Society & Health<br/>In addition, students are required to pass the following courses (including passing subsequent supplementary exams, but if a student fails a course then they will be ineligible):<br/>1. MFAC 1501 Foundations<br/>2. MFAC 1511 Phase 1 Portfolio<br/>3. MFAC 1512 End of Phase Examination<br/>4. MFAC 1513 Clinical and Communication Skills Examination<br/>5. MFAC 2514 Integrated Clinical Studies 1<br/>6. MFAC 2515 Integrated Clinical Studies 2<br/>7. MFAC 2516 Integrated Clinical Studies 3<br/>8. MFAC 2511 Phase 2 Portfolio<br/>9. MFAC 2512 Integrated Clinical Examination<br/><br/>",
-        "processed": "with a WAM of \u2265 65 (see WAM calculation below) && have 12UOC (UOC) General Education before Term 1 in year 4 && are eligible to apply. WAM Calculation The WAM is calculated from the following courses: 1. MFAC 1521 Beginnings && Growth && Development A 2. MFAC 1522 Beginnings && Growth && Development B 3. MFAC 1523 Health Maintenance A 4. MFAC 1524 Health Maintenance B 5. MFAC 1525 Ageing && Endings A 6. MFAC 1526 Ageing && Endings B 7. MFAC 1527 Society && Health In addition && are required to pass the following courses (&& passing subsequent supplementary exams && but if a fails a course then they will be ineligible): 1. MFAC 1501 Foundations 2. MFAC 1511 Phase 1 Portfolio 3. MFAC 1512 End of Phase Examination 4. MFAC 1513 Clinical && Communication Skills Examination 5. MFAC 2514 Integrated Clinical Studies 1 6. MFAC 2515 Integrated Clinical Studies 2 7. MFAC 2516 Integrated Clinical Studies 3 8. MFAC 2511 Phase 2 Portfolio 9. MFAC 2512 Integrated Clinical Examination"
+        "processed": "with a WAM of \u2265 65 (see WAM calculation below) && have 12UOC (UOC) General Education before Term 1 in year 4, are eligible to apply. WAM Calculation The WAM is calculated from the following courses: 1. MFAC 1521 Beginnings, Growth && Development A 2. MFAC 1522 Beginnings, Growth && Development B 3. MFAC 1523 Health Maintenance A 4. MFAC 1524 Health Maintenance B 5. MFAC 1525 Ageing && Endings A 6. MFAC 1526 Ageing && Endings B 7. MFAC 1527 Society && Health In addition, are required to pass the following courses (&& passing subsequent supplementary exams, but if a fails a course then they will be ineligible): 1. MFAC 1501 Foundations 2. MFAC 1511 Phase 1 Portfolio 3. MFAC 1512 End of Phase Examination 4. MFAC 1513 Clinical && Communication Skills Examination 5. MFAC 2514 Integrated Clinical Studies 1 6. MFAC 2515 Integrated Clinical Studies 2 7. MFAC 2516 Integrated Clinical Studies 3 8. MFAC 2511 Phase 2 Portfolio 9. MFAC 2512 Integrated Clinical Examination"
     },
     "MDIA1000": {
         "original": "Prerequisite: Enrolment in a single or dual award Media program<br/><br/>",
@@ -8622,7 +8622,7 @@
     },
     "MDIA3007": {
         "original": "Prerequisite: 48 units of credit overall, and enrolment in a Media program, or a Creative Writing, English, FIlm Studies or MCT major or minor. Students must have a WAM of 65 to be eligible for this course.<br/><br/>",
-        "processed": "48UOC && enrolment in a Media program || a Creative Writing || English || FIlm Studies || MCT major || minor. must have 65WAM to be eligible for this course"
+        "processed": "48UOC && enrolment in a Media program || a Creative Writing, English, FIlm Studies || MCT major || minor. must have 65WAM to be eligible for this course"
     },
     "MDIA3008": {
         "original": "Prerequisite: 66 units of credit overall including MDIA2005 or MDIA2006 or MDIA2012<br/><br/>",
@@ -9386,7 +9386,7 @@
     },
     "MUSC3802": {
         "original": "Prerequisite: 24uoc in MUSC courses and enrolment in one of the following streams, Music Creative Practice, Music Inquiry, Music Pedagogy, Musicology, or Sonic Arts<br/><br/>",
-        "processed": "24UOC in MUSC courses && enrolment in one of the following streams || Music Creative Practice || Music Inquiry || Music Pedagogy || Musicology || Sonic Arts"
+        "processed": "24UOC in MUSC courses && enrolment in one of the following streams, Music Creative Practice, Music Inquiry, Music Pedagogy, Musicology || Sonic Arts"
     },
     "MUSC3804": {
         "original": "Prerequisite: 24uoc in MUSC courses, including MUSC2802, and enrolment in the Music Pedagogy specialisation in a Music single or double degree.<br/><br/>",
@@ -9442,7 +9442,7 @@
     },
     "MUSC4101": {
         "original": "Prerequisite: Level 1, 2 and 3 core Music courses and enrolment in a Music single or dual degree program; or 48 UoC overall including MUSC1602 or MUSC1604, and MUSC2116 and enrolment in a Music major in an Arts program<br/><br/>",
-        "processed": "L1 && 2 && 3 core Music courses && enrolment in a Music single || dual degree program; || 48UOC && MUSC1602 || MUSC1604 && MUSC2116 && enrolment in a Music major in an Arts program"
+        "processed": "L1, 2 && 3 core Music courses && enrolment in a Music single || dual degree program; || 48UOC && MUSC1602 || MUSC1604 && MUSC2116 && enrolment in a Music major in an Arts program"
     },
     "MUSC4102": {
         "original": "Prerequisite: MUSC4101, and enrolment in a Music program. Or 48 uoc overall including MUSC1602 or MUSC1604, and MUSC2116 and enrolment in a Music major in an Arts program<br/><br/>",
@@ -9494,7 +9494,7 @@
     },
     "NEUR2201": {
         "original": "Prerequisites: 36 UOC, which must include 12 UOC of BABS / BIOS courses (or equivalent DPST courses) OR 12 UOC of PSYC courses<br/><br/>",
-        "processed": "36UOC || which must include 12UOC of BABS / BIOS courses (or equivalent DPST courses) || 12UOC of PSYC courses"
+        "processed": "36UOC, which must include 12UOC of BABS / BIOS courses (or equivalent DPST courses) || 12UOC of PSYC courses"
     },
     "NEUR3101": {
         "original": "Prerequisites: PHSL2101 or PHSL2121 or PHSL2501 or NEUR2201<br/><br/>",
@@ -9734,7 +9734,7 @@
     },
     "PHAR2011": {
         "original": "Prerequisite: 6 UOC Level 1 Biology (BABS or BIOS ), 12 UOC Level 1 Chemistry, 6 UOC Level 1 Mathematics and Physiology 1A (Note: Medicinal Chemistry students may substitute BIOC2101 for Physiology 1A) or equivalent DPST courses.<br/><br/>",
-        "processed": "6UOC L1 Biology (BABS || BIOS ) && 12UOC L1 Chemistry && 6UOC L1 Mathematics && Physiology 1A (Note: Medicinal Chemistry may substitute BIOC2101 for Physiology 1A) || equivalent DPST courses"
+        "processed": "6UOC L1 Biology (BABS || BIOS ), 12UOC L1 Chemistry, 6UOC L1 Mathematics && Physiology 1A (Note: Medicinal Chemistry may substitute BIOC2101 for Physiology 1A) || equivalent DPST courses"
     },
     "PHAR3101": {
         "original": "Prerequisite: PHAR2011<br/><br/>",
@@ -10122,15 +10122,15 @@
     },
     "PPEC1001": {
         "original": "Prerequisite: Enrolment in a Politics, Philosophy and Economics program<br/><br/>",
-        "processed": "Enrolment in a Politics && Philosophy && Economics program"
+        "processed": "Enrolment in a Politics, Philosophy && Economics program"
     },
     "PPEC2001": {
         "original": "Prerequisite: 24 units of credit overall, including PPEC1001, and enrolment in a Politics, Philosophy and Economics program<br/><br/>",
-        "processed": "24UOC && PPEC1001 && enrolment in a Politics && Philosophy && Economics program"
+        "processed": "24UOC && PPEC1001 && enrolment in a Politics, Philosophy && Economics program"
     },
     "PPEC3001": {
         "original": "Prerequisite: 72 units of credit overall, including PPEC2001, and enrolment in a Politics, Philosophy and Economics program<br/><br/>",
-        "processed": "72UOC && PPEC2001 && enrolment in a Politics && Philosophy && Economics program"
+        "processed": "72UOC && PPEC2001 && enrolment in a Politics, Philosophy && Economics program"
     },
     "PSYC1001": {
         "original": "",
@@ -10666,7 +10666,7 @@
     },
     "SCIF1131": {
         "original": "Enrolment in BSc (Adv. Science), BAdvSci(Hons), BSc (Adv. Maths), BSc(AdvMath)(Hons), (incl. associated dual degrees), or BMedSci<br/><br/>",
-        "processed": "Enrolment in BSc (Adv. Science) || BAdvSci(Hons) || BSc (Adv. Maths) || BSc(AdvMath)(Hons) || (incl. associated dual degrees) || BMedSci"
+        "processed": "Enrolment in BSc (Adv. Science), BAdvSci(Hons), BSc (Adv. Maths), BSc(AdvMath)(Hons), (incl. associated dual degrees) || BMedSci"
     },
     "SCIF2041": {
         "original": "Pre: Minimum 48 UoC completed and 70 WAM<br/><br/>",
@@ -10698,7 +10698,7 @@
     },
     "SDES2116": {
         "original": "SDES2116 is reserved for students in the Bachelor of Design (4802, Faculty of Art & Design), Bachelor of Architectural Computing (3267, FBE), Diploma in Innovation Management (3451, ASB),  and Design Honours (4809, Faculty of Art & Design)<br/><br/>",
-        "processed": "is reserved for in the Bachelor of Design (4802 && Faculty of Art && Design) && Bachelor of Architectural Computing (3267 && FBE) && Diploma in Innovation Management (3451 && ASB) && && Design Honours (4809 && Faculty of Art && Design)"
+        "processed": "is reserved for in the Bachelor of Design (4802, Faculty of Art && Design), Bachelor of Architectural Computing (3267, FBE), Diploma in Innovation Management (3451, ASB), && Design Honours (4809, Faculty of Art && Design)"
     },
     "SDES2167": {
         "original": "",
@@ -10985,11 +10985,11 @@
     },
     "SOCW4015": {
         "original": "Prerequisite: 168 UOC overall, SOCW4003, SOCW4011, SOCW4012, SOCW4013, enrolment in a Social Work program and an overall WAM of 70. Corequisite: SOCW4018<br/><br/>",
-        "processed": "168UOC && SOCW4003 && SOCW4011 && SOCW4012 && SOCW4013 && enrolment in a Social Work program && an overall 70WAM. [SOCW4018]"
+        "processed": "168UOC , SOCW4003, SOCW4011, SOCW4012, SOCW4013, enrolment in a Social Work program && an overall 70WAM. [SOCW4018]"
     },
     "SOCW4016": {
         "original": "Prerequisite: 168 units of credit overall, including SOCW4003, SOCW4011, SOCW4012, and SOCW4013, and enrolment in Social Work program. Corequisite: SOCW4018<br/><br/>",
-        "processed": "168UOC && SOCW4003 && SOCW4011 && SOCW4012 && SOCW4013 && enrolment in Social Work program. [SOCW4018]"
+        "processed": "168UOC && SOCW4003, SOCW4011, SOCW4012 && SOCW4013 && enrolment in Social Work program. [SOCW4018]"
     },
     "SOCW4017": {
         "original": "Prerequisite: SOCW4003, SOCW4011, SOCW4012, and enrolment in a Social Work program. Corequisite: SOCW4013. Equivalent: SOCW4014, SOCW4001<br/><br/>",
@@ -11233,7 +11233,7 @@
     },
     "SOSS3002": {
         "original": "Prerequisite: SOSS/SRAP1000, SOSS/SRAP1001,  SOSS/SRAP2001, and either ARTS2871 or SRAP2002.<br/>Equivalent SRAP3002<br/><br/>",
-        "processed": "SOSS/SRAP1000 && SOSS/SRAP1001 && SOSS/SRAP2001 && ARTS2871 || SRAP2002. Equivalent SRAP3002"
+        "processed": "SOSS/SRAP1000, SOSS/SRAP1001, SOSS/SRAP2001 && ARTS2871 || SRAP2002. Equivalent SRAP3002"
     },
     "SOSS3003": {
         "original": "Prerequisite: SOSS/SRAP1000 and ARTS2871. Equivalent: SRAP2002<br/><br/>",
@@ -11241,7 +11241,7 @@
     },
     "SOSS3006": {
         "original": "Prerequisite: SOSS/SRAP1000, SOSS/SRAP1001, SOSS/SRAP2001, DIPP1112 or CDEV1112, and enrolment in a Social Science or Social Research and Policy program.<br/>Equivalent: SRAP3006<br/><br/>",
-        "processed": "SOSS/SRAP1000 || SOSS/SRAP1001 || SOSS/SRAP2001 || DIPP1112 || CDEV1112 && enrolment in a Social Science || Social Research && Policy program. Equivalent: SRAP3006"
+        "processed": "SOSS/SRAP1000, SOSS/SRAP1001, SOSS/SRAP2001, DIPP1112 || CDEV1112 && enrolment in a Social Science || Social Research && Policy program. Equivalent: SRAP3006"
     },
     "SOSS3007": {
         "original": "Prerequisite: SOSS1001 and enrolment in a Social Science or Social Research and Policy program<br/><br/>",
@@ -12467,7 +12467,7 @@
     },
     "ZHSS2600": {
         "original": "Prerequisite: Any 2 of ZHSS1201, ZHSS1202, ZHSS1301, ZHSS1302, ZHSS1401, ZHSS1402, ZBUS1101, ZBUS1103 or ZGEN2240 with Head of School consent.<br/><br/>",
-        "processed": "Any 2 of ZHSS1201 || ZHSS1202 || ZHSS1301 || ZHSS1302 || ZHSS1401 || ZHSS1402 || ZBUS1101 || ZBUS1103 || ZGEN2240 with Head of School consent"
+        "processed": "Any 2 of ZHSS1201, ZHSS1202, ZHSS1301, ZHSS1302, ZHSS1401, ZHSS1402, ZBUS1101, ZBUS1103 || ZGEN2240 with Head of School consent"
     },
     "ZHSS2601": {
         "original": "",
@@ -12975,10 +12975,10 @@
     },
     "ARTS3812": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Development Studies, or Politics and International Relations. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations || Development Studies || Politics && International Relations. || 48UOC && enrolment in an International Studies program"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Development Studies || Politics && International Relations. || 48UOC && enrolment in an International Studies program"
     },
     "ARTS3814": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Australian Studies, International Relations, Politics, or Politics and International Relations<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams || Australian Studies || International Relations || Politics || Politics && International Relations"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Australian Studies, International Relations, Politics || Politics && International Relations"
     }
 }
