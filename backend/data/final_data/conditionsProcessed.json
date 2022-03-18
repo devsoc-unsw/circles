@@ -224,7 +224,7 @@
     },
     "ADAD4001": {
         "original": "Must have completed either SART3800, SDES2116, SOMA3616.<br/><br/>",
-        "processed": "SART3800 && SDES2116 && SOMA3616"
+        "processed": "SART3800 || SDES2116 || SOMA3616"
     },
     "ADAD4010": {
         "original": "Completed 138UOC + ADAD3114<br/><br/>",

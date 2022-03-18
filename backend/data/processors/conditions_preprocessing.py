@@ -7,6 +7,7 @@ Some examples of preprocessing are:
 - Converting specialisation and program names to corresponding codes
 '''
 
+from ntpath import join
 import re
 from data.utility import data_helpers
 
@@ -108,9 +109,6 @@ def delete_extraneous_phrasing(processed):
     '''Sometimes there's extraneous phrasing which needs to be handled'''
     # Must have completed COMP1511 ==> COMP1511
     # processed = re.sub("Must have completed ", "", processed, flags=re.IGNORECASE)
-
-    # Remove 'Either' as it usually preceeds handled logical phrases
-    processed = re.sub("Either", "", processed, flags=re.IGNORECASE)
 
     # Remove 'Both' as it also usually preceeds handled logical phrases
     processed = re.sub("Both", "", processed, flags=re.IGNORECASE)
@@ -299,6 +297,14 @@ def handle_comma_logic(processed):
     e.g. COMP1531, and COMP2521 or COMP1927 ??????????
     --> we turn it into COMP1531 && COMP2521 || COMP1927 < YO BUT THIS EVALUATES PROPERLY AHAHAHAHA
     """
+    # If the word 'either' is still in processed. If so, must replace commas with ||s instead of &&s later on
+    # when it's ambiguous between the two
+    if 'either' in processed:
+        joining_cond = '||'
+    else:
+        joining_cond = '&&'
+    processed = re.sub("either", "", processed, flags=re.IGNORECASE)
+
     # First we will just convert , || and , && into || and &&
     processed = re.sub(r',\s?(&&|\|\|)', r' \1', processed)
 
@@ -331,7 +337,7 @@ def handle_comma_logic(processed):
                 # Replace each ' , ' with ' && ', where the amount
                 # of whitespace on either side of the comma doesn't matter
                 replacement = match.split(',')
-                processed = re.sub(match, f'{replacement[0]} && {replacement[1]}', processed)
+                processed = re.sub(match, f'{replacement[0]} {joining_cond} {replacement[1]}', processed)
 
     return processed
 
