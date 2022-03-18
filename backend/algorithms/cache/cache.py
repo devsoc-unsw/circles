@@ -113,20 +113,18 @@ def cache_mappings():
     # add faculties to mappings.json
     for course in courses:
         faculty = courses[course]['faculty']
-        if faculty in mappings:
-            continue
-        faculty_token = tokeniseFaculty(faculty)
-        mappings[faculty] = faculty_token
-        courseMappings[faculty_token] = {} 
+        if faculty not in mappings:
+            faculty_token = tokeniseFaculty(faculty)
+            mappings[faculty] = faculty_token
+            courseMappings[faculty_token] = {} 
     # add schools to mappings.json
     for course in courses.values():
         if 'school' in course:
             school = course['school']
-            if school in mappings:
-                continue
-            school_token = tokeniseSchool(school)
-            mappings[school] = school_token
-            courseMappings[school_token] = {} 
+            if school not in mappings:
+                school_token = tokeniseSchool(school)
+                mappings[school] = school_token
+                courseMappings[school_token] = {} 
     write_data(mappings, MAPPINGS_FILE)
 
     # finalise
