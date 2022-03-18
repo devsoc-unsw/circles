@@ -7,7 +7,6 @@ Some examples of preprocessing are:
 - Converting specialisation and program names to corresponding codes
 '''
 
-from ntpath import join
 import re
 from data.utility import data_helpers
 
