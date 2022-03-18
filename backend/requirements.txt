@@ -20,7 +20,7 @@ requests==2.27.1
 starlette==0.17.1
 toml==0.10.2
 typing-extensions==3.10.0.2
-urllib3==1.26.6
+urllib3==1.26.9
 uvicorn==0.15.0
 zipp==3.7.0
 hypothesis==6.36.2
