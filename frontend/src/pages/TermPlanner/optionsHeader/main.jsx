@@ -7,17 +7,22 @@ import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
 import SettingsMenu from "./SettingsMenu";
 import SaveMenu from "./SaveMenu";
+import { FaRegCalendarTimes } from "react-icons/fa";
 import { IoIosEye } from "react-icons/io";
 import { TiDownload } from "react-icons/ti";
 import { plannerActions } from "../../../actions/plannerActions";
 
-const OptionsHeader = ({ plannerRef }) => {
+const OptionsHeader = ({ plannerRef, isAllEmpty }) => {
   const theme = useSelector((state) => state.theme);
   const { areYearsHidden } = useSelector((state) => state.planner);
+  const { years } = useSelector((state) => state.planner);
   const dispatch = useDispatch();
   const unhideAll = () => {
     dispatch(plannerActions("UNHIDE_ALL_YEARS"));
   };
+  const unscheduleAll = () => {
+    dispatch(plannerActions("UNSCHEDULE_ALL"));
+  }
 
   return (
     <div className="optionsHeader">
@@ -62,10 +67,21 @@ const OptionsHeader = ({ plannerRef }) => {
           </button>
         </Tippy>
       )}
+      
+      {!isAllEmpty(years) && (
+        <Tooltip title="Unschedule all courses">
+          <button 
+            className="settingsButton" 
+            onClick={unscheduleAll}
+          >
+            <FaRegCalendarTimes size="1.5em" className="settingsIcon" />
+          </button>
+        </Tooltip>
+      )}
 
       {areYearsHidden && (
         <Tooltip title="Show all hidden years">
-          <button className="settingsButton " onClick={unhideAll}>
+          <button className="settingsButton" onClick={unhideAll}>
             <IoIosEye size="1.5em" className="settingsIcon" />
           </button>
         </Tooltip>

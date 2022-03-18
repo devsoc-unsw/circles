@@ -93,13 +93,13 @@ def MATH_1099(condition):
 
     "processed": 3956 || 3959
 
-    "warning": Must be a Co-Op Scholar
+    "handbook_note": Must be a Co-Op Scholar
     """
 
     return {
         "original": condition["original"],
         "processed": "3956 || 3959",
-        "warning": "Must be a Co-Op Scholar"
+        "handbook_note": "Must be a Co-Op Scholar"
     }
 
 def MATH_2111():
@@ -242,11 +242,9 @@ def MATH_3531():
 
 def MATH_3611_3701(condition):
     """
-    "original": "Prerequisite: 12 UOC of Level 2 Mathematics with an average mark of at least 70, including MATH2111 or MATH2011 (CR) or MATH2510 (CR), or permission from the Head of Department.<br/><br/>",
-
+    "original": "Prerequisite: 12 UOC of Level 2 Mathematics with an average mark of at least 70, including MATH2111 or MATH2011 (CR) or MATH2510 (CR), or permission from the Head of Department.<br/><br/>"
     "processed": "12UOC in L2 Mathematics with an average 70GRADE && MATH2111 || 65GRADE in MATH2011 || 65GRADE in MATH2510 || permission from the Head of Department"
-
-    "warning": "Can circumvent prerequisites with permission from Head of Department"
+    "handbook_note": "Can circumvent prerequisites with permission from Head of Department"
     """
 
     # TODO: JOEL: This doesn't actually work?? It doesn't like index 9 'MATH'
@@ -254,7 +252,7 @@ def MATH_3611_3701(condition):
     return {
         "original": condition["original"],
         "processed": "12UOC in L2 MATH && 70GRADE in L2 MATH && (MATH2111 || 65GRADE in MATH2011 || 65GRADE in MATH2510)",
-        "warning": "Can circumvent prerequisites with permission from Head of Department"
+        "handbook_note": "Can circumvent prerequisites with permission from Head of Department"
     }
 
 def MATH_3711(condition):
@@ -267,7 +265,7 @@ def MATH_3711(condition):
     return {
         "original": condition["original"],
         "processed": "12UOC in L2 MATH && 70GRADE in L2 MATH && (MATH2601 || 65GRADE in MATH2501)",
-        "warning": "Can circumvent prerequisites with permission from Head of Department"
+        "handbook_note": "Can circumvent prerequisites with permission from Head of Department"
     }
 
 def MATH_3801():

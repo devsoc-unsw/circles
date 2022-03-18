@@ -20,7 +20,7 @@ CONDITIONS_PROCESSED_FILE = "./data/final_data/conditionsProcessed.json"
 
 
 # OUTPUT SOURCES
-CACHED_WARNINGS_FILE = "./algorithms/cache/warnings.json"
+CACHED_WARNINGS_FILE = "./algorithms/cache/handbook_note.json"
 
 MAPPINGS_FILE = "./algorithms/cache/mappings.json"
 
@@ -50,7 +50,7 @@ def cache_exclusions():
     
     write_data(cached_exclusions, CACHED_EXCLUSIONS_FILE)
 
-def cache_warnings():
+def cache_handbook_note():
     """
     Reads from processed conditions and stores the warnings in a map mapping
     COURSE: WARNING
@@ -61,13 +61,13 @@ def cache_warnings():
 
     conditions = read_data(CONDITIONS_PROCESSED_FILE)
 
-    cached_warnings = {}
+    cached_handbook_note= {}
 
     for course, data in conditions.items():
-        if "warning" in data:
-            cached_warnings[course] = data["warning"]
+        if "handbook_note" in data:
+            cached_handbook_note[course] = data["handbook_note"]
     
-    write_data(cached_warnings, CACHED_WARNINGS_FILE)
+    write_data(cached_handbook_note, CACHED_WARNINGS_FILE)
 
 
 def cache_mappings():

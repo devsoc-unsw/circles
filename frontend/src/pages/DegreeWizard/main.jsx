@@ -8,10 +8,11 @@ import { MinorStep } from "./steps/MinorStep";
 import { plannerActions } from "../../actions/plannerActions";
 import { useDispatch } from "react-redux";
 import { useSpring, animated } from "react-spring";
-import { DatePicker, Button, Typography } from "antd";
+import { DatePicker, Button, Typography, Modal } from "antd";
 import "./main.less";
 import { springProps } from "./spring";
 import { scroller } from "react-scroll";
+import { useHistory } from "react-router-dom";
 
 const { Title } = Typography;
 const { RangePicker } = DatePicker;
@@ -19,12 +20,12 @@ const { RangePicker } = DatePicker;
 function DegreeWizard() {
   const theme = useSelector((store) => store.theme);
   const dispatch = useDispatch();
+  const [isModalVisible, setIsModalVisible] = React.useState(false);
+  const history = useHistory();
 
   React.useEffect(() => {
     // TODO: Warning dialog before planner is reset.
-
-    // Degree selector needs to reset to prevent identical courses in a term
-    dispatch(plannerActions("RESET_PLANNER"));
+    setIsModalVisible(true);
   }, []);
 
   const handleYearChange = (_, [startYear, endYear]) => {
@@ -51,8 +52,22 @@ function DegreeWizard() {
     }, 100);
   };
 
+  const handleOk = () => {
+    setIsModalVisible(false);
+    // Degree selector needs to reset to prevent identical courses in a term
+    dispatch(plannerActions("RESET_PLANNER"));
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+    history.push('/course-selector');
+  };
+
   return (
     <div className="degree-root-container">
+      <Modal title="Are you Sure?" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+        <p>You have existing data saved from your last session. Are you sure want to reset your planner?</p>
+      </Modal>
       <Title>Welcome to Circles!</Title>
       <h3 className=" subtitle">
         Let’s start by setting up your UNSW degree, so you can make a plan that
