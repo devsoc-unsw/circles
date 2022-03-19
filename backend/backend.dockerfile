@@ -1,7 +1,7 @@
 # Sets up the backend, without writing data into the database.
 
 # Latest python image
-FROM python:3
+FROM python:3-slim
 
 # Set current working directory inside container to /backend
 WORKDIR /backend
