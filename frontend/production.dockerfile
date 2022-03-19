@@ -1,5 +1,4 @@
-# Node v17 causing digital envelope routines error as at Dec '21.
-FROM node:16.13.0
+FROM node:lts
 
 # Install serve
 RUN npm install -g serve
