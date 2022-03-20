@@ -117,6 +117,14 @@ export default function CourseMenu() {
           }
         }
       }
+      if (structure[group].name) {
+        // Append structure group name if exists 
+        const newGroup = `${group} - ${structure[group].name}`
+        newMenu[newGroup] = newMenu[group]
+        newCoursesUnits[newGroup] = newCoursesUnits[group]
+        delete newMenu[group]
+        delete newCoursesUnits[group]
+      }
     }
     setMenuData(newMenu);
     setCoursesUnits(newCoursesUnits);
