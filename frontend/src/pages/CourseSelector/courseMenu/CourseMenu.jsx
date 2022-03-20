@@ -34,7 +34,7 @@ export default function CourseMenu() {
   const fetchStructure = async () => {
     try {
       const res1 = await axios.get(
-        `http://localhost:8000/programs/getStructure/${programCode}/${specialisation}/${
+        `/programs/getStructure/${programCode}/${specialisation}/${
           minor !== "" ? minor : ""
         }`
       );
@@ -53,13 +53,8 @@ export default function CourseMenu() {
   React.useEffect(async () => {
     try {
       const res = await axios.post(
-        `http://localhost:8000/courses/getAllUnlocked/`,
+        `/courses/getAllUnlocked/`,
         JSON.stringify(prepareUserPayload(degree, planner)),
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
       );
       dispatch(setCourses(res.data.courses_state));
       generateMenuData(res.data.courses_state);
