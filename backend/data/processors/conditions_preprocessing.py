@@ -109,9 +109,6 @@ def delete_extraneous_phrasing(processed):
     # Must have completed COMP1511 ==> COMP1511
     # processed = re.sub("Must have completed ", "", processed, flags=re.IGNORECASE)
 
-    # Remove 'Either' as it usually preceeds handled logical phrases
-    processed = re.sub("Either", "", processed, flags=re.IGNORECASE)
-
     # Remove 'Both' as it also usually preceeds handled logical phrases
     processed = re.sub("Both", "", processed, flags=re.IGNORECASE)
 
@@ -135,8 +132,8 @@ def delete_extraneous_phrasing(processed):
 
 def delete_prereq_label(processed):
     """ Removes 'prerequisite' and variations """
-    # variations incude ["prerequisite", "pre-requisite", "prer-requisite"]
-    return re.sub(r"[Pp]re[A-Za-z/_-]*:*", "", processed)
+    # variations incude ["prerequisite:", "pre-requisite:", "prer-requisite:", "Pre-requisite :", "Pre Req:"]
+    return re.sub(r"pre\s*[a-z/_-]*\s*:*", "", processed, flags=re.IGNORECASE)
 
 
 def delete_trailing_punc(processed):
@@ -257,6 +254,8 @@ def convert_including(processed):
 def convert_AND_OR(processed):
     """ Convert 'and' to '&&' and 'or' to '||' """
     processed = re.sub(" and ", " && ", processed, flags=re.IGNORECASE)
+    processed = re.sub(" & ", " && ", processed, flags=re.IGNORECASE)
+    processed = re.sub(" and/or ", " || ", processed, flags=re.IGNORECASE)
     processed = re.sub(" plus ", " && ", processed, flags=re.IGNORECASE)
     processed = re.sub(r" \+ ", " && ", processed, flags=re.IGNORECASE)
     processed = re.sub(" or ", " || ", processed, flags=re.IGNORECASE)
@@ -266,6 +265,7 @@ def convert_AND_OR(processed):
 def convert_coreqs(processed):
     """ Puts co-requisites inside square brackets """
     processed = processed.rstrip()
+    processed = re.sub(r"concurrently?;?:?\s?(.*)", r"[\1]", processed, flags=re.IGNORECASE)
     return re.sub(r"co-?requisites?;?:?\s?(.*)", r"[\1]", processed, flags=re.IGNORECASE)
 
 # -----------------------------------------------------------------------------
@@ -285,7 +285,8 @@ def joining_terms(processed):
 
 
 def handle_comma_logic(processed):
-    '''Handles commas and either removes or converts into AND/OR
+    """
+    Handles commas and either removes or converts into AND/OR
     We might need to perform lookaheads to detect if the comma should become an AND or an OR.
     3 main types of cases:
     A, B, && C ==> , becomes &&
@@ -294,7 +295,15 @@ def handle_comma_logic(processed):
     NOTE: This logic will mishandle some conditions where its ambiguous,
     e.g. COMP1531, and COMP2521 or COMP1927 ??????????
     --> we turn it into COMP1531 && COMP2521 || COMP1927 < YO BUT THIS EVALUATES PROPERLY AHAHAHAHA
-    '''
+    """
+    # If the word 'either' is still in processed. If so, must replace commas with ||s instead of &&s later on
+    # when it's ambiguous between the two
+    if 'either' in processed:
+        joining_cond = '||'
+    else:
+        joining_cond = '&&'
+    processed = re.sub("either", "", processed, flags=re.IGNORECASE)
+
     # First we will just convert , || and , && into || and &&
     processed = re.sub(r',\s?(&&|\|\|)', r' \1', processed)
 
@@ -302,16 +311,32 @@ def handle_comma_logic(processed):
     # the commas with that
     # e.g. phrase, phrase || phrase ==> phrase || phrase || phrase
     # e.g. phrase, phrase && phrase ==> phrase && phrase && phrase
-    matches = re.findall(r'([^&|]+,\s?[^&|]+\s?)(&&|\|\|)', processed)
+    if bool(re.match(r'^\s*[A-Z]{4}[0-9]{4}', processed)):
+        matches = re.findall(r'([^&|]+,\s?[^&|]+\s?)(&&|\|\|)', processed)
 
-    for match in matches:
-        # Substitute the commas in the phrase with their respective logic operators
-        subbed_phrase = re.sub(r',\s?', f" {match[1]} ", match[0])
+        for match in matches:
+            # Substitute the commas in the phrase with their respective logic operators
+            subbed_phrase = re.sub(r',\s?', f" {match[1]} ", match[0])
 
-        # Escape the matched phrase so regex doesn't misintrepret unclosed brackets, etc
-        escaped_phrase = re.escape(match[0])
+            # Escape the matched phrase so regex doesn't misintrepret unclosed brackets, etc
+            escaped_phrase = re.escape(match[0])
 
-        processed = re.sub(escaped_phrase, subbed_phrase, processed)
+            processed = re.sub(escaped_phrase, subbed_phrase, processed)
+
+        # Check if there were only commas in between course codes. If work has already been done DO NOTHING.
+        # E.g, "72UOC , room in degree for course, Good academic standing" -> considered but no changes
+        # "2303, 3303 && 3304" -> Not considered
+        # "CEIC2001, CEIC2002, MATH2019, CEIC3000" -> "CEIC2001 && CEIC2002 && MATH2019 && CEIC3000"
+        # "at least one of the following: ECON2112, ECON2206, ..." -> Not considered
+
+        # If there are no &&s and ||s between course codes, just replace them with &&s.
+        if '&&' not in processed and '||' not in processed:
+            matches = re.findall(r'(?=([A-Z]{4}[0-9]{4}\s*,\s*[A-Z]{4}[0-9]{4}))', processed)
+            for match in matches:
+                # Replace each ' , ' with ' && ', where the amount
+                # of whitespace on either side of the comma doesn't matter
+                replacement = match.split(',')
+                processed = re.sub(match, f'{replacement[0]} {joining_cond} {replacement[1]}', processed)
 
     return processed
 
@@ -326,7 +351,6 @@ def strip_spaces(processed):
 
     # Get rid of white spaces at start and end of word
     return processed.strip()
-
 
 def strip_bracket_spaces(processed):
     """Strips spaces immediately before and after brackets"""

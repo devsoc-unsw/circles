@@ -82,6 +82,7 @@ def fixUserData(userData: dict):
                 }
             })
 def getCourse(courseCode: str):
+    '''get info about a course given courseCode'''
     result = coursesCOL.find_one({'code' : courseCode})
     if not result:
         raise HTTPException(status_code=400, detail=f"Course code {courseCode} was not found")
@@ -92,6 +93,13 @@ def getCourse(courseCode: str):
 
 @router.get("/searchCourse/{string}")
 def search(string):
+    ''' Search for courses with regex 
+    e.g. search(COMP1) would return 
+        { “COMP1511” :  “Programming Fundamentals”,
+          “COMP1521” : “Computer Systems Fundamentals”, 
+          “COMP1531”: “SoftEng Fundamentals, 
+            ……. } 
+    '''
     pat = re.compile(r'{}'.format(string), re.I)
     code_query = coursesCOL.find({'code': {'$regex': pat}})
     title_query = coursesCOL.find({'title': {'$regex': pat}})
@@ -172,6 +180,9 @@ def getLegacyCourses(year, term):
         gets all the courses that were offered in that term for that year
     """
     result = {c['code']: c['title'] for c in archivesDB[year].find() if term in c['terms']} 
+
+    if result == {}:
+        raise HTTPException(status_code=400, detail=f"Invalid term or year. Valid terms: ST, T1, T2, T3. Valid years: 2019, 2020, 2021, 2022.")
 
     return {'courses' : result}
 

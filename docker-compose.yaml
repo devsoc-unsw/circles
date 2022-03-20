@@ -40,6 +40,19 @@ services:
       - backend
     networks:
       - circles-net
+  frontend-prod:
+    build:
+      context: ./frontend
+      dockerfile: production.dockerfile
+    container_name: frontend
+    ports:
+      - '3000:80'
+    stdin_open: true
+    tty: true
+    depends_on:
+      - backend
+    networks:
+      - circles-net
   init-mongo:
     # Utility container to populate / overwrite database
     # Run after build or when you need to overwrite data
