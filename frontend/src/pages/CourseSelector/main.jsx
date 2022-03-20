@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import { useSelector } from "react-redux";
 import CourseMenu from "./courseMenu/CourseMenu";
 import CourseDescription from "./courseDescription/CourseDescription";
@@ -7,14 +8,38 @@ import "./main.less";
 import SearchCourse from "./SearchCourse";
 
 export default function CourseSelector() {
+  const [structure, setStructure] = React.useState({});
   const degree = useSelector((state) => state.degree);
+  
+  const { programCode, programName, specialisation, minor } = useSelector(
+    (state) => state.degree
+  );
+
+  React.useEffect(() => {
+    fetchStructure();
+  }, []);
+
+   // get structure of degree
+   const fetchStructure = async () => {
+    try {
+      const res1 = await axios.get(
+        `http://localhost:8000/programs/getStructure/${programCode}/${specialisation}/${
+          minor !== "" ? minor : ""
+        }`
+      );
+      setStructure(res1.data.structure);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="cs-root">
       <div className="cs-top-cont">
         <div className="cs-degree-cont">
-          {degree.programCode !== "" && (
+          {programCode !== "" && (
             <h1 className="text">
-              {degree.programCode} - {degree.programName}
+              {programCode} - {programName}
             </h1>
           )}
         </div>
@@ -22,8 +47,8 @@ export default function CourseSelector() {
       </div>
       <CourseTabs />
       <div className="cs-bottom-cont">
-        <CourseMenu />
-        <CourseDescription />
+        <CourseMenu structure={structure} />
+        <CourseDescription structure={structure} />
       </div>
     </div>
   );
