@@ -1,7 +1,7 @@
 # Sets up the backend, without writing data into the database.
 
 # Latest python image
-FROM python:3
+FROM python:3-slim
 
 # Set current working directory inside container to /backend
 WORKDIR /backend
@@ -19,4 +19,4 @@ EXPOSE 8000
 # ENV OVERWRITE='False'
 
 # Run the server
-ENTRYPOINT ["python3", "-u", "runserver.py"]
+ENTRYPOINT ["python3", "-u", "runserver.py", "--overwrite"]
