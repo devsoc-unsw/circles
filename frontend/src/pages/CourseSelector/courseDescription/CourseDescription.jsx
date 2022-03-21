@@ -77,8 +77,7 @@ const getPathToCoursesById = async (id) => {
         UOC: course.UOC,
         plannedFor: null,
         warning: false,
-        prereqs: "",
-        // TODO: Need to add prereqs
+        prereqs: course.raw_requirements,
       },
     };
     dispatch(plannerActions("ADD_TO_UNPLANNED", data));
