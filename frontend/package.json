@@ -24,7 +24,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-scroll": "^1.8.6",
-    "react-spring": "^9.2.3",
+    "react-spring": "^9.4.4",
     "react-svg": "^14.1.14",
     "react-tooltip": "^4.2.21",
     "react-tsparticles": "^1.42.4",
