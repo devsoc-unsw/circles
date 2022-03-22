@@ -7,6 +7,8 @@ import { Loading } from "./Loading";
 import "./CourseMenu.less";
 import { setCourses } from "../../../actions/coursesActions";
 import { IoWarningOutline } from "react-icons/io5";
+import { prepareUserPayload } from "../helper";
+
 
 const { SubMenu } = Menu;
 
@@ -47,29 +49,14 @@ export default function CourseMenu() {
   // get courses in planner
   const planner = useSelector((state) => state.planner);
   const coursesInPlanner = planner.courses;
-  let selectedCourses = {};
-  for (const course of coursesInPlanner.keys()) {
-    selectedCourses[course] = 70;
-  }
-
-  const { startYear } = useSelector((state) => state.planner);
-  const specialisations = {};
-  specialisations[specialisation] = 1;
-  if (minor !== "") specialisations[minor] = 1;
-  const payload = {
-    program: programCode,
-    specialisations: specialisations,
-    courses: selectedCourses,
-    year: new Date().getFullYear() - startYear,
-  };
+  const degree = useSelector((state) => state.degree);
 
   // get all courses
   React.useEffect(async () => {
     try {
-      console.log(JSON.stringify(payload));
       const res = await axios.post(
         `http://localhost:8000/courses/getAllUnlocked/`,
-        JSON.stringify(payload),
+        JSON.stringify(prepareUserPayload(degree, planner)),
         {
           headers: {
             "Content-Type": "application/json",
