@@ -9,7 +9,7 @@ h11==0.13.0
 idna==3.2
 importlib-metadata==4.11.3
 iniconfig==1.1.1
-packaging==21.0
+packaging==21.3
 pluggy==1.0.0
 py==1.11.0
 pydantic==1.9.0
