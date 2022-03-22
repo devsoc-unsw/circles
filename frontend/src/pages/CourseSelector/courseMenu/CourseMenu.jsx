@@ -1,12 +1,14 @@
 import React from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { Menu } from "antd";
+import { Tooltip, Menu } from "antd";
 import { courseTabActions } from "../../../actions/courseTabActions";
 import { Loading } from "./Loading";
 import "./CourseMenu.less";
 import { setCourses } from "../../../actions/coursesActions";
+import { IoWarningOutline } from "react-icons/io5";
 import { prepareUserPayload } from "../helper";
+
 
 const { SubMenu } = Menu;
 
@@ -95,10 +97,12 @@ export default function CourseMenu() {
             for (const courseCode in courses) {
               if (
                 courseCode.match(regex) &&
-                courses[courseCode].is_accurate &&
+                // courses[courseCode].is_accurate &&
                 courses[courseCode].unlocked
               ) {
-                newMenu[group][subGroup].push(courseCode);
+                
+                newMenu[group][subGroup].push({courseCode: courseCode, accuracy: courses[courseCode].is_accurate});
+                console.log(newMenu[group][subGroup])
                 // add UOC to curr
                 if (coursesInPlanner.get(courseCode))
                   newCoursesUnits[group][subGroup].curr +=
@@ -149,10 +153,11 @@ export default function CourseMenu() {
                       />
                     }
                   >
-                    {menuData[group][subGroup].map((courseCode) => (
+                    {menuData[group][subGroup].map((course) => (
                       <MenuItem
-                        selected={coursesInPlanner.get(courseCode)}
-                        courseCode={courseCode}
+                        selected={coursesInPlanner.get(course.courseCode)}
+                        courseCode={course.courseCode}
+                        accurate={course.accuracy}
                         setActiveCourse={setActiveCourse}
                         activeCourse={activeCourse}
                       />
@@ -168,12 +173,18 @@ export default function CourseMenu() {
   );
 }
 
-const MenuItem = ({ selected, courseCode, activeCourse, setActiveCourse }) => {
+const MenuItem = ({ selected, courseCode, activeCourse, setActiveCourse, accurate }) => {
   const dispatch = useDispatch();
   const handleClick = () => {
     dispatch(courseTabActions("ADD_TAB", courseCode));
     setActiveCourse(courseCode);
   };
+
+  const renderAccurateNote = () => {
+    if (!accurate){
+      return (<WarningIcon text="This course info may be inaccurate" />);
+    }
+  }
 
   return (
     <Menu.Item
@@ -182,8 +193,20 @@ const MenuItem = ({ selected, courseCode, activeCourse, setActiveCourse }) => {
       key={courseCode}
       onClick={handleClick}
     >
-      {courseCode}
+      {courseCode} {renderAccurateNote()}
     </Menu.Item>
+  );
+};
+
+const WarningIcon = ({ text }) => {
+  return (
+    <Tooltip placement="top" title={text}>
+      <IoWarningOutline
+                size="1em"
+                color="#DC9930"
+                style={{ position: "absolute", marginLeft: "0.3em", top: "calc(50% - 0.5em)" }}
+              />
+    </Tooltip>
   );
 };
 
