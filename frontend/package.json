@@ -10,7 +10,7 @@
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^13.5.0",
-    "@tippyjs/react": "^4.2.5",
+    "@tippyjs/react": "^4.2.6",
     "antd": "^4.16.3",
     "axios": "^0.26.1",
     "craco-less": "^1.17.1",
