@@ -17,7 +17,8 @@ def test_malformed_request():
 def test_two_courses_completed():
     x = requests.post('http://127.0.0.1:8000/courses/coursesUnlockedWhenTaken/COMP2521', json=USERS["user1"])
     assert x.json() == {"courses_unlocked_when_taken" :
-        ["COMP3121",
+        [
+        "COMP3121",
         "COMP3141",
         "COMP3151",
         "COMP3161",
