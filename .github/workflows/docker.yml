@@ -18,6 +18,8 @@ jobs:
         include:
           - component: frontend
             dockerfile: production.dockerfile
+            args: |
+              "API_URL=https://circlesapi.csesoc.unsw.edu.au"
           - component: backend
             dockerfile: backend.dockerfile
     steps:
@@ -42,6 +44,7 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           platforms: linux/amd64
           file: ${{ matrix.component }}/${{ matrix.dockerfile }}
+          build-args: ${{ matrix.args }}
           tags: |
             ghcr.io/csesoc/circles-${{ matrix.component }}:${{ github.sha }}
             ghcr.io/csesoc/circles-${{ matrix.component }}:latest
