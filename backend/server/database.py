@@ -8,7 +8,7 @@ NOTE: The helper functions must be run from the backend directory due to their p
 import json
 import os
 from pymongo import MongoClient
-from server.config import URI, FINAL_DATA_PATH, ARCHIVED_DATA_PATH
+from server.config import FINAL_DATA_PATH, ARCHIVED_DATA_PATH
 from data.config import ARCHIVED_YEARS
 
 '''Export these as needed'''
