@@ -164,7 +164,7 @@ def MATH_2701():
     # TODO: JOEL: Got these codes from these searches under 'program':
     # https://www.handbook.unsw.edu.au/search?q=advanced%20mathematics
     # https://www.handbook.unsw.edu.au/search?q=advanced%20science
-    return "(65GRADE in MATH1231 || 65GRADE in DPST1014 || 65GRADE in MATH1241 || 65GRADE in MATH1251) && (3956 || 3523 || 3998 || 3564 || 3949 || 3781 || 3589 || 3761 || 3962 || 3782 || 3323 || 3566 || 3458 || 3997 || 3948 || 3593 || 3957 || 3762 || 3472)"
+    return "(65GRADE in MATH1231 || 65GRADE in DPST1014 || 65GRADE in MATH1241 || 65GRADE in MATH1251) && (MATH# || ASCI#)"
 
 def MATH_2871():
     """
@@ -185,7 +185,7 @@ def MATH_3051():
     """
     "original": "Prerequisite: 12UOC of second year mathematics courses, including MATH2011 or MATH2111 or MATH2069(DN).<br/><br/>",
 
-    "processed": "12UOC in L2 MATHS && (MATH2011 || MATH2111 || 75GRADE in MATH2069)"
+    "processed": "12UOC in L2 MATH && (MATH2011 || MATH2111 || 75GRADE in MATH2069)"
     """
     return "12UOC in L2 MATH && (MATH2011 || MATH2111 || 75GRADE in MATH2069)"
 
@@ -193,7 +193,7 @@ def MATH_3101_3121():
     """
     "original": "Prerequisite: 12 units of credit in Level 2 Math courses including (MATH2011 or MATH2111 and MATH2120 or MATH2130 or MATH2121 or MATH2221), or (both MATH2019 (DN) and MATH2089), or (both MATH2069 (CR) and MATH2099)<br/><br/>",
 
-    "processed": "12UOC in L2 MATHS && ((MATH2011 || MATH2111) && (MATH2120 || MATH2130 || MATH2121 || MATH2221) || (75GRADE in MATH2019 && MATH2089) || (65GRADE in MATH2069 && MATH2099))"
+    "processed": "12UOC in L2 MATH && ((MATH2011 || MATH2111) && (MATH2120 || MATH2130 || MATH2121 || MATH2221) || (75GRADE in MATH2019 && MATH2089) || (65GRADE in MATH2069 && MATH2099))"
     """
     return "12UOC in L2 MATH && ((MATH2011 || MATH2111) && (MATH2120 || MATH2130 || MATH2121 || MATH2221) || (75GRADE in MATH2019 && MATH2089) || (65GRADE in MATH2069 && MATH2099))"
 
@@ -247,24 +247,21 @@ def MATH_3611_3701(condition):
     "handbook_note": "Can circumvent prerequisites with permission from Head of Department"
     """
 
-    # TODO: JOEL: This doesn't actually work?? It doesn't like index 9 'MATH'
-    # I think it just doesn't like '70GRADE in LX XXXX' since it's 2 words. So what's the fix?
     return {
         "original": condition["original"],
-        "processed": "12UOC in L2 MATH && 70GRADE in L2 MATH && (MATH2111 || 65GRADE in MATH2011 || 65GRADE in MATH2510)",
+        "processed": "12UOC in L2 MATH && 70WAM in L2 MATH && (MATH2111 || 65GRADE in MATH2011 || 65GRADE in MATH2510)",
         "handbook_note": "Can circumvent prerequisites with permission from Head of Department"
     }
 
 def MATH_3711(condition):
     """
     "original": "Prerequisite: 12 UOC of Level 2 Mathematics with an average mark of at least 70, including MATH2601 or MATH2501 (CR), or permission from the Head of Department.<br/><br/>",
-    "processed": "12UOC in L2 MATH && 70GRADE in L2 MATH && (MATH2601 || 65GRADE in MATH2501)"
+    "processed": "12UOC in L2 MATH && 70WAM in L2 MATH && (MATH2601 || 65GRADE in MATH2501)"
     """
 
-    # TODO: JOEL: Same deal as above in MATH_3611_3701
     return {
         "original": condition["original"],
-        "processed": "12UOC in L2 MATH && 70GRADE in L2 MATH && (MATH2601 || 65GRADE in MATH2501)",
+        "processed": "12UOC in L2 MATH && 70WAM in L2 MATH && (MATH2601 || 65GRADE in MATH2501)",
         "handbook_note": "Can circumvent prerequisites with permission from Head of Department"
     }
 

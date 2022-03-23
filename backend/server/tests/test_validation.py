@@ -4,6 +4,8 @@ import requests
 
 from server.tests.test_getAllUnlocked import USERS
 
+# TODO: Do we care if these courses are broken before deployment? they are the honours courses + some wierd courses
+# main issues include CIRCLES-278 and CIRCLES-276
 ignored = ['COMP3901', 'COMP3902', 'COMP4951', 'COMP9302', 'COMP9491']
 
 def test_validation_majors():
@@ -23,8 +25,16 @@ def test_validation_minors():
 def assert_possible_structure(unlocked, program, major, minor = ''):
     structure = requests.get(f'http://127.0.0.1:8000/programs/getStructure/{program}/{major}/{minor}').json()['structure']
     for container in structure:
-        for container2 in structure[container]:
+        with suppress(KeyError):
             del structure[container]['name']
+        with suppress(KeyError):
+            del structure[container]['Flexible Education']
+        with suppress(KeyError):
+            del structure[container]['General Education']
+
+        for container2 in structure[container]:
+            with suppress(KeyError):
+                del structure[container][container2]['name']
             for course in structure[container][container2]['courses']:
                 for c in unlocked:
                     if course in c and c not in ignored:
