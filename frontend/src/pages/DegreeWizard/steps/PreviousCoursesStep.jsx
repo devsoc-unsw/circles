@@ -21,9 +21,7 @@ const TermBox = ({ yearIndex, termNo }) => {
 
     try {
       const courseInfoList = await Promise.all(
-        courses.map((course) =>
-          axios.get(`http://localhost:8000/courses/getCourse/${course.value}`)
-        )
+        courses.map((course) => axios.get(`/courses/getCourse/${course.value}`))
       );
       for (let course of courseInfoList) {
         const info = course.data;

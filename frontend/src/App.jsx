@@ -9,6 +9,7 @@ import ProgressionChecker from "./pages/ProgressionChecker/main";
 import TermPlanner from "./pages/TermPlanner/main";
 import "./App.less";
 import Loading from "./components/Loading/Loading";
+import './axios'
 
 const { Content } = Layout;
 
