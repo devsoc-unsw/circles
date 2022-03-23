@@ -70,13 +70,13 @@ def ECON_1101(conditions):
     
     "processed": ""
 
-    "warning": Excluded: Students in BCom single or double-degree programs, except for 3155 Actl/Comm and 3521 Comm/Econ, are not allowed to enrol in this course.
+    "handbook_note": Excluded: Students in BCom single or double-degree programs, except for 3155 Actl/Comm and 3521 Comm/Econ, are not allowed to enrol in this course.
     """
     
     return {
         "original": conditions["original"],
         "processed": "",
-        "warning": "Excluded: Students in BCom single or double-degree programs, except for 3155 Actl/Comm and 3521 Comm/Econ, are not allowed to enrol in this course."
+        "handbook_note": "Excluded: Students in BCom single or double-degree programs, except for 3155 Actl/Comm and 3521 Comm/Econ, are not allowed to enrol in this course."
     }
 
 def ECON_1203(code, conditions):
@@ -85,7 +85,7 @@ def ECON_1203(code, conditions):
     
     "processed": ""
 
-    "warning": "Also, must not be enrolled in a BCom single or double degree (except 3155 Actl/Comm or 3521 Comm/Econ)"
+    "handbook_note": "Also, must not be enrolled in a BCom single or double degree (except 3155 Actl/Comm or 3521 Comm/Econ)"
     """
     
     COURSES[code]["exclusions"]["MATH2841"] = 1
@@ -100,7 +100,7 @@ def ECON_1203(code, conditions):
     return {
         "original": conditions["original"],
         "processed": "",
-        "warning": "Also, must not be enrolled in a BCom single or double degree (except 3155 Actl/Comm or 3521 Comm/Econ)"
+        "handbook_note": "Also, must not be enrolled in a BCom single or double degree (except 3155 Actl/Comm or 3521 Comm/Econ)"
     }
 
 def ECON_2206():
@@ -180,13 +180,13 @@ def ECON_4201(conditions):
     
     "processed": "ECON4103"
 
-    "warning": "Assumed knowledge: Familiarity with matrix algebra && introductory statistics && econometrics. Prior Knowledge in Statistical software || programming languages will be useful"    
+    "handbook_note": "Assumed knowledge: Familiarity with matrix algebra && introductory statistics && econometrics. Prior Knowledge in Statistical software || programming languages will be useful"    
     """
 
     return {
         "original": conditions["original"],
         "processed": "ECON4103",
-        "warning": "Assumed knowledge: Familiarity with matrix algebra && introductory statistics && econometrics. Prior Knowledge in Statistical software || programming languages will be useful"
+        "handbook_note": "Assumed knowledge: Familiarity with matrix algebra && introductory statistics && econometrics. Prior Knowledge in Statistical software || programming languages will be useful"
     }
 
 def ECON_4303():

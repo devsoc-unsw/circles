@@ -20,7 +20,7 @@ CONDITIONS_PROCESSED_FILE = "./data/final_data/conditionsProcessed.json"
 
 
 # OUTPUT SOURCES
-CACHED_WARNINGS_FILE = "./algorithms/cache/warnings.json"
+CACHED_WARNINGS_FILE = "./algorithms/cache/handbook_note.json"
 
 MAPPINGS_FILE = "./algorithms/cache/mappings.json"
 
@@ -50,7 +50,7 @@ def cache_exclusions():
     
     write_data(cached_exclusions, CACHED_EXCLUSIONS_FILE)
 
-def cache_warnings():
+def cache_handbook_note():
     """
     Reads from processed conditions and stores the warnings in a map mapping
     COURSE: WARNING
@@ -61,13 +61,13 @@ def cache_warnings():
 
     conditions = read_data(CONDITIONS_PROCESSED_FILE)
 
-    cached_warnings = {}
+    cached_handbook_note= {}
 
     for course, data in conditions.items():
-        if "warning" in data:
-            cached_warnings[course] = data["warning"]
+        if "handbook_note" in data:
+            cached_handbook_note[course] = data["handbook_note"]
     
-    write_data(cached_warnings, CACHED_WARNINGS_FILE)
+    write_data(cached_handbook_note, CACHED_WARNINGS_FILE)
 
 
 def cache_mappings():
@@ -110,13 +110,15 @@ def cache_program_mappings():
     # Initialise mappings with all the mapping codes
     mappings = {}
     mappings["ACTL#"] = {}
+    mappings["ASCI#"] = {}
     mappings["BUSN#"] = {}
     mappings["COMM#"] = {}
+    mappings["COMP#"] = {}
+    mappings["DATA#"] = {}
     mappings["ECON#"] = {}
     mappings["INFS#"] = {}
+    mappings["MATH#"] = {}
     mappings["ZBUS#"] = {}
-    mappings["DATA#"] = {}
-    mappings["COMP#"] = {}
     # TODO: Add any more mappings. Look into updating manual-fixes wiki page?
 
     programs = read_data(PROGRAMS_FORMATTED_FILE)        
@@ -137,9 +139,13 @@ def cache_program_mappings():
         elif re.match(r"information systems", program["title"], flags=re.IGNORECASE):
             mappings["INFS#"][program["code"]] = 1
             mappings["ZBUS#"][program["code"]] = 1
-        elif re.match(r"data science and decisions",program["title"], flags=re.IGNORECASE):
+        elif re.match(r"data science and decisions", program["title"], flags=re.IGNORECASE):
             mappings["DATA#"][program["code"]] = 1
-        elif re.match(r"computer science",program["title"], flags=re.IGNORECASE):
+        elif re.match(r"computer science", program["title"], flags=re.IGNORECASE):
             mappings["COMP#"][program["code"]] = 1
+        elif re.match(r"advanced maths", program["title"], flags=re.IGNORECASE):
+            mappings["MATH#"][program["code"]] = 1
+        elif re.match(r"advanced science", program["title"], flags=re.IGNORECASE):
+            mappings["ASCI#"][program["code"]] = 1
         
     write_data(mappings, PROGRAM_MAPPINGS_FILE)

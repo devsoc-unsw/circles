@@ -53,7 +53,11 @@ const TermPlanner = () => {
 
   return (
     <>
-      <OptionsHeader areYearsHidden={areYearsHidden} plannerRef={plannerPic} />
+      <OptionsHeader 
+        areYearsHidden={areYearsHidden} 
+        plannerRef={plannerPic} 
+        isAllEmpty={isAllEmpty}
+      />
       {isLoading ? (
         <SkeletonPlanner />
       ) : (
@@ -132,7 +136,8 @@ const openNotification = () => {
   notification["info"](args);
 };
 
-// checks if no courses have been planned (to display help notification)
+// checks if no courses have been planned (to display help notification 
+// & determine if unschedule all button available)
 const isAllEmpty = (years) => {
   for (const year of years) {
     var termEmpty = Object.keys(year).every((key) => year[key].length === 0);

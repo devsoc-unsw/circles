@@ -34,7 +34,7 @@ def fix_conditions():
     CONDITIONS["ENGG3060"][PROCESSED] = ENGG_3060()
     CONDITIONS["ENGG4103"][PROCESSED] = ENGG_4103()
 
-    for course in ["ENGG2600", "ENGG3600", "ENGG4600"]:
+    for course in ("ENGG2600", "ENGG3600", "ENGG4600"):
         CONDITIONS[course] = ENGG_2_4600(CONDITIONS[course])
 
     # Updates the files with the modified dictionaries
@@ -64,13 +64,13 @@ def ENGG_2_4600(conditions):
 
     "processed": ""
 
-    "warning": "Please refer to the course overview section for information on requirements"
+    "handbook_note": "Please refer to the course overview section for information on requirements"
     """
 
     return {
         "original": conditions["original"],
         "processed": "",
-        "warning": "Please refer to the course overview section for information on requirements"
+        "handbook_note": "Please refer to the course overview section for information on requirements"
     }
 
 def ENGG_2997():

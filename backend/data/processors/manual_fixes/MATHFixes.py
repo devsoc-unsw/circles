@@ -1,10 +1,10 @@
 """
 https://github.com/csesoc/Circles/wiki/Manual-Fixes-to-Course-Prerequisites
 
-Copy this into a new file for the relevant faculty's fixes: 
+Copy this into a new file for the relevant faculty's fixes:
 e.g. COMPFixes.py, ACCTFixes.py, PSYCFixes.py
 
-Apply manual [code] fixes to processed conditions in conditionsProcessed.json so 
+Apply manual [code] fixes to processed conditions in conditionsProcessed.json so
 that they can be fed into algorithms.
 
 If you make a mistake and need to regenerate conditionsProcessed.json, then you
@@ -32,8 +32,15 @@ def fix_conditions():
 
     codes = ["MATH3000", "MATH3001", "MATH3002","MATH3041","MATH3511","MATH3521","MATH3560","MATH3570"]
     for code in codes:
-        CONDITIONS[code][PROCESSED] = MATH_3000_8()    
-    
+        CONDITIONS[code][PROCESSED] = MATH_3000_8()
+
+    CONDITIONS["MATH2111"][PROCESSED] = MATH_2111()
+    CONDITIONS["MATH2221"][PROCESSED] = MATH_2221()
+    CONDITIONS["MATH2301"][PROCESSED] = MATH_2301()
+    CONDITIONS["MATH2601"][PROCESSED] = MATH_2601()
+    CONDITIONS["MATH2621"][PROCESSED] = MATH_2621()
+    CONDITIONS["MATH2701"][PROCESSED] = MATH_2701()
+    CONDITIONS["MATH2871"][PROCESSED] = MATH_2871()
     CONDITIONS["MATH3051"][PROCESSED] = MATH_3051()
     CONDITIONS["MATH3101"][PROCESSED] = MATH_3101_3121()
     CONDITIONS["MATH3121"][PROCESSED] = MATH_3101_3121()
@@ -86,14 +93,86 @@ def MATH_1099(condition):
 
     "processed": 3956 || 3959
 
-    "warning": Must be a Co-Op Scholar
+    "handbook_note": Must be a Co-Op Scholar
     """
-    
+
     return {
         "original": condition["original"],
         "processed": "3956 || 3959",
-        "warning": "Must be a Co-Op Scholar"
+        "handbook_note": "Must be a Co-Op Scholar"
     }
+
+def MATH_2111():
+    """
+    "original": "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251 each with a mark of at least 70; Excluded: MATH2019, MATH2049, MATH2069, MATH2100, MATH2110.<br/><br/>",
+    "processed": "MATH1231 || DPST1014 || MATH1241 || MATH1251 each with 70GRADE"
+    """
+
+    COURSES["MATH2111"]["exclusions"]["MATH2019"] = 1
+    COURSES["MATH2111"]["exclusions"]["MATH2049"] = 1
+    COURSES["MATH2111"]["exclusions"]["MATH2069"] = 1
+    COURSES["MATH2111"]["exclusions"]["MATH2100"] = 1
+    COURSES["MATH2111"]["exclusions"]["MATH2110"] = 1
+
+    return "70GRADE in MATH1231 || 70GRADE in DPST1014 || 70GRADE in MATH1241 || 70GRADE in MATH1251"
+
+def MATH_2221():
+    """
+    "original": "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251 each with a mark of 70.<br/><br/>",
+    "processed": "MATH1231 || DPST1014 || MATH1241 || MATH1251 each with 70GRADE"
+    """
+
+    return "70GRADE in MATH1231 || 70GRADE in DPST1014 || 70GRADE in MATH1241 || 70GRADE in MATH1251"
+
+def MATH_2301():
+    """
+    "original": "Prerequisite: MATH1031 (CR) or MATH1231 or or DPST1014 or MATH1241 or MATH1251. Exclusions: MATH2089, CVEN2002, and CVEN2702<br/><br/>",
+    "processed": "65GRADE in MATH1031 || MATH1231 || or DPST1014 || MATH1241 || MATH1251"
+    """
+
+    COURSES["MATH2301"]["exclusions"]["MATH2089"] = 1
+    COURSES["MATH2301"]["exclusions"]["CVEN2002"] = 1
+    COURSES["MATH2301"]["exclusions"]["CVEN2702"] = 1
+
+    return "65GRADE in MATH1031 || MATH1231 || DPST1014 || MATH1241 || MATH1251"
+
+def MATH_2601():
+    """
+    "original": "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251 each with a mark of 70 or greater; Exclusion: MATH2099<br/><br/>",
+    "processed": "MATH1231 || DPST1014 || MATH1241 || MATH1251 each with 70GRADE"
+    """
+
+    COURSES["MATH2601"]["exclusions"]["MATH2099"] = 1
+
+    return "70GRADE in MATH1231 || 70GRADE in DPST1014 || 70GRADE in MATH1241 || 70GRADE in MATH1251"
+
+def MATH_2621():
+    """
+    "original": "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251 each with a mark of at least 70; Exclusion: MATH2069<br/><br/>",
+    "processed": "MATH1231 || DPST1014 || MATH1241 || MATH1251 each with 70GRADE"
+    """
+
+    COURSES["MATH2621"]["exclusions"]["MATH2069"] = 1
+
+    return "70GRADE in MATH1231 || 70GRADE in DPST1014 || 70GRADE in MATH1241 || 70GRADE in MATH1251"
+
+def MATH_2701():
+    """
+    "original": "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251 with at least a CR, enrolment in an advanced maths or advanced science program<br/><br/>",
+    "processed": "MATH1231 || DPST1014 || MATH1241 || MATH1251 with at least a CR || enrolment in an advanced maths || advanced science program"
+    """
+    # TODO: JOEL: Got these codes from these searches under 'program':
+    # https://www.handbook.unsw.edu.au/search?q=advanced%20mathematics
+    # https://www.handbook.unsw.edu.au/search?q=advanced%20science
+    return "(65GRADE in MATH1231 || 65GRADE in DPST1014 || 65GRADE in MATH1241 || 65GRADE in MATH1251) && (3956 || 3523 || 3998 || 3564 || 3949 || 3781 || 3589 || 3761 || 3962 || 3782 || 3323 || 3566 || 3458 || 3997 || 3948 || 3593 || 3957 || 3762 || 3472)"
+
+def MATH_2871():
+    """
+    "original": "Prerequisite: MATH1041 or ECON1203 or ECON2292 or PSYC2001 or MATH1231 or DPST1014 or MATH1241 or MATH1251 or equivalent.<br/><br/>",
+    "processed": "MATH1041 || ECON1203 || ECON2292 || PSYC2001 || MATH1231 || DPST1014 || MATH1241 || MATH1251 || equivalent"
+    """
+    
+    return "MATH1041 || ECON1203 || ECON2292 || PSYC2001 || MATH1231 || DPST1014 || MATH1241 || MATH1251"
 
 def MATH_3000_8():
     """
@@ -105,7 +184,7 @@ def MATH_3000_8():
 def MATH_3051():
     """
     "original": "Prerequisite: 12UOC of second year mathematics courses, including MATH2011 or MATH2111 or MATH2069(DN).<br/><br/>",
-    
+
     "processed": "12UOC in L2 MATHS && (MATH2011 || MATH2111 || 75GRADE in MATH2069)"
     """
     return "12UOC in L2 MATH && (MATH2011 || MATH2111 || 75GRADE in MATH2069)"
@@ -113,7 +192,7 @@ def MATH_3051():
 def MATH_3101_3121():
     """
     "original": "Prerequisite: 12 units of credit in Level 2 Math courses including (MATH2011 or MATH2111 and MATH2120 or MATH2130 or MATH2121 or MATH2221), or (both MATH2019 (DN) and MATH2089), or (both MATH2069 (CR) and MATH2099)<br/><br/>",
-    
+
     "processed": "12UOC in L2 MATHS && ((MATH2011 || MATH2111) && (MATH2120 || MATH2130 || MATH2121 || MATH2221) || (75GRADE in MATH2019 && MATH2089) || (65GRADE in MATH2069 && MATH2099))"
     """
     return "12UOC in L2 MATH && ((MATH2011 || MATH2111) && (MATH2120 || MATH2130 || MATH2121 || MATH2221) || (75GRADE in MATH2019 && MATH2089) || (65GRADE in MATH2069 && MATH2099))"
@@ -121,7 +200,7 @@ def MATH_3101_3121():
 def MATH_3161():
     """
     "original": "Prerequisite: 12 units of credit in Level 2 Mathematics courses including MATH2011 or MATH2111 or MATH2510, and MATH2501 or MATH2601, or both MATH2019(DN) and MATH2089, or both MATH2069(CR) and MATH2099.<br/><br/>",
-   
+
     "processed": "12UOC in L2 MATH && ((MATH2011 || MATH2111 || MATH2510) && (MATH2501 || MATH2601) || (75GRADE in MATH2019 && MATH2089) || (65GRADE in MATH2069 && MATH2099))"
     """
     return "12UOC in L2 MATH && ((MATH2011 || MATH2111 || MATH2510) && (MATH2501 || MATH2601) || (75GRADE in MATH2019 && MATH2089) || (65GRADE in MATH2069 && MATH2099))"
@@ -137,7 +216,7 @@ def MATH_3171():
 def MATH_3261():
     """
     "original": "Prerequisite: 12 units of credit in Level 2 Math courses including (MATH2011 or MATH2111) and (MATH2120 or MATH2130 or MATH2121 or MATH2221), or (both MATH2019 (DN) and MATH2089), or (both MATH2069 (DN) and MATH2099)<br/><br/>",
-    
+
     "processed": "12UOC in L2 MATH && ((MATH2011 || MATH2111) && (MATH2120 || MATH2130 || MATH2121 || MATH2221)) || (75GRADE in MATH2019 && MATH2089) || (75GRADE in MATH2069 && MATH2099)"
     """
 
@@ -155,7 +234,7 @@ def MATH_3361():
 def MATH_3531():
     """
     "original": "Prerequisite: 12 units of credit in Level 2 Math courses including MATH2011 or MATH2111 or MATH2069.<br/><br/>",
-    
+
     "processed": "12UOC in L2 MATH && (MATH2011 || MATH2111 || MATH2069)"
     """
 
@@ -163,28 +242,30 @@ def MATH_3531():
 
 def MATH_3611_3701(condition):
     """
-    "original": "Prerequisite: 12 UOC of Level 2 Mathematics with an average mark of at least 70, including MATH2111 or MATH2011 (CR) or MATH2510 (CR), or permission from the Head of Department.<br/><br/>",
-
-    "processed": "12UOC in L2 Mathematics with an average 70GRADE && MATH2111 || 65GRADE in MATH2011 || 65GRADE in MATH2510 || permission from the Head of Department" 
-    
-    "warning": "Can circumvent prerequisites with permission from Head of Department"
+    "original": "Prerequisite: 12 UOC of Level 2 Mathematics with an average mark of at least 70, including MATH2111 or MATH2011 (CR) or MATH2510 (CR), or permission from the Head of Department.<br/><br/>"
+    "processed": "12UOC in L2 Mathematics with an average 70GRADE && MATH2111 || 65GRADE in MATH2011 || 65GRADE in MATH2510 || permission from the Head of Department"
+    "handbook_note": "Can circumvent prerequisites with permission from Head of Department"
     """
+
+    # TODO: JOEL: This doesn't actually work?? It doesn't like index 9 'MATH'
+    # I think it just doesn't like '70GRADE in LX XXXX' since it's 2 words. So what's the fix?
     return {
         "original": condition["original"],
         "processed": "12UOC in L2 MATH && 70GRADE in L2 MATH && (MATH2111 || 65GRADE in MATH2011 || 65GRADE in MATH2510)",
-        "warning": "Can circumvent prerequisites with permission from Head of Department"
+        "handbook_note": "Can circumvent prerequisites with permission from Head of Department"
     }
 
 def MATH_3711(condition):
     """
     "original": "Prerequisite: 12 UOC of Level 2 Mathematics with an average mark of at least 70, including MATH2601 or MATH2501 (CR), or permission from the Head of Department.<br/><br/>",
-
     "processed": "12UOC in L2 MATH && 70GRADE in L2 MATH && (MATH2601 || 65GRADE in MATH2501)"
     """
+
+    # TODO: JOEL: Same deal as above in MATH_3611_3701
     return {
         "original": condition["original"],
         "processed": "12UOC in L2 MATH && 70GRADE in L2 MATH && (MATH2601 || 65GRADE in MATH2501)",
-        "warning": "Can circumvent prerequisites with permission from Head of Department"
+        "handbook_note": "Can circumvent prerequisites with permission from Head of Department"
     }
 
 def MATH_3801():
@@ -217,12 +298,14 @@ def MATH_4001():
 
     "processed": "MATH?H"
     """
+
+    # TODO: JOEL: This doesn't work?? Why? It just doesn't know what 'MATH?H'means?
     return "MATH?H"
 
 def MATH_6781():
     """
     "original": "12 units of credit in Level 2 Mathematics courses including (MATH2120 or MATH2130 or MATH2121 or MATH2221), or both MATH2019 and MATH2089, or both MATH2069 and MATH2099<br/><br/>",
-    
+
     "processed": "12UOC in L2 MATH && ((MATH2120 || MATH2130 || MATH2121 || MATH2221) || (MATH2019 && MATH2089) || (MATH2069 && MATH2099))"
     """
     return "12UOC in L2 MATH && ((MATH2120 || MATH2130 || MATH2121 || MATH2221) || (MATH2019 && MATH2089) || (MATH2069 && MATH2099))"
