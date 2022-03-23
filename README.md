@@ -10,7 +10,7 @@ We use docker to build 'images' for the backend, frontend, and mongodb. These `i
 
 ### Creating Environment Variables
 
-MongoDB and the backend require a few environment variables to get started. In the root folder, create a folder called `env` and add two files: `backend.env`, `mongodb.env` and `frontend.env`. 
+MongoDB and the backend require a few environment variables to get started. In the root folder, create a folder called `env` and add three files: `backend.env`, `mongodb.env` and `frontend.env`. 
 
 In `backend.env`, add the environment variables:
 - `MONGODB_USERNAME=...`
