@@ -12,7 +12,7 @@ const ProgressionChecker = () => {
   const fetchDegree = async () => {
     let res = await axios.get("http://localhost:3000/degree.json");
     setDegree(res.data);
-    res = await axios.get(`http://localhost:8000/programs/getStructure/3778/${res.data.concentrations[0].code}/${res.data.concentrations[1].code}`);
+    res = await axios.get(`/programs/getStructure/3778/${res.data.concentrations[0].code}/${res.data.concentrations[1].code}`);
 
     setCourses(res.data.structure);
     setIsLoading(false);

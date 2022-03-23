@@ -234,17 +234,14 @@ def coursesUnlockedWhenTaken(userData: UserData, courseToBeTaken: str):
     user = User(fixUserData(userData.dict()))
 
     ## initial state
-    courses_initially_unlocked = getAllUnlocked(user)
-
+    courses_initially_unlocked = unlocked_set(getAllUnlocked(user)['courses_state'])
     ## add course to the user
-    courseToAdd = {courseToBeTaken: [getCourse(courseToBeTaken)['UOC'], None]}
-    user.add_courses(courseToAdd)
-
+    user.add_courses({courseToBeTaken: [getCourse(courseToBeTaken)['UOC'], None]})
     ## final state
-    courses_now_unlocked = getAllUnlocked(user)
+    courses_now_unlocked = unlocked_set(getAllUnlocked(user)['courses_state'])
 
-    ## compare
-    before = [course for course in list(courses_initially_unlocked['courses_state'].keys()) if courses_initially_unlocked['courses_state'][course]['unlocked']]
-    after = [course for course in list(courses_now_unlocked['courses_state'].keys()) if courses_now_unlocked['courses_state'][course]['unlocked']]
+    return {'courses_unlocked_when_taken' : sorted(list(courses_now_unlocked - courses_initially_unlocked))}
 
-    return{'courses_unlocked_when_taken' : [course for course in after if course not in before]}
+def unlocked_set(courses_state):
+    '''fetch the set of unlocked courses from the courses_state of a getAllUnlocked call'''
+    return set(course for course in courses_state if courses_state[course]['unlocked'])

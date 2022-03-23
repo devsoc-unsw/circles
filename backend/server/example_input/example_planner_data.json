@@ -1,0 +1,32 @@
+{
+    "program": "3707",
+    "specialisations": ["COMPA1"],
+    "year": 1,
+    "plan": [
+        [
+            {},
+            {
+                "COMP1511": [6, null],
+                "MATH1141": [6, null],
+                "MATH1081": [6, null]
+            },
+            {
+                "COMP1521": [6, null],
+                "COMP9444": [6, null]
+            },
+            {
+                "COMP2521": [6, null],
+                "MATH1241": [6, null],
+                "COMP3331": [6, null]
+            }
+        ],
+        [
+            {},
+            {
+                "COMP1531": [6, null],
+                "COMP6080": [6, null],
+                "COMP3821": [6, null]
+            }
+        ]
+    ]
+}

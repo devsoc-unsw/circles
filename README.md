@@ -10,7 +10,7 @@ We use docker to build 'images' for the backend, frontend, and mongodb. These `i
 
 ### Creating Environment Variables
 
-MongoDB and the backend require a few environment variables to get started. In the root folder, create a folder called `env` and add two files: `backend.env` and `mongodb.env`. 
+MongoDB and the backend require a few environment variables to get started. In the root folder, create a folder called `env` and add three files: `backend.env`, `mongodb.env` and `frontend.env`. 
 
 In `backend.env`, add the environment variables:
 - `MONGODB_USERNAME=...`
@@ -20,6 +20,11 @@ In `backend.env`, add the environment variables:
 In `mongodb.env`, add:
 - `MONGO_INITDB_ROOT_USERNAME=...`
 - `MONGO_INITDB_ROOT_PASSWORD=...`
+
+In `frontend.env`, add:
+- `REACT_APP_BACKEND_API_BASE_URL=http://localhost:8000/`
+
+> NOTE: The `REACT_APP_BACKEND_API_BASE_URL` environment variable is the base url endpoint that the backend is running on. If the environment variable is not specified, the react application will default to using `http://localhost:8000/` as the base url when calling the API endpoint.
 
 Replace the ellipses with a username and password. The username and password in `backend.env` must match the values in `mongodb.env`. The `env` folder has been added to `.gitignore` and will not be committed to the repo. 
 

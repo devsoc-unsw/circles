@@ -17,9 +17,7 @@ export const MinorStep = ({ incrementStep, currStep }) => {
   const [options, setOptions] = React.useState({});
 
   const fetchAllMinors = async () => {
-    const res = await axios.get(
-      `http://localhost:8000/programs/getMinors/${programCode}`
-    );
+    const res = await axios.get(`/programs/getMinors/${programCode}`);
     setOptions(res.data["minors"]);
 
     // setIsLoading(false);

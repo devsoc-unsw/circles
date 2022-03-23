@@ -1,5 +1,4 @@
 # assumes that getPrograms, getMajors, and getMinors isnt borked.
-from random import choice
 import requests
 from hypothesis import given
 from hypothesis.strategies import sampled_from, composite, DrawFn

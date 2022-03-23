@@ -2,7 +2,7 @@ import React from "react";
 import { Tooltip, Typography, Modal, Button, notification } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { plannerActions } from "../../../actions/plannerActions";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { EditOutlined } from "@ant-design/icons";
 import DebouncingSelect from "./DebouncingSelect";
 import "./steps.less";
@@ -21,9 +21,7 @@ const TermBox = ({ yearIndex, termNo }) => {
 
     try {
       const courseInfoList = await Promise.all(
-        courses.map((course) =>
-          axios.get(`http://localhost:8000/courses/getCourse/${course.value}`)
-        )
+        courses.map((course) => axios.get(`/courses/getCourse/${course.value}`))
       );
       for (let course of courseInfoList) {
         const info = course.data;
@@ -92,7 +90,7 @@ const TermBox = ({ yearIndex, termNo }) => {
   );
 };
 export const PreviousCoursesStep = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const planner = useSelector((state) => state.planner);
   const numYears = new Date().getFullYear() - planner.startYear + 1; // Inclusive
 
@@ -104,7 +102,7 @@ export const PreviousCoursesStep = () => {
       openNotification("Please select a specialisation");
     } else {
       localStorage.setItem("degree", JSON.stringify(degree));
-      history.push("/course-selector");
+      navigate("/course-selector");
     }
   };
 
