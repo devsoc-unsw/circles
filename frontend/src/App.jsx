@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Layout, notification } from "antd";
 import { FeedbackBtn } from "./components/feedbackBtn/FeedbackBtn";
 import Header from "./components/header/Header";
@@ -32,23 +32,39 @@ function App() {
       ) : (
         <>
           <Content className="app-root content">
-            <Switch>
-              <Route path="/degree-wizard">
-                <DegreeWizard />
-              </Route>
-              <Route path="/course-selector">
-                <Header />
-                <CourseSelector />
-              </Route>
-              <Route path="/term-planner">
-                <Header />
-                <TermPlanner />
-              </Route>
-              <Route path="/progression-checker">
-                <Header />
-                <ProgressionChecker />
-              </Route>
-            </Switch>
+            <Routes>
+              <Route
+                path="/degree-wizard"
+                element={<DegreeWizard />}
+              />
+              <Route
+                path="/course-selector"
+                element={
+                  <div>
+                    <Header />
+                    <CourseSelector />
+                  </div>
+                }
+              />
+              <Route
+                path="/term-planner"
+                element={
+                  <div>
+                    <Header />
+                    <TermPlanner />
+                  </div>
+                }
+              />
+              <Route
+                path="/progression-checker"
+                element={
+                  <div>
+                    <Header />
+                    <ProgressionChecker />
+                  </div>
+                }
+              />
+            </Routes>
             <FeedbackBtn />
           </Content>
         </>

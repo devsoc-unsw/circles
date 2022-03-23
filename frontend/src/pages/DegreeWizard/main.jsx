@@ -12,7 +12,7 @@ import { DatePicker, Button, Typography, Modal } from "antd";
 import "./main.less";
 import { springProps } from "./spring";
 import { scroller } from "react-scroll";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const { Title } = Typography;
 const { RangePicker } = DatePicker;
@@ -21,7 +21,7 @@ function DegreeWizard() {
   const theme = useSelector((store) => store.theme);
   const dispatch = useDispatch();
   const [isModalVisible, setIsModalVisible] = React.useState(false);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     // TODO: Warning dialog before planner is reset.
@@ -60,7 +60,7 @@ function DegreeWizard() {
 
   const handleCancel = () => {
     setIsModalVisible(false);
-    history.push('/course-selector');
+    navigate('/course-selector');
   };
 
   return (

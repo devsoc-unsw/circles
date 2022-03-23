@@ -1,5 +1,4 @@
-import json 
-import requests 
+import requests
 
 
 def test_search_course():

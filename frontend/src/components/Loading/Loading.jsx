@@ -1,17 +1,17 @@
 import React from "react";
 import circlesLogo from "../../images/circlesWithBg.svg";
 import "./loading.less";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Loading({ setLoading }) {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     setTimeout(() => {
       setLoading(false);
       if (JSON.parse(localStorage.getItem("degree")) === null)
-        history.push("/degree-wizard");
-      else history.push("/course-selector");
+        navigate("/degree-wizard");
+      else navigate("/course-selector");
     }, 750);
   }, []);
 

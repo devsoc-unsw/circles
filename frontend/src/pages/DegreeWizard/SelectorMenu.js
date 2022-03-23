@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Select } from 'antd';
 import { Typography } from 'antd';
 import { Button } from 'antd';
@@ -20,13 +20,13 @@ function SelectorMenu() {
     'Computer Networks','Embedded System','Security Engineering'
   ]
   
-  const history = useHistory();
+  const navigate = useNavigate();
   const [degreeState, setdegreeState] = useState('');
   const [degreetypeState, setdegreetypeState] = useState('');
   const [specialisationState, setspecialisationState] = useState('');
 
   const onButtonClick=(e)=>{
-    history.push('/course-selector');
+    navigate('/course-selector');
   }
 
   return (
