@@ -19,7 +19,8 @@ origins = [
     "http://frontend:8080",
     "http://frontend:8000",
     "http://frontend:3000",
-    "http://frontend:3001"
+    "http://frontend:3001",
+    "https://circles.csesoc.unsw.edu.au"
 ]
 
 app.add_middleware(
