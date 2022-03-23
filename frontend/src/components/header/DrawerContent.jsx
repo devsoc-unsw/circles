@@ -4,17 +4,17 @@ import React from "react";
 // import { useSelector, useDispatch } from 'react-redux';
 import { BugOutlined } from "@ant-design/icons";
 import { Menu } from "antd";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import useMediaQuery from "../../hooks/useMediaQuery";
 
 export const DrawerContent = ({ onCloseDrawer }) => {
   // const theme = useSelector(state => state.theme);
   const isSmall = useMediaQuery("(max-width: 1000px)");
   const FORM_LINK = "https://forms.gle/b3b8CrZsz9h5sZ3v9";
-  const history = useHistory();
+  const navigate = useNavigate();
   // const dispatch = useDispatch();
   const handlePush = (url) => {
-    history.push(url);
+    navigate(url);
     onCloseDrawer();
   };
   const openFeedbackLink = () => {

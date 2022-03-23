@@ -32,7 +32,7 @@ def tokenise_conditions():
         text = re.sub(r'\]', r' ] ', text)
         text = re.sub(r'\[', r' [ ', text)
         text = re.sub(r' +', r' ', text)
-        
+
         logic = ["("]
 
         # Split on white space

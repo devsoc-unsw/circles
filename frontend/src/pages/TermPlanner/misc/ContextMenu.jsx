@@ -4,13 +4,13 @@ import { Menu, Item, theme } from "react-contexify";
 import { plannerActions } from "../../../actions/plannerActions";
 import { courseTabActions } from "../../../actions/courseTabActions";
 import "react-contexify/dist/ReactContexify.css";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { updateAllWarnings } from "../ValidateTermPlanner";
 import { FaCalendarTimes, FaTrash, FaInfoCircle } from "react-icons/fa";
 
 const ContextMenu = ({ code, plannedFor }) => {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const { years, startYear, courses, completedTerms } = useSelector((state) => {
     return state.planner;
   });
@@ -30,7 +30,7 @@ const ContextMenu = ({ code, plannedFor }) => {
   const id = `${code}-context`;
 
   const handleInfo = () => {
-    history.push(`/course-selector`);
+    navigate(`/course-selector`);
     // dispatch(courseTabActions("SET_ACTIVE_TAB", 1));
     dispatch(courseTabActions("ADD_TAB", code));
   };

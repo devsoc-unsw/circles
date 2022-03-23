@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tooltip, Button, Typography, Popconfirm, Alert } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ReactComponent as PlannerIcon } from '../assets/planner-icon.svg';
 import { DeleteOutlined } from '@ant-design/icons';
 import { plannerActions } from '../../actions/plannerActions';
@@ -47,7 +47,7 @@ const CourseCard = ({ code, title, showAlert }) => {
 }
 export const PlannerCart = () => {
     const dispatch = useDispatch();
-    const history = useHistory();
+    const navigate = useNavigate();
     const courses = useSelector(store => store.planner.courses);
     const [openMenu, setOpenMenu] = React.useState(false);
     const [show, setShow] = React.useState(false);
@@ -93,7 +93,7 @@ export const PlannerCart = () => {
                         <div className='planner-cart-empty-cont'>
                             <Text className='text'> You have not selected any courses. Find them in our course selector</Text>
                             <Button type="secondary" shape="round" className="planner-cart-link-to-cs"
-                                onClick={() => history.push('/course-selector')}>
+                                onClick={() => navigate('/course-selector')}>
                                 Go to course selector
                             </Button>
                         </div>
