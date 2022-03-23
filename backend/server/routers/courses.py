@@ -18,7 +18,7 @@ def fixUserData(userData: dict):
     """
         dates and returns the userData with the UOC of a course
     """
-    coursesWithoutUoc = [course for course in userData["courses"] if type(userData["courses"][course]) is int]
+    coursesWithoutUoc = [course for course in userData["courses"] if type(userData["courses"][course]) is not list]
     filledInCourses = {course : [getCourse(course)["UOC"], userData["courses"][course]] for course in coursesWithoutUoc}
     userData["courses"].update(filledInCourses)
     return userData

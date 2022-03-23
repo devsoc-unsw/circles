@@ -23,7 +23,7 @@ export default function CourseSelector() {
    const fetchStructure = async () => {
     try {
       const res1 = await axios.get(
-        `http://localhost:8000/programs/getStructure/${programCode}/${specialisation}/${minor}`
+        `/programs/getStructure/${programCode}/${specialisation}/${minor}`
       );
       setStructure(res1.data.structure);
     } catch (err) {
