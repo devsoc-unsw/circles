@@ -16,7 +16,7 @@ export const DegreeStep = ({ incrementStep, currStep }) => {
   const [options, setOptions] = React.useState(null);
 
   const fetchAllDegrees = async () => {
-    const res = await axios.get("http://localhost:8000/programs/getPrograms");
+    const res = await axios.get("/programs/getPrograms");
     setOptions(res.data["programs"]);
   };
 

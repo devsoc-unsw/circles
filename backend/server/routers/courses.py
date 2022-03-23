@@ -240,7 +240,7 @@ def coursesUnlockedWhenTaken(userData: UserData, courseToBeTaken: str):
     ## final state
     courses_now_unlocked = unlocked_set(getAllUnlocked(user)['courses_state'])
 
-    return {'courses_unlocked_when_taken' : list(courses_initially_unlocked - courses_now_unlocked)}
+    return {'courses_unlocked_when_taken' : sorted(list(courses_now_unlocked - courses_initially_unlocked))}
 
 def unlocked_set(courses_state):
     '''fetch the set of unlocked courses from the courses_state of a getAllUnlocked call'''

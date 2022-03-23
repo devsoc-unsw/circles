@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Tag, Alert, Typography, Space, Menu, Dropdown } from "antd";
 import { PlusOutlined, StopOutlined } from "@ant-design/icons";
@@ -23,7 +23,46 @@ const CourseAttribute = ({ title, content }) => {
   );
 };
 
-export default function CourseDescription() {
+const PlannerDropdown = ({courseCode, structure, addToPlanner}) => {
+  const [categories, setCategories] = useState([])
+
+  useEffect(() => {
+    // Example groups: Major, Minor, General
+    const categoriesDropdown = []
+    for (const group in structure) {
+      // Example subGroup: Core Courses, Computing Electives, Flexible Education
+      for (const subgroup in structure[group]) {
+        const subgroupStructure = structure[group][subgroup]
+        if (subgroupStructure.courses) {
+          const subCourses = Object.keys(subgroupStructure.courses)
+          const regex = subCourses.join("|"); // e.g. "COMP3|COMP4"
+          courseCode.match(regex) && categoriesDropdown.push(`${group} - ${subgroup}`)
+        }
+      }
+    }
+    if (!categoriesDropdown.length) {
+      // add these options to dropdown as a fallback if courseCode is not in
+      // major or minor
+      categoriesDropdown.push('Flexible Education')
+      categoriesDropdown.push('General Education')
+    }
+    setCategories(categoriesDropdown)
+  }, [courseCode])
+
+  return (
+    <Menu>
+      {
+        categories.map(category => 
+          <Menu.Item onClick={() => {addToPlanner(category)}}>
+            Add as {category}
+          </Menu.Item>
+        )
+      }
+    </Menu>
+  );
+}
+
+export default function CourseDescription({structure}) {
   const dispatch = useDispatch();
   const { active, tabs } = useSelector((state) => state.tabs);
   let id = tabs[active];
@@ -33,21 +72,16 @@ export default function CourseDescription() {
   const courseInPlanner = coursesInPlanner.has(id);
   const planner = useSelector((state) => state.planner);
   const degree = useSelector((state) => state.degree);
-  const [show, setShow] = React.useState(false);
-  const [loading, setLoading] = React.useState(false);
-  const [pageLoaded, setpageLoaded] = React.useState(false);
-  const [coursesPathTo, setCoursesPathTo] = React.useState({});
+  const [show, setShow] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [pageLoaded, setpageLoaded] = useState(false);
+  const [coursesPathTo, setCoursesPathTo] = useState({});
 
 const getPathToCoursesById = async (id) => {
   try {
     const res = await axios.post(
-      `http://localhost:8000/courses/coursesUnlockedWhenTaken/${id}`,
+      `/courses/coursesUnlockedWhenTaken/${id}`,
       JSON.stringify(prepareUserPayload(degree, planner)),
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
     );
     setCoursesPathTo(res.data.courses_unlocked_when_taken);
   } catch (err) {
@@ -55,7 +89,7 @@ const getPathToCoursesById = async (id) => {
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (id === "explore" || id === "search") return;
     dispatch(getCourseById(id));
     getPathToCoursesById(id);
@@ -105,18 +139,6 @@ const getPathToCoursesById = async (id) => {
     }, 4000);
   };
 
-  const PlannerDropdown = (
-    <Menu>
-      <Menu.Item onClick={() => {addToPlanner("General Education")}}>
-        Add as Gen-Ed
-      </Menu.Item>
-      <Menu.Item onClick={() => {addToPlanner("Flexible Education")}}>
-        Add as Free Elective
-      </Menu.Item>
-    </Menu>
-  );
-  
-
   return (
     <div>
       <div className="cs-description-root">
@@ -160,9 +182,9 @@ const getPathToCoursesById = async (id) => {
                   </Button>
                 ) : (
                   <Dropdown.Button
-                    overlay={PlannerDropdown}
+                    overlay={() => <PlannerDropdown courseCode={course.code} structure={structure} addToPlanner={addToPlanner}/>}
                     loading={loading}
-                    onClick={() => {addToPlanner("Uncategorised")}}
+                    onClick={() => {addToPlanner('Uncategorised')}}
                     type="primary"
                   >
                     <PlusOutlined />
