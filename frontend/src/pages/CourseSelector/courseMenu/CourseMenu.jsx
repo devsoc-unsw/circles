@@ -32,13 +32,8 @@ export default function CourseMenu({structure}) {
   React.useEffect(async () => {
     try {
       const res = await axios.post(
-        `http://localhost:8000/courses/getAllUnlocked/`,
+        `/courses/getAllUnlocked/`,
         JSON.stringify(prepareUserPayload(degree, planner)),
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
       );
       dispatch(setCourses(res.data.courses_state));
       generateMenuData(res.data.courses_state);

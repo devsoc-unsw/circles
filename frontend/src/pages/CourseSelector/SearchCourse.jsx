@@ -64,15 +64,7 @@ export default function SearchCourse() {
 
   const fetchCourses = async () => {
     try {
-      const res = await axios.post(
-        `http://localhost:8000/courses/getAllUnlocked/`,
-        JSON.stringify(payload),
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const res = await axios.post(`/courses/getAllUnlocked/`, JSON.stringify(payload));
       setCourses(res.data.courses_state);
     } catch (err) {
       console.log(err);

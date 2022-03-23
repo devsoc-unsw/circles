@@ -80,13 +80,8 @@ export default function CourseDescription({structure}) {
 const getPathToCoursesById = async (id) => {
   try {
     const res = await axios.post(
-      `http://localhost:8000/courses/coursesUnlockedWhenTaken/${id}`,
+      `/courses/coursesUnlockedWhenTaken/${id}`,
       JSON.stringify(prepareUserPayload(degree, planner)),
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
     );
     setCoursesPathTo(res.data.courses_unlocked_when_taken);
   } catch (err) {
