@@ -22,7 +22,8 @@ class User:
         self.specialisations: dict[str, int] = {}
         self.year: int = 0
 
-        if data:
+        # Data was provided
+        if data is not None:
             self.load_json(data)
 
     def add_courses(self, courses: dict[str, (int, int)]):
@@ -94,7 +95,7 @@ class User:
         total_wam, total_uoc = 0, 0
 
         for course, (uoc, grade) in self.courses.items():
-            if grade != None and category.match_definition(course):
+            if grade is not None and category.match_definition(course):
                 total_uoc += uoc
                 total_wam += uoc * grade
 
