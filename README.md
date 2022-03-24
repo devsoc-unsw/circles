@@ -16,7 +16,7 @@ In `backend.env`, add the environment variables:
 
 - `MONGODB_USERNAME=...`
 - `MONGODB_PASSWORD=...`
-- `MONGODB_DATABASE=mongodb`
+- `MONGODB_SERVICE_HOSTNAME=mongodb`
 
 In `mongodb.env`, add:
 
