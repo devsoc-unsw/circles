@@ -1,5 +1,9 @@
 env
 *.env
 **/.pytest_cache
+<<<<<<< HEAD
 **/.vscode
 **/.hypothesis
+=======
+**/.vscode
+>>>>>>> c252f91 (CIRCLES-273: fixed some highly offensive files)
