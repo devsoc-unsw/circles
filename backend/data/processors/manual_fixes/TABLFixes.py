@@ -1,10 +1,10 @@
 """
 https://github.com/csesoc/Circles/wiki/Manual-Fixes-to-Course-Prerequisites
 
-Copy this into a new file for the relevant faculty's fixes: 
+Copy this into a new file for the relevant faculty's fixes:
 e.g. COMPFixes.py, ACCTFixes.py, PSYCFixes.py
 
-Apply manual TABL fixes to processed conditions in conditionsProcessed.json so 
+Apply manual TABL fixes to processed conditions in conditionsProcessed.json so
 that they can be fed into algorithms.
 
 If you make a mistake and need to regenerate conditionsProcessed.json, then you
@@ -53,7 +53,7 @@ def TABL_1710_2710():
     "processed": "Must not be Law single && dual programs && 18UOC"
     """
 
-    COURSES["TABL1710"]["exclusions"] ={"LAWS#": 1}
+    COURSES["TABL1710"]["exclusions"] = {"LAWS#": 1}
     COURSES["TABL2710"]["exclusions"] = {"LAWS#": 1}
 
     return "18UOC"

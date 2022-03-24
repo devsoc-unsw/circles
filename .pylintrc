@@ -16,7 +16,8 @@ ignore=CVS, __init__.py
 # Add files or directories matching the regex patterns to the blacklist. The
 # regex matches against base names, not paths.
 # Current pattern will ignore all `test_` and `_test` files
-ignore-patterns=(.)*_test\.py,test_(.)*\.py
+# Also ignore manual fixes
+ignore-patterns=(.)*_test\.py,test_(.)*\.py,
 
 # Python code to execute, usually for sys.path manipulation such as
 # pygtk.require().
@@ -374,7 +375,9 @@ ignore-comments=yes
 ignore-docstrings=yes
 
 # Ignore imports when computing similarities.
-ignore-imports=no
+# Default: No - the nature of Circles, esp manual fixes calls for
+# repeat imports
+ignore-imports=yes
 
 # Minimum lines number of a similarity.
 min-similarity-lines=4
