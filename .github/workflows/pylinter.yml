@@ -22,7 +22,7 @@ on:
 
   # This will only work when this workflow is on default branch
   # TODO: Uncomment when merging
-  # pull_requests:
+  # pull_request:
   #   branches: [dev, master, main]
 
 jobs:
