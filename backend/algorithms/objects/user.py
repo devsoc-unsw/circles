@@ -10,7 +10,7 @@ class User:
     def __init__(self, data = None):
         # Will load the data if any was given
         self.courses: dict[str, (int, int)] = {}
-        self.cur_courses: list[str, (int, int)] = [] # Courses in the current term
+        self.cur_courses: list[str, (int, int)] = []  # Courses in the current term
         self.program: str = None
         self.specialisations: dict[str, int] = {}
         self.year: int = 0
@@ -91,7 +91,6 @@ class User:
             for course, (uoc, _) in self.courses.items()
             if category.match_definition(course)
         )
-
 
     def unselect_course(self, target, locked) -> list[str]:
         """Given a course to unselect and a list of locked courses, remove the courses

@@ -2,7 +2,15 @@ import re
 from fastapi import APIRouter, HTTPException
 from server.database import coursesCOL, archivesDB
 from algorithms.objects.user import User
-from server.routers.model import *
+from server.routers.model import (
+    CourseDetails,
+    message,
+    CoursesState,
+    UserData,
+    CONDITIONS,
+    CACHED_HANDBOOK_NOTE,
+    ProgramCourses,
+)
 from itertools import chain
 
 router = APIRouter(
@@ -33,7 +41,7 @@ def fixUserData(userData: dict):
 
 @router.get(
     "/getCourse/{courseCode}",
-    response_model=courseDetails,
+    response_model=CourseDetails,
     responses={
         400: {
             "model": message,
@@ -165,7 +173,7 @@ def getAllUnlocked(userData: UserData):
 
 @router.get(
     "/getLegacyCourses/{year}/{term}",
-    response_model=programCourses,
+    response_model=ProgramCourses,
     responses={
         400: {"model": message, "description": "Year or Term input is incorrect"},
         200: {
