@@ -23,46 +23,49 @@ const CourseAttribute = ({ title, content }) => {
   );
 };
 
-const PlannerDropdown = ({courseCode, structure, addToPlanner}) => {
-  const [categories, setCategories] = useState([])
+const PlannerDropdown = ({ courseCode, structure, addToPlanner }) => {
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     // Example groups: Major, Minor, General
-    const categoriesDropdown = []
+    const categoriesDropdown = [];
     for (const group in structure) {
       // Example subGroup: Core Courses, Computing Electives, Flexible Education
       for (const subgroup in structure[group]) {
-        const subgroupStructure = structure[group][subgroup]
+        const subgroupStructure = structure[group][subgroup];
         if (subgroupStructure.courses) {
-          const subCourses = Object.keys(subgroupStructure.courses)
+          const subCourses = Object.keys(subgroupStructure.courses);
           const regex = subCourses.join("|"); // e.g. "COMP3|COMP4"
-          courseCode.match(regex) && categoriesDropdown.push(`${group} - ${subgroup}`)
+          courseCode.match(regex) &&
+            categoriesDropdown.push(`${group} - ${subgroup}`);
         }
       }
     }
     if (!categoriesDropdown.length) {
       // add these options to dropdown as a fallback if courseCode is not in
       // major or minor
-      categoriesDropdown.push('Flexible Education')
-      categoriesDropdown.push('General Education')
+      categoriesDropdown.push("Flexible Education");
+      categoriesDropdown.push("General Education");
     }
-    setCategories(categoriesDropdown)
-  }, [courseCode])
+    setCategories(categoriesDropdown);
+  }, [courseCode]);
 
   return (
     <Menu>
-      {
-        categories.map(category => 
-          <Menu.Item onClick={() => {addToPlanner(category)}}>
-            Add as {category}
-          </Menu.Item>
-        )
-      }
+      {categories.map((category) => (
+        <Menu.Item
+          onClick={() => {
+            addToPlanner(category);
+          }}
+        >
+          Add as {category}
+        </Menu.Item>
+      ))}
     </Menu>
   );
-}
+};
 
-export default function CourseDescription({structure}) {
+export default function CourseDescription({ structure }) {
   const dispatch = useDispatch();
   const { active, tabs } = useSelector((state) => state.tabs);
   let id = tabs[active];
@@ -77,14 +80,14 @@ export default function CourseDescription({structure}) {
   const [pageLoaded, setpageLoaded] = useState(false);
   const [coursesPathTo, setCoursesPathTo] = useState({});
 
-const getPathToCoursesById = async (id) => {
-  try {
-    const res = await axios.post(
-      `/courses/coursesUnlockedWhenTaken/${id}`,
-      JSON.stringify(prepareUserPayload(degree, planner)),
-    );
-    setCoursesPathTo(res.data.courses_unlocked_when_taken);
-  } catch (err) {
+  const getPathToCoursesById = async (id) => {
+    try {
+      const res = await axios.post(
+        `/courses/coursesUnlockedWhenTaken/${id}`,
+        JSON.stringify(prepareUserPayload(degree, planner))
+      );
+      setCoursesPathTo(res.data.courses_unlocked_when_taken);
+    } catch (err) {
       console.log(err);
     }
   };
@@ -93,6 +96,8 @@ const getPathToCoursesById = async (id) => {
     if (id === "explore" || id === "search") return;
     dispatch(getCourseById(id));
     getPathToCoursesById(id);
+    // turn off alert when moving to a different page
+    setShow(false);
     setTimeout(() => {
       setpageLoaded(true);
     }, 2000);
@@ -182,9 +187,17 @@ const getPathToCoursesById = async (id) => {
                   </Button>
                 ) : (
                   <Dropdown.Button
-                    overlay={() => <PlannerDropdown courseCode={course.code} structure={structure} addToPlanner={addToPlanner}/>}
+                    overlay={() => (
+                      <PlannerDropdown
+                        courseCode={course.code}
+                        structure={structure}
+                        addToPlanner={addToPlanner}
+                      />
+                    )}
                     loading={loading}
-                    onClick={() => {addToPlanner('Uncategorised')}}
+                    onClick={() => {
+                      addToPlanner("Uncategorised");
+                    }}
                     type="primary"
                   >
                     <PlusOutlined />
@@ -208,7 +221,9 @@ const getPathToCoursesById = async (id) => {
               <Space direction="vertical" style={{ marginBottom: "1rem" }}>
                 <Text>
                   <div
-                    dangerouslySetInnerHTML={{ __html: course.raw_requirements || 'None' }}
+                    dangerouslySetInnerHTML={{
+                      __html: course.raw_requirements || "None",
+                    }}
                   />
                 </Text>
               </Space>
@@ -236,8 +251,12 @@ const getPathToCoursesById = async (id) => {
               )}
             </div>
             <div>
-              <CourseAttribute title="Faculty" content={course.faculty} />
-              <CourseAttribute title="School" content={course.school} />
+              {course.faculty && (
+                <CourseAttribute title="Faculty" content={course.faculty} />
+              )}
+              {course.school && (
+                <CourseAttribute title="School" content={course.school} />
+              )}
               <CourseAttribute
                 title="Study Level"
                 content={course.study_level}
