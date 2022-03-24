@@ -60,10 +60,9 @@ export default function DebouncingSelect({ setPlannedCourses }) {
     try {
       const res = await axios.post(
         `/courses/getAllUnlocked/`,
-        JSON.stringify(payload),
+        JSON.stringify(payload)
       );
       setCourses(res.data.courses_state);
-      console.log(res.data);
     } catch (err) {
       console.log(err);
     }

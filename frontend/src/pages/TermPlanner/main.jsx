@@ -53,9 +53,9 @@ const TermPlanner = () => {
 
   return (
     <>
-      <OptionsHeader 
-        areYearsHidden={areYearsHidden} 
-        plannerRef={plannerPic} 
+      <OptionsHeader
+        areYearsHidden={areYearsHidden}
+        plannerRef={plannerPic}
         isAllEmpty={isAllEmpty}
       />
       {isLoading ? (
@@ -127,8 +127,7 @@ const TermPlanner = () => {
 const openNotification = () => {
   const args = {
     message: "Your terms are looking a little empty",
-    description:
-      "Open the drawers on the right to reveal courses you've added from the course selector",
+    description: "Add courses from the course selector to the term planner",
     duration: 3,
     className: "text helpNotif",
     placement: "topRight",
@@ -136,7 +135,7 @@ const openNotification = () => {
   notification["info"](args);
 };
 
-// checks if no courses have been planned (to display help notification 
+// checks if no courses have been planned (to display help notification
 // & determine if unschedule all button available)
 const isAllEmpty = (years) => {
   for (const year of years) {

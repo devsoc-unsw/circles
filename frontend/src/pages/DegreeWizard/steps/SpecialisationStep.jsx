@@ -18,7 +18,6 @@ export const SpecialisationStep = ({ incrementStep, currStep }) => {
 
   const fetchAllSpecializations = async () => {
     const res = await axios.get(`/programs/getMajors/${programCode}`);
-    console.log(res.data);
     setOptions(res.data["majors"]);
   };
 
