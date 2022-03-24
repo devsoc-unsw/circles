@@ -34,6 +34,11 @@ jobs:
           echo "MONGODB_DATABASE=mongodb";
         } >> env/backend.env
         {
+          echo "MONGODB_USERNAME=github-ci";
+          echo "MONGODB_PASSWORD=github-ci";
+          echo "MONGODB_DATABASE=mongodb";
+        } >> env/frontend.env
+        {
           echo "MONGO_INITDB_ROOT_USERNAME=github-ci";
           echo "MONGO_INITDB_ROOT_PASSWORD=github-ci";
         } >> env/mongodb.env
