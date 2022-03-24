@@ -1,11 +1,13 @@
-""" The central point from where we will run our server. It will open up the 
+""" The central point from where we will run our server. It will open up the
 api and also run the files"""
 
-import uvicorn
 import argparse
 import sys
-from server.server import app
+
+import uvicorn
+
 from server.database import overwrite_all
+from server.server import app
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -17,7 +19,7 @@ if __name__ == "__main__":
 
     try:
         args = parser.parse_args()
-    except:
+    except argparse.ArgumentError:
         parser.print_help()
         sys.exit(0)
 

@@ -4,32 +4,28 @@ in order to run the relevant drivers
 if you need to  bash this, use python3 -m runprocessors --type data-fix --stage all
 """
 
-import sys
 import argparse
 import subprocess
+from sys import exit
+
+from algorithms.cache.cache import (cache_exclusions, cache_handbook_note,
+                                    cache_mappings, cache_program_mappings)
 from algorithms.load_conditions import cache_conditions_pkl_file
 from algorithms.log_broken import log_broken_conditions
 
-from data.scrapers.programs_scraper import scrape_prg_data
-from data.scrapers.specialisations_scraper import scrape_spn_data
-from data.scrapers.courses_scraper import scrape_course_data
-
-from data.scrapers.programs_formatting import format_prg_data
-from data.scrapers.specialisations_formatting import format_spn_data
-from data.scrapers.courses_formatting import format_course_data
-
+from data.processors.conditions_preprocessing import preprocess_conditions
+from data.processors.conditions_tokenising import tokenise_conditions
+from data.processors.courses_processing import process_course_data
 from data.processors.programs_processing import process_prg_data
 from data.processors.programs_processing_type1 import process_prg_data_type1
 from data.processors.specialisations_processing import customise_spn_data
-from data.processors.courses_processing import process_course_data
 
-from data.processors.conditions_preprocessing import preprocess_conditions
-from data.processors.conditions_tokenising import tokenise_conditions
-
-from algorithms.cache.cache import cache_exclusions
-from algorithms.cache.cache import cache_handbook_note
-from algorithms.cache.cache import cache_mappings
-from algorithms.cache.cache import cache_program_mappings
+from data.scrapers.courses_formatting import format_course_data
+from data.scrapers.courses_scraper import scrape_course_data
+from data.scrapers.programs_formatting import format_prg_data
+from data.scrapers.programs_scraper import scrape_prg_data
+from data.scrapers.specialisations_formatting import format_spn_data
+from data.scrapers.specialisations_scraper import scrape_spn_data
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
@@ -50,13 +46,17 @@ parser.add_argument(
 
 try:
     args = parser.parse_args()
-except:
+except argparse.ArgumentError:
     parser.print_help()
-    sys.exit(0)
+    exit(0)
 
 
 def run_manual_fixes():
-    subprocess.run(["data/processors/manual_fixes/run_manual_fixes.sh"])
+    try:
+        subprocess.run(["data/processors/manual_fixes/run_manual_fixes.sh"], check=True)
+    except subprocess.CalledProcessError:
+        print("Unable to run the 'run_manual_fixes.sh'; exiting with error")
+        exit(0)
 
 
 run = {
@@ -91,16 +91,16 @@ run = {
     },
 }
 if __name__ == "__main__":
-    if args.type == None and args.stage == None:
+    if args.type is None and args.stage is None:
         res = input("did you mean to run all data fixes? [y/N] ")
-        if "y" == res:
+        if res == "y":
             args.type = "data-fix"
             args.stage = "all"
         else:
             parser.print_help()
             exit()
     if args.type == "data-fix" and args.stage == "all":
-        """run all the things except for the scrapers and formatters to deal with code changes"""
+        # run all the things except for the scrapers and formatters to deal with code changes
         for t in run:
             for stage in run[t]:
                 if stage != "scrape":

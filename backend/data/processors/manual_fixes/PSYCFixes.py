@@ -122,7 +122,6 @@ def PSYC3051_PSYC3241():
 def PSYC3121_PSYC3301():
     return "PSYC2001 && PSYC2061"
 
-<<<<<<< HEAD
 def PSYC_3202():
     """
     "original": "Prereq: PSYCs 2101, 2081, 2001<br/><br/>",
@@ -135,8 +134,6 @@ def PSYC_3202():
 # TODO: JOEL: Another common case is where they have commas instead of &&.
 # E.g. "PTRL3001,GEOS3321" or "PSYC2001 , PSYC2071" are examples
 # Also, for PSYC specifically, "PSYCAH" isn't recognised?
-=======
->>>>>>> affcd8b (LINTED: manual_fixes)
 
 def PSYC3211_PSYC3221_PSYC3311():
     return "PSYC2001 && PSYC2071"

@@ -7,11 +7,14 @@ NOTE: The helper functions must be run from the backend directory due to their p
 
 import json
 import os
-from pymongo import MongoClient
-from server.config import FINAL_DATA_PATH, ARCHIVED_DATA_PATH
-from data.config import ARCHIVED_YEARS
+from sys import exit
 
-"""Export these as needed"""
+from data.config import ARCHIVED_YEARS
+from pymongo import MongoClient
+
+from server.config import ARCHIVED_DATA_PATH, FINAL_DATA_PATH
+
+# Export these as needec
 try:
     # client = MongoClient("mongodb://localhost:27017/")
     client = MongoClient(
