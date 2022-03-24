@@ -94,8 +94,10 @@ export default function CourseDescription({ structure }) {
 
   useEffect(() => {
     if (id === "explore" || id === "search") return;
-    dispatch(getCourseById(id));
-    getPathToCoursesById(id);
+    if (id) {
+      dispatch(getCourseById(id));
+      getPathToCoursesById(id);
+    }
     // turn off alert when moving to a different page
     setShow(false);
     setTimeout(() => {
