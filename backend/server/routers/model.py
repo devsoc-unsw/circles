@@ -65,17 +65,14 @@ class CourseState(BaseModel):
 class CoursesState(BaseModel):
     courses_state: dict[str, CourseState] = {}
 
-<<<<<<< HEAD
 class CoursesUnlockedWhenTaken (BaseModel):
     courses_unlocked_when_taken: list
 
 class CourseTypeState (BaseModel):
     is_accurate: bool 
-=======
 
 class CourseTypeState(BaseModel):
     is_accurate: bool
->>>>>>> 71f6cd6 (CIRCLES-273: automatically ran black linter and looked at the output to spot anything too wierd)
     unlocked: bool
     handbook_note: str
     warnings: list

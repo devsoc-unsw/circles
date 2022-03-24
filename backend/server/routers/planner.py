@@ -14,15 +14,12 @@ router = APIRouter(
 def plannerIndex():
     return "Index of planner"
 
-<<<<<<< HEAD
 def fixPlannerData(plannerData: PlannerData):
     for year in plannerData["plan"]:
         for term in year:
             for courseName, course in term.items():
                 if type(course) is int:
                     term[courseName] = [getCourse(courseName)["UOC"], course]
-=======
->>>>>>> 71f6cd6 (CIRCLES-273: automatically ran black linter and looked at the output to spot anything too wierd)
 
 @router.post("/validateTermPlanner/", response_model=CoursesState)
 async def validateTermPlanner(

@@ -107,7 +107,6 @@ def MATH_1099(condition):
         "handbook_note": "Must be a Co-Op Scholar"
     }
 
-<<<<<<< HEAD
 def MATH_2111():
     """
     "original": "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251 each with a mark of at least 70; Excluded: MATH2019, MATH2049, MATH2069, MATH2100, MATH2110.<br/><br/>",
@@ -179,8 +178,6 @@ def MATH_2871():
     """
     
     return "MATH1041 || ECON1203 || ECON2292 || PSYC2001 || MATH1231 || DPST1014 || MATH1241 || MATH1251"
-=======
->>>>>>> affcd8b (LINTED: manual_fixes)
 
 def MATH_3000_8():
     """
@@ -258,15 +255,8 @@ def MATH_3531():
 
 def MATH_3611_3701(condition):
     """
-<<<<<<< HEAD
     "original": "Prerequisite: 12 UOC of Level 2 Mathematics with an average mark of at least 70, including MATH2111 or MATH2011 (CR) or MATH2510 (CR), or permission from the Head of Department.<br/><br/>"
     "processed": "12UOC in L2 Mathematics with an average 70GRADE && MATH2111 || 65GRADE in MATH2011 || 65GRADE in MATH2510 || permission from the Head of Department"
-=======
-    "original": "Prerequisite: 12 UOC of Level 2 Mathematics with an average mark of at least 70, including MATH2111 or MATH2011 (CR) or MATH2510 (CR), or permission from the Head of Department.<br/><br/>",
-
-    "processed": "12UOC in L2 Mathematics with an average 70GRADE && MATH2111 || 65GRADE in MATH2011 || 65GRADE in MATH2510 || permission from the Head of Department"
-
->>>>>>> affcd8b (LINTED: manual_fixes)
     "handbook_note": "Can circumvent prerequisites with permission from Head of Department"
     """
 
