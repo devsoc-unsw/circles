@@ -21,11 +21,7 @@ PAYLOAD = {
     "query": {
         "bool": {
             "must": [
-                {
-                    "term": {
-                        "live": True
-                    }
-                },
+                {"term": {"live": True}},
                 [
                     {
                         "bool": {
@@ -33,13 +29,11 @@ PAYLOAD = {
                             "should": [
                                 {
                                     "query_string": {
-                                        "fields": [
-                                            "unsw_paos.implementationYear"
-                                        ],
-                                        "query":f"*{LIVE_YEAR}*"
+                                        "fields": ["unsw_paos.implementationYear"],
+                                        "query": f"*{LIVE_YEAR}*",
                                     }
                                 }
-                            ]
+                            ],
                         }
                     },
                     {
@@ -48,13 +42,11 @@ PAYLOAD = {
                             "should": [
                                 {
                                     "query_string": {
-                                        "fields": [
-                                            "unsw_paos.studyLevelValue"
-                                        ],
-                                        "query":"*ugrd*"
+                                        "fields": ["unsw_paos.studyLevelValue"],
+                                        "query": "*ugrd*",
                                     }
                                 }
-                            ]
+                            ],
                         }
                     },
                     {
@@ -63,35 +55,19 @@ PAYLOAD = {
                             "should": [
                                 {
                                     "query_string": {
-                                        "fields": [
-                                            "unsw_paos.active"
-                                        ],
-                                        "query":"*1*"
+                                        "fields": ["unsw_paos.active"],
+                                        "query": "*1*",
                                     }
                                 }
-                            ]
+                            ],
                         }
-                    }
-                ]
+                    },
+                ],
             ],
-            "filter": [
-                {
-                    "terms": {
-                        "contenttype": [
-                            "unsw_paos"
-                        ]
-                    }
-                }
-            ]
+            "filter": [{"terms": {"contenttype": ["unsw_paos"]}}],
         }
     },
-    "sort": [
-        {
-            "unsw_paos.code_dotraw": {
-                "order": "asc"
-            }
-        }
-    ],
+    "sort": [{"unsw_paos.code_dotraw": {"order": "asc"}}],
     "from": 0,
     "size": TOTAL_SPNS,
     "track_scores": True,
@@ -102,18 +78,15 @@ PAYLOAD = {
             "*.award_titles",
             "*.keywords",
             "urlmap",
-            "contenttype"
+            "contenttype",
         ],
-        "excludes": [
-            "",
-            None
-        ]
-    }
+        "excludes": ["", None],
+    },
 }
 
 
 def scrape_spn_data():
-    """ Retrieves data for all undergraduate specialisations """
+    """Retrieves data for all undergraduate specialisations"""
 
     url = "https://www.handbook.unsw.edu.au/api/es/search"
     headers = {
@@ -123,10 +96,9 @@ def scrape_spn_data():
     r = requests.post(url, data=json.dumps(PAYLOAD), headers=headers)
 
     data_helpers.write_data(
-        r.json()["contentlets"], 'data/scrapers/specialisationsPureRaw.json')
+        r.json()["contentlets"], "data/scrapers/specialisationsPureRaw.json"
+    )
 
 
 if __name__ == "__main__":
     scrape_spn_data()
-
-

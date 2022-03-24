@@ -189,77 +189,12 @@ def addSpecialisation(structure: dict, code: str, type: str):
                     }
                 }
             })
-@router.get("/getStructure/{programCode}/{major}", response_model=Structure,
-            responses={
-                400: {"model": message, "description": "Uh oh you broke me"},
-                200: {
-                    "description": "Returns the program structure",
-                    "content": {
-                        "application/json": {
-                            "example": {
-                                "Major": {
-                                    "Core Courses": {
-                                        "UOC": 66,
-                                        "courses": {
-                                            "COMP3821": "Extended Algorithms and Programming Techniques",
-                                            "COMP3121": "Algorithms and Programming Techniques",
-                                        }
-                                    },
-                                    "Computing Electives": {
-                                        "UOC": 30,
-                                        "courses": {
-                                            "ENGG4600": "Engineering Vertically Integrated Project",
-                                            "ENGG2600": "Engineering Vertically Integrated Project",
-                                        }
-                                    }
-                                },
-                                "General": {
-                                    "GeneralEducation": {
-                                        "UOC": 12
-                                    },
-                                    "FlexEducation": {
-                                        "UOC": 6
-                                    },
-                                    "BusinessCoreCourses": {
-                                        "UOC": 6,
-                                        "courses": {
-                                            "BUSI9999": "How To Business"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            })
-@router.get("/getStructure/{programCode}", response_model=Structure,
-            responses={
-                400: {"model": message, "description": "Uh oh you broke me"},
-                200: {
-                    "description": "Returns the program structure",
-                    "content": {
-                        "application/json": {
-                            "example": {
-                                "General": {
-                                    "GeneralEducation": {
-                                        "UOC": 12
-                                    },
-                                    "FlexEducation": {
-                                        "UOC": 6
-                                    },
-                                    "BusinessCoreCourses": {
-                                        "UOC": 6,
-                                        "courses": {
-                                            "BUSI9999": "How To Business"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            })
+@router.get("/getStructure/{programCode}/{major}", response_model=Structure)
+@router.get("/getStructure/{programCode}", response_model=Structure)
 def getStructure(programCode: str, major: Optional[str] = None, minor: Optional[str] = None):
+    '''
+        NOTE: major and minor is optionally added. 
+    '''
     structure = {}
 
     if major:
@@ -285,6 +220,6 @@ def getStructure(programCode: str, major: Optional[str] = None, minor: Optional[
         structure['General']['Flexible Education'] = {'UOC': programsResult['components']['FE']['credits_to_complete']}
         structure['General']['General Education'] = {'UOC': programsResult['components']['GE']['credits_to_complete']}
 
-    return {'structure': structure}
+    return { 'structure': structure }
 
 

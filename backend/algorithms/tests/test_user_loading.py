@@ -1,4 +1,4 @@
-'''Testing the user class to ensure that the user data is accurately imported and updated'''
+"""Testing the user class to ensure that the user data is accurately imported and updated"""
 
 from algorithms.objects.user import User
 from math import isclose
@@ -23,7 +23,8 @@ def test_user1():
     assert isclose(user.wam(), 70.5)
     assert user.uoc() == 12
     assert user.year == 3
-    
+
+
 def test_user2():
     user = User(USERS["user2"])
 
@@ -36,6 +37,7 @@ def test_user2():
     assert user.uoc() == 18
     assert user.year == 1
 
+
 def test_user3():
     user = User(USERS["user3"])
 
@@ -44,4 +46,3 @@ def test_user3():
     assert user.wam() == None
     assert user.uoc() == 0
     assert user.year == 1
-

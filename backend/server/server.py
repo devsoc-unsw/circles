@@ -20,7 +20,10 @@ origins = [
     "http://frontend:8000",
     "http://frontend:3000",
     "http://frontend:3001",
+<<<<<<< HEAD
     "https://circles.csesoc.unsw.edu.au"
+=======
+>>>>>>> 71f6cd6 (CIRCLES-273: automatically ran black linter and looked at the output to spot anything too wierd)
 ]
 
 app.add_middleware(
@@ -35,8 +38,7 @@ app.include_router(planner.router)
 app.include_router(courses.router)
 app.include_router(programs.router)
 
-@app.get('/')
+
+@app.get("/")
 async def index():
     return "At index inside server.py"
-
-

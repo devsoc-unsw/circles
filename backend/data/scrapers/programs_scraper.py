@@ -18,68 +18,74 @@ TOTAL_PGRMS = 249
 PAYLOAD = {
     "query": {
         "bool": {
-            "must": [{
-                "term": {
-                    "live": True
-                }
-            },
-                [{
-                    "bool": {
-                        "minimum_should_match": "100%",
-                        "should": [{
-                            "query_string": {
-                                "fields": ["unsw_pcourse.studyLevelValue"],
-                                "query": "*ugrd*"
-                            }
-                        }]
-                    }
-                }, {
-                    "bool": {
-                        "minimum_should_match": "100%",
-                        "should": [{
-                            "query_string": {
-                                "fields": ["unsw_pcourse.implementationYear"],
-                                "query":f"*{LIVE_YEAR}*"
-                            }
-                        }]
-                    }
-                }, {
-                    "bool": {
-                        "minimum_should_match": "100%",
-                        "should": [{
-                            "query_string": {
-                                "fields": ["unsw_pcourse.active"],
-                                "query": "*1*"
-                            }
-                        }]
-                    }
-                }]
+            "must": [
+                {"term": {"live": True}},
+                [
+                    {
+                        "bool": {
+                            "minimum_should_match": "100%",
+                            "should": [
+                                {
+                                    "query_string": {
+                                        "fields": ["unsw_pcourse.studyLevelValue"],
+                                        "query": "*ugrd*",
+                                    }
+                                }
+                            ],
+                        }
+                    },
+                    {
+                        "bool": {
+                            "minimum_should_match": "100%",
+                            "should": [
+                                {
+                                    "query_string": {
+                                        "fields": ["unsw_pcourse.implementationYear"],
+                                        "query": f"*{LIVE_YEAR}*",
+                                    }
+                                }
+                            ],
+                        }
+                    },
+                    {
+                        "bool": {
+                            "minimum_should_match": "100%",
+                            "should": [
+                                {
+                                    "query_string": {
+                                        "fields": ["unsw_pcourse.active"],
+                                        "query": "*1*",
+                                    }
+                                }
+                            ],
+                        }
+                    },
+                ],
             ],
-            "filter": [{
-                "terms": {
-                    "contenttype": ["unsw_pcourse", "unsw_pcourse"]
-                }
-            }]
+            "filter": [{"terms": {"contenttype": ["unsw_pcourse", "unsw_pcourse"]}}],
         }
     },
-    "sort": [{
-        "unsw_pcourse.code_dotraw": {
-            "order": "asc"
-        }
-    }],
+    "sort": [{"unsw_pcourse.code_dotraw": {"order": "asc"}}],
     "from": 0,
     "size": 249,
     "track_scores": True,
     "_source": {
-        "includes": ["*.code", "*.name", "*.award_titles", "*.keywords", "urlmap", "contenttype"],
-        "excludes": ["", None]
-    }
+        "includes": [
+            "*.code",
+            "*.name",
+            "*.award_titles",
+            "*.keywords",
+            "urlmap",
+            "contenttype",
+        ],
+        "excludes": ["", None],
+    },
 }
 
 
-'''
+"""
 Retrieves data for all undergraduate programs 
-'''
+"""
 
 
 def scrape_prg_data():
@@ -89,7 +95,8 @@ def scrape_prg_data():
     }
     r = requests.post(url, data=json.dumps(PAYLOAD), headers=headers)
     data_helpers.write_data(
-        r.json()["contentlets"], 'data/scrapers/programsPureRaw.json')
+        r.json()["contentlets"], "data/scrapers/programsPureRaw.json"
+    )
 
 
 if __name__ == "__main__":

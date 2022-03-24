@@ -1,5 +1,5 @@
-''' The central point from where we will run our server. It will open up the 
-api and also run the files'''
+""" The central point from where we will run our server. It will open up the 
+api and also run the files"""
 
 import uvicorn
 import argparse
@@ -9,7 +9,11 @@ from server.database import overwrite_all
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--overwrite', action='store_true', help='Inclusion of option will overwrite the database')
+    parser.add_argument(
+        "--overwrite",
+        action="store_true",
+        help="Inclusion of option will overwrite the database",
+    )
 
     try:
         args = parser.parse_args()

@@ -15,22 +15,37 @@ Step in the data's journey:
 """
 
 import re
-from data.utility import data_helpers
+from data.utility.data_helpers import read_data, write_data
 
 # TODO: add more specialisations as we expand scope of Circles
-TEST_SPNS = ["COMPA1", "COMPAH", "COMPBH", "SENGAH", "COMPD1", "COMPD1",
-             "COMPE1", "COMPI1", "COMPJ1", "COMPN1", "COMPS1", "COMPY1",
-             "COMPZ1", "ACCTA2", "FINSA2", "INFSA2", "MARKA2", "MATHC2",
-             "PSYCM2"]
+TEST_SPNS = [
+    "COMPA1",
+    "COMPAH",
+    "COMPBH",
+    "SENGAH",
+    "COMPD1",
+    "COMPD1",
+    "COMPE1",
+    "COMPI1",
+    "COMPJ1",
+    "COMPN1",
+    "COMPS1",
+    "COMPY1",
+    "COMPZ1",
+    "ACCTA2",
+    "FINSA2",
+    "INFSA2",
+    "MARKA2",
+    "MATHC2",
+    "PSYCM2",
+]
 
-CODE_MAPPING = data_helpers.read_data(
-    "data/utility/programCodeMappings.json")["title_to_code"]
+CODE_MAPPING = read_data("data/utility/programCodeMappings.json")["title_to_code"]
 
 
 def customise_spn_data():
 
-    data = data_helpers.read_data(
-        "data/scrapers/specialisationsFormattedRaw.json")
+    data = read_data("data/scrapers/specialisationsFormattedRaw.json")
 
     customised_data = {}  # Dictionary for all customised data
     for spn in TEST_SPNS:
@@ -46,7 +61,11 @@ def customise_spn_data():
         for container in formatted["structure"]:
             # Build curriculum data and locate any constraints within curriculum
 
-            if container["description"] and not container["courses"] and not container["structure"]:
+            if (
+                container["description"]
+                and not container["courses"]
+                and not container["structure"]
+            ):
                 # If container lists no courses and has no nested curriculum
                 # 'structure', then there is likely to be a constraint in the
                 # 'description' field
@@ -59,12 +78,9 @@ def customise_spn_data():
                     "courses": {},
                     "title": container["title"],
                 }
-                curriculum_item["credits_to_complete"] = int(
-                    get_credits(container))
-                curriculum_item["core"] = is_core(
-                    curriculum_item["title"].lower())
-                curriculum_item["levels"] = get_levels(
-                    curriculum_item["title"].lower())
+                curriculum_item["credits_to_complete"] = int(get_credits(container))
+                curriculum_item["core"] = is_core(curriculum_item["title"].lower())
+                curriculum_item["levels"] = get_levels(curriculum_item["title"].lower())
                 curriculum_item["notes"] = get_notes(container["description"])
 
                 if container["structure"]:
@@ -72,8 +88,11 @@ def customise_spn_data():
                     get_nested_data(container["structure"], curriculum_item)
                 else:
                     # No nested container containing curriculum data
-                    get_courses(curriculum_item["courses"], container["courses"],
-                                container["description"])
+                    get_courses(
+                        curriculum_item["courses"],
+                        container["courses"],
+                        container["description"],
+                    )
 
                 # Add item to curriculum
                 curriculum.append(curriculum_item)
@@ -82,8 +101,7 @@ def customise_spn_data():
         customised_data[spn]["curriculum"] = curriculum
         print("Processing complete :)\n")
 
-    data_helpers.write_data(
-        customised_data, "data/final_data/specialisationsProcessed.json")
+    write_data(customised_data, "data/final_data/specialisationsProcessed.json")
 
 
 def get_constraint(constraint_data: dict) -> dict:
@@ -94,12 +112,12 @@ def get_constraint(constraint_data: dict) -> dict:
     """
     return {
         "title": constraint_data["title"],
-        "description": strip_tags(constraint_data["description"])
+        "description": strip_tags(constraint_data["description"]),
     }
 
 
 def strip_tags(text):
-    """ Strips HTML tags """
+    """Strips HTML tags"""
     text = re.sub(r"<[^>]*?/>", " ", text)
     text = re.sub(r" +", " ", text)
     return text.strip()
@@ -119,7 +137,7 @@ def initialise_spn(spn: dict, data: dict) -> None:
 def get_credits(container: dict) -> str:
     """
     Adds credit point requirements to curriculum item dict.
-    Credit points exist either explicitly in the container's field 
+    Credit points exist either explicitly in the container's field
     "credit_points" or must be parsed from the "description" field.
     """
     if container["credit_points"]:
@@ -132,7 +150,7 @@ def get_credits(container: dict) -> str:
 
 
 def is_core(title: str) -> bool:
-    """ 
+    """
     Returns whether container is core.
     """
     if "core" in title:
@@ -170,14 +188,13 @@ def get_levels(title: str) -> list[int]:
 
 
 def get_notes(description: str) -> str:
-    """ Extracts any unique notes in the container description. While most 
+    """Extracts any unique notes in the container description. While most
     course containers state 'Students must take X UOC of the following courses.',
     some include extra info after this line: e.g. 'Counting further VIP courses
-    is only possible if etc.' """
+    is only possible if etc.'"""
 
     # Non-greedy search to catch anything after first matching line
-    res = re.search(
-        r"Students must.*?following courses\.?([^.].+)", description)
+    res = re.search(r"Students must.*?following courses\.?([^.].+)", description)
     if res:  # Unique notes found
         return strip_tags(res.group(1))
     else:
@@ -193,17 +210,21 @@ def get_nested_data(container: dict, curriculum_item: dict) -> None:
 
         # Student may choose one of two courses
         if sub_container["title"] == "One of the following:":
-            get_one_of_courses(
-                sub_container["courses"], curriculum_item["courses"])
+            get_one_of_courses(sub_container["courses"], curriculum_item["courses"])
 
         # Sub container title matches parent container title, so simply
         # extract courses to put into your curriculum dict
         elif sub_container["title"] == curriculum_item["title"]:
-            get_courses(curriculum_item["courses"], sub_container["courses"],
-                        sub_container["description"])
+            get_courses(
+                curriculum_item["courses"],
+                sub_container["courses"],
+                sub_container["description"],
+            )
 
 
-def get_one_of_courses(container_courses: dict[str, str], curriculum_courses: dict) -> None:
+def get_one_of_courses(
+    container_courses: dict[str, str], curriculum_courses: dict
+) -> None:
     """
     Since tuples are not supported by JSON, current approach to 'one of
     the following' courses is to convert to key-value pair
@@ -221,9 +242,10 @@ def get_one_of_courses(container_courses: dict[str, str], curriculum_courses: di
     curriculum_courses[one_of_courses] = list(container_courses.values())
 
 
-def get_courses(curriculum_courses: dict, container_courses: list[str],
-                description: str) -> None:
-    """ 
+def get_courses(
+    curriculum_courses: dict, container_courses: list[str], description: str
+) -> None:
+    """
     Adds courses from container to the customised curriculum course dict.
     """
     for course, title in container_courses.items():
@@ -240,13 +262,13 @@ def get_courses(curriculum_courses: dict, container_courses: list[str],
     # Below is the old code parsing description for course codes. It
     # may come in handy later, but if not then delete
     # Captures course codes and strings like 'any level X course offered by ... '
-        # if not container_courses:
-        # res = re.findall("[A-Z]{4}[0-9]{4}|any level[^<]+", description)
-        # print(res)
-        # for course in res:
-        #     if "any level" in course:
-        #         course = process_any_level(course)
-        #     curriculum_courses[course] = 1
+    # if not container_courses:
+    # res = re.findall("[A-Z]{4}[0-9]{4}|any level[^<]+", description)
+    # print(res)
+    # for course in res:
+    #     if "any level" in course:
+    #         course = process_any_level(course)
+    #     curriculum_courses[course] = 1
 
 
 def process_any_level(unprocessed_course: str) -> str:
@@ -272,5 +294,3 @@ def process_any_level(unprocessed_course: str) -> str:
 
 if __name__ == "__main__":
     customise_spn_data()
-
-

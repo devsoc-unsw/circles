@@ -1,4 +1,4 @@
-'''
+"""
 DOCUMENTATION: https://github.com/csesoc/Circles/wiki/Tokenising-Conditions
 
 Turns the processed conditions into a list, separated into logical blocks.
@@ -8,14 +8,14 @@ For example:
 
 "65GRADE in COMP1927 || COMP2521"
 ==> [(, 65GRADE in COMP1927, ||, COMP2521, )]
-'''
+"""
 
 import re
 from data.utility import data_helpers
 
 PARSED_LOGIC = {}
 
-'''Converts the text condition into a json list'''
+"""Converts the text condition into a json list"""
 
 
 def tokenise_conditions():
@@ -27,11 +27,11 @@ def tokenise_conditions():
         # There are many words with (abcdefgh) where the brackets are attached
         # too tightly to the word. We first want to separate them like so:
         # ( abcdefgh ) so that our split can separate them cleanly.
-        text = re.sub(r'\(', r' ( ', text)
-        text = re.sub(r'\)', r' ) ', text)
-        text = re.sub(r'\]', r' ] ', text)
-        text = re.sub(r'\[', r' [ ', text)
-        text = re.sub(r' +', r' ', text)
+        text = re.sub(r"\(", r" ( ", text)
+        text = re.sub(r"\)", r" ) ", text)
+        text = re.sub(r"\]", r" ] ", text)
+        text = re.sub(r"\[", r" [ ", text)
+        text = re.sub(r" +", r" ", text)
 
         logic = ["("]
 
@@ -43,5 +43,4 @@ def tokenise_conditions():
 
         PARSED_LOGIC[code] = logic
 
-    data_helpers.write_data(
-        PARSED_LOGIC, "data/final_data/conditionsTokens.json")
+    data_helpers.write_data(PARSED_LOGIC, "data/final_data/conditionsTokens.json")

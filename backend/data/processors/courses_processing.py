@@ -9,9 +9,20 @@ import re
 from data.utility import data_helpers
 
 # Fields to keep in the processed file without modification from coursesFormattedRaw.json
-KEEP_UNEDITED = ["title", "code", "UOC", "level", "description", "study_level",
-                 "school", "faculty", "campus", "equivalents", "exclusions",
-                 "path_to"]
+KEEP_UNEDITED = [
+    "title",
+    "code",
+    "UOC",
+    "level",
+    "description",
+    "study_level",
+    "school",
+    "faculty",
+    "campus",
+    "equivalents",
+    "exclusions",
+    "path_to",
+]
 
 PROCESSED_COURSES = {}
 ABSENT_COURSES = {}  # Courses that appear in enrolment rules but do not exist
@@ -49,14 +60,13 @@ def process_course_data():
 
 
 def process_description(processed: dict, formatted: dict) -> None:
-    """ Removes HTML tags from descriptions """
+    """Removes HTML tags from descriptions"""
     if formatted["description"]:
-        processed["description"] = re.sub(
-            r"<[^>]*?>", "", formatted["description"])
+        processed["description"] = re.sub(r"<[^>]*?>", "", formatted["description"])
 
 
 def format_types(processed: dict) -> None:
-    """ Converts things like UOC and Level to the right type (String->Int) """
+    """Converts things like UOC and Level to the right type (String->Int)"""
     if processed["UOC"] is not None:
         processed["UOC"] = int(processed["UOC"])
 
@@ -65,10 +75,11 @@ def format_types(processed: dict) -> None:
     else:
         processed["level"] = int(processed["code"][4])
 
+
 def process_terms(processed: dict, formatted: dict) -> None:
-    """ Processes terms: e.g. 'Summer Term, Term 2' to ["ST", "T2"]. 
+    """Processes terms: e.g. 'Summer Term, Term 2' to ["ST", "T2"].
     Terms that do not conform to this (e.g. 'Summer Canberra') are left
-    as is and will be modified at a later stage """
+    as is and will be modified at a later stage"""
     res = ""
     if formatted["calendar"] == "3+":
         res = re.sub("Term ", "T", formatted["terms"])
@@ -77,17 +88,18 @@ def process_terms(processed: dict, formatted: dict) -> None:
 
     res = re.sub("Summer Term", "ST", res)
     res = re.sub("Summer Canberra", "SC", res)
-    res = res.split(',')
-    res = [item.strip(' ') for item in res]  # Strip any remaining spaces
+    res = res.split(",")
+    res = [item.strip(" ") for item in res]  # Strip any remaining spaces
     processed["terms"] = res
 
 
 def process_gen_ed(processed: dict, formatted: dict) -> None:
-    """ Processes whether the course is a gen ed. 0 for false and 1 for true """
+    """Processes whether the course is a gen ed. 0 for false and 1 for true"""
     if formatted["gen_ed"] == "false":
         processed["gen_ed"] = 0
     else:
         processed["gen_ed"] = 1
+
 
 # NOTE: ignoring attributes for now
 # def process_attributes(processed: dict, formatted: dict) -> None:
@@ -101,14 +113,13 @@ def process_gen_ed(processed: dict, formatted: dict) -> None:
 
 
 def process_enrolment_path(processed: dict, formatted: dict, data: dict) -> None:
-    """ Adds pre-requisites to 'path_from' field and for each prereq, adds this
-    processed course to their 'path_to' field in the main 'data' dict. This 
-    allows for courses to be processed in one iteration through the data """
+    """Adds pre-requisites to 'path_from' field and for each prereq, adds this
+    processed course to their 'path_to' field in the main 'data' dict. This
+    allows for courses to be processed in one iteration through the data"""
     global ABSENT_COURSES
 
     processed["path_from"] = dict()
-    prereqs = re.findall("\W([A-Z]{4}\d{4})\W*",
-                         formatted["enrolment_rules"], re.ASCII)
+    prereqs = re.findall("\W([A-Z]{4}\d{4})\W*", formatted["enrolment_rules"], re.ASCII)
     for prereq in prereqs:
         # Add each course code to 'path_from'
         processed["path_from"][prereq] = 1
@@ -130,17 +141,17 @@ def process_enrolment_path(processed: dict, formatted: dict, data: dict) -> None
 
 
 def process_exclusions(processed: dict, formatted: dict) -> None:
-    """ Parses exclusion string from enrolment rules """
+    """Parses exclusion string from enrolment rules"""
 
     # Extract exclusion string
-    res = re.search(r'Excl.*?:(.*)',
-                    formatted["enrolment_rules"], flags=re.IGNORECASE)
+    res = re.search(r"Excl.*?:(.*)", formatted["enrolment_rules"], flags=re.IGNORECASE)
     if res:
         exclusion_str = res.group(1)
 
         # Remove prerequisite string (following exclusion string)
-        exclusion_str = re.sub(r"Pre-?requisite.*", "",
-                               exclusion_str, flags=re.IGNORECASE)
+        exclusion_str = re.sub(
+            r"Pre-?requisite.*", "", exclusion_str, flags=re.IGNORECASE
+        )
 
         # Prepend MATH to 1131, 1141 and 1151
         math_codes = ["1131", "1141", "1151"]
@@ -148,23 +159,23 @@ def process_exclusions(processed: dict, formatted: dict) -> None:
             exclusion_str = re.sub(f" {code}", f" MATH{code}", exclusion_str)
 
         # Move courses into 'exclusions' field and remove from plaintext
-        courses = re.findall(r'[A-Z]{4}\d{4}', exclusion_str)
+        courses = re.findall(r"[A-Z]{4}\d{4}", exclusion_str)
         for course in courses:
             exclusion_str = re.sub(course, "", exclusion_str)
             processed["exclusions"][course] = 1
 
         # Move programs into 'exclusions' field and remove from plaintext
-        programs = re.findall(r'\d{4}', exclusion_str)
+        programs = re.findall(r"\d{4}", exclusion_str)
         for program in programs:
             exclusion_str = re.sub(program, "", exclusion_str)
             processed["exclusions"][program] = 1
 
-        exclusion_str = re.sub(r"(\d\d) units of credit",
-                               r"\1UOC", exclusion_str, flags=re.IGNORECASE)
+        exclusion_str = re.sub(
+            r"(\d\d) units of credit", r"\1UOC", exclusion_str, flags=re.IGNORECASE
+        )
 
         # Clean and add any remaining plaintext to 'exclusions' field
-        patterns = ["<br/>", " ,", "[.,]\s*$",
-                    "^[.,]", "^and$", "enrolment in program"]
+        patterns = ["<br/>", " ,", "[.,]\s*$", "^[.,]", "^and$", "enrolment in program"]
         exclusion_str = exclusion_str.strip()
         for pattern in patterns:
             exclusion_str = re.sub(pattern, "", exclusion_str)
@@ -172,13 +183,13 @@ def process_exclusions(processed: dict, formatted: dict) -> None:
 
         # Leftover conjunctions should not be added
         no_conjunctions = re.sub("and", "", exclusion_str, flags=re.IGNORECASE)
-        no_conjunctions = re.sub(
-            "or", "", no_conjunctions, flags=re.IGNORECASE)
+        no_conjunctions = re.sub("or", "", no_conjunctions, flags=re.IGNORECASE)
         if re.search(r"[A-Za-z]", no_conjunctions):
             processed["exclusions"]["leftover_plaintext"] = exclusion_str
 
+
 def process_enrolment_rules(processed: dict, course: dict):
-    processed['raw_requirements'] = re.sub("<br/><br/>", "", course['enrolment_rules'])
+    processed["raw_requirements"] = re.sub("<br/><br/>", "", course["enrolment_rules"])
 
 
 if __name__ == "__main__":

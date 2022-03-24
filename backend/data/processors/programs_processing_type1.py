@@ -40,33 +40,25 @@ def process_prg_data_type1():
         processedData[programData["code"]] = programData
 
     data_helpers.write_data(
-        processedData, "data/final_data/programsProcessedType1.json")
+        processedData, "data/final_data/programsProcessedType1.json"
+    )
 
 
 def addComponentData(formatted, programData):
     components = {
-
-
         # "disciplinary_component" : {
         #     # "credits_to_complete" : 0,
         #     # "Majors" : {
-
         #     # }
         # },
-
-
-
         # "FE" : {
         #     # "credits_to_complete" : 0,
         #     # "Minors" : {
         #     # }
         # },
-
         # "GE" : {
         #     # "credits_to_complete" : 0
         # },
-
-
     }
     # Loop through items in curriculum structure
     for item in formatted["CurriculumStructure"]:
@@ -93,13 +85,14 @@ def addMinorData(components, item):
     # Loop through list of minors
     for minor in item["relationship"]:
         # If item is a minor, add it to list
-        if minor["academic_item_type"] and minor["academic_item_type"]["value"] == "minor":
+        if (
+            minor["academic_item_type"]
+            and minor["academic_item_type"]["value"] == "minor"
+        ):
             code = minor["academic_item_code"]
             minorData[code] = 1
     # Append to minor data
     components["Minors"] = minorData
-
-
 
 
 def addDisciplineData(components, item):
@@ -113,7 +106,10 @@ def addDisciplineData(components, item):
             if container["vertical_grouping"]["value"] == "undergrad_major":
                 majorData = {}
                 for major in container["relationship"]:
-                    if major["academic_item_type"]["value"] == "major" or major["academic_item_type"]["value"] == "honours":
+                    if (
+                        major["academic_item_type"]["value"] == "major"
+                        or major["academic_item_type"]["value"] == "honours"
+                    ):
                         code = major["academic_item_code"]
                         majorData[code] = major["academic_item_name"]
                 Data["Majors"] = majorData
@@ -121,23 +117,24 @@ def addDisciplineData(components, item):
             if container["vertical_grouping"]["value"] == "honours":
                 honoursData = {}
                 for major in container["relationship"]:
-                    if major["academic_item_type"]["value"] == "major" or major["academic_item_type"]["value"] == "honours":
+                    if (
+                        major["academic_item_type"]["value"] == "major"
+                        or major["academic_item_type"]["value"] == "honours"
+                    ):
                         code = major["academic_item_code"]
                         honoursData[code] = major["academic_item_name"]
                 Data["Honours"] = honoursData
-           
-    components["DisciplineData"] = Data
 
+    components["DisciplineData"] = Data
 
 
 def addFEData(components, item):
     FE = {}
-    if item["credit_points"] != '':
+    if item["credit_points"] != "":
         FE["credits_to_complete"] = int(item["credit_points"])
     else:
         FE["credits_to_complete"] = int(item["credit_points_max"])
     title = ""
-
 
     # If container is not empty, add data to minors
     if item["container"] != []:
@@ -146,11 +143,13 @@ def addFEData(components, item):
             if container["vertical_grouping"]["value"] == "undergrad_minor":
                 minorData = {}
                 for minor in container["relationship"]:
-                    if minor["academic_item_type"] and minor["academic_item_type"]["value"] == "minor":
+                    if (
+                        minor["academic_item_type"]
+                        and minor["academic_item_type"]["value"] == "minor"
+                    ):
                         code = minor["academic_item_code"]
                         minorData[code] = minor["academic_item_name"]
                 FE["Minors"] = minorData
-
 
     components[title] = FE
 
@@ -163,10 +162,10 @@ def initialise_program(program):
     program_info["title"] = program["title"]
     program_info["code"] = program["code"]
 
-    duration = re.search("(\d)", program['duration'])
+    duration = re.search("(\d)", program["duration"])
     duration = duration.group(1)
 
-    program_info['duration'] = int(duration)
+    program_info["duration"] = int(duration)
     program_info["UOC"] = int(program["UOC"])
     program_info["faculty"] = program["faculty"]
     program_info["components"] = {}

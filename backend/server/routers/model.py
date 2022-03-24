@@ -3,24 +3,30 @@ from pydantic import BaseModel
 from pickle import load
 import json
 
-from algorithms.objects.conditions import CompositeCondition 
+from algorithms.objects.conditions import CompositeCondition
 
-class message (BaseModel):
+
+class message(BaseModel):
     message: str
 
-class programs (BaseModel):
+
+class programs(BaseModel):
     programs: dict
 
-class majors (BaseModel):
+
+class majors(BaseModel):
     majors: dict
 
-class minors (BaseModel):
+
+class minors(BaseModel):
     minors: dict
 
-class programCourses (BaseModel):
+
+class programCourses(BaseModel):
     courses: dict
 
-class courseDetails (BaseModel):
+
+class courseDetails(BaseModel):
     title: str
     code: str
     UOC: int
@@ -37,38 +43,50 @@ class courseDetails (BaseModel):
     gen_ed: int
     path_from: dict
 
-class Structure (BaseModel): # this is a copout - we should avoid this
+
+class Structure(BaseModel):  # this is a copout - we should avoid this
     structure: dict
 
-class UserData (BaseModel):
-    program: str 
+
+class UserData(BaseModel):
+    program: str
     specialisations: dict
     courses: dict
     year: int
 
-class CourseState (BaseModel):
-    is_accurate: bool 
+
+class CourseState(BaseModel):
+    is_accurate: bool
     unlocked: bool
-    handbook_note: str 
+    handbook_note: str
     warnings: list
 
-class CoursesState (BaseModel):
+
+class CoursesState(BaseModel):
     courses_state: dict[str, CourseState] = {}
 
+<<<<<<< HEAD
 class CoursesUnlockedWhenTaken (BaseModel):
     courses_unlocked_when_taken: list
 
 class CourseTypeState (BaseModel):
     is_accurate: bool 
+=======
+
+class CourseTypeState(BaseModel):
+    is_accurate: bool
+>>>>>>> 71f6cd6 (CIRCLES-273: automatically ran black linter and looked at the output to spot anything too wierd)
     unlocked: bool
-    handbook_note: str 
+    handbook_note: str
     warnings: list
     course_type: list[str]
 
-class CoursesTypeState (BaseModel):
+
+class CoursesTypeState(BaseModel):
     courses_state: dict[str, CourseTypeState] = {}
 
-class PlannerData (BaseModel):
+
+class PlannerData(BaseModel):
     program: str
     specialisations: list[str]
     year: int
@@ -77,8 +95,8 @@ class PlannerData (BaseModel):
 class AffectedCourses (BaseModel):
     affected_courses: list[str]
 
-minorInFE = ['3778']
-minorInSpecialisation = ['3502', '3970']
+minorInFE = ["3778"]
+minorInSpecialisation = ["3502", "3970"]
 
 
 CONDITIONS_PATH = "algorithms/conditions.pkl"
@@ -88,9 +106,8 @@ with open(CONDITIONS_PATH, "rb") as file:
 with open("algorithms/cache/handbook_note.json", "r") as file:
     CACHED_HANDBOOK_NOTE: dict[str, str] = json.load(file)
 
-flexEd = ['3778']
+flexEd = ["3778"]
+
 
 class description(BaseModel):
     description: str
-
-

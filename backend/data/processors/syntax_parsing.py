@@ -1,5 +1,5 @@
 import re
-import sys 
+import sys
 from data.utility import data_helpers
 
 CONDITIONS = data_helpers.read_data("data/final_data/conditionsProcessed.json")
@@ -11,31 +11,35 @@ PROCESSED = "processed"
 # Conditions that have had manual fixes applied
 FINAL_CONDITIONS = ["ACCT", "COMP"]
 
+
 def parse_syntax():
 
-    res = input("Type 'y' to print errors to file syntaxErrors.txt or any other key for stdout: ")
+    res = input(
+        "Type 'y' to print errors to file syntaxErrors.txt or any other key for stdout: "
+    )
 
     orig_stdout = sys.stdout
-    if res == 'y':
-        f = open('syntaxErrors.txt', 'w')
-        sys.stdout = f 
+    if res == "y":
+        f = open("syntaxErrors.txt", "w")
+        sys.stdout = f
 
     for course, condition in CONDITIONS.items():
 
         if course[:4] not in FINAL_CONDITIONS:
-            continue 
+            continue
 
         if not do_brackets_match(condition[PROCESSED]):
-            print(f"Failed bracket match!");
+            print(f"Failed bracket match!")
             print(f"{course}: {condition[PROCESSED]}\n")
 
         unknown = find_unknown_words(condition[PROCESSED])
         if unknown:
-            print(f"Unknown word(s) in condition");
+            print(f"Unknown word(s) in condition")
             print(f"{course}: {condition[PROCESSED]}")
             print(f"Unknown: {unknown}\n")
 
     sys.stdout = orig_stdout
+
 
 def find_unknown_words(processed):
     """
@@ -60,11 +64,12 @@ def find_unknown_words(processed):
         if re.match(r"^\d{1,3}(WAM|UOC|GRADE)$", word):
             # Ignore WAM, GRADE, and UOC words
             continue
-    
+
         if word and word not in KNOWN_WORDS:
             unknown.append(word)
 
     return unknown
+
 
 def do_brackets_match(processed):
     """
@@ -80,7 +85,7 @@ def do_brackets_match(processed):
         if char in bracket_map:
             # Opening brackets
             stack.append(char)
-        
+
         elif char in closing:
             # Closing brackets
             if len(stack) == 0:
@@ -89,13 +94,13 @@ def do_brackets_match(processed):
             popped = stack.pop()
             if char != bracket_map[popped]:
                 return False
-            
+
     if len(stack) != 0:
         # Stack should be empty in the end
         return False
-    
+
     return True
+
 
 if __name__ == "__main__":
     parse_syntax()
-
