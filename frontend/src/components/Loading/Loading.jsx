@@ -6,14 +6,18 @@ import { useLocation, useNavigate } from "react-router-dom";
 function Loading({ setLoading }) {
   const navigate = useNavigate();
 
-  let location = useLocation();
+  const location = useLocation();
+  console.log(location);
+  // redirect index page to course selector
+  let route = location.pathname === "/" ? "course-selector" : location.pathname;
 
   React.useEffect(() => {
     setTimeout(() => {
       setLoading(false);
       if (JSON.parse(localStorage.getItem("degree")) === null)
+        // first-time user
         navigate("/degree-wizard");
-      else navigate(location.pathname);
+      else navigate(route);
     }, 750);
   }, []);
 
