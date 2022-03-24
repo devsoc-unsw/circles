@@ -15,7 +15,7 @@ const { Title, Text } = Typography;
 const CourseAttribute = ({ title, content }) => {
   return (
     <div className="cs-course-attr">
-      <Title level={4} className="text">
+      <Title level={3} className="text">
         {title}
       </Title>
       <Text className="text">{content}</Text>
@@ -205,7 +205,7 @@ export default function CourseDescription({ structure }) {
                   </Dropdown.Button>
                 )}
               </div>
-              <Title level={4} className="text">
+              <Title level={3} className="text">
                 Overview
               </Title>
               <Space direction="vertical" style={{ marginBottom: "1rem" }}>
@@ -215,7 +215,7 @@ export default function CourseDescription({ structure }) {
                   />
                 </Text>
               </Space>
-              <Title level={4} className="text">
+              <Title level={3} className="text">
                 Requirements
               </Title>
               <Space direction="vertical" style={{ marginBottom: "1rem" }}>
@@ -227,7 +227,7 @@ export default function CourseDescription({ structure }) {
                   />
                 </Text>
               </Space>
-              <Title level={4} className="text">
+              <Title level={3} className="text">
                 Courses you have done to unlock this course
               </Title>
               {course.path_from && Object.keys(course.path_from).length > 0 ? (
@@ -239,7 +239,7 @@ export default function CourseDescription({ structure }) {
               ) : (
                 <p className={`text`}>None</p>
               )}
-              <Title level={4} className="text">
+              <Title level={3} className="text">
                 Unlocks these next courses
               </Title>
               {coursesPathTo && Object.values(coursesPathTo).length > 0 ? (
@@ -262,7 +262,7 @@ export default function CourseDescription({ structure }) {
                 content={course.study_level}
               />
               <CourseAttribute title="Campus" content={course.campus} />
-              <Title level={4} className="text cs-final-attr">
+              <Title level={3} className="text cs-final-attr">
                 Offering Terms
               </Title>
               {course.terms &&
