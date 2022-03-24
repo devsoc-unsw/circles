@@ -4,7 +4,7 @@ from itertools import chain
 from algorithms.objects.user import User
 from fastapi import APIRouter, HTTPException
 from server.database import archivesDB, coursesCOL
-from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS,
+from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, AffectedCourses,
                                   CourseDetails, CoursesState,
                                   CoursesUnlockedWhenTaken, ProgramCourses,
                                   UserData, message)
