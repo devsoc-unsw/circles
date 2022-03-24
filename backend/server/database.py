@@ -13,8 +13,7 @@ from data.config import ARCHIVED_YEARS
 
 '''Export these as needed'''
 try:
-    # client = MongoClient("mongodb://localhost:27017/")
-    client = MongoClient(f'mongodb://{os.environ["MONGODB_USERNAME"]}:{os.environ["MONGODB_PASSWORD"]}@{os.environ["MONGODB_DATABASE"]}:27017')
+    client = MongoClient(f'mongodb://{os.environ["MONGODB_USERNAME"]}:{os.environ["MONGODB_PASSWORD"]}@{os.environ["MONGODB_SERVICE_HOSTNAME"]}:27017')
     print('Connected to database.')
 except:
     print("Unable to connect to database.")

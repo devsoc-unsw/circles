@@ -2,7 +2,7 @@ from fastapi import APIRouter
 from fastapi.params import Body
 from algorithms.objects.user import User
 from server.routers.courses import getCourse
-from server.routers.model import CoursesState, PlannerData, CONDITIONS
+from server.routers.model import CoursesState, PlannerData, CONDITIONS, CACHED_HANDBOOK_NOTE
 
 
 router = APIRouter(
@@ -17,11 +17,12 @@ def plannerIndex():
     return "Index of planner"
 
 def fixPlannerData(plannerData: PlannerData):
-    for year in plannerData["plan"]:
-        for term in year:
+    for year_index, year in enumerate(plannerData["plan"]):
+        for term_index, term in enumerate(year):
             for courseName, course in term.items():
-                if type(course) is int:
-                    term[courseName] = [getCourse(courseName)["UOC"], course]
+                if type(course) is not list:
+                    plannerData["plan"][year_index][term_index][courseName] = [getCourse(courseName)["UOC"], course]
+    return plannerData
 
 @router.post("/validateTermPlanner/", response_model=CoursesState)
 async def validateTermPlanner(plannerData: PlannerData = Body(
@@ -89,7 +90,7 @@ async def validateTermPlanner(plannerData: PlannerData = Body(
                 unlocked, warnings = CONDITIONS[course].validate(user) if is_answer_accurate else (True, [])
                 coursesState[course] = {
                     "is_accurate": is_answer_accurate,
-                    "handbook_note": "", # TODO: Cache handbook notes
+                    "handbook_note": CACHED_HANDBOOK_NOTE.get(course, ""),
                     "unlocked": unlocked,
                     "warnings": warnings
                 }

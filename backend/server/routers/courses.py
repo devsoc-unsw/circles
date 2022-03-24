@@ -18,7 +18,7 @@ def fixUserData(userData: dict):
     """
         dates and returns the userData with the UOC of a course
     """
-    coursesWithoutUoc = [course for course in userData["courses"] if type(userData["courses"][course]) is int]
+    coursesWithoutUoc = [course for course in userData["courses"] if type(userData["courses"][course]) is not list]
     filledInCourses = {course : [getCourse(course)["UOC"], userData["courses"][course]] for course in coursesWithoutUoc}
     userData["courses"].update(filledInCourses)
     return userData
@@ -243,5 +243,5 @@ def coursesUnlockedWhenTaken(userData: UserData, courseToBeTaken: str):
     return {'courses_unlocked_when_taken' : sorted(list(courses_now_unlocked - courses_initially_unlocked))}
 
 def unlocked_set(courses_state):
-    '''fetch the set of unlocked courses from the courses_state of a getAllUnlocked call'''
+    """fetch the set of unlocked courses from the courses_state of a getAllUnlocked call"""
     return set(course for course in courses_state if courses_state[course]['unlocked'])
