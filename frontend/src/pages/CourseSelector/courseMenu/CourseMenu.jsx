@@ -139,7 +139,7 @@ export default function CourseMenu({ structure }) {
                       />
                     }
                   >
-                    <AnimatePresence>
+                    <AnimatePresence initial={false}>
                       {menuData[group][subGroup].map((course, ind) => (
                         <MenuItem
                           selected={coursesInPlanner.get(course.courseCode)}
@@ -182,12 +182,7 @@ const MenuItem = ({
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ ease: "easeOut", duration: 0.3 }}
-      layout
-    >
+    <motion.div transition={{ ease: "easeOut", duration: 0.3 }} layout>
       <Menu.Item
         className={`text menuItemText ${selected !== undefined && "bold"} 
       ${activeCourse === courseCode && "activeCourse"}`}
