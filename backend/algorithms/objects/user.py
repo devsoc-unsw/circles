@@ -120,3 +120,5 @@ class User:
             ]
 
         return list(sorted(affected_courses))
+
+

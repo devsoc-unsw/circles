@@ -68,3 +68,5 @@ def overwrite_all():
     overwrite_collection("Specialisations")
     overwrite_collection("Programs")
     overwrite_archives()
+
+

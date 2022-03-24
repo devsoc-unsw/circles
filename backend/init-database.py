@@ -4,3 +4,4 @@ api and also run the files'''
 from server.database import overwrite_all
 
 overwrite_all()
+

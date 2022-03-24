@@ -38,3 +38,5 @@ app.include_router(programs.router)
 @app.get('/')
 async def index():
     return "At index inside server.py"
+
+

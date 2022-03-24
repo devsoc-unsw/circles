@@ -175,3 +175,5 @@ def get_structure(structure, curr_container):
 
 if __name__ == "__main__":
     format_spn_data()
+
+

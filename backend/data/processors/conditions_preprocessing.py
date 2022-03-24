@@ -395,3 +395,5 @@ def map_word_to_program_type(processed, regex_word, type):
 
 if __name__ == "__main__":
     preprocess_conditions()
+
+

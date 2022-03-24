@@ -100,3 +100,5 @@ async def validateTermPlanner(plannerData: PlannerData = Body(
         user.year += 1
 
     return {"courses_state": coursesState}
+
+

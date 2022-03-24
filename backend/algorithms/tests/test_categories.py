@@ -28,3 +28,5 @@ def test_level_course_category_match_definition():
     assert not level1comp.match_definition("COMP3000")
     assert not level1comp.match_definition("ENGG1100")
     assert not level1comp.match_definition("ENGG3100")
+
+

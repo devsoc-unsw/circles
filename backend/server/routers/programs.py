@@ -286,3 +286,5 @@ def getStructure(programCode: str, major: Optional[str] = None, minor: Optional[
         structure['General']['General Education'] = {'UOC': programsResult['components']['GE']['credits_to_complete']}
 
     return {'structure': structure}
+
+
