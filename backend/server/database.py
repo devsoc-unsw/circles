@@ -10,18 +10,18 @@ import os
 from sys import exit
 
 from data.config import ARCHIVED_YEARS
-from pymongo import MongoClient
+from pymongo import MongoClient, MongoException
 
 from server.config import ARCHIVED_DATA_PATH, FINAL_DATA_PATH
 
-# Export these as needec
+# Export these as needed
 try:
     # client = MongoClient("mongodb://localhost:27017/")
     client = MongoClient(
         f'mongodb://{os.environ["MONGODB_USERNAME"]}:{os.environ["MONGODB_PASSWORD"]}@{os.environ["MONGODB_DATABASE"]}:27017'
     )
     print("Connected to database.")
-except:
+except MongoException:
     print("Unable to connect to database.")
     exit(1)
 
@@ -38,7 +38,7 @@ def overwrite_collection(collection_name):
     Collection names can be: Programs, Specialisations, Courses"""
     file_name = FINAL_DATA_PATH + collection_name.lower() + "Processed.json"
 
-    with open(file_name) as f:
+    with open(file_name, encoding="utf8") as f:
         try:
             db[collection_name].drop()
 
@@ -47,7 +47,7 @@ def overwrite_collection(collection_name):
                 db[collection_name].insert_one(file_data[key])
 
             print(f"Finished overwriting {collection_name}")
-        except:
+        except (KeyError, IOError, OSError):
             print(f"Failed to load and overwrite {collection_name}")
 
 
@@ -56,7 +56,7 @@ def overwrite_archives():
     for year in ARCHIVED_YEARS:
         file_name = ARCHIVED_DATA_PATH + str(year) + ".json"
 
-        with open(file_name) as f:
+        with open(file_name, encoding="utf8") as f:
             try:
                 archivesDB[str(year)].drop()
 
@@ -65,7 +65,7 @@ def overwrite_archives():
                     archivesDB[str(year)].insert_one(file_data[key])
 
                 print(f"Finished overwriting {year} archive")
-            except:
+            except (KeyError, IOError, OSError):
                 print(f"Failed to load and overwrite {year} archive")
 
 

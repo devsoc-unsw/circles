@@ -123,7 +123,6 @@ def process_enrolment_path(processed: dict, formatted: dict, data: dict) -> None
     """Adds pre-requisites to 'path_from' field and for each prereq, adds this
     processed course to their 'path_to' field in the main 'data' dict. This
     allows for courses to be processed in one iteration through the data"""
-    global ABSENT_COURSES
 
     processed["path_from"] = {}
     prereqs = re.findall(r"\W([A-Z]{4}\d{4})\W*",
@@ -141,10 +140,11 @@ def process_enrolment_path(processed: dict, formatted: dict, data: dict) -> None
         if prereq in data:
             if "path_to" not in data[prereq]:
                 # Set up dict if not yet added
-                data[prereq]["path_to"] = dict()
+                data[prereq]["path_to"] = {}
             data[prereq]["path_to"][processed["code"]] = 1
         else:
             # prereq not in data and is therefore absent from undergrad handbook
+            global ABSENT_COURSES
             ABSENT_COURSES[prereq] = 1
 
 

@@ -1,17 +1,10 @@
 import contextlib
 from typing import Optional
-from fastapi import APIRouter, HTTPException
-from server.database import specialisationsCOL, programsCOL
-from server.routers.model import (
-    programs,
-    majors,
-    minors,
-    message,
-    minorInFE,
-    minorInSpecialisation,
-    Structure,
-)
 
+from fastapi import APIRouter, HTTPException
+from server.database import programsCOL, specialisationsCOL
+from server.routers.model import (Structure, majors, message, minorInFE,
+                                  minorInSpecialisation, minors, programs)
 
 router = APIRouter(
     prefix="/programs",

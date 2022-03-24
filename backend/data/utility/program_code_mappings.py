@@ -1,10 +1,11 @@
 """
-Scrapes program codes and produces JSON file with two dictionaries, 
-one mapping program code to program title and the other the opposite. 
+Scrapes program codes and produces JSON file with two dictionaries,
+one mapping program code to program title and the other the opposite.
 """
 
-import requests
 import json
+
+import requests
 
 
 def get_mappings():
@@ -40,7 +41,7 @@ def write_to_file(code_to_title, title_to_code):
         "title_to_code": title_to_code,
     }
 
-    with open("data/utility/programCodeMappings.json", "w") as FILE:
+    with open("data/utility/programCodeMappings.json", "w", encoding="utf8") as FILE:
         json.dump(mappings, FILE, indent=4)
 
 

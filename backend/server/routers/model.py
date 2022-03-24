@@ -1,9 +1,9 @@
-from typing import Optional
-from pydantic import BaseModel
-from pickle import load
 import json
+from pickle import load
+from typing import Optional
 
 from algorithms.objects.conditions import CompositeCondition
+from pydantic import BaseModel
 
 
 class message(BaseModel):
