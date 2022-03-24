@@ -1,3 +1,10 @@
+"""
+    Defines the `User` class which holds their data such as, courses taken,
+    current course, current program, ... etc.
+    The class contains methods that are used to determine whether the user
+    is able to take a course.
+"""
+
 import copy
 from typing import Optional
 
@@ -31,6 +38,10 @@ class User:
         self.cur_courses.append(course)
 
     def add_current_courses(self, courses: list[str]):
+        """
+        Takes in a list of courses (represented as strings by course
+        code) and, adds it to the list of current courses.
+        """
         self.cur_courses.extend(courses)
 
     def empty_current_courses(self):
@@ -75,6 +86,11 @@ class User:
         return self.courses[course][1]
 
     def wam(self, category: Category = AnyCategory()) -> Optional[float]:
+        """
+        Calculates the user's WAM by taking the average of the sum of their
+        marks, weighted by uoc per course.
+        Will return `None` is the user has taken no uoc.
+        """
         total_wam, total_uoc = 0, 0
 
         for course, (uoc, grade) in self.courses.items():
@@ -95,6 +111,9 @@ class User:
     def unselect_course(self, target, locked) -> list[str]:
         """Given a course to unselect and a list of locked courses, remove the courses
         from the user and return a list of courses which would be affected by the unselection"""
+
+        if not self.has_taken_course(target):
+            return []
 
         # Resolving circular imports
         from algorithms.create import create_condition
