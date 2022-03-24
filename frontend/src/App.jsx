@@ -9,7 +9,7 @@ import ProgressionChecker from "./pages/ProgressionChecker/main";
 import TermPlanner from "./pages/TermPlanner/main";
 import "./App.less";
 import Loading from "./components/Loading/Loading";
-import './axios'
+import "./axios";
 
 const { Content } = Layout;
 
@@ -22,9 +22,10 @@ function App() {
   // light mode is always on
   document.body.classList.add("light");
 
-  React.useEffect(() => {
-    if (!loading) openDisclaimer();
-  }, [loading]);
+  // Beta testing notification
+  // React.useEffect(() => {
+  //   if (!loading) openDisclaimer();
+  // }, [loading]);
 
   return (
     <Router>
@@ -34,10 +35,7 @@ function App() {
         <>
           <Content className="app-root content">
             <Routes>
-              <Route
-                path="/degree-wizard"
-                element={<DegreeWizard />}
-              />
+              <Route path="/degree-wizard" element={<DegreeWizard />} />
               <Route
                 path="/course-selector"
                 element={
