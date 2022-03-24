@@ -10,7 +10,7 @@ import os
 from sys import exit
 
 from data.config import ARCHIVED_YEARS
-from pymongo import MongoClient, MongoException
+from pymongo import MongoClient
 
 from server.config import ARCHIVED_DATA_PATH, FINAL_DATA_PATH
 
@@ -18,7 +18,7 @@ from server.config import ARCHIVED_DATA_PATH, FINAL_DATA_PATH
 try:
     client = MongoClient(f'mongodb://{os.environ["MONGODB_USERNAME"]}:{os.environ["MONGODB_PASSWORD"]}@{os.environ["MONGODB_SERVICE_HOSTNAME"]}:27017')
     print('Connected to database.')
-except MongoException:
+except:
     print("Unable to connect to database.")
     exit(1)
 
