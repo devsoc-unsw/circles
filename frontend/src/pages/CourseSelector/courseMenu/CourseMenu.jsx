@@ -8,6 +8,7 @@ import "./CourseMenu.less";
 import { setCourses } from "../../../actions/coursesActions";
 import { IoWarningOutline } from "react-icons/io5";
 import { prepareUserPayload } from "../helper";
+import { motion, AnimatePresence } from "framer-motion/dist/framer-motion";
 
 const { SubMenu } = Menu;
 
@@ -138,15 +139,18 @@ export default function CourseMenu({ structure }) {
                       />
                     }
                   >
-                    {menuData[group][subGroup].map((course) => (
-                      <MenuItem
-                        selected={coursesInPlanner.get(course.courseCode)}
-                        courseCode={course.courseCode}
-                        accurate={course.accuracy}
-                        setActiveCourse={setActiveCourse}
-                        activeCourse={activeCourse}
-                      />
-                    ))}
+                    <AnimatePresence>
+                      {menuData[group][subGroup].map((course, ind) => (
+                        <MenuItem
+                          selected={coursesInPlanner.get(course.courseCode)}
+                          courseCode={course.courseCode}
+                          accurate={course.accuracy}
+                          setActiveCourse={setActiveCourse}
+                          activeCourse={activeCourse}
+                          key={course.courseCode + group}
+                        />
+                      ))}
+                    </AnimatePresence>
                   </Menu.ItemGroup>
                 ))}
               </SubMenu>
@@ -178,14 +182,21 @@ const MenuItem = ({
   };
 
   return (
-    <Menu.Item
-      className={`text menuItemText ${selected !== undefined && "bold"} 
-      ${activeCourse === courseCode && "activeCourse"}`}
-      key={courseCode}
-      onClick={handleClick}
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ ease: "easeOut", duration: 0.3 }}
+      layout
     >
-      {courseCode} {renderAccurateNote()}
-    </Menu.Item>
+      <Menu.Item
+        className={`text menuItemText ${selected !== undefined && "bold"} 
+      ${activeCourse === courseCode && "activeCourse"}`}
+        key={courseCode}
+        onClick={handleClick}
+      >
+        {courseCode} {renderAccurateNote()}
+      </Menu.Item>
+    </motion.div>
   );
 };
 
