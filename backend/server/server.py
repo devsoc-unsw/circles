@@ -27,10 +27,7 @@ origins = [
     "http://frontend:8000",
     "http://frontend:3000",
     "http://frontend:3001",
-<<<<<<< HEAD
     "https://circles.csesoc.unsw.edu.au"
-=======
->>>>>>> 71f6cd6 (CIRCLES-273: automatically ran black linter and looked at the output to spot anything too wierd)
 ]
 
 app.add_middleware(
