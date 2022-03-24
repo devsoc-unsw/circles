@@ -1,5 +1,6 @@
 FROM node:lts-alpine as builder
-
+ARG API_URL
+ENV REACT_APP_BACKEND_API_BASE_URL $API_URL
 # Set the current working directory inside the container
 WORKDIR /app
 COPY package.json package-lock.json ./

@@ -8,13 +8,12 @@ NOTE: The helper functions must be run from the backend directory due to their p
 import json
 import os
 from pymongo import MongoClient
-from server.config import URI, FINAL_DATA_PATH, ARCHIVED_DATA_PATH
+from server.config import FINAL_DATA_PATH, ARCHIVED_DATA_PATH
 from data.config import ARCHIVED_YEARS
 
 '''Export these as needed'''
 try:
-    # client = MongoClient("mongodb://localhost:27017/")
-    client = MongoClient(f'mongodb://{os.environ["MONGODB_USERNAME"]}:{os.environ["MONGODB_PASSWORD"]}@{os.environ["MONGODB_DATABASE"]}:27017')
+    client = MongoClient(f'mongodb://{os.environ["MONGODB_USERNAME"]}:{os.environ["MONGODB_PASSWORD"]}@{os.environ["MONGODB_SERVICE_HOSTNAME"]}:27017')
     print('Connected to database.')
 except:
     print("Unable to connect to database.")

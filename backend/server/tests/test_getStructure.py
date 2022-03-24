@@ -32,4 +32,4 @@ def test_all_majors_fetched(specifics):
 
     assert structure.json()['structure']['General'] != {}
     assert structure.json()['structure']['Major'] != {}
-    assert structure.json()['structure'].get('Minor') == None
+    assert structure.json()['structure'].get('Minor') is None

@@ -1,32 +1,77 @@
 {
-    "program": "3707",
-    "specialisations": ["COMPA1"],
-    "year": 1,
-    "plan": [
-        [
-            {},
-            {
-                "COMP1511": [6, null],
-                "MATH1141": [6, null],
-                "MATH1081": [6, null]
-            },
-            {
-                "COMP1521": [6, null],
-                "COMP9444": [6, null]
-            },
-            {
-                "COMP2521": [6, null],
-                "MATH1241": [6, null],
-                "COMP3331": [6, null]
-            }
-        ],
-        [
-            {},
-            {
-                "COMP1531": [6, null],
-                "COMP6080": [6, null],
-                "COMP3821": [6, null]
-            }
+    "empty_year": {
+        "program": "3707",
+        "specialisations": ["COMPA1"],
+        "year": 1,
+        "plan": [
+            [
+                {},
+                {},
+                {},
+                {}
+            ]
         ]
-    ]
+    },
+    "simple_year": {
+        "program": "3707",
+        "specialisations": ["COMPA1"],
+        "year": 1,
+        "plan": [
+            [
+                {},
+                {
+                    "COMP1511": [6, null],
+                    "MATH1141": [6, null],
+                    "MATH1081": [6, null]
+                },
+                {
+                    "COMP1521": [6, null],
+                    "COMP1531": [6, null],
+                    "COMP2521": [6, null]
+                },
+                {
+                }
+            ]
+        ]
+    },
+    "no_uoc": {
+        "program": "3707",
+        "specialisations": ["COMPA1"],
+        "year": 1,
+        "plan": [
+            [
+                {},
+                {
+                    "COMP1511": null,
+                    "MATH1141": null,
+                    "MATH1081": null
+                },
+                {
+                    "COMP1521": null,
+                    "COMP2511": null,
+                    "COMP4128": null
+                },
+                {
+                }
+            ]
+        ]
+    },
+    "out_of_order": {
+        "program": "3707",
+        "specialisations": ["COMPA1"],
+        "year": 1,
+        "plan": [
+            [
+                {},
+                {
+                    "MATH1241": null
+                },
+                {
+                    "MATH1141": null
+                },
+                {
+                }
+            ]
+        ]
+    }
 }

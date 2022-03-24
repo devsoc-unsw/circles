@@ -1,9 +1,9 @@
 asgiref==3.5.0
-attrs==21.2.0
-certifi==2021.5.30
+attrs==21.4.0
+certifi==2021.10.8
 charset-normalizer==2.0.12
 click==8.0.4
-dnspython==1.16.0
+dnspython==2.2.1
 fastapi==0.75.0
 h11==0.13.0
 idna==3.3
@@ -17,10 +17,9 @@ pymongo==4.0.2
 pyparsing==3.0.7
 pytest==7.1.1
 requests==2.27.1
-starlette==0.17.1
 toml==0.10.2
 typing-extensions==4.1.1
 urllib3==1.26.9
 uvicorn==0.17.6
 zipp==3.7.0
-hypothesis==6.36.2
+hypothesis==6.39.4
