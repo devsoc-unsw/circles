@@ -25,7 +25,9 @@ function DegreeWizard() {
 
   React.useEffect(() => {
     // TODO: Warning dialog before planner is reset.
-    setIsModalVisible(true);
+    if (localStorage.getItem("planner")) {
+      setIsModalVisible(true);
+    }
   }, []);
 
   const handleYearChange = (_, [startYear, endYear]) => {
@@ -60,13 +62,29 @@ function DegreeWizard() {
 
   const handleCancel = () => {
     setIsModalVisible(false);
-    navigate('/course-selector');
+    navigate("/course-selector");
   };
 
   return (
     <div className="degree-root-container">
-      <Modal title="Are you Sure?" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-        <p>You have existing data saved from your last session. Are you sure want to reset your planner?</p>
+      <Modal
+        title="Reset Planner?"
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        footer={[
+          <Button key="back" onClick={handleCancel}>
+            Go back to planner
+          </Button>,
+          <Button key="submit" type="primary" danger onClick={handleOk}>
+            Reset
+          </Button>,
+        ]}
+      >
+        <p>
+          Are you sure want to reset your planner? Your existing data will be
+          permanently removed.
+        </p>
       </Modal>
       <Title>Welcome to Circles!</Title>
       <h3 className=" subtitle">

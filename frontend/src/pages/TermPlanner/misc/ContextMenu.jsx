@@ -17,14 +17,12 @@ const ContextMenu = ({ code, plannedFor }) => {
 
   const handleDelete = () => {
     dispatch(plannerActions("REMOVE_COURSE", code));
-    console.log(courses);
     updateAllWarnings(dispatch, { years, startYear, completedTerms });
   };
 
   const handleUnschedule = () => {
     // console.log(code);
     dispatch(plannerActions("UNSCHEDULE", code));
-    console.log(courses);
     updateAllWarnings(dispatch, { years, startYear, completedTerms });
   };
   const id = `${code}-context`;
