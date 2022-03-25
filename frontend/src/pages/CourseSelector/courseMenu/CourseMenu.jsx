@@ -32,7 +32,7 @@ export default function CourseMenu({ structure }) {
 
   // get all courses
   React.useEffect(async () => {
-    if (structure !== null) {
+    if (structure) {
       try {
         const res = await axios.post(
           `/courses/getAllUnlocked/`,
