@@ -15,8 +15,8 @@ function DraggableCourse({ code, index }) {
   });
   const theme = useSelector((state) => state.theme);
   const courseName = courses.get(code)["title"];
-  const prereqs = courses.get(code)["prereqs"];
-  const prereqDisplay = prereqs.replaceAll("||", "or").replaceAll("&&", "and");
+  const prereqs = courses.get(code)["prereqs"]; // rereqs are populated in CourseDescription.jsx via course.raw_requirements
+  const prereqDisplay = prereqs.trim();
   const warning = courses.get(code)["warning"];
   const plannedFor = courses.get(code)["plannedFor"];
 
@@ -81,9 +81,8 @@ function DraggableCourse({ code, index }) {
       <ContextMenu code={code} plannedFor={plannedFor} />
       {/* display prereq tooltip for all courses. However, if a term is marked as complete 
 	  and the course has no warning, then disable the tooltip */}
-      {prereqDisplay !== "" && (!isDragDisabled || warning) && (
+      {prereqDisplay !== "" && !isDragDisabled && warning && (
         <ReactTooltip id={code} place="bottom" className="tooltip">
-          <div className="prereqsTooltip">Prerequisites:</div>
           {prereqDisplay}
         </ReactTooltip>
       )}
