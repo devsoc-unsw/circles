@@ -1,10 +1,10 @@
 """
 https://github.com/csesoc/Circles/wiki/Manual-Fixes-to-Course-Prerequisites
 
-Copy this into a new file for the relevant faculty's fixes: 
+Copy this into a new file for the relevant faculty's fixes:
 e.g. COMPFixes.py, ACCTFixes.py, PSYCFixes.py
 
-Apply manual [code] fixes to processed conditions in conditionsProcessed.json so 
+Apply manual [code] fixes to processed conditions in conditionsProcessed.json so
 that they can be fed into algorithms.
 
 If you make a mistake and need to regenerate conditionsProcessed.json, then you
@@ -23,6 +23,7 @@ PROCESSED = "processed"
 
 # Reads coursesProcessed dictionary into 'COURSES' (for updating exclusions)
 COURSES = data_helpers.read_data("data/final_data/coursesProcessed.json")
+
 
 def fix_conditions():
     """ Functions to apply manual fixes """
@@ -58,6 +59,7 @@ def fix_conditions():
         CONDITIONS, "data/final_data/conditionsProcessed.json")
     data_helpers.write_data(COURSES, "data/final_data/coursesProcessed.json")
 
+
 def COMM_0999():
     """
         "original": "Only available to students completing a Bachelor of Commerce as part of a single or double-degree<br/><br/>",
@@ -66,10 +68,11 @@ def COMM_0999():
     """
     return "COMM#"
 
+
 def COMM_1040(conditions):
     """
     "original": "Prerequisite: Students must be in Good Academic Standing<br/><br/>",
-    
+
     "processed": "",
 
     "handbook_note": "Students must be in Good Academic Standing"
@@ -79,6 +82,7 @@ def COMM_1040(conditions):
         "processed": "",
         "handbook_note": "Students must be in Good Academic Standing"
     }
+
 
 def COMM_1100(conditions):
     """
@@ -92,6 +96,7 @@ def COMM_1100(conditions):
         "handbook_note": "Students enrolled in Actuarial Studies or Economics programs (in single or double degree mode) are not permitted to enrol."
     }
 
+
 def COMM_1110(conditions):
     """
         "original": "Only available to single and double degree Business School students in Term 1. It will be offered to non-Business School students in Terms 2 and 3.<br/><br/>",
@@ -103,6 +108,7 @@ def COMM_1110(conditions):
         "processed": "",
         "handbook_note": "Students enrolled in 3764 (Eng/Comm), Actuarial Studies or Economics programs (in both single and double degree mode) are not permitted to enrol."
     }
+
 
 def COMM_1150(conditions):
     """
@@ -117,6 +123,7 @@ def COMM_1150(conditions):
         "handbook_note": "Only available to single and double degree Business School students in Term 2. Offered to non-Business School students in Term 3."
     }
 
+
 def COMM_1999(conditions):
     """
         "original": "Pre-requisite: COMM0999 AND completed 30 UOC of Integrated First Year Core<br/><br/>",
@@ -129,6 +136,7 @@ def COMM_1999(conditions):
         "handbook_note": "You must have completed 30UOC of Integrated First Year Core"
     }
 
+
 def COMM_2222(conditions):
     """
         "original": "Pre-requisite: In Business degree, COMM6000 Career Accelerator or COMM1999 First Year Portfolio, WAM 65+, minimum 72 UOC completed, room in degree for course, Good academic standing.<br/>Excluded: Co-op students<br/>It is recommended a progression check is completed prior to enrolling.<br/><br/>",
@@ -136,11 +144,12 @@ def COMM_2222(conditions):
         "handbook_note": "Good Academic Standing. Co-op students are excluded. It is recommended to do a progression check prior to enrolling"
     """
 
-    return  {
+    return {
         "original": conditions["original"],
         "processed": "(COMM6000 || COMM1999) && ZBUS# && 65WAM && 72UOC",
         "handbook_note": "Good Academic Standing. Co-op students are excluded. It is recommended to do a progression check prior to enrolling"
     }
+
 
 def COMM_2233(conditions):
     """
@@ -154,6 +163,7 @@ def COMM_2233(conditions):
         "handbook_note": "It is recommended to do a progression check prior to enrolling."
     }
 
+
 def COMM_2244():
     """
         "original": "Must have completed COMM6000 CA:Essentials or COMM1999 First Year Portfolio, minimum 48 UoC, minimum 65 WAM, and be in good academic standing. Students who have completed COMM2233 or CDEV3000 (formerly DIPP1510) must not enrol into this course<br/><br/>",
@@ -164,6 +174,7 @@ def COMM_2244():
     COURSES["COMM1150"]["exclusions"]["DIPP1510"] = 1
 
     return "(COMM6000 || COMM1999) && 65WAM && 48UOC"
+
 
 def COMM_3020(conditions):
     """
@@ -177,6 +188,7 @@ def COMM_3020(conditions):
         "handbook_note": "This course is by application only. Please visit Business School website for more information."
     }
 
+
 def COMM_3030():
     """
         "original": "\u2022\tminimum WAM of 65;<br/>\u2022\thave completed a minimum of 48 UOC at the commencement of this course;<br/>\u2022\thave room in their degree for this course;<br/>\u2022\tare in good academic standing;<br/>\u2022\thave completed COMM6000 Career Accelerator: Essentials or COMM1999 First Year Portfolio (Business School students only)<br/>This course may count as a Business School Free Elective, OR as a major elective within some schools. It is recommended a progression check is completed prior to enrolling.<br/><br/>",
@@ -184,6 +196,7 @@ def COMM_3030():
     """
 
     return "(COMM6000 || COMM1999) && 65WAM && 48UOC"
+
 
 def COMM_3090(conditions):
     """
@@ -197,6 +210,7 @@ def COMM_3090(conditions):
         "processed": "108UOC",
         "handbook_note": "Students are expected to be in their final year of a Bachelor of Commerce single or dual degree"
     }
+
 
 def COMM_3101(conditions):
     """
@@ -213,6 +227,7 @@ def COMM_3101(conditions):
         "handbook_note": "This course is by application only.Please contact the Co-op office for more information. Students who have completed DIPP1510 or COMM2222 or are in Business Co-Op programs are excluded from this course."
     }
 
+
 def COMM_3202(conditions):
     """
         "original": "Pre-requisite: COMM3101 or COMM2101<br/>Both terms of COMM3101/COMM2101 (12 UOC) must be successfully completed. <br/>This course is by application only. Please contact the Co-op office for more information.<br/>Excluded:DIPP1510, COMM2222, Business Co-Op programs<br/><br/>",
@@ -227,6 +242,7 @@ def COMM_3202(conditions):
         "handbook_note": "This course is by application only. Please contact the Co-op office for more information. Excluded:DIPP1510, COMM2222, Business Co-Op programs."
     }
 
+
 def COMM_3303(conditions):
     """
         "original": "Pre-requisite: This course is by application only. Please contact the Co-op office for more information.<br/><br/>",
@@ -239,6 +255,7 @@ def COMM_3303(conditions):
         "handbook_note": "This course is by application only. Please contact the Co-op office for more information."
     }
 
+
 def COMM_3500():
     """
         "original": "Pre-requisite: COMM1822, COMM2050, COMM2501, Business Analytics Modelling I course (ECON2206 or ECON2209 or RISK2002) and completing the Business Analytics major (COMMJ1). It is recommended students are in their final year when taking this course.<br/><br/>",
@@ -246,6 +263,7 @@ def COMM_3500():
     """
 
     return "(COMM1822 && COMM2050 && COMM2501) && (ECON2206 || ECON2209 || RISK2002) && COMMJ1"
+
 
 def COMM_3900(conditions):
     """
@@ -259,6 +277,7 @@ def COMM_3900(conditions):
         "handbook_note": "You must have completed all First Year core"
     }
 
+
 def COMM_3999(conditions):
     """
         "original": "Pre-requisite: Completed myBCom First Year Portfolio (COMM1999) and in their final year of a single or double Commerce degree (completed at least 72 UOC of Business courses).<br/><br/>",
@@ -271,12 +290,14 @@ def COMM_3999(conditions):
         "handbook_note": "Studetns must be in their final year"
     }
 
+
 def COMM_6700():
     """
         "original": "Prerequisite: undergraduate students must have completed 72 units of credit <br/><br/>",
         "processed": "undergraduate 72UOC"
     """
     return "72UOC"
+
 
 if __name__ == "__main__":
     fix_conditions()

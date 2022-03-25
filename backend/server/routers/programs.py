@@ -1,12 +1,14 @@
 import contextlib
-from fastapi import APIRouter, HTTPException
-from server.database import specialisationsCOL, programsCOL
-from server.routers.model import *
+from typing import Optional
 
+from fastapi import APIRouter, HTTPException
+from server.database import programsCOL, specialisationsCOL
+from server.routers.model import (Structure, majors, message, minorInFE,
+                                  minorInSpecialisation, minors, programs)
 
 router = APIRouter(
-    prefix='/programs',
-    tags=['programs'],
+    prefix="/programs",
+    tags=["programs"],
 )
 
 
@@ -14,275 +16,241 @@ router = APIRouter(
 def programsIndex():
     return "Index of programs"
 
-@router.get("/getPrograms", response_model=programs,
-            responses={
-                200: {
-                    "description": "Returns all programs",
-                    "content": {
-                        "application/json": {
-                            "example": {
-                                "programs": {
-                                    "3502": "Commerce",
-                                    "3707": "Engineering (Honours)",
-                                    "3778": "Computer Science",
-                                    "3970": "Science"
-                                }
-                            }
+
+@router.get(
+    "/getPrograms",
+    response_model=programs,
+    responses={
+        200: {
+            "description": "Returns all programs",
+            "content": {
+                "application/json": {
+                    "example": {
+                        "programs": {
+                            "3502": "Commerce",
+                            "3707": "Engineering (Honours)",
+                            "3778": "Computer Science",
+                            "3970": "Science",
                         }
                     }
                 }
-            })
+            },
+        }
+    },
+)
 def getPrograms():
-    """ fetch all the programs the backend knows about in the format of { code: title }"""
-    return {'programs': {'3778': "Computer Science"}}
-    return { 'programs' : {q['code']: q['title'] for q in programsCOL.find()} }
+    """fetch all the programs the backend knows about in the format of { code: title }"""
+    # return {"programs": {q["code"]: q["title"] for q in programsCOL.find()}}
+    # TODO On deployment, DELETE RETURN BELOW and replace with the return above
+    return {"programs": {"3778": "Computer Science"}}
 
-@router.get("/getMajors/{programCode}", response_model=majors,
-            responses={
-                400: {"model": message, "description": "The given program code could not be found in the database"},
-                200: {
-                    "description": "Returns all majors to the given code",
-                    "content": {
-                        "application/json": {
-                            "example": {
-                                "majors": {
-                                    "COMPS1": "Computer Science (Embedded Systems)",
-                                    "COMPJ1": "Computer Science (Programming Languages)",
-                                    "COMPE1": "Computer Science (eCommerce Systems)",
-                                    "COMPA1": "Computer Science",
-                                    "COMPN1": "Computer Science (Computer Networks)",
-                                    "COMPI1": "Computer Science (Artificial Intelligence)",
-                                    "COMPD1": "Computer Science (Database Systems)",
-                                    "COMPY1": "Computer Science (Security Engineering)"
-                                }
-                            }
+
+@router.get(
+    "/getMajors/{programCode}",
+    response_model=majors,
+    responses={
+        400: {
+            "model": message,
+            "description": "The given program code could not be found in the database",
+        },
+        200: {
+            "description": "Returns all majors to the given code",
+            "content": {
+                "application/json": {
+                    "example": {
+                        "majors": {
+                            "COMPS1": "Computer Science (Embedded Systems)",
+                            "COMPJ1": "Computer Science (Programming Languages)",
+                            "COMPE1": "Computer Science (eCommerce Systems)",
+                            "COMPA1": "Computer Science",
+                            "COMPN1": "Computer Science (Computer Networks)",
+                            "COMPI1": "Computer Science (Artificial Intelligence)",
+                            "COMPD1": "Computer Science (Database Systems)",
+                            "COMPY1": "Computer Science (Security Engineering)",
                         }
                     }
                 }
-            })
+            },
+        },
+    },
+)
 def getMajors(programCode: str):
-    """ fetch all the majors known to the backend for a specific program """
-    result = programsCOL.find_one({'code' : programCode})
+    """fetch all the majors known to the backend for a specific program"""
+    result = programsCOL.find_one({"code": programCode})
 
     if not result:
-        raise HTTPException(status_code=400, detail="Program code was not found")
+        raise HTTPException(
+            status_code=400, detail="Program code was not found")
 
-    return {'majors' : result['components']['SpecialisationData']['Majors']}
+    return {"majors": result["components"]["SpecialisationData"]["Majors"]}
 
-@router.get("/getMinors/{programCode}", response_model=minors,
-            responses={
-                400: {"model": message, "description": "The given program code could not be found in the database"},
-                200: {
-                    "description": "Returns all minors to the given code",
-                    "content": {
-                        "application/json": {
-                            "example": {
-                                "minors": {
-                                    "INFSA2": 1,
-                                    "ACCTA2": 1,
-                                    "PSYCM2": 1,
-                                    "MARKA2": 1,
-                                    "FINSA2": 1,
-                                    "MATHC2": 1
-                                }
-                            }
+
+@router.get(
+    "/getMinors/{programCode}",
+    response_model=minors,
+    responses={
+        400: {
+            "model": message,
+            "description": "The given program code could not be found in the database",
+        },
+        200: {
+            "description": "Returns all minors to the given code",
+            "content": {
+                "application/json": {
+                    "example": {
+                        "minors": {
+                            "INFSA2": 1,
+                            "ACCTA2": 1,
+                            "PSYCM2": 1,
+                            "MARKA2": 1,
+                            "FINSA2": 1,
+                            "MATHC2": 1,
                         }
                     }
                 }
-            })
+            },
+        },
+    },
+)
+
+
 def getMinors(programCode: str):
-    """ fetch all the minors known for a specific program """
-    result = programsCOL.find_one({'code' : programCode})
+    """fetch all the minors known for a specific program"""
+    result = programsCOL.find_one({"code": programCode})
 
     if not result:
-        raise HTTPException(status_code=400, detail="Program code was not found")
+        raise HTTPException(
+            status_code=400, detail="Program code was not found")
 
+    # NOTE: DO NOT RENAME THE VARIABLE TO `minors` as it attempts to create
+    # a redefinition of the `minors` class
     if programCode in minorInFE:
-        minors = result['components']['FE']['Minors']
+        minrs = result["components"]["FE"]["Minors"]
     elif programCode in minorInSpecialisation:
-        minors = result['components']['SpecialisationData']['Minors']
+        minrs = result["components"]["SpecialisationData"]["Minors"]
     else:
-        minors = result['components']['Minors']
+        minrs = result["components"]["Minors"]
 
-    return {'minors' : minors}
-
+    return {"minors": minrs}
 
 def addSpecialisation(structure: dict, code: str, type: str):
-    spnResult = specialisationsCOL.find_one({'code': code})
+    spnResult = specialisationsCOL.find_one({"code": code})
     if not spnResult:
-        raise HTTPException(status_code=400, detail=f"{code} of type {type} not found")
-    structure[type] = {'name': spnResult['name']}
-    for container in spnResult['curriculum']:
+        raise HTTPException(
+            status_code=400, detail=f"{code} of type {type} not found")
+    structure[type] = {"name": spnResult["name"]}
+    for container in spnResult["curriculum"]:
 
-        structure[type][container['title']] = {}
-        item = structure[type][container['title']]
+        structure[type][container["title"]] = {}
+        item = structure[type][container["title"]]
 
-        item['UOC'] = container['credits_to_complete']
+        item["UOC"] = container["credits_to_complete"]
 
-        item['courses'] = {}
-        for course, courseObject in container['courses'].items():
-            if ' or ' in course:
-                for index, c in enumerate(course.split('or')):
+        item["courses"] = {}
+        for course, courseObject in container["courses"].items():
+            if " or " in course:
+                for index, c in enumerate(course.split("or")):
                     c = c.strip()
-                    item['courses'][c] = courseObject[index]
+                    item["courses"][c] = courseObject[index]
             else:
-                item['courses'][course] = courseObject
+                item["courses"][course] = courseObject
 
 
-@router.get("/getStructure/{programCode}/{major}/{minor}", response_model=Structure,
-            responses={
-                400: {"model": message, "description": "Uh oh you broke me"},
-                200: {
-                    "description": "Returns the program structure",
-                    "content": {
-                        "application/json": {
-                            "example": {
-                                "Major": {
-                                    "Core Courses": {
-                                        "UOC": 66,
-                                        "courses": {
-                                            "COMP3821": "Extended Algorithms and Programming Techniques",
-                                            "COMP3121": "Algorithms and Programming Techniques",
-                                        }
-                                    },
-                                    "Computing Electives": {
-                                        "UOC": 30,
-                                        "courses": {
-                                            "ENGG4600": "Engineering Vertically Integrated Project",
-                                            "ENGG2600": "Engineering Vertically Integrated Project",
-                                        }
-                                    }
+@router.get(
+    "/getStructure/{programCode}/{major}/{minor}",
+    response_model=Structure,
+    responses={
+        400: {"model": message, "description": "Uh oh you broke me"},
+        200: {
+            "description": "Returns the program structure",
+            "content": {
+                "application/json": {
+                    "example": {
+                        "Major": {
+                            "Core Courses": {
+                                "UOC": 66,
+                                "courses": {
+                                    "COMP3821": "Extended Algorithms and Programming Techniques",
+                                    "COMP3121": "Algorithms and Programming Techniques",
                                 },
-                                "Minor": {
-                                    "Prescribed Electives": {
-                                        "UOC": 12,
-                                        "courses": {
-                                            "FINS3616": "International Business Finance",
-                                            "FINS3634": "Credit Analysis and Lending",
-                                        }
-                                    },
-                                    "Core Courses": {
-                                        "UOC": 18,
-                                        "courses": {
-                                            "FINS2613": "Intermediate Business Finance",
-                                            "COMM1180": "Value Creation",
-                                            "FINS1612": "Capital Markets and Institutions"
-                                        }
-                                    }
+                            },
+                            "Computing Electives": {
+                                "UOC": 30,
+                                "courses": {
+                                    "ENGG4600": "Engineering Vertically Integrated Project",
+                                    "ENGG2600": "Engineering Vertically Integrated Project",
                                 },
-                                "General": {
-                                    "GeneralEducation": {
-                                        "UOC": 12
-                                    },
-                                    "FlexEducation": {
-                                        "UOC": 6
-                                    },
-                                    "BusinessCoreCourses": {
-                                        "UOC": 6,
-                                        "courses": {
-                                            "BUSI9999": "How To Business"
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                            },
+                        },
+                        "Minor": {
+                            "Prescribed Electives": {
+                                "UOC": 12,
+                                "courses": {
+                                    "FINS3616": "International Business Finance",
+                                    "FINS3634": "Credit Analysis and Lending",
+                                },
+                            },
+                            "Core Courses": {
+                                "UOC": 18,
+                                "courses": {
+                                    "FINS2613": "Intermediate Business Finance",
+                                    "COMM1180": "Value Creation",
+                                    "FINS1612": "Capital Markets and Institutions",
+                                },
+                            },
+                        },
+                        "General": {
+                            "GeneralEducation": {"UOC": 12},
+                            "FlexEducation": {"UOC": 6},
+                            "BusinessCoreCourses": {
+                                "UOC": 6,
+                                "courses": {"BUSI9999": "How To Business"},
+                            },
+                        },
                     }
                 }
-            })
-@router.get("/getStructure/{programCode}/{major}", response_model=Structure,
-            responses={
-                400: {"model": message, "description": "Uh oh you broke me"},
-                200: {
-                    "description": "Returns the program structure",
-                    "content": {
-                        "application/json": {
-                            "example": {
-                                "Major": {
-                                    "Core Courses": {
-                                        "UOC": 66,
-                                        "courses": {
-                                            "COMP3821": "Extended Algorithms and Programming Techniques",
-                                            "COMP3121": "Algorithms and Programming Techniques",
-                                        }
-                                    },
-                                    "Computing Electives": {
-                                        "UOC": 30,
-                                        "courses": {
-                                            "ENGG4600": "Engineering Vertically Integrated Project",
-                                            "ENGG2600": "Engineering Vertically Integrated Project",
-                                        }
-                                    }
-                                },
-                                "General": {
-                                    "GeneralEducation": {
-                                        "UOC": 12
-                                    },
-                                    "FlexEducation": {
-                                        "UOC": 6
-                                    },
-                                    "BusinessCoreCourses": {
-                                        "UOC": 6,
-                                        "courses": {
-                                            "BUSI9999": "How To Business"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            })
-@router.get("/getStructure/{programCode}", response_model=Structure,
-            responses={
-                400: {"model": message, "description": "Uh oh you broke me"},
-                200: {
-                    "description": "Returns the program structure",
-                    "content": {
-                        "application/json": {
-                            "example": {
-                                "General": {
-                                    "GeneralEducation": {
-                                        "UOC": 12
-                                    },
-                                    "FlexEducation": {
-                                        "UOC": 6
-                                    },
-                                    "BusinessCoreCourses": {
-                                        "UOC": 6,
-                                        "courses": {
-                                            "BUSI9999": "How To Business"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            })
-def getStructure(programCode: str, major: Optional[str] = None, minor: Optional[str] = None):
+            },
+        },
+    },
+)
+@router.get("/getStructure/{programCode}/{major}", response_model=Structure)
+@router.get("/getStructure/{programCode}", response_model=Structure)
+def getStructure(
+    programCode: str, major: Optional[str] = None, minor: Optional[str] = None
+):
+    """
+    NOTE: major and minor is optionally added.
+    """
     structure = {}
 
     if major:
-        addSpecialisation(structure, major, 'Major')
+        addSpecialisation(structure, major, "Major")
 
     if minor:
-        addSpecialisation(structure, minor, 'Minor')
+        addSpecialisation(structure, minor, "Minor")
 
     # add details for program code
-    programsResult = programsCOL.find_one({'code': programCode})
+    programsResult = programsCOL.find_one({"code": programCode})
     if not programsResult:
-        raise HTTPException(status_code=400, detail="Program code was not found")
+        raise HTTPException(
+            status_code=400, detail="Program code was not found")
 
-    structure['General'] = {}
-    for container, containerObject in programsResult['components']['NonSpecialisationData'].items():
-        containerObject['UOC'] = containerObject['credits_to_complete'] if "credits_to_complete" in containerObject else -1
+    structure["General"] = {}
+    for name, data in programsResult["components"]["NonSpecialisationData"].items():
+        data["UOC"] = (
+            data["credits_to_complete"] if "credits_to_complete" in data else -1
+        )
 
         with contextlib.suppress(KeyError):
-            del containerObject["type"]
-            del containerObject["credits_to_complete"]
-        structure['General'][container] = containerObject
+            del data["type"]
+            del data["credits_to_complete"]
+        structure["General"][name] = data
     with contextlib.suppress(KeyError):
-        structure['General']['Flexible Education'] = {'UOC': programsResult['components']['FE']['credits_to_complete']}
-        structure['General']['General Education'] = {'UOC': programsResult['components']['GE']['credits_to_complete']}
+        structure["General"]["Flexible Education"] = {
+            "UOC": programsResult["components"]["FE"]["credits_to_complete"]
+        }
+        structure["General"]["General Education"] = {
+            "UOC": programsResult["components"]["GE"]["credits_to_complete"]
+        }
 
-    return {'structure': structure}
+    return {"structure": structure}
