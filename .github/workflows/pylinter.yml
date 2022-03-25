@@ -21,9 +21,8 @@ on:
     # branches-ignore: [master, main]
 
   # This will only work when this workflow is on default branch
-  # TODO: Uncomment when merging
-  # pull_request:
-  #   branches: [dev, master, main]
+  pull_request:
+    branches: [dev, master, main]
 
 jobs:
   build:
