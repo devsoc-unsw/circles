@@ -114,7 +114,7 @@ export default function CourseMenu({ structure }) {
     }
     setMenuData(newMenu);
     setCoursesUnits(newCoursesUnits);
-    // setIsPageLoaded(true);
+    setIsPageLoaded(true);
   };
 
   return (
