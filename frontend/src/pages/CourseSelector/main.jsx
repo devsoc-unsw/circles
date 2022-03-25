@@ -8,7 +8,7 @@ import "./main.less";
 import SearchCourse from "./SearchCourse";
 
 export default function CourseSelector() {
-  const [structure, setStructure] = React.useState({});
+  const [structure, setStructure] = React.useState(null);
   const degree = useSelector((state) => state.degree);
 
   const { programCode, programName, specialisation, minor } = useSelector(
