@@ -2,7 +2,7 @@
 from contextlib import suppress
 import requests
 
-from server.tests.test_getAllUnlocked import USERS
+from server.tests.courses.test_getAllUnlocked import USERS
 
 # TODO: Do we care if these courses are broken before deployment? they are the honours courses + some wierd courses
 # main issues include CIRCLES-278 and CIRCLES-276
