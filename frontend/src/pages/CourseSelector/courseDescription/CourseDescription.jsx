@@ -94,8 +94,10 @@ export default function CourseDescription({ structure }) {
 
   useEffect(() => {
     if (id === "explore" || id === "search") return;
-    dispatch(getCourseById(id));
-    getPathToCoursesById(id);
+    if (id) {
+      dispatch(getCourseById(id));
+      getPathToCoursesById(id);
+    }
     // turn off alert when moving to a different page
     setShow(false);
     setTimeout(() => {
@@ -151,26 +153,6 @@ export default function CourseDescription({ structure }) {
         ) : (
           <>
             <div className="cs-description-content">
-              {show && courseInPlanner && (
-                <Alert
-                  message={`Successfully added ${id} to your planner!`}
-                  type="success"
-                  className="cs-alert"
-                  showIcon
-                  closable
-                  afterClose={() => setShow(false)}
-                />
-              )}
-              {show && !courseInPlanner && (
-                <Alert
-                  message={`Successfully removed ${id} from your planner!`}
-                  type="success"
-                  className="cs-alert"
-                  showIcon
-                  closable
-                  afterClose={() => setShow(false)}
-                />
-              )}
               <div className="cs-desc-title-bar">
                 <Title level={2} className="text">
                   {id} - {course.title}

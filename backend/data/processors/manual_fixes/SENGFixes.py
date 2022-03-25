@@ -1,7 +1,7 @@
 """
 https://github.com/csesoc/Circles/wiki/Manual-Fixes-to-Course-Prerequisites
 
-Apply manual COMP fixes to processed conditions in conditionsProcessed.json so 
+Apply manual COMP fixes to processed conditions in conditionsProcessed.json so
 that they can be fed into algorithms.
 
 If you make a mistake and need to regenerate conditionsProcessed.json, then you
@@ -18,6 +18,7 @@ CONDITIONS = data_helpers.read_data("data/final_data/conditionsProcessed.json")
 PROCESSED = "processed"
 
 COURSES = data_helpers.read_data("data/final_data/coursesProcessed.json")
+
 
 def fix_conditions():
     """ Functions to apply manual fixes """
@@ -42,10 +43,11 @@ def SENG_2021():
 
     return "SENG1031 || COMP1531 && (SENG?1 || SENG?H)"
 
+
 def SENG_2991(conditions):
-    """ 
+    """
     "original": "Currently enrolled in Program 3707 in the SENGAH stream <br/>and in an approved workplace arrangement <br/>and completed COMP1511, COMP1531 and COMP2521.<br/><br/>"
-    
+
     "processed": "COMP1511 && COMP1531 && COMP2521 && 3707 && SENGAH"
 
     "handbook_note": "Must be in an approved workplace arrangement"
@@ -56,6 +58,7 @@ def SENG_2991(conditions):
         "processed": "COMP1511 && COMP1531 && COMP2521 && 3707 && SENGAH",
         "handbook_note": "Must be in an approved workplace arrangement"
     }
+
 
 def SENG_3991(conditions):
     """
@@ -72,12 +75,13 @@ def SENG_3991(conditions):
         "handbook_note": "Must currently be enrolled in the Co-op program and completed attendance of IT Reflection Workshop (facilitated by Co-op Program)"
     }
 
+
 def SENG_3992(conditions):
     """
     "original": "Currently enrolled in Program 3707 in the SENGAH stream and in the Co-op program<br/>and completed SENG3011.<br/><br/>Successful completion of SEN2991 and SENG3991are a prerequisite for this course<br/><br/>",
-    
+
     "processed": "3707 && SENGAH && SENG3011 && SENG2991 && SENG3991"
-    
+
     "handbook_note": "Must currently be enrolled in the Co-op program"
     """
     return {
@@ -85,6 +89,7 @@ def SENG_3992(conditions):
         "processed": "3707 && SENGAH && SENG3011 && SENG2991 && SENG3991",
         "handbook_note": "Must currently be enrolled in the Co-op program"
     }
+
 
 def SENG_4920():
     """
@@ -94,6 +99,7 @@ def SENG_4920():
     """
 
     return "COMP2511 && 144UOC in (SENGAH || BINFAH || COMPBH)"
+
 
 if __name__ == "__main__":
     fix_conditions()
