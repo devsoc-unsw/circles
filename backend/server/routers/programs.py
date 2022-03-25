@@ -99,12 +99,12 @@ def getMajors(programCode: str):
                 "application/json": {
                     "example": {
                         "minors": {
-                            "INFSA2": 1,
-                            "ACCTA2": 1,
-                            "PSYCM2": 1,
-                            "MARKA2": 1,
-                            "FINSA2": 1,
-                            "MATHC2": 1,
+                            "INFSA2": "<name of minor>",
+                            "ACCTA2": "<name of minor>",
+                            "PSYCM2": "<name of minor>",
+                            "MARKA2": "<name of minor>",
+                            "FINSA2": "<name of minor>",
+                            "MATHC2": "<name of minor>",
                         }
                     }
                 }
