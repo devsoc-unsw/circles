@@ -15,28 +15,19 @@ export default function SearchCourse() {
 
   useEffect(() => {
     // if debounced term changes , call API
-    if (debouncedSearchTerm) search(debouncedSearchTerm);
+    if (debouncedSearchTerm)
+      search(debouncedSearchTerm, setCourses, setIsLoading);
   }, [debouncedSearchTerm]);
-
-  async function search(query) {
-    try {
-      const res = await axios.get(`/courses/searchCourse/${query}`);
-      setCourses(
-        Object.keys(res.data).map((course) => ({
-          label: `${course}: ${res.data[course]}`,
-          value: course,
-        }))
-      );
-    } catch (err) {
-      console.log(err);
-      return [];
-    }
-    setIsLoading(false);
-  }
 
   const handleSelect = (courseCode) => {
     setValue(courseCode);
     dispatch(courseTabActions("ADD_TAB", courseCode));
+  };
+
+  const handleSearch = (courseCode) => {
+    setValue(courseCode);
+    setCourses([]);
+    setIsLoading(true);
   };
 
   return (
@@ -47,14 +38,26 @@ export default function SearchCourse() {
       size="large"
       options={courses}
       value={value}
-      onSearch={(newVal) => {
-        setValue(newVal);
-        setCourses([]);
-        setIsLoading(true);
-      }}
+      onSearch={handleSearch}
       onSelect={handleSelect}
       notFoundContent={isLoading && value && <Spin size="small" />}
       style={{ width: "30rem", marginRight: "0.5rem" }}
     />
   );
 }
+
+export const search = async (query, setCourses, setIsLoading) => {
+  try {
+    const res = await axios.get(`/courses/searchCourse/${query}`);
+    setCourses(
+      Object.keys(res.data).map((course) => ({
+        label: `${course}: ${res.data[course]}`,
+        value: course,
+      }))
+    );
+  } catch (err) {
+    console.log(err);
+    return [];
+  }
+  setIsLoading(false);
+};

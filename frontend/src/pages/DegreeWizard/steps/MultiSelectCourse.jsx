@@ -5,8 +5,9 @@ import { setCourses } from "../../../actions/coursesActions";
 import debounce from "lodash/debounce";
 import axios from "axios";
 import { useDebounce } from "../../../hooks/useDebounce";
+import { search } from "../../CourseSelector/SearchCourse";
 
-export default function DebouncingSelect({
+export default function MultiSelectCourse({
   plannedCourses,
   setPlannedCourses,
 }) {
@@ -18,24 +19,9 @@ export default function DebouncingSelect({
 
   useEffect(() => {
     // if debounced term changes , call API
-    if (debouncedSearchTerm) search(debouncedSearchTerm);
+    if (debouncedSearchTerm)
+      search(debouncedSearchTerm, setCourseResults, setIsLoading);
   }, [debouncedSearchTerm]);
-
-  async function search(query) {
-    try {
-      const res = await axios.get(`/courses/searchCourse/${query}`);
-      setCourseResults(
-        Object.keys(res.data).map((course) => ({
-          label: `${course}: ${res.data[course]}`,
-          value: course,
-        }))
-      );
-    } catch (err) {
-      console.log(err);
-      return [];
-    }
-    setIsLoading(false);
-  }
 
   const handleSelect = (courseCode) => {
     const newCourse = { label: courseCode, value: courseCode, key: courseCode };
