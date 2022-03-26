@@ -77,4 +77,3 @@ def test_all_majors_fetched(specifics):
     for container_name, container in structure.json()["structure"]["Major"].items():
         if "courses" in container and container_name != "Core Courses":
             assert all(course not in course_list for course in container["courses"])
-    assert False
