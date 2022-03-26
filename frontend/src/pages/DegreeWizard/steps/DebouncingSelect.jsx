@@ -4,94 +4,82 @@ import { Select, Spin } from "antd";
 import { setCourses } from "../../../actions/coursesActions";
 import debounce from "lodash/debounce";
 import axios from "axios";
-
-const DebounceSelect = ({ fetchOptions, debounceTimeout = 100, ...props }) => {
-  const [fetching, setFetching] = useState(false);
-  const [options, setOptions] = useState([]);
-  const fetchRef = useRef(0);
-
-  const debounceFetcher = useMemo(() => {
-    const loadOptions = (value) => {
-      fetchRef.current += 1;
-      const fetchId = fetchRef.current;
-      setOptions([]);
-      setFetching(true);
-      fetchOptions(value).then((newOptions) => {
-        if (fetchId !== fetchRef.current) {
-          // for fetch callback order
-          return;
-        }
-        const filteredOptions = newOptions.filter(
-          (option) =>
-            option.value.toLowerCase().indexOf(value.toLowerCase()) >= 0
-        );
-        setOptions(filteredOptions);
-        setFetching(false);
-      });
-    };
-
-    return debounce(loadOptions, debounceTimeout);
-  }, [fetchOptions, debounceTimeout]);
-
-  return (
-    <Select
-      showSearch
-      labelInValue
-      filterOption={false}
-      onSearch={debounceFetcher}
-      notFoundContent={fetching ? <Spin size="small" /> : null}
-      {...props}
-      options={options}
-    />
-  );
-}; // Usage of DebounceSelect
+import { useDebounce } from "../../../hooks/useDebounce";
 
 export default function DebouncingSelect({ setPlannedCourses }) {
-  const [value, setValue] = useState([]);
-  setPlannedCourses(value);
-
-  const [courses, setCourses] = React.useState({});
+  const [courses, setCourses] = React.useState([]);
+  const [selectedCourses, setSelectedCourses] = useState({});
 
   useEffect(() => {
-    fetchCourses();
-  }, []);
+    // setPlannedCourses(selectedCourses);
+  }, [selectedCourses]);
 
-  const fetchCourses = async () => {
+  // return (
+  //   <DebounceSelect
+  //     mode="multiple"
+  //     value={value}
+  //     placeholder="Search a course"
+  //     fetchOptions={fetchUserList}
+  //     onChange={(newValue) => {
+  //       setValue(newValue);
+  //     }}
+  //     style={{ width: "20rem", marginRight: "0.5rem" }}
+  //   />
+
+  const [value, setValue] = React.useState("");
+  const debouncedSearchTerm = useDebounce(value, 500);
+  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // if debounced term changes , call API
+    if (debouncedSearchTerm) search(debouncedSearchTerm);
+  }, [debouncedSearchTerm]);
+
+  async function search(query) {
     try {
-      const res = await axios.post(
-        `/courses/getAllUnlocked/`,
-        JSON.stringify(payload)
+      const res = await axios.get(`/courses/searchCourse/${query}`);
+      setCourses(
+        Object.keys(res.data).map((course) => ({
+          label: `${course}: ${res.data[course]}`,
+          value: course,
+        }))
       );
-      setCourses(res.data.courses_state);
     } catch (err) {
       console.log(err);
+      return [];
     }
+  }
+
+  const handleSelect = (courseCode) => {
+    // setValue(courseCode);
+    // dispatch(courseTabActions("ADD_TAB", courseCode));
   };
 
-  async function fetchUserList() {
-    return Object.keys(courses).map((course) => ({
+  function prepareSelectedCourses() {
+    return Object.keys(selectedCourses).map((course) => ({
       label: course,
       value: course,
     }));
   }
 
+  console.log(selectedCourses);
+
   return (
-    <DebounceSelect
+    <Select
       mode="multiple"
+      showSearch
+      placeholder="Search for a course..."
+      filterOption={false}
+      size="large"
+      fetchOptions={prepareSelectedCourses}
       value={value}
-      placeholder="Search a course"
-      fetchOptions={fetchUserList}
-      onChange={(newValue) => {
-        setValue(newValue);
+      onSearch={(newVal) => {
+        setValue(newVal);
       }}
-      style={{ width: "20rem", marginRight: "0.5rem" }}
+      onSelect={handleSelect}
+      notFoundContent={isLoading && value && <Spin size="small" />}
+      style={{ width: "30rem", marginRight: "0.5rem" }}
     />
   );
 }
-
-const payload = {
-  program: "",
-  specialisations: {},
-  courses: {},
-  year: 0,
-};
