@@ -6,7 +6,7 @@ import json
 from enum import Enum, auto
 
 from algorithms.objects.categories import AnyCategory
-
+from algorithms.objects.user import User
 
 
 class Logic(Enum):
@@ -33,7 +33,7 @@ class Condition():
     requirements / conditions from the handbook
     """
     @abc.abstractmethod
-    def validate(self, user) -> tuple[bool, list[str]]:
+    def validate(self, user: User) -> tuple[bool, list[str]]:
         """
         returns a tuple first containing whether or not the course is
         unlocked, and second any warnings about the course's unlocked state
@@ -49,10 +49,10 @@ class CourseCondition(Condition):
     the current term
     """
 
-    def __init__(self, course):
+    def __init__(self, course: str):
         self.course = course
 
-    def validate(self, user) -> tuple[bool, list[str]]:
+    def validate(self, user: User) -> tuple[bool, list[str]]:
         return user.has_taken_course(self.course), []
 
 
@@ -71,7 +71,7 @@ class CoreqCoursesCondition(Condition):
     def set_logic(self, logic: Logic):
         self.logic = logic
 
-    def validate(self, user) -> tuple[bool, list[str]]:
+    def validate(self, user: User) -> tuple[bool, list[str]]:
         """Returns true if the user is taking these courses in the same term"""
         match self.logic:
             case Logic.AND:
@@ -94,7 +94,7 @@ class CoreqCoursesCondition(Condition):
 class UOCCondition(Condition):
     """UOC conditions such as '24UOC in COMP'"""
 
-    def __init__(self, uoc):
+    def __init__(self, uoc: int):
         self.uoc = uoc
 
         # The conditional uoc category attached to this object.
@@ -107,17 +107,17 @@ class UOCCondition(Condition):
         # And more...
         self.category = AnyCategory()
 
-    def set_category(self, category_classobj):
+    def set_category(self, category_classobj: Category):
         self.category = category_classobj
 
-    def validate(self, user) -> tuple[bool, list[str]]:
+    def validate(self, user: User) -> tuple[bool, list[str]]:
         return user.uoc(self.category) >= self.uoc, []
 
 
 class WAMCondition(Condition):
     """Handles WAM conditions such as 65WAM and 80WAM in"""
 
-    def __init__(self, wam):
+    def __init__(self, wam: int):
         self.wam = wam
 
         # The conditional wam category attached to this object.
@@ -128,11 +128,11 @@ class WAMCondition(Condition):
         # so that only one category is attached to this wam condition
         self.category = AnyCategory()
 
-    def set_category(self, category_classobj):
+    def set_category(self, category_classobj: Category):
         """Set own category to the one given"""
         self.category = category_classobj
 
-    def validate(self, user) -> tuple[bool, list[str]]:
+    def validate(self, user: User) -> tuple[bool, list[str]]:
         """
         Determines if the user has met the WAM condition for this category.
 
@@ -141,7 +141,7 @@ class WAMCondition(Condition):
         warning = self.get_warning(user.wam(self.category))
         return True, [warning] if warning else []
 
-    def get_warning(self, applicable_wam):
+    def get_warning(self, applicable_wam: int):
         """Returns an appropriate warning message or None if not needed"""
         if isinstance(self.category, AnyCategory):
             if applicable_wam is None:
@@ -160,13 +160,13 @@ class WAMCondition(Condition):
 class GRADECondition(Condition):
     """Handles GRADE conditions such as 65GRADE and 80GRADE in [A-Z]{4}[0-9]{4}"""
 
-    def __init__(self, grade, course):
+    def __init__(self, grade: int, course: str):
         self.grade = grade
 
         # Course code
         self.course = course
 
-    def validate(self, user) -> tuple[bool, list[str]]:
+    def validate(self, user: User) -> tuple[bool, list[str]]:
         if self.course not in user.courses:
             return False, []
 
@@ -185,10 +185,10 @@ class GRADECondition(Condition):
 class ProgramCondition(Condition):
     """Handles Program conditions such as 3707"""
 
-    def __init__(self, program):
+    def __init__(self, program: str):
         self.program = program
 
-    def validate(self, user) -> tuple[bool, list[str]]:
+    def validate(self, user: User) -> tuple[bool, list[str]]:
         return user.in_program(self.program), []
 
 
@@ -200,30 +200,30 @@ class ProgramTypeCondition(Condition):
     program must be any one of a few programs (actl + double degree codes).
     """
 
-    def __init__(self, programType):
+    def __init__(self, programType: str):
         self.programType = programType
 
-    def validate(self, user) -> tuple[bool, list[str]]:
+    def validate(self, user: User) -> tuple[bool, list[str]]:
         return user.program in CACHED_PRGORAM_MAPPINGS[self.programType], []
 
 
 class SpecialisationCondition(Condition):
     """Handles Specialisation conditions such as COMPA1"""
 
-    def __init__(self, specialisation):
+    def __init__(self, specialisation: str):
         self.specialisation = specialisation
 
-    def validate(self, user) -> tuple[bool, list[str]]:
+    def validate(self, user: User) -> tuple[bool, list[str]]:
         return user.in_specialisation(self.specialisation), []
 
 
 class CourseExclusionCondition(Condition):
     """ Handles when you cant take a certain course. Eg Exclusion: MATH1131 for MATH1141"""
 
-    def __init__(self, exclusion):
+    def __init__(self, exclusion: str):
         self.exclusion = exclusion
 
-    def validate(self, user) -> tuple[bool, list[str]]:
+    def validate(self, user: User) -> tuple[bool, list[str]]:
         return not user.has_taken_course(self.exclusion), []
 
 
@@ -233,10 +233,10 @@ class ProgramExclusionCondition(Condition):
     taking a genEd course in your own faculty
     """
 
-    def __init__(self, exclusion):
+    def __init__(self, exclusion: str):
         self.exclusion = exclusion
 
-    def validate(self, user) -> tuple[bool, list[str]]:
+    def validate(self, user: User) -> tuple[bool, list[str]]:
         return not user.in_program(self.exclusion), []
 
 
@@ -255,7 +255,7 @@ class CompositeCondition(Condition):
         """AND or OR"""
         self.logic = logic
 
-    def validate(self, user) -> tuple[bool, list[str]]:
+    def validate(self, user: User) -> tuple[bool, list[str]]:
         """
         Validate user conditions and return the validated conditions and
         warnings

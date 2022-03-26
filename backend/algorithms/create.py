@@ -46,7 +46,7 @@ with open(CACHED_EXCLUSIONS_PATH, "r", encoding="utf8") as f:
     CACHED_EXCLUSIONS = json.load(f)
 
 
-def create_category(tokens):
+def create_category(tokens) -> Category:
     """Given a list of tokens starting from after the connector keyword, create
     and return the category object matching the category, as well as the current index
     of the token list.
@@ -91,7 +91,7 @@ def create_category(tokens):
     return None, 0
 
 
-def create_condition(tokens, course=None):
+def create_condition(tokens, course=None) -> CompositeCondition:
     """
     The main wrapper for make_condition so we don't get 2 returns.
     Given the parsed logical tokens list (assuming starting and ending bracket),
@@ -101,13 +101,11 @@ def create_condition(tokens, course=None):
     return make_condition(tokens, True, course)[0]
 
 
-def make_condition(tokens, first=False, course=None):
+def make_condition(tokens, first=False, course=None) -> CompositeCondition:
     """
     To be called by create_condition
     Given the parsed logical tokens list, (assuming starting and ending bracket),
     return the condition object and the index of that (sub) token list
-
-    Note:
     """
     # Everything is wrapped in a CompositeCondition
     result = CompositeCondition()

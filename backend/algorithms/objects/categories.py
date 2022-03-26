@@ -20,7 +20,7 @@ class Category(ABC):
     """
 
     @abstractmethod
-    def match_definition(self, course):
+    def match_definition(self, course: str) -> bool:
         pass
 
     @abstractmethod
@@ -30,7 +30,7 @@ class Category(ABC):
 
 class AnyCategory(Category):
     """Wildcard category `*` that matches to anything"""
-    def match_definition(self, course):
+    def match_definition(self, course: str) -> bool:
         return True
 
     def __str__(self) -> str:
@@ -43,7 +43,7 @@ class CourseCategory(Category):
     def __init__(self, code: str):
         self.code = code
 
-    def match_definition(self, course):
+    def match_definition(self, course: str) -> bool:
         return bool(re.match(rf"^{self.code}\d{{4}}$", course))
 
     def __str__(self) -> str:
@@ -57,7 +57,7 @@ class LevelCategory(Category):
         # A number representing the level
         self.level = level
 
-    def match_definition(self, course: str):
+    def match_definition(self, course: str) -> bool:
         return bool(course[4] == str(self.level))
 
     def __str__(self) -> str:
@@ -67,11 +67,11 @@ class LevelCategory(Category):
 class LevelCourseCategory(Category):
     """A level category for a certain type of course (e.g. L2 MATH)"""
 
-    def __init__(self, level, code):
+    def __init__(self, level: int, code: str):
         self.level = level
         self.code = code
 
-    def match_definition(self, course) -> bool:
+    def match_definition(self, course: str) -> bool:
         return bool(
             re.match(rf"{self.code}\d{{4}}", course) and course[4] == str(self.level)
         )
@@ -86,7 +86,7 @@ class SchoolCategory(Category):
     def __init__(self, school):
         self.school = school  # The code for the school (S Mech)
 
-    def match_definition(self, course):
+    def match_definition(self, course: str) -> bool:
         return course in CACHED_MAPPINGS[self.school]
 
     def __str__(self) -> str:
@@ -96,10 +96,10 @@ class SchoolCategory(Category):
 class FacultyCategory(Category):
     """Category for courses belonging to a faculty (e.g. F Business)"""
 
-    def __init__(self, faculty):
+    def __init__(self, faculty: str):
         self.faculty = faculty  # The code for the faculty (F Business)
 
-    def match_definition(self, course):
+    def match_definition(self, course: str) -> bool:
         return course in CACHED_MAPPINGS[self.faculty]
 
     def __str__(self) -> str:
