@@ -7,6 +7,7 @@ import json
 import re
 
 from algorithms.objects.categories import (
+    Category,
     CourseCategory,
     FacultyCategory,
     LevelCategory,

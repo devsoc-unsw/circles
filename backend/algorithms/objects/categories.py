@@ -5,7 +5,15 @@ to a specific category
 
 import json
 import re
+from enum import Enum, auto
 from abc import ABC, abstractmethod
+
+
+class Logic(Enum):
+    """ Logic Keywords """
+    AND = auto()
+    OR = auto()
+
 
 # Preload the mappings to school and faculty
 CACHED_MAPPINGS = {}
@@ -29,6 +37,37 @@ class Category(ABC):
 
     def __repr__(self) -> str:
         return self.__str__()
+
+
+class CompositeCategory(Category):
+    """ Composed of other categories, evaluated with either Any or All """
+
+    def __init__(self, logic: Logic = Logic.AND):
+        self.categories: list[Category] = []
+        self.logic = logic
+
+    def add_category(self, category: Category):
+        """ Adds a category object """
+        self.categories.append(category)
+
+    def set_logic(self, logic: Logic):
+        """ AND or OR """
+        self.logic = logic
+
+    def match_definition(self, course: str) -> bool:
+        if self.logic == Logic.AND:
+            return all(
+                [category.match_definition(course) for category in self.categories]
+            )
+        elif self.logic == Logic.OR:
+            return any(
+                [category.match_definition(course) for category in self.categories]
+            )
+        else:
+            raise ValueError("Invalid logic")
+
+    def __str__(self) -> str:
+        return f"{self.logic} ( {', '.join(str(category) for category in self.categories)})"
 
 
 class AnyCategory(Category):
@@ -68,20 +107,13 @@ class LevelCategory(Category):
         return f"level {self.level} courses"
 
 
-class LevelCourseCategory(Category):
+class LevelCourseCategory(CompositeCategory):
     """ A level category for a certain type of course (e.g. L2 MATH) """
 
     def __init__(self, level: int, code: str):
-        self.level = level
-        self.code = code
-
-    def match_definition(self, course: str) -> bool:
-        return bool(
-            re.match(rf"{self.code}\d{{4}}", course) and course[4] == str(self.level)
-        )
-
-    def __str__(self) -> str:
-        return f"Level {self.level} {self.code} courses"
+        super().__init__()
+        self.add_category(LevelCategory(level))
+        self.add_category(CourseCategory(code))
 
 
 class SchoolCategory(Category):

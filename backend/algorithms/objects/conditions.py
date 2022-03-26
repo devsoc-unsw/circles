@@ -43,6 +43,7 @@ class Condition(ABC):
         """
         pass
 
+    @abstractmethod
     def __str__(self) -> str:
         return super().__str__()
 
@@ -144,6 +145,7 @@ class WAMCondition(Condition):
         # NOTE: We will convert 80WAM in (COMP || BINH || SENG) to:
         # 80WAM in COMP || 80WAM in BINH || 80WAM in SENG
         # so that only one category is attached to this wam condition
+        # TODO(josh): fix this to use CompositeCategory
         self.category = AnyCategory()
 
     def set_category(self, category_classobj: Category):
