@@ -17124,22 +17124,25 @@
     "OPTM4271": {
         "condition": {
             "original": "Pre req; OPTM4110, OPTM4131, OPTM4151, Corequisites; OPTM4211, OPTM4231, OPTM4251<br/><br/>",
-            "processed": "; OPTM4110, OPTM4131, OPTM4151, [OPTM4211, OPTM4231, OPTM4251]"
+            "processed": "OPTM4110 && OPTM4131 && OPTM4151, [OPTM4211 && OPTM4231 && OPTM4251]"
         },
         "tokens": [
             "(",
-            ";",
-            "OPTM4110,",
-            "OPTM4131,",
+            "OPTM4110",
+            "&&",
+            "OPTM4131",
+            "&&",
             "OPTM4151,",
             "[",
-            "OPTM4211,",
-            "OPTM4231,",
+            "OPTM4211",
+            "&&",
+            "OPTM4231",
+            "&&",
             "OPTM4251",
             "]",
             ")"
         ],
-        "broke at": "Index 1, ;"
+        "broke at": "Index 5, OPTM4151,"
     },
     "OPTM5131": {
         "condition": {

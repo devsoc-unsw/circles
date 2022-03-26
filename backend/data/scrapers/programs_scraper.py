@@ -10,8 +10,8 @@ Step in the data's journey:
 import json
 
 import requests
-from data.scrapers.payload import create_payload
-from data.utility import data_helpers, URL, HEADERS
+from data.scrapers.payload import create_payload, HEADERS, URL
+from data.utility import data_helpers
 
 TOTAL_PGRMS = 249
 

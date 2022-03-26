@@ -157,12 +157,13 @@ def getAllUnlocked(userData: UserData):
     for course, condition in CONDITIONS.items():
         # Condition object exists for this course
         result, warnings = condition.validate(user) if condition else (True, [])
-        coursesState[course] = {
-            "is_accurate": bool(condition),
-            "unlocked": result,
-            "handbook_note": CACHED_HANDBOOK_NOTE.get(course, ""),
-            "warnings": warnings,
-        }
+        if result:
+            coursesState[course] = {
+                "is_accurate": bool(condition),
+                "unlocked": result,
+                "handbook_note": CACHED_HANDBOOK_NOTE.get(course, ""),
+                "warnings": warnings,
+            }
 
     return {"courses_state": coursesState}
 

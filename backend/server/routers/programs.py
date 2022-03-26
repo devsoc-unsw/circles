@@ -134,13 +134,15 @@ def getMinors(programCode: str):
     return {"minors": minrs}
 
 def addSpecialisation(structure: dict, code: str, type: str):
+    """add a specialisation to the structure of a getStructure call"""
+    # in a specialisation, the first container takes priority - no duplicates may exist
     spnResult = specialisationsCOL.find_one({"code": code})
     if not spnResult:
         raise HTTPException(
             status_code=400, detail=f"{code} of type {type} not found")
     structure[type] = {"name": spnResult["name"]}
-    for container in spnResult["curriculum"]:
-
+    course_list = []
+    for index, container in enumerate(spnResult["curriculum"]):
         structure[type][container["title"]] = {}
         item = structure[type][container["title"]]
 
@@ -149,11 +151,15 @@ def addSpecialisation(structure: dict, code: str, type: str):
         item["courses"] = {}
         for course, courseObject in container["courses"].items():
             if " or " in course:
-                for index, c in enumerate(course.split("or")):
-                    c = c.strip()
-                    item["courses"][c] = courseObject[index]
+                for index, c in enumerate(course.split(" or ")):
+                    if c not in course_list:
+                        item["courses"][c] = courseObject[index]
+                        course_list.append(c)
             else:
-                item["courses"][course] = courseObject
+                if course not in course_list:
+                    item["courses"][course] = courseObject
+                    course_list.append(course)
+
 
 
 @router.get(

@@ -50,6 +50,8 @@ def test_all_majors_minors_fetched(specifics):
     assert structure.json()["structure"]["General"] != {}
     assert structure.json()["structure"]["Major"] != {}
     assert structure.json()["structure"]["Minor"] != {}
+    course_list = [container["courses"] for container in structure.json()["structure"]["Minor"]]
+    assert course_list == [*set(course_list)]
 
 
 @given(major_minor_for_program())
@@ -61,3 +63,6 @@ def test_all_majors_fetched(specifics):
     assert structure.json()["structure"]["General"] != {}
     assert structure.json()["structure"]["Major"] != {}
     assert structure.json()["structure"].get("Minor") is None
+    # also assert that there are no duplicates
+    course_list = [container["courses"] for container in structure.json()["structure"]["Major"]]
+    assert course_list == [*set(course_list)]
