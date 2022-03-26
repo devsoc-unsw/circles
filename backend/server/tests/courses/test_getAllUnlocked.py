@@ -25,4 +25,4 @@ def test_unlock_dependant_course():
     assert x.status_code != 500
     assert x.json()["courses_state"]["MATH1231"]["unlocked"] is True
     assert x.json()["courses_state"]["MATH1231"]["is_accurate"] is True
-    assert "more information" in x.json()["courses_state"]["TABL3033"]["handbook_note"]
+    assert "not permitted to enrol" in x.json()["courses_state"]["COMM1100"]["handbook_note"]

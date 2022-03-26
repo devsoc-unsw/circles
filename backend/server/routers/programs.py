@@ -154,10 +154,12 @@ def addSpecialisation(structure: dict, code: str, type: str):
                 for index, c in enumerate(course.split(" or ")):
                     if c not in course_list:
                         item["courses"][c] = courseObject[index]
+                    if container["title"] == "Core Courses":
                         course_list.append(c)
             else:
                 if course not in course_list:
                     item["courses"][course] = courseObject
+                if container["title"] == "Core Courses":
                     course_list.append(course)
 
 

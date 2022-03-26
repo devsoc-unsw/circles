@@ -50,8 +50,14 @@ def test_all_majors_minors_fetched(specifics):
     assert structure.json()["structure"]["General"] != {}
     assert structure.json()["structure"]["Major"] != {}
     assert structure.json()["structure"]["Minor"] != {}
-    course_list = [container["courses"] for container in structure.json()["structure"]["Minor"]]
-    assert course_list == [*set(course_list)]
+    course_list = []
+    for container_name, container in structure.json()["structure"]["Minor"].items():
+        if container_name == "Core Courses":
+            course_list = container["courses"].keys()
+
+    for container_name, container in structure.json()["structure"]["Minor"].items():
+        if "courses" in container and container_name != "Core Courses":
+            assert all(course not in course_list for course in container["courses"])
 
 
 @given(major_minor_for_program())
@@ -64,5 +70,11 @@ def test_all_majors_fetched(specifics):
     assert structure.json()["structure"]["Major"] != {}
     assert structure.json()["structure"].get("Minor") is None
     # also assert that there are no duplicates
-    course_list = [container["courses"] for container in structure.json()["structure"]["Major"]]
-    assert course_list == [*set(course_list)]
+    course_list = []
+    for container_name, container in structure.json()["structure"]["Major"].items():
+        if container_name == "Core Courses":
+            course_list = [*container["courses"].keys()]
+    for container_name, container in structure.json()["structure"]["Major"].items():
+        if "courses" in container and container_name != "Core Courses":
+            assert all(course not in course_list for course in container["courses"])
+    assert False
