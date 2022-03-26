@@ -28,17 +28,21 @@ export default function CourseMenu({ structure }) {
   const coursesInPlanner = planner.courses;
   const degree = useSelector((state) => state.degree);
 
+  const [isPageLoaded, setIsPageLoaded] = React.useState(false);
+
   // get all courses
   React.useEffect(async () => {
-    try {
-      const res = await axios.post(
-        `/courses/getAllUnlocked/`,
-        JSON.stringify(prepareUserPayload(degree, planner))
-      );
-      dispatch(setCourses(res.data.courses_state));
-      generateMenuData(res.data.courses_state);
-    } catch (err) {
-      console.log(err);
+    if (structure) {
+      try {
+        const res = await axios.post(
+          `/courses/getAllUnlocked/`,
+          JSON.stringify(prepareUserPayload(degree, planner))
+        );
+        dispatch(setCourses(res.data.courses_state));
+        generateMenuData(res.data.courses_state);
+      } catch (err) {
+        console.log(err);
+      }
     }
   }, [structure, coursesInPlanner]);
 
@@ -110,11 +114,12 @@ export default function CourseMenu({ structure }) {
     }
     setMenuData(newMenu);
     setCoursesUnits(newCoursesUnits);
+    setIsPageLoaded(true);
   };
 
   return (
     <div className="cs-menu-root">
-      {structure === null ? (
+      {!isPageLoaded ? (
         <Loading />
       ) : (
         <>
