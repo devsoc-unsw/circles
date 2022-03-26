@@ -27,6 +27,9 @@ class Category(ABC):
     def __str__(self) -> str:
         return super().__str__()
 
+    def __repr__(self) -> str:
+        return self.__str__()
+
 
 class AnyCategory(Category):
     """ Wildcard category `*` that matches to anything """

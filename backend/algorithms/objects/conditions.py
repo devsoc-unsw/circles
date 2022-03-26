@@ -6,7 +6,7 @@ import json
 from enum import Enum, auto
 from abc import ABC, abstractmethod
 
-from algorithms.objects.categories import AnyCategory
+from algorithms.objects.categories import Category, AnyCategory
 from algorithms.objects.user import User
 
 
@@ -43,6 +43,12 @@ class Condition(ABC):
         """
         pass
 
+    def __str__(self) -> str:
+        return super().__str__()
+
+    def __repr__(self) -> str:
+        return self.__str__()
+
 
 class CourseCondition(Condition):
     """
@@ -55,6 +61,9 @@ class CourseCondition(Condition):
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
         return user.has_taken_course(self.course), []
+
+    def __str__(self) -> str:
+        return f"CourseCondition({self.course})"
 
 
 class CoreqCoursesCondition(Condition):
@@ -91,6 +100,11 @@ class CoreqCoursesCondition(Condition):
         print("Conditions Error: validation was not of type AND or OR")
         return True, []
 
+    def __str__(self) -> str:
+        return "CoreqCoursesCondition(courses={}, logic={})".format(
+            self.courses, self.logic
+        )
+
 
 class UOCCondition(Condition):
     """ UOC conditions such as '24UOC in COMP' """
@@ -113,6 +127,9 @@ class UOCCondition(Condition):
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
         return user.uoc(self.category) >= self.uoc, []
+
+    def __str__(self) -> str:
+        return f"{self.uoc}UOC in {self.category}"
 
 
 class WAMCondition(Condition):
@@ -157,6 +174,9 @@ class WAMCondition(Condition):
             return None
         return f"Requires {self.wam} WAM in {self.category}. Your WAM in {self.category} is currently {applicable_wam:.3f}"
 
+    def __str__(self) -> str:
+        return f"{self.wam}WAM in {self.category}"
+
 
 class GRADECondition(Condition):
     """ Handles GRADE conditions such as 65GRADE and 80GRADE in [A-Z]{4}[0-9]{4} """
@@ -182,6 +202,9 @@ class GRADECondition(Condition):
         """ Return warning string for grade condition error """
         return f"Requires {self.grade} mark in {self.course}. Your mark has not been recorded"
 
+    def __str__(self) -> str:
+        return f"{self.grade}GRADE in {self.course}"
+
 
 class ProgramCondition(Condition):
     """ Handles Program conditions such as 3707 """
@@ -191,6 +214,9 @@ class ProgramCondition(Condition):
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
         return user.in_program(self.program), []
+
+    def __str__(self) -> str:
+        return f"Program {self.program}"
 
 
 class ProgramTypeCondition(Condition):
@@ -207,6 +233,9 @@ class ProgramTypeCondition(Condition):
     def validate(self, user: User) -> tuple[bool, list[str]]:
         return user.program in CACHED_PRGORAM_MAPPINGS[self.programType], []
 
+    def __str__(self) -> str:
+        return f"ProgramTypeCondition: {self.programType}"
+
 
 class SpecialisationCondition(Condition):
     """ Handles Specialisation conditions such as COMPA1 """
@@ -217,6 +246,9 @@ class SpecialisationCondition(Condition):
     def validate(self, user: User) -> tuple[bool, list[str]]:
         return user.in_specialisation(self.specialisation), []
 
+    def __str__(self) -> str:
+        return f"SpecialisationCondition: {self.specialisation}"
+
 
 class CourseExclusionCondition(Condition):
     """ Handles when you cant take a certain course. Eg Exclusion: MATH1131 for MATH1141"""
@@ -226,6 +258,9 @@ class CourseExclusionCondition(Condition):
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
         return not user.has_taken_course(self.exclusion), []
+
+    def __str__(self) -> str:
+        return f"Exclusion: {self.exclusion}"
 
 
 class ProgramExclusionCondition(Condition):
@@ -239,6 +274,9 @@ class ProgramExclusionCondition(Condition):
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
         return not user.in_program(self.exclusion), []
+
+    def __str__(self) -> str:
+        return f"ProgramExclusionCondition: {self.exclusion}"
 
 
 class CompositeCondition(Condition):
@@ -270,3 +308,6 @@ class CompositeCondition(Condition):
         satisfied = all(unlocked) if self.logic == Logic.AND else any(unlocked)
 
         return satisfied, sum(warnings, [])  # warnings are flattened
+
+    def __str__(self) -> str:
+        return f"{self.logic} ( {', '.join(str(cond) for cond in self.conditions)})"
