@@ -155,7 +155,6 @@ def getAllUnlocked(userData: UserData):
     coursesState = {}
     user = User(fixUserData(userData.dict())) if type(userData) != User else userData
     for course, condition in CONDITIONS.items():
-        # Condition object exists for this course
         result, warnings = condition.validate(user) if condition else (True, [])
         if result:
             coursesState[course] = {
