@@ -47,7 +47,8 @@ with open(CACHED_EXCLUSIONS_PATH, "r", encoding="utf8") as f:
 
 
 def create_category(tokens) -> Category:
-    """Given a list of tokens starting from after the connector keyword, create
+    """
+    Given a list of tokens starting from after the connector keyword, create
     and return the category object matching the category, as well as the current index
     of the token list.
 
@@ -96,7 +97,7 @@ def create_condition(tokens, course=None) -> CompositeCondition:
     The main wrapper for make_condition so we don't get 2 returns.
     Given the parsed logical tokens list (assuming starting and ending bracket),
     and optionally a course for which this condition applies to,
-    Returns the condition
+    returns the condition
     """
     return make_condition(tokens, True, course)[0]
 

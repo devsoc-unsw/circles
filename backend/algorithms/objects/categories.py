@@ -29,7 +29,8 @@ class Category(ABC):
 
 
 class AnyCategory(Category):
-    """Wildcard category `*` that matches to anything"""
+    """ Wildcard category `*` that matches to anything """
+
     def match_definition(self, course: str) -> bool:
         return True
 
@@ -38,7 +39,7 @@ class AnyCategory(Category):
 
 
 class CourseCategory(Category):
-    """A 4 letter course category, e.g. COMP, SENG, MATH, ENGG"""
+    """ A 4 letter course category, e.g. COMP, SENG, MATH, ENGG """
 
     def __init__(self, code: str):
         self.code = code
@@ -51,7 +52,7 @@ class CourseCategory(Category):
 
 
 class LevelCategory(Category):
-    """A simple level category. e.g. L2"""
+    """ A simple level category. e.g. L2 """
 
     def __init__(self, level: int):
         # A number representing the level
@@ -65,7 +66,7 @@ class LevelCategory(Category):
 
 
 class LevelCourseCategory(Category):
-    """A level category for a certain type of course (e.g. L2 MATH)"""
+    """ A level category for a certain type of course (e.g. L2 MATH) """
 
     def __init__(self, level: int, code: str):
         self.level = level
@@ -81,7 +82,7 @@ class LevelCourseCategory(Category):
 
 
 class SchoolCategory(Category):
-    """Category for courses belonging to a school (e.g. S Mech)"""
+    """ Category for courses belonging to a school (e.g. S Mech) """
 
     def __init__(self, school):
         self.school = school  # The code for the school (S Mech)
@@ -94,7 +95,7 @@ class SchoolCategory(Category):
 
 
 class FacultyCategory(Category):
-    """Category for courses belonging to a faculty (e.g. F Business)"""
+    """ Category for courses belonging to a faculty (e.g. F Business) """
 
     def __init__(self, faculty: str):
         self.faculty = faculty  # The code for the faculty (F Business)
