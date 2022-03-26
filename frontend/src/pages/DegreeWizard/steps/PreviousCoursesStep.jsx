@@ -84,7 +84,10 @@ const TermBox = ({ yearIndex, termNo }) => {
           </Button>,
         ]}
       >
-        <DebouncingSelect setPlannedCourses={setCourses} />
+        <DebouncingSelect
+          plannedCourses={courses}
+          setPlannedCourses={setCourses}
+        />
       </Modal>
     </>
   );
