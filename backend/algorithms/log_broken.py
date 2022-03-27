@@ -54,6 +54,4 @@ def report_index_string(tokens, bad_index):
     """
     Generate a string the index of break and, the tokens broken
     """
-    return f"Index {bad_index}" + str(
-        {"exclusions" if bad_index == -1 else tokens[bad_index]}
-    )
+    return f"Index {bad_index}, {'exclusions' if bad_index == -1 else tokens[bad_index]}"

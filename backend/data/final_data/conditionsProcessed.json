@@ -3666,7 +3666,7 @@
     },
     "COMP3821": {
         "original": "Prerequisite: A mark of at least 65 in COMP1927 or COMP2521<br/><br/>",
-        "processed": "65GRADE in (COMP1927 || COMP2521)"
+        "processed": "65GRADE in COMP1927 || 65GRADE in COMP2521"
     },
     "COMP3891": {
         "original": "Prerequisite: (COMP1521 or DPST1092 or COMP2121) and (COMP2521 or COMP1927) and a WAM of at least 75<br/><br/>",
@@ -9606,7 +9606,7 @@
     },
     "OPTM4271": {
         "original": "Pre req; OPTM4110, OPTM4131, OPTM4151, Corequisites; OPTM4211, OPTM4231, OPTM4251<br/><br/>",
-        "processed": "; OPTM4110, OPTM4131, OPTM4151, [OPTM4211, OPTM4231, OPTM4251]"
+        "processed": "OPTM4110 && OPTM4131 && OPTM4151, [OPTM4211 && OPTM4231 && OPTM4251]"
     },
     "OPTM4291": {
         "original": "Prerequisite: OPTM3231<br/><br/>",
