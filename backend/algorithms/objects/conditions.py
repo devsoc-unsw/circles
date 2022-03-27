@@ -326,4 +326,5 @@ class CompositeCondition(Condition):
         return satisfied, sum(warnings, [])  # warnings are flattened
 
     def __str__(self) -> str:
-        return f"{self.logic} ( {', '.join(str(cond) for cond in self.conditions)})"
+        logic_op = "&&" if self.logic == Logic.AND else "||"
+        return f"({f' {logic_op} '.join(str(cond) for cond in self.conditions)})"

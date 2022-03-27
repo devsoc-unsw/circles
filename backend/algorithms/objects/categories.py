@@ -60,9 +60,9 @@ class CompositeCategory(Category):
         else:
             raise ValueError(f"Invalid logic: {self.logic}")
 
-    # TODO(josh): might need a more readable representation for use in wam/grade condition warnings
     def __str__(self) -> str:
-        return f"{self.logic} ( {', '.join(str(category) for category in self.categories)})"
+        logic_op = "&&" if self.logic == Logic.AND else "||"
+        return f"({f' {logic_op} '.join(str(category) for category in self.categories)})"
 
 
 class AnyCategory(Category):
