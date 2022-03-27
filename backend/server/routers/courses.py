@@ -2,6 +2,7 @@ import re
 from itertools import chain
 
 from algorithms.objects.user import User
+from data.config import ARCHIVED_YEARS
 from fastapi import APIRouter, HTTPException
 from server.database import archivesDB, coursesCOL
 from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, AffectedCourses,
@@ -91,8 +92,20 @@ def fixUserData(userData: dict):
     },
 )
 def getCourse(courseCode: str):
-    """get info about a course given courseCode"""
+    """get info about a course given courseCode
+    - start with the current database
+    - if not found, check the archives
+    """
     result = coursesCOL.find_one({"code": courseCode})
+
+    if not result:
+        years = sorted(ARCHIVED_YEARS, reverse=True)
+        for year in years:
+            result = archivesDB[str(year)].find_one({"code": courseCode})
+            if result is not None:
+                result.setdefault("raw_requirements", "")
+                break
+
     if not result:
         raise HTTPException(
             status_code=400, detail=f"Course code {courseCode} was not found"
@@ -116,6 +129,14 @@ def search(string):
     pat = re.compile(r"{}".format(string), re.I)
     code_query = coursesCOL.find({"code": {"$regex": pat}})
     title_query = coursesCOL.find({"title": {"$regex": pat}})
+
+    years = sorted(ARCHIVED_YEARS, reverse=True)
+    if len(list(code_query.clone())) == 0 and len(list(title_query.clone())) == 0:
+        for year in years:
+            code_query = archivesDB[str(year)].find({"code": {"$regex": pat}})
+            title_query = archivesDB[str(year)].find({"title": {"$regex": pat}})
+            if len(list(code_query.clone())) != 0 or len(list(title_query.clone())) != 0:
+                break
 
     return {
         course["code"]: course["title"] for course in chain(code_query, title_query)
