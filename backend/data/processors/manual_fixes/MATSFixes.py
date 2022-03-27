@@ -28,8 +28,8 @@ def fix_conditions():
     """ Functions to apply manual fixes """
 
     # TODO: call your functions here
-    for course in ("MATS4500", "MATS4501", "MATS4503", "MATS4504", "MATS4505"):
-        CONDITIONS[course][PROCESSED] = MATS_4500_4501_4503_4504_4505()
+    for course in ("MATS4503", "MATS4504", "MATS4505"):
+        CONDITIONS[course][PROCESSED] = MATS_4503_4504_4505()
 
 
     CONDITIONS["MATS5003"][PROCESSED] = MATS_5003()
@@ -39,7 +39,7 @@ def fix_conditions():
         CONDITIONS, "data/final_data/conditionsProcessed.json")
     data_helpers.write_data(COURSES, "data/final_data/coursesProcessed.json")
 
-def MATS_4500_4501_4503_4504_4505():
+def MATS_4503_4504_4505():
     """
     "original": "Prerequisite: Enrolled in Materials Science Honours Plan<br/><br/>",
     "processed": "Materials Science Honours Plan"

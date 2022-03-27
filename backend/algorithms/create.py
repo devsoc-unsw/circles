@@ -232,14 +232,13 @@ def make_condition(tokens, first=False, course=None) -> CompositeCondition:
                     # Error. Return None. (Could also potentially set the uoc category
                     # to just the default Category which returns true and 1000 uoc taken)
                     return None, index
+
                 # Add the category to the uoc and adjust the current index position
                 uoc_cond.set_category(category)
-                result.add_condition(uoc_cond)
 
                 [next(item) for _ in range(sub_index + 1)]
-            else:
-                # Error
-                return None, index
+
+            result.add_condition(uoc_cond)
 
         elif is_wam(token):
             # Condition for WAM requirement
@@ -256,13 +255,10 @@ def make_condition(tokens, first=False, course=None) -> CompositeCondition:
 
                 # Add the category and adjust the current index position
                 wam_cond.set_category(category)
-                result.add_condition(wam_cond)
 
                 [next(item) for _ in range(sub_index + 1)]
-            else:
-                # Error
-                return None, index
 
+            result.add_condition(wam_cond)
 
         elif is_grade(token):
             # Condition for GRADE requirement (mark in a single course)

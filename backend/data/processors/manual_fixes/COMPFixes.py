@@ -49,7 +49,6 @@ def fix_conditions():
         CONDITIONS[code][PROCESSED] = COMP_9312_5()
 
     CONDITIONS["COMP9491"][PROCESSED] = COMP_9491()
-    CONDITIONS["COMP9844"][PROCESSED] = COMP_9844()
 
     data_helpers.write_data(
         CONDITIONS, "data/final_data/conditionsProcessed.json")
@@ -282,15 +281,6 @@ def COMP_9491():
     "processed": "COMP3411 && 70WAM && 12UOC in (COMP9444 || COMP9417 || COMP9517 || COMP4418)"
     """
     return "COMP3411 && 70WAM && 12UOC in (COMP9444 || COMP9417 || COMP9517 || COMP4418)"
-
-
-def COMP_9844():
-    """
-    "original": "Prerequisite: COMP2521 or COMP1927 or MTRN3500, and a WAM of at least 70<br/><br/>"
-
-    "processed": "(COMP2521 || COMP1927 || MTRN3500) && 70WAM"
-    """
-    return "(COMP2521 || COMP1927 || MTRN3500) && 70WAM"
 
 
 if __name__ == "__main__":

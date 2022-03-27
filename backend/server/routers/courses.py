@@ -113,6 +113,9 @@ def search(string):
           “COMP1531”: “SoftEng Fundamentals, 
             ……. } 
     """
+    # TODO: is regex search really something we want?
+    # malicious regex can cause DOS depending on regex implementation
+    # Would fuzzy search be better?
     pat = re.compile(r"{}".format(string), re.I)
     code_query = coursesCOL.find({"code": {"$regex": pat}})
     title_query = coursesCOL.find({"title": {"$regex": pat}})

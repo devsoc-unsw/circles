@@ -37,7 +37,6 @@ def fix_conditions():
     CONDITIONS["FINS3645"][PROCESSED] = FINS_3645_6()
     CONDITIONS["FINS3646"][PROCESSED] = FINS_3645_6()
     CONDITIONS["FINS4774"][PROCESSED] = FINS_4774()
-    CONDITIONS["FINS4775"][PROCESSED] = FINS_4775()
     CONDITIONS["FINS4776"][PROCESSED] = FINS_4776_7_9()
     CONDITIONS["FINS4777"][PROCESSED] = FINS_4776_7_9()
     CONDITIONS["FINS4779"][PROCESSED] = FINS_4776_7_9()
@@ -119,16 +118,6 @@ def FINS_4774():
     """
 
     return "(FINSAH4501 || FINSBH3565 || 4520) && [FINS3775 || FINS4775 || FINS4779]"
-
-
-def FINS_4775():
-    """
-    "original": "Prerequisite:70% or greater in FINS2624 and ECON1203 or enrolled in specialisation FINSAH4501 or FINSBH3565 or program 4520<br/><br/>",
-
-    "processed": "70% || greater in FINS2624 && ECON1203 || specialisation FINSAH4501 || FINSBH3565 || program 4520"
-    """
-
-    return "(70GRADE in FINS2624 && 70GRADE in ECON1203) || (FINSAH4501 || FINSBH3565 || 4520)"
 
 
 def FINS_4776_7_9():
