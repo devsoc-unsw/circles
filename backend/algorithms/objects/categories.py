@@ -9,6 +9,9 @@ from enum import Enum, auto
 from abc import ABC, abstractmethod
 
 
+# TODO: should this be moved somewhere else?
+# being duplicated in conditions.py but not
+# anywhere else i'm aware of yet
 class Logic(Enum):
     """ Logic Keywords """
     AND = auto()
@@ -78,6 +81,19 @@ class AnyCategory(Category):
 
     def __str__(self) -> str:
         return "any course"
+
+
+class ClassCategory(Category):
+    """ Category that matches to a specific class """
+
+    def __init__(self, class_name: str):
+        self.class_name = class_name
+
+    def match_definition(self, course: str) -> bool:
+        return self.class_name == course
+
+    def __str__(self) -> str:
+        return self.class_name
 
 
 class CourseCategory(Category):
