@@ -79,17 +79,17 @@ def COMP_3431():
     """
     "original": "Prerequisite: COMP2521 or COMP1927, and a WAM of at least 70<br/><br/>"
 
-    "processed": "(COMP2521 || COMP1927) && 70WAM"
+    "processed": "COMP2521 || COMP1927 && 70WAM"
     """
     return "(COMP2521 || COMP1927) && 70WAM"
 
-
 def COMP_3821():
+    # possible to remove
     """
     "original": "Prerequisite: A mark of at least 65 in COMP1927 or COMP2521<br/><br/>",
-    "processed": "65GRADE in (COMP1927 || COMP2521)"
+    "processed": "65GRADE in COMP1927 || COMP2521"
     """
-    return "65GRADE in (COMP1927 || COMP2521)"
+    return "65GRADE in COMP1927 || 65GRADE in COMP2521"
 
 
 def COMP_3900():

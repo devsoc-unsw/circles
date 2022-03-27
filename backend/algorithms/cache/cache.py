@@ -45,7 +45,7 @@ def cache_exclusions():
     cached_exclusions = {}
 
     for course, data in courses.items():
-        cached_exclusions[course] = data["exclusions"]
+        cached_exclusions[course] = data["exclusions"] | data["equivalents"]
 
     write_data(cached_exclusions, CACHED_EXCLUSIONS_FILE)
 
