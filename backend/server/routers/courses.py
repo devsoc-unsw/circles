@@ -1,5 +1,6 @@
 import re
 from itertools import chain
+import pymongo
 
 from algorithms.objects.user import User
 from data.config import ARCHIVED_YEARS
@@ -99,12 +100,14 @@ def getCourse(courseCode: str):
     result = coursesCOL.find_one({"code": courseCode})
 
     if not result:
-        years = sorted(ARCHIVED_YEARS, reverse=True)
-        for year in years:
+        for year in sorted(ARCHIVED_YEARS, reverse=True):
             result = archivesDB[str(year)].find_one({"code": courseCode})
             if result is not None:
                 result.setdefault("raw_requirements", "")
+                result["is_legacy"] = True
                 break
+    else:
+        result["is_legacy"] = False
 
     if not result:
         raise HTTPException(
@@ -127,15 +130,14 @@ def search(string):
             ……. } 
     """
     pat = re.compile(r"{}".format(string), re.I)
-    code_query = coursesCOL.find({"code": {"$regex": pat}})
-    title_query = coursesCOL.find({"title": {"$regex": pat}})
+    code_query = list(coursesCOL.find({"code": {"$regex": pat}}))
+    title_query = list(coursesCOL.find({"title": {"$regex": pat}}))
 
-    years = sorted(ARCHIVED_YEARS, reverse=True)
-    if len(list(code_query.clone())) == 0 and len(list(title_query.clone())) == 0:
-        for year in years:
-            code_query = archivesDB[str(year)].find({"code": {"$regex": pat}})
-            title_query = archivesDB[str(year)].find({"title": {"$regex": pat}})
-            if len(list(code_query.clone())) != 0 or len(list(title_query.clone())) != 0:
+    if not code_query and not title_query:
+        for year in sorted(ARCHIVED_YEARS, reverse=True):
+            code_query = list(archivesDB[str(year)].find({"code": {"$regex": pat}}))
+            title_query = list(archivesDB[str(year)].find({"title": {"$regex": pat}}))
+            if code_query or title_query:
                 break
 
     return {
