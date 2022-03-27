@@ -5,17 +5,8 @@ to a specific category
 
 import json
 import re
-from enum import Enum, auto
 from abc import ABC, abstractmethod
-
-
-# TODO: should this be moved somewhere else?
-# being duplicated in conditions.py but not
-# anywhere else i'm aware of yet
-class Logic(Enum):
-    """ Logic Keywords """
-    AND = auto()
-    OR = auto()
+from algorithms.objects.helper import Logic
 
 
 # Preload the mappings to school and faculty
@@ -67,7 +58,7 @@ class CompositeCategory(Category):
                 [category.match_definition(course) for category in self.categories]
             )
         else:
-            raise ValueError("Invalid logic")
+            raise ValueError(f"Invalid logic: {self.logic}")
 
     # TODO(josh): might need a more readable representation for use in wam/grade condition warnings
     def __str__(self) -> str:

@@ -17,7 +17,6 @@ from algorithms.objects.categories import (
     SchoolCategory,
 )
 from algorithms.objects.conditions import (
-    Logic,
     CompositeCondition,
     CoreqCoursesCondition,
     CourseCondition,
@@ -31,6 +30,7 @@ from algorithms.objects.conditions import (
     WAMCondition,
 )
 from algorithms.objects.helper import (
+    Logic,
     get_grade,
     get_uoc,
     get_wam,

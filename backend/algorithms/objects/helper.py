@@ -3,6 +3,13 @@
 import json
 import re
 from sys import exit
+from enum import Enum, auto
+
+
+class Logic(Enum):
+    """ Logic Keywords """
+    AND = auto()
+    OR = auto()
 
 
 def is_course(text) -> bool:

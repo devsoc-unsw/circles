@@ -3,17 +3,11 @@ Contains the Conditions classes
 """
 
 import json
-from enum import Enum, auto
 from abc import ABC, abstractmethod
 
 from algorithms.objects.categories import Category, AnyCategory, CompositeCategory
 from algorithms.objects.user import User
-
-
-class Logic(Enum):
-    """ Logic Keywords """
-    AND = auto()
-    OR = auto()
+from algorithms.objects.helper import Logic
 
 
 # CACHED
