@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { plannerActions } from "../../../actions/plannerActions";
 import { useNavigate } from "react-router-dom";
 import { EditOutlined } from "@ant-design/icons";
-import DebouncingSelect from "./DebouncingSelect";
+import MultiSelectCourse from "./MultiSelectCourse";
 import "./steps.less";
 import axios from "axios";
 
@@ -84,7 +84,10 @@ const TermBox = ({ yearIndex, termNo }) => {
           </Button>,
         ]}
       >
-        <DebouncingSelect setPlannedCourses={setCourses} />
+        <MultiSelectCourse
+          plannedCourses={courses}
+          setPlannedCourses={setCourses}
+        />
       </Modal>
     </>
   );
