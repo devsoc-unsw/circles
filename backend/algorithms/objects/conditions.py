@@ -6,7 +6,7 @@ import json
 from enum import Enum, auto
 from abc import ABC, abstractmethod
 
-from algorithms.objects.categories import Category, AnyCategory
+from algorithms.objects.categories import Category, AnyCategory, CompositeCategory, ClassCategory
 from algorithms.objects.user import User
 
 
@@ -22,9 +22,9 @@ with open(CACHED_CONDITIONS_TOKENS_PATH, "r", encoding="utf8") as f:
     CACHED_CONDITIONS_TOKENS = json.load(f)
 
 
-CACHED_PRGORAM_MAPPINGS_FILE = "./algorithms/cache/programMappings.json"
-with open(CACHED_PRGORAM_MAPPINGS_FILE, "r", encoding="utf8") as f:
-    CACHED_PRGORAM_MAPPINGS = json.load(f)
+CACHED_PROGRAM_MAPPINGS_FILE = "./algorithms/cache/programMappings.json"
+with open(CACHED_PROGRAM_MAPPINGS_FILE, "r", encoding="utf8") as f:
+    CACHED_PROGRAM_MAPPINGS = json.load(f)
 
 
 class Condition(ABC):
@@ -142,10 +142,6 @@ class WAMCondition(Condition):
         # The conditional wam category attached to this object.
         # If a category is attached, then the WAM must be from within this category. E.g.
         # 80WAM in COMP
-        # NOTE: We will convert 80WAM in (COMP || BINH || SENG) to:
-        # 80WAM in COMP || 80WAM in BINH || 80WAM in SENG
-        # so that only one category is attached to this wam condition
-        # TODO(josh): fix this to use CompositeCategory
         self.category = AnyCategory()
 
     def set_category(self, category_classobj: Category):
@@ -161,7 +157,7 @@ class WAMCondition(Condition):
         warning = self.get_warning(user.wam(self.category))
         return True, [warning] if warning else []
 
-    def get_warning(self, applicable_wam: int):
+    def get_warning(self, applicable_wam: int) -> str:
         """ Returns an appropriate warning message or None if not needed """
         if isinstance(self.category, AnyCategory):
             if applicable_wam is None:
@@ -181,31 +177,45 @@ class WAMCondition(Condition):
 
 
 class GRADECondition(Condition):
-    """ Handles GRADE conditions such as 65GRADE and 80GRADE in [A-Z]{4}[0-9]{4} """
+    """ Handles Grade conditions such as 65GRADE and 80GRADE in [A-Z]{4}[0-9]{4} """
 
-    def __init__(self, grade: int, course: str):
+    def __init__(self, grade: int):
         self.grade = grade
+        self.category = CompositeCategory()
 
-        # Course code
-        self.course = course
+    def set_category(self, category_classobj: Category):
+        """ Set own category to the one given """
+        self.category = category_classobj
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
-        if self.course not in user.courses:
-            return False, []
+        def _validate_course(course: ClassCategory):
+            # Grade condition can only be used with ClassCategory
 
-        user_grade = user.get_grade(self.course)
-        if user_grade is None:
-            return True, [self.get_warning()]
-        if user_grade < self.grade:
-            return False, []
-        return True, []
+            course = course.class_name
+            if course not in user.courses:
+                return False, []
 
-    def get_warning(self):
+            user_grade = user.get_grade(course)
+            if user_grade is None:
+                return True, [self.get_warning()]
+            if user_grade < self.grade:
+                return False, []
+            return True, []
+
+        validations = [_validate_course(course) for course in self.category.categories]
+        # unzips a zipped list - https://www.geeksforgeeks.org/python-unzip-a-list-of-tuples/
+        unlocked, warnings = list(zip(*validations))
+        satisfied = all(unlocked) if self.logic == Logic.AND else any(unlocked)
+
+        return satisfied, sum(warnings, [])  # warnings are flattened
+
+
+    def get_warning(self) -> str:
         """ Return warning string for grade condition error """
-        return f"Requires {self.grade} mark in {self.course}. Your mark has not been recorded"
+        return f"Requires {self.grade} mark in {self.category}. Your mark has not been recorded"
 
     def __str__(self) -> str:
-        return f"{self.grade}GRADE in {self.course}"
+        return f"{self.grade}GRADE in {self.category}"
 
 
 class ProgramCondition(Condition):
@@ -233,7 +243,7 @@ class ProgramTypeCondition(Condition):
         self.programType = programType
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
-        return user.program in CACHED_PRGORAM_MAPPINGS[self.programType], []
+        return user.program in CACHED_PROGRAM_MAPPINGS[self.programType], []
 
     def __str__(self) -> str:
         return f"ProgramTypeCondition: {self.programType}"
