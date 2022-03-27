@@ -4,97 +4,60 @@ import { Select, Spin } from "antd";
 import debounce from "lodash/debounce";
 import axios from "axios";
 import { courseTabActions } from "../../actions/courseTabActions";
+import { useDebounce } from "../../hooks/useDebounce";
 
-const DebounceSelect = ({ fetchOptions, debounceTimeout = 100, ...props }) => {
-  const [fetching, setFetching] = useState(false);
-  const [options, setOptions] = useState([]);
-  const fetchRef = useRef(0);
+export default function SearchCourse() {
+  const [value, setValue] = useState("");
+  const debouncedSearchTerm = useDebounce(value, 500);
+  const [courses, setCourses] = React.useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
-  const debounceFetcher = useMemo(() => {
-    const loadOptions = (value) => {
-      fetchRef.current += 1;
-      const fetchId = fetchRef.current;
-      setOptions([]);
-      setFetching(true);
-      fetchOptions(value).then((newOptions) => {
-        if (fetchId !== fetchRef.current) {
-          // for fetch callback order
-          return;
-        }
-        const filteredOptions = newOptions.filter(
-          (option) =>
-            option.value.toLowerCase().indexOf(value.toLowerCase()) >= 0
-        );
-        setOptions(filteredOptions);
-        setFetching(false);
-      });
-    };
 
-    return debounce(loadOptions, debounceTimeout);
-  }, [fetchOptions, debounceTimeout]);
+  useEffect(() => {
+    // if debounced term changes , call API
+    if (debouncedSearchTerm)
+      search(debouncedSearchTerm, setCourses, setIsLoading);
+  }, [debouncedSearchTerm]);
 
   const handleSelect = (courseCode) => {
-    dispatch(courseTabActions("ADD_TAB", courseCode.value));
+    setValue(courseCode);
+    dispatch(courseTabActions("ADD_TAB", courseCode));
+  };
+
+  const handleSearch = (courseCode) => {
+    setValue(courseCode);
+    setCourses([]);
+    setIsLoading(true);
   };
 
   return (
     <Select
       showSearch
-      labelInValue
+      placeholder="Search for a course..."
       filterOption={false}
-      onSearch={debounceFetcher}
-      notFoundContent={fetching ? <Spin size="small" /> : null}
-      {...props}
-      options={options}
       size="large"
-      onSelect={handleSelect}
-    />
-  );
-}; // Usage of DebounceSelect
-
-export default function SearchCourse() {
-  const [value, setValue] = useState([]);
-
-  const dispatch = useDispatch();
-  const [courses, setCourses] = React.useState([]);
-
-  useEffect(() => {
-    fetchCourses();
-  }, []);
-
-  const fetchCourses = async () => {
-    try {
-      const res = await axios.post(`/courses/getAllUnlocked/`, JSON.stringify(payload));
-      setCourses(res.data.courses_state);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  async function fetchUserList() {
-    return Object.keys(courses).map((course) => ({
-      label: course,
-      value: course,
-    }));
-  }
-
-  return (
-    <DebounceSelect
-      // mode="multiple"
+      options={courses}
       value={value}
-      placeholder="Search a course"
-      fetchOptions={fetchUserList}
-      onChange={(newValue) => {
-        setValue(newValue);
-      }}
-      style={{ width: "25rem", marginRight: "0.5rem" }}
+      onSearch={handleSearch}
+      onSelect={handleSelect}
+      notFoundContent={isLoading && value && <Spin size="small" />}
+      style={{ width: "30rem", marginRight: "0.5rem" }}
     />
   );
 }
 
-const payload = {
-  program: "",
-  specialisations: {},
-  courses: {},
-  year: 0,
+export const search = async (query, setCourses, setIsLoading) => {
+  try {
+    const res = await axios.get(`/courses/searchCourse/${query}`);
+    setCourses(
+      Object.keys(res.data).map((course) => ({
+        label: `${course}: ${res.data[course]}`,
+        value: course,
+      }))
+    );
+  } catch (err) {
+    console.log(err);
+    return [];
+  }
+  setIsLoading(false);
 };
