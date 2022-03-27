@@ -28,10 +28,8 @@ def test_get_archived_course():
 
 
 
-''' 
 def test_get_course_all_courses():
     for course in CONDITIONS.keys():
-        if  random.random() < 0.1:
+        if  random.random() < 0.03:
             x = requests.get(f'http://127.0.0.1:8000/courses/getCourse/{course}')
             assert x.status_code == 200 
-'''
