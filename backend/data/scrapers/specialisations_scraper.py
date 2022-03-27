@@ -11,8 +11,8 @@ Step in the data's journey:
 import json
 
 import requests
-from data.scrapers.payload import create_payload
-from data.utility import data_helpers, URL, HEADERS
+from data.scrapers.payload import create_payload, URL, HEADERS
+from data.utility import data_helpers
 
 # Note as at May 2021, there are 365 specialisations
 TOTAL_SPNS = 1000
