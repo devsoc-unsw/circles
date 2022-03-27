@@ -101,10 +101,10 @@ if __name__ == "__main__":
             exit()
     if args.type == "data-fix" and args.stage == "all":
         # run all the things except for the scrapers and formatters to deal with code changes
-        for t, runner in run.items():
-            for stage in runner:
+        for t, type in run.items():
+            for stage, function in type.items():
                 if stage != "scrape":
-                    runner()
+                    function()
 
     elif args.stage == "all":
         # Run all the stages from top to bottom
