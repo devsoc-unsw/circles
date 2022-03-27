@@ -52,7 +52,7 @@ const TermPlanner = () => {
   const plannerPic = useRef();
 
   return (
-    <>
+    <div className="mainContainer">
       <OptionsHeader
         areYearsHidden={areYearsHidden}
         plannerRef={plannerPic}
@@ -120,7 +120,7 @@ const TermPlanner = () => {
           </div>
         </DragDropContext>
       )}
-    </>
+    </div>
   );
 };
 
