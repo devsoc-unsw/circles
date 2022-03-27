@@ -6,7 +6,7 @@ import json
 from enum import Enum, auto
 from abc import ABC, abstractmethod
 
-from algorithms.objects.categories import Category, AnyCategory, CompositeCategory, ClassCategory
+from algorithms.objects.categories import Category, AnyCategory, CompositeCategory
 from algorithms.objects.user import User
 
 
@@ -176,7 +176,7 @@ class WAMCondition(Condition):
         return f"{self.wam}WAM in {self.category}"
 
 
-class GRADECondition(Condition):
+class GradeCondition(Condition):
     """ Handles Grade conditions such as 65GRADE and 80GRADE in [A-Z]{4}[0-9]{4} """
 
     def __init__(self, grade: int):
@@ -188,8 +188,13 @@ class GRADECondition(Condition):
         self.category = category_classobj
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
-        def _validate_course(course: ClassCategory):
+        def _validate_course(course: Category):
             # Grade condition can only be used with ClassCategory
+            if type(course) is CompositeCategory:
+                validations = [_validate_course(course) for course in self.category.categories]
+                unlocked, warnings = list(zip(*validations))
+                satisfied = all(unlocked) if course.logic == Logic.AND else any(unlocked)
+                return satisfied, warnings
 
             course = course.class_name
             if course not in user.courses:
@@ -202,10 +207,15 @@ class GRADECondition(Condition):
                 return False, []
             return True, []
 
-        validations = [_validate_course(course) for course in self.category.categories]
+        if type(self.category) is CompositeCategory:
+            validations = [_validate_course(course) for course in self.category.categories]
+            logic = self.category.logic
+        else:
+            validations = [_validate_course(self.category)]
+            logic = Logic.AND
         # unzips a zipped list - https://www.geeksforgeeks.org/python-unzip-a-list-of-tuples/
         unlocked, warnings = list(zip(*validations))
-        satisfied = all(unlocked) if self.logic == Logic.AND else any(unlocked)
+        satisfied = all(unlocked) if logic == Logic.AND else any(unlocked)
 
         return satisfied, sum(warnings, [])  # warnings are flattened
 

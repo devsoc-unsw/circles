@@ -22,7 +22,7 @@ from algorithms.objects.conditions import (
     CoreqCoursesCondition,
     CourseCondition,
     CourseExclusionCondition,
-    GRADECondition,
+    GradeCondition,
     ProgramCondition,
     ProgramExclusionCondition,
     ProgramTypeCondition,
@@ -178,7 +178,7 @@ def make_condition(tokens, first=False, course=None) -> CompositeCondition:
                 # Error. Return None
                 return None, sub_index
 
-            # Adjust the cur/rent position to scan the next token after this sub result
+            # Adjust the current position to scan the next token after this sub result
             result.add_condition(sub_result)
             [next(item) for _ in range(sub_index + 1)]
         elif token == ")":
@@ -268,7 +268,7 @@ def make_condition(tokens, first=False, course=None) -> CompositeCondition:
                 # Next token is "in" or else there has been an error
                 next(item)  # Skip "in" keyword
 
-                grade_cond = GRADECondition(grade)
+                grade_cond = GradeCondition(grade)
                 category, sub_index = create_category(tokens[index + 2 :])
 
                 if category is None:
@@ -279,8 +279,7 @@ def make_condition(tokens, first=False, course=None) -> CompositeCondition:
                 grade_cond.set_category(category)
                 result.add_condition(grade_cond)
 
-                # TODO: why is this 0 and not 1
-                [next(item) for _ in range(sub_index + 0)]
+                [next(item) for _ in range(sub_index + 1)]
             else:
                 # Error
                 return None, index
