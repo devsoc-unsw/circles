@@ -215,75 +215,6 @@ def make_condition(tokens, first=False, course=None) -> CompositeCondition:
         elif is_course(token):
             # Condition for a single course
             result.add_condition(CourseCondition(token))
-        # TODO: lots of duplication here
-        elif is_uoc(token):
-            # Condition for UOC requirement
-            uoc = get_uoc(token)
-            uoc_cond = UOCCondition(uoc)
-
-            if index + 1 < len(tokens) and tokens[index + 1] == "in":
-                # Create category according to the token after 'in'
-                next(item)  # Skip "in" keyword
-
-                # Get the category of the uoc condition
-                category, sub_index = create_category(tokens[index + 2 :])
-
-                if category is None:
-                    # Error. Return None. (Could also potentially set the uoc category
-                    # to just the default Category which returns true and 1000 uoc taken)
-                    return None, index
-
-                # Add the category to the uoc and adjust the current index position
-                uoc_cond.set_category(category)
-
-                [next(item) for _ in range(sub_index + 1)]
-
-            result.add_condition(uoc_cond)
-
-        elif is_wam(token):
-            # Condition for WAM requirement
-            wam_cond = WAMCondition(get_wam(token))
-
-            if index + 1 < len(tokens) and tokens[index + 1] == "in":
-                # Create category according to the token after 'in'
-                next(item)  # Skip "in" keyword
-                category, sub_index = create_category(tokens[index + 2 :])
-
-                if category is None:
-                    # If can't parse the category, return None(raise an error)
-                    return None, index
-
-                # Add the category and adjust the current index position
-                wam_cond.set_category(category)
-
-                [next(item) for _ in range(sub_index + 1)]
-
-            result.add_condition(wam_cond)
-
-        elif is_grade(token):
-            # Condition for GRADE requirement (mark in a single course)
-            grade = get_grade(token)
-
-            if index + 1 < len(tokens) and tokens[index + 1] == "in":
-                # Next token is "in" or else there has been an error
-                next(item)  # Skip "in" keyword
-
-                grade_cond = GradeCondition(grade)
-                category, sub_index = create_category(tokens[index + 2 :])
-
-                if category is None:
-                    # If can't parse the category, return None(raise an error)
-                    return None, index
-
-                # Add the category and adjust the current index position
-                grade_cond.set_category(category)
-                result.add_condition(grade_cond)
-
-                [next(item) for _ in range(sub_index + 1)]
-            else:
-                # Error
-                return None, index
-
         elif is_program(token):
             result.add_condition(ProgramCondition(token))
         elif is_specialisation(token):
@@ -291,7 +222,35 @@ def make_condition(tokens, first=False, course=None) -> CompositeCondition:
         elif is_program_type(token):
             result.add_condition(ProgramTypeCondition(token))
         else:
-            # Unmatched token. Error
-            return None, index
+            if is_uoc(token):
+                # Condition for UOC requirement
+                cond = UOCCondition(get_uoc(token))
+            elif is_wam(token):
+                # Condition for WAM requirement
+                cond = WAMCondition(get_wam(token))
+            elif is_grade(token):
+                # Condition for GRADE requirement (mark in a single course)
+                cond = GradeCondition(get_grade(token))
+            else:
+                # Unmatched token. Error
+                return None, index
+
+            if index + 1 < len(tokens) and tokens[index + 1] == "in":
+                # Create category according to the token after 'in'
+                next(item)  # Skip "in" keyword
+
+                # Get the category of the condition
+                category, sub_index = create_category(tokens[index + 2 :])
+
+                if category is None:
+                    # Error. Return None.
+                    return None, index
+
+                # Add the category to the condition and adjust the current index position
+                cond.set_category(category)
+
+                [next(item) for _ in range(sub_index + 1)]
+
+            result.add_condition(cond)
 
     return result, index
