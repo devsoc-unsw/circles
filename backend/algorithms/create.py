@@ -81,22 +81,26 @@ def create_category(tokens) -> Category:
             category.set_logic(Logic.AND)
 
         token_iter = enumerate(tokens)
-        # skip opening parenthesis to avoid infinite recursion constructing CompositeCategories
+        # skip opening parenthesis to avoid infinite recursion
         next(token_iter)
         for index, token in token_iter:
             if token == opposite_logic:
                 # (COND1 || COND2 && COND3) or similar combinations is undefined
+                print("WARNING: Found an undefined logic combination. Skipping.")
                 return None, index - 1
             elif token == ")":
                 # We've reached the end of the condition
                 return category, index - 1
 
             sub_category, sub_index = create_category(tokens[index:])
+            if sub_category is not None:
+                # don't throw errors for None categories
+                # most likely they are one of (||, &&)
+                # TODO: should this be revisited?
+                category.add_category(sub_category)
             # skip the tokens used in the sub-category
             # should only be more than one if the sub-category is a composite
             [next(token_iter) for _ in range(sub_index + 1)]
-            if sub_category is not None:
-                category.add_category(sub_category)
 
     if re.match(r"^[A-Z]{4}$", tokens[0], flags=re.IGNORECASE):
         # Course type
@@ -129,7 +133,8 @@ def create_category(tokens) -> Category:
         # Class category
         return ClassCategory(tokens[0]), 0
 
-    # TODO Levels (e.g. SPECIALISATIONS, PROGRAM)
+    # TODO: Levels (e.g. SPECIALISATIONS, PROGRAM)
+    # These don't have categories, do they need a category?
 
     # Did not match any category. Return None and assume only 1 token was consumed
     return None, 0
@@ -153,7 +158,7 @@ def make_condition(tokens, first=False, course=None) -> CompositeCondition:
     """
     # Everything is wrapped in a CompositeCondition
     result = CompositeCondition()
-    # add exclusions
+    # Add exclusions
     if first and CACHED_EXCLUSIONS.get(course):
         # NOTE: we dont check for broken exclusions
         for exclusion in CACHED_EXCLUSIONS[course].keys():
@@ -210,6 +215,7 @@ def make_condition(tokens, first=False, course=None) -> CompositeCondition:
         elif is_course(token):
             # Condition for a single course
             result.add_condition(CourseCondition(token))
+        # TODO: lots of duplication here
         elif is_uoc(token):
             # Condition for UOC requirement
             uoc = get_uoc(token)
