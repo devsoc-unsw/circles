@@ -141,8 +141,8 @@ def delete_extraneous_phrasing(processed):
 
 def delete_prereq_label(processed):
     """Removes 'prerequisite' and variations"""
-    # variations incude ["prerequisite", "pre-requisite", "prer-requisite"]
-    return re.sub(r"[Pp]re[A-Za-z/_-]*:*", "", processed)
+    # variations incude ["prerequisite", "pre-requisite", "prer-requisite", "pre req", "prereq:"]
+    return re.sub(r"[Pp]re( req)?[A-Za-z\/_-]* ?[:;]*", "", processed)
 
 
 def delete_trailing_punc(processed):
@@ -284,7 +284,7 @@ def convert_coreqs(processed):
     """Puts co-requisites inside square brackets"""
     processed = processed.rstrip()
     return re.sub(
-        r"co-?requisites?;?:?\s?(.*)", r"[\1]", processed, flags=re.IGNORECASE
+        r"(co-?requisites?|concurrentl?y?);?:?\s?(.*)", r"[\2]", processed, flags=re.IGNORECASE
     )
 
 
