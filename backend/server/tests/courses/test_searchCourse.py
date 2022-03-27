@@ -12,3 +12,9 @@ def test_invalid():
     x = requests.get('http://127.0.0.1:8000/courses/searchCourse/ABCD')
     assert x.status_code != 500
     assert x.json() == {}
+
+
+def test_search_archives():
+    x = requests.get('http://127.0.0.1:8000/courses/searchCourse/ENGG1000')
+    assert x.status_code == 200
+    assert x.json().get("ENGG1000") is not None
