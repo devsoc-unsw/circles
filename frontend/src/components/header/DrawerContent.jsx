@@ -26,16 +26,16 @@ export const DrawerContent = ({ onCloseDrawer }) => {
   //     onCloseDrawer();
   // }
   return (
-    <Menu mode="vertical" style={{ width: 230, marginTop: "2em" }}>
+    <Menu mode="vertical" style={{ marginTop: "2em" }}>
       <Menu.Item key="1" onClick={() => handlePush("/course-selector")}>
         Course Selector
       </Menu.Item>
       <Menu.Item key="3" onClick={() => handlePush("/term-planner")}>
         Term Planner
       </Menu.Item>
-      <Menu.Item key="2" onClick={() => handlePush("/progression-checker")}>
+      {/* <Menu.Item key="2" onClick={() => handlePush("/progression-checker")}>
         Progression Checker
-      </Menu.Item>
+      </Menu.Item> */}
       {isSmall && (
         <Menu.Item key="4" icon={<BugOutlined />} onClick={openFeedbackLink}>
           Report a bug
