@@ -73,6 +73,7 @@ const prepareCoursesForValidation = (plannerInfo, userInfo) => {
     specialisations: [specialisation, minor],
     year: 1,
     plan: plan,
+    mostRecentPastTerm: getMostRecentPastTerm(startYear),
   };
 
   return payload;
