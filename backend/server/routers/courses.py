@@ -127,7 +127,7 @@ def search(string):
         { “COMP1511” :  “Programming Fundamentals”,
           “COMP1521” : “Computer Systems Fundamentals”, 
           “COMP1531”: “SoftEng Fundamentals, 
-            ……. } 
+            ……. }
     """
     # TODO: is regex search really something we want?
     # malicious regex can cause DOS depending on regex implementation
