@@ -1,28 +1,4 @@
 {
-    "ACCT3610": {
-        "condition": {
-            "original": "Prerequisite: ACCT2542, and, FINS1613 or COMM1180 or (COMM1140 AND ECON1102)<br/><br/>",
-            "processed": "ACCT2542 || and || FINS1613 || COMM1180 || (COMM1140 && ECON1102)"
-        },
-        "tokens": [
-            "(",
-            "ACCT2542",
-            "||",
-            "and",
-            "||",
-            "FINS1613",
-            "||",
-            "COMM1180",
-            "||",
-            "(",
-            "COMM1140",
-            "&&",
-            "ECON1102",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 3, and"
-    },
     "ADAD4100": {
         "condition": {
             "original": "Students must be enrolled in an Art & Design Honours Year. Programs 4526, 4527, 4528<br/><br/>",
@@ -7637,41 +7613,6 @@
         ],
         "broke at": "Index 1, Only"
     },
-    "COMM1140": {
-        "condition": {
-            "original": "Only available to single and double degree Business School students in Term 1. It will be offered to non-Business School students in Terms 2 and 3.<br/><br/>",
-            "processed": "Only available to single && double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 && 3"
-        },
-        "tokens": [
-            "(",
-            "Only",
-            "available",
-            "to",
-            "single",
-            "&&",
-            "double",
-            "degree",
-            "Business",
-            "School",
-            "in",
-            "Term",
-            "1.",
-            "It",
-            "will",
-            "be",
-            "offered",
-            "to",
-            "non-Business",
-            "School",
-            "in",
-            "Terms",
-            "2",
-            "&&",
-            "3",
-            ")"
-        ],
-        "broke at": "Index 1, Only"
-    },
     "COMM1170": {
         "condition": {
             "original": "Pre-requisite: COMM1140. Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Terms 1 and 3.<br/><br/>",
@@ -7707,88 +7648,6 @@
             ")"
         ],
         "broke at": "Index 1, COMM1140."
-    },
-    "COMM1180": {
-        "condition": {
-            "original": "Pre-requisite: COMM1140. Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Terms 1 and 3.<br/><br/>",
-            "processed": "COMM1140. Only available to single && double degree Business School in Term 2. It will be offered to non-Business School in Terms 1 && 3"
-        },
-        "tokens": [
-            "(",
-            "COMM1140.",
-            "Only",
-            "available",
-            "to",
-            "single",
-            "&&",
-            "double",
-            "degree",
-            "Business",
-            "School",
-            "in",
-            "Term",
-            "2.",
-            "It",
-            "will",
-            "be",
-            "offered",
-            "to",
-            "non-Business",
-            "School",
-            "in",
-            "Terms",
-            "1",
-            "&&",
-            "3",
-            ")"
-        ],
-        "broke at": "Index 1, COMM1140."
-    },
-    "COMM1190": {
-        "condition": {
-            "original": "Pre-requisite: COMM1110 or ECON1203 or MATH1031 or MATH1041 or MATH1131 or MATH1141 or MATH1151. Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Term 3.<br/><br/>",
-            "processed": "COMM1110 || ECON1203 || MATH1031 || MATH1041 || MATH1131 || MATH1141 || MATH1151. Only available to single && double degree Business School in Term 2. It will be offered to non-Business School in Term 3"
-        },
-        "tokens": [
-            "(",
-            "COMM1110",
-            "||",
-            "ECON1203",
-            "||",
-            "MATH1031",
-            "||",
-            "MATH1041",
-            "||",
-            "MATH1131",
-            "||",
-            "MATH1141",
-            "||",
-            "MATH1151.",
-            "Only",
-            "available",
-            "to",
-            "single",
-            "&&",
-            "double",
-            "degree",
-            "Business",
-            "School",
-            "in",
-            "Term",
-            "2.",
-            "It",
-            "will",
-            "be",
-            "offered",
-            "to",
-            "non-Business",
-            "School",
-            "in",
-            "Term",
-            "3",
-            ")"
-        ],
-        "broke at": "Index 13, MATH1151."
     },
     "COMM3091": {
         "condition": {

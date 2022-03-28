@@ -34,6 +34,7 @@ def fix_conditions():
 
     CONDITIONS["ACCT3202"][PROCESSED] = ACCT_2101_3202_3303()
     CONDITIONS["ACCT3303"][PROCESSED] = ACCT_2101_3202_3303()
+    CONDITIONS["ACCT3610"][PROCESSED] = ACCT_3610()
 
     CONDITIONS["ACCT3708"] = ACCT_3708(CONDITIONS["ACCT3708"])
 
@@ -64,6 +65,13 @@ def ACCT_2672():
     """
     return "(ACCT1501 && 65WAM) || (COMM1140 && 65WAM)"
 
+def ACCT_3610():
+    """
+    "original": "Prerequisite: ACCT2542, and, FINS1613 or COMM1180 or (COMM1140 AND ECON1102)<br/><br/>",
+
+    "processed": "(ACCT2542 && FINS1613) || COMM1180 || (COMM1140 && ECON1102)"
+    """
+    return "ACCT2542 && FINS1613 || COMM1180 || (COMM1140 && ECON1102)"
 
 def ACCT_3708(condition):
     """

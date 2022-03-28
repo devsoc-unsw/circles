@@ -41,7 +41,7 @@
     },
     "ACCT3610": {
         "original": "Prerequisite: ACCT2542, and, FINS1613 or COMM1180 or (COMM1140 AND ECON1102)<br/><br/>",
-        "processed": "ACCT2542 || and || FINS1613 || COMM1180 || (COMM1140 && ECON1102)"
+        "processed": "ACCT2542 && FINS1613 || COMM1180 || (COMM1140 && ECON1102)"
     },
     "ACCT3625": {
         "original": "Pre-requisite: Completed 72 UOC<br/><br/>",
@@ -3315,7 +3315,7 @@
     },
     "COMM1140": {
         "original": "Only available to single and double degree Business School students in Term 1. It will be offered to non-Business School students in Terms 2 and 3.<br/><br/>",
-        "processed": "Only available to single && double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 && 3"
+        "processed": ""
     },
     "COMM1150": {
         "original": "Pre-requisite: COMM1100 and excludes MGMT1101. Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Terms 1 and 3.<br/><br/>",
@@ -3328,11 +3328,11 @@
     },
     "COMM1180": {
         "original": "Pre-requisite: COMM1140. Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Terms 1 and 3.<br/><br/>",
-        "processed": "COMM1140. Only available to single && double degree Business School in Term 2. It will be offered to non-Business School in Terms 1 && 3"
+        "processed": "COMM1140"
     },
     "COMM1190": {
         "original": "Pre-requisite: COMM1110 or ECON1203 or MATH1031 or MATH1041 or MATH1131 or MATH1141 or MATH1151. Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Term 3.<br/><br/>",
-        "processed": "COMM1110 || ECON1203 || MATH1031 || MATH1041 || MATH1131 || MATH1141 || MATH1151. Only available to single && double degree Business School in Term 2. It will be offered to non-Business School in Term 3"
+        "processed": "COMM1110 || ECON1203 || MATH1031 || MATH1041 || MATH1131 || MATH1141 || MATH1151"
     },
     "COMM1822": {
         "original": "",
