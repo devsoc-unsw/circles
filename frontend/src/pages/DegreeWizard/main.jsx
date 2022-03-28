@@ -78,7 +78,6 @@ function DegreeWizard() {
 
       <div className="steps-container">
         {currStep >= 1 && (
-          // TODO: Move the duration step into its own component
           <div className="step-content" id="Year">
             <YearStep incrementStep={incrementStep} currStep={currStep} />
           </div>
