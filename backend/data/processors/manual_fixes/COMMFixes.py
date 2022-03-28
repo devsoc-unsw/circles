@@ -31,21 +31,21 @@ def fix_conditions():
     CONDITIONS["COMM0999"][PROCESSED] = COMM_0999()
     CONDITIONS["COMM1040"] = COMM_1040(CONDITIONS["COMM1040"])
     CONDITIONS["COMM1100"] = COMM_1100(CONDITIONS["COMM1100"])
-    CONDITIONS["COMM1110"] = COMM_1110(CONDITIONS["COMM1110"])
-    CONDITIONS["COMM1120"][PROCESSED] = COMM_1120()
-    CONDITIONS["COMM1140"][PROCESSED] = COMM_1140()
+    CONDITIONS["COMM1110"] = COMM_1110_1120_1140(CONDITIONS["COMM1110"])
+    CONDITIONS["COMM1120"] = COMM_1110_1120_1140(CONDITIONS["COMM1120"])
+    CONDITIONS["COMM1140"] = COMM_1110_1120_1140(CONDITIONS["COMM1140"])
     CONDITIONS["COMM1150"] = COMM_1150(CONDITIONS["COMM1150"])
-    CONDITIONS["COMM1170"][PROCESSED] = COMM_1170_1180()
-    CONDITIONS["COMM1180"][PROCESSED] = COMM_1170_1180()
-    CONDITIONS["COMM1190"][PROCESSED] = COMM_1190()
+    CONDITIONS["COMM1170"] = COMM_1170_1180(CONDITIONS["COMM1170"])
+    CONDITIONS["COMM1180"] = COMM_1170_1180(CONDITIONS["COMM1180"])
+    CONDITIONS["COMM1190"] = COMM_1190(CONDITIONS["COMM1190"])
     CONDITIONS["COMM1999"] = COMM_1999(CONDITIONS["COMM1999"])
     CONDITIONS["COMM2222"] = COMM_2222(CONDITIONS["COMM2222"])
     CONDITIONS["COMM2233"] = COMM_2233(CONDITIONS["COMM2233"])
-    CONDITIONS["COMM2244"][PROCESSED] = COMM_2244()
+    CONDITIONS["COMM2244"] = COMM_2244(CONDITIONS["COMM2244"])
     CONDITIONS["COMM3020"] = COMM_2222(CONDITIONS["COMM3020"])
     CONDITIONS["COMM3030"][PROCESSED] = COMM_3030()
     CONDITIONS["COMM3090"] = COMM_3090(CONDITIONS["COMM3090"])
-    CONDITIONS["COMM3091"][PROCESSED] = COMM_3091()
+    CONDITIONS["COMM3091"] = COMM_3091(CONDITIONS["COMM3091"])
     CONDITIONS["COMM3101"] = COMM_3101(CONDITIONS["COMM3101"])
     CONDITIONS["COMM3202"] = COMM_3202(CONDITIONS["COMM3202"])
     CONDITIONS["COMM3303"] = COMM_3303(CONDITIONS["COMM3303"])
@@ -66,6 +66,7 @@ def COMM_0999():
 
         "processed": "Only available to a Bachelor of Commerce as part of a single || double-degree"
     """
+
     return "COMM#"
 
 
@@ -77,6 +78,7 @@ def COMM_1040(conditions):
 
     "handbook_note": "Students must be in Good Academic Standing"
     """
+
     return {
         "original": conditions["original"],
         "processed": "",
@@ -90,39 +92,27 @@ def COMM_1100(conditions):
 
         "processed": "who have ECON1101 are not permitted to enrol"
     """
-    return {
-        "original": conditions["original"],
-        "processed": "",
-        "handbook_note": "Students enrolled in Actuarial Studies or Economics programs (in single or double degree mode) are not permitted to enrol."
-    }
 
-
-def COMM_1110(conditions):
-    """
-        "original": "Only available to single and double degree Business School students in Term 1. It will be offered to non-Business School students in Terms 2 and 3.<br/><br/>",
-        "processed": "Only available to single && double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 && 3"
-    """
+    COURSES["COMM1100"]["exclusions"]["ECON1101"] = 1
 
     return {
         "original": conditions["original"],
-        "processed": "",
-        "handbook_note": "Students enrolled in 3764 (Eng/Comm), Actuarial Studies or Economics programs (in both single and double degree mode) are not permitted to enrol."
+        "processed": ""
     }
 
-def COMM_1120():
-    """
-        "original": "Only available to single and double degree Business School students in Term 1. It will be offered to non-Business School students in Terms 2 and 3.<br/><br/>",
-        "processed": "Only available to single && double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 && 3"
-    """
-    return ""
 
-def COMM_1140():
+def COMM_1110_1120_1140(conditions):
     """
         "original": "Only available to single and double degree Business School students in Term 1. It will be offered to non-Business School students in Terms 2 and 3.<br/><br/>",
         "processed": "Only available to single && double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 && 3"
     """
 
-    return ""
+    return {
+        "original": conditions["original"],
+        "processed": "",
+        "handbook_note": "Only available to single && double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 && 3"
+    }
+
 
 def COMM_1150(conditions):
     """
@@ -137,23 +127,33 @@ def COMM_1150(conditions):
         "handbook_note": "Only available to single and double degree Business School students in Term 2. Offered to non-Business School students in Term 3."
     }
 
-def COMM_1170_1180():
+
+def COMM_1170_1180(conditions):
     """
         "original": "Pre-requisite: COMM1140. Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Terms 1 and 3.<br/><br/>",
         "processed": "COMM1140. Only available to single && double degree Business School in Term 2. It will be offered to non-Business School in Terms 1 && 3"
     """
-    # TODO: add handbook_note
 
-    return "COMM1140"
+    return {
+        "original": conditions["original"],
+        "processed": "COMM1140",
+        "handbook_note": "Only available to single && double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 && 3"
+    }
 
-def COMM_1190():
+
+def COMM_1190(conditions):
     """
         "original": "Pre-requisite: COMM1110 or ECON1203 or MATH1031 or MATH1041 or MATH1131 or MATH1141 or MATH1151. Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Term 3.<br/><br/>",
 
         "processed": "COMM1110 || ECON1203 || MATH1031 || MATH1041 || MATH1131 || MATH1141 || MATH1151"
     """
 
-    return "COMM1110 || ECON1203 || MATH1031 || MATH1041 || MATH1131 || MATH1141 || MATH1151"
+    return {
+        "original": conditions["original"],
+        "processed": "COMM1110 || ECON1203 || MATH1031 || MATH1041 || MATH1131 || MATH1141 || MATH1151",
+        "handbook_note": "Only available to single && double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 && 3"
+    }
+
 
 def COMM_1999(conditions):
     """
@@ -195,16 +195,21 @@ def COMM_2233(conditions):
     }
 
 
-def COMM_2244():
+def COMM_2244(conditions):
     """
         "original": "Must have completed COMM6000 CA:Essentials or COMM1999 First Year Portfolio, minimum 48 UoC, minimum 65 WAM, and be in good academic standing. Students who have completed COMM2233 or CDEV3000 (formerly DIPP1510) must not enrol into this course<br/><br/>",
         "processed": "COMM6000 CA:Essentials || COMM1999 First Year Portfolio && 48UOC && 65WAM && be in good academic standing. who have COMM2233 || CDEV3000 (formerly DIPP1510) must not enrol into this course"
     """
+
     COURSES["COMM1150"]["exclusions"]["COMM2233"] = 1
     COURSES["COMM1150"]["exclusions"]["CDEV3000"] = 1
     COURSES["COMM1150"]["exclusions"]["DIPP1510"] = 1
 
-    return "(COMM6000 || COMM1999) && 65WAM && 48UOC"
+    return {
+        "original": conditions["original"],
+        "processed": "(COMM6000 || COMM1999) && 65WAM && 48UOC",
+        "handbook_note": "Students must be in good academic standing."
+    }
 
 
 def COMM_3020(conditions):
@@ -216,7 +221,7 @@ def COMM_3020(conditions):
     return {
         "original": conditions["original"],
         "processed": "(COMM6000 || COMM1999) && 65WAM && 72UOC",
-        "handbook_note": "This course is by application only. Please visit Business School website for more information."
+        "handbook_note": "Students must be in good academic standing. This course is by application only. Please visit Business School website for more information."
     }
 
 
@@ -240,14 +245,21 @@ def COMM_3090(conditions):
         "original": conditions["original"],
         "processed": "108UOC",
         "handbook_note": "Students are expected to be in their final year of a Bachelor of Commerce single or dual degree"
+
     }
 
-def COMM_3091():
+def COMM_3091(conditions):
     """
         "original": "Completed at least 72 UoC and be enrolled in a Commerce Program; be in good academic standing, and completed COMM1999<br/><br/>",
         "processed": "72UOC && be a Commerce Program; be in good academic standing && COMM1999"
     """
-    return "72UOC && COMM1999"
+
+    return {
+        "original": conditions["original"],
+        "processed": "72UOC && COMM1999 && COMM#",
+        "handbook_note": "Students must be in good academic standing."
+    }
+
 
 def COMM_3101(conditions):
     """
