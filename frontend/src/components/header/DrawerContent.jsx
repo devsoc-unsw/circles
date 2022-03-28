@@ -33,9 +33,10 @@ export const DrawerContent = ({ onCloseDrawer }) => {
       <Menu.Item key="3" onClick={() => handlePush("/term-planner")}>
         Term Planner
       </Menu.Item>
-      {/* <Menu.Item key="2" onClick={() => handlePush("/progression-checker")}>
+      <Menu.Item key="2" onClick={() => handlePush("/progression-checker")}>
         Progression Checker
-      </Menu.Item> */}
+      </Menu.Item>{" "}
+      */
       {isSmall && (
         <Menu.Item key="4" icon={<BugOutlined />} onClick={openFeedbackLink}>
           Report a bug
