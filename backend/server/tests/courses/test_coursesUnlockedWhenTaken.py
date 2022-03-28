@@ -16,6 +16,7 @@ def test_malformed_request():
 
 def test_two_courses_completed():
     x = requests.post('http://127.0.0.1:8000/courses/coursesUnlockedWhenTaken/COMP2521', json=USERS["user1"])
+    # TABL2710 is unlocked because USER1 now meets the 18UOC requirement
     assert x.json() == {"courses_unlocked_when_taken" :
         [
             "COMP3121",
@@ -31,11 +32,12 @@ def test_two_courses_completed():
             "COMP3891",
             "COMP6451",
             "COMP6714",
+            "COMP6991",
             "COMP9319",
             "COMP9417",
             "COMP9444",
             "COMP9517",
-            "COMP9844",
-            "TABL1710"
+            "COMP9727",
+            "TABL2710"
         ]
     }

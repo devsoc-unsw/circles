@@ -11,7 +11,7 @@ from typing import Optional
 from algorithms.objects.categories import AnyCategory, Category
 
 class User:
-    """A user and their data which will be used to determine if they can take a course"""
+    """ A user and their data which will be used to determine if they can take a course """
 
     def __init__(self, data = None):
         # Will load the data if any was given
@@ -48,36 +48,38 @@ class User:
         self.cur_courses.extend(courses)
 
     def empty_current_courses(self):
-        """Empty all the current courses. Helps with moving on to the next term
-        in the term planner api"""
+        """
+        Empty all the current courses. Helps with moving
+        on to the next term in the term planner api
+        """
         self.cur_courses.clear()
 
     def add_program(self, program: str):
-        """Adds a program to this user"""
+        """ Adds a program to this user """
         self.program = program
 
     def add_specialisation(self, specialisation: str):
-        """Adds a specialisation to this user"""
+        """ Adds a specialisation to this user """
         self.specialisations[specialisation] = 1
 
     def has_taken_course(self, course: str):
-        """Determines if the user has taken this course"""
+        """ Determines if the user has taken this course """
         return course in self.courses
 
     def is_taking_course(self, course: str):
-        """Determines if the user is taking this course this term"""
+        """ Determines if the user is taking this course this term """
         return course in self.cur_courses
 
     def in_program(self, program: str):
-        """Determines if the user is in this program code"""
+        """ Determines if the user is in this program code """
         return self.program == program
 
     def in_specialisation(self, specialisation: str):
-        """Determines if the user is in the specialisation"""
+        """ Determines if the user is in the specialisation """
         return specialisation in self.specialisations
 
     def load_json(self, data):
-        """Given the user data, correctly loads it into this user class"""
+        """ Given the user data, correctly loads it into this user class """
 
         self.program = copy.deepcopy(data["program"])
         self.specialisations = copy.deepcopy(data["specialisations"])
@@ -107,7 +109,7 @@ class User:
         return None if total_uoc == 0 else total_wam / total_uoc
 
     def uoc(self, category: Category = AnyCategory()):
-        """Given a user, returns the number of units they have taken for this uoc category"""
+        """ Given a user, returns the number of units they have taken for this uoc category """
         return sum(
             uoc
             for course, (uoc, _) in self.courses.items()

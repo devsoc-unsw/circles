@@ -129,6 +129,9 @@ def search(string):
           “COMP1531”: “SoftEng Fundamentals, 
             ……. }
     """
+    # TODO: is regex search really something we want?
+    # malicious regex can cause DOS depending on regex implementation
+    # Would fuzzy search be better?
     pat = re.compile(r"{}".format(string), re.I)
     code_query = list(coursesCOL.find({"code": {"$regex": pat}}))
     title_query = list(coursesCOL.find({"title": {"$regex": pat}}))
@@ -178,10 +181,10 @@ def getAllUnlocked(userData: UserData):
     coursesState = {}
     user = User(fixUserData(userData.dict())) if type(userData) != User else userData
     for course, condition in CONDITIONS.items():
-        result, warnings = condition.validate(user) if condition else (True, [])
+        result, warnings = condition.validate(user) if condition is not None else (True, [])
         if result:
             coursesState[course] = {
-                "is_accurate": bool(condition),
+                "is_accurate": condition is not None,
                 "unlocked": result,
                 "handbook_note": CACHED_HANDBOOK_NOTE.get(course, ""),
                 "warnings": warnings,
