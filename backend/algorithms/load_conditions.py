@@ -8,15 +8,6 @@ import pickle
 
 from algorithms.create import create_condition
 
-# Load in all the courses and their conditions list
-ALL_CONDITION_TOKENS_FILE = "./data/final_data/conditionsTokens.json"
-PICKLE_FILE = "./algorithms/conditions.pkl"
-
-with open(ALL_CONDITION_TOKENS_FILE, "r", encoding="utf8") as f:
-    ALL_CONDITIONS_TOKENS = json.load(f)
-
-ALL_OBJECTS = {}
-
 
 def cache_conditions_pkl_file():
     """
@@ -25,11 +16,20 @@ def cache_conditions_pkl_file():
     Input: None
     Returns: None
     """
-    for course, tokens in ALL_CONDITIONS_TOKENS.items():
-        ALL_OBJECTS[course] = create_condition(tokens, course)
+    # Load in all the courses and their conditions list
+    all_conditions_tokens_file = "./data/final_data/conditionsTokens.json"
+    pickle_file = "./algorithms/conditions.pkl"
 
-    with open(PICKLE_FILE, "wb") as outp:
-        pickle.dump(ALL_OBJECTS, outp, pickle.HIGHEST_PROTOCOL)
+    with open(all_conditions_tokens_file, "r", encoding="utf8") as f:
+        all_conditions_tokens = json.load(f)
+
+    all_objects = {}
+
+    for course, tokens in all_conditions_tokens.items():
+        all_objects[course] = create_condition(tokens, course)
+
+    with open(pickle_file, "wb") as outp:
+        pickle.dump(all_objects, outp, pickle.HIGHEST_PROTOCOL)
 
 
 if __name__ == "__main__":
