@@ -31,9 +31,6 @@ def fix_conditions():
     for course in ("CVEN2303", "CVEN3303", "CVEN3304"):
         CONDITIONS[course] = CVEN_2303_3303_3304()
 
-    for course in ("CVEN4002", "CVEN4003"):
-        CONDITIONS[course][PROCESSED] = CVEN_4002_4003()
-
     CONDITIONS["CVEN4050"][PROCESSED] = CVEN_4050()
     CONDITIONS["CVEN4106"][PROCESSED] = CVEN_4106()
 
@@ -64,14 +61,6 @@ def CVEN_2303_3303_3304():
         "processed": "(ENGG1300 && ENGG2400) || (CVEN1300 && CVEN2301)",
         "warning": "Requirements only applicable to undergrads"
     }
-
-def CVEN_4002_4003():
-    """
-    "original": "Pre Req: 132UOC<br/><br/>",
-    "processed": "Req: 132UOC"
-    """
-
-    return "132UOC"
 
 def CVEN_4050():
     """

@@ -90,7 +90,9 @@ run = {
         "program": cache_program_mappings,
     },
 }
+
 if __name__ == "__main__":
+
     if args.type is None and args.stage is None:
         res = input("did you mean to run all data fixes? [y/N] ")
         if res == "y":
@@ -99,6 +101,7 @@ if __name__ == "__main__":
         else:
             parser.print_help()
             exit()
+
     if args.type == "data-fix" and args.stage == "all":
         # run all the things except for the scrapers and formatters to deal with code changes
         for t, type in run.items():
