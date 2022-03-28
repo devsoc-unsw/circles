@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button, Tag, Alert, Typography, Space, Menu, Dropdown } from "antd";
 import { PlusOutlined, StopOutlined } from "@ant-design/icons";
 import { CourseTag } from "../../../components/courseTag/CourseTag";
-import { getCourseById } from "./../courseProvider";
 import SearchCourse from "../SearchCourse";
 import { plannerActions } from "../../../actions/plannerActions";
 import { Loading } from "./Loading";
