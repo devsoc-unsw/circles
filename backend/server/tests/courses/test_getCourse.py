@@ -21,8 +21,17 @@ def test_get_a_course():
     assert x.json()['path_from'].get("COMP1511") is not None
     assert x.json()['path_to'].get("COMP3231") is not None
 
+
+def test_get_archived_course():
+    x = requests.get('http://127.0.0.1:8000/courses/getCourse/ENGG1000')
+    assert x.status_code == 200
+    assert x.json()['code'] == "ENGG1000"
+    assert x.json()['is_legacy'] == True
+
+
+
 def test_get_course_all_courses():
     for course in CONDITIONS.keys():
-        if  random.random() < 0.1:
+        if  random.random() < 0.03:
             x = requests.get(f'http://127.0.0.1:8000/courses/getCourse/{course}')
             assert x.status_code == 200 

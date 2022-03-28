@@ -1,7 +1,9 @@
 import re
 from itertools import chain
+import pymongo
 
 from algorithms.objects.user import User
+from data.config import ARCHIVED_YEARS
 from fastapi import APIRouter, HTTPException
 from server.database import archivesDB, coursesCOL
 from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, AffectedCourses,
@@ -91,8 +93,22 @@ def fixUserData(userData: dict):
     },
 )
 def getCourse(courseCode: str):
-    """get info about a course given courseCode"""
+    """get info about a course given courseCode
+    - start with the current database
+    - if not found, check the archives
+    """
     result = coursesCOL.find_one({"code": courseCode})
+
+    if not result:
+        for year in sorted(ARCHIVED_YEARS, reverse=True):
+            result = archivesDB[str(year)].find_one({"code": courseCode})
+            if result is not None:
+                result.setdefault("raw_requirements", "")
+                result["is_legacy"] = True
+                break
+    else:
+        result["is_legacy"] = False
+
     if not result:
         raise HTTPException(
             status_code=400, detail=f"Course code {courseCode} was not found"
@@ -111,11 +127,18 @@ def search(string):
         { “COMP1511” :  “Programming Fundamentals”,
           “COMP1521” : “Computer Systems Fundamentals”, 
           “COMP1531”: “SoftEng Fundamentals, 
-            ……. } 
+            ……. }
     """
     pat = re.compile(r"{}".format(string), re.I)
-    code_query = coursesCOL.find({"code": {"$regex": pat}})
-    title_query = coursesCOL.find({"title": {"$regex": pat}})
+    code_query = list(coursesCOL.find({"code": {"$regex": pat}}))
+    title_query = list(coursesCOL.find({"title": {"$regex": pat}}))
+
+    if not code_query and not title_query:
+        for year in sorted(ARCHIVED_YEARS, reverse=True):
+            code_query = list(archivesDB[str(year)].find({"code": {"$regex": pat}}))
+            title_query = list(archivesDB[str(year)].find({"title": {"$regex": pat}}))
+            if code_query or title_query:
+                break
 
     return {
         course["code"]: course["title"] for course in chain(code_query, title_query)
