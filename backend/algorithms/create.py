@@ -49,7 +49,7 @@ with open(CACHED_EXCLUSIONS_PATH, "r", encoding="utf8") as f:
     CACHED_EXCLUSIONS = json.load(f)
 
 
-def create_category(tokens) -> Category:
+def create_category(tokens) -> (Category, int):
     """
     Given a list of tokens starting from after the connector keyword, create
     and return the category object matching the category, as well as the current index
@@ -150,7 +150,7 @@ def create_condition(tokens, course=None) -> CompositeCondition:
     return make_condition(tokens, True, course)[0]
 
 
-def make_condition(tokens, first=False, course=None) -> CompositeCondition:
+def make_condition(tokens, first=False, course=None) -> (CompositeCondition, int):
     """
     To be called by create_condition
     Given the parsed logical tokens list, (assuming starting and ending bracket),
