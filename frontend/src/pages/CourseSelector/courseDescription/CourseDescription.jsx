@@ -10,6 +10,8 @@ import { Loading } from "./Loading";
 import "./courseDescription.less";
 import { prepareUserPayload } from "../helper";
 import axios from "axios";
+import infographic from "../../../images/infographicFontIndependent.svg";
+import { motion } from "framer-motion/dist/framer-motion";
 
 const { Title, Text } = Typography;
 const CourseAttribute = ({ title, content }) => {
@@ -105,7 +107,17 @@ export default function CourseDescription({ structure }) {
     }, 2000);
   }, [id]);
 
-  if (tabs.length === 0) return <div></div>;
+  if (tabs.length === 0)
+    return (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="empty"
+      >
+        <img src={infographic} className="infographic" alt="" />
+      </motion.div>
+    );
+
   if (id === "explore") return <div>This is the explore page</div>;
   if (id === "search") return <SearchCourse />;
   const addToPlanner = (type) => {

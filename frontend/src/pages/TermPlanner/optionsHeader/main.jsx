@@ -22,7 +22,7 @@ const OptionsHeader = ({ plannerRef, isAllEmpty }) => {
   };
   const unscheduleAll = () => {
     dispatch(plannerActions("UNSCHEDULE_ALL"));
-  }
+  };
 
   return (
     <div className="optionsHeader">
@@ -35,15 +35,13 @@ const OptionsHeader = ({ plannerRef, isAllEmpty }) => {
         zIndex={1}
         placement="bottom-start"
       >
-        <button className="settingsButton">
-          <IoCogSharp
-            className="settingsIcon"
-            size="1.5em"
-            style={{
-              color: theme === "light" ? "#303539" : "white",
-            }}
-          />
-        </button>
+        <div>
+          <Tooltip title="Settings">
+            <button className="settingsButton">
+              <IoCogSharp className="settingsIcon" size="1.5em" />
+            </button>
+          </Tooltip>
+        </div>
       </Tippy>
 
       {theme === "light" && (
@@ -56,24 +54,19 @@ const OptionsHeader = ({ plannerRef, isAllEmpty }) => {
           zIndex={1}
           placement="bottom-start"
         >
-          <button className="settingsButton">
-            <TiDownload
-              className="settingsIcon"
-              size="1.5em"
-              style={{
-                color: theme === "light" ? "#303539" : "white",
-              }}
-            />
-          </button>
+          <div>
+            <Tooltip title="Export">
+              <button className="settingsButton">
+                <TiDownload className="settingsIcon" size="1.5em" />
+              </button>
+            </Tooltip>
+          </div>
         </Tippy>
       )}
-      
+
       {!isAllEmpty(years) && (
         <Tooltip title="Unschedule all courses">
-          <button 
-            className="settingsButton" 
-            onClick={unscheduleAll}
-          >
+          <button className="settingsButton" onClick={unscheduleAll}>
             <FaRegCalendarTimes size="1.5em" className="settingsIcon" />
           </button>
         </Tooltip>
