@@ -16,6 +16,7 @@ def cache_conditions_pkl_file():
     Input: None
     Returns: None
     """
+
     # Load in all the courses and their conditions list
     all_conditions_tokens_file = "./data/final_data/conditionsTokens.json"
     pickle_file = "./algorithms/conditions.pkl"
