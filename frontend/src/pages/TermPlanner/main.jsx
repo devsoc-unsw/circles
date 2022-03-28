@@ -30,12 +30,16 @@ const TermPlanner = () => {
     return state.planner;
   });
 
+  const { programCode, programName, specialisation, minor } = useSelector(
+    (state) => state.degree
+  );
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     setIsLoading(false);
     isAllEmpty(years) && openNotification();
-    updateAllWarnings(dispatch, { years, startYear, completedTerms });
+    updateAllWarnings(dispatch, { years, startYear, completedTerms }, { programCode, specialisation, minor });
   }, []);
   const currYear = new Date().getFullYear();
 
@@ -64,7 +68,7 @@ const TermPlanner = () => {
         <DragDropContext
           onDragEnd={(result) => {
             handleOnDragEnd(result, dragEndProps);
-            updateAllWarnings(dispatch, { years, startYear, completedTerms });
+            updateAllWarnings(dispatch, { years, startYear, completedTerms }, { programCode, specialisation, minor });
           }}
           onDragStart={(result) =>
             handleOnDragStart(result, courses, setTermsOffered, setIsDragging)

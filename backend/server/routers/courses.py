@@ -127,7 +127,7 @@ def search(string):
         { “COMP1511” :  “Programming Fundamentals”,
           “COMP1521” : “Computer Systems Fundamentals”, 
           “COMP1531”: “SoftEng Fundamentals, 
-            ……. } 
+            ……. }
     """
     pat = re.compile(r"{}".format(string), re.I)
     code_query = list(coursesCOL.find({"code": {"$regex": pat}}))
