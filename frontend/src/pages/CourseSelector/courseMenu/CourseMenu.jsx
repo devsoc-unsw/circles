@@ -38,6 +38,7 @@ export default function CourseMenu({ structure }) {
           `/courses/getAllUnlocked/`,
           JSON.stringify(prepareUserPayload(degree, planner))
         );
+
         dispatch(setCourses(res.data.courses_state));
         generateMenuData(res.data.courses_state);
       } catch (err) {

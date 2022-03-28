@@ -15,15 +15,19 @@ const ContextMenu = ({ code, plannedFor }) => {
     return state.planner;
   });
 
+  const { programCode, programName, specialisation, minor } = useSelector(
+    (state) => state.degree
+  );
+
   const handleDelete = () => {
     dispatch(plannerActions("REMOVE_COURSE", code));
-    updateAllWarnings(dispatch, { years, startYear, completedTerms });
+    updateAllWarnings(dispatch, { years, startYear, completedTerms }, { programCode, specialisation, minor });
   };
 
   const handleUnschedule = () => {
     // console.log(code);
     dispatch(plannerActions("UNSCHEDULE", code));
-    updateAllWarnings(dispatch, { years, startYear, completedTerms });
+    updateAllWarnings(dispatch, { years, startYear, completedTerms }, { programCode, specialisation, minor });
   };
   const id = `${code}-context`;
 
