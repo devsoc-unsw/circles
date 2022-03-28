@@ -36,18 +36,18 @@ const getMostRecentPastTerm = (startYear) => {
   const currDegreeYear = currYear - startYear + 1;
 
   // session dates gathered from: https://www.student.unsw.edu.au/teaching-periods
-  let pastTerm;
+  let lastTermPast;
   if ((currDay > 29 && currMonth == 8) || currMonth > 8) {
-    pastTerm = 3;
+    lastTermPast = 3;
   } else if ((currDay > 14 && currMonth == 5) || currMonth > 5) {
-    pastTerm = 2;
+    lastTermPast = 2;
   } else if ((currDay >= 28 && currMonth == 1) || currMonth > 1) {
-    pastTerm = 1;
+    lastTermPast = 1;
   } else {
-    pastTerm = 0;
+    lastTermPast = 0;
   }
 
-  return `Y${currDegreeYear}T${pastTerm}`;
+  return `Y${currDegreeYear}T${lastTermPast}`;
 };
 
 const prepareCoursesForValidation = (plannerInfo, userInfo) => {
