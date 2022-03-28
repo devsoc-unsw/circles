@@ -1,10 +1,12 @@
 import contextlib
+import re
 from typing import Optional
 
 from fastapi import APIRouter, HTTPException
 from server.database import programsCOL, specialisationsCOL
 from server.routers.model import (Structure, majors, message, minorInFE,
                                   minorInSpecialisation, minors, programs)
+from server.routers.courses import search
 
 router = APIRouter(
     prefix="/programs",
@@ -142,23 +144,24 @@ def addSpecialisation(structure: dict, code: str, type: str):
             status_code=400, detail=f"{code} of type {type} not found")
     structure[type] = {"name": spnResult["name"]}
     course_list = []
-    for index, container in enumerate(spnResult["curriculum"]):
+    for container in spnResult["curriculum"]:
         structure[type][container["title"]] = {}
         item = structure[type][container["title"]]
 
         item["UOC"] = container["credits_to_complete"]
 
         item["courses"] = {}
-        for course, courseObject in container["courses"].items():
-            if " or " in course:
-                for index, c in enumerate(course.split(" or ")):
-                    if c not in course_list:
-                        item["courses"][c] = courseObject[index]
-                    if container["title"] == "Core Courses":
-                        course_list.append(c)
+        for object, description in container["courses"].items():
+            if " or " in object:
+                courses_mentioned = {c: description[index] for index, c in enumerate(object.split(" or "))}
+            elif not re.match(r"[A-Z]{4}[0-9]{4}", object):
+                courses_mentioned = search(object)
             else:
+                courses_mentioned = {object: description}
+            for course, description in courses_mentioned.items():
                 if course not in course_list:
-                    item["courses"][course] = courseObject
+                    item["courses"][course] = description
+                # NOTE: this string is hardcoded
                 if container["title"] == "Core Courses":
                     course_list.append(course)
 
