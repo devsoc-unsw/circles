@@ -42,6 +42,7 @@ class CourseDetails(BaseModel):
     terms: list
     gen_ed: int
     path_from: dict
+    is_legacy: bool
 
 
 class Structure(BaseModel):  # this is a copout - we should avoid this
