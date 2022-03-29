@@ -135,6 +135,28 @@ def getMinors(programCode: str):
 
     return {"minors": minrs}
 
+def addSubgroupContainer(structure, type, container, exceptions):
+    structure[type][container["title"]] = {}
+    item = structure[type][container["title"]]
+
+    item["UOC"] = container["credits_to_complete"]
+    item["courses"] = {}
+    for object, description in container["courses"].items():
+        if " or " in object:
+            courses_mentioned = {c: description[index] for index, c in enumerate(object.split(" or "))}
+        elif not re.match(r"[A-Z]{4}[0-9]{4}", object):
+            courses_mentioned = search(object)
+        else:
+            courses_mentioned = {object: description}
+        item["courses"] = item["courses"] | {
+            course: description
+            for course, description in courses_mentioned.items()
+            if course not in exceptions
+        }
+
+    return list(item["courses"].keys())
+
+
 def addSpecialisation(structure: dict, code: str, type: str):
     """add a specialisation to the structure of a getStructure call"""
     # in a specialisation, the first container takes priority - no duplicates may exist
@@ -143,27 +165,14 @@ def addSpecialisation(structure: dict, code: str, type: str):
         raise HTTPException(
             status_code=400, detail=f"{code} of type {type} not found")
     structure[type] = {"name": spnResult["name"]}
-    course_list = []
+    # NOTE: takes Core Courses are first
+    cores = next(filter(lambda a: a["title"] == "Core Courses", spnResult["curriculum"]))
+    exceptions = addSubgroupContainer(structure, type, cores, [])
+    print(exceptions)
     for container in spnResult["curriculum"]:
-        structure[type][container["title"]] = {}
-        item = structure[type][container["title"]]
-
-        item["UOC"] = container["credits_to_complete"]
-
-        item["courses"] = {}
-        for object, description in container["courses"].items():
-            if " or " in object:
-                courses_mentioned = {c: description[index] for index, c in enumerate(object.split(" or "))}
-            elif not re.match(r"[A-Z]{4}[0-9]{4}", object):
-                courses_mentioned = search(object)
-            else:
-                courses_mentioned = {object: description}
-            for course, description in courses_mentioned.items():
-                if course not in course_list:
-                    item["courses"][course] = description
-                # NOTE: this string is hardcoded
-                if container["title"] == "Core Courses":
-                    course_list.append(course)
+        if container["title"] == "Core Courses":
+            continue
+        addSubgroupContainer(structure, type, container, exceptions)
 
 
 

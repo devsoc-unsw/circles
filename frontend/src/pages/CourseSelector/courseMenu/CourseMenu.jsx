@@ -12,7 +12,7 @@ import { motion, AnimatePresence } from "framer-motion/dist/framer-motion";
 import {ReactComponent as Padlock} from "../../../images/padlock.svg";
 const { SubMenu } = Menu;
 
-export default function CourseMenu({ structure }) {
+export default function CourseMenu({ structure, showLockedCourses }) {
   const dispatch = useDispatch();
   const [menuData, setMenuData] = React.useState({});
   const [coursesUnits, setCoursesUnits] = React.useState({});
@@ -142,6 +142,7 @@ export default function CourseMenu({ structure }) {
                   >
                     <AnimatePresence initial={false}>
                       {menuData[group][subGroup].map((course, ind) => (
+                        (course.unlocked || showLockedCourses) &&
                         <MenuItem
                           selected={coursesInPlanner.get(course.courseCode)}
                           courseCode={course.courseCode}
