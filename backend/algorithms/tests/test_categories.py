@@ -1,4 +1,10 @@
-from algorithms.objects.categories import *
+from algorithms.objects.categories import (
+    CourseCategory,
+    LevelCategory,
+    LevelCourseCategory,
+)
+
+import json
 
 # need to test if the UOC and WAM mathods are correct for 1 case only
 
@@ -9,6 +15,7 @@ PATH = "./algorithms/exampleUsers.json"
 with open(PATH) as f:
     USERS = json.load(f)
 
+
 def test_course_category_match_definition():
     courseCategory = CourseCategory("PAIN")
     assert not courseCategory.match_definition("PAIN")
@@ -16,11 +23,13 @@ def test_course_category_match_definition():
     assert not courseCategory.match_definition("PAIN123")
     assert not courseCategory.match_definition("PAIN12345")
 
+
 def test_level_category_match_definition():
     level1 = LevelCategory(1)
     assert level1.match_definition("COMP1000")
     assert level1.match_definition("ENGG1100")
     assert not level1.match_definition("ENGG3100")
+
 
 def test_level_course_category_match_definition():
     level1comp = LevelCourseCategory(1, "COMP")

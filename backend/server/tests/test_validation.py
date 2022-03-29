@@ -2,11 +2,11 @@
 from contextlib import suppress
 import requests
 
-from server.tests.test_getAllUnlocked import USERS
+from server.tests.courses.test_getAllUnlocked import USERS
 
 # TODO: Do we care if these courses are broken before deployment? they are the honours courses + some wierd courses
-# main issues include CIRCLES-278 and CIRCLES-276
-ignored = ['COMP3901', 'COMP3902', 'COMP4951', 'COMP9302', 'COMP9491']
+# main issues include CIRCLES-276
+ignored = ['COMP4951']
 
 def test_validation_majors():
     unlocked = requests.post('http://127.0.0.1:8000/courses/getAllUnlocked', json=USERS["user3"]).json()['courses_state']
@@ -14,6 +14,7 @@ def test_validation_majors():
         for major in requests.get(f'http://127.0.0.1:8000/programs/getMajors/{program}').json()['majors']:
                 assert_possible_structure(unlocked, program, major)
 
+# TODO: currently fails because of parsing errors with new course prereqs such as COMM1190
 def test_validation_minors():
     unlocked = requests.post('http://127.0.0.1:8000/courses/getAllUnlocked', json=USERS["user3"]).json()['courses_state']
     for program in requests.get('http://127.0.0.1:8000/programs/getPrograms').json()['programs']:

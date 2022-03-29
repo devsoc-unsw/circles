@@ -1,10 +1,10 @@
 """
 https://github.com/csesoc/Circles/wiki/Manual-Fixes-to-Course-Prerequisites
 
-Copy this into a new file for the relevant faculty's fixes: 
+Copy this into a new file for the relevant faculty's fixes:
 e.g. COMPFixes.py, ACCTFixes.py, PSYCFixes.py
 
-Apply manual [code] fixes to processed conditions in conditionsProcessed.json so 
+Apply manual [code] fixes to processed conditions in conditionsProcessed.json so
 that they can be fed into algorithms.
 
 If you make a mistake and need to regenerate conditionsProcessed.json, then you
@@ -24,6 +24,7 @@ PROCESSED = "processed"
 # Reads coursesProcessed dictionary into 'COURSES' (for updating exclusions)
 COURSES = data_helpers.read_data("data/final_data/coursesProcessed.json")
 
+
 def fix_conditions():
     """ Functions to apply manual fixes """
 
@@ -36,16 +37,9 @@ def fix_conditions():
     CONDITIONS["MARK3089"] = MARK_3087_3088_3089(CONDITIONS["MARK3089"])
     CONDITIONS["MARK3202"][PROCESSED] = MARK_3202_3303()
     CONDITIONS["MARK3303"][PROCESSED] = MARK_3202_3303()
-    CONDITIONS["MARK4210"] = MARK_4210_4211_4212_4213(CONDITIONS["MARK4210"])
-    CONDITIONS["MARK4211"] = MARK_4210_4211_4212_4213(CONDITIONS["MARK4211"])
-    CONDITIONS["MARK4212"] = MARK_4210_4211_4212_4213(CONDITIONS["MARK4212"])
-    CONDITIONS["MARK4213"] = MARK_4210_4211_4212_4213(CONDITIONS["MARK4213"])
-
-
-
-
-
-
+    CONDITIONS["MARK4210"] = MARK_4210_4211_4212(CONDITIONS["MARK4210"])
+    CONDITIONS["MARK4211"] = MARK_4210_4211_4212(CONDITIONS["MARK4211"])
+    CONDITIONS["MARK4212"] = MARK_4210_4211_4212(CONDITIONS["MARK4212"])
 
     # Updates the files with the modified dictionaries
     data_helpers.write_data(
@@ -53,6 +47,7 @@ def fix_conditions():
     data_helpers.write_data(COURSES, "data/final_data/coursesProcessed.json")
 
 # TODO: implement your functions here
+
 
 def MARK_2101():
     """
@@ -62,13 +57,14 @@ def MARK_2101():
     """
     return "MARKB13554"
 
+
 def MARK_3054(conditions):
     """
     "original": "Pre-requisite: ECON1203 or MARK2052. If students can demonstrate they have equivalent statistics knowledge, but haven't completed any of the listed pre-requisite courses, they can seek permission from Program Coordinator by submitting an online form.<br/><br/>",
 
     "processed": "ECON1203 || MARK2052",
 
-    "handbook_note": "If students can demonstrate they have equivalent statistics knowledge, but haven't completed any of the listed pre-requisite courses, 
+    "handbook_note": "If students can demonstrate they have equivalent statistics knowledge, but haven't completed any of the listed pre-requisite courses,
     they can seek permission from Program Coordinator by submitting an online form.<br/><br/>"
     """
     return {
@@ -77,23 +73,24 @@ def MARK_3054(conditions):
         "handbook_note": "If students can demonstrate they have equivalent statistics knowledge, but haven't completed any of the listed pre-requisite courses, they can seek permission from Program Coordinator by submitting an online form"
     }
 
+
 def MARK_3085(conditions):
     """
     "original": "Pre-requisite: (MARK1012 OR MARK2012) or (ECON1203 OR COMM1110). If students can demonstrate they have equivalent statistics knowledge, but haven't completed any of the listed pre-requisite courses, they can seek permission from Program Coordinator by submitting an online form.<br/><br/>",
 
-    "processed": "(MARK1012 || MARK2012) || (ECON1203 || COMM1110). 
+    "processed": "(MARK1012 || MARK2012) || (ECON1203 || COMM1110).
 
     "handbook_note": "If students can demonstrate they have equivalent statistics knowledge, but haven't completed any of the listed pre-requisite courses, they can seek permission from Program Coordinator by submitting an online form"
     """
-    
+
     return {
         "original": conditions["original"],
         "processed": "(MARK1012 || MARK2012) || (ECON1203 || COMM1110)",
         "handbook_note": "If students can demonstrate they have equivalent statistics knowledge, but haven't completed any of the listed pre-requisite courses, they can seek permission from Program Coordinator by submitting an online form"
     }
 
-def MARK_3087_3088_3089(conditions):
 
+def MARK_3087_3088_3089(conditions):
     """
     "original": "Pre-requisite: ECON1203 or INFS1609 or MATH1041 or MATH1231 or MATH1241 or MATH1251 or MARK2052 or COMM2050 or COMM2501 or INFS2605 or INFS2609.<br/>Students with equivalent Statistics knowledge can seek pre-requisite waiver via webforms<br/><br/>",
 
@@ -117,7 +114,7 @@ def MARK_3202_3303():
     return "MARK2101 && MARKB13554"
 
 
-def MARK_4210_4211_4212_4213(conditions):
+def MARK_4210_4211_4212(conditions):
     """
     "original": conditions["original"],
 
@@ -126,12 +123,12 @@ def MARK_4210_4211_4212_4213(conditions):
     "handbook_note": "Admission to Honours in Marketing",
     """
 
-
     return {
         "original": conditions["original"],
         "processed": "",
         "handbook_note": "Requires Admission to Honours in Marketing"
     }
+
 
 if __name__ == "__main__":
     fix_conditions()

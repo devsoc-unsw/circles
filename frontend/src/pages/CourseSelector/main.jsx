@@ -8,28 +8,27 @@ import "./main.less";
 import SearchCourse from "./SearchCourse";
 
 export default function CourseSelector() {
-  const [structure, setStructure] = React.useState({});
-  const degree = useSelector((state) => state.degree);
-  
+  const [structure, setStructure] = React.useState(null);
+
   const { programCode, programName, specialisation, minor } = useSelector(
     (state) => state.degree
   );
 
   React.useEffect(() => {
-    fetchStructure();
-  }, []);
-
-   // get structure of degree
-   const fetchStructure = async () => {
-    try {
-      const res1 = await axios.get(
-        `/programs/getStructure/${programCode}/${specialisation}/${minor}`
-      );
-      setStructure(res1.data.structure);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+    // get structure of degree
+    const fetchStructure = async () => {
+      const endpoint = `/programs/getStructure/${programCode}/${specialisation}${
+        minor && `/${minor}`
+      }`;
+      try {
+        const res1 = await axios.get(endpoint);
+        setStructure(res1.data.structure);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    if (programCode && specialisation) fetchStructure();
+  }, [programCode, specialisation, minor]);
 
   return (
     <div className="cs-root">

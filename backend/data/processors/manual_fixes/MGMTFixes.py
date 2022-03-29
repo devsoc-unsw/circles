@@ -1,10 +1,10 @@
 """
 https://github.com/csesoc/Circles/wiki/Manual-Fixes-to-Course-Prerequisites
 
-Copy this into a new file for the relevant faculty's fixes: 
+Copy this into a new file for the relevant faculty's fixes:
 e.g. COMPFixes.py, ACCTFixes.py, PSYCFixes.py
 
-Apply manual [code] fixes to processed conditions in conditionsProcessed.json so 
+Apply manual [code] fixes to processed conditions in conditionsProcessed.json so
 that they can be fed into algorithms.
 
 If you make a mistake and need to regenerate conditionsProcessed.json, then you
@@ -22,6 +22,7 @@ PROCESSED = "processed"
 
 # Reads coursesProcessed dictionary into 'COURSES' (for updating exclusions)
 COURSES = data_helpers.read_data("data/final_data/coursesProcessed.json")
+
 
 def fix_conditions():
     """ Functions to apply manual fixes """
@@ -42,13 +43,14 @@ def fix_conditions():
     hrmHonours = ["MGMT4104", "MGMT4738", "MGMT4739"]
     for course in hrmHonours:
         CONDITIONS[course] = MGMT_4104_4738_4739()
-    
+
     # Updates the files with the modified dictionaries
     data_helpers.write_data(
         CONDITIONS, "data/final_data/conditionsProcessed.json")
     data_helpers.write_data(COURSES, "data/final_data/coursesProcessed.json")
 
 # TODO: implement your functions here
+
 
 def MGMT_2101():
     """
@@ -59,12 +61,14 @@ def MGMT_2101():
 
     return "[MGMT1101 || COMM1150]"
 
+
 def MGMT_2718():
     """
     "original": "Prerequisite or Co-requisite: MGMT1001 OR MGMT1101 OR MGMT1002 OR COMM1100 OR COMM1150 OR COMM1170<br/><br/>",
     "processed": "|| [MGMT1001 || MGMT1101 || MGMT1002 || COMM1100 || COMM1150 || COMM1170]"
     """
     return "[MGMT1001 || MGMT1101 || MGMT1002 || COMM1100 || COMM1150 || COMM1170]"
+
 
 def MGMT_3001():
     """
@@ -73,6 +77,7 @@ def MGMT_3001():
     """
     return "MGMT1001 || COMM1100 || COMM1120 || COMM1170 || 12UOC in F Business"
 
+
 def MGMT_3004():
     return {
         "original": CONDITIONS["MGMT3004"]["original"],
@@ -80,12 +85,14 @@ def MGMT_3004():
         "handbook_note": "Students must be in good standing"
     }
 
+
 def MGMT_3102():
     """
     "original": "Prerequisite: MGMT1101or COMM1150<br/><br/>",
     "processed": "MGMT1101or COMM1150"
     """
     return "MGMT1101 || COMM1150"
+
 
 def MGMT_3110():
     """
@@ -98,6 +105,7 @@ def MGMT_3110():
         "handbook_note": "If you are enrolled the Commerce International (program 3558), the Commerce Overseas Program (Exchange) is also required"
     }
 
+
 def MGMT_3728():
     """
     "original": "Prerequisite or Corequisite : MGMT2718<br/><br/>",
@@ -105,12 +113,14 @@ def MGMT_3728():
     """
     return "[MGMT2718]"
 
+
 def MGMT_3730():
     """
     "original": "Pre-requisite: MGMT2718 OR MGMT2001 OR MGMT2102 OR any Business Analytics Modelling I course (ECON2206, ECON2209 or RISK2002)<br/><br/>",
     "processed": "MGMT2718 || MGMT2001 || MGMT2102 || any Business Analytics Modelling I course (ECON2206 || ECON2209 || RISK2002)"
     """
     return "MGMT2718 || MGMT2001 || MGMT2102 || ECON2206 || ECON2209 || RISK2002"
+
 
 def MGMT_4101_4500_4501():
     """
@@ -124,6 +134,7 @@ def MGMT_4101_4500_4501():
         "processed": "4501",
         "handbook_note": "enrolment in the International Business Honours plan is required"
     }
+
 
 def MGMT_4104_4738_4739():
     """

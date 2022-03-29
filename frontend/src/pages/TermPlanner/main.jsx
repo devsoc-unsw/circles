@@ -30,12 +30,16 @@ const TermPlanner = () => {
     return state.planner;
   });
 
+  const { programCode, programName, specialisation, minor } = useSelector(
+    (state) => state.degree
+  );
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     setIsLoading(false);
     isAllEmpty(years) && openNotification();
-    updateAllWarnings(dispatch, { years, startYear, completedTerms });
+    updateAllWarnings(dispatch, { years, startYear, completedTerms }, { programCode, specialisation, minor });
   }, []);
   const currYear = new Date().getFullYear();
 
@@ -52,10 +56,10 @@ const TermPlanner = () => {
   const plannerPic = useRef();
 
   return (
-    <>
-      <OptionsHeader 
-        areYearsHidden={areYearsHidden} 
-        plannerRef={plannerPic} 
+    <div className="mainContainer">
+      <OptionsHeader
+        areYearsHidden={areYearsHidden}
+        plannerRef={plannerPic}
         isAllEmpty={isAllEmpty}
       />
       {isLoading ? (
@@ -64,7 +68,7 @@ const TermPlanner = () => {
         <DragDropContext
           onDragEnd={(result) => {
             handleOnDragEnd(result, dragEndProps);
-            updateAllWarnings(dispatch, { years, startYear, completedTerms });
+            updateAllWarnings(dispatch, { years, startYear, completedTerms }, { programCode, specialisation, minor });
           }}
           onDragStart={(result) =>
             handleOnDragStart(result, courses, setTermsOffered, setIsDragging)
@@ -120,15 +124,14 @@ const TermPlanner = () => {
           </div>
         </DragDropContext>
       )}
-    </>
+    </div>
   );
 };
 
 const openNotification = () => {
   const args = {
     message: "Your terms are looking a little empty",
-    description:
-      "Open the drawers on the right to reveal courses you've added from the course selector",
+    description: "Add courses from the course selector to the term planner",
     duration: 3,
     className: "text helpNotif",
     placement: "topRight",
@@ -136,7 +139,7 @@ const openNotification = () => {
   notification["info"](args);
 };
 
-// checks if no courses have been planned (to display help notification 
+// checks if no courses have been planned (to display help notification
 // & determine if unschedule all button available)
 const isAllEmpty = (years) => {
   for (const year of years) {

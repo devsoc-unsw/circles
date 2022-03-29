@@ -8,11 +8,11 @@ import "./CourseMenu.less";
 import { setCourses } from "../../../actions/coursesActions";
 import { IoWarningOutline } from "react-icons/io5";
 import { prepareUserPayload } from "../helper";
-
+import { motion, AnimatePresence } from "framer-motion/dist/framer-motion";
 
 const { SubMenu } = Menu;
 
-export default function CourseMenu({structure}) {
+export default function CourseMenu({ structure }) {
   const dispatch = useDispatch();
   const [menuData, setMenuData] = React.useState({});
   const [coursesUnits, setCoursesUnits] = React.useState({});
@@ -28,17 +28,22 @@ export default function CourseMenu({structure}) {
   const coursesInPlanner = planner.courses;
   const degree = useSelector((state) => state.degree);
 
+  const [isPageLoaded, setIsPageLoaded] = React.useState(false);
+
   // get all courses
   React.useEffect(async () => {
-    try {
-      const res = await axios.post(
-        `/courses/getAllUnlocked/`,
-        JSON.stringify(prepareUserPayload(degree, planner)),
-      );
-      dispatch(setCourses(res.data.courses_state));
-      generateMenuData(res.data.courses_state);
-    } catch (err) {
-      console.log(err);
+    if (structure) {
+      try {
+        const res = await axios.post(
+          `/courses/getAllUnlocked/`,
+          JSON.stringify(prepareUserPayload(degree, planner))
+        );
+
+        dispatch(setCourses(res.data.courses_state));
+        generateMenuData(res.data.courses_state);
+      } catch (err) {
+        console.log(err);
+      }
     }
   }, [structure, coursesInPlanner]);
 
@@ -55,11 +60,11 @@ export default function CourseMenu({structure}) {
       // Example subgroup: Core Courses, Computing Electives, Flexible Education
       for (const subgroup in structure[group]) {
         if (typeof structure[group][subgroup] !== "string") {
-          // case where structure[group][subgroup] gives information on courses in an object 
-          const subgroupStructure = structure[group][subgroup]
+          // case where structure[group][subgroup] gives information on courses in an object
+          const subgroupStructure = structure[group][subgroup];
           newCoursesUnits[group][subgroup] = {
             total: subgroupStructure.UOC,
-            curr: 0
+            curr: 0,
           };
 
           newMenu[group][subgroup] = [];
@@ -74,7 +79,10 @@ export default function CourseMenu({structure}) {
                 // courses[courseCode].is_accurate &&
                 courses[courseCode].unlocked
               ) {
-                newMenu[group][subgroup].push({courseCode: courseCode, accuracy: courses[courseCode].is_accurate});
+                newMenu[group][subgroup].push({
+                  courseCode: courseCode,
+                  accuracy: courses[courseCode].is_accurate,
+                });
 
                 // add UOC to curr
                 if (coursesInPlanner.get(courseCode))
@@ -86,7 +94,7 @@ export default function CourseMenu({structure}) {
             // If there is no specified course list for the subgroup, then manually
             // show the added courses on the menu.
             for (const courseCode of coursesInPlanner.keys()) {
-              const courseData = coursesInPlanner.get(courseCode)
+              const courseData = coursesInPlanner.get(courseCode);
               if (courseData && courseData.type === subgroup) {
                 newMenu[group][subgroup].push(courseCode);
                 // add UOC to curr
@@ -97,21 +105,22 @@ export default function CourseMenu({structure}) {
         }
       }
       if (structure[group].name) {
-        // Append structure group name if exists 
-        const newGroup = `${group} - ${structure[group].name}`
-        newMenu[newGroup] = newMenu[group]
-        newCoursesUnits[newGroup] = newCoursesUnits[group]
-        delete newMenu[group]
-        delete newCoursesUnits[group]
+        // Append structure group name if exists
+        const newGroup = `${group} - ${structure[group].name}`;
+        newMenu[newGroup] = newMenu[group];
+        newCoursesUnits[newGroup] = newCoursesUnits[group];
+        delete newMenu[group];
+        delete newCoursesUnits[group];
       }
     }
     setMenuData(newMenu);
     setCoursesUnits(newCoursesUnits);
+    setIsPageLoaded(true);
   };
 
   return (
     <div className="cs-menu-root">
-      {structure === null ? (
+      {!isPageLoaded ? (
         <Loading />
       ) : (
         <>
@@ -136,15 +145,18 @@ export default function CourseMenu({structure}) {
                       />
                     }
                   >
-                    {menuData[group][subGroup].map((course) => (
-                      <MenuItem
-                        selected={coursesInPlanner.get(course.courseCode)}
-                        courseCode={course.courseCode}
-                        accurate={course.accuracy}
-                        setActiveCourse={setActiveCourse}
-                        activeCourse={activeCourse}
-                      />
-                    ))}
+                    <AnimatePresence initial={false}>
+                      {menuData[group][subGroup].map((course, ind) => (
+                        <MenuItem
+                          selected={coursesInPlanner.get(course.courseCode)}
+                          courseCode={course.courseCode}
+                          accurate={course.accuracy}
+                          setActiveCourse={setActiveCourse}
+                          activeCourse={activeCourse}
+                          key={course.courseCode + group}
+                        />
+                      ))}
+                    </AnimatePresence>
                   </Menu.ItemGroup>
                 ))}
               </SubMenu>
@@ -156,7 +168,13 @@ export default function CourseMenu({structure}) {
   );
 }
 
-const MenuItem = ({ selected, courseCode, activeCourse, setActiveCourse, accurate }) => {
+const MenuItem = ({
+  selected,
+  courseCode,
+  activeCourse,
+  setActiveCourse,
+  accurate,
+}) => {
   const dispatch = useDispatch();
   const handleClick = () => {
     dispatch(courseTabActions("ADD_TAB", courseCode));
@@ -164,20 +182,22 @@ const MenuItem = ({ selected, courseCode, activeCourse, setActiveCourse, accurat
   };
 
   const renderAccurateNote = () => {
-    if (!accurate){
-      return (<WarningIcon text="This course info may be inaccurate" />);
+    if (!accurate) {
+      return <WarningIcon text="This course info may be inaccurate" />;
     }
-  }
+  };
 
   return (
-    <Menu.Item
-      className={`text menuItemText ${selected !== undefined && "bold"} 
+    <motion.div transition={{ ease: "easeOut", duration: 0.3 }} layout>
+      <Menu.Item
+        className={`text menuItemText ${selected !== undefined && "bold"} 
       ${activeCourse === courseCode && "activeCourse"}`}
-      key={courseCode}
-      onClick={handleClick}
-    >
-      {courseCode} {renderAccurateNote()}
-    </Menu.Item>
+        key={courseCode}
+        onClick={handleClick}
+      >
+        {courseCode} {renderAccurateNote()}
+      </Menu.Item>
+    </motion.div>
   );
 };
 
@@ -185,10 +205,14 @@ const WarningIcon = ({ text }) => {
   return (
     <Tooltip placement="top" title={text}>
       <IoWarningOutline
-                size="1em"
-                color="#DC9930"
-                style={{ position: "absolute", marginLeft: "0.3em", top: "calc(50% - 0.5em)" }}
-              />
+        size="1em"
+        color="#DC9930"
+        style={{
+          position: "absolute",
+          marginLeft: "0.3em",
+          top: "calc(50% - 0.5em)",
+        }}
+      />
     </Tooltip>
   );
 };
