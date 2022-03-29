@@ -1,5 +1,5 @@
 import { plannerActions } from "../../actions/plannerActions";
-import { FEB, JUN, SEP, MID_MONTH_DAY, START_MONTH_DAY } from "../../constants"
+import { FEB, JUN, SEP, MID_MONTH_START, BEG_MONTH_START, TERM_PAST_AMOUNT } from "../../constants"
 import axios from "axios";
 
 export const updateAllWarnings = (dispatch, plannerInfo, userInfo) => {
@@ -38,11 +38,11 @@ const getMostRecentPastTerm = (startYear) => {
 
   // session dates gathered from: https://www.student.unsw.edu.au/teaching-periods
   let lastTermPast;
-  if ((currDay >= MID_MONTH_DAY + 14 && currMonth == SEP) || currMonth > SEP) {
+  if ((currDay >= MID_MONTH_START + TERM_PAST_AMOUNT && currMonth == SEP) || currMonth > SEP) {
     lastTermPast = 3;
-  } else if ((currDay >= START_MONTH_DAY + 14 && currMonth == JUN) || currMonth > JUN) {
+  } else if ((currDay >= BEG_MONTH_START + TERM_PAST_AMOUNT && currMonth == JUN) || currMonth > JUN) {
     lastTermPast = 2;
-  } else if ((currDay >= MID_MONTH_DAY + 14 && currMonth == FEB) || currMonth > FEB) {
+  } else if ((currDay >= MID_MONTH_START + TERM_PAST_AMOUNT && currMonth == FEB) || currMonth > FEB) {
     lastTermPast = 1;
   } else {
     lastTermPast = 0;
