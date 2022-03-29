@@ -164,8 +164,10 @@ export default function CourseMenu({ structure, showLockedCourses }) {
     </div>
   );
   function sortMenu(item1, item2) {
-    return coursesInPlanner.get(item1.courseCode) !== undefined ? -1 : (item1.unlocked > item2.unlocked) ? -1: 1;
-  }
+    return item1.unlocked === item2.unlocked
+      ? item1.courseCode > item2.courseCode // sort within locked/unlocked by courseCode
+      : item1.unlocked < item2.unlocked; // separate locked/unlocked
+  };
 }
 
 

@@ -169,7 +169,7 @@ def addSpecialisation(structure: dict, code: str, type: str):
     cores = next(filter(lambda a: "Core" in a["title"], spnResult["curriculum"]))
     exceptions = addSubgroupContainer(structure, type, cores, [])
     for container in spnResult["curriculum"]:
-        if container["title"] == "Core Courses":
+        if "Core" in container["title"]:
             continue
         addSubgroupContainer(structure, type, container, exceptions)
 
