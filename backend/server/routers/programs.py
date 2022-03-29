@@ -166,9 +166,8 @@ def addSpecialisation(structure: dict, code: str, type: str):
             status_code=400, detail=f"{code} of type {type} not found")
     structure[type] = {"name": spnResult["name"]}
     # NOTE: takes Core Courses are first
-    cores = next(filter(lambda a: a["title"] == "Core Courses", spnResult["curriculum"]))
+    cores = next(filter(lambda a: "Core" in a["title"], spnResult["curriculum"]))
     exceptions = addSubgroupContainer(structure, type, cores, [])
-    print(exceptions)
     for container in spnResult["curriculum"]:
         if container["title"] == "Core Courses":
             continue
