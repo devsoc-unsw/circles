@@ -23,7 +23,7 @@ const titleStyles = {
 
 const { Title } = Typography;
 const Header = () => {
-  const isSmall = useMediaQuery("(max-width: 1400px)");
+  const isSmall = useMediaQuery("(max-width: 1000px)");
   const [showDrawer, setShowDrawer] = React.useState(false);
   const [current, setCurrent] = React.useState(() => {
     const validPaths = new Set([

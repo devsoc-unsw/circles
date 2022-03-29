@@ -26,7 +26,7 @@ export const DrawerContent = ({ onCloseDrawer }) => {
   //     onCloseDrawer();
   // }
   return (
-    <Menu mode="vertical" style={{ width: 230, marginTop: "2em" }}>
+    <Menu mode="vertical" style={{ marginTop: "2em" }}>
       <Menu.Item key="1" onClick={() => handlePush("/course-selector")}>
         Course Selector
       </Menu.Item>
