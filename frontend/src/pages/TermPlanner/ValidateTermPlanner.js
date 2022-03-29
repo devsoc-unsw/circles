@@ -27,7 +27,7 @@ const validateTermPlanner = (payload) => {
 };
 
 // takes in startYear (int) and gets current date to return the most recent term that has past (week 2)
-// string of year in degree (not array index) and term most recent is returned e.g. 'Y3T0'
+// dictionary of year in degree and term most recent is returned 
 const getMostRecentPastTerm = (startYear) => {
   let currTime = new Date();
   let currYear = currTime.getFullYear();
@@ -48,7 +48,10 @@ const getMostRecentPastTerm = (startYear) => {
     lastTermPast = 0;
   }
 
-  return `Y${currDegreeYear}T${lastTermPast}`;
+  return {
+    "Y": currDegreeYear,
+    "T": lastTermPast,
+  };
 };
 
 const prepareCoursesForValidation = (plannerInfo, userInfo) => {
