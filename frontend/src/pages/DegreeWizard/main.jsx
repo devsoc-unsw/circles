@@ -13,6 +13,7 @@ import "./main.less";
 import { springProps } from "./spring";
 import { scroller } from "react-scroll";
 import { useNavigate } from "react-router-dom";
+import { YearStep } from "./steps/YearStep";
 
 const { Title } = Typography;
 const { RangePicker } = DatePicker;
@@ -95,24 +96,9 @@ function DegreeWizard() {
 
       <div className="steps-container">
         {currStep >= 1 && (
-          // TODO: Move the duration step into its own component
-          <animated.div style={props} className="step-duration">
-            <div className="steps-heading-container">
-              <Title level={4} className="text">
-                What years do you start and finish?
-              </Title>
-              {currStep === 1 && (
-                <Button type="primary" onClick={incrementStep}>
-                  Next
-                </Button>
-              )}
-            </div>
-            <RangePicker
-              picker="year"
-              size="large"
-              onChange={handleYearChange}
-            />
-          </animated.div>
+          <div className="step-content" id="Year">
+            <YearStep incrementStep={incrementStep} currStep={currStep} />
+          </div>
         )}
         {currStep >= 2 && (
           <div className="step-content" id="Degree">
