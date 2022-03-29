@@ -57,15 +57,22 @@ async def validateTermPlanner(
                     },
                 ],
             ],
+            "mostRecentPastTerm": {
+                "Y": 1,
+                "T": 0,
+            },
         },
     )
 ):
     """
-    Will iteratveily go through the term planner data whilst "building up" the user.
+    Will iteratively go through the term planner data whilst "building up" the user.
     Starting from 1st year ST, we will create an empty user and evaluate the courses.
     Then we will add ST courses to the user and evaluate T1. Then we will add T1
     courses and evaluate T2. Then add T2 and evaluate T3. Then add T3 and evaluate
     2nd year ST... and so on.
+
+    The mostRecentPastTerm will show the latest term (and current year) that has 
+    passed and all warnings will be suppressed until after this term
 
     Returns the state of all the courses on the term planner
     """
@@ -79,10 +86,15 @@ async def validateTermPlanner(
     user = User(emptyUserData)
     # State of courses on the term planner
     coursesState = {}  # TODO: possibly push to user class?
+    
+    currYear = data["mostRecentPastTerm"]["Y"]
+    pastTerm = data["mostRecentPastTerm"]["T"]
 
-    for year in data["plan"]:
+    for yearIndex, year in enumerate(data["plan"]):
         # Go through all the years
-        for term in year:
+        for termIndex, term in enumerate(year):
+            inPast =  yearIndex + 1 < currYear or (yearIndex + 1 == currYear and termIndex <= pastTerm)
+            
             user.add_current_courses(term)
 
             for course in term:
@@ -96,7 +108,7 @@ async def validateTermPlanner(
                     "is_accurate": is_answer_accurate,
                     "handbook_note": CACHED_HANDBOOK_NOTE.get(course, ""),
                     "unlocked": unlocked,
-                    "warnings": warnings,
+                    "warnings": warnings if not inPast else [],
                 }
             # Add all these courses to the user in preparation for the next term
             user.empty_current_courses()
