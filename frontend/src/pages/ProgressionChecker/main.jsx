@@ -16,7 +16,6 @@ const ProgressionChecker = () => {
     const res = await axios.get(
       `/programs/getStructure/3778/${degreeData.concentrations[0].code}`
     );
-    console.log(res);
 
     setCourses(res.data.structure);
     setIsLoading(false);

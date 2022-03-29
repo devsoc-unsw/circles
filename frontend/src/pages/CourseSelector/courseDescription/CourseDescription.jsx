@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button, Tag, Alert, Typography, Space, Menu, Dropdown } from "antd";
 import { PlusOutlined, StopOutlined } from "@ant-design/icons";
 import { CourseTag } from "../../../components/courseTag/CourseTag";
-import { getCourseById } from "./../courseProvider";
 import SearchCourse from "../SearchCourse";
 import { plannerActions } from "../../../actions/plannerActions";
 import { Loading } from "./Loading";
@@ -12,6 +11,9 @@ import { prepareUserPayload } from "../helper";
 import axios from "axios";
 import infographic from "../../../images/infographicFontIndependent.svg";
 import { motion } from "framer-motion/dist/framer-motion";
+import { axiosRequest } from "../../../axios";
+import { setCourse } from "../../../actions/coursesActions";
+import { BsPlusLg } from "react-icons/bs";
 
 const { Title, Text } = Typography;
 const CourseAttribute = ({ title, content }) => {
@@ -77,34 +79,34 @@ export default function CourseDescription({ structure }) {
   const courseInPlanner = coursesInPlanner.has(id);
   const planner = useSelector((state) => state.planner);
   const degree = useSelector((state) => state.degree);
-  const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(false);
   const [pageLoaded, setpageLoaded] = useState(false);
   const [coursesPathTo, setCoursesPathTo] = useState({});
 
-  const getPathToCoursesById = async (id) => {
-    try {
-      const res = await axios.post(
-        `/courses/coursesUnlockedWhenTaken/${id}`,
-        JSON.stringify(prepareUserPayload(degree, planner))
-      );
-      setCoursesPathTo(res.data.courses_unlocked_when_taken);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   useEffect(() => {
+    const getCourse = async () => {
+      const [data, err] = await axiosRequest("get", `/courses/getCourse/${id}`);
+      if (!err) {
+        dispatch(setCourse(data));
+        setpageLoaded(true);
+      }
+    };
+
+    const getPathToCoursesById = async (id) => {
+      const [data, err] = await axiosRequest(
+        "post",
+        `/courses/coursesUnlockedWhenTaken/${id}`,
+        prepareUserPayload(degree, planner)
+      );
+      if (!err) setCoursesPathTo(data.courses_unlocked_when_taken);
+    };
+
+    setpageLoaded(false);
     if (id === "explore" || id === "search") return;
     if (id) {
-      dispatch(getCourseById(id));
+      getCourse();
       getPathToCoursesById(id);
     }
-    // turn off alert when moving to a different page
-    setShow(false);
-    setTimeout(() => {
-      setpageLoaded(true);
-    }, 2000);
   }, [id]);
 
   if (tabs.length === 0)
@@ -137,24 +139,16 @@ export default function CourseDescription({ structure }) {
     // dispatch(setUnplannedCourses(id));
     setLoading(true);
     setTimeout(() => {
-      setShow(true);
       setLoading(false);
     }, 1000);
-    setTimeout(() => {
-      setShow(false);
-    }, 4000);
   };
 
   const removeFromPlanner = () => {
     dispatch(plannerActions("REMOVE_COURSE", id));
     setLoading(true);
     setTimeout(() => {
-      setShow(true);
       setLoading(false);
     }, 1000);
-    setTimeout(() => {
-      setShow(false);
-    }, 4000);
   };
 
   return (
@@ -193,8 +187,10 @@ export default function CourseDescription({ structure }) {
                     }}
                     type="primary"
                   >
-                    <PlusOutlined />
-                    Add to planner
+                    <div className="addBtn">
+                      <BsPlusLg />
+                      Add to planner
+                    </div>
                   </Dropdown.Button>
                 )}
               </div>
