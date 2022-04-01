@@ -78,12 +78,11 @@ class User:
     def in_specialisation(self, specialisation: str):
         """ Determines if the user is in the specialisation """
         # Replace the '?'s with wildcard
-        specialisation.replace('?', '[A-Z0-9]')
-        escaped_specialisation = re.escape(f"^{specialisation}$")
+        matched_specialisation = f"^{specialisation.replace('?', '[A-Z0-9]')}$"
 
         # Search for it in the users' specialisations
         for users_specialisation in self.specialisations:
-            if bool(re.match(escaped_specialisation, users_specialisation, flags=re.IGNORECASE)):
+            if bool(re.match(matched_specialisation, users_specialisation, flags=re.IGNORECASE)):
                 return True
         return False
 
