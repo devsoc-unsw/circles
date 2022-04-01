@@ -7578,27 +7578,6 @@
         ],
         "broke at": "Index 6, /CODE"
     },
-    "COMP4951": {
-        "condition": {
-            "original": "Prerequisite: Enrolled in a CSE BE (Hons) programs, completion of 126 UOC and completion of 3rd year core.<br/><br/>",
-            "processed": "126UOC && (BINF?H || SENGAH || COMP?H)",
-            "handbook_note": "You must be enrolled in a CSE BE (Hons) program and complete all third year core requirements to enrol in this course."
-        },
-        "tokens": [
-            "(",
-            "126UOC",
-            "&&",
-            "(",
-            "BINF?H",
-            "||",
-            "SENGAH",
-            "||",
-            "COMP?H",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 1, 126UOC"
-    },
     "CRIM2021": {
         "condition": {
             "original": "Prerequisite: CRIM2020, not available to students in Bachelor of Laws double-degree programs<br/><br/>",
@@ -8019,58 +7998,6 @@
             ")"
         ],
         "broke at": "Index 1, Enrolment"
-    },
-    "CVEN4050": {
-        "condition": {
-            "original": "Prerequisite: 132 UOCs needed to enrol into this course and BE Hons Programs only<br/><br/>",
-            "processed": "132UOC && (AEROAH || BINFAH || CEICAH || CEICDH || COMPBH || CVENAH || CVENBH || ELECAH || ELECCH || GMATDH || MANFBH || MECHAH || MINEAH || MTRNAH || PETRAH || SENGAH || SOLAAH || SOLABH || TELEAH)"
-        },
-        "tokens": [
-            "(",
-            "132UOC",
-            "&&",
-            "(",
-            "AEROAH",
-            "||",
-            "BINFAH",
-            "||",
-            "CEICAH",
-            "||",
-            "CEICDH",
-            "||",
-            "COMPBH",
-            "||",
-            "CVENAH",
-            "||",
-            "CVENBH",
-            "||",
-            "ELECAH",
-            "||",
-            "ELECCH",
-            "||",
-            "GMATDH",
-            "||",
-            "MANFBH",
-            "||",
-            "MECHAH",
-            "||",
-            "MINEAH",
-            "||",
-            "MTRNAH",
-            "||",
-            "PETRAH",
-            "||",
-            "SENGAH",
-            "||",
-            "SOLAAH",
-            "||",
-            "SOLABH",
-            "||",
-            "TELEAH",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 1, 132UOC"
     },
     "CVEN4701": {
         "condition": {
@@ -11599,88 +11526,6 @@
         ],
         "broke at": "Index 3, ("
     },
-    "INFS4831": {
-        "condition": {
-            "original": "Prerequisite: Enrolled in Honours majoring in Information Systems.<br/><br/>",
-            "processed": "INFS?H"
-        },
-        "tokens": [
-            "(",
-            "INFS?H",
-            ")"
-        ],
-        "broke at": "Index 1, INFS?H"
-    },
-    "INFS4854": {
-        "condition": {
-            "original": "Prerequisite: Enrolled in Honours majoring in Information Systems.<br/><br/>",
-            "processed": "INFS?H"
-        },
-        "tokens": [
-            "(",
-            "INFS?H",
-            ")"
-        ],
-        "broke at": "Index 1, INFS?H"
-    },
-    "INFS4858": {
-        "condition": {
-            "original": "Enrolment in Streams: Enrolled in an Honours Program majoring in Information Systems (INFSAH OR INFSBH OR INFSCH)<br/><br/>",
-            "processed": "INFSAH || INFSBH || INFSCH"
-        },
-        "tokens": [
-            "(",
-            "INFSAH",
-            "||",
-            "INFSBH",
-            "||",
-            "INFSCH",
-            ")"
-        ],
-        "broke at": "Index 1, INFSAH"
-    },
-    "INFS4886": {
-        "condition": {
-            "original": "Prerequisite: Enrolled in Honours majoring in Information Systems.<br/><br/>",
-            "processed": "INFS?H"
-        },
-        "tokens": [
-            "(",
-            "INFS?H",
-            ")"
-        ],
-        "broke at": "Index 1, INFS?H"
-    },
-    "INFS4887": {
-        "condition": {
-            "original": "Prerequisite: INFS4886 AND enrolled in Honours majoring in Information Systems.<br/><br/>",
-            "processed": "INFS4886 && INFS?H"
-        },
-        "tokens": [
-            "(",
-            "INFS4886",
-            "&&",
-            "INFS?H",
-            ")"
-        ],
-        "broke at": "Index 3, INFS?H"
-    },
-    "INFS4907": {
-        "condition": {
-            "original": "Enrolment in Streams: Enrolled in an Honours Program majoring in Information Systems (INFSAH OR INFSBH OR INFSCH)<br/><br/>",
-            "processed": "INFSAH || INFSBH || INFSCH"
-        },
-        "tokens": [
-            "(",
-            "INFSAH",
-            "||",
-            "INFSBH",
-            "||",
-            "INFSCH",
-            ")"
-        ],
-        "broke at": "Index 1, INFSAH"
-    },
     "INST1005": {
         "condition": {
             "original": "Prerequisite: Enrolment in an International Studies single or double degree<br/><br/>",
@@ -15042,18 +14887,6 @@
         ],
         "broke at": "Index 4, MATH,"
     },
-    "MATH4001": {
-        "condition": {
-            "original": "Prerequisite: Enrolled in MATH Honours stream<br/><br/>",
-            "processed": "MATH?H"
-        },
-        "tokens": [
-            "(",
-            "MATH?H",
-            ")"
-        ],
-        "broke at": "Index 1, MATH?H"
-    },
     "MATS3199": {
         "condition": {
             "original": "Prerequisite: enrolled in a Science program (single or dual) and majoring in Materials Science. Must pass Preparation for WIL modules prior to enrolment. Placement must be related to the student\u2019s major, and approved by the School of Materials Science and Engineering prior to enrolment.<br/>Pre-requisite: 48 units of credit and a minimum 65 WAM.<br/>It is the student\u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year.<br/><br/>",
@@ -15187,42 +15020,6 @@
             ")"
         ],
         "broke at": "Index 1, Must"
-    },
-    "MATS4503": {
-        "condition": {
-            "original": "Prerequisite: Enrolled in Materials Science Honours Plan<br/><br/>",
-            "processed": "MATS?H"
-        },
-        "tokens": [
-            "(",
-            "MATS?H",
-            ")"
-        ],
-        "broke at": "Index 1, MATS?H"
-    },
-    "MATS4504": {
-        "condition": {
-            "original": "Prerequisite: Enrolled in Materials Science Honours Plan<br/><br/>",
-            "processed": "MATS?H"
-        },
-        "tokens": [
-            "(",
-            "MATS?H",
-            ")"
-        ],
-        "broke at": "Index 1, MATS?H"
-    },
-    "MATS4505": {
-        "condition": {
-            "original": "Prerequisite: Enrolled in Materials Science Honours Plan<br/><br/>",
-            "processed": "MATS?H"
-        },
-        "tokens": [
-            "(",
-            "MATS?H",
-            ")"
-        ],
-        "broke at": "Index 1, MATS?H"
     },
     "MDCN8888": {
         "condition": {
@@ -17746,54 +17543,6 @@
         ],
         "broke at": "Index 1, Must"
     },
-    "PSYC4072": {
-        "condition": {
-            "original": "Pre-requisite: Enrolled in PSYCAH stream<br/><br/>",
-            "processed": "PSYCAH"
-        },
-        "tokens": [
-            "(",
-            "PSYCAH",
-            ")"
-        ],
-        "broke at": "Index 1, PSYCAH"
-    },
-    "PSYC4073": {
-        "condition": {
-            "original": "Pre-requisite: Enrolled in PSYCAH stream<br/><br/>",
-            "processed": "PSYCAH"
-        },
-        "tokens": [
-            "(",
-            "PSYCAH",
-            ")"
-        ],
-        "broke at": "Index 1, PSYCAH"
-    },
-    "PSYC4093": {
-        "condition": {
-            "original": "Pre-requisite: Enrolled in PSYCAH stream<br/><br/>",
-            "processed": "PSYCAH"
-        },
-        "tokens": [
-            "(",
-            "PSYCAH",
-            ")"
-        ],
-        "broke at": "Index 1, PSYCAH"
-    },
-    "PSYC4103": {
-        "condition": {
-            "original": "Pre-requisite: Enrolled in PSYCAH stream<br/><br/>",
-            "processed": "PSYCAH"
-        },
-        "tokens": [
-            "(",
-            "PSYCAH",
-            ")"
-        ],
-        "broke at": "Index 1, PSYCAH"
-    },
     "SART3405": {
         "condition": {
             "original": "L2 Printmaking Prerequisite<br/><br/>",
@@ -18060,95 +17809,6 @@
             ")"
         ],
         "broke at": "Index 1, L2"
-    },
-    "SENG2021": {
-        "condition": {
-            "original": "Prerequisite:  SENG1031 or COMP1531, and enrolment in a BE or BE(Hons) Software Engineering major.<br/><br/>",
-            "processed": "SENG1031 || COMP1531 && (SENG?1 || SENG?H)"
-        },
-        "tokens": [
-            "(",
-            "SENG1031",
-            "||",
-            "COMP1531",
-            "&&",
-            "(",
-            "SENG?1",
-            "||",
-            "SENG?H",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 1, SENG1031"
-    },
-    "SENG2991": {
-        "condition": {
-            "original": "Currently enrolled in Program 3707 in the SENGAH stream <br/>and in an approved workplace arrangement <br/>and completed COMP1511, COMP1531 and COMP2521.<br/><br/>",
-            "processed": "COMP1511 && COMP1531 && COMP2521 && 3707 && SENGAH",
-            "handbook_note": "Must be in an approved workplace arrangement"
-        },
-        "tokens": [
-            "(",
-            "COMP1511",
-            "&&",
-            "COMP1531",
-            "&&",
-            "COMP2521",
-            "&&",
-            "3707",
-            "&&",
-            "SENGAH",
-            ")"
-        ],
-        "broke at": "Index 9, SENGAH"
-    },
-    "SENG3991": {
-        "condition": {
-            "original": "Currently enrolled in Program 3707 in the SENGAH stream and in the Co-op program<br/>and completed SENG2011 and SENG2021 and DESN2000 and COMP2511 and COMP2041.<br/><br/>Successful completion of SEN2991 and attendance of IT Reflection Workshop (facilitated by Co-op Program) are a<br/>prerequisite for this course.<br/><br/>",
-            "processed": "3707 && SENGAH && SENG2011 && SENG2021 && DESN2000 && COMP2511 && COMP2041 && SENG2991",
-            "handbook_note": "Must currently be enrolled in the Co-op program and completed attendance of IT Reflection Workshop (facilitated by Co-op Program)"
-        },
-        "tokens": [
-            "(",
-            "3707",
-            "&&",
-            "SENGAH",
-            "&&",
-            "SENG2011",
-            "&&",
-            "SENG2021",
-            "&&",
-            "DESN2000",
-            "&&",
-            "COMP2511",
-            "&&",
-            "COMP2041",
-            "&&",
-            "SENG2991",
-            ")"
-        ],
-        "broke at": "Index 3, SENGAH"
-    },
-    "SENG3992": {
-        "condition": {
-            "original": "Currently enrolled in Program 3707 in the SENGAH stream and in the Co-op program<br/>and completed SENG3011.<br/><br/>Successful completion of SEN2991 and SENG3991are a prerequisite for this course<br/><br/>",
-            "processed": "3707 && SENGAH && SENG3011 && SENG2991 && SENG3991",
-            "handbook_note": "Must currently be enrolled in the Co-op program"
-        },
-        "tokens": [
-            "(",
-            "3707",
-            "&&",
-            "SENGAH",
-            "&&",
-            "SENG3011",
-            "&&",
-            "SENG2991",
-            "&&",
-            "SENG3991",
-            ")"
-        ],
-        "broke at": "Index 3, SENGAH"
     },
     "SENG3993": {
         "condition": {
