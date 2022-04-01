@@ -8,10 +8,6 @@ import re
 from abc import ABC, abstractmethod
 from algorithms.objects.helper import Logic
 
-MAJOR_CODE = '1'
-MINOR_CODE = '2'
-HONS_CODE = 'H'
-
 # Preload the mappings to school and faculty
 CACHED_MAPPINGS = {}
 
@@ -151,17 +147,3 @@ class FacultyCategory(Category):
 
     def __str__(self) -> str:
         return self.faculty
-
-
-class StreamCategory(Category):
-    """ Category for streams (either minor, major or honours) belonging to a faculty (e.g. COMP, MATH, ELEC) """
-
-    def __init__(self, code: str, stype: str):
-        self.code = code
-        self.stype = stype # Either MINOR_CODE, MAJOR_CODE or HONS_CODE
-
-    def match_definition(self, stream: str) -> bool:
-        return f"{self.code}?{self.stype}" == stream
-
-    def __str__(self) -> str:
-        return f"{self.code}?{self.stype} stream"

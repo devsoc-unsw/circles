@@ -7,6 +7,7 @@
 
 import copy
 from typing import Optional
+import re
 
 from algorithms.objects.categories import AnyCategory, Category
 
@@ -76,7 +77,15 @@ class User:
 
     def in_specialisation(self, specialisation: str):
         """ Determines if the user is in the specialisation """
-        return specialisation in self.specialisations
+        # Replace the '?'s with wildcard
+        specialisation.replace('?', '[A-Z0-9]')
+        escaped_specialisation = re.escape(f"^{specialisation}$")
+
+        # Search for it in the users' specialisations
+        for users_specialisation in self.specialisations:
+            if bool(re.match(escaped_specialisation, users_specialisation, flags=re.IGNORECASE)):
+                return True
+        return False
 
     def load_json(self, data):
         """ Given the user data, correctly loads it into this user class """
