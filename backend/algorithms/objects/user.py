@@ -78,13 +78,10 @@ class User:
     def in_specialisation(self, specialisation: str):
         """ Determines if the user is in the specialisation """
         # Replace the '?'s with wildcard
-        matched_specialisation = f"^{specialisation.replace('?', '[A-Z0-9]')}$"
+        pat = f"^{re.escape(specialisation.replace('?', '[A-Z0-9]'))}$"
 
         # Search for it in the users' specialisations
-        for users_specialisation in self.specialisations:
-            if bool(re.match(matched_specialisation, users_specialisation, flags=re.IGNORECASE)):
-                return True
-        return False
+        return any(bool(re.match(pat, spec, flags=re.IGNORECASE)) for spec in self.specialisations)
 
     def load_json(self, data):
         """ Given the user data, correctly loads it into this user class """
