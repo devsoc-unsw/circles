@@ -5529,7 +5529,7 @@
     },
     "ELEC3115": {
         "original": "Pre-requisite: MATH2069 AND (PHY1231 OR DPST1024)<br/><br/>",
-        "processed": "MATH2069 && (PHY1231 || DPST1024)"
+        "processed": "MATH2069 && (PHYS1231 || DPST1024)"
     },
     "ELEC3117": {
         "original": "Prereq: ELEC2133<br/><br/>",
@@ -5687,7 +5687,7 @@
     },
     "ENGG3060": {
         "original": "Pre-requisite: Completion of 66 UOC<br/><br/>",
-        "processed": "66UOC in ENGG#"
+        "processed": "66UOC"
     },
     "ENGG3600": {
         "original": "Please refer to the course overview section for information on prerequisite requirements.<br/><br/>",
