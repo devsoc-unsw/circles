@@ -13,24 +13,30 @@ export const CourseTabs = () => {
     dispatch(courseTabActions("SET_ACTIVE_TAB", activeKey));
   };
 
-  const handleEdit = (index, action) => {
-    if (action === "add") {
-      dispatch(courseTabActions("ADD_TAB", "search"));
-    } else if (action === "remove") {
-      dispatch(courseTabActions("REMOVE_TAB", index));
-    }
+  const onDragEnd = (result) => {
+    if (!result.destination) return; // dropped outside of tab container
+
+    // function to help us with reordering the result
+    const reorder = (list, startIndex, endIndex) => {
+      const result = Array.from(list);
+      const [removed] = result.splice(startIndex, 1);
+      result.splice(endIndex, 0, removed);
+
+      return result;
+    };
+
+    const reorderedTabs = reorder(
+      tabs,
+      result.source.index,
+      result.destination.index
+    );
+
+    handleChange(result.destination.index); // set active tab to dragged tab
+    dispatch(courseTabActions("REORDER_TABS", reorderedTabs));
   };
 
-  // a little function to help us with reordering the result
-  const reorder = (list, startIndex, endIndex) => {
-    const result = Array.from(list);
-    const [removed] = result.splice(startIndex, 1);
-    result.splice(endIndex, 0, removed);
-
-    return result;
-  };
-
-  const getStyle = (style, snapshot) => {
+  const getDraggableStyle = (style, snapshot) => {
+    // lock x axis when dragging
     if (style.transform) {
       const axisLockX = `${style.transform.split(",").shift()}, 0px)`;
       return {
@@ -41,21 +47,6 @@ export const CourseTabs = () => {
     return style;
   };
 
-  const onDragEnd = (result) => {
-    // dropped outside the list
-    if (!result.destination) {
-      return;
-    }
-
-    const reorderedTabs = reorder(
-      tabs,
-      result.source.index,
-      result.destination.index
-    );
-    handleChange(result.destination.index);
-    dispatch(courseTabActions("REORDER_TABS", reorderedTabs));
-  };
-
   return (
     <div className="cs-tabs-container">
       <DragDropContext onDragEnd={onDragEnd}>
@@ -63,7 +54,6 @@ export const CourseTabs = () => {
           {(droppableProvided, droppableSnapshot) => (
             <div
               ref={droppableProvided.innerRef}
-              // style={getListStyle(snapshot.isDraggingOver)}
               {...droppableProvided.droppableProps}
               className="cs-tabs-root"
             >
@@ -76,21 +66,20 @@ export const CourseTabs = () => {
                       ref={draggableProvided.innerRef}
                       {...draggableProvided.draggableProps}
                       {...draggableProvided.dragHandleProps}
-                      style={getStyle(
+                      style={getDraggableStyle(
                         draggableProvided.draggableProps.style,
                         draggableSnapshot
                       )}
-                      // style={getItemStyle(
-                      //   snapshot.isDragging,
-                      //   provided.draggableProps.style
-                      // )}
                     >
                       <span className="cs-tab-name">{tab}</span>
                       <Button
                         type="text"
                         size="small"
                         icon={<CloseOutlined style={{ fontSize: "12px" }} />}
-                        onClick={() => handleEdit(index, "remove")}
+                        onClick={(e) => {
+                          e.stopPropagation(); // stop propagation for above tab onclick event
+                          dispatch(courseTabActions("REMOVE_TAB", index));
+                        }}
                       />
                     </div>
                   )}

@@ -5,6 +5,10 @@
   ); // 20vw - width of menu sidebar, 2px is tab margin-left
   width: 100vw;
   height: fit-content;
+
+  ::-webkit-scrollbar {
+    height: 10px;
+  }
 }
 
 .cs-tabs-root {
@@ -13,31 +17,31 @@
   min-height: 55px;
   height: fit-content;
   padding-top: 15px;
-}
 
-.cs-tab {
-  border-radius: 10px 0 0 0 !important;
-  background-color: #fafafa;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;
-  padding: 8px 6px 8px 16px;
-  margin-left: 2px;
-  border: 1px solid #f0f0f0;
-  transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-}
+  .cs-tab {
+    border-radius: 10px 0 0 0 !important;
+    background-color: #fafafa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 6px 8px 16px;
+    margin-left: 2px;
+    border: 1px solid #f0f0f0;
+    transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 
-.cs-tab:hover {
-  color: #9254de;
-}
+    &.active {
+      background-color: #fff;
+      border-bottom-color: #fff;
+      color: #9254de;
+    }
 
-.cs-tab .cs-tab-name {
-  cursor: pointer;
-}
+    &:hover {
+      color: #9254de;
+    }
 
-.cs-tab.active {
-  background-color: #fff;
-  border-bottom-color: #fff;
-  color: #9254de;
+    .cs-tab-name {
+      cursor: pointer;
+    }
+  }
 }
