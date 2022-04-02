@@ -20,7 +20,7 @@
             "4528",
             ")"
         ],
-        "broke at": "Index 1, must"
+        "broke at": "Index 2, be"
     },
     "AERO4110": {
         "condition": {
@@ -61,7 +61,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 4, This"
+        "broke at": "Index 5, course"
     },
     "ARCH1101": {
         "condition": {
@@ -89,7 +89,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, Currently"
+        "broke at": "Index 2, program"
     },
     "ARTS1064": {
         "condition": {
@@ -102,7 +102,7 @@
             "MDIA1006",
             ")"
         ],
-        "broke at": "Index 1, Equivalent:"
+        "broke at": "Index 2, MDIA1006"
     },
     "ARTS1451": {
         "condition": {
@@ -118,7 +118,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS1453": {
         "condition": {
@@ -134,7 +134,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS1481": {
         "condition": {
@@ -150,7 +150,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS1511": {
         "condition": {
@@ -166,7 +166,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS1541": {
         "condition": {
@@ -182,7 +182,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS1571": {
         "condition": {
@@ -198,7 +198,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS1621": {
         "condition": {
@@ -214,7 +214,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS1631": {
         "condition": {
@@ -230,7 +230,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS1661": {
         "condition": {
@@ -246,7 +246,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS2020": {
         "condition": {
@@ -293,7 +293,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "ARTS2129": {
         "condition": {
@@ -308,7 +308,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "ARTS2450": {
         "condition": {
@@ -324,7 +324,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS2451": {
         "condition": {
@@ -340,7 +340,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS2452": {
         "condition": {
@@ -362,7 +362,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 9, language"
+        "broke at": "Index 10, placement"
     },
     "ARTS2461": {
         "condition": {
@@ -378,7 +378,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS2462": {
         "condition": {
@@ -394,7 +394,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS2480": {
         "condition": {
@@ -410,7 +410,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS2481": {
         "condition": {
@@ -426,7 +426,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS2510": {
         "condition": {
@@ -442,7 +442,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS2511": {
         "condition": {
@@ -458,7 +458,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS2570": {
         "condition": {
@@ -474,7 +474,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS2571": {
         "condition": {
@@ -490,7 +490,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS2630": {
         "condition": {
@@ -506,7 +506,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS2631": {
         "condition": {
@@ -522,7 +522,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS2660": {
         "condition": {
@@ -538,7 +538,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS2661": {
         "condition": {
@@ -554,7 +554,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS2852": {
         "condition": {
@@ -588,7 +588,7 @@
             "major",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "ARTS3013": {
         "condition": {
@@ -628,7 +628,7 @@
             "65WAM",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, the"
     },
     "ARTS3022": {
         "condition": {
@@ -660,7 +660,7 @@
             "ARTS3046",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3023": {
         "condition": {
@@ -692,7 +692,7 @@
             "ARTS3051",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3025": {
         "condition": {
@@ -722,7 +722,7 @@
             "English",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3030": {
         "condition": {
@@ -744,7 +744,7 @@
             "Minor",
             ")"
         ],
-        "broke at": "Index 6, in"
+        "broke at": "Index 7, an"
     },
     "ARTS3039": {
         "condition": {
@@ -771,7 +771,7 @@
             "English",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3040": {
         "condition": {
@@ -798,7 +798,7 @@
             "English",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3045": {
         "condition": {
@@ -825,7 +825,7 @@
             "English",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3047": {
         "condition": {
@@ -852,7 +852,7 @@
             "English",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3048": {
         "condition": {
@@ -879,7 +879,7 @@
             "English",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3049": {
         "condition": {
@@ -911,7 +911,7 @@
             "Technology",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3050": {
         "condition": {
@@ -938,7 +938,7 @@
             "English",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3054": {
         "condition": {
@@ -965,7 +965,7 @@
             "English",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3060": {
         "condition": {
@@ -1017,7 +1017,7 @@
             "degree",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3061": {
         "condition": {
@@ -1051,7 +1051,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 7, ARTS2065."
+        "broke at": "Index 8, ||"
     },
     "ARTS3062": {
         "condition": {
@@ -1079,7 +1079,7 @@
             "Studies",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3063": {
         "condition": {
@@ -1112,7 +1112,7 @@
             "Technology",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3064": {
         "condition": {
@@ -1142,7 +1142,7 @@
             "MCT",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3065": {
         "condition": {
@@ -1170,7 +1170,7 @@
             "Studies",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3066": {
         "condition": {
@@ -1200,7 +1200,7 @@
             "MCT",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3090": {
         "condition": {
@@ -1225,7 +1225,7 @@
             "Technology",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, Media,"
     },
     "ARTS3091": {
         "condition": {
@@ -1270,7 +1270,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3092": {
         "condition": {
@@ -1315,7 +1315,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3093": {
         "condition": {
@@ -1360,7 +1360,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3096": {
         "condition": {
@@ -1405,7 +1405,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3097": {
         "condition": {
@@ -1450,7 +1450,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3122": {
         "condition": {
@@ -1477,7 +1477,7 @@
             "Stream",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, the"
     },
     "ARTS3123": {
         "condition": {
@@ -1510,7 +1510,7 @@
             "Studies",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3124": {
         "condition": {
@@ -1540,7 +1540,7 @@
             "Studies",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3125": {
         "condition": {
@@ -1585,7 +1585,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3130": {
         "condition": {
@@ -1628,7 +1628,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3131": {
         "condition": {
@@ -1661,7 +1661,7 @@
             "Studies",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3132": {
         "condition": {
@@ -1691,7 +1691,7 @@
             "Studies",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3212": {
         "condition": {
@@ -1734,7 +1734,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3216": {
         "condition": {
@@ -1782,7 +1782,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, Asian"
     },
     "ARTS3217": {
         "condition": {
@@ -1831,7 +1831,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, Asian"
     },
     "ARTS3218": {
         "condition": {
@@ -1872,7 +1872,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3220": {
         "condition": {
@@ -1918,7 +1918,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3240": {
         "condition": {
@@ -1939,7 +1939,7 @@
             "minor",
             ")"
         ],
-        "broke at": "Index 3, enrolment"
+        "broke at": "Index 4, in"
     },
     "ARTS3241": {
         "condition": {
@@ -1985,7 +1985,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 4, at"
+        "broke at": "Index 5, lv"
     },
     "ARTS3242": {
         "condition": {
@@ -2029,7 +2029,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3243": {
         "condition": {
@@ -2057,7 +2057,7 @@
             "Humanities",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3245": {
         "condition": {
@@ -2088,7 +2088,7 @@
             "Studies",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3270": {
         "condition": {
@@ -2110,7 +2110,7 @@
             "minor",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "ARTS3283": {
         "condition": {
@@ -2137,7 +2137,7 @@
             "History",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3289": {
         "condition": {
@@ -2164,7 +2164,7 @@
             "History",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3290": {
         "condition": {
@@ -2191,7 +2191,7 @@
             "History",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3292": {
         "condition": {
@@ -2237,7 +2237,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3295": {
         "condition": {
@@ -2276,7 +2276,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3330": {
         "condition": {
@@ -2309,7 +2309,7 @@
             "Studies",
             ")"
         ],
-        "broke at": "Index 3, enrolment"
+        "broke at": "Index 4, in"
     },
     "ARTS3360": {
         "condition": {
@@ -2329,7 +2329,7 @@
             "minor",
             ")"
         ],
-        "broke at": "Index 3, enrolment"
+        "broke at": "Index 4, in"
     },
     "ARTS3368": {
         "condition": {
@@ -2356,7 +2356,7 @@
             "Philosophy",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3373": {
         "condition": {
@@ -2383,7 +2383,7 @@
             "Philosophy",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3377": {
         "condition": {
@@ -2410,7 +2410,7 @@
             "Philosophy",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3378": {
         "condition": {
@@ -2437,7 +2437,7 @@
             "Philosophy",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3450": {
         "condition": {
@@ -2455,7 +2455,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 5, language"
+        "broke at": "Index 6, placement"
     },
     "ARTS3451": {
         "condition": {
@@ -2471,7 +2471,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS3452": {
         "condition": {
@@ -2487,7 +2487,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS3453": {
         "condition": {
@@ -2503,7 +2503,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS3454": {
         "condition": {
@@ -2525,7 +2525,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 8, or"
+        "broke at": "Index 9, language"
     },
     "ARTS3455": {
         "condition": {
@@ -2549,7 +2549,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 11, language"
+        "broke at": "Index 12, placement"
     },
     "ARTS3456": {
         "condition": {
@@ -2573,7 +2573,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 10, or"
+        "broke at": "Index 11, language"
     },
     "ARTS3458": {
         "condition": {
@@ -2611,7 +2611,7 @@
             "major/minor",
             ")"
         ],
-        "broke at": "Index 3, ARTS3453,"
+        "broke at": "Index 4, ARTS2452"
     },
     "ARTS3462": {
         "condition": {
@@ -2637,7 +2637,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 13, language"
+        "broke at": "Index 14, placement"
     },
     "ARTS3463": {
         "condition": {
@@ -2663,7 +2663,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 13, language"
+        "broke at": "Index 14, placement"
     },
     "ARTS3480": {
         "condition": {
@@ -2680,7 +2680,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 1, rerequisite:"
+        "broke at": "Index 2, ARTS2481"
     },
     "ARTS3481": {
         "condition": {
@@ -2696,7 +2696,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS3482": {
         "condition": {
@@ -2712,7 +2712,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS3483": {
         "condition": {
@@ -2728,7 +2728,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS3484": {
         "condition": {
@@ -2748,7 +2748,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 7, language"
+        "broke at": "Index 8, placement"
     },
     "ARTS3488": {
         "condition": {
@@ -2768,7 +2768,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 7, language"
+        "broke at": "Index 8, placement"
     },
     "ARTS3490": {
         "condition": {
@@ -2794,7 +2794,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 1, one"
+        "broke at": "Index 2, of"
     },
     "ARTS3491": {
         "condition": {
@@ -2814,7 +2814,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 7, language"
+        "broke at": "Index 8, placement"
     },
     "ARTS3510": {
         "condition": {
@@ -2830,7 +2830,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS3511": {
         "condition": {
@@ -2846,7 +2846,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS3570": {
         "condition": {
@@ -2862,7 +2862,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS3571": {
         "condition": {
@@ -2878,7 +2878,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS3577": {
         "condition": {
@@ -2897,7 +2897,7 @@
             "interview",
             ")"
         ],
-        "broke at": "Index 3, written"
+        "broke at": "Index 4, language"
     },
     "ARTS3630": {
         "condition": {
@@ -2913,7 +2913,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS3631": {
         "condition": {
@@ -2929,7 +2929,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS3632": {
         "condition": {
@@ -2945,7 +2945,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS3633": {
         "condition": {
@@ -2961,7 +2961,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS3634": {
         "condition": {
@@ -2977,7 +2977,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS3636": {
         "condition": {
@@ -3010,7 +3010,7 @@
             "major/minor",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "ARTS3638": {
         "condition": {
@@ -3026,7 +3026,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS3641": {
         "condition": {
@@ -3042,7 +3042,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS3643": {
         "condition": {
@@ -3058,7 +3058,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS3660": {
         "condition": {
@@ -3074,7 +3074,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS3661": {
         "condition": {
@@ -3090,7 +3090,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 3, language"
+        "broke at": "Index 4, placement"
     },
     "ARTS3664": {
         "condition": {
@@ -3112,7 +3112,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 9, language"
+        "broke at": "Index 10, placement"
     },
     "ARTS3665": {
         "condition": {
@@ -3134,7 +3134,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 9, langauage"
+        "broke at": "Index 10, placement"
     },
     "ARTS3667": {
         "condition": {
@@ -3158,7 +3158,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 11, language"
+        "broke at": "Index 12, placement"
     },
     "ARTS3690": {
         "condition": {
@@ -3185,7 +3185,7 @@
             "Linguistics",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3695": {
         "condition": {
@@ -3212,7 +3212,7 @@
             "Linguistics",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3750": {
         "condition": {
@@ -3254,7 +3254,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3751": {
         "condition": {
@@ -3277,7 +3277,7 @@
             "major",
             ")"
         ],
-        "broke at": "Index 3, enrolment"
+        "broke at": "Index 4, in"
     },
     "ARTS3755": {
         "condition": {
@@ -3319,7 +3319,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3756": {
         "condition": {
@@ -3361,7 +3361,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3757": {
         "condition": {
@@ -3392,7 +3392,7 @@
             "Development",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3758": {
         "condition": {
@@ -3408,7 +3408,7 @@
             "consent",
             ")"
         ],
-        "broke at": "Index 3, enrolment"
+        "broke at": "Index 4, with"
     },
     "ARTS3759": {
         "condition": {
@@ -3448,7 +3448,7 @@
             "enrolment",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, with"
     },
     "ARTS3780": {
         "condition": {
@@ -3496,7 +3496,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, European"
     },
     "ARTS3783": {
         "condition": {
@@ -3535,7 +3535,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3786": {
         "condition": {
@@ -3578,7 +3578,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, European"
     },
     "ARTS3787": {
         "condition": {
@@ -3628,7 +3628,7 @@
             "History",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3810": {
         "condition": {
@@ -3653,7 +3653,7 @@
             "major",
             ")"
         ],
-        "broke at": "Index 3, enrolment"
+        "broke at": "Index 4, in"
     },
     "ARTS3812": {
         "condition": {
@@ -3695,7 +3695,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3814": {
         "condition": {
@@ -3731,7 +3731,7 @@
             "Relations",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3819": {
         "condition": {
@@ -3770,7 +3770,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3820": {
         "condition": {
@@ -3800,7 +3800,7 @@
             "Relations",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3821": {
         "condition": {
@@ -3830,7 +3830,7 @@
             "Relations",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3822": {
         "condition": {
@@ -3860,7 +3860,7 @@
             "Relations",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3850": {
         "condition": {
@@ -3890,7 +3890,7 @@
             "Relations",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3870": {
         "condition": {
@@ -3913,7 +3913,7 @@
             "minor",
             ")"
         ],
-        "broke at": "Index 3, enrolment"
+        "broke at": "Index 4, in"
     },
     "ARTS3871": {
         "condition": {
@@ -3964,7 +3964,7 @@
             "CRIM",
             ")"
         ],
-        "broke at": "Index 4, lv1"
+        "broke at": "Index 5, &&"
     },
     "ARTS3872": {
         "condition": {
@@ -4007,7 +4007,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3874": {
         "condition": {
@@ -4045,7 +4045,7 @@
             "Anthropology",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3875": {
         "condition": {
@@ -4079,7 +4079,7 @@
             "Anthropology",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3883": {
         "condition": {
@@ -4111,7 +4111,7 @@
             "Anthropology",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3885": {
         "condition": {
@@ -4149,7 +4149,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3886": {
         "condition": {
@@ -4183,7 +4183,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 4, L1"
+        "broke at": "Index 5, &&"
     },
     "ARTS3900": {
         "condition": {
@@ -4213,7 +4213,7 @@
             "History",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3901": {
         "condition": {
@@ -4243,7 +4243,7 @@
             "Philosophy",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, one"
     },
     "ARTS3991": {
         "condition": {
@@ -4277,7 +4277,7 @@
             "required",
             ")"
         ],
-        "broke at": "Index 3, enrolment"
+        "broke at": "Index 4, in"
     },
     "ARTS4100": {
         "condition": {
@@ -4299,7 +4299,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4202": {
         "condition": {
@@ -4321,7 +4321,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4247": {
         "condition": {
@@ -4342,7 +4342,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4249": {
         "condition": {
@@ -4363,7 +4363,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4266": {
         "condition": {
@@ -4388,7 +4388,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4268": {
         "condition": {
@@ -4413,7 +4413,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4600": {
         "condition": {
@@ -4431,7 +4431,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4601": {
         "condition": {
@@ -4449,7 +4449,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4602": {
         "condition": {
@@ -4467,7 +4467,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4604": {
         "condition": {
@@ -4484,7 +4484,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4605": {
         "condition": {
@@ -4501,7 +4501,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4606": {
         "condition": {
@@ -4518,7 +4518,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4608": {
         "condition": {
@@ -4536,7 +4536,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4609": {
         "condition": {
@@ -4554,7 +4554,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4610": {
         "condition": {
@@ -4572,7 +4572,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4612": {
         "condition": {
@@ -4591,7 +4591,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4613": {
         "condition": {
@@ -4610,7 +4610,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4614": {
         "condition": {
@@ -4629,7 +4629,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4616": {
         "condition": {
@@ -4648,7 +4648,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4617": {
         "condition": {
@@ -4667,7 +4667,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4618": {
         "condition": {
@@ -4686,7 +4686,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4620": {
         "condition": {
@@ -4704,7 +4704,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4621": {
         "condition": {
@@ -4722,7 +4722,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4622": {
         "condition": {
@@ -4740,7 +4740,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4700": {
         "condition": {
@@ -4757,7 +4757,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4701": {
         "condition": {
@@ -4774,7 +4774,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4702": {
         "condition": {
@@ -4791,7 +4791,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4704": {
         "condition": {
@@ -4808,7 +4808,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4705": {
         "condition": {
@@ -4825,7 +4825,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4706": {
         "condition": {
@@ -4842,7 +4842,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4712": {
         "condition": {
@@ -4859,7 +4859,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4713": {
         "condition": {
@@ -4876,7 +4876,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4714": {
         "condition": {
@@ -4893,7 +4893,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4810": {
         "condition": {
@@ -4911,7 +4911,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4811": {
         "condition": {
@@ -4929,7 +4929,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4812": {
         "condition": {
@@ -4947,7 +4947,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4814": {
         "condition": {
@@ -4965,7 +4965,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4815": {
         "condition": {
@@ -4983,7 +4983,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4816": {
         "condition": {
@@ -5001,7 +5001,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4818": {
         "condition": {
@@ -5019,7 +5019,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4819": {
         "condition": {
@@ -5037,7 +5037,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4820": {
         "condition": {
@@ -5055,7 +5055,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4822": {
         "condition": {
@@ -5073,7 +5073,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4823": {
         "condition": {
@@ -5091,7 +5091,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4824": {
         "condition": {
@@ -5109,7 +5109,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4826": {
         "condition": {
@@ -5127,7 +5127,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4827": {
         "condition": {
@@ -5145,7 +5145,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4828": {
         "condition": {
@@ -5163,7 +5163,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4830": {
         "condition": {
@@ -5181,7 +5181,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4831": {
         "condition": {
@@ -5199,7 +5199,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4832": {
         "condition": {
@@ -5217,7 +5217,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4834": {
         "condition": {
@@ -5234,7 +5234,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4835": {
         "condition": {
@@ -5251,7 +5251,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4836": {
         "condition": {
@@ -5268,7 +5268,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4838": {
         "condition": {
@@ -5286,7 +5286,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4839": {
         "condition": {
@@ -5304,7 +5304,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4840": {
         "condition": {
@@ -5322,7 +5322,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4900": {
         "condition": {
@@ -5340,7 +5340,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4901": {
         "condition": {
@@ -5358,7 +5358,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4902": {
         "condition": {
@@ -5376,7 +5376,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4904": {
         "condition": {
@@ -5394,7 +5394,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4905": {
         "condition": {
@@ -5412,7 +5412,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4906": {
         "condition": {
@@ -5430,7 +5430,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4912": {
         "condition": {
@@ -5448,7 +5448,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4913": {
         "condition": {
@@ -5466,7 +5466,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4914": {
         "condition": {
@@ -5484,7 +5484,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4916": {
         "condition": {
@@ -5501,7 +5501,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4917": {
         "condition": {
@@ -5518,7 +5518,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4918": {
         "condition": {
@@ -5535,7 +5535,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4920": {
         "condition": {
@@ -5554,7 +5554,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4921": {
         "condition": {
@@ -5573,7 +5573,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4922": {
         "condition": {
@@ -5592,7 +5592,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4924": {
         "condition": {
@@ -5612,7 +5612,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4925": {
         "condition": {
@@ -5632,7 +5632,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4926": {
         "condition": {
@@ -5652,7 +5652,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4927": {
         "condition": {
@@ -5670,7 +5670,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4928": {
         "condition": {
@@ -5688,7 +5688,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ARTS4929": {
         "condition": {
@@ -5706,7 +5706,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ATSI3008": {
         "condition": {
@@ -5739,7 +5739,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 2, ,"
+        "broke at": "Index 3, enrolment"
     },
     "AVIA1111": {
         "condition": {
@@ -5752,7 +5752,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 1, Aviation"
+        "broke at": "Index 2, Program"
     },
     "AVIA1321": {
         "condition": {
@@ -5764,7 +5764,7 @@
             "None",
             ")"
         ],
-        "broke at": "Index 1, None"
+        "broke at": "Index 2, )"
     },
     "AVIA2117": {
         "condition": {
@@ -5778,7 +5778,7 @@
             "AVIA2111-2116",
             ")"
         ],
-        "broke at": "Index 3, AVIA2111-2116"
+        "broke at": "Index 4, )"
     },
     "AVIA3199": {
         "condition": {
@@ -5861,7 +5861,7 @@
             "year",
             ")"
         ],
-        "broke at": "Index 1, a"
+        "broke at": "Index 2, Science"
     },
     "AVIA3299": {
         "condition": {
@@ -5911,7 +5911,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 1, Must"
+        "broke at": "Index 2, complete"
     },
     "AVIA3900": {
         "condition": {
@@ -5924,7 +5924,7 @@
             "72UOC",
             ")"
         ],
-        "broke at": "Index 1, Minimum"
+        "broke at": "Index 2, 72UOC"
     },
     "AVIA4002": {
         "condition": {
@@ -5937,7 +5937,7 @@
             "Honours",
             ")"
         ],
-        "broke at": "Index 1, AVIA"
+        "broke at": "Index 2, Honours"
     },
     "AVIA4003": {
         "condition": {
@@ -5950,7 +5950,7 @@
             "Honours",
             ")"
         ],
-        "broke at": "Index 1, AVIA"
+        "broke at": "Index 2, Honours"
     },
     "AVIA4004": {
         "condition": {
@@ -5963,7 +5963,7 @@
             "Honours",
             ")"
         ],
-        "broke at": "Index 1, AVIA"
+        "broke at": "Index 2, Honours"
     },
     "BABS3021": {
         "condition": {
@@ -5991,7 +5991,7 @@
             "BIOC2201",
             ")"
         ],
-        "broke at": "Index 2, from"
+        "broke at": "Index 3, MICR2011"
     },
     "BABS3041": {
         "condition": {
@@ -6014,7 +6014,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, BIOC2101"
+        "broke at": "Index 4, BIOC2181and"
     },
     "BABS3061": {
         "condition": {
@@ -6029,7 +6029,7 @@
             "BIOC2201",
             ")"
         ],
-        "broke at": "Index 3, LIFE2101,"
+        "broke at": "Index 4, BIOC2201"
     },
     "BABS3199": {
         "condition": {
@@ -6112,7 +6112,7 @@
             "year",
             ")"
         ],
-        "broke at": "Index 1, a"
+        "broke at": "Index 2, science"
     },
     "BABS3299": {
         "condition": {
@@ -6162,7 +6162,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 1, Must"
+        "broke at": "Index 2, complete"
     },
     "BABS4516": {
         "condition": {
@@ -6176,7 +6176,7 @@
             "plan",
             ")"
         ],
-        "broke at": "Index 1, BABS"
+        "broke at": "Index 2, Honours"
     },
     "BEES3199": {
         "condition": {
@@ -6258,7 +6258,7 @@
             "year",
             ")"
         ],
-        "broke at": "Index 1, a"
+        "broke at": "Index 2, Science"
     },
     "BEES3299": {
         "condition": {
@@ -6308,7 +6308,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 1, Must"
+        "broke at": "Index 2, complete"
     },
     "BEES4517": {
         "condition": {
@@ -6324,7 +6324,7 @@
             "Plan",
             ")"
         ],
-        "broke at": "Index 1, Enrolld"
+        "broke at": "Index 2, in"
     },
     "BEES6741": {
         "condition": {
@@ -6339,7 +6339,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 2, of"
+        "broke at": "Index 3, Science"
     },
     "BEIL0008": {
         "condition": {
@@ -6402,7 +6402,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 3, enrolment"
+        "broke at": "Index 4, in"
     },
     "BEIL6013": {
         "condition": {
@@ -6431,7 +6431,7 @@
             "course",
             ")"
         ],
-        "broke at": "Index 1, UG"
+        "broke at": "Index 2, must"
     },
     "BENV6713": {
         "condition": {
@@ -6461,7 +6461,7 @@
             "BIOC2201",
             ")"
         ],
-        "broke at": "Index 3, LIFE2101,"
+        "broke at": "Index 4, BIOC2201"
     },
     "BIOC3671": {
         "condition": {
@@ -6490,7 +6490,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 3, BIOC2201."
+        "broke at": "Index 4, Restricted"
     },
     "BIOM4951": {
         "condition": {
@@ -6506,7 +6506,7 @@
             "core",
             ")"
         ],
-        "broke at": "Index 3, 3rd"
+        "broke at": "Index 4, year"
     },
     "BIOM4952": {
         "condition": {
@@ -6523,7 +6523,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, Research"
+        "broke at": "Index 2, Thesis"
     },
     "BIOM4953": {
         "condition": {
@@ -6540,7 +6540,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, Research"
+        "broke at": "Index 2, Thesis"
     },
     "BIOS3081": {
         "condition": {
@@ -6552,7 +6552,7 @@
             "None",
             ")"
         ],
-        "broke at": "Index 1, None"
+        "broke at": "Index 2, )"
     },
     "BIOS3161": {
         "condition": {
@@ -6570,7 +6570,7 @@
             "BIOS2061",
             ")"
         ],
-        "broke at": "Index 2, from"
+        "broke at": "Index 3, BIOS2031"
     },
     "BIOS3681": {
         "condition": {
@@ -6582,7 +6582,7 @@
             "None",
             ")"
         ],
-        "broke at": "Index 1, None"
+        "broke at": "Index 2, )"
     },
     "BLDG1011": {
         "condition": {
@@ -6604,7 +6604,7 @@
             "minor",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "BLDG1012": {
         "condition": {
@@ -6618,7 +6618,7 @@
             "3332",
             ")"
         ],
-        "broke at": "Index 1, Program"
+        "broke at": "Index 2, 3331"
     },
     "BLDG1013": {
         "condition": {
@@ -6640,7 +6640,7 @@
             "minor",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "BLDG1014": {
         "condition": {
@@ -6654,7 +6654,7 @@
             "3332",
             ")"
         ],
-        "broke at": "Index 1, Program"
+        "broke at": "Index 2, 3331"
     },
     "BLDG1022": {
         "condition": {
@@ -6668,7 +6668,7 @@
             "3332",
             ")"
         ],
-        "broke at": "Index 1, Program"
+        "broke at": "Index 2, 3331"
     },
     "BLDG1023": {
         "condition": {
@@ -6682,7 +6682,7 @@
             "3332",
             ")"
         ],
-        "broke at": "Index 1, Program"
+        "broke at": "Index 2, 3331"
     },
     "BLDG1024": {
         "condition": {
@@ -6704,7 +6704,7 @@
             "minor",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "BLDG4018": {
         "condition": {
@@ -6724,7 +6724,7 @@
             "over",
             ")"
         ],
-        "broke at": "Index 1, Program"
+        "broke at": "Index 2, 4522"
     },
     "BLDG4019": {
         "condition": {
@@ -6737,7 +6737,7 @@
             "4522",
             ")"
         ],
-        "broke at": "Index 1, Program"
+        "broke at": "Index 2, 4522"
     },
     "BLDG4020": {
         "condition": {
@@ -6750,7 +6750,7 @@
             "4522",
             ")"
         ],
-        "broke at": "Index 1, Program"
+        "broke at": "Index 2, 4522"
     },
     "BLDG4022": {
         "condition": {
@@ -6770,7 +6770,7 @@
             "over",
             ")"
         ],
-        "broke at": "Index 1, Program"
+        "broke at": "Index 2, 4522"
     },
     "BLDG4023": {
         "condition": {
@@ -6790,7 +6790,7 @@
             "over",
             ")"
         ],
-        "broke at": "Index 1, Program"
+        "broke at": "Index 2, 4522"
     },
     "BLDG4024": {
         "condition": {
@@ -6810,7 +6810,7 @@
             "over",
             ")"
         ],
-        "broke at": "Index 1, Program"
+        "broke at": "Index 2, 4522"
     },
     "BLDG4501": {
         "condition": {
@@ -6830,7 +6830,7 @@
             "over",
             ")"
         ],
-        "broke at": "Index 1, Program"
+        "broke at": "Index 2, 4522"
     },
     "CDEV2000": {
         "condition": {
@@ -6859,7 +6859,7 @@
             "30UOC",
             ")"
         ],
-        "broke at": "Index 1, is"
+        "broke at": "Index 2, 30UOC"
     },
     "CDEV3101": {
         "condition": {
@@ -6882,7 +6882,7 @@
             "course",
             ")"
         ],
-        "broke at": "Index 1, are"
+        "broke at": "Index 2, required"
     },
     "CDEV3200": {
         "condition": {
@@ -6903,7 +6903,7 @@
             "course",
             ")"
         ],
-        "broke at": "Index 1, need"
+        "broke at": "Index 2, to"
     },
     "CEIC2000": {
         "condition": {
@@ -6917,7 +6917,7 @@
             "PHY1131",
             ")"
         ],
-        "broke at": "Index 3, PHY1131"
+        "broke at": "Index 4, )"
     },
     "CEIC2001": {
         "condition": {
@@ -6942,7 +6942,7 @@
             "DPST1014",
             ")"
         ],
-        "broke at": "Index 3, PHY1131"
+        "broke at": "Index 4, ||"
     },
     "CEIC3006": {
         "condition": {
@@ -6959,7 +6959,7 @@
             "MATH2089",
             ")"
         ],
-        "broke at": "Index 5, MATH2019,"
+        "broke at": "Index 6, MATH2089"
     },
     "CEIC4951": {
         "condition": {
@@ -6975,7 +6975,7 @@
             "core",
             ")"
         ],
-        "broke at": "Index 3, 3rd"
+        "broke at": "Index 4, year"
     },
     "CEIC4952": {
         "condition": {
@@ -6992,7 +6992,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, Research"
+        "broke at": "Index 2, Thesis"
     },
     "CEIC4953": {
         "condition": {
@@ -7009,7 +7009,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, Research"
+        "broke at": "Index 2, Thesis"
     },
     "CHEM1041": {
         "condition": {
@@ -7039,7 +7039,7 @@
             "major",
             ")"
         ],
-        "broke at": "Index 4, with"
+        "broke at": "Index 5, a"
     },
     "CHEM1051": {
         "condition": {
@@ -7068,7 +7068,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "CHEM1061": {
         "condition": {
@@ -7103,7 +7103,7 @@
             "above",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "CHEM1151": {
         "condition": {
@@ -7127,7 +7127,7 @@
             "4755",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "CHEM1521": {
         "condition": {
@@ -7144,7 +7144,7 @@
             "equivalent",
             ")"
         ],
-        "broke at": "Index 1, of"
+        "broke at": "Index 2, CHEM1011"
     },
     "CHEM1777": {
         "condition": {
@@ -7161,7 +7161,7 @@
             "Science",
             ")"
         ],
-        "broke at": "Index 1, knowledge"
+        "broke at": "Index 2, is"
     },
     "CHEM1829": {
         "condition": {
@@ -7186,7 +7186,7 @@
             "major",
             ")"
         ],
-        "broke at": "Index 3, enrolment"
+        "broke at": "Index 4, in"
     },
     "CHEM1831": {
         "condition": {
@@ -7205,7 +7205,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, None"
+        "broke at": "Index 2, Must"
     },
     "CHEM2521": {
         "condition": {
@@ -7268,7 +7268,7 @@
             "programs",
             ")"
         ],
-        "broke at": "Index 1, This"
+        "broke at": "Index 2, is"
     },
     "CHEM2701": {
         "condition": {
@@ -7320,7 +7320,7 @@
             "Optometry",
             ")"
         ],
-        "broke at": "Index 1, First"
+        "broke at": "Index 2, year"
     },
     "CHEM3051": {
         "condition": {
@@ -7336,7 +7336,7 @@
             "CHEM3021",
             ")"
         ],
-        "broke at": "Index 1, Must"
+        "broke at": "Index 2, be"
     },
     "CHEM3199": {
         "condition": {
@@ -7418,7 +7418,7 @@
             "year",
             ")"
         ],
-        "broke at": "Index 1, a"
+        "broke at": "Index 2, Science"
     },
     "CHEM3299": {
         "condition": {
@@ -7467,7 +7467,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 1, Must"
+        "broke at": "Index 2, complete"
     },
     "CHEM4501": {
         "condition": {
@@ -7481,7 +7481,7 @@
             "Plan",
             ")"
         ],
-        "broke at": "Index 1, CHEM"
+        "broke at": "Index 2, Honours"
     },
     "CHEM4503": {
         "condition": {
@@ -7495,7 +7495,7 @@
             "Honours",
             ")"
         ],
-        "broke at": "Index 1, Medicinal"
+        "broke at": "Index 2, Chemistry"
     },
     "CHEM4512": {
         "condition": {
@@ -7509,7 +7509,7 @@
             "Honours",
             ")"
         ],
-        "broke at": "Index 1, Medicinal"
+        "broke at": "Index 2, Chemistry"
     },
     "CHEM4518": {
         "condition": {
@@ -7522,7 +7522,7 @@
             "Honours",
             ")"
         ],
-        "broke at": "Index 1, CHEM"
+        "broke at": "Index 2, Honours"
     },
     "CHEM6701": {
         "condition": {
@@ -7542,7 +7542,7 @@
             "CHEM2828",
             ")"
         ],
-        "broke at": "Index 2, of"
+        "broke at": "Index 3, CHEM2011,"
     },
     "CODE1240": {
         "condition": {
@@ -7558,7 +7558,7 @@
             "equivalent",
             ")"
         ],
-        "broke at": "Index 5, equivalent"
+        "broke at": "Index 6, )"
     },
     "CODE3100": {
         "condition": {
@@ -7576,7 +7576,7 @@
             "2270",
             ")"
         ],
-        "broke at": "Index 6, /CODE"
+        "broke at": "Index 7, 2270"
     },
     "COMP4951": {
         "condition": {
@@ -7597,7 +7597,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, 126UOC"
+        "broke at": "Index 4, BINF?H"
     },
     "CRIM2021": {
         "condition": {
@@ -7618,7 +7618,7 @@
             "programs",
             ")"
         ],
-        "broke at": "Index 1, CRIM2020,"
+        "broke at": "Index 2, not"
     },
     "CRIM2042": {
         "condition": {
@@ -7652,7 +7652,7 @@
             "CRIM3001",
             ")"
         ],
-        "broke at": "Index 7, enrolment"
+        "broke at": "Index 8, in"
     },
     "CRIM3000": {
         "condition": {
@@ -7680,7 +7680,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 3, enrolment"
+        "broke at": "Index 4, in"
     },
     "CRIM3011": {
         "condition": {
@@ -7712,7 +7712,7 @@
             "/Law",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, Criminology."
     },
     "CRIM3012": {
         "condition": {
@@ -7744,7 +7744,7 @@
             "/Law",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, Criminology."
     },
     "CRIM3017": {
         "condition": {
@@ -7776,7 +7776,7 @@
             "/Law",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, Criminology."
     },
     "CRIM3018": {
         "condition": {
@@ -7808,7 +7808,7 @@
             "/Law",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, Criminology."
     },
     "CRIM3019": {
         "condition": {
@@ -7840,7 +7840,7 @@
             "/Law",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, Criminology."
     },
     "CRIM3020": {
         "condition": {
@@ -7872,7 +7872,7 @@
             "/Law",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, Criminology."
     },
     "CRIM3022": {
         "condition": {
@@ -7921,7 +7921,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 11, Criminology."
     },
     "CRIM3025": {
         "condition": {
@@ -7967,7 +7967,7 @@
             "required",
             ")"
         ],
-        "broke at": "Index 3, CRIM1010,"
+        "broke at": "Index 4, CRIM1011"
     },
     "CRIM4001": {
         "condition": {
@@ -7984,7 +7984,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "CRIM4002": {
         "condition": {
@@ -8001,7 +8001,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "CRIM4003": {
         "condition": {
@@ -8018,7 +8018,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "CVEN4050": {
         "condition": {
@@ -8070,7 +8070,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, 132UOC"
+        "broke at": "Index 4, AEROAH"
     },
     "CVEN4701": {
         "condition": {
@@ -8086,7 +8086,7 @@
             "core",
             ")"
         ],
-        "broke at": "Index 3, 3rd"
+        "broke at": "Index 4, year"
     },
     "DART2151": {
         "condition": {
@@ -8136,7 +8136,7 @@
             "course",
             ")"
         ],
-        "broke at": "Index 1, 48UOC"
+        "broke at": "Index 3, in"
     },
     "DART3200": {
         "condition": {
@@ -8159,7 +8159,7 @@
             "enrolling",
             ")"
         ],
-        "broke at": "Index 1, must"
+        "broke at": "Index 2, complete"
     },
     "DART3203": {
         "condition": {
@@ -8197,7 +8197,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "DDES2200": {
         "condition": {
@@ -8212,7 +8212,7 @@
             "DDES1201",
             ")"
         ],
-        "broke at": "Index 1, Must"
+        "broke at": "Index 2, have"
     },
     "DDES4200": {
         "condition": {
@@ -8226,7 +8226,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 1, Honours"
+        "broke at": "Index 2, ["
     },
     "DESN2000": {
         "condition": {
@@ -8248,7 +8248,7 @@
             "requirements",
             ")"
         ],
-        "broke at": "Index 1, Please"
+        "broke at": "Index 2, refer"
     },
     "DESN3200": {
         "condition": {
@@ -8276,7 +8276,7 @@
             "72UOC",
             ")"
         ],
-        "broke at": "Index 1, at"
+        "broke at": "Index 2, least"
     },
     "DPBS1001": {
         "condition": {
@@ -8298,7 +8298,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 2, of"
+        "broke at": "Index 3, any"
     },
     "DPBS1002": {
         "condition": {
@@ -8320,7 +8320,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 2, of"
+        "broke at": "Index 3, any"
     },
     "DPBS1012": {
         "condition": {
@@ -8342,7 +8342,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 2, of"
+        "broke at": "Index 3, any"
     },
     "DPBS1100": {
         "condition": {
@@ -8363,7 +8363,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, UNSW"
+        "broke at": "Index 2, Global"
     },
     "DPBS1101": {
         "condition": {
@@ -8384,7 +8384,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, UNSW"
+        "broke at": "Index 2, Global"
     },
     "DPBS1102": {
         "condition": {
@@ -8406,7 +8406,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 4, GLDIP"
+        "broke at": "Index 5, &&"
     },
     "DPBS1110": {
         "condition": {
@@ -8428,7 +8428,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 2, of"
+        "broke at": "Index 3, any"
     },
     "DPBS1120": {
         "condition": {
@@ -8450,7 +8450,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 2, of"
+        "broke at": "Index 3, any"
     },
     "DPBS1140": {
         "condition": {
@@ -8471,7 +8471,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, UNSW"
+        "broke at": "Index 2, Global"
     },
     "DPBS1150": {
         "condition": {
@@ -8495,7 +8495,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 6, GLDIP"
+        "broke at": "Index 7, &&"
     },
     "DPBS1170": {
         "condition": {
@@ -8516,7 +8516,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 3, GLDIP"
+        "broke at": "Index 4, &&"
     },
     "DPBS1180": {
         "condition": {
@@ -8537,7 +8537,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 3, GLDIP"
+        "broke at": "Index 4, &&"
     },
     "DPBS1190": {
         "condition": {
@@ -8561,7 +8561,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 6, GLDIP"
+        "broke at": "Index 7, &&"
     },
     "DPBS1203": {
         "condition": {
@@ -8582,7 +8582,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, UNSW"
+        "broke at": "Index 2, Global"
     },
     "DPBS1501": {
         "condition": {
@@ -8604,7 +8604,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 2, of"
+        "broke at": "Index 3, any"
     },
     "DPBS1511": {
         "condition": {
@@ -8626,7 +8626,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 4, GLDIP"
+        "broke at": "Index 5, &&"
     },
     "DPBS1602": {
         "condition": {
@@ -8648,7 +8648,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 2, of"
+        "broke at": "Index 3, any"
     },
     "DPBS1603": {
         "condition": {
@@ -8670,7 +8670,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 2, of"
+        "broke at": "Index 3, any"
     },
     "DPBS1609": {
         "condition": {
@@ -8692,7 +8692,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 2, of"
+        "broke at": "Index 3, any"
     },
     "DPBS1613": {
         "condition": {
@@ -8714,7 +8714,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 2, of"
+        "broke at": "Index 3, any"
     },
     "DPBS1710": {
         "condition": {
@@ -8736,7 +8736,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 2, of"
+        "broke at": "Index 3, any"
     },
     "DPDE1001": {
         "condition": {
@@ -8756,7 +8756,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "DPDE1002": {
         "condition": {
@@ -8776,7 +8776,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "DPDE1003": {
         "condition": {
@@ -8796,7 +8796,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "DPDE1004": {
         "condition": {
@@ -8819,7 +8819,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 4, Enrolment"
+        "broke at": "Index 5, in"
     },
     "DPDE1005": {
         "condition": {
@@ -8840,7 +8840,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 2, Enrolment"
+        "broke at": "Index 3, in"
     },
     "DPDE1006": {
         "condition": {
@@ -8860,7 +8860,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "DPDE1007": {
         "condition": {
@@ -8880,7 +8880,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "DPDE1008": {
         "condition": {
@@ -8901,7 +8901,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 2, Enrolment"
+        "broke at": "Index 3, in"
     },
     "DPDE1009": {
         "condition": {
@@ -8922,7 +8922,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 2, Enrolment"
+        "broke at": "Index 3, in"
     },
     "DPDE1010": {
         "condition": {
@@ -8942,7 +8942,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "DPDE1011": {
         "condition": {
@@ -8965,7 +8965,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 3, DPDE1005."
+        "broke at": "Index 4, Enrolment"
     },
     "DPGE1001": {
         "condition": {
@@ -8986,7 +8986,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, UNSW"
+        "broke at": "Index 2, Global"
     },
     "DPGE1002": {
         "condition": {
@@ -9009,7 +9009,7 @@
             "DPGE1001",
             ")"
         ],
-        "broke at": "Index 1, UNSW"
+        "broke at": "Index 2, Global"
     },
     "DPGE1003": {
         "condition": {
@@ -9034,7 +9034,7 @@
             "DPGE1002",
             ")"
         ],
-        "broke at": "Index 1, UNSW"
+        "broke at": "Index 2, Global"
     },
     "DPHU1001": {
         "condition": {
@@ -9056,7 +9056,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "DPHU1002": {
         "condition": {
@@ -9078,7 +9078,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "DPHU1003": {
         "condition": {
@@ -9100,7 +9100,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "DPHU1004": {
         "condition": {
@@ -9122,7 +9122,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "DPHU1005": {
         "condition": {
@@ -9144,7 +9144,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "DPHU1006": {
         "condition": {
@@ -9166,7 +9166,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "DPHU1007": {
         "condition": {
@@ -9188,7 +9188,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "DPHU1008": {
         "condition": {
@@ -9210,7 +9210,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "DPST1013": {
         "condition": {
@@ -9231,7 +9231,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, UNSW"
+        "broke at": "Index 2, Global"
     },
     "DPST1014": {
         "condition": {
@@ -9254,7 +9254,7 @@
             "DPST1013",
             ")"
         ],
-        "broke at": "Index 1, UNSW"
+        "broke at": "Index 2, Global"
     },
     "DPST1021": {
         "condition": {
@@ -9279,7 +9279,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 1, UNSW"
+        "broke at": "Index 2, Global"
     },
     "DPST1022": {
         "condition": {
@@ -9308,7 +9308,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 1, UNSW"
+        "broke at": "Index 2, Global"
     },
     "DPST1023": {
         "condition": {
@@ -9333,7 +9333,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 1, UNSW"
+        "broke at": "Index 2, Global"
     },
     "DPST1024": {
         "condition": {
@@ -9367,7 +9367,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 1, UNSW"
+        "broke at": "Index 2, Global"
     },
     "DPST1031": {
         "condition": {
@@ -9388,7 +9388,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, UNSW"
+        "broke at": "Index 2, Global"
     },
     "DPST1032": {
         "condition": {
@@ -9411,7 +9411,7 @@
             "DPST1031",
             ")"
         ],
-        "broke at": "Index 1, UNSW"
+        "broke at": "Index 2, Global"
     },
     "DPST1041": {
         "condition": {
@@ -9432,7 +9432,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, UNSW"
+        "broke at": "Index 2, Global"
     },
     "DPST1051": {
         "condition": {
@@ -9453,7 +9453,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, UNSW"
+        "broke at": "Index 2, Global"
     },
     "DPST1052": {
         "condition": {
@@ -9474,7 +9474,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, UNSW"
+        "broke at": "Index 2, Global"
     },
     "DPST1061": {
         "condition": {
@@ -9495,7 +9495,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, UNSW"
+        "broke at": "Index 2, Global"
     },
     "DPST1071": {
         "condition": {
@@ -9516,7 +9516,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, UNSW"
+        "broke at": "Index 2, Global"
     },
     "DPST1072": {
         "condition": {
@@ -9543,7 +9543,7 @@
             "DPST1023",
             ")"
         ],
-        "broke at": "Index 1, UNSW"
+        "broke at": "Index 2, Global"
     },
     "DPST1081": {
         "condition": {
@@ -9564,7 +9564,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, UNSW"
+        "broke at": "Index 2, Global"
     },
     "DPST1091": {
         "condition": {
@@ -9585,7 +9585,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, UNSW"
+        "broke at": "Index 2, Global"
     },
     "DPST1092": {
         "condition": {
@@ -9608,7 +9608,7 @@
             "DPST1091",
             ")"
         ],
-        "broke at": "Index 1, UNSW"
+        "broke at": "Index 2, Global"
     },
     "ECON2101": {
         "condition": {
@@ -9633,7 +9633,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, ("
+        "broke at": "Index 8, ECON1202,"
     },
     "ECON2102": {
         "condition": {
@@ -9658,7 +9658,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, ("
+        "broke at": "Index 8, ECON1202,"
     },
     "ECON2112": {
         "condition": {
@@ -9683,7 +9683,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, ("
+        "broke at": "Index 8, ECON1202,"
     },
     "ECON2209": {
         "condition": {
@@ -9721,7 +9721,7 @@
             "course",
             ")"
         ],
-        "broke at": "Index 11, MATH1251."
+        "broke at": "Index 12, It"
     },
     "EDST2002": {
         "condition": {
@@ -9764,7 +9764,7 @@
             "course",
             ")"
         ],
-        "broke at": "Index 3, EDST1101,"
+        "broke at": "Index 4, EDST1104,"
     },
     "EDST2003": {
         "condition": {
@@ -9801,7 +9801,7 @@
             "4076",
             ")"
         ],
-        "broke at": "Index 9, enrolment"
+        "broke at": "Index 10, in"
     },
     "EDST2094": {
         "condition": {
@@ -9829,7 +9829,7 @@
             "enrolment",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "EDST4080": {
         "condition": {
@@ -9849,7 +9849,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "EDST4084": {
         "condition": {
@@ -9869,7 +9869,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "EDST4096": {
         "condition": {
@@ -9889,7 +9889,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "EDST4501": {
         "condition": {
@@ -9906,7 +9906,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "EDST4502": {
         "condition": {
@@ -9923,7 +9923,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "EDST4503": {
         "condition": {
@@ -9940,7 +9940,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "EDST4505": {
         "condition": {
@@ -9957,7 +9957,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "EDST4506": {
         "condition": {
@@ -9974,7 +9974,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "EDST4507": {
         "condition": {
@@ -9991,7 +9991,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "EDST6700": {
         "condition": {
@@ -10012,7 +10012,7 @@
             "4054",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "EDST6701": {
         "condition": {
@@ -10033,7 +10033,7 @@
             "4054",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "EDST6702": {
         "condition": {
@@ -10054,7 +10054,7 @@
             "4054",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "EDST6704": {
         "condition": {
@@ -10075,7 +10075,7 @@
             "4054",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "EDST6705": {
         "condition": {
@@ -10096,7 +10096,7 @@
             "4054",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "EDST6706": {
         "condition": {
@@ -10118,7 +10118,7 @@
             "4076",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "EDST6707": {
         "condition": {
@@ -10139,7 +10139,7 @@
             "4054",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "EDST6710": {
         "condition": {
@@ -10160,7 +10160,7 @@
             "4054",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "EDST6711": {
         "condition": {
@@ -10181,7 +10181,7 @@
             "4054",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "EDST6714": {
         "condition": {
@@ -10202,7 +10202,7 @@
             "4054",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "EDST6715": {
         "condition": {
@@ -10223,7 +10223,7 @@
             "4058",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "EDST6716": {
         "condition": {
@@ -10245,7 +10245,7 @@
             "4058",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "EDST6717": {
         "condition": {
@@ -10266,7 +10266,7 @@
             "4054",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "EDST6718": {
         "condition": {
@@ -10287,7 +10287,7 @@
             "4054",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "EDST6719": {
         "condition": {
@@ -10308,7 +10308,7 @@
             "4054",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "EDST6722": {
         "condition": {
@@ -10329,7 +10329,7 @@
             "4054",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "EDST6723": {
         "condition": {
@@ -10350,7 +10350,7 @@
             "4054",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "EDST6725": {
         "condition": {
@@ -10369,7 +10369,7 @@
             "4076",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "EDST6726": {
         "condition": {
@@ -10388,7 +10388,7 @@
             "4076",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "EDST6727": {
         "condition": {
@@ -10416,7 +10416,7 @@
             "4054",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "EDST6728": {
         "condition": {
@@ -10437,7 +10437,7 @@
             "3470",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "EDST6730": {
         "condition": {
@@ -10451,7 +10451,7 @@
             "EDST6760",
             ")"
         ],
-        "broke at": "Index 1, EDST6700."
+        "broke at": "Index 2, Corerequisite:"
     },
     "EDST6731": {
         "condition": {
@@ -10465,7 +10465,7 @@
             "EDST6760",
             ")"
         ],
-        "broke at": "Index 1, EDST6701."
+        "broke at": "Index 2, Corerequisite:"
     },
     "EDST6732": {
         "condition": {
@@ -10479,7 +10479,7 @@
             "EDST6760",
             ")"
         ],
-        "broke at": "Index 1, EDST6702."
+        "broke at": "Index 2, Corerequisite:"
     },
     "EDST6734": {
         "condition": {
@@ -10493,7 +10493,7 @@
             "EDST6760",
             ")"
         ],
-        "broke at": "Index 1, EDST6704."
+        "broke at": "Index 2, Corerequisite:"
     },
     "EDST6735": {
         "condition": {
@@ -10507,7 +10507,7 @@
             "EDST6760",
             ")"
         ],
-        "broke at": "Index 1, EDST6705."
+        "broke at": "Index 2, Corerequisite:"
     },
     "EDST6736": {
         "condition": {
@@ -10521,7 +10521,7 @@
             "EDST6760",
             ")"
         ],
-        "broke at": "Index 1, EDST6706."
+        "broke at": "Index 2, Corerequisite:"
     },
     "EDST6737": {
         "condition": {
@@ -10535,7 +10535,7 @@
             "EDST6760",
             ")"
         ],
-        "broke at": "Index 1, EDST6707."
+        "broke at": "Index 2, Corerequisite:"
     },
     "EDST6740": {
         "condition": {
@@ -10549,7 +10549,7 @@
             "EDST6760",
             ")"
         ],
-        "broke at": "Index 1, EDST6710."
+        "broke at": "Index 2, Corerequisite:"
     },
     "EDST6741": {
         "condition": {
@@ -10563,7 +10563,7 @@
             "EDST6760",
             ")"
         ],
-        "broke at": "Index 1, EDST6711."
+        "broke at": "Index 2, Corerequisite:"
     },
     "EDST6744": {
         "condition": {
@@ -10577,7 +10577,7 @@
             "EDST6760",
             ")"
         ],
-        "broke at": "Index 1, EDST6714."
+        "broke at": "Index 2, Corerequisite:"
     },
     "EDST6745": {
         "condition": {
@@ -10591,7 +10591,7 @@
             "EDST6760",
             ")"
         ],
-        "broke at": "Index 1, EDST6715."
+        "broke at": "Index 2, Corerequisite:"
     },
     "EDST6746": {
         "condition": {
@@ -10605,7 +10605,7 @@
             "EDST6760",
             ")"
         ],
-        "broke at": "Index 1, EDST6716."
+        "broke at": "Index 2, Corerequisite:"
     },
     "EDST6747": {
         "condition": {
@@ -10619,7 +10619,7 @@
             "EDST6760",
             ")"
         ],
-        "broke at": "Index 1, EDST6717."
+        "broke at": "Index 2, Corerequisite:"
     },
     "EDST6748": {
         "condition": {
@@ -10633,7 +10633,7 @@
             "EDST6760",
             ")"
         ],
-        "broke at": "Index 1, EDST6718."
+        "broke at": "Index 2, Corerequisite:"
     },
     "EDST6749": {
         "condition": {
@@ -10647,7 +10647,7 @@
             "EDST6760",
             ")"
         ],
-        "broke at": "Index 1, EDST6719."
+        "broke at": "Index 2, Corerequisite:"
     },
     "EDST6752": {
         "condition": {
@@ -10661,7 +10661,7 @@
             "EDST6760",
             ")"
         ],
-        "broke at": "Index 1, EDST6722."
+        "broke at": "Index 2, Corerequisite:"
     },
     "EDST6753": {
         "condition": {
@@ -10675,7 +10675,7 @@
             "EDST6760",
             ")"
         ],
-        "broke at": "Index 1, EDST6723."
+        "broke at": "Index 2, Corerequisite:"
     },
     "EDST6755": {
         "condition": {
@@ -10689,7 +10689,7 @@
             "EDST6760",
             ")"
         ],
-        "broke at": "Index 1, EDST6725."
+        "broke at": "Index 2, Corerequisite:"
     },
     "EDST6756": {
         "condition": {
@@ -10703,7 +10703,7 @@
             "EDST6760",
             ")"
         ],
-        "broke at": "Index 1, EDST6726."
+        "broke at": "Index 2, Corerequisite:"
     },
     "EDST6757": {
         "condition": {
@@ -10717,7 +10717,7 @@
             "EDST6760",
             ")"
         ],
-        "broke at": "Index 1, EDST6727."
+        "broke at": "Index 2, Corerequisite:"
     },
     "EDST6758": {
         "condition": {
@@ -10731,7 +10731,7 @@
             "EDST6760",
             ")"
         ],
-        "broke at": "Index 1, EDST6728."
+        "broke at": "Index 2, Corerequisite:"
     },
     "EDST6760": {
         "condition": {
@@ -10771,7 +10771,7 @@
             "areas",
             ")"
         ],
-        "broke at": "Index 6, Teaching"
+        "broke at": "Index 7, Method"
     },
     "EDST6761": {
         "condition": {
@@ -10849,7 +10849,7 @@
             "areas",
             ")"
         ],
-        "broke at": "Index 8, Teaching"
+        "broke at": "Index 9, Method"
     },
     "EDST6771": {
         "condition": {
@@ -10873,7 +10873,7 @@
             "4066",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "EDST6772": {
         "condition": {
@@ -10887,7 +10887,7 @@
             "EDST6760",
             ")"
         ],
-        "broke at": "Index 1, EDST6771."
+        "broke at": "Index 2, Corerequisite:"
     },
     "EDST6775": {
         "condition": {
@@ -10912,7 +10912,7 @@
             "4066",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "EDST6776": {
         "condition": {
@@ -10926,7 +10926,7 @@
             "EDST6760",
             ")"
         ],
-        "broke at": "Index 1, EDST6775."
+        "broke at": "Index 2, Corerequisite:"
     },
     "EDST6777": {
         "condition": {
@@ -10949,7 +10949,7 @@
             "4066",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "EDST6778": {
         "condition": {
@@ -10963,7 +10963,7 @@
             "EDST6760",
             ")"
         ],
-        "broke at": "Index 1, EDST6777."
+        "broke at": "Index 2, Corerequisite:"
     },
     "EDST6920": {
         "condition": {
@@ -10984,7 +10984,7 @@
             "4054",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "EDST6921": {
         "condition": {
@@ -11005,7 +11005,7 @@
             "4054",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "EDST6922": {
         "condition": {
@@ -11024,7 +11024,7 @@
             "4076",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "EDST6923": {
         "condition": {
@@ -11043,7 +11043,7 @@
             "4076",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "EDST6924": {
         "condition": {
@@ -11062,7 +11062,7 @@
             "4076",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "EDST6925": {
         "condition": {
@@ -11081,7 +11081,7 @@
             "4076",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "EDST6926": {
         "condition": {
@@ -11100,7 +11100,7 @@
             "4076",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "EDST6927": {
         "condition": {
@@ -11119,7 +11119,7 @@
             "4076",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "EDST6950": {
         "condition": {
@@ -11135,7 +11135,7 @@
             "EDST6760",
             ")"
         ],
-        "broke at": "Index 3, EDST6920."
+        "broke at": "Index 4, Corerequisite:"
     },
     "EDST6951": {
         "condition": {
@@ -11151,7 +11151,7 @@
             "EDST6760",
             ")"
         ],
-        "broke at": "Index 3, EDST6921."
+        "broke at": "Index 4, Corerequisite:"
     },
     "EDST6952": {
         "condition": {
@@ -11165,7 +11165,7 @@
             "EDST6760",
             ")"
         ],
-        "broke at": "Index 1, EDST6922."
+        "broke at": "Index 2, Corerequisite:"
     },
     "EDST6953": {
         "condition": {
@@ -11179,7 +11179,7 @@
             "EDST6760",
             ")"
         ],
-        "broke at": "Index 1, EDST6923."
+        "broke at": "Index 2, Corerequisite:"
     },
     "EDST6954": {
         "condition": {
@@ -11193,7 +11193,7 @@
             "EDST6760",
             ")"
         ],
-        "broke at": "Index 1, EDST6924."
+        "broke at": "Index 2, Corerequisite:"
     },
     "EDST6955": {
         "condition": {
@@ -11207,7 +11207,7 @@
             "EDST6760",
             ")"
         ],
-        "broke at": "Index 1, EDST6925."
+        "broke at": "Index 2, Corerequisite:"
     },
     "EDST6956": {
         "condition": {
@@ -11221,7 +11221,7 @@
             "EDST6760",
             ")"
         ],
-        "broke at": "Index 1, EDST6926."
+        "broke at": "Index 2, Corerequisite:"
     },
     "EDST6957": {
         "condition": {
@@ -11235,7 +11235,7 @@
             "EDST6760",
             ")"
         ],
-        "broke at": "Index 1, EDST6927."
+        "broke at": "Index 2, Corerequisite:"
     },
     "EDST6958": {
         "condition": {
@@ -11249,7 +11249,7 @@
             "EDST6760",
             ")"
         ],
-        "broke at": "Index 1, EDST6922."
+        "broke at": "Index 2, Corerequisite:"
     },
     "ELEC3115": {
         "condition": {
@@ -11267,7 +11267,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, MATH2069"
+        "broke at": "Index 4, PHY1231"
     },
     "ENGG3060": {
         "condition": {
@@ -11306,7 +11306,7 @@
             "required",
             ")"
         ],
-        "broke at": "Index 2, ."
+        "broke at": "Index 3, must"
     },
     "FOOD6804": {
         "condition": {
@@ -11319,7 +11319,7 @@
             "INDC2003",
             ")"
         ],
-        "broke at": "Index 1, CHEM3811or"
+        "broke at": "Index 2, INDC2003"
     },
     "GEOS1701": {
         "condition": {
@@ -11331,7 +11331,7 @@
             "None",
             ")"
         ],
-        "broke at": "Index 1, None"
+        "broke at": "Index 2, )"
     },
     "GEOS2071": {
         "condition": {
@@ -11343,7 +11343,7 @@
             "None",
             ")"
         ],
-        "broke at": "Index 1, None"
+        "broke at": "Index 2, )"
     },
     "GEOS3281": {
         "condition": {
@@ -11355,7 +11355,7 @@
             "None",
             ")"
         ],
-        "broke at": "Index 1, None"
+        "broke at": "Index 2, )"
     },
     "GEOS3761": {
         "condition": {
@@ -11367,7 +11367,7 @@
             "None",
             ")"
         ],
-        "broke at": "Index 1, None"
+        "broke at": "Index 2, )"
     },
     "GEOS3811": {
         "condition": {
@@ -11379,7 +11379,7 @@
             "None",
             ")"
         ],
-        "broke at": "Index 1, None"
+        "broke at": "Index 2, )"
     },
     "GEOS3821": {
         "condition": {
@@ -11391,7 +11391,7 @@
             "None",
             ")"
         ],
-        "broke at": "Index 1, None"
+        "broke at": "Index 2, )"
     },
     "GMAT4061": {
         "condition": {
@@ -11405,7 +11405,7 @@
             "A",
             ")"
         ],
-        "broke at": "Index 2, Thesis"
+        "broke at": "Index 3, A"
     },
     "HESC1501": {
         "condition": {
@@ -11418,7 +11418,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 2, program"
+        "broke at": "Index 3, )"
     },
     "HESC2451": {
         "condition": {
@@ -11431,7 +11431,7 @@
             "3871",
             ")"
         ],
-        "broke at": "Index 1, program"
+        "broke at": "Index 2, 3871"
     },
     "HESC2452": {
         "condition": {
@@ -11457,7 +11457,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, ANAT2451"
+        "broke at": "Index 3, or"
     },
     "HESC3541": {
         "condition": {
@@ -11476,7 +11476,7 @@
             "PHSL2501",
             ")"
         ],
-        "broke at": "Index 7, PATH2201,"
+        "broke at": "Index 8, PHSL2501"
     },
     "HESC4501": {
         "condition": {
@@ -11496,7 +11496,7 @@
             "Courses",
             ")"
         ],
-        "broke at": "Index 9, Courses"
+        "broke at": "Index 10, )"
     },
     "HUMS1007": {
         "condition": {
@@ -11538,7 +11538,7 @@
             "required",
             ")"
         ],
-        "broke at": "Index 2, required."
+        "broke at": "Index 3, In"
     },
     "HUMS2003": {
         "condition": {
@@ -11559,7 +11559,7 @@
             "required",
             ")"
         ],
-        "broke at": "Index 5, on"
+        "broke at": "Index 6, good"
     },
     "INFS3830": {
         "condition": {
@@ -11578,7 +11578,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 3, ("
+        "broke at": "Index 6, COMMJ"
     },
     "INFS3873": {
         "condition": {
@@ -11597,7 +11597,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 3, ("
+        "broke at": "Index 6, COMMJ"
     },
     "INFS4831": {
         "condition": {
@@ -11609,7 +11609,7 @@
             "INFS?H",
             ")"
         ],
-        "broke at": "Index 1, INFS?H"
+        "broke at": "Index 2, )"
     },
     "INFS4854": {
         "condition": {
@@ -11621,7 +11621,7 @@
             "INFS?H",
             ")"
         ],
-        "broke at": "Index 1, INFS?H"
+        "broke at": "Index 2, )"
     },
     "INFS4858": {
         "condition": {
@@ -11637,7 +11637,7 @@
             "INFSCH",
             ")"
         ],
-        "broke at": "Index 1, INFSAH"
+        "broke at": "Index 2, ||"
     },
     "INFS4886": {
         "condition": {
@@ -11649,7 +11649,7 @@
             "INFS?H",
             ")"
         ],
-        "broke at": "Index 1, INFS?H"
+        "broke at": "Index 2, )"
     },
     "INFS4887": {
         "condition": {
@@ -11663,7 +11663,7 @@
             "INFS?H",
             ")"
         ],
-        "broke at": "Index 3, INFS?H"
+        "broke at": "Index 4, )"
     },
     "INFS4907": {
         "condition": {
@@ -11679,7 +11679,7 @@
             "INFSCH",
             ")"
         ],
-        "broke at": "Index 1, INFSAH"
+        "broke at": "Index 2, ||"
     },
     "INST1005": {
         "condition": {
@@ -11699,7 +11699,7 @@
             "degree",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "INST1006": {
         "condition": {
@@ -11725,7 +11725,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 3, enrolment"
+        "broke at": "Index 4, in"
     },
     "INST2003": {
         "condition": {
@@ -11772,7 +11772,7 @@
             "minor",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "INST3900": {
         "condition": {
@@ -11795,7 +11795,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 3, enrolment"
+        "broke at": "Index 4, in"
     },
     "INTA2004": {
         "condition": {
@@ -11809,7 +11809,7 @@
             "INTA2002",
             ")"
         ],
-        "broke at": "Index 1, courses:"
+        "broke at": "Index 2, INTA2001,"
     },
     "LAND1322": {
         "condition": {
@@ -11828,7 +11828,7 @@
             "minor",
             ")"
         ],
-        "broke at": "Index 3, enrolment"
+        "broke at": "Index 4, in"
     },
     "LAWS1021": {
         "condition": {
@@ -11843,7 +11843,7 @@
             "JURD7152",
             ")"
         ],
-        "broke at": "Index 3, LAWS1051;"
+        "broke at": "Index 4, JURD7152"
     },
     "LAWS1052": {
         "condition": {
@@ -11867,7 +11867,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 1, This"
+        "broke at": "Index 2, course"
     },
     "LAWS1055": {
         "condition": {
@@ -11909,7 +11909,7 @@
             "JURD7152",
             ")"
         ],
-        "broke at": "Index 3, LAWS1051;"
+        "broke at": "Index 4, JURD7152"
     },
     "LAWS1075": {
         "condition": {
@@ -11934,7 +11934,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, Principles"
+        "broke at": "Index 2, of"
     },
     "LAWS1091": {
         "condition": {
@@ -11976,7 +11976,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, Principles"
+        "broke at": "Index 2, of"
     },
     "LAWS1121": {
         "condition": {
@@ -11995,7 +11995,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 1, Academic"
+        "broke at": "Index 2, program"
     },
     "LAWS1122": {
         "condition": {
@@ -12014,7 +12014,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 1, Academic"
+        "broke at": "Index 2, program"
     },
     "LAWS1123": {
         "condition": {
@@ -12033,7 +12033,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 1, Academic"
+        "broke at": "Index 2, program"
     },
     "LAWS1124": {
         "condition": {
@@ -12052,7 +12052,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 1, Academic"
+        "broke at": "Index 2, program"
     },
     "LAWS1141": {
         "condition": {
@@ -12090,7 +12090,7 @@
             "JURD7152",
             ")"
         ],
-        "broke at": "Index 3, LAWS1051;"
+        "broke at": "Index 4, JURD7152"
     },
     "LAWS1160": {
         "condition": {
@@ -12122,7 +12122,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, Principles"
+        "broke at": "Index 2, of"
     },
     "LAWS1230": {
         "condition": {
@@ -12177,7 +12177,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, Principle"
+        "broke at": "Index 2, of"
     },
     "LAWS2270": {
         "condition": {
@@ -12213,7 +12213,7 @@
             "2013",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, &&"
     },
     "LAWS2277": {
         "condition": {
@@ -12336,7 +12336,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, Crime"
+        "broke at": "Index 2, &&"
     },
     "LAWS2371": {
         "condition": {
@@ -12367,7 +12367,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, Principles"
+        "broke at": "Index 2, of"
     },
     "LAWS2383": {
         "condition": {
@@ -12409,7 +12409,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, Principles"
+        "broke at": "Index 2, of"
     },
     "LAWS2384": {
         "condition": {
@@ -12470,7 +12470,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, Principles"
+        "broke at": "Index 2, of"
     },
     "LAWS2820": {
         "condition": {
@@ -12521,7 +12521,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, &&"
     },
     "LAWS3017": {
         "condition": {
@@ -12559,7 +12559,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, &&"
     },
     "LAWS3018": {
         "condition": {
@@ -12587,7 +12587,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, ["
     },
     "LAWS3021": {
         "condition": {
@@ -12602,7 +12602,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3022": {
         "condition": {
@@ -12617,7 +12617,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3023": {
         "condition": {
@@ -12638,7 +12638,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, &&"
     },
     "LAWS3025": {
         "condition": {
@@ -12653,7 +12653,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3028": {
         "condition": {
@@ -12668,7 +12668,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3040": {
         "condition": {
@@ -12683,7 +12683,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3046": {
         "condition": {
@@ -12698,7 +12698,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3047": {
         "condition": {
@@ -12721,7 +12721,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 4, courses."
+        "broke at": "Index 5, ["
     },
     "LAWS3057": {
         "condition": {
@@ -12761,7 +12761,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 4, courses."
+        "broke at": "Index 5, ["
     },
     "LAWS3060": {
         "condition": {
@@ -12800,7 +12800,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, &&"
     },
     "LAWS3064": {
         "condition": {
@@ -12815,7 +12815,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3065": {
         "condition": {
@@ -12830,7 +12830,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3067": {
         "condition": {
@@ -12845,7 +12845,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3070": {
         "condition": {
@@ -12860,7 +12860,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3072": {
         "condition": {
@@ -12882,7 +12882,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, &&"
     },
     "LAWS3073": {
         "condition": {
@@ -12903,7 +12903,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, &&"
     },
     "LAWS3079": {
         "condition": {
@@ -12918,7 +12918,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3080": {
         "condition": {
@@ -12933,7 +12933,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3084": {
         "condition": {
@@ -12948,7 +12948,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3086": {
         "condition": {
@@ -12963,7 +12963,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3087": {
         "condition": {
@@ -12978,7 +12978,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3102": {
         "condition": {
@@ -12993,7 +12993,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3105": {
         "condition": {
@@ -13008,7 +13008,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3115": {
         "condition": {
@@ -13029,7 +13029,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, &&"
     },
     "LAWS3123": {
         "condition": {
@@ -13044,7 +13044,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3125": {
         "condition": {
@@ -13059,7 +13059,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3131": {
         "condition": {
@@ -13074,7 +13074,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3133": {
         "condition": {
@@ -13089,7 +13089,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3135": {
         "condition": {
@@ -13108,7 +13108,7 @@
             "Trusts",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, &&"
     },
     "LAWS3137": {
         "condition": {
@@ -13131,7 +13131,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 4, courses."
+        "broke at": "Index 5, ["
     },
     "LAWS3144": {
         "condition": {
@@ -13146,7 +13146,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3146": {
         "condition": {
@@ -13161,7 +13161,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3149": {
         "condition": {
@@ -13176,7 +13176,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3150": {
         "condition": {
@@ -13198,7 +13198,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, &&"
     },
     "LAWS3152": {
         "condition": {
@@ -13213,7 +13213,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3155": {
         "condition": {
@@ -13234,7 +13234,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, &&"
     },
     "LAWS3157": {
         "condition": {
@@ -13268,7 +13268,7 @@
             "course",
             ")"
         ],
-        "broke at": "Index 4, courses."
+        "broke at": "Index 5, enrolled"
     },
     "LAWS3159": {
         "condition": {
@@ -13283,7 +13283,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3165": {
         "condition": {
@@ -13298,7 +13298,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3167": {
         "condition": {
@@ -13313,7 +13313,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3170": {
         "condition": {
@@ -13353,7 +13353,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, &&"
     },
     "LAWS3181": {
         "condition": {
@@ -13368,7 +13368,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3182": {
         "condition": {
@@ -13383,7 +13383,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3183": {
         "condition": {
@@ -13398,7 +13398,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3185": {
         "condition": {
@@ -13413,7 +13413,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3186": {
         "condition": {
@@ -13428,7 +13428,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3187": {
         "condition": {
@@ -13443,7 +13443,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3188": {
         "condition": {
@@ -13458,7 +13458,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3192": {
         "condition": {
@@ -13479,7 +13479,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, &&"
     },
     "LAWS3195": {
         "condition": {
@@ -13502,7 +13502,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 4, courses."
+        "broke at": "Index 5, ["
     },
     "LAWS3196": {
         "condition": {
@@ -13517,7 +13517,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3211": {
         "condition": {
@@ -13532,7 +13532,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3212": {
         "condition": {
@@ -13547,7 +13547,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3216": {
         "condition": {
@@ -13562,7 +13562,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3221": {
         "condition": {
@@ -13577,7 +13577,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3222": {
         "condition": {
@@ -13592,7 +13592,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3231": {
         "condition": {
@@ -13607,7 +13607,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3240": {
         "condition": {
@@ -13630,7 +13630,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, &&"
     },
     "LAWS3248": {
         "condition": {
@@ -13645,7 +13645,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3250": {
         "condition": {
@@ -13660,7 +13660,7 @@
             "Courses",
             ")"
         ],
-        "broke at": "Index 4, Courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3251": {
         "condition": {
@@ -13675,7 +13675,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3272": {
         "condition": {
@@ -13697,7 +13697,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, &&"
     },
     "LAWS3276": {
         "condition": {
@@ -13719,7 +13719,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, &&"
     },
     "LAWS3281": {
         "condition": {
@@ -13749,7 +13749,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, &&"
     },
     "LAWS3282": {
         "condition": {
@@ -13770,7 +13770,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, &&"
     },
     "LAWS3292": {
         "condition": {
@@ -13785,7 +13785,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3301": {
         "condition": {
@@ -13800,7 +13800,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3302": {
         "condition": {
@@ -13828,7 +13828,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, &&"
     },
     "LAWS3303": {
         "condition": {
@@ -13858,7 +13858,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, &&"
     },
     "LAWS3304": {
         "condition": {
@@ -13888,7 +13888,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, &&"
     },
     "LAWS3305": {
         "condition": {
@@ -13918,7 +13918,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, &&"
     },
     "LAWS3309": {
         "condition": {
@@ -13948,7 +13948,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, &&"
     },
     "LAWS3314": {
         "condition": {
@@ -13970,7 +13970,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, &&"
     },
     "LAWS3316": {
         "condition": {
@@ -13985,7 +13985,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3319": {
         "condition": {
@@ -14008,7 +14008,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, &&"
     },
     "LAWS3321": {
         "condition": {
@@ -14034,7 +14034,7 @@
             "4053",
             ")"
         ],
-        "broke at": "Index 1, Restricted"
+        "broke at": "Index 2, to"
     },
     "LAWS3326": {
         "condition": {
@@ -14049,7 +14049,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3327": {
         "condition": {
@@ -14064,7 +14064,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3331": {
         "condition": {
@@ -14079,7 +14079,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3332": {
         "condition": {
@@ -14094,7 +14094,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3335": {
         "condition": {
@@ -14109,7 +14109,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3341": {
         "condition": {
@@ -14124,7 +14124,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3345": {
         "condition": {
@@ -14139,7 +14139,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3346": {
         "condition": {
@@ -14154,7 +14154,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3348": {
         "condition": {
@@ -14169,7 +14169,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3350": {
         "condition": {
@@ -14193,7 +14193,7 @@
             "4054",
             ")"
         ],
-        "broke at": "Index 1, Restricted"
+        "broke at": "Index 2, to"
     },
     "LAWS3351": {
         "condition": {
@@ -14217,7 +14217,7 @@
             "4054",
             ")"
         ],
-        "broke at": "Index 1, Restricted"
+        "broke at": "Index 2, to"
     },
     "LAWS3352": {
         "condition": {
@@ -14241,7 +14241,7 @@
             "4054",
             ")"
         ],
-        "broke at": "Index 1, Restricted"
+        "broke at": "Index 2, to"
     },
     "LAWS3354": {
         "condition": {
@@ -14256,7 +14256,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3361": {
         "condition": {
@@ -14271,7 +14271,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3362": {
         "condition": {
@@ -14297,7 +14297,7 @@
             "4053",
             ")"
         ],
-        "broke at": "Index 1, Restricted"
+        "broke at": "Index 2, to"
     },
     "LAWS3368": {
         "condition": {
@@ -14314,7 +14314,7 @@
             "6021",
             ")"
         ],
-        "broke at": "Index 1, Program"
+        "broke at": "Index 2, must"
     },
     "LAWS3381": {
         "condition": {
@@ -14348,7 +14348,7 @@
             "course",
             ")"
         ],
-        "broke at": "Index 4, courses."
+        "broke at": "Index 5, enrolled"
     },
     "LAWS3382": {
         "condition": {
@@ -14363,7 +14363,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3383": {
         "condition": {
@@ -14378,7 +14378,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3384": {
         "condition": {
@@ -14393,7 +14393,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3391": {
         "condition": {
@@ -14408,7 +14408,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3392": {
         "condition": {
@@ -14423,7 +14423,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3393": {
         "condition": {
@@ -14444,7 +14444,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, &&"
     },
     "LAWS3395": {
         "condition": {
@@ -14459,7 +14459,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3396": {
         "condition": {
@@ -14480,7 +14480,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 1, Family"
+        "broke at": "Index 2, Law"
     },
     "LAWS3401": {
         "condition": {
@@ -14495,7 +14495,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3402": {
         "condition": {
@@ -14510,7 +14510,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3412": {
         "condition": {
@@ -14525,7 +14525,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3413": {
         "condition": {
@@ -14540,7 +14540,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3423": {
         "condition": {
@@ -14555,7 +14555,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3427": {
         "condition": {
@@ -14570,7 +14570,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3431": {
         "condition": {
@@ -14596,7 +14596,7 @@
             "4053",
             ")"
         ],
-        "broke at": "Index 1, Restricted"
+        "broke at": "Index 2, to"
     },
     "LAWS3434": {
         "condition": {
@@ -14611,7 +14611,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3441": {
         "condition": {
@@ -14626,7 +14626,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3442": {
         "condition": {
@@ -14641,7 +14641,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3445": {
         "condition": {
@@ -14656,7 +14656,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3478": {
         "condition": {
@@ -14671,7 +14671,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3510": {
         "condition": {
@@ -14686,7 +14686,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3512": {
         "condition": {
@@ -14701,7 +14701,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3513": {
         "condition": {
@@ -14716,7 +14716,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3523": {
         "condition": {
@@ -14742,7 +14742,7 @@
             "4053",
             ")"
         ],
-        "broke at": "Index 1, Restricted"
+        "broke at": "Index 2, to"
     },
     "LAWS3524": {
         "condition": {
@@ -14757,7 +14757,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3532": {
         "condition": {
@@ -14783,7 +14783,7 @@
             "4053",
             ")"
         ],
-        "broke at": "Index 1, Restricted"
+        "broke at": "Index 2, to"
     },
     "LAWS3541": {
         "condition": {
@@ -14798,7 +14798,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3549": {
         "condition": {
@@ -14813,7 +14813,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3555": {
         "condition": {
@@ -14828,7 +14828,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3589": {
         "condition": {
@@ -14850,7 +14850,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, &&"
     },
     "LAWS3623": {
         "condition": {
@@ -14873,7 +14873,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, &&"
     },
     "LAWS3713": {
         "condition": {
@@ -14904,7 +14904,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, &&"
     },
     "LAWS3751": {
         "condition": {
@@ -14919,7 +14919,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3758": {
         "condition": {
@@ -14934,7 +14934,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3812": {
         "condition": {
@@ -14949,7 +14949,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "LAWS3901": {
         "condition": {
@@ -14972,7 +14972,7 @@
             "only",
             ")"
         ],
-        "broke at": "Index 1, This"
+        "broke at": "Index 2, course"
     },
     "LAWS9801": {
         "condition": {
@@ -14997,7 +14997,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, Academic"
+        "broke at": "Index 2, Program"
     },
     "MANF9550": {
         "condition": {
@@ -15012,7 +15012,7 @@
             "65WAM%",
             ")"
         ],
-        "broke at": "Index 1, Successful"
+        "broke at": "Index 2, 96UOC"
     },
     "MATH3191": {
         "condition": {
@@ -15040,7 +15040,7 @@
             "MATH2019",
             ")"
         ],
-        "broke at": "Index 4, MATH,"
+        "broke at": "Index 5, which"
     },
     "MATH4001": {
         "condition": {
@@ -15052,7 +15052,7 @@
             "MATH?H",
             ")"
         ],
-        "broke at": "Index 1, MATH?H"
+        "broke at": "Index 2, )"
     },
     "MATS3199": {
         "condition": {
@@ -15135,7 +15135,7 @@
             "year",
             ")"
         ],
-        "broke at": "Index 1, a"
+        "broke at": "Index 2, Science"
     },
     "MATS3299": {
         "condition": {
@@ -15186,7 +15186,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 1, Must"
+        "broke at": "Index 2, complete"
     },
     "MATS4503": {
         "condition": {
@@ -15198,7 +15198,7 @@
             "MATS?H",
             ")"
         ],
-        "broke at": "Index 1, MATS?H"
+        "broke at": "Index 2, )"
     },
     "MATS4504": {
         "condition": {
@@ -15210,7 +15210,7 @@
             "MATS?H",
             ")"
         ],
-        "broke at": "Index 1, MATS?H"
+        "broke at": "Index 2, )"
     },
     "MATS4505": {
         "condition": {
@@ -15222,7 +15222,7 @@
             "MATS?H",
             ")"
         ],
-        "broke at": "Index 1, MATS?H"
+        "broke at": "Index 2, )"
     },
     "MDCN8888": {
         "condition": {
@@ -15242,7 +15242,7 @@
             "Honours",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "MDCN8889": {
         "condition": {
@@ -15262,7 +15262,7 @@
             "Honours",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "MDIA1000": {
         "condition": {
@@ -15282,7 +15282,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "MDIA1002": {
         "condition": {
@@ -15302,7 +15302,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "MDIA1003": {
         "condition": {
@@ -15322,7 +15322,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "MDIA1004": {
         "condition": {
@@ -15342,7 +15342,7 @@
             "Major",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "MDIA1005": {
         "condition": {
@@ -15362,7 +15362,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "MDIA1007": {
         "condition": {
@@ -15382,7 +15382,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "MDIA2008": {
         "condition": {
@@ -15406,7 +15406,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "MDIA2010": {
         "condition": {
@@ -15441,7 +15441,7 @@
             "MDIA3001",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "MDIA2011": {
         "condition": {
@@ -15470,7 +15470,7 @@
             "major",
             ")"
         ],
-        "broke at": "Index 7, MDIA1003."
+        "broke at": "Index 8, ||"
     },
     "MDIA2012": {
         "condition": {
@@ -15501,7 +15501,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 3, MDIA1003;"
+        "broke at": "Index 4, &&"
     },
     "MDIA2013": {
         "condition": {
@@ -15543,7 +15543,7 @@
             "course",
             ")"
         ],
-        "broke at": "Index 4, Mediated"
+        "broke at": "Index 5, Storytelling"
     },
     "MDIA3003": {
         "condition": {
@@ -15579,7 +15579,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 4, L2"
+        "broke at": "Index 5, MDIA"
     },
     "MDIA3004": {
         "condition": {
@@ -15601,7 +15601,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 3, enrolment"
+        "broke at": "Index 4, in"
     },
     "MDIA3006": {
         "condition": {
@@ -15633,7 +15633,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 13, enrolment"
+        "broke at": "Index 14, in"
     },
     "MDIA3007": {
         "condition": {
@@ -15672,7 +15672,7 @@
             "course",
             ")"
         ],
-        "broke at": "Index 3, enrolment"
+        "broke at": "Index 4, in"
     },
     "MDIA3010": {
         "condition": {
@@ -15705,7 +15705,7 @@
             "creation",
             ")"
         ],
-        "broke at": "Index 5, MDIA2003."
+        "broke at": "Index 6, As"
     },
     "MDIA3011": {
         "condition": {
@@ -15727,7 +15727,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 3, enrolment"
+        "broke at": "Index 4, in"
     },
     "MDIA4000": {
         "condition": {
@@ -15744,7 +15744,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "MDIA4001": {
         "condition": {
@@ -15761,7 +15761,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "MDIA4002": {
         "condition": {
@@ -15778,7 +15778,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "MECH9325": {
         "condition": {
@@ -15790,7 +15790,7 @@
             "None",
             ")"
         ],
-        "broke at": "Index 1, None"
+        "broke at": "Index 2, )"
     },
     "MECH9650": {
         "condition": {
@@ -15807,7 +15807,7 @@
             ">=65",
             ")"
         ],
-        "broke at": "Index 3, a"
+        "broke at": "Index 4, WAM"
     },
     "MECH9720": {
         "condition": {
@@ -15820,7 +15820,7 @@
             "96UOC",
             ")"
         ],
-        "broke at": "Index 1, Successful"
+        "broke at": "Index 2, 96UOC"
     },
     "MFAC4999": {
         "condition": {
@@ -15842,7 +15842,7 @@
             "enrolment",
             ")"
         ],
-        "broke at": "Index 1, who"
+        "broke at": "Index 2, have"
     },
     "MICR3621": {
         "condition": {
@@ -15870,7 +15870,7 @@
             "BIOC2201",
             ")"
         ],
-        "broke at": "Index 2, from"
+        "broke at": "Index 3, MICR2011"
     },
     "MINE2810": {
         "condition": {
@@ -15886,7 +15886,7 @@
             "GEOS111",
             ")"
         ],
-        "broke at": "Index 5, GEOS111"
+        "broke at": "Index 6, )"
     },
     "MMAN4951": {
         "condition": {
@@ -15902,7 +15902,7 @@
             "core",
             ")"
         ],
-        "broke at": "Index 3, 3rd"
+        "broke at": "Index 4, year"
     },
     "MMAN4952": {
         "condition": {
@@ -15919,7 +15919,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, Research"
+        "broke at": "Index 2, Thesis"
     },
     "MMAN4953": {
         "condition": {
@@ -15936,7 +15936,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, Research"
+        "broke at": "Index 2, Thesis"
     },
     "MUSC1707": {
         "condition": {
@@ -15952,7 +15952,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "MUSC2703": {
         "condition": {
@@ -15981,7 +15981,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "MUSC2801": {
         "condition": {
@@ -16003,7 +16003,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "MUSC2802": {
         "condition": {
@@ -16049,7 +16049,7 @@
             "audition",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "MUSC2803": {
         "condition": {
@@ -16073,7 +16073,7 @@
             "minor",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, a"
     },
     "MUSC3105": {
         "condition": {
@@ -16142,7 +16142,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 8, enrolment"
+        "broke at": "Index 9, in"
     },
     "MUSC3706": {
         "condition": {
@@ -16174,7 +16174,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 8, enrolment"
+        "broke at": "Index 9, in"
     },
     "MUSC3801": {
         "condition": {
@@ -16201,7 +16201,7 @@
             "degree",
             ")"
         ],
-        "broke at": "Index 3, enrolment"
+        "broke at": "Index 4, in"
     },
     "MUSC3802": {
         "condition": {
@@ -16235,7 +16235,7 @@
             "Arts",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, &&"
     },
     "MUSC3804": {
         "condition": {
@@ -16266,7 +16266,7 @@
             "degree",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, &&"
     },
     "MUSC3805": {
         "condition": {
@@ -16305,7 +16305,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, &&"
     },
     "MUSC3806": {
         "condition": {
@@ -16346,7 +16346,7 @@
             "degree",
             ")"
         ],
-        "broke at": "Index 3, enrolment"
+        "broke at": "Index 4, in"
     },
     "MUSC3807": {
         "condition": {
@@ -16370,7 +16370,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, &&"
     },
     "MUSC3808": {
         "condition": {
@@ -16412,7 +16412,7 @@
             "audition",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "MUSC4009": {
         "condition": {
@@ -16431,7 +16431,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "MUSC4010": {
         "condition": {
@@ -16450,7 +16450,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "MUSC4011": {
         "condition": {
@@ -16469,7 +16469,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "MUSC4013": {
         "condition": {
@@ -16491,7 +16491,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "MUSC4014": {
         "condition": {
@@ -16513,7 +16513,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "MUSC4015": {
         "condition": {
@@ -16535,7 +16535,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "MUSC4016": {
         "condition": {
@@ -16557,7 +16557,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "MUSC4017": {
         "condition": {
@@ -16579,7 +16579,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "MUSC4101": {
         "condition": {
@@ -16625,7 +16625,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, L1,"
+        "broke at": "Index 2, 2"
     },
     "MUSC4102": {
         "condition": {
@@ -16661,7 +16661,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 3, enrolment"
+        "broke at": "Index 4, in"
     },
     "MUSC4705": {
         "condition": {
@@ -16690,7 +16690,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 8, enrolment"
+        "broke at": "Index 9, in"
     },
     "MUSC4706": {
         "condition": {
@@ -16708,7 +16708,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "NANO4004": {
         "condition": {
@@ -16721,7 +16721,7 @@
             "Honours",
             ")"
         ],
-        "broke at": "Index 1, Nanoscience"
+        "broke at": "Index 2, Honours"
     },
     "NEUR2201": {
         "condition": {
@@ -16753,7 +16753,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 1, 36UOC,"
+        "broke at": "Index 2, which"
     },
     "NEUR4411": {
         "condition": {
@@ -16767,7 +16767,7 @@
             "Plan",
             ")"
         ],
-        "broke at": "Index 1, Neuroscience"
+        "broke at": "Index 2, Honours"
     },
     "NEUR4421": {
         "condition": {
@@ -16781,7 +16781,7 @@
             "Plan",
             ")"
         ],
-        "broke at": "Index 1, Neuroscience"
+        "broke at": "Index 2, Honours"
     },
     "NEUR4441": {
         "condition": {
@@ -16795,7 +16795,7 @@
             "Plan",
             ")"
         ],
-        "broke at": "Index 1, Neuroscience"
+        "broke at": "Index 2, Honours"
     },
     "NEUR4442": {
         "condition": {
@@ -16809,7 +16809,7 @@
             "Plan",
             ")"
         ],
-        "broke at": "Index 1, Neuroscience"
+        "broke at": "Index 2, Honours"
     },
     "NEUR4443": {
         "condition": {
@@ -16822,7 +16822,7 @@
             "Honours",
             ")"
         ],
-        "broke at": "Index 1, Neuroscience"
+        "broke at": "Index 2, Honours"
     },
     "OPTM3111": {
         "condition": {
@@ -16846,7 +16846,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 10, ;"
+        "broke at": "Index 11, ["
     },
     "OPTM5131": {
         "condition": {
@@ -16877,7 +16877,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 15, OPTM4291."
+        "broke at": "Index 16, ["
     },
     "OPTM6411": {
         "condition": {
@@ -16904,7 +16904,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 5, or"
+        "broke at": "Index 6, &&"
     },
     "OPTM6421": {
         "condition": {
@@ -16919,7 +16919,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 1, OPTM6400,"
+        "broke at": "Index 2, ["
     },
     "OPTM6424": {
         "condition": {
@@ -16942,7 +16942,7 @@
             "8095",
             ")"
         ],
-        "broke at": "Index 7, enrolment"
+        "broke at": "Index 8, in"
     },
     "PATH2201": {
         "condition": {
@@ -16963,7 +16963,7 @@
             "BIOC2181",
             ")"
         ],
-        "broke at": "Index 3, any"
+        "broke at": "Index 4, one"
     },
     "PATH3209": {
         "condition": {
@@ -16980,7 +16980,7 @@
             "PATH3205",
             ")"
         ],
-        "broke at": "Index 1, BABS3041."
+        "broke at": "Index 2, Highly"
     },
     "PATH3210": {
         "condition": {
@@ -17007,7 +17007,7 @@
             "NANO2002",
             ")"
         ],
-        "broke at": "Index 3, one"
+        "broke at": "Index 4, of"
     },
     "PHAR2011": {
         "condition": {
@@ -17051,7 +17051,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 2, L1"
+        "broke at": "Index 3, Biology"
     },
     "PHAR3102": {
         "condition": {
@@ -17070,7 +17070,7 @@
             "BIOC2181",
             ")"
         ],
-        "broke at": "Index 1, PHAR2011."
+        "broke at": "Index 2, Highly"
     },
     "PHAR3251": {
         "condition": {
@@ -17092,7 +17092,7 @@
             "BIOC2201",
             ")"
         ],
-        "broke at": "Index 1, PHAR2011."
+        "broke at": "Index 2, Highly"
     },
     "PHCM1001": {
         "condition": {
@@ -17111,7 +17111,7 @@
             "Health",
             ")"
         ],
-        "broke at": "Index 1, Currently"
+        "broke at": "Index 2, program"
     },
     "PHCM3003": {
         "condition": {
@@ -17156,7 +17156,7 @@
             "Practice",
             ")"
         ],
-        "broke at": "Index 1, It"
+        "broke at": "Index 2, is"
     },
     "PHCM3007": {
         "condition": {
@@ -17195,7 +17195,7 @@
             "Health",
             ")"
         ],
-        "broke at": "Index 1, It"
+        "broke at": "Index 2, is"
     },
     "PHSL2101": {
         "condition": {
@@ -17223,7 +17223,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, Biology;"
+        "broke at": "Index 5, &&"
     },
     "PHSL3211": {
         "condition": {
@@ -17246,7 +17246,7 @@
             "PHSL2502",
             ")"
         ],
-        "broke at": "Index 5, PHSL"
+        "broke at": "Index 6, 2501"
     },
     "PHYS1116": {
         "condition": {
@@ -17264,7 +17264,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 1, PHYS1121/1131/1141"
+        "broke at": "Index 2, Physics"
     },
     "PHYS1221": {
         "condition": {
@@ -17291,7 +17291,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 7, PHYS1141;"
+        "broke at": "Index 8, ["
     },
     "PHYS1231": {
         "condition": {
@@ -17345,7 +17345,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 5, PHYS1141;"
+        "broke at": "Index 6, ["
     },
     "PHYS3199": {
         "condition": {
@@ -17424,7 +17424,7 @@
             "year",
             ")"
         ],
-        "broke at": "Index 1, a"
+        "broke at": "Index 2, Science"
     },
     "PHYS3299": {
         "condition": {
@@ -17474,7 +17474,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 1, Must"
+        "broke at": "Index 2, complete"
     },
     "PHYS4141": {
         "condition": {
@@ -17489,7 +17489,7 @@
             "Honours",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "PHYS4142": {
         "condition": {
@@ -17504,7 +17504,7 @@
             "Honours",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "PHYS4144": {
         "condition": {
@@ -17519,7 +17519,7 @@
             "Honours",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "PHYS4145": {
         "condition": {
@@ -17534,7 +17534,7 @@
             "Honours",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "PHYS4146": {
         "condition": {
@@ -17549,7 +17549,7 @@
             "Honours",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "PPEC1001": {
         "condition": {
@@ -17568,7 +17568,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "PPEC2001": {
         "condition": {
@@ -17591,7 +17591,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "PPEC3001": {
         "condition": {
@@ -17614,7 +17614,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "PSYC3199": {
         "condition": {
@@ -17694,7 +17694,7 @@
             "year",
             ")"
         ],
-        "broke at": "Index 1, a"
+        "broke at": "Index 2, Science"
     },
     "PSYC3299": {
         "condition": {
@@ -17744,7 +17744,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 1, Must"
+        "broke at": "Index 2, complete"
     },
     "PSYC4072": {
         "condition": {
@@ -17756,7 +17756,7 @@
             "PSYCAH",
             ")"
         ],
-        "broke at": "Index 1, PSYCAH"
+        "broke at": "Index 2, )"
     },
     "PSYC4073": {
         "condition": {
@@ -17768,7 +17768,7 @@
             "PSYCAH",
             ")"
         ],
-        "broke at": "Index 1, PSYCAH"
+        "broke at": "Index 2, )"
     },
     "PSYC4093": {
         "condition": {
@@ -17780,7 +17780,7 @@
             "PSYCAH",
             ")"
         ],
-        "broke at": "Index 1, PSYCAH"
+        "broke at": "Index 2, )"
     },
     "PSYC4103": {
         "condition": {
@@ -17792,7 +17792,7 @@
             "PSYCAH",
             ")"
         ],
-        "broke at": "Index 1, PSYCAH"
+        "broke at": "Index 2, )"
     },
     "SART3405": {
         "condition": {
@@ -17805,7 +17805,7 @@
             "Printmaking",
             ")"
         ],
-        "broke at": "Index 1, L2"
+        "broke at": "Index 2, Printmaking"
     },
     "SCIF1111": {
         "condition": {
@@ -17847,7 +17847,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "SCIF1131": {
         "condition": {
@@ -17893,7 +17893,7 @@
             "BMedSci",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "SCIF3000": {
         "condition": {
@@ -17917,7 +17917,7 @@
             "65WAM",
             ")"
         ],
-        "broke at": "Index 1, a"
+        "broke at": "Index 2, science"
     },
     "SCIF3199": {
         "condition": {
@@ -17940,7 +17940,7 @@
             "course",
             ")"
         ],
-        "broke at": "Index 1, 48UOC."
+        "broke at": "Index 2, must"
     },
     "SCIF3900": {
         "condition": {
@@ -17953,7 +17953,7 @@
             "72UOC",
             ")"
         ],
-        "broke at": "Index 1, Minimum"
+        "broke at": "Index 2, 72UOC"
     },
     "SDES3404": {
         "condition": {
@@ -17966,7 +17966,7 @@
             "Ceramics",
             ")"
         ],
-        "broke at": "Index 1, L2"
+        "broke at": "Index 2, Ceramics"
     },
     "SDES3406": {
         "condition": {
@@ -17979,7 +17979,7 @@
             "Graphics",
             ")"
         ],
-        "broke at": "Index 1, L2"
+        "broke at": "Index 2, Graphics"
     },
     "SDES3407": {
         "condition": {
@@ -17992,7 +17992,7 @@
             "Graphics",
             ")"
         ],
-        "broke at": "Index 1, L2"
+        "broke at": "Index 2, Graphics"
     },
     "SDES3408": {
         "condition": {
@@ -18005,7 +18005,7 @@
             "Jewellery",
             ")"
         ],
-        "broke at": "Index 1, L2"
+        "broke at": "Index 2, Jewellery"
     },
     "SDES3409": {
         "condition": {
@@ -18018,7 +18018,7 @@
             "Jewellery",
             ")"
         ],
-        "broke at": "Index 1, L2"
+        "broke at": "Index 2, Jewellery"
     },
     "SDES3412": {
         "condition": {
@@ -18032,7 +18032,7 @@
             "Design",
             ")"
         ],
-        "broke at": "Index 1, L2"
+        "broke at": "Index 2, Spatial"
     },
     "SDES3413": {
         "condition": {
@@ -18046,7 +18046,7 @@
             "Design",
             ")"
         ],
-        "broke at": "Index 1, L2"
+        "broke at": "Index 2, Spatial"
     },
     "SDES3414": {
         "condition": {
@@ -18059,7 +18059,7 @@
             "Design",
             ")"
         ],
-        "broke at": "Index 1, L2"
+        "broke at": "Index 2, Design"
     },
     "SENG2021": {
         "condition": {
@@ -18079,7 +18079,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, SENG1031"
+        "broke at": "Index 6, SENG?1"
     },
     "SENG2991": {
         "condition": {
@@ -18100,7 +18100,7 @@
             "SENGAH",
             ")"
         ],
-        "broke at": "Index 9, SENGAH"
+        "broke at": "Index 10, )"
     },
     "SENG3991": {
         "condition": {
@@ -18127,7 +18127,7 @@
             "SENG2991",
             ")"
         ],
-        "broke at": "Index 3, SENGAH"
+        "broke at": "Index 4, &&"
     },
     "SENG3992": {
         "condition": {
@@ -18148,7 +18148,7 @@
             "SENG3991",
             ")"
         ],
-        "broke at": "Index 3, SENGAH"
+        "broke at": "Index 4, &&"
     },
     "SENG3993": {
         "condition": {
@@ -18200,7 +18200,7 @@
             "course",
             ")"
         ],
-        "broke at": "Index 1, Currently"
+        "broke at": "Index 2, Program"
     },
     "SENG3994": {
         "condition": {
@@ -18237,7 +18237,7 @@
             "SENG3011",
             ")"
         ],
-        "broke at": "Index 1, Successful"
+        "broke at": "Index 2, SENG2991"
     },
     "SOCW2003": {
         "condition": {
@@ -18258,7 +18258,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "SOCW2006": {
         "condition": {
@@ -18277,7 +18277,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 3, enrolment"
+        "broke at": "Index 4, in"
     },
     "SOCW2008": {
         "condition": {
@@ -18298,7 +18298,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 5, enrolment"
+        "broke at": "Index 6, in"
     },
     "SOCW2009": {
         "condition": {
@@ -18317,7 +18317,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 3, enrolment"
+        "broke at": "Index 4, in"
     },
     "SOCW2100": {
         "condition": {
@@ -18336,7 +18336,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 3, enrolment"
+        "broke at": "Index 4, in"
     },
     "SOCW3006": {
         "condition": {
@@ -18363,7 +18363,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 11, enrolment"
+        "broke at": "Index 12, in"
     },
     "SOCW3009": {
         "condition": {
@@ -18409,7 +18409,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 19, SOSS/SRAP1000"
+        "broke at": "Index 20, ||"
     },
     "SOCW3010": {
         "condition": {
@@ -18436,7 +18436,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 11, enrolment"
+        "broke at": "Index 12, in"
     },
     "SOCW3012": {
         "condition": {
@@ -18481,7 +18481,7 @@
             "SOCW3011",
             ")"
         ],
-        "broke at": "Index 17, SOSS/SRAP1000"
+        "broke at": "Index 18, ||"
     },
     "SOCW3013": {
         "condition": {
@@ -18531,7 +18531,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 27, enrolment"
+        "broke at": "Index 28, in"
     },
     "SOCW4003": {
         "condition": {
@@ -18569,7 +18569,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 5, SOSS/SRAP3000"
+        "broke at": "Index 6, ||"
     },
     "SOCW4011": {
         "condition": {
@@ -18607,7 +18607,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 5, SOSS/SRAP3000"
+        "broke at": "Index 6, ||"
     },
     "SOCW4012": {
         "condition": {
@@ -18645,7 +18645,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 5, SOSS/SRAP3000"
+        "broke at": "Index 6, ||"
     },
     "SOCW4013": {
         "condition": {
@@ -18683,7 +18683,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 5, SOSS/SRAP3000"
+        "broke at": "Index 6, ||"
     },
     "SOCW4015": {
         "condition": {
@@ -18713,7 +18713,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 2, ,"
+        "broke at": "Index 3, SOCW4003,"
     },
     "SOCW4016": {
         "condition": {
@@ -18740,7 +18740,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 3, SOCW4003,"
+        "broke at": "Index 4, SOCW4011,"
     },
     "SOCW4017": {
         "condition": {
@@ -18769,7 +18769,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 7, enrolment"
+        "broke at": "Index 8, in"
     },
     "SOCW4018": {
         "condition": {
@@ -18802,7 +18802,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 9, enrolment"
+        "broke at": "Index 10, in"
     },
     "SOLA4951": {
         "condition": {
@@ -18818,7 +18818,7 @@
             "core",
             ")"
         ],
-        "broke at": "Index 3, 3rd"
+        "broke at": "Index 4, year"
     },
     "SOLA4952": {
         "condition": {
@@ -18835,7 +18835,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, Research"
+        "broke at": "Index 2, Thesis"
     },
     "SOLA4953": {
         "condition": {
@@ -18852,7 +18852,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, Research"
+        "broke at": "Index 2, Thesis"
     },
     "SOMS3050": {
         "condition": {
@@ -18866,7 +18866,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 2, of"
+        "broke at": "Index 3, courses"
     },
     "SOMS3199": {
         "condition": {
@@ -18924,7 +18924,7 @@
             "65WAM",
             ")"
         ],
-        "broke at": "Index 2, program"
+        "broke at": "Index 3, ||"
     },
     "SOMS3299": {
         "condition": {
@@ -18940,7 +18940,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, SOMS3199"
+        "broke at": "Index 3, multi-term"
     },
     "SOMS4884": {
         "condition": {
@@ -18954,7 +18954,7 @@
             "Plan",
             ")"
         ],
-        "broke at": "Index 1, SOMS"
+        "broke at": "Index 2, Hons"
     },
     "SOMS4888": {
         "condition": {
@@ -18968,7 +18968,7 @@
             "Plan",
             ")"
         ],
-        "broke at": "Index 1, SOMS"
+        "broke at": "Index 2, Hons"
     },
     "SOSS2001": {
         "condition": {
@@ -18980,7 +18980,7 @@
             "SOSS/SRAP1001",
             ")"
         ],
-        "broke at": "Index 1, SOSS/SRAP1001"
+        "broke at": "Index 2, )"
     },
     "SOSS3001": {
         "condition": {
@@ -18994,7 +18994,7 @@
             "SRAP3001",
             ")"
         ],
-        "broke at": "Index 1, SOSS/SRAP1001."
+        "broke at": "Index 2, Equivalent:"
     },
     "SOSS3002": {
         "condition": {
@@ -19014,7 +19014,7 @@
             "SRAP3002",
             ")"
         ],
-        "broke at": "Index 1, SOSS/SRAP1000,"
+        "broke at": "Index 2, SOSS/SRAP1001,"
     },
     "SOSS3003": {
         "condition": {
@@ -19030,7 +19030,7 @@
             "SRAP2002",
             ")"
         ],
-        "broke at": "Index 1, SOSS/SRAP1000"
+        "broke at": "Index 2, &&"
     },
     "SOSS3006": {
         "condition": {
@@ -19061,7 +19061,7 @@
             "SRAP3006",
             ")"
         ],
-        "broke at": "Index 1, SOSS/SRAP1000,"
+        "broke at": "Index 2, SOSS/SRAP1001,"
     },
     "SOSS3007": {
         "condition": {
@@ -19085,7 +19085,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 3, enrolment"
+        "broke at": "Index 4, in"
     },
     "SOSS4051": {
         "condition": {
@@ -19104,7 +19104,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "SOSS4052": {
         "condition": {
@@ -19123,7 +19123,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "SOSS4053": {
         "condition": {
@@ -19142,7 +19142,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "SRAP4051": {
         "condition": {
@@ -19162,7 +19162,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "SRAP4052": {
         "condition": {
@@ -19182,7 +19182,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "SRAP4053": {
         "condition": {
@@ -19202,7 +19202,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "TABL2712": {
         "condition": {
@@ -19224,7 +19224,7 @@
             "Business",
             ")"
         ],
-        "broke at": "Index 5, TABL"
+        "broke at": "Index 6, 2710"
     },
     "TELE9757": {
         "condition": {
@@ -19243,7 +19243,7 @@
             "major",
             ")"
         ],
-        "broke at": "Index 1, UG"
+        "broke at": "Index 2, should"
     },
     "VISN4003": {
         "condition": {
@@ -19256,7 +19256,7 @@
             "Honours",
             ")"
         ],
-        "broke at": "Index 1, VISN"
+        "broke at": "Index 2, Honours"
     },
     "VISN4016": {
         "condition": {
@@ -19269,7 +19269,7 @@
             "Honours",
             ")"
         ],
-        "broke at": "Index 1, VISN"
+        "broke at": "Index 2, Honours"
     },
     "YMED1001": {
         "condition": {
@@ -19288,7 +19288,7 @@
             "Health",
             ")"
         ],
-        "broke at": "Index 1, Currently"
+        "broke at": "Index 2, program"
     },
     "YMED1003": {
         "condition": {
@@ -19307,7 +19307,7 @@
             "Health",
             ")"
         ],
-        "broke at": "Index 1, Currently"
+        "broke at": "Index 2, program"
     },
     "YMED1005": {
         "condition": {
@@ -19326,7 +19326,7 @@
             "Health",
             ")"
         ],
-        "broke at": "Index 1, Currently"
+        "broke at": "Index 2, program"
     },
     "YMED1008": {
         "condition": {
@@ -19345,7 +19345,7 @@
             "Health",
             ")"
         ],
-        "broke at": "Index 1, Currently"
+        "broke at": "Index 2, program"
     },
     "YMED3007": {
         "condition": {
@@ -19364,7 +19364,7 @@
             "Health",
             ")"
         ],
-        "broke at": "Index 1, Currently"
+        "broke at": "Index 2, program"
     },
     "ZBUS2901": {
         "condition": {
@@ -19382,7 +19382,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ZBUS2902": {
         "condition": {
@@ -19400,7 +19400,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ZBUS3104": {
         "condition": {
@@ -19436,7 +19436,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, Business"
+        "broke at": "Index 2, Program"
     },
     "ZBUS3901": {
         "condition": {
@@ -19454,7 +19454,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ZBUS3902": {
         "condition": {
@@ -19472,7 +19472,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ZBUS4001": {
         "condition": {
@@ -19491,7 +19491,7 @@
             "4512",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ZBUS4002": {
         "condition": {
@@ -19510,7 +19510,7 @@
             "4512",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ZBUS4101": {
         "condition": {
@@ -19529,7 +19529,7 @@
             "4512",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ZBUS4102": {
         "condition": {
@@ -19548,7 +19548,7 @@
             "4512",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ZEIT1190": {
         "condition": {
@@ -19563,7 +19563,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ZEIT1191": {
         "condition": {
@@ -19578,7 +19578,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ZEIT1290": {
         "condition": {
@@ -19593,7 +19593,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ZEIT1291": {
         "condition": {
@@ -19608,7 +19608,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ZEIT1690": {
         "condition": {
@@ -19623,7 +19623,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ZEIT1901": {
         "condition": {
@@ -19638,7 +19638,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ZEIT1902": {
         "condition": {
@@ -19653,7 +19653,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ZEIT2901": {
         "condition": {
@@ -19668,7 +19668,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ZEIT2902": {
         "condition": {
@@ -19683,7 +19683,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ZEIT3901": {
         "condition": {
@@ -19698,7 +19698,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ZEIT3902": {
         "condition": {
@@ -19713,7 +19713,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ZEIT4901": {
         "condition": {
@@ -19728,7 +19728,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ZEIT4902": {
         "condition": {
@@ -19743,7 +19743,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ZGEN2215": {
         "condition": {
@@ -19758,7 +19758,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "ZGEN2222": {
         "condition": {
@@ -19773,7 +19773,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "ZGEN2240": {
         "condition": {
@@ -19788,7 +19788,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "ZGEN2801": {
         "condition": {
@@ -19803,7 +19803,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 4, courses"
+        "broke at": "Index 5, )"
     },
     "ZHSS2506": {
         "condition": {
@@ -19823,7 +19823,7 @@
             "ZPEM1202",
             ")"
         ],
-        "broke at": "Index 1, Any"
+        "broke at": "Index 2, 2"
     },
     "ZHSS2600": {
         "condition": {
@@ -19852,7 +19852,7 @@
             "consent",
             ")"
         ],
-        "broke at": "Index 1, Any"
+        "broke at": "Index 2, 2"
     },
     "ZHSS2901": {
         "condition": {
@@ -19870,7 +19870,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ZHSS2902": {
         "condition": {
@@ -19888,7 +19888,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ZHSS3202": {
         "condition": {
@@ -19934,7 +19934,7 @@
             "approval",
             ")"
         ],
-        "broke at": "Index 5, with"
+        "broke at": "Index 6, Head"
     },
     "ZHSS3501": {
         "condition": {
@@ -19954,7 +19954,7 @@
             "ZPEM1202",
             ")"
         ],
-        "broke at": "Index 1, Any"
+        "broke at": "Index 2, 2"
     },
     "ZHSS3505": {
         "condition": {
@@ -19974,7 +19974,7 @@
             "ZPEM1202",
             ")"
         ],
-        "broke at": "Index 1, Any"
+        "broke at": "Index 2, 2"
     },
     "ZPEM1901": {
         "condition": {
@@ -19989,7 +19989,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ZPEM2401": {
         "condition": {
@@ -20007,7 +20007,7 @@
             "ZPEM1502",
             ")"
         ],
-        "broke at": "Index 3, ZPEM1304;"
+        "broke at": "Index 4, &&"
     },
     "ZPEM2509": {
         "condition": {
@@ -20027,7 +20027,7 @@
             "ZPEM1502",
             ")"
         ],
-        "broke at": "Index 7, ZPEM1304,"
+        "broke at": "Index 8, ZPEM1501,"
     },
     "ZPEM2901": {
         "condition": {
@@ -20042,7 +20042,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ZPEM3901": {
         "condition": {
@@ -20057,7 +20057,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ZPEM3902": {
         "condition": {
@@ -20072,7 +20072,7 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 1, Enrolment"
+        "broke at": "Index 2, in"
     },
     "ZPEM4205": {
         "condition": {
@@ -20090,6 +20090,6 @@
             ")",
             ")"
         ],
-        "broke at": "Index 1, Currently"
+        "broke at": "Index 2, 4511"
     }
 }
