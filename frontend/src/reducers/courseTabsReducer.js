@@ -61,6 +61,11 @@ const courseTabsReducer = (state = initial, action) => {
         ...state,
         active: action.payload,
       };
+    case "REORDER_TABS":
+      return {
+        ...state,
+        tabs: action.payload,
+      };
     default:
       return state;
   }

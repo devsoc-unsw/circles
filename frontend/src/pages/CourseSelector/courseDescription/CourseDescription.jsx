@@ -8,7 +8,6 @@ import { plannerActions } from "../../../actions/plannerActions";
 import { Loading } from "./Loading";
 import "./courseDescription.less";
 import { prepareUserPayload } from "../helper";
-import axios from "axios";
 import infographic from "../../../images/infographicFontIndependent.svg";
 import { motion } from "framer-motion/dist/framer-motion";
 import { axiosRequest } from "../../../axios";
