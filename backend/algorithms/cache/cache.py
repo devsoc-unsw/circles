@@ -101,7 +101,9 @@ def cache_program_mappings():
     keyword_codes = read_data(CACHE_CONFIG)
     # Initialise mappings with all the mapping codes
     # TODO: Add any more mappings. Look into updating manual-fixes wiki page?
+
     code_list = keyword_codes["code_list"]
+
     mappings = {}
     for code in code_list:
         mappings[code] = {}
@@ -110,8 +112,8 @@ def cache_program_mappings():
 
     keyword_map = keyword_codes["keyword_mapping"]
     for program in programs.values():
-        for  keyword in keyword_map:
-            if keyword in program["title"]:
+        for keyword in keyword_map:
+            if keyword.lower() in program["title"].lower():
                 for code in keyword_map[keyword]:
                     mappings[code][program["code"]] = 1
 
