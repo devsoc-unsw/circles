@@ -9,10 +9,10 @@ import { setCourses } from "../../../actions/coursesActions";
 import { IoWarningOutline } from "react-icons/io5";
 import { prepareUserPayload } from "../helper";
 import { motion, AnimatePresence } from "framer-motion/dist/framer-motion";
-
+import {ReactComponent as Padlock} from "../../../images/padlock.svg";
 const { SubMenu } = Menu;
 
-export default function CourseMenu({ structure }) {
+export default function CourseMenu({ structure, showLockedCourses }) {
   const dispatch = useDispatch();
   const [menuData, setMenuData] = React.useState({});
   const [coursesUnits, setCoursesUnits] = React.useState({});
@@ -71,25 +71,20 @@ export default function CourseMenu({ structure }) {
 
           if (subgroupStructure.courses) {
             // only consider disciplinary component courses
-            const subCourses = Object.keys(subgroupStructure.courses); // e.g. [ "COMP3", "COMP4" ]
-            const regex = subCourses.join("|"); // e.g. "COMP3|COMP4"
-            for (const courseCode in courses) {
-              if (
-                courseCode.match(regex) &&
-                // courses[courseCode].is_accurate &&
-                courses[courseCode].unlocked
-              ) {
-                newMenu[group][subgroup].push({
-                  courseCode: courseCode,
-                  accuracy: courses[courseCode].is_accurate,
-                });
+            Object.keys(subgroupStructure.courses).forEach(
+              (courseCode) => {
+              newMenu[group][subgroup].push({
+                courseCode: courseCode,
+                unlocked: courses[courseCode] ? true : false,
+                accuracy: courses[courseCode] ? courses[courseCode].is_accurate: true,
+              });
+              newMenu[group][subgroup].sort(sortMenu);
 
-                // add UOC to curr
-                if (coursesInPlanner.get(courseCode))
-                  newCoursesUnits[group][subgroup].curr +=
-                    coursesInPlanner.get(courseCode).UOC;
-              }
-            }
+              // add UOC to curr
+              if (coursesInPlanner.get(courseCode))
+                newCoursesUnits[group][subgroup].curr +=
+                  coursesInPlanner.get(courseCode).UOC;
+            })
           } else {
             // If there is no specified course list for the subgroup, then manually
             // show the added courses on the menu.
@@ -147,10 +142,12 @@ export default function CourseMenu({ structure }) {
                   >
                     <AnimatePresence initial={false}>
                       {menuData[group][subGroup].map((course, ind) => (
+                        (course.unlocked || showLockedCourses) &&
                         <MenuItem
                           selected={coursesInPlanner.get(course.courseCode)}
                           courseCode={course.courseCode}
                           accurate={course.accuracy}
+                          unlocked={course.unlocked}
                           setActiveCourse={setActiveCourse}
                           activeCourse={activeCourse}
                           key={course.courseCode + group}
@@ -166,7 +163,13 @@ export default function CourseMenu({ structure }) {
       )}
     </div>
   );
+  function sortMenu(item1, item2) {
+    return item1.unlocked === item2.unlocked
+      ? item1.courseCode > item2.courseCode // sort within locked/unlocked by courseCode
+      : item1.unlocked < item2.unlocked; // separate locked/unlocked
+  };
 }
+
 
 const MenuItem = ({
   selected,
@@ -174,6 +177,7 @@ const MenuItem = ({
   activeCourse,
   setActiveCourse,
   accurate,
+  unlocked,
 }) => {
   const dispatch = useDispatch();
   const handleClick = () => {
@@ -190,12 +194,16 @@ const MenuItem = ({
   return (
     <motion.div transition={{ ease: "easeOut", duration: 0.3 }} layout>
       <Menu.Item
-        className={`text menuItemText ${selected !== undefined && "bold"} 
-      ${activeCourse === courseCode && "activeCourse"}`}
+        className={
+          `text menuItemText
+          ${selected !== undefined && "bold"}
+          ${activeCourse === courseCode && "activeCourse"}
+          ${!unlocked && "locked"}`
+        }
         key={courseCode}
         onClick={handleClick}
       >
-        {courseCode} {renderAccurateNote()}
+        {courseCode} {renderAccurateNote()} {!unlocked && <Padlock width="10px"/>}
       </Menu.Item>
     </motion.div>
   );

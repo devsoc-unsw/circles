@@ -54,6 +54,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build]
     concurrency: production
+    environment: production
 
     steps:
       - name: Checkout repository

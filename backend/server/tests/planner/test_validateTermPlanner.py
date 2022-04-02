@@ -90,3 +90,45 @@ def test_validateTermPlanner_out_of_order_progress():
             "warnings": []
         }
     }
+
+def test_validateTermPlanner_past_term_suppress_warnings():
+    x = requests.post('http://127.0.0.1:8000/planner/validateTermPlanner', json=PLANS["suppress_warning"])
+    assert x.status_code == 200
+    assert x.json()['courses_state'] ==  {
+        "COMP1511": {
+            "is_accurate": True,
+            "unlocked": True,
+            "handbook_note": "",
+            "warnings": []
+        },
+        "MATH1141": {
+            "is_accurate": True,
+            "unlocked": True,
+            "handbook_note": "",
+            "warnings": []
+        },
+        "MATH1081": {
+            "is_accurate": True,
+            "unlocked": True,
+            "handbook_note": "",
+            "warnings": []
+        },
+        "COMP1521": {
+            "is_accurate": True,
+            "unlocked": True,
+            "handbook_note": "",
+            "warnings": []
+        },
+        "COMP2511": {
+            "is_accurate": True,
+            "unlocked": False,
+            "handbook_note": "",
+            "warnings": []
+        },
+        "COMP4128": {
+            "is_accurate": True,
+            "unlocked": False,
+            "handbook_note": "",
+            "warnings": []
+        }
+    }

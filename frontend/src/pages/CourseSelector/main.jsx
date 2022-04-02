@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { Switch } from "antd";
 import { useSelector } from "react-redux";
 import CourseMenu from "./courseMenu/CourseMenu";
 import CourseDescription from "./courseDescription/CourseDescription";
@@ -9,6 +10,7 @@ import SearchCourse from "./SearchCourse";
 
 export default function CourseSelector() {
   const [structure, setStructure] = React.useState(null);
+  const [showLockedCourses, setShowLockedCourses] = React.useState(false);
 
   const { programCode, programName, specialisation, minor } = useSelector(
     (state) => state.degree
@@ -41,10 +43,18 @@ export default function CourseSelector() {
           )}
         </div>
         <SearchCourse />
+
+        <Switch 
+          className="cs-toggle-locked"
+          onChange={() => setShowLockedCourses(prev => !prev)}
+          checkedChildren="locked courses shown"
+          unCheckedChildren="locked courses hidden"
+        />
+
       </div>
       <CourseTabs />
       <div className="cs-bottom-cont">
-        <CourseMenu structure={structure} />
+        <CourseMenu structure={structure} showLockedCourses={showLockedCourses} />
         <CourseDescription structure={structure} />
       </div>
     </div>
