@@ -176,7 +176,7 @@ def make_condition(tokens, first=False, course=None) -> (CompositeCondition, int
             sub_result, sub_index = make_condition(tokens[index + 1 :])
             if sub_result is None:
                 # Error. Return None
-                return None, sub_index
+                return None, index + sub_index
 
             # Adjust the current position to scan the next token after this sub result
             result.add_condition(sub_result)
@@ -233,7 +233,7 @@ def make_condition(tokens, first=False, course=None) -> (CompositeCondition, int
                 cond = GradeCondition(get_grade(token))
             else:
                 # Unmatched token. Error
-                return None, index
+                return None, index + 1
 
             if index + 1 < len(tokens) and tokens[index + 1] == "in":
                 # Create category according to the token after 'in'
