@@ -89,6 +89,7 @@ class PlannerData(BaseModel):
     specialisations: list[str]
     year: int
     plan: list[list[dict]]
+    mostRecentPastTerm: dict
 
 class AffectedCourses (BaseModel):
     affected_courses: list[str]

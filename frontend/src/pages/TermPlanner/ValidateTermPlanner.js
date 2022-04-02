@@ -1,4 +1,5 @@
 import { plannerActions } from "../../actions/plannerActions";
+import { getMostRecentPastTerm } from "./PastTerm"
 import axios from "axios";
 
 export const updateAllWarnings = (dispatch, plannerInfo, userInfo) => {
@@ -48,6 +49,7 @@ const prepareCoursesForValidation = (plannerInfo, userInfo) => {
     specialisations: [specialisation, minor],
     year: 1,
     plan: plan,
+    mostRecentPastTerm: getMostRecentPastTerm(startYear),
   };
 
   return payload;
