@@ -11251,38 +11251,6 @@
         ],
         "broke at": "Index 2, Corerequisite:"
     },
-    "ELEC3115": {
-        "condition": {
-            "original": "Pre-requisite: MATH2069 AND (PHY1231 OR DPST1024)<br/><br/>",
-            "processed": "MATH2069 && (PHY1231 || DPST1024)"
-        },
-        "tokens": [
-            "(",
-            "MATH2069",
-            "&&",
-            "(",
-            "PHY1231",
-            "||",
-            "DPST1024",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 4, PHY1231"
-    },
-    "ENGG3060": {
-        "condition": {
-            "original": "Pre-requisite: Completion of 66 UOC<br/><br/>",
-            "processed": "66UOC in ENGG#"
-        },
-        "tokens": [
-            "(",
-            "66UOC",
-            "in",
-            "ENGG#",
-            ")"
-        ],
-        "broke at": "Index 1, 66UOC"
-    },
     "FADA6700": {
         "condition": {
             "original": "Prerequisite: 48 units of credit overall. Student must be in good academic standing. Consent from ADA WIL Team required.<br/><br/>",
