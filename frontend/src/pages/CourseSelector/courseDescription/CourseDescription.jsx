@@ -123,6 +123,7 @@ export default function CourseDescription({ structure }) {
   if (id === "explore") return <div>This is the explore page</div>;
   if (id === "search") return <SearchCourse />;
   const addToPlanner = (type) => {
+    console.log(structure);
     const data = {
       courseCode: course.code,
       courseData: {
