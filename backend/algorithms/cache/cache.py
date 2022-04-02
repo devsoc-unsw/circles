@@ -6,26 +6,16 @@ This should be run from the backend directory or via runprocessors
 
 import re
 
+from algorithms.cache.cache_config import (CACHE_CONFIG,
+                                           CACHED_EXCLUSIONS_FILE,
+                                           CACHED_WARNINGS_FILE,
+                                           CONDITIONS_PROCESSED_FILE,
+                                           COURSE_MAPPINGS_FILE,
+                                           COURSES_PROCESSED_FILE,
+                                           MAPPINGS_FILE,
+                                           PROGRAM_MAPPINGS_FILE,
+                                           PROGRAMS_FORMATTED_FILE)
 from data.utility.data_helpers import read_data, write_data
-
-# INPUT SOURCES
-COURSES_PROCESSED_FILE = "./data/final_data/coursesProcessed.json"
-
-PROGRAMS_FORMATTED_FILE = "./data/scrapers/programsFormattedRaw.json"
-
-CACHED_EXCLUSIONS_FILE = "./algorithms/cache/exclusions.json"
-
-CONDITIONS_PROCESSED_FILE = "./data/final_data/conditionsProcessed.json"
-
-
-# OUTPUT SOURCES
-CACHED_WARNINGS_FILE = "./algorithms/cache/handbook_note.json"
-
-MAPPINGS_FILE = "./algorithms/cache/mappings.json"
-
-COURSE_MAPPINGS_FILE = "./algorithms/cache/courseMappings.json"
-
-PROGRAM_MAPPINGS_FILE = "./algorithms/cache/programMappings.json"
 
 
 def cache_exclusions():
@@ -108,32 +98,14 @@ def cache_program_mappings():
     Achieves this by looking for a keyword in the program's title
     """
 
+
+    keyword_codes = read_data(CACHE_CONFIG)
     # Initialise mappings with all the mapping codes
-    mappings = {}
-    mappings["ACTL#"] = {}
-    mappings["ASCI#"] = {}
-    mappings["BUSN#"] = {}
-    mappings["COMM#"] = {}
-    mappings["COMP#"] = {}
-    mappings["DATA#"] = {}
-    mappings["ECON#"] = {}
-    mappings["INFS#"] = {}
-    mappings["MATH#"] = {}
-    mappings["ZBUS#"] = {}
-    mappings["SOSS#"] = {}
-    mappings["MDIA#"] = {}
-    mappings["CRIM#"] = {}
-    mappings["LAWS#"] = {}
-    mappings["INST#"] = {}
-    mappings["SOSS#"] = {}
-    mappings["DDES#"] = {}
-    mappings["ARTS#"] = {}
-    mappings["DART#"] = {}
-    mappings["MUSC#"] = {}
-    mappings["SOCW#"] = {}
-    mappings["PPEC#"] = {}
-    mappings["EDST#"] = {}
     # TODO: Add any more mappings. Look into updating manual-fixes wiki page?
+    code_list = keyword_codes["code_list"]
+    mappings = {}
+    for code in code_list:
+        mappings[code] = {}
 
     programs = read_data(PROGRAMS_FORMATTED_FILE)
 
