@@ -5,11 +5,9 @@ import React from "react";
 import { BugOutlined } from "@ant-design/icons";
 import { Menu } from "antd";
 import { useNavigate } from "react-router";
-import useMediaQuery from "../../hooks/useMediaQuery";
 
 export const DrawerContent = ({ onCloseDrawer }) => {
   // const theme = useSelector(state => state.theme);
-  // const isSmall = useMediaQuery("(max-width: 1000px)");
   const FORM_LINK = "https://github.com/csesoc/Circles/issues?q=is%3Aissue+is%3Aopen";
   const navigate = useNavigate();
   // const dispatch = useDispatch();
