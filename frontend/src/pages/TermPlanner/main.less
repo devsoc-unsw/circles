@@ -6,6 +6,10 @@ body {
 .content {
   @small: ~"(max-width: 1400px)";
 
+  .mainContainer {
+    height: calc(100vh - 70px);
+    overflow: auto;
+  }
 
   .plannerContainer {
     display: flex;
@@ -103,7 +107,8 @@ body {
   }
 
   .alert {
-    margin-bottom: 1em;
+    max-width: 1.5em;
+    max-height: 1.5em;
   }
 
   .ant-picker-dropdown {
@@ -147,11 +152,11 @@ body {
   .settingsButton {
     margin-left: 1em;
     margin-top: 1em;
-    border: none;
+    border: 1px solid #cecece;
     border-radius: 0.5em;
     padding: 0.5em 0.7em 0.3em 0.7em;
     cursor: pointer;
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    // box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
   }
 
   .clicked {
@@ -457,13 +462,13 @@ body {
   }
 
   .settingsButton {
-    background-color: #e8e8e8;
+    background-color: white;
     &:hover {
-      background-color: #cecece;
+      background-color: #e3e3e3;
     }
   }
 
   .settingsIcon {
-    color: #303539;
+     color: #3e3e3e;
   }
 }

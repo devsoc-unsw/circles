@@ -23,7 +23,7 @@ const titleStyles = {
 
 const { Title } = Typography;
 const Header = () => {
-  const isSmall = useMediaQuery("(max-width: 1400px)");
+  const isSmall = useMediaQuery("(max-width: 1000px)");
   const [showDrawer, setShowDrawer] = React.useState(false);
   const [current, setCurrent] = React.useState(() => {
     const validPaths = new Set([
@@ -39,7 +39,7 @@ const Header = () => {
 
   return (
     <Layout className="header">
-      <Link to="degree-wizard">
+      <Link to="/degree-wizard">
         <div className="logo">
           <img alt="circles-logo" src={circlesLogo} width="40" height="40" />
           <Title level={3} style={titleStyles}>
@@ -71,10 +71,10 @@ const Header = () => {
               <span>Term Planner</span>
               <Link to="/term-planner" />
             </Menu.Item>
-            <Menu.Item key="progression-checker">
+            {/* <Menu.Item key="progression-checker">
               <span>Progression Checker</span>
               <Link to="/progression-checker"></Link>
-            </Menu.Item>
+            </Menu.Item> */}
           </Menu>
           <PlannerCart />
           {/* <ThemeToggle /> */}

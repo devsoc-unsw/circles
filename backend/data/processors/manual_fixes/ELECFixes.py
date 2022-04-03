@@ -57,9 +57,7 @@ def ELEC_3115():
     "processed": "MATH2069 && (PHY1231 || DPST1024)"
     """
 
-    # TODO: JOEL: Why didn't this work in the first place??????
-    # "broke at": "Index 1, MATH2069"
-    return "MATH2069 && (PHY1231 || DPST1024)"
+    return "MATH2069 && (PHYS1231 || DPST1024)"
 
 def ELEC_3705():
     """

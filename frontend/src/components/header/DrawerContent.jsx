@@ -4,17 +4,17 @@ import React from "react";
 // import { useSelector, useDispatch } from 'react-redux';
 import { BugOutlined } from "@ant-design/icons";
 import { Menu } from "antd";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import useMediaQuery from "../../hooks/useMediaQuery";
 
 export const DrawerContent = ({ onCloseDrawer }) => {
   // const theme = useSelector(state => state.theme);
   const isSmall = useMediaQuery("(max-width: 1000px)");
-  const FORM_LINK = "https://forms.gle/b3b8CrZsz9h5sZ3v9";
-  const history = useHistory();
+  const FORM_LINK = "https://github.com/csesoc/Circles/issues?q=is%3Aissue+is%3Aopen";
+  const navigate = useNavigate();
   // const dispatch = useDispatch();
   const handlePush = (url) => {
-    history.push(url);
+    navigate(url);
     onCloseDrawer();
   };
   const openFeedbackLink = () => {
@@ -26,16 +26,16 @@ export const DrawerContent = ({ onCloseDrawer }) => {
   //     onCloseDrawer();
   // }
   return (
-    <Menu mode="vertical" style={{ width: 230, marginTop: "2em" }}>
+    <Menu mode="vertical" style={{ marginTop: "2em" }}>
       <Menu.Item key="1" onClick={() => handlePush("/course-selector")}>
         Course Selector
       </Menu.Item>
       <Menu.Item key="3" onClick={() => handlePush("/term-planner")}>
         Term Planner
       </Menu.Item>
-      <Menu.Item key="2" onClick={() => handlePush("/progression-checker")}>
+      {/* <Menu.Item key="2" onClick={() => handlePush("/progression-checker")}>
         Progression Checker
-      </Menu.Item>
+      </Menu.Item> */}
       {isSmall && (
         <Menu.Item key="4" icon={<BugOutlined />} onClick={openFeedbackLink}>
           Report a bug

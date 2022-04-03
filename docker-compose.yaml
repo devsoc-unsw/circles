@@ -31,9 +31,26 @@ services:
     container_name: frontend
     ports:
       - '3000:3000'
+    env_file:
+      - ./env/frontend.env
     volumes:
       # Bind mount volume for live frontend updates while developing
       - ./frontend/src:/client/src
+    stdin_open: true
+    tty: true
+    depends_on:
+      - backend
+    networks:
+      - circles-net
+  frontend-prod:
+    build:
+      context: ./frontend
+      dockerfile: production.dockerfile
+    container_name: frontend
+    ports:
+      - '3000:80'
+    env_file:
+      - ./env/frontend.env
     stdin_open: true
     tty: true
     depends_on:

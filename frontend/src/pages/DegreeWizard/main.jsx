@@ -12,7 +12,8 @@ import { DatePicker, Button, Typography, Modal } from "antd";
 import "./main.less";
 import { springProps } from "./spring";
 import { scroller } from "react-scroll";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { YearStep } from "./steps/YearStep";
 
 const { Title } = Typography;
 const { RangePicker } = DatePicker;
@@ -21,11 +22,13 @@ function DegreeWizard() {
   const theme = useSelector((store) => store.theme);
   const dispatch = useDispatch();
   const [isModalVisible, setIsModalVisible] = React.useState(false);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     // TODO: Warning dialog before planner is reset.
-    setIsModalVisible(true);
+    if (localStorage.getItem("planner")) {
+      setIsModalVisible(true);
+    }
   }, []);
 
   const handleYearChange = (_, [startYear, endYear]) => {
@@ -60,13 +63,29 @@ function DegreeWizard() {
 
   const handleCancel = () => {
     setIsModalVisible(false);
-    history.push('/course-selector');
+    navigate("/course-selector");
   };
 
   return (
     <div className="degree-root-container">
-      <Modal title="Are you Sure?" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-        <p>You have existing data saved from your last session. Are you sure want to reset your planner?</p>
+      <Modal
+        title="Reset Planner?"
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        footer={[
+          <Button key="back" onClick={handleCancel}>
+            Go back to planner
+          </Button>,
+          <Button key="submit" type="primary" danger onClick={handleOk}>
+            Reset
+          </Button>,
+        ]}
+      >
+        <p>
+          Are you sure want to reset your planner? Your existing data will be
+          permanently removed.
+        </p>
       </Modal>
       <Title>Welcome to Circles!</Title>
       <h3 className=" subtitle">
@@ -77,24 +96,9 @@ function DegreeWizard() {
 
       <div className="steps-container">
         {currStep >= 1 && (
-          // TODO: Move the duration step into its own component
-          <animated.div style={props} className="step-duration">
-            <div className="steps-heading-container">
-              <Title level={4} className="text">
-                What years do you start and finish?
-              </Title>
-              {currStep === 1 && (
-                <Button type="primary" onClick={incrementStep}>
-                  Next
-                </Button>
-              )}
-            </div>
-            <RangePicker
-              picker="year"
-              size="large"
-              onChange={handleYearChange}
-            />
-          </animated.div>
+          <div className="step-content" id="Year">
+            <YearStep incrementStep={incrementStep} currStep={currStep} />
+          </div>
         )}
         {currStep >= 2 && (
           <div className="step-content" id="Degree">

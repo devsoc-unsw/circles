@@ -1,32 +1,22 @@
-""" 
-Loads cached data such as exclusions, program mappings, etc, into local JSON files
-for faster algorithms performance.
-
+"""
+Loads cached data such as exclusions, program mappings, etc, into local
+JSON files for faster algorithms performance.
 This should be run from the backend directory or via runprocessors
 """
 
 import re
 
+from algorithms.cache.cache_config import (CACHE_CONFIG,
+                                           CACHED_EXCLUSIONS_FILE,
+                                           CACHED_WARNINGS_FILE,
+                                           CONDITIONS_PROCESSED_FILE,
+                                           COURSE_MAPPINGS_FILE,
+                                           COURSES_PROCESSED_FILE,
+                                           MAPPINGS_FILE,
+                                           PROGRAM_MAPPINGS_FILE,
+                                           PROGRAMS_FORMATTED_FILE)
 from data.utility.data_helpers import read_data, write_data
 
-# INPUT SOURCES
-COURSES_PROCESSED_FILE = "./data/final_data/coursesProcessed.json"
-
-PROGRAMS_FORMATTED_FILE = "./data/scrapers/programsFormattedRaw.json"
-
-CACHED_EXCLUSIONS_FILE = "./algorithms/cache/exclusions.json"
-
-CONDITIONS_PROCESSED_FILE = "./data/final_data/conditionsProcessed.json"
-
-
-# OUTPUT SOURCES
-CACHED_WARNINGS_FILE = "./algorithms/cache/handbook_note.json"
-
-MAPPINGS_FILE = "./algorithms/cache/mappings.json"
-
-COURSE_MAPPINGS_FILE = "./algorithms/cache/courseMappings.json"
-
-PROGRAM_MAPPINGS_FILE = "./algorithms/cache/programMappings.json"
 
 def cache_exclusions():
     """
@@ -34,9 +24,8 @@ def cache_exclusions():
     COURSE: {
         EXCLUSION_1: 1,
         EXCLUSION_2: 1,
-        EXCLUSION_3: 1 
+        EXCLUSION_3: 1
     }
-
     NOTE: Should run this after all the conditions have been processed as sometimes
     exclusions are included inside the conditions text
     """
@@ -46,27 +35,28 @@ def cache_exclusions():
     cached_exclusions = {}
 
     for course, data in courses.items():
-        cached_exclusions[course] = data["exclusions"]
-    
+        cached_exclusions[course] = data["exclusions"] | data["equivalents"]
+
     write_data(cached_exclusions, CACHED_EXCLUSIONS_FILE)
+
 
 def cache_handbook_note():
     """
     Reads from processed conditions and stores the warnings in a map mapping
     COURSE: WARNING
-    
-    NOTE: Condition warnings are created during the manual fix stage, so this 
+
+    NOTE: Condition warnings are created during the manual fix stage, so this
     will need to be re-run as more conditions are manually fixed.
     """
 
     conditions = read_data(CONDITIONS_PROCESSED_FILE)
 
-    cached_handbook_note= {}
+    cached_handbook_note = {}
 
     for course, data in conditions.items():
         if "handbook_note" in data:
             cached_handbook_note[course] = data["handbook_note"]
-    
+
     write_data(cached_handbook_note, CACHED_WARNINGS_FILE)
 
 
@@ -151,45 +141,23 @@ def cache_program_mappings():
     Achieves this by looking for a keyword in the program's title
     """
 
+    keyword_codes = read_data(CACHE_CONFIG)
     # Initialise mappings with all the mapping codes
-    mappings = {}
-    mappings["ACTL#"] = {}
-    mappings["ASCI#"] = {}
-    mappings["BUSN#"] = {}
-    mappings["COMM#"] = {}
-    mappings["COMP#"] = {}
-    mappings["DATA#"] = {}
-    mappings["ECON#"] = {}
-    mappings["INFS#"] = {}
-    mappings["MATH#"] = {}
-    mappings["ZBUS#"] = {}
     # TODO: Add any more mappings. Look into updating manual-fixes wiki page?
 
-    programs = read_data(PROGRAMS_FORMATTED_FILE)        
+    code_list = keyword_codes["code_list"]
 
+    mappings = {}
+    for code in code_list:
+        mappings[code] = {}
+
+    programs = read_data(PROGRAMS_FORMATTED_FILE)
+
+    keyword_map = keyword_codes["keyword_mapping"]
     for program in programs.values():
-        if re.match(r"actuarial", program["title"], flags=re.IGNORECASE):
-            mappings["ACTL#"][program["code"]] = 1
-            mappings["ZBUS#"][program["code"]] = 1
-        elif re.match(r"business", program["title"], flags=re.IGNORECASE):
-            mappings["BUSN#"][program["code"]] = 1
-            mappings["ZBUS#"][program["code"]] = 1
-        elif re.match(r"commerce", program["title"], flags=re.IGNORECASE):
-            mappings["COMM#"][program["code"]] = 1
-            mappings["ZBUS#"][program["code"]] = 1
-        elif re.match(r"economics", program["title"], flags=re.IGNORECASE):
-            mappings["ECON#"][program["code"]] = 1
-            mappings["ZBUS#"][program["code"]] = 1
-        elif re.match(r"information systems", program["title"], flags=re.IGNORECASE):
-            mappings["INFS#"][program["code"]] = 1
-            mappings["ZBUS#"][program["code"]] = 1
-        elif re.match(r"data science and decisions", program["title"], flags=re.IGNORECASE):
-            mappings["DATA#"][program["code"]] = 1
-        elif re.match(r"computer science", program["title"], flags=re.IGNORECASE):
-            mappings["COMP#"][program["code"]] = 1
-        elif re.match(r"advanced maths", program["title"], flags=re.IGNORECASE):
-            mappings["MATH#"][program["code"]] = 1
-        elif re.match(r"advanced science", program["title"], flags=re.IGNORECASE):
-            mappings["ASCI#"][program["code"]] = 1
-        
+        for keyword in keyword_map:
+            if keyword.lower() in program["title"].lower():
+                for code in keyword_map[keyword]:
+                    mappings[code][program["code"]] = 1
+
     write_data(mappings, PROGRAM_MAPPINGS_FILE)

@@ -1,10 +1,10 @@
 """
 https://github.com/csesoc/Circles/wiki/Manual-Fixes-to-Course-Prerequisites
 
-Copy this into a new file for the relevant faculty's fixes: 
+Copy this into a new file for the relevant faculty's fixes:
 e.g. COMPFixes.py, ACCTFixes.py, PSYCFixes.py
 
-Apply manual FINS fixes to processed conditions in conditionsProcessed.json so 
+Apply manual FINS fixes to processed conditions in conditionsProcessed.json so
 that they can be fed into algorithms.
 
 If you make a mistake and need to regenerate conditionsProcessed.json, then you
@@ -37,7 +37,6 @@ def fix_conditions():
     CONDITIONS["FINS3645"][PROCESSED] = FINS_3645_6()
     CONDITIONS["FINS3646"][PROCESSED] = FINS_3645_6()
     CONDITIONS["FINS4774"][PROCESSED] = FINS_4774()
-    CONDITIONS["FINS4775"][PROCESSED] = FINS_4775()
     CONDITIONS["FINS4776"][PROCESSED] = FINS_4776_7_9()
     CONDITIONS["FINS4777"][PROCESSED] = FINS_4776_7_9()
     CONDITIONS["FINS4779"][PROCESSED] = FINS_4776_7_9()
@@ -50,7 +49,7 @@ def fix_conditions():
 
 
 def FINS_2101():
-    """ 
+    """
     "original": "Enrolled in plan FINSD13554 or in FINSBH3565<br/><br/>",
 
     "processed": "plan FINSD13554 || in FINSBH3565"
@@ -119,16 +118,6 @@ def FINS_4774():
     """
 
     return "(FINSAH4501 || FINSBH3565 || 4520) && [FINS3775 || FINS4775 || FINS4779]"
-
-
-def FINS_4775():
-    """
-    "original": "Prerequisite:70% or greater in FINS2624 and ECON1203 or enrolled in specialisation FINSAH4501 or FINSBH3565 or program 4520<br/><br/>",
-
-    "processed": "70% || greater in FINS2624 && ECON1203 || specialisation FINSAH4501 || FINSBH3565 || program 4520"
-    """
-
-    return "(70GRADE in FINS2624 && 70GRADE in ECON1203) || (FINSAH4501 || FINSBH3565 || 4520)"
 
 
 def FINS_4776_7_9():

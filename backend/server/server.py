@@ -1,6 +1,13 @@
+"""
+Configure the FastAPI server
+"""
+
+
+
 from fastapi import FastAPI
-from server.routers import planner, courses, programs
 from fastapi.middleware.cors import CORSMiddleware
+
+from server.routers import courses, planner, programs
 
 app = FastAPI()
 
@@ -19,7 +26,8 @@ origins = [
     "http://frontend:8080",
     "http://frontend:8000",
     "http://frontend:3000",
-    "http://frontend:3001"
+    "http://frontend:3001",
+    "https://circles.csesoc.unsw.edu.au"
 ]
 
 app.add_middleware(
@@ -34,6 +42,7 @@ app.include_router(planner.router)
 app.include_router(courses.router)
 app.include_router(programs.router)
 
-@app.get('/')
+
+@app.get("/")
 async def index():
     return "At index inside server.py"

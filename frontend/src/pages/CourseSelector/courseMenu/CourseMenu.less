@@ -3,7 +3,8 @@
 .cs-menu-root {
   overflow: auto;
   overflow-x: hidden;
-  height: calc(100vh - 35vh);
+  height: calc(100vh - 20vh - 85px - 40px);
+  min-height: 100%;
   scrollbar-width: thin; 
 }
 
@@ -29,6 +30,10 @@
 
 .bold {
   font-weight: 700;
+}
+
+.locked {
+  font-weight: 100;
 }
 
 .activeCourse {
@@ -79,5 +84,11 @@
   }
 }
 
-
-
+.skelContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0rem 1rem;
+  height: 100%;
+  overflow: hidden;
+}

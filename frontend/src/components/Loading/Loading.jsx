@@ -1,17 +1,22 @@
 import React from "react";
 import circlesLogo from "../../images/circlesWithBg.svg";
 import "./loading.less";
-import { useHistory } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function Loading({ setLoading }) {
-  const history = useHistory();
+  const navigate = useNavigate();
+
+  const location = useLocation();
+  // redirect index page to course selector
+  let route = location.pathname === "/" ? "course-selector" : location.pathname;
 
   React.useEffect(() => {
     setTimeout(() => {
       setLoading(false);
       if (JSON.parse(localStorage.getItem("degree")) === null)
-        history.push("/degree-wizard");
-      else history.push("/course-selector");
+        // first-time user
+        navigate("/degree-wizard");
+      else navigate(route);
     }, 750);
   }, []);
 
