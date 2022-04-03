@@ -231,13 +231,7 @@ const MenuItem = ({
         key={courseCode}
         onClick={handleClick}
       >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
+        <div className="menuItemContainer">
           <div>
             {courseCode} {renderAccurateNote()}{" "}
             {!unlocked && <Padlock width="10px" />}
@@ -249,11 +243,7 @@ const MenuItem = ({
                 size="small"
                 shape="circle"
                 icon={<AiOutlinePlus />}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
+                className="quickAddBtn"
               />
             </Tooltip>
           )}
