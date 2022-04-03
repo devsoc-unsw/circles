@@ -1,202 +1,55 @@
 {
-
-
-    "S MechEng": "School of Mechanical and Manufacturing Engineering",
-    "School of Mechanical and Manufacturing Engineering": "S MechEng",
-
-    "S BiomedEng": "Graduate School of Biomedical Engineering",
-    "Graduate School of Biomedical Engineering": "S BiomedEng",
-
-    "S CivEng": "School of Civil and Environmental Engineering",
-    "School of Civil and Environmental Engineering": "S CivEng",
-
-    "S Comp": "School of Computer Science and Engineering",    
-    "School of Computer Science and Engineering": "S Comp",
-
-    "S ElecEng": "School of Electrical Engineering & Telecommunications",
-    "School of Electrical Engineering & Telecommunications": "S ElecEng",
-
-    "S MinEng": "School of Minerals & Energy Resources Engineering",
-    "School of Minerals & Energy Resources Engineering": "S MinEng",
-
-    "S PhotoEng": "School of Photovoltaic and Renewable Engineering",
-    "School of Photovoltaic and Renewable Engineering": "S PhotoEng",
-
-    "S ChemEng": "School of Chemical Engineering",
-    "School of Chemical Engineering": "S ChemEng",
-
-
-
-    "S Math": "School of Mathematics & Statistics",
-    "School of Mathematics & Statistics": "S Math",
-
-    "S Aviation": "School of Aviation",
-    "School of Aviation": "S Aviation",
-
-    "S Biotech": "School of Biotechnology and Biomolecular Sciences",
-    "School of Biotechnology and Biomolecular Sciences": "S Biotech",
-
-    "S Bio": "School of Biological, Earth and Environmental Sciences",
-    "School of Biological, Earth and Environmental Sciences": "S Bio",
-
-    "S Chem": "School of Chemistry",
-    "School of Chemistry": "S Chem",
-
-    "S MatScience": "School of Materials Science & Engineering",
-    "School of Materials Science & Engineering": "S MatScience",
-
-    "S Optom": "School of Optometry and Vision Science",
-    "School of Optometry and Vision Science": "S Optom",
-
-    "S Phys": "School of Physics",
-    "School of Physics": "S Phys",
-
-    "S Psych": "School of Psychology",
-    "School of Psychology": "S Psych",
-
-
-
-
-
-    "S Design": "School of Art and Design",
-    "School of Art & Design": "S Design",
-
-    "S Art": "School of the Arts and Media",
-    "School of the Arts and Media": "S Art",
-
-    "S Built": "School of Built Environment",
-    "School of Built Environment": "S Built",
-
-    "S Edu": "School of Education",
-    "School of Education": "S Edu",
-
-    "S Humanities": "School of Humanities and Languages",
-    "School of Humanities and Languages": "S Humanities",
-
-    "S Social": "School of Social Sciences",
-    "School of Social Sciences": "S Social",
-
-
-
-
-
-    "S Criminology": "School of Law, Society and Criminology",
-    "School of Law, Society and Criminology": "S Criminology",
-
-    "S PublicLaw": "School of Global and Public Law",
-    "School of Global and Public Law": "S PublicLaw",
-
-    "S PrivateLaw": "School of Private and Commercial Law",
-    "School of Private and Commercial Law": "S PrivateLaw",
-
-
-
-
-
-    "S Management": "School of Management and Governance",
-    "School of Management and Governance": "S Management",
-
-    "S Accounting": "School of Accounting, Auditing and Taxation",
-    "School of Accounting, Auditing and Taxation": "S Accounting",
-
-    "S Finance": "School of Banking and Finance",
-    "School of Banking and Finance": "S Finance",
-
-    "S Economics": "School of Economics",
-    "School of Economics": "S Economics",
-
-    "S InfoSys": "School of Information Systems and Technology Management",
-    "School of Information Systems and Technology Management": "S InfoSys",
-
-    "S AGSM": "AGSM MBA Programs",
-    "AGSM MBA Programs": "S AGSM",
-
-    "S Marketing": "School of Marketing",
-    "School of Marketing": "S Marketing",
-
-    "S Actuary": "School of Risk and Actuarial Studies",
-    "School of Risk and Actuarial Studies": "S Actuary",
-
-
-
-
-    "S MedSci": "School of Medical Sciences",
-    "School of Medical Sciences": "S MedSci",
-
-
-
-    "S Canberra": "UC School of Business",
-    "UC School of Business": "S Canberra",
-
-
-    "S Indigenous": "Nura Gili Indigenous Programs",
-    "Nura Gili Indigenous Programs": "S Indigenous",
-
-    "S GlobalDiplomas": "UNSW Global Diplomas",
-    "UNSW Global Diplomas": "S GlobalDiplomas",
-
-
-    "S Registra": "Division of Registrar and Deputy Principal",
-    "Division of Registrar and Deputy Principal": "S Registra",
-
-
-    "S Population": "School of Population Health",
-    "School of Population Health": "S Population",
-
-    "S Success": "Student Academic and Career Success",
-    "Student Academic and Career Success": "S Success",
-
-
-    "S HealthSciences": "School of Health Sciences",
-    "School of Health Sciences": "S HealthSciences",
-
-    "S UCEngineering": "UC Engineering & Information Technology",
-    "UC Engineering & Information Technology": "S UCEngineering",
-
-    "S UCHumanities": "UC School of Humanities and Social Sciences",
-    "UC School of Humanities and Social Sciences": "S UCHumanities",
-
-    "S UCScience": "UC Science",
-    "UC Science": "S UCScience",
-
-
-
-    "F Engineering": "Faculty of Engineering",
+    "UNSW Business School": "F Business",
+    "Faculty of Arts, Design and Architecture": "F Arts",
     "Faculty of Engineering": "F Engineering",
-    
-
-
-    "F Art": "Faculty of Arts, Design and Architecture",
-    "Faculty of Arts, Design and Architecture": "F Art",
-    
-
-
-    "F Law": "Faculty of Law and Justice",
-    "Faculty of Law and Justice": "F Law",
-
-
-
-    "F Med": "Faculty of Medicine and Health",
-    "Faculty of Medicine and Health": "F Med",
-
-
-
-    "F Science": "Faculty of Science",
+    "Faculty of Medicine and Health": "F Medicine",
+    "DVC (Academic) Board of Studies": "F DVC",
     "Faculty of Science": "F Science",
-
-
-    "F Business": "UNSW Business School",
-    "UNSW Business School": "F Business", 
-
-
-    "F Canberra": "UNSW Canberra at ADFA",
+    "Faculty of Law and Justice": "F Law",
+    "UNSW Global": "F Global",
     "UNSW Canberra at ADFA": "F Canberra",
-
-
-    "F UNSWGlobal": "UNSW Global",
-    "UNSW Global": "F UNSWGlobal",
-
-    "F DVC": "DVC (Academic) Board of Studies",
-    "DVC (Academic) Board of Studies": "F DVC"
-
+    "School of Accounting, Auditing and Taxation": "S Accounting",
+    "School of Risk and Actuarial Studies": "S Risk",
+    "School of Art & Design": "S Art",
+    "School of Mechanical and Manufacturing Engineering": "S Mechanical",
+    "School of Medical Sciences": "S Medical",
+    "School of Built Environment": "S Built",
+    "School of the Arts and Media": "S Arts",
+    "School of Humanities and Languages": "S Humanities",
+    "School of Social Sciences": "S Social",
+    "Nura Gili Indigenous Programs": "S Nura",
+    "School of Aviation": "S Aviation",
+    "School of Biotechnology and Biomolecular Sciences": "S Biotechnology",
+    "School of Biological, Earth and Environmental Sciences": "S Biological",
+    "School of Computer Science and Engineering": "S Computer",
+    "Graduate School of Biomedical Engineering": "S Biomedical",
+    "School of Chemical Engineering": "S Chemical",
+    "School of Chemistry": "S Chemistry",
+    "School of Information Systems and Technology Management": "S Information",
+    "School of Management and Governance": "S Management",
+    "School of Law, Society and Criminology": "S Law",
+    "School of Civil and Environmental Engineering": "S Civil",
+    "School of Mathematics & Statistics": "S Mathematics",
+    "UNSW Global Diplomas": "S Global",
+    "School of Economics": "S Economics",
+    "School of Education": "S Education",
+    "School of Electrical Engineering & Telecommunications": "S Electrical",
+    "Division of Registrar and Deputy Principal": "S Division",
+    "School of Banking and Finance": "S Banking",
+    "School of Global and Public Law": "S Global",
+    "School of Private and Commercial Law": "S Private",
+    "School of Population Health": "S Population",
+    "School of Physics": "S Physics",
+    "Student Academic and Career Success": "S Student",
+    "School of Health Sciences": "S Health",
+    "School of Marketing": "S Marketing",
+    "School of Materials Science & Engineering": "S Materials",
+    "School of Minerals & Energy Resources Engineering": "S Minerals",
+    "School of Optometry and Vision Science": "S Optometry",
+    "School of Psychology": "S Psychology",
+    "School of Photovoltaic and Renewable Engineering": "S Photovoltaic",
+    "UC School of Business": "S Business",
+    "UC Engineering & Information Technology": "S UC-Engineering",
+    "UC School of Humanities and Social Sciences": "S Humanities",
+    "UC Science": "S UC-Science"
 }

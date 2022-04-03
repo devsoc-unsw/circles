@@ -475,8 +475,8 @@ def test_school_condition():
         "COMP1521": (6, None),
     })
 
-    comp_12uoc_cond = create_condition(["(", "12UOC", "in", "S", "Comp", ")"])
-    comp_18uoc_cond = create_condition(["(", "18UOC", "in", "S", "Comp", ")"])
+    comp_12uoc_cond = create_condition(["(", "12UOC", "in", "S", "Computer", ")"])
+    comp_18uoc_cond = create_condition(["(", "18UOC", "in", "S", "Computer", ")"])
 
     assert (comp_12uoc_cond.validate(user))[0] == True
     assert (comp_18uoc_cond.validate(user))[0] == False
