@@ -64,9 +64,9 @@ class LevelCourseCategory(Category):
         return f"Level {self.level} {self.code} courses"
 
 class SchoolCategory(Category):
-    '''Category for courses belonging to a school (e.g. S Mech)'''
+    '''Category for courses belonging to a school (e.g. S Mechanical)'''
     def __init__(self, school):
-        self.school = school # The code for the school (S Mech)
+        self.school = school # The code for the school (S Mechanical)
 
     def match_definition(self, course):
         return course in CACHED_MAPPINGS[self.school]
