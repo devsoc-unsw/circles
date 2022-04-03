@@ -5,12 +5,15 @@ import { useNavigate } from "react-router-dom";
 import { ReactComponent as PlannerIcon } from "../assets/planner-icon.svg";
 import { DeleteOutlined } from "@ant-design/icons";
 import { plannerActions } from "../../actions/plannerActions";
+import { courseTabActions } from "../../actions/courseTabActions";
 import "./plannerCart.less";
 
 const { Text, Title } = Typography;
 const CourseCard = ({ code, title, showAlert }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [loading, setLoading] = React.useState(false);
+  
   const confirmDelete = () => {
     dispatch(plannerActions("REMOVE_COURSE", code));
     setLoading(true);
@@ -19,9 +22,15 @@ const CourseCard = ({ code, title, showAlert }) => {
       setLoading(false);
     }, 700);
   };
+
+  const handleCourseLink = () => {
+    navigate(`/course-selector`);
+    dispatch(courseTabActions("ADD_TAB", code));
+  };
+
   return (
     <div className="planner-cart-card">
-      <div>
+      <div onClick={() => handleCourseLink()} style={{cursor: "pointer"}}>
         <Text className="text" strong>
           {code}:{" "}
         </Text>
