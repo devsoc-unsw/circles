@@ -231,7 +231,7 @@ def getLegacyCourses(year, term):
     result = {c['code']: c['title'] for c in archivesDB[year].find() if term in c['terms']} 
 
     if result == {}:
-        raise HTTPException(status_code=400, detail=f"Invalid term or year. Valid terms: ST, T1, T2, T3. Valid years: 2019, 2020, 2021, 2022.")
+        raise HTTPException(status_code=400, detail=f"Invalid term or year. Valid terms: T0, T1, T2, T3. Valid years: 2019, 2020, 2021, 2022.")
 
     return {'courses' : result}
 

@@ -84,7 +84,7 @@ def format_types(processed: dict) -> None:
 
 
 def process_terms(processed: dict, formatted: dict) -> None:
-    """Processes terms: e.g. 'Summer Term, Term 2' to ["ST", "T2"].
+    """Processes terms: e.g. 'Summer Term, Term 2' to ["T0", "T2"].
     Terms that do not conform to this (e.g. 'Summer Canberra') are left
     as is and will be modified at a later stage"""
     res = ""
@@ -93,7 +93,7 @@ def process_terms(processed: dict, formatted: dict) -> None:
     elif formatted["calendar"] == "Semester":
         res = re.sub("Semester ", "S", formatted["terms"])
 
-    res = re.sub("Summer Term", "ST", res)
+    res = re.sub("Summer Term", "T0", res)
     res = re.sub("Summer Canberra", "SC", res)
     res = res.split(",")
     res = [item.strip(" ") for item in res]  # Strip any remaining spaces
