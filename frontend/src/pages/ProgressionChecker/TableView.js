@@ -6,7 +6,7 @@ const TableView = ({checkercourses}) => {
     const columns = [
         {
             title: 'Course Name',
-            Index: 'name',
+            dataIndex: 'name',
             key: 'name',
             render: name => {
                 return <a>{name}</a>
@@ -14,12 +14,12 @@ const TableView = ({checkercourses}) => {
         },
         {
             title: 'UOC',
-            Index: 'UOC',
+            dataIndex: 'UOC',
             key: 'UOC',
         },
         {
             title: 'Faculty',
-            Index: 'faculty',
+            dataIndex: 'faculty',
             key: 'faculty',
             filters: [
                 {
@@ -35,13 +35,13 @@ const TableView = ({checkercourses}) => {
         },
         {
             title: 'State',
-            Index: 'state',
+            dataIndex: 'state',
             key: 'state',
             sorter: (a,b) => a.state.localeCompare(b.state),
         },
         {
             title: 'Time',
-            Index: 'time',
+            dataIndex: 'time',
             key: 'time',
             sorter: (a,b) => a.time.localeCompare(b.time),
         },
@@ -50,7 +50,7 @@ const TableView = ({checkercourses}) => {
     // console.log(checkercourses)
     return (
         <div className = "listPage">
-            <Table className="table-striped-rows" Source={checkercourses.corecourses} columns={columns} />
+            <Table className="table-striped-rows" dataSource={checkercourses.corecourses} columns={columns} />
         </div>
     );
 };
