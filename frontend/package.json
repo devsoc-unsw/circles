@@ -11,7 +11,7 @@
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^14.0.4",
     "@tippyjs/react": "^4.2.6",
-    "antd": "^4.19.4",
+    "antd": "^4.19.5",
     "axios": "^0.26.1",
     "craco-less": "^1.17.1",
     "framer-motion": "^6.2.8",
