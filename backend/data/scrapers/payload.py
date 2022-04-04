@@ -12,7 +12,7 @@ HEADERS = {
     "content-type": "application/json",
 }
 
-def create_payload(size, content_type, year):
+def create_payload(size, content_type, year = LIVE_YEAR):
     """Create a payload of the given size
     content_type will be used as a prefix for the query fields
     Note: If changing any of the keys and passing them in as an argument,
