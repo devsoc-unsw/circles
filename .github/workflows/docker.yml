@@ -19,7 +19,7 @@ jobs:
           - component: frontend
             dockerfile: production.dockerfile
             args: |
-              "API_URL=https://circlesapi.csesoc.unsw.edu.au"
+              "API_URL=https://circlesapi.csesoc.app"
           - component: backend
             dockerfile: backend.dockerfile
     steps:

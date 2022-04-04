@@ -62,28 +62,71 @@ def cache_handbook_note():
 
 def cache_mappings():
     """
-    Reads from courses and mappings to map course to a school/faculty
+    Writes to mappings.json and courseMappings.json (i.e maps courses to corresponding school/faculty)
     """
-    final_mappings = {}
+    mappings = {}
+    courseMappings = {}
     courses = read_data(COURSES_PROCESSED_FILE)
-    mappings = read_data(MAPPINGS_FILE)
-    # Initialise keys in final file
-    for mapping in mappings:
-        first_word = mapping.split()[0]
-        if len(first_word) == 1:
-            final_mappings[mapping] = {}
-    # Map courses to keys
+    
+    # Tokenise faculty using regex, e.g 'UNSW Business School' -> 'F Business'
+    def tokeniseFaculty(Faculty):
+        faculty_token = "F "
+        if re.search("Faculty of.+", Faculty):
+            match_object = re.search("(?<=Faculty\sof\s)[^\s\n\,]+", Faculty)
+        elif re.search("UNSW", Faculty):
+            match_object = re.search(r"(?<=UNSW\s)[^\s\n\,]+", Faculty)
+        else:
+            match_object = re.search("^([\w]+)", Faculty)
+        match = match_object.group()
+        faculty_token += match
+        return faculty_token
+    
+    # Tokenise faculty using regex, e.g 'School of Psychology' -> 'S Psychology'
+    def tokeniseSchool(School):
+        school_token = "S "
+        if re.search("School\sof\sthe.+", School):
+            match_object = re.search("(?<=School\sof\sthe\s)[^\s\n\,]+", School)
+        elif re.search("School\sof\s.+", School):
+            match_object = re.search("(?<=School\sof\s)[^\s\n\,]+", School)
+        elif re.search("^(UC)", School):
+            match_object = re.search("(?<=UC\s)[^\s\n\,]+", School)
+            match = school_token + "UC-" +  match_object.group()
+            return match
+        elif re.search("UNSW", School):
+            match_object = re.search("(?<=UNSW\s)[^\s\n\,]+", School)
+        else: 
+            match_object = re.search("^([\w]+)", School)
+        match = match_object.group()
+        school_token += match
+        return school_token
+
+    # add faculties to mappings.json
+    for course in courses:
+        faculty = courses[course]['faculty']
+        if faculty not in mappings:
+            faculty_token = tokeniseFaculty(faculty)
+            mappings[faculty] = faculty_token
+            courseMappings[faculty_token] = {} 
+    # add schools to mappings.json
     for course in courses.values():
-        course_code = course["code"]
-        course_faculty = course["faculty"]
-        if "school" in course:
-            course_school = course["school"]
-            final_mappings[mappings[course_school]][course_code] = 1
+        if 'school' in course:
+            school = course['school']
+            if school not in mappings:
+                school_token = tokeniseSchool(school)
+                mappings[school] = school_token
+                courseMappings[school_token] = {} 
+    write_data(mappings, MAPPINGS_FILE)
 
-        final_mappings[mappings[course_faculty]][course_code] = 1
-
-    write_data(final_mappings, COURSE_MAPPINGS_FILE)
-
+    # finalise
+    for course in courses.values():
+        courseCode = course['code']
+        courseFaculty = course['faculty']
+        if 'school' in course:
+            courseSchool = course['school']
+            courseMappings[mappings[courseSchool]][courseCode] = 1
+        courseMappings[mappings[courseFaculty]][courseCode] = 1
+    
+    write_data(courseMappings, COURSE_MAPPINGS_FILE)
 
 def cache_program_mappings():
     """

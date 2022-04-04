@@ -61,6 +61,7 @@ const Header = () => {
             onClick={(e) => setCurrent(e.key)}
             selectedKeys={[current]}
             mode="horizontal"
+            overflowedIndicator={null}
             style={menuStyles}
           >
             <Menu.Item key="course-selector">
