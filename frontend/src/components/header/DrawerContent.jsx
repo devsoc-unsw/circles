@@ -5,11 +5,9 @@ import React from "react";
 import { BugOutlined } from "@ant-design/icons";
 import { Menu } from "antd";
 import { useNavigate } from "react-router";
-import useMediaQuery from "../../hooks/useMediaQuery";
 
 export const DrawerContent = ({ onCloseDrawer }) => {
   // const theme = useSelector(state => state.theme);
-  const isSmall = useMediaQuery("(max-width: 1000px)");
   const FORM_LINK = "https://github.com/csesoc/Circles/issues?q=is%3Aissue+is%3Aopen";
   const navigate = useNavigate();
   // const dispatch = useDispatch();
@@ -36,11 +34,9 @@ export const DrawerContent = ({ onCloseDrawer }) => {
       {/* <Menu.Item key="2" onClick={() => handlePush("/progression-checker")}>
         Progression Checker
       </Menu.Item> */}
-      {isSmall && (
-        <Menu.Item key="4" icon={<BugOutlined />} onClick={openFeedbackLink}>
-          Report a bug
-        </Menu.Item>
-      )}
+      <Menu.Item key="4" icon={<BugOutlined />} onClick={openFeedbackLink}>
+        Report a bug
+      </Menu.Item>
       {/* <Menu.ItemGroup key="customisation" title="Customisation">
                 <Menu.Item key="4" 
                     onClick={() => handleThemeToggle()}
