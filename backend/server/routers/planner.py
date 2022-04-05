@@ -66,10 +66,10 @@ async def validateTermPlanner(
 ):
     """
     Will iteratively go through the term planner data whilst "building up" the user.
-    Starting from 1st year ST, we will create an empty user and evaluate the courses.
-    Then we will add ST courses to the user and evaluate T1. Then we will add T1
+    Starting from 1st year T0, we will create an empty user and evaluate the courses.
+    Then we will add T0 courses to the user and evaluate T1. Then we will add T1
     courses and evaluate T2. Then add T2 and evaluate T3. Then add T3 and evaluate
-    2nd year ST... and so on.
+    2nd year T0... and so on.
 
     The mostRecentPastTerm will show the latest term (and current year) that has 
     passed and all warnings will be suppressed until after this term

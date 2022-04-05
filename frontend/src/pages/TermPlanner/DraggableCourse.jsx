@@ -19,6 +19,7 @@ function DraggableCourse({ code, index }) {
   const prereqDisplay = prereqs.trim();
   const warning = courses.get(code)["warning"];
   const plannedFor = courses.get(code)["plannedFor"];
+  const isLegacy = courses.get(code)["isLegacy"] && parseInt(plannedFor.substring(0, 4)) >= parseInt(new Date().getFullYear()) ? true : false;
 
   const { show } = useContextMenu({
     id: `${code}-context`,
@@ -50,13 +51,13 @@ function DraggableCourse({ code, index }) {
             className={`course ${isSummerEnabled && "summerViewCourse"} 
 			${isDragDisabled && " dragDisabledCourse"} 
 			${isDragDisabled && warning && " disabledWarning"}
-			${warning === true && " warning"}`}
+			${(warning || isLegacy) && " warning"}`}
             data-tip
             data-for={code}
             id={code}
             onContextMenu={displayContextMenu}
           >
-            {warning && (
+            {(warning || isLegacy) && (
               <IoWarningOutline
                 className="alert"
                 size="2.5em"
@@ -87,9 +88,9 @@ function DraggableCourse({ code, index }) {
       <ContextMenu code={code} plannedFor={plannedFor} />
       {/* display prereq tooltip for all courses. However, if a term is marked as complete 
 	  and the course has no warning, then disable the tooltip */}
-      {prereqDisplay !== "" && !isDragDisabled && warning && (
+      {!isDragDisabled && (warning || isLegacy) && (
         <ReactTooltip id={code} place="bottom" className="tooltip">
-          {prereqDisplay}
+          {isLegacy ? "This course is discontinued." : prereqDisplay}
         </ReactTooltip>
       )}
     </>
