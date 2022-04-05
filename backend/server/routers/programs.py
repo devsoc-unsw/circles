@@ -135,22 +135,26 @@ def getMinors(programCode: str):
 
     return {"minors": minrs}
 
-def addSubgroupContainer(structure, type, container, exceptions):
+def convertSubgroupObjectToCoursesDict(object: str, description: str|list[str]) -> dict[str, str]:
+    """ gets a subgroup object (format layed out in the processor) and fetches the exact courses its referring to """
+    if " or " in object:
+        return {c: description[index] for index, c in enumerate(object.split(" or "))}
+    elif not re.match(r"[A-Z]{4}[0-9]{4}", object):
+        return search(object)
+    else:
+        return {object: description}
+
+def addSubgroupContainer(structure: dict, type: str, container: dict, exceptions: list[str]) -> list[str]:
+    """returns the added courses"""
     structure[type][container["title"]] = {}
     item = structure[type][container["title"]]
 
     item["UOC"] = container["credits_to_complete"]
     item["courses"] = {}
     for object, description in container["courses"].items():
-        if " or " in object:
-            courses_mentioned = {c: description[index] for index, c in enumerate(object.split(" or "))}
-        elif not re.match(r"[A-Z]{4}[0-9]{4}", object):
-            courses_mentioned = search(object)
-        else:
-            courses_mentioned = {object: description}
         item["courses"] = item["courses"] | {
-            course: description
-            for course, description in courses_mentioned.items()
+            course: description for course, description
+            in convertSubgroupObjectToCoursesDict(object, description).items()
             if course not in exceptions
         }
 
@@ -169,9 +173,8 @@ def addSpecialisation(structure: dict, code: str, type: str):
     cores = next(filter(lambda a: "Core" in a["title"], spnResult["curriculum"]))
     exceptions = addSubgroupContainer(structure, type, cores, [])
     for container in spnResult["curriculum"]:
-        if "Core" in container["title"]:
-            continue
-        addSubgroupContainer(structure, type, container, exceptions)
+        if "Core" not in container["title"]:
+            addSubgroupContainer(structure, type, container, exceptions)
 
 
 
