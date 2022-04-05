@@ -135,8 +135,8 @@ export default function CourseDescription({ structure }) {
         prereqs: course.raw_requirements,
         isLegacy: course.is_legacy,
         isUnlocked: true,
-        warnings: course.warnings,
-        handbook_note: course.handbook_note,
+        warnings: [],
+        handbook_note: "",
       },
     };
     dispatch(plannerActions("ADD_TO_UNPLANNED", data));

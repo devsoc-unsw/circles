@@ -56,6 +56,9 @@ const plannerReducer = (state = initialState, action) => {
     const nCourses = state.courses;
     nCourses.get(code).plannedFor = null;
     nCourses.get(code).warning = false;
+    nCourses.get(code).isUnlocked = true;
+    nCourses.get(code).warnings = [];
+    nCourses.get(code).handbook_note = ""; 
 
     stateCopy = {
       ...state,
@@ -114,6 +117,7 @@ const plannerReducer = (state = initialState, action) => {
       console.log(coursesCpy);
       for (const course in action.payload) {
         // coursesCpy.set(course, !data.courses_state[course].unlocked);
+        coursesCpy.get(course).warning = !action.payload[course].unlocked;
         coursesCpy.get(course).isUnlocked = action.payload[course].unlocked;
         coursesCpy.get(course).warnings = action.payload[course].warnings;
         coursesCpy.get(course).handbook_note = action.payload[course].handbook_note;
