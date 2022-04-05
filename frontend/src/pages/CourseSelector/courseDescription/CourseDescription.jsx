@@ -133,6 +133,9 @@ export default function CourseDescription({ structure }) {
         plannedFor: null,
         warning: false,
         prereqs: course.raw_requirements,
+        isUnlocked: true,
+        warnings: course.warnings,
+        handbook_note: course.handbook_note,
       },
     };
     dispatch(plannerActions("ADD_TO_UNPLANNED", data));

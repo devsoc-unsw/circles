@@ -18,6 +18,8 @@ function DraggableCourse({ code, index }) {
   const prereqs = courses.get(code)["prereqs"]; // rereqs are populated in CourseDescription.jsx via course.raw_requirements
   const prereqDisplay = prereqs.trim();
   const warning = courses.get(code)["warning"];
+  const isUnlocked = courses.get(code)["isUnlocked"];
+  const handbook_note = courses.get(code)["handbook_note"];
   const plannedFor = courses.get(code)["plannedFor"];
 
   const { show } = useContextMenu({
@@ -90,6 +92,7 @@ function DraggableCourse({ code, index }) {
       {prereqDisplay !== "" && !isDragDisabled && warning && (
         <ReactTooltip id={code} place="bottom" className="tooltip">
           {prereqDisplay}
+          {handbook_note}
         </ReactTooltip>
       )}
     </>
