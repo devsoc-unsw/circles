@@ -200,12 +200,25 @@ body {
     margin-bottom: 0;
   }
 
+  .helpMenu {
+    padding: 1em;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5em;
+    grid-auto-rows: auto;
+  }
+  .helpTitleContainer {
+    width: auto;
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
   .helpButton {
     margin-right: 1em;
   }
   .helpGif {
     width: 100%;
     image-rendering: auto;
+    border-radius: 12px;
     cursor: help;
   }
 
