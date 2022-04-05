@@ -20,7 +20,7 @@ function DraggableCourse({ code, index }) {
   const isUnlocked = courses.get(code)["isUnlocked"];
   const handbook_note = courses.get(code)["handbook_note"];
   const plannedFor = courses.get(code)["plannedFor"];
-  const isLegacy = courses.get(code)["isLegacy"] && parseInt(plannedFor.substring(0, 4)) >= parseInt(new Date().getFullYear()) ? true : false;
+  const isLegacy = courses.get(code)["isLegacy"];
   const warningMessage = courses.get(code)["warnings"];  
 
   const warning1 = isLegacy || !isUnlocked; 
