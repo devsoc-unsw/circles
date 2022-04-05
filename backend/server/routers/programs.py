@@ -136,6 +136,7 @@ def getMinors(programCode: str):
     return {"minors": minrs}
 
 def convertSubgroupObjectToCoursesDict(object: str, description: str|list[str]) -> dict[str, str]:
+    """ gets a subgroup object (format layed out in the processor) and fetches the exact courses its referring to """
     if " or " in object:
         return {c: description[index] for index, c in enumerate(object.split(" or "))}
     elif not re.match(r"[A-Z]{4}[0-9]{4}", object):
