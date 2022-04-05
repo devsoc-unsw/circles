@@ -114,7 +114,6 @@ const plannerReducer = (state = initialState, action) => {
       console.log(coursesCpy);
       for (const course in action.payload) {
         // coursesCpy.set(course, !data.courses_state[course].unlocked);
-        coursesCpy.get(course).warning = !action.payload[course].unlocked;
         coursesCpy.get(course).isUnlocked = action.payload[course].unlocked;
         coursesCpy.get(course).warnings = action.payload[course].warnings;
         coursesCpy.get(course).handbook_note = action.payload[course].handbook_note;
