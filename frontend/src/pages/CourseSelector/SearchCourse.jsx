@@ -8,7 +8,7 @@ import { useDebounce } from "../../hooks/useDebounce";
 
 export default function SearchCourse() {
   const [value, setValue] = useState("");
-  const debouncedSearchTerm = useDebounce(value, 500);
+  const debouncedSearchTerm = useDebounce(value, 200);
   const [courses, setCourses] = React.useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();

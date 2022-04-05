@@ -14,7 +14,7 @@ export default function MultiSelectCourse({
   const [courseResults, setCourseResults] = React.useState([]);
 
   const [value, setValue] = React.useState("");
-  const debouncedSearchTerm = useDebounce(value, 500);
+  const debouncedSearchTerm = useDebounce(value, 200);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
