@@ -31,14 +31,18 @@ ABSENT_COURSES = {}  # Courses that appear in enrolment rules but do not exist
 # a postgraduate course
 
 
-def process_course_data():
+def process_course_data(year = None):
     """
     Read data from coursesFormattedRaw.json and process each course, noting
     their properties and write the final data to coursesProcessed.json
     Any missing courses will be written to absentCourses.json
     """
 
-    data = data_helpers.read_data("data/scrapers/coursesFormattedRaw.json")
+    data = data_helpers.read_data(
+        "data/scrapers/coursesFormattedRaw.json" 
+        if year is None else
+        f"data/final_data/archive/formatted/{year}.json"
+    )
 
     for code, course in data.items():
         processed = {k: v for k, v in course.items() if k in KEEP_UNEDITED}
@@ -60,9 +64,16 @@ def process_course_data():
         # Overwrite data file entry with the newly processed info
         data[code] = processed
 
-    data_helpers.write_data(data, "data/final_data/coursesProcessed.json")
     data_helpers.write_data(
-        ABSENT_COURSES, "data/final_data/absentCourses.json")
+        data,
+        "data/scrapers/coursesProcessed.json"
+        if year is None else
+        f"data/final_data/archive/processed/{year}.json"
+    )
+
+    if year is None:
+        data_helpers.write_data(
+            ABSENT_COURSES, "data/final_data/absentCourses.json")
 
 
 def process_description(processed: dict, formatted: dict) -> None:

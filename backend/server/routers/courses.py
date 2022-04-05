@@ -235,6 +235,15 @@ def getLegacyCourses(year, term):
 
     return {'courses' : result}
 
+@router.get("/getLegacyCourse/{year}/{courseCode}")
+def getLegacyCourse(year, courseCode):
+    result = list(archivesDB[str(year)].find({"code": courseCode}))
+    if result == {}:
+        raise HTTPException(status_code=400, detail=f"invalid course code or year")
+    del result["_id"]
+    result["is_legacy"] = True
+    return result
+
 @router.post("/unselectCourse/", response_model=AffectedCourses,
             responses={
                 422: {"model": message, "description": "Unselected course query is required"},
