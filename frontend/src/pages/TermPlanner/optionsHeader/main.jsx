@@ -91,7 +91,7 @@ const OptionsHeader = ({ plannerRef, isAllEmpty }) => {
         trigger="click"
         theme={theme === "light" ? "light" : "dark"}
         zIndex={1}
-        maxWidth="50vh"
+        maxWidth="80vh"
         placement="bottom-start"
       >
         <div>
