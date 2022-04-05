@@ -35,6 +35,7 @@ const TermBox = ({ yearIndex, termNo }) => {
             plannedFor: `${yearIndex + planner.startYear}${termNo}`,
             warning: false,
             prereqs: "",
+            isLegacy: info.is_legacy,
             isUnlocked: true,
             warnings: info.warnings,
             handbook_note: info.handbook_note,
