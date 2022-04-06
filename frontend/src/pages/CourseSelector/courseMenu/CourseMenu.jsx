@@ -215,9 +215,9 @@ const MenuItem = ({
         UOC: course.UOC,
         plannedFor: null,
         prereqs: course.raw_requirements,
-        isLegacy: course.isLegacy,
+        isLegacy: course.is_legacy,
         isUnlocked: true,
-        warnings: "",
+        warnings: "", 
         handbook_note: "",
       },
     };

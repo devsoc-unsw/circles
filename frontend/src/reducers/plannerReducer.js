@@ -113,7 +113,6 @@ const plannerReducer = (state = initialState, action) => {
 
     case "TOGGLE_WARNINGS":
       let coursesCpy = new Map(state.courses);
-      console.log(coursesCpy);
       for (const course in action.payload) {
         // coursesCpy.set(course, !data.courses_state[course].unlocked);
         coursesCpy.get(course).isUnlocked = action.payload[course].unlocked;
