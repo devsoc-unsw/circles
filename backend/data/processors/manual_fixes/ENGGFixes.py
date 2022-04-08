@@ -31,8 +31,6 @@ def fix_conditions():
     # TODO: call your functions here
     CONDITIONS["ENGG1811"][PROCESSED] = ENGG_1811()
     CONDITIONS["ENGG2997"][PROCESSED] = ENGG_2997()
-    CONDITIONS["ENGG3060"][PROCESSED] = ENGG_3060()
-    CONDITIONS["ENGG3060"][PROCESSED] = ENGG_3060()
     CONDITIONS["ENGG4103"][PROCESSED] = ENGG_4103()
 
     for course in ("ENGG2600", "ENGG3600", "ENGG4600"):
@@ -86,16 +84,6 @@ def ENGG_2997():
     """
 
     return "72UOC && (3778 || 3061)"
-
-
-def ENGG_3060():
-    """
-    "original": "Pre-requisite: Completion of 66 UOC from an engineering degree<br/><br/>"
-
-    "processed": "66UOC from an engineering degree"
-    """
-
-    return "66UOC in ENGG#"
 
 
 def ENGG_4103():

@@ -231,9 +231,18 @@ def getLegacyCourses(year, term):
     result = {c['code']: c['title'] for c in archivesDB[year].find() if term in c['terms']} 
 
     if result == {}:
-        raise HTTPException(status_code=400, detail=f"Invalid term or year. Valid terms: ST, T1, T2, T3. Valid years: 2019, 2020, 2021, 2022.")
+        raise HTTPException(status_code=400, detail=f"Invalid term or year. Valid terms: T0, T1, T2, T3. Valid years: 2019, 2020, 2021, 2022.")
 
     return {'courses' : result}
+
+@router.get("/getLegacyCourse/{year}/{courseCode}")
+def getLegacyCourse(year, courseCode):
+    result = list(archivesDB[str(year)].find({"code": courseCode}))
+    if result == {}:
+        raise HTTPException(status_code=400, detail=f"invalid course code or year")
+    del result["_id"]
+    result["is_legacy"] = True
+    return result
 
 @router.post("/unselectCourse/", response_model=AffectedCourses,
             responses={

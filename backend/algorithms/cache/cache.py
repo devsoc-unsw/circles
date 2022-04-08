@@ -6,26 +6,16 @@ This should be run from the backend directory or via runprocessors
 
 import re
 
+from algorithms.cache.cache_config import (CACHE_CONFIG,
+                                           CACHED_EXCLUSIONS_FILE,
+                                           CACHED_WARNINGS_FILE,
+                                           CONDITIONS_PROCESSED_FILE,
+                                           COURSE_MAPPINGS_FILE,
+                                           COURSES_PROCESSED_FILE,
+                                           MAPPINGS_FILE,
+                                           PROGRAM_MAPPINGS_FILE,
+                                           PROGRAMS_FORMATTED_FILE)
 from data.utility.data_helpers import read_data, write_data
-
-# INPUT SOURCES
-COURSES_PROCESSED_FILE = "./data/final_data/coursesProcessed.json"
-
-PROGRAMS_FORMATTED_FILE = "./data/scrapers/programsFormattedRaw.json"
-
-CACHED_EXCLUSIONS_FILE = "./algorithms/cache/exclusions.json"
-
-CONDITIONS_PROCESSED_FILE = "./data/final_data/conditionsProcessed.json"
-
-
-# OUTPUT SOURCES
-CACHED_WARNINGS_FILE = "./algorithms/cache/handbook_note.json"
-
-MAPPINGS_FILE = "./algorithms/cache/mappings.json"
-
-COURSE_MAPPINGS_FILE = "./algorithms/cache/courseMappings.json"
-
-PROGRAM_MAPPINGS_FILE = "./algorithms/cache/programMappings.json"
 
 
 def cache_exclusions():
@@ -72,28 +62,71 @@ def cache_handbook_note():
 
 def cache_mappings():
     """
-    Reads from courses and mappings to map course to a school/faculty
+    Writes to mappings.json and courseMappings.json (i.e maps courses to corresponding school/faculty)
     """
-    final_mappings = {}
+    mappings = {}
+    courseMappings = {}
     courses = read_data(COURSES_PROCESSED_FILE)
-    mappings = read_data(MAPPINGS_FILE)
-    # Initialise keys in final file
-    for mapping in mappings:
-        first_word = mapping.split()[0]
-        if len(first_word) == 1:
-            final_mappings[mapping] = {}
-    # Map courses to keys
+    
+    # Tokenise faculty using regex, e.g 'UNSW Business School' -> 'F Business'
+    def tokeniseFaculty(Faculty):
+        faculty_token = "F "
+        if re.search("Faculty of.+", Faculty):
+            match_object = re.search("(?<=Faculty\sof\s)[^\s\n\,]+", Faculty)
+        elif re.search("UNSW", Faculty):
+            match_object = re.search(r"(?<=UNSW\s)[^\s\n\,]+", Faculty)
+        else:
+            match_object = re.search("^([\w]+)", Faculty)
+        match = match_object.group()
+        faculty_token += match
+        return faculty_token
+    
+    # Tokenise faculty using regex, e.g 'School of Psychology' -> 'S Psychology'
+    def tokeniseSchool(School):
+        school_token = "S "
+        if re.search("School\sof\sthe.+", School):
+            match_object = re.search("(?<=School\sof\sthe\s)[^\s\n\,]+", School)
+        elif re.search("School\sof\s.+", School):
+            match_object = re.search("(?<=School\sof\s)[^\s\n\,]+", School)
+        elif re.search("^(UC)", School):
+            match_object = re.search("(?<=UC\s)[^\s\n\,]+", School)
+            match = school_token + "UC-" +  match_object.group()
+            return match
+        elif re.search("UNSW", School):
+            match_object = re.search("(?<=UNSW\s)[^\s\n\,]+", School)
+        else: 
+            match_object = re.search("^([\w]+)", School)
+        match = match_object.group()
+        school_token += match
+        return school_token
+
+    # add faculties to mappings.json
+    for course in courses:
+        faculty = courses[course]['faculty']
+        if faculty not in mappings:
+            faculty_token = tokeniseFaculty(faculty)
+            mappings[faculty] = faculty_token
+            courseMappings[faculty_token] = {} 
+    # add schools to mappings.json
     for course in courses.values():
-        course_code = course["code"]
-        course_faculty = course["faculty"]
-        if "school" in course:
-            course_school = course["school"]
-            final_mappings[mappings[course_school]][course_code] = 1
+        if 'school' in course:
+            school = course['school']
+            if school not in mappings:
+                school_token = tokeniseSchool(school)
+                mappings[school] = school_token
+                courseMappings[school_token] = {} 
+    write_data(mappings, MAPPINGS_FILE)
 
-        final_mappings[mappings[course_faculty]][course_code] = 1
-
-    write_data(final_mappings, COURSE_MAPPINGS_FILE)
-
+    # finalise
+    for course in courses.values():
+        courseCode = course['code']
+        courseFaculty = course['faculty']
+        if 'school' in course:
+            courseSchool = course['school']
+            courseMappings[mappings[courseSchool]][courseCode] = 1
+        courseMappings[mappings[courseFaculty]][courseCode] = 1
+    
+    write_data(courseMappings, COURSE_MAPPINGS_FILE)
 
 def cache_program_mappings():
     """
@@ -108,83 +141,23 @@ def cache_program_mappings():
     Achieves this by looking for a keyword in the program's title
     """
 
+    keyword_codes = read_data(CACHE_CONFIG)
     # Initialise mappings with all the mapping codes
-    mappings = {}
-    mappings["ACTL#"] = {}
-    mappings["ASCI#"] = {}
-    mappings["BUSN#"] = {}
-    mappings["COMM#"] = {}
-    mappings["COMP#"] = {}
-    mappings["DATA#"] = {}
-    mappings["ECON#"] = {}
-    mappings["INFS#"] = {}
-    mappings["MATH#"] = {}
-    mappings["ZBUS#"] = {}
-    mappings["SOSS#"] = {}
-    mappings["MDIA#"] = {}
-    mappings["CRIM#"] = {}
-    mappings["LAWS#"] = {}
-    mappings["INST#"] = {}
-    mappings["SOSS#"] = {}
-    mappings["DDES#"] = {}
-    mappings["ARTS#"] = {}
-    mappings["DART#"] = {}
-    mappings["MUSC#"] = {}
-    mappings["SOCW#"] = {}
-    mappings["PPEC#"] = {}
-    mappings["EDST#"] = {}
     # TODO: Add any more mappings. Look into updating manual-fixes wiki page?
+
+    code_list = keyword_codes["code_list"]
+
+    mappings = {}
+    for code in code_list:
+        mappings[code] = {}
 
     programs = read_data(PROGRAMS_FORMATTED_FILE)
 
+    keyword_map = keyword_codes["keyword_mapping"]
     for program in programs.values():
-        if re.search(r"actuarial", program["title"], flags=re.IGNORECASE):
-            mappings["ACTL#"][program["code"]] = 1
-            mappings["ZBUS#"][program["code"]] = 1
-        if re.search(r"business", program["title"], flags=re.IGNORECASE):
-            mappings["BUSN#"][program["code"]] = 1
-            mappings["ZBUS#"][program["code"]] = 1
-        if re.search(r"commerce", program["title"], flags=re.IGNORECASE):
-            mappings["COMM#"][program["code"]] = 1
-            mappings["ZBUS#"][program["code"]] = 1
-        if re.search(r"economics", program["title"], flags=re.IGNORECASE):
-            mappings["ECON#"][program["code"]] = 1
-            mappings["ZBUS#"][program["code"]] = 1
-        if re.search(r"information systems", program["title"], flags=re.IGNORECASE):
-            mappings["INFS#"][program["code"]] = 1
-            mappings["ZBUS#"][program["code"]] = 1
-        if re.search(r"data science and decisions", program["title"], flags=re.IGNORECASE):
-            mappings["DATA#"][program["code"]] = 1
-        if re.search(r"computer science", program["title"], flags=re.IGNORECASE):
-            mappings["COMP#"][program["code"]] = 1
-        if re.search(r"advanced maths", program["title"], flags=re.IGNORECASE):
-            mappings["MATH#"][program["code"]] = 1
-        if re.search(r"advanced science", program["title"], flags=re.IGNORECASE):
-            mappings["ASCI#"][program["code"]] = 1
-        if re.search(r"education", program["title"], flags=re.IGNORECASE):
-            mappings["EDST#"][program["code"]] = 1
-        if re.search(r"law", program["title"], flags=re.IGNORECASE):
-            mappings["LAWS#"][program["code"]] = 1
-        if re.search(r"criminology", program["title"], flags=re.IGNORECASE):
-            mappings["CRIM#"][program["code"]] = 1
-        if re.search(r"international studies", program["title"], flags=re.IGNORECASE):
-            mappings["INST#"][program["code"]] = 1
-        if re.search(r"social science", program["title"], flags=re.IGNORECASE):
-            mappings["SOSS#"][program["code"]] = 1
-        if re.search(r"social work", program["title"], flags=re.IGNORECASE):
-            mappings["SOCW#"][program["code"]] = 1
-        if re.search(r"music", program["title"], flags=re.IGNORECASE):
-            mappings["MUSC#"][program["code"]] = 1
-        if re.search(r"design", program["title"], flags=re.IGNORECASE):
-            mappings["DDES#"][program["code"]] = 1
-        if re.search(r"politic", program["title"], flags=re.IGNORECASE):
-            mappings["PPEC#"][program["code"]] = 1
-        if re.search(r"media arts", program["title"], flags=re.IGNORECASE):
-            mappings["DART#"][program["code"]] = 1
-        if re.search(r"arts", program["title"], flags=re.IGNORECASE):
-            mappings["ARTS#"][program["code"]] = 1
-        if re.search(r"media", program["title"], flags=re.IGNORECASE):
-            mappings["MDIA#"][program["code"]] = 1
-
+        for keyword in keyword_map:
+            if keyword.lower() in program["title"].lower():
+                for code in keyword_map[keyword]:
+                    mappings[code][program["code"]] = 1
 
     write_data(mappings, PROGRAM_MAPPINGS_FILE)
