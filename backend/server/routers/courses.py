@@ -307,7 +307,8 @@ def coursesUnlockedWhenTaken(userData: UserData, courseToBeTaken: str):
     return {
         'courses_unlocked_when_taken' : sorted(list(courses_now_unlocked - courses_initially_unlocked)),
         'direct_unlock': sorted(list(direct_unlock)),
-        'indirect_unlock': sorted(list(indirect_unlock))
+        'indirect_unlock': sorted(list(indirect_unlock)),
+        'test': 1
     }
 
 def unlocked_set(courses_state):
