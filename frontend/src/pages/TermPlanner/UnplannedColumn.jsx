@@ -1,8 +1,8 @@
 import React from "react";
 import { Collapse } from "antd";
 import { Droppable } from "react-beautiful-dnd";
-import DraggableCourse from "./DraggableCourse";
 import { useSelector } from "react-redux";
+import DraggableCourse from "./DraggableCourse";
 
 const UnplannedColumn = () => {
   const { Panel } = Collapse;
@@ -23,7 +23,7 @@ const UnplannedColumn = () => {
               .sort()
               .map((type, index) => (
                 <Panel header={type} key={index}>
-                  <Droppable droppableId={type} isDropDisabled={true}>
+                  <Droppable droppableId={type} isDropDisabled>
                     {(provided) => (
                       <div
                         ref={provided.innerRef}
@@ -54,9 +54,9 @@ const UnplannedColumn = () => {
 // e.g. courseTypes = { Core: ["COMP1511", "COMP2521"], Elective: ["COMP6881"] }
 const sortUnplanned = (unplanned, courses) => {
   if (unplanned == null) return {};
-  let courseTypes = {};
+  const courseTypes = {};
   unplanned.forEach((code) => {
-    const type = courses.get(code)["type"];
+    const { type } = courses.get(code);
     if (!courseTypes.hasOwnProperty(type)) {
       courseTypes[type] = [code];
     } else {

@@ -8,22 +8,21 @@ import { useContextMenu } from "react-contexify";
 import ContextMenu from "./misc/ContextMenu";
 import useMediaQuery from "../../hooks/useMediaQuery";
 
-function DraggableCourse({ code, index }) {
+const DraggableCourse = ({ code, index }) => {
   const { Text } = Typography;
-  const { courses, isSummerEnabled, completedTerms } = useSelector((state) => {
-    return state.planner;
-  });
+  const { courses, isSummerEnabled, completedTerms } = useSelector((state) => state.planner);
   const theme = useSelector((state) => state.theme);
-  const courseName = courses.get(code)["title"];
-  const prereqs = courses.get(code)["prereqs"]; // rereqs are populated in CourseDescription.jsx via course.raw_requirements
+  const courseName = courses.get(code).title;
+  // prereqs are populated in CourseDescription.jsx via course.raw_requirements
+  const { prereqs } = courses.get(code);
   const prereqDisplay = prereqs.trim();
-  const isUnlocked = courses.get(code)["isUnlocked"];
-  const handbook_note = courses.get(code)["handbook_note"];
-  const plannedFor = courses.get(code)["plannedFor"];
-  const isLegacy = courses.get(code)["isLegacy"];
-  const warningMessage = courses.get(code)["warnings"];  
+  const { isUnlocked } = courses.get(code);
+  const { handbook_note } = courses.get(code);
+  const { plannedFor } = courses.get(code);
+  const { isLegacy } = courses.get(code);
+  const warningMessage = courses.get(code).warnings;
 
-  const warning1 = isLegacy || !isUnlocked; 
+  const warning1 = isLegacy || !isUnlocked;
   const warning2 = handbook_note != "" || warningMessage != "";
 
   const { show } = useContextMenu({
@@ -91,17 +90,17 @@ function DraggableCourse({ code, index }) {
         )}
       </Draggable>
       <ContextMenu code={code} plannedFor={plannedFor} />
-      {/* display prereq tooltip for all courses. However, if a term is marked as complete 
+      {/* display prereq tooltip for all courses. However, if a term is marked as complete
 	  and the course has no warning, then disable the tooltip */}
       {!isDragDisabled && (warning1 || warning2) && (
         <ReactTooltip id={code} place="bottom" className="tooltip">
-          {isLegacy ? "This course is discontinued." : 
-            !isUnlocked ? prereqDisplay : 
-              warningMessage != "" ? warningMessage : handbook_note}
+          {isLegacy ? "This course is discontinued."
+            : !isUnlocked ? prereqDisplay
+              : warningMessage != "" ? warningMessage : handbook_note}
         </ReactTooltip>
       )}
     </>
   );
-}
+};
 
 export default DraggableCourse;

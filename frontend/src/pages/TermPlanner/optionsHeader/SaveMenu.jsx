@@ -16,14 +16,16 @@ const SaveMenu = ({ plannerRef }) => {
   const [format, setFormat] = React.useState("png");
 
   const download = () => {
-    if (format === "png")
+    if (format === "png") {
       exportComponentAsPNG(plannerRef, {
         fileName: "Term Planner",
       });
-    if (format === "jpg")
+    }
+    if (format === "jpg") {
       exportComponentAsJPEG(plannerRef, {
         fileName: "Term Planner",
       });
+    }
   };
 
   return (

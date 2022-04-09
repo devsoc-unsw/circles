@@ -11,12 +11,10 @@ import { FaCalendarTimes, FaTrash, FaInfoCircle } from "react-icons/fa";
 const ContextMenu = ({ code, plannedFor }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { years, startYear, completedTerms } = useSelector((state) => {
-    return state.planner;
-  });
+  const { years, startYear, completedTerms } = useSelector((state) => state.planner);
 
   const { programCode, specialisation, minor } = useSelector(
-    (state) => state.degree
+    (state) => state.degree,
   );
 
   const handleDelete = () => {
@@ -32,7 +30,7 @@ const ContextMenu = ({ code, plannedFor }) => {
   const id = `${code}-context`;
 
   const handleInfo = () => {
-    navigate(`/course-selector`);
+    navigate("/course-selector");
     // dispatch(courseTabActions("SET_ACTIVE_TAB", 1));
     dispatch(courseTabActions("ADD_TAB", code));
   };

@@ -26,12 +26,10 @@ const TermPlanner = () => {
     completedTerms,
     hidden,
     areYearsHidden,
-  } = useSelector((state) => {
-    return state.planner;
-  });
+  } = useSelector((state) => state.planner);
 
   const { programCode, specialisation, minor } = useSelector(
-    (state) => state.degree
+    (state) => state.degree,
   );
 
   const dispatch = useDispatch();
@@ -70,27 +68,25 @@ const TermPlanner = () => {
             handleOnDragEnd(result, dragEndProps);
             updateAllWarnings(dispatch, { years, startYear, completedTerms }, { programCode, specialisation, minor });
           }}
-          onDragStart={(result) =>
-            handleOnDragStart(result, courses, setTermsOffered, setIsDragging)
-          }
+          onDragStart={(result) => handleOnDragStart(result, courses, setTermsOffered, setIsDragging)}
         >
           <div className="plannerContainer">
             <div
-              class={`gridContainer ${isSummerEnabled && "summerGrid"}`}
+              className={`gridContainer ${isSummerEnabled && "summerGrid"}`}
               ref={plannerPic}
             >
-              <div class="gridItem"></div>
-              {isSummerEnabled && <div class="gridItem">Summer</div>}
-              <div class="gridItem">Term 1</div>
-              <div class="gridItem">Term 2</div>
-              <div class="gridItem">Term 3</div>
+              <div className="gridItem" />
+              {isSummerEnabled && <div className="gridItem">Summer</div>}
+              <div className="gridItem">Term 1</div>
+              <div className="gridItem">Term 2</div>
+              <div className="gridItem">Term 3</div>
 
               {years.map((year, index) => {
                 const iYear = parseInt(startYear) + parseInt(index);
-                  return (!hidden[iYear]) ?
-                  (
+                return (!hidden[iYear])
+                  ? (
                     <React.Fragment key={index}>
-                      <div className={`yearContainer gridItem`}>
+                      <div className="yearContainer gridItem">
                         <div
                           className={`year ${currYear === iYear && "currYear"}`}
                         >
@@ -101,20 +97,21 @@ const TermPlanner = () => {
 
                       {Object.keys(year).map((term) => {
                         const key = iYear + term;
-                        return ((!isSummerEnabled && term !== "T0") ||
-                          isSummerEnabled) ?
-                          <TermBox
-                            key={key}
-                            name={key}
-                            courses={year[term]}
-                            termsOffered={termsOffered}
-                            isDragging={isDragging}
-                          /> : <></>;
+                        return ((!isSummerEnabled && term !== "T0")
+                          || isSummerEnabled)
+                          ? (
+                            <TermBox
+                              key={key}
+                              name={key}
+                              courses={year[term]}
+                              termsOffered={termsOffered}
+                              isDragging={isDragging}
+                            />
+                          ) : <></>;
                       })}
                     </React.Fragment>
                   ) : <></>;
-                }
-              )}
+              })}
             </div>
             <UnplannedColumn />
           </div>
@@ -132,14 +129,14 @@ const openNotification = () => {
     className: "text helpNotif",
     placement: "topRight",
   };
-  notification["info"](args);
+  notification.info(args);
 };
 
 // checks if no courses have been planned (to display help notification
 // & determine if unschedule all button available)
 const isAllEmpty = (years) => {
   for (const year of years) {
-    var termEmpty = Object.keys(year).every((key) => year[key].length === 0);
+    const termEmpty = Object.keys(year).every((key) => year[key].length === 0);
     if (!termEmpty) return false;
   }
   return true;

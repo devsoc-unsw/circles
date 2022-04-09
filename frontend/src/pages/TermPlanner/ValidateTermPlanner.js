@@ -1,40 +1,38 @@
-import { plannerActions } from "../../actions/plannerActions";
-import { getMostRecentPastTerm } from "./PastTerm"
 import axios from "axios";
+import { plannerActions } from "../../actions/plannerActions";
+import { getMostRecentPastTerm } from "./PastTerm";
 
 export const updateAllWarnings = (dispatch, plannerInfo, userInfo) => {
   const payload = prepareCoursesForValidation(plannerInfo, userInfo);
   dispatch(validateTermPlanner(payload));
 };
 
-const validateTermPlanner = (payload) => {
-  return (dispatch) => {
-    axios
-      .post(
-        `/planner/validateTermPlanner/`,
-        JSON.stringify(payload),
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-      .then(({ data }) => {
-        dispatch(plannerActions("TOGGLE_WARNINGS", data.courses_state));
-      })
-      .catch((err) => console.log(err));
-  };
+const validateTermPlanner = (payload) => (dispatch) => {
+  axios
+    .post(
+      "/planner/validateTermPlanner/",
+      JSON.stringify(payload),
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    )
+    .then(({ data }) => {
+      dispatch(plannerActions("TOGGLE_WARNINGS", data.courses_state));
+    })
+    .catch((err) => console.log(err));
 };
 
 const prepareCoursesForValidation = (plannerInfo, userInfo) => {
   const { years, startYear } = plannerInfo;
   const { programCode, specialisation, minor } = userInfo;
 
-  let plan = [];
+  const plan = [];
   for (const year of years) {
     const formattedYear = [];
     for (const term in year) {
-      let courses = {};
+      const courses = {};
       for (const course of year[term]) {
         courses[course] = null;
       }
@@ -48,7 +46,7 @@ const prepareCoursesForValidation = (plannerInfo, userInfo) => {
     program: programCode,
     specialisations: [specialisation, minor],
     year: 1,
-    plan: plan,
+    plan,
     mostRecentPastTerm: getMostRecentPastTerm(startYear),
   };
 

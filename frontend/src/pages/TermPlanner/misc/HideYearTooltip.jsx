@@ -1,11 +1,10 @@
 import React from "react";
-import { Tooltip } from "antd";
-import { notification } from "antd";
+import { Tooltip, notification } from "antd";
 import { IoIosEyeOff } from "react-icons/io";
 import { useSelector, useDispatch } from "react-redux";
 import { plannerActions } from "../../../actions/plannerActions";
 
-function HideYearTooltip({ year }) {
+const HideYearTooltip = ({ year }) => {
   const { hidden, numYears } = useSelector((state) => state.planner);
   const dispatch = useDispatch();
 
@@ -34,6 +33,6 @@ function HideYearTooltip({ year }) {
       </div>
     </Tooltip>
   );
-}
+};
 
 export default HideYearTooltip;
