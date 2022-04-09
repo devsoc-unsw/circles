@@ -98,7 +98,6 @@ export default function CourseDescription({ structure }) {
         `/courses/coursesUnlockedWhenTaken/${id}`,
         prepareUserPayload(degree, planner)
       );
-      console.log(data);
       if (!err) setCoursesPathTo(data.courses_unlocked_when_taken);
     };
 
