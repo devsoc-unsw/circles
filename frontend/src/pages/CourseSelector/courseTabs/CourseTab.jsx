@@ -28,11 +28,7 @@ const CourseTab = ({ tab, index }) => {
 
   useEffect(() => {
     if (active === index && !scrolledTo) {
-      ref.current.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-        inline: "nearest",
-      });
+      ref.current.scrollIntoView({ behavior: "smooth" });
       setScrolledTo(true);
     }
     setScrolledTo(false);
