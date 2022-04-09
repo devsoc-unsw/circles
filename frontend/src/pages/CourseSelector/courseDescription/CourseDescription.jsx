@@ -131,8 +131,11 @@ export default function CourseDescription({ structure }) {
         termsOffered: course.terms,
         UOC: course.UOC,
         plannedFor: null,
-        warning: false,
         prereqs: course.raw_requirements,
+        isLegacy: course.is_legacy,
+        isUnlocked: true,
+        warnings: "",
+        handbook_note: "",
       },
     };
     dispatch(plannerActions("ADD_TO_UNPLANNED", data));
@@ -259,7 +262,7 @@ export default function CourseDescription({ structure }) {
                   let termNo = term.slice(1);
                   return (
                     <Tag key={index} className={`text`}>
-                      {course.terms === "Summer" ? "Summer" : `Term ${termNo}`}
+                      {term === "T0" ? "Summer" : `Term ${termNo}`}
                     </Tag>
                   );
                 })}

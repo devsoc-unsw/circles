@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Menu, Layout, Typography, Button, Drawer } from "antd";
 import { DrawerContent } from "./DrawerContent";
@@ -21,21 +21,28 @@ const titleStyles = {
   marginBottom: "0",
 };
 
+const getCurrentPath = () => {
+  const validPaths = new Set([
+    "course-selector",
+    "progression-checker",
+    "degree-selector",
+    "term-planner",
+  ]);
+  const menuPath = window.location.pathname.split("/")[1];
+
+  if (validPaths.has(menuPath)) return menuPath;
+  return null;
+};
+
 const { Title } = Typography;
 const Header = () => {
   const isSmall = useMediaQuery("(max-width: 1000px)");
-  const [showDrawer, setShowDrawer] = React.useState(false);
-  const [current, setCurrent] = React.useState(() => {
-    const validPaths = new Set([
-      "course-selector",
-      "progression-checker",
-      "degree-selector",
-      "term-planner",
-    ]);
-    const menuPath = window.location.pathname.split("/")[1];
-    if (validPaths.has(menuPath)) return menuPath;
-    return null;
-  });
+  const [showDrawer, setShowDrawer] = useState(false);
+  const [current, setCurrent] = useState(getCurrentPath());
+  
+  useEffect(() => {
+    setCurrent(getCurrentPath());
+  }, [window.location.pathname])
 
   return (
     <Layout className="header">
@@ -61,6 +68,7 @@ const Header = () => {
             onClick={(e) => setCurrent(e.key)}
             selectedKeys={[current]}
             mode="horizontal"
+            overflowedIndicator={null}
             style={menuStyles}
           >
             <Menu.Item key="course-selector">

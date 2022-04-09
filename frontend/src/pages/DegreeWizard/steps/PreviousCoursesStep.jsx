@@ -33,8 +33,11 @@ const TermBox = ({ yearIndex, termNo }) => {
             termsOffered: info.terms,
             UOC: info.UOC,
             plannedFor: `${yearIndex + planner.startYear}${termNo}`,
-            warning: false,
             prereqs: "",
+            isLegacy: info.is_legacy,
+            isUnlocked: true,
+            warnings: "",
+            handbook_note: "",
           },
           position: [yearIndex, termNo],
         };

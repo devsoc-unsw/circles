@@ -20,10 +20,10 @@ function TermBox({ name, courses, termsOffered, isDragging }) {
 
   const isCompleted = completedTerms.get(name);
 
-  const isDropAllowed = termsOffered.includes(term) && !isCompleted;
+  const isOffered = termsOffered.includes(term) && !isCompleted;
 
   return (
-    <Droppable droppableId={name} isDropDisabled={!isDropAllowed}>
+    <Droppable droppableId={name} isDropDisabled={isCompleted}>
       {(provided) => (
         <Badge
           count={
@@ -39,7 +39,7 @@ function TermBox({ name, courses, termsOffered, isDragging }) {
             ref={provided.innerRef}
             {...provided.droppableProps}
             className={`termBox ${
-              isDropAllowed && isDragging && "droppable "
+              isOffered && isDragging && "droppable "
             } ${isSummerEnabled && "summerTermBox"} `}
           >
             {courses.map((code, index) => {
