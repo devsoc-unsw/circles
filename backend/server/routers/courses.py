@@ -297,18 +297,9 @@ def coursesUnlockedWhenTaken(userData: UserData, courseToBeTaken: str):
     user.add_courses({courseToBeTaken: [getCourse(courseToBeTaken)['UOC'], None]})
     ## final state
     courses_now_unlocked = unlocked_set(getAllUnlocked(user)['courses_state'])
-    new_courses = courses_now_unlocked - courses_initially_unlocked
-
-    ## Differentiate direct and indirect unlocks
-    path_to = set(getCourse(courseToBeTaken)['path_to'])
-    direct_unlock = new_courses.intersection(path_to)
-    indirect_unlock = new_courses - direct_unlock
 
     return {
         'courses_unlocked_when_taken' : sorted(list(courses_now_unlocked - courses_initially_unlocked)),
-        'direct_unlock': sorted(list(direct_unlock)),
-        'indirect_unlock': sorted(list(indirect_unlock)),
-        'test': 1
     }
 
 def unlocked_set(courses_state):
