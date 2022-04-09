@@ -24,7 +24,7 @@ function DraggableCourse({ code, index }) {
   const warningMessage = courses.get(code)["warnings"];  
 
   const warning1 = isLegacy || !isUnlocked; 
-  const warning2 = handbook_note != "" || warningMessage != "";
+  const warning2 = handbook_note !== "" || warningMessage !== "";
 
   const { show } = useContextMenu({
     id: `${code}-context`,
@@ -35,9 +35,8 @@ function DraggableCourse({ code, index }) {
   };
 
   const isSmall = useMediaQuery("(max-width: 1400px)");
-
   const isDragDisabled = completedTerms.get(plannedFor);
-
+  console.log(completedTerms);
   return (
     <>
       <Draggable
@@ -95,9 +94,9 @@ function DraggableCourse({ code, index }) {
 	  and the course has no warning, then disable the tooltip */}
       {!isDragDisabled && (warning1 || warning2) && (
         <ReactTooltip id={code} place="bottom" className="tooltip">
-          {isLegacy ? "This course is discontinued." : 
+          {isLegacy ? "This course is discontinued. If an equivalent course is currently being offered, please pick that instead." : 
             !isUnlocked ? prereqDisplay : 
-              warningMessage != "" ? warningMessage : handbook_note}
+              warningMessage !== "" ? warningMessage : handbook_note}
         </ReactTooltip>
       )}
     </>
