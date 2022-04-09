@@ -33,12 +33,11 @@ const HelpMenu = () => {
           </Title>
         </div>
         <img 
-          className="helpGif" 
+          className={dragAndDropPlaying ? "helpGif shadow" : "helpGif"}  
           onMouseEnter={() => {setDragAndDropPlaying(true)}} 
           onMouseLeave={() => {setDragAndDropPlaying(false)}}
           src={dragAndDropPlaying ? dragAndDropGif : dragAndDropPng}
           alt="drag and drop walkthrough"
-          style={dragAndDropPlaying ? {boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"} : {}}
         ></img>
       </div>
       <div>
@@ -48,12 +47,11 @@ const HelpMenu = () => {
           </Title>
         </div>
         <img 
-          className="helpGif" 
+          className={unschedulePlaying ? "helpGif shadow" : "helpGif"} 
           onMouseEnter={() => {setUnschedulePlaying(true)}} 
           onMouseLeave={() => {setUnschedulePlaying(false)}}
           src={unschedulePlaying ? unscheduleGif : unschedulePng}
           alt="context menu walkthrough"
-          style={unschedulePlaying ? {boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"} : {}}
         ></img>
       </div>
       <div>
@@ -63,12 +61,11 @@ const HelpMenu = () => {
           </Title>
         </div>
         <img 
-          className="helpGif" 
+          className={hideYearPlaying ? "helpGif shadow" : "helpGif"} 
           onMouseEnter={() => {setHideYearPlaying(true)}} 
           onMouseLeave={() => {setHideYearPlaying(false)}}
           src={hideYearPlaying ? hideYearGif : hideYearPng}
           alt="hide year walkthrough"
-          style={hideYearPlaying ? {boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"} : {}}
         ></img>
       </div>
       <div>
@@ -78,12 +75,11 @@ const HelpMenu = () => {
           </Title>
         </div>
         <img 
-          className="helpGif" 
+          className={additionalOptionsPlaying ? "helpGif shadow" : "helpGif"} 
           onMouseEnter={() => {setAdditionalOptionsPlaying(true)}} 
           onMouseLeave={() => {setAdditionalOptionsPlaying(false)}}
           src={additionalOptionsPlaying ? additionalOptionsGif : additionalOptionsPng}
           alt="additional options walkthrough"
-          style={additionalOptionsPlaying ? {boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"} : {}}
         ></img>
       </div>
     </div>
