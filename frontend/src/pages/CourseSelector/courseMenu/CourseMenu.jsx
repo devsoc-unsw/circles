@@ -10,7 +10,6 @@ import { IoWarningOutline } from "react-icons/io5";
 import { prepareUserPayload } from "../helper";
 import { motion, AnimatePresence } from "framer-motion/dist/framer-motion";
 import { ReactComponent as Padlock } from "../../../images/padlock.svg";
-import { PlusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { AiOutlinePlus } from "react-icons/ai";
 import { axiosRequest } from "../../../axios";
 import { plannerActions } from "../../../actions/plannerActions";
