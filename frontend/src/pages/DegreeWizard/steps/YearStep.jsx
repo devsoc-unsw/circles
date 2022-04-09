@@ -1,9 +1,7 @@
-import React, { useEffect } from "react";
-import axios from "axios";
-import { Menu, Typography, Button, Input, DatePicker } from "antd";
+import React from "react";
+import { Typography, Button, DatePicker } from "antd";
 import { plannerActions } from "../../../actions/plannerActions";
-import { Link } from "react-scroll";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import "./steps.less";
 import { useSpring, animated } from "react-spring";
 import { springProps } from "../spring";

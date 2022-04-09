@@ -1,9 +1,9 @@
 import React from "react";
 import { Button, Tooltip } from "antd";
 import { BugOutlined } from "@ant-design/icons";
+import { useSelector } from "react-redux";
 import "./feedbackBtn.less";
 import useMediaQuery from "../../hooks/useMediaQuery";
-import { useSelector } from "react-redux";
 
 export const FeedbackBtn = () => {
   const theme = useSelector((store) => store.theme);
@@ -14,18 +14,20 @@ export const FeedbackBtn = () => {
     window.open(FORM_LINK, "_blank");
   };
   // Move this to the drawer if the screen is too small
-  if (isTablet) return <></>;
-  return (
-    <div className="feedbackFab-root">
-      <Tooltip title="Report a bug!">
-        <Button
-          shape="circle"
-          ghost={theme === "dark"}
-          icon={<BugOutlined />}
-          size="large"
-          onClick={() => openFeedbackLink()}
-        />
-      </Tooltip>
-    </div>
-  );
+  return (isTablet) ? <div />
+    : (
+      <div className="feedbackFab-root">
+        <Tooltip title="Report a bug!">
+          <Button
+            shape="circle"
+            ghost={theme === "dark"}
+            icon={<BugOutlined />}
+            size="large"
+            onClick={() => openFeedbackLink()}
+          />
+        </Tooltip>
+      </div>
+    );
 };
+
+export default FeedbackBtn;

@@ -2,8 +2,8 @@ import React from "react";
 import { Tooltip, Button, Typography, Popconfirm, Alert } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { ReactComponent as PlannerIcon } from "../assets/planner-icon.svg";
 import { DeleteOutlined } from "@ant-design/icons";
+import { ReactComponent as PlannerIcon } from "../assets/planner-icon.svg";
 import { plannerActions } from "../../actions/plannerActions";
 import { courseTabActions } from "../../actions/courseTabActions";
 import "./plannerCart.less";
@@ -147,3 +147,5 @@ export const PlannerCart = () => {
     </div>
   );
 };
+
+export default PlannerCart;

@@ -7,9 +7,6 @@
     "@ant-design/icons": "^4.6.2",
     "@craco/craco": "^6.4.3",
     "@reduxjs/toolkit": "^1.8.1",
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^12.1.4",
-    "@testing-library/user-event": "^14.0.4",
     "@tippyjs/react": "^4.2.6",
     "antd": "^4.19.5",
     "axios": "^0.26.1",
@@ -22,14 +19,13 @@
     "react-dom": "^17.0.1",
     "react-flow-renderer": "^10.0.8",
     "react-icons": "^4.2.0",
-    "react-router-dom": "^6.3.0",
+    "react-redux": "^7.2.8",
+    "react-router-dom": "^6.2.2",
     "react-scripts": "4.0.3",
     "react-scroll": "^1.8.6",
     "react-spring": "^9.4.4",
     "react-svg": "^14.1.17",
     "react-tooltip": "^4.2.21",
-    "react-tsparticles": "^1.42.4",
-    "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "web-vitals": "^2.1.4"
   },
@@ -39,7 +35,8 @@
     "test": "craco test",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint-all": "eslint --fix"
   },
   "eslintConfig": {
     "extends": [
@@ -58,5 +55,16 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.2.0",
+    "eslint-plugin-react": "^7.29.4",
+    "eslint-plugin-react-hooks": "^4.4.0"
   }
 }

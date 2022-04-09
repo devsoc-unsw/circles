@@ -2,7 +2,7 @@ const initial = {
   tabs: [],
   active: 0,
 };
-const courseTabsReducer = (state = initial, action) => {
+const courseTabsReducer = (action, state = initial) => {
   switch (action.type) {
     case "ADD_TAB":
       const tabName = action.payload;
@@ -28,11 +28,9 @@ const courseTabsReducer = (state = initial, action) => {
         active: state.tabs.length,
       };
     case "REMOVE_TAB":
-      const index = parseInt(action.payload);
-      // console.log(index);
-      let newTabs = [...state.tabs];
+      const index = parseInt(action.payload, 10);
+      const newTabs = [...state.tabs];
       newTabs.splice(index, 1);
-      // console.log(newTabs.length);
 
       // If only one left, set active to 'explore'
       if (newTabs.length === 1) {
@@ -41,7 +39,7 @@ const courseTabsReducer = (state = initial, action) => {
           active: 0,
         };
       }
-      const active = parseInt(state.active);
+      const active = parseInt(state.active, 10);
 
       if (active === 0 || index > active) {
         // deleting the very first tab or a tab after active tab
@@ -49,13 +47,12 @@ const courseTabsReducer = (state = initial, action) => {
           ...state,
           tabs: newTabs,
         };
-      } else {
-        // deleting tab before/equal to active tab
-        return {
-          tabs: newTabs,
-          active: active - 1,
-        };
       }
+      // deleting tab before/equal to active tab
+      return {
+        tabs: newTabs,
+        active: active - 1,
+      };
     case "SET_ACTIVE_TAB":
       return {
         ...state,

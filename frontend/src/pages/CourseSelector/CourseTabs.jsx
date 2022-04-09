@@ -23,7 +23,7 @@ export const CourseTabs = () => {
   return (
     <div className="cs-tabs-root">
       {/* Placeholder div !!DO NOT DELETE */}
-      <div></div>
+      <div />
       <Tabs
         hideAdd
         type="editable-card"
@@ -31,10 +31,12 @@ export const CourseTabs = () => {
         activeKey={`${active}`}
         onEdit={handleEdit}
       >
-        {tabs.map((tab, key) => (
-          <TabPane tab={tab} key={key} closable={!(tab === "explore")} />
+        {tabs.map((tab) => (
+          <TabPane tab={tab} key={tab} closable={!(tab === "explore")} />
         ))}
       </Tabs>
     </div>
   );
 };
+
+export default CourseTabs;

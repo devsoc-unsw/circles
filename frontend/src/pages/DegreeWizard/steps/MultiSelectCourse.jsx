@@ -1,9 +1,5 @@
-import React, { useState, useRef, useMemo, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
 import { Select, Spin } from "antd";
-import { setCourses } from "../../../actions/coursesActions";
-import debounce from "lodash/debounce";
-import axios from "axios";
 import { useDebounce } from "../../../hooks/useDebounce";
 import { search } from "../../CourseSelector/SearchCourse";
 
@@ -18,7 +14,6 @@ export default function MultiSelectCourse({
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    // if debounced term changes , call API
     if (debouncedSearchTerm)
       search(debouncedSearchTerm, setCourseResults, setIsLoading);
   }, [debouncedSearchTerm]);

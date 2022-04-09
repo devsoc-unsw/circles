@@ -30,7 +30,7 @@ const TermPlanner = () => {
     return state.planner;
   });
 
-  const { programCode, programName, specialisation, minor } = useSelector(
+  const { programCode, specialisation, minor } = useSelector(
     (state) => state.degree
   );
 
@@ -40,7 +40,7 @@ const TermPlanner = () => {
     setIsLoading(false);
     isAllEmpty(years) && openNotification();
     updateAllWarnings(dispatch, { years, startYear, completedTerms }, { programCode, specialisation, minor });
-  }, []);
+  }, [years, dispatch, startYear, completedTerms, programCode, specialisation, minor]);
   const currYear = new Date().getFullYear();
 
   const dragEndProps = {
@@ -87,8 +87,8 @@ const TermPlanner = () => {
 
               {years.map((year, index) => {
                 const iYear = parseInt(startYear) + parseInt(index);
-                if (!hidden[iYear]) {
-                  return (
+                  return (!hidden[iYear]) ?
+                  (
                     <React.Fragment key={index}>
                       <div className={`yearContainer gridItem`}>
                         <div
@@ -101,24 +101,20 @@ const TermPlanner = () => {
 
                       {Object.keys(year).map((term) => {
                         const key = iYear + term;
-                        if (
-                          (!isSummerEnabled && term != "T0") ||
-                          isSummerEnabled
-                        )
-                          return (
-                            <TermBox
-                              key={key}
-                              name={key}
-                              courses={year[term]}
-                              termsOffered={termsOffered}
-                              isDragging={isDragging}
-                            />
-                          );
+                        return ((!isSummerEnabled && term !== "T0") ||
+                          isSummerEnabled) ?
+                          <TermBox
+                            key={key}
+                            name={key}
+                            courses={year[term]}
+                            termsOffered={termsOffered}
+                            isDragging={isDragging}
+                          /> : <></>;
                       })}
                     </React.Fragment>
-                  );
+                  ) : <></>;
                 }
-              })}
+              )}
             </div>
             <UnplannedColumn />
           </div>

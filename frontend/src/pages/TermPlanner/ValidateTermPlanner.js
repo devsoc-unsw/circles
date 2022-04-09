@@ -27,7 +27,7 @@ const validateTermPlanner = (payload) => {
 };
 
 const prepareCoursesForValidation = (plannerInfo, userInfo) => {
-  const { years, startYear, _ } = plannerInfo;
+  const { years, startYear } = plannerInfo;
   const { programCode, specialisation, minor } = userInfo;
 
   let plan = [];

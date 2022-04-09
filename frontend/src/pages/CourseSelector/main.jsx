@@ -8,12 +8,14 @@ import { CourseTabs } from "./CourseTabs";
 import "./main.less";
 import SearchCourse from "./SearchCourse";
 
-export default function CourseSelector() {
+const CourseSelector = () => {
   const [structure, setStructure] = React.useState(null);
   const [showLockedCourses, setShowLockedCourses] = React.useState(false);
 
-  const { programCode, programName, specialisation, minor } = useSelector(
-    (state) => state.degree
+  const {
+    programCode, programName, specialisation, minor,
+  } = useSelector(
+    (state) => state.degree,
   );
 
   React.useEffect(() => {
@@ -26,6 +28,7 @@ export default function CourseSelector() {
         const res1 = await axios.get(endpoint);
         setStructure(res1.data.structure);
       } catch (err) {
+        // eslint-disable-next-line no-console
         console.log(err);
       }
     };
@@ -44,9 +47,9 @@ export default function CourseSelector() {
         </div>
         <SearchCourse />
 
-        <Switch 
+        <Switch
           className="cs-toggle-locked"
-          onChange={() => setShowLockedCourses(prev => !prev)}
+          onChange={() => setShowLockedCourses((prev) => !prev)}
           checkedChildren="locked courses shown"
           unCheckedChildren="locked courses hidden"
         />
@@ -59,4 +62,6 @@ export default function CourseSelector() {
       </div>
     </div>
   );
-}
+};
+
+export default CourseSelector;

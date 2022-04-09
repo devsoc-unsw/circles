@@ -1,22 +1,24 @@
+/* eslint-disable guard-for-in */
+/* eslint-disable no-restricted-syntax */
 import React from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { Tooltip, Menu, Button } from "antd";
-import { courseTabActions } from "../../../actions/courseTabActions";
-import { Loading } from "./Loading";
 import "./CourseMenu.less";
-import { setCourses } from "../../../actions/coursesActions";
 import { IoWarningOutline } from "react-icons/io5";
-import { prepareUserPayload } from "../helper";
+import { AiOutlinePlus } from "react-icons/ai";
 import { motion, AnimatePresence } from "framer-motion/dist/framer-motion";
 import { ReactComponent as Padlock } from "../../../images/padlock.svg";
-import { PlusCircleOutlined, PlusOutlined } from "@ant-design/icons";
-import { AiOutlinePlus } from "react-icons/ai";
 import { axiosRequest } from "../../../axios";
+import prepareUserPayload from "../helper";
+import { Loading } from "./Loading";
+import { courseTabActions } from "../../../actions/courseTabActions";
 import { plannerActions } from "../../../actions/plannerActions";
-const { SubMenu } = Menu;
+import { setCourses } from "../../../actions/coursesActions";
 
-export default function CourseMenu({ structure, showLockedCourses }) {
+const { SubMenu } = Menu;
+// plz help wtf is this file
+const CourseMenu = ({ structure, showLockedCourses }) => {
   const dispatch = useDispatch();
   const [menuData, setMenuData] = React.useState({});
   const [coursesUnits, setCoursesUnits] = React.useState({});
@@ -33,23 +35,6 @@ export default function CourseMenu({ structure, showLockedCourses }) {
   const degree = useSelector((state) => state.degree);
 
   const [isPageLoaded, setIsPageLoaded] = React.useState(false);
-
-  // get all courses
-  React.useEffect(async () => {
-    if (structure) {
-      try {
-        const res = await axios.post(
-          `/courses/getAllUnlocked/`,
-          JSON.stringify(prepareUserPayload(degree, planner))
-        );
-
-        dispatch(setCourses(res.data.courses_state));
-        generateMenuData(res.data.courses_state);
-      } catch (err) {
-        console.log(err);
-      }
-    }
-  }, [structure, coursesInPlanner]);
 
   // generate menu content
   const generateMenuData = (courses) => {
@@ -77,8 +62,8 @@ export default function CourseMenu({ structure, showLockedCourses }) {
             // only consider disciplinary component courses
             Object.keys(subgroupStructure.courses).forEach((courseCode) => {
               newMenu[group][subgroup].push({
-                courseCode: courseCode,
-                unlocked: courses[courseCode] ? true : false,
+                courseCode,
+                unlocked: !!courses[courseCode],
                 accuracy: courses[courseCode]
                   ? courses[courseCode].is_accurate
                   : true,
@@ -86,9 +71,10 @@ export default function CourseMenu({ structure, showLockedCourses }) {
               newMenu[group][subgroup].sort(sortMenu);
 
               // add UOC to curr
-              if (coursesInPlanner.get(courseCode))
-                newCoursesUnits[group][subgroup].curr +=
-                  coursesInPlanner.get(courseCode).UOC;
+              if (coursesInPlanner.get(courseCode)) {
+                newCoursesUnits[group][subgroup].curr
+                    += coursesInPlanner.get(courseCode).UOC;
+              }
             });
           } else {
             // If there is no specified course list for the subgroup, then manually
@@ -118,56 +104,70 @@ export default function CourseMenu({ structure, showLockedCourses }) {
     setIsPageLoaded(true);
   };
 
+  const getAllUnlocked = async () => {
+    try {
+      const res = await axios.post(
+        "/courses/getAllUnlocked/",
+        JSON.stringify(prepareUserPayload(degree, planner)),
+      );
+      dispatch(setCourses(res.data.courses_state));
+      generateMenuData(res.data.courses_state);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  // get all courses
+  React.useEffect(() => {
+    if (structure) { getAllUnlocked(); }
+  });
+
   return (
     <div className="cs-menu-root">
       {!isPageLoaded ? (
         <Loading />
       ) : (
-        <>
-          <Menu
-            onClick={() => {}}
-            defaultSelectedKeys={[]}
-            selectedKeys={[]}
-            defaultOpenKeys={[[...Object.keys(structure)][0]]}
-            mode="inline"
-            className="text"
-          >
-            {Object.keys(menuData).map((group) => (
-              <SubMenu key={group} title={group}>
-                {Object.keys(menuData[group]).map((subGroup) => (
-                  <Menu.ItemGroup
-                    key={subGroup}
-                    title={
-                      <SubgroupContainer
-                        subGroup={subGroup}
-                        group={group}
-                        coursesUnits={coursesUnits}
-                      />
-                    }
-                  >
-                    <AnimatePresence initial={false}>
-                      {menuData[group][subGroup].map(
-                        (course, ind) =>
-                          (course.unlocked || showLockedCourses) && (
-                            <MenuItem
-                              selected={coursesInPlanner.get(course.courseCode)}
-                              courseCode={course.courseCode}
-                              accurate={course.accuracy}
-                              unlocked={course.unlocked}
-                              setActiveCourse={setActiveCourse}
-                              activeCourse={activeCourse}
-                              subGroup={subGroup}
-                              key={course.courseCode + group}
-                            />
-                          )
-                      )}
-                    </AnimatePresence>
-                  </Menu.ItemGroup>
-                ))}
-              </SubMenu>
-            ))}
-          </Menu>
-        </>
+        <Menu
+          onClick={() => {}}
+          defaultSelectedKeys={[]}
+          selectedKeys={[]}
+          defaultOpenKeys={[[...Object.keys(structure)][0]]}
+          mode="inline"
+          className="text"
+        >
+          {Object.keys(menuData).map((group) => (
+            <SubMenu key={group} title={group}>
+              {Object.keys(menuData[group]).map((subGroup) => (
+                <Menu.ItemGroup
+                  key={subGroup}
+                  title={(
+                    <SubgroupContainer
+                      subGroup={subGroup}
+                      group={group}
+                      coursesUnits={coursesUnits}
+                    />
+                    )}
+                >
+                  <AnimatePresence initial={false}>
+                    {menuData[group][subGroup].map(
+                      (course, ind) => (course.unlocked || showLockedCourses) && (
+                        <MenuItem
+                          selected={coursesInPlanner.get(course.courseCode)}
+                          courseCode={course.courseCode}
+                          accurate={course.accuracy}
+                          unlocked={course.unlocked}
+                          setActiveCourse={setActiveCourse}
+                          activeCourse={activeCourse}
+                          subGroup={subGroup}
+                          key={course.courseCode + group}
+                        />
+                      ),
+                    )}
+                  </AnimatePresence>
+                </Menu.ItemGroup>
+              ))}
+            </SubMenu>
+          ))}
+        </Menu>
       )}
     </div>
   );
@@ -176,7 +176,7 @@ export default function CourseMenu({ structure, showLockedCourses }) {
       ? item1.courseCode > item2.courseCode // sort within locked/unlocked by courseCode
       : item1.unlocked < item2.unlocked; // separate locked/unlocked
   }
-}
+};
 
 const MenuItem = ({
   selected,
@@ -195,15 +195,15 @@ const MenuItem = ({
 
   const renderAccurateNote = () => {
     if (!accurate) {
-      return <WarningIcon text="This course info may be inaccurate" />;
+      return <WarningIcon text="We couldn't parse the requirement for this course. Please manually check if you have the correct prerequisites to unlock it." />;
     }
   };
 
   const addToPlanner = async (e, courseCode) => {
     e.stopPropagation();
-    const [course, err] = await axiosRequest(
+    const [course] = await axiosRequest(
       "get",
-      `/courses/getCourse/${courseCode}`
+      `/courses/getCourse/${courseCode}`,
     );
 
     const data = {
@@ -217,7 +217,7 @@ const MenuItem = ({
         prereqs: course.raw_requirements,
         isLegacy: course.is_legacy,
         isUnlocked: true,
-        warnings: "", 
+        warnings: "",
         handbook_note: "",
       },
     };
@@ -256,21 +256,19 @@ const MenuItem = ({
   );
 };
 
-const WarningIcon = ({ text }) => {
-  return (
-    <Tooltip placement="top" title={text}>
-      <IoWarningOutline
-        size="1em"
-        color="#DC9930"
-        style={{
-          position: "absolute",
-          marginLeft: "0.3em",
-          top: "calc(50% - 0.5em)",
-        }}
-      />
-    </Tooltip>
-  );
-};
+const WarningIcon = ({ text }) => (
+  <Tooltip placement="top" title={text}>
+    <IoWarningOutline
+      size="1em"
+      color="#DC9930"
+      style={{
+        marginLeft: "0.3em",
+        textAlign: "center",
+        top: "calc(50% - 0.5em)",
+      }}
+    />
+  </Tooltip>
+);
 
 const SubgroupContainer = ({ subGroup, group, coursesUnits }) => {
   const { curr, total } = coursesUnits[group][subGroup];
@@ -283,3 +281,5 @@ const SubgroupContainer = ({ subGroup, group, coursesUnits }) => {
     </div>
   );
 };
+
+export default CourseMenu;

@@ -1,12 +1,27 @@
-import React, { useEffect, useState, useMemo, useRef } from "react";
+/* eslint-disable no-console */
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Select, Spin } from "antd";
-import debounce from "lodash/debounce";
 import axios from "axios";
 import { courseTabActions } from "../../actions/courseTabActions";
-import { useDebounce } from "../../hooks/useDebounce";
+import useDebounce from "../../hooks/useDebounce";
 
-export default function SearchCourse() {
+const search = async (query, setCourses, setIsLoading) => {
+  try {
+    const res = await axios.get(`/courses/searchCourse/${query}`);
+    setCourses(
+      Object.keys(res.data).map((course) => ({
+        label: `${course}: ${res.data[course]}`,
+        value: course,
+      })),
+    );
+  } catch (err) {
+    console.log(err);
+  }
+  setIsLoading(false);
+};
+
+const SearchCourse = () => {
   const [value, setValue] = useState("");
   const debouncedSearchTerm = useDebounce(value, 200);
   const [courses, setCourses] = React.useState([]);
@@ -15,8 +30,7 @@ export default function SearchCourse() {
 
   useEffect(() => {
     // if debounced term changes , call API
-    if (debouncedSearchTerm)
-      search(debouncedSearchTerm, setCourses, setIsLoading);
+    if (debouncedSearchTerm) { search(debouncedSearchTerm, setCourses, setIsLoading); }
   }, [debouncedSearchTerm]);
 
   const handleSelect = (courseCode) => {
@@ -44,20 +58,6 @@ export default function SearchCourse() {
       style={{ width: "30rem", marginRight: "0.5rem" }}
     />
   );
-}
-
-export const search = async (query, setCourses, setIsLoading) => {
-  try {
-    const res = await axios.get(`/courses/searchCourse/${query}`);
-    setCourses(
-      Object.keys(res.data).map((course) => ({
-        label: `${course}: ${res.data[course]}`,
-        value: course,
-      }))
-    );
-  } catch (err) {
-    console.log(err);
-    return [];
-  }
-  setIsLoading(false);
 };
+
+export default SearchCourse;

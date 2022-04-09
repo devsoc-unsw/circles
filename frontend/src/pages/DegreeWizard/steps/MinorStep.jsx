@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import { Menu, Button, Typography } from "antd";
 import { degreeActions } from "../../../actions/degreeActions";
-import { Link } from "react-scroll";
 import { useDispatch, useSelector } from "react-redux";
 import "./steps.less";
 import { useSpring, animated } from "react-spring";
@@ -12,20 +11,16 @@ const { Title } = Typography;
 export const MinorStep = ({ incrementStep, currStep }) => {
   const dispatch = useDispatch();
   const { minor, programCode } = useSelector((store) => store.degree);
-  // Fetch the minors
-  const [selected, setSelected] = React.useState("Select Minor");
   const [options, setOptions] = React.useState({});
 
   const fetchAllMinors = async () => {
     const res = await axios.get(`/programs/getMinors/${programCode}`);
     setOptions(res.data["minors"]);
-
-    // setIsLoading(false);
   };
 
   useEffect(() => {
     if (programCode !== "") fetchAllMinors();
-  }, [programCode]);
+  });
 
   const props = useSpring(springProps);
 

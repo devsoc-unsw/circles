@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { Menu, Button, Typography } from "antd";
-import { Link } from "react-scroll";
 import { degreeActions } from "../../../actions/degreeActions";
 import { useDispatch, useSelector } from "react-redux";
 import "./steps.less";
@@ -23,7 +22,7 @@ export const SpecialisationStep = ({ incrementStep, currStep }) => {
 
   useEffect(() => {
     if (programCode !== "") fetchAllSpecializations();
-  }, [programCode]);
+  });
 
   const props = useSpring(springProps);
 

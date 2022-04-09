@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Menu, Layout, Typography, Button, Drawer } from "antd";
+import { BarsOutlined } from "@ant-design/icons";
+import {
+  Menu, Layout, Typography, Button, Drawer,
+} from "antd";
 import { DrawerContent } from "./DrawerContent";
 import { PlannerCart } from "../plannerCart/PlannerCart";
-import ThemeToggle from "../ThemeToggle";
-import { BarsOutlined } from "@ant-design/icons";
 import useMediaQuery from "../../hooks/useMediaQuery";
 import circlesLogo from "../../images/circlesLogo.svg";
 import "./header.less";
@@ -92,7 +93,7 @@ const Header = () => {
       <Drawer
         onClose={() => setShowDrawer(false)}
         visible={showDrawer}
-        className={"flex-col"}
+        className="flex-col"
       >
         <DrawerContent onCloseDrawer={() => setShowDrawer(false)} />
       </Drawer>

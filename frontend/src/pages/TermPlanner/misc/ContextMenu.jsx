@@ -11,11 +11,11 @@ import { FaCalendarTimes, FaTrash, FaInfoCircle } from "react-icons/fa";
 const ContextMenu = ({ code, plannedFor }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { years, startYear, courses, completedTerms } = useSelector((state) => {
+  const { years, startYear, completedTerms } = useSelector((state) => {
     return state.planner;
   });
 
-  const { programCode, programName, specialisation, minor } = useSelector(
+  const { programCode, specialisation, minor } = useSelector(
     (state) => state.degree
   );
 

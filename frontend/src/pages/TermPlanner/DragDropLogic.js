@@ -1,7 +1,7 @@
 import { plannerActions } from "../../actions/plannerActions";
 
 export const handleOnDragEnd = (result, dragEndProps) => {
-  const { setIsDragging, dispatch, years, startYear, courses, completedTerms } =
+  const { setIsDragging, dispatch, years, startYear } =
     dragEndProps;
 
   setIsDragging(false);

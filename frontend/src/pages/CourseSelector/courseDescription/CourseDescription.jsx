@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Tag, Alert, Typography, Space, Menu, Dropdown } from "antd";
-import { PlusOutlined, StopOutlined } from "@ant-design/icons";
+import { Button, Tag, Typography, Space, Menu, Dropdown } from "antd";
+import {  StopOutlined } from "@ant-design/icons";
 import { CourseTag } from "../../../components/courseTag/CourseTag";
 import SearchCourse from "../SearchCourse";
 import { plannerActions } from "../../../actions/plannerActions";
 import { Loading } from "./Loading";
 import "./courseDescription.less";
 import { prepareUserPayload } from "../helper";
-import axios from "axios";
 import infographic from "../../../images/infographicFontIndependent.svg";
 import { motion } from "framer-motion/dist/framer-motion";
 import { axiosRequest } from "../../../axios";
@@ -52,7 +51,7 @@ const PlannerDropdown = ({ courseCode, structure, addToPlanner }) => {
       categoriesDropdown.push("General Education");
     }
     setCategories(categoriesDropdown);
-  }, [courseCode]);
+  }, [structure, courseCode]);
 
   return (
     <Menu>
@@ -107,7 +106,7 @@ export default function CourseDescription({ structure }) {
       getCourse();
       getPathToCoursesById(id);
     }
-  }, [id]);
+  }, [id, dispatch, degree, planner]);
 
   if (tabs.length === 0)
     return (

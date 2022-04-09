@@ -1,25 +1,19 @@
 import React from "react";
-import ParticleBackground from "./ParticleBackground";
-import { useSelector } from "react-redux";
 import { DegreeStep } from "./steps/DegreeStep";
 import { SpecialisationStep } from "./steps/SpecialisationStep";
 import { PreviousCoursesStep } from "./steps/PreviousCoursesStep";
 import { MinorStep } from "./steps/MinorStep";
 import { plannerActions } from "../../actions/plannerActions";
 import { useDispatch } from "react-redux";
-import { useSpring, animated } from "react-spring";
-import { DatePicker, Button, Typography, Modal } from "antd";
+import { Button, Typography, Modal } from "antd";
 import "./main.less";
-import { springProps } from "./spring";
 import { scroller } from "react-scroll";
 import { useNavigate } from "react-router-dom";
 import { YearStep } from "./steps/YearStep";
 
 const { Title } = Typography;
-const { RangePicker } = DatePicker;
 
 function DegreeWizard() {
-  const theme = useSelector((store) => store.theme);
   const dispatch = useDispatch();
   const [isModalVisible, setIsModalVisible] = React.useState(false);
   const navigate = useNavigate();
@@ -30,14 +24,6 @@ function DegreeWizard() {
       setIsModalVisible(true);
     }
   }, []);
-
-  const handleYearChange = (_, [startYear, endYear]) => {
-    const numYears = endYear - startYear + 1;
-    dispatch(plannerActions("SET_DEGREE_LENGTH", numYears));
-    dispatch(plannerActions("UPDATE_START_YEAR", startYear));
-  };
-
-  const props = useSpring(springProps);
 
   const [currStep, setCurrStep] = React.useState(1);
   const incrementStep = () => {
@@ -124,7 +110,6 @@ function DegreeWizard() {
           </div>
         )}
       </div>
-      {theme === "dark" && <ParticleBackground />}
     </div>
   );
 }
