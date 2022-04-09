@@ -1,5 +1,5 @@
 import React from "react";
-import { Tooltip } from "antd";
+import { Tooltip, Popconfirm } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { IoCogSharp } from "react-icons/io5";
 import Tippy from "@tippyjs/react";
@@ -68,11 +68,20 @@ const OptionsHeader = ({ plannerRef, isAllEmpty }) => {
         )}
 
         {!isAllEmpty(years) && (
-          <Tooltip title="Unplan all courses">
-            <button className="settingsButton" onClick={unscheduleAll}>
-              <FaRegCalendarTimes size="1.5em" className="settingsIcon" />
-            </button>
-          </Tooltip>
+          <Popconfirm 
+            placement="bottomRight"
+            title={"Are you sure you want to unplan all your courses?"}
+            onConfirm={unscheduleAll}
+            style={{ width: "200px" }}
+            okText="Yes"
+            cancelText="No"
+          >
+            <Tooltip title="Unplan all courses">
+              <button className="settingsButton">
+                <FaRegCalendarTimes size="1.5em" className="settingsIcon" />
+              </button>
+            </Tooltip>
+          </Popconfirm>
         )}
 
         {areYearsHidden && (
