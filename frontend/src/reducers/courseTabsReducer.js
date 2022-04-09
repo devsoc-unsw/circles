@@ -66,6 +66,8 @@ const courseTabsReducer = (state = initial, action) => {
         ...state,
         tabs: action.payload,
       };
+    case "RESET_COURSE_TABS":
+      return initial;
     default:
       return state;
   }

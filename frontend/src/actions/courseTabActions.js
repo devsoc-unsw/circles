@@ -19,6 +19,10 @@ export const courseTabActions = (action, payload) => {
       return {
         type: "REORDER_TABS",
         payload: payload,
+      }
+    case "RESET_COURSE_TABS":
+      return {
+        type: "RESET_COURSE_TABS",
       };
     default:
       return null;

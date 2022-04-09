@@ -17,10 +17,9 @@ const CourseTab = ({ tab, index }) => {
   const getDraggableStyle = (style, snapshot) => {
     // lock x axis when dragging
     if (style.transform) {
-      const axisLockX = `${style.transform.split(",").shift()}, 0px)`;
       return {
         ...style,
-        transform: axisLockX,
+        transform: `${style.transform.split(",").shift()}, 0px)`,
       };
     }
     return style;
