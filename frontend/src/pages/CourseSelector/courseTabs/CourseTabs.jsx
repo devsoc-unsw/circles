@@ -4,6 +4,8 @@ import { courseTabActions } from "../../../actions/courseTabActions";
 import "./courseTabs.less";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import CourseTab from "./CourseTab";
+import { Button, Dropdown, Menu } from "antd";
+import { CloseOutlined, EllipsisOutlined } from "@ant-design/icons";
 
 export const CourseTabs = () => {
   const dispatch = useDispatch();
@@ -35,6 +37,18 @@ export const CourseTabs = () => {
     dispatch(courseTabActions("REORDER_TABS", reorderedTabs));
   };
 
+  const TabDropdownMenu = (
+    <Menu>
+      <Menu.Item
+        onClick={() => dispatch(courseTabActions("RESET_COURSE_TABS"))}
+        style={{color: '#D11A2A'}}
+      >
+        <CloseOutlined /> Close all tabs
+      </Menu.Item>
+    </Menu>
+  );
+  
+
   return (
     <div className="cs-tabs-cont">
       <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
@@ -53,6 +67,12 @@ export const CourseTabs = () => {
           )}
         </Droppable>
       </DragDropContext>
+      {
+        !!tabs.length &&
+        <Dropdown overlay={TabDropdownMenu}>
+          <Button className="cs-tabs-dropdown-btn" icon={<EllipsisOutlined />}/>
+        </Dropdown>
+      }
     </div>
   );
 };
