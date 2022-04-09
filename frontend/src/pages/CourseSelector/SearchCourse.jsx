@@ -6,7 +6,7 @@ import { courseTabActions } from "../../actions/courseTabActions";
 import { useDebounce } from "../../hooks/useDebounce";
 
 export default function SearchCourse() {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(null);
   const debouncedSearchTerm = useDebounce(value, 200);
   const [courses, setCourses] = React.useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -19,7 +19,7 @@ export default function SearchCourse() {
   }, [debouncedSearchTerm]);
 
   const handleSelect = (courseCode) => {
-    setValue("");
+    setValue(null);
     dispatch(courseTabActions("ADD_TAB", courseCode));
   };
 
@@ -37,8 +37,8 @@ export default function SearchCourse() {
       size="large"
       options={courses}
       value={value}
-      // Close search dropdown when there is no input value or when
-      // a course has been selected
+      // open attribute - close search dropdown when there is no input value or 
+      // when a course has been selected
       open={!!value}
       onSearch={handleSearch}
       onSelect={handleSelect}
