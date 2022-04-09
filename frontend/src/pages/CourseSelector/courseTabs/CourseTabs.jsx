@@ -36,7 +36,7 @@ export const CourseTabs = () => {
   };
 
   return (
-    <div className="cs-tabs-container">
+    <div className="cs-tabs-cont">
       <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
         <Droppable droppableId="droppable" direction="horizontal">
           {(droppableProvided, droppableSnapshot) => (

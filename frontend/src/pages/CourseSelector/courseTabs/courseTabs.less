@@ -1,23 +1,22 @@
-.cs-tabs-container {
+.cs-tabs-cont {
   background-color: #efdbff;
   padding-left: calc(
     20vw - 2px
   ); // 20vw - width of menu sidebar, 2px is tab margin-left
   width: 100vw;
-  height: fit-content;
+  height: var(--cs-tabs-cont-height);
 }
 
 .cs-tabs-root {
   display: flex;
   overflow: auto;
-  min-height: 55px;
-  height: fit-content;
-  padding-top: 15px;
+  height: 100%;
   &::-webkit-scrollbar {
     display: none;
   }
 
   .cs-tab {
+    height: 100%;
     border-radius: 10px 0 0 0 !important;
     background-color: #fafafa;
     display: flex;
