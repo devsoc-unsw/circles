@@ -198,6 +198,7 @@ export default function CourseDescription({ structure }) {
                   </Dropdown.Button>
                 )}
               </div>
+              {course.is_legacy && <Text strong> NOTE: this course is discontinued - if an equivalent course exists for it, please pick that instead </Text>}
               <Title level={3} className="text">
                 Overview
               </Title>
