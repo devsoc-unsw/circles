@@ -24,7 +24,7 @@ function DraggableCourse({ code, index }) {
   const warningMessage = courses.get(code)["warnings"];  
 
   const warning1 = isLegacy || !isUnlocked; 
-  const warning2 = handbook_note !== "" || warningMessage !== "";
+  const warning2 = handbook_note !== "" || !!warningMessage.length;
 
   const { show } = useContextMenu({
     id: `${code}-context`,
