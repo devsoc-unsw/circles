@@ -6,22 +6,21 @@
   display: flex;
   flex-direction: column;
   // grid-template-rows: 20vh 55px 1fr;
-  max-height: calc(100vh - 70px);
+  height: calc(100vh - var(--navbar-height));
+
+  --cs-top-cont-height: 28%;
+  --cs-tabs-cont-height: 40px;
+  --cs-bottom-cont-height: calc(100% - var(--cs-top-cont-height) - var(--cs-tabs-cont-height));
 }
 
 
 .cs-top-cont {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  padding: 1.7rem;
+  justify-content: center;
+  padding: 0 1.7rem;
   position: relative;
-  height: 25vh;
-}
-@media (max-height: 800px) {
-  .cs-top-cont {
-    height: 200px;
-  }
+  height: var(--cs-top-cont-height);
 }
 
 .cs-degree-cont {
@@ -37,6 +36,7 @@
 .cs-bottom-cont {
   display: grid;
   grid-template-columns: 20vw auto;
+  height: var(--cs-bottom-cont-height);
 }
 
 .cs-toggle-locked {
