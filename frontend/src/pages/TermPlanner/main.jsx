@@ -102,7 +102,7 @@ const TermPlanner = () => {
                       {Object.keys(year).map((term) => {
                         const key = iYear + term;
                         if (
-                          (!isSummerEnabled && term != "T0") ||
+                          (!isSummerEnabled && term !== "T0") ||
                           isSummerEnabled
                         )
                           return (

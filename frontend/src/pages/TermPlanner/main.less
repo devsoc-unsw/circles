@@ -150,6 +150,11 @@ body {
     gap: 1em;
     margin-bottom: 0.7em;
   }
+
+  .leftButtons {
+    display: flex;
+  }
+
   .settingsButton {
     margin-left: 1em;
     margin-top: 1em;
@@ -157,7 +162,6 @@ body {
     border-radius: 0.5em;
     padding: 0.5em 0.7em 0.3em 0.7em;
     cursor: pointer;
-    // box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
   }
 
   .clicked {
@@ -172,7 +176,7 @@ body {
     gap: 0.5em;
   }
   .settingsTitleContainer {
-    width: 14em;
+    width: auto;
   }
 
   .settingsTitle {
@@ -193,6 +197,37 @@ body {
 
   .settingsSubtitle {
     margin-bottom: 0;
+  }
+
+  .helpMenu {
+    padding: 1em;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5em;
+    grid-auto-rows: auto;
+  }
+  .helpTitleContainer {
+    width: auto;
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+  .helpButton {
+    margin-right: 1em;
+  }
+  .helpGif {
+    width: 100%;
+    image-rendering: auto;
+    border-radius: 12px;
+    cursor: help;
+  }
+
+  .shadow {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+
+  .tall {
+    width: 70%;
+    align-self: center;
   }
 
   .dragDisabledCourse:hover {
@@ -249,6 +284,7 @@ body {
 
   .optionsHeader {
     display: flex;
+    justify-content: space-between;
   }
 
 
