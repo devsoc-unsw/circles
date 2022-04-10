@@ -25,6 +25,13 @@ const CourseTab = ({ tab, index }) => {
     return style;
   };
 
+  const handleMouseDown = (e) => {
+    const MIDDLE_CLICK_BTN = 1
+    if (e.button === MIDDLE_CLICK_BTN) {
+      dispatch(courseTabActions("REMOVE_TAB", index));
+    }
+  }
+
   useEffect(() => {
     if (active === index && !scrolledTo) {
       ref.current.scrollIntoView({ behavior: "smooth" });
@@ -49,6 +56,7 @@ const CourseTab = ({ tab, index }) => {
             draggableProvided.draggableProps.style,
             draggableSnapshot
           )}
+          onMouseDown={handleMouseDown}
         >
           <span className="cs-tab-name">{tab}</span>
           <Button
