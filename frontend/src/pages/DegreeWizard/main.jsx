@@ -1,5 +1,4 @@
 import React from "react";
-import ParticleBackground from "./ParticleBackground";
 import { useSelector } from "react-redux";
 import { DegreeStep } from "./steps/DegreeStep";
 import { SpecialisationStep } from "./steps/SpecialisationStep";
@@ -125,7 +124,6 @@ function DegreeWizard() {
           </div>
         )}
       </div>
-      {theme === "dark" && <ParticleBackground />}
     </div>
   );
 }
