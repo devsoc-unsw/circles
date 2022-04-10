@@ -1,11 +1,13 @@
 import React from "react";
-import { Tooltip, Button, Typography, Popconfirm, Alert } from "antd";
+import {
+  Tooltip, Button, Typography, Popconfirm, Alert,
+} from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { DeleteOutlined } from "@ant-design/icons";
 import { ReactComponent as PlannerIcon } from "../assets/planner-icon.svg";
-import { plannerActions } from "../../actions/plannerActions";
-import { courseTabActions } from "../../actions/courseTabActions";
+import plannerActions from "../../actions/plannerActions";
+import courseTabActions from "../../actions/courseTabActions";
 import "./plannerCart.less";
 
 const { Text, Title } = Typography;
@@ -13,7 +15,7 @@ const CourseCard = ({ code, title, showAlert }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loading, setLoading] = React.useState(false);
-  
+
   const confirmDelete = () => {
     dispatch(plannerActions("REMOVE_COURSE", code));
     setLoading(true);
@@ -24,13 +26,13 @@ const CourseCard = ({ code, title, showAlert }) => {
   };
 
   const handleCourseLink = () => {
-    navigate(`/course-selector`);
+    navigate("/course-selector");
     dispatch(courseTabActions("ADD_TAB", code));
   };
 
   return (
     <div className="planner-cart-card">
-      <div onClick={() => handleCourseLink()} style={{cursor: "pointer"}}>
+      <div onClick={handleCourseLink} style={{ cursor: "pointer" }}>
         <Text className="text" strong>
           {code}:{" "}
         </Text>
@@ -39,7 +41,7 @@ const CourseCard = ({ code, title, showAlert }) => {
       <div className="planner-cart-card-actions">
         <Popconfirm
           placement="bottomRight"
-          title={"Remove this course from your planner?"}
+          title="Remove this course from your planner?"
           onConfirm={confirmDelete}
           style={{ width: "200px" }}
           okText="Yes"
@@ -69,15 +71,16 @@ export const PlannerCart = () => {
   const deleteAllCourses = () => {
     dispatch(plannerActions("REMOVE_ALL_COURSES"));
   };
-  const showAlert = (code) => {
+  const showAlert = (c) => {
     setShow(false);
-    setCode(code);
+    setCode(c);
     setShow(true);
     setTimeout(() => {
       setShow(false);
       setCode("");
     }, 3500);
   };
+
   return (
     <div className="planner-cart-root">
       <Tooltip title="Your courses">

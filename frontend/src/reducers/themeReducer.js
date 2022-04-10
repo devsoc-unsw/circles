@@ -1,8 +1,7 @@
-
-const themeReducer = (state = "light", action) => {
+const themeReducer = (action, state = "light") => {
   switch (action.type) {
     case "theme":
-      return (state = action.payload);
+      return action.payload;
     default:
       return state;
   }

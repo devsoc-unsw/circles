@@ -6,7 +6,7 @@ import SkeletonPlanner from "./misc/SkeletonPlanner";
 import "./main.less";
 import { useSelector, useDispatch } from "react-redux";
 import { handleOnDragEnd, handleOnDragStart } from "./DragDropLogic";
-import { updateAllWarnings } from "./ValidateTermPlanner";
+import updateAllWarnings from "./ValidateTermPlanner";
 import UnplannedColumn from "./UnplannedColumn";
 import OptionsHeader from "./optionsHeader/main";
 import "tippy.js/dist/tippy.css";

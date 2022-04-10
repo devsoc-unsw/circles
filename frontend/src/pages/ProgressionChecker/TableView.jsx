@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Table } from "antd";
+import { Table } from "antd";
 
 const TableView = ({ checkercourses }) => {
   const columns = [
@@ -7,7 +7,7 @@ const TableView = ({ checkercourses }) => {
       title: "Course Name",
       dataIndex: "name",
       key: "name",
-      render: (name) => <a>{name}</a>,
+      render: (name) => name,
     },
     {
       title: "UOC",

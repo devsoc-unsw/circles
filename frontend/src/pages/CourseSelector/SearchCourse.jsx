@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Select, Spin } from "antd";
 import axios from "axios";
-import { courseTabActions } from "../../actions/courseTabActions";
+import courseTabActions from "../../actions/courseTabActions";
 import useDebounce from "../../hooks/useDebounce";
 
 const search = async (query, setCourses, setIsLoading) => {

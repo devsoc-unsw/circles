@@ -1,7 +1,7 @@
 import React from "react";
 import { Tabs } from "antd";
 import { useSelector, useDispatch } from "react-redux";
-import { courseTabActions } from "../../actions/courseTabActions";
+import courseTabActions from "../../actions/courseTabActions";
 import "./courseTabs.less";
 
 const { TabPane } = Tabs;

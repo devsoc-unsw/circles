@@ -4,7 +4,7 @@ import { BarsOutlined } from "@ant-design/icons";
 import {
   Menu, Layout, Typography, Button, Drawer,
 } from "antd";
-import { DrawerContent } from "./DrawerContent";
+import DrawerContent from "./DrawerContent";
 import { PlannerCart } from "../plannerCart/PlannerCart";
 import useMediaQuery from "../../hooks/useMediaQuery";
 import circlesLogo from "../../images/circlesLogo.svg";
@@ -40,10 +40,10 @@ const Header = () => {
   const isSmall = useMediaQuery("(max-width: 1000px)");
   const [showDrawer, setShowDrawer] = useState(false);
   const [current, setCurrent] = useState(getCurrentPath());
-  
+
   useEffect(() => {
     setCurrent(getCurrentPath());
-  }, [window.location.pathname])
+  }, [window.location.pathname]);
 
   return (
     <Layout className="header">

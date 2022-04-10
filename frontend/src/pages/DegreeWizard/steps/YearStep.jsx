@@ -1,10 +1,11 @@
 import React from "react";
 import { Typography, Button, DatePicker } from "antd";
-import { plannerActions } from "../../../actions/plannerActions";
+import plannerActions from "../../../actions/plannerActions";
 import { useDispatch } from "react-redux";
 import "./steps.less";
 import { useSpring, animated } from "react-spring";
-import { springProps } from "../spring";
+import springProps from "../spring";
+
 const { Title } = Typography;
 const { RangePicker } = DatePicker;
 

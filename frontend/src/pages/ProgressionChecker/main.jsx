@@ -1,43 +1,8 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import Dashboard from "./Dashboard";
 import ListView3 from "./ListView3";
-// import TableView from "./TableView";
-import axios from "axios";
 import "./main.less";
-const ProgressionChecker = () => {
-  const [degree, setDegree] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
-  const [courses, setCourses] = useState({});
-
-  const fetchDegree = async () => {
-    // let res = await axios.get("http://localhost:3000/degree.json");
-    // temporary fix to avoid using localhost:3000
-    setDegree(degreeData);
-    const res = await axios.get(
-      `/programs/getStructure/3778/${degreeData.concentrations[0].code}`
-    );
-
-    setCourses(res.data.structure);
-    setIsLoading(false);
-  };
-
-  useEffect(() => {
-    fetchDegree();
-  }, []);
-
-  return (
-    <>
-      <Dashboard isLoading={isLoading} degree={degree} />
-      <ListView3
-        isLoading={isLoading}
-        degree={degree}
-        progressioncourses={courses}
-      />
-    </>
-  );
-};
-
-export default ProgressionChecker;
 
 const degreeData = {
   name: "Pearson",
@@ -69,3 +34,36 @@ const degreeData = {
     },
   ],
 };
+
+const ProgressionChecker = () => {
+  const [degree, setDegree] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+  const [courses, setCourses] = useState({});
+
+  const fetchDegree = async () => {
+    setDegree(degreeData);
+    const res = await axios.get(
+      `/programs/getStructure/3778/${degreeData.concentrations[0].code}`,
+    );
+
+    setCourses(res.data.structure);
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    fetchDegree();
+  }, []);
+
+  return (
+    <>
+      <Dashboard isLoading={isLoading} degree={degree} />
+      <ListView3
+        isLoading={isLoading}
+        degree={degree}
+        progressioncourses={courses}
+      />
+    </>
+  );
+};
+
+export default ProgressionChecker;

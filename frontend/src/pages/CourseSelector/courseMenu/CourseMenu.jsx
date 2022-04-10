@@ -9,11 +9,11 @@ import { IoWarningOutline } from "react-icons/io5";
 import { AiOutlinePlus } from "react-icons/ai";
 import { motion, AnimatePresence } from "framer-motion/dist/framer-motion";
 import { ReactComponent as Padlock } from "../../../images/padlock.svg";
-import { axiosRequest } from "../../../axios";
+import axiosRequest from "../../../axios";
 import prepareUserPayload from "../helper";
 import { Loading } from "./Loading";
-import { courseTabActions } from "../../../actions/courseTabActions";
-import { plannerActions } from "../../../actions/plannerActions";
+import courseTabActions from "../../../actions/courseTabActions";
+import plannerActions from "../../../actions/plannerActions";
 import { setCourses } from "../../../actions/coursesActions";
 
 const { SubMenu } = Menu;
@@ -149,7 +149,7 @@ const CourseMenu = ({ structure, showLockedCourses }) => {
                 >
                   <AnimatePresence initial={false}>
                     {menuData[group][subGroup].map(
-                      (course, ind) => (course.unlocked || showLockedCourses) && (
+                      (course) => (course.unlocked || showLockedCourses) && (
                         <MenuItem
                           selected={coursesInPlanner.get(course.courseCode)}
                           courseCode={course.courseCode}
@@ -197,13 +197,14 @@ const MenuItem = ({
     if (!accurate) {
       return <WarningIcon text="We couldn't parse the requirement for this course. Please manually check if you have the correct prerequisites to unlock it." />;
     }
+    return <div />;
   };
 
-  const addToPlanner = async (e, courseCode) => {
+  const addToPlanner = async (e, plannedCourse) => {
     e.stopPropagation();
     const [course] = await axiosRequest(
       "get",
-      `/courses/getCourse/${courseCode}`,
+      `/courses/getCourse/${plannedCourse}`,
     );
 
     const data = {

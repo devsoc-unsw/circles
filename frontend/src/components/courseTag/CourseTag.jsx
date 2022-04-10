@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Tag } from "antd";
-import { courseTabActions } from "../../actions/courseTabActions";
+import courseTabActions from "../../actions/courseTabActions";
 import "./courseTag.less";
 
 export const CourseTag = ({ name }) => {

@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { Menu, Button, Typography } from "antd";
-import { degreeActions } from "../../../actions/degreeActions";
 import { useDispatch, useSelector } from "react-redux";
 import "./steps.less";
 import { useSpring, animated } from "react-spring";
-import { springProps } from "../spring";
+import springProps from "../spring";
+import degreeActions from "../../../actions/degreeActions";
 
 const { Title } = Typography;
 export const SpecialisationStep = ({ incrementStep, currStep }) => {

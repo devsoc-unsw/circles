@@ -1,19 +1,19 @@
 import React from "react";
-import { DegreeStep } from "./steps/DegreeStep";
+import { useDispatch } from "react-redux";
+import { Button, Typography, Modal } from "antd";
+import { useNavigate } from "react-router-dom";
+import { scroller } from "react-scroll";
+import DegreeStep from "./steps/DegreeStep";
 import { SpecialisationStep } from "./steps/SpecialisationStep";
 import { PreviousCoursesStep } from "./steps/PreviousCoursesStep";
 import { MinorStep } from "./steps/MinorStep";
-import { plannerActions } from "../../actions/plannerActions";
-import { useDispatch } from "react-redux";
-import { Button, Typography, Modal } from "antd";
+import plannerActions from "../../actions/plannerActions";
 import "./main.less";
-import { scroller } from "react-scroll";
-import { useNavigate } from "react-router-dom";
 import { YearStep } from "./steps/YearStep";
 
 const { Title } = Typography;
 
-function DegreeWizard() {
+const DegreeWizard = () => {
   const dispatch = useDispatch();
   const [isModalVisible, setIsModalVisible] = React.useState(false);
   const navigate = useNavigate();
@@ -100,17 +100,17 @@ function DegreeWizard() {
           </div>
         )}
         {currStep >= 4 && (
-          <div className="step-content" id={"Minor"}>
+          <div className="step-content" id="Minor">
             <MinorStep incrementStep={incrementStep} currStep={currStep} />
           </div>
         )}
         {currStep >= 5 && (
-          <div className="step-content" id={"Previous Courses"}>
+          <div className="step-content" id="Previous Courses">
             <PreviousCoursesStep />
           </div>
         )}
       </div>
     </div>
   );
-}
+};
 export default DegreeWizard;

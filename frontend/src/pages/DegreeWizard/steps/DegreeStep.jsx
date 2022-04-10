@@ -1,14 +1,16 @@
 import React, { useEffect } from "react";
 import axios from "axios";
-import { Menu, Typography, Button, Input } from "antd";
-import { degreeActions } from "../../../actions/degreeActions";
+import {
+  Menu, Typography, Button, Input,
+} from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import "./steps.less";
 import { useSpring, animated } from "react-spring";
-import { springProps } from "../spring";
+import degreeActions from "../../../actions/degreeActions";
+import styles from "./steps.less";
+import springProps from "../spring";
 
 const { Title } = Typography;
-export const DegreeStep = ({ incrementStep, currStep }) => {
+const DegreeStep = ({ incrementStep, currStep }) => {
   const dispatch = useDispatch();
   const programCode = useSelector((store) => store.degree.programCode);
   const [input, setInput] = React.useState("");
@@ -16,7 +18,7 @@ export const DegreeStep = ({ incrementStep, currStep }) => {
 
   const fetchAllDegrees = async () => {
     const res = await axios.get("/programs/getPrograms");
-    setOptions(res.data["programs"]);
+    setOptions(res.data.programs);
   };
 
   useEffect(() => {
@@ -30,7 +32,7 @@ export const DegreeStep = ({ incrementStep, currStep }) => {
       degreeActions("SET_PROGRAM", {
         programCode: e.key,
         programName: options[e.key],
-      })
+      }),
     );
   };
 
@@ -38,7 +40,7 @@ export const DegreeStep = ({ incrementStep, currStep }) => {
 
   return (
     <animated.div style={props}>
-      <div className="steps-heading-container">
+      <div className={styles.stepsHeadingContainer}>
         <Title level={4} className="text">
           What are you studying?
         </Title>
@@ -73,3 +75,5 @@ export const DegreeStep = ({ incrementStep, currStep }) => {
     </animated.div>
   );
 };
+
+export default DegreeStep;

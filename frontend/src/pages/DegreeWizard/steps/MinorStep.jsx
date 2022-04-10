@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { Menu, Button, Typography } from "antd";
-import { degreeActions } from "../../../actions/degreeActions";
+import degreeActions from "../../../actions/degreeActions";
 import { useDispatch, useSelector } from "react-redux";
 import "./steps.less";
 import { useSpring, animated } from "react-spring";
-import { springProps } from "../spring";
+import springProps from "../spring";
 
 const { Title } = Typography;
 export const MinorStep = ({ incrementStep, currStep }) => {
@@ -15,7 +15,7 @@ export const MinorStep = ({ incrementStep, currStep }) => {
 
   const fetchAllMinors = async () => {
     const res = await axios.get(`/programs/getMinors/${programCode}`);
-    setOptions(res.data["minors"]);
+    setOptions(res.data.minors);
   };
 
   useEffect(() => {

@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Badge } from "antd";
 import { RiCheckboxCircleFill } from "react-icons/ri";
 import DraggableCourse from "./DraggableCourse";
-import { plannerActions } from "../../actions/plannerActions";
+import plannerActions from "../../actions/plannerActions";
 
 const TermBox = ({
   name, courses, termsOffered, isDragging,

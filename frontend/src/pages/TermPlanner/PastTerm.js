@@ -16,13 +16,17 @@ const getMostRecentPastTerm = (startYear) => {
   const currDay = currTime.getDate();
   const currDegreeYear = currYear - startYear + 1;
 
+  const pastStart = (monthStart, month) => (
+    currDay >= (monthStart + TERM_PAST_AMOUNT && currMonth === month) || currMonth > month
+  );
+
   // session dates gathered from: https://www.student.unsw.edu.au/teaching-periods
   let lastTermPast;
-  if ((currDay >= MID_MONTH_START + TERM_PAST_AMOUNT && currMonth === SEP) || currMonth > SEP) {
+  if (pastStart(MID_MONTH_START, SEP)) {
     lastTermPast = 3;
-  } else if ((currDay >= BEG_MONTH_START + TERM_PAST_AMOUNT && currMonth === JUN) || currMonth > JUN) {
+  } else if (pastStart(BEG_MONTH_START, JUN)) {
     lastTermPast = 2;
-  } else if ((currDay >= MID_MONTH_START + TERM_PAST_AMOUNT && currMonth === FEB) || currMonth > FEB) {
+  } else if (pastStart(MID_MONTH_START, FEB)) {
     lastTermPast = 1;
   } else {
     lastTermPast = 0;

@@ -1,13 +1,14 @@
-import { plannerActions } from "../../actions/plannerActions";
+import plannerActions from "../../actions/plannerActions";
 
 export const handleOnDragEnd = (result, dragEndProps) => {
-  const { setIsDragging, dispatch, years, startYear } =
-    dragEndProps;
+  const {
+    setIsDragging, dispatch, years, startYear,
+  } = dragEndProps;
 
   setIsDragging(false);
 
   const { destination, source, draggableId } = result;
-  let newYears = [...years];
+  const newYears = [...years];
 
   if (!destination) return; // drag outside container
 
@@ -16,15 +17,15 @@ export const handleOnDragEnd = (result, dragEndProps) => {
       course: draggableId,
       term: destination.droppableId,
       // warning: !arePrereqsCompleted,
-    })
+    }),
   );
 
   if (
-    destination.droppableId === source.droppableId &&
-    destination.index === source.index
+    destination.droppableId === source.droppableId
+    && destination.index === source.index
   )
-    // drag to same place
-    return;
+  // drag to same place
+  { return; }
 
   const destYear = destination.droppableId.match(/[0-9]{4}/)[0];
   const destTerm = destination.droppableId.match(/T[0-3]/)[0];
@@ -76,10 +77,10 @@ export const handleOnDragStart = (
   courseItem,
   courses,
   setTermsOffered,
-  setIsDragging
+  setIsDragging,
 ) => {
   const course = courseItem.draggableId;
-  const terms = courses.get(course)["termsOffered"];
+  const terms = courses.get(course).termsOffered;
   setTermsOffered(terms);
   setIsDragging(true);
 };

@@ -1,11 +1,6 @@
 import axios from "axios";
-import { plannerActions } from "../../actions/plannerActions";
-import { getMostRecentPastTerm } from "./PastTerm";
-
-export const updateAllWarnings = (dispatch, plannerInfo, userInfo) => {
-  const payload = prepareCoursesForValidation(plannerInfo, userInfo);
-  dispatch(validateTermPlanner(payload));
-};
+import plannerActions from "../../actions/plannerActions";
+import getMostRecentPastTerm from "./PastTerm";
 
 const validateTermPlanner = (payload) => (dispatch) => {
   axios
@@ -52,3 +47,10 @@ const prepareCoursesForValidation = (plannerInfo, userInfo) => {
 
   return payload;
 };
+
+const updateAllWarnings = (dispatch, plannerInfo, userInfo) => {
+  const payload = prepareCoursesForValidation(plannerInfo, userInfo);
+  dispatch(validateTermPlanner(payload));
+};
+
+export default updateAllWarnings;

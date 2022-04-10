@@ -1,12 +1,14 @@
 import React from "react";
-import { Tooltip, Typography, Modal, Button, notification } from "antd";
+import {
+  Tooltip, Typography, Modal, Button, notification,
+} from "antd";
 import { useSelector, useDispatch } from "react-redux";
-import { plannerActions } from "../../../actions/plannerActions";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { EditOutlined } from "@ant-design/icons";
+import plannerActions from "../../../actions/plannerActions";
 import MultiSelectCourse from "./MultiSelectCourse";
 import "./steps.less";
-import axios from "axios";
 
 const { Title } = Typography;
 const TermBox = ({ yearIndex, termNo }) => {
@@ -21,9 +23,9 @@ const TermBox = ({ yearIndex, termNo }) => {
 
     try {
       const courseInfoList = await Promise.all(
-        courses.map((course) => axios.get(`/courses/getCourse/${course.value}`))
+        courses.map((course) => axios.get(`/courses/getCourse/${course.value}`)),
       );
-      for (let course of courseInfoList) {
+      for (const course of courseInfoList) {
         const info = course.data;
         const data = {
           code: info.code,
@@ -131,7 +133,7 @@ export const PreviousCoursesStep = () => {
       {/* Add info button */}
 
       <div className="steps-grid-cont">
-        <div className="steps-grid-item"></div>
+        <div className="steps-grid-item" />
         <div className="steps-grid-item">Summer</div>
         <div className="steps-grid-item">Term 1</div>
         <div className="steps-grid-item">Term 2</div>
@@ -145,7 +147,7 @@ export const PreviousCoursesStep = () => {
           </div>
           {[...Array(4)].map((_, termNo) => {
             // Get the courses in the term
-            const term = "T" + termNo.toString();
+            const term = `T${termNo.toString()}`;
             return <TermBox yearIndex={yearNo} termNo={term} />;
           })}
         </div>
@@ -161,5 +163,5 @@ const openNotification = (msg) => {
     className: "text helpNotif",
     placement: "topRight",
   };
-  notification["error"](args);
+  notification.error(args);
 };

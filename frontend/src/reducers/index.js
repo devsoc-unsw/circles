@@ -1,4 +1,4 @@
-import { combineReducers } from "react-redux";
+import { combineReducers } from "redux";
 import themeReducer from "./themeReducer";
 import degreeReducer from "./degreeReducer";
 import plannerReducer from "./plannerReducer";

@@ -4,7 +4,7 @@ import {
 } from "antd";
 import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
-import { plannerActions } from "../../../actions/plannerActions";
+import plannerActions from "../../../actions/plannerActions";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
 
