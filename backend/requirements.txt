@@ -5,6 +5,7 @@ charset-normalizer==2.0.12
 click==8.1.2
 dnspython==2.2.1
 fastapi==0.75.0
+fuzzywuzzy==0.18.0
 h11==0.13.0
 idna==3.3
 importlib-metadata==4.11.3

@@ -1,6 +1,7 @@
 import re
 from itertools import chain
 import pymongo
+from fuzzywuzzy import fuzz
 
 from algorithms.objects.user import User
 from data.config import ARCHIVED_YEARS
@@ -16,6 +17,7 @@ router = APIRouter(
     tags=["courses"],
 )
 
+ALL_COURSES = [{"title": course["title"], "code": course["code"]} for course in coursesCOL.find()]
 
 @router.get("/")
 def apiIndex():
@@ -129,23 +131,11 @@ def search(string):
           “COMP1531”: “SoftEng Fundamentals, 
             ……. }
     """
-    # TODO: is regex search really something we want?
-    # malicious regex can cause DOS depending on regex implementation
-    # Would fuzzy search be better?
-    pat = re.compile(r"{}".format(string), re.I)
-    code_query = list(coursesCOL.find({"code": {"$regex": pat}}))
-    title_query = list(coursesCOL.find({"title": {"$regex": pat}}))
+    # TODO: consider ways to search legacy courses
+    top_results = sorted(ALL_COURSES, reverse=True,
+                         key=lambda course: weight_course(course, string))[:20]
 
-    if not code_query and not title_query:
-        for year in sorted(ARCHIVED_YEARS, reverse=True):
-            code_query = list(archivesDB[str(year)].find({"code": {"$regex": pat}}))
-            title_query = list(archivesDB[str(year)].find({"title": {"$regex": pat}}))
-            if code_query or title_query:
-                break
-
-    return {
-        course["code"]: course["title"] for course in chain(code_query, title_query)
-    }
+    return {course["code"]: course["title"] for course in top_results}
 
 
 @router.post(
@@ -292,5 +282,11 @@ def coursesUnlockedWhenTaken(userData: UserData, courseToBeTaken: str):
     return {'courses_unlocked_when_taken' : sorted(list(courses_now_unlocked - courses_initially_unlocked))}
 
 def unlocked_set(courses_state):
-    """fetch the set of unlocked courses from the courses_state of a getAllUnlocked call"""
+    """ Fetch the set of unlocked courses from the courses_state of a getAllUnlocked call """
     return set(course for course in courses_state if courses_state[course]['unlocked'])
+
+def weight_course(course: dict, search_term: str):
+    """ Gives the course a weighting based on the relevance to the search """
+    # TODO: consider adding additional weighting based on the user
+    return max(fuzz.ratio(course['code'], search_term),
+               fuzz.partial_ratio(course['title'], search_term))
