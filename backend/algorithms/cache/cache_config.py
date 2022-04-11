@@ -7,7 +7,7 @@ Is the configuration file for `cache.py`
 # "codes" is a list of valid codes
 # "keyword_mapping" is a dict where the key is a keyword and the value
 # is the codes that keyword maps to
-CACHE_CONFIG = "./cache_config.json"
+CACHE_CONFIG = "./algorithms/cache/cache_config.json"
 
 # INPUT SOURCES
 COURSES_PROCESSED_FILE = "./data/final_data/coursesProcessed.json"
