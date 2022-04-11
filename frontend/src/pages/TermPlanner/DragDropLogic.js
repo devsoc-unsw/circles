@@ -14,8 +14,7 @@ export const handleOnDragEnd = (result, dragEndProps) => {
   dispatch(
     plannerActions("MOVE_COURSE", {
       course: draggableId,
-      term: destination.droppableId,
-      // warning: !arePrereqsCompleted,
+      term: destination.droppableId
     })
   );
 

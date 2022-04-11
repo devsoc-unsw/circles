@@ -221,9 +221,18 @@ def getLegacyCourses(year, term):
     result = {c['code']: c['title'] for c in archivesDB[year].find() if term in c['terms']} 
 
     if result == {}:
-        raise HTTPException(status_code=400, detail=f"Invalid term or year. Valid terms: ST, T1, T2, T3. Valid years: 2019, 2020, 2021, 2022.")
+        raise HTTPException(status_code=400, detail=f"Invalid term or year. Valid terms: T0, T1, T2, T3. Valid years: 2019, 2020, 2021, 2022.")
 
     return {'courses' : result}
+
+@router.get("/getLegacyCourse/{year}/{courseCode}")
+def getLegacyCourse(year, courseCode):
+    result = list(archivesDB[str(year)].find({"code": courseCode}))
+    if result == {}:
+        raise HTTPException(status_code=400, detail=f"invalid course code or year")
+    del result["_id"]
+    result["is_legacy"] = True
+    return result
 
 @router.post("/unselectCourse/", response_model=AffectedCourses,
             responses={
@@ -279,7 +288,9 @@ def coursesUnlockedWhenTaken(userData: UserData, courseToBeTaken: str):
     ## final state
     courses_now_unlocked = unlocked_set(getAllUnlocked(user)['courses_state'])
 
-    return {'courses_unlocked_when_taken' : sorted(list(courses_now_unlocked - courses_initially_unlocked))}
+    return {
+        'courses_unlocked_when_taken' : sorted(list(courses_now_unlocked - courses_initially_unlocked)),
+    }
 
 def unlocked_set(courses_state):
     """ Fetch the set of unlocked courses from the courses_state of a getAllUnlocked call """

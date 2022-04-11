@@ -51,8 +51,6 @@ def customise_spn_data():
     customised_data = {}  # Dictionary for all customised data
     for spn in TEST_SPNS:
 
-        print(f"Processing {spn} . . .")
-
         formatted = data[spn]
         customised_data[spn] = {}
         initialise_spn(customised_data[spn], formatted)
@@ -103,7 +101,6 @@ def customise_spn_data():
 
         customised_data[spn]["course_constraints"] = constraints
         customised_data[spn]["curriculum"] = curriculum
-        print("Processing complete :)\n")
 
     write_data(customised_data, "data/final_data/specialisationsProcessed.json")
 

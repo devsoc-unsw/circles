@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { Tooltip, Menu } from "antd";
+import { Tooltip, Menu, Button } from "antd";
 import { courseTabActions } from "../../../actions/courseTabActions";
 import { Loading } from "./Loading";
 import "./CourseMenu.less";
@@ -9,7 +9,10 @@ import { setCourses } from "../../../actions/coursesActions";
 import { IoWarningOutline } from "react-icons/io5";
 import { prepareUserPayload } from "../helper";
 import { motion, AnimatePresence } from "framer-motion/dist/framer-motion";
-import {ReactComponent as Padlock} from "../../../images/padlock.svg";
+import { ReactComponent as Padlock } from "../../../images/padlock.svg";
+import { AiOutlinePlus } from "react-icons/ai";
+import { axiosRequest } from "../../../axios";
+import { plannerActions } from "../../../actions/plannerActions";
 const { SubMenu } = Menu;
 
 export default function CourseMenu({ structure, showLockedCourses }) {
@@ -71,12 +74,13 @@ export default function CourseMenu({ structure, showLockedCourses }) {
 
           if (subgroupStructure.courses) {
             // only consider disciplinary component courses
-            Object.keys(subgroupStructure.courses).forEach(
-              (courseCode) => {
+            Object.keys(subgroupStructure.courses).forEach((courseCode) => {
               newMenu[group][subgroup].push({
                 courseCode: courseCode,
                 unlocked: courses[courseCode] ? true : false,
-                accuracy: courses[courseCode] ? courses[courseCode].is_accurate: true,
+                accuracy: courses[courseCode]
+                  ? courses[courseCode].is_accurate
+                  : true,
               });
               newMenu[group][subgroup].sort(sortMenu);
 
@@ -84,7 +88,7 @@ export default function CourseMenu({ structure, showLockedCourses }) {
               if (coursesInPlanner.get(courseCode))
                 newCoursesUnits[group][subgroup].curr +=
                   coursesInPlanner.get(courseCode).UOC;
-            })
+            });
           } else {
             // If there is no specified course list for the subgroup, then manually
             // show the added courses on the menu.
@@ -141,18 +145,21 @@ export default function CourseMenu({ structure, showLockedCourses }) {
                     }
                   >
                     <AnimatePresence initial={false}>
-                      {menuData[group][subGroup].map((course, ind) => (
-                        (course.unlocked || showLockedCourses) &&
-                        <MenuItem
-                          selected={coursesInPlanner.get(course.courseCode)}
-                          courseCode={course.courseCode}
-                          accurate={course.accuracy}
-                          unlocked={course.unlocked}
-                          setActiveCourse={setActiveCourse}
-                          activeCourse={activeCourse}
-                          key={course.courseCode + group}
-                        />
-                      ))}
+                      {menuData[group][subGroup].map(
+                        (course, ind) =>
+                          (course.unlocked || showLockedCourses) && (
+                            <MenuItem
+                              selected={coursesInPlanner.get(course.courseCode)}
+                              courseCode={course.courseCode}
+                              accurate={course.accuracy}
+                              unlocked={course.unlocked}
+                              setActiveCourse={setActiveCourse}
+                              activeCourse={activeCourse}
+                              subGroup={subGroup}
+                              key={course.courseCode + group}
+                            />
+                          )
+                      )}
                     </AnimatePresence>
                   </Menu.ItemGroup>
                 ))}
@@ -167,9 +174,8 @@ export default function CourseMenu({ structure, showLockedCourses }) {
     return item1.unlocked === item2.unlocked
       ? item1.courseCode > item2.courseCode // sort within locked/unlocked by courseCode
       : item1.unlocked < item2.unlocked; // separate locked/unlocked
-  };
+  }
 }
-
 
 const MenuItem = ({
   selected,
@@ -178,6 +184,7 @@ const MenuItem = ({
   setActiveCourse,
   accurate,
   unlocked,
+  subGroup,
 }) => {
   const dispatch = useDispatch();
   const handleClick = () => {
@@ -191,19 +198,58 @@ const MenuItem = ({
     }
   };
 
+  const addToPlanner = async (e, courseCode) => {
+    e.stopPropagation();
+    const [course, err] = await axiosRequest(
+      "get",
+      `/courses/getCourse/${courseCode}`
+    );
+
+    const data = {
+      courseCode: course.code,
+      courseData: {
+        title: course.title,
+        type: subGroup,
+        termsOffered: course.terms,
+        UOC: course.UOC,
+        plannedFor: null,
+        prereqs: course.raw_requirements,
+        isLegacy: course.is_legacy,
+        isUnlocked: true,
+        warnings: "", 
+        handbook_note: "",
+      },
+    };
+    dispatch(plannerActions("ADD_TO_UNPLANNED", data));
+  };
+
   return (
     <motion.div transition={{ ease: "easeOut", duration: 0.3 }} layout>
       <Menu.Item
-        className={
-          `text menuItemText
+        className={`text menuItemText
           ${selected !== undefined && "bold"}
           ${activeCourse === courseCode && "activeCourse"}
-          ${!unlocked && "locked"}`
-        }
+          ${!unlocked && "locked"}`}
         key={courseCode}
         onClick={handleClick}
       >
-        {courseCode} {renderAccurateNote()} {!unlocked && <Padlock width="10px"/>}
+        <div className="menuItemContainer">
+          <div>
+            {courseCode} {renderAccurateNote()}{" "}
+            {!unlocked && <Padlock width="10px" />}
+          </div>
+          {!selected && (
+            <Tooltip title="Add to Planner" placement="bottom">
+              <Button
+                onClick={(e) => addToPlanner(e, courseCode)}
+                size="small"
+                shape="circle"
+                icon={<AiOutlinePlus />}
+                className="quickAddBtn"
+              />
+            </Tooltip>
+          )}
+        </div>
       </Menu.Item>
     </motion.div>
   );

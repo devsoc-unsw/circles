@@ -17,8 +17,14 @@ function DraggableCourse({ code, index }) {
   const courseName = courses.get(code)["title"];
   const prereqs = courses.get(code)["prereqs"]; // rereqs are populated in CourseDescription.jsx via course.raw_requirements
   const prereqDisplay = prereqs.trim();
-  const warning = courses.get(code)["warning"];
+  const isUnlocked = courses.get(code)["isUnlocked"];
+  const handbook_note = courses.get(code)["handbook_note"];
   const plannedFor = courses.get(code)["plannedFor"];
+  const isLegacy = courses.get(code)["isLegacy"];
+  const warningMessage = courses.get(code)["warnings"];  
+
+  const warning1 = isLegacy || !isUnlocked; 
+  const warning2 = handbook_note !== "" || !!warningMessage.length;
 
   const { show } = useContextMenu({
     id: `${code}-context`,
@@ -29,9 +35,8 @@ function DraggableCourse({ code, index }) {
   };
 
   const isSmall = useMediaQuery("(max-width: 1400px)");
-
   const isDragDisabled = completedTerms.get(plannedFor);
-
+  console.log(completedTerms);
   return (
     <>
       <Draggable
@@ -49,14 +54,14 @@ function DraggableCourse({ code, index }) {
             }}
             className={`course ${isSummerEnabled && "summerViewCourse"} 
 			${isDragDisabled && " dragDisabledCourse"} 
-			${isDragDisabled && warning && " disabledWarning"}
-			${warning === true && " warning"}`}
+			${isDragDisabled && warning1 && " disabledWarning"}
+			${warning1 && " warning"}`}
             data-tip
             data-for={code}
             id={code}
             onContextMenu={displayContextMenu}
           >
-            {warning && (
+            {(warning1 || warning2) && (
               <IoWarningOutline
                 className="alert"
                 size="2.5em"
@@ -87,9 +92,11 @@ function DraggableCourse({ code, index }) {
       <ContextMenu code={code} plannedFor={plannedFor} />
       {/* display prereq tooltip for all courses. However, if a term is marked as complete 
 	  and the course has no warning, then disable the tooltip */}
-      {prereqDisplay !== "" && !isDragDisabled && warning && (
+      {!isDragDisabled && (warning1 || warning2) && (
         <ReactTooltip id={code} place="bottom" className="tooltip">
-          {prereqDisplay}
+          {isLegacy ? "This course is discontinued. If an equivalent course is currently being offered, please pick that instead." : 
+            !isUnlocked ? prereqDisplay : 
+              warningMessage !== "" ? warningMessage : handbook_note}
         </ReactTooltip>
       )}
     </>

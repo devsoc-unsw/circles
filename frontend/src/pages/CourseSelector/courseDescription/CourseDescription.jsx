@@ -8,7 +8,6 @@ import { plannerActions } from "../../../actions/plannerActions";
 import { Loading } from "./Loading";
 import "./courseDescription.less";
 import { prepareUserPayload } from "../helper";
-import axios from "axios";
 import infographic from "../../../images/infographicFontIndependent.svg";
 import { motion } from "framer-motion/dist/framer-motion";
 import { axiosRequest } from "../../../axios";
@@ -131,8 +130,11 @@ export default function CourseDescription({ structure }) {
         termsOffered: course.terms,
         UOC: course.UOC,
         plannedFor: null,
-        warning: false,
         prereqs: course.raw_requirements,
+        isLegacy: course.is_legacy,
+        isUnlocked: true,
+        warnings: "",
+        handbook_note: "",
       },
     };
     dispatch(plannerActions("ADD_TO_UNPLANNED", data));
@@ -152,121 +154,120 @@ export default function CourseDescription({ structure }) {
   };
 
   return (
-    <div>
-      <div className="cs-description-root">
-        {!pageLoaded ? (
-          <Loading />
-        ) : (
-          <>
-            <div className="cs-description-content">
-              <div className="cs-desc-title-bar">
-                <Title level={2} className="text">
-                  {id} - {course.title}
-                </Title>
-                {courseInPlanner ? (
-                  <Button
-                    type="secondary"
-                    loading={loading}
-                    onClick={removeFromPlanner}
-                    icon={<StopOutlined />}
-                  >
-                    Remove from planner
-                  </Button>
-                ) : (
-                  <Dropdown.Button
-                    overlay={() => (
-                      <PlannerDropdown
-                        courseCode={course.code}
-                        structure={structure}
-                        addToPlanner={addToPlanner}
-                      />
-                    )}
-                    loading={loading}
-                    onClick={() => {
-                      addToPlanner("Uncategorised");
-                    }}
-                    type="primary"
-                  >
-                    <div className="addBtn">
-                      <BsPlusLg />
-                      Add to planner
-                    </div>
-                  </Dropdown.Button>
-                )}
-              </div>
-              <Title level={3} className="text">
-                Overview
+    <div className="cs-description-root">
+      {!pageLoaded ? (
+        <Loading />
+      ) : (
+        <>
+          <div className="cs-description-content">
+            <div className="cs-desc-title-bar">
+              <Title level={2} className="text">
+                {id} - {course.title}
               </Title>
-              <Space direction="vertical" style={{ marginBottom: "1rem" }}>
-                <Text>
-                  <div
-                    dangerouslySetInnerHTML={{ __html: course.description }}
-                  />
-                </Text>
-              </Space>
-              <Title level={3} className="text">
-                Requirements
-              </Title>
-              <Space direction="vertical" style={{ marginBottom: "1rem" }}>
-                <Text>
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: course.raw_requirements || "None",
-                    }}
-                  />
-                </Text>
-              </Space>
-              <Title level={3} className="text">
-                Courses you have done to unlock this course
-              </Title>
-              {course.path_from && Object.keys(course.path_from).length > 0 ? (
-                <div className={"text course-tag-cont"}>
-                  {Object.keys(course.path_from).map((courseCode) => (
-                    <CourseTag key={courseCode} name={courseCode} />
-                  ))}
-                </div>
+              {courseInPlanner ? (
+                <Button
+                  type="secondary"
+                  loading={loading}
+                  onClick={removeFromPlanner}
+                  icon={<StopOutlined />}
+                >
+                  Remove from planner
+                </Button>
               ) : (
-                <p className={`text`}>None</p>
+                <Dropdown.Button
+                  overlay={() => (
+                    <PlannerDropdown
+                      courseCode={course.code}
+                      structure={structure}
+                      addToPlanner={addToPlanner}
+                    />
+                  )}
+                  loading={loading}
+                  onClick={() => {
+                    addToPlanner("Uncategorised");
+                  }}
+                  type="primary"
+                >
+                  <div className="addBtn">
+                    <BsPlusLg />
+                    Add to planner
+                  </div>
+                </Dropdown.Button>
               )}
-              <Title level={3} className="text">
-                Unlocks these next courses
-              </Title>
-              {coursesPathTo && Object.values(coursesPathTo).length > 0 ? (
-                Object.values(coursesPathTo).map((courseCode) => (
+            </div>
+            {course.is_legacy && <Text strong> NOTE: this course is discontinued - if an equivalent course exists for it, please pick that instead </Text>}
+            <Title level={3} className="text">
+              Overview
+            </Title>
+            <Space direction="vertical" style={{ marginBottom: "1rem" }}>
+              <Text>
+                <div
+                  dangerouslySetInnerHTML={{ __html: course.description }}
+                />
+              </Text>
+            </Space>
+            <Title level={3} className="text">
+              Requirements
+            </Title>
+            <Space direction="vertical" style={{ marginBottom: "1rem" }}>
+              <Text>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: course.raw_requirements || "None",
+                  }}
+                />
+              </Text>
+            </Space>
+            <Title level={3} className="text">
+              Courses you have done to unlock this course
+            </Title>
+            {course.path_from && Object.keys(course.path_from).length > 0 ? (
+              <div className={"text course-tag-cont"}>
+                {Object.keys(course.path_from).map((courseCode) => (
                   <CourseTag key={courseCode} name={courseCode} />
-                ))
-              ) : (
-                <p className={`text`}>None</p>
-              )}
-            </div>
-            <div>
-              {course.faculty && (
-                <CourseAttribute title="Faculty" content={course.faculty} />
-              )}
-              {course.school && (
-                <CourseAttribute title="School" content={course.school} />
-              )}
-              <CourseAttribute
-                title="Study Level"
-                content={course.study_level}
-              />
-              <CourseAttribute title="Campus" content={course.campus} />
-              <Title level={3} className="text cs-final-attr">
-                Offering Terms
-              </Title>
-              {course.terms &&
-                course.terms.map((term, index) => {
-                  let termNo = term.slice(1);
-                  return (
-                    <Tag key={index} className={`text`}>
-                      {course.terms === "Summer" ? "Summer" : `Term ${termNo}`}
-                    </Tag>
-                  );
-                })}
-            </div>
-          </>
-        )}
-      </div>
+                ))}
+              </div>
+            ) : (
+              <p className={`text`}>None</p>
+            )}
+            <Title level={3} className="text">
+              Unlocks these next courses
+            </Title>
+            {coursesPathTo && Object.values(coursesPathTo).length > 0 ? (
+              Object.values(coursesPathTo).map((courseCode) => (
+                <CourseTag key={courseCode} name={courseCode} />
+              ))
+            ) : (
+              <p className={`text`}>None</p>
+            )}
+          </div>
+          <div>
+            {course.faculty && (
+              <CourseAttribute title="Faculty" content={course.faculty} />
+            )}
+            {course.school && (
+              <CourseAttribute title="School" content={course.school} />
+            )}
+            <CourseAttribute
+              title="Study Level"
+              content={course.study_level}
+            />
+            <CourseAttribute title="Campus" content={course.campus} />
+            <Title level={3} className="text cs-final-attr">
+              Offering Terms
+            </Title>
+            {course.terms &&
+              course.terms.map((term, index) => {
+                let termNo = term.slice(1);
+                return (
+                  <Tag key={index} className={`text`}>
+                    {term === "T0" ? "Summer" : `Term ${termNo}`}
+                  </Tag>
+                );
+              })}
+          </div>
+        </>
+      )}
     </div>
   );
 }
