@@ -22,9 +22,11 @@ function DraggableCourse({ code, index }) {
   const plannedFor = courses.get(code)["plannedFor"];
   const isLegacy = courses.get(code)["isLegacy"];
   const warningMessage = courses.get(code)["warnings"];  
+  const isAccurate = courses.get(code)["isAccurate"];
+  const termsOffered = courses.get(code)["termsOffered"];
 
-  const warning1 = isLegacy || !isUnlocked; 
-  const warning2 = handbook_note !== "" || !!warningMessage.length;
+  const isOffered = plannedFor ? termsOffered.includes(plannedFor.match(/T[0-3]/)[0]) : true;
+  const BEwarnings = handbook_note !== "" || !!warningMessage.length;
 
   const { show } = useContextMenu({
     id: `${code}-context`,
@@ -36,7 +38,7 @@ function DraggableCourse({ code, index }) {
 
   const isSmall = useMediaQuery("(max-width: 1400px)");
   const isDragDisabled = completedTerms.get(plannedFor);
-  console.log(completedTerms);
+  //console.log(completedTerms);
   return (
     <>
       <Draggable
@@ -54,14 +56,14 @@ function DraggableCourse({ code, index }) {
             }}
             className={`course ${isSummerEnabled && "summerViewCourse"} 
 			${isDragDisabled && " dragDisabledCourse"} 
-			${isDragDisabled && warning1 && " disabledWarning"}
-			${warning1 && " warning"}`}
+			${isDragDisabled && !isUnlocked && " disabledWarning"}
+			${(!isUnlocked || !isOffered) && " warning"}`}
             data-tip
             data-for={code}
             id={code}
             onContextMenu={displayContextMenu}
           >
-            {(warning1 || warning2) && (
+            {(isLegacy || !isUnlocked || BEwarnings || !isAccurate || !isOffered) && (
               <IoWarningOutline
                 className="alert"
                 size="2.5em"
@@ -92,11 +94,14 @@ function DraggableCourse({ code, index }) {
       <ContextMenu code={code} plannedFor={plannedFor} />
       {/* display prereq tooltip for all courses. However, if a term is marked as complete 
 	  and the course has no warning, then disable the tooltip */}
-      {!isDragDisabled && (warning1 || warning2) && (
+      {!isDragDisabled && (isLegacy || !isUnlocked || BEwarnings || !isAccurate || !isOffered) && (
         <ReactTooltip id={code} place="bottom" className="tooltip">
           {isLegacy ? "This course is discontinued. If an equivalent course is currently being offered, please pick that instead." : 
             !isUnlocked ? prereqDisplay : 
-              warningMessage !== "" ? warningMessage : handbook_note}
+              !isOffered ? "The course is not offered in this term." :
+                warningMessage != "" ? warningMessage : 
+                  handbook_note !== "" ? handbook_note :""}
+          {!isAccurate ? " The course info may be inaccurate." : ""}
         </ReactTooltip>
       )}
     </>
