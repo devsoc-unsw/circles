@@ -18,7 +18,16 @@ def test_no_courses_completed():
             'COMP2121',
             'COMP2521',
             'COMP9334'
-        ]
+        ],
+        "direct_unlock": [
+            'COMP1521',
+            'COMP1531',
+            'COMP2041',
+            'COMP2121',
+            'COMP2521',
+            'COMP9334'
+        ],
+        "indirect_unlock": []
     }
 
 
