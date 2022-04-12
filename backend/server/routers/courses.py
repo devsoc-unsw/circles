@@ -290,7 +290,6 @@ def unselectCourse(userData: UserData, lockedCourses: list, unselectedCourse: st
                     "content": {
                         "application/json": {
                             "example": {
-                                "courses_unlocked_when_taken": ["COMP2511, COMP3311"],
                                 "direct_unlock": ["COMP2511", "COMP3311"],
                                 "indirect_unlock": []
                             }
