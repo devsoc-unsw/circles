@@ -1,13 +1,15 @@
 import pymongo
+import re
 from fuzzywuzzy import fuzz
 
 from algorithms.objects.user import User
 from data.config import ARCHIVED_YEARS
+from data.utility.data_helpers import read_data
 from fastapi import APIRouter, HTTPException
 from server.database import archivesDB, coursesCOL
 from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, AffectedCourses,
                                   CourseDetails, CoursesState,
-                                  CoursesUnlockedWhenTaken, ProgramCourses,
+                                  CoursesUnlockedWhenTaken, ProgramCourses, Structure,
                                   UserData, message)
 
 router = APIRouter(
@@ -16,6 +18,7 @@ router = APIRouter(
 )
 
 ALL_COURSES = [{"title": course["title"], "code": course["code"]} for course in coursesCOL.find()]
+CODE_MAPPING = read_data("data/utility/programCodeMappings.json")["title_to_code"]
 
 @router.get("/")
 def apiIndex():
@@ -119,8 +122,10 @@ def getCourse(courseCode: str):
     return result
 
 
-@router.get("/searchCourse/{string}")
-def search(string):
+# TODO(josh): add better fastAPI documentation
+@router.post("/searchCourse/{search_string}")
+def search(userData: UserData, search_string: str):
+    from server.routers.programs import getStructure
     """
     Search for courses with regex 
     e.g. search(COMP1) would return 
@@ -130,8 +135,33 @@ def search(string):
             ……. }
     """
     # TODO: consider ways to search legacy courses
+    specialisations = list(userData.specialisations.keys())
+    major = None
+    minor = None
+
+    # TODO: can you have a minor with no major in Circles?
+    if len(specialisations) == 1:
+        major = specialisations[0]
+    elif len(specialisations) == 2:
+        major = specialisations[0]
+        minor = specialisations[1]
+
+    structure = getStructure(userData.program, major, minor)['structure']
+
     top_results = sorted(ALL_COURSES, reverse=True,
-                         key=lambda course: weight_course(course, string))[:20]
+                         key=lambda course: fuzzy_match(course, search_string))[:100]
+    weighted_results = sorted(top_results, reverse=True,
+                              key=lambda course: weight_course(course, search_string, structure))[:20]
+
+    return {course["code"]: course["title"] for course in weighted_results}
+
+def fuzzy_search(search_string: str):
+    """ 
+    Only does fuzzy search without weighting on user data.
+    This is for programs.py which doesn't have access to user data.
+    """
+    top_results = sorted(ALL_COURSES, reverse=True,
+                         key=lambda course: fuzzy_match(course, search_string))[:10]
 
     return {course["code"]: course["title"] for course in top_results}
 
@@ -294,8 +324,51 @@ def unlocked_set(courses_state):
     """ Fetch the set of unlocked courses from the courses_state of a getAllUnlocked call """
     return set(course for course in courses_state if courses_state[course]['unlocked'])
 
-def weight_course(course: dict, search_term: str):
+def fuzzy_match(course: dict, search_term: str):
     """ Gives the course a weighting based on the relevance to the search """
-    # TODO: consider adding additional weighting based on the user
-    return max(fuzz.ratio(course['code'], search_term),
-               fuzz.partial_ratio(course['title'], search_term))
+
+    # either match against a course code, or match many words against the title
+    # (not necessarily in the same order as the title)
+    search_term = search_term.lower()
+    if re.match('[a-z]{4}[0-9]', search_term):
+        return fuzz.ratio(course['code'].lower(), search_term)
+
+    return max(fuzz.ratio(course['code'].lower(), search_term),
+               sum([fuzz.partial_ratio(course['title'].lower(), word)
+                       for word in search_term.split(' ')]))
+
+def weight_course(course: dict, search_term: str, structure: dict):
+    """ Gives the course a weighting based on the relevance to the user's degree """
+    weight = fuzzy_match(course, search_term)
+
+    # TODO: integrate electives weighting
+    # problem is e.g. COMPA1 uses key 'Computing Electives'
+    # whereas ACCTA2 uses key 'Prescribed Electives'
+    major = structure.get('Major')
+    if major is not None:
+        major_core = major['Core Courses']['courses']
+        major_code = CODE_MAPPING[major['name']]
+    else:
+        major_core = {}
+        major_code = ''
+
+    minor = structure.get('Minor')
+    if minor is not None:
+        minor_core = structure['Minor']['Core Courses']['courses']
+        minor_code = CODE_MAPPING[structure['Minor']['name']]
+    else:
+        minor_core = {}
+        minor_code = ''
+
+    # TODO: adjust weights
+    if major_core.get(course['code']) is not None:
+        weight += 15
+    if minor_core.get(course['code']) is not None:
+        weight += 7
+
+    if str(course['code']).startswith(major_code):
+        weight += 10
+    elif str(course['code']).startswith(major_code):
+        weight += 5
+
+    return weight

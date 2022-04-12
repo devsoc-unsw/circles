@@ -1,18 +1,24 @@
 import requests
+import json
+
+with open("algorithms/exampleUnselectCourse.json") as f:
+    USER = json.load(f)['userData']
+f.close()
 
 
 def test_search_course():
-    x = requests.get('http://127.0.0.1:8000/courses/searchCourse/COMP1')
+    x = requests.post('http://127.0.0.1:8000/courses/searchCourse/COMP1', json=USER)
     assert x.status_code == 200
     assert x.json().get("COMP1521") is not None
     
 
 def test_search_archives():
-    x = requests.get('http://127.0.0.1:8000/courses/searchCourse/DESN1000')
+    x = requests.post('http://127.0.0.1:8000/courses/searchCourse/DESN1000', json=USER)
     assert x.status_code == 200
     assert x.json().get("DESN1000") is not None
 
+
 def test_search_title():
-    x = requests.get('http://127.0.0.1:8000/courses/searchCourse/Programming Fundamentals')
+    x = requests.post('http://127.0.0.1:8000/courses/searchCourse/Programming Fundamentals', json=USER)
     assert x.status_code == 200
     assert x.json().get("COMP1511") is not None

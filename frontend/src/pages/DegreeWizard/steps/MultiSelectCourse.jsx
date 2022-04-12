@@ -17,10 +17,13 @@ export default function MultiSelectCourse({
   const debouncedSearchTerm = useDebounce(value, 200);
   const [isLoading, setIsLoading] = useState(false);
 
+  const planner = useSelector((state) => state.planner);
+  const degree = useSelector((state) => state.degree);
+
   useEffect(() => {
     // if debounced term changes , call API
     if (debouncedSearchTerm)
-      search(debouncedSearchTerm, setCourseResults, setIsLoading);
+      search(debouncedSearchTerm, setCourseResults, setIsLoading, degree, planner);
   }, [debouncedSearchTerm]);
 
   const handleSelect = (courseCode) => {
