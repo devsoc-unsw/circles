@@ -311,7 +311,6 @@ def coursesUnlockedWhenTaken(userData: UserData, courseToBeTaken: str):
     courses_now_unlocked = unlocked_set(getAllUnlocked(user)['courses_state'])
     new_courses = courses_now_unlocked - courses_initially_unlocked
 
-<<<<<<< HEAD
     ## Differentiate direct and indirect unlocks
     path_to = set(getCourse(courseToBeTaken)['path_to'])
     direct_unlock = new_courses.intersection(path_to)
@@ -321,10 +320,6 @@ def coursesUnlockedWhenTaken(userData: UserData, courseToBeTaken: str):
         'courses_unlocked_when_taken' : sorted(list(courses_now_unlocked - courses_initially_unlocked)),
         'direct_unlock': sorted(list(direct_unlock)),
         'indirect_unlock': sorted(list(indirect_unlock))
-=======
-    return {
-        'courses_unlocked_when_taken' : sorted(list(courses_now_unlocked - courses_initially_unlocked)),
->>>>>>> dev
     }
 
 def unlocked_set(courses_state):
