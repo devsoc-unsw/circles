@@ -1,6 +1,7 @@
 import pymongo
 import re
 from fuzzywuzzy import fuzz
+from typing import Optional
 
 from algorithms.objects.user import User
 from data.config import ARCHIVED_YEARS
@@ -135,23 +136,18 @@ def search(userData: UserData, search_string: str):
             ……. }
     """
     # TODO: consider ways to search legacy courses
+    # TODO: can you have a minor without a major selected?
+    #       will wreak havoc on the argument order with *specialisations
     specialisations = list(userData.specialisations.keys())
-    major = None
-    minor = None
-
-    # TODO: can you have a minor with no major in Circles?
-    if len(specialisations) == 1:
-        major = specialisations[0]
-    elif len(specialisations) == 2:
-        major = specialisations[0]
-        minor = specialisations[1]
-
-    structure = getStructure(userData.program, major, minor)['structure']
+    structure = getStructure(userData.program, *specialisations)['structure']
+    print(f"{structure=}")
 
     top_results = sorted(ALL_COURSES, reverse=True,
                          key=lambda course: fuzzy_match(course, search_string))[:100]
+    print(f"{top_results=}")
     weighted_results = sorted(top_results, reverse=True,
-                              key=lambda course: weight_course(course, search_string, structure))[:20]
+                              key=lambda course: weight_course(course, search_string, structure, *specialisations))[:20]
+    print(f"{weighted_results=}")
 
     return {course["code"]: course["title"] for course in weighted_results}
 
@@ -337,38 +333,33 @@ def fuzzy_match(course: dict, search_term: str):
                sum([fuzz.partial_ratio(course['title'].lower(), word)
                        for word in search_term.split(' ')]))
 
-def weight_course(course: dict, search_term: str, structure: dict):
+def weight_course(course: dict, search_term: str, structure: dict, major_code: Optional[str] = None, minor_code: Optional[str] = None):
     """ Gives the course a weighting based on the relevance to the user's degree """
     weight = fuzzy_match(course, search_term)
 
     # TODO: integrate electives weighting
     # problem is e.g. COMPA1 uses key 'Computing Electives'
     # whereas ACCTA2 uses key 'Prescribed Electives'
-    major = structure.get('Major')
-    if major is not None:
-        major_core = major['Core Courses']['courses']
-        major_code = CODE_MAPPING[major['name']]
+    if major_code is not None:
+        major_core = structure['Major']['Core Courses']['courses']
+
+        if str(course['code']).startswith(major_code[:4]):
+            weight += 10
     else:
         major_core = {}
-        major_code = ''
 
-    minor = structure.get('Minor')
-    if minor is not None:
+    if minor_code is not None:
         minor_core = structure['Minor']['Core Courses']['courses']
-        minor_code = CODE_MAPPING[structure['Minor']['name']]
+
+        if str(course['code']).startswith(minor_code[:4]):
+            weight += 5
     else:
         minor_core = {}
-        minor_code = ''
 
-    # TODO: adjust weights
+    # TODO: adjust weights to give more accurate results
     if major_core.get(course['code']) is not None:
         weight += 15
     if minor_core.get(course['code']) is not None:
         weight += 7
-
-    if str(course['code']).startswith(major_code):
-        weight += 10
-    elif str(course['code']).startswith(major_code):
-        weight += 5
 
     return weight
