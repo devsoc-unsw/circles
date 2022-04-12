@@ -99,7 +99,6 @@ export default function CourseDescription({ structure }) {
       );
       console.log(data);
       if (!err) setCoursesPathTo({
-        "courses_unlocked_when_taken": data.courses_unlocked_when_taken,
         "direct_unlock": data.direct_unlock,
         "indirect_unlock": data.indirect_unlock
       });

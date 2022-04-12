@@ -51,7 +51,6 @@ def test_two_courses_completed():
             "COMP3151",
             "COMP3161",
             "COMP3231",
-            "COMP3311",
             "COMP3331",
             "COMP3411",
             "COMP3431",

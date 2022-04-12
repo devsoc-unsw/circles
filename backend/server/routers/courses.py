@@ -291,7 +291,7 @@ def unselectCourse(userData: UserData, lockedCourses: list, unselectedCourse: st
                         "application/json": {
                             "example": {
                                 "courses_unlocked_when_taken": ["COMP2511, COMP3311"],
-                                "direct_unlock": ["COMP2511"],
+                                "direct_unlock": ["COMP2511", "COMP3311"],
                                 "indirect_unlock": []
                             }
                         }
@@ -317,7 +317,6 @@ def coursesUnlockedWhenTaken(userData: UserData, courseToBeTaken: str):
     indirect_unlock = new_courses - direct_unlock
 
     return {
-        'courses_unlocked_when_taken' : sorted(list(courses_now_unlocked - courses_initially_unlocked)),
         'direct_unlock': sorted(list(direct_unlock)),
         'indirect_unlock': sorted(list(indirect_unlock))
     }
