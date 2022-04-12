@@ -218,6 +218,7 @@ const MenuItem = ({
         isUnlocked: true,
         warnings: [], 
         handbook_note: "",
+        isAccurate: true,
       },
     };
     dispatch(plannerActions("ADD_TO_UNPLANNED", data));
