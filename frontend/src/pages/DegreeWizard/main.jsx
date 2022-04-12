@@ -7,7 +7,7 @@ import { PreviousCoursesStep } from "./steps/PreviousCoursesStep";
 import { MinorStep } from "./steps/MinorStep";
 import { plannerActions } from "../../actions/plannerActions";
 import { useDispatch } from "react-redux";
-import { useSpring, animated } from "react-spring";
+import { useSpring } from "react-spring";
 import { DatePicker, notification, Button, Typography, Modal } from "antd";
 import "./main.less";
 import { springProps } from "./spring";
