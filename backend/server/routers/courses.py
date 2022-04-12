@@ -23,7 +23,7 @@ router = APIRouter(
 
 @router.get("/")
 def apiIndex():
-    """ returns the index of the courses API """
+    """ Returns the index of the courses API """
     return "Index of courses"
 
 
@@ -99,7 +99,7 @@ def fixUserData(userData: dict):
 )
 def getCourse(courseCode: str):
     """
-    get info about a course given courseCode
+    Get info about a course given its courseCode
     - start with the current database
     - if not found, check the archives
     """
