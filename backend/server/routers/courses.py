@@ -1,5 +1,3 @@
-import re
-from itertools import chain
 import pymongo
 from fuzzywuzzy import fuzz
 
