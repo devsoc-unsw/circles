@@ -8,7 +8,7 @@ import { MinorStep } from "./steps/MinorStep";
 import { plannerActions } from "../../actions/plannerActions";
 import { useDispatch } from "react-redux";
 import { useSpring, animated } from "react-spring";
-import { DatePicker, Button, Typography, Modal } from "antd";
+import { DatePicker, notification, Button, Typography, Modal } from "antd";
 import "./main.less";
 import { springProps } from "./spring";
 import { scroller } from "react-scroll";
@@ -24,11 +24,21 @@ function DegreeWizard() {
   const [isModalVisible, setIsModalVisible] = React.useState(false);
   const navigate = useNavigate();
 
+  const csDegreeDisclaimer = () =>{
+    notification.info({
+      message: "Disclaimer",
+      description: "Currently, Circles can only support CS degree and undergrad courses.",
+      placement: "bottomRight",
+      duration: 4
+    });
+  };
+
   React.useEffect(() => {
     // TODO: Warning dialog before planner is reset.
     if (localStorage.getItem("planner")) {
       setIsModalVisible(true);
     }
+    csDegreeDisclaimer();
   }, []);
 
   const handleYearChange = (_, [startYear, endYear]) => {
