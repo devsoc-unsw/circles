@@ -98,7 +98,11 @@ export default function CourseDescription({ structure }) {
         prepareUserPayload(degree, planner)
       );
       console.log(data);
-      if (!err) setCoursesPathTo(data.courses_unlocked_when_taken);
+      if (!err) setCoursesPathTo({
+        "courses_unlocked_when_taken": data.courses_unlocked_when_taken,
+        "direct_unlock": data.direct_unlock,
+        "indirect_unlock": data.indirect_unlock
+      });
     };
 
     setpageLoaded(false);
@@ -232,10 +236,20 @@ export default function CourseDescription({ structure }) {
               <p className={`text`}>None</p>
             )}
             <Title level={3} className="text">
-              Unlocks these next courses
+              Doing this course will directly unlock these courses
             </Title>
             {coursesPathTo && Object.values(coursesPathTo).length > 0 ? (
-              Object.values(coursesPathTo).map((courseCode) => (
+              coursesPathTo.direct_unlock.map((courseCode) => (
+                <CourseTag key={courseCode} name={courseCode} />
+              ))
+            ) : (
+              <p className={`text`}>None</p>
+            )}
+            <Title level={3} className="text">
+              Doing this course will indirectly unlock these courses
+            </Title>
+            {coursesPathTo && Object.values(coursesPathTo).length > 0 ? (
+              coursesPathTo.indirect_unlock.map((courseCode) => (
                 <CourseTag key={courseCode} name={courseCode} />
               ))
             ) : (
