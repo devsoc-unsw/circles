@@ -138,7 +138,7 @@ export default function CourseDescription({ structure }) {
         prereqs: course.raw_requirements,
         isLegacy: course.is_legacy,
         isUnlocked: true,
-        warnings: [],
+        warnings: "",
         handbook_note: "",
       },
     };
