@@ -18,7 +18,7 @@ router = APIRouter(
     tags=["courses"],
 )
 
-ALL_COURSES = [{"title": course["title"], "code": course["code"]} for course in coursesCOL.find()]
+ALL_COURSES = None
 CODE_MAPPING = read_data("data/utility/programCodeMappings.json")["title_to_code"]
 
 @router.get("/")
@@ -97,7 +97,8 @@ def fixUserData(userData: dict):
     },
 )
 def getCourse(courseCode: str):
-    """get info about a course given courseCode
+    """
+    Get info about a course given courseCode
     - start with the current database
     - if not found, check the archives
     """
@@ -126,7 +127,6 @@ def getCourse(courseCode: str):
 # TODO(josh): add better fastAPI documentation
 @router.post("/searchCourse/{search_string}")
 def search(userData: UserData, search_string: str):
-    from server.routers.programs import getStructure
     """
     Search for courses with regex 
     e.g. search(COMP1) would return 
@@ -135,19 +135,27 @@ def search(userData: UserData, search_string: str):
           “COMP1531”: “SoftEng Fundamentals, 
             ……. }
     """
+    global ALL_COURSES
+    from server.routers.programs import getStructure
+
+    if ALL_COURSES is None:
+        ALL_COURSES = [{"title": course["title"], "code": course["code"]} for course in coursesCOL.find()]
+
     # TODO: consider ways to search legacy courses
     # TODO: can you have a minor without a major selected?
     #       will wreak havoc on the argument order with *specialisations
     specialisations = list(userData.specialisations.keys())
     structure = getStructure(userData.program, *specialisations)['structure']
-    print(f"{structure=}")
 
     top_results = sorted(ALL_COURSES, reverse=True,
-                         key=lambda course: fuzzy_match(course, search_string))[:100]
-    print(f"{top_results=}")
+                         key=lambda course: fuzzy_match(course, search_string)
+                         )[:100]
     weighted_results = sorted(top_results, reverse=True,
-                              key=lambda course: weight_course(course, search_string, structure, *specialisations))[:20]
-    print(f"{weighted_results=}")
+                              key=lambda course: weight_course(course,
+                                                               search_string,
+                                                               structure, 
+                                                               *specialisations)
+                              )[:20]
 
     return {course["code"]: course["title"] for course in weighted_results}
 
@@ -156,8 +164,14 @@ def fuzzy_search(search_string: str):
     Only does fuzzy search without weighting on user data.
     This is for programs.py which doesn't have access to user data.
     """
+    global ALL_COURSES
+
+    if ALL_COURSES is None:
+        ALL_COURSES = [{"title": course["title"], "code": course["code"]} for course in coursesCOL.find()]
+
+    # TODO(josh): exact search is probably what is wanted, can just do a db lookup
     top_results = sorted(ALL_COURSES, reverse=True,
-                         key=lambda course: fuzzy_match(course, search_string))[:10]
+                         key=lambda course: fuzzy_match(course, search_string))[:20]
 
     return {course["code"]: course["title"] for course in top_results}
 
@@ -333,15 +347,21 @@ def fuzzy_match(course: dict, search_term: str):
                sum([fuzz.partial_ratio(course['title'].lower(), word)
                        for word in search_term.split(' ')]))
 
-def weight_course(course: dict, search_term: str, structure: dict, major_code: Optional[str] = None, minor_code: Optional[str] = None):
+def weight_course(course: dict, search_term: str, structure: dict,
+                  major_code: Optional[str] = None, minor_code: Optional[str] = None):
     """ Gives the course a weighting based on the relevance to the user's degree """
     weight = fuzzy_match(course, search_term)
 
     # TODO: integrate electives weighting
     # problem is e.g. COMPA1 uses key 'Computing Electives'
     # whereas ACCTA2 uses key 'Prescribed Electives'
+    # TODO: adjust weights to give more accurate results
     if major_code is not None:
-        major_core = structure['Major']['Core Courses']['courses']
+        for key in structure['Major'].items():
+            if isinstance(key[1], dict):
+                if key[1].get(course['code']) is not None:
+                    weight += 15
+                    break
 
         if str(course['code']).startswith(major_code[:4]):
             weight += 10
@@ -349,17 +369,15 @@ def weight_course(course: dict, search_term: str, structure: dict, major_code: O
         major_core = {}
 
     if minor_code is not None:
-        minor_core = structure['Minor']['Core Courses']['courses']
+        for key in structure['Minor'].items():
+            if isinstance(key[1], dict):
+                if key[1].get(course['code']) is not None:
+                    weight += 7
+                    break
 
         if str(course['code']).startswith(minor_code[:4]):
             weight += 5
     else:
         minor_core = {}
-
-    # TODO: adjust weights to give more accurate results
-    if major_core.get(course['code']) is not None:
-        weight += 15
-    if minor_core.get(course['code']) is not None:
-        weight += 7
 
     return weight
