@@ -3594,7 +3594,8 @@
     },
     "COMP4920": {
         "original": "Prerequisite: (COMP2511 or COMP2911) and completion of 96 UOC in Computer Science.<br/><br/>",
-        "processed": "(COMP2511 || COMP2911) && 96UOC in COMP"
+        "processed": "(COMP2511 || COMP2911) && 96UOC",
+        "handbook_note": "96UOC must be from Computer Science courses"
     },
     "COMP4951": {
         "original": "Prerequisite: Enrolled in a CSE BE (Hons) programs, completion of 126 UOC and completion of 3rd year core.<br/><br/>",
