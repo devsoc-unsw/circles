@@ -43,6 +43,7 @@ class CourseDetails(BaseModel):
     gen_ed: int
     path_from: dict
     is_legacy: bool
+    is_accurate: bool
 
 
 class Structure(BaseModel):  # this is a copout - we should avoid this

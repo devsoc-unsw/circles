@@ -114,6 +114,7 @@ def getCourse(courseCode: str):
             status_code=400, detail=f"Course code {courseCode} was not found"
         )
     result.setdefault("school", None)
+    result['is_accurate'] = CONDITIONS.get(courseCode) is not None
     del result["_id"]
 
     return result

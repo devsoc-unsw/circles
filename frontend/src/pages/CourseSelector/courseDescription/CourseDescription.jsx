@@ -135,7 +135,7 @@ export default function CourseDescription({ structure }) {
         isUnlocked: true,
         warnings: [],
         handbook_note: "",
-        isAccurate: true,
+        isAccurate: course.is_accurate,
       },
     };
     dispatch(plannerActions("ADD_TO_UNPLANNED", data));
