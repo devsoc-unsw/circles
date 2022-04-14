@@ -145,7 +145,7 @@ def cache_program_mappings():
     # Initialise mappings with all the mapping codes
     # TODO: Add any more mappings. Look into updating manual-fixes wiki page?
 
-    code_list = keyword_codes["code_list"]
+    code_list = keyword_codes["codes"]
 
     mappings = {}
     for code in code_list:

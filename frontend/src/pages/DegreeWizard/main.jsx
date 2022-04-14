@@ -1,5 +1,4 @@
 import React from "react";
-import ParticleBackground from "./ParticleBackground";
 import { useSelector } from "react-redux";
 import { DegreeStep } from "./steps/DegreeStep";
 import { SpecialisationStep } from "./steps/SpecialisationStep";
@@ -14,9 +13,9 @@ import { springProps } from "./spring";
 import { scroller } from "react-scroll";
 import { useNavigate } from "react-router-dom";
 import { YearStep } from "./steps/YearStep";
+import { courseTabActions } from "../../actions/courseTabActions";
 
 const { Title } = Typography;
-const { RangePicker } = DatePicker;
 
 function DegreeWizard() {
   const theme = useSelector((store) => store.theme);
@@ -69,6 +68,7 @@ function DegreeWizard() {
     setIsModalVisible(false);
     // Degree selector needs to reset to prevent identical courses in a term
     dispatch(plannerActions("RESET_PLANNER"));
+    dispatch(courseTabActions("RESET_COURSE_TABS"));
   };
 
   const handleCancel = () => {
@@ -134,7 +134,6 @@ function DegreeWizard() {
           </div>
         )}
       </div>
-      {theme === "dark" && <ParticleBackground />}
     </div>
   );
 }

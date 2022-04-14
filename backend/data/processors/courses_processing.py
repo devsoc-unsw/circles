@@ -66,7 +66,7 @@ def process_course_data(year = None):
 
     data_helpers.write_data(
         data,
-        "data/scrapers/coursesProcessed.json"
+        "data/final_data/coursesProcessed.json"
         if year is None else
         f"data/final_data/archive/processed/{year}.json"
     )

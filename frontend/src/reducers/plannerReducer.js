@@ -55,7 +55,10 @@ const plannerReducer = (state = initialState, action) => {
 
     const nCourses = state.courses;
     nCourses.get(code).plannedFor = null;
-    nCourses.get(code).warning = false;
+    nCourses.get(code).isUnlocked = true;
+    nCourses.get(code).warnings = []; 
+    nCourses.get(code).handbook_note = ""; 
+    nCourses.get(code).isAccurate = true; 
 
     stateCopy = {
       ...state,
@@ -113,7 +116,10 @@ const plannerReducer = (state = initialState, action) => {
       let coursesCpy = new Map(state.courses);
       for (const course in action.payload) {
         // coursesCpy.set(course, !data.courses_state[course].unlocked);
-        coursesCpy.get(course).warning = !action.payload[course].unlocked;
+        coursesCpy.get(course).isAccurate = action.payload[course].is_accurate;
+        coursesCpy.get(course).isUnlocked = action.payload[course].unlocked;
+        coursesCpy.get(course).warnings = action.payload[course].warnings;
+        coursesCpy.get(course).handbook_note = action.payload[course].handbook_note;
       }
       return { ...state, courses: coursesCpy };
 
@@ -182,7 +188,7 @@ const plannerReducer = (state = initialState, action) => {
       return stateCopy;
 
     case "MOVE_COURSE":
-      const { course, term, warning } = action.payload;
+      const { course, term } = action.payload;
       const courseInfo = state.courses.get(course);
       courseInfo["plannedFor"] = term;
       // courseInfo["warning"] = warning;
@@ -238,7 +244,7 @@ const plannerReducer = (state = initialState, action) => {
             yearToBeRemoved[term].forEach((course) => {
               updatedUnplan.push(course);
               state.courses.get(course).plannedFor = null;
-              state.courses.get(course).warning = false;
+              state.courses.get(course).isUnlocked = true;
             });
           }
         }

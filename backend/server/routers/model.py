@@ -43,6 +43,7 @@ class CourseDetails(BaseModel):
     gen_ed: int
     path_from: dict
     is_legacy: bool
+    is_accurate: bool
 
 
 class Structure(BaseModel):  # this is a copout - we should avoid this
@@ -67,7 +68,8 @@ class CoursesState(BaseModel):
     courses_state: dict[str, CourseState] = {}
 
 class CoursesUnlockedWhenTaken (BaseModel):
-    courses_unlocked_when_taken: list
+    direct_unlock: list
+    indirect_unlock: list
 
 class CourseTypeState (BaseModel):
     is_accurate: bool 
