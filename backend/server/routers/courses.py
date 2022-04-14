@@ -18,6 +18,7 @@ router = APIRouter(
     tags=["courses"],
 )
 
+# TODO: would prefer to initialise ALL_COURSES here but that fails on CI for some reason
 ALL_COURSES = None
 CODE_MAPPING = read_data("data/utility/programCodeMappings.json")["title_to_code"]
 
@@ -27,7 +28,7 @@ def apiIndex():
 
 
 def fixUserData(userData: dict):
-    """updates and returns the userData with the UOC of a course"""
+    """ Updates and returns the userData with the UOC of a course """
     coursesWithoutUoc = [
         course
         for course in userData["courses"]
@@ -200,10 +201,10 @@ def fuzzy_search(search_string: str):
 )
 def getAllUnlocked(userData: UserData):
     """
-        Given the userData and a list of locked courses, returns the state of all
-        the courses. Note that locked courses always return as True with no warnings
-        since it doesn't make sense for us to tell the user they can't take a course
-        that they have already completed
+    Given the userData and a list of locked courses, returns the state of all
+    the courses. Note that locked courses always return as True with no warnings
+    since it doesn't make sense for us to tell the user they can't take a course
+    that they have already completed
     """
 
     coursesState = {}
@@ -254,7 +255,7 @@ def getAllUnlocked(userData: UserData):
 )
 def getLegacyCourses(year, term):
     """
-        gets all the courses that were offered in that term for that year
+    Gets all the courses that were offered in that term for that year
     """
     result = {c['code']: c['title'] for c in archivesDB[year].find() if term in c['terms']} 
 
@@ -293,8 +294,8 @@ def getLegacyCourse(year, courseCode):
             })
 def unselectCourse(userData: UserData, lockedCourses: list, unselectedCourse: str):
     """
-        Creates a new user class and returns all the courses
-        affected from the course that was unselected in sorted order
+    Creates a new user class and returns all the courses
+    affected from the course that was unselected in sorted order
     """
     affectedCourses = User(fixUserData(userData.dict())).unselect_course(unselectedCourse, lockedCourses)
 
