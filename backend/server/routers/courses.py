@@ -13,6 +13,10 @@ from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, AffectedCour
                                   CoursesUnlockedWhenTaken, ProgramCourses, Structure,
                                   UserData, message)
 
+"""
+APIs for the /courses/ route.
+"""
+
 router = APIRouter(
     prefix="/courses",
     tags=["courses"],
@@ -52,6 +56,7 @@ def fixUserData(userData: dict):
 
 @router.get("/")
 def apiIndex():
+    """ Returns the index of the courses API """
     return "Index of courses"
 
 
@@ -73,9 +78,9 @@ def apiIndex():
                         "UOC": 6,
                         "level": 1,
                         "description": """An introduction to problem-solving via programming, which aims to have students develop
-                                    proficiency in using a high level programming language. Topics: algorithms, program structures 
-                                    (statements, sequence, selection, iteration, functions), data types (numeric, character), data structures 
-                                    (arrays, tuples, pointers, lists), storage structures (memory, addresses), introduction to analysis of 
+                                    proficiency in using a high level programming language. Topics: algorithms, program structures
+                                    (statements, sequence, selection, iteration, functions), data types (numeric, character), data structures
+                                    (arrays, tuples, pointers, lists), storage structures (memory, addresses), introduction to analysis of
                                     algorithms, testing, code quality, teamwork, and reflective practice. The course includes extensive practical
                                     work in labs and programming projects.</p>\n<p>Additional Information</p>\n<p>This course should be taken by
                                     all CSE majors, and any other students who have an interest in computing or who wish to be extended.
@@ -112,7 +117,7 @@ def apiIndex():
 )
 def getCourse(courseCode: str):
     """
-    Get info about a course given courseCode
+    Get info about a course given its courseCode
     - start with the current database
     - if not found, check the archives
     """
@@ -133,6 +138,7 @@ def getCourse(courseCode: str):
             status_code=400, detail=f"Course code {courseCode} was not found"
         )
     result.setdefault("school", None)
+    result['is_accurate'] = CONDITIONS.get(courseCode) is not None
     del result["_id"]
 
     return result
@@ -167,11 +173,11 @@ def getCourse(courseCode: str):
 )
 def search(userData: UserData, search_string: str):
     """
-    Search for courses with regex 
-    e.g. search(COMP1) would return 
+    Search for courses with regex
+    e.g. search(COMP1) would return
         { “COMP1511” :  “Programming Fundamentals”,
-          “COMP1521” : “Computer Systems Fundamentals”, 
-          “COMP1531”: “SoftEng Fundamentals, 
+          “COMP1521” : “Computer Systems Fundamentals”,
+          “COMP1531”: “SoftEng Fundamentals,
             ……. }
     """
     # global ALL_COURSES
@@ -296,19 +302,23 @@ def getLegacyCourses(year, term):
     """
     Gets all the courses that were offered in that term for that year
     """
-    result = {c['code']: c['title'] for c in archivesDB[year].find() if term in c['terms']} 
+    result = {c['code']: c['title'] for c in archivesDB[year].find() if term in c['terms']}
 
     if result == {}:
-        raise HTTPException(status_code=400, detail=f"Invalid term or year. Valid terms: T0, T1, T2, T3. Valid years: 2019, 2020, 2021, 2022.")
+        raise HTTPException(status_code=400, detail="Invalid term or year. Valid terms: T0, T1, T2, T3. Valid years: 2019, 2020, 2021, 2022.")
 
     return {'courses' : result}
 
 
 @router.get("/getLegacyCourse/{year}/{courseCode}")
 def getLegacyCourse(year, courseCode):
+    """
+        Like /getCourse/ but for legacy courses in the given year.
+        Returns information relating to the given course
+    """
     result = list(archivesDB[str(year)].find({"code": courseCode}))
     if result == {}:
-        raise HTTPException(status_code=400, detail=f"invalid course code or year")
+        raise HTTPException(status_code=400, detail="invalid course code or year")
     del result["_id"]
     result["is_legacy"] = True
     return result
@@ -351,7 +361,8 @@ def unselectCourse(userData: UserData, lockedCourses: list, unselectedCourse: st
                     "content": {
                         "application/json": {
                             "example": {
-                                "courses_unlocked_when_taken": ["COMP2511, COMP3311"]
+                                "direct_unlock": ["COMP2511", "COMP3311"],
+                                "indirect_unlock": []
                             }
                         }
                     }
@@ -368,9 +379,16 @@ def coursesUnlockedWhenTaken(userData: UserData, courseToBeTaken: str):
     user.add_courses({courseToBeTaken: [getCourse(courseToBeTaken)['UOC'], None]})
     ## final state
     courses_now_unlocked = unlocked_set(getAllUnlocked(user)['courses_state'])
+    new_courses = courses_now_unlocked - courses_initially_unlocked
+
+    ## Differentiate direct and indirect unlocks
+    path_to = set(getCourse(courseToBeTaken)['path_to'])
+    direct_unlock = new_courses.intersection(path_to)
+    indirect_unlock = new_courses - direct_unlock
 
     return {
-        'courses_unlocked_when_taken' : sorted(list(courses_now_unlocked - courses_initially_unlocked)),
+        'direct_unlock': sorted(list(direct_unlock)),
+        'indirect_unlock': sorted(list(indirect_unlock))
     }
 
 def unlocked_set(courses_state):
