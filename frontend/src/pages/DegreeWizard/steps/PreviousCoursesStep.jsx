@@ -82,7 +82,6 @@ const TermBox = ({ yearIndex, termNo }) => {
             <div className="text course">{course.value}</div>
           ))}
         </div>
-        {/* Term Box! {yearIndex} {termNo} */}
       </div>
       <Modal
         className="step-modal"
@@ -156,8 +155,7 @@ const PreviousCoursesStep = () => {
           <div className="steps-grid-item">
             {parseInt(planner.startYear, 10) + yearNo}
           </div>
-          {[...Array(4)].map((termNo) => {
-            // Get the courses in the term
+          {[...Array.from({ length: 4 })].map((_, termNo) => {
             const term = `T${termNo.toString()}`;
             return <TermBox yearIndex={yearNo} termNo={term} />;
           })}

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import axios from "axios";
 import { Menu, Button, Typography } from "antd";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,14 +13,14 @@ const MinorStep = ({ incrementStep, currStep }) => {
   const { minor, programCode } = useSelector((store) => store.degree);
   const [options, setOptions] = React.useState({});
 
-  const fetchAllMinors = async () => {
+  const fetchAllMinors = useCallback(async () => {
     const res = await axios.get(`/programs/getMinors/${programCode}`);
     setOptions(res.data.minors);
-  };
+  }, [programCode]);
 
   useEffect(() => {
     if (programCode !== "") fetchAllMinors();
-  });
+  }, [fetchAllMinors]);
 
   const props = useSpring(springProps);
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { Menu, Button, Typography } from "antd";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,18 +11,18 @@ const { Title } = Typography;
 const SpecialisationStep = ({ incrementStep, currStep }) => {
   const dispatch = useDispatch();
   const { programCode, specialisation } = useSelector((store) => store.degree);
-  const [options, setOptions] = React.useState({
+  const [options, setOptions] = useState({
     1: "major",
   });
 
-  const fetchAllSpecializations = async () => {
+  const fetchAllSpecialisations = useCallback(async () => {
     const res = await axios.get(`/programs/getMajors/${programCode}`);
     setOptions(res.data.majors);
-  };
+  }, [programCode]);
 
   useEffect(() => {
-    if (programCode !== "") fetchAllSpecializations();
-  });
+    if (programCode !== "") fetchAllSpecialisations();
+  }, [fetchAllSpecialisations]);
 
   const props = useSpring(springProps);
 

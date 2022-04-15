@@ -22,7 +22,6 @@ const DegreeStep = ({ incrementStep, currStep }) => {
   };
 
   useEffect(() => {
-    // setTimeout(fetchDegree, 2000);  // testing skeleton
     fetchAllDegrees();
   }, []);
 

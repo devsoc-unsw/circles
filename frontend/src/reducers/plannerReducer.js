@@ -242,8 +242,8 @@ const plannerReducer = (state = initialState, action) => {
           });
           // unschedule the courses that are in the year which will be removed
           const yearToBeRemoved = state.years[state.numYears - i - 1];
-          yearToBeRemoved.forEach((t) => {
-            yearToBeRemoved[t].forEach((c) => {
+          Object.values(yearToBeRemoved).forEach((t) => {
+            Object.values(t).forEach((c) => {
               updatedUnplan.push(c);
               state.courses.get(c).plannedFor = null;
               state.courses.get(c).isUnlocked = true;

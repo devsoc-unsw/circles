@@ -43,7 +43,7 @@ const Header = () => {
 
   useEffect(() => {
     setCurrent(getCurrentPath());
-  }, [window.location.pathname]);
+  }, []);
 
   return (
     <Layout className="header">
