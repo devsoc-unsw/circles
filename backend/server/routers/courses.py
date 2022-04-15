@@ -19,7 +19,6 @@ router = APIRouter(
 )
 
 # TODO: would prefer to initialise ALL_COURSES here but that fails on CI for some reason
-ALL_COURSES = None
 CODE_MAPPING = read_data("data/utility/programCodeMappings.json")["title_to_code"]
 
 def fetch_all_courses():
@@ -33,6 +32,8 @@ def fetch_all_courses():
                 courses[course["code"]] = course["title"]
 
     return courses
+
+ALL_COURSES = fetch_all_courses()
 
 def fixUserData(userData: dict):
     """ Updates and returns the userData with the UOC of a course """
@@ -173,11 +174,11 @@ def search(userData: UserData, search_string: str):
           “COMP1531”: “SoftEng Fundamentals, 
             ……. }
     """
-    global ALL_COURSES
+    # global ALL_COURSES
     from server.routers.programs import getStructure
 
-    if ALL_COURSES is None:
-        ALL_COURSES = fetch_all_courses()
+    # if ALL_COURSES is None:
+    #     ALL_COURSES = fetch_all_courses()
 
     # TODO: can you have a minor without a major selected?
     #       will wreak havoc on the argument order with *specialisations
@@ -198,21 +199,21 @@ def search(userData: UserData, search_string: str):
 
     return {course[0]: course[1] for course in weighted_results}
 
-def fuzzy_search(search_string: str):
+def regex_search(search_string: str):
     """ 
-    Only does fuzzy search without weighting on user data.
-    This is for programs.py which doesn't have access to user data.
+    Uses the search string as a regex to match all courses with an exact pattern.
     """
-    global ALL_COURSES
 
-    if ALL_COURSES is None:
-        ALL_COURSES = fetch_all_courses()
+    pat = re.compile(search_string, re.I)
+    courses = list(coursesCOL.find({"code": {"$regex": pat}}))
 
-    # TODO(josh): exact search is probably what is wanted, can just do a db lookup
-    top_results = sorted(ALL_COURSES.items(), reverse=True,
-                         key=lambda course: fuzzy_match(course, search_string))[:30]
+    if not courses:
+        for year in sorted(ARCHIVED_YEARS, reverse=True):
+            courses = list(archivesDB[str(year)].find({"code": {"$regex": pat}}))
+            if courses:
+                break
 
-    return {course[0]: course[1] for course in top_results}
+    return {course["code"]: course["title"] for course in courses}
 
 
 @router.post(
