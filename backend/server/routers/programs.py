@@ -152,12 +152,6 @@ def addSubgroupContainer(structure: dict, type: str, container: dict, exceptions
     item["UOC"] = container["credits_to_complete"]
     item["courses"] = {}
     for object, description in container["courses"].items():
-        if " or " in object:
-            courses_mentioned = {c: description[index] for index, c in enumerate(object.split(" or "))}
-        elif not re.match(r"[A-Z]{4}[0-9]{4}", object):
-            courses_mentioned = regex_search(object)
-        else:
-            courses_mentioned = {object: description}
         item["courses"] = item["courses"] | {
             course: description for course, description
             in convertSubgroupObjectToCoursesDict(object, description).items()

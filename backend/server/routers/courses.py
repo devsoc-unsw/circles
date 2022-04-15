@@ -203,7 +203,7 @@ def search(userData: UserData, search_string: str):
                                                                *specialisations)
                               )[:30]
 
-    return {course[0]: course[1] for course in weighted_results}
+    return {code: title for code, title in weighted_results}
 
 def regex_search(search_string: str):
     """ 
@@ -417,10 +417,6 @@ def weight_course(course: tuple, search_term: str, structure: dict,
     weight = fuzzy_match(course, search_term)
     (code, title) = course
 
-    # TODO: integrate electives weighting
-    # problem is e.g. COMPA1 uses key 'Computing Electives'
-    # whereas ACCTA2 uses key 'Prescribed Electives'
-    # TODO: adjust weights to give more accurate results
     if major_code is not None:
         for key in structure['Major'].items():
             if isinstance(key[1], dict):
