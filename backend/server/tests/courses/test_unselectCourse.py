@@ -2,9 +2,13 @@ import json
 import requests
 import copy
 
-with open("algorithms/exampleUnselectCourse.json") as f:
-    USER = json.load(f)
+with open("algorithms/exampleUsers.json") as f:
+    USERS = json.load(f)
 
+USER = {
+    "userData": USERS["user6"],
+    "lockedCourses": ["COMP9242"]
+}
 USER_NO_UOC = copy.deepcopy(USER)
 for course in USER_NO_UOC["userData"]["courses"]:
     [uoc, mark] = USER_NO_UOC["userData"]["courses"][course]

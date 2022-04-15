@@ -1,8 +1,8 @@
 import requests
 import json
 
-with open("algorithms/exampleUnselectCourse.json") as f:
-    USER = json.load(f)['userData']
+with open("algorithms/exampleUsers.json") as f:
+    USER = json.load(f)["user6"]
 f.close()
 
 
