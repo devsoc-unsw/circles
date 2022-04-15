@@ -23,6 +23,7 @@ router = APIRouter(
 )
 
 # TODO: would prefer to initialise ALL_COURSES here but that fails on CI for some reason
+ALL_COURSES = None
 CODE_MAPPING = read_data("data/utility/programCodeMappings.json")["title_to_code"]
 
 def fetch_all_courses():
@@ -37,7 +38,6 @@ def fetch_all_courses():
 
     return courses
 
-ALL_COURSES = fetch_all_courses()
 
 def fixUserData(userData: dict):
     """ Updates and returns the userData with the UOC of a course """
@@ -180,11 +180,11 @@ def search(userData: UserData, search_string: str):
           “COMP1531”: “SoftEng Fundamentals,
             ……. }
     """
-    # global ALL_COURSES
+    global ALL_COURSES
     from server.routers.programs import getStructure
 
-    # if ALL_COURSES is None:
-    #     ALL_COURSES = fetch_all_courses()
+    if ALL_COURSES is None:
+        ALL_COURSES = fetch_all_courses()
 
     # TODO: can you have a minor without a major selected?
     #       will wreak havoc on the argument order with *specialisations
@@ -213,6 +213,7 @@ def regex_search(search_string: str):
     pat = re.compile(search_string, re.I)
     courses = list(coursesCOL.find({"code": {"$regex": pat}}))
 
+    # TODO: do we want to always include matching legacy courses (excluding duplicates)?
     if not courses:
         for year in sorted(ARCHIVED_YEARS, reverse=True):
             courses = list(archivesDB[str(year)].find({"code": {"$regex": pat}}))
