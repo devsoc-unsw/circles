@@ -408,8 +408,8 @@ def fuzzy_match(course: tuple, search_term: str):
         return fuzz.ratio(code.lower(), search_term)
 
     return max(fuzz.ratio(code.lower(), search_term),
-               sum([fuzz.partial_ratio(title.lower(), word)
-                       for word in search_term.split(' ')]))
+               sum(fuzz.partial_ratio(title.lower(), word)
+                       for word in search_term.split(' ')))
 
 def weight_course(course: tuple, search_term: str, structure: dict,
                   major_code: Optional[str] = None, minor_code: Optional[str] = None):
