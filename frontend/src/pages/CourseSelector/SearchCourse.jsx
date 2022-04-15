@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState, useMemo, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Select, Spin } from "antd";
 import axios from "axios";
 import { courseTabActions } from "../../actions/courseTabActions";
 import { useDebounce } from "../../hooks/useDebounce";
+import { prepareUserPayload } from "./helper";
 
 export default function SearchCourse() {
   const [value, setValue] = useState(null);
@@ -12,10 +13,13 @@ export default function SearchCourse() {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
 
+  const planner = useSelector((state) => state.planner);
+  const degree = useSelector((state) => state.degree);
+
   useEffect(() => {
     // if debounced term changes , call API
     if (debouncedSearchTerm)
-      search(debouncedSearchTerm, setCourses, setIsLoading);
+      search(debouncedSearchTerm, setCourses, setIsLoading, degree, planner);
   }, [debouncedSearchTerm]);
 
   const handleSelect = (courseCode) => {
@@ -48,9 +52,12 @@ export default function SearchCourse() {
   );
 }
 
-export const search = async (query, setCourses, setIsLoading) => {
+export const search = async (query, setCourses, setIsLoading, degree, planner) => {
   try {
-    const res = await axios.get(`/courses/searchCourse/${query}`);
+    const res = await axios.post(
+      `/courses/searchCourse/${query}`,
+      JSON.stringify(prepareUserPayload(degree, planner))
+    );
     setCourses(
       Object.keys(res.data).map((course) => ({
         label: `${course}: ${res.data[course]}`,

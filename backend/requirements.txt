@@ -5,6 +5,7 @@ charset-normalizer==2.0.12
 click==8.1.2
 dnspython==2.2.1
 fastapi==0.75.1
+fuzzywuzzy==0.18.0
 h11==0.13.0
 idna==3.3
 importlib-metadata==4.11.3
@@ -16,6 +17,7 @@ pydantic==1.9.0
 pymongo==4.1.1
 pyparsing==3.0.8
 pytest==7.1.1
+python-Levenshtein==0.12.2
 requests==2.27.1
 toml==0.10.2
 typing-extensions==4.1.1
