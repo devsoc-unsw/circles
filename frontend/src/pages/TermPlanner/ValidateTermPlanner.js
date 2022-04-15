@@ -16,6 +16,7 @@ const validateTermPlanner = (payload) => (dispatch) => {
     .then(({ data }) => {
       dispatch(plannerActions("TOGGLE_WARNINGS", data.courses_state));
     })
+    // eslint-disable-next-line
     .catch((err) => console.log(err));
 };
 
@@ -24,18 +25,17 @@ const prepareCoursesForValidation = (plannerInfo, userInfo) => {
   const { programCode, specialisation, minor } = userInfo;
 
   const plan = [];
-  for (const year of years) {
+  years.forEach((year) => {
     const formattedYear = [];
-    for (const term in year) {
+    Object.values(year).forEach((term) => {
       const courses = {};
-      for (const course of year[term]) {
-        courses[course] = null;
-      }
-
+      Object.values(term).forEach((course) => {
+        courses[course] = null; // TODO: turn into course mark
+      });
       formattedYear.push(courses);
-    }
+    });
     plan.push(formattedYear);
-  }
+  });
 
   const payload = {
     program: programCode,

@@ -44,8 +44,8 @@ const SaveMenu = ({ plannerRef }) => {
           style={{ width: 70 }}
           onChange={(value) => setFormat(value)}
         >
-          {exportFormats.map((format) => (
-            <Option value={format}>{format}</Option>
+          {exportFormats.map((form) => (
+            <Option value={form}>{form}</Option>
           ))}
         </Select>
       </div>

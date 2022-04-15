@@ -9,7 +9,7 @@ import { BsPlusLg } from "react-icons/bs";
 import { CourseTag } from "../../../components/courseTag/CourseTag";
 import SearchCourse from "../SearchCourse";
 import plannerActions from "../../../actions/plannerActions";
-import { Loading } from "./Loading";
+import Loading from "./Loading";
 import "./courseDescription.less";
 import prepareUserPayload from "../helper";
 import infographic from "../../../images/infographicFontIndependent.svg";
@@ -32,18 +32,13 @@ const PlannerDropdown = ({ courseCode, structure, addToPlanner }) => {
   useEffect(() => {
     // Example groups: Major, Minor, General
     const categoriesDropdown = [];
-    for (const group in structure) {
-      // Example subGroup: Core Courses, Computing Electives, Flexible Education
-      for (const subgroup in structure[group]) {
-        const subgroupStructure = structure[group][subgroup];
-        if (subgroupStructure.courses) {
-          const subCourses = Object.keys(subgroupStructure.courses);
-          const regex = subCourses.join("|"); // e.g. "COMP3|COMP4"
-          courseCode.match(regex)
-            && categoriesDropdown.push(`${group} - ${subgroup}`);
-        }
-      }
-    }
+    Object.entries(structure).forEach((group, groupContainer) => {
+      Object.entries(groupContainer).forEach((subgroup, subgroupStructure) => {
+        const subCourses = Object.keys(subgroupStructure.courses);
+        if (subCourses.includes(courseCode)) categoriesDropdown.push(`${group} - ${subgroup}`);
+      });
+    });
+
     if (!categoriesDropdown.length) {
       // add these options to dropdown as a fallback if courseCode is not in
       // major or minor
@@ -68,7 +63,7 @@ const PlannerDropdown = ({ courseCode, structure, addToPlanner }) => {
   );
 };
 
-export default function CourseDescription({ structure }) {
+const CourseDescription = ({ structure }) => {
   const dispatch = useDispatch();
   const { active, tabs } = useSelector((state) => state.tabs);
   const id = tabs[active];
@@ -91,10 +86,10 @@ export default function CourseDescription({ structure }) {
       }
     };
 
-    const getPathToCoursesById = async (id) => {
+    const getPathToCoursesById = async (c) => {
       const [data, err] = await axiosRequest(
         "post",
-        `/courses/coursesUnlockedWhenTaken/${id}`,
+        `/courses/coursesUnlockedWhenTaken/${c}`,
         prepareUserPayload(degree, planner),
       );
       if (!err) setCoursesPathTo(data.courses_unlocked_when_taken);
@@ -202,9 +197,8 @@ export default function CourseDescription({ structure }) {
               </Title>
               <Space direction="vertical" style={{ marginBottom: "1rem" }}>
                 <Text>
-                  <div
-                    dangerouslySetInnerHTML={{ __html: course.description }}
-                  />
+                  {/* eslint-disable-next-line react/no-danger */}
+                  <div dangerouslySetInnerHTML={{ __html: course.description }} />
                 </Text>
               </Space>
               <Title level={3} className="text">
@@ -212,11 +206,8 @@ export default function CourseDescription({ structure }) {
               </Title>
               <Space direction="vertical" style={{ marginBottom: "1rem" }}>
                 <Text>
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: course.raw_requirements || "None",
-                    }}
-                  />
+                  {/* eslint-disable-next-line react/no-danger */}
+                  <div dangerouslySetInnerHTML={{ __html: course.raw_requirements || "None" }} />
                 </Text>
               </Space>
               <Title level={3} className="text">
@@ -272,4 +263,6 @@ export default function CourseDescription({ structure }) {
       </div>
     </div>
   );
-}
+};
+
+export default CourseDescription;

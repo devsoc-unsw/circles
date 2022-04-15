@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Switch } from "antd";
 import { useSelector } from "react-redux";
@@ -9,21 +9,17 @@ import "./main.less";
 import SearchCourse from "./SearchCourse";
 
 const CourseSelector = () => {
-  const [structure, setStructure] = React.useState(null);
-  const [showLockedCourses, setShowLockedCourses] = React.useState(false);
+  const [structure, setStructure] = useState(null);
+  const [showLockedCourses, setShowLockedCourses] = useState(false);
 
   const {
     programCode, programName, specialisation, minor,
-  } = useSelector(
-    (state) => state.degree,
-  );
+  } = useSelector((state) => state.degree);
 
-  React.useEffect(() => {
+  useEffect(() => {
     // get structure of degree
     const fetchStructure = async () => {
-      const endpoint = `/programs/getStructure/${programCode}/${specialisation}${
-        minor && `/${minor}`
-      }`;
+      const endpoint = `/programs/getStructure/${programCode}/${specialisation}${minor && `/${minor}`}`;
       try {
         const res1 = await axios.get(endpoint);
         setStructure(res1.data.structure);

@@ -7,19 +7,21 @@ import { useSelector } from "react-redux";
 
 const DegreeCard = ({ concentration }) => {
   const { Title, Text } = Typography;
-  const { name, type, completed_UOC, UOC } = concentration;
+  const {
+    name, type, completedUOC, UOC,
+  } = concentration;
 
-  const progress = Math.round((completed_UOC / UOC) * 100);
+  const progress = Math.round((completedUOC / UOC) * 100);
 
   const theme = useSelector((state) => state.theme);
 
   return (
-    <Link to={name} smooth={true} duration={1000}>
+    <Link to={name} smooth duration={1000}>
       <Card className="card text" hoverable bordered={false}>
         <Title className="text" level={5}>
           {name}
         </Title>
-        <Text className="secondaryText">{type.charAt(0).toUpperCase()+type.slice(1)}</Text>
+        <Text className="secondaryText">{type.charAt(0).toUpperCase() + type.slice(1)}</Text>
         <div data-tip data-for={type}>
           <Progress
             percent={progress}
@@ -36,7 +38,7 @@ const DegreeCard = ({ concentration }) => {
         >
           <div>{progress}%</div>
           <div>
-            ({completed_UOC} / {UOC} UOC)
+            ({completedUOC} / {UOC} UOC)
           </div>
         </ReactTooltip>
       </Card>

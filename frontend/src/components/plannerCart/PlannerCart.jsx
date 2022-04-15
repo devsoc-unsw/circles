@@ -32,7 +32,7 @@ const CourseCard = ({ code, title, showAlert }) => {
 
   return (
     <div className="planner-cart-card">
-      <div onClick={handleCourseLink} style={{ cursor: "pointer" }}>
+      <div role="menuitem" onClick={handleCourseLink} style={{ cursor: "pointer" }}>
         <Text className="text" strong>
           {code}:{" "}
         </Text>

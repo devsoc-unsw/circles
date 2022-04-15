@@ -8,7 +8,7 @@ import springProps from "../spring";
 import degreeActions from "../../../actions/degreeActions";
 
 const { Title } = Typography;
-export const SpecialisationStep = ({ incrementStep, currStep }) => {
+const SpecialisationStep = ({ incrementStep, currStep }) => {
   const dispatch = useDispatch();
   const { programCode, specialisation } = useSelector((store) => store.degree);
   const [options, setOptions] = React.useState({
@@ -17,7 +17,7 @@ export const SpecialisationStep = ({ incrementStep, currStep }) => {
 
   const fetchAllSpecializations = async () => {
     const res = await axios.get(`/programs/getMajors/${programCode}`);
-    setOptions(res.data["majors"]);
+    setOptions(res.data.majors);
   };
 
   useEffect(() => {
@@ -58,3 +58,5 @@ export const SpecialisationStep = ({ incrementStep, currStep }) => {
     </animated.div>
   );
 };
+
+export default SpecialisationStep;

@@ -10,6 +10,16 @@ import plannerActions from "../../../actions/plannerActions";
 import MultiSelectCourse from "./MultiSelectCourse";
 import "./steps.less";
 
+const openNotification = (msg) => {
+  const args = {
+    message: msg,
+    duration: 2,
+    className: "text helpNotif",
+    placement: "topRight",
+  };
+  notification.error(args);
+};
+
 const { Title } = Typography;
 const TermBox = ({ yearIndex, termNo }) => {
   const planner = useSelector((store) => store.planner);
@@ -25,7 +35,7 @@ const TermBox = ({ yearIndex, termNo }) => {
       const courseInfoList = await Promise.all(
         courses.map((course) => axios.get(`/courses/getCourse/${course.value}`)),
       );
-      for (const course of courseInfoList) {
+      courseInfoList.forEach((course) => {
         const info = course.data;
         const data = {
           code: info.code,
@@ -44,8 +54,9 @@ const TermBox = ({ yearIndex, termNo }) => {
           position: [yearIndex, termNo],
         };
         dispatch(plannerActions("ADD_TO_PLANNED", data));
-      }
+      });
     } catch (err) {
+      // eslint-disable-next-line no-console
       console.log(err);
       setLoading(false);
     }
@@ -97,7 +108,7 @@ const TermBox = ({ yearIndex, termNo }) => {
     </>
   );
 };
-export const PreviousCoursesStep = () => {
+const PreviousCoursesStep = () => {
   const navigate = useNavigate();
   const planner = useSelector((state) => state.planner);
   const numYears = new Date().getFullYear() - planner.startYear + 1; // Inclusive
@@ -140,12 +151,12 @@ export const PreviousCoursesStep = () => {
         <div className="steps-grid-item">Term 3</div>
       </div>
 
-      {[...Array(parseInt(numYears))].map((_, yearNo) => (
+      {[...Array(parseInt(numYears, 10))].map((_, yearNo) => (
         <div className="steps-grid-cont">
           <div className="steps-grid-item">
-            {parseInt(planner.startYear) + yearNo}
+            {parseInt(planner.startYear, 10) + yearNo}
           </div>
-          {[...Array(4)].map((_, termNo) => {
+          {[...Array(4)].map((termNo) => {
             // Get the courses in the term
             const term = `T${termNo.toString()}`;
             return <TermBox yearIndex={yearNo} termNo={term} />;
@@ -156,12 +167,4 @@ export const PreviousCoursesStep = () => {
   );
 };
 
-const openNotification = (msg) => {
-  const args = {
-    message: msg,
-    duration: 2,
-    className: "text helpNotif",
-    placement: "topRight",
-  };
-  notification.error(args);
-};
+export default PreviousCoursesStep;

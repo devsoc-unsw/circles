@@ -17,10 +17,9 @@ const HideYearTooltip = ({ year }) => {
     });
   };
 
-  const hideYear = (year) => {
-    let i = 0;
-    for (const value of Object.values(hidden)) if (value) i++;
-    if (i === numYears - 1) showCannotHideAllYearsNotification();
+  const hideYear = () => {
+    const numHidden = Object.values(hidden).filter((h) => h).length;
+    if (numHidden === numYears - 1) showCannotHideAllYearsNotification();
     else {
       dispatch(plannerActions("HIDE_YEAR", year));
     }
@@ -28,7 +27,7 @@ const HideYearTooltip = ({ year }) => {
 
   return (
     <Tooltip title="Hide year">
-      <div className="eye" onClick={() => hideYear(year)}>
+      <div role="button" className="eye" onClick={hideYear}>
         <IoIosEyeOff />
       </div>
     </Tooltip>

@@ -17,25 +17,25 @@ const DraggableCourse = ({ code, index }) => {
   const { prereqs } = courses.get(code);
   const prereqDisplay = prereqs.trim();
   const { isUnlocked } = courses.get(code);
-  const { handbook_note } = courses.get(code);
+  const { handbookNote } = courses.get(code);
   const { plannedFor } = courses.get(code);
   const { isLegacy } = courses.get(code);
   const warningMessage = courses.get(code).warnings;
 
   const warning1 = isLegacy || !isUnlocked;
-  const warning2 = handbook_note != "" || warningMessage != "";
+  const warning2 = handbookNote !== "" || warningMessage !== "";
 
   const { show } = useContextMenu({
     id: `${code}-context`,
   });
+
+  const isDragDisabled = completedTerms.get(plannedFor);
 
   const displayContextMenu = (e) => {
     if (!isDragDisabled) show(e);
   };
 
   const isSmall = useMediaQuery("(max-width: 1400px)");
-
-  const isDragDisabled = completedTerms.get(plannedFor);
 
   return (
     <>
@@ -53,9 +53,9 @@ const DraggableCourse = ({ code, index }) => {
               ...provided.draggableProps.style,
             }}
             className={`course ${isSummerEnabled && "summerViewCourse"} 
-			${isDragDisabled && " dragDisabledCourse"} 
-			${isDragDisabled && warning1 && " disabledWarning"}
-			${warning1 && " warning"}`}
+      ${isDragDisabled && " dragDisabledCourse"} 
+      ${isDragDisabled && warning1 && " disabledWarning"}
+      ${warning1 && " warning"}`}
             data-tip
             data-for={code}
             id={code}
@@ -91,12 +91,12 @@ const DraggableCourse = ({ code, index }) => {
       </Draggable>
       <ContextMenu code={code} plannedFor={plannedFor} />
       {/* display prereq tooltip for all courses. However, if a term is marked as complete
-	  and the course has no warning, then disable the tooltip */}
+      and the course has no warning, then disable the tooltip */}
       {!isDragDisabled && (warning1 || warning2) && (
         <ReactTooltip id={code} place="bottom" className="tooltip">
           {isLegacy ? "This course is discontinued."
             : !isUnlocked ? prereqDisplay
-              : warningMessage != "" ? warningMessage : handbook_note}
+              : warningMessage !== "" ? warningMessage : handbookNote}
         </ReactTooltip>
       )}
     </>

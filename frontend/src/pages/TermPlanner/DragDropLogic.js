@@ -23,9 +23,10 @@ export const handleOnDragEnd = (result, dragEndProps) => {
   if (
     destination.droppableId === source.droppableId
     && destination.index === source.index
-  )
-  // drag to same place
-  { return; }
+  ) {
+    // drag to same place
+    return;
+  }
 
   const destYear = destination.droppableId.match(/[0-9]{4}/)[0];
   const destTerm = destination.droppableId.match(/T[0-3]/)[0];

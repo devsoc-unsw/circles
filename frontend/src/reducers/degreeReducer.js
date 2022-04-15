@@ -9,7 +9,7 @@ let initial = {
 const degree = JSON.parse(localStorage.getItem("degree"));
 if (degree) initial = degree;
 
-const degreeReducer = (action, state = initial) => {
+const degreeReducer = (state = initial, action) => {
   switch (action.type) {
     case "SET_PROGRAM":
       return {

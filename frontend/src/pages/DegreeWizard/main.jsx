@@ -4,12 +4,12 @@ import { Button, Typography, Modal } from "antd";
 import { useNavigate } from "react-router-dom";
 import { scroller } from "react-scroll";
 import DegreeStep from "./steps/DegreeStep";
-import { SpecialisationStep } from "./steps/SpecialisationStep";
-import { PreviousCoursesStep } from "./steps/PreviousCoursesStep";
-import { MinorStep } from "./steps/MinorStep";
+import SpecialisationStep from "./steps/SpecialisationStep";
+import PreviousCoursesStep from "./steps/PreviousCoursesStep";
+import MinorStep from "./steps/MinorStep";
 import plannerActions from "../../actions/plannerActions";
 import "./main.less";
-import { YearStep } from "./steps/YearStep";
+import YearStep from "./steps/YearStep";
 
 const { Title } = Typography;
 

@@ -18,7 +18,10 @@ const ListView = ({ isLoading, degree, progressioncourses }) => {
                 key={concentration.name}
               >
                 <Title className="text">{concentration.type.charAt(0).toUpperCase() + concentration.type.slice(1)} ({concentration.name})</Title>
-                <CourseComponents progressioncourses={progressioncourses} type={concentration.type} />
+                <CourseComponents
+                  progressioncourses={progressioncourses}
+                  type={concentration.type}
+                />
               </div>
             ))}
       </div>

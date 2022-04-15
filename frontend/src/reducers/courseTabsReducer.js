@@ -2,7 +2,7 @@ const initial = {
   tabs: [],
   active: 0,
 };
-const courseTabsReducer = (action, state = initial) => {
+const courseTabsReducer = (state = initial, action) => {
   switch (action.type) {
     case "ADD_TAB":
       const tabName = action.payload;

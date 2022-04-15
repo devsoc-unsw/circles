@@ -2,7 +2,7 @@ import React from "react";
 import { Switch } from "antd";
 import { IoMdMoon, IoIosSunny } from "react-icons/io";
 import { useDispatch } from "react-redux";
-import { toggleTheme } from "../actions/toggleTheme";
+import toggleTheme from "../actions/toggleTheme";
 
 const ThemeToggle = () => {
   const [theme, setTheme] = React.useState(() => {

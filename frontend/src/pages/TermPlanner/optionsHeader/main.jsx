@@ -37,7 +37,7 @@ const OptionsHeader = ({ plannerRef, isAllEmpty }) => {
       >
         <div>
           <Tooltip title="Settings">
-            <button className="settingsButton">
+            <button type="button" className="settingsButton">
               <IoCogSharp className="settingsIcon" size="1.5em" />
             </button>
           </Tooltip>
@@ -56,7 +56,7 @@ const OptionsHeader = ({ plannerRef, isAllEmpty }) => {
         >
           <div>
             <Tooltip title="Export">
-              <button className="settingsButton">
+              <button type="button" className="settingsButton">
                 <TiDownload className="settingsIcon" size="1.5em" />
               </button>
             </Tooltip>
@@ -74,7 +74,7 @@ const OptionsHeader = ({ plannerRef, isAllEmpty }) => {
           cancelText="No"
         >
           <Tooltip title="Unplan all courses">
-            <button className="settingsButton">
+            <button type="button" className="settingsButton">
               <FaRegCalendarTimes size="1.5em" className="settingsIcon" />
             </button>
           </Tooltip>
@@ -83,7 +83,7 @@ const OptionsHeader = ({ plannerRef, isAllEmpty }) => {
 
       {areYearsHidden && (
         <Tooltip title="Show all hidden years">
-          <button className="settingsButton" onClick={unhideAll}>
+          <button type="button" className="settingsButton" onClick={unhideAll}>
             <IoIosEye size="1.5em" className="settingsIcon" />
           </button>
         </Tooltip>

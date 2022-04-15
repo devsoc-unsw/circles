@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { Menu, Button, Typography } from "antd";
-import degreeActions from "../../../actions/degreeActions";
 import { useDispatch, useSelector } from "react-redux";
 import "./steps.less";
 import { useSpring, animated } from "react-spring";
 import springProps from "../spring";
+import degreeActions from "../../../actions/degreeActions";
 
 const { Title } = Typography;
-export const MinorStep = ({ incrementStep, currStep }) => {
+const MinorStep = ({ incrementStep, currStep }) => {
   const dispatch = useDispatch();
   const { minor, programCode } = useSelector((store) => store.degree);
   const [options, setOptions] = React.useState({});
@@ -60,3 +60,4 @@ export const MinorStep = ({ incrementStep, currStep }) => {
     </animated.div>
   );
 };
+export default MinorStep;

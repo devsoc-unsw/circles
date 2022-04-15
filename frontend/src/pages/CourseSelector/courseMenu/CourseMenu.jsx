@@ -11,13 +11,13 @@ import { motion, AnimatePresence } from "framer-motion/dist/framer-motion";
 import { ReactComponent as Padlock } from "../../../images/padlock.svg";
 import axiosRequest from "../../../axios";
 import prepareUserPayload from "../helper";
-import { Loading } from "./Loading";
+import Loading from "./Loading";
 import courseTabActions from "../../../actions/courseTabActions";
 import plannerActions from "../../../actions/plannerActions";
 import { setCourses } from "../../../actions/coursesActions";
 
 const { SubMenu } = Menu;
-// plz help wtf is this file
+
 const CourseMenu = ({ structure, showLockedCourses }) => {
   const dispatch = useDispatch();
   const [menuData, setMenuData] = React.useState({});
@@ -41,6 +41,11 @@ const CourseMenu = ({ structure, showLockedCourses }) => {
     const newMenu = {};
     const newCoursesUnits = {};
 
+    function sortMenu(item1, item2) {
+      return item1.unlocked === item2.unlocked
+        ? item1.courseCode > item2.courseCode // sort within locked/unlocked by courseCode
+        : item1.unlocked < item2.unlocked; // separate locked/unlocked
+    }
     // Example groups: Major, Minor, General
     for (const group in structure) {
       newMenu[group] = {};
@@ -113,6 +118,7 @@ const CourseMenu = ({ structure, showLockedCourses }) => {
       dispatch(setCourses(res.data.courses_state));
       generateMenuData(res.data.courses_state);
     } catch (err) {
+      // eslint-disable-next-line
       console.log(err);
     }
   };
@@ -171,11 +177,6 @@ const CourseMenu = ({ structure, showLockedCourses }) => {
       )}
     </div>
   );
-  function sortMenu(item1, item2) {
-    return item1.unlocked === item2.unlocked
-      ? item1.courseCode > item2.courseCode // sort within locked/unlocked by courseCode
-      : item1.unlocked < item2.unlocked; // separate locked/unlocked
-  }
 };
 
 const MenuItem = ({
