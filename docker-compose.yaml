@@ -11,6 +11,8 @@ services:
       - ./env/mongodb.env
     networks:
       - circles-net
+    ports:
+      - '27017:27017'
   backend:
     build:
       context: ./backend
