@@ -41,7 +41,7 @@ def programsIndex():
     },
 )
 def getPrograms():
-    """fetch all the programs the backend knows about in the format of { code: title }"""
+    """ Fetch all the programs the backend knows about in the format of { code: title } """
     # return {"programs": {q["code"]: q["title"] for q in programsCOL.find()}}
     # TODO On deployment, DELETE RETURN BELOW and replace with the return above
     return {"programs": {"3778": "Computer Science"}}
@@ -77,7 +77,7 @@ def getPrograms():
     },
 )
 def getMajors(programCode: str):
-    """fetch all the majors known to the backend for a specific program"""
+    """ Fetch all the majors known to the backend for a specific program """
     result = programsCOL.find_one({"code": programCode})
 
     if not result:
@@ -117,7 +117,7 @@ def getMajors(programCode: str):
 
 
 def getMinors(programCode: str):
-    """fetch all the minors known for a specific program"""
+    """ Fetch all the minors known for a specific program """
     result = programsCOL.find_one({"code": programCode})
 
     if not result:
@@ -136,7 +136,7 @@ def getMinors(programCode: str):
     return {"minors": minrs}
 
 def convertSubgroupObjectToCoursesDict(object: str, description: str|list[str]) -> dict[str, str]:
-    """ gets a subgroup object (format laid out in the processor) and fetches the exact courses its referring to """
+    """ Gets a subgroup object (format laid out in the processor) and fetches the exact courses its referring to """
     if " or " in object:
         return {c: description[index] for index, c in enumerate(object.split(" or "))}
     elif not re.match(r"[A-Z]{4}[0-9]{4}", object):
@@ -146,7 +146,7 @@ def convertSubgroupObjectToCoursesDict(object: str, description: str|list[str]) 
         return {object: description}
 
 def addSubgroupContainer(structure: dict, type: str, container: dict, exceptions: list[str]) -> list[str]:
-    """returns the added courses"""
+    """ Returns the added courses """
     structure[type][container["title"]] = {}
     item = structure[type][container["title"]]
 
@@ -170,7 +170,7 @@ def addSubgroupContainer(structure: dict, type: str, container: dict, exceptions
 
 
 def addSpecialisation(structure: dict, code: str, type: str):
-    """add a specialisation to the structure of a getStructure call"""
+    """ Add a specialisation to the structure of a getStructure call """
     # in a specialisation, the first container takes priority - no duplicates may exist
     spnResult = specialisationsCOL.find_one({"code": code})
     if not spnResult:
