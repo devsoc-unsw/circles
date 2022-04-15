@@ -34,11 +34,6 @@ def fetch_all_courses():
 
     return courses
 
-@router.get("/")
-def apiIndex():
-    return "Index of courses"
-
-
 def fixUserData(userData: dict):
     """ Updates and returns the userData with the UOC of a course """
     coursesWithoutUoc = [
@@ -52,6 +47,11 @@ def fixUserData(userData: dict):
     }
     userData["courses"].update(filledInCourses)
     return userData
+
+
+@router.get("/")
+def apiIndex():
+    return "Index of courses"
 
 
 @router.get(
@@ -137,8 +137,33 @@ def getCourse(courseCode: str):
     return result
 
 
-# TODO(josh): add better fastAPI documentation
-@router.post("/searchCourse/{search_string}")
+@router.post(
+    "/searchCourse/{search_string}",
+    responses={
+        200: {
+            "description": "Returns a list of the most relevant courses to a search term",
+            "content": {
+                "application/json": {
+                    "example": {
+                            "ACCT1511": "Accounting and Financial Management 1B",
+                            "ACCT2542": "Corporate Financial Reporting and Analysis",
+                            "ACCT3202": "Industry Placement 2",
+                            "ACCT3303": "Industry Placement 3",
+                            "ACCT3610": "Business Analysis and Valuation",
+                            "ACCT4797": "Thesis (Accounting) B",
+                            "ACCT4809": "Current Developments in Auditing Research",
+                            "ACCT4852": "Current Developments in Accounting Research - Managerial",
+                            "ACCT4897": "Seminar in Research Methodology",
+                            "ACTL1101": "Introduction to Actuarial Studies",
+                            "ACTL2101": "Industry Placement 1",
+                            "ACTL2102": "Foundations of Actuarial Models",
+                            "ACTL3142": "Actuarial Data and Analysis",
+                    }
+                }
+            }
+        }
+    },
+)
 def search(userData: UserData, search_string: str):
     """
     Search for courses with regex 
@@ -277,6 +302,7 @@ def getLegacyCourses(year, term):
 
     return {'courses' : result}
 
+
 @router.get("/getLegacyCourse/{year}/{courseCode}")
 def getLegacyCourse(year, courseCode):
     result = list(archivesDB[str(year)].find({"code": courseCode}))
@@ -285,6 +311,7 @@ def getLegacyCourse(year, courseCode):
     del result["_id"]
     result["is_legacy"] = True
     return result
+
 
 @router.post("/unselectCourse/", response_model=AffectedCourses,
             responses={
@@ -313,6 +340,7 @@ def unselectCourse(userData: UserData, lockedCourses: list, unselectedCourse: st
     affectedCourses = User(fixUserData(userData.dict())).unselect_course(unselectedCourse, lockedCourses)
 
     return {'affected_courses': affectedCourses}
+
 
 @router.post("/coursesUnlockedWhenTaken/{courseToBeTaken}", response_model=CoursesUnlockedWhenTaken,
             responses={
@@ -347,6 +375,7 @@ def coursesUnlockedWhenTaken(userData: UserData, courseToBeTaken: str):
 def unlocked_set(courses_state):
     """ Fetch the set of unlocked courses from the courses_state of a getAllUnlocked call """
     return set(course for course in courses_state if courses_state[course]['unlocked'])
+
 
 def fuzzy_match(course: tuple, search_term: str):
     """ Gives the course a weighting based on the relevance to the search """
