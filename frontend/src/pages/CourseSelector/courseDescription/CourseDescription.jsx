@@ -15,6 +15,7 @@ import { setCourse } from "../../../actions/coursesActions";
 import { BsPlusLg } from "react-icons/bs";
 
 const { Title, Text } = Typography;
+const term = "2022-T2";
 const CourseAttribute = ({ title, content }) => {
   return (
     <div className="cs-course-attr">
@@ -33,31 +34,10 @@ const ProgressBar = ({progress,height}) => {
   : progress >= 25 ? bgColor = "yellow"
   : bgColor = "green";
 
-  const Parentdiv = {
-    height: height,
-    width: '100%',
-    backgroundColor: 'whitesmoke',
-    borderRadius: 40,
-  }
-
-  const Childdiv = {
-    height: '100%',
-    width: `${progress}%`,
-    backgroundColor: {bgColor},
-    borderRadius:40,
-    textAlign: 'right'
-  }
-
-  const progresstext = {
-    padding: 10,
-    color: 'black',
-    fontWeight: 900
-  }
-
   return (
-  <div style={Parentdiv}>
-    <div style={Childdiv}>
-      <span style={progresstext}>{`${progress}%`}</span>
+  <div className="progressBarWrapper" height={height}>
+    <div className="progressBar" width={progress}>
+      <span className="progressText" backgroundColor={bgColor}>{`${progress}%`}</span>
     </div>
   </div>
   )
@@ -146,7 +126,7 @@ export default function CourseDescription({ structure }) {
     const getCourseCapacityById = async (id) => {
       const [data, err] = await axiosRequest(
         "get",
-        `http://localhost:3001/api/terms/2022-T2/courses/${id}`
+        `https://timetable.csesoc.app/api/terms/${term}/courses/${id}`
       );
       console.log(data);
       if (!err) {
@@ -164,11 +144,14 @@ export default function CourseDescription({ structure }) {
   }, [id]);
 
   const getCapacityAndEnrolment = (data) => {
-    let enrolmentCapacityData = {};
+    let enrolmentCapacityData = {
+      enrolments: 0,
+      capacity: 0,
+    };
     for (let i = 0; i < data.classes.length; i++) {
-      if (data.classes[i].activity === "Lecture") {
-        enrolmentCapacityData = data.classes[i].courseEnrolment;
-        break;
+      if (data.classes[i].activity === "Lecture" || data.classes[i].activity === "Seminar" || data.classes[i].activity === "Thesis Research") {
+        enrolmentCapacityData.enrolments += data.classes[i].courseEnrolment.enrolments;
+        enrolmentCapacityData.capacity += data.classes[i].courseEnrolment.enrolments;
       }
     }
     setCourseCapacity(enrolmentCapacityData);
@@ -344,7 +327,7 @@ export default function CourseDescription({ structure }) {
                 );
               })}
             <Title level={3} className="text cs-final-attr">
-              Capacity
+              Capacity - for {term}
             </Title>
             {courseCapacity.enrolments ? (
                 <ProgressBar
