@@ -8,9 +8,10 @@ with open("algorithms/exampleUsers.json") as f:
     USERS = json.load(f)
 f.close()
 
-with open("algorithms/exampleUnselectCourse.json") as f:
-    USER = json.load(f)
-f.close()
+USER = {
+    "userData": USERS["user6"],
+    "lockedCourses": ["COMP9242"]
+}
 
 def test_user1():
     user = User(USERS["user1"])

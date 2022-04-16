@@ -48,7 +48,7 @@ const TermBox = ({ yearIndex, termNo }) => {
             prereqs: "",
             isLegacy: info.is_legacy,
             isUnlocked: true,
-            warnings: "",
+            warnings: [],
             handbook_note: "",
           },
           position: [yearIndex, termNo],

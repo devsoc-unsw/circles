@@ -13,8 +13,13 @@ const MultiSelectCourse = ({
   const debouncedSearchTerm = useDebounce(value, 200);
   const [isLoading, setIsLoading] = useState(false);
 
+  const planner = useSelector((state) => state.planner);
+  const degree = useSelector((state) => state.degree);
+
   useEffect(() => {
-    if (debouncedSearchTerm) { search(debouncedSearchTerm, setCourseResults, setIsLoading); }
+    // if debounced term changes , call API
+    if (debouncedSearchTerm)
+      search(debouncedSearchTerm, setCourseResults, setIsLoading, degree, planner);
   }, [debouncedSearchTerm]);
 
   const handleSelect = (courseCode) => {

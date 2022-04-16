@@ -219,8 +219,9 @@ const MenuItem = ({
         prereqs: course.raw_requirements,
         isLegacy: course.is_legacy,
         isUnlocked: true,
-        warnings: "",
+        warnings: [], 
         handbook_note: "",
+        isAccurate: course.is_accurate,
       },
     };
     dispatch(plannerActions("ADD_TO_UNPLANNED", data));

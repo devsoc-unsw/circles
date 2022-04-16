@@ -16,14 +16,16 @@ const DraggableCourse = ({ code, index }) => {
   // prereqs are populated in CourseDescription.jsx via course.raw_requirements
   const { prereqs } = courses.get(code);
   const prereqDisplay = prereqs.trim();
-  const { isUnlocked } = courses.get(code);
-  const { handbookNote } = courses.get(code);
-  const { plannedFor } = courses.get(code);
-  const { isLegacy } = courses.get(code);
-  const warningMessage = courses.get(code).warnings;
+  const isUnlocked = courses.get(code)["isUnlocked"];
+  const handbookNote = courses.get(code)["handbook_note"];
+  const plannedFor = courses.get(code)["plannedFor"];
+  const isLegacy = courses.get(code)["isLegacy"];
+  const warningMessage = courses.get(code)["warnings"];  
+  const isAccurate = courses.get(code)["isAccurate"];
+  const termsOffered = courses.get(code)["termsOffered"];
 
-  const warning1 = isLegacy || !isUnlocked;
-  const warning2 = handbookNote !== "" || warningMessage !== "";
+  const isOffered = plannedFor ? termsOffered.includes(plannedFor.match(/T[0-3]/)[0]) : true;
+  const BEwarnings = handbookNote !== "" || !!warningMessage.length;
 
   const { show } = useContextMenu({
     id: `${code}-context`,
@@ -36,7 +38,6 @@ const DraggableCourse = ({ code, index }) => {
   };
 
   const isSmall = useMediaQuery("(max-width: 1400px)");
-
   return (
     <>
       <Draggable
@@ -53,15 +54,15 @@ const DraggableCourse = ({ code, index }) => {
               ...provided.draggableProps.style,
             }}
             className={`course ${isSummerEnabled && "summerViewCourse"} 
-      ${isDragDisabled && " dragDisabledCourse"} 
-      ${isDragDisabled && warning1 && " disabledWarning"}
-      ${warning1 && " warning"}`}
+            ${isDragDisabled && " dragDisabledCourse"} 
+            ${isDragDisabled && !isUnlocked && " disabledWarning"}
+            ${(!isUnlocked || !isOffered) && " warning"}`}
             data-tip
             data-for={code}
             id={code}
             onContextMenu={displayContextMenu}
           >
-            {(warning1 || warning2) && (
+            {(isLegacy || !isUnlocked || BEwarnings || !isAccurate || !isOffered) && (
               <IoWarningOutline
                 className="alert"
                 size="2.5em"
@@ -90,13 +91,16 @@ const DraggableCourse = ({ code, index }) => {
         )}
       </Draggable>
       <ContextMenu code={code} plannedFor={plannedFor} />
-      {/* display prereq tooltip for all courses. However, if a term is marked as complete
-      and the course has no warning, then disable the tooltip */}
-      {!isDragDisabled && (warning1 || warning2) && (
+      {/* display prereq tooltip for all courses. However, if a term is marked as complete 
+	  and the course has no warning, then disable the tooltip */}
+      {!isDragDisabled && (isLegacy || !isUnlocked || BEwarnings || !isAccurate || !isOffered) && (
         <ReactTooltip id={code} place="bottom" className="tooltip">
-          {isLegacy ? "This course is discontinued."
-            : !isUnlocked ? prereqDisplay
-              : warningMessage !== "" ? warningMessage : handbookNote}
+          {isLegacy ? "This course is discontinued. If an equivalent course is currently being offered, please pick that instead." : 
+            !isUnlocked ? prereqDisplay : 
+              !isOffered ? "The course is not offered in this term." :
+                warningMessage != "" ? warningMessage : 
+                  handbookNote !== "" ? handbookNote :""}
+          {!isAccurate ? " The course info may be inaccurate." : ""}
         </ReactTooltip>
       )}
     </>

@@ -45,6 +45,7 @@ const DegreeWizard = () => {
     setIsModalVisible(false);
     // Degree selector needs to reset to prevent identical courses in a term
     dispatch(plannerActions("RESET_PLANNER"));
+    dispatch(courseTabActions("RESET_COURSE_TABS"));
   };
 
   const handleCancel = () => {

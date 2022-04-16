@@ -4,7 +4,7 @@ import { Switch } from "antd";
 import { useSelector } from "react-redux";
 import CourseMenu from "./courseMenu/CourseMenu";
 import CourseDescription from "./courseDescription/CourseDescription";
-import { CourseTabs } from "./CourseTabs";
+import { CourseTabs } from "./courseTabs/CourseTabs";
 import "./main.less";
 import SearchCourse from "./SearchCourse";
 
@@ -42,18 +42,19 @@ const CourseSelector = () => {
           )}
         </div>
         <SearchCourse />
-
         <Switch
           className="cs-toggle-locked"
           onChange={() => setShowLockedCourses((prev) => !prev)}
           checkedChildren="locked courses shown"
           unCheckedChildren="locked courses hidden"
         />
-
       </div>
       <CourseTabs />
       <div className="cs-bottom-cont">
-        <CourseMenu structure={structure} showLockedCourses={showLockedCourses} />
+        <CourseMenu
+          structure={structure}
+          showLockedCourses={showLockedCourses}
+        />
         <CourseDescription structure={structure} />
       </div>
     </div>

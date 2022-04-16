@@ -61,8 +61,9 @@ const plannerReducer = (state = initialState, action) => {
     const nCourses = state.courses;
     nCourses.get(code).plannedFor = null;
     nCourses.get(code).isUnlocked = true;
-    nCourses.get(code).warnings = "";
-    nCourses.get(code).handbook_note = "";
+    nCourses.get(code).warnings = []; 
+    nCourses.get(code).handbook_note = ""; 
+    nCourses.get(code).isAccurate = true; 
 
     stateCopy = {
       ...state,
@@ -119,6 +120,7 @@ const plannerReducer = (state = initialState, action) => {
     case "TOGGLE_WARNINGS":
       const coursesCpy = new Map(state.courses);
       action.payload.forEach((course) => {
+        coursesCpy.get(course).isAccurate = action.payload[course].is_accurate;
         coursesCpy.get(course).isUnlocked = action.payload[course].unlocked;
         coursesCpy.get(course).warnings = action.payload[course].warnings;
         coursesCpy.get(course).handbook_note = action.payload[course].handbook_note;
