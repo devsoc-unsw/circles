@@ -26,6 +26,43 @@ const CourseAttribute = ({ title, content }) => {
   );
 };
 
+const ProgressBar = ({progress,height}) => {
+  let bgColor = "";
+  progress >= 75 ? bgColor = "red"
+  : progress >= 45 ? bgColor = "orange"
+  : progress >= 25 ? bgColor = "yellow"
+  : bgColor = "green";
+
+  const Parentdiv = {
+    height: height,
+    width: '100%',
+    backgroundColor: 'whitesmoke',
+    borderRadius: 40,
+  }
+
+  const Childdiv = {
+    height: '100%',
+    width: `${progress}%`,
+    backgroundColor: {bgColor},
+    borderRadius:40,
+    textAlign: 'right'
+  }
+
+  const progresstext = {
+    padding: 10,
+    color: 'black',
+    fontWeight: 900
+  }
+
+  return (
+  <div style={Parentdiv}>
+    <div style={Childdiv}>
+      <span style={progresstext}>{`${progress}%`}</span>
+    </div>
+  </div>
+  )
+}
+
 const PlannerDropdown = ({ courseCode, structure, addToPlanner }) => {
   const [categories, setCategories] = useState([]);
 
@@ -79,15 +116,16 @@ export default function CourseDescription({ structure }) {
   const planner = useSelector((state) => state.planner);
   const degree = useSelector((state) => state.degree);
   const [loading, setLoading] = useState(false);
-  const [pageLoaded, setpageLoaded] = useState(false);
+  const [pageLoaded, setPageLoaded] = useState(false);
   const [coursesPathTo, setCoursesPathTo] = useState({});
+  const [courseCapacity, setCourseCapacity] = useState({});
 
   useEffect(() => {
     const getCourse = async () => {
       const [data, err] = await axiosRequest("get", `/courses/getCourse/${id}`);
       if (!err) {
         dispatch(setCourse(data));
-        setpageLoaded(true);
+
       }
     };
 
@@ -98,19 +136,43 @@ export default function CourseDescription({ structure }) {
         prepareUserPayload(degree, planner)
       );
       console.log(data);
-      if (!err) setCoursesPathTo({
-        "direct_unlock": data.direct_unlock,
-        "indirect_unlock": data.indirect_unlock
-      });
+      if (!err)
+        setCoursesPathTo({
+          direct_unlock: data.direct_unlock,
+          indirect_unlock: data.indirect_unlock,
+        });
     };
 
-    setpageLoaded(false);
+    const getCourseCapacityById = async (id) => {
+      const [data, err] = await axiosRequest(
+        "get",
+        `http://localhost:3001/api/terms/2022-T2/courses/${id}`
+      );
+      console.log(data);
+      if (!err) {
+        getCapacityAndEnrolment(data);
+      }
+    };
+
     if (id === "explore" || id === "search") return;
     if (id) {
       getCourse();
       getPathToCoursesById(id);
+      getCourseCapacityById(id);
     }
+    setPageLoaded(true);
   }, [id]);
+
+  const getCapacityAndEnrolment = (data) => {
+    let enrolmentCapacityData = {};
+    for (let i = 0; i < data.classes.length; i++) {
+      if (data.classes[i].activity === "Lecture") {
+        enrolmentCapacityData = data.classes[i].courseEnrolment;
+        break;
+      }
+    }
+    setCourseCapacity(enrolmentCapacityData);
+  };
 
   if (tabs.length === 0)
     return (
@@ -200,15 +262,19 @@ export default function CourseDescription({ structure }) {
                 </Dropdown.Button>
               )}
             </div>
-            {course.is_legacy && <Text strong> NOTE: this course is discontinued - if an equivalent course exists for it, please pick that instead </Text>}
+            {course.is_legacy && (
+              <Text strong>
+                {" "}
+                NOTE: this course is discontinued - if an equivalent course
+                exists for it, please pick that instead{" "}
+              </Text>
+            )}
             <Title level={3} className="text">
               Overview
             </Title>
             <Space direction="vertical" style={{ marginBottom: "1rem" }}>
               <Text>
-                <div
-                  dangerouslySetInnerHTML={{ __html: course.description }}
-                />
+                <div dangerouslySetInnerHTML={{ __html: course.description }} />
               </Text>
             </Space>
             <Title level={3} className="text">
@@ -263,10 +329,7 @@ export default function CourseDescription({ structure }) {
             {course.school && (
               <CourseAttribute title="School" content={course.school} />
             )}
-            <CourseAttribute
-              title="Study Level"
-              content={course.study_level}
-            />
+            <CourseAttribute title="Study Level" content={course.study_level} />
             <CourseAttribute title="Campus" content={course.campus} />
             <Title level={3} className="text cs-final-attr">
               Offering Terms
@@ -280,6 +343,17 @@ export default function CourseDescription({ structure }) {
                   </Tag>
                 );
               })}
+            <Title level={3} className="text cs-final-attr">
+              Capacity
+            </Title>
+            {courseCapacity.enrolments ? (
+                <ProgressBar
+                  progress={Math.round((courseCapacity.enrolments/courseCapacity.capacity) * 100)}
+                  height = {30}
+                />
+            ) : (
+              <Text>Nothing to show</Text>
+            )}
           </div>
         </>
       )}
