@@ -8,12 +8,6 @@
     "@ant-design/icons": "^4.6.2",
     "@craco/craco": "^6.4.3",
     "@reduxjs/toolkit": "^1.8.1",
-<<<<<<< HEAD
-=======
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^12.1.4",
-    "@testing-library/user-event": "^14.1.0",
->>>>>>> 749078b26c8c90253a2fb8089af05ace6b644b2e
     "@tippyjs/react": "^4.2.6",
     "antd": "^4.19.5",
     "axios": "^0.26.1",

@@ -15,8 +15,8 @@ export const handleOnDragEnd = (result, dragEndProps) => {
   dispatch(
     plannerActions("MOVE_COURSE", {
       course: draggableId,
-      term: destination.droppableId
-    })
+      term: destination.droppableId,
+    }),
   );
 
   if (

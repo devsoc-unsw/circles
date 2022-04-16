@@ -92,11 +92,12 @@ const CourseDescription = ({ structure }) => {
         `/courses/coursesUnlockedWhenTaken/${c}`,
         prepareUserPayload(degree, planner),
       );
-      console.log(data);
-      if (!err) setCoursesPathTo({
-        "direct_unlock": data.direct_unlock,
-        "indirect_unlock": data.indirect_unlock
-      });
+      if (!err) {
+        setCoursesPathTo({
+          direct_unlock: data.direct_unlock,
+          indirect_unlock: data.indirect_unlock,
+        });
+      }
     };
 
     setpageLoaded(false);
@@ -196,15 +197,21 @@ const CourseDescription = ({ structure }) => {
                 </Dropdown.Button>
               )}
             </div>
-            {course.is_legacy && <Text strong> NOTE: this course is discontinued - if an equivalent course exists for it, please pick that instead </Text>}
+            {
+              course.is_legacy
+              && (
+              <Text strong>
+                NOTE: this course is discontinued - if a current course exists, pick that instead
+              </Text>
+              )
+}
             <Title level={3} className="text">
               Overview
             </Title>
             <Space direction="vertical" style={{ marginBottom: "1rem" }}>
               <Text>
-                <div
-                  dangerouslySetInnerHTML={{ __html: course.description }}
-                />
+                {/* eslint-disable-next-line react/no-danger */}
+                <div dangerouslySetInnerHTML={{ __html: course.description }} />
               </Text>
             </Space>
             <Title level={3} className="text">
@@ -212,24 +219,21 @@ const CourseDescription = ({ structure }) => {
             </Title>
             <Space direction="vertical" style={{ marginBottom: "1rem" }}>
               <Text>
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: course.raw_requirements || "None",
-                  }}
-                />
+                {/* eslint-disable-next-line react/no-danger */}
+                <div dangerouslySetInnerHTML={{ __html: course.raw_requirements || "None" }} />
               </Text>
             </Space>
             <Title level={3} className="text">
               Courses you have done to unlock this course
             </Title>
             {course.path_from && Object.keys(course.path_from).length > 0 ? (
-              <div className={"text course-tag-cont"}>
+              <div className="text course-tag-cont">
                 {Object.keys(course.path_from).map((courseCode) => (
                   <CourseTag key={courseCode} name={courseCode} />
                 ))}
               </div>
             ) : (
-              <p className={`text`}>None</p>
+              <p className="text">None</p>
             )}
             <Title level={3} className="text">
               Doing this course will directly unlock these courses
@@ -239,7 +243,7 @@ const CourseDescription = ({ structure }) => {
                 <CourseTag key={courseCode} name={courseCode} />
               ))
             ) : (
-              <p className={`text`}>None</p>
+              <p className="text">None</p>
             )}
             <Title level={3} className="text">
               Doing this course will indirectly unlock these courses
@@ -249,7 +253,7 @@ const CourseDescription = ({ structure }) => {
                 <CourseTag key={courseCode} name={courseCode} />
               ))
             ) : (
-              <p className={`text`}>None</p>
+              <p className="text">None</p>
             )}
           </div>
           <div>
@@ -267,11 +271,11 @@ const CourseDescription = ({ structure }) => {
             <Title level={3} className="text cs-final-attr">
               Offering Terms
             </Title>
-            {course.terms &&
-              course.terms.map((term, index) => {
-                let termNo = term.slice(1);
+            {course.terms
+              && course.terms.map((term, index) => {
+                const termNo = term.slice(1);
                 return (
-                  <Tag key={index} className={`text`}>
+                  <Tag key={index} className="text">
                     {term === "T0" ? "Summer" : `Term ${termNo}`}
                   </Tag>
                 );

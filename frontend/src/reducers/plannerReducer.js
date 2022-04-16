@@ -61,9 +61,9 @@ const plannerReducer = (state = initialState, action) => {
     const nCourses = state.courses;
     nCourses.get(code).plannedFor = null;
     nCourses.get(code).isUnlocked = true;
-    nCourses.get(code).warnings = []; 
-    nCourses.get(code).handbook_note = ""; 
-    nCourses.get(code).isAccurate = true; 
+    nCourses.get(code).warnings = [];
+    nCourses.get(code).handbook_note = "";
+    nCourses.get(code).isAccurate = true;
 
     stateCopy = {
       ...state,

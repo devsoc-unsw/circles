@@ -22,7 +22,7 @@
         "no-case-declarations": ["off"],
         "default-param-last": ["off"], // redux
         "no-nested-ternary": ["off"],
-        "import/no-extraneous-dependencies": ["off"], // a problem with how tippy is used - ill leave it to an fe person to figure out
+        "import/no-extraneous-dependencies": ["off"], // a problem with how tippy is used - ill leave it to an FE person to figure out
         "react/jsx-props-no-spreading": ["off"],
         "react/jsx-one-expression-per-line": ["off"],
         "react/jsx-no-bind": ["off"],

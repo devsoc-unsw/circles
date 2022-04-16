@@ -16,13 +16,11 @@ const DraggableCourse = ({ code, index }) => {
   // prereqs are populated in CourseDescription.jsx via course.raw_requirements
   const { prereqs } = courses.get(code);
   const prereqDisplay = prereqs.trim();
-  const isUnlocked = courses.get(code)["isUnlocked"];
-  const handbookNote = courses.get(code)["handbook_note"];
-  const plannedFor = courses.get(code)["plannedFor"];
-  const isLegacy = courses.get(code)["isLegacy"];
-  const warningMessage = courses.get(code)["warnings"];  
-  const isAccurate = courses.get(code)["isAccurate"];
-  const termsOffered = courses.get(code)["termsOffered"];
+  const {
+    isUnlocked, plannedFor, isLegacy, isAccurate, termsOffered,
+  } = courses.get(code);
+  const handbookNote = courses.get(code).handbook_note;
+  const warningMessage = courses.get(code).warnings;
 
   const isOffered = plannedFor ? termsOffered.includes(plannedFor.match(/T[0-3]/)[0]) : true;
   const BEwarnings = handbookNote !== "" || !!warningMessage.length;
@@ -91,15 +89,15 @@ const DraggableCourse = ({ code, index }) => {
         )}
       </Draggable>
       <ContextMenu code={code} plannedFor={plannedFor} />
-      {/* display prereq tooltip for all courses. However, if a term is marked as complete 
-	  and the course has no warning, then disable the tooltip */}
+      {/* display prereq tooltip for all courses. However, if a term is marked as complete
+        and the course has no warning, then disable the tooltip */}
       {!isDragDisabled && (isLegacy || !isUnlocked || BEwarnings || !isAccurate || !isOffered) && (
         <ReactTooltip id={code} place="bottom" className="tooltip">
-          {isLegacy ? "This course is discontinued. If an equivalent course is currently being offered, please pick that instead." : 
-            !isUnlocked ? prereqDisplay : 
-              !isOffered ? "The course is not offered in this term." :
-                warningMessage != "" ? warningMessage : 
-                  handbookNote !== "" ? handbookNote :""}
+          {isLegacy ? "This course is discontinued. If an equivalent course is currently being offered, please pick that instead."
+            : !isUnlocked ? prereqDisplay
+              : !isOffered ? "The course is not offered in this term."
+                : warningMessage !== "" ? warningMessage
+                  : handbookNote !== "" ? handbookNote : ""}
           {!isAccurate ? " The course info may be inaccurate." : ""}
         </ReactTooltip>
       )}

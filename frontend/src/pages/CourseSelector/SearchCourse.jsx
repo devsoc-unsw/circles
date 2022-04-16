@@ -1,16 +1,17 @@
 /* eslint-disable no-console */
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Select, Spin } from "antd";
 import axios from "axios";
 import courseTabActions from "../../actions/courseTabActions";
 import useDebounce from "../../hooks/useDebounce";
+import prepareUserPayload from "./helper";
 
 const search = async (query, setCourses, setIsLoading, degree, planner) => {
   try {
     const res = await axios.post(
       `/courses/searchCourse/${query}`,
-      JSON.stringify(prepareUserPayload(degree, planner))
+      JSON.stringify(prepareUserPayload(degree, planner)),
     );
     setCourses(
       Object.keys(res.data).map((course) => ({
@@ -36,8 +37,9 @@ const SearchCourse = () => {
 
   useEffect(() => {
     // if debounced term changes , call API
-    if (debouncedSearchTerm)
+    if (debouncedSearchTerm) {
       search(debouncedSearchTerm, setCourses, setIsLoading, degree, planner);
+    }
   }, [debouncedSearchTerm]);
 
   const handleSelect = (courseCode) => {
@@ -59,7 +61,7 @@ const SearchCourse = () => {
       size="large"
       options={courses}
       value={value}
-      // open attribute - close search dropdown when there is no input value or 
+      // open attribute - close search dropdown when there is no input value or
       // when a course has been selected
       open={!!value}
       onSearch={handleSearch}

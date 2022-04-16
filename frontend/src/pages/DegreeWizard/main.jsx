@@ -10,6 +10,7 @@ import MinorStep from "./steps/MinorStep";
 import plannerActions from "../../actions/plannerActions";
 import "./main.less";
 import YearStep from "./steps/YearStep";
+import courseTabActions from "../../actions/courseTabActions";
 
 const { Title } = Typography;
 

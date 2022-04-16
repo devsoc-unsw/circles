@@ -22,7 +22,7 @@ const SpecialisationStep = ({ incrementStep, currStep }) => {
 
   useEffect(() => {
     if (programCode !== "") fetchAllSpecialisations();
-  }, [fetchAllSpecialisations]);
+  }, [fetchAllSpecialisations, programCode]);
 
   const props = useSpring(springProps);
 

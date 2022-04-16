@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Select, Spin } from "antd";
+import { useSelector } from "react-redux";
 import useDebounce from "../../../hooks/useDebounce";
 import search from "../../CourseSelector/SearchCourse";
 
@@ -18,8 +19,9 @@ const MultiSelectCourse = ({
 
   useEffect(() => {
     // if debounced term changes , call API
-    if (debouncedSearchTerm)
+    if (debouncedSearchTerm) {
       search(debouncedSearchTerm, setCourseResults, setIsLoading, degree, planner);
+    }
   }, [debouncedSearchTerm]);
 
   const handleSelect = (courseCode) => {

@@ -20,7 +20,7 @@ const MinorStep = ({ incrementStep, currStep }) => {
 
   useEffect(() => {
     if (programCode !== "") fetchAllMinors();
-  }, [fetchAllMinors]);
+  }, [fetchAllMinors, programCode]);
 
   const props = useSpring(springProps);
 
