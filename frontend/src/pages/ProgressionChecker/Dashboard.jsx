@@ -1,6 +1,6 @@
 import React from "react";
 import { Typography } from "antd";
-import { useSpring, animated } from "react-spring";
+import { useSpring, animated } from "@react-spring/web";
 import DegreeCard from "./DegreeCard";
 import SkeletonDashboard from "./SkeletonDashboard";
 import LiquidProgressChart from "../../components/liquidProgressChart/LiquidProgressChart";

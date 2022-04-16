@@ -1,28 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { Select, Spin } from "antd";
 import { useSelector } from "react-redux";
-import useDebounce from "../../../hooks/useDebounce";
-import search from "../../CourseSelector/SearchCourse";
+import { useDebounce } from "use-debounce";
+import { search } from "../../CourseSelector/SearchCourse";
 
 const MultiSelectCourse = ({
   plannedCourses,
   setPlannedCourses,
 }) => {
-  const [courseResults, setCourseResults] = React.useState([]);
-
-  const [value, setValue] = React.useState("");
-  const debouncedSearchTerm = useDebounce(value, 200);
+  const [courseResults, setCourseResults] = useState([]);
+  const [value, setValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  const [debouncedSearchTerm] = useDebounce(value, 200);
 
   const planner = useSelector((state) => state.planner);
   const degree = useSelector((state) => state.degree);
 
   useEffect(() => {
-    // if debounced term changes , call API
     if (debouncedSearchTerm) {
       search(debouncedSearchTerm, setCourseResults, setIsLoading, degree, planner);
     }
-  }, [debouncedSearchTerm]);
+  }, [debouncedSearchTerm, degree, planner]);
 
   const handleSelect = (courseCode) => {
     const newCourse = { label: courseCode, value: courseCode, key: courseCode };

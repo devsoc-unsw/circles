@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Tooltip, Typography, Modal, Button, notification,
 } from "antd";
@@ -23,9 +23,9 @@ const openNotification = (msg) => {
 const { Title } = Typography;
 const TermBox = ({ yearIndex, termNo }) => {
   const planner = useSelector((store) => store.planner);
-  const [open, setOpen] = React.useState(false);
-  const [loading, setLoading] = React.useState(false);
-  const [courses, setCourses] = React.useState([]);
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [courses, setCourses] = useState([]);
   const dispatch = useDispatch();
 
   const handleSave = async () => {

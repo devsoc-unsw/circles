@@ -3,11 +3,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Select, Spin } from "antd";
 import axios from "axios";
+import { useDebounce } from "use-debounce";
 import courseTabActions from "../../actions/courseTabActions";
-import useDebounce from "../../hooks/useDebounce";
 import prepareUserPayload from "./helper";
 
-const search = async (query, setCourses, setIsLoading, degree, planner) => {
+export const search = async (query, setCourses, setIsLoading, degree, planner) => {
   try {
     const res = await axios.post(
       `/courses/searchCourse/${query}`,
@@ -27,9 +27,11 @@ const search = async (query, setCourses, setIsLoading, degree, planner) => {
 
 const SearchCourse = () => {
   const [value, setValue] = useState(null);
-  const debouncedSearchTerm = useDebounce(value, 200);
-  const [courses, setCourses] = React.useState([]);
+  const [courses, setCourses] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  const [debouncedSearchTerm] = useDebounce(value, 200);
+
   const dispatch = useDispatch();
 
   const planner = useSelector((state) => state.planner);
@@ -40,7 +42,7 @@ const SearchCourse = () => {
     if (debouncedSearchTerm) {
       search(debouncedSearchTerm, setCourses, setIsLoading, degree, planner);
     }
-  }, [debouncedSearchTerm]);
+  }, [debouncedSearchTerm, degree, planner]);
 
   const handleSelect = (courseCode) => {
     setValue(null);

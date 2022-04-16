@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Tooltip, Button, Typography, Popconfirm, Alert,
 } from "antd";
@@ -14,7 +14,7 @@ const { Text, Title } = Typography;
 const CourseCard = ({ code, title, showAlert }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = useState(false);
 
   const confirmDelete = () => {
     dispatch(plannerActions("REMOVE_COURSE", code));
@@ -65,9 +65,9 @@ export const PlannerCart = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const courses = useSelector((store) => store.planner.courses);
-  const [openMenu, setOpenMenu] = React.useState(false);
-  const [show, setShow] = React.useState(false);
-  const [code, setCode] = React.useState("");
+  const [openMenu, setOpenMenu] = useState(false);
+  const [show, setShow] = useState(false);
+  const [code, setCode] = useState("");
   const deleteAllCourses = () => {
     dispatch(plannerActions("REMOVE_ALL_COURSES"));
   };

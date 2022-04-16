@@ -3,7 +3,7 @@ import axios from "axios";
 import { Menu, Button, Typography } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import "./steps.less";
-import { useSpring, animated } from "react-spring";
+import { useSpring, animated } from "@react-spring/web";
 import springProps from "../spring";
 import degreeActions from "../../../actions/degreeActions";
 

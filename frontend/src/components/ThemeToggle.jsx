@@ -1,17 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Switch } from "antd";
 import { IoMdMoon, IoIosSunny } from "react-icons/io";
 import { useDispatch } from "react-redux";
 import toggleTheme from "../actions/toggleTheme";
 
 const ThemeToggle = () => {
-  const [theme, setTheme] = React.useState(() => {
+  const [theme, setTheme] = useState(() => {
     const t = window.localStorage.getItem("theme");
     return t ? JSON.parse(theme) : "light";
   });
   const dispatch = useDispatch();
 
-  React.useEffect(() => {
+  useEffect(() => {
     window.localStorage.setItem("theme", JSON.stringify(theme));
     dispatch(toggleTheme(theme));
     if (theme === "light") {

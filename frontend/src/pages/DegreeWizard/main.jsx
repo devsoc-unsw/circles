@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Button, Typography, Modal } from "antd";
 import { useNavigate } from "react-router-dom";
@@ -16,17 +16,17 @@ const { Title } = Typography;
 
 const DegreeWizard = () => {
   const dispatch = useDispatch();
-  const [isModalVisible, setIsModalVisible] = React.useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const navigate = useNavigate();
 
-  React.useEffect(() => {
+  useEffect(() => {
     // TODO: Warning dialog before planner is reset.
     if (localStorage.getItem("planner")) {
       setIsModalVisible(true);
     }
   }, []);
 
-  const [currStep, setCurrStep] = React.useState(1);
+  const [currStep, setCurrStep] = useState(1);
   const incrementStep = () => {
     setCurrStep(currStep + 1);
     let nextId = "Degree";

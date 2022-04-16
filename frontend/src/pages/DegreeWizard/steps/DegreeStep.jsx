@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {
   Menu, Typography, Button, Input,
 } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { useSpring, animated } from "react-spring";
+import { useSpring, animated } from "@react-spring/web";
 import degreeActions from "../../../actions/degreeActions";
 import styles from "./steps.less";
 import springProps from "../spring";
@@ -13,8 +13,8 @@ const { Title } = Typography;
 const DegreeStep = ({ incrementStep, currStep }) => {
   const dispatch = useDispatch();
   const programCode = useSelector((store) => store.degree.programCode);
-  const [input, setInput] = React.useState("");
-  const [options, setOptions] = React.useState(null);
+  const [input, setInput] = useState("");
+  const [options, setOptions] = useState(null);
 
   const fetchAllDegrees = async () => {
     const res = await axios.get("/programs/getPrograms");

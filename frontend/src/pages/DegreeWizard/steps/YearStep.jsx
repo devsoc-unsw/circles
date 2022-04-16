@@ -2,7 +2,7 @@ import React from "react";
 import { Typography, Button, DatePicker } from "antd";
 import { useDispatch } from "react-redux";
 import "./steps.less";
-import { useSpring, animated } from "react-spring";
+import { useSpring, animated } from "@react-spring/web";
 import plannerActions from "../../../actions/plannerActions";
 import springProps from "../spring";
 

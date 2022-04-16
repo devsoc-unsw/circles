@@ -283,10 +283,10 @@ const plannerReducer = (state = initialState, action) => {
           if (i > newNumYears) {
             // unschedule  courses in year
             const yearToBeRemoved = state.years[i - 1];
-            yearToBeRemoved.forEach((t) => {
-              yearToBeRemoved[t].forEach((c) => {
+            Object.values(yearToBeRemoved).forEach((t) => {
+              t.forEach((c) => {
                 updatedUnplan.push(c);
-                state.courses.get(c).plannedFor = null;
+                state.courses.get(c).plannedFor = null; // TODO: generate new state from scratch.
                 state.courses.get(c).warning = true;
               });
             });

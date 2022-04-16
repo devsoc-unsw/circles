@@ -1,9 +1,9 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { Menu, Button, Typography } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import "./steps.less";
-import { useSpring, animated } from "react-spring";
+import { useSpring, animated } from "@react-spring/web";
 import springProps from "../spring";
 import degreeActions from "../../../actions/degreeActions";
 
@@ -11,7 +11,7 @@ const { Title } = Typography;
 const MinorStep = ({ incrementStep, currStep }) => {
   const dispatch = useDispatch();
   const { minor, programCode } = useSelector((store) => store.degree);
-  const [options, setOptions] = React.useState({});
+  const [options, setOptions] = useState({});
 
   const fetchAllMinors = useCallback(async () => {
     const res = await axios.get(`/programs/getMinors/${programCode}`);

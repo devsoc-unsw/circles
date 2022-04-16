@@ -4,7 +4,7 @@ import { Switch } from "antd";
 import { useSelector } from "react-redux";
 import CourseMenu from "./courseMenu/CourseMenu";
 import CourseDescription from "./courseDescription/CourseDescription";
-import { CourseTabs } from "./courseTabs/CourseTabs";
+import CourseTabs from "./courseTabs/CourseTabs";
 import "./main.less";
 import SearchCourse from "./SearchCourse";
 

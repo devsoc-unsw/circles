@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Typography, Select, Button } from "antd";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
@@ -13,7 +13,7 @@ const SaveMenu = ({ plannerRef }) => {
 
   const exportFormats = ["png", "jpg"];
 
-  const [format, setFormat] = React.useState("png");
+  const [format, setFormat] = useState("png");
 
   const download = () => {
     if (format === "png") {

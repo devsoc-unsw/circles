@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Layout } from "antd";
 import { FeedbackBtn } from "./components/feedbackBtn/FeedbackBtn";
@@ -14,7 +14,7 @@ import "./axios";
 const { Content } = Layout;
 
 const App = () => {
-  const [loading, setLoading] = React.useState(true);
+  const [loading, setLoading] = useState(true);
 
   // light mode is always on
   document.body.classList.add("light");
