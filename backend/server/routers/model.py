@@ -39,6 +39,7 @@ class CourseDetails(BaseModel):
     raw_requirements: str
     exclusions: dict
     path_to: dict
+    handbook_note: str
     terms: list
     gen_ed: int
     path_from: dict
@@ -60,7 +61,7 @@ class UserData(BaseModel):
 class CourseState(BaseModel):
     is_accurate: bool
     unlocked: bool
-    handbookNote: str
+    handbook_note: str
     warnings: list
 
 
@@ -77,7 +78,7 @@ class CourseTypeState (BaseModel):
 class CourseTypeState(BaseModel):
     is_accurate: bool
     unlocked: bool
-    handbookNote: str
+    handbook_note: str
     warnings: list
     course_type: list[str]
 
@@ -104,7 +105,7 @@ CONDITIONS_PATH = "algorithms/conditions.pkl"
 with open(CONDITIONS_PATH, "rb") as file:
     CONDITIONS: dict[str, CompositeCondition] = load(file)
 
-with open("algorithms/cache/handbookNote.json", "r") as file:
+with open("algorithms/cache/handbook_note.json", "r") as file:
     CACHED_HANDBOOK_NOTE: dict[str, str] = json.load(file)
 
 flexEd = ["3778"]

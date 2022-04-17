@@ -33,7 +33,7 @@ export const handleOnDragEnd = (result, dragEndProps) => {
   const destBox = years[destRow][destTerm];
 
   // === move unplanned course to term ===
-  if (source.droppableId.match(/[0-9]{4}/) === null) {
+  if (source.droppableId.match(/T[0-3]/) === null) {
     dispatch(plannerActions("SET_UNPLANNED", draggableId));
 
     // update destination term box

@@ -106,7 +106,7 @@ async def validateTermPlanner(
                 )
                 coursesState[course] = {
                     "is_accurate": is_answer_accurate,
-                    "handbookNote": CACHED_HANDBOOK_NOTE.get(course, ""),
+                    "handbook_note": CACHED_HANDBOOK_NOTE.get(course, ""),
                     "unlocked": unlocked,
                     "warnings": warnings if not inPast else [],
                 }

@@ -50,13 +50,13 @@ def SENG_2991(conditions):
 
     "processed": "COMP1511 && COMP1531 && COMP2521 && 3707 && SENGAH"
 
-    "handbookNote": "Must be in an approved workplace arrangement"
+    "handbook_note": "Must be in an approved workplace arrangement"
     """
 
     return {
         "original": conditions["original"],
         "processed": "COMP1511 && COMP1531 && COMP2521 && 3707 && SENGAH",
-        "handbookNote": "Must be in an approved workplace arrangement"
+        "handbook_note": "Must be in an approved workplace arrangement"
     }
 
 
@@ -66,13 +66,13 @@ def SENG_3991(conditions):
 
     "processed": "3707 && SENGAH && SENG2011 && SENG2021 && DESN2000 && COMP2511 && COMP2041 && SENG2991"
 
-    "handbookNote": "Must currently be enrolled in the Co-op program and completed attendance of IT Reflection Workshop (facilitated by Co-op Program)"
+    "handbook_note": "Must currently be enrolled in the Co-op program and completed attendance of IT Reflection Workshop (facilitated by Co-op Program)"
     """
 
     return {
         "original": conditions["original"],
         "processed": "3707 && SENGAH && SENG2011 && SENG2021 && DESN2000 && COMP2511 && COMP2041 && SENG2991",
-        "handbookNote": "Must currently be enrolled in the Co-op program and completed attendance of IT Reflection Workshop (facilitated by Co-op Program)"
+        "handbook_note": "Must currently be enrolled in the Co-op program and completed attendance of IT Reflection Workshop (facilitated by Co-op Program)"
     }
 
 
@@ -82,12 +82,12 @@ def SENG_3992(conditions):
 
     "processed": "3707 && SENGAH && SENG3011 && SENG2991 && SENG3991"
 
-    "handbookNote": "Must currently be enrolled in the Co-op program"
+    "handbook_note": "Must currently be enrolled in the Co-op program"
     """
     return {
         "original": conditions["original"],
         "processed": "3707 && SENGAH && SENG3011 && SENG2991 && SENG3991",
-        "handbookNote": "Must currently be enrolled in the Co-op program"
+        "handbook_note": "Must currently be enrolled in the Co-op program"
     }
 
 

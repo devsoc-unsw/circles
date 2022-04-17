@@ -20,7 +20,7 @@ CONDITIONS_PROCESSED_FILE = "./data/final_data/conditionsProcessed.json"
 
 
 # OUTPUT SOURCES
-CACHED_WARNINGS_FILE = "./algorithms/cache/handbookNote.json"
+CACHED_WARNINGS_FILE = "./algorithms/cache/handbook_note.json"
 
 MAPPINGS_FILE = "./algorithms/cache/mappings.json"
 

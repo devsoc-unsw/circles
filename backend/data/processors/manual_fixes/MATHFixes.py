@@ -98,13 +98,13 @@ def MATH_1099(condition):
 
     "processed": 3956 || 3959
 
-    "handbookNote": Must be a Co-Op Scholar
+    "handbook_note": Must be a Co-Op Scholar
     """
 
     return {
         "original": condition["original"],
         "processed": "3956 || 3959",
-        "handbookNote": "Must be a Co-Op Scholar"
+        "handbook_note": "Must be a Co-Op Scholar"
     }
 
 def MATH_2111():
@@ -257,13 +257,13 @@ def MATH_3611_3701(condition):
     """
     "original": "Prerequisite: 12 UOC of Level 2 Mathematics with an average mark of at least 70, including MATH2111 or MATH2011 (CR) or MATH2510 (CR), or permission from the Head of Department.<br/><br/>"
     "processed": "12UOC in L2 Mathematics with an average 70GRADE && MATH2111 || 65GRADE in MATH2011 || 65GRADE in MATH2510 || permission from the Head of Department"
-    "handbookNote": "Can circumvent prerequisites with permission from Head of Department"
+    "handbook_note": "Can circumvent prerequisites with permission from Head of Department"
     """
 
     return {
         "original": condition["original"],
         "processed": "12UOC in L2 MATH && 70WAM in L2 MATH && (MATH2111 || 65GRADE in MATH2011 || 65GRADE in MATH2510)",
-        "handbookNote": "Can circumvent prerequisites with permission from Head of Department"
+        "handbook_note": "Can circumvent prerequisites with permission from Head of Department"
     }
 
 
@@ -276,7 +276,7 @@ def MATH_3711(condition):
     return {
         "original": condition["original"],
         "processed": "12UOC in L2 MATH && 70WAM in L2 MATH && (MATH2601 || 65GRADE in MATH2501)",
-        "handbookNote": "Can circumvent prerequisites with permission from Head of Department"
+        "handbook_note": "Can circumvent prerequisites with permission from Head of Department"
     }
 
 

@@ -85,7 +85,7 @@ run = {
     "cache": {
         "conditions": cache_conditions_pkl_file,
         "exclusion": cache_exclusions,
-        "handbookNote": cache_handbook_note,
+        "handbook_note": cache_handbook_note,
         "mapping": cache_mappings,
         "program": cache_program_mappings,
     },

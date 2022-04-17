@@ -14,13 +14,9 @@ const UnplannedColumn = () => {
 
   return (
     <div className="unplannedColumn">
-      <div className="gridItem" style={{ marginBottom: "0.5em" }}>
-        Unplanned
-      </div>
       <Collapse className="collapse" ghost={theme === "dark"}>
         <Panel header="Unplanned" key="unplanned">
-          {Object.keys(unplanned)
-            .sort()
+          {unplanned.sort()
             .map((course, courseIndex) => (
               <Droppable droppableId={course} isDropDisabled>
                 {(provided) => (

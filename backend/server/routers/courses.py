@@ -139,6 +139,7 @@ def getCourse(courseCode: str):
         )
     result.setdefault("school", None)
     result['is_accurate'] = CONDITIONS.get(courseCode) is not None
+    result['handbook_note'] = CACHED_HANDBOOK_NOTE.get(courseCode, "")
     del result["_id"]
 
     return result
@@ -236,7 +237,7 @@ def regex_search(search_string: str):
                         "COMP9302": {
                             "is_accurate": True,
                             "unlocked": True,
-                            "handbookNote": "This course can only be taken in the final term of your program.",
+                            "handbook_note": "This course can only be taken in the final term of your program.",
                             "warnings": [],
                         }
                     }
@@ -261,7 +262,7 @@ def getAllUnlocked(userData: UserData):
             coursesState[course] = {
                 "is_accurate": condition is not None,
                 "unlocked": result,
-                "handbookNote": CACHED_HANDBOOK_NOTE.get(course, ""),
+                "handbook_note": CACHED_HANDBOOK_NOTE.get(course, ""),
                 "warnings": warnings,
             }
 

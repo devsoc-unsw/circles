@@ -79,12 +79,12 @@ def ACCT_3708(condition):
 
     "processed": "ACCT2542",
 
-    "handbookNote": "You need approval from the School of Accounting, Auditing and Taxation to enrol in this course"
+    "handbook_note": "You need approval from the School of Accounting, Auditing and Taxation to enrol in this course"
     """
     return {
         "original": condition["original"],
         "processed": "ACCT2542",
-        "handbookNote": "You need approval from the School of Accounting, Auditing and Taxation to enrol in this course."
+        "handbook_note": "You need approval from the School of Accounting, Auditing and Taxation to enrol in this course."
     }
 
 

@@ -8,7 +8,7 @@ import {
 // set up hidden object
 const generateHiddenInit = (startYear, numYears) => {
   const hiddenInit = {};
-  for (let i = 0; i < numYears; i++) {
+  for (let i = 0; i < numYears - 1; i++) {
     hiddenInit[startYear + i] = false;
   }
   return hiddenInit;
@@ -88,16 +88,14 @@ const plannerReducer = (state = initialState, action) => {
       return stateCopy;
 
     case "ADD_TO_PLANNED":
-      const { code, data, position } = action.payload;
+      const { code, position } = action.payload;
+      stateCopy = { ...state };
       const [yearNum, termNum] = position;
-      if (!state.courses[code]) {
-        state.courses.set(code, data);
-      }
 
-      state.years[yearNum][termNum].push(code);
+      stateCopy.years[yearNum][termNum].push(code);
       // Add course data to courses
-      setInLocalStorage(state);
-      return state;
+      setInLocalStorage(stateCopy);
+      return stateCopy;
 
     case "ADD_CORE_COURSES":
       stateCopy = {
@@ -123,9 +121,8 @@ const plannerReducer = (state = initialState, action) => {
         coursesCpy.get(course).isAccurate = action.payload[course].is_accurate;
         coursesCpy.get(course).isUnlocked = action.payload[course].unlocked;
         coursesCpy.get(course).warnings = action.payload[course].warnings;
-        coursesCpy.get(course).handbookNote = action.payload[course].handbookNote;
+        coursesCpy.get(course).handbookNote = action.payload[course].handbook_note;
       });
-      setInLocalStorage(stateCopy);
       return { ...state, courses: coursesCpy };
 
     case "SET_UNPLANNED":
@@ -194,7 +191,6 @@ const plannerReducer = (state = initialState, action) => {
       const { course, term } = action.payload;
       const courseInfo = state.courses.get(course);
       courseInfo.plannedFor = term;
-      // courseInfo["warning"] = warning;
       const updatedCourses = new Map(state.courses).set(course, courseInfo);
       stateCopy = { ...state, courses: updatedCourses };
       setInLocalStorage(stateCopy);

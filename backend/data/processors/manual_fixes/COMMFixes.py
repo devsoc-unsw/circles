@@ -76,13 +76,13 @@ def COMM_1040(conditions):
 
     "processed": "",
 
-    "handbookNote": "Students must be in Good Academic Standing"
+    "handbook_note": "Students must be in Good Academic Standing"
     """
 
     return {
         "original": conditions["original"],
         "processed": "",
-        "handbookNote": "Students must be in Good Academic Standing"
+        "handbook_note": "Students must be in Good Academic Standing"
     }
 
 
@@ -110,7 +110,7 @@ def COMM_1110_1120_1140(conditions):
     return {
         "original": conditions["original"],
         "processed": "",
-        "handbookNote": "Only available to single && double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 && 3"
+        "handbook_note": "Only available to single && double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 && 3"
     }
 
 
@@ -124,7 +124,7 @@ def COMM_1150(conditions):
     return {
         "original": conditions["original"],
         "processed": "COMM1100",
-        "handbookNote": "Only available to single and double degree Business School students in Term 2. Offered to non-Business School students in Term 3."
+        "handbook_note": "Only available to single and double degree Business School students in Term 2. Offered to non-Business School students in Term 3."
     }
 
 
@@ -137,7 +137,7 @@ def COMM_1170_1180(conditions):
     return {
         "original": conditions["original"],
         "processed": "COMM1140",
-        "handbookNote": "Only available to single && double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 && 3"
+        "handbook_note": "Only available to single && double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 && 3"
     }
 
 
@@ -151,7 +151,7 @@ def COMM_1190(conditions):
     return {
         "original": conditions["original"],
         "processed": "COMM1110 || ECON1203 || MATH1031 || MATH1041 || MATH1131 || MATH1141 || MATH1151",
-        "handbookNote": "Only available to single && double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 && 3"
+        "handbook_note": "Only available to single && double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 && 3"
     }
 
 
@@ -164,7 +164,7 @@ def COMM_1999(conditions):
     return {
         "original": conditions["original"],
         "processed": "COMM0999",
-        "handbookNote": "You must have completed 30UOC of Integrated First Year Core"
+        "handbook_note": "You must have completed 30UOC of Integrated First Year Core"
     }
 
 
@@ -172,13 +172,13 @@ def COMM_2222(conditions):
     """
         "original": "Pre-requisite: In Business degree, COMM6000 Career Accelerator or COMM1999 First Year Portfolio, WAM 65+, minimum 72 UOC completed, room in degree for course, Good academic standing.<br/>Excluded: Co-op students<br/>It is recommended a progression check is completed prior to enrolling.<br/><br/>",
         "processed": "(COMM6000 || COMM1999) && ZBUS# && 65WAM && 72UOC",
-        "handbookNote": "Good Academic Standing. Co-op students are excluded. It is recommended to do a progression check prior to enrolling"
+        "handbook_note": "Good Academic Standing. Co-op students are excluded. It is recommended to do a progression check prior to enrolling"
     """
 
     return {
         "original": conditions["original"],
         "processed": "(COMM6000 || COMM1999) && ZBUS# && 65WAM && 72UOC",
-        "handbookNote": "Good Academic Standing. Co-op students are excluded. It is recommended to do a progression check prior to enrolling"
+        "handbook_note": "Good Academic Standing. Co-op students are excluded. It is recommended to do a progression check prior to enrolling"
     }
 
 
@@ -191,7 +191,7 @@ def COMM_2233(conditions):
     return {
         "original": conditions["original"],
         "processed": "(COMM6000 || COMM1999) && 48UOC",
-        "handbookNote": "It is recommended to do a progression check prior to enrolling."
+        "handbook_note": "It is recommended to do a progression check prior to enrolling."
     }
 
 
@@ -208,7 +208,7 @@ def COMM_2244(conditions):
     return {
         "original": conditions["original"],
         "processed": "(COMM6000 || COMM1999) && 65WAM && 48UOC",
-        "handbookNote": "Students must be in good academic standing."
+        "handbook_note": "Students must be in good academic standing."
     }
 
 
@@ -221,7 +221,7 @@ def COMM_3020(conditions):
     return {
         "original": conditions["original"],
         "processed": "(COMM6000 || COMM1999) && 65WAM && 72UOC",
-        "handbookNote": "Students must be in good academic standing. This course is by application only. Please visit Business School website for more information."
+        "handbook_note": "Students must be in good academic standing. This course is by application only. Please visit Business School website for more information."
     }
 
 
@@ -238,13 +238,13 @@ def COMM_3090(conditions):
     """
         "original": "Students are expected to be in their final year of a Bachelor of Commerce single or dual degree with at least 108 UOC completed.<br/><br/>",
         "processed": "108UOC",
-        "handbookNote": "Students are expected to be in their final year of a Bachelor of Commerce single or dual degree with at least 108 UOC completed."
+        "handbook_note": "Students are expected to be in their final year of a Bachelor of Commerce single or dual degree with at least 108 UOC completed."
     """
 
     return {
         "original": conditions["original"],
         "processed": "108UOC",
-        "handbookNote": "Students are expected to be in their final year of a Bachelor of Commerce single or dual degree"
+        "handbook_note": "Students are expected to be in their final year of a Bachelor of Commerce single or dual degree"
 
     }
 
@@ -257,7 +257,7 @@ def COMM_3091(conditions):
     return {
         "original": conditions["original"],
         "processed": "72UOC && COMM1999 && COMM#",
-        "handbookNote": "Students must be in good academic standing."
+        "handbook_note": "Students must be in good academic standing."
     }
 
 
@@ -273,7 +273,7 @@ def COMM_3101(conditions):
     return {
         "original": conditions["original"],
         "processed": "48UOC",
-        "handbookNote": "This course is by application only.Please contact the Co-op office for more information. Students who have completed DIPP1510 or COMM2222 or are in Business Co-Op programs are excluded from this course."
+        "handbook_note": "This course is by application only.Please contact the Co-op office for more information. Students who have completed DIPP1510 or COMM2222 or are in Business Co-Op programs are excluded from this course."
     }
 
 
@@ -288,7 +288,7 @@ def COMM_3202(conditions):
     return {
         "original": conditions["original"],
         "processed": "COMM3101 || COMM2101",
-        "handbookNote": "This course is by application only. Please contact the Co-op office for more information. Excluded:DIPP1510, COMM2222, Business Co-Op programs."
+        "handbook_note": "This course is by application only. Please contact the Co-op office for more information. Excluded:DIPP1510, COMM2222, Business Co-Op programs."
     }
 
 
@@ -301,7 +301,7 @@ def COMM_3303(conditions):
     return {
         "original": conditions["original"],
         "processed": "",
-        "handbookNote": "This course is by application only. Please contact the Co-op office for more information."
+        "handbook_note": "This course is by application only. Please contact the Co-op office for more information."
     }
 
 
@@ -323,7 +323,7 @@ def COMM_3900(conditions):
     return {
         "original": conditions["original"],
         "processed": "COMM6000 && 108UOC",
-        "handbookNote": "You must have completed all First Year core"
+        "handbook_note": "You must have completed all First Year core"
     }
 
 
@@ -336,7 +336,7 @@ def COMM_3999(conditions):
     return {
         "original": conditions["original"],
         "processed": "COMM1999 && 72UOC in ZBUS && COMM#",
-        "handbookNote": "Studetns must be in their final year"
+        "handbook_note": "Studetns must be in their final year"
     }
 
 

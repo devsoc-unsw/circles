@@ -203,7 +203,7 @@ const CourseDescription = ({ structure }) => {
                 NOTE: this course is discontinued - if a current course exists, pick that instead
               </Text>
               )
-}
+            }
             <Title level={3} className="text">
               Overview
             </Title>

@@ -66,13 +66,13 @@ def ENGG_2_4600(conditions):
 
     "processed": ""
 
-    "handbookNote": "Please refer to the course overview section for information on requirements"
+    "handbook_note": "Please refer to the course overview section for information on requirements"
     """
 
     return {
         "original": conditions["original"],
         "processed": "",
-        "handbookNote": "Please refer to the course overview section for information on requirements"
+        "handbook_note": "Please refer to the course overview section for information on requirements"
     }
 
 

@@ -54,8 +54,8 @@ def cache_handbook_note():
     cached_handbook_note = {}
 
     for course, data in conditions.items():
-        if "handbookNote" in data:
-            cached_handbook_note[course] = data["handbookNote"]
+        if "handbook_note" in data:
+            cached_handbook_note[course] = data["handbook_note"]
 
     write_data(cached_handbook_note, CACHED_WARNINGS_FILE)
 
