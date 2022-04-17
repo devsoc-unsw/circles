@@ -17,7 +17,6 @@ const DraggableCourse = ({ code, index }) => {
     prereqs, title, isUnlocked, plannedFor, isLegacy, isAccurate, termsOffered, handbookNote,
   } = courses.get(code);
   const warningMessage = courses.get(code).warnings;
-  console.log(`handbook note for ${title}: ${handbookNote}`);
   const isOffered = plannedFor ? termsOffered.includes(plannedFor.match(/T[0-3]/)[0]) : true;
   const BEwarnings = handbookNote !== "" || !!warningMessage.length;
 
