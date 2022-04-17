@@ -7,7 +7,7 @@ const prepareUserPayload = (degree, planner) => {
   if (minor !== "") specialisations[minor] = 1;
 
   const selectedCourses = {};
-  Object.keys(courses).forEach((course) => {
+  Array.from(courses.keys()).forEach((course) => {
     selectedCourses[course] = 70;
   });
 

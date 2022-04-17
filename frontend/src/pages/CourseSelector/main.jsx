@@ -9,7 +9,7 @@ import "./main.less";
 import SearchCourse from "./SearchCourse";
 
 const CourseSelector = () => {
-  const [structure, setStructure] = useState(null);
+  const [structure, setStructure] = useState({});
   const [showLockedCourses, setShowLockedCourses] = useState(false);
 
   const {
@@ -19,9 +19,8 @@ const CourseSelector = () => {
   useEffect(() => {
     // get structure of degree
     const fetchStructure = async () => {
-      const endpoint = `/programs/getStructure/${programCode}/${specialisation}${minor && `/${minor}`}`;
       try {
-        const res1 = await axios.get(endpoint);
+        const res1 = await axios.get(`/programs/getStructure/${programCode}/${specialisation}${minor && `/${minor}`}`);
         setStructure(res1.data.structure);
       } catch (err) {
         // eslint-disable-next-line no-console

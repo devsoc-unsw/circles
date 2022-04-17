@@ -31,12 +31,12 @@ const SaveMenu = ({ plannerRef }) => {
   return (
     <div className="settingsMenu" style={{ width: "180px" }}>
       <div className="settingsTitleContainer">
-        <Title level={2} class="text" strong className="settingsTitle">
+        <Title level={2} strong className="text settingsTitle">
           Export
         </Title>
       </div>
       <div className="settingsEntry">
-        <Title level={3} class="text settingsSubtitle">
+        <Title level={3} className="text settingsSubtitle">
           File Type
         </Title>
         <Select

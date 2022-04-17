@@ -135,12 +135,11 @@ const CourseDescription = ({ structure }) => {
         isLegacy: course.is_legacy,
         isUnlocked: true,
         warnings: [],
-        handbook_note: "",
+        handbookNote: "",
         isAccurate: course.is_accurate,
       },
     };
     dispatch(plannerActions("ADD_TO_UNPLANNED", data));
-    // dispatch(setUnplannedCourses(id));
     setLoading(true);
     setTimeout(() => {
       setLoading(false);

@@ -64,13 +64,13 @@ def MARK_3054(conditions):
 
     "processed": "ECON1203 || MARK2052",
 
-    "handbook_note": "If students can demonstrate they have equivalent statistics knowledge, but haven't completed any of the listed pre-requisite courses,
+    "handbookNote": "If students can demonstrate they have equivalent statistics knowledge, but haven't completed any of the listed pre-requisite courses,
     they can seek permission from Program Coordinator by submitting an online form.<br/><br/>"
     """
     return {
         "original": conditions["original"],
         "processed": "ECON1203 || MARK2052",
-        "handbook_note": "If students can demonstrate they have equivalent statistics knowledge, but haven't completed any of the listed pre-requisite courses, they can seek permission from Program Coordinator by submitting an online form"
+        "handbookNote": "If students can demonstrate they have equivalent statistics knowledge, but haven't completed any of the listed pre-requisite courses, they can seek permission from Program Coordinator by submitting an online form"
     }
 
 
@@ -80,13 +80,13 @@ def MARK_3085(conditions):
 
     "processed": "(MARK1012 || MARK2012) || (ECON1203 || COMM1110).
 
-    "handbook_note": "If students can demonstrate they have equivalent statistics knowledge, but haven't completed any of the listed pre-requisite courses, they can seek permission from Program Coordinator by submitting an online form"
+    "handbookNote": "If students can demonstrate they have equivalent statistics knowledge, but haven't completed any of the listed pre-requisite courses, they can seek permission from Program Coordinator by submitting an online form"
     """
 
     return {
         "original": conditions["original"],
         "processed": "(MARK1012 || MARK2012) || (ECON1203 || COMM1110)",
-        "handbook_note": "If students can demonstrate they have equivalent statistics knowledge, but haven't completed any of the listed pre-requisite courses, they can seek permission from Program Coordinator by submitting an online form"
+        "handbookNote": "If students can demonstrate they have equivalent statistics knowledge, but haven't completed any of the listed pre-requisite courses, they can seek permission from Program Coordinator by submitting an online form"
     }
 
 
@@ -96,12 +96,12 @@ def MARK_3087_3088_3089(conditions):
 
     "processed": "ECON1203 || INFS1609 || MATH1041 || MATH1231 || MATH1241 || MATH1251 || MARK2052 || COMM2050 || COMM2501 || INFS2605 || INFS2609."
 
-    "handbook_note": <br/>Students with equivalent Statistics knowledge can seek pre-requisite waiver via webforms<br/><br/>",
+    "handbookNote": <br/>Students with equivalent Statistics knowledge can seek pre-requisite waiver via webforms<br/><br/>",
     """
     return {
         "original": conditions["original"],
         "processed": "ECON1203 || INFS1609 || MATH1041 || MATH1231 || MATH1241 || MATH1251 || MARK2052 || COMM2050 || COMM2501 || INFS2605 || INFS2609",
-        "handbook_note": "Students with equivalent Statistics knowledge can seek pre-requisite waiver via webforms"
+        "handbookNote": "Students with equivalent Statistics knowledge can seek pre-requisite waiver via webforms"
     }
 
 
@@ -120,13 +120,13 @@ def MARK_4210_4211_4212(conditions):
 
     "processed": ""
 
-    "handbook_note": "Admission to Honours in Marketing",
+    "handbookNote": "Admission to Honours in Marketing",
     """
 
     return {
         "original": conditions["original"],
         "processed": "",
-        "handbook_note": "Requires Admission to Honours in Marketing"
+        "handbookNote": "Requires Admission to Honours in Marketing"
     }
 
 

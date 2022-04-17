@@ -49,7 +49,7 @@ const TermBox = ({ yearIndex, termNo }) => {
             isLegacy: info.is_legacy,
             isUnlocked: true,
             warnings: [],
-            handbook_note: "",
+            handbookNote: "",
           },
           position: [yearIndex, termNo],
         };

@@ -70,7 +70,6 @@ export const handleOnDragEnd = (result, dragEndProps) => {
   newYears[srcRow][srcTerm] = srcCoursesCpy;
   newYears[destRow][destTerm] = destCoursesCpy;
   dispatch(plannerActions("SET_YEARS", newYears));
-  // updateWarnings(newYears, startYear, courses, dispatch);
 };
 
 export const handleOnDragStart = (

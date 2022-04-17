@@ -22,7 +22,7 @@ const isAllEmpty = (years) => (
 const openNotification = () => {
   const args = {
     message: "Your terms are looking a little empty",
-    description: "Add courses from the course selector to the term planner",
+    description: "Add courses from the course selector to the term planner by dragging from the unplanned column",
     duration: 3,
     className: "text helpNotif",
     placement: "topRight",

@@ -9,15 +9,17 @@ import {
 const generateHiddenInit = (startYear, numYears) => {
   const hiddenInit = {};
   for (let i = 0; i < numYears; i++) {
-    hiddenInit[parseInt(startYear, 10) + parseInt(i, 10)] = false;
+    hiddenInit[startYear + i] = false;
   }
   return hiddenInit;
 };
 
+const fakeStartYear = parseInt(new Date().getFullYear(), 10);
+const fakeNumYears = 3;
 let initialState = {
   unplanned: [],
-  startYear: parseInt(new Date().getFullYear(), 10),
-  numYears: 3,
+  startYear: fakeStartYear,
+  numYears: fakeNumYears,
   isSummerEnabled: false,
   years: [
     {
@@ -33,7 +35,7 @@ let initialState = {
   courses: new Map(),
   plannedCourses: new Map(),
   completedTerms: new Map(),
-  hidden: generateHiddenInit(3, parseInt(new Date().getFullYear(), 10)),
+  hidden: generateHiddenInit(fakeStartYear, fakeNumYears),
   areYearsHidden: false,
 };
 
@@ -62,7 +64,7 @@ const plannerReducer = (state = initialState, action) => {
     nCourses.get(code).plannedFor = null;
     nCourses.get(code).isUnlocked = true;
     nCourses.get(code).warnings = [];
-    nCourses.get(code).handbook_note = "";
+    nCourses.get(code).handbookNote = "";
     nCourses.get(code).isAccurate = true;
 
     stateCopy = {
@@ -76,12 +78,10 @@ const plannerReducer = (state = initialState, action) => {
   switch (action.type) {
     case "ADD_TO_UNPLANNED":
       const { courseCode, courseData } = action.payload;
-      // Add course data to courses
       newCourses = new Map(state.courses);
-      if (!state.courses[courseCode]) {
-        newCourses.set(courseCode, courseData);
-      }
-      // Append course code onto unplanned
+
+      newCourses.set(courseCode, courseData);
+
       state.unplanned.push(courseCode);
       stateCopy = { ...state, courses: newCourses };
       setInLocalStorage(stateCopy);
@@ -119,11 +119,11 @@ const plannerReducer = (state = initialState, action) => {
 
     case "TOGGLE_WARNINGS":
       const coursesCpy = new Map(state.courses);
-      action.payload.forEach((course) => {
+      Object.keys(action.payload).forEach((course) => {
         coursesCpy.get(course).isAccurate = action.payload[course].is_accurate;
         coursesCpy.get(course).isUnlocked = action.payload[course].unlocked;
         coursesCpy.get(course).warnings = action.payload[course].warnings;
-        coursesCpy.get(course).handbook_note = action.payload[course].handbook_note;
+        coursesCpy.get(course).handbookNote = action.payload[course].handbookNote;
       });
       return { ...state, courses: coursesCpy };
 
@@ -265,34 +265,28 @@ const plannerReducer = (state = initialState, action) => {
 
     case "SET_DEGREE_LENGTH":
       const newNumYears = action.payload;
-      const dupYears = state.years;
-      const newUnplan = [...state.unplanned];
+      const dupYears = [...state.years];
 
       if (newNumYears === state.numYears) return state;
+
       if (newNumYears > state.numYears) {
-        // add empty years to the end
-        const diff = newNumYears - state.numYears;
-        for (let i = 0; i < diff; i++) {
+        // add new empty years
+        for (let i = 0; i < newNumYears - state.numYears; i++) {
           dupYears.push({
             T0: [], T1: [], T2: [], T3: [],
           });
         }
       } else {
         // remove extra years
-        for (let i = state.numYears; i >= 1; i--) {
-          if (i > newNumYears) {
-            // unschedule  courses in year
-            const yearToBeRemoved = state.years[i - 1];
-            Object.values(yearToBeRemoved).forEach((t) => {
+        for (let i = state.numYears; i >= newNumYears; i--) {
+          Object.values(state.years[i - 1])
+            .forEach((t) => {
               t.forEach((c) => {
-                updatedUnplan.push(c);
-                state.courses.get(c).plannedFor = null; // TODO: generate new state from scratch.
-                state.courses.get(c).warning = true;
+                state.courses.get(c).plannedFor = null;
               });
             });
-            // remove year
-            dupYears.splice(i - 1, 1);
-          }
+          // remove year
+          dupYears.splice(i - 1, 1);
         }
       }
 
@@ -300,8 +294,7 @@ const plannerReducer = (state = initialState, action) => {
         ...state,
         years: dupYears,
         numYears: newNumYears,
-        unplanned: newUnplan,
-        hidden: generateHiddenInit(dupYears, newNumYears),
+        hidden: generateHiddenInit(state.startYear, newNumYears),
       };
       setInLocalStorage(stateCopy);
       return stateCopy;

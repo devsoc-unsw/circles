@@ -21,14 +21,14 @@ const HelpMenu = () => {
   return (
     <div className="helpMenu">
       <div className="helpTitleContainer">
-        <Title level={2} class="text" strong className="settingsTitle">
+        <Title level={2} strong className="text settingsTitle">
           Term Planner Tips (Hover to Play)
         </Title>
         <Divider className="settingsDivider" />
       </div>
       <div>
         <div className="settingsEntry">
-          <Title level={3} class="text settingsSubtitle">
+          <Title level={3} className="text settingsSubtitle">
             1. Drag and Drop Courses
           </Title>
         </div>
@@ -42,7 +42,7 @@ const HelpMenu = () => {
       </div>
       <div>
         <div className="settingsEntry">
-          <Title level={3} class="text settingsSubtitle">
+          <Title level={3} className="text settingsSubtitle">
             2. Right Click Courses for More Actions
           </Title>
         </div>
@@ -56,7 +56,7 @@ const HelpMenu = () => {
       </div>
       <div>
         <div className="settingsEntry">
-          <Title level={3} class="text settingsSubtitle">
+          <Title level={3} className="text settingsSubtitle">
             3. Hide Year
           </Title>
         </div>
@@ -70,7 +70,7 @@ const HelpMenu = () => {
       </div>
       <div>
         <div className="settingsEntry">
-          <Title level={3} class="text settingsSubtitle">
+          <Title level={3} className="text settingsSubtitle">
             4. Additional Features
           </Title>
         </div>

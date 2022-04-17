@@ -12,14 +12,10 @@ const DraggableCourse = ({ code, index }) => {
   const { Text } = Typography;
   const { courses, isSummerEnabled, completedTerms } = useSelector((state) => state.planner);
   const theme = useSelector((state) => state.theme);
-  const courseName = courses.get(code).title;
   // prereqs are populated in CourseDescription.jsx via course.raw_requirements
-  const { prereqs } = courses.get(code);
-  const prereqDisplay = prereqs.trim();
   const {
-    isUnlocked, plannedFor, isLegacy, isAccurate, termsOffered,
+    prereqs, title, isUnlocked, plannedFor, isLegacy, isAccurate, termsOffered, handbookNote,
   } = courses.get(code);
-  const handbookNote = courses.get(code).handbook_note;
   const warningMessage = courses.get(code).warnings;
 
   const isOffered = plannedFor ? termsOffered.includes(plannedFor.match(/T[0-3]/)[0]) : true;
@@ -81,7 +77,7 @@ const DraggableCourse = ({ code, index }) => {
                   <Text strong className="text">
                     {code}
                   </Text>
-                  <Text className="text">: {courseName} </Text>
+                  <Text className="text">: {title} </Text>
                 </>
               )}
             </div>
@@ -94,7 +90,7 @@ const DraggableCourse = ({ code, index }) => {
       {!isDragDisabled && (isLegacy || !isUnlocked || BEwarnings || !isAccurate || !isOffered) && (
         <ReactTooltip id={code} place="bottom" className="tooltip">
           {isLegacy ? "This course is discontinued. If an equivalent course is currently being offered, please pick that instead."
-            : !isUnlocked ? prereqDisplay
+            : !isUnlocked ? prereqs.trim()
               : !isOffered ? "The course is not offered in this term."
                 : warningMessage !== "" ? warningMessage
                   : handbookNote !== "" ? handbookNote : ""}

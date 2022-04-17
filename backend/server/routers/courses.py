@@ -236,7 +236,7 @@ def regex_search(search_string: str):
                         "COMP9302": {
                             "is_accurate": True,
                             "unlocked": True,
-                            "handbook_note": "This course can only be taken in the final term of your program.",
+                            "handbookNote": "This course can only be taken in the final term of your program.",
                             "warnings": [],
                         }
                     }
@@ -261,7 +261,7 @@ def getAllUnlocked(userData: UserData):
             coursesState[course] = {
                 "is_accurate": condition is not None,
                 "unlocked": result,
-                "handbook_note": CACHED_HANDBOOK_NOTE.get(course, ""),
+                "handbookNote": CACHED_HANDBOOK_NOTE.get(course, ""),
                 "warnings": warnings,
             }
 

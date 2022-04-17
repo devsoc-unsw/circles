@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { Tooltip, Menu, Button } from "antd";
@@ -29,7 +29,6 @@ const CourseMenu = ({ structure, showLockedCourses }) => {
 
   // get courses in planner
   const planner = useSelector((state) => state.planner);
-  const coursesInPlanner = planner.courses;
   const degree = useSelector((state) => state.degree);
 
   const [isPageLoaded, setIsPageLoaded] = useState(false);
@@ -73,16 +72,16 @@ const CourseMenu = ({ structure, showLockedCourses }) => {
               newMenu[group][subgroup].sort(sortMenu);
 
               // add UOC to curr
-              if (coursesInPlanner.get(courseCode)) {
+              if (planner.courses.get(courseCode)) {
                 newCoursesUnits[group][subgroup].curr
-                    += coursesInPlanner.get(courseCode).UOC;
+                    += planner.courses.get(courseCode).UOC;
               }
             });
           } else {
             // If there is no specified course list for the subgroup, then manually
             // show the added courses on the menu.
-            Object.keys(coursesInPlanner).forEach((courseCode) => {
-              const courseData = coursesInPlanner.get(courseCode);
+            Object.keys(planner.courses).forEach((courseCode) => {
+              const courseData = planner.courses.get(courseCode);
               if (courseData && courseData.type === subgroup) {
                 newMenu[group][subgroup].push(courseCode);
                 // add UOC to curr
@@ -106,7 +105,7 @@ const CourseMenu = ({ structure, showLockedCourses }) => {
     setIsPageLoaded(true);
   };
 
-  const getAllUnlocked = async () => {
+  const getAllUnlocked = useCallback(async () => {
     try {
       const res = await axios.post(
         "/courses/getAllUnlocked/",
@@ -118,12 +117,12 @@ const CourseMenu = ({ structure, showLockedCourses }) => {
       // eslint-disable-next-line
       console.log(err);
     }
-  };
+  }, [planner, structure, degree]);
 
   // get all courses
   useEffect(() => {
-    if (structure) { getAllUnlocked(); }
-  }, [structure]);
+    if (structure) getAllUnlocked();
+  }, [structure, getAllUnlocked]);
 
   return (
     <div className="cs-menu-root">
@@ -138,9 +137,9 @@ const CourseMenu = ({ structure, showLockedCourses }) => {
             mode="inline"
             className="text"
           >
-            {Object.entries(menuData).map((group, groupEntry) => (
+            {Object.entries(menuData).map(([group, groupEntry]) => (
               <SubMenu key={group} title={group}>
-                {Object.entries(groupEntry).map((subGroup, subGroupEntry) => (
+                {Object.entries(groupEntry).map(([subGroup, subGroupEntry]) => (
                   <Menu.ItemGroup
                     key={subGroup}
                     title={(
@@ -155,7 +154,7 @@ const CourseMenu = ({ structure, showLockedCourses }) => {
                       {subGroupEntry.map(
                         (course) => (course.unlocked || showLockedCourses) && (
                         <MenuItem
-                          selected={coursesInPlanner.get(course.courseCode)}
+                          selected={planner.courses.get(course.courseCode) !== undefined}
                           courseCode={course.courseCode}
                           accurate={course.accuracy}
                           unlocked={course.unlocked}
@@ -192,13 +191,6 @@ const MenuItem = ({
     setActiveCourse(courseCode);
   };
 
-  const renderAccurateNote = () => {
-    if (!accurate) {
-      return <WarningIcon text="We couldn't parse the requirement for this course. Please manually check if you have the correct prerequisites to unlock it." />;
-    }
-    return <div />;
-  };
-
   const addToPlanner = async (e, plannedCourse) => {
     e.stopPropagation();
     const [course] = await axiosRequest(
@@ -218,7 +210,7 @@ const MenuItem = ({
         isLegacy: course.is_legacy,
         isUnlocked: true,
         warnings: [],
-        handbook_note: "",
+        handbookNote: "",
         isAccurate: course.is_accurate,
       },
     };
@@ -229,7 +221,7 @@ const MenuItem = ({
     <motion.div transition={{ ease: "easeOut", duration: 0.3 }} layout>
       <Menu.Item
         className={`text menuItemText
-          ${selected !== undefined && "bold"}
+          ${selected && "bold"}
           ${activeCourse === courseCode && "activeCourse"}
           ${!unlocked && "locked"}`}
         key={courseCode}
@@ -237,7 +229,13 @@ const MenuItem = ({
       >
         <div className="menuItemContainer">
           <div>
-            {courseCode} {renderAccurateNote()}{" "}{!unlocked && <Padlock width="10px" />}
+            {`${courseCode} `}
+            {!accurate && (
+              <WarningIcon
+                text="We couldn't parse the requirement for this course. Please manually check if you have the correct prerequisites to unlock it."
+              />
+            )}
+            {!unlocked && <Padlock width="10px" />}
           </div>
           {!selected && (
             <Tooltip title="Add to Planner" placement="bottom">

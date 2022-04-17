@@ -19,12 +19,12 @@ def test_validateTermPlanner_valid_progress():
     x = requests.post('http://127.0.0.1:8000/planner/validateTermPlanner', json=PLANS["simple_year"])
     assert x.status_code == 200
     assert x.json()['courses_state'] == {
-        "COMP1511": {"is_accurate" : True, "handbook_note": "", "unlocked": True, "warnings": []},
-        "MATH1141": {"is_accurate" : True, "handbook_note": "", "unlocked": True, "warnings": []},
-        "MATH1081": {"is_accurate" : True, "handbook_note": "", "unlocked": True, "warnings": []},
-        "COMP1521": {"is_accurate" : True, "handbook_note": "", "unlocked": True, "warnings": []},
-        "COMP1531": {"is_accurate" : True, "handbook_note": "", "unlocked": True, "warnings": []},
-        "COMP2521": {"is_accurate" : True, "handbook_note": "", "unlocked": True, "warnings": []},
+        "COMP1511": {"is_accurate" : True, "handbookNote": "", "unlocked": True, "warnings": []},
+        "MATH1141": {"is_accurate" : True, "handbookNote": "", "unlocked": True, "warnings": []},
+        "MATH1081": {"is_accurate" : True, "handbookNote": "", "unlocked": True, "warnings": []},
+        "COMP1521": {"is_accurate" : True, "handbookNote": "", "unlocked": True, "warnings": []},
+        "COMP1531": {"is_accurate" : True, "handbookNote": "", "unlocked": True, "warnings": []},
+        "COMP2521": {"is_accurate" : True, "handbookNote": "", "unlocked": True, "warnings": []},
     }
 
 def test_validateTermPlanner_invalid_progress():
@@ -35,37 +35,37 @@ def test_validateTermPlanner_invalid_progress():
         "COMP1511": {
             "is_accurate": True,
             "unlocked": True,
-            "handbook_note": "",
+            "handbookNote": "",
             "warnings": []
         },
         "MATH1141": {
             "is_accurate": True,
             "unlocked": True,
-            "handbook_note": "",
+            "handbookNote": "",
             "warnings": []
         },
         "MATH1081": {
             "is_accurate": True,
             "unlocked": True,
-            "handbook_note": "",
+            "handbookNote": "",
             "warnings": []
         },
         "COMP1521": {
             "is_accurate": True,
             "unlocked": True,
-            "handbook_note": "",
+            "handbookNote": "",
             "warnings": []
         },
         "COMP2511": {
             "is_accurate": True,
             "unlocked": False,
-            "handbook_note": "",
+            "handbookNote": "",
             "warnings": []
         },
         "COMP4128": {
             "is_accurate": True,
             "unlocked": False,
-            "handbook_note": "",
+            "handbookNote": "",
             "warnings": [
                 "Requires 75 WAM. Your WAM has not been recorded"
             ]
@@ -80,13 +80,13 @@ def test_validateTermPlanner_out_of_order_progress():
         "MATH1241": {
             "is_accurate": True,
             "unlocked": False,
-            "handbook_note": "",
+            "handbookNote": "",
             "warnings": []
         },
         "MATH1141": {
             "is_accurate": True,
             "unlocked": True,
-            "handbook_note": "",
+            "handbookNote": "",
             "warnings": []
         }
     }
@@ -98,37 +98,37 @@ def test_validateTermPlanner_past_term_suppress_warnings():
         "COMP1511": {
             "is_accurate": True,
             "unlocked": True,
-            "handbook_note": "",
+            "handbookNote": "",
             "warnings": []
         },
         "MATH1141": {
             "is_accurate": True,
             "unlocked": True,
-            "handbook_note": "",
+            "handbookNote": "",
             "warnings": []
         },
         "MATH1081": {
             "is_accurate": True,
             "unlocked": True,
-            "handbook_note": "",
+            "handbookNote": "",
             "warnings": []
         },
         "COMP1521": {
             "is_accurate": True,
             "unlocked": True,
-            "handbook_note": "",
+            "handbookNote": "",
             "warnings": []
         },
         "COMP2511": {
             "is_accurate": True,
             "unlocked": False,
-            "handbook_note": "",
+            "handbookNote": "",
             "warnings": []
         },
         "COMP4128": {
             "is_accurate": True,
             "unlocked": False,
-            "handbook_note": "",
+            "handbookNote": "",
             "warnings": []
         }
     }
