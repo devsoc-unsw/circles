@@ -30,4 +30,4 @@ jobs:
         echo "MONGO_INITDB_ROOT_USERNAME=github-ci" >> env/mongodb.env
         echo "MONGO_INITDB_ROOT_PASSWORD=github-ci" >> env/mongodb.env
         echo "REACT_APP_BACKEND_API_BASE_URL=http://localhost:8000/" >> env/frontend.env
-        docker compose up -d frontend
+        docker compose up frontend-prod

@@ -79,9 +79,9 @@ const plannerReducer = (state = initialState, action) => {
     case "ADD_TO_UNPLANNED":
       const { courseCode, courseData } = action.payload;
       newCourses = new Map(state.courses);
-
-      newCourses.set(courseCode, courseData);
-
+      if (!state.courses[courseCode]) {
+        newCourses.set(courseCode, courseData);
+      }
       state.unplanned.push(courseCode);
       stateCopy = { ...state, courses: newCourses };
       setInLocalStorage(stateCopy);
@@ -125,6 +125,7 @@ const plannerReducer = (state = initialState, action) => {
         coursesCpy.get(course).warnings = action.payload[course].warnings;
         coursesCpy.get(course).handbookNote = action.payload[course].handbookNote;
       });
+      setInLocalStorage(stateCopy);
       return { ...state, courses: coursesCpy };
 
     case "SET_UNPLANNED":

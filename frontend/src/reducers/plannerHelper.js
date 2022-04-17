@@ -1,8 +1,8 @@
 export const setInLocalStorage = (state) => {
   const stateCopy = { ...state };
-  const jsonCourses = Array.from(Object.entries(state.courses));
-  const jsonPlannedCourses = Array.from(Object.entries(state.plannedCourses));
-  const jsonCompletedTerms = Array.from(Object.entries(state.completedTerms));
+  const jsonCourses = Array.from(state.courses.entries());
+  const jsonPlannedCourses = Array.from(state.plannedCourses.entries());
+  const jsonCompletedTerms = Array.from(state.completedTerms.entries());
   const jsonHidden = JSON.stringify(state.hidden);
   stateCopy.courses = jsonCourses;
   stateCopy.plannedCourses = jsonPlannedCourses;
