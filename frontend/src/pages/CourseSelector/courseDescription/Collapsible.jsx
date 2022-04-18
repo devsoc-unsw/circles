@@ -37,8 +37,8 @@ export const CollapsibleButton = ({ isCollapsed, setIsCollapsed }) => {
         data-name="Layer
         2"><g
         data-name="arrow-left"><rect
-        width="24"
-        height="24"
+        width="26"
+        height="26"
         opacity="0"
       />
         <path
