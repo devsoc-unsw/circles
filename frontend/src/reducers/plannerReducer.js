@@ -8,7 +8,7 @@ import {
 // set up hidden object
 const generateHiddenInit = (startYear, numYears) => {
   const hiddenInit = {};
-  for (let i = 0; i < numYears - 1; i++) {
+  for (let i = -1; i < numYears - 1; i++) {
     hiddenInit[startYear + i] = false;
   }
   return hiddenInit;

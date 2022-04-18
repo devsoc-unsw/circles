@@ -210,7 +210,7 @@ const MenuItem = ({
         isLegacy: course.is_legacy,
         isUnlocked: true,
         warnings: [],
-        handbookNote: "",
+        handbookNote: course.handbook_note,
         isAccurate: course.is_accurate,
       },
     };

@@ -108,8 +108,5 @@ with open(CONDITIONS_PATH, "rb") as file:
 with open("algorithms/cache/handbook_note.json", "r") as file:
     CACHED_HANDBOOK_NOTE: dict[str, str] = json.load(file)
 
-flexEd = ["3778"]
-
-
 class description(BaseModel):
     description: str

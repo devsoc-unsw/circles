@@ -16,7 +16,7 @@ const validateTermPlanner = (payload) => (dispatch) => {
     .then(({ data }) => {
       dispatch(plannerActions("TOGGLE_WARNINGS", data.courses_state));
     })
-    // eslint-disable-next-line
+    // eslint-disable-next-line no-console
     .catch((err) => console.log(err));
 };
 
