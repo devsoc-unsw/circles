@@ -241,14 +241,14 @@ const CourseDescription = ({ structure }) => {
                 isCollapsed={collapseRequirements}
                 setIsCollapsed={setCollapseRequirements}
               />
-            <Space direction="vertical" style={{ marginBottom: "1rem" }}>
               <div className={calcCollapsibleContentClass(collapseRequirements)}>
+            <Space direction="vertical" style={{ marginBottom: "1rem" }}>
                 <Text>
                 {/* eslint-disable-next-line react/no-danger */}
                   <div dangerouslySetInnerHTML={{ __html: course.raw_requirements || "None", }} />
               </Text>
-              </div>
             </Space>
+            </div>
             {/* <Title level={3} className="text"> */}
             <CollapsibleHeader
               text="Courses you have done to unlock this course"
@@ -258,7 +258,7 @@ const CourseDescription = ({ structure }) => {
             {/* </Title> */}
             <div className={calcCollapsibleContentClass(collapseDone)}>
               {course.path_from && Object.keys(course.path_from).length > 0 ? (
-                <div className={'text course-tag-cont'}>
+              <div className={'text course-tag-cont'}>
                 {Object.keys(course.path_from).map((courseCode) => (
                   <CourseTag key={courseCode} name={courseCode} />
                   ))}

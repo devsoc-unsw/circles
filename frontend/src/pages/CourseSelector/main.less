@@ -67,8 +67,9 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  border-radius: 5px;
+  // border-radius: 5px;
   cursor: pointer;
+  border-bottom: 2px solid black;
   justify-content: space-between;
 }
 
@@ -86,20 +87,25 @@
 
 .collapsible-button {
   transition: 200ms;
+  transform: rotate(-90deg);
 }
 
 .collapsible-button-collapsed {
-  color: red;
-  transform: rotate(-90deg);
   transition: 200ms;
+  transform: rotate(0);
 }
 
 .collapsible-content {
   transition: 200ms;
+  width: 100%;
+  display: flex;
+  align-items: left;
+  flex-wrap: wrap;
 }
+
 
 .collapsible-content-collapsed {
   transition: 200ms;
-  background-color: green;
+  width: 100%;
   display: none;
 }
