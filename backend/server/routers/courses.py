@@ -139,6 +139,7 @@ def getCourse(courseCode: str):
         )
     result.setdefault("school", None)
     result['is_accurate'] = CONDITIONS.get(courseCode) is not None
+    result['handbook_note'] = CACHED_HANDBOOK_NOTE.get(courseCode, "")
     del result["_id"]
 
     return result

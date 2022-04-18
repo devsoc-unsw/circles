@@ -1,11 +1,11 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { courseTabActions } from "../../../actions/courseTabActions";
-import "./courseTabs.less";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import courseTabActions from "../../../actions/courseTabActions";
+import "./courseTabs.less";
 import CourseTab from "./CourseTab";
 
-export const CourseTabs = () => {
+const CourseTabs = () => {
   const dispatch = useDispatch();
   const { tabs } = useSelector((state) => state.tabs);
 
@@ -18,17 +18,17 @@ export const CourseTabs = () => {
 
     // function to help us with reordering the result
     const reorder = (list, startIndex, endIndex) => {
-      const result = Array.from(list);
-      const [removed] = result.splice(startIndex, 1);
-      result.splice(endIndex, 0, removed);
+      const r = Array.from(list);
+      const [removed] = r.splice(startIndex, 1);
+      r.splice(endIndex, 0, removed);
 
-      return result;
+      return r;
     };
 
     const reorderedTabs = reorder(
       tabs,
       result.source.index,
-      result.destination.index
+      result.destination.index,
     );
 
     dispatch(courseTabActions("SET_ACTIVE_TAB", result.destination.index));
@@ -39,7 +39,7 @@ export const CourseTabs = () => {
     <div className="cs-tabs-cont">
       <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
         <Droppable droppableId="droppable" direction="horizontal">
-          {(droppableProvided, droppableSnapshot) => (
+          {(droppableProvided, _) => (
             <div
               ref={droppableProvided.innerRef}
               {...droppableProvided.droppableProps}
@@ -56,3 +56,5 @@ export const CourseTabs = () => {
     </div>
   );
 };
+
+export default CourseTabs;

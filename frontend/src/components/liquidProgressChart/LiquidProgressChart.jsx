@@ -11,12 +11,11 @@ import {
 } from "../GlobalColors";
 
 const LiquidProgressChart = ({ completedUOC, totalUOC }) => {
-  var [percent, setPercent] = useState(0);
-  var fillValue = completedUOC / totalUOC;
-  var ref;
+  const [percent, setPercent] = useState(0);
+  const fillValue = completedUOC / totalUOC;
 
   // light mode text color varies
-  var textColor;
+  let textColor;
   if (percent < 0.31) {
     textColor = lightYellow;
   } else if (percent < 0.45) {
@@ -33,8 +32,8 @@ const LiquidProgressChart = ({ completedUOC, totalUOC }) => {
     textColor = "white";
   }
 
-  var config = {
-    percent: percent,
+  const config = {
+    percent,
     radius: 1,
     width: 320,
     height: 320,
@@ -52,7 +51,7 @@ const LiquidProgressChart = ({ completedUOC, totalUOC }) => {
           lineHeight: 1,
           fill: textColor,
         }),
-        formatter: () => (percent * 100).toFixed(0) + "%",
+        formatter: () => `${(percent * 100).toFixed(0)}%`,
       },
     },
     liquidStyle: () => ({
@@ -60,12 +59,11 @@ const LiquidProgressChart = ({ completedUOC, totalUOC }) => {
       stroke: percent > 0.45 ? purple : yellow,
     }),
   };
-
   // increment percentage from 0 to fillValue
   useEffect(() => {
-    var data = 0.0;
+    let data = 0.0;
     const time = 30;
-    var interval = setInterval(function () {
+    const interval = setInterval(() => {
       data += 0.01;
       if (data <= fillValue + 0.01) {
         setPercent(data);
@@ -73,7 +71,7 @@ const LiquidProgressChart = ({ completedUOC, totalUOC }) => {
         clearInterval(interval);
       }
     }, time);
-  }, []);
+  }, [fillValue]);
 
   return (
     <div>
@@ -81,7 +79,7 @@ const LiquidProgressChart = ({ completedUOC, totalUOC }) => {
         {completedUOC} / {totalUOC} UOC
       </ReactTooltip>
       <div data-tip>
-        <Liquid {...config} chartRef={(chartRef) => (ref = chartRef)} />
+        <Liquid {...config} />
       </div>
     </div>
   );

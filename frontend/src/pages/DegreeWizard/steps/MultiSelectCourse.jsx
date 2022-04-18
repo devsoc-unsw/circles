@@ -1,30 +1,27 @@
-import React, { useState, useRef, useMemo, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
 import { Select, Spin } from "antd";
-import { setCourses } from "../../../actions/coursesActions";
-import debounce from "lodash/debounce";
-import axios from "axios";
-import { useDebounce } from "../../../hooks/useDebounce";
+import { useSelector } from "react-redux";
+import { useDebounce } from "use-debounce";
 import { search } from "../../CourseSelector/SearchCourse";
 
-export default function MultiSelectCourse({
+const MultiSelectCourse = ({
   plannedCourses,
   setPlannedCourses,
-}) {
-  const [courseResults, setCourseResults] = React.useState([]);
-
-  const [value, setValue] = React.useState("");
-  const debouncedSearchTerm = useDebounce(value, 200);
+}) => {
+  const [courseResults, setCourseResults] = useState([]);
+  const [value, setValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  const [debouncedSearchTerm] = useDebounce(value, 200);
 
   const planner = useSelector((state) => state.planner);
   const degree = useSelector((state) => state.degree);
 
   useEffect(() => {
-    // if debounced term changes , call API
-    if (debouncedSearchTerm)
+    if (debouncedSearchTerm) {
       search(debouncedSearchTerm, setCourseResults, setIsLoading, degree, planner);
-  }, [debouncedSearchTerm]);
+    }
+  }, [debouncedSearchTerm, degree, planner]);
 
   const handleSelect = (courseCode) => {
     const newCourse = { label: courseCode, value: courseCode, key: courseCode };
@@ -32,9 +29,9 @@ export default function MultiSelectCourse({
   };
 
   const handleSelectionChange = (newSelectedCourses) => {
-    const newValues = newSelectedCourses.map((courseCode) => {
-      return { label: courseCode, value: courseCode, key: courseCode };
-    });
+    const newValues = newSelectedCourses.map(
+      (courseCode) => ({ label: courseCode, value: courseCode, key: courseCode }),
+    );
     setPlannedCourses(newValues);
   };
 
@@ -57,4 +54,6 @@ export default function MultiSelectCourse({
       style={{ width: "30rem", marginRight: "0.5rem" }}
     />
   );
-}
+};
+
+export default MultiSelectCourse;

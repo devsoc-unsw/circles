@@ -39,6 +39,7 @@ class CourseDetails(BaseModel):
     raw_requirements: str
     exclusions: dict
     path_to: dict
+    handbook_note: str
     terms: list
     gen_ed: int
     path_from: dict
@@ -106,9 +107,6 @@ with open(CONDITIONS_PATH, "rb") as file:
 
 with open("algorithms/cache/handbook_note.json", "r") as file:
     CACHED_HANDBOOK_NOTE: dict[str, str] = json.load(file)
-
-flexEd = ["3778"]
-
 
 class description(BaseModel):
     description: str

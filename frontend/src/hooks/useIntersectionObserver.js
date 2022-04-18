@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 
-export const useIntersectionObserver = (ref, config = {}) => {
+const useIntersectionObserver = (ref, config = {}) => {
   const [isIntersecting, setIntersecting] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => setIntersecting(entry.isIntersecting),
-      config
+      config,
     );
 
     observer.observe(ref.current);
@@ -18,3 +18,5 @@ export const useIntersectionObserver = (ref, config = {}) => {
 
   return isIntersecting;
 };
+
+export default useIntersectionObserver;
