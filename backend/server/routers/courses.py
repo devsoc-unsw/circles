@@ -421,24 +421,20 @@ def weight_course(course: tuple, search_term: str, structure: dict,
         for key in structure['Major'].items():
             if isinstance(key[1], dict):
                 if key[1].get(code) is not None:
-                    weight += 15
+                    weight += 20
                     break
 
         if str(code).startswith(major_code[:4]):
-            weight += 10
-    else:
-        major_core = {}
+            weight += 14
 
     if minor_code is not None:
         for key in structure['Minor'].items():
             if isinstance(key[1], dict):
                 if key[1].get(code) is not None:
-                    weight += 7
+                    weight += 10
                     break
 
         if str(code).startswith(minor_code[:4]):
-            weight += 5
-    else:
-        minor_core = {}
+            weight += 7
 
     return weight
