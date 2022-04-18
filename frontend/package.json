@@ -33,7 +33,7 @@
     "web-vitals": "^2.1.4"
   },
   "resolutions": {
-    "react-error-overlay": "6.0.11"
+    "react-error-overlay": "6.0.9"
   },
   "scripts": {
     "start": "craco start",
@@ -70,6 +70,6 @@
     "eslint-plugin-promise": "^5.2.0",
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.4.0",
-    "react-error-overlay": "^6.0.11"
+    "react-error-overlay": "6.0.9"
   }
 }

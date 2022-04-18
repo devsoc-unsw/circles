@@ -2,7 +2,7 @@ import React from "react";
 import { Typography } from "antd";
 import { Draggable } from "react-beautiful-dnd";
 import { useSelector } from "react-redux";
-import { IoWarningOutline } from "react-icons/io5";
+import { IoInformationCircle, IoWarningOutline } from "react-icons/io5";
 import ReactTooltip from "react-tooltip";
 import { useContextMenu } from "react-contexify";
 import ContextMenu from "./misc/ContextMenu";
@@ -32,6 +32,8 @@ const DraggableCourse = ({ code, index }) => {
 
   const isSmall = useMediaQuery("(max-width: 1400px)");
   const shouldHaveWarning = (isLegacy || !isUnlocked || BEwarnings || !isAccurate || !isOffered);
+  const errorIsInformational = shouldHaveWarning && isUnlocked
+    && warningMessage.length === 0 && !isLegacy && isAccurate && isOffered;
   return (
     <>
       <Draggable
@@ -56,19 +58,19 @@ const DraggableCourse = ({ code, index }) => {
             id={code}
             onContextMenu={displayContextMenu}
           >
-            {!isDragDisabled && shouldHaveWarning && (
-              <IoWarningOutline
-                className="alert"
-                size="2.5em"
-                color={theme === "light" ? "#DC9930" : "white"}
-                style={
+            {!isDragDisabled && shouldHaveWarning
+              && (errorIsInformational ? <IoInformationCircle /> : (
+                <IoWarningOutline
+                  className="alert"
+                  size="2.5em"
+                  color={theme === "light" ? "#DC9930" : "white"}
+                  style={
                   isSmall && {
-                    position: "absolute",
                     marginRight: "8em",
                   }
                 }
-              />
-            )}
+                />
+              ))}
             <div>
               {isSmall ? (
                 <Text className="text">{code}</Text>
