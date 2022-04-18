@@ -1,44 +1,32 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { DegreeStep } from "./steps/DegreeStep";
-import { SpecialisationStep } from "./steps/SpecialisationStep";
-import { PreviousCoursesStep } from "./steps/PreviousCoursesStep";
-import { MinorStep } from "./steps/MinorStep";
-import { plannerActions } from "../../actions/plannerActions";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useSpring } from "react-spring";
 import { Button, Typography, Modal } from "antd";
-import "./main.less";
-import { springProps } from "./spring";
-import { scroller } from "react-scroll";
 import { useNavigate } from "react-router-dom";
-import { YearStep } from "./steps/YearStep";
-import { courseTabActions } from "../../actions/courseTabActions";
+import { scroller } from "react-scroll";
+import DegreeStep from "./steps/DegreeStep";
+import SpecialisationStep from "./steps/SpecialisationStep";
+import PreviousCoursesStep from "./steps/PreviousCoursesStep";
+import MinorStep from "./steps/MinorStep";
+import plannerActions from "../../actions/plannerActions";
+import "./main.less";
+import YearStep from "./steps/YearStep";
+import courseTabActions from "../../actions/courseTabActions";
 
 const { Title } = Typography;
 
-function DegreeWizard() {
-  const theme = useSelector((store) => store.theme);
+const DegreeWizard = () => {
   const dispatch = useDispatch();
-  const [isModalVisible, setIsModalVisible] = React.useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const navigate = useNavigate();
 
-  React.useEffect(() => {
+  useEffect(() => {
     // TODO: Warning dialog before planner is reset.
     if (localStorage.getItem("planner")) {
       setIsModalVisible(true);
     }
   }, []);
 
-  const handleYearChange = (_, [startYear, endYear]) => {
-    const numYears = endYear - startYear + 1;
-    dispatch(plannerActions("SET_DEGREE_LENGTH", numYears));
-    dispatch(plannerActions("UPDATE_START_YEAR", startYear));
-  };
-
-  const props = useSpring(springProps);
-
-  const [currStep, setCurrStep] = React.useState(1);
+  const [currStep, setCurrStep] = useState(1);
   const incrementStep = () => {
     setCurrStep(currStep + 1);
     let nextId = "Degree";
@@ -114,17 +102,17 @@ function DegreeWizard() {
           </div>
         )}
         {currStep >= 4 && (
-          <div className="step-content" id={"Minor"}>
+          <div className="step-content" id="Minor">
             <MinorStep incrementStep={incrementStep} currStep={currStep} />
           </div>
         )}
         {currStep >= 5 && (
-          <div className="step-content" id={"Previous Courses"}>
+          <div className="step-content" id="Previous Courses">
             <PreviousCoursesStep />
           </div>
         )}
       </div>
     </div>
   );
-}
+};
 export default DegreeWizard;

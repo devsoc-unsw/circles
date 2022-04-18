@@ -1,119 +1,38 @@
-export const plannerActions = (action, payload) => {
+const plannerActions = (action, payload) => {
   switch (action) {
     case "ADD_TO_UNPLANNED":
-      return {
-        type: action,
-        payload: payload,
-      };
     case "ADD_TO_PLANNED":
-      return {
-        type: action,
-        payload: payload,
-      };
     case "ADD_CORE_COURSES":
-      return {
-        type: action,
-        payload: payload,
-      };
     case "REMOVE_ALL_UNPLANNED":
+    case "SET_START_YEAR":
+    case "SET_NUM_YEARS":
+    case "SET_DEGREE_LENGTH":
+    case "SET_UNPLANNED":
+    case "REMOVE_COURSE":
+    case "SET_YEARS":
+    case "TOGGLE_WARNINGS":
+    case "UPDATE_PLANNED_COURSES":
+    case "MOVE_COURSE":
+    case "UNSCHEDULE":
+    case "UNSCHEDULE_ALL":
+    case "TOGGLE_TERM_COMPLETE":
+    case "UPDATE_START_YEAR":
+    case "HIDE_YEAR":
+    case "UNHIDE_ALL_YEARS":
+    case "LOAD_PLANNER":
       return {
         type: action,
         payload,
       };
-    case "SET_START_YEAR":
-      return {
-        type: "SET_START_YEAR",
-        payload: payload,
-      };
-    case "SET_NUM_YEARS":
-      return {
-        type: "SET_NUM_YEARS",
-        payload: payload,
-      };
-    case "SET_DEGREE_LENGTH":
-      return {
-        type: "SET_DEGREE_LENGTH",
-        payload: payload,
-      };
-    case "SET_UNPLANNED":
-      return {
-        type: action,
-        payload: payload,
-      };
-    case "REMOVE_COURSE":
-      return {
-        type: action,
-        payload: payload,
-      };
     case "REMOVE_ALL_COURSES":
-      return {
-        type: action,
-        payload: null,
-      };
-    case "SET_YEARS":
-      return {
-        type: "SET_YEARS",
-        payload: payload,
-      };
-    case "TOGGLE_WARNINGS":
-      return {
-        type: action,
-        payload: payload,
-      };
-    case "UPDATE_PLANNED_COURSES":
-      return {
-        type: action,
-        payload: payload,
-      };
-    case "MOVE_COURSE":
-      return {
-        type: action,
-        payload: payload,
-      };
-    case "UNSCHEDULE":
-      return {
-        type: action,
-        payload: payload,
-      };
-    case "UNSCHEDULE_ALL":
-      return {
-        type: action,
-        payload: payload,
-      };
     case "TOGGLE_SUMMER":
-      return {
-        type: action,
-      };
-    case "TOGGLE_TERM_COMPLETE":
-      return {
-        type: action,
-        payload: payload,
-      };
-    case "UPDATE_START_YEAR":
-      return {
-        type: action,
-        payload: payload,
-      };
-    case "HIDE_YEAR":
-      return {
-        type: action,
-        payload: payload,
-      };
-    case "UNHIDE_ALL_YEARS":
-      return {
-        type: action,
-        payload: payload,
-      };
     case "RESET_PLANNER":
       return {
         type: action,
       };
-    case "LOAD_PLANNER":
-      return {
-        type: action,
-        payload: payload,
-      };
     default:
-      return;
+      return {};
   }
 };
+
+export default plannerActions;

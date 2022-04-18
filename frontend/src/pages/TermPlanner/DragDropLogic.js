@@ -1,29 +1,31 @@
-import { plannerActions } from "../../actions/plannerActions";
+import plannerActions from "../../actions/plannerActions";
 
 export const handleOnDragEnd = (result, dragEndProps) => {
-  const { setIsDragging, dispatch, years, startYear, courses, completedTerms } =
-    dragEndProps;
+  const {
+    setIsDragging, dispatch, years, startYear,
+  } = dragEndProps;
 
   setIsDragging(false);
 
   const { destination, source, draggableId } = result;
-  let newYears = [...years];
+  const newYears = [...years];
 
   if (!destination) return; // drag outside container
 
   dispatch(
     plannerActions("MOVE_COURSE", {
       course: draggableId,
-      term: destination.droppableId
-    })
+      term: destination.droppableId,
+    }),
   );
 
   if (
-    destination.droppableId === source.droppableId &&
-    destination.index === source.index
-  )
+    destination.droppableId === source.droppableId
+    && destination.index === source.index
+  ) {
     // drag to same place
     return;
+  }
 
   const destYear = destination.droppableId.match(/[0-9]{4}/)[0];
   const destTerm = destination.droppableId.match(/T[0-3]/)[0];
@@ -31,7 +33,7 @@ export const handleOnDragEnd = (result, dragEndProps) => {
   const destBox = years[destRow][destTerm];
 
   // === move unplanned course to term ===
-  if (source.droppableId.match(/[0-9]{4}/) === null) {
+  if (source.droppableId.match(/T[0-3]/) === null) {
     dispatch(plannerActions("SET_UNPLANNED", draggableId));
 
     // update destination term box
@@ -68,17 +70,16 @@ export const handleOnDragEnd = (result, dragEndProps) => {
   newYears[srcRow][srcTerm] = srcCoursesCpy;
   newYears[destRow][destTerm] = destCoursesCpy;
   dispatch(plannerActions("SET_YEARS", newYears));
-  // updateWarnings(newYears, startYear, courses, dispatch);
 };
 
 export const handleOnDragStart = (
   courseItem,
   courses,
   setTermsOffered,
-  setIsDragging
+  setIsDragging,
 ) => {
   const course = courseItem.draggableId;
-  const terms = courses.get(course)["termsOffered"];
+  const terms = courses.get(course).termsOffered;
   setTermsOffered(terms);
   setIsDragging(true);
 };

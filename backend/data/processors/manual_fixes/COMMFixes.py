@@ -110,7 +110,7 @@ def COMM_1110_1120_1140(conditions):
     return {
         "original": conditions["original"],
         "processed": "",
-        "handbook_note": "Only available to single && double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 && 3"
+        "handbook_note": "Only available to single and double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 and 3"
     }
 
 
@@ -137,7 +137,7 @@ def COMM_1170_1180(conditions):
     return {
         "original": conditions["original"],
         "processed": "COMM1140",
-        "handbook_note": "Only available to single && double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 && 3"
+        "handbook_note": "Only available to single and double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 and 3"
     }
 
 
@@ -151,7 +151,7 @@ def COMM_1190(conditions):
     return {
         "original": conditions["original"],
         "processed": "COMM1110 || ECON1203 || MATH1031 || MATH1041 || MATH1131 || MATH1141 || MATH1151",
-        "handbook_note": "Only available to single && double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 && 3"
+        "handbook_note": "Only available to single and double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 and 3"
     }
 
 

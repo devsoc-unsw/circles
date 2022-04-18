@@ -1,30 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Tag, Alert, Typography, Space, Menu, Dropdown } from "antd";
-import { PlusOutlined, StopOutlined } from "@ant-design/icons";
+import {
+  Button, Tag, Typography, Space, Menu, Dropdown,
+} from "antd";
+import { StopOutlined } from "@ant-design/icons";
+import { motion } from "framer-motion/dist/framer-motion";
+import { BsPlusLg } from "react-icons/bs";
 import { CourseTag } from "../../../components/courseTag/CourseTag";
 import SearchCourse from "../SearchCourse";
-import { plannerActions } from "../../../actions/plannerActions";
-import { Loading } from "./Loading";
+import plannerActions from "../../../actions/plannerActions";
+import Loading from "./Loading";
 import "./courseDescription.less";
-import { prepareUserPayload } from "../helper";
+import prepareUserPayload from "../helper";
 import infographic from "../../../images/infographicFontIndependent.svg";
-import { motion } from "framer-motion/dist/framer-motion";
-import { axiosRequest } from "../../../axios";
+import axiosRequest from "../../../axios";
 import { setCourse } from "../../../actions/coursesActions";
-import { BsPlusLg } from "react-icons/bs";
 
 const { Title, Text } = Typography;
-const CourseAttribute = ({ title, content }) => {
-  return (
-    <div className="cs-course-attr">
-      <Title level={3} className="text">
-        {title}
-      </Title>
-      <Text className="text">{content}</Text>
-    </div>
-  );
-};
+const CourseAttribute = ({ title, content }) => (
+  <div className="cs-course-attr">
+    <Title level={3} className="text">
+      {title}
+    </Title>
+    <Text className="text">{content}</Text>
+  </div>
+);
 
 const PlannerDropdown = ({ courseCode, structure, addToPlanner }) => {
   const [categories, setCategories] = useState([]);
@@ -32,18 +32,13 @@ const PlannerDropdown = ({ courseCode, structure, addToPlanner }) => {
   useEffect(() => {
     // Example groups: Major, Minor, General
     const categoriesDropdown = [];
-    for (const group in structure) {
-      // Example subGroup: Core Courses, Computing Electives, Flexible Education
-      for (const subgroup in structure[group]) {
-        const subgroupStructure = structure[group][subgroup];
-        if (subgroupStructure.courses) {
-          const subCourses = Object.keys(subgroupStructure.courses);
-          const regex = subCourses.join("|"); // e.g. "COMP3|COMP4"
-          courseCode.match(regex) &&
-            categoriesDropdown.push(`${group} - ${subgroup}`);
-        }
-      }
-    }
+    Object.entries(structure).forEach((group, groupContainer) => {
+      Object.entries(groupContainer).forEach((subgroup, subgroupStructure) => {
+        const subCourses = Object.keys(subgroupStructure.courses);
+        if (subCourses.includes(courseCode)) categoriesDropdown.push(`${group} - ${subgroup}`);
+      });
+    });
+
     if (!categoriesDropdown.length) {
       // add these options to dropdown as a fallback if courseCode is not in
       // major or minor
@@ -51,7 +46,7 @@ const PlannerDropdown = ({ courseCode, structure, addToPlanner }) => {
       categoriesDropdown.push("General Education");
     }
     setCategories(categoriesDropdown);
-  }, [courseCode]);
+  }, [structure, courseCode]);
 
   return (
     <Menu>
@@ -68,10 +63,10 @@ const PlannerDropdown = ({ courseCode, structure, addToPlanner }) => {
   );
 };
 
-export default function CourseDescription({ structure }) {
+const CourseDescription = ({ structure }) => {
   const dispatch = useDispatch();
   const { active, tabs } = useSelector((state) => state.tabs);
-  let id = tabs[active];
+  const id = tabs[active];
 
   const course = useSelector((state) => state.courses.course);
   const coursesInPlanner = useSelector((state) => state.planner.courses);
@@ -91,17 +86,18 @@ export default function CourseDescription({ structure }) {
       }
     };
 
-    const getPathToCoursesById = async (id) => {
+    const getPathToCoursesById = async (c) => {
       const [data, err] = await axiosRequest(
         "post",
-        `/courses/coursesUnlockedWhenTaken/${id}`,
-        prepareUserPayload(degree, planner)
+        `/courses/coursesUnlockedWhenTaken/${c}`,
+        prepareUserPayload(degree, planner),
       );
-      console.log(data);
-      if (!err) setCoursesPathTo({
-        "direct_unlock": data.direct_unlock,
-        "indirect_unlock": data.indirect_unlock
-      });
+      if (!err) {
+        setCoursesPathTo({
+          direct_unlock: data.direct_unlock,
+          indirect_unlock: data.indirect_unlock,
+        });
+      }
     };
 
     setpageLoaded(false);
@@ -110,9 +106,9 @@ export default function CourseDescription({ structure }) {
       getCourse();
       getPathToCoursesById(id);
     }
-  }, [id]);
+  }, [id, dispatch, degree, planner]);
 
-  if (tabs.length === 0)
+  if (tabs.length === 0) {
     return (
       <motion.div
         initial={{ opacity: 0 }}
@@ -122,6 +118,7 @@ export default function CourseDescription({ structure }) {
         <img src={infographic} className="infographic" alt="" />
       </motion.div>
     );
+  }
 
   if (id === "explore") return <div>This is the explore page</div>;
   if (id === "search") return <SearchCourse />;
@@ -138,12 +135,11 @@ export default function CourseDescription({ structure }) {
         isLegacy: course.is_legacy,
         isUnlocked: true,
         warnings: [],
-        handbook_note: "",
+        handbookNote: course.handbook_note,
         isAccurate: course.is_accurate,
       },
     };
     dispatch(plannerActions("ADD_TO_UNPLANNED", data));
-    // dispatch(setUnplannedCourses(id));
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
@@ -200,15 +196,21 @@ export default function CourseDescription({ structure }) {
                 </Dropdown.Button>
               )}
             </div>
-            {course.is_legacy && <Text strong> NOTE: this course is discontinued - if an equivalent course exists for it, please pick that instead </Text>}
+            {
+              course.is_legacy
+              && (
+              <Text strong>
+                NOTE: this course is discontinued - if a current course exists, pick that instead
+              </Text>
+              )
+            }
             <Title level={3} className="text">
               Overview
             </Title>
             <Space direction="vertical" style={{ marginBottom: "1rem" }}>
               <Text>
-                <div
-                  dangerouslySetInnerHTML={{ __html: course.description }}
-                />
+                {/* eslint-disable-next-line react/no-danger */}
+                <div dangerouslySetInnerHTML={{ __html: course.description }} />
               </Text>
             </Space>
             <Title level={3} className="text">
@@ -216,24 +218,21 @@ export default function CourseDescription({ structure }) {
             </Title>
             <Space direction="vertical" style={{ marginBottom: "1rem" }}>
               <Text>
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: course.raw_requirements || "None",
-                  }}
-                />
+                {/* eslint-disable-next-line react/no-danger */}
+                <div dangerouslySetInnerHTML={{ __html: course.raw_requirements || "None" }} />
               </Text>
             </Space>
             <Title level={3} className="text">
               Courses you have done to unlock this course
             </Title>
             {course.path_from && Object.keys(course.path_from).length > 0 ? (
-              <div className={"text course-tag-cont"}>
+              <div className="text course-tag-cont">
                 {Object.keys(course.path_from).map((courseCode) => (
                   <CourseTag key={courseCode} name={courseCode} />
                 ))}
               </div>
             ) : (
-              <p className={`text`}>None</p>
+              <p className="text">None</p>
             )}
             <Title level={3} className="text">
               Doing this course will directly unlock these courses
@@ -243,7 +242,7 @@ export default function CourseDescription({ structure }) {
                 <CourseTag key={courseCode} name={courseCode} />
               ))
             ) : (
-              <p className={`text`}>None</p>
+              <p className="text">None</p>
             )}
             <Title level={3} className="text">
               Doing this course will indirectly unlock these courses
@@ -253,7 +252,7 @@ export default function CourseDescription({ structure }) {
                 <CourseTag key={courseCode} name={courseCode} />
               ))
             ) : (
-              <p className={`text`}>None</p>
+              <p className="text">None</p>
             )}
           </div>
           <div>
@@ -271,11 +270,11 @@ export default function CourseDescription({ structure }) {
             <Title level={3} className="text cs-final-attr">
               Offering Terms
             </Title>
-            {course.terms &&
-              course.terms.map((term, index) => {
-                let termNo = term.slice(1);
+            {course.terms
+              && course.terms.map((term, index) => {
+                const termNo = term.slice(1);
                 return (
-                  <Tag key={index} className={`text`}>
+                  <Tag key={index} className="text">
                     {term === "T0" ? "Summer" : `Term ${termNo}`}
                   </Tag>
                 );
@@ -285,4 +284,6 @@ export default function CourseDescription({ structure }) {
       )}
     </div>
   );
-}
+};
+
+export default CourseDescription;

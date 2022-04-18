@@ -1,29 +1,28 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { Menu, Button, Typography } from "antd";
-import { Link } from "react-scroll";
-import { degreeActions } from "../../../actions/degreeActions";
 import { useDispatch, useSelector } from "react-redux";
 import "./steps.less";
-import { useSpring, animated } from "react-spring";
-import { springProps } from "../spring";
+import { useSpring, animated } from "@react-spring/web";
+import springProps from "../spring";
+import degreeActions from "../../../actions/degreeActions";
 
 const { Title } = Typography;
-export const SpecialisationStep = ({ incrementStep, currStep }) => {
+const SpecialisationStep = ({ incrementStep, currStep }) => {
   const dispatch = useDispatch();
   const { programCode, specialisation } = useSelector((store) => store.degree);
-  const [options, setOptions] = React.useState({
+  const [options, setOptions] = useState({
     1: "major",
   });
 
-  const fetchAllSpecializations = async () => {
+  const fetchAllSpecialisations = useCallback(async () => {
     const res = await axios.get(`/programs/getMajors/${programCode}`);
-    setOptions(res.data["majors"]);
-  };
+    setOptions(res.data.majors);
+  }, [programCode]);
 
   useEffect(() => {
-    if (programCode !== "") fetchAllSpecializations();
-  }, [programCode]);
+    if (programCode !== "") fetchAllSpecialisations();
+  }, [fetchAllSpecialisations, programCode]);
 
   const props = useSpring(springProps);
 
@@ -59,3 +58,5 @@ export const SpecialisationStep = ({ incrementStep, currStep }) => {
     </animated.div>
   );
 };
+
+export default SpecialisationStep;

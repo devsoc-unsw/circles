@@ -1,20 +1,20 @@
 export const setInLocalStorage = (state) => {
-  let stateCopy = Object.assign({}, state);
+  const stateCopy = { ...state };
   const jsonCourses = Array.from(state.courses.entries());
   const jsonPlannedCourses = Array.from(state.plannedCourses.entries());
   const jsonCompletedTerms = Array.from(state.completedTerms.entries());
   const jsonHidden = JSON.stringify(state.hidden);
-  stateCopy["courses"] = jsonCourses;
-  stateCopy["plannedCourses"] = jsonPlannedCourses;
-  stateCopy["completedTerms"] = jsonCompletedTerms;
-  stateCopy["hidden"] = jsonHidden;
-  stateCopy["areYearsHidden"] = state.areYearsHidden;
+  stateCopy.courses = jsonCourses;
+  stateCopy.plannedCourses = jsonPlannedCourses;
+  stateCopy.completedTerms = jsonCompletedTerms;
+  stateCopy.hidden = jsonHidden;
+  stateCopy.areYearsHidden = state.areYearsHidden;
 
   localStorage.setItem("planner", JSON.stringify(stateCopy));
 };
 
 export const extractFromLocalStorage = (planner) => {
-  let plannerCpy = Object.assign({}, planner);
+  const plannerCpy = { ...planner };
   const coursesCpy = new Map(planner.courses);
   const plannedCoursesCpy = new Map(planner.plannedCourses);
   const completedTermsCpy = new Map(planner.completedTerms);
@@ -28,10 +28,11 @@ export const extractFromLocalStorage = (planner) => {
 };
 
 export const generateEmptyYears = (nYears) => {
-  let res = [];
-  for (let i = 0; i < nYears; ++i) {
-    const year = { T0: [], T1: [], T2: [], T3: [] };
-    res.push(year);
+  const res = [];
+  for (let i = 0; i < nYears; i++) {
+    res.push({
+      T0: [], T1: [], T2: [], T3: [],
+    });
   }
   return res;
 };

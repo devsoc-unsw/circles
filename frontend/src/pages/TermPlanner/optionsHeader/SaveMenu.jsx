@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Typography, Select, Button } from "antd";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
@@ -13,28 +13,30 @@ const SaveMenu = ({ plannerRef }) => {
 
   const exportFormats = ["png", "jpg"];
 
-  const [format, setFormat] = React.useState("png");
+  const [format, setFormat] = useState("png");
 
   const download = () => {
-    if (format === "png")
+    if (format === "png") {
       exportComponentAsPNG(plannerRef, {
         fileName: "Term Planner",
       });
-    if (format === "jpg")
+    }
+    if (format === "jpg") {
       exportComponentAsJPEG(plannerRef, {
         fileName: "Term Planner",
       });
+    }
   };
 
   return (
     <div className="settingsMenu" style={{ width: "180px" }}>
       <div className="settingsTitleContainer">
-        <Title level={2} class="text" strong className="settingsTitle">
+        <Title level={2} strong className="text settingsTitle">
           Export
         </Title>
       </div>
       <div className="settingsEntry">
-        <Title level={3} class="text settingsSubtitle">
+        <Title level={3} className="text settingsSubtitle">
           File Type
         </Title>
         <Select
@@ -42,8 +44,8 @@ const SaveMenu = ({ plannerRef }) => {
           style={{ width: 70 }}
           onChange={(value) => setFormat(value)}
         >
-          {exportFormats.map((format) => (
-            <Option value={format}>{format}</Option>
+          {exportFormats.map((form) => (
+            <Option value={form}>{form}</Option>
           ))}
         </Select>
       </div>
