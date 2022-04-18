@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography } from "antd";
 const { Title } = Typography;
 
-const CollapsibleHeader = ({ isCollapsed, setIsCollapsed, text }) => {
+export const CollapsibleHeader = ({ isCollapsed, setIsCollapsed, text }) => {
 
   const toggleCollapse = (e) => {
     setIsCollapsed(!isCollapsed);
@@ -48,6 +48,4 @@ const CollapsibleButton = ({ isCollapsed, setIsCollapsed }) => {
     </div>
   )
 }
-
-export default CollapsibleHeader;
 
