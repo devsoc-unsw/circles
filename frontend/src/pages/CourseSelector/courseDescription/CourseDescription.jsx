@@ -236,9 +236,6 @@ const CourseDescription = ({ structure }) => {
                 <div dangerouslySetInnerHTML={{ __html: course.description }} />
               </Text>
             </Space>
-            {/* <Title level={3} className="text">
-              Requirements
-            </Title> */}
               <CollapsibleHeader
                 text="Requirements"
                 isCollapsed={collapseRequirements}
@@ -259,13 +256,12 @@ const CourseDescription = ({ structure }) => {
               setIsCollapsed={setCollapseDone}
             />
             {/* </Title> */}
-            <div className="{calcCollapsibleContentClass(collapseDone)}">
+            <div className={calcCollapsibleContentClass(collapseDone)}>
               {course.path_from && Object.keys(course.path_from).length > 0 ? (
                 <div className={'text course-tag-cont'}>
                 {Object.keys(course.path_from).map((courseCode) => (
                   <CourseTag key={courseCode} name={courseCode} />
                   ))}
-                  {calcCollapsibleContentClass(collapseDone)}
               </div>
               ) : (
                 <p className={`text`}>None</p>
@@ -276,7 +272,7 @@ const CourseDescription = ({ structure }) => {
               isCollapsed={collapseDirectUnlock}
               setIsCollapsed={setCollapseDirectUnlock}
             />
-            <div className="{calcCollapsibleContentClass(collapseDirectUnlock)}">
+            <div className={calcCollapsibleContentClass(collapseDirectUnlock)}>
               {coursesPathTo.direct_unlock && coursesPathTo.direct_unlock.length > 0 ? (
                 coursesPathTo.direct_unlock.map((courseCode) => (
                   <CourseTag key={courseCode} name={courseCode} />
@@ -290,7 +286,7 @@ const CourseDescription = ({ structure }) => {
               isCollapsed={collapseIndirectUnlock}
               setIsCollapsed={setCollapseIndirectUnlock}
             />
-            <div className="{calcCollapsibleContentClass(collapseIndirectUnlock)}">
+            <div className={calcCollapsibleContentClass(collapseIndirectUnlock)}>
               {coursesPathTo.indirect_unlock && coursesPathTo.indirect_unlock.length > 0 ? (
                 coursesPathTo.indirect_unlock.map((courseCode) => (
                     <CourseTag key={courseCode} name={courseCode} />
