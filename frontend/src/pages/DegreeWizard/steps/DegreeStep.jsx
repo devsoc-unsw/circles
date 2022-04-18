@@ -6,7 +6,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useSpring, animated } from "@react-spring/web";
 import degreeActions from "../../../actions/degreeActions";
-import styles from "./steps.less";
+import "./steps.less";
 import springProps from "../spring";
 
 const { Title } = Typography;
@@ -39,7 +39,7 @@ const DegreeStep = ({ incrementStep, currStep }) => {
 
   return (
     <animated.div style={props}>
-      <div className={styles.stepsHeadingContainer}>
+      <div className="steps-heading-container">
         <Title level={4} className="text">
           What are you studying?
         </Title>

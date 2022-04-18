@@ -28,7 +28,7 @@ const HelpMenu = () => {
       </div>
       <div>
         <div className="settingsEntry">
-          <Title level={3} className="text settingsSubtitle">
+          <Title level={3} className="text">
             1. Drag and Drop Courses
           </Title>
         </div>
@@ -42,7 +42,7 @@ const HelpMenu = () => {
       </div>
       <div>
         <div className="settingsEntry">
-          <Title level={3} className="text settingsSubtitle">
+          <Title level={3} className="text">
             2. Right Click Courses for More Actions
           </Title>
         </div>
@@ -56,7 +56,7 @@ const HelpMenu = () => {
       </div>
       <div>
         <div className="settingsEntry">
-          <Title level={3} className="text settingsSubtitle">
+          <Title level={3} className="text">
             3. Hide Year
           </Title>
         </div>
@@ -70,7 +70,7 @@ const HelpMenu = () => {
       </div>
       <div>
         <div className="settingsEntry">
-          <Title level={3} className="text settingsSubtitle">
+          <Title level={3} className="text">
             4. Additional Features
           </Title>
         </div>
