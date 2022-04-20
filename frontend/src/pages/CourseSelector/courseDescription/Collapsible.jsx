@@ -22,10 +22,12 @@ export const CollapsibleHeader = ({ isCollapsed, setIsCollapsed, text }) => {
 const CollapsibleButton = ({ isCollapsed, setIsCollapsed }) => {
   const rotation = isCollapsed ? 0 : -90;
   
-  const classes = (isCollapsed) ? "collapsible-button collapsible-button-collapsed" : "collapsible-button";
+  const classes = 
   
   return (
-    <div className={classes}>
+    <div
+		className={(isCollapsed) ? "collapsible-button collapsible-button-collapsed" : "collapsible-button"
+	>
       <svg
         width="24px"
         height="24px"
