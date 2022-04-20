@@ -118,10 +118,6 @@ const CourseDescription = ({ structure }) => {
   const [collapseDirectUnlock, setCollapseDirectUnlock] = useState(false);
   const [collapseIndirectUnlock, setCollapseIndirectUnlock] = useState(true);
 
-  const toggleCollapse = (state, setState) => {
-    setState(!state);
-  }
-
   const calcCollapsibleContentClass = (state) => {
     console.log(state);
     return (state) ? "collapsible-content-collapsed" : "collapsible-content";
