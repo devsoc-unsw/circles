@@ -27,7 +27,7 @@
     "react-scroll": "^1.8.7",
     "react-svg": "^14.1.18",
     "react-tooltip": "^4.2.21",
-    "redux": "^4.1.2",
+    "redux": "^4.2.0",
     "redux-thunk": "^2.3.0",
     "use-debounce": "^7.0.1",
     "web-vitals": "^2.1.4"
