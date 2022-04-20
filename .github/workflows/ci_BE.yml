@@ -2,9 +2,9 @@ name: Run Algorithm Unit Tests
 
 on:
   push:
-    branches: [ dev, main ]
+    branches: [dev, main, "renovate/*"]
   pull_request:
-    branches: [ dev, main ]
+    branches: [dev, main]
 
 jobs:
   build:
@@ -13,30 +13,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checking out repository
-      uses: actions/checkout@v3
+      - name: Checking out repository
+        uses: actions/checkout@v3
 
-    - name: Set up Python (latest)
-      uses: actions/setup-python@v3
-      with:
-        python-version: "3.x"
+      - name: Set up Python (latest)
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.x"
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r backend/requirements.txt
-    - name: Set up docker compose
-      run: |
-        mkdir env
-        echo "MONGODB_USERNAME=github-ci" >> env/backend.env
-        echo "MONGODB_PASSWORD=github-ci" >> env/backend.env
-        echo "MONGODB_SERVICE_HOSTNAME=mongodb" >> env/backend.env
-        echo "MONGO_INITDB_ROOT_USERNAME=github-ci" >> env/mongodb.env
-        echo "MONGO_INITDB_ROOT_PASSWORD=github-ci" >> env/mongodb.env
-        echo "REACT_APP_BACKEND_API_BASE_URL=http://localhost:8000/" >> env/frontend.env
-        docker compose run init-mongo
-    - name: Test algorithm with pytest
-      run: |
-        cd backend
-        python3 -m pytest algorithms
-        python3 -m pytest server
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r backend/requirements.txt
+      - name: Set up docker compose
+        run: |
+          mkdir env
+          echo "MONGODB_USERNAME=github-ci" >> env/backend.env
+          echo "MONGODB_PASSWORD=github-ci" >> env/backend.env
+          echo "MONGODB_SERVICE_HOSTNAME=mongodb" >> env/backend.env
+          echo "MONGO_INITDB_ROOT_USERNAME=github-ci" >> env/mongodb.env
+          echo "MONGO_INITDB_ROOT_PASSWORD=github-ci" >> env/mongodb.env
+          echo "REACT_APP_BACKEND_API_BASE_URL=http://localhost:8000/" >> env/frontend.env
+          docker compose run init-mongo
+      - name: Test algorithm with pytest
+        run: |
+          cd backend
+          python3 -m pytest algorithms
+          python3 -m pytest server
