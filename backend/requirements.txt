@@ -24,4 +24,4 @@ typing-extensions==4.2.0
 urllib3==1.26.9
 uvicorn==0.17.6
 zipp==3.8.0
-hypothesis==6.43.3
+hypothesis==6.44.0
