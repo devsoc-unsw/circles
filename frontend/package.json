@@ -25,7 +25,7 @@
     "react-router-dom": "6.3.0",
     "react-scripts": "4.0.3",
     "react-scroll": "1.8.7",
-    "react-svg": "14.1.18",
+    "react-svg": "14.1.19",
     "react-tooltip": "4.2.21",
     "redux": "4.1.2",
     "redux-thunk": "2.4.1",
