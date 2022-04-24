@@ -43,6 +43,7 @@ const CourseMenu = ({ structure, showLockedCourses }) => {
         ? item1.courseCode > item2.courseCode // sort within locked/unlocked by courseCode
         : item1.unlocked < item2.unlocked; // separate locked/unlocked
     }
+
     // Example groups: Major, Minor, General
     Object.keys(structure).forEach((group) => {
       newMenu[group] = {};
@@ -121,19 +122,18 @@ const CourseMenu = ({ structure, showLockedCourses }) => {
 
   // get all courses
   useEffect(() => {
-    if (structure) getAllUnlocked();
+    if (structure && Object.keys(structure).length) getAllUnlocked();
   }, [structure, getAllUnlocked]);
 
   return (
     <div className="cs-menu-root">
-      {!isPageLoaded
-        ? (<Loading />)
-        : (
+      {isPageLoaded
+        ? (
           <Menu
             onClick={() => {}}
             defaultSelectedKeys={[]}
             selectedKeys={[]}
-            defaultOpenKeys={[[...Object.keys(structure)][0]]}
+            defaultOpenKeys={[Object.keys(menuData)[0]]}
             mode="inline"
             className="text"
           >
@@ -171,7 +171,7 @@ const CourseMenu = ({ structure, showLockedCourses }) => {
               </SubMenu>
             ))}
           </Menu>
-        )}
+        ) : (<Loading />)}
     </div>
   );
 };

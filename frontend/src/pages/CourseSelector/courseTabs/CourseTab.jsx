@@ -25,7 +25,7 @@ const CourseTab = ({ tab, index }) => {
     return style;
   };
 
-  const handleMouseDown = (e) => {
+  const handleMouseUp = (e) => {
     const MIDDLE_CLICK_BTN = 1;
     if (e.button === MIDDLE_CLICK_BTN) {
       dispatch(courseTabActions("REMOVE_TAB", index));
@@ -54,7 +54,7 @@ const CourseTab = ({ tab, index }) => {
           {...draggableProvided.draggableProps}
           {...draggableProvided.dragHandleProps}
           style={getDraggableStyle(draggableProvided.draggableProps.style)}
-          onMouseDown={handleMouseDown}
+          onMouseUp={handleMouseUp}
         >
           <span className="cs-tab-name">{tab}</span>
           <Button
