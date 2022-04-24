@@ -5,7 +5,6 @@ import {
 } from "antd";
 import { StopOutlined } from "@ant-design/icons";
 import { motion } from "framer-motion/dist/framer-motion";
-import { BsPlusLg } from "react-icons/bs";
 import { CourseTag } from "../../../components/courseTag/CourseTag";
 import SearchCourse from "../SearchCourse";
 import Loading from "./Loading";
