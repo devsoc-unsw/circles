@@ -1,7 +1,7 @@
 import React from "react";
 import { Skeleton } from "antd";
 
-function SkeletonPlanner() {
+const SkeletonPlanner = () => {
   const skeletonTermStyle = {
     width: "20em",
     height: "18em",
@@ -20,57 +20,57 @@ function SkeletonPlanner() {
 
         <div className="gridItem" />
         <Skeleton.Button
-          active={true}
+          active
           shape="round"
           style={skeletonTermStyle}
         />
         <Skeleton.Button
-          active={true}
+          active
           shape="round"
           style={skeletonTermStyle}
         />
         <Skeleton.Button
-          active={true}
-          shape="round"
-          style={skeletonTermStyle}
-        />
-
-        <div className="gridItem" />
-        <Skeleton.Button
-          active={true}
-          shape="round"
-          style={skeletonTermStyle}
-        />
-        <Skeleton.Button
-          active={true}
-          shape="round"
-          style={skeletonTermStyle}
-        />
-        <Skeleton.Button
-          active={true}
+          active
           shape="round"
           style={skeletonTermStyle}
         />
 
         <div className="gridItem" />
         <Skeleton.Button
-          active={true}
+          active
           shape="round"
           style={skeletonTermStyle}
         />
         <Skeleton.Button
-          active={true}
+          active
           shape="round"
           style={skeletonTermStyle}
         />
         <Skeleton.Button
-          active={true}
+          active
+          shape="round"
+          style={skeletonTermStyle}
+        />
+
+        <div className="gridItem" />
+        <Skeleton.Button
+          active
+          shape="round"
+          style={skeletonTermStyle}
+        />
+        <Skeleton.Button
+          active
+          shape="round"
+          style={skeletonTermStyle}
+        />
+        <Skeleton.Button
+          active
           shape="round"
           style={skeletonTermStyle}
         />
       </div>
     </div>
   );
-}
+};
 
 export default SkeletonPlanner;

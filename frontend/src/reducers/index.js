@@ -4,6 +4,7 @@ import degreeReducer from "./degreeReducer";
 import plannerReducer from "./plannerReducer";
 import coursesReducer from "./coursesReducer";
 import courseTabsReducer from "./courseTabsReducer";
+
 const allReducers = combineReducers({
   degree: degreeReducer,
   tabs: courseTabsReducer,

@@ -1,17 +1,17 @@
 import React from "react";
-import { plannerActions } from "../../../actions/plannerActions";
-import { Typography, DatePicker, Select, Switch, Divider } from "antd";
+import {
+  Typography, DatePicker, Select, Switch, Divider,
+} from "antd";
 import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
+import plannerActions from "../../../actions/plannerActions";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
 
 const SettingsMenu = () => {
   const { Title } = Typography;
   const { Option } = Select;
-  const { isSummerEnabled } = useSelector((state) => {
-    return state.planner;
-  });
+  const { isSummerEnabled } = useSelector((state) => state.planner);
 
   const dispatch = useDispatch();
 
@@ -32,13 +32,13 @@ const SettingsMenu = () => {
   return (
     <div className="settingsMenu">
       <div className="settingsTitleContainer">
-        <Title level={2} class="text" strong className="settingsTitle">
+        <Title level={2} strong className="text settingsTitle">
           Settings
         </Title>
         <Divider className="settingsDivider" />
       </div>
       <div className="settingsEntry">
-        <Title level={3} class="text settingsSubtitle">
+        <Title level={3} className="text settingsSubtitle">
           Summer Term
         </Title>
         <Switch
@@ -49,7 +49,7 @@ const SettingsMenu = () => {
         />
       </div>
       <div className="settingsEntry">
-        <Title level={3} class="text settingsSubtitle">
+        <Title level={3} className="text settingsSubtitle">
           Start Year
         </Title>
         <DatePicker
@@ -59,7 +59,7 @@ const SettingsMenu = () => {
         />
       </div>
       <div className="settingsEntry">
-        <Title level={3} class="text settingsSubtitle">
+        <Title level={3} className="text settingsSubtitle">
           Degree Length
         </Title>
         <Select

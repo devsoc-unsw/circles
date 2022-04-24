@@ -39,10 +39,12 @@ class CourseDetails(BaseModel):
     raw_requirements: str
     exclusions: dict
     path_to: dict
+    handbook_note: str
     terms: list
     gen_ed: int
     path_from: dict
     is_legacy: bool
+    is_accurate: bool
 
 
 class Structure(BaseModel):  # this is a copout - we should avoid this
@@ -67,7 +69,8 @@ class CoursesState(BaseModel):
     courses_state: dict[str, CourseState] = {}
 
 class CoursesUnlockedWhenTaken (BaseModel):
-    courses_unlocked_when_taken: list
+    direct_unlock: list
+    indirect_unlock: list
 
 class CourseTypeState (BaseModel):
     is_accurate: bool 
@@ -104,9 +107,6 @@ with open(CONDITIONS_PATH, "rb") as file:
 
 with open("algorithms/cache/handbook_note.json", "r") as file:
     CACHED_HANDBOOK_NOTE: dict[str, str] = json.load(file)
-
-flexEd = ["3778"]
-
 
 class description(BaseModel):
     description: str

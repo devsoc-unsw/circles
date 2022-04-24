@@ -3306,17 +3306,17 @@
     "COMM1110": {
         "original": "Students enrolled in 3764 (Eng/Comm), Actuarial Studies or Economics programs (in both single and double degree mode) are not permitted to enrol. Only available to single and double degree Business School students in Term 1. It will be offered to non-Business School students in Terms 2 and 3.<br/><br/>",
         "processed": "",
-        "handbook_note": "Only available to single && double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 && 3"
+        "handbook_note": "Only available to single and double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 and 3"
     },
     "COMM1120": {
         "original": "Only available to single and double degree Business School students in Term 1. It will be offered to non-Business School students in Terms 2 and 3.<br/><br/>",
         "processed": "",
-        "handbook_note": "Only available to single && double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 && 3"
+        "handbook_note": "Only available to single and double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 and 3"
     },
     "COMM1140": {
         "original": "Only available to single and double degree Business School students in Term 1. It will be offered to non-Business School students in Terms 2 and 3.<br/><br/>",
         "processed": "",
-        "handbook_note": "Only available to single && double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 && 3"
+        "handbook_note": "Only available to single and double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 and 3"
     },
     "COMM1150": {
         "original": "Pre-requisite: COMM1100 and excludes MGMT1101. Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Terms 1 and 3.<br/><br/>",
@@ -3326,17 +3326,17 @@
     "COMM1170": {
         "original": "Pre-requisite: COMM1140. Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Terms 1 and 3.<br/><br/>",
         "processed": "COMM1140",
-        "handbook_note": "Only available to single && double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 && 3"
+        "handbook_note": "Only available to single and double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 and 3"
     },
     "COMM1180": {
         "original": "Pre-requisite: COMM1140. Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Terms 1 and 3.<br/><br/>",
         "processed": "COMM1140",
-        "handbook_note": "Only available to single && double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 && 3"
+        "handbook_note": "Only available to single and double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 and 3"
     },
     "COMM1190": {
         "original": "Pre-requisite: COMM1110 or ECON1203 or MATH1031 or MATH1041 or MATH1131 or MATH1141 or MATH1151. Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Term 3.<br/><br/>",
         "processed": "COMM1110 || ECON1203 || MATH1031 || MATH1041 || MATH1131 || MATH1141 || MATH1151",
-        "handbook_note": "Only available to single && double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 && 3"
+        "handbook_note": "Only available to single and double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 and 3"
     },
     "COMM1822": {
         "original": "",

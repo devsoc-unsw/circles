@@ -1,4 +1,6 @@
-export const toggleTheme = (payload) => ({
+const toggleTheme = (payload) => ({
   type: "toggleTheme",
-  payload: payload,
+  payload,
 });
+
+export default toggleTheme;
