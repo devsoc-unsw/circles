@@ -67,7 +67,6 @@ const CourseDescription = ({ structure }) => {
   const dispatch = useDispatch();
   const { active, tabs } = useSelector((state) => state.tabs);
   const id = tabs[active];
-  console.log("====", tabs, active);
 
   const course = useSelector((state) => state.courses.course);
   const coursesInPlanner = useSelector((state) => state.planner.courses);
@@ -139,7 +138,6 @@ const CourseDescription = ({ structure }) => {
         isAccurate: course.is_accurate,
       },
     };
-    console.log("===adding to unplanned");
     dispatch(addToUnplanned(data));
     setLoading(true);
     setTimeout(() => {

@@ -27,7 +27,6 @@ const ContextMenu = ({ code, plannedFor }) => {
   };
 
   const handleUnschedule = () => {
-    // console.log(code);
     dispatch(unschedule(code));
     updateAllWarnings(
       dispatch,

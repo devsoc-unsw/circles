@@ -183,7 +183,6 @@ const MenuItem = ({
   const dispatch = useDispatch();
   const handleClick = () => {
     dispatch(addTab(courseCode));
-    console.log("===adding curse", courseCode);
     setActiveCourse(courseCode);
   };
 

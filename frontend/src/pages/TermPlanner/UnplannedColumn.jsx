@@ -11,7 +11,6 @@ const UnplannedColumn = () => {
   const { Panel } = Collapse;
   const theme = useSelector((state) => state.theme);
   const { unplanned } = useSelector((state) => state.planner);
-  console.log(unplanned);
 
   return (
     <div className="unplannedColumn">
