@@ -43,9 +43,10 @@ const MinorStep = ({ incrementStep, currStep }) => {
 
       <Menu
         className="degree-minors"
-        onClick={(e) => dispatch(degreeActions("SET_MINOR", e.key))}
         selectedKeys={minor && [minor]}
         mode="inline"
+        onDeselect={() => dispatch(degreeActions("SET_MINOR", ""))}
+        onSelect={(e) => dispatch(degreeActions("SET_MINOR", e.key))}
       >
         {programCode ? (
           Object.keys(options).map((key) => (
