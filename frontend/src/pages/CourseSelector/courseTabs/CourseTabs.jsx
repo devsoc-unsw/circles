@@ -1,6 +1,8 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { Popconfirm, Tooltip } from "antd";
+import { DeleteOutlined } from "@ant-design/icons";
 import courseTabActions from "../../../actions/courseTabActions";
 import "./courseTabs.less";
 import CourseTab from "./CourseTab";
@@ -53,6 +55,25 @@ const CourseTabs = () => {
           )}
         </Droppable>
       </DragDropContext>
+      {
+        !!tabs.length
+        && (
+          <div className="cs-tabs-close-all">
+            <Popconfirm
+              placement="bottomRight"
+              title="Do you want to close all tabs?"
+              onConfirm={() => dispatch(courseTabActions("RESET_COURSE_TABS"))}
+              style={{ width: "500px" }}
+              okText="Yes"
+              cancelText="No"
+            >
+              <Tooltip title="Close all tabs">
+                <DeleteOutlined />
+              </Tooltip>
+            </Popconfirm>
+          </div>
+        )
+      }
     </div>
   );
 };
