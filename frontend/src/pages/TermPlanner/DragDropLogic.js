@@ -1,4 +1,4 @@
-import plannerActions from "../../actions/plannerActions";
+import { moveCourse, setUnplanned, setYears } from "../../reducers/plannerSlice";
 
 export const handleOnDragEnd = (result, dragEndProps) => {
   const {
@@ -13,7 +13,7 @@ export const handleOnDragEnd = (result, dragEndProps) => {
   if (!destination) return; // drag outside container
 
   dispatch(
-    plannerActions("MOVE_COURSE", {
+    moveCourse({
       course: draggableId,
       term: destination.droppableId,
     }),
@@ -34,13 +34,13 @@ export const handleOnDragEnd = (result, dragEndProps) => {
 
   // === move unplanned course to term ===
   if (source.droppableId.match(/T[0-3]/) === null) {
-    dispatch(plannerActions("SET_UNPLANNED", draggableId));
+    dispatch(setUnplanned(draggableId));
 
     // update destination term box
     const destCoursesCpy = Array.from(years[destRow][destTerm]);
     destCoursesCpy.splice(destination.index, 0, draggableId);
     newYears[destRow][destTerm] = destCoursesCpy;
-    dispatch(plannerActions("SET_YEARS", newYears));
+    dispatch(setYears(newYears));
 
     return;
   }
@@ -56,7 +56,7 @@ export const handleOnDragEnd = (result, dragEndProps) => {
     alteredBox.splice(source.index, 1);
     alteredBox.splice(destination.index, 0, draggableId);
     newYears[srcRow][srcTerm] = alteredBox;
-    dispatch(plannerActions("SET_YEARS", newYears));
+    dispatch(setYears(newYears));
     return;
   }
 
@@ -69,7 +69,7 @@ export const handleOnDragEnd = (result, dragEndProps) => {
 
   newYears[srcRow][srcTerm] = srcCoursesCpy;
   newYears[destRow][destTerm] = destCoursesCpy;
-  dispatch(plannerActions("SET_YEARS", newYears));
+  dispatch(setYears(newYears));
 };
 
 export const handleOnDragStart = (

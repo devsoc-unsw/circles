@@ -6,11 +6,11 @@ import { scroller } from "react-scroll";
 import DegreeStep from "./steps/DegreeStep";
 import SpecialisationStep from "./steps/SpecialisationStep";
 import MinorStep from "./steps/MinorStep";
-import plannerActions from "../../actions/plannerActions";
 import "./main.less";
 import YearStep from "./steps/YearStep";
-import courseTabActions from "../../actions/courseTabActions";
 import StartBrowsingStep from "./steps/StartBrowsingStep";
+import { resetTabs } from "../../reducers/courseTabsSlice";
+import { resetPlanner } from "../../reducers/plannerSlice";
 
 const { Title } = Typography;
 
@@ -45,8 +45,8 @@ const DegreeWizard = () => {
   const handleOk = () => {
     setIsModalVisible(false);
     // Degree selector needs to reset to prevent identical courses in a term
-    dispatch(plannerActions("RESET_PLANNER"));
-    dispatch(courseTabActions("RESET_COURSE_TABS"));
+    dispatch(resetPlanner());
+    dispatch(resetTabs());
   };
 
   const handleCancel = () => {

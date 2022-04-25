@@ -10,9 +10,9 @@ import { ReactComponent as Padlock } from "../../../images/padlock.svg";
 import axiosRequest from "../../../axios";
 import prepareUserPayload from "../helper";
 import Loading from "./Loading";
-import courseTabActions from "../../../actions/courseTabActions";
-import plannerActions from "../../../actions/plannerActions";
-import { setCourses } from "../../../actions/coursesActions";
+import { setCourses } from "../../../reducers/coursesSlice";
+import { addTab } from "../../../reducers/courseTabsSlice";
+import { addToUnplanned } from "../../../reducers/plannerSlice";
 
 const { SubMenu } = Menu;
 
@@ -21,11 +21,6 @@ const CourseMenu = ({ structure, showLockedCourses }) => {
   const [menuData, setMenuData] = useState({});
   const [coursesUnits, setCoursesUnits] = useState({});
   const [activeCourse, setActiveCourse] = useState("");
-  const { active, tabs } = useSelector((state) => state.tabs);
-  let id = tabs[active];
-
-  // Exception tabs
-  if (id === "explore" || id === "search") id = null;
 
   // get courses in planner
   const planner = useSelector((state) => state.planner);
@@ -187,7 +182,7 @@ const MenuItem = ({
 }) => {
   const dispatch = useDispatch();
   const handleClick = () => {
-    dispatch(courseTabActions("ADD_TAB", courseCode));
+    dispatch(addTab(courseCode));
     setActiveCourse(courseCode);
   };
 
@@ -214,7 +209,7 @@ const MenuItem = ({
         isAccurate: course.is_accurate,
       },
     };
-    dispatch(plannerActions("ADD_TO_UNPLANNED", data));
+    dispatch(addToUnplanned(data));
   };
 
   return (

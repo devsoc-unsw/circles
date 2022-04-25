@@ -4,9 +4,9 @@ import {
 } from "antd";
 import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
-import plannerActions from "../../../actions/plannerActions";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
+import { setDegreeLength, toggleSummer, updateStartYear } from "../../../reducers/plannerSlice";
 
 const SettingsMenu = () => {
   const { Title } = Typography;
@@ -15,16 +15,16 @@ const SettingsMenu = () => {
 
   const dispatch = useDispatch();
 
-  function updateStartYear(date, dateString) {
-    dispatch(plannerActions("UPDATE_START_YEAR", dateString));
+  function handleUpdateStartYear(date, dateString) {
+    dispatch(updateStartYear(dateString));
   }
 
-  function updateDegreeLength(value) {
-    dispatch(plannerActions("SET_DEGREE_LENGTH", value));
+  function handleUpdateDegreeLength(value) {
+    dispatch(setDegreeLength(value));
   }
 
   function handleSummerToggle() {
-    dispatch(plannerActions("TOGGLE_SUMMER"));
+    dispatch(toggleSummer());
   }
 
   const years = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -53,7 +53,7 @@ const SettingsMenu = () => {
           Start Year
         </Title>
         <DatePicker
-          onChange={updateStartYear}
+          onChange={handleUpdateStartYear}
           picker="year"
           style={{ width: 105 }}
         />
@@ -65,7 +65,7 @@ const SettingsMenu = () => {
         <Select
           defaultValue="3"
           style={{ width: 70 }}
-          onChange={updateDegreeLength}
+          onChange={handleUpdateDegreeLength}
         >
           {years.map((num) => (
             <Option value={num}>{num}</Option>

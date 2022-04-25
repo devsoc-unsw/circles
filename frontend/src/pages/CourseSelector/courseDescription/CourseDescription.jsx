@@ -8,13 +8,13 @@ import { motion } from "framer-motion/dist/framer-motion";
 import { BsPlusLg } from "react-icons/bs";
 import { CourseTag } from "../../../components/courseTag/CourseTag";
 import SearchCourse from "../SearchCourse";
-import plannerActions from "../../../actions/plannerActions";
 import Loading from "./Loading";
 import "./courseDescription.less";
 import prepareUserPayload from "../helper";
 import infographic from "../../../images/infographicFontIndependent.svg";
 import axiosRequest from "../../../axios";
-import { setCourse } from "../../../actions/coursesActions";
+import { setCourse } from "../../../reducers/coursesSlice";
+import { addToUnplanned, removeCourse } from "../../../reducers/plannerSlice";
 
 const { Title, Text } = Typography;
 const CourseAttribute = ({ title, content }) => (
@@ -101,7 +101,6 @@ const CourseDescription = ({ structure }) => {
     };
 
     setpageLoaded(false);
-    if (id === "explore" || id === "search") return;
     if (id) {
       getCourse();
       getPathToCoursesById(id);
@@ -139,7 +138,7 @@ const CourseDescription = ({ structure }) => {
         isAccurate: course.is_accurate,
       },
     };
-    dispatch(plannerActions("ADD_TO_UNPLANNED", data));
+    dispatch(addToUnplanned(data));
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
@@ -147,7 +146,7 @@ const CourseDescription = ({ structure }) => {
   };
 
   const removeFromPlanner = () => {
-    dispatch(plannerActions("REMOVE_COURSE", id));
+    dispatch(removeCourse(id));
     setLoading(true);
     setTimeout(() => {
       setLoading(false);

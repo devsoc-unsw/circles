@@ -3,8 +3,8 @@ import { Typography, Button, DatePicker } from "antd";
 import { useDispatch } from "react-redux";
 import "./steps.less";
 import { useSpring, animated } from "@react-spring/web";
-import plannerActions from "../../../actions/plannerActions";
 import springProps from "../spring";
+import { setDegreeLength, updateStartYear } from "../../../reducers/plannerSlice";
 
 const { Title } = Typography;
 const { RangePicker } = DatePicker;
@@ -16,8 +16,8 @@ const YearStep = ({ incrementStep, currStep }) => {
   const handleYearChange = (_, [startYear, endYear]) => {
     setNextStep(startYear && endYear);
     const numYears = endYear - startYear + 1;
-    dispatch(plannerActions("SET_DEGREE_LENGTH", numYears));
-    dispatch(plannerActions("UPDATE_START_YEAR", startYear));
+    dispatch(setDegreeLength(numYears));
+    dispatch(updateStartYear(startYear));
   };
   const props = useSpring(springProps);
   return (
