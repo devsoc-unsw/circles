@@ -5,12 +5,12 @@ import { useNavigate } from "react-router-dom";
 import { scroller } from "react-scroll";
 import DegreeStep from "./steps/DegreeStep";
 import SpecialisationStep from "./steps/SpecialisationStep";
-import PreviousCoursesStep from "./steps/PreviousCoursesStep";
 import MinorStep from "./steps/MinorStep";
 import plannerActions from "../../actions/plannerActions";
 import "./main.less";
 import YearStep from "./steps/YearStep";
 import courseTabActions from "../../actions/courseTabActions";
+import StartBrowsingStep from "./steps/StartBrowsingStep";
 
 const { Title } = Typography;
 
@@ -33,7 +33,7 @@ const DegreeWizard = () => {
     if (currStep === 1) nextId = "Degree";
     if (currStep === 2) nextId = "Specialisation";
     if (currStep === 3) nextId = "Minor";
-    if (currStep === 4) nextId = "Previous Courses";
+    if (currStep === 4) nextId = "Start Browsing";
     setTimeout(() => {
       scroller.scrollTo(nextId, {
         duration: 1500,
@@ -107,8 +107,8 @@ const DegreeWizard = () => {
           </div>
         )}
         {currStep >= 5 && (
-          <div className="step-content" id="Previous Courses">
-            <PreviousCoursesStep />
+          <div className="step-content" id="Start Browsing">
+            <StartBrowsingStep />
           </div>
         )}
       </div>

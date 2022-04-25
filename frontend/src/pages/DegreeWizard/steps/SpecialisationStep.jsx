@@ -32,7 +32,7 @@ const SpecialisationStep = ({ incrementStep, currStep }) => {
         <Title level={4} className="text">
           What are you specialising in?
         </Title>
-        {specialisation !== null && currStep === 3 && (
+        {specialisation && currStep === 3 && (
           <Button type="primary" onClick={incrementStep}>
             Next
           </Button>
@@ -41,7 +41,8 @@ const SpecialisationStep = ({ incrementStep, currStep }) => {
 
       <Menu
         className="degree-specialisations"
-        onClick={(e) => dispatch(degreeActions("SET_SPECIALISATION", e.key))}
+        onSelect={(e) => dispatch(degreeActions("SET_SPECIALISATION", e.key))}
+        onDeselect={() => dispatch(degreeActions("SET_SPECIALISATION", ""))}
         selectedKeys={specialisation && [specialisation]}
         mode="inline"
       >
