@@ -10,7 +10,7 @@
     "@react-spring/web": "9.4.4",
     "@reduxjs/toolkit": "1.8.1",
     "@tippyjs/react": "4.2.6",
-    "antd": "4.19.5",
+    "antd": "4.20.0",
     "axios": "0.26.1",
     "craco-less": "1.20.0",
     "framer-motion": "6.3.1",
