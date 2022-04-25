@@ -283,11 +283,10 @@ const plannerSlice = createSlice({
 });
 
 export const {
-  addToPlanned, addToUnplanned, addCoreCourses, setNumYears,
-  toggleWarnings, setUnplanned, removeAllUnplanned, removeCourse, removeAllCourses,
+  addToUnplanned, setUnplannedCourseToTerm, setPlannedCourseToTerm,
+  toggleWarnings, setUnplanned, removeCourse, removeAllCourses,
   moveCourse, unschedule, unscheduleAll, toggleSummer, toggleTermComplete,
   updateStartYear, updateDegreeLength, hideYear, unhideAllYears, resetPlanner,
-  setUnplannedCourseToTerm, setPlannedCourseToTerm,
 } = plannerSlice.actions;
 
 export default plannerSlice.reducer;
