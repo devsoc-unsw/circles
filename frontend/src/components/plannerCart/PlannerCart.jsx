@@ -106,10 +106,10 @@ export const PlannerCart = () => {
               afterClose={() => setShow(false)}
             />
           )}
-          {courses.size > 0 ? (
+          {Object.keys(courses).length > 0 ? (
             <div className="planner-cart-content">
               {/* Reversed map to show the most recently added courses first */}
-              {[...courses.keys()].reverse().map((courseCode) => (
+              {Object.keys(courses).reverse().map((courseCode) => (
                 <CourseCard
                   code={courseCode}
                   title={courses[courseCode].title}
@@ -135,7 +135,7 @@ export const PlannerCart = () => {
             </div>
           )}
           {/* Hacky solution so prevent overflow.. help  */}
-          {!show && courses.size > 0 && (
+          {!show && Object.keys(courses).length > 0 && (
             <Button
               danger
               className="planner-cart-delete-all-btn"

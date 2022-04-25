@@ -6,21 +6,24 @@ import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
-import { setDegreeLength, toggleSummer, updateStartYear } from "../../../reducers/plannerSlice";
+import moment from "moment";
+import { updateDegreeLength, toggleSummer, updateStartYear } from "../../../reducers/plannerSlice";
 
 const SettingsMenu = () => {
   const { Title } = Typography;
   const { Option } = Select;
-  const { isSummerEnabled } = useSelector((state) => state.planner);
+  const { isSummerEnabled, numYears, startYear } = useSelector((state) => state.planner);
 
   const dispatch = useDispatch();
 
   function handleUpdateStartYear(date, dateString) {
-    dispatch(updateStartYear(dateString));
+    if (dateString) {
+      dispatch(updateStartYear(dateString));
+    }
   }
 
   function handleUpdateDegreeLength(value) {
-    dispatch(setDegreeLength(value));
+    dispatch(updateDegreeLength(value));
   }
 
   function handleSummerToggle() {
@@ -56,6 +59,7 @@ const SettingsMenu = () => {
           onChange={handleUpdateStartYear}
           picker="year"
           style={{ width: 105 }}
+          value={moment(startYear, "YYYY")}
         />
       </div>
       <div className="settingsEntry">
@@ -63,7 +67,7 @@ const SettingsMenu = () => {
           Degree Length
         </Title>
         <Select
-          defaultValue="3"
+          value={numYears}
           style={{ width: 70 }}
           onChange={handleUpdateDegreeLength}
         >

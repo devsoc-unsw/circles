@@ -65,7 +65,7 @@ const PlannerDropdown = ({ courseCode, structure, addToPlanner }) => {
 
 const CourseDescription = ({ structure }) => {
   const dispatch = useDispatch();
-  const { active, tabs } = useSelector((state) => state.tabs);
+  const { active, tabs } = useSelector((state) => state.courseTabs);
   const id = tabs[active];
 
   const course = useSelector((state) => state.courses.course);

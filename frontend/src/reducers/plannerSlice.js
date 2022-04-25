@@ -1,9 +1,5 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from "@reduxjs/toolkit";
-import {
-  setInLocalStorage,
-  generateEmptyYears,
-} from "./plannerHelper";
 
 // set up hidden object
 const generateHiddenInit = (startYear, numYears) => {
@@ -14,8 +10,19 @@ const generateHiddenInit = (startYear, numYears) => {
   return hiddenInit;
 };
 
+const generateEmptyYears = (nYears) => {
+  const res = [];
+  for (let i = 0; i < nYears; i++) {
+    res.push({
+      T0: [], T1: [], T2: [], T3: [],
+    });
+  }
+  return res;
+};
+
 const fakeStartYear = parseInt(new Date().getFullYear(), 10);
 const fakeNumYears = 3;
+
 let initialState = {
   unplanned: [],
   startYear: fakeStartYear,
@@ -42,25 +49,6 @@ let initialState = {
 const planner = JSON.parse(localStorage.getItem("planner"));
 if (planner) initialState = planner;
 
-const unscheduleCourse = (state, code) => {
-  state.unplanned.push(code);
-
-  const { plannedFor } = state.courses[code];
-
-  const yearI = parseInt(plannedFor.slice(0, 4), 10) - state.startYear;
-  const termI = plannedFor.slice(4);
-
-  state.years[yearI][termI] = state.years[yearI][termI].filter((course) => course !== code);
-
-  state.courses[code].plannedFor = null;
-  state.courses[code].isUnlocked = true;
-  state.courses[code].warnings = [];
-  state.courses[code].handbookNote = "";
-  state.courses[code].isAccurate = true;
-
-  setInLocalStorage(state);
-};
-
 const plannerSlice = createSlice({
   name: "planner",
   initialState,
@@ -71,30 +59,7 @@ const plannerSlice = createSlice({
         state.courses[courseCode] = courseData;
         state.unplanned.push(courseCode);
       }
-      setInLocalStorage(state);
-    },
-    addToPlanned: (state, action) => {
-      const { code, position } = action.payload;
-      const [yearNum, termNum] = position;
-
-      state.years[yearNum][termNum].push(code);
-      // Add course data to courses
-      setInLocalStorage(state);
-    },
-    // addCoreCourses: (state, action) => {
-    //   state.courses = {
-    //     ...state.courses,
-    //     ...action.payload,
-    //   };
-    //   setInLocalStorage(state);
-    // },
-    // setNumYears: (state, action) => {
-    //   state.numYears = action.payload;
-    //   setInLocalStorage(state);
-    // },
-    setYears: (state, action) => {
-      state.years = action.payload;
-      setInLocalStorage(state);
+      localStorage.setItem("planner", JSON.stringify(state));
     },
     toggleWarnings: (state, action) => {
       Object.keys(action.payload).forEach((course) => {
@@ -109,6 +74,7 @@ const plannerSlice = createSlice({
           state.courses[course].handbookNote = handbookNote;
         }
       });
+      localStorage.setItem("planner", JSON.stringify(state));
     },
     setUnplannedCourseToTerm: (state, action) => {
       const {
@@ -118,7 +84,7 @@ const plannerSlice = createSlice({
         (c) => c !== course,
       );
       state.years[destRow][destTerm].splice(destIndex, 0, course);
-      setInLocalStorage(state);
+      localStorage.setItem("planner", JSON.stringify(state));
     },
     setPlannedCourseToTerm: (state, action) => {
       const {
@@ -127,11 +93,15 @@ const plannerSlice = createSlice({
       } = action.payload;
       state.years[srcRow][srcTerm].splice(srcIndex, 1);
       state.years[destRow][destTerm].splice(destIndex, 0, course);
+      localStorage.setItem("planner", JSON.stringify(state));
     },
-    // removeAllUnplanned: (state, action) => {
-    //   state.unplanned = action.plannedCourses;
-    //   setInLocalStorage(state);
-    // },
+    moveCourse: (state, action) => {
+      const { course, term } = action.payload;
+      if (state.courses[course]) {
+        state.courses[course].plannedFor = term;
+      }
+      localStorage.setItem("planner", JSON.stringify(state));
+    },
     removeCourse: (state, action) => {
       // Remove courses from years and courses
       if (state.courses[action.payload]) {
@@ -155,43 +125,79 @@ const plannerSlice = createSlice({
             (course) => course !== action.payload,
           );
         }
-        setInLocalStorage(state);
+        localStorage.setItem("planner", JSON.stringify(state));
       }
     },
     removeAllCourses: (state) => {
       state.years = generateEmptyYears(state.numYears);
       state.courses = {};
       state.unplanned = [];
-      setInLocalStorage(state);
-    },
-    moveCourse: (state, action) => {
-      const { course, term } = action.payload;
-      if (state.courses[course]) {
-        state.courses[course].plannedFor = term;
-      }
-      setInLocalStorage(state);
+      localStorage.setItem("planner", JSON.stringify(state));
     },
     unschedule: (state, action) => {
-      unscheduleCourse(action.payload);
-      // Object.assign(state, unscheduleCourse(action.payload));
+      const code = action.payload;
+      state.unplanned.push(code);
+
+      const { plannedFor } = state.courses[code];
+
+      const yearI = parseInt(plannedFor.slice(0, 4), 10) - state.startYear;
+      const termI = plannedFor.slice(4);
+
+      state.years[yearI][termI] = state.years[yearI][termI].filter((course) => course !== code);
+
+      state.courses[code].plannedFor = null;
+      state.courses[code].isUnlocked = true;
+      state.courses[code].warnings = [];
+      state.courses[code].handbookNote = "";
+      state.courses[code].isAccurate = true;
+
+      localStorage.setItem("planner", JSON.stringify(state));
     },
     unscheduleAll: (state) => {
-      // TODO: FIX
-      state.courses.forEach((desc, c) => {
+      Object.entries(state.courses).forEach(([code, desc]) => {
         if (desc.plannedFor !== null) {
-          unscheduleCourse(c);
-          // Object.assign(state, unscheduleCourse(c));
+          state.unplanned.push(code);
+
+          const { plannedFor } = state.courses[code];
+
+          const yearI = parseInt(plannedFor.slice(0, 4), 10) - state.startYear;
+          const termI = plannedFor.slice(4);
+
+          state.years[yearI][termI] = state.years[yearI][termI].filter((course) => course !== code);
+
+          state.courses[code].plannedFor = null;
+          state.courses[code].isUnlocked = true;
+          state.courses[code].warnings = [];
+          state.courses[code].handbookNote = "";
+          state.courses[code].isAccurate = true;
         }
       });
+      localStorage.setItem("planner", JSON.stringify(state));
     },
     toggleSummer: (state) => {
       state.isSummerEnabled = !state.isSummerEnabled;
-      setInLocalStorage(state);
+
+      // TODO: Unsure if we should keep the course in the summer column if hidden
+      // For now, keep courses hidden if summer column is also hidden. If we want
+      // to remove the courses if summer term is toggled off, then 'term complete'
+      // must also be reset.
+      // if (!state.isSummerEnabled) {
+      //   for (let i = 0; i < state.numYears; i++) {
+      //     const courses = state.years[i].T0;
+      //     courses.forEach((course) => {
+      //       state.courses[course].plannedFor = null;
+      //       state.unplanned.push(course);
+      //     });
+      //     state.years[i].T0 = [];
+      //   }
+      // }
+
+      localStorage.setItem("planner", JSON.stringify(state));
     },
     toggleTermComplete: (state, action) => {
       const isCompleted = state.completedTerms[action.payload];
       state.completedTerms[action.payload] = !isCompleted;
-      setInLocalStorage(state);
+      localStorage.setItem("planner", JSON.stringify(state));
     },
     updateStartYear: (state, action) => {
       const currEndYear = state.startYear + state.numYears - 1;
@@ -222,9 +228,9 @@ const plannerSlice = createSlice({
 
       state.startYear = newStartYear;
       state.years = updatedYears;
-      setInLocalStorage(state);
+      localStorage.setItem("planner", JSON.stringify(state));
     },
-    setDegreeLength: (state, action) => {
+    updateDegreeLength: (state, action) => {
       const newNumYears = action.payload;
 
       if (newNumYears !== state.numYears) {
@@ -237,48 +243,50 @@ const plannerSlice = createSlice({
           }
         } else {
           // remove extra years
-          for (let i = state.numYears; i >= newNumYears; i--) {
-            Object.values(state.years[i - 1])
-              .forEach((t) => {
-                t.forEach((c) => {
-                  state.courses[c].plannedFor = null;
+          for (let i = state.numYears - 1; i >= newNumYears; i--) {
+            if (state.years[i]) {
+              Object.values(state.years[i]).forEach((courses) => {
+                courses.forEach((course) => {
+                  state.courses[course].plannedFor = null;
+                  state.unplanned.push(course);
                 });
               });
+            }
             // remove year
-            state.years.splice(i - 1, 1);
+            state.years.splice(i, 1);
           }
         }
 
         state.numYears = newNumYears;
         state.hidden = generateHiddenInit(state.startYear, newNumYears);
 
-        setInLocalStorage(state);
+        localStorage.setItem("planner", JSON.stringify(state));
       }
     },
     hideYear: (state, action) => {
       state.hidden[action.payload] = true;
       state.areYearsHidden = true;
-      setInLocalStorage(state);
+      localStorage.setItem("planner", JSON.stringify(state));
     },
     unhideAllYears: (state) => {
       Object.keys(state.hidden).forEach((year) => {
         state.hidden[year] = false;
       });
       state.areYearsHidden = false;
-      setInLocalStorage(state);
+      localStorage.setItem("planner", JSON.stringify(state));
     },
     resetPlanner: (state) => {
-      setInLocalStorage(initialState);
       Object.assign(state, initialState);
+      localStorage.setItem("planner", JSON.stringify(initialState));
     },
   },
 });
 
 export const {
-  addToPlanned, addToUnplanned, addCoreCourses, setNumYears, setYears,
+  addToPlanned, addToUnplanned, addCoreCourses, setNumYears,
   toggleWarnings, setUnplanned, removeAllUnplanned, removeCourse, removeAllCourses,
   moveCourse, unschedule, unscheduleAll, toggleSummer, toggleTermComplete,
-  updateStartYear, setDegreeLength, hideYear, unhideAllYears, resetPlanner,
+  updateStartYear, updateDegreeLength, hideYear, unhideAllYears, resetPlanner,
   setUnplannedCourseToTerm, setPlannedCourseToTerm,
 } = plannerSlice.actions;
 

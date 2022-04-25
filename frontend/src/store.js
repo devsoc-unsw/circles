@@ -8,7 +8,7 @@ import themeReducer from "./reducers/themeSlice";
 export default configureStore({
   reducer: {
     degree: degreeReducer,
-    tabs: courseTabsReducer,
+    courseTabs: courseTabsReducer,
     courses: coursesReducer,
     planner: plannerReducer,
     theme: themeReducer,

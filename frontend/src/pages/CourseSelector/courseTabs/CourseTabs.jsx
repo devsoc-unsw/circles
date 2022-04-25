@@ -9,7 +9,7 @@ import { reorderTabs, resetTabs, setActiveTab } from "../../../reducers/courseTa
 
 const CourseTabs = () => {
   const dispatch = useDispatch();
-  const { tabs } = useSelector((state) => state.tabs);
+  const { tabs } = useSelector((state) => state.courseTabs);
 
   const onDragStart = (result) => {
     dispatch(setActiveTab(result.source.index));

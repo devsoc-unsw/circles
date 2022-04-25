@@ -6,7 +6,7 @@ const initialState = {
 };
 
 const courseTabsSplice = createSlice({
-  name: "tabs",
+  name: "courseTabs",
   initialState,
   reducers: {
     addTab: (state, action) => {
@@ -36,9 +36,7 @@ const courseTabsSplice = createSlice({
     reorderTabs: (state, action) => {
       state.tabs = action.payload;
     },
-    resetTabs: (state) => {
-      Object.assign(state, initialState);
-    },
+    resetTabs: () => initialState,
   },
 });
 

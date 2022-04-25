@@ -12,7 +12,7 @@ const CourseTab = ({ tab, index }) => {
   const dispatch = useDispatch();
   const ref = useRef(null);
   const tabInView = useIntersectionObserver(ref);
-  const { active } = useSelector((state) => state.tabs);
+  const { active } = useSelector((state) => state.courseTabs);
 
   const getDraggableStyle = (style) => {
     // lock x axis when dragging
