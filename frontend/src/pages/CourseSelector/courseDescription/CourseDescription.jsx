@@ -67,14 +67,15 @@ const CourseDescription = ({ structure }) => {
   const dispatch = useDispatch();
   const { active, tabs } = useSelector((state) => state.tabs);
   const id = tabs[active];
+  console.log("====", tabs, active);
 
   const course = useSelector((state) => state.courses.course);
   const coursesInPlanner = useSelector((state) => state.planner.courses);
-  const courseInPlanner = coursesInPlanner.has(id);
+  const courseInPlanner = !!coursesInPlanner[id];
   const planner = useSelector((state) => state.planner);
   const degree = useSelector((state) => state.degree);
   const [loading, setLoading] = useState(false);
-  const [pageLoaded, setpageLoaded] = useState(false);
+  const [pageLoaded, setPageLoaded] = useState(false);
   const [coursesPathTo, setCoursesPathTo] = useState({});
 
   useEffect(() => {
@@ -82,7 +83,7 @@ const CourseDescription = ({ structure }) => {
       const [data, err] = await axiosRequest("get", `/courses/getCourse/${id}`);
       if (!err) {
         dispatch(setCourse(data));
-        setpageLoaded(true);
+        setPageLoaded(true);
       }
     };
 
@@ -100,7 +101,7 @@ const CourseDescription = ({ structure }) => {
       }
     };
 
-    setpageLoaded(false);
+    setPageLoaded(false);
     if (id) {
       getCourse();
       getPathToCoursesById(id);

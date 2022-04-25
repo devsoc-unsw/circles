@@ -68,16 +68,16 @@ const CourseMenu = ({ structure, showLockedCourses }) => {
               newMenu[group][subgroup].sort(sortMenu);
 
               // add UOC to curr
-              if (planner.courses.get(courseCode)) {
+              if (planner.courses[courseCode]) {
                 newCoursesUnits[group][subgroup].curr
-                    += planner.courses.get(courseCode).UOC;
+                    += planner.courses[courseCode].UOC;
               }
             });
           } else {
             // If there is no specified course list for the subgroup, then manually
             // show the added courses on the menu.
             Object.keys(planner.courses).forEach((courseCode) => {
-              const courseData = planner.courses.get(courseCode);
+              const courseData = planner.courses[courseCode];
               if (courseData && courseData.type === subgroup) {
                 newMenu[group][subgroup].push(courseCode);
                 // add UOC to curr
@@ -149,7 +149,7 @@ const CourseMenu = ({ structure, showLockedCourses }) => {
                       {subGroupEntry.map(
                         (course) => (course.unlocked || showLockedCourses) && (
                         <MenuItem
-                          selected={planner.courses.get(course.courseCode) !== undefined}
+                          selected={planner.courses[course.courseCode] !== undefined}
                           courseCode={course.courseCode}
                           accurate={course.accuracy}
                           unlocked={course.unlocked}
@@ -183,6 +183,7 @@ const MenuItem = ({
   const dispatch = useDispatch();
   const handleClick = () => {
     dispatch(addTab(courseCode));
+    console.log("===adding curse", courseCode);
     setActiveCourse(courseCode);
   };
 

@@ -63,7 +63,7 @@ const CourseTab = ({ tab, index }) => {
             icon={<CloseOutlined style={{ fontSize: "12px" }} />}
             onClick={(e) => {
               e.stopPropagation(); // stop propagation for above tab onclick event
-              dispatch(setActiveTab(index));
+              dispatch(removeTab(index));
             }}
           />
         </div>
