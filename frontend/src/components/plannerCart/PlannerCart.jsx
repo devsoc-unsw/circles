@@ -112,7 +112,7 @@ export const PlannerCart = () => {
               {[...courses.keys()].reverse().map((courseCode) => (
                 <CourseCard
                   code={courseCode}
-                  title={courses.get(courseCode).title}
+                  title={courses[courseCode].title}
                   showAlert={showAlert}
                 />
               ))}

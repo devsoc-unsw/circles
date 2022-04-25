@@ -69,6 +69,7 @@ const plannerSlice = createSlice({
       const { courseCode, courseData } = action.payload;
       if (!state.courses[courseCode]) {
         state.courses[courseCode] = courseData;
+        state.unplanned.push(courseCode);
       }
       setInLocalStorage(state);
     },
@@ -109,11 +110,23 @@ const plannerSlice = createSlice({
         }
       });
     },
-    setUnplanned: (state, action) => {
+    setUnplannedCourseToTerm: (state, action) => {
+      const {
+        destRow, destTerm, destIndex, course,
+      } = action.payload;
       state.unplanned = state.unplanned.filter(
-        (course) => course !== action.payload,
+        (c) => c !== course,
       );
+      state.years[destRow][destTerm].splice(destIndex, 0, course);
       setInLocalStorage(state);
+    },
+    setPlannedCourseToTerm: (state, action) => {
+      const {
+        srcRow, srcTerm, srcIndex,
+        destRow, destTerm, destIndex, course,
+      } = action.payload;
+      state.years[srcRow][srcTerm].splice(srcIndex, 1);
+      state.years[destRow][destTerm].splice(destIndex, 0, course);
     },
     // removeAllUnplanned: (state, action) => {
     //   state.unplanned = action.plannedCourses;
@@ -200,8 +213,8 @@ const plannerSlice = createSlice({
           Object.values(yearToBeRemoved).forEach((t) => {
             Object.values(t).forEach((c) => {
               state.unplanned.push(c);
-              state.courses.get(c).plannedFor = null;
-              state.courses.get(c).isUnlocked = true;
+              state.courses[c].plannedFor = null;
+              state.courses[c].isUnlocked = true;
             });
           });
         }
@@ -228,7 +241,7 @@ const plannerSlice = createSlice({
             Object.values(state.years[i - 1])
               .forEach((t) => {
                 t.forEach((c) => {
-                  state.courses.get(c).plannedFor = null;
+                  state.courses[c].plannedFor = null;
                 });
               });
             // remove year
@@ -266,6 +279,7 @@ export const {
   toggleWarnings, setUnplanned, removeAllUnplanned, removeCourse, removeAllCourses,
   moveCourse, unschedule, unscheduleAll, toggleSummer, toggleTermComplete,
   updateStartYear, setDegreeLength, hideYear, unhideAllYears, resetPlanner,
+  setUnplannedCourseToTerm, setPlannedCourseToTerm,
 } = plannerSlice.actions;
 
 export default plannerSlice.reducer;

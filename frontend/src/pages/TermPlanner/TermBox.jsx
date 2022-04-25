@@ -18,7 +18,7 @@ const TermBox = ({
     dispatch(toggleTermComplete(name));
   };
 
-  const isCompleted = completedTerms.get(name);
+  const isCompleted = !!completedTerms[name];
 
   const isOffered = termsOffered.includes(term) && !isCompleted;
 

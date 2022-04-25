@@ -11,12 +11,13 @@ const UnplannedColumn = () => {
   const { Panel } = Collapse;
   const theme = useSelector((state) => state.theme);
   const { unplanned } = useSelector((state) => state.planner);
+  console.log(unplanned);
 
   return (
     <div className="unplannedColumn">
       <Collapse className="collapse" ghost={theme === "dark"}>
         <Panel header="Unplanned" key="unplanned">
-          {unplanned.sort()
+          {unplanned
             .map((course, courseIndex) => (
               <Droppable droppableId={course} isDropDisabled>
                 {(provided) => (

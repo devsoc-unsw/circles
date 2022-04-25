@@ -139,6 +139,7 @@ const CourseDescription = ({ structure }) => {
         isAccurate: course.is_accurate,
       },
     };
+    console.log("===adding to unplanned");
     dispatch(addToUnplanned(data));
     setLoading(true);
     setTimeout(() => {
