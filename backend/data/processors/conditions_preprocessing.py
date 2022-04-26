@@ -284,7 +284,7 @@ def convert_coreqs(processed):
     """Puts co-requisites inside square brackets"""
     processed = processed.rstrip()
     return re.sub(
-        r"(co-?requisites?|concurrentl?y?);?:?\s?(.*)", r"[\2]", processed, flags=re.IGNORECASE
+        r",*;*\.*\s*(co-?requisites?|concurrentl?y?)\s?;?:?\s?(.*)", r" [\2]", processed, flags=re.IGNORECASE
     )
 
 
@@ -351,12 +351,20 @@ def handle_comma_logic(processed):
 
         # If there are no &&s and ||s between course codes, just replace them with &&s.
         if '&&' not in processed and '||' not in processed:
-            matches = re.findall(r'(?=([A-Z]{4}[0-9]{4}\s*,\s*[A-Z]{4}[0-9]{4}))', processed)
+            matches = re.findall(r'(?=([A-Z]{4}[0-9]{4}\s*,\s[A-Z]{4}[0-9]{4}))', processed)
             for match in matches:
                 # Replace each ' , ' with ' && ', where the amount
                 # of whitespace on either side of the comma doesn't matter
                 replacement = match.split(',')
                 processed = re.sub(match, f'{replacement[0]} {joining_cond} {replacement[1]}', processed)
+
+    # add &&s before coreqs if coreqs is not preceded by an OR logic
+    if re.search(r'\[.*\]', processed) and re.search(r'\|\|\s*\[', processed) is None:
+        processed = re.sub(r'&*\s*[^\|\|]\s*\[(.*)\]', r' && [\1]', processed)
+    
+    # remove &&s or ||s if it's the start of string
+    processed = re.sub(r'^\s*&&', '', processed)
+    processed = re.sub(r'^\s*\|\|', '', processed)
 
     return processed
 
