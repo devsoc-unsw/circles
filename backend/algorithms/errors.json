@@ -5914,19 +5914,6 @@
         ],
         "broke at": "Index 2, complete"
     },
-    "AVIA3900": {
-        "condition": {
-            "original": "Minimum completion of 72 UoC<br/><br/>",
-            "processed": "Minimum 72UOC"
-        },
-        "tokens": [
-            "(",
-            "Minimum",
-            "72UOC",
-            ")"
-        ],
-        "broke at": "Index 2, 72UOC"
-    },
     "AVIA4002": {
         "condition": {
             "original": "Prerequisite: Enrolled in AVIA Honours<br/><br/>",
@@ -11281,18 +11268,6 @@
         ],
         "broke at": "Index 3, must"
     },
-    "FOOD3010": {
-        "condition": {
-            "original": "Pre-requisites:FOOD1120,FOOD2320,CHEM2921<br/><br/>",
-            "processed": "FOOD1120,FOOD2320,CHEM2921"
-        },
-        "tokens": [
-            "(",
-            "FOOD1120,FOOD2320,CHEM2921",
-            ")"
-        ],
-        "broke at": "Index 2, )"
-    },
     "FOOD6804": {
         "condition": {
             "original": "Prerequsite :CHEM3811or INDC2003<br/><br/>",
@@ -11781,19 +11756,6 @@
             ")"
         ],
         "broke at": "Index 4, in"
-    },
-    "INTA1003": {
-        "condition": {
-            "original": "Pre-requisites: INTA1001,  INTA1002<br/><br/>",
-            "processed": "INTA1001, INTA1002"
-        },
-        "tokens": [
-            "(",
-            "INTA1001,",
-            "INTA1002",
-            ")"
-        ],
-        "broke at": "Index 2, INTA1002"
     },
     "INTA2004": {
         "condition": {
@@ -15827,30 +15789,6 @@
         ],
         "broke at": "Index 2, 96UOC"
     },
-    "MFAC2511": {
-        "condition": {
-            "original": "Prerequisite: MFAC1511,MFAC1512,MFAC1513<br/><br/>",
-            "processed": "MFAC1511,MFAC1512,MFAC1513"
-        },
-        "tokens": [
-            "(",
-            "MFAC1511,MFAC1512,MFAC1513",
-            ")"
-        ],
-        "broke at": "Index 2, )"
-    },
-    "MFAC2512": {
-        "condition": {
-            "original": "Prerequisite: MFAC1511,MFAC1512,MFAC1513<br/><br/>",
-            "processed": "MFAC1511,MFAC1512,MFAC1513"
-        },
-        "tokens": [
-            "(",
-            "MFAC1511,MFAC1512,MFAC1513",
-            ")"
-        ],
-        "broke at": "Index 2, )"
-    },
     "MFAC4999": {
         "condition": {
             "original": "Students who have completed Year 3 clinical coursework requirements are eligible for enrolment.<br/><br/>",
@@ -17692,18 +17630,6 @@
         ],
         "broke at": "Index 2, )"
     },
-    "PTRL4024": {
-        "condition": {
-            "original": "Prerequisite:PTRL3003,PTRL3015<br/><br/>",
-            "processed": "PTRL3003,PTRL3015"
-        },
-        "tokens": [
-            "(",
-            "PTRL3003,PTRL3015",
-            ")"
-        ],
-        "broke at": "Index 2, )"
-    },
     "SART3405": {
         "condition": {
             "original": "L2 Printmaking Prerequisite<br/><br/>",
@@ -17851,19 +17777,6 @@
             ")"
         ],
         "broke at": "Index 2, must"
-    },
-    "SCIF3900": {
-        "condition": {
-            "original": "Minimum completion of 72 UoC<br/><br/>",
-            "processed": "Minimum 72UOC"
-        },
-        "tokens": [
-            "(",
-            "Minimum",
-            "72UOC",
-            ")"
-        ],
-        "broke at": "Index 2, 72UOC"
     },
     "SDES3404": {
         "condition": {

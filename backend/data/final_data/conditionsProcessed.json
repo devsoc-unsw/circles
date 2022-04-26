@@ -2160,7 +2160,7 @@
     },
     "AVIA3900": {
         "original": "Minimum completion of 72 UoC<br/><br/>",
-        "processed": "Minimum 72UOC"
+        "processed": "72UOC"
     },
     "AVIA3910": {
         "original": "",
@@ -5914,7 +5914,7 @@
     },
     "FOOD3010": {
         "original": "Pre-requisites:FOOD1120,FOOD2320,CHEM2921<br/><br/>",
-        "processed": "FOOD1120,FOOD2320,CHEM2921"
+        "processed": "FOOD1120 && FOOD2320 && CHEM2921"
     },
     "FOOD3020": {
         "original": "Pre-Requisites:FOOD1120, CHEM2921<br/>Co-requisite: FOOD3010<br/><br/>",
@@ -6648,7 +6648,7 @@
     },
     "INTA1003": {
         "original": "Pre-requisites: INTA1001,  INTA1002<br/><br/>",
-        "processed": "INTA1001, INTA1002"
+        "processed": "INTA1001 && INTA1002"
     },
     "INTA2000": {
         "original": "",
@@ -8304,11 +8304,11 @@
     },
     "MFAC2511": {
         "original": "Prerequisite: MFAC1511,MFAC1512,MFAC1513<br/><br/>",
-        "processed": "MFAC1511,MFAC1512,MFAC1513"
+        "processed": "MFAC1511 && MFAC1512 && MFAC1513"
     },
     "MFAC2512": {
         "original": "Prerequisite: MFAC1511,MFAC1512,MFAC1513<br/><br/>",
-        "processed": "MFAC1511,MFAC1512,MFAC1513"
+        "processed": "MFAC1511 && MFAC1512 && MFAC1513"
     },
     "MFAC2514": {
         "original": "",
@@ -9724,7 +9724,7 @@
     },
     "PTRL4024": {
         "original": "Prerequisite:PTRL3003,PTRL3015<br/><br/>",
-        "processed": "PTRL3003,PTRL3015"
+        "processed": "PTRL3003 && PTRL3015"
     },
     "PTRL5100": {
         "original": "Prerequisites: PTRL2019 OR PTRL5019<br/><br/>",
@@ -9828,7 +9828,7 @@
     },
     "SCIF3900": {
         "original": "Minimum completion of 72 UoC<br/><br/>",
-        "processed": "Minimum 72UOC"
+        "processed": "72UOC"
     },
     "SDES2167": {
         "original": "",
