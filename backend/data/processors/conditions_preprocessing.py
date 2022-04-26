@@ -360,7 +360,7 @@ def handle_comma_logic(processed):
 
     # add &&s before coreqs if coreqs is not preceded by an OR logic
     if re.search(r'\[.*\]', processed) and re.search(r'\|\|\s*\[', processed) is None:
-        processed = re.sub(r'&*\s*[^\|\|]\s*\[(.*)\]', r' && [\1]', processed)
+        processed = re.sub(r'&*\s*\[(.*)\]', r' && [\1]', processed)
     
     # remove &&s or ||s if it's the start of string
     processed = re.sub(r'^\s*&&', '', processed)
