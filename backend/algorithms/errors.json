@@ -5866,7 +5866,7 @@
     "AVIA3299": {
         "condition": {
             "original": "Must complete AVIA3199 Aviation Work Placement 1 as a co-requisite or pre-requisite. <br/>It is the student\u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year. <br/><br/>",
-            "processed": "Must complete AVIA3199 Aviation Work Placement 1 as && [|| . It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year]"
+            "processed": "Must complete AVIA3199 Aviation Work Placement 1 as a && [|| . It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year]"
         },
         "tokens": [
             "(",
@@ -5878,6 +5878,7 @@
             "Placement",
             "1",
             "as",
+            "a",
             "&&",
             "[",
             "||",
@@ -6117,7 +6118,7 @@
     "BABS3299": {
         "condition": {
             "original": "Must complete BABS3199 BABS Work Placement 1 as a co-requisite or pre-requisite. <br/>It is the student\u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year.<br/><br/>",
-            "processed": "Must complete BABS3199 BABS Work Placement 1 as && [|| . It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year]"
+            "processed": "Must complete BABS3199 BABS Work Placement 1 as a && [|| . It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year]"
         },
         "tokens": [
             "(",
@@ -6129,6 +6130,7 @@
             "Placement",
             "1",
             "as",
+            "a",
             "&&",
             "[",
             "||",
@@ -6263,7 +6265,7 @@
     "BEES3299": {
         "condition": {
             "original": "Must complete BEES3199 BEES Work Placement 1 as a co-requisite or pre-requisite.<br/>It is the student\u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year.      <br/><br/>",
-            "processed": "Must complete BEES3199 BEES Work Placement 1 as && [|| . It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year]"
+            "processed": "Must complete BEES3199 BEES Work Placement 1 as a && [|| . It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year]"
         },
         "tokens": [
             "(",
@@ -6275,6 +6277,7 @@
             "Placement",
             "1",
             "as",
+            "a",
             "&&",
             "[",
             "||",
@@ -6944,24 +6947,6 @@
         ],
         "broke at": "Index 4, ||"
     },
-    "CEIC2005": {
-        "condition": {
-            "original": "Prerequisite: CEIC2000<br/>Co-requisite: MATH2089 or MATH2301<br/><br/>",
-            "processed": "CEIC200 && [MATH2089 || MATH2301]"
-        },
-        "tokens": [
-            "(",
-            "CEIC200",
-            "&&",
-            "[",
-            "MATH2089",
-            "||",
-            "MATH2301",
-            "]",
-            ")"
-        ],
-        "broke at": "Index 2, &&"
-    },
     "CEIC3006": {
         "condition": {
             "original": "Pre-requisites: CEIC2000, MATH2018 or MATH2019, MATH2089<br/><br/>",
@@ -7441,7 +7426,7 @@
     "CHEM3299": {
         "condition": {
             "original": "Must complete CHEM3199 Chemistry Work Placement 1 as a co-requisite or pre-requisite <br/>It is the student\u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year.<br/><br/>",
-            "processed": "Must complete CHEM3199 Chemistry Work Placement 1 as && [|| It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year]"
+            "processed": "Must complete CHEM3199 Chemistry Work Placement 1 as a && [|| It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year]"
         },
         "tokens": [
             "(",
@@ -7453,6 +7438,7 @@
             "Placement",
             "1",
             "as",
+            "a",
             "&&",
             "[",
             "||",
@@ -8235,11 +8221,11 @@
     "DDES4200": {
         "condition": {
             "original": "Honours Co-requisite<br/><br/>",
-            "processed": "Honour && []"
+            "processed": "Honours && []"
         },
         "tokens": [
             "(",
-            "Honour",
+            "Honours",
             "&&",
             "[",
             "]",
@@ -11307,24 +11293,6 @@
         ],
         "broke at": "Index 2, )"
     },
-    "FOOD3020": {
-        "condition": {
-            "original": "Pre-Requisites:FOOD1120, CHEM2921<br/>Co-requisite: FOOD3010<br/><br/>",
-            "processed": "FOOD1120 && CHEM292 && [FOOD3010]"
-        },
-        "tokens": [
-            "(",
-            "FOOD1120",
-            "&&",
-            "CHEM292",
-            "&&",
-            "[",
-            "FOOD3010",
-            "]",
-            ")"
-        ],
-        "broke at": "Index 4, &&"
-    },
     "FOOD6804": {
         "condition": {
             "original": "Prerequsite :CHEM3811or INDC2003<br/><br/>",
@@ -11878,7 +11846,7 @@
     "LAWS1052": {
         "condition": {
             "original": "This course is strictly for students undertaking Law programs only. Corequisite : LAWS1055<br/><br/>",
-            "processed": "This course is strictly for undertaking Law programs onl && [LAWS1055]"
+            "processed": "This course is strictly for undertaking Law programs only && [LAWS1055]"
         },
         "tokens": [
             "(",
@@ -11890,7 +11858,7 @@
             "undertaking",
             "Law",
             "programs",
-            "onl",
+            "only",
             "&&",
             "[",
             "LAWS1055",
@@ -12594,14 +12562,14 @@
     "LAWS3018": {
         "condition": {
             "original": "Prerequisite: Completion of 78 UOC in LAWS courses<br/>Co-requisite: Business Associations (LAWS1091) and Land Law (LAWS2383)<br/><br/>",
-            "processed": "78UOC in LAWS course && [Business Associations (LAWS1091) && Land Law (LAWS2383)]"
+            "processed": "78UOC in LAWS courses && [Business Associations (LAWS1091) && Land Law (LAWS2383)]"
         },
         "tokens": [
             "(",
             "78UOC",
             "in",
             "LAWS",
-            "course",
+            "courses",
             "&&",
             "[",
             "Business",
@@ -12734,14 +12702,14 @@
     "LAWS3047": {
         "condition": {
             "original": "Prerequisite: Completion of 78 UOC in LAWS courses. <br/>Co-requisite: Resolving Civil Disputes (LAWS2371)<br/><br/>",
-            "processed": "78UOC in LAWS course && [Resolving Civil Disputes (LAWS2371)]"
+            "processed": "78UOC in LAWS courses && [Resolving Civil Disputes (LAWS2371)]"
         },
         "tokens": [
             "(",
             "78UOC",
             "in",
             "LAWS",
-            "course",
+            "courses",
             "&&",
             "[",
             "Resolving",
@@ -12758,14 +12726,14 @@
     "LAWS3057": {
         "condition": {
             "original": "Prerequisite: Completion of 78 UOC in LAWS courses. <br/>Co-requisite: Foundations of Intellectual Property Law (LAWS3021/JURD7321) or Intellectual Property Law (LAWS8017/JURD7617).<br/><br/>",
-            "processed": "78UOC in LAWS course && [Foundations of Intellectual Property Law ((LAWS3021 || JURD7321)) || Intellectual Property Law ((LAWS8017 || JURD7617))]"
+            "processed": "78UOC in LAWS courses && [Foundations of Intellectual Property Law ((LAWS3021 || JURD7321)) || Intellectual Property Law ((LAWS8017 || JURD7617))]"
         },
         "tokens": [
             "(",
             "78UOC",
             "in",
             "LAWS",
-            "course",
+            "courses",
             "&&",
             "[",
             "Foundations",
@@ -13146,14 +13114,14 @@
     "LAWS3137": {
         "condition": {
             "original": "Prerequisite: Completion of 78 UOC in LAWS courses. <br/>Co-requisite: Resolving Civil Disputes (LAWS2371)<br/><br/>",
-            "processed": "78UOC in LAWS course && [Resolving Civil Disputes (LAWS2371)]"
+            "processed": "78UOC in LAWS courses && [Resolving Civil Disputes (LAWS2371)]"
         },
         "tokens": [
             "(",
             "78UOC",
             "in",
             "LAWS",
-            "course",
+            "courses",
             "&&",
             "[",
             "Resolving",
@@ -13352,7 +13320,7 @@
     "LAWS3170": {
         "condition": {
             "original": "Prerequisite: Completion of 78 UOC in LAWS courses including Resolving Civil Disputes (LAWS2371) and Lawyers, Ethics and Justice (LAWS1230)<br/>Co-requisite: Court Process, Evidence and Proof (LAWS2351)<br/><br/>",
-            "processed": "78UOC in LAWS courses && Resolving Civil Disputes (LAWS2371) && Lawyers, Ethics && Justice (LAWS1230 && [Court Process, Evidence && Proof (LAWS2351)]"
+            "processed": "78UOC in LAWS courses && Resolving Civil Disputes (LAWS2371) && Lawyers, Ethics && Justice (LAWS1230) && [Court Process, Evidence && Proof (LAWS2351)]"
         },
         "tokens": [
             "(",
@@ -13374,6 +13342,7 @@
             "Justice",
             "(",
             "LAWS1230",
+            ")",
             "&&",
             "[",
             "Court",
@@ -13518,14 +13487,14 @@
     "LAWS3195": {
         "condition": {
             "original": "Prerequisite: Completion of 78 UOC in LAWS courses. <br/>Co-requisite: Federal Constitutional Law (LAWS2150)<br/><br/>",
-            "processed": "78UOC in LAWS course && [Federal Constitutional Law (LAWS2150)]"
+            "processed": "78UOC in LAWS courses && [Federal Constitutional Law (LAWS2150)]"
         },
         "tokens": [
             "(",
             "78UOC",
             "in",
             "LAWS",
-            "course",
+            "courses",
             "&&",
             "[",
             "Federal",
@@ -13759,7 +13728,7 @@
     "LAWS3281": {
         "condition": {
             "original": "Prerequisites: Completion of 78 UOC in LAWS courses including Administrative Law (LAWS1160). <br/>Co-requisite: Resolving Civil Disputes (LAWS2371)<br/><br/>",
-            "processed": "78UOC in LAWS courses && Administrative Law (LAWS1160 && [Resolving Civil Disputes (LAWS2371)]"
+            "processed": "78UOC in LAWS courses && Administrative Law (LAWS1160) && [Resolving Civil Disputes (LAWS2371)]"
         },
         "tokens": [
             "(",
@@ -13772,6 +13741,7 @@
             "Law",
             "(",
             "LAWS1160",
+            ")",
             "&&",
             "[",
             "Resolving",
@@ -15174,7 +15144,7 @@
     "MATS3299": {
         "condition": {
             "original": "Must complete MATS3199 Materials Science Work Placement 1 as a co-requisite or pre-requisite.<br/> It is the student\u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year.<br/><br/>",
-            "processed": "Must complete MATS3199 Materials Science Work Placement 1 as && [|| . It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year]"
+            "processed": "Must complete MATS3199 Materials Science Work Placement 1 as a && [|| . It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year]"
         },
         "tokens": [
             "(",
@@ -15187,6 +15157,7 @@
             "Placement",
             "1",
             "as",
+            "a",
             "&&",
             "[",
             "||",
@@ -16882,66 +16853,10 @@
         ],
         "broke at": "Index 2, Honours"
     },
-    "OPTM3211": {
-        "condition": {
-            "original": "Pre-requisites: VISN3111, OPTM3111, OPTM3131 Co-requisites: OPTM3231, VISN3211, PHAR3306<br/><br/>",
-            "processed": "VISN3111 && OPTM3111 && OPTM313 && [OPTM3231 && VISN3211 && PHAR3306]"
-        },
-        "tokens": [
-            "(",
-            "VISN3111",
-            "&&",
-            "OPTM3111",
-            "&&",
-            "OPTM313",
-            "&&",
-            "[",
-            "OPTM3231",
-            "&&",
-            "VISN3211",
-            "&&",
-            "PHAR3306",
-            "]",
-            ")"
-        ],
-        "broke at": "Index 6, &&"
-    },
-    "OPTM5131": {
-        "condition": {
-            "original": "Prerequisites: OPTM4110, OPTM4131, OPTM4151, OPTM4211, OPTM4231, OPTM4251, OPTM4271, OPTM4291.Co-requisites: OPTM5111, OPTM5151<br/><br/>",
-            "processed": "OPTM4110 && OPTM4131 && OPTM4151 && OPTM4211 && OPTM4231 && OPTM4251 && OPTM4271 && OPTM429 && [OPTM5111 && OPTM5151]"
-        },
-        "tokens": [
-            "(",
-            "OPTM4110",
-            "&&",
-            "OPTM4131",
-            "&&",
-            "OPTM4151",
-            "&&",
-            "OPTM4211",
-            "&&",
-            "OPTM4231",
-            "&&",
-            "OPTM4251",
-            "&&",
-            "OPTM4271",
-            "&&",
-            "OPTM429",
-            "&&",
-            "[",
-            "OPTM5111",
-            "&&",
-            "OPTM5151",
-            "]",
-            ")"
-        ],
-        "broke at": "Index 16, &&"
-    },
     "OPTM6411": {
         "condition": {
             "original": "Prerequisite: OPTM6400 and OPTM6413, or, completion of OPTM3211, OPTM3231, PHAR3306, and VISN3211<br/>Corequisite: OPTM6412<br/><br/>",
-            "processed": "OPTM6400 && OPTM6413 && or && OPTM3211 && OPTM3231 && PHAR3306 && VISN321 && [OPTM6412]"
+            "processed": "OPTM6400 && OPTM6413 && or && OPTM3211 && OPTM3231 && PHAR3306 && VISN3211 && [OPTM6412]"
         },
         "tokens": [
             "(",
@@ -16957,7 +16872,7 @@
             "&&",
             "PHAR3306",
             "&&",
-            "VISN321",
+            "VISN3211",
             "&&",
             "[",
             "OPTM6412",
@@ -16969,18 +16884,18 @@
     "OPTM6421": {
         "condition": {
             "original": "Prerequisite: OPTM6400, Corequisite: OPTM6412, Exclusion:OPTM4211<br/><br/>",
-            "processed": "OPTM640 && [OPTM6412,]"
+            "processed": "OPTM6400 && [OPTM6412,]"
         },
         "tokens": [
             "(",
-            "OPTM640",
+            "OPTM6400",
             "&&",
             "[",
             "OPTM6412,",
             "]",
             ")"
         ],
-        "broke at": "Index 2, &&"
+        "broke at": "Index 4, OPTM6412,"
     },
     "OPTM6424": {
         "condition": {
@@ -17312,14 +17227,14 @@
     "PHYS1116": {
         "condition": {
             "original": "PHYS1121/1131/1141 Physics 1A as co-requisite or pre-requisite.<br/><br/>Exclusion - PHYS1160 Introduction to Astronomy<br/><br/>",
-            "processed": "PHYS1121/1131/1141 Physics 1A a && [||]"
+            "processed": "PHYS1121/1131/1141 Physics 1A as && [||]"
         },
         "tokens": [
             "(",
             "PHYS1121/1131/1141",
             "Physics",
             "1A",
-            "a",
+            "as",
             "&&",
             "[",
             "||",
@@ -17327,90 +17242,6 @@
             ")"
         ],
         "broke at": "Index 2, Physics"
-    },
-    "PHYS1221": {
-        "condition": {
-            "original": "Prerequisite: PHYS1121 or PHYS1131 or DPST1023 or PHYS1141; Corequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251<br/><br/>",
-            "processed": "PHYS1121 || PHYS1131 || DPST1023 || PHYS114 && [MATH1231 || DPST1014 || MATH1241 || MATH1251]"
-        },
-        "tokens": [
-            "(",
-            "PHYS1121",
-            "||",
-            "PHYS1131",
-            "||",
-            "DPST1023",
-            "||",
-            "PHYS114",
-            "&&",
-            "[",
-            "MATH1231",
-            "||",
-            "DPST1014",
-            "||",
-            "MATH1241",
-            "||",
-            "MATH1251",
-            "]",
-            ")"
-        ],
-        "broke at": "Index 8, &&"
-    },
-    "PHYS1231": {
-        "condition": {
-            "original": "Prerequisite: PHYS1131 or DPST1023 or PHYS1141 or a mark of 65 or above in PHYS1121; Corequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251<br/><br/>",
-            "processed": "PHYS1131 || DPST1023 || PHYS1141 || 65GRADE in PHYS112 && [MATH1231 || DPST1014 || MATH1241 || MATH1251]"
-        },
-        "tokens": [
-            "(",
-            "PHYS1131",
-            "||",
-            "DPST1023",
-            "||",
-            "PHYS1141",
-            "||",
-            "65GRADE",
-            "in",
-            "PHYS112",
-            "&&",
-            "[",
-            "MATH1231",
-            "||",
-            "DPST1014",
-            "||",
-            "MATH1241",
-            "||",
-            "MATH1251",
-            "]",
-            ")"
-        ],
-        "broke at": "Index 7, 65GRADE"
-    },
-    "PHYS1241": {
-        "condition": {
-            "original": "Prerequisites: PHYS1131 or DPST1023 or PHYS1141; Co-requisites: MATH1231 or DPST1014 or MATH1241 or MATH1251<br/><br/>",
-            "processed": "PHYS1131 || DPST1023 || PHYS114 && [MATH1231 || DPST1014 || MATH1241 || MATH1251]"
-        },
-        "tokens": [
-            "(",
-            "PHYS1131",
-            "||",
-            "DPST1023",
-            "||",
-            "PHYS114",
-            "&&",
-            "[",
-            "MATH1231",
-            "||",
-            "DPST1014",
-            "||",
-            "MATH1241",
-            "||",
-            "MATH1251",
-            "]",
-            ")"
-        ],
-        "broke at": "Index 6, &&"
     },
     "PHYS3199": {
         "condition": {
@@ -17494,7 +17325,7 @@
     "PHYS3299": {
         "condition": {
             "original": "Must complete PHYS3199 Physics Work Placement 1 as a co-requisite or pre-requisite. <br/>It is the student\u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year.<br/><br/>",
-            "processed": "Must complete PHYS3199 Physics Work Placement 1 as && [|| . It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year]"
+            "processed": "Must complete PHYS3199 Physics Work Placement 1 as a && [|| . It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year]"
         },
         "tokens": [
             "(",
@@ -17506,6 +17337,7 @@
             "Placement",
             "1",
             "as",
+            "a",
             "&&",
             "[",
             "||",
@@ -17764,7 +17596,7 @@
     "PSYC3299": {
         "condition": {
             "original": "Must complete PSYC3199 Psychology Work Placement 1 as a co-requisite or pre-requisite. <br/>It is the student\u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year. <br/><br/>",
-            "processed": "Must complete PSYC3199 Psychology Work Placement 1 as && [|| . It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year]"
+            "processed": "Must complete PSYC3199 Psychology Work Placement 1 as a && [|| . It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year]"
         },
         "tokens": [
             "(",
@@ -17776,6 +17608,7 @@
             "Placement",
             "1",
             "as",
+            "a",
             "&&",
             "[",
             "||",
@@ -18445,7 +18278,7 @@
     "SOCW3009": {
         "condition": {
             "original": "Prerequisite: ARTS1753 or ARTS1870 or ARTS1871 and PSYC1001, SOCW2006, SOCW2008, SOCW2009, SOCW2100, SOCW3012, SOSS/SRAP1000, SOSS/SRAP1001, ARTS2871 or SRAP2002, and enrolment in a Social Work program. Corequisite: SOCW3013<br/><br/>",
-            "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOCW3012 || SOSS/SRAP1000 || SOSS/SRAP1001 || ARTS2871 || SRAP2002 && enrolment in a Social Work progra && [SOCW3013]"
+            "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOCW3012 || SOSS/SRAP1000 || SOSS/SRAP1001 || ARTS2871 || SRAP2002 && enrolment in a Social Work program && [SOCW3013]"
         },
         "tokens": [
             "(",
@@ -18480,7 +18313,7 @@
             "a",
             "Social",
             "Work",
-            "progra",
+            "program",
             "&&",
             "[",
             "SOCW3013",
@@ -18564,7 +18397,7 @@
     "SOCW3013": {
         "condition": {
             "original": "Prerequisite: ARTS1753 or ARTS1870 or ARTS1871 and PSYC1001, SOCW2006, SOCW2008, SOCW2009, SOCW2100, SOCW3012, SOSS1000, SOSS1001, ARTS2871 or SRAP2002, and enrolment in a Social Work program. Equivalent: SOCW3001 and SOCW3011. Corequisite: SOCW3009<br/><br/>",
-            "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOCW3012 || SOSS1000 || SOSS1001 || ARTS2871 || SRAP2002 && enrolment in a Social Work program. Equivalent: SOCW3001 && SOCW301 && [SOCW3009]"
+            "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOCW3012 || SOSS1000 || SOSS1001 || ARTS2871 || SRAP2002 && enrolment in a Social Work program. Equivalent: SOCW3001 && SOCW3011 && [SOCW3009]"
         },
         "tokens": [
             "(",
@@ -18603,7 +18436,7 @@
             "Equivalent:",
             "SOCW3001",
             "&&",
-            "SOCW301",
+            "SOCW3011",
             "&&",
             "[",
             "SOCW3009",
@@ -18767,7 +18600,7 @@
     "SOCW4015": {
         "condition": {
             "original": "Prerequisite: 168 UOC overall, SOCW4003, SOCW4011, SOCW4012, SOCW4013, enrolment in a Social Work program and an overall WAM of 70. Corequisite: SOCW4018<br/><br/>",
-            "processed": "168UOC , SOCW4003, SOCW4011, SOCW4012, SOCW4013, enrolment in a Social Work program && an overall 70WA && [SOCW4018]"
+            "processed": "168UOC , SOCW4003, SOCW4011, SOCW4012, SOCW4013, enrolment in a Social Work program && an overall 70WAM && [SOCW4018]"
         },
         "tokens": [
             "(",
@@ -18786,7 +18619,7 @@
             "&&",
             "an",
             "overall",
-            "70WA",
+            "70WAM",
             "&&",
             "[",
             "SOCW4018",
@@ -18798,7 +18631,7 @@
     "SOCW4016": {
         "condition": {
             "original": "Prerequisite: 168 units of credit overall, including SOCW4003, SOCW4011, SOCW4012, and SOCW4013, and enrolment in Social Work program. Corequisite: SOCW4018<br/><br/>",
-            "processed": "168UOC && SOCW4003, SOCW4011, SOCW4012 && SOCW4013 && enrolment in Social Work progra && [SOCW4018]"
+            "processed": "168UOC && SOCW4003, SOCW4011, SOCW4012 && SOCW4013 && enrolment in Social Work program && [SOCW4018]"
         },
         "tokens": [
             "(",
@@ -18814,7 +18647,7 @@
             "in",
             "Social",
             "Work",
-            "progra",
+            "program",
             "&&",
             "[",
             "SOCW4018",
@@ -18826,7 +18659,7 @@
     "SOCW4017": {
         "condition": {
             "original": "Prerequisite: SOCW4003, SOCW4011, SOCW4012, and enrolment in a Social Work program. Corequisite: SOCW4013. Equivalent: SOCW4014, SOCW4001<br/><br/>",
-            "processed": "SOCW4003 && SOCW4011 && SOCW4012 && enrolment in a Social Work progra && [SOCW4013. Equivalent: SOCW4014, SOCW4001]"
+            "processed": "SOCW4003 && SOCW4011 && SOCW4012 && enrolment in a Social Work program && [SOCW4013. Equivalent: SOCW4014, SOCW4001]"
         },
         "tokens": [
             "(",
@@ -18841,7 +18674,7 @@
             "a",
             "Social",
             "Work",
-            "progra",
+            "program",
             "&&",
             "[",
             "SOCW4013.",
@@ -18856,7 +18689,7 @@
     "SOCW4018": {
         "condition": {
             "original": "Prerequisite: SOCW4003, SOCW4011, SOCW4012, SOCW4013 and enrolment in a Social Work program. Corequisite: SOCW4015 or SOCW4016. Equivalent: SOCW4014, SOCW4001<br/><br/>",
-            "processed": "SOCW4003 && SOCW4011 && SOCW4012 && SOCW4013 && enrolment in a Social Work progra && [SOCW4015 || SOCW4016. Equivalent: SOCW4014, SOCW4001]"
+            "processed": "SOCW4003 && SOCW4011 && SOCW4012 && SOCW4013 && enrolment in a Social Work program && [SOCW4015 || SOCW4016. Equivalent: SOCW4014, SOCW4001]"
         },
         "tokens": [
             "(",
@@ -18873,7 +18706,7 @@
             "a",
             "Social",
             "Work",
-            "progra",
+            "program",
             "&&",
             "[",
             "SOCW4015",
@@ -19976,7 +19809,7 @@
     "ZHSS3202": {
         "condition": {
             "original": "Prerequisite: 24 units of credit in upper-level History passed at Credit level or higher;<br/>Corequisite: 6 units of credit in upper-level History.<br/><br/>",
-            "processed": "24UOC in upper-level History passed at Credit leve && [6UOC in upper-level History]"
+            "processed": "24UOC in upper-level History passed at Credit level && [6UOC in upper-level History]"
         },
         "tokens": [
             "(",
@@ -19987,7 +19820,7 @@
             "passed",
             "at",
             "Credit",
-            "leve",
+            "level",
             "&&",
             "[",
             "6UOC",
