@@ -28,7 +28,7 @@ const DrawerContent = ({ onCloseDrawer }) => {
         Progression Checker
       </Menu.Item> */}
       <Menu.Item key="4" icon={<BugOutlined />} onClick={openFeedbackLink}>
-        Report a bug
+        Report a bug!
       </Menu.Item>
       {/* <Menu.ItemGroup key="customisation" title="Customisation">
                 <Menu.Item key="4"
