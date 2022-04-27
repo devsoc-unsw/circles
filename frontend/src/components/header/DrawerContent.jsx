@@ -1,12 +1,9 @@
 import React from "react";
-// import { IoMdMoon, IoIosSunny } from "react-icons/io";
-// import { toggleTheme } from "../../actions/toggleTheme";
-// import { useSelector, useDispatch } from 'react-redux';
 import { BugOutlined } from "@ant-design/icons";
 import { Menu } from "antd";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
-export const DrawerContent = ({ onCloseDrawer }) => {
+const DrawerContent = ({ onCloseDrawer }) => {
   // const theme = useSelector(state => state.theme);
   const FORM_LINK = "https://github.com/csesoc/Circles/issues?q=is%3Aissue+is%3Aopen";
   const navigate = useNavigate();
@@ -19,10 +16,6 @@ export const DrawerContent = ({ onCloseDrawer }) => {
     window.open(FORM_LINK, "_blank");
     onCloseDrawer();
   };
-  // const handleThemeToggle = () => {
-  //     dispatch(toggleTheme(theme === "light" ? "dark" : "light"));
-  //     onCloseDrawer();
-  // }
   return (
     <Menu mode="vertical" style={{ marginTop: "2em" }}>
       <Menu.Item key="1" onClick={() => handlePush("/course-selector")}>
@@ -35,10 +28,10 @@ export const DrawerContent = ({ onCloseDrawer }) => {
         Progression Checker
       </Menu.Item> */}
       <Menu.Item key="4" icon={<BugOutlined />} onClick={openFeedbackLink}>
-        Report a bug
+        Report a bug!
       </Menu.Item>
       {/* <Menu.ItemGroup key="customisation" title="Customisation">
-                <Menu.Item key="4" 
+                <Menu.Item key="4"
                     onClick={() => handleThemeToggle()}
                     icon={theme === "light" ? <IoMdMoon/> : <IoIosSunny/> }
                 >
@@ -48,3 +41,5 @@ export const DrawerContent = ({ onCloseDrawer }) => {
     </Menu>
   );
 };
+
+export default DrawerContent;

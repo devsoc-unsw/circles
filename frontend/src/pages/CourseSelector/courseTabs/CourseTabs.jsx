@@ -1,11 +1,13 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { courseTabActions } from "../../../actions/courseTabActions";
-import "./courseTabs.less";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { Popconfirm, Tooltip } from "antd";
+import { DeleteOutlined } from "@ant-design/icons";
+import courseTabActions from "../../../actions/courseTabActions";
+import "./courseTabs.less";
 import CourseTab from "./CourseTab";
 
-export const CourseTabs = () => {
+const CourseTabs = () => {
   const dispatch = useDispatch();
   const { tabs } = useSelector((state) => state.tabs);
 
@@ -18,17 +20,17 @@ export const CourseTabs = () => {
 
     // function to help us with reordering the result
     const reorder = (list, startIndex, endIndex) => {
-      const result = Array.from(list);
-      const [removed] = result.splice(startIndex, 1);
-      result.splice(endIndex, 0, removed);
+      const r = Array.from(list);
+      const [removed] = r.splice(startIndex, 1);
+      r.splice(endIndex, 0, removed);
 
-      return result;
+      return r;
     };
 
     const reorderedTabs = reorder(
       tabs,
       result.source.index,
-      result.destination.index
+      result.destination.index,
     );
 
     dispatch(courseTabActions("SET_ACTIVE_TAB", result.destination.index));
@@ -39,7 +41,7 @@ export const CourseTabs = () => {
     <div className="cs-tabs-cont">
       <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
         <Droppable droppableId="droppable" direction="horizontal">
-          {(droppableProvided, droppableSnapshot) => (
+          {(droppableProvided, _) => (
             <div
               ref={droppableProvided.innerRef}
               {...droppableProvided.droppableProps}
@@ -53,6 +55,27 @@ export const CourseTabs = () => {
           )}
         </Droppable>
       </DragDropContext>
+      {
+        !!tabs.length
+        && (
+          <div className="cs-tabs-close-all">
+            <Popconfirm
+              placement="bottomRight"
+              title="Do you want to close all tabs?"
+              onConfirm={() => dispatch(courseTabActions("RESET_COURSE_TABS"))}
+              style={{ width: "500px" }}
+              okText="Yes"
+              cancelText="No"
+            >
+              <Tooltip title="Close all tabs">
+                <DeleteOutlined />
+              </Tooltip>
+            </Popconfirm>
+          </div>
+        )
+      }
     </div>
   );
 };
+
+export default CourseTabs;

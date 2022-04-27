@@ -1,11 +1,11 @@
 import React from "react";
 import { RadialBar } from "@ant-design/charts";
-import { data } from "./radialChartData";
+import data from "./radialChartData";
 
 // not currently used
 const RadialBarChart = () => {
-  var config = {
-    data: data,
+  const config = {
+    data,
     xField: "name",
     yField: "UOC",
     maxAngle: 720,
@@ -21,9 +21,7 @@ const RadialBarChart = () => {
       },
     },
     colorField: "color", // or seriesField in some cases
-    color: ({ color }) => {
-      return color;
-    },
+    color: ({ color }) => color,
     barBackground: {},
     barStyle: { lineCap: "round" },
   };

@@ -1,4 +1,4 @@
-export const prepareUserPayload = (degree, planner) => {
+const prepareUserPayload = (degree, planner) => {
   const { startYear, courses } = planner;
   const { programCode, specialisation, minor } = degree;
 
@@ -6,15 +6,17 @@ export const prepareUserPayload = (degree, planner) => {
   specialisations[specialisation] = 1;
   if (minor !== "") specialisations[minor] = 1;
 
-  let selectedCourses = {};
-  for (const course of courses.keys()) {
+  const selectedCourses = {};
+  Array.from(courses.keys()).forEach((course) => {
     selectedCourses[course] = 70;
-  }
+  });
 
   return {
     program: programCode,
-    specialisations: specialisations,
+    specialisations,
     courses: selectedCourses,
     year: new Date().getFullYear() - startYear,
   };
 };
+
+export default prepareUserPayload;

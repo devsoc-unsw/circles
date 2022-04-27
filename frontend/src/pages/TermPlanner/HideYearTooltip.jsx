@@ -1,11 +1,10 @@
 import React from "react";
-import { Tooltip } from "antd";
-import { notification } from "antd";
+import { Tooltip, notification } from "antd";
 import { IoIosEyeOff } from "react-icons/io";
 import { useSelector, useDispatch } from "react-redux";
-import { plannerActions } from "../../actions/plannerActions";
+import plannerActions from "../../actions/plannerActions";
 
-function HideYearTooltip({ year }) {
+const HideYearTooltip = ({ year }) => {
   const { hidden, numYears } = useSelector((state) => state.planner);
   const dispatch = useDispatch();
 
@@ -18,10 +17,9 @@ function HideYearTooltip({ year }) {
     });
   };
 
-  const hideYear = (year) => {
-    let i = 0;
-    for (const value of Object.values(hidden)) if (value) i++;
-    if (i === numYears - 1) showCannotHideAllYearsNotification();
+  const hideYear = () => {
+    const numHidden = Object.values(hidden).filter((h) => h).length;
+    if (numHidden === numYears - 1) showCannotHideAllYearsNotification();
     else {
       dispatch(plannerActions("HIDE_YEAR", year));
     }
@@ -29,11 +27,11 @@ function HideYearTooltip({ year }) {
 
   return (
     <Tooltip title="Hide year">
-      <div className="eye" onClick={() => hideYear(year)}>
+      <div role="button" className="eye" onClick={hideYear}>
         <IoIosEyeOff />
       </div>
     </Tooltip>
   );
-}
+};
 
 export default HideYearTooltip;

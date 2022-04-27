@@ -58,5 +58,21 @@
             "COMP1521": 60
         },
         "year": 1
+    },
+    "user6": {
+        "program": "3707",
+        "specialisations": {
+            "COMPJ1": 1,
+            "ACCTA2": 1
+        },
+        "courses": {
+            "COMP9242": [6, 81],
+            "COMP3231": [6, 61],
+            "COMP2521": [6, 57],
+            "COMP1531": [6, 66],
+            "COMP1521": [6, 57],
+            "COMP1511": [6, 84]
+        },
+        "year": 3
     }
 }
