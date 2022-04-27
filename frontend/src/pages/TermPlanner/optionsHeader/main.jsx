@@ -12,19 +12,13 @@ import { TiDownload } from "react-icons/ti";
 import SaveMenu from "./SaveMenu";
 import SettingsMenu from "./SettingsMenu";
 import HelpMenu from "./HelpMenu";
-import plannerActions from "../../../actions/plannerActions";
+import { unhideAllYears, unscheduleAll } from "../../../reducers/plannerSlice";
 
 const OptionsHeader = ({ plannerRef, isAllEmpty }) => {
   const theme = useSelector((state) => state.theme);
   const { areYearsHidden } = useSelector((state) => state.planner);
   const { years } = useSelector((state) => state.planner);
   const dispatch = useDispatch();
-  const unhideAll = () => {
-    dispatch(plannerActions("UNHIDE_ALL_YEARS"));
-  };
-  const unscheduleAll = () => {
-    dispatch(plannerActions("UNSCHEDULE_ALL"));
-  };
 
   return (
     <div className="optionsHeader">
@@ -71,7 +65,7 @@ const OptionsHeader = ({ plannerRef, isAllEmpty }) => {
           <Popconfirm
             placement="bottomRight"
             title="Are you sure you want to unplan all your courses?"
-            onConfirm={unscheduleAll}
+            onConfirm={() => dispatch(unscheduleAll())}
             style={{ width: "200px" }}
             okText="Yes"
             cancelText="No"
@@ -86,7 +80,7 @@ const OptionsHeader = ({ plannerRef, isAllEmpty }) => {
 
         {areYearsHidden && (
           <Tooltip title="Show all hidden years">
-            <button type="button" className="settingsButton" onClick={unhideAll}>
+            <button type="button" className="settingsButton" onClick={() => dispatch(unhideAllYears())}>
               <IoIosEye size="1.5em" className="settingsIcon" />
             </button>
           </Tooltip>

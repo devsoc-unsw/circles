@@ -6,9 +6,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { DeleteOutlined } from "@ant-design/icons";
 import { ReactComponent as PlannerIcon } from "../assets/planner-icon.svg";
-import plannerActions from "../../actions/plannerActions";
-import courseTabActions from "../../actions/courseTabActions";
 import "./plannerCart.less";
+import { addTab } from "../../reducers/courseTabsSlice";
+import { removeAllCourses, removeCourse } from "../../reducers/plannerSlice";
 
 const { Text, Title } = Typography;
 const CourseCard = ({ code, title, showAlert }) => {
@@ -17,7 +17,7 @@ const CourseCard = ({ code, title, showAlert }) => {
   const [loading, setLoading] = useState(false);
 
   const confirmDelete = () => {
-    dispatch(plannerActions("REMOVE_COURSE", code));
+    dispatch(removeCourse(code));
     setLoading(true);
     setTimeout(() => {
       showAlert(code);
@@ -27,7 +27,7 @@ const CourseCard = ({ code, title, showAlert }) => {
 
   const handleCourseLink = () => {
     navigate("/course-selector");
-    dispatch(courseTabActions("ADD_TAB", code));
+    dispatch(addTab(code));
   };
 
   return (
@@ -69,7 +69,7 @@ export const PlannerCart = () => {
   const [show, setShow] = useState(false);
   const [code, setCode] = useState("");
   const deleteAllCourses = () => {
-    dispatch(plannerActions("REMOVE_ALL_COURSES"));
+    dispatch(removeAllCourses());
   };
   const showAlert = (c) => {
     setShow(false);
@@ -106,13 +106,13 @@ export const PlannerCart = () => {
               afterClose={() => setShow(false)}
             />
           )}
-          {courses.size > 0 ? (
+          {Object.keys(courses).length > 0 ? (
             <div className="planner-cart-content">
               {/* Reversed map to show the most recently added courses first */}
-              {[...courses.keys()].reverse().map((courseCode) => (
+              {Object.keys(courses).reverse().map((courseCode) => (
                 <CourseCard
                   code={courseCode}
-                  title={courses.get(courseCode).title}
+                  title={courses[courseCode].title}
                   showAlert={showAlert}
                 />
               ))}
@@ -135,7 +135,7 @@ export const PlannerCart = () => {
             </div>
           )}
           {/* Hacky solution so prevent overflow.. help  */}
-          {!show && courses.size > 0 && (
+          {!show && Object.keys(courses).length > 0 && (
             <Button
               danger
               className="planner-cart-delete-all-btn"

@@ -4,9 +4,9 @@ import { Menu, Item, theme } from "react-contexify";
 import "react-contexify/dist/ReactContexify.css";
 import { useNavigate } from "react-router-dom";
 import { FaCalendarTimes, FaTrash, FaInfoCircle } from "react-icons/fa";
-import plannerActions from "../../../actions/plannerActions";
-import courseTabActions from "../../../actions/courseTabActions";
 import updateAllWarnings from "../ValidateTermPlanner";
+import { addTab } from "../../../reducers/courseTabsSlice";
+import { removeCourse, unschedule } from "../../../reducers/plannerSlice";
 
 const ContextMenu = ({ code, plannedFor }) => {
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ const ContextMenu = ({ code, plannedFor }) => {
   );
 
   const handleDelete = () => {
-    dispatch(plannerActions("REMOVE_COURSE", code));
+    dispatch(removeCourse(code));
     updateAllWarnings(
       dispatch,
       { years, startYear, completedTerms },
@@ -27,8 +27,7 @@ const ContextMenu = ({ code, plannedFor }) => {
   };
 
   const handleUnschedule = () => {
-    // console.log(code);
-    dispatch(plannerActions("UNSCHEDULE", code));
+    dispatch(unschedule(code));
     updateAllWarnings(
       dispatch,
       { years, startYear, completedTerms },
@@ -39,8 +38,7 @@ const ContextMenu = ({ code, plannedFor }) => {
 
   const handleInfo = () => {
     navigate("/course-selector");
-    // dispatch(courseTabActions("SET_ACTIVE_TAB", 1));
-    dispatch(courseTabActions("ADD_TAB", code));
+    dispatch(addTab(code));
   };
 
   return (

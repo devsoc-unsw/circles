@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./steps.less";
 import { useSpring, animated } from "@react-spring/web";
 import springProps from "../spring";
-import degreeActions from "../../../actions/degreeActions";
+import { setSpecialisation } from "../../../reducers/degreeSlice";
 
 const { Title } = Typography;
 const SpecialisationStep = ({ incrementStep, currStep }) => {
@@ -41,8 +41,8 @@ const SpecialisationStep = ({ incrementStep, currStep }) => {
 
       <Menu
         className="degree-specialisations"
-        onSelect={(e) => dispatch(degreeActions("SET_SPECIALISATION", e.key))}
-        onDeselect={() => dispatch(degreeActions("SET_SPECIALISATION", ""))}
+        onSelect={(e) => dispatch(setSpecialisation(e.key))}
+        onDeselect={() => dispatch(setSpecialisation(""))}
         selectedKeys={specialisation && [specialisation]}
         mode="inline"
       >

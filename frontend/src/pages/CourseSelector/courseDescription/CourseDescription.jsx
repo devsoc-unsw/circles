@@ -7,13 +7,13 @@ import { PlusOutlined, StopOutlined } from "@ant-design/icons";
 import { motion } from "framer-motion/dist/framer-motion";
 import { CourseTag } from "../../../components/courseTag/CourseTag";
 import SearchCourse from "../SearchCourse";
-import plannerActions from "../../../actions/plannerActions";
 import Loading from "./Loading";
 import "./courseDescription.less";
 import prepareUserPayload from "../helper";
 import infographic from "../../../images/infographicFontIndependent.svg";
 import axiosRequest from "../../../axios";
-import { setCourse } from "../../../actions/coursesActions";
+import { setCourse } from "../../../reducers/coursesSlice";
+import { addToUnplanned, removeCourse } from "../../../reducers/plannerSlice";
 
 const { Title, Text } = Typography;
 const CourseAttribute = ({ title, content }) => (
@@ -27,16 +27,16 @@ const CourseAttribute = ({ title, content }) => (
 
 const CourseDescription = () => {
   const dispatch = useDispatch();
-  const { active, tabs } = useSelector((state) => state.tabs);
+  const { active, tabs } = useSelector((state) => state.courseTabs);
   const id = tabs[active];
 
   const course = useSelector((state) => state.courses.course);
   const coursesInPlanner = useSelector((state) => state.planner.courses);
-  const courseInPlanner = coursesInPlanner.has(id);
+  const courseInPlanner = !!coursesInPlanner[id];
   const planner = useSelector((state) => state.planner);
   const degree = useSelector((state) => state.degree);
   const [loading, setLoading] = useState(false);
-  const [pageLoaded, setpageLoaded] = useState(false);
+  const [pageLoaded, setPageLoaded] = useState(false);
   const [coursesPathTo, setCoursesPathTo] = useState({});
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const CourseDescription = () => {
       const [data, err] = await axiosRequest("get", `/courses/getCourse/${id}`);
       if (!err) {
         dispatch(setCourse(data));
-        setpageLoaded(true);
+        setPageLoaded(true);
       }
     };
 
@@ -62,8 +62,7 @@ const CourseDescription = () => {
       }
     };
 
-    setpageLoaded(false);
-    if (id === "explore" || id === "search") return;
+    setPageLoaded(false);
     if (id) {
       getCourse();
       getPathToCoursesById(id);
@@ -101,7 +100,7 @@ const CourseDescription = () => {
         isAccurate: course.is_accurate,
       },
     };
-    dispatch(plannerActions("ADD_TO_UNPLANNED", data));
+    dispatch(addToUnplanned(data));
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
@@ -109,7 +108,7 @@ const CourseDescription = () => {
   };
 
   const removeFromPlanner = () => {
-    dispatch(plannerActions("REMOVE_COURSE", id));
+    dispatch(removeCourse(id));
     setLoading(true);
     setTimeout(() => {
       setLoading(false);

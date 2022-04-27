@@ -55,7 +55,6 @@ const Header = () => {
           </Title>
         </div>
       </Link>
-
       {isSmall ? (
         <Button
           type="primary"

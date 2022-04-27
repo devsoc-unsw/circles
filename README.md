@@ -1,5 +1,7 @@
 # Circles
 
+You can find a live build of Circles at [https://circles.csesoc.app](https://circles.csesoc.app/).
+
 ## Running Circles on your local machine
 
 ### Installing Docker

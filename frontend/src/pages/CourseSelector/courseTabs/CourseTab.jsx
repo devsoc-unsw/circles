@@ -4,15 +4,15 @@ import { useSelector, useDispatch } from "react-redux";
 import "./courseTabs.less";
 import { Draggable } from "react-beautiful-dnd";
 import { CloseOutlined } from "@ant-design/icons";
-import courseTabActions from "../../../actions/courseTabActions";
 import useIntersectionObserver from "../../../hooks/useIntersectionObserver";
+import { removeTab, setActiveTab } from "../../../reducers/courseTabsSlice";
 
 const CourseTab = ({ tab, index }) => {
   const [scrolledTo, setScrolledTo] = useState(false);
   const dispatch = useDispatch();
   const ref = useRef(null);
   const tabInView = useIntersectionObserver(ref);
-  const { active } = useSelector((state) => state.tabs);
+  const { active } = useSelector((state) => state.courseTabs);
 
   const getDraggableStyle = (style) => {
     // lock x axis when dragging
@@ -28,7 +28,7 @@ const CourseTab = ({ tab, index }) => {
   const handleMouseUp = (e) => {
     const MIDDLE_CLICK_BTN = 1;
     if (e.button === MIDDLE_CLICK_BTN) {
-      dispatch(courseTabActions("REMOVE_TAB", index));
+      dispatch(removeTab(index));
     }
   };
 
@@ -46,7 +46,7 @@ const CourseTab = ({ tab, index }) => {
         <div
           role="tab"
           className={index === active ? "cs-tab active" : "cs-tab"}
-          onClick={() => dispatch(courseTabActions("SET_ACTIVE_TAB", index))}
+          onClick={() => dispatch(setActiveTab(index))}
           ref={(r) => {
             ref.current = r;
             draggableProvided.innerRef(r);
@@ -63,7 +63,7 @@ const CourseTab = ({ tab, index }) => {
             icon={<CloseOutlined style={{ fontSize: "12px" }} />}
             onClick={(e) => {
               e.stopPropagation(); // stop propagation for above tab onclick event
-              dispatch(courseTabActions("REMOVE_TAB", index));
+              dispatch(removeTab(index));
             }}
           />
         </div>

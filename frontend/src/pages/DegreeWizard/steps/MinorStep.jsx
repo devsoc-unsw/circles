@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./steps.less";
 import { useSpring, animated } from "@react-spring/web";
 import springProps from "../spring";
-import degreeActions from "../../../actions/degreeActions";
+import { setMinor } from "../../../reducers/degreeSlice";
 
 const { Title } = Typography;
 const MinorStep = ({ incrementStep, currStep }) => {
@@ -45,8 +45,8 @@ const MinorStep = ({ incrementStep, currStep }) => {
         className="degree-minors"
         selectedKeys={minor && [minor]}
         mode="inline"
-        onDeselect={() => dispatch(degreeActions("SET_MINOR", ""))}
-        onSelect={(e) => dispatch(degreeActions("SET_MINOR", e.key))}
+        onDeselect={() => dispatch(setMinor(""))}
+        onSelect={(e) => dispatch(setMinor(e.key))}
       >
         {programCode ? (
           Object.keys(options).map((key) => (

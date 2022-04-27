@@ -1,5 +1,5 @@
 import axios from "axios";
-import plannerActions from "../../actions/plannerActions";
+import { toggleWarnings } from "../../reducers/plannerSlice";
 import getMostRecentPastTerm from "./PastTerm";
 
 const validateTermPlanner = (payload) => (dispatch) => {
@@ -14,7 +14,7 @@ const validateTermPlanner = (payload) => (dispatch) => {
       },
     )
     .then(({ data }) => {
-      dispatch(plannerActions("TOGGLE_WARNINGS", data.courses_state));
+      dispatch(toggleWarnings(data.courses_state));
     })
     // eslint-disable-next-line no-console
     .catch((err) => console.log(err));
