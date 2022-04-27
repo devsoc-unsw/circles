@@ -32,9 +32,8 @@ const CourseDescription = () => {
 
   const course = useSelector((state) => state.courses.course);
   const coursesInPlanner = useSelector((state) => state.planner.courses);
-  const courseInPlanner = !!coursesInPlanner[id];
-  const planner = useSelector((state) => state.planner);
-  const degree = useSelector((state) => state.degree);
+  const [addedCourseInPlanner, setAddedCourseInPlanner] = useState(!!coursesInPlanner[id]);
+  const { degree, planner } = useSelector((state) => state);
   const [loading, setLoading] = useState(false);
   const [pageLoaded, setPageLoaded] = useState(false);
   const [coursesPathTo, setCoursesPathTo] = useState({});
@@ -63,11 +62,12 @@ const CourseDescription = () => {
     };
 
     setPageLoaded(false);
+    setAddedCourseInPlanner(!!coursesInPlanner[id]);
     if (id) {
       getCourse();
       getPathToCoursesById(id);
     }
-  }, [id, dispatch, degree, planner]);
+  }, [id]);
 
   if (tabs.length === 0) {
     return (
@@ -104,6 +104,7 @@ const CourseDescription = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
+      setAddedCourseInPlanner(true);
     }, 1000);
   };
 
@@ -112,6 +113,7 @@ const CourseDescription = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
+      setAddedCourseInPlanner(false);
     }, 1000);
   };
 
@@ -126,14 +128,14 @@ const CourseDescription = () => {
               <Title level={2} className="text">
                 {id} - {course.title}
               </Title>
-              {courseInPlanner ? (
+              {addedCourseInPlanner ? (
                 <Button
                   type="secondary"
                   loading={loading}
                   onClick={removeFromPlanner}
                   icon={<StopOutlined />}
                 >
-                  {courseInPlanner ? "Remove from planner" : "Add to planner"}
+                  {!loading ? "Remove from planner" : "Removing from planner"}
                 </Button>
               ) : (
                 <Button
@@ -144,7 +146,7 @@ const CourseDescription = () => {
                   icon={<PlusOutlined />}
                   type="primary"
                 >
-                  Add to planner
+                  {!loading ? "Add to planner" : "Adding to planner"}
                 </Button>
               )}
             </div>
