@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  Button, Tag, Typography, Space, Menu, Dropdown,
+  Button, Tag, Typography, Space,
 } from "antd";
-import { StopOutlined } from "@ant-design/icons";
+import { PlusOutlined, StopOutlined } from "@ant-design/icons";
 import { motion } from "framer-motion/dist/framer-motion";
-import { BsPlusLg } from "react-icons/bs";
 import { CourseTag } from "../../../components/courseTag/CourseTag";
 import SearchCourse from "../SearchCourse";
 import plannerActions from "../../../actions/plannerActions";
@@ -26,44 +25,7 @@ const CourseAttribute = ({ title, content }) => (
   </div>
 );
 
-const PlannerDropdown = ({ courseCode, structure, addToPlanner }) => {
-  const [categories, setCategories] = useState([]);
-
-  useEffect(() => {
-    // Example groups: Major, Minor, General
-    const categoriesDropdown = [];
-    Object.entries(structure).forEach((group, groupContainer) => {
-      Object.entries(groupContainer).forEach((subgroup, subgroupStructure) => {
-        const subCourses = Object.keys(subgroupStructure.courses);
-        if (subCourses.includes(courseCode)) categoriesDropdown.push(`${group} - ${subgroup}`);
-      });
-    });
-
-    if (!categoriesDropdown.length) {
-      // add these options to dropdown as a fallback if courseCode is not in
-      // major or minor
-      categoriesDropdown.push("Flexible Education");
-      categoriesDropdown.push("General Education");
-    }
-    setCategories(categoriesDropdown);
-  }, [structure, courseCode]);
-
-  return (
-    <Menu>
-      {categories.map((category) => (
-        <Menu.Item
-          onClick={() => {
-            addToPlanner(category);
-          }}
-        >
-          Add as {category}
-        </Menu.Item>
-      ))}
-    </Menu>
-  );
-};
-
-const CourseDescription = ({ structure }) => {
+const CourseDescription = () => {
   const dispatch = useDispatch();
   const { active, tabs } = useSelector((state) => state.tabs);
   const id = tabs[active];
@@ -172,28 +134,19 @@ const CourseDescription = ({ structure }) => {
                   onClick={removeFromPlanner}
                   icon={<StopOutlined />}
                 >
-                  Remove from planner
+                  {courseInPlanner ? "Remove from planner" : "Add to planner"}
                 </Button>
               ) : (
-                <Dropdown.Button
-                  overlay={() => (
-                    <PlannerDropdown
-                      courseCode={course.code}
-                      structure={structure}
-                      addToPlanner={addToPlanner}
-                    />
-                  )}
+                <Button
                   loading={loading}
                   onClick={() => {
                     addToPlanner("Uncategorised");
                   }}
+                  icon={<PlusOutlined />}
                   type="primary"
                 >
-                  <div className="addBtn">
-                    <BsPlusLg />
-                    Add to planner
-                  </div>
-                </Dropdown.Button>
+                  Add to planner
+                </Button>
               )}
             </div>
             {
