@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Button, Typography, Modal } from "antd";
-import { notification } from "antd";
+import { Button, notification, Typography, Modal } from "antd";
 import { useNavigate } from "react-router-dom";
 import { scroller } from "react-scroll";
 import DegreeStep from "./steps/DegreeStep";
