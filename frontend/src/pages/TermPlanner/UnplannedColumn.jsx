@@ -16,7 +16,7 @@ const UnplannedColumn = () => {
     <div className="unplannedColumn">
       <Collapse className="collapse" ghost={theme === "dark"}>
         <Panel header="Unplanned" key="unplanned">
-          {unplanned.sort()
+          {unplanned
             .map((course, courseIndex) => (
               <Droppable droppableId={course} isDropDisabled>
                 {(provided) => (

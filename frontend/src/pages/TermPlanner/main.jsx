@@ -5,13 +5,15 @@ import { useSelector, useDispatch } from "react-redux";
 import TermBox from "./TermBox";
 import SkeletonPlanner from "./misc/SkeletonPlanner";
 import "./main.less";
-import { handleOnDragEnd, handleOnDragStart } from "./DragDropLogic";
 import updateAllWarnings from "./ValidateTermPlanner";
 import UnplannedColumn from "./UnplannedColumn";
 import OptionsHeader from "./optionsHeader/main";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
 import HideYearTooltip from "./HideYearTooltip";
+import {
+  moveCourse, setPlannedCourseToTerm, setUnplannedCourseToTerm,
+} from "../../reducers/plannerSlice";
 
 // checks if no courses have been planned (to display help notification
 // & determine if unschedule all button available)
@@ -38,7 +40,6 @@ const TermPlanner = () => {
     years,
     startYear,
     courses,
-    plannedCourses,
     isSummerEnabled,
     completedTerms,
     hidden,
@@ -62,17 +63,65 @@ const TermPlanner = () => {
   }, [years, dispatch, startYear, completedTerms, programCode, specialisation, minor]);
   const currYear = new Date().getFullYear();
 
-  const dragEndProps = {
-    setIsDragging,
-    dispatch,
-    years,
-    startYear,
-    plannedCourses,
-    courses,
-    completedTerms,
+  const plannerPic = useRef();
+
+  const handleOnDragStart = (courseItem) => {
+    const course = courseItem.draggableId;
+    const terms = courses[course].termsOffered;
+    setTermsOffered(terms);
+    setIsDragging(true);
   };
 
-  const plannerPic = useRef();
+  const handleOnDragEnd = (result) => {
+    setIsDragging(false);
+
+    const { destination, source, draggableId } = result;
+
+    if (!destination) return; // drag outside container
+
+    dispatch(
+      moveCourse({
+        course: draggableId,
+        term: destination.droppableId,
+      }),
+    );
+
+    if (
+      destination.droppableId === source.droppableId
+      && destination.index === source.index
+    ) {
+      // drag to same place
+      return;
+    }
+
+    const destYear = destination.droppableId.match(/[0-9]{4}/)[0];
+    const destTerm = destination.droppableId.match(/T[0-3]/)[0];
+    const destRow = destYear - startYear;
+    const destIndex = destination.index;
+
+    if (source.droppableId.match(/T[0-3]/) === null) {
+      // === move unplanned course to term ===
+      dispatch(setUnplannedCourseToTerm({
+        destRow, destTerm, destIndex, course: draggableId,
+      }));
+    } else {
+      // === move between terms ===
+      const srcYear = source.droppableId.match(/[0-9]{4}/)[0];
+      const srcTerm = source.droppableId.match(/T[0-3]/)[0];
+      const srcRow = srcYear - startYear;
+      const srcIndex = source.index;
+
+      dispatch(setPlannedCourseToTerm({
+        srcRow,
+        srcTerm,
+        srcIndex,
+        destRow,
+        destTerm,
+        destIndex: destination.index,
+        course: draggableId,
+      }));
+    }
+  };
 
   return (
     <div className="mainContainer">
@@ -86,19 +135,14 @@ const TermPlanner = () => {
       ) : (
         <DragDropContext
           onDragEnd={(result) => {
-            handleOnDragEnd(result, dragEndProps);
+            handleOnDragEnd(result);
             updateAllWarnings(
               dispatch,
               { years, startYear, completedTerms },
               { programCode, specialisation, minor },
             );
           }}
-          onDragStart={(result) => handleOnDragStart(
-            result,
-            courses,
-            setTermsOffered,
-            setIsDragging,
-          )}
+          onDragStart={handleOnDragStart}
         >
           <div className="plannerContainer">
             <div

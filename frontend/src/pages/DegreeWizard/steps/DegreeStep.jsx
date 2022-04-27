@@ -5,9 +5,9 @@ import {
 } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { useSpring, animated } from "@react-spring/web";
-import degreeActions from "../../../actions/degreeActions";
 import "./steps.less";
 import springProps from "../spring";
+import { setProgram } from "../../../reducers/degreeSlice";
 
 const { Title } = Typography;
 const DegreeStep = ({ incrementStep, currStep }) => {
@@ -26,10 +26,7 @@ const DegreeStep = ({ incrementStep, currStep }) => {
 
   const handleDegreeChange = (e) => {
     dispatch(
-      degreeActions("SET_PROGRAM", {
-        programCode: e.key,
-        programName: options[e.key],
-      }),
+      setProgram({ programCode: e.key, programName: options[e.key] }),
     );
   };
 

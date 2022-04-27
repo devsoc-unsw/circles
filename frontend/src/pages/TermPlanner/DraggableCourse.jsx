@@ -15,8 +15,8 @@ const DraggableCourse = ({ code, index }) => {
   // prereqs are populated in CourseDescription.jsx via course.raw_requirements
   const {
     prereqs, title, isUnlocked, plannedFor, isLegacy, isAccurate, termsOffered, handbookNote,
-  } = courses.get(code);
-  const warningMessage = courses.get(code).warnings;
+  } = courses[code];
+  const warningMessage = courses[code].warnings;
   const isOffered = plannedFor ? termsOffered.includes(plannedFor.match(/T[0-3]/)[0]) : true;
   const BEwarnings = handbookNote !== "" || !!warningMessage.length;
 
@@ -24,7 +24,7 @@ const DraggableCourse = ({ code, index }) => {
     id: `${code}-context`,
   });
 
-  const isDragDisabled = completedTerms.get(plannedFor);
+  const isDragDisabled = !!completedTerms[plannedFor];
 
   const displayContextMenu = (e) => {
     if (!isDragDisabled) show(e);

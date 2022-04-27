@@ -5,7 +5,7 @@ import {
 
 const ListView = ({ isLoading, degree, checkercourses }) => {
   const { Title } = Typography;
-  // console.log(checkercourses)
+
   return (
     isLoading ? (
       <Skeleton />
@@ -27,7 +27,8 @@ const ListView = ({ isLoading, degree, checkercourses }) => {
           <div className="space" />
           <Title className="text" level={3}>Discipline Electives</Title>
           <Space size={[20, 20]} wrap>
-            {checkercourses.disciplineelectives && checkercourses.disciplineelectives.map((course) => (
+            {checkercourses.disciplineelectives
+            && checkercourses.disciplineelectives.map((course) => (
               <Button className="checkerButton" type="primary" ghost>{course.name}</Button>
             ))}
           </Space>

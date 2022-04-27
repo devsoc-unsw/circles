@@ -8,12 +8,13 @@
     "@ant-design/icons": "4.7.0",
     "@craco/craco": "6.4.3",
     "@react-spring/web": "9.4.4",
-    "@reduxjs/toolkit": "1.8.1",
+    "@reduxjs/toolkit": "^1.8.1",
     "@tippyjs/react": "4.2.6",
-    "antd": "4.20.0",
-    "axios": "0.26.1",
+    "antd": "4.20.1",
+    "axios": "0.27.1",
     "craco-less": "1.20.0",
-    "framer-motion": "6.3.1",
+    "framer-motion": "6.3.2",
+    "moment": "^2.29.3",
     "react": "17.0.2",
     "react-beautiful-dnd": "13.1.0",
     "react-component-export-image": "1.0.6",
@@ -69,7 +70,7 @@
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-promise": "6.0.0",
     "eslint-plugin-react": "7.29.4",
-    "eslint-plugin-react-hooks": "4.4.0",
+    "eslint-plugin-react-hooks": "4.5.0",
     "react-error-overlay": "6.0.9"
   }
 }

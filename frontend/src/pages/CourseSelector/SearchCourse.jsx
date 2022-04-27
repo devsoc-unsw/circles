@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Select, Spin } from "antd";
 import axios from "axios";
 import { useDebounce } from "use-debounce";
-import courseTabActions from "../../actions/courseTabActions";
 import prepareUserPayload from "./helper";
+import { addTab } from "../../reducers/courseTabsSlice";
 
 export const search = async (query, setCourses, setIsLoading, degree, planner) => {
   try {
@@ -46,7 +46,7 @@ const SearchCourse = () => {
 
   const handleSelect = (courseCode) => {
     setValue(null);
-    dispatch(courseTabActions("ADD_TAB", courseCode));
+    dispatch(addTab(courseCode));
   };
 
   const handleSearch = (courseCode) => {
