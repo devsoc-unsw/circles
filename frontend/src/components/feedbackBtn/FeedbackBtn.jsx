@@ -8,7 +8,7 @@ import useMediaQuery from "../../hooks/useMediaQuery";
 export const FeedbackBtn = () => {
   const theme = useSelector((store) => store.theme);
   // Feedback form
-  const FORM_LINK = "https://forms.gle/b3b8CrZsz9h5sZ3v9";
+  const FORM_LINK = "https://github.com/csesoc/Circles/issues?q=is%3Aissue+is%3Aopen";
   const isTablet = useMediaQuery("(max-width: 1000px)");
   const openFeedbackLink = () => {
     window.open(FORM_LINK, "_blank");
