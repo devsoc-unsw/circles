@@ -44,7 +44,6 @@ const TableView = ({ checkercourses }) => {
     },
   ];
 
-  // console.log(checkercourses)
   return (
     <div className="listPage">
       <Table className="table-striped-rows" dataSource={checkercourses.corecourses} columns={columns} />

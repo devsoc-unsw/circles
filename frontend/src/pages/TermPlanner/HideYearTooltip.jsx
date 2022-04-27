@@ -2,7 +2,7 @@ import React from "react";
 import { Tooltip, notification } from "antd";
 import { IoIosEyeOff } from "react-icons/io";
 import { useSelector, useDispatch } from "react-redux";
-import plannerActions from "../../actions/plannerActions";
+import { hideYear } from "../../reducers/plannerSlice";
 
 const HideYearTooltip = ({ year }) => {
   const { hidden, numYears } = useSelector((state) => state.planner);
@@ -17,17 +17,17 @@ const HideYearTooltip = ({ year }) => {
     });
   };
 
-  const hideYear = () => {
+  const handleHideYear = () => {
     const numHidden = Object.values(hidden).filter((h) => h).length;
     if (numHidden === numYears - 1) showCannotHideAllYearsNotification();
     else {
-      dispatch(plannerActions("HIDE_YEAR", year));
+      dispatch(hideYear(year));
     }
   };
 
   return (
     <Tooltip title="Hide year">
-      <div role="button" className="eye" onClick={hideYear}>
+      <div role="button" className="eye" onClick={handleHideYear}>
         <IoIosEyeOff />
       </div>
     </Tooltip>

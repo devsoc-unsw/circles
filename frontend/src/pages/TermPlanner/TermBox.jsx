@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Badge } from "antd";
 import { RiCheckboxCircleFill } from "react-icons/ri";
 import DraggableCourse from "./DraggableCourse";
-import plannerActions from "../../actions/plannerActions";
+import { toggleTermComplete } from "../../reducers/plannerSlice";
 
 const TermBox = ({
   name, courses, termsOffered, isDragging,
@@ -15,10 +15,10 @@ const TermBox = ({
 
   const dispatch = useDispatch();
   const handleCompleteTerm = () => {
-    dispatch(plannerActions("TOGGLE_TERM_COMPLETE", name));
+    dispatch(toggleTermComplete(name));
   };
 
-  const isCompleted = completedTerms.get(name);
+  const isCompleted = !!completedTerms[name];
 
   const isOffered = termsOffered.includes(term) && !isCompleted;
 

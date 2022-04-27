@@ -3,16 +3,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { Popconfirm, Tooltip } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
-import courseTabActions from "../../../actions/courseTabActions";
 import "./courseTabs.less";
 import CourseTab from "./CourseTab";
+import { reorderTabs, resetTabs, setActiveTab } from "../../../reducers/courseTabsSlice";
 
 const CourseTabs = () => {
   const dispatch = useDispatch();
-  const { tabs } = useSelector((state) => state.tabs);
+  const { tabs } = useSelector((state) => state.courseTabs);
 
   const onDragStart = (result) => {
-    dispatch(courseTabActions("SET_ACTIVE_TAB", result.source.index));
+    dispatch(setActiveTab(result.source.index));
   };
 
   const onDragEnd = (result) => {
@@ -33,8 +33,8 @@ const CourseTabs = () => {
       result.destination.index,
     );
 
-    dispatch(courseTabActions("SET_ACTIVE_TAB", result.destination.index));
-    dispatch(courseTabActions("REORDER_TABS", reorderedTabs));
+    dispatch(setActiveTab(result.destination.index));
+    dispatch(reorderTabs(reorderedTabs));
   };
 
   return (
@@ -62,7 +62,7 @@ const CourseTabs = () => {
             <Popconfirm
               placement="bottomRight"
               title="Do you want to close all tabs?"
-              onConfirm={() => dispatch(courseTabActions("RESET_COURSE_TABS"))}
+              onConfirm={() => dispatch(resetTabs())}
               style={{ width: "500px" }}
               okText="Yes"
               cancelText="No"
