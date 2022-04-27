@@ -1,29 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  Button, Tag, Typography, Space,
+  Tag, Typography, Space,
 } from "antd";
-import { PlusOutlined, StopOutlined } from "@ant-design/icons";
 import { motion } from "framer-motion/dist/framer-motion";
 import { CourseTag } from "../../../components/courseTag/CourseTag";
-import SearchCourse from "../SearchCourse";
-import Loading from "./Loading";
-import "./courseDescription.less";
 import prepareUserPayload from "../helper";
 import infographic from "../../../images/infographicFontIndependent.svg";
 import axiosRequest from "../../../axios";
 import { setCourse } from "../../../reducers/coursesSlice";
-import { addToUnplanned, removeCourse } from "../../../reducers/plannerSlice";
+import AddToPlannerButton from "./AddToPlannerButton";
+import CourseAttribute from "./CourseAttribute";
+import "./index.less";
+import LoadingSkeleton from "./LoadingSkeleton";
 
 const { Title, Text } = Typography;
-const CourseAttribute = ({ title, content }) => (
-  <div className="cs-course-attr">
-    <Title level={3} className="text">
-      {title}
-    </Title>
-    <Text className="text">{content}</Text>
-  </div>
-);
 
 const CourseDescription = () => {
   const dispatch = useDispatch();
@@ -31,10 +22,7 @@ const CourseDescription = () => {
   const id = tabs[active];
 
   const course = useSelector((state) => state.courses.course);
-  const coursesInPlanner = useSelector((state) => state.planner.courses);
-  const [addedCourseInPlanner, setAddedCourseInPlanner] = useState(!!coursesInPlanner[id]);
   const { degree, planner } = useSelector((state) => state);
-  const [loading, setLoading] = useState(false);
   const [pageLoaded, setPageLoaded] = useState(false);
   const [coursesPathTo, setCoursesPathTo] = useState({});
 
@@ -62,7 +50,6 @@ const CourseDescription = () => {
     };
 
     setPageLoaded(false);
-    setAddedCourseInPlanner(!!coursesInPlanner[id]);
     if (id) {
       getCourse();
       getPathToCoursesById(id);
@@ -81,46 +68,10 @@ const CourseDescription = () => {
     );
   }
 
-  if (id === "explore") return <div>This is the explore page</div>;
-  if (id === "search") return <SearchCourse />;
-  const addToPlanner = (type) => {
-    const data = {
-      courseCode: course.code,
-      courseData: {
-        title: course.title,
-        type,
-        termsOffered: course.terms,
-        UOC: course.UOC,
-        plannedFor: null,
-        prereqs: course.raw_requirements,
-        isLegacy: course.is_legacy,
-        isUnlocked: true,
-        warnings: [],
-        handbookNote: course.handbook_note,
-        isAccurate: course.is_accurate,
-      },
-    };
-    dispatch(addToUnplanned(data));
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setAddedCourseInPlanner(true);
-    }, 1000);
-  };
-
-  const removeFromPlanner = () => {
-    dispatch(removeCourse(id));
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setAddedCourseInPlanner(false);
-    }, 1000);
-  };
-
   return (
     <div className="cs-description-root">
       {!pageLoaded ? (
-        <Loading />
+        <LoadingSkeleton />
       ) : (
         <>
           <div className="cs-description-content">
@@ -128,27 +79,7 @@ const CourseDescription = () => {
               <Title level={2} className="text">
                 {id} - {course.title}
               </Title>
-              {addedCourseInPlanner ? (
-                <Button
-                  type="secondary"
-                  loading={loading}
-                  onClick={removeFromPlanner}
-                  icon={<StopOutlined />}
-                >
-                  {!loading ? "Remove from planner" : "Removing from planner"}
-                </Button>
-              ) : (
-                <Button
-                  loading={loading}
-                  onClick={() => {
-                    addToPlanner("Uncategorised");
-                  }}
-                  icon={<PlusOutlined />}
-                  type="primary"
-                >
-                  {!loading ? "Add to planner" : "Adding to planner"}
-                </Button>
-              )}
+              <AddToPlannerButton />
             </div>
             {
               course.is_legacy

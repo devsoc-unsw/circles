@@ -1,10 +1,10 @@
 import React from "react";
 import { Skeleton } from "antd";
-import "./courseDescription.less";
+import "./index.less";
 
-const Loading = () => (
-  <div className="skelDescContainer">
-    <div className="skelDescInfo">
+const LoadingSkeleton = () => (
+  <div className="loading-skeleton-container">
+    <div className="loading-skeleton-description">
       {/* title */}
       <Skeleton.Input style={{ width: "70%", height: 70 }} active />
       {/* overview */}
@@ -20,7 +20,7 @@ const Loading = () => (
       <Skeleton.Input style={{ width: "25%", height: 40 }} active />
       <Skeleton.Input style={{ width: "100%", height: 100 }} active />
     </div>
-    <div className="skelDescSidebar">
+    <div className="loading-skeleton-sidebar">
       <Skeleton.Input style={{ width: "100%", height: 75 }} active />
       <Skeleton.Input style={{ width: "100%", height: 75 }} active />
       <Skeleton.Input style={{ width: "100%", height: 75 }} active />
@@ -29,4 +29,4 @@ const Loading = () => (
   </div>
 );
 
-export default Loading;
+export default LoadingSkeleton;
