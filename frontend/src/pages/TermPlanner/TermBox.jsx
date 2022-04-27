@@ -2,7 +2,7 @@ import React from "react";
 import { Droppable } from "react-beautiful-dnd";
 import { useSelector, useDispatch } from "react-redux";
 import { Badge } from "antd";
-import { RiCheckboxCircleFill } from "react-icons/ri";
+import { LockFilled, UnlockFilled } from "@ant-design/icons";
 import DraggableCourse from "./DraggableCourse";
 import { toggleTermComplete } from "../../reducers/plannerSlice";
 
@@ -27,11 +27,18 @@ const TermBox = ({
       {(provided) => (
         <Badge
           count={(
-            <RiCheckboxCircleFill
-              size="1.5em"
-              className={`termCheckbox ${isCompleted && "checkedTerm"}`}
-              onClick={handleCompleteTerm}
-            />
+            !isCompleted
+              ? (
+                <UnlockFilled
+                  className="termCheckbox"
+                  onClick={handleCompleteTerm}
+                />
+              ) : (
+                <LockFilled
+                  className="termCheckbox checkedTerm"
+                  onClick={handleCompleteTerm}
+                />
+              )
           )}
           offset={isSummerEnabled ? [-13, 13] : [-22, 22]}
         >
