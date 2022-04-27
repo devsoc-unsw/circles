@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Button, Typography, Modal } from "antd";
+import {
+  Button, notification, Typography, Modal,
+} from "antd";
 import { useNavigate } from "react-router-dom";
 import { scroller } from "react-scroll";
 import DegreeStep from "./steps/DegreeStep";
@@ -19,11 +21,21 @@ const DegreeWizard = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const navigate = useNavigate();
 
+  const csDegreeDisclaimer = () => {
+    notification.info({
+      message: "Disclaimer",
+      description: "Currently, Circles can only support CS degree and undergrad courses.",
+      placement: "bottomRight",
+      duration: 4,
+    });
+  };
+
   useEffect(() => {
     // TODO: Warning dialog before planner is reset.
     if (localStorage.getItem("planner")) {
       setIsModalVisible(true);
     }
+    csDegreeDisclaimer();
   }, []);
 
   const [currStep, setCurrStep] = useState(1);
