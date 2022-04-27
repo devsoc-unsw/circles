@@ -359,7 +359,7 @@ def handle_comma_logic(processed):
                 processed = re.sub(match, f'{replacement[0]} {joining_cond} {replacement[1]}', processed)
 
     # add &&s before coreqs if coreqs is not preceded by an OR logic
-    if re.search(r'\[.*\]', processed) and re.search(r'\|\|\s*\[', processed) is None:
+    if re.search(r'(?<!\|\|\s)\[.*\]', processed):
         processed = re.sub(r'&*\s*\[(.*)\]', r' && [\1]', processed)
     
     # remove &&s or ||s if it's the start of string
