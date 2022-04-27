@@ -1,6 +1,6 @@
 # Circles
 
-You can find a live build of [Circles](https://circles.csesoc.app/degree-wizard) at [https://circles.csesoc.app/degree-wizard](https://circles.csesoc.app/degree-wizard).
+You can find a live build of [Circles](https://circles.csesoc.app/degree-wizard) at [https://circles.csesoc.app](https://circles.csesoc.app/degree-wizard).
 
 ## Running Circles on your local machine
 
