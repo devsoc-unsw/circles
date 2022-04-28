@@ -15,8 +15,7 @@ import infographic from "../../../images/infographicFontIndependent.svg";
 import axiosRequest from "../../../axios";
 import { setCourse } from "../../../reducers/coursesSlice";
 import { addToUnplanned, removeCourse } from "../../../reducers/plannerSlice";
-
-import CollapsibleHeader from "./CollapsibleHeader";
+import CollapsibleHeader from "./Collapsible";
 
 const { Title, Text } = Typography;
 const CourseAttribute = ({ title, content }) => (
