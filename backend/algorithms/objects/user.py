@@ -115,7 +115,7 @@ class User:
             if category.match_definition(course)
         )
 
-    def unselect_course(self, target) -> list[str]:
+    def unselect_course(self, target: str) -> list[str]:
         """
         Given a course to unselect and a list of locked courses, remove the
         courses from the user and return a list of courses which would be
