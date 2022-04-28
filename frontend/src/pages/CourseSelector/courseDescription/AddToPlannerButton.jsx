@@ -14,23 +14,18 @@ const AddToPlannerButton = () => {
   const [addedCourseInPlanner, setAddedCourseInPlanner] = useState(!!coursesInPlanner[id]);
   const [loading, setLoading] = useState(false);
 
+  const addCourseToPlannerTimeout = (courseInPlanner) => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      setAddedCourseInPlanner(courseInPlanner);
+    }, 1000);
+  };
+
   useEffect(() => {
-    if (!!coursesInPlanner[id] !== addedCourseInPlanner) {
-      if (coursesInPlanner[id]) {
-        // course is being added
-        setLoading(true);
-        setTimeout(() => {
-          setLoading(false);
-          setAddedCourseInPlanner(true);
-        }, 1000);
-      } else if (!coursesInPlanner[id]) {
-        setLoading(true);
-        setTimeout(() => {
-          setLoading(false);
-          setAddedCourseInPlanner(false);
-        }, 1000);
-      }
-    }
+    if (!!coursesInPlanner[id] === addedCourseInPlanner) return;
+    setLoading(true);
+    addCourseToPlannerTimeout(!!coursesInPlanner[id]);
   }, [coursesInPlanner]);
 
   const addToPlanner = (type) => {
@@ -51,20 +46,12 @@ const AddToPlannerButton = () => {
       },
     };
     dispatch(addToUnplanned(data));
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setAddedCourseInPlanner(true);
-    }, 1000);
+    addCourseToPlannerTimeout(true);
   };
 
   const removeFromPlanner = () => {
     dispatch(removeCourse(id));
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setAddedCourseInPlanner(false);
-    }, 1000);
+    addCourseToPlannerTimeout(false);
   };
 
   return (
