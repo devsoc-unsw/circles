@@ -27,18 +27,22 @@ const TermBox = ({
       {(provided) => (
         <Badge
           count={(
-            !isCompleted
-              ? (
-                <UnlockFilled
-                  className="termCheckbox"
-                  onClick={handleCompleteTerm}
-                />
-              ) : (
-                <LockFilled
-                  className="termCheckbox checkedTerm"
-                  onClick={handleCompleteTerm}
-                />
-              )
+            <div className={`termCheckboxContainer ${isCompleted && "checkedTerm"}`}>
+              {(
+                !isCompleted
+                  ? (
+                    <UnlockFilled
+                      className="termCheckbox"
+                      onClick={handleCompleteTerm}
+                    />
+                  ) : (
+                    <LockFilled
+                      className="termCheckbox"
+                      onClick={handleCompleteTerm}
+                    />
+                  )
+              )}
+            </div>
           )}
           offset={isSummerEnabled ? [-13, 13] : [-22, 22]}
         >

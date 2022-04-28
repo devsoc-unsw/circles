@@ -445,22 +445,32 @@ body {
     color: #9254de;
   }
 
-  .termCheckbox {
-    color: #e4e3e3;
-    background-color: white;
+  .termCheckboxContainer {
+    background-color: #D9D9D9;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    padding-top: 3.5px;
     transition: all 200ms ease;
-    font-size: 20px;
 
     &:hover {
-      color: #bfbbbb;
+      background-color: #bfbbbb;
     }
   }
 
   .checkedTerm {
-    color: #9685f3;
+    background-color: #9685f3;
+
     &:hover {
-      color: #b4a9f4;
+      background-color: #b4a9f4;
     }
+  }
+
+  .termCheckbox {
+    color: #fff;
+    font-size: 12px;
   }
 
   .dragDisabledCourse {
