@@ -17,7 +17,7 @@ from data.utility import data_helpers
 TOTAL_COURSES = 10000
 
 
-def scrape_course_data():
+def scrape_course_data(year = None):
     """
     Retrieves data for all undergraduate courses
     Makes the request to the handbook, scrape the data and calls
@@ -26,10 +26,15 @@ def scrape_course_data():
 
     r = requests.post(URL, data=json.dumps(create_payload(
         TOTAL_COURSES,
-        content_type="unsw_psubject"
+        "unsw_psubject",
+        year
     )), headers=HEADERS)
+
     data_helpers.write_data(
-        r.json()["contentlets"], "data/scrapers/coursesPureRaw.json"
+        r.json()["contentlets"],
+        "data/scrapers/coursesPureRaw.json"
+        if year is None else
+        f"data/final_data/archive/raw/{year}.json"
     )
 
 

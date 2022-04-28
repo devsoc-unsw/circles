@@ -1,18 +1,20 @@
-import React from 'react';
+import React from "react";
 import { useDispatch } from "react-redux";
-import { courseTabActions } from '../../actions/courseTabActions';
-import { Tag } from 'antd';
-import './courseTag.less'
+import { Tag } from "antd";
+import "./courseTag.less";
+import { addTab } from "../../reducers/courseTabsSlice";
 
 export const CourseTag = ({ name }) => {
   const dispatch = useDispatch();
   const handleClick = () => {
-    dispatch(courseTabActions("ADD_TAB", name));
-  }
+    dispatch(addTab(name));
+  };
 
   return (
-      <Tag onClick={handleClick} className={'text tag'}>
-        { name }
-      </Tag>
+    <Tag onClick={handleClick} className="text tag">
+      { name }
+    </Tag>
   );
-}
+};
+
+export default CourseTag;

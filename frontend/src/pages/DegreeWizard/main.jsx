@@ -1,52 +1,51 @@
-import React from "react";
-import ParticleBackground from "./ParticleBackground";
-import { useSelector } from "react-redux";
-import { DegreeStep } from "./steps/DegreeStep";
-import { SpecialisationStep } from "./steps/SpecialisationStep";
-import { PreviousCoursesStep } from "./steps/PreviousCoursesStep";
-import { MinorStep } from "./steps/MinorStep";
-import { plannerActions } from "../../actions/plannerActions";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useSpring, animated } from "react-spring";
-import { DatePicker, Button, Typography, Modal } from "antd";
-import "./main.less";
-import { springProps } from "./spring";
-import { scroller } from "react-scroll";
+import {
+  Button, notification, Typography, Modal,
+} from "antd";
 import { useNavigate } from "react-router-dom";
-import { YearStep } from "./steps/YearStep";
+import { scroller } from "react-scroll";
+import DegreeStep from "./steps/DegreeStep";
+import SpecialisationStep from "./steps/SpecialisationStep";
+import MinorStep from "./steps/MinorStep";
+import "./main.less";
+import YearStep from "./steps/YearStep";
+import StartBrowsingStep from "./steps/StartBrowsingStep";
+import { resetTabs } from "../../reducers/courseTabsSlice";
+import { resetPlanner } from "../../reducers/plannerSlice";
 
 const { Title } = Typography;
-const { RangePicker } = DatePicker;
 
-function DegreeWizard() {
-  const theme = useSelector((store) => store.theme);
+const DegreeWizard = () => {
   const dispatch = useDispatch();
-  const [isModalVisible, setIsModalVisible] = React.useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const navigate = useNavigate();
 
-  React.useEffect(() => {
+  const csDegreeDisclaimer = () => {
+    notification.info({
+      message: "Disclaimer",
+      description: "Currently, Circles can only support CS degree and undergrad courses.",
+      placement: "bottomRight",
+      duration: 4,
+    });
+  };
+
+  useEffect(() => {
     // TODO: Warning dialog before planner is reset.
     if (localStorage.getItem("planner")) {
       setIsModalVisible(true);
     }
+    csDegreeDisclaimer();
   }, []);
 
-  const handleYearChange = (_, [startYear, endYear]) => {
-    const numYears = endYear - startYear + 1;
-    dispatch(plannerActions("SET_DEGREE_LENGTH", numYears));
-    dispatch(plannerActions("UPDATE_START_YEAR", startYear));
-  };
-
-  const props = useSpring(springProps);
-
-  const [currStep, setCurrStep] = React.useState(1);
+  const [currStep, setCurrStep] = useState(1);
   const incrementStep = () => {
     setCurrStep(currStep + 1);
     let nextId = "Degree";
     if (currStep === 1) nextId = "Degree";
     if (currStep === 2) nextId = "Specialisation";
     if (currStep === 3) nextId = "Minor";
-    if (currStep === 4) nextId = "Previous Courses";
+    if (currStep === 4) nextId = "Start Browsing";
     setTimeout(() => {
       scroller.scrollTo(nextId, {
         duration: 1500,
@@ -58,7 +57,8 @@ function DegreeWizard() {
   const handleOk = () => {
     setIsModalVisible(false);
     // Degree selector needs to reset to prevent identical courses in a term
-    dispatch(plannerActions("RESET_PLANNER"));
+    dispatch(resetPlanner());
+    dispatch(resetTabs());
   };
 
   const handleCancel = () => {
@@ -114,18 +114,17 @@ function DegreeWizard() {
           </div>
         )}
         {currStep >= 4 && (
-          <div className="step-content" id={"Minor"}>
+          <div className="step-content" id="Minor">
             <MinorStep incrementStep={incrementStep} currStep={currStep} />
           </div>
         )}
         {currStep >= 5 && (
-          <div className="step-content" id={"Previous Courses"}>
-            <PreviousCoursesStep />
+          <div className="step-content" id="Start Browsing">
+            <StartBrowsingStep />
           </div>
         )}
       </div>
-      {theme === "dark" && <ParticleBackground />}
     </div>
   );
-}
+};
 export default DegreeWizard;

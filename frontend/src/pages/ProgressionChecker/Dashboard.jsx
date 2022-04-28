@@ -1,6 +1,6 @@
 import React from "react";
 import { Typography } from "antd";
-import { useSpring, animated } from "react-spring";
+import { useSpring, animated } from "@react-spring/web";
 import DegreeCard from "./DegreeCard";
 import SkeletonDashboard from "./SkeletonDashboard";
 import LiquidProgressChart from "../../components/liquidProgressChart/LiquidProgressChart";
@@ -23,28 +23,27 @@ const Dashboard = ({ isLoading, degree }) => {
       ) : (
         <animated.div className="centered" style={props}>
           <LiquidProgressChart
-            completedUOC={degree["completed_UOC"]}
-            totalUOC={degree["UOC"]}
+            completedUOC={degree.completed_UOC}
+            totalUOC={degree.UOC}
           />
           <a
-            href={`https://www.handbook.unsw.edu.au/undergraduate/programs/${currYear}/${degree["code"]}?year=${currYear}`}
+            href={`https://www.handbook.unsw.edu.au/undergraduate/programs/${currYear}/${degree.code}?year=${currYear}`}
             target="_blank"
             rel="noopener noreferrer"
             className="textLink"
           >
-            <Title className="text textLink">{degree["name"]}</Title>
+            <Title className="text textLink">{degree.name}</Title>
           </a>
           <div className="cards">
-            {degree.concentrations &&
-              degree.concentrations.map((concentration, index) => (
-              <DegreeCard key={index} concentration={concentration} />
-            ))}
+            {degree.concentrations
+              && degree.concentrations.map((concentration, index) => (
+                <DegreeCard key={index} concentration={concentration} />
+              ))}
           </div>
         </animated.div>
       )}
     </div>
   );
 };
-
 
 export default Dashboard;

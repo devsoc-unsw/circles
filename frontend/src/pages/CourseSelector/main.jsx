@@ -1,31 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Switch } from "antd";
 import { useSelector } from "react-redux";
 import CourseMenu from "./courseMenu/CourseMenu";
 import CourseDescription from "./courseDescription/CourseDescription";
-import { CourseTabs } from "./CourseTabs";
+import CourseTabs from "./courseTabs/CourseTabs";
 import "./main.less";
 import SearchCourse from "./SearchCourse";
 
-export default function CourseSelector() {
-  const [structure, setStructure] = React.useState(null);
-  const [showLockedCourses, setShowLockedCourses] = React.useState(false);
+const CourseSelector = () => {
+  const [structure, setStructure] = useState({});
+  const [showLockedCourses, setShowLockedCourses] = useState(false);
 
-  const { programCode, programName, specialisation, minor } = useSelector(
-    (state) => state.degree
-  );
+  const {
+    programCode, programName, specialisation, minor,
+  } = useSelector((state) => state.degree);
 
-  React.useEffect(() => {
+  useEffect(() => {
     // get structure of degree
     const fetchStructure = async () => {
-      const endpoint = `/programs/getStructure/${programCode}/${specialisation}${
-        minor && `/${minor}`
-      }`;
       try {
-        const res1 = await axios.get(endpoint);
+        const res1 = await axios.get(`/programs/getStructure/${programCode}/${specialisation}${minor && `/${minor}`}`);
         setStructure(res1.data.structure);
       } catch (err) {
+        // eslint-disable-next-line no-console
         console.log(err);
       }
     };
@@ -43,20 +41,23 @@ export default function CourseSelector() {
           )}
         </div>
         <SearchCourse />
-
-        <Switch 
+        <Switch
           className="cs-toggle-locked"
-          onChange={() => setShowLockedCourses(prev => !prev)}
+          onChange={() => setShowLockedCourses((prev) => !prev)}
           checkedChildren="locked courses shown"
           unCheckedChildren="locked courses hidden"
         />
-
       </div>
       <CourseTabs />
       <div className="cs-bottom-cont">
-        <CourseMenu structure={structure} showLockedCourses={showLockedCourses} />
+        <CourseMenu
+          structure={structure}
+          showLockedCourses={showLockedCourses}
+        />
         <CourseDescription structure={structure} />
       </div>
     </div>
   );
-}
+};
+
+export default CourseSelector;

@@ -1,27 +1,38 @@
-import React from "react";
-import { Tooltip, Button, Typography, Popconfirm, Alert } from "antd";
+import React, { useState } from "react";
+import {
+  Tooltip, Button, Typography, Popconfirm, Alert,
+} from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { ReactComponent as PlannerIcon } from "../assets/planner-icon.svg";
 import { DeleteOutlined } from "@ant-design/icons";
-import { plannerActions } from "../../actions/plannerActions";
+import { ReactComponent as PlannerIcon } from "../assets/planner-icon.svg";
 import "./plannerCart.less";
+import { addTab } from "../../reducers/courseTabsSlice";
+import { removeAllCourses, removeCourse } from "../../reducers/plannerSlice";
 
 const { Text, Title } = Typography;
 const CourseCard = ({ code, title, showAlert }) => {
   const dispatch = useDispatch();
-  const [loading, setLoading] = React.useState(false);
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
   const confirmDelete = () => {
-    dispatch(plannerActions("REMOVE_COURSE", code));
+    dispatch(removeCourse(code));
     setLoading(true);
     setTimeout(() => {
       showAlert(code);
       setLoading(false);
     }, 700);
   };
+
+  const handleCourseLink = () => {
+    navigate("/course-selector");
+    dispatch(addTab(code));
+  };
+
   return (
     <div className="planner-cart-card">
-      <div>
+      <div role="menuitem" onClick={handleCourseLink} style={{ cursor: "pointer" }}>
         <Text className="text" strong>
           {code}:{" "}
         </Text>
@@ -30,7 +41,7 @@ const CourseCard = ({ code, title, showAlert }) => {
       <div className="planner-cart-card-actions">
         <Popconfirm
           placement="bottomRight"
-          title={"Remove this course from your planner?"}
+          title="Remove this course from your planner?"
           onConfirm={confirmDelete}
           style={{ width: "200px" }}
           okText="Yes"
@@ -54,21 +65,22 @@ export const PlannerCart = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const courses = useSelector((store) => store.planner.courses);
-  const [openMenu, setOpenMenu] = React.useState(false);
-  const [show, setShow] = React.useState(false);
-  const [code, setCode] = React.useState("");
+  const [openMenu, setOpenMenu] = useState(false);
+  const [show, setShow] = useState(false);
+  const [code, setCode] = useState("");
   const deleteAllCourses = () => {
-    dispatch(plannerActions("REMOVE_ALL_COURSES"));
+    dispatch(removeAllCourses());
   };
-  const showAlert = (code) => {
+  const showAlert = (c) => {
     setShow(false);
-    setCode(code);
+    setCode(c);
     setShow(true);
     setTimeout(() => {
       setShow(false);
       setCode("");
     }, 3500);
   };
+
   return (
     <div className="planner-cart-root">
       <Tooltip title="Your courses">
@@ -94,13 +106,13 @@ export const PlannerCart = () => {
               afterClose={() => setShow(false)}
             />
           )}
-          {courses.size > 0 ? (
+          {Object.keys(courses).length > 0 ? (
             <div className="planner-cart-content">
               {/* Reversed map to show the most recently added courses first */}
-              {[...courses.keys()].reverse().map((courseCode) => (
+              {Object.keys(courses).reverse().map((courseCode) => (
                 <CourseCard
                   code={courseCode}
-                  title={courses.get(courseCode).title}
+                  title={courses[courseCode].title}
                   showAlert={showAlert}
                 />
               ))}
@@ -123,7 +135,7 @@ export const PlannerCart = () => {
             </div>
           )}
           {/* Hacky solution so prevent overflow.. help  */}
-          {!show && courses.size > 0 && (
+          {!show && Object.keys(courses).length > 0 && (
             <Button
               danger
               className="planner-cart-delete-all-btn"
@@ -138,3 +150,5 @@ export const PlannerCart = () => {
     </div>
   );
 };
+
+export default PlannerCart;

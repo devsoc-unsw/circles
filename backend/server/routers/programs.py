@@ -6,7 +6,7 @@ from fastapi import APIRouter, HTTPException
 from server.database import programsCOL, specialisationsCOL
 from server.routers.model import (Structure, majors, message, minorInFE,
                                   minorInSpecialisation, minors, programs)
-from server.routers.courses import search
+from server.routers.courses import regex_search
 
 router = APIRouter(
     prefix="/programs",
@@ -41,7 +41,7 @@ def programsIndex():
     },
 )
 def getPrograms():
-    """fetch all the programs the backend knows about in the format of { code: title }"""
+    """ Fetch all the programs the backend knows about in the format of { code: title } """
     # return {"programs": {q["code"]: q["title"] for q in programsCOL.find()}}
     # TODO On deployment, DELETE RETURN BELOW and replace with the return above
     return {"programs": {"3778": "Computer Science"}}
@@ -77,7 +77,7 @@ def getPrograms():
     },
 )
 def getMajors(programCode: str):
-    """fetch all the majors known to the backend for a specific program"""
+    """ Fetch all the majors known to the backend for a specific program """
     result = programsCOL.find_one({"code": programCode})
 
     if not result:
@@ -117,7 +117,7 @@ def getMajors(programCode: str):
 
 
 def getMinors(programCode: str):
-    """fetch all the minors known for a specific program"""
+    """ Fetch all the minors known for a specific program """
     result = programsCOL.find_one({"code": programCode})
 
     if not result:
@@ -135,22 +135,26 @@ def getMinors(programCode: str):
 
     return {"minors": minrs}
 
-def addSubgroupContainer(structure, type, container, exceptions):
+def convertSubgroupObjectToCoursesDict(object: str, description: str|list[str]) -> dict[str, str]:
+    """ Gets a subgroup object (format laid out in the processor) and fetches the exact courses its referring to """
+    if " or " in object:
+        return {c: description[index] for index, c in enumerate(object.split(" or "))}
+    elif not re.match(r"[A-Z]{4}[0-9]{4}", object):
+        return regex_search(object)
+    else:
+        return {object: description}
+
+def addSubgroupContainer(structure: dict, type: str, container: dict, exceptions: list[str]) -> list[str]:
+    """ Returns the added courses """
     structure[type][container["title"]] = {}
     item = structure[type][container["title"]]
 
     item["UOC"] = container["credits_to_complete"]
     item["courses"] = {}
     for object, description in container["courses"].items():
-        if " or " in object:
-            courses_mentioned = {c: description[index] for index, c in enumerate(object.split(" or "))}
-        elif not re.match(r"[A-Z]{4}[0-9]{4}", object):
-            courses_mentioned = search(object)
-        else:
-            courses_mentioned = {object: description}
         item["courses"] = item["courses"] | {
-            course: description
-            for course, description in courses_mentioned.items()
+            course: description for course, description
+            in convertSubgroupObjectToCoursesDict(object, description).items()
             if course not in exceptions
         }
 
@@ -158,7 +162,7 @@ def addSubgroupContainer(structure, type, container, exceptions):
 
 
 def addSpecialisation(structure: dict, code: str, type: str):
-    """add a specialisation to the structure of a getStructure call"""
+    """ Add a specialisation to the structure of a getStructure call """
     # in a specialisation, the first container takes priority - no duplicates may exist
     spnResult = specialisationsCOL.find_one({"code": code})
     if not spnResult:
@@ -169,9 +173,8 @@ def addSpecialisation(structure: dict, code: str, type: str):
     cores = next(filter(lambda a: "Core" in a["title"], spnResult["curriculum"]))
     exceptions = addSubgroupContainer(structure, type, cores, [])
     for container in spnResult["curriculum"]:
-        if "Core" in container["title"]:
-            continue
-        addSubgroupContainer(structure, type, container, exceptions)
+        if "Core" not in container["title"]:
+            addSubgroupContainer(structure, type, container, exceptions)
 
 
 

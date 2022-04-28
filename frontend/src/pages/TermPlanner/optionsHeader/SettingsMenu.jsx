@@ -1,30 +1,33 @@
 import React from "react";
-import { plannerActions } from "../../../actions/plannerActions";
-import { Typography, DatePicker, Select, Switch, Divider } from "antd";
+import {
+  Typography, DatePicker, Select, Switch, Divider,
+} from "antd";
 import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
+import moment from "moment";
+import { updateDegreeLength, toggleSummer, updateStartYear } from "../../../reducers/plannerSlice";
 
 const SettingsMenu = () => {
   const { Title } = Typography;
   const { Option } = Select;
-  const { isSummerEnabled } = useSelector((state) => {
-    return state.planner;
-  });
+  const { isSummerEnabled, numYears, startYear } = useSelector((state) => state.planner);
 
   const dispatch = useDispatch();
 
-  function updateStartYear(date, dateString) {
-    dispatch(plannerActions("UPDATE_START_YEAR", dateString));
+  function handleUpdateStartYear(date, dateString) {
+    if (dateString) {
+      dispatch(updateStartYear(dateString));
+    }
   }
 
-  function updateDegreeLength(value) {
-    dispatch(plannerActions("SET_DEGREE_LENGTH", value));
+  function handleUpdateDegreeLength(value) {
+    dispatch(updateDegreeLength(value));
   }
 
   function handleSummerToggle() {
-    dispatch(plannerActions("TOGGLE_SUMMER"));
+    dispatch(toggleSummer());
   }
 
   const years = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -32,13 +35,13 @@ const SettingsMenu = () => {
   return (
     <div className="settingsMenu">
       <div className="settingsTitleContainer">
-        <Title level={2} class="text" strong className="settingsTitle">
+        <Title level={2} strong className="text settingsTitle">
           Settings
         </Title>
         <Divider className="settingsDivider" />
       </div>
       <div className="settingsEntry">
-        <Title level={3} class="text settingsSubtitle">
+        <Title level={3} className="text settingsSubtitle">
           Summer Term
         </Title>
         <Switch
@@ -49,23 +52,24 @@ const SettingsMenu = () => {
         />
       </div>
       <div className="settingsEntry">
-        <Title level={3} class="text settingsSubtitle">
+        <Title level={3} className="text settingsSubtitle">
           Start Year
         </Title>
         <DatePicker
-          onChange={updateStartYear}
+          onChange={handleUpdateStartYear}
           picker="year"
           style={{ width: 105 }}
+          value={moment(startYear, "YYYY")}
         />
       </div>
       <div className="settingsEntry">
-        <Title level={3} class="text settingsSubtitle">
+        <Title level={3} className="text settingsSubtitle">
           Degree Length
         </Title>
         <Select
-          defaultValue="3"
+          value={numYears}
           style={{ width: 70 }}
-          onChange={updateDegreeLength}
+          onChange={handleUpdateDegreeLength}
         >
           {years.map((num) => (
             <Option value={num}>{num}</Option>

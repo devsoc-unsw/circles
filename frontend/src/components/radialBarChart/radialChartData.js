@@ -1,4 +1,4 @@
-export const data = [
+const data = [
   {
     name: "G6",
     UOC: 10,
@@ -15,3 +15,5 @@ export const data = [
     color: "#722ed1",
   },
 ];
+
+export default data;

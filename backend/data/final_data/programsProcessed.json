@@ -6,30 +6,30 @@
         "UOC": 144,
         "faculty": "Faculty of Engineering",
         "components": {
+            "GE": {
+                "credits_to_complete": 12
+            },
             "FE": {
                 "credits_to_complete": 36,
                 "Minors": {
                     "INFSA2": "Information Systems",
-                    "MARKA2": "Marketing",
-                    "ACCTA2": "Accounting",
                     "FINSA2": "Finance",
+                    "ACCTA2": "Accounting",
+                    "PSYCM2": "Psychology",
                     "MATHC2": "Mathematics",
-                    "PSYCM2": "Psychology"
+                    "MARKA2": "Marketing"
                 }
-            },
-            "GE": {
-                "credits_to_complete": 12
             },
             "SpecialisationData": {
                 "Majors": {
-                    "COMPD1": "Computer Science (Database Systems)",
-                    "COMPS1": "Computer Science (Embedded Systems)",
                     "COMPA1": "Computer Science",
-                    "COMPN1": "Computer Science (Computer Networks)",
-                    "COMPJ1": "Computer Science (Programming Languages)",
                     "COMPY1": "Computer Science (Security Engineering)",
+                    "COMPN1": "Computer Science (Computer Networks)",
+                    "COMPS1": "Computer Science (Embedded Systems)",
+                    "COMPJ1": "Computer Science (Programming Languages)",
                     "COMPI1": "Computer Science (Artificial Intelligence)",
-                    "COMPE1": "Computer Science (eCommerce Systems)"
+                    "COMPE1": "Computer Science (eCommerce Systems)",
+                    "COMPD1": "Computer Science (Database Systems)"
                 }
             },
             "NonSpecialisationData": {}
@@ -42,38 +42,38 @@
         "UOC": 192,
         "faculty": "Faculty of Engineering",
         "components": {
-            "SpecialisationData": {
-                "Honours": {
-                    "CEICAH": "Chemical Engineering",
-                    "SOLABH": "Renewable Energy Engineering",
-                    "CVENBH": "Environmental Engineering",
-                    "AEROAH": "Aerospace Engineering",
-                    "SENGAH": "Software Engineering",
-                    "GMATEH": "Geospatial Engineering",
-                    "MECHAH": "Mechanical Engineering",
-                    "TELEAH": "Telecommunications",
-                    "MINEAH": "Mining Engineering",
-                    "ELECCH": "Quantum Engineering",
-                    "NAVLAH": "Naval Architecture",
-                    "MANFBH": "Mechanical and Manufacturing Engineering",
-                    "CEICDH": "Chemical Product Engineering",
-                    "MTRNAH": "Mechatronic Engineering",
-                    "CVENAH": "Civil Engineering",
-                    "SOLAAH": "Photovoltaics and Solar Energy",
-                    "BINFAH": "Bioinformatics Engineering",
-                    "COMPBH": "Computer Engineering",
-                    "ELECAH": "Electrical Engineering",
-                    "GMATDH": "Surveying",
-                    "PETRAH": "Petroleum Engineering"
-                }
-            },
-            "NonSpecialisationData": {},
             "GE": {
                 "credits_to_complete": 12
             },
             "Minors": {
                 "ENGGA2": 1
-            }
+            },
+            "SpecialisationData": {
+                "Honours": {
+                    "CVENBH": "Environmental Engineering",
+                    "NAVLAH": "Naval Architecture",
+                    "SOLAAH": "Photovoltaics and Solar Energy",
+                    "MTRNAH": "Mechatronic Engineering",
+                    "CEICAH": "Chemical Engineering",
+                    "GMATEH": "Geospatial Engineering",
+                    "MANFBH": "Mechanical and Manufacturing Engineering",
+                    "ELECAH": "Electrical Engineering",
+                    "CEICDH": "Chemical Product Engineering",
+                    "SOLABH": "Renewable Energy Engineering",
+                    "ELECCH": "Quantum Engineering",
+                    "TELEAH": "Telecommunications",
+                    "AEROAH": "Aerospace Engineering",
+                    "PETRAH": "Petroleum Engineering",
+                    "MECHAH": "Mechanical Engineering",
+                    "MINEAH": "Mining Engineering",
+                    "GMATDH": "Surveying",
+                    "COMPBH": "Computer Engineering",
+                    "CVENAH": "Civil Engineering",
+                    "BINFAH": "Bioinformatics Engineering",
+                    "SENGAH": "Software Engineering"
+                }
+            },
+            "NonSpecialisationData": {}
         }
     },
     "3970": {
@@ -83,123 +83,123 @@
         "UOC": 144,
         "faculty": "Faculty of Science",
         "components": {
-            "Science Elective Courses": {
-                "credits_to_complete": 12,
-                "courses": {
-                    "any Climate Science course": 1,
-                    "any Pathology course": 1,
-                    "any Vision Science course": 1,
-                    "any Biochemistry course": 1,
-                    "any Geoscience course": 1,
-                    "any Pharmacology course": 1,
-                    "any Neuroscience course": 1,
-                    "any Biological, Earth & Environmental Science course": 1,
-                    "any Biological Science course": 1,
-                    "any Computer Science course": 1,
-                    "any Microbiology course": 1,
-                    "any Biotechnology course": 1,
-                    "any Faculty of Science course": 1,
-                    "any Materials Science and Engineering course": 1,
-                    "any Anatomy course": 1,
-                    "any Food Technology course": 1,
-                    "any Aviation course": 1,
-                    "any Chemistry course": 1,
-                    "any Medical Science course": 1,
-                    "any Physiology course": 1,
-                    "any Data Science course": 1,
-                    "any Optometry course": 1,
-                    "any Biotechnology & Biomolecular Sciences course": 1,
-                    "any Psychology course": 1,
-                    "any Physics course": 1,
-                    "any Mathematics course": 1,
-                    "any Marine Science course": 1
-                }
-            },
             "GE": {
                 "credits_to_complete": 12
             },
             "FE": {
                 "credits_to_complete": 24
             },
+            "Science Elective Courses": {
+                "credits_to_complete": 12,
+                "courses": {
+                    "any Anatomy course": 1,
+                    "any Medical Science course": 1,
+                    "any Pathology course": 1,
+                    "any Microbiology course": 1,
+                    "any Biological, Earth & Environmental Science course": 1,
+                    "any Data Science course": 1,
+                    "any Pharmacology course": 1,
+                    "any Faculty of Science course": 1,
+                    "any Neuroscience course": 1,
+                    "any Mathematics course": 1,
+                    "any Computer Science course": 1,
+                    "any Biological Science course": 1,
+                    "any Physiology course": 1,
+                    "any Geoscience course": 1,
+                    "any Food Technology course": 1,
+                    "any Physics course": 1,
+                    "any Biotechnology course": 1,
+                    "any Climate Science course": 1,
+                    "any Materials Science and Engineering course": 1,
+                    "any Marine Science course": 1,
+                    "any Optometry course": 1,
+                    "any Chemistry course": 1,
+                    "any Biochemistry course": 1,
+                    "any Aviation course": 1,
+                    "any Vision Science course": 1,
+                    "any Biotechnology & Biomolecular Sciences course": 1,
+                    "any Psychology course": 1
+                }
+            },
             "SpecialisationData": {
                 "Majors": {
-                    "MATHV1": "Mathematics for Education",
-                    "MATSB1": "Materials Science",
-                    "BIOSJ1": "Biology",
+                    "BIOCC1": "Genetics",
                     "ANATA1": "Anatomy",
-                    "NEURS1": "Neuroscience",
-                    "BIOSG1": "Ecology",
-                    "BIOCM1": "Molecular and Cell Biology",
+                    "MATSB1": "Materials Science",
+                    "PHARA1": "Pharmacology",
+                    "PHYSL1": "Physics",
                     "MATHM1": "Mathematics",
+                    "MATHN1": "Physical Oceanography",
+                    "BIOSJ1": "Biology",
                     "PATHA1": "Pathology",
-                    "BIOTA1": "Biotechnology",
-                    "BINFB1": "Bioinformatics",
-                    "PSYCA1": "Psychology",
-                    "PHSLA1": "Physiology",
-                    "FOODH1": "Food Science",
-                    "GEOLS1": "Earth Science",
                     "MATHT1": "Statistics",
-                    "MICRB1": "Microbiology",
                     "MICRJ1": "Immunology",
-                    "CHEMA1": "Chemistry",
+                    "MSCIM1": "Marine and Coastal Science",
+                    "BIOTA1": "Biotechnology",
+                    "BIOCM1": "Molecular and Cell Biology",
+                    "GEOLS1": "Earth Science",
                     "VISNA1": "Vision Science",
                     "GEOGG1": "Geography",
-                    "BIOCC1": "Genetics",
-                    "PHYSL1": "Physics",
-                    "MSCIM1": "Marine and Coastal Science",
-                    "MATHN1": "Physical Oceanography",
-                    "PHARA1": "Pharmacology"
+                    "FOODH1": "Food Science",
+                    "PSYCA1": "Psychology",
+                    "PHSLA1": "Physiology",
+                    "NEURS1": "Neuroscience",
+                    "CHEMA1": "Chemistry",
+                    "BINFB1": "Bioinformatics",
+                    "MICRB1": "Microbiology",
+                    "MATHV1": "Mathematics for Education",
+                    "BIOSG1": "Ecology"
                 },
                 "Minors": {
-                    "PHYSC2": "Physics",
-                    "GEOLF2": "Geology",
+                    "MICRJ2": "Immunology",
+                    "PSYCM2": "Psychology",
+                    "CHEMD2": "Chemistry",
                     "BIOSD2": "Biology",
-                    "BIOCD2": "Molecular Biology",
-                    "PHARB2": "Pharmacology",
+                    "CLIMA2": "Climate Science",
+                    "GEOLF2": "Geology",
+                    "PATHB2": "Pathology",
+                    "PHYSC2": "Physics",
                     "MSCIH2": "Marine Science",
-                    "ANATB2": "Anatomy",
+                    "PHARB2": "Pharmacology",
+                    "BIOCD2": "Molecular Biology",
                     "GEOGH2": "Physical Geography",
                     "PHSLB2": "Physiology",
-                    "MICRJ2": "Immunology",
-                    "VISNB2": "Vision Science",
-                    "CHEMD2": "Chemistry",
-                    "ARCYB2": "Palaeosciences",
-                    "MATHD2": "Statistics",
-                    "PSYCM2": "Psychology",
-                    "CLIMA2": "Climate Science",
                     "MATHC2": "Mathematics",
-                    "PATHB2": "Pathology"
+                    "ARCYB2": "Palaeosciences",
+                    "VISNB2": "Vision Science",
+                    "MATHD2": "Statistics",
+                    "ANATB2": "Anatomy"
                 }
             },
             "NonSpecialisationData": {
                 "Science Electives": {
                     "type": "elective",
-                    "any Mathematics course": 1,
-                    "any Pharmacology course": 1,
-                    "any Food Technology course": 1,
-                    "any Physics course": 1,
-                    "any Materials Science and Engineering course": 1,
-                    "any Climate Science course": 1,
-                    "any Biotechnology & Biomolecular Sciences course": 1,
-                    "any Medical Science course": 1,
-                    "any Physiology course": 1,
-                    "any Faculty of Science course": 1,
-                    "any Marine Science course": 1,
                     "any Geoscience course": 1,
+                    "any Materials Science and Engineering course": 1,
                     "any Biological, Earth & Environmental Science course": 1,
-                    "any Psychology course": 1,
                     "any Vision Science course": 1,
-                    "any Neuroscience course": 1,
-                    "any Aviation course": 1,
+                    "any Physiology course": 1,
                     "any Anatomy course": 1,
-                    "any Pathology course": 1,
+                    "any Biochemistry course": 1,
+                    "any Neuroscience course": 1,
+                    "any Physics course": 1,
+                    "any Biotechnology & Biomolecular Sciences course": 1,
+                    "any Climate Science course": 1,
+                    "any Biological Science course": 1,
                     "any Biotechnology course": 1,
+                    "any Optometry course": 1,
                     "any Chemistry course": 1,
                     "any Microbiology course": 1,
+                    "any Medical Science course": 1,
+                    "any Pharmacology course": 1,
+                    "any Psychology course": 1,
                     "any Computer Science course": 1,
-                    "any Biochemistry course": 1,
-                    "any Biological Science course": 1,
-                    "any Optometry course": 1
+                    "any Marine Science course": 1,
+                    "any Aviation course": 1,
+                    "any Pathology course": 1,
+                    "any Food Technology course": 1,
+                    "any Faculty of Science course": 1,
+                    "any Mathematics course": 1
                 }
             }
         }
@@ -211,98 +211,100 @@
         "UOC": 144,
         "faculty": "UNSW Business School",
         "components": {
-            "SpecialisationData": {
-                "Minors": {
-                    "INFSA2": "Information Systems",
-                    "JAPNG2": "Advanced Japanese Studies",
-                    "ACCTA2": "Accounting",
-                    "GERSF2": "German Studies",
-                    "CHINF2": "Advanced Chinese Studies",
-                    "JAPNF2": "Japanese Studies",
-                    "FINSR2": "Financial Technology",
-                    "FRENG2": "Advanced French Studies",
-                    "MGMTH2": "Human Resource Management",
-                    "IBUSA2": "International Business",
-                    "FRENF2": "French Studies",
-                    "MGMTA2": "Management",
-                    "SPANI2": "Spanish Studies",
-                    "TABLC2": "Taxation",
-                    "KOREG2": "Advanced Korean Studies",
-                    "COMMJ2": "Business Analytics",
-                    "TABLA2": "Business Law",
-                    "KOREF2": "Korean Studies",
-                    "CHINE2": "Chinese Studies",
-                    "MARKA2": "Marketing",
-                    "FINSA2": "Finance",
-                    "ECONF2": "Business Economics"
-                },
-                "Majors": {
-                    "FINSR1": "Financial Technology",
-                    "TABLC1": "Taxation",
-                    "MGMTH1": "Human Resource Management",
-                    "COMMJ1": "Business Analytics",
-                    "MGMTJ1": "Innovation, Strategy and Entrepreneurship",
-                    "INFSA1": "Information Systems",
-                    "IBUSA1": "International Business",
-                    "FINSA1": "Finance",
-                    "ACCTA1": "Accounting",
-                    "ECONO1": "Behavioural Economics",
-                    "ECONF1": "Business Economics",
-                    "MARKA1": "Marketing"
-                }
-            },
-            "NonSpecialisationData": {
-                "Final Year Synthesis": {
-                    "type": "core",
-                    "ECON3000": "Evidence-based Intervention Design and Evaluation",
-                    "COMM3030": "Social Entrepreneurship Practicum",
-                    "MGMT3004": "Solving Complex Strategy and Policy Problems",
-                    "COMM3501": "Quantitative Business Analytics",
-                    "COMM2233": "Industry Consulting Project",
-                    "COMM3090": "Synthesis of Learning Experience",
-                    "COMM3020": "Global Business Practicum",
-                    "ACCT3583": "Management Accounting 2",
-                    "COMM3900": "Capstone Project",
-                    "TABL3033": "UNSW Tax and Business Advisory Clinic",
-                    "INFS3020": "International Information Systems and Technology Practicum"
-                },
-                "Prescribed Work Integrated Learning (WIL) Course": {
-                    "type": "elective",
-                    "credits_to_complete": "6",
-                    "COMM2233": "Industry Consulting Project",
-                    "COMM2222": "Industry Experience Program",
-                    "CDEV3000": "Practice of Work",
-                    "COMM3101": "Industry Experience Placement 1",
-                    "COMM3202": "Industry Experience Placement 2",
-                    "COMM2244": "Future of Work Project",
-                    "COMM3030": "Social Entrepreneurship Practicum",
-                    "COMM3020": "Global Business Practicum",
-                    "TABL3033": "UNSW Tax and Business Advisory Clinic"
-                },
-                "Integrated First Year Courses": {
-                    "type": "core",
-                    "credits_to_complete": "48",
-                    "COMM1190": "Data, Insights and Decisions",
-                    "COMM1180": "Value Creation",
-                    "COMM1150": "Global Business Environments",
-                    "COMM1100": "Business Decision Making",
-                    "COMM1140": "Financial Management",
-                    "COMM1170": "Organisational Resources",
-                    "COMM1110": "Evidence-Based Problem Solving",
-                    "COMM1120": "Collaboration and Innovation in Business"
-                },
-                "myBCom": {
-                    "type": "core",
-                    "COMM1999": "myBCom First Year Portfolio",
-                    "COMM3999": "myBCom Graduation Portfolio",
-                    "COMM0999": "myBCom Blueprint"
-                }
+            "FE": {
+                "credits_to_complete": 36
             },
             "GE": {
                 "credits_to_complete": 12
             },
-            "FE": {
-                "credits_to_complete": 36
+            "SpecialisationData": {
+                "Minors": {
+                    "FRENF2": "French Studies",
+                    "KOREG2": "Advanced Korean Studies",
+                    "CHINE2": "Chinese Studies",
+                    "GERSF2": "German Studies",
+                    "MGMTA2": "Management",
+                    "COMMJ2": "Business Analytics",
+                    "INFSA2": "Information Systems",
+                    "SPANI2": "Spanish Studies",
+                    "FINSA2": "Finance",
+                    "JAPNG2": "Advanced Japanese Studies",
+                    "TABLC2": "Taxation",
+                    "ACCTA2": "Accounting",
+                    "FRENG2": "Advanced French Studies",
+                    "MARKA2": "Marketing",
+                    "CHINF2": "Advanced Chinese Studies",
+                    "IBUSA2": "International Business",
+                    "MGMTH2": "Human Resource Management",
+                    "ECONF2": "Business Economics",
+                    "JAPNF2": "Japanese Studies",
+                    "TABLA2": "Business Law",
+                    "FINSR2": "Financial Technology",
+                    "KOREF2": "Korean Studies"
+                },
+                "Majors": {
+                    "ACCTA1": "Accounting",
+                    "MARKA1": "Marketing",
+                    "ECONF1": "Business Economics",
+                    "MGMTJ1": "Innovation, Strategy and Entrepreneurship",
+                    "FINSA1": "Finance",
+                    "IBUSA1": "International Business",
+                    "COMMJ1": "Business Analytics",
+                    "MGMTH1": "Human Resource Management",
+                    "ECONO1": "Behavioural Economics",
+                    "TABLC1": "Taxation",
+                    "FINSR1": "Financial Technology",
+                    "INFSA1": "Information Systems"
+                }
+            },
+            "NonSpecialisationData": {
+                "Integrated First Year Courses": {
+                    "type": "core",
+                    "credits_to_complete": "48",
+                    "COMM1140": "Financial Management",
+                    "COMM1170": "Organisational Resources",
+                    "COMM1190": "Data, Insights and Decisions",
+                    "COMM1110": "Evidence-Based Problem Solving",
+                    "COMM1150": "Global Business Environments",
+                    "COMM1180": "Value Creation",
+                    "COMM1100": "Business Decision Making",
+                    "COMM1120": "Collaboration and Innovation in Business"
+                },
+                "Prescribed Work Integrated Learning (WIL) Course": {
+                    "type": "elective",
+                    "credits_to_complete": "6",
+                    "COMM3020": "Global Business Practicum",
+                    "COMM3101": "Industry Experience Placement 1",
+                    "CDEV3000": "Practice of Work",
+                    "TABL3033": "UNSW Tax and Business Advisory Clinic",
+                    "COMM2233": "Industry Consulting Project",
+                    "COMM3030": "Social Entrepreneurship Practicum",
+                    "COMM3202": "Industry Experience Placement 2",
+                    "COMM2222": "Industry Experience Program",
+                    "COMM2244": "Future of Work Project"
+                },
+                "myBCom": {
+                    "type": "core",
+                    "COMM1999": "myBCom First Year Portfolio",
+                    "COMM0999": "myBCom Blueprint",
+                    "COMM3999": "myBCom Graduation Portfolio"
+                },
+                "Final Year Synthesis": {
+                    "type": "core",
+                    "ACTL3192": "Retirement Saving and Spending Over the Lifecycle",
+                    "COMM3020": "Global Business Practicum",
+                    "TABL3033": "UNSW Tax and Business Advisory Clinic",
+                    "COMM3090": "Synthesis of Learning Experience",
+                    "COMM3900": "Capstone Project",
+                    "COMM2233": "Industry Consulting Project",
+                    "INFS3020": "International Information Systems and Technology Practicum",
+                    "COMM3030": "Social Entrepreneurship Practicum",
+                    "COMM3501": "Quantitative Business Analytics",
+                    "ACCT3583": "Management Accounting 2",
+                    "ECON3000": "Evidence-based Intervention Design and Evaluation",
+                    "COMM2244": "Future of Work Project",
+                    "MGMT3004": "Solving Complex Strategy and Policy Problems"
+                }
             }
         }
     },
@@ -321,53 +323,53 @@
             },
             "SpecialisationData": {},
             "NonSpecialisationData": {
-                "Level 3 Core Courses": {
-                    "type": "core",
-                    "credits_to_complete": "24",
-                    "BABS3200": "Synthetic Biology",
-                    "BABS3071": "Commercial Biotechnology",
-                    "BABS3031": "Biotechnology and Bioengineering",
-                    "BABS3061": "Medical Biotechnology"
-                },
-                "Level 2 Core Courses": {
-                    "type": "core",
-                    "credits_to_complete": "24",
-                    "MICR2011": "Microbiology 1",
-                    "BIOC2201": "Principles of Molecular Biology (Advanced)",
-                    "BIOC2101": "Principles of Biochemistry (Advanced)",
-                    "BABS2011": "Current Trends in Biotechnology"
+                "Level 2 and Level 3 Electives": {
+                    "type": "elective",
+                    "credits_to_complete": "36",
+                    "any level 3 Microbiology course": 1,
+                    "any level 3 Biochemistry course": 1,
+                    "any level 3 Bioinformatics course": 1,
+                    "any level 3 Medical Science course": 1,
+                    "any level 2 Biotechnology & Biomolecular Sciences course": 1,
+                    "any level 2 Faculty of Science course": 1,
+                    "any level 3 Chemistry course": 1,
+                    "any level 3 Biotechnology & Biomolecular Sciences course": 1,
+                    "any level 3 Faculty of Science course": 1,
+                    "any level 2 Medical Science course": 1,
+                    "any level 2 Pharmacology course": 1,
+                    "any level 2 Chemistry course": 1,
+                    "any level 2 Bioinformatics course": 1,
+                    "any level 3 Pharmacology course": 1
                 },
                 "Level 1 Core Courses": {
                     "type": "core",
                     "credits_to_complete": "36",
-                    "MATH1141": "Higher Mathematics 1A",
+                    "BABS1202": "Applied Biomolecular Sciences",
+                    "CHEM1011": "Chemistry 1A: Atoms, Molecules and Energy",
+                    "CHEM1021": "Chemistry 1B: Elements, Compounds and Life",
+                    "BABS1201": "Molecules, Cells and Genes",
                     "MATH1031": "Mathematics for Life Sciences",
                     "MATH1131": "Mathematics 1A",
-                    "BABS1201": "Molecules, Cells and Genes",
-                    "CHEM1011": "Chemistry 1A: Atoms, Molecules and Energy",
-                    "BABS1202": "Applied Biomolecular Sciences",
-                    "CHEM1021": "Chemistry 1B: Elements, Compounds and Life",
-                    "MATH1041": "Statistics for Life and Social Sciences",
+                    "MATH1141": "Higher Mathematics 1A",
+                    "MATH1231": "Mathematics 1B",
                     "MATH1241": "Higher Mathematics 1B",
-                    "MATH1231": "Mathematics 1B"
+                    "MATH1041": "Statistics for Life and Social Sciences"
                 },
-                "Level 2 and Level 3 Electives": {
-                    "type": "elective",
-                    "credits_to_complete": "36",
-                    "any level 2 Pharmacology course": 1,
-                    "any level 3 Microbiology course": 1,
-                    "any level 3 Biotechnology & Biomolecular Sciences course": 1,
-                    "any level 3 Biochemistry course": 1,
-                    "any level 2 Medical Science course": 1,
-                    "any level 2 Bioinformatics course": 1,
-                    "any level 3 Medical Science course": 1,
-                    "any level 3 Bioinformatics course": 1,
-                    "any level 2 Biotechnology & Biomolecular Sciences course": 1,
-                    "any level 3 Chemistry course": 1,
-                    "any level 3 Pharmacology course": 1,
-                    "any level 2 Faculty of Science course": 1,
-                    "any level 3 Faculty of Science course": 1,
-                    "any level 2 Chemistry course": 1
+                "Level 3 Core Courses": {
+                    "type": "core",
+                    "credits_to_complete": "24",
+                    "BABS3031": "Biotechnology and Bioengineering",
+                    "BABS3071": "Commercial Biotechnology",
+                    "BABS3061": "Medical Biotechnology",
+                    "BABS3200": "Synthetic Biology"
+                },
+                "Level 2 Core Courses": {
+                    "type": "core",
+                    "credits_to_complete": "24",
+                    "BIOC2201": "Principles of Molecular Biology (Advanced)",
+                    "BABS2011": "Current Trends in Biotechnology",
+                    "BIOC2101": "Principles of Biochemistry (Advanced)",
+                    "MICR2011": "Microbiology 1"
                 },
                 "Level 4 Core Course": {
                     "type": "core",
@@ -386,50 +388,50 @@
         "components": {
             "SpecialisationData": {},
             "NonSpecialisationData": {
-                "Business Core Courses": {
-                    "type": "core",
-                    "credits_to_complete": "30",
-                    "COMM1110": "Evidence-Based Problem Solving",
-                    "COMM1190": "Data, Insights and Decisions",
-                    "COMM1100": "Business Decision Making",
-                    "COMM1150": "Global Business Environments",
-                    "COMM1140": "Financial Management",
-                    "COMM1120": "Collaboration and Innovation in Business",
-                    "COMM1180": "Value Creation"
-                },
-                "Prescribed Information Systems Electives": {
-                    "type": "elective",
-                    "credits_to_complete": "12"
-                },
                 "Information Systems core courses": {
                     "type": "core",
                     "credits_to_complete": "72",
-                    "INFS1701": "Networking and Security",
-                    "INFS3703": "Information Systems Project Management",
-                    "INFS3700": "User Experience and IT Service Design",
-                    "INFS1602": "Digital Transformation in Business",
-                    "INFS3701": "Enterprise Architecture for Scalable Cloud Solutions",
-                    "INFS3605": "Information Systems Innovation & Transformation",
-                    "INFS2608": "Database Management & Big Data Infrastructures",
-                    "INFS3604": "Business Process Management",
+                    "INFS2603": "Business Analysis and Agile Product Management",
                     "INFS2701": "Cyber Security Management and Governance",
+                    "INFS3604": "Business Process Management",
                     "INFS1603": "Introduction to Business Databases",
+                    "INFS1602": "Digital Transformation in Business",
+                    "INFS1701": "Networking and Security",
+                    "INFS3701": "Enterprise Architecture for Scalable Cloud Solutions",
+                    "INFS3703": "Information Systems Project Management",
+                    "INFS3605": "Information Systems Innovation & Transformation",
                     "INFS2822": "Programming for Data Analytics",
-                    "INFS2603": "Business Analysis and Agile Product Management"
+                    "INFS2608": "Database Management & Big Data Infrastructures",
+                    "INFS3700": "User Experience and IT Service Design"
                 },
                 "Work Integrated Learning (WIL)": {
                     "type": "elective",
                     "credits_to_complete": "6",
                     "COMM2222": "Industry Experience Program",
                     "COMM2233": "Industry Consulting Project",
-                    "INFS3020": "International Information Systems and Technology Practicum",
-                    "COMM3030": "Social Entrepreneurship Practicum"
+                    "COMM3030": "Social Entrepreneurship Practicum",
+                    "INFS3020": "International Information Systems and Technology Practicum"
+                },
+                "Prescribed Information Systems Electives": {
+                    "type": "elective",
+                    "credits_to_complete": "12"
+                },
+                "Business Core Courses": {
+                    "type": "core",
+                    "credits_to_complete": "30",
+                    "COMM1140": "Financial Management",
+                    "COMM1150": "Global Business Environments",
+                    "COMM1100": "Business Decision Making",
+                    "COMM1190": "Data, Insights and Decisions",
+                    "COMM1110": "Evidence-Based Problem Solving",
+                    "COMM1120": "Collaboration and Innovation in Business",
+                    "COMM1180": "Value Creation"
                 }
             },
-            "GE": {
+            "FE": {
                 "credits_to_complete": 12
             },
-            "FE": {
+            "GE": {
                 "credits_to_complete": 12
             }
         }
@@ -441,48 +443,48 @@
         "UOC": 144,
         "faculty": "Faculty of Science",
         "components": {
-            "GE": {
-                "credits_to_complete": 12
-            },
             "FE": {
                 "credits_to_complete": 12
             },
             "SpecialisationData": {
                 "Majors": {
-                    "MATHE1": "Quantitative Data Science",
                     "ECONL1": "Business Data Science",
-                    "COMPZ1": "Computational Data Science"
+                    "COMPZ1": "Computational Data Science",
+                    "MATHE1": "Quantitative Data Science"
                 }
             },
             "NonSpecialisationData": {
                 "Level 2 Core Courses": {
                     "type": "core",
                     "credits_to_complete": "18",
-                    "MATH2901": "Higher Theory of Statistics",
-                    "MATH2801": "Theory of Statistics",
-                    "ECON2112": "Game Theory and Business Strategy",
+                    "MATH2601": "Higher Linear Algebra",
                     "MATH2501": "Linear Algebra",
-                    "MATH2601": "Higher Linear Algebra"
+                    "ECON2112": "Game Theory and Business Strategy",
+                    "MATH2801": "Theory of Statistics",
+                    "MATH2901": "Higher Theory of Statistics"
                 },
                 "Level 3 Core Courses": {
                     "type": "core",
                     "credits_to_complete": "18",
-                    "COMP3311": "Database Systems",
                     "DATA3001": "Data Science and Decisions in Practice",
+                    "COMP3311": "Database Systems",
                     "ECON3203": "Econometric Theory and Methods"
                 },
                 "Level 1 Core Courses": {
                     "type": "core",
                     "credits_to_complete": "36",
-                    "DATA1001": "Introduction to Data Science and Decisions",
-                    "ECON1101": "Microeconomics 1",
-                    "COMP1511": "Programming Fundamentals",
                     "COMP2521": "Data Structures and Algorithms",
-                    "MATH1131": "Mathematics 1A",
-                    "MATH1141": "Higher Mathematics 1A",
+                    "ECON1101": "Microeconomics 1",
+                    "DATA1001": "Introduction to Data Science and Decisions",
+                    "COMP1511": "Programming Fundamentals",
                     "MATH1231": "Mathematics 1B",
-                    "MATH1241": "Higher Mathematics 1B"
+                    "MATH1241": "Higher Mathematics 1B",
+                    "MATH1131": "Mathematics 1A",
+                    "MATH1141": "Higher Mathematics 1A"
                 }
+            },
+            "GE": {
+                "credits_to_complete": 12
             }
         }
     },
@@ -498,42 +500,42 @@
             },
             "SpecialisationData": {},
             "NonSpecialisationData": {
-                "Level 1 Core Courses": {
-                    "type": "core",
-                    "credits_to_complete": "48",
-                    "CHEM1829": "Biological Chemistry for Optometry Students",
-                    "VISN1221": "Visual Optics",
-                    "BABS1201": "Molecules, Cells and Genes",
-                    "VISN1101": "Seeing the World: Perspectives from Vision Science",
-                    "VISN1111": "Geometrical and Physical Optics",
-                    "CHEM1011": "Chemistry 1A: Atoms, Molecules and Energy",
-                    "PHYS1121": "Physics 1A",
-                    "PHYS1131": "Higher Physics 1A",
-                    "PHYS1111": "Fundamentals of Physics",
-                    "MATH1141": "Higher Mathematics 1A",
-                    "MATH1131": "Mathematics 1A",
-                    "MATH1031": "Mathematics for Life Sciences"
-                },
                 "Level 3 Core Courses": {
                     "type": "core",
                     "credits_to_complete": "42",
-                    "OPTM3133": "Vision Science in the Consulting Room",
                     "OPTM3233": "Working in Clinical Contexts",
-                    "PHAR3306": "Pharmacology for Optometry",
-                    "OPTM3105": "Disease Processes of the Eye 1",
                     "VISN3111": "Development and Aging of the Visual System",
-                    "OPTM3205": "Disease Processes of the Eye 2",
-                    "OPTM3201": "Ocular Imaging & Applied Vision Science"
+                    "OPTM3105": "Disease Processes of the Eye 1",
+                    "OPTM3201": "Ocular Imaging & Applied Vision Science",
+                    "PHAR3306": "Pharmacology for Optometry",
+                    "OPTM3133": "Vision Science in the Consulting Room",
+                    "OPTM3205": "Disease Processes of the Eye 2"
+                },
+                "Level 1 Core Courses": {
+                    "type": "core",
+                    "credits_to_complete": "48",
+                    "BABS1201": "Molecules, Cells and Genes",
+                    "CHEM1829": "Biological Chemistry for Optometry Students",
+                    "VISN1111": "Geometrical and Physical Optics",
+                    "CHEM1011": "Chemistry 1A: Atoms, Molecules and Energy",
+                    "VISN1101": "Seeing the World: Perspectives from Vision Science",
+                    "VISN1221": "Visual Optics",
+                    "PHYS1121": "Physics 1A",
+                    "PHYS1111": "Fundamentals of Physics",
+                    "PHYS1131": "Higher Physics 1A",
+                    "MATH1031": "Mathematics for Life Sciences",
+                    "MATH1141": "Higher Mathematics 1A",
+                    "MATH1131": "Mathematics 1A"
                 },
                 "Level 2 Core Courses": {
                     "type": "core",
                     "credits_to_complete": "42",
+                    "PHSL2101": "Physiology 1A",
+                    "VISN2111": "Ocular Anatomy and Physiology",
+                    "OPTM2133": "The Clinical Environment",
                     "PHSL2201": "Physiology 1B",
                     "VISN2211": "Organisation and Function of the Visual System",
-                    "PHSL2101": "Physiology 1A",
-                    "OPTM2133": "The Clinical Environment",
                     "ANAT2111": "Introductory Anatomy",
-                    "VISN2111": "Ocular Anatomy and Physiology",
                     "OPTM2233": "Optical Dispensing"
                 }
             }
@@ -549,29 +551,14 @@
             "FE": {
                 "credits_to_complete": 36
             },
-            "GE": {
-                "credits_to_complete": 12
-            },
             "SpecialisationData": {
                 "Majors": {
                     "ECONU1": "Economic Policy and Society",
-                    "ECONT1": "Data Analytics and Econometrics",
-                    "ECONV1": "Macroeconomics and Financial Markets"
+                    "ECONV1": "Macroeconomics and Financial Markets",
+                    "ECONT1": "Data Analytics and Econometrics"
                 }
             },
             "NonSpecialisationData": {
-                "Economics Core": {
-                    "type": "core",
-                    "credits_to_complete": "48",
-                    "ECON2102": "Macroeconomics 2",
-                    "ECON2206": "Introductory Econometrics ",
-                    "ECON2101": "Microeconomics 2",
-                    "ECON1401": "Economic Perspectives",
-                    "ECON1203": "Business and Economic Statistics",
-                    "ECON1202": "Quantitative Analysis for Business and Economics",
-                    "ECON1102": "Macroeconomics 1",
-                    "ECON1101": "Microeconomics 1"
-                },
                 "UNSW Business Electives": {
                     "type": "elective",
                     "credits_to_complete": "12",
@@ -585,9 +572,25 @@
                     "type": "elective",
                     "credits_to_complete": "6",
                     "COMM1140": "Financial Management",
+                    "COMM1120": "Collaboration and Innovation in Business",
                     "COMM1900": "Organisations in Their Environment",
                     "COMM1190": "Data, Insights and Decisions"
+                },
+                "Economics Core": {
+                    "type": "core",
+                    "credits_to_complete": "48",
+                    "ECON2206": "Introductory Econometrics ",
+                    "ECON1203": "Business and Economic Statistics",
+                    "ECON1202": "Quantitative Analysis for Business and Economics",
+                    "ECON2101": "Microeconomics 2",
+                    "ECON2102": "Macroeconomics 2",
+                    "ECON1401": "Economic Perspectives",
+                    "ECON1102": "Macroeconomics 1",
+                    "ECON1101": "Microeconomics 1"
                 }
+            },
+            "GE": {
+                "credits_to_complete": 12
             }
         }
     },
@@ -598,44 +601,44 @@
         "UOC": 144,
         "faculty": "UNSW Business School",
         "components": {
+            "GE": {
+                "credits_to_complete": 12
+            },
             "SpecialisationData": {},
             "NonSpecialisationData": {
-                "Level 1 Core Courses": {
-                    "type": "core",
-                    "credits_to_complete": "48",
-                    "ACTL1101": "Introduction to Actuarial Studies",
-                    "MATH1251": "Mathematics for Actuarial Studies and Finance 1B",
-                    "MATH1151": "Mathematics for Actuarial Studies and Finance 1A",
-                    "ECON1101": "Microeconomics 1",
-                    "ECON1102": "Macroeconomics 1",
-                    "COMM1180": "Value Creation",
-                    "COMM1170": "Organisational Resources",
-                    "COMM1140": "Financial Management"
-                },
                 "Level 3 Actuarial Electives": {
                     "type": "elective",
                     "credits_to_complete": "24",
-                    "ACTL3192": "Retirement Saving and Spending Over the Lifecycle",
-                    "ACTL3301": "Quantitative Risk Management",
                     "ACTL3191": "Superannuation and Retirement Benefits",
-                    "ACTL3162": "General Insurance Techniques",
                     "ACTL3151": "Actuarial Mathematics for Insurance and Superannuation",
+                    "ACTL3301": "Quantitative Risk Management",
                     "ACTL3182": "Asset-Liability and Derivative Models",
                     "ACTL3141": "Modelling and Prediction of Life and Health Related Risks",
-                    "ACTL3142": "Statistical Machine Learning for Risk and Actuarial Applications",
-                    "ACTL3143": "Artificial Intelligence and Deep Learning Models for Actuarial Applications"
+                    "ACTL3162": "General Insurance Techniques",
+                    "ACTL3143": "Artificial Intelligence and Deep Learning Models for Actuarial Applications",
+                    "ACTL3192": "Retirement Saving and Spending Over the Lifecycle",
+                    "ACTL3142": "Statistical Machine Learning for Risk and Actuarial Applications"
+                },
+                "Level 1 Core Courses": {
+                    "type": "core",
+                    "credits_to_complete": "48",
+                    "COMM1170": "Organisational Resources",
+                    "MATH1151": "Mathematics for Actuarial Studies and Finance 1A",
+                    "COMM1180": "Value Creation",
+                    "ECON1101": "Microeconomics 1",
+                    "MATH1251": "Mathematics for Actuarial Studies and Finance 1B",
+                    "COMM1140": "Financial Management",
+                    "ACTL1101": "Introduction to Actuarial Studies",
+                    "ECON1102": "Macroeconomics 1"
                 },
                 "Level 2 Core Courses": {
                     "type": "core",
                     "credits_to_complete": "24",
-                    "ACTL2111": "Financial Mathematics for Actuaries",
                     "ACTL2102": "Foundations of Actuarial Models",
+                    "ACTL2111": "Financial Mathematics for Actuaries",
                     "ACTL2131": "Probability and Mathematical Statistics",
                     "COMM2501": "Data Visualisation and Communication"
                 }
-            },
-            "GE": {
-                "credits_to_complete": 12
             },
             "FE": {
                 "credits_to_complete": 36
@@ -713,73 +716,73 @@
             },
             "SpecialisationData": {},
             "NonSpecialisationData": {
-                "Level 4 Core Courses": {
-                    "type": "core",
-                    "credits_to_complete": "36",
-                    "HESC4561": "Research Internship A",
-                    "HESC4551": "Research Project",
-                    "HESC4502": "Workplace Assessment and Rehabilitation",
-                    "HESC3581": "Exercise Prescription in Diverse Populations",
-                    "HESC4622": "Clinical Practicum B",
-                    "HESC4611": "Clinical Practicum A",
-                    "HESC4501": "Exercise Physiology Research Seminars"
-                },
-                "Electives": {
-                    "type": "elective",
-                    "credits_to_complete": "6",
-                    "PHSL3221": "Endocrine, Reproductive and Developmental Physiology",
-                    "FOOD4403": "Advanced Nutrition",
-                    "ANAT3411": "Neuroanatomy",
-                    "MATH1131": "Mathematics 1A",
-                    "BIOC3261": "Human Biochemistry",
-                    "PATH3207": "Musculoskeletal Diseases",
-                    "PHSL3211": "Cardiovascular Physiology and Pathophysiology",
-                    "FOOD3220": "Nutrition",
-                    "BIOM9551": "Biomechanics of Physical Rehabilitation",
-                    "ANAT3121": "Visceral Anatomy",
-                    "PSYC1024": "Clinical Perspectives on Anxiety, Mood and Stress",
-                    "PHYS1121": "Physics 1A",
-                    "PSYC1023": "Abnormal Psychology",
-                    "MATH1031": "Mathematics for Life Sciences",
-                    "BEIL0011": "Healthy Planning",
-                    "NEUR3221": "Neurophysiology",
-                    "PSYC1022": "The Psychology of Addiction",
-                    "HESC4571": "Research Internship B"
-                },
-                "Level 1 Core Courses": {
-                    "type": "core",
-                    "credits_to_complete": "42",
-                    "ANAT2111": "Introductory Anatomy",
-                    "MATH1041": "Statistics for Life and Social Sciences",
-                    "PSYC1001": "Psychology 1A",
-                    "BABS1201": "Molecules, Cells and Genes",
-                    "HESC1511": "Exercise Programs and Behaviour",
-                    "HESC1501": "Introductory Exercise Science",
-                    "CHEM1831": "Chemistry for Exercise Physiology"
-                },
-                "Level 2 Core Courses": {
-                    "type": "core",
-                    "credits_to_complete": "48",
-                    "HESC2451": "Biomechanics",
-                    "BIOC2181": "Fundamentals of Biochemistry",
-                    "PATH2202": "Processes in Disease for Health and Exercise Science",
-                    "ANAT2451": "Functional Anatomy for Health and Exercise Science",
-                    "PHSL2502": "Human Physiology B",
-                    "HESC2501": "Exercise Physiology",
-                    "HESC2452": "Movement Assessment and Instruction",
-                    "PHSL2501": "Human Physiology A"
-                },
                 "Level 3 Core Courses": {
                     "type": "core",
                     "credits_to_complete": "48",
                     "PHAR3111": "Clinical Pharmacology for Health and Exercise Science",
-                    "HESC3541": "Clinical Exercise Physiology",
-                    "HESC3532": "Movement Rehabilitation",
-                    "NEUR3101": "Muscle and Motor Control",
-                    "HESC3504": "Physical Activity and Health",
-                    "HESC3501": "Advanced Exercise Science",
                     "HESC3592": "Neuromuscular Rehabilitation",
-                    "HESC3511": "Health, Exercise and Sport Psychology"
+                    "HESC3541": "Clinical Exercise Physiology",
+                    "HESC3511": "Health, Exercise and Sport Psychology",
+                    "HESC3532": "Movement Rehabilitation",
+                    "HESC3501": "Advanced Exercise Science",
+                    "NEUR3101": "Muscle and Motor Control",
+                    "HESC3504": "Physical Activity and Health"
+                },
+                "Electives": {
+                    "type": "elective",
+                    "credits_to_complete": "6",
+                    "MATH1031": "Mathematics for Life Sciences",
+                    "BIOM9551": "Biomechanics of Physical Rehabilitation",
+                    "NEUR3221": "Neurophysiology",
+                    "PHSL3211": "Cardiovascular Physiology and Pathophysiology",
+                    "BEIL0011": "Healthy Planning",
+                    "FOOD4403": "Advanced Nutrition",
+                    "ANAT3411": "Neuroanatomy",
+                    "PATH3207": "Musculoskeletal Diseases",
+                    "PSYC1023": "Abnormal Psychology",
+                    "HESC4571": "Research Internship B",
+                    "PHSL3221": "Endocrine, Reproductive and Developmental Physiology",
+                    "FOOD3220": "Nutrition",
+                    "BIOC3261": "Human Biochemistry",
+                    "PSYC1022": "The Psychology of Addiction",
+                    "PSYC1024": "Clinical Perspectives on Anxiety, Mood and Stress",
+                    "PHYS1121": "Physics 1A",
+                    "ANAT3121": "Visceral Anatomy",
+                    "MATH1131": "Mathematics 1A"
+                },
+                "Level 2 Core Courses": {
+                    "type": "core",
+                    "credits_to_complete": "48",
+                    "HESC2452": "Movement Assessment and Instruction",
+                    "BIOC2181": "Fundamentals of Biochemistry",
+                    "HESC2451": "Biomechanics",
+                    "PATH2202": "Processes in Disease for Health and Exercise Science",
+                    "HESC2501": "Exercise Physiology",
+                    "PHSL2502": "Human Physiology B",
+                    "ANAT2451": "Functional Anatomy for Health and Exercise Science",
+                    "PHSL2501": "Human Physiology A"
+                },
+                "Level 4 Core Courses": {
+                    "type": "core",
+                    "credits_to_complete": "36",
+                    "HESC3581": "Exercise Prescription in Diverse Populations",
+                    "HESC4622": "Clinical Practicum B",
+                    "HESC4501": "Exercise Physiology Research Seminars",
+                    "HESC4611": "Clinical Practicum A",
+                    "HESC4502": "Workplace Assessment and Rehabilitation",
+                    "HESC4561": "Research Internship A",
+                    "HESC4551": "Research Project"
+                },
+                "Level 1 Core Courses": {
+                    "type": "core",
+                    "credits_to_complete": "42",
+                    "MATH1041": "Statistics for Life and Social Sciences",
+                    "HESC1501": "Introductory Exercise Science",
+                    "ANAT2111": "Introductory Anatomy",
+                    "PSYC1001": "Psychology 1A",
+                    "CHEM1831": "Chemistry for Exercise Physiology",
+                    "HESC1511": "Exercise Programs and Behaviour",
+                    "BABS1201": "Molecules, Cells and Genes"
                 }
             }
         }
@@ -794,19 +797,16 @@
             "GE": {
                 "credits_to_complete": 12
             },
-            "FE": {
-                "credits_to_complete": 36
-            },
             "SpecialisationData": {
-                "Honours": {
-                    "MATHAH": "Applied Mathematics",
-                    "MATHTH": "Statistics",
-                    "MATHPH": "Pure Mathematics"
-                },
                 "Majors": {
-                    "MATHA1": "Applied Mathematics",
                     "MATHU1": "Advanced Statistics",
+                    "MATHA1": "Applied Mathematics",
                     "MATHP1": "Pure Mathematics"
+                },
+                "Honours": {
+                    "MATHTH": "Statistics",
+                    "MATHPH": "Pure Mathematics",
+                    "MATHAH": "Applied Mathematics"
                 }
             },
             "NonSpecialisationData": {
@@ -817,34 +817,37 @@
                 },
                 "Science Electives": {
                     "type": "elective",
-                    "any Psychology course": 1,
-                    "any Optometry course": 1,
-                    "any Computer Science course": 1,
-                    "any Mathematics course": 1,
-                    "any Biochemistry course": 1,
-                    "any Biological Science course": 1,
-                    "any Geoscience course": 1,
-                    "any Faculty of Science course": 1,
-                    "any Aviation course": 1,
-                    "any Materials Science and Engineering course": 1,
                     "any Anatomy course": 1,
-                    "any Marine Science course": 1,
-                    "any Biotechnology & Biomolecular Sciences course": 1,
-                    "any Medical Science course": 1,
-                    "any Climate Science course": 1,
-                    "any Physiology course": 1,
-                    "any Physics course": 1,
-                    "any Pathology course": 1,
-                    "any Chemistry course": 1,
-                    "any Vision Science course": 1,
-                    "any Neuroscience course": 1,
-                    "any Pharmacology course": 1,
+                    "any Psychology course": 1,
                     "any Data Science course": 1,
-                    "any Biotechnology course": 1,
-                    "any Biological, Earth & Environmental Science course": 1,
+                    "any Marine Science course": 1,
+                    "any Microbiology course": 1,
+                    "any Biochemistry course": 1,
                     "any Food Technology course": 1,
-                    "any Microbiology course": 1
+                    "any Chemistry course": 1,
+                    "any Medical Science course": 1,
+                    "any Mathematics course": 1,
+                    "any Computer Science course": 1,
+                    "any Materials Science and Engineering course": 1,
+                    "any Biotechnology & Biomolecular Sciences course": 1,
+                    "any Neuroscience course": 1,
+                    "any Climate Science course": 1,
+                    "any Biological, Earth & Environmental Science course": 1,
+                    "any Aviation course": 1,
+                    "any Physics course": 1,
+                    "any Pharmacology course": 1,
+                    "any Pathology course": 1,
+                    "any Faculty of Science course": 1,
+                    "any Geoscience course": 1,
+                    "any Optometry course": 1,
+                    "any Biotechnology course": 1,
+                    "any Vision Science course": 1,
+                    "any Biological Science course": 1,
+                    "any Physiology course": 1
                 }
+            },
+            "FE": {
+                "credits_to_complete": 36
             }
         }
     }

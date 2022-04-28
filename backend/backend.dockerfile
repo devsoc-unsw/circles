@@ -3,6 +3,11 @@
 # Latest python image
 FROM python:3-slim
 
+# gcc required for python-Levenshtein
+RUN apt-get update \
+&& apt-get install gcc -y \
+&& apt-get clean
+
 # Set current working directory inside container to /backend
 WORKDIR /backend
 

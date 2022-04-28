@@ -207,17 +207,17 @@ def convert_UOC(processed):
     """Converts to XXUOC"""
     # Converts unit(s) of credit(s) to UOC and removes spacing
     processed = re.sub(
-        r"\s?units? (of credits?|completed?)", "UOC", processed, flags=re.IGNORECASE
+        r"\s*units? (of credits?|completed?)", "UOC", processed, flags=re.IGNORECASE
     )
     # Places UOC right next to the numbers
-    processed = re.sub(r"\s?UOC", "UOC", processed, flags=re.IGNORECASE)
+    processed = re.sub(r"\s*UOC", "UOC", processed, flags=re.IGNORECASE)
 
     # After UOC has been mainly converted, remove some extraneous phrasing
     processed = re.sub(
-        r"(of|at least)?\s?(\d+UOC)", r" \2", processed, flags=re.IGNORECASE
+        r"(of|at least)?\s*(\d+UOC)", r" \2", processed, flags=re.IGNORECASE
     )
     processed = re.sub(
-        r"(\d+UOC)(\s?overall\s?)", r"\1 ", processed, flags=re.IGNORECASE
+        r"(\d+UOC)(\s*overall\s*)", r"\1 ", processed, flags=re.IGNORECASE
     )
 
     # Remove "minimum" since it is implied
@@ -239,7 +239,7 @@ def convert_WAM(processed):
     #    - "minimum 65WAM" -> "65WAM"
     #    - "A 65WAM" -> "65WAM"
     processed = re.sub(
-        r"[a|minimum]+ (\d\d)\s?WAM", r"\1WAM", processed, flags=re.IGNORECASE
+        r"[a|minimum]+ (\d\d)\s*WAM", r"\1WAM", processed, flags=re.IGNORECASE
     )
 
     # Compress any remaining spaces between digits and WAM and remove misc chars
@@ -248,7 +248,7 @@ def convert_WAM(processed):
     #    - "65+ WAM" -> "65WAM"
     #    - "65WAM+" -> "65WAM"
     processed = re.sub(
-        r">?(\d\d)\+?\s?WAM\+?", r"\1WAM", processed, flags=re.IGNORECASE
+        r">?(\d\d)\+?\s*WAM\+?", r"\1WAM", processed, flags=re.IGNORECASE
     )
 
     return processed
@@ -270,8 +270,8 @@ def convert_GRADE(processed):
     # Further handle CR and DN. These usually follow a course code
     # MATH1141 (CR) ==> 65WAM MATH1141
     # Use "in" as a joining word"
-    processed = re.sub(r"([A-Z]{4}[\d]{4})\s?\(CR\)", r"65GRADE in \1", processed)
-    processed = re.sub(r"([A-Z]{4}[\d]{4})\s?\(DN\)", r"75GRADE in \1", processed)
+    processed = re.sub(r"([A-Z]{4}[\d]{4})\s*\(CR\)", r"65GRADE in \1", processed)
+    processed = re.sub(r"([A-Z]{4}[\d]{4})\s*\(DN\)", r"75GRADE in \1", processed)
 
     return processed
 
@@ -295,7 +295,7 @@ def convert_fslash(processed):
     # E.g.:
     #    - "(COMP1521/DPST1092 && COMP2521)" -> "((COMP1521 || DPST1092) && COMP2521)"
     #    - "COMP9444 / COMP9417 / COMP9517/COMP4418" -> "(COMP9444 || COMP9417 || COMP9517 || COMP4418)"
-    matches = re.findall(r"[A-Z]{4}[\d]{4}(?:\s?/\s?[A-Z]{4}[\d]{4})+", processed)
+    matches = re.findall(r"[A-Z]{4}[\d]{4}(?:\s*/\s*[A-Z]{4}[\d]{4})+", processed)
 
     for match in matches:
         subbed_phrase = re.sub(r"/", r" || ", match)
@@ -343,7 +343,7 @@ def convert_coreqs(processed):
     """Puts co-requisites inside square brackets"""
     processed = processed.rstrip()
     return re.sub(
-        r"(co-?requisites?|concurrentl?y?);?:?\s?(.*)", r"[\2]", processed, flags=re.IGNORECASE
+        r",*;*\.*\s*(co-?requisites?|concurrentl?y?)\s*;?:?\s*(.*)", r" [\2]", processed, flags=re.IGNORECASE
     )
 
 
@@ -384,18 +384,18 @@ def handle_comma_logic(processed):
     processed = re.sub("either", "", processed, flags=re.IGNORECASE)
 
     # First we will just convert , || and , && into || and &&
-    processed = re.sub(r",\s?(&&|\|\|)", r" \1", processed)
+    processed = re.sub(r",\s*(&&|\|\|)", r" \1", processed)
 
     # Scan for combos of commas until we hit the first || or && and replace the
     # the commas with that
     # e.g. phrase, phrase || phrase ==> phrase || phrase || phrase
     # e.g. phrase, phrase && phrase ==> phrase && phrase && phrase
     if bool(re.match(r'^\s*[A-Z]{4}[0-9]{4}', processed)):
-        matches = re.findall(r'([^&|]+,\s?[^&|]+\s?)(&&|\|\|)', processed)
+        matches = re.findall(r'([^&|]+,\s*[^&|]+\s*)(&&|\|\|)', processed)
 
         for match in matches:
             # Substitute the commas in the phrase with their respective logic operators
-            subbed_phrase = re.sub(r',\s?', f" {match[1]} ", match[0])
+            subbed_phrase = re.sub(r',\s*', f" {match[1]} ", match[0])
 
             # Escape the matched phrase so regex doesn't misintrepret unclosed brackets, etc
             escaped_phrase = re.escape(match[0])
@@ -416,6 +416,14 @@ def handle_comma_logic(processed):
                 # of whitespace on either side of the comma doesn't matter
                 replacement = match.split(',')
                 processed = re.sub(match, f'{replacement[0]} {joining_cond} {replacement[1]}', processed)
+
+    # add &&s before coreqs if coreqs is not preceded by an OR logic
+    if re.search(r'(?<!\|\|\s)\[.*\]', processed):
+        processed = re.sub(r'&*\s*\[(.*)\]', r' && [\1]', processed)
+    
+    # remove &&s or ||s if it's the start of string
+    processed = re.sub(r'^\s*&&', '', processed)
+    processed = re.sub(r'^\s*\|\|', '', processed)
 
     return processed
 

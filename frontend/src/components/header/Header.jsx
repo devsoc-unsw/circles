@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Menu, Layout, Typography, Button, Drawer } from "antd";
-import { DrawerContent } from "./DrawerContent";
-import { PlannerCart } from "../plannerCart/PlannerCart";
-import ThemeToggle from "../ThemeToggle";
 import { BarsOutlined } from "@ant-design/icons";
+import {
+  Menu, Layout, Typography, Button, Drawer,
+} from "antd";
+import DrawerContent from "./DrawerContent";
+import { PlannerCart } from "../plannerCart/PlannerCart";
 import useMediaQuery from "../../hooks/useMediaQuery";
 import circlesLogo from "../../images/circlesLogo.svg";
 import "./header.less";
@@ -21,21 +22,28 @@ const titleStyles = {
   marginBottom: "0",
 };
 
+const getCurrentPath = () => {
+  const validPaths = new Set([
+    "course-selector",
+    "progression-checker",
+    "degree-selector",
+    "term-planner",
+  ]);
+  const menuPath = window.location.pathname.split("/")[1];
+
+  if (validPaths.has(menuPath)) return menuPath;
+  return null;
+};
+
 const { Title } = Typography;
 const Header = () => {
   const isSmall = useMediaQuery("(max-width: 1000px)");
-  const [showDrawer, setShowDrawer] = React.useState(false);
-  const [current, setCurrent] = React.useState(() => {
-    const validPaths = new Set([
-      "course-selector",
-      "progression-checker",
-      "degree-selector",
-      "term-planner",
-    ]);
-    const menuPath = window.location.pathname.split("/")[1];
-    if (validPaths.has(menuPath)) return menuPath;
-    return null;
-  });
+  const [showDrawer, setShowDrawer] = useState(false);
+  const [current, setCurrent] = useState(getCurrentPath());
+
+  useEffect(() => {
+    setCurrent(getCurrentPath());
+  }, []);
 
   return (
     <Layout className="header">
@@ -47,7 +55,6 @@ const Header = () => {
           </Title>
         </div>
       </Link>
-
       {isSmall ? (
         <Button
           type="primary"
@@ -61,6 +68,7 @@ const Header = () => {
             onClick={(e) => setCurrent(e.key)}
             selectedKeys={[current]}
             mode="horizontal"
+            overflowedIndicator={null}
             style={menuStyles}
           >
             <Menu.Item key="course-selector">
@@ -84,7 +92,7 @@ const Header = () => {
       <Drawer
         onClose={() => setShowDrawer(false)}
         visible={showDrawer}
-        className={"flex-col"}
+        className="flex-col"
       >
         <DrawerContent onCloseDrawer={() => setShowDrawer(false)} />
       </Drawer>

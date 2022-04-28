@@ -1,31 +1,26 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { Menu, Button, Typography } from "antd";
-import { degreeActions } from "../../../actions/degreeActions";
-import { Link } from "react-scroll";
 import { useDispatch, useSelector } from "react-redux";
 import "./steps.less";
-import { useSpring, animated } from "react-spring";
-import { springProps } from "../spring";
+import { useSpring, animated } from "@react-spring/web";
+import springProps from "../spring";
+import { setMinor } from "../../../reducers/degreeSlice";
 
 const { Title } = Typography;
-export const MinorStep = ({ incrementStep, currStep }) => {
+const MinorStep = ({ incrementStep, currStep }) => {
   const dispatch = useDispatch();
   const { minor, programCode } = useSelector((store) => store.degree);
-  // Fetch the minors
-  const [selected, setSelected] = React.useState("Select Minor");
-  const [options, setOptions] = React.useState({});
+  const [options, setOptions] = useState({});
 
-  const fetchAllMinors = async () => {
+  const fetchAllMinors = useCallback(async () => {
     const res = await axios.get(`/programs/getMinors/${programCode}`);
-    setOptions(res.data["minors"]);
-
-    // setIsLoading(false);
-  };
+    setOptions(res.data.minors);
+  }, [programCode]);
 
   useEffect(() => {
     if (programCode !== "") fetchAllMinors();
-  }, [programCode]);
+  }, [fetchAllMinors, programCode]);
 
   const props = useSpring(springProps);
 
@@ -48,9 +43,10 @@ export const MinorStep = ({ incrementStep, currStep }) => {
 
       <Menu
         className="degree-minors"
-        onClick={(e) => dispatch(degreeActions("SET_MINOR", e.key))}
         selectedKeys={minor && [minor]}
         mode="inline"
+        onDeselect={() => dispatch(setMinor(""))}
+        onSelect={(e) => dispatch(setMinor(e.key))}
       >
         {programCode ? (
           Object.keys(options).map((key) => (
@@ -65,3 +61,4 @@ export const MinorStep = ({ incrementStep, currStep }) => {
     </animated.div>
   );
 };
+export default MinorStep;

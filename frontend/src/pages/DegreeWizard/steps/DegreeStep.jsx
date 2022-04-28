@@ -1,37 +1,34 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Menu, Typography, Button, Input } from "antd";
-import { degreeActions } from "../../../actions/degreeActions";
-import { Link } from "react-scroll";
+import {
+  Menu, Typography, Button, Input,
+} from "antd";
 import { useDispatch, useSelector } from "react-redux";
+import { useSpring, animated } from "@react-spring/web";
 import "./steps.less";
-import { useSpring, animated } from "react-spring";
-import { springProps } from "../spring";
+import springProps from "../spring";
+import { setProgram } from "../../../reducers/degreeSlice";
 
 const { Title } = Typography;
-export const DegreeStep = ({ incrementStep, currStep }) => {
+const DegreeStep = ({ incrementStep, currStep }) => {
   const dispatch = useDispatch();
   const programCode = useSelector((store) => store.degree.programCode);
-  const [input, setInput] = React.useState("");
-  const [options, setOptions] = React.useState(null);
+  const [input, setInput] = useState("");
+  const [options, setOptions] = useState(null);
 
   const fetchAllDegrees = async () => {
     const res = await axios.get("/programs/getPrograms");
-    setOptions(res.data["programs"]);
+    setOptions(res.data.programs);
   };
 
   useEffect(() => {
-    // setTimeout(fetchDegree, 2000);  // testing skeleton
     fetchAllDegrees();
   }, []);
 
   const handleDegreeChange = (e) => {
     setInput(options[e.key]);
     dispatch(
-      degreeActions("SET_PROGRAM", {
-        programCode: e.key,
-        programName: options[e.key],
-      })
+      setProgram({ programCode: e.key, programName: options[e.key] }),
     );
   };
 
@@ -74,3 +71,5 @@ export const DegreeStep = ({ incrementStep, currStep }) => {
     </animated.div>
   );
 };
+
+export default DegreeStep;

@@ -25,9 +25,7 @@ function SelectorMenu() {
   const [degreetypeState, setdegreetypeState] = useState('');
   const [specialisationState, setspecialisationState] = useState('');
 
-  const onButtonClick=(e)=>{
-    navigate('/course-selector');
-  }
+  const onButtonClick = () => navigate('/course-selector');
 
   return (
     <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", height: "100vh" }}>
@@ -36,7 +34,7 @@ function SelectorMenu() {
           <Select
             style={{ width: '20%' }}
             bordered={false}
-            className={'text selector'}
+            className='text selector'
             placeholder="Undergraduate"
             onChange={(value)=>{
               setdegreetypeState(value);
@@ -77,7 +75,7 @@ function SelectorMenu() {
         <p> specialising in <span></span>
           <Select
             bordered={false}
-            className={'text selector'}
+            className='text selector'
             onChange={ value => setspecialisationState(value) } 
             showSearch
             style={{ width: '20%' }}
