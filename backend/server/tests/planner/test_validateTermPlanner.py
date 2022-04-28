@@ -67,7 +67,7 @@ def test_validateTermPlanner_invalid_progress():
             "unlocked": False,
             "handbook_note": "",
             "warnings": [
-                "Requires 75 WAM. Your WAM has not been recorded"
+                "Requires 75 WAM in all courses. Your WAM has not been recorded"
             ]
         }
     }
