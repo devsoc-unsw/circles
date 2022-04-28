@@ -153,13 +153,6 @@ class WAMCondition(Condition):
 
     def get_warning(self, applicable_wam: int) -> str:
         """ Returns an appropriate warning message or None if not needed """
-        if isinstance(self.category, AnyCategory):
-            if applicable_wam is None:
-                return f"Requires {self.wam} WAM. Your WAM has not been recorded"
-            if applicable_wam >= self.wam:
-                return None
-            return f"Requires {self.wam} WAM. Your WAM is currently {applicable_wam:.3f}"
-
         if applicable_wam is None:
             return f"Requires {self.wam} WAM in {self.category}. Your WAM in {self.category} has not been recorded"
         if applicable_wam >= self.wam:

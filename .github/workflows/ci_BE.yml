@@ -1,4 +1,4 @@
-name: Run Algorithm Unit Tests
+name: Run Backend Unit Tests
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    name: Algorithm CI Testing
+    name: Backend CI Testing
 
     runs-on: ubuntu-latest
 
