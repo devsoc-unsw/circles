@@ -13,6 +13,46 @@ from data.utility.data_helpers import read_data, write_data
 PREPROCESSED_CONDITIONS = {}
 CODE_MAPPING = read_data("data/utility/programCodeMappings.json")["title_to_code"]
 
+SPECIALISATION_MAPPINGS = {
+    'School of the Arts and Media honours': 'MDIA?H',
+    'School of Social Sciences, Asian Studies or European Studies honours': 'ASIABH || EUROBH',
+    'Creative Writing honours': 'CRWTWH',
+    'Construction Management and Property undergraduate program or minor': 'BLDG??',
+    'Media, Culture and Technology honours': 'MECTBH',
+    'Theatre and Performance Studies honours': 'THSTBH',
+    'Environmental Humanities honours': 'ENVPEH',
+    'Physics Honours': 'ZPEMPH || PHYSGH',
+    'Film Studies honours': 'FILMBH',
+    'English honours': 'ENGLDH',
+    'Dance Studies honours': 'DANCBH',
+    'History honours': 'HISTCH || ZHSSHH',
+    'Philosophy honours': 'PHILBH',
+    'Asian Studies honours': 'ASIABH',
+    'Chinese Studies honours': 'CHINBH',
+    'French Studies honours': 'FRENBH',
+    'Spanish Studies honours': 'SPANEH',
+    'Japanese Studies honours': 'JAPNDH',
+    'Korean Studies honours': 'KORECH',
+    'Linguistics honours': 'LINGCH',
+    'German Studies honours': 'GERSBH',
+    'European Studies honours': 'EUROBH',
+    'Sociology and Anthropology honours': 'SOCACH',
+    'Politics and International Relations honours': 'POLSGH',
+    'Global Development honours': 'COMDFH',
+    'Media honours': 'MDIA?H',
+    'Education honours': '4509',
+    'Criminology honours': '4505',
+    'Politics, Philosophy and Economics': '3478 || 4797',
+    'single or double Music (Honours)': 'MUSC?H || 4508',
+    'Music program': 'MUSC?? || 4508',
+    'Social Work': '4033',
+    'single or dual award Media': '4510 || 3454 || 3438 || 3453',
+    'single or double degree Media': '4510 || 3454 || 3438 || 3453',
+    'single or double Music (Honours)': 'MUSC?H || 4508',
+    'Social Science or Social Research and Policy': '3321 || 3420',
+    'Education program': '4509 || 4056',
+    'International Studies(?:\s+single)?(?:\s+or\s+((double)|(dual))\s+((degree)|(program)))?(?:\s*\(2017 onwards\))?': '3447',
+}
 
 def preprocess_conditions():
     """
@@ -51,6 +91,7 @@ def preprocess_conditions():
         processed = convert_program_type(processed)
         processed = convert_fslash(processed)
         processed = convert_including(processed)
+        processed = convert_manual_programs_and_specialisations(processed)
         processed = convert_AND_OR(processed)
         processed = convert_coreqs(processed)
 
@@ -269,6 +310,24 @@ def convert_including(processed):
     return re.sub("including", "&&", processed)
 
 
+def convert_manual_programs_and_specialisations(processed):
+    """
+    Deals with the following cases:
+    - Enrolment in a x program
+    - Enrolment in x program
+    - Enrolment in x
+    - Enrolment in the x honours program
+    """
+    for prog_str, code in SPECIALISATION_MAPPINGS.items():
+        processed = re.sub(
+            rf"\s*enrolment\s+in\s+((?:an?\s+)|(?:the\s+))?{prog_str}(?:\s+program)?\s*",
+            f" ({code}) ",
+            processed,
+            flags=re.IGNORECASE
+        )
+    return processed
+
+
 def convert_AND_OR(processed):
     """Convert 'and' to '&&' and 'or' to '||'"""
     processed = re.sub(" and ", " && ", processed, flags=re.IGNORECASE)
@@ -423,57 +482,6 @@ def map_word_to_program_type(processed, regex_word, type):
         processed,
         flags=re.IGNORECASE,
     )  # hard to capture a generic case?
-
-def misc_specialisation_requirements(processed):
-    """
-    Extremely common ones (ocurring more than a couple times word for word):
-    - This one is awful but anyway:            48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, MCT. || 6UOC L1 && 6UOC L2 Media Electives && enrolment in a Media single || double degreel program
-
-    - ... enrolment in an International Studies (program/single/single || double degree/single || double degree (2017 onwards)/single || double degree(2017 onwards))
-    - ... enrolment in an Education program ...
-
-    - ... Enrolment with consent ...                                          To me we should just get rid of it or it's a warning?
-
-    - Enrolment in a School of the Arts && Media honours program
-    - Enrolment in a School of Humanities && Languages honours program
-    - Enrolment in a School of Social Sciences, Asian Studies || European Studies honours program
-    - Enrolment in a Creative Writing honours program
-    - ... enrolment in a Global Diploma program
-    - Enrolment in a Construction Management && Property undergraduate program || minor
-    - ... Enrolment in a Politics, Philosophy && Economics program
-    - ... enrolment in a Social Work program ...
-    - ... enrolment in a Social Science || Social Research && Policy program ...
-    - ... Enrolment in a single || dual award Media program ...
-    - ... enrolment in a single || double degree Media program
-    - Enrolment in a single || double Music (Honours) program
-    - ... Enrolment in a single || double Music (Honours) program
-    - ... Enrolment in a Music program ...
-
-    - Enrolment in Media, Culture && Technology honours program
-    - Enrolment in Theatre && Performance Studies honours program
-    - Enrolment in Environmental Humanities honours program
-    - ... enrolment in program 4053 || 4054
-    - ... enrolment in program 4076
-    - Enrolment in CDF Program (4462)
-    - Enrolment in Business (Honours) Program 4512
-    - Enrolment in CDF Program
-    - Enrolment in CDF Program (4461)
-    - Enrolment in program 4508 Music (Honours)
-    - Enrolment in Physics Honours
-    - Enrolment in 4529 Social Science (Honours)
-    - Enrolment in 3959 Data Science program ...                                                only once, but data science is close to CS
-    - Enrolment in program 3831 Science (Medicine) Honours
-    - ... Enrolment in 7006 UNSW Global Diploma in Architecture Program                         Need to be careful about this one, sometimes there is stuff before the requirement, sometimes not
-    - Enrolment in 7005 UNSW Global Diploma in Media && Communication Program
-
-    - Enrolment in the (Education/Criminology/Film Studies/English/Dance Studies/History/Philosophy/Asian Studies/Chinese Studies/French Studies/Spanish Studies/Japanese Studies/Korean Studies/Linguistics/German Studies/Development Studies/European Studies/International Relations/Politics/Sociology && Anthropology/Politics && International Relations/Global Development/Media) honours program
-    - Enrolment in the Social Research && Policy honours program
-
-    - ... Must pass for WIL modules prior to enrolment ...                    Maybe this is a warning though, not a specialisation?
-
-    - LAWS2277 seems to have been filtered wrong: [LAWS1160 || JURD7160 (One of these courses must be prior to || concurrently with enrolment in)]
-    """
-    pass
 
 if __name__ == "__main__":
     preprocess_conditions()
