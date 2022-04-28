@@ -14,10 +14,8 @@ import infographic from "../../../images/infographicFontIndependent.svg";
 import axiosRequest from "../../../axios";
 import { setCourse } from "../../../reducers/coursesSlice";
 import { addToUnplanned, removeCourse } from "../../../reducers/plannerSlice";
-import { motion } from "framer-motion/dist/framer-motion";
-import { axiosRequest } from "../../../axios";
-import { setCourse } from "../../../actions/coursesActions";
-import { CollapsibleHeader, CollapsibleButton } from "./Collapsible"
+// eslint-disable-next-line import/no-named-as-default
+import CollapsibleHeader from "./CollapsibleHeader";
 
 const { Title, Text } = Typography;
 const CourseAttribute = ({ title, content }) => (
@@ -104,7 +102,6 @@ const CourseDescription = ({ structure }) => {
     };
 
     setpageLoaded(false);
-    if (id === "explore" || id === "search") return;
     if (id) {
       getCourse();
       getPathToCoursesById(id);
@@ -117,12 +114,11 @@ const CourseDescription = ({ structure }) => {
   const [collapseDirectUnlock, setCollapseDirectUnlock] = useState(false);
   const [collapseIndirectUnlock, setCollapseIndirectUnlock] = useState(true);
 
-  const calcCollapsibleContentClass = (state) => {
-    console.log(state);
-    return (state) ? "collapsible-content-collapsed" : "collapsible-content";
-  }
+  const calcCollapsibleContentClass = (state) => (
+    (state) ? "collapsible-content-collapsed" : "collapsible-content"
+  );
 
-  if (tabs.length === 0)
+  if (tabs.length === 0) {
     return (
       <motion.div
         initial={{ opacity: 0 }}
@@ -227,18 +223,18 @@ const CourseDescription = ({ structure }) => {
                 <div dangerouslySetInnerHTML={{ __html: course.description }} />
               </Text>
             </Space>
-              <CollapsibleHeader
-                text="Requirements"
-                isCollapsed={collapseRequirements}
-                setIsCollapsed={setCollapseRequirements}
-              />
-              <div className={calcCollapsibleContentClass(collapseRequirements)}>
-            <Space direction="vertical" style={{ marginBottom: "1rem" }}>
+            <CollapsibleHeader
+              text="Requirements"
+              isCollapsed={collapseRequirements}
+              setIsCollapsed={setCollapseRequirements}
+            />
+            <div className={calcCollapsibleContentClass(collapseRequirements)}>
+              <Space direction="vertical" style={{ marginBottom: "1rem" }}>
                 <Text>
-                {/* eslint-disable-next-line react/no-danger */}
-                  <div dangerouslySetInnerHTML={{ __html: course.raw_requirements || "None", }} />
-              </Text>
-            </Space>
+                  {/* eslint-disable-next-line react/no-danger */}
+                  <div dangerouslySetInnerHTML={{ __html: course.raw_requirements || "None" }} />
+                </Text>
+              </Space>
             </div>
             <CollapsibleHeader
               text="Courses you have done to unlock this course"
@@ -247,13 +243,13 @@ const CourseDescription = ({ structure }) => {
             />
             <div className={calcCollapsibleContentClass(collapseDone)}>
               {course.path_from && Object.keys(course.path_from).length > 0 ? (
-              <div className={'text course-tag-cont'}>
-                {Object.keys(course.path_from).map((courseCode) => (
-                  <CourseTag key={courseCode} name={courseCode} />
+                <div className="text course-tag-cont">
+                  {Object.keys(course.path_from).map((courseCode) => (
+                    <CourseTag key={courseCode} name={courseCode} />
                   ))}
-              </div>
+                </div>
               ) : (
-                <p className={`text`}>None</p>
+                <p className="text">None</p>
               )}
             </div>
             <CollapsibleHeader
@@ -267,7 +263,7 @@ const CourseDescription = ({ structure }) => {
                   <CourseTag key={courseCode} name={courseCode} />
                 ))
               ) : (
-                <p className={`text`}>None</p>
+                <p className="text">None</p>
               )}
             </div>
             <CollapsibleHeader
@@ -278,11 +274,11 @@ const CourseDescription = ({ structure }) => {
             <div className={calcCollapsibleContentClass(collapseIndirectUnlock)}>
               {coursesPathTo.indirect_unlock && coursesPathTo.indirect_unlock.length > 0 ? (
                 coursesPathTo.indirect_unlock.map((courseCode) => (
-                    <CourseTag key={courseCode} name={courseCode} />
-                  ))
-                  ) : (
-                  <p className={`text`}>None</p>
-                  )}
+                  <CourseTag key={courseCode} name={courseCode} />
+                ))
+              ) : (
+                <p className="text">None</p>
+              )}
             </div>
           </div>
           <div>
