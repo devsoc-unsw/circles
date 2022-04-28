@@ -72,7 +72,7 @@ class AnyCategory(Category):
         return True
 
     def __str__(self) -> str:
-        return "any course"
+        return "all courses"
 
 
 class ClassCategory(Category):

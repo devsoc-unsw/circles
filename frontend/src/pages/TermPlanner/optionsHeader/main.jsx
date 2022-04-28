@@ -1,7 +1,7 @@
 import React from "react";
 import { Tooltip, Popconfirm } from "antd";
 import { useSelector, useDispatch } from "react-redux";
-import { IoCogSharp } from "react-icons/io5";
+import { IoCogSharp, IoWarning } from "react-icons/io5";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
@@ -13,11 +13,17 @@ import SaveMenu from "./SaveMenu";
 import SettingsMenu from "./SettingsMenu";
 import HelpMenu from "./HelpMenu";
 import { unhideAllYears, unscheduleAll } from "../../../reducers/plannerSlice";
+import updateAllWarnings from "../ValidateTermPlanner";
 
-const OptionsHeader = ({ plannerRef, isAllEmpty }) => {
+const OptionsHeader = ({
+  plannerRef, isAllEmpty, setSupress, supress,
+}) => {
   const theme = useSelector((state) => state.theme);
   const { areYearsHidden } = useSelector((state) => state.planner);
-  const { years } = useSelector((state) => state.planner);
+  const { years, startYear, completedTerms } = useSelector((state) => state.planner);
+  const { programCode, specialisation, minor } = useSelector(
+    (state) => state.degree,
+  );
   const dispatch = useDispatch();
 
   return (
@@ -85,6 +91,23 @@ const OptionsHeader = ({ plannerRef, isAllEmpty }) => {
             </button>
           </Tooltip>
         )}
+        <Tooltip title="toggle warnings for previous terms">
+          <button
+            className={`settingsButton${supress ? " filled" : ""}`}
+            type="button"
+            onClick={() => {
+              setSupress((prev) => !prev);
+              updateAllWarnings(
+                dispatch,
+                { years, startYear, completedTerms },
+                { programCode, specialisation, minor },
+                supress,
+              );
+            }}
+          >
+            <IoWarning />
+          </button>
+        </Tooltip>
       </div>
 
       <Tippy

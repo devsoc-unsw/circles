@@ -8,7 +8,7 @@ const prepareUserPayload = (degree, planner) => {
 
   const selectedCourses = {};
   Array.from(Object.keys(courses)).forEach((course) => {
-    selectedCourses[course] = 70;
+    selectedCourses[course] = null;
   });
 
   return {
