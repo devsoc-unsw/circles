@@ -12,17 +12,13 @@ import Loading from "./Loading";
 import "./courseDescription.less";
 import prepareUserPayload from "../helper";
 import infographic from "../../../images/infographicFontIndependent.svg";
-<<<<<<< HEAD
 import axiosRequest from "../../../axios";
 import { setCourse } from "../../../reducers/coursesSlice";
 import { addToUnplanned, removeCourse } from "../../../reducers/plannerSlice";
-=======
 import { motion } from "framer-motion/dist/framer-motion";
 import { axiosRequest } from "../../../axios";
 import { setCourse } from "../../../actions/coursesActions";
-import { BsPlusLg } from "react-icons/bs";
 import { CollapsibleHeader, CollapsibleButton } from "./Collapsible"
->>>>>>> b1e20af (add collapsible elements to courseDescription w/ state)
 
 const { Title, Text } = Typography;
 const CourseAttribute = ({ title, content }) => (
@@ -249,13 +245,11 @@ const CourseDescription = ({ structure }) => {
               </Text>
             </Space>
             </div>
-            {/* <Title level={3} className="text"> */}
             <CollapsibleHeader
               text="Courses you have done to unlock this course"
               isCollapsed={collapseDone}
               setIsCollapsed={setCollapseDone}
             />
-            {/* </Title> */}
             <div className={calcCollapsibleContentClass(collapseDone)}>
               {course.path_from && Object.keys(course.path_from).length > 0 ? (
               <div className={'text course-tag-cont'}>
