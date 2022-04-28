@@ -12,9 +12,17 @@ import Loading from "./Loading";
 import "./courseDescription.less";
 import prepareUserPayload from "../helper";
 import infographic from "../../../images/infographicFontIndependent.svg";
+<<<<<<< HEAD
 import axiosRequest from "../../../axios";
 import { setCourse } from "../../../reducers/coursesSlice";
 import { addToUnplanned, removeCourse } from "../../../reducers/plannerSlice";
+=======
+import { motion } from "framer-motion/dist/framer-motion";
+import { axiosRequest } from "../../../axios";
+import { setCourse } from "../../../actions/coursesActions";
+import { BsPlusLg } from "react-icons/bs";
+import { CollapsibleHeader, CollapsibleButton } from "./Collapsible"
+>>>>>>> b1e20af (add collapsible elements to courseDescription w/ state)
 
 const { Title, Text } = Typography;
 const CourseAttribute = ({ title, content }) => (
@@ -108,7 +116,22 @@ const CourseDescription = ({ structure }) => {
     }
   }, [id, dispatch, degree, planner]);
 
-  if (tabs.length === 0) {
+  const [collapseRequirements, setCollapseRequirements] = useState(false);
+  const [collapseOverview, setCollapseOverview] = useState(false);
+  const [collapseDone, setCollapseDone] = useState(false);
+  const [collapseDirectUnlock, setCollapseDirectUnlock] = useState(false);
+  const [collapseIndirectUnlock, setCollapseIndirectUnlock] = useState(true);
+
+  const toggleCollapse = (state, setState) => {
+    setState(!state);
+  }
+
+  const calcCollapsibleContentClass = (state) => {
+    console.log(state);
+    return (state) ? "collapsible-content-collapsed" : "collapsible-content";
+  }
+
+  if (tabs.length === 0)
     return (
       <motion.div
         initial={{ opacity: 0 }}
@@ -213,47 +236,69 @@ const CourseDescription = ({ structure }) => {
                 <div dangerouslySetInnerHTML={{ __html: course.description }} />
               </Text>
             </Space>
-            <Title level={3} className="text">
+            {/* <Title level={3} className="text">
               Requirements
-            </Title>
+            </Title> */}
+              <CollapsibleHeader
+                text="Requirements"
+                isCollapsed={collapseRequirements}
+                setIsCollapsed={setCollapseRequirements}
+              />
             <Space direction="vertical" style={{ marginBottom: "1rem" }}>
-              <Text>
+              <div className={calcCollapsibleContentClass(collapseRequirements)}>
+                <Text>
                 {/* eslint-disable-next-line react/no-danger */}
-                <div dangerouslySetInnerHTML={{ __html: course.raw_requirements || "None" }} />
+                  <div dangerouslySetInnerHTML={{ __html: course.raw_requirements || "None", }} />
               </Text>
+              </div>
             </Space>
-            <Title level={3} className="text">
-              Courses you have done to unlock this course
-            </Title>
-            {course.path_from && Object.keys(course.path_from).length > 0 ? (
-              <div className="text course-tag-cont">
+            {/* <Title level={3} className="text"> */}
+            <CollapsibleHeader
+              text="Courses you have done to unlock this course"
+              isCollapsed={collapseDone}
+              setIsCollapsed={setCollapseDone}
+            />
+            {/* </Title> */}
+            <div className="{calcCollapsibleContentClass(collapseDone)}">
+              {course.path_from && Object.keys(course.path_from).length > 0 ? (
+                <div className={'text course-tag-cont'}>
                 {Object.keys(course.path_from).map((courseCode) => (
                   <CourseTag key={courseCode} name={courseCode} />
-                ))}
+                  ))}
+                  {calcCollapsibleContentClass(collapseDone)}
               </div>
-            ) : (
-              <p className="text">None</p>
-            )}
-            <Title level={3} className="text">
-              Doing this course will directly unlock these courses
-            </Title>
-            {coursesPathTo && coursesPathTo.direct_unlock.length > 0 ? (
-              coursesPathTo.direct_unlock.map((courseCode) => (
-                <CourseTag key={courseCode} name={courseCode} />
-              ))
-            ) : (
-              <p className="text">None</p>
-            )}
-            <Title level={3} className="text">
-              Doing this course will indirectly unlock these courses
-            </Title>
-            {coursesPathTo && coursesPathTo.indirect_unlock.length > 0 ? (
-              coursesPathTo.indirect_unlock.map((courseCode) => (
-                <CourseTag key={courseCode} name={courseCode} />
-              ))
-            ) : (
-              <p className="text">None</p>
-            )}
+              ) : (
+                <p className={`text`}>None</p>
+              )}
+            </div>
+            <CollapsibleHeader
+              text="Doing this course will directly unlock these courses"
+              isCollapsed={collapseDirectUnlock}
+              setIsCollapsed={setCollapseDirectUnlock}
+            />
+            <div className="{calcCollapsibleContentClass(collapseDirectUnlock)}">
+              {coursesPathTo.direct_unlock && coursesPathTo.direct_unlock.length > 0 ? (
+                coursesPathTo.direct_unlock.map((courseCode) => (
+                  <CourseTag key={courseCode} name={courseCode} />
+                ))
+              ) : (
+                <p className={`text`}>None</p>
+              )}
+            </div>
+            <CollapsibleHeader
+              text="Doing this course will indirectly unlock these courses"
+              isCollapsed={collapseIndirectUnlock}
+              setIsCollapsed={setCollapseIndirectUnlock}
+            />
+            <div className="{calcCollapsibleContentClass(collapseIndirectUnlock)}">
+              {coursesPathTo.indirect_unlock && coursesPathTo.indirect_unlock.length > 0 ? (
+                coursesPathTo.indirect_unlock.map((courseCode) => (
+                    <CourseTag key={courseCode} name={courseCode} />
+                  ))
+                  ) : (
+                  <p className={`text`}>None</p>
+                  )}
+            </div>
           </div>
           <div>
             {course.faculty && (
