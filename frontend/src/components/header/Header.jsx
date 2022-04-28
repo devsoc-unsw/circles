@@ -12,8 +12,6 @@ import "./header.less";
 
 const menuStyles = {
   backgroundColor: "inherit",
-  marginLeft: "auto",
-  marginRight: "2em",
 };
 
 const titleStyles = {

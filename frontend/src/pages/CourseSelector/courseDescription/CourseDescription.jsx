@@ -6,6 +6,7 @@ import {
 import { StopOutlined } from "@ant-design/icons";
 import { motion } from "framer-motion/dist/framer-motion";
 import { BsPlusLg } from "react-icons/bs";
+import axios from "axios";
 import { CourseTag } from "../../../components/courseTag/CourseTag";
 import SearchCourse from "../SearchCourse";
 import Loading from "./Loading";
@@ -145,12 +146,13 @@ const CourseDescription = ({ structure }) => {
     }, 1000);
   };
 
-  const removeFromPlanner = () => {
-    dispatch(removeCourse(id));
+  const removeFromPlanner = async () => {
+    const coursesToRemove = axios.post(`/courses/unselectCourse/${id}`, prepareUserPayload(degree, planner));
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
+    (await coursesToRemove).data.affected_courses.forEach((courseToRemove) => {
+      dispatch(removeCourse(courseToRemove));
+    });
+    setLoading(false);
   };
 
   return (

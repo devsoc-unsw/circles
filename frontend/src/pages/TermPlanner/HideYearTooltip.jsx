@@ -1,7 +1,7 @@
 import React from "react";
 import { Tooltip, notification } from "antd";
-import { IoIosEyeOff } from "react-icons/io";
 import { useSelector, useDispatch } from "react-redux";
+import { EyeInvisibleFilled } from "@ant-design/icons";
 import { hideYear } from "../../reducers/plannerSlice";
 
 const HideYearTooltip = ({ year }) => {
@@ -28,7 +28,7 @@ const HideYearTooltip = ({ year }) => {
   return (
     <Tooltip title="Hide year">
       <div role="button" className="eye" onClick={handleHideYear}>
-        <IoIosEyeOff />
+        <EyeInvisibleFilled />
       </div>
     </Tooltip>
   );
