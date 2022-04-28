@@ -146,15 +146,13 @@ const CourseDescription = ({ structure }) => {
     }, 1000);
   };
 
-  const removeFromPlanner = () => {
+  const removeFromPlanner = async () => {
     const coursesToRemove = axios.post(`/courses/unselectCourse/${id}`, prepareUserPayload(degree, planner));
     setLoading(true);
-    coursesToRemove.then((courses) => {
-      courses.data.affected_courses.forEach((courseToRemove) => {
-        dispatch(removeCourse(courseToRemove));
-      });
-      setLoading(false);
+    (await coursesToRemove).data.affected_courses.forEach((courseToRemove) => {
+      dispatch(removeCourse(courseToRemove));
     });
+    setLoading(false);
   };
 
   return (

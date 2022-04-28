@@ -91,7 +91,7 @@ const OptionsHeader = ({
             </button>
           </Tooltip>
         )}
-        <Tooltip title="toggle warnings for previous terms">
+        <Tooltip title="Toggle warnings for previous terms">
           <button
             className={`settingsButton${supress ? " filled" : ""}`}
             type="button"
