@@ -107,7 +107,7 @@ async def validateTermPlanner(
                 coursesState[course] = {
                     "is_accurate": is_answer_accurate,
                     "handbook_note": CACHED_HANDBOOK_NOTE.get(course, ""),
-                    "unlocked": unlocked,
+                    "unlocked": unlocked if not inPast else True,
                     "warnings": warnings if not inPast else [],
                 }
             # Add all these courses to the user in preparation for the next term

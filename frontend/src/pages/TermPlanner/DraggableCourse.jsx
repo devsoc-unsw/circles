@@ -58,7 +58,7 @@ const DraggableCourse = ({ code, index }) => {
             id={code}
             onContextMenu={displayContextMenu}
           >
-            {shouldHaveWarning
+            {!isDragDisabled && shouldHaveWarning
               && (errorIsInformational ? <InfoCircleOutlined style={{ color: "#000" }} /> : (
                 <WarningOutlined
                   className="alert"

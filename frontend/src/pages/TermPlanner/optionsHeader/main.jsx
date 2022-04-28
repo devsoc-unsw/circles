@@ -6,18 +6,24 @@ import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
 import { FaRegCalendarTimes } from "react-icons/fa";
 import {
-  DownloadOutlined, EyeFilled, QuestionCircleOutlined, SettingFilled,
+  DownloadOutlined, EyeFilled, QuestionCircleOutlined, SettingFilled, WarningFilled,
 } from "@ant-design/icons";
 import SaveMenu from "./SaveMenu";
 import SettingsMenu from "./SettingsMenu";
 import HelpMenu from "./HelpMenu";
 import { unhideAllYears, unscheduleAll } from "../../../reducers/plannerSlice";
+import updateAllWarnings from "../ValidateTermPlanner";
 import "./index.less";
 
-const OptionsHeader = ({ plannerRef, isAllEmpty }) => {
+const OptionsHeader = ({
+  plannerRef, isAllEmpty, setSuppress, suppress,
+}) => {
   const theme = useSelector((state) => state.theme);
   const { areYearsHidden } = useSelector((state) => state.planner);
-  const { years } = useSelector((state) => state.planner);
+  const { years, startYear, completedTerms } = useSelector((state) => state.planner);
+  const { programCode, specialisation, minor } = useSelector(
+    (state) => state.degree,
+  );
   const dispatch = useDispatch();
 
   return (
@@ -85,6 +91,23 @@ const OptionsHeader = ({ plannerRef, isAllEmpty }) => {
             </button>
           </Tooltip>
         )}
+        <Tooltip title="Toggle warnings for previous terms">
+          <button
+            className={`settings-button ${suppress ? "filled" : ""}`}
+            type="button"
+            onClick={() => {
+              setSuppress((prev) => !prev);
+              updateAllWarnings(
+                dispatch,
+                { years, startYear, completedTerms },
+                { programCode, specialisation, minor },
+                suppress,
+              );
+            }}
+          >
+            <WarningFilled className="settings-icon" />
+          </button>
+        </Tooltip>
       </div>
 
       <Tippy
