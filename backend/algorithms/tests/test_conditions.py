@@ -195,7 +195,7 @@ def test_wam_condition_simple():
     cond1_user_unlocked = cond1.validate(user)
     assert cond1_user_unlocked[0] == True
     assert len(cond1_user_unlocked[1]) == 1
-    assert "Requires 70 WAM. Your WAM has not been recorded" in cond1_user_unlocked[1]
+    assert "Requires 70 WAM in all courses. Your WAM in all courses has not been recorded" in cond1_user_unlocked[1]
 
     user1 = User(USERS["user3"])
     user1.add_courses({
@@ -217,7 +217,7 @@ def test_wam_condition_simple():
     cond4_user1_unlocked = cond4.validate(user1)
     assert cond4_user1_unlocked[0] == True
     assert len(cond4_user1_unlocked[1]) == 1
-    assert "Requires 100 WAM. Your WAM is currently 90.000" in cond4_user1_unlocked[1]
+    assert "Requires 100 WAM in all courses. Your WAM in all courses is currently 90.000" in cond4_user1_unlocked[1]
 
 def test_wam_condition_complex():
     '''Testing wam condition including keywords'''
