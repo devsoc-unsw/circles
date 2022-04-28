@@ -7,7 +7,7 @@ body {
   @small: ~"(max-width: 1400px)";
 
   .mainContainer {
-    height: calc(100vh - 70px);
+    height: calc(100vh - var(--navbar-height));
     overflow: auto;
   }
 
@@ -181,6 +181,7 @@ body {
   }
 
   .settingsTitle {
+    font-size: 1.75em;
     margin-bottom: 0;
     text-align: left;
   }
@@ -197,6 +198,7 @@ body {
   }
 
   .settingsSubtitle {
+    font-size: 1.1em;
     margin-bottom: 0;
   }
 
@@ -220,8 +222,9 @@ body {
     image-rendering: auto;
     border-radius: 12px;
     cursor: help;
+    transition: box-shadow 0.5s;
   }
-
+  
   .shadow {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }

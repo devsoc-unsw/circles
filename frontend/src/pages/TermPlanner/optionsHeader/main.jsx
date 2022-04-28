@@ -90,10 +90,9 @@ const OptionsHeader = ({ plannerRef, isAllEmpty }) => {
       <Tippy
         content={<HelpMenu />}
         moveTransition="transform 0.2s ease-out"
-        interactive
+        interactive="true"
         trigger="click"
         theme={theme === "light" ? "light" : "dark"}
-        zIndex={1}
         maxWidth="80vh"
         placement="bottom-start"
       >

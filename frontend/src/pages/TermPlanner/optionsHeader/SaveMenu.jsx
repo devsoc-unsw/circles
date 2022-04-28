@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { Typography, Select, Button } from "antd";
+import {
+  Typography,
+  Divider,
+  Select,
+  Button,
+} from "antd";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
 import {
@@ -34,6 +39,7 @@ const SaveMenu = ({ plannerRef }) => {
         <Title level={2} strong className="text settingsTitle">
           Export
         </Title>
+        <Divider className="settingsDivider" />
       </div>
       <div className="settingsEntry">
         <Title level={3} className="text settingsSubtitle">
