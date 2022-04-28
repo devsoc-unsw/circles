@@ -5,6 +5,7 @@ import {
 } from "antd";
 import { StopOutlined } from "@ant-design/icons";
 import { motion } from "framer-motion/dist/framer-motion";
+import { BsPlusLg } from "react-icons/bs";
 import { CourseTag } from "../../../components/courseTag/CourseTag";
 import SearchCourse from "../SearchCourse";
 import Loading from "./Loading";
@@ -14,7 +15,7 @@ import infographic from "../../../images/infographicFontIndependent.svg";
 import axiosRequest from "../../../axios";
 import { setCourse } from "../../../reducers/coursesSlice";
 import { addToUnplanned, removeCourse } from "../../../reducers/plannerSlice";
-// eslint-disable-next-line import/no-named-as-default
+
 import CollapsibleHeader from "./CollapsibleHeader";
 
 const { Title, Text } = Typography;
@@ -101,7 +102,7 @@ const CourseDescription = ({ structure }) => {
       }
     };
 
-    setpageLoaded(false);
+    setPageLoaded(false);
     if (id) {
       getCourse();
       getPathToCoursesById(id);
@@ -109,7 +110,7 @@ const CourseDescription = ({ structure }) => {
   }, [id, dispatch, degree, planner]);
 
   const [collapseRequirements, setCollapseRequirements] = useState(false);
-  const [collapseOverview, setCollapseOverview] = useState(false);
+  // const [collapseOverview, setCollapseOverview] = useState(false);
   const [collapseDone, setCollapseDone] = useState(false);
   const [collapseDirectUnlock, setCollapseDirectUnlock] = useState(false);
   const [collapseIndirectUnlock, setCollapseIndirectUnlock] = useState(true);
