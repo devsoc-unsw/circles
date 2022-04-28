@@ -100,7 +100,8 @@ const CourseDescription = ({ structure }) => {
       }
     };
 
-    setPageLoaded(false);
+    setpageLoaded(false);
+    if (id === "explore" || id === "search") return;
     if (id) {
       getCourse();
       getPathToCoursesById(id);
@@ -236,7 +237,7 @@ const CourseDescription = ({ structure }) => {
             <Title level={3} className="text">
               Doing this course will directly unlock these courses
             </Title>
-            {coursesPathTo && Object.values(coursesPathTo).length > 0 ? (
+            {coursesPathTo && coursesPathTo.direct_unlock.length > 0 ? (
               coursesPathTo.direct_unlock.map((courseCode) => (
                 <CourseTag key={courseCode} name={courseCode} />
               ))
@@ -246,7 +247,7 @@ const CourseDescription = ({ structure }) => {
             <Title level={3} className="text">
               Doing this course will indirectly unlock these courses
             </Title>
-            {coursesPathTo && Object.values(coursesPathTo).length > 0 ? (
+            {coursesPathTo && coursesPathTo.indirect_unlock.length > 0 ? (
               coursesPathTo.indirect_unlock.map((courseCode) => (
                 <CourseTag key={courseCode} name={courseCode} />
               ))
