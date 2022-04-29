@@ -9,7 +9,6 @@ from algorithms.objects.categories import Category, AnyCategory, CompositeCatego
 from algorithms.objects.user import User
 from algorithms.objects.helper import Logic
 
-
 # CACHED
 CACHED_CONDITIONS_TOKENS_PATH = "./data/final_data/conditionsTokens.json"
 with open(CACHED_CONDITIONS_TOKENS_PATH, "r", encoding="utf8") as f:
