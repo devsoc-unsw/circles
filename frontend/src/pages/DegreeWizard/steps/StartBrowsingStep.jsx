@@ -30,6 +30,12 @@ const StartBrowsingStep = () => {
     }
   };
 
+  onkeyup = (e) => {
+    if (e.key === "Enter") {
+      saveUserSettings();
+    }
+  };
+
   return (
     <div className="steps-root-container">
       <div className="steps-start-browsing-container">

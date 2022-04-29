@@ -25,6 +25,12 @@ const DegreeStep = ({ incrementStep, currStep }) => {
     fetchAllDegrees();
   }, []);
 
+  onkeyup = (e) => {
+    if (input.length > 0 && e.key === "Enter") {
+      incrementStep();
+    }
+  };
+
   const handleDegreeChange = (e) => {
     setInput(options[e.key]);
     dispatch(

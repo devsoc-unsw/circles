@@ -13,6 +13,12 @@ const YearStep = ({ incrementStep, currStep }) => {
   const dispatch = useDispatch();
   const [nextStep, setNextStep] = useState(false);
 
+  onkeyup = (e) => {
+    if (nextStep && e.key === "Enter") {
+      incrementStep();
+    }
+  };
+
   const handleYearChange = (_, [startYear, endYear]) => {
     setNextStep(startYear && endYear);
     const numYears = endYear - startYear + 1;
