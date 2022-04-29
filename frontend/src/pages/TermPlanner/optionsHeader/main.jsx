@@ -68,46 +68,53 @@ const OptionsHeader = ({
         )}
 
         {!isAllEmpty(years) && (
-          <Popconfirm
-            placement="bottomRight"
-            title="Are you sure you want to unplan all your courses?"
-            onConfirm={() => dispatch(unscheduleAll())}
-            style={{ width: "200px" }}
-            okText="Yes"
-            cancelText="No"
-          >
-            <Tooltip title="Unplan all courses">
-              <button type="button" className="settingsButton">
-                <FaRegCalendarTimes size="1.5em" className="settingsIcon" />
-              </button>
-            </Tooltip>
-          </Popconfirm>
+          <div>
+            <Popconfirm
+              placement="bottomRight"
+              title="Are you sure you want to unplan all your courses?"
+              onConfirm={() => dispatch(unscheduleAll())}
+              style={{ width: "200px" }}
+              okText="Yes"
+              cancelText="No"
+            >
+              <Tooltip title="Unplan all courses">
+                <button type="button" className="settingsButton">
+                  <FaRegCalendarTimes size="1.5em" className="settingsIcon" />
+                </button>
+              </Tooltip>
+            </Popconfirm>
+          </div>
         )}
 
         {areYearsHidden && (
-          <Tooltip title="Show all hidden years">
-            <button type="button" className="settingsButton" onClick={() => dispatch(unhideAllYears())}>
-              <IoIosEye size="1.5em" className="settingsIcon" />
+          <div>
+            <Tooltip title="Show all hidden years">
+              <button type="button" className="settingsButton" onClick={() => dispatch(unhideAllYears())}>
+                <IoIosEye size="1.5em" className="settingsIcon" />
+              </button>
+            </Tooltip>
+          </div>
+        )}
+
+        <div>
+          <Tooltip title="Toggle warnings for previous terms">
+            <button
+              className={`settingsButton${supress ? " filled" : ""}`}
+              type="button"
+              onClick={() => {
+                setSupress((prev) => !prev);
+                updateAllWarnings(
+                  dispatch,
+                  { years, startYear, completedTerms },
+                  { programCode, specialisation, minor },
+                  supress,
+                );
+              }}
+            >
+              <IoWarning size="1.5em" />
             </button>
           </Tooltip>
-        )}
-        <Tooltip title="Toggle warnings for previous terms">
-          <button
-            className={`settingsButton${supress ? " filled" : ""}`}
-            type="button"
-            onClick={() => {
-              setSupress((prev) => !prev);
-              updateAllWarnings(
-                dispatch,
-                { years, startYear, completedTerms },
-                { programCode, specialisation, minor },
-                supress,
-              );
-            }}
-          >
-            <IoWarning />
-          </button>
-        </Tooltip>
+        </div>
       </div>
 
       <Tippy
