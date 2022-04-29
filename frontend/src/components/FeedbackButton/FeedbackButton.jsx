@@ -2,21 +2,21 @@ import React from "react";
 import { Button, Tooltip } from "antd";
 import { BugOutlined } from "@ant-design/icons";
 import { useSelector } from "react-redux";
-import "./feedbackBtn.less";
 import useMediaQuery from "../../hooks/useMediaQuery";
+import { FEEDBACK_LINK } from "../../constants";
+import "./index.less";
 
-export const FeedbackBtn = () => {
+const FeedbackButton = () => {
   const theme = useSelector((store) => store.theme);
   // Feedback form
-  const FORM_LINK = "https://github.com/csesoc/Circles/issues?q=is%3Aissue+is%3Aopen";
   const isTablet = useMediaQuery("(max-width: 1000px)");
   const openFeedbackLink = () => {
-    window.open(FORM_LINK, "_blank");
+    window.open(FEEDBACK_LINK, "_blank");
   };
   // Move this to the drawer if the screen is too small
   return (isTablet) ? <div />
     : (
-      <div className="feedbackFab-root">
+      <div className="feedback-btn-cont-root">
         <Tooltip title="Report a bug!">
           <Button
             shape="circle"
@@ -30,4 +30,4 @@ export const FeedbackBtn = () => {
     );
 };
 
-export default FeedbackBtn;
+export default FeedbackButton;
