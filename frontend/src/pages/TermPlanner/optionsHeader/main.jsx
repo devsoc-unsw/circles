@@ -120,7 +120,7 @@ const OptionsHeader = ({
       <Tippy
         content={<HelpMenu />}
         moveTransition="transform 0.2s ease-out"
-        interactive="true"
+        interactive
         trigger="click"
         theme={theme === "light" ? "light" : "dark"}
         maxWidth="80vh"
