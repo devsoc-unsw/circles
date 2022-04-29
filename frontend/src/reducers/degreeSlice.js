@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { DEGREE_STRUCTURE_VERSION } from "../constants";
 
 let initialState = {
   programCode: "",
@@ -6,6 +7,7 @@ let initialState = {
   majors: [],
   minor: "",
   specialisation: "",
+  version: DEGREE_STRUCTURE_VERSION,
 };
 
 const degree = JSON.parse(localStorage.getItem("degree"));
@@ -25,14 +27,18 @@ const degreeSlice = createSlice({
     setMinor: (state, action) => {
       state.minor = action.payload;
     },
-    toggleUpdatedDegree: (state) => {
-      state.hasUpdatedDegree = !state.hasUpdatedDegree;
+    saveDegree: (state) => {
+      localStorage.setItem("degree", JSON.stringify(state));
+    },
+    resetDegree: (state) => {
+      Object.assign(state, initialState);
+      localStorage.removeItem("degree", JSON.stringify(state));
     },
   },
 });
 
 export const {
-  setProgram, setSpecialisation, setMinor, toggleUpdatedDegree,
+  setProgram, setSpecialisation, setMinor, saveDegree, resetDegree,
 } = degreeSlice.actions;
 
 export default degreeSlice.reducer;

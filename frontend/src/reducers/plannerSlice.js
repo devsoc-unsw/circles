@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { PLANNER_STRUCTURE_VERSION } from "../constants";
 
 // set up hidden object
 const generateHiddenInit = (startYear, numYears) => {
@@ -43,6 +44,7 @@ let initialState = {
   completedTerms: {},
   hidden: generateHiddenInit(fakeStartYear, fakeNumYears),
   areYearsHidden: false,
+  version: PLANNER_STRUCTURE_VERSION,
 };
 
 const planner = JSON.parse(localStorage.getItem("planner"));
@@ -277,7 +279,7 @@ const plannerSlice = createSlice({
     },
     resetPlanner: (state) => {
       Object.assign(state, initialState);
-      localStorage.setItem("planner", JSON.stringify(initialState));
+      localStorage.removeItem("planner");
     },
   },
 });

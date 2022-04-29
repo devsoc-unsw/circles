@@ -1,0 +1,2 @@
+export const DEGREE_STRUCTURE_VERSION = 0;
+export const PLANNER_STRUCTURE_VERSION = 0;

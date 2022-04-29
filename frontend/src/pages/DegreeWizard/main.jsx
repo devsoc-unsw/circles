@@ -13,6 +13,7 @@ import YearStep from "./steps/YearStep";
 import StartBrowsingStep from "./steps/StartBrowsingStep";
 import { resetTabs } from "../../reducers/courseTabsSlice";
 import { resetPlanner } from "../../reducers/plannerSlice";
+import { resetDegree } from "../../reducers/degreeSlice";
 
 const { Title } = Typography;
 
@@ -56,8 +57,8 @@ const DegreeWizard = () => {
 
   const handleOk = () => {
     setIsModalVisible(false);
-    // Degree selector needs to reset to prevent identical courses in a term
     dispatch(resetPlanner());
+    dispatch(resetDegree());
     dispatch(resetTabs());
   };
 
