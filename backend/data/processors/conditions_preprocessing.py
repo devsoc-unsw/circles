@@ -48,7 +48,6 @@ SPECIALISATION_MAPPINGS = {
     'Social Work': '4033',
     'single or dual award Media': '4510 || 3454 || 3438 || 3453',
     'single or double degree Media': '4510 || 3454 || 3438 || 3453',
-    'single or double Music (Honours)': 'MUSC?H || 4508',
     'Social Science or Social Research and Policy': '3321 || 3420',
     'Education program': '4509 || 4056',
     'International Studies(?:\s+single)?(?:\s+or\s+((double)|(dual))\s+((degree)|(program)))?(?:\s*\(2017 onwards\))?': '3447',
@@ -420,7 +419,7 @@ def handle_comma_logic(processed):
     # add &&s before coreqs if coreqs is not preceded by an OR logic
     if re.search(r'(?<!\|\|\s)\[.*\]', processed):
         processed = re.sub(r'&*\s*\[(.*)\]', r' && [\1]', processed)
-    
+
     # remove &&s or ||s if it's the start of string
     processed = re.sub(r'^\s*&&', '', processed)
     processed = re.sub(r'^\s*\|\|', '', processed)
