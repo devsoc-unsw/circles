@@ -67,7 +67,7 @@ def test_validateTermPlanner_invalid_progress():
             "unlocked": False,
             "handbook_note": "",
             "warnings": [
-                "Requires 75 WAM. Your WAM has not been recorded"
+                "Requires 75 WAM in all courses. Your WAM in all courses has not been recorded"
             ]
         }
     }
@@ -121,13 +121,13 @@ def test_validateTermPlanner_past_term_suppress_warnings():
         },
         "COMP2511": {
             "is_accurate": True,
-            "unlocked": False,
+            "unlocked": True,
             "handbook_note": "",
             "warnings": []
         },
         "COMP4128": {
             "is_accurate": True,
-            "unlocked": False,
+            "unlocked": True,
             "handbook_note": "",
             "warnings": []
         }

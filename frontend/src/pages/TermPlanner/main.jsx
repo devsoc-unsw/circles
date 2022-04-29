@@ -34,6 +34,7 @@ const openNotification = () => {
 
 const TermPlanner = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [suppress, setSuppress] = useState(false);
   const [termsOffered, setTermsOffered] = useState([]);
   const [isDragging, setIsDragging] = useState(false);
   const {
@@ -59,6 +60,7 @@ const TermPlanner = () => {
       dispatch,
       { years, startYear, completedTerms },
       { programCode, specialisation, minor },
+      suppress,
     );
   }, [years, dispatch, startYear, completedTerms, programCode, specialisation, minor]);
   const currYear = new Date().getFullYear();
@@ -129,6 +131,8 @@ const TermPlanner = () => {
         areYearsHidden={areYearsHidden}
         plannerRef={plannerPic}
         isAllEmpty={isAllEmpty}
+        setSuppress={setSuppress}
+        suppress={suppress}
       />
       {isLoading ? (
         <SkeletonPlanner />
@@ -140,6 +144,7 @@ const TermPlanner = () => {
               dispatch,
               { years, startYear, completedTerms },
               { programCode, specialisation, minor },
+              suppress,
             );
           }}
           onDragStart={handleOnDragStart}

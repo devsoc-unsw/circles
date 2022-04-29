@@ -1,80 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  Button, Tag, Typography, Space, Menu, Dropdown,
+  Tag, Typography, Space,
 } from "antd";
-import { StopOutlined } from "@ant-design/icons";
 import { motion } from "framer-motion/dist/framer-motion";
-import { BsPlusLg } from "react-icons/bs";
 import { CourseTag } from "../../../components/courseTag/CourseTag";
-import SearchCourse from "../SearchCourse";
-import Loading from "./Loading";
-import "./courseDescription.less";
 import prepareUserPayload from "../helper";
 import infographic from "../../../images/infographicFontIndependent.svg";
 import axiosRequest from "../../../axios";
 import { setCourse } from "../../../reducers/coursesSlice";
-import { addToUnplanned, removeCourse } from "../../../reducers/plannerSlice";
 import Collapsible from "./Collapsible";
+import AddToPlannerButton from "./AddToPlannerButton";
+import CourseAttribute from "./CourseAttribute";
+import "./index.less";
+import LoadingSkeleton from "./LoadingSkeleton";
 
 const { Title, Text } = Typography;
-const CourseAttribute = ({ title, content }) => (
-  <div className="cs-course-attr">
-    <Title level={3} className="text">
-      {title}
-    </Title>
-    <Text className="text">{content}</Text>
-  </div>
-);
 
-const PlannerDropdown = ({ courseCode, structure, addToPlanner }) => {
-  const [categories, setCategories] = useState([]);
-
-  useEffect(() => {
-    // Example groups: Major, Minor, General
-    const categoriesDropdown = [];
-    Object.entries(structure).forEach((group, groupContainer) => {
-      Object.entries(groupContainer).forEach((subgroup, subgroupStructure) => {
-        const subCourses = Object.keys(subgroupStructure.courses);
-        if (subCourses.includes(courseCode)) categoriesDropdown.push(`${group} - ${subgroup}`);
-      });
-    });
-
-    if (!categoriesDropdown.length) {
-      // add these options to dropdown as a fallback if courseCode is not in
-      // major or minor
-      categoriesDropdown.push("Flexible Education");
-      categoriesDropdown.push("General Education");
-    }
-    setCategories(categoriesDropdown);
-  }, [structure, courseCode]);
-
-  return (
-    <Menu>
-      {categories.map((category) => (
-        <Menu.Item
-          onClick={() => {
-            addToPlanner(category);
-          }}
-        >
-          Add as {category}
-        </Menu.Item>
-      ))}
-    </Menu>
-  );
-};
-
-const CourseDescription = ({ structure }) => {
+const CourseDescription = () => {
   const dispatch = useDispatch();
   const { active, tabs } = useSelector((state) => state.courseTabs);
   const id = tabs[active];
 
   const course = useSelector((state) => state.courses.course);
-  const coursesInPlanner = useSelector((state) => state.planner.courses);
-  const courseInPlanner = !!coursesInPlanner[id];
-  const planner = useSelector((state) => state.planner);
-  const degree = useSelector((state) => state.degree);
-  const [loading, setLoading] = useState(false);
+  const { degree, planner } = useSelector((state) => state);
   const [pageLoaded, setPageLoaded] = useState(false);
   const [coursesPathTo, setCoursesPathTo] = useState({});
 
@@ -106,7 +55,7 @@ const CourseDescription = ({ structure }) => {
       getCourse();
       getPathToCoursesById(id);
     }
-  }, [id, dispatch, degree, planner]);
+  }, [id]);
 
   if (tabs.length === 0) {
     return (
@@ -120,44 +69,10 @@ const CourseDescription = ({ structure }) => {
     );
   }
 
-  if (id === "explore") return <div>This is the explore page</div>;
-  if (id === "search") return <SearchCourse />;
-  const addToPlanner = (type) => {
-    const data = {
-      courseCode: course.code,
-      courseData: {
-        title: course.title,
-        type,
-        termsOffered: course.terms,
-        UOC: course.UOC,
-        plannedFor: null,
-        prereqs: course.raw_requirements,
-        isLegacy: course.is_legacy,
-        isUnlocked: true,
-        warnings: [],
-        handbookNote: course.handbook_note,
-        isAccurate: course.is_accurate,
-      },
-    };
-    dispatch(addToUnplanned(data));
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  };
-
-  const removeFromPlanner = () => {
-    dispatch(removeCourse(id));
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  };
-
   return (
     <div className="cs-description-root">
       {!pageLoaded ? (
-        <Loading />
+        <LoadingSkeleton />
       ) : (
         <>
           <div className="cs-description-content">
@@ -165,36 +80,7 @@ const CourseDescription = ({ structure }) => {
               <Title level={2} className="text">
                 {id} - {course.title}
               </Title>
-              {courseInPlanner ? (
-                <Button
-                  type="secondary"
-                  loading={loading}
-                  onClick={removeFromPlanner}
-                  icon={<StopOutlined />}
-                >
-                  Remove from planner
-                </Button>
-              ) : (
-                <Dropdown.Button
-                  overlay={() => (
-                    <PlannerDropdown
-                      courseCode={course.code}
-                      structure={structure}
-                      addToPlanner={addToPlanner}
-                    />
-                  )}
-                  loading={loading}
-                  onClick={() => {
-                    addToPlanner("Uncategorised");
-                  }}
-                  type="primary"
-                >
-                  <div className="addBtn">
-                    <BsPlusLg />
-                    Add to planner
-                  </div>
-                </Dropdown.Button>
-              )}
+              <AddToPlannerButton />
             </div>
             {
               course.is_legacy

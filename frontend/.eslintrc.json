@@ -20,8 +20,7 @@
     ],
     "rules": {
         "no-case-declarations": ["off"],
-        "default-param-last": ["off"], // redux
-        "no-param-reassign": ["error", { "props": false }], // redux toolkit
+        "no-param-reassign": ["error", { "ignorePropertyModificationsFor": [ "state" ] }], // redux toolkit
         "no-nested-ternary": ["off"],
         "import/no-extraneous-dependencies": ["off"], // a problem with how tippy is used - ill leave it to an FE person to figure out
         "react/jsx-props-no-spreading": ["off"],
