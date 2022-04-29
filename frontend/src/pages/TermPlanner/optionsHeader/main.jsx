@@ -1,22 +1,22 @@
 import React from "react";
 import { Tooltip, Popconfirm } from "antd";
 import { useSelector, useDispatch } from "react-redux";
-import { IoCogSharp, IoWarning } from "react-icons/io5";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
 import { FaRegCalendarTimes } from "react-icons/fa";
-import { FiHelpCircle } from "react-icons/fi";
-import { IoIosEye } from "react-icons/io";
-import { TiDownload } from "react-icons/ti";
+import {
+  DownloadOutlined, EyeFilled, QuestionCircleOutlined, SettingFilled, WarningFilled,
+} from "@ant-design/icons";
 import SaveMenu from "./SaveMenu";
 import SettingsMenu from "./SettingsMenu";
 import HelpMenu from "./HelpMenu";
 import { unhideAllYears, unscheduleAll } from "../../../reducers/plannerSlice";
 import updateAllWarnings from "../ValidateTermPlanner";
+import "./index.less";
 
 const OptionsHeader = ({
-  plannerRef, isAllEmpty, setSupress, supress,
+  plannerRef, isAllEmpty, setSuppress, suppress,
 }) => {
   const theme = useSelector((state) => state.theme);
   const { areYearsHidden } = useSelector((state) => state.planner);
@@ -27,8 +27,8 @@ const OptionsHeader = ({
   const dispatch = useDispatch();
 
   return (
-    <div className="optionsHeader">
-      <div className="leftButtons">
+    <div className="options-header">
+      <div className="left-buttons">
         <Tippy
           content={<SettingsMenu />}
           moveTransition="transform 0.2s ease-out"
@@ -40,8 +40,8 @@ const OptionsHeader = ({
         >
           <div>
             <Tooltip title="Settings">
-              <button type="button" className="settingsButton">
-                <IoCogSharp className="settingsIcon" size="1.5em" />
+              <button type="button" className="settings-button">
+                <SettingFilled className="settings-icon" />
               </button>
             </Tooltip>
           </div>
@@ -59,8 +59,8 @@ const OptionsHeader = ({
           >
             <div>
               <Tooltip title="Export">
-                <button type="button" className="settingsButton">
-                  <TiDownload className="settingsIcon" size="1.5em" />
+                <button type="button" className="settings-button">
+                  <DownloadOutlined className="settings-icon" />
                 </button>
               </Tooltip>
             </div>
@@ -78,8 +78,8 @@ const OptionsHeader = ({
               cancelText="No"
             >
               <Tooltip title="Unplan all courses">
-                <button type="button" className="settingsButton">
-                  <FaRegCalendarTimes size="1.5em" className="settingsIcon" />
+                <button type="button" className="settings-button">
+                  <FaRegCalendarTimes className="settings-icon" />
                 </button>
               </Tooltip>
             </Popconfirm>
@@ -89,8 +89,8 @@ const OptionsHeader = ({
         {areYearsHidden && (
           <div>
             <Tooltip title="Show all hidden years">
-              <button type="button" className="settingsButton" onClick={() => dispatch(unhideAllYears())}>
-                <IoIosEye size="1.5em" className="settingsIcon" />
+              <button type="button" className="settings-button" onClick={() => dispatch(unhideAllYears())}>
+                <EyeFilled className="settings-icon" />
               </button>
             </Tooltip>
           </div>
@@ -99,19 +99,19 @@ const OptionsHeader = ({
         <div>
           <Tooltip title="Toggle warnings for previous terms">
             <button
-              className={`settingsButton${supress ? " filled" : ""}`}
+              className={`settings-button ${suppress ? "filled" : ""}`}
               type="button"
               onClick={() => {
-                setSupress((prev) => !prev);
+                setSuppress((prev) => !prev);
                 updateAllWarnings(
                   dispatch,
                   { years, startYear, completedTerms },
                   { programCode, specialisation, minor },
-                  supress,
+                  suppress,
                 );
               }}
             >
-              <IoWarning size="1.5em" />
+              <WarningFilled className="settings-icon" />
             </button>
           </Tooltip>
         </div>
@@ -128,8 +128,8 @@ const OptionsHeader = ({
       >
         <div>
           <Tooltip title="Help">
-            <button type="button" className="settingsButton helpButton">
-              <FiHelpCircle className="settingsIcon" size="1.5em" />
+            <button type="button" className="settings-button help-button">
+              <QuestionCircleOutlined className="settings-icon" />
             </button>
           </Tooltip>
         </div>

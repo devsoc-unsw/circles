@@ -1696,7 +1696,7 @@
     "ARTS3212": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Asian Studies, Development Studies, Global Development or History. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Asian Studies, Development Studies, Global Development || History. || 48UOC && enrolment in an International Studies program"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Asian Studies, Development Studies, Global Development || History. || 48UOC && (3447)"
         },
         "tokens": [
             "(",
@@ -1726,12 +1726,9 @@
             "||",
             "48UOC",
             "&&",
-            "enrolment",
-            "in",
-            "an",
-            "International",
-            "Studies",
-            "program",
+            "(",
+            "3447",
+            ")",
             ")"
         ],
         "broke at": "Index 11, one"
@@ -1739,7 +1736,7 @@
     "ARTS3216": {
         "condition": {
             "original": "Prerequisite: 48 UOC including 6 UOC at level 1 and 6 UOC at level 2 in Asian Studies. Or 48 UOC including 12 UOC in Chinese Studies language courses. Or 48 UOC and enrolment in an International Studies single or double degree (2017 onwards)<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in Asian Studies. || 48UOC && 12UOC in Chinese Studies language courses. || 48UOC && enrolment in an International Studies single || double degree (2017 onwards)"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in Asian Studies. || 48UOC && 12UOC in Chinese Studies language courses. || 48UOC && (3447)"
         },
         "tokens": [
             "(",
@@ -1767,18 +1764,8 @@
             "||",
             "48UOC",
             "&&",
-            "enrolment",
-            "in",
-            "an",
-            "International",
-            "Studies",
-            "single",
-            "||",
-            "double",
-            "degree",
             "(",
-            "2017",
-            "onwards",
+            "3447",
             ")",
             ")"
         ],
@@ -1787,7 +1774,7 @@
     "ARTS3217": {
         "condition": {
             "original": "Prerequisite: 48 UOC including 6 UOC at level 1 and 6 UOC at level 2 in Asian Studies or History. Or 48 UOC incuding 12 UOC in Chinese Studies language courses.Or 48 UOC and enrolment in an International Studies single or dual program (2017 onwards)<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in Asian Studies || History. || 48UOC incuding 12UOC in Chinese Studies language courses.Or 48UOC && enrolment in an International Studies single || dual program (2017 onwards)"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in Asian Studies || History. || 48UOC incuding 12UOC in Chinese Studies language courses.Or 48UOC && (3447)"
         },
         "tokens": [
             "(",
@@ -1816,18 +1803,8 @@
             "courses.Or",
             "48UOC",
             "&&",
-            "enrolment",
-            "in",
-            "an",
-            "International",
-            "Studies",
-            "single",
-            "||",
-            "dual",
-            "program",
             "(",
-            "2017",
-            "onwards",
+            "3447",
             ")",
             ")"
         ],
@@ -1877,7 +1854,7 @@
     "ARTS3220": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Asian Studies or History. Or 48 UOC overall and enrolment in an International Studies single or dual program (2017 onwards)<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Asian Studies || History. || 48UOC && enrolment in an International Studies single || dual program (2017 onwards)"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Asian Studies || History. || 48UOC && (3447)"
         },
         "tokens": [
             "(",
@@ -1903,18 +1880,8 @@
             "||",
             "48UOC",
             "&&",
-            "enrolment",
-            "in",
-            "an",
-            "International",
-            "Studies",
-            "single",
-            "||",
-            "dual",
-            "program",
             "(",
-            "2017",
-            "onwards",
+            "3447",
             ")",
             ")"
         ],
@@ -1944,7 +1911,7 @@
     "ARTS3241": {
         "condition": {
             "original": "Prerequisite: 48 UOC including 6 UOC at lv 1 and 6 UOC at lv 2 in one of the following streams, Development Studies, Environmental Humanities, Geographical Studies or Global Development. Or 48 UOC and enrolment in an International Studies program<br/><br/>",
-            "processed": "48UOC && 6UOC at lv 1 && 6UOC at lv 2 in one of the following streams, Development Studies, Environmental Humanities, Geographical Studies || Global Development. || 48UOC && enrolment in an International Studies program"
+            "processed": "48UOC && 6UOC at lv 1 && 6UOC at lv 2 in one of the following streams, Development Studies, Environmental Humanities, Geographical Studies || Global Development. || 48UOC && (3447)"
         },
         "tokens": [
             "(",
@@ -1977,12 +1944,9 @@
             "||",
             "48UOC",
             "&&",
-            "enrolment",
-            "in",
-            "an",
-            "International",
-            "Studies",
-            "program",
+            "(",
+            "3447",
+            ")",
             ")"
         ],
         "broke at": "Index 5, lv"
@@ -1990,7 +1954,7 @@
     "ARTS3242": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Environmental Humanities, Geographical Studies or History. Or 48 UOC overall and enrolment in an International Studies single or dual program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Environmental Humanities, Geographical Studies || History. || 48UOC && enrolment in an International Studies single || dual program"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Environmental Humanities, Geographical Studies || History. || 48UOC && (3447)"
         },
         "tokens": [
             "(",
@@ -2018,15 +1982,9 @@
             "||",
             "48UOC",
             "&&",
-            "enrolment",
-            "in",
-            "an",
-            "International",
-            "Studies",
-            "single",
-            "||",
-            "dual",
-            "program",
+            "(",
+            "3447",
+            ")",
             ")"
         ],
         "broke at": "Index 11, one"
@@ -2196,7 +2154,7 @@
     "ARTS3292": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Australian Studies or History. Or 48 UOC and enrolment in an International Studies single or dual program (2017 onwards)<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Australian Studies || History. || 48UOC && enrolment in an International Studies single || dual program (2017 onwards)"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Australian Studies || History. || 48UOC && (3447)"
         },
         "tokens": [
             "(",
@@ -2222,18 +2180,8 @@
             "||",
             "48UOC",
             "&&",
-            "enrolment",
-            "in",
-            "an",
-            "International",
-            "Studies",
-            "single",
-            "||",
-            "dual",
-            "program",
             "(",
-            "2017",
-            "onwards",
+            "3447",
             ")",
             ")"
         ],
@@ -3217,7 +3165,7 @@
     "ARTS3750": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Development Studies, Geographical Studies or Global Development. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Development Studies, Geographical Studies || Global Development. || 48UOC && enrolment in an International Studies program"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Development Studies, Geographical Studies || Global Development. || 48UOC && (3447)"
         },
         "tokens": [
             "(",
@@ -3246,12 +3194,9 @@
             "||",
             "48UOC",
             "&&",
-            "enrolment",
-            "in",
-            "an",
-            "International",
-            "Studies",
-            "program",
+            "(",
+            "3447",
+            ")",
             ")"
         ],
         "broke at": "Index 11, one"
@@ -3282,7 +3227,7 @@
     "ARTS3755": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Development Studies, Geographical Studies or Global Development. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Development Studies, Geographical Studies || Global Development. || 48UOC && enrolment in an International Studies program"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Development Studies, Geographical Studies || Global Development. || 48UOC && (3447)"
         },
         "tokens": [
             "(",
@@ -3311,12 +3256,9 @@
             "||",
             "48UOC",
             "&&",
-            "enrolment",
-            "in",
-            "an",
-            "International",
-            "Studies",
-            "program",
+            "(",
+            "3447",
+            ")",
             ")"
         ],
         "broke at": "Index 11, one"
@@ -3324,7 +3266,7 @@
     "ARTS3756": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Development Studies, Geographical Studies or Global Development. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Development Studies, Geographical Studies || Global Development. || 48UOC && enrolment in an International Studies program"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Development Studies, Geographical Studies || Global Development. || 48UOC && (3447)"
         },
         "tokens": [
             "(",
@@ -3353,12 +3295,9 @@
             "||",
             "48UOC",
             "&&",
-            "enrolment",
-            "in",
-            "an",
-            "International",
-            "Studies",
-            "program",
+            "(",
+            "3447",
+            ")",
             ")"
         ],
         "broke at": "Index 11, one"
@@ -3453,7 +3392,7 @@
     "ARTS3780": {
         "condition": {
             "original": "Prerequisite: 48 UOC including 6 UOC at level 1 and 6 UOC at level 2 in European Studies. Or 48 UOC including 12 UOC in German Studies language courses. Or 48 UOC and enrolment in an International Studies single or double degree (2017 onwards)<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in European Studies. || 48UOC && 12UOC in German Studies language courses. || 48UOC && enrolment in an International Studies single || double degree (2017 onwards)"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in European Studies. || 48UOC && 12UOC in German Studies language courses. || 48UOC && (3447)"
         },
         "tokens": [
             "(",
@@ -3481,18 +3420,8 @@
             "||",
             "48UOC",
             "&&",
-            "enrolment",
-            "in",
-            "an",
-            "International",
-            "Studies",
-            "single",
-            "||",
-            "double",
-            "degree",
             "(",
-            "2017",
-            "onwards",
+            "3447",
             ")",
             ")"
         ],
@@ -3501,7 +3430,7 @@
     "ARTS3783": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Politics and International Relations. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Politics && International Relations. || 48UOC && enrolment in an International Studies program"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Politics && International Relations. || 48UOC && (3447)"
         },
         "tokens": [
             "(",
@@ -3527,12 +3456,9 @@
             "||",
             "48UOC",
             "&&",
-            "enrolment",
-            "in",
-            "an",
-            "International",
-            "Studies",
-            "program",
+            "(",
+            "3447",
+            ")",
             ")"
         ],
         "broke at": "Index 11, one"
@@ -3540,7 +3466,7 @@
     "ARTS3786": {
         "condition": {
             "original": "Prerequisite: 48UOC overall, including 6UOC at level 1 and 6UOC at level 2 in European Studies or History; or 48UOC overall, including 12UOC in German Studies language courses. Or 48UOC and enrolment in an International Studies program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in European Studies || History; || 48UOC && 12UOC in German Studies language courses. || 48UOC && enrolment in an International Studies program"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in European Studies || History; || 48UOC && 12UOC in German Studies language courses. || 48UOC && (3447)"
         },
         "tokens": [
             "(",
@@ -3570,12 +3496,9 @@
             "||",
             "48UOC",
             "&&",
-            "enrolment",
-            "in",
-            "an",
-            "International",
-            "Studies",
-            "program",
+            "(",
+            "3447",
+            ")",
             ")"
         ],
         "broke at": "Index 11, European"
@@ -3658,7 +3581,7 @@
     "ARTS3812": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Development Studies, or Politics and International Relations. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Development Studies || Politics && International Relations. || 48UOC && enrolment in an International Studies program"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Development Studies || Politics && International Relations. || 48UOC && (3447)"
         },
         "tokens": [
             "(",
@@ -3687,12 +3610,9 @@
             "||",
             "48UOC",
             "&&",
-            "enrolment",
-            "in",
-            "an",
-            "International",
-            "Studies",
-            "program",
+            "(",
+            "3447",
+            ")",
             ")"
         ],
         "broke at": "Index 11, one"
@@ -3736,7 +3656,7 @@
     "ARTS3819": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Politics and International Relations. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Politics && International Relations. || 48UOC && enrolment in an International Studies program"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Politics && International Relations. || 48UOC && (3447)"
         },
         "tokens": [
             "(",
@@ -3762,12 +3682,9 @@
             "||",
             "48UOC",
             "&&",
-            "enrolment",
-            "in",
-            "an",
-            "International",
-            "Studies",
-            "program",
+            "(",
+            "3447",
+            ")",
             ")"
         ],
         "broke at": "Index 11, one"
@@ -3969,7 +3886,7 @@
     "ARTS3872": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Media, Culture & Technology or Sociology & Anthropology. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Media, Culture && Technology || Sociology && Anthropology. || 48UOC && enrolment in an International Studies program"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Media, Culture && Technology || Sociology && Anthropology. || 48UOC && (3447)"
         },
         "tokens": [
             "(",
@@ -3999,12 +3916,9 @@
             "||",
             "48UOC",
             "&&",
-            "enrolment",
-            "in",
-            "an",
-            "International",
-            "Studies",
-            "program",
+            "(",
+            "3447",
+            ")",
             ")"
         ],
         "broke at": "Index 11, one"
@@ -4116,7 +4030,7 @@
     "ARTS3885": {
         "condition": {
             "original": "Prerequisites: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Sociology & Anthropology. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Sociology && Anthropology. || 48UOC && enrolment in an International Studies program"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Sociology && Anthropology. || 48UOC && (3447)"
         },
         "tokens": [
             "(",
@@ -4141,12 +4055,9 @@
             "||",
             "48UOC",
             "&&",
-            "enrolment",
-            "in",
-            "an",
-            "International",
-            "Studies",
-            "program",
+            "(",
+            "3447",
+            ")",
             ")"
         ],
         "broke at": "Index 11, one"
@@ -4154,7 +4065,7 @@
     "ARTS3886": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC level 1 and 6 UOC level 2 in one of the following streams, Criminology/S&A. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-            "processed": "48UOC && 6UOC L1 && 6UOC L2 in one of the following streams, Criminology/S&A. || 48UOC && enrolment in an International Studies program"
+            "processed": "48UOC && 6UOC L1 && 6UOC L2 in one of the following streams, Criminology/S&A. || 48UOC && (3447)"
         },
         "tokens": [
             "(",
@@ -4175,12 +4086,9 @@
             "||",
             "48UOC",
             "&&",
-            "enrolment",
-            "in",
-            "an",
-            "International",
-            "Studies",
-            "program",
+            "(",
+            "3447",
+            ")",
             ")"
         ],
         "broke at": "Index 5, &&"
@@ -4279,50 +4187,6 @@
         ],
         "broke at": "Index 4, in"
     },
-    "ARTS4100": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in a School of the Arts and Media honours program<br/><br/>",
-            "processed": "Enrolment in a School of the Arts && Media honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "a",
-            "School",
-            "of",
-            "the",
-            "Arts",
-            "&&",
-            "Media",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4202": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in a School of the Arts and Media honours program<br/><br/>",
-            "processed": "Enrolment in a School of the Arts && Media honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "a",
-            "School",
-            "of",
-            "the",
-            "Arts",
-            "&&",
-            "Media",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
     "ARTS4247": {
         "condition": {
             "original": "Prerequisite: Enrolment in a School of Humanities and Languages honours program<br/><br/>",
@@ -4359,965 +4223,6 @@
             "Humanities",
             "&&",
             "Languages",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4266": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in  a School of Social Sciences, Asian Studies or European Studies honours program<br/><br/>",
-            "processed": "Enrolment in a School of Social Sciences, Asian Studies || European Studies honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "a",
-            "School",
-            "of",
-            "Social",
-            "Sciences,",
-            "Asian",
-            "Studies",
-            "||",
-            "European",
-            "Studies",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4268": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in  a School of Social Sciences, Asian Studies or European Studies honours program<br/><br/>",
-            "processed": "Enrolment in a School of Social Sciences, Asian Studies || European Studies honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "a",
-            "School",
-            "of",
-            "Social",
-            "Sciences,",
-            "Asian",
-            "Studies",
-            "||",
-            "European",
-            "Studies",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4600": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Dance Studies honours program<br/><br/>",
-            "processed": "Enrolment in the Dance Studies honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Dance",
-            "Studies",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4601": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Dance Studies honours program<br/><br/>",
-            "processed": "Enrolment in the Dance Studies honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Dance",
-            "Studies",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4602": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Dance Studies honours program<br/><br/>",
-            "processed": "Enrolment in the Dance Studies honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Dance",
-            "Studies",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4604": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the English honours program<br/><br/>",
-            "processed": "Enrolment in the English honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "English",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4605": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the English honours program<br/><br/>",
-            "processed": "Enrolment in the English honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "English",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4606": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the English honours program<br/><br/>",
-            "processed": "Enrolment in the English honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "English",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4608": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Film Studies honours program<br/><br/>",
-            "processed": "Enrolment in the Film Studies honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Film",
-            "Studies",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4609": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Film Studies honours program<br/><br/>",
-            "processed": "Enrolment in the Film Studies honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Film",
-            "Studies",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4610": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Film Studies honours program<br/><br/>",
-            "processed": "Enrolment in the Film Studies honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Film",
-            "Studies",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4612": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in Media, Culture and Technology honours program<br/><br/>",
-            "processed": "Enrolment in Media, Culture && Technology honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "Media,",
-            "Culture",
-            "&&",
-            "Technology",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4613": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in Media, Culture and Technology honours program<br/><br/>",
-            "processed": "Enrolment in Media, Culture && Technology honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "Media,",
-            "Culture",
-            "&&",
-            "Technology",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4614": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in Media, Culture and Technology honours program<br/><br/>",
-            "processed": "Enrolment in Media, Culture && Technology honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "Media,",
-            "Culture",
-            "&&",
-            "Technology",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4616": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in Theatre and Performance Studies honours program<br/><br/>",
-            "processed": "Enrolment in Theatre && Performance Studies honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "Theatre",
-            "&&",
-            "Performance",
-            "Studies",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4617": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in Theatre and Performance Studies honours program<br/><br/>",
-            "processed": "Enrolment in Theatre && Performance Studies honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "Theatre",
-            "&&",
-            "Performance",
-            "Studies",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4618": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in Theatre and Performance Studies honours program<br/><br/>",
-            "processed": "Enrolment in Theatre && Performance Studies honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "Theatre",
-            "&&",
-            "Performance",
-            "Studies",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4620": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in a Creative Writing honours program<br/><br/>",
-            "processed": "Enrolment in a Creative Writing honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "a",
-            "Creative",
-            "Writing",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4621": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in a Creative Writing honours program<br/><br/>",
-            "processed": "Enrolment in a Creative Writing honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "a",
-            "Creative",
-            "Writing",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4622": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in a Creative Writing honours program<br/><br/>",
-            "processed": "Enrolment in a Creative Writing honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "a",
-            "Creative",
-            "Writing",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4700": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in Environmental Humanities honours program<br/><br/>",
-            "processed": "Enrolment in Environmental Humanities honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "Environmental",
-            "Humanities",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4701": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in Environmental Humanities honours program<br/><br/>",
-            "processed": "Enrolment in Environmental Humanities honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "Environmental",
-            "Humanities",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4702": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in Environmental Humanities honours program<br/><br/>",
-            "processed": "Enrolment in Environmental Humanities honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "Environmental",
-            "Humanities",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4704": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the History honours program<br/><br/>",
-            "processed": "Enrolment in the History honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "History",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4705": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the History honours program<br/><br/>",
-            "processed": "Enrolment in the History honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "History",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4706": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the History honours program<br/><br/>",
-            "processed": "Enrolment in the History honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "History",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4712": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Philosophy honours program<br/><br/>",
-            "processed": "Enrolment in the Philosophy honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Philosophy",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4713": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Philosophy honours program<br/><br/>",
-            "processed": "Enrolment in the Philosophy honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Philosophy",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4714": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Philosophy honours program<br/><br/>",
-            "processed": "Enrolment in the Philosophy honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Philosophy",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4810": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Asian Studies honours program<br/><br/>",
-            "processed": "Enrolment in the Asian Studies honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Asian",
-            "Studies",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4811": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Asian Studies honours program<br/><br/>",
-            "processed": "Enrolment in the Asian Studies honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Asian",
-            "Studies",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4812": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Asian Studies honours program<br/><br/>",
-            "processed": "Enrolment in the Asian Studies honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Asian",
-            "Studies",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4814": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Chinese Studies honours program<br/><br/>",
-            "processed": "Enrolment in the Chinese Studies honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Chinese",
-            "Studies",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4815": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Chinese Studies honours program<br/><br/>",
-            "processed": "Enrolment in the Chinese Studies honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Chinese",
-            "Studies",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4816": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Chinese Studies honours program<br/><br/>",
-            "processed": "Enrolment in the Chinese Studies honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Chinese",
-            "Studies",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4818": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the French Studies honours program<br/><br/>",
-            "processed": "Enrolment in the French Studies honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "French",
-            "Studies",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4819": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the French Studies honours program<br/><br/>",
-            "processed": "Enrolment in the French Studies honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "French",
-            "Studies",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4820": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the French Studies honours program<br/><br/>",
-            "processed": "Enrolment in the French Studies honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "French",
-            "Studies",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4822": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Spanish Studies honours program<br/><br/>",
-            "processed": "Enrolment in the Spanish Studies honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Spanish",
-            "Studies",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4823": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Spanish Studies honours program<br/><br/>",
-            "processed": "Enrolment in the Spanish Studies honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Spanish",
-            "Studies",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4824": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Spanish Studies honours program<br/><br/>",
-            "processed": "Enrolment in the Spanish Studies honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Spanish",
-            "Studies",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4826": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Japanese Studies honours program<br/><br/>",
-            "processed": "Enrolment in the Japanese Studies honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Japanese",
-            "Studies",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4827": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Japanese Studies honours program<br/><br/>",
-            "processed": "Enrolment in the Japanese Studies honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Japanese",
-            "Studies",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4828": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Japanese Studies honours program<br/><br/>",
-            "processed": "Enrolment in the Japanese Studies honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Japanese",
-            "Studies",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4830": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Korean Studies honours program<br/><br/>",
-            "processed": "Enrolment in the Korean Studies honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Korean",
-            "Studies",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4831": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Korean Studies honours program<br/><br/>",
-            "processed": "Enrolment in the Korean Studies honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Korean",
-            "Studies",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4832": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Korean Studies honours program<br/><br/>",
-            "processed": "Enrolment in the Korean Studies honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Korean",
-            "Studies",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4834": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Linguistics honours program<br/><br/>",
-            "processed": "Enrolment in the Linguistics honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Linguistics",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4835": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Linguistics honours program<br/><br/>",
-            "processed": "Enrolment in the Linguistics honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Linguistics",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4836": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Linguistics honours program<br/><br/>",
-            "processed": "Enrolment in the Linguistics honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Linguistics",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4838": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the German Studies honours program<br/><br/>",
-            "processed": "Enrolment in the German Studies honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "German",
-            "Studies",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4839": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the German Studies honours program<br/><br/>",
-            "processed": "Enrolment in the German Studies honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "German",
-            "Studies",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4840": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the German Studies honours program<br/><br/>",
-            "processed": "Enrolment in the German Studies honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "German",
-            "Studies",
             "honours",
             "program",
             ")"
@@ -5371,60 +4276,6 @@
             "in",
             "the",
             "Development",
-            "Studies",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4904": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the European Studies honours program<br/><br/>",
-            "processed": "Enrolment in the European Studies honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "European",
-            "Studies",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4905": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the European Studies honours program<br/><br/>",
-            "processed": "Enrolment in the European Studies honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "European",
-            "Studies",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4906": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the European Studies honours program<br/><br/>",
-            "processed": "Enrolment in the European Studies honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "European",
             "Studies",
             "honours",
             "program",
@@ -5531,177 +4382,6 @@
             "in",
             "the",
             "Politics",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4920": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Sociology and Anthropology honours program<br/><br/>",
-            "processed": "Enrolment in the Sociology && Anthropology honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Sociology",
-            "&&",
-            "Anthropology",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4921": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Sociology and Anthropology honours program<br/><br/>",
-            "processed": "Enrolment in the Sociology && Anthropology honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Sociology",
-            "&&",
-            "Anthropology",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4922": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Sociology and Anthropology honours program<br/><br/>",
-            "processed": "Enrolment in the Sociology && Anthropology honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Sociology",
-            "&&",
-            "Anthropology",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4924": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Politics and International Relations honours program<br/><br/>",
-            "processed": "Enrolment in the Politics && International Relations honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Politics",
-            "&&",
-            "International",
-            "Relations",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4925": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Politics and International Relations honours program<br/><br/>",
-            "processed": "Enrolment in the Politics && International Relations honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Politics",
-            "&&",
-            "International",
-            "Relations",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4926": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Politics and International Relations honours program<br/><br/>",
-            "processed": "Enrolment in the Politics && International Relations honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Politics",
-            "&&",
-            "International",
-            "Relations",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4927": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Global Development honours program<br/><br/>",
-            "processed": "Enrolment in the Global Development honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Global",
-            "Development",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4928": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Global Development honours program<br/><br/>",
-            "processed": "Enrolment in the Global Development honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Global",
-            "Development",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4929": {
-        "condition": {
-            "original": "Prerequisite: Enrolment  in the Global Development honours program<br/><br/>",
-            "processed": "Enrolment in the Global Development honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Global",
-            "Development",
             "honours",
             "program",
             ")"
@@ -6574,28 +5254,6 @@
         ],
         "broke at": "Index 2, )"
     },
-    "BLDG1011": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in a Construction Management and Property undergraduate program or minor<br/><br/>",
-            "processed": "Enrolment in a Construction Management && Property undergraduate program || minor"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "a",
-            "Construction",
-            "Management",
-            "&&",
-            "Property",
-            "undergraduate",
-            "program",
-            "||",
-            "minor",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
     "BLDG1012": {
         "condition": {
             "original": "Program 3331 3332<br/><br/>",
@@ -6609,28 +5267,6 @@
             ")"
         ],
         "broke at": "Index 2, 3331"
-    },
-    "BLDG1013": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in a Construction Management and Property undergraduate program or minor<br/><br/>",
-            "processed": "Enrolment in a Construction Management && Property undergraduate program || minor"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "a",
-            "Construction",
-            "Management",
-            "&&",
-            "Property",
-            "undergraduate",
-            "program",
-            "||",
-            "minor",
-            ")"
-        ],
-        "broke at": "Index 2, in"
     },
     "BLDG1014": {
         "condition": {
@@ -6673,28 +5309,6 @@
             ")"
         ],
         "broke at": "Index 2, 3331"
-    },
-    "BLDG1024": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in a Construction Management and Property undergraduate program or minor<br/><br/>",
-            "processed": "Enrolment in a Construction Management && Property undergraduate program || minor"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "a",
-            "Construction",
-            "Management",
-            "&&",
-            "Property",
-            "undergraduate",
-            "program",
-            "||",
-            "minor",
-            ")"
-        ],
-        "broke at": "Index 2, in"
     },
     "BLDG4018": {
         "condition": {
@@ -7569,27 +6183,6 @@
         ],
         "broke at": "Index 7, 2270"
     },
-    "COMP4951": {
-        "condition": {
-            "original": "Prerequisite: Enrolled in a CSE BE (Hons) programs, completion of 126 UOC and completion of 3rd year core.<br/><br/>",
-            "processed": "126UOC && (BINF?H || SENGAH || COMP?H)",
-            "handbook_note": "You must be enrolled in a CSE BE (Hons) program and complete all third year core requirements to enrol in this course."
-        },
-        "tokens": [
-            "(",
-            "126UOC",
-            "&&",
-            "(",
-            "BINF?H",
-            "||",
-            "SENGAH",
-            "||",
-            "COMP?H",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 4, BINF?H"
-    },
     "CRIM2021": {
         "condition": {
             "original": "Prerequisite: CRIM2020, not available to students in Bachelor of Laws double-degree programs<br/><br/>",
@@ -7959,109 +6552,6 @@
             ")"
         ],
         "broke at": "Index 4, CRIM1011"
-    },
-    "CRIM4001": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Criminology honours program<br/><br/>",
-            "processed": "Enrolment in the Criminology honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Criminology",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "CRIM4002": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Criminology honours program<br/><br/>",
-            "processed": "Enrolment in the Criminology honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Criminology",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "CRIM4003": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Criminology honours program<br/><br/>",
-            "processed": "Enrolment in the Criminology honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Criminology",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "CVEN4050": {
-        "condition": {
-            "original": "Prerequisite: 132 UOCs needed to enrol into this course and BE Hons Programs only<br/><br/>",
-            "processed": "132UOC && (AEROAH || BINFAH || CEICAH || CEICDH || COMPBH || CVENAH || CVENBH || ELECAH || ELECCH || GMATDH || MANFBH || MECHAH || MINEAH || MTRNAH || PETRAH || SENGAH || SOLAAH || SOLABH || TELEAH)"
-        },
-        "tokens": [
-            "(",
-            "132UOC",
-            "&&",
-            "(",
-            "AEROAH",
-            "||",
-            "BINFAH",
-            "||",
-            "CEICAH",
-            "||",
-            "CEICDH",
-            "||",
-            "COMPBH",
-            "||",
-            "CVENAH",
-            "||",
-            "CVENBH",
-            "||",
-            "ELECAH",
-            "||",
-            "ELECCH",
-            "||",
-            "GMATDH",
-            "||",
-            "MANFBH",
-            "||",
-            "MECHAH",
-            "||",
-            "MINEAH",
-            "||",
-            "MTRNAH",
-            "||",
-            "PETRAH",
-            "||",
-            "SENGAH",
-            "||",
-            "SOLAAH",
-            "||",
-            "SOLABH",
-            "||",
-            "TELEAH",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 4, AEROAH"
     },
     "CVEN4701": {
         "condition": {
@@ -9718,7 +8208,7 @@
     "EDST2002": {
         "condition": {
             "original": "Prerequisite: 72 uoc overall, including EDST1101, EDST1104, EDST1108, and EDST2003, and enrolment in an Education program. Students must have passed the Literacy and Numeracy Test for Initial Teacher Education in order to enrol into this course<br/><br/>",
-            "processed": "72UOC && EDST1101, EDST1104, EDST1108 && EDST2003 && enrolment in an Education program. must have passed the Literacy && Numeracy Test for Initial Teacher Education in order to enrol into this course"
+            "processed": "72UOC && EDST1101, EDST1104, EDST1108 && EDST2003 && (4509 || 4056) . must have passed the Literacy && Numeracy Test for Initial Teacher Education in order to enrol into this course"
         },
         "tokens": [
             "(",
@@ -9730,11 +8220,12 @@
             "&&",
             "EDST2003",
             "&&",
-            "enrolment",
-            "in",
-            "an",
-            "Education",
-            "program.",
+            "(",
+            "4509",
+            "||",
+            "4056",
+            ")",
+            ".",
             "must",
             "have",
             "passed",
@@ -9798,7 +8289,7 @@
     "EDST2094": {
         "condition": {
             "original": "Prerequisite: 18 units of credit at Level 1, and enrolment in an Education program. Please contact the School of Education for enrolment<br/><br/>",
-            "processed": "18UOC in L1 && enrolment in an Education program. Please contact the School of Education for enrolment"
+            "processed": "18UOC in L1 && (4509 || 4056) . Please contact the School of Education for enrolment"
         },
         "tokens": [
             "(",
@@ -9806,11 +8297,12 @@
             "in",
             "L1",
             "&&",
-            "enrolment",
-            "in",
-            "an",
-            "Education",
-            "program.",
+            "(",
+            "4509",
+            "||",
+            "4056",
+            ")",
+            ".",
             "Please",
             "contact",
             "the",
@@ -9821,169 +8313,7 @@
             "enrolment",
             ")"
         ],
-        "broke at": "Index 6, in"
-    },
-    "EDST4080": {
-        "condition": {
-            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in an Education program<br/><br/>",
-            "processed": "78UOC && EDST2002 && enrolment in an Education program"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "&&",
-            "EDST2002",
-            "&&",
-            "enrolment",
-            "in",
-            "an",
-            "Education",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 6, in"
-    },
-    "EDST4084": {
-        "condition": {
-            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in an Education program<br/><br/>",
-            "processed": "78UOC && EDST2002 && enrolment in an Education program"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "&&",
-            "EDST2002",
-            "&&",
-            "enrolment",
-            "in",
-            "an",
-            "Education",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 6, in"
-    },
-    "EDST4096": {
-        "condition": {
-            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in an Education program<br/><br/>",
-            "processed": "78UOC && EDST2002 && enrolment in an Education program"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "&&",
-            "EDST2002",
-            "&&",
-            "enrolment",
-            "in",
-            "an",
-            "Education",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 6, in"
-    },
-    "EDST4501": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Education honours program<br/><br/>",
-            "processed": "Enrolment in the Education honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Education",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "EDST4502": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Education honours program<br/><br/>",
-            "processed": "Enrolment in the Education honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Education",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "EDST4503": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Education honours program<br/><br/>",
-            "processed": "Enrolment in the Education honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Education",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "EDST4505": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Education honours program<br/><br/>",
-            "processed": "Enrolment in the Education honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Education",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "EDST4506": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Education honours program<br/><br/>",
-            "processed": "Enrolment in the Education honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Education",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "EDST4507": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Education honours program<br/><br/>",
-            "processed": "Enrolment in the Education honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Education",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
+        "broke at": "Index 11, Please"
     },
     "EDST6700": {
         "condition": {
@@ -10728,7 +9058,7 @@
     "EDST6760": {
         "condition": {
             "original": "Prerequisite: EDST2002, EDST4084, 12 uoc Teaching Method 1 courses, and enrolment in an Education program. Students must have passed LANTITE.\u00a0 Students must have sufficient subject content knowledge in their teaching areas<br/><br/>",
-            "processed": "EDST2002 && EDST4084 && 12UOC Teaching Method 1 courses && enrolment in an Education program. must have passed LANTITE.\u00a0 must have sufficient subject content knowledge in their teaching areas"
+            "processed": "EDST2002 && EDST4084 && 12UOC Teaching Method 1 courses && (4509 || 4056) . must have passed LANTITE.\u00a0 must have sufficient subject content knowledge in their teaching areas"
         },
         "tokens": [
             "(",
@@ -10742,11 +9072,12 @@
             "1",
             "courses",
             "&&",
-            "enrolment",
-            "in",
-            "an",
-            "Education",
-            "program.",
+            "(",
+            "4509",
+            "||",
+            "4056",
+            ")",
+            ".",
             "must",
             "have",
             "passed",
@@ -10805,7 +9136,7 @@
     "EDST6765": {
         "condition": {
             "original": "Prerequisite: EDST4080, EDST4096, EDST6760, 24 uoc Teaching Method courses, and enrolment in an Education program. Students must have passed LANTITE.\u00a0Students must have sufficient subject content knowledge in their teaching areas.\u00a0Excluded: EDST4081<br/><br/>",
-            "processed": "EDST4080 && EDST4096 && EDST6760 && 24UOC Teaching Method courses && enrolment in an Education program. must have passed LANTITE.\u00a0 must have sufficient subject content knowledge in their teaching areas"
+            "processed": "EDST4080 && EDST4096 && EDST6760 && 24UOC Teaching Method courses && (4509 || 4056) . must have passed LANTITE.\u00a0 must have sufficient subject content knowledge in their teaching areas"
         },
         "tokens": [
             "(",
@@ -10820,11 +9151,12 @@
             "Method",
             "courses",
             "&&",
-            "enrolment",
-            "in",
-            "an",
-            "Education",
-            "program.",
+            "(",
+            "4509",
+            "||",
+            "4056",
+            ")",
+            ".",
             "must",
             "have",
             "passed",
@@ -11559,147 +9891,16 @@
         ],
         "broke at": "Index 6, COMMJ"
     },
-    "INFS4831": {
-        "condition": {
-            "original": "Prerequisite: Enrolled in Honours majoring in Information Systems.<br/><br/>",
-            "processed": "INFS?H"
-        },
-        "tokens": [
-            "(",
-            "INFS?H",
-            ")"
-        ],
-        "broke at": "Index 2, )"
-    },
-    "INFS4854": {
-        "condition": {
-            "original": "Prerequisite: Enrolled in Honours majoring in Information Systems.<br/><br/>",
-            "processed": "INFS?H"
-        },
-        "tokens": [
-            "(",
-            "INFS?H",
-            ")"
-        ],
-        "broke at": "Index 2, )"
-    },
-    "INFS4858": {
-        "condition": {
-            "original": "Enrolment in Streams: Enrolled in an Honours Program majoring in Information Systems (INFSAH OR INFSBH OR INFSCH)<br/><br/>",
-            "processed": "INFSAH || INFSBH || INFSCH"
-        },
-        "tokens": [
-            "(",
-            "INFSAH",
-            "||",
-            "INFSBH",
-            "||",
-            "INFSCH",
-            ")"
-        ],
-        "broke at": "Index 2, ||"
-    },
-    "INFS4886": {
-        "condition": {
-            "original": "Prerequisite: Enrolled in Honours majoring in Information Systems.<br/><br/>",
-            "processed": "INFS?H"
-        },
-        "tokens": [
-            "(",
-            "INFS?H",
-            ")"
-        ],
-        "broke at": "Index 2, )"
-    },
-    "INFS4887": {
-        "condition": {
-            "original": "Prerequisite: INFS4886 AND enrolled in Honours majoring in Information Systems.<br/><br/>",
-            "processed": "INFS4886 && INFS?H"
-        },
-        "tokens": [
-            "(",
-            "INFS4886",
-            "&&",
-            "INFS?H",
-            ")"
-        ],
-        "broke at": "Index 4, )"
-    },
-    "INFS4907": {
-        "condition": {
-            "original": "Enrolment in Streams: Enrolled in an Honours Program majoring in Information Systems (INFSAH OR INFSBH OR INFSCH)<br/><br/>",
-            "processed": "INFSAH || INFSBH || INFSCH"
-        },
-        "tokens": [
-            "(",
-            "INFSAH",
-            "||",
-            "INFSBH",
-            "||",
-            "INFSCH",
-            ")"
-        ],
-        "broke at": "Index 2, ||"
-    },
-    "INST1005": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in an International Studies single or double degree<br/><br/>",
-            "processed": "Enrolment in an International Studies single || double degree"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "an",
-            "International",
-            "Studies",
-            "single",
-            "||",
-            "double",
-            "degree",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "INST1006": {
-        "condition": {
-            "original": "Prerequisite: INST1005 and enrolment in an International Studies  single or double degree(2017 onwards)<br/><br/>",
-            "processed": "INST1005 && enrolment in an International Studies single || double degree(2017 onwards)"
-        },
-        "tokens": [
-            "(",
-            "INST1005",
-            "&&",
-            "enrolment",
-            "in",
-            "an",
-            "International",
-            "Studies",
-            "single",
-            "||",
-            "double",
-            "degree",
-            "(",
-            "2017",
-            "onwards",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 4, in"
-    },
     "INST2003": {
         "condition": {
             "original": "Prerequisite: Enrolment in an International Studies program (pre 2017). Or INST1005 and INST1006 and enrolment in an International Studies program (2017+). Or ARTS1250 and enrolment in a Geographical Studies major or minor<br/><br/>",
-            "processed": "Enrolment in an International Studies program (2017). || INST1005 && INST1006 && enrolment in an International Studies program (2017+). || ARTS1250 && enrolment in a Geographical Studies major || minor"
+            "processed": "(3447) (2017). || INST1005 && INST1006 && (3447) (2017+). || ARTS1250 && enrolment in a Geographical Studies major || minor"
         },
         "tokens": [
             "(",
-            "Enrolment",
-            "in",
-            "an",
-            "International",
-            "Studies",
-            "program",
+            "(",
+            "3447",
+            ")",
             "(",
             "2017",
             ")",
@@ -11709,12 +9910,9 @@
             "&&",
             "INST1006",
             "&&",
-            "enrolment",
-            "in",
-            "an",
-            "International",
-            "Studies",
-            "program",
+            "(",
+            "3447",
+            ")",
             "(",
             "2017+",
             ")",
@@ -11732,30 +9930,7 @@
             "minor",
             ")"
         ],
-        "broke at": "Index 2, in"
-    },
-    "INST3900": {
-        "condition": {
-            "original": "Prerequisite: 96 units of credit and enrolment in an International Studies single or double degree program<br/><br/>",
-            "processed": "96UOC && enrolment in an International Studies single || double degree program"
-        },
-        "tokens": [
-            "(",
-            "96UOC",
-            "&&",
-            "enrolment",
-            "in",
-            "an",
-            "International",
-            "Studies",
-            "single",
-            "||",
-            "double",
-            "degree",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 4, in"
+        "broke at": "Index 8, ||"
     },
     "INTA2004": {
         "condition": {
@@ -15008,18 +13183,6 @@
         ],
         "broke at": "Index 5, which"
     },
-    "MATH4001": {
-        "condition": {
-            "original": "Prerequisite: Enrolled in MATH Honours stream<br/><br/>",
-            "processed": "MATH?H"
-        },
-        "tokens": [
-            "(",
-            "MATH?H",
-            ")"
-        ],
-        "broke at": "Index 2, )"
-    },
     "MATS3199": {
         "condition": {
             "original": "Prerequisite: enrolled in a Science program (single or dual) and majoring in Materials Science. Must pass Preparation for WIL modules prior to enrolment. Placement must be related to the student\u2019s major, and approved by the School of Materials Science and Engineering prior to enrolment.<br/>Pre-requisite: 48 units of credit and a minimum 65 WAM.<br/>It is the student\u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year.<br/><br/>",
@@ -15155,42 +13318,6 @@
         ],
         "broke at": "Index 2, complete"
     },
-    "MATS4503": {
-        "condition": {
-            "original": "Prerequisite: Enrolled in Materials Science Honours Plan<br/><br/>",
-            "processed": "MATS?H"
-        },
-        "tokens": [
-            "(",
-            "MATS?H",
-            ")"
-        ],
-        "broke at": "Index 2, )"
-    },
-    "MATS4504": {
-        "condition": {
-            "original": "Prerequisite: Enrolled in Materials Science Honours Plan<br/><br/>",
-            "processed": "MATS?H"
-        },
-        "tokens": [
-            "(",
-            "MATS?H",
-            ")"
-        ],
-        "broke at": "Index 2, )"
-    },
-    "MATS4505": {
-        "condition": {
-            "original": "Prerequisite: Enrolled in Materials Science Honours Plan<br/><br/>",
-            "processed": "MATS?H"
-        },
-        "tokens": [
-            "(",
-            "MATS?H",
-            ")"
-        ],
-        "broke at": "Index 2, )"
-    },
     "MDCN8888": {
         "condition": {
             "original": "Prerequisite: Enrolment in program 3831 Science (Medicine) Honours. <br/><br/>",
@@ -15231,66 +13358,6 @@
         ],
         "broke at": "Index 2, in"
     },
-    "MDIA1000": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in a single or dual award Media program<br/><br/>",
-            "processed": "Enrolment in a single || dual award Media program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "a",
-            "single",
-            "||",
-            "dual",
-            "award",
-            "Media",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "MDIA1002": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in a single or dual award Media program<br/><br/>",
-            "processed": "Enrolment in a single || dual award Media program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "a",
-            "single",
-            "||",
-            "dual",
-            "award",
-            "Media",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "MDIA1003": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in a single or dual award Media program<br/><br/>",
-            "processed": "Enrolment in a single || dual award Media program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "a",
-            "single",
-            "||",
-            "dual",
-            "award",
-            "Media",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
     "MDIA1004": {
         "condition": {
             "original": "Prerequisite: Enrolment in a Media program or Creative Writing Major<br/><br/>",
@@ -15311,74 +13378,10 @@
         ],
         "broke at": "Index 2, in"
     },
-    "MDIA1005": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in a single or dual award Media program<br/><br/>",
-            "processed": "Enrolment in a single || dual award Media program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "a",
-            "single",
-            "||",
-            "dual",
-            "award",
-            "Media",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "MDIA1007": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in a single or dual award Media program<br/><br/>",
-            "processed": "Enrolment in a single || dual award Media program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "a",
-            "single",
-            "||",
-            "dual",
-            "award",
-            "Media",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "MDIA2008": {
-        "condition": {
-            "original": "Prerequisite: 24 units of credit at level 1, and enrolment in a single or dual award Media program<br/><br/>",
-            "processed": "24UOC in L1 && enrolment in a single || dual award Media program"
-        },
-        "tokens": [
-            "(",
-            "24UOC",
-            "in",
-            "L1",
-            "&&",
-            "enrolment",
-            "in",
-            "a",
-            "single",
-            "||",
-            "dual",
-            "award",
-            "Media",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 6, in"
-    },
     "MDIA2010": {
         "condition": {
             "original": "Prerequisite: 24 units of credit at level 1, and enrolment in a single or dual award Media program or enrolment in a Creative Writing major or minor. Equivalent: MDIA3001<br/><br/>",
-            "processed": "24UOC in L1 && enrolment in a single || dual award Media program || enrolment in a Creative Writing major || minor. Equivalent: MDIA3001"
+            "processed": "24UOC in L1 && (4510 || 3454 || 3438 || 3453) || enrolment in a Creative Writing major || minor. Equivalent: MDIA3001"
         },
         "tokens": [
             "(",
@@ -15386,15 +13389,15 @@
             "in",
             "L1",
             "&&",
-            "enrolment",
-            "in",
-            "a",
-            "single",
+            "(",
+            "4510",
             "||",
-            "dual",
-            "award",
-            "Media",
-            "program",
+            "3454",
+            "||",
+            "3438",
+            "||",
+            "3453",
+            ")",
             "||",
             "enrolment",
             "in",
@@ -15408,7 +13411,7 @@
             "MDIA3001",
             ")"
         ],
-        "broke at": "Index 6, in"
+        "broke at": "Index 16, in"
     },
     "MDIA2011": {
         "condition": {
@@ -15548,60 +13551,6 @@
         ],
         "broke at": "Index 5, MDIA"
     },
-    "MDIA3004": {
-        "condition": {
-            "original": "Prerequisite: 66 units of credit overall, and enrolment in a single or double degree Media program<br/><br/>",
-            "processed": "66UOC && enrolment in a single || double degree Media program"
-        },
-        "tokens": [
-            "(",
-            "66UOC",
-            "&&",
-            "enrolment",
-            "in",
-            "a",
-            "single",
-            "||",
-            "double",
-            "degree",
-            "Media",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 4, in"
-    },
-    "MDIA3006": {
-        "condition": {
-            "original": "Prerequisite: 66 units of credit overall, including ARTS2065 or ARTS2066 or MDIA2000 or MDIA2001 or MDIA2010, and enrolment in a single or double degree media program<br/><br/>",
-            "processed": "66UOC && ARTS2065 || ARTS2066 || MDIA2000 || MDIA2001 || MDIA2010 && enrolment in a single || double degree media program"
-        },
-        "tokens": [
-            "(",
-            "66UOC",
-            "&&",
-            "ARTS2065",
-            "||",
-            "ARTS2066",
-            "||",
-            "MDIA2000",
-            "||",
-            "MDIA2001",
-            "||",
-            "MDIA2010",
-            "&&",
-            "enrolment",
-            "in",
-            "a",
-            "single",
-            "||",
-            "double",
-            "degree",
-            "media",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 14, in"
-    },
     "MDIA3007": {
         "condition": {
             "original": "Prerequisite: 48 units of credit overall, and enrolment in a Media program, or a Creative Writing, English, FIlm Studies or MCT major or minor. Students must have a WAM of 65 to be eligible for this course.<br/><br/>",
@@ -15673,79 +13622,6 @@
             ")"
         ],
         "broke at": "Index 6, As"
-    },
-    "MDIA3011": {
-        "condition": {
-            "original": "Prerequisites: 66 units of credit overall and enrolment in a single or double degree Media program<br/><br/>",
-            "processed": "66UOC && enrolment in a single || double degree Media program"
-        },
-        "tokens": [
-            "(",
-            "66UOC",
-            "&&",
-            "enrolment",
-            "in",
-            "a",
-            "single",
-            "||",
-            "double",
-            "degree",
-            "Media",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 4, in"
-    },
-    "MDIA4000": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Media honours program<br/><br/>",
-            "processed": "Enrolment in the Media honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Media",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "MDIA4001": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Media honours program<br/><br/>",
-            "processed": "Enrolment in the Media honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Media",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "MDIA4002": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Media honours program<br/><br/>",
-            "processed": "Enrolment in the Media honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Media",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
     },
     "MECH9325": {
         "condition": {
@@ -15905,51 +13781,6 @@
         ],
         "broke at": "Index 2, Thesis"
     },
-    "MUSC1707": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in a Music program.<br/><br/>",
-            "processed": "Enrolment in a Music program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "a",
-            "Music",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "MUSC2703": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in a Music program and either MUSC1701 and MUSC1704, or MUSC1702 and MUSC1705, or MUSC1707 (12 uoc).<br/><br/>",
-            "processed": "Enrolment in a Music program && MUSC1701 && MUSC1704 || MUSC1702 && MUSC1705 || MUSC1707 (12UOC)"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "a",
-            "Music",
-            "program",
-            "&&",
-            "MUSC1701",
-            "&&",
-            "MUSC1704",
-            "||",
-            "MUSC1702",
-            "&&",
-            "MUSC1705",
-            "||",
-            "MUSC1707",
-            "(",
-            "12UOC",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
     "MUSC2801": {
         "condition": {
             "original": "Prerequisite: Enrolment in the Music Creative Practice Stream in a Music program<br/><br/>",
@@ -16088,29 +13919,6 @@
         ],
         "broke at": "Index 1, 24UOC"
     },
-    "MUSC3705": {
-        "condition": {
-            "original": "Prerequisite: MUSC2702 or MUSC2703 (12 uoc), and enrolment in a Music program.<br/><br/>",
-            "processed": "MUSC2702 || MUSC2703 (12UOC) && enrolment in a Music program"
-        },
-        "tokens": [
-            "(",
-            "MUSC2702",
-            "||",
-            "MUSC2703",
-            "(",
-            "12UOC",
-            ")",
-            "&&",
-            "enrolment",
-            "in",
-            "a",
-            "Music",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 9, in"
-    },
     "MUSC3706": {
         "condition": {
             "original": "Prerequisite: MUSC2702 or MUSC2703 (12 uoc), and enrolment in a Music Creative Practice or Music Pedagogy stream in a Music program.<br/><br/>",
@@ -16238,7 +14046,7 @@
     "MUSC3805": {
         "condition": {
             "original": "Prerequisite: 24uoc in MUSC courses and enrolment in a Music single or double degree; or 66 uoc overall and enrolment in a single or double degree Media (S&SP) program<br/><br/>",
-            "processed": "24UOC in MUSC courses && enrolment in a Music single || double degree; || 66UOC && enrolment in a single || double degree Media (S&SP) program"
+            "processed": "24UOC in MUSC courses && enrolment in a Music single || double degree; || 66UOC && (4510 || 3454 || 3438 || 3453) (S&SP) program"
         },
         "tokens": [
             "(",
@@ -16258,14 +14066,15 @@
             "||",
             "66UOC",
             "&&",
-            "enrolment",
-            "in",
-            "a",
-            "single",
+            "(",
+            "4510",
             "||",
-            "double",
-            "degree",
-            "Media",
+            "3454",
+            "||",
+            "3438",
+            "||",
+            "3453",
+            ")",
             "(",
             "S&SP",
             ")",
@@ -16597,17 +14406,18 @@
     "MUSC4102": {
         "condition": {
             "original": "Prerequisite: MUSC4101, and enrolment in a Music program. Or 48 uoc overall including MUSC1602 or MUSC1604, and MUSC2116 and enrolment in a Music major in an Arts program<br/><br/>",
-            "processed": "MUSC4101 && enrolment in a Music program. || 48UOC && MUSC1602 || MUSC1604 && MUSC2116 && enrolment in a Music major in an Arts program"
+            "processed": "MUSC4101 && (MUSC?? || 4508) . || 48UOC && MUSC1602 || MUSC1604 && MUSC2116 && enrolment in a Music major in an Arts program"
         },
         "tokens": [
             "(",
             "MUSC4101",
             "&&",
-            "enrolment",
-            "in",
-            "a",
-            "Music",
-            "program.",
+            "(",
+            "MUSC??",
+            "||",
+            "4508",
+            ")",
+            ".",
             "||",
             "48UOC",
             "&&",
@@ -16628,7 +14438,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 4, in"
+        "broke at": "Index 9, ||"
     },
     "MUSC4705": {
         "condition": {
@@ -17311,146 +15121,6 @@
         ],
         "broke at": "Index 2, complete"
     },
-    "PHYS4141": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in Physics Honours<br/><br/>",
-            "processed": "Enrolment in Physics Honours"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "Physics",
-            "Honours",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "PHYS4142": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in Physics Honours<br/><br/>",
-            "processed": "Enrolment in Physics Honours"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "Physics",
-            "Honours",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "PHYS4144": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in Physics Honours<br/><br/>",
-            "processed": "Enrolment in Physics Honours"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "Physics",
-            "Honours",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "PHYS4145": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in Physics Honours<br/><br/>",
-            "processed": "Enrolment in Physics Honours"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "Physics",
-            "Honours",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "PHYS4146": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in Physics Honours<br/><br/>",
-            "processed": "Enrolment in Physics Honours"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "Physics",
-            "Honours",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "PPEC1001": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in a Politics, Philosophy and Economics program<br/><br/>",
-            "processed": "Enrolment in a Politics, Philosophy && Economics program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "a",
-            "Politics,",
-            "Philosophy",
-            "&&",
-            "Economics",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "PPEC2001": {
-        "condition": {
-            "original": "Prerequisite: 24 units of credit overall, including PPEC1001, and enrolment in a Politics, Philosophy and Economics program<br/><br/>",
-            "processed": "24UOC && PPEC1001 && enrolment in a Politics, Philosophy && Economics program"
-        },
-        "tokens": [
-            "(",
-            "24UOC",
-            "&&",
-            "PPEC1001",
-            "&&",
-            "enrolment",
-            "in",
-            "a",
-            "Politics,",
-            "Philosophy",
-            "&&",
-            "Economics",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 6, in"
-    },
-    "PPEC3001": {
-        "condition": {
-            "original": "Prerequisite: 72 units of credit overall, including PPEC2001, and enrolment in a Politics, Philosophy and Economics program<br/><br/>",
-            "processed": "72UOC && PPEC2001 && enrolment in a Politics, Philosophy && Economics program"
-        },
-        "tokens": [
-            "(",
-            "72UOC",
-            "&&",
-            "PPEC2001",
-            "&&",
-            "enrolment",
-            "in",
-            "a",
-            "Politics,",
-            "Philosophy",
-            "&&",
-            "Economics",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 6, in"
-    },
     "PSYC3199": {
         "condition": {
             "original": "Prerequisite: enrolled in a Science program (single or dual) and completing a Psychology major. Must pass Preparation for WIL modules prior to enrolment. Placement must be related to the student\u2019s Psychology major and approved by the School of Psychology prior to enrolment. <br/>Pre-requisite: 48 units of credit and a minimum 65 WAM. <br/>It is the student\u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year.<br/><br/>",
@@ -17581,54 +15251,6 @@
             ")"
         ],
         "broke at": "Index 2, complete"
-    },
-    "PSYC4072": {
-        "condition": {
-            "original": "Pre-requisite: Enrolled in PSYCAH stream<br/><br/>",
-            "processed": "PSYCAH"
-        },
-        "tokens": [
-            "(",
-            "PSYCAH",
-            ")"
-        ],
-        "broke at": "Index 2, )"
-    },
-    "PSYC4073": {
-        "condition": {
-            "original": "Pre-requisite: Enrolled in PSYCAH stream<br/><br/>",
-            "processed": "PSYCAH"
-        },
-        "tokens": [
-            "(",
-            "PSYCAH",
-            ")"
-        ],
-        "broke at": "Index 2, )"
-    },
-    "PSYC4093": {
-        "condition": {
-            "original": "Pre-requisite: Enrolled in PSYCAH stream<br/><br/>",
-            "processed": "PSYCAH"
-        },
-        "tokens": [
-            "(",
-            "PSYCAH",
-            ")"
-        ],
-        "broke at": "Index 2, )"
-    },
-    "PSYC4103": {
-        "condition": {
-            "original": "Pre-requisite: Enrolled in PSYCAH stream<br/><br/>",
-            "processed": "PSYCAH"
-        },
-        "tokens": [
-            "(",
-            "PSYCAH",
-            ")"
-        ],
-        "broke at": "Index 2, )"
     },
     "SART3405": {
         "condition": {
@@ -17884,95 +15506,6 @@
         ],
         "broke at": "Index 2, Design"
     },
-    "SENG2021": {
-        "condition": {
-            "original": "Prerequisite:  SENG1031 or COMP1531, and enrolment in a BE or BE(Hons) Software Engineering major.<br/><br/>",
-            "processed": "SENG1031 || COMP1531 && (SENG?1 || SENG?H)"
-        },
-        "tokens": [
-            "(",
-            "SENG1031",
-            "||",
-            "COMP1531",
-            "&&",
-            "(",
-            "SENG?1",
-            "||",
-            "SENG?H",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 6, SENG?1"
-    },
-    "SENG2991": {
-        "condition": {
-            "original": "Currently enrolled in Program 3707 in the SENGAH stream <br/>and in an approved workplace arrangement <br/>and completed COMP1511, COMP1531 and COMP2521.<br/><br/>",
-            "processed": "COMP1511 && COMP1531 && COMP2521 && 3707 && SENGAH",
-            "handbook_note": "Must be in an approved workplace arrangement"
-        },
-        "tokens": [
-            "(",
-            "COMP1511",
-            "&&",
-            "COMP1531",
-            "&&",
-            "COMP2521",
-            "&&",
-            "3707",
-            "&&",
-            "SENGAH",
-            ")"
-        ],
-        "broke at": "Index 10, )"
-    },
-    "SENG3991": {
-        "condition": {
-            "original": "Currently enrolled in Program 3707 in the SENGAH stream and in the Co-op program<br/>and completed SENG2011 and SENG2021 and DESN2000 and COMP2511 and COMP2041.<br/><br/>Successful completion of SEN2991 and attendance of IT Reflection Workshop (facilitated by Co-op Program) are a<br/>prerequisite for this course.<br/><br/>",
-            "processed": "3707 && SENGAH && SENG2011 && SENG2021 && DESN2000 && COMP2511 && COMP2041 && SENG2991",
-            "handbook_note": "Must currently be enrolled in the Co-op program and completed attendance of IT Reflection Workshop (facilitated by Co-op Program)"
-        },
-        "tokens": [
-            "(",
-            "3707",
-            "&&",
-            "SENGAH",
-            "&&",
-            "SENG2011",
-            "&&",
-            "SENG2021",
-            "&&",
-            "DESN2000",
-            "&&",
-            "COMP2511",
-            "&&",
-            "COMP2041",
-            "&&",
-            "SENG2991",
-            ")"
-        ],
-        "broke at": "Index 4, &&"
-    },
-    "SENG3992": {
-        "condition": {
-            "original": "Currently enrolled in Program 3707 in the SENGAH stream and in the Co-op program<br/>and completed SENG3011.<br/><br/>Successful completion of SEN2991 and SENG3991are a prerequisite for this course<br/><br/>",
-            "processed": "3707 && SENGAH && SENG3011 && SENG2991 && SENG3991",
-            "handbook_note": "Must currently be enrolled in the Co-op program"
-        },
-        "tokens": [
-            "(",
-            "3707",
-            "&&",
-            "SENGAH",
-            "&&",
-            "SENG3011",
-            "&&",
-            "SENG2991",
-            "&&",
-            "SENG3991",
-            ")"
-        ],
-        "broke at": "Index 4, &&"
-    },
     "SENG3993": {
         "condition": {
             "original": "Currently enrolled in Program 3707 in the SENGAH stream and in the Co-op program and completed SENG2011 and SENG2021 and DESN2000 and COMP2511 and COMP2041.<br/><br/>Successful completion of SENG2991 and attendance at IT Reflection Workshop (facilitated by Co-op Program) are a prerequisite for this course.<br/><br/>",
@@ -18062,136 +15595,10 @@
         ],
         "broke at": "Index 2, SENG2991"
     },
-    "SOCW2003": {
-        "condition": {
-            "original": "Prerequisite: SOCW1001 and SOCW1004, and enrolment in a Social Work program<br/><br/>",
-            "processed": "SOCW1001 && SOCW1004 && enrolment in a Social Work program"
-        },
-        "tokens": [
-            "(",
-            "SOCW1001",
-            "&&",
-            "SOCW1004",
-            "&&",
-            "enrolment",
-            "in",
-            "a",
-            "Social",
-            "Work",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 6, in"
-    },
-    "SOCW2006": {
-        "condition": {
-            "original": "Prerequisite: SOCW1001 and enrolment in a Social Work Program<br/><br/>",
-            "processed": "SOCW1001 && enrolment in a Social Work Program"
-        },
-        "tokens": [
-            "(",
-            "SOCW1001",
-            "&&",
-            "enrolment",
-            "in",
-            "a",
-            "Social",
-            "Work",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 4, in"
-    },
-    "SOCW2008": {
-        "condition": {
-            "original": "Prerequisite: SOCW1001 and SOCW1004, and enrolment in a Social Work program<br/><br/>",
-            "processed": "SOCW1001 && SOCW1004 && enrolment in a Social Work program"
-        },
-        "tokens": [
-            "(",
-            "SOCW1001",
-            "&&",
-            "SOCW1004",
-            "&&",
-            "enrolment",
-            "in",
-            "a",
-            "Social",
-            "Work",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 6, in"
-    },
-    "SOCW2009": {
-        "condition": {
-            "original": "Prerequisite: SOCW2003 and enrolment in a Social Work Program<br/><br/>",
-            "processed": "SOCW2003 && enrolment in a Social Work Program"
-        },
-        "tokens": [
-            "(",
-            "SOCW2003",
-            "&&",
-            "enrolment",
-            "in",
-            "a",
-            "Social",
-            "Work",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 4, in"
-    },
-    "SOCW2100": {
-        "condition": {
-            "original": "Prerequisite: SOCW1001 and enrolment in a Social Work Program<br/><br/>",
-            "processed": "SOCW1001 && enrolment in a Social Work Program"
-        },
-        "tokens": [
-            "(",
-            "SOCW1001",
-            "&&",
-            "enrolment",
-            "in",
-            "a",
-            "Social",
-            "Work",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 4, in"
-    },
-    "SOCW3006": {
-        "condition": {
-            "original": "Prerequisite: SOCW3009 and SOCW3011, or SOCW3009, SOCW3012 and SOCW3013, and enrolment in a Social Work program.  Excluded: Students enrolled in 4787 Social Work (Honours)/Law<br/><br/>",
-            "processed": "SOCW3009 && SOCW3011 || SOCW3009 && SOCW3012 && SOCW3013 && enrolment in a Social Work program"
-        },
-        "tokens": [
-            "(",
-            "SOCW3009",
-            "&&",
-            "SOCW3011",
-            "||",
-            "SOCW3009",
-            "&&",
-            "SOCW3012",
-            "&&",
-            "SOCW3013",
-            "&&",
-            "enrolment",
-            "in",
-            "a",
-            "Social",
-            "Work",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 12, in"
-    },
     "SOCW3009": {
         "condition": {
             "original": "Prerequisite: ARTS1753 or ARTS1870 or ARTS1871 and PSYC1001, SOCW2006, SOCW2008, SOCW2009, SOCW2100, SOCW3012, SOSS/SRAP1000, SOSS/SRAP1001, ARTS2871 or SRAP2002, and enrolment in a Social Work program. Corequisite: SOCW3013<br/><br/>",
-            "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOCW3012 || SOSS/SRAP1000 || SOSS/SRAP1001 || ARTS2871 || SRAP2002 && enrolment in a Social Work program && [SOCW3013]"
+            "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOCW3012 || SOSS/SRAP1000 || SOSS/SRAP1001 || ARTS2871 || SRAP2002 && (4033) && [SOCW3013]"
         },
         "tokens": [
             "(",
@@ -18221,12 +15628,9 @@
             "||",
             "SRAP2002",
             "&&",
-            "enrolment",
-            "in",
-            "a",
-            "Social",
-            "Work",
-            "program",
+            "(",
+            "4033",
+            ")",
             "&&",
             "[",
             "SOCW3013",
@@ -18235,37 +15639,10 @@
         ],
         "broke at": "Index 20, ||"
     },
-    "SOCW3010": {
-        "condition": {
-            "original": "Prerequisite: SOCW3009 and SOCW3011, or SOCW3009, SOCW3012 and SOCW3013, and enrolment in a Social Work program<br/><br/>",
-            "processed": "SOCW3009 && SOCW3011 || SOCW3009 && SOCW3012 && SOCW3013 && enrolment in a Social Work program"
-        },
-        "tokens": [
-            "(",
-            "SOCW3009",
-            "&&",
-            "SOCW3011",
-            "||",
-            "SOCW3009",
-            "&&",
-            "SOCW3012",
-            "&&",
-            "SOCW3013",
-            "&&",
-            "enrolment",
-            "in",
-            "a",
-            "Social",
-            "Work",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 12, in"
-    },
     "SOCW3012": {
         "condition": {
             "original": "Prerequisite: ARTS1753 or ARTS1870 or ARTS1871 and PSYC1001, SOCW2006, SOCW2008, SOCW2009, SOCW2100, SOSS/SRAP1000, SOSS/SRAP1001,  ARTS2871 or SOSS/SRAP2002, and enrolment in a Social Work program. Equivalent: SOCW3001 and SOCW3011<br/><br/>",
-            "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOSS/SRAP1000 || SOSS/SRAP1001 || ARTS2871 || SOSS/SRAP2002 && enrolment in a Social Work program. Equivalent: SOCW3001 && SOCW3011"
+            "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOSS/SRAP1000 || SOSS/SRAP1001 || ARTS2871 || SOSS/SRAP2002 && (4033) . Equivalent: SOCW3001 && SOCW3011"
         },
         "tokens": [
             "(",
@@ -18293,12 +15670,10 @@
             "||",
             "SOSS/SRAP2002",
             "&&",
-            "enrolment",
-            "in",
-            "a",
-            "Social",
-            "Work",
-            "program.",
+            "(",
+            "4033",
+            ")",
+            ".",
             "Equivalent:",
             "SOCW3001",
             "&&",
@@ -18310,7 +15685,7 @@
     "SOCW3013": {
         "condition": {
             "original": "Prerequisite: ARTS1753 or ARTS1870 or ARTS1871 and PSYC1001, SOCW2006, SOCW2008, SOCW2009, SOCW2100, SOCW3012, SOSS1000, SOSS1001, ARTS2871 or SRAP2002, and enrolment in a Social Work program. Equivalent: SOCW3001 and SOCW3011. Corequisite: SOCW3009<br/><br/>",
-            "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOCW3012 || SOSS1000 || SOSS1001 || ARTS2871 || SRAP2002 && enrolment in a Social Work program. Equivalent: SOCW3001 && SOCW3011 && [SOCW3009]"
+            "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOCW3012 || SOSS1000 || SOSS1001 || ARTS2871 || SRAP2002 && (4033) . Equivalent: SOCW3001 && SOCW3011 && [SOCW3009]"
         },
         "tokens": [
             "(",
@@ -18340,12 +15715,10 @@
             "||",
             "SRAP2002",
             "&&",
-            "enrolment",
-            "in",
-            "a",
-            "Social",
-            "Work",
-            "program.",
+            "(",
+            "4033",
+            ")",
+            ".",
             "Equivalent:",
             "SOCW3001",
             "&&",
@@ -18356,12 +15729,12 @@
             "]",
             ")"
         ],
-        "broke at": "Index 28, in"
+        "broke at": "Index 31, Equivalent:"
     },
     "SOCW4003": {
         "condition": {
             "original": "Prerequisite: SOCW3006, SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work program. Or SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work/Law program<br/><br/>",
-            "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && enrolment in a Social Work program. || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && enrolment in a Social Work/Law program"
+            "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) . || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /Law program"
         },
         "tokens": [
             "(",
@@ -18373,12 +15746,10 @@
             "||",
             "ARTS2871",
             "&&",
-            "enrolment",
-            "in",
-            "a",
-            "Social",
-            "Work",
-            "program.",
+            "(",
+            "4033",
+            ")",
+            ".",
             "||",
             "SOCW3010",
             "&&",
@@ -18386,11 +15757,10 @@
             "||",
             "ARTS2871",
             "&&",
-            "enrolment",
-            "in",
-            "a",
-            "Social",
-            "Work/Law",
+            "(",
+            "4033",
+            ")",
+            "/Law",
             "program",
             ")"
         ],
@@ -18399,7 +15769,7 @@
     "SOCW4011": {
         "condition": {
             "original": "Prerequisite: SOCW3006, SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work program. Or SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work/Law program<br/><br/>",
-            "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && enrolment in a Social Work program. || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && enrolment in a Social Work/Law program"
+            "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) . || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /Law program"
         },
         "tokens": [
             "(",
@@ -18411,12 +15781,10 @@
             "||",
             "ARTS2871",
             "&&",
-            "enrolment",
-            "in",
-            "a",
-            "Social",
-            "Work",
-            "program.",
+            "(",
+            "4033",
+            ")",
+            ".",
             "||",
             "SOCW3010",
             "&&",
@@ -18424,11 +15792,10 @@
             "||",
             "ARTS2871",
             "&&",
-            "enrolment",
-            "in",
-            "a",
-            "Social",
-            "Work/Law",
+            "(",
+            "4033",
+            ")",
+            "/Law",
             "program",
             ")"
         ],
@@ -18437,7 +15804,7 @@
     "SOCW4012": {
         "condition": {
             "original": "Prerequisite: SOCW3006, SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work program. Or SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work/Law program<br/><br/>",
-            "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && enrolment in a Social Work program. || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && enrolment in a Social Work/Law program"
+            "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) . || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /Law program"
         },
         "tokens": [
             "(",
@@ -18449,12 +15816,10 @@
             "||",
             "ARTS2871",
             "&&",
-            "enrolment",
-            "in",
-            "a",
-            "Social",
-            "Work",
-            "program.",
+            "(",
+            "4033",
+            ")",
+            ".",
             "||",
             "SOCW3010",
             "&&",
@@ -18462,11 +15827,10 @@
             "||",
             "ARTS2871",
             "&&",
-            "enrolment",
-            "in",
-            "a",
-            "Social",
-            "Work/Law",
+            "(",
+            "4033",
+            ")",
+            "/Law",
             "program",
             ")"
         ],
@@ -18475,7 +15839,7 @@
     "SOCW4013": {
         "condition": {
             "original": "Prerequisite: SOCW3006, SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work program. Or SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work/Law program<br/><br/>",
-            "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && enrolment in a Social Work program. || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && enrolment in a Social Work/Law program"
+            "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) . || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /Law program"
         },
         "tokens": [
             "(",
@@ -18487,12 +15851,10 @@
             "||",
             "ARTS2871",
             "&&",
-            "enrolment",
-            "in",
-            "a",
-            "Social",
-            "Work",
-            "program.",
+            "(",
+            "4033",
+            ")",
+            ".",
             "||",
             "SOCW3010",
             "&&",
@@ -18500,11 +15862,10 @@
             "||",
             "ARTS2871",
             "&&",
-            "enrolment",
-            "in",
-            "a",
-            "Social",
-            "Work/Law",
+            "(",
+            "4033",
+            ")",
+            "/Law",
             "program",
             ")"
         ],
@@ -18513,7 +15874,7 @@
     "SOCW4015": {
         "condition": {
             "original": "Prerequisite: 168 UOC overall, SOCW4003, SOCW4011, SOCW4012, SOCW4013, enrolment in a Social Work program and an overall WAM of 70. Corequisite: SOCW4018<br/><br/>",
-            "processed": "168UOC , SOCW4003, SOCW4011, SOCW4012, SOCW4013, enrolment in a Social Work program && an overall 70WAM && [SOCW4018]"
+            "processed": "168UOC , SOCW4003, SOCW4011, SOCW4012, SOCW4013, (4033) && an overall 70WAM && [SOCW4018]"
         },
         "tokens": [
             "(",
@@ -18523,12 +15884,9 @@
             "SOCW4011,",
             "SOCW4012,",
             "SOCW4013,",
-            "enrolment",
-            "in",
-            "a",
-            "Social",
-            "Work",
-            "program",
+            "(",
+            "4033",
+            ")",
             "&&",
             "an",
             "overall",
@@ -18544,7 +15902,7 @@
     "SOCW4016": {
         "condition": {
             "original": "Prerequisite: 168 units of credit overall, including SOCW4003, SOCW4011, SOCW4012, and SOCW4013, and enrolment in Social Work program. Corequisite: SOCW4018<br/><br/>",
-            "processed": "168UOC && SOCW4003, SOCW4011, SOCW4012 && SOCW4013 && enrolment in Social Work program && [SOCW4018]"
+            "processed": "168UOC && SOCW4003, SOCW4011, SOCW4012 && SOCW4013 && (4033) && [SOCW4018]"
         },
         "tokens": [
             "(",
@@ -18556,11 +15914,9 @@
             "&&",
             "SOCW4013",
             "&&",
-            "enrolment",
-            "in",
-            "Social",
-            "Work",
-            "program",
+            "(",
+            "4033",
+            ")",
             "&&",
             "[",
             "SOCW4018",
@@ -18572,7 +15928,7 @@
     "SOCW4017": {
         "condition": {
             "original": "Prerequisite: SOCW4003, SOCW4011, SOCW4012, and enrolment in a Social Work program. Corequisite: SOCW4013. Equivalent: SOCW4014, SOCW4001<br/><br/>",
-            "processed": "SOCW4003 && SOCW4011 && SOCW4012 && enrolment in a Social Work program && [SOCW4013. Equivalent: SOCW4014, SOCW4001]"
+            "processed": "SOCW4003 && SOCW4011 && SOCW4012 && (4033) && [SOCW4013. Equivalent: SOCW4014, SOCW4001]"
         },
         "tokens": [
             "(",
@@ -18582,12 +15938,9 @@
             "&&",
             "SOCW4012",
             "&&",
-            "enrolment",
-            "in",
-            "a",
-            "Social",
-            "Work",
-            "program",
+            "(",
+            "4033",
+            ")",
             "&&",
             "[",
             "SOCW4013.",
@@ -18597,12 +15950,12 @@
             "]",
             ")"
         ],
-        "broke at": "Index 8, in"
+        "broke at": "Index 12, SOCW4013."
     },
     "SOCW4018": {
         "condition": {
             "original": "Prerequisite: SOCW4003, SOCW4011, SOCW4012, SOCW4013 and enrolment in a Social Work program. Corequisite: SOCW4015 or SOCW4016. Equivalent: SOCW4014, SOCW4001<br/><br/>",
-            "processed": "SOCW4003 && SOCW4011 && SOCW4012 && SOCW4013 && enrolment in a Social Work program && [SOCW4015 || SOCW4016. Equivalent: SOCW4014, SOCW4001]"
+            "processed": "SOCW4003 && SOCW4011 && SOCW4012 && SOCW4013 && (4033) && [SOCW4015 || SOCW4016. Equivalent: SOCW4014, SOCW4001]"
         },
         "tokens": [
             "(",
@@ -18614,12 +15967,9 @@
             "&&",
             "SOCW4013",
             "&&",
-            "enrolment",
-            "in",
-            "a",
-            "Social",
-            "Work",
-            "program",
+            "(",
+            "4033",
+            ")",
             "&&",
             "[",
             "SOCW4015",
@@ -18631,7 +15981,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 10, in"
+        "broke at": "Index 16, SOCW4016."
     },
     "SOLA4951": {
         "condition": {
@@ -18864,7 +16214,7 @@
     "SOSS3006": {
         "condition": {
             "original": "Prerequisite: SOSS/SRAP1000, SOSS/SRAP1001, SOSS/SRAP2001, DIPP1112 or CDEV1112, and enrolment in a Social Science or Social Research and Policy program.<br/>Equivalent: SRAP3006<br/><br/>",
-            "processed": "SOSS/SRAP1000, SOSS/SRAP1001, SOSS/SRAP2001, DIPP1112 || CDEV1112 && enrolment in a Social Science || Social Research && Policy program. Equivalent: SRAP3006"
+            "processed": "SOSS/SRAP1000, SOSS/SRAP1001, SOSS/SRAP2001, DIPP1112 || CDEV1112 && (3321 || 3420) . Equivalent: SRAP3006"
         },
         "tokens": [
             "(",
@@ -18875,46 +16225,17 @@
             "||",
             "CDEV1112",
             "&&",
-            "enrolment",
-            "in",
-            "a",
-            "Social",
-            "Science",
+            "(",
+            "3321",
             "||",
-            "Social",
-            "Research",
-            "&&",
-            "Policy",
-            "program.",
+            "3420",
+            ")",
+            ".",
             "Equivalent:",
             "SRAP3006",
             ")"
         ],
         "broke at": "Index 2, SOSS/SRAP1001,"
-    },
-    "SOSS3007": {
-        "condition": {
-            "original": "Prerequisite: SOSS1001 and enrolment in a Social Science or Social Research and Policy program<br/><br/>",
-            "processed": "SOSS1001 && enrolment in a Social Science || Social Research && Policy program"
-        },
-        "tokens": [
-            "(",
-            "SOSS1001",
-            "&&",
-            "enrolment",
-            "in",
-            "a",
-            "Social",
-            "Science",
-            "||",
-            "Social",
-            "Research",
-            "&&",
-            "Policy",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 4, in"
     },
     "SOSS4051": {
         "condition": {

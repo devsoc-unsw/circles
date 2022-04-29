@@ -4,8 +4,7 @@ import {
 } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { DeleteOutlined } from "@ant-design/icons";
-import { ReactComponent as PlannerIcon } from "../assets/planner-icon.svg";
+import { CalendarOutlined, DeleteOutlined } from "@ant-design/icons";
 import "./plannerCart.less";
 import { addTab } from "../../reducers/courseTabsSlice";
 import { removeAllCourses, removeCourse } from "../../reducers/plannerSlice";
@@ -86,7 +85,8 @@ export const PlannerCart = () => {
       <Tooltip title="Your courses">
         <Button
           type="primary"
-          icon={<PlannerIcon />}
+          icon={<CalendarOutlined style={{ fontSize: "26px" }} />}
+          size="large"
           onClick={() => setOpenMenu(!openMenu)}
         />
       </Tooltip>
