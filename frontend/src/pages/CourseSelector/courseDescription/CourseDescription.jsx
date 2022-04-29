@@ -15,7 +15,7 @@ import infographic from "../../../images/infographicFontIndependent.svg";
 import axiosRequest from "../../../axios";
 import { setCourse } from "../../../reducers/coursesSlice";
 import { addToUnplanned, removeCourse } from "../../../reducers/plannerSlice";
-import CollapsibleHeader from "./Collapsible";
+import Collapsible from "./Collapsible";
 
 const { Title, Text } = Typography;
 const CourseAttribute = ({ title, content }) => (
@@ -204,7 +204,7 @@ const CourseDescription = ({ structure }) => {
               </Text>
               )
             }
-            <CollapsibleHeader
+            <Collapsible
               title="Overview"
             >
               <Space direction="vertical" style={{ marginBottom: "1rem" }}>
@@ -213,8 +213,8 @@ const CourseDescription = ({ structure }) => {
                   <div dangerouslySetInnerHTML={{ __html: course.description }} />
                 </Text>
               </Space>
-            </CollapsibleHeader>
-            <CollapsibleHeader
+            </Collapsible>
+            <Collapsible
               title="Requirements"
             >
               <div>
@@ -225,8 +225,8 @@ const CourseDescription = ({ structure }) => {
                   </Text>
                 </Space>
               </div>
-            </CollapsibleHeader>
-            <CollapsibleHeader
+            </Collapsible>
+            <Collapsible
               title="Courses you have done to unlock this course"
             >
               <div>
@@ -240,8 +240,8 @@ const CourseDescription = ({ structure }) => {
                   <p className="text">None</p>
                 )}
               </div>
-            </CollapsibleHeader>
-            <CollapsibleHeader
+            </Collapsible>
+            <Collapsible
               title="Doing this course will directly unlock these courses"
             >
               <div>
@@ -253,8 +253,8 @@ const CourseDescription = ({ structure }) => {
                   <p className="text">None</p>
                 )}
               </div>
-            </CollapsibleHeader>
-            <CollapsibleHeader
+            </Collapsible>
+            <Collapsible
               title="Doing this course will indirectly unlock these courses"
               initiallyCollapsed
             >
@@ -267,7 +267,7 @@ const CourseDescription = ({ structure }) => {
                   <p className="text">None</p>
                 )}
               </div>
-            </CollapsibleHeader>
+            </Collapsible>
           </div>
           <div>
             {course.faculty && (

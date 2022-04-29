@@ -4,7 +4,7 @@ import { LeftOutlined } from "@ant-design/icons";
 
 const { Title } = Typography;
 
-const CollapsibleHeader = ({ initiallyCollapsed, title, children }) => {
+const Collapsible = ({ initiallyCollapsed, title, children }) => {
   const [isCollapsed, setIsCollapsed] = useState(initiallyCollapsed);
 
   const toggleCollapse = () => {
@@ -30,4 +30,4 @@ const CollapsibleHeader = ({ initiallyCollapsed, title, children }) => {
   );
 };
 
-export default CollapsibleHeader;
+export default Collapsible;
