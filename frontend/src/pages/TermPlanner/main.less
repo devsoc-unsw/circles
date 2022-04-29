@@ -1,23 +1,23 @@
 html,
 body {
   height: 100%;
+  --option-header-height: 65px;
 }
 
 .content {
   @small: ~"(max-width: 1400px)";
 
   .mainContainer {
-    height: calc(100vh - var(--navbar-height));
+    height: calc(100vh - var(--navbar-height) - var(--option-header-height));
+    padding-top: 0.5em;
     overflow: auto;
   }
 
   .plannerContainer {
     display: flex;
     // align-items: center;
-    margin-top: 0.5em;
+    margin: 1em 1em 1em 1em;
     justify-content: center;
-    margin-left: 1em;
-    margin-right: 1em;
   }
   .unplannedColumn {
     overflow-y: auto;
@@ -157,8 +157,9 @@ body {
   }
 
   .settingsButton {
-    margin-left: 1em;
-    margin-top: 1em;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     border: 1px solid #cecece;
     border-radius: 0.5em;
     padding: 0.5em 0.7em 0.3em 0.7em;
@@ -219,7 +220,7 @@ body {
     grid-column-end: 3;
   }
   .helpButton {
-    margin-right: 1em;
+    margin-right: 10px;
   }
   .helpGif {
     width: 100%;
@@ -292,7 +293,12 @@ body {
 
   .optionsHeader {
     display: flex;
+    height: var(--option-header-height);
+    padding-left: 14px;
+    padding-right: 14px;
+    background-color: #e4e3e3;
     justify-content: space-between;
+    align-items: center;
   }
 
 
