@@ -1,7 +1,6 @@
 html,
 body {
   height: 100%;
-  --option-header-height: 65px;
 }
 
 .content {
@@ -9,14 +8,14 @@ body {
 
   .mainContainer {
     height: calc(100vh - var(--navbar-height) - var(--option-header-height));
-    padding-top: 0.5em;
+    padding-top: 10px;
     overflow: auto;
   }
 
   .plannerContainer {
     display: flex;
     // align-items: center;
-    margin: 1em 1em 1em 1em;
+    margin: 15px;
     justify-content: center;
   }
   .unplannedColumn {
@@ -191,7 +190,7 @@ body {
   }
 
   .helpMenu {
-    padding: 1em;
+    padding: 15px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5em;
@@ -208,7 +207,7 @@ body {
     image-rendering: auto;
     border-radius: 12px;
     cursor: help;
-    transition: box-shadow 0.5s;
+    transition: box-shadow 0.3s ease;
   }
   
   .shadow {
