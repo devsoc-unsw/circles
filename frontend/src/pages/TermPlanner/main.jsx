@@ -126,7 +126,7 @@ const TermPlanner = () => {
   };
 
   return (
-    <div className="mainContainer">
+    <div>
       <OptionsHeader
         areYearsHidden={areYearsHidden}
         plannerRef={plannerPic}
@@ -134,66 +134,68 @@ const TermPlanner = () => {
         setSuppress={setSuppress}
         suppress={suppress}
       />
-      {isLoading ? (
-        <SkeletonPlanner />
-      ) : (
-        <DragDropContext
-          onDragEnd={(result) => {
-            handleOnDragEnd(result);
-            updateAllWarnings(
-              dispatch,
-              { years, startYear, completedTerms },
-              { programCode, specialisation, minor },
-              suppress,
-            );
-          }}
-          onDragStart={handleOnDragStart}
-        >
-          <div className="plannerContainer">
-            <div
-              className={`gridContainer ${isSummerEnabled && "summerGrid"}`}
-              ref={plannerPic}
-            >
-              <div className="gridItem" />
-              {isSummerEnabled && <div className="gridItem">Summer</div>}
-              <div className="gridItem">Term 1</div>
-              <div className="gridItem">Term 2</div>
-              <div className="gridItem">Term 3</div>
+      <div className="mainContainer">
+        {isLoading ? (
+          <SkeletonPlanner />
+        ) : (
+          <DragDropContext
+            onDragEnd={(result) => {
+              handleOnDragEnd(result);
+              updateAllWarnings(
+                dispatch,
+                { years, startYear, completedTerms },
+                { programCode, specialisation, minor },
+                suppress,
+              );
+            }}
+            onDragStart={handleOnDragStart}
+          >
+            <div className="plannerContainer">
+              <div
+                className={`gridContainer ${isSummerEnabled && "summerGrid"}`}
+                ref={plannerPic}
+              >
+                <div className="gridItem" />
+                {isSummerEnabled && <div className="gridItem">Summer</div>}
+                <div className="gridItem">Term 1</div>
+                <div className="gridItem">Term 2</div>
+                <div className="gridItem">Term 3</div>
 
-              {years.map((year, index) => {
-                const iYear = parseInt(startYear, 10) + parseInt(index, 10);
-                if (hidden[iYear]) return null;
-                return (
-                  <React.Fragment key={index}>
-                    <div className="yearContainer gridItem">
-                      <div
-                        className={`year ${currYear === iYear && "currYear"}`}
-                      >
-                        {iYear}
+                {years.map((year, index) => {
+                  const iYear = parseInt(startYear, 10) + parseInt(index, 10);
+                  if (hidden[iYear]) return null;
+                  return (
+                    <React.Fragment key={index}>
+                      <div className="yearContainer gridItem">
+                        <div
+                          className={`year ${currYear === iYear && "currYear"}`}
+                        >
+                          {iYear}
+                        </div>
+                        <HideYearTooltip year={iYear} />
                       </div>
-                      <HideYearTooltip year={iYear} />
-                    </div>
-                    {Object.keys(year).map((term) => {
-                      const key = iYear + term;
-                      if (!isSummerEnabled && term === "T0") return null;
-                      return (
-                        <TermBox
-                          key={key}
-                          name={key}
-                          courses={year[term]}
-                          termsOffered={termsOffered}
-                          isDragging={isDragging}
-                        />
-                      );
-                    })}
-                  </React.Fragment>
-                );
-              })}
+                      {Object.keys(year).map((term) => {
+                        const key = iYear + term;
+                        if (!isSummerEnabled && term === "T0") return null;
+                        return (
+                          <TermBox
+                            key={key}
+                            name={key}
+                            courses={year[term]}
+                            termsOffered={termsOffered}
+                            isDragging={isDragging}
+                          />
+                        );
+                      })}
+                    </React.Fragment>
+                  );
+                })}
+              </div>
+              <UnplannedColumn />
             </div>
-            <UnplannedColumn />
-          </div>
-        </DragDropContext>
-      )}
+          </DragDropContext>
+        )}
+      </div>
     </div>
   );
 };

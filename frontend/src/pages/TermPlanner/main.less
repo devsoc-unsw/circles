@@ -7,17 +7,16 @@ body {
   @small: ~"(max-width: 1400px)";
 
   .mainContainer {
-    height: calc(100vh - 70px);
+    height: calc(100vh - var(--navbar-height) - var(--option-header-height));
+    padding-top: 10px;
     overflow: auto;
   }
 
   .plannerContainer {
     display: flex;
     // align-items: center;
-    margin-top: 0.5em;
+    margin: 15px;
     justify-content: center;
-    margin-left: 1em;
-    margin-right: 1em;
   }
   .unplannedColumn {
     overflow-y: auto;
@@ -169,6 +168,7 @@ body {
   }
 
   .settingsTitle {
+    font-size: 1.75em;
     margin-bottom: 0;
     text-align: left;
   }
@@ -185,11 +185,12 @@ body {
   }
 
   .settingsSubtitle {
+    font-size: 1.1em;
     margin-bottom: 0;
   }
 
   .helpMenu {
-    padding: 1em;
+    padding: 15px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5em;
@@ -206,8 +207,9 @@ body {
     image-rendering: auto;
     border-radius: 12px;
     cursor: help;
+    transition: box-shadow 0.3s ease;
   }
-
+  
   .shadow {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }

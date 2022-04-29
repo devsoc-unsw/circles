@@ -1,6 +1,11 @@
 .options-header {
   display: flex;
+  height: var(--option-header-height);
+  padding-left: 20px;
+  padding-right: 20px;
+  border-bottom-style: inset;
   justify-content: space-between;
+  align-items: center;
 }
 
 .left-buttons {
@@ -8,8 +13,9 @@
 }
 
 .settings-button {
-  margin-left: 1em;
-  margin-top: 1em;
+  margin-left: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   border: 1px solid #cecece;
   border-radius: 0.5em;
   width: 40px;
@@ -23,12 +29,16 @@
   }
 }
 
+.filled {
+  color: #9254de;
+}
+
 .settings-icon {
   font-size: 20px;
 }
 
 .help-button {
-  margin-right: 1em;
+  margin-right: 10px;
 }
 
 .light {
