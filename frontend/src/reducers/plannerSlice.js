@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import { createSlice } from "@reduxjs/toolkit";
 
 // set up hidden object
@@ -102,6 +101,7 @@ const plannerSlice = createSlice({
       }
       localStorage.setItem("planner", JSON.stringify(state));
     },
+    // NOTE: think about if you would want to call the backend first to fetch dependant courses
     removeCourse: (state, action) => {
       // Remove courses from years and courses
       if (state.courses[action.payload]) {

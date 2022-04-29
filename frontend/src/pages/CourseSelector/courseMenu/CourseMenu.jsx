@@ -3,9 +3,9 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { Tooltip, Menu, Button } from "antd";
 import "./CourseMenu.less";
-import { IoWarningOutline } from "react-icons/io5";
 import { AiOutlinePlus } from "react-icons/ai";
 import { motion, AnimatePresence } from "framer-motion/dist/framer-motion";
+import { WarningOutlined } from "@ant-design/icons";
 import { ReactComponent as Padlock } from "../../../images/padlock.svg";
 import axiosRequest from "../../../axios";
 import prepareUserPayload from "../helper";
@@ -226,7 +226,7 @@ const MenuItem = ({
           <div>
             {`${courseCode} `}
             {!accurate && (
-              <WarningIcon
+              <TooltipWarningIcon
                 text="We couldn't parse the requirement for this course. Please manually check if you have the correct prerequisites to unlock it."
               />
             )}
@@ -249,12 +249,12 @@ const MenuItem = ({
   );
 };
 
-const WarningIcon = ({ text }) => (
+const TooltipWarningIcon = ({ text }) => (
   <Tooltip placement="top" title={text}>
-    <IoWarningOutline
-      size="1em"
-      color="#DC9930"
+    <WarningOutlined
       style={{
+        color: "#DC9930",
+        fontSize: "16px",
         marginLeft: "0.3em",
         textAlign: "center",
         top: "calc(50% - 0.5em)",
