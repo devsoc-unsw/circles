@@ -7,6 +7,7 @@
 
 import copy
 from typing import Optional
+import re
 
 from algorithms.objects.categories import AnyCategory, Category
 
@@ -76,7 +77,15 @@ class User:
 
     def in_specialisation(self, specialisation: str):
         """ Determines if the user is in the specialisation """
-        return specialisation in self.specialisations
+        # Escape specialisations and replace '?'s with wildcards
+        wildcarded = re.escape(specialisation).replace('\?', '[A-Z0-9]')
+        pat = f"^{wildcarded}$"
+
+        # Search for it in the users' specialisations
+        return any(
+            bool(re.match(pat, spec, flags=re.IGNORECASE))
+            for spec in self.specialisations
+        )
 
     def load_json(self, data):
         """ Given the user data, correctly loads it into this user class """
@@ -100,7 +109,6 @@ class User:
         Will return `None` is the user has taken no uoc.
         """
         total_wam, total_uoc = 0, 0
-
         for course, (uoc, grade) in self.courses.items():
             if grade is not None and category.match_definition(course):
                 total_uoc += uoc
@@ -116,7 +124,7 @@ class User:
             if category.match_definition(course)
         )
 
-    def unselect_course(self, target, locked) -> list[str]:
+    def unselect_course(self, target: str) -> list[str]:
         """
         Given a course to unselect and a list of locked courses, remove the
         courses from the user and return a list of courses which would be
@@ -134,7 +142,6 @@ class User:
         cached_conditions = {
             course: create_condition(CACHED_CONDITIONS_TOKENS[course], course)
             for course in self.courses
-            if not course in locked
         }
 
         affected_courses = []

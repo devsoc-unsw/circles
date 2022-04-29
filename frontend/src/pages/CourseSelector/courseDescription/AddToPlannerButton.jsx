@@ -2,7 +2,9 @@ import { PlusOutlined, StopOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addToUnplanned, removeCourse } from "../../../reducers/plannerSlice";
+import axiosRequest from "../../../axios";
+import { addToUnplanned, removeCourses } from "../../../reducers/plannerSlice";
+import prepareUserPayload from "../helper";
 
 const AddToPlannerButton = () => {
   const { active, tabs } = useSelector((state) => state.courseTabs);
@@ -13,6 +15,8 @@ const AddToPlannerButton = () => {
   const dispatch = useDispatch();
   const [addedCourseInPlanner, setAddedCourseInPlanner] = useState(!!coursesInPlanner[id]);
   const [loading, setLoading] = useState(false);
+
+  const { degree, planner } = useSelector((state) => state);
 
   const addCourseToPlannerTimeout = (courseInPlanner) => {
     setLoading(true);
@@ -49,9 +53,10 @@ const AddToPlannerButton = () => {
     addCourseToPlannerTimeout(true);
   };
 
-  const removeFromPlanner = () => {
-    dispatch(removeCourse(id));
+  const removeFromPlanner = async () => {
+    const [data] = await axiosRequest("post", `/courses/unselectCourse/${id}`, prepareUserPayload(degree, planner));
     addCourseToPlannerTimeout(false);
+    dispatch(removeCourses(data.affected_courses));
   };
 
   return (
