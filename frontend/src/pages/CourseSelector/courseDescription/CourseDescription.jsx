@@ -108,16 +108,6 @@ const CourseDescription = ({ structure }) => {
     }
   }, [id, dispatch, degree, planner]);
 
-  const [collapseRequirements, setCollapseRequirements] = useState(false);
-  // const [collapseOverview, setCollapseOverview] = useState(false);
-  const [collapseDone, setCollapseDone] = useState(false);
-  const [collapseDirectUnlock, setCollapseDirectUnlock] = useState(false);
-  const [collapseIndirectUnlock, setCollapseIndirectUnlock] = useState(true);
-
-  const calcCollapsibleContentClass = (state) => (
-    (state) ? "collapsible-content-collapsed" : "collapsible-content"
-  );
-
   if (tabs.length === 0) {
     return (
       <motion.div
@@ -214,72 +204,70 @@ const CourseDescription = ({ structure }) => {
               </Text>
               )
             }
-            <Title level={3} className="text">
-              Overview
-            </Title>
-            <Space direction="vertical" style={{ marginBottom: "1rem" }}>
-              <Text>
-                {/* eslint-disable-next-line react/no-danger */}
-                <div dangerouslySetInnerHTML={{ __html: course.description }} />
-              </Text>
-            </Space>
             <CollapsibleHeader
-              text="Requirements"
-              isCollapsed={collapseRequirements}
-              setIsCollapsed={setCollapseRequirements}
-            />
-            <div className={calcCollapsibleContentClass(collapseRequirements)}>
+              title="Overview"
+            >
               <Space direction="vertical" style={{ marginBottom: "1rem" }}>
                 <Text>
                   {/* eslint-disable-next-line react/no-danger */}
-                  <div dangerouslySetInnerHTML={{ __html: course.raw_requirements || "None" }} />
+                  <div dangerouslySetInnerHTML={{ __html: course.description }} />
                 </Text>
               </Space>
-            </div>
+            </CollapsibleHeader>
             <CollapsibleHeader
-              text="Courses you have done to unlock this course"
-              isCollapsed={collapseDone}
-              setIsCollapsed={setCollapseDone}
-            />
-            <div className={calcCollapsibleContentClass(collapseDone)}>
-              {course.path_from && Object.keys(course.path_from).length > 0 ? (
-                <div className="text course-tag-cont">
-                  {Object.keys(course.path_from).map((courseCode) => (
+              title="Requirements"
+            >
+              <div>
+                <Space direction="vertical" style={{ marginBottom: "1rem" }}>
+                  <Text>
+                    {/* eslint-disable-next-line react/no-danger */}
+                    <div dangerouslySetInnerHTML={{ __html: course.raw_requirements || "None" }} />
+                  </Text>
+                </Space>
+              </div>
+            </CollapsibleHeader>
+            <CollapsibleHeader
+              title="Courses you have done to unlock this course"
+            >
+              <div>
+                {course.path_from && Object.keys(course.path_from).length > 0 ? (
+                  <div className="text course-tag-cont">
+                    {Object.keys(course.path_from).map((courseCode) => (
+                      <CourseTag key={courseCode} name={courseCode} />
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text">None</p>
+                )}
+              </div>
+            </CollapsibleHeader>
+            <CollapsibleHeader
+              title="Doing this course will directly unlock these courses"
+            >
+              <div>
+                {coursesPathTo.direct_unlock && coursesPathTo.direct_unlock.length > 0 ? (
+                  coursesPathTo.direct_unlock.map((courseCode) => (
                     <CourseTag key={courseCode} name={courseCode} />
-                  ))}
-                </div>
-              ) : (
-                <p className="text">None</p>
-              )}
-            </div>
+                  ))
+                ) : (
+                  <p className="text">None</p>
+                )}
+              </div>
+            </CollapsibleHeader>
             <CollapsibleHeader
-              text="Doing this course will directly unlock these courses"
-              isCollapsed={collapseDirectUnlock}
-              setIsCollapsed={setCollapseDirectUnlock}
-            />
-            <div className={calcCollapsibleContentClass(collapseDirectUnlock)}>
-              {coursesPathTo.direct_unlock && coursesPathTo.direct_unlock.length > 0 ? (
-                coursesPathTo.direct_unlock.map((courseCode) => (
-                  <CourseTag key={courseCode} name={courseCode} />
-                ))
-              ) : (
-                <p className="text">None</p>
-              )}
-            </div>
-            <CollapsibleHeader
-              text="Doing this course will indirectly unlock these courses"
-              isCollapsed={collapseIndirectUnlock}
-              setIsCollapsed={setCollapseIndirectUnlock}
-            />
-            <div className={calcCollapsibleContentClass(collapseIndirectUnlock)}>
-              {coursesPathTo.indirect_unlock && coursesPathTo.indirect_unlock.length > 0 ? (
-                coursesPathTo.indirect_unlock.map((courseCode) => (
-                  <CourseTag key={courseCode} name={courseCode} />
-                ))
-              ) : (
-                <p className="text">None</p>
-              )}
-            </div>
+              title="Doing this course will indirectly unlock these courses"
+              initiallyCollapsed
+            >
+              <div>
+                {coursesPathTo.indirect_unlock && coursesPathTo.indirect_unlock.length > 0 ? (
+                  coursesPathTo.indirect_unlock.map((courseCode) => (
+                    <CourseTag key={courseCode} name={courseCode} />
+                  ))
+                ) : (
+                  <p className="text">None</p>
+                )}
+              </div>
+            </CollapsibleHeader>
           </div>
           <div>
             {course.faculty && (

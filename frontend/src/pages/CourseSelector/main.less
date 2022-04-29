@@ -67,15 +67,18 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  vertical-align: bottom;
   border-bottom: #d9d9d9 solid 1px; //grey-5
+  margin-top: 10px;
   margin-bottom: 10px;
   justify-content: space-between;
+  transition: 250ms;
   cursor: pointer;
 }
 
 .collapsible-header:hover {
-  background-color: #c3c3c3;
-  transition: 200ms;
+  background-color: #c3c3c37d;
+  transition: 250ms;
   cursor: pointer;
 }
 
@@ -92,7 +95,7 @@
 }
 
 .collapsible-content {
-  transition: 200ms;
+  transition: 250ms;
   width: 100%;
   display: flex;
   align-items: left;
@@ -101,7 +104,9 @@
 
 
 .collapsible-content-collapsed {
+  height: 0px;
+  opacity: 0px;
   display: none;
-  transition: 200ms;
+  transition: 250ms;
   width: 100%;
 }
