@@ -141,8 +141,23 @@ const plannerSlice = createSlice({
       localStorage.setItem("planner", JSON.stringify(state));
     },
     unschedule: (state, action) => {
-      const code = action.payload;
-      state.unplanned.push(code);
+      const { destIndex, code } = action.payload;
+
+      if (Number.isNaN(destIndex)) {
+        state.unplanned.push(code);
+      } else {
+        const existsIndex = state.unplanned.indexOf(code);
+        if (existsIndex !== -1) {
+          state.unplanned.splice(existsIndex, 1);
+        }
+        state.unplanned.splice(destIndex, 0, code);
+
+        if (existsIndex !== -1) {
+          // if was already unplanned don't need to modify other attributes
+          localStorage.setItem("planner", JSON.stringify(state));
+          return;
+        }
+      }
 
       const { plannedFor } = state.courses[code];
 
@@ -162,7 +177,7 @@ const plannerSlice = createSlice({
     unscheduleAll: (state) => {
       Object.entries(state.courses).forEach(([code, desc]) => {
         if (desc.plannedFor !== null) {
-          plannerSlice.caseReducers.unschedule(state, { payload: code });
+          plannerSlice.caseReducers.unschedule(state, { payload: { destIndex: null, code } });
         }
       });
       localStorage.setItem("planner", JSON.stringify(state));

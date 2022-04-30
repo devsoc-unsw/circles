@@ -29,7 +29,10 @@ const ContextMenu = ({ code, plannedFor }) => {
   };
 
   const handleUnschedule = () => {
-    dispatch(unschedule(code));
+    dispatch(unschedule({
+      destIndex: null,
+      code,
+    }));
   };
   const id = `${code}-context`;
 

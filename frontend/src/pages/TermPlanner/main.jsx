@@ -93,22 +93,26 @@ const TermPlanner = () => {
 
     if (
       destination.droppableId === source.droppableId
-      && (destination.droppableId === "unplanned" || destination.index === source.index)
+      && destination.index === source.index
     ) {
       // drag to same place
       return;
     }
 
+    const destIndex = destination.index;
+
     if (destination.droppableId === "unplanned") {
       // === move course to unplanned ===
-      dispatch(unschedule(draggableId));
+      dispatch(unschedule({
+        destIndex,
+        code: draggableId,
+      }));
       return;
     }
 
     const destYear = destination.droppableId.match(/[0-9]{4}/)[0];
     const destTerm = destination.droppableId.match(/T[0-3]/)[0];
     const destRow = destYear - startYear;
-    const destIndex = destination.index;
 
     if (source.droppableId === "unplanned") {
       // === move unplanned course to term ===
