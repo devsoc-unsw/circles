@@ -44,7 +44,7 @@ def fixUserData(userData: dict):
     coursesWithoutUoc = [
         course
         for course in userData["courses"]
-        if isinstance(userData["courses"][course], int)
+        if not isinstance(userData["courses"][course], list)
     ]
     filledInCourses = {
         course: [getCourse(course)["UOC"], userData["courses"][course]]
@@ -326,7 +326,7 @@ def getLegacyCourse(year, courseCode):
     return result
 
 
-@router.post("/unselectCourse/", response_model=AffectedCourses,
+@router.post("/unselectCourse/{unselectedCourse}", response_model=AffectedCourses,
             responses={
                 422: {"model": message, "description": "Unselected course query is required"},
                 400: {"model": message, "description": "Uh oh you broke me"},
@@ -345,12 +345,12 @@ def getLegacyCourse(year, courseCode):
                      }
                  }
             })
-def unselectCourse(userData: UserData, lockedCourses: list, unselectedCourse: str):
+def unselectCourse(userData: UserData, unselectedCourse: str):
     """
     Creates a new user class and returns all the courses
     affected from the course that was unselected in sorted order
     """
-    affectedCourses = User(fixUserData(userData.dict())).unselect_course(unselectedCourse, lockedCourses)
+    affectedCourses = User(fixUserData(userData.dict())).unselect_course(unselectedCourse)
 
     return {'affected_courses': affectedCourses}
 

@@ -7,32 +7,40 @@ body {
   @small: ~"(max-width: 1400px)";
 
   .mainContainer {
-    height: calc(100vh - 70px);
+    height: calc(100vh - var(--navbar-height) - var(--option-header-height));
+    padding-top: 10px;
     overflow: auto;
   }
 
   .plannerContainer {
     display: flex;
     // align-items: center;
-    margin-top: 0.5em;
+    margin: 15px;
     justify-content: center;
-    margin-left: 1em;
-    margin-right: 1em;
   }
-  .unplannedColumn {
-    overflow-y: auto;
-    max-width: 20.5em;
-    margin-left: 1em;
-    margin-right: 1em;
-    align-self: stretch;
-    flex: 1;
+  .unplannedBox {
+    grid-row-start: 2;
+    grid-row-end: span 10;
+    grid-column-start: 5;
+    margin: 1em;
+    border: 1px solid #D9D9D9;
+    border-radius: 15px;
+    padding: 15px;
+    place-self: stretch;
+    transition: 200ms ease-out;
     @media @small {
-      max-width: 19em;
+      border-radius: 1em;
     }
+  }
+  .summerUnplannedBox {
+    grid-column-start: 6;
+    margin: 0.5em;
+    border: 1px solid #D9D9D9;
+    padding-top: 0.5em;
   }
   .gridContainer {
     display: grid;
-    grid-template-columns: 7em 1fr 1fr 1fr;
+    grid-template-columns: 7em 1fr 1fr 1fr 1fr;
     align-items: center;
     max-width: 100em;
     height: max-content;
@@ -64,7 +72,7 @@ body {
   }
 
   .summerGrid {
-    grid-template-columns: 7em 1fr 1fr 1fr 1fr;
+    grid-template-columns: 7em 1fr 1fr 1fr 1fr 1fr;
   }
   .summerTermBox {
     margin: 0.5em;
@@ -112,6 +120,7 @@ body {
   .alert {
     max-width: 1.5em;
     max-height: 1.5em;
+    font-size: 16px;
   }
 
   .ant-picker-dropdown {
@@ -153,19 +162,6 @@ body {
     margin-bottom: 0.7em;
   }
 
-  .leftButtons {
-    display: flex;
-  }
-
-  .settingsButton {
-    margin-left: 1em;
-    margin-top: 1em;
-    border: 1px solid #cecece;
-    border-radius: 0.5em;
-    padding: 0.5em 0.7em 0.3em 0.7em;
-    cursor: pointer;
-  }
-
   .clicked {
     background-color: #bfbfbf;
   }
@@ -182,6 +178,7 @@ body {
   }
 
   .settingsTitle {
+    font-size: 1.75em;
     margin-bottom: 0;
     text-align: left;
   }
@@ -198,11 +195,12 @@ body {
   }
 
   .settingsSubtitle {
+    font-size: 1.1em;
     margin-bottom: 0;
   }
 
   .helpMenu {
-    padding: 1em;
+    padding: 15px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5em;
@@ -213,16 +211,15 @@ body {
     grid-column-start: 1;
     grid-column-end: 3;
   }
-  .helpButton {
-    margin-right: 1em;
-  }
+  
   .helpGif {
     width: 100%;
     image-rendering: auto;
     border-radius: 12px;
     cursor: help;
+    transition: box-shadow 0.3s ease;
   }
-
+  
   .shadow {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
@@ -283,12 +280,6 @@ body {
       }
     }
   }
-
-  .optionsHeader {
-    display: flex;
-    justify-content: space-between;
-  }
-
 
   .ant-collapse-header {
     color: white !important;
@@ -368,7 +359,8 @@ body {
     color: #373a3a;
     background-color: #1d1f20;
     transition: all 200ms ease;
-    
+    font-size: 24px;
+
     &:hover {
       cursor: pointer;
       color: #bfbbbb;
@@ -391,13 +383,6 @@ body {
 
   .disabledWarning {
     background-color: rgba(186, 132, 81, 0.33);
-  }
-
-  .settingsButton {
-    background-color: #0f1010;
-    &:hover {
-      background-color: #242728;
-    }
   }
 
   .clicked {
@@ -473,22 +458,34 @@ body {
     color: #9254de;
   }
 
-  .termCheckbox {
-    color: #e4e3e3;
-    background-color: white;
+  .termCheckboxContainer {
+    background-color: #D9D9D9;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    padding-top: 3.5px;
     transition: all 200ms ease;
 
     &:hover {
       cursor: pointer;
       color: #bfbbbb;
+      background-color: #bfbbbb;
     }
   }
 
   .checkedTerm {
-    color: #9685f3;
+    background-color: #9685f3;
+
     &:hover {
-      color: #b4a9f4;
+      background-color: #b4a9f4;
     }
+  }
+
+  .termCheckbox {
+    color: #fff;
+    font-size: 12px;
   }
 
   .dragDisabledCourse {
@@ -500,13 +497,6 @@ body {
 
   .disabledWarning {
     background-color: #fff3e0;
-  }
-
-  .settingsButton {
-    background-color: white;
-    &:hover {
-      background-color: #e3e3e3;
-    }
   }
 
   .settingsIcon {

@@ -50,7 +50,7 @@ const SearchCourse = () => {
   };
 
   const handleSearch = (courseCode) => {
-    setValue(courseCode);
+    setValue(courseCode || null);
     setCourses([]);
     setIsLoading(true);
   };
@@ -70,6 +70,7 @@ const SearchCourse = () => {
       onSelect={handleSelect}
       notFoundContent={isLoading && value && <Spin size="small" />}
       style={{ width: "30rem", marginRight: "0.5rem" }}
+      showArrow={!!value}
     />
   );
 };

@@ -1,0 +1,60 @@
+.options-header {
+  display: flex;
+  height: var(--option-header-height);
+  padding-left: 20px;
+  padding-right: 20px;
+  border-bottom-style: inset;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.left-buttons {
+  display: flex;
+}
+
+.settings-button {
+  margin-left: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #cecece;
+  border-radius: 0.5em;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.filled {
+  color: #9254de;
+}
+
+.settings-icon {
+  font-size: 20px;
+}
+
+.help-button {
+  margin-right: 10px;
+}
+
+.light {
+  .settings-button {
+    background-color: white;
+    &:hover {
+      background-color: #e3e3e3;
+    }
+  }
+}
+
+.dark {
+  .settings-button {
+    background-color: #0f1010;
+    &:hover {
+      background-color: #242728;
+    }
+  }
+}

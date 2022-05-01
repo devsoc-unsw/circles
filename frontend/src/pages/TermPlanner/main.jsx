@@ -12,7 +12,7 @@ import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
 import HideYearTooltip from "./HideYearTooltip";
 import {
-  moveCourse, setPlannedCourseToTerm, setUnplannedCourseToTerm,
+  moveCourse, setPlannedCourseToTerm, setUnplannedCourseToTerm, unschedule,
 } from "../../reducers/plannerSlice";
 
 // checks if no courses have been planned (to display help notification
@@ -34,6 +34,7 @@ const openNotification = () => {
 
 const TermPlanner = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [suppress, setSuppress] = useState(false);
   const [termsOffered, setTermsOffered] = useState([]);
   const [isDragging, setIsDragging] = useState(false);
   const {
@@ -59,6 +60,7 @@ const TermPlanner = () => {
       dispatch,
       { years, startYear, completedTerms },
       { programCode, specialisation, minor },
+      suppress,
     );
   }, [years, dispatch, startYear, completedTerms, programCode, specialisation, minor]);
   const currYear = new Date().getFullYear();
@@ -79,12 +81,15 @@ const TermPlanner = () => {
 
     if (!destination) return; // drag outside container
 
-    dispatch(
-      moveCourse({
-        course: draggableId,
-        term: destination.droppableId,
-      }),
-    );
+    if (destination.droppableId !== "unplanned") {
+      // === moving course to unplanned doesn't require term logic ===
+      dispatch(
+        moveCourse({
+          course: draggableId,
+          term: destination.droppableId,
+        }),
+      );
+    }
 
     if (
       destination.droppableId === source.droppableId
@@ -94,12 +99,22 @@ const TermPlanner = () => {
       return;
     }
 
+    const destIndex = destination.index;
+
+    if (destination.droppableId === "unplanned") {
+      // === move course to unplanned ===
+      dispatch(unschedule({
+        destIndex,
+        code: draggableId,
+      }));
+      return;
+    }
+
     const destYear = destination.droppableId.match(/[0-9]{4}/)[0];
     const destTerm = destination.droppableId.match(/T[0-3]/)[0];
     const destRow = destYear - startYear;
-    const destIndex = destination.index;
 
-    if (source.droppableId.match(/T[0-3]/) === null) {
+    if (source.droppableId === "unplanned") {
       // === move unplanned course to term ===
       dispatch(setUnplannedCourseToTerm({
         destRow, destTerm, destIndex, course: draggableId,
@@ -124,71 +139,81 @@ const TermPlanner = () => {
   };
 
   return (
-    <div className="mainContainer">
+    <div>
       <OptionsHeader
         areYearsHidden={areYearsHidden}
         plannerRef={plannerPic}
         isAllEmpty={isAllEmpty}
+        setSuppress={setSuppress}
+        suppress={suppress}
       />
-      {isLoading ? (
-        <SkeletonPlanner />
-      ) : (
-        <DragDropContext
-          onDragEnd={(result) => {
-            handleOnDragEnd(result);
-            updateAllWarnings(
-              dispatch,
-              { years, startYear, completedTerms },
-              { programCode, specialisation, minor },
-            );
-          }}
-          onDragStart={handleOnDragStart}
-        >
-          <div className="plannerContainer">
-            <div
-              className={`gridContainer ${isSummerEnabled && "summerGrid"}`}
-              ref={plannerPic}
-            >
-              <div className="gridItem" />
-              {isSummerEnabled && <div className="gridItem">Summer</div>}
-              <div className="gridItem">Term 1</div>
-              <div className="gridItem">Term 2</div>
-              <div className="gridItem">Term 3</div>
-
-              {years.map((year, index) => {
-                const iYear = parseInt(startYear, 10) + parseInt(index, 10);
-                if (hidden[iYear]) return null;
-                return (
-                  <React.Fragment key={index}>
-                    <div className="yearContainer gridItem">
-                      <div
-                        className={`year ${currYear === iYear && "currYear"}`}
-                      >
-                        {iYear}
-                      </div>
-                      <HideYearTooltip year={iYear} />
-                    </div>
-                    {Object.keys(year).map((term) => {
-                      const key = iYear + term;
-                      if (!isSummerEnabled && term === "T0") return null;
-                      return (
-                        <TermBox
-                          key={key}
-                          name={key}
-                          courses={year[term]}
-                          termsOffered={termsOffered}
-                          isDragging={isDragging}
-                        />
-                      );
-                    })}
-                  </React.Fragment>
+      <div className="mainContainer">
+        {isLoading ? (
+          <SkeletonPlanner />
+        ) : (
+          <DragDropContext
+            onDragEnd={(result) => {
+              handleOnDragEnd(result);
+              if (result.destination && result.destination.droppableId !== "unplanned") {
+                updateAllWarnings(
+                  dispatch,
+                  { years, startYear, completedTerms },
+                  { programCode, specialisation, minor },
+                  suppress,
                 );
-              })}
+              }
+            }}
+            onDragStart={handleOnDragStart}
+          >
+            <div className="plannerContainer">
+              <div
+                className={`gridContainer ${isSummerEnabled && "summerGrid"}`}
+                ref={plannerPic}
+              >
+                <div className="gridItem" />
+                {isSummerEnabled && <div className="gridItem">Summer</div>}
+                <div className="gridItem">Term 1</div>
+                <div className="gridItem">Term 2</div>
+                <div className="gridItem">Term 3</div>
+                <div className="gridItem">Unplanned</div>
+
+                {years.map((year, index) => {
+                  const iYear = parseInt(startYear, 10) + parseInt(index, 10);
+                  if (hidden[iYear]) return null;
+                  return (
+                    <React.Fragment key={index}>
+                      <div className="yearContainer gridItem">
+                        <div
+                          className={`year ${currYear === iYear && "currYear"}`}
+                        >
+                          {iYear}
+                        </div>
+                        <HideYearTooltip year={iYear} />
+                      </div>
+                      {Object.keys(year).map((term) => {
+                        const key = iYear + term;
+                        if (!isSummerEnabled && term === "T0") return null;
+                        return (
+                          <TermBox
+                            key={key}
+                            name={key}
+                            courses={year[term]}
+                            termsOffered={termsOffered}
+                            isDragging={isDragging}
+                          />
+                        );
+                      })}
+                    </React.Fragment>
+                  );
+                })}
+                <UnplannedColumn
+                  isDragging={isDragging}
+                />
+              </div>
             </div>
-            <UnplannedColumn />
-          </div>
-        </DragDropContext>
-      )}
+          </DragDropContext>
+        )}
+      </div>
     </div>
   );
 };

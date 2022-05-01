@@ -20,7 +20,7 @@ const validateTermPlanner = (payload) => (dispatch) => {
     .catch((err) => console.log(err));
 };
 
-const prepareCoursesForValidation = (plannerInfo, userInfo) => {
+const prepareCoursesForValidation = (plannerInfo, userInfo, suppress) => {
   const { years, startYear } = plannerInfo;
   const { programCode, specialisation, minor } = userInfo;
 
@@ -42,14 +42,14 @@ const prepareCoursesForValidation = (plannerInfo, userInfo) => {
     specialisations: [specialisation, minor],
     year: 1,
     plan,
-    mostRecentPastTerm: getMostRecentPastTerm(startYear),
+    mostRecentPastTerm: suppress ? getMostRecentPastTerm(startYear) : { Y: 0, T: 0 },
   };
 
   return payload;
 };
 
-const updateAllWarnings = (dispatch, plannerInfo, userInfo) => {
-  const payload = prepareCoursesForValidation(plannerInfo, userInfo);
+const updateAllWarnings = (dispatch, plannerInfo, userInfo, suppress) => {
+  const payload = prepareCoursesForValidation(plannerInfo, userInfo, suppress);
   dispatch(validateTermPlanner(payload));
 };
 

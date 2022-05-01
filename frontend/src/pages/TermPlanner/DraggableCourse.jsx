@@ -2,11 +2,11 @@ import React from "react";
 import { Typography } from "antd";
 import { Draggable } from "react-beautiful-dnd";
 import { useSelector } from "react-redux";
-import { IoInformationCircle, IoWarningOutline } from "react-icons/io5";
 import ReactTooltip from "react-tooltip";
 import { useContextMenu } from "react-contexify";
-import ContextMenu from "./misc/ContextMenu";
+import { WarningOutlined, InfoCircleOutlined } from "@ant-design/icons";
 import useMediaQuery from "../../hooks/useMediaQuery";
+import ContextMenu from "./ContextMenu";
 
 const DraggableCourse = ({ code, index }) => {
   const { Text } = Typography;
@@ -59,16 +59,10 @@ const DraggableCourse = ({ code, index }) => {
             onContextMenu={displayContextMenu}
           >
             {!isDragDisabled && shouldHaveWarning
-              && (errorIsInformational ? <IoInformationCircle /> : (
-                <IoWarningOutline
+              && (errorIsInformational ? <InfoCircleOutlined style={{ color: "#000" }} /> : (
+                <WarningOutlined
                   className="alert"
-                  size="2.5em"
-                  color={theme === "light" ? "#DC9930" : "white"}
-                  style={
-                  isSmall && {
-                    marginRight: "8em",
-                  }
-                }
+                  style={{ color: theme === "light" ? "#DC9930" : "white" }}
                 />
               ))}
             <div>
