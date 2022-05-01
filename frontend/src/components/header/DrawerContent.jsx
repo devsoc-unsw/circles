@@ -2,10 +2,10 @@ import React from "react";
 import { BugOutlined } from "@ant-design/icons";
 import { Menu } from "antd";
 import { useNavigate } from "react-router-dom";
+import { FEEDBACK_LINK } from "../../constants";
 
 const DrawerContent = ({ onCloseDrawer }) => {
   // const theme = useSelector(state => state.theme);
-  const FORM_LINK = "https://github.com/csesoc/Circles/issues?q=is%3Aissue+is%3Aopen";
   const navigate = useNavigate();
   // const dispatch = useDispatch();
   const handlePush = (url) => {
@@ -13,7 +13,7 @@ const DrawerContent = ({ onCloseDrawer }) => {
     onCloseDrawer();
   };
   const openFeedbackLink = () => {
-    window.open(FORM_LINK, "_blank");
+    window.open(FEEDBACK_LINK, "_blank");
     onCloseDrawer();
   };
   return (

@@ -7,6 +7,7 @@ import CourseDescription from "./courseDescription";
 import CourseTabs from "./courseTabs/CourseTabs";
 import "./main.less";
 import SearchCourse from "./SearchCourse";
+import PageTemplate from "../../components/PageTemplate";
 
 const CourseSelector = () => {
   const [structure, setStructure] = useState({});
@@ -31,32 +32,34 @@ const CourseSelector = () => {
   }, [programCode, specialisation, minor]);
 
   return (
-    <div className="cs-root">
-      <div className="cs-top-cont">
-        <div className="cs-degree-cont">
-          {programCode !== "" && (
+    <PageTemplate>
+      <div className="cs-root">
+        <div className="cs-top-cont">
+          <div className="cs-degree-cont">
+            {programCode !== "" && (
             <h1 className="text">
               {programCode} - {programName}
             </h1>
-          )}
+            )}
+          </div>
+          <SearchCourse />
+          <Switch
+            className="cs-toggle-locked"
+            onChange={() => setShowLockedCourses((prev) => !prev)}
+            checkedChildren="locked courses shown"
+            unCheckedChildren="locked courses hidden"
+          />
         </div>
-        <SearchCourse />
-        <Switch
-          className="cs-toggle-locked"
-          onChange={() => setShowLockedCourses((prev) => !prev)}
-          checkedChildren="locked courses shown"
-          unCheckedChildren="locked courses hidden"
-        />
+        <CourseTabs />
+        <div className="cs-bottom-cont">
+          <CourseMenu
+            structure={structure}
+            showLockedCourses={showLockedCourses}
+          />
+          <CourseDescription structure={structure} />
+        </div>
       </div>
-      <CourseTabs />
-      <div className="cs-bottom-cont">
-        <CourseMenu
-          structure={structure}
-          showLockedCourses={showLockedCourses}
-        />
-        <CourseDescription structure={structure} />
-      </div>
-    </div>
+    </PageTemplate>
   );
 };
 

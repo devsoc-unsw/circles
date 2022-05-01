@@ -3,6 +3,7 @@ import axios from "axios";
 import Dashboard from "./Dashboard";
 import ListView3 from "./ListView3";
 import "./main.less";
+import PageTemplate from "../../components/PageTemplate";
 
 const degreeData = {
   name: "Pearson",
@@ -55,14 +56,14 @@ const ProgressionChecker = () => {
   }, []);
 
   return (
-    <>
+    <PageTemplate>
       <Dashboard isLoading={isLoading} degree={degree} />
       <ListView3
         isLoading={isLoading}
         degree={degree}
         progressioncourses={courses}
       />
-    </>
+    </PageTemplate>
   );
 };
 
