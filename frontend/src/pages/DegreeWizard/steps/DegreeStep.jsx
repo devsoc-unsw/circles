@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {
-  Menu, Typography, Button, Input,
+  Menu, Typography, Button,
 } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { useSpring, animated } from "@react-spring/web";
@@ -13,7 +13,6 @@ const { Title } = Typography;
 const DegreeStep = ({ incrementStep, currStep }) => {
   const dispatch = useDispatch();
   const programCode = useSelector((store) => store.degree.programCode);
-  const [input, setInput] = useState("");
   const [options, setOptions] = useState(null);
 
   const fetchAllDegrees = async () => {
@@ -26,7 +25,6 @@ const DegreeStep = ({ incrementStep, currStep }) => {
   }, []);
 
   const handleDegreeChange = (e) => {
-    setInput(options[e.key]);
     dispatch(
       setProgram({ programCode: e.key, programName: options[e.key] }),
     );
@@ -47,14 +45,7 @@ const DegreeStep = ({ incrementStep, currStep }) => {
         )}
       </div>
 
-      <Input
-        size="large"
-        type="text"
-        value={input}
-        placeholder="Search Degree"
-        onChange={(e) => setInput(e.target.value)}
-      />
-      {input !== "" && options && (
+      {options && (
         <Menu
           className="degree-search-results"
           onClick={handleDegreeChange}
