@@ -3,14 +3,8 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { Tooltip, Menu, Button } from "antd";
 import "./CourseMenu.less";
-<<<<<<< HEAD
-import { IoWarningOutline } from "react-icons/io5";
-import { PlusOutlined } from "@ant-design/icons";
-=======
-import { AiOutlinePlus } from "react-icons/ai";
->>>>>>> dev
 import { motion, AnimatePresence } from "framer-motion/dist/framer-motion";
-import { WarningOutlined } from "@ant-design/icons";
+import { WarningOutlined, PlusOutlined } from "@ant-design/icons";
 import { ReactComponent as Padlock } from "../../../images/padlock.svg";
 import axiosRequest from "../../../axios";
 import prepareUserPayload from "../helper";
