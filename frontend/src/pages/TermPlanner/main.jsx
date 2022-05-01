@@ -14,6 +14,7 @@ import HideYearTooltip from "./HideYearTooltip";
 import {
   moveCourse, setPlannedCourseToTerm, setUnplannedCourseToTerm, unschedule,
 } from "../../reducers/plannerSlice";
+import PageTemplate from "../../components/PageTemplate";
 
 // checks if no courses have been planned (to display help notification
 // & determine if unschedule all button available)
@@ -139,7 +140,7 @@ const TermPlanner = () => {
   };
 
   return (
-    <div>
+    <PageTemplate>
       <OptionsHeader
         areYearsHidden={areYearsHidden}
         plannerRef={plannerPic}
@@ -214,7 +215,7 @@ const TermPlanner = () => {
           </DragDropContext>
         )}
       </div>
-    </div>
+    </PageTemplate>
   );
 };
 
