@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { DEGREE_STRUCTURE_VERSION } from "../constants";
+import { DATA_STRUCTURE_VERSION } from "../constants";
 
 /**
  * IMPORTANT NOTE:
@@ -10,7 +10,7 @@ import { DEGREE_STRUCTURE_VERSION } from "../constants";
  * can have unintended effects for users using a previous version local storage
  * data format. This could cause Circles to break or create some weird behaviours.
  *
- * You must update/increment DEGREE_STRUCTURE_VERSION value found in `constants.js`
+ * You must update/increment DATA_STRUCTURE_VERSION value found in `constants.js`
  * to indicate is a breaking change is introduced to make it non compatible with
  * previous versions of local storage data.
  *
@@ -22,7 +22,7 @@ let initialState = {
   majors: [],
   minor: "",
   specialisation: "",
-  version: DEGREE_STRUCTURE_VERSION,
+  version: DATA_STRUCTURE_VERSION,
 };
 
 const degree = JSON.parse(localStorage.getItem("degree"));
