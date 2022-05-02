@@ -7,32 +7,40 @@ body {
   @small: ~"(max-width: 1400px)";
 
   .mainContainer {
-    height: calc(100vh - 70px);
+    height: calc(100vh - var(--navbar-height) - var(--option-header-height));
+    padding-top: 10px;
     overflow: auto;
   }
 
   .plannerContainer {
     display: flex;
     // align-items: center;
-    margin-top: 0.5em;
+    margin: 15px;
     justify-content: center;
-    margin-left: 1em;
-    margin-right: 1em;
   }
-  .unplannedColumn {
-    overflow-y: auto;
-    max-width: 20.5em;
-    margin-left: 1em;
-    margin-right: 1em;
-    align-self: stretch;
-    flex: 1;
+  .unplannedBox {
+    grid-row-start: 2;
+    grid-row-end: span 10;
+    grid-column-start: 5;
+    margin: 1em;
+    border: 1px solid #D9D9D9;
+    border-radius: 15px;
+    padding: 15px;
+    place-self: stretch;
+    transition: 200ms ease-out;
     @media @small {
-      max-width: 19em;
+      border-radius: 1em;
     }
+  }
+  .summerUnplannedBox {
+    grid-column-start: 6;
+    margin: 0.5em;
+    border: 1px solid #D9D9D9;
+    padding-top: 0.5em;
   }
   .gridContainer {
     display: grid;
-    grid-template-columns: 7em 1fr 1fr 1fr;
+    grid-template-columns: 7em 1fr 1fr 1fr 1fr;
     align-items: center;
     max-width: 100em;
     height: max-content;
@@ -64,7 +72,7 @@ body {
   }
 
   .summerGrid {
-    grid-template-columns: 7em 1fr 1fr 1fr 1fr;
+    grid-template-columns: 7em 1fr 1fr 1fr 1fr 1fr;
   }
   .summerTermBox {
     margin: 0.5em;
@@ -94,6 +102,7 @@ body {
     justify-content: flex-start;
     gap: 0.7em;
     align-items: center;
+    line-height: 1.5715;
 
     @media @small {
       border-radius: 2em;
@@ -169,6 +178,7 @@ body {
   }
 
   .settingsTitle {
+    font-size: 1.75em;
     margin-bottom: 0;
     text-align: left;
   }
@@ -185,11 +195,12 @@ body {
   }
 
   .settingsSubtitle {
+    font-size: 1.1em;
     margin-bottom: 0;
   }
 
   .helpMenu {
-    padding: 1em;
+    padding: 15px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5em;
@@ -206,8 +217,9 @@ body {
     image-rendering: auto;
     border-radius: 12px;
     cursor: help;
+    transition: box-shadow 0.3s ease;
   }
-
+  
   .shadow {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
@@ -350,6 +362,7 @@ body {
     font-size: 24px;
 
     &:hover {
+      cursor: pointer;
       color: #bfbbbb;
     }
   }
@@ -456,6 +469,8 @@ body {
     transition: all 200ms ease;
 
     &:hover {
+      cursor: pointer;
+      color: #bfbbbb;
       background-color: #bfbbbb;
     }
   }
