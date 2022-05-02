@@ -3,18 +3,21 @@
   flex-direction: row;
   align-items: center;
   vertical-align: bottom;
-  border-bottom: #d9d9d9 solid 1px; //grey-5
+  border-bottom: #d9d9d9c0 solid 1px; //grey-5
   margin-top: 10px;
   margin-bottom: 7px;
-  // justify-content: space-between;
   transition: 250ms;
   cursor: pointer;
 }
 
+
 .collapsible-header:hover {
-  background-color: #c3c3c37d;
+  color: #7d51d2;
   transition: 250ms;
   cursor: pointer;
+  .text {
+    color: #7d51d2;
+  }
 }
 
 
@@ -35,6 +38,7 @@
   transition: 250ms;
   width: 100%;
   display: flex;
+  padding-left: 35px;
   align-items: left;
   flex-wrap: wrap;
 }
