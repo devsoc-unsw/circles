@@ -2,7 +2,7 @@ from fastapi import APIRouter
 from fastapi.params import Body
 from algorithms.objects.user import User
 from server.routers.courses import getCourse
-from server.routers.model import CoursesState, PlannerData, CONDITIONS, CACHED_HANDBOOK_NOTE
+from server.routers.model import ValidCoursesState, PlannerData, CONDITIONS, CACHED_HANDBOOK_NOTE
 
 
 router = APIRouter(
@@ -22,7 +22,7 @@ def fixPlannerData(plannerData: PlannerData):
                     plannerData["plan"][year_index][term_index][courseName] = [getCourse(courseName)["UOC"], course]
     return plannerData
 
-@router.post("/validateTermPlanner/", response_model=CoursesState)
+@router.post("/validateTermPlanner/", response_model=ValidCoursesState)
 async def validateTermPlanner(
     plannerData: PlannerData = Body(
         ...,
@@ -86,15 +86,13 @@ async def validateTermPlanner(
     user = User(emptyUserData)
     # State of courses on the term planner
     coursesState = {}  # TODO: possibly push to user class?
-    
+
     currYear = data["mostRecentPastTerm"]["Y"]
     pastTerm = data["mostRecentPastTerm"]["T"]
 
     for yearIndex, year in enumerate(data["plan"]):
         # Go through all the years
         for termIndex, term in enumerate(year):
-            inPast =  yearIndex + 1 < currYear or (yearIndex + 1 == currYear and termIndex <= pastTerm)
-            
             user.add_current_courses(term)
 
             for course in term:
@@ -107,8 +105,9 @@ async def validateTermPlanner(
                 coursesState[course] = {
                     "is_accurate": is_answer_accurate,
                     "handbook_note": CACHED_HANDBOOK_NOTE.get(course, ""),
-                    "unlocked": unlocked if not inPast else True,
-                    "warnings": warnings if not inPast else [],
+                    "unlocked": unlocked,
+                    "warnings": warnings,
+                    "supressed": yearIndex + 1 < currYear or (yearIndex + 1 == currYear and termIndex <= pastTerm)
                 }
             # Add all these courses to the user in preparation for the next term
             user.empty_current_courses()

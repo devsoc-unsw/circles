@@ -35,7 +35,7 @@ const openNotification = () => {
 
 const TermPlanner = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [suppress, setSuppress] = useState(false);
+  const [suppress, setSuppress] = useState(true);
   const [termsOffered, setTermsOffered] = useState([]);
   const [isDragging, setIsDragging] = useState(false);
   const {
@@ -63,7 +63,7 @@ const TermPlanner = () => {
       { programCode, specialisation, minor },
       suppress,
     );
-  }, [years, dispatch, startYear, completedTerms, programCode, specialisation, minor]);
+  }, [years, suppress, dispatch, startYear, completedTerms, programCode, specialisation, minor]);
   const currYear = new Date().getFullYear();
 
   const plannerPic = useRef();

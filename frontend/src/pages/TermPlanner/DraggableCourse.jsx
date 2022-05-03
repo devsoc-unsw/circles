@@ -14,7 +14,8 @@ const DraggableCourse = ({ code, index }) => {
   const theme = useSelector((state) => state.theme);
   // prereqs are populated in CourseDescription.jsx via course.raw_requirements
   const {
-    prereqs, title, isUnlocked, plannedFor, isLegacy, isAccurate, termsOffered, handbookNote,
+    prereqs, title, isUnlocked, plannedFor,
+    isLegacy, isAccurate, termsOffered, handbookNote, supressed,
   } = courses[code];
   const warningMessage = courses[code].warnings;
   const isOffered = plannedFor ? termsOffered.includes(plannedFor.match(/T[0-3]/)[0]) : true;
@@ -31,7 +32,9 @@ const DraggableCourse = ({ code, index }) => {
   };
 
   const isSmall = useMediaQuery("(max-width: 1400px)");
-  const shouldHaveWarning = (isLegacy || !isUnlocked || BEwarnings || !isAccurate || !isOffered);
+  const shouldHaveWarning = !supressed && (
+    isLegacy || !isUnlocked || BEwarnings || !isAccurate || !isOffered
+  );
   const errorIsInformational = shouldHaveWarning && isUnlocked
     && warningMessage.length === 0 && !isLegacy && isAccurate && isOffered;
   return (
@@ -52,7 +55,7 @@ const DraggableCourse = ({ code, index }) => {
             className={`course ${isSummerEnabled && "summerViewCourse"} 
             ${isDragDisabled && " dragDisabledCourse"} 
             ${isDragDisabled && !isUnlocked && " disabledWarning"}
-            ${(!isUnlocked || !isOffered) && " warning"}`}
+            ${(!supressed && (!isUnlocked || !isOffered)) && " warning"}`}
             data-tip
             data-for={code}
             id={code}

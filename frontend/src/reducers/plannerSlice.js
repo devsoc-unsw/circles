@@ -85,13 +85,14 @@ const plannerSlice = createSlice({
       Object.keys(action.payload).forEach((course) => {
         if (state.courses[course]) {
           const {
-            is_accurate: isAccurate, unlocked, warnings, handbook_note: handbookNote,
+            is_accurate: isAccurate, unlocked, warnings, handbook_note: handbookNote, supressed,
           } = action.payload[course];
 
           state.courses[course].isAccurate = isAccurate;
           state.courses[course].isUnlocked = unlocked;
           state.courses[course].warnings = warnings;
           state.courses[course].handbookNote = handbookNote;
+          state.courses[course].supressed = supressed;
         }
       });
       localStorage.setItem("planner", JSON.stringify(state));

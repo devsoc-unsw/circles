@@ -1,7 +1,7 @@
 // Recent Past Term Constants
-const FEB = 1;
-const JUN = 5;
-const SEP = 8;
+const FEB = 2;
+const JUN = 6;
+const SEP = 9;
 const MID_MONTH_START = 14;
 const BEG_MONTH_START = 1;
 const TERM_PAST_AMOUNT = 14;
@@ -17,7 +17,7 @@ const getMostRecentPastTerm = (startYear) => {
   const currDegreeYear = currYear - startYear + 1;
 
   const pastStart = (monthStart, month) => (
-    currDay >= (monthStart + TERM_PAST_AMOUNT && currMonth === month) || currMonth > month
+    (currDay >= monthStart + TERM_PAST_AMOUNT && currMonth === month) || currMonth > month
   );
 
   // session dates gathered from: https://www.student.unsw.edu.au/teaching-periods
