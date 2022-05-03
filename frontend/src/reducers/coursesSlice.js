@@ -15,11 +15,12 @@ const coursesSplice = createSlice({
     setCourse: (state, action) => {
       state.course = action.payload;
     },
+    resetCourses: () => initialState,
   },
 });
 
 export const {
-  setCourses, setCourse,
+  setCourses, setCourse, resetCourses,
 } = coursesSplice.actions;
 
 export default coursesSplice.reducer;

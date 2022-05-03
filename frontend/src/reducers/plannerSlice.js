@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { DATA_STRUCTURE_VERSION } from "../constants";
 
 // set up hidden object
 const generateHiddenInit = (startYear, numYears) => {
@@ -18,6 +19,21 @@ const generateEmptyYears = (nYears) => {
   }
   return res;
 };
+
+/**
+ * IMPORTANT NOTE:
+ *
+ * Since we store the state in local storage, this means that any modifications
+ * to the state (i.e. changing the initialState data structure fields, a bug
+ * created in the reducer functions that can cause some logic issues, etc.)
+ * can have unintended effects for users using a previous version local storage
+ * data format. This could cause Circles to break or create some weird behaviours.
+ *
+ * You must update/increment DATA_STRUCTURE_VERSION value found in `constants.js`
+ * to indicate is a breaking change is introduced to make it non compatible with
+ * previous versions of local storage data.
+ *
+ */
 
 const fakeStartYear = parseInt(new Date().getFullYear(), 10);
 const fakeNumYears = 3;
@@ -43,10 +59,15 @@ let initialState = {
   completedTerms: {},
   hidden: generateHiddenInit(fakeStartYear, fakeNumYears),
   areYearsHidden: false,
+  version: DATA_STRUCTURE_VERSION,
 };
 
 const planner = JSON.parse(localStorage.getItem("planner"));
-if (planner) initialState = planner;
+if (planner && planner.version === initialState.version) {
+  initialState = planner;
+} else if (planner && planner.version !== initialState.version) {
+  localStorage.setItem("isUpdate", true);
+}
 
 const plannerSlice = createSlice({
   name: "planner",
@@ -286,7 +307,7 @@ const plannerSlice = createSlice({
     },
     resetPlanner: (state) => {
       Object.assign(state, initialState);
-      localStorage.setItem("planner", JSON.stringify(initialState));
+      localStorage.removeItem("planner");
     },
   },
 });
