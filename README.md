@@ -2,8 +2,7 @@
 
 # Circles
 
-Tired of using a poorly laid out spreadsheet to cobble together a plan to follow for the next 3-8 years of your life?
-'Have no fear, Circles is here!'
+Tired of using a poorly laid out spreadsheet to cobble together a plan to follow for the next 3-8 years of your life? Have no fear, Circles is here!
 
 Circles is a UNSW degree planner where you can explore and validate your degree structure.
 
@@ -39,4 +38,4 @@ You can find a live build of Circles at [https://circles.csesoc.app](https://cir
 - Also, special thanks to
     - James Ji, Vincent Xiao, Hayes Choy - for being the first team to work on and inspire Circles :)
 
-[for further development documentation, a linktree to our jira boards and more!](https://compclub.atlassian.net/wiki/spaces/C/pages/1664385928/About+Circles) 
+[For further development documentation, a linktree to our jira boards and more!](https://compclub.atlassian.net/wiki/spaces/C/pages/1664385928/About+Circles) 
