@@ -1,7 +1,9 @@
 <img src="https://img.shields.io/badge/-CSESoc-blue" />
 
 # Circles
-> [for further development documentation, a linktree to our jira boards and more!] (https://compclub.atlassian.net/wiki/spaces/C/pages/1664385928/About+Circles) ## About Circles
+
+## About Circles
+
 Tired of using a poorly laid out spreadsheet to cobble together a plan to follow for the next 3-8 years of your life?
 'Have no fear, Circles is here!'
 
@@ -19,11 +21,11 @@ NOTE: we currently only support the Computer Science (3778) degree - but we will
 - Term planner:
     - An intuitive drag and drop interface
     - Validates your progression to make sure you've met the requirements for future courses
-    - Allows you to generate a savable and sharable image of your plan
+    - Allows you to generate a saveable and sharable image of your plan
 
-### Future
+### Future Plans
 
-this project is rapidly expanding and our roadmap includes features such as:
+This project is rapidly expanding and our roadmap includes features such as:
 
 - Progression checker: (NEW PAGE!)
     - Lets you understand which requirements you have met and which you still need to complete
@@ -35,6 +37,8 @@ this project is rapidly expanding and our roadmap includes features such as:
 You can find a live build of Circles at [https://circles.csesoc.app](https://circles.csesoc.app/).
 
 # Our team
-- we are a team that is part of CSESoc projects!
+- We are a team that is part of CSESoc Projects!
 - Also, special thanks to
     - James Ji, Vincent Xiao, Hayes Choy - for being the first team to work on and inspire Circles :)
+
+[for further development documentation, a linktree to our jira boards and more!] (https://compclub.atlassian.net/wiki/spaces/C/pages/1664385928/About+Circles) 
