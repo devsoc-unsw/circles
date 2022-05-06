@@ -83,6 +83,7 @@ export const PlannerCart = () => {
 
   useEffect(() => {
     const handlerClickOutside = (e) => {
+      console.log(e.target);
       if (cartRef?.current?.contains(e.target) === false) {
         setOpenMenu(false);
       }
@@ -96,7 +97,7 @@ export const PlannerCart = () => {
   });
 
   return (
-    <div className="planner-cart-root">
+    <div ref={cartRef} className="planner-cart-root">
       <Tooltip title="Your courses">
         <Button
           type="primary"
@@ -106,7 +107,7 @@ export const PlannerCart = () => {
         />
       </Tooltip>
       {openMenu && (
-        <div ref={cartRef} className="planner-cart-menu">
+        <div className="planner-cart-menu">
           <Title className="text" level={4}>
             Your selected courses
           </Title>
