@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Tooltip, Button, Typography, Popconfirm, Alert,
 } from "antd";
@@ -79,6 +79,21 @@ export const PlannerCart = () => {
       setCode("");
     }, 3500);
   };
+  const cartRef = useRef();
+
+  useEffect(() => {
+    const handlerClickOutside = (e) => {
+      if (cartRef?.current?.contains(e.target) === false) {
+        setOpenMenu(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handlerClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handlerClickOutside);
+    };
+  });
 
   return (
     <div className="planner-cart-root">
@@ -91,7 +106,7 @@ export const PlannerCart = () => {
         />
       </Tooltip>
       {openMenu && (
-        <div className="planner-cart-menu">
+        <div ref={cartRef} className="planner-cart-menu">
           <Title className="text" level={4}>
             Your selected courses
           </Title>
@@ -128,7 +143,10 @@ export const PlannerCart = () => {
                 type="secondary"
                 shape="round"
                 className="planner-cart-link-to-cs"
-                onClick={() => navigate("/course-selector")}
+                onClick={() => {
+                  setOpenMenu(false);
+                  navigate("/course-selector");
+                }}
               >
                 Go to course selector
               </Button>
