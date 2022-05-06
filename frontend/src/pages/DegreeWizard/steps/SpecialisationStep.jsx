@@ -15,6 +15,12 @@ const SpecialisationStep = ({ incrementStep, currStep }) => {
     1: "major",
   });
 
+  onkeyup = (e) => {
+    if (specialisation && e.key === "Enter") {
+      incrementStep();
+    }
+  };
+
   const fetchAllSpecialisations = useCallback(async () => {
     const res = await axios.get(`/programs/getMajors/${programCode}`);
     setOptions(res.data.majors);
