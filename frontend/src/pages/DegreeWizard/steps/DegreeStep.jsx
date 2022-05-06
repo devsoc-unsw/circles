@@ -26,7 +26,7 @@ const DegreeStep = ({ incrementStep, currStep }) => {
   }, []);
 
   onkeyup = (e) => {
-    if (input.length > 0 && e.key === "Enter") {
+    if (programCode && e.key === "Enter") {
       incrementStep();
     }
   };
