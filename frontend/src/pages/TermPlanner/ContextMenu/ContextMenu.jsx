@@ -29,12 +29,10 @@ const ContextMenu = ({ code, plannedFor }) => {
   };
 
   const handleUnschedule = () => {
-    dispatch(unschedule(code));
-    updateAllWarnings(
-      dispatch,
-      { years, startYear, completedTerms },
-      { programCode, specialisation, minor },
-    );
+    dispatch(unschedule({
+      destIndex: null,
+      code,
+    }));
   };
   const id = `${code}-context`;
 

@@ -64,9 +64,18 @@ class CourseState(BaseModel):
     handbook_note: str
     warnings: list
 
+class ValidCourseState(BaseModel):
+    is_accurate: bool
+    unlocked: bool
+    handbook_note: str
+    warnings: list
+    supressed: bool
 
 class CoursesState(BaseModel):
     courses_state: dict[str, CourseState] = {}
+
+class ValidCoursesState(BaseModel):
+    courses_state: dict[str, ValidCourseState] = {}
 
 class CoursesUnlockedWhenTaken (BaseModel):
     direct_unlock: list

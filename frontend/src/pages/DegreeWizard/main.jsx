@@ -13,6 +13,9 @@ import YearStep from "./steps/YearStep";
 import StartBrowsingStep from "./steps/StartBrowsingStep";
 import { resetTabs } from "../../reducers/courseTabsSlice";
 import { resetPlanner } from "../../reducers/plannerSlice";
+import { resetDegree } from "../../reducers/degreeSlice";
+import PageTemplate from "../../components/PageTemplate";
+import { resetCourses } from "../../reducers/coursesSlice";
 
 const { Title } = Typography;
 
@@ -56,9 +59,11 @@ const DegreeWizard = () => {
 
   const handleOk = () => {
     setIsModalVisible(false);
-    // Degree selector needs to reset to prevent identical courses in a term
     dispatch(resetPlanner());
+    dispatch(resetDegree());
     dispatch(resetTabs());
+    dispatch(resetCourses());
+    localStorage.clear();
   };
 
   const handleCancel = () => {
@@ -67,64 +72,66 @@ const DegreeWizard = () => {
   };
 
   return (
-    <div className="degree-root-container">
-      <Modal
-        title="Reset Planner?"
-        visible={isModalVisible}
-        onOk={handleOk}
-        onCancel={handleCancel}
-        footer={[
-          <Button key="back" onClick={handleCancel}>
-            Go back to planner
-          </Button>,
-          <Button key="submit" type="primary" danger onClick={handleOk}>
-            Reset
-          </Button>,
-        ]}
-      >
-        <p>
-          Are you sure want to reset your planner? Your existing data will be
-          permanently removed.
-        </p>
-      </Modal>
-      <Title>Welcome to Circles!</Title>
-      <h3 className=" subtitle">
-        Let’s start by setting up your UNSW degree, so you can make a plan that
-        suits you.
-      </h3>
-      <hr className="rule" />
+    <PageTemplate>
+      <div className="degree-root-container">
+        <Modal
+          title="Reset Planner?"
+          visible={isModalVisible}
+          onOk={handleOk}
+          onCancel={handleCancel}
+          footer={[
+            <Button key="back" onClick={handleCancel}>
+              Go back to planner
+            </Button>,
+            <Button key="submit" type="primary" danger onClick={handleOk}>
+              Reset
+            </Button>,
+          ]}
+        >
+          <p>
+            Are you sure want to reset your planner? Your existing data will be
+            permanently removed.
+          </p>
+        </Modal>
+        <Title>Welcome to Circles!</Title>
+        <h3 className=" subtitle">
+          Let’s start by setting up your UNSW degree, so you can make a plan that
+          suits you.
+        </h3>
+        <hr className="rule" />
 
-      <div className="steps-container">
-        {currStep >= 1 && (
+        <div className="steps-container">
+          {currStep >= 1 && (
           <div className="step-content" id="Year">
             <YearStep incrementStep={incrementStep} currStep={currStep} />
           </div>
-        )}
-        {currStep >= 2 && (
+          )}
+          {currStep >= 2 && (
           <div className="step-content" id="Degree">
             <DegreeStep incrementStep={incrementStep} currStep={currStep} />
           </div>
-        )}
-        {currStep >= 3 && (
+          )}
+          {currStep >= 3 && (
           <div className="step-content" id="Specialisation">
             <SpecialisationStep
               incrementStep={incrementStep}
               currStep={currStep}
             />
           </div>
-        )}
-        {currStep >= 4 && (
+          )}
+          {currStep >= 4 && (
           <div className="step-content" id="Minor">
             <MinorStep incrementStep={incrementStep} currStep={currStep} />
           </div>
-        )}
-        {currStep >= 5 && (
+          )}
+          {currStep >= 5 && (
           <div className="step-content" id="Start Browsing">
             <StartBrowsingStep />
           </div>
-        )}
+          )}
+        </div>
       </div>
-    </div>
+    </PageTemplate>
   );
 };
 export default DegreeWizard;

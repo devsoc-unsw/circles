@@ -12,8 +12,9 @@ import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
 import HideYearTooltip from "./HideYearTooltip";
 import {
-  moveCourse, setPlannedCourseToTerm, setUnplannedCourseToTerm,
+  moveCourse, setPlannedCourseToTerm, setUnplannedCourseToTerm, unschedule,
 } from "../../reducers/plannerSlice";
+import PageTemplate from "../../components/PageTemplate";
 
 // checks if no courses have been planned (to display help notification
 // & determine if unschedule all button available)
@@ -34,7 +35,7 @@ const openNotification = () => {
 
 const TermPlanner = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [suppress, setSuppress] = useState(false);
+  const [suppress, setSuppress] = useState(true);
   const [termsOffered, setTermsOffered] = useState([]);
   const [isDragging, setIsDragging] = useState(false);
   const {
@@ -62,7 +63,7 @@ const TermPlanner = () => {
       { programCode, specialisation, minor },
       suppress,
     );
-  }, [years, dispatch, startYear, completedTerms, programCode, specialisation, minor]);
+  }, [years, suppress, dispatch, startYear, completedTerms, programCode, specialisation, minor]);
   const currYear = new Date().getFullYear();
 
   const plannerPic = useRef();
@@ -81,12 +82,15 @@ const TermPlanner = () => {
 
     if (!destination) return; // drag outside container
 
-    dispatch(
-      moveCourse({
-        course: draggableId,
-        term: destination.droppableId,
-      }),
-    );
+    if (destination.droppableId !== "unplanned") {
+      // === moving course to unplanned doesn't require term logic ===
+      dispatch(
+        moveCourse({
+          course: draggableId,
+          term: destination.droppableId,
+        }),
+      );
+    }
 
     if (
       destination.droppableId === source.droppableId
@@ -96,12 +100,22 @@ const TermPlanner = () => {
       return;
     }
 
+    const destIndex = destination.index;
+
+    if (destination.droppableId === "unplanned") {
+      // === move course to unplanned ===
+      dispatch(unschedule({
+        destIndex,
+        code: draggableId,
+      }));
+      return;
+    }
+
     const destYear = destination.droppableId.match(/[0-9]{4}/)[0];
     const destTerm = destination.droppableId.match(/T[0-3]/)[0];
     const destRow = destYear - startYear;
-    const destIndex = destination.index;
 
-    if (source.droppableId.match(/T[0-3]/) === null) {
+    if (source.droppableId === "unplanned") {
       // === move unplanned course to term ===
       dispatch(setUnplannedCourseToTerm({
         destRow, destTerm, destIndex, course: draggableId,
@@ -126,7 +140,7 @@ const TermPlanner = () => {
   };
 
   return (
-    <div>
+    <PageTemplate>
       <OptionsHeader
         areYearsHidden={areYearsHidden}
         plannerRef={plannerPic}
@@ -141,12 +155,14 @@ const TermPlanner = () => {
           <DragDropContext
             onDragEnd={(result) => {
               handleOnDragEnd(result);
-              updateAllWarnings(
-                dispatch,
-                { years, startYear, completedTerms },
-                { programCode, specialisation, minor },
-                suppress,
-              );
+              if (result.destination && result.destination.droppableId !== "unplanned") {
+                updateAllWarnings(
+                  dispatch,
+                  { years, startYear, completedTerms },
+                  { programCode, specialisation, minor },
+                  suppress,
+                );
+              }
             }}
             onDragStart={handleOnDragStart}
           >
@@ -160,6 +176,7 @@ const TermPlanner = () => {
                 <div className="gridItem">Term 1</div>
                 <div className="gridItem">Term 2</div>
                 <div className="gridItem">Term 3</div>
+                <div className="gridItem">Unplanned</div>
 
                 {years.map((year, index) => {
                   const iYear = parseInt(startYear, 10) + parseInt(index, 10);
@@ -190,13 +207,15 @@ const TermPlanner = () => {
                     </React.Fragment>
                   );
                 })}
+                <UnplannedColumn
+                  isDragging={isDragging}
+                />
               </div>
-              <UnplannedColumn />
             </div>
           </DragDropContext>
         )}
       </div>
-    </div>
+    </PageTemplate>
   );
 };
 
