@@ -14,11 +14,21 @@ Step in the data's journey:
 import re
 from collections import OrderedDict
 
+"""
+TODO: Get rid of this before merging
+Joels notes
+- Science (3970) is a little weird because underneath the disciplinary component it has 'science electives'
+- Fix mix of camel/snake case
+- What's the best way to deal with cases like Biotechnology (Honours) (3053) where under Disciplinary Component/Level 1 core course there's the 'one of the following'? Seperate requirements?
+- Commerce (3502) has some courses that are 0UOC but are core?
+- Do we actually need to store free elective stuff? Some programs don't even have it, so the algorithm is going to have to deal with not having access to it anyways.
+"""
+
 
 from data.utility.data_helpers import read_data, write_data
 
 # Set of current course codes in programs_processed.json
-TEST_PROGS = [
+TEST_PROGS = (
     "3778",
     "3707",
     "3970",
@@ -32,7 +42,7 @@ TEST_PROGS = [
     "3805",
     "3871",
     "3956",
-]
+)
 
 def process_prg_data():
     """
@@ -41,19 +51,18 @@ def process_prg_data():
     """
     # Read in ProgramsFormattedRaw File
     data = read_data("data/scrapers/programsFormattedRaw.json")
-    # Final Data for all programs
-    processedData = {}
 
+    processedData = {}
     for program in TEST_PROGS:
         # Get program specific data
         formattedData = data[program]
-        # Initialise Processed data
-        programData = {}
+
         # Add infomation about program (excluding ciriculum structure)
         programData = initialise_program(formattedData)
+
         # Add curriculum structure
         addComponentData(formattedData, programData)
-        # Sort data alphabetically by key
+
         # Append processed program data to final data
         processedData[programData["code"]] = programData
 
@@ -61,53 +70,68 @@ def process_prg_data():
 
 
 def addComponentData(formatted, programData):
-    components = {
-        # "disciplinary_component" : {
-        #     # "credits_to_complete" : 0,
-        #     # "Majors" : {
-        #     # }
-        #     #"PE" : {
-        #         #description
-        #     # }
-        # },
-        # "FE" : {
-        #     # "credits_to_complete" : 0,
-        #     # "Minors" : {
-        #     # }
-        # },
-        # "GE" : {
-        #     # "credits_to_complete" : 0
-        # },
+    # TODO: Properly document how it's structured
+    programData["components"] = {
+        "GE": {},
+        "SpecialisationData": {},
+        "NonSpecialisationData": {},
     }
+
     # Loop through items in curriculum structure
     for item in formatted["CurriculumStructure"]:
-        # If item is a free elective
-        if item["vertical_grouping"]["value"] == "FE":
-            addFEData(components, item)
-        # If item is general education
-        if item["vertical_grouping"]["value"] == "GE":
-            GE = {}
-            try:
-                GE["credits_to_complete"] = int(item["credit_points"])
-            except ValueError:
-                GE["credits_to_complete"] = int(item["credit_points_max"])
+        recAddComponentData(programData, item)
 
-            components["GE"] = GE
-        # If item is part of core disciplinary
-        if "Disciplinary Component" in item["title"]:
-            addDisciplineData(components, item)
-        # If item is part of minor
-        if item["vertical_grouping"]["value"] == "undergrad_minor":
-            addMinorData(components, item)
     # Order dict alphabetically
-    OrderedDict(sorted(components.items(), key=lambda t: t[0]))
-    programData["components"] = components
+    OrderedDict(sorted(programData["components"].items(), key=lambda t: t[0]))
+
+def recAddComponentData(programData, item):
+    if any(key not in item.keys() for key in ("vertical_grouping", "title")):
+        return
+
+    if item["vertical_grouping"]["value"] == "GE":
+        addGEData(programData, item)
+
+    # If item is part of core disciplinary
+    if "Disciplinary Component" in item["title"]:
+        addDisciplineData(programData, item)
+
+    # If item is part of minor
+    if item["vertical_grouping"]["value"] == "undergrad_minor":
+        addMinorData(programData, item)
+
+    # Add anything from dynamic relationship unless it's a gened/free elective
+    if item["dynamic_relationship"] and item["title"] != "Free Electives" and item["vertical_grouping"]["value"] in ("FE", "PE"):
+        # Create a new NonSpecialisationData field
+        requirement = {
+            "type": "elective",
+            "credits_to_complete": getCredits(item),
+            "from": [],
+        }
+        for rel in item["dynamic_relationship"]:
+            requirement["from"].append(rel["description"])
+        programData["components"]["NonSpecialisationData"][item["title"]] = requirement
+
+    # Recurse further down
+    for rel_item in item["relationship"]:
+        recAddComponentData(programData, rel_item)
+    for con_item in item["container"]:
+        recAddComponentData(programData, con_item)
 
 
-def addMinorData(components, item):
-    # Initialise data
-    minorData = {}
+def addGEData(programData, item):
+    programData["components"]["GE"]["credits_to_complete"] = getCredits(item)
+
+
+def getCredits(item):
+    try:
+        return int(item["credit_points"])
+    except ValueError:
+        return int(item["credit_points_max"])
+
+
+def addMinorData(programData, item):
     # Loop through list of minors
+    minorData = {}
     for minor in item["relationship"]:
         # If item is a minor, add it to list
         if (
@@ -115,16 +139,18 @@ def addMinorData(components, item):
             and minor["academic_item_type"]["value"] == "minor"
         ):
             code = minor["academic_item_code"]
-            minorData[code] = 1
+            minorData[code] = minor["academic_item_name"]
     # Append to minor data
-    components["Minors"] = minorData
+    programData["components"]["SpecialisationData"]["Minors"] = minorData
 
 
-def addDisciplineData(components, item):
+# TODO: Clean this function
+def addDisciplineData(programData, item):
+    # TODO: Where is the wiki?
     # Initialise Specialisation Data (explained in wiki)
-    SpecialisationData = {}
+    SpecialisationData = programData["components"]["SpecialisationData"]
     # Initialise NonSpecialisation Data (explained in wiki)
-    NonSpecialisationData = {}
+    NonSpecialisationData = programData["components"]["NonSpecialisationData"]
 
     if "container" in item and item["container"] != []:
         # Loop through items in disciplinary component
@@ -164,7 +190,7 @@ def addDisciplineData(components, item):
                 PE = {}
                 PE["type"] = "elective"
                 if container["credit_points"] != "":
-                    PE["credits_to_complete"] = container["credit_points"]
+                    PE["credits_to_complete"] = getCredits(container)
                 if container["relationship"] != []:
                     for course in container["relationship"]:
                         PE[course["academic_item_code"]] = course["academic_item_name"]
@@ -180,7 +206,7 @@ def addDisciplineData(components, item):
                 CC["type"] = "core"
                 # Add credit points
                 if container["credit_points"] != "":
-                    CC["credits_to_complete"] = container["credit_points"]
+                    CC["credits_to_complete"] = getCredits(container)
                 # If there are multiple courses
                 if container["container"] != []:
                     # Loop through and find all courses and add them
@@ -200,53 +226,51 @@ def addDisciplineData(components, item):
                         CC[course["academic_item_code"]] = course["academic_item_name"]
                 NonSpecialisationData[title] = CC
 
-    components["SpecialisationData"] = SpecialisationData
-    components["NonSpecialisationData"] = NonSpecialisationData
 
+# TODO: Do we need this function?
+# def addFEData(components, item):
+#     FE = {}
+#     if item["credit_points"] != "":
+#         FE["credits_to_complete"] = int(item["credit_points"])
+#     else:
+#         FE["credits_to_complete"] = int(item["credit_points_max"])
+#     title = ""
 
-def addFEData(components, item):
-    FE = {}
-    if item["credit_points"] != "":
-        FE["credits_to_complete"] = int(item["credit_points"])
-    else:
-        FE["credits_to_complete"] = int(item["credit_points_max"])
-    title = ""
+#     # Minor data can exist in many places depending on program, so must check
 
-    # Minor data can exist in many places depending on program, so must check
+#     # If container is not empty, add data to minors
+#     if item["container"] != []:
+#         title = "FE"
+#         for container in item["container"]:
+#             if container["vertical_grouping"]["value"] == "undergrad_minor":
+#                 minorData = {}
+#                 for minor in container["relationship"]:
+#                     if (
+#                         minor["academic_item_type"]
+#                         and minor["academic_item_type"]["value"] == "minor"
+#                     ):
+#                         code = minor["academic_item_code"]
+#                         minorData[code] = minor["academic_item_name"]
+#                 FE["Minors"] = minorData
+#     # If relationship is not empty, add data to minors
+#     elif item["relationship"] != []:
+#         title = item["title"]
+#         for elective in item["relationship"]:
+#             FE[elective["academic_item_code"]] = elective["academic_item_name"]
+#     # If dynamic_relationship is not empty, add data to minors
+#     elif item["dynamic_relationship"] != []:
+#         # Below if statement is an indication that it's not a real free elective
+#         if item["dynamic_relationship"][0]["description"] != "any course":
+#             title = item["title"]
+#             courses = {}
+#             for elective in item["dynamic_relationship"]:
+#                 courses[elective["description"]] = 1
+#             FE["courses"] = courses
+#         # It is free elective
+#         else:
+#             title = "FE"
 
-    # If container is not empty, add data to minors
-    if item["container"] != []:
-        title = "FE"
-        for container in item["container"]:
-            if container["vertical_grouping"]["value"] == "undergrad_minor":
-                minorData = {}
-                for minor in container["relationship"]:
-                    if (
-                        minor["academic_item_type"]
-                        and minor["academic_item_type"]["value"] == "minor"
-                    ):
-                        code = minor["academic_item_code"]
-                        minorData[code] = minor["academic_item_name"]
-                FE["Minors"] = minorData
-    # If relationship is not empty, add data to minors
-    elif item["relationship"] != []:
-        title = item["title"]
-        for elective in item["relationship"]:
-            FE[elective["academic_item_code"]] = elective["academic_item_name"]
-    # If dynamic_relationship is not empty, add data to minors
-    elif item["dynamic_relationship"] != []:
-        # Below if statement is an indication that it's not a real free elective
-        if item["dynamic_relationship"][0]["description"] != "any course":
-            title = item["title"]
-            courses = {}
-            for elective in item["dynamic_relationship"]:
-                courses[elective["description"]] = 1
-            FE["courses"] = courses
-        # It is free elective
-        else:
-            title = "FE"
-
-    components[title] = FE
+#     components[title] = FE
 
 
 def initialise_program(program):
@@ -255,7 +279,7 @@ def initialise_program(program):
     """
     program_info = {}
     program_info["title"] = program["title"]
-    program_info["code"] = program["code"]
+    program_info["code"] = int(program["code"])
 
     duration = re.search("(\d)", program["duration"])
     duration = duration.group(1)
