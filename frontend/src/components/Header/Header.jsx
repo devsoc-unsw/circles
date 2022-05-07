@@ -5,10 +5,10 @@ import {
   Menu, Layout, Typography, Button, Drawer,
 } from "antd";
 import DrawerContent from "./DrawerContent";
-import { PlannerCart } from "../plannerCart/PlannerCart";
 import useMediaQuery from "../../hooks/useMediaQuery";
-import circlesLogo from "../../images/circlesLogo.svg";
-import "./header.less";
+import circlesLogo from "../../assets/circlesLogo.svg";
+import "./index.less";
+import PlannerCart from "../PlannerCart";
 
 const menuStyles = {
   backgroundColor: "inherit",
@@ -34,6 +34,7 @@ const getCurrentPath = () => {
 };
 
 const { Title } = Typography;
+
 const Header = () => {
   const isSmall = useMediaQuery("(max-width: 1000px)");
   const [showDrawer, setShowDrawer] = useState(false);

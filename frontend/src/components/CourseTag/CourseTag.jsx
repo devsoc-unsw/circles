@@ -1,10 +1,10 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Tag } from "antd";
-import "./courseTag.less";
 import { addTab } from "../../reducers/courseTabsSlice";
+import "./index.less";
 
-export const CourseTag = ({ name }) => {
+const CourseTag = ({ name }) => {
   const dispatch = useDispatch();
   const handleClick = () => {
     dispatch(addTab(name));

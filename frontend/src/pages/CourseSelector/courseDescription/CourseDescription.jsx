@@ -4,9 +4,8 @@ import {
   Tag, Typography, Space,
 } from "antd";
 import { motion } from "framer-motion/dist/framer-motion";
-import { CourseTag } from "../../../components/courseTag/CourseTag";
 import prepareUserPayload from "../helper";
-import infographic from "../../../images/infographicFontIndependent.svg";
+import infographic from "../../../assets/infographicFontIndependent.svg";
 import axiosRequest from "../../../axios";
 import { setCourse } from "../../../reducers/coursesSlice";
 import Collapsible from "./Collapsible";
@@ -14,6 +13,7 @@ import AddToPlannerButton from "./AddToPlannerButton";
 import CourseAttribute from "./CourseAttribute";
 import "./index.less";
 import LoadingSkeleton from "./LoadingSkeleton";
+import CourseTag from "../../../components/CourseTag";
 
 const { Title, Text } = Typography;
 

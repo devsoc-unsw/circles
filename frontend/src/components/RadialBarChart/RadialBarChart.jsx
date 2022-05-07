@@ -2,7 +2,6 @@ import React from "react";
 import { RadialBar } from "@ant-design/charts";
 import data from "./radialChartData";
 
-// not currently used
 const RadialBarChart = () => {
   const config = {
     data,

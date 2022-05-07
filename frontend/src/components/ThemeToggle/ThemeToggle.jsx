@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Switch } from "antd";
 import { IoMdMoon, IoIosSunny } from "react-icons/io";
 import { useDispatch } from "react-redux";
-import { toggleTheme } from "../reducers/themeSlice";
+import { toggleTheme } from "../../reducers/themeSlice";
 
 const ThemeToggle = () => {
   const [theme, setTheme] = useState(() => {

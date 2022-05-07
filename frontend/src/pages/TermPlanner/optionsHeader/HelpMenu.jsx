@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { Typography, Divider } from "antd";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
-import dragAndDropGif from "../../../images/helpGifs/drag-and-drop.gif";
-import dragAndDropPng from "../../../images/helpGifs/drag-and-drop.png";
-import unscheduleGif from "../../../images/helpGifs/unschedule.gif";
-import unschedulePng from "../../../images/helpGifs/unschedule.png";
-import hideYearGif from "../../../images/helpGifs/hide-year.gif";
-import hideYearPng from "../../../images/helpGifs/hide-year.png";
-import additionalOptionsGif from "../../../images/helpGifs/additional-options.gif";
-import additionalOptionsPng from "../../../images/helpGifs/additional-options.png";
+import dragAndDropGif from "../../../assets/helpGifs/drag-and-drop.gif";
+import dragAndDropPng from "../../../assets/helpGifs/drag-and-drop.png";
+import unscheduleGif from "../../../assets/helpGifs/unschedule.gif";
+import unschedulePng from "../../../assets/helpGifs/unschedule.png";
+import hideYearGif from "../../../assets/helpGifs/hide-year.gif";
+import hideYearPng from "../../../assets/helpGifs/hide-year.png";
+import additionalOptionsGif from "../../../assets/helpGifs/additional-options.gif";
+import additionalOptionsPng from "../../../assets/helpGifs/additional-options.png";
 
 const HelpMenu = () => {
   const [dragAndDropPlaying, setDragAndDropPlaying] = useState(false);

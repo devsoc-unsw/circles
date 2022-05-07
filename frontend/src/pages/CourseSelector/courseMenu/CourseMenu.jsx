@@ -4,8 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Tooltip, Menu, Button } from "antd";
 import "./CourseMenu.less";
 import { motion, AnimatePresence } from "framer-motion/dist/framer-motion";
-import { WarningOutlined, PlusOutlined } from "@ant-design/icons";
-import { ReactComponent as Padlock } from "../../../images/padlock.svg";
+import { WarningOutlined, PlusOutlined, LockOutlined } from "@ant-design/icons";
 import axiosRequest from "../../../axios";
 import prepareUserPayload from "../helper";
 import Loading from "./Loading";
@@ -229,7 +228,7 @@ const MenuItem = ({
                 text="We couldn't parse the requirement for this course. Please manually check if you have the correct prerequisites to unlock it."
               />
             )}
-            {!unlocked && <Padlock width="10px" />}
+            {!unlocked && <LockOutlined style={{ fontSize: "11px" }} />}
           </div>
           {!selected && (
             <Tooltip title="Add to Planner" placement="bottom">

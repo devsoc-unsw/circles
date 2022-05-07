@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import circlesLogo from "../../images/circlesWithBg.svg";
-import "./loading.less";
+import circlesLogo from "../../assets/circlesWithBg.svg";
+import "./index.less";
 
-const Loading = ({ setLoading }) => {
+const PageLoading = ({ setLoading }) => {
   const navigate = useNavigate();
 
   const location = useLocation();
@@ -16,7 +16,7 @@ const Loading = ({ setLoading }) => {
       // check if this is a first time user
       navigate(JSON.parse(localStorage.getItem("degree")) === null ? "/degree-wizard" : route);
     }, 750);
-  });
+  }, []);
 
   return (
     <div className="loadingPage">
@@ -25,4 +25,4 @@ const Loading = ({ setLoading }) => {
   );
 };
 
-export default Loading;
+export default PageLoading;

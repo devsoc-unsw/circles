@@ -3,7 +3,7 @@ import { Typography } from "antd";
 import { useSpring, animated } from "@react-spring/web";
 import DegreeCard from "./DegreeCard";
 import SkeletonDashboard from "./SkeletonDashboard";
-import LiquidProgressChart from "../../components/liquidProgressChart/LiquidProgressChart";
+import LiquidProgressChart from "../../components/LiquidProgressChart";
 
 const Dashboard = ({ isLoading, degree }) => {
   const { Title } = Typography;

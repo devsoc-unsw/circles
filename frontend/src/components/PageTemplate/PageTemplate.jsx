@@ -44,7 +44,7 @@ const PageTemplate = ({ children }) => {
           You would need to reset your degree to plan your courses!
         </Modal>
         )
-      }
+        }
       {children}
       <FeedbackButton />
     </Content>

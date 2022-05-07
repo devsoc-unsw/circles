@@ -8,7 +8,7 @@ import {
   lightYellow,
   lightGrey,
   darkGrey,
-} from "../GlobalColors";
+} from "../../constants";
 
 const LiquidProgressChart = ({ completedUOC, totalUOC }) => {
   const [percent, setPercent] = useState(0);
