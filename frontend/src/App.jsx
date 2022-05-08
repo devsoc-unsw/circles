@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import {
   BrowserRouter as Router, Routes, Route,
 } from "react-router-dom";
-import CourseSelector from "./pages/CourseSelector/main";
-import DegreeWizard from "./pages/DegreeWizard/main";
+import DegreeWizard from "./pages/DegreeWizard";
+import CourseSelector from "./pages/CourseSelector";
+import TermPlanner from "./pages/TermPlanner";
 import ProgressionChecker from "./pages/ProgressionChecker/main";
-import TermPlanner from "./pages/TermPlanner/main";
 import "./App.less";
 import PageLoading from "./components/PageLoading";
 import "./axios";

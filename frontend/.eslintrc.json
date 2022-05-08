@@ -35,6 +35,6 @@
         "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
         "no-unused-vars": ["error", { "argsIgnorePattern": "^_$" }],
         "react/function-component-definition": ["error", { "namedComponents": "arrow-function", "unnamedComponents": "arrow-function" }],
-        "react/no-unstable-nested-components": ["error", { "allowAsProps": true }]
+        "react/no-unstable-nested-components": ["error", { "allowAsProps": true }],
     }
 }
