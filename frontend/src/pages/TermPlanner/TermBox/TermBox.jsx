@@ -3,7 +3,7 @@ import { Droppable } from "react-beautiful-dnd";
 import { useSelector, useDispatch } from "react-redux";
 import { Badge } from "antd";
 import { LockFilled, UnlockFilled } from "@ant-design/icons";
-import DraggableCourse from "../DraggableCourse/DraggableCourse";
+import DraggableCourse from "../DraggableCourse";
 import { toggleTermComplete } from "../../../reducers/plannerSlice";
 import "./index.less";
 

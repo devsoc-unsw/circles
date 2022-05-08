@@ -1,7 +1,7 @@
 import React from "react";
 import { Droppable } from "react-beautiful-dnd";
 import { useSelector } from "react-redux";
-import DraggableCourse from "../DraggableCourse/DraggableCourse";
+import DraggableCourse from "../DraggableCourse";
 import "./index.less";
 
 // create separate array for each type
