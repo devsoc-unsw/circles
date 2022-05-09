@@ -5,7 +5,7 @@ import {
 import DegreeWizard from "./pages/DegreeWizard";
 import CourseSelector from "./pages/CourseSelector";
 import TermPlanner from "./pages/TermPlanner";
-import ProgressionChecker from "./pages/ProgressionChecker/main";
+import ProgressionChecker from "./pages/ProgressionChecker";
 import "./App.less";
 import PageLoading from "./components/PageLoading";
 import "./axios";

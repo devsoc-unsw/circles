@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Dashboard from "./Dashboard";
 import ListView3 from "./ListView3";
-import "./main.less";
+import "./index.less";
 import PageTemplate from "../../components/PageTemplate";
 
 // TODO: dummy data for now

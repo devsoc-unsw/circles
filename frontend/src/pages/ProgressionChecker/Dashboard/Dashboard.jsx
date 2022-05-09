@@ -1,9 +1,10 @@
 import React from "react";
 import { Typography } from "antd";
 import { useSpring, animated } from "@react-spring/web";
-import DegreeCard from "./DegreeCard";
+import DegreeCard from "../DegreeCard";
 import SkeletonDashboard from "./SkeletonDashboard";
-import LiquidProgressChart from "../../components/LiquidProgressChart";
+import LiquidProgressChart from "../../../components/LiquidProgressChart";
+import "./index.less";
 
 const Dashboard = ({ isLoading, degree }) => {
   const { Title } = Typography;

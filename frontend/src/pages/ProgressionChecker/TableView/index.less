@@ -1,0 +1,53 @@
+.listPage {
+  height: 100vh;
+  padding: 2em;
+  max-width: 1200px;
+  min-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.light {
+  //Change header text and background color 
+  .ant-table-thead > tr >th{
+    color: black !important;
+    background: #f0f0f0 !important;
+  }
+
+  //Modify list text and background color  
+  .ant-table-tbody > tr >th{
+    color: black !important;
+    background: #f0f0f0 !important;
+    }
+
+  .table-striped-rows tr:nth-child(2n) td {
+      background-color: #fbfbfb;
+    }
+  .table-striped-rows thead {
+        background-color: #f1f1f1;
+    }
+}
+
+.dark {
+  //Change header text and background color 
+  .ant-table-thead > tr >th{
+    color: white !important;
+    background: #17191a !important;
+  }
+
+  //Modify list text and background color  
+  .ant-table-tbody > tr >th{
+    color: white !important;
+    background: #17191a !important;
+  }
+
+  .table-striped-rows tr:nth-child(2n) td {
+    background-color: #17191a;
+  }
+  .table-striped-rows thead {
+    background-color: #373b3d;
+  }
+  .ant-notification-notice-message {
+    color: white !important;
+  }
+}
