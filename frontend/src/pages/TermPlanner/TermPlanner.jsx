@@ -198,6 +198,7 @@ const TermPlanner = () => {
                         />
                       );
                     })}
+                    <div />
                   </React.Fragment>
                 );
               })}
