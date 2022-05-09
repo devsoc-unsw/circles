@@ -51,7 +51,7 @@ const SaveMenu = ({ plannerRef }) => {
           onChange={(value) => setFormat(value)}
         >
           {exportFormats.map((form) => (
-            <Option value={form}>{form}</Option>
+            <Option key={form} value={form}>{form}</Option>
           ))}
         </Select>
       </div>
