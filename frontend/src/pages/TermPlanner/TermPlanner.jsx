@@ -170,7 +170,7 @@ const TermPlanner = () => {
               <div className="gridItem">Term 1</div>
               <div className="gridItem">Term 2</div>
               <div className="gridItem">Term 3</div>
-              <div className="gridItem">Unplanned</div>
+              <div className="gridItem" />
 
               {years.map((year, index) => {
                 const iYear = parseInt(startYear, 10) + parseInt(index, 10);
@@ -204,6 +204,7 @@ const TermPlanner = () => {
               })}
               <UnplannedColumn
                 isDragging={isDragging}
+                plannerRef={plannerPic}
               />
             </div>
           </div>
