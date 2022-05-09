@@ -33,7 +33,7 @@ const UnplannedColumn = ({ isDragging, plannerRef }) => {
     window.addEventListener("resize", updateDimensions);
 
     return () => window.removeEventListener("resize", updateDimensions);
-  }, []);
+  });
 
   return (
     <div className="unplannedContainer" style={style}>
