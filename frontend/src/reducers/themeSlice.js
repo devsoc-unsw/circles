@@ -1,13 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = "light";
+const initialState = localStorage.getItem("theme") || "light";
 
 const themeSplice = createSlice({
   name: "theme",
   initialState,
   reducers: {
     toggleTheme: (state, action) => {
-      Object.assign(state, action.payload);
+      localStorage.setItem("theme", action.payload);
+      return action.payload;
     },
   },
 });

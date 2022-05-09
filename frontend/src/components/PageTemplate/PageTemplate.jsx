@@ -14,9 +14,6 @@ const PageTemplate = ({ children }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // light mode is always on
-  document.body.classList.add("light");
-
   const handleReset = () => {
     dispatch(resetTabs());
     dispatch(resetCourses());

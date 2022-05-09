@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import axios from "axios";
 import Dashboard from "./Dashboard";
 import ListView3 from "./ListView3";
@@ -38,31 +39,36 @@ const degreeData = {
 };
 
 const ProgressionChecker = () => {
-  const [degree, setDegree] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [courses, setCourses] = useState({});
 
-  const fetchDegree = async () => {
-    setDegree(degreeData);
-    const res = await axios.get(
-      `/programs/getStructure/3778/${degreeData.concentrations[0].code}`,
-    );
+  const {
+    programCode, specialisation, minor,
+  } = useSelector((state) => state.degree);
 
-    setCourses(res.data.structure);
-    setIsLoading(false);
-  };
+  const [structure, setStructure] = useState({});
 
   useEffect(() => {
-    fetchDegree();
-  }, []);
+    // get structure of degree
+    const fetchStructure = async () => {
+      try {
+        const res = await axios.get(`/programs/getStructure/${programCode}/${specialisation}${minor && `/${minor}`}`);
+        setStructure(res.data.structure);
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.log(err);
+      }
+      setIsLoading(false);
+    };
+    if (programCode && specialisation) fetchStructure();
+  }, [programCode, specialisation, minor]);
 
   return (
     <PageTemplate>
-      <Dashboard isLoading={isLoading} degree={degree} />
+      <Dashboard isLoading={isLoading} degree={degreeData} />
       <ListView3
         isLoading={isLoading}
-        degree={degree}
-        progressioncourses={courses}
+        degree={degreeData}
+        progressioncourses={structure}
       />
     </PageTemplate>
   );

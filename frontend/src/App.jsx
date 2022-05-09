@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   BrowserRouter as Router, Routes, Route,
 } from "react-router-dom";
+import { useSelector } from "react-redux";
 import DegreeWizard from "./pages/DegreeWizard";
 import CourseSelector from "./pages/CourseSelector";
 import TermPlanner from "./pages/TermPlanner";
@@ -13,6 +14,17 @@ import Header from "./components/Header";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
+  const theme = useSelector((state) => state.theme);
+
+  useEffect(() => {
+    if (theme === "light") {
+      document.body.classList.remove("dark");
+      document.body.classList.add("light");
+    } else {
+      document.body.classList.remove("light");
+      document.body.classList.add("dark");
+    }
+  }, [theme]);
 
   return (
     <Router>
