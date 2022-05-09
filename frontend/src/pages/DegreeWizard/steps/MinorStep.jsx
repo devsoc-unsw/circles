@@ -4,7 +4,7 @@ import { Menu, Button, Typography } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import "./steps.less";
 import { useSpring, animated } from "@react-spring/web";
-import springProps from "../spring";
+import springProps from "./spring";
 import { setMinor } from "../../../reducers/degreeSlice";
 
 const { Title } = Typography;

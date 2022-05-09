@@ -5,6 +5,7 @@ import ListView3 from "./ListView3";
 import "./main.less";
 import PageTemplate from "../../components/PageTemplate";
 
+// TODO: dummy data for now
 const degreeData = {
   name: "Pearson",
   code: "3767",
