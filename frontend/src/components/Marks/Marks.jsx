@@ -1,32 +1,49 @@
 /* eslint-disable */
 
 import React, { useState, useSelector }  from "react";
-import KebabMenuIcon from "../KebabMenuIcon";
+import KebabMenu from "../KebabMenu";
 import { Typography } from "antd";
 
 import "./index.less";
 
-const Marks = ({ mark, showMarks }) => {
-  // ? toShow should be handled by the parent?
+const Marks = ({ courseCode }) => {
 
-  // const [mark, setMark] = useState(91);
-  // const mark = 100;
-  // const course = useSelector((state) => state.courses.course);
+  // TODO: This Component Should now take in courseCode instead of 
+  // the mark - pick up the courseMark from the state
+  const mark = 100;
 
   const { Text } = Typography;
 
-  return (showMarks) ? (
+  console.log(mark, showMarks);
+
+  // ! REMOVE TRUE
+  // showMarks = true;
+
+  return (
     <div className="marks-cont">
-      <Text strong className="text">
+      STILL AHHHHH
+      {/* <Text strong className="text">
         Mark:
       </Text>
       <Text className="text marks-val">
-        {(mark && showMarks) ? mark : "N/A"}
-      </Text>
-
-      <KebabMenuIcon />
+        {(mark) ? mark : "Unavailable"}
+      </Text> */}
     </div>
-  ) : null;
+  )
+  
+  // return (showMarks) ? (
+  //   <div className="marks-cont">
+  //     AHHHHHHHHH
+  //     <Text strong className="text">
+  //       Mark:
+  //     </Text>
+  //     <Text className="text marks-val">
+  //       {(mark) ? mark : "N/A"}
+  //     </Text>
+
+  //     <KebabMenu />
+  //   </div>
+  // ) : null;
 };
 
 export default Marks;

@@ -136,6 +136,8 @@ const TermPlanner = () => {
     }
   };
 
+  const [showMarks, setShowMarks] = useState(false);
+
   return (
     <PageTemplate>
       <OptionsHeader
@@ -144,6 +146,8 @@ const TermPlanner = () => {
         isAllEmpty={isAllEmpty}
         setSuppress={setSuppress}
         suppress={suppress}
+        showMarks={showMarks}
+        setShowMarks={setShowMarks}
       />
       <div className="mainContainer">
         <DragDropContext
@@ -195,6 +199,7 @@ const TermPlanner = () => {
                           courses={year[term]}
                           termsOffered={termsOffered}
                           isDragging={isDragging}
+                          showMarks={showMarks}
                         />
                       );
                     })}

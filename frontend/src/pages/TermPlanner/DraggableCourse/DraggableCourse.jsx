@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React from "react";
 import { Typography } from "antd";
 import { Draggable } from "react-beautiful-dnd";
@@ -7,9 +9,11 @@ import { useContextMenu } from "react-contexify";
 import { WarningOutlined, InfoCircleOutlined } from "@ant-design/icons";
 import useMediaQuery from "../../../hooks/useMediaQuery";
 import ContextMenu from "../ContextMenu";
+import Marks from "../../../components/Marks";
+
 import "./index.less";
 
-const DraggableCourse = ({ code, index }) => {
+const DraggableCourse = ({ code, index, showMark }) => {
   const { Text } = Typography;
   const { courses, isSummerEnabled, completedTerms } = useSelector((state) => state.planner);
   const theme = useSelector((state) => state.theme);
@@ -38,6 +42,9 @@ const DraggableCourse = ({ code, index }) => {
   );
   const errorIsInformational = shouldHaveWarning && isUnlocked
     && warningMessage.length === 0 && !isLegacy && isAccurate && isOffered;
+  
+  console.log("Inside DraggableCourse", showMark);
+
   return (
     <>
       <Draggable
@@ -69,18 +76,22 @@ const DraggableCourse = ({ code, index }) => {
                   style={{ color: theme === "light" ? "#DC9930" : "white" }}
                 />
               ))}
-            <div>
-              {isSmall ? (
+            {isSmall ? (
+              <div>
                 <Text className="text">{code}</Text>
-              ) : (
-                <>
-                  <Text strong className="text">
-                    {code}
-                  </Text>
-                  <Text className="text">: {title} </Text>
-                </>
-              )}
-            </div>
+                <Marks mark="100" showMark={showMark} />
+              </div>
+            ) : (
+              <div>
+                <Text strong className="text">
+                  {code}
+                </Text>
+                <Text className="text">: {title} </Text>
+                STARTMARK---;
+                <Marks mark="100" showMark={showMark} />
+                ENDMARK---;
+              </div>
+            )}
           </li>
         )}
       </Draggable>

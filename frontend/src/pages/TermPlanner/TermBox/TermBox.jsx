@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React from "react";
 import { Droppable } from "react-beautiful-dnd";
 import { useSelector, useDispatch } from "react-redux";
@@ -22,6 +24,8 @@ const TermBox = ({
   const isCompleted = !!completedTerms[name];
 
   const isOffered = termsOffered.includes(term) && !isCompleted;
+
+  console.log("showMarks in TermBox: ", showMarks);
 
   return (
     <Droppable droppableId={name} isDropDisabled={isCompleted}>

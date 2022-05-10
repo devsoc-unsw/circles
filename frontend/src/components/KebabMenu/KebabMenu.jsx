@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React from "react";
 import { useContextMenu } from "react-contexify";
 import "./index.less";
