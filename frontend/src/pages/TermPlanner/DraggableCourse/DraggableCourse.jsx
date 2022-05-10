@@ -10,6 +10,7 @@ import { WarningOutlined, InfoCircleOutlined } from "@ant-design/icons";
 import useMediaQuery from "../../../hooks/useMediaQuery";
 import ContextMenu from "../ContextMenu";
 import Marks from "../../../components/Marks";
+import KebabMenu from "../../../components/KebabMenu";
 
 import "./index.less";
 
@@ -76,22 +77,27 @@ const DraggableCourse = ({ code, index, showMark }) => {
                   style={{ color: theme === "light" ? "#DC9930" : "white" }}
                 />
               ))}
-            {isSmall ? (
-              <div>
+            <div>
+              {isSmall ? (
                 <Text className="text">{code}</Text>
-                <Marks mark="100" showMark={showMark} />
-              </div>
-            ) : (
-              <div>
-                <Text strong className="text">
-                  {code}
-                </Text>
-                <Text className="text">: {title} </Text>
-                STARTMARK---;
-                <Marks mark="100" showMark={showMark} />
-                ENDMARK---;
-              </div>
-            )}
+              ) : (
+                <>
+                  <Text strong className="text">
+                    {code}
+                  </Text>
+                  <Text className="text">: {title} </Text>
+                </>
+              )}
+              {true ? (
+                <Marks
+                  courseCode={"COMP1511"}
+                />
+              ) : null
+              }
+              <KebabMenu />
+            </div>
+
+
           </li>
         )}
       </Draggable>

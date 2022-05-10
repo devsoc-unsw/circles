@@ -10,26 +10,30 @@ const Marks = ({ courseCode }) => {
 
   // TODO: This Component Should now take in courseCode instead of 
   // the mark - pick up the courseMark from the state
-  const mark = 100;
+  const mark = "100";
 
-  const { Text } = Typography;
-
-  console.log(mark, showMarks);
+  // const { Text } = Typography;
 
   // ! REMOVE TRUE
   // showMarks = true;
 
   return (
-    <div className="marks-cont">
-      STILL AHHHHH
-      {/* <Text strong className="text">
-        Mark:
-      </Text>
-      <Text className="text marks-val">
-        {(mark) ? mark : "Unavailable"}
-      </Text> */}
-    </div>
+    <div>
+      AHHHHHHHH
+    </div >
   )
+
+  // return (
+  //   <div className="marks-cont">
+  //     STILL AHHHHH
+  //     <Text strong className="text">
+  //       Mark:
+  //     </Text>
+  //     <Text className="text marks-val">
+  //       {(mark) ? mark : "Unavailable"}
+  //     </Text>
+  //   </div>
+  // )
   
   // return (showMarks) ? (
   //   <div className="marks-cont">
