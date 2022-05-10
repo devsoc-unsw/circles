@@ -83,8 +83,7 @@ export const PlannerCart = () => {
 
   useEffect(() => {
     const handlerClickOutside = (e) => {
-      console.log(e.target);
-      if (cartRef?.current?.contains(e.target) === false) {
+      if (!cartRef?.current?.contains(e.target)) {
         setOpenMenu(false);
       }
     };
