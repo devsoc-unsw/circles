@@ -170,6 +170,7 @@ const TermPlanner = () => {
               <div className="gridItem">Term 1</div>
               <div className="gridItem">Term 2</div>
               <div className="gridItem">Term 3</div>
+              {/* Empty div to add space for fixed unplanned column */}
               <div className="gridItem" />
 
               {years.map((year, index) => {
@@ -198,6 +199,7 @@ const TermPlanner = () => {
                         />
                       );
                     })}
+                    {/* Empty div to add space for fixed unplanned column */}
                     <div />
                   </React.Fragment>
                 );
