@@ -91,19 +91,6 @@
         ],
         "broke at": "Index 2, program"
     },
-    "ARTS1064": {
-        "condition": {
-            "original": "Equivalent: MDIA1006<br/><br/>",
-            "processed": "Equivalent: MDIA1006"
-        },
-        "tokens": [
-            "(",
-            "Equivalent:",
-            "MDIA1006",
-            ")"
-        ],
-        "broke at": "Index 2, MDIA1006"
-    },
     "ARTS1451": {
         "condition": {
             "original": "Prerequisite: ARTS1450 or language placement approval<br/><br/>",
@@ -247,22 +234,6 @@
             ")"
         ],
         "broke at": "Index 4, placement"
-    },
-    "ARTS2020": {
-        "condition": {
-            "original": "Prerequisite: 24 units of credit at level 1. Equivalent: ARTS2032<br/><br/>",
-            "processed": "24UOC in L1. Equivalent: ARTS2032"
-        },
-        "tokens": [
-            "(",
-            "24UOC",
-            "in",
-            "L1.",
-            "Equivalent:",
-            "ARTS2032",
-            ")"
-        ],
-        "broke at": "Index 1, 24UOC"
     },
     "ARTS2050": {
         "condition": {
@@ -633,7 +604,7 @@
     "ARTS3022": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Creative Writing or English<br/>Equivalent: ARTS3046<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Creative Writing || English Equivalent: ARTS3046"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Creative Writing || English"
         },
         "tokens": [
             "(",
@@ -656,8 +627,6 @@
             "Writing",
             "||",
             "English",
-            "Equivalent:",
-            "ARTS3046",
             ")"
         ],
         "broke at": "Index 11, one"
@@ -665,7 +634,7 @@
     "ARTS3023": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Creative Writing or English<br/>Equivalent: ARTS3051<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Creative Writing || English Equivalent: ARTS3051"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Creative Writing || English"
         },
         "tokens": [
             "(",
@@ -688,8 +657,6 @@
             "Writing",
             "||",
             "English",
-            "Equivalent:",
-            "ARTS3051",
             ")"
         ],
         "broke at": "Index 11, one"
@@ -6207,7 +6174,7 @@
     "CRIM2042": {
         "condition": {
             "original": "Prerequisite: 24 units of credit overall, including CRIM1010 or CRIM1011, and enrolment in a single or double degree Criminology and Criminal Justice program, or Criminology stream. Equivalent: CRIM3001<br/><br/>",
-            "processed": "24UOC && CRIM1010 || CRIM1011 && enrolment in a single || double degree Criminology && Criminal Justice program || Criminology stream. Equivalent: CRIM3001"
+            "processed": "24UOC && CRIM1010 || CRIM1011 && enrolment in a single || double degree Criminology && Criminal Justice program || Criminology stream"
         },
         "tokens": [
             "(",
@@ -6231,9 +6198,7 @@
             "program",
             "||",
             "Criminology",
-            "stream.",
-            "Equivalent:",
-            "CRIM3001",
+            "stream",
             ")"
         ],
         "broke at": "Index 8, in"
@@ -6826,48 +6791,6 @@
         ],
         "broke at": "Index 3, any"
     },
-    "DPBS1100": {
-        "condition": {
-            "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
-            "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)"
-        },
-        "tokens": [
-            "(",
-            "UNSW",
-            "Global",
-            "Diplomas",
-            "only",
-            "(",
-            "7001,",
-            "7002,",
-            "7003,",
-            "7004",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 2, Global"
-    },
-    "DPBS1101": {
-        "condition": {
-            "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
-            "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)"
-        },
-        "tokens": [
-            "(",
-            "UNSW",
-            "Global",
-            "Diplomas",
-            "only",
-            "(",
-            "7001,",
-            "7002,",
-            "7003,",
-            "7004",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 2, Global"
-    },
     "DPBS1102": {
         "condition": {
             "original": "Prereq: DPBS1101 + 6UOC GLDIP + enrolment in a Global Diploma program<br/><br/>",
@@ -6933,27 +6856,6 @@
             ")"
         ],
         "broke at": "Index 3, any"
-    },
-    "DPBS1140": {
-        "condition": {
-            "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
-            "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)"
-        },
-        "tokens": [
-            "(",
-            "UNSW",
-            "Global",
-            "Diplomas",
-            "only",
-            "(",
-            "7001,",
-            "7002,",
-            "7003,",
-            "7004",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 2, Global"
     },
     "DPBS1150": {
         "condition": {
@@ -7044,27 +6946,6 @@
             ")"
         ],
         "broke at": "Index 7, &&"
-    },
-    "DPBS1203": {
-        "condition": {
-            "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
-            "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)"
-        },
-        "tokens": [
-            "(",
-            "UNSW",
-            "Global",
-            "Diplomas",
-            "only",
-            "(",
-            "7001,",
-            "7002,",
-            "7003,",
-            "7004",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 2, Global"
     },
     "DPBS1501": {
         "condition": {
@@ -7449,75 +7330,6 @@
         ],
         "broke at": "Index 4, Enrolment"
     },
-    "DPGE1001": {
-        "condition": {
-            "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
-            "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)"
-        },
-        "tokens": [
-            "(",
-            "UNSW",
-            "Global",
-            "Diplomas",
-            "only",
-            "(",
-            "7001,",
-            "7002,",
-            "7003,",
-            "7004",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 2, Global"
-    },
-    "DPGE1002": {
-        "condition": {
-            "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) and DPGE1001<br/><br/>",
-            "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) && DPGE1001"
-        },
-        "tokens": [
-            "(",
-            "UNSW",
-            "Global",
-            "Diplomas",
-            "only",
-            "(",
-            "7001,",
-            "7002,",
-            "7003,",
-            "7004",
-            ")",
-            "&&",
-            "DPGE1001",
-            ")"
-        ],
-        "broke at": "Index 2, Global"
-    },
-    "DPGE1003": {
-        "condition": {
-            "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004), DPGE1001 and DPGE1002<br/><br/>",
-            "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004), DPGE1001 && DPGE1002"
-        },
-        "tokens": [
-            "(",
-            "UNSW",
-            "Global",
-            "Diplomas",
-            "only",
-            "(",
-            "7001,",
-            "7002,",
-            "7003,",
-            "7004",
-            ")",
-            ",",
-            "DPGE1001",
-            "&&",
-            "DPGE1002",
-            ")"
-        ],
-        "broke at": "Index 2, Global"
-    },
     "DPHU1001": {
         "condition": {
             "original": "Enrolment in 7005 UNSW Global Diploma in Media and Communication Program.<br/><br/>",
@@ -7694,144 +7506,20 @@
         ],
         "broke at": "Index 2, in"
     },
-    "DPST1013": {
-        "condition": {
-            "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
-            "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)"
-        },
-        "tokens": [
-            "(",
-            "UNSW",
-            "Global",
-            "Diplomas",
-            "only",
-            "(",
-            "7001,",
-            "7002,",
-            "7003,",
-            "7004",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 2, Global"
-    },
-    "DPST1014": {
-        "condition": {
-            "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) and prerequisite DPST1013<br/><br/>",
-            "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) && DPST1013"
-        },
-        "tokens": [
-            "(",
-            "UNSW",
-            "Global",
-            "Diplomas",
-            "only",
-            "(",
-            "7001,",
-            "7002,",
-            "7003,",
-            "7004",
-            ")",
-            "&&",
-            "DPST1013",
-            ")"
-        ],
-        "broke at": "Index 2, Global"
-    },
-    "DPST1021": {
-        "condition": {
-            "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) and corequisite DPST1013<br/><br/>",
-            "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) && [DPST1013]"
-        },
-        "tokens": [
-            "(",
-            "UNSW",
-            "Global",
-            "Diplomas",
-            "only",
-            "(",
-            "7001,",
-            "7002,",
-            "7003,",
-            "7004",
-            ")",
-            "&&",
-            "[",
-            "DPST1013",
-            "]",
-            ")"
-        ],
-        "broke at": "Index 2, Global"
-    },
-    "DPST1022": {
-        "condition": {
-            "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004), prerequisite DPST1021 OR DPST1023 and corequisite DPST1014<br/><br/>",
-            "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004), DPST1021 || DPST1023 && [DPST1014]"
-        },
-        "tokens": [
-            "(",
-            "UNSW",
-            "Global",
-            "Diplomas",
-            "only",
-            "(",
-            "7001,",
-            "7002,",
-            "7003,",
-            "7004",
-            ")",
-            ",",
-            "DPST1021",
-            "||",
-            "DPST1023",
-            "&&",
-            "[",
-            "DPST1014",
-            "]",
-            ")"
-        ],
-        "broke at": "Index 2, Global"
-    },
-    "DPST1023": {
-        "condition": {
-            "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) and corequisite DPST1013 <br/><br/>",
-            "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) && [DPST1013]"
-        },
-        "tokens": [
-            "(",
-            "UNSW",
-            "Global",
-            "Diplomas",
-            "only",
-            "(",
-            "7001,",
-            "7002,",
-            "7003,",
-            "7004",
-            ")",
-            "&&",
-            "[",
-            "DPST1013",
-            "]",
-            ")"
-        ],
-        "broke at": "Index 2, Global"
-    },
     "DPST1024": {
         "condition": {
             "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) prerequisite DPST1023 OR a credit (\u226565%) in DPST1021 and corequisite DPST1014<br/><br/>",
-            "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) DPST1023 || a credit (\u226565%) in DPST1021 && [DPST1014]"
+            "processed": "(7001 || 7002 || 7003 || 7004) DPST1023 || a credit (\u226565%) in DPST1021 && [DPST1014]"
         },
         "tokens": [
             "(",
-            "UNSW",
-            "Global",
-            "Diplomas",
-            "only",
             "(",
-            "7001,",
-            "7002,",
-            "7003,",
+            "7001",
+            "||",
+            "7002",
+            "||",
+            "7003",
+            "||",
             "7004",
             ")",
             "DPST1023",
@@ -7849,248 +7537,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 2, Global"
-    },
-    "DPST1031": {
-        "condition": {
-            "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
-            "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)"
-        },
-        "tokens": [
-            "(",
-            "UNSW",
-            "Global",
-            "Diplomas",
-            "only",
-            "(",
-            "7001,",
-            "7002,",
-            "7003,",
-            "7004",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 2, Global"
-    },
-    "DPST1032": {
-        "condition": {
-            "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) and DPST1031<br/><br/>",
-            "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) && DPST1031"
-        },
-        "tokens": [
-            "(",
-            "UNSW",
-            "Global",
-            "Diplomas",
-            "only",
-            "(",
-            "7001,",
-            "7002,",
-            "7003,",
-            "7004",
-            ")",
-            "&&",
-            "DPST1031",
-            ")"
-        ],
-        "broke at": "Index 2, Global"
-    },
-    "DPST1041": {
-        "condition": {
-            "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
-            "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)"
-        },
-        "tokens": [
-            "(",
-            "UNSW",
-            "Global",
-            "Diplomas",
-            "only",
-            "(",
-            "7001,",
-            "7002,",
-            "7003,",
-            "7004",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 2, Global"
-    },
-    "DPST1051": {
-        "condition": {
-            "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
-            "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)"
-        },
-        "tokens": [
-            "(",
-            "UNSW",
-            "Global",
-            "Diplomas",
-            "only",
-            "(",
-            "7001,",
-            "7002,",
-            "7003,",
-            "7004",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 2, Global"
-    },
-    "DPST1052": {
-        "condition": {
-            "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
-            "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)"
-        },
-        "tokens": [
-            "(",
-            "UNSW",
-            "Global",
-            "Diplomas",
-            "only",
-            "(",
-            "7001,",
-            "7002,",
-            "7003,",
-            "7004",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 2, Global"
-    },
-    "DPST1061": {
-        "condition": {
-            "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
-            "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)"
-        },
-        "tokens": [
-            "(",
-            "UNSW",
-            "Global",
-            "Diplomas",
-            "only",
-            "(",
-            "7001,",
-            "7002,",
-            "7003,",
-            "7004",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 2, Global"
-    },
-    "DPST1071": {
-        "condition": {
-            "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
-            "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)"
-        },
-        "tokens": [
-            "(",
-            "UNSW",
-            "Global",
-            "Diplomas",
-            "only",
-            "(",
-            "7001,",
-            "7002,",
-            "7003,",
-            "7004",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 2, Global"
-    },
-    "DPST1072": {
-        "condition": {
-            "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004), DPST1013 and DPST1021 OR DPST1023<br/><br/>",
-            "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004), DPST1013 && DPST1021 || DPST1023"
-        },
-        "tokens": [
-            "(",
-            "UNSW",
-            "Global",
-            "Diplomas",
-            "only",
-            "(",
-            "7001,",
-            "7002,",
-            "7003,",
-            "7004",
-            ")",
-            ",",
-            "DPST1013",
-            "&&",
-            "DPST1021",
-            "||",
-            "DPST1023",
-            ")"
-        ],
-        "broke at": "Index 2, Global"
-    },
-    "DPST1081": {
-        "condition": {
-            "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
-            "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)"
-        },
-        "tokens": [
-            "(",
-            "UNSW",
-            "Global",
-            "Diplomas",
-            "only",
-            "(",
-            "7001,",
-            "7002,",
-            "7003,",
-            "7004",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 2, Global"
-    },
-    "DPST1091": {
-        "condition": {
-            "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
-            "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)"
-        },
-        "tokens": [
-            "(",
-            "UNSW",
-            "Global",
-            "Diplomas",
-            "only",
-            "(",
-            "7001,",
-            "7002,",
-            "7003,",
-            "7004",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 2, Global"
-    },
-    "DPST1092": {
-        "condition": {
-            "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) and DPST1091<br/><br/>",
-            "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) && DPST1091"
-        },
-        "tokens": [
-            "(",
-            "UNSW",
-            "Global",
-            "Diplomas",
-            "only",
-            "(",
-            "7001,",
-            "7002,",
-            "7003,",
-            "7004",
-            ")",
-            "&&",
-            "DPST1091",
-            ")"
-        ],
-        "broke at": "Index 2, Global"
+        "broke at": "Index 13, credit"
     },
     "ECON2101": {
         "condition": {
@@ -13381,7 +12828,7 @@
     "MDIA2010": {
         "condition": {
             "original": "Prerequisite: 24 units of credit at level 1, and enrolment in a single or dual award Media program or enrolment in a Creative Writing major or minor. Equivalent: MDIA3001<br/><br/>",
-            "processed": "24UOC in L1 && (4510 || 3454 || 3438 || 3453) || enrolment in a Creative Writing major || minor. Equivalent: MDIA3001"
+            "processed": "24UOC in L1 && (4510 || 3454 || 3438 || 3453) || enrolment in a Creative Writing major || minor"
         },
         "tokens": [
             "(",
@@ -13406,9 +12853,7 @@
             "Writing",
             "major",
             "||",
-            "minor.",
-            "Equivalent:",
-            "MDIA3001",
+            "minor",
             ")"
         ],
         "broke at": "Index 16, in"
@@ -14629,22 +14074,6 @@
         ],
         "broke at": "Index 6, &&"
     },
-    "OPTM6421": {
-        "condition": {
-            "original": "Prerequisite: OPTM6400, Corequisite: OPTM6412, Exclusion:OPTM4211<br/><br/>",
-            "processed": "OPTM6400 && [OPTM6412,]"
-        },
-        "tokens": [
-            "(",
-            "OPTM6400",
-            "&&",
-            "[",
-            "OPTM6412,",
-            "]",
-            ")"
-        ],
-        "broke at": "Index 4, OPTM6412,"
-    },
     "OPTM6424": {
         "condition": {
             "original": "Prerequisite:  OPTM6412 and OPTM6411 and OPTM6400 and enrolment in program 3182 or 8095. Exclusion: OPTM4271<br/><br/>",
@@ -15642,7 +15071,7 @@
     "SOCW3012": {
         "condition": {
             "original": "Prerequisite: ARTS1753 or ARTS1870 or ARTS1871 and PSYC1001, SOCW2006, SOCW2008, SOCW2009, SOCW2100, SOSS/SRAP1000, SOSS/SRAP1001,  ARTS2871 or SOSS/SRAP2002, and enrolment in a Social Work program. Equivalent: SOCW3001 and SOCW3011<br/><br/>",
-            "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOSS/SRAP1000 || SOSS/SRAP1001 || ARTS2871 || SOSS/SRAP2002 && (4033) . Equivalent: SOCW3001 && SOCW3011"
+            "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOSS/SRAP1000 || SOSS/SRAP1001 || ARTS2871 || SOSS/SRAP2002 && (4033)"
         },
         "tokens": [
             "(",
@@ -15673,63 +15102,9 @@
             "(",
             "4033",
             ")",
-            ".",
-            "Equivalent:",
-            "SOCW3001",
-            "&&",
-            "SOCW3011",
             ")"
         ],
         "broke at": "Index 18, ||"
-    },
-    "SOCW3013": {
-        "condition": {
-            "original": "Prerequisite: ARTS1753 or ARTS1870 or ARTS1871 and PSYC1001, SOCW2006, SOCW2008, SOCW2009, SOCW2100, SOCW3012, SOSS1000, SOSS1001, ARTS2871 or SRAP2002, and enrolment in a Social Work program. Equivalent: SOCW3001 and SOCW3011. Corequisite: SOCW3009<br/><br/>",
-            "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOCW3012 || SOSS1000 || SOSS1001 || ARTS2871 || SRAP2002 && (4033) . Equivalent: SOCW3001 && SOCW3011 && [SOCW3009]"
-        },
-        "tokens": [
-            "(",
-            "ARTS1753",
-            "||",
-            "ARTS1870",
-            "||",
-            "ARTS1871",
-            "&&",
-            "PSYC1001",
-            "||",
-            "SOCW2006",
-            "||",
-            "SOCW2008",
-            "||",
-            "SOCW2009",
-            "||",
-            "SOCW2100",
-            "||",
-            "SOCW3012",
-            "||",
-            "SOSS1000",
-            "||",
-            "SOSS1001",
-            "||",
-            "ARTS2871",
-            "||",
-            "SRAP2002",
-            "&&",
-            "(",
-            "4033",
-            ")",
-            ".",
-            "Equivalent:",
-            "SOCW3001",
-            "&&",
-            "SOCW3011",
-            "&&",
-            "[",
-            "SOCW3009",
-            "]",
-            ")"
-        ],
-        "broke at": "Index 31, Equivalent:"
     },
     "SOCW4003": {
         "condition": {
@@ -15925,64 +15300,6 @@
         ],
         "broke at": "Index 4, SOCW4011,"
     },
-    "SOCW4017": {
-        "condition": {
-            "original": "Prerequisite: SOCW4003, SOCW4011, SOCW4012, and enrolment in a Social Work program. Corequisite: SOCW4013. Equivalent: SOCW4014, SOCW4001<br/><br/>",
-            "processed": "SOCW4003 && SOCW4011 && SOCW4012 && (4033) && [SOCW4013. Equivalent: SOCW4014, SOCW4001]"
-        },
-        "tokens": [
-            "(",
-            "SOCW4003",
-            "&&",
-            "SOCW4011",
-            "&&",
-            "SOCW4012",
-            "&&",
-            "(",
-            "4033",
-            ")",
-            "&&",
-            "[",
-            "SOCW4013.",
-            "Equivalent:",
-            "SOCW4014,",
-            "SOCW4001",
-            "]",
-            ")"
-        ],
-        "broke at": "Index 12, SOCW4013."
-    },
-    "SOCW4018": {
-        "condition": {
-            "original": "Prerequisite: SOCW4003, SOCW4011, SOCW4012, SOCW4013 and enrolment in a Social Work program. Corequisite: SOCW4015 or SOCW4016. Equivalent: SOCW4014, SOCW4001<br/><br/>",
-            "processed": "SOCW4003 && SOCW4011 && SOCW4012 && SOCW4013 && (4033) && [SOCW4015 || SOCW4016. Equivalent: SOCW4014, SOCW4001]"
-        },
-        "tokens": [
-            "(",
-            "SOCW4003",
-            "&&",
-            "SOCW4011",
-            "&&",
-            "SOCW4012",
-            "&&",
-            "SOCW4013",
-            "&&",
-            "(",
-            "4033",
-            ")",
-            "&&",
-            "[",
-            "SOCW4015",
-            "||",
-            "SOCW4016.",
-            "Equivalent:",
-            "SOCW4014,",
-            "SOCW4001",
-            "]",
-            ")"
-        ],
-        "broke at": "Index 16, SOCW4016."
-    },
     "SOLA4951": {
         "condition": {
             "original": "Prerequisite: Completion of 126 UOC and completion of 3rd year core<br/><br/>",
@@ -16164,16 +15481,14 @@
     "SOSS3001": {
         "condition": {
             "original": "Prerequisite: SOSS/SRAP1001. <br/>Equivalent: SRAP3001<br/><br/>",
-            "processed": "SOSS/SRAP1001. Equivalent: SRAP3001"
+            "processed": "SOSS/SRAP1001"
         },
         "tokens": [
             "(",
-            "SOSS/SRAP1001.",
-            "Equivalent:",
-            "SRAP3001",
+            "SOSS/SRAP1001",
             ")"
         ],
-        "broke at": "Index 2, Equivalent:"
+        "broke at": "Index 2, )"
     },
     "SOSS3002": {
         "condition": {
@@ -16198,15 +15513,13 @@
     "SOSS3003": {
         "condition": {
             "original": "Prerequisite: SOSS/SRAP1000 and ARTS2871. Equivalent: SRAP2002<br/><br/>",
-            "processed": "SOSS/SRAP1000 && ARTS2871. Equivalent: SRAP2002"
+            "processed": "SOSS/SRAP1000 && ARTS2871"
         },
         "tokens": [
             "(",
             "SOSS/SRAP1000",
             "&&",
-            "ARTS2871.",
-            "Equivalent:",
-            "SRAP2002",
+            "ARTS2871",
             ")"
         ],
         "broke at": "Index 2, &&"
@@ -16214,7 +15527,7 @@
     "SOSS3006": {
         "condition": {
             "original": "Prerequisite: SOSS/SRAP1000, SOSS/SRAP1001, SOSS/SRAP2001, DIPP1112 or CDEV1112, and enrolment in a Social Science or Social Research and Policy program.<br/>Equivalent: SRAP3006<br/><br/>",
-            "processed": "SOSS/SRAP1000, SOSS/SRAP1001, SOSS/SRAP2001, DIPP1112 || CDEV1112 && (3321 || 3420) . Equivalent: SRAP3006"
+            "processed": "SOSS/SRAP1000, SOSS/SRAP1001, SOSS/SRAP2001, DIPP1112 || CDEV1112 && (3321 || 3420)"
         },
         "tokens": [
             "(",
@@ -16230,9 +15543,6 @@
             "||",
             "3420",
             ")",
-            ".",
-            "Equivalent:",
-            "SRAP3006",
             ")"
         ],
         "broke at": "Index 2, SOSS/SRAP1001,"

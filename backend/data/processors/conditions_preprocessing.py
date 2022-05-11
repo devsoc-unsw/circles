@@ -74,7 +74,7 @@ def preprocess_conditions():
         processed = original
 
         # Phase 1: Deletions
-        processed = delete_exclusions(processed)
+        processed = delete_exclusions_and_equivalents(processed)
         processed = delete_HTML(processed)
         processed = delete_self_referencing(code, processed)
         processed = delete_extraneous_phrasing(processed)
@@ -105,6 +105,7 @@ def preprocess_conditions():
         # Phase 5: Common patterns
         processed = uoc_in_business_school(processed)
         processed = l2_math_courses(processed)
+        processed = unsw_global_degrees(processed)
 
         conditions["processed"] = processed
 
@@ -118,16 +119,21 @@ def preprocess_conditions():
 # -------------------
 
 
-def delete_exclusions(processed):
+def delete_exclusions_and_equivalents(processed):
     """Removes exclusions from enrolment conditions"""
     # Remove exclusion string which appears before prerequisite plaintext
-    excl_string = re.search(r"(excl.*?:.*?)(pre)", processed, flags=re.IGNORECASE)
+    excl_string = re.search(r"(excl.*?:.*?)(pre|co-?req)", processed, flags=re.IGNORECASE)
+    equiv_string = re.search(r"(equiv.*?:.*?)(pre|co-?req)", processed, flags=re.IGNORECASE)
     if excl_string:
         processed = re.sub(excl_string.group(1), "", processed)
 
+    if equiv_string:
+        processed = re.sub(equiv_string.group(1), "", processed)
+
     # Remove exclusion string appearing after prerequisite plaintext, typically
     # at the end of the enrolment rule
-    processed = re.sub(r"excl.*", "", processed, flags=re.IGNORECASE)
+    processed = re.sub(r"((\.|,)?\s)?excl.*", "", processed, flags=re.IGNORECASE)
+    processed = re.sub(r"((\.|,)?\s)?equiv.*?:.*", "", processed, flags=re.IGNORECASE)
 
     return processed
 
@@ -489,6 +495,25 @@ def map_word_to_program_type(processed, regex_word, type):
         processed,
         flags=re.IGNORECASE,
     )  # hard to capture a generic case?
+
+def unsw_global_degrees(processed):
+    processed =  re.sub(
+        r"UNSW Global Diplomas only \(7001, 7002, 7003, 7004\)",
+        "(7001 || 7002 || 7003 || 7004)",
+        processed,
+        flags=re.IGNORECASE,
+    )
+
+    processed =  re.sub(
+        "\(7001 \|\| 7002 \|\| 7003 \|\| 7004\),",
+        "(7001 || 7002 || 7003 || 7004) &&",
+        processed,
+        flags=re.IGNORECASE,
+    )
+
+    return processed
+
+
 
 if __name__ == "__main__":
     preprocess_conditions()
