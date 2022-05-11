@@ -11,6 +11,7 @@ Run from the backend directory with python3 -m algorithms.log_broken
 import json
 
 from algorithms.create import make_condition
+from data.utility import data_helpers
 
 CONDITIONS_TOKENS_FILE = "./data/final_data/conditionsTokens.json"
 CONDITIONS_PROCESSED_FILE = "./data/final_data/conditionsProcessed.json"
@@ -42,12 +43,8 @@ def log_broken_conditions():
                 "broke at": report_index_string(tokens, bad_index),
             }
 
-    with open(ERROR_OUTPUT_FILE, "w", encoding="utf8") as out:
-        json.dump(output, out, indent=4)
+    data_helpers.write_data(output, ERROR_OUTPUT_FILE)
 
-
-if __name__ == "__main__":
-    log_broken_conditions()
 
 
 def report_index_string(tokens, bad_index):
@@ -55,3 +52,7 @@ def report_index_string(tokens, bad_index):
     Generate a string the index of break and, the tokens broken
     """
     return f"Index {bad_index}, {'exclusions' if bad_index == -1 else tokens[bad_index]}"
+
+
+if __name__ == "__main__":
+    log_broken_conditions()
