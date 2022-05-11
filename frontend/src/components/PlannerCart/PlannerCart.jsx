@@ -3,7 +3,7 @@ import {
   Tooltip, Button, Typography, Alert,
 } from "antd";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { CalendarOutlined, DeleteOutlined } from "@ant-design/icons";
 import { removeAllCourses } from "../../reducers/plannerSlice";
 import "./index.less";
@@ -31,6 +31,11 @@ const PlannerCart = () => {
     }, 3500);
   };
   const cartRef = useRef();
+  const pathname = useLocation();
+
+  useEffect(() => {
+    setOpenMenu(false);
+  }, [pathname]);
 
   useEffect(() => {
     const handlerClickOutside = (e) => {
@@ -94,7 +99,6 @@ const PlannerCart = () => {
                 shape="round"
                 className="planner-cart-link-to-cs"
                 onClick={() => {
-                  setOpenMenu(false);
                   navigate("/course-selector");
                 }}
               >
