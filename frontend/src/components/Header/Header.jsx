@@ -39,10 +39,11 @@ const Header = () => {
   const isSmall = useMediaQuery("(max-width: 1000px)");
   const [showDrawer, setShowDrawer] = useState(false);
   const [current, setCurrent] = useState(getCurrentPath());
+  const url = window.location.pathname;
 
   useEffect(() => {
     setCurrent(getCurrentPath());
-  }, []);
+  }, [url]);
 
   return (
     <Layout className="header">
