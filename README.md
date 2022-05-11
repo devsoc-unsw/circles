@@ -7,7 +7,7 @@ Tired of using a poorly laid out spreadsheet to cobble together a plan to follow
 Circles is a UNSW degree planner where you can explore and validate your degree structure.
 
 ### Features
-<img src="https://raw.githubusercontent.com/csesoc/Circles/dev/frontend/src/images/infographic.png">
+<img src="https://raw.githubusercontent.com/csesoc/Circles/dev/frontend/src/assets/infographic.png">
 NOTE: we currently only support the Computer Science (3778) degree - but we will add more!
 
 - Adaptive course selector:

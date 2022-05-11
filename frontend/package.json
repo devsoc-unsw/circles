@@ -7,10 +7,10 @@
     "@ant-design/colors": "6.0.0",
     "@ant-design/icons": "4.7.0",
     "@craco/craco": "6.4.3",
-    "@react-spring/web": "9.4.4",
+    "@react-spring/web": "9.4.5",
     "@reduxjs/toolkit": "1.8.1",
     "@tippyjs/react": "4.2.6",
-    "antd": "4.20.2",
+    "antd": "4.20.3",
     "axios": "0.27.2",
     "craco-less": "1.20.0",
     "framer-motion": "6.3.3",
@@ -20,21 +20,21 @@
     "react-component-export-image": "1.0.6",
     "react-contexify": "5.0.0",
     "react-dom": "17.0.2",
-    "react-flow-renderer": "10.2.0",
+    "react-flow-renderer": "10.2.2",
     "react-icons": "4.3.1",
-    "react-redux": "7.2.8",
+    "react-redux": "8.0.1",
     "react-router-dom": "6.3.0",
     "react-scripts": "4.0.3",
     "react-scroll": "1.8.7",
-    "react-svg": "15.0.0",
+    "react-svg": "15.0.1",
     "react-tooltip": "4.2.21",
     "redux": "4.2.0",
     "redux-thunk": "2.4.1",
-    "use-debounce": "8.0.0",
+    "use-debounce": "8.0.1",
     "web-vitals": "2.1.4"
   },
   "resolutions": {
-    "react-error-overlay": "6.0.9"
+    "react-error-overlay": "6.0.11"
   },
   "scripts": {
     "start": "craco start",
@@ -71,6 +71,6 @@
     "eslint-plugin-promise": "6.0.0",
     "eslint-plugin-react": "7.29.4",
     "eslint-plugin-react-hooks": "4.5.0",
-    "react-error-overlay": "6.0.9"
+    "react-error-overlay": "6.0.11"
   }
 }

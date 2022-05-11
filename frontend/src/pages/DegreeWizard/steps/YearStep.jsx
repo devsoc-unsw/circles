@@ -3,7 +3,7 @@ import { Typography, Button, DatePicker } from "antd";
 import { useDispatch } from "react-redux";
 import "./steps.less";
 import { useSpring, animated } from "@react-spring/web";
-import springProps from "../spring";
+import springProps from "./spring";
 import { updateDegreeLength, updateStartYear } from "../../../reducers/plannerSlice";
 
 const { Title } = Typography;
