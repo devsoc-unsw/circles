@@ -123,7 +123,7 @@ def delete_exclusions_and_equivalents(processed):
     """Removes exclusions from enrolment conditions"""
     # Remove exclusion string which appears before prerequisite plaintext
     excl_string = re.search(r"(excl.*?:.*?)(pre|co-?req)", processed, flags=re.IGNORECASE)
-    equiv_string = re.search(r"(equivalent:.*?)(pre|co-?req)", processed, flags=re.IGNORECASE)
+    equiv_string = re.search(r"(equiv.*?:.*?)(pre|co-?req)", processed, flags=re.IGNORECASE)
     if excl_string:
         processed = re.sub(excl_string.group(1), "", processed)
 
@@ -133,7 +133,7 @@ def delete_exclusions_and_equivalents(processed):
     # Remove exclusion string appearing after prerequisite plaintext, typically
     # at the end of the enrolment rule
     processed = re.sub(r"((\.|,)?\s)?excl.*", "", processed, flags=re.IGNORECASE)
-    processed = re.sub(r"((\.|,)?\s)?equivalent:.*", "", processed, flags=re.IGNORECASE)
+    processed = re.sub(r"((\.|,)?\s)?equiv.*?:.*", "", processed, flags=re.IGNORECASE)
 
     return processed
 
