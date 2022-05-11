@@ -43,6 +43,7 @@ let initialState = {
   startYear: fakeStartYear,
   numYears: fakeNumYears,
   isSummerEnabled: false,
+  isLockedEnabled: false,
   years: [
     {
       T0: [], T1: [], T2: [], T3: [],
@@ -224,6 +225,10 @@ const plannerSlice = createSlice({
 
       localStorage.setItem("planner", JSON.stringify(state));
     },
+    toggleCourseLock: (state) => {
+      state.isLockedEnabled = !state.isLockedEnabled;
+      localStorage.setItem("planner", JSON.stringify(state));
+    },
     toggleTermComplete: (state, action) => {
       const isCompleted = state.completedTerms[action.payload];
       state.completedTerms[action.payload] = !isCompleted;
@@ -315,7 +320,7 @@ const plannerSlice = createSlice({
 export const {
   addToUnplanned, setUnplannedCourseToTerm, setPlannedCourseToTerm,
   toggleWarnings, setUnplanned, removeCourse, removeCourses, removeAllCourses,
-  moveCourse, unschedule, unscheduleAll, toggleSummer, toggleTermComplete,
+  moveCourse, unschedule, unscheduleAll, toggleSummer, toggleCourseLock, toggleTermComplete,
   updateStartYear, updateDegreeLength, hideYear, unhideAllYears, resetPlanner,
 } = plannerSlice.actions;
 
