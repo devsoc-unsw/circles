@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { BarsOutlined } from "@ant-design/icons";
 import {
   Menu, Layout, Typography, Button, Drawer,
@@ -39,7 +39,7 @@ const Header = () => {
   const isSmall = useMediaQuery("(max-width: 1000px)");
   const [showDrawer, setShowDrawer] = useState(false);
   const [current, setCurrent] = useState(getCurrentPath());
-  const url = window.location.pathname;
+  const url = useLocation();
 
   useEffect(() => {
     setCurrent(getCurrentPath());
