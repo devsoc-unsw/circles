@@ -9,7 +9,7 @@ import CourseTabs from "./CourseTabs";
 import PageTemplate from "../../components/PageTemplate";
 import "./index.less";
 import CourseSearchBar from "./CourseSearchBar";
-import { toggleCourseLock } from "../../reducers/plannerSlice";
+import { toggleCourseLock } from "../../reducers/coursesSlice";
 
 const CourseSelector = () => {
   const [structure, setStructure] = useState({});
@@ -19,10 +19,9 @@ const CourseSelector = () => {
     programCode, programName, specialisation, minor,
   } = useSelector((state) => state.degree);
 
-  const { isLockedEnabled } = useSelector((state) => state.planner);
+  const { isLockedEnabled } = useSelector((state) => state.courses);
 
   const handleChange = () => {
-    console.log(isLockedEnabled);
     dispatch(toggleCourseLock());
   };
 
