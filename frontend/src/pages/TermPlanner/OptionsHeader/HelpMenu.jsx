@@ -3,13 +3,13 @@ import { Typography, Divider } from "antd";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
 import dragAndDropGif from "../../../assets/helpGifs/drag-and-drop.gif";
-import dragAndDropPng from "../../../assets/helpGifs/drag-and-drop.png";
+import dragAndDropPic from "../../../assets/helpGifs/drag-and-drop.jpg";
 import unscheduleGif from "../../../assets/helpGifs/unschedule.gif";
-import unschedulePng from "../../../assets/helpGifs/unschedule.png";
+import unschedulePic from "../../../assets/helpGifs/unschedule.jpg";
 import hideYearGif from "../../../assets/helpGifs/hide-year.gif";
-import hideYearPng from "../../../assets/helpGifs/hide-year.png";
+import hideYearPic from "../../../assets/helpGifs/hide-year.jpg";
 import additionalOptionsGif from "../../../assets/helpGifs/additional-options.gif";
-import additionalOptionsPng from "../../../assets/helpGifs/additional-options.png";
+import additionalOptionsPic from "../../../assets/helpGifs/additional-options.jpg";
 
 const HelpMenu = () => {
   const [dragAndDropPlaying, setDragAndDropPlaying] = useState(false);
@@ -36,7 +36,7 @@ const HelpMenu = () => {
           className="helpGif"
           onMouseEnter={() => { setDragAndDropPlaying(true); }}
           onMouseLeave={() => { setDragAndDropPlaying(false); }}
-          src={dragAndDropPlaying ? dragAndDropGif : dragAndDropPng}
+          src={dragAndDropPlaying ? dragAndDropGif : dragAndDropPic}
           alt="drag and drop walkthrough"
         />
       </div>
@@ -50,7 +50,7 @@ const HelpMenu = () => {
           className="helpGif"
           onMouseEnter={() => { setUnschedulePlaying(true); }}
           onMouseLeave={() => { setUnschedulePlaying(false); }}
-          src={unschedulePlaying ? unscheduleGif : unschedulePng}
+          src={unschedulePlaying ? unscheduleGif : unschedulePic}
           alt="context menu walkthrough"
         />
       </div>
@@ -64,7 +64,7 @@ const HelpMenu = () => {
           className="helpGif"
           onMouseEnter={() => { setHideYearPlaying(true); }}
           onMouseLeave={() => { setHideYearPlaying(false); }}
-          src={hideYearPlaying ? hideYearGif : hideYearPng}
+          src={hideYearPlaying ? hideYearGif : hideYearPic}
           alt="hide year walkthrough"
         />
       </div>
@@ -78,7 +78,7 @@ const HelpMenu = () => {
           className="helpGif"
           onMouseEnter={() => { setAdditionalOptionsPlaying(true); }}
           onMouseLeave={() => { setAdditionalOptionsPlaying(false); }}
-          src={additionalOptionsPlaying ? additionalOptionsGif : additionalOptionsPng}
+          src={additionalOptionsPlaying ? additionalOptionsGif : additionalOptionsPic}
           alt="additional options walkthrough"
         />
       </div>
