@@ -64,7 +64,8 @@ const DraggableCourse = ({ code, index, showMark }) => {
             className={`course ${isSummerEnabled && "summerViewCourse"} 
             ${isDragDisabled && " dragDisabledCourse"} 
             ${isDragDisabled && !isUnlocked && " disabledWarning"}
-            ${(!supressed && (!isUnlocked || !isOffered)) && " warning"}`}
+            ${(!supressed && (!isUnlocked || !isOffered)) && " warning"}
+            draggable-course-container`}
             data-tip
             data-for={code}
             id={code}
@@ -78,26 +79,28 @@ const DraggableCourse = ({ code, index, showMark }) => {
                 />
               ))}
             <div>
-              {isSmall ? (
-                <Text className="text">{code}</Text>
-              ) : (
-                <>
-                  <Text strong className="text">
-                    {code}
-                  </Text>
-                  <Text className="text">: {title} </Text>
-                </>
-              )}
-              {true ? (
-                <Marks
-                  courseCode={"COMP1511"}
-                />
-              ) : null
-              }
+              <div className="draggable-course-info">
+                {isSmall ? (
+                  <Text className="text">{code}</Text>
+                ) : (
+                  <div>
+                    <Text strong className="text">
+                      {code}
+                    </Text>
+                    <Text className="text">: {title} </Text>
+                  </div>
+                )}
+                {true ? (
+                  <Marks
+                    courseCode={"COMP1511"}
+                  />
+                ) : null
+                }
+                </div>
+            </div>
+            <div className="kebab-container">
               <KebabMenu />
             </div>
-
-
           </li>
         )}
       </Draggable>

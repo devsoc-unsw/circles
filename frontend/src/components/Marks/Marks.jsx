@@ -12,14 +12,19 @@ const Marks = ({ courseCode }) => {
   // the mark - pick up the courseMark from the state
   const mark = "100";
 
-  // const { Text } = Typography;
+  const { Text } = Typography;
 
   // ! REMOVE TRUE
   // showMarks = true;
 
   return (
     <div>
-      AHHHHHHHH
+      <Text strong className="text">
+        Mark:
+      </Text>
+      <Text classnmae="text marks-val">
+        {(mark) ? mark : "N/A"}
+      </Text>
     </div >
   )
 

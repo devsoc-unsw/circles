@@ -17,6 +17,10 @@
   background-color: #d9d9d9;
 }
 
+// .course * {
+//   border: 1px solid black;
+// }
+
 .disabledWarning {
   background-color: #fff3e0;
 }
@@ -24,6 +28,37 @@
 .warning {
   background-color: #ffe8c3;
 }
+
+.draggable-course-container {
+  // border: solid red 2px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// .draggable-course-container > * {
+  // border: solid green 1px;
+// }
+
+
+.draggable-course-info {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  padding: 0px;
+  margin: 0px;
+}
+
+.kebab-container {
+  display: flex;
+}
+
+// ? Can be nested with .less magic?
+.kebab-container > * {
+  margin: auto;
+}
+
 
 .dragDisabledCourse {
   background-color: #eee;
