@@ -14,7 +14,7 @@ import KebabMenu from "../../../components/KebabMenu";
 
 import "./index.less";
 
-const DraggableCourse = ({ code, index, showMark }) => {
+const DraggableCourse = ({ code, index, showMarks }) => {
   const { Text } = Typography;
   const { courses, isSummerEnabled, completedTerms } = useSelector((state) => state.planner);
   const theme = useSelector((state) => state.theme);
@@ -44,7 +44,7 @@ const DraggableCourse = ({ code, index, showMark }) => {
   const errorIsInformational = shouldHaveWarning && isUnlocked
     && warningMessage.length === 0 && !isLegacy && isAccurate && isOffered;
   
-  console.log("Inside DraggableCourse", showMark);
+  console.log("Inside DraggableCourse", showMarks);
 
   return (
     <>

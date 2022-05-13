@@ -24,8 +24,10 @@ const OptionsHeader = ({
   const { years } = useSelector((state) => state.planner);
   const dispatch = useDispatch();
 
-  const toggleMarksShown = () => {
-    setShowMarks(!showMarks);
+  const toggleMarksShown = (e) => {
+    e.stopPropagation();
+    showMark = !showMark;
+    setShowMarks(showMarks);
     console.log("showMarks", showMarks);
   }
 
@@ -120,6 +122,7 @@ const OptionsHeader = ({
           checkedChildren="marks shown"
           unCheckedChildren="marks hidden"
         />
+        MARKS: {showMarks ? "shown" : "hidden"}
         <Tippy
           content={<HelpMenu />}
           moveTransition="transform 0.2s ease-out"
