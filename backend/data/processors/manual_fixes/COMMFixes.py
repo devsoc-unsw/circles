@@ -27,38 +27,38 @@ COURSES = data_helpers.read_data("data/final_data/coursesProcessed.json")
 
 def fix_conditions():
     """ Functions to apply manual fixes """
-
+    
     CONDITIONS["COMM0999"][PROCESSED] = COMM_0999()
-    CONDITIONS["COMM1040"] = COMM_1040(CONDITIONS["COMM1040"])
+    #CONDITIONS["COMM1040"] = COMM_1040(CONDITIONS["COMM1040"])
     CONDITIONS["COMM1100"] = COMM_1100(CONDITIONS["COMM1100"])
     CONDITIONS["COMM1110"] = COMM_1110_1120_1140(CONDITIONS["COMM1110"])
-    CONDITIONS["COMM1120"] = COMM_1110_1120_1140(CONDITIONS["COMM1120"])
-    CONDITIONS["COMM1140"] = COMM_1110_1120_1140(CONDITIONS["COMM1140"])
+    #CONDITIONS["COMM1120"] = COMM_1110_1120_1140(CONDITIONS["COMM1120"])
+    #CONDITIONS["COMM1140"] = COMM_1110_1120_1140(CONDITIONS["COMM1140"])
     CONDITIONS["COMM1150"] = COMM_1150(CONDITIONS["COMM1150"])
-    CONDITIONS["COMM1170"] = COMM_1170_1180(CONDITIONS["COMM1170"])
-    CONDITIONS["COMM1180"] = COMM_1170_1180(CONDITIONS["COMM1180"])
-    CONDITIONS["COMM1190"] = COMM_1190(CONDITIONS["COMM1190"])
+    #CONDITIONS["COMM1170"] = COMM_1170_1180(CONDITIONS["COMM1170"])
+    #CONDITIONS["COMM1180"] = COMM_1170_1180(CONDITIONS["COMM1180"])
+    #CONDITIONS["COMM1190"] = COMM_1190(CONDITIONS["COMM1190"])
     CONDITIONS["COMM1999"] = COMM_1999(CONDITIONS["COMM1999"])
     CONDITIONS["COMM2222"] = COMM_2222(CONDITIONS["COMM2222"])
     CONDITIONS["COMM2233"] = COMM_2233(CONDITIONS["COMM2233"])
     CONDITIONS["COMM2244"] = COMM_2244(CONDITIONS["COMM2244"])
     CONDITIONS["COMM3020"] = COMM_2222(CONDITIONS["COMM3020"])
     CONDITIONS["COMM3030"][PROCESSED] = COMM_3030()
-    CONDITIONS["COMM3090"] = COMM_3090(CONDITIONS["COMM3090"])
-    CONDITIONS["COMM3091"] = COMM_3091(CONDITIONS["COMM3091"])
+    #CONDITIONS["COMM3090"] = COMM_3090(CONDITIONS["COMM3090"])
+    #CONDITIONS["COMM3091"] = COMM_3091(CONDITIONS["COMM3091"])
     CONDITIONS["COMM3101"] = COMM_3101(CONDITIONS["COMM3101"])
     CONDITIONS["COMM3202"] = COMM_3202(CONDITIONS["COMM3202"])
-    CONDITIONS["COMM3303"] = COMM_3303(CONDITIONS["COMM3303"])
+    #CONDITIONS["COMM3303"] = COMM_3303(CONDITIONS["COMM3303"])
     CONDITIONS["COMM3500"][PROCESSED] = COMM_3500()
     CONDITIONS["COMM3900"] = COMM_3900(CONDITIONS["COMM3900"])
-    CONDITIONS["COMM3999"] = COMM_3999(CONDITIONS["COMM3999"])
-    CONDITIONS["COMM6700"][PROCESSED] = COMM_6700()
+    #CONDITIONS["COMM3999"] = COMM_3999(CONDITIONS["COMM3999"])
+    #CONDITIONS["COMM6700"][PROCESSED] = COMM_6700()
 
     # Updates the files with the modified dictionaries
     data_helpers.write_data(
         CONDITIONS, "data/final_data/conditionsProcessed.json")
     data_helpers.write_data(COURSES, "data/final_data/coursesProcessed.json")
-
+    
 
 def COMM_0999():
     """
@@ -121,12 +121,13 @@ def COMM_1150(conditions):
     """
 
     COURSES["COMM1150"]["exclusions"]["MGMT1101"] = 1
+    
     return {
         "original": conditions["original"],
         "processed": "COMM1100",
         "handbook_note": "Only available to single and double degree Business School students in Term 2. Offered to non-Business School students in Term 3."
     }
-
+    
 
 def COMM_1170_1180(conditions):
     """
@@ -245,7 +246,6 @@ def COMM_3090(conditions):
         "original": conditions["original"],
         "processed": "108UOC",
         "handbook_note": "Students are expected to be in their final year of a Bachelor of Commerce single or dual degree"
-
     }
 
 def COMM_3091(conditions):
@@ -336,7 +336,7 @@ def COMM_3999(conditions):
     return {
         "original": conditions["original"],
         "processed": "COMM1999 && 72UOC in ZBUS && COMM#",
-        "handbook_note": "Studetns must be in their final year"
+        "handbook_note": "Students must be in their final year"
     }
 
 

@@ -445,8 +445,15 @@ def map_word_to_program_type(processed, regex_word, type):
 #adds handbook notes and removes phrasing
 def remove_extraneous_comm_data(conditions, processed):
     note = ""
+    # Academic Standing note
     processed, number_of_subs = re.subn(
         r"Prerequisite: Students must be in Good Academic Standing<br/><br/>", r"", processed, flags=re.IGNORECASE
+    )
+    if number_of_subs > 0:
+        note += "Students must be in Good Academic Standing."
+
+    processed, number_of_subs = re.subn(
+        r"on Good Standing and", r"", processed, flags=re.IGNORECASE
     )
     if number_of_subs > 0:
         note += "Students must be in Good Academic Standing."
@@ -456,13 +463,16 @@ def remove_extraneous_comm_data(conditions, processed):
     )
     if number_of_subs > 0:
         note += "Students must be in Good Academic Standing."
+    
 
+    # Final 2 terms note
     processed, number_of_subs = re.subn(
         r"It is strongly recommended that students only complete this course within their final 2 terms of study", r"", processed, flags=re.IGNORECASE
     )
     if number_of_subs > 0:
         note += "Recommended to take this course within their final 2 terms of study."
 
+    # Business school students notes
     processed, number_of_subs = re.subn(
         r"Only available to single and double degree Business School students in Term 1. It will be offered to non-Business School students in Terms 2 and 3.<br/><br/>", r"", processed, flags=re.IGNORECASE
     )
@@ -481,6 +491,7 @@ def remove_extraneous_comm_data(conditions, processed):
     if number_of_subs > 0:
         note += "Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Term 3.<br/><br/>"
 
+    # Application and progression check notes
     processed, number_of_subs = re.subn(
     r"This course is by application only. Please contact the Co-op office for more information", r"", processed, flags=re.IGNORECASE
     ) 
@@ -488,10 +499,10 @@ def remove_extraneous_comm_data(conditions, processed):
         note += "This course is by application only. Please contact the Co-op office for more information"
 
     processed, number_of_subs = re.subn(
-    r"completed 30 UOC of Integrated First Year Core<br/><br/>", r"", processed, flags=re.IGNORECASE
+    r"This course is by application only.", r"", processed, flags=re.IGNORECASE
     ) 
     if number_of_subs > 0:
-        note += "You must have completed 30UOC of Integrated First Year Core"
+        note += "This course is by application only."
 
     processed, number_of_subs = re.subn(
     r"Its recommended to seek a progression check prior to application.", r"", processed, flags=re.IGNORECASE
@@ -505,28 +516,59 @@ def remove_extraneous_comm_data(conditions, processed):
     if number_of_subs > 0:
         note += "This course is by application only. Please visit Business School website for more information<br/><br/>"
 
+    processed, number_of_subs = re.subn(
+    r"This course is by application only.Please visit Business School website for more information<br/><br/>", r"", processed, flags=re.IGNORECASE
+    ) 
+    if number_of_subs > 0:
+        note += "This course is by application only. Please visit Business School website for more information<br/><br/>"
+
+
     if re.search("good academic standing", processed, flags=re.IGNORECASE) != None:
         note += "Students must be in good academic standing."
-
+    
+    processed = re.sub(
+    r"be in good academic standing", r"", processed, flags=re.IGNORECASE
+    )
+    
     processed, number_of_subs = re.subn(
     r"in their final year of a single or double Commerce degree", r"", processed, flags=re.IGNORECASE
     ) 
     if number_of_subs > 0:
         note += "Students must be in their final year of a single or double Commerce degree"
-
-    #need to change this
+    processed, number_of_subs = re.subn(
+    r"Students are expected to be in their final year of a Bachelor of Commerce single or dual degree", r"", processed, flags=re.IGNORECASE
+    ) 
+    if number_of_subs > 0:
+        note += "Students must be in their final year of a single or double Commerce degree"
+    processed = re.sub(
+    r"Only available to students completing a Bachelor of Commerce as part of a single or double-degree", r"COMM#", processed, flags=re.IGNORECASE
+    )
+    processed = re.sub(
+    r"be enrolled in a Commerce Program", r"COMM#", processed, flags=re.IGNORECASE
+    )
+    
+    # need to change this/review these
     processed = re.sub(
     r"myBCom First Year Portfolio", r"", processed, flags=re.IGNORECASE
     )
-    
+    processed = re.sub(
+    r"with ", r"", processed, flags=re.IGNORECASE
+    )
+    processed, number_of_subs = re.subn(
+    r"completed 30 UOC of Integrated First Year Core<br/><br/>", r"", processed, flags=re.IGNORECASE
+    ) 
+    if number_of_subs > 0:
+        note += "You must have completed 30UOC of Integrated First Year Core"
+
     processed, number_of_subs = re.subn(
     r"First Year core", r"", processed, flags=re.IGNORECASE
     ) 
     if number_of_subs > 0:
         note += "Must have completed first year core."
-
-    
-    
+    # delete semi-colon
+    processed = re.sub(
+    r"; ", r"", processed, flags=re.IGNORECASE
+    )
     return note, processed
 
 if __name__ == "__main__":
