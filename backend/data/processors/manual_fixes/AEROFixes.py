@@ -43,6 +43,8 @@ def AERO_4110():
         "processed": "At least 144 Units in AEROAH stream. AERO3110"
     """
 
+    # TODO: Specialisations not supported as categories
+
     return "144UOC in AEROAH && AERO3110"
 
 

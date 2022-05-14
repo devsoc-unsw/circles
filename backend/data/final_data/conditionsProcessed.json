@@ -692,7 +692,7 @@
     },
     "ARTS2129": {
         "original": "24 units of credit at Level 1 courses<br/><br/>",
-        "processed": "24UOC in L1 courses"
+        "processed": "24UOC in L1"
     },
     "ARTS2150": {
         "original": "Prerequisite: 24 units of credit at Level 1<br/><br/>",
@@ -3088,7 +3088,7 @@
     },
     "CHEM2521": {
         "original": "This is the main Level 2 Organic Chemistry course taught within the School of Chemistry.<br/>It assumes knowledge of CHEM1011 and CHEM1021 or CHEM1031 and CHEM1041 or CHEM1051 and CHEM1061, AND CHEM2041. It is a core element in Chemistry major programs. It is also required for industrial chemistry, biochemistry and medicinal chemistry programs.<br/><br/>",
-        "processed": "This is the main L2 Organic Chemistry course taught within the School of Chemistry. It assumes knowledge of CHEM1011 && CHEM1021 || CHEM1031 && CHEM1041 || CHEM1051 && CHEM1061 && CHEM2041. It is a core element in Chemistry major programs. It is also required for industrial chemistry, biochemistry && medicinal chemistry programs"
+        "processed": "((CHEM1011 && CHEM1021) || (CHEM1031 && CHEM1041) || (CHEM1051 && 1061)) && CHEM2041"
     },
     "CHEM2531": {
         "original": "Prerequisite: CHEM2041 Exclusion: CHEM2031, CHEM2828, CHEM2839<br/><br/>",
@@ -3418,13 +3418,13 @@
     },
     "COMM3900": {
         "original": "Pre-requisite: Completed a minimum of 108 UOC (including First Year core), on Good standing and completed Career Accelerator Essentials (COMM6000).<br/>It is strongly recommended that students only complete this course within their final 2 terms of study.<br/><br/>",
-        "processed": "COMM6000 && 108UOC",
-        "handbook_note": "You must have completed all First Year core"
+        "processed": "COMM6000 && 108UOC && L1 CORES",
+        "handbook_note": "Students must be in good academic standing."
     },
     "COMM3999": {
         "original": "Pre-requisite: Completed myBCom First Year Portfolio (COMM1999) and in their final year of a single or double Commerce degree (completed at least 72 UOC of Business courses).<br/><br/>",
         "processed": "COMM1999 && 72UOC in ZBUS && COMM#",
-        "handbook_note": "Studetns must be in their final year"
+        "handbook_note": "Students must be in their final year"
     },
     "COMM6700": {
         "original": "Prerequisite: undergraduate students must have completed 72 units of credit <br/><br/>",
@@ -11135,19 +11135,19 @@
     },
     "ZGEN2215": {
         "original": "Prerequisite: 36 Units of Credit in Level 1 courses<br/><br/>",
-        "processed": "36UOC in L1 courses"
+        "processed": "36UOC in L1"
     },
     "ZGEN2222": {
         "original": "Prerequisite: 36 Units of Credit in Level 1 courses<br/><br/>",
-        "processed": "36UOC in L1 courses"
+        "processed": "36UOC in L1"
     },
     "ZGEN2240": {
         "original": "Prerequisite: 36 Units of Credit in Level 1 courses<br/><br/>",
-        "processed": "36UOC in L1 courses"
+        "processed": "36UOC in L1"
     },
     "ZGEN2801": {
         "original": "Prerequisite: 36 Units of Credit in Level 1 courses<br/><br/>",
-        "processed": "36UOC in L1 courses"
+        "processed": "36UOC in L1"
     },
     "ZHSS1101": {
         "original": "",

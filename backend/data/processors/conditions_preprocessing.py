@@ -226,7 +226,7 @@ def convert_UOC(processed):
     )
 
     # Remove "minimum" since it is implied
-    processed = re.sub(r"minimum (\d+UOC)", r"\1", processed, flags=re.IGNORECASE)
+    processed = re.sub(r"minimum (?:of )?(\d+UOC)", r"\1", processed, flags=re.IGNORECASE)
 
     return processed
 
@@ -282,8 +282,9 @@ def convert_GRADE(processed):
 
 
 def convert_level(processed):
-    """Converts level X to LX"""
-    return re.sub(r"level (\d)", r"L\1", processed, flags=re.IGNORECASE)
+    """Converts level X and X year to LX"""
+    processed = re.sub(r"3rd year", r"L3", processed, flags=re.IGNORECASE)
+    return re.sub(r"level (\d)(?: courses)?", r"L\1", processed, flags=re.IGNORECASE)
 
 
 def convert_program_type(processed):
