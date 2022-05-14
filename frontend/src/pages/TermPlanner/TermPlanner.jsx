@@ -154,7 +154,7 @@ const TermPlanner = () => {
         Test
         <EditMarks
           courseCode="COMP1511"
-          courseTitle="Programming Fundamentals"
+          courseTitle="Introduction to Programming Fundamentals"
         />
       </div>
       <div>
