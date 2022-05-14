@@ -81,12 +81,14 @@ const Header = () => {
               <span>Term Planner</span>
               <Link to="/term-planner" />
             </Menu.Item>
-            { inDev && (
-            <Menu.Item key="progression-checker">
-              <span>Progression Checker</span>
-              <Link to="/progression-checker" />
-            </Menu.Item>
-            )}
+            {
+              inDev && (
+                <Menu.Item key="progression-checker">
+                  <span>Progression Checker</span>
+                  <Link to="/progression-checker" />
+                </Menu.Item>
+              )
+            }
           </Menu>
           <PlannerCart />
           { inDev && <ThemeToggle /> }
