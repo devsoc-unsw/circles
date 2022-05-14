@@ -3048,7 +3048,7 @@
     },
     "CHEM1521": {
         "original": "Pre-req of Prerequisite: CHEM1011 Chemistry 1A or equivalent. Exclusion: CHEM1021<br/><br/>",
-        "processed": "of CHEM1011 Chemistry 1A || equivalent"
+        "processed": "CHEM1011"
     },
     "CHEM1777": {
         "original": "Presumed knowledge is Year 10 General Science.<br/><br/>",
