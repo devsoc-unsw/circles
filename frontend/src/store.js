@@ -35,8 +35,11 @@ const rootReducer = combineReducers({
  *
  */
 
-// migration schema
-const migrations = {};
+// migration schema used to translate structure - return undefined to reset initialState
+const migrations = {
+  // 0: () => undefined,
+  // 1: () => undefined,
+};
 
 const persistConfig = {
   key: "root",

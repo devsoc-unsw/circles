@@ -16,9 +16,9 @@ const PageLoading = ({ setLoading }) => {
 
   useEffect(() => {
     setTimeout(() => {
-      setLoading(false);
       // check if this is a first time user
       navigate(JSON.stringify(degree) === JSON.stringify(initialState) ? "/degree-wizard" : route);
+      setLoading(false);
     }, 750);
   }, []);
 
