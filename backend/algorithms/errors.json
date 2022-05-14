@@ -5717,23 +5717,6 @@
         ],
         "broke at": "Index 2, CHEM1011"
     },
-    "CHEM1777": {
-        "condition": {
-            "original": "Presumed knowledge is Year 10 General Science.<br/><br/>",
-            "processed": "knowledge is Year 10 General Science"
-        },
-        "tokens": [
-            "(",
-            "knowledge",
-            "is",
-            "Year",
-            "10",
-            "General",
-            "Science",
-            ")"
-        ],
-        "broke at": "Index 2, is"
-    },
     "CHEM1829": {
         "condition": {
             "original": "Prerequisite: CHEM1011, and enrolment in 3181, 3182, 3952 or a Vision Science major.<br/><br/>",
