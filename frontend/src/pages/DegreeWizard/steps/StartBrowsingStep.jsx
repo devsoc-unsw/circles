@@ -2,10 +2,9 @@ import React from "react";
 import {
   Button, notification,
 } from "antd";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./steps.less";
-import { saveDegree } from "../../../reducers/degreeSlice";
 
 const openNotification = (msg) => {
   const args = {
@@ -19,7 +18,6 @@ const openNotification = (msg) => {
 
 const StartBrowsingStep = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const degree = useSelector((state) => state.degree);
 
   const saveUserSettings = () => {
@@ -28,7 +26,6 @@ const StartBrowsingStep = () => {
     } else if (degree.specialisation === "") {
       openNotification("Please select a specialisation");
     } else {
-      dispatch(saveDegree());
       navigate("/course-selector");
     }
   };

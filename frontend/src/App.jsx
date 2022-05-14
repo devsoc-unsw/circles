@@ -17,7 +17,9 @@ const App = () => {
   const theme = useSelector((state) => state.theme);
 
   useEffect(() => {
-    document.body.classList.replace(theme === "light" ? "dark" : "light", theme);
+    // initialise theme
+    document.body.classList.add(theme);
+    document.body.classList.remove(theme === "light" ? "dark" : "light");
   }, [theme]);
 
   return (

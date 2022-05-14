@@ -2903,8 +2903,8 @@
         "processed": "PHYS1121 || PHY1131"
     },
     "CEIC2001": {
-        "original": "Pre-requisites:  PHYS1121 or PHY1131 or DPST1021 or DPST1023<br/><br/>Pre-requisites:  MATH1231 or MATH1241 or MATH1251 or DPST1014<br/><br/>",
-        "processed": "PHYS1121 || PHY1131 || DPST1021 || DPST1023 MATH1231 || MATH1241 || MATH1251 || DPST1014"
+        "original": "Pre-requisites:  MATH1231 or MATH1241 or MATH1251 or DPST1014<br/><br/>Pre-requisites:  PHYS1121 or PHY1131 or DPST1021 or DPST1023<br/><br/>",
+        "processed": "MATH1231 || MATH1241 || MATH1251 || DPST1014 PHYS1121 || PHY1131 || DPST1021 || DPST1023"
     },
     "CEIC2002": {
         "original": "Prerequisite:CEIC2001<br/><br/>",
@@ -4948,8 +4948,8 @@
         "processed": "(ECON1101 || COMM1100) && (ECON1203 || COMM1190 || MATH1041 || MATH2801 || MATH2841 || MATH2901)"
     },
     "ECON2111": {
-        "original": "Prerequisite: ECON1102 or COMM1150<br/><br/>",
-        "processed": "ECON1102 || COMM1150"
+        "original": "Prerequisite: ECON1101 or COMM1100<br/><br/>",
+        "processed": "ECON1101 || COMM1100"
     },
     "ECON2112": {
         "original": "Prerequisite: (ECON1101 or COMM1100) and (ECON1202, MATH1031, MATH1131, MATH1141 or MATH1151)<br/><br/>",
@@ -6489,8 +6489,8 @@
         "processed": ""
     },
     "INFS2603": {
-        "original": "Prerequisite: INFS1602<br/><br/>",
-        "processed": "INFS1602"
+        "original": "Prerequisite: INFS1602 or INFS2602<br/><br/>",
+        "processed": "INFS1602 || INFS2602"
     },
     "INFS2605": {
         "original": "Prerequisite: INFS1603 AND (INFS2609 or INFS1609).<br/>Students completing Computer Science degrees or majors (including BINF, COMP, or SENG) are excluded from this course.<br/><br/>",
