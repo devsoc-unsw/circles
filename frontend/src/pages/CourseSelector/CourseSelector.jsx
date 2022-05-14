@@ -42,7 +42,7 @@ const CourseSelector = () => {
     if (Object.keys(courses).length === 0) {
       openNotification();
     }
-  }, []);
+  }, [courses]);
 
   useEffect(() => {
     // get structure of degree
