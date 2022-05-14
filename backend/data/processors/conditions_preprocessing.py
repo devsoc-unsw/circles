@@ -93,6 +93,7 @@ def preprocess_conditions():
         processed = convert_manual_programs_and_specialisations(processed)
         processed = convert_AND_OR(processed)
         processed = convert_coreqs(processed)
+        processed = convert_core(processed)
 
         # Phase 3: Algo logic
         processed = joining_terms(processed)
@@ -352,6 +353,8 @@ def convert_coreqs(processed):
         r",*;*\.*\s*(co-?(re)?requisites?|concurrentl?y?)\s*;?:?\s*(.*)", r" [\3]", processed, flags=re.IGNORECASE
     )
 
+def convert_core(processed):
+    return re.sub("core", "CORES", processed, flags=re.IGNORECASE)
 
 # -----------------------------------------------------------------------------
 # Phase 3: Algo logic

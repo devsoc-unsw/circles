@@ -112,7 +112,8 @@ class UOCCondition(Condition):
         # SENG - course codes starting with SENG
         # L4 - level 4 courses
         # L2 MATH - level 2 courses starting with MATH
-        # CORE - core courses
+        # CORES - core courses
+        # L2 CORES - level 2 core courses
         # And more...
         self.category = AnyCategory()
 
