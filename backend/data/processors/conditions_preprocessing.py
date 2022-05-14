@@ -7,7 +7,6 @@ Some examples of preprocessing are:
 - Converting specialisation and program names to corresponding codes
 """
 
-#from asyncio.windows_events import NULL
 import re
 from data.utility.data_helpers import read_data, write_data
 
@@ -35,7 +34,10 @@ def preprocess_conditions():
         conditions["original"] = original
         processed = original
 
-        conditions["handbook note"], processed = remove_extraneous_comm_data(conditions, original)
+
+        processed = remove_extraneous_comm_data(conditions, processed)[1]
+        if remove_extraneous_comm_data(conditions, original)[0] != "":
+            conditions["handbook note"] = remove_extraneous_comm_data(conditions, original)[0]
         
         # Phase 1: Deletions
         processed = delete_exclusions(processed)
@@ -417,6 +419,9 @@ def uoc_in_business_school(processed):
     processed = re.sub(
         r"(\d+UOC) offered by the UNSW Business School", r"\1 in F Business", processed
     )
+    processed = re.sub(
+        r"(\d+UOC) of Business courses", r"\1 in ZBUS && COMM#", processed
+    )
     return processed
 
 
@@ -437,43 +442,91 @@ def map_word_to_program_type(processed, regex_word, type):
         flags=re.IGNORECASE,
     )  # hard to capture a generic case?
 
+#adds handbook notes and removes phrasing
 def remove_extraneous_comm_data(conditions, processed):
     note = ""
     processed, number_of_subs = re.subn(
         r"Prerequisite: Students must be in Good Academic Standing<br/><br/>", r"", processed, flags=re.IGNORECASE
     )
     if number_of_subs > 0:
-        note = "Students must be in Good Academic Standing"
+        note += "Students must be in Good Academic Standing."
+
+    processed, number_of_subs = re.subn(
+        r"Good Standing", r"", processed, flags=re.IGNORECASE
+    )
+    if number_of_subs > 0:
+        note += "Students must be in Good Academic Standing."
+
+    processed, number_of_subs = re.subn(
+        r"It is strongly recommended that students only complete this course within their final 2 terms of study", r"", processed, flags=re.IGNORECASE
+    )
+    if number_of_subs > 0:
+        note += "Recommended to take this course within their final 2 terms of study."
 
     processed, number_of_subs = re.subn(
         r"Only available to single and double degree Business School students in Term 1. It will be offered to non-Business School students in Terms 2 and 3.<br/><br/>", r"", processed, flags=re.IGNORECASE
     )
     if number_of_subs > 0:
-        note = "Only available to single and double degree Business School students in Term 1. It will be offered to non-Business School students in Terms 2 and 3."
+        note += "Only available to single and double degree Business School students in Term 1. It will be offered to non-Business School students in Terms 2 and 3."
     
     processed, number_of_subs = re.subn(
     r"Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Terms 1 and 3.<br/><br/>", r"", processed, flags=re.IGNORECASE
     )
-    """print(processed)
-    print(number_of_subs)"""
     if number_of_subs > 0:
-        note = "Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Terms 1 and 3."
+        note += "Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Terms 1 and 3."
     
     processed, number_of_subs = re.subn(
     r"Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Term 3.<br/><br/>", r"", processed, flags=re.IGNORECASE
     ) 
     if number_of_subs > 0:
-        note = "Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Term 3.<br/><br/>"
+        note += "Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Term 3.<br/><br/>"
 
     processed, number_of_subs = re.subn(
     r"This course is by application only. Please contact the Co-op office for more information", r"", processed, flags=re.IGNORECASE
     ) 
     if number_of_subs > 0:
-        note = "This course is by application only. Please contact the Co-op office for more information"
+        note += "This course is by application only. Please contact the Co-op office for more information"
+
+    processed, number_of_subs = re.subn(
+    r"completed 30 UOC of Integrated First Year Core<br/><br/>", r"", processed, flags=re.IGNORECASE
+    ) 
+    if number_of_subs > 0:
+        note += "You must have completed 30UOC of Integrated First Year Core"
+
+    processed, number_of_subs = re.subn(
+    r"Its recommended to seek a progression check prior to application.", r"", processed, flags=re.IGNORECASE
+    ) 
+    if number_of_subs > 0:
+        note += "It is recommended to do a progression check prior to enrolling."
+
+    processed, number_of_subs = re.subn(
+    r"This course is by application only. Please visit Business School website for more information<br/><br/>", r"", processed, flags=re.IGNORECASE
+    ) 
+    if number_of_subs > 0:
+        note += "This course is by application only. Please visit Business School website for more information<br/><br/>"
 
     if re.search("good academic standing", processed, flags=re.IGNORECASE) != None:
         note += "Students must be in good academic standing."
 
+    processed, number_of_subs = re.subn(
+    r"in their final year of a single or double Commerce degree", r"", processed, flags=re.IGNORECASE
+    ) 
+    if number_of_subs > 0:
+        note += "Students must be in their final year of a single or double Commerce degree"
+
+    #need to change this
+    processed = re.sub(
+    r"myBCom First Year Portfolio", r"", processed, flags=re.IGNORECASE
+    )
+    
+    processed, number_of_subs = re.subn(
+    r"First Year core", r"", processed, flags=re.IGNORECASE
+    ) 
+    if number_of_subs > 0:
+        note += "Must have completed first year core."
+
+    
+    
     return note, processed
 
 if __name__ == "__main__":
