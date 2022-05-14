@@ -15,7 +15,7 @@ import LoadingSkeleton from "./LoadingSkeleton";
 import CourseTag from "../../../components/CourseTag";
 import Collapsible from "../../../components/Collapsible";
 import ProgressBar from "../../../components/ProgressBar";
-import REACT_APP_TIMETABLE_API_URL from "../../../config";
+import CONFIG from "../../../config";
 
 const { Title, Text } = Typography;
 
@@ -75,7 +75,7 @@ const CourseDescription = () => {
     const getCourseCapacityById = async (c) => {
       const [data, err] = await axiosRequest(
         "get",
-        `${REACT_APP_TIMETABLE_API_URL}/${c}`,
+        `${CONFIG.REACT_APP_TIMETABLE_API_URL}/${c}`,
       );
       if (!err) {
         getCapacityAndEnrolment(data);
@@ -229,7 +229,7 @@ const CourseDescription = () => {
           {courseCapacity !== {} && (
             <div>
               <Title level={3} className="text cs-final-attr">
-                Capacity - out of {courseCapacity.capacity}
+                Capacity - out of {courseCapacity.capacity} for {CONFIG.REACT_APP_TERM}
               </Title>
               <ProgressBar
                 progress={Math.round((courseCapacity.enrolemnts / courseCapacity.capacity) * 100)}
