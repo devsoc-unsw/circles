@@ -5492,18 +5492,11 @@
     },
     "CEIC2001": {
         "condition": {
-            "original": "Pre-requisites:  PHYS1121 or PHY1131 or DPST1021 or DPST1023<br/><br/>Pre-requisites:  MATH1231 or MATH1241 or MATH1251 or DPST1014<br/><br/>",
-            "processed": "PHYS1121 || PHY1131 || DPST1021 || DPST1023 MATH1231 || MATH1241 || MATH1251 || DPST1014"
+            "original": "Pre-requisites:  MATH1231 or MATH1241 or MATH1251 or DPST1014<br/><br/>Pre-requisites:  PHYS1121 or PHY1131 or DPST1021 or DPST1023<br/><br/>",
+            "processed": "MATH1231 || MATH1241 || MATH1251 || DPST1014 PHYS1121 || PHY1131 || DPST1021 || DPST1023"
         },
         "tokens": [
             "(",
-            "PHYS1121",
-            "||",
-            "PHY1131",
-            "||",
-            "DPST1021",
-            "||",
-            "DPST1023",
             "MATH1231",
             "||",
             "MATH1241",
@@ -5511,9 +5504,16 @@
             "MATH1251",
             "||",
             "DPST1014",
+            "PHYS1121",
+            "||",
+            "PHY1131",
+            "||",
+            "DPST1021",
+            "||",
+            "DPST1023",
             ")"
         ],
-        "broke at": "Index 4, ||"
+        "broke at": "Index 11, ||"
     },
     "CEIC3006": {
         "condition": {
