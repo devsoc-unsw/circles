@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Switch } from "antd";
+import { Switch, notification } from "antd";
 import { useSelector } from "react-redux";
 import CourseMenu from "./CourseMenu";
 import CourseDescription from "./CourseDescription";
@@ -16,6 +16,25 @@ const CourseSelector = () => {
   const {
     programCode, programName, specialisation, minor,
   } = useSelector((state) => state.degree);
+
+  const { courses } = useSelector((state) => state.planner);
+
+  useEffect(() => {
+    const openNotification = () => {
+      notification.info({
+        message: "How do I unlock courses on the sidebar?",
+        description: "Quick add courses are made visible when you add their prerequisites to your planner and fulfill UOC requirements. Otherwise all courses can be viewed via the search bar.",
+        duration: 30,
+        className: "text helpNotif",
+        placement: "topRight",
+      });
+    };
+
+    // only open for users with no courses
+    if (Object.keys(courses).length === 0) {
+      openNotification();
+    }
+  }, []);
 
   useEffect(() => {
     // get structure of degree
