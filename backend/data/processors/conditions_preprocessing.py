@@ -188,7 +188,7 @@ def delete_extraneous_phrasing(processed):
 def delete_prereq_label(processed):
     """Removes 'prerequisite' and variations"""
     # variations incude ["prerequisite", "pre-requisite", "prer-requisite", "pre req", "prereq:"]
-    return re.sub(r"[Pp]re( req)?[A-Za-z\/_-]* ?[:;]*", "", processed)
+    return re.sub(r"pre( req)?[a-z\/_\-]* *[:;]*", "", processed, flags=re.IGNORECASE)
 
 
 def delete_trailing_punc(processed):

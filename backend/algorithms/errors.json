@@ -5700,23 +5700,6 @@
         ],
         "broke at": "Index 2, in"
     },
-    "CHEM1521": {
-        "condition": {
-            "original": "Pre-req of Prerequisite: CHEM1011 Chemistry 1A or equivalent. Exclusion: CHEM1021<br/><br/>",
-            "processed": "of CHEM1011 Chemistry 1A || equivalent"
-        },
-        "tokens": [
-            "(",
-            "of",
-            "CHEM1011",
-            "Chemistry",
-            "1A",
-            "||",
-            "equivalent",
-            ")"
-        ],
-        "broke at": "Index 2, CHEM1011"
-    },
     "CHEM1829": {
         "condition": {
             "original": "Prerequisite: CHEM1011, and enrolment in 3181, 3182, 3952 or a Vision Science major.<br/><br/>",

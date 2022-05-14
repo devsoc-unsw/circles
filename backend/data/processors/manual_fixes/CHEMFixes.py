@@ -25,12 +25,20 @@ COURSES = data_helpers.read_data("data/final_data/coursesProcessed.json")
 def fix_conditions():
     """ Functions to apply manual fixes """
 
+    CONDITIONS["CHEM1521"][PROCESSED] = CHEM_1521()
     CONDITIONS["CHEM1777"][PROCESSED] = CHEM_1777()
 
     # Updates the files with the modified dictionaries
     data_helpers.write_data(
         CONDITIONS, "data/final_data/conditionsProcessed.json")
     data_helpers.write_data(COURSES, "data/final_data/coursesProcessed.json")
+
+def CHEM_1521():
+    """
+        "original": "Pre-req of Prerequisite: CHEM1011 Chemistry 1A or equivalent. Exclusion: CHEM1021<br/><br/>",
+        "processed": "of CHEM1011 Chemistry 1A || equivalent"
+    """
+    return "CHEM1011"
 
 def CHEM_1777():
     """
