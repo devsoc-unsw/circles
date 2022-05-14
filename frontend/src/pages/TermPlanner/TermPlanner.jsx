@@ -14,6 +14,7 @@ import {
 import PageTemplate from "../../components/PageTemplate";
 import UnplannedColumn from "./UnplannedColumn";
 import TermBox from "./TermBox";
+import EditMarks from "../../components/EditMarks";
 
 // checks if no courses have been planned (to display help notification
 // & determine if unschedule all button available)
@@ -149,7 +150,18 @@ const TermPlanner = () => {
         showMarks={showMarks}
         setShowMarks={setShowMarks}
       />
+      <div>
+        Test
+        <EditMarks
+          courseCode="COMP1511"
+          courseTitle="Programming Fundamentals"
+        />
+      </div>
+      <div>
+        showMarks: {showMarks ? "true" : "false"}
+      </div>
       <div className="mainContainer">
+        {/* TODO: Delete */}
         <DragDropContext
           onDragEnd={(result) => {
             handleOnDragEnd(result);

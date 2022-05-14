@@ -26,8 +26,7 @@ const OptionsHeader = ({
 
   const toggleMarksShown = (e) => {
     e.stopPropagation();
-    showMark = !showMark;
-    setShowMarks(showMarks);
+    setShowMarks(!showMarks);
     console.log("showMarks", showMarks);
   }
 
@@ -116,13 +115,14 @@ const OptionsHeader = ({
         </div>
       </div>
       <div className="right-buttons">
+        <div>
         <Switch
           className="cs-toggle-locked"
-          onChange={toggleMarksShown}
+          onChange={() => setShowMarks((prev) => !prev)}
           checkedChildren="marks shown"
           unCheckedChildren="marks hidden"
-        />
-        MARKS: {showMarks ? "shown" : "hidden"}
+          />
+        </div>
         <Tippy
           content={<HelpMenu />}
           moveTransition="transform 0.2s ease-out"

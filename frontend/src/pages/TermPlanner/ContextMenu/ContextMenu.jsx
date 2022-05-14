@@ -43,7 +43,7 @@ const ContextMenu = ({ code, plannedFor }) => {
     dispatch(addTab(code));
   };
 
-  const editMark = (e, code) => {
+  const editMark = (e) => {
     e.stopPropagation();
     const x = e.y;
     const y = e.x;
@@ -63,12 +63,12 @@ const ContextMenu = ({ code, plannedFor }) => {
       <Item onClick={handleDelete}>
         <DeleteFilled className="context-menu-icon" /> Delete from Planner
       </Item>
+      <Item onClick={editMark}>
+        <FaEdit className="contextMenuIcon" /> Edit mark
+      </Item>
       <Item onClick={handleInfo}>
         <InfoCircleFilled className="context-menu-icon" />
         View Info
-      </Item>
-      <Item onClick={editMark}>
-        <FaEdit className="contextMenuIcon" /> Edit mark
       </Item>
     </Menu>
   );

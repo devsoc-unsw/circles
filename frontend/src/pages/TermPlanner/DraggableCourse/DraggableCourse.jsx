@@ -44,7 +44,26 @@ const DraggableCourse = ({ code, index, showMarks }) => {
   const errorIsInformational = shouldHaveWarning && isUnlocked
     && warningMessage.length === 0 && !isLegacy && isAccurate && isOffered;
   
-  console.log("Inside DraggableCourse", showMarks);
+  // EDIT MARK - TODO: remove this comment - only for visual seperation
+  const [isEditMarkVisible, setIsEditMarkVisible] = React.useState(false);
+
+  const showEditMark = () => {
+    setIsEditMarkVisible(true);
+  }
+
+  const handleConfirmEditMark = () => {
+    // Validate Input
+    // TODO: Update state
+    // close
+    setIsEditMarkVisible(false);
+  }
+
+  const handleCancelEditMark = () => {
+    // close w/ no state changes
+    setIsEditMarkVisible(false);
+  }
+
+
 
   return (
     <>
@@ -90,7 +109,7 @@ const DraggableCourse = ({ code, index, showMarks }) => {
                     <Text className="text">: {title} </Text>
                   </div>
                 )}
-                {true ? (
+                {showMarks ? (
                   <Marks
                     courseCode={"COMP1511"}
                   />
@@ -99,7 +118,12 @@ const DraggableCourse = ({ code, index, showMarks }) => {
                 </div>
             </div>
             <div className="kebab-container">
-              <KebabMenu />
+              <KebabMenu
+                data-tip
+                data-for={code}
+                id={code}
+                onClick={displayContextMenu}
+              />
             </div>
           </li>
         )}

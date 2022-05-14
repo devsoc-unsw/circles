@@ -7,15 +7,17 @@ import "./index.less";
 const KebabMenuIcon = ({ code }) => {
 
 
-  const onClick = (e) => {
-    e.target.style.color = (e.target.style.color == "green") ? "black" : "green";
-    return 0;
-  };
+  // TODO: delete
+  // const onClick = (e) => {
+  //   e.target.style.color = (e.target.style.color == "green") ? "black" : "green";
+  //   return 0;
+  // };
 
   const { show, hideAll } = useContextMenu({
     id: `${code}-context`,
   });
 
+  // ? onClick Handled by caller
   const displayContextMenu = (e) => {
     e.stopPropagation();
     // TODO: remove debug
@@ -27,8 +29,6 @@ const KebabMenuIcon = ({ code }) => {
   return (
     <svg
       className="KebabMenuIcon"
-      onClick={displayContextMenu}
-      onContextMenu={useContextMenu}
       viewBox="0 0 16 16"
       xmlns="http://www.w3.org/2000/svg"
       version="1.1"
