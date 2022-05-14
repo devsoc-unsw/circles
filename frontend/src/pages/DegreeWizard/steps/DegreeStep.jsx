@@ -14,6 +14,7 @@ const { Title } = Typography;
 const DegreeStep = ({ incrementStep, currStep }) => {
   const dispatch = useDispatch();
   const programCode = useSelector((store) => store.degree.programCode);
+  console.log("===", programCode);
   const [options, setOptions] = useState(null);
 
   const fetchAllDegrees = async () => {
