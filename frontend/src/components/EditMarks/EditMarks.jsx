@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { useState } from "react";
-import { Typography , PageHeader } from "antd";
+import { Typography , PageHeader , Input } from "antd";
 
 import "./index.less";
 
@@ -15,9 +15,15 @@ const EditMarks = ({ courseCode, courseTitle, handleCancelEditMark }) => {
         <PageHeader
           className="site-page-header"
           onBack={() => null}
-          title={courseCode}
-          subTitle={courseTitle}
+          title="EditMarks"
+          subTitle={courseCode}
         />
+      </div>
+      <Input
+        placeholder="Enter Mark"
+      />
+      <div className="edit-mark-buttons">
+
       </div>
     </div>
   );
