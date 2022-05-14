@@ -30,8 +30,8 @@ const CourseSelector = () => {
   useEffect(() => {
     const openNotification = () => {
       notification.info({
-        message: "How do I unlock courses on the sidebar?",
-        description: "Quick add courses are made visible when you add their prerequisites to your planner and fulfill UOC requirements. Otherwise all courses can be viewed via the search bar.",
+        message: "How do I see more sidebar courses?",
+        description: "Add prerequisites and meet UoC requirements. Courses can also be selected via the search bar.",
         duration: 30,
         className: "text helpNotif",
         placement: "topRight",
