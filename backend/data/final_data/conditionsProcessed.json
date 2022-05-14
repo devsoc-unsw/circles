@@ -376,7 +376,7 @@
     },
     "ARTS1064": {
         "original": "Equivalent: MDIA1006<br/><br/>",
-        "processed": "Equivalent: MDIA1006"
+        "processed": ""
     },
     "ARTS1090": {
         "original": "",
@@ -564,7 +564,7 @@
     },
     "ARTS2020": {
         "original": "Prerequisite: 24 units of credit at level 1. Equivalent: ARTS2032<br/><br/>",
-        "processed": "24UOC in L1. Equivalent: ARTS2032"
+        "processed": "24UOC in L1"
     },
     "ARTS2021": {
         "original": "Prerequisite: 24 units of credit at Level 1<br/><br/>",
@@ -1088,11 +1088,11 @@
     },
     "ARTS3022": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Creative Writing or English<br/>Equivalent: ARTS3046<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Creative Writing || English Equivalent: ARTS3046"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Creative Writing || English"
     },
     "ARTS3023": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Creative Writing or English<br/>Equivalent: ARTS3051<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Creative Writing || English Equivalent: ARTS3051"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Creative Writing || English"
     },
     "ARTS3025": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Creative Writing or English<br/><br/>",
@@ -3834,7 +3834,7 @@
     },
     "CRIM2042": {
         "original": "Prerequisite: 24 units of credit overall, including CRIM1010 or CRIM1011, and enrolment in a single or double degree Criminology and Criminal Justice program, or Criminology stream. Equivalent: CRIM3001<br/><br/>",
-        "processed": "24UOC && CRIM1010 || CRIM1011 && enrolment in a single || double degree Criminology && Criminal Justice program || Criminology stream. Equivalent: CRIM3001"
+        "processed": "24UOC && CRIM1010 || CRIM1011 && enrolment in a single || double degree Criminology && Criminal Justice program || Criminology stream"
     },
     "CRIM3000": {
         "original": "Prerequisite: 72 units of credit overall, and enrolment in a Criminology major or a Criminology & Criminology Justice single or dual program<br/><br/>",
@@ -4679,11 +4679,11 @@
     },
     "DPBS1100": {
         "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
-        "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)"
+        "processed": "(7001 || 7002 || 7003 || 7004)"
     },
     "DPBS1101": {
         "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
-        "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)"
+        "processed": "(7001 || 7002 || 7003 || 7004)"
     },
     "DPBS1102": {
         "original": "Prereq: DPBS1101 + 6UOC GLDIP + enrolment in a Global Diploma program<br/><br/>",
@@ -4699,7 +4699,7 @@
     },
     "DPBS1140": {
         "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
-        "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)"
+        "processed": "(7001 || 7002 || 7003 || 7004)"
     },
     "DPBS1150": {
         "original": "Prereq: DPBS1100 or DPBS1101, 6UoC GLDIP + enrolment in a Global Diploma program<br/><br/>",
@@ -4719,7 +4719,7 @@
     },
     "DPBS1203": {
         "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
-        "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)"
+        "processed": "(7001 || 7002 || 7003 || 7004)"
     },
     "DPBS1501": {
         "original": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program<br/><br/>",
@@ -4795,15 +4795,15 @@
     },
     "DPGE1001": {
         "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
-        "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)"
+        "processed": "(7001 || 7002 || 7003 || 7004)"
     },
     "DPGE1002": {
         "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) and DPGE1001<br/><br/>",
-        "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) && DPGE1001"
+        "processed": "(7001 || 7002 || 7003 || 7004) && DPGE1001"
     },
     "DPGE1003": {
         "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004), DPGE1001 and DPGE1002<br/><br/>",
-        "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004), DPGE1001 && DPGE1002"
+        "processed": "(7001 || 7002 || 7003 || 7004) && DPGE1001 && DPGE1002"
     },
     "DPHU1001": {
         "original": "Enrolment in 7005 UNSW Global Diploma in Media and Communication Program.<br/><br/>",
@@ -4839,71 +4839,71 @@
     },
     "DPST1013": {
         "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
-        "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)"
+        "processed": "(7001 || 7002 || 7003 || 7004)"
     },
     "DPST1014": {
         "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) and prerequisite DPST1013<br/><br/>",
-        "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) && DPST1013"
+        "processed": "(7001 || 7002 || 7003 || 7004) && DPST1013"
     },
     "DPST1021": {
         "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) and corequisite DPST1013<br/><br/>",
-        "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) && [DPST1013]"
+        "processed": "(7001 || 7002 || 7003 || 7004) && [DPST1013]"
     },
     "DPST1022": {
         "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004), prerequisite DPST1021 OR DPST1023 and corequisite DPST1014<br/><br/>",
-        "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004), DPST1021 || DPST1023 && [DPST1014]"
+        "processed": "(7001 || 7002 || 7003 || 7004) && DPST1021 || DPST1023 && [DPST1014]"
     },
     "DPST1023": {
         "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) and corequisite DPST1013 <br/><br/>",
-        "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) && [DPST1013]"
+        "processed": "(7001 || 7002 || 7003 || 7004) && [DPST1013]"
     },
     "DPST1024": {
         "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) prerequisite DPST1023 OR a credit (\u226565%) in DPST1021 and corequisite DPST1014<br/><br/>",
-        "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) DPST1023 || a credit (\u226565%) in DPST1021 && [DPST1014]"
+        "processed": "(7001 || 7002 || 7003 || 7004) DPST1023 || a credit (\u226565%) in DPST1021 && [DPST1014]"
     },
     "DPST1031": {
         "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
-        "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)"
+        "processed": "(7001 || 7002 || 7003 || 7004)"
     },
     "DPST1032": {
         "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) and DPST1031<br/><br/>",
-        "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) && DPST1031"
+        "processed": "(7001 || 7002 || 7003 || 7004) && DPST1031"
     },
     "DPST1041": {
         "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
-        "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)"
+        "processed": "(7001 || 7002 || 7003 || 7004)"
     },
     "DPST1051": {
         "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
-        "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)"
+        "processed": "(7001 || 7002 || 7003 || 7004)"
     },
     "DPST1052": {
         "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
-        "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)"
+        "processed": "(7001 || 7002 || 7003 || 7004)"
     },
     "DPST1061": {
         "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
-        "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)"
+        "processed": "(7001 || 7002 || 7003 || 7004)"
     },
     "DPST1071": {
         "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
-        "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)"
+        "processed": "(7001 || 7002 || 7003 || 7004)"
     },
     "DPST1072": {
         "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004), DPST1013 and DPST1021 OR DPST1023<br/><br/>",
-        "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004), DPST1013 && DPST1021 || DPST1023"
+        "processed": "(7001 || 7002 || 7003 || 7004) && DPST1013 && DPST1021 || DPST1023"
     },
     "DPST1081": {
         "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
-        "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)"
+        "processed": "(7001 || 7002 || 7003 || 7004)"
     },
     "DPST1091": {
         "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)<br/><br/>",
-        "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)"
+        "processed": "(7001 || 7002 || 7003 || 7004)"
     },
     "DPST1092": {
         "original": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) and DPST1091<br/><br/>",
-        "processed": "UNSW Global Diplomas only (7001, 7002, 7003, 7004) && DPST1091"
+        "processed": "(7001 || 7002 || 7003 || 7004) && DPST1091"
     },
     "ECON1101": {
         "original": "Excluded: Students in BCom single or double-degree programs, except for 3155 Actl/Comm and 3521 Comm/Econ, are not allowed to enrol in this course. <br/><br/>",
@@ -8104,7 +8104,7 @@
     },
     "MDIA2010": {
         "original": "Prerequisite: 24 units of credit at level 1, and enrolment in a single or dual award Media program or enrolment in a Creative Writing major or minor. Equivalent: MDIA3001<br/><br/>",
-        "processed": "24UOC in L1 && (4510 || 3454 || 3438 || 3453) || enrolment in a Creative Writing major || minor. Equivalent: MDIA3001"
+        "processed": "24UOC in L1 && (4510 || 3454 || 3438 || 3453) || enrolment in a Creative Writing major || minor"
     },
     "MDIA2011": {
         "original": "Prerequisite: 24 units of credit at level 1 including\u00a0MDIA1002 or MDIA1003. Or 24 units of credit at level 1 and enrolment  in a Global Development major<br/><br/>",
@@ -9044,7 +9044,7 @@
     },
     "OPTM6421": {
         "original": "Prerequisite: OPTM6400, Corequisite: OPTM6412, Exclusion:OPTM4211<br/><br/>",
-        "processed": "OPTM6400 && [OPTM6412,]"
+        "processed": "OPTM6400 && [OPTM6412]"
     },
     "OPTM6422": {
         "original": "Prerequisite: OPTM6412 and OPTM6411, OPTM6413 and OPTM6421<br/><br/>",
@@ -10031,11 +10031,11 @@
     },
     "SOCW3012": {
         "original": "Prerequisite: ARTS1753 or ARTS1870 or ARTS1871 and PSYC1001, SOCW2006, SOCW2008, SOCW2009, SOCW2100, SOSS/SRAP1000, SOSS/SRAP1001,  ARTS2871 or SOSS/SRAP2002, and enrolment in a Social Work program. Equivalent: SOCW3001 and SOCW3011<br/><br/>",
-        "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOSS/SRAP1000 || SOSS/SRAP1001 || ARTS2871 || SOSS/SRAP2002 && (4033) . Equivalent: SOCW3001 && SOCW3011"
+        "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOSS/SRAP1000 || SOSS/SRAP1001 || ARTS2871 || SOSS/SRAP2002 && (4033)"
     },
     "SOCW3013": {
         "original": "Prerequisite: ARTS1753 or ARTS1870 or ARTS1871 and PSYC1001, SOCW2006, SOCW2008, SOCW2009, SOCW2100, SOCW3012, SOSS1000, SOSS1001, ARTS2871 or SRAP2002, and enrolment in a Social Work program. Equivalent: SOCW3001 and SOCW3011. Corequisite: SOCW3009<br/><br/>",
-        "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOCW3012 || SOSS1000 || SOSS1001 || ARTS2871 || SRAP2002 && (4033) . Equivalent: SOCW3001 && SOCW3011 && [SOCW3009]"
+        "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOCW3012 || SOSS1000 || SOSS1001 || ARTS2871 || SRAP2002 && (4033) && [SOCW3009]"
     },
     "SOCW4003": {
         "original": "Prerequisite: SOCW3006, SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work program. Or SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work/Law program<br/><br/>",
@@ -10063,11 +10063,11 @@
     },
     "SOCW4017": {
         "original": "Prerequisite: SOCW4003, SOCW4011, SOCW4012, and enrolment in a Social Work program. Corequisite: SOCW4013. Equivalent: SOCW4014, SOCW4001<br/><br/>",
-        "processed": "SOCW4003 && SOCW4011 && SOCW4012 && (4033) && [SOCW4013. Equivalent: SOCW4014, SOCW4001]"
+        "processed": "SOCW4003 && SOCW4011 && SOCW4012 && (4033) && [SOCW4013]"
     },
     "SOCW4018": {
         "original": "Prerequisite: SOCW4003, SOCW4011, SOCW4012, SOCW4013 and enrolment in a Social Work program. Corequisite: SOCW4015 or SOCW4016. Equivalent: SOCW4014, SOCW4001<br/><br/>",
-        "processed": "SOCW4003 && SOCW4011 && SOCW4012 && SOCW4013 && (4033) && [SOCW4015 || SOCW4016. Equivalent: SOCW4014, SOCW4001]"
+        "processed": "SOCW4003 && SOCW4011 && SOCW4012 && SOCW4013 && (4033) && [SOCW4015 || SOCW4016]"
     },
     "SOLA1070": {
         "original": "",
@@ -10207,7 +10207,7 @@
     },
     "SOSS3001": {
         "original": "Prerequisite: SOSS/SRAP1001. <br/>Equivalent: SRAP3001<br/><br/>",
-        "processed": "SOSS/SRAP1001. Equivalent: SRAP3001"
+        "processed": "SOSS/SRAP1001"
     },
     "SOSS3002": {
         "original": "Prerequisite: SOSS/SRAP1000, SOSS/SRAP1001,  SOSS/SRAP2001, and either ARTS2871 or SRAP2002.<br/>Equivalent SRAP3002<br/><br/>",
@@ -10215,11 +10215,11 @@
     },
     "SOSS3003": {
         "original": "Prerequisite: SOSS/SRAP1000 and ARTS2871. Equivalent: SRAP2002<br/><br/>",
-        "processed": "SOSS/SRAP1000 && ARTS2871. Equivalent: SRAP2002"
+        "processed": "SOSS/SRAP1000 && ARTS2871"
     },
     "SOSS3006": {
         "original": "Prerequisite: SOSS/SRAP1000, SOSS/SRAP1001, SOSS/SRAP2001, DIPP1112 or CDEV1112, and enrolment in a Social Science or Social Research and Policy program.<br/>Equivalent: SRAP3006<br/><br/>",
-        "processed": "SOSS/SRAP1000, SOSS/SRAP1001, SOSS/SRAP2001, DIPP1112 || CDEV1112 && (3321 || 3420) . Equivalent: SRAP3006"
+        "processed": "SOSS/SRAP1000, SOSS/SRAP1001, SOSS/SRAP2001, DIPP1112 || CDEV1112 && (3321 || 3420)"
     },
     "SOSS3007": {
         "original": "Prerequisite: SOSS1001 and enrolment in a Social Science or Social Research and Policy program<br/><br/>",
