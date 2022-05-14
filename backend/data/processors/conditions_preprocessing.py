@@ -348,7 +348,7 @@ def convert_coreqs(processed):
     """Puts co-requisites inside square brackets"""
     processed = processed.rstrip()
     return re.sub(
-        r",*;*\.*\s*(co-?requisites?|concurrentl?y?)\s*;?:?\s*(.*)", r" [\2]", processed, flags=re.IGNORECASE
+        r",*;*\.*\s*(co-?(re)?requisites?|concurrentl?y?)\s*;?:?\s*(.*)", r" [\3]", processed, flags=re.IGNORECASE
     )
 
 
