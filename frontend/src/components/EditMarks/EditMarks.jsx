@@ -2,46 +2,25 @@
 import React, { useState } from "react";
 import { Typography , PageHeader } from "antd";
 
-const EditMark = ({ courseCode, courseTitle }) => {
+import ".index.less";
 
-  const { Text, Title } = Typography;
-  // Fetch courseMark from State
-  
-  const isSmall = media("(max-width: 1000px)");
+const EditMarks = ({ courseCode, courseTitle, handleCancelEditMark }) => {
 
-  // ? Move to parent?
-  const [isModalVisible, setIsModalVisible] = useState(false);
-
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-
-  const confirmUpdate= () => {
-    // Validate input
-    // If bad input - get something from popconfirm
-
-    // Update state
-    setIsModalVisible(false);
-  }
-
-  const courseDescriptor = (isSmall) ?
-    `${courseCode}` : `${courseCode}: ${courseTitle}`;
+  // const { Text, Title } = Typography;
 
   return (
     <div className="edit-mark">
       <div className="edit-mark-head">
+        PAGEHEADER!!!!!
         <PageHeader
           className="site-page-header"
           onBack={() => null}
           title={courseCode}
-          subtitle={courseTitle}
+          subTitle={courseTitle}
         />
-      </div>
-      <div>
-
       </div>
     </div>
   );
 };
 
-export default EditMark;
+export default EditMarks;
