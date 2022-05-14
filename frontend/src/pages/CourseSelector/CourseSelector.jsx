@@ -1,23 +1,31 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Switch, notification } from "antd";
-import { useSelector } from "react-redux";
+import { Switch, Tooltip, notification } from "antd";
+import { LockOutlined, UnlockOutlined } from "@ant-design/icons";
+import { useSelector, useDispatch } from "react-redux";
 import CourseMenu from "./CourseMenu";
 import CourseDescription from "./CourseDescription";
 import CourseTabs from "./CourseTabs";
 import PageTemplate from "../../components/PageTemplate";
 import "./index.less";
 import CourseSearchBar from "./CourseSearchBar";
+import { toggleCourseLock } from "../../reducers/coursesSlice";
 
 const CourseSelector = () => {
   const [structure, setStructure] = useState({});
-  const [showLockedCourses, setShowLockedCourses] = useState(false);
+  const dispatch = useDispatch();
 
   const {
     programCode, programName, specialisation, minor,
   } = useSelector((state) => state.degree);
 
   const { courses } = useSelector((state) => state.planner);
+
+  const { isLockedEnabled } = useSelector((state) => state.courses);
+
+  const handleChange = () => {
+    dispatch(toggleCourseLock());
+  };
 
   useEffect(() => {
     const openNotification = () => {
@@ -62,18 +70,23 @@ const CourseSelector = () => {
             )}
           </div>
           <CourseSearchBar />
-          <Switch
-            className="cs-toggle-locked"
-            onChange={() => setShowLockedCourses((prev) => !prev)}
-            checkedChildren="locked courses shown"
-            unCheckedChildren="locked courses hidden"
-          />
+          <Tooltip placement="topLeft" title={isLockedEnabled ? "Hide locked courses" : "Show locked courses"}>
+            <Switch
+              defaultChecked={isLockedEnabled}
+              className="cs-toggle-locked"
+              onChange={() => {
+                handleChange();
+              }}
+              checkedChildren={<LockOutlined />}
+              unCheckedChildren={<UnlockOutlined />}
+            />
+          </Tooltip>
         </div>
         <CourseTabs />
         <div className="cs-bottom-cont">
           <CourseMenu
             structure={structure}
-            showLockedCourses={showLockedCourses}
+            showLockedCourses={isLockedEnabled}
           />
           <CourseDescription structure={structure} />
         </div>
