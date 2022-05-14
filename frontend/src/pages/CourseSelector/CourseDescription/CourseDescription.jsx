@@ -14,6 +14,8 @@ import "./index.less";
 import LoadingSkeleton from "./LoadingSkeleton";
 import CourseTag from "../../../components/CourseTag";
 import Collapsible from "../../../components/Collapsible";
+import ProgressBar from "../../../components/ProgressBar";
+import REACT_APP_TIMETABLE_API_URL from "../../../config";
 
 const { Title, Text } = Typography;
 
@@ -26,6 +28,7 @@ const CourseDescription = () => {
   const { degree, planner } = useSelector((state) => state);
   const [pageLoaded, setPageLoaded] = useState(false);
   const [coursesPathTo, setCoursesPathTo] = useState({});
+  const [courseCapacity, setCourseCapacity] = useState({});
 
   useEffect(() => {
     const getCourse = async () => {
@@ -50,10 +53,41 @@ const CourseDescription = () => {
       }
     };
 
+    const getCapacityAndEnrolment = (data) => {
+      const enrolmentCapacityData = {
+        enrolments: 0,
+        capacity: 0,
+      };
+      for (let i = 0; i < data.classes.length; i++) {
+        if (
+          data.classes[i].activity === "Lecture"
+          || data.classes[i].activity === "Seminar"
+          || data.classes[i].activity === "Thesis Research"
+        ) {
+          enrolmentCapacityData.enrolments
+            += data.classes[i].courseEnrolment.enrolments;
+          enrolmentCapacityData.capacity
+            += data.classes[i].courseEnrolment.capacity;
+        }
+      }
+      setCourseCapacity(enrolmentCapacityData);
+    };
+
+    const getCourseCapacityById = async (c) => {
+      const [data, err] = await axiosRequest(
+        "get",
+        `${REACT_APP_TIMETABLE_API_URL}/${c}`,
+      );
+      if (!err) {
+        getCapacityAndEnrolment(data);
+      }
+    };
+
     setPageLoaded(false);
     if (id) {
       getCourse();
       getPathToCoursesById(id);
+      getCourseCapacityById(id);
     }
   }, [id]);
 
@@ -104,9 +138,9 @@ const CourseDescription = () => {
             {
               course.is_legacy
               && (
-              <Text strong>
-                NOTE: this course is discontinued - if a current course exists, pick that instead
-              </Text>
+                <Text strong>
+                  NOTE: this course is discontinued - if a current course exists, pick that instead
+                </Text>
               )
             }
             <Collapsible
@@ -192,6 +226,18 @@ const CourseDescription = () => {
               })
               : "None"}
           </div>
+          {courseCapacity !== {} && (
+            <div>
+              <Title level={3} className="text cs-final-attr">
+                Capacity
+              </Title>
+              <ProgressBar
+                progress={Math.round((courseCapacity.enrolemnts / courseCapacity.capacity) * 100)}
+                height={20}
+              />
+            </div>
+          )}
+
         </>
       )}
     </div>
