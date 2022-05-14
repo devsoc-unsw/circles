@@ -31,7 +31,7 @@ const CourseSelector = () => {
     const openNotification = () => {
       notification.info({
         message: "How do I see more sidebar courses?",
-        description: "Add prerequisites and meet UoC requirements. Courses can also be selected via the search bar.",
+        description: "Courses are shown as you meet the requirements to take them. Any course can also be selected via the search bar.",
         duration: 30,
         className: "text helpNotif",
         placement: "topRight",
