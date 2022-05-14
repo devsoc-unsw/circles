@@ -35,7 +35,6 @@ const CourseDescription = () => {
       const [data, err] = await axiosRequest("get", `/courses/getCourse/${id}`);
       if (!err) {
         dispatch(setCourse(data));
-        setPageLoaded(true);
       }
     };
 
@@ -89,6 +88,7 @@ const CourseDescription = () => {
       getPathToCoursesById(id);
       getCourseCapacityById(id);
     }
+    setPageLoaded(true);
   }, [id]);
 
   if (tabs.length === 0) {
@@ -229,7 +229,7 @@ const CourseDescription = () => {
           {courseCapacity !== {} && (
             <div>
               <Title level={3} className="text cs-final-attr">
-                Capacity
+                Capacity - out of {courseCapacity.capacity}
               </Title>
               <ProgressBar
                 progress={Math.round((courseCapacity.enrolemnts / courseCapacity.capacity) * 100)}
