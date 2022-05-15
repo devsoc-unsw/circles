@@ -29,7 +29,7 @@
     "react-svg": "15.0.1",
     "react-tooltip": "4.2.21",
     "redux": "4.2.0",
-    "redux-persist": "^6.0.0",
+    "redux-persist": "6.0.0",
     "redux-thunk": "2.4.1",
     "use-debounce": "8.0.1",
     "web-vitals": "2.1.4"
