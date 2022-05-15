@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Button, notification, Typography, Modal,
 } from "antd";
@@ -13,7 +13,7 @@ import YearStep from "./steps/YearStep";
 import StartBrowsingStep from "./steps/StartBrowsingStep";
 import { resetTabs } from "../../reducers/courseTabsSlice";
 import { resetPlanner } from "../../reducers/plannerSlice";
-import { resetDegree } from "../../reducers/degreeSlice";
+import { resetDegree, initialState } from "../../reducers/degreeSlice";
 import PageTemplate from "../../components/PageTemplate";
 import { resetCourses } from "../../reducers/coursesSlice";
 
@@ -23,6 +23,8 @@ const DegreeWizard = () => {
   const dispatch = useDispatch();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const navigate = useNavigate();
+
+  const degree = useSelector((state) => state.degree);
 
   const csDegreeDisclaimer = () => {
     notification.info({
@@ -35,7 +37,7 @@ const DegreeWizard = () => {
 
   useEffect(() => {
     // TODO: Warning dialog before planner is reset.
-    if (localStorage.getItem("planner")) {
+    if (JSON.stringify(degree) !== JSON.stringify(initialState)) {
       setIsModalVisible(true);
     }
     csDegreeDisclaimer();
@@ -63,7 +65,6 @@ const DegreeWizard = () => {
     dispatch(resetDegree());
     dispatch(resetTabs());
     dispatch(resetCourses());
-    localStorage.clear();
   };
 
   const handleCancel = () => {
