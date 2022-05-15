@@ -2903,8 +2903,8 @@
         "processed": "PHYS1121 || PHY1131"
     },
     "CEIC2001": {
-        "original": "Pre-requisites:  PHYS1121 or PHY1131 or DPST1021 or DPST1023<br/><br/>Pre-requisites:  MATH1231 or MATH1241 or MATH1251 or DPST1014<br/><br/>",
-        "processed": "PHYS1121 || PHY1131 || DPST1021 || DPST1023 MATH1231 || MATH1241 || MATH1251 || DPST1014"
+        "original": "Pre-requisites:  MATH1231 or MATH1241 or MATH1251 or DPST1014<br/><br/>Pre-requisites:  PHYS1121 or PHY1131 or DPST1021 or DPST1023<br/><br/>",
+        "processed": "MATH1231 || MATH1241 || MATH1251 || DPST1014 PHYS1121 || PHY1131 || DPST1021 || DPST1023"
     },
     "CEIC2002": {
         "original": "Prerequisite:CEIC2001<br/><br/>",
@@ -4948,8 +4948,8 @@
         "processed": "(ECON1101 || COMM1100) && (ECON1203 || COMM1190 || MATH1041 || MATH2801 || MATH2841 || MATH2901)"
     },
     "ECON2111": {
-        "original": "Prerequisite: ECON1102 or COMM1150<br/><br/>",
-        "processed": "ECON1102 || COMM1150"
+        "original": "Prerequisite: ECON1101 or COMM1100<br/><br/>",
+        "processed": "ECON1101 || COMM1100"
     },
     "ECON2112": {
         "original": "Prerequisite: (ECON1101 or COMM1100) and (ECON1202, MATH1031, MATH1131, MATH1141 or MATH1151)<br/><br/>",
@@ -5298,87 +5298,87 @@
     },
     "EDST6730": {
         "original": "Prerequisite: EDST6700. Corerequisite: EDST6760<br/><br/>",
-        "processed": "EDST6700. Corerequisite: EDST6760"
+        "processed": "EDST6700 && [EDST6760]"
     },
     "EDST6731": {
         "original": "Prerequisite: EDST6701. Corerequisite: EDST6760<br/><br/>",
-        "processed": "EDST6701. Corerequisite: EDST6760"
+        "processed": "EDST6701 && [EDST6760]"
     },
     "EDST6732": {
         "original": "Prerequisite: EDST6702. Corerequisite: EDST6760<br/><br/>",
-        "processed": "EDST6702. Corerequisite: EDST6760"
+        "processed": "EDST6702 && [EDST6760]"
     },
     "EDST6734": {
         "original": "Prerequisite: EDST6704. Corerequisite: EDST6760<br/><br/>",
-        "processed": "EDST6704. Corerequisite: EDST6760"
+        "processed": "EDST6704 && [EDST6760]"
     },
     "EDST6735": {
         "original": "Prerequisite: EDST6705. Corerequisite: EDST6760<br/><br/>",
-        "processed": "EDST6705. Corerequisite: EDST6760"
+        "processed": "EDST6705 && [EDST6760]"
     },
     "EDST6736": {
         "original": "Prerequisite: EDST6706. Corerequisite: EDST6760<br/><br/>",
-        "processed": "EDST6706. Corerequisite: EDST6760"
+        "processed": "EDST6706 && [EDST6760]"
     },
     "EDST6737": {
         "original": "Prerequisite: EDST6707. Corerequisite: EDST6760<br/><br/>",
-        "processed": "EDST6707. Corerequisite: EDST6760"
+        "processed": "EDST6707 && [EDST6760]"
     },
     "EDST6740": {
         "original": "Prerequisite: EDST6710. Corerequisite: EDST6760<br/><br/>",
-        "processed": "EDST6710. Corerequisite: EDST6760"
+        "processed": "EDST6710 && [EDST6760]"
     },
     "EDST6741": {
         "original": "Prerequisite: EDST6711. Corerequisite: EDST6760<br/><br/>",
-        "processed": "EDST6711. Corerequisite: EDST6760"
+        "processed": "EDST6711 && [EDST6760]"
     },
     "EDST6744": {
         "original": "Prerequisite: EDST6714. Corerequisite: EDST6760<br/><br/>",
-        "processed": "EDST6714. Corerequisite: EDST6760"
+        "processed": "EDST6714 && [EDST6760]"
     },
     "EDST6745": {
         "original": "Prerequisite: EDST6715. Corerequisite: EDST6760<br/><br/>",
-        "processed": "EDST6715. Corerequisite: EDST6760"
+        "processed": "EDST6715 && [EDST6760]"
     },
     "EDST6746": {
         "original": "Prerequisite: EDST6716. Corerequisite: EDST6760<br/><br/>",
-        "processed": "EDST6716. Corerequisite: EDST6760"
+        "processed": "EDST6716 && [EDST6760]"
     },
     "EDST6747": {
         "original": "Prerequisite: EDST6717. Corerequisite: EDST6760<br/><br/>",
-        "processed": "EDST6717. Corerequisite: EDST6760"
+        "processed": "EDST6717 && [EDST6760]"
     },
     "EDST6748": {
         "original": "Prerequisite: EDST6718. Corerequisite: EDST6760<br/><br/>",
-        "processed": "EDST6718. Corerequisite: EDST6760"
+        "processed": "EDST6718 && [EDST6760]"
     },
     "EDST6749": {
         "original": "Prerequisite: EDST6719. Corerequisite: EDST6760<br/><br/>",
-        "processed": "EDST6719. Corerequisite: EDST6760"
+        "processed": "EDST6719 && [EDST6760]"
     },
     "EDST6752": {
         "original": "Prerequisite: EDST6722. Corerequisite: EDST6760<br/><br/>",
-        "processed": "EDST6722. Corerequisite: EDST6760"
+        "processed": "EDST6722 && [EDST6760]"
     },
     "EDST6753": {
         "original": "Prerequisite: EDST6723. Corerequisite: EDST6760<br/><br/>",
-        "processed": "EDST6723. Corerequisite: EDST6760"
+        "processed": "EDST6723 && [EDST6760]"
     },
     "EDST6755": {
         "original": "Prerequisite: EDST6725. Corerequisite: EDST6760<br/><br/>",
-        "processed": "EDST6725. Corerequisite: EDST6760"
+        "processed": "EDST6725 && [EDST6760]"
     },
     "EDST6756": {
         "original": "Prerequisite: EDST6726. Corerequisite: EDST6760<br/><br/>",
-        "processed": "EDST6726. Corerequisite: EDST6760"
+        "processed": "EDST6726 && [EDST6760]"
     },
     "EDST6757": {
         "original": "Prerequisite: EDST6727. Corerequisite: EDST6760<br/><br/>",
-        "processed": "EDST6727. Corerequisite: EDST6760"
+        "processed": "EDST6727 && [EDST6760]"
     },
     "EDST6758": {
         "original": "Prerequisite: EDST6728. Corerequisite: EDST6760<br/><br/>",
-        "processed": "EDST6728. Corerequisite: EDST6760"
+        "processed": "EDST6728 && [EDST6760]"
     },
     "EDST6760": {
         "original": "Prerequisite: EDST2002, EDST4084, 12 uoc Teaching Method 1 courses, and enrolment in an Education program. Students must have passed LANTITE.\u00a0 Students must have sufficient subject content knowledge in their teaching areas<br/><br/>",
@@ -5398,7 +5398,7 @@
     },
     "EDST6772": {
         "original": "Prerequisite: EDST6771. Corerequisite: EDST6760<br/><br/>",
-        "processed": "EDST6771. Corerequisite: EDST6760"
+        "processed": "EDST6771 && [EDST6760]"
     },
     "EDST6775": {
         "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4059, 4061, 4062, 4063, 4064, or 4066<br/><br/>",
@@ -5406,7 +5406,7 @@
     },
     "EDST6776": {
         "original": "Prerequisite: EDST6775. Corerequisite: EDST6760<br/><br/>",
-        "processed": "EDST6775. Corerequisite: EDST6760"
+        "processed": "EDST6775 && [EDST6760]"
     },
     "EDST6777": {
         "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4059, 4061, 4063, or 4066<br/><br/>",
@@ -5414,7 +5414,7 @@
     },
     "EDST6778": {
         "original": "Prerequisite: EDST6777. Corerequisite: EDST6760<br/><br/>",
-        "processed": "EDST6777. Corerequisite: EDST6760"
+        "processed": "EDST6777 && [EDST6760]"
     },
     "EDST6920": {
         "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053 or 4054<br/><br/>",
@@ -5450,39 +5450,39 @@
     },
     "EDST6950": {
         "original": "Prerequisite: EDST6724 or EDST6920. Corerequisite: EDST6760<br/><br/>",
-        "processed": "EDST6724 || EDST6920. Corerequisite: EDST6760"
+        "processed": "EDST6724 || EDST6920 && [EDST6760]"
     },
     "EDST6951": {
         "original": "Prerequisite: EDST6708 or EDST6921. Corerequisite: EDST6760<br/><br/>",
-        "processed": "EDST6708 || EDST6921. Corerequisite: EDST6760"
+        "processed": "EDST6708 || EDST6921 && [EDST6760]"
     },
     "EDST6952": {
         "original": "Prerequisite: EDST6922. Corerequisite: EDST6760<br/><br/>",
-        "processed": "EDST6922. Corerequisite: EDST6760"
+        "processed": "EDST6922 && [EDST6760]"
     },
     "EDST6953": {
         "original": "Prerequisite: EDST6923. Corerequisite: EDST6760<br/><br/>",
-        "processed": "EDST6923. Corerequisite: EDST6760"
+        "processed": "EDST6923 && [EDST6760]"
     },
     "EDST6954": {
         "original": "Prerequisite: EDST6924. Corerequisite: EDST6760<br/><br/>",
-        "processed": "EDST6924. Corerequisite: EDST6760"
+        "processed": "EDST6924 && [EDST6760]"
     },
     "EDST6955": {
         "original": "Prerequisite: EDST6925. Corerequisite: EDST6760<br/><br/>",
-        "processed": "EDST6925. Corerequisite: EDST6760"
+        "processed": "EDST6925 && [EDST6760]"
     },
     "EDST6956": {
         "original": "Prerequisite: EDST6926. Corerequisite: EDST6760<br/><br/>",
-        "processed": "EDST6926. Corerequisite: EDST6760"
+        "processed": "EDST6926 && [EDST6760]"
     },
     "EDST6957": {
         "original": "Prerequisite: EDST6927. Corerequisite: EDST6760<br/><br/>",
-        "processed": "EDST6927. Corerequisite: EDST6760"
+        "processed": "EDST6927 && [EDST6760]"
     },
     "EDST6958": {
         "original": "Prerequisite: EDST6922. Corerequisite: EDST6760<br/><br/>",
-        "processed": "EDST6922. Corerequisite: EDST6760"
+        "processed": "EDST6922 && [EDST6760]"
     },
     "ELEC1111": {
         "original": "",
@@ -6489,8 +6489,8 @@
         "processed": ""
     },
     "INFS2603": {
-        "original": "Prerequisite: INFS1602<br/><br/>",
-        "processed": "INFS1602"
+        "original": "Prerequisite: INFS1602 or INFS2602<br/><br/>",
+        "processed": "INFS1602 || INFS2602"
     },
     "INFS2605": {
         "original": "Prerequisite: INFS1603 AND (INFS2609 or INFS1609).<br/>Students completing Computer Science degrees or majors (including BINF, COMP, or SENG) are excluded from this course.<br/><br/>",
