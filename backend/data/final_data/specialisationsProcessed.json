@@ -867,78 +867,51 @@
         "curriculum": [
             {
                 "courses": {
-                    "COMP2521": "Data Structures and Algorithms",
-                    "COMP2041": "Software Construction: Techniques and Tools"
-                },
-                "title": "Level 2 Core Courses",
-                "credits_to_complete": 12,
-                "core": true,
-                "levels": [
-                    2
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ECON2104": "Applied Macroeconomics",
-                    "ECON2206": "Introductory Econometrics ",
-                    "ECON3206": "Financial Econometrics",
                     "COMP9418": "Advanced Topics in Statistical Machine Learning",
-                    "ACTL3141": "Modelling and Prediction of Life and Health Related Risks",
-                    "ECON1102": "Macroeconomics 1",
-                    "COMP3411": "Artificial Intelligence",
-                    "MATH3161": "Optimization",
-                    "COMP6841": "Extended Security Engineering and Cyber Security",
-                    "MATH2931": "Higher Linear Models",
-                    "COMP9318": "Data Warehousing and Data Mining",
-                    "MATH2871": "Data Management for Statistical Analysis",
-                    "ACTL3142": "Statistical Machine Learning for Risk and Actuarial Applications",
-                    "MATH5836": "Data Mining and its Business Applications",
-                    "MATH2011": "Several Variable Calculus",
-                    "ECON2101": "Microeconomics 2",
-                    "COMP6441": "Security Engineering and Cyber Security",
-                    "ECON2209": "Business Forecasting",
-                    "INFS3603": "Introduction to Business Analytics",
-                    "ECON3208": "Applied Econometric Methods",
-                    "MATH3041": "Mathematical Modelling for Real World Systems",
-                    "COMP9319": "Web Data Compression and Search",
-                    "MATH2831": "Linear Models",
-                    "COMP6771": "Advanced C++ Programming",
-                    "INFS1602": "Digital Transformation in Business",
-                    "ECON3123": "Organisational Economics",
-                    "MARK3085": "Digital Marketing and Web Analytics",
-                    "COMP6714": "Information Retrieval and Web Search",
                     "COMP4418": "Knowledge Representation and Reasoning",
-                    "ECON2111": "Introduction to Economic Development",
-                    "MATH3871": "Bayesian Inference and Computation",
-                    "ECON3130": "Real Estate Economics and Public Policy",
                     "COMP4121": "Advanced Algorithms",
-                    "MATH3821": "Statistical Modelling and Computing",
+                    "MATH3161": "Optimization",
+                    "COMP9318": "Data Warehousing and Data Mining",
+                    "ECON3206": "Financial Econometrics",
+                    "COMP9319": "Web Data Compression and Search",
+                    "MATH2011": "Several Variable Calculus",
+                    "COMP3411": "Artificial Intelligence",
                     "MATH2111": "Higher Several Variable Calculus",
-                    "MARK3054": "Marketing Analytics and Big Data",
-                    "ECON3107": "Economics of Finance",
+                    "ECON3123": "Organisational Economics",
+                    "ECON2209": "Business Forecasting",
+                    "ECON2101": "Microeconomics 2",
+                    "MATH2871": "Data Management for Statistical Analysis",
+                    "ECON3208": "Applied Econometric Methods",
+                    "MATH2831": "Linear Models",
+                    "INFS3603": "Introduction to Business Analytics",
+                    "ACTL3142": "Statistical Machine Learning for Risk and Actuarial Applications",
                     "COMP9315": "Database Systems Implementation",
+                    "ECON2111": "Introduction to Economic Development",
+                    "MATH3821": "Statistical Modelling and Computing",
+                    "COMP6714": "Information Retrieval and Web Search",
+                    "COMP6771": "Advanced C++ Programming",
+                    "MATH3871": "Bayesian Inference and Computation",
+                    "MARK3054": "Marketing Analytics and Big Data",
+                    "MARK3085": "Digital Marketing and Web Analytics",
+                    "MATH2931": "Higher Linear Models",
+                    "ECON2104": "Applied Macroeconomics",
+                    "INFS1602": "Digital Transformation in Business",
+                    "ACTL3141": "Modelling and Prediction of Life and Health Related Risks",
+                    "COMP6841": "Extended Security Engineering and Cyber Security",
+                    "MARK1012": "Marketing Fundamentals",
+                    "ECON3130": "Real Estate Economics and Public Policy",
+                    "ECON3107": "Economics of Finance",
+                    "ECON2206": "Introductory Econometrics ",
                     "MATH3411": "Information, Codes and Ciphers",
-                    "MARK1012": "Marketing Fundamentals"
+                    "MATH3041": "Mathematical Modelling for Real World Systems",
+                    "MATH5836": "Data Mining and its Business Applications",
+                    "ECON1102": "Macroeconomics 1",
+                    "COMP6441": "Security Engineering and Cyber Security"
                 },
                 "title": "Prescribed Electives",
                 "credits_to_complete": 18,
                 "core": false,
                 "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "COMP9313": "Big Data Management",
-                    "COMP3121": "Algorithms and Programming Techniques",
-                    "COMP9417": "Machine Learning and Data Mining"
-                },
-                "title": "Level 3 Core Courses",
-                "credits_to_complete": 18,
-                "core": true,
-                "levels": [
-                    3
-                ],
                 "notes": ""
             },
             {
@@ -954,18 +927,45 @@
                     1
                 ],
                 "notes": ""
+            },
+            {
+                "courses": {
+                    "COMP2521": "Data Structures and Algorithms",
+                    "COMP2041": "Software Construction: Techniques and Tools"
+                },
+                "title": "Level 2 Core Courses",
+                "credits_to_complete": 12,
+                "core": true,
+                "levels": [
+                    2
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "COMP3121": "Algorithms and Programming Techniques",
+                    "COMP9313": "Big Data Management",
+                    "COMP9417": "Machine Learning and Data Mining"
+                },
+                "title": "Level 3 Core Courses",
+                "credits_to_complete": 18,
+                "core": true,
+                "levels": [
+                    3
+                ],
+                "notes": ""
             }
         ]
     },
     "ACCTA2": {
         "programs": [
-            "3554",
-            "3502",
+            "3586",
             "3587",
-            "3558",
-            "3543",
             "3778",
-            "3586"
+            "3554",
+            "3543",
+            "3502",
+            "3558"
         ],
         "name": "Accounting",
         "type": "minor",
@@ -1007,13 +1007,13 @@
     },
     "FINSA2": {
         "programs": [
-            "3554",
-            "3502",
+            "3586",
             "3587",
-            "3558",
-            "3543",
             "3778",
-            "3586"
+            "3554",
+            "3543",
+            "3502",
+            "3558"
         ],
         "name": "Finance",
         "type": "minor",
@@ -1023,8 +1023,8 @@
         "curriculum": [
             {
                 "courses": {
-                    "FINS2615": "Intermediate Business Finance",
                     "FINS1612": "Capital Markets and Institutions",
+                    "FINS2615": "Intermediate Business Finance",
                     "COMM1180": "Value Creation"
                 },
                 "title": "Core Courses",
@@ -1035,31 +1035,31 @@
             },
             {
                 "courses": {
-                    "FINS3775": "Research Methods in Finance 1",
-                    "FINS3655": "Behavioural Finance",
-                    "FINS3625": "Applied Corporate Finance",
-                    "FINS3637": "Wealth Management Advice and Ethics",
-                    "FINS2624": "Portfolio Management",
-                    "FINS3634": "Credit Analysis and Lending",
-                    "FINS3647": "Bitcoin and Decentralised Finance",
-                    "FINS3616": "International Business Finance",
-                    "FINS3650": "International Banking",
                     "FINS3623": "Venture Capital",
-                    "FINS2643": "Wealth Management and Client Engagement",
-                    "FINS3666": "Trading and Market Making",
-                    "FINS3640": "Investment Management Modeling",
-                    "FINS3635": "Options, Futures and Risk Management",
-                    "FINS3633": "Real Estate Finance",
-                    "FINS3631": "Personal Risk, Insurance, and Superannuation for Financial Planning ",
-                    "FINS3644": "Sustainable and Responsible Investing",
-                    "FINS3645": "Financial Market Data Design and Analysis",
-                    "FINS3626": "International Corporate Governance",
-                    "FINS3646": "Toolkit for Finance",
-                    "FINS3636": "Interest Rate Risk Management",
-                    "FINS3630": "Bank Financial Management",
                     "FINS2622": "Asia-Pacific Capital Markets",
+                    "FINS3635": "Options, Futures and Risk Management",
+                    "FINS3637": "Wealth Management Advice and Ethics",
+                    "FINS3644": "Sustainable and Responsible Investing",
+                    "FINS3634": "Credit Analysis and Lending",
+                    "FINS3646": "Toolkit for Finance",
+                    "FINS2643": "Wealth Management and Client Engagement",
                     "FINS3648": "Banking, Finance and Technology",
-                    "FINS3641": "Security Analysis and Valuation"
+                    "FINS3775": "Research Methods in Finance 1",
+                    "FINS3645": "Financial Market Data Design and Analysis",
+                    "FINS3647": "Bitcoin and Decentralised Finance",
+                    "FINS3636": "Interest Rate Risk Management",
+                    "FINS3666": "Trading and Market Making",
+                    "FINS3641": "Security Analysis and Valuation",
+                    "FINS3655": "Behavioural Finance",
+                    "FINS3633": "Real Estate Finance",
+                    "FINS3626": "International Corporate Governance",
+                    "FINS3616": "International Business Finance",
+                    "FINS3640": "Investment Management Modeling",
+                    "FINS3625": "Applied Corporate Finance",
+                    "FINS3631": "Personal Risk, Insurance, and Superannuation for Financial Planning ",
+                    "FINS2624": "Portfolio Management",
+                    "FINS3650": "International Banking",
+                    "FINS3630": "Bank Financial Management"
                 },
                 "title": "Prescribed Electives",
                 "credits_to_complete": 12,
@@ -1071,13 +1071,13 @@
     },
     "INFSA2": {
         "programs": [
-            "3554",
-            "3502",
+            "3586",
             "3587",
-            "3558",
-            "3543",
             "3778",
-            "3586"
+            "3554",
+            "3543",
+            "3502",
+            "3558"
         ],
         "name": "Information Systems",
         "type": "minor",
@@ -1087,9 +1087,9 @@
         "curriculum": [
             {
                 "courses": {
-                    "INFS1603": "Introduction to Business Databases",
-                    "COMM1190": "Data, Insights and Decisions",
                     "INFS2603": "Business Analysis and Agile Product Management",
+                    "COMM1190": "Data, Insights and Decisions",
+                    "INFS1603": "Introduction to Business Databases",
                     "INFS3604": "Business Process Management",
                     "INFS2602": "Managing Information Systems"
                 },
@@ -1103,12 +1103,12 @@
     },
     "MARKA2": {
         "programs": [
-            "3554",
-            "3502",
-            "3558",
-            "3543",
+            "3586",
             "3778",
-            "3586"
+            "3554",
+            "3543",
+            "3502",
+            "3558"
         ],
         "name": "Marketing",
         "type": "minor",
@@ -1118,48 +1118,48 @@
         "curriculum": [
             {
                 "courses": {
-                    "MARK2012": "Marketing Fundamentals",
-                    "COMM1100": "Business Decision Making"
-                },
-                "title": "Core Course",
-                "credits_to_complete": 12,
-                "core": true,
-                "levels": [],
-                "notes": "Students in Comm/Econ and Comm/Actl should take COMM1900 instead of COMM1100. Students in Econ and Actl should take ECON1101. All other students should complete COMM1100"
-            },
-            {
-                "courses": {
-                    "MARK2055": "Service Marketing and Management",
-                    "MARK3092": "Brand Management",
+                    "MARK3081": "Distribution Strategy and Retail Channels",
+                    "MARK3085": "Digital Marketing and Web Analytics",
                     "MARK2053": "Marketing Communications and Promotions Management",
+                    "MARK3054": "Marketing Analytics and Big Data",
+                    "MARK3090": "Marketing Decision Analysis",
+                    "MARK2055": "Service Marketing and Management",
                     "MARK3088": "Product Analytics",
-                    "MARK3089": "Pricing Analytics",
+                    "MARK3091": "New Product and New Service Development",
+                    "MARK2085": "Consumer Centric Innovation",
+                    "MARK2052": "Marketing Research",
                     "MARK2071": "International and Global Marketing",
+                    "MARK2060": "Event Management and Marketing",
+                    "MARK3092": "Brand Management",
                     "MARK3087": "Customer Analytics",
                     "MARK2051": "Consumer Behaviour",
-                    "MARK3090": "Marketing Decision Analysis",
-                    "MARK2060": "Event Management and Marketing",
-                    "MARK2052": "Marketing Research",
-                    "MARK3081": "Distribution Strategy and Retail Channels",
-                    "MARK2085": "Consumer Centric Innovation",
-                    "MARK3054": "Marketing Analytics and Big Data",
-                    "MARK3091": "New Product and New Service Development",
-                    "MARK3085": "Digital Marketing and Web Analytics"
+                    "MARK3089": "Pricing Analytics"
                 },
                 "title": "Prescribed Electives",
                 "credits_to_complete": 18,
                 "core": false,
                 "levels": [],
                 "notes": "At least one of the elective courses must be at level 3 (i.e. MARK3XXX)). The minor does not form part of the nominated major."
+            },
+            {
+                "courses": {
+                    "COMM1100": "Business Decision Making",
+                    "MARK2012": "Marketing Fundamentals"
+                },
+                "title": "Core Course",
+                "credits_to_complete": 12,
+                "core": true,
+                "levels": [],
+                "notes": "Students in Comm/Econ and Comm/Actl should take COMM1900 instead of COMM1100. Students in Econ and Actl should take ECON1101. All other students should complete COMM1100"
             }
         ]
     },
     "MATHC2": {
         "programs": [
-            "3543",
             "3970",
             "3962",
-            "3778"
+            "3778",
+            "3543"
         ],
         "name": "Mathematics",
         "type": "minor",
@@ -1247,10 +1247,10 @@
             "3409",
             "3453",
             "3454",
-            "3543",
             "3970",
             "3962",
             "3778",
+            "3543",
             "3438"
         ],
         "name": "Psychology",
@@ -1261,6 +1261,21 @@
         "curriculum": [
             {
                 "courses": {
+                    "PSYC2071": "Perception and Cognition",
+                    "PSYC2081": "Learning and Physiological Psychology",
+                    "PSYC2061": "Social and Developmental Psychology",
+                    "PSYC2101": "Assessment, Personality and Psychopathology"
+                },
+                "title": "Level 2 Core Courses",
+                "credits_to_complete": 24,
+                "core": true,
+                "levels": [
+                    2
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
                     "PSYC1011": "Psychology 1B",
                     "PSYC1001": "Psychology 1A"
                 },
@@ -1269,21 +1284,6 @@
                 "core": true,
                 "levels": [
                     1
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "PSYC2081": "Learning and Physiological Psychology",
-                    "PSYC2101": "Assessment, Personality and Psychopathology",
-                    "PSYC2071": "Perception and Cognition",
-                    "PSYC2061": "Social and Developmental Psychology"
-                },
-                "title": "Level 2 Core Courses",
-                "credits_to_complete": 24,
-                "core": true,
-                "levels": [
-                    2
                 ],
                 "notes": ""
             }
