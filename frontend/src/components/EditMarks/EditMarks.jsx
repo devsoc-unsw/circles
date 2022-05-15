@@ -12,18 +12,11 @@ const EditMarks = ({ courseCode, courseTitle, handleCancelEditMark }) => {
   return (
     <div className="edit-mark">
       <div className="edit-mark-head">
-        <PageHeader
-          className="site-page-header"
-          onBack={() => null}
-          title="EditMarks"
-          subTitle={courseCode}
-        />
       </div>
       <Input
         placeholder="Enter Mark"
       />
       <div className="edit-mark-buttons">
-
       </div>
     </div>
   );
