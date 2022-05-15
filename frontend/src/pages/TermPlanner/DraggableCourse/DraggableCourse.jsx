@@ -43,26 +43,6 @@ const DraggableCourse = ({ code, index, showMarks }) => {
   );
   const errorIsInformational = shouldHaveWarning && isUnlocked
     && warningMessage.length === 0 && !isLegacy && isAccurate && isOffered;
-  
-  // EDIT MARK - TODO: remove this comment - only for visual seperation
-  const [isEditMarkVisible, setIsEditMarkVisible] = React.useState(false);
-
-  const showEditMark = () => {
-    setIsEditMarkVisible(true);
-  }
-
-  const handleConfirmEditMark = () => {
-    // Validate Input
-    // TODO: Update state
-    // close
-    setIsEditMarkVisible(false);
-  }
-
-  const handleCancelEditMark = () => {
-    // close w/ no state changes
-    setIsEditMarkVisible(false);
-  }
-
 
 
   return (

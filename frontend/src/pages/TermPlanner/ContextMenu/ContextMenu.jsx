@@ -1,6 +1,7 @@
 /* eslint-disable */
 
 import React from "react";
+import { Modal } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { Menu, Item, theme } from "react-contexify";
 import "react-contexify/dist/ReactContexify.css";
@@ -10,6 +11,8 @@ import { FaEdit, FaRegCalendarTimes } from "react-icons/fa";
 import validateTermPlanner from "../validateTermPlanner";
 import { addTab } from "../../../reducers/courseTabsSlice";
 import { removeCourse, unschedule } from "../../../reducers/plannerSlice";
+import EditMarks from "../../../components/EditMarks";
+
 import "./index.less";
 
 const ContextMenu = ({ code, plannedFor }) => {
@@ -43,34 +46,57 @@ const ContextMenu = ({ code, plannedFor }) => {
     dispatch(addTab(code));
   };
 
-  const editMark = (e) => {
-    e.stopPropagation();
-    const x = e.y;
-    const y = e.x;
-    // TODO: Obviously, remove this
-    // eslint-disable-next-line no-console
-    console.log(x, y);
-    return x + y;
-  };
+  // EDIT MARK - TODO: remove this comment - only for visual seperation
+  const [isEditMarkVisible, setIsEditMarkVisible] = React.useState(false);
+
+  const showEditMark = () => {
+    setIsEditMarkVisible(true);
+  }
+
+  const handleConfirmEditMark = () => {
+    // Validate Input
+    // TODO: Update state
+    // close
+    setIsEditMarkVisible(false);
+  }
+
+  const handleCancelEditMark = () => {
+    // close w/ no state changes
+    setIsEditMarkVisible(false);
+  }
 
   return (
-    <Menu id={id} theme={theme.dark}>
-      {plannedFor && (
-        <Item onClick={handleUnschedule}>
-          <FaRegCalendarTimes className="context-menu-icon" /> Unschedule
+    <>
+      <Menu id={id} theme={theme.dark}>
+        {plannedFor && (
+          <Item onClick={handleUnschedule}>
+            <FaRegCalendarTimes className="context-menu-icon" /> Unschedule
+          </Item>
+        )}
+        <Item onClick={handleDelete}>
+          <DeleteFilled className="context-menu-icon" /> Delete from Planner
         </Item>
-      )}
-      <Item onClick={handleDelete}>
-        <DeleteFilled className="context-menu-icon" /> Delete from Planner
-      </Item>
-      <Item onClick={editMark}>
-        <FaEdit className="contextMenuIcon" /> Edit mark
-      </Item>
-      <Item onClick={handleInfo}>
-        <InfoCircleFilled className="context-menu-icon" />
-        View Info
-      </Item>
-    </Menu>
+        <Item onClick={showEditMark}>
+          <FaEdit className="contextMenuIcon" /> Edit mark
+        </Item>
+        <Item onClick={handleInfo}>
+          <InfoCircleFilled className="context-menu-icon" />
+          View Info
+        </Item>
+      </Menu>
+      <Modal
+        // title="Edit Marks"
+        visible={isEditMarkVisible}
+        onOk={handleConfirmEditMark}
+        onCancel={handleCancelEditMark}
+      >
+        <EditMarks
+          courseCode="COMP1511"
+          courseTitle="Introduction to testing"
+          handleCancelEditMark={() => alert("implement cancel pls")}
+        />
+      </Modal>
+    </>
   );
 };
 
