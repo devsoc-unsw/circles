@@ -36,23 +36,23 @@ if __name__ == "__main__":
 
     target_courses = f"data/final_data/archive/processed/{args.f}.json"
 
-    with open(source_courses) as f:
+    with open(source_courses, "r") as f:
         source_courses = json.loads(f.read())
-    
-    with open(target_courses) as f:
+
+    with open(target_courses, "r") as f:
         target_courses = json.loads(f.read())
 
     all_source = set(source_courses.keys())
     all_target = set(target_courses.keys())
     print("the following courses have been removed:")
-    print(all_source - all_target)
-
-    print("======================================")
-
-    print("the following courses have been added:")
     print(all_target - all_source)
 
-    print("======================================")
+    print("============================================================================")
+
+    print("the following courses have been added:")
+    print(all_source - all_target)
+
+    print("============================================================================")
     print("the following courses have had their prerequisites changed:")
     courses_in_manual = []
     for coursename in all_source.intersection(all_target):
@@ -61,10 +61,11 @@ if __name__ == "__main__":
         if target_course != source_course:
             print(coursename)
             with suppress(FileNotFoundError):
-                with open(f"data/processors/manual_fixes/{coursename[0:4]}fixes.py") as f:
+                with open(f"data/processors/manual_fixes/{coursename[0:4]}fixes.py", "r") as f:
                     if f"CONDITIONS[\"{coursename}\"]" in f.read():
                         courses_in_manual.append(coursename)
             print(f"from: {source_course}")
             print(f"to: {target_course}")
+    print("============================================================================")
     print("of these, the following are in manual fixes:")
     print(courses_in_manual)
