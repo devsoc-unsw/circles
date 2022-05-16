@@ -78,7 +78,7 @@ const prepareCoursesForValidation = (plannerInfo, userInfo, suppress) => {
 
   const payload = {
     program: programCode,
-    specialisations: minor ? majors.append(minor) : majors,
+    specialisations: minor ? [...majors, minor] : majors,
     year: 1,
     plan,
     mostRecentPastTerm: suppress ? getMostRecentPastTerm(startYear) : { Y: 0, T: 0 },

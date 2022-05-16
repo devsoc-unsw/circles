@@ -47,7 +47,6 @@ def getPrograms():
     # TODO On deployment, DELETE RETURN BELOW and replace with the return above
     return {"programs": {"3778": "Computer Science", 
                         "3784": "Commerce / Computer Science",
-                        "3789": "Science / Computer Science",
                         }}
 
 
@@ -64,21 +63,22 @@ def getPrograms():
             "content": {
                 "application/json": {
                     "example": {
-                        "majors": [{
-                            "COMPS1": "Computer Science (Embedded Systems)",
-                            "COMPJ1": "Computer Science (Programming Languages)",
-                            "COMPE1": "Computer Science (eCommerce Systems)",
-                            "COMPA1": "Computer Science",
-                            "COMPN1": "Computer Science (Computer Networks)",
-                            "COMPI1": "Computer Science (Artificial Intelligence)",
-                            "COMPD1": "Computer Science (Database Systems)",
-                            "COMPY1": "Computer Science (Security Engineering)",
-                        },
-                        {
-                            "FINSA1": "Finance",
-                            "ACCTA1": "Accounting",
-                            
-                        }]
+                        "majors": { 
+                            "Computer Science": {
+                                "COMPS1": "Computer Science (Embedded Systems)",
+                                "COMPJ1": "Computer Science (Programming Languages)",
+                                "COMPE1": "Computer Science (eCommerce Systems)",
+                                "COMPA1": "Computer Science",
+                                "COMPN1": "Computer Science (Computer Networks)",
+                                "COMPI1": "Computer Science (Artificial Intelligence)",
+                                "COMPD1": "Computer Science (Database Systems)",
+                                "COMPY1": "Computer Science (Security Engineering)",
+                            },
+                            "Commerce": {
+                                "FINSA1": "Finance",
+                                "ACCTA1": "Accounting",
+                            }
+                        }
                     }
                 }
             },
