@@ -153,6 +153,26 @@
                         "MATHV1": "Mathematics for Education",
                         "BIOSG1": "Ecology"
                     }
+                },
+                "Minors": {
+                    "MICRJ2": "Immunology",
+                    "PSYCM2": "Psychology",
+                    "CHEMD2": "Chemistry",
+                    "BIOSD2": "Biology",
+                    "CLIMA2": "Climate Science",
+                    "GEOLF2": "Geology",
+                    "PATHB2": "Pathology",
+                    "PHYSC2": "Physics",
+                    "MSCIH2": "Marine Science",
+                    "PHARB2": "Pharmacology",
+                    "BIOCD2": "Molecular Biology",
+                    "GEOGH2": "Physical Geography",
+                    "PHSLB2": "Physiology",
+                    "MATHC2": "Mathematics",
+                    "ARCYB2": "Palaeosciences",
+                    "VISNB2": "Vision Science",
+                    "MATHD2": "Statistics",
+                    "ANATB2": "Anatomy"
                 }
             },
             "NonSpecialisationData": {
@@ -185,26 +205,6 @@
                     "any Faculty of Science course": 1,
                     "any Mathematics course": 1
                 }
-            },
-            "Minors": {
-                "MICRJ2": "Immunology",
-                "PSYCM2": "Psychology",
-                "CHEMD2": "Chemistry",
-                "BIOSD2": "Biology",
-                "CLIMA2": "Climate Science",
-                "GEOLF2": "Geology",
-                "PATHB2": "Pathology",
-                "PHYSC2": "Physics",
-                "MSCIH2": "Marine Science",
-                "PHARB2": "Pharmacology",
-                "BIOCD2": "Molecular Biology",
-                "GEOGH2": "Physical Geography",
-                "PHSLB2": "Physiology",
-                "MATHC2": "Mathematics",
-                "ARCYB2": "Palaeosciences",
-                "VISNB2": "Vision Science",
-                "MATHD2": "Statistics",
-                "ANATB2": "Anatomy"
             }
         }
     },
@@ -216,6 +216,32 @@
         "faculty": "UNSW Business School",
         "components": {
             "SpecialisationData": {
+                "Minors": {
+                    "ECONO2": "Behavioural Economics",
+                    "JAPNF2": "Japanese Studies",
+                    "SPANI2": "Spanish Studies",
+                    "FINSR2": "Financial Technology",
+                    "KOREF2": "Korean Studies",
+                    "TABLC2": "Taxation",
+                    "CHINE2": "Chinese Studies",
+                    "FRENG2": "Advanced French Studies",
+                    "MARKA2": "Marketing",
+                    "COMMJ2": "Business Analytics",
+                    "IBUSA2": "International Business",
+                    "MGMTH2": "Human Resource Management",
+                    "FINSA2": "Finance",
+                    "JAPNG2": "Advanced Japanese Studies",
+                    "TABLA2": "Business Law",
+                    "ACCTA2": "Accounting",
+                    "FRENF2": "French Studies",
+                    "KOREG2": "Advanced Korean Studies",
+                    "CHINF2": "Advanced Chinese Studies",
+                    "GERSF2": "German Studies",
+                    "MGMTA2": "Management",
+                    "ECONF2": "Business Economics",
+                    "INFSA2": "Information Systems",
+                    "MGMTJ2": "Innovation, Strategy and Entrepreneurship"
+                },
                 "Majors": {
                     "Commerce": {
                         "INFSA1": "Information Systems",
@@ -281,32 +307,6 @@
                     "TABL3033": "UNSW Tax and Business Advisory Clinic",
                     "COMM2233": "Industry Consulting Project"
                 }
-            },
-            "Minors": {
-                "ECONO2": "Behavioural Economics",
-                "JAPNF2": "Japanese Studies",
-                "SPANI2": "Spanish Studies",
-                "FINSR2": "Financial Technology",
-                "KOREF2": "Korean Studies",
-                "TABLC2": "Taxation",
-                "CHINE2": "Chinese Studies",
-                "FRENG2": "Advanced French Studies",
-                "MARKA2": "Marketing",
-                "COMMJ2": "Business Analytics",
-                "IBUSA2": "International Business",
-                "MGMTH2": "Human Resource Management",
-                "FINSA2": "Finance",
-                "JAPNG2": "Advanced Japanese Studies",
-                "TABLA2": "Business Law",
-                "ACCTA2": "Accounting",
-                "FRENF2": "French Studies",
-                "KOREG2": "Advanced Korean Studies",
-                "CHINF2": "Advanced Chinese Studies",
-                "GERSF2": "German Studies",
-                "MGMTA2": "Management",
-                "ECONF2": "Business Economics",
-                "INFSA2": "Information Systems",
-                "MGMTJ2": "Innovation, Strategy and Entrepreneurship"
             },
             "GE": {
                 "credits_to_complete": 12
@@ -873,6 +873,26 @@
         "faculty": "Faculty of Engineering",
         "components": {
             "SpecialisationData": {
+                "Minors": {
+                    "GEOGH2": "Physical Geography",
+                    "GEOLF2": "Geology",
+                    "ANATB2": "Anatomy",
+                    "PHARB2": "Pharmacology",
+                    "CLIMA2": "Climate Science",
+                    "ARCYB2": "Palaeosciences",
+                    "MATHD2": "Statistics",
+                    "MSCIH2": "Marine Science",
+                    "BIOSD2": "Biology",
+                    "PHSLB2": "Physiology",
+                    "PATHB2": "Pathology",
+                    "MATHC2": "Mathematics",
+                    "PHYSC2": "Physics",
+                    "MICRJ2": "Immunology",
+                    "VISNB2": "Vision Science",
+                    "PSYCM2": "Psychology",
+                    "BIOCD2": "Molecular Biology",
+                    "CHEMD2": "Chemistry"
+                },
                 "Majors": {
                     "Science": {
                         "PHARA1": "Pharmacology",
@@ -942,26 +962,6 @@
                     "any Neuroscience course": 1,
                     "any Psychology course": 1
                 }
-            },
-            "Minors": {
-                "GEOGH2": "Physical Geography",
-                "GEOLF2": "Geology",
-                "ANATB2": "Anatomy",
-                "PHARB2": "Pharmacology",
-                "CLIMA2": "Climate Science",
-                "ARCYB2": "Palaeosciences",
-                "MATHD2": "Statistics",
-                "MSCIH2": "Marine Science",
-                "BIOSD2": "Biology",
-                "PHSLB2": "Physiology",
-                "PATHB2": "Pathology",
-                "MATHC2": "Mathematics",
-                "PHYSC2": "Physics",
-                "MICRJ2": "Immunology",
-                "VISNB2": "Vision Science",
-                "PSYCM2": "Psychology",
-                "BIOCD2": "Molecular Biology",
-                "CHEMD2": "Chemistry"
             }
         }
     },
@@ -998,6 +998,20 @@
                         "FINSA1": "Finance",
                         "MARKA1": "Marketing"
                     }
+                },
+                "Minors": {
+                    "MARKA2": "Marketing",
+                    "ACCTA2": "Accounting",
+                    "FINSA2": "Finance",
+                    "MGMTA2": "Management",
+                    "MGMTH2": "Human Resource Management",
+                    "TABLC2": "Taxation",
+                    "COMMJ2": "Business Analytics",
+                    "INFSA2": "Information Systems",
+                    "ECONF2": "Business Economics",
+                    "TABLA2": "Business Law",
+                    "FINSR2": "Financial Technology",
+                    "IBUSA2": "International Business"
                 }
             },
             "NonSpecialisationData": {
@@ -1048,20 +1062,6 @@
                     "COMM0999": "myBCom Blueprint",
                     "COMM1999": "myBCom First Year Portfolio"
                 }
-            },
-            "Minors": {
-                "MARKA2": "Marketing",
-                "ACCTA2": "Accounting",
-                "FINSA2": "Finance",
-                "MGMTA2": "Management",
-                "MGMTH2": "Human Resource Management",
-                "TABLC2": "Taxation",
-                "COMMJ2": "Business Analytics",
-                "INFSA2": "Information Systems",
-                "ECONF2": "Business Economics",
-                "TABLA2": "Business Law",
-                "FINSR2": "Financial Technology",
-                "IBUSA2": "International Business"
             }
         }
     },

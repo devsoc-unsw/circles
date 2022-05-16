@@ -140,7 +140,7 @@ def getMinors(programCode: str):
     elif programCode in minorInSpecialisation:
         minrs = result["components"]["SpecialisationData"]["Minors"]
     else:
-        minrs = result["components"]["Minors"]
+        minrs = result["components"]["SpecialisationData"]["Minors"]
 
     return {"minors": minrs}
 

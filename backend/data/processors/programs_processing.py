@@ -167,10 +167,7 @@ def addDisciplineData(components, item, programData):
                     ):
                         code = major["academic_item_code"]
                         honoursData[code] = major["academic_item_name"]
-                try:
-                    components["SpecialisationData"]["Honours"].update(honoursData)
-                except KeyError:
-                    components["SpecialisationData"]["Honours"] = honoursData
+                components["SpecialisationData"].setdefault("Honours", {}).update(honoursData)
 
             # If item is minor loop through and add data to minors
             if container["vertical_grouping"]["value"] == "undergrad_minor":
@@ -179,10 +176,7 @@ def addDisciplineData(components, item, programData):
                     if minor["academic_item_type"]["value"] == "minor":
                         code = minor["academic_item_code"]
                         minorData[code] = minor["academic_item_name"]
-                try:
-                    components["Minors"].update(minorData)
-                except KeyError:
-                    components["Minors"] = minorData
+                components["SpecialisationData"].setdefault("Minors", {}).update(minorData)
 
             # If item is a prescribed elective, loop through and add data to nonspecialisationdata
             if container["vertical_grouping"]["value"] == "PE":
