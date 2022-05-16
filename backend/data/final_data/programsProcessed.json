@@ -22,7 +22,7 @@
             },
             "SpecialisationData": {
                 "Majors": {
-                    "COMPD1": {
+                    "Computer Science": {
                         "COMPA1": "Computer Science",
                         "COMPY1": "Computer Science (Security Engineering)",
                         "COMPN1": "Computer Science (Computer Networks)",
@@ -125,7 +125,7 @@
             },
             "SpecialisationData": {
                 "Majors": {
-                    "BIOSG1": {
+                    "Science": {
                         "BIOCC1": "Genetics",
                         "ANATA1": "Anatomy",
                         "MATSB1": "Materials Science",
@@ -217,7 +217,7 @@
         "components": {
             "SpecialisationData": {
                 "Majors": {
-                    "IBUSA1": {
+                    "Commerce": {
                         "INFSA1": "Information Systems",
                         "COMMJ1": "Business Analytics",
                         "MGMTH1": "Human Resource Management",
@@ -456,7 +456,7 @@
             },
             "SpecialisationData": {
                 "Majors": {
-                    "MATHE1": {
+                    "Data Science and Decisions": {
                         "ECONL1": "Business Data Science",
                         "COMPZ1": "Computational Data Science",
                         "MATHE1": "Quantitative Data Science"
@@ -560,7 +560,7 @@
         "components": {
             "SpecialisationData": {
                 "Majors": {
-                    "ECONU1": {
+                    "Economics": {
                         "ECONT1": "Data Analytics and Econometrics",
                         "ECONV1": "Macroeconomics and Financial Markets",
                         "ECONU1": "Economic Policy and Society"
@@ -811,7 +811,7 @@
             },
             "SpecialisationData": {
                 "Majors": {
-                    "MATHP1": {
+                    "Advanced Mathematics (Honours)": {
                         "MATHU1": "Advanced Statistics",
                         "MATHA1": "Applied Mathematics",
                         "MATHP1": "Pure Mathematics"
@@ -874,7 +874,7 @@
         "components": {
             "SpecialisationData": {
                 "Majors": {
-                    "MATSB1": {
+                    "Science ": {
                         "PHARA1": "Pharmacology",
                         "PHSLA1": "Physiology",
                         "PATHA1": "Pathology",
@@ -901,7 +901,7 @@
                         "VISNA1": "Vision Science",
                         "MATSB1": "Materials Science"
                     },
-                    "COMPI1": {
+                    " Computer Science": {
                         "COMPJ1": "Computer Science (Programming Languages)",
                         "COMPD1": "Computer Science (Database Systems)",
                         "COMPN1": "Computer Science (Computer Networks)",
@@ -974,7 +974,7 @@
         "components": {
             "SpecialisationData": {
                 "Majors": {
-                    "COMPS1": {
+                    " Computer Science": {
                         "COMPJ1": "Computer Science (Programming Languages)",
                         "COMPY1": "Computer Science (Security Engineering)",
                         "COMPI1": "Computer Science (Artificial Intelligence)",
@@ -984,7 +984,7 @@
                         "COMPD1": "Computer Science (Database Systems)",
                         "COMPS1": "Computer Science (Embedded Systems)"
                     },
-                    "MARKA1": {
+                    "Commerce ": {
                         "MGMTJ1": "Innovation, Strategy and Entrepreneurship",
                         "IBUSA1": "International Business",
                         "INFSA1": "Information Systems",
@@ -1074,7 +1074,7 @@
         "components": {
             "SpecialisationData": {
                 "Majors": {
-                    "COMPN1": {
+                    " Computer Science": {
                         "COMPD1": "Computer Science (Database Systems)",
                         "COMPS1": "Computer Science (Embedded Systems)",
                         "COMPA1": "Computer Science",

@@ -98,7 +98,7 @@ def addComponentData(formatted, programData):
             components["GE"] = GE
         # If item is part of core disciplinary
         if "Disciplinary Component" in item["title"]:
-            addDisciplineData(components, item)
+            addDisciplineData(components, item, programData)
         # If item is part of minor
         if item["vertical_grouping"]["value"] == "undergrad_minor":
             addMinorData(components, item)
@@ -123,12 +123,24 @@ def addMinorData(components, item):
     components["Minors"] = minorData
 
 
-def addDisciplineData(components, item):
+def findProgramName(programData, item):
+    programName = item["title"]
+    programNames = programData["title"].split("/")
+    for programName in programNames:
+        if programName in item["title"]:
+            return programName
+        for container in item["container"]:
+            if programName in container["title"]:
+                return programName 
+    return programName 
+
+def addDisciplineData(components, item, programData):
     if components.get("SpecialisationData") is None:
         components["SpecialisationData"] = {}
     if components.get("NonSpecialisationData") is None:
         components["NonSpecialisationData"] = {}
 
+    programName = findProgramName(programData, item)
     if "container" in item and item["container"] != []:
         # Loop through items in disciplinary component
         for container in item["container"]:
@@ -143,9 +155,9 @@ def addDisciplineData(components, item):
                         code = major["academic_item_code"]
                         majorData[code] = major["academic_item_name"]
                 try:
-                    components["SpecialisationData"]["Majors"].update({code: majorData})
+                    components["SpecialisationData"]["Majors"].update({programName: majorData})
                 except KeyError:
-                    components["SpecialisationData"]["Majors"] = {code: majorData}
+                    components["SpecialisationData"]["Majors"] = {programName: majorData}
 
             # If item is honours loop through and add data to honours
             if container["vertical_grouping"]["value"] == "honours":
