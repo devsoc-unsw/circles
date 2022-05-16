@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import React from "react";
+import React, { useState } from "react";
 import { Modal } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { Menu, Item, theme } from "react-contexify";
@@ -49,19 +49,33 @@ const ContextMenu = ({ code, plannedFor }) => {
   // EDIT MARK - TODO: remove this comment - only for visual seperation
   const [isEditMarkVisible, setIsEditMarkVisible] = React.useState(false);
 
+  const [markInput, setMarkInput] = useState("");
+
   const showEditMark = () => {
     setIsEditMarkVisible(true);
   }
 
-  const handleConfirmEditMark = () => {
+  const validLetterGrades = ["FL", "PS", "CR", "DN", "HD"];
+  
+
+  const handleConfirmEditMark = (e) => {
     // Validate Input
-    // TODO: Update state
-    // close
+    // TODO: function for this
+    if (validLetterGrades.includes(markInput)){
+      return True;
+    }
+
+    iv
+
+    
+    // Dispatch and reset state
+    
+    setMarkInput("");
     setIsEditMarkVisible(false);
   }
 
   const handleCancelEditMark = () => {
-    // close w/ no state changes
+    setMarkInput("");
     setIsEditMarkVisible(false);
   }
 
@@ -86,11 +100,12 @@ const ContextMenu = ({ code, plannedFor }) => {
       </Menu>
       <Modal
         title={`Edit Mark: ${code}`}
-        // visible={isEditMarkVisible}
-        visible={true}
+        visible={isEditMarkVisible}
+        // visible={true}
         onOk={handleConfirmEditMark}
         onCancel={handleCancelEditMark}
-        width="300px"
+        // footer={ null // <EditMarksFooter // /> }
+        width="300px"// 
       >
         <EditMarks
           courseCode="COMP1511"

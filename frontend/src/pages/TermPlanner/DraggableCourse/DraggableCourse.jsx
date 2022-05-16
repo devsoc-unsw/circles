@@ -21,7 +21,7 @@ const DraggableCourse = ({ code, index, showMarks }) => {
   // prereqs are populated in CourseDescription.jsx via course.raw_requirements
   const {
     prereqs, title, isUnlocked, plannedFor,
-    isLegacy, isAccurate, termsOffered, handbookNote, supressed,
+    isLegacy, isAccurate, termsOffered, handbookNote, supressed, mark
   } = courses[code];
   const warningMessage = courses[code].warnings;
   const isOffered = plannedFor ? termsOffered.includes(plannedFor.match(/T[0-3]/)[0]) : true;
