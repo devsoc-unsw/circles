@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Droppable } from "react-beautiful-dnd";
 import { useSelector } from "react-redux";
 import DraggableCourse from "../DraggableCourse";
@@ -7,38 +7,21 @@ import "./index.less";
 // create separate array for each type
 // e.g. courseTypes = { Core: ["COMP1511", "COMP2521"], Elective: ["COMP6881"] }
 
-const UnplannedColumn = ({ isDragging, plannerRef }) => {
+const UnplannedColumn = ({ isDragging, unplannedRef }) => {
   const { isSummerEnabled, unplanned } = useSelector((state) => state.planner);
   const [style, setStyle] = useState({});
-  const isSummerRef = useRef(isSummerEnabled);
 
   useEffect(() => {
-    isSummerRef.current = isSummerEnabled;
-
     const updateDimensions = () => {
-      console.log(plannerRef);
-      const offsetLeftGrid = plannerRef.current.offsetLeft;
-      console.log("left: ", offsetLeftGrid);
-      let widthTP = 0;
-      const columns = isSummerRef.current ? 5 : 4;
-      for (let i = 0; i < columns; i++) {
-        console.log("width ", i, plannerRef.current.children[i].scrollWidth);
-        widthTP += plannerRef.current.children[i].scrollWidth;
-      }
-
-      setStyle({
-        left: offsetLeftGrid + widthTP,
-      });
+      setStyle({ left: unplannedRef.current.offsetLeft });
     };
 
     window.addEventListener("resize", updateDimensions);
-    // const interval = setTimeout(updateDimensions(), 200);
-
+    updateDimensions();
     return () => {
       window.removeEventListener("resize", updateDimensions);
-      // clearTimeout(interval);
     };
-  }, [isSummerEnabled]);
+  }, [isSummerEnabled, unplanned]);
 
   return (
     <div className="unplannedContainer" style={style}>

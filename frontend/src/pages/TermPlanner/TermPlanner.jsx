@@ -64,6 +64,7 @@ const TermPlanner = () => {
   const currYear = new Date().getFullYear();
 
   const plannerPic = useRef();
+  const unplannedRef = useRef();
 
   const handleOnDragStart = (courseItem) => {
     const course = courseItem.draggableId;
@@ -171,7 +172,7 @@ const TermPlanner = () => {
               <div className="gridItem">Term 2</div>
               <div className="gridItem">Term 3</div>
               {/* Empty div to add space for fixed unplanned column */}
-              <div className="gridItem" />
+              <div className="gridItem" ref={unplannedRef} />
 
               {years.map((year, index) => {
                 const iYear = parseInt(startYear, 10) + parseInt(index, 10);
@@ -206,7 +207,7 @@ const TermPlanner = () => {
               })}
               <UnplannedColumn
                 isDragging={isDragging}
-                plannerRef={plannerPic}
+                unplannedRef={unplannedRef}
               />
             </div>
           </div>
