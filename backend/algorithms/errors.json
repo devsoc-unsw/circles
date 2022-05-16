@@ -3319,7 +3319,7 @@
     "ARTS3759": {
         "condition": {
             "original": "Prerequisite: Enrolment with consent. ARTS3759 is open to UNSW undergraduate students that are also enrolled in an internship (or international field placement course). This needs to be demonstrated prior to enrolment.<br/><br/>",
-            "processed": "Enrolment with consent. is open to UNSW undergraduate that are also an internship (or international field placement course). This needs to be demonstrated prior to enrolment"
+            "processed": "Enrolment with consent. is open to UNSW undergraduate that are also an internship (or international field placement course). This needs to be demonstrated"
         },
         "tokens": [
             "(",
@@ -3349,9 +3349,6 @@
             "to",
             "be",
             "demonstrated",
-            "prior",
-            "to",
-            "enrolment",
             ")"
         ],
         "broke at": "Index 2, with"
@@ -4430,7 +4427,7 @@
     "AVIA3199": {
         "condition": {
             "original": "Prerequisite: enrolled in a Science program (single or dual) and completing an Aviation major or specialisation. Must pass Preparation for WIL modules prior to enrolment. Placement must be related to the student\u2019s major or specialisation, and approved by the School of Aviation prior to enrolment.<br/>Pre-requisite: 48 units of credit and a minimum 65 WAM.<br/>It is the student\u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year.<br/><br/>",
-            "processed": "a Science program (single || dual) && an Aviation major || specialisation. Must pass for WIL modules prior to enrolment. Placement must be related to the \u2019s major || specialisation && approved by the School of Aviation prior to enrolment. 48UOC && a 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
+            "processed": "a Science program (single || dual) && an Aviation major || specialisation. Must pass for WIL modules . Placement must be related to the \u2019s major || specialisation && approved by the School of Aviation . 48UOC && a 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
         },
         "tokens": [
             "(",
@@ -4453,9 +4450,7 @@
             "for",
             "WIL",
             "modules",
-            "prior",
-            "to",
-            "enrolment.",
+            ".",
             "Placement",
             "must",
             "be",
@@ -4473,9 +4468,7 @@
             "School",
             "of",
             "Aviation",
-            "prior",
-            "to",
-            "enrolment.",
+            ".",
             "48UOC",
             "&&",
             "a",
@@ -4669,7 +4662,7 @@
     "BABS3199": {
         "condition": {
             "original": "Prerequisite: enrolled in a science Science program (single or dual) and majoring in a BABS major or specialisation. Must pass Preparation for WIL modules prior to enrolment. Placement must be related to the student\u2019s major or specialisation, and approved by BABS prior to enrolment.<br/>Pre-requisite: 48 units of credit and a minimum 65 WAM.<br/>It is the student\u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year.<br/><br/>",
-            "processed": "a science Science program (single || dual) && majoring in a BABS major || specialisation. Must pass for WIL modules prior to enrolment. Placement must be related to the \u2019s major || specialisation && approved by BABS prior to enrolment. 48UOC && a 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
+            "processed": "a science Science program (single || dual) && majoring in a BABS major || specialisation. Must pass for WIL modules . Placement must be related to the \u2019s major || specialisation && approved by BABS . 48UOC && a 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
         },
         "tokens": [
             "(",
@@ -4695,9 +4688,7 @@
             "for",
             "WIL",
             "modules",
-            "prior",
-            "to",
-            "enrolment.",
+            ".",
             "Placement",
             "must",
             "be",
@@ -4712,9 +4703,7 @@
             "approved",
             "by",
             "BABS",
-            "prior",
-            "to",
-            "enrolment.",
+            ".",
             "48UOC",
             "&&",
             "a",
@@ -4817,7 +4806,7 @@
     "BEES3199": {
         "condition": {
             "original": "Prerequisite: enrolled in a Science program (single or dual) and majoring in a BEES major or specialisation. Must pass Preparation for WIL modules prior to enrolment. Placement must be related to the student\u2019s major or specialisation, and approved by BEES prior to enrolment. <br/>Pre-requisite: 48 units of credit and a minimum 65 WAM. <br/>It is the student\u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year.<br/><br/>",
-            "processed": "a Science program (single || dual) && majoring in a BEES major || specialisation. Must pass for WIL modules prior to enrolment. Placement must be related to the \u2019s major || specialisation && approved by BEES prior to enrolment. 48UOC && a 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
+            "processed": "a Science program (single || dual) && majoring in a BEES major || specialisation. Must pass for WIL modules . Placement must be related to the \u2019s major || specialisation && approved by BEES . 48UOC && a 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
         },
         "tokens": [
             "(",
@@ -4842,9 +4831,7 @@
             "for",
             "WIL",
             "modules",
-            "prior",
-            "to",
-            "enrolment.",
+            ".",
             "Placement",
             "must",
             "be",
@@ -4859,9 +4846,7 @@
             "approved",
             "by",
             "BEES",
-            "prior",
-            "to",
-            "enrolment.",
+            ".",
             "48UOC",
             "&&",
             "a",
@@ -5044,7 +5029,7 @@
     "BEIL6013": {
         "condition": {
             "original": "UG students must be in their third year of study (having completed 96 units of credit) to enroll in this course. <br/><br/>",
-            "processed": "UG must be in their third year of study (having 96UOC) to enroll in this course"
+            "processed": "UG must be in their third year of study (having 96UOC)"
         },
         "tokens": [
             "(",
@@ -5061,11 +5046,6 @@
             "having",
             "96UOC",
             ")",
-            "to",
-            "enroll",
-            "in",
-            "this",
-            "course",
             ")"
         ],
         "broke at": "Index 2, must"
@@ -5403,22 +5383,6 @@
         ],
         "broke at": "Index 2, 4522"
     },
-    "CDEV2000": {
-        "condition": {
-            "original": "Student must have completed 30 UoC in order to enrol.<br/><br/>",
-            "processed": "30UOC in order to enrol"
-        },
-        "tokens": [
-            "(",
-            "30UOC",
-            "in",
-            "order",
-            "to",
-            "enrol",
-            ")"
-        ],
-        "broke at": "Index 1, 30UOC"
-    },
     "CDEV3100": {
         "condition": {
             "original": "Pre-requisite is 30 Units of Credit<br/><br/>",
@@ -5435,7 +5399,7 @@
     "CDEV3101": {
         "condition": {
             "original": "Students are required to have completed a minimum of 30 UoC to enrol in this course.<br/><br/>",
-            "processed": "are required to have a minimum 30UOC to enrol in this course"
+            "processed": "are required to have a minimum 30UOC"
         },
         "tokens": [
             "(",
@@ -5446,11 +5410,6 @@
             "a",
             "minimum",
             "30UOC",
-            "to",
-            "enrol",
-            "in",
-            "this",
-            "course",
             ")"
         ],
         "broke at": "Index 2, required"
@@ -5810,7 +5769,7 @@
     "CHEM2701": {
         "condition": {
             "original": "First year chemistry is a prerequisite. One of the following courses must have been completed prior to enrolment: <br/> - CHEM1021 -- Chemistry 1B <br/> - CHEM1041/1061 -- Higher Chemistry 1B<br/> - CHEM1821 -- Engineering Chemistry 1B<br/> - CHEM1829 -- Biological Chemistry for Optometry Students<br/><br/>",
-            "processed": "First year chemistry is a . One of the following courses must have been prior to enrolment: - CHEM1021 -- Chemistry 1B - CHEM1041/1061 -- Higher Chemistry 1B - CHEM1821 -- Engineering Chemistry 1B - CHEM1829 -- Biological Chemistry for Optometry"
+            "processed": "First year chemistry is a . One of the following courses must have been : - CHEM1021 -- Chemistry 1B - CHEM1041/1061 -- Higher Chemistry 1B - CHEM1821 -- Engineering Chemistry 1B - CHEM1829 -- Biological Chemistry for Optometry"
         },
         "tokens": [
             "(",
@@ -5828,9 +5787,7 @@
             "must",
             "have",
             "been",
-            "prior",
-            "to",
-            "enrolment:",
+            ":",
             "-",
             "CHEM1021",
             "--",
@@ -5878,7 +5835,7 @@
     "CHEM3199": {
         "condition": {
             "original": "Prerequisite: enrolled in a Science program (single or dual) and majoring in a Chemistry major or specialisation. Must pass Preparation for WIL modules prior to enrolment. Placement must be related to the student\u2019s major or specialisation, and approved by Chemistry prior to enrolment. <br/>Pre-requisite: 48 units of credit and a minimum 65 WAM. <br/>It is the student\u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year.<br/><br/>",
-            "processed": "a Science program (single || dual) && majoring in a Chemistry major || specialisation. Must pass for WIL modules prior to enrolment. Placement must be related to the \u2019s major || specialisation && approved by Chemistry prior to enrolment. 48UOC && a 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
+            "processed": "a Science program (single || dual) && majoring in a Chemistry major || specialisation. Must pass for WIL modules . Placement must be related to the \u2019s major || specialisation && approved by Chemistry . 48UOC && a 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
         },
         "tokens": [
             "(",
@@ -5903,9 +5860,7 @@
             "for",
             "WIL",
             "modules",
-            "prior",
-            "to",
-            "enrolment.",
+            ".",
             "Placement",
             "must",
             "be",
@@ -5920,9 +5875,7 @@
             "approved",
             "by",
             "Chemistry",
-            "prior",
-            "to",
-            "enrolment.",
+            ".",
             "48UOC",
             "&&",
             "a",
@@ -6441,7 +6394,7 @@
     "CRIM3025": {
         "condition": {
             "original": "Prerequisite: 96 uoc including CRIM1010, CRIM1011 and CRIM2042, WAM 70, and in the final year of a Criminology major or Criminology & Criminal Justice single or double degree. Students in program 4034 are not eligible to enrol. Consent required.<br/><br/>",
-            "processed": "96UOC && CRIM1010, CRIM1011 && CRIM2042, 70WAM && in the final year of a Criminology major || Criminology && Criminal Justice single || double degree. in program 4034 are not eligible to enrol. Consent required"
+            "processed": "96UOC && CRIM1010, CRIM1011 && CRIM2042, 70WAM && in the final year of a Criminology major || Criminology && Criminal Justice single || double degree. in program 4034 are not eligible . Consent required"
         },
         "tokens": [
             "(",
@@ -6476,8 +6429,7 @@
             "are",
             "not",
             "eligible",
-            "to",
-            "enrol.",
+            ".",
             "Consent",
             "required",
             ")"
@@ -6530,7 +6482,7 @@
     "DART2252": {
         "condition": {
             "original": "Students must have completed 48 UOC (in any program) prior to enrolling in this course.<br/><br/>",
-            "processed": "48UOC (in any program) prior to enrolling in this course"
+            "processed": "48UOC (in any program)"
         },
         "tokens": [
             "(",
@@ -6540,12 +6492,6 @@
             "any",
             "program",
             ")",
-            "prior",
-            "to",
-            "enrolling",
-            "in",
-            "this",
-            "course",
             ")"
         ],
         "broke at": "Index 3, in"
@@ -6553,7 +6499,7 @@
     "DART3200": {
         "condition": {
             "original": "Students must complete 72 UOC including two media arts disciplinary sequences prior to enrolling.<br/><br/>",
-            "processed": "must complete 72UOC && two media arts disciplinary sequences prior to enrolling"
+            "processed": "must complete 72UOC && two media arts disciplinary sequences"
         },
         "tokens": [
             "(",
@@ -6566,9 +6512,6 @@
             "arts",
             "disciplinary",
             "sequences",
-            "prior",
-            "to",
-            "enrolling",
             ")"
         ],
         "broke at": "Index 2, complete"
@@ -7621,7 +7564,7 @@
     "EDST2002": {
         "condition": {
             "original": "Prerequisite: 72 uoc overall, including EDST1101, EDST1104, EDST1108, and EDST2003, and enrolment in an Education program. Students must have passed the Literacy and Numeracy Test for Initial Teacher Education in order to enrol into this course<br/><br/>",
-            "processed": "72UOC && EDST1101, EDST1104, EDST1108 && EDST2003 && (4509 || 4056) . must have passed the Literacy && Numeracy Test for Initial Teacher Education in order to enrol into this course"
+            "processed": "72UOC && EDST1101, EDST1104, EDST1108 && EDST2003 && (4509 || 4056) . must have passed the Literacy && Numeracy Test for Initial Teacher Education"
         },
         "tokens": [
             "(",
@@ -7651,13 +7594,6 @@
             "Initial",
             "Teacher",
             "Education",
-            "in",
-            "order",
-            "to",
-            "enrol",
-            "into",
-            "this",
-            "course",
             ")"
         ],
         "broke at": "Index 4, EDST1104,"
@@ -8218,7 +8154,7 @@
     "EDST6761": {
         "condition": {
             "original": "Prerequisite: EDST6760 and 12 units of credit in Teaching Methods courses. Students must have passed the Literacy and Numeracy Test for Initial Teacher Education in order to enrol into this course.<br/><br/>",
-            "processed": "EDST6760 && 12UOC in Teaching Methods courses. must have passed the Literacy && Numeracy Test for Initial Teacher Education in order to enrol into this course"
+            "processed": "EDST6760 && 12UOC in Teaching Methods courses. must have passed the Literacy && Numeracy Test for Initial Teacher Education"
         },
         "tokens": [
             "(",
@@ -8241,13 +8177,6 @@
             "Initial",
             "Teacher",
             "Education",
-            "in",
-            "order",
-            "to",
-            "enrol",
-            "into",
-            "this",
-            "course",
             ")"
         ],
         "broke at": "Index 3, 12UOC"
@@ -12133,7 +12062,7 @@
     "MATS3199": {
         "condition": {
             "original": "Prerequisite: enrolled in a Science program (single or dual) and majoring in Materials Science. Must pass Preparation for WIL modules prior to enrolment. Placement must be related to the student\u2019s major, and approved by the School of Materials Science and Engineering prior to enrolment.<br/>Pre-requisite: 48 units of credit and a minimum 65 WAM.<br/>It is the student\u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year.<br/><br/>",
-            "processed": "a Science program (single || dual) && majoring in Materials Science. Must pass for WIL modules prior to enrolment. Placement must be related to the \u2019s major && approved by the School of Materials Science && Engineering prior to enrolment. 48UOC && a 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
+            "processed": "a Science program (single || dual) && majoring in Materials Science. Must pass for WIL modules . Placement must be related to the \u2019s major && approved by the School of Materials Science && Engineering . 48UOC && a 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
         },
         "tokens": [
             "(",
@@ -12155,9 +12084,7 @@
             "for",
             "WIL",
             "modules",
-            "prior",
-            "to",
-            "enrolment.",
+            ".",
             "Placement",
             "must",
             "be",
@@ -12176,9 +12103,7 @@
             "Science",
             "&&",
             "Engineering",
-            "prior",
-            "to",
-            "enrolment.",
+            ".",
             "48UOC",
             "&&",
             "a",
@@ -13923,7 +13848,7 @@
     "PHYS3199": {
         "condition": {
             "original": "Prerequisite: enrolled in a Science program (single or dual) and completing a Physics major. Must pass Preparation for WIL modules prior to enrolment. Placement must be related to the student\u2019s major, and approved by the School of Physics prior to enrolment.<br/>Pre-requisite: 48 units of credit and a minimum 65 WAM.<br/>It is the student\u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year.<br/><br/>",
-            "processed": "a Science program (single || dual) && a Physics major. Must pass for WIL modules prior to enrolment. Placement must be related to the \u2019s major && approved by the School of Physics prior to enrolment. 48UOC && a 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
+            "processed": "a Science program (single || dual) && a Physics major. Must pass for WIL modules . Placement must be related to the \u2019s major && approved by the School of Physics . 48UOC && a 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
         },
         "tokens": [
             "(",
@@ -13944,9 +13869,7 @@
             "for",
             "WIL",
             "modules",
-            "prior",
-            "to",
-            "enrolment.",
+            ".",
             "Placement",
             "must",
             "be",
@@ -13962,9 +13885,7 @@
             "School",
             "of",
             "Physics",
-            "prior",
-            "to",
-            "enrolment.",
+            ".",
             "48UOC",
             "&&",
             "a",
@@ -14053,7 +13974,7 @@
     "PSYC3199": {
         "condition": {
             "original": "Prerequisite: enrolled in a Science program (single or dual) and completing a Psychology major. Must pass Preparation for WIL modules prior to enrolment. Placement must be related to the student\u2019s Psychology major and approved by the School of Psychology prior to enrolment. <br/>Pre-requisite: 48 units of credit and a minimum 65 WAM. <br/>It is the student\u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year.<br/><br/>",
-            "processed": "a Science program (single || dual) && a Psychology major. Must pass for WIL modules prior to enrolment. Placement must be related to the \u2019s Psychology major && approved by the School of Psychology prior to enrolment. 48UOC && a 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
+            "processed": "a Science program (single || dual) && a Psychology major. Must pass for WIL modules . Placement must be related to the \u2019s Psychology major && approved by the School of Psychology . 48UOC && a 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
         },
         "tokens": [
             "(",
@@ -14074,9 +13995,7 @@
             "for",
             "WIL",
             "modules",
-            "prior",
-            "to",
-            "enrolment.",
+            ".",
             "Placement",
             "must",
             "be",
@@ -14093,9 +14012,7 @@
             "School",
             "of",
             "Psychology",
-            "prior",
-            "to",
-            "enrolment.",
+            ".",
             "48UOC",
             "&&",
             "a",
@@ -14867,7 +14784,7 @@
     "SOMS3199": {
         "condition": {
             "original": "Prerequisite: enrolled in 3991 program, or in a Science program (single or dual) and majoring in a SOMS major. Must complete preparation for WIL mini-modules prior to enrolment. Placement must be related to the student\u2019s major or specialisation, and approved by SOMS prior to enrolment.  <br/>Pre-requisite of 48 units of credit and a minimum 65 WAM.  <br/><br/>",
-            "processed": "3991 program || in a Science program (single || dual) && majoring in a SOMS major. Must complete for WIL mini-modules prior to enrolment. Placement must be related to the \u2019s major || specialisation && approved by SOMS prior to enrolment. 48UOC && a 65WAM"
+            "processed": "3991 program || in a Science program (single || dual) && majoring in a SOMS major. Must complete for WIL mini-modules . Placement must be related to the \u2019s major || specialisation && approved by SOMS . 48UOC && a 65WAM"
         },
         "tokens": [
             "(",
@@ -14894,9 +14811,7 @@
             "for",
             "WIL",
             "mini-modules",
-            "prior",
-            "to",
-            "enrolment.",
+            ".",
             "Placement",
             "must",
             "be",
@@ -14911,9 +14826,7 @@
             "approved",
             "by",
             "SOMS",
-            "prior",
-            "to",
-            "enrolment.",
+            ".",
             "48UOC",
             "&&",
             "a",

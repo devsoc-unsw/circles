@@ -167,8 +167,11 @@ def delete_extraneous_phrasing(processed):
     # Remove 'student' references as it is implied
     processed = re.sub("students?", "", processed, flags=re.IGNORECASE)
 
-    # Removed enrollment language since course and program codes imply this
+    # Remove enrollment language since course and program codes imply this
     processed = re.sub("enrolled in", "", processed, flags=re.IGNORECASE)
+
+    # Remove tautological endings
+    processed = re.sub("(prior )?(in order )?to enrol(l)?(ing)?(ment)?( in(to)? this course)?", "", processed, flags=re.IGNORECASE)
 
     # Remove completion language
     completion_text = [
