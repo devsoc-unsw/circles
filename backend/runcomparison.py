@@ -25,16 +25,22 @@ except argparse.ArgumentError:
     parser.print_help()
     exit(0)
 
+def check_in_fixes(coursename, courses_in_manual):
+    """ mutates the list given to add the course name if it is in manual fixes"""
+    with suppress(FileNotFoundError):
+        with open(f"data/processors/manual_fixes/{coursename[0:4]}fixes.py", "r") as f:
+            if f"CONDITIONS[\"{coursename}\"]" in f.read():
+                courses_in_manual.append(coursename)
 
 
 if __name__ == "__main__":
     source_courses = (
         "data/final_data/coursesProcessed.json"
-        if args.s is None
-        else f"data/final_data/archive/processed/{args.s}.json"
+        if args.source is None
+        else f"data/final_data/archive/processed/{args.source}.json"
     )
 
-    target_courses = f"data/final_data/archive/processed/{args.f}.json"
+    target_courses = f"data/final_data/archive/processed/{args.target}.json"
 
     with open(source_courses, "r") as f:
         source_courses = json.loads(f.read())
@@ -44,28 +50,28 @@ if __name__ == "__main__":
 
     all_source = set(source_courses.keys())
     all_target = set(target_courses.keys())
-    print("the following courses have been removed:")
-    print(all_target - all_source)
-
-    print("============================================================================")
-
-    print("the following courses have been added:")
-    print(all_source - all_target)
-
-    print("============================================================================")
-    print("the following courses have had their prerequisites changed:")
     courses_in_manual = []
+
+    print("removed:")
+    for removed in all_target - all_source:
+        check_in_fixes(removed, courses_in_manual)
+        print(f"\t- {removed}")
+
+    print("added:")
+    for added in all_source - all_target:
+        check_in_fixes(added, courses_in_manual)
+        print(f"\t- {added}")
+
+    print("changed:")
     for coursename in all_source.intersection(all_target):
         target_course = target_courses[coursename]["raw_requirements"]
         source_course = source_courses[coursename]["raw_requirements"]
         if target_course != source_course:
-            print(coursename)
-            with suppress(FileNotFoundError):
-                with open(f"data/processors/manual_fixes/{coursename[0:4]}fixes.py", "r") as f:
-                    if f"CONDITIONS[\"{coursename}\"]" in f.read():
-                        courses_in_manual.append(coursename)
-            print(f"from: {source_course}")
-            print(f"to: {target_course}")
-    print("============================================================================")
-    print("of these, the following are in manual fixes:")
-    print(courses_in_manual)
+            print()
+            print(f"\t{coursename}:")
+            check_in_fixes(coursename, courses_in_manual)
+            print(f"\t\t - from: \"{source_course}\"")
+            print(f"\t\t - to: \"{target_course}\"")
+    print("inFixes:")
+    for added in courses_in_manual:
+        print(f"\t- {added}")
