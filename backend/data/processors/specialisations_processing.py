@@ -19,6 +19,7 @@ from data.utility.data_helpers import read_data, write_data
 
 # TODO: add more specialisations as we expand scope of Circles
 TEST_SPNS = [
+    # CompSci Majors: 
     "COMPA1",
     "COMPAH",
     "COMPBH",
@@ -32,12 +33,27 @@ TEST_SPNS = [
     "COMPS1",
     "COMPY1",
     "COMPZ1",
+    # CompSci Minors:
     "ACCTA2",
     "FINSA2",
     "INFSA2",
     "MARKA2",
     "MATHC2",
     "PSYCM2",
+    # Commerce Majors: 
+    "MGMTJ1",
+    "IBUSA1",
+    "INFSA1",
+    "TABLC1",
+    "COMMJ1",
+    "FINSR1",
+    "ACCTA1",
+    "ECONF1",
+    "ECONO1",
+    "MGMTH1",
+    "FINSA1",
+    "MARKA1",
+
 ]
 
 CODE_MAPPING = read_data(

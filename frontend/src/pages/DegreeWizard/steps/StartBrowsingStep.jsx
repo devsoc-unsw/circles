@@ -23,7 +23,7 @@ const StartBrowsingStep = () => {
   const saveUserSettings = () => {
     if (degree.programCode === "") {
       openNotification("Please select a degree");
-    } else if (degree.specialisation === "") {
+    } else if (degree.majors === [] && degree.minors === []) {
       openNotification("Please select a specialisation");
     } else {
       navigate("/course-selector");

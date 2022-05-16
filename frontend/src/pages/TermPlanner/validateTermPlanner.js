@@ -61,7 +61,7 @@ const validateTermPlannerRequest = (payload) => (dispatch) => {
 
 const prepareCoursesForValidation = (plannerInfo, userInfo, suppress) => {
   const { years, startYear } = plannerInfo;
-  const { programCode, specialisation, minor } = userInfo;
+  const { programCode, majors, minor } = userInfo;
 
   const plan = [];
   years.forEach((year) => {
@@ -78,7 +78,7 @@ const prepareCoursesForValidation = (plannerInfo, userInfo, suppress) => {
 
   const payload = {
     program: programCode,
-    specialisations: [specialisation, minor],
+    specialisations: minor ? majors.append(minor) : majors,
     year: 1,
     plan,
     mostRecentPastTerm: suppress ? getMostRecentPastTerm(startYear) : { Y: 0, T: 0 },

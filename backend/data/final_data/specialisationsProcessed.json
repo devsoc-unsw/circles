@@ -1288,5 +1288,896 @@
                 "notes": ""
             }
         ]
+    },
+    "MGMTJ1": {
+        "programs": [
+            "3586",
+            "3554",
+            "3543",
+            "3502",
+            "3558"
+        ],
+        "name": "Innovation, Strategy and Entrepreneurship",
+        "type": "major",
+        "UOC": 48,
+        "code": "MGMTJ1",
+        "course_constraints": [],
+        "curriculum": [
+            {
+                "courses": {
+                    "MGMT2001": "Managing Innovation and Organisational Change",
+                    "COMM1040": "Entrepreneurial Ecosystems",
+                    "MGMT3001": "Business and Corporate Strategy",
+                    "MGMT2010": "Innovation and Entrepreneurship"
+                },
+                "title": "Specialisation Core Courses",
+                "credits_to_complete": 24,
+                "core": true,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {},
+                "title": "Elective Courses",
+                "credits_to_complete": 18,
+                "core": false,
+                "levels": [],
+                "notes": "with at least 12 UOC at level 3."
+            },
+            {
+                "courses": {
+                    "COMM1120": "Collaboration and Innovation in Business"
+                },
+                "title": "Gateway Core Course",
+                "credits_to_complete": 6,
+                "core": true,
+                "levels": [],
+                "notes": ""
+            }
+        ]
+    },
+    "IBUSA1": {
+        "programs": [
+            "3409",
+            "3586",
+            "3321",
+            "3587",
+            "3447",
+            "3554",
+            "3543",
+            "3502",
+            "3420",
+            "3558"
+        ],
+        "name": "International Business",
+        "type": "major",
+        "UOC": 48,
+        "code": "IBUSA1",
+        "course_constraints": [],
+        "curriculum": [
+            {
+                "courses": {
+                    "MGMT3102": "Asia-Pacific Business",
+                    "MGMT2102": "Managing Across Cultures",
+                    "MGMT3101": "International Business Strategy",
+                    "COMM1150": "Global Business Environments",
+                    "MGMT2101": "International Business and Multinational Operations"
+                },
+                "title": "Core Courses",
+                "credits_to_complete": 30,
+                "core": true,
+                "levels": [],
+                "notes": "Students in Comm/Econ and Comm/Actl should take COMM1900 instead of COMM1150. Students in Econ and Actl should take ECON1102. All other students should complete COMM1150. Please note: students in the Bachelor of Commerce (International) (Program 3558) need to complete one additional elective course, i.e. a total of four (4), because MGMT2102 Managing Across Cultures is a compulsory course in the international depth component."
+            },
+            {
+                "courses": {
+                    "MGMT3730": "Human Capital Analytics",
+                    "MGMT2002": "Managing Business Communication",
+                    "MGMT3004": "Solving Complex Strategy and Policy Problems",
+                    "COMM3101": "Industry Experience Placement 1",
+                    "MGMT2725": "Career Management",
+                    "COMM3020": "Global Business Practicum",
+                    "MGMT3721": "Negotiation Skills",
+                    "COMM3202": "Industry Experience Placement 2",
+                    "MGMT2010": "Innovation and Entrepreneurship",
+                    "MGMT3702": "International Human Resource Management",
+                    "TABL2712": "Business Ethics and the Law",
+                    "MGMT2105": "East Asian Business Enterprise",
+                    "MGMT2726": "Business Ethics and Sustainability",
+                    "COMM3030": "Social Entrepreneurship Practicum",
+                    "COMM2233": "Industry Consulting Project",
+                    "MGMT2106": "Comparative Management Systems",
+                    "MGMT3001": "Business and Corporate Strategy",
+                    "COMM2222": "Industry Experience Program",
+                    "MGMT3003": "Global Entrepreneurship"
+                },
+                "title": "Prescribed Electives",
+                "credits_to_complete": 18,
+                "core": false,
+                "levels": [],
+                "notes": "At least one (1) of the elective courses needs to be at level 3 (MGMT3XXX). This is regardless of whether you are doing a single major or taking International Business as a second major. Please note: Students may count ONE (6 UOC) of COMM2222, COMM2233, COMM3020, COMM3030, COMM3101 or COMM3202 towards their International Business major."
+            }
+        ]
+    },
+    "INFSA1": {
+        "programs": [
+            "3586",
+            "3587",
+            "3554",
+            "3543",
+            "3502",
+            "3558"
+        ],
+        "name": "Information Systems",
+        "type": "major",
+        "UOC": 48,
+        "code": "INFSA1",
+        "course_constraints": [
+            {
+                "title": "REQUIREMENTS: DOUBLE MAJOR ACCOUNTING & INFORMATION SYSTEMS",
+                "description": "ACCT3563 is included for the benefit of students undertaking majors in both Accounting and Information Systems to allow compliance with the requirements of the professional Accounting bodies. Students with majors in Accounting and Information Systems may count this course towards the Information Systems major AND the Accounting major."
+            }
+        ],
+        "curriculum": [
+            {
+                "courses": {
+                    "INFS3822": "Artificial Intelligence for Business Analytics",
+                    "INFS3634": "Mobile Ecosystems and Applications Development",
+                    "COMM3030": "Social Entrepreneurship Practicum",
+                    "ACCT3563": "Issues in Financial Reporting and Analysis",
+                    "COMM3020": "Global Business Practicum",
+                    "INFS3020": "International Information Systems and Technology Practicum",
+                    "INFS3700": "User Experience and IT Service Design",
+                    "COMM3202": "Industry Experience Placement 2",
+                    "INFS3701": "Enterprise Architecture for Scalable Cloud Solutions",
+                    "COMM2233": "Industry Consulting Project",
+                    "INFS1701": "Networking and Security",
+                    "COMM2222": "Industry Experience Program",
+                    "INFS2702": "Organisational Infrastructure and Supply Chain Management",
+                    "INFS3603": "Introduction to Business Analytics",
+                    "INFS2608": "Database Management & Big Data Infrastructures",
+                    "INFS2631": "Innovation and Technology Management",
+                    "INFS2822": "Programming for Data Analytics",
+                    "INFS3873": "Business Analytics Methods",
+                    "INFS2609": "Programming for Business",
+                    "INFS3703": "Information Systems Project Management",
+                    "COMM3101": "Industry Experience Placement 1",
+                    "INFS2701": "Cyber Security Management and Governance",
+                    "INFS3830": "Social Media and Analytics"
+                },
+                "title": "Prescribed Electives",
+                "credits_to_complete": 18,
+                "core": false,
+                "levels": [],
+                "notes": "At least two (2) of these elective courses must be at level 3 (i.e. INFS3XXX). This is regardless of whether you are doing a single major or taking Information Systems as a second major. Please note: Students may count ONE (6 UOC) of ACCT3563, COMM2222, COMM2233, COMM3020, COMM3030, COMM3101 or COMM3202 towards their major in Information Systems."
+            },
+            {
+                "courses": {
+                    "INFS1603": "Introduction to Business Databases",
+                    "INFS3604": "Business Process Management",
+                    "COMM1190": "Data, Insights and Decisions",
+                    "INFS2602": "Managing Information Systems",
+                    "INFS2603": "Business Analysis and Agile Product Management"
+                },
+                "title": "Core Courses",
+                "credits_to_complete": 30,
+                "core": true,
+                "levels": [],
+                "notes": "Students Actuarial degrees should complete MATH1151 or MATH1251 instead of COMM1190. All other students should complete COMM1190."
+            }
+        ]
+    },
+    "TABLC1": {
+        "programs": [
+            "3586",
+            "3587",
+            "3554",
+            "3543",
+            "3502",
+            "3558"
+        ],
+        "name": "Taxation",
+        "type": "major",
+        "UOC": 48,
+        "code": "TABLC1",
+        "course_constraints": [],
+        "curriculum": [
+            {
+                "courses": {
+                    "TABL3010": "Taxation of Superannuation",
+                    "TABL4722": "Special Topic in Taxation",
+                    "COMM2233": "Industry Consulting Project",
+                    "COMM3020": "Global Business Practicum",
+                    "TABL3752": "Capital Gains Tax",
+                    "COMM2222": "Industry Experience Program",
+                    "COMM3202": "Industry Experience Placement 2",
+                    "COMM3030": "Social Entrepreneurship Practicum",
+                    "TABL3016": "Critical Perspectives and Ethics",
+                    "TABL3033": "UNSW Tax and Business Advisory Clinic",
+                    "TABL3757": "Corporate Tax Strategy",
+                    "TABL2756": "International Business Tax",
+                    "TABL3755": "Taxation of Business Entities",
+                    "TABL3023": "Principles of Goods and Services Tax Law",
+                    "TABL2741": "Business Entities",
+                    "COMM3101": "Industry Experience Placement 1",
+                    "TABL2793": "People and the Environmental Challenge"
+                },
+                "title": "Prescribed Electives",
+                "credits_to_complete": 30,
+                "core": false,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "TABL2751": "Business Taxation",
+                    "COMM1150": "Global Business Environments",
+                    "TABL2710": "Business and the Law"
+                },
+                "title": "Core Courses",
+                "credits_to_complete": 18,
+                "core": true,
+                "levels": [],
+                "notes": "Students in Comm/Econ and Comm/Actl should take COMM1900 instead of COMM1150. Students in Econ and Actl should take ECON1102. All other students should complete COMM1150."
+            },
+            {
+                "courses": {
+                    "TABL3016": "Critical Perspectives and Ethics",
+                    "COMM3101": "Industry Experience Placement 1",
+                    "COMM3303": "Industry-Research Integrated Learning",
+                    "TABL3005": "Taxation of Trusts",
+                    "TABL3010": "Taxation of Superannuation",
+                    "TABL4722": "Special Topic in Taxation",
+                    "TABL3755": "Taxation of Business Entities",
+                    "TABL2793": "People and the Environmental Challenge",
+                    "TABL3752": "Capital Gains Tax",
+                    "TABL3023": "Principles of Goods and Services Tax Law",
+                    "COMM3030": "Social Entrepreneurship Practicum",
+                    "TABL3757": "Corporate Tax Strategy",
+                    "TABL3006": "Tax Litigation",
+                    "TABL3003": "Taxation of Corporations",
+                    "TABL2756": "International Business Tax",
+                    "COMM2233": "Industry Consulting Project",
+                    "TABL3033": "UNSW Tax and Business Advisory Clinic",
+                    "COMM2222": "Industry Experience Program",
+                    "TABL2751": "Business Taxation",
+                    "COMM3202": "Industry Experience Placement 2",
+                    "COMM3020": "Global Business Practicum"
+                },
+                "title": "Taxation Course List for Commerce/Law (4733) Students",
+                "credits_to_complete": 48,
+                "core": false,
+                "levels": [],
+                "notes": ""
+            }
+        ]
+    },
+    "COMMJ1": {
+        "programs": [
+            "3586",
+            "3587",
+            "3554",
+            "3543",
+            "3502",
+            "3558"
+        ],
+        "name": "Business Analytics",
+        "type": "major",
+        "UOC": 48,
+        "code": "COMMJ1",
+        "course_constraints": [
+            {
+                "title": "Constraint Rule",
+                "description": "Students must not complete more than 60 UOC of Level 1 courses in their program."
+            }
+        ],
+        "curriculum": [
+            {
+                "courses": {
+                    "COMM2501": "Data Visualisation and Communication",
+                    "COMM1190": "Data, Insights and Decisions",
+                    "COMM2050": "Data Use and Misuse",
+                    "COMM1822": "Introduction to Databases for Business Analytics"
+                },
+                "title": "Compulsory Core",
+                "credits_to_complete": 24,
+                "core": true,
+                "levels": [],
+                "notes": "Students in Comm/Actl should complete MATH1151 or MATH1251 instead of COMM1190. All other students should complete COMM1190"
+            },
+            {
+                "courses": {
+                    "ECON2209 or ECON2206 or RISK2002": [
+                        "Business Forecasting",
+                        "Introductory Econometrics ",
+                        "Risk Analytics"
+                    ]
+                },
+                "title": "Modelling 1",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "COMM2222": "Industry Experience Program",
+                    "COMM3101": "Industry Experience Placement 1",
+                    "ECON3206": "Financial Econometrics",
+                    "COMM2233": "Industry Consulting Project",
+                    "MARK3087": "Customer Analytics",
+                    "COMM3030": "Social Entrepreneurship Practicum",
+                    "MARK3085": "Digital Marketing and Web Analytics",
+                    "RISK3003": "Risk Decision Analytics",
+                    "ECON2112": "Game Theory and Business Strategy",
+                    "ECON2206": "Introductory Econometrics ",
+                    "COMM3202": "Industry Experience Placement 2",
+                    "INFS3873": "Business Analytics Methods",
+                    "MARK3054": "Marketing Analytics and Big Data",
+                    "INFS3830": "Social Media and Analytics",
+                    "MGMT3730": "Human Capital Analytics",
+                    "INFS3603": "Introduction to Business Analytics",
+                    "ECON3123": "Organisational Economics",
+                    "FINS3646": "Toolkit for Finance",
+                    "COMM3501": "Quantitative Business Analytics",
+                    "COMM3020": "Global Business Practicum",
+                    "COMM3500": "Analytics Industry Project",
+                    "MGMT2200": "Thinking Skills",
+                    "MGMT2002": "Managing Business Communication",
+                    "RISK2001": "Fundamentals of Risk and Risk Management",
+                    "INFS2608": "Database Management & Big Data Infrastructures",
+                    "MGMT2726": "Business Ethics and Sustainability",
+                    "RISK2002": "Risk Analytics",
+                    "ECON2209": "Business Forecasting",
+                    "ACCT3563": "Issues in Financial Reporting and Analysis",
+                    "MGMT3001": "Business and Corporate Strategy",
+                    "INFS2822": "Programming for Data Analytics",
+                    "FINS3645": "Financial Market Data Design and Analysis",
+                    "ECON3210": "Big Data Econometrics"
+                },
+                "title": "Prescribed Electives",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "COMM3501": "Quantitative Business Analytics",
+                    "COMM3500": "Analytics Industry Project"
+                },
+                "title": "Capstone",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "MGMT3730 or RISK3003 or ECON3210 or MARK3054": [
+                        "Human Capital Analytics",
+                        "Risk Decision Analytics",
+                        "Big Data Econometrics",
+                        "Marketing Analytics and Big Data"
+                    ]
+                },
+                "title": "Modelling 2",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [],
+                "notes": ""
+            }
+        ]
+    },
+    "FINSR1": {
+        "programs": [
+            "3586",
+            "3587",
+            "3554",
+            "3543",
+            "3502",
+            "3558"
+        ],
+        "name": "Financial Technology",
+        "type": "major",
+        "UOC": 48,
+        "code": "FINSR1",
+        "course_constraints": [],
+        "curriculum": [
+            {
+                "courses": {
+                    "FINS1612": "Capital Markets and Institutions",
+                    "FINS3646": "Toolkit for Finance",
+                    "COMM1190": "Data, Insights and Decisions",
+                    "FINS3648": "Banking, Finance and Technology",
+                    "FINS3645": "Financial Market Data Design and Analysis",
+                    "FINS3647": "Bitcoin and Decentralised Finance",
+                    "FINS3623 or FINS2615 or FINS2624 or FINS3630": [
+                        "Venture Capital",
+                        "Intermediate Business Finance",
+                        "Portfolio Management",
+                        "Bank Financial Management"
+                    ]
+                },
+                "title": "Core Courses",
+                "credits_to_complete": 42,
+                "core": true,
+                "levels": [],
+                "notes": "Students in Comm/Actl should complete MATH1151 or MATH1251 instead of COMM1190. All other students should complete COMM1190."
+            },
+            {
+                "courses": {
+                    "FINS3666": "Trading and Market Making",
+                    "FINS3630": "Bank Financial Management",
+                    "FINS3633": "Real Estate Finance",
+                    "FINS3775": "Research Methods in Finance 1",
+                    "FINS3634": "Credit Analysis and Lending",
+                    "FINS3650": "International Banking",
+                    "COMM3202": "Industry Experience Placement 2",
+                    "FINS3623": "Venture Capital",
+                    "COMM3101": "Industry Experience Placement 1",
+                    "FINS3631": "Personal Risk, Insurance, and Superannuation for Financial Planning ",
+                    "FINS2622": "Asia-Pacific Capital Markets",
+                    "FINS2643": "Wealth Management and Client Engagement",
+                    "COMM2222": "Industry Experience Program",
+                    "COMM3020": "Global Business Practicum",
+                    "FINS3625": "Applied Corporate Finance",
+                    "COMM3030": "Social Entrepreneurship Practicum",
+                    "FINS3641": "Security Analysis and Valuation",
+                    "FINS3635": "Options, Futures and Risk Management",
+                    "FINS3640": "Investment Management Modeling",
+                    "FINS3636": "Interest Rate Risk Management",
+                    "ACCT3563": "Issues in Financial Reporting and Analysis",
+                    "FINS3637": "Wealth Management Advice and Ethics",
+                    "FINS3655": "Behavioural Finance",
+                    "FINS2624": "Portfolio Management"
+                },
+                "title": "Prescribed Electives",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [],
+                "notes": ""
+            }
+        ]
+    },
+    "ACCTA1": {
+        "programs": [
+            "3586",
+            "3587",
+            "3554",
+            "3543",
+            "3502",
+            "3558"
+        ],
+        "name": "Accounting",
+        "type": "major",
+        "UOC": 48,
+        "code": "ACCTA1",
+        "course_constraints": [],
+        "curriculum": [
+            {
+                "courses": {},
+                "title": "Tax Practitioners Board Requirements",
+                "credits_to_complete": 0,
+                "core": false,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ACCT3583": "Management Accounting 2",
+                    "COMM3020": "Global Business Practicum",
+                    "ACCT3610": "Business Analysis and Valuation",
+                    "COMM3101": "Industry Experience Placement 1",
+                    "ACCT3708": "Auditing and Assurance Services",
+                    "FINS3626": "International Corporate Governance",
+                    "ACCT2507": "Introduction to Accounting Research",
+                    "COMM2222": "Industry Experience Program",
+                    "TABL3033": "UNSW Tax and Business Advisory Clinic",
+                    "ACCT3601": "Global Financial Reporting and Analysis",
+                    "COMM3030": "Social Entrepreneurship Practicum",
+                    "ACCT3625": "ESG Reporting and Enterprise Value Creation",
+                    "COMM3202": "Industry Experience Placement 2",
+                    "ACTL2111": "Financial Mathematics for Actuaries",
+                    "TABL2741": "Business Entities",
+                    "ACCT2672": "Accounting Analytics for Business Decision Making",
+                    "COMM2233": "Industry Consulting Project"
+                },
+                "title": "Prescribed Electives",
+                "credits_to_complete": 18,
+                "core": false,
+                "levels": [],
+                "notes": "with at least 12 UOC being at Level 3 (i.e. ACCT3XXX). Please Note: - Students with a major in Accounting and Finance may count FINS3626 towards the Accounting major AND the Finance major. - Students completing a Bachelor of Actuarial Studies can count ACTL2111 in both the Actuarial Studies program and accounting major. - Students enrolled in 4733 Commerce/Law cannot take TABL2741 from the below elective list. - Students may count ONE (6 UOC) of COMM2222, COMM2233, COMM3020, COMM3030, COMM3101, COMM3202 or TABL3033 towards their Accounting major. - Students planning on studying Honours in Accounting should complete ACCT2507 Introduction to Accounting Research."
+            },
+            {
+                "courses": {
+                    "ACCT2522": "Management Accounting 1",
+                    "ACCT3563": "Issues in Financial Reporting and Analysis",
+                    "ACCT2511": "Financial Accounting Fundamentals",
+                    "ACCT2542": "Corporate Financial Reporting and Analysis",
+                    "COMM1140": "Financial Management"
+                },
+                "title": "Core Courses",
+                "credits_to_complete": 30,
+                "core": true,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {},
+                "title": "CAANZ/CPA Accreditation Requirements",
+                "credits_to_complete": 0,
+                "core": false,
+                "levels": [],
+                "notes": ""
+            }
+        ]
+    },
+    "ECONF1": {
+        "programs": [
+            "3586",
+            "3587",
+            "3554",
+            "3502",
+            "3558"
+        ],
+        "name": "Business Economics",
+        "type": "major",
+        "UOC": 48,
+        "code": "ECONF1",
+        "course_constraints": [
+            {
+                "title": "Double Major Accounting & Business Economics",
+                "description": "ACCT3563 is included for the benefit of students undertaking majors in both Accounting and Business Economics to allow compliance with the requirements of the professional Accounting bodies. Students with majors in Accounting and Business Economics may count this course towards the Business Economics major AND the Accounting major."
+            }
+        ],
+        "curriculum": [
+            {
+                "courses": {},
+                "title": "Prescribed Electives",
+                "credits_to_complete": 30,
+                "core": false,
+                "levels": [],
+                "notes": "with at least 18 UOC of Level 3 Economics courses."
+            },
+            {
+                "courses": {
+                    "ECON2112": "Game Theory and Business Strategy",
+                    "ECON2101": "Microeconomics 2"
+                },
+                "title": "Flexible Core Courses",
+                "credits_to_complete": 6,
+                "core": true,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "COMM1100": "Business Decision Making",
+                    "ECON1202": "Quantitative Analysis for Business and Economics"
+                },
+                "title": "Compulsory Core Courses",
+                "credits_to_complete": 12,
+                "core": true,
+                "levels": [],
+                "notes": "Students in Comm/Actl should take COMM1900 instead of COMM1100. Students in Actl should take ECON1101. All other students should complete COMM1100."
+            }
+        ]
+    },
+    "ECONO1": {
+        "programs": [
+            "3586",
+            "3554",
+            "3543",
+            "3502",
+            "3435",
+            "3558"
+        ],
+        "name": "Behavioural Economics",
+        "type": "major",
+        "UOC": 48,
+        "code": "ECONO1",
+        "course_constraints": [
+            {
+                "title": "Recommended Additional Elective Choices",
+                "description": "Students completing a major in Behavioural Economics may be interested in considering the following courses as free electives as part of meeting their program requirements:- PSYC1011: Psychology 1B PSYC1001: Psychology 1A PSYC1111: Measuring mind and behaviour PSYC1022 Psychology of Addiction PSYC1025 Psychology of Work PSYC1062 Science of Wellbeing PSYC1028 Psychology of Human Centred Design"
+            }
+        ],
+        "curriculum": [
+            {
+                "courses": {
+                    "COMM1100": "Business Decision Making",
+                    "ECON1101": "Microeconomics 1"
+                },
+                "title": "Flexible Level 1 Core",
+                "credits_to_complete": 6,
+                "core": true,
+                "levels": [
+                    1
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ECON2112": "Game Theory and Business Strategy",
+                    "ECON2101": "Microeconomics 2"
+                },
+                "title": "Flexible Level 2 Core",
+                "credits_to_complete": 6,
+                "core": true,
+                "levels": [
+                    2
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {},
+                "title": "Level 3 Prescribed Elective",
+                "credits_to_complete": 12,
+                "core": false,
+                "levels": [
+                    3
+                ],
+                "notes": "including at least 6 UOC of Level 3 Economics courses."
+            },
+            {
+                "courses": {
+                    "ECON2126": "Principles of Experimental and Behavioural Economics",
+                    "ECON2206": "Introductory Econometrics ",
+                    "ECON3124": "Behavioural Economics"
+                },
+                "title": "Level 2 and 3 Core",
+                "credits_to_complete": 18,
+                "core": true,
+                "levels": [
+                    2
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "MATH1131": "Mathematics 1A",
+                    "MATH1031": "Mathematics for Life Sciences",
+                    "MATH1151": "Mathematics for Actuarial Studies and Finance 1A",
+                    "ECON1202": "Quantitative Analysis for Business and Economics",
+                    "MATH1141": "Higher Mathematics 1A"
+                },
+                "title": "Quantitative Core",
+                "credits_to_complete": 6,
+                "core": true,
+                "levels": [],
+                "notes": ""
+            }
+        ]
+    },
+    "MGMTH1": {
+        "programs": [
+            "3409",
+            "3586",
+            "3321",
+            "3587",
+            "3554",
+            "3543",
+            "3502",
+            "3435",
+            "3420",
+            "3558"
+        ],
+        "name": "Human Resource Management",
+        "type": "major",
+        "UOC": 48,
+        "code": "MGMTH1",
+        "course_constraints": [],
+        "curriculum": [
+            {
+                "courses": {
+                    "MGMT3724": "Strategic Human Resource Management",
+                    "MGMT3730": "Human Capital Analytics"
+                },
+                "title": "Elective Core Course (MGMT)",
+                "credits_to_complete": 6,
+                "core": true,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "MGMT1002": "Managing Organisational Behaviour",
+                    "MGMT2718": "Human Resource Management",
+                    "MGMT3701": "Regulating Work and Employment Law "
+                },
+                "title": "Core Courses (MGMT)",
+                "credits_to_complete": 18,
+                "core": true,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "MGMT3729": "Managing Training and Development",
+                    "MGMT3728": "Managing Pay and Performance",
+                    "MGMT3721": "Negotiation Skills",
+                    "MGMT3702": "International Human Resource Management",
+                    "MGMT2705": "Industrial Relations",
+                    "MGMT2725": "Career Management"
+                },
+                "title": "Prescribed Electives",
+                "credits_to_complete": 0,
+                "core": false,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "COMM1100": "Business Decision Making",
+                    "COMM1900": "Organisations in Their Environment",
+                    "COMM1170": "Organisational Resources"
+                },
+                "title": "Core Course (COMM)",
+                "credits_to_complete": 0,
+                "core": true,
+                "levels": [],
+                "notes": ""
+            }
+        ]
+    },
+    "FINSA1": {
+        "programs": [
+            "3586",
+            "3587",
+            "3554",
+            "3543",
+            "3502",
+            "3558"
+        ],
+        "name": "Finance",
+        "type": "major",
+        "UOC": 48,
+        "code": "FINSA1",
+        "course_constraints": [
+            {
+                "title": "Honours",
+                "description": "Honours Level study is also available in Finance. Students interested in studying at Honours Level should refer to the relevant Honours stream record for entry requirements."
+            },
+            {
+                "title": "DOUBLE MAJOR ACCOUNTING & FINANCE",
+                "description": "ACCT3563 is included for the benefit of students undertaking majors in both Accounting and Finance to allow compliance with the requirements of the professional Accounting bodies. Students with majors in Accounting and Finance may count this course towards the Finance major AND the Accounting major."
+            },
+            {
+                "title": "Bachelor of Actuarial Studies",
+                "description": "ACTL2111 is included for the benefit of students undertaking a Finance major with the Bachelor of Actuarial Studies. Students completing the Bachelor of Actuarial Studies can count ACTL2111 in both the Bachelor of Actuarial Studies and the Finance major."
+            },
+            {
+                "title": "Professional Recognition",
+                "description": "The Australian Securities and Investment Commission has accredited specific courses that can be taken in the undergraduate programs to meet the training requirements of the Regulatory Guide 146 (RG146) for the purpose of licensing financial product advisors. A list of the courses required is available from Professional Recognition of Programs for Undergraduate Students in the UNSW Online Handbook. Students interested in pursuing the CFA examinations of the CFA Institute will find the electives FINS2643, FINS3635, FINS3640 and FINS3641 very helpful."
+            }
+        ],
+        "curriculum": [
+            {
+                "courses": {
+                    "FINS2615": "Intermediate Business Finance",
+                    "COMM1180": "Value Creation",
+                    "FINS2624": "Portfolio Management",
+                    "FINS1612": "Capital Markets and Institutions",
+                    "FINS3616": "International Business Finance"
+                },
+                "title": "Core Courses",
+                "credits_to_complete": 30,
+                "core": true,
+                "levels": [],
+                "notes": "Students in 3543 Bachelor of Economics should take COMM1140 and ECON1102 instead of COMM1180. All other students, including Comm/Econ, should complete COMM1180."
+            },
+            {
+                "courses": {
+                    "FINS2622": "Asia-Pacific Capital Markets",
+                    "FINS3634": "Credit Analysis and Lending",
+                    "FINS3633": "Real Estate Finance",
+                    "FINS3630": "Bank Financial Management",
+                    "FINS3625": "Applied Corporate Finance",
+                    "COMM3020": "Global Business Practicum",
+                    "COMM3101": "Industry Experience Placement 1",
+                    "COMM3030": "Social Entrepreneurship Practicum",
+                    "FINS3647": "Bitcoin and Decentralised Finance",
+                    "COMM3202": "Industry Experience Placement 2",
+                    "FINS3646": "Toolkit for Finance",
+                    "ACTL2111": "Financial Mathematics for Actuaries",
+                    "FINS3623": "Venture Capital",
+                    "FINS2643": "Wealth Management and Client Engagement",
+                    "FINS3635": "Options, Futures and Risk Management",
+                    "FINS3641": "Security Analysis and Valuation",
+                    "FINS3645": "Financial Market Data Design and Analysis",
+                    "FINS3637": "Wealth Management Advice and Ethics",
+                    "FINS3655": "Behavioural Finance",
+                    "FINS3775": "Research Methods in Finance 1",
+                    "COMM2222": "Industry Experience Program",
+                    "ACCT3563": "Issues in Financial Reporting and Analysis",
+                    "FINS3644": "Sustainable and Responsible Investing",
+                    "FINS3626": "International Corporate Governance",
+                    "FINS3650": "International Banking",
+                    "FINS3648": "Banking, Finance and Technology",
+                    "FINS3640": "Investment Management Modeling",
+                    "FINS3631": "Personal Risk, Insurance, and Superannuation for Financial Planning ",
+                    "FINS3636": "Interest Rate Risk Management",
+                    "FINS3666": "Trading and Market Making"
+                },
+                "title": "Prescribed Electives",
+                "credits_to_complete": 18,
+                "core": false,
+                "levels": [],
+                "notes": "At least two (2) of the elective courses must be at level 3 (i.e. FINS3XXX). This is regardless of whether you are doing a single major or taking Finance as a second major. Please note: Students may count ONE (6 UOC) of ACCT3563, COMM2222, COMM3020, COMM3030, COMM3101 or COMM3202 towards their major in Finance. Additionally, students may only count ONE Financial Technology course (FINS3645, FINS3646, FINS3647 or FINS3648) towards their major in Finance."
+            }
+        ]
+    },
+    "MARKA1": {
+        "programs": [
+            "3586",
+            "3321",
+            "3587",
+            "3554",
+            "3543",
+            "3502",
+            "3435",
+            "3420",
+            "3558"
+        ],
+        "name": "Marketing",
+        "type": "major",
+        "UOC": 48,
+        "code": "MARKA1",
+        "course_constraints": [
+            {
+                "title": "Requirements: Double major Accounting & Marketing",
+                "description": "ACCT3563 Issues in Financial Reporting is included for the benefit of students undertaking majors in both Accounting and Marketing to allow compliance with the requirements of the professional Accounting bodies. Students with majors in Accounting and Marketing may count this course towards the Accounting major AND the Marketing major."
+            },
+            {
+                "title": "Honours",
+                "description": "Honours level study is available for Marketing students. Students interested in studying at Honours Level should refer to the relevant Honours plan within 4501 Bachelor of Commerce (Honours) for entry requirements."
+            }
+        ],
+        "curriculum": [
+            {
+                "courses": {
+                    "COMM1100": "Business Decision Making",
+                    "MARK2085": "Consumer Centric Innovation",
+                    "MARK2052": "Marketing Research",
+                    "MARK3054": "Marketing Analytics and Big Data",
+                    "MARK3087": "Customer Analytics",
+                    "MARK2012": "Marketing Fundamentals"
+                },
+                "title": "Core Courses",
+                "credits_to_complete": 36,
+                "core": true,
+                "levels": [],
+                "notes": "Students in Comm/Econ and Comm/Actl should take COMM1900 instead of COMM1100. Students in Econ and Actl should take ECON1101. All other students should complete COMM1100"
+            },
+            {
+                "courses": {
+                    "MARK3085": "Digital Marketing and Web Analytics",
+                    "MARK2055": "Service Marketing and Management",
+                    "MARK3091": "New Product and New Service Development",
+                    "MARK2053": "Marketing Communications and Promotions Management",
+                    "ACCT3563": "Issues in Financial Reporting and Analysis",
+                    "MARK3092": "Brand Management",
+                    "COMM3030": "Social Entrepreneurship Practicum",
+                    "MARK3089": "Pricing Analytics",
+                    "MARK2071": "International and Global Marketing",
+                    "COMM3101": "Industry Experience Placement 1",
+                    "COMM2233": "Industry Consulting Project",
+                    "MARK3088": "Product Analytics",
+                    "COMM3202": "Industry Experience Placement 2",
+                    "COMM2222": "Industry Experience Program",
+                    "MARK3090": "Marketing Decision Analysis",
+                    "MARK2060": "Event Management and Marketing",
+                    "MARK3081": "Distribution Strategy and Retail Channels",
+                    "MARK2051": "Consumer Behaviour",
+                    "COMM3020": "Global Business Practicum"
+                },
+                "title": "Prescribed Electives",
+                "credits_to_complete": 12,
+                "core": false,
+                "levels": [],
+                "notes": ""
+            }
+        ]
     }
 }

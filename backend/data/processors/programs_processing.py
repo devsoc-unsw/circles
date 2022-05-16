@@ -32,6 +32,9 @@ TEST_PROGS = [
     "3805",
     "3871",
     "3956",
+    "3789", # Science/CompSci
+    "3784", # Commerce/CompSci
+    "3785", # Engineering(Honours)/CompSci
 ]
 
 def process_prg_data():
@@ -121,10 +124,10 @@ def addMinorData(components, item):
 
 
 def addDisciplineData(components, item):
-    # Initialise Specialisation Data (explained in wiki)
-    SpecialisationData = {}
-    # Initialise NonSpecialisation Data (explained in wiki)
-    NonSpecialisationData = {}
+    if components.get("SpecialisationData") is None:
+        components["SpecialisationData"] = {}
+    if components.get("NonSpecialisationData") is None:
+        components["NonSpecialisationData"] = {}
 
     if "container" in item and item["container"] != []:
         # Loop through items in disciplinary component
@@ -139,7 +142,11 @@ def addDisciplineData(components, item):
                     ):
                         code = major["academic_item_code"]
                         majorData[code] = major["academic_item_name"]
-                SpecialisationData["Majors"] = majorData
+                try:
+                    components["SpecialisationData"]["Majors"].update({code: majorData})
+                except KeyError:
+                    components["SpecialisationData"]["Majors"] = {code: majorData}
+
             # If item is honours loop through and add data to honours
             if container["vertical_grouping"]["value"] == "honours":
                 honoursData = {}
@@ -150,7 +157,11 @@ def addDisciplineData(components, item):
                     ):
                         code = major["academic_item_code"]
                         honoursData[code] = major["academic_item_name"]
-                SpecialisationData["Honours"] = honoursData
+                try:
+                    components["SpecialisationData"]["Honours"].update(honoursData)
+                except KeyError:
+                    components["SpecialisationData"]["Honours"] = honoursData
+
             # If item is minor loop through and add data to minors
             if container["vertical_grouping"]["value"] == "undergrad_minor":
                 minorData = {}
@@ -158,7 +169,11 @@ def addDisciplineData(components, item):
                     if minor["academic_item_type"]["value"] == "minor":
                         code = minor["academic_item_code"]
                         minorData[code] = minor["academic_item_name"]
-                SpecialisationData["Minors"] = minorData
+                try:
+                    components["Minors"].update(minorData)
+                except KeyError:
+                    components["Minors"] = minorData
+
             # If item is a prescribed elective, loop through and add data to nonspecialisationdata
             if container["vertical_grouping"]["value"] == "PE":
                 PE = {}
@@ -168,11 +183,11 @@ def addDisciplineData(components, item):
                 if container["relationship"] != []:
                     for course in container["relationship"]:
                         PE[course["academic_item_code"]] = course["academic_item_name"]
-                    NonSpecialisationData[container["title"]] = PE
+                    components["NonSpecialisationData"][container["title"]] = PE
                 else:
                     for course in container["dynamic_relationship"]:
                         PE[course["description"]] = 1
-                    NonSpecialisationData[container["title"]] = PE
+                    components["NonSpecialisationData"][container["title"]] = PE
             # If item is a core course
             if container["vertical_grouping"]["value"] == "CC":
                 title = container["title"]
@@ -198,10 +213,8 @@ def addDisciplineData(components, item):
                 else:
                     for course in container["relationship"]:
                         CC[course["academic_item_code"]] = course["academic_item_name"]
-                NonSpecialisationData[title] = CC
+                components["NonSpecialisationData"][title] = CC
 
-    components["SpecialisationData"] = SpecialisationData
-    components["NonSpecialisationData"] = NonSpecialisationData
 
 
 def addFEData(components, item):

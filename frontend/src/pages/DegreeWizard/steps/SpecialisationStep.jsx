@@ -5,15 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import "./steps.less";
 import { useSpring, animated } from "@react-spring/web";
 import springProps from "./spring";
-import { setSpecialisation } from "../../../reducers/degreeSlice";
+import { addMajor, removeMajor } from "../../../reducers/degreeSlice";
 
 const { Title } = Typography;
 const SpecialisationStep = ({ incrementStep, currStep }) => {
   const dispatch = useDispatch();
-  const { programCode, specialisation } = useSelector((store) => store.degree);
-  const [options, setOptions] = useState({
-    1: "major",
-  });
+  const { programCode, majors } = useSelector((store) => store.degree);
+  const [options, setOptions] = useState({ 1: { 1: "major" } });
 
   const fetchAllSpecialisations = useCallback(async () => {
     const res = await axios.get(`/programs/getMajors/${programCode}`);
@@ -30,9 +28,9 @@ const SpecialisationStep = ({ incrementStep, currStep }) => {
     <animated.div style={props} className="steps-root-container">
       <div className="steps-heading-container">
         <Title level={4} className="text">
-          What are you specialising in?
+          What do you major in?
         </Title>
-        {specialisation && currStep === 3 && (
+        {majors !== [] && currStep === 3 && (
           <Button type="primary" onClick={incrementStep}>
             Next
           </Button>
@@ -41,20 +39,24 @@ const SpecialisationStep = ({ incrementStep, currStep }) => {
 
       <Menu
         className="degree-specialisations"
-        onSelect={(e) => dispatch(setSpecialisation(e.key))}
-        onDeselect={() => dispatch(setSpecialisation(""))}
-        selectedKeys={specialisation && [specialisation]}
+        onSelect={(e) => dispatch(addMajor(e.key))}
+        onDeselect={(e) => dispatch(removeMajor(e.key))}
+        selectedKeys={majors}
+        defaultOpenKeys={["0"]}
         mode="inline"
       >
-        {programCode ? (
-          Object.keys(options).map((key) => (
-            <Menu.Item className="text" key={key}>
-              {key} {options[key]}
-            </Menu.Item>
-          ))
-        ) : (
-          <div>Please select a degree first...</div>
-        )}
+        {Object.keys(options).map((sub) => (
+          <Menu.SubMenu
+            key={sub}
+            title={`Majors for program ${sub}`}
+          >
+            {Object.keys(options[sub]).map((key) => (
+              <Menu.Item className="text" key={key}>
+                {key} {options[sub][key]}
+              </Menu.Item>
+            ))}
+          </Menu.SubMenu>
+        ))}
       </Menu>
     </animated.div>
   );

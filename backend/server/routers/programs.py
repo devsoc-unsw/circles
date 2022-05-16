@@ -44,7 +44,7 @@ def getPrograms():
     """ Fetch all the programs the backend knows about in the format of { code: title } """
     # return {"programs": {q["code"]: q["title"] for q in programsCOL.find()}}
     # TODO On deployment, DELETE RETURN BELOW and replace with the return above
-    return {"programs": {"3778": "Computer Science"}}
+    return {"programs": {"3778": "Computer Science", "3784": "Commerce / Computer Science"}}
 
 
 @router.get(
@@ -60,7 +60,7 @@ def getPrograms():
             "content": {
                 "application/json": {
                     "example": {
-                        "majors": {
+                        "majors": [{
                             "COMPS1": "Computer Science (Embedded Systems)",
                             "COMPJ1": "Computer Science (Programming Languages)",
                             "COMPE1": "Computer Science (eCommerce Systems)",
@@ -69,7 +69,12 @@ def getPrograms():
                             "COMPI1": "Computer Science (Artificial Intelligence)",
                             "COMPD1": "Computer Science (Database Systems)",
                             "COMPY1": "Computer Science (Security Engineering)",
-                        }
+                        },
+                        {
+                            "FINSA1": "Finance",
+                            "ACCTA1": "Accounting",
+                            
+                        }]
                     }
                 }
             },
@@ -165,6 +170,7 @@ def addSpecialisation(structure: dict, code: str, type: str):
     """ Add a specialisation to the structure of a getStructure call """
     # in a specialisation, the first container takes priority - no duplicates may exist
     spnResult = specialisationsCOL.find_one({"code": code})
+    type = f"{type} - {code}"
     if not spnResult:
         raise HTTPException(
             status_code=400, detail=f"{code} of type {type} not found")
@@ -246,7 +252,9 @@ def getStructure(
     structure = {}
 
     if major:
-        addSpecialisation(structure, major, "Major")
+        majors = major.split("+")
+        for m in majors:
+            addSpecialisation(structure, m, "Major")
 
     if minor:
         addSpecialisation(structure, minor, "Minor")
