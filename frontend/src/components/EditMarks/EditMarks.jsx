@@ -1,13 +1,16 @@
 /* eslint-disable */
 import React, { useState } from "react";
-import { Typography , PageHeader , Input } from "antd";
+import { Typography , PageHeader , Input , Button } from "antd";
 
 import "./index.less";
 
 const EditMarks = ({ courseCode, courseTitle, handleCancelEditMark }) => {
 
-  const courseDescriptor = (courseTitle.length > 33) ?
-    courseTitle.slice(0, 30) + "..." : courseTitle;
+  const handleLetterGrade = (e) => {
+    e.preventDefault();
+    console.log("testing");
+    // TODO - 
+  }
 
   return (
     <div className="edit-mark">
@@ -16,7 +19,12 @@ const EditMarks = ({ courseCode, courseTitle, handleCancelEditMark }) => {
       <Input
         placeholder="Enter Mark"
       />
-      <div className="edit-mark-buttons">
+      <div className="letter-grade-container">
+        <Button onClick={handleLetterGrade} classname="letter-grade-button">FL</Button>
+        <Button onClick={handleLetterGrade} classname="letter-grade-button">PS</Button>
+        <Button onClick={handleLetterGrade} classname="letter-grade-button">CR</Button>
+        <Button onClick={handleLetterGrade} classname="letter-grade-button">DN</Button>
+        <Button onClick={handleLetterGrade} classname="letter-grade-button">HD</Button>
       </div>
     </div>
   );

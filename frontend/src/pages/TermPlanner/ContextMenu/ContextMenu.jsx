@@ -85,8 +85,9 @@ const ContextMenu = ({ code, plannedFor }) => {
         </Item>
       </Menu>
       <Modal
-        title="Edit Marks"
-        visible={isEditMarkVisible}
+        title={`Edit Mark: ${code}`}
+        // visible={isEditMarkVisible}
+        visible={true}
         onOk={handleConfirmEditMark}
         onCancel={handleCancelEditMark}
         width="300px"
