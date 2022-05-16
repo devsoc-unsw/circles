@@ -48,8 +48,8 @@ const CourseSelector = () => {
     // get structure of degree
     const fetchStructure = async () => {
       try {
-        const res1 = await axios.get(`/programs/getStructure/${programCode}/${majors.join("+")}${minor && `/${minor}`}`);
-        setStructure(res1.data.structure);
+        const res = await axios.get(`/programs/getStructure/${programCode}/${majors.join("+")}${minor && `/${minor}`}`);
+        setStructure(res.data.structure);
       } catch (err) {
         // eslint-disable-next-line no-console
         console.log(err);
