@@ -198,7 +198,7 @@ def addSpecialisation(structure: dict, code: str, type: str):
             "content": {
                 "application/json": {
                     "example": {
-                        "Major": {
+                        "Major - COMPS1 - Computer Science": {
                             "Core Courses": {
                                 "UOC": 66,
                                 "courses": {
@@ -211,6 +211,14 @@ def addSpecialisation(structure: dict, code: str, type: str):
                                 "courses": {
                                     "ENGG4600": "Engineering Vertically Integrated Project",
                                     "ENGG2600": "Engineering Vertically Integrated Project",
+                                },
+                            },
+                        },
+                        "Major - FINSA1 - Finance": {
+                            "Core Courses": {
+                                "UOC": 66,
+                                "courses": {
+                                    "FINS3121": "Financial Accounting",
                                 },
                             },
                         },
@@ -256,7 +264,8 @@ def getStructure(
     structure = {}
 
     if major:
-        majors = major.split("+")
+        majors = major.split("+") if "+" in major else [major]
+
         for m in majors:
             addSpecialisation(structure, m, "Major")
 
