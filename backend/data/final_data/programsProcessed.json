@@ -874,7 +874,7 @@
         "components": {
             "SpecialisationData": {
                 "Majors": {
-                    "Science ": {
+                    "Science": {
                         "PHARA1": "Pharmacology",
                         "PHSLA1": "Physiology",
                         "PATHA1": "Pathology",
@@ -901,7 +901,7 @@
                         "VISNA1": "Vision Science",
                         "MATSB1": "Materials Science"
                     },
-                    " Computer Science": {
+                    "Computer Science": {
                         "COMPJ1": "Computer Science (Programming Languages)",
                         "COMPD1": "Computer Science (Database Systems)",
                         "COMPN1": "Computer Science (Computer Networks)",
@@ -974,7 +974,7 @@
         "components": {
             "SpecialisationData": {
                 "Majors": {
-                    " Computer Science": {
+                    "Computer Science": {
                         "COMPJ1": "Computer Science (Programming Languages)",
                         "COMPY1": "Computer Science (Security Engineering)",
                         "COMPI1": "Computer Science (Artificial Intelligence)",
@@ -984,7 +984,7 @@
                         "COMPD1": "Computer Science (Database Systems)",
                         "COMPS1": "Computer Science (Embedded Systems)"
                     },
-                    "Commerce ": {
+                    "Commerce": {
                         "MGMTJ1": "Innovation, Strategy and Entrepreneurship",
                         "IBUSA1": "International Business",
                         "INFSA1": "Information Systems",
@@ -1074,7 +1074,7 @@
         "components": {
             "SpecialisationData": {
                 "Majors": {
-                    " Computer Science": {
+                    "Computer Science": {
                         "COMPD1": "Computer Science (Database Systems)",
                         "COMPS1": "Computer Science (Embedded Systems)",
                         "COMPA1": "Computer Science",

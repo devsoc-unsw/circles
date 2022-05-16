@@ -19,7 +19,6 @@ from data.utility.data_helpers import read_data, write_data
 from data.processors.programs_processing import TEST_PROGS
 
 # TODO: add more specialisations as we expand scope of Circles
-TEST_SPNS = []
 
 CODE_MAPPING = read_data(
     "data/utility/programCodeMappings.json")["title_to_code"]
@@ -130,10 +129,7 @@ def get_credits(container: dict) -> str:
     # No data in "credit_points" field, so parse plaintext "description"
     # Catches XX UOC, XX credits, XX Credit, etc.
     credits = re.search("(\d+) UOC|[cC]redit", container["description"])
-    if credits:
-        return credits.group(1)
-    return "0"
-
+    return credits.group(1) if credits else "0"
 
 def is_core(title: str) -> bool:
     """

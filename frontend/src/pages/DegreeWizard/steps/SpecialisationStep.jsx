@@ -29,7 +29,7 @@ const SpecialisationStep = ({ incrementStep, currStep }) => {
         <Title level={4} className="text">
           What do you major in?
         </Title>
-        {majors !== [] && currStep === 3 && (
+        {majors.length > 0 && currStep === 3 && (
           <Button type="primary" onClick={incrementStep}>
             Next
           </Button>
@@ -47,7 +47,7 @@ const SpecialisationStep = ({ incrementStep, currStep }) => {
         {Object.keys(options).map((sub, index) => (
           <Menu.SubMenu
             key={index}
-            title={`Majors for program ${sub}`}
+            title={`Majors for ${sub}`}
             className="step-submenu"
             mode="inline"
           >

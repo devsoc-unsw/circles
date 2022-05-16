@@ -55,7 +55,7 @@ const CourseSelector = () => {
         console.log(err);
       }
     };
-    if (programCode && majors) fetchStructure();
+    if (programCode && (majors.length > 0)) fetchStructure();
   }, [programCode, majors, minor]);
 
   return (

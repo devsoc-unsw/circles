@@ -128,11 +128,11 @@ def findProgramName(programData, item):
     programNames = programData["title"].split("/")
     for programName in programNames:
         if programName in item["title"]:
-            return programName
+            return programName.strip()
         for container in item["container"]:
             if programName in container["title"]:
-                return programName 
-    return programName 
+                return programName.strip()
+    return programName.strip()
 
 def addDisciplineData(components, item, programData):
     if components.get("SpecialisationData") is None:
@@ -154,10 +154,8 @@ def addDisciplineData(components, item, programData):
                     ):
                         code = major["academic_item_code"]
                         majorData[code] = major["academic_item_name"]
-                try:
-                    components["SpecialisationData"]["Majors"].update({programName: majorData})
-                except KeyError:
-                    components["SpecialisationData"]["Majors"] = {programName: majorData}
+
+                components["SpecialisationData"].setdefault("Majors", {}).update({programName: majorData})
 
             # If item is honours loop through and add data to honours
             if container["vertical_grouping"]["value"] == "honours":
