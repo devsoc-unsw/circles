@@ -7,6 +7,7 @@ from server.database import programsCOL, specialisationsCOL
 from server.routers.model import (Structure, majors, message, minorInFE,
                                   minorInSpecialisation, minors, programs)
 from server.routers.courses import regex_search
+from data.processors.programs_processing import TEST_PROGS
 
 router = APIRouter(
     prefix="/programs",
@@ -44,7 +45,10 @@ def getPrograms():
     """ Fetch all the programs the backend knows about in the format of { code: title } """
     # return {"programs": {q["code"]: q["title"] for q in programsCOL.find()}}
     # TODO On deployment, DELETE RETURN BELOW and replace with the return above
-    return {"programs": {"3778": "Computer Science", "3784": "Commerce / Computer Science"}}
+    return {"programs": {"3778": "Computer Science", 
+                        "3784": "Commerce / Computer Science",
+                        "3789": "Science / Computer Science",
+                        }}
 
 
 @router.get(

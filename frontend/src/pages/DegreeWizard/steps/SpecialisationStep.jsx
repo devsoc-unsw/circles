@@ -23,7 +23,6 @@ const SpecialisationStep = ({ incrementStep, currStep }) => {
   }, [fetchAllSpecialisations, programCode]);
 
   const props = useSpring(springProps);
-
   return (
     <animated.div style={props} className="steps-root-container">
       <div className="steps-heading-container">
@@ -45,10 +44,12 @@ const SpecialisationStep = ({ incrementStep, currStep }) => {
         defaultOpenKeys={["0"]}
         mode="inline"
       >
-        {Object.keys(options).map((sub) => (
+        {Object.keys(options).map((sub, index) => (
           <Menu.SubMenu
-            key={sub}
+            key={index}
             title={`Majors for program ${sub}`}
+            className="step-submenu"
+            mode="inline"
           >
             {Object.keys(options[sub]).map((key) => (
               <Menu.Item className="text" key={key}>

@@ -16,45 +16,10 @@ Step in the data's journey:
 
 import re
 from data.utility.data_helpers import read_data, write_data
+from data.processors.programs_processing import TEST_PROGS
 
 # TODO: add more specialisations as we expand scope of Circles
-TEST_SPNS = [
-    # CompSci Majors: 
-    "COMPA1",
-    "COMPAH",
-    "COMPBH",
-    "SENGAH",
-    "COMPD1",
-    "COMPD1",
-    "COMPE1",
-    "COMPI1",
-    "COMPJ1",
-    "COMPN1",
-    "COMPS1",
-    "COMPY1",
-    "COMPZ1",
-    # CompSci Minors:
-    "ACCTA2",
-    "FINSA2",
-    "INFSA2",
-    "MARKA2",
-    "MATHC2",
-    "PSYCM2",
-    # Commerce Majors: 
-    "MGMTJ1",
-    "IBUSA1",
-    "INFSA1",
-    "TABLC1",
-    "COMMJ1",
-    "FINSR1",
-    "ACCTA1",
-    "ECONF1",
-    "ECONO1",
-    "MGMTH1",
-    "FINSA1",
-    "MARKA1",
-
-]
+TEST_SPNS = []
 
 CODE_MAPPING = read_data(
     "data/utility/programCodeMappings.json")["title_to_code"]
@@ -65,7 +30,9 @@ def customise_spn_data():
     data = read_data("data/scrapers/specialisationsFormattedRaw.json")
 
     customised_data = {}  # Dictionary for all customised data
-    for spn in TEST_SPNS:
+    for spn in data.keys():
+        if not any([prog in TEST_PROGS for prog in data[spn]["programs"]]):
+            continue
 
         formatted = data[spn]
         customised_data[spn] = {}
@@ -163,7 +130,9 @@ def get_credits(container: dict) -> str:
     # No data in "credit_points" field, so parse plaintext "description"
     # Catches XX UOC, XX credits, XX Credit, etc.
     credits = re.search("(\d+) UOC|[cC]redit", container["description"])
-    return credits.group(1)
+    if credits:
+        return credits.group(1)
+    return "0"
 
 
 def is_core(title: str) -> bool:
@@ -296,7 +265,7 @@ def process_any_level(unprocessed_course: str) -> str:
     """
     # group 1 contains level number and group 2 contains program title
     # Note '?:' means inner parentheses is non-capturing group
-    res = re.search("level (\d) ((?:[^ ]+ )+)course", unprocessed_course)
+    res = re.search("level (\d) ((?:[^ ]+ )+)(course)?", unprocessed_course)
     course_level = res.group(1).strip()
     program_title = res.group(2).strip()
 
