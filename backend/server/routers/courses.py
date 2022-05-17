@@ -1,17 +1,17 @@
-import pymongo
 import re
-from fuzzywuzzy import fuzz
 from typing import Optional
 
+import pymongo
 from algorithms.objects.user import User
 from data.config import ARCHIVED_YEARS
 from data.utility.data_helpers import read_data
 from fastapi import APIRouter, HTTPException
+from fuzzywuzzy import fuzz
 from server.database import archivesDB, coursesCOL
-from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, AffectedCourses,
-                                  CourseDetails, CoursesState,
-                                  CoursesUnlockedWhenTaken, ProgramCourses, Structure,
-                                  UserData, message)
+from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS,
+                                  AffectedCourses, CourseDetails, CoursesState,
+                                  CoursesUnlockedWhenTaken, ProgramCourses,
+                                  Structure, UserData, Message)
 
 """
 APIs for the /courses/ route.
@@ -65,7 +65,7 @@ def apiIndex():
     response_model=CourseDetails,
     responses={
         400: {
-            "model": message,
+            "model": Message,
             "description": "The given course code could not be found in the database",
         },
         200: {
@@ -228,7 +228,7 @@ def regex_search(search_string: str):
     "/getAllUnlocked/",
     response_model=CoursesState,
     responses={
-        400: {"model": message, "description": "Uh oh you broke me"},
+        400: {"model": Message, "description": "Uh oh you broke me"},
         200: {
             "description": "Returns the state of all the courses",
             "content": {
@@ -273,7 +273,7 @@ def getAllUnlocked(userData: UserData):
     "/getLegacyCourses/{year}/{term}",
     response_model=ProgramCourses,
     responses={
-        400: {"model": message, "description": "Year or Term input is incorrect"},
+        400: {"model": Message, "description": "Year or Term input is incorrect"},
         200: {
             "description": "Returns the program structure",
             "content": {
@@ -306,7 +306,7 @@ def getLegacyCourses(year, term):
     """
     result = {c['code']: c['title'] for c in archivesDB[year].find() if term in c['terms']}
 
-    if result == {}:
+    if not result:
         raise HTTPException(status_code=400, detail="Invalid term or year. Valid terms: T0, T1, T2, T3. Valid years: 2019, 2020, 2021, 2022.")
 
     return {'courses' : result}
@@ -319,7 +319,7 @@ def getLegacyCourse(year, courseCode):
         Returns information relating to the given course
     """
     result = list(archivesDB[str(year)].find({"code": courseCode}))
-    if result == {}:
+    if not result:
         raise HTTPException(status_code=400, detail="invalid course code or year")
     del result["_id"]
     result["is_legacy"] = True
@@ -328,8 +328,8 @@ def getLegacyCourse(year, courseCode):
 
 @router.post("/unselectCourse/{unselectedCourse}", response_model=AffectedCourses,
             responses={
-                422: {"model": message, "description": "Unselected course query is required"},
-                400: {"model": message, "description": "Uh oh you broke me"},
+                422: {"model": Message, "description": "Unselected course query is required"},
+                400: {"model": Message, "description": "Uh oh you broke me"},
                 200: {
                     "description": "Returns the state of all the courses",
                     "content": {
@@ -357,7 +357,7 @@ def unselectCourse(userData: UserData, unselectedCourse: str):
 
 @router.post("/coursesUnlockedWhenTaken/{courseToBeTaken}", response_model=CoursesUnlockedWhenTaken,
             responses={
-                400: {"model": message, "description": "Uh oh you broke me"},
+                400: {"model": Message, "description": "Uh oh you broke me"},
                 200: {
                     "description": "Returns all courses which are unlocked when this course is taken",
                     "content": {
@@ -416,7 +416,7 @@ def weight_course(course: tuple, search_term: str, structure: dict,
                   major_code: Optional[str] = None, minor_code: Optional[str] = None):
     """ Gives the course a weighting based on the relevance to the user's degree """
     weight = fuzzy_match(course, search_term)
-    (code, title) = course
+    (code, _) = course
 
     if major_code is not None:
         for key in structure['Major'].items():

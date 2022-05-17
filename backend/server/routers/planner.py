@@ -1,9 +1,9 @@
+from algorithms.objects.user import User
 from fastapi import APIRouter
 from fastapi.params import Body
-from algorithms.objects.user import User
 from server.routers.courses import getCourse
-from server.routers.model import ValidCoursesState, PlannerData, CONDITIONS, CACHED_HANDBOOK_NOTE
-
+from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS,
+                                  PlannerData, ValidCoursesState)
 
 router = APIRouter(
     prefix="/planner", tags=["planner"], responses={404: {"description": "Not found"}}
@@ -71,7 +71,7 @@ async def validateTermPlanner(
     courses and evaluate T2. Then add T2 and evaluate T3. Then add T3 and evaluate
     2nd year T0... and so on.
 
-    The mostRecentPastTerm will show the latest term (and current year) that has 
+    The mostRecentPastTerm will show the latest term (and current year) that has
     passed and all warnings will be suppressed until after this term
 
     Returns the state of all the courses on the term planner

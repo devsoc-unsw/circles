@@ -6,19 +6,19 @@ from algorithms.objects.conditions import CompositeCondition
 from pydantic import BaseModel
 
 
-class message(BaseModel):
+class Message(BaseModel):
     message: str
 
 
-class programs(BaseModel):
+class Programs(BaseModel):
     programs: dict
 
 
-class majors(BaseModel):
+class Majors(BaseModel):
     majors: dict
 
 
-class minors(BaseModel):
+class Minors(BaseModel):
     minors: dict
 
 
@@ -82,7 +82,7 @@ class CoursesUnlockedWhenTaken (BaseModel):
     indirect_unlock: list
 
 class CourseTypeState (BaseModel):
-    is_accurate: bool 
+    is_accurate: bool
 
 class CourseTypeState(BaseModel):
     is_accurate: bool
@@ -114,7 +114,7 @@ CONDITIONS_PATH = "algorithms/conditions.pkl"
 with open(CONDITIONS_PATH, "rb") as file:
     CONDITIONS: dict[str, CompositeCondition] = load(file)
 
-with open("algorithms/cache/handbook_note.json", "r") as file:
+with open("algorithms/cache/handbook_note.json", "r", encoding="utf8") as file:
     CACHED_HANDBOOK_NOTE: dict[str, str] = json.load(file)
 
 class description(BaseModel):

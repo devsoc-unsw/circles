@@ -4,8 +4,8 @@ from typing import Optional
 
 from fastapi import APIRouter, HTTPException
 from server.database import programsCOL, specialisationsCOL
-from server.routers.model import (Structure, majors, message, minorInFE,
-                                  minorInSpecialisation, minors, programs)
+from server.routers.model import (Structure, Majors, Message, minorInFE,
+                                  minorInSpecialisation, Minors, Programs)
 from server.routers.courses import regex_search
 
 router = APIRouter(
@@ -21,7 +21,7 @@ def programsIndex():
 
 @router.get(
     "/getPrograms",
-    response_model=programs,
+    response_model=Programs,
     responses={
         200: {
             "description": "Returns all programs",
@@ -49,10 +49,10 @@ def getPrograms():
 
 @router.get(
     "/getMajors/{programCode}",
-    response_model=majors,
+    response_model=Majors,
     responses={
         400: {
-            "model": message,
+            "model": Message,
             "description": "The given program code could not be found in the database",
         },
         200: {
@@ -89,10 +89,10 @@ def getMajors(programCode: str):
 
 @router.get(
     "/getMinors/{programCode}",
-    response_model=minors,
+    response_model=Minors,
     responses={
         400: {
-            "model": message,
+            "model": Message,
             "description": "The given program code could not be found in the database",
         },
         200: {
@@ -136,13 +136,15 @@ def getMinors(programCode: str):
     return {"minors": minrs}
 
 def convertSubgroupObjectToCoursesDict(object: str, description: str|list[str]) -> dict[str, str]:
-    """ Gets a subgroup object (format laid out in the processor) and fetches the exact courses its referring to """
+    """
+    Gets a subgroup object (format laid out in the processor) and
+    fetches the exact courses its referring to
+    """
     if " or " in object:
         return {c: description[index] for index, c in enumerate(object.split(" or "))}
-    elif not re.match(r"[A-Z]{4}[0-9]{4}", object):
+    if not re.match(r"[A-Z]{4}[0-9]{4}", object):
         return regex_search(object)
-    else:
-        return {object: description}
+    return {object: description}
 
 def addSubgroupContainer(structure: dict, type: str, container: dict, exceptions: list[str]) -> list[str]:
     """ Returns the added courses """
@@ -182,7 +184,7 @@ def addSpecialisation(structure: dict, code: str, type: str):
     "/getStructure/{programCode}/{major}/{minor}",
     response_model=Structure,
     responses={
-        400: {"model": message, "description": "Uh oh you broke me"},
+        400: {"model": Message, "description": "Uh oh you broke me"},
         200: {
             "description": "Returns the program structure",
             "content": {

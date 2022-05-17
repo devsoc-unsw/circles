@@ -446,10 +446,12 @@ function-naming-style=snake_case
 # Good variable names which should always be accepted, separated by a comma.
 good-names=i,
            j,
+		   f,
            k,
            ex,
            Run,
            _
+		   ^[A-Z]{4}(_[0-9]{4})*
 
 # Good variable names regexes, separated by a comma. If names match any regex,
 # they will always be accepted
