@@ -135,10 +135,8 @@ def findProgramName(programData, item):
     return programName.strip()
 
 def addDisciplineData(components, item, programData):
-    if components.get("SpecialisationData") is None:
-        components["SpecialisationData"] = {}
-    if components.get("NonSpecialisationData") is None:
-        components["NonSpecialisationData"] = {}
+    components.setdefault("SpecialisationData", {})
+    components.setdefault("NonSpecialisationData", {})
 
     programName = findProgramName(programData, item)
     if "container" in item and item["container"] != []:
