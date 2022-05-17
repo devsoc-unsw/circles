@@ -116,14 +116,20 @@ const TableView = ({
   ];
 
   return (
-    <div className="listPage">
+    <div className="tableViewContainer">
       {Object.entries(tableLayout).map(([group, groupEntry]) => (
-        <div>
+        <div key={group} className="category">
           <h1>{group}</h1>
           {Object.entries(groupEntry).map(([subGroup, subGroupEntry]) => (
-            <div>
+            <div key={subGroup} className="subCategory">
               <h2>{subGroup}</h2>
-              <Table className="table-striped-rows" dataSource={subGroupEntry} columns={columns} />
+              <Table
+                className="table-striped-rows"
+                dataSource={subGroupEntry}
+                columns={columns}
+                pagination={{ position: ["none", "none"] }}
+              />
+              <br />
             </div>
           ))}
         </div>
