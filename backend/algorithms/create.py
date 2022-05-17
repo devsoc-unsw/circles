@@ -249,7 +249,6 @@ def make_condition(tokens, first=False, course=None) -> Tuple[CompositeCondition
 
                 # Add the category to the condition and adjust the current index position
                 cond.set_category(category)
-
                 [next(item) for _ in range(sub_index + 1)]
 
             result.add_condition(cond)

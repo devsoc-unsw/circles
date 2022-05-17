@@ -8,6 +8,7 @@ const prepareUserPayload = (degree, planner) => {
 
   const selectedCourses = {};
   Array.from(Object.keys(courses)).forEach((course) => {
+    // ! TODO: add coursemark here
     selectedCourses[course] = null;
   });
 

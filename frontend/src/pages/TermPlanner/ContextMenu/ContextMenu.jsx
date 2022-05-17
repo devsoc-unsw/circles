@@ -56,16 +56,17 @@ const ContextMenu = ({ code, plannedFor }) => {
   }
 
   const validLetterGrades = ["FL", "PS", "CR", "DN", "HD"];
-  
+  const [markInputBuf, setMarkInputBuf] = useState("");
 
   const handleConfirmEditMark = (e) => {
-    // Validate Input
-    // TODO: function for this
-    if (validLetterGrades.includes(markInput)){
-      return True;
+    // Validate Input // Create warning if input is invalid
+    if (
+      (isNaN(markInputBuf) && !validLetterGrades.includes(markInputBuf))
+      || (parseInt(markInputBuf) < 0 || parseInt(markInputBuf) > 100)
+    ) {
+      return;
     }
 
-    iv
 
     
     // Dispatch and reset state
