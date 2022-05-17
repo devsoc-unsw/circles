@@ -67,7 +67,7 @@ const ProgressionChecker = () => {
 
   return (
     <PageTemplate>
-      <TableView years={years} startYear={startYear} courses={courses} />
+      <TableView structure={structure} years={years} startYear={startYear} courses={courses} />
       <Dashboard isLoading={isLoading} degree={degreeData} />
       <ListView3
         isLoading={isLoading}
