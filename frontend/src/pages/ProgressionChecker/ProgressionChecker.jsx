@@ -5,6 +5,7 @@ import Dashboard from "./Dashboard";
 import ListView3 from "./ListView3";
 import "./index.less";
 import PageTemplate from "../../components/PageTemplate";
+import TableView from "./TableView";
 
 // TODO: dummy data for now
 const degreeData = {
@@ -45,6 +46,8 @@ const ProgressionChecker = () => {
     programCode, specialisation, minor,
   } = useSelector((state) => state.degree);
 
+  const { years, startYear, courses } = useSelector((store) => store.planner);
+
   const [structure, setStructure] = useState({});
 
   useEffect(() => {
@@ -64,6 +67,7 @@ const ProgressionChecker = () => {
 
   return (
     <PageTemplate>
+      <TableView years={years} startYear={startYear} courses={courses} />
       <Dashboard isLoading={isLoading} degree={degreeData} />
       <ListView3
         isLoading={isLoading}
