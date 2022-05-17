@@ -450,12 +450,13 @@ good-names=i,
            k,
            ex,
            Run,
-           _
-		   ^[A-Z]{4}(_[0-9]{4})*
+           _,
+		   res
 
 # Good variable names regexes, separated by a comma. If names match any regex,
 # they will always be accepted
-good-names-rgxs=
+good-names-rgxs=[A-Z]{4}(_[0-9]{4})*,
+				[A-Z]{4}Fixes
 
 # Include a hint for the correct naming format with invalid-name.
 include-naming-hint=no
