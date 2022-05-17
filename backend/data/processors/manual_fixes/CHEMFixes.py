@@ -1,9 +1,6 @@
 """
 https://github.com/csesoc/Circles/wiki/Manual-Fixes-to-Course-Prerequisites
 
-Copy this into a new file for the relevant faculty's fixes:
-e.g. COMPFixes.py, ACCTFixes.py, PSYCFixes.py
-
 Apply manual [code] fixes to processed conditions in conditionsProcessed.json so
 that they can be fed into algorithms.
 
@@ -12,7 +9,7 @@ can run:
     python3 -m data.processors.conditionsPreprocessing
 
 To then run this file:
-    python3 -m data.processors.manualFixes.[CODE]Fixes
+    python3 -m data.processors.manualFixes.CHEMFixes
 """
 
 from data.utility import data_helpers
@@ -27,21 +24,28 @@ COURSES = data_helpers.read_data("data/final_data/coursesProcessed.json")
 
 def fix_conditions():
     """ Functions to apply manual fixes """
-    CONDITIONS["AERO4110"][PROCESSED] = AERO_4110()
+
+    CONDITIONS["CHEM1521"][PROCESSED] = CHEM_1521()
+    CONDITIONS["CHEM1777"][PROCESSED] = CHEM_1777()
+
     # Updates the files with the modified dictionaries
     data_helpers.write_data(
         CONDITIONS, "data/final_data/conditionsProcessed.json")
     data_helpers.write_data(COURSES, "data/final_data/coursesProcessed.json")
 
-
-def AERO_4110():
+def CHEM_1521():
     """
-        "original": "Prerequisite: At least 144 Units completed in AEROAH stream.<br/><br/>Prerequisite: AERO3110<br/><br/>",
-
-        "processed": "At least 144 Units in AEROAH stream. AERO3110"
+        "original": "Pre-req of Prerequisite: CHEM1011 Chemistry 1A or equivalent. Exclusion: CHEM1021<br/><br/>",
+        "processed": "of CHEM1011 Chemistry 1A || equivalent"
     """
+    return "CHEM1011"
 
-    return "144UOC && AEROAH && AERO3110"
+def CHEM_1777():
+    """
+        "original": "Presumed knowledge is Year 10 General Science.<br/><br/>",
+        "processed": "knowledge is Year 10 General Science"
+    """
+    return ""
 
 
 if __name__ == "__main__":

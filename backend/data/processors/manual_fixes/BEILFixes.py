@@ -12,7 +12,7 @@ can run:
     python3 -m data.processors.conditionsPreprocessing
 
 To then run this file:
-    python3 -m data.processors.manualFixes.[CODE]Fixes
+    python3 -m data.processors.manualFixes.BEILFixes
 """
 
 from data.utility import data_helpers
@@ -27,21 +27,21 @@ COURSES = data_helpers.read_data("data/final_data/coursesProcessed.json")
 
 def fix_conditions():
     """ Functions to apply manual fixes """
-    CONDITIONS["AERO4110"][PROCESSED] = AERO_4110()
+
+    CONDITIONS["BEIL0008"][PROCESSED] = BEIL_0008()
+
     # Updates the files with the modified dictionaries
     data_helpers.write_data(
         CONDITIONS, "data/final_data/conditionsProcessed.json")
     data_helpers.write_data(COURSES, "data/final_data/coursesProcessed.json")
 
 
-def AERO_4110():
+def BEIL_0008():
     """
-        "original": "Prerequisite: At least 144 Units completed in AEROAH stream.<br/><br/>Prerequisite: AERO3110<br/><br/>",
-
-        "processed": "At least 144 Units in AEROAH stream. AERO3110"
+        "original": "Prerequisite: 96 units of credit completed in Built Environment<br/><br/>",
+        "processed": "96UOC in Built Environment"
     """
-
-    return "144UOC && AEROAH && AERO3110"
+    return "96UOC in BENV"
 
 
 if __name__ == "__main__":

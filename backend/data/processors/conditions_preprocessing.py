@@ -167,8 +167,11 @@ def delete_extraneous_phrasing(processed):
     # Remove 'student' references as it is implied
     processed = re.sub("students?", "", processed, flags=re.IGNORECASE)
 
-    # Removed enrollment language since course and program codes imply this
+    # Remove enrollment language since course and program codes imply this
     processed = re.sub("enrolled in", "", processed, flags=re.IGNORECASE)
+
+    # Remove tautological endings
+    processed = re.sub("(prior )?(in order )?to enrol(l)?(ing)?(ment)?( in(to)? this course)?", "", processed, flags=re.IGNORECASE)
 
     # Remove completion language
     completion_text = [
@@ -188,7 +191,7 @@ def delete_extraneous_phrasing(processed):
 def delete_prereq_label(processed):
     """Removes 'prerequisite' and variations"""
     # variations incude ["prerequisite", "pre-requisite", "prer-requisite", "pre req", "prereq:"]
-    return re.sub(r"[Pp]re( req)?[A-Za-z\/_-]* ?[:;]*", "", processed)
+    return re.sub(r"pre( req)?[a-z\/_\-]* *[:;]*", "", processed, flags=re.IGNORECASE)
 
 
 def delete_trailing_punc(processed):
