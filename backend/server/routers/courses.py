@@ -423,9 +423,14 @@ def weight_course(course: tuple, search_term: str, structure: dict,
             if "Major" not in structKey:
                 continue
             for key in structure[structKey].items():
-                if isinstance(key[1], list):
-                    if code in key[1]:
-                        weight += 10
+                if isinstance(key[1], dict):
+                    for c in key[1].get("courses", {}):
+                        if code in c:
+                            if "Core" in key[0]:
+                                weight += 20
+                            else:
+                                weight += 10
+                            break
 
         if str(code).startswith(major_code[:4]):
             weight += 14
@@ -434,13 +439,17 @@ def weight_course(course: tuple, search_term: str, structure: dict,
         for structKey in structure.keys():
             if "Minor" not in structKey:
                 continue
-        for key in structure[structKey].items():
-            if isinstance(key[1], dict):
-                if key[1].get(code) is not None:
-                    weight += 10
-                    break
+            for key in structure[structKey].items():
+                if isinstance(key[1], dict):
+                    for c in key[1].get("courses", {}):
+                        if code in c:
+                            if "Core" in key[0]:
+                                weight += 10
+                            else:
+                                weight += 5
+                            break
 
-            if str(code).startswith(minor_code[:4]):
-                weight += 7
+        if str(code).startswith(minor_code[:4]):
+            weight += 7
 
     return weight
