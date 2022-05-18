@@ -75,7 +75,7 @@ class CoreqCoursesCondition(Condition):
     def set_logic(self, logic: Logic):
         self.logic = logic
 
-    def validate(self, user: User) -> tuple[bool, list[str]]:
+    def validate(self, user: User): #-> tuple[bool, list[str]]:
         """ Returns True if the user is taking these courses in the same term """
         match self.logic:
             case Logic.AND:
@@ -176,7 +176,7 @@ class GradeCondition(Condition):
     def validate(self, user: User) -> tuple[bool, list[str]]:
         def _validate_course(course: Category):
             # Grade condition can only be used with ClassCategory
-            if type(course) is CompositeCategory:
+            if isinstance(course, CompositeCategory):
                 validations = [_validate_course(course) for course in self.category.categories]
                 unlocked, warnings = list(zip(*validations))
                 satisfied = all(unlocked) if course.logic == Logic.AND else any(unlocked)
@@ -193,7 +193,7 @@ class GradeCondition(Condition):
                 return False, []
             return True, []
 
-        if type(self.category) is CompositeCategory:
+        if isinstance(self.category, CompositeCategory):
             validations = [_validate_course(course) for course in self.category.categories]
             logic = self.category.logic
         else:

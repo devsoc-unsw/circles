@@ -1,3 +1,7 @@
+"""
+This module contains the Models required for FASTAPI
+"""
+
 import json
 from pickle import load
 from typing import Optional
@@ -81,8 +85,6 @@ class CoursesUnlockedWhenTaken (BaseModel):
     direct_unlock: list
     indirect_unlock: list
 
-class CourseTypeState (BaseModel):
-    is_accurate: bool
 
 class CourseTypeState(BaseModel):
     is_accurate: bool

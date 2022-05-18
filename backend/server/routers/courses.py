@@ -1,7 +1,10 @@
+"""
+APIs for the /courses/ route.
+"""
+
 import re
 from typing import Optional
 
-import pymongo
 from algorithms.objects.user import User
 from data.config import ARCHIVED_YEARS
 from data.utility.data_helpers import read_data
@@ -10,12 +13,8 @@ from fuzzywuzzy import fuzz
 from server.database import archivesDB, coursesCOL
 from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS,
                                   AffectedCourses, CourseDetails, CoursesState,
-                                  CoursesUnlockedWhenTaken, ProgramCourses,
-                                  Structure, UserData, Message)
-
-"""
-APIs for the /courses/ route.
-"""
+                                  CoursesUnlockedWhenTaken, Message,
+                                  ProgramCourses, UserData)
 
 router = APIRouter(
     prefix="/courses",
@@ -24,7 +23,9 @@ router = APIRouter(
 
 # TODO: would prefer to initialise ALL_COURSES here but that fails on CI for some reason
 ALL_COURSES = None
-CODE_MAPPING = read_data("data/utility/programCodeMappings.json")["title_to_code"]
+CODE_MAPPING = read_data(
+    "data/utility/programCodeMappings.json")["title_to_code"]
+
 
 def fetch_all_courses():
     courses = {}
@@ -153,19 +154,19 @@ def getCourse(courseCode: str):
             "content": {
                 "application/json": {
                     "example": {
-                            "ACCT1511": "Accounting and Financial Management 1B",
-                            "ACCT2542": "Corporate Financial Reporting and Analysis",
-                            "ACCT3202": "Industry Placement 2",
-                            "ACCT3303": "Industry Placement 3",
-                            "ACCT3610": "Business Analysis and Valuation",
-                            "ACCT4797": "Thesis (Accounting) B",
-                            "ACCT4809": "Current Developments in Auditing Research",
-                            "ACCT4852": "Current Developments in Accounting Research - Managerial",
-                            "ACCT4897": "Seminar in Research Methodology",
-                            "ACTL1101": "Introduction to Actuarial Studies",
-                            "ACTL2101": "Industry Placement 1",
-                            "ACTL2102": "Foundations of Actuarial Models",
-                            "ACTL3142": "Actuarial Data and Analysis",
+                        "ACCT1511": "Accounting and Financial Management 1B",
+                        "ACCT2542": "Corporate Financial Reporting and Analysis",
+                        "ACCT3202": "Industry Placement 2",
+                        "ACCT3303": "Industry Placement 3",
+                        "ACCT3610": "Business Analysis and Valuation",
+                        "ACCT4797": "Thesis (Accounting) B",
+                        "ACCT4809": "Current Developments in Auditing Research",
+                        "ACCT4852": "Current Developments in Accounting Research - Managerial",
+                        "ACCT4897": "Seminar in Research Methodology",
+                        "ACTL1101": "Introduction to Actuarial Studies",
+                        "ACTL2101": "Industry Placement 1",
+                        "ACTL2102": "Foundations of Actuarial Models",
+                        "ACTL3142": "Actuarial Data and Analysis",
                     }
                 }
             }
@@ -200,14 +201,15 @@ def search(userData: UserData, search_string: str):
     weighted_results = sorted(top_results, reverse=True,
                               key=lambda course: weight_course(course,
                                                                search_string,
-                                                               structure, 
+                                                               structure,
                                                                *specialisations)
                               )[:30]
 
-    return {code: title for code, title in weighted_results}
+    return dict(weighted_results)
+
 
 def regex_search(search_string: str):
-    """ 
+    """
     Uses the search string as a regex to match all courses with an exact pattern.
     """
 
@@ -217,7 +219,8 @@ def regex_search(search_string: str):
     # TODO: do we want to always include matching legacy courses (excluding duplicates)?
     if not courses:
         for year in sorted(ARCHIVED_YEARS, reverse=True):
-            courses = list(archivesDB[str(year)].find({"code": {"$regex": pat}}))
+            courses = list(archivesDB[str(year)].find(
+                {"code": {"$regex": pat}}))
             if courses:
                 break
 
@@ -255,9 +258,11 @@ def getAllUnlocked(userData: UserData):
     """
 
     coursesState = {}
-    user = User(fixUserData(userData.dict())) if type(userData) != User else userData
+    user = User(fixUserData(userData.dict())) if not isinstance(
+        userData, User) else userData
     for course, condition in CONDITIONS.items():
-        result, warnings = condition.validate(user) if condition is not None else (True, [])
+        result, warnings = condition.validate(
+            user) if condition is not None else (True, [])
         if result:
             coursesState[course] = {
                 "is_accurate": condition is not None,
@@ -304,12 +309,14 @@ def getLegacyCourses(year, term):
     """
     Gets all the courses that were offered in that term for that year
     """
-    result = {c['code']: c['title'] for c in archivesDB[year].find() if term in c['terms']}
+    result = {c['code']: c['title']
+              for c in archivesDB[year].find() if term in c['terms']}
 
     if not result:
-        raise HTTPException(status_code=400, detail="Invalid term or year. Valid terms: T0, T1, T2, T3. Valid years: 2019, 2020, 2021, 2022.")
+        raise HTTPException(
+            status_code=400, detail="Invalid term or year. Valid terms: T0, T1, T2, T3. Valid years: 2019, 2020, 2021, 2022.")
 
-    return {'courses' : result}
+    return {'courses': result}
 
 
 @router.get("/getLegacyCourse/{year}/{courseCode}")
@@ -320,70 +327,74 @@ def getLegacyCourse(year, courseCode):
     """
     result = list(archivesDB[str(year)].find({"code": courseCode}))
     if not result:
-        raise HTTPException(status_code=400, detail="invalid course code or year")
+        raise HTTPException(
+            status_code=400, detail="invalid course code or year")
     del result["_id"]
     result["is_legacy"] = True
     return result
 
 
 @router.post("/unselectCourse/{unselectedCourse}", response_model=AffectedCourses,
-            responses={
-                422: {"model": Message, "description": "Unselected course query is required"},
-                400: {"model": Message, "description": "Uh oh you broke me"},
-                200: {
-                    "description": "Returns the state of all the courses",
-                    "content": {
-                        "application/json": {
-                            "example": {
+             responses={
+                 422: {"model": Message, "description": "Unselected course query is required"},
+                 400: {"model": Message, "description": "Uh oh you broke me"},
+                 200: {
+                     "description": "Returns the state of all the courses",
+                     "content": {
+                         "application/json": {
+                             "example": {
                                  "affected_courses": [
-                                     "COMP1521",
-                                     "COMP1531",
-                                     "COMP3121"
+                                    "COMP1521",
+                                    "COMP1531",
+                                    "COMP3121"
                                  ]
                              }
                          }
                      }
                  }
-            })
+             })
 def unselectCourse(userData: UserData, unselectedCourse: str):
     """
     Creates a new user class and returns all the courses
     affected from the course that was unselected in sorted order
     """
-    affectedCourses = User(fixUserData(userData.dict())).unselect_course(unselectedCourse)
+    affectedCourses = User(fixUserData(userData.dict())
+                           ).unselect_course(unselectedCourse)
 
     return {'affected_courses': affectedCourses}
 
 
 @router.post("/coursesUnlockedWhenTaken/{courseToBeTaken}", response_model=CoursesUnlockedWhenTaken,
-            responses={
-                400: {"model": Message, "description": "Uh oh you broke me"},
-                200: {
-                    "description": "Returns all courses which are unlocked when this course is taken",
-                    "content": {
-                        "application/json": {
-                            "example": {
-                                "direct_unlock": ["COMP2511", "COMP3311"],
-                                "indirect_unlock": []
-                            }
-                        }
-                    }
-                }
-            })
+             responses={
+                 400: {"model": Message, "description": "Uh oh you broke me"},
+                 200: {
+                     "description": "Returns all courses which are unlocked when this course is taken",
+                     "content": {
+                         "application/json": {
+                             "example": {
+                                 "direct_unlock": ["COMP2511", "COMP3311"],
+                                 "indirect_unlock": []
+                             }
+                         }
+                     }
+                 }
+             })
 def coursesUnlockedWhenTaken(userData: UserData, courseToBeTaken: str):
     """ Returns all courses which are unlocked when given course is taken """
     # define the user object with user data
     user = User(fixUserData(userData.dict()))
 
-    ## initial state
-    courses_initially_unlocked = unlocked_set(getAllUnlocked(user)['courses_state'])
-    ## add course to the user
-    user.add_courses({courseToBeTaken: [getCourse(courseToBeTaken)['UOC'], None]})
-    ## final state
+    # initial state
+    courses_initially_unlocked = unlocked_set(
+        getAllUnlocked(user)['courses_state'])
+    # add course to the user
+    user.add_courses(
+        {courseToBeTaken: [getCourse(courseToBeTaken)['UOC'], None]})
+    # final state
     courses_now_unlocked = unlocked_set(getAllUnlocked(user)['courses_state'])
     new_courses = courses_now_unlocked - courses_initially_unlocked
 
-    ## Differentiate direct and indirect unlocks
+    # Differentiate direct and indirect unlocks
     path_to = set(getCourse(courseToBeTaken)['path_to'])
     direct_unlock = new_courses.intersection(path_to)
     indirect_unlock = new_courses - direct_unlock
@@ -392,6 +403,7 @@ def coursesUnlockedWhenTaken(userData: UserData, courseToBeTaken: str):
         'direct_unlock': sorted(list(direct_unlock)),
         'indirect_unlock': sorted(list(indirect_unlock))
     }
+
 
 def unlocked_set(courses_state):
     """ Fetch the set of unlocked courses from the courses_state of a getAllUnlocked call """
@@ -410,7 +422,8 @@ def fuzzy_match(course: tuple, search_term: str):
 
     return max(fuzz.ratio(code.lower(), search_term),
                sum(fuzz.partial_ratio(title.lower(), word)
-                       for word in search_term.split(' ')))
+                   for word in search_term.split(' ')))
+
 
 def weight_course(course: tuple, search_term: str, structure: dict,
                   major_code: Optional[str] = None, minor_code: Optional[str] = None):
