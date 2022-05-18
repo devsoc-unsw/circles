@@ -1,7 +1,7 @@
 import json
 import pytest
 from algorithms.objects.categories import Category, CourseCategory
-from backend.algorithms.objects.user import User
+from algorithms.objects.user import User
 
 PATH = "./algorithms/exampleUsers.json"
 
