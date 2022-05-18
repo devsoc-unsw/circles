@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Tooltip, Button, Typography, Alert,
 } from "antd";
@@ -30,29 +30,14 @@ const PlannerCart = () => {
       setCode("");
     }, 3500);
   };
-  const cartRef = useRef();
   const pathname = useLocation();
 
   useEffect(() => {
     setOpenMenu(false);
   }, [pathname]);
 
-  useEffect(() => {
-    const handlerClickOutside = (e) => {
-      if (!cartRef?.current?.contains(e.target)) {
-        setOpenMenu(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handlerClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handlerClickOutside);
-    };
-  });
-
   return (
-    <div ref={cartRef} className="planner-cart-root">
+    <div className="planner-cart-root">
       <Tooltip title="Your courses">
         <Button
           type="primary"
