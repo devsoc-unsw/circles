@@ -11,6 +11,7 @@ import "./App.less";
 import PageLoading from "./components/PageLoading";
 import "./axios";
 import Header from "./components/Header";
+import PageNotFound from "./components/PageNotFound/PageNotFound";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -55,6 +56,15 @@ const App = () => {
                 <ProgressionChecker />
               </div>
                 )}
+          />
+          <Route
+            path="*"
+            element={(
+              <div>
+                <Header />
+                <PageNotFound />
+              </div>
+            )}
           />
         </Routes>
       )}
