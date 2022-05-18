@@ -45,7 +45,7 @@ const persistConfig = {
   key: "root",
   version: REDUX_PERSIST_VERSION,
   storage,
-  whitelist: ["degree", "courses", "planner"],
+  whitelist: ["degree", "courses", "planner", "theme"],
   migrate: createMigrate(migrations, { debug: true }),
 
 };
