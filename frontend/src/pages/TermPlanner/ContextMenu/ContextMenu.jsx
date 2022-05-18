@@ -47,7 +47,7 @@ const ContextMenu = ({ code, plannedFor }) => {
   };
 
   // EDIT MARK - TODO: remove this comment - only for visual seperation
-  const [isEditMarkVisible, setIsEditMarkVisible] = React.useState(false);
+  const [isEditMarkVisible, setIsEditMarkVisible] = useState(false);
 
   const [markInput, setMarkInput] = useState("");
 
@@ -56,7 +56,8 @@ const ContextMenu = ({ code, plannedFor }) => {
   }
 
   const validLetterGrades = ["FL", "PS", "CR", "DN", "HD"];
-  const [markInputBuf, setMarkInputBuf] = useState("");
+  const [markInputBuf, setMarkInputBuf] = useState(
+    useSelector((state) => state.planner.courses[code].mark));
 
   const handleConfirmEditMark = (e) => {
     // Validate Input // Create warning if input is invalid
@@ -64,6 +65,7 @@ const ContextMenu = ({ code, plannedFor }) => {
       (isNaN(markInputBuf) && !validLetterGrades.includes(markInputBuf))
       || (parseInt(markInputBuf) < 0 || parseInt(markInputBuf) > 100)
     ) {
+      // Error
       return;
     }
 
@@ -112,6 +114,8 @@ const ContextMenu = ({ code, plannedFor }) => {
           courseCode="COMP1511"
           courseTitle="Introduction to testing"
           handleCancelEditMark={() => alert("implement cancel pls")}
+          inputBuffer={markInputBuf}
+          setInputBuffer={setMarkInputBuf}
         />
       </Modal>
     </>

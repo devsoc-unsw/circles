@@ -10,7 +10,8 @@ const Marks = ({ courseCode }) => {
 
   // TODO: This Component Should now take in courseCode instead of 
   // the mark - pick up the courseMark from the state
-  const mark = "100";
+  const mark = useSelector((state) => state);
+  console.log("mark:", mark);
 
   const { Text } = Typography;
 
@@ -23,7 +24,7 @@ const Marks = ({ courseCode }) => {
         Mark:
       </Text>
       <Text classnmae="text marks-val">
-        {(mark) ? mark : "N/A"}
+        {/* {(mark) ? mark : "N/A"} */}
       </Text>
     </div >
   )

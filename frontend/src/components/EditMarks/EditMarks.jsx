@@ -22,8 +22,9 @@ const EditMarks = ({ courseCode, courseTitle, handleCancelEditMark , inputBuffer
   }
 
   const handleInputChange = (e) => {
-    console.log(e.target.value);  // TODO: remove
+    // console.log(e.target.value);  // TODO: remove
     setInputBuffer(e.target.value);
+    console.log("input Buffer: ", inputBuffer)
   }
 
   return (
