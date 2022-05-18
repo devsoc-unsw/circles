@@ -178,19 +178,27 @@ const CourseDescription = () => {
             {courseAttributesData.map(({ title, content }) => (
               content && <CourseAttribute title={title} content={content} />
             ))}
-            <Title level={3} className="text cs-final-attr">
-              Offering Terms
-            </Title>
-            {course.terms
-              ? course.terms.map((term, index) => {
-                const termNo = term.slice(1);
-                return (
-                  <Tag key={index} className="text">
-                    {term === "T0" ? "Summer" : `Term ${termNo}`}
-                  </Tag>
-                );
-              })
-              : "None"}
+            <div className="cs-course-attr">
+              <Title level={3} className="text cs-final-attr">
+                Offering Terms
+              </Title>
+              {course.terms
+                ? course.terms.map((term, index) => {
+                  const termNo = term.slice(1);
+                  return (
+                    <Tag key={index} className="text">
+                      {term === "T0" ? "Summer" : `Term ${termNo}`}
+                    </Tag>
+                  );
+                })
+                : "None"}
+            </div>
+            <div className="cs-course-attr">
+              <Title level={3} className="text">
+                Handbook
+              </Title>
+              <a href={`https://www.handbook.unsw.edu.au/${course.study_level.toLowerCase()}/courses/2022/${course.code}/`}>View {course.code} in handbook</a>
+            </div>
           </div>
         </>
       )}

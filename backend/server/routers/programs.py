@@ -7,6 +7,7 @@ from server.database import programsCOL, specialisationsCOL
 from server.routers.model import (Structure, Majors, Message, minorInFE,
                                   minorInSpecialisation, Minors, Programs)
 from server.routers.courses import regex_search
+from data.processors.programs_processing import TEST_PROGS
 
 router = APIRouter(
     prefix="/programs",
@@ -44,7 +45,9 @@ def getPrograms():
     """ Fetch all the programs the backend knows about in the format of { code: title } """
     # return {"programs": {q["code"]: q["title"] for q in programsCOL.find()}}
     # TODO On deployment, DELETE RETURN BELOW and replace with the return above
-    return {"programs": {"3778": "Computer Science"}}
+    return {"programs": {"3778": "Computer Science", 
+                        "3784": "Commerce / Computer Science",
+                        }}
 
 
 @router.get(
@@ -60,15 +63,21 @@ def getPrograms():
             "content": {
                 "application/json": {
                     "example": {
-                        "majors": {
-                            "COMPS1": "Computer Science (Embedded Systems)",
-                            "COMPJ1": "Computer Science (Programming Languages)",
-                            "COMPE1": "Computer Science (eCommerce Systems)",
-                            "COMPA1": "Computer Science",
-                            "COMPN1": "Computer Science (Computer Networks)",
-                            "COMPI1": "Computer Science (Artificial Intelligence)",
-                            "COMPD1": "Computer Science (Database Systems)",
-                            "COMPY1": "Computer Science (Security Engineering)",
+                        "majors": { 
+                            "Computer Science": {
+                                "COMPS1": "Computer Science (Embedded Systems)",
+                                "COMPJ1": "Computer Science (Programming Languages)",
+                                "COMPE1": "Computer Science (eCommerce Systems)",
+                                "COMPA1": "Computer Science",
+                                "COMPN1": "Computer Science (Computer Networks)",
+                                "COMPI1": "Computer Science (Artificial Intelligence)",
+                                "COMPD1": "Computer Science (Database Systems)",
+                                "COMPY1": "Computer Science (Security Engineering)",
+                            },
+                            "Commerce": {
+                                "FINSA1": "Finance",
+                                "ACCTA1": "Accounting",
+                            }
                         }
                     }
                 }
@@ -131,7 +140,7 @@ def getMinors(programCode: str):
     elif programCode in minorInSpecialisation:
         minrs = result["components"]["SpecialisationData"]["Minors"]
     else:
-        minrs = result["components"]["Minors"]
+        minrs = result["components"]["SpecialisationData"]["Minors"]
 
     return {"minors": minrs}
 
@@ -167,6 +176,7 @@ def addSpecialisation(structure: dict, code: str, type: str):
     """ Add a specialisation to the structure of a getStructure call """
     # in a specialisation, the first container takes priority - no duplicates may exist
     spnResult = specialisationsCOL.find_one({"code": code})
+    type = f"{type} - {code}"
     if not spnResult:
         raise HTTPException(
             status_code=400, detail=f"{code} of type {type} not found")
@@ -190,7 +200,7 @@ def addSpecialisation(structure: dict, code: str, type: str):
             "content": {
                 "application/json": {
                     "example": {
-                        "Major": {
+                        "Major - COMPS1 - Computer Science": {
                             "Core Courses": {
                                 "UOC": 66,
                                 "courses": {
@@ -203,6 +213,14 @@ def addSpecialisation(structure: dict, code: str, type: str):
                                 "courses": {
                                     "ENGG4600": "Engineering Vertically Integrated Project",
                                     "ENGG2600": "Engineering Vertically Integrated Project",
+                                },
+                            },
+                        },
+                        "Major - FINSA1 - Finance": {
+                            "Core Courses": {
+                                "UOC": 66,
+                                "courses": {
+                                    "FINS3121": "Financial Accounting",
                                 },
                             },
                         },
@@ -248,7 +266,10 @@ def getStructure(
     structure = {}
 
     if major:
-        addSpecialisation(structure, major, "Major")
+        majors = major.split("+") if "+" in major else [major]
+
+        for m in majors:
+            addSpecialisation(structure, m, "Major")
 
     if minor:
         addSpecialisation(structure, minor, "Minor")
