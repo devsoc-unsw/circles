@@ -113,10 +113,10 @@ minorInSpecialisation = ["3502", "3970"]
 
 
 CONDITIONS_PATH = "algorithms/conditions.pkl"
-with open(CONDITIONS_PATH, "rb", encoding="utf8") as file:
+with open(CONDITIONS_PATH, "rb") as file:
     CONDITIONS: dict[str, CompositeCondition] = load(file)
 
-with open("algorithms/cache/handbook_note.json", "r", encoding="utf8") as file:
+with open("algorithms/cache/handbook_note.json", "r") as file:
     CACHED_HANDBOOK_NOTE: dict[str, str] = json.load(file)
 
 class description(BaseModel):
