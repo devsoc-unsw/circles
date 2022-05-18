@@ -87,6 +87,11 @@ const DraggableCourse = ({ code, index }) => {
       <ContextMenu code={code} plannedFor={plannedFor} />
       {/* display prereq tooltip for all courses. However, if a term is marked as complete
         and the course has no warning, then disable the tooltip */}
+      {isSmall && (
+        <ReactTooltip id={code} place="top" effect="solid">
+          {title}
+        </ReactTooltip>
+      )}
       {!isDragDisabled && shouldHaveWarning && (
         <ReactTooltip id={code} place="bottom" className="tooltip">
           {isLegacy ? "This course is discontinued. If an equivalent course is currently being offered, please pick that instead."
