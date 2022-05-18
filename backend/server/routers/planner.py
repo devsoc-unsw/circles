@@ -18,7 +18,7 @@ def fixPlannerData(plannerData: PlannerData):
     for year_index, year in enumerate(plannerData["plan"]):
         for term_index, term in enumerate(year):
             for courseName, course in term.items():
-                if type(course) is not list:
+                if not isinstance(course, list):
                     plannerData["plan"][year_index][term_index][courseName] = [getCourse(courseName)["UOC"], course]
     return plannerData
 

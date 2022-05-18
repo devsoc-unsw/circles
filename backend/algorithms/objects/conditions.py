@@ -61,7 +61,10 @@ class CourseCondition(Condition):
 
 
 class CoreqCoursesCondition(Condition):
-    """ Condition that the student has completed the course/s in or before the current term """
+    """
+    Condition that the student has completed the course/s in or before
+    the current term
+    """
 
     def __init__(self, logic: Logic = Logic.AND):
         # An example corequisite is [COMP1511 || COMP1521 || COMP1531]. The user
