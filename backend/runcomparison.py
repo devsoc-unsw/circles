@@ -1,6 +1,5 @@
 """ a script that is used to compare 2 years in the archive (or with the current active year) """
 
-
 import argparse
 from contextlib import suppress
 import json

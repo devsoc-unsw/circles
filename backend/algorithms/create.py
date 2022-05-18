@@ -89,7 +89,7 @@ def create_category(tokens) -> Tuple[Category, int]:
                 # (COND1 || COND2 && COND3) or similar combinations is undefined
                 print("WARNING: Found an undefined logic combination. Skipping.")
                 return None, index - 1
-            elif token == ")":
+            if token == ")":
                 # We've reached the end of the condition
                 return category, index - 1
 

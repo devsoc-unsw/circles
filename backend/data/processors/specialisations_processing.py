@@ -251,7 +251,7 @@ def get_courses(
     Adds courses from container to the customised curriculum course dict.
     """
     for course, title in container_courses.items():
-        description = description + "" # prevent unused variable error
+        description = description + ""  # prevent unused variable error
 
         if "any course" in course:
             course = {"any course": 1}

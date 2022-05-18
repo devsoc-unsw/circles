@@ -44,7 +44,7 @@ if __name__ == "__main__":
     if args.stage == "all":
         # Run all the stages from top to bottom
         res = input(
-            f"Careful. You are about to run all stages INCLUDING the scrapers... Enter 'y' if you wish to proceed or 'n' to cancel: "
+            "Careful. You are about to run all stages INCLUDING the scrapers... Enter 'y' if you wish to proceed or 'n' to cancel: "
         )
         if res == "y":
             for s in run:

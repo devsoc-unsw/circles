@@ -1,7 +1,3 @@
-"""
-
-"""
-
 import re
 import sys
 from data.utility import data_helpers
