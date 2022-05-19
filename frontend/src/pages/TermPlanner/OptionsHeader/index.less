@@ -1,0 +1,130 @@
+// OptionsHeader less stylings
+.options-header {
+  display: flex;
+  height: var(--option-header-height);
+  padding-left: 20px;
+  padding-right: 20px;
+  border-bottom-style: inset;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.left-buttons {
+  display: flex;
+}
+
+.settings-button {
+  margin-left: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #cecece;
+  border-radius: 0.5em;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.filled {
+  color: #9254de;
+}
+
+.settings-icon {
+  font-size: 20px;
+}
+
+.help-button {
+  margin-right: 10px;
+}
+
+.light {
+  .settings-button {
+    background-color: white;
+    &:hover {
+      background-color: #e3e3e3;
+    }
+  }
+}
+
+.dark {
+  .settings-button {
+    background-color: #0f1010;
+    &:hover {
+      background-color: #242728;
+    }
+  }
+
+  .settingsIcon {
+    color: #3b3e3e;
+  }
+}
+
+// SettingsMenu, SaveMenu and HelpMenu less stylings
+.content {
+  .settingsMenu {
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5em;
+  }
+  
+  .settingsTitleContainer {
+    width: auto;
+  }
+
+  .settingsTitle {
+    font-size: 1.75em;
+    margin-bottom: 0;
+    text-align: left;
+  }
+
+  .settingsDivider {
+    margin: 0.5em 0 0.5em 0;
+  }
+  
+  .settingsEntry {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    margin-bottom: 1em;
+  }
+  
+  .settingsSubtitle {
+    font-size: 1.1em;
+    margin-bottom: 0;
+  }
+}
+
+// HelpMenu less stylings
+
+.helpMenu {
+  padding: 15px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5em;
+  grid-auto-rows: auto;
+}
+
+.helpTitleContainer {
+  width: auto;
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+.helpGif {
+  width: 100%;
+  image-rendering: auto;
+  border-radius: 12px;
+  cursor: help;
+  transition: box-shadow 0.3s ease;
+}
+
+.helpGif:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}

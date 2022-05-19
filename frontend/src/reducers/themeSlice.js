@@ -6,9 +6,7 @@ const themeSplice = createSlice({
   name: "theme",
   initialState,
   reducers: {
-    toggleTheme: (state, action) => {
-      Object.assign(state, action.payload);
-    },
+    toggleTheme: (state, action) => action.payload,
   },
 });
 

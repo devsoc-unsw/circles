@@ -6,10 +6,11 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useSpring, animated } from "@react-spring/web";
 import "./steps.less";
-import springProps from "../spring";
+import springProps from "./spring";
 import { setProgram } from "../../../reducers/degreeSlice";
 
 const { Title } = Typography;
+
 const DegreeStep = ({ incrementStep, currStep }) => {
   const dispatch = useDispatch();
   const programCode = useSelector((store) => store.degree.programCode);

@@ -33,8 +33,6 @@ def fix_conditions():
         CONDITIONS, "data/final_data/conditionsProcessed.json")
     data_helpers.write_data(COURSES, "data/final_data/coursesProcessed.json")
 
-# TODO: implement your functions here
-
 
 def AERO_4110():
     """
@@ -43,7 +41,7 @@ def AERO_4110():
         "processed": "At least 144 Units in AEROAH stream. AERO3110"
     """
 
-    return "144UOC in AEROAH && AERO3110"
+    return "144UOC && AEROAH && AERO3110"
 
 
 if __name__ == "__main__":

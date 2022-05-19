@@ -42,6 +42,9 @@ TEST_PROGS = (
     "3805",
     "3871",
     "3956",
+    "3789", # Science/CompSci
+    "3784", # Commerce/CompSci
+    "3785", # Engineering(Honours)/CompSci
 )
 
 def process_prg_data():
@@ -144,14 +147,29 @@ def addMinorData(programData, item):
     programData["components"]["SpecialisationData"]["Minors"] = minorData
 
 
+
+def findProgramName(programData, item):
+    programName = item["title"]
+    programNames = programData["title"].split("/")
+    for programName in programNames:
+        if programName in item["title"]:
+            return programName.strip()
+        for container in item["container"]:
+            if programName in container["title"]:
+                return programName.strip()
+    return programName.strip()
+
 # TODO: Clean this function
 def addDisciplineData(programData, item):
-    # TODO: Where is the wiki?
-    # Initialise Specialisation Data (explained in wiki)
-    SpecialisationData = programData["components"]["SpecialisationData"]
-    # Initialise NonSpecialisation Data (explained in wiki)
-    NonSpecialisationData = programData["components"]["NonSpecialisationData"]
+    components = programData["components"]
+    components.setdefault("SpecialisationData", {})
+    components.setdefault("NonSpecialisationData", {})
 
+    SpecialisationData = SpecialisationData
+    # Initialise NonSpecialisation Data (explained in wiki)
+    NonSpecialisationData = NonSpecialisationData
+
+    programName = findProgramName(programData, item)
     if "container" in item and item["container"] != []:
         # Loop through items in disciplinary component
         for container in item["container"]:
@@ -165,7 +183,9 @@ def addDisciplineData(programData, item):
                     ):
                         code = major["academic_item_code"]
                         majorData[code] = major["academic_item_name"]
-                SpecialisationData["Majors"] = majorData
+
+                SpecialisationData.setdefault("Majors", {}).update({programName: majorData})
+
             # If item is honours loop through and add data to honours
             if container["vertical_grouping"]["value"] == "honours":
                 honoursData = {}
@@ -176,7 +196,8 @@ def addDisciplineData(programData, item):
                     ):
                         code = major["academic_item_code"]
                         honoursData[code] = major["academic_item_name"]
-                SpecialisationData["Honours"] = honoursData
+                SpecialisationData.setdefault("Honours", {}).update(honoursData)
+
             # If item is minor loop through and add data to minors
             if container["vertical_grouping"]["value"] == "undergrad_minor":
                 minorData = {}
@@ -184,7 +205,8 @@ def addDisciplineData(programData, item):
                     if minor["academic_item_type"]["value"] == "minor":
                         code = minor["academic_item_code"]
                         minorData[code] = minor["academic_item_name"]
-                SpecialisationData["Minors"] = minorData
+                SpecialisationData.setdefault("Minors", {}).update(minorData)
+
             # If item is a prescribed elective, loop through and add data to nonspecialisationdata
             if container["vertical_grouping"]["value"] == "PE":
                 PE = {}
