@@ -14,6 +14,7 @@ const Marks = ({ courseCode }) => {
   // console.log("mark:", mark);
 
   const { Text } = Typography;
+  const mark = undefined;
 
   // ! REMOVE TRUE
   // showMarks = true;
@@ -21,10 +22,10 @@ const Marks = ({ courseCode }) => {
   return (
     <div>
       <Text strong className="text">
-        Mark:
+        Mark: 
       </Text>
       <Text classnmae="text marks-val">
-        {/* {(mark) ? mark : "N/A"} */}
+        {(mark) ? mark : " N/A"}
       </Text>
     </div >
   )

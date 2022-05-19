@@ -4,6 +4,7 @@ import courseTabsReducer from "./reducers/courseTabsSlice";
 import degreeReducer from "./reducers/degreeSlice";
 import plannerReducer from "./reducers/plannerSlice";
 import themeReducer from "./reducers/themeSlice";
+import markReducer from "./reducers/markSlice";
 
 export default configureStore({
   reducer: {

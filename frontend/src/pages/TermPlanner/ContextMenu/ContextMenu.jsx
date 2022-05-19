@@ -47,6 +47,7 @@ const ContextMenu = ({ code, plannedFor }) => {
   };
 
   // EDIT MARK - TODO: remove this comment - only for visual seperation
+  // ? make this a part of the state?
   const [isEditMarkVisible, setIsEditMarkVisible] = useState(false);
 
   const [markInput, setMarkInput] = useState("");
@@ -59,7 +60,6 @@ const ContextMenu = ({ code, plannedFor }) => {
   const [markInputBuf, setMarkInputBuf] = useState(
     useSelector((state) => state.planner.courses[code].mark));
 
-  // const dispatch
 
   const handleConfirmEditMark = (e) => {
     // Validate Input // Create warning if input is invalid
