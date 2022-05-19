@@ -144,16 +144,17 @@ def getMinors(programCode: str):
 
     return {"minors": minrs}
 
-def convertSubgroupObjectToCoursesDict(object: str, description: str|list[str]) -> dict[str, str]:
+def convertSubgroupObjectToCoursesDict(object: str, description: str|list[str]):# -> dict[str, str]:
     """
     Gets a subgroup object (format laid out in the processor) and
     fetches the exact courses its referring to
     """
-    if " or " in object:
-        return {c: description[index] for index, c in enumerate(object.split(" or "))}
-    if not re.match(r"[A-Z]{4}[0-9]{4}", object):
-        return regex_search(object)
-    return {object: description}
+    return (
+        {c: description[index] for index, c in enumerate(object.split(" or "))} if "or" in object
+        else regex_search(object) if not re.match(r"[A-Z]{4}[0-9]{4}", object)
+        else {object: description}
+    )
+
 
 def addSubgroupContainer(structure: dict, type: str, container: dict, exceptions: list[str]) -> list[str]:
     """ Returns the added courses """
