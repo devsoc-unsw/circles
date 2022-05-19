@@ -1,7 +1,7 @@
 {
     "3778": {
         "title": "Computer Science",
-        "code": 3778,
+        "code": "3778",
         "duration": 3,
         "UOC": 144,
         "faculty": "Faculty of Engineering",
@@ -31,12 +31,12 @@
                     }
                 }
             },
-            "NonSpecialisationData": {}
+            "NonSpecialisationData": []
         }
     },
     "3707": {
         "title": "Engineering (Honours)",
-        "code": 3707,
+        "code": "3707",
         "duration": 4,
         "UOC": 192,
         "faculty": "Faculty of Engineering",
@@ -72,12 +72,12 @@
                     "SENGAH": "Software Engineering"
                 }
             },
-            "NonSpecialisationData": {}
+            "NonSpecialisationData": []
         }
     },
     "3970": {
         "title": "Science",
-        "code": 3970,
+        "code": "3970",
         "duration": 3,
         "UOC": 144,
         "faculty": "Faculty of Science",
@@ -137,11 +137,9 @@
                     "ANATB2": "Anatomy"
                 }
             },
-            "NonSpecialisationData": {
-                "Science Elective Courses": {
-                    "type": "elective",
-                    "credits_to_complete": 12,
-                    "from": [
+            "NonSpecialisationData": [
+                {
+                    "courses": [
                         "any Anatomy course",
                         "any Medical Science course",
                         "any Pathology course",
@@ -169,12 +167,48 @@
                         "any Vision Science course",
                         "any Biotechnology & Biomolecular Sciences course",
                         "any Psychology course"
-                    ]
+                    ],
+                    "title": "Science Elective Courses",
+                    "credits_to_complete": null,
+                    "core": false,
+                    "levels": [],
+                    "notes": "Students taking the Bachelor of Science as a stand-alone program are required to take an additional 12 UOC of Science elective courses in addition to the minimum disciplinary component requirements. Students taking a second major or minor may not have to take these courses where their chosen specialisations require more than 108 UOC."
                 },
-                "Science Electives": {
-                    "type": "elective",
-                    "credits_to_complete": 36,
-                    "from": [
+                {
+                    "courses": {
+                        "any Geoscience course": 1,
+                        "any Materials Science and Engineering course": 1,
+                        "any Biological, Earth & Environmental Science course": 1,
+                        "any Vision Science course": 1,
+                        "any Physiology course": 1,
+                        "any Anatomy course": 1,
+                        "any Biochemistry course": 1,
+                        "any Neuroscience course": 1,
+                        "any Physics course": 1,
+                        "any Biotechnology & Biomolecular Sciences course": 1,
+                        "any Climate Science course": 1,
+                        "any Biological Science course": 1,
+                        "any Biotechnology course": 1,
+                        "any Optometry course": 1,
+                        "any Chemistry course": 1,
+                        "any Microbiology course": 1,
+                        "any Medical Science course": 1,
+                        "any Pharmacology course": 1,
+                        "any Psychology course": 1,
+                        "any Computer Science course": 1,
+                        "any Marine Science course": 1,
+                        "any Aviation course": 1,
+                        "any Pathology course": 1,
+                        "any Food Technology course": 1,
+                        "any Faculty of Science course": 1,
+                        "any Mathematics course": 1
+                    },
+                    "title": "Science Electives",
+                    "credits_to_complete": null,
+                    "core": false
+                },
+                {
+                    "courses": [
                         "any Geoscience course",
                         "any Materials Science and Engineering course",
                         "any Biological, Earth & Environmental Science course",
@@ -201,18 +235,26 @@
                         "any Food Technology course",
                         "any Faculty of Science course",
                         "any Mathematics course"
-                    ]
+                    ],
+                    "title": "Science Electives",
+                    "credits_to_complete": null,
+                    "core": false,
+                    "levels": [],
+                    "notes": "Students need to complete 96 UOC to meet the core requirements for the Bachelor of Science. If your choice of specialisation(s) requires less than 96 UOC you are required to complete additional Science elective courses from the following list to meet the 96 UOC requirement."
                 }
-            }
+            ]
         }
     },
     "3502": {
         "title": "Commerce",
-        "code": 3502,
+        "code": "3502",
         "duration": 3,
         "UOC": 144,
         "faculty": "UNSW Business School",
         "components": {
+            "GE": {
+                "credits_to_complete": 12
+            },
             "SpecialisationData": {
                 "Minors": {
                     "ECONO2": "Behavioural Economics",
@@ -257,66 +299,80 @@
                     }
                 }
             },
-            "NonSpecialisationData": {
-                "Final Year Synthesis": {
-                    "type": "core",
-                    "COMM2233": "Industry Consulting Project",
-                    "INFS3020": "International Information Systems and Technology Practicum",
-                    "COMM3020": "Global Business Practicum",
-                    "TABL3033": "UNSW Tax and Business Advisory Clinic",
-                    "COMM3090": "Synthesis of Learning Experience",
-                    "ACCT3583": "Management Accounting 2",
-                    "COMM3900": "Capstone Project",
-                    "COMM2244": "Future of Work Project",
-                    "MGMT3004": "Solving Complex Strategy and Policy Problems",
-                    "COMM3030": "Social Entrepreneurship Practicum",
-                    "COMM3501": "Quantitative Business Analytics",
-                    "ACTL3192": "Retirement Saving and Spending Over the Lifecycle",
-                    "ECON3000": "Evidence-based Intervention Design and Evaluation"
+            "NonSpecialisationData": [
+                {
+                    "core": true,
+                    "title": "Final Year Synthesis",
+                    "credits_to_complete": null,
+                    "courses": {
+                        "COMM2233": "Industry Consulting Project",
+                        "INFS3020": "International Information Systems and Technology Practicum",
+                        "COMM3020": "Global Business Practicum",
+                        "TABL3033": "UNSW Tax and Business Advisory Clinic",
+                        "COMM3090": "Synthesis of Learning Experience",
+                        "ACCT3583": "Management Accounting 2",
+                        "COMM3900": "Capstone Project",
+                        "COMM2244": "Future of Work Project",
+                        "MGMT3004": "Solving Complex Strategy and Policy Problems",
+                        "COMM3030": "Social Entrepreneurship Practicum",
+                        "COMM3501": "Quantitative Business Analytics",
+                        "ACTL3192": "Retirement Saving and Spending Over the Lifecycle",
+                        "ECON3000": "Evidence-based Intervention Design and Evaluation"
+                    },
+                    "levels": [],
+                    "notes": "Students must complete either a 6 UOC Synthesis of Learning Course, or a 0 UOC Synthesis Experience.<br /><br />Students who complete a Synthesis course that is also a Work Integrated Learning course within a major, will meet a major elective, WIL and Synthesis requirement.<br /><br />Students must complete their Final Year Synthesis course within their final year of their Bachelor of Commerce program. That is, within 48 UOC or less remaining in their BCom program."
                 },
-                "myBCom": {
-                    "type": "core",
-                    "COMM3999": "myBCom Graduation Portfolio",
-                    "COMM0999": "myBCom Blueprint",
-                    "COMM1999": "myBCom First Year Portfolio"
+                {
+                    "core": true,
+                    "title": "myBCom",
+                    "credits_to_complete": null,
+                    "courses": {
+                        "COMM3999": "myBCom Graduation Portfolio",
+                        "COMM0999": "myBCom Blueprint",
+                        "COMM1999": "myBCom First Year Portfolio"
+                    },
+                    "levels": [],
+                    "notes": "Students need to complete three non-credit bearing myBCom professional development elements. COMM0999 is recommended to be enrolled in the first term of study, COMM1999 upon completion of the integrated first year courses and COMM3999 in the final term of study. Students will engage in course Moodle activities as well as the myBCom platform (https://mybcom.unsw.edu.au/) to complete these elements."
                 },
-                "Integrated First Year Courses": {
-                    "type": "core",
-                    "credits_to_complete": "48",
-                    "COMM1120": "Collaboration and Innovation in Business",
-                    "COMM1150": "Global Business Environments",
-                    "COMM1180": "Value Creation",
-                    "COMM1100": "Business Decision Making",
-                    "COMM1140": "Financial Management",
-                    "COMM1170": "Organisational Resources",
-                    "COMM1190": "Data, Insights and Decisions",
-                    "COMM1110": "Evidence-Based Problem Solving"
+                {
+                    "core": true,
+                    "title": "Integrated First Year Courses",
+                    "credits_to_complete": 48,
+                    "courses": {
+                        "COMM1120": "Collaboration and Innovation in Business",
+                        "COMM1150": "Global Business Environments",
+                        "COMM1180": "Value Creation",
+                        "COMM1100": "Business Decision Making",
+                        "COMM1140": "Financial Management",
+                        "COMM1170": "Organisational Resources",
+                        "COMM1190": "Data, Insights and Decisions",
+                        "COMM1110": "Evidence-Based Problem Solving"
+                    },
+                    "levels": [],
+                    "notes": "Students must take 48 UOC of the following courses."
                 },
-                "Prescribed Work Integrated Learning (WIL) Course": {
-                    "type": "elective",
-                    "credits_to_complete": "6",
-                    "COMM2244": "Future of Work Project",
-                    "COMM3030": "Social Entrepreneurship Practicum",
-                    "COMM3202": "Industry Experience Placement 2",
-                    "COMM2222": "Industry Experience Program",
-                    "COMM3020": "Global Business Practicum",
-                    "COMM3101": "Industry Experience Placement 1",
-                    "CDEV3000": "Practice of Work",
-                    "TABL3033": "UNSW Tax and Business Advisory Clinic",
-                    "COMM2233": "Industry Consulting Project"
+                {
+                    "courses": {
+                        "COMM2244": "Future of Work Project",
+                        "COMM3030": "Social Entrepreneurship Practicum",
+                        "COMM3202": "Industry Experience Placement 2",
+                        "COMM2222": "Industry Experience Program",
+                        "COMM3020": "Global Business Practicum",
+                        "COMM3101": "Industry Experience Placement 1",
+                        "CDEV3000": "Practice of Work",
+                        "TABL3033": "UNSW Tax and Business Advisory Clinic",
+                        "COMM2233": "Industry Consulting Project"
+                    },
+                    "title": "Prescribed Work Integrated Learning (WIL) Course",
+                    "credits_to_complete": 6,
+                    "core": false
                 }
-            },
-            "GE": {
-                "credits_to_complete": 12
-            },
-            "FE": {
-                "credits_to_complete": 36
-            }
+            ]
         }
     },
     "3053": {
         "title": "Biotechnology (Honours)",
-        "code": 3053,
+        "code": "3053",
         "duration": 4,
         "UOC": 192,
         "faculty": "Faculty of Science",
@@ -325,11 +381,85 @@
                 "credits_to_complete": 12
             },
             "SpecialisationData": {},
-            "NonSpecialisationData": {
-                "Level 2 and Level 3 Electives": {
-                    "type": "elective",
+            "NonSpecialisationData": [
+                {
+                    "courses": {
+                        "any level 3 Microbiology course": 1,
+                        "any level 3 Biochemistry course": 1,
+                        "any level 3 Bioinformatics course": 1,
+                        "any level 3 Medical Science course": 1,
+                        "any level 2 Biotechnology & Biomolecular Sciences course": 1,
+                        "any level 2 Faculty of Science course": 1,
+                        "any level 3 Chemistry course": 1,
+                        "any level 3 Biotechnology & Biomolecular Sciences course": 1,
+                        "any level 3 Faculty of Science course": 1,
+                        "any level 2 Medical Science course": 1,
+                        "any level 2 Pharmacology course": 1,
+                        "any level 2 Chemistry course": 1,
+                        "any level 2 Bioinformatics course": 1,
+                        "any level 3 Pharmacology course": 1
+                    },
+                    "title": "Level 2 and Level 3 Electives",
                     "credits_to_complete": 36,
-                    "from": [
+                    "core": false
+                },
+                {
+                    "core": true,
+                    "title": "Level 1 Core Courses",
+                    "credits_to_complete": 36,
+                    "courses": {
+                        "BABS1202": "Applied Biomolecular Sciences",
+                        "CHEM1011": "Chemistry 1A: Atoms, Molecules and Energy",
+                        "CHEM1021": "Chemistry 1B: Elements, Compounds and Life",
+                        "BABS1201": "Molecules, Cells and Genes",
+                        "MATH1031": "Mathematics for Life Sciences",
+                        "MATH1131": "Mathematics 1A",
+                        "MATH1141": "Higher Mathematics 1A",
+                        "MATH1231": "Mathematics 1B",
+                        "MATH1241": "Higher Mathematics 1B",
+                        "MATH1041": "Statistics for Life and Social Sciences"
+                    },
+                    "levels": [],
+                    "notes": "Students must take 36 UOC of the following courses."
+                },
+                {
+                    "core": true,
+                    "title": "Level 3 Core Courses",
+                    "credits_to_complete": 24,
+                    "courses": {
+                        "BABS3031": "Biotechnology and Bioengineering",
+                        "BABS3071": "Commercial Biotechnology",
+                        "BABS3061": "Medical Biotechnology",
+                        "BABS3200": "Synthetic Biology"
+                    },
+                    "levels": [],
+                    "notes": "Students must take 24 UOC of the following courses."
+                },
+                {
+                    "core": true,
+                    "title": "Level 2 Core Courses",
+                    "credits_to_complete": 24,
+                    "courses": {
+                        "BIOC2201": "Principles of Molecular Biology (Advanced)",
+                        "BABS2011": "Current Trends in Biotechnology",
+                        "BIOC2101": "Principles of Biochemistry (Advanced)",
+                        "MICR2011": "Microbiology 1"
+                    },
+                    "levels": [],
+                    "notes": "Students must take 24 UOC of the following courses."
+                },
+                {
+                    "core": true,
+                    "title": "Level 4 Core Course",
+                    "credits_to_complete": 48,
+                    "courses": {
+                        "BABS4516": "Biotechnology and Biomolecular Sciences Honours"
+                    },
+                    "levels": [],
+                    "notes": "Students must take BABS4516 (16 UOC) three times per year for a total of 48 UOC."
+                },
+                {
+                    "courses": [
                         "any level 3 Microbiology course",
                         "any level 3 Biochemistry course",
                         "any level 3 Bioinformatics course",
@@ -344,49 +474,19 @@
                         "any level 2 Chemistry course",
                         "any level 2 Bioinformatics course",
                         "any level 3 Pharmacology course"
-                    ]
-                },
-                "Level 1 Core Courses": {
-                    "type": "core",
+                    ],
+                    "title": "Level 2 and Level 3 Electives",
                     "credits_to_complete": 36,
-                    "BABS1202": "Applied Biomolecular Sciences",
-                    "CHEM1011": "Chemistry 1A: Atoms, Molecules and Energy",
-                    "CHEM1021": "Chemistry 1B: Elements, Compounds and Life",
-                    "BABS1201": "Molecules, Cells and Genes",
-                    "MATH1031": "Mathematics for Life Sciences",
-                    "MATH1131": "Mathematics 1A",
-                    "MATH1141": "Higher Mathematics 1A",
-                    "MATH1231": "Mathematics 1B",
-                    "MATH1241": "Higher Mathematics 1B",
-                    "MATH1041": "Statistics for Life and Social Sciences"
-                },
-                "Level 3 Core Courses": {
-                    "type": "core",
-                    "credits_to_complete": 24,
-                    "BABS3031": "Biotechnology and Bioengineering",
-                    "BABS3071": "Commercial Biotechnology",
-                    "BABS3061": "Medical Biotechnology",
-                    "BABS3200": "Synthetic Biology"
-                },
-                "Level 2 Core Courses": {
-                    "type": "core",
-                    "credits_to_complete": 24,
-                    "BIOC2201": "Principles of Molecular Biology (Advanced)",
-                    "BABS2011": "Current Trends in Biotechnology",
-                    "BIOC2101": "Principles of Biochemistry (Advanced)",
-                    "MICR2011": "Microbiology 1"
-                },
-                "Level 4 Core Course": {
-                    "type": "core",
-                    "credits_to_complete": 48,
-                    "BABS4516": "Biotechnology and Biomolecular Sciences Honours"
+                    "core": false,
+                    "levels": [],
+                    "notes": "Students must take at least 36 UOC of the following courses."
                 }
-            }
+            ]
         }
     },
     "3979": {
         "title": "Information Systems",
-        "code": 3979,
+        "code": "3979",
         "duration": 3,
         "UOC": 144,
         "faculty": "UNSW Business School",
@@ -394,56 +494,68 @@
             "GE": {
                 "credits_to_complete": 12
             },
-            "FE": {
-                "credits_to_complete": 12
-            },
             "SpecialisationData": {},
-            "NonSpecialisationData": {
-                "Business Core Courses": {
-                    "type": "core",
-                    "credits_to_complete": "30",
-                    "COMM1180": "Value Creation",
-                    "COMM1120": "Collaboration and Innovation in Business",
-                    "COMM1150": "Global Business Environments",
-                    "COMM1140": "Financial Management",
-                    "COMM1190": "Data, Insights and Decisions",
-                    "COMM1110": "Evidence-Based Problem Solving",
-                    "COMM1100": "Business Decision Making"
+            "NonSpecialisationData": [
+                {
+                    "core": true,
+                    "title": "Business Core Courses",
+                    "credits_to_complete": 30,
+                    "courses": {
+                        "COMM1180": "Value Creation",
+                        "COMM1120": "Collaboration and Innovation in Business",
+                        "COMM1150": "Global Business Environments",
+                        "COMM1140": "Financial Management",
+                        "COMM1190": "Data, Insights and Decisions",
+                        "COMM1110": "Evidence-Based Problem Solving",
+                        "COMM1100": "Business Decision Making"
+                    },
+                    "levels": [],
+                    "notes": "Students must take 30 UOC of the following courses."
                 },
-                "Information Systems core courses": {
-                    "type": "core",
-                    "credits_to_complete": "72",
-                    "INFS3700": "User Experience and IT Service Design",
-                    "INFS2701": "Cyber Security Management and Governance",
-                    "INFS2822": "Programming for Data Analytics",
-                    "INFS1602": "Digital Transformation in Business",
-                    "INFS1603": "Introduction to Business Databases",
-                    "INFS3604": "Business Process Management",
-                    "INFS3701": "Enterprise Architecture for Scalable Cloud Solutions",
-                    "INFS1701": "Networking and Security",
-                    "INFS2608": "Database Management & Big Data Infrastructures",
-                    "INFS3605": "Information Systems Innovation & Transformation",
-                    "INFS2603": "Business Analysis and Agile Product Management",
-                    "INFS3703": "Information Systems Project Management"
+                {
+                    "core": true,
+                    "title": "Information Systems core courses",
+                    "credits_to_complete": 72,
+                    "courses": {
+                        "INFS3700": "User Experience and IT Service Design",
+                        "INFS2701": "Cyber Security Management and Governance",
+                        "INFS2822": "Programming for Data Analytics",
+                        "INFS1602": "Digital Transformation in Business",
+                        "INFS1603": "Introduction to Business Databases",
+                        "INFS3604": "Business Process Management",
+                        "INFS3701": "Enterprise Architecture for Scalable Cloud Solutions",
+                        "INFS1701": "Networking and Security",
+                        "INFS2608": "Database Management & Big Data Infrastructures",
+                        "INFS3605": "Information Systems Innovation & Transformation",
+                        "INFS2603": "Business Analysis and Agile Product Management",
+                        "INFS3703": "Information Systems Project Management"
+                    },
+                    "levels": [],
+                    "notes": "Students must take 72 UOC of the following courses."
                 },
-                "Work Integrated Learning (WIL)": {
-                    "type": "elective",
+                {
+                    "courses": {
+                        "COMM2222": "Industry Experience Program",
+                        "COMM3030": "Social Entrepreneurship Practicum",
+                        "COMM2233": "Industry Consulting Project",
+                        "INFS3020": "International Information Systems and Technology Practicum"
+                    },
+                    "title": "Work Integrated Learning (WIL)",
                     "credits_to_complete": 6,
-                    "COMM2222": "Industry Experience Program",
-                    "COMM3030": "Social Entrepreneurship Practicum",
-                    "COMM2233": "Industry Consulting Project",
-                    "INFS3020": "International Information Systems and Technology Practicum"
+                    "core": false
                 },
-                "Prescribed Information Systems Electives": {
-                    "type": "elective",
-                    "credits_to_complete": "12"
+                {
+                    "courses": {},
+                    "title": "Prescribed Information Systems Electives",
+                    "credits_to_complete": 12,
+                    "core": false
                 }
-            }
+            ]
         }
     },
     "3959": {
         "title": "Data Science and Decisions",
-        "code": 3959,
+        "code": "3959",
         "duration": 3,
         "UOC": 144,
         "faculty": "Faculty of Science",
@@ -460,41 +572,56 @@
                     }
                 }
             },
-            "NonSpecialisationData": {
-                "Level 2 Core Courses": {
-                    "type": "core",
+            "NonSpecialisationData": [
+                {
+                    "core": true,
+                    "title": "Level 2 Core Courses",
                     "credits_to_complete": 18,
-                    "MATH2601": "Higher Linear Algebra",
-                    "MATH2501": "Linear Algebra",
-                    "ECON2112": "Game Theory and Business Strategy",
-                    "MATH2801": "Theory of Statistics",
-                    "MATH2901": "Higher Theory of Statistics"
+                    "courses": {
+                        "MATH2601": "Higher Linear Algebra",
+                        "MATH2501": "Linear Algebra",
+                        "ECON2112": "Game Theory and Business Strategy",
+                        "MATH2801": "Theory of Statistics",
+                        "MATH2901": "Higher Theory of Statistics"
+                    },
+                    "levels": [],
+                    "notes": "Students must take 18 UOC of the following courses."
                 },
-                "Level 3 Core Courses": {
-                    "type": "core",
+                {
+                    "core": true,
+                    "title": "Level 3 Core Courses",
                     "credits_to_complete": 18,
-                    "DATA3001": "Data Science and Decisions in Practice",
-                    "COMP3311": "Database Systems",
-                    "ECON3203": "Econometric Theory and Methods"
+                    "courses": {
+                        "DATA3001": "Data Science and Decisions in Practice",
+                        "COMP3311": "Database Systems",
+                        "ECON3203": "Econometric Theory and Methods"
+                    },
+                    "levels": [],
+                    "notes": "Students must take 18 UOC of the following courses."
                 },
-                "Level 1 Core Courses": {
-                    "type": "core",
+                {
+                    "core": true,
+                    "title": "Level 1 Core Courses",
                     "credits_to_complete": 36,
-                    "COMP2521": "Data Structures and Algorithms",
-                    "ECON1101": "Microeconomics 1",
-                    "DATA1001": "Introduction to Data Science and Decisions",
-                    "COMP1511": "Programming Fundamentals",
-                    "MATH1231": "Mathematics 1B",
-                    "MATH1241": "Higher Mathematics 1B",
-                    "MATH1131": "Mathematics 1A",
-                    "MATH1141": "Higher Mathematics 1A"
+                    "courses": {
+                        "COMP2521": "Data Structures and Algorithms",
+                        "ECON1101": "Microeconomics 1",
+                        "DATA1001": "Introduction to Data Science and Decisions",
+                        "COMP1511": "Programming Fundamentals",
+                        "MATH1231": "Mathematics 1B",
+                        "MATH1241": "Higher Mathematics 1B",
+                        "MATH1131": "Mathematics 1A",
+                        "MATH1141": "Higher Mathematics 1A"
+                    },
+                    "levels": [],
+                    "notes": "Students must take 36 UOC of the following courses."
                 }
-            }
+            ]
         }
     },
     "3181": {
         "title": "Vision Science",
-        "code": 3181,
+        "code": "3181",
         "duration": 3,
         "UOC": 144,
         "faculty": "Faculty of Medicine and Health",
@@ -503,55 +630,73 @@
                 "credits_to_complete": 12
             },
             "SpecialisationData": {},
-            "NonSpecialisationData": {
-                "Level 3 Core Courses": {
-                    "type": "core",
+            "NonSpecialisationData": [
+                {
+                    "core": true,
+                    "title": "Level 3 Core Courses",
                     "credits_to_complete": 42,
-                    "OPTM3233": "Working in Clinical Contexts",
-                    "VISN3111": "Development and Aging of the Visual System",
-                    "OPTM3105": "Disease Processes of the Eye 1",
-                    "OPTM3201": "Ocular Imaging & Applied Vision Science",
-                    "PHAR3306": "Pharmacology for Optometry",
-                    "OPTM3133": "Vision Science in the Consulting Room",
-                    "OPTM3205": "Disease Processes of the Eye 2"
+                    "courses": {
+                        "OPTM3233": "Working in Clinical Contexts",
+                        "VISN3111": "Development and Aging of the Visual System",
+                        "OPTM3105": "Disease Processes of the Eye 1",
+                        "OPTM3201": "Ocular Imaging & Applied Vision Science",
+                        "PHAR3306": "Pharmacology for Optometry",
+                        "OPTM3133": "Vision Science in the Consulting Room",
+                        "OPTM3205": "Disease Processes of the Eye 2"
+                    },
+                    "levels": [],
+                    "notes": "Students must take 42 UOC of the following courses."
                 },
-                "Level 1 Core Courses": {
-                    "type": "core",
+                {
+                    "core": true,
+                    "title": "Level 1 Core Courses",
                     "credits_to_complete": 48,
-                    "BABS1201": "Molecules, Cells and Genes",
-                    "CHEM1829": "Biological Chemistry for Optometry Students",
-                    "VISN1111": "Geometrical and Physical Optics",
-                    "CHEM1011": "Chemistry 1A: Atoms, Molecules and Energy",
-                    "VISN1101": "Seeing the World: Perspectives from Vision Science",
-                    "VISN1221": "Visual Optics",
-                    "PHYS1121": "Physics 1A",
-                    "PHYS1111": "Fundamentals of Physics",
-                    "PHYS1131": "Higher Physics 1A",
-                    "MATH1031": "Mathematics for Life Sciences",
-                    "MATH1141": "Higher Mathematics 1A",
-                    "MATH1131": "Mathematics 1A"
+                    "courses": {
+                        "BABS1201": "Molecules, Cells and Genes",
+                        "CHEM1829": "Biological Chemistry for Optometry Students",
+                        "VISN1111": "Geometrical and Physical Optics",
+                        "CHEM1011": "Chemistry 1A: Atoms, Molecules and Energy",
+                        "VISN1101": "Seeing the World: Perspectives from Vision Science",
+                        "VISN1221": "Visual Optics",
+                        "PHYS1121": "Physics 1A",
+                        "PHYS1111": "Fundamentals of Physics",
+                        "PHYS1131": "Higher Physics 1A",
+                        "MATH1031": "Mathematics for Life Sciences",
+                        "MATH1141": "Higher Mathematics 1A",
+                        "MATH1131": "Mathematics 1A"
+                    },
+                    "levels": [],
+                    "notes": "Students must take 48 UOC of the following courses."
                 },
-                "Level 2 Core Courses": {
-                    "type": "core",
+                {
+                    "core": true,
+                    "title": "Level 2 Core Courses",
                     "credits_to_complete": 42,
-                    "PHSL2101": "Physiology 1A",
-                    "VISN2111": "Ocular Anatomy and Physiology",
-                    "OPTM2133": "The Clinical Environment",
-                    "PHSL2201": "Physiology 1B",
-                    "VISN2211": "Organisation and Function of the Visual System",
-                    "ANAT2111": "Introductory Anatomy",
-                    "OPTM2233": "Optical Dispensing"
+                    "courses": {
+                        "PHSL2101": "Physiology 1A",
+                        "VISN2111": "Ocular Anatomy and Physiology",
+                        "OPTM2133": "The Clinical Environment",
+                        "PHSL2201": "Physiology 1B",
+                        "VISN2211": "Organisation and Function of the Visual System",
+                        "ANAT2111": "Introductory Anatomy",
+                        "OPTM2233": "Optical Dispensing"
+                    },
+                    "levels": [],
+                    "notes": "Students must take 42 UOC of the following courses."
                 }
-            }
+            ]
         }
     },
     "3543": {
         "title": "Economics",
-        "code": 3543,
+        "code": "3543",
         "duration": 3,
         "UOC": 144,
         "faculty": "UNSW Business School",
         "components": {
+            "GE": {
+                "credits_to_complete": 12
+            },
             "SpecialisationData": {
                 "Majors": {
                     "Economics": {
@@ -561,99 +706,146 @@
                     }
                 }
             },
-            "NonSpecialisationData": {
-                "Introductory Business Course": {
-                    "type": "elective",
+            "NonSpecialisationData": [
+                {
+                    "courses": {
+                        "COMM1140": "Financial Management",
+                        "COMM1900": "Organisations in Their Environment",
+                        "COMM1120": "Collaboration and Innovation in Business",
+                        "COMM1190": "Data, Insights and Decisions"
+                    },
+                    "title": "Introductory Business Course",
                     "credits_to_complete": 6,
-                    "COMM1140": "Financial Management",
-                    "COMM1900": "Organisations in Their Environment",
-                    "COMM1120": "Collaboration and Innovation in Business",
-                    "COMM1190": "Data, Insights and Decisions"
+                    "core": false
                 },
-                "Economics Electives": {
-                    "type": "elective",
-                    "credits_to_complete": "30"
+                {
+                    "courses": {},
+                    "title": "Economics Electives",
+                    "credits_to_complete": 30,
+                    "core": false
                 },
-                "Economics Core": {
-                    "type": "core",
-                    "credits_to_complete": "48",
-                    "ECON1203": "Business and Economic Statistics",
-                    "ECON2101": "Microeconomics 2",
-                    "ECON2206": "Introductory Econometrics ",
-                    "ECON1102": "Macroeconomics 1",
-                    "ECON1202": "Quantitative Analysis for Business and Economics",
-                    "ECON2102": "Macroeconomics 2",
-                    "ECON1101": "Microeconomics 1",
-                    "ECON1401": "Economic Perspectives"
+                {
+                    "core": true,
+                    "title": "Economics Core",
+                    "credits_to_complete": 48,
+                    "courses": {
+                        "ECON1203": "Business and Economic Statistics",
+                        "ECON2101": "Microeconomics 2",
+                        "ECON2206": "Introductory Econometrics ",
+                        "ECON1102": "Macroeconomics 1",
+                        "ECON1202": "Quantitative Analysis for Business and Economics",
+                        "ECON2102": "Macroeconomics 2",
+                        "ECON1101": "Microeconomics 1",
+                        "ECON1401": "Economic Perspectives"
+                    },
+                    "levels": [],
+                    "notes": "Students must take 48 UOC of the following courses."
                 },
-                "UNSW Business Electives": {
-                    "type": "elective",
-                    "credits_to_complete": "12",
-                    "any course offered by UNSW Business School": 1
+                {
+                    "courses": {
+                        "any course offered by UNSW Business School": 1
+                    },
+                    "title": "UNSW Business Electives",
+                    "credits_to_complete": 12,
+                    "core": false
+                },
+                {
+                    "courses": [
+                        "any level 3 Economics course"
+                    ],
+                    "title": "any level 3 Economics course",
+                    "credits_to_complete": 0,
+                    "core": false,
+                    "levels": [],
+                    "notes": ""
+                },
+                {
+                    "courses": [
+                        "any level 2 Economics course"
+                    ],
+                    "title": "any level 2 Economics course",
+                    "credits_to_complete": 0,
+                    "core": false,
+                    "levels": [],
+                    "notes": ""
+                },
+                {
+                    "courses": [
+                        "any course offered by UNSW Business School"
+                    ],
+                    "title": "UNSW Business Electives",
+                    "credits_to_complete": 12,
+                    "core": false,
+                    "levels": [],
+                    "notes": "Students must complete 12 UOC of Business School electives. Students are encouraged to select a Work-Integrated Learning course as one of their Business School elective courses - e.g., COMM3020, COMM3030, COMM3101, or COMM3202."
                 }
-            },
-            "GE": {
-                "credits_to_complete": 12
-            },
-            "FE": {
-                "credits_to_complete": 36
-            }
+            ]
         }
     },
     "3586": {
         "title": "Actuarial Studies",
-        "code": 3586,
+        "code": "3586",
         "duration": 3,
         "UOC": 144,
         "faculty": "UNSW Business School",
         "components": {
-            "FE": {
-                "credits_to_complete": 36
-            },
-            "SpecialisationData": {},
-            "NonSpecialisationData": {
-                "Level 1 Core Courses": {
-                    "type": "core",
-                    "credits_to_complete": "48",
-                    "ACTL1101": "Introduction to Actuarial Studies",
-                    "MATH1151": "Mathematics for Actuarial Studies and Finance 1A",
-                    "COMM1170": "Organisational Resources",
-                    "ECON1101": "Microeconomics 1",
-                    "COMM1140": "Financial Management",
-                    "MATH1251": "Mathematics for Actuarial Studies and Finance 1B",
-                    "COMM1180": "Value Creation",
-                    "ECON1102": "Macroeconomics 1"
-                },
-                "Level 3 Actuarial Electives": {
-                    "type": "elective",
-                    "credits_to_complete": "24",
-                    "ACTL3143": "Artificial Intelligence and Deep Learning Models for Actuarial Applications",
-                    "ACTL3141": "Modelling and Prediction of Life and Health Related Risks",
-                    "ACTL3182": "Asset-Liability and Derivative Models",
-                    "ACTL3192": "Retirement Saving and Spending Over the Lifecycle",
-                    "ACTL3151": "Actuarial Mathematics for Insurance and Superannuation",
-                    "ACTL3142": "Statistical Machine Learning for Risk and Actuarial Applications",
-                    "ACTL3162": "General Insurance Techniques",
-                    "ACTL3191": "Superannuation and Retirement Benefits",
-                    "ACTL3301": "Quantitative Risk Management"
-                },
-                "Level 2 Core Courses": {
-                    "type": "core",
-                    "credits_to_complete": 24,
-                    "ACTL2102": "Foundations of Actuarial Models",
-                    "ACTL2131": "Probability and Mathematical Statistics",
-                    "ACTL2111": "Financial Mathematics for Actuaries",
-                    "COMM2501": "Data Visualisation and Communication"
-                }
-            },
             "GE": {
                 "credits_to_complete": 12
-            }
+            },
+            "SpecialisationData": {},
+            "NonSpecialisationData": [
+                {
+                    "core": true,
+                    "title": "Level 1 Core Courses",
+                    "credits_to_complete": 48,
+                    "courses": {
+                        "ACTL1101": "Introduction to Actuarial Studies",
+                        "MATH1151": "Mathematics for Actuarial Studies and Finance 1A",
+                        "COMM1170": "Organisational Resources",
+                        "ECON1101": "Microeconomics 1",
+                        "COMM1140": "Financial Management",
+                        "MATH1251": "Mathematics for Actuarial Studies and Finance 1B",
+                        "COMM1180": "Value Creation",
+                        "ECON1102": "Macroeconomics 1"
+                    },
+                    "levels": [],
+                    "notes": "Students must take 48 UOC of the following courses."
+                },
+                {
+                    "courses": {
+                        "ACTL3143": "Artificial Intelligence and Deep Learning Models for Actuarial Applications",
+                        "ACTL3141": "Modelling and Prediction of Life and Health Related Risks",
+                        "ACTL3182": "Asset-Liability and Derivative Models",
+                        "ACTL3192": "Retirement Saving and Spending Over the Lifecycle",
+                        "ACTL3151": "Actuarial Mathematics for Insurance and Superannuation",
+                        "ACTL3142": "Statistical Machine Learning for Risk and Actuarial Applications",
+                        "ACTL3162": "General Insurance Techniques",
+                        "ACTL3191": "Superannuation and Retirement Benefits",
+                        "ACTL3301": "Quantitative Risk Management"
+                    },
+                    "title": "Level 3 Actuarial Electives",
+                    "credits_to_complete": 24,
+                    "core": false
+                },
+                {
+                    "core": true,
+                    "title": "Level 2 Core Courses",
+                    "credits_to_complete": 24,
+                    "courses": {
+                        "ACTL2102": "Foundations of Actuarial Models",
+                        "ACTL2131": "Probability and Mathematical Statistics",
+                        "ACTL2111": "Financial Mathematics for Actuaries",
+                        "COMM2501": "Data Visualisation and Communication"
+                    },
+                    "levels": [],
+                    "notes": "Students must take 24 UOC of the following courses.<br /><br />Students may replace ACTL2131 with the two courses MATH2901 Higher Theory of Statistics and MATH2931 Higher Linear Models. If students make this replacement, MATH2901 will count towards ACTL2131, and MATH2931 will be counted towards a major where this course is required or as a Business elective."
+                }
+            ]
         }
     },
     "3805": {
         "title": "Medicine",
-        "code": 3805,
+        "code": "3805",
         "duration": 6,
         "UOC": 288,
         "faculty": "Faculty of Medicine and Health",
@@ -662,57 +854,72 @@
                 "credits_to_complete": 12
             },
             "SpecialisationData": {},
-            "NonSpecialisationData": {
-                "Stage 2 Core Courses": {
-                    "type": "core",
+            "NonSpecialisationData": [
+                {
+                    "core": true,
+                    "title": "Stage 2 Core Courses",
                     "credits_to_complete": 84,
-                    "MFAC2515": "Integrated Clinical Studies 2",
-                    "MFAC2507": "Clinical Transition",
-                    "MFAC2511": "Phase 2 Portfolio Examination",
-                    "MFAC2512": "Phase 2 Integrated Clinical Assessment",
-                    "MFAC2516": "Integrated Clinical Studies 3",
-                    "MFAC2514": "Integrated Clinical Studies 1",
-                    "MFAC4001": "Value-Based Health Care in Clinical Practice",
-                    "MFAC4999": "Independent Learning Project (ILP)"
+                    "courses": {
+                        "MFAC2515": "Integrated Clinical Studies 2",
+                        "MFAC2507": "Clinical Transition",
+                        "MFAC2511": "Phase 2 Portfolio Examination",
+                        "MFAC2512": "Phase 2 Integrated Clinical Assessment",
+                        "MFAC2516": "Integrated Clinical Studies 3",
+                        "MFAC2514": "Integrated Clinical Studies 1",
+                        "MFAC4001": "Value-Based Health Care in Clinical Practice",
+                        "MFAC4999": "Independent Learning Project (ILP)"
+                    },
+                    "levels": [],
+                    "notes": "Students must take 84 UOC of the following courses.<br /><br />Note: <br />- MFAC4001 (2 UOC) is a multi-term course run over 3-terms for a total UOC of 6. <br />- MFAC4999 (8 UOC) is a multi-term course run over 3-terms for a total UOC of 24. <br />- MFAC4001 and MFAC4999 must be taken concurrently in Year 4"
                 },
-                "Stage 1 Core Courses": {
-                    "type": "core",
+                {
+                    "core": true,
+                    "title": "Stage 1 Core Courses",
                     "credits_to_complete": 96,
-                    "MFAC1513": "Phase 1 Clinical and Communications Skills Examination",
-                    "MFAC1501": "Foundations",
-                    "MFAC1521": "Beginnings, Growth and Development A",
-                    "MFAC1524": "Health Maintenance B",
-                    "MFAC1527": "Society and Health",
-                    "MFAC1523": "Health Maintenance A",
-                    "MFAC1522": "Beginnings, Growth and Development B",
-                    "MFAC1526": "Ageing and Endings B",
-                    "MFAC1525": "Ageing and Endings A",
-                    "MFAC1512": "Phase 1 End-of-Phase Examination",
-                    "MFAC1511": "Phase 1 Portfolio Examination"
+                    "courses": {
+                        "MFAC1513": "Phase 1 Clinical and Communications Skills Examination",
+                        "MFAC1501": "Foundations",
+                        "MFAC1521": "Beginnings, Growth and Development A",
+                        "MFAC1524": "Health Maintenance B",
+                        "MFAC1527": "Society and Health",
+                        "MFAC1523": "Health Maintenance A",
+                        "MFAC1522": "Beginnings, Growth and Development B",
+                        "MFAC1526": "Ageing and Endings B",
+                        "MFAC1525": "Ageing and Endings A",
+                        "MFAC1512": "Phase 1 End-of-Phase Examination",
+                        "MFAC1511": "Phase 1 Portfolio Examination"
+                    },
+                    "levels": [],
+                    "notes": "Students must take 96 UOC of the following courses."
                 },
-                "Stage 3 Core Courses": {
-                    "type": "core",
+                {
+                    "core": true,
+                    "title": "Stage 3 Core Courses",
                     "credits_to_complete": 96,
-                    "MFAC3508": "Emergency / Selective",
-                    "MFAC3505": "Obstetrics and Gynaecology",
-                    "MFAC3509": "Selective",
-                    "MFAC3502": "Surgery",
-                    "MFAC3504": "Primary Care",
-                    "MFAC3515": "Preparation for Internship (PRINT)",
-                    "MFAC3512": "Phase 3 Biomedical Sciences Viva",
-                    "MFAC3514": "Elective",
-                    "MFAC3501": "Medicine",
-                    "MFAC3523": "Phase 3 Integrated Clinical Examination",
-                    "MFAC3506": "Children's Health (Paediatrics)",
-                    "MFAC3503": "Psychiatry",
-                    "MFAC3522": "Phase 3 Portfolio Examination"
+                    "courses": {
+                        "MFAC3508": "Emergency / Selective",
+                        "MFAC3505": "Obstetrics and Gynaecology",
+                        "MFAC3509": "Selective",
+                        "MFAC3502": "Surgery",
+                        "MFAC3504": "Primary Care",
+                        "MFAC3515": "Preparation for Internship (PRINT)",
+                        "MFAC3512": "Phase 3 Biomedical Sciences Viva",
+                        "MFAC3514": "Elective",
+                        "MFAC3501": "Medicine",
+                        "MFAC3523": "Phase 3 Integrated Clinical Examination",
+                        "MFAC3506": "Children's Health (Paediatrics)",
+                        "MFAC3503": "Psychiatry",
+                        "MFAC3522": "Phase 3 Portfolio Examination"
+                    },
+                    "levels": [],
+                    "notes": "Students must complete 96 UOC of Stage 3 core courses.<br /><br />Note: Students who are enrolled concurrently in the Bachelor of Medicine and the Bachelor of Arts programs must complete the Bachelor of Arts program requirements prior to commencing Stage 3 of the Medicine program. Upon rejoining the Medicine program, they will undertake a short clinical skills refresher course."
                 }
-            }
+            ]
         }
     },
     "3871": {
         "title": "Exercise Physiology",
-        "code": 3871,
+        "code": "3871",
         "duration": 4,
         "UOC": 192,
         "faculty": "Faculty of Medicine and Health",
@@ -721,81 +928,104 @@
                 "credits_to_complete": 12
             },
             "SpecialisationData": {},
-            "NonSpecialisationData": {
-                "Level 4 Core Courses": {
-                    "type": "core",
-                    "credits_to_complete": "36",
-                    "HESC4551": "Research Project",
-                    "HESC4561": "Research Internship A",
-                    "HESC3581": "Exercise Prescription in Diverse Populations",
-                    "HESC4502": "Workplace Assessment and Rehabilitation",
-                    "HESC4611": "Clinical Practicum A",
-                    "HESC4501": "Exercise Physiology Research Seminars",
-                    "HESC4622": "Clinical Practicum B"
+            "NonSpecialisationData": [
+                {
+                    "core": true,
+                    "title": "Level 4 Core Courses",
+                    "credits_to_complete": 36,
+                    "courses": {
+                        "HESC4551": "Research Project",
+                        "HESC4561": "Research Internship A",
+                        "HESC3581": "Exercise Prescription in Diverse Populations",
+                        "HESC4502": "Workplace Assessment and Rehabilitation",
+                        "HESC4611": "Clinical Practicum A",
+                        "HESC4501": "Exercise Physiology Research Seminars",
+                        "HESC4622": "Clinical Practicum B"
+                    },
+                    "levels": [],
+                    "notes": "Students must take 36 UOC of the following courses.<br /><br />For entry into the 20-week 4th year research internship, a minimum program WAM of 65 is required."
                 },
-                "Level 3 Core Courses": {
-                    "type": "core",
-                    "credits_to_complete": "48",
-                    "NEUR3101": "Muscle and Motor Control",
-                    "HESC3592": "Neuromuscular Rehabilitation",
-                    "HESC3504": "Physical Activity and Health",
-                    "HESC3541": "Clinical Exercise Physiology",
-                    "PHAR3111": "Clinical Pharmacology for Health and Exercise Science",
-                    "HESC3501": "Advanced Exercise Science",
-                    "HESC3511": "Health, Exercise and Sport Psychology",
-                    "HESC3532": "Movement Rehabilitation"
+                {
+                    "core": true,
+                    "title": "Level 3 Core Courses",
+                    "credits_to_complete": 48,
+                    "courses": {
+                        "NEUR3101": "Muscle and Motor Control",
+                        "HESC3592": "Neuromuscular Rehabilitation",
+                        "HESC3504": "Physical Activity and Health",
+                        "HESC3541": "Clinical Exercise Physiology",
+                        "PHAR3111": "Clinical Pharmacology for Health and Exercise Science",
+                        "HESC3501": "Advanced Exercise Science",
+                        "HESC3511": "Health, Exercise and Sport Psychology",
+                        "HESC3532": "Movement Rehabilitation"
+                    },
+                    "levels": [],
+                    "notes": "Students must take 48 UOC of the following courses.<br /><br />A Senior First Aid and CPR Certificate, Immunisation, Criminal Record and Working with Children Check must be obtained before commencing HESC3501 Advanced Exercise Science and must be valid till the completion of the program."
                 },
-                "Level 1 Core Courses": {
-                    "type": "core",
-                    "credits_to_complete": "42",
-                    "CHEM1831": "Chemistry for Exercise Physiology",
-                    "HESC1511": "Exercise Programs and Behaviour",
-                    "MATH1041": "Statistics for Life and Social Sciences",
-                    "PSYC1001": "Psychology 1A",
-                    "BABS1201": "Molecules, Cells and Genes",
-                    "ANAT2111": "Introductory Anatomy",
-                    "HESC1501": "Introductory Exercise Science"
+                {
+                    "core": true,
+                    "title": "Level 1 Core Courses",
+                    "credits_to_complete": 42,
+                    "courses": {
+                        "CHEM1831": "Chemistry for Exercise Physiology",
+                        "HESC1511": "Exercise Programs and Behaviour",
+                        "MATH1041": "Statistics for Life and Social Sciences",
+                        "PSYC1001": "Psychology 1A",
+                        "BABS1201": "Molecules, Cells and Genes",
+                        "ANAT2111": "Introductory Anatomy",
+                        "HESC1501": "Introductory Exercise Science"
+                    },
+                    "levels": [],
+                    "notes": "Students must take 42 UOC of the following courses."
                 },
-                "Electives": {
-                    "type": "elective",
-                    "credits_to_complete": "6",
-                    "BIOC3261": "Human Biochemistry",
-                    "MATH1131": "Mathematics 1A",
-                    "FOOD3220": "Nutrition",
-                    "FOOD4403": "Advanced Nutrition",
-                    "ANAT3411": "Neuroanatomy",
-                    "PATH3207": "Musculoskeletal Diseases",
-                    "BIOM9551": "Biomechanics of Physical Rehabilitation",
-                    "PHSL3221": "Endocrine, Reproductive and Developmental Physiology",
-                    "BEIL0011": "Healthy Planning",
-                    "NEUR3221": "Neurophysiology",
-                    "HESC4571": "Research Internship B",
-                    "PHYS1121": "Physics 1A",
-                    "PHSL3211": "Cardiovascular Physiology and Pathophysiology",
-                    "PSYC1023": "Abnormal Psychology",
-                    "MATH1031": "Mathematics for Life Sciences",
-                    "PSYC1022": "The Psychology of Addiction",
-                    "ANAT3121": "Visceral Anatomy",
-                    "PSYC1024": "Clinical Perspectives on Anxiety, Mood and Stress"
+                {
+                    "courses": {
+                        "BIOC3261": "Human Biochemistry",
+                        "MATH1131": "Mathematics 1A",
+                        "FOOD3220": "Nutrition",
+                        "FOOD4403": "Advanced Nutrition",
+                        "ANAT3411": "Neuroanatomy",
+                        "PATH3207": "Musculoskeletal Diseases",
+                        "BIOM9551": "Biomechanics of Physical Rehabilitation",
+                        "PHSL3221": "Endocrine, Reproductive and Developmental Physiology",
+                        "BEIL0011": "Healthy Planning",
+                        "NEUR3221": "Neurophysiology",
+                        "HESC4571": "Research Internship B",
+                        "PHYS1121": "Physics 1A",
+                        "PHSL3211": "Cardiovascular Physiology and Pathophysiology",
+                        "PSYC1023": "Abnormal Psychology",
+                        "MATH1031": "Mathematics for Life Sciences",
+                        "PSYC1022": "The Psychology of Addiction",
+                        "ANAT3121": "Visceral Anatomy",
+                        "PSYC1024": "Clinical Perspectives on Anxiety, Mood and Stress"
+                    },
+                    "title": "Electives",
+                    "credits_to_complete": 6,
+                    "core": false
                 },
-                "Level 2 Core Courses": {
-                    "type": "core",
-                    "credits_to_complete": "48",
-                    "HESC2501": "Exercise Physiology",
-                    "PHSL2501": "Human Physiology A",
-                    "BIOC2181": "Fundamentals of Biochemistry",
-                    "PHSL2502": "Human Physiology B",
-                    "PATH2202": "Processes in Disease for Health and Exercise Science",
-                    "ANAT2451": "Functional Anatomy for Health and Exercise Science",
-                    "HESC2452": "Movement Assessment and Instruction",
-                    "HESC2451": "Biomechanics"
+                {
+                    "core": true,
+                    "title": "Level 2 Core Courses",
+                    "credits_to_complete": 48,
+                    "courses": {
+                        "HESC2501": "Exercise Physiology",
+                        "PHSL2501": "Human Physiology A",
+                        "BIOC2181": "Fundamentals of Biochemistry",
+                        "PHSL2502": "Human Physiology B",
+                        "PATH2202": "Processes in Disease for Health and Exercise Science",
+                        "ANAT2451": "Functional Anatomy for Health and Exercise Science",
+                        "HESC2452": "Movement Assessment and Instruction",
+                        "HESC2451": "Biomechanics"
+                    },
+                    "levels": [],
+                    "notes": "Students must take 48 UOC of the following courses."
                 }
-            }
+            ]
         }
     },
     "3956": {
         "title": "Advanced Mathematics (Honours)",
-        "code": 3956,
+        "code": "3956",
         "duration": 4,
         "UOC": 192,
         "faculty": "Faculty of Science",
@@ -817,16 +1047,53 @@
                     "MATHAH": "Applied Mathematics"
                 }
             },
-            "NonSpecialisationData": {
-                "Level 1 Core Course": {
-                    "type": "core",
+            "NonSpecialisationData": [
+                {
+                    "core": true,
+                    "title": "Level 1 Core Course",
                     "credits_to_complete": 6,
-                    "SCIF1131": "Introductory Skills for Science"
+                    "courses": {
+                        "SCIF1131": "Introductory Skills for Science"
+                    },
+                    "levels": [],
+                    "notes": "Students must take the following course."
                 },
-                "Science Electives": {
-                    "type": "elective",
-                    "credits_to_complete": 6,
-                    "from": [
+                {
+                    "courses": {
+                        "any Anatomy course": 1,
+                        "any Psychology course": 1,
+                        "any Data Science course": 1,
+                        "any Marine Science course": 1,
+                        "any Microbiology course": 1,
+                        "any Biochemistry course": 1,
+                        "any Food Technology course": 1,
+                        "any Chemistry course": 1,
+                        "any Medical Science course": 1,
+                        "any Mathematics course": 1,
+                        "any Computer Science course": 1,
+                        "any Materials Science and Engineering course": 1,
+                        "any Biotechnology & Biomolecular Sciences course": 1,
+                        "any Neuroscience course": 1,
+                        "any Climate Science course": 1,
+                        "any Biological, Earth & Environmental Science course": 1,
+                        "any Aviation course": 1,
+                        "any Physics course": 1,
+                        "any Pharmacology course": 1,
+                        "any Pathology course": 1,
+                        "any Faculty of Science course": 1,
+                        "any Geoscience course": 1,
+                        "any Optometry course": 1,
+                        "any Biotechnology course": 1,
+                        "any Vision Science course": 1,
+                        "any Biological Science course": 1,
+                        "any Physiology course": 1
+                    },
+                    "title": "Science Electives",
+                    "credits_to_complete": null,
+                    "core": false
+                },
+                {
+                    "courses": [
                         "any Anatomy course",
                         "any Psychology course",
                         "any Data Science course",
@@ -854,9 +1121,14 @@
                         "any Vision Science course",
                         "any Biological Science course",
                         "any Physiology course"
-                    ]
+                    ],
+                    "title": "Science Electives",
+                    "credits_to_complete": null,
+                    "core": false,
+                    "levels": [],
+                    "notes": "Students must take 'science' courses so that the major plus SCIF1131, plus Honours year plus 'science' courses total 144 units of credit."
                 }
-            }
+            ]
         }
     },
     "3789": {
@@ -866,6 +1138,7 @@
         "UOC": 192,
         "faculty": "Faculty of Engineering",
         "components": {
+            "GE": {},
             "SpecialisationData": {
                 "Minors": {
                     "GEOGH2": "Physical Geography",
@@ -927,36 +1200,74 @@
                     }
                 }
             },
-            "NonSpecialisationData": {
-                "Science Electives": {
-                    "type": "elective",
-                    "any Biotechnology course": 1,
-                    "any Climate Science course": 1,
-                    "any Pathology course": 1,
-                    "any Aviation course": 1,
-                    "any Materials Science and Engineering course": 1,
-                    "any Physics course": 1,
-                    "any Biological Science course": 1,
-                    "any Pharmacology course": 1,
-                    "any Chemistry course": 1,
-                    "any Optometry course": 1,
-                    "any Anatomy course": 1,
-                    "any Mathematics course": 1,
-                    "any Geoscience course": 1,
-                    "any Faculty of Science course": 1,
-                    "any Vision Science course": 1,
-                    "any Physiology course": 1,
-                    "any Biotechnology & Biomolecular Sciences course": 1,
-                    "any Medical Science course": 1,
-                    "any Marine Science course": 1,
-                    "any Biochemistry course": 1,
-                    "any Microbiology course": 1,
-                    "any Food Technology course": 1,
-                    "any Biological, Earth & Environmental Science course": 1,
-                    "any Neuroscience course": 1,
-                    "any Psychology course": 1
+            "NonSpecialisationData": [
+                {
+                    "courses": {
+                        "any Biotechnology course": 1,
+                        "any Climate Science course": 1,
+                        "any Pathology course": 1,
+                        "any Aviation course": 1,
+                        "any Materials Science and Engineering course": 1,
+                        "any Physics course": 1,
+                        "any Biological Science course": 1,
+                        "any Pharmacology course": 1,
+                        "any Chemistry course": 1,
+                        "any Optometry course": 1,
+                        "any Anatomy course": 1,
+                        "any Mathematics course": 1,
+                        "any Geoscience course": 1,
+                        "any Faculty of Science course": 1,
+                        "any Vision Science course": 1,
+                        "any Physiology course": 1,
+                        "any Biotechnology & Biomolecular Sciences course": 1,
+                        "any Medical Science course": 1,
+                        "any Marine Science course": 1,
+                        "any Biochemistry course": 1,
+                        "any Microbiology course": 1,
+                        "any Food Technology course": 1,
+                        "any Biological, Earth & Environmental Science course": 1,
+                        "any Neuroscience course": 1,
+                        "any Psychology course": 1
+                    },
+                    "title": "Science Electives",
+                    "credits_to_complete": null,
+                    "core": false
+                },
+                {
+                    "courses": [
+                        "any Biotechnology course",
+                        "any Climate Science course",
+                        "any Pathology course",
+                        "any Aviation course",
+                        "any Materials Science and Engineering course",
+                        "any Physics course",
+                        "any Biological Science course",
+                        "any Pharmacology course",
+                        "any Chemistry course",
+                        "any Optometry course",
+                        "any Anatomy course",
+                        "any Mathematics course",
+                        "any Geoscience course",
+                        "any Faculty of Science course",
+                        "any Vision Science course",
+                        "any Physiology course",
+                        "any Biotechnology & Biomolecular Sciences course",
+                        "any Medical Science course",
+                        "any Marine Science course",
+                        "any Biochemistry course",
+                        "any Microbiology course",
+                        "any Food Technology course",
+                        "any Biological, Earth & Environmental Science course",
+                        "any Neuroscience course",
+                        "any Psychology course"
+                    ],
+                    "title": "Science Electives",
+                    "credits_to_complete": null,
+                    "core": false,
+                    "levels": [],
+                    "notes": "Students need to complete 96 UOC to meet the core requirements for the Bachelor of Science. If your choice of specialisation(s) requires less than 96 UOC you are required to complete additional Science elective courses from the following list to meet the 96 UOC requirement."
                 }
-            }
+            ]
         }
     },
     "3784": {
@@ -966,6 +1277,7 @@
         "UOC": 192,
         "faculty": "UNSW Business School",
         "components": {
+            "GE": {},
             "SpecialisationData": {
                 "Majors": {
                     "Computer Science": {
@@ -1008,55 +1320,75 @@
                     "IBUSA2": "International Business"
                 }
             },
-            "NonSpecialisationData": {
-                "Prescribed Work Integrated Learning (WIL) Course": {
-                    "type": "elective",
-                    "credits_to_complete": "6",
-                    "COMM3202": "Industry Experience Placement 2",
-                    "COMM3030": "Social Entrepreneurship Practicum",
-                    "COMM2244": "Future of Work Project",
-                    "COMM3020": "Global Business Practicum",
-                    "COMM3101": "Industry Experience Placement 1",
-                    "CDEV3000": "Practice of Work",
-                    "COMM2233": "Industry Consulting Project",
-                    "TABL3033": "UNSW Tax and Business Advisory Clinic",
-                    "COMM2222": "Industry Experience Program"
+            "NonSpecialisationData": [
+                {
+                    "courses": {
+                        "COMM3202": "Industry Experience Placement 2",
+                        "COMM3030": "Social Entrepreneurship Practicum",
+                        "COMM2244": "Future of Work Project",
+                        "COMM3020": "Global Business Practicum",
+                        "COMM3101": "Industry Experience Placement 1",
+                        "CDEV3000": "Practice of Work",
+                        "COMM2233": "Industry Consulting Project",
+                        "TABL3033": "UNSW Tax and Business Advisory Clinic",
+                        "COMM2222": "Industry Experience Program"
+                    },
+                    "title": "Prescribed Work Integrated Learning (WIL) Course",
+                    "credits_to_complete": 6,
+                    "core": false
                 },
-                "Integrated First Year Courses": {
-                    "type": "core",
-                    "credits_to_complete": "48",
-                    "COMM1180": "Value Creation",
-                    "COMM1140": "Financial Management",
-                    "COMM1190": "Data, Insights and Decisions",
-                    "COMM1170": "Organisational Resources",
-                    "COMM1150": "Global Business Environments",
-                    "COMM1120": "Collaboration and Innovation in Business",
-                    "COMM1100": "Business Decision Making",
-                    "COMM1110": "Evidence-Based Problem Solving"
+                {
+                    "core": true,
+                    "title": "Integrated First Year Courses",
+                    "credits_to_complete": 48,
+                    "courses": {
+                        "COMM1180": "Value Creation",
+                        "COMM1140": "Financial Management",
+                        "COMM1190": "Data, Insights and Decisions",
+                        "COMM1170": "Organisational Resources",
+                        "COMM1150": "Global Business Environments",
+                        "COMM1120": "Collaboration and Innovation in Business",
+                        "COMM1100": "Business Decision Making",
+                        "COMM1110": "Evidence-Based Problem Solving"
+                    },
+                    "levels": [],
+                    "notes": "Students must take 48 UOC of the following courses."
                 },
-                "Final Year Synthesis": {
-                    "type": "core",
-                    "COMM3030": "Social Entrepreneurship Practicum",
-                    "TABL3033": "UNSW Tax and Business Advisory Clinic",
-                    "COMM3900": "Capstone Project",
-                    "COMM3090": "Synthesis of Learning Experience",
-                    "COMM2244": "Future of Work Project",
-                    "COMM2233": "Industry Consulting Project",
-                    "COMM3020": "Global Business Practicum",
-                    "ACCT3583": "Management Accounting 2",
-                    "COMM3501": "Quantitative Business Analytics",
-                    "ACTL3192": "Retirement Saving and Spending Over the Lifecycle",
-                    "INFS3020": "International Information Systems and Technology Practicum",
-                    "MGMT3004": "Solving Complex Strategy and Policy Problems",
-                    "ECON3000": "Evidence-based Intervention Design and Evaluation"
+                {
+                    "core": true,
+                    "title": "Final Year Synthesis",
+                    "credits_to_complete": null,
+                    "courses": {
+                        "COMM3030": "Social Entrepreneurship Practicum",
+                        "TABL3033": "UNSW Tax and Business Advisory Clinic",
+                        "COMM3900": "Capstone Project",
+                        "COMM3090": "Synthesis of Learning Experience",
+                        "COMM2244": "Future of Work Project",
+                        "COMM2233": "Industry Consulting Project",
+                        "COMM3020": "Global Business Practicum",
+                        "ACCT3583": "Management Accounting 2",
+                        "COMM3501": "Quantitative Business Analytics",
+                        "ACTL3192": "Retirement Saving and Spending Over the Lifecycle",
+                        "INFS3020": "International Information Systems and Technology Practicum",
+                        "MGMT3004": "Solving Complex Strategy and Policy Problems",
+                        "ECON3000": "Evidence-based Intervention Design and Evaluation"
+                    },
+                    "levels": [],
+                    "notes": "Students must complete either a 6 UOC Synthesis of Learning Course, or a 0 UOC Synthesis Experience.<br /><br />Students who complete a Synthesis course that is also a Work Integrated Learning course within a major, will meet a major elective, WIL and Synthesis requirement.<br /><br />Students must complete their Final Year Synthesis course within their final year of their Bachelor of Commerce program. That is, within 48 UOC or less remaining in their BCom program."
                 },
-                "myBCom": {
-                    "type": "core",
-                    "COMM3999": "myBCom Graduation Portfolio",
-                    "COMM0999": "myBCom Blueprint",
-                    "COMM1999": "myBCom First Year Portfolio"
+                {
+                    "core": true,
+                    "title": "myBCom",
+                    "credits_to_complete": null,
+                    "courses": {
+                        "COMM3999": "myBCom Graduation Portfolio",
+                        "COMM0999": "myBCom Blueprint",
+                        "COMM1999": "myBCom First Year Portfolio"
+                    },
+                    "levels": [],
+                    "notes": "Students need to complete three non-credit bearing myBCom professional development elements. COMM0999 is recommended to be enrolled in the first term of study, COMM1999 upon completion of the integrated first year courses and COMM3999 in the final term of study. Students will engage in course Moodle activities as well as the myBCom platform (https://mybcom.unsw.edu.au/) to complete these elements."
                 }
-            }
+            ]
         }
     },
     "3785": {
@@ -1066,6 +1398,7 @@
         "UOC": 240,
         "faculty": "Faculty of Engineering",
         "components": {
+            "GE": {},
             "SpecialisationData": {
                 "Majors": {
                     "Computer Science": {
@@ -1100,7 +1433,7 @@
                     "CEICDH": "Chemical Product Engineering"
                 }
             },
-            "NonSpecialisationData": {}
+            "NonSpecialisationData": []
         }
     }
 }
