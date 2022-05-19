@@ -78,7 +78,7 @@ class CoreqCoursesCondition(Condition):
     def set_logic(self, logic: Logic):
         self.logic = logic
 
-    def validate(self, user: User): #-> tuple[bool, list[str]]:
+    def validate(self, user: User) -> tuple[bool, list[str]]:
         """ Returns True if the user is taking these courses in the same term """
         match self.logic:
             case Logic.AND:
