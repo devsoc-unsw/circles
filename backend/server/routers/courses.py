@@ -310,8 +310,10 @@ def getLegacyCourses(year, term):
     """
     Gets all the courses that were offered in that term for that year
     """
-    result = {c['code']: c['title']
-              for c in archivesDB[year].find() if term in c['terms']}
+    result = {
+        c['code']: c['title']
+        for c in archivesDB[year].find() if term in c['terms']
+    }
 
     if not result:
         raise HTTPException(
