@@ -220,7 +220,8 @@ def regex_search(search_string: str):
     if not courses:
         for year in sorted(ARCHIVED_YEARS, reverse=True):
             courses = list(archivesDB[str(year)].find(
-                {"code": {"$regex": pat}}))
+                {"code": {"$regex": pat}}
+            ))
             if courses:
                 break
 
