@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { Typography , PageHeader , Input , Button , Modal } from "antd";
+import { Typography , PageHeader , Input , Button , Modal , message } from "antd";
 
 import "./index.less";
 
@@ -45,9 +45,9 @@ const EditMarks = ({ courseCode, courseTitle, handleCancelEditMark , inputBuffer
       </div>
       {/*  */}
     </div>
-    <Modal>
+    {/* <Modal>
       BAD INPUT MATE@!!! // TODO:
-    </Modal>
+    </Modal> */}
     </>
   );
 };

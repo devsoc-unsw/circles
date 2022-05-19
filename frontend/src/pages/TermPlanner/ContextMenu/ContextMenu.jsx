@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 import React, { useState } from "react";
-import { Modal } from "antd";
+import { Modal , message } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { Menu, Item, theme } from "react-contexify";
 import "react-contexify/dist/ReactContexify.css";
@@ -59,22 +59,21 @@ const ContextMenu = ({ code, plannedFor }) => {
   const [markInputBuf, setMarkInputBuf] = useState(
     useSelector((state) => state.planner.courses[code].mark));
 
+  // const dispatch
+
   const handleConfirmEditMark = (e) => {
     // Validate Input // Create warning if input is invalid
     if (
       (isNaN(markInputBuf) && !validLetterGrades.includes(markInputBuf))
       || (parseInt(markInputBuf) < 0 || parseInt(markInputBuf) > 100)
     ) {
-      // Error
-      return;
+      return message.error("lol no");
     }
-
-
     
-    // Dispatch and reset state
-    
+    // TODO: Dispatch and reset state
     setMarkInput("");
     setIsEditMarkVisible(false);
+    return message.success("Mark Updated")
   }
 
   const handleCancelEditMark = () => {

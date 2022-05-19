@@ -10,8 +10,8 @@ const Marks = ({ courseCode }) => {
 
   // TODO: This Component Should now take in courseCode instead of 
   // the mark - pick up the courseMark from the state
-  const mark = useSelector((state) => state);
-  console.log("mark:", mark);
+  // const mark = useSelector((state) => state);
+  // console.log("mark:", mark);
 
   const { Text } = Typography;
 
