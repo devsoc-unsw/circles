@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { configureStore } from "@reduxjs/toolkit";
 import coursesReducer from "./reducers/coursesSlice";
 import courseTabsReducer from "./reducers/courseTabsSlice";

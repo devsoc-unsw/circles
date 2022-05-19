@@ -5,7 +5,7 @@ import { Typography , PageHeader , Input , Button , Modal , message } from "antd
 
 import "./index.less";
 
-const EditMarks = ({ courseCode, courseTitle, handleCancelEditMark , inputBuffer, setInputBuffer }) => {
+const EditMarks = ({ courseCode, courseTitle, handleKeyDown, inputBuffer, setInputBuffer }) => {
 
   const state = useSelector((state) => state);
   console.log("state:", state);
@@ -25,6 +25,7 @@ const EditMarks = ({ courseCode, courseTitle, handleCancelEditMark , inputBuffer
     // console.log(e.target.value);  // TODO: remove
     setInputBuffer(e.target.value);
     console.log("input Buffer: ", inputBuffer)
+    // console.log("type", e.type);
   }
 
   return (
@@ -34,16 +35,16 @@ const EditMarks = ({ courseCode, courseTitle, handleCancelEditMark , inputBuffer
       </div>
       <Input
         onChange={handleInputChange}
+        onKeyDown={handleKeyDown}
         placeholder="Enter Mark"
       />
       <div className="letter-grade-container">
-        <Button onClick={handleLetterGrade} classname="letter-grade-button">FL</Button>
-        <Button onClick={handleLetterGrade} classname="letter-grade-button">PS</Button>
-        <Button onClick={handleLetterGrade} classname="letter-grade-button">CR</Button>
-        <Button onClick={handleLetterGrade} classname="letter-grade-button">DN</Button>
-        <Button onClick={handleLetterGrade} classname="letter-grade-button">HD</Button>
+        <Button onClick={handleLetterGrade} className="letter-grade-button">FL</Button>
+        <Button onClick={handleLetterGrade} className="letter-grade-button">PS</Button>
+        <Button onClick={handleLetterGrade} className="letter-grade-button">CR</Button>
+        <Button onClick={handleLetterGrade} className="letter-grade-button">DN</Button>
+        <Button onClick={handleLetterGrade} className="letter-grade-button">HD</Button>
       </div>
-      {/*  */}
     </div>
     {/* <Modal>
       BAD INPUT MATE@!!! // TODO:

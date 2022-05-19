@@ -60,14 +60,20 @@ const ContextMenu = ({ code, plannedFor }) => {
   const [markInputBuf, setMarkInputBuf] = useState(
     useSelector((state) => state.planner.courses[code].mark));
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleConfirmEditMark();
+    }
+  }
 
-  const handleConfirmEditMark = (e) => {
+  const handleConfirmEditMark = () => {
     // Validate Input // Create warning if input is invalid
+    
     if (
       (isNaN(markInputBuf) && !validLetterGrades.includes(markInputBuf))
       || (parseInt(markInputBuf) < 0 || parseInt(markInputBuf) > 100)
     ) {
-      return message.error("lol no");
+      return message.error("Could not update mark. Please enter a valid mark or letter grade");
     }
     
     // TODO: Dispatch and reset state
@@ -112,7 +118,7 @@ const ContextMenu = ({ code, plannedFor }) => {
         <EditMarks
           courseCode="COMP1511"
           courseTitle="Introduction to testing"
-          handleCancelEditMark={() => alert("implement cancel pls")}
+          handleKeyDown={handleKeyDown}
           inputBuffer={markInputBuf}
           setInputBuffer={setMarkInputBuf}
         />

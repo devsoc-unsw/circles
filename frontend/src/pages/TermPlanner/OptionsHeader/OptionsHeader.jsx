@@ -24,11 +24,6 @@ const OptionsHeader = ({
   const { years } = useSelector((state) => state.planner);
   const dispatch = useDispatch();
 
-  const toggleMarksShown = (e) => {
-    e.stopPropagation();
-    setShowMarks(!showMarks);
-    console.log("showMarks", showMarks);
-  }
 
   return (
     <div className="options-header">
