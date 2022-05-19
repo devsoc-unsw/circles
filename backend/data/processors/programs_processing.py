@@ -14,16 +14,6 @@ Step in the data's journey:
 import re
 from collections import OrderedDict
 
-"""
-TODO: Get rid of this before merging
-Joels notes
-- Science (3970) is a little weird because underneath the disciplinary component it has 'science electives'
-- Fix mix of camel/snake case
-- What's the best way to deal with cases like Biotechnology (Honours) (3053) where under Disciplinary Component/Level 1 core course there's the 'one of the following'? Seperate requirements?
-- Commerce (3502) has some courses that are 0UOC but are core?
-- Do we actually need to store free elective stuff? Some programs don't even have it, so the algorithm is going to have to deal with not having access to it anyways.
-"""
-
 
 from data.utility.data_helpers import read_data, write_data
 
@@ -88,7 +78,7 @@ def addComponentData(formatted, programData):
     OrderedDict(sorted(programData["components"].items(), key=lambda t: t[0]))
 
 def recAddComponentData(programData, item):
-    if any(key not in item.keys() for key in ("vertical_grouping", "title")):
+    if any(key not in item for key in ("vertical_grouping", "title")):
         return
 
     if item["vertical_grouping"]["value"] == "GE":
@@ -123,19 +113,18 @@ def recAddComponentData(programData, item):
 def addGEData(programData, item):
     # Double check we haven't somehow already added the GE stuff already
     GE = programData["components"]["GE"]
-    if "credits_to_complete" in GE.keys():
+    if "credits_to_complete" in GE:
         raise ValueError("Already added GE credits to this program")
+
     GE["credits_to_complete"] = getCredits(item)
 
 
 def getCredits(item):
-    if item["credit_points"] == "":
-        return None
-
-    try:
-        return int(item["credit_points"])
-    except ValueError:
-        return int(item["credit_points_max"])
+    if item["credit_points"] != "":
+        try:
+            return int(item["credit_points"])
+        except ValueError:
+            return int(item["credit_points_max"])
 
 
 def addMinorData(programData, item):
@@ -143,121 +132,126 @@ def addMinorData(programData, item):
     minorData = {}
     for minor in item["relationship"]:
         # If item is a minor, add it to list
-        if isMinor(minor):
+        if minor["academic_item_type"] and minor["academic_item_type"]["value"] == "minor":
             code = minor["academic_item_code"]
             minorData[code] = minor["academic_item_name"]
+
     # Append to minor data
-    programData["components"]["SpecialisationData"]["Minors"] = minorData
+    SpecialisationData = programData["components"]["SpecialisationData"]
+    if "Minors" not in SpecialisationData:
+        SpecialisationData["Minors"] = {}
+
+    programName = findProgramName(programData, item)
+    SpecialisationData["Minors"][programName] = minorData
 
 
-def isMinor(minor):
-    return minor["academic_item_type"] and minor["academic_item_type"]["value"] == "minor"
-
-
+# TODO: This function doesn't work properly. Must make it more robust (see my attempt below)
 def findProgramName(programData, item):
-    programName = item["title"]
-    programNames = programData["title"].split("/")
-    for programName in programNames:
+    # Split the title into it's single degrees and get rid of white space
+    rawProgramNames = programData["title"].split("/")
+    strippedProgramNames = list(map(lambda s: s.strip(), rawProgramNames))
+
+    # Check if we even need to bother searching
+    if len(strippedProgramNames) == 1:
+        return strippedProgramNames[0]
+
+    # Sort by longest length first
+    sortedProgramNames = sorted(strippedProgramNames, key = lambda s: -len(s))
+
+    # Print a warning if one of the strings is a substring of the other
+    if sortedProgramNames[0] in sortedProgramNames[1] or sortedProgramNames[1] in sortedProgramNames[0]:
+        print(f"Warning: One of {sortedProgramNames} is a substring of the other for program code {programData['code']}")
+
+    # Search
+    for programName in sortedProgramNames:
         if programName in item["title"]:
-            return programName.strip()
+            return programName
         for container in item["container"]:
             if programName in container["title"]:
-                return programName.strip()
-    return programName.strip()
+                return programName
+
+    # Couldn't find a match :(
+    print(f"Warning: Couldn't find any of names = {sortedProgramNames} for program code {programData['code']}")
+
+
+def addSpecialisationData(programData, field, container, programName):
+    SpecialisationData = programData["components"]["SpecialisationData"]
+    data = {}
+    for specialisation in container["relationship"]:
+        code = specialisation["academic_item_code"]
+        data[code] = specialisation["academic_item_name"]
+
+    SpecialisationData.setdefault(field, {}).update({programName: data})
+
 
 # TODO: Clean this function
 def addDisciplineData(programData, item):
+    if "container" not in item:
+        return
+
     components = programData["components"]
+
     components.setdefault("SpecialisationData", {})
     components.setdefault("NonSpecialisationData", [])
 
-    SpecialisationData = components["SpecialisationData"]
-    # Initialise NonSpecialisation Data (explained in wiki)
     NonSpecialisationData = components["NonSpecialisationData"]
 
     programName = findProgramName(programData, item)
-    if "container" in item and item["container"] != []:
-        # Loop through items in disciplinary component
-        for container in item["container"]:
-            # If item is a major, loop through and add data to major
-            if container["vertical_grouping"]["value"] == "undergrad_major":
-                majorData = {}
-                for major in container["relationship"]:
-                    if (
-                        major["academic_item_type"]["value"] == "major"
-                        or major["academic_item_type"]["value"] == "honours"
-                    ):
-                        code = major["academic_item_code"]
-                        majorData[code] = major["academic_item_name"]
 
-                SpecialisationData.setdefault("Majors", {}).update({programName: majorData})
+    # Loop through items in disciplinary component
+    for container in item["container"]:
+        if container["vertical_grouping"]["value"] == "undergrad_major":
+            addSpecialisationData(programData, "Majors", container, programName)
+        if container["vertical_grouping"]["value"] == "honours":
+            addSpecialisationData(programData, "Honours", container, programName)
+        if container["vertical_grouping"]["value"] == "undergrad_minor":
+            addSpecialisationData(programData, "Minors", container, programName)
 
-            # If item is honours loop through and add data to honours
-            if container["vertical_grouping"]["value"] == "honours":
-                honoursData = {}
-                for major in container["relationship"]:
-                    if (
-                        major["academic_item_type"]["value"] == "major"
-                        or major["academic_item_type"]["value"] == "honours"
-                    ):
-                        code = major["academic_item_code"]
-                        honoursData[code] = major["academic_item_name"]
-                SpecialisationData.setdefault("Honours", {}).update(honoursData)
+        # If item is a prescribed elective, loop through and add data to nonspecialisationdata
+        if container["vertical_grouping"]["value"] == "PE":
+            PE = {
+                "courses": {},
+                "title": container["title"],
+                "credits_to_complete": getCredits(container),
+                "core": False,
+            }
 
-            # If item is minor loop through and add data to minors
-            if container["vertical_grouping"]["value"] == "undergrad_minor":
-                minorData = {}
-                for minor in container["relationship"]:
-                    if minor["academic_item_type"]["value"] == "minor":
-                        code = minor["academic_item_code"]
-                        minorData[code] = minor["academic_item_name"]
-                SpecialisationData.setdefault("Minors", {}).update(minorData)
+            # Figure out if there are sub relations
+            if container["relationship"] != []:
+                for course in container["relationship"]:
+                    code = course["academic_item_code"]
+                    PE["courses"][code] = course["academic_item_name"]
+            else:
+                for course in container["dynamic_relationship"]:
+                    PE["courses"][course["description"]] = 1
 
-            # If item is a prescribed elective, loop through and add data to nonspecialisationdata
-            if container["vertical_grouping"]["value"] == "PE":
-                PE = {
-                    "courses": {},
-                    "title": container["title"],
-                    "credits_to_complete": getCredits(container),
-                    "core": False,
-                }
+            # Append this new requirement
+            NonSpecialisationData.append(PE) # TODO: [container["title"]]
 
-                # Figure out if there are sub relations
-                if container["relationship"] != []:
-                    for course in container["relationship"]:
-                        code = course["academic_item_code"]
-                        PE["courses"][code] = course["academic_item_name"]
-                else:
-                    for course in container["dynamic_relationship"]:
-                        PE["courses"][course["description"]] = 1
+        # If item is a core course
+        if container["vertical_grouping"]["value"] == "CC":
+            CC = {
+                "core": True,
+                "title": container["title"],
+                "credits_to_complete": getCredits(container),
+                "courses": {},
+                "levels": [], # TODO
+                "notes": container["description"],
+            }
 
-                # Append this new requirement
-                NonSpecialisationData.append(PE) # TODO: [container["title"]]
-
-            # If item is a core course
-            if container["vertical_grouping"]["value"] == "CC":
-                CC = {
-                    "core": True,
-                    "title": container["title"],
-                    "credits_to_complete": getCredits(container),
-                    "courses": {},
-                    "levels": [], # TODO
-                    "notes": container["description"],
-                }
-
-                # If there are multiple courses
-                if container["container"] != []:
-                    # Loop through and find all courses and add them
-                    for item in container["container"]:
-                        for course in item["relationship"]:
-                            code = course["academic_item_code"]
-                            CC["courses"][code] = course["academic_item_name"]
-                else:
-                    for course in container["relationship"]:
+            # If there are multiple courses
+            if container["container"] != []:
+                # Loop through and find all courses and add them
+                for item in container["container"]:
+                    for course in item["relationship"]:
                         code = course["academic_item_code"]
                         CC["courses"][code] = course["academic_item_name"]
+            else:
+                for course in container["relationship"]:
+                    code = course["academic_item_code"]
+                    CC["courses"][code] = course["academic_item_name"]
 
-                NonSpecialisationData.append(CC)
+            NonSpecialisationData.append(CC)
 
 
 def initialise_program(program):

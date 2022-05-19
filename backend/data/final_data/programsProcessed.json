@@ -11,12 +11,14 @@
             },
             "SpecialisationData": {
                 "Minors": {
-                    "INFSA2": "Information Systems",
-                    "FINSA2": "Finance",
-                    "ACCTA2": "Accounting",
-                    "PSYCM2": "Psychology",
-                    "MATHC2": "Mathematics",
-                    "MARKA2": "Marketing"
+                    "Computer Science": {
+                        "INFSA2": "Information Systems",
+                        "FINSA2": "Finance",
+                        "ACCTA2": "Accounting",
+                        "PSYCM2": "Psychology",
+                        "MATHC2": "Mathematics",
+                        "MARKA2": "Marketing"
+                    }
                 },
                 "Majors": {
                     "Computer Science": {
@@ -46,30 +48,34 @@
             },
             "SpecialisationData": {
                 "Minors": {
-                    "ENGGA2": "Humanitarian Engineering"
+                    "Engineering (Honours)": {
+                        "ENGGA2": "Humanitarian Engineering"
+                    }
                 },
                 "Honours": {
-                    "CVENBH": "Environmental Engineering",
-                    "NAVLAH": "Naval Architecture",
-                    "SOLAAH": "Photovoltaics and Solar Energy",
-                    "MTRNAH": "Mechatronic Engineering",
-                    "CEICAH": "Chemical Engineering",
-                    "GMATEH": "Geospatial Engineering",
-                    "MANFBH": "Mechanical and Manufacturing Engineering",
-                    "ELECAH": "Electrical Engineering",
-                    "CEICDH": "Chemical Product Engineering",
-                    "SOLABH": "Renewable Energy Engineering",
-                    "ELECCH": "Quantum Engineering",
-                    "TELEAH": "Telecommunications",
-                    "AEROAH": "Aerospace Engineering",
-                    "PETRAH": "Petroleum Engineering",
-                    "MECHAH": "Mechanical Engineering",
-                    "MINEAH": "Mining Engineering",
-                    "GMATDH": "Surveying",
-                    "COMPBH": "Computer Engineering",
-                    "CVENAH": "Civil Engineering",
-                    "BINFAH": "Bioinformatics Engineering",
-                    "SENGAH": "Software Engineering"
+                    "Engineering (Honours)": {
+                        "CVENBH": "Environmental Engineering",
+                        "NAVLAH": "Naval Architecture",
+                        "SOLAAH": "Photovoltaics and Solar Energy",
+                        "MTRNAH": "Mechatronic Engineering",
+                        "CEICAH": "Chemical Engineering",
+                        "GMATEH": "Geospatial Engineering",
+                        "MANFBH": "Mechanical and Manufacturing Engineering",
+                        "ELECAH": "Electrical Engineering",
+                        "CEICDH": "Chemical Product Engineering",
+                        "SOLABH": "Renewable Energy Engineering",
+                        "ELECCH": "Quantum Engineering",
+                        "TELEAH": "Telecommunications",
+                        "AEROAH": "Aerospace Engineering",
+                        "PETRAH": "Petroleum Engineering",
+                        "MECHAH": "Mechanical Engineering",
+                        "MINEAH": "Mining Engineering",
+                        "GMATDH": "Surveying",
+                        "COMPBH": "Computer Engineering",
+                        "CVENAH": "Civil Engineering",
+                        "BINFAH": "Bioinformatics Engineering",
+                        "SENGAH": "Software Engineering"
+                    }
                 }
             },
             "NonSpecialisationData": []
@@ -117,24 +123,26 @@
                     }
                 },
                 "Minors": {
-                    "MICRJ2": "Immunology",
-                    "PSYCM2": "Psychology",
-                    "CHEMD2": "Chemistry",
-                    "BIOSD2": "Biology",
-                    "CLIMA2": "Climate Science",
-                    "GEOLF2": "Geology",
-                    "PATHB2": "Pathology",
-                    "PHYSC2": "Physics",
-                    "MSCIH2": "Marine Science",
-                    "PHARB2": "Pharmacology",
-                    "BIOCD2": "Molecular Biology",
-                    "GEOGH2": "Physical Geography",
-                    "PHSLB2": "Physiology",
-                    "MATHC2": "Mathematics",
-                    "ARCYB2": "Palaeosciences",
-                    "VISNB2": "Vision Science",
-                    "MATHD2": "Statistics",
-                    "ANATB2": "Anatomy"
+                    "Science": {
+                        "MICRJ2": "Immunology",
+                        "PSYCM2": "Psychology",
+                        "CHEMD2": "Chemistry",
+                        "BIOSD2": "Biology",
+                        "CLIMA2": "Climate Science",
+                        "GEOLF2": "Geology",
+                        "PATHB2": "Pathology",
+                        "PHYSC2": "Physics",
+                        "MSCIH2": "Marine Science",
+                        "PHARB2": "Pharmacology",
+                        "BIOCD2": "Molecular Biology",
+                        "GEOGH2": "Physical Geography",
+                        "PHSLB2": "Physiology",
+                        "MATHC2": "Mathematics",
+                        "ARCYB2": "Palaeosciences",
+                        "VISNB2": "Vision Science",
+                        "MATHD2": "Statistics",
+                        "ANATB2": "Anatomy"
+                    }
                 }
             },
             "NonSpecialisationData": [
@@ -257,30 +265,32 @@
             },
             "SpecialisationData": {
                 "Minors": {
-                    "ECONO2": "Behavioural Economics",
-                    "JAPNF2": "Japanese Studies",
-                    "SPANI2": "Spanish Studies",
-                    "FINSR2": "Financial Technology",
-                    "KOREF2": "Korean Studies",
-                    "TABLC2": "Taxation",
-                    "CHINE2": "Chinese Studies",
-                    "FRENG2": "Advanced French Studies",
-                    "MARKA2": "Marketing",
-                    "COMMJ2": "Business Analytics",
-                    "IBUSA2": "International Business",
-                    "MGMTH2": "Human Resource Management",
-                    "FINSA2": "Finance",
-                    "JAPNG2": "Advanced Japanese Studies",
-                    "TABLA2": "Business Law",
-                    "ACCTA2": "Accounting",
-                    "FRENF2": "French Studies",
-                    "KOREG2": "Advanced Korean Studies",
-                    "CHINF2": "Advanced Chinese Studies",
-                    "GERSF2": "German Studies",
-                    "MGMTA2": "Management",
-                    "ECONF2": "Business Economics",
-                    "INFSA2": "Information Systems",
-                    "MGMTJ2": "Innovation, Strategy and Entrepreneurship"
+                    "Commerce": {
+                        "ECONO2": "Behavioural Economics",
+                        "JAPNF2": "Japanese Studies",
+                        "SPANI2": "Spanish Studies",
+                        "FINSR2": "Financial Technology",
+                        "KOREF2": "Korean Studies",
+                        "TABLC2": "Taxation",
+                        "CHINE2": "Chinese Studies",
+                        "FRENG2": "Advanced French Studies",
+                        "MARKA2": "Marketing",
+                        "COMMJ2": "Business Analytics",
+                        "IBUSA2": "International Business",
+                        "MGMTH2": "Human Resource Management",
+                        "FINSA2": "Finance",
+                        "JAPNG2": "Advanced Japanese Studies",
+                        "TABLA2": "Business Law",
+                        "ACCTA2": "Accounting",
+                        "FRENF2": "French Studies",
+                        "KOREG2": "Advanced Korean Studies",
+                        "CHINF2": "Advanced Chinese Studies",
+                        "GERSF2": "German Studies",
+                        "MGMTA2": "Management",
+                        "ECONF2": "Business Economics",
+                        "INFSA2": "Information Systems",
+                        "MGMTJ2": "Innovation, Strategy and Entrepreneurship"
+                    }
                 },
                 "Majors": {
                     "Commerce": {
@@ -1042,9 +1052,11 @@
                     }
                 },
                 "Honours": {
-                    "MATHTH": "Statistics",
-                    "MATHPH": "Pure Mathematics",
-                    "MATHAH": "Applied Mathematics"
+                    "Advanced Mathematics (Honours)": {
+                        "MATHTH": "Statistics",
+                        "MATHPH": "Pure Mathematics",
+                        "MATHAH": "Applied Mathematics"
+                    }
                 }
             },
             "NonSpecialisationData": [
@@ -1141,24 +1153,46 @@
             "GE": {},
             "SpecialisationData": {
                 "Minors": {
-                    "GEOGH2": "Physical Geography",
-                    "GEOLF2": "Geology",
-                    "ANATB2": "Anatomy",
-                    "PHARB2": "Pharmacology",
-                    "CLIMA2": "Climate Science",
-                    "ARCYB2": "Palaeosciences",
-                    "MATHD2": "Statistics",
-                    "MSCIH2": "Marine Science",
-                    "BIOSD2": "Biology",
-                    "PHSLB2": "Physiology",
-                    "PATHB2": "Pathology",
-                    "MATHC2": "Mathematics",
-                    "PHYSC2": "Physics",
-                    "MICRJ2": "Immunology",
-                    "VISNB2": "Vision Science",
-                    "PSYCM2": "Psychology",
-                    "BIOCD2": "Molecular Biology",
-                    "CHEMD2": "Chemistry"
+                    "Science": {
+                        "GEOGH2": "Physical Geography",
+                        "GEOLF2": "Geology",
+                        "ANATB2": "Anatomy",
+                        "PHARB2": "Pharmacology",
+                        "CLIMA2": "Climate Science",
+                        "ARCYB2": "Palaeosciences",
+                        "MATHD2": "Statistics",
+                        "MSCIH2": "Marine Science",
+                        "BIOSD2": "Biology",
+                        "PHSLB2": "Physiology",
+                        "PATHB2": "Pathology",
+                        "MATHC2": "Mathematics",
+                        "PHYSC2": "Physics",
+                        "MICRJ2": "Immunology",
+                        "VISNB2": "Vision Science",
+                        "PSYCM2": "Psychology",
+                        "BIOCD2": "Molecular Biology",
+                        "CHEMD2": "Chemistry"
+                    },
+                    "null": {
+                        "GEOGH2": "Physical Geography",
+                        "GEOLF2": "Geology",
+                        "ANATB2": "Anatomy",
+                        "PHARB2": "Pharmacology",
+                        "CLIMA2": "Climate Science",
+                        "ARCYB2": "Palaeosciences",
+                        "MATHD2": "Statistics",
+                        "MSCIH2": "Marine Science",
+                        "BIOSD2": "Biology",
+                        "PHSLB2": "Physiology",
+                        "PATHB2": "Pathology",
+                        "MATHC2": "Mathematics",
+                        "PHYSC2": "Physics",
+                        "MICRJ2": "Immunology",
+                        "VISNB2": "Vision Science",
+                        "PSYCM2": "Psychology",
+                        "BIOCD2": "Molecular Biology",
+                        "CHEMD2": "Chemistry"
+                    }
                 },
                 "Majors": {
                     "Science": {
@@ -1280,7 +1314,7 @@
             "GE": {},
             "SpecialisationData": {
                 "Majors": {
-                    "Computer Science": {
+                    "null": {
                         "COMPJ1": "Computer Science (Programming Languages)",
                         "COMPY1": "Computer Science (Security Engineering)",
                         "COMPI1": "Computer Science (Artificial Intelligence)",
@@ -1306,18 +1340,34 @@
                     }
                 },
                 "Minors": {
-                    "MARKA2": "Marketing",
-                    "ACCTA2": "Accounting",
-                    "FINSA2": "Finance",
-                    "MGMTA2": "Management",
-                    "MGMTH2": "Human Resource Management",
-                    "TABLC2": "Taxation",
-                    "COMMJ2": "Business Analytics",
-                    "INFSA2": "Information Systems",
-                    "ECONF2": "Business Economics",
-                    "TABLA2": "Business Law",
-                    "FINSR2": "Financial Technology",
-                    "IBUSA2": "International Business"
+                    "Commerce": {
+                        "MARKA2": "Marketing",
+                        "ACCTA2": "Accounting",
+                        "FINSA2": "Finance",
+                        "MGMTA2": "Management",
+                        "MGMTH2": "Human Resource Management",
+                        "TABLC2": "Taxation",
+                        "COMMJ2": "Business Analytics",
+                        "INFSA2": "Information Systems",
+                        "ECONF2": "Business Economics",
+                        "TABLA2": "Business Law",
+                        "FINSR2": "Financial Technology",
+                        "IBUSA2": "International Business"
+                    },
+                    "null": {
+                        "MARKA2": "Marketing",
+                        "ACCTA2": "Accounting",
+                        "FINSA2": "Finance",
+                        "MGMTA2": "Management",
+                        "MGMTH2": "Human Resource Management",
+                        "TABLC2": "Taxation",
+                        "COMMJ2": "Business Analytics",
+                        "INFSA2": "Information Systems",
+                        "ECONF2": "Business Economics",
+                        "TABLA2": "Business Law",
+                        "FINSR2": "Financial Technology",
+                        "IBUSA2": "International Business"
+                    }
                 }
             },
             "NonSpecialisationData": [
@@ -1413,24 +1463,26 @@
                     }
                 },
                 "Honours": {
-                    "SOLABH": "Renewable Energy Engineering",
-                    "PETRAH": "Petroleum Engineering",
-                    "MINEAH": "Mining Engineering",
-                    "GMATDH": "Surveying",
-                    "SOLAAH": "Photovoltaics and Solar Energy",
-                    "AEROAH": "Aerospace Engineering",
-                    "CVENAH": "Civil Engineering",
-                    "MTRNAH": "Mechatronic Engineering",
-                    "CEICAH": "Chemical Engineering",
-                    "GMATEH": "Geospatial Engineering",
-                    "TELEAH": "Telecommunications",
-                    "ELECAH": "Electrical Engineering",
-                    "ELECCH": "Quantum Engineering",
-                    "NAVLAH": "Naval Architecture",
-                    "MANFBH": "Mechanical and Manufacturing Engineering",
-                    "CVENBH": "Environmental Engineering",
-                    "MECHAH": "Mechanical Engineering",
-                    "CEICDH": "Chemical Product Engineering"
+                    "Engineering (Honours)": {
+                        "SOLABH": "Renewable Energy Engineering",
+                        "PETRAH": "Petroleum Engineering",
+                        "MINEAH": "Mining Engineering",
+                        "GMATDH": "Surveying",
+                        "SOLAAH": "Photovoltaics and Solar Energy",
+                        "AEROAH": "Aerospace Engineering",
+                        "CVENAH": "Civil Engineering",
+                        "MTRNAH": "Mechatronic Engineering",
+                        "CEICAH": "Chemical Engineering",
+                        "GMATEH": "Geospatial Engineering",
+                        "TELEAH": "Telecommunications",
+                        "ELECAH": "Electrical Engineering",
+                        "ELECCH": "Quantum Engineering",
+                        "NAVLAH": "Naval Architecture",
+                        "MANFBH": "Mechanical and Manufacturing Engineering",
+                        "CVENBH": "Environmental Engineering",
+                        "MECHAH": "Mechanical Engineering",
+                        "CEICDH": "Chemical Product Engineering"
+                    }
                 }
             },
             "NonSpecialisationData": []
