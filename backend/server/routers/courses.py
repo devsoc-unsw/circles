@@ -261,8 +261,8 @@ def getAllUnlocked(userData: UserData):
     user = User(fixUserData(userData.dict())) if not isinstance(
         userData, User) else userData
     for course, condition in CONDITIONS.items():
-        result, warnings = condition.validate(
-            user) if condition is not None else (True, [])
+        result, warnings = condition.validate(user)
+            if condition is not None else (True, [])
         if result:
             coursesState[course] = {
                 "is_accurate": condition is not None,
