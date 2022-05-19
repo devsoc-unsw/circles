@@ -258,8 +258,8 @@ def getAllUnlocked(userData: UserData):
     """
 
     coursesState = {}
-    user = User(fixUserData(userData.dict())) if not isinstance(
-        userData, User) else userData
+    user = User(fixUserData(userData.dict()))
+        if not isinstance(userData, User) else userData
     for course, condition in CONDITIONS.items():
         result, warnings = condition.validate(user)
             if condition is not None else (True, [])
