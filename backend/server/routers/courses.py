@@ -386,7 +386,8 @@ def coursesUnlockedWhenTaken(userData: UserData, courseToBeTaken: str):
 
     # initial state
     courses_initially_unlocked = unlocked_set(
-        getAllUnlocked(user)['courses_state'])
+        getAllUnlocked(user)['courses_state']
+    )
     # add course to the user
     user.add_courses(
         {courseToBeTaken: [getCourse(courseToBeTaken)['UOC'], None]})
