@@ -67,11 +67,12 @@ const ContextMenu = ({ code, plannedFor }) => {
   }
 
   const handleConfirmEditMark = () => {
-    // Validate Input // Create warning if input is invalid
+    const attemptedMark = (' ' + markInputBuf).slice(1).replace(" ", "");
     
+    // Validate mark
     if (
-      (isNaN(markInputBuf) && !validLetterGrades.includes(markInputBuf))
-      || (parseInt(markInputBuf) < 0 || parseInt(markInputBuf) > 100)
+      (isNaN(attemptedMark) && !validLetterGrades.includes(attemptedMark))
+      || (parseFloat(attemptedMark) < 0 || parseFloat(attemptedMark) > 100)
     ) {
       return message.error("Could not update mark. Please enter a valid mark or letter grade");
     }

@@ -150,7 +150,6 @@ const TermPlanner = () => {
         setShowMarks={setShowMarks}
       />
       <div className="mainContainer">
-        {/* TODO: Delete */}
         <DragDropContext
           onDragEnd={(result) => {
             handleOnDragEnd(result);

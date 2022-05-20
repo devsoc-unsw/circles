@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const markSlice = createSlice({
   name: "marks",
-  initialState: [],
+  initialState: "N/A",
   reducers: {
     updateMark(state, action) {
       state.mark = action.payload;
