@@ -71,6 +71,8 @@ const ContextMenu = ({ code, plannedFor }) => {
 
   const handleConfirmEditMark = () => {
     const attemptedMark = (' ' + markInputBuf).slice(1).replace(" ", "");
+    console.log("confirm", attemptedMark, markInputBuf);
+
     
     if (
       (isNaN(attemptedMark) && !validLetterGrades.includes(attemptedMark))
@@ -81,7 +83,6 @@ const ContextMenu = ({ code, plannedFor }) => {
     console.log(updateCourseMark);
     
     console.log("dispatchign");
-    console.log("code, mark:", code, parseInt(attemptedMark));
     dispatch(updateCourseMark({
       "code": code,
       "mark": isNaN(attemptedMark) ? attemptedMark : parseInt(attemptedMark),
@@ -120,17 +121,16 @@ const ContextMenu = ({ code, plannedFor }) => {
       <Modal
         title={`Edit Mark: ${code}`}
         visible={isEditMarkVisible}
-        // visible={true}
         onOk={handleConfirmEditMark}
         onCancel={handleCancelEditMark}
-        // footer={ null // <EditMarksFooter // /> }
         width="300px"// 
       >
         <EditMarks
           courseCode={code}
-          handleKeyDown={handleKeyDown}
           inputBuffer={markInputBuf}
           setInputBuffer={setMarkInputBuf}
+          handleKeyDown={handleKeyDown}
+          handleConfirm={handleConfirmEditMark}
         />
       </Modal>
     </>
