@@ -22,7 +22,7 @@ const generateEmptyYears = (nYears) => {
 const fakeStartYear = parseInt(new Date().getFullYear(), 10);
 const fakeNumYears = 3;
 
-let initialState = {
+const initialState = {
   unplanned: [],
   startYear: fakeStartYear,
   numYears: fakeNumYears,
@@ -45,9 +45,6 @@ let initialState = {
   areYearsHidden: false,
 };
 
-const planner = JSON.parse(localStorage.getItem("planner"));
-if (planner) initialState = planner;
-
 const plannerSlice = createSlice({
   name: "planner",
   initialState,
@@ -58,22 +55,21 @@ const plannerSlice = createSlice({
         state.courses[courseCode] = courseData;
         state.unplanned.push(courseCode);
       }
-      localStorage.setItem("planner", JSON.stringify(state));
     },
     toggleWarnings: (state, action) => {
       Object.keys(action.payload).forEach((course) => {
         if (state.courses[course]) {
           const {
-            is_accurate: isAccurate, unlocked, warnings, handbook_note: handbookNote,
+            is_accurate: isAccurate, unlocked, warnings, handbook_note: handbookNote, supressed,
           } = action.payload[course];
 
           state.courses[course].isAccurate = isAccurate;
           state.courses[course].isUnlocked = unlocked;
           state.courses[course].warnings = warnings;
           state.courses[course].handbookNote = handbookNote;
+          state.courses[course].supressed = supressed;
         }
       });
-      localStorage.setItem("planner", JSON.stringify(state));
     },
     setUnplannedCourseToTerm: (state, action) => {
       const {
@@ -83,7 +79,6 @@ const plannerSlice = createSlice({
         (c) => c !== course,
       );
       state.years[destRow][destTerm].splice(destIndex, 0, course);
-      localStorage.setItem("planner", JSON.stringify(state));
     },
     setPlannedCourseToTerm: (state, action) => {
       const {
@@ -92,16 +87,14 @@ const plannerSlice = createSlice({
       } = action.payload;
       state.years[srcRow][srcTerm].splice(srcIndex, 1);
       state.years[destRow][destTerm].splice(destIndex, 0, course);
-      localStorage.setItem("planner", JSON.stringify(state));
     },
     moveCourse: (state, action) => {
       const { course, term } = action.payload;
       if (state.courses[course]) {
         state.courses[course].plannedFor = term;
       }
-      localStorage.setItem("planner", JSON.stringify(state));
     },
-    // NOTE: think about if you would want to call the backend first to fetch dependant courses
+    // TODO NOTE: think about if you would want to call the backend first to fetch dependant courses
     removeCourse: (state, action) => {
       // Remove courses from years and courses
       if (state.courses[action.payload]) {
@@ -125,18 +118,36 @@ const plannerSlice = createSlice({
             (course) => course !== action.payload,
           );
         }
-        localStorage.setItem("planner", JSON.stringify(state));
       }
+    },
+    removeCourses: (state, action) => {
+      const courses = action.payload;
+      courses.forEach((course) => {
+        plannerSlice.caseReducers.removeCourse(state, { payload: course });
+      });
     },
     removeAllCourses: (state) => {
       state.years = generateEmptyYears(state.numYears);
       state.courses = {};
       state.unplanned = [];
-      localStorage.setItem("planner", JSON.stringify(state));
     },
     unschedule: (state, action) => {
-      const code = action.payload;
-      state.unplanned.push(code);
+      const { destIndex, code } = action.payload;
+
+      if (Number.isNaN(destIndex)) {
+        state.unplanned.push(code);
+      } else {
+        const existsIndex = state.unplanned.indexOf(code);
+        if (existsIndex !== -1) {
+          state.unplanned.splice(existsIndex, 1);
+        }
+        state.unplanned.splice(destIndex, 0, code);
+
+        if (existsIndex !== -1) {
+          // if was already unplanned don't need to modify other attributes
+          return;
+        }
+      }
 
       const { plannedFor } = state.courses[code];
 
@@ -150,29 +161,13 @@ const plannerSlice = createSlice({
       state.courses[code].warnings = [];
       state.courses[code].handbookNote = "";
       state.courses[code].isAccurate = true;
-
-      localStorage.setItem("planner", JSON.stringify(state));
     },
     unscheduleAll: (state) => {
       Object.entries(state.courses).forEach(([code, desc]) => {
         if (desc.plannedFor !== null) {
-          state.unplanned.push(code);
-
-          const { plannedFor } = state.courses[code];
-
-          const yearI = parseInt(plannedFor.slice(0, 4), 10) - state.startYear;
-          const termI = plannedFor.slice(4);
-
-          state.years[yearI][termI] = state.years[yearI][termI].filter((course) => course !== code);
-
-          state.courses[code].plannedFor = null;
-          state.courses[code].isUnlocked = true;
-          state.courses[code].warnings = [];
-          state.courses[code].handbookNote = "";
-          state.courses[code].isAccurate = true;
+          plannerSlice.caseReducers.unschedule(state, { payload: { destIndex: null, code } });
         }
       });
-      localStorage.setItem("planner", JSON.stringify(state));
     },
     toggleSummer: (state) => {
       state.isSummerEnabled = !state.isSummerEnabled;
@@ -191,13 +186,10 @@ const plannerSlice = createSlice({
       //     state.years[i].T0 = [];
       //   }
       // }
-
-      localStorage.setItem("planner", JSON.stringify(state));
     },
     toggleTermComplete: (state, action) => {
       const isCompleted = state.completedTerms[action.payload];
       state.completedTerms[action.payload] = !isCompleted;
-      localStorage.setItem("planner", JSON.stringify(state));
     },
     updateStartYear: (state, action) => {
       const currEndYear = state.startYear + state.numYears - 1;
@@ -228,7 +220,6 @@ const plannerSlice = createSlice({
 
       state.startYear = newStartYear;
       state.years = updatedYears;
-      localStorage.setItem("planner", JSON.stringify(state));
     },
     updateDegreeLength: (state, action) => {
       const newNumYears = action.payload;
@@ -259,32 +250,25 @@ const plannerSlice = createSlice({
 
         state.numYears = newNumYears;
         state.hidden = generateHiddenInit(state.startYear, newNumYears);
-
-        localStorage.setItem("planner", JSON.stringify(state));
       }
     },
     hideYear: (state, action) => {
       state.hidden[action.payload] = true;
       state.areYearsHidden = true;
-      localStorage.setItem("planner", JSON.stringify(state));
     },
     unhideAllYears: (state) => {
       Object.keys(state.hidden).forEach((year) => {
         state.hidden[year] = false;
       });
       state.areYearsHidden = false;
-      localStorage.setItem("planner", JSON.stringify(state));
     },
-    resetPlanner: (state) => {
-      Object.assign(state, initialState);
-      localStorage.setItem("planner", JSON.stringify(initialState));
-    },
+    resetPlanner: () => initialState,
   },
 });
 
 export const {
   addToUnplanned, setUnplannedCourseToTerm, setPlannedCourseToTerm,
-  toggleWarnings, setUnplanned, removeCourse, removeAllCourses,
+  toggleWarnings, setUnplanned, removeCourse, removeCourses, removeAllCourses,
   moveCourse, unschedule, unscheduleAll, toggleSummer, toggleTermComplete,
   updateStartYear, updateDegreeLength, hideYear, unhideAllYears, resetPlanner,
 } = plannerSlice.actions;

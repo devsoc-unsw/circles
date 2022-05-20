@@ -19,13 +19,13 @@ const openNotification = (msg) => {
 const StartBrowsingStep = () => {
   const navigate = useNavigate();
   const degree = useSelector((state) => state.degree);
+
   const saveUserSettings = () => {
     if (degree.programCode === "") {
       openNotification("Please select a degree");
-    } else if (degree.specialisation === "") {
+    } else if (!degree.majors.length && !degree.minors.length) {
       openNotification("Please select a specialisation");
     } else {
-      localStorage.setItem("degree", JSON.stringify(degree));
       navigate("/course-selector");
     }
   };

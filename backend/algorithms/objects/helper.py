@@ -66,7 +66,7 @@ def is_program_type(program: str) -> bool:
 
 def is_specialisation(text) -> bool:
     """ Determines if the text is a specialisation code """
-    return bool(re.match(r"^[A-Z]{5}\d$", text, flags=re.IGNORECASE))
+    return bool(re.match(r"^[A-Z?]{5}[0-9H?]$", text, flags=re.IGNORECASE))
 
 
 
