@@ -6,25 +6,6 @@ import "./index.less";
 
 const KebabMenuIcon = ({ code }) => {
 
-
-  // TODO: delete
-  // const onClick = (e) => {
-  //   e.target.style.color = (e.target.style.color == "green") ? "black" : "green";
-  //   return 0;
-  // };
-
-  const { show, hideAll } = useContextMenu({
-    id: `${code}-context`,
-  });
-
-  // ? onClick Handled by caller
-  const displayContextMenu = (e) => {
-    e.stopPropagation();
-    // TODO: remove debug
-    // e.target.style.color = (e.target.style.color === "green") ? "black" : "green";
-    // show(e);
-  };
-
   // ? Should this have a query for light / dark mode?
   return (
     <svg

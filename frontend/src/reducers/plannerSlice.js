@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { createSlice } from "@reduxjs/toolkit";
 
 // set up hidden object
@@ -92,6 +93,16 @@ const plannerSlice = createSlice({
       const { course, term } = action.payload;
       if (state.courses[course]) {
         state.courses[course].plannedFor = term;
+      }
+    },
+    updateCourseMark: (state, action) => {
+      const { mark, code } = action.payload;
+      console.log("reducer", state);
+      console.log("courses", state.courses);
+
+      if (state.courses[code]) {
+        console.log("reached if", state.courses[code]);
+        state.planner.courses[code].mark = mark;
       }
     },
     // TODO NOTE: think about if you would want to call the backend first to fetch dependant courses
@@ -271,6 +282,7 @@ export const {
   toggleWarnings, setUnplanned, removeCourse, removeCourses, removeAllCourses,
   moveCourse, unschedule, unscheduleAll, toggleSummer, toggleTermComplete,
   updateStartYear, updateDegreeLength, hideYear, unhideAllYears, resetPlanner,
+  updateCourseMark,
 } = plannerSlice.actions;
 
 export default plannerSlice.reducer;

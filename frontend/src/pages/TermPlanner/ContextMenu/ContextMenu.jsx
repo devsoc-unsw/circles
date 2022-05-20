@@ -6,24 +6,28 @@ import { useSelector, useDispatch } from "react-redux";
 import { Menu, Item, theme } from "react-contexify";
 import "react-contexify/dist/ReactContexify.css";
 import { useNavigate } from "react-router-dom";
-import { DeleteFilled, InfoCircleFilled } from "@ant-design/icons";
+import { ConsoleSqlOutlined, DeleteFilled, InfoCircleFilled } from "@ant-design/icons";
 import { FaEdit, FaRegCalendarTimes } from "react-icons/fa";
 import validateTermPlanner from "../validateTermPlanner";
 import { addTab } from "../../../reducers/courseTabsSlice";
-import { removeCourse, unschedule } from "../../../reducers/plannerSlice";
+import { removeCourse, unschedule, updateCourseMark } from "../../../reducers/plannerSlice";
 import EditMarks from "../../../components/EditMarks";
 
 import "./index.less";
+import { setCourse } from "../../../reducers/coursesSlice";
+import { updateMark } from "../../../reducers/markSlice";
 
 const ContextMenu = ({ code, plannedFor }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { years, startYear, completedTerms } = useSelector((state) => state.planner);
+
+  const { years, startYear, completedTerm, courses } = useSelector((state) => state.planner);
 
   const { programCode, majors, minor } = useSelector(
     (state) => state.degree,
   );
 
+  
   const handleDelete = () => {
     dispatch(removeCourse(code));
     validateTermPlanner(
@@ -69,7 +73,6 @@ const ContextMenu = ({ code, plannedFor }) => {
   const handleConfirmEditMark = () => {
     const attemptedMark = (' ' + markInputBuf).slice(1).replace(" ", "");
     
-    // Validate mark
     if (
       (isNaN(attemptedMark) && !validLetterGrades.includes(attemptedMark))
       || (parseFloat(attemptedMark) < 0 || parseFloat(attemptedMark) > 100)
@@ -77,7 +80,14 @@ const ContextMenu = ({ code, plannedFor }) => {
       return message.error("Could not update mark. Please enter a valid mark or letter grade");
     }
     
-    // TODO: Dispatch and reset state
+    console.log("dispatchign");
+    console.log("code, mark:", code, mark);
+    dispatch(updateCourseMark, {
+      "code": code,
+      "mark": mark
+    });
+    console.log("finished dispatch");
+    
     setMarkInput("");
     setIsEditMarkVisible(false);
     return message.success("Mark Updated")
@@ -117,8 +127,7 @@ const ContextMenu = ({ code, plannedFor }) => {
         width="300px"// 
       >
         <EditMarks
-          courseCode="COMP1511"
-          courseTitle="Introduction to testing"
+          courseCode={code}
           handleKeyDown={handleKeyDown}
           inputBuffer={markInputBuf}
           setInputBuffer={setMarkInputBuf}
