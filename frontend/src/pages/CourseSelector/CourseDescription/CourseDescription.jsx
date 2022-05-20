@@ -28,7 +28,7 @@ const CourseDescription = () => {
   const { degree, planner } = useSelector((state) => state);
   const [pageLoaded, setPageLoaded] = useState(false);
   const [coursesPathTo, setCoursesPathTo] = useState({});
-  const [courseCapacity, setCourseCapacity] = useState({});
+  const [courseCapacity, setCourseCapacity] = useState({ enrolments: 0, capacity: 0 });
 
   useEffect(() => {
     const getCourse = async () => {
@@ -62,6 +62,7 @@ const CourseDescription = () => {
           data.classes[i].activity === "Lecture"
           || data.classes[i].activity === "Seminar"
           || data.classes[i].activity === "Thesis Research"
+          || data.classes[i].activity === "Project"
         ) {
           enrolmentCapacityData.enrolments
             += data.classes[i].courseEnrolment.enrolments;
@@ -79,13 +80,15 @@ const CourseDescription = () => {
       );
       if (!err) {
         getCapacityAndEnrolment(data);
+      } else {
+        setCourseCapacity({ enrolments: 0, capacity: 0 });
       }
     };
 
     if (id) {
       getCourse();
-      getPathToCoursesById(id);
       getCourseCapacityById(id);
+      getPathToCoursesById(id);
     }
     setPageLoaded(true);
   }, [id]);
@@ -232,19 +235,18 @@ const CourseDescription = () => {
               </Title>
               <a href={`https://www.handbook.unsw.edu.au/${course.study_level.toLowerCase()}/courses/2022/${course.code}/`}>View {course.code} in handbook</a>
             </div>
-          </div>
-          {Object.keys(courseCapacity).length > 0 && (
+            {courseCapacity.enrolments !== 0 && (
             <div>
               <Title level={3} className="text cs-final-attr">
                 Capacity
               </Title>
-              <p className="text">{courseCapacity.capacity} students for {CONFIG.REACT_APP_TERM}</p>
+              <p className="text">{courseCapacity.capacity} Students for {CONFIG.REACT_APP_TERM}</p>
               <ProgressBar
-                progress={Math.round((courseCapacity.enrolemnts / courseCapacity.capacity) * 100)}
-                height={20}
+                progress={Math.round((courseCapacity.enrolments / courseCapacity.capacity) * 100)}
               />
             </div>
-          )}
+            )}
+          </div>
         </>
       )}
     </div>
