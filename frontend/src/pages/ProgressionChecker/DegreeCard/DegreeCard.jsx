@@ -4,6 +4,7 @@ import ReactTooltip from "react-tooltip";
 import { purple } from "@ant-design/colors";
 import { Link } from "react-scroll";
 import { useSelector } from "react-redux";
+import "./index.less";
 
 const DegreeCard = ({ concentration }) => {
   const { Title, Text } = Typography;

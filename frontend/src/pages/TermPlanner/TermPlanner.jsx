@@ -46,7 +46,7 @@ const TermPlanner = () => {
     areYearsHidden,
   } = useSelector((state) => state.planner);
 
-  const { programCode, specialisation, minor } = useSelector(
+  const { programCode, minor, majors } = useSelector(
     (state) => state.degree,
   );
 
@@ -57,10 +57,10 @@ const TermPlanner = () => {
     validateTermPlanner(
       dispatch,
       { years, startYear, completedTerms },
-      { programCode, specialisation, minor },
+      { programCode, minor, majors },
       suppress,
     );
-  }, [years, suppress, dispatch, startYear, completedTerms, programCode, specialisation, minor]);
+  }, [years, suppress, dispatch, startYear, completedTerms, programCode, minor, majors]);
   const currYear = new Date().getFullYear();
 
   const plannerPic = useRef();
@@ -158,7 +158,7 @@ const TermPlanner = () => {
               validateTermPlanner(
                 dispatch,
                 { years, startYear, completedTerms },
-                { programCode, specialisation, minor },
+                { programCode, minor, majors },
                 suppress,
               );
             }

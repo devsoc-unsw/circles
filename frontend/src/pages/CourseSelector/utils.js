@@ -1,9 +1,9 @@
 const prepareUserPayload = (degree, planner) => {
   const { startYear, courses } = planner;
-  const { programCode, specialisation, minor } = degree;
+  const { programCode, majors, minor } = degree;
 
   const specialisations = {};
-  specialisations[specialisation] = 1;
+  majors.forEach((major) => { specialisations[major] = 1; });
   if (minor !== "") specialisations[minor] = 1;
 
   const selectedCourses = {};

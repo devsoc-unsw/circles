@@ -20,7 +20,7 @@ const ContextMenu = ({ code, plannedFor }) => {
   const navigate = useNavigate();
   const { years, startYear, completedTerms } = useSelector((state) => state.planner);
 
-  const { programCode, specialisation, minor } = useSelector(
+  const { programCode, majors, minor } = useSelector(
     (state) => state.degree,
   );
 
@@ -29,7 +29,7 @@ const ContextMenu = ({ code, plannedFor }) => {
     validateTermPlanner(
       dispatch,
       { years, startYear, completedTerms },
-      { programCode, specialisation, minor },
+      { programCode, majors, minor },
     );
   };
 
