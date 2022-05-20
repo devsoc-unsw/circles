@@ -96,13 +96,16 @@ const plannerSlice = createSlice({
       }
     },
     updateCourseMark: (state, action) => {
-      const { mark, code } = action.payload;
+      console.log("inside reducer");
+      console.log(action);
+      console.log("payload", action.payload);
+      const { code, mark } = action.payload;
       console.log("reducer", state);
       console.log("courses", state.courses);
 
       if (state.courses[code]) {
         console.log("reached if", state.courses[code]);
-        state.planner.courses[code].mark = mark;
+        state.courses[code].mark = mark;
       }
     },
     // TODO NOTE: think about if you would want to call the backend first to fetch dependant courses

@@ -10,22 +10,14 @@ const EditMarks = ({ courseCode, courseTitle, handleKeyDown, inputBuffer, setInp
   const state = useSelector((state) => state);
   console.log("state:", state);
 
-  const x = [];
-  console.log(x);
-
   // ? Move outside of the function
   const handleLetterGrade = (e) => {
     e.preventDefault();
-    
-    console.log("testing");
     // TODO - 
   }
 
   const handleInputChange = (e) => {
-    // console.log(e.target.value);  // TODO: remove
     setInputBuffer(e.target.value);
-    console.log("input Buffer: ", inputBuffer)
-    // console.log("type", e.type);
   }
 
   return (

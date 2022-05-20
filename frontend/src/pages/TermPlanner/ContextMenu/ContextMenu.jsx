@@ -15,7 +15,6 @@ import EditMarks from "../../../components/EditMarks";
 
 import "./index.less";
 import { setCourse } from "../../../reducers/coursesSlice";
-import { updateMark } from "../../../reducers/markSlice";
 
 const ContextMenu = ({ code, plannedFor }) => {
   const dispatch = useDispatch();
@@ -79,16 +78,17 @@ const ContextMenu = ({ code, plannedFor }) => {
     ) {
       return message.error("Could not update mark. Please enter a valid mark or letter grade");
     }
+    console.log(updateCourseMark);
     
     console.log("dispatchign");
-    console.log("code, mark:", code, mark);
-    dispatch(updateCourseMark, {
+    console.log("code, mark:", code, parseInt(attemptedMark));
+    dispatch(updateCourseMark({
       "code": code,
-      "mark": mark
-    });
+      "mark": isNaN(attemptedMark) ? attemptedMark : parseInt(attemptedMark),
+    }));
     console.log("finished dispatch");
-    
     setMarkInput("");
+    console.log("setMarkInput:", markInput);
     setIsEditMarkVisible(false);
     return message.success("Mark Updated")
   }
