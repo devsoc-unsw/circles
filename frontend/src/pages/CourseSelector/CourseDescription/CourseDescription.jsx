@@ -90,12 +90,6 @@ const CourseDescription = () => {
       getCourseCapacityById(id);
     }
     setPageLoaded(true);
-
-    setPageLoaded(false);
-    if (id) {
-      getCourse();
-      getPathToCoursesById(id);
-    }
   }, [id]);
 
   if (tabs.length === 0) {
