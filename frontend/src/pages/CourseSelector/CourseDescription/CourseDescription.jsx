@@ -35,7 +35,6 @@ const CourseDescription = () => {
       const [data, err] = await axiosRequest("get", `/courses/getCourse/${id}`);
       if (!err) {
         dispatch(setCourse(data));
-        setPageLoaded(true);
       }
     };
 
@@ -83,7 +82,6 @@ const CourseDescription = () => {
       }
     };
 
-    setPageLoaded(false);
     if (id) {
       getCourse();
       getPathToCoursesById(id);
