@@ -65,7 +65,6 @@ def main():
   except(CalledProcessError) as exception:
     sys.stdout.write(f'exception - {exception}')
   finally:
-    sys.stdout.write('Execution Stopped - Exiting...')
     sys.stdout.close()
     sys.stderr.close()
     sys.stdout = sys.__stdout__
