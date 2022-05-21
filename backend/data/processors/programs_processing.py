@@ -35,6 +35,8 @@ TEST_PROGS = (
     "3789", # Science/CompSci
     "3784", # Commerce/CompSci
     "3785", # Engineering(Honours)/CompSci
+    "3783", # CompSci / Arts
+    "3786", # CompSci / Law
 )
 
 def process_prg_data():
@@ -77,11 +79,11 @@ def addComponentData(formatted, programData):
     # Order dict alphabetically
     OrderedDict(sorted(programData["components"].items(), key=lambda t: t[0]))
 
-def recAddComponentData(programData, item):
+def recAddComponentData(programData, item, programName = ""):
     if any(key not in item for key in ("vertical_grouping", "title")):
         return
 
-    programName = findProgramName(programData, item)
+    programName = findProgramName(programData, item) if programName == "" else programName
 
     if item["vertical_grouping"]["value"] == "GE":
         addGEData(programData, item)
@@ -114,9 +116,9 @@ def recAddComponentData(programData, item):
 
     # Recurse further down
     for rel_item in item["relationship"]:
-        recAddComponentData(programData, rel_item)
+        recAddComponentData(programData, rel_item, programName)
     for con_item in item["container"]:
-        recAddComponentData(programData, con_item)
+        recAddComponentData(programData, con_item, programName)
 
 
 def addGEData(programData, item):

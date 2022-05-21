@@ -1353,7 +1353,7 @@
             "GE": {},
             "SpecialisationData": {
                 "Minors": {
-                    "null": {
+                    "Science": {
                         "notes": "Students may choose to complete an optional minor in one of the following areas, using their Science and/or free electives.",
                         "GEOGH2": "Physical Geography",
                         "GEOLF2": "Geology",
@@ -1376,7 +1376,35 @@
                     }
                 },
                 "Majors": {
-                    "null": {
+                    "Science": {
+                        "notes": "Students must complete at least one Science major selected from the list below. Students should declare their major prior to commencing Stage 2 courses. Notes: 1.Students are not permitted to take the Bioinformatics major BINFB1 when taking the degree in dual award mode with the Bachelor of Engineering (Bioinformatics) program.",
+                        "PHARA1": "Pharmacology",
+                        "PHSLA1": "Physiology",
+                        "PATHA1": "Pathology",
+                        "BIOCM1": "Molecular and Cell Biology",
+                        "MSCIM1": "Marine and Coastal Science",
+                        "GEOLS1": "Earth Science",
+                        "GEOGG1": "Geography",
+                        "MATHM1": "Mathematics",
+                        "FOODH1": "Food Science",
+                        "MATHT1": "Statistics",
+                        "BIOCC1": "Genetics",
+                        "PSYCA1": "Psychology",
+                        "MICRB1": "Microbiology",
+                        "NEURS1": "Neuroscience",
+                        "BIOTA1": "Biotechnology",
+                        "MICRJ1": "Immunology",
+                        "CHEMA1": "Chemistry",
+                        "PHYSL1": "Physics",
+                        "BINFB1": "Bioinformatics",
+                        "MATHN1": "Physical Oceanography",
+                        "BIOSJ1": "Biology",
+                        "ANATA1": "Anatomy",
+                        "BIOSG1": "Ecology",
+                        "VISNA1": "Vision Science",
+                        "MATSB1": "Materials Science"
+                    },
+                    "Computer Science": {
                         "notes": "COMPA1 is the default stream, and will be used if no other stream is selected.",
                         "COMPJ1": "Computer Science (Programming Languages)",
                         "COMPD1": "Computer Science (Database Systems)",
@@ -1500,7 +1528,7 @@
                     }
                 },
                 "Minors": {
-                    "null": {
+                    "Commerce": {
                         "notes": "Students may choose to use their electives to complete one of the following minors. Minor Requirements: An approved disciplinary stream containing at least 18 UOC at Level 2 and Level 3.",
                         "MARKA2": "Marketing",
                         "ACCTA2": "Accounting",
@@ -1601,7 +1629,7 @@
             "GE": {},
             "SpecialisationData": {
                 "Majors": {
-                    "null": {
+                    "Computer Science": {
                         "notes": "COMPA1 is the default stream, and will be used if no other stream is selected.",
                         "COMPD1": "Computer Science (Database Systems)",
                         "COMPS1": "Computer Science (Embedded Systems)",
@@ -1614,7 +1642,7 @@
                     }
                 },
                 "Honours": {
-                    "null": {
+                    "Engineering (Honours)": {
                         "notes": "Students must complete at least one of the specialisations below.",
                         "SOLABH": "Renewable Energy Engineering",
                         "PETRAH": "Petroleum Engineering",
@@ -1638,6 +1666,264 @@
                 }
             },
             "NonSpecialisationData": []
+        }
+    },
+    "3783": {
+        "title": "Computer Science / Arts",
+        "code": "3783",
+        "duration": 4,
+        "UOC": 192,
+        "faculty": "Faculty of Engineering",
+        "notes": "The dual award BSc (Computer Science) BA enables students to complete the requirements of the BSc (Computer Science) and a Bachelor of Arts program from the Faculty of Arts and Social Sciences. For admission to the program, students must satisfy the entry requirements for both the BSc (Computer Science) and the BA in the Faculty of Arts and Social Sciences. Students in this program must complete 192 units of credit of study.",
+        "components": {
+            "GE": {},
+            "SpecialisationData": {
+                "Majors": {
+                    "Computer Science": {
+                        "notes": "COMPA1 is the default stream, and will be used if no other stream is selected.",
+                        "COMPJ1": "Computer Science (Programming Languages)",
+                        "COMPD1": "Computer Science (Database Systems)",
+                        "COMPE1": "Computer Science (eCommerce Systems)",
+                        "COMPA1": "Computer Science",
+                        "COMPY1": "Computer Science (Security Engineering)",
+                        "COMPI1": "Computer Science (Artificial Intelligence)",
+                        "COMPS1": "Computer Science (Embedded Systems)",
+                        "COMPN1": "Computer Science (Computer Networks)"
+                    }
+                }
+            },
+            "NonSpecialisationData": [
+                {
+                    "courses": {
+                        "any Arts and Social Sciences course": 1
+                    },
+                    "title": "Arts and Social Sciences Prescribed Electives",
+                    "credits_to_complete": null,
+                    "core": false,
+                    "levels": [],
+                    "notes": "You must complete 12 UOC of any courses offered by UNSW Arts and Social Sciences. Indigenous Studies courses (ATSIxxxx) cannot be studied as Arts and Social Sciences Prescribed Electives."
+                },
+                {
+                    "courses": [
+                        "any Arts and Social Sciences course"
+                    ],
+                    "title": "Arts and Social Sciences Prescribed Electives",
+                    "credits_to_complete": null,
+                    "core": false,
+                    "levels": [],
+                    "notes": "You must complete 12 UOC of any courses offered by UNSW Arts and Social Sciences. Indigenous Studies courses (ATSIxxxx) cannot be studied as Arts and Social Sciences Prescribed Electives."
+                }
+            ]
+        }
+    },
+    "3786": {
+        "title": "Computer Science / Law",
+        "code": "3786",
+        "duration": 5,
+        "UOC": 240,
+        "faculty": "Faculty of Law and Justice",
+        "notes": "This Handbook is for commencing students. If you commenced in a prior year please refer to the Online Handbook in the year you started your Law degree or contact the Faculty of Law for advice. This program combines the professional LLB program with a major in Computer Science offered within the School of Computer Science, Faculty of Engineering. Duration/Award The program is a five year full-time combined program leading to the award of the two degrees of Bachelor of Science (Computer Science) and Bachelor of Laws (BSc LLB).",
+        "components": {
+            "GE": {},
+            "SpecialisationData": {
+                "Majors": {
+                    "Computer Science": {
+                        "notes": "COMPA1 is the default stream, and will be used if no other stream is selected.",
+                        "COMPS1": "Computer Science (Embedded Systems)",
+                        "COMPY1": "Computer Science (Security Engineering)",
+                        "COMPD1": "Computer Science (Database Systems)",
+                        "COMPE1": "Computer Science (eCommerce Systems)",
+                        "COMPN1": "Computer Science (Computer Networks)",
+                        "COMPA1": "Computer Science",
+                        "COMPI1": "Computer Science (Artificial Intelligence)",
+                        "COMPJ1": "Computer Science (Programming Languages)"
+                    }
+                }
+            },
+            "NonSpecialisationData": [
+                {
+                    "courses": {
+                        "LAWS3789": "Policing",
+                        "LAWS3073": "Cities, Planning, Law and Justice",
+                        "LAWS3812": "Sport and the Law",
+                        "LAWS3332": "Law and Social Theory",
+                        "LAWS3713": "Indigenous Peoples in International Law",
+                        "LAWS3341": "Gender and Law",
+                        "LAWS3346": "Law and Technology: Comparative Perspectives (UNSW/UZH)",
+                        "LAWS3541": "Pacific Islands Laws (USP)",
+                        "LAWS3017": "The Politics of Human Rights: Theory and Critique",
+                        "LAWS3165": "Islamic Law and Society",
+                        "LAWS3623": "The Criminal Trial",
+                        "LAWS3146": "Human Rights Law (New York)",
+                        "LAWS3300": "Housing Clinic (Redfern Legal Centre)",
+                        "LAWS3102": "Advanced Criminal Law",
+                        "LAWS3305": "Kingsford Legal Centre Employment Law Clinic (Intensive)",
+                        "LAWS3147": "Elements of Income Tax Law",
+                        "LAWS3326": "Theories of Law and Justice",
+                        "LAWS3425": "Research Thesis",
+                        "LAWS3221": "Media Law: General Principles",
+                        "LAWS3105": "Penology",
+                        "LAWS3589": "Class Actions and Mega-Litigation",
+                        "LAWS3152": "Advanced Revenue Law",
+                        "LAWS3182": "International Human Rights Law and Advocacy",
+                        "LAWS3382": "Conflict of Laws",
+                        "LAWS3130": "Administrative Justice",
+                        "LAWS3335": "Economic Analysis of Law",
+                        "LAWS3040": "Regulation for Cyber Security",
+                        "LAWS3302": "Land and Environment Court Clinic",
+                        "LAWS3135": "Land Dealings: Residential and Commercial Contracts",
+                        "LAWS3183": "Australian Journal of Human Rights",
+                        "LAWS3014": "Insolvency Law",
+                        "LAWS3084": "International Trade Law: The Law and Policy of the WTO",
+                        "LAWS3086": "International Law Competitive Moot",
+                        "LAWS3524": "Indigenous Women and the Law",
+                        "LAWS3142": "Conceptual Framework of the Common Law",
+                        "LAWS3758": "Roman Law",
+                        "LAWS3144": "Animal Law",
+                        "LAWS3513": "Indigenous Children and the Law",
+                        "LAWS3028": "Employment Law",
+                        "LAWS3018": "Commercial Law",
+                        "LAWS3381": "Public International Law",
+                        "LAWS3167": "The Rule of Law in Asia",
+                        "LAWS3125": "Criminal Process and Human Rights",
+                        "LAWS3196": "Designing Technology Solutions for Access to Justice",
+                        "LAWS3384": "Legal Experimentalism",
+                        "LAWS3064": "UNSW Law Journal (Executive Editor)",
+                        "LAWS3331": "Legal Theory",
+                        "LAWS3319": "Police Powers Clinic",
+                        "LAWS3155": "Responses to Corporate Wrongdoing",
+                        "LAWS3281": "Advanced Statutory Interpretation",
+                        "LAWS3248": "Intellectual Property 2: Trade Marks and Patents",
+                        "LAWS3276": "Sir Anthony Mason Research Project in Constitutional Law",
+                        "LAWS3348": "Transitional Justice (South America)",
+                        "LAWS3401": "Health and Medical Law",
+                        "LAWS3510": "International Commercial Mediation Competition",
+                        "LAWS3181": "International Humanitarian Law",
+                        "LAWS3445": "Women and Gender Law ILS Pune",
+                        "LAWS3231": "Work Health and Safety Law",
+                        "LAWS3185": "Public Interest Litigation: Origins and Strategies",
+                        "LAWS1213": "Foundations Enrichment 1",
+                        "LAWS3188": "Settlement of International Disputes",
+                        "LAWS3080": "Insurance in Australia",
+                        "LAWS3412": "Discrimination and the Law",
+                        "LAWS3512": "Native Title Law, Policy and Practice",
+                        "LAWS3141": "Securities and Financial Services Regulation",
+                        "LAWS3301": "Remedies",
+                        "LAWS3427": "Drug Law and Policy",
+                        "LAWS3413": "Housing Law",
+                        "LAWS3434": "Research Thesis: Extended",
+                        "LAWS3192": "Takeovers and Capital Markets Law",
+                        "LAWS3309": "Human Rights Clinic (Intensive)",
+                        "LAWS3393": "Succession",
+                        "LAWS3023": "Commercial and Charitable Trusts",
+                        "LAWS3072": "Corporate Misconduct and White Collar Crime",
+                        "LAWS3327": "Law Schools Global League Summer School",
+                        "LAWS3423": "Research Thesis",
+                        "LAWS3115": "People, Land and Community",
+                        "LAWS3021": "Foundations of Intellectual Property Law",
+                        "LAWS3478": "Theft, Fraud and Corruption",
+                        "LAWS3292": "The High Court of Australia",
+                        "LAWS3137": "Australian Consumer Law",
+                        "LAWS3212": "Indigenous Law Centre Student Editor",
+                        "LAWS3391": "Family Law",
+                        "LAWS3186": "Human Rights Defender",
+                        "LAWS3187": "Forced Migration and Human Rights in International Law",
+                        "LAWS3150": "Contemporary Constitutional Law",
+                        "LAWS3159": "International and Comparative Law Workshop",
+                        "LAWS3282": "Advanced Administrative Law",
+                        "LAWS3442": "The Will of the People",
+                        "LAWS3549": "Child Rights Comparative Clinical Program: India",
+                        "LAWS3060": "Human Rights Clinic (Non-intensive)",
+                        "LAWS3392": "Children and the Law",
+                        "LAWS1214": "Foundations Enrichment 2",
+                        "LAWS3394": "Families, Property & Death",
+                        "LAWS3149": "Theories of Law and Biology",
+                        "LAWS3079": "Restitution",
+                        "LAWS3123": "Chinese Legal System (SJTU)",
+                        "LAWS3070": "International Investment Law and Policy",
+                        "LAWS3314": "Alternative Dispute Resolution in Practice",
+                        "LAWS3133": "Law of Banking",
+                        "LAWS3303": "Kingsford Legal Centre Community Law Clinic (Intensive)",
+                        "LAWS3046": "Intellectual Property 1: Copyright and Designs",
+                        "LAWS3304": "Kingsford Legal Centre Community Law Clinic (Non-intensive)",
+                        "LAWS3354": "International Trade Remedies: Law and Practices",
+                        "LAWS3345": "CIBEL Elective (Tsinghua)",
+                        "LAWS3272": "Australian Immigration Law and Practice",
+                        "LAWS3170": "The Essential Advocate:An Intro to Advocacy",
+                        "LAWS3025": "Advanced Contract Law",
+                        "LAWS3131": "Information Technology Law",
+                        "LAWS3240": "Kingsford Legal Centre Family Law Community Education Clinic (Non-Intensive)",
+                        "LAWS3555": "UNSW Law Internships",
+                        "LAWS3600": "Housing Clinic (Redfern Legal Centre) Intensive",
+                        "LAWS3441": "Law Journal (Issue Editor)",
+                        "LAWS3211": "Indigenous People and the Law",
+                        "LAWS3067": "International Criminal Law",
+                        "LAWS3087": "US Legal Systems (Berkeley)",
+                        "LAWS3139": "Indonesian Law",
+                        "LAWS3157": "Chinese Regulation of International Business",
+                        "LAWS3396": "Family Law Advocacy and Practice",
+                        "LAWS3316": "Expert Evidence",
+                        "LAWS3361": "Environmental Law",
+                        "LAWS3251": "Australian Legal History - Before and After the First Fleet",
+                        "LAWS3751": "Business Taxation",
+                        "LAWS3402": "The Law of Politics",
+                        "LAWS3195": "Anti-Terrorism Law, Criminal Justice and Human Rights",
+                        "LAWS3216": "Food Law",
+                        "LAWS3383": "Legal Aid and Global Justice Lawyering: Issues in Practice",
+                        "LAWS3047": "Australian Bills of Rights and the Protection of Human Rights",
+                        "LAWS3057": "Advanced Intellectual Property Policy and Practice",
+                        "LAWS3395": "Interpretation of Contracts",
+                        "LAWS3022": "Competition Law",
+                        "LAWS3222": "Communications Law",
+                        "LAWS3065": "UNSW Law Journal Editor",
+                        "LAWS3019": "Financial Economics and Law"
+                    },
+                    "title": "Law Elective Courses",
+                    "credits_to_complete": 42,
+                    "core": false,
+                    "levels": [],
+                    "notes": "Students must complete 42 UOC of Law Electives. Note: With the permission of the Director of Undergraduate Studies and the course teacher, undergraduate students may enrol in one or more Postgraduate courses, in a select list of approved Postgraduate Electives. Not more than half the students' total elective courses may be taken from the postgraduate offerings."
+                },
+                {
+                    "courses": {
+                        "LAWS1022": "Criminal Laws",
+                        "LAWS1091": "Business Associations",
+                        "LAWS2150": "Federal Constitutional Law",
+                        "LAWS1075": "Contracts",
+                        "LAWS1150": "Principles of Private Law",
+                        "LAWS1141": "Principles of Public Law",
+                        "LAWS1021": "Crime and the Criminal Process",
+                        "LAWS2383": "Land Law",
+                        "LAWS2385": "Equity and Trusts",
+                        "LAWS1230": "Lawyers, Ethics and Justice",
+                        "LAWS1061": "Torts",
+                        "LAWS2371": "Resolving Civil Disputes",
+                        "LAWS1160": "Administrative Law",
+                        "LAWS1055": "Legal Research and Writing",
+                        "LAWS2270": "Law in the Global Context",
+                        "LAWS2351": "Court Process, Evidence and Proof",
+                        "LAWS1052": "Introducing Law and Justice"
+                    },
+                    "title": "Core Courses",
+                    "credits_to_complete": 96,
+                    "core": true,
+                    "levels": [],
+                    "notes": "Students must take 96 UOC of the following courses."
+                },
+                {
+                    "courses": {
+                        "LAWS2320": "Legal Theory",
+                        "LAWS2384": "Legal Experimentalism",
+                        "LAWS2820": "Law and Social Theory",
+                        "LAWS2326": "Theories of Law and Justice"
+                    },
+                    "title": "Prescribed Theory Electives",
+                    "credits_to_complete": 6,
+                    "core": false,
+                    "levels": [],
+                    "notes": "Students must take 6 UOC of the following courses"
+                }
+            ]
         }
     }
 }
