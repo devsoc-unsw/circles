@@ -18,6 +18,7 @@ Step in the data's journey:
     [   ] Customise formatted data (programProcessing.py)
 """
 import json
+import re
 from data.utility import data_helpers
 
 
@@ -59,6 +60,7 @@ def initialiseProgram(programsFormatted, data):
         "faculty": None,
         "duration": None,
         "CurriculumStructure": [],
+        "description": None,
     }
     # Get course code
     courseCode = data["course_code"]
@@ -81,6 +83,7 @@ def addData(programsFormatted, courseCode, program, data, curriculumStructure):
     prog["studyLevel"] = program.get("studyLevelURL")
     prog["faculty"] = data["parent_academic_org"]["value"]
     prog["duration"] = data.get("full_time_duration")
+    prog["description"] = re.sub(r"<.+?>" , "", data.get("description"))
     # Assign infomation about program cirriculum
     format_curriculum(prog["CurriculumStructure"], curriculumStructure["container"])
 

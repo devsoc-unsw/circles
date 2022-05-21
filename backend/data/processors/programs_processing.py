@@ -81,16 +81,25 @@ def recAddComponentData(programData, item):
     if any(key not in item for key in ("vertical_grouping", "title")):
         return
 
+    programName = findProgramName(programData, item)
+
     if item["vertical_grouping"]["value"] == "GE":
         addGEData(programData, item)
 
-    # If item is part of core disciplinary
-    if "Disciplinary Component" in item["title"]:
-        addDisciplineData(programData, item)
+    if item["vertical_grouping"]["value"] == "undergrad_major":
+        addSpecialisationData(programData, item, programName, "Majors")
 
-    # If item is part of minor
+    if item["vertical_grouping"]["value"] == "honours":
+        addSpecialisationData(programData, item, programName, "Honours")
+
     if item["vertical_grouping"]["value"] == "undergrad_minor":
-        addMinorData(programData, item)
+        addSpecialisationData(programData, item, programName, "Minors")
+
+    if item["vertical_grouping"]["value"] == "PE":
+        addPEData(programData, item)
+
+    if item["vertical_grouping"]["value"] == "CC":
+        addCCData(programData, item)
 
     # Add anything from dynamic relationship unless it's a gened/free elective
     if item["dynamic_relationship"] and item["title"] != "Free Electives" and item["vertical_grouping"]["value"] in ("FE", "PE"):
@@ -181,7 +190,8 @@ def addSpecialisationData(programData, container, programName, field):
     }
     for specialisation in container["relationship"]:
         code = specialisation["academic_item_code"]
-        data[code] = specialisation["academic_item_name"]
+        if code is not None:
+            data[code] = specialisation["academic_item_name"]
 
     SpecialisationData.setdefault(field, {}).update({programName: data})
 
@@ -235,35 +245,6 @@ def addCCData(programData, container):
 
     NonSpecialisationData.append(cc)
 
-# TODO: Clean this function
-def addDisciplineData(programData, item):
-    if "container" not in item:
-        return
-
-    components = programData["components"]
-
-    components.setdefault("SpecialisationData", {})
-    components.setdefault("NonSpecialisationData", [])
-
-    programName = findProgramName(programData, item)
-
-    # Loop through items in disciplinary component
-    for container in item["container"]:
-        if container["vertical_grouping"]["value"] == "undergrad_major":
-            addSpecialisationData(programData, container, programName, "Majors")
-
-        if container["vertical_grouping"]["value"] == "honours":
-            addSpecialisationData(programData, container, programName, "Honours")
-
-        if container["vertical_grouping"]["value"] == "undergrad_minor":
-            addSpecialisationData(programData, container, programName, "Minors")
-
-        if container["vertical_grouping"]["value"] == "PE":
-            addPEData(programData, container)
-
-        if container["vertical_grouping"]["value"] == "CC":
-            addCCData(programData, container)
-
 
 def initialise_program(program):
     """
@@ -280,6 +261,7 @@ def initialise_program(program):
     program_info["UOC"] = int(program["UOC"])
     program_info["faculty"] = program["faculty"]
     program_info["components"] = {}
+    program_info["notes"] = program["description"]
 
     return program_info
 
