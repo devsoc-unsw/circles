@@ -7,9 +7,9 @@ import { Typography } from "antd";
 import "./index.less";
 
 const Marks = ({ courseCode }) => {
-  const { Text } = Typography;
-  const theState = useSelector(state => state);
-  console.log("Marks State is ", theState);
+  // const { Text } = Typography;
+  // const theState = useSelector(state => state);
+  // console.log("Marks State is ", theState);
   // console.log("courses in mark", courses);
   // const { mark } = courses[courseCode];
   const mark = 100;
