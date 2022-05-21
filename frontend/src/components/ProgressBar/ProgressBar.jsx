@@ -1,5 +1,6 @@
 import React from "react";
 import "./index.less";
+import { Progress } from "antd";
 
 const ProgressBar = ({ progress }) => {
   let bgColor = "#3cb371";
@@ -9,25 +10,11 @@ const ProgressBar = ({ progress }) => {
     bgColor = "#ffa500";
   }
 
-  const progressBarStyle = {
-    backgroundColor: `${bgColor}`,
-    width: `${progress}%`,
-  };
-
   return (
-    <div className="progressBarWrapper">
-      <div
-        className="progressBar"
-        style={progressBarStyle}
-      >
-        <span
-          className="progressText"
-        >{`${progress}%`}
-
-        </span>
-      </div>
-    </div>
+    <Progress
+      strokeColor={bgColor}
+      percent={progress}
+    />
   );
 };
-
 export default ProgressBar;

@@ -242,7 +242,9 @@ const CourseDescription = () => {
               </Title>
               <p className="text">{courseCapacity.capacity} Students for {CONFIG.REACT_APP_TERM}</p>
               <ProgressBar
-                progress={Math.round((courseCapacity.enrolments / courseCapacity.capacity) * 100)}
+                progress={
+                  Math.round((courseCapacity.enrolments / courseCapacity.capacity) * 1000) / 10
+                }
               />
             </div>
             )}
