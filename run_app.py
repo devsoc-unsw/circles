@@ -31,13 +31,9 @@ class LogPipe(threading.Thread):
     """Close the write end of the pipe."""
     os.close(self.fdWrite)
 
-  def write(self):
-    """If your code has something like sys.stdout.write"""
+  def write(self, message):
     logging.log(self.level, message)
 
-  def flush(self):
-    """If you code has something like this sys.stdout.flush"""
-    pass
 
 def get_backend_env():
   with open('env/backend.env') as f:
@@ -60,10 +56,22 @@ def main():
   username, password = get_backend_env()
   os.system('docker compose run --rm init-mongo')
   try:
-    backend = Popen(f'MONGODB_SERVICE_HOSTNAME=localhost MONGODB_PASSWORD={password} MONGODB_USERNAME={username}  nodemon --exec python runserver.py', stdout=sys.stdout, stderr=sys.stderr, shell=True, cwd='backend/')
-    frontend = check_call('npm start', shell=True, stdout=sys.stdout, stderr=sys.stderr,  cwd='frontend/')
-  except(CalledProcessError) as exception:
-    sys.stdout.write(f'exception - {exception}')
+    backend = Popen(
+      f'MONGODB_SERVICE_HOSTNAME=localhost MONGODB_PASSWORD={password} MONGODB_USERNAME={username}  nodemon --exec python runserver.py', 
+      stdout=sys.stdout, 
+      stderr=sys.stderr, 
+      shell=True, 
+      cwd='backend/'
+    )
+    frontend = check_call(
+      'npm start', 
+      shell=True, 
+      stdout=sys.stdout, 
+      stderr=sys.stderr,  
+      cwd='frontend/'
+    )
+  except Exception as e:
+    sys.stdout.write(f'exception - {e}')
   finally:
     sys.stdout.close()
     sys.stderr.close()
