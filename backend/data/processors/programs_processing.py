@@ -260,8 +260,8 @@ def initialise_program(program):
     program_info["duration"] = int(duration)
     program_info["UOC"] = int(program["UOC"])
     program_info["faculty"] = program["faculty"]
-    program_info["components"] = {}
     program_info["notes"] = program["description"]
+    program_info["components"] = {}
 
     return program_info
 

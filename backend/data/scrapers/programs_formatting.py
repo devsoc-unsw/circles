@@ -46,8 +46,6 @@ def format_prg_data():
     )
 
 
-
-
 def initialiseProgram(programsFormatted, data):
     """
     Initialises dictionary and assigns it to main programs dictionary
@@ -69,8 +67,6 @@ def initialiseProgram(programsFormatted, data):
     return courseCode
 
 
-
-
 def addData(programsFormatted, courseCode, program, data, curriculumStructure):
     """Assign values from raw data to dictionary"""
 
@@ -83,11 +79,22 @@ def addData(programsFormatted, courseCode, program, data, curriculumStructure):
     prog["studyLevel"] = program.get("studyLevelURL")
     prog["faculty"] = data["parent_academic_org"]["value"]
     prog["duration"] = data.get("full_time_duration")
-    prog["description"] = re.sub(r"<.+?>" , "", data.get("description"))
+    prog["description"] = formatDescription(data.get("description"))
     # Assign infomation about program cirriculum
     format_curriculum(prog["CurriculumStructure"], curriculumStructure["container"])
 
 
+def formatDescription(description):
+    # Get rid of any html tags
+    description = re.sub(r"<.+?>" , " ", description)
+
+    # Get rid of random unicode characters
+    description = re.sub(r"[^\x00-\x7F]+", " ", description)
+
+    # Get rid of double spaces
+    description = re.sub(r"\s+", " ", description)
+
+    return description.strip()
 
 
 def format_curriculum(CurriculumStructure, currcontainer):
@@ -100,7 +107,7 @@ def format_curriculum(CurriculumStructure, currcontainer):
         info = {
             "vertical_grouping": item.get("vertical_grouping"),
             "title": item["title"],
-            "description": item.get("description"),
+            "description": formatDescription(item.get("description")),
             "credit_points": item.get("credit_points"),
             "credit_points_max": item.get("credit_points_max"),
             "parent_record": item["parent_record"]["value"],
@@ -125,7 +132,7 @@ def format_curriculum(CurriculumStructure, currcontainer):
             for course in item["dynamic_relationship"]:
                 item = {}
                 item["value"] = course["parent_record"]["value"]
-                item["description"] = course.get("description")
+                item["description"] = formatDescription(course.get("description"))
                 info["dynamic_relationship"].append(item)
 
         elif "container" in item and item["container"] != []:
