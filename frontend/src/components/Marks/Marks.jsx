@@ -8,7 +8,8 @@ import "./index.less";
 
 const Marks = ({ courseCode }) => {
   const { Text } = Typography;
-  const courses = useSelector(state => state.planner.courses);
+  const theState = useSelector(state => state);
+  console.log("Marks State is ", theState);
   // console.log("courses in mark", courses);
   // const { mark } = courses[courseCode];
   const mark = 100;
