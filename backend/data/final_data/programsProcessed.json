@@ -22,6 +22,7 @@
                 },
                 "Majors": {
                     "Computer Science": {
+                        "notes": "COMPA1 is the default stream, and will be used if no other stream is selected.",
                         "COMPA1": "Computer Science",
                         "COMPY1": "Computer Science (Security Engineering)",
                         "COMPN1": "Computer Science (Computer Networks)",
@@ -54,6 +55,7 @@
                 },
                 "Honours": {
                     "Engineering (Honours)": {
+                        "notes": "Students must complete at least one of the specialisations below.",
                         "CVENBH": "Environmental Engineering",
                         "NAVLAH": "Naval Architecture",
                         "SOLAAH": "Photovoltaics and Solar Energy",
@@ -94,6 +96,7 @@
             "SpecialisationData": {
                 "Majors": {
                     "Science": {
+                        "notes": "Students must complete at least one Science major selected from the list below. Students should declare their major prior to commencing Stage 2 courses.<br /><br />Notes:<br />1.Students are not permitted to take the Bioinformatics major BINFB1 when taking the degree in dual award mode with the Bachelor of Engineering (Bioinformatics) program.",
                         "BIOCC1": "Genetics",
                         "ANATA1": "Anatomy",
                         "MATSB1": "Materials Science",
@@ -213,7 +216,9 @@
                     },
                     "title": "Science Electives",
                     "credits_to_complete": null,
-                    "core": false
+                    "core": false,
+                    "levels": [],
+                    "notes": "Students need to complete 96 UOC to meet the core requirements for the Bachelor of Science. If your choice of specialisation(s) requires less than 96 UOC you are required to complete additional Science elective courses from the following list to meet the 96 UOC requirement."
                 },
                 {
                     "courses": [
@@ -294,6 +299,7 @@
                 },
                 "Majors": {
                     "Commerce": {
+                        "notes": "Students must complete a 48 UOC within a specified discipline (Commerce major) with at least 18 UOC of Level 3 courses to meet program requirements. Please note, this 48 UOC includes 1 course from the Integrated First Year (IFY) core. This means that students will complete 42 UOC in specified disciplinary courses outside the IFY core.",
                         "INFSA1": "Information Systems",
                         "COMMJ1": "Business Analytics",
                         "MGMTH1": "Human Resource Management",
@@ -311,9 +317,6 @@
             },
             "NonSpecialisationData": [
                 {
-                    "core": true,
-                    "title": "Final Year Synthesis",
-                    "credits_to_complete": null,
                     "courses": {
                         "COMM2233": "Industry Consulting Project",
                         "INFS3020": "International Information Systems and Technology Practicum",
@@ -329,25 +332,25 @@
                         "ACTL3192": "Retirement Saving and Spending Over the Lifecycle",
                         "ECON3000": "Evidence-based Intervention Design and Evaluation"
                     },
+                    "title": "Final Year Synthesis",
+                    "credits_to_complete": null,
+                    "core": true,
                     "levels": [],
                     "notes": "Students must complete either a 6 UOC Synthesis of Learning Course, or a 0 UOC Synthesis Experience.<br /><br />Students who complete a Synthesis course that is also a Work Integrated Learning course within a major, will meet a major elective, WIL and Synthesis requirement.<br /><br />Students must complete their Final Year Synthesis course within their final year of their Bachelor of Commerce program. That is, within 48 UOC or less remaining in their BCom program."
                 },
                 {
-                    "core": true,
-                    "title": "myBCom",
-                    "credits_to_complete": null,
                     "courses": {
                         "COMM3999": "myBCom Graduation Portfolio",
                         "COMM0999": "myBCom Blueprint",
                         "COMM1999": "myBCom First Year Portfolio"
                     },
+                    "title": "myBCom",
+                    "credits_to_complete": null,
+                    "core": true,
                     "levels": [],
                     "notes": "Students need to complete three non-credit bearing myBCom professional development elements. COMM0999 is recommended to be enrolled in the first term of study, COMM1999 upon completion of the integrated first year courses and COMM3999 in the final term of study. Students will engage in course Moodle activities as well as the myBCom platform (https://mybcom.unsw.edu.au/) to complete these elements."
                 },
                 {
-                    "core": true,
-                    "title": "Integrated First Year Courses",
-                    "credits_to_complete": 48,
                     "courses": {
                         "COMM1120": "Collaboration and Innovation in Business",
                         "COMM1150": "Global Business Environments",
@@ -358,6 +361,9 @@
                         "COMM1190": "Data, Insights and Decisions",
                         "COMM1110": "Evidence-Based Problem Solving"
                     },
+                    "title": "Integrated First Year Courses",
+                    "credits_to_complete": 48,
+                    "core": true,
                     "levels": [],
                     "notes": "Students must take 48 UOC of the following courses."
                 },
@@ -375,7 +381,9 @@
                     },
                     "title": "Prescribed Work Integrated Learning (WIL) Course",
                     "credits_to_complete": 6,
-                    "core": false
+                    "core": false,
+                    "levels": [],
+                    "notes": "Students must complete a 6 UOC Work Integrated Learning (WIL) course within their program. This course can count as a free elective or where applicable, can count as a Commerce major elective or General Education course.<br />Note: Students in Commerce Double Degrees have the option of meeting the mandatory WIL requirement in the non-Commerce component of the Double Degree."
                 }
             ]
         }
@@ -411,12 +419,11 @@
                     },
                     "title": "Level 2 and Level 3 Electives",
                     "credits_to_complete": 36,
-                    "core": false
+                    "core": false,
+                    "levels": [],
+                    "notes": "Students must take at least 36 UOC of the following courses."
                 },
                 {
-                    "core": true,
-                    "title": "Level 1 Core Courses",
-                    "credits_to_complete": 36,
                     "courses": {
                         "BABS1202": "Applied Biomolecular Sciences",
                         "CHEM1011": "Chemistry 1A: Atoms, Molecules and Energy",
@@ -429,42 +436,45 @@
                         "MATH1241": "Higher Mathematics 1B",
                         "MATH1041": "Statistics for Life and Social Sciences"
                     },
+                    "title": "Level 1 Core Courses",
+                    "credits_to_complete": 36,
+                    "core": true,
                     "levels": [],
                     "notes": "Students must take 36 UOC of the following courses."
                 },
                 {
-                    "core": true,
-                    "title": "Level 3 Core Courses",
-                    "credits_to_complete": 24,
                     "courses": {
                         "BABS3031": "Biotechnology and Bioengineering",
                         "BABS3071": "Commercial Biotechnology",
                         "BABS3061": "Medical Biotechnology",
                         "BABS3200": "Synthetic Biology"
                     },
+                    "title": "Level 3 Core Courses",
+                    "credits_to_complete": 24,
+                    "core": true,
                     "levels": [],
                     "notes": "Students must take 24 UOC of the following courses."
                 },
                 {
-                    "core": true,
-                    "title": "Level 2 Core Courses",
-                    "credits_to_complete": 24,
                     "courses": {
                         "BIOC2201": "Principles of Molecular Biology (Advanced)",
                         "BABS2011": "Current Trends in Biotechnology",
                         "BIOC2101": "Principles of Biochemistry (Advanced)",
                         "MICR2011": "Microbiology 1"
                     },
+                    "title": "Level 2 Core Courses",
+                    "credits_to_complete": 24,
+                    "core": true,
                     "levels": [],
                     "notes": "Students must take 24 UOC of the following courses."
                 },
                 {
-                    "core": true,
-                    "title": "Level 4 Core Course",
-                    "credits_to_complete": 48,
                     "courses": {
                         "BABS4516": "Biotechnology and Biomolecular Sciences Honours"
                     },
+                    "title": "Level 4 Core Course",
+                    "credits_to_complete": 48,
+                    "core": true,
                     "levels": [],
                     "notes": "Students must take BABS4516 (16 UOC) three times per year for a total of 48 UOC."
                 },
@@ -507,9 +517,6 @@
             "SpecialisationData": {},
             "NonSpecialisationData": [
                 {
-                    "core": true,
-                    "title": "Business Core Courses",
-                    "credits_to_complete": 30,
                     "courses": {
                         "COMM1180": "Value Creation",
                         "COMM1120": "Collaboration and Innovation in Business",
@@ -519,13 +526,13 @@
                         "COMM1110": "Evidence-Based Problem Solving",
                         "COMM1100": "Business Decision Making"
                     },
+                    "title": "Business Core Courses",
+                    "credits_to_complete": 30,
+                    "core": true,
                     "levels": [],
                     "notes": "Students must take 30 UOC of the following courses."
                 },
                 {
-                    "core": true,
-                    "title": "Information Systems core courses",
-                    "credits_to_complete": 72,
                     "courses": {
                         "INFS3700": "User Experience and IT Service Design",
                         "INFS2701": "Cyber Security Management and Governance",
@@ -540,6 +547,9 @@
                         "INFS2603": "Business Analysis and Agile Product Management",
                         "INFS3703": "Information Systems Project Management"
                     },
+                    "title": "Information Systems core courses",
+                    "credits_to_complete": 72,
+                    "core": true,
                     "levels": [],
                     "notes": "Students must take 72 UOC of the following courses."
                 },
@@ -552,13 +562,17 @@
                     },
                     "title": "Work Integrated Learning (WIL)",
                     "credits_to_complete": 6,
-                    "core": false
+                    "core": false,
+                    "levels": [],
+                    "notes": "As part of the BIS degree students must complete at least one WIL course."
                 },
                 {
                     "courses": {},
                     "title": "Prescribed Information Systems Electives",
                     "credits_to_complete": 12,
-                    "core": false
+                    "core": false,
+                    "levels": [],
+                    "notes": "Choose any two IS Electives from the following courses."
                 }
             ]
         }
@@ -576,6 +590,7 @@
             "SpecialisationData": {
                 "Majors": {
                     "Data Science and Decisions": {
+                        "notes": "Students must complete only one of the following majors. Each major is 66-72 UoC. 18-24 UoC of program core courses are double-counted towards your major and the remaining 48 UoC are specific to your major.",
                         "ECONL1": "Business Data Science",
                         "COMPZ1": "Computational Data Science",
                         "MATHE1": "Quantitative Data Science"
@@ -584,9 +599,6 @@
             },
             "NonSpecialisationData": [
                 {
-                    "core": true,
-                    "title": "Level 2 Core Courses",
-                    "credits_to_complete": 18,
                     "courses": {
                         "MATH2601": "Higher Linear Algebra",
                         "MATH2501": "Linear Algebra",
@@ -594,25 +606,25 @@
                         "MATH2801": "Theory of Statistics",
                         "MATH2901": "Higher Theory of Statistics"
                     },
+                    "title": "Level 2 Core Courses",
+                    "credits_to_complete": 18,
+                    "core": true,
                     "levels": [],
                     "notes": "Students must take 18 UOC of the following courses."
                 },
                 {
-                    "core": true,
-                    "title": "Level 3 Core Courses",
-                    "credits_to_complete": 18,
                     "courses": {
                         "DATA3001": "Data Science and Decisions in Practice",
                         "COMP3311": "Database Systems",
                         "ECON3203": "Econometric Theory and Methods"
                     },
+                    "title": "Level 3 Core Courses",
+                    "credits_to_complete": 18,
+                    "core": true,
                     "levels": [],
                     "notes": "Students must take 18 UOC of the following courses."
                 },
                 {
-                    "core": true,
-                    "title": "Level 1 Core Courses",
-                    "credits_to_complete": 36,
                     "courses": {
                         "COMP2521": "Data Structures and Algorithms",
                         "ECON1101": "Microeconomics 1",
@@ -623,6 +635,9 @@
                         "MATH1131": "Mathematics 1A",
                         "MATH1141": "Higher Mathematics 1A"
                     },
+                    "title": "Level 1 Core Courses",
+                    "credits_to_complete": 36,
+                    "core": true,
                     "levels": [],
                     "notes": "Students must take 36 UOC of the following courses."
                 }
@@ -642,9 +657,6 @@
             "SpecialisationData": {},
             "NonSpecialisationData": [
                 {
-                    "core": true,
-                    "title": "Level 3 Core Courses",
-                    "credits_to_complete": 42,
                     "courses": {
                         "OPTM3233": "Working in Clinical Contexts",
                         "VISN3111": "Development and Aging of the Visual System",
@@ -654,13 +666,13 @@
                         "OPTM3133": "Vision Science in the Consulting Room",
                         "OPTM3205": "Disease Processes of the Eye 2"
                     },
+                    "title": "Level 3 Core Courses",
+                    "credits_to_complete": 42,
+                    "core": true,
                     "levels": [],
                     "notes": "Students must take 42 UOC of the following courses."
                 },
                 {
-                    "core": true,
-                    "title": "Level 1 Core Courses",
-                    "credits_to_complete": 48,
                     "courses": {
                         "BABS1201": "Molecules, Cells and Genes",
                         "CHEM1829": "Biological Chemistry for Optometry Students",
@@ -675,13 +687,13 @@
                         "MATH1141": "Higher Mathematics 1A",
                         "MATH1131": "Mathematics 1A"
                     },
+                    "title": "Level 1 Core Courses",
+                    "credits_to_complete": 48,
+                    "core": true,
                     "levels": [],
                     "notes": "Students must take 48 UOC of the following courses."
                 },
                 {
-                    "core": true,
-                    "title": "Level 2 Core Courses",
-                    "credits_to_complete": 42,
                     "courses": {
                         "PHSL2101": "Physiology 1A",
                         "VISN2111": "Ocular Anatomy and Physiology",
@@ -691,6 +703,9 @@
                         "ANAT2111": "Introductory Anatomy",
                         "OPTM2233": "Optical Dispensing"
                     },
+                    "title": "Level 2 Core Courses",
+                    "credits_to_complete": 42,
+                    "core": true,
                     "levels": [],
                     "notes": "Students must take 42 UOC of the following courses."
                 }
@@ -710,6 +725,7 @@
             "SpecialisationData": {
                 "Majors": {
                     "Economics": {
+                        "notes": "Students may choose to complete one or two optional Economics majors.  Students may use their Economics Core and Economics Elective courses to complete these economics majors. Please note: If you choose to study two optional Economics majors, you must choose another 6 courses (36 UOC) from the second major that do not overlap with the first optional major.",
                         "ECONT1": "Data Analytics and Econometrics",
                         "ECONV1": "Macroeconomics and Financial Markets",
                         "ECONU1": "Economic Policy and Society"
@@ -726,18 +742,19 @@
                     },
                     "title": "Introductory Business Course",
                     "credits_to_complete": 6,
-                    "core": false
+                    "core": false,
+                    "levels": [],
+                    "notes": "Students must take 6 UOC of the following courses.  <br /><br />Please Note:  The below courses cannot be counted towards an Economics major.<br />"
                 },
                 {
                     "courses": {},
                     "title": "Economics Electives",
                     "credits_to_complete": 30,
-                    "core": false
+                    "core": false,
+                    "levels": [],
+                    "notes": "Students must take 30 UOC of the following courses with at least 18 UOC of level 3 Economics courses. "
                 },
                 {
-                    "core": true,
-                    "title": "Economics Core",
-                    "credits_to_complete": 48,
                     "courses": {
                         "ECON1203": "Business and Economic Statistics",
                         "ECON2101": "Microeconomics 2",
@@ -748,6 +765,9 @@
                         "ECON1101": "Microeconomics 1",
                         "ECON1401": "Economic Perspectives"
                     },
+                    "title": "Economics Core",
+                    "credits_to_complete": 48,
+                    "core": true,
                     "levels": [],
                     "notes": "Students must take 48 UOC of the following courses."
                 },
@@ -757,7 +777,9 @@
                     },
                     "title": "UNSW Business Electives",
                     "credits_to_complete": 12,
-                    "core": false
+                    "core": false,
+                    "levels": [],
+                    "notes": "Students must complete 12 UOC of Business School electives. Students are encouraged to select a Work-Integrated Learning course as one of their Business School elective courses - e.g., COMM3020, COMM3030, COMM3101, or COMM3202."
                 },
                 {
                     "courses": [
@@ -805,9 +827,6 @@
             "SpecialisationData": {},
             "NonSpecialisationData": [
                 {
-                    "core": true,
-                    "title": "Level 1 Core Courses",
-                    "credits_to_complete": 48,
                     "courses": {
                         "ACTL1101": "Introduction to Actuarial Studies",
                         "MATH1151": "Mathematics for Actuarial Studies and Finance 1A",
@@ -818,6 +837,9 @@
                         "COMM1180": "Value Creation",
                         "ECON1102": "Macroeconomics 1"
                     },
+                    "title": "Level 1 Core Courses",
+                    "credits_to_complete": 48,
+                    "core": true,
                     "levels": [],
                     "notes": "Students must take 48 UOC of the following courses."
                 },
@@ -835,18 +857,20 @@
                     },
                     "title": "Level 3 Actuarial Electives",
                     "credits_to_complete": 24,
-                    "core": false
+                    "core": false,
+                    "levels": [],
+                    "notes": "Students must complete 24 UOC of the following courses."
                 },
                 {
-                    "core": true,
-                    "title": "Level 2 Core Courses",
-                    "credits_to_complete": 24,
                     "courses": {
                         "ACTL2102": "Foundations of Actuarial Models",
                         "ACTL2131": "Probability and Mathematical Statistics",
                         "ACTL2111": "Financial Mathematics for Actuaries",
                         "COMM2501": "Data Visualisation and Communication"
                     },
+                    "title": "Level 2 Core Courses",
+                    "credits_to_complete": 24,
+                    "core": true,
                     "levels": [],
                     "notes": "Students must take 24 UOC of the following courses.<br /><br />Students may replace ACTL2131 with the two courses MATH2901 Higher Theory of Statistics and MATH2931 Higher Linear Models. If students make this replacement, MATH2901 will count towards ACTL2131, and MATH2931 will be counted towards a major where this course is required or as a Business elective."
                 }
@@ -866,9 +890,6 @@
             "SpecialisationData": {},
             "NonSpecialisationData": [
                 {
-                    "core": true,
-                    "title": "Stage 2 Core Courses",
-                    "credits_to_complete": 84,
                     "courses": {
                         "MFAC2515": "Integrated Clinical Studies 2",
                         "MFAC2507": "Clinical Transition",
@@ -879,13 +900,13 @@
                         "MFAC4001": "Value-Based Health Care in Clinical Practice",
                         "MFAC4999": "Independent Learning Project (ILP)"
                     },
+                    "title": "Stage 2 Core Courses",
+                    "credits_to_complete": 84,
+                    "core": true,
                     "levels": [],
                     "notes": "Students must take 84 UOC of the following courses.<br /><br />Note: <br />- MFAC4001 (2 UOC) is a multi-term course run over 3-terms for a total UOC of 6. <br />- MFAC4999 (8 UOC) is a multi-term course run over 3-terms for a total UOC of 24. <br />- MFAC4001 and MFAC4999 must be taken concurrently in Year 4"
                 },
                 {
-                    "core": true,
-                    "title": "Stage 1 Core Courses",
-                    "credits_to_complete": 96,
                     "courses": {
                         "MFAC1513": "Phase 1 Clinical and Communications Skills Examination",
                         "MFAC1501": "Foundations",
@@ -899,13 +920,13 @@
                         "MFAC1512": "Phase 1 End-of-Phase Examination",
                         "MFAC1511": "Phase 1 Portfolio Examination"
                     },
+                    "title": "Stage 1 Core Courses",
+                    "credits_to_complete": 96,
+                    "core": true,
                     "levels": [],
                     "notes": "Students must take 96 UOC of the following courses."
                 },
                 {
-                    "core": true,
-                    "title": "Stage 3 Core Courses",
-                    "credits_to_complete": 96,
                     "courses": {
                         "MFAC3508": "Emergency / Selective",
                         "MFAC3505": "Obstetrics and Gynaecology",
@@ -921,6 +942,9 @@
                         "MFAC3503": "Psychiatry",
                         "MFAC3522": "Phase 3 Portfolio Examination"
                     },
+                    "title": "Stage 3 Core Courses",
+                    "credits_to_complete": 96,
+                    "core": true,
                     "levels": [],
                     "notes": "Students must complete 96 UOC of Stage 3 core courses.<br /><br />Note: Students who are enrolled concurrently in the Bachelor of Medicine and the Bachelor of Arts programs must complete the Bachelor of Arts program requirements prior to commencing Stage 3 of the Medicine program. Upon rejoining the Medicine program, they will undertake a short clinical skills refresher course."
                 }
@@ -940,9 +964,6 @@
             "SpecialisationData": {},
             "NonSpecialisationData": [
                 {
-                    "core": true,
-                    "title": "Level 4 Core Courses",
-                    "credits_to_complete": 36,
                     "courses": {
                         "HESC4551": "Research Project",
                         "HESC4561": "Research Internship A",
@@ -952,13 +973,13 @@
                         "HESC4501": "Exercise Physiology Research Seminars",
                         "HESC4622": "Clinical Practicum B"
                     },
+                    "title": "Level 4 Core Courses",
+                    "credits_to_complete": 36,
+                    "core": true,
                     "levels": [],
                     "notes": "Students must take 36 UOC of the following courses.<br /><br />For entry into the 20-week 4th year research internship, a minimum program WAM of 65 is required."
                 },
                 {
-                    "core": true,
-                    "title": "Level 3 Core Courses",
-                    "credits_to_complete": 48,
                     "courses": {
                         "NEUR3101": "Muscle and Motor Control",
                         "HESC3592": "Neuromuscular Rehabilitation",
@@ -969,13 +990,13 @@
                         "HESC3511": "Health, Exercise and Sport Psychology",
                         "HESC3532": "Movement Rehabilitation"
                     },
+                    "title": "Level 3 Core Courses",
+                    "credits_to_complete": 48,
+                    "core": true,
                     "levels": [],
                     "notes": "Students must take 48 UOC of the following courses.<br /><br />A Senior First Aid and CPR Certificate, Immunisation, Criminal Record and Working with Children Check must be obtained before commencing HESC3501 Advanced Exercise Science and must be valid till the completion of the program."
                 },
                 {
-                    "core": true,
-                    "title": "Level 1 Core Courses",
-                    "credits_to_complete": 42,
                     "courses": {
                         "CHEM1831": "Chemistry for Exercise Physiology",
                         "HESC1511": "Exercise Programs and Behaviour",
@@ -985,6 +1006,9 @@
                         "ANAT2111": "Introductory Anatomy",
                         "HESC1501": "Introductory Exercise Science"
                     },
+                    "title": "Level 1 Core Courses",
+                    "credits_to_complete": 42,
+                    "core": true,
                     "levels": [],
                     "notes": "Students must take 42 UOC of the following courses."
                 },
@@ -1011,12 +1035,11 @@
                     },
                     "title": "Electives",
                     "credits_to_complete": 6,
-                    "core": false
+                    "core": false,
+                    "levels": [],
+                    "notes": "Students must complete one 6 UOC elective course. The following courses are recommended,"
                 },
                 {
-                    "core": true,
-                    "title": "Level 2 Core Courses",
-                    "credits_to_complete": 48,
                     "courses": {
                         "HESC2501": "Exercise Physiology",
                         "PHSL2501": "Human Physiology A",
@@ -1027,6 +1050,9 @@
                         "HESC2452": "Movement Assessment and Instruction",
                         "HESC2451": "Biomechanics"
                     },
+                    "title": "Level 2 Core Courses",
+                    "credits_to_complete": 48,
+                    "core": true,
                     "levels": [],
                     "notes": "Students must take 48 UOC of the following courses."
                 }
@@ -1046,6 +1072,7 @@
             "SpecialisationData": {
                 "Majors": {
                     "Advanced Mathematics (Honours)": {
+                        "notes": "Students must complete exactly one approved Bachelor of Science (Advanced Mathematics) (Honours) major, and this must be declared before enrolling in Level III courses. Students cannot undertake a double major in this program.",
                         "MATHU1": "Advanced Statistics",
                         "MATHA1": "Applied Mathematics",
                         "MATHP1": "Pure Mathematics"
@@ -1053,6 +1080,7 @@
                 },
                 "Honours": {
                     "Advanced Mathematics (Honours)": {
+                        "notes": "Students must complete at least one of the specialisations below.",
                         "MATHTH": "Statistics",
                         "MATHPH": "Pure Mathematics",
                         "MATHAH": "Applied Mathematics"
@@ -1061,12 +1089,12 @@
             },
             "NonSpecialisationData": [
                 {
-                    "core": true,
-                    "title": "Level 1 Core Course",
-                    "credits_to_complete": 6,
                     "courses": {
                         "SCIF1131": "Introductory Skills for Science"
                     },
+                    "title": "Level 1 Core Course",
+                    "credits_to_complete": 6,
+                    "core": true,
                     "levels": [],
                     "notes": "Students must take the following course."
                 },
@@ -1102,7 +1130,9 @@
                     },
                     "title": "Science Electives",
                     "credits_to_complete": null,
-                    "core": false
+                    "core": false,
+                    "levels": [],
+                    "notes": "Students must take 'science' courses so that the major plus SCIF1131, plus Honours year plus 'science' courses total 144 units of credit."
                 },
                 {
                     "courses": [
@@ -1154,6 +1184,7 @@
             "SpecialisationData": {
                 "Minors": {
                     "Science": {
+                        "notes": "Students may choose to complete an optional minor in one of the following areas, using their Science and/or free electives.  ",
                         "GEOGH2": "Physical Geography",
                         "GEOLF2": "Geology",
                         "ANATB2": "Anatomy",
@@ -1196,6 +1227,7 @@
                 },
                 "Majors": {
                     "Science": {
+                        "notes": "Students must complete at least one Science major selected from the list below. Students should declare their major prior to commencing Stage 2 courses.<br /><br />Notes:<br />1.Students are not permitted to take the Bioinformatics major BINFB1 when taking the degree in dual award mode with the Bachelor of Engineering (Bioinformatics) program.",
                         "PHARA1": "Pharmacology",
                         "PHSLA1": "Physiology",
                         "PATHA1": "Pathology",
@@ -1223,6 +1255,7 @@
                         "MATSB1": "Materials Science"
                     },
                     "Computer Science": {
+                        "notes": "COMPA1 is the default stream, and will be used if no other stream is selected.",
                         "COMPJ1": "Computer Science (Programming Languages)",
                         "COMPD1": "Computer Science (Database Systems)",
                         "COMPN1": "Computer Science (Computer Networks)",
@@ -1265,7 +1298,9 @@
                     },
                     "title": "Science Electives",
                     "credits_to_complete": null,
-                    "core": false
+                    "core": false,
+                    "levels": [],
+                    "notes": "Students need to complete 96 UOC to meet the core requirements for the Bachelor of Science. If your choice of specialisation(s) requires less than 96 UOC you are required to complete additional Science elective courses from the following list to meet the 96 UOC requirement."
                 },
                 {
                     "courses": [
@@ -1315,6 +1350,7 @@
             "SpecialisationData": {
                 "Majors": {
                     "null": {
+                        "notes": "COMPA1 is the default stream, and will be used if no other stream is selected.",
                         "COMPJ1": "Computer Science (Programming Languages)",
                         "COMPY1": "Computer Science (Security Engineering)",
                         "COMPI1": "Computer Science (Artificial Intelligence)",
@@ -1325,6 +1361,7 @@
                         "COMPS1": "Computer Science (Embedded Systems)"
                     },
                     "Commerce": {
+                        "notes": "Students must complete a 48 UOC within a specified discipline (Commerce major) with at least 18 UOC of Level 3 courses to meet program requirements. Please note, this 48 UOC includes 1 course from the Integrated First Year (IFY) core. This means that students will complete 42 UOC in specified disciplinary courses outside the IFY core.",
                         "MGMTJ1": "Innovation, Strategy and Entrepreneurship",
                         "IBUSA1": "International Business",
                         "INFSA1": "Information Systems",
@@ -1341,6 +1378,7 @@
                 },
                 "Minors": {
                     "Commerce": {
+                        "notes": "Students may choose to use their electives to complete one of the following minors.<br /><br />Minor Requirements: An approved disciplinary stream containing at least 18 UOC at Level 2 and Level 3.",
                         "MARKA2": "Marketing",
                         "ACCTA2": "Accounting",
                         "FINSA2": "Finance",
@@ -1385,12 +1423,11 @@
                     },
                     "title": "Prescribed Work Integrated Learning (WIL) Course",
                     "credits_to_complete": 6,
-                    "core": false
+                    "core": false,
+                    "levels": [],
+                    "notes": "Students must complete a 6 UOC Work Integrated Learning (WIL) course within their program. This course can count as a free elective or where applicable, can count as a Commerce major elective or General Education course.<br />Note: Students in Commerce Double Degrees have the option of meeting the mandatory WIL requirement in the non-Commerce component of the Double Degree."
                 },
                 {
-                    "core": true,
-                    "title": "Integrated First Year Courses",
-                    "credits_to_complete": 48,
                     "courses": {
                         "COMM1180": "Value Creation",
                         "COMM1140": "Financial Management",
@@ -1401,13 +1438,13 @@
                         "COMM1100": "Business Decision Making",
                         "COMM1110": "Evidence-Based Problem Solving"
                     },
+                    "title": "Integrated First Year Courses",
+                    "credits_to_complete": 48,
+                    "core": true,
                     "levels": [],
                     "notes": "Students must take 48 UOC of the following courses."
                 },
                 {
-                    "core": true,
-                    "title": "Final Year Synthesis",
-                    "credits_to_complete": null,
                     "courses": {
                         "COMM3030": "Social Entrepreneurship Practicum",
                         "TABL3033": "UNSW Tax and Business Advisory Clinic",
@@ -1423,18 +1460,21 @@
                         "MGMT3004": "Solving Complex Strategy and Policy Problems",
                         "ECON3000": "Evidence-based Intervention Design and Evaluation"
                     },
+                    "title": "Final Year Synthesis",
+                    "credits_to_complete": null,
+                    "core": true,
                     "levels": [],
                     "notes": "Students must complete either a 6 UOC Synthesis of Learning Course, or a 0 UOC Synthesis Experience.<br /><br />Students who complete a Synthesis course that is also a Work Integrated Learning course within a major, will meet a major elective, WIL and Synthesis requirement.<br /><br />Students must complete their Final Year Synthesis course within their final year of their Bachelor of Commerce program. That is, within 48 UOC or less remaining in their BCom program."
                 },
                 {
-                    "core": true,
-                    "title": "myBCom",
-                    "credits_to_complete": null,
                     "courses": {
                         "COMM3999": "myBCom Graduation Portfolio",
                         "COMM0999": "myBCom Blueprint",
                         "COMM1999": "myBCom First Year Portfolio"
                     },
+                    "title": "myBCom",
+                    "credits_to_complete": null,
+                    "core": true,
                     "levels": [],
                     "notes": "Students need to complete three non-credit bearing myBCom professional development elements. COMM0999 is recommended to be enrolled in the first term of study, COMM1999 upon completion of the integrated first year courses and COMM3999 in the final term of study. Students will engage in course Moodle activities as well as the myBCom platform (https://mybcom.unsw.edu.au/) to complete these elements."
                 }
@@ -1452,6 +1492,7 @@
             "SpecialisationData": {
                 "Majors": {
                     "Computer Science": {
+                        "notes": "COMPA1 is the default stream, and will be used if no other stream is selected.",
                         "COMPD1": "Computer Science (Database Systems)",
                         "COMPS1": "Computer Science (Embedded Systems)",
                         "COMPA1": "Computer Science",
@@ -1464,6 +1505,7 @@
                 },
                 "Honours": {
                     "Engineering (Honours)": {
+                        "notes": "Students must complete at least one of the specialisations below.",
                         "SOLABH": "Renewable Energy Engineering",
                         "PETRAH": "Petroleum Engineering",
                         "MINEAH": "Mining Engineering",

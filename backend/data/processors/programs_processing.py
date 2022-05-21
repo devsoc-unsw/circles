@@ -174,15 +174,66 @@ def findProgramName(programData, item):
     print(f"Warning: Couldn't find any of names = {sortedProgramNames} for program code {programData['code']}")
 
 
-def addSpecialisationData(programData, field, container, programName):
+def addSpecialisationData(programData, container, programName, field):
     SpecialisationData = programData["components"]["SpecialisationData"]
-    data = {}
+    data = {
+        "notes": container["description"],
+    }
     for specialisation in container["relationship"]:
         code = specialisation["academic_item_code"]
         data[code] = specialisation["academic_item_name"]
 
     SpecialisationData.setdefault(field, {}).update({programName: data})
 
+def addPEData(programData, container):
+    # If item is a prescribed elective, loop through and add data to nonspecialisationdata
+    NonSpecialisationData = programData["components"]["NonSpecialisationData"]
+    pe = {
+        "courses": {},
+        "title": container["title"],
+        "credits_to_complete": getCredits(container),
+        "core": False,
+        "levels": [], # TODO
+        "notes": container["description"],
+    }
+
+    # Figure out if there are sub relations
+    if container["relationship"] != []:
+        for course in container["relationship"]:
+            code = course["academic_item_code"]
+            pe["courses"][code] = course["academic_item_name"]
+    else:
+        for course in container["dynamic_relationship"]:
+            pe["courses"][course["description"]] = 1
+
+    # Append this new requirement
+    NonSpecialisationData.append(pe) # TODO: [container["title"]]
+
+def addCCData(programData, container):
+    # If item is a core course
+    NonSpecialisationData = programData["components"]["NonSpecialisationData"]
+    cc = {
+        "courses": {},
+        "title": container["title"],
+        "credits_to_complete": getCredits(container),
+        "core": True,
+        "levels": [], # TODO
+        "notes": container["description"],
+    }
+
+    # If there are multiple courses
+    if container["container"] != []:
+        # Loop through and find all courses and add them
+        for item in container["container"]:
+            for course in item["relationship"]:
+                code = course["academic_item_code"]
+                cc["courses"][code] = course["academic_item_name"]
+    else:
+        for course in container["relationship"]:
+            code = course["academic_item_code"]
+            cc["courses"][code] = course["academic_item_name"]
+
+    NonSpecialisationData.append(cc)
 
 # TODO: Clean this function
 def addDisciplineData(programData, item):
@@ -194,64 +245,24 @@ def addDisciplineData(programData, item):
     components.setdefault("SpecialisationData", {})
     components.setdefault("NonSpecialisationData", [])
 
-    NonSpecialisationData = components["NonSpecialisationData"]
-
     programName = findProgramName(programData, item)
 
     # Loop through items in disciplinary component
     for container in item["container"]:
         if container["vertical_grouping"]["value"] == "undergrad_major":
-            addSpecialisationData(programData, "Majors", container, programName)
+            addSpecialisationData(programData, container, programName, "Majors")
+
         if container["vertical_grouping"]["value"] == "honours":
-            addSpecialisationData(programData, "Honours", container, programName)
+            addSpecialisationData(programData, container, programName, "Honours")
+
         if container["vertical_grouping"]["value"] == "undergrad_minor":
-            addSpecialisationData(programData, "Minors", container, programName)
+            addSpecialisationData(programData, container, programName, "Minors")
 
-        # If item is a prescribed elective, loop through and add data to nonspecialisationdata
         if container["vertical_grouping"]["value"] == "PE":
-            PE = {
-                "courses": {},
-                "title": container["title"],
-                "credits_to_complete": getCredits(container),
-                "core": False,
-            }
+            addPEData(programData, container)
 
-            # Figure out if there are sub relations
-            if container["relationship"] != []:
-                for course in container["relationship"]:
-                    code = course["academic_item_code"]
-                    PE["courses"][code] = course["academic_item_name"]
-            else:
-                for course in container["dynamic_relationship"]:
-                    PE["courses"][course["description"]] = 1
-
-            # Append this new requirement
-            NonSpecialisationData.append(PE) # TODO: [container["title"]]
-
-        # If item is a core course
         if container["vertical_grouping"]["value"] == "CC":
-            CC = {
-                "core": True,
-                "title": container["title"],
-                "credits_to_complete": getCredits(container),
-                "courses": {},
-                "levels": [], # TODO
-                "notes": container["description"],
-            }
-
-            # If there are multiple courses
-            if container["container"] != []:
-                # Loop through and find all courses and add them
-                for item in container["container"]:
-                    for course in item["relationship"]:
-                        code = course["academic_item_code"]
-                        CC["courses"][code] = course["academic_item_name"]
-            else:
-                for course in container["relationship"]:
-                    code = course["academic_item_code"]
-                    CC["courses"][code] = course["academic_item_name"]
-
-            NonSpecialisationData.append(CC)
+            addCCData(programData, container)
 
 
 def initialise_program(program):
