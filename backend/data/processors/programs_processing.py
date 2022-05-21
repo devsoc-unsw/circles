@@ -79,11 +79,11 @@ def addComponentData(formatted, programData):
     # Order dict alphabetically
     OrderedDict(sorted(programData["components"].items(), key=lambda t: t[0]))
 
-def recAddComponentData(programData, item, programName = ""):
+def recAddComponentData(programData, item, programName = None):
     if any(key not in item for key in ("vertical_grouping", "title")):
         return
 
-    programName = findProgramName(programData, item) if programName == "" else programName
+    programName = findProgramName(programData, item) if programName == None else programName
 
     if item["vertical_grouping"]["value"] == "GE":
         addGEData(programData, item)
@@ -136,24 +136,6 @@ def getCredits(item):
             return int(item["credit_points"])
         except ValueError:
             return int(item["credit_points_max"])
-
-
-def addMinorData(programData, item):
-    # Loop through list of minors
-    minorData = {}
-    for minor in item["relationship"]:
-        # If item is a minor, add it to list
-        if minor["academic_item_type"] and minor["academic_item_type"]["value"] == "minor":
-            code = minor["academic_item_code"]
-            minorData[code] = minor["academic_item_name"]
-
-    # Append to minor data
-    SpecialisationData = programData["components"]["SpecialisationData"]
-    if "Minors" not in SpecialisationData:
-        SpecialisationData["Minors"] = {}
-
-    programName = findProgramName(programData, item)
-    SpecialisationData["Minors"][programName] = minorData
 
 
 # TODO: This function doesn't work properly. Must make it more robust (see my attempt below)
