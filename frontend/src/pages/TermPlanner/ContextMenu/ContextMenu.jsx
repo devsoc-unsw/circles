@@ -71,8 +71,6 @@ const ContextMenu = ({ code, plannedFor }) => {
 
   const handleConfirmEditMark = () => {
     const attemptedMark = (' ' + markInputBuf).slice(1).replace(" ", "");
-    console.log("confirm", attemptedMark, markInputBuf);
-
     
     if (
       (isNaN(attemptedMark) && !validLetterGrades.includes(attemptedMark))
@@ -80,16 +78,12 @@ const ContextMenu = ({ code, plannedFor }) => {
     ) {
       return message.error("Could not update mark. Please enter a valid mark or letter grade");
     }
-    console.log(updateCourseMark);
     
-    console.log("dispatchign");
     dispatch(updateCourseMark({
       "code": code,
       "mark": isNaN(attemptedMark) ? attemptedMark : parseInt(attemptedMark),
     }));
-    console.log("finished dispatch");
     setMarkInput("");
-    console.log("setMarkInput:", markInput);
     setIsEditMarkVisible(false);
     return message.success("Mark Updated")
   }

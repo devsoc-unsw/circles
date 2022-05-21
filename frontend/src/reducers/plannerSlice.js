@@ -96,15 +96,9 @@ const plannerSlice = createSlice({
       }
     },
     updateCourseMark: (state, action) => {
-      console.log("inside reducer");
-      console.log(action);
-      console.log("payload", action.payload);
       const { code, mark } = action.payload;
-      console.log("reducer", state);
-      console.log("courses", state.courses);
 
       if (state.courses[code]) {
-        console.log("reached if", state.courses[code]);
         state.courses[code].mark = mark;
       }
     },

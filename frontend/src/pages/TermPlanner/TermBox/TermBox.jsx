@@ -25,8 +25,6 @@ const TermBox = ({
 
   const isOffered = termsOffered.includes(term) && !isCompleted;
 
-  console.log("showMarks in TermBox: ", showMarks);
-
   return (
     <Droppable droppableId={name} isDropDisabled={isCompleted}>
       {(provided) => (

@@ -10,7 +10,6 @@ const EditMarks = ({ handleConfirm, handleKeyDown, inputBuffer, setInputBuffer }
 
   // ? Move outside of the function
   const handleLetterGrade = (e) => {
-    console.log(e.target.value);
     setInputBuffer(e.target.value);
     handleConfirm();
   }

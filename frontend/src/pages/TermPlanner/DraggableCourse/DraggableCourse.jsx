@@ -97,14 +97,11 @@ const DraggableCourse = ({ code, index, showMarks }) => {
                 }
                 </div>
             </div>
-            <div className="kebab-container">
+            {/* <div className="kebab-container">
               <KebabMenu
-                data-tip
-                data-for={code}
-                id={code}
                 onClick={displayContextMenu}
               />
-            </div>
+            </div> */}
           </li>
         )}
       </Draggable>

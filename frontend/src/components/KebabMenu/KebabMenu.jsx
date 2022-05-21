@@ -4,9 +4,8 @@ import React from "react";
 import { useContextMenu } from "react-contexify";
 import "./index.less";
 
-const KebabMenuIcon = ({ code }) => {
+const KebabMenuIcon = () => {
 
-  // ? Should this have a query for light / dark mode?
   return (
     <svg
       className="KebabMenuIcon"
