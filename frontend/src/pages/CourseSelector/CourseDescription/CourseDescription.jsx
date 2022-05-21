@@ -28,7 +28,7 @@ const CourseDescription = () => {
   const { degree, planner } = useSelector((state) => state);
   const [pageLoaded, setPageLoaded] = useState(false);
   const [coursesPathTo, setCoursesPathTo] = useState({});
-  const [courseCapacity, setCourseCapacity] = useState({ enrolments: 0, capacity: 0 });
+  const [courseCapacity, setCourseCapacity] = useState({});
 
   useEffect(() => {
     const getCourse = async () => {
@@ -81,7 +81,7 @@ const CourseDescription = () => {
       if (!err) {
         getCapacityAndEnrolment(data);
       } else {
-        setCourseCapacity({ enrolments: 0, capacity: 0 });
+        setCourseCapacity({});
       }
     };
 
@@ -235,7 +235,7 @@ const CourseDescription = () => {
               </Title>
               <a href={`https://www.handbook.unsw.edu.au/${course.study_level.toLowerCase()}/courses/2022/${course.code}/`}>View {course.code} in handbook</a>
             </div>
-            {courseCapacity.enrolments !== 0 && (
+            {Object.keys(courseCapacity).length !== 0 && (
             <div>
               <Title level={3} className="text cs-final-attr">
                 Capacity
