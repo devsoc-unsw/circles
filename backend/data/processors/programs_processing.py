@@ -17,6 +17,15 @@ from collections import OrderedDict
 
 from data.utility.data_helpers import read_data, write_data
 
+
+FREE_ELECTIVE = "FE"
+GENERAL_EDUCATION = "GE"
+PRESCRIBED_ELECTIVE = "PE"
+CORE_COURSE = "CC"
+INFORMATION_RULE = "IR"
+LIMIT_RULE = "LR"
+
+
 # Set of current course codes in programs_processed.json
 TEST_PROGS = (
     "3778",
@@ -51,95 +60,82 @@ def process_prg_data():
     for program in TEST_PROGS:
         # Get program specific data
         formattedData = data[program]
-
-        # Add infomation about program (excluding ciriculum structure)
         programData = initialise_program(formattedData)
 
-        # Add curriculum structure
-        addComponentData(formattedData, programData)
+        # Loop through items in curriculum structure and add to the program data
+        for item in formattedData["CurriculumStructure"]:
+            addComponentData(programData, item)
 
-        # Append processed program data to final data
-        processedData[programData["code"]] = programData
+        # Order dict alphabetically
+        OrderedDict(sorted(programData["components"].items(), key=lambda t: t[0]))
+
+        code = programData["code"]
+        processedData[code] = programData
 
     write_data(processedData, "data/final_data/programsProcessed.json")
 
 
-def addComponentData(formatted, programData):
-    # TODO: Properly document how it's structured
-    programData["components"] = {
-        "GE": {},
+def initialise_program(program: dict) -> dict:
+    """
+    Initialises basic attributes of the specialisation.
+    """
+    programInfo = {}
+    programInfo["title"] = program["title"]
+    programInfo["code"] = program["code"]
+
+    duration = re.search("(\d)", program["duration"])
+    duration = duration.group(1)
+
+    programInfo["duration"] = int(duration)
+    programInfo["UOC"] = int(program["UOC"])
+    programInfo["faculty"] = program["faculty"]
+    programInfo["description"] = program["description"]
+    programInfo["components"] = { # TODO: Document the structure
+        GENERAL_EDUCATION: {},
+        INFORMATION_RULE: [],
+        LIMIT_RULE: [],
         "SpecialisationData": {},
         "NonSpecialisationData": [],
     }
 
-    # Loop through items in curriculum structure
-    for item in formatted["CurriculumStructure"]:
-        recAddComponentData(programData, item)
+    return programInfo
 
-    # Order dict alphabetically
-    OrderedDict(sorted(programData["components"].items(), key=lambda t: t[0]))
 
-def recAddComponentData(programData, item, programName = None):
+def addComponentData(programData: dict, item: dict, programName = None) -> None:
     if any(key not in item for key in ("vertical_grouping", "title")):
         return
 
-    programName = findProgramName(programData, item) if programName == None else programName
+    programName = findProgramName(programData, item) if programName is None else programName
 
-    if item["vertical_grouping"]["value"] == "GE":
-        addGEData(programData, item)
-
-    if item["vertical_grouping"]["value"] == "undergrad_major":
-        addSpecialisationData(programData, item, programName, "Majors")
-
-    if item["vertical_grouping"]["value"] == "honours":
-        addSpecialisationData(programData, item, programName, "Honours")
-
-    if item["vertical_grouping"]["value"] == "undergrad_minor":
+    # Figure out what type of requirement we're looking at,
+    # and add it to the appropriate spot in the program data
+    if isGeneralEducation(item):
+        addGeneralEducationData(programData, item)
+    if isMajor(item):
         addSpecialisationData(programData, item, programName, "Minors")
+    if isMinor(item):
+        addSpecialisationData(programData, item, programName, "Majors")
+    if isHonours(item):
+        addSpecialisationData(programData, item, programName, "Honours")
+    if isPrescribedElective(item):
+        addPrescribedElectiveData(programData, item)
+    if isCoreCourse(item):
+        addCoreCourseData(programData, item)
+    if isInformationRule(item):
+        addRule(programData, INFORMATION_RULE, item)
+    if isLimitRule(item):
+        addRule(programData, LIMIT_RULE, item)
+    if isOther(item):
+        addOther(programData, item)
 
-    if item["vertical_grouping"]["value"] == "PE":
-        addPEData(programData, item)
-
-    if item["vertical_grouping"]["value"] == "CC":
-        addCCData(programData, item)
-
-    # Add anything from dynamic relationship unless it's a gened/free elective
-    if item["dynamic_relationship"] and item["title"] != "Free Electives" and item["vertical_grouping"]["value"] in ("FE", "PE"):
-        programData["components"]["NonSpecialisationData"].append({
-            "courses": [rel["description"] for rel in item["dynamic_relationship"]],
-            "title": item["title"],
-            "credits_to_complete": getCredits(item),
-            "core": item["vertical_grouping"]["value"] == "CC", # TODO: Make a function for this that's more comprehensive
-            "levels": [], # TODO: What is this?
-            "notes": item["description"],
-        })
-
-    # Recurse further down
-    for rel_item in item["relationship"]:
-        recAddComponentData(programData, rel_item, programName)
-    for con_item in item["container"]:
-        recAddComponentData(programData, con_item, programName)
+    # Recurse further down through the container nad the relationship list
+    for next in item["relationship"]:
+        addComponentData(programData, next, programName = programName)
+    for next in item["container"]:
+        addComponentData(programData, next, programName = programName)
 
 
-def addGEData(programData, item):
-    # Double check we haven't somehow already added the GE stuff already
-    GE = programData["components"]["GE"]
-    if "credits_to_complete" in GE:
-        raise ValueError("Already added GE credits to this program")
-
-    GE["credits_to_complete"] = getCredits(item)
-
-
-def getCredits(item):
-    if item["credit_points"] != "":
-        try:
-            return int(item["credit_points"])
-        except ValueError:
-            return int(item["credit_points_max"])
-
-
-# TODO: This function doesn't work properly. Must make it more robust (see my attempt below)
-def findProgramName(programData, item):
+def findProgramName(programData: dict, item: dict) -> str:
     # Split the title into it's single degrees and get rid of white space
     rawProgramNames = programData["title"].split("/")
     strippedProgramNames = list(map(lambda s: s.strip(), rawProgramNames))
@@ -167,87 +163,148 @@ def findProgramName(programData, item):
     print(f"Warning: Couldn't find any of names = {sortedProgramNames} for program code {programData['code']}")
 
 
-def addSpecialisationData(programData, container, programName, field):
+def isGeneralEducation(item: dict) -> bool:
+    return item["vertical_grouping"]["value"] == GENERAL_EDUCATION
+
+
+def isMajor(item: dict) -> bool:
+    return item["vertical_grouping"]["value"] == "undergrad_major"
+
+
+def isMinor(item: dict) -> bool:
+    return item["vertical_grouping"]["value"] == "undergrad_minor"
+
+
+def isHonours(item: dict) -> bool:
+    return item["vertical_grouping"]["value"] == "honours"
+
+
+def isPrescribedElective(item: dict) -> bool:
+    return item["vertical_grouping"]["value"] == PRESCRIBED_ELECTIVE
+
+
+def isCoreCourse(item: dict) -> bool:
+    return item["vertical_grouping"]["value"] == CORE_COURSE
+
+
+def isInformationRule(item: dict) -> bool:
+    return item["vertical_grouping"]["value"] == INFORMATION_RULE
+
+
+def isLimitRule(item: dict) -> bool:
+    return item["vertical_grouping"]["value"] == LIMIT_RULE
+
+
+def isOther(item: dict) -> bool:
+    return (
+        item["dynamic_relationship"]
+        and item["title"] != "Free Electives"
+        and item["vertical_grouping"]["value"] in (FREE_ELECTIVE, PRESCRIBED_ELECTIVE)
+    )
+
+
+def addGeneralEducationData(programData: dict, item: dict) -> None:
+    # Double check we haven't somehow already added the general education stuff already
+    if programData["components"][GENERAL_EDUCATION] != {}:
+        raise ValueError("Already added GE to this program")
+
+    programData["components"][GENERAL_EDUCATION] = {
+        "notes": item["description"],
+        "credits_to_complete": getCredits(item),
+    }
+
+
+def addSpecialisationData(programData: dict, item: dict, programName: str, field: str) -> None:
     SpecialisationData = programData["components"]["SpecialisationData"]
     data = {
-        "notes": container["description"],
+        "notes": item["description"],
     }
-    for specialisation in container["relationship"]:
+    for specialisation in item["relationship"]:
         code = specialisation["academic_item_code"]
         if code is not None:
             data[code] = specialisation["academic_item_name"]
 
     SpecialisationData.setdefault(field, {}).update({programName: data})
 
-def addPEData(programData, container):
+
+def addPrescribedElectiveData(programData: dict, item: dict) -> None:
     # If item is a prescribed elective, loop through and add data to nonspecialisationdata
     NonSpecialisationData = programData["components"]["NonSpecialisationData"]
     pe = {
         "courses": {},
-        "title": container["title"],
-        "credits_to_complete": getCredits(container),
+        "title": item["title"],
+        "credits_to_complete": getCredits(item),
         "core": False,
         "levels": [], # TODO
-        "notes": container["description"],
+        "notes": item["description"],
     }
 
     # Figure out if there are sub relations
-    if container["relationship"] != []:
-        for course in container["relationship"]:
+    if item["relationship"] != []:
+        for course in item["relationship"]:
             code = course["academic_item_code"]
             pe["courses"][code] = course["academic_item_name"]
     else:
-        for course in container["dynamic_relationship"]:
+        for course in item["dynamic_relationship"]:
             pe["courses"][course["description"]] = 1
 
     # Append this new requirement
-    NonSpecialisationData.append(pe) # TODO: [container["title"]]
+    NonSpecialisationData.append(pe)
 
-def addCCData(programData, container):
+def addCoreCourseData(programData: dict, item: dict) -> None:
     # If item is a core course
     NonSpecialisationData = programData["components"]["NonSpecialisationData"]
     cc = {
         "courses": {},
-        "title": container["title"],
-        "credits_to_complete": getCredits(container),
+        "title": item["title"],
+        "credits_to_complete": getCredits(item),
         "core": True,
         "levels": [], # TODO
-        "notes": container["description"],
+        "notes": item["description"],
     }
 
     # If there are multiple courses
-    if container["container"] != []:
+    if item["container"] != []:
         # Loop through and find all courses and add them
-        for item in container["container"]:
+        for item in item["container"]:
             for course in item["relationship"]:
                 code = course["academic_item_code"]
                 cc["courses"][code] = course["academic_item_name"]
     else:
-        for course in container["relationship"]:
+        for course in item["relationship"]:
             code = course["academic_item_code"]
             cc["courses"][code] = course["academic_item_name"]
 
     NonSpecialisationData.append(cc)
 
 
-def initialise_program(program):
-    """
-    Initialises basic attributes of the specialisation.
-    """
-    program_info = {}
-    program_info["title"] = program["title"]
-    program_info["code"] = program["code"]
+def addRule(programData: dict, ruleType: str, item: dict) -> None:
+    programData["components"][ruleType].append({
+        "title": item["title"],
+        "notes": item["description"],
+    })
 
-    duration = re.search("(\d)", program["duration"])
-    duration = duration.group(1)
 
-    program_info["duration"] = int(duration)
-    program_info["UOC"] = int(program["UOC"])
-    program_info["faculty"] = program["faculty"]
-    program_info["notes"] = program["description"]
-    program_info["components"] = {}
+def addOther(programData: dict, item: dict) -> None:
+    NonSpecialisationData = programData["components"]["NonSpecialisationData"]
 
-    return program_info
+    NonSpecialisationData.append({
+        "courses": [ rel["description"] for rel in item["dynamic_relationship"] ],
+        "title": item["title"],
+        "credits_to_complete": getCredits(item),
+        "core": isCoreCourse(item),
+        "levels": [], # TODO: What is this?
+        "notes": item["description"],
+    })
+
+
+
+def getCredits(item: dict) -> int:
+    if item["credit_points"] != "":
+        try:
+            return int(item["credit_points"])
+        except ValueError:
+            return int(item["credit_points_max"])
 
 
 if __name__ == "__main__":
