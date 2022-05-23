@@ -52,10 +52,11 @@ const SpecialisationStep = ({ incrementStep, currStep }) => {
             mode="inline"
           >
             {Object.keys(options[sub]).map((key) => (
+              key !== "notes" && (
               <Menu.Item className="text" key={key}>
                 {key} {options[sub][key]}
               </Menu.Item>
-            ))}
+              )))}
           </Menu.SubMenu>
         ))}
       </Menu>

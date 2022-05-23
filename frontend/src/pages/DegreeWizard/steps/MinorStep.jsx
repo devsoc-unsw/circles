@@ -47,16 +47,23 @@ const MinorStep = ({ incrementStep, currStep }) => {
         mode="inline"
         onDeselect={() => dispatch(setMinor(""))}
         onSelect={(e) => dispatch(setMinor(e.key))}
+        defaultOpenKeys={["0"]}
       >
-        {programCode ? (
-          Object.keys(options).map((key) => (
-            <Menu.Item className="text" key={key}>
-              {key} {options[key]}
-            </Menu.Item>
-          ))
-        ) : (
-          <div>Please select a degree first...</div>
-        )}
+        {Object.keys(options).map((sub, index) => (
+          <Menu.SubMenu
+            key={index}
+            title={`Minors for ${sub}`}
+            className="step-submenu"
+            mode="inline"
+          >
+            {Object.keys(options[sub]).map((key) => (
+              key !== "notes" && (
+                <Menu.Item className="text" key={key}>
+                  {key} {options[sub][key]}
+                </Menu.Item>
+              )))}
+          </Menu.SubMenu>
+        ))}
       </Menu>
     </animated.div>
   );

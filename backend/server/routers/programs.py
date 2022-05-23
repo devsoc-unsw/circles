@@ -46,7 +46,6 @@ def getPrograms():
     # return {"programs": {q["code"]: q["title"] for q in programsCOL.find()}}
     # TODO On deployment, DELETE RETURN BELOW and replace with the return above
     return {"programs": {"3778": "Computer Science", 
-                        "3781" : "Advanced Mathematics (Honours) / Computer Science",
                         "3784": "Commerce / Computer Science",
                         "3789": "Science / Computer Science",
                         }}
@@ -157,6 +156,8 @@ def addSubgroupContainer(structure: dict, type: str, container: dict, exceptions
 
     item["UOC"] = container["credits_to_complete"]
     item["courses"] = {}
+    if not isinstance(container["courses"], dict):
+        return []
     for object, description in container["courses"].items():
         item["courses"] = item["courses"] | {
             course: description for course, description
