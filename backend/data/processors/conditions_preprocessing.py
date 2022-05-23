@@ -33,7 +33,7 @@ def preprocess_conditions():
         # Store original text for debugging
         conditions["original"] = original
         processed = original
-        
+
         # Phase 1: Deletions
         processed = delete_exclusions(processed)
         processed = delete_HTML(processed)
@@ -44,7 +44,7 @@ def preprocess_conditions():
         processed = delete_extraneous_phrasing(processed)
         processed = delete_prereq_label(processed)
         processed = delete_trailing_punc(processed)
-        
+
         # Phase 2: Conversions
         processed = convert_square_brackets(processed)
         processed = convert_UOC(processed)
@@ -69,7 +69,7 @@ def preprocess_conditions():
         processed = uoc_in_business_school(processed)
         processed = l2_math_courses(processed)
 
-        
+
 
         conditions["processed"] = processed
 
@@ -366,7 +366,7 @@ def handle_comma_logic(processed):
     # add &&s before coreqs if coreqs is not preceded by an OR logic
     if re.search(r'(?<!\|\|\s)\[.*\]', processed):
         processed = re.sub(r'&*\s*\[(.*)\]', r' && [\1]', processed)
-    
+
     # remove &&s or ||s if it's the start of string
     processed = re.sub(r'^\s*&&', '', processed)
     processed = re.sub(r'^\s*\|\|', '', processed)
@@ -417,7 +417,7 @@ def uoc_in_business_school(processed):
     processed = re.sub(
         r"(\d+UOC) offered by the UNSW Business School", r"\1 in F Business", processed
     )
-    
+
     return processed
 
 
@@ -446,7 +446,7 @@ def remove_extraneous_comm_data(processed):
     # Academic Standing note
     processed, number_of_subs = re.subn(
         r"Students must be in Good Academic Standing", r"", processed, flags=re.IGNORECASE
-    ) 
+    )
     if number_of_subs > 0:
         note += "Students must be in Good Academic Standing."
 
@@ -461,7 +461,7 @@ def remove_extraneous_comm_data(processed):
     )
     if number_of_subs > 0:
         note += "Students must be in Good Academic Standing."
-    
+
 
     # Final 2 terms note
     processed, number_of_subs = re.subn(
@@ -472,66 +472,66 @@ def remove_extraneous_comm_data(processed):
 
     # Business school students terms notes
     terms_string = re.findall("Only available to single and double degree Business School students in Term \d. It will be offered to non-Business School students in Terms \d and \d.", processed)
-    
+
     processed, number_of_subs = re.subn(
         r"Only available to single and double degree Business School students in Term \d. It will be offered to non-Business School students in Terms \d and \d.", r"", processed, flags=re.IGNORECASE
     )
     if number_of_subs > 0:
         terms_numbers = re.findall(r'[0-9]+', terms_string[0])
         note += r"Only available to single and double degree Business School students in Term " + terms_numbers[0] + ". It will be offered to non-Business School students in Terms " + terms_numbers[1] +" and " + terms_numbers[2] +"."
-      
+
     processed, number_of_subs = re.subn(
     r"Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Term 3.", r"", processed, flags=re.IGNORECASE
-    ) 
+    )
     if number_of_subs > 0:
         note += "Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Term 3."
 
     # Application and progression check notes
     processed, number_of_subs = re.subn(
     r"This course is by application only. Please contact the Co-op office for more information", r"", processed, flags=re.IGNORECASE
-    ) 
+    )
     if number_of_subs > 0:
         note += "This course is by application only. Please contact the Co-op office for more information"
 
     processed, number_of_subs = re.subn(
     r"This course is by application only.", r"", processed, flags=re.IGNORECASE
-    ) 
+    )
     if number_of_subs > 0:
         note += "This course is by application only."
 
     processed, number_of_subs = re.subn(
     r"Its recommended to seek a progression check prior to application.", r"", processed, flags=re.IGNORECASE
-    ) 
+    )
     if number_of_subs > 0:
         note += "It is recommended to do a progression check prior to enrolling."
 
     processed, number_of_subs = re.subn(
     r"This course is by application only. Please visit Business School website for more information", r"", processed, flags=re.IGNORECASE
-    ) 
+    )
     if number_of_subs > 0:
         note += "This course is by application only. Please visit Business School website for more information"
 
     processed, number_of_subs = re.subn(
     r"This course is by application only.Please visit Business School website for more information", r"", processed, flags=re.IGNORECASE
-    ) 
+    )
     if number_of_subs > 0:
         note += "This course is by application only. Please visit Business School website for more information"
 
     if re.search("good academic standing", processed, flags=re.IGNORECASE) != None:
         note += "Students must be in good academic standing."
-    
+
     processed = re.sub(
     r"be in good academic standing", r"", processed, flags=re.IGNORECASE
     )
     # Commerce degree notes
     processed, number_of_subs = re.subn(
     r"in their final year of a single or double Commerce degree", r"COMM#", processed, flags=re.IGNORECASE
-    ) 
+    )
     if number_of_subs > 0:
         note += "Students must be in their final year of a single or double Commerce degree"
     processed, number_of_subs = re.subn(
     r"Students are expected to be in their final year of a Bachelor of Commerce single or dual degree", r"COMM#", processed, flags=re.IGNORECASE
-    ) 
+    )
     if number_of_subs > 0:
         note += "Students must be in their final year of a single or double Commerce degree"
     processed = re.sub(
@@ -540,7 +540,7 @@ def remove_extraneous_comm_data(processed):
     processed = re.sub(
     r"be enrolled in a Commerce Program", r"COMM#", processed, flags=re.IGNORECASE
     )
-    
+
     # need to change this/review these
     # fix comm3999
     processed = re.sub(
