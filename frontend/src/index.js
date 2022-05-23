@@ -1,25 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import { createStore, applyMiddleware, compose }  from 'redux';
-import allReducers from "./reducers/index"; 
-import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
+/* eslint-disable react/jsx-filename-extension */
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { persistStore } from "redux-persist";
+import { PersistGate } from "redux-persist/integration/react";
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+import App from "./App";
+import store from "./store";
 
-const store = createStore(
-  allReducers, 
-  composeEnhancers(applyMiddleware(thunk))
-  // Download redux devtools extension on chrome extensions 
-  // This is helpful for debugging the state inside ur browser
-  // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-); 
+const persistor = persistStore(store);
+
 ReactDOM.render(
-  <Provider store={store}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </Provider>,
-  document.getElementById('root')
+  <React.StrictMode>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <App />
+      </PersistGate>
+    </Provider>
+  </React.StrictMode>,
+  document.getElementById("root"),
 );

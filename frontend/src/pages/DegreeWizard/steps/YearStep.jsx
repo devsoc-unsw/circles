@@ -1,43 +1,44 @@
-import React, { useEffect } from "react";
-import axios from "axios";
-import { Menu, Typography, Button, Input, DatePicker } from "antd";
-import { plannerActions } from "../../../actions/plannerActions";
-import { Link } from "react-scroll";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import { Typography, Button, DatePicker } from "antd";
+import { useDispatch } from "react-redux";
 import "./steps.less";
-import { useSpring, animated } from "react-spring";
-import { springProps } from "../spring";
+import { useSpring, animated } from "@react-spring/web";
+import springProps from "./spring";
+import { updateDegreeLength, updateStartYear } from "../../../reducers/plannerSlice";
+
 const { Title } = Typography;
 const { RangePicker } = DatePicker;
 
-export const YearStep = ({ incrementStep, currStep }) => {
+const YearStep = ({ incrementStep, currStep }) => {
+  const dispatch = useDispatch();
+  const [nextStep, setNextStep] = useState(false);
 
-    const dispatch = useDispatch();
-
-    const handleYearChange = (_, [startYear, endYear]) => {
-        const numYears = endYear - startYear + 1;
-        dispatch(plannerActions("SET_DEGREE_LENGTH", numYears));
-        dispatch(plannerActions("UPDATE_START_YEAR", startYear));
-    };
-    const props = useSpring(springProps);
-    return (
-        <animated.div style={props} className="step-duration">
-            <div className="steps-heading-container">
-              <Title level={4} className="text">
-                What years do you start and finish?
-              </Title>
-              {currStep === 1 && (
-                <Button type="primary" onClick={incrementStep}>
-                  Next
-                </Button>
-              )}
-            </div>
-            <RangePicker
-              picker="year"
-              size="large"
-              onChange={handleYearChange}
-            />
-        </animated.div>
-    );
-
+  const handleYearChange = (_, [startYear, endYear]) => {
+    setNextStep(startYear && endYear);
+    const numYears = endYear - startYear + 1;
+    dispatch(updateDegreeLength(numYears));
+    dispatch(updateStartYear(startYear));
+  };
+  const props = useSpring(springProps);
+  return (
+    <animated.div style={props} className="step-duration">
+      <div className="steps-heading-container">
+        <Title level={4} className="text">
+          What years do you start and finish?
+        </Title>
+        {nextStep && currStep === 1 && (
+          <Button type="primary" onClick={incrementStep}>
+            Next
+          </Button>
+        )}
+      </div>
+      <RangePicker
+        picker="year"
+        size="large"
+        onChange={handleYearChange}
+      />
+    </animated.div>
+  );
 };
+
+export default YearStep;

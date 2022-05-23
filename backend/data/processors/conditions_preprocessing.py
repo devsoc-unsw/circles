@@ -13,6 +13,45 @@ from data.utility.data_helpers import read_data, write_data
 PREPROCESSED_CONDITIONS = {}
 CODE_MAPPING = read_data("data/utility/programCodeMappings.json")["title_to_code"]
 
+SPECIALISATION_MAPPINGS = {
+    'School of the Arts and Media honours': 'MDIA?H',
+    'School of Social Sciences, Asian Studies or European Studies honours': 'ASIABH || EUROBH',
+    'Creative Writing honours': 'CRWTWH',
+    'Construction Management and Property undergraduate program or minor': 'BLDG??',
+    'Media, Culture and Technology honours': 'MECTBH',
+    'Theatre and Performance Studies honours': 'THSTBH',
+    'Environmental Humanities honours': 'ENVPEH',
+    'Physics Honours': 'ZPEMPH || PHYSGH',
+    'Film Studies honours': 'FILMBH',
+    'English honours': 'ENGLDH',
+    'Dance Studies honours': 'DANCBH',
+    'History honours': 'HISTCH || ZHSSHH',
+    'Philosophy honours': 'PHILBH',
+    'Asian Studies honours': 'ASIABH',
+    'Chinese Studies honours': 'CHINBH',
+    'French Studies honours': 'FRENBH',
+    'Spanish Studies honours': 'SPANEH',
+    'Japanese Studies honours': 'JAPNDH',
+    'Korean Studies honours': 'KORECH',
+    'Linguistics honours': 'LINGCH',
+    'German Studies honours': 'GERSBH',
+    'European Studies honours': 'EUROBH',
+    'Sociology and Anthropology honours': 'SOCACH',
+    'Politics and International Relations honours': 'POLSGH',
+    'Global Development honours': 'COMDFH',
+    'Media honours': 'MDIA?H',
+    'Education honours': '4509',
+    'Criminology honours': '4505',
+    'Politics, Philosophy and Economics': '3478 || 4797',
+    'single or double Music (Honours)': 'MUSC?H || 4508',
+    'Music program': 'MUSC?? || 4508',
+    'Social Work': '4033',
+    'single or dual award Media': '4510 || 3454 || 3438 || 3453',
+    'single or double degree Media': '4510 || 3454 || 3438 || 3453',
+    'Social Science or Social Research and Policy': '3321 || 3420',
+    'Education program': '4509 || 4056',
+    'International Studies(?:\s+single)?(?:\s+or\s+((double)|(dual))\s+((degree)|(program)))?(?:\s*\(2017 onwards\))?': '3447',
+}
 
 def preprocess_conditions():
     """
@@ -35,7 +74,7 @@ def preprocess_conditions():
         processed = original
 
         # Phase 1: Deletions
-        processed = delete_exclusions(processed)
+        processed = delete_exclusions_and_equivalents(processed)
         processed = delete_HTML(processed)
         processed = delete_self_referencing(code, processed)
         processed = delete_extraneous_phrasing(processed)
@@ -51,6 +90,7 @@ def preprocess_conditions():
         processed = convert_program_type(processed)
         processed = convert_fslash(processed)
         processed = convert_including(processed)
+        processed = convert_manual_programs_and_specialisations(processed)
         processed = convert_AND_OR(processed)
         processed = convert_coreqs(processed)
 
@@ -65,6 +105,7 @@ def preprocess_conditions():
         # Phase 5: Common patterns
         processed = uoc_in_business_school(processed)
         processed = l2_math_courses(processed)
+        processed = unsw_global_degrees(processed)
 
         conditions["processed"] = processed
 
@@ -78,16 +119,21 @@ def preprocess_conditions():
 # -------------------
 
 
-def delete_exclusions(processed):
+def delete_exclusions_and_equivalents(processed):
     """Removes exclusions from enrolment conditions"""
     # Remove exclusion string which appears before prerequisite plaintext
-    excl_string = re.search(r"(excl.*?:.*?)(pre)", processed, flags=re.IGNORECASE)
+    excl_string = re.search(r"(excl.*?:.*?)(pre|co-?req)", processed, flags=re.IGNORECASE)
+    equiv_string = re.search(r"(equiv.*?:.*?)(pre|co-?req)", processed, flags=re.IGNORECASE)
     if excl_string:
         processed = re.sub(excl_string.group(1), "", processed)
 
+    if equiv_string:
+        processed = re.sub(equiv_string.group(1), "", processed)
+
     # Remove exclusion string appearing after prerequisite plaintext, typically
     # at the end of the enrolment rule
-    processed = re.sub(r"excl.*", "", processed, flags=re.IGNORECASE)
+    processed = re.sub(r"((\.|,)?\s)?excl.*", "", processed, flags=re.IGNORECASE)
+    processed = re.sub(r"((\.|,)?\s)?equiv.*?:.*", "", processed, flags=re.IGNORECASE)
 
     return processed
 
@@ -121,8 +167,11 @@ def delete_extraneous_phrasing(processed):
     # Remove 'student' references as it is implied
     processed = re.sub("students?", "", processed, flags=re.IGNORECASE)
 
-    # Removed enrollment language since course and program codes imply this
+    # Remove enrollment language since course and program codes imply this
     processed = re.sub("enrolled in", "", processed, flags=re.IGNORECASE)
+
+    # Remove tautological endings
+    processed = re.sub("(prior )?(in order )?to enrol(l)?(ing)?(ment)?( in(to)? this course)?", "", processed, flags=re.IGNORECASE)
 
     # Remove completion language
     completion_text = [
@@ -142,7 +191,7 @@ def delete_extraneous_phrasing(processed):
 def delete_prereq_label(processed):
     """Removes 'prerequisite' and variations"""
     # variations incude ["prerequisite", "pre-requisite", "prer-requisite", "pre req", "prereq:"]
-    return re.sub(r"[Pp]re( req)?[A-Za-z\/_-]* ?[:;]*", "", processed)
+    return re.sub(r"pre( req)?[a-z\/_\-]* *[:;]*", "", processed, flags=re.IGNORECASE)
 
 
 def delete_trailing_punc(processed):
@@ -166,17 +215,17 @@ def convert_UOC(processed):
     """Converts to XXUOC"""
     # Converts unit(s) of credit(s) to UOC and removes spacing
     processed = re.sub(
-        r"\s?units? (of credits?|completed?)", "UOC", processed, flags=re.IGNORECASE
+        r"\s*units? (of credits?|completed?)", "UOC", processed, flags=re.IGNORECASE
     )
     # Places UOC right next to the numbers
-    processed = re.sub(r"\s?UOC", "UOC", processed, flags=re.IGNORECASE)
+    processed = re.sub(r"\s*UOC", "UOC", processed, flags=re.IGNORECASE)
 
     # After UOC has been mainly converted, remove some extraneous phrasing
     processed = re.sub(
-        r"(of|at least)?\s?(\d+UOC)", r" \2", processed, flags=re.IGNORECASE
+        r"(of|at least)?\s*(\d+UOC)", r" \2", processed, flags=re.IGNORECASE
     )
     processed = re.sub(
-        r"(\d+UOC)(\s?overall\s?)", r"\1 ", processed, flags=re.IGNORECASE
+        r"(\d+UOC)(\s*overall\s*)", r"\1 ", processed, flags=re.IGNORECASE
     )
 
     # Remove "minimum" since it is implied
@@ -198,7 +247,7 @@ def convert_WAM(processed):
     #    - "minimum 65WAM" -> "65WAM"
     #    - "A 65WAM" -> "65WAM"
     processed = re.sub(
-        r"[a|minimum]+ (\d\d)\s?WAM", r"\1WAM", processed, flags=re.IGNORECASE
+        r"[a|minimum]+ (\d\d)\s*WAM", r"\1WAM", processed, flags=re.IGNORECASE
     )
 
     # Compress any remaining spaces between digits and WAM and remove misc chars
@@ -207,7 +256,7 @@ def convert_WAM(processed):
     #    - "65+ WAM" -> "65WAM"
     #    - "65WAM+" -> "65WAM"
     processed = re.sub(
-        r">?(\d\d)\+?\s?WAM\+?", r"\1WAM", processed, flags=re.IGNORECASE
+        r">?(\d\d)\+?\s*WAM\+?", r"\1WAM", processed, flags=re.IGNORECASE
     )
 
     return processed
@@ -229,8 +278,8 @@ def convert_GRADE(processed):
     # Further handle CR and DN. These usually follow a course code
     # MATH1141 (CR) ==> 65WAM MATH1141
     # Use "in" as a joining word"
-    processed = re.sub(r"([A-Z]{4}[\d]{4})\s?\(CR\)", r"65GRADE in \1", processed)
-    processed = re.sub(r"([A-Z]{4}[\d]{4})\s?\(DN\)", r"75GRADE in \1", processed)
+    processed = re.sub(r"([A-Z]{4}[\d]{4})\s*\(CR\)", r"65GRADE in \1", processed)
+    processed = re.sub(r"([A-Z]{4}[\d]{4})\s*\(DN\)", r"75GRADE in \1", processed)
 
     return processed
 
@@ -254,7 +303,7 @@ def convert_fslash(processed):
     # E.g.:
     #    - "(COMP1521/DPST1092 && COMP2521)" -> "((COMP1521 || DPST1092) && COMP2521)"
     #    - "COMP9444 / COMP9417 / COMP9517/COMP4418" -> "(COMP9444 || COMP9417 || COMP9517 || COMP4418)"
-    matches = re.findall(r"[A-Z]{4}[\d]{4}(?:\s?/\s?[A-Z]{4}[\d]{4})+", processed)
+    matches = re.findall(r"[A-Z]{4}[\d]{4}(?:\s*/\s*[A-Z]{4}[\d]{4})+", processed)
 
     for match in matches:
         subbed_phrase = re.sub(r"/", r" || ", match)
@@ -267,6 +316,24 @@ def convert_fslash(processed):
 def convert_including(processed):
     """Convert 'including' to &&"""
     return re.sub("including", "&&", processed)
+
+
+def convert_manual_programs_and_specialisations(processed):
+    """
+    Deals with the following cases:
+    - Enrolment in a x program
+    - Enrolment in x program
+    - Enrolment in x
+    - Enrolment in the x honours program
+    """
+    for prog_str, code in SPECIALISATION_MAPPINGS.items():
+        processed = re.sub(
+            rf"\s*enrolment\s+in\s+((?:an?\s+)|(?:the\s+))?{prog_str}(?:\s+program)?\s*",
+            f" ({code}) ",
+            processed,
+            flags=re.IGNORECASE
+        )
+    return processed
 
 
 def convert_AND_OR(processed):
@@ -284,7 +351,7 @@ def convert_coreqs(processed):
     """Puts co-requisites inside square brackets"""
     processed = processed.rstrip()
     return re.sub(
-        r"(co-?requisites?|concurrentl?y?);?:?\s?(.*)", r"[\2]", processed, flags=re.IGNORECASE
+        r",*;*\.*\s*(co-?(re)?requisites?|concurrentl?y?)\s*;?:?\s*(.*)", r" [\3]", processed, flags=re.IGNORECASE
     )
 
 
@@ -325,18 +392,18 @@ def handle_comma_logic(processed):
     processed = re.sub("either", "", processed, flags=re.IGNORECASE)
 
     # First we will just convert , || and , && into || and &&
-    processed = re.sub(r",\s?(&&|\|\|)", r" \1", processed)
+    processed = re.sub(r",\s*(&&|\|\|)", r" \1", processed)
 
     # Scan for combos of commas until we hit the first || or && and replace the
     # the commas with that
     # e.g. phrase, phrase || phrase ==> phrase || phrase || phrase
     # e.g. phrase, phrase && phrase ==> phrase && phrase && phrase
     if bool(re.match(r'^\s*[A-Z]{4}[0-9]{4}', processed)):
-        matches = re.findall(r'([^&|]+,\s?[^&|]+\s?)(&&|\|\|)', processed)
+        matches = re.findall(r'([^&|]+,\s*[^&|]+\s*)(&&|\|\|)', processed)
 
         for match in matches:
             # Substitute the commas in the phrase with their respective logic operators
-            subbed_phrase = re.sub(r',\s?', f" {match[1]} ", match[0])
+            subbed_phrase = re.sub(r',\s*', f" {match[1]} ", match[0])
 
             # Escape the matched phrase so regex doesn't misintrepret unclosed brackets, etc
             escaped_phrase = re.escape(match[0])
@@ -357,6 +424,14 @@ def handle_comma_logic(processed):
                 # of whitespace on either side of the comma doesn't matter
                 replacement = match.split(',')
                 processed = re.sub(match, f'{replacement[0]} {joining_cond} {replacement[1]}', processed)
+
+    # add &&s before coreqs if coreqs is not preceded by an OR logic
+    if re.search(r'(?<!\|\|\s)\[.*\]', processed):
+        processed = re.sub(r'&*\s*\[(.*)\]', r' && [\1]', processed)
+
+    # remove &&s or ||s if it's the start of string
+    processed = re.sub(r'^\s*&&', '', processed)
+    processed = re.sub(r'^\s*\|\|', '', processed)
 
     return processed
 
@@ -400,7 +475,7 @@ def strip_bracket_spaces(processed):
 # Phase 4: Common patterns
 # -------------------
 def uoc_in_business_school(processed):
-    r"""Converts \d+UOC offered by the UNSW Business School to \d+UOC in F Business"""
+    """Converts \d+UOC offered by the UNSW Business School to \d+UOC in F Business"""
     processed = re.sub(
         r"(\d+UOC) offered by the UNSW Business School", r"\1 in F Business", processed
     )
@@ -423,6 +498,24 @@ def map_word_to_program_type(processed, regex_word, type):
         processed,
         flags=re.IGNORECASE,
     )  # hard to capture a generic case?
+
+def unsw_global_degrees(processed):
+    processed =  re.sub(
+        r"UNSW Global Diplomas only \(7001, 7002, 7003, 7004\)",
+        "(7001 || 7002 || 7003 || 7004)",
+        processed,
+        flags=re.IGNORECASE,
+    )
+
+    processed =  re.sub(
+        "\(7001 \|\| 7002 \|\| 7003 \|\| 7004\),",
+        "(7001 || 7002 || 7003 || 7004) &&",
+        processed,
+        flags=re.IGNORECASE,
+    )
+
+    return processed
+
 
 
 if __name__ == "__main__":

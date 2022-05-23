@@ -13,13 +13,18 @@ HEADERS = {
 }
 
 def create_payload(size, content_type, year = LIVE_YEAR):
-    """Create a payload of the given size
+    """
+    Create a payload of the given size
     content_type will be used as a prefix for the query fields
     Note: If changing any of the keys and passing them in as an argument,
     ensure that you add a default value for the argument so as to not
     break the payload for the other files
     """
 
+    # Might get passed None as default value by the calling function
+    if year is None:
+        year = LIVE_YEAR
+    
     return {
         "query": {
             "bool": {

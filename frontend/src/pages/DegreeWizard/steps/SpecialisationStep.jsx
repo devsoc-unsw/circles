@@ -1,39 +1,35 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { Menu, Button, Typography } from "antd";
-import { Link } from "react-scroll";
-import { degreeActions } from "../../../actions/degreeActions";
 import { useDispatch, useSelector } from "react-redux";
 import "./steps.less";
-import { useSpring, animated } from "react-spring";
-import { springProps } from "../spring";
+import { useSpring, animated } from "@react-spring/web";
+import springProps from "./spring";
+import { addMajor, removeMajor } from "../../../reducers/degreeSlice";
 
 const { Title } = Typography;
-export const SpecialisationStep = ({ incrementStep, currStep }) => {
+const SpecialisationStep = ({ incrementStep, currStep }) => {
   const dispatch = useDispatch();
-  const { programCode, specialisation } = useSelector((store) => store.degree);
-  const [options, setOptions] = React.useState({
-    1: "major",
-  });
+  const { programCode, majors } = useSelector((store) => store.degree);
+  const [options, setOptions] = useState({ 1: { 1: "major" } });
 
-  const fetchAllSpecializations = async () => {
+  const fetchAllSpecialisations = useCallback(async () => {
     const res = await axios.get(`/programs/getMajors/${programCode}`);
-    setOptions(res.data["majors"]);
-  };
-
-  useEffect(() => {
-    if (programCode !== "") fetchAllSpecializations();
+    setOptions(res.data.majors);
   }, [programCode]);
 
-  const props = useSpring(springProps);
+  useEffect(() => {
+    if (programCode !== "") fetchAllSpecialisations();
+  }, [fetchAllSpecialisations, programCode]);
 
+  const props = useSpring(springProps);
   return (
     <animated.div style={props} className="steps-root-container">
       <div className="steps-heading-container">
         <Title level={4} className="text">
-          What are you specialising in?
+          What do you major in?
         </Title>
-        {specialisation !== null && currStep === 3 && (
+        {majors.length > 0 && currStep === 3 && (
           <Button type="primary" onClick={incrementStep}>
             Next
           </Button>
@@ -42,20 +38,29 @@ export const SpecialisationStep = ({ incrementStep, currStep }) => {
 
       <Menu
         className="degree-specialisations"
-        onClick={(e) => dispatch(degreeActions("SET_SPECIALISATION", e.key))}
-        selectedKeys={specialisation && [specialisation]}
+        onSelect={(e) => dispatch(addMajor(e.key))}
+        onDeselect={(e) => dispatch(removeMajor(e.key))}
+        selectedKeys={majors}
+        defaultOpenKeys={["0"]}
         mode="inline"
       >
-        {programCode ? (
-          Object.keys(options).map((key) => (
-            <Menu.Item className="text" key={key}>
-              {key} {options[key]}
-            </Menu.Item>
-          ))
-        ) : (
-          <div>Please select a degree first...</div>
-        )}
+        {Object.keys(options).map((sub, index) => (
+          <Menu.SubMenu
+            key={index}
+            title={`Majors for ${sub}`}
+            className="step-submenu"
+            mode="inline"
+          >
+            {Object.keys(options[sub]).map((key) => (
+              <Menu.Item className="text" key={key}>
+                {key} {options[sub][key]}
+              </Menu.Item>
+            ))}
+          </Menu.SubMenu>
+        ))}
       </Menu>
     </animated.div>
   );
 };
+
+export default SpecialisationStep;

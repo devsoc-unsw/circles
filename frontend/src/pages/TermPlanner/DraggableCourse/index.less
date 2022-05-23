@@ -1,0 +1,89 @@
+.course {
+  user-select: none;
+  font-size: 0.8rem;
+  cursor: grab;
+  padding: 0.9em;
+  padding-right: 1.1em;
+  padding-left: 1.1em;
+  border-radius: 1em;
+  max-width: 20em;
+  min-width: 12em;
+  margin-top: 1em;
+  display: flex;
+  justify-content: flex-start;
+  gap: 0.7em;
+  align-items: center;
+  line-height: 1.5715;
+  background-color: #d9d9d9;
+}
+
+.disabledWarning {
+  background-color: #fff3e0;
+}
+
+.warning {
+  background-color: #ffe8c3;
+}
+
+.dragDisabledCourse {
+  background-color: #eee;
+  .text {
+    color: #6c6c6c;
+  }
+
+  &:hover {
+    animation: shake 0.25s;
+    transform: none;
+    cursor: url("../../../assets/notAllowed.ico"), default;
+  }
+}
+
+.alert {
+  max-width: 1.5em;
+  max-height: 1.5em;
+  font-size: 16px;
+}
+
+.light {
+  .alert {
+    color: #323739;
+    .ant-alert-message {
+      color: #323739;
+    }
+  }
+}
+
+.dark {
+  .course {
+    // background-color: #9254de;
+    backdrop-filter: blur(9px) saturate(95%);
+    -webkit-backdrop-filter: blur(9px) saturate(95%);
+    background-color: rgba(146, 84, 222, 0.6);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.125);
+  }
+
+  .dragDisabledCourse {
+    background-color: rgba(146, 84, 222, 0.4);
+    .text {
+      color: #d2d2d2;
+    }
+  }
+
+  .disabledWarning {
+    background-color: rgba(186, 132, 81, 0.33);
+  }
+
+  .warning {
+    backdrop-filter: blur(9px) saturate(95%);
+    -webkit-backdrop-filter: blur(9px) saturate(95%);
+    background-color: rgba(254, 166, 82, 0.33);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.125);
+  }
+
+  .alert {
+    background-color: #242728;
+  }
+
+}

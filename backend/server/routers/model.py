@@ -39,6 +39,7 @@ class CourseDetails(BaseModel):
     raw_requirements: str
     exclusions: dict
     path_to: dict
+    handbook_note: str
     terms: list
     gen_ed: int
     path_from: dict
@@ -63,9 +64,18 @@ class CourseState(BaseModel):
     handbook_note: str
     warnings: list
 
+class ValidCourseState(BaseModel):
+    is_accurate: bool
+    unlocked: bool
+    handbook_note: str
+    warnings: list
+    supressed: bool
 
 class CoursesState(BaseModel):
     courses_state: dict[str, CourseState] = {}
+
+class ValidCoursesState(BaseModel):
+    courses_state: dict[str, ValidCourseState] = {}
 
 class CoursesUnlockedWhenTaken (BaseModel):
     direct_unlock: list
@@ -106,9 +116,6 @@ with open(CONDITIONS_PATH, "rb") as file:
 
 with open("algorithms/cache/handbook_note.json", "r") as file:
     CACHED_HANDBOOK_NOTE: dict[str, str] = json.load(file)
-
-flexEd = ["3778"]
-
 
 class description(BaseModel):
     description: str
