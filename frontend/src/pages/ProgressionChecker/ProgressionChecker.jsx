@@ -51,13 +51,17 @@ const ProgressionChecker = () => {
   useEffect(() => {
     // get structure of degree
     const fetchStructure = async () => {
-      try {
-        const res = await axios.get(`/programs/getStructure/${programCode}/${major && `/${minor}`}`);
-        setStructure(res.data.structure);
-      } catch (err) {
-        // eslint-disable-next-line no-console
-        console.log(err);
-      }
+      await Promise.all(majors.map(async (major) => {
+        try {
+          const newStructure = structure;
+          const res = await axios.get(`/programs/getStructure/${programCode}/${major}${minor && `/${minor}`}`);
+          newStructure[major] = res.data.structure;
+          setStructure(newStructure);
+        } catch (err) {
+          // eslint-disable-next-line no-console
+          console.log(err);
+        }
+      }));
       setIsLoading(false);
     };
     if (programCode && majors) fetchStructure();
@@ -66,7 +70,7 @@ const ProgressionChecker = () => {
   return (
     <PageTemplate>
       <Dashboard isLoading={isLoading} degree={degreeData} />
-      <TableView structure={structure} />
+      <TableView isLoading={isLoading} structure={structure} />
       <ListView3
         isLoading={isLoading}
         degree={degreeData}
