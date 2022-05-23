@@ -61,7 +61,7 @@ def addComponentData(formatted, programData):
         # },
     }
     # Loop through items in curriculum structure
-    for item in formatted["CurriculumStructure"]:
+    for item in formatted["structure"]:
         # If item is a free elective
         if item["vertical_grouping"]["value"] == "FE":
             addFEData(components, item)

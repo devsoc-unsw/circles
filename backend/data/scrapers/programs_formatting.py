@@ -57,7 +57,7 @@ def initialiseProgram(programsFormatted, data):
         "studyLevel": None,
         "faculty": None,
         "duration": None,
-        "CurriculumStructure": [],
+        "structure": [],
         "description": None,
     }
     # Get course code
@@ -81,10 +81,13 @@ def addData(programsFormatted, courseCode, program, data, curriculumStructure):
     prog["duration"] = data.get("full_time_duration")
     prog["description"] = formatDescription(data.get("description"))
     # Assign infomation about program cirriculum
-    format_curriculum(prog["CurriculumStructure"], curriculumStructure["container"])
+    format_curriculum(prog["structure"], curriculumStructure["container"])
 
 
 def formatDescription(description):
+    """
+    (Lazily) formats description by getting rid of HTML tags, random unicode characters and multiple spaces.
+    """
     # Get rid of any html tags
     description = re.sub(r"<.+?>" , " ", description)
 

@@ -7,19 +7,19 @@
         "faculty": "Faculty of Engineering",
         "description": "Computer Science involves the study of the design, construction and uses of computer systems. It is concerned with the representation of data and data structures in computer systems and the design of algorithms for automatic manipulation of this information by programming languages and machine systems. It is very much concerned with the design and development of hardware and software tools by which computer applications may be developed, but not so much with the applications themselves. It is, however, noted that non-computing elements (such as human interface or psychological aspects) can often dictate the level of success of computing systems. At UNSW, particular emphasis is given to comprehension of the basic principles behind computing tools, operating systems, compilers and translators, and computer hardware.",
         "components": {
-            "GE": {
+            "general_education": {
                 "notes": "Students must take 12 UOC of any General Education course. NOTE: Students are encouraged to complete 48 UOC before taking any General Education course.",
                 "credits_to_complete": 12
             },
-            "IR": [],
-            "LR": [
+            "information_rule": [],
+            "limit_rule": [
                 {
                     "title": "Maximum Level 1 Electives UOC",
                     "notes": "Students may only undertake a maximum of 60 UOC of the following courses. any level 1 course"
                 }
             ],
-            "SpecialisationData": {
-                "Majors": {
+            "spec_data": {
+                "minors": {
                     "Computer Science": {
                         "notes": "Optional minors available include the following. If you complete a minor of 30 UOC, you will also need to take 6 UOC of free electives.",
                         "INFSA2": "Information Systems",
@@ -30,7 +30,7 @@
                         "MARKA2": "Marketing"
                     }
                 },
-                "Minors": {
+                "majors": {
                     "Computer Science": {
                         "notes": "COMPA1 is the default stream, and will be used if no other stream is selected.",
                         "COMPA1": "Computer Science",
@@ -44,7 +44,7 @@
                     }
                 }
             },
-            "NonSpecialisationData": []
+            "non_spec_data": []
         }
     },
     "3707": {
@@ -55,11 +55,11 @@
         "faculty": "Faculty of Engineering",
         "description": "The UNSW Bachelor of Engineering (Honours) is designed to equip you for a career as a professional engineer. We provide you with a solid background in mathematics, natural sciences and computing that will prepare you for learning knowledge and skills in an engineering discipline specialisation. You will get the chance to apply yourself to engineering design and enquiry projects, professional engineering practice, engineering and technical management and conduct research towards your thesis project. The four year program is offered in 19 engineering disciplines (listed below). A flexible first year engineering stream is offered for students who wish to study engineering but choose to delay their choice of which branch of engineering to study until the end of Year 1.",
         "components": {
-            "GE": {
+            "general_education": {
                 "notes": "Students must take at least 12 UOC of the following courses.",
                 "credits_to_complete": 12
             },
-            "IR": [
+            "information_rule": [
                 {
                     "title": "Discipline Elective List",
                     "notes": "Students must take 12 UOC from the Discipline Elective List for the engineering specialisation. Students should check the details in the specialisation page."
@@ -69,15 +69,15 @@
                     "notes": "Students must complete a minimum of 60 days of Industrial Training to graduate. Industrial Training must be undertaken concurrently with enrolment in the program. For more information on Industrial Training, please visit https://www.unsw.edu.au/engineering/student-life/industrial-training"
                 }
             ],
-            "LR": [],
-            "SpecialisationData": {
-                "Majors": {
+            "limit_rule": [],
+            "spec_data": {
+                "minors": {
                     "Engineering (Honours)": {
                         "notes": "Students who choose to complete a minor must declare the minor before their final term of study. Students should check requirements for the minor and in which Engineering (Honours) majors it is available. Courses taken for a minor may be course shared with General Education requirements, but cannot be double counted towards them.",
                         "ENGGA2": "Humanitarian Engineering"
                     }
                 },
-                "Honours": {
+                "honours": {
                     "Engineering (Honours)": {
                         "notes": "Students must complete at least one of the specialisations below.",
                         "CVENBH": "Environmental Engineering",
@@ -104,7 +104,7 @@
                     }
                 }
             },
-            "NonSpecialisationData": []
+            "non_spec_data": []
         }
     },
     "3970": {
@@ -115,11 +115,11 @@
         "faculty": "Faculty of Science",
         "description": "The three-year Bachelor of Science allows you to study a wide range of science subjects as well as many other areas of interest. This degree is ideal for students who seek a &#39;generalist&#39; degree in which there is a large element of choice. Students are encouraged to choose a broad range of courses in the first year, to expand their general understanding of Science which then enables them to choose from a wide selection of major options in the second and third year. There is also the option to apply for an additional Honours year at the end of the three years, subject to a student&#39;s academic performance and other criteria. The rules and requirements for the degree are set out below.",
         "components": {
-            "GE": {
+            "general_education": {
                 "notes": "Students must take 12 UOC of the following courses. Any course defined as a Science course cannot be taken as General Education (GE). All other courses can be used to fulfil the GE requirement of this program, including GEN#-coded courses. Any exceptions to these rules must be approved by the Associate Dean (Academic Programs) or nominee.",
                 "credits_to_complete": 12
             },
-            "IR": [
+            "information_rule": [
                 {
                     "title": "Course Information Rule",
                     "notes": "GEN# courses cannot count towards the free elective component, or towards science core courses or science electives in the program. Any exceptions to these rules must be approved by the Associate Dean (Academic Programs) or nominee."
@@ -129,7 +129,7 @@
                     "notes": "Students cannot complete a minor with the same name as their nominated major, and Level II and III courses cannot be double-counted between majors and minors. More than one minor may be completed subject to the limit on double-counting. Students must declare their minor(s) before their final term."
                 }
             ],
-            "LR": [
+            "limit_rule": [
                 {
                     "title": "Excluded General Education Courses",
                     "notes": "Students may not undertake any of the following excluded courses. any General Education - Faculty of Science (GENS) course any Food Technology (FOOD) course any Medical Science (SOMS) course any Computer Science (COMP) course any course offered by Faculty of Science"
@@ -143,8 +143,8 @@
                     "notes": "A maximum of 72 UOC of Level 1 courses can be taken, including any General Education or mainstream Level 1 course taken to fulfil either the General Education or the Free Elective requirement. any level 1 course"
                 }
             ],
-            "SpecialisationData": {
-                "Minors": {
+            "spec_data": {
+                "majors": {
                     "Science": {
                         "notes": "Students must complete at least one Science major selected from the list below. Students should declare their major prior to commencing Stage 2 courses. Notes: 1.Students are not permitted to take the Bioinformatics major BINFB1 when taking the degree in dual award mode with the Bachelor of Engineering (Bioinformatics) program.",
                         "BIOCC1": "Genetics",
@@ -175,7 +175,7 @@
                         "BIOSG1": "Ecology"
                     }
                 },
-                "Majors": {
+                "minors": {
                     "Science": {
                         "notes": "Students may choose to complete an optional minor in one of the following areas, using their Science and/or free electives.",
                         "MICRJ2": "Immunology",
@@ -199,7 +199,7 @@
                     }
                 }
             },
-            "NonSpecialisationData": [
+            "non_spec_data": [
                 {
                     "courses": [
                         "any Anatomy course",
@@ -231,7 +231,7 @@
                         "any Psychology course"
                     ],
                     "title": "Science Elective Courses",
-                    "credits_to_complete": null,
+                    "credits_to_complete": 12,
                     "core": false,
                     "levels": [],
                     "notes": "Students taking the Bachelor of Science as a stand-alone program are required to take an additional 12 UOC of Science elective courses in addition to the minimum disciplinary component requirements. Students taking a second major or minor may not have to take these courses where their chosen specialisations require more than 108 UOC."
@@ -266,7 +266,7 @@
                         "any Mathematics course": 1
                     },
                     "title": "Science Electives",
-                    "credits_to_complete": null,
+                    "credits_to_complete": 36,
                     "core": false,
                     "levels": [],
                     "notes": "Students need to complete 96 UOC to meet the core requirements for the Bachelor of Science. If your choice of specialisation(s) requires less than 96 UOC you are required to complete additional Science elective courses from the following list to meet the 96 UOC requirement."
@@ -301,7 +301,7 @@
                         "any Mathematics course"
                     ],
                     "title": "Science Electives",
-                    "credits_to_complete": null,
+                    "credits_to_complete": 36,
                     "core": false,
                     "levels": [],
                     "notes": "Students need to complete 96 UOC to meet the core requirements for the Bachelor of Science. If your choice of specialisation(s) requires less than 96 UOC you are required to complete additional Science elective courses from the following list to meet the 96 UOC requirement."
@@ -317,11 +317,11 @@
         "faculty": "UNSW Business School",
         "description": "The Bachelor of Commerce (BCom) is a highly valued business qualification offering students a career-focused education for long term success. Students are empowered to become adaptive thinkers and drive purposeful change to thrive in a fast-changing world. A unique feature of the BCom is the Integrated First Year, where students learn about business management and the broader environment in which an organisation operates, with a strong focus on developing professional skills and capabilities. In this flexible, diverse and comprehensive business degree, students have exclusive access to Career Accelerator an impressive suite of career-boosting opportunities. Completion of at least one for-credit Career Accelerator course is a signature feature of the BCom. Students complete up to two majors, selecting from a comprehensive and industry advised suite, including Accounting, Business Analytics, Economics, Finance, FinTech, HR, Information Systems, International Business, Marketing and Taxation, many fulfilling professional accreditation requirements. The myBCom Series , designed in collaboration with industry and alumni, guides students to develop a personalised roadmap to get the full benefit of the curricular and co-curricular opportunities offered in the BCom. Students graduate with their personal digital myBCom Graduate Portfolio, showcasing their academic, technical and practical career-ready skills and capabilities for a fulfilling career. High performing students can study an additional Honours year or more advanced postgraduate studies. BCom includes: 1st year (48UOC) Business Management (24UOC) Four courses explore what goes on inside an organisation Business Ecosystem (12UOC) Two courses consider the broader environment in which an organisation operates Skills and Capabilities (12UOC) Two courses build essential skills and capabilities myBCom Blueprint and myBCom First Year Portfolio (0UOC) Two primers to personalise your degree and showcase your achievements 2nd and 3rd year (96UOC) 1st Major (48UOC) Free Electives or optional 2nd Major or Minor (48UOC) Mandatory Work-Integrated Learning (6UOC) General Education (12UOC) Final Year Synthesis (0-6UOC) MyBCom Graduate Portfolio (0UOC) The UNSW Business School difference: Exclusive access to Career Accelerator a suite of opportunities for students to complete internships, mentoring, global business practicums, build professional networks and attend industry events Integrated First Year Experience immerse yourself in business problems and opportunities to learn how organisations operate in complex environments and to develop your professional skills Highly regarded by industry, with unique accreditation opportunities Learn from leading academics and business experts at a business school with top rankings in Australia across Accounting, Finance, Actuarial Studies and Information Systems A comprehensive selection of majors including Business Analytics and FinTech Incorporates practical real-world experience and global opportunities Access to UNSW Business School s alumni network of 90,000&#43; Graduate with a digital Graduate Portfolio highlighting your skills and capabilities required for a successful and exciting start to your career",
         "components": {
-            "GE": {
+            "general_education": {
                 "notes": "Students must take at least 12 UOC of any General Education course. Please note: Students enrolled in programs within the UNSW Business School cannot take General Education courses offered by the UNSW Business School (i.e. GENC code). These restrictions also apply to the following courses: GENL2021 An Introduction to the Australian Legal System GENL2032 Cyberspace Law 2.0 Students must complete at least 48 UOC before enrolling in General Education courses.",
                 "credits_to_complete": 12
             },
-            "IR": [
+            "information_rule": [
                 {
                     "title": "LEVEL 2 AND 3 MATURITY REQUIREMENTS",
                     "notes": "Student must have completed 24 UOC before taking any level 2 courses. Student must have completed 48 UOC before taking any level 3 courses."
@@ -331,14 +331,14 @@
                     "notes": "If a student chooses to complete 2 commerce majors and the majors have a Integrated First Year (IFY) core course in common, they are permitted to double count a maximum of 6 UOC of this overlap unless specified otherwise. Students completing a major sequence with courses in common which are not part of the IFY courses may only count the overlap towards one major and must replace this course within the other major with a major elective of the same level or higher (e.g. Level 3 core course for a Level 3 major elective)."
                 }
             ],
-            "LR": [
+            "limit_rule": [
                 {
                     "title": "Minimum Faculty UOC",
                     "notes": "Students must complete a minimum of 96 UOC of the following courses. any course offered by UNSW Business School"
                 }
             ],
-            "SpecialisationData": {
-                "Majors": {
+            "spec_data": {
+                "minors": {
                     "Commerce": {
                         "notes": "Students may choose to use their electives to complete one of the following minors. Minor Requirements: An approved disciplinary stream containing at least 18 UOC at Level 2 and Level 3.",
                         "ECONO2": "Behavioural Economics",
@@ -367,7 +367,7 @@
                         "MGMTJ2": "Innovation, Strategy and Entrepreneurship"
                     }
                 },
-                "Minors": {
+                "majors": {
                     "Commerce": {
                         "notes": "Students must complete a 48 UOC within a specified discipline (Commerce major) with at least 18 UOC of Level 3 courses to meet program requirements. Please note, this 48 UOC includes 1 course from the Integrated First Year (IFY) core. This means that students will complete 42 UOC in specified disciplinary courses outside the IFY core.",
                         "INFSA1": "Information Systems",
@@ -385,7 +385,7 @@
                     }
                 }
             },
-            "NonSpecialisationData": [
+            "non_spec_data": [
                 {
                     "courses": {
                         "COMM2233": "Industry Consulting Project",
@@ -403,7 +403,7 @@
                         "ECON3000": "Evidence-based Intervention Design and Evaluation"
                     },
                     "title": "Final Year Synthesis",
-                    "credits_to_complete": null,
+                    "credits_to_complete": 6,
                     "core": true,
                     "levels": [],
                     "notes": "Students must complete either a 6 UOC Synthesis of Learning Course, or a 0 UOC Synthesis Experience. Students who complete a Synthesis course that is also a Work Integrated Learning course within a major, will meet a major elective, WIL and Synthesis requirement. Students must complete their Final Year Synthesis course within their final year of their Bachelor of Commerce program. That is, within 48 UOC or less remaining in their BCom program."
@@ -466,11 +466,11 @@
         "faculty": "Faculty of Science",
         "description": "Biotechnology can be defined as the use of various biological processes to make products and perform services. In biotechnology, living cells and biochemical macromolecules such as proteins, DNA and RNA are applied in a rapidly expanding range of activities of direct benefit to society. Biotechnology is used for the production of pharmaceuticals, food and industrial chemicals, in the development of improved crops and livestock for farming, for environmental clean-up, and in forensics. Modern biotechnology makes practical use of the most recent scientific advances in areas such as molecular genetics and molecular cell biology. The development of recombinant DNA technology has resulted in the ability to create, modify and improve industrial organisms and to produce large quantities of any useful protein. Based on this technology, biopharmaceuticals including hormones, vaccines, anti-hypertensive agents, anti-inflammatory agents and new therapies for the treatment of cancer are being developed with the potential to revolutionise medicine. The sequencing of the human genome and the rapid emergence of high-throughput genomic and proteomic techniques is resulting in a surge of new drug targets. Translation of this advanced knowledge into useful therapies and improved medical practices requires the application of biotechnology. Microorganisms and viruses are being modified for use in controlling plant and animal diseases and pests. Diagnostic kits are being developed for use in forensic science and in product identification and quality control. Genetic improvements in agriculture, plants and animals are becoming a reality, as is the control of inborn genetic disorders in humans. The ability to treat diseased and injured organs with replacement cells and tissues generated outside of the body is advancing rapidly. The future for expansion in all the above areas is immense. Our ability to cope with many medical, environmental, agricultural and manufacturing problems in the 21st century will depend heavily on advances in biotechnology.",
         "components": {
-            "GE": {
+            "general_education": {
                 "notes": "Students must take 12 UOC of the following courses. Any course defined as a Science course cannot be taken as General Education (GE). All other courses can be used to fulfil the GE requirement of this program, including GEN# coded courses. Any exceptions to these rules must be approved by the Associate Dean (Academic Programs) or nominee.",
                 "credits_to_complete": 12
             },
-            "IR": [
+            "information_rule": [
                 {
                     "title": "Suggested Level 2 Science Electives",
                     "notes": "BABS2202 Molecular Cell Biology 1 BABS2204 Genetics or BABS2264 Genetics (Advanced) BINF2010 Introduction to Bioinformatics CHEM2021 Organic Chemistry: Mechanisms & Biomolecules CHEM2041 Analytical Chemistry: Essential Methods PHAR2011 Introductory Pharmacology and Toxicology SCIF2199 Science Work Placement"
@@ -488,7 +488,7 @@
                     "notes": "Suggested Free Electives: - ACCT1501 Accounting and Financial Management 1A - MGMT2010 Innovation & Entrepreneurship"
                 }
             ],
-            "LR": [
+            "limit_rule": [
                 {
                     "title": "Excluded General Education Courses",
                     "notes": "Students may not undertake any of the following excluded courses. any course offered by Faculty of Science any General Education - Faculty of Science (GENS) course any Food Technology (FOOD) course any Computer Science (COMP) course any course offered by School of Medical Sciences"
@@ -498,8 +498,8 @@
                     "notes": "A maximum of 48 units of credit of level I courses can be taken throughout this entire program, excluding any GEN#### course or other mainstream level I course taken to fulfill the 12 unit of credit General Education requirement. any level 1 course"
                 }
             ],
-            "SpecialisationData": {},
-            "NonSpecialisationData": [
+            "spec_data": {},
+            "non_spec_data": [
                 {
                     "courses": {
                         "any level 3 Microbiology course": 1,
@@ -625,14 +625,14 @@
         "faculty": "UNSW Business School",
         "description": "The Bachelor of Information Systems (BIS) is a highly valued and accredited business qualification offering students a career-focused education in Information Systems (IS). Organisations are always looking for &#39;business savvy&#39; IS graduates who understand both the business and technical issues related to their systems. This three-year degree is designed for students interested in the practical application of technology in business and government. Information Systems relates to the interaction between technology, people and processes to achieve business goals. This can include internal applications of technology such as networks and Information Technology (IT) services that help those who work for organisations operate more efficiently, as well as external applications such as technological products and user experiences. IS professionals are in the business of transformation, working in teams to understand data, solve problems, optimise systems, create innovations, and enrich organisational workflows. Through the BIS degree, you will learn from leading academics and business experts in Information Systems to become an adaptive thinker, solve problems through a variety of digital technologies and tools, and drive purposeful change required to thrive in a fast-changing and increasingly digital world. The BIS degree now includes an Integrated First Year (IFY) experience, allowing you to begin your study with other students in the business school. You will learn about business management and the broader environment in which an organisation operates, with a focus on developing professional skills and capabilities. The BIS now also offers a work integrated learning (WIL) course. WIL enables you to engage in authentic, purposeful, partnered, supervised and assessed work learning experiences that integrate academic learning with its application in the workplace. The core BIS courses cover discipline specific competency areas that prepare you for a career as an IS graduate. This includes the study of Design and Development and Organisational IS such as Business Analysis, Agile Product Management, User Experience (UX) and IT Service Design, IS Project Management, as well as Business Process Management. In addition, you will undertake studies in Data &amp; Information Management , including courses that will develop your knowledge and skills in Databases (SQL), Database Management, Big Data, and programming for analytics (R and Python). The core IS curriculum also prepares you for a career in Technology/Security related areas of business, and the study of Networking and Security, Cyber Security Management and Governance as well as Enterprise Architecture and Cloud Solutions. Finally, you will conclude your core study of IS through an Integration and capstone project course. This course will synthesise your learnings across the program, requiring you to complete an authentic, sandbox project that closely relates to professional and collaborative work in the field. The BIS degree also offers a number of technical elective courses for students looking to further their data analytic or programming skills (Java and Android app development). Once you have successfully completed the BIS degree, you will be able to pursue a career in the following areas: digital transformation, IT consulting, business systems analysis, User Experience (UX) design, information system design, communications network analysis, IS security development, cybersecurity consulting, digital innovation, data science, IS and IT architecture, database administration, and infrastructure development and maintenance. High performing students can study an additional Honours year for more advanced studies in Information Systems, including the completion of an honours research thesis project.",
         "components": {
-            "GE": {
+            "general_education": {
                 "notes": "Students must complete 12 UOC of General Education. Please note: Students enrolled in programs within the UNSW Business School cannot take General Education courses offered by the UNSW Business School (i.e. GENC code). These restrictions also apply to the following courses: GENL2021 An Introduction to the Australian Legal System GENL2032 Cyberspace Law",
                 "credits_to_complete": 12
             },
-            "IR": [],
-            "LR": [],
-            "SpecialisationData": {},
-            "NonSpecialisationData": [
+            "information_rule": [],
+            "limit_rule": [],
+            "spec_data": {},
+            "non_spec_data": [
                 {
                     "courses": {
                         "COMM1180": "Value Creation",
@@ -750,17 +750,17 @@
         "faculty": "Faculty of Science",
         "description": "The three-year Bachelor of Data Science and Decisions has been developed to train scientists to meet the current, and future, strong demand for Data Scientists and Data Analysts. Graduates will have broad and coherent knowledge and skills in Data Science across the three areas of mathematics and statistics, computer science, and economics, and they will gain deeper knowledge of Data Science in one of these three areas by pursuing studies in one of three streams. Students will also have the opportunity to increase their breadth of experience using electives. The Bachelor of Data Science and Decisions has been designed to: Develop graduates who have a working knowledge of scientific criteria and methods of investigation, and a concern for objectivity and precision. Enable students to understand the significance of science, technology, economics and social factors in modern society, and of the contributions they can make in improving material conditions. Produce graduates able to read critically and with understanding, to think logically, and to communicate clearly by written and oral means. Create graduates able to analyse information critically in a mathematical setting. Allow students to understand the role of speculation in the selection and solution of problems, the construction of hypotheses, and the design of experiments. Train graduates to work successfully as part of a team. Train students to demonstrate knowledge and skills in formulating problems involving both qualitative and quantitative data. Produce graduates able to prepare, process, interpret and present data using appropriate qualitative and quantitative techniques. Enable students to apply mathematical and computational techniques and business sensibilities to real-world problems involving complex data sets. Encourage graduates to apply the highest ethical standards to their professional and personal lives Provide opportunities for the development of students&#39; motivations and social maturity, and an awareness of their capabilities in relation to a choice of career which will be fruitful to themselves and to society.",
         "components": {
-            "GE": {
+            "general_education": {
                 "notes": "Students must take 12 UOC of the following courses. Any course defined as a Science course (see Table 1) cannot be taken as General Education (GE). Any exceptions to these rules must be approved by the Associate Dean (Academic Programs) or nominee.",
                 "credits_to_complete": 12
             },
-            "IR": [
+            "information_rule": [
                 {
                     "title": "Course Information Rule",
                     "notes": "GEN# courses cannot count towards the free elective component, or towards science core courses or science electives in the program. Any exceptions to these rules must be approved by the Associate Dean (Academic Programs) or nominee."
                 }
             ],
-            "LR": [
+            "limit_rule": [
                 {
                     "title": "Maximum Level 1 UOC",
                     "notes": "Students may complete up to a maximum of 72 UOC of Level 1 courses (including General Education courses). any level 1 course"
@@ -770,8 +770,8 @@
                     "notes": "Students may not undertake any Science, Engineering or Business courses towards their General Education requirement. any course offered by Faculty of Science any course offered by Faculty of Engineering any course offered by UNSW Business School any General Education - Faculty of Business (GENC) course any General Education - Faculty of Science (GENS) course any General Education - Faculty of Engineering (GENE) course any Food Technology (FOOD) course any Computer Science (COMP) course any course offered by School of Medical Sciences"
                 }
             ],
-            "SpecialisationData": {
-                "Minors": {
+            "spec_data": {
+                "majors": {
                     "Data Science and Decisions": {
                         "notes": "Students must complete only one of the following majors. Each major is 66-72 UoC. 18-24 UoC of program core courses are double-counted towards your major and the remaining 48 UoC are specific to your major.",
                         "ECONL1": "Business Data Science",
@@ -780,7 +780,7 @@
                     }
                 }
             },
-            "NonSpecialisationData": [
+            "non_spec_data": [
                 {
                     "courses": {
                         "MATH2601": "Higher Linear Algebra",
@@ -858,19 +858,19 @@
         "faculty": "Faculty of Medicine and Health",
         "description": "Vision Science is the study of the sensory processes that underlie vision, and the development and use of vision-related technologies. This is broad discipline degree that provides comprehensive knowledge and direct training in areas relevant to a career in Vision Science such as: Optics, anatomy and functioning of the eye, eye disorders, clinical optometry, ocular therapy, sensation and perception, psychophysics, and research design, methods and experimentation. This degree is designed to develop scientists who can work with ophthalmic industries in the development of new technologies, diagnostic instruments, and patient care options, as well as develop persons who can liaise with ophthalmic practitioners dealing with the patient directly. Students who complete this degree may be elligible to transfer to the Master of Clinical Optometry degree, see Additional Information below.",
         "components": {
-            "GE": {
+            "general_education": {
                 "notes": "Students must take 12 UOC of the following courses. Any course within the Faculty of Medicine and Health cannot be taken as General Education (GE). All other courses can be used to fulfil the GE requirement of this program, including GEN# coded courses. Any exceptions to these rules must be approved by the Associate Dean (Academic Programs) or nominee.",
                 "credits_to_complete": 12
             },
-            "IR": [],
-            "LR": [
+            "information_rule": [],
+            "limit_rule": [
                 {
                     "title": "Excluded General Education Courses",
                     "notes": "Students may not undertake any of the following excluded courses. any course offered by Faculty of Medicine and Health any General Education - Faculty of Medicine and Health (GENM) course any course offered by School of Medical Sciences"
                 }
             ],
-            "SpecialisationData": {},
-            "NonSpecialisationData": [
+            "spec_data": {},
+            "non_spec_data": [
                 {
                     "courses": {
                         "OPTM3233": "Working in Clinical Contexts",
@@ -950,11 +950,11 @@
         "faculty": "UNSW Business School",
         "description": "Economics is an influential social science that explores human behaviour and decision-making, with a focus on the roles played by incentives, resource constraints, laws, customs, and institutions. When you study the Bachelor of Economics at UNSW, you ll explore how the decisions of institutions and individuals interact to determine outcomes for the economy and society. As a graduate of economics, your distinct insights can be applied broadly. Through this degree, you&#39;ll gain highly transferable analytical skills that are valuable in a diverse range of careers. In addition to more traditional economic issues like unemployment, taxation, and trade policy, economics allows you to understand and address human challenges like inequality, climate change, corruption, political polarisation, and impediments to education and health care. Key features Learn how to change the world You ll explore and find solutions to the important issues of our time. Economics uncovers the forces behind global inequality and the drivers of international relations. It explores policymaking and regulation, inflation, property rights, labour markets, our interaction with the environment, firm organisation and competition, and strategic interaction. Become highly sought after by industry and government UNSW Economics graduates are keenly sought after by policymakers at all levels of government, private sector employers, not-for-profits, and international organisations. They work in diverse careers as analysts, researchers, forecasters, journalists, and advisors. Build your expertise Our flexible program allows you to shape your degree around your interests and goals. Choose from three specialisations in economics, build your own program, or complement your economics studies with other Business and Commerce courses. You can also study this program as a double degree to combine your expertise. Put theory into practice You ll apply your academic learning through practical experience, empowering you to use economics and leadership to change the world. Opportunities for practical experience include internships, group consulting projects, and global practicums.",
         "components": {
-            "GE": {
+            "general_education": {
                 "notes": "Students must complete 12 UOC of General Education. Please note: Students enrolled in programs within the UNSW Business School cannot take General Education courses offered by the UNSW Business School (i.e. GENC code). These restrictions also apply to the following courses: GENL2021 An Introduction to the Australian Legal System GENL2032 Cyberspace Law 2.0 Students must have completed 48 UOC before taking any General Education course",
                 "credits_to_complete": 12
             },
-            "IR": [
+            "information_rule": [
                 {
                     "title": "Level 3 Maturity Requirements",
                     "notes": "Students must have completed all Level 1 ECON courses prescribed in the degree before taking any Level 3 ECON courses."
@@ -964,9 +964,9 @@
                     "notes": "High performing students can complete an additional Honours year. For students considering Honours, it is recommended to take 3202 Mathematical Economics. Please, refer to Economics (Honours) Program for more information."
                 }
             ],
-            "LR": [],
-            "SpecialisationData": {
-                "Minors": {
+            "limit_rule": [],
+            "spec_data": {
+                "majors": {
                     "Economics": {
                         "notes": "Students may choose to complete one or two optional Economics majors. Students may use their Economics Core and Economics Elective courses to complete these economics majors. Please note: If you choose to study two optional Economics majors, you must choose another 6 courses (36 UOC) from the second major that do not overlap with the first optional major.",
                         "ECONT1": "Data Analytics and Econometrics",
@@ -975,7 +975,7 @@
                     }
                 }
             },
-            "NonSpecialisationData": [
+            "non_spec_data": [
                 {
                     "courses": {
                         "COMM1140": "Financial Management",
@@ -1096,11 +1096,11 @@
         "faculty": "UNSW Business School",
         "description": "The Actuarial Studies program serves as a foundation for students who wish to enter the actuarial profession. Students must achieve the required academic standard in their Actuarial Studies courses to gain exemption from the Foundation Program of the Actuaries Institute professional examinations, and the Validation by Educational Experience (VEE) credit for the Society of Actuaries (USA) and Casualty Actuarial Society (USA). Students (esp. Actuarial Studies (Co-op) students and dual degree students) may also be eligible to gain exemption from the university accreditation components of the Actuary Program of the Actuaries Institute professional examinations. Students who wish to complete their studies with the Institute and Faculty of Actuaries (UK) may be eligible to receive credit for subjects for which they have credit with the Actuaries Institute via Transfer of Prior Learning (TPL).",
         "components": {
-            "GE": {
+            "general_education": {
                 "notes": "Students must complete 12 UOC of General Education courses. Please note: Students enrolled in programs within the UNSW Business School cannot take General Education courses offered by the UNSW Business School (i.e. GENC code). These restrictions also apply to the following courses: GENL2021 An Introduction to the Australian Legal System GENL2032 Cyberspace Law 2.0",
                 "credits_to_complete": 12
             },
-            "IR": [
+            "information_rule": [
                 {
                     "title": "Note for students choosing to complete an Actuarial Studies major",
                     "notes": "Students completing an Actuarial Studies major and an additional major/minor will result in more UOC required for degree completion."
@@ -1110,9 +1110,9 @@
                     "notes": "A major in the School of Mathematics and Statistics comprises at least 60 UOC. Students completing a Major in the School of Mathematics and Statistics may treat MATH 1151 as equivalent to MATH1141, and MATH1251 as equivalent to MATH1241 for the purposes of completing major requirements."
                 }
             ],
-            "LR": [],
-            "SpecialisationData": {
-                "Minors": {
+            "limit_rule": [],
+            "spec_data": {
+                "majors": {
                     "Actuarial Studies": {
                         "notes": "Students may elect to complete ACTLE1 or MATHE1 in addition to their Actuarial Studies program requirements. Students completing these majors will still need to complete the program requirements such as Level 1 and 2 core course as well as Level 3 electives. These majors will require UOC to be taken from the Business Electives, Free elective and/or General Education courses depending on a students program rules and courses completed. It may also require completion of additional UOC above the minimum required for a student's program. Please see the Progression Plans and consult the Business School Student Centre if you are interested in completing either of these majors.",
                         "ACTLE1": "Actuarial Risk Management and Analytics",
@@ -1120,7 +1120,7 @@
                     }
                 }
             },
-            "NonSpecialisationData": [
+            "non_spec_data": [
                 {
                     "courses": {
                         "ACTL1101": "Introduction to Actuarial Studies",
@@ -1180,14 +1180,14 @@
         "faculty": "Faculty of Medicine and Health",
         "description": "UNSW Medicine offers a six year integrated Medicine program (288 UOC) which leads to the awards of Bachelor of Medical Studies (BMed) and Doctor of Medicine (MD). The program includes a compulsory Independent Learning Project (30 UOC) to ensure that all graduates acquire knowledge of research principles and methods applicable to Medicine and its professional practice. The objectives of the Medicine program are: To establish an integrated, interconnected and organised medical knowledge base as a platform for a professional and personal life of learning through experience. To develop effective interactions with oneself through reflection; interaction with others through communication; and interaction with information and learning resources through information literacy and critical analysis. To develop a set of personal attributes and skills appropriate to the professional practice of Medicine. The program is organised into two degrees: Bachelor of Medical Studies (BMed) The BMed includes Phase 1 and Phase 2. Phase 1 commences with the Foundations course, followed by 7 x 8 week courses focussing on basic medical sciences in relation to the human life cycle; social, ethical and legal issues related to health care; and early experience in clinical or other health-related environments. During this phase, students will undertake a variety of learning activities involving students from different stages of the program working collaboratively in small groups. Phase 2 consists of 2 x 16-week courses, with increased clinical content and an emphasis on correlation between prior and current learning. Doctor of Medicine (MD) The MD includes the Independent Learning Project (ILP), followed by a Clinical Transition Course prior to the Phase 3 courses. During the Independent Learning Project students should also complete 12 UOC of General Education courses in a faculty or faculties other than Medicine. Phase 3 consists of 10 x 8-week courses with a clinical focus, but still includes relevant content from the basic medical sciences and the social sciences. Students are required to complete a course in the disciplines of Internal Medicine, Surgery, Psychiatry, Primary Care, Obstetrics and Gynaecology and Children&#39;s Health (Paediatrics). Students may choose from a range of other available clinical modules to complete Phase 3 requirements. In addition, a student&#39;s clinical experiences during Phase 3 must include a minimum of 4 weeks in a rural location. All clinical courses in Phase 3 adopt the principles of clinical clerkship, in which students learn through experience and participation in the treatment of patients under the care of medical practitioners and/or medical teams to which they are attached. Students who have achieved a high standard in the BMed may undertake a one year program of supervised research leading to the award of the BSc(Med) Honours. Students wishing to undertake a full year of research may be able to enrol in the BSc (Med) Honours program 3831 subject to the approval from the Honours Committee. These students will be exempt from undertaking the Independent Learning Project. Exemption from the Independent Learning Project will also be granted to students who have previously completed a research Honours program or higher research degree, or a Master degree with a significant research component, or who can otherwise demonstrate acceptable evidence of independent study or research at a tertiary level.",
         "components": {
-            "GE": {
+            "general_education": {
                 "notes": "Students must take at least 12 UOC of the following courses.",
                 "credits_to_complete": 12
             },
-            "IR": [],
-            "LR": [],
-            "SpecialisationData": {},
-            "NonSpecialisationData": [
+            "information_rule": [],
+            "limit_rule": [],
+            "spec_data": {},
+            "non_spec_data": [
                 {
                     "courses": {
                         "MFAC2515": "Integrated Clinical Studies 2",
@@ -1258,14 +1258,14 @@
         "faculty": "Faculty of Medicine and Health",
         "description": "The program offers a comprehensive education in the area of health and exercise science with a focus on the use of physical activity as a preventative and rehabilitative therapy. Four years of full-time study leads to the award of a Bachelor of Exercise Physiology. A total of 192 units of credit must be successfully completed for the award of this degree. Graduates may expect to find employment as Accredited Exercise Physiologists (AEP) in rehabilitation clinics and hospitals working in post-acute rehabilitation, sports medicine clinics, corporate health, specialised fitness centres, and private practice for rehabilitation/exercise prescription for people requiring specialist guidance (e.g. workplace rehabilitation). The Bachelor of Exercise Physiology is accredited by the national governing body, Exercise and Sports Science Australia (ESSA). Graduates are eligible to become members of ESSA and practice as Accredited Exercise Physiologists and Accredited Exercise Scientists. Program Structure Foundation science courses are an important component of the early stages of the program and include chemistry, molecular and cellular biology, biochemistry, statistics and psychology. Building on this knowledge base, the medical sciences of anatomy, physiology, pathology and pharmacology are studied concurrently with the exercise science sub-disciplines of biomechanics, motor control and exercise psychology - leading to an integrated understanding of human function in health and disease and how this is impacted by exercise. The professional role of Exercise Physiologists is emphasised from the commencement of the program in Stage 1 exercise science courses. Clinical courses in Stage 3 cover the four broad areas of practice for Exercise Physiologists being, 1) the primary prevention of disease in apparently healthy populations, 2) the management of chronic diseases under the broad categories of cardiopulmonary and metabolic conditions, 3) musculoskeletal conditions and work hardening and 4) neuromuscular conditions. Courses offer a mixture of traditional and interactive/case study approaches to learning. Students are required to complete a minimum of 12 UOC of research courses in their final year. The majority of students achieve this through enrolment in HESC4501 Exercise Physiology Research Seminars and then HESC4551 Research Project. However, students can opt to take an additional 6 UOC of research by enrolling in a supervised research internship. Selection of this additional research component improves student eligibility and preparedness for entry into higher degree research programs (e.g. Masters by Research; PhD). Students who choose to take a total of 18 UOC of 4th year research can take HESC4501 Exercise Physiology Research Seminars, then HESC4561 Research Internship A followed by HESC4571 Research Internship B. Enrolment in HESC4561 and HESC4571 will constitute the first and second halves, respectively, of a 20-week supervised research internship. Students are required to take one elective course (6 UOC) throughout their program. This allows students to select a course according to their areas of interest and career specialisation. These may include: a research internship, or coursework focusing on cardiopulmonary conditions, metabolic conditions, musculoskeletal conditions, neuromuscular conditions, nutrition, mental health, and rehabilitation biomechanics. Specific elective courses available are listed below under Electives. General Education is a requirement of all undergraduate programs at UNSW Sydney. Elective and General Education courses in Stage 4 provide flexibility to facilitate international exchange in the latter stage of the program, while still completing the core courses and practicum required to be eligible to become an Accredited Exercise Physiologist.",
         "components": {
-            "GE": {
+            "general_education": {
                 "notes": "Students must take at least 12 UOC of the following courses.",
                 "credits_to_complete": 12
             },
-            "IR": [],
-            "LR": [],
-            "SpecialisationData": {},
-            "NonSpecialisationData": [
+            "information_rule": [],
+            "limit_rule": [],
+            "spec_data": {},
+            "non_spec_data": [
                 {
                     "courses": {
                         "HESC4551": "Research Project",
@@ -1384,17 +1384,17 @@
         "faculty": "Faculty of Science",
         "description": "The Advanced Mathematics degree is aimed at high achieving students who wish to specialise in mathematics as a basis for the increasing range of quantitative careers in areas such as finance, environmental modelling and research. This four-year degree combines advanced coursework with an Honours-level research project in one of the available plans of study. UNSW offers mathematics students advanced facilities combined with innovative teaching. This program has been designed to cater for the specific abilities and interests of talented students with a superior ATAR.",
         "components": {
-            "GE": {
+            "general_education": {
                 "notes": "Students must take 12 UOC of the following courses. Any course defined as a Science course cannot be taken as General Education (GE). All other courses can be used to fulfil the GE requirement of this program, including GEN# coded courses. Any exceptions to these rules must be approved by the Associate Dean (Academic Programs) or nominee.",
                 "credits_to_complete": 12
             },
-            "IR": [
+            "information_rule": [
                 {
                     "title": "Course Information Rule",
                     "notes": "GEN# courses cannot count towards the free elective component, or towards science core courses or science electives in the program. Any exceptions to these rules must be approved by the Associate Dean (Academic Programs) or nominee."
                 }
             ],
-            "LR": [
+            "limit_rule": [
                 {
                     "title": "Excluded General Education Courses",
                     "notes": "Students may not undertake any of the following excluded courses. any course offered by Faculty of Science any General Education - Faculty of Science (GENS) course any Food Technology (FOOD) course any Medical Science (SOMS) course any Computer Science (COMP) course"
@@ -1412,8 +1412,8 @@
                     "notes": "Students must complete a minimum of 30 UOC of the following courses. any level 3 course offered by Faculty of Science any level 3 Anatomy (ANAT) course any level 3 Neuroscience (NEUR) course any level 3 Pathology (PATH) course any level 3 Pharmacology (PHAR) course any level 3 Physiology (PHSL) course any level 3 Food Technology (FOOD) course any level 3 Computer Science (COMP) course any level 3 Medical Science (SOMS) course"
                 }
             ],
-            "SpecialisationData": {
-                "Minors": {
+            "spec_data": {
+                "majors": {
                     "Advanced Mathematics (Honours)": {
                         "notes": "Students must complete exactly one approved Bachelor of Science (Advanced Mathematics) (Honours) major, and this must be declared before enrolling in Level III courses. Students cannot undertake a double major in this program.",
                         "MATHU1": "Advanced Statistics",
@@ -1421,7 +1421,7 @@
                         "MATHP1": "Pure Mathematics"
                     }
                 },
-                "Honours": {
+                "honours": {
                     "Advanced Mathematics (Honours)": {
                         "notes": "Students must complete at least one of the specialisations below.",
                         "MATHTH": "Statistics",
@@ -1430,7 +1430,7 @@
                     }
                 }
             },
-            "NonSpecialisationData": [
+            "non_spec_data": [
                 {
                     "courses": {
                         "SCIF1131": "Introductory Skills for Science"
@@ -1472,7 +1472,7 @@
                         "any Physiology course": 1
                     },
                     "title": "Science Electives",
-                    "credits_to_complete": null,
+                    "credits_to_complete": 6,
                     "core": false,
                     "levels": [],
                     "notes": "Students must take 'science' courses so that the major plus SCIF1131, plus Honours year plus 'science' courses total 144 units of credit."
@@ -1508,7 +1508,7 @@
                         "any Physiology course"
                     ],
                     "title": "Science Electives",
-                    "credits_to_complete": null,
+                    "credits_to_complete": 6,
                     "core": false,
                     "levels": [],
                     "notes": "Students must take 'science' courses so that the major plus SCIF1131, plus Honours year plus 'science' courses total 144 units of credit."
@@ -1524,8 +1524,8 @@
         "faculty": "Faculty of Engineering",
         "description": "With this dual degree program, students can add a Science program to the standard, professionally accredited BSc in Computer Science program offered by the School of Computer Science and Engineering. All Science majors within program 3970 are available. Students who meet the entry requirements for the BSc in Computer Science program 3778 and for the Bachelor of Science program 3970 may apply to enter the combined Bachelor of Science Bachelor of Science (Computer Science) program. Students should schedule the Science and Computer Science components to suit their preferences while meeting constraints of timetables and prerequisites. The Science Faculty section in this Handbook describes the Science options and the School of Computer Science and Engineering Student Office can supply sample programs indicating what previous students have arranged. In addition to the BSc in Computer Science program 3778, students must complete a minimum of 96 units of credit in Science courses, including a major sequence in an approved area. The Science office must approve the Science component while the School of Computer Science and Engineering will approve the final program and schedule.",
         "components": {
-            "GE": {},
-            "IR": [
+            "general_education": {},
+            "information_rule": [
                 {
                     "title": "3789 - COMP Course Rule",
                     "notes": "Students in the Bachelor of Science/Bachelor of Science (Computer Science) dual degree may not count 'COMP' courses towards their Science requirements unless they are specified as core courses in their major (i.e. for these students 'COMP' courses will not count as 'Science' courses)."
@@ -1535,7 +1535,7 @@
                     "notes": "Students cannot complete a minor with the same name as their nominated major, and Level II and III courses cannot be double-counted between majors and minors. More than one minor may be completed subject to the limit on double-counting. Students must declare their minor(s) before their final term."
                 }
             ],
-            "LR": [
+            "limit_rule": [
                 {
                     "title": "Level 1 Science UOC",
                     "notes": "Students must complete a minimum of 24 UOC of the following courses. any level 1 course offered by Faculty of Science"
@@ -1549,8 +1549,8 @@
                     "notes": "Students may only undertake a maximum of 60 UOC of the following courses. any level 1 course"
                 }
             ],
-            "SpecialisationData": {
-                "Majors": {
+            "spec_data": {
+                "minors": {
                     "Science": {
                         "notes": "Students may choose to complete an optional minor in one of the following areas, using their Science and/or free electives.",
                         "GEOGH2": "Physical Geography",
@@ -1573,7 +1573,7 @@
                         "CHEMD2": "Chemistry"
                     }
                 },
-                "Minors": {
+                "majors": {
                     "Science": {
                         "notes": "Students must complete at least one Science major selected from the list below. Students should declare their major prior to commencing Stage 2 courses. Notes: 1.Students are not permitted to take the Bioinformatics major BINFB1 when taking the degree in dual award mode with the Bachelor of Engineering (Bioinformatics) program.",
                         "PHARA1": "Pharmacology",
@@ -1615,7 +1615,7 @@
                     }
                 }
             },
-            "NonSpecialisationData": [
+            "non_spec_data": [
                 {
                     "courses": {
                         "any Biotechnology course": 1,
@@ -1645,7 +1645,7 @@
                         "any Psychology course": 1
                     },
                     "title": "Science Electives",
-                    "credits_to_complete": null,
+                    "credits_to_complete": 36,
                     "core": false,
                     "levels": [],
                     "notes": "Students need to complete 96 UOC to meet the core requirements for the Bachelor of Science. If your choice of specialisation(s) requires less than 96 UOC you are required to complete additional Science elective courses from the following list to meet the 96 UOC requirement."
@@ -1679,7 +1679,7 @@
                         "any Psychology course"
                     ],
                     "title": "Science Electives",
-                    "credits_to_complete": null,
+                    "credits_to_complete": 36,
                     "core": false,
                     "levels": [],
                     "notes": "Students need to complete 96 UOC to meet the core requirements for the Bachelor of Science. If your choice of specialisation(s) requires less than 96 UOC you are required to complete additional Science elective courses from the following list to meet the 96 UOC requirement."
@@ -1695,8 +1695,8 @@
         "faculty": "UNSW Business School",
         "description": "The dual degree program Bachelor of Commerce/Bachelor of Science (Computer Science) (BCom/BSc(Comp Sc)) degree provides the latest thinking in business and technology for today and the future. It offers excellent career options, equipping graduates with unique skill sets that can lead to a wide range of career opportunities. Whether you want to focus your career in computer science and also want the commercial skills that a business degree can give you, or you want a career in business with the added dimension of a computer science degree, then this dual degree gives you the flexibility to choose a program to meet your needs.",
         "components": {
-            "GE": {},
-            "IR": [
+            "general_education": {},
+            "information_rule": [
                 {
                     "title": "LEVEL 2 AND 3 MATURITY REQUIREMENTS",
                     "notes": "Student must have completed 24 UOC before taking any level 2 courses. Student must have completed 48 UOC before taking any level 3 courses."
@@ -1706,7 +1706,7 @@
                     "notes": "For any majors that require ECON1202, MATH1011/MATH1031/MATH1131/MATH1141/MATH1151 completed under the Computer Science component will act as substitute so student should not do ECON1202 but instead complete another Major elective to meet the 48 UOC requirement. Students taking a combination of majors and/or minors that require both COMM1822 or INFS1603 and COMP3311 as core courses, should take only COMP3311, and replace COMM1822/INFS1603 with an additional major or minor elective."
                 }
             ],
-            "LR": [
+            "limit_rule": [
                 {
                     "title": "Maximum Level 1 Electives UOC",
                     "notes": "Students may only undertake a maximum of 60 UOC of the following courses. any level 1 course"
@@ -1716,8 +1716,8 @@
                     "notes": "Students must complete a minimum of 96 UOC of the following courses. any course offered by UNSW Business School"
                 }
             ],
-            "SpecialisationData": {
-                "Minors": {
+            "spec_data": {
+                "majors": {
                     "null": {
                         "notes": "COMPA1 is the default stream, and will be used if no other stream is selected.",
                         "COMPJ1": "Computer Science (Programming Languages)",
@@ -1745,7 +1745,7 @@
                         "MARKA1": "Marketing"
                     }
                 },
-                "Majors": {
+                "minors": {
                     "Commerce": {
                         "notes": "Students may choose to use their electives to complete one of the following minors. Minor Requirements: An approved disciplinary stream containing at least 18 UOC at Level 2 and Level 3.",
                         "MARKA2": "Marketing",
@@ -1763,7 +1763,7 @@
                     }
                 }
             },
-            "NonSpecialisationData": [
+            "non_spec_data": [
                 {
                     "courses": {
                         "COMM3202": "Industry Experience Placement 2",
@@ -1816,7 +1816,7 @@
                         "ECON3000": "Evidence-based Intervention Design and Evaluation"
                     },
                     "title": "Final Year Synthesis",
-                    "credits_to_complete": null,
+                    "credits_to_complete": 6,
                     "core": true,
                     "levels": [],
                     "notes": "Students must complete either a 6 UOC Synthesis of Learning Course, or a 0 UOC Synthesis Experience. Students who complete a Synthesis course that is also a Work Integrated Learning course within a major, will meet a major elective, WIL and Synthesis requirement. Students must complete their Final Year Synthesis course within their final year of their Bachelor of Commerce program. That is, within 48 UOC or less remaining in their BCom program."
@@ -1844,21 +1844,21 @@
         "faculty": "Faculty of Engineering",
         "description": "Students may seek to undertake a five-year full-time dual degree program leading to the award of the degrees of Bachelor of Engineering (Honours) and Bachelor of Science (Computer Science) (BE (Hons) BSc). The Faculty of Engineering administers the program, and delegates administration to the School which offers the Engineering discipline selected. Students should seek advice from the relevant School Office in the first instance, from the Faculty of Engineering, or from the School of Computer Science and Engineering for the Science component. With this dual degree program, students take the 168 units of credit core of the Bachelor of Engineering (Honours) 3707 and the 96 units of credit core of the Bachelor of Science (Computer Science) program 3778. Because of the overlap of 24 units of credit of Science courses in both core, the total units of credit required for completion is 240 UOC, rather than 264 UOC (please see Academic Rules below for more details).",
         "components": {
-            "GE": {},
-            "IR": [
+            "general_education": {},
+            "information_rule": [
                 {
                     "title": "Industrial Experience Requirement",
                     "notes": "Students must complete a minimum of 60 days of Industrial Training to graduate. Industrial Training must be undertaken concurrently with enrolment in the program. For more information on Industrial Training, please visit https://www.unsw.edu.au/engineering/student-life/industrial-training"
                 }
             ],
-            "LR": [
+            "limit_rule": [
                 {
                     "title": "Maximum Level 1 Electives UOC",
                     "notes": "Students may only undertake a maximum of 60 UOC of the following courses. any level 1 course"
                 }
             ],
-            "SpecialisationData": {
-                "Minors": {
+            "spec_data": {
+                "majors": {
                     "Computer Science": {
                         "notes": "COMPA1 is the default stream, and will be used if no other stream is selected.",
                         "COMPD1": "Computer Science (Database Systems)",
@@ -1871,7 +1871,7 @@
                         "COMPN1": "Computer Science (Computer Networks)"
                     }
                 },
-                "Honours": {
+                "honours": {
                     "Engineering (Honours)": {
                         "notes": "Students must complete at least one of the specialisations below.",
                         "SOLABH": "Renewable Energy Engineering",
@@ -1895,7 +1895,7 @@
                     }
                 }
             },
-            "NonSpecialisationData": []
+            "non_spec_data": []
         }
     },
     "3783": {
@@ -1906,21 +1906,21 @@
         "faculty": "Faculty of Engineering",
         "description": "The dual award BSc (Computer Science) BA enables students to complete the requirements of the BSc (Computer Science) and a Bachelor of Arts program from the Faculty of Arts and Social Sciences. For admission to the program, students must satisfy the entry requirements for both the BSc (Computer Science) and the BA in the Faculty of Arts and Social Sciences. Students in this program must complete 192 units of credit of study.",
         "components": {
-            "GE": {},
-            "IR": [
+            "general_education": {},
+            "information_rule": [
                 {
                     "title": "Academic Writing & Language Enhancement",
                     "notes": "ARTS2050 Academic Writing for the Humanities (6 UOC) and HUMS1005 Personalised English Language Enhancement (6 UOC) can be counted as UNSW Arts and Social Sciences Prescribed Electives or Free Electives."
                 }
             ],
-            "LR": [
+            "limit_rule": [
                 {
                     "title": "Maximum Level 1 Electives UOC",
                     "notes": "Students may only undertake a maximum of 60 UOC of the following courses. any level 1 course"
                 }
             ],
-            "SpecialisationData": {
-                "Minors": {
+            "spec_data": {
+                "majors": {
                     "Computer Science": {
                         "notes": "COMPA1 is the default stream, and will be used if no other stream is selected.",
                         "COMPJ1": "Computer Science (Programming Languages)",
@@ -1934,13 +1934,13 @@
                     }
                 }
             },
-            "NonSpecialisationData": [
+            "non_spec_data": [
                 {
                     "courses": {
                         "any Arts and Social Sciences course": 1
                     },
                     "title": "Arts and Social Sciences Prescribed Electives",
-                    "credits_to_complete": null,
+                    "credits_to_complete": 24,
                     "core": false,
                     "levels": [],
                     "notes": "You must complete 12 UOC of any courses offered by UNSW Arts and Social Sciences. Indigenous Studies courses (ATSIxxxx) cannot be studied as Arts and Social Sciences Prescribed Electives."
@@ -1950,7 +1950,7 @@
                         "any Arts and Social Sciences course"
                     ],
                     "title": "Arts and Social Sciences Prescribed Electives",
-                    "credits_to_complete": null,
+                    "credits_to_complete": 24,
                     "core": false,
                     "levels": [],
                     "notes": "You must complete 12 UOC of any courses offered by UNSW Arts and Social Sciences. Indigenous Studies courses (ATSIxxxx) cannot be studied as Arts and Social Sciences Prescribed Electives."
@@ -1966,21 +1966,21 @@
         "faculty": "Faculty of Law and Justice",
         "description": "This Handbook is for commencing students. If you commenced in a prior year please refer to the Online Handbook in the year you started your Law degree or contact the Faculty of Law for advice. This program combines the professional LLB program with a major in Computer Science offered within the School of Computer Science, Faculty of Engineering. Duration/Award The program is a five year full-time combined program leading to the award of the two degrees of Bachelor of Science (Computer Science) and Bachelor of Laws (BSc LLB).",
         "components": {
-            "GE": {},
-            "IR": [
+            "general_education": {},
+            "information_rule": [
                 {
                     "title": "Nura-Gili Pre-Law Program",
                     "notes": "Indigenous students who have entered the Bachelor of Law program through the Nura Gili Pre-Law program must complete the following two courses (6 UOC): - LAWS1213 Foundations Enrichment 1 (3 UOC) - LAWS1214 Foundations Enrichment 2 (3 UOC) These courses are taken in place of 6 UOC of electives and are not available to other students."
                 }
             ],
-            "LR": [
+            "limit_rule": [
                 {
                     "title": "Maximum Level 1 Electives UOC",
                     "notes": "Students may only undertake a maximum of 60 UOC of the following courses. any level 1 course"
                 }
             ],
-            "SpecialisationData": {
-                "Minors": {
+            "spec_data": {
+                "majors": {
                     "Computer Science": {
                         "notes": "COMPA1 is the default stream, and will be used if no other stream is selected.",
                         "COMPS1": "Computer Science (Embedded Systems)",
@@ -1994,7 +1994,7 @@
                     }
                 }
             },
-            "NonSpecialisationData": [
+            "non_spec_data": [
                 {
                     "courses": {
                         "LAWS3789": "Policing",
