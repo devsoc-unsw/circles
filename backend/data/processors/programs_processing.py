@@ -130,8 +130,6 @@ def add_component_data(program_data: dict, item: dict, program_name = None) -> N
         add_specialisation_data(program_data, item, program_name, MINOR_KEY)
     if is_honours(item):
         add_specialisation_data(program_data, item, program_name, HONOURS_KEY)
-    if is_prescribed_elective(item):
-        add_prescribed_elective_data(program_data, item)
     if is_core_course(item):
         add_core_course_data(program_data, item)
     if is_information_rule(item):
@@ -210,13 +208,6 @@ def is_honours(item: dict) -> bool:
     return item["vertical_grouping"]["value"] == HONOURS
 
 
-def is_prescribed_elective(item: dict) -> bool:
-    """
-    Returns boolean depending on if the given container is a prescribed elective requirement
-    """
-    return item["vertical_grouping"]["value"] == PRESCRIBED_ELECTIVE
-
-
 def is_core_course(item: dict) -> bool:
     """
     Returns boolean depending on if the given container is a core course requirement
@@ -244,7 +235,7 @@ def is_other(item: dict) -> bool:
     (except for free electives)
     """
     return (
-        item["dynamic_relationship"]
+        (item["dynamic_relationship"] or item["relationship"])
         and item["title"] != "Free Electives"
         and item["vertical_grouping"]["value"] in (FREE_ELECTIVE, PRESCRIBED_ELECTIVE)
     )
@@ -277,33 +268,6 @@ def add_specialisation_data(program_data: dict, item: dict, program_name: str, f
             data[code] = specialisation["academic_item_name"]
 
     program_data["components"][SPEC_KEY].setdefault(field, {}).update({program_name: data})
-
-
-def add_prescribed_elective_data(program_data: dict, item: dict) -> None:
-    """
-    Adds prescribed elective data to the correct spot in program_data
-    """
-    # If item is a prescribed elective, loop through and add data to non_spec_data
-    pe = {
-        "courses": {},
-        "title": item["title"],
-        "credits_to_complete": get_credits(program_data, item),
-        "core": False,
-        "levels": [], # TODO
-        "notes": item["description"],
-    }
-
-    # Figure out if there are sub relations
-    if item["relationship"] != []:
-        for course in item["relationship"]:
-            code = course["academic_item_code"]
-            pe["courses"][code] = course["academic_item_name"]
-    else:
-        for course in item["dynamic_relationship"]:
-            pe["courses"][course["description"]] = 1
-
-    # Append this new requirement
-    program_data["components"][NON_SPEC_KEY].append(pe)
 
 
 def add_core_course_data(program_data: dict, item: dict) -> None:
@@ -349,14 +313,24 @@ def add_other(program_data: dict, item: dict) -> None:
     """
     Adds 'other' data to the correct spot in program_data
     """
-    program_data["components"][NON_SPEC_KEY].append({
-        "courses": [ rel["description"] for rel in item["dynamic_relationship"] ],
+    new_requirement = {
+        "courses": None,
         "title": item["title"],
         "credits_to_complete": get_credits(program_data, item),
         "core": is_core_course(item),
         "levels": [], # TODO: What is this?
         "notes": item["description"],
-    })
+    }
+
+    if item["dynamic_relationship"]:
+        new_requirement["courses"] = [rel["description"] for rel in item["dynamic_relationship"]]
+    else:
+        new_requirement["courses"] = {}
+        for course in item["relationship"]:
+            code = course["academic_item_code"]
+            new_requirement["courses"][code] = course["academic_item_name"]
+
+    program_data["components"][NON_SPEC_KEY].append(new_requirement)
 
 
 def get_credits(program_data: dict, item: dict) -> int:

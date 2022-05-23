@@ -237,41 +237,6 @@
                     "notes": "Students taking the Bachelor of Science as a stand-alone program are required to take an additional 12 UOC of Science elective courses in addition to the minimum disciplinary component requirements. Students taking a second major or minor may not have to take these courses where their chosen specialisations require more than 108 UOC."
                 },
                 {
-                    "courses": {
-                        "any Geoscience course": 1,
-                        "any Materials Science and Engineering course": 1,
-                        "any Biological, Earth & Environmental Science course": 1,
-                        "any Vision Science course": 1,
-                        "any Physiology course": 1,
-                        "any Anatomy course": 1,
-                        "any Biochemistry course": 1,
-                        "any Neuroscience course": 1,
-                        "any Physics course": 1,
-                        "any Biotechnology & Biomolecular Sciences course": 1,
-                        "any Climate Science course": 1,
-                        "any Biological Science course": 1,
-                        "any Biotechnology course": 1,
-                        "any Optometry course": 1,
-                        "any Chemistry course": 1,
-                        "any Microbiology course": 1,
-                        "any Medical Science course": 1,
-                        "any Pharmacology course": 1,
-                        "any Psychology course": 1,
-                        "any Computer Science course": 1,
-                        "any Marine Science course": 1,
-                        "any Aviation course": 1,
-                        "any Pathology course": 1,
-                        "any Food Technology course": 1,
-                        "any Faculty of Science course": 1,
-                        "any Mathematics course": 1
-                    },
-                    "title": "Science Electives",
-                    "credits_to_complete": 36,
-                    "core": false,
-                    "levels": [],
-                    "notes": "Students need to complete 96 UOC to meet the core requirements for the Bachelor of Science. If your choice of specialisation(s) requires less than 96 UOC you are required to complete additional Science elective courses from the following list to meet the 96 UOC requirement."
-                },
-                {
                     "courses": [
                         "any Geoscience course",
                         "any Materials Science and Engineering course",
@@ -501,29 +466,6 @@
             "spec_data": {},
             "non_spec_data": [
                 {
-                    "courses": {
-                        "any level 3 Microbiology course": 1,
-                        "any level 3 Biochemistry course": 1,
-                        "any level 3 Bioinformatics course": 1,
-                        "any level 3 Medical Science course": 1,
-                        "any level 2 Biotechnology & Biomolecular Sciences course": 1,
-                        "any level 2 Faculty of Science course": 1,
-                        "any level 3 Chemistry course": 1,
-                        "any level 3 Biotechnology & Biomolecular Sciences course": 1,
-                        "any level 3 Faculty of Science course": 1,
-                        "any level 2 Medical Science course": 1,
-                        "any level 2 Pharmacology course": 1,
-                        "any level 2 Chemistry course": 1,
-                        "any level 2 Bioinformatics course": 1,
-                        "any level 3 Pharmacology course": 1
-                    },
-                    "title": "Level 2 and Level 3 Electives",
-                    "credits_to_complete": 36,
-                    "core": false,
-                    "levels": [],
-                    "notes": "Students must take at least 36 UOC of the following courses."
-                },
-                {
                     "courses": [
                         "any level 3 Microbiology course",
                         "any level 3 Biochemistry course",
@@ -694,14 +636,6 @@
                     "core": false,
                     "levels": [],
                     "notes": "As part of the BIS degree students must complete at least one WIL course."
-                },
-                {
-                    "courses": {},
-                    "title": "Prescribed Information Systems Electives",
-                    "credits_to_complete": 12,
-                    "core": false,
-                    "levels": [],
-                    "notes": "Choose any two IS Electives from the following courses."
                 },
                 {
                     "courses": {
@@ -990,38 +924,10 @@
                     "notes": "Students must take 6 UOC of the following courses. Please Note: The below courses cannot be counted towards an Economics major."
                 },
                 {
-                    "courses": {},
-                    "title": "Economics Electives",
-                    "credits_to_complete": 30,
-                    "core": false,
-                    "levels": [],
-                    "notes": "Students must take 30 UOC of the following courses with at least 18 UOC of level 3 Economics courses."
-                },
-                {
-                    "courses": {
-                        "any level 3 Economics course": 1
-                    },
-                    "title": "any level 3 Economics course",
-                    "credits_to_complete": 0,
-                    "core": false,
-                    "levels": [],
-                    "notes": ""
-                },
-                {
                     "courses": [
                         "any level 3 Economics course"
                     ],
                     "title": "any level 3 Economics course",
-                    "credits_to_complete": 0,
-                    "core": false,
-                    "levels": [],
-                    "notes": ""
-                },
-                {
-                    "courses": {
-                        "any level 2 Economics course": 1
-                    },
-                    "title": "any level 2 Economics course",
                     "credits_to_complete": 0,
                     "core": false,
                     "levels": [],
@@ -1064,16 +970,6 @@
                     "core": true,
                     "levels": [],
                     "notes": "Students must take 48 UOC of the following courses."
-                },
-                {
-                    "courses": {
-                        "any course offered by UNSW Business School": 1
-                    },
-                    "title": "UNSW Business Electives",
-                    "credits_to_complete": 12,
-                    "core": false,
-                    "levels": [],
-                    "notes": "Students must complete 12 UOC of Business School electives. Students are encouraged to select a Work-Integrated Learning course as one of their Business School elective courses - e.g., COMM3020, COMM3030, COMM3101, or COMM3202."
                 },
                 {
                     "courses": [
@@ -1442,42 +1338,6 @@
                     "notes": "Students must take the following course."
                 },
                 {
-                    "courses": {
-                        "any Anatomy course": 1,
-                        "any Psychology course": 1,
-                        "any Data Science course": 1,
-                        "any Marine Science course": 1,
-                        "any Microbiology course": 1,
-                        "any Biochemistry course": 1,
-                        "any Food Technology course": 1,
-                        "any Chemistry course": 1,
-                        "any Medical Science course": 1,
-                        "any Mathematics course": 1,
-                        "any Computer Science course": 1,
-                        "any Materials Science and Engineering course": 1,
-                        "any Biotechnology & Biomolecular Sciences course": 1,
-                        "any Neuroscience course": 1,
-                        "any Climate Science course": 1,
-                        "any Biological, Earth & Environmental Science course": 1,
-                        "any Aviation course": 1,
-                        "any Physics course": 1,
-                        "any Pharmacology course": 1,
-                        "any Pathology course": 1,
-                        "any Faculty of Science course": 1,
-                        "any Geoscience course": 1,
-                        "any Optometry course": 1,
-                        "any Biotechnology course": 1,
-                        "any Vision Science course": 1,
-                        "any Biological Science course": 1,
-                        "any Physiology course": 1
-                    },
-                    "title": "Science Electives",
-                    "credits_to_complete": 6,
-                    "core": false,
-                    "levels": [],
-                    "notes": "Students must take 'science' courses so that the major plus SCIF1131, plus Honours year plus 'science' courses total 144 units of credit."
-                },
-                {
                     "courses": [
                         "any Anatomy course",
                         "any Psychology course",
@@ -1616,40 +1476,6 @@
                 }
             },
             "non_spec_data": [
-                {
-                    "courses": {
-                        "any Biotechnology course": 1,
-                        "any Climate Science course": 1,
-                        "any Pathology course": 1,
-                        "any Aviation course": 1,
-                        "any Materials Science and Engineering course": 1,
-                        "any Physics course": 1,
-                        "any Biological Science course": 1,
-                        "any Pharmacology course": 1,
-                        "any Chemistry course": 1,
-                        "any Optometry course": 1,
-                        "any Anatomy course": 1,
-                        "any Mathematics course": 1,
-                        "any Geoscience course": 1,
-                        "any Faculty of Science course": 1,
-                        "any Vision Science course": 1,
-                        "any Physiology course": 1,
-                        "any Biotechnology & Biomolecular Sciences course": 1,
-                        "any Medical Science course": 1,
-                        "any Marine Science course": 1,
-                        "any Biochemistry course": 1,
-                        "any Microbiology course": 1,
-                        "any Food Technology course": 1,
-                        "any Biological, Earth & Environmental Science course": 1,
-                        "any Neuroscience course": 1,
-                        "any Psychology course": 1
-                    },
-                    "title": "Science Electives",
-                    "credits_to_complete": 36,
-                    "core": false,
-                    "levels": [],
-                    "notes": "Students need to complete 96 UOC to meet the core requirements for the Bachelor of Science. If your choice of specialisation(s) requires less than 96 UOC you are required to complete additional Science elective courses from the following list to meet the 96 UOC requirement."
-                },
                 {
                     "courses": [
                         "any Biotechnology course",
@@ -1935,16 +1761,6 @@
                 }
             },
             "non_spec_data": [
-                {
-                    "courses": {
-                        "any Arts and Social Sciences course": 1
-                    },
-                    "title": "Arts and Social Sciences Prescribed Electives",
-                    "credits_to_complete": 24,
-                    "core": false,
-                    "levels": [],
-                    "notes": "You must complete 12 UOC of any courses offered by UNSW Arts and Social Sciences. Indigenous Studies courses (ATSIxxxx) cannot be studied as Arts and Social Sciences Prescribed Electives."
-                },
                 {
                     "courses": [
                         "any Arts and Social Sciences course"
