@@ -236,7 +236,7 @@ const MenuItem = ({
             </div>
           </Tooltip>
           {!selected && (
-            <Tooltip title="Add to Planner" placement="bottom">
+            <Tooltip title="Add to Planner" placement="top">
               <Button
                 onClick={(e) => addToPlanner(e, courseCode)}
                 size="small"
