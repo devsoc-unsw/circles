@@ -4,3 +4,4 @@ env
 **/.vscode
 **/.hypothesis
 **/.DS_Store
+*.log
