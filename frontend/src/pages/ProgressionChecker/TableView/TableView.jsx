@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Table } from "antd";
+import { useSelector } from "react-redux";
 import { getMostRecentPastTerm } from "../../TermPlanner/validateTermPlanner";
 import "./index.less";
 
-const TableView = ({
-  structure, years, startYear, courses,
-}) => {
+const TableView = ({ structure }) => {
   const [pastCourses, setPastCourses] = useState({});
   const [tableLayout, setTableLayout] = useState({});
+  const { years, startYear, courses } = useSelector((store) => store.planner);
 
   const getPastCourses = () => {
     const { Y: recentYear, T: recentTerm } = getMostRecentPastTerm(startYear);
@@ -62,7 +62,7 @@ const TableView = ({
             });
           } else {
             // If there is no specified course list for the subgroup, then manually
-            // show the added courses on the menu.
+            // show the added courses for the subgroup.
             Object.keys(plannedCourses).forEach((courseCode) => {
               const courseData = plannedCourses[courseCode];
               if (courseData && courseData.type === subgroup) {
