@@ -5,7 +5,7 @@ import "react-contexify/dist/ReactContexify.css";
 import { useNavigate } from "react-router-dom";
 import { DeleteFilled, InfoCircleFilled } from "@ant-design/icons";
 import { FaRegCalendarTimes } from "react-icons/fa";
-import updateAllWarnings from "../ValidateTermPlanner";
+import validateTermPlanner from "../validateTermPlanner";
 import { addTab } from "../../../reducers/courseTabsSlice";
 import { removeCourse, unschedule } from "../../../reducers/plannerSlice";
 import "./index.less";
@@ -15,26 +15,24 @@ const ContextMenu = ({ code, plannedFor }) => {
   const navigate = useNavigate();
   const { years, startYear, completedTerms } = useSelector((state) => state.planner);
 
-  const { programCode, specialisation, minor } = useSelector(
+  const { programCode, majors, minor } = useSelector(
     (state) => state.degree,
   );
 
   const handleDelete = () => {
     dispatch(removeCourse(code));
-    updateAllWarnings(
+    validateTermPlanner(
       dispatch,
       { years, startYear, completedTerms },
-      { programCode, specialisation, minor },
+      { programCode, majors, minor },
     );
   };
 
   const handleUnschedule = () => {
-    dispatch(unschedule(code));
-    updateAllWarnings(
-      dispatch,
-      { years, startYear, completedTerms },
-      { programCode, specialisation, minor },
-    );
+    dispatch(unschedule({
+      destIndex: null,
+      code,
+    }));
   };
   const id = `${code}-context`;
 
