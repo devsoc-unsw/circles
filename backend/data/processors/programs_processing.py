@@ -56,6 +56,7 @@ TEST_PROGS = (
     "3871",
     "3956",
     "3789", # Science/CompSci
+    "3781", # Advanced Maths/ CompSci
     "3784", # Commerce/CompSci
     "3785", # Engineering(Honours)/CompSci
     "3783", # CompSci / Arts

@@ -46,7 +46,9 @@ def getPrograms():
     # return {"programs": {q["code"]: q["title"] for q in programsCOL.find()}}
     # TODO On deployment, DELETE RETURN BELOW and replace with the return above
     return {"programs": {"3778": "Computer Science", 
+                        "3781" : "Advanced Mathematics (Honours) / Computer Science",
                         "3784": "Commerce / Computer Science",
+                        "3789": "Science / Computer Science",
                         }}
 
 
@@ -93,7 +95,7 @@ def getMajors(programCode: str):
         raise HTTPException(
             status_code=400, detail="Program code was not found")
 
-    return {"majors": result["components"]["SpecialisationData"]["Majors"]}
+    return {"majors": result["components"]["spec_data"]["majors"]}
 
 
 @router.get(
@@ -135,12 +137,7 @@ def getMinors(programCode: str):
 
     # NOTE: DO NOT RENAME THE VARIABLE TO `minors` as it attempts to create
     # a redefinition of the `minors` class
-    if programCode in minorInFE:
-        minrs = result["components"]["FE"]["Minors"]
-    elif programCode in minorInSpecialisation:
-        minrs = result["components"]["SpecialisationData"]["Minors"]
-    else:
-        minrs = result["components"]["SpecialisationData"]["Minors"]
+    minrs = result["components"]["spec_data"].get("minors")
 
     return {"minors": minrs}
 
@@ -278,6 +275,10 @@ def getStructure(
         raise HTTPException(
             status_code=400, detail="Program code was not found")
 
+    structure['General'] = {}
+    for container in programsResult['components']['non_spec_data']:
+        addSubgroupContainer(structure, "General", container, [])
+    ''' 
     structure["General"] = {}
     for name, data in programsResult["components"]["NonSpecialisationData"].items():
         data["UOC"] = (
@@ -295,5 +296,6 @@ def getStructure(
         structure["General"]["General Education"] = {
             "UOC": programsResult["components"]["GE"]["credits_to_complete"]
         }
+    '''
 
     return {"structure": structure}

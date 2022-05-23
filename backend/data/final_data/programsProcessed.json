@@ -1513,6 +1513,117 @@
             ]
         }
     },
+    "3781": {
+        "title": "Advanced Mathematics (Honours) / Computer Science",
+        "code": "3781",
+        "duration": 5,
+        "UOC": 240,
+        "faculty": "Faculty of Science",
+        "description": "The Faculty of Science and the Faculty of Engineering offer a dual degree program leading to the award of the degrees Bachelor of Science (Advanced Mathematics)(Honours) and Bachelor of Science (Computer Science). The typical duration of this program is 5 years full-time. The Advanced Mathematics (Honours) and Computer Science degrees lend themselves well to each other. While the Advanced Mathematics (Honours) degree focuses on an in-depth understanding of pure and applied mathematics, the computer science degree looks at the design, construction and uses of computer systems. Your mathematics study will assist with the manipulation of data as well as the development of algorithms in computer science. There is no better degree to combine your passion for mathematics as well as computer systems.",
+        "components": {
+            "general_education": {},
+            "information_rule": [
+                {
+                    "title": "3781 - COMP COURSE RULE",
+                    "notes": "Students may not count 'COMP' courses towards their Science requirements unless they are specified as core courses in their major (i.e. for these students 'COMP' courses will not count as 'Science' courses)."
+                }
+            ],
+            "limit_rule": [
+                {
+                    "title": "Maximum Level 1 Electives UOC",
+                    "notes": "Students may only undertake a maximum of 60 UOC of the following courses. any level 1 course"
+                },
+                {
+                    "title": "Maximum Level 1 UOC",
+                    "notes": "A maximum of 72 UOC of Level 1 courses can be taken, including any General Education or mainstream Level 1 course taken to fulfil either the General Education or the Free Elective requirement. any level 1 course"
+                },
+                {
+                    "title": "Minimum Level 3 Science Courses",
+                    "notes": "Students must complete a minimum of 30 UOC of the following courses. any level 3 course offered by Faculty of Science any level 3 Anatomy (ANAT) course any level 3 Neuroscience (NEUR) course any level 3 Pathology (PATH) course any level 3 Pharmacology (PHAR) course any level 3 Physiology (PHSL) course any level 3 Food Technology (FOOD) course any level 3 Computer Science (COMP) course any level 3 Medical Science (SOMS) course"
+                },
+                {
+                    "title": "Minimum Level 1 Science Courses",
+                    "notes": "Students must complete a minimum of 24 UOC of the following courses. any level 1 course offered by Faculty of Science any level 1 Computer Science (COMP) course any level 1 Food Technology (FOOD) course any level 1 Anatomy (ANAT) course any level 1 Neuroscience (NEUR) course any level 1 Pathology (PATH) course any level 1 Pharmacology (PHAR) course any level 1 Physiology (PHSL) course"
+                }
+            ],
+            "spec_data": {
+                "majors": {
+                    "Computer Science": {
+                        "notes": "COMPA1 is the default stream, and will be used if no other stream is selected.",
+                        "COMPY1": "Computer Science (Security Engineering)",
+                        "COMPS1": "Computer Science (Embedded Systems)",
+                        "COMPI1": "Computer Science (Artificial Intelligence)",
+                        "COMPJ1": "Computer Science (Programming Languages)",
+                        "COMPE1": "Computer Science (eCommerce Systems)",
+                        "COMPN1": "Computer Science (Computer Networks)",
+                        "COMPD1": "Computer Science (Database Systems)",
+                        "COMPA1": "Computer Science"
+                    },
+                    "Advanced Mathematics (Honours)": {
+                        "notes": "Students must complete exactly one approved Bachelor of Science (Advanced Mathematics) (Honours) major, and this must be declared before enrolling in Level III courses. Students cannot undertake a double major in this program.",
+                        "MATHA1": "Applied Mathematics",
+                        "MATHU1": "Advanced Statistics",
+                        "MATHP1": "Pure Mathematics"
+                    }
+                },
+                "honours": {
+                    "Advanced Mathematics (Honours)": {
+                        "notes": "Students must complete at least one of the specialisations below.",
+                        "MATHPH": "Pure Mathematics",
+                        "MATHAH": "Applied Mathematics",
+                        "MATHTH": "Statistics"
+                    }
+                }
+            },
+            "non_spec_data": [
+                {
+                    "courses": {
+                        "SCIF1131": "Introductory Skills for Science"
+                    },
+                    "title": "Level 1 Core Course",
+                    "credits_to_complete": 6,
+                    "core": true,
+                    "levels": [],
+                    "notes": "Students must take the following course."
+                },
+                {
+                    "courses": [
+                        "any Marine Science course",
+                        "any Biotechnology course",
+                        "any Biological, Earth & Environmental Science course",
+                        "any Mathematics course",
+                        "any Pharmacology course",
+                        "any Climate Science course",
+                        "any Faculty of Science course",
+                        "any Biochemistry course",
+                        "any Materials Science and Engineering course",
+                        "any Geoscience course",
+                        "any Chemistry course",
+                        "any Aviation course",
+                        "any Physiology course",
+                        "any Physics course",
+                        "any Optometry course",
+                        "any Medical Science course",
+                        "any Biotechnology & Biomolecular Sciences course",
+                        "any Biological Science course",
+                        "any Neuroscience course",
+                        "any Psychology course",
+                        "any Pathology course",
+                        "any Food Technology course",
+                        "any Microbiology course",
+                        "any Data Science course",
+                        "any Vision Science course",
+                        "any Anatomy course"
+                    ],
+                    "title": "Science Electives",
+                    "credits_to_complete": 6,
+                    "core": false,
+                    "levels": [],
+                    "notes": "Students must take 'science' courses so that the major plus SCIF1131, plus Honours year plus 'science' courses total 144 units of credit."
+                }
+            ]
+        }
+    },
     "3784": {
         "title": "Commerce / Computer Science",
         "code": "3784",
