@@ -51,20 +51,16 @@ const ProgressionChecker = () => {
   useEffect(() => {
     // get structure of degree
     const fetchStructure = async () => {
-      await Promise.all(majors.map(async (major) => {
-        try {
-          const newStructure = structure;
-          const res = await axios.get(`/programs/getStructure/${programCode}/${major}${minor && `/${minor}`}`);
-          newStructure[major] = res.data.structure;
-          setStructure(newStructure);
-        } catch (err) {
-          // eslint-disable-next-line no-console
-          console.log(err);
-        }
-      }));
+      try {
+        const res = await axios.get(`/programs/getStructure/${programCode}/${majors.join("+")}${minor && `/${minor}`}`);
+        setStructure(res.data.structure);
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.log(err);
+      }
       setIsLoading(false);
     };
-    if (programCode && majors) fetchStructure();
+    if (programCode && majors.length > 0) fetchStructure();
   }, [programCode, majors, minor]);
 
   return (
