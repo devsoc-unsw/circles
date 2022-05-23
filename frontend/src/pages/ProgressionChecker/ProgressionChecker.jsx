@@ -43,10 +43,8 @@ const ProgressionChecker = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const {
-    programCode, specialisation, minor,
+    programCode, majors, minor,
   } = useSelector((state) => state.degree);
-
-  const { years, startYear, courses } = useSelector((store) => store.planner);
 
   const [structure, setStructure] = useState({});
 
@@ -54,7 +52,7 @@ const ProgressionChecker = () => {
     // get structure of degree
     const fetchStructure = async () => {
       try {
-        const res = await axios.get(`/programs/getStructure/${programCode}/${specialisation}${minor && `/${minor}`}`);
+        const res = await axios.get(`/programs/getStructure/${programCode}/${major && `/${minor}`}`);
         setStructure(res.data.structure);
       } catch (err) {
         // eslint-disable-next-line no-console
@@ -62,13 +60,13 @@ const ProgressionChecker = () => {
       }
       setIsLoading(false);
     };
-    if (programCode && specialisation) fetchStructure();
-  }, [programCode, specialisation, minor]);
+    if (programCode && majors) fetchStructure();
+  }, [programCode, majors, minor]);
 
   return (
     <PageTemplate>
       <Dashboard isLoading={isLoading} degree={degreeData} />
-      <TableView structure={structure} years={years} startYear={startYear} courses={courses} />
+      <TableView structure={structure} />
       <ListView3
         isLoading={isLoading}
         degree={degreeData}
