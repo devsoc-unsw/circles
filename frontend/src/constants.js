@@ -9,7 +9,7 @@
  * THESE SHOULD BE RARELY INCREMENTED UNLESS THERE IS A BREAKING CHANGE.
  *
  */
-export const REDUX_PERSIST_VERSION = -1;
+export const REDUX_PERSIST_VERSION = 0;
 
 export const FEEDBACK_LINK = "https://github.com/csesoc/Circles/issues?q=is%3Aissue+is%3Aopen";
 
