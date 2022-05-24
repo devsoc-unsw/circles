@@ -523,30 +523,22 @@ def unsw_global_degrees(processed):
 
     return processed
 
-
+def add_note_if_found(processed, find, note, substitute_with, add_to_note):
+    """Checks processed for find, substitutes find with substitute_with, adds add_to_note to note """
+    processed, number_of_subs = re.subn(find, substitute_with, processed, flags=re.IGNORECASE)
+    return processed, note + add_to_note * (number_of_subs > 0)
 
 def remove_extraneous_comm_data(processed):
     """Adds handbook notes and removes phrasing
     example: 'good academic standing' -> '' with a handbook_note:'Students must be in Good Academic Standing.' """
     note = ""
     # Academic Standing note
-
-    processed, number_of_subs = re.subn(
-        r"(Students must)? (be)? [io]n Good (Academic)? Standing( and)?", r"", processed, flags=re.IGNORECASE
-    )
-    if number_of_subs > 0:
-        note += "Students must be in Good Academic Standing."
+    processed, note = add_note_if_found(processed, r"(Students must)? (be)? [io]n Good (Academic)? Standing( and)?", note, r"", "Students must be in Good Academic Standing.")
 
     # Final 2 terms note
-    processed, number_of_subs = re.subn(
-        r"It is strongly recommended that students only complete this course within their final 2 terms of study", r"", processed, flags=re.IGNORECASE
-    )
-    if number_of_subs > 0:
-        note += "Recommended to take this course within their final 2 terms of study."
-
+    processed, note = add_note_if_found(processed, r"It is strongly recommended that students only complete this course within their final 2 terms of study", note, r"", "Recommended to take this course within their final 2 terms of study.")
     # Business school students terms notes
     terms_string = re.findall("Only available to single and double degree Business School students in Term \d. It will be offered to non-Business School students in Terms \d and \d.", processed)
-
     processed, number_of_subs = re.subn(
         r"Only available to single and double degree Business School students in Term \d. It will be offered to non-Business School students in Terms \d and \d.", r"", processed, flags=re.IGNORECASE
     )
@@ -554,44 +546,19 @@ def remove_extraneous_comm_data(processed):
         terms_numbers = re.findall(r'[0-9]+', terms_string[0])
         note += r"Only available to single and double degree Business School students in Term " + terms_numbers[0] + ". It will be offered to non-Business School students in Terms " + terms_numbers[1] +" and " + terms_numbers[2] +"."
 
-    processed, number_of_subs = re.subn(
-    r"Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Term 3.", r"", processed, flags=re.IGNORECASE
-    )
-    if number_of_subs > 0:
-        note += "Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Term 3."
-
+    find = r"Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Term 3."
+    processed, note = add_note_if_found(processed, find, note, r"", find)
     # Application and progression check notes
-    processed, number_of_subs = re.subn(
-    r"This course is by application only. Please contact the Co-op office for more information", r"", processed, flags=re.IGNORECASE
-    )
-    if number_of_subs > 0:
-        note += "This course is by application only. Please contact the Co-op office for more information"
-
-    processed, number_of_subs = re.subn(
-    r"This course is by application only.", r"", processed, flags=re.IGNORECASE
-    )
-    if number_of_subs > 0:
-        note += "This course is by application only."
-
-    processed, number_of_subs = re.subn(
-    r"Its recommended to seek a progression check prior to application.", r"", processed, flags=re.IGNORECASE
-    )
-    if number_of_subs > 0:
-        note += "It is recommended to do a progression check prior to enrolling."
-
-    processed, number_of_subs = re.subn(
-    r"This course is by application only.( )?Please visit Business School website for more information", r"", processed, flags=re.IGNORECASE
-    )
-    if number_of_subs > 0:
-        note += "This course is by application only. Please visit Business School website for more information"
-
+    find = r"This course is by application only. Please contact the Co-op office for more information"
+    processed, note = add_note_if_found(processed, find, note, r"", find)
+    find = r"This course is by application only."
+    processed, note = add_note_if_found(processed, find, note, r"", find)
+    find = r"Its recommended to seek a progression check prior to application."
+    processed, note = add_note_if_found(processed, find, note, r"", find)
+    processed, note = add_note_if_found(processed, r"This course is by application only.( )?Please visit Business School website for more information", note, r"", "This course is by application only. Please visit Business School website for more information")
+ 
     # Commerce degree notes
-    processed, number_of_subs = re.subn(
-        #Students are expected to be in their final year of a Bachelor of Commerce single or dual degree with
-    r"(Students are expected to be )?in their final year of a( single or )?(double)?(dual)? Bachelor of Commerce( single or dual)?( degree)?", r"COMM#", processed, flags=re.IGNORECASE
-    )
-    if number_of_subs > 0:
-        note += "Students must be in their final year of a single or double Commerce degree"
+    processed, note = add_note_if_found(processed, r"(Students are expected to be )?in their final year of a( single or )?(double)?(dual)? Bachelor of Commerce( single or dual)?( degree)?", note, r"COMM#", "Students must be in their final year of a single or double Commerce degree")
     processed = re.sub(
     r"Only available to students completing a Bachelor of Commerce as part of a single or double-degree", r"COMM#", processed, flags=re.IGNORECASE
     )
