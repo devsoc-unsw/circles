@@ -93,3 +93,5 @@ const validateTermPlanner = (dispatch, plannerInfo, userInfo, suppress) => {
 };
 
 export default validateTermPlanner;
+
+export { getMostRecentPastTerm };
