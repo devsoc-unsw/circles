@@ -25,7 +25,6 @@ const ContextMenu = ({ code, plannedFor }) => {
   const { programCode, majors, minor } = useSelector(
     (state) => state.degree,
   );
-
   
   const handleDelete = () => {
     dispatch(removeCourse(code));
@@ -87,7 +86,8 @@ const ContextMenu = ({ code, plannedFor }) => {
       "mark": isNaN(attemptedMark) ? attemptedMark : parseInt(attemptedMark),
     }));
     setIsEditMarkVisible(false);
-    return message.success("Mark Updated")
+    // ! TODO: validateTermPlanner
+    return message.success("Mark Updated");
   }
 
   const handleCancelEditMark = () => {

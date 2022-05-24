@@ -9,6 +9,8 @@ import "./index.less";
 const Marks = ({ courseCode }) => {
   const { Text } = Typography;
   console.log("going to select");
+  const beep = useSelector((state) => state.planner.courses[courseCode]);
+  console.log("beep", beep);
   const { mark } = useSelector((state) => state.planner.courses[courseCode]);
 
   return (
@@ -17,7 +19,7 @@ const Marks = ({ courseCode }) => {
         Mark: 
       </Text>
       <Text className="text marks-val">
-        {(mark) ? mark : " N/A"}
+        {(mark === null) ? " N/A" : mark}
       </Text>
     </div >
   )
