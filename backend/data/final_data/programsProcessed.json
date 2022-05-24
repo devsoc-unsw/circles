@@ -219,10 +219,74 @@
                     "notes": "A maximum of 72 UOC of Level 1 courses can be taken, including any General Education or mainstream Level 1 course taken to fulfil either the General Education or the Free Elective requirement. any level 1 course"
                 }
             ],
-            "prescribed_electives": [],
+            "prescribed_electives": [
+                {
+                    "courses": {
+                        "GEOS????": "any Geoscience course",
+                        "MATS????": "any Materials Science and Engineering course",
+                        "BEES????": "any Biological, Earth & Environmental Science course",
+                        "VISN????": "any Vision Science course",
+                        "PHSL????": "any Physiology course",
+                        "ANAT????": "any Anatomy course",
+                        "BIOC????": "any Biochemistry course",
+                        "NEUR????": "any Neuroscience course",
+                        "PHYS????": "any Physics course",
+                        "BABS????": "any Biotechnology & Biomolecular Sciences course",
+                        "CLIM????": "any Climate Science course",
+                        "BIOS????": "any Biological Science course",
+                        "BIOT????": "any Biotechnology course",
+                        "OPTM????": "any Optometry course",
+                        "CHEM????": "any Chemistry course",
+                        "MICR????": "any Microbiology course",
+                        "SOMS????": "any Medical Science course",
+                        "PHAR????": "any Pharmacology course",
+                        "PSYC????": "any Psychology course",
+                        "COMP????": "any Computer Science course",
+                        "MSCI????": "any Marine Science course",
+                        "AVIA????": "any Aviation course",
+                        "PATH????": "any Pathology course",
+                        "FOOD????": "any Food Technology course",
+                        "SCIF????": "any Faculty of Science course",
+                        "MATH????": "any Mathematics course"
+                    },
+                    "title": "Science Electives",
+                    "credits_to_complete": 36,
+                    "core": false,
+                    "levels": [],
+                    "notes": "Students need to complete 96 UOC to meet the core requirements for the Bachelor of Science. If your choice of specialisation(s) requires less than 96 UOC you are required to complete additional Science elective courses from the following list to meet the 96 UOC requirement."
+                }
+            ],
             "other": [
                 {
-                    "courses": {},
+                    "courses": {
+                        "ANAT????": "any Anatomy course",
+                        "SOMS????": "any Medical Science course",
+                        "PATH????": "any Pathology course",
+                        "MICR????": "any Microbiology course",
+                        "BEES????": "any Biological, Earth & Environmental Science course",
+                        "DATA????": "any Data Science course",
+                        "PHAR????": "any Pharmacology course",
+                        "SCIF????": "any Faculty of Science course",
+                        "NEUR????": "any Neuroscience course",
+                        "MATH????": "any Mathematics course",
+                        "COMP????": "any Computer Science course",
+                        "BIOS????": "any Biological Science course",
+                        "PHSL????": "any Physiology course",
+                        "GEOS????": "any Geoscience course",
+                        "FOOD????": "any Food Technology course",
+                        "PHYS????": "any Physics course",
+                        "BIOT????": "any Biotechnology course",
+                        "CLIM????": "any Climate Science course",
+                        "MATS????": "any Materials Science and Engineering course",
+                        "MSCI????": "any Marine Science course",
+                        "OPTM????": "any Optometry course",
+                        "CHEM????": "any Chemistry course",
+                        "BIOC????": "any Biochemistry course",
+                        "AVIA????": "any Aviation course",
+                        "VISN????": "any Vision Science course",
+                        "BABS????": "any Biotechnology & Biomolecular Sciences course",
+                        "PSYC????": "any Psychology course"
+                    },
                     "title": "Science Elective Courses",
                     "credits_to_complete": 12,
                     "core": false,
@@ -366,7 +430,16 @@
                     "notes": "Students must complete a minimum of 96 UOC of the following courses. any course offered by UNSW Business School"
                 }
             ],
-            "prescribed_electives": [],
+            "prescribed_electives": [
+                {
+                    "courses": {},
+                    "title": "Prescribed Work Integrated Learning (WIL) Course",
+                    "credits_to_complete": 6,
+                    "core": false,
+                    "levels": [],
+                    "notes": "Students must complete a 6 UOC Work Integrated Learning (WIL) course within their program. This course can count as a free elective or where applicable, can count as a Commerce major elective or General Education course. Note: Students in Commerce Double Degrees have the option of meeting the mandatory WIL requirement in the non-Commerce component of the Double Degree."
+                }
+            ],
             "other": []
         }
     },
@@ -473,7 +546,31 @@
                     "notes": "A maximum of 48 units of credit of level I courses can be taken throughout this entire program, excluding any GEN#### course or other mainstream level I course taken to fulfill the 12 unit of credit General Education requirement. any level 1 course"
                 }
             ],
-            "prescribed_electives": [],
+            "prescribed_electives": [
+                {
+                    "courses": {
+                        "MICR3???": "any level 3 Microbiology course",
+                        "BIOC3???": "any level 3 Biochemistry course",
+                        "BINF3???": "any level 3 Bioinformatics course",
+                        "SOMS3???": "any level 3 Medical Science course",
+                        "BABS2???": "any level 2 Biotechnology & Biomolecular Sciences course",
+                        "SCIF2???": "any level 2 Faculty of Science course",
+                        "CHEM3???": "any level 3 Chemistry course",
+                        "BABS3???": "any level 3 Biotechnology & Biomolecular Sciences course",
+                        "SCIF3???": "any level 3 Faculty of Science course",
+                        "SOMS2???": "any level 2 Medical Science course",
+                        "PHAR2???": "any level 2 Pharmacology course",
+                        "CHEM2???": "any level 2 Chemistry course",
+                        "BINF2???": "any level 2 Bioinformatics course",
+                        "PHAR3???": "any level 3 Pharmacology course"
+                    },
+                    "title": "Level 2 and Level 3 Electives",
+                    "credits_to_complete": 36,
+                    "core": false,
+                    "levels": [],
+                    "notes": "Students must take at least 36 UOC of the following courses."
+                }
+            ],
             "other": []
         }
     },
@@ -536,7 +633,48 @@
             ],
             "information_rules": [],
             "limit_rules": [],
-            "prescribed_electives": [],
+            "prescribed_electives": [
+                {
+                    "courses": {},
+                    "title": "Work Integrated Learning (WIL)",
+                    "credits_to_complete": 6,
+                    "core": false,
+                    "levels": [],
+                    "notes": "As part of the BIS degree students must complete at least one WIL course."
+                },
+                {
+                    "courses": {},
+                    "title": "Prescribed Information Systems Electives",
+                    "credits_to_complete": 12,
+                    "core": false,
+                    "levels": [],
+                    "notes": "Choose any two IS Electives from the following courses."
+                },
+                {
+                    "courses": {},
+                    "title": "IS Programming Electives",
+                    "credits_to_complete": 0,
+                    "core": false,
+                    "levels": [],
+                    "notes": "Elective courses focused on developing skills in programming."
+                },
+                {
+                    "courses": {},
+                    "title": "IS Data Analytics Electives",
+                    "credits_to_complete": 0,
+                    "core": false,
+                    "levels": [],
+                    "notes": "Elective courses focused on developing skills in data analytics."
+                },
+                {
+                    "courses": {},
+                    "title": "IS organisational Electives",
+                    "credits_to_complete": 0,
+                    "core": false,
+                    "levels": [],
+                    "notes": "Elective courses focused on IS in Organisations"
+                }
+            ],
             "other": []
         }
     },
@@ -777,7 +915,62 @@
                 }
             ],
             "limit_rules": [],
-            "prescribed_electives": [],
+            "prescribed_electives": [
+                {
+                    "courses": {},
+                    "title": "Introductory Business Course",
+                    "credits_to_complete": 6,
+                    "core": false,
+                    "levels": [],
+                    "notes": "Students must take 6 UOC of the following courses. Please Note: The below courses cannot be counted towards an Economics major."
+                },
+                {
+                    "courses": {},
+                    "title": "Economics Electives",
+                    "credits_to_complete": 30,
+                    "core": false,
+                    "levels": [],
+                    "notes": "Students must take 30 UOC of the following courses with at least 18 UOC of level 3 Economics courses."
+                },
+                {
+                    "courses": {
+                        "ECON3???": "any level 3 Economics course"
+                    },
+                    "title": "any level 3 Economics course",
+                    "credits_to_complete": 0,
+                    "core": false,
+                    "levels": [],
+                    "notes": ""
+                },
+                {
+                    "courses": {
+                        "ECON2???": "any level 2 Economics course"
+                    },
+                    "title": "any level 2 Economics course",
+                    "credits_to_complete": 0,
+                    "core": false,
+                    "levels": [],
+                    "notes": ""
+                },
+                {
+                    "courses": {},
+                    "title": "Actuarial Studies Options",
+                    "credits_to_complete": 0,
+                    "core": false,
+                    "levels": [],
+                    "notes": "Students can take a maximum of 6 UOC of the following courses as substitutes for Level 3 ECON courses."
+                },
+                {
+                    "courses": {
+                        "GENC????": "any course offered by UNSW Business School"
+                    },
+                    "title": "UNSW Business Electives",
+                    "credits_to_complete": 12,
+                    "core": false,
+                    "levels": [],
+                    "notes": "Students must complete 12 UOC of Business School electives. Students are encouraged to select a Work-Integrated Learning course as one of their Business School elective courses - e.g., COMM3020, COMM3030, COMM3101, or COMM3202."
+                }
+            ],
             "other": []
         }
     },
@@ -848,7 +1041,16 @@
                 }
             ],
             "limit_rules": [],
-            "prescribed_electives": [],
+            "prescribed_electives": [
+                {
+                    "courses": {},
+                    "title": "Level 3 Actuarial Electives",
+                    "credits_to_complete": 24,
+                    "core": false,
+                    "levels": [],
+                    "notes": "Students must complete 24 UOC of the following courses."
+                }
+            ],
             "other": []
         }
     },
@@ -1019,7 +1221,16 @@
             ],
             "information_rules": [],
             "limit_rules": [],
-            "prescribed_electives": [],
+            "prescribed_electives": [
+                {
+                    "courses": {},
+                    "title": "Electives",
+                    "credits_to_complete": 6,
+                    "core": false,
+                    "levels": [],
+                    "notes": "Students must complete one 6 UOC elective course. The following courses are recommended,"
+                }
+            ],
             "other": []
         }
     },
@@ -1094,7 +1305,44 @@
                     "notes": "Students must complete a minimum of 30 UOC of the following courses. any level 3 course offered by Faculty of Science any level 3 Anatomy (ANAT) course any level 3 Neuroscience (NEUR) course any level 3 Pathology (PATH) course any level 3 Pharmacology (PHAR) course any level 3 Physiology (PHSL) course any level 3 Food Technology (FOOD) course any level 3 Computer Science (COMP) course any level 3 Medical Science (SOMS) course"
                 }
             ],
-            "prescribed_electives": [],
+            "prescribed_electives": [
+                {
+                    "courses": {
+                        "ANAT????": "any Anatomy course",
+                        "PSYC????": "any Psychology course",
+                        "DATA????": "any Data Science course",
+                        "MSCI????": "any Marine Science course",
+                        "MICR????": "any Microbiology course",
+                        "BIOC????": "any Biochemistry course",
+                        "FOOD????": "any Food Technology course",
+                        "CHEM????": "any Chemistry course",
+                        "SOMS????": "any Medical Science course",
+                        "MATH????": "any Mathematics course",
+                        "COMP????": "any Computer Science course",
+                        "MATS????": "any Materials Science and Engineering course",
+                        "BABS????": "any Biotechnology & Biomolecular Sciences course",
+                        "NEUR????": "any Neuroscience course",
+                        "CLIM????": "any Climate Science course",
+                        "BEES????": "any Biological, Earth & Environmental Science course",
+                        "AVIA????": "any Aviation course",
+                        "PHYS????": "any Physics course",
+                        "PHAR????": "any Pharmacology course",
+                        "PATH????": "any Pathology course",
+                        "SCIF????": "any Faculty of Science course",
+                        "GEOS????": "any Geoscience course",
+                        "OPTM????": "any Optometry course",
+                        "BIOT????": "any Biotechnology course",
+                        "VISN????": "any Vision Science course",
+                        "BIOS????": "any Biological Science course",
+                        "PHSL????": "any Physiology course"
+                    },
+                    "title": "Science Electives",
+                    "credits_to_complete": 6,
+                    "core": false,
+                    "levels": [],
+                    "notes": "Students must take 'science' courses so that the major plus SCIF1131, plus Honours year plus 'science' courses total 144 units of credit."
+                }
+            ],
             "other": []
         }
     },
@@ -1205,7 +1453,42 @@
                     "notes": "Students may only undertake a maximum of 60 UOC of the following courses. any level 1 course"
                 }
             ],
-            "prescribed_electives": [],
+            "prescribed_electives": [
+                {
+                    "courses": {
+                        "BIOT????": "any Biotechnology course",
+                        "CLIM????": "any Climate Science course",
+                        "PATH????": "any Pathology course",
+                        "AVIA????": "any Aviation course",
+                        "MATS????": "any Materials Science and Engineering course",
+                        "PHYS????": "any Physics course",
+                        "BIOS????": "any Biological Science course",
+                        "PHAR????": "any Pharmacology course",
+                        "CHEM????": "any Chemistry course",
+                        "OPTM????": "any Optometry course",
+                        "ANAT????": "any Anatomy course",
+                        "MATH????": "any Mathematics course",
+                        "GEOS????": "any Geoscience course",
+                        "SCIF????": "any Faculty of Science course",
+                        "VISN????": "any Vision Science course",
+                        "PHSL????": "any Physiology course",
+                        "BABS????": "any Biotechnology & Biomolecular Sciences course",
+                        "SOMS????": "any Medical Science course",
+                        "MSCI????": "any Marine Science course",
+                        "BIOC????": "any Biochemistry course",
+                        "MICR????": "any Microbiology course",
+                        "FOOD????": "any Food Technology course",
+                        "BEES????": "any Biological, Earth & Environmental Science course",
+                        "NEUR????": "any Neuroscience course",
+                        "PSYC????": "any Psychology course"
+                    },
+                    "title": "Science Electives",
+                    "credits_to_complete": 36,
+                    "core": false,
+                    "levels": [],
+                    "notes": "Students need to complete 96 UOC to meet the core requirements for the Bachelor of Science. If your choice of specialisation(s) requires less than 96 UOC you are required to complete additional Science elective courses from the following list to meet the 96 UOC requirement."
+                }
+            ],
             "other": []
         }
     },
@@ -1345,7 +1628,16 @@
                     "notes": "Students must complete a minimum of 96 UOC of the following courses. any course offered by UNSW Business School"
                 }
             ],
-            "prescribed_electives": [],
+            "prescribed_electives": [
+                {
+                    "courses": {},
+                    "title": "Prescribed Work Integrated Learning (WIL) Course",
+                    "credits_to_complete": 6,
+                    "core": false,
+                    "levels": [],
+                    "notes": "Students must complete a 6 UOC Work Integrated Learning (WIL) course within their program. This course can count as a free elective or where applicable, can count as a Commerce major elective or General Education course. Note: Students in Commerce Double Degrees have the option of meeting the mandatory WIL requirement in the non-Commerce component of the Double Degree."
+                }
+            ],
             "other": []
         }
     },
@@ -1458,7 +1750,16 @@
                     "notes": "Students may only undertake a maximum of 60 UOC of the following courses. any level 1 course"
                 }
             ],
-            "prescribed_electives": [],
+            "prescribed_electives": [
+                {
+                    "courses": {},
+                    "title": "Arts and Social Sciences Prescribed Electives",
+                    "credits_to_complete": 24,
+                    "core": false,
+                    "levels": [],
+                    "notes": "You must complete 12 UOC of any courses offered by UNSW Arts and Social Sciences. Indigenous Studies courses (ATSIxxxx) cannot be studied as Arts and Social Sciences Prescribed Electives."
+                }
+            ],
             "other": []
         }
     },
@@ -1529,7 +1830,24 @@
                     "notes": "Students may only undertake a maximum of 60 UOC of the following courses. any level 1 course"
                 }
             ],
-            "prescribed_electives": [],
+            "prescribed_electives": [
+                {
+                    "courses": {},
+                    "title": "Law Elective Courses",
+                    "credits_to_complete": 42,
+                    "core": false,
+                    "levels": [],
+                    "notes": "Students must complete 42 UOC of Law Electives. Note: With the permission of the Director of Undergraduate Studies and the course teacher, undergraduate students may enrol in one or more Postgraduate courses, in a select list of approved Postgraduate Electives. Not more than half the students' total elective courses may be taken from the postgraduate offerings."
+                },
+                {
+                    "courses": {},
+                    "title": "Prescribed Theory Electives",
+                    "credits_to_complete": 6,
+                    "core": false,
+                    "levels": [],
+                    "notes": "Students must take 6 UOC of the following courses"
+                }
+            ],
             "other": []
         }
     }

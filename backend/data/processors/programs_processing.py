@@ -1,6 +1,6 @@
 """
 Program processes the formatted data by editing and customising the data for
-use on the frontend. See 'programs_processed.json' for output.
+use on the frontend. See 'programsProcessed.json' for output.
 
 Status: Currently works for all COMP programs and SENGAH. Query next
         set of programs to include.
@@ -19,6 +19,7 @@ from data.utility.data_helpers import read_data, write_data
 
 INPUT_PATH = "data/scrapers/programsFormattedRaw.json"
 OUTPUT_PATH = "data/final_data/programsProcessed.json"
+FACULTY_CODE_PATH = "data/final_data/facultyCodesProcessed.json"
 
 GENERAL_EDUCATION = "GE"
 MAJOR = "undergrad_major"
@@ -94,7 +95,7 @@ def initialise_program(program: dict) -> dict:
     """
     Initialises basic attributes of the specialisation.
     """
-    duration = re.search("(\d)", program["duration"]).group(1)
+    duration = re.search(r"(\d)", program["duration"]).group(1)
 
     return { # TODO: Document the structure
         "title": program["title"],
@@ -142,6 +143,8 @@ def add_component_data(program_data: dict, item: dict, program_name = None) -> N
         add_rule(program_data, item, INFORMATION_RULE_KEY)
     if is_limit_rule(item):
         add_rule(program_data, item, LIMIT_RULE_KEY)
+    if is_prescribed_elective(item):
+        add_prescribed_elective(program_data, item)
     if is_other(item):
         add_other(program_data, item)
 
@@ -325,7 +328,7 @@ def add_rule(program_data: dict, item: dict, rule_type: str) -> None:
 
 def add_prescribed_elective(program_data: dict, item: dict) -> None:
     program_data["components"][PRESCRIBED_ELECTIVE_KEY].append({
-        "courses": [rel["description"] for rel in item["dynamic_relationship"]],
+        "courses": process_any_course_requirement(program_data, [ course["description"] for course in item["dynamic_relationship"] ]),
         "title": item["title"],
         "credits_to_complete": get_credits(program_data, item),
         "core": False,
@@ -338,20 +341,48 @@ def add_other(program_data: dict, item: dict) -> None:
     """
     Adds 'other' data to the correct spot in program_data
     """
-    other = {
-        "courses": {},
+    program_data["components"][OTHER_KEY].append({
+        "courses": process_any_course_requirement(program_data, [ course["description"] for course in item["dynamic_relationship"] ]),
         "title": item["title"],
         "credits_to_complete": get_credits(program_data, item),
-        "core": is_core_course(item),
+        "core": False,
         "levels": [], # TODO: What is this?
         "notes": item["description"],
-    }
+    })
 
-    for course in item["relationship"]:
-        code = course["academic_item_code"]
-        other["courses"][code] = course["academic_item_name"]
 
-    program_data["components"][OTHER_KEY].append(other)
+def process_any_course_requirement(program_data: dict, descriptions: list[str]) -> dict:
+    """
+    Processes list of course (as strings) requirements
+    that are of the form 'any <faculty or type of course> course'
+    """
+    courses = {}
+    mappings = read_data(FACULTY_CODE_PATH)
+
+    for description in descriptions:
+        search_result = re.search(r"any (.+) course", description, flags = re.IGNORECASE)
+        if search_result is None:
+            search_result = re.search(r"any course offered by (.+)", description, flags = re.IGNORECASE)
+
+        stripped = search_result.group(1)
+
+        # Find the level requirement (if there is any)
+        if bool(re.match(r"level \d", stripped, flags = re.IGNORECASE)):
+            search_result = re.search(r"level (\d) (.+)", stripped, flags = re.IGNORECASE)
+            level = search_result.group(1)
+            faculty = search_result.group(2)
+        else:
+            level = "?"
+            faculty = stripped
+
+        try:
+            code = f"{mappings[faculty]}{level}???"
+        except KeyError:
+            print(f"Warning: Can't figure out what the code is for {faculty} in program {program_data['code']}")
+            continue
+
+        courses[code] = description
+    return courses
 
 
 def get_credits(program_data: dict, item: dict) -> int:
