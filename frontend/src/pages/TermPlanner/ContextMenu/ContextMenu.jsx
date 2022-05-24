@@ -53,7 +53,7 @@ const ContextMenu = ({ code, plannedFor }) => {
   // ? make this a part of the state?
   const [isEditMarkVisible, setIsEditMarkVisible] = useState(false);
 
-  const [markInput, setMarkInput] = useState("");
+  // const [markInput, setMarkInput] = useState("");
 
   const showEditMark = () => {
     setIsEditMarkVisible(true);
@@ -83,13 +83,12 @@ const ContextMenu = ({ code, plannedFor }) => {
       "code": code,
       "mark": isNaN(attemptedMark) ? attemptedMark : parseInt(attemptedMark),
     }));
-    setMarkInput("");
     setIsEditMarkVisible(false);
     return message.success("Mark Updated")
   }
 
   const handleCancelEditMark = () => {
-    setMarkInput("");
+    setMarkInputBuf("");
     setIsEditMarkVisible(false);
   }
 

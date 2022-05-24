@@ -1,25 +1,15 @@
 /* eslint-disable */
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { Typography , PageHeader , Input , Button , Modal , message } from "antd";
+import { Input , Button } from "antd";
 
 import "./index.less";
 
-const EditMarks = ({ handleConfirm, handleKeyDown, inputBuffer, setInputBuffer }) => {
-
-
-  // ? Move outside of the function
-  const handleLetterGrade = (e) => {
-    setInputBuffer(e.target.value);
-    handleConfirm();
-  }
+const EditMarks = ({ handleConfirm, handleKeyDown, setInputBuffer }) => {
 
   const handleInputChange = (e) => {
     setInputBuffer(e.target.value);
   }
 
   return (
-    <>
     <div className="edit-mark">
       <div className="edit-mark-head">
       </div>
@@ -36,8 +26,8 @@ const EditMarks = ({ handleConfirm, handleKeyDown, inputBuffer, setInputBuffer }
         <Button onClick={() => {setInputBuffer("HD"); return handleConfirm();}} className="letter-grade-button">HD</Button>
       </div>
     </div>
-    </>
   );
 };
 
 export default EditMarks;
+
