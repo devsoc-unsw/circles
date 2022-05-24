@@ -468,6 +468,11 @@ def test_coreq_condition():
 
     assert complex_coreq_cond1.is_path_to("COMP1521")
     assert complex_coreq_cond6.is_path_to("COMP9999")
+    assert complex_coreq_cond4.beneficial(user, {"COMP9999": (6, 100)})
+    assert not complex_coreq_cond4.beneficial(user, {"COMP1521": (6, 100)})
+    assert not complex_coreq_cond4.beneficial(user, {"COMP1511": (6, 100)})
+    assert not complex_coreq_cond2.beneficial(user, {"COMP1551": (6, 100)})
+    assert complex_coreq_cond6.beneficial(user, {"COMP8888": (6, 100)})
 
 
 def test_school_condition():
@@ -510,3 +515,14 @@ def test_program_type():
     assert not (actl_program_cond.validate(comp_user))[0]
     assert (actl_program_cond.validate(actl_user))[0]
 
+def test_complex_composite_condition():
+    user = User(USERS["user3"])
+    comp_program_cond = create_condition(["(" ,"COMP1511" , "||" , "3707", ")"])
+    deep_program_cond = create_condition(["(" ,"COMP5555" , "||" , "(", "COMP2521", "&&", "MATH1141", ")", ")"])
+    assert not comp_program_cond.beneficial(user, {"COMP1511": (6, 100)})
+    assert deep_program_cond.beneficial(user, {"COMP2521": (6, 100)})
+    assert deep_program_cond.beneficial(user, {"COMP5555": (6, 100)})
+    assert deep_program_cond.beneficial(user, {"MATH1141": (6, 100)})
+    user.add_courses({"COMP5555" : (6, 100)})
+    assert not deep_program_cond.beneficial(user, {"COMP5555": (6, 100)})
+    assert not deep_program_cond.beneficial(user, {"MATH1141": (6, 100)})

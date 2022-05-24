@@ -6,7 +6,7 @@
 """
 
 import copy
-from typing import Optional
+from typing import Optional, Tuple
 import re
 
 from algorithms.objects.categories import AnyCategory, Category
@@ -16,8 +16,8 @@ class User:
 
     def __init__(self, data = None):
         # Will load the data if any was given
-        self.courses: dict[str, (int, int)] = {}
-        self.cur_courses: list[str, (int, int)] = []  # Courses in the current term
+        self.courses: dict[str, Tuple[int, int]] = {}
+        self.cur_courses: list[str, Tuple[int, int]] = []  # Courses in the current term
         self.program: str = None
         self.specialisations: dict[str, int] = {}
         self.year: int = 0
@@ -26,7 +26,7 @@ class User:
         if data is not None:
             self.load_json(data)
 
-    def add_courses(self, courses: dict[str, (int, int)]):
+    def add_courses(self, courses: dict[str, Tuple[int, int]]):
         """
         Given a dictionary of courses mapping course code to a (uoc, grade) tuple,
         adds the course to the user and updates the uoc/grade at the same time.
@@ -86,7 +86,7 @@ class User:
             bool(re.match(pat, spec, flags=re.IGNORECASE))
             for spec in self.specialisations
         )
-
+    
     def load_json(self, data):
         """ Given the user data, correctly loads it into this user class """
 
@@ -123,6 +123,9 @@ class User:
             for course, (uoc, _) in self.courses.items()
             if category.match_definition(course)
         )
+    
+    def pop_course(self, course: str) -> Tuple[str, Tuple[int, int]]:
+        return self.courses.pop(course)
 
     def unselect_course(self, target: str) -> list[str]:
         """

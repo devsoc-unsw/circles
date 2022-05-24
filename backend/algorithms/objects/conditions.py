@@ -45,10 +45,15 @@ class Condition(ABC):
     @abstractmethod
     def beneficial(self, user: User,  course: dict[str, Tuple[int, int]]) -> bool:
         """ checks if 'course' is able to meet any *more* subtrees' requirements """
-        if self.validate(user):
+        # shitty way to get coursename
+        for c in course:
+            pass
+        if self.validate(user)[0] or user.has_taken_course(c):
             return False
-        user.add_courses({course})
-        return self.validate(user)
+        user.add_courses(course)
+        answer = self.validate(user)[0]
+        user.pop_course(c)
+        return answer
 
     @abstractmethod
     def __str__(self) -> str:
@@ -118,7 +123,13 @@ class CoreqCoursesCondition(Condition):
         return course in self.courses
 
     def beneficial(self, user: User, course: dict[str, Tuple[int, int]]) -> bool:
-        return super().beneficial(user, course)
+        # shitty way to get the coursename
+        for c in course:
+            pass
+        if self.validate(user)[0] or user.has_taken_course(c) or user.is_taking_course(c):
+            return False
+        return any(c in course.keys() for c in self.courses)
+
 
     def __str__(self) -> str:
         return "CoreqCoursesCondition(courses={}, logic={})".format(
@@ -396,6 +407,11 @@ class CompositeCondition(Condition):
         return any(condition.is_path_to(course) for condition in  self.conditions)
 
     def beneficial(self, user: User, course: dict[str, Tuple[int, int]]) -> bool:
+        # shitty way to get coursename
+        for c in course:
+            pass
+        if self.validate(user)[0] or user.has_taken_course(c):
+            return False
         return any(condition.beneficial(user, course) for condition in self.conditions)
 
     def __str__(self) -> str:
