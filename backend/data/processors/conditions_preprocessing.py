@@ -346,6 +346,7 @@ def convert_AND_OR(processed):
     processed = re.sub(" and ", " && ", processed, flags=re.IGNORECASE)
     processed = re.sub(" & ", " && ", processed, flags=re.IGNORECASE)
     processed = re.sub(" and/or ", " || ", processed, flags=re.IGNORECASE)
+    processed = re.sub(" with ", " && ", processed, flags=re.IGNORECASE)
     processed = re.sub(" plus ", " && ", processed, flags=re.IGNORECASE)
     processed = re.sub(r" \+ ", " && ", processed, flags=re.IGNORECASE)
     processed = re.sub(" or ", " || ", processed, flags=re.IGNORECASE)
@@ -526,29 +527,16 @@ def unsw_global_degrees(processed):
 
 def remove_extraneous_comm_data(processed):
     """Adds handbook notes and removes phrasing
-    example: """
+    example: 'good academic standing' -> '' with a handbook_note:'Students must be in Good Academic Standing.' """
     note = ""
     # Academic Standing note
-    
+
     processed, number_of_subs = re.subn(
-        r"(Students must be)? [io]n Good (Academic Standing)? (and)?", r"", processed, flags=re.IGNORECASE
-    )
-    if number_of_subs > 0:
-        note += "Students must be in Good Academic Standing."
-    '''
-    processed, number_of_subs = re.subn(
-        r"on Good Standing and", r"", processed, flags=re.IGNORECASE
+        r"(Students must)? (be)? [io]n Good (Academic)? Standing( and)?", r"", processed, flags=re.IGNORECASE
     )
     if number_of_subs > 0:
         note += "Students must be in Good Academic Standing."
 
-    processed, number_of_subs = re.subn(
-        r"Good Standing", r"", processed, flags=re.IGNORECASE
-    )
-    if number_of_subs > 0:
-        note += "Students must be in Good Academic Standing."
-    '''
-    
     # Final 2 terms note
     processed, number_of_subs = re.subn(
         r"It is strongly recommended that students only complete this course within their final 2 terms of study", r"", processed, flags=re.IGNORECASE
@@ -592,33 +580,15 @@ def remove_extraneous_comm_data(processed):
         note += "It is recommended to do a progression check prior to enrolling."
 
     processed, number_of_subs = re.subn(
-    r"This course is by application only. Please visit Business School website for more information", r"", processed, flags=re.IGNORECASE
+    r"This course is by application only.( )?Please visit Business School website for more information", r"", processed, flags=re.IGNORECASE
     )
     if number_of_subs > 0:
         note += "This course is by application only. Please visit Business School website for more information"
 
-    processed, number_of_subs = re.subn(
-    r"This course is by application only.Please visit Business School website for more information", r"", processed, flags=re.IGNORECASE
-    )
-    if number_of_subs > 0:
-        note += "This course is by application only. Please visit Business School website for more information"
-    '''
-    if re.search("good academic standing", processed, flags=re.IGNORECASE) != None:
-        note += "Students must be in good academic standing."
-
-    processed = re.sub(
-    r"be in good academic standing", r"", processed, flags=re.IGNORECASE
-    )
-    '''
-    
     # Commerce degree notes
     processed, number_of_subs = re.subn(
-    r"in their final year of a single or double Commerce degree", r"COMM#", processed, flags=re.IGNORECASE
-    )
-    if number_of_subs > 0:
-        note += "Students must be in their final year of a single or double Commerce degree"
-    processed, number_of_subs = re.subn(
-    r"Students are expected to be in their final year of a Bachelor of Commerce single or dual degree", r"COMM#", processed, flags=re.IGNORECASE
+        #Students are expected to be in their final year of a Bachelor of Commerce single or dual degree with
+    r"(Students are expected to be )?in their final year of a( single or )?(double)?(dual)? Bachelor of Commerce( single or dual)?( degree)?", r"COMM#", processed, flags=re.IGNORECASE
     )
     if number_of_subs > 0:
         note += "Students must be in their final year of a single or double Commerce degree"
@@ -630,7 +600,6 @@ def remove_extraneous_comm_data(processed):
     )
 
     # need to change this/review these
-    # fix comm3999
     processed = re.sub(
         r"(\d+UOC) of Business courses", r"\1 in ZBUS && COMM#", processed
     )
