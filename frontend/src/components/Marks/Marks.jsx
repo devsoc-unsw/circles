@@ -1,18 +1,15 @@
 /* eslint-disable */
 
-import React, { useState, useSelector }  from "react";
-import KebabMenu from "../KebabMenu";
+import React, { useSelector }  from "react-redux";
+// import KebabMenu from "../KebabMenu";
 import { Typography } from "antd";
 
 import "./index.less";
 
 const Marks = ({ courseCode }) => {
-  // const { Text } = Typography;
-  // const theState = useSelector(state => state);
-  // console.log("Marks State is ", theState);
-  // console.log("courses in mark", courses);
-  // const { mark } = courses[courseCode];
-  const mark = 100;
+  const { Text } = Typography;
+  console.log("going to select");
+  const { mark } = useSelector((state) => state.planner.courses[courseCode]);
 
   return (
     <div>

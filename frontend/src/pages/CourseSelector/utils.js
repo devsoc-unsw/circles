@@ -1,3 +1,6 @@
+/* eslint-disable */
+import { useSelector } from 'react-redux';
+
 const prepareUserPayload = (degree, planner) => {
   const { startYear, courses } = planner;
   const { programCode, majors, minor } = degree;
@@ -9,7 +12,8 @@ const prepareUserPayload = (degree, planner) => {
   const selectedCourses = {};
   Array.from(Object.keys(courses)).forEach((course) => {
     // ! TODO: add coursemark here
-    selectedCourses[course] = null;
+    const { mark } = useSelector((state) => state.planner.courses[courseCode]);
+    selectedCourses[course] = mark;
   });
 
   return {

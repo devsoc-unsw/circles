@@ -11,7 +11,7 @@ import { FaEdit, FaRegCalendarTimes } from "react-icons/fa";
 import validateTermPlanner from "../validateTermPlanner";
 import { addTab } from "../../../reducers/courseTabsSlice";
 import { removeCourse, unschedule, updateCourseMark } from "../../../reducers/plannerSlice";
-import EditMarks from "../../../components/EditMarks";
+import EditMarks from "../EditMarks";
 
 import "./index.less";
 import { setCourse } from "../../../reducers/coursesSlice";
@@ -71,6 +71,8 @@ const ContextMenu = ({ code, plannedFor }) => {
 
   const handleConfirmEditMark = () => {
     const attemptedMark = (' ' + markInputBuf).slice(1).replace(" ", "");
+    console.log("pre:attempt", markInputBuf);
+    console.log("pos:attempt", attemptedMark);
     
     if (
       (isNaN(attemptedMark) && !validLetterGrades.includes(attemptedMark))
@@ -78,6 +80,7 @@ const ContextMenu = ({ code, plannedFor }) => {
     ) {
       return message.error("Could not update mark. Please enter a valid mark or letter grade");
     }
+    console.log("trying to dispatch: ", attemptedMark);
     
     dispatch(updateCourseMark({
       "code": code,
@@ -88,7 +91,7 @@ const ContextMenu = ({ code, plannedFor }) => {
   }
 
   const handleCancelEditMark = () => {
-    setMarkInputBuf("");
+    // setMarkInputBuf("");
     setIsEditMarkVisible(false);
   }
 
