@@ -4,6 +4,7 @@ Contains the Conditions classes
 
 import json
 from abc import ABC, abstractmethod
+from typing import Tuple
 
 from algorithms.objects.categories import Category, AnyCategory, CompositeCategory
 from algorithms.objects.user import User
@@ -37,6 +38,19 @@ class Condition(ABC):
         pass
 
     @abstractmethod
+    def is_path_to(self, course: str) -> bool:
+        """ checks if 'course' is able to meet any subtree's requirements"""
+        pass
+
+    @abstractmethod
+    def beneficial(self, user: User,  course: dict[str, Tuple[int, int]]) -> bool:
+        """ checks if 'course' is able to meet any *more* subtrees' requirements """
+        if self.validate(user):
+            return False
+        user.add_courses({course})
+        return self.validate(user)
+
+    @abstractmethod
     def __str__(self) -> str:
         return super().__str__()
 
@@ -52,6 +66,12 @@ class CourseCondition(Condition):
 
     def __init__(self, course: str):
         self.course = course
+
+    def is_path_to(self, course: str) -> bool:
+        return self.course == course
+
+    def beneficial(self, user: User, course: dict[str, Tuple[int, int]]) -> bool:
+        return super().beneficial(user, course)
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
         return user.has_taken_course(self.course), []
@@ -94,6 +114,12 @@ class CoreqCoursesCondition(Condition):
         print("Conditions Error: validation was not of type AND or OR")
         return True, []
 
+    def is_path_to(self, course: str) -> bool:
+        return course in self.courses
+
+    def beneficial(self, user: User, course: dict[str, Tuple[int, int]]) -> bool:
+        return super().beneficial(user, course)
+
     def __str__(self) -> str:
         return "CoreqCoursesCondition(courses={}, logic={})".format(
             self.courses, self.logic
@@ -116,11 +142,17 @@ class UOCCondition(Condition):
         # And more...
         self.category = AnyCategory()
 
+    def is_path_to(self, course: str) -> bool:
+        return False
+
     def set_category(self, category_classobj: Category):
         self.category = category_classobj
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
         return user.uoc(self.category) >= self.uoc, []
+
+    def beneficial(self, user: User, course: dict[str, Tuple[int, int]]) -> bool:
+        return super().beneficial(user, course)
 
     def __str__(self) -> str:
         return f"{self.uoc}UOC in {self.category}"
@@ -141,6 +173,10 @@ class WAMCondition(Condition):
         """ Set own category to the one given """
         self.category = category_classobj
 
+    def is_path_to(self, course: str) -> bool:
+        """??? do we want this? """
+        return self.category.match_definition(course)
+
     def validate(self, user: User) -> tuple[bool, list[str]]:
         """
         Determines if the user has met the WAM condition for this category.
@@ -149,6 +185,9 @@ class WAMCondition(Condition):
         """
         warning = self.get_warning(user.wam(self.category))
         return True, [warning] if warning else []
+
+    def beneficial(self, user: User, course: dict[str, Tuple[int, int]]) -> bool:
+        return super().beneficial(user, course)
 
     def get_warning(self, applicable_wam: int) -> str:
         """ Returns an appropriate warning message or None if not needed """
@@ -172,6 +211,9 @@ class GradeCondition(Condition):
     def set_category(self, category_classobj: Category):
         """ Set own category to the one given """
         self.category = category_classobj
+
+    def is_path_to(self, course: str) -> bool:
+        return self.category.match_definition(course)
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
         def _validate_course(course: Category):
@@ -205,6 +247,8 @@ class GradeCondition(Condition):
 
         return satisfied, sum(warnings, [])  # warnings are flattened
 
+    def beneficial(self, user: User, course: dict[str, Tuple[int, int]]) -> bool:
+        return super().beneficial(user, course)
 
     def get_warning(self) -> str:
         """ Return warning string for grade condition error """
@@ -219,6 +263,12 @@ class ProgramCondition(Condition):
 
     def __init__(self, program: str):
         self.program = program
+
+    def is_path_to(self, course: str) -> bool:
+        return False
+
+    def beneficial(self, user: User, course: dict[str, Tuple[int, int]]) -> bool:
+        return super().beneficial(user, course)
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
         return user.in_program(self.program), []
@@ -238,6 +288,12 @@ class ProgramTypeCondition(Condition):
     def __init__(self, programType: str):
         self.programType = programType
 
+    def is_path_to(self, course: str) -> bool:
+        return False
+
+    def beneficial(self, user: User, course: dict[str, Tuple[int, int]]) -> bool:
+        return super().beneficial(user, course)
+
     def validate(self, user: User) -> tuple[bool, list[str]]:
         return user.program in CACHED_PROGRAM_MAPPINGS[self.programType], []
 
@@ -254,6 +310,12 @@ class SpecialisationCondition(Condition):
     def validate(self, user: User) -> tuple[bool, list[str]]:
         return user.in_specialisation(self.specialisation), []
 
+    def is_path_to(self, course: str) -> bool:
+        return False
+    
+    def beneficial(self, user: User, course: dict[str, Tuple[int, int]]) -> bool:
+        return super().beneficial(user, course)
+
     def __str__(self) -> str:
         return f"SpecialisationCondition: {self.specialisation}"
 
@@ -265,7 +327,14 @@ class CourseExclusionCondition(Condition):
         self.exclusion = exclusion
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
-        return not user.has_taken_course(self.exclusion), []
+        is_valid = not user.has_taken_course(self.exclusion)
+        return is_valid, [] if is_valid else [f"{self.exclusion} is an exclusion course for this one"]
+
+    def is_path_to(self, course: str) -> bool:
+        return False
+
+    def beneficial(self, user: User, course: dict[str, Tuple[int, int]]) -> bool:
+        return super().beneficial(user, course)
 
     def __str__(self) -> str:
         return f"Exclusion: {self.exclusion}"
@@ -282,6 +351,12 @@ class ProgramExclusionCondition(Condition):
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
         return not user.in_program(self.exclusion), []
+
+    def is_path_to(self, course: str) -> bool:
+        return False
+
+    def beneficial(self, user: User, course: dict[str, Tuple[int, int]]) -> bool:
+        return super().beneficial(user, course)
 
     def __str__(self) -> str:
         return f"ProgramExclusionCondition: {self.exclusion}"
@@ -316,6 +391,12 @@ class CompositeCondition(Condition):
         satisfied = all(unlocked) if self.logic == Logic.AND else any(unlocked)
 
         return satisfied, sum(warnings, [])  # warnings are flattened
+
+    def is_path_to(self, course: str) -> bool:
+        return any(condition.is_path_to(course) for condition in  self.conditions)
+
+    def beneficial(self, user: User, course: dict[str, Tuple[int, int]]) -> bool:
+        return any(condition.beneficial(user, course) for condition in self.conditions)
 
     def __str__(self) -> str:
         logic_op = "&&" if self.logic == Logic.AND else "||"
