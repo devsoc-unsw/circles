@@ -60,6 +60,9 @@ def run_manual_fixes():
 
 
 run = {
+    "faculty": {
+        "format": format_code_data,
+    },
     "program": {
         "scrape": scrape_prg_data,
         "format": format_prg_data,
@@ -80,9 +83,6 @@ run = {
         "manual": run_manual_fixes,
         "tokenise": tokenise_conditions,
         "parsingErrors": log_broken_conditions,
-    },
-    "faculty": {
-        "format": format_code_data,
     },
     "cache": {
         "conditions": cache_conditions_pkl_file,

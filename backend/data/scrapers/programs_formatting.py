@@ -95,8 +95,9 @@ def format_description(description: str) -> str:
     # Get rid of random unicode characters
     description = re.sub(r"[^\x00-\x7F]+", " ", description)
 
-    # Get rid of double spaces
-    description = re.sub(r"\s+", " ", description)
+    # Get rid of double spaces and new lines mixed with spaces
+    description = re.sub(r"  +", "\n", description)
+    description = re.sub(r" *\n *", "\n", description)
 
     return description.strip()
 

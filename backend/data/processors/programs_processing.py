@@ -11,6 +11,7 @@ Step in the data's journey:
     [ X ] Customise formatted data (program_processing.py)
 """
 
+from multiprocessing.sharedctypes import Value
 import re
 from collections import OrderedDict
 
@@ -113,7 +114,8 @@ def initialise_program(program: dict) -> dict:
             LIMIT_RULE_KEY: [],
             PRESCRIBED_ELECTIVE_KEY: [],
             OTHER_KEY: [],
-        }
+        },
+        "processing_warnings": [],
     }
 
 
@@ -140,9 +142,9 @@ def add_component_data(program_data: dict, item: dict, program_name = None) -> N
         add_core_course_data(program_data, item)
         return
     if is_information_rule(item):
-        add_rule(program_data, item, INFORMATION_RULE_KEY)
+        add_information_rule(program_data, item)
     if is_limit_rule(item):
-        add_rule(program_data, item, LIMIT_RULE_KEY)
+        add_limit_rule(program_data, item)
     if is_prescribed_elective(item):
         add_prescribed_elective(program_data, item)
     if is_other(item):
@@ -155,7 +157,6 @@ def add_component_data(program_data: dict, item: dict, program_name = None) -> N
         add_component_data(program_data, next, program_name = program_name)
 
 
-# TODO: Fix remaining issues with this function
 def find_program_name(program_data: dict, item: dict) -> str:
     """
     Find the program name (if possible).
@@ -174,8 +175,10 @@ def find_program_name(program_data: dict, item: dict) -> str:
     program_names = sorted(program_names, key = lambda s: -len(s))
 
     # Print a warning if one of the strings is a substring of the other
-    if (program_names[0] in program_names[1]) or (program_names[1] in program_names[0]):
-        print(f"Warning: One of {program_names} is a substring of the other for program code {program_data['code']}")
+    if is_substring(program_names[0], program_names[1]):
+        add_warning(f"{program_names[0]} is a substring of {program_names[1]}", program_data, item)
+    if is_substring(program_names[1], program_names[0]):
+        add_warning(f"{program_names[1]} is a substring of {program_names[0]}", program_data, item)
 
     # Search
     for program_name in program_names:
@@ -186,7 +189,16 @@ def find_program_name(program_data: dict, item: dict) -> str:
                 return program_name
 
     # Couldn't find a match :(
-    print(f"Warning: Couldn't find any of names = {program_names} for program code {program_data['code']}")
+    add_warning(f"Couldn't find any of names ({') or ('.join(program_names)})", program_data, item)
+
+
+def is_substring(needle: str, haystack: str) -> bool:
+    """
+    Returns boolean whether needle is a substring of haystack
+    (case insensitive)
+    """
+    needle_escaped = re.escape(needle)
+    return bool(re.match(needle_escaped, haystack, flags = re.IGNORECASE))
 
 
 def is_general_education(item: dict) -> bool:
@@ -262,7 +274,7 @@ def add_general_education_data(program_data: dict, item: dict) -> None:
 
     program_data["components"][GENERAL_EDUCATION_KEY] = {
         "notes": item["description"],
-        "credits_to_complete": get_credits(program_data, item),
+        "credits_to_complete": get_container_credits(program_data, item),
     }
 
 
@@ -290,8 +302,7 @@ def add_core_course_data(program_data: dict, item: dict) -> None:
     cc = {
         "courses": {},
         "title": item["title"],
-        "credits_to_complete": get_credits(program_data, item),
-        "core": True,
+        "credits_to_complete": get_container_credits(program_data, item),
         "levels": [], # TODO
         "notes": item["description"],
     }
@@ -305,7 +316,75 @@ def add_core_course_data(program_data: dict, item: dict) -> None:
 
     program_data["components"][CORE_COURSE_KEY].append(cc)
 
+
+def add_information_rule(program_data: dict, item: dict) -> None:
+    """
+    Adds information rule data to the correct spot in program_data
+    """
+    program_data["components"][INFORMATION_RULE_KEY].append({
+        "title": item["title"],
+        "notes": item["description"],
+    })
+
+
+def add_limit_rule(program_data: dict, item: dict) -> None:
+    """
+    Adds limit rule data to the correct spot in program_data
+    """
+    # Split into description and requirements component
+    description_lines = item["description"].split("\n")
+    if len(description_lines) != 2:
+        add_warning("Expected 1 newline for limit rule", program_data, item)
+        return
+
+    notes = description_lines[0]
+    requirements_str = description_lines[1]
+
+    # Process the limit rule descriptions to get credits and requirements
+    credits_to_complete = get_string_credits(program_data, item, notes)
+    requirements = format_course_strings(requirements_str)
+
+    program_data["components"][LIMIT_RULE_KEY].append({
+        "courses": process_any_requirement(program_data, requirements, item),
+        "title": item["title"],
+        "credits_to_complete": credits_to_complete,
+        "levels": [], # TODO
+        "notes": notes,
+    })
+
+
+def add_prescribed_elective(program_data: dict, item: dict) -> None:
+    """
+    Adds prescribed elective data to the correct spot in program_data
+    """
+    requirements = [ course["description"] for course in item["dynamic_relationship"] ]
+    program_data["components"][PRESCRIBED_ELECTIVE_KEY].append({
+        "courses": process_any_requirement(program_data, requirements, item),
+        "title": item["title"],
+        "credits_to_complete": get_container_credits(program_data, item),
+        "levels": [], # TODO: What is this?
+        "notes": item["description"],
+    })
+
+
+def add_other(program_data: dict, item: dict) -> None:
+    """
+    Adds 'other' data to the correct spot in program_data
+    """
+    requirements = [ course["description"] for course in item["dynamic_relationship"] ]
+    program_data["components"][OTHER_KEY].append({
+        "courses": process_any_requirement(program_data, requirements, item),
+        "title": item["title"],
+        "credits_to_complete": get_container_credits(program_data, item),
+        "levels": [], # TODO: What is this?
+        "notes": item["description"],
+    })
+
+
 def add_core_course_tab(cc:dict, item: dict) -> None:
+    """
+    Adds a single given drop down tab to the core courses requirements
+    """
     # Check if it's a 'one of the following' requirement or single course requirements
     if item["vertical_grouping"]["value"] == "one_of_the_following":
         combined_key = " or ".join([ course["academic_item_code"] for course in item["relationship"] ])
@@ -316,76 +395,123 @@ def add_core_course_tab(cc:dict, item: dict) -> None:
             cc["courses"][code] = course["academic_item_name"]
 
 
-def add_rule(program_data: dict, item: dict, rule_type: str) -> None:
-    """
-    Adds rule data to the correct spot in program_data given a rule type
-    """
-    program_data["components"][rule_type].append({
-        "title": item["title"],
-        "notes": item["description"],
-    })
-
-
-def add_prescribed_elective(program_data: dict, item: dict) -> None:
-    program_data["components"][PRESCRIBED_ELECTIVE_KEY].append({
-        "courses": process_any_course_requirement(program_data, [ course["description"] for course in item["dynamic_relationship"] ]),
-        "title": item["title"],
-        "credits_to_complete": get_credits(program_data, item),
-        "core": False,
-        "levels": [], # TODO: What is this?
-        "notes": item["description"],
-    })
-
-
-def add_other(program_data: dict, item: dict) -> None:
-    """
-    Adds 'other' data to the correct spot in program_data
-    """
-    program_data["components"][OTHER_KEY].append({
-        "courses": process_any_course_requirement(program_data, [ course["description"] for course in item["dynamic_relationship"] ]),
-        "title": item["title"],
-        "credits_to_complete": get_credits(program_data, item),
-        "core": False,
-        "levels": [], # TODO: What is this?
-        "notes": item["description"],
-    })
-
-
-def process_any_course_requirement(program_data: dict, descriptions: list[str]) -> dict:
+def process_any_requirement(program_data: dict, requirements: list[str], item: dict) -> dict:
     """
     Processes list of course (as strings) requirements
     that are of the form 'any <faculty or type of course> course'
     """
     courses = {}
-    mappings = read_data(FACULTY_CODE_PATH)
-
-    for description in descriptions:
-        search_result = re.search(r"any (.+) course", description, flags = re.IGNORECASE)
-        if search_result is None:
-            search_result = re.search(r"any course offered by (.+)", description, flags = re.IGNORECASE)
-
-        stripped = search_result.group(1)
-
-        # Find the level requirement (if there is any)
-        if bool(re.match(r"level \d", stripped, flags = re.IGNORECASE)):
-            search_result = re.search(r"level (\d) (.+)", stripped, flags = re.IGNORECASE)
-            level = search_result.group(1)
-            faculty = search_result.group(2)
-        else:
-            level = "?"
-            faculty = stripped
+    for requirement in requirements:
+        stripped = strip_any_requirement_description(requirement)
+        level = get_any_requirement_level(stripped)
 
         try:
-            code = f"{mappings[faculty]}{level}???"
-        except KeyError:
-            print(f"Warning: Can't figure out what the code is for {faculty} in program {program_data['code']}")
+            codes = get_any_requirement_codes(stripped, level)
+        except ValueError as e:
+            add_warning(e, program_data, item)
             continue
 
-        courses[code] = description
+        for code in codes:
+            courses[code] = requirement
     return courses
 
 
-def get_credits(program_data: dict, item: dict) -> int:
+def format_course_strings(requirements_str: str) -> list[str]:
+    """
+    Format limit rule requirement string to match other rules format
+    by making it into a list of strings of the form 'any <faculty> course'
+    """
+    # Get rid of useless keywords, codes and double spaces
+    requirements_str = re.sub(r"(course|offered by|\([A-Z]{4}\))", " ", requirements_str, flags = re.IGNORECASE)
+    requirements_str = re.sub(r"\s+", " ", requirements_str, flags = re.IGNORECASE)
+
+    # Split into different requirements
+    courses = re.split(r"\s*any\s*", requirements_str, flags = re.IGNORECASE)
+
+    # Format
+    courses = list(map(lambda s: s.strip(), courses))
+    courses = list(filter(lambda s: s != "", courses))
+    courses = list(map(lambda s: f"any {s} course", courses))
+
+    return courses
+
+
+def strip_any_requirement_description(requirement: str) -> str:
+    """
+    Get only the useful bit of any requirements.
+    I.e., if requirement is of the form 'any <faculty> course'
+    or 'any course offered by <faculty>' then get '<faculty>'
+    """
+    search_result = re.search(r"any (.+) course", requirement, flags = re.IGNORECASE)
+    if search_result is None:
+        search_result = re.search(r"any course offered by (.+)", requirement, flags = re.IGNORECASE)
+
+    return search_result.group(1)
+
+
+def get_any_requirement_level(requirement: str) -> str:
+    """
+    Finds the level requirement (if there is any).
+    If there isn't, returns empty string
+    """
+    search_result = re.search(r"level (\d)", requirement, flags = re.IGNORECASE)
+    if search_result is not None:
+        return search_result.group(1)
+    return ""
+
+
+def get_any_requirement_codes(stripped: str, level: str) -> list[str]:
+    """
+    Generates code from stripped requirement and level.
+    Raises a ValueError if the faculty isn't in facultyCodesProcessed.json
+    """
+    # Find the faculty (if there is any)
+    search_result = re.search(r"([a-zA-Z]\D+)$", stripped, flags = re.IGNORECASE)
+    if search_result is None:
+        # There is no faculty, return generic code
+        return [f"....{level}"]
+
+    # There is a faculty/school.
+    # Format the faculty properly and get the mappings from faculties -> codes
+    faculty = faculty_manual_fixes(search_result.group(1))
+    mappings = read_data(FACULTY_CODE_PATH)
+
+    try:
+        faculty_codes = mappings[faculty]
+    except KeyError:
+        raise ValueError(f"Can't figure out what abbreviated code(s) are for {faculty}")
+
+    return list(map(lambda c: f"{c}{level}", faculty_codes))
+
+
+def faculty_manual_fixes(faculty: str) -> str:
+    """
+    Manual fixes to format keys into the
+    form seen in facultyCodesProcessed.json
+    """
+    faculty = faculty.replace("School of", "S")
+    faculty = faculty.replace("Faculty of", "F")
+
+    # Manual fixes
+    faculty = faculty.replace("S Medical Sciences", "S Medical")
+    faculty = faculty.replace("F Medicine and Health", "F Medicine")
+    # TODO: More manual fixes, but not sure what these are meant to become
+    # General Education - F Business -> ????
+    # Arts and Social Sciences -> ????
+    return faculty
+
+
+def get_credits_decorator(func):
+    def wrapper(program_data, item, *args, **kwargs):
+        try:
+            return func(item, *args, **kwargs)
+        except ValueError as e:
+            add_warning(e, program_data, item)
+            return 0
+    return wrapper
+
+@get_credits_decorator
+def get_container_credits(item: dict) -> int:
     """
     Get the number of credits in this requirement.
     If there are no attached credits, returns 0
@@ -398,9 +524,25 @@ def get_credits(program_data: dict, item: dict) -> int:
     try:
         return int(item["credit_points_max"])
     except ValueError:
-        print(f"Warning: Couldn't find the number of credits for an item in program {program_data['code']}")
+        raise ValueError("Couldn't find the number of credits for item")
 
-    return 0
+
+@get_credits_decorator
+def get_string_credits(_: dict, notes: str) -> int:
+    """
+    Search for UOC conditions in the notes section of a limit rule
+    TODO: Is this method robust enough?
+    """
+    search_result = re.search(r"(\d+) *UOC", notes, flags = re.IGNORECASE)
+    if search_result is not None:
+        return int(search_result.group(1))
+    raise ValueError("Couldn't find the number of credits for item")
+
+
+def add_warning(w: Exception | str, program_data: dict, item: dict) -> None:
+    warning = f"{w} in program {program_data['title']} ({program_data['code']}) in section titled '{item['title']}'"
+    program_data["processing_warnings"].append(warning)
+    print(f"Warning: {warning}")
 
 
 if __name__ == "__main__":
