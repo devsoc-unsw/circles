@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { BarsOutlined } from "@ant-design/icons";
 import {
   Menu, Layout, Typography, Button, Drawer,
@@ -9,6 +9,8 @@ import useMediaQuery from "../../hooks/useMediaQuery";
 import circlesLogo from "../../assets/circlesLogo.svg";
 import "./index.less";
 import PlannerCart from "../PlannerCart";
+import { inDev } from "../../constants";
+import ThemeToggle from "../ThemeToggle";
 
 const menuStyles = {
   backgroundColor: "inherit",
@@ -39,10 +41,11 @@ const Header = () => {
   const isSmall = useMediaQuery("(max-width: 1000px)");
   const [showDrawer, setShowDrawer] = useState(false);
   const [current, setCurrent] = useState(getCurrentPath());
+  const url = useLocation();
 
   useEffect(() => {
     setCurrent(getCurrentPath());
-  }, []);
+  }, [url]);
 
   return (
     <Layout className="header">
@@ -78,13 +81,17 @@ const Header = () => {
               <span>Term Planner</span>
               <Link to="/term-planner" />
             </Menu.Item>
-            {/* <Menu.Item key="progression-checker">
-              <span>Progression Checker</span>
-              <Link to="/progression-checker"></Link>
-            </Menu.Item> */}
+            {
+              inDev && (
+                <Menu.Item key="progression-checker">
+                  <span>Progression Checker</span>
+                  <Link to="/progression-checker" />
+                </Menu.Item>
+              )
+            }
           </Menu>
           <PlannerCart />
-          {/* <ThemeToggle /> */}
+          { inDev && <ThemeToggle /> }
         </div>
       )}
 
