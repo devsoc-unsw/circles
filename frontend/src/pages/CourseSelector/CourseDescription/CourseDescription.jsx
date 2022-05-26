@@ -233,7 +233,14 @@ const CourseDescription = () => {
               <Title level={3} className="text">
                 Handbook
               </Title>
-              <a href={`https://www.handbook.unsw.edu.au/${course.study_level.toLowerCase()}/courses/2022/${course.code}/`}>View {course.code} in handbook</a>
+              <a
+                href={
+                Object.entries(course).length !== 0
+                && `https://www.handbook.unsw.edu.au/${course.study_level.toLowerCase()}/courses/2022/${course.code}/`
+                }
+              >
+                View {course.code} in handbook
+              </a>
             </div>
             {Object.keys(courseCapacity).length !== 0 && (
             <div>
