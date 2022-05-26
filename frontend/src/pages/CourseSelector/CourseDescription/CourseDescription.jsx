@@ -10,12 +10,12 @@ import axiosRequest from "../../../axios";
 import { setCourse } from "../../../reducers/coursesSlice";
 import AddToPlannerButton from "./AddToPlannerButton";
 import CourseAttribute from "./CourseAttribute";
-import "./index.less";
 import LoadingSkeleton from "./LoadingSkeleton";
 import CourseTag from "../../../components/CourseTag";
 import Collapsible from "../../../components/Collapsible";
 import ProgressBar from "../../../components/ProgressBar";
 import { TERM, TIMETABLE_API_URL } from "../../../constants";
+import "./index.less";
 
 const { Title, Text } = Typography;
 
@@ -85,12 +85,14 @@ const CourseDescription = () => {
       }
     };
 
+    const fetchCourseData = async () => {
+      await Promise.all([getCourse(), getPathToCoursesById(id), getCourseCapacityById(id)]);
+      setPageLoaded(true);
+    };
+
     if (id) {
-      getCourse();
-      getPathToCoursesById(id);
-      getCourseCapacityById(id);
+      fetchCourseData();
     }
-    setPageLoaded(true);
   }, [id]);
 
   if (tabs.length === 0) {
@@ -229,31 +231,30 @@ const CourseDescription = () => {
                 })
                 : "None"}
             </div>
-            <div className="cs-course-attr">
-              <Title level={3} className="text">
-                Handbook
-              </Title>
-              <a
-                href={
-                Object.entries(course).length !== 0
-                && `https://www.handbook.unsw.edu.au/${course.study_level.toLowerCase()}/courses/2022/${course.code}/`
-                }
-              >
-                View {course.code} in handbook
-              </a>
-            </div>
+            {
+              course.study_level && (
+              <div className="cs-course-attr">
+                <Title level={3} className="text">
+                  UNSW Handbook
+                </Title>
+                <a href={`https://www.handbook.unsw.edu.au/${course.study_level.toLowerCase()}/courses/2022/${course.code}/`}>
+                  View {course.code} in handbook
+                </a>
+              </div>
+              )
+            }
             {Object.keys(courseCapacity).length !== 0 && (
-            <div>
-              <Title level={3} className="text cs-final-attr">
-                Capacity
-              </Title>
-              <p className="text">{courseCapacity.capacity} Students for {TERM}</p>
-              <ProgressBar
-                progress={
-                  Math.round((courseCapacity.enrolments / courseCapacity.capacity) * 1000) / 10
-                }
-              />
-            </div>
+              <div>
+                <Title level={3} className="text cs-final-attr">
+                  Capacity
+                </Title>
+                <Text className="text">{courseCapacity.capacity} Students for {TERM}</Text>
+                <ProgressBar
+                  progress={
+                    Math.round((courseCapacity.enrolments / courseCapacity.capacity) * 1000) / 10
+                  }
+                />
+              </div>
             )}
           </div>
         </>
