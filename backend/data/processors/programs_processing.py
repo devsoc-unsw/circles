@@ -148,14 +148,14 @@ def initialise_program(program: dict) -> dict:
     }
 
 
-def add_component_data(program_data: dict, item: dict, program_name = None) -> None:
+def add_component_data(program_data: dict, item: dict, program_name = "") -> None:
     """
     Adds data within a given item to a given program recursively
     """
     if any(key not in item for key in ("vertical_grouping", "title")):
         return
 
-    program_name = find_program_name(program_data, item) if program_name is None else program_name
+    program_name = find_program_name(program_data, item) if program_name == "" else program_name
 
     # Figure out what type of requirement we're looking at,
     # and add it to the appropriate spot in the program data
@@ -220,6 +220,7 @@ def find_program_name(program_data: dict, item: dict) -> str:
 
     # Couldn't find a match :(
     add_warning(f"Couldn't find any of names ({') or ('.join(program_names)})", program_data, item)
+    return ""
 
 
 def is_substring(needle: str, haystack: str) -> bool:
@@ -542,6 +543,9 @@ def faculty_manual_fixes(faculty: str) -> str:
 
 
 def get_credits_decorator(func):
+    """
+    TODO: add docstring for this function
+    """
     def wrapper(program_data, item, *args, **kwargs):
         try:
             return func(item, *args, **kwargs)
@@ -580,6 +584,9 @@ def get_string_credits(_: dict, notes: str) -> int:
 
 
 def add_warning(w: Exception | str, program_data: dict, item: dict) -> None:
+    """
+    TODO: add docstring to this function
+    """
     warning = f"{w} in program {program_data['title']} ({program_data['code']}) in section titled '{item['title']}'"
     program_data["processing_warnings"].append(warning)
     print(f"Warning: {warning}")
