@@ -91,7 +91,7 @@ const Header = () => {
             }
           </Menu>
           <PlannerCart />
-          { inDev && <ThemeToggle /> }
+          {inDev && <ThemeToggle />}
         </div>
       )}
 

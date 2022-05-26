@@ -37,7 +37,7 @@ const App = () => {
                 <Header />
                 <CourseSelector />
               </div>
-                )}
+            )}
           />
           <Route
             path="/term-planner"
@@ -46,7 +46,7 @@ const App = () => {
                 <Header />
                 <TermPlanner />
               </div>
-                )}
+            )}
           />
           <Route
             path="/progression-checker"
@@ -55,7 +55,7 @@ const App = () => {
                 <Header />
                 <ProgressionChecker />
               </div>
-                )}
+            )}
           />
           <Route
             path="*"
