@@ -38,6 +38,30 @@ body {
   margin: 0px;
 }
 
+@media only screen and (max-width: 470px) {
+  .text404 {
+    position: absolute;
+    top: 44%;
+    left: 41%;
+    margin-right: -50%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  #headd {
+    font-size: 5em;
+    color: gray;
+    margin: 0px;
+  }
+
+  #page-text {
+    font-size: 1em;
+    color: gray;
+    margin: 0px;
+  }
+}
+
 .main-con {
   background-color: black;
   opacity: 0.1;
@@ -56,4 +80,27 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  animation: cirmove 2s linear infinite;
+}
+
+.box-anti {
+  margin: 10px;
+  margin-right: 50px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: cirantimove 2s linear infinite;
+}
+
+@keyframes cirmove {
+  100% {
+    transform: rotate(1turn);
+  }
+}
+
+@keyframes cirantimove {
+  100% {
+    transform: rotate(-1turn);
+  }
 }
