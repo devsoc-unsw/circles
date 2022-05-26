@@ -43,29 +43,55 @@ LIMIT_RULE_KEY = "limit_rules"
 PRESCRIBED_ELECTIVE_KEY = "prescribed_electives"
 OTHER_KEY = "other"
 
-
-# Set of current course codes in programs_processed.json
-TEST_PROGS = (
+CS_PROGS = (
+    "3673", # Ecomonics major is optional, no general education, program constraints(?), Introductory Business Course, UNSW Business Electives
+    "3674",
     "3778",
-    "3707",
-    "3970",
-    "3502",
-    "3053",
-    "3979",
-    "3959",
-    "3181",
-    "3543",
-    "3586",
-    "3805",
-    "3871",
-    "3956",
-    "3789", # Science/CompSci
-    "3784", # Commerce/CompSci
-    "3785", # Engineering(Honours)/CompSci
-    "3783", # CompSci / Arts
-    "3786", # CompSci / Law
+    "3781",
+    "3782",
+    "3783",
+    "3784",
+    "3785",
+    "3786",
+    "3789",
+    "3791",
+    "4515",
+    "7003",
+    "7022"
 )
 
+ENG_PROGS = (
+    "3131",
+    "3132",
+    "3133",
+    "3134",
+    "3707",
+    "3736",
+    "3761",
+    "3762",
+    "3764",
+    "3765",
+    "3766",
+    "3767",
+    "3768",
+    "3769",
+    "3773",
+    "3776",
+    "3785",
+    "3961",
+    "4471",
+    "4472",
+    "4473",
+    "4474",
+    "4475",
+    "4476",
+    "4477",
+    "4478",
+    "4515"
+)
+
+TESTING_MODE = True
+TEST_PROGS = CS_PROGS
 
 def process_prg_data() -> None:
     """
@@ -74,21 +100,20 @@ def process_prg_data() -> None:
     data = read_data(INPUT_PATH)
 
     processed_data = {}
-    for program in TEST_PROGS:
+    for program_code, formatted_data in data.items():
         # Get program specific data
-        formatted_data = data[program]
-        program_data = initialise_program(formatted_data)
+        if not TESTING_MODE or program_code in TEST_PROGS:
+            program_data = initialise_program(formatted_data)
 
-        # Loop through items in curriculum structure and add to the program data
-        for item in formatted_data["structure"]:
-            add_component_data(program_data, item)
+            # Loop through items in curriculum structure and add to the program data
+            for item in formatted_data["structure"]:
+                add_component_data(program_data, item)
 
-        # Order dict alphabetically
-        OrderedDict(sorted(program_data["components"].items(), key=lambda t: t[0]))
+            # Order dict alphabetically
+            OrderedDict(sorted(program_data["components"].items(), key=lambda t: t[0]))
 
-        code = program_data["code"]
-        processed_data[code] = program_data
-
+            code = program_data["code"]
+            processed_data[code] = program_data
     write_data(processed_data, OUTPUT_PATH)
 
 
@@ -147,6 +172,7 @@ def add_component_data(program_data: dict, item: dict, program_name = None) -> N
         add_limit_rule(program_data, item)
     if is_prescribed_elective(item):
         add_prescribed_elective(program_data, item)
+        return
     if is_other(item):
         add_other(program_data, item)
 
@@ -345,7 +371,7 @@ def add_limit_rule(program_data: dict, item: dict) -> None:
     requirements = format_course_strings(requirements_str)
 
     program_data["components"][LIMIT_RULE_KEY].append({
-        "courses": process_any_requirement(program_data, requirements, item),
+        "courses": process_any_requirements(program_data, requirements, item),
         "title": item["title"],
         "credits_to_complete": credits_to_complete,
         "levels": [], # TODO
@@ -359,7 +385,7 @@ def add_prescribed_elective(program_data: dict, item: dict) -> None:
     """
     requirements = [ course["description"] for course in item["dynamic_relationship"] ]
     program_data["components"][PRESCRIBED_ELECTIVE_KEY].append({
-        "courses": process_any_requirement(program_data, requirements, item),
+        "courses": process_any_requirements(program_data, requirements, item),
         "title": item["title"],
         "credits_to_complete": get_container_credits(program_data, item),
         "levels": [], # TODO: What is this?
@@ -373,7 +399,7 @@ def add_other(program_data: dict, item: dict) -> None:
     """
     requirements = [ course["description"] for course in item["dynamic_relationship"] ]
     program_data["components"][OTHER_KEY].append({
-        "courses": process_any_requirement(program_data, requirements, item),
+        "courses": process_any_requirements(program_data, requirements, item),
         "title": item["title"],
         "credits_to_complete": get_container_credits(program_data, item),
         "levels": [], # TODO: What is this?
@@ -391,11 +417,19 @@ def add_core_course_tab(cc:dict, item: dict) -> None:
         cc["courses"][combined_key] = [ course["academic_item_name"] for course in item["relationship"] ]
     else:
         for course in item["relationship"]:
-            code = course["academic_item_code"]
-            cc["courses"][code] = course["academic_item_name"]
+            # Check if it's just a normal course
+            if course["academic_item_code"] is not None:
+                # Normal course, add it
+                code = course["academic_item_code"]
+                cc["courses"][code] = course["academic_item_name"]
+            else:
+                # It's of the form 'any course matching the pattern ########'
+                code = course["parent_record"][-8:].rstrip("#")
+                cc["courses"][code] = course["parent_record"][-40:]
 
 
-def process_any_requirement(program_data: dict, requirements: list[str], item: dict) -> dict:
+
+def process_any_requirements(program_data: dict, requirements: list[str], item: dict) -> dict:
     """
     Processes list of course (as strings) requirements
     that are of the form 'any <faculty or type of course> course'
