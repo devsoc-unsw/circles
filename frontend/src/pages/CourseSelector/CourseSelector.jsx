@@ -64,9 +64,9 @@ const CourseSelector = () => {
         <div className="cs-top-cont">
           <div className="cs-degree-cont">
             {programCode !== "" && (
-            <h1 className="text">
-              {programCode} - {programName}
-            </h1>
+              <h1 className="text">
+                {programCode} - {programName}
+              </h1>
             )}
           </div>
           <CourseSearchBar />
