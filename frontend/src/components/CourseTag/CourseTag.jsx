@@ -12,7 +12,7 @@ const CourseTag = ({ name }) => {
 
   return (
     <Tag onClick={handleClick} className="text tag">
-      { name }
+      {name}
     </Tag>
   );
 };

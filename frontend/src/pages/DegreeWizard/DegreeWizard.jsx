@@ -103,32 +103,32 @@ const DegreeWizard = () => {
 
         <div className="steps-container">
           {currStep >= 1 && (
-          <div className="step-content" id="Year">
-            <YearStep incrementStep={incrementStep} currStep={currStep} />
-          </div>
+            <div className="step-content" id="Year">
+              <YearStep incrementStep={incrementStep} currStep={currStep} />
+            </div>
           )}
           {currStep >= 2 && (
-          <div className="step-content" id="Degree">
-            <DegreeStep incrementStep={incrementStep} currStep={currStep} />
-          </div>
+            <div className="step-content" id="Degree">
+              <DegreeStep incrementStep={incrementStep} currStep={currStep} />
+            </div>
           )}
           {currStep >= 3 && (
-          <div className="step-content" id="Specialisation">
-            <SpecialisationStep
-              incrementStep={incrementStep}
-              currStep={currStep}
-            />
-          </div>
+            <div className="step-content" id="Specialisation">
+              <SpecialisationStep
+                incrementStep={incrementStep}
+                currStep={currStep}
+              />
+            </div>
           )}
           {currStep >= 4 && (
-          <div className="step-content" id="Minor">
-            <MinorStep incrementStep={incrementStep} currStep={currStep} />
-          </div>
+            <div className="step-content" id="Minor">
+              <MinorStep incrementStep={incrementStep} currStep={currStep} />
+            </div>
           )}
           {currStep >= 5 && (
-          <div className="step-content" id="Start Browsing">
-            <StartBrowsingStep />
-          </div>
+            <div className="step-content" id="Start Browsing">
+              <StartBrowsingStep />
+            </div>
           )}
         </div>
       </div>
