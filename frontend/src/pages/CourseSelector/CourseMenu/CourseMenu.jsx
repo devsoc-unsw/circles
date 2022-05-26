@@ -224,7 +224,7 @@ const MenuItem = ({
         onClick={handleClick}
       >
         <div className="menuItemContainer">
-          <Tooltip title={`${courseTitle}`} placement="topLeft">
+          <Tooltip title={courseTitle} placement="topLeft">
             <div>
               {`${courseCode} `}
               {!accurate && (
