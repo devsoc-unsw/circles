@@ -237,7 +237,11 @@ const CourseDescription = () => {
                 <Title level={3} className="text">
                   UNSW Handbook
                 </Title>
-                <a href={`https://www.handbook.unsw.edu.au/${course.study_level.toLowerCase()}/courses/2022/${course.code}/`}>
+                <a
+                  href={`https://www.handbook.unsw.edu.au/${course.study_level.toLowerCase()}/courses/2022/${course.code}/`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   View {course.code} in handbook
                 </a>
               </div>
