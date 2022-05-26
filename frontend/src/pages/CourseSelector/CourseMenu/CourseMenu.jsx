@@ -69,7 +69,7 @@ const CourseMenu = ({ structure, showLockedCourses }) => {
               // add UOC to curr
               if (planner.courses[courseCode]) {
                 newCoursesUnits[group][subgroup].curr
-                    += planner.courses[courseCode].UOC;
+                  += planner.courses[courseCode].UOC;
               }
             });
           } else {
@@ -124,7 +124,7 @@ const CourseMenu = ({ structure, showLockedCourses }) => {
       {isPageLoaded
         ? (
           <Menu
-            onClick={() => {}}
+            onClick={() => { }}
             defaultSelectedKeys={[]}
             selectedKeys={[]}
             defaultOpenKeys={[Object.keys(menuData)[0]]}
