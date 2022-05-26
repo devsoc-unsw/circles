@@ -262,13 +262,13 @@ def getStructure(
     structure = {}
 
     if major:
-        majors = major.split("+") if "+" in major else [major]
-        for m in majors:
+        majrs = major.split("+") if "+" in major else [major]
+        for m in majrs:
             addSpecialisation(structure, m, "Major")
 
     if minor:
-        minors = minor.split("+") if "+" in minor else [minor]
-        for m in minors:
+        minrs = minor.split("+") if "+" in minor else [minor]
+        for m in minrs:
             addSpecialisation(structure, minor, "Minor")
 
     # add details for program code
