@@ -11,7 +11,7 @@ const { Title } = Typography;
 const MinorStep = ({ incrementStep, currStep }) => {
   const dispatch = useDispatch();
   const { minor, programCode } = useSelector((store) => store.degree);
-  const [options, setOptions] = useState({});
+  const [options, setOptions] = useState({ someProgramName: { specs: { major: "major data etc" } } });
 
   const fetchAllMinors = useCallback(async () => {
     const res = await axios.get(`/programs/getMinors/${programCode}`);
@@ -56,10 +56,10 @@ const MinorStep = ({ incrementStep, currStep }) => {
             className="step-submenu"
             mode="inline"
           >
-            {Object.keys(options[sub]).map((key) => (
+            {Object.keys(options[sub].specs).map((key) => (
               key !== "notes" && (
                 <Menu.Item className="text" key={key}>
-                  {key} {options[sub][key]}
+                  {key} {options[sub].specs[key]}
                 </Menu.Item>
               )))}
           </Menu.SubMenu>

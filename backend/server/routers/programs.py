@@ -263,22 +263,25 @@ def getStructure(
 
     if major:
         majors = major.split("+") if "+" in major else [major]
-
         for m in majors:
             addSpecialisation(structure, m, "Major")
 
     if minor:
-        addSpecialisation(structure, minor, "Minor")
+        minors = minor.split("+") if "+" in minor else [minor]
+        for m in minors:
+            addSpecialisation(structure, minor, "Minor")
 
     # add details for program code
     programsResult = programsCOL.find_one({"code": programCode})
     if not programsResult:
+        print(programCode)
         raise HTTPException(
             status_code=400, detail="Program code was not found")
 
     structure['General'] = {}
-    for container in programsResult['components']['non_spec_data']:
-        addSubgroupContainer(structure, "General", container, [])
+    with contextlib.suppress(KeyError):
+        for container in programsResult['components']['non_spec_data']:
+            addSubgroupContainer(structure, "General", container, [])
     ''' 
     structure["General"] = {}
     for name, data in programsResult["components"]["NonSpecialisationData"].items():
