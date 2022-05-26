@@ -53,8 +53,8 @@ const DraggableCourse = ({ code, index }) => {
             style={{
               ...provided.draggableProps.style,
             }}
-            className={`course ${isSummerEnabled && "summerViewCourse"} 
-            ${isDragDisabled && " dragDisabledCourse"} 
+            className={`course ${isSummerEnabled && "summerViewCourse"}
+            ${isDragDisabled && " dragDisabledCourse"}
             ${isDragDisabled && !isUnlocked && " disabledWarning"}
             ${(!supressed && (!isUnlocked || !isOffered)) && " warning"}`}
             data-tip
