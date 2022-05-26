@@ -45,7 +45,7 @@ def getPrograms():
     """ Fetch all the programs the backend knows about in the format of { code: title } """
     # return {"programs": {q["code"]: q["title"] for q in programsCOL.find()}}
     # TODO On deployment, DELETE RETURN BELOW and replace with the return above
-    return {"programs": {"3778": "Computer Science", 
+    return {"programs": {"3778": "Computer Science",
                         "3784": "Commerce / Computer Science",
                         "3789": "Science / Computer Science",
                         }}
@@ -64,7 +64,7 @@ def getPrograms():
             "content": {
                 "application/json": {
                     "example": {
-                        "majors": { 
+                        "majors": {
                             "Computer Science": {
                                 "COMPS1": "Computer Science (Embedded Systems)",
                                 "COMPJ1": "Computer Science (Programming Languages)",
@@ -144,7 +144,7 @@ def convertSubgroupObjectToCoursesDict(object: str, description: str|list[str]) 
     """ Gets a subgroup object (format laid out in the processor) and fetches the exact courses its referring to """
     if " or " in object:
         return {c: description[index] for index, c in enumerate(object.split(" or "))}
-    elif not re.match(r"[A-Z]{4}[0-9]{4}", object):
+    if not re.match(r"[A-Z]{4}[0-9]{4}", object):
         return regex_search(object)
     else:
         return {object: description}
@@ -269,7 +269,7 @@ def getStructure(
     if minor:
         minrs = minor.split("+") if "+" in minor else [minor]
         for m in minrs:
-            addSpecialisation(structure, minor, "Minor")
+            addSpecialisation(structure, m, "Minor")
 
     # add details for program code
     programsResult = programsCOL.find_one({"code": programCode})
@@ -282,24 +282,5 @@ def getStructure(
     with contextlib.suppress(KeyError):
         for container in programsResult['components']['non_spec_data']:
             addSubgroupContainer(structure, "General", container, [])
-    ''' 
-    structure["General"] = {}
-    for name, data in programsResult["components"]["NonSpecialisationData"].items():
-        data["UOC"] = (
-            data["credits_to_complete"] if "credits_to_complete" in data else -1
-        )
-
-        with contextlib.suppress(KeyError):
-            del data["type"]
-            del data["credits_to_complete"]
-        structure["General"][name] = data
-    with contextlib.suppress(KeyError):
-        structure["General"]["Flexible Education"] = {
-            "UOC": programsResult["components"]["FE"]["credits_to_complete"]
-        }
-        structure["General"]["General Education"] = {
-            "UOC": programsResult["components"]["GE"]["credits_to_complete"]
-        }
-    '''
 
     return {"structure": structure}
