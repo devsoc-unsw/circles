@@ -9,6 +9,8 @@ import useMediaQuery from "../../hooks/useMediaQuery";
 import circlesLogo from "../../assets/circlesLogo.svg";
 import "./index.less";
 import PlannerCart from "../PlannerCart";
+import { inDev } from "../../constants";
+import ThemeToggle from "../ThemeToggle";
 
 const menuStyles = {
   backgroundColor: "inherit",
@@ -79,13 +81,17 @@ const Header = () => {
               <span>Term Planner</span>
               <Link to="/term-planner" />
             </Menu.Item>
-            {/* <Menu.Item key="progression-checker">
-              <span>Progression Checker</span>
-              <Link to="/progression-checker"></Link>
-            </Menu.Item> */}
+            {
+              inDev && (
+                <Menu.Item key="progression-checker">
+                  <span>Progression Checker</span>
+                  <Link to="/progression-checker" />
+                </Menu.Item>
+              )
+            }
           </Menu>
           <PlannerCart />
-          {/* <ThemeToggle /> */}
+          {inDev && <ThemeToggle />}
         </div>
       )}
 

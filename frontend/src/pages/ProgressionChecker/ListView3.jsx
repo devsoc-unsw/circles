@@ -11,19 +11,19 @@ const ListView = ({ isLoading, degree, progressioncourses }) => {
     ) : (
       <div>
         {degree.concentrations
-            && degree.concentrations.map((concentration) => (
-              <div
-                className="listPage"
-                id={concentration.name}
-                key={concentration.name}
-              >
-                <Title className="text">{concentration.type.charAt(0).toUpperCase() + concentration.type.slice(1)} ({concentration.name})</Title>
-                <CourseComponents
-                  progressioncourses={progressioncourses}
-                  type={concentration.type}
-                />
-              </div>
-            ))}
+          && degree.concentrations.map((concentration) => (
+            <div
+              className="listPage"
+              id={concentration.name}
+              key={concentration.name}
+            >
+              <Title className="text">{concentration.type.charAt(0).toUpperCase() + concentration.type.slice(1)} ({concentration.name})</Title>
+              <CourseComponents
+                progressioncourses={progressioncourses}
+                type={concentration.type}
+              />
+            </div>
+          ))}
       </div>
     )
   );

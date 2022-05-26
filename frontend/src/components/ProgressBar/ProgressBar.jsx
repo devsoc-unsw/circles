@@ -1,25 +1,19 @@
 import React from "react";
-import "./progressBar.less";
+import { Progress } from "antd";
 
-const ProgressBar = ({ progress, height }) => {
+const ProgressBar = ({ progress }) => {
   let bgColor = "#3cb371";
-  if (progress >= 45) {
+  if (progress >= 75) {
+    bgColor = "#fe6f5e";
+  } else if (progress >= 45) {
     bgColor = "#ffa500";
-  } else if (progress >= 75) {
-    (bgColor = "#fe6f5e");
   }
 
   return (
-    <div className="progressBarWrapper" height={height}>
-      <div className="progressBar" width={progress}>
-        <span
-          className="progressText"
-          backgroundColor={bgColor}
-        >{`${progress}%`}
-        </span>
-      </div>
-    </div>
+    <Progress
+      strokeColor={bgColor}
+      percent={progress}
+    />
   );
 };
-
 export default ProgressBar;

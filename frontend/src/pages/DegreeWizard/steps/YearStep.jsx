@@ -27,9 +27,9 @@ const YearStep = ({ incrementStep, currStep }) => {
           What years do you start and finish?
         </Title>
         {nextStep && currStep === 1 && (
-        <Button type="primary" onClick={incrementStep}>
-          Next
-        </Button>
+          <Button type="primary" onClick={incrementStep}>
+            Next
+          </Button>
         )}
       </div>
       <RangePicker

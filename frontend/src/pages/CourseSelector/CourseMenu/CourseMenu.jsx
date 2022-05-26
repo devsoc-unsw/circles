@@ -68,7 +68,7 @@ const CourseMenu = ({ structure, showLockedCourses }) => {
               // add UOC to curr
               if (planner.courses[courseCode]) {
                 newCoursesUnits[group][subgroup].curr
-                    += planner.courses[courseCode].UOC;
+                  += planner.courses[courseCode].UOC;
               }
             });
           } else {
@@ -123,7 +123,7 @@ const CourseMenu = ({ structure, showLockedCourses }) => {
       {isPageLoaded
         ? (
           <Menu
-            onClick={() => {}}
+            onClick={() => { }}
             defaultSelectedKeys={[]}
             selectedKeys={[]}
             defaultOpenKeys={[Object.keys(menuData)[0]]}
@@ -146,16 +146,16 @@ const CourseMenu = ({ structure, showLockedCourses }) => {
                     <AnimatePresence initial={false}>
                       {subGroupEntry.map(
                         (course) => (course.unlocked || showLockedCourses) && (
-                        <MenuItem
-                          selected={planner.courses[course.courseCode] !== undefined}
-                          courseCode={course.courseCode}
-                          accurate={course.accuracy}
-                          unlocked={course.unlocked}
-                          setActiveCourse={setActiveCourse}
-                          activeCourse={activeCourse}
-                          subGroup={subGroup}
-                          key={`${course.courseCode}-${group}`}
-                        />
+                          <MenuItem
+                            selected={planner.courses[course.courseCode] !== undefined}
+                            courseCode={course.courseCode}
+                            accurate={course.accuracy}
+                            unlocked={course.unlocked}
+                            setActiveCourse={setActiveCourse}
+                            activeCourse={activeCourse}
+                            subGroup={subGroup}
+                            key={`${course.courseCode}-${group}`}
+                          />
                         ),
                       )}
                     </AnimatePresence>

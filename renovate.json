@@ -5,9 +5,14 @@
   "labels": ["dependencies"],
   "packageRules": [
     {
-      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "matchUpdateTypes": ["minor", "pin", "digest"],
       "automerge": true,
       "automergeStrategy": "branch"
+    },
+    {
+      "matchUpdateTypes": ["patch"],
+      "groupName": "weekly patch updates",
+      "schedule": ["before 5am every monday"]
     }
   ]
 }

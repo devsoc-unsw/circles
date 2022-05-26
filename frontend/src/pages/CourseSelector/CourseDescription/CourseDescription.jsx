@@ -62,6 +62,7 @@ const CourseDescription = () => {
           data.classes[i].activity === "Lecture"
           || data.classes[i].activity === "Seminar"
           || data.classes[i].activity === "Thesis Research"
+          || data.classes[i].activity === "Project"
         ) {
           enrolmentCapacityData.enrolments
             += data.classes[i].courseEnrolment.enrolments;
@@ -79,12 +80,14 @@ const CourseDescription = () => {
       );
       if (!err) {
         getCapacityAndEnrolment(data);
+      } else {
+        setCourseCapacity({});
       }
     };
 
-    setPageLoaded(false);
     if (id) {
       getCourse();
+      getCourseCapacityById(id);
       getPathToCoursesById(id);
       getCourseCapacityById(id);
     }
@@ -212,19 +215,40 @@ const CourseDescription = () => {
             {courseAttributesData.map(({ title, content }) => (
               content && <CourseAttribute title={title} content={content} />
             ))}
-            <Title level={3} className="text cs-final-attr">
-              Offering Terms
-            </Title>
-            {course.terms
-              ? course.terms.map((term, index) => {
-                const termNo = term.slice(1);
-                return (
-                  <Tag key={index} className="text">
-                    {term === "T0" ? "Summer" : `Term ${termNo}`}
-                  </Tag>
-                );
-              })
-              : "None"}
+            <div className="cs-course-attr">
+              <Title level={3} className="text cs-final-attr">
+                Offering Terms
+              </Title>
+              {course.terms
+                ? course.terms.map((term, index) => {
+                  const termNo = term.slice(1);
+                  return (
+                    <Tag key={index} className="text">
+                      {term === "T0" ? "Summer" : `Term ${termNo}`}
+                    </Tag>
+                  );
+                })
+                : "None"}
+            </div>
+            <div className="cs-course-attr">
+              <Title level={3} className="text">
+                Handbook
+              </Title>
+              <a href={`https://www.handbook.unsw.edu.au/${course.study_level.toLowerCase()}/courses/2022/${course.code}/`}>View {course.code} in handbook</a>
+            </div>
+            {Object.keys(courseCapacity).length !== 0 && (
+            <div>
+              <Title level={3} className="text cs-final-attr">
+                Capacity
+              </Title>
+              <p className="text">{courseCapacity.capacity} Students for {CONFIG.REACT_APP_TERM}</p>
+              <ProgressBar
+                progress={
+                  Math.round((courseCapacity.enrolments / courseCapacity.capacity) * 1000) / 10
+                }
+              />
+            </div>
+            )}
           </div>
           {courseCapacity !== {} && (
             <div>
