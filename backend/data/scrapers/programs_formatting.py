@@ -9,20 +9,20 @@ Within 'contentLets', relevant info includes:
  - code (i.e. unique identifier for program)
  - title (e.g. 'Accounting')
  - data (see below)
- - CurriculumStructure (see below)
+ - curriculum_structure (see below)
  - additionalInfo
 
 Step in the data's journey:
-    [   ] Scrape raw data (programscraper.py)
-    [ X ] Format scraped data (programFormatting.py)
-    [   ] Customise formatted data (programProcessing.py)
+    [   ] Scrape raw data (programs_scraper.py)
+    [ X ] Format scraped data (programs_formatting.py)
+    [   ] Customise formatted data (programs_processing.py)
 """
 import json
 import re
 from data.utility import data_helpers
 
 
-def format_prg_data():
+def format_prg_data() -> None:
     """
     Get raw data for a program, format it and dump the output to
     programsFormatterRaw.json
@@ -30,23 +30,23 @@ def format_prg_data():
     # Get raw data
     raw_content = data_helpers.read_data("data/scrapers/programsPureRaw.json")
     # Initialise formatted data
-    programsFormatted = {}
+    programs_formatted = {}
     for program in raw_content:
         # Load summary infomation about program
         data = json.loads(program["data"])
         # Load infomation about program structure
-        curriculumStructure = json.loads(program["CurriculumStructure"])
+        curriculum_structure = json.loads(program["CurriculumStructure"])
 
         # Setup dictionary and add data
-        courseCode = initialiseProgram(programsFormatted, data)
-        addData(programsFormatted, courseCode, program, data, curriculumStructure)
+        course_code = init_program(programs_formatted, data)
+        add_data(programs_formatted, course_code, program, data, curriculum_structure)
 
     data_helpers.write_data(
-        programsFormatted, "data/scrapers/programsFormattedRaw.json"
+        programs_formatted, "data/scrapers/programsFormattedRaw.json"
     )
 
 
-def initialiseProgram(programsFormatted, data):
+def init_program(programs_formatted, data):
     """
     Initialises dictionary and assigns it to main programs dictionary
     """
@@ -61,17 +61,17 @@ def initialiseProgram(programsFormatted, data):
         "description": None,
     }
     # Get course code
-    courseCode = data["course_code"]
+    course_code = data["course_code"]
     # Map course code to content
-    programsFormatted[courseCode] = content
-    return courseCode
+    programs_formatted[course_code] = content
+    return course_code
 
 
-def addData(programsFormatted, courseCode, program, data, curriculumStructure):
+def add_data(programs_formatted, course_code, program, data, curriculum_structure):
     """Assign values from raw data to dictionary"""
 
     # Get program info via code
-    prog = programsFormatted[courseCode]
+    prog = programs_formatted[course_code]
     # Assign summary infomation from raw data
     prog["title"] = data.get("title")
     prog["code"] = data.get("course_code")
@@ -79,12 +79,13 @@ def addData(programsFormatted, courseCode, program, data, curriculumStructure):
     prog["studyLevel"] = program.get("studyLevelURL")
     prog["faculty"] = data["parent_academic_org"]["value"]
     prog["duration"] = data.get("full_time_duration")
-    prog["description"] = formatDescription(data.get("description"))
+    prog["overview"] = format_description(data.get("description"))
+    prog["structure_summary"] = format_description(data.get("structure_summary"))
     # Assign infomation about program cirriculum
-    format_curriculum(prog["structure"], curriculumStructure["container"])
+    format_curriculum(prog["structure"], curriculum_structure["container"])
 
 
-def formatDescription(description):
+def format_description(description: str) -> str:
     """
     (Lazily) formats description by getting rid of HTML tags, random unicode characters and multiple spaces.
     """
@@ -94,13 +95,14 @@ def formatDescription(description):
     # Get rid of random unicode characters
     description = re.sub(r"[^\x00-\x7F]+", " ", description)
 
-    # Get rid of double spaces
-    description = re.sub(r"\s+", " ", description)
+    # Get rid of double spaces and new lines mixed with spaces
+    description = re.sub(r"  +", "\n", description)
+    description = re.sub(r" *\n *", "\n", description)
 
     return description.strip()
 
 
-def format_curriculum(CurriculumStructure, currcontainer):
+def format_curriculum(curriculum_structure, currcontainer):
     """
     Filters through curiculum structure of program and saves neccesary
     infomation. Purpose of this is to make the information more readable
@@ -110,7 +112,7 @@ def format_curriculum(CurriculumStructure, currcontainer):
         info = {
             "vertical_grouping": item.get("vertical_grouping"),
             "title": item["title"],
-            "description": formatDescription(item.get("description")),
+            "description": format_description(item.get("description")),
             "credit_points": item.get("credit_points"),
             "credit_points_max": item.get("credit_points_max"),
             "parent_record": item["parent_record"]["value"],
@@ -135,7 +137,7 @@ def format_curriculum(CurriculumStructure, currcontainer):
             for course in item["dynamic_relationship"]:
                 item = {}
                 item["value"] = course["parent_record"]["value"]
-                item["description"] = formatDescription(course.get("description"))
+                item["description"] = format_description(course.get("description"))
                 info["dynamic_relationship"].append(item)
 
         elif "container" in item and item["container"] != []:
@@ -143,9 +145,9 @@ def format_curriculum(CurriculumStructure, currcontainer):
             format_curriculum(info["container"], item["container"])
 
         # Append data to cirrculum structure
-        CurriculumStructure.append(info)
+        curriculum_structure.append(info)
 
-    return CurriculumStructure
+    return curriculum_structure
 
 
 if __name__ == "__main__":

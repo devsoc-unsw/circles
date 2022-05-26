@@ -17,7 +17,6 @@ from data.processors.conditions_preprocessing import preprocess_conditions
 from data.processors.conditions_tokenising import tokenise_conditions
 from data.processors.courses_processing import process_course_data
 from data.processors.programs_processing import process_prg_data
-from data.processors.programs_processing_type1 import process_prg_data_type1
 from data.processors.specialisations_processing import customise_spn_data
 
 from data.scrapers.courses_formatting import format_course_data
@@ -26,6 +25,7 @@ from data.scrapers.programs_formatting import format_prg_data
 from data.scrapers.programs_scraper import scrape_prg_data
 from data.scrapers.specialisations_formatting import format_spn_data
 from data.scrapers.specialisations_scraper import scrape_spn_data
+from data.scrapers.faculty_code_formatting import format_code_data
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
@@ -60,11 +60,13 @@ def run_manual_fixes():
 
 
 run = {
+    "faculty": {
+        "format": format_code_data,
+    },
     "program": {
         "scrape": scrape_prg_data,
         "format": format_prg_data,
         "process": process_prg_data,
-        "type1": process_prg_data_type1,
     },
     "specialisation": {
         "scrape": scrape_spn_data,
