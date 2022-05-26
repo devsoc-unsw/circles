@@ -87,7 +87,6 @@ const CourseDescription = () => {
 
     if (id) {
       getCourse();
-      getCourseCapacityById(id);
       getPathToCoursesById(id);
       getCourseCapacityById(id);
     }
@@ -250,19 +249,6 @@ const CourseDescription = () => {
             </div>
             )}
           </div>
-          {courseCapacity !== {} && (
-            <div>
-              <Title level={3} className="text cs-final-attr">
-                Capacity
-              </Title>
-              <p className="text">{courseCapacity.capacity} students for {TERM}</p>
-              <ProgressBar
-                progress={Math.round((courseCapacity.enrolemnts / courseCapacity.capacity) * 100)}
-                height={20}
-              />
-            </div>
-          )}
-
         </>
       )}
     </div>
