@@ -1,3 +1,5 @@
+import { getMostRecentPastTerm } from "./pages/TermPlanner/validateTermPlanner";
+
 /**
  * IMPORTANT NOTE:
  *
@@ -12,6 +14,9 @@
 export const REDUX_PERSIST_VERSION = 0;
 
 export const FEEDBACK_LINK = "https://github.com/csesoc/Circles/issues?q=is%3Aissue+is%3Aopen";
+
+export const TERM = `${new Date().getFullYear()}-T${getMostRecentPastTerm()}`;
+export const TIMETABLE_API_URL = `https://timetable.csesoc.app/api/terms/${TERM}/courses`;
 
 // Global colors - currently only being used in LiquidProgressChart
 export const lightYellow = "#f9b01e";
