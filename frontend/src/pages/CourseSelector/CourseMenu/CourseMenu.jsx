@@ -58,6 +58,7 @@ const CourseMenu = ({ structure, showLockedCourses }) => {
             Object.keys(subgroupStructure.courses).forEach((courseCode) => {
               newMenu[group][subgroup].push({
                 courseCode,
+                title: subgroupStructure.courses[courseCode],
                 unlocked: !!courses[courseCode],
                 accuracy: courses[courseCode]
                   ? courses[courseCode].is_accurate
@@ -146,16 +147,17 @@ const CourseMenu = ({ structure, showLockedCourses }) => {
                     <AnimatePresence initial={false}>
                       {subGroupEntry.map(
                         (course) => (course.unlocked || showLockedCourses) && (
-                          <MenuItem
-                            selected={planner.courses[course.courseCode] !== undefined}
-                            courseCode={course.courseCode}
-                            accurate={course.accuracy}
-                            unlocked={course.unlocked}
-                            setActiveCourse={setActiveCourse}
-                            activeCourse={activeCourse}
-                            subGroup={subGroup}
-                            key={`${course.courseCode}-${group}`}
-                          />
+                        <MenuItem
+                          selected={planner.courses[course.courseCode] !== undefined}
+                          courseCode={course.courseCode}
+                          courseTitle={course.title}
+                          accurate={course.accuracy}
+                          unlocked={course.unlocked}
+                          setActiveCourse={setActiveCourse}
+                          activeCourse={activeCourse}
+                          subGroup={subGroup}
+                          key={`${course.courseCode}-${group}`}
+                        />
                         ),
                       )}
                     </AnimatePresence>
@@ -172,6 +174,7 @@ const CourseMenu = ({ structure, showLockedCourses }) => {
 const MenuItem = ({
   selected,
   courseCode,
+  courseTitle,
   activeCourse,
   setActiveCourse,
   accurate,
@@ -221,17 +224,19 @@ const MenuItem = ({
         onClick={handleClick}
       >
         <div className="menuItemContainer">
-          <div>
-            {`${courseCode} `}
-            {!accurate && (
-              <TooltipWarningIcon
-                text="We couldn't parse the requirement for this course. Please manually check if you have the correct prerequisites to unlock it."
-              />
-            )}
-            {!unlocked && <LockOutlined style={{ fontSize: "11px" }} />}
-          </div>
+          <Tooltip title={courseTitle} placement="topLeft">
+            <div>
+              {`${courseCode} `}
+              {!accurate && (
+                <TooltipWarningIcon
+                  text="We couldn't parse the requirement for this course. Please manually check if you have the correct prerequisites to unlock it."
+                />
+              )}
+              {!unlocked && <LockOutlined style={{ fontSize: "11px" }} />}
+            </div>
+          </Tooltip>
           {!selected && (
-            <Tooltip title="Add to Planner" placement="bottom">
+            <Tooltip title="Add to Planner" placement="top">
               <Button
                 onClick={(e) => addToPlanner(e, courseCode)}
                 size="small"
