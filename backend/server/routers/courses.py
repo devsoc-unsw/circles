@@ -8,7 +8,7 @@ from data.config import ARCHIVED_YEARS
 from data.utility.data_helpers import read_data
 from fastapi import APIRouter, HTTPException
 from server.database import archivesDB, coursesCOL
-from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, AffectedCourses,
+from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, Courses,
                                   CourseDetails, CoursesState,
                                   CoursesUnlockedWhenTaken, ProgramCourses, Structure,
                                   UserData, message)
@@ -326,7 +326,7 @@ def getLegacyCourse(year, courseCode):
     return result
 
 
-@router.post("/unselectCourse/{unselectedCourse}", response_model=AffectedCourses,
+@router.post("/unselectCourse/{unselectedCourse}", response_model=Courses,
             responses={
                 422: {"model": message, "description": "Unselected course query is required"},
                 400: {"model": message, "description": "Uh oh you broke me"},
@@ -353,6 +353,18 @@ def unselectCourse(userData: UserData, unselectedCourse: str):
     affectedCourses = User(fixUserData(userData.dict())).unselect_course(unselectedCourse)
 
     return {'affected_courses': affectedCourses}
+
+@router.get("/CourseChildren/{course}", response_model=Courses, 
+            responses = {
+                200 : {
+                    "courses": ["COMP1521", "COMP1531"] 
+                }
+            })
+def courseChildren(course: str):
+    """ fetches courses which are dependant on taking 'course' """
+    courses = [coursename for coursename, c in CONDITIONS.items() if c.is_path_to(course)]
+    return {"courses": courses}
+
 
 
 @router.post("/coursesUnlockedWhenTaken/{courseToBeTaken}", response_model=CoursesUnlockedWhenTaken,

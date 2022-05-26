@@ -103,8 +103,8 @@ class PlannerData(BaseModel):
     plan: list[list[dict]]
     mostRecentPastTerm: dict
 
-class AffectedCourses (BaseModel):
-    affected_courses: list[str]
+class Courses (BaseModel):
+    courses: list[str]
 
 minorInFE = ["3778"]
 minorInSpecialisation = ["3502", "3970"]
