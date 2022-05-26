@@ -14,6 +14,8 @@ import "./index.less";
 import LoadingSkeleton from "./LoadingSkeleton";
 import CourseTag from "../../../components/CourseTag";
 import Collapsible from "../../../components/Collapsible";
+import ProgressBar from "../../../components/ProgressBar";
+import { TERM, TIMETABLE_API_URL } from "../../../constants";
 
 const { Title, Text } = Typography;
 
@@ -26,13 +28,13 @@ const CourseDescription = () => {
   const { degree, planner } = useSelector((state) => state);
   const [pageLoaded, setPageLoaded] = useState(false);
   const [coursesPathTo, setCoursesPathTo] = useState({});
+  const [courseCapacity, setCourseCapacity] = useState({});
 
   useEffect(() => {
     const getCourse = async () => {
       const [data, err] = await axiosRequest("get", `/courses/getCourse/${id}`);
       if (!err) {
         dispatch(setCourse(data));
-        setPageLoaded(true);
       }
     };
 
@@ -50,11 +52,45 @@ const CourseDescription = () => {
       }
     };
 
-    setPageLoaded(false);
+    const getCapacityAndEnrolment = (data) => {
+      const enrolmentCapacityData = {
+        enrolments: 0,
+        capacity: 0,
+      };
+      for (let i = 0; i < data.classes.length; i++) {
+        if (
+          data.classes[i].activity === "Lecture"
+          || data.classes[i].activity === "Seminar"
+          || data.classes[i].activity === "Thesis Research"
+          || data.classes[i].activity === "Project"
+        ) {
+          enrolmentCapacityData.enrolments
+            += data.classes[i].courseEnrolment.enrolments;
+          enrolmentCapacityData.capacity
+            += data.classes[i].courseEnrolment.capacity;
+        }
+      }
+      setCourseCapacity(enrolmentCapacityData);
+    };
+
+    const getCourseCapacityById = async (c) => {
+      const [data, err] = await axiosRequest(
+        "get",
+        `${TIMETABLE_API_URL}/${c}`,
+      );
+      if (!err) {
+        getCapacityAndEnrolment(data);
+      } else {
+        setCourseCapacity({});
+      }
+    };
+
     if (id) {
       getCourse();
       getPathToCoursesById(id);
+      getCourseCapacityById(id);
     }
+    setPageLoaded(true);
   }, [id]);
 
   if (tabs.length === 0) {
@@ -104,9 +140,9 @@ const CourseDescription = () => {
             {
               course.is_legacy
               && (
-              <Text strong>
-                NOTE: this course is discontinued - if a current course exists, pick that instead
-              </Text>
+                <Text strong>
+                  NOTE: this course is discontinued - if a current course exists, pick that instead
+                </Text>
               )
             }
             <Collapsible
@@ -197,8 +233,28 @@ const CourseDescription = () => {
               <Title level={3} className="text">
                 Handbook
               </Title>
-              <a href={`https://www.handbook.unsw.edu.au/${course.study_level.toLowerCase()}/courses/2022/${course.code}/`}>View {course.code} in handbook</a>
+              <a
+                href={
+                Object.entries(course).length !== 0
+                && `https://www.handbook.unsw.edu.au/${course.study_level.toLowerCase()}/courses/2022/${course.code}/`
+                }
+              >
+                View {course.code} in handbook
+              </a>
             </div>
+            {Object.keys(courseCapacity).length !== 0 && (
+            <div>
+              <Title level={3} className="text cs-final-attr">
+                Capacity
+              </Title>
+              <p className="text">{courseCapacity.capacity} Students for {TERM}</p>
+              <ProgressBar
+                progress={
+                  Math.round((courseCapacity.enrolments / courseCapacity.capacity) * 1000) / 10
+                }
+              />
+            </div>
+            )}
           </div>
         </>
       )}

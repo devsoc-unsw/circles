@@ -50,8 +50,7 @@ const TermBox = ({
           <ul
             ref={provided.innerRef}
             {...provided.droppableProps}
-            className={`termBox ${
-              isOffered && isDragging && "droppable "
+            className={`termBox ${isOffered && isDragging && "droppable "
             } ${isSummerEnabled && "summerTermBox"} `}
           >
             {courses.map((code, index) => <DraggableCourse key={code} code={code} index={index} />)}

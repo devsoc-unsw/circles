@@ -28,9 +28,9 @@ const ListView = ({ isLoading, degree, checkercourses }) => {
           <Title className="text" level={3}>Discipline Electives</Title>
           <Space size={[20, 20]} wrap>
             {checkercourses.disciplineelectives
-            && checkercourses.disciplineelectives.map((course) => (
-              <Button className="checkerButton" type="primary" ghost>{course.name}</Button>
-            ))}
+              && checkercourses.disciplineelectives.map((course) => (
+                <Button className="checkerButton" type="primary" ghost>{course.name}</Button>
+              ))}
           </Space>
           <div className="space" />
           <Title className="text" level={3}>Free Electives</Title>
