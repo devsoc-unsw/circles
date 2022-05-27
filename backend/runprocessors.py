@@ -24,6 +24,7 @@ from data.scrapers.courses_formatting import format_course_data
 from data.scrapers.courses_scraper import scrape_course_data
 from data.scrapers.programs_formatting import format_prg_data
 from data.scrapers.programs_scraper import scrape_prg_data
+from data.scrapers.gened_formatting import format_gened_data
 from data.scrapers.gened_scraper import scrape_gened_data
 from data.scrapers.specialisations_formatting import format_spn_data
 from data.scrapers.specialisations_scraper import scrape_spn_data
@@ -69,6 +70,7 @@ run = {
     },
      "gened": {
         "scrape": scrape_gened_data,
+        "format": format_gened_data,
     },
     "specialisation": {
         "scrape": scrape_spn_data,
