@@ -1,12 +1,10 @@
-/* eslint-disable */
-
-import React, { useState } from "react";
-import { Modal , message } from "antd";
+import React, { useState, useEffect } from "react";
+import { Modal, message } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { Menu, Item, theme } from "react-contexify";
 import "react-contexify/dist/ReactContexify.css";
 import { useNavigate } from "react-router-dom";
-import { ConsoleSqlOutlined, DeleteFilled, InfoCircleFilled } from "@ant-design/icons";
+import { DeleteFilled, InfoCircleFilled } from "@ant-design/icons";
 import { FaEdit, FaRegCalendarTimes } from "react-icons/fa";
 import validateTermPlanner from "../validateTermPlanner";
 import { addTab } from "../../../reducers/courseTabsSlice";
@@ -14,23 +12,22 @@ import { removeCourse, unschedule, updateCourseMark } from "../../../reducers/pl
 import EditMarks from "../EditMarks";
 
 import "./index.less";
-import { setCourse } from "../../../reducers/coursesSlice";
 
 const ContextMenu = ({ code, plannedFor }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { years, startYear, completedTerm, courses } = useSelector((state) => state.planner);
+  const { years, startYear, completedTerm } = useSelector((state) => state.planner);
 
   const { programCode, majors, minor } = useSelector(
     (state) => state.degree,
   );
-  
+
   const handleDelete = () => {
     dispatch(removeCourse(code));
     validateTermPlanner(
       dispatch,
-      { years, startYear, completedTerms },
+      { years, startYear, completedTerm },
       { programCode, majors, minor },
     );
   };
@@ -56,45 +53,46 @@ const ContextMenu = ({ code, plannedFor }) => {
 
   const showEditMark = () => {
     setIsEditMarkVisible(true);
-  }
+  };
 
-  const validLetterGrades = ["FL", "PS", "CR", "DN", "HD"];
+  const validLetterGrades = ["SY", "PS", "CR", "DN", "HD"];
   const [markInputBuf, setMarkInputBuf] = useState(
-    useSelector((state) => state.planner.courses[code].mark));
-
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      handleConfirmEditMark();
-    }
-  }
+    useSelector((state) => state.planner.courses[code].mark),
+  );
 
   const handleConfirmEditMark = (mark) => {
-    const attemptedMark = (' ' + mark).slice(1).replace(" ", "");
-    console.log("pre:attempt", mark);
-    console.log("pos:attempt", attemptedMark);
-    
+    const attemptedMark = (` ${mark}`).slice(1).replace(" ", "");
     if (
-      (isNaN(attemptedMark) && !validLetterGrades.includes(attemptedMark))
+      (attemptedMark.isNaN && !validLetterGrades.includes(attemptedMark))
       || (parseFloat(attemptedMark) < 0 || parseFloat(attemptedMark) > 100)
     ) {
       return message.error("Could not update mark. Please enter a valid mark or letter grade");
     }
-    console.log("trying to dispatch: ", attemptedMark);
-    
-    console.log("updating", code, "with", attemptedMark);
     dispatch(updateCourseMark({
-      "code": code,
-      "mark": attemptedMark,
+      code,
+      mark: attemptedMark,
     }));
     setIsEditMarkVisible(false);
     // ! TODO: validateTermPlanner
     return message.success("Mark Updated");
-  }
+  };
+
+  const [markUpdatedQueued, setMarkUpdateQueued] = useState(false);
+  useEffect(() => {
+    if (markUpdatedQueued) {
+      setMarkUpdateQueued(false);
+      handleConfirmEditMark(markInputBuf);
+    }
+  });
+
+  const queueEditMark = () => {
+    setMarkUpdateQueued(true);
+  };
 
   const handleCancelEditMark = () => {
-    // setMarkInputBuf("");
     setIsEditMarkVisible(false);
-  }
+    setMarkUpdateQueued(false);
+  };
 
   return (
     <>
@@ -120,14 +118,14 @@ const ContextMenu = ({ code, plannedFor }) => {
         visible={isEditMarkVisible}
         onOk={handleConfirmEditMark}
         onCancel={handleCancelEditMark}
-        width="300px"// 
+        width="300px"
       >
         <EditMarks
           courseCode={code}
           inputBuffer={markInputBuf}
+          letterGrades={validLetterGrades}
           setInputBuffer={setMarkInputBuf}
-          handleKeyDown={handleKeyDown}
-          handleConfirm={handleConfirmEditMark}
+          handleConfirm={queueEditMark}
         />
       </Modal>
     </>

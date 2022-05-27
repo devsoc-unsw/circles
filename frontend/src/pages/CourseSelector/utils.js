@@ -1,4 +1,6 @@
 /* eslint-disable */
+import { validateTermPlanner } from "../TermPlanner/validateTermPlanner";
+import { useDispatch } from "react-redux";
 
 const prepareUserPayload = (degree, planner) => {
   const { startYear, courses } = planner;
@@ -26,9 +28,12 @@ const prepareUserPayload = (degree, planner) => {
   const selectedCourses = {};
   Object.entries(courses).forEach(([courseCode, courseData]) => {
     console.log("mark for", courseCode, "is", courseData.mark);
-    console.log("adding mark ", courseData.mark, "to course", courseCode);
+    console.log("adding mark ", courseData.mark, "to course", parseMarkToInt(courseCode));
     selectedCourses[courseCode] = parseMarkToInt(courseData.mark);
   })
+
+  // ! TODO: validate marks
+
 
   return {
     program: programCode,

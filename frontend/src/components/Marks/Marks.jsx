@@ -21,7 +21,7 @@ const Marks = ({ courseCode }) => {
         Mark:
       </Text>
       <Text className="text marks-val">
-        {(mark === null) ? " N/A" : mark}
+        {(mark === null || mark === undefined || mark === "") ? "N/A" : mark}
       </Text>
     </div >
   )

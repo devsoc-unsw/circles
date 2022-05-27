@@ -1,20 +1,25 @@
-/* eslint-disable */
-import { Input , Button } from "antd";
-import LetterGradeButton from "./../LetterGradeButton";
+import React from "react";
+import { Input } from "antd";
+import LetterGradeButton from "../LetterGradeButton";
 
 import "./index.less";
 
-const EditMarks = ({ handleConfirm, handleKeyDown, inputBuffer, setInputBuffer }) => {
+const EditMarks = ({
+  letterGrades, handleConfirm, inputBuffer, setInputBuffer,
+}) => {
   const handleInputChange = (e) => {
     setInputBuffer(e.target.value);
-  }
+  };
 
-  const letterGrades = ["SY", "PS", "CR", "DN", "HD"];
-  
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleConfirm();
+    }
+  };
+
   return (
     <div className="edit-mark">
-      <div className="edit-mark-head">
-      </div>
+      <div className="edit-mark-head" />
       <Input
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}
@@ -23,12 +28,13 @@ const EditMarks = ({ handleConfirm, handleKeyDown, inputBuffer, setInputBuffer }
       <div className="letter-grade-container">
         {
           letterGrades.map((letterGrade) => (
-           <LetterGradeButton
+            <LetterGradeButton
               value={inputBuffer}
               letterGrade={letterGrade}
-              handleConfirm={() => handleConfirm(inputBuffer)}
+              handleConfirm={handleConfirm}
               setInputBuffer={setInputBuffer}
-          />))
+            />
+          ))
         }
       </div>
     </div>
@@ -36,4 +42,3 @@ const EditMarks = ({ handleConfirm, handleKeyDown, inputBuffer, setInputBuffer }
 };
 
 export default EditMarks;
-
