@@ -1,19 +1,11 @@
-/* eslint-disable */
-
-import React, { useSelector }  from "react-redux";
-// import KebabMenu from "../KebabMenu";
+import React, { useSelector } from "react-redux";
 import { Typography } from "antd";
 
 import "./index.less";
 
 const Marks = ({ courseCode }) => {
   const { Text } = Typography;
-  console.log("going to select");
-  const beep = useSelector((state) => state.planner.courses[courseCode]);
-  console.log("beep", beep);
   const { mark } = useSelector((state) => state.planner.courses[courseCode]);
-  console.log("mark for", courseCode,  mark);
-  console.log("full-state:", useSelector((state) => state));
 
   return (
     <div>
@@ -23,8 +15,8 @@ const Marks = ({ courseCode }) => {
       <Text className="text marks-val">
         {(mark === null || mark === undefined || mark === "") ? "N/A" : mark}
       </Text>
-    </div >
-  )
+    </div>
+  );
 };
 
 export default Marks;
