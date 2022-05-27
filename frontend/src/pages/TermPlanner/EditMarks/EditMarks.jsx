@@ -4,19 +4,12 @@ import LetterGradeButton from "./../LetterGradeButton";
 
 import "./index.less";
 
-const EditMarks = ({ handleConfirm, handleKeyDown, setInputBuffer }) => {
+const EditMarks = ({ handleConfirm, handleKeyDown, inputBuffer, setInputBuffer }) => {
   const handleInputChange = (e) => {
     setInputBuffer(e.target.value);
   }
 
-  const handleLetterGrade = (e) => {
-    e.stopPropagation();
-    console.log("id", e.target.id, 10);
-    setInputBuffer(e.target.id);
-    handleConfirm();
-  }
-
-  const letterGrades = ["FL", "PS", "CR", "DN", "HD"];
+  const letterGrades = ["SY", "PS", "CR", "DN", "HD"];
   
   return (
     <div className="edit-mark">
@@ -31,8 +24,9 @@ const EditMarks = ({ handleConfirm, handleKeyDown, setInputBuffer }) => {
         {
           letterGrades.map((letterGrade) => (
            <LetterGradeButton
+              value={inputBuffer}
               letterGrade={letterGrade}
-              handleConfirm={handleConfirm}
+              handleConfirm={() => handleConfirm(inputBuffer)}
               setInputBuffer={setInputBuffer}
           />))
         }

@@ -12,11 +12,13 @@ const Marks = ({ courseCode }) => {
   const beep = useSelector((state) => state.planner.courses[courseCode]);
   console.log("beep", beep);
   const { mark } = useSelector((state) => state.planner.courses[courseCode]);
+  console.log("mark for", courseCode,  mark);
+  console.log("full-state:", useSelector((state) => state));
 
   return (
     <div>
       <Text strong className="text">
-        Mark: 
+        Mark:
       </Text>
       <Text className="text marks-val">
         {(mark === null) ? " N/A" : mark}

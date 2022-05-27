@@ -14,7 +14,7 @@ const prepareUserPayload = (degree, planner) => {
       return parseInt(mark);
     }
     const letterGradeToIntMap = {
-      "FL": 25,
+      "SY": null,
       "PS": 60,
       "CR": 70,
       "DN": 80,

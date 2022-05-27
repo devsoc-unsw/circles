@@ -68,9 +68,9 @@ const ContextMenu = ({ code, plannedFor }) => {
     }
   }
 
-  const handleConfirmEditMark = () => {
-    const attemptedMark = (' ' + markInputBuf).slice(1).replace(" ", "");
-    console.log("pre:attempt", markInputBuf);
+  const handleConfirmEditMark = (mark) => {
+    const attemptedMark = (' ' + mark).slice(1).replace(" ", "");
+    console.log("pre:attempt", mark);
     console.log("pos:attempt", attemptedMark);
     
     if (
@@ -81,9 +81,10 @@ const ContextMenu = ({ code, plannedFor }) => {
     }
     console.log("trying to dispatch: ", attemptedMark);
     
+    console.log("updating", code, "with", attemptedMark);
     dispatch(updateCourseMark({
       "code": code,
-      "mark": isNaN(attemptedMark) ? attemptedMark : parseInt(attemptedMark),
+      "mark": attemptedMark,
     }));
     setIsEditMarkVisible(false);
     // ! TODO: validateTermPlanner

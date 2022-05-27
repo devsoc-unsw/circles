@@ -91,7 +91,7 @@ const DraggableCourse = ({ code, index, showMarks }) => {
                 )}
                 {showMarks ? (
                   <Marks
-                    courseCode={"COMP1511"}
+                    courseCode={code}
                   />
                 ) : null
                 }
