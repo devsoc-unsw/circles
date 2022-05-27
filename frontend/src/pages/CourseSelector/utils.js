@@ -27,13 +27,9 @@ const prepareUserPayload = (degree, planner) => {
   
   const selectedCourses = {};
   Object.entries(courses).forEach(([courseCode, courseData]) => {
-    console.log("mark for", courseCode, "is", courseData.mark);
-    console.log("adding mark ", courseData.mark, "to course", parseMarkToInt(courseCode));
+    console.log("adding mark ", courseData.mark, "to course", courseCode, "as", parseMarkToInt(courseData.mark));
     selectedCourses[courseCode] = parseMarkToInt(courseData.mark);
   })
-
-  // ! TODO: validate marks
-
 
   return {
     program: programCode,

@@ -45,11 +45,7 @@ const ContextMenu = ({ code, plannedFor }) => {
     dispatch(addTab(code));
   };
 
-  // EDIT MARK - TODO: remove this comment - only for visual seperation
-  // ? make this a part of the state?
   const [isEditMarkVisible, setIsEditMarkVisible] = useState(false);
-
-  // const [markInput, setMarkInput] = useState("");
 
   const showEditMark = () => {
     setIsEditMarkVisible(true);
@@ -73,7 +69,13 @@ const ContextMenu = ({ code, plannedFor }) => {
       mark: attemptedMark,
     }));
     setIsEditMarkVisible(false);
-    // ! TODO: validateTermPlanner
+
+    validateTermPlanner(
+      dispatch,
+      { years, startYear, completedTerm },
+      { programCode, majors, minor },
+    );
+
     return message.success("Mark Updated");
   };
 
