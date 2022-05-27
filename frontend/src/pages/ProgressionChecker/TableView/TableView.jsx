@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Table } from "antd";
+import { Table, Skeleton } from "antd";
 import { useSelector } from "react-redux";
 import { getMostRecentPastTerm } from "../../TermPlanner/validateTermPlanner";
 import "./index.less";
@@ -120,8 +120,7 @@ const TableView = ({ isLoading, structure }) => {
   return (
     <div className="tableViewContainer">
       {isLoading ? (
-        // TODO: implement loading skeleton
-        <br />
+        <Skeleton />
       ) : (
         <>
           {Object.entries(tableLayout).map(([group, groupEntry]) => (
