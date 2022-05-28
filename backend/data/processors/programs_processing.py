@@ -134,14 +134,14 @@ def findProgramName(programData, item):
                 return programName.strip()
     return programName.strip()
 
-def addDisciplineData(components, course, programData):
+def addDisciplineData(components, c, programData):
     components.setdefault("SpecialisationData", {})
     components.setdefault("NonSpecialisationData", {})
 
-    programName = findProgramName(programData, course)
-    if "container" in course and course["container"] != []:
+    programName = findProgramName(programData, c)
+    if "container" in c and c["container"] != []:
         # Loop through items in disciplinary component
-        for container in course["container"]:
+        for container in c["container"]:
             # If item is a major, loop through and add data to major
             if container["vertical_grouping"]["value"] == "undergrad_major":
                 majorData = {}
@@ -183,12 +183,12 @@ def addDisciplineData(components, course, programData):
                 if container["credit_points"] != "":
                     PE["credits_to_complete"] = container["credit_points"]
                 if container["relationship"] != []:
-                    for course in container["relationship"]:
-                        PE[course["academic_item_code"]] = course["academic_item_name"]
+                    for c in container["relationship"]:
+                        PE[c["academic_item_code"]] = c["academic_item_name"]
                     components["NonSpecialisationData"][container["title"]] = PE
                 else:
-                    for course in container["dynamic_relationship"]:
-                        PE[course["description"]] = 1
+                    for c in container["dynamic_relationship"]:
+                        PE[c["description"]] = 1
                     components["NonSpecialisationData"][container["title"]] = PE
             # If item is a core course
             if container["vertical_grouping"]["value"] == "CC":
@@ -201,20 +201,20 @@ def addDisciplineData(components, course, programData):
                 # If there are multiple courses
                 if container["container"] != []:
                     # Loop through and find all courses and add them
-                    for course in container["container"]:
-                        if course["vertical_grouping"]["value"] == "one_of_the_following":
-                            for course in course["relationship"]:
-                                CC[course["academic_item_code"]] = course[
+                    for c in container["container"]:
+                        if c["vertical_grouping"]["value"] == "one_of_the_following":
+                            for c in c["relationship"]:
+                                CC[c["academic_item_code"]] = c[
                                     "academic_item_name"
                                 ]
-                        elif course["vertical_grouping"]["value"] == "CC":
-                            for course in course["relationship"]:
-                                CC[course["academic_item_code"]] = course[
+                        elif c["vertical_grouping"]["value"] == "CC":
+                            for c in c["relationship"]:
+                                CC[c["academic_item_code"]] = c[
                                     "academic_item_name"
                                 ]
                 else:
-                    for course in container["relationship"]:
-                        CC[course["academic_item_code"]] = course["academic_item_name"]
+                    for c in container["relationship"]:
+                        CC[c["academic_item_code"]] = c["academic_item_name"]
                 components["NonSpecialisationData"][title] = CC
 
 

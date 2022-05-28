@@ -95,10 +95,7 @@ class CoreqCoursesCondition(Condition):
         return True, []
 
     def __str__(self) -> str:
-        return "CoreqCoursesCondition(courses={}, logic={})".format(
-            self.courses, self.logic
-        )
-
+        return f"CoreqCoursesCondition(courses={self.courses}, logic={self.logic})"
 
 class UOCCondition(Condition):
     """ UOC conditions such as '24UOC in COMP' """

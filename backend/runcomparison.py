@@ -33,7 +33,7 @@ def check_in_fixes(coursename, courses_in_manual):
                 courses_in_manual.append(coursename)
 
 
-if __name__ == "__main__":
+def main():
     source_courses = (
         "data/final_data/coursesProcessed.json"
         if args.source is None
@@ -75,3 +75,6 @@ if __name__ == "__main__":
     print("inFixes:")
     for added in courses_in_manual:
         print(f"\t- {added}")
+
+if __name__ == "__main__":
+    main()
