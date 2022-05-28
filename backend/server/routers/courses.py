@@ -93,21 +93,9 @@ def apiIndex():
                         "campus": "Sydney",
                         "equivalents": {"DPST1091": 1, "COMP1917": 1},
                         "exclusions": {"DPST1091": 1},
-                        "path_to": {
-                            "COMP1521": 1,
-                            "COMP1531": 1,
-                            "COMP2041": 1,
-                            "COMP2111": 1,
-                            "COMP2121": 1,
-                            "COMP2521": 1,
-                            "COMP9334": 1,
-                            "ELEC2117": 1,
-                            "SENG2991": 1,
-                        },
                         "terms": ["T1", "T2", "T3"],
                         "raw_requirements": "",
                         "gen_ed": 1,
-                        "path_from": {},
                     }
                 }
             },
@@ -424,7 +412,7 @@ def coursesUnlockedWhenTaken(userData: UserData, courseToBeTaken: str):
     new_courses = courses_now_unlocked - courses_initially_unlocked
 
     ## Differentiate direct and indirect unlocks
-    path_to = set(getCourse(courseToBeTaken)['path_to'])
+    path_to = set(courseChildren(courseToBeTaken))
     direct_unlock = new_courses.intersection(path_to)
     indirect_unlock = new_courses - direct_unlock
 

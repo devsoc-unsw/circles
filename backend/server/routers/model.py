@@ -44,7 +44,6 @@ class CourseDetails(BaseModel):
     handbook_note: str
     terms: list
     gen_ed: int
-    path_from: dict
     is_legacy: bool
     is_accurate: bool
 

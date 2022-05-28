@@ -18,8 +18,6 @@ def test_get_a_course():
 
     assert x.status_code == 200
     assert x.json()['code'] == "COMP1521"
-    assert x.json()['path_from'].get("COMP1511") is not None
-    assert x.json()['path_to'].get("COMP3231") is not None
 
 
 def test_get_archived_course():
