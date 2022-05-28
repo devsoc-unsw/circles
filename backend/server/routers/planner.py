@@ -1,3 +1,6 @@
+"""
+route for planner algorithms
+"""
 from fastapi import APIRouter
 from fastapi.params import Body
 from algorithms.objects.user import User
@@ -15,10 +18,11 @@ def plannerIndex():
     return "Index of planner"
 
 def fixPlannerData(plannerData: PlannerData):
+    """ fixes the planner data to add missing UOC info """
     for year_index, year in enumerate(plannerData["plan"]):
         for term_index, term in enumerate(year):
             for courseName, course in term.items():
-                if type(course) is not list:
+                if not isinstance(course, list):
                     plannerData["plan"][year_index][term_index][courseName] = [getCourse(courseName)["UOC"], course]
     return plannerData
 
@@ -65,13 +69,10 @@ async def validateTermPlanner(
     )
 ):
     """
-    Will iteratively go through the term planner data whilst "building up" the user.
-    Starting from 1st year T0, we will create an empty user and evaluate the courses.
-    Then we will add T0 courses to the user and evaluate T1. Then we will add T1
-    courses and evaluate T2. Then add T2 and evaluate T3. Then add T3 and evaluate
-    2nd year T0... and so on.
+    Will iteratively go through the term planner data whilst
+    iteratively filling the user with courses.
 
-    The mostRecentPastTerm will show the latest term (and current year) that has 
+    The mostRecentPastTerm will show the latest term (and current year) that has
     passed and all warnings will be suppressed until after this term
 
     Returns the state of all the courses on the term planner

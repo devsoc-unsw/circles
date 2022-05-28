@@ -14,7 +14,7 @@ class programs(BaseModel):
     programs: dict
 
 
-class majors(BaseModel):
+class Majors(BaseModel):
     majors: dict
 
 
@@ -82,7 +82,7 @@ class CoursesUnlockedWhenTaken (BaseModel):
     indirect_unlock: list
 
 class CourseTypeState (BaseModel):
-    is_accurate: bool 
+    is_accurate: bool
 
 class CourseTypeState(BaseModel):
     is_accurate: bool

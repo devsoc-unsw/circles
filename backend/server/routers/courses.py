@@ -1,7 +1,9 @@
-import pymongo
+"""
+APIs for the /courses/ route.
+"""
 import re
 from fuzzywuzzy import fuzz
-from typing import Optional
+from typing import Optional, Tuple
 
 from algorithms.objects.user import User
 from data.config import ARCHIVED_YEARS
@@ -13,9 +15,6 @@ from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, Courses,
                                   CoursesUnlockedWhenTaken, ProgramCourses,
                                   UserData, message)
 
-"""
-APIs for the /courses/ route.
-"""
 
 router = APIRouter(
     prefix="/courses",
@@ -200,14 +199,14 @@ def search(userData: UserData, search_string: str):
     weighted_results = sorted(top_results, reverse=True,
                               key=lambda course: weight_course(course,
                                                                search_string,
-                                                               structure, 
+                                                               structure,
                                                                *specialisations)
                               )[:30]
 
-    return {code: title for code, title in weighted_results}
+    return dict(weighted_results)
 
 def regex_search(search_string: str):
-    """ 
+    """
     Uses the search string as a regex to match all courses with an exact pattern.
     """
 
@@ -255,7 +254,7 @@ def getAllUnlocked(userData: UserData):
     """
 
     coursesState = {}
-    user = User(fixUserData(userData.dict())) if type(userData) != User else userData
+    user = User(fixUserData(userData.dict())) if not isinstance(userData, User) else userData
     for course, condition in CONDITIONS.items():
         result, warnings = condition.validate(user) if condition is not None else (True, [])
         if result:
@@ -306,7 +305,7 @@ def getLegacyCourses(year, term):
     """
     result = {c['code']: c['title'] for c in archivesDB[year].find() if term in c['terms']}
 
-    if result == {}:
+    if not result:
         raise HTTPException(status_code=400, detail="Invalid term or year. Valid terms: T0, T1, T2, T3. Valid years: 2019, 2020, 2021, 2022.")
 
     return {'courses' : result}
@@ -354,10 +353,10 @@ def unselectCourse(userData: UserData, unselectedCourse: str):
 
     return {'courses': affectedCourses}
 
-@router.get("/courseChildren/{course}", response_model=CoursesPath, 
+@router.get("/courseChildren/{course}", response_model=CoursesPath,
             responses = {
                 200 : {
-                    "courses": ["COMP1521", "COMP1531"] 
+                    "courses": ["COMP1521", "COMP1531"]
                 }
             })
 def courseChildren(course: str):
@@ -375,10 +374,10 @@ def courseChildren(course: str):
             ]
         }
 
-@router.get("/getPathFrom/{course}", response_model=CoursesPath, 
+@router.get("/getPathFrom/{course}", response_model=CoursesPath,
             responses = {
                 200 : {
-                    "courses": ["COMP1521", "COMP1531"] 
+                    "courses": ["COMP1521", "COMP1531"]
                 }
             })
 def getPathFrom(course):
@@ -386,14 +385,14 @@ def getPathFrom(course):
     fetches courses which can be used to satisfy 'course'
     eg 2521 -> 1511
     """
- 
+
     course_condition = CONDITIONS[course]
     return {
         "original" : course,
         "courses" :[
             coursename for coursename, _ in CONDITIONS.items()
             if course_condition.is_path_to(coursename)
-        ] 
+        ]
     }
 
 @router.post("/coursesUnlockedWhenTaken/{courseToBeTaken}", response_model=CoursesUnlockedWhenTaken,
@@ -439,9 +438,9 @@ def unlocked_set(courses_state):
     return set(course for course in courses_state if courses_state[course]['unlocked'])
 
 
-def fuzzy_match(course: tuple, search_term: str):
+def fuzzy_match(course: Tuple[str, str], search_term: str):
     """ Gives the course a weighting based on the relevance to the search """
-    (code, title) = course
+    code, title = course
 
     # either match against a course code, or match many words against the title
     # (not necessarily in the same order as the title)
@@ -453,11 +452,11 @@ def fuzzy_match(course: tuple, search_term: str):
                sum(fuzz.partial_ratio(title.lower(), word)
                        for word in search_term.split(' ')))
 
-def weight_course(course: tuple, search_term: str, structure: dict,
+def weight_course(course: Tuple[str, str], search_term: str, structure: dict,
                   major_code: Optional[str] = None, minor_code: Optional[str] = None):
     """ Gives the course a weighting based on the relevance to the user's degree """
     weight = fuzzy_match(course, search_term)
-    (code, title) = course
+    code, _ = course
 
     if major_code is not None:
         for structKey in structure.keys():

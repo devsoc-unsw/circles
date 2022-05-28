@@ -86,7 +86,7 @@ class User:
             bool(re.match(pat, spec, flags=re.IGNORECASE))
             for spec in self.specialisations
         )
-    
+
     def load_json(self, data):
         """ Given the user data, correctly loads it into this user class """
 
@@ -123,8 +123,9 @@ class User:
             for course, (uoc, _) in self.courses.items()
             if category.match_definition(course)
         )
-    
-    def pop_course(self, course: str) -> Tuple[str, Tuple[int, int]]:
+
+    def pop_course(self, course: str) -> Tuple[int, int]:
+        """ removes a course from done courses and returns its uoc and mark """
         return self.courses.pop(course)
 
     def unselect_course(self, target: str) -> list[str]:
