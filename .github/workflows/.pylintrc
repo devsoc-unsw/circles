@@ -449,14 +449,16 @@ good-names=i,
            k,
            ex,
            Run,
-           _
+           _,
+           f
+
 
 # Good variable names regexes, separated by a comma. If names match any regex,
 # they will always be accepted
-good-names-rgxs=
+good-names-rgxs=^([A-Z]{4})_FIXES
 
 # Include a hint for the correct naming format with invalid-name.
-include-naming-hint=no
+include-naming-hint=yes
 
 # Naming style matching correct inline iteration names.
 inlinevar-naming-style=any

@@ -54,9 +54,9 @@ class CompositeCategory(Category):
             raise ValueError(f"Invalid logic: {self.logic}")
 
         return all(
-            [category.match_definition(course) for category in self.categories]
+            category.match_definition(course) for category in self.categories
         ) if self.logic == Logic.AND else any(
-            [category.match_definition(course) for category in self.categories]
+            category.match_definition(course) for category in self.categories
         ) if self.logic == Logic.OR else None
 
     def __str__(self) -> str:
