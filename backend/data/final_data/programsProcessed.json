@@ -394,53 +394,53 @@
         "UOC": 144,
         "faculty": "UNSW Business School",
         "components": {
+            "SpecialisationData": {},
+            "NonSpecialisationData": {
+                "Work Integrated Learning (WIL)": {
+                    "type": "elective",
+                    "credits_to_complete": "6",
+                    "COMM2222": "Industry Experience Program",
+                    "INFS3020": "International Information Systems and Technology Practicum",
+                    "COMM3030": "Social Entrepreneurship Practicum",
+                    "COMM2233": "Industry Consulting Project"
+                },
+                "Information Systems core courses": {
+                    "type": "core",
+                    "credits_to_complete": "72",
+                    "INFS2822": "Programming for Data Analytics",
+                    "INFS3701": "Enterprise Architecture for Scalable Cloud Solutions",
+                    "INFS2608": "Database Management & Big Data Infrastructures",
+                    "INFS1603": "Introduction to Business Databases",
+                    "INFS2701": "Cyber Security Management and Governance",
+                    "INFS3703": "Information Systems Project Management",
+                    "INFS1602": "Digital Transformation in Business",
+                    "INFS3605": "Information Systems Innovation & Transformation",
+                    "INFS3604": "Business Process Management",
+                    "INFS2603": "Business Analysis and Agile Product Management",
+                    "INFS1701": "Networking and Security",
+                    "INFS3700": "User Experience and IT Service Design"
+                },
+                "Prescribed Information Systems Electives": {
+                    "type": "elective",
+                    "credits_to_complete": "12"
+                },
+                "Business Core Courses": {
+                    "type": "core",
+                    "credits_to_complete": "30",
+                    "COMM1150": "Global Business Environments",
+                    "COMM1140": "Financial Management",
+                    "COMM1190": "Data, Insights and Decisions",
+                    "COMM1100": "Business Decision Making",
+                    "COMM1110": "Evidence-Based Problem Solving",
+                    "COMM1120": "Collaboration and Innovation in Business",
+                    "COMM1180": "Value Creation"
+                }
+            },
             "GE": {
                 "credits_to_complete": 12
             },
             "FE": {
                 "credits_to_complete": 12
-            },
-            "SpecialisationData": {},
-            "NonSpecialisationData": {
-                "Business Core Courses": {
-                    "type": "core",
-                    "credits_to_complete": "30",
-                    "COMM1180": "Value Creation",
-                    "COMM1120": "Collaboration and Innovation in Business",
-                    "COMM1150": "Global Business Environments",
-                    "COMM1140": "Financial Management",
-                    "COMM1190": "Data, Insights and Decisions",
-                    "COMM1110": "Evidence-Based Problem Solving",
-                    "COMM1100": "Business Decision Making"
-                },
-                "Information Systems core courses": {
-                    "type": "core",
-                    "credits_to_complete": "72",
-                    "INFS3700": "User Experience and IT Service Design",
-                    "INFS2701": "Cyber Security Management and Governance",
-                    "INFS2822": "Programming for Data Analytics",
-                    "INFS1602": "Digital Transformation in Business",
-                    "INFS1603": "Introduction to Business Databases",
-                    "INFS3604": "Business Process Management",
-                    "INFS3701": "Enterprise Architecture for Scalable Cloud Solutions",
-                    "INFS1701": "Networking and Security",
-                    "INFS2608": "Database Management & Big Data Infrastructures",
-                    "INFS3605": "Information Systems Innovation & Transformation",
-                    "INFS2603": "Business Analysis and Agile Product Management",
-                    "INFS3703": "Information Systems Project Management"
-                },
-                "Work Integrated Learning (WIL)": {
-                    "type": "elective",
-                    "credits_to_complete": "6",
-                    "COMM2222": "Industry Experience Program",
-                    "COMM3030": "Social Entrepreneurship Practicum",
-                    "COMM2233": "Industry Consulting Project",
-                    "INFS3020": "International Information Systems and Technology Practicum"
-                },
-                "Prescribed Information Systems Electives": {
-                    "type": "elective",
-                    "credits_to_complete": "12"
-                }
             }
         }
     },
@@ -505,49 +505,49 @@
         "UOC": 144,
         "faculty": "Faculty of Medicine and Health",
         "components": {
-            "GE": {
-                "credits_to_complete": 12
-            },
             "SpecialisationData": {},
             "NonSpecialisationData": {
                 "Level 3 Core Courses": {
                     "type": "core",
                     "credits_to_complete": "42",
-                    "OPTM3233": "Working in Clinical Contexts",
-                    "VISN3111": "Development and Aging of the Visual System",
                     "OPTM3105": "Disease Processes of the Eye 1",
-                    "OPTM3201": "Ocular Imaging & Applied Vision Science",
+                    "OPTM3233": "Working in Clinical Contexts",
                     "PHAR3306": "Pharmacology for Optometry",
                     "OPTM3133": "Vision Science in the Consulting Room",
+                    "VISN3111": "Development and Aging of the Visual System",
+                    "OPTM3201": "Ocular Imaging & Applied Vision Science",
                     "OPTM3205": "Disease Processes of the Eye 2"
-                },
-                "Level 1 Core Courses": {
-                    "type": "core",
-                    "credits_to_complete": "48",
-                    "BABS1201": "Molecules, Cells and Genes",
-                    "CHEM1829": "Biological Chemistry for Optometry Students",
-                    "VISN1111": "Geometrical and Physical Optics",
-                    "CHEM1011": "Chemistry 1A: Atoms, Molecules and Energy",
-                    "VISN1101": "Seeing the World: Perspectives from Vision Science",
-                    "VISN1221": "Visual Optics",
-                    "PHYS1121": "Physics 1A",
-                    "PHYS1111": "Fundamentals of Physics",
-                    "PHYS1131": "Higher Physics 1A",
-                    "MATH1031": "Mathematics for Life Sciences",
-                    "MATH1141": "Higher Mathematics 1A",
-                    "MATH1131": "Mathematics 1A"
                 },
                 "Level 2 Core Courses": {
                     "type": "core",
                     "credits_to_complete": "42",
-                    "PHSL2101": "Physiology 1A",
-                    "VISN2111": "Ocular Anatomy and Physiology",
                     "OPTM2133": "The Clinical Environment",
-                    "PHSL2201": "Physiology 1B",
-                    "VISN2211": "Organisation and Function of the Visual System",
                     "ANAT2111": "Introductory Anatomy",
-                    "OPTM2233": "Optical Dispensing"
+                    "VISN2211": "Organisation and Function of the Visual System",
+                    "PHSL2201": "Physiology 1B",
+                    "OPTM2233": "Optical Dispensing",
+                    "VISN2111": "Ocular Anatomy and Physiology",
+                    "PHSL2101": "Physiology 1A"
+                },
+                "Level 1 Core Courses": {
+                    "type": "core",
+                    "credits_to_complete": "48",
+                    "VISN1111": "Geometrical and Physical Optics",
+                    "BABS1201": "Molecules, Cells and Genes",
+                    "VISN1221": "Visual Optics",
+                    "VISN1101": "Seeing the World: Perspectives from Vision Science",
+                    "CHEM1011": "Chemistry 1A: Atoms, Molecules and Energy",
+                    "CHEM1829": "Biological Chemistry for Optometry Students",
+                    "PHYS1121": "Physics 1A",
+                    "PHYS1111": "Fundamentals of Physics",
+                    "PHYS1131": "Higher Physics 1A",
+                    "MATH1131": "Mathematics 1A",
+                    "MATH1141": "Higher Mathematics 1A",
+                    "MATH1031": "Mathematics for Life Sciences"
                 }
+            },
+            "GE": {
+                "credits_to_complete": 12
             }
         }
     },
@@ -733,68 +733,68 @@
                     "credits_to_complete": "36",
                     "HESC4551": "Research Project",
                     "HESC4561": "Research Internship A",
-                    "HESC3581": "Exercise Prescription in Diverse Populations",
-                    "HESC4502": "Workplace Assessment and Rehabilitation",
-                    "HESC4611": "Clinical Practicum A",
+                    "HESC4622": "Clinical Practicum B",
                     "HESC4501": "Exercise Physiology Research Seminars",
-                    "HESC4622": "Clinical Practicum B"
-                },
-                "Level 3 Core Courses": {
-                    "type": "core",
-                    "credits_to_complete": "48",
-                    "NEUR3101": "Muscle and Motor Control",
-                    "HESC3592": "Neuromuscular Rehabilitation",
-                    "HESC3504": "Physical Activity and Health",
-                    "HESC3541": "Clinical Exercise Physiology",
-                    "PHAR3111": "Clinical Pharmacology for Health and Exercise Science",
-                    "HESC3501": "Advanced Exercise Science",
-                    "HESC3511": "Health, Exercise and Sport Psychology",
-                    "HESC3532": "Movement Rehabilitation"
-                },
-                "Level 1 Core Courses": {
-                    "type": "core",
-                    "credits_to_complete": "42",
-                    "CHEM1831": "Chemistry for Exercise Physiology",
-                    "HESC1511": "Exercise Programs and Behaviour",
-                    "MATH1041": "Statistics for Life and Social Sciences",
-                    "PSYC1001": "Psychology 1A",
-                    "BABS1201": "Molecules, Cells and Genes",
-                    "ANAT2111": "Introductory Anatomy",
-                    "HESC1501": "Introductory Exercise Science"
-                },
-                "Electives": {
-                    "type": "elective",
-                    "credits_to_complete": "6",
-                    "BIOC3261": "Human Biochemistry",
-                    "MATH1131": "Mathematics 1A",
-                    "FOOD3220": "Nutrition",
-                    "FOOD4403": "Advanced Nutrition",
-                    "ANAT3411": "Neuroanatomy",
-                    "PATH3207": "Musculoskeletal Diseases",
-                    "BIOM9551": "Biomechanics of Physical Rehabilitation",
-                    "PHSL3221": "Endocrine, Reproductive and Developmental Physiology",
-                    "BEIL0011": "Healthy Planning",
-                    "NEUR3221": "Neurophysiology",
-                    "HESC4571": "Research Internship B",
-                    "PHYS1121": "Physics 1A",
-                    "PHSL3211": "Cardiovascular Physiology and Pathophysiology",
-                    "PSYC1023": "Abnormal Psychology",
-                    "MATH1031": "Mathematics for Life Sciences",
-                    "PSYC1022": "The Psychology of Addiction",
-                    "ANAT3121": "Visceral Anatomy",
-                    "PSYC1024": "Clinical Perspectives on Anxiety, Mood and Stress"
+                    "HESC4611": "Clinical Practicum A",
+                    "HESC4502": "Workplace Assessment and Rehabilitation",
+                    "HESC3581": "Exercise Prescription in Diverse Populations"
                 },
                 "Level 2 Core Courses": {
                     "type": "core",
                     "credits_to_complete": "48",
-                    "HESC2501": "Exercise Physiology",
+                    "ANAT2451": "Functional Anatomy for Health and Exercise Science",
+                    "PATH2202": "Processes in Disease for Health and Exercise Science",
                     "PHSL2501": "Human Physiology A",
                     "BIOC2181": "Fundamentals of Biochemistry",
-                    "PHSL2502": "Human Physiology B",
-                    "PATH2202": "Processes in Disease for Health and Exercise Science",
-                    "ANAT2451": "Functional Anatomy for Health and Exercise Science",
                     "HESC2452": "Movement Assessment and Instruction",
-                    "HESC2451": "Biomechanics"
+                    "PHSL2502": "Human Physiology B",
+                    "HESC2451": "Biomechanics",
+                    "HESC2501": "Exercise Physiology"
+                },
+                "Level 1 Core Courses": {
+                    "type": "core",
+                    "credits_to_complete": "42",
+                    "ANAT2111": "Introductory Anatomy",
+                    "PSYC1001": "Psychology 1A",
+                    "BABS1201": "Molecules, Cells and Genes",
+                    "HESC1511": "Exercise Programs and Behaviour",
+                    "MATH1041": "Statistics for Life and Social Sciences",
+                    "HESC1501": "Introductory Exercise Science",
+                    "CHEM1831": "Chemistry for Exercise Physiology"
+                },
+                "Electives": {
+                    "type": "elective",
+                    "credits_to_complete": "6",
+                    "BIOM9551": "Biomechanics of Physical Rehabilitation",
+                    "FOOD3220": "Nutrition",
+                    "ANAT3121": "Visceral Anatomy",
+                    "ANAT3411": "Neuroanatomy",
+                    "PSYC1024": "Clinical Perspectives on Anxiety, Mood and Stress",
+                    "PHYS1121": "Physics 1A",
+                    "BIOC3261": "Human Biochemistry",
+                    "HESC4571": "Research Internship B",
+                    "PHSL3211": "Cardiovascular Physiology and Pathophysiology",
+                    "MATH1031": "Mathematics for Life Sciences",
+                    "BEIL0011": "Healthy Planning",
+                    "PSYC1022": "The Psychology of Addiction",
+                    "MATH1131": "Mathematics 1A",
+                    "PHSL3221": "Endocrine, Reproductive and Developmental Physiology",
+                    "PATH3207": "Musculoskeletal Diseases",
+                    "PSYC1023": "Abnormal Psychology",
+                    "NEUR3221": "Neurophysiology",
+                    "FOOD4403": "Advanced Nutrition"
+                },
+                "Level 3 Core Courses": {
+                    "type": "core",
+                    "credits_to_complete": "48",
+                    "HESC3541": "Clinical Exercise Physiology",
+                    "HESC3511": "Health, Exercise and Sport Psychology",
+                    "HESC3532": "Movement Rehabilitation",
+                    "HESC3504": "Physical Activity and Health",
+                    "HESC3501": "Advanced Exercise Science",
+                    "NEUR3101": "Muscle and Motor Control",
+                    "PHAR3111": "Clinical Pharmacology for Health and Exercise Science",
+                    "HESC3592": "Neuromuscular Rehabilitation"
                 }
             }
         }
@@ -973,94 +973,96 @@
         "faculty": "UNSW Business School",
         "components": {
             "SpecialisationData": {
-                "Majors": {
-                    "Computer Science": {
-                        "COMPJ1": "Computer Science (Programming Languages)",
-                        "COMPY1": "Computer Science (Security Engineering)",
-                        "COMPI1": "Computer Science (Artificial Intelligence)",
-                        "COMPE1": "Computer Science (eCommerce Systems)",
-                        "COMPA1": "Computer Science",
-                        "COMPN1": "Computer Science (Computer Networks)",
-                        "COMPD1": "Computer Science (Database Systems)",
-                        "COMPS1": "Computer Science (Embedded Systems)"
-                    },
-                    "Commerce": {
-                        "MGMTJ1": "Innovation, Strategy and Entrepreneurship",
-                        "IBUSA1": "International Business",
-                        "INFSA1": "Information Systems",
-                        "TABLC1": "Taxation",
-                        "COMMJ1": "Business Analytics",
-                        "FINSR1": "Financial Technology",
-                        "ACCTA1": "Accounting",
-                        "ECONF1": "Business Economics",
-                        "ECONO1": "Behavioural Economics",
-                        "MGMTH1": "Human Resource Management",
-                        "FINSA1": "Finance",
-                        "MARKA1": "Marketing"
-                    }
-                },
                 "Minors": {
-                    "MARKA2": "Marketing",
+                    "ECONF2": "Business Economics",
+                    "MGMTH2": "Human Resource Management",
+                    "TABLA2": "Business Law",
+                    "MGMTA2": "Management",
+                    "INFSA2": "Information Systems",
                     "ACCTA2": "Accounting",
                     "FINSA2": "Finance",
-                    "MGMTA2": "Management",
-                    "MGMTH2": "Human Resource Management",
-                    "TABLC2": "Taxation",
-                    "COMMJ2": "Business Analytics",
-                    "INFSA2": "Information Systems",
-                    "ECONF2": "Business Economics",
-                    "TABLA2": "Business Law",
+                    "MGMTJ2": "Innovation, Strategy and Entrepreneurship",
                     "FINSR2": "Financial Technology",
+                    "TABLC2": "Taxation",
+                    "ECONO2": "Behavioural Economics",
+                    "COMMJ2": "Business Analytics",
+                    "MARKA2": "Marketing",
                     "IBUSA2": "International Business"
+                },
+                "Majors": {
+                    "Commerce": {
+                        "FINSA1": "Finance",
+                        "INFSA1": "Information Systems",
+                        "COMMJ1": "Business Analytics",
+                        "MGMTJ1": "Innovation, Strategy and Entrepreneurship",
+                        "TABLC1": "Taxation",
+                        "MARKA1": "Marketing",
+                        "IBUSA1": "International Business",
+                        "ECONO1": "Behavioural Economics",
+                        "ECONF1": "Business Economics",
+                        "MGMTH1": "Human Resource Management",
+                        "ACCTA1": "Accounting",
+                        "FINSR1": "Financial Technology"
+                    },
+                    "Computer Science": {
+                        "COMPI1": "Computer Science (Artificial Intelligence)",
+                        "COMPD1": "Computer Science (Database Systems)",
+                        "COMPS1": "Computer Science (Embedded Systems)",
+                        "COMPN1": "Computer Science (Computer Networks)",
+                        "COMPA1": "Computer Science",
+                        "COMPY1": "Computer Science (Security Engineering)",
+                        "COMPE1": "Computer Science (eCommerce Systems)",
+                        "COMPJ1": "Computer Science (Programming Languages)"
+                    }
                 }
             },
             "NonSpecialisationData": {
+                "myBCom": {
+                    "type": "core",
+                    "COMM0999": "myBCom Blueprint",
+                    "COMM1999": "myBCom First Year Portfolio",
+                    "COMM3999": "myBCom Graduation Portfolio"
+                },
+                "Final Year Synthesis": {
+                    "type": "core",
+                    "INFS3020": "International Information Systems and Technology Practicum",
+                    "ACTL3192": "Retirement Saving and Spending Over the Lifecycle",
+                    "COMM3090": "Synthesis of Learning Experience",
+                    "MGMT3004": "Solving Complex Strategy and Policy Problems",
+                    "COMM3020": "Global Business Practicum",
+                    "TABL3033": "UNSW Tax and Business Advisory Clinic",
+                    "ACCT3583": "Management Accounting 2",
+                    "COMM3030": "Social Entrepreneurship Practicum",
+                    "COMM3900": "Capstone Project",
+                    "COMM2244": "Future of Work Project",
+                    "ECON3000": "Evidence-based Intervention Design and Evaluation",
+                    "COMM2233": "Industry Consulting Project",
+                    "COMM3501": "Quantitative Business Analytics"
+                },
                 "Prescribed Work Integrated Learning (WIL) Course": {
                     "type": "elective",
                     "credits_to_complete": "6",
-                    "COMM3202": "Industry Experience Placement 2",
-                    "COMM3030": "Social Entrepreneurship Practicum",
-                    "COMM2244": "Future of Work Project",
-                    "COMM3020": "Global Business Practicum",
-                    "COMM3101": "Industry Experience Placement 1",
+                    "TABL3033": "UNSW Tax and Business Advisory Clinic",
                     "CDEV3000": "Practice of Work",
                     "COMM2233": "Industry Consulting Project",
-                    "TABL3033": "UNSW Tax and Business Advisory Clinic",
-                    "COMM2222": "Industry Experience Program"
+                    "COMM2244": "Future of Work Project",
+                    "COMM3030": "Social Entrepreneurship Practicum",
+                    "COMM2222": "Industry Experience Program",
+                    "COMM3202": "Industry Experience Placement 2",
+                    "COMM3101": "Industry Experience Placement 1",
+                    "COMM3020": "Global Business Practicum"
                 },
                 "Integrated First Year Courses": {
                     "type": "core",
                     "credits_to_complete": "48",
-                    "COMM1180": "Value Creation",
-                    "COMM1140": "Financial Management",
-                    "COMM1190": "Data, Insights and Decisions",
-                    "COMM1170": "Organisational Resources",
-                    "COMM1150": "Global Business Environments",
                     "COMM1120": "Collaboration and Innovation in Business",
+                    "COMM1140": "Financial Management",
+                    "COMM1180": "Value Creation",
+                    "COMM1170": "Organisational Resources",
                     "COMM1100": "Business Decision Making",
-                    "COMM1110": "Evidence-Based Problem Solving"
-                },
-                "Final Year Synthesis": {
-                    "type": "core",
-                    "COMM3030": "Social Entrepreneurship Practicum",
-                    "TABL3033": "UNSW Tax and Business Advisory Clinic",
-                    "COMM3900": "Capstone Project",
-                    "COMM3090": "Synthesis of Learning Experience",
-                    "COMM2244": "Future of Work Project",
-                    "COMM2233": "Industry Consulting Project",
-                    "COMM3020": "Global Business Practicum",
-                    "ACCT3583": "Management Accounting 2",
-                    "COMM3501": "Quantitative Business Analytics",
-                    "ACTL3192": "Retirement Saving and Spending Over the Lifecycle",
-                    "INFS3020": "International Information Systems and Technology Practicum",
-                    "MGMT3004": "Solving Complex Strategy and Policy Problems",
-                    "ECON3000": "Evidence-based Intervention Design and Evaluation"
-                },
-                "myBCom": {
-                    "type": "core",
-                    "COMM3999": "myBCom Graduation Portfolio",
-                    "COMM0999": "myBCom Blueprint",
-                    "COMM1999": "myBCom First Year Portfolio"
+                    "COMM1110": "Evidence-Based Problem Solving",
+                    "COMM1150": "Global Business Environments",
+                    "COMM1190": "Data, Insights and Decisions"
                 }
             }
         }
