@@ -357,8 +357,8 @@ def courseChildren(course: str):
     return {
             "original" : course,
             "courses": [
-                coursename for coursename, c in CONDITIONS.items()
-                if c.is_path_to(course)
+                coursename for coursename, condition in CONDITIONS.items()
+                if condition is not None and condition.is_path_to(course)
             ]
         }
 
@@ -412,7 +412,7 @@ def coursesUnlockedWhenTaken(userData: UserData, courseToBeTaken: str):
     new_courses = courses_now_unlocked - courses_initially_unlocked
 
     ## Differentiate direct and indirect unlocks
-    path_to = set(courseChildren(courseToBeTaken))
+    path_to = set(courseChildren(courseToBeTaken)["courses"])
     direct_unlock = new_courses.intersection(path_to)
     indirect_unlock = new_courses - direct_unlock
 
