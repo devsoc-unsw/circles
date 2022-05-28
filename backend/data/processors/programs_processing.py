@@ -134,6 +134,7 @@ def findProgramName(programData, item):
                 return programName.strip()
     return programName.strip()
 
+
 def addDisciplineData(components, item, programData):
     components.setdefault("SpecialisationData", {})
     components.setdefault("NonSpecialisationData", {})
@@ -183,12 +184,12 @@ def addDisciplineData(components, item, programData):
                 if container["credit_points"] != "":
                     PE["credits_to_complete"] = container["credit_points"]
                 if container["relationship"] != []:
-                    for relo in container["relationship"]:
-                        PE[relo["academic_item_code"]] = relo["academic_item_name"]
+                    for course in container["relationship"]:
+                        PE[course["academic_item_code"]] = course["academic_item_name"]
                     components["NonSpecialisationData"][container["title"]] = PE
                 else:
-                    for dynamic_relo in container["dynamic_relationship"]:
-                        PE[dynamic_relo["description"]] = 1
+                    for course in container["dynamic_relationship"]:
+                        PE[course["description"]] = 1
                     components["NonSpecialisationData"][container["title"]] = PE
             # If item is a core course
             if container["vertical_grouping"]["value"] == "CC":
@@ -201,20 +202,20 @@ def addDisciplineData(components, item, programData):
                 # If there are multiple courses
                 if container["container"] != []:
                     # Loop through and find all courses and add them
-                    for cont in container["container"]:
-                        if cont["vertical_grouping"]["value"] == "one_of_the_following":
-                            for relo in ["relationship"]:
-                                CC[relo["academic_item_code"]] = relo[
+                    for item in container["container"]:
+                        if item["vertical_grouping"]["value"] == "one_of_the_following":
+                            for course in item["relationship"]:
+                                CC[course["academic_item_code"]] = course[
                                     "academic_item_name"
                                 ]
-                        elif cont["vertical_grouping"]["value"] == "CC":
-                            for relo in relo["relationship"]:
-                                CC[relo["academic_item_code"]] = relo[
+                        elif item["vertical_grouping"]["value"] == "CC":
+                            for course in item["relationship"]:
+                                CC[course["academic_item_code"]] = course[
                                     "academic_item_name"
                                 ]
                 else:
-                    for relo in container["relationship"]:
-                        CC[relo["academic_item_code"]] = relo["academic_item_name"]
+                    for course in container["relationship"]:
+                        CC[course["academic_item_code"]] = course["academic_item_name"]
                 components["NonSpecialisationData"][title] = CC
 
 
