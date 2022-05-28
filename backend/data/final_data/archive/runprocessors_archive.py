@@ -44,14 +44,14 @@ if __name__ == "__main__":
     if args.stage == "all":
         # Run all the stages from top to bottom
         res = input(
-            f"Careful. You are about to run all stages INCLUDING the scrapers... Enter 'y' if you wish to proceed or 'n' to cancel: "
+            "Careful. You are about to run all stages INCLUDING the scrapers... Enter 'y' if you wish to proceed or 'n' to cancel: "
         )
         if res == "y":
-            for s in run:
-                run[s](args.year)
+            for _, stage_f in run.items():
+                stage_f(args.year)
     elif args.stage == "data-fix":
-        for s in run:
-            if s != "scrape":
-                run[s](args.year)
+        for stage, stage_f in run.items():
+            if stage != "scrape":
+                stage_f(args.year)
     else:
         run[args.stage](args.year)
