@@ -106,6 +106,10 @@ class PlannerData(BaseModel):
 class Courses (BaseModel):
     courses: list[str]
 
+class CoursesPath (BaseModel):
+    original: str
+    courses: list[str]
+
 minorInFE = ["3778"]
 minorInSpecialisation = ["3502", "3970"]
 

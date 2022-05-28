@@ -20,8 +20,7 @@ KEEP_UNEDITED = [
     "faculty",
     "campus",
     "equivalents",
-    "exclusions",
-    "path_to",
+    "exclusions"
 ]
 
 PROCESSED_COURSES = {}
@@ -43,11 +42,6 @@ def process_course_data(year = None):
     for code, course in data.items():
         processed = {k: v for k, v in course.items() if k in KEEP_UNEDITED}
 
-        if "path_to" not in processed:
-            # If this course does not yet have a 'path_to' field, set up
-            # dict in anticipation of courses being added
-            processed["path_to"] = {}
-
         process_description(processed, course)
         format_types(processed)
         process_terms(processed, course)
@@ -64,11 +58,6 @@ def process_course_data(year = None):
         if year is None else
         f"data/final_data/archive/processed/{year}.json"
     )
-
-    if year is None:
-        data_helpers.write_data(
-            ABSENT_COURSES, "data/final_data/absentCourses.json")
-
 
 def process_description(processed: dict, formatted: dict) -> None:
     """Removes HTML tags from descriptions"""

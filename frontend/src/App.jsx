@@ -7,6 +7,7 @@ import DegreeWizard from "./pages/DegreeWizard";
 import CourseSelector from "./pages/CourseSelector";
 import TermPlanner from "./pages/TermPlanner";
 import ProgressionChecker from "./pages/ProgressionChecker";
+import GraphicalSelector from "./pages/GraphicalSelector";
 import "./App.less";
 import PageLoading from "./components/PageLoading";
 import "./axios";
@@ -35,6 +36,15 @@ const App = () => {
               <div>
                 <Header />
                 <CourseSelector />
+              </div>
+            )}
+          />
+          <Route
+            path="/graphical-selector"
+            element={(
+              <div>
+                <Header />
+                <GraphicalSelector />
               </div>
             )}
           />

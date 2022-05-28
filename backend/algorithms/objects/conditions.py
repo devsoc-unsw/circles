@@ -185,8 +185,7 @@ class WAMCondition(Condition):
         self.category = category_classobj
 
     def is_path_to(self, course: str) -> bool:
-        """??? do we want this? """
-        return self.category.match_definition(course)
+        return False
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
         """

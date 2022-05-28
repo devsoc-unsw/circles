@@ -50,7 +50,6 @@ except argparse.ArgumentError:
     parser.print_help()
     exit(0)
 
-
 def run_manual_fixes():
     try:
         subprocess.run(["data/processors/manual_fixes/run_manual_fixes.sh"], check=True)

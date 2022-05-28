@@ -9,8 +9,8 @@ from data.utility.data_helpers import read_data
 from fastapi import APIRouter, HTTPException
 from server.database import archivesDB, coursesCOL
 from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, Courses,
-                                  CourseDetails, CoursesState,
-                                  CoursesUnlockedWhenTaken, ProgramCourses, Structure,
+                                  CourseDetails, CoursesState, CoursesPath,
+                                  CoursesUnlockedWhenTaken, ProgramCourses,
                                   UserData, message)
 
 """
@@ -335,7 +335,7 @@ def getLegacyCourse(year, courseCode):
                     "content": {
                         "application/json": {
                             "example": {
-                                 "affected_courses": [
+                                 "courses": [
                                      "COMP1521",
                                      "COMP1531",
                                      "COMP3121"
@@ -352,20 +352,49 @@ def unselectCourse(userData: UserData, unselectedCourse: str):
     """
     affectedCourses = User(fixUserData(userData.dict())).unselect_course(unselectedCourse)
 
-    return {'affected_courses': affectedCourses}
+    return {'courses': affectedCourses}
 
-@router.get("/CourseChildren/{course}", response_model=Courses, 
+@router.get("/courseChildren/{course}", response_model=CoursesPath, 
             responses = {
                 200 : {
                     "courses": ["COMP1521", "COMP1531"] 
                 }
             })
 def courseChildren(course: str):
-    """ fetches courses which are dependant on taking 'course' """
-    courses = [coursename for coursename, c in CONDITIONS.items() if c.is_path_to(course)]
-    return {"courses": courses}
+    """
+    fetches courses which are dependant on taking 'course'
+    eg 1511 -> 1521, 1531, 2521 etc
+    """
+    if not CONDITIONS.get(course):
+        raise HTTPException(400, f"no course by name {course}")
+    return {
+            "original" : course,
+            "courses": [
+                coursename for coursename, c in CONDITIONS.items()
+                if c.is_path_to(course)
+            ]
+        }
 
-
+@router.get("/getPathFrom/{course}", response_model=CoursesPath, 
+            responses = {
+                200 : {
+                    "courses": ["COMP1521", "COMP1531"] 
+                }
+            })
+def getPathFrom(course):
+    """
+    fetches courses which can be used to satisfy 'course'
+    eg 2521 -> 1511
+    """
+ 
+    course_condition = CONDITIONS[course]
+    return {
+        "original" : course,
+        "courses" :[
+            coursename for coursename, _ in CONDITIONS.items()
+            if course_condition.is_path_to(coursename)
+        ] 
+    }
 
 @router.post("/coursesUnlockedWhenTaken/{courseToBeTaken}", response_model=CoursesUnlockedWhenTaken,
             responses={
