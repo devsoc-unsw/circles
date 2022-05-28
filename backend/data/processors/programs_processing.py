@@ -134,14 +134,14 @@ def findProgramName(programData, item):
                 return programName.strip()
     return programName.strip()
 
-def addDisciplineData(components, item, programData):
+def addDisciplineData(components, course, programData):
     components.setdefault("SpecialisationData", {})
     components.setdefault("NonSpecialisationData", {})
 
-    programName = findProgramName(programData, item)
-    if "container" in item and item["container"] != []:
+    programName = findProgramName(programData, course)
+    if "container" in course and course["container"] != []:
         # Loop through items in disciplinary component
-        for container in item["container"]:
+        for container in course["container"]:
             # If item is a major, loop through and add data to major
             if container["vertical_grouping"]["value"] == "undergrad_major":
                 majorData = {}
@@ -201,14 +201,14 @@ def addDisciplineData(components, item, programData):
                 # If there are multiple courses
                 if container["container"] != []:
                     # Loop through and find all courses and add them
-                    for item in container["container"]:
-                        if item["vertical_grouping"]["value"] == "one_of_the_following":
-                            for course in item["relationship"]:
+                    for course in container["container"]:
+                        if course["vertical_grouping"]["value"] == "one_of_the_following":
+                            for course in course["relationship"]:
                                 CC[course["academic_item_code"]] = course[
                                     "academic_item_name"
                                 ]
-                        elif item["vertical_grouping"]["value"] == "CC":
-                            for course in item["relationship"]:
+                        elif course["vertical_grouping"]["value"] == "CC":
+                            for course in course["relationship"]:
                                 CC[course["academic_item_code"]] = course[
                                     "academic_item_name"
                                 ]
@@ -219,6 +219,7 @@ def addDisciplineData(components, item, programData):
 
 
 
+# !TODO: add a docstring here if you understand this
 def addFEData(components, item):
     FE = {}
     if item["credit_points"] != "":
