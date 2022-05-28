@@ -150,7 +150,7 @@ def convertSubgroupObjectToCoursesDict(object: str, description: str|list[str]) 
     """ Gets a subgroup object (format laid out in the processor) and fetches the exact courses its referring to """
     if " or " in object:
         return {c: description[index] for index, c in enumerate(object.split(" or "))}
-    elif not re.match(r"[A-Z]{4}[0-9]{4}", object):
+    if not re.match(r"[A-Z]{4}[0-9]{4}", object):
         return regex_search(object)
 
     return {object: description}

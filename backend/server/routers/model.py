@@ -83,9 +83,6 @@ class CoursesUnlockedWhenTaken (BaseModel):
     direct_unlock: list
     indirect_unlock: list
 
-class CourseTypeState (BaseModel):
-    is_accurate: bool
-
 class CourseTypeState(BaseModel):
     is_accurate: bool
     unlocked: bool

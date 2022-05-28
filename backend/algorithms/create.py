@@ -49,8 +49,7 @@ CACHED_EXCLUSIONS_PATH = "./algorithms/cache/exclusions.json"
 with open(CACHED_EXCLUSIONS_PATH, "r", encoding="utf8") as f:
     CACHED_EXCLUSIONS = json.load(f)
 
-
-def create_category(tokens) -> Tuple[Category, int]:
+def create_category(tokens) -> Tuple[Category, int]: # pylint: disable=too-many-return-statements
     """
     Given a list of tokens starting from after the connector keyword, create
     and return the category object matching the category, as well as the current index
@@ -89,7 +88,7 @@ def create_category(tokens) -> Tuple[Category, int]:
                 # (COND1 || COND2 && COND3) or similar combinations is undefined
                 print("WARNING: Found an undefined logic combination. Skipping.")
                 return None, index - 1
-            elif token == ")":
+            if token == ")":
                 # We've reached the end of the condition
                 return category, index - 1
 

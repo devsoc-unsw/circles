@@ -53,7 +53,7 @@ class CompositeCategory(Category):
             return all(
                 category.match_definition(course) for category in self.categories
             )
-        elif self.logic == Logic.OR:
+        if self.logic == Logic.OR:
             return any(
                 category.match_definition(course) for category in self.categories
             )
