@@ -29,7 +29,7 @@ def cache_conditions_pkl_file():
     for course, tokens in all_conditions_tokens.items():
         all_objects[course] = create_condition(tokens, course)
 
-    with open(pickle_file, "wb", encoding="utf8") as outp:
+    with open(pickle_file, "wb") as outp:
         pickle.dump(all_objects, outp, pickle.HIGHEST_PROTOCOL)
 
 
