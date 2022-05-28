@@ -5,7 +5,6 @@ import G6 from "@antv/g6";
 import { findDOMNode } from "react-dom";
 
 const GraphicalSelector = () => {
-  // eslint-disable-next-line
   const { programCode, majors, minor } = useSelector((state) => state.degree);
 
   const [courses, setCourses] = useState([]);
@@ -39,9 +38,7 @@ const GraphicalSelector = () => {
     graph.data(data);
     graph.render();
   };
-  // eslint-disable-next-line
   useEffect(() => {
-    // get structure of degree
     const fetchCourseList = async () => {
       const res = (
         await axios.get(`/programs/getStructure/${programCode}/${majors.join("+")}${minor && `/${minor}`}`)

@@ -284,7 +284,7 @@
     },
     "ARCH1101": {
         "original": "Currently enrolled in program 3261 Architectural Studies, 3268 Computational Design, or 3635 Civil Engineering with Architecture (Hons)<br/><br/>",
-        "processed": "Currently program 3261 Architectural Studies, 3268 Computational Design || 3635 Civil Engineering with Architecture (Hons)"
+        "processed": "Currently program 3261 Architectural Studies, 3268 Computational Design || 3635 Civil Engineering && Architecture (Hons)"
     },
     "ARCH1102": {
         "original": "Prerequisite: ARCH1101<br/><br/>",
@@ -1508,11 +1508,11 @@
     },
     "ARTS3758": {
         "original": "Prerequisite: ARTS3759 and enrolment with consent<br/><br/>",
-        "processed": "ARTS3759 && enrolment with consent"
+        "processed": "ARTS3759 && enrolment && consent"
     },
     "ARTS3759": {
         "original": "Prerequisite: Enrolment with consent. ARTS3759 is open to UNSW undergraduate students that are also enrolled in an internship (or international field placement course). This needs to be demonstrated prior to enrolment.<br/><br/>",
-        "processed": "Enrolment with consent. is open to UNSW undergraduate that are also an internship (or international field placement course). This needs to be demonstrated"
+        "processed": "Enrolment && consent. is open to UNSW undergraduate that are also an internship (or international field placement course). This needs to be demonstrated"
     },
     "ARTS3780": {
         "original": "Prerequisite: 48 UOC including 6 UOC at level 1 and 6 UOC at level 2 in European Studies. Or 48 UOC including 12 UOC in German Studies language courses. Or 48 UOC and enrolment in an International Studies single or double degree (2017 onwards)<br/><br/>",
@@ -2836,7 +2836,7 @@
     },
     "BLDG4018": {
         "original": "Program Prerequisite:4522 or Program 3332 with WAM of 65 or over<br/><br/>",
-        "processed": "Program 4522 || Program 3332 with 65WAM || over"
+        "processed": "Program 4522 || Program 3332 && 65WAM || over"
     },
     "BLDG4019": {
         "original": "Program Prerequisite: 4522<br/><br/>",
@@ -2848,19 +2848,19 @@
     },
     "BLDG4022": {
         "original": "Program Prerequisite:4522 or Program 3332 with WAM of 65 or over<br/><br/>",
-        "processed": "Program 4522 || Program 3332 with 65WAM || over"
+        "processed": "Program 4522 || Program 3332 && 65WAM || over"
     },
     "BLDG4023": {
         "original": "Program Prerequisite:4522 or Program 3332 with WAM of 65 or over<br/><br/>",
-        "processed": "Program 4522 || Program 3332 with 65WAM || over"
+        "processed": "Program 4522 || Program 3332 && 65WAM || over"
     },
     "BLDG4024": {
         "original": "Program Prerequisite:4522 or Program 3332 with WAM of 65 or over<br/><br/>",
-        "processed": "Program 4522 || Program 3332 with 65WAM || over"
+        "processed": "Program 4522 || Program 3332 && 65WAM || over"
     },
     "BLDG4501": {
         "original": "Program Prerequisite:4522 or Program 3332 with WAM of 65 or over<br/><br/>",
-        "processed": "Program 4522 || Program 3332 with 65WAM || over"
+        "processed": "Program 4522 || Program 3332 && 65WAM || over"
     },
     "BLDG4504": {
         "original": "Prerequisite: BLDG4501 or BENV4000<br/><br/>",
@@ -3028,7 +3028,7 @@
     },
     "CHEM1041": {
         "original": "Prerequisite: CHEM1031, or CHEM1011 with a credit or above.<br/><br/>Prerequisite: Must be enrolled in a program with the option of a CHEM major<br/><br/>",
-        "processed": "CHEM1031 || CHEM1011 with a credit || above. Must be a program with the option of a CHEM major"
+        "processed": "CHEM1031 || CHEM1011 && a credit || above. Must be a program && the option of a CHEM major"
     },
     "CHEM1051": {
         "original": "Prerequisite: Enrolment in the Bachelor of Medicinal Chemistry (3999 or 3992) or Bachelor of Medicinal Chemistry/Law program<br/><br/>",
@@ -3036,7 +3036,7 @@
     },
     "CHEM1061": {
         "original": "Prerequisite: Enrolment in the Bachelor of Medicinal Chemistry (3992 or 3999) program and completion of either CHEM1051 or CHEM1031 or CHEM1011 with a credit or above.<br/><br/>",
-        "processed": "Enrolment in the Bachelor of Medicinal Chemistry (3992 || 3999) program && CHEM1051 || CHEM1031 || CHEM1011 with a credit || above"
+        "processed": "Enrolment in the Bachelor of Medicinal Chemistry (3992 || 3999) program && CHEM1051 || CHEM1031 || CHEM1011 && a credit || above"
     },
     "CHEM1151": {
         "original": "Enrolment in Medicinal Chemistry (3992) or (3999) or 4755<br/><br/>",
@@ -3386,11 +3386,12 @@
     "COMM3090": {
         "original": "Students are expected to be in their final year of a Bachelor of Commerce single or dual degree with at least 108 UOC completed.<br/><br/>",
         "handbook_note": "Students must be in their final year of a single or double Commerce degree",
-        "processed": "COMM# with 108UOC"
+        "processed": "COMM# && 108UOC"
     },
     "COMM3091": {
         "original": "Completed at least 72 UoC and be enrolled in a Commerce Program; be in good academic standing, and completed COMM1999<br/><br/>",
-        "processed": "72UOC && COMM# be in good academic standing && COMM1999"
+        "handbook_note": "Students must be in Good Academic Standing.",
+        "processed": "72UOC && COMM# && COMM1999"
     },
     "COMM3101": {
         "original": "Pre-requisite: Completion of 48 UOC.<br/>This course is by application only.Please contact the Co-op office for more information.<br/>Students who have completed DIPP1510 or COMM2222 or are in Business Co-Op programs are excluded from this course.<br/><br/>",
@@ -3422,8 +3423,7 @@
     },
     "COMM3999": {
         "original": "Pre-requisite: Completed myBCom First Year Portfolio (COMM1999) and in their final year of a single or double Commerce degree (completed at least 72 UOC of Business courses).<br/><br/>",
-        "handbook_note": "Students must be in their final year of a single or double Commerce degree",
-        "processed": "myBCom First Year Portfolio (COMM1999) && COMM# (72UOC of Business courses)"
+        "processed": "myBCom First Year Portfolio (COMM1999) && in their final year of a single || double Commerce degree (72UOC of Business courses)"
     },
     "COMM6700": {
         "original": "Prerequisite: undergraduate students must have completed 72 units of credit <br/><br/>",
@@ -5745,7 +5745,8 @@
     },
     "FADA6700": {
         "original": "Prerequisite: 48 units of credit overall. Student must be in good academic standing. Consent from ADA WIL Team required.<br/><br/>",
-        "processed": "48UOC . must be in good academic standing. Consent from ADA WIL Team required"
+        "handbook_note": "Students must be in Good Academic Standing.",
+        "processed": "48UOC . must. Consent from ADA WIL Team required"
     },
     "FINS1612": {
         "original": "",
@@ -6831,7 +6832,7 @@
     },
     "LAWS1055": {
         "original": "Co-requisite with LAWS1052. To be able to be enrolled in separately in subsequent term if LAWS1052 successfully completed<br/><br/>",
-        "processed": "[with LAWS1052. To be able to be separately in subsequent term if LAWS1052 successfully]"
+        "processed": "[&& LAWS1052. To be able to be separately in subsequent term if LAWS1052 successfully]"
     },
     "LAWS1061": {
         "original": "Prerequisite: Prerequisite: LAWS1052 or LAWS1051; JURD7152<br/><br/>",
@@ -6895,7 +6896,7 @@
     },
     "LAWS2277": {
         "original": "Corequisite: LAWS1160 or JURD7160<br/>(One of these courses must be completed prior to or concurrently with enrolment in LAWS2277)<br/><br/>",
-        "processed": "[LAWS1160 || JURD7160 (One of these courses must be prior to || concurrently with enrolment in)]"
+        "processed": "[LAWS1160 || JURD7160 (One of these courses must be prior to || concurrently && enrolment in)]"
     },
     "LAWS2320": {
         "original": "Pre-requisite: 24 UOC completed in LLB courses or 24 UOC completed in Juris Doctor courses. Juris Doctor students who commenced prior to 2013 need no pre-requisites.<br/><br/>",
@@ -11282,7 +11283,7 @@
     },
     "ZHSS2600": {
         "original": "Prerequisite: Any 2 of ZHSS1201, ZHSS1202, ZHSS1301, ZHSS1302, ZHSS1401, ZHSS1402, ZBUS1101, ZBUS1103 or ZGEN2240 with Head of School consent.<br/><br/>",
-        "processed": "Any 2 of ZHSS1201, ZHSS1202, ZHSS1301, ZHSS1302, ZHSS1401, ZHSS1402, ZBUS1101, ZBUS1103 || ZGEN2240 with Head of School consent"
+        "processed": "Any 2 of ZHSS1201, ZHSS1202, ZHSS1301, ZHSS1302, ZHSS1401, ZHSS1402, ZBUS1101, ZBUS1103 || ZGEN2240 && Head of School consent"
     },
     "ZHSS2601": {
         "original": "",
@@ -11338,7 +11339,7 @@
     },
     "ZHSS3231": {
         "original": "Prerequisite: ZHSS1201 or ZHSS1202 or with Head of School approval<br/><br/>",
-        "processed": "ZHSS1201 || ZHSS1202 || with Head of School approval"
+        "processed": "ZHSS1201 || ZHSS1202 || && Head of School approval"
     },
     "ZHSS3233": {
         "original": "Prerequisite: ZHSS1201 and ZHSS1202<br/><br/>",
