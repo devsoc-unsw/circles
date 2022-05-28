@@ -7,7 +7,6 @@ from server.database import programsCOL, specialisationsCOL
 from server.routers.model import (Structure, majors, message, minorInFE,
                                   minorInSpecialisation, minors, programs)
 from server.routers.courses import regex_search
-from data.processors.programs_processing import TEST_PROGS
 
 router = APIRouter(
     prefix="/programs",
@@ -45,7 +44,7 @@ def getPrograms():
     """ Fetch all the programs the backend knows about in the format of { code: title } """
     # return {"programs": {q["code"]: q["title"] for q in programsCOL.find()}}
     # TODO On deployment, DELETE RETURN BELOW and replace with the return above
-    return {"programs": {"3778": "Computer Science", 
+    return {"programs": {"3778": "Computer Science",
                         "3784": "Commerce / Computer Science",
                         }}
 
@@ -63,7 +62,7 @@ def getPrograms():
             "content": {
                 "application/json": {
                     "example": {
-                        "majors": { 
+                        "majors": {
                             "Computer Science": {
                                 "COMPS1": "Computer Science (Embedded Systems)",
                                 "COMPJ1": "Computer Science (Programming Languages)",
@@ -144,14 +143,17 @@ def getMinors(programCode: str):
 
     return {"minors": minrs}
 
-def convertSubgroupObjectToCoursesDict(object: str, description: str|list[str]) -> dict[str, str]:
+def convertSubgroupObjectToCoursesDict(object: str, description: str|list[str]):#-> dict[str, str]:
     """ Gets a subgroup object (format laid out in the processor) and fetches the exact courses its referring to """
-    if " or " in object:
-        return {c: description[index] for index, c in enumerate(object.split(" or "))}
-    elif not re.match(r"[A-Z]{4}[0-9]{4}", object):
-        return regex_search(object)
-    else:
-        return {object: description}
+    
+    return (
+        {c: description[index] for index, c in enumerate(object.split(" or "))}
+            if " or " in object
+        else regex_search(object)
+            if not re.match(r"[A-Z]{4}[0-9]{4}", object)
+        else {object: description}
+    )
+
 
 def addSubgroupContainer(structure: dict, type: str, container: dict, exceptions: list[str]) -> list[str]:
     """ Returns the added courses """
@@ -264,9 +266,9 @@ def getStructure(
     structure = {}
 
     if major:
-        majors = major.split("+") if "+" in major else [major]
+        majors_l = major.split("+") if "+" in major else [major]
 
-        for m in majors:
+        for m in majors_l:
             addSpecialisation(structure, m, "Major")
 
     if minor:
