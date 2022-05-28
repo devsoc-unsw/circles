@@ -2,8 +2,8 @@
 APIs for the /courses/ route.
 """
 import re
-from fuzzywuzzy import fuzz
 from typing import Optional, Tuple
+from fuzzywuzzy import fuzz
 
 from algorithms.objects.user import User
 from data.config import ARCHIVED_YEARS
@@ -318,7 +318,7 @@ def getLegacyCourse(year, courseCode):
         Returns information relating to the given course
     """
     result = list(archivesDB[str(year)].find({"code": courseCode}))
-    if result == {}:
+    if not result:
         raise HTTPException(status_code=400, detail="invalid course code or year")
     del result["_id"]
     result["is_legacy"] = True
