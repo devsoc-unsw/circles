@@ -14,6 +14,7 @@ CACHED_MAPPINGS = {}
 with open("./algorithms/cache/courseMappings.json", "r", encoding="utf8") as f:
     CACHED_MAPPINGS = json.load(f)
 
+
 class Category(ABC):
     """
     The base Category class from which more detailed Category classes
@@ -48,16 +49,15 @@ class CompositeCategory(Category):
         self.logic = logic
 
     def match_definition(self, course: str) -> bool:
-        if self.logic == Logic.AND:
-            return all(
-                [category.match_definition(course) for category in self.categories]
-            )
-        elif self.logic == Logic.OR:
-            return any(
-                [category.match_definition(course) for category in self.categories]
-            )
-        else:
+
+        if self.logic not in [Logic.AND, Logic.OR]:
             raise ValueError(f"Invalid logic: {self.logic}")
+
+        return all(
+            [category.match_definition(course) for category in self.categories]
+        ) if self.logic == Logic.AND else any(
+            [category.match_definition(course) for category in self.categories]
+        ) if self.logic == Logic.OR else None
 
     def __str__(self) -> str:
         logic_op = "&&" if self.logic == Logic.AND else "||"
@@ -125,8 +125,9 @@ class LevelCourseCategory(CompositeCategory):
 
 class SchoolCategory(Category):
     '''Category for courses belonging to a school (e.g. S Mechanical)'''
+
     def __init__(self, school):
-        self.school = school # The code for the school (S Mechanical)
+        self.school = school  # The code for the school (S Mechanical)
 
     def match_definition(self, course: str) -> bool:
         return course in CACHED_MAPPINGS[self.school]
