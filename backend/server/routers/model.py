@@ -1,3 +1,4 @@
+# pylint: disable=missing-class-docstring
 import json
 from pickle import load
 from typing import Optional
