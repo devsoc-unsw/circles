@@ -34,7 +34,7 @@ def process_course_data(year = None):
     """
 
     data = data_helpers.read_data(
-        "data/scrapers/coursesFormattedRaw.json" 
+        "data/scrapers/coursesFormattedRaw.json"
         if year is None else
         f"data/final_data/archive/formatted/{year}.json"
     )

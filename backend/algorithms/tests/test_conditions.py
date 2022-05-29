@@ -10,7 +10,7 @@ from algorithms.objects.user import User
 
 PATH = "./algorithms/exampleUsers.json"
 
-with open(PATH) as f:
+with open(PATH, encoding="utf8") as f:
     USERS = json.load(f)
 f.close()
 

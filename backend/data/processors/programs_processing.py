@@ -134,6 +134,7 @@ def findProgramName(programData, item):
                 return programName.strip()
     return programName.strip()
 
+
 def addDisciplineData(components, item, programData):
     components.setdefault("SpecialisationData", {})
     components.setdefault("NonSpecialisationData", {})
@@ -219,6 +220,7 @@ def addDisciplineData(components, item, programData):
 
 
 
+# !TODO: add a docstring here if you understand this
 def addFEData(components, item):
     FE = {}
     if item["credit_points"] != "":

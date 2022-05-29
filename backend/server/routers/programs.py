@@ -146,7 +146,7 @@ def getMinors(programCode: str):
 
     return {"minors": minrs}
 
-def convertSubgroupObjectToCoursesDict(object: str, description: str|list[str]) -> dict[str, str]:
+def convertSubgroupObjectToCoursesDict(object: str, description: str|list[str]):#-> dict[str, str]:
     """ Gets a subgroup object (format laid out in the processor) and fetches the exact courses its referring to """
     if " or " in object:
         return {c: description[index] for index, c in enumerate(object.split(" or "))}
@@ -266,9 +266,9 @@ def getStructure(
     structure = {}
 
     if major:
-        majors = major.split("+") if "+" in major else [major]
+        majors_l = major.split("+") if "+" in major else [major]
 
-        for m in majors:
+        for m in majors_l:
             addSpecialisation(structure, m, "Major")
 
     if minor:

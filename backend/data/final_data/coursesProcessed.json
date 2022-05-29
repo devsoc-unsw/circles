@@ -1117,10 +1117,10 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {
-            "ANAT2511": 1,
-            "ANAT1551": 1,
             "ANAT2151": 1,
-            "ANAT2111": 1
+            "ANAT2511": 1,
+            "ANAT2111": 1,
+            "ANAT1551": 1
         },
         "terms": [
             "T2"
@@ -4854,16 +4854,16 @@
         "code": "ARTS2813",
         "UOC": 6,
         "level": 2,
-        "description": "In this course, you will\u00a0examine the key international security issues since the end of the Cold War. The end of the Cold War and \u2018globalisation\u2019 have coincided with the emergence of a host of &#34;new&#34; security challenges to the state. These include the proliferation of conventional weapons and of weapons of mass destruction, international crime, international terrorism, environmental degradation, civil wars and ethnic violence. At the same time, traditional notions of security centered around the state have been challenged by advocates of human security, leading the emergence of the human security agenda which focuses on the human individual as the referent for security. To add to these, there remain traditional security concerns centred around war and conflict, geostrategic rivalries and arms races. You will examine the key security challenges of our times, both traditional and non-traditional, how they are manifested and how the state and the global community have attempted to cope with them.\n\n\u00a0\n",
+        "description": "International Security has traditionally been analysed through (neo)realist theoretical frameworks that focus exclusively on the state as the referent of security, and investigate issues as the causes of war and armed conflict, alliances, strategy, arms control and deterrence. At the same time, International Relations scholars have argued that these narrow, state-centric and military-centric approaches to security \u2013 and the concepts and discourses they rely on \u2013 are deeply implicated in the \u2018imperial-racial origins of IR\u2019 and unable to engage with contemporary security concerns related to issues such as climate justice, environmental security, food security, the Black Lives Matter movement, disinformation, ethnic strife, the evolution of terrorism, the corollaries of intervention, and the securitisation of migrants and refugees, amongst others. This course provides a critical evaluation of the traditional security studies scholarship, and introduces students to critical approaches to security, including feminist, postcolonial, poststructuralist, and emancipatory theoretical frameworks that extend beyond warfare and examine diverse modern security issues. We will analyse different sets of critical theoretical approaches and explore their analytical utility (as well as any biases/ blind spots) by investigating relevant case studies and contemporary security dilemmas. Overall, the course will enable you to recognise core differences between critical security scholarship and traditional security studies; identify and evaluate critical theories of security, and apply them to contemporary events and issues in global politics.\n\u00a0",
         "study_level": "Undergraduate",
         "school": "School of Social Sciences",
         "faculty": "Faculty of Arts, Design and Architecture",
         "campus": "Sydney",
         "equivalents": {
-            "GLST2106": 1,
             "INST2013": 1,
-            "INST2302": 1,
-            "POLS3023": 1
+            "POLS3023": 1,
+            "GLST2106": 1,
+            "INST2302": 1
         },
         "exclusions": {},
         "terms": [
@@ -10559,13 +10559,13 @@
         "faculty": "Faculty of Science",
         "campus": "Sydney",
         "equivalents": {
-            "DPST1051": 1,
-            "BIOS1201": 1
+            "BIOS1201": 1,
+            "DPST1051": 1
         },
         "exclusions": {
-            "GENS1111": 1,
+            "BABS1111": 1,
             "DPST1051": 1,
-            "BABS1111": 1
+            "GENS1111": 1
         },
         "terms": [
             "T1",
@@ -36806,7 +36806,7 @@
         "equivalents": {},
         "exclusions": {},
         "terms": [
-            "T2"
+            ""
         ],
         "gen_ed": 1,
         "raw_requirements": "Pre-requisite: ECON1203 or COMM1190 or INFS1609 or MATH1041 or MATH1231 or MATH1241 or MATH1251 or MARK2052 or COMM2050 or COMM2501 or INFS2605 or INFS2609.<br/>Students with equivalent Statistics knowledge can seek pre-requisite waiver via webforms"
@@ -44509,7 +44509,7 @@
         "code": "PHCM2003",
         "UOC": 6,
         "level": 2,
-        "description": "This course is offered in two modes: either face to face (on campus) and fully online\n\nHealth Promotion is a fundamental component of any approach to public health and population health, whether it be research, policy or practice. The World Health Organisation defines health promotion as \u2018Health promotion is the process of enabling people to increase control over, and to improve, their health. It moves beyond a focus on individual behaviour towards a wide range of social and environmental interventions.\u201d (http://www.who.int/topics/health_promotion/en/ ). This course provides an overview of health promotion including examination of the social determinants of health, health literacy and foundations in health promotion. During the course students will explore the role of health promotion in addressing a range of current global health issues and their relevance to the field of public health. Students will examine contemporary perspectives on health and health promotion contributions to public health and population health responses. The course enables students to gain an understanding of \u00a0how health can be defined from different perspectives, and develop core knowledge of health promotion including its foundation theories, principles and concepts,. The course will equip students with the capacity to engage in public health and population health through the essential health promotion skills and understandings.\n",
+        "description": "This course is offered in two modes: either face to face (on campus) and fully online\nHealth Promotion is a fundamental component of any approach to public health and population health, whether it be research, policy or practice. The World Health Organisation defines health promotion as \u2018Health promotion is the process of enabling people to increase control over, and to improve, their health. It moves beyond a focus on individual behaviour towards a wide range of social and environmental interventions.\u201d (http://www.who.int/topics/health_promotion/en/ ). This course provides an overview of health promotion including examination of the social determinants of health, health literacy and foundations in health promotion. During the course students will explore the role of health promotion in addressing a range of current global health issues and their relevance to the field of public health. Students will examine contemporary perspectives on health and health promotion contributions to public health and population health responses. The course enables students to gain an understanding of \u00a0how health can be defined from different perspectives, and develop core knowledge of health promotion including its foundation theories, principles and concepts,. The course will equip students with the capacity to engage in public health and population health through the essential health promotion skills and understandings.",
         "study_level": "Undergraduate",
         "school": "School of Population Health",
         "faculty": "Faculty of Medicine and Health",
@@ -46178,7 +46178,7 @@
         "code": "PPEC3001",
         "UOC": 6,
         "level": 3,
-        "description": "This is the capstone course for the Bachelor of Philosophy, Politics and Economics program. In this course students will apply their accumulated understanding of PPE to the analysis of contemporary social and political problems, and examine potential solutions from the perspectives of feasibility, efficiency and ethics. The course will focus on the interactions between unfolding historical processes and established social, politcal and economic institutions. At the end of this course, PPE students will be ready to approach public policy questions as independent professionals.\n",
+        "description": "This is the capstone course for the Bachelor of Philosophy, Politics and Economics program. In this course you will apply your accumulated understanding of PPE to the analysis of contemporary social and political problems, and examine potential solutions from the perspectives of feasibility, efficiency and ethics. The course will focus on the interactions between unfolding historical processes and established social, political and economic institutions. At the end of this course, PPE you will be ready to approach public policy questions as an independent professional.",
         "study_level": "Undergraduate",
         "faculty": "Faculty of Arts, Design and Architecture",
         "campus": "Sydney",

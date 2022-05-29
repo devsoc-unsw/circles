@@ -2,7 +2,7 @@ import json
 import requests
 import copy
 
-with open("algorithms/exampleUsers.json") as f:
+with open("algorithms/exampleUsers.json", encoding="utf8") as f:
     USERS = json.load(f)
 
 

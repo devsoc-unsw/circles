@@ -126,7 +126,6 @@ class CoreqCoursesCondition(Condition):
     def __str__(self) -> str:
         return f"CoreqCoursesCondition(courses={self.courses}, logic={self.logic})"
 
-
 class UOCCondition(Condition):
     """ UOC conditions such as '24UOC in COMP' """
 

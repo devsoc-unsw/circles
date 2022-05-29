@@ -121,23 +121,18 @@ def create_category(tokens) -> Tuple[Category, int]: # pylint: disable=too-many-
         # There are no tokens after this. Simple level category
         return LevelCategory(level), 0
 
-    if re.match(r"^S$", tokens[0], flags=re.IGNORECASE):
-        # School category
-        return SchoolCategory(f"{tokens[0]} {tokens[1]}"), 1
-
-    if re.match(r"^F$", tokens[0], flags=re.IGNORECASE):
-        # Faculty category
-        return FacultyCategory(f"{tokens[0]} {tokens[1]}"), 1
-
-    if re.match(r"^[A-Z]{4}[0-9]{4}$", tokens[0], flags=re.IGNORECASE):
-        # Class category
-        return ClassCategory(tokens[0]), 0
 
     # TODO: Levels (e.g. SPECIALISATIONS, PROGRAM)
     # These don't have categories, do they need a category?
-
-    # Did not match any category. Return None and assume only 1 token was consumed
-    return None, 0
+    return (
+        (SchoolCategory(f"{tokens[0]} {tokens[1]}"), 1)
+            if re.match(r"^S$", tokens[0], flags=re.IGNORECASE)
+        else (FacultyCategory(f"{tokens[0]} {tokens[1]}"), 1)
+            if re.match(r"^F$", tokens[0], flags=re.IGNORECASE)
+        else (ClassCategory(tokens[0]), 0)
+            if re.match(r"^[A-Z]{4}[0-9]{4}$", tokens[0], flags=re.IGNORECASE)
+        else (None, 0)          # No match, 1 token consumed
+    )
 
 
 def create_condition(tokens, course=None) -> CompositeCondition:

@@ -9,6 +9,7 @@ from algorithms.objects.user import User
 from data.config import ARCHIVED_YEARS
 from data.utility.data_helpers import read_data
 from fastapi import APIRouter, HTTPException
+from fuzzywuzzy import fuzz
 from server.database import archivesDB, coursesCOL
 from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, Courses,
                                   CourseDetails, CoursesState, CoursesPath,
@@ -442,7 +443,11 @@ def fuzzy_match(course: Tuple[str, str], search_term: str):
 
 def weight_course(course: Tuple[str, str], search_term: str, structure: dict,
                   major_code: Optional[str] = None, minor_code: Optional[str] = None):
-    """ Gives the course a weighting based on the relevance to the user's degree """
+    """
+    Gives the course a weighting based on the relevance to the user's degree
+    Arguments:
+        - code: tuple(course_code, course_title)
+    """
     weight = fuzzy_match(course, search_term)
     code, _ = course
 
