@@ -1,16 +1,4 @@
-const parseMarkToInt = (mark) => {
-  if (!Number.isNaN(mark)) {
-    return parseInt(mark, 10);
-  }
-  const letterGradeToIntMap = {
-    FL: 25,
-    PS: 60,
-    CR: 70,
-    DN: 80,
-    HD: 90,
-  };
-  return (mark in letterGradeToIntMap) ? letterGradeToIntMap[mark] : null;
-};
+import { parseMarkToInt } from "../TermPlanner/utils";
 
 const prepareUserPayload = (degree, planner) => {
   const { startYear, courses } = planner;
@@ -34,5 +22,3 @@ const prepareUserPayload = (degree, planner) => {
 };
 
 export default prepareUserPayload;
-
-export { parseMarkToInt };

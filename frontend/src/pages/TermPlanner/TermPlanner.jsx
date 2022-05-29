@@ -44,9 +44,13 @@ const TermPlanner = () => {
   const planner = useSelector((state) => state.planner);
 
   const degree = useSelector((state) => state.degree);
-
   const dispatch = useDispatch();
-
+  const getMarkList = () => Object.values(planner.courses).map(((object) => object.mark));
+  // a memoised way to check if marks have changed
+  const marksRef = useRef(getMarkList());
+  if (JSON.stringify(marksRef.current) !== JSON.stringify(getMarkList())) {
+    marksRef.current = getMarkList();
+  }
   const validateTermPlanner = async () => {
     try {
       const { data } = await axios.post(
@@ -63,7 +67,9 @@ const TermPlanner = () => {
   useEffect(() => {
     if (isAllEmpty(planner.years)) openNotification();
     validateTermPlanner();
-  }, [degree, planner.years, suppress, planner.startYear]);
+  }, [
+    degree, planner.years, suppress, planner.startYear, marksRef.current,
+  ]);
 
   const currYear = new Date().getFullYear();
 

@@ -39,7 +39,7 @@ const ContextMenu = ({ code, plannedFor }) => {
     setIsEditMarkVisible(true);
   };
 
-  const validLetterGrades = ["FL", "SY", "PS", "CR", "DN", "HD"];
+  const validLetterGrades = ["FL", "PS", "CR", "DN", "HD"];
   const [markInputBuf, setMarkInputBuf] = useState(
     useSelector((state) => state.planner.courses[code].mark),
   );
@@ -106,7 +106,7 @@ const ContextMenu = ({ code, plannedFor }) => {
       <Modal
         title={`Edit Mark: ${code}`}
         visible={isEditMarkVisible}
-        onOk={handleConfirmEditMark}
+        onOk={() => handleConfirmEditMark(markInputBuf)}
         onCancel={handleCancelEditMark}
         width="300px"
       >
