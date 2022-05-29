@@ -7,9 +7,7 @@ def test_sanity():
     assert x.status_code == 200
     minors = x.json()['minors']
     for minor in minors.values():
-        for key, value in minor.items():
-            if key == "notes":
-                continue
+        for key, value in minor["specs"].items():
             assert re.match(r"[A-Z]{5}[0-9]{1}", key)
             assert type(value) is str
 

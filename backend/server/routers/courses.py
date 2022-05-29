@@ -192,8 +192,8 @@ def search(userData: UserData, search_string: str):
     #       currently this is enforced during setup but will need to
     #       make sure that this is true for all degrees not just comp sci
     specialisations = list(userData.specialisations.keys())
-    majrs = filter(lambda x: x.endswith("1"), specialisations)
-    minrs = filter(lambda x: x.endswith("2"), specialisations)
+    majrs = list(filter(lambda x: x.endswith("1"), specialisations))
+    minrs = list(filter(lambda x: x.endswith("2"), specialisations))
     structure = getStructure(userData.program, "+".join(majrs), "+".join(minrs))['structure']
 
     top_results = sorted(ALL_COURSES.items(), reverse=True,
