@@ -192,7 +192,7 @@ const TermPlanner = () => {
                         <TermBox
                           key={key}
                           name={key}
-                          courses={year[term]}
+                          coursesList={year[term]}
                           termsOffered={termsOffered}
                           isDragging={isDragging}
                         />
