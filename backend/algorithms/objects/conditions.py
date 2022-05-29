@@ -47,6 +47,7 @@ class Condition(ABC):
         course_name = list(course.keys())[0]
         if self.validate(user)[0] or user.has_taken_course(course_name):
             return False
+        # temp check if the course is useful
         user.add_courses(course)
         answer = self.validate(user)[0]
         user.pop_course(course_name)
@@ -309,7 +310,7 @@ class CourseExclusionCondition(Condition):
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
         is_valid = not user.has_taken_course(self.exclusion)
-        return is_valid, [] if is_valid else [f"{self.exclusion} is an exclusion course for this one"]
+        return is_valid, ([] if is_valid else [f"{self.exclusion} is an exclusion course for this one"])
 
     def is_path_to(self, course: str) -> bool:
         return False
@@ -368,7 +369,7 @@ class CompositeCondition(Condition):
         return satisfied, sum(warnings, [])  # warnings are flattened
 
     def is_path_to(self, course: str) -> bool:
-        return any(condition.is_path_to(course) for condition in  self.conditions)
+        return any(condition.is_path_to(course) for condition in self.conditions)
 
     def beneficial(self, user: User, course: dict[str, Tuple[int, int]]) -> bool:
         course_name = list(course.keys())[0]
