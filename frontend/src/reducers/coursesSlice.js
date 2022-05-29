@@ -18,8 +18,9 @@ const coursesSplice = createSlice({
     },
     toggleCourseLock: (state) => {
       state.isLockedEnabled = !state.isLockedEnabled;
-     },
+    },
     resetCourses: () => initialState,
+  },
 });
 
 export const {
