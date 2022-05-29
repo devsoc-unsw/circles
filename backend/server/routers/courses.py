@@ -14,7 +14,7 @@ from server.database import archivesDB, coursesCOL
 from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS,
                                   AffectedCourses, CourseDetails, CoursesState,
                                   CoursesUnlockedWhenTaken, ProgramCourses,
-                                  Structure, UserData, message)
+                                  UserData, message)
 
 router = APIRouter(
     prefix="/courses",
