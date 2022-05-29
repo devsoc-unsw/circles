@@ -172,7 +172,7 @@
             "general_education": {},
             "spec_data": {
                 "majors": {
-                    "null": {
+                    "": {
                         "notes": "COMPA1 is the default stream, and will be used if no other stream is selected.",
                         "specs": {
                             "COMPI1": "Computer Science (Artificial Intelligence)",
@@ -986,7 +986,7 @@
             "general_education": {},
             "spec_data": {
                 "majors": {
-                    "null": {
+                    "": {
                         "notes": "COMPA1 is the default stream, and will be used if no other stream is selected.",
                         "specs": {
                             "COMPJ1": "Computer Science (Programming Languages)",
@@ -1731,6 +1731,239 @@
             "other": []
         },
         "processing_warnings": []
+    },
+    "3970": {
+        "title": "Science",
+        "code": "3970",
+        "duration": 3,
+        "UOC": 144,
+        "faculty": "Faculty of Science",
+        "overview": "The three-year Bachelor of Science allows you to study a wide range of science subjects as well as many other areas of interest. This degree is ideal for students who seek a &#39;generalist&#39; degree in which there is a large element of choice. Students are encouraged to choose a broad range of courses in the first year, to expand their general understanding of Science which then enables them to choose from a wide selection of major options in the second and third year. There is also the option to apply for an additional Honours year at the end of the three years, subject to a student&#39;s academic performance and other criteria. The rules and requirements for the degree are set out below.",
+        "structure_summary": "Students must complete 144 UOC when taken as a standalone program.\nThe requirements for a Bachelor of Science taken as a stand-alone program are:\n\n108 UOC of Science courses\nThis includes at least one\nBachelor of Science major\nand\nScience elective courses . Science elective courses are defined in 'Table 1' in the Additional Information section below.\n\n24 UOC of Free Electives\nThese courses can be taken from any Faculty at UNSW at any stage of your program.\n\n\n12 UOC of General Education\ncourses\nThese cannot be Science courses. The rules regarding General Education are detailed below.\nPlease click the Sample Programs link below to view a typical enrolment pattern for this program.",
+        "components": {
+            "general_education": {
+                "notes": "Students must take 12 UOC of the following courses.\nAny course defined as a Science course cannot be taken as General Education (GE).\nAll other courses can be used to fulfil the GE requirement of this program, including GEN#-coded courses.\nAny exceptions to these rules must be approved by the Associate Dean (Academic Programs) or nominee.",
+                "credits_to_complete": 12
+            },
+            "spec_data": {
+                "majors": {
+                    "Science": {
+                        "notes": "Students must complete at least one Science major selected from the list below. Students should declare their major prior to commencing Stage 2 courses.\nNotes: 1.Students are not permitted to take the Bioinformatics major BINFB1 when taking the degree in dual award mode with the Bachelor of Engineering (Bioinformatics) program.",
+                        "specs": {
+                            "BIOCC1": "Genetics",
+                            "ANATA1": "Anatomy",
+                            "MATSB1": "Materials Science",
+                            "PHARA1": "Pharmacology",
+                            "PHYSL1": "Physics",
+                            "MATHM1": "Mathematics",
+                            "MATHN1": "Physical Oceanography",
+                            "BIOSJ1": "Biology",
+                            "PATHA1": "Pathology",
+                            "MATHT1": "Statistics",
+                            "MICRJ1": "Immunology",
+                            "MSCIM1": "Marine and Coastal Science",
+                            "BIOTA1": "Biotechnology",
+                            "BIOCM1": "Molecular and Cell Biology",
+                            "GEOLS1": "Earth Science",
+                            "VISNA1": "Vision Science",
+                            "GEOGG1": "Geography",
+                            "FOODH1": "Food Science",
+                            "PSYCA1": "Psychology",
+                            "PHSLA1": "Physiology",
+                            "NEURS1": "Neuroscience",
+                            "CHEMA1": "Chemistry",
+                            "BINFB1": "Bioinformatics",
+                            "MICRB1": "Microbiology",
+                            "MATHV1": "Mathematics for Education",
+                            "BIOSG1": "Ecology"
+                        }
+                    }
+                },
+                "minors": {
+                    "Science": {
+                        "notes": "Students may choose to complete an optional minor in one of the following areas, using their Science and/or free electives.",
+                        "specs": {
+                            "MICRJ2": "Immunology",
+                            "PSYCM2": "Psychology",
+                            "CHEMD2": "Chemistry",
+                            "BIOSD2": "Biology",
+                            "CLIMA2": "Climate Science",
+                            "GEOLF2": "Geology",
+                            "PATHB2": "Pathology",
+                            "PHYSC2": "Physics",
+                            "MSCIH2": "Marine Science",
+                            "PHARB2": "Pharmacology",
+                            "BIOCD2": "Molecular Biology",
+                            "GEOGH2": "Physical Geography",
+                            "PHSLB2": "Physiology",
+                            "MATHC2": "Mathematics",
+                            "ARCYB2": "Palaeosciences",
+                            "VISNB2": "Vision Science",
+                            "MATHD2": "Statistics",
+                            "ANATB2": "Anatomy"
+                        }
+                    }
+                }
+            },
+            "core_courses": [],
+            "information_rules": [
+                {
+                    "title": "Course Information Rule",
+                    "notes": "GEN# courses cannot count towards the free elective component, or towards science core courses or science electives in the program. Any exceptions to these rules must be approved by the Associate Dean (Academic Programs) or nominee."
+                },
+                {
+                    "title": "Double Counting",
+                    "notes": "Students cannot complete a minor with the same name as their nominated major, and Level II and III courses cannot be double-counted between majors and minors. More than one minor may be completed subject to the limit on double-counting. Students must declare their minor(s) before their final term."
+                }
+            ],
+            "limit_rules": [
+                {
+                    "courses": {
+                        "GENS": "any Faculty of Science course",
+                        "FOOD": "any Food Technology course",
+                        "SOMS": "any Medical Science course",
+                        "COMP": "any Computer Science course",
+                        "AVIA": "any Faculty of Science course",
+                        "BABS": "any Faculty of Science course",
+                        "BEES": "any Faculty of Science course",
+                        "BIOC": "any Faculty of Science course",
+                        "BIOS": "any Faculty of Science course",
+                        "CHEM": "any Faculty of Science course",
+                        "CLIM": "any Faculty of Science course",
+                        "DATA": "any Faculty of Science course",
+                        "GEOS": "any Faculty of Science course",
+                        "MATH": "any Faculty of Science course",
+                        "MATS": "any Faculty of Science course",
+                        "MICR": "any Faculty of Science course",
+                        "MSCI": "any Faculty of Science course",
+                        "NANO": "any Faculty of Science course",
+                        "PHYS": "any Faculty of Science course",
+                        "PSYC": "any Faculty of Science course",
+                        "SCIF": "any Faculty of Science course"
+                    },
+                    "title": "Excluded General Education Courses",
+                    "credits_to_complete": 0,
+                    "levels": [],
+                    "notes": "Students may not undertake any of the following excluded courses."
+                },
+                {
+                    "courses": {
+                        "AVIA1": "any level 1 Faculty of Science course",
+                        "BABS1": "any level 1 Faculty of Science course",
+                        "BEES1": "any level 1 Faculty of Science course",
+                        "BIOC1": "any level 1 Faculty of Science course",
+                        "BIOS1": "any level 1 Faculty of Science course",
+                        "CHEM1": "any level 1 Faculty of Science course",
+                        "CLIM1": "any level 1 Faculty of Science course",
+                        "DATA1": "any level 1 Faculty of Science course",
+                        "GENS1": "any level 1 Faculty of Science course",
+                        "GEOS1": "any level 1 Faculty of Science course",
+                        "MATH1": "any level 1 Faculty of Science course",
+                        "MATS1": "any level 1 Faculty of Science course",
+                        "MICR1": "any level 1 Faculty of Science course",
+                        "MSCI1": "any level 1 Faculty of Science course",
+                        "NANO1": "any level 1 Faculty of Science course",
+                        "PHYS1": "any level 1 Faculty of Science course",
+                        "PSYC1": "any level 1 Faculty of Science course",
+                        "SCIF1": "any level 1 Faculty of Science course"
+                    },
+                    "title": "Level 1 Science UOC",
+                    "credits_to_complete": 24,
+                    "levels": [],
+                    "notes": "Students must complete a minimum of 24 UOC of the following courses."
+                },
+                {
+                    "courses": {
+                        "....1": "any level 1 course"
+                    },
+                    "title": "Maximum Level 1 UOC",
+                    "credits_to_complete": 72,
+                    "levels": [],
+                    "notes": "A maximum of 72 UOC of Level 1 courses can be taken, including any General Education or mainstream Level 1 course taken to fulfil either the General Education or the Free Elective requirement."
+                }
+            ],
+            "prescribed_electives": [
+                {
+                    "courses": {
+                        "GEOS": "any Faculty of Science course",
+                        "MATS": "any Faculty of Science course",
+                        "BEES": "any Faculty of Science course",
+                        "VISN": "any Vision Science course",
+                        "PHSL": "any Physiology course",
+                        "ANAT": "any Anatomy course",
+                        "BIOC": "any Faculty of Science course",
+                        "NEUR": "any Neuroscience course",
+                        "PHYS": "any Faculty of Science course",
+                        "BABS": "any Faculty of Science course",
+                        "CLIM": "any Faculty of Science course",
+                        "BIOS": "any Faculty of Science course",
+                        "BIOT": "any Biotechnology course",
+                        "OPTM": "any Optometry course",
+                        "CHEM": "any Faculty of Science course",
+                        "MICR": "any Faculty of Science course",
+                        "SOMS": "any Medical Science course",
+                        "PHAR": "any Pharmacology course",
+                        "PSYC": "any Faculty of Science course",
+                        "COMP": "any Computer Science course",
+                        "MSCI": "any Faculty of Science course",
+                        "AVIA": "any Faculty of Science course",
+                        "PATH": "any Pathology course",
+                        "FOOD": "any Food Technology course",
+                        "DATA": "any Faculty of Science course",
+                        "GENS": "any Faculty of Science course",
+                        "MATH": "any Mathematics course",
+                        "NANO": "any Faculty of Science course",
+                        "SCIF": "any Faculty of Science course"
+                    },
+                    "title": "Science Electives",
+                    "credits_to_complete": 36,
+                    "levels": [],
+                    "notes": "Students need to complete 96 UOC to meet the core requirements for the Bachelor of Science. If your choice of specialisation(s) requires less than 96 UOC you are required to complete additional Science elective courses from the following list to meet the 96 UOC requirement."
+                }
+            ],
+            "other": [
+                {
+                    "courses": {
+                        "ANAT": "any Anatomy course",
+                        "SOMS": "any Medical Science course",
+                        "PATH": "any Pathology course",
+                        "MICR": "any Faculty of Science course",
+                        "BEES": "any Faculty of Science course",
+                        "DATA": "any Faculty of Science course",
+                        "PHAR": "any Pharmacology course",
+                        "AVIA": "any Aviation course",
+                        "BABS": "any Biotechnology & Biomolecular Sciences course",
+                        "BIOC": "any Biochemistry course",
+                        "BIOS": "any Biological Science course",
+                        "CHEM": "any Chemistry course",
+                        "CLIM": "any Climate Science course",
+                        "GENS": "any Faculty of Science course",
+                        "GEOS": "any Geoscience course",
+                        "MATH": "any Mathematics course",
+                        "MATS": "any Materials Science and Engineering course",
+                        "MSCI": "any Marine Science course",
+                        "NANO": "any Faculty of Science course",
+                        "PHYS": "any Physics course",
+                        "PSYC": "any Psychology course",
+                        "SCIF": "any Faculty of Science course",
+                        "NEUR": "any Neuroscience course",
+                        "COMP": "any Computer Science course",
+                        "PHSL": "any Physiology course",
+                        "FOOD": "any Food Technology course",
+                        "BIOT": "any Biotechnology course",
+                        "OPTM": "any Optometry course",
+                        "VISN": "any Vision Science course"
+                    },
+                    "title": "Science Elective Courses",
+                    "credits_to_complete": 12,
+                    "levels": [],
+                    "notes": "Students taking the Bachelor of Science as a stand-alone program are required to take an additional 12 UOC of Science elective courses in addition to the minimum disciplinary component requirements. Students taking a second major or minor may not have to take these courses where their chosen specialisations require more than 108 UOC."
+                }
+            ]
+        },
+        "processing_warnings": [
+            "Couldn't find the number of credits for item in program Science (3970) in section titled 'Excluded General Education Courses'"
+        ]
     },
     "4515": {
         "title": "Computer Science & Engineering (Honours)",

@@ -280,7 +280,7 @@ def getStructure(
 
     structure['General'] = {}
     with contextlib.suppress(KeyError):
-        for container in programsResult['components']['non_spec_data']:
+        for container in programsResult['components']['core_courses']:
             addSubgroupContainer(structure, "General", container, [])
 
     return {"structure": structure}

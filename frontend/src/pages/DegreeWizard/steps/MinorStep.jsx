@@ -5,12 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import "./steps.less";
 import { useSpring, animated } from "@react-spring/web";
 import springProps from "./spring";
-import { setMinor } from "../../../reducers/degreeSlice";
+import { addMinor, removeMinor } from "../../../reducers/degreeSlice";
 
 const { Title } = Typography;
 const MinorStep = ({ incrementStep, currStep }) => {
   const dispatch = useDispatch();
-  const { minor, programCode } = useSelector((store) => store.degree);
+  const { minors, programCode } = useSelector((store) => store.degree);
   const [options, setOptions] = useState({ someProgramName: { specs: { major: "major data etc" } } });
 
   const fetchAllMinors = useCallback(async () => {
@@ -43,10 +43,10 @@ const MinorStep = ({ incrementStep, currStep }) => {
 
       <Menu
         className="degree-minors"
-        selectedKeys={minor && [minor]}
+        selectedKeys={minors}
         mode="inline"
-        onDeselect={() => dispatch(setMinor(""))}
-        onSelect={(e) => dispatch(setMinor(e.key))}
+        onDeselect={(e) => dispatch(removeMinor(e.key))}
+        onSelect={(e) => dispatch(addMinor(e.key))}
         defaultOpenKeys={["0"]}
       >
         {Object.keys(options).map((sub, index) => (
@@ -57,11 +57,10 @@ const MinorStep = ({ incrementStep, currStep }) => {
             mode="inline"
           >
             {Object.keys(options[sub].specs).map((key) => (
-              key !== "notes" && (
-                <Menu.Item className="text" key={key}>
-                  {key} {options[sub].specs[key]}
-                </Menu.Item>
-              )))}
+              <Menu.Item className="text" key={key}>
+                {key} {options[sub].specs[key]}
+              </Menu.Item>
+            ))}
           </Menu.SubMenu>
         ))}
       </Menu>
