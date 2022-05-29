@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { combineReducers } from "redux";
 import { configureStore } from "@reduxjs/toolkit";
 import {
@@ -11,7 +10,6 @@ import courseTabsReducer from "./reducers/courseTabsSlice";
 import degreeReducer from "./reducers/degreeSlice";
 import plannerReducer from "./reducers/plannerSlice";
 import themeReducer from "./reducers/themeSlice";
-import markReducer from "./reducers/markSlice";
 import { REDUX_PERSIST_VERSION } from "./constants";
 
 const rootReducer = combineReducers({

@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import React from "react";
 import { Typography } from "antd";
 import { Draggable } from "react-beautiful-dnd";
@@ -10,7 +8,7 @@ import { WarningOutlined, InfoCircleOutlined } from "@ant-design/icons";
 import useMediaQuery from "../../../hooks/useMediaQuery";
 import ContextMenu from "../ContextMenu";
 import Marks from "../../../components/Marks";
-import KebabMenu from "../../../components/KebabMenu";
+// import KebabMenu from "../../../components/KebabMenu";
 
 import "./index.less";
 
@@ -21,7 +19,7 @@ const DraggableCourse = ({ code, index, showMarks }) => {
   // prereqs are populated in CourseDescription.jsx via course.raw_requirements
   const {
     prereqs, title, isUnlocked, plannedFor,
-    isLegacy, isAccurate, termsOffered, handbookNote, supressed, mark
+    isLegacy, isAccurate, termsOffered, handbookNote, supressed, mark,
   } = courses[code];
   const warningMessage = courses[code].warnings;
   const isOffered = plannedFor ? termsOffered.includes(plannedFor.match(/T[0-3]/)[0]) : true;
@@ -43,7 +41,6 @@ const DraggableCourse = ({ code, index, showMarks }) => {
   );
   const errorIsInformational = shouldHaveWarning && isUnlocked
     && warningMessage.length === 0 && !isLegacy && isAccurate && isOffered;
-
 
   return (
     <>
@@ -93,9 +90,8 @@ const DraggableCourse = ({ code, index, showMarks }) => {
                   <Marks
                     mark={mark}
                   />
-                ) : null
-                }
-                </div>
+                ) : null}
+              </div>
             </div>
             {/* <div className="kebab-container">
               <KebabMenu

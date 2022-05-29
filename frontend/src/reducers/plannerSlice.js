@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { createSlice } from "@reduxjs/toolkit";
 
 // set up hidden object

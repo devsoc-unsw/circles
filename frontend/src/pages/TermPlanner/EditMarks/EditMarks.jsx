@@ -4,12 +4,12 @@ import LetterGradeButton from "../LetterGradeButton";
 
 import "./index.less";
 
-const EditMarks = ({ handleConfirm, handleKeyDown, setInputBuffer }) => {
+const EditMarks = ({
+  letterGrades, handleConfirm, setInputBuffer, handleKeyDown,
+}) => {
   const handleInputChange = (e) => {
     setInputBuffer(e.target.value);
   };
-
-  const letterGrades = ["FL", "PS", "CR", "DN", "HD"];
 
   return (
     <div className="edit-mark">

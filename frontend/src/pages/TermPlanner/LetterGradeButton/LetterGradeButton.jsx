@@ -4,7 +4,7 @@ import { Button } from "antd";
 const LetterGradeButton = ({ letterGrade, setInputBuffer, handleConfirm }) => {
   const handleClick = () => {
     setInputBuffer(letterGrade);
-    handleConfirm();
+    handleConfirm(letterGrade);
   };
 
   return (

@@ -1,7 +1,5 @@
-/* eslint-disable */
-
-import React, { useState } from "react";
-import { Modal , message } from "antd";
+import React, { useState, useEffect } from "react";
+import { Modal, message } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { Menu, Item, theme } from "react-contexify";
 import "react-contexify/dist/ReactContexify.css";
@@ -35,45 +33,56 @@ const ContextMenu = ({ code, plannedFor }) => {
     dispatch(addTab(code));
   };
 
-  // EDIT MARK - TODO: remove this comment - only for visual seperation
-  // ? make this a part of the state?
   const [isEditMarkVisible, setIsEditMarkVisible] = useState(false);
 
   const showEditMark = () => {
     setIsEditMarkVisible(true);
-  }
+  };
 
-  const validLetterGrades = ["FL", "PS", "CR", "DN", "HD"];
+  const validLetterGrades = ["FL", "SY", "PS", "CR", "DN", "HD"];
   const [markInputBuf, setMarkInputBuf] = useState(
-    useSelector((state) => state.planner.courses[code].mark));
+    useSelector((state) => state.planner.courses[code].mark),
+  );
+
+  const handleConfirmEditMark = (mark) => {
+    const attemptedMark = ` ${mark}`.slice(1).replace(" ", "");
+
+    if (
+      (attemptedMark.isNaN && !validLetterGrades.includes(attemptedMark))
+      || (parseFloat(attemptedMark) < 0 || parseFloat(attemptedMark) > 100)
+    ) {
+      return message.error("Could not update mark. Please enter a valid mark or letter grade");
+    }
+    dispatch(updateCourseMark({
+      code,
+      mark: attemptedMark,
+    }));
+    setIsEditMarkVisible(false);
+    return message.success("Mark Updated");
+  };
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       handleConfirmEditMark(markInputBuf);
     }
-  }
+  };
 
-  const handleConfirmEditMark = (mark) => {
-    const attemptedMark = (' ' + mark).slice(1).replace(" ", "");
-    
-    if (
-      (isNaN(attemptedMark) && !validLetterGrades.includes(attemptedMark))
-      || (parseFloat(attemptedMark) < 0 || parseFloat(attemptedMark) > 100)
-    ) {
-      return message.error("Could not update mark. Please enter a valid mark or letter grade");
+  const [markUpdatedQueued, setMarkUpdateQueued] = useState(false);
+  useEffect(() => {
+    if (markUpdatedQueued) {
+      setMarkUpdateQueued(false);
+      handleConfirmEditMark(markInputBuf);
     }
+  });
 
-    dispatch(updateCourseMark({
-      "code": code,
-      "mark": isNaN(attemptedMark) ? attemptedMark : parseInt(attemptedMark),
-    }));
-    setIsEditMarkVisible(false);
-    return message.success("Mark Updated");
-  }
+  const queueEditMark = () => {
+    setMarkUpdateQueued(true);
+  };
 
   const handleCancelEditMark = () => {
     setIsEditMarkVisible(false);
-  }
+    setMarkUpdateQueued(false);
+  };
 
   return (
     <>
@@ -99,14 +108,13 @@ const ContextMenu = ({ code, plannedFor }) => {
         visible={isEditMarkVisible}
         onOk={handleConfirmEditMark}
         onCancel={handleCancelEditMark}
-        width="300px"// 
+        width="300px"
       >
         <EditMarks
-          courseCode={code}
-          inputBuffer={markInputBuf}
-          setInputBuffer={setMarkInputBuf}
           handleKeyDown={handleKeyDown}
-          handleConfirm={handleConfirmEditMark}
+          letterGrades={validLetterGrades}
+          setInputBuffer={setMarkInputBuf}
+          handleConfirm={queueEditMark}
         />
       </Modal>
     </>
