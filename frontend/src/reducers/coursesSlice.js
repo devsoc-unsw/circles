@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-let initialState = {
+const initialState = {
   courses: {},
   course: {},
   isLockedEnabled: false,
@@ -19,7 +19,7 @@ const coursesSplice = createSlice({
     toggleCourseLock: (state) => {
       state.isLockedEnabled = !state.isLockedEnabled;
      },
-    resetCourses: (state) => {},
+    resetCourses: () => initialState,
 });
 
 export const {
