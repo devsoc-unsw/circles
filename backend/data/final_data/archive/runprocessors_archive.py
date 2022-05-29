@@ -47,7 +47,7 @@ if __name__ == "__main__":
             "Careful. You are about to run all stages INCLUDING the scrapers... Enter 'y' if you wish to proceed or 'n' to cancel: "
         )
         if res == "y":
-            for _, stage_f in run.items():
+            for stage_f in run.values():
                 stage_f(args.year)
     elif args.stage == "data-fix":
         for stage, stage_f in run.items():
