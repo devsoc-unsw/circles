@@ -1,5 +1,4 @@
-import axios from "axios";
-import { toggleWarnings } from "../../reducers/plannerSlice";
+import { parseMarkToInt } from "../CourseSelector/utils";
 
 // Recent Past Term Constants
 const FEB = 2;
@@ -41,37 +40,19 @@ const getMostRecentPastTerm = (startYear) => {
   };
 };
 
-const validateTermPlannerRequest = (payload) => (dispatch) => {
-  axios
-    .post(
-      "/planner/validateTermPlanner/",
-      JSON.stringify(payload),
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      },
-    )
-    .then(({ data }) => {
-      dispatch(toggleWarnings(data.courses_state));
-    })
-    // eslint-disable-next-line no-console
-    .catch((err) => console.log(err));
-};
-
-const prepareCoursesForValidation = (plannerInfo, userInfo, suppress) => {
-  const { years, startYear } = plannerInfo;
-  const { programCode, majors, minor } = userInfo;
+const prepareCoursesForValidation = (planner, degree, suppress) => {
+  const { years, startYear, courses } = planner;
+  const { programCode, majors, minor } = degree;
 
   const plan = [];
   years.forEach((year) => {
     const formattedYear = [];
     Object.values(year).forEach((term) => {
-      const courses = {};
+      const coursesData = {};
       Object.values(term).forEach((course) => {
-        courses[course] = null; // TODO: turn into course mark
+        coursesData[course] = parseMarkToInt(courses[course].mark);
       });
-      formattedYear.push(courses);
+      formattedYear.push(coursesData);
     });
     plan.push(formattedYear);
   });
@@ -87,11 +68,4 @@ const prepareCoursesForValidation = (plannerInfo, userInfo, suppress) => {
   return payload;
 };
 
-const validateTermPlanner = (dispatch, plannerInfo, userInfo, suppress) => {
-  const payload = prepareCoursesForValidation(plannerInfo, userInfo, suppress);
-  dispatch(validateTermPlannerRequest(payload));
-};
-
-export default validateTermPlanner;
-
-export { getMostRecentPastTerm };
+export { getMostRecentPastTerm, prepareCoursesForValidation };

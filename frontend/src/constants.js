@@ -1,4 +1,4 @@
-import { getMostRecentPastTerm } from "./pages/TermPlanner/validateTermPlanner";
+import { getMostRecentPastTerm } from "./pages/TermPlanner/utils";
 
 /**
  * IMPORTANT NOTE:

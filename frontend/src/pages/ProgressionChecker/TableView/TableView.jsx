@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Table } from "antd";
 import { useSelector } from "react-redux";
-import { getMostRecentPastTerm } from "../../TermPlanner/validateTermPlanner";
+import { getMostRecentPastTerm } from "../../TermPlanner/utils";
 import "./index.less";
 
 const TableView = ({ isLoading, structure }) => {
