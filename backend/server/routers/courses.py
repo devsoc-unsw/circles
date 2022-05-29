@@ -192,7 +192,9 @@ def search(userData: UserData, search_string: str):
     #       currently this is enforced during setup but will need to
     #       make sure that this is true for all degrees not just comp sci
     specialisations = list(userData.specialisations.keys())
-    structure = getStructure(userData.program, *specialisations)['structure']
+    majrs = filter(lambda x: x.endswith("1"), specialisations)
+    minrs = filter(lambda x: x.endswith("2"), specialisations)
+    structure = getStructure(userData.program, "+".join(majrs), "+".join(minrs))['structure']
 
     top_results = sorted(ALL_COURSES.items(), reverse=True,
                          key=lambda course: fuzzy_match(course, search_string)
@@ -201,7 +203,8 @@ def search(userData: UserData, search_string: str):
                               key=lambda course: weight_course(course,
                                                                search_string,
                                                                structure, 
-                                                               *specialisations)
+                                                               "+".join(majrs),
+                                                               "+".join(minrs))
                               )[:30]
 
     return {code: title for code, title in weighted_results}
@@ -413,43 +416,47 @@ def fuzzy_match(course: tuple, search_term: str):
                        for word in search_term.split(' ')))
 
 def weight_course(course: tuple, search_term: str, structure: dict,
-                  major_code: Optional[str] = None, minor_code: Optional[str] = None):
+                  majrs: Optional[str] = None, minrs: Optional[str] = None):
     """ Gives the course a weighting based on the relevance to the user's degree """
     weight = fuzzy_match(course, search_term)
     (code, title) = course
 
-    if major_code is not None:
-        for structKey in structure.keys():
-            if "Major" not in structKey:
-                continue
-            for key in structure[structKey].items():
-                if isinstance(key[1], dict):
-                    for c in key[1].get("courses", {}):
-                        if code in c:
-                            if "Core" in key[0]:
-                                weight += 20
-                            else:
-                                weight += 10
-                            break
+    majrs = list(majrs.split("+"))
+    minrs = list(minrs.split("+"))
+    if majrs:
+        for major_code in majrs:
+            for structKey in structure.keys():
+                if "Major" not in structKey:
+                    continue
+                for key in structure[structKey].items():
+                    if isinstance(key[1], dict):
+                        for c in key[1].get("courses", {}):
+                            if code in c:
+                                if "Core" in key[0]:
+                                    weight += 20
+                                else:
+                                    weight += 10
+                                break
 
-        if str(code).startswith(major_code[:4]):
-            weight += 14
+            if str(code).startswith(major_code[:4]):
+                weight += 14
 
-    if minor_code is not None:
-        for structKey in structure.keys():
-            if "Minor" not in structKey:
-                continue
-            for key in structure[structKey].items():
-                if isinstance(key[1], dict):
-                    for c in key[1].get("courses", {}):
-                        if code in c:
-                            if "Core" in key[0]:
-                                weight += 10
-                            else:
-                                weight += 5
-                            break
+    if minrs:
+        for minor_code in minrs:
+            for structKey in structure.keys():
+                if "Minor" not in structKey:
+                    continue
+                for key in structure[structKey].items():
+                    if isinstance(key[1], dict):
+                        for c in key[1].get("courses", {}):
+                            if code in c:
+                                if "Core" in key[0]:
+                                    weight += 10
+                                else:
+                                    weight += 5
+                                break
 
-        if str(code).startswith(minor_code[:4]):
-            weight += 7
+            if str(code).startswith(minor_code[:4]):
+                weight += 7
 
     return weight

@@ -47,7 +47,6 @@ def getPrograms():
     # TODO On deployment, DELETE RETURN BELOW and replace with the return above
     return {"programs": {"3778": "Computer Science",
                         "3784": "Commerce / Computer Science",
-                        "3789": "Science / Computer Science",
                         }}
 
 
@@ -111,12 +110,18 @@ def getMajors(programCode: str):
                 "application/json": {
                     "example": {
                         "minors": {
-                            "INFSA2": "<name of minor>",
-                            "ACCTA2": "<name of minor>",
-                            "PSYCM2": "<name of minor>",
-                            "MARKA2": "<name of minor>",
-                            "FINSA2": "<name of minor>",
-                            "MATHC2": "<name of minor>",
+                            "Computer Science": { 
+                                "INFSA2": "<name of minor>",
+                                "ACCTA2": "<name of minor>",
+                                "PSYCM2": "<name of minor>",
+                                "MARKA2": "<name of minor>",
+                                "FINSA2": "<name of minor>",
+                                "MATHC2": "<name of minor>",
+                            },
+                            "Science": {
+                                "CODEE2": "<name of minor>",
+                                "...": "<name of minor>",
+                            }
                         }
                     }
                 }
