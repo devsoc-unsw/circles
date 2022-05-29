@@ -60,8 +60,8 @@ const DraggableCourse = ({ code, index, showMarks }) => {
             style={{
               ...provided.draggableProps.style,
             }}
-            className={`course ${isSummerEnabled && "summerViewCourse"} 
-            ${isDragDisabled && " dragDisabledCourse"} 
+            className={`course ${isSummerEnabled && "summerViewCourse"}
+            ${isDragDisabled && " dragDisabledCourse"}
             ${isDragDisabled && !isUnlocked && " disabledWarning"}
             ${(!supressed && (!isUnlocked || !isOffered)) && " warning"}
             draggable-course-container`}
