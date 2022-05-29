@@ -5,7 +5,7 @@ import requests
 
 PATH = "server/example_input/example_planner_data.json"
 
-with open(PATH) as f:
+with open(PATH, encoding="utf8") as f:
     PLANS = json.load(f)
 
 
