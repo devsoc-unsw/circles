@@ -5,7 +5,6 @@ APIs for the /courses/ route.
 import re
 from typing import Optional
 
-import pymongo
 from algorithms.objects.user import User
 from data.config import ARCHIVED_YEARS
 from data.utility.data_helpers import read_data
