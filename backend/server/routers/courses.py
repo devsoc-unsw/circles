@@ -3,7 +3,6 @@ APIs for the /courses/ route.
 """
 import re
 from typing import Optional, Tuple
-from fuzzywuzzy import fuzz
 
 from algorithms.objects.user import User
 from data.config import ARCHIVED_YEARS

@@ -34,6 +34,7 @@ def check_in_fixes(cname: str, ls: list) -> None:
 
 
 def main():
+    """ runs the comparison between a target and a source year """
     source_courses = (
         "data/final_data/coursesProcessed.json"
         if args.source is None
@@ -78,4 +79,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

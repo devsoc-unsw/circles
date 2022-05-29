@@ -1,3 +1,4 @@
+# pylint: disable=cyclic-import
 """ run all of circles in one terminal """
 import logging
 from subprocess import Popen, check_call

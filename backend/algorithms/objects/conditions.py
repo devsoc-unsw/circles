@@ -90,9 +90,12 @@ class CoreqCoursesCondition(Condition):
         self.logic: Logic = logic
 
     def add_course(self, course: str):
+        """ add a course to 'courses' """
         self.courses.append(course)
 
     def set_logic(self, logic: Logic):
+        """ allow logic to be swapped between AND and OR """
+
         self.logic = logic
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
@@ -147,6 +150,7 @@ class UOCCondition(Condition):
         return False
 
     def set_category(self, category_classobj: Category):
+        """ sets a category for UOC that is counted """
         self.category = category_classobj
 
     def validate(self, user: User) -> tuple[bool, list[str]]:

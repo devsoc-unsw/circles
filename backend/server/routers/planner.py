@@ -15,6 +15,7 @@ router = APIRouter(
 
 @router.get("/")
 def plannerIndex():
+    """ sanity test that this file is loaded """
     return "Index of planner"
 
 def fixPlannerData(plannerData: PlannerData):
