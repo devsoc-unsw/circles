@@ -986,7 +986,7 @@
             "general_education": {},
             "spec_data": {
                 "majors": {
-                    "": {
+                    "Computer Science": {
                         "notes": "COMPA1 is the default stream, and will be used if no other stream is selected.",
                         "specs": {
                             "COMPJ1": "Computer Science (Programming Languages)",
