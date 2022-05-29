@@ -67,7 +67,7 @@ def cache_mappings():
     mappings = {}
     courseMappings = {}
     courses = read_data(COURSES_PROCESSED_FILE)
-    
+
     # Tokenise faculty using regex, e.g 'UNSW Business School' -> 'F Business'
     def tokeniseFaculty(Faculty):
         faculty_token = "F "
@@ -80,7 +80,7 @@ def cache_mappings():
         match = match_object.group()
         faculty_token += match
         return faculty_token
-    
+
     # Tokenise faculty using regex, e.g 'School of Psychology' -> 'S Psychology'
     def tokeniseSchool(School):
         school_token = "S "
@@ -94,7 +94,7 @@ def cache_mappings():
             return match
         elif re.search("UNSW", School):
             match_object = re.search("(?<=UNSW\s)[^\s\n\,]+", School)
-        else: 
+        else:
             match_object = re.search("^([\w]+)", School)
         match = match_object.group()
         school_token += match
@@ -106,7 +106,7 @@ def cache_mappings():
         if faculty not in mappings:
             faculty_token = tokeniseFaculty(faculty)
             mappings[faculty] = faculty_token
-            courseMappings[faculty_token] = {} 
+            courseMappings[faculty_token] = {}
     # add schools to mappings.json
     for course in courses.values():
         if 'school' in course:
@@ -114,7 +114,7 @@ def cache_mappings():
             if school not in mappings:
                 school_token = tokeniseSchool(school)
                 mappings[school] = school_token
-                courseMappings[school_token] = {} 
+                courseMappings[school_token] = {}
     write_data(mappings, MAPPINGS_FILE)
 
     # finalise
@@ -125,7 +125,7 @@ def cache_mappings():
             courseSchool = course['school']
             courseMappings[mappings[courseSchool]][courseCode] = 1
         courseMappings[mappings[courseFaculty]][courseCode] = 1
-    
+
     write_data(courseMappings, COURSE_MAPPINGS_FILE)
 
 def cache_program_mappings():

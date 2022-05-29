@@ -1,21 +1,20 @@
-import pymongo
+"""
+APIs for the /courses/ route.
+"""
+
 import re
-from fuzzywuzzy import fuzz
 from typing import Optional
 
 from algorithms.objects.user import User
 from data.config import ARCHIVED_YEARS
 from data.utility.data_helpers import read_data
 from fastapi import APIRouter, HTTPException
+from fuzzywuzzy import fuzz
 from server.database import archivesDB, coursesCOL
-from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, AffectedCourses,
-                                  CourseDetails, CoursesState,
-                                  CoursesUnlockedWhenTaken, ProgramCourses, Structure,
+from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS,
+                                  AffectedCourses, CourseDetails, CoursesState,
+                                  CoursesUnlockedWhenTaken, ProgramCourses,
                                   UserData, message)
-
-"""
-APIs for the /courses/ route.
-"""
 
 router = APIRouter(
     prefix="/courses",
@@ -200,14 +199,14 @@ def search(userData: UserData, search_string: str):
     weighted_results = sorted(top_results, reverse=True,
                               key=lambda course: weight_course(course,
                                                                search_string,
-                                                               structure, 
+                                                               structure,
                                                                *specialisations)
                               )[:30]
 
-    return {code: title for code, title in weighted_results}
+    return dict(weighted_results)
 
 def regex_search(search_string: str):
-    """ 
+    """
     Uses the search string as a regex to match all courses with an exact pattern.
     """
 
@@ -255,7 +254,7 @@ def getAllUnlocked(userData: UserData):
     """
 
     coursesState = {}
-    user = User(fixUserData(userData.dict())) if type(userData) != User else userData
+    user = User(fixUserData(userData.dict())) if not isinstance(userData, User) else userData
     for course, condition in CONDITIONS.items():
         result, warnings = condition.validate(user) if condition is not None else (True, [])
         if result:
@@ -319,7 +318,7 @@ def getLegacyCourse(year, courseCode):
         Returns information relating to the given course
     """
     result = list(archivesDB[str(year)].find({"code": courseCode}))
-    if result == {}:
+    if not result:
         raise HTTPException(status_code=400, detail="invalid course code or year")
     del result["_id"]
     result["is_legacy"] = True
@@ -414,9 +413,13 @@ def fuzzy_match(course: tuple, search_term: str):
 
 def weight_course(course: tuple, search_term: str, structure: dict,
                   major_code: Optional[str] = None, minor_code: Optional[str] = None):
-    """ Gives the course a weighting based on the relevance to the user's degree """
+    """
+    Gives the course a weighting based on the relevance to the user's degree
+    Arguments:
+        - code: tuple(course_code, course_title)
+    """
     weight = fuzzy_match(course, search_term)
-    (code, title) = course
+    (code, _) = course
 
     if major_code is not None:
         for structKey in structure.keys():
