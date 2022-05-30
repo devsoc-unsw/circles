@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { Menu, Item, theme } from "react-contexify";
 import "react-contexify/dist/ReactContexify.css";
 import { useNavigate } from "react-router-dom";
-import { DeleteFilled, InfoCircleFilled } from "@ant-design/icons";
-import { FaEdit, FaRegCalendarTimes } from "react-icons/fa";
+import { DeleteFilled, InfoCircleFilled, EditFilled } from "@ant-design/icons";
+import { FaRegCalendarTimes } from "react-icons/fa";
 import { addTab } from "../../../reducers/courseTabsSlice";
 import { removeCourse, unschedule, updateCourseMark } from "../../../reducers/plannerSlice";
 import EditMarks from "../EditMarks";
@@ -96,7 +96,8 @@ const ContextMenu = ({ code, plannedFor }) => {
           <DeleteFilled className="context-menu-icon" /> Delete from Planner
         </Item>
         <Item onClick={showEditMark}>
-          <FaEdit className="contextMenuIcon" /> Edit mark
+          <EditFilled className="context-menu-icon" />
+          Edit mark
         </Item>
         <Item onClick={handleInfo}>
           <InfoCircleFilled className="context-menu-icon" />
