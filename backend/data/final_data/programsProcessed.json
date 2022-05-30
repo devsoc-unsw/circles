@@ -8,9 +8,8 @@
         "overview": "This program allows students to study a double degree in both Economics and Computer Science. There are practical applications in combining such majors as Econometrics with the discipline of computer science. This program has an extensive range of majors in both economics (3) and computer science (8). An honours year in economics or computer science is possible for high-achieving students\nfollowing completion of this program.",
         "structure_summary": "Students must complete 192 UOC.\n\nEconomics\n\n\nIntroductory Business Course (6 UOC)\nEconomics Core Courses (48 UOC)\nEconomics Electives (30 UOC)\nBusiness Electives (12 UOC)\n\nStudents may choose to use their Economics core and elective courses to complete an optional Economics major. Courses for the major are taken once but also meet core and elective course rules where listed.\n\nComputer Science\n\n\nA Bachelor of Computer Science Major (96 UOC)",
         "components": {
-            "general_education": {},
             "spec_data": {
-                "majors": {
+                "major": {
                     "null": {
                         "notes": "COMPA1 is the default stream, and will be used if no other stream is selected.",
                         "specs": {
@@ -129,14 +128,26 @@
         "overview": "This program combines the strengths of Actuarial Studies and Computer Science and allows high-performing students the opportunity to study a quantitative program with practical applications in computer science. This 4-year program will allow students to combine advanced studies in mathematics, economics, insurance, finance, statistics and programming.",
         "structure_summary": "Students must complete 192 UOC.\nActuarial Studies component (96 UOC)\n\nLevel 1 Actuarial Studies Core Courses (48 UOC)\n\nLevel 2 Actuarial Studies Core Courses (18 UOC) (Please note: ACTL2131 may be substituted by MATH2901 and MATH2931, please see below)\nLevel 3 Actuarial Studies Electives (24 UOC)\nBusiness School Elective (6 UOC)\n\nBachelor of Computer Science (96 UOC)\n\nAn approved Bachelor of Computer Science major.\n\nPlease note: MATH1151 and MATH1251 are completed under the Actuarial Studies component of the Double Degree, and replace (MATH1131 or MATH1141) and (MATH1231 or MATH1241) in the Computer Science component.",
         "components": {
-            "general_education": {},
             "spec_data": {
-                "majors": {
+                "major": {
                     "Actuarial Studies": {
-                        "notes": "Students may elect to complete ACTLE1 or MATHE1 in addition to their Actuarial Studies program requirements.\nStudents completing these majors will still need to complete the program requirements such as Level 1 and 2 core course as well as Level 3 electives.\nThese majors will require UOC to be taken from the Business Electives, Free elective and/or General Education courses depending on a students program rules and courses completed. It may also require completion of additional UOC above the minimum required for a student's program. Please see the Progression Plans and consult the Business School Student Centre if you are interested in completing either of these majors.",
+                        "notes": "Students may elect to complete ACTLE1 or MATHE1 in addition to their Actuarial Studies program requirements.\nStudents completing these majors will still need to complete the program requirements such as Level 1 and 2 core course as well as Level 3 electives.\nThese majors will require UOC to be taken from the Business Electives, Free elective and/or General Education courses depending on a students program rules and courses completed. It may also require completion of additional UOC above the minimum required for a student's program. Please see the Progression Plans and consult the Business School Student Centre if you are interested in completing either of these majors.\n\nStudents may elect to complete a maximum of one major/minor listed below in addition to their Actuarial Studies program requirements.\nNotes for Single-Degree students: Completion of one of the following non-Actuarial Studies Majors within the single Actuarial Studies degree may result in more UOC required for degree completion.\nNotes for Double-Degree students: Completion of an additional major/minor within the combined Actuarial Studies degree may result in more UOC required for degree completion.",
                         "specs": {
                             "MATHE1": "Quantitative Data Science",
-                            "ACTLE1": "Actuarial Risk Management and Analytics"
+                            "ACTLE1": "Actuarial Risk Management and Analytics",
+                            "COMMJ1": "Business Analytics",
+                            "TABLC1": "Taxation",
+                            "ACCTA1": "Accounting",
+                            "FINSA1": "Finance",
+                            "MGMTJ1": "Innovation, Strategy and Entrepreneurship",
+                            "FINSR1": "Financial Technology",
+                            "ECONF1": "Business Economics",
+                            "ECONJ1": "Financial Economics",
+                            "MARKA1": "Marketing",
+                            "INFSA1": "Information Systems",
+                            "IBUSA1": "International Business",
+                            "MGMTH1": "Human Resource Management",
+                            "ECONO1": "Behavioural Economics"
                         }
                     },
                     "Computer Science": {
@@ -150,6 +161,24 @@
                             "COMPY1": "Computer Science (Security Engineering)",
                             "COMPE1": "Computer Science (eCommerce Systems)",
                             "COMPA1": "Computer Science"
+                        }
+                    }
+                },
+                "minor": {
+                    "Actuarial Studies": {
+                        "notes": "Students may elect to complete a maximum of one major/minor listed below in addition to their Actuarial Studies program requirements.\nNotes for Single-Degree students: Completion of one of the following non-Actuarial Studies Majors within the single Actuarial Studies degree may result in more UOC required for degree completion.\nNotes for Double-Degree students: Completion of an additional major/minor within the combined Actuarial Studies degree may result in more UOC required for degree completion.",
+                        "specs": {
+                            "IBUSA2": "International Business",
+                            "MGMTA2": "Management",
+                            "MARKA2": "Marketing",
+                            "FINSR2": "Financial Technology",
+                            "ACCTA2": "Accounting",
+                            "ECONF2": "Business Economics",
+                            "TABLA2": "Business Law",
+                            "INFSA2": "Information Systems",
+                            "FINSA2": "Finance",
+                            "MGMTH2": "Human Resource Management",
+                            "COMMJ2": "Business Analytics"
                         }
                     }
                 }
@@ -226,7 +255,9 @@
             ],
             "other": []
         },
-        "processing_warnings": []
+        "processing_warnings": [
+            "There were two instances of major for section Actuarial Studies in program Actuarial Studies / Computer Science (3674) in section titled 'Business Majors / Minors'"
+        ]
     },
     "3778": {
         "title": "Computer Science",
@@ -237,12 +268,8 @@
         "overview": "Computer Science involves the study of the design, construction and uses of computer systems. It is concerned with the representation of data and data structures in computer systems and the design of algorithms for automatic manipulation of this information by programming languages and machine systems. It is very much concerned with the design and development of hardware and software tools by which computer applications may be developed, but not so much with the applications themselves. It is, however, noted that non-computing elements (such as human interface or psychological aspects) can often dictate the level of success of computing systems. At UNSW, particular emphasis is given to comprehension of the basic principles behind computing tools, operating systems, compilers and translators, and computer hardware.",
         "structure_summary": "Students must complete 144 UOC when taken as a standalone program.\n\nComplete a 96 UOC CS major\n\n36 UOC of Free Electives - students can also choose to undertake an optional minor or a combination of an optional minor and Free Electives to fulfil this requirement\n12 UOC of General Education",
         "components": {
-            "general_education": {
-                "notes": "Students must take 12 UOC of any General Education course.\nNOTE: Students are encouraged to complete 48 UOC before taking any General Education course.",
-                "credits_to_complete": 12
-            },
             "spec_data": {
-                "minors": {
+                "optional_minor": {
                     "Computer Science": {
                         "notes": "Optional minors available include the following. If you complete a minor of 30 UOC, you will also need to take 6 UOC of free electives.",
                         "specs": {
@@ -255,7 +282,7 @@
                         }
                     }
                 },
-                "majors": {
+                "major": {
                     "Computer Science": {
                         "notes": "COMPA1 is the default stream, and will be used if no other stream is selected.",
                         "specs": {
@@ -285,7 +312,11 @@
                 }
             ],
             "prescribed_electives": [],
-            "other": []
+            "other": [],
+            "general_education": {
+                "notes": "Students must take 12 UOC of any General Education course.\nNOTE: Students are encouraged to complete 48 UOC before taking any General Education course.",
+                "credits_to_complete": 12
+            }
         },
         "processing_warnings": []
     },
@@ -298,9 +329,8 @@
         "overview": "The Faculty of Science and the Faculty of Engineering offer a dual degree program leading to the award of the degrees Bachelor of Science (Advanced Mathematics)(Honours) and Bachelor of Science (Computer Science). The typical duration of this program is 5 years full-time.\nThe Advanced Mathematics (Honours) and Computer Science degrees lend themselves well to each other. While the Advanced Mathematics (Honours) degree focuses on an in-depth understanding of pure and applied mathematics, the computer science degree looks at the design, construction and uses of computer systems. Your mathematics study will assist with the manipulation of data as well as the development of algorithms in computer science. There is no better degree to combine your passion for mathematics as well as computer systems.",
         "structure_summary": "Students must complete 240 UOC.\nBachelor of Advanced Mathematics (Honours) (144 UOC)\n\nAn approved Advanced Mathematics (Honours) major; and\nSCIF1131;\n48 units of credit Honours Year; and\nScience elective courses\n\n\nBachelor of Science (Computer Science) (96 UOC)\n\nA Bachelor of Computer Science major; and\nComputer Science elective courses\n\nIn this dual degree students take 144 UOC for the Bachelor of Advanced Mathematics, and 96 UOC for the Bachelor of Science (Computer Science), for a total of 240 UOC. The Science courses required for both degrees can overlap. Depending on the chosen combination of Computer Science major and Advanced Mathematics major there may be varying amounts of overlapping courses. When a student meets all the requirements for both degrees in less than 240 UOC, students must complete additional elective courses to bring the total to 240 UOC. Those electives must be taken from the Faculty of Engineering and/or the Faculty of Science.\n\nIn some cases, course overlaps will require students to replace the usual course in one core or major with a more advanced course required in the other program. Specifically:\n- Students must complete MATH1141 and MATH1241 or higher versions.",
         "components": {
-            "general_education": {},
             "spec_data": {
-                "majors": {
+                "major": {
                     "Computer Science": {
                         "notes": "COMPA1 is the default stream, and will be used if no other stream is selected.",
                         "specs": {
@@ -491,9 +521,8 @@
         "overview": "The Faculty of Science and the Faculty of Engineering offer a dual degree program leading to the award of the degrees Bachelor of Science (Advanced) and Bachelor of Science (Computer Science). The typical duration of this program is 5 years full-time.\nThe Bachelor of Advanced Science (Honours) is the degree of choice for innovative thinkers with exceptional scientific knowledge and skills. It&#39;s designed for talented students and offers the flexibility to tailor the degree in a way that works for them. The degree offers students access to advanced level courses and includes an Honours year.\nThe Bachelor of Science (Computer Science) focuses on the design and development of hardware and software tool by which computer applications may be developed. By combining your passion for science and the computer sciences you could further develop applications for use within the scientific world.",
         "structure_summary": "Students must complete 240 UOC.\nBachelor of Advanced Science (Honours) (144 UOC)\n\nAn approved Bachelor of Advanced Science (Honours) major; and\nSCIF1131;\n48 units of credit Honours Year; and\nScience elective courses\n\nBachelor of Science (Computer Science) (96 UOC)\n\nA Bachelor of Computer Science major; and\nComputer Science elective courses\n\nIn this dual degree students take 144 UOC for the Bachelor of Advanced Science (Honours), and 96 UOC for the Bachelor of Science (Computer Science), for a total of 240 UOC. The Science courses required for both degrees can overlap. Depending on the chosen combination of Computer Science major and Advanced Science (Honours) major there may be varying amounts of overlapping courses. When a student meets all the requirements for both degrees in less than 240 UOC, students must complete additional elective courses to bring the total to 240 UOC. Those electives must be taken from the Faculty of Engineering and/or the Faculty of Science.\nIn some cases, course overlaps will require students to replace the usual course in one core or major with a more advanced course required in the other program. Specifically:\n\n- Students must complete MATH1141 and MATH1241 or higher versions.",
         "components": {
-            "general_education": {},
             "spec_data": {
-                "majors": {
+                "major": {
                     "Advanced Science (Honours)": {
                         "notes": "Students must complete at least one Science major selected from the list below.\nWhen offered in a particular major, students must take higher versions of any Level 2 or 3 courses. Any variation to this must be approved by the Associate Dean (Academic Programs) or nominee.\nBioinformatics is a 96 UOC major, students will not be able to complete this major as part of a double degree within the minimum UOC. This major will involve extra time and costs to meet the degree requirements and may have visa implications for international students. Contact the Science Student Centre for more details.",
                         "specs": {
@@ -539,7 +568,7 @@
                         }
                     }
                 },
-                "minors": {
+                "minor": {
                     "Advanced Science (Honours)": {
                         "notes": "Students may choose to complete an optional minor in one of the following areas, using their Science and/or free electives",
                         "specs": {
@@ -762,9 +791,42 @@
         "overview": "The dual award BSc (Computer Science) BA enables students to complete the requirements of the BSc (Computer Science) and a Bachelor of Arts program from the Faculty of Arts and Social Sciences.\nFor admission to the program, students must satisfy the entry requirements for both the BSc (Computer Science) and the BA in the Faculty of Arts and Social Sciences. Students in this program must complete 192 units of credit of study.",
         "structure_summary": "Students must complete 192 UOC.\n1. A home major stream (60 UOC) 2. A minor stream (24 UOC) 3. Arts and Social Sciences Prescribed Electives (12 UOC) 4. Computer Science courses (96 UOC)",
         "components": {
-            "general_education": {},
             "spec_data": {
-                "majors": {
+                "major": {
+                    "Arts": {
+                        "notes": "You are required to complete one Home Major and one Minor in order to graduate.\nNote: If you choose to complete a major or minor in a language and your language skills are assessed as Level A in Introductory, Intermediate, Advanced or Professional, you can only commence study of the language in Term 1.",
+                        "specs": {
+                            "LINGC1": "Linguistics",
+                            "THSTC1": "Theatre and Performance Studies",
+                            "SPANI1": "Spanish Studies",
+                            "ENVPE1": "Environmental Humanities",
+                            "HISTD1": "History",
+                            "CHINF1": "Advanced Chinese Studies",
+                            "MECTC1": "Media, Culture and Technology",
+                            "CHINE1": "Chinese Studies",
+                            "MUSCK1": "Music Studies (Intensive)",
+                            "ENGLC1": "English",
+                            "PHILE1": "Philosophy",
+                            "ATSIC1": "Indigenous Studies",
+                            "CRIMC1": "Criminology",
+                            "MUSCJ1": "Music Studies",
+                            "SOCAD1": "Sociology and Anthropology",
+                            "JAPNF1": "Japanese Studies",
+                            "ASIAB1": "Asian Studies",
+                            "COMDF1": "Global Development",
+                            "GEOGK1": "Geographical Studies",
+                            "EUROC1": "European Studies",
+                            "GERSF1": "German Studies",
+                            "POLSG1": "Politics and International Relations",
+                            "FRENF1": "French Studies",
+                            "FILMB1": "Film Studies",
+                            "JAPNG1": "Advanced Japanese Studies",
+                            "KOREF1": "Korean Studies",
+                            "CRWTA1": "Creative Writing",
+                            "FRENG1": "Advanced French Studies",
+                            "KOREG1": "Advanced Korean Studies"
+                        }
+                    },
                     "Computer Science": {
                         "notes": "COMPA1 is the default stream, and will be used if no other stream is selected.",
                         "specs": {
@@ -776,6 +838,54 @@
                             "COMPI1": "Computer Science (Artificial Intelligence)",
                             "COMPS1": "Computer Science (Embedded Systems)",
                             "COMPN1": "Computer Science (Computer Networks)"
+                        }
+                    }
+                },
+                "minor": {
+                    "Arts": {
+                        "notes": "You are required to complete one Home Major and one Minor in order to graduate.\nNote: If you choose to complete a major or minor in a language and your language skills are assessed as Level A in Introductory, Intermediate, Advanced or Professional, you can only commence study of the language in Term 1.\n\nYou may complete one of the following external specialisations.\nMATHB2 is only available in 3961 Engineering (Honours)/Arts.\nIf you are enrolled in a double degree program and wish to complete an external minor that is greater than 24 UOC you will need to take extra UOC above 96 UOC.",
+                        "specs": {
+                            "WOMSC2": "Gender Studies",
+                            "EUROC2": "European Studies",
+                            "FRENF2": "French Studies",
+                            "THSTC2": "Theatre and Performance Studies",
+                            "ENGLC2": "English",
+                            "KOREG2": "Advanced Korean Studies",
+                            "ARTSB2": "Arts and Social Sciences",
+                            "SPANI2": "Spanish Studies",
+                            "CRIMC2": "Criminology",
+                            "JAPNF2": "Japanese Studies",
+                            "COMDF2": "Global Development",
+                            "PHILE2": "Philosophy",
+                            "CHINF2": "Advanced Chinese Studies",
+                            "GERSF2": "German Studies",
+                            "ENVPE2": "Environmental Humanities",
+                            "ATSIC2": "Indigenous Studies",
+                            "CRWTA2": "Creative Writing",
+                            "ITALB2": "Italian Studies",
+                            "MUSCJ2": "Music Studies",
+                            "FILMB2": "Film Studies",
+                            "GREKC2": "Modern Greek Studies",
+                            "GEOGK2": "Geographical Studies",
+                            "KOREF2": "Korean Studies",
+                            "FRENG2": "Advanced French Studies",
+                            "CHINE2": "Chinese Studies",
+                            "INDOC2": "Indonesian Studies",
+                            "ASIAB2": "Asian Studies",
+                            "SOCAD2": "Sociology and Anthropology",
+                            "HISTD2": "History",
+                            "POLSG2": "Politics and International Relations",
+                            "JAPNG2": "Advanced Japanese Studies",
+                            "MECTC2": "Media, Culture and Technology",
+                            "AUSTB2": "Australian Studies",
+                            "LINGC2": "Linguistics",
+                            "PSYCB2": "Studies in Psychology",
+                            "MGMTH2": "Human Resource Management",
+                            "PSYCM2": "Psychology",
+                            "GEOGS2": "Geography",
+                            "ARTHB2": "Art History and Theory",
+                            "IBUSA2": "International Business",
+                            "ECONA2": "Economics"
                         }
                     }
                 }
@@ -810,7 +920,8 @@
             "other": []
         },
         "processing_warnings": [
-            "Can't figure out what abbreviated code(s) are for Arts and Social Sciences in program Computer Science / Arts (3783) in section titled 'Arts and Social Sciences Prescribed Electives'"
+            "Can't figure out what abbreviated code(s) are for Arts and Social Sciences in program Computer Science / Arts (3783) in section titled 'Arts and Social Sciences Prescribed Electives'",
+            "There were two instances of minor for section Arts in program Computer Science / Arts (3783) in section titled 'Optional External Specialisations'"
         ]
     },
     "3784": {
@@ -822,9 +933,8 @@
         "overview": "The dual degree program Bachelor of Commerce/Bachelor of Science (Computer Science) (BCom/BSc(Comp Sc)) degree provides the latest thinking in business and technology for today and the future. It offers excellent career options, equipping graduates with unique skill sets that can lead to a wide range of career opportunities.\nWhether you want to focus your career in computer science and also want the commercial skills that a business degree can give you, or you want a career in business with the added dimension of a computer science degree, then this dual degree gives you the flexibility to choose a program to meet your needs.",
         "structure_summary": "Students must complete 192 UOC.\nBachelor of Commerce (96 UOC)\n\nIntegrated First Year Courses (42 UOC) - 3784 students do not have to take COMM1110 as this requirement is satisfied in the Computer Science program\nmyBCom (0 UOC)\nCommerce major (48UOC): Students taking a combination of majors and/or minors that require both COMM1822 or INFS1603 and COMP3311 as core courses, should take only COMP3311, and replace COMM1822/INFS1603 with an additional major or minor elective.\nPrescribed Work Integrated Learning Course (Requirement can be satisfied by taking a Computer Science or Commerce WIL course)\nFinal Year Synthesis (0 - 6UOC)\nBusiness electives to make up to 96UOC Business School disciplinary requirement\n\nBachelor of Science in Computer Science (96 UOC)\n\nA Computer Science major\n\nFor any majors that require ECON1202, either MATH1131 or MATH1141 completed under the Computer Science component will act as substitute so student should not do ECON1202 but instead complete another Major elective to meet the 48UOC requirement.",
         "components": {
-            "general_education": {},
             "spec_data": {
-                "majors": {
+                "major": {
                     "null": {
                         "notes": "COMPA1 is the default stream, and will be used if no other stream is selected.",
                         "specs": {
@@ -856,7 +966,7 @@
                         }
                     }
                 },
-                "minors": {
+                "minor": {
                     "Commerce": {
                         "notes": "Students may choose to use their electives to complete one of the following minors.\nMinor Requirements: An approved disciplinary stream containing at least 18 UOC at Level 2 and Level 3.",
                         "specs": {
@@ -994,9 +1104,8 @@
         "overview": "Students may seek to undertake a five-year full-time dual degree program leading to the award of the degrees of Bachelor of Engineering (Honours) and Bachelor of Science (Computer Science) (BE (Hons) BSc). The Faculty of Engineering administers the program, and delegates administration to the School which offers the Engineering discipline selected. Students should seek advice from the relevant School Office in the first instance, from the Faculty of Engineering, or from the School of Computer Science and Engineering for the Science component.\nWith this dual degree program, students take the 168 units of credit core of the Bachelor of Engineering (Honours) 3707 and the 96 units of credit core of the Bachelor of Science (Computer Science) program 3778. Because of the overlap of 24 units of credit of Science courses in both core, the total units of credit required for completion is 240 UOC, rather than 264 UOC (please see Academic Rules below for more details).",
         "structure_summary": "Students must complete 240 UOC (after the 24 UOC reduction from double counted courses).\nBachelor of Engineering (Hons) - 168 UOC\n\nA 168 UOC stream consisting of the following,\n\n\nAt least 48 UOC Disciplinary Knowledge and Enquiry-based Courses\n30-42 UOC Introductory Knowledge core courses\nAt least 12 UOC of elective courses\nThe balance of stream (specialisation/major) to consist of Foundation Disciplinary Knowledge courses\n6 UOC free elective\n\n\nStudents must also complete at least 60 days of approved Industrial Training experience\n\nBachelor of Computer Science\n96 UOC\n\nA Bachelor of Computer Science major\n6 UOC free elective\n\nBINFAH and COMPBH and SENGAH majors are not available in this double degree. This double degree also requires students to complete 12 UOC of Free Electives.\nIn this double degree students take 168 UOC for the Bachelor of Engineering (Hons) and 96 UOC for the Bachelor of Computer Science, for a total of 264 UOC. Because the courses required for both degrees overlap, the total minimum UOC required for the double degree is reduced by 24 UOC to 240 UOC.\nDepending on the chosen combination of Engineering stream and Computer Science major there may be more than 24 UOC of overlapping courses. When a student meets all the requirements for both degrees in less than 240 UOC, students must complete additional elective courses (on top of the required 12 UOC of free electives) to bring the total to 240 UOC. Students must take these additional electives from Faculty of Engineering and/or the School of Computer Science\nSome courses are double counted. Additionally the course overlaps require students to replace the usual course in one core or major with a more advanced course required in the other program. Specifically,\n\nStudents MUST take COMP1511 as their first year Engineering computing course, COMP1511 is then double counted towards both degrees\nCOMP1521 is a core requirement (BSc) and is double counted towards the BE(Hons) as a first year Engineering elective. Students should accordingly take one less first year Engineering elective\nStudents are required to complete one of MATH1131 or MATH1141, and one of MATH1231 or MATH1241. The two Maths course are double counted towards both degrees.\nCOMP4920 is required for the BSc, however students do not enrol in this course, and instead double count the management or ethics course in their chosen Engineering stream. Students take a free elective with the 6uoc freed up from not taking COMP4920\nMATH1081 is a core requirement (BSc) but is replaced by the 2nd year Maths course taken in the BE(Hons) major. Students take a free elective with the 6 UOC freed up from not taking MATH1081\n\nNote: Without following the substitutions above, students may end up needing to use free electives for core requirements or taking more than 240 UOC to complete the dual degree.",
         "components": {
-            "general_education": {},
             "spec_data": {
-                "majors": {
+                "major": {
                     "Computer Science": {
                         "notes": "COMPA1 is the default stream, and will be used if no other stream is selected.",
                         "specs": {
@@ -1069,9 +1178,8 @@
         "overview": "This Handbook is for commencing students. If you commenced in a prior year please refer to the Online Handbook in the year you started your Law degree or contact the Faculty of Law for advice.\nThis program combines the professional LLB program with a major in Computer Science offered within the School of Computer Science, Faculty of Engineering.\nDuration/Award The program is a five year full-time combined program leading to the award of the two degrees of Bachelor of Science (Computer Science) and Bachelor of Laws (BSc LLB).",
         "structure_summary": "Students must complete 240 UOC.\n1. Law compulsory courses - 96 UOC\n2. Law prescribed elective - 6 UOC\n3. Law elective courses - 42 UOC\n4. Computer Science courses - 96 UOC",
         "components": {
-            "general_education": {},
             "spec_data": {
-                "majors": {
+                "major": {
                     "Computer Science": {
                         "notes": "COMPA1 is the default stream, and will be used if no other stream is selected.",
                         "specs": {
@@ -1300,9 +1408,8 @@
         "overview": "With this dual degree program, students can add a Science program to the standard, professionally accredited BSc in Computer Science program offered by the School of Computer Science and Engineering. All Science majors within program 3970 are available.\nStudents who meet the entry requirements for the BSc in Computer Science program 3778 and for the Bachelor of Science program 3970 may apply to enter the combined Bachelor of Science Bachelor of Science (Computer Science) program.\nStudents should schedule the Science and Computer Science components to suit their preferences while meeting constraints of timetables and prerequisites. The Science Faculty section in this Handbook describes the Science options and the School of Computer Science and Engineering Student Office can supply sample programs indicating what previous students have arranged.\nIn addition to the BSc in Computer Science program 3778, students must complete a minimum of 96 units of credit in Science courses, including a major sequence in an approved area. The Science office must approve the Science component while the School of Computer Science and Engineering will approve the final program and schedule.",
         "structure_summary": "Students must complete 192 UOC.\nBachelor of Science (96 UOC)\n\nAn approved Bachelor of Science major; and\nScience elective courses\n\nBachelor of Science (Computer Science) (96 UOC)\n\nA Bachelor of Computer Science major; and\nComputer Science elective courses\n\nIn this dual degree students take 96 UOC for the Bachelor of Science, and 96 UOC for the Bachelor of Computer, for a total of 192 UOC. The Science courses required for both degrees can overlap. Depending on the chosen combination of Computer Science major and Science major, there may be varying amounts of overlapping courses. When a student meets all the requirements for both degrees in less than 192 UOC, students must complete additional elective courses to bring the total to 192 UOC.",
         "components": {
-            "general_education": {},
             "spec_data": {
-                "minors": {
+                "minor": {
                     "Science": {
                         "notes": "Students may choose to complete an optional minor in one of the following areas, using their Science and/or free electives.",
                         "specs": {
@@ -1327,7 +1434,7 @@
                         }
                     }
                 },
-                "majors": {
+                "major": {
                     "Science": {
                         "notes": "Students must complete at least one Science major selected from the list below. Students should declare their major prior to commencing Stage 2 courses.\nNotes: 1.Students are not permitted to take the Bioinformatics major BINFB1 when taking the degree in dual award mode with the Bachelor of Engineering (Bioinformatics) program.",
                         "specs": {
@@ -1483,9 +1590,8 @@
         "overview": "The Computer Science / Media Arts dual award provides both a technical and creative foundation to the development and use of computer graphics. It also allows specialisation in the final semester in either the technical or creative strand of computer graphics and associated fields.",
         "structure_summary": "Students must complete 192 UOC.",
         "components": {
-            "general_education": {},
             "spec_data": {
-                "majors": {
+                "major": {
                     "Computer Science": {
                         "notes": "COMPA1 is the default stream, and will be used if no other stream is selected.",
                         "specs": {
@@ -1580,7 +1686,6 @@
         "overview": "The Bachelor of Science (Honours) program in Computer Science and Engineering is a 1 year full-time or 2 year part-time award undertaken by eligible students after completion of a 3 year Bachelor of Science program in a relevant discipline and offers students an opportunity to deepen their understanding of the discipline through the completion of advanced coursework and a research thesis.\nThe goals of the program are to:\nProvide advanced training to enable graduates to competently undertake sophisticated computing tasks in industry and commerce.\nProvide investigative academic training in preparation for undertaking postgraduate research, through Masters and PhD programs.\nIn attaining these goals the following objectives are considered important:\nTo expand the scope and depth of training, by coursework, in chosen areas.\nTo foster the development of personal initiative and group interaction by encouraging individual and cooperative investigation of topics of interest.\nTo foster the development of creativity and project management by the planning and undertaking of significant project work in the form of a research thesis.\nTo promote the development of verbal and written presentation skills.\nTo provide an environment for open and free enquiry based on the accepted tenets of academic scepticism.\nTo expose students to the rigour and excitement of novel enquiry.",
         "structure_summary": "Students must complete 48 UOC when taken as a standalone program.\nStudents must complete the following:\n\n\n\t COMP4961 Computer Science Thesis A (6 UOC)\n\t COMP4962&nbsp;Computer Science Thesis B&nbsp;(6 UOC)\n\t COMP4963&nbsp;Computer Science Thesis C (6 UOC)\n\t COMP electives level 4 or higher (30 UOC)",
         "components": {
-            "general_education": {},
             "spec_data": {
                 "honours": {
                     "Computer Science & Engineering (Honours)": {
@@ -1609,7 +1714,6 @@
         "overview": "This 11 month program will provide students with the opportunity to pursue a degree in Computer Science that will lead to a career in a discipline of Computer Science or related area. Students will complete a set of seven science and engineering courses in addition to a set of Communication and Academic Literacy courses (total of 6 UOC). Credit will be granted towards the Bachelor of Computer Science for each of the seven science and engineering courses which are all equivalent to First-Year UNSW courses and for the Communication and Academic Literacy courses. After successful completion of all eight courses, students will receive advanced standing equivalent to one year (48 UOC) towards their degree program and move into the Bachelor of Computer Science at UNSW Sydney.\nIn this Diploma program students will be able to experience a university environment and university life, while being supported to acquire all of the knowledge and skills needed for successful transition to undergraduate studies at UNSW. Students receive a solid background in science through their science courses, while some of the engineering courses they may choose provide them with the opportunity to engage in real-life situations including the design and construction of engineering prototypes. The courses in this program are equivalent in content and outcomes to First-Year UNSW courses but the delivery pace is slower and the face-to-face contact hours are greater. The course structure allows students to get accustomed to University learning styles - in Lectures, Laboratories, and Problem-Solving Workshops - while receiving additional support, as required, for the duration of the diploma program.",
         "structure_summary": "Students must complete 48 UOC when taken as a standalone program.\n1. Communication and Academic Literacy Core Course (6 UOC) 2. Core Courses (24 UOC) 3. Prescribed Electives (18 UOC)",
         "components": {
-            "general_education": {},
             "spec_data": {},
             "core_courses": [
                 {
@@ -1672,7 +1776,6 @@
         "overview": "Computer Science involves the study of the design, construction and uses of computer systems. It is concerned with the representation of data and data structures in computer systems and the design of algorithms for automatic manipulation of this information by programming languages and machine systems\nThe undergraduate certificate in Computer Science provides you with a solid foundation in Computer Science concepts. You will learn about the fundamentals of programming and computer systems, and gain an understanding of some of the mathematical underpinnings of Computer Science. It will equip you to apply that understanding to write software and solve problems.\nOn successful completion of the certificate, you can transfer your completed courses and continue your studies in the Bachelor of Computer Science, subject to meeting the articulation requirements.\nNOTE:\nThis program does not have CRICOS registration; it is not available for study on a Student Visa.",
         "structure_summary": "Students must complete 24 UOC when taken as a standalone program.",
         "components": {
-            "general_education": {},
             "spec_data": {},
             "core_courses": [
                 {
