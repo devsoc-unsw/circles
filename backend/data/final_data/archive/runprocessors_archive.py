@@ -47,11 +47,11 @@ if __name__ == "__main__":
             "Careful. You are about to run all stages INCLUDING the scrapers... Enter 'y' if you wish to proceed or 'n' to cancel: "
         )
         if res == "y":
-            for stage_f in run.values():
-                stage_f(args.year)
+            for courseFunction in run.values():
+                courseFunction(args.year)
     elif args.stage == "data-fix":
-        for stage, stage_f in run.items():
+        for stage, func in run.items():
             if stage != "scrape":
-                stage_f(args.year)
+                func(args.year)
     else:
         run[args.stage](args.year)

@@ -25,15 +25,16 @@ except argparse.ArgumentError:
     parser.print_help()
     exit(0)
 
-def check_in_fixes(coursename, courses_in_manual):
+def check_in_fixes(cname: str, ls: list) -> None:
     """ mutates the list given to add the course name if it is in manual fixes"""
     with suppress(FileNotFoundError):
-        with open(f"data/processors/manual_fixes/{coursename[0:4]}fixes.py", "r", encoding="utf8") as f:
-            if f"CONDITIONS[\"{coursename}\"]" in f.read():
-                courses_in_manual.append(coursename)
+        with open(f"data/processors/manual_fixes/{cname[0:4]}fixes.py", "r", encoding="utf8") as file:
+            if f"CONDITIONS[\"{cname}\"]" in file.read():
+                ls.append(cname)
 
 
 def main():
+    """ runs the comparison between a target and a source year """
     source_courses = (
         "data/final_data/coursesProcessed.json"
         if args.source is None
@@ -78,4 +79,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
