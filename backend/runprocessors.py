@@ -51,6 +51,7 @@ except argparse.ArgumentError:
     exit(0)
 
 def run_manual_fixes():
+    """ runs all the manual fix scripts """
     try:
         subprocess.run(["data/processors/manual_fixes/run_manual_fixes.sh"], check=True)
     except subprocess.CalledProcessError:

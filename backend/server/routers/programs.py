@@ -1,10 +1,13 @@
+"""
+API for fetching data about programs and specialisations
+"""
 import contextlib
 import re
 from typing import Optional
 
 from fastapi import APIRouter, HTTPException
 from server.database import programsCOL, specialisationsCOL
-from server.routers.model import (Structure, majors, message, minorInFE,
+from server.routers.model import (Structure, Majors, message, minorInFE,
                                   minorInSpecialisation, minors, programs)
 from server.routers.courses import regex_search
 
@@ -16,6 +19,7 @@ router = APIRouter(
 
 @router.get("/")
 def programsIndex():
+    """ sanity test that this file is loaded """
     return "Index of programs"
 
 
@@ -51,7 +55,7 @@ def getPrograms():
 
 @router.get(
     "/getMajors/{programCode}",
-    response_model=majors,
+    response_model=Majors,
     responses={
         400: {
             "model": message,
@@ -145,15 +149,12 @@ def getMinors(programCode: str):
 
 def convertSubgroupObjectToCoursesDict(object: str, description: str|list[str]):#-> dict[str, str]:
     """ Gets a subgroup object (format laid out in the processor) and fetches the exact courses its referring to """
-    
-    return (
-        {c: description[index] for index, c in enumerate(object.split(" or "))}
-            if " or " in object
-        else regex_search(object)
-            if not re.match(r"[A-Z]{4}[0-9]{4}", object)
-        else {object: description}
-    )
+    if " or " in object:
+        return {c: description[index] for index, c in enumerate(object.split(" or "))}
+    if not re.match(r"[A-Z]{4}[0-9]{4}", object):
+        return regex_search(object)
 
+    return {object: description}
 
 def addSubgroupContainer(structure: dict, type: str, container: dict, exceptions: list[str]) -> list[str]:
     """ Returns the added courses """

@@ -1,3 +1,4 @@
+""" model for interacting with the FE """
 # pylint: disable=missing-class-docstring
 import json
 from pickle import load
@@ -15,7 +16,7 @@ class programs(BaseModel):
     programs: dict
 
 
-class majors(BaseModel):
+class Majors(BaseModel):
     majors: dict
 
 
@@ -39,11 +40,9 @@ class CourseDetails(BaseModel):
     equivalents: dict
     raw_requirements: str
     exclusions: dict
-    path_to: dict
     handbook_note: str
     terms: list
     gen_ed: int
-    path_from: dict
     is_legacy: bool
     is_accurate: bool
 
@@ -82,7 +81,6 @@ class CoursesUnlockedWhenTaken (BaseModel):
     direct_unlock: list
     indirect_unlock: list
 
-
 class CourseTypeState(BaseModel):
     is_accurate: bool
     unlocked: bool
@@ -102,8 +100,12 @@ class PlannerData(BaseModel):
     plan: list[list[dict]]
     mostRecentPastTerm: dict
 
-class AffectedCourses (BaseModel):
-    affected_courses: list[str]
+class Courses (BaseModel):
+    courses: list[str]
+
+class CoursesPath (BaseModel):
+    original: str
+    courses: list[str]
 
 minorInFE = ["3778"]
 minorInSpecialisation = ["3502", "3970"]
