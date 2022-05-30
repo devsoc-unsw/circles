@@ -4,7 +4,7 @@ import { Button, Input } from "antd";
 import "./index.less";
 
 const EditMarks = ({
-  handleConfirm, setInputBuffer, handleKeyDown,
+  letterGrades, handleConfirm, setInputBuffer, handleKeyDown,
 }) => {
   const handleInputChange = (e) => {
     setInputBuffer(e.target.value);
@@ -15,8 +15,6 @@ const EditMarks = ({
     setInputBuffer(e.target.innerText);
     handleConfirm();
   };
-
-  const letterGrades = ["FL", "PS", "CR", "DN", "HD"];
 
   return (
     <div className="edit-mark">

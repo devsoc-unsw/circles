@@ -33,13 +33,13 @@ const ContextMenu = ({ code, plannedFor }) => {
     dispatch(addTab(code));
   };
 
+  const validLetterGrades = ["FL", "PS", "CR", "DN", "HD"];
   const [isEditMarkVisible, setIsEditMarkVisible] = useState(false);
 
   const showEditMark = () => {
     setIsEditMarkVisible(true);
   };
 
-  const validLetterGrades = ["FL", "PS", "CR", "DN", "HD"];
   const [markInputBuf, setMarkInputBuf] = useState(
     useSelector((state) => state.planner.courses[code].mark),
   );
