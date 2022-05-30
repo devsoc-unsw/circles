@@ -11,7 +11,7 @@ import "./App.less";
 import PageLoading from "./components/PageLoading";
 import "./axios";
 import Header from "./components/Header";
-import PageNotFound from "./components/PageNotFound/PageNotFound";
+import PageNotFound from "./pages/PageNotFound/PageNotFound";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
