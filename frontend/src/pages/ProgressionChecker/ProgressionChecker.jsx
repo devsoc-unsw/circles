@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import Dashboard from "./Dashboard";
-import ListView3 from "./ListView3";
 import "./index.less";
 import PageTemplate from "../../components/PageTemplate";
 import TableView from "./TableView";
+import GridView from "./GridView/GridView";
 
 // TODO: dummy data for now
 const degreeData = {
@@ -66,12 +66,8 @@ const ProgressionChecker = () => {
   return (
     <PageTemplate>
       <Dashboard isLoading={isLoading} degree={degreeData} />
+      <GridView isLoading={isLoading} structure={structure} />
       <TableView isLoading={isLoading} structure={structure} />
-      <ListView3
-        isLoading={isLoading}
-        degree={degreeData}
-        progressioncourses={structure}
-      />
     </PageTemplate>
   );
 };
