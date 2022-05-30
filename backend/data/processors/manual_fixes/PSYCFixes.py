@@ -80,7 +80,7 @@ def fix_conditions():
     data_helpers.write_data(COURSES, "data/final_data/coursesProcessed.json")
 
 def PSYC_1011():
-    """    
+    """
     "original": "None<br/><br/>"
     "processed": "None"
     """

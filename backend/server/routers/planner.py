@@ -18,7 +18,7 @@ def fixPlannerData(plannerData: PlannerData):
     for year_index, year in enumerate(plannerData["plan"]):
         for term_index, term in enumerate(year):
             for courseName, course in term.items():
-                if type(course) is not list:
+                if not isinstance(course, list):
                     plannerData["plan"][year_index][term_index][courseName] = [getCourse(courseName)["UOC"], course]
     return plannerData
 
@@ -71,7 +71,7 @@ async def validateTermPlanner(
     courses and evaluate T2. Then add T2 and evaluate T3. Then add T3 and evaluate
     2nd year T0... and so on.
 
-    The mostRecentPastTerm will show the latest term (and current year) that has 
+    The mostRecentPastTerm will show the latest term (and current year) that has
     passed and all warnings will be suppressed until after this term
 
     Returns the state of all the courses on the term planner
