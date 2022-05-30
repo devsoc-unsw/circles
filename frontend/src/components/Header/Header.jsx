@@ -77,6 +77,14 @@ const Header = () => {
               <span>Course Selector</span>
               <Link to="/course-selector" />
             </Menu.Item>
+            {
+              inDev && (
+                <Menu.Item key="graphical-selector">
+                  <span>Graphical Selector</span>
+                  <Link to="/graphical-selector" />
+                </Menu.Item>
+              )
+            }
             <Menu.Item key="term-planner">
               <span>Term Planner</span>
               <Link to="/term-planner" />

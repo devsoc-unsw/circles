@@ -1,13 +1,15 @@
+"""
+API for fetching data about programs and specialisations
+"""
 import contextlib
 import re
 from typing import Optional
 
 from fastapi import APIRouter, HTTPException
 from server.database import programsCOL, specialisationsCOL
-from server.routers.model import (Structure, majors, message, minorInFE,
+from server.routers.model import (Structure, Majors, message, minorInFE,
                                   minorInSpecialisation, minors, programs)
 from server.routers.courses import regex_search
-from data.processors.programs_processing import TEST_PROGS
 
 router = APIRouter(
     prefix="/programs",
@@ -17,6 +19,7 @@ router = APIRouter(
 
 @router.get("/")
 def programsIndex():
+    """ sanity test that this file is loaded """
     return "Index of programs"
 
 
@@ -45,14 +48,14 @@ def getPrograms():
     """ Fetch all the programs the backend knows about in the format of { code: title } """
     # return {"programs": {q["code"]: q["title"] for q in programsCOL.find()}}
     # TODO On deployment, DELETE RETURN BELOW and replace with the return above
-    return {"programs": {"3778": "Computer Science", 
+    return {"programs": {"3778": "Computer Science",
                         "3784": "Commerce / Computer Science",
                         }}
 
 
 @router.get(
     "/getMajors/{programCode}",
-    response_model=majors,
+    response_model=Majors,
     responses={
         400: {
             "model": message,
@@ -63,7 +66,7 @@ def getPrograms():
             "content": {
                 "application/json": {
                     "example": {
-                        "majors": { 
+                        "majors": {
                             "Computer Science": {
                                 "COMPS1": "Computer Science (Embedded Systems)",
                                 "COMPJ1": "Computer Science (Programming Languages)",
@@ -144,14 +147,14 @@ def getMinors(programCode: str):
 
     return {"minors": minrs}
 
-def convertSubgroupObjectToCoursesDict(object: str, description: str|list[str]) -> dict[str, str]:
+def convertSubgroupObjectToCoursesDict(object: str, description: str|list[str]):#-> dict[str, str]:
     """ Gets a subgroup object (format laid out in the processor) and fetches the exact courses its referring to """
     if " or " in object:
         return {c: description[index] for index, c in enumerate(object.split(" or "))}
-    elif not re.match(r"[A-Z]{4}[0-9]{4}", object):
+    if not re.match(r"[A-Z]{4}[0-9]{4}", object):
         return regex_search(object)
-    else:
-        return {object: description}
+
+    return {object: description}
 
 def addSubgroupContainer(structure: dict, type: str, container: dict, exceptions: list[str]) -> list[str]:
     """ Returns the added courses """
@@ -264,9 +267,9 @@ def getStructure(
     structure = {}
 
     if major:
-        majors = major.split("+") if "+" in major else [major]
+        majors_l = major.split("+") if "+" in major else [major]
 
-        for m in majors:
+        for m in majors_l:
             addSpecialisation(structure, m, "Major")
 
     if minor:
