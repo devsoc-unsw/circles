@@ -1,15 +1,22 @@
 import React from "react";
-import { Input } from "antd";
-import LetterGradeButton from "../LetterGradeButton";
+import { Button, Input } from "antd";
 
 import "./index.less";
 
 const EditMarks = ({
-  letterGrades, handleConfirm, setInputBuffer, handleKeyDown,
+  handleConfirm, setInputBuffer, handleKeyDown,
 }) => {
   const handleInputChange = (e) => {
     setInputBuffer(e.target.value);
   };
+
+  const handleLetterGrade = (e) => {
+    e.stopPropagation();
+    setInputBuffer(e.target.innerText);
+    handleConfirm();
+  };
+
+  const letterGrades = ["FL", "PS", "CR", "DN", "HD"];
 
   return (
     <div className="edit-mark">
@@ -22,11 +29,12 @@ const EditMarks = ({
       <div className="letter-grade-container">
         {
           letterGrades.map((letterGrade) => (
-            <LetterGradeButton
-              letterGrade={letterGrade}
-              handleConfirm={() => handleConfirm(letterGrade)}
-              setInputBuffer={setInputBuffer}
-            />
+            <Button
+              key={letterGrade}
+              onClick={handleLetterGrade}
+            >
+              {letterGrade}
+            </Button>
           ))
         }
       </div>
