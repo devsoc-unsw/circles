@@ -11,7 +11,6 @@ Step in the data's journey:
     [ X ] Customise formatted data (program_processing.py)
 """
 
-from multiprocessing.sharedctypes import Value
 import re
 from collections import OrderedDict
 
