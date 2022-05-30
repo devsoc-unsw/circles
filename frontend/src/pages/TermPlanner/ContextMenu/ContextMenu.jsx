@@ -33,7 +33,7 @@ const ContextMenu = ({ code, plannedFor }) => {
     dispatch(addTab(code));
   };
 
-  const validLetterGrades = ["FL", "PS", "CR", "DN", "HD"];
+  const validLetterGrades = ["SY", "PS", "CR", "DN", "HD"];
   const [isEditMarkVisible, setIsEditMarkVisible] = useState(false);
 
   const showEditMark = () => {

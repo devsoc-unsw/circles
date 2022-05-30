@@ -12,6 +12,7 @@ const parseMarkToInt = (mark) => {
     return parseInt(mark, 10);
   }
   const letterGradeToIntMap = {
+    SY: null,
     FL: 25,
     PS: 60,
     CR: 70,
