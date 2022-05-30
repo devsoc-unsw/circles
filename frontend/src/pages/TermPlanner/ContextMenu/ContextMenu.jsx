@@ -45,7 +45,7 @@ const ContextMenu = ({ code, plannedFor }) => {
   );
 
   const handleConfirmEditMark = (mark) => {
-    const attemptedMark = ` ${mark}`.slice(1).replace(" ", "");
+    const attemptedMark = ` ${mark}`.replaceAll(" ", "");
 
     if (
       (attemptedMark.isNaN && !validLetterGrades.includes(attemptedMark))
