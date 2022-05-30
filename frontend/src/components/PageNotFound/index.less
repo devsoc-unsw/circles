@@ -18,8 +18,9 @@ body {
 
 .text404 {
   position: absolute;
-  top: 44%;
-  left: 41%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   margin-right: -50%;
   display: flex;
   align-items: center;
@@ -39,15 +40,6 @@ body {
 }
 
 @media only screen and (max-width: 470px) {
-  .text404 {
-    position: absolute;
-    top: 44%;
-    left: 41%;
-    margin-right: -50%;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-  }
   
   #headd {
     font-size: 5em;
@@ -80,7 +72,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: cirmove 2s linear infinite;
 }
 
 .box-anti {
@@ -90,17 +81,4 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: cirantimove 2s linear infinite;
-}
-
-@keyframes cirmove {
-  100% {
-    transform: rotate(1turn);
-  }
-}
-
-@keyframes cirantimove {
-  100% {
-    transform: rotate(-1turn);
-  }
 }
