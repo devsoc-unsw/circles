@@ -1,54 +1,50 @@
 import React, { useState, useEffect } from "react";
-import { Typography, Table, Skeleton } from "antd";
+import { Typography, Skeleton, Button } from "antd";
 import { useSelector } from "react-redux";
 import "./index.less";
 import getPastCourses from "../getPastCourses";
 
-const TableView = ({ isLoading, structure }) => {
+const GridView = ({ isLoading, structure }) => {
   const { Title } = Typography;
   const [pastCourses, setPastCourses] = useState({});
-  const [tableLayout, setTableLayout] = useState({});
+  const [gridLayout, setGridLayout] = useState({});
   const { years, startYear, courses } = useSelector((store) => store.planner);
 
-  const generateTableStructure = (plannedCourses) => {
-    const newTableLayout = {};
+  const generateGridStructure = () => {
+    const newGridLayout = {};
 
     // Example groups: Major, Minor, General
     Object.keys(structure).forEach((group) => {
-      newTableLayout[group] = {};
+      newGridLayout[group] = {};
       // Example subgroup: Core Courses, Computing Electives, Flexible Education
       Object.keys(structure[group]).forEach((subgroup) => {
         if (typeof structure[group][subgroup] !== "string") {
           // case where structure[group][subgroup] gives information on courses in an object
           const subgroupStructure = structure[group][subgroup];
-          newTableLayout[group][subgroup] = [];
+          newGridLayout[group][subgroup] = [];
 
           if (subgroupStructure.courses) {
             // only consider disciplinary component courses
             Object.keys(subgroupStructure.courses).forEach((courseCode) => {
-              if (courseCode in plannedCourses) {
-                newTableLayout[group][subgroup].push({
-                  key: courseCode,
-                  title: plannedCourses[courseCode].title,
-                  UOC: plannedCourses[courseCode].UOC,
-                  termTaken: plannedCourses[courseCode].termTaken,
-                });
-                newTableLayout[group][subgroup].sort(
-                  (a, b) => a.termTaken.localeCompare(b.termTaken),
-                );
-              }
+              newGridLayout[group][subgroup].push({
+                key: courseCode,
+                title: subgroupStructure.courses[courseCode],
+                completed: courseCode in pastCourses,
+              });
+              newGridLayout[group][subgroup].sort(
+                (a, b) => a.key.localeCompare(b.key),
+              );
             });
           } else {
             // If there is no specified course list for the subgroup, then manually
             // show the added courses.
-            Object.keys(plannedCourses).forEach((courseCode) => {
-              const courseData = plannedCourses[courseCode];
+            Object.keys(courses).forEach((courseCode) => {
+              const courseData = courses[courseCode];
               if (courseData && courseData.type === subgroup) {
-                newTableLayout[group][subgroup].push({
+                newGridLayout[group][subgroup].push({
                   key: courseCode,
-                  title: plannedCourses.courseCode.title,
-                  UOC: plannedCourses.courseCode.UOC,
-                  termTaken: plannedCourses.courseCode.termTaken,
+                  title: courses.courseCode.title,
+                  completed: courseCode in pastCourses,
                 });
               }
             });
@@ -58,59 +54,37 @@ const TableView = ({ isLoading, structure }) => {
       if (structure[group].name) {
         // Append structure group name if exists
         const newGroup = `${group} - ${structure[group].name}`;
-        newTableLayout[newGroup] = newTableLayout[group];
-        delete newTableLayout[group];
+        newGridLayout[newGroup] = newGridLayout[group];
+        delete newGridLayout[group];
       }
     });
-    setTableLayout(newTableLayout);
+    setGridLayout(newGridLayout);
   };
 
   useEffect(() => {
     setPastCourses(getPastCourses(years, startYear, courses));
-    generateTableStructure(pastCourses);
+    generateGridStructure();
   }, [isLoading, structure, years, startYear, courses]);
 
-  const columns = [
-    {
-      title: "Course Code",
-      dataIndex: "key",
-      key: "key",
-    },
-    {
-      title: "Course Name",
-      dataIndex: "title",
-      key: "title",
-    },
-    {
-      title: "UOC",
-      dataIndex: "UOC",
-      key: "UOC",
-    },
-    {
-      title: "Term Taken",
-      dataIndex: "termTaken",
-      key: "termTaken",
-    },
-  ];
-
   return (
-    <div className="tableViewContainer">
+    <div className="gridViewContainer">
       {isLoading ? (
         <Skeleton />
       ) : (
         <>
-          {Object.entries(tableLayout).map(([group, groupEntry]) => (
+          {Object.entries(gridLayout).map(([group, groupEntry]) => (
             <div key={group} className="category">
               <Title level={1}>{group}</Title>
               {Object.entries(groupEntry).map(([subGroup, subGroupEntry]) => (
                 <div key={subGroup} className="subCategory">
                   <Title level={2}>{subGroup}</Title>
-                  <Table
-                    className="table-striped-rows"
-                    dataSource={subGroupEntry}
-                    columns={columns}
-                    pagination={{ position: ["none", "none"] }}
-                  />
+                  <div className="courseGroup">
+                    {subGroupEntry.map((course) => (
+                      <Button className="checkerButton" type="primary" style={course.completed ? null : { background: "#FFF", color: "#9254de" }} key={course.key}>
+                        {course.key}: {course.title}
+                      </Button>
+                    ))}
+                  </div>
                   <br />
                 </div>
               ))}
@@ -122,4 +96,4 @@ const TableView = ({ isLoading, structure }) => {
   );
 };
 
-export default TableView;
+export default GridView;

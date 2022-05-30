@@ -28,6 +28,7 @@ const CourseDescription = () => {
   const { degree, planner } = useSelector((state) => state);
   const [pageLoaded, setPageLoaded] = useState(false);
   const [coursesPathTo, setCoursesPathTo] = useState({});
+  const [coursesPathFrom, setCoursesPathFrom] = useState([]);
   const [courseCapacity, setCourseCapacity] = useState({});
 
   useEffect(() => {
@@ -49,6 +50,16 @@ const CourseDescription = () => {
           direct_unlock: data.direct_unlock,
           indirect_unlock: data.indirect_unlock,
         });
+      }
+    };
+
+    const getPathFromCoursesById = async (c) => {
+      const [data, err] = await axiosRequest(
+        "get",
+        `/courses/getPathFrom/${c}`,
+      );
+      if (!err) {
+        setCoursesPathFrom(data.courses);
       }
     };
 
@@ -86,7 +97,12 @@ const CourseDescription = () => {
     };
 
     const fetchCourseData = async () => {
-      await Promise.all([getCourse(), getPathToCoursesById(id), getCourseCapacityById(id)]);
+      await Promise.all([
+        getCourse(),
+        getPathFromCoursesById(id),
+        getPathToCoursesById(id),
+        getCourseCapacityById(id),
+      ]);
       setPageLoaded(true);
     };
 
@@ -173,11 +189,15 @@ const CourseDescription = () => {
               title="Courses you have done to unlock this course"
             >
               <div>
-                {course.path_from && Object.keys(course.path_from).length > 0 ? (
+                {coursesPathFrom && coursesPathFrom.length > 0 ? (
                   <div className="text course-tag-cont">
-                    {Object.keys(course.path_from).map((courseCode) => (
-                      <CourseTag key={courseCode} name={courseCode} />
-                    ))}
+                    {
+                      coursesPathFrom
+                        .filter((courseCode) => Object.keys(planner.courses).includes(courseCode))
+                        .map((courseCode) => (
+                          <CourseTag key={courseCode} name={courseCode} />
+                        ))
+                    }
                   </div>
                 ) : (
                   <p className="text">None</p>

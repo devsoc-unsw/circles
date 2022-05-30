@@ -1,9 +1,8 @@
 """
 APIs for the /courses/ route.
 """
-
 import re
-from typing import Optional
+from typing import Optional, Tuple
 
 from algorithms.objects.user import User
 from data.config import ARCHIVED_YEARS
@@ -11,10 +10,11 @@ from data.utility.data_helpers import read_data
 from fastapi import APIRouter, HTTPException
 from fuzzywuzzy import fuzz
 from server.database import archivesDB, coursesCOL
-from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS,
-                                  AffectedCourses, CourseDetails, CoursesState,
+from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, Courses,
+                                  CourseDetails, CoursesState, CoursesPath,
                                   CoursesUnlockedWhenTaken, ProgramCourses,
                                   UserData, message)
+
 
 router = APIRouter(
     prefix="/courses",
@@ -93,21 +93,9 @@ def apiIndex():
                         "campus": "Sydney",
                         "equivalents": {"DPST1091": 1, "COMP1917": 1},
                         "exclusions": {"DPST1091": 1},
-                        "path_to": {
-                            "COMP1521": 1,
-                            "COMP1531": 1,
-                            "COMP2041": 1,
-                            "COMP2111": 1,
-                            "COMP2121": 1,
-                            "COMP2521": 1,
-                            "COMP9334": 1,
-                            "ELEC2117": 1,
-                            "SENG2991": 1,
-                        },
                         "terms": ["T1", "T2", "T3"],
                         "raw_requirements": "",
                         "gen_ed": 1,
-                        "path_from": {},
                     }
                 }
             },
@@ -305,7 +293,7 @@ def getLegacyCourses(year, term):
     """
     result = {c['code']: c['title'] for c in archivesDB[year].find() if term in c['terms']}
 
-    if result == {}:
+    if not result:
         raise HTTPException(status_code=400, detail="Invalid term or year. Valid terms: T0, T1, T2, T3. Valid years: 2019, 2020, 2021, 2022.")
 
     return {'courses' : result}
@@ -325,7 +313,7 @@ def getLegacyCourse(year, courseCode):
     return result
 
 
-@router.post("/unselectCourse/{unselectedCourse}", response_model=AffectedCourses,
+@router.post("/unselectCourse/{unselectedCourse}", response_model=Courses,
             responses={
                 422: {"model": message, "description": "Unselected course query is required"},
                 400: {"model": message, "description": "Uh oh you broke me"},
@@ -334,7 +322,7 @@ def getLegacyCourse(year, courseCode):
                     "content": {
                         "application/json": {
                             "example": {
-                                 "affected_courses": [
+                                 "courses": [
                                      "COMP1521",
                                      "COMP1531",
                                      "COMP3121"
@@ -351,8 +339,49 @@ def unselectCourse(userData: UserData, unselectedCourse: str):
     """
     affectedCourses = User(fixUserData(userData.dict())).unselect_course(unselectedCourse)
 
-    return {'affected_courses': affectedCourses}
+    return {'courses': affectedCourses}
 
+@router.get("/courseChildren/{course}", response_model=CoursesPath,
+            responses = {
+                200 : {
+                    "courses": ["COMP1521", "COMP1531"]
+                }
+            })
+def courseChildren(course: str):
+    """
+    fetches courses which are dependant on taking 'course'
+    eg 1511 -> 1521, 1531, 2521 etc
+    """
+    if not CONDITIONS.get(course):
+        raise HTTPException(400, f"no course by name {course}")
+    return {
+            "original" : course,
+            "courses": [
+                coursename for coursename, condition in CONDITIONS.items()
+                if condition is not None and condition.is_path_to(course)
+            ]
+        }
+
+@router.get("/getPathFrom/{course}", response_model=CoursesPath,
+            responses = {
+                200 : {
+                    "courses": ["COMP1521", "COMP1531"]
+                }
+            })
+def getPathFrom(course):
+    """
+    fetches courses which can be used to satisfy 'course'
+    eg 2521 -> 1511
+    """
+
+    course_condition = CONDITIONS[course]
+    return {
+        "original" : course,
+        "courses" :[
+            coursename for coursename, _ in CONDITIONS.items()
+            if course_condition.is_path_to(coursename)
+        ]
+    }
 
 @router.post("/coursesUnlockedWhenTaken/{courseToBeTaken}", response_model=CoursesUnlockedWhenTaken,
             responses={
@@ -383,7 +412,7 @@ def coursesUnlockedWhenTaken(userData: UserData, courseToBeTaken: str):
     new_courses = courses_now_unlocked - courses_initially_unlocked
 
     ## Differentiate direct and indirect unlocks
-    path_to = set(getCourse(courseToBeTaken)['path_to'])
+    path_to = set(courseChildren(courseToBeTaken)["courses"])
     direct_unlock = new_courses.intersection(path_to)
     indirect_unlock = new_courses - direct_unlock
 
@@ -397,9 +426,9 @@ def unlocked_set(courses_state):
     return set(course for course in courses_state if courses_state[course]['unlocked'])
 
 
-def fuzzy_match(course: tuple, search_term: str):
+def fuzzy_match(course: Tuple[str, str], search_term: str):
     """ Gives the course a weighting based on the relevance to the search """
-    (code, title) = course
+    code, title = course
 
     # either match against a course code, or match many words against the title
     # (not necessarily in the same order as the title)
@@ -411,7 +440,7 @@ def fuzzy_match(course: tuple, search_term: str):
                sum(fuzz.partial_ratio(title.lower(), word)
                        for word in search_term.split(' ')))
 
-def weight_course(course: tuple, search_term: str, structure: dict,
+def weight_course(course: Tuple[str, str], search_term: str, structure: dict,
                   major_code: Optional[str] = None, minor_code: Optional[str] = None):
     """
     Gives the course a weighting based on the relevance to the user's degree
@@ -419,7 +448,7 @@ def weight_course(course: tuple, search_term: str, structure: dict,
         - code: tuple(course_code, course_title)
     """
     weight = fuzzy_match(course, search_term)
-    (code, _) = course
+    code, _ = course
 
     if major_code is not None:
         for structKey in structure.keys():
