@@ -8,7 +8,6 @@ import { WarningOutlined, InfoCircleOutlined } from "@ant-design/icons";
 import useMediaQuery from "../../../hooks/useMediaQuery";
 import ContextMenu from "../ContextMenu";
 import Marks from "../../../components/Marks";
-// import KebabMenu from "../../../components/KebabMenu";
 
 import "./index.less";
 
@@ -93,11 +92,6 @@ const DraggableCourse = ({ code, index, showMarks }) => {
                 ) : null}
               </div>
             </div>
-            {/* <div className="kebab-container">
-              <KebabMenu
-                onClick={displayContextMenu}
-              />
-            </div> */}
           </li>
         )}
       </Draggable>
