@@ -1,38 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Table, Skeleton } from "antd";
+import { Typography, Table, Skeleton } from "antd";
 import { useSelector } from "react-redux";
-import { getMostRecentPastTerm } from "../../TermPlanner/validateTermPlanner";
 import "./index.less";
+import getPastCourses from "../getPastCourses";
 
 const TableView = ({ isLoading, structure }) => {
+  const { Title } = Typography;
   const [pastCourses, setPastCourses] = useState({});
   const [tableLayout, setTableLayout] = useState({});
   const { years, startYear, courses } = useSelector((store) => store.planner);
-
-  const getPastCourses = () => {
-    const { Y: recentYear, T: recentTerm } = getMostRecentPastTerm(startYear);
-    const newPastCourses = {};
-
-    // get courses and their matching information for table columns
-    // only from past terms, by ignoring future years and terms in the planner
-    years.slice(0, recentYear).forEach((year, yearIndex) => {
-      Object.values(year).forEach((term, termIndex) => {
-        Object.values(term).forEach((course) => {
-          if (yearIndex < recentYear - 1 || termIndex <= recentTerm) {
-            const currCourse = {};
-            currCourse.title = courses[course].title;
-            currCourse.UOC = courses[course].UOC;
-            currCourse.type = courses[course].type;
-            const currYear = (startYear + yearIndex).toString().slice(-2);
-            currCourse.termTaken = `${currYear}T${termIndex}`;
-
-            newPastCourses[course] = currCourse;
-          }
-        });
-      });
-    });
-    setPastCourses(newPastCourses);
-  };
 
   const generateTableStructure = (plannedCourses) => {
     const newTableLayout = {};
@@ -64,7 +40,7 @@ const TableView = ({ isLoading, structure }) => {
             });
           } else {
             // If there is no specified course list for the subgroup, then manually
-            // show the added courses on the menu.
+            // show the added courses.
             Object.keys(plannedCourses).forEach((courseCode) => {
               const courseData = plannedCourses[courseCode];
               if (courseData && courseData.type === subgroup) {
@@ -90,7 +66,7 @@ const TableView = ({ isLoading, structure }) => {
   };
 
   useEffect(() => {
-    getPastCourses();
+    setPastCourses(getPastCourses(years, startYear, courses));
     generateTableStructure(pastCourses);
   }, [isLoading, structure, years, startYear, courses]);
 
@@ -125,10 +101,10 @@ const TableView = ({ isLoading, structure }) => {
         <>
           {Object.entries(tableLayout).map(([group, groupEntry]) => (
             <div key={group} className="category">
-              <h1>{group}</h1>
+              <Title level={1}>{group}</Title>
               {Object.entries(groupEntry).map(([subGroup, subGroupEntry]) => (
                 <div key={subGroup} className="subCategory">
-                  <h2>{subGroup}</h2>
+                  <Title level={2}>{subGroup}</Title>
                   <Table
                     className="table-striped-rows"
                     dataSource={subGroupEntry}
