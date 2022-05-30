@@ -15,7 +15,6 @@ from multiprocessing.sharedctypes import Value
 import re
 from collections import OrderedDict
 
-
 from data.utility.data_helpers import read_data, write_data
 
 # Data input/output paths
@@ -82,7 +81,7 @@ ENG_PROGS = (
 )
 
 # Enable or disable testing, and choose what programs to test on
-TESTING_MODE = True
+TESTING_MODE = False
 TEST_PROGS = CS_PROGS
 
 def process_prg_data() -> None:
@@ -372,7 +371,8 @@ def add_limit_rule(program_data: dict, item: dict) -> None:
     requirements = format_course_strings(requirements_str)
 
     courses = {}
-    process_any_requirements(program_data, courses, requirements, item)
+    for requirement in requirements:
+        process_any_requirement(program_data, courses, requirement, item)
 
     program_data["components"][LIMIT_RULE_KEY].append({
         "courses": courses,
@@ -418,8 +418,8 @@ def add_course_tabs(program_data: dict, courses: dict, item: dict) -> None:
     Adds a single given drop down tab to the core courses requirements
     """
     if item["dynamic_relationship"]:
-        requirements = [ course["description"] for course in item["dynamic_relationship"] ]
-        process_any_requirements(program_data, courses, requirements, item)
+        for course in item["dynamic_relationship"]:
+            process_any_requirement(program_data, courses, course["description"], item)
     elif item["vertical_grouping"]["value"] == "one_of_the_following":
         # Check if it's a 'one of the following' requirement or single course requirements
         combined_key = " or ".join([ course["academic_item_code"] for course in item["relationship"] ])
@@ -431,38 +431,41 @@ def add_course_tabs(program_data: dict, courses: dict, item: dict) -> None:
                 # Normal course, add it
                 code = course["academic_item_code"]
                 courses[code] = course["academic_item_name"]
-            else:
-                # It's of the form 'any course matching the pattern ########'
-                code = course["parent_record"][-8:].rstrip("#")
-                courses[code] = course["parent_record"][-40:]
+            elif course["parent_record"] != "Curriculum Structure Container: Free Electives":
+                process_any_requirement(program_data, courses, course["parent_record"], item)
 
     # Recurse further down in case we've missed something
     for next in item["container"]:
         add_course_tabs(program_data, courses, next)
 
 
-def process_any_requirements(program_data: dict, courses: dict, requirements: list[str], item: dict) -> None:
+def process_any_requirement(program_data: dict, courses: dict, requirement: str, item: dict) -> None:
     """
     Processes list of course (as strings) requirements
     that are of the form 'any <faculty or type of course> course'
     """
-    for requirement in requirements:
-        if bool(re.match(r"^any course$", requirement, flags = re.IGNORECASE)):
-            # Manual fix
-            codes = [""]
-        else:
-            # Standard case
-            stripped = strip_any_requirement_description(requirement)
-            level = get_any_requirement_level(stripped)
+    if bool(re.match(r"^any course$", requirement, flags = re.IGNORECASE)):
+        # Manual fix
+        codes = [""]
+    # TODO: Why does this regex not work?!?!
+    # elif bool(re.match(r"any course matching the pattern [A-Z]{4}[0-9#]{4}", requirement, re.IGNORECASE)):
+    elif "any course matching the pattern " in requirement:
+        # It's of the form 'any course matching the pattern ########'
+        codes = [requirement[-8:].rstrip("#")]
+        requirement = requirement[-40:]
+    else:
+        # Standard case
+        stripped = strip_any_requirement_description(requirement)
+        level = get_any_requirement_level(stripped)
 
-            try:
-                codes = get_any_requirement_codes(stripped, level)
-            except ValueError as e:
-                add_warning(e, program_data, item)
-                continue
+        try:
+            codes = get_any_requirement_codes(stripped, level)
+        except ValueError as e:
+            add_warning(e, program_data, item)
+            return
 
-        for code in codes:
-            courses[code] = requirement
+    for code in codes:
+        courses[code] = requirement
 
 
 def format_course_strings(requirements_str: str) -> list[str]:
