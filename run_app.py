@@ -40,7 +40,7 @@ class LogPipe(threading.Thread):
 
 def get_backend_env():
     """reads backend.env"""
-    with open('env/backend.env', encoding='utf-8') as f:
+    with open('env/backend.env', encoding="utf8") as f:
         data = f.readlines()
     data[0] = data[0].replace('MONGODB_USERNAME=', '')
     data[1] = data[1].replace('MONGODB_PASSWORD=', '')
