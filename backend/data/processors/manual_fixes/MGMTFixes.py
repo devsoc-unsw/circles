@@ -36,10 +36,13 @@ def fix_conditions():
     CONDITIONS["MGMT3728"][PROCESSED] = MGMT_3728()
     CONDITIONS["MGMT3730"][PROCESSED] = MGMT_3730()
 
+    ibusHonours = ["MGMT4101", "MGMT4500", "MGMT4501"]
+    for course in ibusHonours:
+        CONDITIONS[course] = MGMT_4101_4500_4501()
 
-    hrmHonours = ["MGMT4104", "MGMT4738", "MGMT4739", "MGMT4101", "MGMT4500", "MGMT4501"]
+    hrmHonours = ["MGMT4104", "MGMT4738", "MGMT4739"]
     for course in hrmHonours:
-        CONDITIONS[course] = MGMT_4101_4500_4501_4104_4738_4739()
+        CONDITIONS[course] = MGMT_4104_4738_4739()
 
     # Updates the files with the modified dictionaries
     data_helpers.write_data(
@@ -119,13 +122,29 @@ def MGMT_3730():
     return "MGMT2718 || MGMT2001 || MGMT2102 || ECON2206 || ECON2209 || RISK2002"
 
 
+def MGMT_4101_4500_4501():
+    """
+    "original": "Prerequisite: Program 4501 and enrolment in the International Business Honours plan is required.<br/><br/>",
+    "processed": "Program 4501 && enrolment in the International Business Honours plan is required"
+    """
+    # Have not been able to locate a code for the IBUS honours plans. It appears
+    # to be an IBUS specialisation with an additional course.
+    return {
+        "original": CONDITIONS["MGMT4101"]["original"],
+        "processed": "4501",
+        "handbook_note": "enrolment in the International Business Honours plan is required"
+    }
 
-def MGMT_4101_4500_4501_4104_4738_4739():
+def MGMT_4104_4738_4739():
+    """
+    "original": "Prerequisite: Program 4501 and enrolled in the Human Resource Management Honours plan.<br/><br/>",
+    "processed": "Program 4501 && the Human Resource Management Honours plan"
+    """
     # Have not been able to locate a code for the HRM honours plan.
     return {
-        "original": CONDITIONS["MGMT3110"]["original"],
-        "processed": "MGMT2102 && 72UOC && 3558",
-        "handbook_note": "Commerce Overseas Program (Exchange) is also required"
+        "original": CONDITIONS["MGMT4104"]["original"],
+        "processed": "4501",
+        "handbook_note": "enrolment in the Human Resource Management Honours plan is required"
     }
 
 
