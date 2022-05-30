@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {
-  Menu, Typography, Button,
+  Menu, Typography,
 } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { useSpring, animated } from "@react-spring/web";
@@ -39,11 +39,7 @@ const DegreeStep = ({ incrementStep, currStep }) => {
         <Title level={4} className="text">
           What are you studying?
         </Title>
-        {programCode && currStep === 2 && (
-          <Button type="primary" onClick={incrementStep}>
-            Next
-          </Button>
-        )}
+        {programCode && currStep === 2 && dispatch(incrementStep)}
       </div>
 
       {options && (

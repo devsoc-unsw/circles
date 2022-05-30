@@ -5,6 +5,7 @@ import Dashboard from "./Dashboard";
 import ListView3 from "./ListView3";
 import "./index.less";
 import PageTemplate from "../../components/PageTemplate";
+import TableView from "./TableView";
 
 // TODO: dummy data for now
 const degreeData = {
@@ -42,7 +43,7 @@ const ProgressionChecker = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const {
-    programCode, specialisation, minor,
+    programCode, majors, minor,
   } = useSelector((state) => state.degree);
 
   const [structure, setStructure] = useState({});
@@ -51,7 +52,7 @@ const ProgressionChecker = () => {
     // get structure of degree
     const fetchStructure = async () => {
       try {
-        const res = await axios.get(`/programs/getStructure/${programCode}/${specialisation}${minor && `/${minor}`}`);
+        const res = await axios.get(`/programs/getStructure/${programCode}/${majors.join("+")}${minor && `/${minor}`}`);
         setStructure(res.data.structure);
       } catch (err) {
         // eslint-disable-next-line no-console
@@ -59,12 +60,13 @@ const ProgressionChecker = () => {
       }
       setIsLoading(false);
     };
-    if (programCode && specialisation) fetchStructure();
-  }, [programCode, specialisation, minor]);
+    if (programCode && majors.length > 0) fetchStructure();
+  }, [programCode, majors, minor]);
 
   return (
     <PageTemplate>
       <Dashboard isLoading={isLoading} degree={degreeData} />
+      <TableView isLoading={isLoading} structure={structure} />
       <ListView3
         isLoading={isLoading}
         degree={degreeData}
