@@ -39,7 +39,7 @@ const TermBox = ({
   return (
     <Droppable droppableId={name} isDropDisabled={isCompleted}>
       {(provided) => (
-        <Badge color="#9254de" count={`${totalUOC} UOC`} offset={isSummerEnabled ? [-13, 260] : [-22, 260]}>
+        <Badge color="#9254de" count={`${totalUOC} UOC`} offset={isSummerEnabled ? [-20, 250] : [-14, 260]}>
           <Badge
             count={(
               <div className={`termCheckboxContainer ${isCompleted && "checkedTerm"}`}>

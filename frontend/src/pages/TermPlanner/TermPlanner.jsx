@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { notification } from "antd";
+import { Badge, notification } from "antd";
 import { DragDropContext } from "react-beautiful-dnd";
 import { useSelector, useDispatch } from "react-redux";
 import "./index.less";
@@ -177,14 +177,16 @@ const TermPlanner = () => {
                 if (hidden[iYear]) return null;
                 return (
                   <React.Fragment key={index}>
-                    <div className="yearContainer gridItem">
-                      <div
-                        className={`year ${currYear === iYear && "currYear"}`}
-                      >
-                        {iYear}
+                    <Badge count={4} offset={[-8, 20]}>
+                      <div className="yearContainer gridItem">
+                        <div
+                          className={`year ${currYear === iYear && "currYear"}`}
+                        >
+                          {iYear}
+                        </div>
+                        <HideYearTooltip year={iYear} />
                       </div>
-                      <HideYearTooltip year={iYear} />
-                    </div>
+                    </Badge>
                     {Object.keys(year).map((term) => {
                       const key = iYear + term;
                       if (!isSummerEnabled && term === "T0") return null;
