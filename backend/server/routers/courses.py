@@ -187,14 +187,10 @@ def search(userData: UserData, search_string: str):
     if ALL_COURSES is None:
         ALL_COURSES = fetch_all_courses()
 
-    # TODO: can you have a minor without a major selected?
-    #       will wreak havoc on the argument order with *specialisations
-    #       currently this is enforced during setup but will need to
-    #       make sure that this is true for all degrees not just comp sci
     specialisations = list(userData.specialisations.keys())
-    majrs = list(filter(lambda x: x.endswith("1"), specialisations))
-    minrs = list(filter(lambda x: x.endswith("2"), specialisations))
-    structure = getStructure(userData.program, "+".join(majrs), "+".join(minrs))['structure']
+    majors = list(filter(lambda x: x.endswith("1"), specialisations))
+    minors = list(filter(lambda x: x.endswith("2"), specialisations))
+    structure = getStructure(userData.program, "+".join(majors), "+".join(minors))['structure']
 
     top_results = sorted(ALL_COURSES.items(), reverse=True,
                          key=lambda course: fuzzy_match(course, search_string)
@@ -203,8 +199,8 @@ def search(userData: UserData, search_string: str):
                               key=lambda course: weight_course(course,
                                                                search_string,
                                                                structure, 
-                                                               "+".join(majrs),
-                                                               "+".join(minrs))
+                                                               "+".join(majors),
+                                                               "+".join(minors))
                               )[:30]
 
     return {code: title for code, title in weighted_results}
@@ -416,15 +412,15 @@ def fuzzy_match(course: tuple, search_term: str):
                        for word in search_term.split(' ')))
 
 def weight_course(course: tuple, search_term: str, structure: dict,
-                  majrs: Optional[str] = None, minrs: Optional[str] = None):
+                  majors: Optional[str] = None, minors: Optional[str] = None):
     """ Gives the course a weighting based on the relevance to the user's degree """
     weight = fuzzy_match(course, search_term)
     (code, title) = course
 
-    majrs = list(majrs.split("+"))
-    minrs = list(minrs.split("+"))
-    if majrs:
-        for major_code in majrs:
+    majors = list(majors.split("+"))
+    minors = list(minors.split("+"))
+    if majors:
+        for major_code in majors:
             for structKey in structure.keys():
                 if "Major" not in structKey:
                     continue
@@ -441,8 +437,8 @@ def weight_course(course: tuple, search_term: str, structure: dict,
             if str(code).startswith(major_code[:4]):
                 weight += 14
 
-    if minrs:
-        for minor_code in minrs:
+    if minors:
+        for minor_code in minors:
             for structKey in structure.keys():
                 if "Minor" not in structKey:
                     continue
