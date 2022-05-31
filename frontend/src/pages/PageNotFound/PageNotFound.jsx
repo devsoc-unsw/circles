@@ -54,7 +54,7 @@ const PageNotFound = () => {
       <div className="text404">
         <Title className="not-found">404</Title>
         <Title level={2} className="page-text">PAGE NOT FOUND</Title>
-        <Button type="primary" size="large" onClick={() => navigate("/degree-wizard")}>Go Back Home</Button>
+        <Button type="primary" size="large" onClick={() => navigate("/course-selector")}>Go Back Home</Button>
       </div>
     </>
   );
