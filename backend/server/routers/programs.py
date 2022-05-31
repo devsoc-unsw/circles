@@ -1,13 +1,15 @@
+"""
+API for fetching data about programs and specialisations
+"""
 import contextlib
 import re
 from typing import Optional
 
 from fastapi import APIRouter, HTTPException
 from server.database import programsCOL, specialisationsCOL
-from server.routers.model import (Structure, majors, message, minorInFE,
+from server.routers.model import (Structure, Majors, message, minorInFE,
                                   minorInSpecialisation, minors, programs)
 from server.routers.courses import regex_search
-from data.processors.programs_processing import TEST_PROGS
 
 router = APIRouter(
     prefix="/programs",
@@ -17,6 +19,7 @@ router = APIRouter(
 
 @router.get("/")
 def programsIndex():
+    """ sanity test that this file is loaded """
     return "Index of programs"
 
 
@@ -52,7 +55,7 @@ def getPrograms():
 
 @router.get(
     "/getMajors/{programCode}",
-    response_model=majors,
+    response_model=Majors,
     responses={
         400: {
             "model": message,
@@ -145,14 +148,14 @@ def getMinors(programCode: str):
 
     return {"minors": minrs}
 
-def convertSubgroupObjectToCoursesDict(object: str, description: str|list[str]) -> dict[str, str]:
+def convertSubgroupObjectToCoursesDict(object: str, description: str|list[str]):#-> dict[str, str]:
     """ Gets a subgroup object (format laid out in the processor) and fetches the exact courses its referring to """
     if " or " in object:
         return {c: description[index] for index, c in enumerate(object.split(" or "))}
     if not re.match(r"[A-Z]{4}[0-9]{4}", object):
         return regex_search(object)
-    else:
-        return {object: description}
+
+    return {object: description}
 
 def addSubgroupContainer(structure: dict, type: str, container: dict, exceptions: list[str], title: str = "") -> list[str]:
     """ Returns the added courses """
@@ -273,13 +276,14 @@ def getStructure(
     structure = {}
 
     if major:
-        majors = major.split("+") if "+" in major else [major]
-        for m in majors:
+        majors_l = major.split("+") if "+" in major else [major]
+
+        for m in majors_l:
             addSpecialisation(structure, m, "Major")
 
     if minor:
-        minors = minor.split("+") if "+" in minor else [minor]
-        for m in minors:
+        minors_l = minor.split("+") if "+" in minor else [minor]
+        for m in minors_l:
             addSpecialisation(structure, m, "Minor")
 
     # add details for program code

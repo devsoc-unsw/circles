@@ -37,23 +37,23 @@ const DrawerContent = ({ onCloseDrawer }) => {
         Term Planner
       </Menu.Item>
       {inDev && (
-      <Menu.Item key="progression-checker" onClick={() => handlePush("/progression-checker")}>
-        Progression Checker
-      </Menu.Item>
+        <Menu.Item key="progression-checker" onClick={() => handlePush("/progression-checker")}>
+          Progression Checker
+        </Menu.Item>
       )}
       <Menu.Item key="feedback-link" icon={<BugOutlined />} onClick={openFeedbackLink}>
         Report a bug!
       </Menu.Item>
       {inDev && (
-      <Menu.ItemGroup key="customisation" title="Customisation">
-        <Menu.Item
-          key="theme-toggle"
-          onClick={() => handleThemeToggle()}
-          icon={theme === "light" ? <IoMdMoon /> : <IoIosSunny />}
-        >
-          Change to {theme === "light" ? "dark" : "light"} theme
-        </Menu.Item>
-      </Menu.ItemGroup>
+        <Menu.ItemGroup key="customisation" title="Customisation">
+          <Menu.Item
+            key="theme-toggle"
+            onClick={() => handleThemeToggle()}
+            icon={theme === "light" ? <IoMdMoon /> : <IoIosSunny />}
+          >
+            Change to {theme === "light" ? "dark" : "light"} theme
+          </Menu.Item>
+        </Menu.ItemGroup>
       )}
     </Menu>
   );

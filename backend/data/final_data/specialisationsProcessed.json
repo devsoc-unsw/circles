@@ -1,12 +1,12 @@
 {
     "ACCTA1": {
         "programs": [
+            "3558",
             "3586",
             "3587",
             "3554",
             "3543",
-            "3502",
-            "3558"
+            "3502"
         ],
         "name": "Accounting",
         "type": "major",
@@ -74,13 +74,13 @@
     },
     "ACCTA2": {
         "programs": [
+            "3558",
             "3586",
             "3587",
             "3778",
             "3554",
             "3543",
-            "3502",
-            "3558"
+            "3502"
         ],
         "name": "Accounting",
         "type": "minor",
@@ -141,8 +141,32 @@
         "curriculum": [
             {
                 "courses": {
-                    "ANAT2111": "Introductory Anatomy",
-                    "ANAT2241": "Histology: Basic and Systematic"
+                    "CHEM1031 or CHEM1011": [
+                        "Higher Chemistry 1A: Atoms, Molecules and Energy",
+                        "Chemistry 1A: Atoms, Molecules and Energy"
+                    ],
+                    "MATH1041 or MATH1131 or MATH1151 or MATH1141 or MATH1031": [
+                        "Statistics for Life and Social Sciences",
+                        "Mathematics 1A",
+                        "Mathematics for Actuarial Studies and Finance 1A",
+                        "Higher Mathematics 1A",
+                        "Mathematics for Life Sciences"
+                    ],
+                    "BABS1201": "Molecules, Cells and Genes",
+                    "BIOS1101": "Evolutionary and Functional Biology"
+                },
+                "title": "Level 1 Core Courses",
+                "credits_to_complete": 24,
+                "core": true,
+                "levels": [
+                    1
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ANAT2241": "Histology: Basic and Systematic",
+                    "ANAT2111": "Introductory Anatomy"
                 },
                 "title": "Level 2 Core Courses",
                 "credits_to_complete": 12,
@@ -155,10 +179,10 @@
             {
                 "courses": {
                     "PHSL2101": "Physiology 1A",
-                    "ANAT2341": "Embryology",
                     "ANAT2521": "Biological Anthropology: Principles and Practices",
-                    "PATH2201": "Processes in Disease",
-                    "PHSL2201": "Physiology 1B"
+                    "PHSL2201": "Physiology 1B",
+                    "ANAT2341": "Embryology",
+                    "PATH2201": "Processes in Disease"
                 },
                 "title": "Level 2 Prescribed Electives",
                 "credits_to_complete": 12,
@@ -170,41 +194,17 @@
             },
             {
                 "courses": {
-                    "ANAT3121": "Visceral Anatomy",
-                    "SOMS3232": "Cellular Mechanisms of Health and Disease",
-                    "ANAT3411": "Neuroanatomy",
                     "ANAT3141": "Functional Anatomy of the Limbs",
-                    "ANAT3131": "Functional Anatomy of the Head, Neck and Back"
+                    "SOMS3232": "Cellular Mechanisms of Health and Disease",
+                    "ANAT3131": "Functional Anatomy of the Head, Neck and Back",
+                    "ANAT3121": "Visceral Anatomy",
+                    "ANAT3411": "Neuroanatomy"
                 },
                 "title": "Level 3 Prescribed Electives",
                 "credits_to_complete": 24,
                 "core": false,
                 "levels": [
                     3
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "CHEM1011 or CHEM1031": [
-                        "Chemistry 1A: Atoms, Molecules and Energy",
-                        "Higher Chemistry 1A: Atoms, Molecules and Energy"
-                    ],
-                    "MATH1041 or MATH1131 or MATH1031 or MATH1151 or MATH1141": [
-                        "Statistics for Life and Social Sciences",
-                        "Mathematics 1A",
-                        "Mathematics for Life Sciences",
-                        "Mathematics for Actuarial Studies and Finance 1A",
-                        "Higher Mathematics 1A"
-                    ],
-                    "BABS1201": "Molecules, Cells and Genes",
-                    "BIOS1101": "Evolutionary and Functional Biology"
-                },
-                "title": "Level 1 Core Courses",
-                "credits_to_complete": 24,
-                "core": true,
-                "levels": [
-                    1
                 ],
                 "notes": ""
             }
@@ -223,18 +223,6 @@
         "curriculum": [
             {
                 "courses": {
-                    "BABS1201": "Molecules, Cells and Genes",
-                    "BIOS1101": "Evolutionary and Functional Biology",
-                    "ANAT2111": "Introductory Anatomy"
-                },
-                "title": "Core Courses",
-                "credits_to_complete": 18,
-                "core": true,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
                     "ANAT3": "any level 3 Anatomy course",
                     "ANAT2": "any level 2 Anatomy course"
                 },
@@ -249,9 +237,25 @@
             },
             {
                 "courses": {
-                    "ANAT2341": "Embryology",
+                    "ANAT3141": "Functional Anatomy of the Limbs",
+                    "SOMS3232": "Cellular Mechanisms of Health and Disease",
+                    "ANAT3121": "Visceral Anatomy",
+                    "ANAT3131": "Functional Anatomy of the Head, Neck and Back",
+                    "ANAT3411": "Neuroanatomy"
+                },
+                "title": "Level 3 Prescribed Electives",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [
+                    3
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ANAT2521": "Biological Anthropology: Principles and Practices",
                     "ANAT2241": "Histology: Basic and Systematic",
-                    "ANAT2521": "Biological Anthropology: Principles and Practices"
+                    "ANAT2341": "Embryology"
                 },
                 "title": "Level 2 Prescribed Electives",
                 "credits_to_complete": 6,
@@ -263,18 +267,14 @@
             },
             {
                 "courses": {
-                    "ANAT3131": "Functional Anatomy of the Head, Neck and Back",
-                    "ANAT3141": "Functional Anatomy of the Limbs",
-                    "ANAT3411": "Neuroanatomy",
-                    "SOMS3232": "Cellular Mechanisms of Health and Disease",
-                    "ANAT3121": "Visceral Anatomy"
+                    "BABS1201": "Molecules, Cells and Genes",
+                    "BIOS1101": "Evolutionary and Functional Biology",
+                    "ANAT2111": "Introductory Anatomy"
                 },
-                "title": "Level 3 Prescribed Electives",
-                "credits_to_complete": 6,
-                "core": false,
-                "levels": [
-                    3
-                ],
+                "title": "Core Courses",
+                "credits_to_complete": 18,
+                "core": true,
+                "levels": [],
                 "notes": ""
             }
         ]
@@ -294,24 +294,24 @@
         "curriculum": [
             {
                 "courses": {
-                    "CHEM1011 or CHEM1031": [
-                        "Chemistry 1A: Atoms, Molecules and Energy",
-                        "Higher Chemistry 1A: Atoms, Molecules and Energy"
+                    "MATH1141 or MATH1131": [
+                        "Higher Mathematics 1A",
+                        "Mathematics 1A"
                     ],
+                    "COMP1511": "Programming Fundamentals",
+                    "BABS1201": "Molecules, Cells and Genes",
+                    "COMP2521": "Data Structures and Algorithms",
                     "CHEM1041 or CHEM1021": [
                         "Higher Chemistry 1B: Elements, Compounds and Life",
                         "Chemistry 1B: Elements, Compounds and Life"
                     ],
+                    "CHEM1011 or CHEM1031": [
+                        "Chemistry 1A: Atoms, Molecules and Energy",
+                        "Higher Chemistry 1A: Atoms, Molecules and Energy"
+                    ],
                     "MATH1231 or MATH1241": [
                         "Mathematics 1B",
                         "Higher Mathematics 1B"
-                    ],
-                    "BABS1201": "Molecules, Cells and Genes",
-                    "COMP2521": "Data Structures and Algorithms",
-                    "COMP1511": "Programming Fundamentals",
-                    "MATH1141 or MATH1131": [
-                        "Higher Mathematics 1A",
-                        "Mathematics 1A"
                     ]
                 },
                 "title": "Level 1 Core Courses",
@@ -324,10 +324,10 @@
             },
             {
                 "courses": {
-                    "BINF3020": "Computational Bioinformatics",
-                    "BABS3281": "Molecular Frontiers",
                     "BINF3010": "Applied Bioinformatics",
-                    "BABS3121": "Molecular Biology of Nucleic Acids"
+                    "BABS3121": "Molecular Biology of Nucleic Acids",
+                    "BABS3281": "Molecular Frontiers",
+                    "BINF3020": "Computational Bioinformatics"
                 },
                 "title": "Level 3 Core Courses",
                 "credits_to_complete": 24,
@@ -339,14 +339,14 @@
             },
             {
                 "courses": {
-                    "BINF2010": "Introduction to Bioinformatics",
-                    "COMP2041": "Software Construction: Techniques and Tools",
-                    "BIOC2101": "Principles of Biochemistry (Advanced)",
-                    "BIOC2201": "Principles of Molecular Biology (Advanced)",
                     "MATH2901 or MATH2801": [
                         "Higher Theory of Statistics",
                         "Theory of Statistics"
-                    ]
+                    ],
+                    "COMP2041": "Software Construction: Techniques and Tools",
+                    "BIOC2101": "Principles of Biochemistry (Advanced)",
+                    "BINF2010": "Introduction to Bioinformatics",
+                    "BIOC2201": "Principles of Molecular Biology (Advanced)"
                 },
                 "title": "Level 2 Core Courses",
                 "credits_to_complete": 30,
@@ -415,23 +415,10 @@
         "curriculum": [
             {
                 "courses": {
-                    "BABS3291": "Genes, Genomes and Evolution",
-                    "BABS3121": "Molecular Biology of Nucleic Acids"
-                },
-                "title": "Level 3 Core Courses",
-                "credits_to_complete": 12,
-                "core": true,
-                "levels": [
-                    3
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "MICR3621": "Microbial Genetics (Advanced)",
+                    "BINF3010": "Applied Bioinformatics",
                     "BABS3151": "Human Molecular Genetics and Disease",
-                    "BABS3021": "Microbial Genetics",
-                    "BINF3010": "Applied Bioinformatics"
+                    "MICR3621": "Microbial Genetics (Advanced)",
+                    "BABS3021": "Microbial Genetics"
                 },
                 "title": "Level 3 Prescribed Electives",
                 "credits_to_complete": 12,
@@ -447,22 +434,22 @@
                         "Chemistry 1B: Elements, Compounds and Life",
                         "Higher Chemistry 1B: Elements, Compounds and Life"
                     ],
+                    "CHEM1031 or CHEM1011": [
+                        "Higher Chemistry 1A: Atoms, Molecules and Energy",
+                        "Chemistry 1A: Atoms, Molecules and Energy"
+                    ],
+                    "MATH1231 or MATH1241 or MATH1041": [
+                        "Mathematics 1B",
+                        "Higher Mathematics 1B",
+                        "Statistics for Life and Social Sciences"
+                    ],
                     "MATH1131 or MATH1141 or MATH1031": [
                         "Mathematics 1A",
                         "Higher Mathematics 1A",
                         "Mathematics for Life Sciences"
                     ],
-                    "CHEM1011 or CHEM1031": [
-                        "Chemistry 1A: Atoms, Molecules and Energy",
-                        "Higher Chemistry 1A: Atoms, Molecules and Energy"
-                    ],
                     "BABS1202": "Applied Biomolecular Sciences",
-                    "BABS1201": "Molecules, Cells and Genes",
-                    "MATH1241 or MATH1041 or MATH1231": [
-                        "Higher Mathematics 1B",
-                        "Statistics for Life and Social Sciences",
-                        "Mathematics 1B"
-                    ]
+                    "BABS1201": "Molecules, Cells and Genes"
                 },
                 "title": "Level 1 Core Courses",
                 "credits_to_complete": 36,
@@ -474,17 +461,30 @@
             },
             {
                 "courses": {
-                    "BIOC2101 or BINF2010": [
-                        "Principles of Biochemistry (Advanced)",
-                        "Introduction to Bioinformatics"
-                    ],
-                    "BABS2264 or BABS2204": [
-                        "Genetics (Advanced Level)",
-                        "Genetics"
-                    ],
-                    "MICR2011": "Microbiology 1",
+                    "BABS3121": "Molecular Biology of Nucleic Acids",
+                    "BABS3291": "Genes, Genomes and Evolution"
+                },
+                "title": "Level 3 Core Courses",
+                "credits_to_complete": 12,
+                "core": true,
+                "levels": [
+                    3
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "BIOC2201": "Principles of Molecular Biology (Advanced)",
                     "BABS2202": "Molecular Cell Biology 1",
-                    "BIOC2201": "Principles of Molecular Biology (Advanced)"
+                    "MICR2011": "Microbiology 1",
+                    "BINF2010 or BIOC2101": [
+                        "Introduction to Bioinformatics",
+                        "Principles of Biochemistry (Advanced)"
+                    ],
+                    "BABS2204 or BABS2264": [
+                        "Genetics",
+                        "Genetics (Advanced Level)"
+                    ]
                 },
                 "title": "Level 2 Core Courses",
                 "credits_to_complete": 30,
@@ -514,20 +514,20 @@
         "curriculum": [
             {
                 "courses": {
-                    "CHEM1031 or CHEM1011": [
-                        "Higher Chemistry 1A: Atoms, Molecules and Energy",
-                        "Chemistry 1A: Atoms, Molecules and Energy"
-                    ],
                     "BIOC2101 or BIOC2181": [
                         "Principles of Biochemistry (Advanced)",
                         "Fundamentals of Biochemistry"
                     ],
+                    "CHEM1031 or CHEM1011": [
+                        "Higher Chemistry 1A: Atoms, Molecules and Energy",
+                        "Chemistry 1A: Atoms, Molecules and Energy"
+                    ],
                     "BABS2202": "Molecular Cell Biology 1",
-                    "BABS1201": "Molecules, Cells and Genes",
                     "BIOC2201": "Principles of Molecular Biology (Advanced)",
-                    "CHEM1021 or CHEM1041": [
-                        "Chemistry 1B: Elements, Compounds and Life",
-                        "Higher Chemistry 1B: Elements, Compounds and Life"
+                    "BABS1201": "Molecules, Cells and Genes",
+                    "CHEM1041 or CHEM1021": [
+                        "Higher Chemistry 1B: Elements, Compounds and Life",
+                        "Chemistry 1B: Elements, Compounds and Life"
                     ]
                 },
                 "title": "Core Courses",
@@ -538,11 +538,11 @@
             },
             {
                 "courses": {
-                    "MICR2011": "Microbiology 1",
-                    "BABS2264 or BABS2204": [
-                        "Genetics (Advanced Level)",
-                        "Genetics"
-                    ]
+                    "BABS2204 or BABS2264": [
+                        "Genetics",
+                        "Genetics (Advanced Level)"
+                    ],
+                    "MICR2011": "Microbiology 1"
                 },
                 "title": "Prescribed Electives",
                 "credits_to_complete": 6,
@@ -572,32 +572,13 @@
         "curriculum": [
             {
                 "courses": {
-                    "BABS2202": "Molecular Cell Biology 1",
-                    "BIOC2101": "Principles of Biochemistry (Advanced)",
-                    "BIOC2201": "Principles of Molecular Biology (Advanced)",
-                    "BABS2264 or BABS2204 or MICR2011": [
-                        "Genetics (Advanced Level)",
-                        "Genetics",
-                        "Microbiology 1"
-                    ]
-                },
-                "title": "Level 2 Core Courses",
-                "credits_to_complete": 24,
-                "core": true,
-                "levels": [
-                    2
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "BIOC3271 or BIOC3671": [
-                        "Molecular Cell Biology 2",
-                        "Molecular Cell Biology 2 (Advanced)"
-                    ],
+                    "BIOC3261": "Human Biochemistry",
                     "BABS3121": "Molecular Biology of Nucleic Acids",
                     "BIOC3111": "Molecular Biology of Proteins",
-                    "BIOC3261": "Human Biochemistry"
+                    "BIOC3671 or BIOC3271": [
+                        "Molecular Cell Biology 2 (Advanced)",
+                        "Molecular Cell Biology 2"
+                    ]
                 },
                 "title": "Level 3 Core Courses",
                 "credits_to_complete": 24,
@@ -609,24 +590,43 @@
             },
             {
                 "courses": {
-                    "BABS1201": "Molecules, Cells and Genes",
-                    "BABS1202": "Applied Biomolecular Sciences",
-                    "MATH1041 or MATH1231 or MATH1241": [
+                    "MICR2011 or BABS2264 or BABS2204": [
+                        "Microbiology 1",
+                        "Genetics (Advanced Level)",
+                        "Genetics"
+                    ],
+                    "BIOC2201": "Principles of Molecular Biology (Advanced)",
+                    "BABS2202": "Molecular Cell Biology 1",
+                    "BIOC2101": "Principles of Biochemistry (Advanced)"
+                },
+                "title": "Level 2 Core Courses",
+                "credits_to_complete": 24,
+                "core": true,
+                "levels": [
+                    2
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "CHEM1011 or CHEM1031": [
+                        "Chemistry 1A: Atoms, Molecules and Energy",
+                        "Higher Chemistry 1A: Atoms, Molecules and Energy"
+                    ],
+                    "MATH1241 or MATH1041 or MATH1231": [
+                        "Higher Mathematics 1B",
                         "Statistics for Life and Social Sciences",
-                        "Mathematics 1B",
-                        "Higher Mathematics 1B"
+                        "Mathematics 1B"
                     ],
                     "CHEM1041 or CHEM1021": [
                         "Higher Chemistry 1B: Elements, Compounds and Life",
                         "Chemistry 1B: Elements, Compounds and Life"
                     ],
-                    "CHEM1031 or CHEM1011": [
-                        "Higher Chemistry 1A: Atoms, Molecules and Energy",
-                        "Chemistry 1A: Atoms, Molecules and Energy"
-                    ],
-                    "MATH1141 or MATH1131 or MATH1031": [
-                        "Higher Mathematics 1A",
+                    "BABS1202": "Applied Biomolecular Sciences",
+                    "BABS1201": "Molecules, Cells and Genes",
+                    "MATH1131 or MATH1141 or MATH1031": [
                         "Mathematics 1A",
+                        "Higher Mathematics 1A",
                         "Mathematics for Life Sciences"
                     ]
                 },
@@ -654,10 +654,10 @@
             {
                 "courses": {
                     "BIOS2061": "Vertebrate Zoology",
-                    "BABS2204": "Genetics",
                     "BIOS2011": "Evolutionary and Physiological Ecology",
-                    "BIOS2051": "Plant Biology",
-                    "BIOS2031": "Biology of Invertebrates"
+                    "BIOS2031": "Biology of Invertebrates",
+                    "BABS2204": "Genetics",
+                    "BIOS2051": "Plant Biology"
                 },
                 "title": "Prescribed Electives",
                 "credits_to_complete": 24,
@@ -667,9 +667,9 @@
             },
             {
                 "courses": {
-                    "BIOS1301": "Ecology, Sustainability and Environmental Science",
                     "BABS1201": "Molecules, Cells and Genes",
-                    "BIOS1101": "Evolutionary and Functional Biology"
+                    "BIOS1101": "Evolutionary and Functional Biology",
+                    "BIOS1301": "Ecology, Sustainability and Environmental Science"
                 },
                 "title": "Core Courses",
                 "credits_to_complete": 18,
@@ -797,61 +797,16 @@
         "curriculum": [
             {
                 "courses": {
-                    "BEES2041": "Data Analysis for Life and Earth Sciences"
-                },
-                "title": "Level 2 Core Courses",
-                "credits_to_complete": 6,
-                "core": true,
-                "levels": [
-                    2
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "MATH1041": "Statistics for Life and Social Sciences",
-                    "BIOS1301": "Ecology, Sustainability and Environmental Science",
-                    "BEES1041": "Exploring the Natural World",
-                    "BIOS1101": "Evolutionary and Functional Biology",
-                    "BABS1201": "Molecules, Cells and Genes"
-                },
-                "title": "Level 1 Core Courses",
-                "credits_to_complete": 30,
-                "core": true,
-                "levels": [
-                    1
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "BIOS2051": "Plant Biology",
-                    "BIOS2011": "Evolutionary and Physiological Ecology",
-                    "BIOS2031": "Biology of Invertebrates",
-                    "BIOS2500": "Evolution and the Modern World",
-                    "BIOS2061": "Vertebrate Zoology",
-                    "BIOS2123": "Ecosystem Conservation and Management"
-                },
-                "title": "Level 2 Prescribed Electives",
-                "credits_to_complete": 18,
-                "core": false,
-                "levels": [
-                    2
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "BIOS3081": "Ocean to Estuarine Ecosystems",
-                    "BIOS3061": "Plant Ecology",
+                    "BIOS3011": "Animal Behaviour",
                     "BEES3041": "Big Data in the Biological, Earth and Environmental Sciences",
+                    "GEOS3911": "Environmental Impact Assessment",
+                    "BIOS3161": "Life in Arid Lands",
+                    "BIOS3081": "Ocean to Estuarine Ecosystems",
+                    "BIOS3123": "Conservation in Practice",
                     "BIOS3221": "Assembling the Tree of Life",
                     "BIOS6723": "River Basin Ecosystem Management",
                     "BIOS6671": "Biodiversity and Conservation of Natural Resources",
-                    "BIOS3161": "Life in Arid Lands",
-                    "BIOS3011": "Animal Behaviour",
-                    "BIOS3123": "Conservation in Practice",
-                    "GEOS3911": "Environmental Impact Assessment",
+                    "BIOS3061": "Plant Ecology",
                     "BIOS3601": "Advanced Field Biology"
                 },
                 "title": "Level 3 Prescribed Electives",
@@ -871,6 +826,51 @@
                 "core": true,
                 "levels": [
                     3
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "BABS1201": "Molecules, Cells and Genes",
+                    "BIOS1101": "Evolutionary and Functional Biology",
+                    "MATH1041": "Statistics for Life and Social Sciences",
+                    "BEES1041": "Exploring the Natural World",
+                    "BIOS1301": "Ecology, Sustainability and Environmental Science"
+                },
+                "title": "Level 1 Core Courses",
+                "credits_to_complete": 30,
+                "core": true,
+                "levels": [
+                    1
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "BIOS2031": "Biology of Invertebrates",
+                    "BIOS2011": "Evolutionary and Physiological Ecology",
+                    "BIOS2500": "Evolution and the Modern World",
+                    "BIOS2123": "Ecosystem Conservation and Management",
+                    "BIOS2051": "Plant Biology",
+                    "BIOS2061": "Vertebrate Zoology"
+                },
+                "title": "Level 2 Prescribed Electives",
+                "credits_to_complete": 18,
+                "core": false,
+                "levels": [
+                    2
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "BEES2041": "Data Analysis for Life and Earth Sciences"
+                },
+                "title": "Level 2 Core Courses",
+                "credits_to_complete": 6,
+                "core": true,
+                "levels": [
+                    2
                 ],
                 "notes": ""
             }
@@ -900,25 +900,41 @@
         "curriculum": [
             {
                 "courses": {
-                    "BABS3061": "Medical Biotechnology",
-                    "BABS3200": "Synthetic Biology",
-                    "BABS3071": "Commercial Biotechnology",
-                    "BABS3031": "Biotechnology and Bioengineering"
+                    "CHEM1031 or CHEM1011": [
+                        "Higher Chemistry 1A: Atoms, Molecules and Energy",
+                        "Chemistry 1A: Atoms, Molecules and Energy"
+                    ],
+                    "CHEM1041 or CHEM1021": [
+                        "Higher Chemistry 1B: Elements, Compounds and Life",
+                        "Chemistry 1B: Elements, Compounds and Life"
+                    ],
+                    "MATH1241 or MATH1231 or MATH1041": [
+                        "Higher Mathematics 1B",
+                        "Mathematics 1B",
+                        "Statistics for Life and Social Sciences"
+                    ],
+                    "BABS1202": "Applied Biomolecular Sciences",
+                    "BABS1201": "Molecules, Cells and Genes",
+                    "MATH1031 or MATH1131 or MATH1141": [
+                        "Mathematics for Life Sciences",
+                        "Mathematics 1A",
+                        "Higher Mathematics 1A"
+                    ]
                 },
-                "title": "Level 3 Core Courses",
-                "credits_to_complete": 24,
+                "title": "Level 1 Core Courses",
+                "credits_to_complete": 36,
                 "core": true,
                 "levels": [
-                    3
+                    1
                 ],
                 "notes": ""
             },
             {
                 "courses": {
-                    "BIOC2201": "Principles of Molecular Biology (Advanced)",
+                    "BABS2011": "Current Trends in Biotechnology",
                     "BIOC2101": "Principles of Biochemistry (Advanced)",
                     "MICR2011": "Microbiology 1",
-                    "BABS2011": "Current Trends in Biotechnology"
+                    "BIOC2201": "Principles of Molecular Biology (Advanced)"
                 },
                 "title": "Level 2 Core Courses",
                 "credits_to_complete": 24,
@@ -930,32 +946,16 @@
             },
             {
                 "courses": {
-                    "BABS1202": "Applied Biomolecular Sciences",
-                    "BABS1201": "Molecules, Cells and Genes",
-                    "MATH1031 or MATH1131 or MATH1141": [
-                        "Mathematics for Life Sciences",
-                        "Mathematics 1A",
-                        "Higher Mathematics 1A"
-                    ],
-                    "CHEM1011 or CHEM1031": [
-                        "Chemistry 1A: Atoms, Molecules and Energy",
-                        "Higher Chemistry 1A: Atoms, Molecules and Energy"
-                    ],
-                    "CHEM1041 or CHEM1021": [
-                        "Higher Chemistry 1B: Elements, Compounds and Life",
-                        "Chemistry 1B: Elements, Compounds and Life"
-                    ],
-                    "MATH1231 or MATH1241 or MATH1041": [
-                        "Mathematics 1B",
-                        "Higher Mathematics 1B",
-                        "Statistics for Life and Social Sciences"
-                    ]
+                    "BABS3031": "Biotechnology and Bioengineering",
+                    "BABS3071": "Commercial Biotechnology",
+                    "BABS3200": "Synthetic Biology",
+                    "BABS3061": "Medical Biotechnology"
                 },
-                "title": "Level 1 Core Courses",
-                "credits_to_complete": 36,
+                "title": "Level 3 Core Courses",
+                "credits_to_complete": 24,
                 "core": true,
                 "levels": [
-                    1
+                    3
                 ],
                 "notes": ""
             }
@@ -1119,14 +1119,14 @@
         "programs": [
             "3444",
             "3409",
+            "3558",
             "3453",
             "3454",
             "3447",
             "3554",
             "3543",
             "3438",
-            "3502",
-            "3558"
+            "3502"
         ],
         "name": "Chinese Studies",
         "type": "minor",
@@ -1213,13 +1213,13 @@
         "programs": [
             "3444",
             "3409",
+            "3558",
             "3453",
             "3454",
             "3447",
             "3554",
             "3438",
-            "3502",
-            "3558"
+            "3502"
         ],
         "name": "Advanced Chinese Studies",
         "type": "minor",
@@ -1328,12 +1328,12 @@
     },
     "COMMJ1": {
         "programs": [
+            "3558",
             "3586",
             "3587",
             "3554",
             "3543",
-            "3502",
-            "3558"
+            "3502"
         ],
         "name": "Business Analytics",
         "type": "major",
@@ -1445,12 +1445,12 @@
     },
     "COMMJ2": {
         "programs": [
+            "3558",
             "3586",
             "3587",
             "3554",
             "3543",
-            "3502",
-            "3558"
+            "3502"
         ],
         "name": "Business Analytics",
         "type": "minor",
@@ -2108,11 +2108,11 @@
     },
     "ECONF1": {
         "programs": [
+            "3558",
             "3586",
             "3587",
             "3554",
-            "3502",
-            "3558"
+            "3502"
         ],
         "name": "Business Economics",
         "type": "major",
@@ -2159,11 +2159,11 @@
     },
     "ECONF2": {
         "programs": [
+            "3558",
             "3586",
             "3587",
             "3554",
-            "3502",
-            "3558"
+            "3502"
         ],
         "name": "Business Economics",
         "type": "minor",
@@ -2225,12 +2225,12 @@
     },
     "ECONO1": {
         "programs": [
+            "3558",
             "3586",
             "3554",
             "3543",
             "3502",
-            "3435",
-            "3558"
+            "3435"
         ],
         "name": "Behavioural Economics",
         "type": "major",
@@ -2311,11 +2311,11 @@
     },
     "ECONO2": {
         "programs": [
+            "3558",
             "3586",
             "3554",
             "3543",
-            "3502",
-            "3558"
+            "3502"
         ],
         "name": "Behavioural Economics",
         "type": "minor",
@@ -2381,12 +2381,12 @@
     },
     "FINSA1": {
         "programs": [
+            "3558",
             "3586",
             "3587",
             "3554",
             "3543",
-            "3502",
-            "3558"
+            "3502"
         ],
         "name": "Finance",
         "type": "major",
@@ -2468,13 +2468,13 @@
     },
     "FINSA2": {
         "programs": [
+            "3558",
             "3586",
             "3587",
             "3778",
             "3554",
             "3543",
-            "3502",
-            "3558"
+            "3502"
         ],
         "name": "Finance",
         "type": "minor",
@@ -2532,12 +2532,12 @@
     },
     "FINSR1": {
         "programs": [
+            "3558",
             "3586",
             "3587",
             "3554",
             "3543",
-            "3502",
-            "3558"
+            "3502"
         ],
         "name": "Financial Technology",
         "type": "major",
@@ -2603,12 +2603,12 @@
     },
     "FINSR2": {
         "programs": [
+            "3558",
             "3586",
             "3587",
             "3554",
             "3543",
-            "3502",
-            "3558"
+            "3502"
         ],
         "name": "Financial Technology",
         "type": "minor",
@@ -2682,25 +2682,31 @@
         "curriculum": [
             {
                 "courses": {
-                    "FOOD3010": "Food Products and Ingredients Technology"
+                    "FOOD2320": "Food Microbiology",
+                    "MICR2011": "Microbiology 1",
+                    "CHEM2921": "Food Chemistry",
+                    "BIOC2181 or BIOC2101": [
+                        "Fundamentals of Biochemistry",
+                        "Principles of Biochemistry (Advanced)"
+                    ]
                 },
-                "title": "Level 3 Core Courses",
-                "credits_to_complete": 6,
+                "title": "Level 2 Core Courses",
+                "credits_to_complete": 24,
                 "core": true,
                 "levels": [
-                    3
+                    2
                 ],
                 "notes": ""
             },
             {
                 "courses": {
+                    "CHEM1041 or CHEM1821 or CHEM1021": [
+                        "Higher Chemistry 1B: Elements, Compounds and Life",
+                        "Engineering Chemistry 1B",
+                        "Chemistry 1B: Elements, Compounds and Life"
+                    ],
                     "BABS1201": "Molecules, Cells and Genes",
                     "FOOD1120": "Food Science, Society and Sustainability",
-                    "CHEM1821 or CHEM1021 or CHEM1041": [
-                        "Engineering Chemistry 1B",
-                        "Chemistry 1B: Elements, Compounds and Life",
-                        "Higher Chemistry 1B: Elements, Compounds and Life"
-                    ],
                     "MATH1131 or MATH1031": [
                         "Mathematics 1A",
                         "Mathematics for Life Sciences"
@@ -2721,33 +2727,27 @@
             },
             {
                 "courses": {
-                    "BIOC2181 or BIOC2101": [
-                        "Fundamentals of Biochemistry",
-                        "Principles of Biochemistry (Advanced)"
-                    ],
-                    "FOOD2320": "Food Microbiology",
-                    "MICR2011": "Microbiology 1",
-                    "CHEM2921": "Food Chemistry"
-                },
-                "title": "Level 2 Core Courses",
-                "credits_to_complete": 24,
-                "core": true,
-                "levels": [
-                    2
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
                     "FOOD3020": "Food Properties and Functions Laboratory",
+                    "FOOD3030": "Food Safety and Quality Assurance",
                     "FOOD4110": "Advanced Food Chemistry",
-                    "FOOD3220": "Nutrition",
-                    "FOOD3030": "Food Safety and Quality Assurance"
+                    "FOOD3220": "Nutrition"
                 },
                 "title": "Discipline Electives",
                 "credits_to_complete": 12,
                 "core": false,
                 "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "FOOD3010": "Food Products and Ingredients Technology"
+                },
+                "title": "Level 3 Core Courses",
+                "credits_to_complete": 6,
+                "core": true,
+                "levels": [
+                    3
+                ],
                 "notes": ""
             }
         ]
@@ -2756,14 +2756,14 @@
         "programs": [
             "3444",
             "3409",
+            "3558",
             "3453",
             "3454",
             "3447",
             "3554",
             "3543",
             "3438",
-            "3502",
-            "3558"
+            "3502"
         ],
         "name": "French Studies",
         "type": "minor",
@@ -2834,13 +2834,13 @@
         "programs": [
             "3444",
             "3409",
+            "3558",
             "3453",
             "3454",
             "3447",
             "3554",
             "3438",
-            "3502",
-            "3558"
+            "3502"
         ],
         "name": "Advanced French Studies",
         "type": "minor",
@@ -3182,14 +3182,14 @@
         "programs": [
             "3444",
             "3409",
+            "3558",
             "3453",
             "3454",
             "3447",
             "3554",
             "3543",
             "3438",
-            "3502",
-            "3558"
+            "3502"
         ],
         "name": "German Studies",
         "type": "minor",
@@ -3260,6 +3260,7 @@
     "IBUSA1": {
         "programs": [
             "3409",
+            "3558",
             "3586",
             "3321",
             "3587",
@@ -3267,8 +3268,7 @@
             "3554",
             "3543",
             "3502",
-            "3420",
-            "3558"
+            "3420"
         ],
         "name": "International Business",
         "type": "major",
@@ -3323,6 +3323,7 @@
     "IBUSA2": {
         "programs": [
             "3409",
+            "3558",
             "3586",
             "3587",
             "3453",
@@ -3331,8 +3332,7 @@
             "3554",
             "3543",
             "3438",
-            "3502",
-            "3558"
+            "3502"
         ],
         "name": "International Business",
         "type": "minor",
@@ -3358,12 +3358,12 @@
     },
     "INFSA1": {
         "programs": [
+            "3558",
             "3586",
             "3587",
             "3554",
             "3543",
-            "3502",
-            "3558"
+            "3502"
         ],
         "name": "Information Systems",
         "type": "major",
@@ -3378,61 +3378,61 @@
         "curriculum": [
             {
                 "courses": {
-                    "INFS3822": "Artificial Intelligence for Business Analytics",
-                    "INFS3634": "Mobile Ecosystems and Applications Development",
-                    "COMM3030": "Social Entrepreneurship Practicum",
-                    "ACCT3563": "Issues in Financial Reporting and Analysis",
-                    "COMM3020": "Global Business Practicum",
-                    "INFS3020": "International Information Systems and Technology Practicum",
-                    "INFS3700": "User Experience and IT Service Design",
-                    "COMM3202": "Industry Experience Placement 2",
-                    "INFS3701": "Enterprise Architecture for Scalable Cloud Solutions",
-                    "COMM2233": "Industry Consulting Project",
-                    "INFS1701": "Networking and Security",
-                    "COMM2222": "Industry Experience Program",
-                    "INFS2702": "Organisational Infrastructure and Supply Chain Management",
-                    "INFS3603": "Introduction to Business Analytics",
-                    "INFS2608": "Database Management & Big Data Infrastructures",
-                    "INFS2631": "Innovation and Technology Management",
-                    "INFS2822": "Programming for Data Analytics",
-                    "INFS3873": "Business Analytics Methods",
-                    "INFS2609": "Programming for Business",
-                    "INFS3703": "Information Systems Project Management",
-                    "COMM3101": "Industry Experience Placement 1",
-                    "INFS2701": "Cyber Security Management and Governance",
-                    "INFS3830": "Social Media and Analytics"
-                },
-                "title": "Prescribed Electives",
-                "credits_to_complete": 18,
-                "core": false,
-                "levels": [],
-                "notes": "At least two (2) of these elective courses must be at level 3 (i.e. INFS3XXX). This is regardless of whether you are doing a single major or taking Information Systems as a second major. Please note: Students may count ONE (6 UOC) of ACCT3563, COMM2222, COMM2233, COMM3020, COMM3030, COMM3101 or COMM3202 towards their major in Information Systems."
-            },
-            {
-                "courses": {
-                    "INFS1603": "Introduction to Business Databases",
                     "INFS3604": "Business Process Management",
-                    "COMM1190": "Data, Insights and Decisions",
+                    "INFS2603": "Business Analysis and Agile Product Management",
+                    "INFS1603": "Introduction to Business Databases",
                     "INFS2602": "Managing Information Systems",
-                    "INFS2603": "Business Analysis and Agile Product Management"
+                    "COMM1190": "Data, Insights and Decisions"
                 },
                 "title": "Core Courses",
                 "credits_to_complete": 30,
                 "core": true,
                 "levels": [],
                 "notes": "Students Actuarial degrees should complete MATH1151 or MATH1251 instead of COMM1190. All other students should complete COMM1190."
+            },
+            {
+                "courses": {
+                    "INFS2608": "Database Management & Big Data Infrastructures",
+                    "ACCT3563": "Issues in Financial Reporting and Analysis",
+                    "INFS3873": "Business Analytics Methods",
+                    "COMM3202": "Industry Experience Placement 2",
+                    "INFS1701": "Networking and Security",
+                    "INFS3830": "Social Media and Analytics",
+                    "INFS3822": "Artificial Intelligence for Business Analytics",
+                    "INFS2631": "Innovation and Technology Management",
+                    "COMM3020": "Global Business Practicum",
+                    "INFS2609": "Programming for Business",
+                    "INFS3701": "Enterprise Architecture for Scalable Cloud Solutions",
+                    "COMM3101": "Industry Experience Placement 1",
+                    "COMM2222": "Industry Experience Program",
+                    "INFS3634": "Mobile Ecosystems and Applications Development",
+                    "INFS2822": "Programming for Data Analytics",
+                    "INFS3020": "International Information Systems and Technology Practicum",
+                    "INFS3703": "Information Systems Project Management",
+                    "COMM2233": "Industry Consulting Project",
+                    "INFS2702": "Organisational Infrastructure and Supply Chain Management",
+                    "COMM3030": "Social Entrepreneurship Practicum",
+                    "INFS3700": "User Experience and IT Service Design",
+                    "INFS2701": "Cyber Security Management and Governance",
+                    "INFS3603": "Introduction to Business Analytics"
+                },
+                "title": "Prescribed Electives",
+                "credits_to_complete": 18,
+                "core": false,
+                "levels": [],
+                "notes": "At least two (2) of these elective courses must be at level 3 (i.e. INFS3XXX). This is regardless of whether you are doing a single major or taking Information Systems as a second major. Please note: Students may count ONE (6 UOC) of ACCT3563, COMM2222, COMM2233, COMM3020, COMM3030, COMM3101 or COMM3202 towards their major in Information Systems."
             }
         ]
     },
     "INFSA2": {
         "programs": [
+            "3558",
             "3586",
             "3587",
             "3778",
             "3554",
             "3543",
-            "3502",
-            "3558"
+            "3502"
         ],
         "name": "Information Systems",
         "type": "minor",
@@ -3460,14 +3460,14 @@
         "programs": [
             "3444",
             "3409",
+            "3558",
             "3453",
             "3454",
             "3447",
             "3554",
             "3543",
             "3438",
-            "3502",
-            "3558"
+            "3502"
         ],
         "name": "Japanese Studies",
         "type": "minor",
@@ -3538,13 +3538,13 @@
         "programs": [
             "3444",
             "3409",
+            "3558",
             "3453",
             "3454",
             "3447",
             "3554",
             "3438",
-            "3502",
-            "3558"
+            "3502"
         ],
         "name": "Advanced Japanese Studies",
         "type": "minor",
@@ -3613,14 +3613,14 @@
         "programs": [
             "3444",
             "3409",
+            "3558",
             "3453",
             "3454",
             "3447",
             "3554",
             "3543",
             "3438",
-            "3502",
-            "3558"
+            "3502"
         ],
         "name": "Korean Studies",
         "type": "minor",
@@ -3674,13 +3674,13 @@
         "programs": [
             "3444",
             "3409",
+            "3558",
             "3453",
             "3454",
             "3447",
             "3554",
             "3438",
-            "3502",
-            "3558"
+            "3502"
         ],
         "name": "Advanced Korean Studies",
         "type": "minor",
@@ -3735,6 +3735,7 @@
     },
     "MARKA1": {
         "programs": [
+            "3558",
             "3586",
             "3321",
             "3587",
@@ -3742,8 +3743,7 @@
             "3543",
             "3502",
             "3435",
-            "3420",
-            "3558"
+            "3420"
         ],
         "name": "Marketing",
         "type": "major",
@@ -3807,12 +3807,12 @@
     },
     "MARKA2": {
         "programs": [
+            "3558",
             "3586",
             "3778",
             "3554",
             "3543",
-            "3502",
-            "3558"
+            "3502"
         ],
         "name": "Marketing",
         "type": "minor",
@@ -4490,12 +4490,12 @@
     },
     "MGMTA2": {
         "programs": [
+            "3558",
             "3586",
             "3587",
             "3554",
             "3543",
-            "3502",
-            "3558"
+            "3502"
         ],
         "name": "Management",
         "type": "minor",
@@ -4522,6 +4522,7 @@
     "MGMTH1": {
         "programs": [
             "3409",
+            "3558",
             "3586",
             "3321",
             "3587",
@@ -4529,8 +4530,7 @@
             "3543",
             "3502",
             "3435",
-            "3420",
-            "3558"
+            "3420"
         ],
         "name": "Human Resource Management",
         "type": "major",
@@ -4647,11 +4647,11 @@
     },
     "MGMTJ1": {
         "programs": [
+            "3558",
             "3586",
             "3554",
             "3543",
-            "3502",
-            "3558"
+            "3502"
         ],
         "name": "Innovation, Strategy and Entrepreneurship",
         "type": "major",
@@ -4694,11 +4694,11 @@
     },
     "MGMTJ2": {
         "programs": [
+            "3558",
             "3586",
             "3554",
             "3543",
-            "3502",
-            "3558"
+            "3502"
         ],
         "name": "Innovation, Strategy and Entrepreneurship",
         "type": "minor",
@@ -4746,25 +4746,44 @@
         "curriculum": [
             {
                 "courses": {
-                    "CHEM1041 or CHEM1021": [
-                        "Higher Chemistry 1B: Elements, Compounds and Life",
-                        "Chemistry 1B: Elements, Compounds and Life"
-                    ],
-                    "MATH1131 or MATH1031 or MATH1141": [
-                        "Mathematics 1A",
-                        "Mathematics for Life Sciences",
-                        "Higher Mathematics 1A"
-                    ],
-                    "MATH1231 or MATH1241 or MATH1041": [
-                        "Mathematics 1B",
-                        "Higher Mathematics 1B",
-                        "Statistics for Life and Social Sciences"
-                    ],
+                    "MICR3621": "Microbial Genetics (Advanced)",
+                    "BABS3200": "Synthetic Biology",
+                    "MICR3071": "Environmental Microbiology",
+                    "BABS3081": "Bacteria and Disease",
+                    "BABS3041": "Immunology",
+                    "BABS3061": "Medical Biotechnology",
+                    "MICR3061": "Viruses and Disease",
+                    "BABS3021": "Microbial Genetics"
+                },
+                "title": "Level 3 Prescribed Electives",
+                "credits_to_complete": 24,
+                "core": false,
+                "levels": [
+                    3
+                ],
+                "notes": "Note courses BABS3021 and MICR3621 are excluded from each other and students are only permitted to take one."
+            },
+            {
+                "courses": {
                     "BABS1202": "Applied Biomolecular Sciences",
                     "BABS1201": "Molecules, Cells and Genes",
+                    "MATH1031 or MATH1131 or MATH1141": [
+                        "Mathematics for Life Sciences",
+                        "Mathematics 1A",
+                        "Higher Mathematics 1A"
+                    ],
                     "CHEM1011 or CHEM1031": [
                         "Chemistry 1A: Atoms, Molecules and Energy",
                         "Higher Chemistry 1A: Atoms, Molecules and Energy"
+                    ],
+                    "CHEM1021 or CHEM1041": [
+                        "Chemistry 1B: Elements, Compounds and Life",
+                        "Higher Chemistry 1B: Elements, Compounds and Life"
+                    ],
+                    "MATH1041 or MATH1231 or MATH1241": [
+                        "Statistics for Life and Social Sciences",
+                        "Mathematics 1B",
+                        "Higher Mathematics 1B"
                     ]
                 },
                 "title": "Level 1 Core Courses",
@@ -4777,32 +4796,13 @@
             },
             {
                 "courses": {
-                    "BABS3200": "Synthetic Biology",
-                    "BABS3041": "Immunology",
-                    "MICR3621": "Microbial Genetics (Advanced)",
-                    "MICR3071": "Environmental Microbiology",
-                    "BABS3021": "Microbial Genetics",
-                    "BABS3061": "Medical Biotechnology",
-                    "MICR3061": "Viruses and Disease",
-                    "BABS3081": "Bacteria and Disease"
-                },
-                "title": "Level 3 Prescribed Electives",
-                "credits_to_complete": 24,
-                "core": false,
-                "levels": [
-                    3
-                ],
-                "notes": "Note courses BABS3021 and MICR3621 are excluded from each other and students are only permitted to take one."
-            },
-            {
-                "courses": {
-                    "BIOC2201": "Principles of Molecular Biology (Advanced)",
-                    "MICR2011": "Microbiology 1",
-                    "BABS2202": "Molecular Cell Biology 1",
                     "BABS2204 or BIOC2101": [
                         "Genetics",
                         "Principles of Biochemistry (Advanced)"
-                    ]
+                    ],
+                    "MICR2011": "Microbiology 1",
+                    "BABS2202": "Molecular Cell Biology 1",
+                    "BIOC2201": "Principles of Molecular Biology (Advanced)"
                 },
                 "title": "Level 2 Core Courses",
                 "credits_to_complete": 24,
@@ -4834,15 +4834,36 @@
         "curriculum": [
             {
                 "courses": {
+                    "PATH3205": "Molecular Basis of Disease",
                     "MICR3061": "Viruses and Disease",
-                    "BABS3081": "Bacteria and Disease",
-                    "PATH3205": "Molecular Basis of Disease"
+                    "BABS3081": "Bacteria and Disease"
                 },
                 "title": "Level 3 Prescribed Electives",
                 "credits_to_complete": 6,
                 "core": false,
                 "levels": [
                     3
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "CHEM1011 or CHEM1031": [
+                        "Chemistry 1A: Atoms, Molecules and Energy",
+                        "Higher Chemistry 1A: Atoms, Molecules and Energy"
+                    ],
+                    "BABS1201": "Molecules, Cells and Genes",
+                    "BIOS1101": "Evolutionary and Functional Biology",
+                    "CHEM1041 or CHEM1021": [
+                        "Higher Chemistry 1B: Elements, Compounds and Life",
+                        "Chemistry 1B: Elements, Compounds and Life"
+                    ]
+                },
+                "title": "Level 1 Core Courses",
+                "credits_to_complete": 24,
+                "core": true,
+                "levels": [
+                    1
                 ],
                 "notes": ""
             },
@@ -4861,41 +4882,20 @@
             },
             {
                 "courses": {
+                    "BIOC2181 or BIOC2101": [
+                        "Fundamentals of Biochemistry",
+                        "Principles of Biochemistry (Advanced)"
+                    ],
                     "MICR2011": "Microbiology 1",
-                    "BABS2202": "Molecular Cell Biology 1",
                     "PATH2201": "Processes in Disease",
                     "ANAT2241": "Histology: Basic and Systematic",
-                    "BIOC2101 or BIOC2181": [
-                        "Principles of Biochemistry (Advanced)",
-                        "Fundamentals of Biochemistry"
-                    ]
+                    "BABS2202": "Molecular Cell Biology 1"
                 },
                 "title": "Level 2 Core Courses",
                 "credits_to_complete": 30,
                 "core": true,
                 "levels": [
                     2
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "CHEM1011 or CHEM1031": [
-                        "Chemistry 1A: Atoms, Molecules and Energy",
-                        "Higher Chemistry 1A: Atoms, Molecules and Energy"
-                    ],
-                    "CHEM1021 or CHEM1041": [
-                        "Chemistry 1B: Elements, Compounds and Life",
-                        "Higher Chemistry 1B: Elements, Compounds and Life"
-                    ],
-                    "BIOS1101": "Evolutionary and Functional Biology",
-                    "BABS1201": "Molecules, Cells and Genes"
-                },
-                "title": "Level 1 Core Courses",
-                "credits_to_complete": 24,
-                "core": true,
-                "levels": [
-                    1
                 ],
                 "notes": ""
             }
@@ -4914,26 +4914,6 @@
         "curriculum": [
             {
                 "courses": {
-                    "CHEM1021 or CHEM1041": [
-                        "Chemistry 1B: Elements, Compounds and Life",
-                        "Higher Chemistry 1B: Elements, Compounds and Life"
-                    ],
-                    "CHEM1011 or CHEM1031": [
-                        "Chemistry 1A: Atoms, Molecules and Energy",
-                        "Higher Chemistry 1A: Atoms, Molecules and Energy"
-                    ],
-                    "BABS1201": "Molecules, Cells and Genes"
-                },
-                "title": "Level 1 Core Courses",
-                "credits_to_complete": 18,
-                "core": true,
-                "levels": [
-                    1
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
                     "BABS3041": "Immunology",
                     "PATH3209": "Clinical Immunology"
                 },
@@ -4947,14 +4927,29 @@
             },
             {
                 "courses": {
+                    "MICR3061": "Viruses and Disease",
+                    "PATH3205": "Molecular Basis of Disease",
+                    "BABS3081": "Bacteria and Disease",
+                    "MATH1041": "Statistics for Life and Social Sciences",
+                    "MATH1031": "Mathematics for Life Sciences",
+                    "BINF3010": "Applied Bioinformatics"
+                },
+                "title": "Recommended Electives",
+                "credits_to_complete": 0,
+                "core": false,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "MICR2011": "Microbiology 1",
+                    "PATH2201": "Processes in Disease",
+                    "BABS2202": "Molecular Cell Biology 1",
+                    "ANAT2241": "Histology: Basic and Systematic",
                     "BIOC2101 or BIOC2181": [
                         "Principles of Biochemistry (Advanced)",
                         "Fundamentals of Biochemistry"
-                    ],
-                    "ANAT2241": "Histology: Basic and Systematic",
-                    "MICR2011": "Microbiology 1",
-                    "BABS2202": "Molecular Cell Biology 1",
-                    "PATH2201": "Processes in Disease"
+                    ]
                 },
                 "title": "Level 2 Core Courses",
                 "credits_to_complete": 30,
@@ -4966,17 +4961,22 @@
             },
             {
                 "courses": {
-                    "MATH1041": "Statistics for Life and Social Sciences",
-                    "MICR3061": "Viruses and Disease",
-                    "BINF3010": "Applied Bioinformatics",
-                    "PATH3205": "Molecular Basis of Disease",
-                    "MATH1031": "Mathematics for Life Sciences",
-                    "BABS3081": "Bacteria and Disease"
+                    "CHEM1031 or CHEM1011": [
+                        "Higher Chemistry 1A: Atoms, Molecules and Energy",
+                        "Chemistry 1A: Atoms, Molecules and Energy"
+                    ],
+                    "BABS1201": "Molecules, Cells and Genes",
+                    "CHEM1041 or CHEM1021": [
+                        "Higher Chemistry 1B: Elements, Compounds and Life",
+                        "Chemistry 1B: Elements, Compounds and Life"
+                    ]
                 },
-                "title": "Recommended Electives",
-                "credits_to_complete": 0,
-                "core": false,
-                "levels": [],
+                "title": "Level 1 Core Courses",
+                "credits_to_complete": 18,
+                "core": true,
+                "levels": [
+                    1
+                ],
                 "notes": ""
             }
         ]
@@ -5035,6 +5035,20 @@
         "curriculum": [
             {
                 "courses": {
+                    "GEOS3921": "Coastal Resource Management",
+                    "GEOS3731": "Coastal Processes and Hazards",
+                    "GEOS3911": "Environmental Impact Assessment"
+                },
+                "title": "Level 3 Prescribed Electives",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [
+                    3
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
                     "MSCI3001": "Physical Oceanography",
                     "BIOS3081": "Ocean to Estuarine Ecosystems"
                 },
@@ -5048,8 +5062,24 @@
             },
             {
                 "courses": {
-                    "BIOS1301": "Ecology, Sustainability and Environmental Science",
-                    "GEOS1701": "Environmental Systems, Processes and Issues"
+                    "BIOS1101": "Evolutionary and Functional Biology",
+                    "MATH1041": "Statistics for Life and Social Sciences",
+                    "BEES1041": "Exploring the Natural World",
+                    "MSCI1001": "Introductory Marine Science",
+                    "BABS1201": "Molecules, Cells and Genes"
+                },
+                "title": "Level 1 Core Courses",
+                "credits_to_complete": 30,
+                "core": true,
+                "levels": [
+                    1
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "GEOS1701": "Environmental Systems, Processes and Issues",
+                    "BIOS1301": "Ecology, Sustainability and Environmental Science"
                 },
                 "title": "Level 1 Prescribed Electives",
                 "credits_to_complete": 6,
@@ -5061,9 +5091,9 @@
             },
             {
                 "courses": {
-                    "BIOS2031": "Biology of Invertebrates",
-                    "BEES2041": "Data Analysis for Life and Earth Sciences",
                     "GEOS2821": "Introduction to GIS and Remote Sensing",
+                    "BEES2041": "Data Analysis for Life and Earth Sciences",
+                    "BIOS2031": "Biology of Invertebrates",
                     "BIOS2091": "Marine and Aquatic Ecology"
                 },
                 "title": "Level 2 Core Courses",
@@ -5071,36 +5101,6 @@
                 "core": true,
                 "levels": [
                     2
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "GEOS3921": "Coastal Resource Management",
-                    "GEOS3911": "Environmental Impact Assessment",
-                    "GEOS3731": "Coastal Processes and Hazards"
-                },
-                "title": "Level 3 Prescribed Electives",
-                "credits_to_complete": 6,
-                "core": false,
-                "levels": [
-                    3
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "BABS1201": "Molecules, Cells and Genes",
-                    "BEES1041": "Exploring the Natural World",
-                    "BIOS1101": "Evolutionary and Functional Biology",
-                    "MSCI1001": "Introductory Marine Science",
-                    "MATH1041": "Statistics for Life and Social Sciences"
-                },
-                "title": "Level 1 Core Courses",
-                "credits_to_complete": 30,
-                "core": true,
-                "levels": [
-                    1
                 ],
                 "notes": ""
             }
@@ -5126,41 +5126,10 @@
         "curriculum": [
             {
                 "courses": {
-                    "PHAR2011": "Introductory Pharmacology and Toxicology",
-                    "ANAT2111": "Introductory Anatomy",
-                    "PSYC2081": "Learning and Physiological Psychology",
-                    "ANAT2511": "Fundamentals of Anatomy",
-                    "PSYC2001": "Research Methods 2"
-                },
-                "title": "Level 2 Prescribed Electives",
-                "credits_to_complete": 18,
-                "core": false,
-                "levels": [
-                    2
-                ],
-                "notes": "Note: ANAT2111 and ANAT2511 are excluded."
-            },
-            {
-                "courses": {
-                    "CHEM1041": "Higher Chemistry 1B: Elements, Compounds and Life",
-                    "BIOS1101": "Evolutionary and Functional Biology",
-                    "PSYC1111": "Measuring Mind and Behaviour",
-                    "CHEM1021": "Chemistry 1B: Elements, Compounds and Life"
-                },
-                "title": "Level 1 Prescribed Electives",
-                "credits_to_complete": 6,
-                "core": false,
-                "levels": [
-                    1
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
                     "ANAT3411": "Neuroanatomy",
                     "NEUR3121": "Molecular and Cellular Neuroscience",
-                    "PSYC3051": "Physiological Psychology",
-                    "PHAR3202": "Neuropharmacology"
+                    "PHAR3202": "Neuropharmacology",
+                    "PSYC3051": "Physiological Psychology"
                 },
                 "title": "Level 3 Prescribed Electives",
                 "credits_to_complete": 18,
@@ -5185,18 +5154,49 @@
             },
             {
                 "courses": {
-                    "BABS1201": "Molecules, Cells and Genes",
-                    "PSYC1001": "Psychology 1A",
-                    "PSYC1011": "Psychology 1B",
-                    "MATH1041": "Statistics for Life and Social Sciences",
+                    "PSYC2081": "Learning and Physiological Psychology",
+                    "ANAT2111": "Introductory Anatomy",
+                    "ANAT2511": "Fundamentals of Anatomy",
+                    "PHAR2011": "Introductory Pharmacology and Toxicology",
+                    "PSYC2001": "Research Methods 2"
+                },
+                "title": "Level 2 Prescribed Electives",
+                "credits_to_complete": 18,
+                "core": false,
+                "levels": [
+                    2
+                ],
+                "notes": "Note: ANAT2111 and ANAT2511 are excluded."
+            },
+            {
+                "courses": {
                     "CHEM1031 or CHEM1011": [
                         "Higher Chemistry 1A: Atoms, Molecules and Energy",
                         "Chemistry 1A: Atoms, Molecules and Energy"
-                    ]
+                    ],
+                    "PSYC1011": "Psychology 1B",
+                    "BABS1201": "Molecules, Cells and Genes",
+                    "MATH1041": "Statistics for Life and Social Sciences",
+                    "PSYC1001": "Psychology 1A"
                 },
                 "title": "Level 1 Core Courses",
                 "credits_to_complete": 30,
                 "core": true,
+                "levels": [
+                    1
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "BIOS1101": "Evolutionary and Functional Biology",
+                    "PSYC1111": "Measuring Mind and Behaviour",
+                    "CHEM1041": "Higher Chemistry 1B: Elements, Compounds and Life",
+                    "CHEM1021": "Chemistry 1B: Elements, Compounds and Life"
+                },
+                "title": "Level 1 Prescribed Electives",
+                "credits_to_complete": 6,
+                "core": false,
                 "levels": [
                     1
                 ],
@@ -5224,16 +5224,16 @@
         "curriculum": [
             {
                 "courses": {
-                    "CHEM1041 or CHEM1021": [
-                        "Higher Chemistry 1B: Elements, Compounds and Life",
-                        "Chemistry 1B: Elements, Compounds and Life"
-                    ],
+                    "BIOS1101": "Evolutionary and Functional Biology",
+                    "BABS1201": "Molecules, Cells and Genes",
                     "CHEM1011 or CHEM1031": [
                         "Chemistry 1A: Atoms, Molecules and Energy",
                         "Higher Chemistry 1A: Atoms, Molecules and Energy"
                     ],
-                    "BABS1201": "Molecules, Cells and Genes",
-                    "BIOS1101": "Evolutionary and Functional Biology"
+                    "CHEM1021 or CHEM1041": [
+                        "Chemistry 1B: Elements, Compounds and Life",
+                        "Higher Chemistry 1B: Elements, Compounds and Life"
+                    ]
                 },
                 "title": "Level 1 Core Courses",
                 "credits_to_complete": 24,
@@ -5245,8 +5245,8 @@
             },
             {
                 "courses": {
-                    "PATH3205": "Molecular Basis of Disease",
-                    "PATH3206": "Cancer Pathology"
+                    "PATH3206": "Cancer Pathology",
+                    "PATH3205": "Molecular Basis of Disease"
                 },
                 "title": "Level 3 Core Courses",
                 "credits_to_complete": 12,
@@ -5258,28 +5258,12 @@
             },
             {
                 "courses": {
-                    "SOMS3232": "Cellular Mechanisms of Health and Disease",
-                    "PATH3210": "Visualising Disease",
-                    "PATH3207": "Musculoskeletal Diseases",
-                    "PATH3209": "Clinical Immunology",
-                    "BABS3041": "Immunology"
-                },
-                "title": "Level 3 Prescribed Electives",
-                "credits_to_complete": 6,
-                "core": false,
-                "levels": [
-                    3
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "PATH2201": "Processes in Disease",
-                    "ANAT2241": "Histology: Basic and Systematic",
                     "BIOC2181 or BIOC2101": [
                         "Fundamentals of Biochemistry",
                         "Principles of Biochemistry (Advanced)"
-                    ]
+                    ],
+                    "PATH2201": "Processes in Disease",
+                    "ANAT2241": "Histology: Basic and Systematic"
                 },
                 "title": "Level 2 Core Courses",
                 "credits_to_complete": 18,
@@ -5292,14 +5276,30 @@
             {
                 "courses": {
                     "BABS2202": "Molecular Cell Biology 1",
-                    "MICR2011": "Microbiology 1",
-                    "ANAT2111": "Introductory Anatomy"
+                    "ANAT2111": "Introductory Anatomy",
+                    "MICR2011": "Microbiology 1"
                 },
                 "title": "Level 2 Prescribed Electives",
                 "credits_to_complete": 6,
                 "core": false,
                 "levels": [
                     2
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "PATH3210": "Visualising Disease",
+                    "PATH3207": "Musculoskeletal Diseases",
+                    "BABS3041": "Immunology",
+                    "SOMS3232": "Cellular Mechanisms of Health and Disease",
+                    "PATH3209": "Clinical Immunology"
+                },
+                "title": "Level 3 Prescribed Electives",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [
+                    3
                 ],
                 "notes": ""
             }
@@ -5323,32 +5323,12 @@
         "curriculum": [
             {
                 "courses": {
-                    "CHEM1031 or CHEM1011": [
-                        "Higher Chemistry 1A: Atoms, Molecules and Energy",
-                        "Chemistry 1A: Atoms, Molecules and Energy"
-                    ],
-                    "CHEM1041 or CHEM1021": [
-                        "Higher Chemistry 1B: Elements, Compounds and Life",
-                        "Chemistry 1B: Elements, Compounds and Life"
-                    ],
-                    "ANAT2241": "Histology: Basic and Systematic",
-                    "BABS1201": "Molecules, Cells and Genes",
-                    "PATH2201": "Processes in Disease"
-                },
-                "title": "Core Courses",
-                "credits_to_complete": 30,
-                "core": true,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "BIOC2101 or BIOC2181": [
-                        "Principles of Biochemistry (Advanced)",
-                        "Fundamentals of Biochemistry"
-                    ],
                     "ANAT2111": "Introductory Anatomy",
-                    "PHSL2101": "Physiology 1A"
+                    "PHSL2101": "Physiology 1A",
+                    "BIOC2181 or BIOC2101": [
+                        "Fundamentals of Biochemistry",
+                        "Principles of Biochemistry (Advanced)"
+                    ]
                 },
                 "title": "Prescribed Electives List 2",
                 "credits_to_complete": 6,
@@ -5364,6 +5344,26 @@
                 "title": "Prescribed Electives List 1",
                 "credits_to_complete": 6,
                 "core": false,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "PATH2201": "Processes in Disease",
+                    "BABS1201": "Molecules, Cells and Genes",
+                    "ANAT2241": "Histology: Basic and Systematic",
+                    "CHEM1041 or CHEM1021": [
+                        "Higher Chemistry 1B: Elements, Compounds and Life",
+                        "Chemistry 1B: Elements, Compounds and Life"
+                    ],
+                    "CHEM1011 or CHEM1031": [
+                        "Chemistry 1A: Atoms, Molecules and Energy",
+                        "Higher Chemistry 1A: Atoms, Molecules and Energy"
+                    ]
+                },
+                "title": "Core Courses",
+                "credits_to_complete": 30,
+                "core": true,
                 "levels": [],
                 "notes": ""
             }
@@ -5389,38 +5389,21 @@
         "curriculum": [
             {
                 "courses": {
-                    "CHEM2021": "Organic Chemistry: Mechanisms and Biomolecules",
-                    "CHEM2041": "Analytical Chemistry: Essential Methods",
-                    "BIOC2101": "Principles of Biochemistry (Advanced)",
-                    "BIOC2181": "Fundamentals of Biochemistry",
-                    "BABS2202": "Molecular Cell Biology 1",
-                    "BIOC2201": "Principles of Molecular Biology (Advanced)"
-                },
-                "title": "Level 2 Prescribed Electives",
-                "credits_to_complete": 12,
-                "core": false,
-                "levels": [
-                    2
-                ],
-                "notes": "Note courses BIOC2101 and BIOC2181 are excluded from each other and students are only permitted to take one."
-            },
-            {
-                "courses": {
-                    "CHEM1031 or CHEM1011": [
-                        "Higher Chemistry 1A: Atoms, Molecules and Energy",
-                        "Chemistry 1A: Atoms, Molecules and Energy"
-                    ],
-                    "BABS1201": "Molecules, Cells and Genes",
                     "CHEM1041 or CHEM1021": [
                         "Higher Chemistry 1B: Elements, Compounds and Life",
                         "Chemistry 1B: Elements, Compounds and Life"
                     ],
-                    "MATH1031 or MATH1151 or MATH1141 or MATH1131 or MATH1041": [
-                        "Mathematics for Life Sciences",
-                        "Mathematics for Actuarial Studies and Finance 1A",
+                    "MATH1141 or MATH1131 or MATH1041 or MATH1031 or MATH1151": [
                         "Higher Mathematics 1A",
                         "Mathematics 1A",
-                        "Statistics for Life and Social Sciences"
+                        "Statistics for Life and Social Sciences",
+                        "Mathematics for Life Sciences",
+                        "Mathematics for Actuarial Studies and Finance 1A"
+                    ],
+                    "BABS1201": "Molecules, Cells and Genes",
+                    "CHEM1031 or CHEM1011": [
+                        "Higher Chemistry 1A: Atoms, Molecules and Energy",
+                        "Chemistry 1A: Atoms, Molecules and Energy"
                     ]
                 },
                 "title": "Level 1 Core Courses",
@@ -5433,9 +5416,9 @@
             },
             {
                 "courses": {
-                    "PHAR3202": "Neuropharmacology",
                     "PHAR3251": "Clinical and Experimental Pharmacology",
                     "PHAR3102": "Molecular Pharmacology",
+                    "PHAR3202": "Neuropharmacology",
                     "PHAR3101": "Drug Discovery, Design and Development"
                 },
                 "title": "Level 3 Prescribed Electives",
@@ -5445,6 +5428,23 @@
                     3
                 ],
                 "notes": ""
+            },
+            {
+                "courses": {
+                    "BIOC2181": "Fundamentals of Biochemistry",
+                    "BIOC2201": "Principles of Molecular Biology (Advanced)",
+                    "CHEM2041": "Analytical Chemistry: Essential Methods",
+                    "BIOC2101": "Principles of Biochemistry (Advanced)",
+                    "CHEM2021": "Organic Chemistry: Mechanisms and Biomolecules",
+                    "BABS2202": "Molecular Cell Biology 1"
+                },
+                "title": "Level 2 Prescribed Electives",
+                "credits_to_complete": 12,
+                "core": false,
+                "levels": [
+                    2
+                ],
+                "notes": "Note courses BIOC2101 and BIOC2181 are excluded from each other and students are only permitted to take one."
             },
             {
                 "courses": {
@@ -5474,45 +5474,45 @@
         "curriculum": [
             {
                 "courses": {
-                    "CHEM1031 or CHEM1011": [
-                        "Higher Chemistry 1A: Atoms, Molecules and Energy",
-                        "Chemistry 1A: Atoms, Molecules and Energy"
-                    ],
-                    "MATH1131 or MATH1151 or MATH1041 or MATH1031 or MATH1141": [
-                        "Mathematics 1A",
-                        "Mathematics for Actuarial Studies and Finance 1A",
-                        "Statistics for Life and Social Sciences",
-                        "Mathematics for Life Sciences",
-                        "Higher Mathematics 1A"
-                    ],
-                    "CHEM1021 or CHEM1041": [
-                        "Chemistry 1B: Elements, Compounds and Life",
-                        "Higher Chemistry 1B: Elements, Compounds and Life"
-                    ],
-                    "BABS1201": "Molecules, Cells and Genes",
-                    "PHSL2101": "Physiology 1A",
-                    "PHAR2011": "Introductory Pharmacology and Toxicology"
+                    "PHAR3202": "Neuropharmacology",
+                    "PHAR3102": "Molecular Pharmacology",
+                    "PHAR3251": "Clinical and Experimental Pharmacology",
+                    "PHAR3101": "Drug Discovery, Design and Development",
+                    "BIOC2201 or BIOC2101": [
+                        "Principles of Molecular Biology (Advanced)",
+                        "Principles of Biochemistry (Advanced)"
+                    ]
                 },
-                "title": "Core Courses",
-                "credits_to_complete": 36,
-                "core": true,
+                "title": "Prescribed Electives",
+                "credits_to_complete": 12,
+                "core": false,
                 "levels": [],
                 "notes": ""
             },
             {
                 "courses": {
-                    "BIOC2201 or BIOC2101": [
-                        "Principles of Molecular Biology (Advanced)",
-                        "Principles of Biochemistry (Advanced)"
+                    "BABS1201": "Molecules, Cells and Genes",
+                    "PHSL2101": "Physiology 1A",
+                    "PHAR2011": "Introductory Pharmacology and Toxicology",
+                    "MATH1141 or MATH1151 or MATH1031 or MATH1131 or MATH1041": [
+                        "Higher Mathematics 1A",
+                        "Mathematics for Actuarial Studies and Finance 1A",
+                        "Mathematics for Life Sciences",
+                        "Mathematics 1A",
+                        "Statistics for Life and Social Sciences"
                     ],
-                    "PHAR3102": "Molecular Pharmacology",
-                    "PHAR3251": "Clinical and Experimental Pharmacology",
-                    "PHAR3202": "Neuropharmacology",
-                    "PHAR3101": "Drug Discovery, Design and Development"
+                    "CHEM1021 or CHEM1041": [
+                        "Chemistry 1B: Elements, Compounds and Life",
+                        "Higher Chemistry 1B: Elements, Compounds and Life"
+                    ],
+                    "CHEM1031 or CHEM1011": [
+                        "Higher Chemistry 1A: Atoms, Molecules and Energy",
+                        "Chemistry 1A: Atoms, Molecules and Energy"
+                    ]
                 },
-                "title": "Prescribed Electives",
-                "credits_to_complete": 12,
-                "core": false,
+                "title": "Core Courses",
+                "credits_to_complete": 36,
+                "core": true,
                 "levels": [],
                 "notes": ""
             }
@@ -5538,34 +5538,11 @@
         "curriculum": [
             {
                 "courses": {
-                    "CHEM1011 or CHEM1031": [
-                        "Chemistry 1A: Atoms, Molecules and Energy",
-                        "Higher Chemistry 1A: Atoms, Molecules and Energy"
-                    ],
-                    "MATH1131 or MATH1141 or MATH1031 or MATH1041 or MATH1151": [
-                        "Mathematics 1A",
-                        "Higher Mathematics 1A",
-                        "Mathematics for Life Sciences",
-                        "Statistics for Life and Social Sciences",
-                        "Mathematics for Actuarial Studies and Finance 1A"
-                    ],
-                    "BABS1201": "Molecules, Cells and Genes"
-                },
-                "title": "Level 1 Core Courses",
-                "credits_to_complete": 18,
-                "core": true,
-                "levels": [
-                    1
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "BIOC2201": "Principles of Molecular Biology (Advanced)",
-                    "BIOC2181": "Fundamentals of Biochemistry",
-                    "NEUR2201": "Neuroscience Fundamentals",
                     "BIOC2101": "Principles of Biochemistry (Advanced)",
-                    "PHAR2011": "Introductory Pharmacology and Toxicology"
+                    "BIOC2181": "Fundamentals of Biochemistry",
+                    "PHAR2011": "Introductory Pharmacology and Toxicology",
+                    "BIOC2201": "Principles of Molecular Biology (Advanced)",
+                    "NEUR2201": "Neuroscience Fundamentals"
                 },
                 "title": "Level 2 Prescribed Electives",
                 "credits_to_complete": 12,
@@ -5577,23 +5554,33 @@
             },
             {
                 "courses": {
-                    "PHSL2201": "Physiology 1B",
-                    "PHSL2101": "Physiology 1A"
+                    "BABS1201": "Molecules, Cells and Genes",
+                    "MATH1141 or MATH1031 or MATH1041 or MATH1151 or MATH1131": [
+                        "Higher Mathematics 1A",
+                        "Mathematics for Life Sciences",
+                        "Statistics for Life and Social Sciences",
+                        "Mathematics for Actuarial Studies and Finance 1A",
+                        "Mathematics 1A"
+                    ],
+                    "CHEM1031 or CHEM1011": [
+                        "Higher Chemistry 1A: Atoms, Molecules and Energy",
+                        "Chemistry 1A: Atoms, Molecules and Energy"
+                    ]
                 },
-                "title": "Level 2 Core Courses",
-                "credits_to_complete": 12,
+                "title": "Level 1 Core Courses",
+                "credits_to_complete": 18,
                 "core": true,
                 "levels": [
-                    2
+                    1
                 ],
                 "notes": ""
             },
             {
                 "courses": {
-                    "NEUR3121": "Molecular and Cellular Neuroscience",
+                    "PHSL3211": "Cardiovascular Physiology and Pathophysiology",
                     "NEUR3101": "Muscle and Motor Control",
                     "NEUR3221": "Neurophysiology",
-                    "PHSL3211": "Cardiovascular Physiology and Pathophysiology",
+                    "NEUR3121": "Molecular and Cellular Neuroscience",
                     "PHSL3221": "Endocrine, Reproductive and Developmental Physiology"
                 },
                 "title": "Level 3 Prescribed Electives",
@@ -5606,12 +5593,25 @@
             },
             {
                 "courses": {
+                    "PHSL2101": "Physiology 1A",
+                    "PHSL2201": "Physiology 1B"
+                },
+                "title": "Level 2 Core Courses",
+                "credits_to_complete": 12,
+                "core": true,
+                "levels": [
+                    2
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
                     "CHEM1021": "Chemistry 1B: Elements, Compounds and Life",
-                    "PHYS1121": "Physics 1A",
                     "BIOS1101": "Evolutionary and Functional Biology",
+                    "PHYS1111": "Fundamentals of Physics",
+                    "PHYS1121": "Physics 1A",
                     "PHYS1131": "Higher Physics 1A",
-                    "CHEM1041": "Higher Chemistry 1B: Elements, Compounds and Life",
-                    "PHYS1111": "Fundamentals of Physics"
+                    "CHEM1041": "Higher Chemistry 1B: Elements, Compounds and Life"
                 },
                 "title": "Level 1 Prescribed Electives",
                 "credits_to_complete": 6,
@@ -5636,11 +5636,38 @@
         "curriculum": [
             {
                 "courses": {
-                    "NEUR3221": "Neurophysiology",
-                    "PHSL3221": "Endocrine, Reproductive and Developmental Physiology",
+                    "MATH1151 or MATH1041 or MATH1141 or MATH1131 or MATH1031": [
+                        "Mathematics for Actuarial Studies and Finance 1A",
+                        "Statistics for Life and Social Sciences",
+                        "Higher Mathematics 1A",
+                        "Mathematics 1A",
+                        "Mathematics for Life Sciences"
+                    ],
+                    "CHEM1011 or CHEM1031": [
+                        "Chemistry 1A: Atoms, Molecules and Energy",
+                        "Higher Chemistry 1A: Atoms, Molecules and Energy"
+                    ],
+                    "CHEM1041 or CHEM1021": [
+                        "Higher Chemistry 1B: Elements, Compounds and Life",
+                        "Chemistry 1B: Elements, Compounds and Life"
+                    ],
+                    "BABS1201": "Molecules, Cells and Genes",
+                    "PHSL2201": "Physiology 1B",
+                    "PHSL2101": "Physiology 1A"
+                },
+                "title": "Core Courses",
+                "credits_to_complete": 36,
+                "core": true,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
                     "PHSL3211": "Cardiovascular Physiology and Pathophysiology",
-                    "NEUR3121": "Molecular and Cellular Neuroscience",
                     "NEUR3101": "Muscle and Motor Control",
+                    "PHSL3221": "Endocrine, Reproductive and Developmental Physiology",
+                    "NEUR3121": "Molecular and Cellular Neuroscience",
+                    "NEUR3221": "Neurophysiology",
                     "BIOC2101 or BIOC2201": [
                         "Principles of Biochemistry (Advanced)",
                         "Principles of Molecular Biology (Advanced)"
@@ -5649,33 +5676,6 @@
                 "title": "Prescribed Electives",
                 "credits_to_complete": 12,
                 "core": false,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "BABS1201": "Molecules, Cells and Genes",
-                    "PHSL2201": "Physiology 1B",
-                    "PHSL2101": "Physiology 1A",
-                    "MATH1131 or MATH1031 or MATH1151 or MATH1041 or MATH1141": [
-                        "Mathematics 1A",
-                        "Mathematics for Life Sciences",
-                        "Mathematics for Actuarial Studies and Finance 1A",
-                        "Statistics for Life and Social Sciences",
-                        "Higher Mathematics 1A"
-                    ],
-                    "CHEM1041 or CHEM1021": [
-                        "Higher Chemistry 1B: Elements, Compounds and Life",
-                        "Chemistry 1B: Elements, Compounds and Life"
-                    ],
-                    "CHEM1011 or CHEM1031": [
-                        "Chemistry 1A: Atoms, Molecules and Energy",
-                        "Higher Chemistry 1A: Atoms, Molecules and Energy"
-                    ]
-                },
-                "title": "Core Courses",
-                "credits_to_complete": 36,
-                "core": true,
                 "levels": [],
                 "notes": ""
             }
@@ -5967,14 +5967,14 @@
         "programs": [
             "3444",
             "3409",
+            "3558",
             "3453",
             "3454",
             "3447",
             "3554",
             "3543",
             "3438",
-            "3502",
-            "3558"
+            "3502"
         ],
         "name": "Spanish Studies",
         "type": "minor",
@@ -6043,11 +6043,11 @@
     },
     "TABLA2": {
         "programs": [
+            "3558",
             "3586",
             "3554",
             "3543",
-            "3502",
-            "3558"
+            "3502"
         ],
         "name": "Business Law",
         "type": "minor",
@@ -6094,12 +6094,12 @@
     },
     "TABLC1": {
         "programs": [
+            "3558",
             "3586",
             "3587",
             "3554",
             "3543",
-            "3502",
-            "3558"
+            "3502"
         ],
         "name": "Taxation",
         "type": "major",
@@ -6239,20 +6239,20 @@
         "code": "VISNA1",
         "course_constraints": [
             {
-                "title": "Course Selection",
-                "description": "Students are advised to select their courses carefully to ensure prerequisites for Stage 2 and 3 electives are met. It is recommended that Stage 1 students enrol into CHEM1011 unless they are considering a Chemistry major. Chemistry majors should enrol in CHEM1031."
-            },
-            {
-                "title": "Level 3 Recommended Electives",
-                "description": "The following courses are not required but are recommended as good complementary courses for this major. - OPTM3105 Disease Processes of the Eye 1 (6 UOC) - OPTM3205 Disease Processes of the Eye 2 (6 UOC) - OPTM3133 Vision Science in the Consulting Room (6 UOC) - NEUR3211 Neuroscience Research Seminars (6UOC) - PSYC3221 Vision and Brain (6 UOC) - PSYC3211 Cognitive Science (6 UOC) - ANAT3131 Functional Anatomy 1 (6 UOC) - SCIF3041 - Research Internship B (6 UOC)"
-            },
-            {
                 "title": "Level 2 Recommended Electives",
                 "description": "The following courses are not required but are recommended as good complementary courses for this major. - OPTM2133 The Clinical Environment (6 UOC) - OPTM2233 Optical Dispensing (6 UOC) - PSYC2071 Perception and Cognition (6 UOC) - PSYC2001 Research Methods 2 (6 UOC) - SCIF2041 - Research Internship A (6 UOC)"
             },
             {
+                "title": "Course Selection",
+                "description": "Students are advised to select their courses carefully to ensure prerequisites for Stage 2 and 3 electives are met. It is recommended that Stage 1 students enrol into CHEM1011 unless they are considering a Chemistry major. Chemistry majors should enrol in CHEM1031."
+            },
+            {
                 "title": "Advanced Science Electives",
                 "description": "For students enrolled in or applying for transfer into a Bachelor of Advanced Science (3962) with a Major in Vision Science the course VISN1101 Seeing the World: Perspectives from Vision Science (6 UOC) will be counted in-place of SCIF1131. It is highly recommended that Advanced Science students majoring in Vision Science take SCIF2041 and SCIF3041 in Stages 2 and 3."
+            },
+            {
+                "title": "Level 3 Recommended Electives",
+                "description": "The following courses are not required but are recommended as good complementary courses for this major. - OPTM3105 Disease Processes of the Eye 1 (6 UOC) - OPTM3205 Disease Processes of the Eye 2 (6 UOC) - OPTM3133 Vision Science in the Consulting Room (6 UOC) - NEUR3211 Neuroscience Research Seminars (6UOC) - PSYC3221 Vision and Brain (6 UOC) - PSYC3211 Cognitive Science (6 UOC) - ANAT3131 Functional Anatomy 1 (6 UOC) - SCIF3041 - Research Internship B (6 UOC)"
             },
             {
                 "title": "Level 1 Recommended Electives",
@@ -6262,25 +6262,9 @@
         "curriculum": [
             {
                 "courses": {
-                    "ANAT2111": "Introductory Anatomy",
-                    "VISN2111": "Ocular Anatomy and Physiology",
-                    "PHSL2101": "Physiology 1A",
-                    "PHSL2201": "Physiology 1B",
-                    "VISN2211": "Organisation and Function of the Visual System"
-                },
-                "title": "Level 2 Core Courses",
-                "credits_to_complete": 30,
-                "core": true,
-                "levels": [
-                    2
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "OPTM3201": "Ocular Imaging & Applied Vision Science",
+                    "VISN3111": "Development and Aging of the Visual System",
                     "ANAT3411": "Neuroanatomy",
-                    "VISN3111": "Development and Aging of the Visual System"
+                    "OPTM3201": "Ocular Imaging & Applied Vision Science"
                 },
                 "title": "Level 3 Core Courses",
                 "credits_to_complete": 18,
@@ -6292,17 +6276,17 @@
             },
             {
                 "courses": {
-                    "MATH1141 or MATH1031 or MATH1131": [
+                    "MATH1131 or MATH1141 or MATH1031": [
+                        "Mathematics 1A",
                         "Higher Mathematics 1A",
-                        "Mathematics for Life Sciences",
-                        "Mathematics 1A"
+                        "Mathematics for Life Sciences"
                     ],
-                    "CHEM1011 or CHEM1031": [
-                        "Chemistry 1A: Atoms, Molecules and Energy",
-                        "Higher Chemistry 1A: Atoms, Molecules and Energy"
+                    "CHEM1031 or CHEM1011": [
+                        "Higher Chemistry 1A: Atoms, Molecules and Energy",
+                        "Chemistry 1A: Atoms, Molecules and Energy"
                     ],
-                    "BABS1201": "Molecules, Cells and Genes",
                     "VISN1111": "Geometrical and Physical Optics",
+                    "BABS1201": "Molecules, Cells and Genes",
                     "VISN1221": "Visual Optics",
                     "VISN1101": "Seeing the World: Perspectives from Vision Science"
                 },
@@ -6311,6 +6295,22 @@
                 "core": true,
                 "levels": [
                     1
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ANAT2111": "Introductory Anatomy",
+                    "PHSL2101": "Physiology 1A",
+                    "VISN2111": "Ocular Anatomy and Physiology",
+                    "PHSL2201": "Physiology 1B",
+                    "VISN2211": "Organisation and Function of the Visual System"
+                },
+                "title": "Level 2 Core Courses",
+                "credits_to_complete": 30,
+                "core": true,
+                "levels": [
+                    2
                 ],
                 "notes": ""
             }
