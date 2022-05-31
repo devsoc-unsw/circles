@@ -14,25 +14,15 @@ programs = [
 @composite
 def major_minor_for_program(draw: DrawFn):
     program = draw(sampled_from(programs))
-    majorGroup = draw(
-        sampled_from(
-            [
-                *requests.get(f"http://127.0.0.1:8000/programs/getMajors/{program}").json()["majors"].values()
-            ]
-        )
-    )
-    major = draw(sampled_from([*majorGroup.keys()]))
+    majorRequest = requests.get(f"http://127.0.0.1:8000/programs/getMajors/{program}").json()
+    majorGroup = draw(sampled_from([*majorRequest["majors"]]))
+    major = draw(sampled_from([*majorRequest["majors"][majorGroup]["specs"].keys()]))
 
 
-    minor = draw(
-        sampled_from(
-            [
-                *requests.get(f"http://127.0.0.1:8000/programs/getMinors/{program}")
-                .json()["minors"]
-                .keys()
-            ]
-        )
-    )
+    minorRequest = requests.get(f"http://127.0.0.1:8000/programs/getMinors/{program}").json()
+    minorGroup = draw(sampled_from([*minorRequest["minors"]]))
+    minor = draw(sampled_from([*minorRequest["minors"][minorGroup]["specs"].keys()]))
+
     return (program, major, minor)
 
 

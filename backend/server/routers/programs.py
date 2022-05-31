@@ -154,15 +154,21 @@ def convertSubgroupObjectToCoursesDict(object: str, description: str|list[str]) 
     else:
         return {object: description}
 
-def addSubgroupContainer(structure: dict, type: str, container: dict, exceptions: list[str]) -> list[str]:
+def addSubgroupContainer(structure: dict, type: str, container: dict, exceptions: list[str], title: str = "") -> list[str]:
     """ Returns the added courses """
-    structure[type][container["title"]] = {}
-    item = structure[type][container["title"]]
+    title = title if title != "" else container["title"]
+    structure[type][title] = {}
+    item = structure[type][title]
 
     item["UOC"] = container["credits_to_complete"]
     item["courses"] = {}
+
+    if not container.get("courses"):
+        return []
+    
     if not isinstance(container["courses"], dict):
         return []
+
     for object, description in container["courses"].items():
         item["courses"] = item["courses"] | {
             course: description for course, description
@@ -287,5 +293,10 @@ def getStructure(
     with contextlib.suppress(KeyError):
         for container in programsResult['components']['core_courses']:
             addSubgroupContainer(structure, "General", container, [])
+
+        # TODO: handling non-spec data more generally
+        addSubgroupContainer(structure, "General", programsResult['components']['general_education'], [], "General Education")
+        for container in programsResult['components']['prescribed_electives']:
+            addSubgroupContainer(structure, "Prescribed Electives", programsResult['components']['prescribed_electives'], [])
 
     return {"structure": structure}

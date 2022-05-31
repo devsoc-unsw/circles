@@ -45,7 +45,8 @@ def assert_possible_structure(unlocked, program, major, minor = ''):
         for container2 in structure[container]:
             with suppress(KeyError):
                 del structure[container][container2]['name']
-            for course in structure[container][container2]['courses']:
-                for c in unlocked:
-                    if course in c and c not in ignored:
-                        assert unlocked[c]['is_accurate'], f"{c} is inaccurate"
+
+                for course in structure[container][container2]['courses']:
+                    for c in unlocked:
+                        if course in c and c not in ignored:
+                            assert unlocked[c]['is_accurate'], f"{c} is inaccurate"

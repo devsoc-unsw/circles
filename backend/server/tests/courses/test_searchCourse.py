@@ -27,4 +27,4 @@ def test_search_title():
 def test_search_minor():
     x = requests.post('http://127.0.0.1:8000/courses/searchCourse/Financial Fundamentals', json=USER)
     assert x.status_code == 200
-    assert x.json().get("specs").get("ACCT2511") is not None
+    assert x.json().get("ACCT2511") is not None
