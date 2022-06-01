@@ -15,7 +15,7 @@ f.close()
 def test_user1():
     user = User(USERS["user1"])
 
-    assert user.in_program("3707")
+    assert user.in_program("3778")
     assert user.in_specialisation("COMPA1")
     assert user.in_specialisation("ACCTA2")
     assert user.has_taken_course("COMP1511")
@@ -28,7 +28,7 @@ def test_user1():
 def test_user2():
     user = User(USERS["user2"])
 
-    assert user.in_program("3707")
+    assert user.in_program("3778")
     assert user.in_specialisation("COMPA1")
     assert user.has_taken_course("COMP1511")
     assert user.has_taken_course("MATH1131")
@@ -41,7 +41,7 @@ def test_user2():
 def test_user3():
     user = User(USERS["user3"])
 
-    assert user.in_program("3707")
+    assert user.in_program("3778")
     assert user.in_specialisation("COMPA1")
     assert user.wam() == None
     assert user.uoc() == 0
