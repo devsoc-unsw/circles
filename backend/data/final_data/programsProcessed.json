@@ -397,6 +397,74 @@
             "Couldn't find any of names (Actuarial Studies) or (Computer Science) in program Actuarial Studies / Computer Science (3674) in section titled 'Level 3 Actuarial Electives'"
         ]
     },
+    "3707": {
+        "title": "Engineering (Honours)",
+        "code": "3707",
+        "duration": 4,
+        "UOC": 192,
+        "faculty": "Faculty of Engineering",
+        "overview": "The UNSW Bachelor of Engineering (Honours) is designed to equip you for a career as a professional engineer. We provide you with a solid background in mathematics, natural sciences and computing that will prepare you for learning knowledge and skills in an engineering discipline specialisation. You will get the chance to apply yourself to engineering design and enquiry projects, professional engineering practice, engineering and technical management and conduct research towards your thesis project.\nThe four year program is offered in 19 engineering disciplines (listed below). A flexible first year engineering stream is offered for students who wish to study engineering but choose to delay their choice of which branch of engineering to study until the end of Year 1.",
+        "structure_summary": "Students must complete 192 UOC when taken as a standalone program.\n\n168 UOC stream\n12 UOC General Education\n12 UOC Electives (Foundational Disciplinary or Disciplinary Knowledge Courses)\n\nAll students are also required to complete 60 days of Industrial Training.",
+        "components": {
+            "general_education": {
+                "notes": "Students must take at least 12 UOC of the following courses.",
+                "credits_to_complete": 12
+            },
+            "spec_data": {
+                "minors": {
+                    "Engineering (Honours)": {
+                        "notes": "Students who choose to complete a minor must declare the minor before their final term of study. Students should check requirements for the minor and in which Engineering (Honours) majors it is available.\nCourses taken for a minor may be course shared with General Education requirements, but cannot be double counted towards them.",
+                        "specs": {
+                            "ENGGA2": "Humanitarian Engineering"
+                        }
+                    }
+                },
+                "honours": {
+                    "Engineering (Honours)": {
+                        "notes": "Students must complete at least one of the specialisations below.",
+                        "specs": {
+                            "CVENBH": "Environmental Engineering",
+                            "NAVLAH": "Naval Architecture",
+                            "SOLAAH": "Photovoltaics and Solar Energy",
+                            "MTRNAH": "Mechatronic Engineering",
+                            "CEICAH": "Chemical Engineering",
+                            "GMATEH": "Geospatial Engineering",
+                            "MANFBH": "Mechanical and Manufacturing Engineering",
+                            "ELECAH": "Electrical Engineering",
+                            "CEICDH": "Chemical Product Engineering",
+                            "SOLABH": "Renewable Energy Engineering",
+                            "ELECCH": "Quantum Engineering",
+                            "TELEAH": "Telecommunications",
+                            "AEROAH": "Aerospace Engineering",
+                            "PETRAH": "Petroleum Engineering",
+                            "MECHAH": "Mechanical Engineering",
+                            "MINEAH": "Mining Engineering",
+                            "GMATDH": "Surveying",
+                            "COMPBH": "Computer Engineering",
+                            "CVENAH": "Civil Engineering",
+                            "BINFAH": "Bioinformatics Engineering",
+                            "SENGAH": "Software Engineering"
+                        }
+                    }
+                }
+            },
+            "core_courses": [],
+            "information_rules": [
+                {
+                    "title": "Discipline Elective List",
+                    "notes": "Students must take 12 UOC from the Discipline Elective List for the engineering specialisation. Students should check the details in the specialisation page."
+                },
+                {
+                    "title": "Industrial Experience Requirement",
+                    "notes": "Students must complete a minimum of 60 days of Industrial Training to graduate. Industrial Training must be undertaken concurrently with enrolment in the program.\nFor more information on Industrial Training, please visit https://www.unsw.edu.au/engineering/student-life/industrial-training"
+                }
+            ],
+            "limit_rules": [],
+            "prescribed_electives": [],
+            "other": []
+        },
+        "processing_warnings": []
+    },
     "3778": {
         "title": "Computer Science",
         "code": "3778",

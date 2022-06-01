@@ -339,8 +339,8 @@ def test_program_condition_simple():
     cond_3707 = create_condition(["(", "3707", ")"])
     cond_3778 = create_condition(["(", "3778", ")"])
 
-    assert (cond_3707.validate(user))[0]
-    assert not (cond_3778.validate(user))[0]
+    assert not (cond_3707.validate(user))[0]
+    assert (cond_3778.validate(user))[0]
 
 
 def test_level_condition_simple():
@@ -517,7 +517,7 @@ def test_program_type():
 
 def test_complex_composite_condition():
     user = User(USERS["user3"])
-    comp_program_cond = create_condition(["(" ,"COMP1511" , "||" , "3707", ")"])
+    comp_program_cond = create_condition(["(" ,"COMP1511" , "||" , "3778", ")"])
     deep_program_cond = create_condition(["(" ,"COMP5555" , "||" , "(", "COMP2521", "&&", "MATH1141", ")", ")"])
     assert not comp_program_cond.beneficial(user, {"COMP1511": (6, 100)})
     assert deep_program_cond.beneficial(user, {"COMP2521": (6, 100)})

@@ -92,7 +92,8 @@ ENG_PROGS = (
 
 OTH_PROGS = (
     "3502",
-    "3970"
+    "3970",
+    "3707",
 )
 
 TESTING_MODE = True
