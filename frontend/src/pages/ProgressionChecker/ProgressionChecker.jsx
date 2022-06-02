@@ -66,7 +66,6 @@ const ProgressionChecker = () => {
     if (programCode && majors.length > 0) fetchStructure();
   }, [programCode, majors, minors, view]);
 
-
   return (
     <PageTemplate>
       <Dashboard isLoading={isLoading} degree={degreeData} />
