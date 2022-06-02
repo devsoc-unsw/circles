@@ -12451,29 +12451,6 @@
         ],
         "broke at": "Index 5, Storytelling"
     },
-    "MDIA3003": {
-        "condition": {
-            "original": "Prerequisite: 66 units of credit overall, including 6 units of credit Level 2 MDIA core courses and enrolment in a Media (Communication & Journalism) or Media (PR & Advertising) program<br/><br/>",
-            "processed": "66UOC && 6UOC in L2 CORES && (3454 || 3453)"
-        },
-        "tokens": [
-            "(",
-            "66UOC",
-            "&&",
-            "6UOC",
-            "in",
-            "L2",
-            "CORES",
-            "&&",
-            "(",
-            "3454",
-            "||",
-            "3453",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 7, &&"
-    },
     "MDIA3007": {
         "condition": {
             "original": "Prerequisite: 48 units of credit overall, and enrolment in a Media program, or a Creative Writing, English, FIlm Studies or MCT major or minor. Students must have a WAM of 65 to be eligible for this course.<br/><br/>",

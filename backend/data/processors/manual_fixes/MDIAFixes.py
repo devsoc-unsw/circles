@@ -12,6 +12,8 @@ To then run this file:
     python3 -m data.processors.manualFixes.MDIAFixes
 """
 
+import re
+
 from data.utility import data_helpers
 
 # Reads conditionsProcessed dictionary into 'CONDITIONS'
@@ -20,6 +22,8 @@ PROCESSED = "processed"
 
 # Reads coursesProcessed dictionary into 'COURSES' (for updating exclusions)
 COURSES = data_helpers.read_data("data/final_data/coursesProcessed.json")
+
+PROGRAMS = data_helpers.read_data("data/final_data/programsProcessed.json")
 
 
 def fix_conditions():
@@ -38,7 +42,15 @@ def MDIA_3003():
         "processed": "66UOC && 6UOC L2 MDIA CORES courses && enrolment in a Media (Communication && Journalism) || Media (PR && Advertising) program"
     """
 
-    return "66UOC && 6UOC in L2 CORES && (3454 || 3453)"
+    # 3454 is Media (Comm & Journalism)
+    core_courses = PROGRAMS["3454"]["components"]["NonSpecialisationData"]["Level 2 Media Prescribed Elective Courses"].keys()
+    if not core_courses:
+        print("ERROR[MDIA3003]: No core courses found for Media (Comm & Journalism)")
+
+    core_courses = filter(lambda x: re.match(r"[A-Z]{4}[0-9]{4}", x, flags=re.IGNORECASE),
+                          core_courses)
+
+    return f"66UOC && (6UOC in ({' || '.join(core_courses)})) && (3454 || 3453)"
 
 if __name__ == "__main__":
     fix_conditions()
