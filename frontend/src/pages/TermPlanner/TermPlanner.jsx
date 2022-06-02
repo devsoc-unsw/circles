@@ -53,6 +53,7 @@ const TermPlanner = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log(years);
     if (isAllEmpty(years)) openNotification();
     validateTermPlanner(
       dispatch,
@@ -171,13 +172,22 @@ const TermPlanner = () => {
               <div className="gridItem">Term 2</div>
               <div className="gridItem">Term 3</div>
               <div className="gridItem">Unplanned</div>
-
               {years.map((year, index) => {
                 const iYear = parseInt(startYear, 10) + parseInt(index, 10);
+                console.log(year);
+                let yearUOC = 0;
+                Object.keys(year).forEach((i) => {
+                  console.log(year[i]);
+                  Object.keys(courses).forEach((j) => {
+                    if (year[i].includes(j)) {
+                      yearUOC += courses[j].UOC;
+                    }
+                  });
+                });
                 if (hidden[iYear]) return null;
                 return (
                   <React.Fragment key={index}>
-                    <Badge count={4} offset={[-8, 20]}>
+                    <Badge color="#efdbff" style={{ color: "#000" }} size="small" count={`${yearUOC} UOC`} offset={[-26, 42]}>
                       <div className="yearContainer gridItem">
                         <div
                           className={`year ${currYear === iYear && "currYear"}`}
