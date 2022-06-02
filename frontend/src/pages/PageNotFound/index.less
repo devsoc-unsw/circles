@@ -1,12 +1,5 @@
 @import "~antd/lib/style/themes/default.less";
 
-body {
-  margin: 0px;
-  height: 100%;
-  overflow: hidden;
-  position: relative;
-}
-
 .grid-circle {
   display: grid;
   grid-template-columns: auto auto auto auto;
@@ -61,8 +54,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  height: calc(100vh - var(--navbar-height));
   width: 100%;
+  overflow: hidden;
 }
 
 .box {
