@@ -19,6 +19,7 @@ from algorithms.objects.categories import (
 )
 from algorithms.objects.conditions import (
     CompositeCondition,
+    CoresCondition,
     CoreqCoursesCondition,
     CourseCondition,
     CourseExclusionCondition,
@@ -232,6 +233,9 @@ def make_condition(tokens, first=False, course=None) -> Tuple[CompositeCondition
             elif is_grade(token):
                 # Condition for GRADE requirement (mark in a single course)
                 cond = GradeCondition(get_grade(token))
+            elif token == "CORES":
+                # Condition for Core Course completion requirement
+                cond = CoresCondition()
             else:
                 # Unmatched token. Error
                 return None, index + 1

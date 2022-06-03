@@ -354,7 +354,8 @@ def convert_coreqs(processed):
     )
 
 def convert_core(processed):
-    return re.sub("core", "CORES", processed, flags=re.IGNORECASE)
+    processed = re.sub("core", "CORES", processed, flags=re.IGNORECASE)
+    return re.sub(r"(L\d) CORES", r"CORES in \1", processed, flags=re.IGNORECASE)
 
 # -----------------------------------------------------------------------------
 # Phase 3: Algo logic

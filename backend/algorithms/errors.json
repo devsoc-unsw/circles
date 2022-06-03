@@ -5114,21 +5114,6 @@
         ],
         "broke at": "Index 4, Restricted"
     },
-    "BIOM4951": {
-        "condition": {
-            "original": "Prerequisite: Completion of 126 UOC and completion of 3rd year core<br/><br/>",
-            "processed": "126UOC && L3 CORES"
-        },
-        "tokens": [
-            "(",
-            "126UOC",
-            "&&",
-            "L3",
-            "CORES",
-            ")"
-        ],
-        "broke at": "Index 4, CORES"
-    },
     "BIOM4952": {
         "condition": {
             "original": "Prerequisite: Completion of Research Thesis A (4951)<br/><br/>",
@@ -5515,21 +5500,6 @@
             ")"
         ],
         "broke at": "Index 6, MATH2089"
-    },
-    "CEIC4951": {
-        "condition": {
-            "original": "Prerequisite: Completion of 126 UOC and completion of 3rd year core<br/><br/>",
-            "processed": "126UOC && L3 CORES"
-        },
-        "tokens": [
-            "(",
-            "126UOC",
-            "&&",
-            "L3",
-            "CORES",
-            ")"
-        ],
-        "broke at": "Index 4, CORES"
     },
     "CEIC4952": {
         "condition": {
@@ -6475,21 +6445,6 @@
             ")"
         ],
         "broke at": "Index 4, CRIM1011"
-    },
-    "CVEN4701": {
-        "condition": {
-            "original": "Completion of 126 UOC and 3rd year core<br/><br/>",
-            "processed": "126UOC && L3 CORES"
-        },
-        "tokens": [
-            "(",
-            "126UOC",
-            "&&",
-            "L3",
-            "CORES",
-            ")"
-        ],
-        "broke at": "Index 4, CORES"
     },
     "DART2151": {
         "condition": {
@@ -12631,21 +12586,6 @@
         ],
         "broke at": "Index 6, )"
     },
-    "MMAN4951": {
-        "condition": {
-            "original": "Prerequisite: Completion of 126 UOC and completion of 3rd year core<br/><br/>",
-            "processed": "126UOC && L3 CORES"
-        },
-        "tokens": [
-            "(",
-            "126UOC",
-            "&&",
-            "L3",
-            "CORES",
-            ")"
-        ],
-        "broke at": "Index 4, CORES"
-    },
     "MMAN4952": {
         "condition": {
             "original": "Prerequisite: Completion of Research Thesis A (4951)<br/><br/>",
@@ -14740,21 +14680,6 @@
             ")"
         ],
         "broke at": "Index 4, SOCW4011,"
-    },
-    "SOLA4951": {
-        "condition": {
-            "original": "Prerequisite: Completion of 126 UOC and completion of 3rd year core<br/><br/>",
-            "processed": "126UOC && L3 CORES"
-        },
-        "tokens": [
-            "(",
-            "126UOC",
-            "&&",
-            "L3",
-            "CORES",
-            ")"
-        ],
-        "broke at": "Index 4, CORES"
     },
     "SOLA4952": {
         "condition": {

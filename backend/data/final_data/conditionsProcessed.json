@@ -2576,7 +2576,7 @@
     },
     "BIOM4951": {
         "original": "Prerequisite: Completion of 126 UOC and completion of 3rd year core<br/><br/>",
-        "processed": "126UOC && L3 CORES"
+        "processed": "126UOC && CORES in L3"
     },
     "BIOM4952": {
         "original": "Prerequisite: Completion of Research Thesis A (4951)<br/><br/>",
@@ -2964,7 +2964,7 @@
     },
     "CEIC4951": {
         "original": "Prerequisite: Completion of 126 UOC and completion of 3rd year core<br/><br/>",
-        "processed": "126UOC && L3 CORES"
+        "processed": "126UOC && CORES in L3"
     },
     "CEIC4952": {
         "original": "Prerequisite: Completion of Research Thesis A (4951)<br/><br/>",
@@ -4069,7 +4069,7 @@
     },
     "CVEN4701": {
         "original": "Completion of 126 UOC and 3rd year core<br/><br/>",
-        "processed": "126UOC && L3 CORES"
+        "processed": "126UOC && CORES in L3"
     },
     "CVEN4703": {
         "original": "Prerequisite: CVEN3502<br/><br/>",
@@ -8668,7 +8668,7 @@
     },
     "MMAN4951": {
         "original": "Prerequisite: Completion of 126 UOC and completion of 3rd year core<br/><br/>",
-        "processed": "126UOC && L3 CORES"
+        "processed": "126UOC && CORES in L3"
     },
     "MMAN4952": {
         "original": "Prerequisite: Completion of Research Thesis A (4951)<br/><br/>",
@@ -10107,7 +10107,7 @@
     },
     "SOLA4951": {
         "original": "Prerequisite: Completion of 126 UOC and completion of 3rd year core<br/><br/>",
-        "processed": "126UOC && L3 CORES"
+        "processed": "126UOC && CORES in L3"
     },
     "SOLA4952": {
         "original": "Prerequisite: Completion of Research Thesis A (4951)<br/><br/>",
