@@ -160,20 +160,24 @@ def convertSubgroupObjectToCoursesDict(object: str, description: str|list[str]):
 
 def addSubgroupContainer(structure: dict, type: str, container: dict, exceptions: list[str]) -> list[str]:
     """ Returns the added courses """
-    #TODO: further standardise non_spec_data to remove this line:
+    #TODO: further standardise non_spec_data to remove these line:
     title = container.get("title")
     if container.get("type") == "gened":
         title = "General Education"
+    
+    # don't do anything if it's info_rule or limit_rule
+    if container.get("type") is not None and "rule" in container.get("type"):
+        return []
+
+    if container.get("credits_to_complete") is None:
+        return []
 
     structure[type][title] = {}
     item = structure[type][title]
     item["UOC"] = container["credits_to_complete"]
     item["courses"] = {}
 
-    if not container.get("courses"):
-        return []
-    
-    if not isinstance(container["courses"], dict):
+    if container.get("courses") is None:
         return []
 
     for object, description in container["courses"].items():
