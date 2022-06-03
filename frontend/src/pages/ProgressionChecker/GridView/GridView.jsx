@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Typography, Skeleton, Button } from "antd";
+import {
+  Typography,
+  Skeleton,
+  Button,
+  Badge,
+  Tooltip,
+} from "antd";
 import { useSelector } from "react-redux";
 import "./index.less";
 import getPastCourses from "../getPastCourses";
@@ -30,6 +36,9 @@ const GridView = ({ isLoading, structure }) => {
                 key: courseCode,
                 title: subgroupStructure.courses[courseCode],
                 completed: courseCode in pastCourses,
+                // if undefined that means course not in term planner
+                unplanned: courses[courseCode] === undefined
+                  ? false : courses[courseCode].plannedFor === null,
               });
               newGridLayout[group][subgroup].sort(
                 (a, b) => a.key.localeCompare(b.key),
@@ -43,8 +52,9 @@ const GridView = ({ isLoading, structure }) => {
               if (courseData && courseData.type === subgroup) {
                 newGridLayout[group][subgroup].push({
                   key: courseCode,
-                  title: courses.courseCode.title,
+                  title: courseData.title,
                   completed: courseCode in pastCourses,
+                  unplanned: courseData.plannedFor === null,
                 });
               }
             });
@@ -80,9 +90,25 @@ const GridView = ({ isLoading, structure }) => {
                   <Title level={2}>{subGroup}</Title>
                   <div className="courseGroup">
                     {subGroupEntry.map((course) => (
-                      <Button className="checkerButton" type="primary" style={course.completed ? null : { background: "#FFF", color: "#9254de" }} key={course.key}>
-                        {course.key}: {course.title}
-                      </Button>
+                      course.unplanned ? (
+                        <Badge
+                          count={(
+                            <Tooltip title="Course has not been planned">
+                              <div className="unplannedBadge">
+                                Unplanned
+                              </div>
+                            </Tooltip>
+                          )}
+                        >
+                          <Button className="checkerButton" type="primary" style={course.completed ? null : { background: "#FFF", color: "#9254de" }} key={course.key}>
+                            {course.key}: {course.title}
+                          </Button>
+                        </Badge>
+                      ) : (
+                        <Button className="checkerButton" type="primary" style={course.completed ? null : { background: "#FFF", color: "#9254de" }} key={course.key}>
+                          {course.key}: {course.title}
+                        </Button>
+                      )
                     ))}
                   </div>
                   <br />
