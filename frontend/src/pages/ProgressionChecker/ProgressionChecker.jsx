@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { Divider, Button } from "antd";
+import { TableOutlined, BorderlessTableOutlined } from "@ant-design/icons";
 import Dashboard from "./Dashboard";
-import ListView3 from "./ListView3";
 import "./index.less";
 import PageTemplate from "../../components/PageTemplate";
 import TableView from "./TableView";
+import GridView from "./GridView/GridView";
 
 // TODO: dummy data for now
 const degreeData = {
@@ -41,6 +43,7 @@ const degreeData = {
 
 const ProgressionChecker = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [view, setView] = useState("grid");
 
   const {
     programCode, majors, minor,
@@ -61,17 +64,37 @@ const ProgressionChecker = () => {
       setIsLoading(false);
     };
     if (programCode && majors.length > 0) fetchStructure();
-  }, [programCode, majors, minor]);
+  }, [programCode, majors, minor, view]);
 
   return (
     <PageTemplate>
       <Dashboard isLoading={isLoading} degree={degreeData} />
-      <TableView isLoading={isLoading} structure={structure} />
-      <ListView3
-        isLoading={isLoading}
-        degree={degreeData}
-        progressioncourses={structure}
-      />
+      <Divider />
+      {view === "grid" ? (
+        <>
+          <Button
+            className="viewSwitcher"
+            type="primary"
+            icon={<TableOutlined />}
+            onClick={() => setView("table")}
+          >
+            Display Table View
+          </Button>
+          <GridView isLoading={isLoading} structure={structure} />
+        </>
+      ) : (
+        <>
+          <Button
+            className="viewSwitcher"
+            type="primary"
+            icon={<BorderlessTableOutlined />}
+            onClick={() => setView("grid")}
+          >
+            Display Grid View
+          </Button>
+          <TableView isLoading={isLoading} structure={structure} />
+        </>
+      )}
     </PageTemplate>
   );
 };

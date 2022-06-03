@@ -23,6 +23,7 @@ class Category(ABC):
 
     @abstractmethod
     def match_definition(self, course: str) -> bool:
+        """ a definition of how a course fits in a category """
         pass
 
     @abstractmethod
@@ -49,15 +50,16 @@ class CompositeCategory(Category):
         self.logic = logic
 
     def match_definition(self, course: str) -> bool:
+        if self.logic == Logic.AND:
+            return all(
+                category.match_definition(course) for category in self.categories
+            )
+        if self.logic == Logic.OR:
+            return any(
+                category.match_definition(course) for category in self.categories
+            )
+        raise ValueError(f"Invalid logic: {self.logic}")
 
-        if self.logic not in [Logic.AND, Logic.OR]:
-            raise ValueError(f"Invalid logic: {self.logic}")
-
-        return all(
-            category.match_definition(course) for category in self.categories
-        ) if self.logic == Logic.AND else any(
-            category.match_definition(course) for category in self.categories
-        ) if self.logic == Logic.OR else None
 
     def __str__(self) -> str:
         logic_op = "&&" if self.logic == Logic.AND else "||"

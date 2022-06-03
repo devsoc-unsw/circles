@@ -57,7 +57,7 @@ const AddToPlannerButton = () => {
   const removeFromPlanner = async () => {
     const [data] = await axiosRequest("post", `/courses/unselectCourse/${id}`, prepareUserPayload(degree, planner));
     addCourseToPlannerTimeout(false);
-    dispatch(removeCourses(data.affected_courses));
+    dispatch(removeCourses(data.courses));
   };
 
   return (

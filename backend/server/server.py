@@ -2,8 +2,6 @@
 Configure the FastAPI server
 """
 
-
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -46,4 +44,5 @@ app.include_router(programs.router)
 
 @app.get("/")
 async def index():
+    """ sanity test that this file is loaded """
     return "At index inside server.py"

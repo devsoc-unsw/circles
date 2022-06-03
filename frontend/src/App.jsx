@@ -7,10 +7,12 @@ import DegreeWizard from "./pages/DegreeWizard";
 import CourseSelector from "./pages/CourseSelector";
 import TermPlanner from "./pages/TermPlanner";
 import ProgressionChecker from "./pages/ProgressionChecker";
+import GraphicalSelector from "./pages/GraphicalSelector";
 import "./App.less";
 import PageLoading from "./components/PageLoading";
 import "./axios";
 import Header from "./components/Header";
+import PageNotFound from "./pages/PageNotFound";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -39,6 +41,15 @@ const App = () => {
             )}
           />
           <Route
+            path="/graphical-selector"
+            element={(
+              <div>
+                <Header />
+                <GraphicalSelector />
+              </div>
+            )}
+          />
+          <Route
             path="/term-planner"
             element={(
               <div>
@@ -53,6 +64,15 @@ const App = () => {
               <div>
                 <Header />
                 <ProgressionChecker />
+              </div>
+            )}
+          />
+          <Route
+            path="*"
+            element={(
+              <div>
+                <Header />
+                <PageNotFound />
               </div>
             )}
           />
