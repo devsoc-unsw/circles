@@ -167,7 +167,6 @@ def addSubgroupContainer(structure: dict, type: str, container: dict, exceptions
 
     structure[type][title] = {}
     item = structure[type][title]
-
     item["UOC"] = container["credits_to_complete"]
     item["courses"] = {}
 
@@ -282,7 +281,6 @@ def getStructure(
 
     if major:
         majors_l = major.split("+") if "+" in major else [major]
-
         for m in majors_l:
             addSpecialisation(structure, m, "Major")
 
