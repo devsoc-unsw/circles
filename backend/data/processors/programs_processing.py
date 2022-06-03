@@ -167,17 +167,18 @@ def add_component_data(processed_data: dict[str, dict], program_data: dict, item
     if is_specialisation(item):
         add_specialisation_data(processed_data, program_data, item, program_name, is_optional)
     if is_core_course(item):
-        add_core_course_data(program_data, item)
+        add_course_data(program_data, item, "core_courses")
         return
     if is_information_rule(item):
         add_information_rule(program_data, item)
     if is_limit_rule(item):
         add_limit_rule(program_data, item)
     if is_prescribed_elective(item):
-        add_prescribed_elective(program_data, item)
+        add_course_data(program_data, item, "prescribed_electives")
         return
     if is_other(item):
-        add_other(program_data, item)
+        add_course_data(program_data, item, "other")
+        return
 
     # Recurse further down through the container and the relationship list
     for next in item["relationship"]:
@@ -298,8 +299,8 @@ def add_general_education_data(program_data: dict, item: dict) -> None:
 
     program_data["components"][NON_SPEC_KEY].append({
         "type": "gened",
-        "notes": item["description"],
         "credits_to_complete": get_container_credits(program_data, item),
+        "notes": item["description"],
     })
 
 
@@ -338,9 +339,9 @@ def add_specialisation_data(processed_data: dict, program_data: dict, item: dict
             continue
 
         new_data = {
-            "notes": item["description"],
             "is_optional": is_optional,
             "specs": {},
+            "notes": item["description"],
         }
         for specialisation in spec_type_items:
             code = specialisation["academic_item_code"]
@@ -403,7 +404,7 @@ def compute_levels(courses: dict[str, str]) -> list[int]:
     ))
 
 
-def add_core_course_data(program_data: dict, item: dict) -> None:
+def add_course_data(program_data: dict, item: dict, req_type: str) -> None:
     """
     Adds core course data to the correct spot in program_data
     """
@@ -412,7 +413,7 @@ def add_core_course_data(program_data: dict, item: dict) -> None:
 
     program_data["components"].setdefault(NON_SPEC_KEY, [])
     program_data["components"][NON_SPEC_KEY].append({
-        "type": "core",
+        "type": req_type,
         "courses": order_dict_alphabetically(courses),
         "title": item["title"],
         "credits_to_complete": get_container_credits(program_data, item),
@@ -462,40 +463,6 @@ def add_limit_rule(program_data: dict, item: dict) -> None:
         "credits_to_complete": credits_to_complete,
         "levels": compute_levels(courses),
         "notes": notes,
-    })
-
-
-def add_prescribed_elective(program_data: dict, item: dict) -> None:
-    """
-    Adds prescribed elective data to the correct spot in program_data
-    """
-    courses = {}
-    add_course_tabs(program_data, courses, item)
-    program_data["components"].setdefault(NON_SPEC_KEY, [])
-    program_data["components"][NON_SPEC_KEY].append({
-        "type": "prescribed_elective",
-        "courses": order_dict_alphabetically(courses),
-        "title": item["title"],
-        "credits_to_complete": get_container_credits(program_data, item),
-        "levels": compute_levels(courses),
-        "notes": item["description"],
-    })
-
-
-def add_other(program_data: dict, item: dict) -> None:
-    """
-    Adds 'other' data to the correct spot in program_data
-    """
-    courses = {}
-    add_course_tabs(program_data, courses, item)
-    program_data["components"].setdefault(NON_SPEC_KEY, [])
-    program_data["components"][NON_SPEC_KEY].append({
-        "type": "other",
-        "courses": order_dict_alphabetically(courses),
-        "title": item["title"],
-        "credits_to_complete": get_container_credits(program_data, item),
-        "levels": compute_levels(courses),
-        "notes": item["description"],
     })
 
 
