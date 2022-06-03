@@ -50,6 +50,7 @@ def getPrograms():
     # TODO On deployment, DELETE RETURN BELOW and replace with the return above
     return {"programs": {"3778": "Computer Science",
                         "3784": "Commerce / Computer Science",
+                        "3502": "Commerce"
                         }}
 
 
@@ -157,9 +158,13 @@ def convertSubgroupObjectToCoursesDict(object: str, description: str|list[str]):
 
     return {object: description}
 
-def addSubgroupContainer(structure: dict, type: str, container: dict, exceptions: list[str], title: str = "") -> list[str]:
+def addSubgroupContainer(structure: dict, type: str, container: dict, exceptions: list[str]) -> list[str]:
     """ Returns the added courses """
-    title = title if title != "" else container["title"]
+    #TODO: further standardise non_spec_data to remove this line:
+    title = container.get("title")
+    if container.get("type") == "gened":
+        title = "General Education"
+
     structure[type][title] = {}
     item = structure[type][title]
 
@@ -295,12 +300,7 @@ def getStructure(
 
     structure['General'] = {}
     with contextlib.suppress(KeyError):
-        for container in programsResult['components']['core_courses']:
+        for container in programsResult['components']['non_spec_data']:
             addSubgroupContainer(structure, "General", container, [])
-
-        # TODO: handling non-spec data more generally
-        addSubgroupContainer(structure, "General", programsResult['components']['general_education'], [], "General Education")
-        for container in programsResult['components']['prescribed_electives']:
-            addSubgroupContainer(structure, "Prescribed Electives", programsResult['components']['prescribed_electives'], [])
 
     return {"structure": structure}
