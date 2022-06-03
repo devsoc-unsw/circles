@@ -36,8 +36,8 @@ const GridView = ({ isLoading, structure }) => {
                 key: courseCode,
                 title: subgroupStructure.courses[courseCode],
                 completed: courseCode in pastCourses,
-                // if undefined that means course not in term planner
-                unplanned: !courses[courseCode]?.plannedFor,
+                // must check null as could be undefined
+                unplanned: courses[courseCode]?.plannedFor === null,
               });
               newGridLayout[group][subgroup].sort(
                 (a, b) => a.key.localeCompare(b.key),
@@ -92,7 +92,7 @@ const GridView = ({ isLoading, structure }) => {
                       course.unplanned ? (
                         <Badge
                           count={(
-                            <Tooltip title="Course has not been planned">
+                            <Tooltip title="Course added but not planned">
                               <div className="unplannedBadge">
                                 !
                               </div>
