@@ -37,8 +37,8 @@ const rootReducer = combineReducers({
 
 // migration schema used to translate structure - return undefined to reset initialState
 const migrations = {
+  0: () => undefined,
   1: () => undefined,
-  // 1: () => undefined,
 };
 
 const persistConfig = {
