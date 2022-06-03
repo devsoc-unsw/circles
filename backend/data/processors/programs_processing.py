@@ -23,13 +23,7 @@ FACULTY_CODE_PATH = "data/final_data/facultyCodesProcessed.json"
 
 # Keys for each item in the data
 SPEC_KEY = "spec_data"
-NON_SPEC_KEY = "non_spec_data"
-GENERAL_EDUCATION_KEY = "general_education"
-CORE_COURSE_KEY = "core_courses"
-INFORMATION_RULE_KEY = "information_rules"
-LIMIT_RULE_KEY = "limit_rules"
-PRESCRIBED_ELECTIVE_KEY = "prescribed_electives"
-OTHER_KEY = "other"
+NON_SPEC_KEY = f"non_{SPEC_KEY}"
 
 # List of all program codes that include a computer science degree
 CS_PROGS = (
@@ -117,8 +111,9 @@ def add_program(processed_data: dict[str, dict], formatted_data: dict):
             add_component_data(processed_data, program_data, item)
 
         # Order dict alphabetically
-        program_data["components"][NON_SPEC_KEY] = order_dict_alphabetically(program_data["components"][NON_SPEC_KEY])
-        program_data["components"][SPEC_KEY] = order_dict_alphabetically(program_data["components"][SPEC_KEY])
+        program_data["components"] = order_dict_alphabetically(program_data["components"])
+        if SPEC_KEY in program_data["components"]:
+            program_data["components"][SPEC_KEY] = order_dict_alphabetically(program_data["components"][SPEC_KEY])
 
         code = program_data["code"]
         processed_data[code] = program_data
@@ -146,10 +141,7 @@ def initialise_program(program: dict) -> dict:
         "faculty": program["faculty"],
         "overview": program["overview"],
         "structure_summary": program["structure_summary"],
-        "components": {
-            SPEC_KEY: {},
-            NON_SPEC_KEY: {},
-        },
+        "components": {},
         "processing_warnings": [],
     }
 
@@ -300,26 +292,28 @@ def add_general_education_data(program_data: dict, item: dict) -> None:
     Adds general education data to the correct spot in program_data
     """
     # Double check we haven't somehow already added the general education stuff already
-    if GENERAL_EDUCATION_KEY in program_data["components"][NON_SPEC_KEY]:
+    program_data["components"].setdefault(NON_SPEC_KEY, [])
+    if any(req["type"] == "gened" for req in program_data["components"][NON_SPEC_KEY]):
         add_warning("Already added general education", program_data, item)
 
-    program_data["components"][NON_SPEC_KEY][GENERAL_EDUCATION_KEY] = {
+    program_data["components"][NON_SPEC_KEY].append({
+        "type": "gened",
         "notes": item["description"],
         "credits_to_complete": get_container_credits(program_data, item),
-    }
+    })
 
 
-def contains_spec(spec_data: dict[str, dict], new_spec: dict, spec_type_key: str) -> bool:
+def contains_spec(components: dict[str, dict], new_spec: dict, spec_type_key: str) -> bool:
     """
     Returns boolean based on whether spec_data
     contains new_spec under spec_type_key
     """
     # Check if there actually is a spec_type_key field
-    if spec_type_key not in spec_data:
+    if SPEC_KEY not in components or spec_type_key not in components[SPEC_KEY]:
         return False
 
     # Check if this is indeed a single degree (that has specialisations)
-    degrees = spec_data[spec_type_key].values()
+    degrees = components[SPEC_KEY][spec_type_key].values()
     if len(degrees) != 1:
         return False
 
@@ -361,7 +355,7 @@ def add_specialisation_data(processed_data: dict, program_data: dict, item: dict
             # We know this is a double degree
             single_degrees = [
                 val["title"] for val in processed_data.values()
-                if "/" not in val["title"] and contains_spec(val["components"][SPEC_KEY], new_data, spec_type_key)
+                if "/" not in val["title"] and contains_spec(val["components"], new_data, spec_type_key)
             ]
 
             if len(single_degrees) != 1:
@@ -371,6 +365,7 @@ def add_specialisation_data(processed_data: dict, program_data: dict, item: dict
                 program_name = single_degrees[0]
 
         # Add this specialisation (if it doesn't exist)
+        program_data["components"].setdefault(SPEC_KEY, {})
         spec_data = program_data["components"][SPEC_KEY]
         spec_data.setdefault(spec_type_key, {})
 
@@ -386,6 +381,28 @@ def add_specialisation_data(processed_data: dict, program_data: dict, item: dict
             spec_data[spec_type_key].update({program_name: new_data})
 
 
+def compute_levels(courses: dict[str, str]) -> list[int]:
+    """
+    From a dictionary of courses, figures out a list of ints
+    of all levels present. If any course is wildcarded,
+    then a list of numbers 1-9 is returned
+    """
+    # If any of the courses are less than 5 chars (ie they're just a number)
+    # then assume it's any level. Additionally, if the 5th char is wildcarded
+    # (with a '.'), assume it's any level
+    if any(
+        len(code) < 5 or code[4] == "."
+        for code in courses.keys()
+    ):
+        return [ i for i in range(1, 10) ]
+
+    # Everything has a number (that isn't wildcarded).
+    # Get all levels as a set to remove duplicates
+    return list(set(
+        [ int(code[4]) for code in courses.keys() ]
+    ))
+
+
 def add_core_course_data(program_data: dict, item: dict) -> None:
     """
     Adds core course data to the correct spot in program_data
@@ -393,12 +410,13 @@ def add_core_course_data(program_data: dict, item: dict) -> None:
     courses = {}
     add_course_tabs(program_data, courses, item)
 
-    program_data["components"][NON_SPEC_KEY].setdefault(CORE_COURSE_KEY, [])
-    program_data["components"][NON_SPEC_KEY][CORE_COURSE_KEY].append({
+    program_data["components"].setdefault(NON_SPEC_KEY, [])
+    program_data["components"][NON_SPEC_KEY].append({
+        "type": "core",
         "courses": order_dict_alphabetically(courses),
         "title": item["title"],
         "credits_to_complete": get_container_credits(program_data, item),
-        "levels": [], # TODO
+        "levels": compute_levels(courses),
         "notes": item["description"],
     })
 
@@ -407,8 +425,9 @@ def add_information_rule(program_data: dict, item: dict) -> None:
     """
     Adds information rule data to the correct spot in program_data
     """
-    program_data["components"][NON_SPEC_KEY].setdefault(INFORMATION_RULE_KEY, [])
-    program_data["components"][NON_SPEC_KEY][INFORMATION_RULE_KEY].append({
+    program_data["components"].setdefault(NON_SPEC_KEY, [])
+    program_data["components"][NON_SPEC_KEY].append({
+        "type": "info_rule",
         "title": item["title"],
         "notes": item["description"],
     })
@@ -435,12 +454,13 @@ def add_limit_rule(program_data: dict, item: dict) -> None:
     for requirement in requirements:
         process_any_requirement(program_data, courses, requirement, item)
 
-    program_data["components"][NON_SPEC_KEY].setdefault(LIMIT_RULE_KEY, [])
-    program_data["components"][NON_SPEC_KEY][LIMIT_RULE_KEY].append({
+    program_data["components"].setdefault(NON_SPEC_KEY, [])
+    program_data["components"][NON_SPEC_KEY].append({
+        "type": "limit_rule",
         "courses": order_dict_alphabetically(courses),
         "title": item["title"],
         "credits_to_complete": credits_to_complete,
-        "levels": [], # TODO
+        "levels": compute_levels(courses),
         "notes": notes,
     })
 
@@ -451,12 +471,13 @@ def add_prescribed_elective(program_data: dict, item: dict) -> None:
     """
     courses = {}
     add_course_tabs(program_data, courses, item)
-    program_data["components"][NON_SPEC_KEY].setdefault(PRESCRIBED_ELECTIVE_KEY, [])
-    program_data["components"][NON_SPEC_KEY][PRESCRIBED_ELECTIVE_KEY].append({
+    program_data["components"].setdefault(NON_SPEC_KEY, [])
+    program_data["components"][NON_SPEC_KEY].append({
+        "type": "prescribed_elective",
         "courses": order_dict_alphabetically(courses),
         "title": item["title"],
         "credits_to_complete": get_container_credits(program_data, item),
-        "levels": [], # TODO: What is this?
+        "levels": compute_levels(courses),
         "notes": item["description"],
     })
 
@@ -467,12 +488,13 @@ def add_other(program_data: dict, item: dict) -> None:
     """
     courses = {}
     add_course_tabs(program_data, courses, item)
-    program_data["components"][NON_SPEC_KEY].setdefault(OTHER_KEY, [])
-    program_data["components"][NON_SPEC_KEY][OTHER_KEY].append({
+    program_data["components"].setdefault(NON_SPEC_KEY, [])
+    program_data["components"][NON_SPEC_KEY].append({
+        "type": "other",
         "courses": order_dict_alphabetically(courses),
         "title": item["title"],
         "credits_to_complete": get_container_credits(program_data, item),
-        "levels": [], # TODO: What is this?
+        "levels": compute_levels(courses),
         "notes": item["description"],
     })
 
