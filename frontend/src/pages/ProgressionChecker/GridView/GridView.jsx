@@ -37,8 +37,7 @@ const GridView = ({ isLoading, structure }) => {
                 title: subgroupStructure.courses[courseCode],
                 completed: courseCode in pastCourses,
                 // if undefined that means course not in term planner
-                unplanned: courses[courseCode] === undefined
-                  ? false : courses[courseCode].plannedFor === null,
+                unplanned: !courses[courseCode]?.plannedFor,
               });
               newGridLayout[group][subgroup].sort(
                 (a, b) => a.key.localeCompare(b.key),
@@ -54,7 +53,7 @@ const GridView = ({ isLoading, structure }) => {
                   key: courseCode,
                   title: courseData.title,
                   completed: courseCode in pastCourses,
-                  unplanned: courseData.plannedFor === null,
+                  unplanned: !courseData.plannedFor,
                 });
               }
             });
@@ -95,7 +94,7 @@ const GridView = ({ isLoading, structure }) => {
                           count={(
                             <Tooltip title="Course has not been planned">
                               <div className="unplannedBadge">
-                                Unplanned
+                                !
                               </div>
                             </Tooltip>
                           )}
