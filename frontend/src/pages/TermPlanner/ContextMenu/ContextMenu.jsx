@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect } from "react";
 import { Modal, message } from "antd";
 import { useSelector, useDispatch } from "react-redux";
@@ -61,11 +62,7 @@ const ContextMenu = ({ code, plannedFor }) => {
     return message.success("Mark Updated");
   };
 
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      handleConfirmEditMark(markInputBuf);
-    }
-  };
+
 
   const [markUpdatedQueued, setMarkUpdateQueued] = useState(false);
   useEffect(() => {
@@ -76,7 +73,6 @@ const ContextMenu = ({ code, plannedFor }) => {
   });
 
   const queueEditMark = () => {
-    setMarkUpdateQueued(true);
   };
 
   const handleCancelEditMark = () => {
@@ -104,21 +100,11 @@ const ContextMenu = ({ code, plannedFor }) => {
           View Info
         </Item>
       </Menu>
-      <Modal
-        title={`Edit Mark: ${code}`}
-        visible={isEditMarkVisible}
-        onOk={() => handleConfirmEditMark(markInputBuf)}
-        onCancel={handleCancelEditMark}
-        width="300px"
-      >
-        <EditMarksModal
-          courseCode={code}
-          handleKeyDown={handleKeyDown}
-          letterGrades={validLetterGrades}
-          setInputBuffer={setMarkInputBuf}
-          handleConfirm={queueEditMark}
-        />
-      </Modal>
+      <EditMarksModal
+        code={code}
+        isVisible={isEditMarkVisible}
+        setIsVisible={setIsEditMarkVisible}
+      />
     </>
   );
 };
