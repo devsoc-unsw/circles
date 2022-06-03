@@ -47,6 +47,7 @@ const AddToPlannerButton = () => {
         warnings: [],
         handbookNote: course.handbook_note,
         isAccurate: course.is_accurate,
+        mark: null,
       },
     };
     dispatch(addToUnplanned(data));

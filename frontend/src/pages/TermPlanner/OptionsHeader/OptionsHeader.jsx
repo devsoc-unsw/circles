@@ -1,5 +1,5 @@
 import React from "react";
-import { Tooltip, Popconfirm } from "antd";
+import { Tooltip, Popconfirm, Switch } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
@@ -15,7 +15,7 @@ import { unhideAllYears, unscheduleAll } from "../../../reducers/plannerSlice";
 import "./index.less";
 
 const OptionsHeader = ({
-  plannerRef, isAllEmpty, setSuppress, suppress,
+  plannerRef, isAllEmpty, setSuppress, suppress, setShowMarks,
 }) => {
   const theme = useSelector((state) => state.theme);
   const { areYearsHidden } = useSelector((state) => state.planner);
@@ -106,24 +106,33 @@ const OptionsHeader = ({
           </Tooltip>
         </div>
       </div>
-
-      <Tippy
-        content={<HelpMenu />}
-        moveTransition="transform 0.2s ease-out"
-        interactive
-        trigger="click"
-        theme={theme === "light" ? "light" : "dark"}
-        maxWidth="80vh"
-        placement="bottom-start"
-      >
+      <div className="right-buttons">
         <div>
-          <Tooltip title="Help">
-            <button type="button" className="settings-button help-button">
-              <QuestionCircleOutlined className="settings-icon" />
-            </button>
-          </Tooltip>
+          <Switch
+            className="cs-toggle-locked"
+            onChange={() => setShowMarks((prev) => !prev)}
+            checkedChildren="marks shown"
+            unCheckedChildren="marks hidden"
+          />
         </div>
-      </Tippy>
+        <Tippy
+          content={<HelpMenu />}
+          moveTransition="transform 0.2s ease-out"
+          interactive
+          trigger="click"
+          theme={theme === "light" ? "light" : "dark"}
+          maxWidth="80vh"
+          placement="bottom-start"
+        >
+          <div>
+            <Tooltip title="Help">
+              <button type="button" className="settings-button help-button">
+                <QuestionCircleOutlined className="settings-icon" />
+              </button>
+            </Tooltip>
+          </div>
+        </Tippy>
+      </div>
     </div>
   );
 };
