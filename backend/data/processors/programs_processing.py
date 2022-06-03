@@ -23,6 +23,7 @@ FACULTY_CODE_PATH = "data/final_data/facultyCodesProcessed.json"
 
 # Keys for each item in the data
 SPEC_KEY = "spec_data"
+NON_SPEC_KEY = "non_spec_data"
 GENERAL_EDUCATION_KEY = "general_education"
 CORE_COURSE_KEY = "core_courses"
 INFORMATION_RULE_KEY = "information_rules"
@@ -88,23 +89,33 @@ def process_prg_data() -> None:
     Read in INPUT_PATH, process them and write to OUTPUT_PATH
     """
     data = read_data(INPUT_PATH)
+    single_degrees = [ val for val in data.values() if "/" not in val["title"] ]
+    double_degrees = [ val for val in data.values() if "/" in val["title"] ]
 
+    # Process single degrees then double degrees
     processed_data = {}
-    for program_code, formatted_data in data.items():
-        # Get program specific data
-        if not TESTING_MODE or program_code in TEST_PROGS:
-            program_data = initialise_program(formatted_data)
+    for formatted_data in single_degrees:
+        add_program(processed_data, formatted_data)
+    for formatted_data in double_degrees:
+        add_program(processed_data, formatted_data)
 
-            # Loop through items in curriculum structure and add to the program data
-            for item in formatted_data["structure"]:
-                add_component_data(program_data, item)
-
-            # Order dict alphabetically
-            OrderedDict(sorted(program_data["components"].items(), key=lambda t: t[0]))
-
-            code = program_data["code"]
-            processed_data[code] = program_data
     write_data(processed_data, OUTPUT_PATH)
+
+
+def add_program(processed_data, formatted_data):
+    # Get program specific data
+    if not TESTING_MODE or formatted_data["code"] in TEST_PROGS:
+        program_data = initialise_program(formatted_data)
+
+        # Loop through items in curriculum structure and add to the program data
+        for item in formatted_data["structure"]:
+            add_component_data(processed_data, program_data, item)
+
+        # Order dict alphabetically
+        OrderedDict(sorted(program_data["components"].items(), key=lambda t: t[0]))
+
+        code = program_data["code"]
+        processed_data[code] = program_data
 
 
 def initialise_program(program: dict) -> dict:
@@ -123,17 +134,19 @@ def initialise_program(program: dict) -> dict:
         "structure_summary": program["structure_summary"],
         "components": {
             SPEC_KEY: {},
-            CORE_COURSE_KEY: [],
-            INFORMATION_RULE_KEY: [],
-            LIMIT_RULE_KEY: [],
-            PRESCRIBED_ELECTIVE_KEY: [],
-            OTHER_KEY: [],
+            NON_SPEC_KEY: {
+                CORE_COURSE_KEY: [],
+                INFORMATION_RULE_KEY: [],
+                LIMIT_RULE_KEY: [],
+                PRESCRIBED_ELECTIVE_KEY: [],
+                OTHER_KEY: [],
+            },
         },
         "processing_warnings": [],
     }
 
 
-def add_component_data(program_data: dict, item: dict, program_name = None, is_optional = False) -> None:
+def add_component_data(processed_data: dict, program_data: dict, item: dict, program_name = None, is_optional = False) -> None:
     """
     Adds data within a given item to a given program recursively
     """
@@ -152,7 +165,7 @@ def add_component_data(program_data: dict, item: dict, program_name = None, is_o
     if is_general_education(item):
         add_general_education_data(program_data, item)
     if is_specialisation(item):
-        add_specialisation_data(program_data, item, program_name, is_optional)
+        add_specialisation_data(processed_data, program_data, item, program_name, is_optional)
     if is_core_course(item):
         add_core_course_data(program_data, item)
         return
@@ -168,9 +181,9 @@ def add_component_data(program_data: dict, item: dict, program_name = None, is_o
 
     # Recurse further down through the container and the relationship list
     for next in item["relationship"]:
-        add_component_data(program_data, next, program_name = program_name, is_optional = is_optional)
+        add_component_data(processed_data, program_data, next, program_name = program_name, is_optional = is_optional)
     for next in item["container"]:
-        add_component_data(program_data, next, program_name = program_name, is_optional = is_optional)
+        add_component_data(processed_data, program_data, next, program_name = program_name, is_optional = is_optional)
 
 
 def find_program_name(program_data: dict, item: dict) -> str:
@@ -203,9 +216,6 @@ def find_program_name(program_data: dict, item: dict) -> str:
         for container in item["container"]:
             if program_name in container["title"]:
                 return program_name
-
-    # Couldn't find a match :(
-    add_warning(f"Couldn't find any of names ({') or ('.join(program_names)})", program_data, item)
 
 
 def is_substring(needle: str, haystack: str) -> bool:
@@ -276,16 +286,32 @@ def add_general_education_data(program_data: dict, item: dict) -> None:
     Adds general education data to the correct spot in program_data
     """
     # Double check we haven't somehow already added the general education stuff already
-    if GENERAL_EDUCATION_KEY in program_data["components"]:
+    if GENERAL_EDUCATION_KEY in program_data["components"][NON_SPEC_KEY]:
         add_warning("Already added general education", program_data, item)
 
-    program_data["components"][GENERAL_EDUCATION_KEY] = {
+    program_data["components"][NON_SPEC_KEY][GENERAL_EDUCATION_KEY] = {
         "notes": item["description"],
         "credits_to_complete": get_container_credits(program_data, item),
     }
 
 
-def add_specialisation_data(program_data: dict, item: dict, program_name: str, is_optional: bool) -> None:
+def contains_spec(spec_data: dict, new_spec: dict, spec_type_key: str) -> bool:
+    if spec_type_key not in spec_data:
+        return False
+
+    degrees = spec_data[spec_type_key].values()
+    if len(degrees) != 1:
+        return False
+
+    spec = list(degrees)[0]
+
+    try:
+        return spec == new_spec
+    except KeyError:
+        return False
+
+
+def add_specialisation_data(processed_data: dict, program_data: dict, item: dict, program_name: str, is_optional: bool) -> None:
     """
     Adds specialisation data to the correct spot in program_data given a field and name of program
     """
@@ -310,6 +336,23 @@ def add_specialisation_data(program_data: dict, item: dict, program_name: str, i
         # Figure out if it's optional
         spec_type_key = f"optional_{spec_type}" if is_optional else spec_type
 
+        # If we don't have a program name yet, try to find one
+        if program_name is None:
+            # We know this is a double degree
+            single_degrees = [
+                val["title"] for val in processed_data.values()
+                if (
+                    "/" not in val["title"] and
+                    contains_spec(val["components"][SPEC_KEY], new_data, spec_type_key)
+                )
+            ]
+
+            if len(single_degrees) != 1:
+                # Couldn't find program name :(
+                add_warning(f"Couldn't find any of the program names for double degree", program_data, item)
+            else:
+                program_name = single_degrees[0]
+
         # Add this specialisation (if it doesn't exist)
         spec_data = program_data["components"][SPEC_KEY]
         spec_data.setdefault(spec_type_key, {})
@@ -333,7 +376,7 @@ def add_core_course_data(program_data: dict, item: dict) -> None:
     courses = {}
     add_course_tabs(program_data, courses, item)
 
-    program_data["components"][CORE_COURSE_KEY].append({
+    program_data["components"][NON_SPEC_KEY][CORE_COURSE_KEY].append({
         "courses": courses,
         "title": item["title"],
         "credits_to_complete": get_container_credits(program_data, item),
@@ -346,7 +389,7 @@ def add_information_rule(program_data: dict, item: dict) -> None:
     """
     Adds information rule data to the correct spot in program_data
     """
-    program_data["components"][INFORMATION_RULE_KEY].append({
+    program_data["components"][NON_SPEC_KEY][INFORMATION_RULE_KEY].append({
         "title": item["title"],
         "notes": item["description"],
     })
@@ -373,7 +416,7 @@ def add_limit_rule(program_data: dict, item: dict) -> None:
     for requirement in requirements:
         process_any_requirement(program_data, courses, requirement, item)
 
-    program_data["components"][LIMIT_RULE_KEY].append({
+    program_data["components"][NON_SPEC_KEY][LIMIT_RULE_KEY].append({
         "courses": courses,
         "title": item["title"],
         "credits_to_complete": credits_to_complete,
@@ -388,7 +431,7 @@ def add_prescribed_elective(program_data: dict, item: dict) -> None:
     """
     courses = {}
     add_course_tabs(program_data, courses, item)
-    program_data["components"][PRESCRIBED_ELECTIVE_KEY].append({
+    program_data["components"][NON_SPEC_KEY][PRESCRIBED_ELECTIVE_KEY].append({
         "courses": courses,
         "title": item["title"],
         "credits_to_complete": get_container_credits(program_data, item),
@@ -403,7 +446,7 @@ def add_other(program_data: dict, item: dict) -> None:
     """
     courses = {}
     add_course_tabs(program_data, courses, item)
-    program_data["components"][OTHER_KEY].append({
+    program_data["components"][NON_SPEC_KEY][OTHER_KEY].append({
         "courses": courses,
         "title": item["title"],
         "credits_to_complete": get_container_credits(program_data, item),
