@@ -445,38 +445,40 @@ def weight_course(course: tuple, search_term: str, structure: dict,
     weight = fuzzy_match(course, search_term)
     code, _ = course
 
-    for major_code in majors:
-        for structKey in structure.keys():
-            if "Major" not in structKey:
-                continue
-            for key in structure[structKey].items():
-                if isinstance(key[1], dict):
-                    for c in key[1].get("courses", {}):
-                        if code in c:
-                            if "Core" in key[0]:
-                                weight += 28
-                            else:
-                                weight += 14
-                            break
+    for structKey in structure.keys():
+        if "Major" not in structKey:
+            continue
+        for key in structure[structKey].items():
+            if isinstance(key[1], dict):
+                for c in key[1].get("courses", {}):
+                    if code in c:
+                        if re.match("core|prescribed", key[0], flags=re.IGNORECASE):
+                            weight += 28
+                        else:
+                            weight += 14
+                        break
 
+    for major_code in majors:
         if str(code).startswith(major_code[:4]):
             weight += 14
+            break
+
+    for structKey in structure.keys():
+        if "Minor" not in structKey:
+            continue
+        for key in structure[structKey].items():
+            if isinstance(key[1], dict):
+                for c in key[1].get("courses", {}):
+                    if code in c:
+                        if re.match("core|prescribed", key[0], flags=re.IGNORECASE):
+                            weight += 14
+                        else:
+                            weight += 7
+                        break
 
     for minor_code in minors:
-        for structKey in structure.keys():
-            if "Minor" not in structKey:
-                continue
-            for key in structure[structKey].items():
-                if isinstance(key[1], dict):
-                    for c in key[1].get("courses", {}):
-                        if code in c:
-                            if "Core" in key[0]:
-                                weight += 14
-                            else:
-                                weight += 7
-                            break
-
         if str(code).startswith(minor_code[:4]):
             weight += 7
+            break
 
     return weight
