@@ -33,7 +33,7 @@ OTHER_KEY = "other"
 
 # List of all program codes that include a computer science degree
 CS_PROGS = (
-    "3673", # Ecomonics major is optional, no general education, program constraints(?), UNSW Business Electives
+    "3673", # NOTE: Ecomonics major is optional, no general education, program constraints(?), UNSW Business Electives
     "3674",
     "3778",
     "3781",
@@ -102,7 +102,11 @@ def process_prg_data() -> None:
     write_data(processed_data, OUTPUT_PATH)
 
 
-def add_program(processed_data, formatted_data):
+def add_program(processed_data: dict[str, dict], formatted_data: dict):
+    """
+    Adds program to processed_data if it's not in testing mode
+    OR if we're in testing mode and it's in the testing list
+    """
     # Get program specific data
     if not TESTING_MODE or formatted_data["code"] in TEST_PROGS:
         program_data = initialise_program(formatted_data)
@@ -124,7 +128,7 @@ def initialise_program(program: dict) -> dict:
     """
     duration = re.search(r"(\d)", program["duration"]).group(1)
 
-    return { # TODO: Document the structure
+    return {
         "title": program["title"],
         "code": program["code"],
         "duration": int(duration),
@@ -134,19 +138,13 @@ def initialise_program(program: dict) -> dict:
         "structure_summary": program["structure_summary"],
         "components": {
             SPEC_KEY: {},
-            NON_SPEC_KEY: {
-                CORE_COURSE_KEY: [],
-                INFORMATION_RULE_KEY: [],
-                LIMIT_RULE_KEY: [],
-                PRESCRIBED_ELECTIVE_KEY: [],
-                OTHER_KEY: [],
-            },
+            NON_SPEC_KEY: {},
         },
         "processing_warnings": [],
     }
 
 
-def add_component_data(processed_data: dict, program_data: dict, item: dict, program_name = None, is_optional = False) -> None:
+def add_component_data(processed_data: dict[str, dict], program_data: dict, item: dict, program_name = None, is_optional = False) -> None:
     """
     Adds data within a given item to a given program recursively
     """
@@ -186,15 +184,21 @@ def add_component_data(processed_data: dict, program_data: dict, item: dict, pro
         add_component_data(processed_data, program_data, next, program_name = program_name, is_optional = is_optional)
 
 
-def find_program_name(program_data: dict, item: dict) -> str:
+def split_program_names(title: str) -> list[str]:
+    """
+    Splits the title into it's single degrees and gets rid of white space
+    """
+    program_names = title.split("/")
+    return list(map(lambda s: s.strip(), program_names))
+
+
+def find_program_name(program_data: dict, item: dict) -> str | None:
     """
     Find the program name (if possible).
     Returns a string with the program name if found,
     else returns None
     """
-    # Split the title into it's single degrees and get rid of white space
-    program_names = program_data["title"].split("/")
-    program_names = list(map(lambda s: s.strip(), program_names))
+    program_names = split_program_names(program_data["title"])
 
     # Check if we even need to bother searching
     if len(program_names) == 1:
@@ -295,32 +299,37 @@ def add_general_education_data(program_data: dict, item: dict) -> None:
     }
 
 
-def contains_spec(spec_data: dict, new_spec: dict, spec_type_key: str) -> bool:
+def contains_spec(spec_data: dict[str, dict], new_spec: dict, spec_type_key: str) -> bool:
+    """
+    Returns boolean based on whether spec_data
+    contains new_spec under spec_type_key
+    """
+    # Check if there actually is a spec_type_key field
     if spec_type_key not in spec_data:
         return False
 
+    # Check if this is indeed a single degree (that has specialisations)
     degrees = spec_data[spec_type_key].values()
     if len(degrees) != 1:
         return False
 
+    # Finally, check if this spec is same as the new spec
     spec = list(degrees)[0]
+    return spec == new_spec
 
-    try:
-        return spec == new_spec
-    except KeyError:
-        return False
-
-
+# TODO: Tidy
 def add_specialisation_data(processed_data: dict, program_data: dict, item: dict, program_name: str, is_optional: bool) -> None:
     """
     Adds specialisation data to the correct spot in program_data given a field and name of program
     """
     for spec_type in ("major", "minor", "honours"):
+        # Filter out all items that aren't spec_type
         spec_type_items = list(filter(
             lambda r: r["academic_item_type"] is not None and r["academic_item_type"]["value"] == spec_type,
             item["relationship"]
         ))
 
+        # Found nothing...
         if not spec_type_items:
             continue
 
@@ -341,14 +350,11 @@ def add_specialisation_data(processed_data: dict, program_data: dict, item: dict
             # We know this is a double degree
             single_degrees = [
                 val["title"] for val in processed_data.values()
-                if (
-                    "/" not in val["title"] and
-                    contains_spec(val["components"][SPEC_KEY], new_data, spec_type_key)
-                )
+                if "/" not in val["title"] and contains_spec(val["components"][SPEC_KEY], new_data, spec_type_key)
             ]
 
             if len(single_degrees) != 1:
-                # Couldn't find program name :(
+                # Didn't find program name :(
                 add_warning(f"Couldn't find any of the program names for double degree", program_data, item)
             else:
                 program_name = single_degrees[0]
@@ -376,6 +382,7 @@ def add_core_course_data(program_data: dict, item: dict) -> None:
     courses = {}
     add_course_tabs(program_data, courses, item)
 
+    program_data["components"][NON_SPEC_KEY].setdefault(CORE_COURSE_KEY, [])
     program_data["components"][NON_SPEC_KEY][CORE_COURSE_KEY].append({
         "courses": courses,
         "title": item["title"],
@@ -389,6 +396,7 @@ def add_information_rule(program_data: dict, item: dict) -> None:
     """
     Adds information rule data to the correct spot in program_data
     """
+    program_data["components"][NON_SPEC_KEY].setdefault(INFORMATION_RULE_KEY, [])
     program_data["components"][NON_SPEC_KEY][INFORMATION_RULE_KEY].append({
         "title": item["title"],
         "notes": item["description"],
@@ -416,6 +424,7 @@ def add_limit_rule(program_data: dict, item: dict) -> None:
     for requirement in requirements:
         process_any_requirement(program_data, courses, requirement, item)
 
+    program_data["components"][NON_SPEC_KEY].setdefault(LIMIT_RULE_KEY, [])
     program_data["components"][NON_SPEC_KEY][LIMIT_RULE_KEY].append({
         "courses": courses,
         "title": item["title"],
@@ -431,6 +440,7 @@ def add_prescribed_elective(program_data: dict, item: dict) -> None:
     """
     courses = {}
     add_course_tabs(program_data, courses, item)
+    program_data["components"][NON_SPEC_KEY].setdefault(PRESCRIBED_ELECTIVE_KEY, [])
     program_data["components"][NON_SPEC_KEY][PRESCRIBED_ELECTIVE_KEY].append({
         "courses": courses,
         "title": item["title"],
@@ -446,6 +456,7 @@ def add_other(program_data: dict, item: dict) -> None:
     """
     courses = {}
     add_course_tabs(program_data, courses, item)
+    program_data["components"][NON_SPEC_KEY].setdefault(OTHER_KEY, [])
     program_data["components"][NON_SPEC_KEY][OTHER_KEY].append({
         "courses": courses,
         "title": item["title"],
@@ -457,7 +468,7 @@ def add_other(program_data: dict, item: dict) -> None:
 
 def add_course_tabs(program_data: dict, courses: dict, item: dict) -> None:
     """
-    Adds a single given drop down tab to the core courses requirements
+    (Recursively) adds an entire drop down tab of courses requirements
     """
     if item["dynamic_relationship"]:
         for course in item["dynamic_relationship"]:
@@ -625,7 +636,6 @@ def get_container_credits(item: dict) -> int:
 def get_string_credits(_: dict, notes: str) -> int:
     """
     Search for UOC conditions in the notes section of a limit rule
-    TODO: Is this method robust enough?
     """
     search_result = re.search(r"(\d+) *UOC", notes, flags = re.IGNORECASE)
     if search_result is not None:
