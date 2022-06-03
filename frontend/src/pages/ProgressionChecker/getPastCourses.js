@@ -1,4 +1,4 @@
-import { getMostRecentPastTerm } from "../TermPlanner/validateTermPlanner";
+import { getMostRecentPastTerm } from "../TermPlanner/utils";
 
 const getPastCourses = (years, startYear, courses) => {
   const { Y: recentYear, T: recentTerm } = getMostRecentPastTerm(startYear);
