@@ -99,6 +99,7 @@ def process_prg_data() -> None:
     for formatted_data in double_degrees:
         add_program(processed_data, formatted_data)
 
+    processed_data = order_dict_alphabetically(processed_data)
     write_data(processed_data, OUTPUT_PATH)
 
 
@@ -116,10 +117,19 @@ def add_program(processed_data: dict[str, dict], formatted_data: dict):
             add_component_data(processed_data, program_data, item)
 
         # Order dict alphabetically
-        OrderedDict(sorted(program_data["components"].items(), key=lambda t: t[0]))
+        program_data["components"][NON_SPEC_KEY] = order_dict_alphabetically(program_data["components"][NON_SPEC_KEY])
+        program_data["components"][SPEC_KEY] = order_dict_alphabetically(program_data["components"][SPEC_KEY])
 
         code = program_data["code"]
         processed_data[code] = program_data
+
+
+def order_dict_alphabetically(dict: dict) -> OrderedDict:
+    """
+    Takes in dictionary and returns ordered dictionary sorted
+    alphabetically by the 'key' strings
+    """
+    return OrderedDict(sorted(dict.items(), key=lambda t: t[0]))
 
 
 def initialise_program(program: dict) -> dict:
@@ -335,6 +345,7 @@ def add_specialisation_data(processed_data: dict, program_data: dict, item: dict
 
         new_data = {
             "notes": item["description"],
+            "is_optional": is_optional,
             "specs": {},
         }
         for specialisation in spec_type_items:
@@ -343,7 +354,7 @@ def add_specialisation_data(processed_data: dict, program_data: dict, item: dict
                 new_data["specs"][code] = specialisation["academic_item_name"]
 
         # Figure out if it's optional
-        spec_type_key = f"optional_{spec_type}" if is_optional else spec_type
+        spec_type_key = spec_type if spec_type[-1] == "s" else f"{spec_type}s"
 
         # If we don't have a program name yet, try to find one
         if program_name is None:
@@ -384,7 +395,7 @@ def add_core_course_data(program_data: dict, item: dict) -> None:
 
     program_data["components"][NON_SPEC_KEY].setdefault(CORE_COURSE_KEY, [])
     program_data["components"][NON_SPEC_KEY][CORE_COURSE_KEY].append({
-        "courses": courses,
+        "courses": order_dict_alphabetically(courses),
         "title": item["title"],
         "credits_to_complete": get_container_credits(program_data, item),
         "levels": [], # TODO
@@ -426,7 +437,7 @@ def add_limit_rule(program_data: dict, item: dict) -> None:
 
     program_data["components"][NON_SPEC_KEY].setdefault(LIMIT_RULE_KEY, [])
     program_data["components"][NON_SPEC_KEY][LIMIT_RULE_KEY].append({
-        "courses": courses,
+        "courses": order_dict_alphabetically(courses),
         "title": item["title"],
         "credits_to_complete": credits_to_complete,
         "levels": [], # TODO
@@ -442,7 +453,7 @@ def add_prescribed_elective(program_data: dict, item: dict) -> None:
     add_course_tabs(program_data, courses, item)
     program_data["components"][NON_SPEC_KEY].setdefault(PRESCRIBED_ELECTIVE_KEY, [])
     program_data["components"][NON_SPEC_KEY][PRESCRIBED_ELECTIVE_KEY].append({
-        "courses": courses,
+        "courses": order_dict_alphabetically(courses),
         "title": item["title"],
         "credits_to_complete": get_container_credits(program_data, item),
         "levels": [], # TODO: What is this?
@@ -458,7 +469,7 @@ def add_other(program_data: dict, item: dict) -> None:
     add_course_tabs(program_data, courses, item)
     program_data["components"][NON_SPEC_KEY].setdefault(OTHER_KEY, [])
     program_data["components"][NON_SPEC_KEY][OTHER_KEY].append({
-        "courses": courses,
+        "courses": order_dict_alphabetically(courses),
         "title": item["title"],
         "credits_to_complete": get_container_credits(program_data, item),
         "levels": [], # TODO: What is this?
@@ -646,7 +657,6 @@ def get_string_credits(_: dict, notes: str) -> int:
 def add_warning(w: Exception | str, program_data: dict, item: dict) -> None:
     warning = f"{w} in program {program_data['title']} ({program_data['code']}) in section titled '{item['title']}'"
     program_data["processing_warnings"].append(warning)
-    print(f"Warning: {warning}")
 
 
 if __name__ == "__main__":
