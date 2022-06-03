@@ -6006,28 +6006,10 @@
         ],
         "broke at": "Index 7, 2270"
     },
-    "COMM3900": {
-        "condition": {
-            "original": "Pre-requisite: Completed a minimum of 108 UOC (including First Year core), on Good standing and completed Career Accelerator Essentials (COMM6000).<br/>It is strongly recommended that students only complete this course within their final 2 terms of study.<br/><br/>",
-            "processed": "COMM6000 && 108UOC && L1 CORES",
-            "handbook_note": "Students must be in good academic standing."
-        },
-        "tokens": [
-            "(",
-            "COMM6000",
-            "&&",
-            "108UOC",
-            "&&",
-            "L1",
-            "CORES",
-            ")"
-        ],
-        "broke at": "Index 6, CORES"
-    },
     "COMP3901": {
         "condition": {
             "original": "Prerequisite: 80+ WAM in COMP, SENG or BINF courses, completion of all first and second year core requirements a CSE program, and agreement from a suitable CSE academic supervisor.<br/><br/>",
-            "processed": "80WAM in (COMP || SENG || BINF) && L1 CORES && L2 CORES",
+            "processed": "80WAM in (COMP || SENG || BINF) && CORES in L1 && CORES in L2",
             "handbook_note": "You must obtain agreement from a suitable CSE academic supervisor to enrol in this course."
         },
         "tokens": [
@@ -6042,11 +6024,13 @@
             "BINF",
             ")",
             "&&",
+            "CORES",
+            "in",
             "L1",
-            "CORES",
             "&&",
-            "L2",
             "CORES",
+            "in",
+            "L2",
             ")"
         ],
         "broke at": "Index 1, 80WAM"
@@ -6054,7 +6038,7 @@
     "COMP3902": {
         "condition": {
             "original": "Prerequisite: 80+ WAM in COMP, SENG or BINF courses, completion of all first and second year core requirements a CSE program, and agreement from a suitable CSE academic supervisor.<br/><br/>",
-            "processed": "80WAM in (COMP || SENG || BINF) && L1 CORES && L2 CORES",
+            "processed": "80WAM in (COMP || SENG || BINF) && CORES in L1 && CORES in L2",
             "handbook_note": "You must obtain agreement from a suitable CSE academic supervisor to enrol in this course."
         },
         "tokens": [
@@ -6069,11 +6053,13 @@
             "BINF",
             ")",
             "&&",
+            "CORES",
+            "in",
             "L1",
-            "CORES",
             "&&",
-            "L2",
             "CORES",
+            "in",
+            "L2",
             ")"
         ],
         "broke at": "Index 1, 80WAM"
@@ -13195,39 +13181,6 @@
             ")"
         ],
         "broke at": "Index 2, in"
-    },
-    "MUSC4101": {
-        "condition": {
-            "original": "Prerequisite: Level 1, 2 and 3 core Music courses and enrolment in a Music single or dual degree program; or 48 UoC overall including MUSC1602 or MUSC1604, and MUSC2116 and enrolment in a Music major in an Arts program<br/><br/>",
-            "processed": "(L1 CORES && L2 CORES && L3 CORES) || (48UOC && (MUSC1602 || MUSC1604) && MUSC2116)"
-        },
-        "tokens": [
-            "(",
-            "(",
-            "L1",
-            "CORES",
-            "&&",
-            "L2",
-            "CORES",
-            "&&",
-            "L3",
-            "CORES",
-            ")",
-            "||",
-            "(",
-            "48UOC",
-            "&&",
-            "(",
-            "MUSC1602",
-            "||",
-            "MUSC1604",
-            ")",
-            "&&",
-            "MUSC2116",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 2, L1"
     },
     "MUSC4102": {
         "condition": {

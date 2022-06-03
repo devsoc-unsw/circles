@@ -3418,7 +3418,7 @@
     },
     "COMM3900": {
         "original": "Pre-requisite: Completed a minimum of 108 UOC (including First Year core), on Good standing and completed Career Accelerator Essentials (COMM6000).<br/>It is strongly recommended that students only complete this course within their final 2 terms of study.<br/><br/>",
-        "processed": "COMM6000 && 108UOC && L1 CORES",
+        "processed": "COMM6000 && 108UOC && CORES in L1",
         "handbook_note": "Students must be in good academic standing."
     },
     "COMM3999": {
@@ -3548,12 +3548,12 @@
     },
     "COMP3901": {
         "original": "Prerequisite: 80+ WAM in COMP, SENG or BINF courses, completion of all first and second year core requirements a CSE program, and agreement from a suitable CSE academic supervisor.<br/><br/>",
-        "processed": "80WAM in (COMP || SENG || BINF) && L1 CORES && L2 CORES",
+        "processed": "80WAM in (COMP || SENG || BINF) && CORES in L1 && CORES in L2",
         "handbook_note": "You must obtain agreement from a suitable CSE academic supervisor to enrol in this course."
     },
     "COMP3902": {
         "original": "Prerequisite: 80+ WAM in COMP, SENG or BINF courses, completion of all first and second year core requirements a CSE program, and agreement from a suitable CSE academic supervisor.<br/><br/>",
-        "processed": "80WAM in (COMP || SENG || BINF) && L1 CORES && L2 CORES",
+        "processed": "80WAM in (COMP || SENG || BINF) && CORES in L1 && CORES in L2",
         "handbook_note": "You must obtain agreement from a suitable CSE academic supervisor to enrol in this course."
     },
     "COMP4121": {
@@ -8892,7 +8892,7 @@
     },
     "MUSC4101": {
         "original": "Prerequisite: Level 1, 2 and 3 core Music courses and enrolment in a Music single or dual degree program; or 48 UoC overall including MUSC1602 or MUSC1604, and MUSC2116 and enrolment in a Music major in an Arts program<br/><br/>",
-        "processed": "(L1 CORES && L2 CORES && L3 CORES) || (48UOC && (MUSC1602 || MUSC1604) && MUSC2116)"
+        "processed": "(CORES in L1 && CORES in L2 && CORES in L3) || (48UOC && (MUSC1602 || MUSC1604) && MUSC2116)"
     },
     "MUSC4102": {
         "original": "Prerequisite: MUSC4101, and enrolment in a Music program. Or 48 uoc overall including MUSC1602 or MUSC1604, and MUSC2116 and enrolment in a Music major in an Arts program<br/><br/>",

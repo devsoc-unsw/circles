@@ -41,7 +41,7 @@ def MUSC_4101():
 
     # TODO: add proper warnings/handbook notes/conditions about enrolment in the correct program - since the enrolment requirements change depending on how you satisfy the prereq I'm not sure how to best go about this
 
-    return "(L1 CORES && L2 CORES && L3 CORES) || (48UOC && (MUSC1602 || MUSC1604) && MUSC2116)"
+    return "(CORES in L1 && CORES in L2 && CORES in L3) || (48UOC && (MUSC1602 || MUSC1604) && MUSC2116)"
 
 
 if __name__ == "__main__":
