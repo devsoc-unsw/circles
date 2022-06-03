@@ -8,7 +8,7 @@ import { DeleteFilled, InfoCircleFilled, EditFilled } from "@ant-design/icons";
 import { FaRegCalendarTimes } from "react-icons/fa";
 import { addTab } from "../../../reducers/courseTabsSlice";
 import { removeCourse, unschedule, updateCourseMark } from "../../../reducers/plannerSlice";
-import EditMarks from "../EditMarks";
+import EditMarksModal from "../EditMarksModal";
 
 import "./index.less";
 
@@ -111,7 +111,7 @@ const ContextMenu = ({ code, plannedFor }) => {
         onCancel={handleCancelEditMark}
         width="300px"
       >
-        <EditMarks
+        <EditMarksModal
           handleKeyDown={handleKeyDown}
           letterGrades={validLetterGrades}
           setInputBuffer={setMarkInputBuf}

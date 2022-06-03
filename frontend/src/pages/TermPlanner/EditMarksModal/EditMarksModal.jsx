@@ -3,7 +3,7 @@ import { Button, Input } from "antd";
 
 import "./index.less";
 
-const EditMarks = ({
+const EditMarksModal = ({
   letterGrades, handleConfirm, setInputBuffer, handleKeyDown,
 }) => {
   const handleInputChange = (e) => {
@@ -40,4 +40,4 @@ const EditMarks = ({
   );
 };
 
-export default EditMarks;
+export default EditMarksModal;
