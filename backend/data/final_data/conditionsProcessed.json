@@ -8892,7 +8892,7 @@
     },
     "MUSC4101": {
         "original": "Prerequisite: Level 1, 2 and 3 core Music courses and enrolment in a Music single or dual degree program; or 48 UoC overall including MUSC1602 or MUSC1604, and MUSC2116 and enrolment in a Music major in an Arts program<br/><br/>",
-        "processed": "(CORES in L1 && CORES in L2 && CORES in L3) || (48UOC && (MUSC1602 || MUSC1604) && MUSC2116)"
+        "processed": "(CORES in (L1 || L2 || L3)) || (48UOC && (MUSC1602 || MUSC1604) && MUSC2116)"
     },
     "MUSC4102": {
         "original": "Prerequisite: MUSC4101, and enrolment in a Music program. Or 48 uoc overall including MUSC1602 or MUSC1604, and MUSC2116 and enrolment in a Music major in an Arts program<br/><br/>",
