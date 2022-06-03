@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -16,35 +15,10 @@ const EditMarksModal = ({
     useSelector((state) => state.planner.courses[code].mark),
   );
 
-  /**
-   * 2 - Move the useSelector here for marks
-   * 1 - Move the Modal to here
-   * 3 - move the
-   *
-   * */
-  /**
-   * - [x] showEditMark
-   * - [x] validLetterGrade
-   * - [x] handleLetterGrade
-   * - [] handleMarkUpdateQueue
-   * - [] handleConfirm
-   * - [] handleKeyDown
-   * - [] handleCancel
-   */
-
   const letterGrades = ["SY", "PS", "CR", "DN", "HD"];
 
-  console.log("regex:")
-  
-  
   const handleConfirmEditMark = (mark) => {
     const attemptedMark = ` ${mark}`.replaceAll(" ", "").toUpperCase();
-    // console.log(attemptedMark.match(/[A-Z]*/));
-    // console.log(attemptedMark.match(/[0-9]*/));
-    console.log(/[A-Z]+/.test(attemptedMark));
-    console.log(/[0-9]+/.test(attemptedMark));
-    // console.log((parseFloat(attemptedMark).isNaN) && !letterGrades.includes(attemptedMark));
-    // console.log(parseFloat(attemptedMark) < 0 || parseFloat(attemptedMark) > 100);
 
     if (
       // Has lettergrades - invalid
@@ -58,6 +32,7 @@ const EditMarksModal = ({
       code,
       mark: attemptedMark,
     }));
+    setMarkValue("");
     setIsVisible(false);
     return message.success("Mark Updated");
   };
