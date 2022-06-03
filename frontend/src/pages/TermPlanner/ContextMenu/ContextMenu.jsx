@@ -7,7 +7,7 @@ import { DeleteFilled, InfoCircleFilled, EditFilled } from "@ant-design/icons";
 import { FaRegCalendarTimes } from "react-icons/fa";
 import { addTab } from "../../../reducers/courseTabsSlice";
 import { removeCourse, unschedule } from "../../../reducers/plannerSlice";
-import EditMarksModal from "../EditMarksModal";
+import EditMarkModal from "../EditMarkModal";
 
 import "./index.less";
 
@@ -58,7 +58,7 @@ const ContextMenu = ({ code, plannedFor }) => {
           View Info
         </Item>
       </Menu>
-      <EditMarksModal
+      <EditMarkModal
         code={code}
         isVisible={isEditMarkVisible}
         setIsVisible={setIsEditMarkVisible}

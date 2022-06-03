@@ -7,7 +7,7 @@ import { updateCourseMark } from "../../../reducers/plannerSlice";
 
 import "./index.less";
 
-const EditMarksModal = ({
+const EditMarkModal = ({
   code, isVisible, setIsVisible,
 }) => {
   const dispatch = useDispatch();
@@ -21,7 +21,6 @@ const EditMarksModal = ({
     const attemptedMark = ` ${mark}`.replaceAll(" ", "").toUpperCase();
 
     if (
-      // Has lettergrades - invalid
       ((/[A-Z]+/.test(attemptedMark)) && !letterGrades.includes(attemptedMark))
       || (parseFloat(attemptedMark) < 0 || parseFloat(attemptedMark) > 100)
       || ((/[A-Z]+/.test(attemptedMark)) && (/[0-9]+/.test(attemptedMark)))
@@ -97,4 +96,4 @@ const EditMarksModal = ({
   );
 };
 
-export default EditMarksModal;
+export default EditMarkModal;
