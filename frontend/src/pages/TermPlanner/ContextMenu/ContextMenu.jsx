@@ -112,6 +112,7 @@ const ContextMenu = ({ code, plannedFor }) => {
         width="300px"
       >
         <EditMarksModal
+          courseCode={code}
           handleKeyDown={handleKeyDown}
           letterGrades={validLetterGrades}
           setInputBuffer={setMarkInputBuf}
