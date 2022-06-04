@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { PlusOutlined, StopOutlined } from "@ant-design/icons";
 import { Button } from "antd";
-import axiosRequest from "axios";
+import axiosRequest from "config/axios";
 import { addToUnplanned, removeCourses } from "reducers/plannerSlice";
 import prepareUserPayload from "../utils";
 
