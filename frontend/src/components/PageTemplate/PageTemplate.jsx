@@ -1,6 +1,6 @@
-import { Layout } from "antd";
 import React from "react";
-import FeedbackButton from "../FeedbackButton";
+import { Layout } from "antd";
+import FeedbackButton from "components/FeedbackButton";
 
 const { Content } = Layout;
 

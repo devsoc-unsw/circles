@@ -1,19 +1,19 @@
 import React, { useCallback, useEffect, useState } from "react";
-import axios from "axios";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { LockOutlined, PlusOutlined, WarningOutlined } from "@ant-design/icons";
 import {
-  Tooltip, Menu, Button, Typography,
+  Button, Menu, Tooltip, Typography,
 } from "antd";
-import { motion, AnimatePresence } from "framer-motion/dist/framer-motion";
-import { WarningOutlined, PlusOutlined, LockOutlined } from "@ant-design/icons";
-import axiosRequest from "../../../axios";
+import axios from "axios";
+import { AnimatePresence, motion } from "framer-motion/dist/framer-motion";
+import axiosRequest from "config/axios";
+import useMediaQuery from "hooks/useMediaQuery";
+import { setCourses } from "reducers/coursesSlice";
+import { addTab } from "reducers/courseTabsSlice";
+import { addToUnplanned } from "reducers/plannerSlice";
 import prepareUserPayload from "../utils";
 import LoadingSkeleton from "./LoadingSkeleton";
-import { setCourses } from "../../../reducers/coursesSlice";
-import { addTab } from "../../../reducers/courseTabsSlice";
-import { addToUnplanned } from "../../../reducers/plannerSlice";
 import "./index.less";
-import useMediaQuery from "../../../hooks/useMediaQuery";
 
 const { SubMenu } = Menu;
 

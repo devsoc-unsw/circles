@@ -1,20 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  Tag, Typography, Space,
+  Space,
+  Tag, Typography,
 } from "antd";
 import { motion } from "framer-motion/dist/framer-motion";
+import infographic from "assets/infographicFontIndependent.svg";
+import Collapsible from "components/Collapsible";
+import CourseTag from "components/CourseTag";
+import ProgressBar from "components/ProgressBar";
+import axiosRequest from "config/axios";
+import { TERM, TIMETABLE_API_URL } from "config/constants";
+import { setCourse } from "reducers/coursesSlice";
 import prepareUserPayload from "../utils";
-import infographic from "../../../assets/infographicFontIndependent.svg";
-import axiosRequest from "../../../axios";
-import { setCourse } from "../../../reducers/coursesSlice";
 import AddToPlannerButton from "./AddToPlannerButton";
 import CourseAttribute from "./CourseAttribute";
 import LoadingSkeleton from "./LoadingSkeleton";
-import CourseTag from "../../../components/CourseTag";
-import Collapsible from "../../../components/Collapsible";
-import ProgressBar from "../../../components/ProgressBar";
-import { TERM, TIMETABLE_API_URL } from "../../../constants";
 import "./index.less";
 
 const { Title, Text } = Typography;

@@ -1,15 +1,15 @@
-import { combineReducers } from "redux";
 import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers } from "redux";
 import {
-  persistReducer,
   createMigrate,
+  persistReducer,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import coursesReducer from "./reducers/coursesSlice";
-import courseTabsReducer from "./reducers/courseTabsSlice";
-import degreeReducer from "./reducers/degreeSlice";
-import plannerReducer from "./reducers/plannerSlice";
-import themeReducer from "./reducers/themeSlice";
+import coursesReducer from "reducers/coursesSlice";
+import courseTabsReducer from "reducers/courseTabsSlice";
+import degreeReducer from "reducers/degreeSlice";
+import plannerReducer from "reducers/plannerSlice";
+import themeReducer from "reducers/themeSlice";
 import { REDUX_PERSIST_VERSION } from "./constants";
 
 const rootReducer = combineReducers({

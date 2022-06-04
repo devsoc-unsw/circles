@@ -16,12 +16,14 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "simple-import-sort"
     ],
     "rules": {
         "no-case-declarations": ["off"],
         "no-param-reassign": ["error", { "ignorePropertyModificationsFor": [ "state" ] }], // redux toolkit
         "no-nested-ternary": ["off"],
+        "import/order": "off", // for simple-import-sort plugin
         "import/no-extraneous-dependencies": ["off"], // a problem with how tippy is used - ill leave it to an FE person to figure out
         "react/jsx-props-no-spreading": ["off"],
         "react/jsx-one-expression-per-line": ["off"],
@@ -35,6 +37,32 @@
         "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
         "no-unused-vars": ["error", { "argsIgnorePattern": "^_$" }],
         "react/function-component-definition": ["error", { "namedComponents": "arrow-function", "unnamedComponents": "arrow-function" }],
-        "react/no-unstable-nested-components": ["error", { "allowAsProps": true }]
+        "react/no-unstable-nested-components": ["error", { "allowAsProps": true }],
+        "simple-import-sort/imports": ["error", {
+            "groups": [
+                [
+                    // react based packages
+                    "^react",
+                    // packages
+                    "^@?\\w",
+                    // absolute imports
+                    "^(assets|components|config|hooks|pages|reducers)",
+                    // absolute path or other imports that is not matched by the other groups
+                    "^",
+                    // relative imports
+                    "^\\.",
+                    // side effect imports
+                    "^\\u0000"
+                  ]
+            ]
+        }],
+        "simple-import-sort/exports": ["error"]
+    },
+    "settings": {
+        "import/resolver": {
+          "node": {
+            "moduleDirectory": ["node_modules", "src/"]
+          }
+        }
     }
 }

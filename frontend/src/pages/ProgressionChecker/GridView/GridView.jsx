@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import {
-  Typography,
-  Skeleton,
-  Button,
-  Badge,
-  Tooltip,
-} from "antd";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import "./index.less";
+import {
+  Badge,
+  Button,
+  Skeleton,
+  Tooltip,
+  Typography,
+} from "antd";
 import getPastCourses from "../getPastCourses";
+import "./index.less";
 
 const GridView = ({ isLoading, structure }) => {
   const { Title } = Typography;

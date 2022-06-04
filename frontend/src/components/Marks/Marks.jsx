@@ -1,5 +1,4 @@
 import React from "react-redux";
-// import KebabMenu from "../KebabMenu";
 import { Typography } from "antd";
 import "./index.less";
 

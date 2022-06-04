@@ -1,14 +1,13 @@
 import React from "react";
-import { Typography } from "antd";
 import { Draggable } from "react-beautiful-dnd";
+import { useContextMenu } from "react-contexify";
 import { useSelector } from "react-redux";
 import ReactTooltip from "react-tooltip";
-import { useContextMenu } from "react-contexify";
-import { WarningOutlined, InfoCircleOutlined } from "@ant-design/icons";
-import useMediaQuery from "../../../hooks/useMediaQuery";
+import { InfoCircleOutlined, WarningOutlined } from "@ant-design/icons";
+import { Typography } from "antd";
+import Marks from "components/Marks";
+import useMediaQuery from "hooks/useMediaQuery";
 import ContextMenu from "../ContextMenu";
-import Marks from "../../../components/Marks";
-
 import "./index.less";
 
 const DraggableCourse = ({ code, index, showMarks }) => {

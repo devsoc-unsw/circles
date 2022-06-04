@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Typography } from "antd";
 import { RightOutlined } from "@ant-design/icons";
+import { Typography } from "antd";
 import "./index.less";
 
 const { Title } = Typography;

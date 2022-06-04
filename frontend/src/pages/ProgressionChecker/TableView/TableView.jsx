@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { Typography, Table, Skeleton } from "antd";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import "./index.less";
+import { Skeleton, Table, Typography } from "antd";
 import getPastCourses from "../getPastCourses";
+import "./index.less";
 
 const TableView = ({ isLoading, structure }) => {
   const { Title } = Typography;

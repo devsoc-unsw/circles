@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import {
-  Typography,
-  Divider,
-  Button,
-  Radio,
-} from "antd";
-import "tippy.js/dist/tippy.css";
-import "tippy.js/themes/light.css";
-import {
   exportComponentAsJPEG,
   exportComponentAsPNG,
 } from "react-component-export-image";
+import {
+  Button,
+  Divider,
+  Radio,
+  Typography,
+} from "antd";
+import "tippy.js/dist/tippy.css";
+import "tippy.js/themes/light.css";
 import "./index.less";
 
 const SaveMenu = ({ plannerRef }) => {
