@@ -69,18 +69,17 @@ def getPrograms():
                     "example": {
                         "majors": {
                             "Computer Science": {
-                                "COMPS1": "Computer Science (Embedded Systems)",
-                                "COMPJ1": "Computer Science (Programming Languages)",
-                                "COMPE1": "Computer Science (eCommerce Systems)",
-                                "COMPA1": "Computer Science",
-                                "COMPN1": "Computer Science (Computer Networks)",
-                                "COMPI1": "Computer Science (Artificial Intelligence)",
-                                "COMPD1": "Computer Science (Database Systems)",
-                                "COMPY1": "Computer Science (Security Engineering)",
-                            },
-                            "Commerce": {
-                                "FINSA1": "Finance",
-                                "ACCTA1": "Accounting",
+                                "specs": {
+                                    "COMPS1": "Computer Science (Embedded Systems)",
+                                    "COMPJ1": "Computer Science (Programming Languages)",
+                                    "COMPE1": "Computer Science (eCommerce Systems)",
+                                    "COMPA1": "Computer Science",
+                                    "COMPN1": "Computer Science (Computer Networks)",
+                                    "COMPI1": "Computer Science (Artificial Intelligence)",
+                                    "COMPD1": "Computer Science (Database Systems)",
+                                    "COMPY1": "Computer Science (Security Engineering)",
+                                },
+                                "note": "COMPA1 is the default stream, and will be used if no other stream is selected."
                             }
                         }
                     }
@@ -115,17 +114,16 @@ def getMajors(programCode: str):
                     "example": {
                         "minors": {
                             "Computer Science": { 
-                                "INFSA2": "<name of minor>",
-                                "ACCTA2": "<name of minor>",
-                                "PSYCM2": "<name of minor>",
-                                "MARKA2": "<name of minor>",
-                                "FINSA2": "<name of minor>",
-                                "MATHC2": "<name of minor>",
+                                "specs": {
+                                    "INFSA2": "<name of minor>",
+                                    "ACCTA2": "<name of minor>",
+                                    "PSYCM2": "<name of minor>",
+                                    "MARKA2": "<name of minor>",
+                                    "FINSA2": "<name of minor>",
+                                    "MATHC2": "<name of minor>",
+                                },
+                                "notes": "Optional minors available include the following. If you complete a minor of 30 UOC, you will also need to take 6 UOC of free electives.",
                             },
-                            "Science": {
-                                "CODEE2": "<name of minor>",
-                                "...": "<name of minor>",
-                            }
                         }
                     }
                 }
@@ -169,12 +167,9 @@ def addSubgroupContainer(structure: dict, type: str, container: dict, exceptions
     if container.get("type") is not None and "rule" in container.get("type"):
         return []
 
-    if container.get("credits_to_complete") is None:
-        return []
-
     structure[type][title] = {}
     item = structure[type][title]
-    item["UOC"] = container["credits_to_complete"]
+    item["UOC"] = container.get("credits_to_complete") if container.get("credits_to_complete") is not None else 0
     item["courses"] = {}
 
     if container.get("courses") is None:

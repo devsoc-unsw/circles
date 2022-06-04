@@ -9,7 +9,7 @@ def test_sanity():
     for minor in minors.values():
         for key, value in minor["specs"].items():
             assert re.match(r"[A-Z]{5}[0-9]{1}", key)
-            assert type(value) is str
+            assert isinstance(value, str)
 
 def test_nonexistant():
     x = requests.get('http://127.0.0.1:8000/programs/getMinors/0000')
