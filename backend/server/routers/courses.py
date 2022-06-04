@@ -174,12 +174,10 @@ def search(userData: UserData, search_string: str):
     if ALL_COURSES is None:
         ALL_COURSES = fetch_all_courses()
 
-    # TODO: can you have a minor without a major selected?
-    #       will wreak havoc on the argument order with *specialisations
-    #       currently this is enforced during setup but will need to
-    #       make sure that this is true for all degrees not just comp sci
     specialisations = list(userData.specialisations.keys())
-    structure = getStructure(userData.program, *specialisations)['structure']
+    majors = list(filter(lambda x: x.endswith("1"), specialisations))
+    minors = list(filter(lambda x: x.endswith("2"), specialisations))
+    structure = getStructure(userData.program, "+".join(majors), "+".join(minors))['structure']
 
     top_results = sorted(ALL_COURSES.items(), reverse=True,
                          key=lambda course: fuzzy_match(course, search_string)
@@ -187,8 +185,9 @@ def search(userData: UserData, search_string: str):
     weighted_results = sorted(top_results, reverse=True,
                               key=lambda course: weight_course(course,
                                                                search_string,
-                                                               structure,
-                                                               *specialisations)
+                                                               structure, 
+                                                               majors,
+                                                               minors)
                               )[:30]
 
     return dict(weighted_results)
@@ -440,48 +439,46 @@ def fuzzy_match(course: Tuple[str, str], search_term: str):
                sum(fuzz.partial_ratio(title.lower(), word)
                        for word in search_term.split(' ')))
 
-def weight_course(course: Tuple[str, str], search_term: str, structure: dict,
-                  major_code: Optional[str] = None, minor_code: Optional[str] = None):
-    """
-    Gives the course a weighting based on the relevance to the user's degree
-    Arguments:
-        - code: tuple(course_code, course_title)
-    """
+def weight_course(course: tuple, search_term: str, structure: dict,
+                  majors: list, minors: list):
+    """ Gives the course a weighting based on the relevance to the user's degree """
     weight = fuzzy_match(course, search_term)
     code, _ = course
 
-    if major_code is not None:
-        for structKey in structure.keys():
-            if "Major" not in structKey:
-                continue
-            for key in structure[structKey].items():
-                if isinstance(key[1], dict):
-                    for c in key[1].get("courses", {}):
-                        if code in c:
-                            if "Core" in key[0]:
-                                weight += 20
-                            else:
-                                weight += 10
-                            break
+    for structKey in structure.keys():
+        if "Major" not in structKey:
+            continue
+        for key in structure[structKey].items():
+            if isinstance(key[1], dict):
+                for c in key[1].get("courses", {}):
+                    if code in c:
+                        if re.match("core|prescribed", key[0], flags=re.IGNORECASE):
+                            weight += 28
+                        else:
+                            weight += 14
+                        break
 
+    for major_code in majors:
         if str(code).startswith(major_code[:4]):
             weight += 14
+            break
 
-    if minor_code is not None:
-        for structKey in structure.keys():
-            if "Minor" not in structKey:
-                continue
-            for key in structure[structKey].items():
-                if isinstance(key[1], dict):
-                    for c in key[1].get("courses", {}):
-                        if code in c:
-                            if "Core" in key[0]:
-                                weight += 10
-                            else:
-                                weight += 5
-                            break
+    for structKey in structure.keys():
+        if "Minor" not in structKey:
+            continue
+        for key in structure[structKey].items():
+            if isinstance(key[1], dict):
+                for c in key[1].get("courses", {}):
+                    if code in c:
+                        if re.match("core|prescribed", key[0], flags=re.IGNORECASE):
+                            weight += 14
+                        else:
+                            weight += 7
+                        break
 
+    for minor_code in minors:
         if str(code).startswith(minor_code[:4]):
             weight += 7
+            break
 
     return weight

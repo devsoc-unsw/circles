@@ -4,7 +4,7 @@ export const initialState = {
   programCode: "",
   programName: "",
   majors: [],
-  minor: "",
+  minors: [],
 };
 
 const degreeSlice = createSlice({
@@ -22,15 +22,19 @@ const degreeSlice = createSlice({
       const index = state.majors.indexOf(action.payload);
       if (index !== -1) state.majors.splice(index, 1);
     },
-    setMinor: (state, action) => {
-      state.minor = action.payload;
+    addMinor: (state, action) => {
+      state.minors.push(action.payload);
+    },
+    removeMinor: (state, action) => {
+      const index = state.minors.indexOf(action.payload);
+      if (index !== -1) state.minors.splice(index, 1);
     },
     resetDegree: () => initialState,
   },
 });
 
 export const {
-  setProgram, setMinor, resetDegree, addMajor, removeMajor,
+  setProgram, resetDegree, addMajor, removeMajor, addMinor, removeMinor,
 } = degreeSlice.actions;
 
 export default degreeSlice.reducer;

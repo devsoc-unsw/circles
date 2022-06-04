@@ -120,53 +120,6 @@
             }
         ]
     },
-    "ACTLE1": {
-        "programs": [
-            "3586",
-            "3587"
-        ],
-        "name": "Actuarial Risk Management and Analytics",
-        "type": "major",
-        "UOC": 48,
-        "code": "ACTLE1",
-        "course_constraints": [],
-        "curriculum": [
-            {
-                "courses": {
-                    "ACTL3142": "Statistical Machine Learning for Risk and Actuarial Applications",
-                    "RISK2001": "Fundamentals of Risk and Risk Management"
-                },
-                "title": "Core Courses",
-                "credits_to_complete": 12,
-                "core": true,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "RISK2002": "Risk Analytics",
-                    "ACTL4303": "Asset-Liability Management",
-                    "ACTL3301": "Quantitative Risk Management",
-                    "ACTL4001": "Actuarial Theory and Practice A",
-                    "ACTL3192": "Retirement Saving and Spending Over the Lifecycle",
-                    "ACTL4002": "Actuarial Theory and Practice B",
-                    "ACTL4305": "Actuarial Data Analytic Applications",
-                    "RISK3003": "Risk Decision Analytics",
-                    "ACTL3191": "Superannuation and Retirement Benefits",
-                    "ACTL3141": "Modelling and Prediction of Life and Health Related Risks",
-                    "RISK3009": "Risk Management Strategies",
-                    "ACTL3162": "General Insurance Techniques",
-                    "ACTL3182": "Asset-Liability and Derivative Models",
-                    "ACTL4302": "Risk and Capital Management"
-                },
-                "title": "Prescribed Electives",
-                "credits_to_complete": 36,
-                "core": false,
-                "levels": [],
-                "notes": ""
-            }
-        ]
-    },
     "AEROAH": {
         "programs": [
             "3707"
@@ -529,228 +482,6 @@
             }
         ]
     },
-    "ASIAB2": {
-        "programs": [
-            "3444",
-            "3409",
-            "3558",
-            "3453",
-            "3454",
-            "3447",
-            "3543",
-            "3438"
-        ],
-        "name": "Asian Studies",
-        "type": "minor",
-        "UOC": 24,
-        "code": "ASIAB2",
-        "course_constraints": [],
-        "curriculum": [
-            {
-                "courses": {
-                    "ARTS3639": "Japan in Popular Culture",
-                    "ARTS3217": "History of Modern China: Contested Visions",
-                    "ARTS3216": "Chinese Media and Communication",
-                    "ARTS3640": "Japan and Korea: Cultures in Conflict",
-                    "ARTS3883": "Personhood in Asia",
-                    "ARTS3218": "Japanese History: Modern Miracles and Mythologies",
-                    "ARTS3220": "Architecture and Urbanism in Asia",
-                    "ARTS3212": "Contemporary India Through Bollywood: Politics, Society and Culture"
-                },
-                "title": "Level 3 Prescribed Electives",
-                "credits_to_complete": 6,
-                "core": false,
-                "levels": [
-                    3
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ARTS2455": "Gender in China",
-                    "ARTS2458": "Along the Silk Road: Conquerors, Traders and Explorers",
-                    "ARTS2909": "Gender in South Asia and Southeast Asia",
-                    "ARTS2212": "Southeast Asia",
-                    "ARTS2815": "Politics and Security in the Indo-Pacific",
-                    "ARTS2633": "A Cultural Survey of Japan: From Gods to Gadgets",
-                    "ARTS2213": "Asian Popular Culture",
-                    "ARTS2663": "Korea and Japan: Chinese Cultural Transmission",
-                    "ARTS2211": "East Asia",
-                    "ARTS2662": "Korea at a Glance",
-                    "ARTS2908": "Sex and Power in Early Modern China and Japan",
-                    "ARTS2210": "Modern India: Violence and Nonviolence in Colonial South Asia, 1750-1947",
-                    "ARTS2464": "Chinese Ideas of Beauty and Erotica: Ancient to Modern",
-                    "ARTS2363": "Chinese Philosophy"
-                },
-                "title": "Level 2 Prescribed Electives",
-                "credits_to_complete": 6,
-                "core": false,
-                "levels": [
-                    2
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ARTS1210": "Concepts of Asia",
-                    "ARTS1211": "Australia's Asian Context"
-                },
-                "title": "Level 1 Core Courses",
-                "credits_to_complete": 12,
-                "core": true,
-                "levels": [
-                    1
-                ],
-                "notes": ""
-            }
-        ]
-    },
-    "ATSIC2": {
-        "programs": [
-            "3444",
-            "3409",
-            "3453",
-            "3454",
-            "3543",
-            "3438"
-        ],
-        "name": "Indigenous Studies",
-        "type": "minor",
-        "UOC": 24,
-        "code": "ATSIC2",
-        "course_constraints": [
-            {
-                "title": "ARTS/EDUCATION (SECONDARY) STUDENTS",
-                "description": "The minor in Indigenous Studies (24 UOC) is not available to Bachelor of Arts/Education (Secondary) students. To be eligible for the approved teaching specialisation, Bachelor of Arts/Education (Secondary) students must complete either the Indigenous Studies Major (60 UOC) or Indigenous Studies (Extended) Minor (36 UOC)."
-            }
-        ],
-        "curriculum": [
-            {
-                "courses": {
-                    "ATSI3002": "Gendered Identities in Indigenous Australia",
-                    "ARTS3241": "Environmental Justice",
-                    "ATSI3017": "Indigenous Histories and the Colonial World",
-                    "ATSI3003": "Indigenous Cultural Heritage and the Environment",
-                    "ATSI3005": "Race, Colonialism and Whiteness"
-                },
-                "title": "Level 3 Prescribed Electives",
-                "credits_to_complete": 6,
-                "core": false,
-                "levels": [
-                    3
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ATSI1011": "Indigenous Australia",
-                    "ATSI1012": "Aboriginal Sydney"
-                },
-                "title": "Level 1 Core Courses",
-                "credits_to_complete": 12,
-                "core": true,
-                "levels": [
-                    1
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ATSI2012": "Contemporary Issues in Indigenous Politics",
-                    "ATSI2011": "Indigenous Australian Political History",
-                    "ATSI2015": "The Science of Indigenous Knowledges",
-                    "ATSI2004": "Popular Culture of Indigenous Australia",
-                    "ATSI2003": "Indigenous Material Culture-Objects and Their Journey",
-                    "ATSI2014": "Indigenous People and Policy"
-                },
-                "title": "Level 2 Prescribed Electives",
-                "credits_to_complete": 6,
-                "core": false,
-                "levels": [
-                    2
-                ],
-                "notes": ""
-            }
-        ]
-    },
-    "AUSTB2": {
-        "programs": [
-            "3444",
-            "3409",
-            "3453",
-            "3454",
-            "3543",
-            "3438"
-        ],
-        "name": "Australian Studies",
-        "type": "minor",
-        "UOC": 24,
-        "code": "AUSTB2",
-        "course_constraints": [
-            {
-                "title": "ARTS/EDUCATION (SECONDARY) STUDENTS",
-                "description": "The 24 UOC minor in Australian Studies can be combined with a major in History as preparation for a double first teaching specialisation"
-            }
-        ],
-        "curriculum": [
-            {
-                "courses": {
-                    "ARTS1190": "Sydney: History, Landscapes, People"
-                },
-                "title": "Level 1 Core Courses",
-                "credits_to_complete": 6,
-                "core": true,
-                "levels": [
-                    1
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ATSI3017": "Indigenous Histories and the Colonial World",
-                    "ARTS3874": "Culture and Human Rights",
-                    "BIOS3161": "Life in Arid Lands",
-                    "ARTS3292": "Migrants and Refugees in Australian History",
-                    "ARTS3279": "Inequality in Australia: A History",
-                    "ARTS3875": "Decolonising Research Methods",
-                    "ARTS3814": "Australian Foreign Policy",
-                    "ARTS3131": "Australian Drama"
-                },
-                "title": "Level 3 Prescribed Electives",
-                "credits_to_complete": 6,
-                "core": false,
-                "levels": [
-                    3
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ARTS2062": "Australian Cinema",
-                    "ARTS2845": "Sex, Human Rights and Justice",
-                    "ATSI2004": "Popular Culture of Indigenous Australia",
-                    "ARTS2870": "Citizens, Action and Dissent",
-                    "ARTS2873": "Doing Fieldwork: Ethnography in Place",
-                    "ATSI2011": "Indigenous Australian Political History",
-                    "ARTS2270": "The Australian Experiment and the Nineteenth-Century World",
-                    "BEES6601": "An Introduction to the Sydney Environment",
-                    "PLAN2122": "History, Heritage and the Built Environment",
-                    "ARTS2031": "Australian Literature",
-                    "ARTS2271": "Inventing Modern Australia: 1900 to Now",
-                    "ATSI2012": "Contemporary Issues in Indigenous Politics",
-                    "GEOS2711": "Australian Climate and Vegetation",
-                    "GEOS2641": "Urban Environments"
-                },
-                "title": "Level 2 Prescribed Electives",
-                "credits_to_complete": 6,
-                "core": false,
-                "levels": [
-                    2
-                ],
-                "notes": ""
-            }
-        ]
-    },
     "BINFAH": {
         "programs": [
             "3707"
@@ -951,6 +682,43 @@
                 "levels": [
                     2
                 ],
+                "notes": ""
+            }
+        ]
+    },
+    "BINFBH": {
+        "programs": [
+            "4515"
+        ],
+        "name": "Computational Biology",
+        "type": "honours",
+        "UOC": 48,
+        "code": "BINFBH",
+        "course_constraints": [],
+        "curriculum": [
+            {
+                "courses": {
+                    "COMP9": "any level 9 Computer Science course",
+                    "BINF4": "any level 4 Bioinformatics course",
+                    "COMP4": "any level 4 Computer Science course",
+                    "COMP6": "any level 6 Computer Science course"
+                },
+                "title": "Coursework",
+                "credits_to_complete": 30,
+                "core": false,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "COMP4961": "Computer Science Thesis A",
+                    "COMP4962": "Computer Science Thesis B",
+                    "COMP4963": "Computer Science Thesis C"
+                },
+                "title": "Thesis",
+                "credits_to_complete": 18,
+                "core": false,
+                "levels": [],
                 "notes": ""
             }
         ]
@@ -2466,6 +2234,42 @@
             }
         ]
     },
+    "COMPAH": {
+        "programs": [
+            "4515"
+        ],
+        "name": "Computer Science",
+        "type": "honours",
+        "UOC": 48,
+        "code": "COMPAH",
+        "course_constraints": [],
+        "curriculum": [
+            {
+                "courses": {
+                    "COMP4962": "Computer Science Thesis B",
+                    "COMP4961": "Computer Science Thesis A",
+                    "COMP4963": "Computer Science Thesis C"
+                },
+                "title": "Thesis",
+                "credits_to_complete": 18,
+                "core": false,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "COMP6": "any level 6 Computer Science course",
+                    "COMP9": "any level 9 Computer Science course",
+                    "COMP4": "any level 4 Computer Science course"
+                },
+                "title": "Coursework",
+                "credits_to_complete": 30,
+                "core": false,
+                "levels": [],
+                "notes": ""
+            }
+        ]
+    },
     "COMPBH": {
         "programs": [
             "3707"
@@ -3102,108 +2906,6 @@
             }
         ]
     },
-    "COMPZ1": {
-        "programs": [
-            "3959"
-        ],
-        "name": "Computational Data Science",
-        "type": "major",
-        "UOC": 66,
-        "code": "COMPZ1",
-        "course_constraints": [],
-        "curriculum": [
-            {
-                "courses": {
-                    "COMP9418": "Advanced Topics in Statistical Machine Learning",
-                    "COMP4418": "Knowledge Representation and Reasoning",
-                    "COMP4121": "Advanced Algorithms",
-                    "MATH3161": "Optimization",
-                    "COMP9318": "Data Warehousing and Data Mining",
-                    "ECON3206": "Financial Econometrics",
-                    "COMP9319": "Web Data Compression and Search",
-                    "MATH2011": "Several Variable Calculus",
-                    "COMP3411": "Artificial Intelligence",
-                    "MATH2111": "Higher Several Variable Calculus",
-                    "ECON3123": "Organisational Economics",
-                    "ECON2209": "Business Forecasting",
-                    "ECON2101": "Microeconomics 2",
-                    "MATH2871": "Data Management for Statistical Analysis",
-                    "ECON3208": "Applied Econometric Methods",
-                    "MATH2831": "Linear Models",
-                    "INFS3603": "Introduction to Business Analytics",
-                    "ACTL3142": "Statistical Machine Learning for Risk and Actuarial Applications",
-                    "COMP9315": "Database Systems Implementation",
-                    "ECON2111": "Introduction to Economic Development",
-                    "MATH3821": "Statistical Modelling and Computing",
-                    "COMP6714": "Information Retrieval and Web Search",
-                    "COMP6771": "Advanced C++ Programming",
-                    "MATH3871": "Bayesian Inference and Computation",
-                    "MARK3054": "Marketing Analytics and Big Data",
-                    "MARK3085": "Digital Marketing and Web Analytics",
-                    "MATH2931": "Higher Linear Models",
-                    "ECON2104": "Applied Macroeconomics",
-                    "INFS1602": "Digital Transformation in Business",
-                    "ACTL3141": "Modelling and Prediction of Life and Health Related Risks",
-                    "COMP6841": "Extended Security Engineering and Cyber Security",
-                    "MARK1012": "Marketing Fundamentals",
-                    "ECON3130": "Real Estate Economics and Public Policy",
-                    "ECON3107": "Economics of Finance",
-                    "ECON2206": "Introductory Econometrics ",
-                    "MATH3411": "Information, Codes and Ciphers",
-                    "MATH3041": "Mathematical Modelling for Real World Systems",
-                    "MATH5836": "Data Mining and its Business Applications",
-                    "ECON1102": "Macroeconomics 1",
-                    "COMP6441": "Security Engineering and Cyber Security"
-                },
-                "title": "Prescribed Electives",
-                "credits_to_complete": 18,
-                "core": false,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "COMP1511": "Programming Fundamentals",
-                    "MATH1081": "Discrete Mathematics",
-                    "MATH1131": "Mathematics 1A"
-                },
-                "title": "Level 1 Core Courses",
-                "credits_to_complete": 18,
-                "core": true,
-                "levels": [
-                    1
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "COMP2521": "Data Structures and Algorithms",
-                    "COMP2041": "Software Construction: Techniques and Tools"
-                },
-                "title": "Level 2 Core Courses",
-                "credits_to_complete": 12,
-                "core": true,
-                "levels": [
-                    2
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "COMP3121": "Algorithms and Programming Techniques",
-                    "COMP9313": "Big Data Management",
-                    "COMP9417": "Machine Learning and Data Mining"
-                },
-                "title": "Level 3 Core Courses",
-                "credits_to_complete": 18,
-                "core": true,
-                "levels": [
-                    3
-                ],
-                "notes": ""
-            }
-        ]
-    },
     "CVENAH": {
         "programs": [
             "3707"
@@ -3725,97 +3427,6 @@
             }
         ]
     },
-    "ECONL1": {
-        "programs": [
-            "3959"
-        ],
-        "name": "Business Data Science",
-        "type": "major",
-        "UOC": 72,
-        "code": "ECONL1",
-        "course_constraints": [],
-        "curriculum": [
-            {
-                "courses": {
-                    "COMP9417": "Machine Learning and Data Mining",
-                    "ACTL3142": "Statistical Machine Learning for Risk and Actuarial Applications",
-                    "MARK3085": "Digital Marketing and Web Analytics",
-                    "ECON3206": "Financial Econometrics",
-                    "COMP2041": "Software Construction: Techniques and Tools",
-                    "ECON1102": "Macroeconomics 1",
-                    "MATH1081": "Discrete Mathematics",
-                    "ECON3107": "Economics of Finance",
-                    "ACTL3141": "Modelling and Prediction of Life and Health Related Risks",
-                    "INFS3603": "Introduction to Business Analytics",
-                    "ECON2104": "Applied Macroeconomics",
-                    "MARK3054": "Marketing Analytics and Big Data",
-                    "MATH2871": "Data Management for Statistical Analysis",
-                    "ECON2101": "Microeconomics 2",
-                    "ECON3130": "Real Estate Economics and Public Policy",
-                    "COMP9313": "Big Data Management",
-                    "MARK1012": "Marketing Fundamentals",
-                    "ECON2111": "Introduction to Economic Development",
-                    "MATH2011": "Several Variable Calculus",
-                    "MATH3871": "Bayesian Inference and Computation"
-                },
-                "title": "Prescribed Electives",
-                "credits_to_complete": 30,
-                "core": false,
-                "levels": [],
-                "notes": "subject to whether both ECON3208 and ECON3210 are taken as Level 3 Flexible Core Courses. At least three of the elective courses must be at level 3 or above (3XXX). Additionally, at least 3 of the electives must be selected from Business School subject areas ACTL, ECON, INFS, MARK and MGMT. A Level 3 Business course will fulfill both of these requirements."
-            },
-            {
-                "courses": {
-                    "ECON2112": "Game Theory and Business Strategy",
-                    "ECON2209": "Business Forecasting",
-                    "MATH2831 or ECON2206": [
-                        "Linear Models",
-                        "Introductory Econometrics "
-                    ]
-                },
-                "title": "Level 2 Core Courses",
-                "credits_to_complete": 18,
-                "core": true,
-                "levels": [
-                    2
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "MATH1131 or MATH1141": [
-                        "Mathematics 1A",
-                        "Higher Mathematics 1A"
-                    ],
-                    "MATH1231 or MATH1241": [
-                        "Mathematics 1B",
-                        "Higher Mathematics 1B"
-                    ],
-                    "ECON1101": "Microeconomics 1"
-                },
-                "title": "Level 1 Core Courses",
-                "credits_to_complete": 18,
-                "core": true,
-                "levels": [
-                    1
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ECON3208": "Applied Econometric Methods",
-                    "ECON3210": "Big Data Econometrics"
-                },
-                "title": "Level 3 Flexible Core Courses",
-                "credits_to_complete": 6,
-                "core": true,
-                "levels": [
-                    3
-                ],
-                "notes": "If students would like to complete both courses they will only be required to complete an additional 24 UOC of prescribed electives from the list below to satisfy major requirements."
-            }
-        ]
-    },
     "ECONO1": {
         "programs": [
             "3558",
@@ -3967,172 +3578,6 @@
                 "core": false,
                 "levels": [
                     2
-                ],
-                "notes": ""
-            }
-        ]
-    },
-    "ECONT1": {
-        "programs": [
-            "3543"
-        ],
-        "name": "Data Analytics and Econometrics",
-        "type": "major",
-        "UOC": 48,
-        "code": "ECONT1",
-        "course_constraints": [],
-        "curriculum": [
-            {
-                "courses": {
-                    "ECON3000": "Evidence-based Intervention Design and Evaluation",
-                    "ECON2209": "Business Forecasting",
-                    "ECON3208": "Applied Econometric Methods",
-                    "ECON3206": "Financial Econometrics",
-                    "ECON3210": "Big Data Econometrics"
-                },
-                "title": "  Prescribed Elective Courses",
-                "credits_to_complete": 12,
-                "core": false,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ECON3203": "Econometric Theory and Methods",
-                    "ECON1102": "Macroeconomics 1",
-                    "ECON2206": "Introductory Econometrics ",
-                    "ECON2101": "Microeconomics 2",
-                    "ECON3209": "Statistics for Econometrics",
-                    "ECON1101": "Microeconomics 1"
-                },
-                "title": "Core Courses",
-                "credits_to_complete": 36,
-                "core": true,
-                "levels": [],
-                "notes": ""
-            }
-        ]
-    },
-    "ECONU1": {
-        "programs": [
-            "3543"
-        ],
-        "name": "Economic Policy and Society",
-        "type": "major",
-        "UOC": 48,
-        "code": "ECONU1",
-        "course_constraints": [],
-        "curriculum": [
-            {
-                "courses": {},
-                "title": "  Prescribed Level 3 Elective Courses - Applications",
-                "credits_to_complete": 12,
-                "core": false,
-                "levels": [
-                    3
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ECON2103": "Business and Government",
-                    "ECON2112": "Game Theory and Business Strategy"
-                },
-                "title": "  Prescribed Level 2 Elective Courses",
-                "credits_to_complete": 6,
-                "core": false,
-                "levels": [
-                    2
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ECON2206": "Introductory Econometrics ",
-                    "ECON2101": "Microeconomics 2",
-                    "ECON1101": "Microeconomics 1",
-                    "ECON1102": "Macroeconomics 1"
-                },
-                "title": "Core Courses",
-                "credits_to_complete": 24,
-                "core": true,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ECON3208": "Applied Econometric Methods",
-                    "ECON3210": "Big Data Econometrics",
-                    "ECON3101": "Markets and Frictions",
-                    "ECON3121": "Industrial Organisation"
-                },
-                "title": "  Prescribed Level 3 Elective Courses - Methods",
-                "credits_to_complete": 6,
-                "core": false,
-                "levels": [
-                    3
-                ],
-                "notes": ""
-            }
-        ]
-    },
-    "ECONV1": {
-        "programs": [
-            "3543"
-        ],
-        "name": "Macroeconomics and Financial Markets",
-        "type": "major",
-        "UOC": 48,
-        "code": "ECONV1",
-        "course_constraints": [],
-        "curriculum": [
-            {
-                "courses": {
-                    "ECON2107": "Modern Labour Markets: Theory and Policy",
-                    "ECON2209": "Business Forecasting"
-                },
-                "title": "  Prescribed Level 2 Elective Courses",
-                "credits_to_complete": 6,
-                "core": false,
-                "levels": [
-                    2
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {},
-                "title": "  Prescribed level 3 Elective Courses - Applications",
-                "credits_to_complete": 12,
-                "core": false,
-                "levels": [
-                    3
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ECON1102": "Macroeconomics 1",
-                    "ECON1101": "Microeconomics 1",
-                    "ECON2206": "Introductory Econometrics ",
-                    "ECON2101": "Microeconomics 2"
-                },
-                "title": "Core Courses",
-                "credits_to_complete": 24,
-                "core": true,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ECON3208": "Applied Econometric Methods",
-                    "ECON3206": "Financial Econometrics",
-                    "ECON3210": "Big Data Econometrics"
-                },
-                "title": "  Prescribed Level 3 Elective Courses - Methods",
-                "credits_to_complete": 6,
-                "core": false,
-                "levels": [
-                    3
                 ],
                 "notes": ""
             }
@@ -4563,149 +4008,6 @@
                 "core": true,
                 "levels": [],
                 "notes": "Note: - With approval of the minor stream authority, a student may substitute ENGG4102 Humanitarian Engineering Project only with another suitable humanitarian project/thesis topic completed elsewhere (e.g. Thesis or Project Course). Where a 12uoc Thesis is substituted, only 6uoc counts towards the minor, in place of ENGG4102. Please contact the Humanitarian Engineering minor coordinator to seek approval for a substitution. - ENGG3001 Fundamentals of Humanitarian Engineering is considered to be an interdisciplinary course in this minor"
-            }
-        ]
-    },
-    "ENVPE2": {
-        "programs": [
-            "3444",
-            "3409",
-            "3453",
-            "3454",
-            "3447",
-            "3543",
-            "3438"
-        ],
-        "name": "Environmental Humanities",
-        "type": "minor",
-        "UOC": 24,
-        "code": "ENVPE2",
-        "course_constraints": [
-            {
-                "title": "ARTS/EDUCATION (SECONDARY) STUDENTS",
-                "description": "The 24 uoc minor in Environmental Humanities can be combined with a major in History as preparation for a double first teaching specialisation."
-            }
-        ],
-        "curriculum": [
-            {
-                "courses": {
-                    "ARTS1240": "Environment and Society",
-                    "ARTS1241": "Environmental Advocacy and Activism"
-                },
-                "title": "Level 1 Core Courses",
-                "credits_to_complete": 12,
-                "core": true,
-                "levels": [
-                    1
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ARTS2244": "The Animal: Worker, Wild, Extinct?",
-                    "ARTS2243": "Waste and Society",
-                    "ARTS2248": "Disasters and Society",
-                    "ARTS2242": "The Politics of Climate Change",
-                    "ARTS2249": "Environmental Philosophy",
-                    "ARTS2240": "Environment, Sustainability and Development"
-                },
-                "title": "Level 2 Prescribed Electives",
-                "credits_to_complete": 6,
-                "core": false,
-                "levels": [
-                    2
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ATSI3003": "Indigenous Cultural Heritage and the Environment",
-                    "ARTS3241": "Environmental Justice",
-                    "ARTS3242": "Environmental History",
-                    "DART3330": "Art and the Anthropocene",
-                    "ARTS3240": "Environmental Humanities Capstone",
-                    "ARTS3243": "Remaking Nature: The Politics of Biotechnology",
-                    "ARTS3245": "Urban Environments"
-                },
-                "title": "Level 3 Prescribed Electives",
-                "credits_to_complete": 6,
-                "core": false,
-                "levels": [
-                    3
-                ],
-                "notes": ""
-            }
-        ]
-    },
-    "EUROC2": {
-        "programs": [
-            "3444",
-            "3409",
-            "3558",
-            "3453",
-            "3454",
-            "3447",
-            "3543",
-            "3438"
-        ],
-        "name": "European Studies",
-        "type": "minor",
-        "UOC": 24,
-        "code": "EUROC2",
-        "course_constraints": [
-            {
-                "title": "Arts/Education (Secondary) Students",
-                "description": "The 24 uoc minor in European Studies can be combined with a major in History as preparation for a double first teaching specialisation."
-            }
-        ],
-        "curriculum": [
-            {
-                "courses": {
-                    "ARTS1780": "Concepts of Europe",
-                    "ARTS1782": "Contemporary Europe in Crisis: Power and Culture"
-                },
-                "title": "Level 1 Core Courses",
-                "credits_to_complete": 12,
-                "core": true,
-                "levels": [
-                    1
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ARTS3786": "Confronting the Past in Contemporary Europe",
-                    "ARTS3295": "Understanding Nazi Germany: Origins, Structures, Explanation",
-                    "ARTS3787": "European Modernity: Religion, Politics, Culture",
-                    "ARTS3780": "Contemporary Germany: History, Politics, Society"
-                },
-                "title": "Level 3 Prescribed Electives",
-                "credits_to_complete": 6,
-                "core": false,
-                "levels": [
-                    3
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ARTS2542": "Gods, Heroines and Heroes in Greek Myth",
-                    "ARTS2785": "Europe's Age of Catastrophe, 1914-1945",
-                    "ARTS2272": "The European World, 1500-1800",
-                    "ARTS3789": "Ethnic and Religious Minorities in Modern Europe",
-                    "ARTS2781": "Europe since the Second World War: Politics, Societies and Economies",
-                    "ARTS2788": "Religion and Secularism in Modern Europe",
-                    "ARTS2285": "The Holocaust: Origins, Implementation, Aftermath",
-                    "ECON2322": "European Economic Development",
-                    "ARTS2487": "French Popular Culture"
-                },
-                "title": "Level 2 Prescribed Electives",
-                "credits_to_complete": 6,
-                "core": false,
-                "levels": [
-                    2
-                ],
-                "notes": ""
             }
         ]
     },
@@ -5755,116 +5057,6 @@
             }
         ]
     },
-    "HISTD2": {
-        "programs": [
-            "3444",
-            "3409",
-            "3558",
-            "3453",
-            "3454",
-            "3543",
-            "3438"
-        ],
-        "name": "History",
-        "type": "minor",
-        "UOC": 24,
-        "code": "HISTD2",
-        "course_constraints": [
-            {
-                "title": "Arts/Education (Secondary) Students",
-                "description": "The minor in History (24 UOC) is not available to Bachelor of Arts/Education (Secondary) students. To be eligible for the approved teaching specialisation, Bachelor of Arts/Education (Secondary) students must complete either the History Major (60 UOC) or History (Extended) Minor (36 UOC)."
-            }
-        ],
-        "curriculum": [
-            {
-                "courses": {
-                    "ATSI3017": "Indigenous Histories and the Colonial World",
-                    "ARTS3218": "Japanese History: Modern Miracles and Mythologies",
-                    "ARTS3283": "Roman Emperors: From Augustus to Nero",
-                    "ARTS3289": "Documentary Film and History",
-                    "ARTS3212": "Contemporary India Through Bollywood: Politics, Society and Culture",
-                    "ARTS3270": "Reflecting on Histories and Historians: Capstone",
-                    "ARTS3900": "Gender and Queer Critiques: Rethinking History and Other Studies",
-                    "ARTS3290": "Visions and Voices of Empire",
-                    "ARTS3242": "Environmental History",
-                    "ARTS3295": "Understanding Nazi Germany: Origins, Structures, Explanation",
-                    "ARTS3640": "Japan and Korea: Cultures in Conflict",
-                    "ARTS3279": "Inequality in Australia: A History",
-                    "ARTS3292": "Migrants and Refugees in Australian History",
-                    "ARTS3786": "Confronting the Past in Contemporary Europe",
-                    "ARTS3220": "Architecture and Urbanism in Asia",
-                    "ARTS3217": "History of Modern China: Contested Visions"
-                },
-                "title": "Level 3 Prescribed Electives",
-                "credits_to_complete": 6,
-                "core": false,
-                "levels": [
-                    3
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ARTS2211": "East Asia",
-                    "ARTS2282": "Rome",
-                    "ARTS2271": "Inventing Modern Australia: 1900 to Now",
-                    "ARTS2272": "The European World, 1500-1800",
-                    "ARTS2283": "Classical Greece",
-                    "ARTS2281": "Ancient Egypt and Western Asia",
-                    "ARTS2781": "Europe since the Second World War: Politics, Societies and Economies",
-                    "ARTS2212": "Southeast Asia",
-                    "ARTS2663": "Korea and Japan: Chinese Cultural Transmission",
-                    "ARTS2278": "Slavery and Freedom: US History 1750-1890",
-                    "ARTS2904": "Dressed to Kill: Dress and Identity in History",
-                    "ARTS2210": "Modern India: Violence and Nonviolence in Colonial South Asia, 1750-1947",
-                    "ARTS2908": "Sex and Power in Early Modern China and Japan",
-                    "ARTS2750": "Modern Latin America: Dependency and Development",
-                    "ARTS2909": "Gender in South Asia and Southeast Asia",
-                    "ARTS2785": "Europe's Age of Catastrophe, 1914-1945",
-                    "ARTS2906": "History of Sexuality",
-                    "ARTS2270": "The Australian Experiment and the Nineteenth-Century World",
-                    "ARTS2150": "A House Divided: The Making of Modern America",
-                    "ARTS2662": "Korea at a Glance",
-                    "ARTS2633": "A Cultural Survey of Japan: From Gods to Gadgets",
-                    "ARTS2285": "The Holocaust: Origins, Implementation, Aftermath",
-                    "ARTS2458": "Along the Silk Road: Conquerors, Traders and Explorers",
-                    "ARTS2457": "China Imagined and Perceived",
-                    "ARTS2900": "Global Feminisms: Competing Visions, Varying Histories"
-                },
-                "title": "Level 2 Prescribed Electives",
-                "credits_to_complete": 6,
-                "core": false,
-                "levels": [
-                    2
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ARTS1190": "Sydney: History, Landscapes, People",
-                    "ARTS1900": "Gendered Worlds: Introduction to Gender Studies",
-                    "ARTS1271": "History of the Present: The World since 1900"
-                },
-                "title": "Level 1 Prescribed Electives",
-                "credits_to_complete": 6,
-                "core": false,
-                "levels": [
-                    1
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ARTS1270": "Global History: Exploring the First Globalization, 15th-19th Century"
-                },
-                "title": "Core Course",
-                "credits_to_complete": 6,
-                "core": true,
-                "levels": [],
-                "notes": ""
-            }
-        ]
-    },
     "IBUSA1": {
         "programs": [
             "3409",
@@ -6669,127 +5861,6 @@
             }
         ]
     },
-    "MATHA1": {
-        "programs": [
-            "3956"
-        ],
-        "name": "Applied Mathematics",
-        "type": "major",
-        "UOC": 90,
-        "code": "MATHA1",
-        "course_constraints": [
-            {
-                "title": "Recommended Level 1 Electives",
-                "description": "These courses are not required but are recommended as good complementary Level 1 electives for this major. Students interested in physical sciences or theoretical oceanography, meterology or fluid dynamics, both of: PHYS1121 Physics 1A (6 UOC) PHYS1221 Physics 1B (6 UOC) Students interest in social or biological sciences, at least 12 UOC (i.e. both level I courses from the subject area) from: Biology BABS1201 Molecules, Cells and Genes (6 UOC) BIOS1101 Evolutionary & Functional Biol (6 UOC) Psychology PSYC1001 Psychology 1A (6 UOC) PSYC1011 Psychology 1B (6 UOC) Chemistry CHEM1011 Essentials of Chemistry 1A (6 UOC) CHEM1021 Essentials of Chemistry 1B (6 UOC) Students interested in computational methods or computer science: COMP1511 Introduction to Programming (6 UOC)"
-            },
-            {
-                "title": "Recommended Level 2 Electives",
-                "description": "Students in this major are recommended to include at least 6 UOC from the following among their electives: MATH2241 Intro to Atmos & Oceans (6 UOC)"
-            }
-        ],
-        "curriculum": [
-            {
-                "courses": {},
-                "title": "Level 3 Core ",
-                "credits_to_complete": 18,
-                "core": true,
-                "levels": [
-                    3
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "MATH3": "any level 3 Mathematics course"
-                },
-                "title": "Level 3 Prescribed Electives ",
-                "credits_to_complete": 12,
-                "core": false,
-                "levels": [
-                    3
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "MATH1141": "Higher Mathematics 1A",
-                    "MATH1241": "Higher Mathematics 1B",
-                    "MATH1081": "Discrete Mathematics"
-                },
-                "title": "Level 1 Core Courses",
-                "credits_to_complete": 18,
-                "core": true,
-                "levels": [
-                    1
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "MATH2221": "Higher Theory and Applications of Differential Equations",
-                    "MATH2621": "Higher Complex Analysis",
-                    "MATH2901": "Higher Theory of Statistics",
-                    "MATH2111": "Higher Several Variable Calculus",
-                    "MATH2601": "Higher Linear Algebra",
-                    "MATH2301": "Mathematical Computing"
-                },
-                "title": "Level 2 Core Courses",
-                "credits_to_complete": 36,
-                "core": true,
-                "levels": [
-                    2
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ENGG1811": "Computing for Engineers",
-                    "COMP1": "any level 1 Computer Science course"
-                },
-                "title": "Level 1 Computer Science Elective",
-                "credits_to_complete": 6,
-                "core": false,
-                "levels": [
-                    1
-                ],
-                "notes": ""
-            }
-        ]
-    },
-    "MATHAH": {
-        "programs": [
-            "3956",
-            "3962",
-            "4500"
-        ],
-        "name": "Applied Mathematics",
-        "type": "honours",
-        "UOC": 48,
-        "code": "MATHAH",
-        "course_constraints": [],
-        "curriculum": [
-            {
-                "courses": {
-                    "MATH4001": "Mathematics and Statistics Honours Thesis"
-                },
-                "title": "Thesis Courses",
-                "credits_to_complete": 18,
-                "core": false,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "MATH5": "any level 5 Mathematics course"
-                },
-                "title": "Core Courses",
-                "credits_to_complete": 30,
-                "core": true,
-                "levels": [],
-                "notes": "Note: Courses must be approved by the Head of School or nominee and taken with the advice of the Honours thesis supervisor."
-            }
-        ]
-    },
     "MATHC2": {
         "programs": [
             "3970",
@@ -6951,110 +6022,6 @@
                         "Higher Mathematics 1A",
                         "Mathematics 1A"
                     ]
-                },
-                "title": "Level 1 Core Courses",
-                "credits_to_complete": 12,
-                "core": true,
-                "levels": [
-                    1
-                ],
-                "notes": ""
-            }
-        ]
-    },
-    "MATHE1": {
-        "programs": [
-            "3959",
-            "3586",
-            "3587"
-        ],
-        "name": "Quantitative Data Science",
-        "type": "major",
-        "UOC": 66,
-        "code": "MATHE1",
-        "course_constraints": [],
-        "curriculum": [
-            {
-                "courses": {
-                    "MATH2901 or MATH2801": [
-                        "Higher Theory of Statistics",
-                        "Theory of Statistics"
-                    ],
-                    "MATH2831": "Linear Models",
-                    "MATH2871": "Data Management for Statistical Analysis"
-                },
-                "title": "Level 2 Core Courses",
-                "credits_to_complete": 18,
-                "core": true,
-                "levels": [
-                    2
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ECON2206": "Introductory Econometrics ",
-                    "ECON3107": "Economics of Finance",
-                    "ECON2101": "Microeconomics 2",
-                    "COMP9315": "Database Systems Implementation",
-                    "MATH3411": "Information, Codes and Ciphers",
-                    "COMP9418": "Advanced Topics in Statistical Machine Learning",
-                    "MATH3161": "Optimization",
-                    "COMP2911": "Engineering Design in Computing",
-                    "MATH3041": "Mathematical Modelling for Real World Systems",
-                    "ACTL3141": "Modelling and Prediction of Life and Health Related Risks",
-                    "MATH2011": "Several Variable Calculus",
-                    "COMP4418": "Knowledge Representation and Reasoning",
-                    "ECON3123": "Organisational Economics",
-                    "COMP2041": "Software Construction: Techniques and Tools",
-                    "COMP6771": "Advanced C++ Programming",
-                    "ECON2209": "Business Forecasting",
-                    "ECON2111": "Introduction to Economic Development",
-                    "ECON1102": "Macroeconomics 1",
-                    "ECON3130": "Real Estate Economics and Public Policy",
-                    "COMP9313": "Big Data Management",
-                    "COMP3121": "Algorithms and Programming Techniques",
-                    "ECON2104": "Applied Macroeconomics",
-                    "ACTL3142": "Statistical Machine Learning for Risk and Actuarial Applications",
-                    "MARK1012": "Marketing Fundamentals",
-                    "MATH1081": "Discrete Mathematics",
-                    "COMP9319": "Web Data Compression and Search",
-                    "COMP9417": "Machine Learning and Data Mining",
-                    "INFS1602": "Digital Transformation in Business",
-                    "MATH2111": "Higher Several Variable Calculus",
-                    "MARK3054": "Marketing Analytics and Big Data",
-                    "MARK3085": "Digital Marketing and Web Analytics",
-                    "INFS3603": "Introduction to Business Analytics",
-                    "COMP3441": "Security Engineering",
-                    "COMP3411": "Artificial Intelligence",
-                    "ECON3206": "Financial Econometrics",
-                    "COMP4121": "Advanced Algorithms",
-                    "MATH5836": "Data Mining and its Business Applications",
-                    "ECON3208": "Applied Econometric Methods"
-                },
-                "title": "Prescribed Electives",
-                "credits_to_complete": 24,
-                "core": false,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "MATH3821": "Statistical Modelling and Computing",
-                    "MATH3871": "Bayesian Inference and Computation"
-                },
-                "title": "Level 3 Core Courses",
-                "credits_to_complete": 12,
-                "core": true,
-                "levels": [
-                    3
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "MATH1231": "Mathematics 1B",
-                    "MATH1131": "Mathematics 1A"
                 },
                 "title": "Level 1 Core Courses",
                 "credits_to_complete": 12,
@@ -7260,122 +6227,6 @@
             }
         ]
     },
-    "MATHP1": {
-        "programs": [
-            "3956"
-        ],
-        "name": "Pure Mathematics",
-        "type": "major",
-        "UOC": 90,
-        "code": "MATHP1",
-        "course_constraints": [],
-        "curriculum": [
-            {
-                "courses": {
-                    "MATH3701": "Higher Topology and Differential Geometry",
-                    "MATH3611": "Higher Analysis",
-                    "MATH3711": "Higher Algebra"
-                },
-                "title": "Level 3 Core Courses",
-                "credits_to_complete": 18,
-                "core": true,
-                "levels": [
-                    3
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "MATH2111": "Higher Several Variable Calculus",
-                    "MATH2601": "Higher Linear Algebra",
-                    "MATH2701": "Abstract Algebra and Fundamental Analysis",
-                    "MATH2221": "Higher Theory and Applications of Differential Equations",
-                    "MATH2901": "Higher Theory of Statistics",
-                    "MATH2621": "Higher Complex Analysis"
-                },
-                "title": "Level 2 Core Courses",
-                "credits_to_complete": 36,
-                "core": true,
-                "levels": [
-                    2
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "MATH1081": "Discrete Mathematics",
-                    "MATH1141": "Higher Mathematics 1A",
-                    "MATH1241": "Higher Mathematics 1B"
-                },
-                "title": "Level 1 Core Courses",
-                "credits_to_complete": 18,
-                "core": true,
-                "levels": [
-                    1
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ENGG1811": "Computing for Engineers",
-                    "COMP1": "any level 1 Computer Science course"
-                },
-                "title": "Level 1 Computer Science Elective",
-                "credits_to_complete": 6,
-                "core": false,
-                "levels": [
-                    1
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "MATH3": "any level 3 Mathematics course"
-                },
-                "title": "Level 3 Electives",
-                "credits_to_complete": 12,
-                "core": false,
-                "levels": [
-                    3
-                ],
-                "notes": ""
-            }
-        ]
-    },
-    "MATHPH": {
-        "programs": [
-            "3956",
-            "3962",
-            "4500"
-        ],
-        "name": "Pure Mathematics",
-        "type": "honours",
-        "UOC": 48,
-        "code": "MATHPH",
-        "course_constraints": [],
-        "curriculum": [
-            {
-                "courses": {
-                    "MATH5": "any level 5 Mathematics course"
-                },
-                "title": "Core Courses",
-                "credits_to_complete": 30,
-                "core": true,
-                "levels": [],
-                "notes": "Note: Courses must be approved by the Head of School or nominee and taken with the advice of the Honours thesis supervisor."
-            },
-            {
-                "courses": {
-                    "MATH4001": "Mathematics and Statistics Honours Thesis"
-                },
-                "title": "Thesis Courses",
-                "credits_to_complete": 18,
-                "core": false,
-                "levels": [],
-                "notes": ""
-            }
-        ]
-    },
     "MATHT1": {
         "programs": [
             "3925",
@@ -7459,130 +6310,6 @@
                 "core": true,
                 "levels": [
                     3
-                ],
-                "notes": ""
-            }
-        ]
-    },
-    "MATHTH": {
-        "programs": [
-            "3956",
-            "3962",
-            "4500"
-        ],
-        "name": "Statistics",
-        "type": "honours",
-        "UOC": 48,
-        "code": "MATHTH",
-        "course_constraints": [],
-        "curriculum": [
-            {
-                "courses": {
-                    "MATH5": "any level 5 Mathematics course"
-                },
-                "title": "Core Courses",
-                "credits_to_complete": 30,
-                "core": true,
-                "levels": [],
-                "notes": "Note: Courses must be approved by the Head of School or nominee and taken with the advice of the honours thesis supervisor."
-            },
-            {
-                "courses": {
-                    "MATH4001": "Mathematics and Statistics Honours Thesis"
-                },
-                "title": "Thesis Courses",
-                "credits_to_complete": 18,
-                "core": false,
-                "levels": [],
-                "notes": ""
-            }
-        ]
-    },
-    "MATHU1": {
-        "programs": [
-            "3956"
-        ],
-        "name": "Advanced Statistics",
-        "type": "major",
-        "UOC": 84,
-        "code": "MATHU1",
-        "course_constraints": [],
-        "curriculum": [
-            {
-                "courses": {
-                    "MATH2111": "Higher Several Variable Calculus",
-                    "MATH2901": "Higher Theory of Statistics",
-                    "MATH2601": "Higher Linear Algebra",
-                    "MATH2931": "Higher Linear Models",
-                    "MATH2621 or MATH2221": [
-                        "Higher Complex Analysis",
-                        "Higher Theory and Applications of Differential Equations"
-                    ]
-                },
-                "title": "Level 2 Core Courses",
-                "credits_to_complete": 30,
-                "core": true,
-                "levels": [
-                    2
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "MATH1081": "Discrete Mathematics",
-                    "MATH1241": "Higher Mathematics 1B",
-                    "MATH1141": "Higher Mathematics 1A"
-                },
-                "title": "Level 1 Core Courses",
-                "credits_to_complete": 18,
-                "core": true,
-                "levels": [
-                    1
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "MATH3": "any level 3 Mathematics course"
-                },
-                "title": "Level 3 Prescribed Electives",
-                "credits_to_complete": 6,
-                "core": false,
-                "levels": [
-                    3
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "MATH3901": "Higher Probability and Stochastic Processes",
-                    "MATH3821": "Statistical Modelling and Computing",
-                    "MATH3911": "Higher Statistical Inference",
-                    "MATH3841 or MATH3831 or MATH3871 or MATH3851": [
-                        "Statistical Analysis of Dependent Data",
-                        "Statistical Methods in Social and Market Research",
-                        "Bayesian Inference and Computation",
-                        "Experimental Design and Categorical Data"
-                    ]
-                },
-                "title": "Level 3 Core Courses",
-                "credits_to_complete": 24,
-                "core": true,
-                "levels": [
-                    3
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ENGG1811": "Computing for Engineers",
-                    "COMP1": "any level 1 Computer Science course"
-                },
-                "title": "Level 1 Computer Science Elective",
-                "credits_to_complete": 6,
-                "core": false,
-                "levels": [
-                    1
                 ],
                 "notes": ""
             }
@@ -10110,78 +8837,6 @@
                 "credits_to_complete": 36,
                 "core": false,
                 "levels": [],
-                "notes": ""
-            }
-        ]
-    },
-    "SOCAD2": {
-        "programs": [
-            "3444",
-            "3409",
-            "3453",
-            "3454",
-            "3447",
-            "3543",
-            "3438"
-        ],
-        "name": "Sociology and Anthropology",
-        "type": "minor",
-        "UOC": 24,
-        "code": "SOCAD2",
-        "course_constraints": [
-            {
-                "title": "Arts/Education (Secondary) Students",
-                "description": "The minor in Sociology and Anthropology (24 UOC) is not available to Bachelor of Arts/Education (Secondary) students. To be eligible for the approved teaching specialisation, Bachelor of Arts/Education (Secondary) students must complete either the Sociology and Anthropology Major (60 UOC) or Sociology and Anthropology (Extended) Minor (36 UOC)."
-            },
-            {
-                "title": "Note: Social Work (Honours)/Arts",
-                "description": "If you are enrolled in the Bachelor of Social Work (Honours)/Bachelor of Arts you will complete ARTS1753 Culture, Experience and Change (6 UOC) as part of your Social Work core requirement. If you choose a major or minor in Sociology and Anthropology you must complete an additional 6 UOC UNSW Arts and Social Sciences Prescribed Elective."
-            }
-        ],
-        "curriculum": [
-            {
-                "courses": {
-                    "ARTS2871": "Power and Powerlessness"
-                },
-                "title": "Level 2 Core Courses",
-                "credits_to_complete": 6,
-                "core": true,
-                "levels": [
-                    2
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ARTS3883": "Personhood in Asia",
-                    "ARTS3871": "Forensic Sociology",
-                    "ARTS2876": "Understanding the Self",
-                    "ARTS2873": "Doing Fieldwork: Ethnography in Place",
-                    "ARTS3872": "Media, Culture and Power",
-                    "ARTS2874": "Culture and Emotion",
-                    "ARTS2870": "Citizens, Action and Dissent",
-                    "ARTS3885": "Violence, Resistance, Change",
-                    "ARTS3874": "Culture and Human Rights",
-                    "ARTS2877": "Technologies, Culture, Society",
-                    "ARTS2872": "Living and dying"
-                },
-                "title": "Prescribed Electives",
-                "credits_to_complete": 6,
-                "core": false,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ARTS1753": "Culture, Experience and Change",
-                    "ARTS1870": "Rethinking the Social"
-                },
-                "title": "Level 1 Core Courses",
-                "credits_to_complete": 12,
-                "core": true,
-                "levels": [
-                    1
-                ],
                 "notes": ""
             }
         ]

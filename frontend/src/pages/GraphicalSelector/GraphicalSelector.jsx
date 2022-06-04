@@ -5,7 +5,7 @@ import G6 from "@antv/g6";
 import { findDOMNode } from "react-dom";
 
 const GraphicalSelector = () => {
-  const { programCode, majors, minor } = useSelector((state) => state.degree);
+  const { programCode, majors, minors } = useSelector((state) => state.degree);
 
   const [courses, setCourses] = useState([]);
   const [courseEdges, setCourseEdges] = useState([]);
@@ -41,7 +41,7 @@ const GraphicalSelector = () => {
   useEffect(() => {
     const fetchCourseList = async () => {
       const res = (
-        await axios.get(`/programs/getStructure/${programCode}/${majors.join("+")}${minor && `/${minor}`}`)
+        await axios.get(`/programs/getStructure/${programCode}/${majors.join("+")}${minors && `/${minors.join("+")}`}`)
       ).data;
       const courseList = (
         Object.values(res.structure)
