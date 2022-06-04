@@ -5,6 +5,7 @@ export const initialState = {
   programName: "",
   majors: [],
   minor: "",
+  isComplete: false,
 };
 
 const degreeSlice = createSlice({
@@ -25,12 +26,15 @@ const degreeSlice = createSlice({
     setMinor: (state, action) => {
       state.minor = action.payload;
     },
+    setIsComplete: (state, action) => {
+      state.isComplete = action.payload;
+    },
     resetDegree: () => initialState,
   },
 });
 
 export const {
-  setProgram, setMinor, resetDegree, addMajor, removeMajor,
+  setProgram, setMinor, resetDegree, addMajor, removeMajor, setIsComplete,
 } = degreeSlice.actions;
 
 export default degreeSlice.reducer;
