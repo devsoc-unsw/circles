@@ -58,6 +58,8 @@ def initialiseProgram(programsFormatted, data):
         "studyLevel": None,
         "faculty": None,
         "duration": None,
+        "academicOrg": None,
+        "parentAcademicOrg": None,
         "CurriculumStructure": [],
     }
     # Get course code
@@ -81,6 +83,8 @@ def addData(programsFormatted, courseCode, program, data, curriculumStructure):
     prog["studyLevel"] = program.get("studyLevelURL")
     prog["faculty"] = data["parent_academic_org"]["value"]
     prog["duration"] = data.get("full_time_duration")
+    prog["academicOrg"] = data.get("academic_org")["cl_id"]
+    prog["parentAcademicOrg"] = data.get("parent_academic_org")["cl_id"]
     # Assign infomation about program cirriculum
     format_curriculum(prog["CurriculumStructure"], curriculumStructure["container"])
 
