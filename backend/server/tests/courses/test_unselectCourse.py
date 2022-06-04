@@ -25,4 +25,3 @@ def test_multiple_dependencies():
 def test_invalid_course():
     x = requests.post('http://127.0.0.1:8000/courses/unselectCourse/BADC0000', json=USERS["user6"])
     assert x.status_code == 200
-

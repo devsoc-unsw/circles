@@ -336,9 +336,30 @@ def unselectCourse(userData: UserData, unselectedCourse: str):
     Creates a new user class and returns all the courses
     affected from the course that was unselected in sorted order
     """
-    affectedCourses = User(fixUserData(userData.dict())).unselect_course(unselectedCourse)
+    user = User(fixUserData(userData.dict()))
+    if not user.has_taken_course(unselectedCourse):
+        return []
 
-    return {'courses': affectedCourses}
+    affected_courses = []
+    # Brute force loop through all taken courses and if we find a course which is
+    # no longer unlocked, we unselect it, add it to the affected course list,
+    # then restart loop.
+    courses_to_delete = [unselectedCourse]
+    while courses_to_delete:
+        affected_courses.extend(courses_to_delete)
+        for course in courses_to_delete:
+            if user.has_taken_course():
+                user.pop_course(course)
+
+        courses_to_delete = [
+            c
+            for c in user.get_courses()
+            if CONDITIONS.get(c) is not None  # course is in conditions
+            and not (CONDITIONS[c].validate(user))[0]  # not unlocked anymore
+        ]
+
+    return { 'courses' : list(sorted(affected_courses)) }
+
 
 @router.get("/courseChildren/{course}", response_model=CoursesPath,
             responses = {
