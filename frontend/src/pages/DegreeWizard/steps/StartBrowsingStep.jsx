@@ -2,9 +2,14 @@ import React from "react";
 import {
   Button, notification,
 } from "antd";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./steps.less";
+import { setIsComplete } from "../../../reducers/degreeSlice";
+
+// import {
+//   updateDegreeLength, updateStartYear, setProgram, addMajor, removeMajor, setMinor,
+// } from "../../../reducers/plannerSlice";
 
 const openNotification = (msg) => {
   const args = {
@@ -21,12 +26,15 @@ const StartBrowsingStep = () => {
   const degree = useSelector((state) => state.degree);
 
   const saveUserSettings = () => {
+    // const dispatch = useDispatch(); // switch final degree change to true
     if (degree.programCode === "") {
       openNotification("Please select a degree");
     } else if (!degree.majors.length && !degree.minors.length) {
       openNotification("Please select a specialisation");
     } else {
       navigate("/course-selector");
+      const dispatch = useDispatch();
+      dispatch(setIsComplete(true));
     }
   };
 
