@@ -70,7 +70,6 @@ run = {
     },
      "gened": {
         "scrape": scrape_gened_data,
-        "format": format_gened_data,
     },
     "specialisation": {
         "scrape": scrape_spn_data,

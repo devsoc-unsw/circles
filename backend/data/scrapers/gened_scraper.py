@@ -22,34 +22,49 @@ def scrape_gened_data(year=None):
     """
     Retrieves gen ed data for all undergraduate programs
     """
-    
-    r = requests.post(URL, data=json.dumps(
-        create_payload_gened(
-        TOTAL_COURSES,
-        "unsw_psubject",
-        #"882a15a31bfae810d044ffbbdc4bcb53", #design
-        "7c2459ef1bbae810d044ffbbdc4bcbd4", #vision science
-        #"57a56ceb4f0093004aa6eb4f0310c7ae",
-        "parentAcademicOrg",
-        year
-        )
-    ), headers=HEADERS)
+    #faculty_list = get_faculty_list()
+    faculty_list = []
+    #gened_raw = data_helpers.read_data("data/scrapers/genedPureRaw.json")
+    gened_raw = {}
+    cl_id = ""
+    academicOrg = ""
+
+    programs_formatted = data_helpers.read_data("data/scrapers/programsFormattedRaw.json")
+    for program_code in programs_formatted:
+        program = programs_formatted[program_code]
+        faculty = program["faculty"]
+        if faculty in faculty_list: 
+            continue 
+        else: 
+            faculty_list.append(faculty)
+
+        if faculty == "Faculty of Arts, Design and Architecture" or faculty == "Faculty of Law and Justice":
+            academicOrg = "academicOrg"
+        else:
+            academicOrg = "parentAcademicOrg"
+        cl_id = program[academicOrg]
+        r = requests.post(URL, data=json.dumps(
+            create_payload_gened(
+            TOTAL_COURSES,
+            "unsw_psubject",
+            cl_id,
+            academicOrg,
+            year
+            )
+        ), headers=HEADERS)
+        new_gened_courses_raw = r.json()["contentlets"]
+        new_gened_list = []
+        for course in new_gened_courses_raw:
+            new_gened_list.append(course.get("code"))
+        #gen eds by program code
+        gened_raw[program["code"]] = new_gened_list
+
     data_helpers.write_data(
-        r.json()["contentlets"],
+        gened_raw,
         "data/scrapers/genedPureRaw.json"
         if year is None else
         f"data/final_data/archive/raw/{year}.json"
     )
-    print(get_faculty_list())
-
-def get_faculty_list():
-    faculty_list = []
-    with open('data/final_data/programsProcessed.json') as json_file:
-        data = json.load(json_file)
-    for program in data.values():
-        faculty_list.append(program["faculty"])
-    faculty_list = set(faculty_list)
-    return faculty_list
 
 if __name__ == "__main__":
     scrape_gened_data()
