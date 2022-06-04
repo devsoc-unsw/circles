@@ -81,7 +81,7 @@ OTH_PROGS = (
 )
 
 # Enable or disable testing, and choose what programs to test on
-TESTING_MODE = True
+TESTING_MODE = False
 TEST_PROGS = (CS_PROGS + OTH_PROGS)
 
 def process_prg_data() -> None:
@@ -120,6 +120,10 @@ def add_program(processed_data: dict[str, dict], formatted_data: dict):
         program_data["components"] = order_dict_alphabetically(program_data["components"])
         if SPEC_KEY in program_data["components"]:
             program_data["components"][SPEC_KEY] = order_dict_alphabetically(program_data["components"][SPEC_KEY])
+
+        # If there was some processing warning, print
+        if program_data["processing_warnings"]:
+            print(f"Warning: Some issues when processing program {program_data['code']}")
 
         code = program_data["code"]
         processed_data[code] = program_data
@@ -328,7 +332,7 @@ def contains_spec(components: dict[str, dict], new_spec: dict, spec_type_key: st
     spec = list(degrees)[0]
     return spec == new_spec
 
-# TODO: Tidy
+
 def add_specialisation_data(processed_data: dict, program_data: dict, item: dict, program_name: str, is_optional: bool) -> None:
     """
     Adds specialisation data to the correct spot in program_data given a field and name of program
@@ -378,7 +382,7 @@ def add_specialisation_data(processed_data: dict, program_data: dict, item: dict
 
         # Check if there was already a <spec_type_key> added
         if program_name in spec_data[spec_type_key]:
-            # Merge this entry and the previous one. Also print a warning
+            # Merge this entry and the previous one. Also add a warning
             curr_data = spec_data[spec_type_key][program_name]
             curr_data["specs"] = curr_data["specs"] | new_data["specs"]
             curr_data["notes"] = f"{curr_data['notes']}\n\n{new_data['notes']}"
@@ -397,9 +401,13 @@ def compute_levels(courses: dict[str, str]) -> list[int]:
     # If any of the courses are less than 5 chars (ie they're just a number)
     # then assume it's any level. Additionally, if the 5th char is wildcarded
     # (with a '.'), assume it's any level
+    codes = []
+    for key in courses.keys():
+        codes += key.split(" or ")
+
     if any(
         len(code) < 5 or code[4] == "."
-        for code in courses.keys()
+        for code in codes
     ):
         return [ i for i in range(1, 10) ]
 
@@ -614,9 +622,10 @@ def faculty_manual_fixes(faculty: str) -> str:
 
 def get_credits_decorator(func):
     """
-    TODO: add docstring for this function
+    Decorates the 'get credits' functions with some error
+    checking and adds warning if needed
     """
-    def wrapper(program_data, item, *args, **kwargs):
+    def wrapper(program_data: dict, item: dict, *args, **kwargs) -> int:
         try:
             return func(item, *args, **kwargs)
         except ValueError as e:
@@ -654,7 +663,7 @@ def get_string_credits(_: dict, notes: str) -> int:
 
 def add_warning(w: Exception | str, program_data: dict, item: dict) -> None:
     """
-    TODO: add docstring to this function
+    Adds warning in the form of either a string or Exception to a specific program/section
     """
     warning = f"{w} in program {program_data['title']} ({program_data['code']}) in section titled '{item['title']}'"
     program_data["processing_warnings"].append(warning)
