@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const initialState = {
+const initialState = {
   programCode: "",
   programName: "",
   majors: [],
@@ -38,7 +38,7 @@ const degreeSlice = createSlice({
 });
 
 export const {
-  setProgram, resetDegree, addMajor, removeMajor, addMinor, removeMinor, setIsComplete
+  setProgram, resetDegree, addMajor, removeMajor, addMinor, removeMinor, setIsComplete,
 } = degreeSlice.actions;
 
 export default degreeSlice.reducer;

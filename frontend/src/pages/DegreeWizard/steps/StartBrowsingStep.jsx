@@ -23,18 +23,17 @@ const openNotification = (msg) => {
 
 const StartBrowsingStep = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const degree = useSelector((state) => state.degree);
 
   const saveUserSettings = () => {
-    // const dispatch = useDispatch(); // switch final degree change to true
     if (degree.programCode === "") {
       openNotification("Please select a degree");
     } else if (!degree.majors.length && !degree.minors.length) {
       openNotification("Please select a specialisation");
     } else {
-      navigate("/course-selector");
-      const dispatch = useDispatch();
       dispatch(setIsComplete(true));
+      navigate("/course-selector");
     }
   };
 

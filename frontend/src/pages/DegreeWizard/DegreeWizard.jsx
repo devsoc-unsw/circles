@@ -39,6 +39,11 @@ const DegreeWizard = () => {
     // TODO: Warning dialog before planner is reset.
     if (degree.isComplete) {
       setIsModalVisible(true);
+    } else {
+      dispatch(resetPlanner());
+      dispatch(resetDegree());
+      dispatch(resetTabs());
+      dispatch(resetCourses());
     }
     csDegreeDisclaimer();
   }, []);
