@@ -72,7 +72,7 @@ const TermBox = ({
             ))}
             {provided.placeholder}
             <div className="uocCounter">
-              <Badge style={{ backgroundColor: "#9254de" }} count={`${totalUOC} UOC`} offset={isSummerEnabled ? [13, -13] : [22, -22]} />
+              <Badge style={{ backgroundColor: "#9254de" }} size="small" count={`${totalUOC} UOC`} offset={isSummerEnabled ? [13, -13] : [22, -14]} />
             </div>
           </ul>
         </Badge>

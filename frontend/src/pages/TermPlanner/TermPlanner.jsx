@@ -187,7 +187,7 @@ const TermPlanner = () => {
                 if (hidden[iYear]) return null;
                 return (
                   <React.Fragment key={index}>
-                    <Badge color="#efdbff" style={{ color: "#000" }} size="small" count={`${yearUOC} UOC`} offset={[-26, 42]}>
+                    <Badge style={{ backgroundColor: "#efdbff", color: "#000000" }} size="small" count={`${yearUOC} UOC`} offset={[-26, 42]}>
                       <div className="yearContainer gridItem">
                         <div
                           className={`year ${currYear === iYear && "currYear"}`}
