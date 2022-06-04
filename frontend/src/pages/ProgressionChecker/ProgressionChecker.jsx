@@ -16,7 +16,7 @@ const degreeData = {
   completed_UOC: 108,
   concentrations: [
     {
-      type: "Specialisation",
+      type: "Degree",
       name: "Software Engineering",
       code: "SENGAH",
       UOC: 168,
@@ -43,8 +43,10 @@ const ProgressionChecker = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const {
-    programCode, majors, minor,
+    programCode, programName, majors, minor,
   } = useSelector((state) => state.degree);
+
+  console.log(majors, " ", minor);
 
   const [structure, setStructure] = useState({});
 
@@ -52,7 +54,13 @@ const ProgressionChecker = () => {
     // get structure of degree
     const fetchStructure = async () => {
       try {
-        const res = await axios.get(`/programs/getStructure/${programCode}/${majors.join("+")}${minor && `/${minor}`}`);
+        const res = await axios.get(`/programs/getStructure/${programCode}/${majors}`);
+        console.log(res);
+        degreeData.code = programCode;
+        degreeData.concentrations[0].name = programName;
+        degreeData.concentrations[1].name = programName;
+        console.log(res.data.structure.majors);
+        console.log(degreeData);
         setStructure(res.data.structure);
       } catch (err) {
         // eslint-disable-next-line no-console
