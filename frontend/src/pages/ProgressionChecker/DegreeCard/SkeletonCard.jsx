@@ -1,5 +1,6 @@
 import React from "react";
 import { Skeleton } from "antd";
+import "./index.less";
 
 const SkeletonCard = () => (
   <Skeleton.Button

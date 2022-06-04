@@ -208,7 +208,7 @@
     },
     "AERO4110": {
         "original": "Prerequisite: At least 144 Units completed in AEROAH stream.<br/><br/>Prerequisite: AERO3110<br/><br/>",
-        "processed": "144UOC in AEROAH && AERO3110"
+        "processed": "144UOC && AEROAH && AERO3110"
     },
     "AERO4500": {
         "original": "",
@@ -284,7 +284,7 @@
     },
     "ARCH1101": {
         "original": "Currently enrolled in program 3261 Architectural Studies, 3268 Computational Design, or 3635 Civil Engineering with Architecture (Hons)<br/><br/>",
-        "processed": "Currently program 3261 Architectural Studies, 3268 Computational Design || 3635 Civil Engineering with Architecture (Hons)"
+        "processed": "Currently program 3261 Architectural Studies, 3268 Computational Design || 3635 Civil Engineering && Architecture (Hons)"
     },
     "ARCH1102": {
         "original": "Prerequisite: ARCH1101<br/><br/>",
@@ -1136,7 +1136,7 @@
     },
     "ARTS3060": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Film Studies or MCT; or ARTS1060/ARTS1090, at least 6uoc in level 2  Film Studies electives and enrolment in a Media single or double degree<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Film Studies || MCT; || (ARTS1060 || ARTS1090), 6UOC in L2 Film Studies electives && enrolment in a Media single || double degree"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Film Studies || MCT || (ARTS1060 || ARTS1090), 6UOC in L2 Film Studies electives && enrolment in a Media single || double degree"
     },
     "ARTS3061": {
         "original": "Prerequisite: 48 UOC overall, including ARTS1060 or ARTS1064, and ARTS2065. Or 66 UOC overall and enrolled in a single or double degree Media (Screen and Sound Production) program<br/><br/>",
@@ -1228,7 +1228,7 @@
     },
     "ARTS3218": {
         "original": "Prerequisiste: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Asian Studies, Gender Studies, or History; or 48 UOC overall, including 12 UOC in Japanese Studies language courses<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Asian Studies, Gender Studies || History; || 48UOC && 12UOC in Japanese Studies language courses"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Asian Studies, Gender Studies || History || 48UOC && 12UOC in Japanese Studies language courses"
     },
     "ARTS3220": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Asian Studies or History. Or 48 UOC overall and enrolment in an International Studies single or dual program (2017 onwards)<br/><br/>",
@@ -1276,7 +1276,7 @@
     },
     "ARTS3295": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, European Studies or History; or 48 UOC overall, including 12 UOC in German Studies language courses<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, European Studies || History; || 48UOC && 12UOC in German Studies language courses"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, European Studies || History || 48UOC && 12UOC in German Studies language courses"
     },
     "ARTS3330": {
         "original": "Prerequisite: 72 units of credit overall, and enrolment in a language major stream - Chinese Studies, French Studies, German Studies, Japanese Studies, Korean Studies, or Spanish Studies<br/><br/>",
@@ -1332,7 +1332,7 @@
     },
     "ARTS3458": {
         "original": "Prerequisite: 72uoc overall, including ARTS3453, ARTS2452, or ARTS3454  and enrolment in an Advanced Chinese Studies major/minor; or 72uoc overall, including ARTS2451 or ARTS2462 and enrolment in a Chinese Studies major/minor<br/><br/>",
-        "processed": "72UOC && ARTS3453, ARTS2452 || ARTS3454 && enrolment in an Advanced Chinese Studies major/minor; || 72UOC && ARTS2451 || ARTS2462 && enrolment in a Chinese Studies major/minor"
+        "processed": "72UOC && ARTS3453, ARTS2452 || ARTS3454 && enrolment in an Advanced Chinese Studies major/minor || 72UOC && ARTS2451 || ARTS2462 && enrolment in a Chinese Studies major/minor"
     },
     "ARTS3462": {
         "original": "Prerequisite: ARTS2452 or ARTS3451 or ARTS3452 or ARTS3453 or ARTS3454 or ARTS3463 or language placement approval<br/><br/>",
@@ -1428,7 +1428,7 @@
     },
     "ARTS3636": {
         "original": "Prerequisite: 72uoc overall, including ARTS3633 and enrolment in an Advanced Japanese Studies major/minor; or 72uoc overall, including ARTS2631 and enrolment in a Japanese Studies major/minor<br/><br/>",
-        "processed": "72UOC && ARTS3633 && enrolment in an Advanced Japanese Studies major/minor; || 72UOC && ARTS2631 && enrolment in a Japanese Studies major/minor"
+        "processed": "72UOC && ARTS3633 && enrolment in an Advanced Japanese Studies major/minor || 72UOC && ARTS2631 && enrolment in a Japanese Studies major/minor"
     },
     "ARTS3638": {
         "original": "Prerequisite: ARTS3632 or language placement approval<br/><br/>",
@@ -1508,11 +1508,11 @@
     },
     "ARTS3758": {
         "original": "Prerequisite: ARTS3759 and enrolment with consent<br/><br/>",
-        "processed": "ARTS3759 && enrolment with consent"
+        "processed": "ARTS3759 && enrolment && consent"
     },
     "ARTS3759": {
         "original": "Prerequisite: Enrolment with consent. ARTS3759 is open to UNSW undergraduate students that are also enrolled in an internship (or international field placement course). This needs to be demonstrated prior to enrolment.<br/><br/>",
-        "processed": "Enrolment with consent. is open to UNSW undergraduate that are also an internship (or international field placement course). This needs to be demonstrated prior to enrolment"
+        "processed": "Enrolment && consent. is open to UNSW undergraduate that are also an internship (or international field placement course). This needs to be demonstrated"
     },
     "ARTS3780": {
         "original": "Prerequisite: 48 UOC including 6 UOC at level 1 and 6 UOC at level 2 in European Studies. Or 48 UOC including 12 UOC in German Studies language courses. Or 48 UOC and enrolment in an International Studies single or double degree (2017 onwards)<br/><br/>",
@@ -1524,7 +1524,7 @@
     },
     "ARTS3786": {
         "original": "Prerequisite: 48UOC overall, including 6UOC at level 1 and 6UOC at level 2 in European Studies or History; or 48UOC overall, including 12UOC in German Studies language courses. Or 48UOC and enrolment in an International Studies program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in European Studies || History; || 48UOC && 12UOC in German Studies language courses. || 48UOC && (3447)"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in European Studies || History || 48UOC && 12UOC in German Studies language courses. || 48UOC && (3447)"
     },
     "ARTS3787": {
         "original": "Prerequisite: 24 units of credit in either the European Studies or German Studies stream.<br/>Excluded: ARTS2783<br/><br/>",
@@ -1532,7 +1532,7 @@
     },
     "ARTS3789": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams; European Studies or History. Excluded: ARTS2786<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams; European Studies || History"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams European Studies || History"
     },
     "ARTS3810": {
         "original": "Prerequisite: 72 units of credit overall, and  enrolment in an International Relations, Politics, or Politics & International Relations major<br/><br/>",
@@ -1572,7 +1572,7 @@
     },
     "ARTS3871": {
         "original": "Prerequisite: 48UOC overall, including 6UOC lv1 and 6UOC lv2 in one of the following streams, Criminology/S&A; or enrolment in program 3422/4763 and 12UOC lv2 SRAP and 18UOC lv2 CRIM; or enrolment in Program 4034 and 30UOC at lv2 including 12UOC lv2 CRIM<br/><br/>",
-        "processed": "48UOC && 6UOC lv1 && 6UOC lv2 in one of the following streams, Criminology/S&A; || enrolment in program 3422/4763 && 12UOC lv2 SRAP && 18UOC lv2 CRIM; || enrolment in Program 4034 && 30UOC at lv2 && 12UOC lv2 CRIM"
+        "processed": "48UOC && 6UOC lv1 && 6UOC lv2 in one of the following streams, Criminology/S&A || enrolment in program 3422/4763 && 12UOC lv2 SRAP && 18UOC lv2 CRIM || enrolment in Program 4034 && 30UOC at lv2 && 12UOC lv2 CRIM"
     },
     "ARTS3872": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Media, Culture & Technology or Sociology & Anthropology. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
@@ -2128,7 +2128,7 @@
     },
     "AVIA3199": {
         "original": "Prerequisite: enrolled in a Science program (single or dual) and completing an Aviation major or specialisation. Must pass Preparation for WIL modules prior to enrolment. Placement must be related to the student\u2019s major or specialisation, and approved by the School of Aviation prior to enrolment.<br/>Pre-requisite: 48 units of credit and a minimum 65 WAM.<br/>It is the student\u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year.<br/><br/>",
-        "processed": "a Science program (single || dual) && an Aviation major || specialisation. Must pass for WIL modules prior to enrolment. Placement must be related to the \u2019s major || specialisation && approved by the School of Aviation prior to enrolment. 48UOC && a 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
+        "processed": "a Science program (single || dual) && an Aviation major || specialisation. Must pass for WIL modules . Placement must be related to the \u2019s major || specialisation && approved by the School of Aviation . 48UOC && a 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
     },
     "AVIA3201": {
         "original": "Prerequisite: AVIA3101<br/><br/>",
@@ -2244,7 +2244,7 @@
     },
     "BABS3199": {
         "original": "Prerequisite: enrolled in a science Science program (single or dual) and majoring in a BABS major or specialisation. Must pass Preparation for WIL modules prior to enrolment. Placement must be related to the student\u2019s major or specialisation, and approved by BABS prior to enrolment.<br/>Pre-requisite: 48 units of credit and a minimum 65 WAM.<br/>It is the student\u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year.<br/><br/>",
-        "processed": "a science Science program (single || dual) && majoring in a BABS major || specialisation. Must pass for WIL modules prior to enrolment. Placement must be related to the \u2019s major || specialisation && approved by BABS prior to enrolment. 48UOC && a 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
+        "processed": "a science Science program (single || dual) && majoring in a BABS major || specialisation. Must pass for WIL modules . Placement must be related to the \u2019s major || specialisation && approved by BABS . 48UOC && a 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
     },
     "BABS3200": {
         "original": "Prerequisite: BIOC2201<br/><br/>",
@@ -2300,7 +2300,7 @@
     },
     "BEES3199": {
         "original": "Prerequisite: enrolled in a Science program (single or dual) and majoring in a BEES major or specialisation. Must pass Preparation for WIL modules prior to enrolment. Placement must be related to the student\u2019s major or specialisation, and approved by BEES prior to enrolment. <br/>Pre-requisite: 48 units of credit and a minimum 65 WAM. <br/>It is the student\u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year.<br/><br/>",
-        "processed": "a Science program (single || dual) && majoring in a BEES major || specialisation. Must pass for WIL modules prior to enrolment. Placement must be related to the \u2019s major || specialisation && approved by BEES prior to enrolment. 48UOC && a 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
+        "processed": "a Science program (single || dual) && majoring in a BEES major || specialisation. Must pass for WIL modules . Placement must be related to the \u2019s major || specialisation && approved by BEES . 48UOC && a 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
     },
     "BEES3299": {
         "original": "Must complete BEES3199 BEES Work Placement 1 as a co-requisite or pre-requisite.<br/>It is the student\u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year.      <br/><br/>",
@@ -2356,7 +2356,7 @@
     },
     "BEIL0008": {
         "original": "Prerequisite: 96 units of credit completed in Built Environment<br/><br/>",
-        "processed": "96UOC in Built Environment"
+        "processed": "96UOC in BENV"
     },
     "BEIL0009": {
         "original": "Prerequisite: 96 unit of credits completed<br/><br/>",
@@ -2436,7 +2436,7 @@
     },
     "BEIL6013": {
         "original": "UG students must be in their third year of study (having completed 96 units of credit) to enroll in this course. <br/><br/>",
-        "processed": "UG must be in their third year of study (having 96UOC) to enroll in this course"
+        "processed": "UG must be in their third year of study (having 96UOC)"
     },
     "BENV0021": {
         "original": "",
@@ -2836,7 +2836,7 @@
     },
     "BLDG4018": {
         "original": "Program Prerequisite:4522 or Program 3332 with WAM of 65 or over<br/><br/>",
-        "processed": "Program 4522 || Program 3332 with 65WAM || over"
+        "processed": "Program 4522 || Program 3332 && 65WAM || over"
     },
     "BLDG4019": {
         "original": "Program Prerequisite: 4522<br/><br/>",
@@ -2848,19 +2848,19 @@
     },
     "BLDG4022": {
         "original": "Program Prerequisite:4522 or Program 3332 with WAM of 65 or over<br/><br/>",
-        "processed": "Program 4522 || Program 3332 with 65WAM || over"
+        "processed": "Program 4522 || Program 3332 && 65WAM || over"
     },
     "BLDG4023": {
         "original": "Program Prerequisite:4522 or Program 3332 with WAM of 65 or over<br/><br/>",
-        "processed": "Program 4522 || Program 3332 with 65WAM || over"
+        "processed": "Program 4522 || Program 3332 && 65WAM || over"
     },
     "BLDG4024": {
         "original": "Program Prerequisite:4522 or Program 3332 with WAM of 65 or over<br/><br/>",
-        "processed": "Program 4522 || Program 3332 with 65WAM || over"
+        "processed": "Program 4522 || Program 3332 && 65WAM || over"
     },
     "BLDG4501": {
         "original": "Program Prerequisite:4522 or Program 3332 with WAM of 65 or over<br/><br/>",
-        "processed": "Program 4522 || Program 3332 with 65WAM || over"
+        "processed": "Program 4522 || Program 3332 && 65WAM || over"
     },
     "BLDG4504": {
         "original": "Prerequisite: BLDG4501 or BENV4000<br/><br/>",
@@ -2868,7 +2868,7 @@
     },
     "CDEV2000": {
         "original": "Student must have completed 30 UoC in order to enrol.<br/><br/>",
-        "processed": "30UOC in order to enrol"
+        "processed": "30UOC"
     },
     "CDEV3000": {
         "original": "",
@@ -2888,7 +2888,7 @@
     },
     "CDEV3101": {
         "original": "Students are required to have completed a minimum of 30 UoC to enrol in this course.<br/><br/>",
-        "processed": "are required to have a minimum 30UOC to enrol in this course"
+        "processed": "are required to have a minimum 30UOC"
     },
     "CDEV3200": {
         "original": "Students need to have completed a minimum of 30 UoC to undertake this course.<br/><br/>",
@@ -3028,7 +3028,7 @@
     },
     "CHEM1041": {
         "original": "Prerequisite: CHEM1031, or CHEM1011 with a credit or above.<br/><br/>Prerequisite: Must be enrolled in a program with the option of a CHEM major<br/><br/>",
-        "processed": "CHEM1031 || CHEM1011 with a credit || above. Must be a program with the option of a CHEM major"
+        "processed": "CHEM1031 || CHEM1011 && a credit || above. Must be a program && the option of a CHEM major"
     },
     "CHEM1051": {
         "original": "Prerequisite: Enrolment in the Bachelor of Medicinal Chemistry (3999 or 3992) or Bachelor of Medicinal Chemistry/Law program<br/><br/>",
@@ -3036,7 +3036,7 @@
     },
     "CHEM1061": {
         "original": "Prerequisite: Enrolment in the Bachelor of Medicinal Chemistry (3992 or 3999) program and completion of either CHEM1051 or CHEM1031 or CHEM1011 with a credit or above.<br/><br/>",
-        "processed": "Enrolment in the Bachelor of Medicinal Chemistry (3992 || 3999) program && CHEM1051 || CHEM1031 || CHEM1011 with a credit || above"
+        "processed": "Enrolment in the Bachelor of Medicinal Chemistry (3992 || 3999) program && CHEM1051 || CHEM1031 || CHEM1011 && a credit || above"
     },
     "CHEM1151": {
         "original": "Enrolment in Medicinal Chemistry (3992) or (3999) or 4755<br/><br/>",
@@ -3048,11 +3048,11 @@
     },
     "CHEM1521": {
         "original": "Pre-req of Prerequisite: CHEM1011 Chemistry 1A or equivalent. Exclusion: CHEM1021<br/><br/>",
-        "processed": "of CHEM1011 Chemistry 1A || equivalent"
+        "processed": "CHEM1011"
     },
     "CHEM1777": {
         "original": "Presumed knowledge is Year 10 General Science.<br/><br/>",
-        "processed": "knowledge is Year 10 General Science"
+        "processed": ""
     },
     "CHEM1811": {
         "original": "",
@@ -3100,7 +3100,7 @@
     },
     "CHEM2701": {
         "original": "First year chemistry is a prerequisite. One of the following courses must have been completed prior to enrolment: <br/> - CHEM1021 -- Chemistry 1B <br/> - CHEM1041/1061 -- Higher Chemistry 1B<br/> - CHEM1821 -- Engineering Chemistry 1B<br/> - CHEM1829 -- Biological Chemistry for Optometry Students<br/><br/>",
-        "processed": "First year chemistry is a . One of the following courses must have been prior to enrolment: - CHEM1021 -- Chemistry 1B - CHEM1041/1061 -- Higher Chemistry 1B - CHEM1821 -- Engineering Chemistry 1B - CHEM1829 -- Biological Chemistry for Optometry"
+        "processed": "First year chemistry is a . One of the following courses must have been : - CHEM1021 -- Chemistry 1B - CHEM1041/1061 -- Higher Chemistry 1B - CHEM1821 -- Engineering Chemistry 1B - CHEM1829 -- Biological Chemistry for Optometry"
     },
     "CHEM2921": {
         "original": "Prerequisite: CHEM1011 or DPST1031 or CHEM1031 or CHEM1051 or CHEM1811 and CHEM1021 or DPST1032 or CHEM1041 or CHEM1061 or CHEM1821<br/><br/>",
@@ -3136,7 +3136,7 @@
     },
     "CHEM3199": {
         "original": "Prerequisite: enrolled in a Science program (single or dual) and majoring in a Chemistry major or specialisation. Must pass Preparation for WIL modules prior to enrolment. Placement must be related to the student\u2019s major or specialisation, and approved by Chemistry prior to enrolment. <br/>Pre-requisite: 48 units of credit and a minimum 65 WAM. <br/>It is the student\u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year.<br/><br/>",
-        "processed": "a Science program (single || dual) && majoring in a Chemistry major || specialisation. Must pass for WIL modules prior to enrolment. Placement must be related to the \u2019s major || specialisation && approved by Chemistry prior to enrolment. 48UOC && a 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
+        "processed": "a Science program (single || dual) && majoring in a Chemistry major || specialisation. Must pass for WIL modules . Placement must be related to the \u2019s major || specialisation && approved by Chemistry . 48UOC && a 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
     },
     "CHEM3299": {
         "original": "Must complete CHEM3199 Chemistry Work Placement 1 as a co-requisite or pre-requisite <br/>It is the student\u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year.<br/><br/>",
@@ -3296,8 +3296,8 @@
     },
     "COMM1040": {
         "original": "Prerequisite: Students must be in Good Academic Standing<br/><br/>",
-        "processed": "",
-        "handbook_note": "Students must be in Good Academic Standing"
+        "handbook_note": "Students must be in Good Academic Standing.",
+        "processed": ""
     },
     "COMM1100": {
         "original": "Students enrolled in Actuarial Studies or Economics programs (in single or double degree mode) are not permitted to enrol. Only available to single and double degree Business School students in Term 1. It will be offered to non-Business School students in Terms 2 and 3.<br/><br/>",
@@ -3310,13 +3310,13 @@
     },
     "COMM1120": {
         "original": "Only available to single and double degree Business School students in Term 1. It will be offered to non-Business School students in Terms 2 and 3.<br/><br/>",
-        "processed": "",
-        "handbook_note": "Only available to single and double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 and 3"
+        "handbook_note": "Only available to single and double degree Business School students in Term 1. It will be offered to non-Business School students in Terms 2 and 3.",
+        "processed": ""
     },
     "COMM1140": {
         "original": "Only available to single and double degree Business School students in Term 1. It will be offered to non-Business School students in Terms 2 and 3.<br/><br/>",
-        "processed": "",
-        "handbook_note": "Only available to single and double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 and 3"
+        "handbook_note": "Only available to single and double degree Business School students in Term 1. It will be offered to non-Business School students in Terms 2 and 3.",
+        "processed": ""
     },
     "COMM1150": {
         "original": "Pre-requisite: COMM1100 and excludes MGMT1101. Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Terms 1 and 3.<br/><br/>",
@@ -3325,18 +3325,18 @@
     },
     "COMM1170": {
         "original": "Pre-requisite: COMM1140. Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Terms 1 and 3.<br/><br/>",
-        "processed": "COMM1140",
-        "handbook_note": "Only available to single and double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 and 3"
+        "handbook_note": "Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Terms 1 and 3.",
+        "processed": "COMM1140"
     },
     "COMM1180": {
         "original": "Pre-requisite: COMM1140. Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Terms 1 and 3.<br/><br/>",
-        "processed": "COMM1140",
-        "handbook_note": "Only available to single and double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 and 3"
+        "handbook_note": "Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Terms 1 and 3.",
+        "processed": "COMM1140"
     },
     "COMM1190": {
         "original": "Pre-requisite: COMM1110 or ECON1203 or MATH1031 or MATH1041 or MATH1131 or MATH1141 or MATH1151. Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Term 3.<br/><br/>",
-        "processed": "COMM1110 || ECON1203 || MATH1031 || MATH1041 || MATH1131 || MATH1141 || MATH1151",
-        "handbook_note": "Only available to single and double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 and 3"
+        "handbook_note": "Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Term 3.",
+        "processed": "COMM1110 || ECON1203 || MATH1031 || MATH1041 || MATH1131 || MATH1141 || MATH1151"
     },
     "COMM1822": {
         "original": "",
@@ -3385,13 +3385,13 @@
     },
     "COMM3090": {
         "original": "Students are expected to be in their final year of a Bachelor of Commerce single or dual degree with at least 108 UOC completed.<br/><br/>",
-        "processed": "108UOC",
-        "handbook_note": "Students are expected to be in their final year of a Bachelor of Commerce single or dual degree"
+        "handbook_note": "Students must be in their final year of a single or double Commerce degree",
+        "processed": "COMM# && 108UOC"
     },
     "COMM3091": {
         "original": "Completed at least 72 UoC and be enrolled in a Commerce Program; be in good academic standing, and completed COMM1999<br/><br/>",
-        "processed": "72UOC && COMM1999 && COMM#",
-        "handbook_note": "Students must be in good academic standing."
+        "handbook_note": "Students must be in Good Academic Standing.",
+        "processed": "72UOC && COMM# && COMM1999"
     },
     "COMM3101": {
         "original": "Pre-requisite: Completion of 48 UOC.<br/>This course is by application only.Please contact the Co-op office for more information.<br/>Students who have completed DIPP1510 or COMM2222 or are in Business Co-Op programs are excluded from this course.<br/><br/>",
@@ -3405,8 +3405,8 @@
     },
     "COMM3303": {
         "original": "Pre-requisite: This course is by application only. <br/><br/>",
-        "processed": "",
-        "handbook_note": "This course is by application only. Please contact the Co-op office for more information."
+        "handbook_note": "This course is by application only.",
+        "processed": ""
     },
     "COMM3500": {
         "original": "Pre-requisite: COMM1822, COMM2050, COMM2501, Business Analytics Modelling I course (ECON2206 or ECON2209 or RISK2002) and completing the Business Analytics major (COMMJ1). It is recommended students are in their final year when taking this course.<br/><br/>",
@@ -3423,12 +3423,11 @@
     },
     "COMM3999": {
         "original": "Pre-requisite: Completed myBCom First Year Portfolio (COMM1999) and in their final year of a single or double Commerce degree (completed at least 72 UOC of Business courses).<br/><br/>",
-        "processed": "COMM1999 && 72UOC in ZBUS && COMM#",
-        "handbook_note": "Studetns must be in their final year"
+        "processed": "myBCom First Year Portfolio (COMM1999) && in their final year of a single || double Commerce degree (72UOC of Business courses)"
     },
     "COMM6700": {
         "original": "Prerequisite: undergraduate students must have completed 72 units of credit <br/><br/>",
-        "processed": "72UOC"
+        "processed": "undergraduate 72UOC"
     },
     "COMP1010": {
         "original": "Exclusion: COMP1511/DPST1091<br/><br/>",
@@ -3878,7 +3877,7 @@
     },
     "CRIM3025": {
         "original": "Prerequisite: 96 uoc including CRIM1010, CRIM1011 and CRIM2042, WAM 70, and in the final year of a Criminology major or Criminology & Criminal Justice single or double degree. Students in program 4034 are not eligible to enrol. Consent required.<br/><br/>",
-        "processed": "96UOC && CRIM1010, CRIM1011 && CRIM2042, 70WAM && in the final year of a Criminology major || Criminology && Criminal Justice single || double degree. in program 4034 are not eligible to enrol. Consent required"
+        "processed": "96UOC && CRIM1010, CRIM1011 && CRIM2042, 70WAM && in the final year of a Criminology major || Criminology && Criminal Justice single || double degree. in program 4034 are not eligible . Consent required"
     },
     "CRIM4001": {
         "original": "Prerequisite: Enrolment in the Criminology honours program<br/><br/>",
@@ -4371,7 +4370,7 @@
     },
     "DART2252": {
         "original": "Students must have completed 48 UOC (in any program) prior to enrolling in this course.<br/><br/>",
-        "processed": "48UOC (in any program) prior to enrolling in this course"
+        "processed": "48UOC (in any program)"
     },
     "DART2310": {
         "original": "",
@@ -4427,7 +4426,7 @@
     },
     "DART3200": {
         "original": "Students must complete 72 UOC including two media arts disciplinary sequences prior to enrolling.<br/><br/>",
-        "processed": "must complete 72UOC && two media arts disciplinary sequences prior to enrolling"
+        "processed": "must complete 72UOC && two media arts disciplinary sequences"
     },
     "DART3201": {
         "original": "Must have completed DART3200<br/><br/>",
@@ -5150,7 +5149,7 @@
     },
     "EDST2002": {
         "original": "Prerequisite: 72 uoc overall, including EDST1101, EDST1104, EDST1108, and EDST2003, and enrolment in an Education program. Students must have passed the Literacy and Numeracy Test for Initial Teacher Education in order to enrol into this course<br/><br/>",
-        "processed": "72UOC && EDST1101, EDST1104, EDST1108 && EDST2003 && (4509 || 4056) . must have passed the Literacy && Numeracy Test for Initial Teacher Education in order to enrol into this course"
+        "processed": "72UOC && EDST1101, EDST1104, EDST1108 && EDST2003 && (4509 || 4056) . must have passed the Literacy && Numeracy Test for Initial Teacher Education"
     },
     "EDST2003": {
         "original": "Prerequisite: 24 units of credit at Level 1 including EDST1101 or EDST1104 and enrolment in one of the following teaching Programs 3446, 3462, 4053, 4054, 4058, 4059, 4061, 4062 or 4076<br/><br/>",
@@ -5386,7 +5385,7 @@
     },
     "EDST6761": {
         "original": "Prerequisite: EDST6760 and 12 units of credit in Teaching Methods courses. Students must have passed the Literacy and Numeracy Test for Initial Teacher Education in order to enrol into this course.<br/><br/>",
-        "processed": "EDST6760 && 12UOC in Teaching Methods courses. must have passed the Literacy && Numeracy Test for Initial Teacher Education in order to enrol into this course"
+        "processed": "EDST6760 && 12UOC in Teaching Methods courses. must have passed the Literacy && Numeracy Test for Initial Teacher Education"
     },
     "EDST6765": {
         "original": "Prerequisite: EDST4080, EDST4096, EDST6760, 24 uoc Teaching Method courses, and enrolment in an Education program. Students must have passed LANTITE.\u00a0Students must have sufficient subject content knowledge in their teaching areas.\u00a0Excluded: EDST4081<br/><br/>",
@@ -5746,7 +5745,8 @@
     },
     "FADA6700": {
         "original": "Prerequisite: 48 units of credit overall. Student must be in good academic standing. Consent from ADA WIL Team required.<br/><br/>",
-        "processed": "48UOC . must be in good academic standing. Consent from ADA WIL Team required"
+        "handbook_note": "Students must be in Good Academic Standing.",
+        "processed": "48UOC . must. Consent from ADA WIL Team required"
     },
     "FINS1612": {
         "original": "",
@@ -6820,7 +6820,7 @@
     },
     "LAWS1021": {
         "original": "Prerequisite: LAWS1052 or LAWS1051; JURD7152<br/><br/>",
-        "processed": "LAWS1052 || LAWS1051; JURD7152"
+        "processed": "LAWS1052 || LAWS1051 JURD7152"
     },
     "LAWS1022": {
         "original": "Prerequisite: LAWS1021 or JURD7121 or LAWS1001 or  JURD7101<br/><br/>",
@@ -6832,11 +6832,11 @@
     },
     "LAWS1055": {
         "original": "Co-requisite with LAWS1052. To be able to be enrolled in separately in subsequent term if LAWS1052 successfully completed<br/><br/>",
-        "processed": "[with LAWS1052. To be able to be separately in subsequent term if LAWS1052 successfully]"
+        "processed": "[&& LAWS1052. To be able to be separately in subsequent term if LAWS1052 successfully]"
     },
     "LAWS1061": {
         "original": "Prerequisite: Prerequisite: LAWS1052 or LAWS1051; JURD7152<br/><br/>",
-        "processed": "LAWS1052 || LAWS1051; JURD7152"
+        "processed": "LAWS1052 || LAWS1051 JURD7152"
     },
     "LAWS1075": {
         "original": "Pre-requisite: Principles of Private Law (any one of LAWS1071, LAWS1150, JURD7150, or JURD7171)<br/><br/>",
@@ -6868,7 +6868,7 @@
     },
     "LAWS1150": {
         "original": "Prerequisite: LAWS1052 or LAWS1051; JURD7152<br/><br/>",
-        "processed": "LAWS1052 || LAWS1051; JURD7152"
+        "processed": "LAWS1052 || LAWS1051 JURD7152"
     },
     "LAWS1160": {
         "original": "Pre-requisite: Principles of Public Law (LAWS1141/JURD7141) or Public Law (LAWS1140/JURD7140)<br/><br/>",
@@ -6896,7 +6896,7 @@
     },
     "LAWS2277": {
         "original": "Corequisite: LAWS1160 or JURD7160<br/>(One of these courses must be completed prior to or concurrently with enrolment in LAWS2277)<br/><br/>",
-        "processed": "[LAWS1160 || JURD7160 (One of these courses must be prior to || concurrently with enrolment in)]"
+        "processed": "[LAWS1160 || JURD7160 (One of these courses must be prior to || concurrently && enrolment in)]"
     },
     "LAWS2320": {
         "original": "Pre-requisite: 24 UOC completed in LLB courses or 24 UOC completed in Juris Doctor courses. Juris Doctor students who commenced prior to 2013 need no pre-requisites.<br/><br/>",
@@ -7960,7 +7960,7 @@
     },
     "MATS3199": {
         "original": "Prerequisite: enrolled in a Science program (single or dual) and majoring in Materials Science. Must pass Preparation for WIL modules prior to enrolment. Placement must be related to the student\u2019s major, and approved by the School of Materials Science and Engineering prior to enrolment.<br/>Pre-requisite: 48 units of credit and a minimum 65 WAM.<br/>It is the student\u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year.<br/><br/>",
-        "processed": "a Science program (single || dual) && majoring in Materials Science. Must pass for WIL modules prior to enrolment. Placement must be related to the \u2019s major && approved by the School of Materials Science && Engineering prior to enrolment. 48UOC && a 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
+        "processed": "a Science program (single || dual) && majoring in Materials Science. Must pass for WIL modules . Placement must be related to the \u2019s major && approved by the School of Materials Science && Engineering . 48UOC && a 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
     },
     "MATS3299": {
         "original": "Must complete MATS3199 Materials Science Work Placement 1 as a co-requisite or pre-requisite.<br/> It is the student\u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year.<br/><br/>",
@@ -8112,7 +8112,7 @@
     },
     "MDIA2012": {
         "original": "Prerequisite: MDIA1002 or MDIA1003; and enrolment in a single or double degree Bachelor of Media (PR & Advertising) program<br/><br/>",
-        "processed": "MDIA1002 || MDIA1003; && enrolment in a single || double degree Bachelor of Media (PR && Advertising) program"
+        "processed": "MDIA1002 || MDIA1003 && enrolment in a single || double degree Bachelor of Media (PR && Advertising) program"
     },
     "MDIA2013": {
         "original": "Prerequisite: 24 uoc overall, including MDIA1006 Mediated Storytelling or ARTS1064 Screen Production I, or MDIA1004 News Fundamentals or (with course convenor approval) at least 6 UOC of an audio-visual media production or feature writing course<br/><br/>",
@@ -8489,32 +8489,32 @@
         "processed": "MGMT2718 || MGMT2001 || MGMT2102 || ECON2206 || ECON2209 || RISK2002"
     },
     "MGMT4101": {
-        "original": "MGMT2102 and completion of 72 UOC (if you are enrolled the Commerce International [program 3558], completion of the Commerce Overseas Program (Exchange) is also required)<br/><br/>",
+        "original": "Prerequisite: Program 4501 and enrolment in the International Business Honours plan is required.<br/><br/>",
         "processed": "4501",
         "handbook_note": "enrolment in the International Business Honours plan is required"
     },
     "MGMT4104": {
-        "original": "MGMT2102 and completion of 72 UOC (if you are enrolled the Commerce International [program 3558], completion of the Commerce Overseas Program (Exchange) is also required)<br/><br/>",
+        "original": "Prerequisite: Program 4501 and enrolled in the Human Resource Management Honours plan.<br/><br/>",
         "processed": "4501",
         "handbook_note": "enrolment in the Human Resource Management Honours plan is required"
     },
     "MGMT4500": {
-        "original": "MGMT2102 and completion of 72 UOC (if you are enrolled the Commerce International [program 3558], completion of the Commerce Overseas Program (Exchange) is also required)<br/><br/>",
+        "original": "Prerequisite: Program 4501 and enrolment in the International Business Honours plan is required.<br/><br/>",
         "processed": "4501",
         "handbook_note": "enrolment in the International Business Honours plan is required"
     },
     "MGMT4501": {
-        "original": "MGMT2102 and completion of 72 UOC (if you are enrolled the Commerce International [program 3558], completion of the Commerce Overseas Program (Exchange) is also required)<br/><br/>",
+        "original": "Prerequisite: Program 4501 and enrolment in the International Business Honours plan is required.<br/><br/>",
         "processed": "4501",
         "handbook_note": "enrolment in the International Business Honours plan is required"
     },
     "MGMT4738": {
-        "original": "MGMT2102 and completion of 72 UOC (if you are enrolled the Commerce International [program 3558], completion of the Commerce Overseas Program (Exchange) is also required)<br/><br/>",
+        "original": "Prerequisite: Program 4501 and enrolled in the Human Resource Management Honours plan.<br/><br/>",
         "processed": "4501",
         "handbook_note": "enrolment in the Human Resource Management Honours plan is required"
     },
     "MGMT4739": {
-        "original": "MGMT2102 and completion of 72 UOC (if you are enrolled the Commerce International [program 3558], completion of the Commerce Overseas Program (Exchange) is also required)<br/><br/>",
+        "original": "Prerequisite: Program 4501 and enrolled in the Human Resource Management Honours plan.<br/><br/>",
         "processed": "4501",
         "handbook_note": "enrolment in the Human Resource Management Honours plan is required"
     },
@@ -8812,7 +8812,7 @@
     },
     "MUSC3105": {
         "original": "Prerequisite: 24 units of credit in Music courses, including 12 at Level 1 and enrolment in a single or dual Music program. Or 48 UOC overall, including 6 UOC level 1 Music and 6 UOC level 2 Music and enrolment in a Music major or minor<br/><br/>",
-        "processed": "24UOC in Music courses && 12 at L1 && enrolment in a single || dual Music program. || 48UOC && 6UOC L1 Music && 6UOC L2 Music && enrolment in a Music major || minor"
+        "processed": "(24UOC in MUSC && 12UOC in L1 MUSC) || (48UOC && 6UOC in L1 MUSC && 6UOC in L2 MUSC)"
     },
     "MUSC3162": {
         "original": "Prerequisite: MUSC1602, MUSC1603, and MUSC1604<br/><br/>",
@@ -8844,11 +8844,11 @@
     },
     "MUSC3805": {
         "original": "Prerequisite: 24uoc in MUSC courses and enrolment in a Music single or double degree; or 66 uoc overall and enrolment in a single or double degree Media (S&SP) program<br/><br/>",
-        "processed": "24UOC in MUSC courses && enrolment in a Music single || double degree; || 66UOC && (4510 || 3454 || 3438 || 3453) (S&SP) program"
+        "processed": "24UOC in MUSC courses && enrolment in a Music single || double degree || 66UOC && (4510 || 3454 || 3438 || 3453) (S&SP) program"
     },
     "MUSC3806": {
         "original": "Prerequisite: MUSC2803 and enrolment in the Sonic Arts stream in a Music single or double degree; or 66 uoc overall, including MDIA1005 and enrolment in Media (S&SP) single or double degree<br/><br/>",
-        "processed": "MUSC2803 && enrolment in the Sonic Arts stream in a Music single || double degree; || 66UOC && MDIA1005 && enrolment in Media (S&SP) single || double degree"
+        "processed": "MUSC2803 && enrolment in the Sonic Arts stream in a Music single || double degree || 66UOC && MDIA1005 && enrolment in Media (S&SP) single || double degree"
     },
     "MUSC3807": {
         "original": "Prerequisite: 24uoc in MUSC courses, and enrolment in a Music single or dual program<br/><br/>",
@@ -8892,7 +8892,7 @@
     },
     "MUSC4101": {
         "original": "Prerequisite: Level 1, 2 and 3 core Music courses and enrolment in a Music single or dual degree program; or 48 UoC overall including MUSC1602 or MUSC1604, and MUSC2116 and enrolment in a Music major in an Arts program<br/><br/>",
-        "processed": "L1, 2 && 3 core Music courses && enrolment in a Music single || dual degree program; || 48UOC && MUSC1602 || MUSC1604 && MUSC2116 && enrolment in a Music major in an Arts program"
+        "processed": "(L1 CORES && L2 CORES && L3 CORES) || (48UOC && (MUSC1602 || MUSC1604) && MUSC2116)"
     },
     "MUSC4102": {
         "original": "Prerequisite: MUSC4101, and enrolment in a Music program. Or 48 uoc overall including MUSC1602 or MUSC1604, and MUSC2116 and enrolment in a Music major in an Arts program<br/><br/>",
@@ -9200,7 +9200,7 @@
     },
     "PHSL2101": {
         "original": "Prerequisite: Prerequisite: 6 UOC of level 1 Biology; and 6 UOC of Level 1 CHEM; and 6 UOC Level 1 MATH or equivalent DPST courses.<br/><br/>",
-        "processed": "6UOC in L1 Biology; && 6UOC in L1 CHEM; && 6UOC L1 MATH || equivalent DPST courses"
+        "processed": "6UOC in L1 Biology && 6UOC in L1 CHEM && 6UOC L1 MATH || equivalent DPST courses"
     },
     "PHSL2121": {
         "original": "",
@@ -9340,7 +9340,7 @@
     },
     "PHYS3199": {
         "original": "Prerequisite: enrolled in a Science program (single or dual) and completing a Physics major. Must pass Preparation for WIL modules prior to enrolment. Placement must be related to the student\u2019s major, and approved by the School of Physics prior to enrolment.<br/>Pre-requisite: 48 units of credit and a minimum 65 WAM.<br/>It is the student\u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year.<br/><br/>",
-        "processed": "a Science program (single || dual) && a Physics major. Must pass for WIL modules prior to enrolment. Placement must be related to the \u2019s major && approved by the School of Physics prior to enrolment. 48UOC && a 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
+        "processed": "a Science program (single || dual) && a Physics major. Must pass for WIL modules . Placement must be related to the \u2019s major && approved by the School of Physics . 48UOC && a 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
     },
     "PHYS3299": {
         "original": "Must complete PHYS3199 Physics Work Placement 1 as a co-requisite or pre-requisite. <br/>It is the student\u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year.<br/><br/>",
@@ -9588,7 +9588,7 @@
     },
     "PSYC3199": {
         "original": "Prerequisite: enrolled in a Science program (single or dual) and completing a Psychology major. Must pass Preparation for WIL modules prior to enrolment. Placement must be related to the student\u2019s Psychology major and approved by the School of Psychology prior to enrolment. <br/>Pre-requisite: 48 units of credit and a minimum 65 WAM. <br/>It is the student\u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year.<br/><br/>",
-        "processed": "a Science program (single || dual) && a Psychology major. Must pass for WIL modules prior to enrolment. Placement must be related to the \u2019s Psychology major && approved by the School of Psychology prior to enrolment. 48UOC && a 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
+        "processed": "a Science program (single || dual) && a Psychology major. Must pass for WIL modules . Placement must be related to the \u2019s Psychology major && approved by the School of Psychology . 48UOC && a 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
     },
     "PSYC3202": {
         "original": "Prereq: PSYCs 2101, 2081, 2001<br/><br/>",
@@ -10175,7 +10175,7 @@
     },
     "SOMS3199": {
         "original": "Prerequisite: enrolled in 3991 program, or in a Science program (single or dual) and majoring in a SOMS major. Must complete preparation for WIL mini-modules prior to enrolment. Placement must be related to the student\u2019s major or specialisation, and approved by SOMS prior to enrolment.  <br/>Pre-requisite of 48 units of credit and a minimum 65 WAM.  <br/><br/>",
-        "processed": "3991 program || in a Science program (single || dual) && majoring in a SOMS major. Must complete for WIL mini-modules prior to enrolment. Placement must be related to the \u2019s major || specialisation && approved by SOMS prior to enrolment. 48UOC && a 65WAM"
+        "processed": "3991 program || in a Science program (single || dual) && majoring in a SOMS major. Must complete for WIL mini-modules . Placement must be related to the \u2019s major || specialisation && approved by SOMS . 48UOC && a 65WAM"
     },
     "SOMS3232": {
         "original": "Prerequisite: ANAT3231 or BIOC2101  or BIOC2181 or BABS2202 or (ANAT2241 and PHSL2101)<br/><br/>",
@@ -11283,7 +11283,7 @@
     },
     "ZHSS2600": {
         "original": "Prerequisite: Any 2 of ZHSS1201, ZHSS1202, ZHSS1301, ZHSS1302, ZHSS1401, ZHSS1402, ZBUS1101, ZBUS1103 or ZGEN2240 with Head of School consent.<br/><br/>",
-        "processed": "Any 2 of ZHSS1201, ZHSS1202, ZHSS1301, ZHSS1302, ZHSS1401, ZHSS1402, ZBUS1101, ZBUS1103 || ZGEN2240 with Head of School consent"
+        "processed": "Any 2 of ZHSS1201, ZHSS1202, ZHSS1301, ZHSS1302, ZHSS1401, ZHSS1402, ZBUS1101, ZBUS1103 || ZGEN2240 && Head of School consent"
     },
     "ZHSS2601": {
         "original": "",
@@ -11339,7 +11339,7 @@
     },
     "ZHSS3231": {
         "original": "Prerequisite: ZHSS1201 or ZHSS1202 or with Head of School approval<br/><br/>",
-        "processed": "ZHSS1201 || ZHSS1202 || with Head of School approval"
+        "processed": "ZHSS1201 || ZHSS1202 || && Head of School approval"
     },
     "ZHSS3233": {
         "original": "Prerequisite: ZHSS1201 and ZHSS1202<br/><br/>",
@@ -11599,7 +11599,7 @@
     },
     "ZPEM2401": {
         "original": "Prerequisite: ZPEM1302 or ZPEM1304; and ZPEM1501 and ZPEM1502<br/><br/>",
-        "processed": "ZPEM1302 || ZPEM1304; && ZPEM1501 && ZPEM1502"
+        "processed": "ZPEM1302 || ZPEM1304 && ZPEM1501 && ZPEM1502"
     },
     "ZPEM2405": {
         "original": "Prerequisite: ZPEM2401<br/><br/>",

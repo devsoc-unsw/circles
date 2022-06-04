@@ -1,6 +1,6 @@
 import React from "react";
 import { Skeleton } from "antd";
-import SkeletonCard from "./SkeletonCard";
+import { SkeletonCard } from "../DegreeCard";
 
 const SkeletonDashboard = () => (
   <div className="centered">

@@ -1,14 +1,16 @@
+import { parseMarkToInt } from "../TermPlanner/utils";
+
 const prepareUserPayload = (degree, planner) => {
   const { startYear, courses } = planner;
-  const { programCode, specialisation, minor } = degree;
+  const { programCode, majors, minors } = degree;
 
   const specialisations = {};
-  specialisations[specialisation] = 1;
-  if (minor !== "") specialisations[minor] = 1;
+  majors.forEach((major) => { specialisations[major] = 1; });
+  minors.forEach((minor) => { specialisations[minor] = 1; });
 
   const selectedCourses = {};
-  Array.from(Object.keys(courses)).forEach((course) => {
-    selectedCourses[course] = null;
+  Object.entries(courses).forEach(([courseCode, courseData]) => {
+    selectedCourses[courseCode] = parseMarkToInt(courseData.mark);
   });
 
   return {

@@ -1,6 +1,3 @@
-import axios from "axios";
-import { toggleWarnings } from "../../reducers/plannerSlice";
-
 // Recent Past Term Constants
 const FEB = 2;
 const JUN = 6;
@@ -8,6 +5,22 @@ const SEP = 9;
 const MID_MONTH_START = 14;
 const BEG_MONTH_START = 1;
 const TERM_PAST_AMOUNT = 14;
+
+const parseMarkToInt = (mark) => {
+  // eslint-disable-next-line no-restricted-globals
+  if (!isNaN(mark)) {
+    return parseInt(mark, 10);
+  }
+  const letterGradeToIntMap = {
+    SY: null,
+    FL: 25,
+    PS: 60,
+    CR: 70,
+    DN: 80,
+    HD: 90,
+  };
+  return Object.keys(letterGradeToIntMap).includes(mark) ? letterGradeToIntMap[mark] : null;
+};
 
 // takes in startYear (int) and gets current date to
 // return the most recent term that has past (week 2)
@@ -41,44 +54,26 @@ const getMostRecentPastTerm = (startYear) => {
   };
 };
 
-const validateTermPlannerRequest = (payload) => (dispatch) => {
-  axios
-    .post(
-      "/planner/validateTermPlanner/",
-      JSON.stringify(payload),
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      },
-    )
-    .then(({ data }) => {
-      dispatch(toggleWarnings(data.courses_state));
-    })
-    // eslint-disable-next-line no-console
-    .catch((err) => console.log(err));
-};
-
-const prepareCoursesForValidation = (plannerInfo, userInfo, suppress) => {
-  const { years, startYear } = plannerInfo;
-  const { programCode, specialisation, minor } = userInfo;
+const prepareCoursesForValidation = (planner, degree, suppress) => {
+  const { years, startYear, courses } = planner;
+  const { programCode, majors, minor } = degree;
 
   const plan = [];
   years.forEach((year) => {
     const formattedYear = [];
     Object.values(year).forEach((term) => {
-      const courses = {};
-      Object.values(term).forEach((course) => {
-        courses[course] = null; // TODO: turn into course mark
+      const coursesData = {};
+      Object.values(term).forEach((c) => {
+        coursesData[c] = parseMarkToInt(courses[c].mark);
       });
-      formattedYear.push(courses);
+      formattedYear.push(coursesData);
     });
     plan.push(formattedYear);
   });
 
   const payload = {
     program: programCode,
-    specialisations: [specialisation, minor],
+    specialisations: minor ? [...majors, minor] : majors,
     year: 1,
     plan,
     mostRecentPastTerm: suppress ? getMostRecentPastTerm(startYear) : { Y: 0, T: 0 },
@@ -87,9 +82,4 @@ const prepareCoursesForValidation = (plannerInfo, userInfo, suppress) => {
   return payload;
 };
 
-const validateTermPlanner = (dispatch, plannerInfo, userInfo, suppress) => {
-  const payload = prepareCoursesForValidation(plannerInfo, userInfo, suppress);
-  dispatch(validateTermPlannerRequest(payload));
-};
-
-export default validateTermPlanner;
+export { getMostRecentPastTerm, prepareCoursesForValidation, parseMarkToInt };

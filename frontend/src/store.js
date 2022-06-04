@@ -37,15 +37,15 @@ const rootReducer = combineReducers({
 
 // migration schema used to translate structure - return undefined to reset initialState
 const migrations = {
-  // 0: () => undefined,
-  // 1: () => undefined,
+  0: () => undefined,
+  1: () => undefined,
 };
 
 const persistConfig = {
   key: "root",
   version: REDUX_PERSIST_VERSION,
   storage,
-  whitelist: ["degree", "courses", "planner"],
+  whitelist: ["degree", "courses", "planner", "theme"],
   migrate: createMigrate(migrations, { debug: true }),
 
 };
