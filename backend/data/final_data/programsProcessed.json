@@ -248,7 +248,7 @@
                 },
                 "minors": {
                     "Food Science (Honours)": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "FOODA2": "Humanitarian Science and Technology"
                         },
@@ -1088,7 +1088,7 @@
                 },
                 "minors": {
                     "Commerce": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "ECONO2": "Behavioural Economics",
                             "MGMTA2": "Management",
@@ -1341,7 +1341,7 @@
                 },
                 "minors": {
                     "Actuarial Studies": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "COMMJ2": "Business Analytics",
                             "MGMTA2": "Management",
@@ -1360,7 +1360,7 @@
                         "notes": "Students may elect to complete a maximum of one major/minor listed below in addition to their Actuarial Studies program requirements.\nNotes for Single-Degree students: Completion of one of the following non-Actuarial Studies Majors within the single Actuarial Studies degree may result in more UOC required for degree completion.\nNotes for Double-Degree students: Completion of an additional major/minor within the combined Actuarial Studies degree may result in more UOC required for degree completion."
                     },
                     "Science": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "GEOGH2": "Physical Geography",
                             "PHSLB2": "Physiology",
@@ -1620,7 +1620,7 @@
                 },
                 "minors": {
                     "Commerce": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "MGMTJ2": "Innovation, Strategy and Entrepreneurship",
                             "FINSR2": "Financial Technology",
@@ -1640,7 +1640,7 @@
                         "notes": "Students may choose to use their electives to complete one of the following minors.\nMinor Requirements: An approved disciplinary stream containing at least 18 UOC at Level 2 and Level 3."
                     },
                     "Actuarial Studies": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "COMMJ2": "Business Analytics",
                             "MGMTA2": "Management",
@@ -2086,7 +2086,7 @@
             "spec_data": {
                 "minors": {
                     "Interior Architecture (Honours)": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "IDESA2": "Industrial Design ",
                             "CODEA2": "Computational Design",
@@ -3041,7 +3041,7 @@
                 },
                 "minors": {
                     "Advanced Science (Honours)": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "MSCIH2": "Marine Science",
                             "MATHC2": "Mathematics",
@@ -3300,7 +3300,7 @@
                 },
                 "minors": {
                     "Science": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "CLIMA2": "Climate Science",
                             "BIOCD2": "Molecular Biology",
@@ -3816,7 +3816,7 @@
                 },
                 "minors": {
                     "Arts": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "JAPNF2": "Japanese Studies",
                             "CHINF2": "Advanced Chinese Studies",
@@ -4625,7 +4625,7 @@
                 },
                 "minors": {
                     "Media (Screen and Sound Production)": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "CRWTA2": "Creative Writing",
                             "PSYCM2": "Psychology",
@@ -4923,7 +4923,7 @@
                 },
                 "minors": {
                     "Arts and Business": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "CHINE2": "Chinese Studies",
                             "SPANI2": "Spanish Studies",
@@ -5481,7 +5481,7 @@
                 },
                 "minors": {
                     "International Studies": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "GERSF2": "German Studies",
                             "ENGGA2": "Humanitarian Engineering",
@@ -5671,7 +5671,7 @@
                 },
                 "minors": {
                     "Arts": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "COMDF2": "Global Development",
                             "HISTD2": "History",
@@ -5854,7 +5854,7 @@
             "spec_data": {
                 "minors": {
                     "Media (Public Relations and Advertising)": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "MGMTH2": "Human Resource Management",
                             "ITALB2": "Italian Studies",
@@ -6031,7 +6031,7 @@
             "spec_data": {
                 "minors": {
                     "Media (Communication and Journalism)": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "FRENF2": "French Studies",
                             "CHINF2": "Advanced Chinese Studies",
@@ -6248,7 +6248,7 @@
                 },
                 "minors": {
                     "Arts": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "GEOGS2": "Geography",
                             "ARTHB2": "Art History and Theory",
@@ -6542,7 +6542,7 @@
                 },
                 "minors": {
                     "Science": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "CHEMD2": "Chemistry",
                             "CLIMA2": "Climate Science",
@@ -6904,7 +6904,7 @@
                 },
                 "minors": {
                     "Advanced Science (Honours)": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "GEOLF2": "Geology",
                             "BIOCD2": "Molecular Biology",
@@ -7174,7 +7174,7 @@
                 },
                 "minors": {
                     "Commerce": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "ECONF2": "Business Economics",
                             "MARKA2": "Marketing",
@@ -7440,7 +7440,7 @@
                 },
                 "minors": {
                     "Commerce": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "TABLC2": "Taxation",
                             "INFSA2": "Information Systems",
@@ -8909,7 +8909,7 @@
                 },
                 "minors": {
                     "Science": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "BIOSD2": "Biology",
                             "CLIMA2": "Climate Science",
@@ -9274,7 +9274,7 @@
                 },
                 "minors": {
                     "Advanced Science (Honours)": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "MATHC2": "Mathematics",
                             "ANATB2": "Anatomy",
@@ -9549,7 +9549,7 @@
                 },
                 "minors": {
                     "Commerce": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "ECONO2": "Behavioural Economics",
                             "ACCTA2": "Accounting",
@@ -9742,7 +9742,7 @@
                 },
                 "minors": {
                     "Arts": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "ARTHB2": "Art History and Theory",
                             "PSYCM2": "Psychology",
@@ -10174,7 +10174,7 @@
                 },
                 "minors": {
                     "International Studies": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "POLSG2": "Politics and International Relations",
                             "FRENG2": "Advanced French Studies",
@@ -10588,7 +10588,7 @@
                 },
                 "minors": {
                     "International Studies": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "KOREF2": "Korean Studies",
                             "FRENF2": "French Studies",
@@ -10878,7 +10878,7 @@
                 },
                 "minors": {
                     "Arts": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "ITALB2": "Italian Studies",
                             "JAPNF2": "Japanese Studies",
@@ -11100,7 +11100,7 @@
                 },
                 "minors": {
                     "Arts": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "GERSF2": "German Studies",
                             "FRENF2": "French Studies",
@@ -11303,7 +11303,7 @@
                 },
                 "minors": {
                     "Commerce": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "ECONO2": "Behavioural Economics",
                             "JAPNF2": "Japanese Studies",
@@ -11553,7 +11553,7 @@
                 },
                 "minors": {
                     "Commerce": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "COMMJ2": "Business Analytics",
                             "IBUSA2": "International Business",
@@ -11888,7 +11888,7 @@
                 },
                 "minors": {
                     "Commerce": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "INFSA2": "Information Systems",
                             "COMMJ2": "Business Analytics",
@@ -12184,7 +12184,7 @@
                 },
                 "minors": {
                     "Science": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "PHYSC2": "Physics",
                             "PATHB2": "Pathology",
@@ -12208,7 +12208,7 @@
                         "notes": "Students may choose to complete an optional minor in one of the following areas, using their Science and/or free electives."
                     },
                     "Commerce": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "ECONO2": "Behavioural Economics",
                             "MARKA2": "Marketing",
@@ -12356,7 +12356,7 @@
                 },
                 "minors": {
                     "Economics": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "AUSTB2": "Australian Studies",
                             "MATHC2": "Mathematics",
@@ -12568,7 +12568,7 @@
                 },
                 "minors": {
                     "Commerce (Co-op)": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "COMMJ2": "Business Analytics",
                             "FINSA2": "Finance",
@@ -12824,7 +12824,7 @@
                 },
                 "minors": {
                     "Commerce (International)": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "ECONO2": "Behavioural Economics",
                             "TABLA2": "Business Law",
@@ -13103,7 +13103,7 @@
                 },
                 "minors": {
                     "Science": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "CLIMA2": "Climate Science",
                             "MSCIH2": "Marine Science",
@@ -13881,7 +13881,7 @@
                 },
                 "minors": {
                     "Advanced Science (Honours)": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "PHARB2": "Pharmacology",
                             "MATHC2": "Mathematics",
@@ -14101,7 +14101,7 @@
                 },
                 "minors": {
                     "Commerce": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "IBUSA2": "International Business",
                             "FINSR2": "Financial Technology",
@@ -14315,7 +14315,7 @@
                 },
                 "minors": {
                     "Arts": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "ARTHB2": "Art History and Theory",
                             "GEOGS2": "Geography",
@@ -14359,7 +14359,7 @@
                         "notes": "You may complete one of the following external specialisations.\nMATHB2 is only available in 3961 Engineering (Honours)/Arts.\nIf you are enrolled in a double degree program and wish to complete an external minor that is greater than 24 UOC you will need to take extra UOC above 96 UOC.\n\nYou are required to complete one Home Major and one Minor in order to graduate.\nNote: If you choose to complete a major or minor in a language and your language skills are assessed as Level A in Introductory, Intermediate, Advanced or Professional, you can only commence study of the language in Term 1."
                     },
                     "Commerce": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "SPANI2": "Spanish Studies",
                             "TABLA2": "Business Law",
@@ -14542,7 +14542,7 @@
                 },
                 "minors": {
                     "Arts": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "ENGLC2": "English",
                             "ASIAB2": "Asian Studies",
@@ -14830,7 +14830,7 @@
                 },
                 "minors": {
                     "Commerce": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "MGMTA2": "Management",
                             "IBUSA2": "International Business",
@@ -15239,7 +15239,7 @@
                 },
                 "minors": {
                     "International Studies": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "GERSF2": "German Studies",
                             "ENGGA2": "Humanitarian Engineering",
@@ -16099,7 +16099,7 @@
                 },
                 "minors": {
                     "International Studies": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "SPANI2": "Spanish Studies",
                             "FRENG2": "Advanced French Studies",
@@ -16587,7 +16587,7 @@
                 },
                 "minors": {
                     "Commerce": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "MGMTA2": "Management",
                             "ECONF2": "Business Economics",
@@ -16720,7 +16720,7 @@
                 },
                 "minors": {
                     "Actuarial Studies": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "ECONO2": "Behavioural Economics",
                             "MGMTJ2": "Innovation, Strategy and Entrepreneurship",
@@ -17180,7 +17180,7 @@
                 },
                 "minors": {
                     "Actuarial Studies": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "TABLA2": "Business Law",
                             "MARKA2": "Marketing",
@@ -17568,7 +17568,7 @@
                 },
                 "minors": {
                     "Advanced Science (Honours)": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "CLIMA2": "Climate Science",
                             "PSYCM2": "Psychology",
@@ -17592,7 +17592,7 @@
                         "notes": "Students may choose to complete an optional minor in one of the following areas, using their Science and/or free electives"
                     },
                     "Commerce": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "IBUSA2": "International Business",
                             "TABLC2": "Taxation",
@@ -18090,7 +18090,7 @@
                 },
                 "minors": {
                     "Commerce": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "MGMTA2": "Management",
                             "MGMTJ2": "Innovation, Strategy and Entrepreneurship",
@@ -18700,7 +18700,7 @@
                 },
                 "minors": {
                     "Actuarial Studies": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "FINSA2": "Finance",
                             "COMMJ2": "Business Analytics",
@@ -18990,7 +18990,7 @@
                 },
                 "minors": {
                     "Actuarial Studies": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "ECONO2": "Behavioural Economics",
                             "MGMTH2": "Human Resource Management",
@@ -19134,7 +19134,7 @@
                 },
                 "minors": {
                     "Engineering (Honours)": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "ENGGA2": "Humanitarian Engineering"
                         },
@@ -19984,7 +19984,7 @@
                 },
                 "minors": {
                     "Advanced Science (Honours)": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "PHSLB2": "Physiology",
                             "MATHC2": "Mathematics",
@@ -20193,7 +20193,7 @@
                 },
                 "minors": {
                     "Commerce": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "MGMTJ2": "Innovation, Strategy and Entrepreneurship",
                             "IBUSA2": "International Business",
@@ -20795,7 +20795,7 @@
                 },
                 "minors": {
                     "Science": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "PHSLB2": "Physiology",
                             "BIOSD2": "Biology",
@@ -21841,7 +21841,7 @@
                 },
                 "minors": {
                     "Advanced Science (Honours)": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "GEOLF2": "Geology",
                             "BIOSD2": "Biology",
@@ -21961,7 +21961,7 @@
                 },
                 "minors": {
                     "Arts": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "WOMSC2": "Gender Studies",
                             "EUROC2": "European Studies",
@@ -22186,7 +22186,7 @@
                 },
                 "minors": {
                     "Commerce": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "ECONF2": "Business Economics",
                             "MGMTH2": "Human Resource Management",
@@ -22697,7 +22697,7 @@
                 },
                 "minors": {
                     "Science": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "GEOGH2": "Physical Geography",
                             "GEOLF2": "Geology",
@@ -23207,7 +23207,7 @@
                 },
                 "minors": {
                     "Commerce": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "IBUSA2": "International Business",
                             "TABLA2": "Business Law",
@@ -23368,7 +23368,7 @@
                 },
                 "minors": {
                     "Arts": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "ARTHB2": "Art History and Theory",
                             "PSYCM2": "Psychology",
@@ -24050,7 +24050,7 @@
                 },
                 "minors": {
                     "Science": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "ATSIC2": "Indigenous Studies",
                             "CRWTA2": "Creative Writing",
@@ -24403,7 +24403,7 @@
                 },
                 "minors": {
                     "Arts": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "THSTC2": "Theatre and Performance Studies",
                             "HISTD2": "History",
@@ -24447,7 +24447,7 @@
                         "notes": "You are required to complete one Home Major and one Minor in order to graduate.\nNote: If you choose to complete a major or minor in a language and your language skills are assessed as Level A in Introductory, Intermediate, Advanced or Professional, you can only commence study of the language in Term 1.\n\nYou may complete one of the following external specialisations.\nMATHB2 is only available in 3961 Engineering (Honours)/Arts.\nIf you are enrolled in a double degree program and wish to complete an external minor that is greater than 24 UOC you will need to take extra UOC above 96 UOC."
                     },
                     "Advanced Science (Honours)": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "ARCYB2": "Palaeosciences",
                             "MSCIH2": "Marine Science",
@@ -24708,7 +24708,7 @@
                 },
                 "minors": {
                     "Arts": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "KOREF2": "Korean Studies",
                             "LINGC2": "Linguistics",
@@ -24929,7 +24929,7 @@
                 },
                 "minors": {
                     "Arts": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "POLSG2": "Politics and International Relations",
                             "THSTC2": "Theatre and Performance Studies",
@@ -25499,7 +25499,7 @@
                 },
                 "minors": {
                     "Advanced Science (Honours)": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "PHYSC2": "Physics",
                             "ANATB2": "Anatomy",
@@ -25720,7 +25720,7 @@
                 },
                 "minors": {
                     "Science": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "PHARB2": "Pharmacology",
                             "CHEMD2": "Chemistry",
@@ -26022,7 +26022,7 @@
                 },
                 "minors": {
                     "Arts": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "GEOGK2": "Geographical Studies",
                             "THSTC2": "Theatre and Performance Studies",
@@ -26409,7 +26409,7 @@
                 },
                 "minors": {
                     "Advanced Science (Honours)": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "GEOGH2": "Physical Geography",
                             "MICRJ2": "Immunology",
@@ -27227,7 +27227,7 @@
                 },
                 "minors": {
                     "Science": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "MICRJ2": "Immunology",
                             "PSYCM2": "Psychology",
@@ -27843,7 +27843,7 @@
                 },
                 "minors": {
                     "Science (International)": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "KOREC2": "Korean Studies (Extended)",
                             "INDOD2": "Indonesian Studies (Extended)",
@@ -28512,7 +28512,7 @@
                 },
                 "minors": {
                     "Advanced Science (Honours)": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "MATHD2": "Statistics",
                             "PHYSC2": "Physics",
@@ -29557,7 +29557,7 @@
                 },
                 "minors": {
                     "Arts": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "MGMTH2": "Human Resource Management",
                             "PSYCM2": "Psychology",
@@ -29805,7 +29805,7 @@
                 },
                 "minors": {
                     "Arts": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "CRWTA2": "Creative Writing",
                             "FILMB2": "Film Studies",
@@ -35871,7 +35871,7 @@
                 },
                 "minors": {
                     "Commerce": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "ECONF2": "Business Economics",
                             "IBUSA2": "International Business",
@@ -36193,7 +36193,7 @@
                 },
                 "minors": {
                     "Actuarial Studies": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "ACCTA2": "Accounting",
                             "IBUSA2": "International Business",
@@ -38107,7 +38107,7 @@
                 },
                 "minors": {
                     "Science": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "CHEMD2": "Chemistry",
                             "PHARB2": "Pharmacology",
@@ -39432,7 +39432,7 @@
                 },
                 "minors": {
                     "Arts": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "WOMSC2": "Gender Studies",
                             "ENGLC2": "English",
@@ -39801,7 +39801,7 @@
                 },
                 "minors": {
                     "Arts and Business": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "POLSG2": "Politics and International Relations",
                             "KOREG2": "Advanced Korean Studies",
@@ -40607,7 +40607,7 @@
                 },
                 "minors": {
                     "International Studies": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "IBUSA2": "International Business",
                             "KOREF2": "Korean Studies",
@@ -42356,7 +42356,7 @@
                 },
                 "minors": {
                     "Arts": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "PSYCB2": "Studies in Psychology",
                             "GEOGS2": "Geography",
@@ -42712,7 +42712,7 @@
                 },
                 "minors": {
                     "Arts": {
-                        "is_optional": false,
+                        "is_optional": true,
                         "specs": {
                             "FILMB2": "Film Studies",
                             "FRENF2": "French Studies",

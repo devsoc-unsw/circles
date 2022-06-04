@@ -349,7 +349,7 @@ def add_specialisation_data(processed_data: dict, program_data: dict, item: dict
             continue
 
         new_data = {
-            "is_optional": is_optional,
+            "is_optional": spec_type == "minor" or is_optional,
             "specs": {},
             "notes": item["description"],
         }
