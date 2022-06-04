@@ -41,7 +41,7 @@ const GraphicalSelector = () => {
   useEffect(() => {
     const fetchCourseList = async () => {
       const res = (
-        await axios.get(`/programs/getStructure/${programCode}/${majors.join("+")}${minors && `/${minors.join("+")}`}`)
+        await axios.get(`/programs/getStructure/${programCode}/${majors.join("+")}/${minors.join("+")}`)
       ).data;
       const courseList = (
         Object.values(res.structure)
