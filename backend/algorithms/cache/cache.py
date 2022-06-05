@@ -4,6 +4,8 @@ JSON files for faster algorithms performance.
 This should be run from the backend directory or via runprocessors
 """
 
+from functools import reduce
+import operator
 import re
 
 from algorithms.cache.cache_config import (CACHE_CONFIG,
@@ -141,14 +143,12 @@ def cache_program_mappings():
     Achieves this by looking for a keyword in the program's title
     """
 
-    keyword_codes = read_data(CACHE_CONFIG)
+    keyword_codes: dict[str, list[str]] = read_data(CACHE_CONFIG)
     # Initialise mappings with all the mapping codes
     # TODO: Add any more mappings. Look into updating manual-fixes wiki page?
 
-    code_list = keyword_codes["codes"]
-
     mappings = {}
-    for code in code_list:
+    for code in reduce(operator.add, keyword_codes.values()):
         mappings[code] = {}
 
     programs = read_data(PROGRAMS_FORMATTED_FILE)

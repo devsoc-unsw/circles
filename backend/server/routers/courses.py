@@ -338,7 +338,7 @@ def unselectCourse(userData: UserData, unselectedCourse: str):
     """
     user = User(fixUserData(userData.dict()))
     if not user.has_taken_course(unselectedCourse):
-        return []
+        return { 'courses' : [] }
 
     affected_courses = []
     # Brute force loop through all taken courses and if we find a course which is
@@ -348,7 +348,7 @@ def unselectCourse(userData: UserData, unselectedCourse: str):
     while courses_to_delete:
         affected_courses.extend(courses_to_delete)
         for course in courses_to_delete:
-            if user.has_taken_course():
+            if user.has_taken_course(course):
                 user.pop_course(course)
 
         courses_to_delete = [
