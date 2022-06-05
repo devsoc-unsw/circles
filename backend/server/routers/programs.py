@@ -154,7 +154,7 @@ def convertSubgroupObjectToCoursesDict(object: str, description: str|list[str]):
     if not re.match(r"[A-Z]{4}[0-9]{4}", object):
         return regex_search(object)
 
-    return {object: description}
+    return { object: description }
 
 def addSubgroupContainer(structure: dict, type: str, container: dict, exceptions: list[str]) -> list[str]:
     """ Returns the added courses """

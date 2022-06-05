@@ -130,11 +130,3 @@ class User:
     def pop_course(self, course: str) -> Tuple[int, int]:
         """ removes a course from done courses and returns its uoc and mark """
         return self.courses.pop(course)
-
-    def unselect_course(self, target: str) -> list[str]:
-        """
-        Given a course to unselect and a list of locked courses, remove the
-        courses from the user and return a list of courses which would be
-        affected by the unselection
-        """
-

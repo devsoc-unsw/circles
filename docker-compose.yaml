@@ -73,7 +73,6 @@ services:
     networks:
       - circles-net
 
-
 # Note only named volumes need to be listed here for persistance.
 volumes:
   circles_data:
