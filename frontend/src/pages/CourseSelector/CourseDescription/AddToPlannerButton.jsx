@@ -47,6 +47,7 @@ const AddToPlannerButton = () => {
         warnings: [],
         handbookNote: course.handbook_note,
         isAccurate: course.is_accurate,
+        mark: null,
       },
     };
     dispatch(addToUnplanned(data));
@@ -56,7 +57,7 @@ const AddToPlannerButton = () => {
   const removeFromPlanner = async () => {
     const [data] = await axiosRequest("post", `/courses/unselectCourse/${id}`, prepareUserPayload(degree, planner));
     addCourseToPlannerTimeout(false);
-    dispatch(removeCourses(data.affected_courses));
+    dispatch(removeCourses(data.courses));
   };
 
   return (

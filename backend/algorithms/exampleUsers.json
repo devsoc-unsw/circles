@@ -1,6 +1,6 @@
 {
     "user1": {
-        "program": "3707",
+        "program": "3778",
         "specialisations": {
             "COMPA1": 1,
             "ACCTA2": 1
@@ -12,7 +12,7 @@
         "year": 3
     },
     "user2": {
-        "program": "3707",
+        "program": "3778",
         "specialisations": {
             "COMPA1": 1
         },
@@ -24,7 +24,7 @@
         "year": 1
     },
     "user3": {
-        "program": "3707",
+        "program": "3778",
         "specialisations": {
             "COMPA1": 1
         },
@@ -32,7 +32,7 @@
         "year": 1
     },
     "user4": {
-        "program": "3707",
+        "program": "3778",
         "specialisations": {
             "COMPA1": 1, 
             "ACCTA2": 1
@@ -47,7 +47,7 @@
         "year": 3
     },
     "user5": {
-        "program": "3707",
+        "program": "3778",
         "specialisations": {
             "COMPA1": 1
         },
@@ -60,10 +60,17 @@
         "year": 1
     },
     "user6": {
+<<<<<<< HEAD
         "program": "3707",
         "specialisations": {
             "COMPJ1": 1,
             "ACCTA2": 1
+=======
+        "program": "3789",
+        "specialisations": {
+            "COMPJ1": 1,
+            "FOODH1": 1
+>>>>>>> dev
         },
         "courses": {
             "COMP9242": [6, 81],

@@ -55,4 +55,8 @@ def report_index_string(tokens, bad_index):
 
 
 if __name__ == "__main__":
+<<<<<<< HEAD
     log_broken_conditions()
+=======
+    log_broken_conditions()
+>>>>>>> dev

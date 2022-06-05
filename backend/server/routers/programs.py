@@ -1,13 +1,19 @@
+"""
+API for fetching data about programs and specialisations
+"""
 import contextlib
 import re
 from typing import Optional
 
 from fastapi import APIRouter, HTTPException
 from server.database import programsCOL, specialisationsCOL
-from server.routers.model import (Structure, majors, message, minorInFE,
+from server.routers.model import (Structure, Majors, message, minorInFE,
                                   minorInSpecialisation, minors, programs)
 from server.routers.courses import regex_search
+<<<<<<< HEAD
 from data.processors.programs_processing import TEST_PROGS
+=======
+>>>>>>> dev
 
 router = APIRouter(
     prefix="/programs",
@@ -17,6 +23,7 @@ router = APIRouter(
 
 @router.get("/")
 def programsIndex():
+    """ sanity test that this file is loaded """
     return "Index of programs"
 
 
@@ -45,14 +52,20 @@ def getPrograms():
     """ Fetch all the programs the backend knows about in the format of { code: title } """
     # return {"programs": {q["code"]: q["title"] for q in programsCOL.find()}}
     # TODO On deployment, DELETE RETURN BELOW and replace with the return above
+<<<<<<< HEAD
     return {"programs": {"3778": "Computer Science", 
                         "3784": "Commerce / Computer Science",
+=======
+    return {"programs": {"3778": "Computer Science",
+                        "3784": "Commerce / Computer Science",
+                        "3502": "Commerce"
+>>>>>>> dev
                         }}
 
 
 @router.get(
     "/getMajors/{programCode}",
-    response_model=majors,
+    response_model=Majors,
     responses={
         400: {
             "model": message,
@@ -63,6 +76,7 @@ def getPrograms():
             "content": {
                 "application/json": {
                     "example": {
+<<<<<<< HEAD
                         "majors": { 
                             "Computer Science": {
                                 "COMPS1": "Computer Science (Embedded Systems)",
@@ -77,6 +91,21 @@ def getPrograms():
                             "Commerce": {
                                 "FINSA1": "Finance",
                                 "ACCTA1": "Accounting",
+=======
+                        "majors": {
+                            "Computer Science": {
+                                "specs": {
+                                    "COMPS1": "Computer Science (Embedded Systems)",
+                                    "COMPJ1": "Computer Science (Programming Languages)",
+                                    "COMPE1": "Computer Science (eCommerce Systems)",
+                                    "COMPA1": "Computer Science",
+                                    "COMPN1": "Computer Science (Computer Networks)",
+                                    "COMPI1": "Computer Science (Artificial Intelligence)",
+                                    "COMPD1": "Computer Science (Database Systems)",
+                                    "COMPY1": "Computer Science (Security Engineering)",
+                                },
+                                "note": "COMPA1 is the default stream, and will be used if no other stream is selected."
+>>>>>>> dev
                             }
                         }
                     }
@@ -93,7 +122,7 @@ def getMajors(programCode: str):
         raise HTTPException(
             status_code=400, detail="Program code was not found")
 
-    return {"majors": result["components"]["SpecialisationData"]["Majors"]}
+    return {"majors": result["components"]["spec_data"]["majors"]}
 
 
 @router.get(
@@ -110,12 +139,17 @@ def getMajors(programCode: str):
                 "application/json": {
                     "example": {
                         "minors": {
-                            "INFSA2": "<name of minor>",
-                            "ACCTA2": "<name of minor>",
-                            "PSYCM2": "<name of minor>",
-                            "MARKA2": "<name of minor>",
-                            "FINSA2": "<name of minor>",
-                            "MATHC2": "<name of minor>",
+                            "Computer Science": { 
+                                "specs": {
+                                    "INFSA2": "<name of minor>",
+                                    "ACCTA2": "<name of minor>",
+                                    "PSYCM2": "<name of minor>",
+                                    "MARKA2": "<name of minor>",
+                                    "FINSA2": "<name of minor>",
+                                    "MATHC2": "<name of minor>",
+                                },
+                                "notes": "Optional minors available include the following. If you complete a minor of 30 UOC, you will also need to take 6 UOC of free electives.",
+                            },
                         }
                     }
                 }
@@ -135,6 +169,7 @@ def getMinors(programCode: str):
 
     # NOTE: DO NOT RENAME THE VARIABLE TO `minors` as it attempts to create
     # a redefinition of the `minors` class
+<<<<<<< HEAD
     if programCode in minorInFE:
         minrs = result["components"]["FE"]["Minors"]
     elif programCode in minorInSpecialisation:
@@ -157,9 +192,40 @@ def addSubgroupContainer(structure: dict, type: str, container: dict, exceptions
     """ Returns the added courses """
     structure[type][container["title"]] = {}
     item = structure[type][container["title"]]
+=======
+    minrs = result["components"]["spec_data"].get("minors")
 
-    item["UOC"] = container["credits_to_complete"]
+    return {"minors": minrs}
+
+def convertSubgroupObjectToCoursesDict(object: str, description: str|list[str]):#-> dict[str, str]:
+    """ Gets a subgroup object (format laid out in the processor) and fetches the exact courses its referring to """
+    if " or " in object:
+        return {c: description[index] for index, c in enumerate(object.split(" or "))}
+    if not re.match(r"[A-Z]{4}[0-9]{4}", object):
+        return regex_search(object)
+
+    return {object: description}
+>>>>>>> dev
+
+def addSubgroupContainer(structure: dict, type: str, container: dict, exceptions: list[str]) -> list[str]:
+    """ Returns the added courses """
+    #TODO: further standardise non_spec_data to remove these line:
+    title = container.get("title")
+    if container.get("type") == "gened":
+        title = "General Education"
+    
+    # don't do anything if it's info_rule or limit_rule
+    if container.get("type") is not None and "rule" in container.get("type"):
+        return []
+
+    structure[type][title] = {}
+    item = structure[type][title]
+    item["UOC"] = container.get("credits_to_complete") if container.get("credits_to_complete") is not None else 0
     item["courses"] = {}
+
+    if container.get("courses") is None:
+        return []
+
     for object, description in container["courses"].items():
         item["courses"] = item["courses"] | {
             course: description for course, description
@@ -264,36 +330,31 @@ def getStructure(
     structure = {}
 
     if major:
+<<<<<<< HEAD
         majors = major.split("+") if "+" in major else [major]
 
         for m in majors:
+=======
+        majors_l = major.split("+") if "+" in major else [major]
+        for m in majors_l:
+>>>>>>> dev
             addSpecialisation(structure, m, "Major")
 
     if minor:
-        addSpecialisation(structure, minor, "Minor")
+        minors_l = minor.split("+") if "+" in minor else [minor]
+        for m in minors_l:
+            addSpecialisation(structure, m, "Minor")
 
     # add details for program code
     programsResult = programsCOL.find_one({"code": programCode})
     if not programsResult:
+        print(programCode)
         raise HTTPException(
             status_code=400, detail="Program code was not found")
 
-    structure["General"] = {}
-    for name, data in programsResult["components"]["NonSpecialisationData"].items():
-        data["UOC"] = (
-            data["credits_to_complete"] if "credits_to_complete" in data else -1
-        )
-
-        with contextlib.suppress(KeyError):
-            del data["type"]
-            del data["credits_to_complete"]
-        structure["General"][name] = data
+    structure['General'] = {}
     with contextlib.suppress(KeyError):
-        structure["General"]["Flexible Education"] = {
-            "UOC": programsResult["components"]["FE"]["credits_to_complete"]
-        }
-        structure["General"]["General Education"] = {
-            "UOC": programsResult["components"]["GE"]["credits_to_complete"]
-        }
+        for container in programsResult['components']['non_spec_data']:
+            addSubgroupContainer(structure, "General", container, [])
 
     return {"structure": structure}

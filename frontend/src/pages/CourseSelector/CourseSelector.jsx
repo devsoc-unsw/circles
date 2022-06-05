@@ -16,7 +16,7 @@ const CourseSelector = () => {
   const dispatch = useDispatch();
 
   const {
-    programCode, programName, minor, majors,
+    programCode, programName, minors, majors,
   } = useSelector((state) => state.degree);
 
   const { courses } = useSelector((state) => state.planner);
@@ -48,7 +48,8 @@ const CourseSelector = () => {
     // get structure of degree
     const fetchStructure = async () => {
       try {
-        const res = await axios.get(`/programs/getStructure/${programCode}/${majors.join("+")}${minor && `/${minor}`}`);
+        const minorAppend = minors.length > 0 ? `/${minors.join("+")}` : "";
+        const res = await axios.get(`/programs/getStructure/${programCode}/${majors.join("+")}${minorAppend}`);
         setStructure(res.data.structure);
       } catch (err) {
         // eslint-disable-next-line no-console
@@ -56,7 +57,7 @@ const CourseSelector = () => {
       }
     };
     if (programCode && (majors.length > 0)) fetchStructure();
-  }, [programCode, majors, minor]);
+  }, [programCode, majors, minors]);
 
   return (
     <PageTemplate>

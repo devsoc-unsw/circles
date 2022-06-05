@@ -1,9 +1,17 @@
+<<<<<<< HEAD
 import React, { useState } from "react";
+=======
+import React, { useEffect, useState } from "react";
+>>>>>>> dev
 import {
   Tooltip, Button, Typography, Alert,
 } from "antd";
 import { useSelector, useDispatch } from "react-redux";
+<<<<<<< HEAD
 import { useNavigate } from "react-router-dom";
+=======
+import { useLocation, useNavigate } from "react-router-dom";
+>>>>>>> dev
 import { CalendarOutlined, DeleteOutlined } from "@ant-design/icons";
 import { removeAllCourses } from "../../reducers/plannerSlice";
 import "./index.less";
@@ -30,6 +38,14 @@ const PlannerCart = () => {
       setCode("");
     }, 3500);
   };
+<<<<<<< HEAD
+=======
+  const pathname = useLocation();
+
+  useEffect(() => {
+    setOpenMenu(false);
+  }, [pathname]);
+>>>>>>> dev
 
   return (
     <div className="planner-cart-root">
@@ -78,7 +94,13 @@ const PlannerCart = () => {
                 type="secondary"
                 shape="round"
                 className="planner-cart-link-to-cs"
+<<<<<<< HEAD
                 onClick={() => navigate("/course-selector")}
+=======
+                onClick={() => {
+                  navigate("/course-selector");
+                }}
+>>>>>>> dev
               >
                 Go to course selector
               </Button>

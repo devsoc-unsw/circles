@@ -8,7 +8,11 @@ import { toggleTermComplete } from "../../../reducers/plannerSlice";
 import "./index.less";
 
 const TermBox = ({
+<<<<<<< HEAD
   name, courses, termsOffered, isDragging,
+=======
+  name, courses, termsOffered, isDragging, showMarks,
+>>>>>>> dev
 }) => {
   const term = name.match(/T[0-3]/)[0];
 
@@ -53,7 +57,20 @@ const TermBox = ({
             className={`termBox ${isOffered && isDragging && "droppable "
             } ${isSummerEnabled && "summerTermBox"} `}
           >
+<<<<<<< HEAD
             {courses.map((code, index) => <DraggableCourse key={code} code={code} index={index} />)}
+=======
+            {courses.map(
+              (code, index) => (
+                <DraggableCourse
+                  key={code}
+                  code={code}
+                  index={index}
+                  showMarks={showMarks}
+                />
+              ),
+            )}
+>>>>>>> dev
             {provided.placeholder}
           </ul>
         </Badge>

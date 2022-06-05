@@ -41,7 +41,7 @@ def AERO_4110():
         "processed": "At least 144 Units in AEROAH stream. AERO3110"
     """
 
-    return "144UOC in AEROAH && AERO3110"
+    return "144UOC && AEROAH && AERO3110"
 
 
 if __name__ == "__main__":

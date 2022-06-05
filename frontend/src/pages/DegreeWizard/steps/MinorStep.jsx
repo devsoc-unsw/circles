@@ -5,13 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import "./steps.less";
 import { useSpring, animated } from "@react-spring/web";
 import springProps from "./spring";
-import { setMinor } from "../../../reducers/degreeSlice";
+import { addMinor, removeMinor } from "../../../reducers/degreeSlice";
 
 const { Title } = Typography;
 const MinorStep = ({ incrementStep, currStep }) => {
   const dispatch = useDispatch();
-  const { minor, programCode } = useSelector((store) => store.degree);
-  const [options, setOptions] = useState({});
+  const { minors, programCode } = useSelector((store) => store.degree);
+  const [options, setOptions] = useState({ someProgramName: { specs: { major: "major data etc" } } });
 
   const fetchAllMinors = useCallback(async () => {
     const res = await axios.get(`/programs/getMinors/${programCode}`);
@@ -43,20 +43,26 @@ const MinorStep = ({ incrementStep, currStep }) => {
 
       <Menu
         className="degree-minors"
-        selectedKeys={minor && [minor]}
+        selectedKeys={minors}
         mode="inline"
-        onDeselect={() => dispatch(setMinor(""))}
-        onSelect={(e) => dispatch(setMinor(e.key))}
+        onDeselect={(e) => dispatch(removeMinor(e.key))}
+        onSelect={(e) => dispatch(addMinor(e.key))}
+        defaultOpenKeys={["0"]}
       >
-        {programCode ? (
-          Object.keys(options).map((key) => (
-            <Menu.Item className="text" key={key}>
-              {key} {options[key]}
-            </Menu.Item>
-          ))
-        ) : (
-          <div>Please select a degree first...</div>
-        )}
+        {Object.keys(options).map((sub, index) => (
+          <Menu.SubMenu
+            key={index}
+            title={`Minors for ${sub}`}
+            className="step-submenu"
+            mode="inline"
+          >
+            {Object.keys(options[sub].specs).map((key) => (
+              <Menu.Item className="text" key={key}>
+                {key} {options[sub].specs[key]}
+              </Menu.Item>
+            ))}
+          </Menu.SubMenu>
+        ))}
       </Menu>
     </animated.div>
   );
