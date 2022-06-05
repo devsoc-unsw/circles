@@ -1,21 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Button, notification, Typography, Modal,
-} from "antd";
 import { useNavigate } from "react-router-dom";
 import { scroller } from "react-scroll";
+import {
+  Button, Modal,
+  notification, Typography,
+} from "antd";
+import PageTemplate from "components/PageTemplate";
+import { resetCourses } from "reducers/coursesSlice";
+import { resetTabs } from "reducers/courseTabsSlice";
+import { initialState, resetDegree } from "reducers/degreeSlice";
+import { resetPlanner } from "reducers/plannerSlice";
 import DegreeStep from "./steps/DegreeStep";
-import SpecialisationStep from "./steps/SpecialisationStep";
 import MinorStep from "./steps/MinorStep";
-import "./index.less";
-import YearStep from "./steps/YearStep";
+import SpecialisationStep from "./steps/SpecialisationStep";
 import StartBrowsingStep from "./steps/StartBrowsingStep";
-import { resetTabs } from "../../reducers/courseTabsSlice";
-import { resetPlanner } from "../../reducers/plannerSlice";
-import { resetDegree, initialState } from "../../reducers/degreeSlice";
-import PageTemplate from "../../components/PageTemplate";
-import { resetCourses } from "../../reducers/coursesSlice";
+import YearStep from "./steps/YearStep";
+import "./index.less";
 
 const { Title } = Typography;
 

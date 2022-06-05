@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
-import axios from "axios";
-import G6 from "@antv/g6";
+import React, { useEffect, useRef, useState } from "react";
 import { findDOMNode } from "react-dom";
+import { useSelector } from "react-redux";
+import G6 from "@antv/g6";
+import axios from "axios";
 
 const GraphicalSelector = () => {
   const { programCode, majors, minors } = useSelector((state) => state.degree);

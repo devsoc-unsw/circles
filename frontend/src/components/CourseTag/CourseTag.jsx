@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Tag } from "antd";
-import { addTab } from "../../reducers/courseTabsSlice";
+import { addTab } from "reducers/courseTabsSlice";
 import "./index.less";
 
 const CourseTag = ({ name }) => {

@@ -1,11 +1,11 @@
 import React from "react";
-import { BugOutlined } from "@ant-design/icons";
-import { IoMdMoon, IoIosSunny } from "react-icons/io";
-import { Menu } from "antd";
-import { useNavigate } from "react-router-dom";
+import { IoIosSunny, IoMdMoon } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
-import { FEEDBACK_LINK, inDev } from "../../constants";
-import { toggleTheme } from "../../reducers/themeSlice";
+import { useNavigate } from "react-router-dom";
+import { BugOutlined } from "@ant-design/icons";
+import { Menu } from "antd";
+import { FEEDBACK_LINK, inDev } from "config/constants";
+import { toggleTheme } from "reducers/themeSlice";
 
 const DrawerContent = ({ onCloseDrawer }) => {
   const theme = useSelector((state) => state.theme);
@@ -33,6 +33,13 @@ const DrawerContent = ({ onCloseDrawer }) => {
       <Menu.Item key="course-selector" onClick={() => handlePush("/course-selector")}>
         Course Selector
       </Menu.Item>
+      {
+        inDev && (
+          <Menu.Item key="graphical-selector" onClick={() => handlePush("/graphical-selector")}>
+            Graphical Selector
+          </Menu.Item>
+        )
+      }
       <Menu.Item key="term-planner" onClick={() => handlePush("/term-planner")}>
         Term Planner
       </Menu.Item>

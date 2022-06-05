@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { Liquid } from "@ant-design/charts";
-import ReactTooltip from "react-tooltip";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import ReactTooltip from "react-tooltip";
+import { Liquid } from "@ant-design/charts";
 import {
+  darkGrey,
+  lightGrey,
+  lightYellow,
   purple,
   yellow,
-  lightYellow,
-  lightGrey,
-  darkGrey,
-} from "../../constants";
+} from "config/constants";
 
 const LiquidProgressChart = ({ completedUOC, totalUOC }) => {
   const [percent, setPercent] = useState(0);

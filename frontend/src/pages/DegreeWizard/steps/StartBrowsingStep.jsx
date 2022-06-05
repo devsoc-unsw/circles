@@ -1,9 +1,9 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   Button, notification,
 } from "antd";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import "./steps.less";
 
 const openNotification = (msg) => {

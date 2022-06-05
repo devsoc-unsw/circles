@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { animated, useSpring } from "@react-spring/web";
 import {
   Menu, Typography,
 } from "antd";
-import { useDispatch, useSelector } from "react-redux";
-import { useSpring, animated } from "@react-spring/web";
-import "./steps.less";
+import axios from "axios";
+import { setProgram } from "reducers/degreeSlice";
 import springProps from "./spring";
-import { setProgram } from "../../../reducers/degreeSlice";
+import "./steps.less";
 
 const { Title } = Typography;
 
