@@ -49,12 +49,7 @@ CACHED_EXCLUSIONS_PATH = "./algorithms/cache/exclusions.json"
 with open(CACHED_EXCLUSIONS_PATH, "r", encoding="utf8") as f:
     CACHED_EXCLUSIONS = json.load(f)
 
-<<<<<<< HEAD
-
-def create_category(tokens) -> Tuple[Category, int]:
-=======
 def create_category(tokens) -> Tuple[Category, int]: # pylint: disable=too-many-return-statements
->>>>>>> dev
     """
     Given a list of tokens starting from after the connector keyword, create
     and return the category object matching the category, as well as the current index

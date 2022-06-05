@@ -48,14 +48,9 @@ def getPrograms():
     """ Fetch all the programs the backend knows about in the format of { code: title } """
     # return {"programs": {q["code"]: q["title"] for q in programsCOL.find()}}
     # TODO On deployment, DELETE RETURN BELOW and replace with the return above
-<<<<<<< HEAD
-    return {"programs": {"3778": "Computer Science", 
-                        "3784": "Commerce / Computer Science",
-=======
     return {"programs": {"3778": "Computer Science",
                         "3784": "Commerce / Computer Science",
                         "3502": "Commerce"
->>>>>>> dev
                         }}
 
 
@@ -72,22 +67,6 @@ def getPrograms():
             "content": {
                 "application/json": {
                     "example": {
-<<<<<<< HEAD
-                        "majors": { 
-                            "Computer Science": {
-                                "COMPS1": "Computer Science (Embedded Systems)",
-                                "COMPJ1": "Computer Science (Programming Languages)",
-                                "COMPE1": "Computer Science (eCommerce Systems)",
-                                "COMPA1": "Computer Science",
-                                "COMPN1": "Computer Science (Computer Networks)",
-                                "COMPI1": "Computer Science (Artificial Intelligence)",
-                                "COMPD1": "Computer Science (Database Systems)",
-                                "COMPY1": "Computer Science (Security Engineering)",
-                            },
-                            "Commerce": {
-                                "FINSA1": "Finance",
-                                "ACCTA1": "Accounting",
-=======
                         "majors": {
                             "Computer Science": {
                                 "specs": {
@@ -101,7 +80,6 @@ def getPrograms():
                                     "COMPY1": "Computer Science (Security Engineering)",
                                 },
                                 "note": "COMPA1 is the default stream, and will be used if no other stream is selected."
->>>>>>> dev
                             }
                         }
                     }
@@ -165,30 +143,6 @@ def getMinors(programCode: str):
 
     # NOTE: DO NOT RENAME THE VARIABLE TO `minors` as it attempts to create
     # a redefinition of the `minors` class
-<<<<<<< HEAD
-    if programCode in minorInFE:
-        minrs = result["components"]["FE"]["Minors"]
-    elif programCode in minorInSpecialisation:
-        minrs = result["components"]["SpecialisationData"]["Minors"]
-    else:
-        minrs = result["components"]["SpecialisationData"]["Minors"]
-
-    return {"minors": minrs}
-
-def convertSubgroupObjectToCoursesDict(object: str, description: str|list[str]) -> dict[str, str]:
-    """ Gets a subgroup object (format laid out in the processor) and fetches the exact courses its referring to """
-    if " or " in object:
-        return {c: description[index] for index, c in enumerate(object.split(" or "))}
-    elif not re.match(r"[A-Z]{4}[0-9]{4}", object):
-        return regex_search(object)
-    else:
-        return {object: description}
-
-def addSubgroupContainer(structure: dict, type: str, container: dict, exceptions: list[str]) -> list[str]:
-    """ Returns the added courses """
-    structure[type][container["title"]] = {}
-    item = structure[type][container["title"]]
-=======
     minrs = result["components"]["spec_data"].get("minors")
 
     return {"minors": minrs}
@@ -200,12 +154,7 @@ def convertSubgroupObjectToCoursesDict(object: str, description: str|list[str]):
     if not re.match(r"[A-Z]{4}[0-9]{4}", object):
         return regex_search(object)
 
-<<<<<<< HEAD
-    return {object: description}
->>>>>>> dev
-=======
     return { object: description }
->>>>>>> dev
 
 def addSubgroupContainer(structure: dict, type: str, container: dict, exceptions: list[str]) -> list[str]:
     """ Returns the added courses """
@@ -330,14 +279,8 @@ def getStructure(
     structure = {}
 
     if major:
-<<<<<<< HEAD
-        majors = major.split("+") if "+" in major else [major]
-
-        for m in majors:
-=======
         majors_l = major.split("+") if "+" in major else [major]
         for m in majors_l:
->>>>>>> dev
             addSpecialisation(structure, m, "Major")
 
     if minor:
