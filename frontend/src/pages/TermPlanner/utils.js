@@ -82,4 +82,4 @@ const prepareCoursesForValidation = (planner, degree, suppress) => {
   return payload;
 };
 
-export { getMostRecentPastTerm, prepareCoursesForValidation, parseMarkToInt };
+export { getMostRecentPastTerm, parseMarkToInt, prepareCoursesForValidation };

@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Menu, Item, theme } from "react-contexify";
-import "react-contexify/dist/ReactContexify.css";
-import { useNavigate } from "react-router-dom";
-import { DeleteFilled, InfoCircleFilled, EditFilled } from "@ant-design/icons";
+import { Item, Menu, theme } from "react-contexify";
 import { FaRegCalendarTimes } from "react-icons/fa";
-import { addTab } from "../../../reducers/courseTabsSlice";
-import { removeCourse, unschedule } from "../../../reducers/plannerSlice";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { DeleteFilled, EditFilled, InfoCircleFilled } from "@ant-design/icons";
+import { addTab } from "reducers/courseTabsSlice";
+import { removeCourse, unschedule } from "reducers/plannerSlice";
 import EditMarkModal from "../EditMarkModal";
-
+import "react-contexify/dist/ReactContexify.css";
 import "./index.less";
 
 const ContextMenu = ({ code, plannedFor }) => {

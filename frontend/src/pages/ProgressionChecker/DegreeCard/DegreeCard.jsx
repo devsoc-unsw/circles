@@ -1,9 +1,9 @@
 import React from "react";
-import { Card, Progress, Typography } from "antd";
+import { useSelector } from "react-redux";
+import { Link } from "react-scroll";
 import ReactTooltip from "react-tooltip";
 import { purple } from "@ant-design/colors";
-import { Link } from "react-scroll";
-import { useSelector } from "react-redux";
+import { Card, Progress, Typography } from "antd";
 import "./index.less";
 
 const DegreeCard = ({ concentration }) => {

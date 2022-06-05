@@ -1,4 +1,6 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   Button, notification,
 } from "antd";
@@ -6,10 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./steps.less";
 import { setIsComplete } from "../../../reducers/degreeSlice";
-
-// import {
-//   updateDegreeLength, updateStartYear, setProgram, addMajor, removeMajor, setMinor,
-// } from "../../../reducers/plannerSlice";
 
 const openNotification = (msg) => {
   const args = {

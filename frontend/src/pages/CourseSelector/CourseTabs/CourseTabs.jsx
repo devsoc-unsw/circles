@@ -1,11 +1,11 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import { Popconfirm, Tooltip } from "antd";
+import { useDispatch, useSelector } from "react-redux";
 import { DeleteOutlined } from "@ant-design/icons";
-import "./index.less";
+import { Popconfirm, Tooltip } from "antd";
+import { reorderTabs, resetTabs, setActiveTab } from "reducers/courseTabsSlice";
 import CourseTab from "./CourseTab";
-import { reorderTabs, resetTabs, setActiveTab } from "../../../reducers/courseTabsSlice";
+import "./index.less";
 
 const CourseTabs = () => {
   const dispatch = useDispatch();
