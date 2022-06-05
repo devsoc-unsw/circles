@@ -1,8 +1,8 @@
 import React from "react";
-import { Button, Typography } from "antd";
-import "./index.less";
 import { useNavigate } from "react-router-dom";
-import circlesLogo from "../../assets/circlesLogo.svg";
+import { Button, Typography } from "antd";
+import circlesLogo from "assets/circlesLogo.svg";
+import "./index.less";
 
 const { Title } = Typography;
 const PageNotFound = () => {

@@ -1,22 +1,20 @@
-import React, {
-  useState, useEffect, useRef,
-} from "react";
-import axios from "axios";
-import { notification } from "antd";
+import React, { useEffect, useRef, useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
-import { useSelector, useDispatch } from "react-redux";
-import "./index.less";
-import OptionsHeader from "./OptionsHeader";
-import "tippy.js/dist/tippy.css";
-import "tippy.js/themes/light.css";
-import HideYearTooltip from "./HideYearTooltip";
+import { useDispatch, useSelector } from "react-redux";
+import { notification } from "antd";
+import axios from "axios";
+import PageTemplate from "components/PageTemplate";
 import {
   moveCourse, setPlannedCourseToTerm, setUnplannedCourseToTerm, toggleWarnings, unschedule,
-} from "../../reducers/plannerSlice";
-import PageTemplate from "../../components/PageTemplate";
-import UnplannedColumn from "./UnplannedColumn";
+} from "reducers/plannerSlice";
+import HideYearTooltip from "./HideYearTooltip";
+import OptionsHeader from "./OptionsHeader";
 import TermBox from "./TermBox";
+import UnplannedColumn from "./UnplannedColumn";
 import { prepareCoursesForValidation } from "./utils";
+import "./index.less";
+import "tippy.js/dist/tippy.css";
+import "tippy.js/themes/light.css";
 
 // checks if no courses have been planned (to display help notification
 // & determine if unschedule all button available)

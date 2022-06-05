@@ -42,6 +42,8 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
+    "lint": "eslint src/**/*.{js,jsx}",
+    "lint:fix": "eslint --fix src/**/*.{js,jsx}",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "eject": "react-scripts eject"
@@ -73,6 +75,7 @@
     "eslint-plugin-promise": "6.0.0",
     "eslint-plugin-react": "7.30.0",
     "eslint-plugin-react-hooks": "4.5.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
     "react-error-overlay": "6.0.11"
   }
 }

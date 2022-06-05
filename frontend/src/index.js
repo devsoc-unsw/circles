@@ -4,9 +4,8 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
-
 import App from "./App";
-import store from "./store";
+import store from "./config/store";
 
 const persistor = persistStore(store);
 

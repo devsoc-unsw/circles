@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from "react";
-import {
-  BrowserRouter as Router, Routes, Route,
-} from "react-router-dom";
 import { useSelector } from "react-redux";
-import DegreeWizard from "./pages/DegreeWizard";
-import CourseSelector from "./pages/CourseSelector";
-import TermPlanner from "./pages/TermPlanner";
-import ProgressionChecker from "./pages/ProgressionChecker";
-import GraphicalSelector from "./pages/GraphicalSelector";
-import "./App.less";
-import PageLoading from "./components/PageLoading";
-import "./axios";
+import {
+  BrowserRouter as Router, Route,
+  Routes,
+} from "react-router-dom";
 import Header from "./components/Header";
+import PageLoading from "./components/PageLoading";
+import CourseSelector from "./pages/CourseSelector";
+import DegreeWizard from "./pages/DegreeWizard";
+import GraphicalSelector from "./pages/GraphicalSelector";
 import PageNotFound from "./pages/PageNotFound";
+import ProgressionChecker from "./pages/ProgressionChecker";
+import TermPlanner from "./pages/TermPlanner";
+import "./App.less";
+import "./config/axios";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
