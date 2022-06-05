@@ -16,6 +16,9 @@ In `backend.env`, add the environment variables:
 - `MONGODB_PASSWORD=...`
 - `MONGODB_SERVICE_HOSTNAME=mongodb`
 
+FOR PRODUCTION, also add:
+- `FORWARDED_ALLOW_IPS=*`
+
 In `mongodb.env`, add:
 
 - `MONGO_INITDB_ROOT_USERNAME=...`
