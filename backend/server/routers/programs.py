@@ -10,10 +10,6 @@ from server.database import programsCOL, specialisationsCOL
 from server.routers.model import (Structure, Majors, message, minorInFE,
                                   minorInSpecialisation, minors, programs)
 from server.routers.courses import regex_search
-<<<<<<< HEAD
-from data.processors.programs_processing import TEST_PROGS
-=======
->>>>>>> dev
 
 router = APIRouter(
     prefix="/programs",
@@ -204,7 +200,11 @@ def convertSubgroupObjectToCoursesDict(object: str, description: str|list[str]):
     if not re.match(r"[A-Z]{4}[0-9]{4}", object):
         return regex_search(object)
 
+<<<<<<< HEAD
     return {object: description}
+>>>>>>> dev
+=======
+    return { object: description }
 >>>>>>> dev
 
 def addSubgroupContainer(structure: dict, type: str, container: dict, exceptions: list[str]) -> list[str]:

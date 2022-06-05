@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 =======
 import React, { useEffect, useState } from "react";
+<<<<<<< HEAD
 >>>>>>> dev
 import {
   Tooltip, Button, Typography, Alert,
@@ -10,12 +11,19 @@ import { useSelector, useDispatch } from "react-redux";
 <<<<<<< HEAD
 import { useNavigate } from "react-router-dom";
 =======
+=======
+import { useDispatch, useSelector } from "react-redux";
+>>>>>>> dev
 import { useLocation, useNavigate } from "react-router-dom";
 >>>>>>> dev
 import { CalendarOutlined, DeleteOutlined } from "@ant-design/icons";
-import { removeAllCourses } from "../../reducers/plannerSlice";
-import "./index.less";
+import {
+  Alert,
+  Button, Tooltip, Typography,
+} from "antd";
+import { removeAllCourses } from "reducers/plannerSlice";
 import CartCourseCard from "./CartCourseCard";
+import "./index.less";
 
 const { Text, Title } = Typography;
 

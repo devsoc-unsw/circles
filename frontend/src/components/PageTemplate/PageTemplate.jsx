@@ -1,10 +1,14 @@
-import { Layout } from "antd";
 import React from "react";
 <<<<<<< HEAD
 =======
 import { Helmet } from "react-helmet";
+<<<<<<< HEAD
 >>>>>>> dev
 import FeedbackButton from "../FeedbackButton";
+=======
+import { Layout } from "antd";
+import FeedbackButton from "components/FeedbackButton";
+>>>>>>> dev
 
 const { Content } = Layout;
 

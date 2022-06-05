@@ -6,13 +6,10 @@
 """
 
 import copy
-<<<<<<< HEAD
-from typing import Optional
-=======
-from typing import Optional, Tuple
->>>>>>> dev
-import re
 
+from typing import Optional, Tuple
+
+import re
 from algorithms.objects.categories import AnyCategory, Category
 
 class User:
@@ -78,6 +75,9 @@ class User:
     def in_program(self, program: str):
         """ Determines if the user is in this program code """
         return self.program == program
+    
+    def get_courses(self):
+        return list(self.courses.keys())
 
     def in_specialisation(self, specialisation: str):
         """ Determines if the user is in the specialisation """
@@ -133,6 +133,7 @@ class User:
     def pop_course(self, course: str) -> Tuple[int, int]:
         """ removes a course from done courses and returns its uoc and mark """
         return self.courses.pop(course)
+<<<<<<< HEAD
 
 >>>>>>> dev
     def unselect_course(self, target: str) -> list[str]:
@@ -174,3 +175,5 @@ class User:
             ]
 
         return list(sorted(affected_courses))
+=======
+>>>>>>> dev

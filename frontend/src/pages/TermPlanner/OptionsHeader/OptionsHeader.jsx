@@ -1,17 +1,25 @@
 import React from "react";
+<<<<<<< HEAD
 import { Tooltip, Popconfirm } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
+=======
+>>>>>>> dev
 import { FaRegCalendarTimes } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
 import {
   DownloadOutlined, EyeFilled, QuestionCircleOutlined, SettingFilled, WarningFilled,
 } from "@ant-design/icons";
+import Tippy from "@tippyjs/react";
+import { Popconfirm, Switch, Tooltip } from "antd";
+import { unhideAllYears, unscheduleAll } from "reducers/plannerSlice";
+import HelpMenu from "./HelpMenu";
 import SaveMenu from "./SaveMenu";
 import SettingsMenu from "./SettingsMenu";
-import HelpMenu from "./HelpMenu";
-import { unhideAllYears, unscheduleAll } from "../../../reducers/plannerSlice";
+import "tippy.js/dist/tippy.css";
+import "tippy.js/themes/light.css";
 import "./index.less";
 
 const OptionsHeader = ({

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Typography, DatePicker } from "antd";
 import { useDispatch } from "react-redux";
-import "./steps.less";
-import { useSpring, animated } from "@react-spring/web";
+import { animated, useSpring } from "@react-spring/web";
+import { DatePicker, Typography } from "antd";
+import { updateDegreeLength, updateStartYear } from "reducers/plannerSlice";
 import springProps from "./spring";
-import { updateDegreeLength, updateStartYear } from "../../../reducers/plannerSlice";
+import "./steps.less";
 
 const { Title } = Typography;
 const { RangePicker } = DatePicker;

@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { BorderlessTableOutlined, TableOutlined } from "@ant-design/icons";
+import { Button, Divider } from "antd";
 import axios from "axios";
+<<<<<<< HEAD
 <<<<<<< HEAD
 import Dashboard from "./Dashboard";
 import ListView3 from "./ListView3";
@@ -9,11 +12,16 @@ import PageTemplate from "../../components/PageTemplate";
 =======
 import { Divider, Button } from "antd";
 import { TableOutlined, BorderlessTableOutlined } from "@ant-design/icons";
+=======
+import PageTemplate from "components/PageTemplate";
+>>>>>>> dev
 import Dashboard from "./Dashboard";
-import "./index.less";
-import PageTemplate from "../../components/PageTemplate";
-import TableView from "./TableView";
 import GridView from "./GridView/GridView";
+<<<<<<< HEAD
+>>>>>>> dev
+=======
+import TableView from "./TableView";
+import "./index.less";
 >>>>>>> dev
 
 // TODO: dummy data for now

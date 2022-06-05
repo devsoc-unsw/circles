@@ -30,7 +30,6 @@ def process_course_data(year = None):
     """
     Read data from coursesFormattedRaw.json and process each course, noting
     their properties and write the final data to coursesProcessed.json
-    Any missing courses will be written to absentCourses.json
     """
 
     data = data_helpers.read_data(

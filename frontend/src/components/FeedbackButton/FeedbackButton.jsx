@@ -1,9 +1,9 @@
 import React from "react";
-import { Button, Tooltip } from "antd";
-import { BugOutlined } from "@ant-design/icons";
 import { useSelector } from "react-redux";
-import useMediaQuery from "../../hooks/useMediaQuery";
-import { FEEDBACK_LINK } from "../../constants";
+import { BugOutlined } from "@ant-design/icons";
+import { Button, Tooltip } from "antd";
+import { FEEDBACK_LINK } from "config/constants";
+import useMediaQuery from "hooks/useMediaQuery";
 import "./index.less";
 
 const FeedbackButton = () => {

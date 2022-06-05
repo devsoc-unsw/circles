@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Button } from "antd";
-import { useSelector, useDispatch } from "react-redux";
-import "./index.less";
 import { Draggable } from "react-beautiful-dnd";
+import { useDispatch, useSelector } from "react-redux";
 import { CloseOutlined } from "@ant-design/icons";
-import useIntersectionObserver from "../../../hooks/useIntersectionObserver";
-import { removeTab, setActiveTab } from "../../../reducers/courseTabsSlice";
+import { Button } from "antd";
+import useIntersectionObserver from "hooks/useIntersectionObserver";
+import { removeTab, setActiveTab } from "reducers/courseTabsSlice";
+import "./index.less";
 
 const CourseTab = ({ tab, index }) => {
   const [scrolledTo, setScrolledTo] = useState(false);
