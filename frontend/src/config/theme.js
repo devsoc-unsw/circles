@@ -22,4 +22,5 @@ export const lightTheme = {
 export const darkTheme = {
   body: "#1d1f20",
   text: "#f1f1f1",
+  tagBackground: "#9254de",
 };
