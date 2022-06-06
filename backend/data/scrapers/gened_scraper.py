@@ -4,8 +4,8 @@ Program extracts raw data for Programs and place data in file
 
 Step in the data's journey:
     [ X ] Scrape raw data (gened_scraper.py)
-    [   ] Format scraped data 
-    [   ] Customise formatted data 
+    [   ] Format scraped data
+    [   ] Customise formatted data
 """
 
 import json
@@ -14,7 +14,7 @@ import requests
 from data.scrapers.courses_scraper import TOTAL_COURSES
 from data.scrapers.payload import HEADERS
 from data.scrapers.payloadGened import create_payload_gened
-from data.utility import data_helpers 
+from data.utility import data_helpers
 
 URL = "https://www.handbook.unsw.edu.au/api/es/search?appliedFilters="
 
@@ -33,9 +33,9 @@ def scrape_gened_data(year=None):
     for program_code in programs_formatted:
         program = programs_formatted[program_code]
         faculty = program["faculty"]
-        if faculty in faculty_list: 
-            continue 
-        else: 
+        if faculty in faculty_list:
+            continue
+        else:
             faculty_list.append(faculty)
 
         if faculty == "Faculty of Arts, Design and Architecture" or faculty == "Faculty of Law and Justice":
@@ -68,4 +68,3 @@ def scrape_gened_data(year=None):
 
 if __name__ == "__main__":
     scrape_gened_data()
-    

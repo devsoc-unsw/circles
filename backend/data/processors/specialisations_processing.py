@@ -31,11 +31,7 @@ def customise_spn_data():
 
     customised_data = {}  # Dictionary for all customised data
     for spn in data.keys():
-<<<<<<< HEAD
-        if not any([prog in TEST_PROGS for prog in data[spn]["programs"]]):
-=======
         if not any((prog in TEST_PROGS for prog in data[spn]["programs"])):
->>>>>>> dev
             continue
 
         formatted = data[spn]

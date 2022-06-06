@@ -2,16 +2,6 @@
     "ACCT3708": "You need approval from the School of Accounting, Auditing and Taxation to enrol in this course.",
     "ACTL3192": "You must be in good academic standing to enroll in this course.",
     "ACTL4001": "Students in 3587 may complete ACTL3141 as a co-requisite.",
-<<<<<<< HEAD
-    "COMM1040": "Students must be in Good Academic Standing",
-    "COMM1110": "Only available to single and double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 and 3",
-    "COMM1120": "Only available to single and double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 and 3",
-    "COMM1140": "Only available to single and double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 and 3",
-    "COMM1150": "Only available to single and double degree Business School students in Term 2. Offered to non-Business School students in Term 3.",
-    "COMM1170": "Only available to single and double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 and 3",
-    "COMM1180": "Only available to single and double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 and 3",
-    "COMM1190": "Only available to single and double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 and 3",
-=======
     "COMM1040": "Students must be in Good Academic Standing.",
     "COMM1110": "Only available to single and double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 and 3",
     "COMM1120": "Only available to single and double degree Business School students in Term 1. It will be offered to non-Business School students in Terms 2 and 3.",
@@ -20,7 +10,6 @@
     "COMM1170": "Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Terms 1 and 3.",
     "COMM1180": "Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Terms 1 and 3.",
     "COMM1190": "Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Term 3.",
->>>>>>> dev
     "COMM1999": "You must have completed 30UOC of Integrated First Year Core",
     "COMM2222": "Good Academic Standing. Co-op students are excluded. It is recommended to do a progression check prior to enrolling",
     "COMM2233": "It is recommended to do a progression check prior to enrolling.",
