@@ -9,17 +9,12 @@ import {
 import PageTemplate from "components/PageTemplate";
 import { resetCourses } from "reducers/coursesSlice";
 import { resetTabs } from "reducers/courseTabsSlice";
-import { initialState, resetDegree } from "reducers/degreeSlice";
+import { resetDegree } from "reducers/degreeSlice";
 import { resetPlanner } from "reducers/plannerSlice";
 import DegreeStep from "./steps/DegreeStep";
 import MinorStep from "./steps/MinorStep";
 import SpecialisationStep from "./steps/SpecialisationStep";
 import StartBrowsingStep from "./steps/StartBrowsingStep";
-import { resetTabs } from "../../reducers/courseTabsSlice";
-import { resetPlanner } from "../../reducers/plannerSlice";
-import { resetDegree } from "../../reducers/degreeSlice";
-import PageTemplate from "../../components/PageTemplate";
-import { resetCourses } from "../../reducers/coursesSlice";
 import YearStep from "./steps/YearStep";
 import "./index.less";
 
