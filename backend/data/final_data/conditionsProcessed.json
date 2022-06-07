@@ -1512,11 +1512,7 @@
     },
     "ARTS3759": {
         "original": "Prerequisite: Enrolment with consent. ARTS3759 is open to UNSW undergraduate students that are also enrolled in an internship (or international field placement course). This needs to be demonstrated prior to enrolment.<br/><br/>",
-<<<<<<< HEAD
-        "processed": "Enrolment with consent. is open to UNSW undergraduate that are also an internship (or international field placement course). This needs to be demonstrated"
-=======
         "processed": "Enrolment && consent. is open to UNSW undergraduate that are also an internship (or international field placement course). This needs to be demonstrated"
->>>>>>> dev
     },
     "ARTS3780": {
         "original": "Prerequisite: 48 UOC including 6 UOC at level 1 and 6 UOC at level 2 in European Studies. Or 48 UOC including 12 UOC in German Studies language courses. Or 48 UOC and enrolment in an International Studies single or double degree (2017 onwards)<br/><br/>",
@@ -1528,11 +1524,7 @@
     },
     "ARTS3786": {
         "original": "Prerequisite: 48UOC overall, including 6UOC at level 1 and 6UOC at level 2 in European Studies or History; or 48UOC overall, including 12UOC in German Studies language courses. Or 48UOC and enrolment in an International Studies program<br/><br/>",
-<<<<<<< HEAD
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in European Studies || History; || 48UOC && 12UOC in German Studies language courses. || 48UOC && (3447)"
-=======
         "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in European Studies || History || 48UOC && 12UOC in German Studies language courses. || 48UOC && (3447)"
->>>>>>> dev
     },
     "ARTS3787": {
         "original": "Prerequisite: 24 units of credit in either the European Studies or German Studies stream.<br/>Excluded: ARTS2783<br/><br/>",
@@ -2902,6 +2894,10 @@
         "original": "Students need to have completed a minimum of 30 UoC to undertake this course.<br/><br/>",
         "processed": "need to have a minimum 30UOC to undertake this course"
     },
+    "CDEV3300": {
+        "original": "",
+        "processed": ""
+    },
     "CEIC1000": {
         "original": "",
         "processed": ""
@@ -3318,15 +3314,6 @@
     },
     "COMM1120": {
         "original": "Only available to single and double degree Business School students in Term 1. It will be offered to non-Business School students in Terms 2 and 3.<br/><br/>",
-<<<<<<< HEAD
-        "processed": "",
-        "handbook_note": "Only available to single and double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 and 3"
-    },
-    "COMM1140": {
-        "original": "Only available to single and double degree Business School students in Term 1. It will be offered to non-Business School students in Terms 2 and 3.<br/><br/>",
-        "processed": "",
-        "handbook_note": "Only available to single and double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 and 3"
-=======
         "handbook_note": "Only available to single and double degree Business School students in Term 1. It will be offered to non-Business School students in Terms 2 and 3.",
         "processed": ""
     },
@@ -3334,7 +3321,6 @@
         "original": "Only available to single and double degree Business School students in Term 1. It will be offered to non-Business School students in Terms 2 and 3.<br/><br/>",
         "handbook_note": "Only available to single and double degree Business School students in Term 1. It will be offered to non-Business School students in Terms 2 and 3.",
         "processed": ""
->>>>>>> dev
     },
     "COMM1150": {
         "original": "Pre-requisite: COMM1100 and excludes MGMT1101. Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Terms 1 and 3.<br/><br/>",
@@ -3343,20 +3329,6 @@
     },
     "COMM1170": {
         "original": "Pre-requisite: COMM1140. Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Terms 1 and 3.<br/><br/>",
-<<<<<<< HEAD
-        "processed": "COMM1140",
-        "handbook_note": "Only available to single and double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 and 3"
-    },
-    "COMM1180": {
-        "original": "Pre-requisite: COMM1140. Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Terms 1 and 3.<br/><br/>",
-        "processed": "COMM1140",
-        "handbook_note": "Only available to single and double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 and 3"
-    },
-    "COMM1190": {
-        "original": "Pre-requisite: COMM1110 or ECON1203 or MATH1031 or MATH1041 or MATH1131 or MATH1141 or MATH1151. Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Term 3.<br/><br/>",
-        "processed": "COMM1110 || ECON1203 || MATH1031 || MATH1041 || MATH1131 || MATH1141 || MATH1151",
-        "handbook_note": "Only available to single and double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 and 3"
-=======
         "handbook_note": "Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Terms 1 and 3.",
         "processed": "COMM1140"
     },
@@ -3369,7 +3341,6 @@
         "original": "Pre-requisite: COMM1110 or ECON1203 or MATH1031 or MATH1041 or MATH1131 or MATH1141 or MATH1151. Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Term 3.<br/><br/>",
         "handbook_note": "Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Term 3.",
         "processed": "COMM1110 || ECON1203 || MATH1031 || MATH1041 || MATH1131 || MATH1141 || MATH1151"
->>>>>>> dev
     },
     "COMM1822": {
         "original": "",
@@ -8877,11 +8848,7 @@
     },
     "MUSC3805": {
         "original": "Prerequisite: 24uoc in MUSC courses and enrolment in a Music single or double degree; or 66 uoc overall and enrolment in a single or double degree Media (S&SP) program<br/><br/>",
-<<<<<<< HEAD
-        "processed": "24UOC in MUSC courses && enrolment in a Music single || double degree; || 66UOC && (4510 || 3454 || 3438 || 3453) (S&SP) program"
-=======
         "processed": "24UOC in MUSC courses && enrolment in a Music single || double degree || 66UOC && (4510 || 3454 || 3438 || 3453) (S&SP) program"
->>>>>>> dev
     },
     "MUSC3806": {
         "original": "Prerequisite: MUSC2803 and enrolment in the Sonic Arts stream in a Music single or double degree; or 66 uoc overall, including MDIA1005 and enrolment in Media (S&SP) single or double degree<br/><br/>",
