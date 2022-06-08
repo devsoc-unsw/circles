@@ -60,17 +60,10 @@
         "year": 1
     },
     "user6": {
-<<<<<<< HEAD
-        "program": "3707",
-        "specialisations": {
-            "COMPJ1": 1,
-            "ACCTA2": 1
-=======
         "program": "3789",
         "specialisations": {
             "COMPJ1": 1,
             "FOODH1": 1
->>>>>>> dev
         },
         "courses": {
             "COMP9242": [6, 81],
