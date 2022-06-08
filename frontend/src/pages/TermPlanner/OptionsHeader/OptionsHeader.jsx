@@ -5,7 +5,7 @@ import {
   DownloadOutlined, EyeFilled, QuestionCircleOutlined, SettingFilled, WarningFilled,
 } from "@ant-design/icons";
 import Tippy from "@tippyjs/react";
-import { Popconfirm, Tooltip } from "antd";
+import { Popconfirm, Switch, Tooltip } from "antd";
 import { unhideAllYears, unscheduleAll } from "reducers/plannerSlice";
 import HelpMenu from "./HelpMenu";
 import SaveMenu from "./SaveMenu";
@@ -15,7 +15,7 @@ import "tippy.js/themes/light.css";
 import "./index.less";
 
 const OptionsHeader = ({
-  plannerRef, isAllEmpty, setSuppress, suppress,
+  plannerRef, isAllEmpty, setSuppress, suppress, setShowMarks,
 }) => {
   const theme = useSelector((state) => state.theme);
   const { areYearsHidden } = useSelector((state) => state.planner);
@@ -106,24 +106,33 @@ const OptionsHeader = ({
           </Tooltip>
         </div>
       </div>
-
-      <Tippy
-        content={<HelpMenu />}
-        moveTransition="transform 0.2s ease-out"
-        interactive
-        trigger="click"
-        theme={theme === "light" ? "light" : "dark"}
-        maxWidth="80vh"
-        placement="bottom-start"
-      >
+      <div className="right-buttons">
         <div>
-          <Tooltip title="Help">
-            <button type="button" className="settings-button help-button">
-              <QuestionCircleOutlined className="settings-icon" />
-            </button>
-          </Tooltip>
+          <Switch
+            className="cs-toggle-locked"
+            onChange={() => setShowMarks((prev) => !prev)}
+            checkedChildren="marks shown"
+            unCheckedChildren="marks hidden"
+          />
         </div>
-      </Tippy>
+        <Tippy
+          content={<HelpMenu />}
+          moveTransition="transform 0.2s ease-out"
+          interactive
+          trigger="click"
+          theme={theme === "light" ? "light" : "dark"}
+          maxWidth="80vh"
+          placement="bottom-start"
+        >
+          <div>
+            <Tooltip title="Help">
+              <button type="button" className="settings-button help-button">
+                <QuestionCircleOutlined className="settings-icon" />
+              </button>
+            </Tooltip>
+          </div>
+        </Tippy>
+      </div>
     </div>
   );
 };

@@ -39,6 +39,7 @@ const DraggableCourse = ({ code, index, showMarks }) => {
   );
   const errorIsInformational = shouldHaveWarning && isUnlocked
     && warningMessage.length === 0 && !isLegacy && isAccurate && isOffered;
+
   return (
     <>
       <Draggable
