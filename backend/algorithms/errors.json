@@ -3303,11 +3303,7 @@
     "ARTS3759": {
         "condition": {
             "original": "Prerequisite: Enrolment with consent. ARTS3759 is open to UNSW undergraduate students that are also enrolled in an internship (or international field placement course). This needs to be demonstrated prior to enrolment.<br/><br/>",
-<<<<<<< HEAD
-            "processed": "Enrolment with consent. is open to UNSW undergraduate that are also an internship (or international field placement course). This needs to be demonstrated"
-=======
             "processed": "Enrolment && consent. is open to UNSW undergraduate that are also an internship (or international field placement course). This needs to be demonstrated"
->>>>>>> dev
         },
         "tokens": [
             "(",
@@ -3418,11 +3414,7 @@
     "ARTS3786": {
         "condition": {
             "original": "Prerequisite: 48UOC overall, including 6UOC at level 1 and 6UOC at level 2 in European Studies or History; or 48UOC overall, including 12UOC in German Studies language courses. Or 48UOC and enrolment in an International Studies program<br/><br/>",
-<<<<<<< HEAD
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in European Studies || History; || 48UOC && 12UOC in German Studies language courses. || 48UOC && (3447)"
-=======
             "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in European Studies || History || 48UOC && 12UOC in German Studies language courses. || 48UOC && (3447)"
->>>>>>> dev
         },
         "tokens": [
             "(",
@@ -4144,8 +4136,6 @@
         "broke at": "Index 4, in"
     },
     "ARTS4247": {
-<<<<<<< HEAD
-=======
         "condition": {
             "original": "Prerequisite: Enrolment in a School of Humanities and Languages honours program<br/><br/>",
             "processed": "Enrolment in a School of Humanities && Languages honours program"
@@ -4188,7 +4178,6 @@
         "broke at": "Index 2, in"
     },
     "ARTS4900": {
->>>>>>> dev
         "condition": {
             "original": "Prerequisite: Enrolment in the Development Studies honours program<br/><br/>",
             "processed": "Enrolment in the Development Studies honours program"
@@ -4206,47 +4195,6 @@
         ],
         "broke at": "Index 2, in"
     },
-    "ARTS4901": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Development Studies honours program<br/><br/>",
-            "processed": "Enrolment in the Development Studies honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Development",
-            "Studies",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-<<<<<<< HEAD
-    "ARTS4900": {
-=======
-    "ARTS4902": {
->>>>>>> dev
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Development Studies honours program<br/><br/>",
-            "processed": "Enrolment in the Development Studies honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Development",
-            "Studies",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-<<<<<<< HEAD
     "ARTS4901": {
         "condition": {
             "original": "Prerequisite: Enrolment in the Development Studies honours program<br/><br/>",
@@ -4283,8 +4231,6 @@
         ],
         "broke at": "Index 2, in"
     },
-=======
->>>>>>> dev
     "ARTS4912": {
         "condition": {
             "original": "Prerequisite: Enrolment in the International Relations honours program<br/><br/>",
@@ -6128,8 +6074,6 @@
         ],
         "broke at": "Index 2, First"
     },
-<<<<<<< HEAD
-=======
     "COMM6700": {
         "condition": {
             "original": "Prerequisite: undergraduate students must have completed 72 units of credit <br/><br/>",
@@ -6143,7 +6087,6 @@
         ],
         "broke at": "Index 2, 72UOC"
     },
->>>>>>> dev
     "CRIM2021": {
         "condition": {
             "original": "Prerequisite: CRIM2020, not available to students in Bachelor of Laws double-degree programs<br/><br/>",
@@ -7245,8 +7188,6 @@
             "Diploma",
             "in",
             "Architecture",
-<<<<<<< HEAD
-=======
             "Program",
             ")"
         ],
@@ -7268,27 +7209,18 @@
             "Diploma",
             "in",
             "Architecture",
->>>>>>> dev
             "Program",
             ")"
         ],
         "broke at": "Index 3, in"
     },
-<<<<<<< HEAD
-    "DPDE1009": {
-        "condition": {
-            "original": "Prerequisite: DPDE1001 <br/><br/>Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>",
-            "processed": "DPDE1001 Enrolment in 7006 UNSW Global Diploma in Architecture Program"
-=======
     "DPDE1010": {
         "condition": {
             "original": "Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>",
             "processed": "Enrolment in 7006 UNSW Global Diploma in Architecture Program"
->>>>>>> dev
         },
         "tokens": [
             "(",
-            "DPDE1001",
             "Enrolment",
             "in",
             "7006",
@@ -7300,43 +7232,9 @@
             "Program",
             ")"
         ],
-        "broke at": "Index 3, in"
+        "broke at": "Index 2, in"
     },
-<<<<<<< HEAD
-    "DPDE1010": {
-        "condition": {
-            "original": "Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>",
-            "processed": "Enrolment in 7006 UNSW Global Diploma in Architecture Program"
-=======
     "DPDE1011": {
-        "condition": {
-            "original": "Prerequisite: DPDE1001 and DPDE1005.<br/><br/>Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>",
-            "processed": "DPDE1001 && DPDE1005. Enrolment in 7006 UNSW Global Diploma in Architecture Program"
->>>>>>> dev
-        },
-        "tokens": [
-            "(",
-            "DPDE1001",
-            "&&",
-            "DPDE1005.",
-            "Enrolment",
-            "in",
-            "7006",
-            "UNSW",
-            "Global",
-            "Diploma",
-            "in",
-            "Architecture",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 4, Enrolment"
-    },
-<<<<<<< HEAD
-    "DPDE1011": {
-=======
-    "DPHU1001": {
->>>>>>> dev
         "condition": {
             "original": "Prerequisite: DPDE1001 and DPDE1005.<br/><br/>Enrolment in 7006 UNSW Global Diploma in Architecture Program.<br/><br/>",
             "processed": "DPDE1001 && DPDE1005. Enrolment in 7006 UNSW Global Diploma in Architecture Program"
@@ -7359,11 +7257,29 @@
         ],
         "broke at": "Index 4, Enrolment"
     },
-<<<<<<< HEAD
     "DPHU1001": {
-=======
+        "condition": {
+            "original": "Enrolment in 7005 UNSW Global Diploma in Media and Communication Program.<br/><br/>",
+            "processed": "Enrolment in 7005 UNSW Global Diploma in Media && Communication Program"
+        },
+        "tokens": [
+            "(",
+            "Enrolment",
+            "in",
+            "7005",
+            "UNSW",
+            "Global",
+            "Diploma",
+            "in",
+            "Media",
+            "&&",
+            "Communication",
+            "Program",
+            ")"
+        ],
+        "broke at": "Index 2, in"
+    },
     "DPHU1002": {
->>>>>>> dev
         "condition": {
             "original": "Enrolment in 7005 UNSW Global Diploma in Media and Communication Program.<br/><br/>",
             "processed": "Enrolment in 7005 UNSW Global Diploma in Media && Communication Program"
@@ -7385,11 +7301,7 @@
         ],
         "broke at": "Index 2, in"
     },
-<<<<<<< HEAD
-    "DPHU1002": {
-=======
     "DPHU1003": {
->>>>>>> dev
         "condition": {
             "original": "Enrolment in 7005 UNSW Global Diploma in Media and Communication Program.<br/><br/>",
             "processed": "Enrolment in 7005 UNSW Global Diploma in Media && Communication Program"
@@ -7411,11 +7323,7 @@
         ],
         "broke at": "Index 2, in"
     },
-<<<<<<< HEAD
-    "DPHU1003": {
-=======
     "DPHU1004": {
->>>>>>> dev
         "condition": {
             "original": "Enrolment in 7005 UNSW Global Diploma in Media and Communication Program.<br/><br/>",
             "processed": "Enrolment in 7005 UNSW Global Diploma in Media && Communication Program"
@@ -7437,11 +7345,7 @@
         ],
         "broke at": "Index 2, in"
     },
-<<<<<<< HEAD
-    "DPHU1004": {
-=======
     "DPHU1005": {
->>>>>>> dev
         "condition": {
             "original": "Enrolment in 7005 UNSW Global Diploma in Media and Communication Program.<br/><br/>",
             "processed": "Enrolment in 7005 UNSW Global Diploma in Media && Communication Program"
@@ -7451,33 +7355,6 @@
             "Enrolment",
             "in",
             "7005",
-            "UNSW",
-            "Global",
-            "Diploma",
-            "in",
-            "Media",
-            "&&",
-            "Communication",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-<<<<<<< HEAD
-    "DPHU1005": {
-=======
-    "DPHU1006": {
->>>>>>> dev
-        "condition": {
-            "original": "Enrolment in 7005 UNSW Global Diploma in Media and Communication Program.<br/><br/>",
-            "processed": "Enrolment in 7005 UNSW Global Diploma in Media && Communication Program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "7005",
-<<<<<<< HEAD
             "UNSW",
             "Global",
             "Diploma",
@@ -7500,8 +7377,6 @@
             "Enrolment",
             "in",
             "7005",
-=======
->>>>>>> dev
             "UNSW",
             "Global",
             "Diploma",
@@ -12964,11 +12839,7 @@
     "MUSC3805": {
         "condition": {
             "original": "Prerequisite: 24uoc in MUSC courses and enrolment in a Music single or double degree; or 66 uoc overall and enrolment in a single or double degree Media (S&SP) program<br/><br/>",
-<<<<<<< HEAD
-            "processed": "24UOC in MUSC courses && enrolment in a Music single || double degree; || 66UOC && (4510 || 3454 || 3438 || 3453) (S&SP) program"
-=======
             "processed": "24UOC in MUSC courses && enrolment in a Music single || double degree || 66UOC && (4510 || 3454 || 3438 || 3453) (S&SP) program"
->>>>>>> dev
         },
         "tokens": [
             "(",
@@ -14481,7 +14352,6 @@
         "broke at": "Index 2, SENG2991"
     },
     "SOCW3009": {
-<<<<<<< HEAD
         "condition": {
             "original": "Prerequisite: ARTS1753 or ARTS1870 or ARTS1871 and PSYC1001, SOCW2006, SOCW2008, SOCW2009, SOCW2100, SOCW3012, SOSS/SRAP1000, SOSS/SRAP1001, ARTS2871 or SRAP2002, and enrolment in a Social Work program. Corequisite: SOCW3013<br/><br/>",
             "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOCW3012 || SOSS/SRAP1000 || SOSS/SRAP1001 || ARTS2871 || SRAP2002 && (4033) && [SOCW3013]"
@@ -14514,58 +14384,6 @@
             "||",
             "SRAP2002",
             "&&",
-            "(",
-            "4033",
-            ")",
-            "&&",
-            "[",
-            "SOCW3013",
-            "]",
-            ")"
-        ],
-        "broke at": "Index 20, ||"
-    },
-    "SOCW3012": {
-        "condition": {
-            "original": "Prerequisite: ARTS1753 or ARTS1870 or ARTS1871 and PSYC1001, SOCW2006, SOCW2008, SOCW2009, SOCW2100, SOSS/SRAP1000, SOSS/SRAP1001,  ARTS2871 or SOSS/SRAP2002, and enrolment in a Social Work program. Equivalent: SOCW3001 and SOCW3011<br/><br/>",
-            "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOSS/SRAP1000 || SOSS/SRAP1001 || ARTS2871 || SOSS/SRAP2002 && (4033)"
-=======
-        "condition": {
-            "original": "Prerequisite: ARTS1753 or ARTS1870 or ARTS1871 and PSYC1001, SOCW2006, SOCW2008, SOCW2009, SOCW2100, SOCW3012, SOSS/SRAP1000, SOSS/SRAP1001, ARTS2871 or SRAP2002, and enrolment in a Social Work program. Corequisite: SOCW3013<br/><br/>",
-            "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOCW3012 || SOSS/SRAP1000 || SOSS/SRAP1001 || ARTS2871 || SRAP2002 && (4033) && [SOCW3013]"
->>>>>>> dev
-        },
-        "tokens": [
-            "(",
-            "ARTS1753",
-            "||",
-            "ARTS1870",
-            "||",
-            "ARTS1871",
-            "&&",
-            "PSYC1001",
-            "||",
-            "SOCW2006",
-            "||",
-            "SOCW2008",
-            "||",
-            "SOCW2009",
-            "||",
-            "SOCW2100",
-            "||",
-            "SOCW3012",
-            "||",
-            "SOSS/SRAP1000",
-            "||",
-            "SOSS/SRAP1001",
-            "||",
-            "ARTS2871",
-            "||",
-            "SRAP2002",
-            "&&",
-<<<<<<< HEAD
-            "(",
-=======
             "(",
             "4033",
             ")",
@@ -14609,7 +14427,6 @@
             "SOSS/SRAP2002",
             "&&",
             "(",
->>>>>>> dev
             "4033",
             ")",
             ")"

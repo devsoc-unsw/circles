@@ -102,35 +102,6 @@ def COMM_1150(conditions):
     }
 
 
-<<<<<<< HEAD
-def COMM_1170_1180(conditions):
-    """
-        "original": "Pre-requisite: COMM1140. Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Terms 1 and 3.<br/><br/>",
-        "processed": "COMM1140. Only available to single && double degree Business School in Term 2. It will be offered to non-Business School in Terms 1 && 3"
-    """
-
-    return {
-        "original": conditions["original"],
-        "processed": "COMM1140",
-        "handbook_note": "Only available to single and double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 and 3"
-    }
-
-
-def COMM_1190(conditions):
-    """
-        "original": "Pre-requisite: COMM1110 or ECON1203 or MATH1031 or MATH1041 or MATH1131 or MATH1141 or MATH1151. Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Term 3.<br/><br/>",
-
-        "processed": "COMM1110 || ECON1203 || MATH1031 || MATH1041 || MATH1131 || MATH1141 || MATH1151"
-    """
-
-    return {
-        "original": conditions["original"],
-        "processed": "COMM1110 || ECON1203 || MATH1031 || MATH1041 || MATH1131 || MATH1141 || MATH1151",
-        "handbook_note": "Only available to single and double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 and 3"
-    }
-
-=======
->>>>>>> dev
 
 def COMM_1999(conditions):
     """
