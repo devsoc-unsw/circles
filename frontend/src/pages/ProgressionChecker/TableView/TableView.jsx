@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { Typography, Table, Skeleton } from "antd";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Skeleton, Table, Typography } from "antd";
 import getPastCourses from "../getPastCourses";

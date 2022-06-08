@@ -12,8 +12,9 @@ def test_validation_majors():
     unlocked = requests.post('http://127.0.0.1:8000/courses/getAllUnlocked', json=USERS["user3"]).json()['courses_state']
     for program in requests.get('http://127.0.0.1:8000/programs/getPrograms').json()['programs']:
         majorsGroups = requests.get(f'http://127.0.0.1:8000/programs/getMajors/{program}').json()['majors']
-        for major in group["specs"].keys():
-            assert_possible_structure(unlocked, program, major)
+        for group in majorsGroups.values():
+            for major in group["specs"].keys():
+                assert_possible_structure(unlocked, program, major)
     for program in requests.get('http://127.0.0.1:8000/programs/getPrograms').json()['programs']:
         majorGroups = requests.get(f'http://127.0.0.1:8000/programs/getMajors/{program}').json()['majors']
         minorGroups = requests.get(f'http://127.0.0.1:8000/programs/getMinors/{program}').json()['minors']

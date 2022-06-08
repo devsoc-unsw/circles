@@ -3,7 +3,6 @@ import { Helmet } from "react-helmet";
 import { Layout } from "antd";
 import FeedbackButton from "components/FeedbackButton";
 
-
 const { Content } = Layout;
 
 const PageTemplate = ({ children }) => (

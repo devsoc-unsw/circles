@@ -5,7 +5,7 @@ import {
   DownloadOutlined, EyeFilled, QuestionCircleOutlined, SettingFilled, WarningFilled,
 } from "@ant-design/icons";
 import Tippy from "@tippyjs/react";
-import { Popconfirm, Switch, Tooltip } from "antd";
+import { Popconfirm, Tooltip } from "antd";
 import { unhideAllYears, unscheduleAll } from "reducers/plannerSlice";
 import HelpMenu from "./HelpMenu";
 import SaveMenu from "./SaveMenu";
