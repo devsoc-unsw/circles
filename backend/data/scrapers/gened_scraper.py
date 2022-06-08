@@ -12,8 +12,7 @@ import json
 
 import requests
 from data.scrapers.courses_scraper import TOTAL_COURSES
-from data.scrapers.payload import HEADERS
-from data.scrapers.payloadGened import create_payload_gened
+from data.scrapers.payload import HEADERS, create_payload_gened
 from data.utility import data_helpers
 
 URL = "https://www.handbook.unsw.edu.au/api/es/search?appliedFilters="
