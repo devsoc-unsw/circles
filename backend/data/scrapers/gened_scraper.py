@@ -20,10 +20,9 @@ URL = "https://www.handbook.unsw.edu.au/api/es/search?appliedFilters="
 def scrape_gened_data(year=None):
     """
     Retrieves gen ed data for all undergraduate programs
+    Stores in genedPureRaw.json as list of course codes for each program code in programsFormattedRaw.json
     """
-    #faculty_list = get_faculty_list()
     faculty_list = []
-    #gened_raw = data_helpers.read_data("data/scrapers/genedPureRaw.json")
     gened_raw = {}
     cl_id = ""
     academicOrg = ""
