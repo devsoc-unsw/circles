@@ -1,15 +1,8 @@
-<<<<<<< HEAD
-import pymongo
-import re
-from fuzzywuzzy import fuzz
-from typing import Optional
-=======
 """
 APIs for the /courses/ route.
 """
 import re
 from typing import Optional, Tuple
->>>>>>> dev
 
 from algorithms.objects.user import User
 from data.config import ARCHIVED_YEARS
@@ -17,22 +10,11 @@ from data.utility.data_helpers import read_data
 from fastapi import APIRouter, HTTPException
 from fuzzywuzzy import fuzz
 from server.database import archivesDB, coursesCOL
-<<<<<<< HEAD
-from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, AffectedCourses,
-                                  CourseDetails, CoursesState,
-                                  CoursesUnlockedWhenTaken, ProgramCourses, Structure,
-                                  UserData, message)
-
-"""
-APIs for the /courses/ route.
-"""
-=======
 from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, Courses,
                                   CourseDetails, CoursesState, CoursesPath,
                                   CoursesUnlockedWhenTaken, ProgramCourses,
                                   UserData, message)
 
->>>>>>> dev
 
 router = APIRouter(
     prefix="/courses",
@@ -192,19 +174,10 @@ def search(userData: UserData, search_string: str):
     if ALL_COURSES is None:
         ALL_COURSES = fetch_all_courses()
 
-<<<<<<< HEAD
-    # TODO: can you have a minor without a major selected?
-    #       will wreak havoc on the argument order with *specialisations
-    #       currently this is enforced during setup but will need to
-    #       make sure that this is true for all degrees not just comp sci
-    specialisations = list(userData.specialisations.keys())
-    structure = getStructure(userData.program, *specialisations)['structure']
-=======
     specialisations = list(userData.specialisations.keys())
     majors = list(filter(lambda x: x.endswith("1"), specialisations))
     minors = list(filter(lambda x: x.endswith("2"), specialisations))
     structure = getStructure(userData.program, "+".join(majors), "+".join(minors))['structure']
->>>>>>> dev
 
     top_results = sorted(ALL_COURSES.items(), reverse=True,
                          key=lambda course: fuzzy_match(course, search_string)
@@ -213,15 +186,6 @@ def search(userData: UserData, search_string: str):
                               key=lambda course: weight_course(course,
                                                                search_string,
                                                                structure, 
-<<<<<<< HEAD
-                                                               *specialisations)
-                              )[:30]
-
-    return {code: title for code, title in weighted_results}
-
-def regex_search(search_string: str):
-    """ 
-=======
                                                                majors,
                                                                minors)
                               )[:30]
@@ -230,7 +194,6 @@ def regex_search(search_string: str):
 
 def regex_search(search_string: str):
     """
->>>>>>> dev
     Uses the search string as a regex to match all courses with an exact pattern.
     """
 
@@ -349,11 +312,7 @@ def getLegacyCourse(year, courseCode):
     return result
 
 
-<<<<<<< HEAD
-@router.post("/unselectCourse/{unselectedCourse}", response_model=AffectedCourses,
-=======
 @router.post("/unselectCourse/{unselectedCourse}", response_model=Courses,
->>>>>>> dev
             responses={
                 422: {"model": message, "description": "Unselected course query is required"},
                 400: {"model": message, "description": "Uh oh you broke me"},
@@ -373,13 +332,6 @@ def getLegacyCourse(year, courseCode):
                  }
             })
 def unselectCourse(userData: UserData, unselectedCourse: str):
-<<<<<<< HEAD
-    """
-    Creates a new user class and returns all the courses
-    affected from the course that was unselected in sorted order
-    """
-    affectedCourses = User(fixUserData(userData.dict())).unselect_course(unselectedCourse)
-=======
     """
     Creates a new user class and returns all the courses
     affected from the course that was unselected in sorted order
@@ -441,7 +393,6 @@ def getPathFrom(course):
     fetches courses which can be used to satisfy 'course'
     eg 2521 -> 1511
     """
->>>>>>> dev
 
     course_condition = CONDITIONS[course]
     return {
@@ -496,15 +447,9 @@ def unlocked_set(courses_state):
     return set(course for course in courses_state if courses_state[course]['unlocked'])
 
 
-<<<<<<< HEAD
-def fuzzy_match(course: tuple, search_term: str):
-    """ Gives the course a weighting based on the relevance to the search """
-    (code, title) = course
-=======
 def fuzzy_match(course: Tuple[str, str], search_term: str):
     """ Gives the course a weighting based on the relevance to the search """
     code, title = course
->>>>>>> dev
 
     # either match against a course code, or match many words against the title
     # (not necessarily in the same order as the title)
@@ -517,46 +462,6 @@ def fuzzy_match(course: Tuple[str, str], search_term: str):
                        for word in search_term.split(' ')))
 
 def weight_course(course: tuple, search_term: str, structure: dict,
-<<<<<<< HEAD
-                  major_code: Optional[str] = None, minor_code: Optional[str] = None):
-    """ Gives the course a weighting based on the relevance to the user's degree """
-    weight = fuzzy_match(course, search_term)
-    (code, title) = course
-
-    if major_code is not None:
-        for structKey in structure.keys():
-            if "Major" not in structKey:
-                continue
-            for key in structure[structKey].items():
-                if isinstance(key[1], dict):
-                    for c in key[1].get("courses", {}):
-                        if code in c:
-                            if "Core" in key[0]:
-                                weight += 20
-                            else:
-                                weight += 10
-                            break
-
-        if str(code).startswith(major_code[:4]):
-            weight += 14
-
-    if minor_code is not None:
-        for structKey in structure.keys():
-            if "Minor" not in structKey:
-                continue
-            for key in structure[structKey].items():
-                if isinstance(key[1], dict):
-                    for c in key[1].get("courses", {}):
-                        if code in c:
-                            if "Core" in key[0]:
-                                weight += 10
-                            else:
-                                weight += 5
-                            break
-
-        if str(code).startswith(minor_code[:4]):
-            weight += 7
-=======
                   majors: list, minors: list):
     """ Gives the course a weighting based on the relevance to the user's degree """
     weight = fuzzy_match(course, search_term)
@@ -597,6 +502,5 @@ def weight_course(course: tuple, search_term: str, structure: dict,
         if str(code).startswith(minor_code[:4]):
             weight += 7
             break
->>>>>>> dev
 
     return weight

@@ -25,17 +25,6 @@ except argparse.ArgumentError:
     parser.print_help()
     exit(0)
 
-<<<<<<< HEAD
-def check_in_fixes(coursename, courses_in_manual):
-    """ mutates the list given to add the course name if it is in manual fixes"""
-    with suppress(FileNotFoundError):
-        with open(f"data/processors/manual_fixes/{coursename[0:4]}fixes.py", "r") as f:
-            if f"CONDITIONS[\"{coursename}\"]" in f.read():
-                courses_in_manual.append(coursename)
-
-
-if __name__ == "__main__":
-=======
 def check_in_fixes(cname: str, ls: list) -> None:
     """ mutates the list given to add the course name if it is in manual fixes"""
     with suppress(FileNotFoundError):
@@ -46,7 +35,6 @@ def check_in_fixes(cname: str, ls: list) -> None:
 
 def main():
     """ runs the comparison between a target and a source year """
->>>>>>> dev
     source_courses = (
         "data/final_data/coursesProcessed.json"
         if args.source is None
@@ -55,17 +43,10 @@ def main():
 
     target_courses = f"data/final_data/archive/processed/{args.target}.json"
 
-<<<<<<< HEAD
-    with open(source_courses, "r") as f:
-        source_courses = json.loads(f.read())
-
-    with open(target_courses, "r") as f:
-=======
     with open(source_courses, "r", encoding="utf8") as f:
         source_courses = json.loads(f.read())
 
     with open(target_courses, "r", encoding="utf8") as f:
->>>>>>> dev
         target_courses = json.loads(f.read())
 
     all_source = set(source_courses.keys())
@@ -95,9 +76,6 @@ def main():
     print("inFixes:")
     for added in courses_in_manual:
         print(f"\t- {added}")
-<<<<<<< HEAD
-=======
 
 if __name__ == "__main__":
     main()
->>>>>>> dev

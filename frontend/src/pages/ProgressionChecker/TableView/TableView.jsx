@@ -1,22 +1,5 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-import React from "react";
-import { Table } from "antd";
-import "./index.less";
-
-const TableView = ({ checkercourses }) => {
-  const columns = [
-    {
-      title: "Course Name",
-      dataIndex: "name",
-      key: "name",
-      render: (name) => name,
-=======
 import React, { useState, useEffect } from "react";
 import { Typography, Table, Skeleton } from "antd";
-=======
-import React, { useEffect, useState } from "react";
->>>>>>> dev
 import { useSelector } from "react-redux";
 import { Skeleton, Table, Typography } from "antd";
 import getPastCourses from "../getPastCourses";
@@ -98,7 +81,6 @@ const TableView = ({ isLoading, structure }) => {
       title: "Course Name",
       dataIndex: "title",
       key: "title",
->>>>>>> dev
     },
     {
       title: "UOC",
@@ -106,46 +88,13 @@ const TableView = ({ isLoading, structure }) => {
       key: "UOC",
     },
     {
-<<<<<<< HEAD
-      title: "Faculty",
-      dataIndex: "faculty",
-      key: "faculty",
-      filters: [
-        {
-          text: "UNSW Business School",
-          value: "UNSW Business School",
-        },
-        {
-          text: "School of Computer Science and Engineering",
-          value: "School of Computer Science and Engineering",
-        },
-      ],
-      onFilter: (value, record) => record.faculty.indexOf(value) === 0,
-    },
-    {
-      title: "State",
-      dataIndex: "state",
-      key: "state",
-      sorter: (a, b) => a.state.localeCompare(b.state),
-    },
-    {
-      title: "Time",
-      dataIndex: "time",
-      key: "time",
-      sorter: (a, b) => a.time.localeCompare(b.time),
-=======
       title: "Term Taken",
       dataIndex: "termTaken",
       key: "termTaken",
->>>>>>> dev
     },
   ];
 
   return (
-<<<<<<< HEAD
-    <div className="listPage">
-      <Table className="table-striped-rows" dataSource={checkercourses.corecourses} columns={columns} />
-=======
     <div className="tableViewContainer">
       {isLoading ? (
         <Skeleton />
@@ -170,7 +119,6 @@ const TableView = ({ isLoading, structure }) => {
           ))}
         </>
       )}
->>>>>>> dev
     </div>
   );
 };

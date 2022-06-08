@@ -1,12 +1,4 @@
 import React from "react";
-<<<<<<< HEAD
-import { Tooltip, Popconfirm } from "antd";
-import { useSelector, useDispatch } from "react-redux";
-import Tippy from "@tippyjs/react";
-import "tippy.js/dist/tippy.css";
-import "tippy.js/themes/light.css";
-=======
->>>>>>> dev
 import { FaRegCalendarTimes } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import {

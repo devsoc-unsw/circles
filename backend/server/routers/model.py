@@ -40,10 +40,6 @@ class CourseDetails(BaseModel):
     equivalents: dict
     raw_requirements: str
     exclusions: dict
-<<<<<<< HEAD
-    path_to: dict
-=======
->>>>>>> dev
     handbook_note: str
     terms: list
     gen_ed: int

@@ -12,32 +12,16 @@ def test_validation_majors():
     unlocked = requests.post('http://127.0.0.1:8000/courses/getAllUnlocked', json=USERS["user3"]).json()['courses_state']
     for program in requests.get('http://127.0.0.1:8000/programs/getPrograms').json()['programs']:
         majorsGroups = requests.get(f'http://127.0.0.1:8000/programs/getMajors/{program}').json()['majors']
-<<<<<<< HEAD
-        for group in majorsGroups.keys():
-            for major in majorsGroups[group].keys():
-=======
-        for group in majorsGroups.values():
-            for major in group["specs"].keys():
->>>>>>> dev
-                assert_possible_structure(unlocked, program, major)
-
-# TODO: currently fails because of parsing errors with new course prereqs such as COMM1190
-def test_validation_minors():
-    unlocked = requests.post('http://127.0.0.1:8000/courses/getAllUnlocked', json=USERS["user3"]).json()['courses_state']
+        for major in group["specs"].keys():
+            assert_possible_structure(unlocked, program, major)
     for program in requests.get('http://127.0.0.1:8000/programs/getPrograms').json()['programs']:
         majorGroups = requests.get(f'http://127.0.0.1:8000/programs/getMajors/{program}').json()['majors']
-<<<<<<< HEAD
-        major = list(majorGroups[list(majorGroups.keys())[0]].keys())[0]
-        for minor in requests.get(f'http://127.0.0.1:8000/programs/getMinors/{program}').json()['minors']:
-            assert_possible_structure(unlocked, program, major, minor)
-=======
         minorGroups = requests.get(f'http://127.0.0.1:8000/programs/getMinors/{program}').json()['minors']
         for majGroup in majorGroups.values():
             for major in majGroup["specs"].keys():
                 for group in minorGroups.values():
                     for minor in group["specs"].keys():
                         assert_possible_structure(unlocked, program, major, minor)
->>>>>>> dev
 
 
 def assert_possible_structure(unlocked, program, major, minor = ''):
@@ -48,22 +32,10 @@ def assert_possible_structure(unlocked, program, major, minor = ''):
             del structure[container]['name']
             del structure[container]['Flexible Education']
             del structure[container]['General Education']
-<<<<<<< HEAD
-        with suppress(KeyError):
-            del structure[container]['Prescribed Work Integrated Learning (WIL) Course']
-        with suppress(KeyError):
-            del structure[container]['Integrated First Year Courses']
-        with suppress(KeyError):
-            del structure[container]['Final Year Synthesis']
-        with suppress(KeyError):
-            del structure[container]['myBCom']
-        with suppress(KeyError):
-=======
             del structure[container]['Prescribed Work Integrated Learning (WIL) Course']
             del structure[container]['Integrated First Year Courses']
             del structure[container]['Final Year Synthesis']
             del structure[container]['myBCom']
->>>>>>> dev
             del structure[container]['Compulsory Core']
 
         for container2 in structure[container]:
