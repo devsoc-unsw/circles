@@ -47,6 +47,7 @@ def process_course_data(year = None):
         process_gen_ed(processed, course)
         process_exclusions(processed, course)
         process_enrolment_rules(processed, course)
+        process_multi_term(processed, course)
 
         # Overwrite data file entry with the newly processed info
         data[code] = processed
@@ -155,6 +156,14 @@ def process_enrolment_rules(processed: dict, course: dict):
     processed["raw_requirements"] = re.sub(
         "<br/><br/>", "", course["enrolment_rules"])
 
+def process_multi_term(processed: dict, course: dict) -> None:
+    is_multiterm = 0
+
+    for attribute in course["attributes"]:
+        if attribute["type"] == "multi-term_course":
+            is_multiterm = 1
+
+    processed["multi_term"] = is_multiterm
 
 if __name__ == "__main__":
     process_course_data()
