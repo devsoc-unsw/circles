@@ -158,4 +158,3 @@ def process_enrolment_rules(processed: dict, course: dict):
 
 if __name__ == "__main__":
     process_course_data()
-    #process_course_data("data/scrapers/coursesFormattedRaw.json", "data/final_data/coursesProcessed.json")

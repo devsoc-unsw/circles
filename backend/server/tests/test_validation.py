@@ -15,6 +15,9 @@ def test_validation_majors():
         for group in majorsGroups.values():
             for major in group["specs"].keys():
                 assert_possible_structure(unlocked, program, major)
+
+def test_validation_minors():
+    unlocked = requests.post('http://127.0.0.1:8000/courses/getAllUnlocked', json=USERS["user3"]).json()['courses_state']
     for program in requests.get('http://127.0.0.1:8000/programs/getPrograms').json()['programs']:
         majorGroups = requests.get(f'http://127.0.0.1:8000/programs/getMajors/{program}').json()['majors']
         minorGroups = requests.get(f'http://127.0.0.1:8000/programs/getMinors/{program}').json()['minors']
@@ -28,7 +31,6 @@ def test_validation_majors():
 def assert_possible_structure(unlocked, program, major, minor = ''):
     structure = requests.get(f'http://127.0.0.1:8000/programs/getStructure/{program}/{major}/{minor}').json()['structure']
     for container in structure:
-        print(container)
         with suppress(KeyError):
             del structure[container]['name']
             del structure[container]['Flexible Education']
@@ -40,8 +42,6 @@ def assert_possible_structure(unlocked, program, major, minor = ''):
             del structure[container]['Compulsory Core']
 
         for container2 in structure[container]:
-            print(container2)
-            print(structure[container][container2])
             with suppress(KeyError):
                 del structure[container][container2]['name']
 
