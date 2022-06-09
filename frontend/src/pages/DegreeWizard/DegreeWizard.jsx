@@ -74,7 +74,7 @@ const DegreeWizard = () => {
   };
 
   return (
-    <PageTemplate>
+    <PageTemplate showHeader={false}>
       <div className="degree-root-container">
         <Modal
           title="Reset Planner?"

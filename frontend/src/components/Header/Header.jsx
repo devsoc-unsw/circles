@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { BarsOutlined } from "@ant-design/icons";
 import {
   Button, Drawer,
-  Layout, Menu, Typography,
+  Menu, Typography,
 } from "antd";
 import circlesLogo from "assets/circlesLogo.svg";
 import PlannerCart from "components/PlannerCart";
@@ -11,17 +11,8 @@ import ThemeToggle from "components/ThemeToggle";
 import { inDev } from "config/constants";
 import useMediaQuery from "hooks/useMediaQuery";
 import DrawerContent from "./DrawerContent";
+import S from "./styles";
 import "./index.less";
-
-const menuStyles = {
-  backgroundColor: "inherit",
-};
-
-const titleStyles = {
-  color: "white",
-  marginLeft: "0.3em",
-  marginBottom: "0",
-};
 
 const getCurrentPath = () => {
   const validPaths = new Set([
@@ -49,14 +40,21 @@ const Header = () => {
   }, [url]);
 
   return (
-    <Layout className="header">
+    <S.HeaderWrapper>
       <Link to="/degree-wizard">
-        <div className="logo">
+        <S.LogoWrapper>
           <img alt="circles-logo" src={circlesLogo} width="40" height="40" />
-          <Title level={3} style={titleStyles}>
+          <Title
+            level={3}
+            style={{
+              color: "white",
+              marginLeft: "0.3em",
+              marginBottom: "0",
+            }}
+          >
             Circles
           </Title>
-        </div>
+        </S.LogoWrapper>
       </Link>
       {isSmall ? (
         <Button
@@ -65,14 +63,16 @@ const Header = () => {
           icon={<BarsOutlined style={{ color: "#fff", fontSize: "1.7em" }} />}
         />
       ) : (
-        <div className="header-content">
+        <S.HeaderContent>
           <Menu
             theme="dark"
             onClick={(e) => setCurrent(e.key)}
             selectedKeys={[current]}
             mode="horizontal"
             overflowedIndicator={null}
-            style={menuStyles}
+            style={{
+              backgroundColor: "inherit",
+            }}
           >
             <Menu.Item key="course-selector">
               <span>Course Selector</span>
@@ -101,7 +101,7 @@ const Header = () => {
           </Menu>
           <PlannerCart />
           {inDev && <ThemeToggle />}
-        </div>
+        </S.HeaderContent>
       )}
 
       <Drawer
@@ -111,7 +111,7 @@ const Header = () => {
       >
         <DrawerContent onCloseDrawer={() => setShowDrawer(false)} />
       </Drawer>
-    </Layout>
+    </S.HeaderWrapper>
   );
 };
 
