@@ -20,7 +20,7 @@ def test_user_has_taken_empty_user():
     Note that this is differentiated from the case where the user
     has no courses.
     """
-    user = User({})
+    user = User()
     assert user.has_taken_course("COMP1069") is False
     assert user.has_taken_course("COMP1511") is False
     assert user.has_taken_course("COMP1521") is False
@@ -46,7 +46,7 @@ def test_user_has_taken_one_course():
     assert user.has_taken_course("COMP3521") is False
 
 def test_user_has_taken_add_course():
-    user = User({})
+    user = User()
     assert user.has_taken_course("COMP1511") is False
     user = user.add_course([{"COMP1511": [6, 100]}])
     assert user.has_taken_course("COMP1511") is True
