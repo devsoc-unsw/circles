@@ -6,8 +6,8 @@
             "ACCTA2": 1
         },
         "courses": {
-            "COMP1511": [6, null],
-            "COMP1521": [6, null]
+            "COMP1511": [6, 84],
+            "COMP1521": [6, 57]
         },
         "year": 3
     },
@@ -18,8 +18,8 @@
             "ACCTA2": 1
         },
         "courses": {
-            "COMP1511": [6, 84],
-            "COMP1521": [6, 57]
+            "COMP1511": [6, null],
+            "COMP1521": [6, null]
         },
         "year": 3
     },
