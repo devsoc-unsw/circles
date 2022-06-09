@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { Switch, Tooltip, notification } from "antd";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { LockOutlined, UnlockOutlined } from "@ant-design/icons";
-import { useSelector, useDispatch } from "react-redux";
-import CourseMenu from "./CourseMenu";
+import { notification, Switch, Tooltip } from "antd";
+import axios from "axios";
+import PageTemplate from "components/PageTemplate";
+import { toggleCourseLock } from "reducers/coursesSlice";
 import CourseDescription from "./CourseDescription";
-import CourseTabs from "./CourseTabs";
-import PageTemplate from "../../components/PageTemplate";
-import "./index.less";
+import CourseMenu from "./CourseMenu";
 import CourseSearchBar from "./CourseSearchBar";
-import { toggleCourseLock } from "../../reducers/coursesSlice";
+import CourseTabs from "./CourseTabs";
+import "./index.less";
 
 const CourseSelector = () => {
   const [structure, setStructure] = useState({});
   const dispatch = useDispatch();
 
   const {
-    programCode, programName, minor, majors,
+    programCode, programName, minors, majors,
   } = useSelector((state) => state.degree);
 
   const { courses } = useSelector((state) => state.planner);
@@ -48,7 +48,8 @@ const CourseSelector = () => {
     // get structure of degree
     const fetchStructure = async () => {
       try {
-        const res = await axios.get(`/programs/getStructure/${programCode}/${majors.join("+")}${minor && `/${minor}`}`);
+        const minorAppend = minors.length > 0 ? `/${minors.join("+")}` : "";
+        const res = await axios.get(`/programs/getStructure/${programCode}/${majors.join("+")}${minorAppend}`);
         setStructure(res.data.structure);
       } catch (err) {
         // eslint-disable-next-line no-console
@@ -56,7 +57,7 @@ const CourseSelector = () => {
       }
     };
     if (programCode && (majors.length > 0)) fetchStructure();
-  }, [programCode, majors, minor]);
+  }, [programCode, majors, minors]);
 
   return (
     <PageTemplate>

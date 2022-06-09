@@ -1,9 +1,9 @@
 import React from "react";
+import { animated, useSpring } from "@react-spring/web";
 import { Typography } from "antd";
-import { useSpring, animated } from "@react-spring/web";
+import LiquidProgressChart from "components/LiquidProgressChart";
 import DegreeCard from "../DegreeCard";
 import SkeletonDashboard from "./SkeletonDashboard";
-import LiquidProgressChart from "../../../components/LiquidProgressChart";
 import "./index.less";
 
 const Dashboard = ({ isLoading, degree }) => {

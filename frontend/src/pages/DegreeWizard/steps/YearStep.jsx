@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Typography, Button, DatePicker } from "antd";
 import { useDispatch } from "react-redux";
-import "./steps.less";
-import { useSpring, animated } from "@react-spring/web";
+import { animated, useSpring } from "@react-spring/web";
+import { DatePicker, Typography } from "antd";
+import { updateDegreeLength, updateStartYear } from "reducers/plannerSlice";
 import springProps from "./spring";
-import { updateDegreeLength, updateStartYear } from "../../../reducers/plannerSlice";
+import "./steps.less";
 
 const { Title } = Typography;
 const { RangePicker } = DatePicker;
@@ -26,11 +26,7 @@ const YearStep = ({ incrementStep, currStep }) => {
         <Title level={4} className="text">
           What years do you start and finish?
         </Title>
-        {nextStep && currStep === 1 && (
-          <Button type="primary" onClick={incrementStep}>
-            Next
-          </Button>
-        )}
+        {nextStep && currStep === 1 && dispatch(incrementStep)}
       </div>
       <RangePicker
         picker="year"

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Droppable } from "react-beautiful-dnd";
-import { useSelector, useDispatch } from "react-redux";
-import { Badge } from "antd";
+import { useDispatch, useSelector } from "react-redux";
 import { LockFilled, UnlockFilled } from "@ant-design/icons";
+import { Badge } from "antd";
+import { toggleTermComplete } from "reducers/plannerSlice";
 import DraggableCourse from "../DraggableCourse";
-import { toggleTermComplete } from "../../../reducers/plannerSlice";
 import "./index.less";
 
 const TermBox = ({

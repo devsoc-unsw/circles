@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { BorderlessTableOutlined, TableOutlined } from "@ant-design/icons";
+import { Button, Divider } from "antd";
 import axios from "axios";
+import PageTemplate from "components/PageTemplate";
 import Dashboard from "./Dashboard";
-import ListView3 from "./ListView3";
-import "./index.less";
-import PageTemplate from "../../components/PageTemplate";
+import GridView from "./GridView/GridView";
 import TableView from "./TableView";
+import "./index.less";
 
 // TODO: dummy data for now
 const degreeData = {
@@ -41,9 +43,10 @@ const degreeData = {
 
 const ProgressionChecker = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [view, setView] = useState("grid");
 
   const {
-    programCode, majors, minor,
+    programCode, majors, minors,
   } = useSelector((state) => state.degree);
 
   const [structure, setStructure] = useState({});
@@ -52,7 +55,7 @@ const ProgressionChecker = () => {
     // get structure of degree
     const fetchStructure = async () => {
       try {
-        const res = await axios.get(`/programs/getStructure/${programCode}/${majors.join("+")}${minor && `/${minor}`}`);
+        const res = await axios.get(`/programs/getStructure/${programCode}/${majors.join("+")}/${minors.join("+")}`);
         setStructure(res.data.structure);
       } catch (err) {
         // eslint-disable-next-line no-console
@@ -61,17 +64,37 @@ const ProgressionChecker = () => {
       setIsLoading(false);
     };
     if (programCode && majors.length > 0) fetchStructure();
-  }, [programCode, majors, minor]);
+  }, [programCode, majors, minors, view]);
 
   return (
     <PageTemplate>
       <Dashboard isLoading={isLoading} degree={degreeData} />
-      <TableView isLoading={isLoading} structure={structure} />
-      <ListView3
-        isLoading={isLoading}
-        degree={degreeData}
-        progressioncourses={structure}
-      />
+      <Divider />
+      {view === "grid" ? (
+        <>
+          <Button
+            className="viewSwitcher"
+            type="primary"
+            icon={<TableOutlined />}
+            onClick={() => setView("table")}
+          >
+            Display Table View
+          </Button>
+          <GridView isLoading={isLoading} structure={structure} />
+        </>
+      ) : (
+        <>
+          <Button
+            className="viewSwitcher"
+            type="primary"
+            icon={<BorderlessTableOutlined />}
+            onClick={() => setView("grid")}
+          >
+            Display Grid View
+          </Button>
+          <TableView isLoading={isLoading} structure={structure} />
+        </>
+      )}
     </PageTemplate>
   );
 };

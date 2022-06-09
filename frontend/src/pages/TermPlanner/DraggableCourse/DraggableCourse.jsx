@@ -1,22 +1,23 @@
 import React from "react";
-import { Typography } from "antd";
 import { Draggable } from "react-beautiful-dnd";
+import { useContextMenu } from "react-contexify";
 import { useSelector } from "react-redux";
 import ReactTooltip from "react-tooltip";
-import { useContextMenu } from "react-contexify";
-import { WarningOutlined, InfoCircleOutlined } from "@ant-design/icons";
-import useMediaQuery from "../../../hooks/useMediaQuery";
+import { InfoCircleOutlined, WarningOutlined } from "@ant-design/icons";
+import { Typography } from "antd";
+import Marks from "components/Marks";
+import useMediaQuery from "hooks/useMediaQuery";
 import ContextMenu from "../ContextMenu";
 import "./index.less";
 
-const DraggableCourse = ({ code, index }) => {
+const DraggableCourse = ({ code, index, showMarks }) => {
   const { Text } = Typography;
   const { courses, isSummerEnabled, completedTerms } = useSelector((state) => state.planner);
   const theme = useSelector((state) => state.theme);
   // prereqs are populated in CourseDescription.jsx via course.raw_requirements
   const {
     prereqs, title, isUnlocked, plannedFor,
-    isLegacy, isAccurate, termsOffered, handbookNote, supressed,
+    isLegacy, isAccurate, termsOffered, handbookNote, supressed, mark,
   } = courses[code];
   const warningMessage = courses[code].warnings;
   const isOffered = plannedFor ? termsOffered.includes(plannedFor.match(/T[0-3]/)[0]) : true;
@@ -38,6 +39,7 @@ const DraggableCourse = ({ code, index }) => {
   );
   const errorIsInformational = shouldHaveWarning && isUnlocked
     && warningMessage.length === 0 && !isLegacy && isAccurate && isOffered;
+
   return (
     <>
       <Draggable
@@ -56,7 +58,8 @@ const DraggableCourse = ({ code, index }) => {
             className={`course ${isSummerEnabled && "summerViewCourse"}
             ${isDragDisabled && " dragDisabledCourse"}
             ${isDragDisabled && !isUnlocked && " disabledWarning"}
-            ${(!supressed && (!isUnlocked || !isOffered)) && " warning"}`}
+            ${(!supressed && (!isUnlocked || !isOffered)) && " warning"}
+            draggable-course-container`}
             data-tip
             data-for={code}
             id={code}
@@ -70,16 +73,23 @@ const DraggableCourse = ({ code, index }) => {
                 />
               ))}
             <div>
-              {isSmall ? (
-                <Text className="text">{code}</Text>
-              ) : (
-                <>
-                  <Text strong className="text">
-                    {code}
-                  </Text>
-                  <Text className="text">: {title} </Text>
-                </>
-              )}
+              <div className="draggable-course-info">
+                {isSmall ? (
+                  <Text className="text">{code}</Text>
+                ) : (
+                  <div>
+                    <Text strong className="text">
+                      {code}
+                    </Text>
+                    <Text className="text">: {title} </Text>
+                  </div>
+                )}
+                {showMarks ? (
+                  <Marks
+                    mark={mark}
+                  />
+                ) : null}
+              </div>
             </div>
           </li>
         )}

@@ -1,19 +1,15 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { Tag } from "antd";
-import { addTab } from "../../reducers/courseTabsSlice";
-import "./index.less";
+import { addTab } from "reducers/courseTabsSlice";
+import S from "./styles";
 
 const CourseTag = ({ name }) => {
   const dispatch = useDispatch();
-  const handleClick = () => {
-    dispatch(addTab(name));
-  };
 
   return (
-    <Tag onClick={handleClick} className="text tag">
+    <S.Tag onClick={() => dispatch(addTab(name))} className="text tag">
       {name}
-    </Tag>
+    </S.Tag>
   );
 };
 

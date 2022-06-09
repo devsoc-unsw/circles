@@ -4,7 +4,10 @@ JSON files for faster algorithms performance.
 This should be run from the backend directory or via runprocessors
 """
 
+from functools import reduce
+import operator
 import re
+from typing import Any
 
 from algorithms.cache.cache_config import (CACHE_CONFIG,
                                            CACHED_EXCLUSIONS_FILE,
@@ -67,7 +70,7 @@ def cache_mappings():
     mappings = {}
     courseMappings = {}
     courses = read_data(COURSES_PROCESSED_FILE)
-    
+
     # Tokenise faculty using regex, e.g 'UNSW Business School' -> 'F Business'
     def tokeniseFaculty(Faculty):
         faculty_token = "F "
@@ -80,7 +83,7 @@ def cache_mappings():
         match = match_object.group()
         faculty_token += match
         return faculty_token
-    
+
     # Tokenise faculty using regex, e.g 'School of Psychology' -> 'S Psychology'
     def tokeniseSchool(School):
         school_token = "S "
@@ -94,7 +97,7 @@ def cache_mappings():
             return match
         elif re.search("UNSW", School):
             match_object = re.search("(?<=UNSW\s)[^\s\n\,]+", School)
-        else: 
+        else:
             match_object = re.search("^([\w]+)", School)
         match = match_object.group()
         school_token += match
@@ -106,7 +109,7 @@ def cache_mappings():
         if faculty not in mappings:
             faculty_token = tokeniseFaculty(faculty)
             mappings[faculty] = faculty_token
-            courseMappings[faculty_token] = {} 
+            courseMappings[faculty_token] = {}
     # add schools to mappings.json
     for course in courses.values():
         if 'school' in course:
@@ -114,7 +117,7 @@ def cache_mappings():
             if school not in mappings:
                 school_token = tokeniseSchool(school)
                 mappings[school] = school_token
-                courseMappings[school_token] = {} 
+                courseMappings[school_token] = {}
     write_data(mappings, MAPPINGS_FILE)
 
     # finalise
@@ -125,7 +128,7 @@ def cache_mappings():
             courseSchool = course['school']
             courseMappings[mappings[courseSchool]][courseCode] = 1
         courseMappings[mappings[courseFaculty]][courseCode] = 1
-    
+
     write_data(courseMappings, COURSE_MAPPINGS_FILE)
 
 def cache_program_mappings():
@@ -141,23 +144,19 @@ def cache_program_mappings():
     Achieves this by looking for a keyword in the program's title
     """
 
-    keyword_codes = read_data(CACHE_CONFIG)
-    # Initialise mappings with all the mapping codes
-    # TODO: Add any more mappings. Look into updating manual-fixes wiki page?
+    keyword_codes: dict[str, list[str]] = read_data(CACHE_CONFIG)
 
-    code_list = keyword_codes["codes"]
+    mappings = {
+        code: {} for code
+        in reduce(operator.add, keyword_codes.values())
+    }
 
-    mappings = {}
-    for code in code_list:
-        mappings[code] = {}
+    programs: dict[str, Any] = read_data(PROGRAMS_FORMATTED_FILE)
 
-    programs = read_data(PROGRAMS_FORMATTED_FILE)
-
-    keyword_map = keyword_codes["keyword_mapping"]
     for program in programs.values():
-        for keyword in keyword_map:
+        for keyword in keyword_codes.keys():
             if keyword.lower() in program["title"].lower():
-                for code in keyword_map[keyword]:
+                for code in keyword_codes[keyword]:
                     mappings[code][program["code"]] = 1
 
     write_data(mappings, PROGRAM_MAPPINGS_FILE)

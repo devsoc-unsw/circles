@@ -1,19 +1,21 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Badge, notification } from "antd";
 import { DragDropContext } from "react-beautiful-dnd";
-import { useSelector, useDispatch } from "react-redux";
-import "./index.less";
-import validateTermPlanner from "./validateTermPlanner";
+import { useDispatch, useSelector } from "react-redux";
+import { notification } from "antd";
+import axios from "axios";
+import PageTemplate from "components/PageTemplate";
+import {
+  moveCourse, setPlannedCourseToTerm, setUnplannedCourseToTerm, toggleWarnings, unschedule,
+} from "reducers/plannerSlice";
+import HideYearTooltip from "./HideYearTooltip";
 import OptionsHeader from "./OptionsHeader";
+import TermBox from "./TermBox";
+import UnplannedColumn from "./UnplannedColumn";
+import { prepareCoursesForValidation } from "./utils";
+import "./index.less";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
-import HideYearTooltip from "./HideYearTooltip";
-import {
-  moveCourse, setPlannedCourseToTerm, setUnplannedCourseToTerm, unschedule,
-} from "../../reducers/plannerSlice";
-import PageTemplate from "../../components/PageTemplate";
-import UnplannedColumn from "./UnplannedColumn";
-import TermBox from "./TermBox";
 
 // checks if no courses have been planned (to display help notification
 // & determine if unschedule all button available)
@@ -36,21 +38,30 @@ const TermPlanner = () => {
   const [suppress, setSuppress] = useState(true);
   const [termsOffered, setTermsOffered] = useState([]);
   const [isDragging, setIsDragging] = useState(false);
-  const {
-    years,
-    startYear,
-    courses,
-    isSummerEnabled,
-    completedTerms,
-    hidden,
-    areYearsHidden,
-  } = useSelector((state) => state.planner);
+  const [showMarks, setShowMarks] = useState(false);
 
-  const { programCode, minor, majors } = useSelector(
-    (state) => state.degree,
-  );
+  const planner = useSelector((state) => state.planner);
 
+  const degree = useSelector((state) => state.degree);
   const dispatch = useDispatch();
+  const getMarkList = () => Object.values(planner.courses).map(((object) => object.mark));
+  // a memoised way to check if marks have changed
+  const marksRef = useRef(getMarkList());
+  if (JSON.stringify(marksRef.current) !== JSON.stringify(getMarkList())) {
+    marksRef.current = getMarkList();
+  }
+  const validateTermPlanner = async () => {
+    try {
+      const { data } = await axios.post(
+        "/planner/validateTermPlanner/",
+        JSON.stringify(prepareCoursesForValidation(planner, degree, suppress)),
+      );
+      dispatch(toggleWarnings(data.courses_state));
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
     console.log(years);
@@ -68,7 +79,7 @@ const TermPlanner = () => {
 
   const handleOnDragStart = (courseItem) => {
     const course = courseItem.draggableId;
-    const terms = courses[course].termsOffered;
+    const terms = planner.courses[course].termsOffered;
     setTermsOffered(terms);
     setIsDragging(true);
   };
@@ -111,7 +122,7 @@ const TermPlanner = () => {
 
     const destYear = destination.droppableId.match(/[0-9]{4}/)[0];
     const destTerm = destination.droppableId.match(/T[0-3]/)[0];
-    const destRow = destYear - startYear;
+    const destRow = destYear - planner.startYear;
 
     if (source.droppableId === "unplanned") {
       // === move unplanned course to term ===
@@ -122,7 +133,7 @@ const TermPlanner = () => {
       // === move between terms ===
       const srcYear = source.droppableId.match(/[0-9]{4}/)[0];
       const srcTerm = source.droppableId.match(/T[0-3]/)[0];
-      const srcRow = srcYear - startYear;
+      const srcRow = srcYear - planner.startYear;
       const srcIndex = source.index;
 
       dispatch(setPlannedCourseToTerm({
@@ -140,34 +151,26 @@ const TermPlanner = () => {
   return (
     <PageTemplate>
       <OptionsHeader
-        areYearsHidden={areYearsHidden}
+        areYearsHidden={planner.areYearsHidden}
         plannerRef={plannerPic}
         isAllEmpty={isAllEmpty}
         setSuppress={setSuppress}
         suppress={suppress}
+        showMarks={showMarks}
+        setShowMarks={setShowMarks}
       />
       <div className="mainContainer">
         <DragDropContext
-          onDragEnd={(result) => {
-            handleOnDragEnd(result);
-            if (result.destination && result.destination.droppableId !== "unplanned") {
-              validateTermPlanner(
-                dispatch,
-                { years, startYear, completedTerms },
-                { programCode, minor, majors },
-                suppress,
-              );
-            }
-          }}
+          onDragEnd={(result) => handleOnDragEnd(result)}
           onDragStart={handleOnDragStart}
         >
           <div className="plannerContainer">
             <div
-              className={`gridContainer ${isSummerEnabled && "summerGrid"}`}
+              className={`gridContainer ${planner.isSummerEnabled && "summerGrid"}`}
               ref={plannerPic}
             >
               <div className="gridItem" />
-              {isSummerEnabled && <div className="gridItem">Summer</div>}
+              {planner.isSummerEnabled && <div className="gridItem">Summer</div>}
               <div className="gridItem">Term 1</div>
               <div className="gridItem">Term 2</div>
               <div className="gridItem">Term 3</div>
@@ -199,7 +202,7 @@ const TermPlanner = () => {
                     </Badge>
                     {Object.keys(year).map((term) => {
                       const key = iYear + term;
-                      if (!isSummerEnabled && term === "T0") return null;
+                      if (!planner.isSummerEnabled && term === "T0") return null;
                       return (
                         <TermBox
                           key={key}
@@ -207,6 +210,7 @@ const TermPlanner = () => {
                           coursesList={year[term]}
                           termsOffered={termsOffered}
                           isDragging={isDragging}
+                          showMarks={showMarks}
                         />
                       );
                     })}
