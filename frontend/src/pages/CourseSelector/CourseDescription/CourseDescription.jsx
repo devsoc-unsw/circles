@@ -1,20 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  Tag, Typography, Space,
+  Space,
+  Tag, Typography,
 } from "antd";
 import { motion } from "framer-motion/dist/framer-motion";
+import infographic from "assets/infographicFontIndependent.svg";
+import Collapsible from "components/Collapsible";
+import CourseTag from "components/CourseTag";
+import ProgressBar from "components/ProgressBar";
+import axiosRequest from "config/axios";
+import { TERM, TIMETABLE_API_URL } from "config/constants";
+import { setCourse } from "reducers/coursesSlice";
 import prepareUserPayload from "../utils";
-import infographic from "../../../assets/infographicFontIndependent.svg";
-import axiosRequest from "../../../axios";
-import { setCourse } from "../../../reducers/coursesSlice";
 import AddToPlannerButton from "./AddToPlannerButton";
 import CourseAttribute from "./CourseAttribute";
 import LoadingSkeleton from "./LoadingSkeleton";
-import CourseTag from "../../../components/CourseTag";
-import Collapsible from "../../../components/Collapsible";
-import ProgressBar from "../../../components/ProgressBar";
-import { TERM, TIMETABLE_API_URL } from "../../../constants";
 import "./index.less";
 
 const { Title, Text } = Typography;
@@ -31,84 +32,83 @@ const CourseDescription = () => {
   const [coursesPathFrom, setCoursesPathFrom] = useState([]);
   const [courseCapacity, setCourseCapacity] = useState({});
 
-  useEffect(() => {
-    const getCourse = async () => {
-      const [data, err] = await axiosRequest("get", `/courses/getCourse/${id}`);
-      if (!err) {
-        dispatch(setCourse(data));
-      }
-    };
-
-    const getPathToCoursesById = async (c) => {
-      const [data, err] = await axiosRequest(
-        "post",
-        `/courses/coursesUnlockedWhenTaken/${c}`,
-        prepareUserPayload(degree, planner),
-      );
-      if (!err) {
-        setCoursesPathTo({
-          direct_unlock: data.direct_unlock,
-          indirect_unlock: data.indirect_unlock,
-        });
-      }
-    };
-
-    const getPathFromCoursesById = async (c) => {
-      const [data, err] = await axiosRequest(
-        "get",
-        `/courses/getPathFrom/${c}`,
-      );
-      if (!err) {
-        setCoursesPathFrom(data.courses);
-      }
-    };
-
-    const getCapacityAndEnrolment = (data) => {
-      const enrolmentCapacityData = {
-        enrolments: 0,
-        capacity: 0,
-      };
-      for (let i = 0; i < data.classes.length; i++) {
-        if (
-          data.classes[i].activity === "Lecture"
-          || data.classes[i].activity === "Seminar"
-          || data.classes[i].activity === "Thesis Research"
-          || data.classes[i].activity === "Project"
-        ) {
-          enrolmentCapacityData.enrolments
-            += data.classes[i].courseEnrolment.enrolments;
-          enrolmentCapacityData.capacity
-            += data.classes[i].courseEnrolment.capacity;
-        }
-      }
-      setCourseCapacity(enrolmentCapacityData);
-    };
-
-    const getCourseCapacityById = async (c) => {
-      const [data, err] = await axiosRequest(
-        "get",
-        `${TIMETABLE_API_URL}/${c}`,
-      );
-      if (!err) {
-        getCapacityAndEnrolment(data);
-      } else {
-        setCourseCapacity({});
-      }
-    };
-
-    const fetchCourseData = async () => {
-      await Promise.all([
-        getCourse(),
-        getPathFromCoursesById(id),
-        getPathToCoursesById(id),
-        getCourseCapacityById(id),
-      ]);
-      setPageLoaded(true);
-    };
-
-    if (id) {
-      fetchCourseData();
+  const getCourse = async (c) => {
+    const [data, err] = await axiosRequest("get", `/courses/getCourse/${c}`);
+    if (!err) {
+      dispatch(setCourse(data));
     }
+  };
+
+  const getPathToCoursesById = async (c) => {
+    const [data, err] = await axiosRequest(
+      "post",
+      `/courses/coursesUnlockedWhenTaken/${c}`,
+      prepareUserPayload(degree, planner),
+    );
+    if (!err) {
+      setCoursesPathTo({
+        direct_unlock: data.direct_unlock,
+        indirect_unlock: data.indirect_unlock,
+      });
+    }
+  };
+
+  const getPathFromCoursesById = async (c) => {
+    const [data, err] = await axiosRequest(
+      "get",
+      `/courses/getPathFrom/${c}`,
+    );
+    if (!err) {
+      setCoursesPathFrom(data.courses);
+    }
+  };
+
+  const getCapacityAndEnrolment = (data) => {
+    const enrolmentCapacityData = {
+      enrolments: 0,
+      capacity: 0,
+    };
+    for (let i = 0; i < data.classes.length; i++) {
+      if (
+        data.classes[i].activity === "Lecture"
+        || data.classes[i].activity === "Seminar"
+        || data.classes[i].activity === "Thesis Research"
+        || data.classes[i].activity === "Project"
+      ) {
+        enrolmentCapacityData.enrolments
+          += data.classes[i].courseEnrolment.enrolments;
+        enrolmentCapacityData.capacity
+          += data.classes[i].courseEnrolment.capacity;
+      }
+    }
+    setCourseCapacity(enrolmentCapacityData);
+  };
+
+  const getCourseCapacityById = async (c) => {
+    const [data, err] = await axiosRequest(
+      "get",
+      `${TIMETABLE_API_URL}/${c}`,
+    );
+    if (!err) {
+      getCapacityAndEnrolment(data);
+    } else {
+      setCourseCapacity({});
+    }
+  };
+
+  const fetchCourseData = async (c) => {
+    setPageLoaded(false);
+    await Promise.all([
+      getCourse(c),
+      getPathFromCoursesById(c),
+      getPathToCoursesById(c),
+      getCourseCapacityById(c),
+    ]);
+    setPageLoaded(true);
+  };
+
+  useEffect(() => {
+    if (id) fetchCourseData(id);
   }, [id]);
 
   if (tabs.length === 0) {

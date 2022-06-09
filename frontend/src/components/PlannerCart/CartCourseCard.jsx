@@ -1,12 +1,12 @@
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { DeleteOutlined } from "@ant-design/icons";
 import {
   Button, Popconfirm, Tooltip, Typography,
 } from "antd";
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { removeCourse } from "../../reducers/plannerSlice";
-import { addTab } from "../../reducers/courseTabsSlice";
+import { addTab } from "reducers/courseTabsSlice";
+import { removeCourse } from "reducers/plannerSlice";
 import "./index.less";
 
 const { Text } = Typography;

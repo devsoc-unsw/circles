@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useCallback } from "react";
-import axios from "axios";
-import { Menu, Button, Typography } from "antd";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import "./steps.less";
-import { useSpring, animated } from "@react-spring/web";
+import { animated, useSpring } from "@react-spring/web";
+import { Button, Menu, Typography } from "antd";
+import axios from "axios";
+import { addMinor, removeMinor } from "reducers/degreeSlice";
 import springProps from "./spring";
-import { addMinor, removeMinor } from "../../../reducers/degreeSlice";
+import "./steps.less";
 
 const { Title } = Typography;
 const MinorStep = ({ incrementStep, currStep }) => {

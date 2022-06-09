@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { BorderlessTableOutlined, TableOutlined } from "@ant-design/icons";
+import { Button, Divider } from "antd";
 import axios from "axios";
-import { Divider, Button } from "antd";
-import { TableOutlined, BorderlessTableOutlined } from "@ant-design/icons";
+import PageTemplate from "components/PageTemplate";
 import Dashboard from "./Dashboard";
-import "./index.less";
-import PageTemplate from "../../components/PageTemplate";
-import TableView from "./TableView";
 import GridView from "./GridView/GridView";
+import TableView from "./TableView";
+import "./index.less";
 
 // TODO: dummy data for now
 const degreeData = {
@@ -55,7 +55,7 @@ const ProgressionChecker = () => {
     // get structure of degree
     const fetchStructure = async () => {
       try {
-        const res = await axios.get(`/programs/getStructure/${programCode}/${majors.join("+")}${minors && `/${minors.join("+")}`}`);
+        const res = await axios.get(`/programs/getStructure/${programCode}/${majors.join("+")}/${minors.join("+")}`);
         setStructure(res.data.structure);
       } catch (err) {
         // eslint-disable-next-line no-console

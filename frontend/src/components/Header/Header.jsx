@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { BarsOutlined } from "@ant-design/icons";
 import {
-  Menu, Layout, Typography, Button, Drawer,
+  Button, Drawer,
+  Layout, Menu, Typography,
 } from "antd";
+import circlesLogo from "assets/circlesLogo.svg";
+import PlannerCart from "components/PlannerCart";
+import ThemeToggle from "components/ThemeToggle";
+import { inDev } from "config/constants";
+import useMediaQuery from "hooks/useMediaQuery";
 import DrawerContent from "./DrawerContent";
-import useMediaQuery from "../../hooks/useMediaQuery";
-import circlesLogo from "../../assets/circlesLogo.svg";
 import "./index.less";
-import PlannerCart from "../PlannerCart";
-import { inDev } from "../../constants";
-import ThemeToggle from "../ThemeToggle";
 
 const menuStyles = {
   backgroundColor: "inherit",

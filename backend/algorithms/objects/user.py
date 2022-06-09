@@ -6,9 +6,9 @@
 """
 
 import copy
+from pickle import load
 from typing import Optional, Tuple
 import re
-
 from algorithms.objects.categories import AnyCategory, Category
 
 class User:
@@ -74,6 +74,9 @@ class User:
     def in_program(self, program: str):
         """ Determines if the user is in this program code """
         return self.program == program
+    
+    def get_courses(self):
+        return list(self.courses.keys())
 
     def in_specialisation(self, specialisation: str):
         """ Determines if the user is in the specialisation """
@@ -127,43 +130,3 @@ class User:
     def pop_course(self, course: str) -> Tuple[int, int]:
         """ removes a course from done courses and returns its uoc and mark """
         return self.courses.pop(course)
-
-    def unselect_course(self, target: str) -> list[str]:
-        """
-        Given a course to unselect and a list of locked courses, remove the
-        courses from the user and return a list of courses which would be
-        affected by the unselection
-        """
-
-        if not self.has_taken_course(target):
-            return []
-
-        # Resolving circular imports
-        from algorithms.create import create_condition
-        from algorithms.objects.conditions import CACHED_CONDITIONS_TOKENS
-
-        # Load all the necessary conditions
-        cached_conditions = {
-            course: create_condition(CACHED_CONDITIONS_TOKENS[course], course)
-            for course in self.courses
-        }
-
-        affected_courses = []
-        # Brute force loop through all taken courses and if we find a course which is
-        # no longer unlocked, we unselect it, add it to the affected course list,
-        # then restart loop.
-        courses_to_delete = [target]
-        while courses_to_delete:
-            affected_courses.extend(courses_to_delete)
-            for course in courses_to_delete:
-                if course in self.courses:
-                    del self.courses[course]
-
-            courses_to_delete = [
-                c
-                for c in self.courses
-                if cached_conditions.get(c) is not None  # course is in conditions
-                and not (cached_conditions[c].validate(self))[0]  # not unlocked anymore
-            ]
-
-        return list(sorted(affected_courses))
