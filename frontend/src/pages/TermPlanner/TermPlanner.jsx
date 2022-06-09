@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Badge, notification } from "antd";
+import React, { useEffect, useRef, useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
+import { Badge, notification } from "antd";
 import axios from "axios";
 import PageTemplate from "components/PageTemplate";
 import {
@@ -63,14 +63,12 @@ const TermPlanner = () => {
   };
 
   useEffect(() => {
-    if (isAllEmpty(years)) openNotification();
-    validateTermPlanner(
-      dispatch,
-      { years, startYear, completedTerms },
-      { programCode, minor, majors },
-      suppress,
-    );
-  }, [years, suppress, dispatch, startYear, completedTerms, programCode, minor, majors]);
+    if (isAllEmpty(planner.years)) openNotification();
+    validateTermPlanner();
+  }, [
+    degree, planner.years, suppress, planner.startYear, marksRef.current,
+  ]);
+
   const currYear = new Date().getFullYear();
 
   const plannerPic = useRef();
@@ -173,17 +171,17 @@ const TermPlanner = () => {
               <div className="gridItem">Term 2</div>
               <div className="gridItem">Term 3</div>
               <div className="gridItem">Unplanned</div>
-              {years.map((year, index) => {
-                const iYear = parseInt(startYear, 10) + parseInt(index, 10);
+              {planner.years.map((year, index) => {
+                const iYear = parseInt(planner.startYear, 10) + parseInt(index, 10);
                 let yearUOC = 0;
                 Object.keys(year).forEach((i) => {
-                  Object.keys(courses).forEach((j) => {
+                  Object.keys(planner.courses).forEach((j) => {
                     if (year[i].includes(j)) {
-                      yearUOC += courses[j].UOC;
+                      yearUOC += planner.courses[j].UOC;
                     }
                   });
                 });
-                if (hidden[iYear]) return null;
+                if (planner.hidden[iYear]) return null;
                 return (
                   <React.Fragment key={index}>
                     <Badge style={{ backgroundColor: "#efdbff", color: "#000000" }} size="small" count={`${yearUOC} UOC`} offset={[-26, 42]}>
