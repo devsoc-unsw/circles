@@ -117,7 +117,8 @@
         },
         "courses": {
             "COMP1511": [6, 49]
-        }
+        },
+        "year": 1
     },
     "user_bare_pass_comp1511": {
         "program": "3707",
@@ -127,6 +128,7 @@
         },
         "courses": {
             "COMP1511": [6, 50]
-        }
+        },
+        "year": 1
     }
 }

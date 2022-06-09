@@ -13,6 +13,7 @@ EXAMPLE_USERS_PATH = "./algorithms/exampleUsers.json"
 with open(EXAMPLE_USERS_PATH) as f:
     USERS = json.load(f)
 
+
 def test_user_has_taken_empty_user():
     """
     The user object being passed in for construction is empty.
@@ -27,6 +28,7 @@ def test_user_has_taken_empty_user():
     assert user.has_taken_course("COMP2521") is False
     assert user.has_taken_course("COMP3521") is False
 
+
 def test_user_no_courses():
     user = User(USERS["user_no_courses"])
     assert user.has_taken_course("COMP1069") is False
@@ -36,6 +38,7 @@ def test_user_no_courses():
     assert user.has_taken_course("COMP2521") is False
     assert user.has_taken_course("COMP3521") is False
 
+
 def test_user_has_taken_one_course():
     user = User(USERS["user_one_course"])
     assert user.has_taken_course("COMP1511") is True
@@ -44,10 +47,13 @@ def test_user_has_taken_one_course():
     assert user.has_taken_course("COMP2521") is False
     assert user.has_taken_course("COMP3521") is False
 
+
 def test_user_has_taken_add_course():
     user = User()
     assert user.has_taken_course("COMP1511") is False
-    user = user.add_course([{"COMP1511": [6, 100]}])
+    user = user.add_courses([{
+        "COMP1511": (6, 100)
+    }])
     assert user.has_taken_course("COMP1511") is True
 
 
@@ -56,6 +62,7 @@ def test_user_has_taken_user_1():
     assert user.has_taken_course("COMP1511")
     assert user.has_taken_course("COMP1511")
 
+
 def test_user_has_taken_fail():
     """
     Check that the pass / fail condition works
@@ -63,14 +70,16 @@ def test_user_has_taken_fail():
     """
     user_fail = User(USERS["user_fail_comp1511"])
     assert user_fail.has_taken_course("COMP1511") is False
-    user_pass = User(USERS["user_pass_comp1511"])
+    user_pass = User(USERS["user_bare_pass_comp1511"])
     assert user_pass.has_taken_course("COMP1511") is True
+
 
 def test_user_has_taken_no_marks():
     """If no marks, want to assume that the course has been completed."""
     user = User(USERS["user1_no_marks"])
     assert user.has_taken_course("COMP1511") is True
     assert user.has_taken_course("COMP1521") is True
+
 
 def test_user_has_taken_remove_course():
     user = User(USERS["user1"])
