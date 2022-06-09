@@ -59,7 +59,7 @@ const ProgressionChecker = () => {
         degreeData.code = programCode;
         degreeData.concentrations[0].name = programName;
         degreeData.concentrations[1].name = programName;
-        console.log(res.data.structure.majors);
+        console.log(res.data[structure]);
         console.log(degreeData);
         setStructure(res.data.structure);
       } catch (err) {
