@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Droppable } from "react-beautiful-dnd";
 import { useSelector } from "react-redux";
 import DraggableCourse from "../DraggableCourse";
