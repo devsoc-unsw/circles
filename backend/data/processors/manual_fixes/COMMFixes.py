@@ -322,7 +322,7 @@ def COMM_3900(conditions):
 
     return {
         "original": conditions["original"],
-        "processed": "COMM6000 && 108UOC && L1 CORES",
+        "processed": "COMM6000 && 108UOC && CORES in L1",
         "handbook_note": "Students must be in good academic standing."
     }
 

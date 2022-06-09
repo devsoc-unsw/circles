@@ -5114,21 +5114,6 @@
         ],
         "broke at": "Index 4, Restricted"
     },
-    "BIOM4951": {
-        "condition": {
-            "original": "Prerequisite: Completion of 126 UOC and completion of 3rd year core<br/><br/>",
-            "processed": "126UOC && L3 CORES"
-        },
-        "tokens": [
-            "(",
-            "126UOC",
-            "&&",
-            "L3",
-            "CORES",
-            ")"
-        ],
-        "broke at": "Index 4, CORES"
-    },
     "BIOM4952": {
         "condition": {
             "original": "Prerequisite: Completion of Research Thesis A (4951)<br/><br/>",
@@ -5515,21 +5500,6 @@
             ")"
         ],
         "broke at": "Index 6, MATH2089"
-    },
-    "CEIC4951": {
-        "condition": {
-            "original": "Prerequisite: Completion of 126 UOC and completion of 3rd year core<br/><br/>",
-            "processed": "126UOC && L3 CORES"
-        },
-        "tokens": [
-            "(",
-            "126UOC",
-            "&&",
-            "L3",
-            "CORES",
-            ")"
-        ],
-        "broke at": "Index 4, CORES"
     },
     "CEIC4952": {
         "condition": {
@@ -6036,28 +6006,10 @@
         ],
         "broke at": "Index 7, 2270"
     },
-    "COMM3900": {
-        "condition": {
-            "original": "Pre-requisite: Completed a minimum of 108 UOC (including First Year core), on Good standing and completed Career Accelerator Essentials (COMM6000).<br/>It is strongly recommended that students only complete this course within their final 2 terms of study.<br/><br/>",
-            "processed": "COMM6000 && 108UOC && L1 CORES",
-            "handbook_note": "Students must be in good academic standing."
-        },
-        "tokens": [
-            "(",
-            "COMM6000",
-            "&&",
-            "108UOC",
-            "&&",
-            "L1",
-            "CORES",
-            ")"
-        ],
-        "broke at": "Index 6, CORES"
-    },
     "COMP3901": {
         "condition": {
             "original": "Prerequisite: 80+ WAM in COMP, SENG or BINF courses, completion of all first and second year core requirements a CSE program, and agreement from a suitable CSE academic supervisor.<br/><br/>",
-            "processed": "80WAM in (COMP || SENG || BINF) && L1 CORES && L2 CORES",
+            "processed": "80WAM in (COMP || SENG || BINF) && CORES in L1 && CORES in L2",
             "handbook_note": "You must obtain agreement from a suitable CSE academic supervisor to enrol in this course."
         },
         "tokens": [
@@ -6072,11 +6024,13 @@
             "BINF",
             ")",
             "&&",
+            "CORES",
+            "in",
             "L1",
-            "CORES",
             "&&",
-            "L2",
             "CORES",
+            "in",
+            "L2",
             ")"
         ],
         "broke at": "Index 1, 80WAM"
@@ -6084,7 +6038,7 @@
     "COMP3902": {
         "condition": {
             "original": "Prerequisite: 80+ WAM in COMP, SENG or BINF courses, completion of all first and second year core requirements a CSE program, and agreement from a suitable CSE academic supervisor.<br/><br/>",
-            "processed": "80WAM in (COMP || SENG || BINF) && L1 CORES && L2 CORES",
+            "processed": "80WAM in (COMP || SENG || BINF) && CORES in L1 && CORES in L2",
             "handbook_note": "You must obtain agreement from a suitable CSE academic supervisor to enrol in this course."
         },
         "tokens": [
@@ -6099,11 +6053,13 @@
             "BINF",
             ")",
             "&&",
+            "CORES",
+            "in",
             "L1",
-            "CORES",
             "&&",
-            "L2",
             "CORES",
+            "in",
+            "L2",
             ")"
         ],
         "broke at": "Index 1, 80WAM"
@@ -6475,21 +6431,6 @@
             ")"
         ],
         "broke at": "Index 4, CRIM1011"
-    },
-    "CVEN4701": {
-        "condition": {
-            "original": "Completion of 126 UOC and 3rd year core<br/><br/>",
-            "processed": "126UOC && L3 CORES"
-        },
-        "tokens": [
-            "(",
-            "126UOC",
-            "&&",
-            "L3",
-            "CORES",
-            ")"
-        ],
-        "broke at": "Index 4, CORES"
     },
     "DART2151": {
         "condition": {
@@ -12451,29 +12392,6 @@
         ],
         "broke at": "Index 5, Storytelling"
     },
-    "MDIA3003": {
-        "condition": {
-            "original": "Prerequisite: 66 units of credit overall, including 6 units of credit Level 2 MDIA core courses and enrolment in a Media (Communication & Journalism) or Media (PR & Advertising) program<br/><br/>",
-            "processed": "66UOC && 6UOC in L2 CORES && (3454 || 3453)"
-        },
-        "tokens": [
-            "(",
-            "66UOC",
-            "&&",
-            "6UOC",
-            "in",
-            "L2",
-            "CORES",
-            "&&",
-            "(",
-            "3454",
-            "||",
-            "3453",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 7, &&"
-    },
     "MDIA3007": {
         "condition": {
             "original": "Prerequisite: 48 units of credit overall, and enrolment in a Media program, or a Creative Writing, English, FIlm Studies or MCT major or minor. Students must have a WAM of 65 to be eligible for this course.<br/><br/>",
@@ -12653,21 +12571,6 @@
             ")"
         ],
         "broke at": "Index 6, )"
-    },
-    "MMAN4951": {
-        "condition": {
-            "original": "Prerequisite: Completion of 126 UOC and completion of 3rd year core<br/><br/>",
-            "processed": "126UOC && L3 CORES"
-        },
-        "tokens": [
-            "(",
-            "126UOC",
-            "&&",
-            "L3",
-            "CORES",
-            ")"
-        ],
-        "broke at": "Index 4, CORES"
     },
     "MMAN4952": {
         "condition": {
@@ -13278,39 +13181,6 @@
             ")"
         ],
         "broke at": "Index 2, in"
-    },
-    "MUSC4101": {
-        "condition": {
-            "original": "Prerequisite: Level 1, 2 and 3 core Music courses and enrolment in a Music single or dual degree program; or 48 UoC overall including MUSC1602 or MUSC1604, and MUSC2116 and enrolment in a Music major in an Arts program<br/><br/>",
-            "processed": "(L1 CORES && L2 CORES && L3 CORES) || (48UOC && (MUSC1602 || MUSC1604) && MUSC2116)"
-        },
-        "tokens": [
-            "(",
-            "(",
-            "L1",
-            "CORES",
-            "&&",
-            "L2",
-            "CORES",
-            "&&",
-            "L3",
-            "CORES",
-            ")",
-            "||",
-            "(",
-            "48UOC",
-            "&&",
-            "(",
-            "MUSC1602",
-            "||",
-            "MUSC1604",
-            ")",
-            "&&",
-            "MUSC2116",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 2, L1"
     },
     "MUSC4102": {
         "condition": {
@@ -14763,21 +14633,6 @@
             ")"
         ],
         "broke at": "Index 4, SOCW4011,"
-    },
-    "SOLA4951": {
-        "condition": {
-            "original": "Prerequisite: Completion of 126 UOC and completion of 3rd year core<br/><br/>",
-            "processed": "126UOC && L3 CORES"
-        },
-        "tokens": [
-            "(",
-            "126UOC",
-            "&&",
-            "L3",
-            "CORES",
-            ")"
-        ],
-        "broke at": "Index 4, CORES"
     },
     "SOLA4952": {
         "condition": {

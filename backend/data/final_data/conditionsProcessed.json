@@ -2576,7 +2576,7 @@
     },
     "BIOM4951": {
         "original": "Prerequisite: Completion of 126 UOC and completion of 3rd year core<br/><br/>",
-        "processed": "126UOC && L3 CORES"
+        "processed": "126UOC && CORES in L3"
     },
     "BIOM4952": {
         "original": "Prerequisite: Completion of Research Thesis A (4951)<br/><br/>",
@@ -2964,7 +2964,7 @@
     },
     "CEIC4951": {
         "original": "Prerequisite: Completion of 126 UOC and completion of 3rd year core<br/><br/>",
-        "processed": "126UOC && L3 CORES"
+        "processed": "126UOC && CORES in L3"
     },
     "CEIC4952": {
         "original": "Prerequisite: Completion of Research Thesis A (4951)<br/><br/>",
@@ -3418,7 +3418,7 @@
     },
     "COMM3900": {
         "original": "Pre-requisite: Completed a minimum of 108 UOC (including First Year core), on Good standing and completed Career Accelerator Essentials (COMM6000).<br/>It is strongly recommended that students only complete this course within their final 2 terms of study.<br/><br/>",
-        "processed": "COMM6000 && 108UOC && L1 CORES",
+        "processed": "COMM6000 && 108UOC && CORES in L1",
         "handbook_note": "Students must be in good academic standing."
     },
     "COMM3999": {
@@ -3548,12 +3548,12 @@
     },
     "COMP3901": {
         "original": "Prerequisite: 80+ WAM in COMP, SENG or BINF courses, completion of all first and second year core requirements a CSE program, and agreement from a suitable CSE academic supervisor.<br/><br/>",
-        "processed": "80WAM in (COMP || SENG || BINF) && L1 CORES && L2 CORES",
+        "processed": "80WAM in (COMP || SENG || BINF) && CORES in L1 && CORES in L2",
         "handbook_note": "You must obtain agreement from a suitable CSE academic supervisor to enrol in this course."
     },
     "COMP3902": {
         "original": "Prerequisite: 80+ WAM in COMP, SENG or BINF courses, completion of all first and second year core requirements a CSE program, and agreement from a suitable CSE academic supervisor.<br/><br/>",
-        "processed": "80WAM in (COMP || SENG || BINF) && L1 CORES && L2 CORES",
+        "processed": "80WAM in (COMP || SENG || BINF) && CORES in L1 && CORES in L2",
         "handbook_note": "You must obtain agreement from a suitable CSE academic supervisor to enrol in this course."
     },
     "COMP4121": {
@@ -4069,7 +4069,7 @@
     },
     "CVEN4701": {
         "original": "Completion of 126 UOC and 3rd year core<br/><br/>",
-        "processed": "126UOC && L3 CORES"
+        "processed": "126UOC && CORES in L3"
     },
     "CVEN4703": {
         "original": "Prerequisite: CVEN3502<br/><br/>",
@@ -8128,7 +8128,7 @@
     },
     "MDIA3003": {
         "original": "Prerequisite: 66 units of credit overall, including 6 units of credit Level 2 MDIA core courses and enrolment in a Media (Communication & Journalism) or Media (PR & Advertising) program<br/><br/>",
-        "processed": "66UOC && 6UOC in L2 CORES && (3454 || 3453)"
+        "processed": "66UOC && (6UOC in (ARTS2093 || ARTS2091 || ARTS2092 || ARTS2096 || ARTS2095)) && (3454 || 3453)"
     },
     "MDIA3004": {
         "original": "Prerequisite: 66 units of credit overall, and enrolment in a single or double degree Media program<br/><br/>",
@@ -8668,7 +8668,7 @@
     },
     "MMAN4951": {
         "original": "Prerequisite: Completion of 126 UOC and completion of 3rd year core<br/><br/>",
-        "processed": "126UOC && L3 CORES"
+        "processed": "126UOC && CORES in L3"
     },
     "MMAN4952": {
         "original": "Prerequisite: Completion of Research Thesis A (4951)<br/><br/>",
@@ -8892,7 +8892,7 @@
     },
     "MUSC4101": {
         "original": "Prerequisite: Level 1, 2 and 3 core Music courses and enrolment in a Music single or dual degree program; or 48 UoC overall including MUSC1602 or MUSC1604, and MUSC2116 and enrolment in a Music major in an Arts program<br/><br/>",
-        "processed": "(L1 CORES && L2 CORES && L3 CORES) || (48UOC && (MUSC1602 || MUSC1604) && MUSC2116)"
+        "processed": "(CORES in (L1 || L2 || L3)) || (48UOC && (MUSC1602 || MUSC1604) && MUSC2116)"
     },
     "MUSC4102": {
         "original": "Prerequisite: MUSC4101, and enrolment in a Music program. Or 48 uoc overall including MUSC1602 or MUSC1604, and MUSC2116 and enrolment in a Music major in an Arts program<br/><br/>",
@@ -10107,7 +10107,7 @@
     },
     "SOLA4951": {
         "original": "Prerequisite: Completion of 126 UOC and completion of 3rd year core<br/><br/>",
-        "processed": "126UOC && L3 CORES"
+        "processed": "126UOC && CORES in L3"
     },
     "SOLA4952": {
         "original": "Prerequisite: Completion of Research Thesis A (4951)<br/><br/>",

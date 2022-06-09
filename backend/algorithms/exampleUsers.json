@@ -11,6 +11,18 @@
         },
         "year": 3
     },
+    "user1_no_marks": {
+        "program": "3707",
+        "specialisations": {
+            "COMPA1": 1,
+            "ACCTA2": 1
+        },
+        "courses": {
+            "COMP1511": [6, null],
+            "COMP1521": [6, null]
+        },
+        "year": 3
+    },
     "user2": {
         "program": "3707",
         "specialisations": {
@@ -74,5 +86,49 @@
             "COMP1511": [6, 84]
         },
         "year": 3
+    },
+    "empty_user": {
+    },
+    "user_no_courses": {
+        "program": "3707",
+        "specialisations": {
+            "COMPA1": 1,
+            "ACCTA2": 1
+        },
+        "courses": {},
+        "year": 1
+    },
+    "user_one_course": {
+        "program": "3707",
+        "specialisations": {
+            "COMPA1": 1,
+            "ACCTA2": 1
+        },
+        "courses": {
+            "COMP1511": [6, 100]
+        },
+        "year": 1
+    },
+    "user_fail_comp1511": {
+        "program": "3707",
+        "specialisations": {
+            "COMPA1": 1,
+            "ACCTA2": 1
+        },
+        "courses": {
+            "COMP1511": [6, 49]
+        },
+        "year": 1
+    },
+    "user_bare_pass_comp1511": {
+        "program": "3707",
+        "specialisations": {
+            "COMPA1": 1,
+            "ACCTA2": 1
+        },
+        "courses": {
+            "COMP1511": [6, 50]
+        },
+        "year": 1
     }
 }

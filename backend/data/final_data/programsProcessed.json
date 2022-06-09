@@ -852,5 +852,234 @@
                 "credits_to_complete": 36
             }
         }
+    },
+    "3454": {
+        "title": "Media (Communication and Journalism)",
+        "code": "3454",
+        "duration": 3,
+        "UOC": 144,
+        "faculty": "Faculty of Arts, Design and Architecture",
+        "components": {
+            "FE": {
+                "credits_to_complete": 36
+            },
+            "GE": {
+                "credits_to_complete": 12
+            },
+            "SpecialisationData": {},
+            "NonSpecialisationData": {
+                "Communication and Journalism Prescribed Elective Courses": {
+                    "type": "elective",
+                    "credits_to_complete": "18",
+                    "MDIA3011": "Communication Design: Multimodality, Meaning and Media",
+                    "ARTS2094": "Visual Communication",
+                    "MDIA2008": "Broadcast Media Practices",
+                    "MDIA2013": "Making Virtual Reality Documentaries",
+                    "MDIA3010": "Professional Media Practices: Creating, Publishing and Publicising Digital Journalism"
+                },
+                "Level 3 Communication and Journalism Core Courses": {
+                    "type": "core",
+                    "credits_to_complete": "12",
+                    "MDIA3002": "Multiplatform Media",
+                    "MDIA3003": "Professional Portfolio"
+                },
+                "Level 1 Communication and Journalism Core Courses": {
+                    "type": "core",
+                    "credits_to_complete": "18",
+                    "MDIA1004": "News Fundamentals",
+                    "MDIA1002": "Media & Communication Contexts",
+                    "MDIA1007": "Media Entrepreneurship"
+                },
+                "Level 3 Media Prescribed Elective Courses": {
+                    "type": "elective",
+                    "credits_to_complete": "12",
+                    "ARTS3093": "Media Power",
+                    "ARTS3091": "Advanced Media Issues",
+                    "ARTS3097": "Current Debates in Media and Culture",
+                    "ARTS3096": "Media, Climate Crisis, and Extinction in the Anthropocene",
+                    "MDIA3007": "Media and Arts Internship",
+                    "ARTS3092": "Media and Transformation in the Asia-Pacific"
+                },
+                "Level 2 Media Prescribed Elective Courses": {
+                    "type": "elective",
+                    "credits_to_complete": "12",
+                    "ARTS2093": "Social Media",
+                    "ARTS2091": "Mobile Cultures",
+                    "ARTS2092": "Global Media: Markets, Flows and Cultures",
+                    "ARTS2096": "Media Rights, Media Wrongs",
+                    "ARTS2095": "Digital Technologies and the Self"
+                },
+                "Level 2 Communication and Journalism Core Courses": {
+                    "type": "core",
+                    "credits_to_complete": "12",
+                    "MDIA2003": "Media Content Creation",
+                    "MDIA2002": "Analysing Media Communication"
+                },
+                "Level 1 Media Prescribed Elective Courses": {
+                    "type": "elective",
+                    "credits_to_complete": "12",
+                    "ARTS1091": "Media, Society, Politics",
+                    "ARTS1092": "Working with Data",
+                    "ARTS1090": "Media, Culture and Everyday Life"
+                }
+            },
+            "Minors": {
+                "FRENF2": 1,
+                "CHINF2": 1,
+                "JAPNF2": 1,
+                "ENGLC2": 1,
+                "FRENG2": 1,
+                "JAPNG2": 1,
+                "PSYCM2": 1,
+                "CRWTA2": 1,
+                "GREKC2": 1,
+                "LINGC2": 1,
+                "ASIAB2": 1,
+                "HISTD2": 1,
+                "IBUSA2": 1,
+                "CHINE2": 1,
+                "SPANI2": 1,
+                "THSTC2": 1,
+                "FILMB2": 1,
+                "GEOGK2": 1,
+                "COMDF2": 1,
+                "KOREG2": 1,
+                "ITALB2": 1,
+                "PSYCB2": 1,
+                "CRIMC2": 1,
+                "ATSIC2": 1,
+                "GEOGS2": 1,
+                "INDOC2": 1,
+                "MUSCJ2": 1,
+                "PHILE2": 1,
+                "ARTSB2": 1,
+                "SOCAD2": 1,
+                "WOMSC2": 1,
+                "ENVPE2": 1,
+                "EUROC2": 1,
+                "ECONA2": 1,
+                "KOREF2": 1,
+                "GERSF2": 1,
+                "ARTHB2": 1,
+                "POLSG2": 1,
+                "MGMTH2": 1,
+                "AUSTB2": 1
+            }
+        }
+    },
+    "3453": {
+        "title": "Media (Public Relations and Advertising)",
+        "code": "3453",
+        "duration": 3,
+        "UOC": 144,
+        "faculty": "Faculty of Arts, Design and Architecture",
+        "components": {
+            "FE": {
+                "credits_to_complete": 36
+            },
+            "GE": {
+                "credits_to_complete": 12
+            },
+            "SpecialisationData": {},
+            "NonSpecialisationData": {
+                "Level 1 Media Prescribed Courses": {
+                    "type": "elective",
+                    "credits_to_complete": "12",
+                    "ARTS1091": "Media, Society, Politics",
+                    "ARTS1090": "Media, Culture and Everyday Life",
+                    "ARTS1092": "Working with Data"
+                },
+                "PR & Advertising Prescribed Courses": {
+                    "type": "elective",
+                    "credits_to_complete": "18",
+                    "MDIA2007": "Political Communication",
+                    "MDIA3012": "Communication in Action",
+                    "ARTS2094": "Visual Communication",
+                    "MDIA3005": "Social Engagement for Civic Action",
+                    "MDIA3008": "Issues and Crisis Communication",
+                    "MDIA2013": "Making Virtual Reality Documentaries",
+                    "MDIA2011": "Media Design for Change"
+                },
+                "Level 1 PR and Advertising Core Courses.": {
+                    "type": "core",
+                    "credits_to_complete": "12",
+                    "MDIA1002": "Media & Communication Contexts",
+                    "MDIA1003": "Public Relations and Advertising Foundations"
+                },
+                "Level 3 PR and Advertising Core Courses": {
+                    "type": "core",
+                    "credits_to_complete": "12",
+                    "MDIA3000": "Discourse and Promotion",
+                    "MDIA3009": "Brand Communications and Cultures"
+                },
+                "Level 2 Media Prescribed Courses": {
+                    "type": "elective",
+                    "credits_to_complete": "12",
+                    "ARTS2096": "Media Rights, Media Wrongs",
+                    "ARTS2093": "Social Media",
+                    "ARTS2092": "Global Media: Markets, Flows and Cultures",
+                    "ARTS2095": "Digital Technologies and the Self",
+                    "ARTS2091": "Mobile Cultures"
+                },
+                "Level 3 Media Prescribed Courses": {
+                    "type": "elective",
+                    "credits_to_complete": "12",
+                    "ARTS3097": "Current Debates in Media and Culture",
+                    "MDIA3007": "Media and Arts Internship",
+                    "ARTS3093": "Media Power",
+                    "ARTS3096": "Media, Climate Crisis, and Extinction in the Anthropocene",
+                    "ARTS3092": "Media and Transformation in the Asia-Pacific",
+                    "ARTS3091": "Advanced Media Issues"
+                },
+                "Level 2 PR and Advertising Core Courses": {
+                    "type": "core",
+                    "credits_to_complete": "18",
+                    "MDIA2005": "Advertising: The Creative Dimensions",
+                    "MDIA2006": "Communication Strategies",
+                    "MDIA2012": "Promotional Cultures"
+                }
+            },
+            "Minors": {
+                "MGMTH2": 1,
+                "ITALB2": 1,
+                "SPANI2": 1,
+                "CRIMC2": 1,
+                "ENVPE2": 1,
+                "ENGLC2": 1,
+                "JAPNG2": 1,
+                "ECONA2": 1,
+                "PHILE2": 1,
+                "SOCAD2": 1,
+                "INDOC2": 1,
+                "ATSIC2": 1,
+                "KOREF2": 1,
+                "PSYCB2": 1,
+                "GREKC2": 1,
+                "EUROC2": 1,
+                "KOREG2": 1,
+                "IBUSA2": 1,
+                "FILMB2": 1,
+                "POLSG2": 1,
+                "JAPNF2": 1,
+                "AUSTB2": 1,
+                "LINGC2": 1,
+                "ARTHB2": 1,
+                "HISTD2": 1,
+                "CRWTA2": 1,
+                "PSYCM2": 1,
+                "MUSCJ2": 1,
+                "GEOGK2": 1,
+                "ASIAB2": 1,
+                "GEOGS2": 1,
+                "THSTC2": 1,
+                "CHINE2": 1,
+                "COMDF2": 1,
+                "GERSF2": 1,
+                "FRENF2": 1,
+                "CHINF2": 1,
+                "WOMSC2": 1,
+                "FRENG2": 1
+            }
+        }
     }
 }

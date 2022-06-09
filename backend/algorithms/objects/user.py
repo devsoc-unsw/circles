@@ -21,6 +21,7 @@ class User:
         self.program: str = None
         self.specialisations: dict[str, int] = {}
         self.year: int = 0
+        self.core_courses: list[str] = []
 
         # Data was provided
         if data is not None:
@@ -64,8 +65,18 @@ class User:
         self.specialisations[specialisation] = 1
 
     def has_taken_course(self, course: str):
-        """ Determines if the user has taken this course """
-        return course in self.courses
+        """
+        Determines if the user has taken and passed this course
+        If there is no mark, we assume the user has passed the course
+        """
+        return (
+            course in self.courses
+                and (
+                    self.courses[course][1] >= 50
+                    if self.courses[course][1] is not None
+                    else True
+                )
+        )
 
     def is_taking_course(self, course: str):
         """ Determines if the user is taking this course this term """
@@ -121,6 +132,14 @@ class User:
         return sum(
             uoc
             for course, (uoc, _) in self.courses.items()
+            if category.match_definition(course)
+        )
+
+    def completed_core(self, category: Category = AnyCategory()):
+        """ Checks that the user has completed all core courses matching a category """
+        return all(
+            self.has_taken_course(course)
+            for course in self.core_courses
             if category.match_definition(course)
         )
 

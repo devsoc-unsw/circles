@@ -215,6 +215,23 @@ class GradeCondition(Condition):
         return f"{self.grade}GRADE in {self.category}"
 
 
+class CoresCondition(Condition):
+    """ Handles Core Course conditions such as L1 CORES """
+
+    def __init__(self):
+        self.category = AnyCategory()
+
+    def set_category(self, category_classobj: Category):
+        """ Set own category to the one given """
+        self.category = category_classobj
+
+    def validate(self, user: User) -> tuple[bool, list[str]]:
+        return user.completed_core(self.category), []
+
+    def __str__(self) -> str:
+        return f"Core courses in {self.category}"
+
+
 class ProgramCondition(Condition):
     """ Handles Program conditions such as 3707 """
 
