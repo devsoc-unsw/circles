@@ -48,7 +48,7 @@ def test_user_has_taken_one_course():
 def test_user_has_taken_add_course():
     user = User({})
     assert user.has_taken_course("COMP1511") is False
-    user = user.add_course(["COMP1511"])
+    user = user.add_course([{"COMP1511": [6, 100]}])
     assert user.has_taken_course("COMP1511") is True
 
 
