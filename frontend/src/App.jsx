@@ -4,6 +4,8 @@ import {
   BrowserRouter as Router, Route,
   Routes,
 } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
+import { darkTheme, GlobalStyles, lightTheme } from "config/theme";
 import Header from "./components/Header";
 import PageLoading from "./components/PageLoading";
 import CourseSelector from "./pages/CourseSelector";
@@ -26,60 +28,63 @@ const App = () => {
   }, [theme]);
 
   return (
-    <Router>
-      {loading ? (
-        <PageLoading setLoading={setLoading} />
-      ) : (
-        <Routes>
-          <Route path="/degree-wizard" element={<DegreeWizard />} />
-          <Route
-            path="/course-selector"
-            element={(
-              <div>
-                <Header />
-                <CourseSelector />
-              </div>
+    <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+      <GlobalStyles />
+      <Router>
+        {loading ? (
+          <PageLoading setLoading={setLoading} />
+        ) : (
+          <Routes>
+            <Route path="/degree-wizard" element={<DegreeWizard />} />
+            <Route
+              path="/course-selector"
+              element={(
+                <div>
+                  <Header />
+                  <CourseSelector />
+                </div>
             )}
-          />
-          <Route
-            path="/graphical-selector"
-            element={(
-              <div>
-                <Header />
-                <GraphicalSelector />
-              </div>
+            />
+            <Route
+              path="/graphical-selector"
+              element={(
+                <div>
+                  <Header />
+                  <GraphicalSelector />
+                </div>
             )}
-          />
-          <Route
-            path="/term-planner"
-            element={(
-              <div>
-                <Header />
-                <TermPlanner />
-              </div>
+            />
+            <Route
+              path="/term-planner"
+              element={(
+                <div>
+                  <Header />
+                  <TermPlanner />
+                </div>
             )}
-          />
-          <Route
-            path="/progression-checker"
-            element={(
-              <div>
-                <Header />
-                <ProgressionChecker />
-              </div>
+            />
+            <Route
+              path="/progression-checker"
+              element={(
+                <div>
+                  <Header />
+                  <ProgressionChecker />
+                </div>
             )}
-          />
-          <Route
-            path="*"
-            element={(
-              <div>
-                <Header />
-                <PageNotFound />
-              </div>
+            />
+            <Route
+              path="*"
+              element={(
+                <div>
+                  <Header />
+                  <PageNotFound />
+                </div>
             )}
-          />
-        </Routes>
-      )}
-    </Router>
+            />
+          </Routes>
+        )}
+      </Router>
+    </ThemeProvider>
   );
 };
 
