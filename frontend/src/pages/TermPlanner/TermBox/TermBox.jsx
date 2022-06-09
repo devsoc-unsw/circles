@@ -27,7 +27,6 @@ const TermBox = ({
     key.forEach((i) => {
       if (coursesList.includes(i)) {
         count += courses[i].UOC;
-        console.log(i, " ", count);
         setTotalUOC(count);
       }
     });

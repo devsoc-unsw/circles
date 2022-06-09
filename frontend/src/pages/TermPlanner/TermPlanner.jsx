@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import { Badge, notification } from "antd";
 import { DragDropContext } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
-import { notification } from "antd";
 import axios from "axios";
 import PageTemplate from "components/PageTemplate";
 import {
@@ -64,7 +63,6 @@ const TermPlanner = () => {
   };
 
   useEffect(() => {
-    console.log(years);
     if (isAllEmpty(years)) openNotification();
     validateTermPlanner(
       dispatch,
@@ -177,10 +175,8 @@ const TermPlanner = () => {
               <div className="gridItem">Unplanned</div>
               {years.map((year, index) => {
                 const iYear = parseInt(startYear, 10) + parseInt(index, 10);
-                console.log(year);
                 let yearUOC = 0;
                 Object.keys(year).forEach((i) => {
-                  console.log(year[i]);
                   Object.keys(courses).forEach((j) => {
                     if (year[i].includes(j)) {
                       yearUOC += courses[j].UOC;
