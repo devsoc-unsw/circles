@@ -13,7 +13,6 @@ EXAMPLE_USERS_PATH = "./algorithms/exampleUsers.json"
 with open(EXAMPLE_USERS_PATH) as f:
     USERS = json.load(f)
 
-
 def test_user_has_taken_empty_user():
     """
     The user object being passed in for construction is empty.

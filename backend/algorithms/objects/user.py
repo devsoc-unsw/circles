@@ -180,4 +180,5 @@ class User:
                 if cached_conditions.get(c) is not None  # course is in conditions
                 and not (cached_conditions[c].validate(self))[0]  # not unlocked anymore
             ]
+
         return list(sorted(affected_courses))
