@@ -3,20 +3,27 @@
 
   .mainContainer {
     height: calc(100vh - var(--navbar-height) - var(--option-header-height));
-    padding-top: 10px;
+    padding-top: var(--tp-main-container-padding);
     overflow: auto;
   }
 
   .plannerContainer {
     display: flex;
     // align-items: center;
-    margin: 15px;
+    margin: var(--tp-planner-container-margin);
     justify-content: center;
   }
 
   .unplannedBox {
     @media @small {
       border-radius: 1em;
+      min-width: 12em;
+    }
+  }
+  .summerUnplannedBox {
+    @media @small {
+      border-radius: 1em;
+      min-width: 13em;
     }
   }
 
@@ -36,7 +43,7 @@
   }
 
   .gridItem {
-    font-size: 1.5rem;
+    font-size: var(--tp-grid-item-font-size);
     text-align: center;
   }
   .currYear {
@@ -58,7 +65,7 @@
 
   .course {
     @media @small {
-      border-radius: 2em;
+      border-radius: 1.25em;
       padding: 0.8em;
       width: 10em;
     }

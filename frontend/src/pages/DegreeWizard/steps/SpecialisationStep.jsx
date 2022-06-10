@@ -1,17 +1,17 @@
-import React, { useState, useEffect, useCallback } from "react";
-import axios from "axios";
-import { Menu, Button, Typography } from "antd";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import "./steps.less";
-import { useSpring, animated } from "@react-spring/web";
+import { animated, useSpring } from "@react-spring/web";
+import { Button, Menu, Typography } from "antd";
+import axios from "axios";
+import { addMajor, removeMajor } from "reducers/degreeSlice";
 import springProps from "./spring";
-import { addMajor, removeMajor } from "../../../reducers/degreeSlice";
+import "./steps.less";
 
 const { Title } = Typography;
 const SpecialisationStep = ({ incrementStep, currStep }) => {
   const dispatch = useDispatch();
   const { programCode, majors } = useSelector((store) => store.degree);
-  const [options, setOptions] = useState({ 1: { 1: "major" } });
+  const [options, setOptions] = useState({ someProgramName: { specs: { major: "major data" } } });
 
   const fetchAllSpecialisations = useCallback(async () => {
     const res = await axios.get(`/programs/getMajors/${programCode}`);
@@ -51,9 +51,9 @@ const SpecialisationStep = ({ incrementStep, currStep }) => {
             className="step-submenu"
             mode="inline"
           >
-            {Object.keys(options[sub]).map((key) => (
+            {Object.keys(options[sub].specs).map((key) => (
               <Menu.Item className="text" key={key}>
-                {key} {options[sub][key]}
+                {key} {options[sub].specs[key]}
               </Menu.Item>
             ))}
           </Menu.SubMenu>

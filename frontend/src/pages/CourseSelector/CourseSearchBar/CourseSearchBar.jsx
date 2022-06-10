@@ -1,9 +1,9 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Select, Spin } from "antd";
+import axios from "axios";
 import { useDebounce } from "use-debounce";
-import { addTab } from "../../../reducers/courseTabsSlice";
+import { addTab } from "reducers/courseTabsSlice";
 import prepareUserPayload from "../utils";
 
 const CourseSearchBar = () => {

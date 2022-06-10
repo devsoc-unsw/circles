@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import {
-  Menu, Typography, Button,
-} from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { useSpring, animated } from "@react-spring/web";
-import "./steps.less";
+import { animated, useSpring } from "@react-spring/web";
+import {
+  Menu, Typography,
+} from "antd";
+import axios from "axios";
+import { setProgram } from "reducers/degreeSlice";
 import springProps from "./spring";
-import { setProgram } from "../../../reducers/degreeSlice";
+import "./steps.less";
 
 const { Title } = Typography;
 
@@ -39,11 +39,7 @@ const DegreeStep = ({ incrementStep, currStep }) => {
         <Title level={4} className="text">
           What are you studying?
         </Title>
-        {programCode && currStep === 2 && (
-          <Button type="primary" onClick={incrementStep}>
-            Next
-          </Button>
-        )}
+        {programCode && currStep === 2 && dispatch(incrementStep)}
       </div>
 
       {options && (

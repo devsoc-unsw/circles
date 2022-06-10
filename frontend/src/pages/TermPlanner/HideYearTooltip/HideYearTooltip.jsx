@@ -1,8 +1,8 @@
 import React from "react";
-import { Tooltip, notification } from "antd";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { EyeInvisibleFilled } from "@ant-design/icons";
-import { hideYear } from "../../../reducers/plannerSlice";
+import { notification, Tooltip } from "antd";
+import { hideYear } from "reducers/plannerSlice";
 import "./index.less";
 
 const HideYearTooltip = ({ year }) => {

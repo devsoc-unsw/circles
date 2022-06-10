@@ -124,7 +124,7 @@ def preprocess_conditions():
 # -------------------
 
 
-def delete_exclusions_and_equivalents(processed):
+def delete_exclusions_and_equivalents(processed: str) -> str:
     """Removes exclusions from enrolment conditions"""
     # Remove exclusion string which appears before prerequisite plaintext
     excl_string = re.search(r"(excl.*?:.*?)(pre|co-?req)", processed, flags=re.IGNORECASE)
@@ -143,7 +143,7 @@ def delete_exclusions_and_equivalents(processed):
     return processed
 
 
-def delete_HTML(processed):
+def delete_HTML(processed: str) -> str:
     """Remove HTML tags"""
     # Will replace with a space because they sometimes appear in the middle of the text
     # so "and<br/>12 UOC" would turn into and12 UOC
@@ -157,8 +157,7 @@ def delete_self_referencing(code, processed):
     # } "
     return re.sub(code, "", processed)
 
-
-def delete_extraneous_phrasing(processed):
+def delete_extraneous_phrasing(processed: str) -> str:
     """Sometimes there's extraneous phrasing which needs to be handled"""
     # Must have completed COMP1511 ==> COMP1511
     # processed = re.sub("Must have completed ", "", processed, flags=re.IGNORECASE)
@@ -193,13 +192,13 @@ def delete_extraneous_phrasing(processed):
     return processed
 
 
-def delete_prereq_label(processed):
+def delete_prereq_label(processed: str) -> str:
     """Removes 'prerequisite' and variations"""
     # variations incude ["prerequisite", "pre-requisite", "prer-requisite", "pre req", "prereq:"]
     return re.sub(r"pre( req)?[a-z\/_\-]* *[:;]*", "", processed, flags=re.IGNORECASE)
 
 
-def delete_trailing_punc(processed):
+def delete_trailing_punc(processed: str) -> str:
     """Deletes any trailing punctuation"""
     return re.sub(r"(\.|;)\s*$", "", processed)
 
@@ -209,14 +208,14 @@ def delete_trailing_punc(processed):
 # -------------------
 
 
-def convert_square_brackets(processed):
+def convert_square_brackets(processed: str) -> str:
     """Converts '[' to '(' and ']' to ')'"""
     processed = re.sub(r"\[", r"(", processed)
     processed = re.sub(r"]", r")", processed)
     return processed
 
 
-def convert_UOC(processed):
+def convert_UOC(processed: str) -> str:
     """Converts to XXUOC"""
     # Converts unit(s) of credit(s) to UOC and removes spacing
     processed = re.sub(
@@ -239,7 +238,7 @@ def convert_UOC(processed):
     return processed
 
 
-def convert_WAM(processed):
+def convert_WAM(processed: str) -> str:
     """Converts WAM requirements. WAM refers to overall mark."""
     # Look for integer within 3 words after 'WAM' or 'mark', e.g.:
     #    - "WAM of 65" -> "65WAM"
@@ -267,7 +266,7 @@ def convert_WAM(processed):
     return processed
 
 
-def convert_GRADE(processed):
+def convert_GRADE(processed: str) -> str:
     """Converts mark/grade requirements, usually relating to a specific course.
     NOTE: We prefer to use 'GRADE' here because 'MARK' could interfere with Marketing
     courses"""
@@ -285,16 +284,17 @@ def convert_GRADE(processed):
     # Use "in" as a joining word"
     processed = re.sub(r"([A-Z]{4}[\d]{4})\s*\(CR\)", r"65GRADE in \1", processed)
     processed = re.sub(r"([A-Z]{4}[\d]{4})\s*\(DN\)", r"75GRADE in \1", processed)
+    processed = re.sub(r"([A-Z]{4}[\d]{4})\s*\(HD\)", r"85GRADE in \1", processed)
 
     return processed
 
 
-def convert_level(processed):
+def convert_level(processed: str) -> str:
     """Converts level X to LX"""
     return re.sub(r"level (\d)", r"L\1", processed, flags=re.IGNORECASE)
 
 
-def convert_program_type(processed):
+def convert_program_type(processed: str) -> str:
     """Converts complex phrases into something of the form CODE# for specifying a program type"""
     # TODO: make this more generic
     processed = map_word_to_program_type(processed, r"actuarial( studies)?", "ACTL#")
@@ -303,7 +303,7 @@ def convert_program_type(processed):
     return processed
 
 
-def convert_fslash(processed):
+def convert_fslash(processed: str) -> str:
     """Converts forward slashes to || and surrounds in brackets"""
     # E.g.:
     #    - "(COMP1521/DPST1092 && COMP2521)" -> "((COMP1521 || DPST1092) && COMP2521)"
@@ -318,12 +318,12 @@ def convert_fslash(processed):
     return processed
 
 
-def convert_including(processed):
+def convert_including(processed: str) -> str:
     """Convert 'including' to &&"""
     return re.sub("including", "&&", processed)
 
 
-def convert_manual_programs_and_specialisations(processed):
+def convert_manual_programs_and_specialisations(processed: str) -> str:
     """
     Deals with the following cases:
     - Enrolment in a x program
@@ -341,7 +341,7 @@ def convert_manual_programs_and_specialisations(processed):
     return processed
 
 
-def convert_AND_OR(processed):
+def convert_AND_OR(processed: str) -> str:
     """Convert 'and' to '&&' and 'or' to '||'"""
     processed = re.sub(" and ", " && ", processed, flags=re.IGNORECASE)
     processed = re.sub(" & ", " && ", processed, flags=re.IGNORECASE)
@@ -353,7 +353,7 @@ def convert_AND_OR(processed):
     return processed
 
 
-def convert_coreqs(processed):
+def convert_coreqs(processed: str) -> str:
     """Puts co-requisites inside square brackets"""
     processed = processed.rstrip()
     return re.sub(
@@ -366,7 +366,7 @@ def convert_coreqs(processed):
 # -------------------
 
 
-def joining_terms(processed):
+def joining_terms(processed: str) -> str:
     """Currently, we aim to use "in" as a joining term"""
     # UOC at LX ==> UOC in LX
     processed = re.sub(r"UOC at (L\d)", r"UOC in \1", processed)
@@ -377,7 +377,7 @@ def joining_terms(processed):
     return processed
 
 
-def handle_comma_logic(processed):
+def handle_comma_logic(processed: str) -> str:
     """
     Handles commas and either removes or converts into AND/OR
     We might need to perform lookaheads to detect if the comma should become an AND or an OR.
@@ -447,14 +447,14 @@ def handle_comma_logic(processed):
 # -------------------
 
 
-def strip_spaces(processed):
+def strip_spaces(processed: str) -> str:
     """Strip multiple repeated whitespace"""
     processed = re.sub(" +", " ", processed)
 
     # Get rid of white spaces at start and end of word
     return processed.strip()
 
-def strip_bracket_spaces(processed):
+def strip_bracket_spaces(processed: str) -> str:
     """Strips spaces immediately before and after brackets"""
     processed = re.sub(r"([([]) ", r"\1", processed)
     processed = re.sub(r" ([)]])", r"\1", processed)
@@ -473,14 +473,14 @@ def strip_bracket_spaces(processed):
 # TODO: Ensure brackets are evenly matched and any mismatched brackets are fixed
 # before this point
 # """
-# def surround_brackets(processed):
+# def surround_brackets(processed: str) -> str:
 #     return "(" + processed + ")"
 
 
 # -----------------------------------------------------------------------------
 # Phase 5: Common patterns
 # -------------------
-def uoc_in_business_school(processed):
+def uoc_in_business_school(processed: str) -> str:
     """Converts \d+UOC offered by the UNSW Business School to \d+UOC in F Business"""
     processed = re.sub(
         r"(\d+UOC) offered by the UNSW Business School", r"\1 in F Business", processed
@@ -489,7 +489,7 @@ def uoc_in_business_school(processed):
     return processed
 
 
-def l2_math_courses(processed):
+def l2_math_courses(processed: str) -> str:
     """Converts L2 Maths courses to L@ MATH"""
     processed = re.sub(r"L2 Maths? courses", r"L2 MATH", processed, flags=re.IGNORECASE)
     processed = re.sub(
@@ -498,7 +498,7 @@ def l2_math_courses(processed):
     return processed
 
 
-def map_word_to_program_type(processed, regex_word, type):
+def map_word_to_program_type(processed: str, regex_word: str, type: str):
     return re.sub(
         rf"in {regex_word} (programs?|single or dual degrees?)",
         type,
@@ -506,7 +506,7 @@ def map_word_to_program_type(processed, regex_word, type):
         flags=re.IGNORECASE,
     )  # hard to capture a generic case?
 
-def unsw_global_degrees(processed):
+def unsw_global_degrees(processed: str):
     processed =  re.sub(
         r"UNSW Global Diplomas only \(7001, 7002, 7003, 7004\)",
         "(7001 || 7002 || 7003 || 7004)",
@@ -556,7 +556,7 @@ def remove_extraneous_comm_data(processed):
     find = r"Its recommended to seek a progression check prior to application."
     processed, note = add_note_if_found(processed, find, note, r"", find)
     processed, note = add_note_if_found(processed, r"This course is by application only.( )?Please visit Business School website for more information", note, r"", "This course is by application only. Please visit Business School website for more information")
- 
+
     # Commerce degree notes
     processed, note = add_note_if_found(processed, r"(Students are expected to be )?in their final year of a( single or )?(double)?(dual)? Bachelor of Commerce( single or dual)?( degree)?", note, r"COMM#", "Students must be in their final year of a single or double Commerce degree")
     processed = re.sub(

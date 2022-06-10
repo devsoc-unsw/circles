@@ -25,12 +25,13 @@ CODE_MAPPING = read_data(
 
 
 def customise_spn_data():
+    """ TODO: add docstring for this function"""
 
     data = read_data("data/scrapers/specialisationsFormattedRaw.json")
 
     customised_data = {}  # Dictionary for all customised data
     for spn in data.keys():
-        if not any([prog in TEST_PROGS for prog in data[spn]["programs"]]):
+        if not any((prog in TEST_PROGS for prog in data[spn]["programs"])):
             continue
 
         formatted = data[spn]

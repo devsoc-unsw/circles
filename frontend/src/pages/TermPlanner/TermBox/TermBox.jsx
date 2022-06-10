@@ -1,14 +1,14 @@
 import React from "react";
 import { Droppable } from "react-beautiful-dnd";
-import { useSelector, useDispatch } from "react-redux";
-import { Badge } from "antd";
+import { useDispatch, useSelector } from "react-redux";
 import { LockFilled, UnlockFilled } from "@ant-design/icons";
+import { Badge } from "antd";
+import { toggleTermComplete } from "reducers/plannerSlice";
 import DraggableCourse from "../DraggableCourse";
-import { toggleTermComplete } from "../../../reducers/plannerSlice";
 import "./index.less";
 
 const TermBox = ({
-  name, courses, termsOffered, isDragging,
+  name, courses, termsOffered, isDragging, showMarks,
 }) => {
   const term = name.match(/T[0-3]/)[0];
 
@@ -53,7 +53,16 @@ const TermBox = ({
             className={`termBox ${isOffered && isDragging && "droppable "
             } ${isSummerEnabled && "summerTermBox"} `}
           >
-            {courses.map((code, index) => <DraggableCourse key={code} code={code} index={index} />)}
+            {courses.map(
+              (code, index) => (
+                <DraggableCourse
+                  key={code}
+                  code={code}
+                  index={index}
+                  showMarks={showMarks}
+                />
+              ),
+            )}
             {provided.placeholder}
           </ul>
         </Badge>

@@ -6,9 +6,9 @@
 """
 
 import copy
-from typing import Optional
+from pickle import load
+from typing import Optional, Tuple
 import re
-
 from algorithms.objects.categories import AnyCategory, Category
 
 class User:
@@ -16,8 +16,8 @@ class User:
 
     def __init__(self, data = None):
         # Will load the data if any was given
-        self.courses: dict[str, (int, int)] = {}
-        self.cur_courses: list[str, (int, int)] = []  # Courses in the current term
+        self.courses: dict[str, Tuple[int, int]] = {}
+        self.cur_courses: list[str, Tuple[int, int]] = []  # Courses in the current term
         self.program: str = None
         self.specialisations: dict[str, int] = {}
         self.year: int = 0
@@ -26,7 +26,7 @@ class User:
         if data is not None:
             self.load_json(data)
 
-    def add_courses(self, courses: dict[str, (int, int)]):
+    def add_courses(self, courses: dict[str, Tuple[int, int]]):
         """
         Given a dictionary of courses mapping course code to a (uoc, grade) tuple,
         adds the course to the user and updates the uoc/grade at the same time.
@@ -74,6 +74,9 @@ class User:
     def in_program(self, program: str):
         """ Determines if the user is in this program code """
         return self.program == program
+    
+    def get_courses(self):
+        return list(self.courses.keys())
 
     def in_specialisation(self, specialisation: str):
         """ Determines if the user is in the specialisation """
@@ -90,10 +93,14 @@ class User:
     def load_json(self, data):
         """ Given the user data, correctly loads it into this user class """
 
-        self.program = copy.deepcopy(data["program"])
-        self.specialisations = copy.deepcopy(data["specialisations"])
-        self.courses = copy.deepcopy(data["courses"])
-        self.year = copy.deepcopy(data["year"])
+        if "program" in data.keys():
+            self.program = copy.deepcopy(data["program"])
+        if "specialisations" in data.keys():
+            self.specialisations = copy.deepcopy(data["specialisations"])
+        if "courses" in data.keys():
+            self.courses = copy.deepcopy(data["courses"])
+        if "year" in data.keys():
+            self.year = copy.deepcopy(data["year"])
 
     def get_grade(self, course: str):
         """
@@ -124,42 +131,6 @@ class User:
             if category.match_definition(course)
         )
 
-    def unselect_course(self, target: str) -> list[str]:
-        """
-        Given a course to unselect and a list of locked courses, remove the
-        courses from the user and return a list of courses which would be
-        affected by the unselection
-        """
-
-        if not self.has_taken_course(target):
-            return []
-
-        # Resolving circular imports
-        from algorithms.create import create_condition
-        from algorithms.objects.conditions import CACHED_CONDITIONS_TOKENS
-
-        # Load all the necessary conditions
-        cached_conditions = {
-            course: create_condition(CACHED_CONDITIONS_TOKENS[course], course)
-            for course in self.courses
-        }
-
-        affected_courses = []
-        # Brute force loop through all taken courses and if we find a course which is
-        # no longer unlocked, we unselect it, add it to the affected course list,
-        # then restart loop.
-        courses_to_delete = [target]
-        while courses_to_delete:
-            affected_courses.extend(courses_to_delete)
-            for course in courses_to_delete:
-                if course in self.courses:
-                    del self.courses[course]
-
-            courses_to_delete = [
-                c
-                for c in self.courses
-                if cached_conditions.get(c) is not None  # course is in conditions
-                and not (cached_conditions[c].validate(self))[0]  # not unlocked anymore
-            ]
-
-        return list(sorted(affected_courses))
+    def pop_course(self, course: str) -> Tuple[int, int]:
+        """ removes a course from done courses and returns its uoc and mark """
+        return self.courses.pop(course)

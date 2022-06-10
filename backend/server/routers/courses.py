@@ -1,21 +1,20 @@
-import pymongo
+"""
+APIs for the /courses/ route.
+"""
 import re
-from fuzzywuzzy import fuzz
-from typing import Optional
+from typing import Optional, Tuple
 
 from algorithms.objects.user import User
 from data.config import ARCHIVED_YEARS
 from data.utility.data_helpers import read_data
 from fastapi import APIRouter, HTTPException
+from fuzzywuzzy import fuzz
 from server.database import archivesDB, coursesCOL
-from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, AffectedCourses,
-                                  CourseDetails, CoursesState,
-                                  CoursesUnlockedWhenTaken, ProgramCourses, Structure,
+from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, Courses,
+                                  CourseDetails, CoursesState, CoursesPath,
+                                  CoursesUnlockedWhenTaken, ProgramCourses,
                                   UserData, message)
 
-"""
-APIs for the /courses/ route.
-"""
 
 router = APIRouter(
     prefix="/courses",
@@ -94,21 +93,9 @@ def apiIndex():
                         "campus": "Sydney",
                         "equivalents": {"DPST1091": 1, "COMP1917": 1},
                         "exclusions": {"DPST1091": 1},
-                        "path_to": {
-                            "COMP1521": 1,
-                            "COMP1531": 1,
-                            "COMP2041": 1,
-                            "COMP2111": 1,
-                            "COMP2121": 1,
-                            "COMP2521": 1,
-                            "COMP9334": 1,
-                            "ELEC2117": 1,
-                            "SENG2991": 1,
-                        },
                         "terms": ["T1", "T2", "T3"],
                         "raw_requirements": "",
                         "gen_ed": 1,
-                        "path_from": {},
                     }
                 }
             },
@@ -187,12 +174,10 @@ def search(userData: UserData, search_string: str):
     if ALL_COURSES is None:
         ALL_COURSES = fetch_all_courses()
 
-    # TODO: can you have a minor without a major selected?
-    #       will wreak havoc on the argument order with *specialisations
-    #       currently this is enforced during setup but will need to
-    #       make sure that this is true for all degrees not just comp sci
     specialisations = list(userData.specialisations.keys())
-    structure = getStructure(userData.program, *specialisations)['structure']
+    majors = list(filter(lambda x: x.endswith("1"), specialisations))
+    minors = list(filter(lambda x: x.endswith("2"), specialisations))
+    structure = getStructure(userData.program, "+".join(majors), "+".join(minors))['structure']
 
     top_results = sorted(ALL_COURSES.items(), reverse=True,
                          key=lambda course: fuzzy_match(course, search_string)
@@ -201,13 +186,14 @@ def search(userData: UserData, search_string: str):
                               key=lambda course: weight_course(course,
                                                                search_string,
                                                                structure, 
-                                                               *specialisations)
+                                                               majors,
+                                                               minors)
                               )[:30]
 
-    return {code: title for code, title in weighted_results}
+    return dict(weighted_results)
 
 def regex_search(search_string: str):
-    """ 
+    """
     Uses the search string as a regex to match all courses with an exact pattern.
     """
 
@@ -255,7 +241,7 @@ def getAllUnlocked(userData: UserData):
     """
 
     coursesState = {}
-    user = User(fixUserData(userData.dict())) if type(userData) != User else userData
+    user = User(fixUserData(userData.dict())) if not isinstance(userData, User) else userData
     for course, condition in CONDITIONS.items():
         result, warnings = condition.validate(user) if condition is not None else (True, [])
         if result:
@@ -306,7 +292,7 @@ def getLegacyCourses(year, term):
     """
     result = {c['code']: c['title'] for c in archivesDB[year].find() if term in c['terms']}
 
-    if result == {}:
+    if not result:
         raise HTTPException(status_code=400, detail="Invalid term or year. Valid terms: T0, T1, T2, T3. Valid years: 2019, 2020, 2021, 2022.")
 
     return {'courses' : result}
@@ -319,14 +305,14 @@ def getLegacyCourse(year, courseCode):
         Returns information relating to the given course
     """
     result = list(archivesDB[str(year)].find({"code": courseCode}))
-    if result == {}:
+    if not result:
         raise HTTPException(status_code=400, detail="invalid course code or year")
     del result["_id"]
     result["is_legacy"] = True
     return result
 
 
-@router.post("/unselectCourse/{unselectedCourse}", response_model=AffectedCourses,
+@router.post("/unselectCourse/{unselectedCourse}", response_model=Courses,
             responses={
                 422: {"model": message, "description": "Unselected course query is required"},
                 400: {"model": message, "description": "Uh oh you broke me"},
@@ -335,7 +321,7 @@ def getLegacyCourse(year, courseCode):
                     "content": {
                         "application/json": {
                             "example": {
-                                 "affected_courses": [
+                                 "courses": [
                                      "COMP1521",
                                      "COMP1531",
                                      "COMP3121"
@@ -350,10 +336,72 @@ def unselectCourse(userData: UserData, unselectedCourse: str):
     Creates a new user class and returns all the courses
     affected from the course that was unselected in sorted order
     """
-    affectedCourses = User(fixUserData(userData.dict())).unselect_course(unselectedCourse)
+    user = User(fixUserData(userData.dict()))
+    if not user.has_taken_course(unselectedCourse):
+        return { 'courses' : [] }
 
-    return {'affected_courses': affectedCourses}
+    affected_courses = []
+    # Brute force loop through all taken courses and if we find a course which is
+    # no longer unlocked, we unselect it, add it to the affected course list,
+    # then restart loop.
+    courses_to_delete = [unselectedCourse]
+    while courses_to_delete:
+        affected_courses.extend(courses_to_delete)
+        for course in courses_to_delete:
+            if user.has_taken_course(course):
+                user.pop_course(course)
 
+        courses_to_delete = [
+            c
+            for c in user.get_courses()
+            if CONDITIONS.get(c) is not None  # course is in conditions
+            and not (CONDITIONS[c].validate(user))[0]  # not unlocked anymore
+        ]
+
+    return { 'courses' : list(sorted(affected_courses)) }
+
+
+@router.get("/courseChildren/{course}", response_model=CoursesPath,
+            responses = {
+                200 : {
+                    "courses": ["COMP1521", "COMP1531"]
+                }
+            })
+def courseChildren(course: str):
+    """
+    fetches courses which are dependant on taking 'course'
+    eg 1511 -> 1521, 1531, 2521 etc
+    """
+    if not CONDITIONS.get(course):
+        raise HTTPException(400, f"no course by name {course}")
+    return {
+            "original" : course,
+            "courses": [
+                coursename for coursename, condition in CONDITIONS.items()
+                if condition is not None and condition.is_path_to(course)
+            ]
+        }
+
+@router.get("/getPathFrom/{course}", response_model=CoursesPath,
+            responses = {
+                200 : {
+                    "courses": ["COMP1521", "COMP1531"]
+                }
+            })
+def getPathFrom(course):
+    """
+    fetches courses which can be used to satisfy 'course'
+    eg 2521 -> 1511
+    """
+
+    course_condition = CONDITIONS[course]
+    return {
+        "original" : course,
+        "courses" :[
+            coursename for coursename, _ in CONDITIONS.items()
+            if course_condition.is_path_to(coursename)
+        ]
+    }
 
 @router.post("/coursesUnlockedWhenTaken/{courseToBeTaken}", response_model=CoursesUnlockedWhenTaken,
             responses={
@@ -384,7 +432,7 @@ def coursesUnlockedWhenTaken(userData: UserData, courseToBeTaken: str):
     new_courses = courses_now_unlocked - courses_initially_unlocked
 
     ## Differentiate direct and indirect unlocks
-    path_to = set(getCourse(courseToBeTaken)['path_to'])
+    path_to = set(courseChildren(courseToBeTaken)["courses"])
     direct_unlock = new_courses.intersection(path_to)
     indirect_unlock = new_courses - direct_unlock
 
@@ -398,9 +446,9 @@ def unlocked_set(courses_state):
     return set(course for course in courses_state if courses_state[course]['unlocked'])
 
 
-def fuzzy_match(course: tuple, search_term: str):
+def fuzzy_match(course: Tuple[str, str], search_term: str):
     """ Gives the course a weighting based on the relevance to the search """
-    (code, title) = course
+    code, title = course
 
     # either match against a course code, or match many words against the title
     # (not necessarily in the same order as the title)
@@ -413,43 +461,45 @@ def fuzzy_match(course: tuple, search_term: str):
                        for word in search_term.split(' ')))
 
 def weight_course(course: tuple, search_term: str, structure: dict,
-                  major_code: Optional[str] = None, minor_code: Optional[str] = None):
+                  majors: list, minors: list):
     """ Gives the course a weighting based on the relevance to the user's degree """
     weight = fuzzy_match(course, search_term)
-    (code, title) = course
+    code, _ = course
 
-    if major_code is not None:
-        for structKey in structure.keys():
-            if "Major" not in structKey:
-                continue
-            for key in structure[structKey].items():
-                if isinstance(key[1], dict):
-                    for c in key[1].get("courses", {}):
-                        if code in c:
-                            if "Core" in key[0]:
-                                weight += 20
-                            else:
-                                weight += 10
-                            break
+    for structKey in structure.keys():
+        if "Major" not in structKey:
+            continue
+        for key in structure[structKey].items():
+            if isinstance(key[1], dict):
+                for c in key[1].get("courses", {}):
+                    if code in c:
+                        if re.match("core|prescribed", key[0], flags=re.IGNORECASE):
+                            weight += 28
+                        else:
+                            weight += 14
+                        break
 
+    for major_code in majors:
         if str(code).startswith(major_code[:4]):
             weight += 14
+            break
 
-    if minor_code is not None:
-        for structKey in structure.keys():
-            if "Minor" not in structKey:
-                continue
-            for key in structure[structKey].items():
-                if isinstance(key[1], dict):
-                    for c in key[1].get("courses", {}):
-                        if code in c:
-                            if "Core" in key[0]:
-                                weight += 10
-                            else:
-                                weight += 5
-                            break
+    for structKey in structure.keys():
+        if "Minor" not in structKey:
+            continue
+        for key in structure[structKey].items():
+            if isinstance(key[1], dict):
+                for c in key[1].get("courses", {}):
+                    if code in c:
+                        if re.match("core|prescribed", key[0], flags=re.IGNORECASE):
+                            weight += 14
+                        else:
+                            weight += 7
+                        break
 
+    for minor_code in minors:
         if str(code).startswith(minor_code[:4]):
             weight += 7
+            break
 
     return weight

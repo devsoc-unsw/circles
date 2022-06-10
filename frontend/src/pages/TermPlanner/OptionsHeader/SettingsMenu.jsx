@@ -1,13 +1,14 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
 import {
-  Typography, DatePicker, Select, Switch, Divider,
+  DatePicker, Divider,
+  Select, Switch, Typography,
 } from "antd";
-import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
-import { useSelector, useDispatch } from "react-redux";
+import moment from "moment";
+import { toggleSummer, updateDegreeLength, updateStartYear } from "reducers/plannerSlice";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
-import moment from "moment";
-import { updateDegreeLength, toggleSummer, updateStartYear } from "../../../reducers/plannerSlice";
 import "./index.less";
 
 const SettingsMenu = () => {
@@ -73,7 +74,7 @@ const SettingsMenu = () => {
           onChange={handleUpdateDegreeLength}
         >
           {years.map((num) => (
-            <Option value={num}>{num}</Option>
+            <Option key={num} value={num}>{num}</Option>
           ))}
         </Select>
       </div>
