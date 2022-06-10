@@ -46,3 +46,24 @@ def test_user3():
     assert user.wam() == None
     assert user.uoc() == 0
     assert user.year == 1
+
+def test_user_no_data():
+    user = User()
+    assert user.courses == {}
+    assert user.cur_courses == []
+    assert user.program == None
+    assert user.specialisations == {}
+    assert user.year == 0
+
+def test_user_empty():
+    """
+    Passing in a user as an empty dict to ensure that no changes are made
+    to the fields of the user and, no key-errors are thrown
+    """
+    default_user = User()
+    empty_dict_user = User({})
+    assert empty_dict_user.courses == default_user.courses
+    assert empty_dict_user.cur_courses == default_user.cur_courses
+    assert empty_dict_user.program == default_user.program
+    assert empty_dict_user.specialisations == default_user.specialisations
+    assert empty_dict_user.year == default_user.year
