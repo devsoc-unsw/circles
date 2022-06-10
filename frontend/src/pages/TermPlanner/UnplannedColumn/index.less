@@ -16,6 +16,7 @@
 .unplannedTitle {
   position: absolute;
   font-weight: 500;
+  // sum of heights from the top of the page for where the unplanned header should be 
   top: calc(
     var(--navbar-height) + 
     var(--option-header-height) + 
@@ -27,6 +28,8 @@
 .unplannedBox {
   position: absolute;
   overflow-y: auto;
+  overflow-x: hidden;
+  // sum of heights from the top of the page for where the unplanned box should be
   top: calc(
     var(--navbar-height) + 
     var(--option-header-height) + 
@@ -35,6 +38,7 @@
     var(--tp-term-box-margin) +
     var(--tp-grid-item-font-size)
   );
+  // height of box should be the remaining viewport excluding the top and a bottom gap matching the other term boxes
   height: calc(
     100vh - (
       var(--navbar-height) + 
@@ -48,7 +52,7 @@
   min-width: 20em;
   max-width: 20em;
   margin: 1em;
-  border: 2px solid #9254de;
+  border: 1.5px solid #9254de;
   border-radius: 15px;
   padding: 15px;
   transition: 200ms ease-out;
@@ -62,6 +66,7 @@
 }
 
 .summerUnplannedBox {
+  // same as above but using the summer box sizing instead
   height: calc(
     100vh - (
       var(--navbar-height) + 
