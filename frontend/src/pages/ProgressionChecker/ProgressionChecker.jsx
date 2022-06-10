@@ -31,13 +31,6 @@ const degreeData = {
       UOC: 60,
       completed_UOC: 18,
     },
-    {
-      type: "Minor",
-      name: "Marine Science",
-      code: "MSCIM1",
-      UOC: 36,
-      completed_UOC: 6,
-    },
   ],
 };
 
@@ -57,14 +50,28 @@ const ProgressionChecker = () => {
     // get structure of degree
     const fetchStructure = async () => {
       try {
-        const res = await axios.get(`/programs/getStructure/${programCode}/${majors}`);
-        console.log(res);
-        degreeData.code = programCode;
+        const majorData = "Major - ".concat(majors);
+        const minorData = "Minor - ".concat(minors);
         degreeData.concentrations[0].name = programName;
-        degreeData.concentrations[1].name = programName;
-        console.log(res.data[structure]);
+        console.log(typeof degreeData.concentrations[0]);
+        if (minors.length === 0) {
+          const res = await axios.get(`/programs/getStructure/${programCode}/${majors}`);
+          console.log(res);
+          degreeData.code = programCode;
+          degreeData.concentrations[1].name = res.data.structure[majorData].name;
+          setStructure(res.data.structure);
+        } else {
+          const res = await axios.get(`/programs/getStructure/${programCode}/${majors}/${minors}`);
+          console.log(res);
+          degreeData.code = programCode;
+          const minorObj = {
+            type: "Minor", name: res.data.structure[minorData].name, code: minors, UOC: 30, completed_UOC: 6,
+          };
+          degreeData.concentrations.push(minorObj);
+          degreeData.concentrations[1].name = res.data.structure[majorData].name;
+          setStructure(res.data.structure);
+        }
         console.log(degreeData);
-        setStructure(res.data.structure);
       } catch (err) {
         // eslint-disable-next-line no-console
         console.log(err);
