@@ -1,4 +1,5 @@
 [![CSEsoc](https://img.shields.io/badge/-CSESoc-blue)](https://www.csesoc.unsw.edu.au/)
+![Status](https://img.shields.io/website?label=status&up_message=online&url=https%3A%2F%2Fcircles.csesoc.unsw.edu.au%2F)
 [![Backend Tests](https://github.com/csesoc/Circles/actions/workflows/ci_BE.yml/badge.svg)](https://github.com/csesoc/Circles/actions/workflows/ci_BE.yml)
 [![Frontend Build](https://github.com/csesoc/Circles/actions/workflows/ci_FE.yml/badge.svg)](https://github.com/csesoc/Circles/actions/workflows/ci_FE.yml)
 [![Pylint](https://github.com/csesoc/Circles/actions/workflows/pylinter.yml/badge.svg)](https://github.com/csesoc/Circles/actions/workflows/pylinter.yml)
