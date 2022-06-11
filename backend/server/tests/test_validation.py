@@ -4,9 +4,7 @@ import requests
 
 from server.tests.courses.test_getAllUnlocked import USERS
 
-# TODO: Do we care if these courses are broken before deployment? they are the honours courses + some wierd courses
-# main issues include CIRCLES-276
-ignored = ['COMP4951', 'TABL2712', 'INFS3873', 'INFS3830', 'ECON2209', 'ECON2112', 'ECON2101', 'ECON2102']
+ignored = ['ECON2209', 'ECON2112', 'ECON2101', 'ECON2102']
 
 def test_validation_majors():
     unlocked = requests.post('http://127.0.0.1:8000/courses/getAllUnlocked', json=USERS["user3"]).json()['courses_state']

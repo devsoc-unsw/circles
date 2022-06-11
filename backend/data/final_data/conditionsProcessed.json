@@ -6578,12 +6578,12 @@
     },
     "INFS3830": {
         "original": "Pre-requisite: INFS3603 or (COMM2501 and in Business Analytics major (COMMJ)).<br/>Note: Students wishing to meet SAS certification must complete INFS3603. Completion of COMM2501 in lieu of INFS3603 will not be considered equivalent for the certificate.<br/><br/>",
-        "processed": "INFS3603 || (COMM2501 && COMMJ)",
+        "processed": "INFS3603 || (COMM2501 && COMMJ1)",
         "handbook_note": "Students wishing to meet SAS certification must complete INFS3603. Completion of COMM2501 in lieu of INFS3603 will not be considered equivalent for the certificate"
     },
     "INFS3873": {
         "original": "Pre-requisite: INFS3603 or (COMM2501 and in Business Analytics major (COMMJ)).<br/>Note: Students wishing to meet SAS certification must complete INFS3603. Completion of COMM2501 in lieu of INFS3603 will not be considered equivalent for the certificate.<br/><br/>",
-        "processed": "INFS3603 || (COMM2501 && COMMJ)",
+        "processed": "INFS3603 || (COMM2501 && COMMJ1)",
         "handbook_note": "Students wishing to meet SAS certification must complete INFS3603. Completion of COMM2501 in lieu of INFS3603 will not be considered equivalent for the certificate"
     },
     "INFS4800": {
