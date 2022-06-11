@@ -111,7 +111,7 @@ minorInFE = ["3778"]
 minorInSpecialisation = ["3502", "3970"]
 
 
-CONDITIONS_PATH = "algorithms/conditions.pkl"
+CONDITIONS_PATH = "data/final_data/conditions.pkl"
 with open(CONDITIONS_PATH, "rb") as file:
     CONDITIONS: dict[str, CompositeCondition] = load(file)
 
