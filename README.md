@@ -2,7 +2,7 @@
 [![Backend Tests](https://github.com/csesoc/Circles/actions/workflows/ci_BE.yml/badge.svg)](https://github.com/csesoc/Circles/actions/workflows/ci_BE.yml)
 [![Frontend Build](https://github.com/csesoc/Circles/actions/workflows/ci_FE.yml/badge.svg)](https://github.com/csesoc/Circles/actions/workflows/ci_FE.yml)
 [![Pylint](https://github.com/csesoc/Circles/actions/workflows/pylinter.yml/badge.svg)](https://github.com/csesoc/Circles/actions/workflows/pylinter.yml)
-![Repo Size](https://img.shields.io/github/languages/code-size/csesoc/Circles?label=repo%20size)
+![GitHub Repo Size](https://img.shields.io/github/repo-size/csesoc/Circles)
 
 # Circles
 
