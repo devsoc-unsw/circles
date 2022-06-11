@@ -1,6 +1,9 @@
 <img src="https://img.shields.io/badge/-CSESoc-blue" />
+
 [![Backend Tests](https://github.com/csesoc/Circles/actions/workflows/ci_BE.yml/badge.svg)](https://github.com/csesoc/Circles/actions/workflows/ci_BE.yml)
+
 [![Frontend Build](https://github.com/csesoc/Circles/actions/workflows/ci_FE.yml/badge.svg)](https://github.com/csesoc/Circles/actions/workflows/ci_FE.yml)
+
 [![Pylint](https://github.com/csesoc/Circles/actions/workflows/pylinter.yml/badge.svg)](https://github.com/csesoc/Circles/actions/workflows/pylinter.yml)
 
 # Circles
