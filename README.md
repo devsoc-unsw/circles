@@ -6,6 +6,8 @@
 
 [![Pylint](https://github.com/csesoc/Circles/actions/workflows/pylinter.yml/badge.svg)](https://github.com/csesoc/Circles/actions/workflows/pylinter.yml)
 
+![Repo Size](https://img.shields.io/github/languages/code-size/csesoc/Circles?label=repo%20size)
+
 # Circles
 
 Tired of using a poorly laid out spreadsheet to cobble together a plan to follow for the next 3-8 years of your life? Have no fear, Circles is here!
