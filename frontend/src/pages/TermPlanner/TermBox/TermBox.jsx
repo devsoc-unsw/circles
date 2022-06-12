@@ -20,15 +20,11 @@ const TermBox = ({
   };
 
   useEffect(() => {
-    setTotalUOC(0);
-    let count = 0;
-    const key = Object.keys(courses);
-    key.forEach((i) => {
-      if (coursesList.includes(i)) {
-        count += courses[i].UOC;
-        setTotalUOC(count);
-      }
+    let uoc = 0;
+    Object.keys(courses).forEach((c) => {
+      if (coursesList.includes(c)) uoc += courses[c].UOC;
     });
+    setTotalUOC(uoc);
   }, [coursesList]);
 
   const isCompleted = !!completedTerms[name];
