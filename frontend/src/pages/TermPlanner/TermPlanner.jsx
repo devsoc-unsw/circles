@@ -28,7 +28,7 @@ const openNotification = () => {
     description: "Add courses from the course selector to the term planner by dragging from the unplanned column",
     duration: 3,
     className: "text helpNotif",
-    placement: "topRight",
+    placement: "bottomRight",
   };
   notification.info(args);
 };
