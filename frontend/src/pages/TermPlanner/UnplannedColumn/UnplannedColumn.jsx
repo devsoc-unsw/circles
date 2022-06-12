@@ -11,24 +11,27 @@ const UnplannedColumn = ({ isDragging }) => {
   const { isSummerEnabled, unplanned } = useSelector((state) => state.planner);
 
   return (
-    <Droppable droppableId="unplanned">
-      {(provided) => (
-        <ul
-          ref={provided.innerRef}
-          {...provided.droppableProps}
-          className={`unplannedBox ${isDragging && "droppable "} ${isSummerEnabled && "summerUnplannedBox"}`}
-        >
-          {unplanned.map((course, courseIndex) => (
-            <DraggableCourse
-              code={course}
-              index={courseIndex}
-              key={course}
-            />
-          ))}
-          {provided.placeholder}
-        </ul>
-      )}
-    </Droppable>
+    <div className={`unplannedContainer ${isSummerEnabled && "summerUnplannedContainer"}`}>
+      <div className="gridItem unplannedTitle">Unplanned</div>
+      <Droppable droppableId="unplanned">
+        {(provided) => (
+          <ul
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+            className={`unplannedBox ${isDragging && "droppable "} ${isSummerEnabled && "summerUnplannedBox"}`}
+          >
+            {unplanned.map((course, courseIndex) => (
+              <DraggableCourse
+                code={course}
+                index={courseIndex}
+                key={course}
+              />
+            ))}
+            {provided.placeholder}
+          </ul>
+        )}
+      </Droppable>
+    </div>
   );
 };
 

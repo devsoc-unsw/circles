@@ -170,7 +170,6 @@ const TermPlanner = () => {
               <div className="gridItem">Term 1</div>
               <div className="gridItem">Term 2</div>
               <div className="gridItem">Term 3</div>
-              <div className="gridItem">Unplanned</div>
 
               {planner.years.map((year, index) => {
                 const iYear = parseInt(planner.startYear, 10) + parseInt(index, 10);
