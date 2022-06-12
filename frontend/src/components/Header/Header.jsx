@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { BarsOutlined } from "@ant-design/icons";
 import {
@@ -12,32 +12,13 @@ import { inDev } from "config/constants";
 import useMediaQuery from "hooks/useMediaQuery";
 import DrawerContent from "./DrawerContent";
 import S from "./styles";
-import "./index.less";
-
-const getCurrentPath = () => {
-  const validPaths = new Set([
-    "course-selector",
-    "progression-checker",
-    "degree-selector",
-    "term-planner",
-  ]);
-  const menuPath = window.location.pathname.split("/")[1];
-
-  if (validPaths.has(menuPath)) return menuPath;
-  return null;
-};
 
 const { Title } = Typography;
 
 const Header = () => {
   const isSmall = useMediaQuery("(max-width: 1000px)");
   const [showDrawer, setShowDrawer] = useState(false);
-  const [current, setCurrent] = useState(getCurrentPath());
-  const url = useLocation();
-
-  useEffect(() => {
-    setCurrent(getCurrentPath());
-  }, [url]);
+  const { pathname } = useLocation();
 
   return (
     <S.HeaderWrapper>
@@ -60,14 +41,13 @@ const Header = () => {
         <Button
           type="primary"
           onClick={() => setShowDrawer(true)}
-          icon={<BarsOutlined style={{ color: "#fff", fontSize: "1.7em" }} />}
+          icon={<BarsOutlined style={{ color: "#fff", fontSize: "1.7rem" }} />}
         />
       ) : (
         <S.HeaderContent>
           <Menu
             theme="dark"
-            onClick={(e) => setCurrent(e.key)}
-            selectedKeys={[current]}
+            selectedKeys={[pathname.split("/")[1]]}
             mode="horizontal"
             overflowedIndicator={null}
             style={{
@@ -75,26 +55,22 @@ const Header = () => {
             }}
           >
             <Menu.Item key="course-selector">
-              <span>Course Selector</span>
-              <Link to="/course-selector" />
+              <Link to="/course-selector">Course Selector</Link>
             </Menu.Item>
             {
               inDev && (
                 <Menu.Item key="graphical-selector">
-                  <span>Graphical Selector</span>
-                  <Link to="/graphical-selector" />
+                  <Link to="/graphical-selector">Graphical Selector</Link>
                 </Menu.Item>
               )
             }
             <Menu.Item key="term-planner">
-              <span>Term Planner</span>
-              <Link to="/term-planner" />
+              <Link to="/term-planner">Term Planner</Link>
             </Menu.Item>
             {
               inDev && (
                 <Menu.Item key="progression-checker">
-                  <span>Progression Checker</span>
-                  <Link to="/progression-checker" />
+                  <Link to="/progression-checker">Progression Checker</Link>
                 </Menu.Item>
               )
             }
@@ -103,7 +79,6 @@ const Header = () => {
           {inDev && <ThemeToggle />}
         </S.HeaderContent>
       )}
-
       <Drawer
         onClose={() => setShowDrawer(false)}
         visible={showDrawer}

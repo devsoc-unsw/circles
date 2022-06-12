@@ -3,6 +3,7 @@ import { findDOMNode } from "react-dom";
 import { useSelector } from "react-redux";
 import G6 from "@antv/g6";
 import axios from "axios";
+import PageTemplate from "components/PageTemplate";
 
 const GraphicalSelector = () => {
   const { programCode, majors, minors } = useSelector((state) => state.degree);
@@ -65,7 +66,7 @@ const GraphicalSelector = () => {
   useEffect(() => {
     if (courses.length !== 0 && courseEdges.length !== 0) loadGraph();
   }, [courses, courseEdges]);
-  return <div ref={ref} />;
+  return <PageTemplate><div ref={ref} /></PageTemplate>;
 };
 
 export default GraphicalSelector;
