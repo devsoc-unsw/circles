@@ -36,7 +36,7 @@ const MinorStep = ({ incrementStep, currStep }) => {
             type="primary"
             className="steps-next-btn"
           >
-            Next
+            {minors.length > 0 ? "Next" : "Skip"}
           </Button>
         )}
       </div>

@@ -93,10 +93,14 @@ class User:
     def load_json(self, data):
         """ Given the user data, correctly loads it into this user class """
 
-        self.program = copy.deepcopy(data["program"])
-        self.specialisations = copy.deepcopy(data["specialisations"])
-        self.courses = copy.deepcopy(data["courses"])
-        self.year = copy.deepcopy(data["year"])
+        if "program" in data.keys():
+            self.program = copy.deepcopy(data["program"])
+        if "specialisations" in data.keys():
+            self.specialisations = copy.deepcopy(data["specialisations"])
+        if "courses" in data.keys():
+            self.courses = copy.deepcopy(data["courses"])
+        if "year" in data.keys():
+            self.year = copy.deepcopy(data["year"])
 
     def get_grade(self, course: str):
         """

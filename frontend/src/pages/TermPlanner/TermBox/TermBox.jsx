@@ -8,12 +8,11 @@ import DraggableCourse from "../DraggableCourse";
 import "./index.less";
 
 const TermBox = ({
-  name, coursesList, termsOffered, isDragging,
+  name, coursesList, termsOffered, isDragging, showMarks,
 }) => {
   const term = name.match(/T[0-3]/)[0];
 
   const { isSummerEnabled, completedTerms, courses } = useSelector((state) => state.planner);
-  // eslint-disable-next-line
   const [totalUOC, setTotalUOC] = useState(0);
   const dispatch = useDispatch();
   const handleCompleteTerm = () => {
@@ -66,9 +65,16 @@ const TermBox = ({
             className={`termBox ${isOffered && isDragging && "droppable "
             } ${isSummerEnabled && "summerTermBox"} `}
           >
-            {coursesList.map((code, index) => (
-              <DraggableCourse key={code} code={code} index={index} />
-            ))}
+            {coursesList.map(
+              (code, index) => (
+                <DraggableCourse
+                  key={code}
+                  code={code}
+                  index={index}
+                  showMarks={showMarks}
+                />
+              ),
+            )}
             {provided.placeholder}
             <div className="uocCounter">
               <Badge style={{ backgroundColor: "#9254de" }} size="small" count={`${totalUOC} UOC`} offset={isSummerEnabled ? [13, -13] : [22, -14]} />
