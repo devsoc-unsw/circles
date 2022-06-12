@@ -156,10 +156,10 @@ def process_enrolment_rules(processed: dict, course: dict):
     processed["raw_requirements"] = re.sub(
         "<br/><br/>", "", course["enrolment_rules"])
 
-def process_multi_term(processed: dict, course: dict) -> None:
+def process_multi_term(processed: dict, formatted: dict) -> None:
     is_multiterm = 0
 
-    for attribute in course["attributes"]:
+    for attribute in formatted["attributes"]:
         if attribute["type"] == "multi-term_course":
             is_multiterm = 1
 
