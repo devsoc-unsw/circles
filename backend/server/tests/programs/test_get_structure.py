@@ -26,9 +26,9 @@ def major_minor_for_program(draw: DrawFn):
     strat = sampled_from(possible_specs)
     spec1 = draw(strat)
     spec2 = draw(strat)
-    if spec1 in fake_specs:
+    while spec1 in fake_specs:
         spec1 = draw(strat)
-    if spec2 in fake_specs:
+    while spec2 in fake_specs:
         spec2 = draw(strat)
 
     return (program, spec1, spec2)
