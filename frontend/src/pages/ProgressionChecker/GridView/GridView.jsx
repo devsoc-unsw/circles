@@ -60,12 +60,12 @@ const GridView = ({ isLoading, structure }) => {
           }
         }
       });
-      if (structure[group].name) {
-        // Append structure group name if exists
-        const newGroup = `${group} - ${structure[group].name}`;
-        newGridLayout[newGroup] = newGridLayout[group];
-        delete newGridLayout[group];
-      }
+      // if (structure[group].name) {
+      //   // Append structure group name if exists
+      //   const newGroup = `${group} - ${structure[group].name}`;
+      //   newGridLayout[newGroup] = newGridLayout[group];
+      //   delete newGridLayout[group];
+      // }
     });
     setGridLayout(newGridLayout);
   };
@@ -74,7 +74,6 @@ const GridView = ({ isLoading, structure }) => {
     setPastCourses(getPastCourses(years, startYear, courses));
     generateGridStructure();
   }, [isLoading, structure, years, startYear, courses]);
-
   return (
     <div className="gridViewContainer">
       {isLoading ? (
@@ -83,10 +82,11 @@ const GridView = ({ isLoading, structure }) => {
         <>
           {Object.entries(gridLayout).map(([group, groupEntry]) => (
             <div key={group} className="category">
-              <Title level={1}>{group}</Title>
+              <Title level={1}>{group} - {structure[group].name} </Title>
               {Object.entries(groupEntry).map(([subGroup, subGroupEntry]) => (
                 <div key={subGroup} className="subCategory">
                   <Title level={2}>{subGroup}</Title>
+                  <Title level={4}>{structure[group][subGroup].UOC} UOC of the following courses</Title>
                   <div className="courseGroup">
                     {subGroupEntry.map((course) => (
                       course.unplanned ? (
