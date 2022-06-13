@@ -4,7 +4,7 @@ from algorithms.objects.user import User
 from math import isclose
 import json
 
-PATH = "./algorithms/exampleUsers.json"
+PATH = "./algorithms/tests/exampleUsers.json"
 
 
 with open(PATH, encoding="utf8") as f:
