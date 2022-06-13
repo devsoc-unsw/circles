@@ -22,19 +22,15 @@ def scrape_gened_data(year=None):
     Retrieves gen ed data for all undergraduate programs
     Stores in genedPureRaw.json as list of course codes for each program code in programsFormattedRaw.json
     """
-    faculty_list = []
+    faculty_list = set()
     gened_raw = {}
     cl_id = ""
     academicOrg = ""
 
     programs_formatted = data_helpers.read_data("data/scrapers/programsFormattedRaw.json")
-    for program_code in programs_formatted:
-        program = programs_formatted[program_code]
+    for program_code, program in programs_formatted.items():
         faculty = program["faculty"]
-        if faculty in faculty_list:
-            continue
-        else:
-            faculty_list.append(faculty)
+        faculty_list.add(faculty)
 
         if faculty == "Faculty of Arts, Design and Architecture" or faculty == "Faculty of Law and Justice":
             academicOrg = "academicOrg"
@@ -51,12 +47,9 @@ def scrape_gened_data(year=None):
             )
         ), headers=HEADERS)
         new_gened_courses_raw = r.json()["contentlets"]
-        new_gened_list = []
-        for course in new_gened_courses_raw:
-            new_gened_list.append(course.get("code"))
+  
         #gen eds by program code
-        gened_raw[program["code"]] = new_gened_list
-
+        gened_raw[program["code"]] = [course.get("code") for course in new_gened_courses_raw]
     data_helpers.write_data(
         gened_raw,
         "data/scrapers/genedPureRaw.json"

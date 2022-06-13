@@ -125,7 +125,7 @@ def create_payload_gened(size, content_type, cl_id, academic_org, year=LIVE_YEAR
                         {"fields": [f"{content_type}.{academic_org}"], "query":cl_id}},
 
                     ]}},
-        
         "sort": [{f"{content_type}.code_dotraw": "asc"}],
         "from": 0, "size": size,
     }
+    
