@@ -25,3 +25,4 @@ urllib3==1.26.9
 uvicorn==0.17.6
 zipp==3.8.0
 hypothesis==6.47.0
+more-itertools==8.13.0
