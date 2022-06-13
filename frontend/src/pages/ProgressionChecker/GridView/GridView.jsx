@@ -86,7 +86,9 @@ const GridView = ({ isLoading, structure }) => {
               {Object.entries(groupEntry).map(([subGroup, subGroupEntry]) => (
                 <div key={subGroup} className="subCategory">
                   <Title level={2}>{subGroup}</Title>
-                  <Title level={4}>{structure[group][subGroup].UOC} UOC of the following courses</Title>
+                  <Title level={4}>
+                    {structure[group][subGroup].UOC} UOC of the following courses
+                  </Title>
                   <div className="courseGroup">
                     {subGroupEntry.map((course) => (
                       course.unplanned ? (
