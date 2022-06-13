@@ -5,7 +5,7 @@ import G6 from "@antv/g6";
 import axios from "axios";
 
 const GraphicalSelector = () => {
-  const { programCode, majors, minors } = useSelector((state) => state.degree);
+  const { programCode, specs } = useSelector((state) => state.degree);
 
   const [courses, setCourses] = useState([]);
   const [courseEdges, setCourseEdges] = useState([]);
@@ -41,7 +41,7 @@ const GraphicalSelector = () => {
   useEffect(() => {
     const fetchCourseList = async () => {
       const res = (
-        await axios.get(`/programs/getStructure/${programCode}/${majors.join("+")}/${minors.join("+")}`)
+        await axios.get(`/programs/getStructure/${programCode}/${specs.join("+")}}`)
       ).data;
       const courseList = (
         Object.values(res.structure)
@@ -59,8 +59,8 @@ const GraphicalSelector = () => {
       );
       setCourseEdges(edges);
     };
-    if (programCode && majors.length > 0) fetchCourseList();
-  }, [programCode, majors]);
+    if (programCode) fetchCourseList();
+  }, [programCode, specs]);
 
   useEffect(() => {
     if (courses.length !== 0 && courseEdges.length !== 0) loadGraph();

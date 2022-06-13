@@ -2,7 +2,6 @@
 import requests
 from hypothesis import given
 from hypothesis.strategies import DrawFn, composite, sampled_from
-from functools import reduce
 
 programs = [
     *requests.get("http://127.0.0.1:8000/programs/getPrograms")

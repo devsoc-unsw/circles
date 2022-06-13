@@ -4,9 +4,17 @@ route for planner algorithms
 from fastapi import APIRouter
 from fastapi.params import Body
 from algorithms.objects.user import User
-from server.routers.courses import getCourse
+from server.routers.courses import get_course
 from server.routers.model import ValidCoursesState, PlannerData, CONDITIONS, CACHED_HANDBOOK_NOTE
 
+def fix_planner_data(plannerData: PlannerData):
+    """ fixes the planner data to add missing UOC info """
+    for year_index, year in enumerate(plannerData["plan"]):
+        for term_index, term in enumerate(year):
+            for courseName, course in term.items():
+                if not isinstance(course, list):
+                    plannerData["plan"][year_index][term_index][courseName] = [get_course(courseName)["UOC"], course]
+    return plannerData
 
 router = APIRouter(
     prefix="/planner", tags=["planner"], responses={404: {"description": "Not found"}}
@@ -18,17 +26,8 @@ def plannerIndex():
     """ sanity test that this file is loaded """
     return "Index of planner"
 
-def fixPlannerData(plannerData: PlannerData):
-    """ fixes the planner data to add missing UOC info """
-    for year_index, year in enumerate(plannerData["plan"]):
-        for term_index, term in enumerate(year):
-            for courseName, course in term.items():
-                if not isinstance(course, list):
-                    plannerData["plan"][year_index][term_index][courseName] = [getCourse(courseName)["UOC"], course]
-    return plannerData
-
 @router.post("/validateTermPlanner/", response_model=ValidCoursesState)
-async def validateTermPlanner(
+async def validate_term_planner(
     plannerData: PlannerData = Body(
         ...,
         example={
@@ -78,7 +77,7 @@ async def validateTermPlanner(
 
     Returns the state of all the courses on the term planner
     """
-    data = fixPlannerData(plannerData.dict())
+    data = fix_planner_data(plannerData.dict())
     emptyUserData = {
         "program": data["program"],
         "specialisations": data["specialisations"],

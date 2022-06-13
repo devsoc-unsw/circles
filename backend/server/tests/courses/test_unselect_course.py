@@ -16,7 +16,6 @@ def test_no_dependencies():
     assert x.status_code == 200
     assert x.json()["courses"] == ["COMP1531", "COMP9242"]
 
-
 def test_multiple_dependencies():
     x = requests.post("http://127.0.0.1:8000/courses/unselectCourse/COMP1511", json=USERS["user6"])
     assert x.status_code == 200

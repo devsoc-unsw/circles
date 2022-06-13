@@ -6,13 +6,13 @@ import {
   Button, Modal,
   notification, Typography,
 } from "antd";
+import axios from "axios";
 import PageTemplate from "components/PageTemplate";
 import { resetCourses } from "reducers/coursesSlice";
 import { resetTabs } from "reducers/courseTabsSlice";
 import { initialState, resetDegree } from "reducers/degreeSlice";
 import { resetPlanner } from "reducers/plannerSlice";
 import DegreeStep from "./steps/DegreeStep";
-import MinorStep from "./steps/MinorStep";
 import SpecialisationStep from "./steps/SpecialisationStep";
 import StartBrowsingStep from "./steps/StartBrowsingStep";
 import YearStep from "./steps/YearStep";
@@ -23,37 +23,40 @@ const { Title } = Typography;
 const DegreeWizard = () => {
   const dispatch = useDispatch();
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [steps, setSteps] = useState(["majors", "honours", "minors"]);
   const navigate = useNavigate();
-
+  const stepList = ["year", "degree"].concat(steps).concat(["start browsing"]);
   const degree = useSelector((state) => state.degree);
 
   const csDegreeDisclaimer = () => {
     notification.info({
       message: "Disclaimer",
-      description: "Currently, Circles can only support CS degree and undergrad courses.",
+      description: "Currently, Circles can only support some degrees and undergrad courses.",
       placement: "bottomRight",
       duration: 4,
     });
   };
 
   useEffect(() => {
-    // TODO: Warning dialog before planner is reset.
     if (JSON.stringify(degree) !== JSON.stringify(initialState)) {
       setIsModalVisible(true);
     }
     csDegreeDisclaimer();
   }, []);
 
+  useEffect(() => {
+    const getSteps = async () => {
+      const res = await axios.get(`/specialisations/getSpecialisationTypes/${degree.programCode}`);
+      setSteps(res.data.types);
+    };
+    if (degree.programCode !== "") getSteps();
+  }, [degree.programCode]);
+
   const [currStep, setCurrStep] = useState(1);
   const incrementStep = () => {
     setCurrStep(currStep + 1);
-    let nextId = "Degree";
-    if (currStep === 1) nextId = "Degree";
-    if (currStep === 2) nextId = "Specialisation";
-    if (currStep === 3) nextId = "Minor";
-    if (currStep === 4) nextId = "Start Browsing";
     setTimeout(() => {
-      scroller.scrollTo(nextId, {
+      scroller.scrollTo(stepList[currStep], {
         duration: 1500,
         smooth: true,
       });
@@ -103,34 +106,23 @@ const DegreeWizard = () => {
         <hr className="rule" />
 
         <div className="steps-container">
-          {currStep >= 1 && (
-            <div className="step-content" id="Year">
-              <YearStep incrementStep={incrementStep} currStep={currStep} />
-            </div>
-          )}
-          {currStep >= 2 && (
-            <div className="step-content" id="Degree">
-              <DegreeStep incrementStep={incrementStep} currStep={currStep} />
-            </div>
-          )}
-          {currStep >= 3 && (
-            <div className="step-content" id="Specialisation">
-              <SpecialisationStep
-                incrementStep={incrementStep}
-                currStep={currStep}
-              />
-            </div>
-          )}
-          {currStep >= 4 && (
-            <div className="step-content" id="Minor">
-              <MinorStep incrementStep={incrementStep} currStep={currStep} />
-            </div>
-          )}
-          {currStep >= 5 && (
-            <div className="step-content" id="Start Browsing">
-              <StartBrowsingStep />
-            </div>
-          )}
+          {stepList.map((stepName, index) => (
+            currStep >= index + 1 && (
+              <div className="step-content" id={stepName}>
+                {
+                  index + 1 === 1 ? <YearStep currStep={currStep} incrementStep={incrementStep} />
+                    : index + 1 === 2 ? (
+                      <DegreeStep
+                        currStep={currStep}
+                        incrementStep={incrementStep}
+                      />
+                    )
+                      : index + 1 === stepList.length ? <StartBrowsingStep />
+                        : <SpecialisationStep incrementStep={incrementStep} type={stepName} />
+                }
+              </div>
+            )
+          ))}
         </div>
       </div>
     </PageTemplate>
