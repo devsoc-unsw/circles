@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const initialState = {
+const initialState = {
   programCode: "",
   programName: "",
   specs: [],
+  isComplete: false,
 };
 
 const degreeSlice = createSlice({
@@ -21,12 +22,15 @@ const degreeSlice = createSlice({
       const index = state.specs.indexOf(action.payload);
       if (index !== -1) state.specs.splice(index, 1);
     },
+    setIsComplete: (state, action) => {
+      state.isComplete = action.payload;
+    },
     resetDegree: () => initialState,
   },
 });
 
 export const {
-  setProgram, resetDegree, addSpecialisation, removeSpecialisation,
+  setProgram, resetDegree, addSpecialisation, removeSpecialisation, setIsComplete,
 } = degreeSlice.actions;
 
 export default degreeSlice.reducer;

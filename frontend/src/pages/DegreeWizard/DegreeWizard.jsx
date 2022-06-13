@@ -10,7 +10,7 @@ import axios from "axios";
 import PageTemplate from "components/PageTemplate";
 import { resetCourses } from "reducers/coursesSlice";
 import { resetTabs } from "reducers/courseTabsSlice";
-import { initialState, resetDegree } from "reducers/degreeSlice";
+import { resetDegree } from "reducers/degreeSlice";
 import { resetPlanner } from "reducers/plannerSlice";
 import DegreeStep from "./steps/DegreeStep";
 import SpecialisationStep from "./steps/SpecialisationStep";
@@ -38,8 +38,14 @@ const DegreeWizard = () => {
   };
 
   useEffect(() => {
-    if (JSON.stringify(degree) !== JSON.stringify(initialState)) {
+    // TODO: Warning dialog before planner is reset.
+    if (degree.isComplete) {
       setIsModalVisible(true);
+    } else {
+      dispatch(resetPlanner());
+      dispatch(resetDegree());
+      dispatch(resetTabs());
+      dispatch(resetCourses());
     }
     csDegreeDisclaimer();
   }, []);
