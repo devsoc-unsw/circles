@@ -3381,7 +3381,7 @@
         "equivalents": {},
         "exclusions": {},
         "terms": [
-            "T2"
+            ""
         ],
         "gen_ed": 0,
         "raw_requirements": "24 units of credit at Level 1 courses"
@@ -4198,7 +4198,7 @@
         "code": "ARTS2480",
         "UOC": 6,
         "level": 2,
-        "description": "This course is designed for students with basic knowledge of French equivalent to two terms/semesters of studying the language at university level. With a communicative and task-based approach to foreign language learning, you will learn to communicate in simple and routine tasks requiring a simple and direct exchange of information on familiar and routine matters. You will develop your listening and speaking skills as well as your reading and writing skills through varied activities and tasks done in class and/or prepared at home. Vocabulary and grammatical structures are presented in the context of culturally relevant issues from France or the Francophone world. The medium of instruction is French.\n",
+        "description": "This course is designed for students with basic knowledge of French equivalent to two terms/semesters of studying the language at university level. With a communicative and task-based approach to foreign language learning, you will learn to communicate in simple and routine tasks requiring a simple and direct exchange of information on familiar and routine matters. You will develop your listening and speaking skills as well as your reading and writing skills through varied activities and tasks done in class and/or prepared at home. Vocabulary and grammatical structures are presented in the context of culturally relevant issues from France or the Francophone world. The medium of instruction is French.",
         "study_level": "Undergraduate",
         "school": "School of Humanities and Languages",
         "faculty": "Faculty of Arts, Design and Architecture",
@@ -13973,6 +13973,23 @@
         "gen_ed": 1,
         "raw_requirements": "Students need to have completed a minimum of 30 UoC to undertake this course."
     },
+    "CDEV3300": {
+        "title": "Global Practice of Work",
+        "code": "CDEV3300",
+        "UOC": 6,
+        "level": 3,
+        "description": "Global Practice of Work is a work integrated learning (WIL) course that enables students to work directly with an international partner organisation to undertake a placement (internship) or an interdisciplinary partner project co-designed and supervised with an international partner organisation. The course can be undertaken either overseas or virtually. It is designed to enable students to develop and deepen their global competencies by engaging in global work learning, thus further developing their personal and professional skills and capabilities. The course is available to domestic and international students and can be undertaken as a General Education course.",
+        "study_level": "Undergraduate",
+        "faculty": "DVC (Academic) Board of Studies",
+        "campus": "Sydney",
+        "equivalents": {},
+        "exclusions": {},
+        "terms": [
+            "T3"
+        ],
+        "gen_ed": 1,
+        "raw_requirements": ""
+    },
     "CEIC1000": {
         "title": "Sustainable Product Engineering and Design",
         "code": "CEIC1000",
@@ -16184,6 +16201,7 @@
         "exclusions": {},
         "terms": [
             "T1",
+            "T2",
             "T3"
         ],
         "gen_ed": 0,
@@ -17992,7 +18010,7 @@
         "code": "COMP9318",
         "UOC": 6,
         "level": 9,
-        "description": "Data Warehouse: (a) Data Model for Data Warehouses. (b) Implementing Data Warehouses: data  extraction,  cleansing,  transformation  and  loading,  data  cube  computation,  materialized  view  selection, OLAP query processing. Data Mining: (a) Fundamentals: data mining process and system  architecture, relationship with data warehouse and OLAP systems, data pre-processing. (b) Mining  Techniques  and  Application:  association  rules,  mining  spatial  databases,  mining  multimedia  databases, web mining, mining sequence and time-series data, text mining, etc.    The lecture materials will be complemented by projects /assignments.",
+        "description": "Data Warehouse: (a) Data Model for Data Warehouses. (b) Implementing Data Warehouses: data extraction, cleansing, transformation and loading, data cube computation, materialized view selection, OLAP query processing. Data Mining: (a) Fundamentals: data mining process and system architecture, relationship with data warehouse and OLAP systems, data pre-processing. (b) Mining Techniques and Application: association rules, mining spatial databases, mining multimedia databases, web mining, mining sequence and time-series data, text mining, etc. The lecture materials will be complemented by projects /assignments.",
         "study_level": "Undergraduate",
         "school": "School of Computer Science and Engineering",
         "faculty": "Faculty of Engineering",
@@ -27677,7 +27695,7 @@
         "code": "ENGG4600",
         "UOC": 2,
         "level": 4,
-        "description": "This course is designed for highly motivated undergraduates seeking the opportunity to integrate specific curricular and co-curricular components into their undergraduate program, to provide them with superior preparation and experience in\u00a0the areas of Leadership and Project Management thus giving them a headstart when seeking employment.\u00a0 \u00a0\nThe\u00a0courses\u00a0run across three consecutive terms within a single calendar year:\u00a0T1,2 and 3 (2 UoC per Term) for a total of 6 UoC at the end,\u00a0which\u00a0enables students to extend their project-based learning experience beyond a single term.\u00a0\nYou must complete all three terms of the\u00a0course and satisfy all assessment requirements as set out by the course coordinator to receive full course credit.\u00a0Partial credits will not be given.\nStudents will pursue research in a particular theme, explore interdisciplinary coursework, gain a global perspective, develop an entrepreneurial mindset, and give back to the community through service learning. Benefits for participating can include unique opportunities and experiences, mentoring by academic supervisors, guest speakers, and funding opportunities and engagement with industry partners.\nUnder the guidance of academic mentors and industry mentors, this course provides a vehicle for guided but independent group project work on varying briefs. The learning and effort in the course is largely group-based, with group members ideally being drawn from different discipline areas. Students will develop their skills in critical thinking, problem definition, creative and systematic design, precise written and oral technical communication skills, and professional skills including communication and team organisation and coordination. The course allows students to design, build and research a variety of projects.\u00a0\nPrerequisite conditions:\nUNSW Engineering students prerequisites: (Successful completion of ENGG1000 or enrolled in a Food Science or Computer Science plan) AND successful completion of at least 114\u00a0UOC AND enrolled in a program offered by the Faculty of Engineering.\nUNSW Medicine\u00a0students (program 3805 or 3856) must have demonstrated adequate performance with teamwork in every course during their first year to be eligible to participate in Vertically Integrated Courses: ENGG2600, ENGG3600, ENGG4600.\nMedicine\u00a0students must also be eligible to overload during year 3 based on the general education requirements for BSc (Med) Hons.\nStudents from other UNSW Faculties may apply to join the ChallENG program as a General Education elective. Students should ensure their program requires a General Education elective prior to application.\nNote:\u00a0WAM will be considered in all student applications for enrolment in this course.",
+        "description": "This course is designed for highly motivated undergraduates seeking the opportunity to integrate specific curricular and co-curricular components into their undergraduate program, to provide them with superior preparation and experience in\u00a0the areas of Leadership and Project Management thus giving them a headstart when seeking employment.\u00a0 \u00a0\nThe\u00a0courses\u00a0run across three consecutive terms within a single calendar year:\u00a0T1,2 and 3 (2 UoC per Term) for a total of 6 UoC at the end,\u00a0which\u00a0enables students to extend their project-based learning experience beyond a single term.\u00a0\nYou must complete all three terms of the\u00a0course and satisfy all assessment requirements as set out by the course coordinator to receive full course credit.\u00a0Partial credits will not be given.\nStudents will pursue research in a particular theme, explore interdisciplinary coursework, gain a global perspective, develop an entrepreneurial mindset, and give back to the community through service learning. Benefits for participating can include unique opportunities and experiences, mentoring by academic supervisors, guest speakers, and funding opportunities and engagement with industry partners.\nUnder the guidance of academic mentors and industry mentors, this course provides a vehicle for guided but independent group project work on varying briefs. The learning and effort in the course is largely group-based, with group members ideally being drawn from different discipline areas. Students will develop their skills in critical thinking, problem definition, creative and systematic design, precise written and oral technical communication skills, and professional skills including communication and team organisation and coordination. The course allows students to design, build and research a variety of projects.\u00a0\nPrerequisite conditions:\nUNSW Engineering students prerequisites: (Successful completion of DESN1000 or enrolled in a Food Science or Computer Science plan) AND successful completion of at least 114\u00a0UOC AND enrolled in a program offered by the Faculty of Engineering.\nUNSW Medicine\u00a0students (program 3805 or 3856) must have demonstrated adequate performance with teamwork in every course during their first year to be eligible to participate in Vertically Integrated Courses: ENGG2600, ENGG3600, ENGG4600.\nMedicine\u00a0students must also be eligible to overload during year 3 based on the general education requirements for BSc (Med) Hons.\nStudents from other UNSW Faculties may apply to join the ChallENG program as a General Education elective. Students should ensure their program requires a General Education elective prior to application.\nNote:\u00a0WAM will be considered in all student applications for enrolment in this course.",
         "study_level": "Undergraduate",
         "faculty": "Faculty of Engineering",
         "campus": "Sydney",
@@ -32008,7 +32026,7 @@
             "INFS5907": 1
         },
         "terms": [
-            "T3"
+            ""
         ],
         "gen_ed": 0,
         "raw_requirements": "Enrolment in Streams: Enrolled in an Honours Program majoring in Information Systems (INFSAH OR INFSBH OR INFSCH)"
@@ -40800,7 +40818,8 @@
         "equivalents": {},
         "exclusions": {},
         "terms": [
-            "SC"
+            "SC",
+            "T3"
         ],
         "gen_ed": 0,
         "raw_requirements": ""
@@ -46443,8 +46462,7 @@
         },
         "terms": [
             "T1",
-            "T2",
-            "T3"
+            "T2"
         ],
         "gen_ed": 1,
         "raw_requirements": ""
@@ -48904,7 +48922,7 @@
         "code": "SOLA1070",
         "UOC": 6,
         "level": 1,
-        "description": "Students will be introduced to the central concepts of energy and sustainability with a particular focus on sustainable energy systems through their use of the multiplayer PlayEnergy online simulation/game. Energy efficiency will be introduced as an effective way in which to conserve our natural fuel reserves and reduce environmental damage in a cost-effective way. This course will also introduce students to a range of renewable energy technologies such as photovoltaics, wind generators and solar thermal and allow them to explore ways in which these technologies and energy efficiency can be used to improve the sustainability of electrical power systems. Finally students will attempt to address the challenges involved in balancing between energy security (ability to meet demand), energy equity (affordability) and environmental sustainability in the design of an energy infrastructure for a community.\n",
+        "description": "Students will be introduced to the central concepts of energy and sustainability with a particular focus on sustainable energy systems. Energy efficiency will be introduced as an effective way in which to conserve our natural fuel reserves and reduce environmental damage in a cost-effective way. This course will also introduce students to a range of renewable energy technologies such as photovoltaics, wind generators and solar thermal and allow them to explore ways in which these technologies and energy efficiency can be used to improve the sustainability of electrical power systems. Finally students will attempt to address the challenges involved in balancing between energy security (ability to meet demand), energy equity (affordability) and environmental sustainability in the design of an energy infrastructure for a community.",
         "study_level": "Undergraduate",
         "school": "School of Photovoltaic and Renewable Engineering",
         "faculty": "Faculty of Engineering",
