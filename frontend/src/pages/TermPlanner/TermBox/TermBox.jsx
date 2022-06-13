@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Droppable } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import { LockFilled, UnlockFilled } from "@ant-design/icons";
@@ -8,16 +8,24 @@ import DraggableCourse from "../DraggableCourse";
 import "./index.less";
 
 const TermBox = ({
-  name, courses, termsOffered, isDragging, showMarks,
+  name, coursesList, termsOffered, isDragging, showMarks,
 }) => {
   const term = name.match(/T[0-3]/)[0];
 
-  const { isSummerEnabled, completedTerms } = useSelector((state) => state.planner);
-
+  const { isSummerEnabled, completedTerms, courses } = useSelector((state) => state.planner);
+  const [totalUOC, setTotalUOC] = useState(0);
   const dispatch = useDispatch();
   const handleCompleteTerm = () => {
     dispatch(toggleTermComplete(name));
   };
+
+  useEffect(() => {
+    let uoc = 0;
+    Object.keys(courses).forEach((c) => {
+      if (coursesList.includes(c)) uoc += courses[c].UOC;
+    });
+    setTotalUOC(uoc);
+  }, [coursesList]);
 
   const isCompleted = !!completedTerms[name];
 
@@ -30,21 +38,21 @@ const TermBox = ({
           count={(
             <div className={`termCheckboxContainer ${isCompleted && "checkedTerm"}`}>
               {(
-                !isCompleted
-                  ? (
-                    <UnlockFilled
-                      className="termCheckbox"
-                      onClick={handleCompleteTerm}
-                    />
-                  ) : (
-                    <LockFilled
-                      className="termCheckbox"
-                      onClick={handleCompleteTerm}
-                    />
-                  )
-              )}
+                  !isCompleted
+                    ? (
+                      <UnlockFilled
+                        className="termCheckbox"
+                        onClick={handleCompleteTerm}
+                      />
+                    ) : (
+                      <LockFilled
+                        className="termCheckbox"
+                        onClick={handleCompleteTerm}
+                      />
+                    )
+                )}
             </div>
-          )}
+            )}
           offset={isSummerEnabled ? [-13, 13] : [-22, 22]}
         >
           <ul
@@ -53,7 +61,7 @@ const TermBox = ({
             className={`termBox ${isOffered && isDragging && "droppable "
             } ${isSummerEnabled && "summerTermBox"} `}
           >
-            {courses.map(
+            {coursesList.map(
               (code, index) => (
                 <DraggableCourse
                   key={code}
@@ -64,6 +72,9 @@ const TermBox = ({
               ),
             )}
             {provided.placeholder}
+            <div className="uocCounter">
+              <Badge style={{ backgroundColor: "#9254de" }} size="small" count={`${totalUOC} UOC`} offset={isSummerEnabled ? [13, -13] : [22, -14]} />
+            </div>
           </ul>
         </Badge>
       )}

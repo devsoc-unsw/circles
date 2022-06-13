@@ -18,10 +18,10 @@ pymongo==4.1.1
 pyparsing==3.0.9
 pytest==7.1.2
 python-Levenshtein==0.12.2
-requests==2.27.1
+requests==2.28.0
 toml==0.10.2
 typing-extensions==4.2.0
 urllib3==1.26.9
 uvicorn==0.17.6
 zipp==3.8.0
-hypothesis==6.46.9
+hypothesis==6.47.0
