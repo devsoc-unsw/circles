@@ -55,8 +55,9 @@ const CourseMenu = ({ structure, showLockedCourses }) => {
           };
 
           newMenu[group][subgroup] = [];
+          const isRule = subgroupStructure.type && subgroupStructure.type.includes("rule");
 
-          if (subgroupStructure.courses) {
+          if (subgroupStructure.courses && !isRule) {
             // only consider disciplinary component courses
             Object.keys(subgroupStructure.courses).forEach((courseCode) => {
               newMenu[group][subgroup].push({
