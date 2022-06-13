@@ -19306,7 +19306,6 @@
                         "is_optional": false,
                         "specs": {
                             "CVENBH": "Environmental Engineering",
-                            "NAVLAH": "Naval Architecture",
                             "SOLAAH": "Photovoltaics and Solar Energy",
                             "MTRNAH": "Mechatronic Engineering",
                             "CEICAH": "Chemical Engineering",
@@ -19881,7 +19880,6 @@
                             "BINFAH": "Bioinformatics Engineering",
                             "ELECCH": "Quantum Engineering",
                             "TELEAH": "Telecommunications",
-                            "NAVLAH": "Naval Architecture",
                             "CEICDH": "Chemical Product Engineering",
                             "MINEAH": "Mining Engineering",
                             "COMPBH": "Computer Engineering",
@@ -20131,7 +20129,6 @@
                             "MINEAH": "Mining Engineering",
                             "COMPBH": "Computer Engineering",
                             "ELECAH": "Electrical Engineering",
-                            "NAVLAH": "Naval Architecture",
                             "AEROAH": "Aerospace Engineering",
                             "SOLABH": "Renewable Energy Engineering",
                             "MECHAH": "Mechanical Engineering",
@@ -20354,7 +20351,6 @@
                             "BINFAH": "Bioinformatics Engineering",
                             "TELEAH": "Telecommunications",
                             "SOLABH": "Renewable Energy Engineering",
-                            "NAVLAH": "Naval Architecture",
                             "SOLAAH": "Photovoltaics and Solar Energy",
                             "CEICAH": "Chemical Engineering",
                             "MINEAH": "Mining Engineering",
@@ -20633,7 +20629,6 @@
                     "Engineering (Honours)": {
                         "is_optional": false,
                         "specs": {
-                            "NAVLAH": "Naval Architecture",
                             "SOLABH": "Renewable Energy Engineering",
                             "SENGAH": "Software Engineering",
                             "MTRNAH": "Mechatronic Engineering",
@@ -20785,7 +20780,6 @@
                             "TELEAH": "Telecommunications",
                             "ELECAH": "Electrical Engineering",
                             "COMPBH": "Computer Engineering",
-                            "NAVLAH": "Naval Architecture",
                             "MTRNAH": "Mechatronic Engineering",
                             "BINFAH": "Bioinformatics Engineering",
                             "CEICAH": "Chemical Engineering",
@@ -20933,7 +20927,6 @@
                     "Engineering (Honours)": {
                         "is_optional": false,
                         "specs": {
-                            "NAVLAH": "Naval Architecture",
                             "CVENAH": "Civil Engineering",
                             "MECHAH": "Mechanical Engineering",
                             "SOLABH": "Renewable Energy Engineering",
@@ -21194,7 +21187,6 @@
                             "AEROAH": "Aerospace Engineering",
                             "PETRAH": "Petroleum Engineering",
                             "CEICAH": "Chemical Engineering",
-                            "NAVLAH": "Naval Architecture",
                             "TELEAH": "Telecommunications",
                             "ELECCH": "Quantum Engineering",
                             "MINEAH": "Mining Engineering",
@@ -22456,7 +22448,6 @@
                             "TELEAH": "Telecommunications",
                             "ELECAH": "Electrical Engineering",
                             "ELECCH": "Quantum Engineering",
-                            "NAVLAH": "Naval Architecture",
                             "MANFBH": "Mechanical and Manufacturing Engineering",
                             "CVENBH": "Environmental Engineering",
                             "MECHAH": "Mechanical Engineering",
@@ -26284,7 +26275,6 @@
                             "AEROAH": "Aerospace Engineering",
                             "CVENAH": "Civil Engineering",
                             "BINFAH": "Bioinformatics Engineering",
-                            "NAVLAH": "Naval Architecture",
                             "SENGAH": "Software Engineering",
                             "TELEAH": "Telecommunications"
                         },

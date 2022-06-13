@@ -35,5 +35,5 @@ def test_sanity(program):
                     assert type(value) is str
 
 def test_nonexistant():
-    x = requests.get('http://127.0.0.1:8000/specialisations/getSpecialisations/{program}/{typespec}')
+    x = requests.get('http://127.0.0.1:8000/specialisations/getSpecialisations/2434/honours')
     assert x.status_code == 400

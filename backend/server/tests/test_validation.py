@@ -4,22 +4,24 @@ from itertools import chain
 import requests
 
 from server.tests.courses.test_get_all_unlocked import USERS
+from server.tests.programs.test_get_structure import fake_specs
 
 ignored = ['ECON2209', 'ECON2112', 'ECON2101', 'ECON2102']
 
 def test_validation():
     unlocked = requests.post('http://127.0.0.1:8000/courses/getAllUnlocked', json=USERS["user3"]).json()['courses_state']
     for program in requests.get('http://127.0.0.1:8000/programs/getPrograms').json()['programs']:
-        majorsGroups = requests.get(f'http://127.0.0.1:8000/programs/getSpecialisations/{program}/majors')
-        minorsGroups = requests.get(f'http://127.0.0.1:8000/programs/getSpecialisations/{program}/minors')
-        honoursGroups = requests.get(f'http://127.0.0.1:8000/programs/getSpecialisations/{program}/honours')
+        majorsGroups = requests.get(f'http://127.0.0.1:8000/specialisations/getSpecialisations/{program}/majors')
+        minorsGroups = requests.get(f'http://127.0.0.1:8000/specialisations/getSpecialisations/{program}/minors')
+        honoursGroups = requests.get(f'http://127.0.0.1:8000/specialisations/getSpecialisations/{program}/honours')
         majorsGroups = majorsGroups.json()['spec'] if majorsGroups.status_code == 200 else {}
         minorsGroups = minorsGroups.json()['spec'] if minorsGroups.status_code == 200 else {}
         honoursGroups = honoursGroups.json()['spec'] if honoursGroups.status_code == 200 else {}
 
         for group in chain(majorsGroups.values(), minorsGroups.values(), honoursGroups.values()):
             for major in group["specs"].keys():
-                assert_possible_structure(unlocked, program, major)
+                if major not in fake_specs:
+                    assert_possible_structure(unlocked, program, major)
 
 
 def assert_possible_structure(unlocked, program, spec):
@@ -29,11 +31,6 @@ def assert_possible_structure(unlocked, program, spec):
             del structure[container]['name']
             del structure[container]['Flexible Education']
             del structure[container]['General Education']
-            del structure[container]['Prescribed Work Integrated Learning (WIL) Course']
-            del structure[container]['Integrated First Year Courses']
-            del structure[container]['Final Year Synthesis']
-            del structure[container]['myBCom']
-            del structure[container]['Compulsory Core']
 
         for container2 in structure[container]:
             with suppress(KeyError):
