@@ -409,7 +409,7 @@ def compute_levels(courses: dict[str, str]) -> list[int]:
         len(code) < 5 or code[4] == "."
         for code in codes
     ):
-        return [ i for i in range(1, 10) ]
+        return list(range(1, 10))
 
     # Everything has a number (that isn't wildcarded).
     # Get all levels as a set to remove duplicates

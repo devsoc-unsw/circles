@@ -6,7 +6,6 @@
 """
 
 import copy
-from pickle import load
 from typing import Optional, Tuple
 import re
 from algorithms.objects.categories import AnyCategory, Category
