@@ -37,6 +37,21 @@ def scrape_gened_data(year=None):
         else:
             academicOrg = "parentAcademicOrg"
         cl_id = program[academicOrg]
+
+        try:
+            resp = requests.get(URL, data=json.dumps(
+            create_payload_gened(
+            TOTAL_COURSES,
+            "unsw_psubject",
+            cl_id,
+            academicOrg,
+            year
+            )
+        ), headers=HEADERS)
+            resp.raise_for_status()
+        except requests.exceptions.HTTPError as err:
+            print(f"{err}+ Failed at program: {program_code}")
+            
         r = requests.post(URL, data=json.dumps(
             create_payload_gened(
             TOTAL_COURSES,
