@@ -69,6 +69,7 @@ def get_specialisations(programCode: str, typeSpec: str):
     if not result:
         raise HTTPException(
             status_code=400, detail="Program code was not found")
+
     if typeSpec not in ['honours', 'minors', 'majors']:
         raise HTTPException(
             status_code=400, detail="type is invalid. Valid ones are: 'honours', 'minors', 'majors'")

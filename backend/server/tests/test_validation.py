@@ -1,36 +1,29 @@
 # we want to assure that courses that may be accessed from a container are always accurately computed.
 from contextlib import suppress
+from itertools import chain
 import requests
 
 from server.tests.courses.test_get_all_unlocked import USERS
 
-# TODO: Do we care if these courses are broken before deployment? they are the honours courses + some wierd courses
-# main issues include CIRCLES-276
-ignored = ['COMP4951', 'TABL2712', 'INFS3873', 'INFS3830', 'ECON2209', 'ECON2112', 'ECON2101', 'ECON2102']
+ignored = ['TABL2712', 'INFS3873', 'INFS3830', 'ECON2209', 'ECON2112', 'ECON2101', 'ECON2102']
 
-def test_validation_majors():
+def test_validation():
     unlocked = requests.post('http://127.0.0.1:8000/courses/getAllUnlocked', json=USERS["user3"]).json()['courses_state']
     for program in requests.get('http://127.0.0.1:8000/programs/getPrograms').json()['programs']:
-        majorsGroups = requests.get(f'http://127.0.0.1:8000/programs/getMajors/{program}').json()['majors']
-        for group in majorsGroups.values():
+        majorsGroups = requests.get(f'http://127.0.0.1:8000/programs/getSpecialisations/{program}/majors')
+        minorsGroups = requests.get(f'http://127.0.0.1:8000/programs/getSpecialisations/{program}/minors')
+        honoursGroups = requests.get(f'http://127.0.0.1:8000/programs/getSpecialisations/{program}/honours')
+        majorsGroups = majorsGroups.json()['spec'] if majorsGroups.status_code == 200 else {}
+        minorsGroups = minorsGroups.json()['spec'] if minorsGroups.status_code == 200 else {}
+        honoursGroups = honoursGroups.json()['spec'] if honoursGroups.status_code == 200 else {}
+
+        for group in chain(majorsGroups.values(), minorsGroups.values(), honoursGroups.values()):
             for major in group["specs"].keys():
                 assert_possible_structure(unlocked, program, major)
 
-# TODO: currently fails because of parsing errors with new course prereqs such as COMM1190
-def test_validation_minors():
-    unlocked = requests.post('http://127.0.0.1:8000/courses/getAllUnlocked', json=USERS["user3"]).json()['courses_state']
-    for program in requests.get('http://127.0.0.1:8000/programs/getPrograms').json()['programs']:
-        majorGroups = requests.get(f'http://127.0.0.1:8000/programs/getMajors/{program}').json()['majors']
-        minorGroups = requests.get(f'http://127.0.0.1:8000/programs/getMinors/{program}').json()['minors']
-        for majGroup in majorGroups.values():
-            for major in majGroup["specs"].keys():
-                for group in minorGroups.values():
-                    for minor in group["specs"].keys():
-                        assert_possible_structure(unlocked, program, major, minor)
 
-
-def assert_possible_structure(unlocked, program, major, minor = ''):
-    structure = requests.get(f'http://127.0.0.1:8000/programs/getStructure/{program}/{major}/{minor}').json()['structure']
+def assert_possible_structure(unlocked, program, spec):
+    structure = requests.get(f'http://127.0.0.1:8000/programs/getStructure/{program}/{spec}').json()['structure']
     for container in structure:
         with suppress(KeyError):
             del structure[container]['name']
