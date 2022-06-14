@@ -10499,11 +10499,11 @@
     },
     "ZBUS2901": {
         "original": "Prerequisite: Enrolment in CDF Program (4462).<br/><br/>",
-        "processed": "Enrolment in CDF Program (4462)"
+        "processed": "CCDF# (4462)"
     },
     "ZBUS2902": {
         "original": "Prerequisite: Enrolment in CDF Program (4462).<br/><br/>",
-        "processed": "Enrolment in CDF Program (4462)"
+        "processed": "CCDF# (4462)"
     },
     "ZBUS3101": {
         "original": "Prerequisite ZBUS2101<br/><br/>",
@@ -10559,11 +10559,11 @@
     },
     "ZBUS3901": {
         "original": "Prerequisite: Enrolment in CDF Program (4462).<br/><br/>",
-        "processed": "Enrolment in CDF Program (4462)"
+        "processed": "CCDF# (4462)"
     },
     "ZBUS3902": {
         "original": "Prerequisite: Enrolment in CDF Program (4462).<br/><br/>",
-        "processed": "Enrolment in CDF Program (4462)"
+        "processed": "CCDF# (4462)"
     },
     "ZBUS4001": {
         "original": "Enrolment in Business (Honours) Program 4512.<br/><br/>",
@@ -10591,11 +10591,11 @@
     },
     "ZEIT1190": {
         "original": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-        "processed": "Enrolment in CDF Program"
+        "processed": "CCDF#"
     },
     "ZEIT1191": {
         "original": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-        "processed": "Enrolment in CDF Program"
+        "processed": "CCDF#"
     },
     "ZEIT1206": {
         "original": "Prerequisite ZEIT1208 and ZPEM1303<br/><br/>",
@@ -10607,11 +10607,11 @@
     },
     "ZEIT1290": {
         "original": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-        "processed": "Enrolment in CDF Program"
+        "processed": "CCDF#"
     },
     "ZEIT1291": {
         "original": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-        "processed": "Enrolment in CDF Program"
+        "processed": "CCDF#"
     },
     "ZEIT1501": {
         "original": "",
@@ -10631,7 +10631,7 @@
     },
     "ZEIT1690": {
         "original": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-        "processed": "Enrolment in CDF Program"
+        "processed": "CCDF#"
     },
     "ZEIT1800": {
         "original": "",
@@ -10639,11 +10639,11 @@
     },
     "ZEIT1901": {
         "original": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-        "processed": "Enrolment in CDF Program"
+        "processed": "CCDF#"
     },
     "ZEIT1902": {
         "original": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-        "processed": "Enrolment in CDF Program"
+        "processed": "CCDF#"
     },
     "ZEIT2102": {
         "original": "Prerequisite: ZEIT1102<br/><br/>",
@@ -10727,11 +10727,11 @@
     },
     "ZEIT2901": {
         "original": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-        "processed": "Enrolment in CDF Program"
+        "processed": "CCDF#"
     },
     "ZEIT2902": {
         "original": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-        "processed": "Enrolment in CDF Program"
+        "processed": "CCDF#"
     },
     "ZEIT3101": {
         "original": "Prerequisite: ZEIT3118<br/><br/>",
@@ -10911,11 +10911,11 @@
     },
     "ZEIT3901": {
         "original": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-        "processed": "Enrolment in CDF Program"
+        "processed": "CCDF#"
     },
     "ZEIT3902": {
         "original": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-        "processed": "Enrolment in CDF Program"
+        "processed": "CCDF#"
     },
     "ZEIT4003": {
         "original": "Prerequisite: ZEIT2500 and ZEIT2503 or ZEIT2602<br/><br/>",
@@ -11131,11 +11131,11 @@
     },
     "ZEIT4901": {
         "original": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-        "processed": "Enrolment in CDF Program"
+        "processed": "CCDF#"
     },
     "ZEIT4902": {
         "original": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-        "processed": "Enrolment in CDF Program"
+        "processed": "CCDF#"
     },
     "ZGEN2215": {
         "original": "Prerequisite: 36 Units of Credit in Level 1 courses<br/><br/>",
@@ -11295,11 +11295,11 @@
     },
     "ZHSS2901": {
         "original": "Prerequisite: Enrolment in CDF Program (4461)<br/><br/>",
-        "processed": "Enrolment in CDF Program (4461)"
+        "processed": "CCDF# (4461)"
     },
     "ZHSS2902": {
         "original": "Prerequisite: Enrolment in CDF Program (4461)<br/><br/>",
-        "processed": "Enrolment in CDF Program (4461)"
+        "processed": "CCDF# (4461)"
     },
     "ZHSS3104": {
         "original": "Prerequisite: ZHSS1101 and ZHSS1102<br/><br/>",
@@ -11547,7 +11547,7 @@
     },
     "ZPEM1901": {
         "original": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-        "processed": "Enrolment in CDF Program"
+        "processed": "CCDF#"
     },
     "ZPEM2102": {
         "original": "Prerequisite: ZPEM1101 and ZPEM1102<br/><br/>",
@@ -11627,7 +11627,7 @@
     },
     "ZPEM2901": {
         "original": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-        "processed": "Enrolment in CDF Program"
+        "processed": "CCDF#"
     },
     "ZPEM3103": {
         "original": "Prerequisite: ZPEM1301, ZPEM1302, ZPEM2113 or ZPEM2502<br/><br/>",
@@ -11699,11 +11699,11 @@
     },
     "ZPEM3901": {
         "original": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-        "processed": "Enrolment in CDF Program"
+        "processed": "CCDF#"
     },
     "ZPEM3902": {
         "original": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-        "processed": "Enrolment in CDF Program"
+        "processed": "CCDF#"
     },
     "ZPEM4001": {
         "original": "",

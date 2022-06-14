@@ -300,6 +300,7 @@ def convert_program_type(processed: str) -> str:
     processed = map_word_to_program_type(processed, r"actuarial( studies)?", "ACTL#")
     processed = map_word_to_program_type(processed, r"business", "BUSN#")
     processed = map_word_to_program_type(processed, r"commerce", "COMM#")
+    processed = map_word_to_program_type(processed, r"CDF", "CCDF#")
     return processed
 
 
@@ -500,7 +501,7 @@ def l2_math_courses(processed: str) -> str:
 
 def map_word_to_program_type(processed: str, regex_word: str, type: str):
     return re.sub(
-        rf"in {regex_word} (programs?|single or dual degrees?)",
+        rf"(enrolment)? in {regex_word} (programs?|single or dual degrees?)",
         type,
         processed,
         flags=re.IGNORECASE,

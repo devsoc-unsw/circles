@@ -15111,42 +15111,6 @@
         ],
         "broke at": "Index 2, program"
     },
-    "ZBUS2901": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in CDF Program (4462).<br/><br/>",
-            "processed": "Enrolment in CDF Program (4462)"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "CDF",
-            "Program",
-            "(",
-            "4462",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ZBUS2902": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in CDF Program (4462).<br/><br/>",
-            "processed": "Enrolment in CDF Program (4462)"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "CDF",
-            "Program",
-            "(",
-            "4462",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
     "ZBUS3104": {
         "condition": {
             "original": "Business Program (4405 or 4462) and ZBUS1104<br/><br/>Completion of ZBUS3108 Business Strategy Implementation is assumed prior to undertaking ZBUS3104 Business Capstone (Work Practice Project). <br/><br/>",
@@ -15182,42 +15146,6 @@
             ")"
         ],
         "broke at": "Index 2, Program"
-    },
-    "ZBUS3901": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in CDF Program (4462).<br/><br/>",
-            "processed": "Enrolment in CDF Program (4462)"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "CDF",
-            "Program",
-            "(",
-            "4462",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ZBUS3902": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in CDF Program (4462).<br/><br/>",
-            "processed": "Enrolment in CDF Program (4462)"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "CDF",
-            "Program",
-            "(",
-            "4462",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 2, in"
     },
     "ZBUS4001": {
         "condition": {
@@ -15291,201 +15219,6 @@
             ")",
             "Program",
             "4512",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ZEIT1190": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-            "processed": "Enrolment in CDF Program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "CDF",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ZEIT1191": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-            "processed": "Enrolment in CDF Program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "CDF",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ZEIT1290": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-            "processed": "Enrolment in CDF Program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "CDF",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ZEIT1291": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-            "processed": "Enrolment in CDF Program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "CDF",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ZEIT1690": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-            "processed": "Enrolment in CDF Program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "CDF",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ZEIT1901": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-            "processed": "Enrolment in CDF Program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "CDF",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ZEIT1902": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-            "processed": "Enrolment in CDF Program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "CDF",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ZEIT2901": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-            "processed": "Enrolment in CDF Program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "CDF",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ZEIT2902": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-            "processed": "Enrolment in CDF Program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "CDF",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ZEIT3901": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-            "processed": "Enrolment in CDF Program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "CDF",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ZEIT3902": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-            "processed": "Enrolment in CDF Program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "CDF",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ZEIT4901": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-            "processed": "Enrolment in CDF Program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "CDF",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ZEIT4902": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-            "processed": "Enrolment in CDF Program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "CDF",
-            "Program",
             ")"
         ],
         "broke at": "Index 2, in"
@@ -15599,42 +15332,6 @@
         ],
         "broke at": "Index 2, 2"
     },
-    "ZHSS2901": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in CDF Program (4461)<br/><br/>",
-            "processed": "Enrolment in CDF Program (4461)"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "CDF",
-            "Program",
-            "(",
-            "4461",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ZHSS2902": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in CDF Program (4461)<br/><br/>",
-            "processed": "Enrolment in CDF Program (4461)"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "CDF",
-            "Program",
-            "(",
-            "4461",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
     "ZHSS3202": {
         "condition": {
             "original": "Prerequisite: 24 units of credit in upper-level History passed at Credit level or higher;<br/>Corequisite: 6 units of credit in upper-level History.<br/><br/>",
@@ -15721,21 +15418,6 @@
         ],
         "broke at": "Index 2, 2"
     },
-    "ZPEM1901": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-            "processed": "Enrolment in CDF Program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "CDF",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
     "ZPEM2509": {
         "condition": {
             "original": "Prerequisite: ZPEM1301 or ZPEM1303, ZPEM1302 or ZPEM1304, ZPEM1501, ZPEM1502<br/><br/>",
@@ -15755,51 +15437,6 @@
             ")"
         ],
         "broke at": "Index 8, ZPEM1501,"
-    },
-    "ZPEM2901": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-            "processed": "Enrolment in CDF Program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "CDF",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ZPEM3901": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-            "processed": "Enrolment in CDF Program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "CDF",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ZPEM3902": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in CDF Program<br/><br/>",
-            "processed": "Enrolment in CDF Program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "CDF",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
     },
     "ZPEM4205": {
         "condition": {
