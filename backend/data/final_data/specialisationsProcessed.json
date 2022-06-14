@@ -132,34 +132,34 @@
         "curriculum": [
             {
                 "courses": {
-                    "COMP1531": "Software Engineering Fundamentals",
-                    "CHEM1011": "Chemistry 1A: Atoms, Molecules and Energy",
-                    "ENGG1300": "Engineering Mechanics",
-                    "SOLA1070": "Sustainable Energy",
-                    "PSYC1001": "Psychology 1A",
-                    "BABS1201": "Molecules, Cells and Genes",
+                    "PSYC1028": "Psychology of Human Centred Design",
+                    "CHEM1821": "Engineering Chemistry 1B",
                     "COMP1521": "Computer Systems Fundamentals",
-                    "ARTS2755": "Inclusive Development: Gender and Intersectionality",
-                    "COMM1120": "Collaboration and Innovation in Business",
+                    "BIOM1010": "Engineering in Medicine and Biology",
+                    "ENGG1200": "Undergraduate Special Projects",
+                    "ENGG1300": "Engineering Mechanics",
                     "BIOS1301": "Ecology, Sustainability and Environmental Science",
-                    "ENGG1100": "Grand Challenges for Engineering",
+                    "ARTS2755": "Inclusive Development: Gender and Intersectionality",
+                    "CEIC1000": "Sustainable Product Engineering and Design",
+                    "COMM1120": "Collaboration and Innovation in Business",
+                    "ENGG1400": "Engineering Infrastructure Systems",
+                    "GMAT1110": "Surveying and Geospatial Engineering",
+                    "PSYC1001": "Psychology 1A",
                     "CVEN1701": "Environmental Principles and Systems",
                     "GEOS1111": "Investigating Earth and Its Evolution",
-                    "MATH1081": "Discrete Mathematics",
-                    "ENGG1200": "Undergraduate Special Projects",
-                    "PHYS1231": "Higher Physics 1B",
-                    "MINE1010": "Mineral Resources Engineering",
-                    "ENGG1400": "Engineering Infrastructure Systems",
-                    "BIOM1010": "Engineering in Medicine and Biology",
-                    "MATS1101": "Engineering Materials and Chemistry",
-                    "CHEM1811": "Engineering Chemistry 1A",
-                    "CHEM1021": "Chemistry 1B: Elements, Compounds and Life",
-                    "CEIC1000": "Sustainable Product Engineering and Design",
-                    "PSYC1028": "Psychology of Human Centred Design",
                     "MATS1110": "Introduction to Materials for Engineering Applications",
-                    "CHEM1821": "Engineering Chemistry 1B",
+                    "CHEM1011": "Chemistry 1A: Atoms, Molecules and Energy",
+                    "COMP1531": "Software Engineering Fundamentals",
+                    "BABS1201": "Molecules, Cells and Genes",
+                    "ENGG1100": "Grand Challenges for Engineering",
+                    "MATH1081": "Discrete Mathematics",
+                    "MINE1010": "Mineral Resources Engineering",
+                    "PHYS1231": "Higher Physics 1B",
+                    "MATS1101": "Engineering Materials and Chemistry",
                     "ELEC1111": "Electrical Circuit Fundamentals",
-                    "GMAT1110": "Surveying and Geospatial Engineering"
+                    "CHEM1021": "Chemistry 1B: Elements, Compounds and Life",
+                    "CHEM1811": "Engineering Chemistry 1A",
+                    "SOLA1070": "Sustainable Energy"
                 },
                 "title": "Level 1 Prescribed Electives",
                 "credits_to_complete": 12,
@@ -171,32 +171,12 @@
             },
             {
                 "courses": {
-                    "MMAN4400": "Engineering Management",
-                    "MECH9420": "Composite Materials and Mechanics",
-                    "AERO9500": "Space Systems Architectures and Orbits",
-                    "MMAN4410": "Finite Element Methods",
-                    "MECH4900": "Mechanics of Fracture and Fatigue",
-                    "MMAN4200": "Additive Manufacturing",
-                    "MECH4305": "Fundamental and Advanced Vibration Analysis",
-                    "AERO9610": "The Space Segment",
-                    "MECH4320": "Engineering Mechanics 3",
-                    "MECH4620": "Computational Fluid Dynamics",
-                    "AERO9660": "Advanced Aerospace Propulsion"
-                },
-                "title": "Recommended Disciplinary Electives",
-                "credits_to_complete": 6,
-                "core": false,
-                "levels": [],
-                "notes": "NOTE: All disciplinary electives should be chosen from the \"recommended elective list\" and/or \"disciplinary elective list\". At least 6 UOC of disciplinary electives must be chosen from the \"recommended elective list\"."
-            },
-            {
-                "courses": {
-                    "AERO3110": "Aerospace Design 1",
-                    "AERO3410": "Aerospace Structures",
-                    "AERO3660": "Flight Performance and Propulsion",
-                    "MMAN3200": "Linear Systems and Control",
                     "AERO3630": "Aerodynamics",
-                    "DESN3000": "Strategic Design Innovation"
+                    "MMAN3200": "Linear Systems and Control",
+                    "AERO3410": "Aerospace Structures",
+                    "DESN3000": "Strategic Design Innovation",
+                    "AERO3110": "Aerospace Design 1",
+                    "AERO3660": "Flight Performance and Propulsion"
                 },
                 "title": "Level 3 Core Courses",
                 "credits_to_complete": 36,
@@ -208,39 +188,26 @@
             },
             {
                 "courses": {
-                    "AERO4110": "Aerospace Design 2",
-                    "AERO4620": "Dynamics of Aerospace Vehicles, Systems and Avionics"
-                },
-                "title": "Level 4 Core Courses",
-                "credits_to_complete": 12,
-                "core": true,
-                "levels": [
-                    4
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
                     "MATH1131 or MATH1141": [
                         "Mathematics 1A",
                         "Higher Mathematics 1A"
                     ],
-                    "PHYS1121 or PHYS1131": [
-                        "Physics 1A",
-                        "Higher Physics 1A"
-                    ],
-                    "MATH1241 or MATH1231": [
-                        "Higher Mathematics 1B",
-                        "Mathematics 1B"
-                    ],
-                    "ENGG1300": "Engineering Mechanics",
-                    "ELEC1111": "Electrical Circuit Fundamentals",
-                    "MMAN1130": "Design and Manufacturing",
-                    "DESN1000": "Introduction to Engineering Design and Innovation",
-                    "ENGG1811 or COMP1911 or COMP1511": [
+                    "COMP1511 or ENGG1811 or COMP1911": [
+                        "Programming Fundamentals",
                         "Computing for Engineers",
-                        "Computing 1A",
-                        "Programming Fundamentals"
+                        "Computing 1A"
+                    ],
+                    "PHYS1131 or PHYS1121": [
+                        "Higher Physics 1A",
+                        "Physics 1A"
+                    ],
+                    "DESN1000": "Introduction to Engineering Design and Innovation",
+                    "ELEC1111": "Electrical Circuit Fundamentals",
+                    "ENGG1300": "Engineering Mechanics",
+                    "MMAN1130": "Design and Manufacturing",
+                    "MATH1231 or MATH1241": [
+                        "Mathematics 1B",
+                        "Higher Mathematics 1B"
                     ]
                 },
                 "title": "Level 1 Core Courses",
@@ -253,49 +220,35 @@
             },
             {
                 "courses": {
-                    "MMAN4951": "Research Thesis A",
-                    "MMAN4020": "Thesis B",
-                    "MMAN4952": "Research Thesis B",
-                    "MMAN4010": "Thesis A",
-                    "MMAN4953": "Research Thesis C"
-                },
-                "title": "Thesis Courses",
-                "credits_to_complete": 12,
-                "core": false,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "COMP3331": "Computer Networks and Applications",
-                    "MANF4100": "Design and Analysis of Product-Process Systems",
-                    "MANF4611": "Process Modelling and Simulation",
-                    "MTRN9400": "Control of Robotic Systems",
-                    "MANF4430": "Reliability and Maintenance Engineering",
-                    "MECH9650": "Applied Bio and Microfluidics",
-                    "ELEC4633": "Real-Time Engineering",
-                    "MANF9472": "Production Planning and Control",
-                    "MANF6860": "Strategic Manufacturing Management",
-                    "MECH9325": "Fundamentals of Acoustics & Noise",
                     "MANF9420": "Operations and Supply Chain Management in Engineering",
-                    "MANF9400": "Industrial Management",
                     "SOLA5052": "Bioenergy and Renewable Fuels",
-                    "ENGG2600": "Engineering Vertically Integrated Project",
-                    "SOLA5056": "Sustainable Energy for Developing Countries",
-                    "ENGG3600": "Engineering Vertically Integrated Project",
-                    "ENGG4600": "Engineering Vertically Integrated Project",
-                    "ENGG4841": "Systems Engineering Fundamentals",
-                    "MTRN4231": "Robotics Project",
-                    "ENGG3060": "Rehabilitation and Assistive Technology ",
-                    "COMP3141": "Software System Design and Implementation",
-                    "MECH4880": "Refrigeration and Air Conditioning 1",
-                    "SOLA5057": "Energy Efficiency",
-                    "MECH9720": "Solar Thermal Energy Design",
-                    "ENGG3001": "Fundamentals of Humanitarian Engineering",
-                    "MECH9761": "Automobile Engine Technology",
-                    "MECH4100": "Mechanical Design 2",
                     "MECH9660": "Biofluid Dynamics and Systems",
-                    "SOLA5053": "Wind Energy Converters"
+                    "MECH9650": "Applied Bio and Microfluidics",
+                    "ENGG3001": "Fundamentals of Humanitarian Engineering",
+                    "MANF4430": "Reliability and Maintenance Engineering",
+                    "MECH9720": "Solar Thermal Energy Design",
+                    "MANF6860": "Strategic Manufacturing Management",
+                    "MANF9400": "Industrial Management",
+                    "ENGG3600": "Engineering Vertically Integrated Project",
+                    "MTRN9400": "Control of Robotic Systems",
+                    "MECH4100": "Mechanical Design 2",
+                    "MECH4880": "Refrigeration and Air Conditioning 1",
+                    "ENGG4600": "Engineering Vertically Integrated Project",
+                    "COMP3141": "Software System Design and Implementation",
+                    "MECH9761": "Automobile Engine Technology",
+                    "MANF4611": "Process Modelling and Simulation",
+                    "COMP3331": "Computer Networks and Applications",
+                    "MTRN4231": "Robotics Project",
+                    "MANF4100": "Design and Analysis of Product-Process Systems",
+                    "MANF9472": "Production Planning and Control",
+                    "ENGG2600": "Engineering Vertically Integrated Project",
+                    "ENGG4841": "Systems Engineering Fundamentals",
+                    "MECH9325": "Fundamentals of Acoustics & Noise",
+                    "ENGG3060": "Rehabilitation and Assistive Technology ",
+                    "SOLA5056": "Sustainable Energy for Developing Countries",
+                    "SOLA5057": "Energy Efficiency",
+                    "SOLA5053": "Wind Energy Converters",
+                    "ELEC4633": "Real-Time Engineering"
                 },
                 "title": "Discipline Electives",
                 "credits_to_complete": 12,
@@ -305,12 +258,39 @@
             },
             {
                 "courses": {
-                    "ENGG2500": "Fluid Mechanics for Engineers",
-                    "MMAN2700": "Thermodynamics",
+                    "MMAN4952": "Research Thesis B",
+                    "MMAN4020": "Thesis B",
+                    "MMAN4010": "Thesis A",
+                    "MMAN4953": "Research Thesis C",
+                    "MMAN4951": "Research Thesis A"
+                },
+                "title": "Thesis Courses",
+                "credits_to_complete": 12,
+                "core": false,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "AERO4620": "Dynamics of Aerospace Vehicles, Systems and Avionics",
+                    "AERO4110": "Aerospace Design 2"
+                },
+                "title": "Level 4 Core Courses",
+                "credits_to_complete": 12,
+                "core": true,
+                "levels": [
+                    4
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ENGG2400": "Mechanics of Solids 1",
                     "MATH2089": "Numerical Methods and Statistics",
                     "MATH2019": "Engineering Mathematics 2E",
-                    "ENGG2400": "Mechanics of Solids 1",
                     "DESN2000": "Engineering Design and Professional Practice",
+                    "MMAN2700": "Thermodynamics",
+                    "ENGG2500": "Fluid Mechanics for Engineers",
                     "MMAN2300": "Engineering Mechanics 2"
                 },
                 "title": "Level 2 Core Courses",
@@ -320,6 +300,26 @@
                     2
                 ],
                 "notes": ""
+            },
+            {
+                "courses": {
+                    "MECH4900": "Mechanics of Fracture and Fatigue",
+                    "MECH9420": "Composite Materials and Mechanics",
+                    "AERO9660": "Advanced Aerospace Propulsion",
+                    "MMAN4400": "Engineering Management",
+                    "MMAN4410": "Finite Element Methods",
+                    "MECH4320": "Engineering Mechanics 3",
+                    "MMAN4200": "Additive Manufacturing",
+                    "MECH4620": "Computational Fluid Dynamics",
+                    "AERO9610": "The Space Segment",
+                    "MECH4305": "Fundamental and Advanced Vibration Analysis",
+                    "AERO9500": "Space Systems Architectures and Orbits"
+                },
+                "title": "Recommended Disciplinary Electives",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [],
+                "notes": "NOTE: All disciplinary electives should be chosen from the \"recommended elective list\" and/or \"disciplinary elective list\". At least 6 UOC of disciplinary electives must be chosen from the \"recommended elective list\"."
             }
         ]
     },
@@ -1299,77 +1299,25 @@
         "code": "CEICAH",
         "course_constraints": [
             {
-                "title": "Recommended Level 1 Elective",
-                "description": "The suggested Level 1 Elective for this stream is, - CEIC1000 Product Engineering Design (6 UOC)"
-            },
-            {
                 "title": "Discipline Electives (Single Degree Mode)",
                 "description": "As a part of the CEICAH stream, students are required to select one elective from the Disciplinary Electives (Depth) list given above. Students studying a single degree in chemical engineering are required to select another two disciplinary electives, one from the Disciplinary Electives (Breadth) list and the remaining from either the Depth, Breadth, or Practice lists."
+            },
+            {
+                "title": "Recommended Level 1 Elective",
+                "description": "The suggested Level 1 Elective for this stream is, - CEIC1000 Product Engineering Design (6 UOC)"
             }
         ],
         "curriculum": [
             {
                 "courses": {
-                    "COMP1521": "Computer Systems Fundamentals",
-                    "PHYS1231": "Higher Physics 1B",
-                    "PSYC1001": "Psychology 1A",
-                    "ENGG1100": "Grand Challenges for Engineering",
-                    "COMM1120": "Collaboration and Innovation in Business",
-                    "CEIC1000": "Sustainable Product Engineering and Design",
-                    "MATS1101": "Engineering Materials and Chemistry",
-                    "BABS1201": "Molecules, Cells and Genes",
-                    "ENGG1300": "Engineering Mechanics",
-                    "GMAT1110": "Surveying and Geospatial Engineering",
-                    "MATH1081": "Discrete Mathematics",
-                    "GEOS1111": "Investigating Earth and Its Evolution",
-                    "MINE1010": "Mineral Resources Engineering",
-                    "ARTS2755": "Inclusive Development: Gender and Intersectionality",
-                    "BIOS1301": "Ecology, Sustainability and Environmental Science",
-                    "MATS1110": "Introduction to Materials for Engineering Applications",
-                    "CVEN1701": "Environmental Principles and Systems",
-                    "BIOM1010": "Engineering in Medicine and Biology",
-                    "ENGG1400": "Engineering Infrastructure Systems",
-                    "COMP1531": "Software Engineering Fundamentals",
-                    "PSYC1028": "Psychology of Human Centred Design",
-                    "SOLA1070": "Sustainable Energy",
-                    "ENGG1200": "Undergraduate Special Projects",
-                    "ELEC1111": "Electrical Circuit Fundamentals"
-                },
-                "title": "Level 1 Prescribed Electives",
-                "credits_to_complete": 6,
-                "core": false,
-                "levels": [
-                    1
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "CEIC3000": "Process Modelling and Analysis",
-                    "CEIC3004": "Process Equipment Design",
-                    "CEIC3005": "Process Plant Design",
-                    "CEIC3001": "Advanced Thermodynamics and Separation",
-                    "CEIC3007": "Chemical Engineering Lab B",
-                    "CEIC3006": "Process Dynamics and Control"
-                },
-                "title": "Level 3 Core Courses",
-                "credits_to_complete": 36,
-                "core": true,
-                "levels": [
-                    3
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ENGG2600": "Engineering Vertically Integrated Project",
-                    "ENGG4102": "Humanitarian Engineering Project",
-                    "ENGG4060": "Student Initiated Project",
-                    "ENGG4600": "Engineering Vertically Integrated Project",
-                    "CEIC4954": "Research Thesis Extension",
                     "ENGG3600": "Engineering Vertically Integrated Project",
                     "ENGG3060": "Rehabilitation and Assistive Technology ",
-                    "ENGG4103": "International Humanitarian Response"
+                    "ENGG4103": "International Humanitarian Response",
+                    "ENGG4600": "Engineering Vertically Integrated Project",
+                    "CEIC4954": "Research Thesis Extension",
+                    "ENGG2600": "Engineering Vertically Integrated Project",
+                    "ENGG4102": "Humanitarian Engineering Project",
+                    "ENGG4060": "Student Initiated Project"
                 },
                 "title": "Practice Electives",
                 "credits_to_complete": 2,
@@ -1380,10 +1328,10 @@
             {
                 "courses": {
                     "CEIC4001": "Process Design Project",
-                    "CEIC4951": "Research Thesis A",
                     "CEIC4953": "Research Thesis C",
-                    "CEIC4000": "Environment and Sustainability",
-                    "CEIC4952": "Research Thesis B"
+                    "CEIC4951": "Research Thesis A",
+                    "CEIC4952": "Research Thesis B",
+                    "CEIC4000": "Environment and Sustainability"
                 },
                 "title": "Level 4 Core Courses",
                 "credits_to_complete": 30,
@@ -1395,17 +1343,85 @@
             },
             {
                 "courses": {
-                    "CEIC2001": "Fluid and Particle Mechanics",
-                    "CEIC2000": "Material and Energy Systems",
-                    "MATH2089": "Numerical Methods and Statistics",
-                    "CEIC2007": "Chemical Engineering Lab A",
-                    "CEIC2005": "Chemical Reaction Engineering",
-                    "CEIC2002": "Heat and Mass Transfer",
-                    "DESN2000": "Engineering Design and Professional Practice",
+                    "COMP1531": "Software Engineering Fundamentals",
+                    "COMM1120": "Collaboration and Innovation in Business",
+                    "BIOS1301": "Ecology, Sustainability and Environmental Science",
+                    "MATH1081": "Discrete Mathematics",
+                    "BABS1201": "Molecules, Cells and Genes",
+                    "ENGG1300": "Engineering Mechanics",
+                    "PSYC1001": "Psychology 1A",
+                    "PSYC1028": "Psychology of Human Centred Design",
+                    "ENGG1200": "Undergraduate Special Projects",
+                    "ENGG1100": "Grand Challenges for Engineering",
+                    "COMP1521": "Computer Systems Fundamentals",
+                    "BIOM1010": "Engineering in Medicine and Biology",
+                    "GEOS1111": "Investigating Earth and Its Evolution",
+                    "MATS1101": "Engineering Materials and Chemistry",
+                    "ENGG1400": "Engineering Infrastructure Systems",
+                    "MATS1110": "Introduction to Materials for Engineering Applications",
+                    "PHYS1231": "Higher Physics 1B",
+                    "ELEC1111": "Electrical Circuit Fundamentals",
+                    "SOLA1070": "Sustainable Energy",
+                    "CEIC1000": "Sustainable Product Engineering and Design",
+                    "ARTS2755": "Inclusive Development: Gender and Intersectionality",
+                    "CVEN1701": "Environmental Principles and Systems",
+                    "GMAT1110": "Surveying and Geospatial Engineering",
+                    "MINE1010": "Mineral Resources Engineering"
+                },
+                "title": "Level 1 Prescribed Electives",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [
+                    1
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "CHEN6703": "Advanced Particle Systems Engineering",
+                    "CEIC8102": "Advanced Process Control",
+                    "CEIC6004": "Advanced Polymers",
+                    "CEIC6711": "Complex Fluids Microstructure and Rheology",
+                    "CHEN6706": "Advanced Transport Phenomena",
+                    "CEIC6789": "Data-driven Decision Making in Chemical Engineering and Food Science",
+                    "CHEN6701": "Advanced Reaction Engineering"
+                },
+                "title": "Discipline (Depth) Electives",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "CEIC3000": "Process Modelling and Analysis",
+                    "CEIC3001": "Advanced Thermodynamics and Separation",
+                    "CEIC3007": "Chemical Engineering Lab B",
+                    "CEIC3005": "Process Plant Design",
+                    "CEIC3006": "Process Dynamics and Control",
+                    "CEIC3004": "Process Equipment Design"
+                },
+                "title": "Level 3 Core Courses",
+                "credits_to_complete": 36,
+                "core": true,
+                "levels": [
+                    3
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
                     "MATH2018 or MATH2019": [
                         "Engineering Mathematics 2D",
                         "Engineering Mathematics 2E"
-                    ]
+                    ],
+                    "CEIC2000": "Material and Energy Systems",
+                    "DESN2000": "Engineering Design and Professional Practice",
+                    "CEIC2001": "Fluid and Particle Mechanics",
+                    "CEIC2005": "Chemical Reaction Engineering",
+                    "MATH2089": "Numerical Methods and Statistics",
+                    "CEIC2002": "Heat and Mass Transfer",
+                    "CEIC2007": "Chemical Engineering Lab A"
                 },
                 "title": "Level 2 Core Courses",
                 "credits_to_complete": 48,
@@ -1417,59 +1433,22 @@
             },
             {
                 "courses": {
-                    "POLY3000": "Polymer Science",
-                    "CEIC6712": "Pharmaceutical Design and Engineering",
-                    "FOOD8450": "Advanced Food Engineering",
-                    "GSOE9111": "Energy Storage",
-                    "CEIC6005": "Fuel and Energy",
-                    "FOOD3010": "Food Products and Ingredients Technology",
-                    "ELEC4445": "Entrepreneurial Engineering",
-                    "CHEM2041": "Analytical Chemistry: Essential Methods",
-                    "ENGG3001": "Fundamentals of Humanitarian Engineering",
-                    "CEIC8341": "Membrane Processes",
-                    "CEIC8204": "Topics in Business Management in Chemical Engineering",
-                    "CEIC8330": "Process Engineering in the Petroleum Industry"
-                },
-                "title": "Breadth Electives",
-                "credits_to_complete": 12,
-                "core": false,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "CHEN6706": "Advanced Transport Phenomena",
-                    "CEIC8102": "Advanced Process Control",
-                    "CHEN6701": "Advanced Reaction Engineering",
-                    "CEIC6711": "Complex Fluids Microstructure and Rheology",
-                    "CEIC6789": "Data-driven Decision Making in Chemical Engineering and Food Science",
-                    "CEIC6004": "Advanced Polymers",
-                    "CHEN6703": "Advanced Particle Systems Engineering"
-                },
-                "title": "Discipline (Depth) Electives",
-                "credits_to_complete": 6,
-                "core": false,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "CHEM1811": "Engineering Chemistry 1A",
-                    "DESN1000": "Introduction to Engineering Design and Innovation",
-                    "ENGG1811": "Computing for Engineers",
-                    "CHEM1821": "Engineering Chemistry 1B",
-                    "MATH1141 or MATH1131": [
-                        "Higher Mathematics 1A",
-                        "Mathematics 1A"
+                    "MATH1131 or MATH1141": [
+                        "Mathematics 1A",
+                        "Higher Mathematics 1A"
+                    ],
+                    "MATH1231 or MATH1241": [
+                        "Mathematics 1B",
+                        "Higher Mathematics 1B"
                     ],
                     "PHYS1131 or PHYS1121": [
                         "Higher Physics 1A",
                         "Physics 1A"
                     ],
-                    "MATH1231 or MATH1241": [
-                        "Mathematics 1B",
-                        "Higher Mathematics 1B"
-                    ]
+                    "DESN1000": "Introduction to Engineering Design and Innovation",
+                    "CHEM1811": "Engineering Chemistry 1A",
+                    "ENGG1811": "Computing for Engineers",
+                    "CHEM1821": "Engineering Chemistry 1B"
                 },
                 "title": "Level 1 Core Courses",
                 "credits_to_complete": 42,
@@ -1477,6 +1456,27 @@
                 "levels": [
                     1
                 ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "CEIC6005": "Fuel and Energy",
+                    "CEIC6712": "Pharmaceutical Design and Engineering",
+                    "FOOD3010": "Food Products and Ingredients Technology",
+                    "GSOE9111": "Energy Storage",
+                    "ELEC4445": "Entrepreneurial Engineering",
+                    "CHEM2041": "Analytical Chemistry: Essential Methods",
+                    "ENGG3001": "Fundamentals of Humanitarian Engineering",
+                    "POLY3000": "Polymer Science",
+                    "CEIC8341": "Membrane Processes",
+                    "FOOD8450": "Advanced Food Engineering",
+                    "CEIC8330": "Process Engineering in the Petroleum Industry",
+                    "CEIC8204": "Topics in Business Management in Chemical Engineering"
+                },
+                "title": "Breadth Electives",
+                "credits_to_complete": 12,
+                "core": false,
+                "levels": [],
                 "notes": ""
             }
         ]
@@ -1493,117 +1493,8 @@
         "curriculum": [
             {
                 "courses": {
-                    "MATH1231 or MATH1241": [
-                        "Mathematics 1B",
-                        "Higher Mathematics 1B"
-                    ],
-                    "PHYS1121 or PHYS1131": [
-                        "Physics 1A",
-                        "Higher Physics 1A"
-                    ],
-                    "CHEM1811": "Engineering Chemistry 1A",
-                    "CHEM1821": "Engineering Chemistry 1B",
-                    "DESN1000": "Introduction to Engineering Design and Innovation",
-                    "MATH1141 or MATH1131": [
-                        "Higher Mathematics 1A",
-                        "Mathematics 1A"
-                    ],
-                    "COMP1911 or ENGG1811 or COMP1511": [
-                        "Computing 1A",
-                        "Computing for Engineers",
-                        "Programming Fundamentals"
-                    ]
-                },
-                "title": "Level 1 Core Courses",
-                "credits_to_complete": 42,
-                "core": true,
-                "levels": [
-                    1
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ENGG1300": "Engineering Mechanics",
-                    "GEOS1111": "Investigating Earth and Its Evolution",
-                    "CVEN1701": "Environmental Principles and Systems",
-                    "COMM1120": "Collaboration and Innovation in Business",
-                    "ARTS2755": "Inclusive Development: Gender and Intersectionality",
-                    "MATS1110": "Introduction to Materials for Engineering Applications",
-                    "GMAT1110": "Surveying and Geospatial Engineering",
-                    "SOLA1070": "Sustainable Energy",
-                    "ENGG1100": "Grand Challenges for Engineering",
-                    "ELEC1111": "Electrical Circuit Fundamentals",
-                    "MINE1010": "Mineral Resources Engineering",
-                    "MATS1101": "Engineering Materials and Chemistry",
-                    "PSYC1001": "Psychology 1A",
-                    "BIOS1301": "Ecology, Sustainability and Environmental Science",
-                    "PSYC1028": "Psychology of Human Centred Design",
-                    "BABS1201": "Molecules, Cells and Genes",
-                    "CEIC1000": "Sustainable Product Engineering and Design",
-                    "ENGG1200": "Undergraduate Special Projects",
-                    "ENGG1400": "Engineering Infrastructure Systems",
-                    "COMP1521": "Computer Systems Fundamentals",
-                    "MATH1081": "Discrete Mathematics",
-                    "BIOM1010": "Engineering in Medicine and Biology",
-                    "COMP1531": "Software Engineering Fundamentals",
-                    "PHYS1231": "Higher Physics 1B"
-                },
-                "title": "Level 1 Electives",
-                "credits_to_complete": 6,
-                "core": false,
-                "levels": [
-                    1
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "MATH2019 or MATH2018": [
-                        "Engineering Mathematics 2E",
-                        "Engineering Mathematics 2D"
-                    ],
-                    "CHEM2021": "Organic Chemistry: Mechanisms and Biomolecules",
-                    "CEIC2005": "Chemical Reaction Engineering",
-                    "CHEM2041": "Analytical Chemistry: Essential Methods",
-                    "CEIC2000": "Material and Energy Systems",
-                    "CEIC2002": "Heat and Mass Transfer",
-                    "MATH2089": "Numerical Methods and Statistics",
-                    "CHEM2031": "Inorganic Chemistry: The Elements",
-                    "DESN2000": "Engineering Design and Professional Practice",
-                    "CEIC2001": "Fluid and Particle Mechanics"
-                },
-                "title": "Level 2 Core Courses",
-                "credits_to_complete": 60,
-                "core": true,
-                "levels": [
-                    2
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "CEIC6711": "Complex Fluids Microstructure and Rheology",
-                    "CEIC4008": "Product Design Project Thesis B",
-                    "CEIC4000": "Environment and Sustainability",
-                    "CEIC4007": "Product Design Project Thesis A",
-                    "CEIC8204 or ELEC4445": [
-                        "Topics in Business Management in Chemical Engineering",
-                        "Entrepreneurial Engineering"
-                    ]
-                },
-                "title": "Level 4 Core Courses",
-                "credits_to_complete": 30,
-                "core": true,
-                "levels": [
-                    4
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "CHEM3021": "Organic Chemistry: Modern Synthetic Strategies",
                     "CEIC3001": "Advanced Thermodynamics and Separation",
+                    "CHEM3021": "Organic Chemistry: Modern Synthetic Strategies",
                     "POLY3000": "Polymer Science"
                 },
                 "title": "Level 3 Core Courses",
@@ -1616,32 +1507,141 @@
             },
             {
                 "courses": {
-                    "ENGG4600": "Engineering Vertically Integrated Project",
-                    "ENGG3600": "Engineering Vertically Integrated Project",
-                    "ENGG3001": "Fundamentals of Humanitarian Engineering",
-                    "CEIC8330": "Process Engineering in the Petroleum Industry",
-                    "CEIC4953": "Research Thesis C",
-                    "CEIC8341": "Membrane Processes",
-                    "GSOE9111": "Energy Storage",
-                    "CHEN6703": "Advanced Particle Systems Engineering",
-                    "CHEN6701": "Advanced Reaction Engineering",
+                    "MATH1231 or MATH1241": [
+                        "Mathematics 1B",
+                        "Higher Mathematics 1B"
+                    ],
+                    "MATH1131 or MATH1141": [
+                        "Mathematics 1A",
+                        "Higher Mathematics 1A"
+                    ],
+                    "ENGG1811 or COMP1911 or COMP1511": [
+                        "Computing for Engineers",
+                        "Computing 1A",
+                        "Programming Fundamentals"
+                    ],
+                    "PHYS1121 or PHYS1131": [
+                        "Physics 1A",
+                        "Higher Physics 1A"
+                    ],
+                    "DESN1000": "Introduction to Engineering Design and Innovation",
+                    "CHEM1821": "Engineering Chemistry 1B",
+                    "CHEM1811": "Engineering Chemistry 1A"
+                },
+                "title": "Level 1 Core Courses",
+                "credits_to_complete": 42,
+                "core": true,
+                "levels": [
+                    1
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "CEIC8204 or ELEC4445": [
+                        "Topics in Business Management in Chemical Engineering",
+                        "Entrepreneurial Engineering"
+                    ],
+                    "CEIC6711": "Complex Fluids Microstructure and Rheology",
+                    "CEIC4000": "Environment and Sustainability",
+                    "CEIC4007": "Product Design Project Thesis A",
+                    "CEIC4008": "Product Design Project Thesis B"
+                },
+                "title": "Level 4 Core Courses",
+                "credits_to_complete": 30,
+                "core": true,
+                "levels": [
+                    4
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "CEIC2000": "Material and Energy Systems",
+                    "MATH2089": "Numerical Methods and Statistics",
+                    "CHEM2041": "Analytical Chemistry: Essential Methods",
+                    "DESN2000": "Engineering Design and Professional Practice",
+                    "CHEM2021": "Organic Chemistry: Mechanisms and Biomolecules",
+                    "CEIC2002": "Heat and Mass Transfer",
+                    "CEIC2005": "Chemical Reaction Engineering",
+                    "CEIC2001": "Fluid and Particle Mechanics",
+                    "CHEM2031": "Inorganic Chemistry: The Elements",
+                    "MATH2019 or MATH2018": [
+                        "Engineering Mathematics 2E",
+                        "Engineering Mathematics 2D"
+                    ]
+                },
+                "title": "Level 2 Core Courses",
+                "credits_to_complete": 60,
+                "core": true,
+                "levels": [
+                    2
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
                     "CEIC6005": "Fuel and Energy",
-                    "ENGG4102": "Humanitarian Engineering Project",
-                    "ENGG2600": "Engineering Vertically Integrated Project",
-                    "FOOD8450": "Advanced Food Engineering",
-                    "CEIC6712": "Pharmaceutical Design and Engineering",
-                    "ENGG4060": "Student Initiated Project",
+                    "CEIC8341": "Membrane Processes",
+                    "ENGG3001": "Fundamentals of Humanitarian Engineering",
+                    "CEIC6789": "Data-driven Decision Making in Chemical Engineering and Food Science",
+                    "CHEN6703": "Advanced Particle Systems Engineering",
                     "CEIC4954": "Research Thesis Extension",
+                    "GSOE9111": "Energy Storage",
+                    "ENGG2600": "Engineering Vertically Integrated Project",
+                    "ENGG3600": "Engineering Vertically Integrated Project",
+                    "ENGG4060": "Student Initiated Project",
+                    "CEIC6712": "Pharmaceutical Design and Engineering",
                     "CEIC4952": "Research Thesis B",
-                    "CEIC4951": "Research Thesis A",
-                    "CEIC8105": "Advanced Polymer Science and Research",
+                    "ENGG4600": "Engineering Vertically Integrated Project",
                     "ENGG3060": "Rehabilitation and Assistive Technology ",
-                    "CEIC6789": "Data-driven Decision Making in Chemical Engineering and Food Science"
+                    "CHEN6701": "Advanced Reaction Engineering",
+                    "CEIC8330": "Process Engineering in the Petroleum Industry",
+                    "CEIC8105": "Advanced Polymer Science and Research",
+                    "CEIC4951": "Research Thesis A",
+                    "ENGG4102": "Humanitarian Engineering Project",
+                    "CEIC4953": "Research Thesis C",
+                    "FOOD8450": "Advanced Food Engineering"
                 },
                 "title": "Discipline Electives",
                 "credits_to_complete": 12,
                 "core": false,
                 "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "BABS1201": "Molecules, Cells and Genes",
+                    "MINE1010": "Mineral Resources Engineering",
+                    "ARTS2755": "Inclusive Development: Gender and Intersectionality",
+                    "GMAT1110": "Surveying and Geospatial Engineering",
+                    "COMP1531": "Software Engineering Fundamentals",
+                    "BIOS1301": "Ecology, Sustainability and Environmental Science",
+                    "CEIC1000": "Sustainable Product Engineering and Design",
+                    "ENGG1200": "Undergraduate Special Projects",
+                    "ENGG1400": "Engineering Infrastructure Systems",
+                    "PSYC1001": "Psychology 1A",
+                    "SOLA1070": "Sustainable Energy",
+                    "COMP1521": "Computer Systems Fundamentals",
+                    "MATH1081": "Discrete Mathematics",
+                    "GEOS1111": "Investigating Earth and Its Evolution",
+                    "PHYS1231": "Higher Physics 1B",
+                    "PSYC1028": "Psychology of Human Centred Design",
+                    "MATS1110": "Introduction to Materials for Engineering Applications",
+                    "ENGG1100": "Grand Challenges for Engineering",
+                    "COMM1120": "Collaboration and Innovation in Business",
+                    "ENGG1300": "Engineering Mechanics",
+                    "BIOM1010": "Engineering in Medicine and Biology",
+                    "CVEN1701": "Environmental Principles and Systems",
+                    "MATS1101": "Engineering Materials and Chemistry",
+                    "ELEC1111": "Electrical Circuit Fundamentals"
+                },
+                "title": "Level 1 Electives",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [
+                    1
+                ],
                 "notes": ""
             }
         ]
@@ -2188,38 +2188,9 @@
         "curriculum": [
             {
                 "courses": {
-                    "MATH1241 or MATH1231": [
-                        "Higher Mathematics 1B",
-                        "Mathematics 1B"
-                    ],
-                    "COMP1521": "Computer Systems Fundamentals",
-                    "COMP2511": "Object-Oriented Design & Programming",
-                    "COMP3900": "Computer Science Project",
-                    "MATH1081": "Discrete Mathematics",
-                    "COMP1531": "Software Engineering Fundamentals",
-                    "COMP1511": "Programming Fundamentals",
-                    "COMP2521": "Data Structures and Algorithms",
-                    "COMP4920": "Professional Issues and Ethics in Information Technology",
-                    "COMP3821 or COMP3121": [
-                        "Extended Algorithms and Programming Techniques",
-                        "Algorithms and Programming Techniques"
-                    ],
-                    "MATH1141 or MATH1131": [
-                        "Higher Mathematics 1A",
-                        "Mathematics 1A"
-                    ]
-                },
-                "title": "Core Courses",
-                "credits_to_complete": 66,
-                "core": true,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ENGG3600": "Engineering Vertically Integrated Project",
                     "COMP2041": "Software Construction: Techniques and Tools",
                     "ENGG2600": "Engineering Vertically Integrated Project",
+                    "ENGG3600": "Engineering Vertically Integrated Project",
                     "ENGG4600": "Engineering Vertically Integrated Project",
                     "COMP3": "any level 3 Computer Science course",
                     "COMP4": "any level 4 Computer Science course",
@@ -2231,6 +2202,35 @@
                 "core": false,
                 "levels": [],
                 "notes": "NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. 2 UOC courses are run over consecutive terms for a final total of 6 UOC."
+            },
+            {
+                "courses": {
+                    "MATH1241 or MATH1231": [
+                        "Higher Mathematics 1B",
+                        "Mathematics 1B"
+                    ],
+                    "COMP3121 or COMP3821": [
+                        "Algorithms and Programming Techniques",
+                        "Extended Algorithms and Programming Techniques"
+                    ],
+                    "COMP2521": "Data Structures and Algorithms",
+                    "COMP1521": "Computer Systems Fundamentals",
+                    "MATH1081": "Discrete Mathematics",
+                    "COMP1531": "Software Engineering Fundamentals",
+                    "COMP3900": "Computer Science Project",
+                    "COMP2511": "Object-Oriented Design & Programming",
+                    "COMP1511": "Programming Fundamentals",
+                    "COMP4920": "Professional Issues and Ethics in Information Technology",
+                    "MATH1131 or MATH1141": [
+                        "Mathematics 1A",
+                        "Higher Mathematics 1A"
+                    ]
+                },
+                "title": "Core Courses",
+                "credits_to_complete": 66,
+                "core": true,
+                "levels": [],
+                "notes": ""
             }
         ]
     },
@@ -2398,9 +2398,9 @@
             {
                 "courses": {
                     "ENGG2600": "Engineering Vertically Integrated Project",
+                    "COMP2041": "Software Construction: Techniques and Tools",
                     "ENGG4600": "Engineering Vertically Integrated Project",
                     "ENGG3600": "Engineering Vertically Integrated Project",
-                    "COMP2041": "Software Construction: Techniques and Tools",
                     "COMP3": "any level 3 Computer Science course",
                     "COMP4": "any level 4 Computer Science course",
                     "COMP6": "any level 6 Computer Science course",
@@ -2414,22 +2414,22 @@
             },
             {
                 "courses": {
-                    "COMP1531": "Software Engineering Fundamentals",
-                    "COMP3311": "Database Systems",
-                    "COMP4920": "Professional Issues and Ethics in Information Technology",
-                    "COMP1511": "Programming Fundamentals",
-                    "COMP2521": "Data Structures and Algorithms",
-                    "COMP2511": "Object-Oriented Design & Programming",
-                    "COMP3900": "Computer Science Project",
                     "MATH1081": "Discrete Mathematics",
                     "COMP1521": "Computer Systems Fundamentals",
-                    "MATH1231 or MATH1241": [
-                        "Mathematics 1B",
-                        "Higher Mathematics 1B"
-                    ],
+                    "COMP3311": "Database Systems",
+                    "COMP3900": "Computer Science Project",
+                    "COMP2521": "Data Structures and Algorithms",
+                    "COMP4920": "Professional Issues and Ethics in Information Technology",
+                    "COMP1511": "Programming Fundamentals",
+                    "COMP1531": "Software Engineering Fundamentals",
+                    "COMP2511": "Object-Oriented Design & Programming",
                     "MATH1131 or MATH1141": [
                         "Mathematics 1A",
                         "Higher Mathematics 1A"
+                    ],
+                    "MATH1231 or MATH1241": [
+                        "Mathematics 1B",
+                        "Higher Mathematics 1B"
                     ],
                     "COMP3121 or COMP3821": [
                         "Algorithms and Programming Techniques",
@@ -2444,11 +2444,11 @@
             },
             {
                 "courses": {
+                    "COMP6714": "Information Retrieval and Web Search",
+                    "COMP9319": "Web Data Compression and Search",
                     "COMP9313": "Big Data Management",
                     "COMP9318": "Data Warehousing and Data Mining",
-                    "COMP6714": "Information Retrieval and Web Search",
-                    "COMP9315": "Database Systems Implementation",
-                    "COMP9319": "Web Data Compression and Search"
+                    "COMP9315": "Database Systems Implementation"
                 },
                 "title": "Database Systems Prescribed Electives",
                 "credits_to_complete": 18,
@@ -2470,27 +2470,27 @@
         "curriculum": [
             {
                 "courses": {
-                    "MATH1141 or MATH1131": [
-                        "Higher Mathematics 1A",
-                        "Mathematics 1A"
+                    "MATH1131 or MATH1141": [
+                        "Mathematics 1A",
+                        "Higher Mathematics 1A"
+                    ],
+                    "MATH1231 or MATH1241": [
+                        "Mathematics 1B",
+                        "Higher Mathematics 1B"
                     ],
                     "COMP3821 or COMP3121": [
                         "Extended Algorithms and Programming Techniques",
                         "Algorithms and Programming Techniques"
                     ],
                     "COMP1511": "Programming Fundamentals",
+                    "COMP1521": "Computer Systems Fundamentals",
+                    "COMP2511": "Object-Oriented Design & Programming",
                     "MATH1081": "Discrete Mathematics",
                     "COMP1531": "Software Engineering Fundamentals",
                     "COMP2521": "Data Structures and Algorithms",
-                    "COMP3900": "Computer Science Project",
-                    "COMP1521": "Computer Systems Fundamentals",
-                    "COMP2511": "Object-Oriented Design & Programming",
                     "COMP3311": "Database Systems",
-                    "COMP4920": "Professional Issues and Ethics in Information Technology",
-                    "MATH1241 or MATH1231": [
-                        "Higher Mathematics 1B",
-                        "Mathematics 1B"
-                    ]
+                    "COMP3900": "Computer Science Project",
+                    "COMP4920": "Professional Issues and Ethics in Information Technology"
                 },
                 "title": "Core Courses",
                 "credits_to_complete": 72,
@@ -2500,23 +2500,10 @@
             },
             {
                 "courses": {
-                    "COMP3511": "Human Computer Interaction",
-                    "COMP9322": "Software Service Design and Engineering",
-                    "COMP9321": "Data Services Engineering",
-                    "COMP9323": "Software as a Service Project"
-                },
-                "title": "Discipline Electives",
-                "credits_to_complete": 18,
-                "core": false,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ENGG3600": "Engineering Vertically Integrated Project",
-                    "COMP2041": "Software Construction: Techniques and Tools",
-                    "ENGG4600": "Engineering Vertically Integrated Project",
                     "ENGG2600": "Engineering Vertically Integrated Project",
+                    "ENGG3600": "Engineering Vertically Integrated Project",
+                    "ENGG4600": "Engineering Vertically Integrated Project",
+                    "COMP2041": "Software Construction: Techniques and Tools",
                     "COMP3": "any level 3 Computer Science course",
                     "COMP4": "any level 4 Computer Science course",
                     "COMP6": "any level 6 Computer Science course",
@@ -2527,6 +2514,19 @@
                 "core": false,
                 "levels": [],
                 "notes": "NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. 2 UOC courses are run over consecutive terms for a final total of 6 UOC."
+            },
+            {
+                "courses": {
+                    "COMP3511": "Human Computer Interaction",
+                    "COMP9321": "Data Services Engineering",
+                    "COMP9322": "Software Service Design and Engineering",
+                    "COMP9323": "Software as a Service Project"
+                },
+                "title": "Discipline Electives",
+                "credits_to_complete": 18,
+                "core": false,
+                "levels": [],
+                "notes": ""
             }
         ]
     },
@@ -2542,11 +2542,28 @@
         "curriculum": [
             {
                 "courses": {
-                    "COMP9418": "Advanced Topics in Statistical Machine Learning",
+                    "ENGG2600": "Engineering Vertically Integrated Project",
+                    "COMP2041": "Software Construction: Techniques and Tools",
+                    "ENGG4600": "Engineering Vertically Integrated Project",
+                    "ENGG3600": "Engineering Vertically Integrated Project",
+                    "COMP3": "any level 3 Computer Science course",
+                    "COMP4": "any level 4 Computer Science course",
+                    "COMP6": "any level 6 Computer Science course",
+                    "COMP9": "any level 9 Computer Science course"
+                },
+                "title": "Computing Electives",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [],
+                "notes": "NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. 2 UOC courses are run over consecutive terms for a final total of 6 UOC."
+            },
+            {
+                "courses": {
                     "COMP9517": "Computer Vision",
-                    "COMP3431": "Robotic Software Architecture",
                     "COMP9318": "Data Warehousing and Data Mining",
+                    "COMP3431": "Robotic Software Architecture",
                     "COMP9444": "Neural Networks and Deep Learning",
+                    "COMP9418": "Advanced Topics in Statistical Machine Learning",
                     "COMP4418": "Knowledge Representation and Reasoning",
                     "COMP9417": "Machine Learning and Data Mining"
                 },
@@ -2558,26 +2575,26 @@
             },
             {
                 "courses": {
-                    "COMP1511": "Programming Fundamentals",
-                    "MATH1081": "Discrete Mathematics",
-                    "COMP1531": "Software Engineering Fundamentals",
-                    "COMP2521": "Data Structures and Algorithms",
-                    "COMP3900": "Computer Science Project",
-                    "COMP1521": "Computer Systems Fundamentals",
-                    "COMP2511": "Object-Oriented Design & Programming",
-                    "COMP3411": "Artificial Intelligence",
-                    "COMP4920": "Professional Issues and Ethics in Information Technology",
+                    "COMP3121 or COMP3821": [
+                        "Algorithms and Programming Techniques",
+                        "Extended Algorithms and Programming Techniques"
+                    ],
                     "MATH1241 or MATH1231": [
                         "Higher Mathematics 1B",
                         "Mathematics 1B"
                     ],
+                    "COMP2511": "Object-Oriented Design & Programming",
+                    "MATH1081": "Discrete Mathematics",
+                    "COMP3900": "Computer Science Project",
+                    "COMP1531": "Software Engineering Fundamentals",
+                    "COMP3411": "Artificial Intelligence",
+                    "COMP4920": "Professional Issues and Ethics in Information Technology",
+                    "COMP1521": "Computer Systems Fundamentals",
+                    "COMP1511": "Programming Fundamentals",
+                    "COMP2521": "Data Structures and Algorithms",
                     "MATH1141 or MATH1131": [
                         "Higher Mathematics 1A",
                         "Mathematics 1A"
-                    ],
-                    "COMP3821 or COMP3121": [
-                        "Extended Algorithms and Programming Techniques",
-                        "Algorithms and Programming Techniques"
                     ]
                 },
                 "title": "Core Courses",
@@ -2585,23 +2602,6 @@
                 "core": true,
                 "levels": [],
                 "notes": ""
-            },
-            {
-                "courses": {
-                    "ENGG3600": "Engineering Vertically Integrated Project",
-                    "COMP2041": "Software Construction: Techniques and Tools",
-                    "ENGG4600": "Engineering Vertically Integrated Project",
-                    "ENGG2600": "Engineering Vertically Integrated Project",
-                    "COMP3": "any level 3 Computer Science course",
-                    "COMP4": "any level 4 Computer Science course",
-                    "COMP6": "any level 6 Computer Science course",
-                    "COMP9": "any level 9 Computer Science course"
-                },
-                "title": "Computing Electives",
-                "credits_to_complete": 6,
-                "core": false,
-                "levels": [],
-                "notes": "NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. 2 UOC courses are run over consecutive terms for a final total of 6 UOC."
             }
         ]
     },
@@ -2621,20 +2621,20 @@
                         "Higher Mathematics 1A",
                         "Mathematics 1A"
                     ],
-                    "MATH1241 or MATH1231": [
-                        "Higher Mathematics 1B",
-                        "Mathematics 1B"
-                    ],
-                    "COMP3121": "Algorithms and Programming Techniques",
-                    "COMP3900": "Computer Science Project",
-                    "COMP1521": "Computer Systems Fundamentals",
                     "MATH1081": "Discrete Mathematics",
                     "COMP2511": "Object-Oriented Design & Programming",
-                    "COMP3161": "Concepts of Programming Languages",
                     "COMP1511": "Programming Fundamentals",
-                    "COMP4920": "Professional Issues and Ethics in Information Technology",
                     "COMP1531": "Software Engineering Fundamentals",
-                    "COMP2521": "Data Structures and Algorithms"
+                    "COMP3161": "Concepts of Programming Languages",
+                    "COMP4920": "Professional Issues and Ethics in Information Technology",
+                    "COMP3121": "Algorithms and Programming Techniques",
+                    "COMP2521": "Data Structures and Algorithms",
+                    "COMP3900": "Computer Science Project",
+                    "COMP1521": "Computer Systems Fundamentals",
+                    "MATH1231 or MATH1241": [
+                        "Mathematics 1B",
+                        "Higher Mathematics 1B"
+                    ]
                 },
                 "title": "Core Course",
                 "credits_to_complete": 72,
@@ -2644,10 +2644,10 @@
             },
             {
                 "courses": {
-                    "COMP3141": "Software System Design and Implementation",
-                    "COMP6771": "Advanced C++ Programming",
                     "COMP3151": "Foundations of Concurrency",
-                    "COMP3131": "Programming Languages and Compilers"
+                    "COMP3141": "Software System Design and Implementation",
+                    "COMP3131": "Programming Languages and Compilers",
+                    "COMP6771": "Advanced C++ Programming"
                 },
                 "title": "Discipline Electives",
                 "credits_to_complete": 18,
@@ -2686,8 +2686,38 @@
         "curriculum": [
             {
                 "courses": {
-                    "COMP2041": "Software Construction: Techniques and Tools",
+                    "MATH1141 or MATH1131": [
+                        "Higher Mathematics 1A",
+                        "Mathematics 1A"
+                    ],
+                    "COMP1531": "Software Engineering Fundamentals",
+                    "MATH1081": "Discrete Mathematics",
+                    "COMP2511": "Object-Oriented Design & Programming",
+                    "COMP1521": "Computer Systems Fundamentals",
+                    "COMP2521": "Data Structures and Algorithms",
+                    "COMP3331": "Computer Networks and Applications",
+                    "COMP4920": "Professional Issues and Ethics in Information Technology",
+                    "COMP3900": "Computer Science Project",
+                    "COMP1511": "Programming Fundamentals",
+                    "MATH1231 or MATH1241": [
+                        "Mathematics 1B",
+                        "Higher Mathematics 1B"
+                    ],
+                    "COMP3121 or COMP3821": [
+                        "Algorithms and Programming Techniques",
+                        "Extended Algorithms and Programming Techniques"
+                    ]
+                },
+                "title": "Core Courses",
+                "credits_to_complete": 72,
+                "core": true,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
                     "ENGG3600": "Engineering Vertically Integrated Project",
+                    "COMP2041": "Software Construction: Techniques and Tools",
                     "ENGG2600": "Engineering Vertically Integrated Project",
                     "ENGG4600": "Engineering Vertically Integrated Project",
                     "COMP3": "any level 3 Computer Science course",
@@ -2703,41 +2733,11 @@
             },
             {
                 "courses": {
-                    "COMP1531": "Software Engineering Fundamentals",
-                    "COMP2521": "Data Structures and Algorithms",
-                    "COMP3900": "Computer Science Project",
-                    "COMP1511": "Programming Fundamentals",
-                    "MATH1081": "Discrete Mathematics",
-                    "COMP2511": "Object-Oriented Design & Programming",
-                    "COMP3331": "Computer Networks and Applications",
-                    "COMP4920": "Professional Issues and Ethics in Information Technology",
-                    "COMP1521": "Computer Systems Fundamentals",
-                    "MATH1241 or MATH1231": [
-                        "Higher Mathematics 1B",
-                        "Mathematics 1B"
-                    ],
-                    "MATH1141 or MATH1131": [
-                        "Higher Mathematics 1A",
-                        "Mathematics 1A"
-                    ],
-                    "COMP3821 or COMP3121": [
-                        "Extended Algorithms and Programming Techniques",
-                        "Algorithms and Programming Techniques"
-                    ]
-                },
-                "title": "Core Courses",
-                "credits_to_complete": 72,
-                "core": true,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
                     "COMP4337": "Securing Fixed and Wireless Networks",
-                    "COMP9332": "Network Routing and Switching",
-                    "COMP4336": "Mobile Data Networking",
                     "COMP6733": "Internet of Things Experimental Design Studio",
-                    "COMP9334": "Capacity Planning of Computer Systems and Networks"
+                    "COMP9334": "Capacity Planning of Computer Systems and Networks",
+                    "COMP9332": "Network Routing and Switching",
+                    "COMP4336": "Mobile Data Networking"
                 },
                 "title": "Discipline Electives",
                 "credits_to_complete": 18,
@@ -2759,43 +2759,26 @@
         "curriculum": [
             {
                 "courses": {
-                    "ENGG4600": "Engineering Vertically Integrated Project",
-                    "ENGG2600": "Engineering Vertically Integrated Project",
-                    "ENGG3600": "Engineering Vertically Integrated Project",
-                    "COMP2041": "Software Construction: Techniques and Tools",
-                    "COMP3": "any level 3 Computer Science course",
-                    "COMP4": "any level 4 Computer Science course",
-                    "COMP6": "any level 6 Computer Science course",
-                    "COMP9": "any level 9 Computer Science course"
-                },
-                "title": "Computing Elective",
-                "credits_to_complete": 0,
-                "core": false,
-                "levels": [],
-                "notes": "NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. 2 UOC courses are run over consecutive terms for a final total of 6 UOC."
-            },
-            {
-                "courses": {
                     "MATH1231 or MATH1241": [
                         "Mathematics 1B",
                         "Higher Mathematics 1B"
                     ],
-                    "COMP3900": "Computer Science Project",
-                    "COMP1521": "Computer Systems Fundamentals",
-                    "COMP2521": "Data Structures and Algorithms",
-                    "COMP2511": "Object-Oriented Design & Programming",
-                    "COMP4920": "Professional Issues and Ethics in Information Technology",
-                    "COMP1531": "Software Engineering Fundamentals",
-                    "MATH1081": "Discrete Mathematics",
-                    "COMP3222": "Digital Circuits and Systems",
-                    "COMP1511": "Programming Fundamentals",
-                    "COMP3121 or COMP3821": [
-                        "Algorithms and Programming Techniques",
-                        "Extended Algorithms and Programming Techniques"
+                    "COMP3821 or COMP3121": [
+                        "Extended Algorithms and Programming Techniques",
+                        "Algorithms and Programming Techniques"
                     ],
-                    "MATH1141 or MATH1131": [
-                        "Higher Mathematics 1A",
-                        "Mathematics 1A"
+                    "COMP1521": "Computer Systems Fundamentals",
+                    "COMP2511": "Object-Oriented Design & Programming",
+                    "COMP2521": "Data Structures and Algorithms",
+                    "COMP1511": "Programming Fundamentals",
+                    "MATH1081": "Discrete Mathematics",
+                    "COMP1531": "Software Engineering Fundamentals",
+                    "COMP3900": "Computer Science Project",
+                    "COMP3222": "Digital Circuits and Systems",
+                    "COMP4920": "Professional Issues and Ethics in Information Technology",
+                    "MATH1131 or MATH1141": [
+                        "Mathematics 1A",
+                        "Higher Mathematics 1A"
                     ]
                 },
                 "title": "Core Courses",
@@ -2806,19 +2789,36 @@
             },
             {
                 "courses": {
-                    "COMP4601": "Design Project B",
-                    "COMP3211": "Computer Architecture",
                     "COMP3231": "Operating Systems",
-                    "COMP9517": "Computer Vision",
-                    "COMP9242": "Advanced Operating Systems",
+                    "COMP4601": "Design Project B",
+                    "COMP3601": "Design Project A",
+                    "COMP3211": "Computer Architecture",
                     "COMP3331": "Computer Networks and Applications",
-                    "COMP3601": "Design Project A"
+                    "COMP9242": "Advanced Operating Systems",
+                    "COMP9517": "Computer Vision"
                 },
                 "title": "Embedded Systems Prescribed Electives",
                 "credits_to_complete": 18,
                 "core": false,
                 "levels": [],
                 "notes": ""
+            },
+            {
+                "courses": {
+                    "ENGG4600": "Engineering Vertically Integrated Project",
+                    "COMP2041": "Software Construction: Techniques and Tools",
+                    "ENGG3600": "Engineering Vertically Integrated Project",
+                    "ENGG2600": "Engineering Vertically Integrated Project",
+                    "COMP3": "any level 3 Computer Science course",
+                    "COMP4": "any level 4 Computer Science course",
+                    "COMP6": "any level 6 Computer Science course",
+                    "COMP9": "any level 9 Computer Science course"
+                },
+                "title": "Computing Elective",
+                "credits_to_complete": 0,
+                "core": false,
+                "levels": [],
+                "notes": "NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. 2 UOC courses are run over consecutive terms for a final total of 6 UOC."
             }
         ]
     },
@@ -2839,47 +2839,17 @@
         "curriculum": [
             {
                 "courses": {
-                    "COMP1511": "Programming Fundamentals",
-                    "MATH1081": "Discrete Mathematics",
-                    "COMP1531": "Software Engineering Fundamentals",
-                    "COMP2521": "Data Structures and Algorithms",
-                    "COMP3900": "Computer Science Project",
-                    "COMP1521": "Computer Systems Fundamentals",
-                    "COMP2511": "Object-Oriented Design & Programming",
-                    "COMP3121": "Algorithms and Programming Techniques",
-                    "COMP4920": "Professional Issues and Ethics in Information Technology",
-                    "MATH1241 or MATH1231": [
-                        "Higher Mathematics 1B",
-                        "Mathematics 1B"
-                    ],
-                    "MATH1141 or MATH1131": [
-                        "Higher Mathematics 1A",
-                        "Mathematics 1A"
-                    ],
-                    "COMP6841 or COMP6441": [
-                        "Extended Security Engineering and Cyber Security",
-                        "Security Engineering and Cyber Security"
-                    ]
-                },
-                "title": "Core Courses",
-                "credits_to_complete": 72,
-                "core": true,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
                     "COMP6447": "System and Software Security Assessment",
-                    "COMP6449": "Security Engineering Professional Practice",
+                    "COMP9447": "Security Engineering Workshop",
+                    "COMP6448": "Security Engineering Masterclass",
                     "COMP6845": "Extended Digital Forensics and Incident Response",
                     "COMP6443": "Web Application Security and Testing",
-                    "MATH3411": "Information, Codes and Ciphers",
-                    "COMP6448": "Security Engineering Masterclass",
-                    "COMP6843": "Extended Web Application Security and Testing",
-                    "COMP4337": "Securing Fixed and Wireless Networks",
-                    "COMP9447": "Security Engineering Workshop",
                     "COMP6445": "Digital Forensics",
-                    "TELE3119": "Trusted Networks"
+                    "MATH3411": "Information, Codes and Ciphers",
+                    "COMP6449": "Security Engineering Professional Practice",
+                    "TELE3119": "Trusted Networks",
+                    "COMP6843": "Extended Web Application Security and Testing",
+                    "COMP4337": "Securing Fixed and Wireless Networks"
                 },
                 "title": "Security Engineering Prescribed Electives",
                 "credits_to_complete": 18,
@@ -2889,10 +2859,10 @@
             },
             {
                 "courses": {
-                    "ENGG3600": "Engineering Vertically Integrated Project",
-                    "COMP2041": "Software Construction: Techniques and Tools",
-                    "ENGG4600": "Engineering Vertically Integrated Project",
                     "ENGG2600": "Engineering Vertically Integrated Project",
+                    "COMP2041": "Software Construction: Techniques and Tools",
+                    "ENGG3600": "Engineering Vertically Integrated Project",
+                    "ENGG4600": "Engineering Vertically Integrated Project",
                     "COMP3": "any level 3 Computer Science course",
                     "COMP4": "any level 4 Computer Science course",
                     "COMP6": "any level 6 Computer Science course",
@@ -2903,6 +2873,36 @@
                 "core": false,
                 "levels": [],
                 "notes": "NOTE: A student may take up to 6 UOC of VIP courses (ENGG2600, ENG3600, ENG4600) as a computing elective. Counting further VIP courses as computing electives is only possible if approved by the Program Authority (ENG SSS) and Deputy Head of School. 2 UOC courses are run over consecutive terms for a final total of 6 UOC."
+            },
+            {
+                "courses": {
+                    "MATH1231 or MATH1241": [
+                        "Mathematics 1B",
+                        "Higher Mathematics 1B"
+                    ],
+                    "COMP6841 or COMP6441": [
+                        "Extended Security Engineering and Cyber Security",
+                        "Security Engineering and Cyber Security"
+                    ],
+                    "MATH1141 or MATH1131": [
+                        "Higher Mathematics 1A",
+                        "Mathematics 1A"
+                    ],
+                    "COMP1511": "Programming Fundamentals",
+                    "COMP3121": "Algorithms and Programming Techniques",
+                    "COMP1521": "Computer Systems Fundamentals",
+                    "COMP2521": "Data Structures and Algorithms",
+                    "MATH1081": "Discrete Mathematics",
+                    "COMP3900": "Computer Science Project",
+                    "COMP1531": "Software Engineering Fundamentals",
+                    "COMP4920": "Professional Issues and Ethics in Information Technology",
+                    "COMP2511": "Object-Oriented Design & Programming"
+                },
+                "title": "Core Courses",
+                "credits_to_complete": 72,
+                "core": true,
+                "levels": [],
+                "notes": ""
             }
         ]
     },
@@ -2918,12 +2918,85 @@
         "curriculum": [
             {
                 "courses": {
-                    "CVEN2101": "Engineering Construction",
-                    "DESN2000": "Engineering Design and Professional Practice",
-                    "ENGG2400": "Mechanics of Solids 1",
+                    "ENGG1300": "Engineering Mechanics",
+                    "ENGG1811": "Computing for Engineers",
+                    "DESN1000": "Introduction to Engineering Design and Innovation",
+                    "MATH1131 or MATH1141": [
+                        "Mathematics 1A",
+                        "Higher Mathematics 1A"
+                    ],
+                    "PHYS1121 or PHYS1131": [
+                        "Physics 1A",
+                        "Higher Physics 1A"
+                    ],
+                    "MATH1231 or MATH1241": [
+                        "Mathematics 1B",
+                        "Higher Mathematics 1B"
+                    ]
+                },
+                "title": "Level 1 Core Courses",
+                "credits_to_complete": 36,
+                "core": true,
+                "levels": [
+                    1
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ENGG3600": "Engineering Vertically Integrated Project",
+                    "ENGG4600": "Engineering Vertically Integrated Project",
+                    "ENGG2600": "Engineering Vertically Integrated Project"
+                },
+                "title": "Practice Electives",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "CVEN4050": "Thesis A",
+                    "CVEN4032": "Higher Honours Thesis A",
+                    "CVEN4952": "Research Thesis B",
+                    "CVEN4051": "Thesis B",
+                    "CVEN4951": "Research Thesis A",
+                    "CVEN4953": "Research Thesis C",
+                    "CVEN4033": "Higher Honours Thesis B"
+                },
+                "title": "Thesis Courses",
+                "credits_to_complete": 12,
+                "core": false,
+                "levels": [],
+                "notes": "Note: School approval is required to take the alternative thesis options CVEN4951/4952/4953 or CVEN4032/4033 Students who take CVEN4951 Research Thesis A or CVEN4032 Higher Honours Thesis A must take CVEN4701 Planning Sustainable Infrastructure as one of their discipline electives."
+            },
+            {
+                "courses": {
+                    "CVEN3303": "Steel Structures",
+                    "CVEN3202": "Soil Mechanics",
+                    "CVEN3304": "Concrete Structures",
+                    "CVEN3501": "Water Resources Engineering",
+                    "CVEN3203": "Applied Geotechnics and Engineering Geology",
+                    "CVEN3401": "Sustainable Transport and Highway Engineering",
+                    "CVEN3502": "Water and Wastewater Engineering",
+                    "CVEN3101": "Engineering Operations and Control"
+                },
+                "title": "Level 3 Core Courses",
+                "credits_to_complete": 48,
+                "core": true,
+                "levels": [
+                    3
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
                     "CVEN2002": "Civil and Environmental Engineering Computations",
                     "CVEN2303": "Structural Analysis and Modelling",
                     "ENGG2500": "Fluid Mechanics for Engineers",
+                    "CVEN2101": "Engineering Construction",
+                    "DESN2000": "Engineering Design and Professional Practice",
+                    "ENGG2400": "Mechanics of Solids 1",
                     "MATH2018 or MATH2019": [
                         "Engineering Mathematics 2D",
                         "Engineering Mathematics 2E"
@@ -2939,136 +3012,53 @@
             },
             {
                 "courses": {
-                    "MATH1231 or MATH1241": [
-                        "Mathematics 1B",
-                        "Higher Mathematics 1B"
-                    ],
-                    "PHYS1121 or PHYS1131": [
-                        "Physics 1A",
-                        "Higher Physics 1A"
-                    ],
-                    "DESN1000": "Introduction to Engineering Design and Innovation",
-                    "ENGG1811": "Computing for Engineers",
-                    "ENGG1300": "Engineering Mechanics",
-                    "MATH1131 or MATH1141": [
-                        "Mathematics 1A",
-                        "Higher Mathematics 1A"
-                    ]
-                },
-                "title": "Level 1 Core Courses",
-                "credits_to_complete": 36,
-                "core": true,
-                "levels": [
-                    1
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "CVEN4050": "Thesis A",
-                    "CVEN4051": "Thesis B",
-                    "CVEN4952": "Research Thesis B",
-                    "CVEN4951": "Research Thesis A",
-                    "CVEN4033": "Higher Honours Thesis B",
-                    "CVEN4032": "Higher Honours Thesis A",
-                    "CVEN4953": "Research Thesis C"
-                },
-                "title": "Thesis Courses",
-                "credits_to_complete": 12,
-                "core": false,
-                "levels": [],
-                "notes": "Note: School approval is required to take the alternative thesis options CVEN4951/4952/4953 or CVEN4032/4033 Students who take CVEN4951 Research Thesis A or CVEN4032 Higher Honours Thesis A must take CVEN4701 Planning Sustainable Infrastructure as one of their discipline electives."
-            },
-            {
-                "courses": {
-                    "CHEM1041": "Higher Chemistry 1B: Elements, Compounds and Life",
-                    "CHEM1031": "Higher Chemistry 1A: Atoms, Molecules and Energy",
-                    "COMM1120": "Collaboration and Innovation in Business",
-                    "CEIC1000": "Sustainable Product Engineering and Design",
-                    "CHEM1821": "Engineering Chemistry 1B",
-                    "CVEN1701": "Environmental Principles and Systems",
-                    "COMP1531": "Software Engineering Fundamentals",
-                    "ENGG1300": "Engineering Mechanics",
-                    "CHEM1011": "Chemistry 1A: Atoms, Molecules and Energy",
-                    "ENGG1400": "Engineering Infrastructure Systems",
-                    "SOLA1070": "Sustainable Energy",
-                    "PHYS1231": "Higher Physics 1B",
-                    "CHEM1811": "Engineering Chemistry 1A",
-                    "MATS1110": "Introduction to Materials for Engineering Applications",
-                    "ENGG1100": "Grand Challenges for Engineering",
-                    "ARTS2755": "Inclusive Development: Gender and Intersectionality",
-                    "ELEC1111": "Electrical Circuit Fundamentals",
-                    "BIOS1301": "Ecology, Sustainability and Environmental Science",
-                    "BIOM1010": "Engineering in Medicine and Biology",
-                    "BABS1201": "Molecules, Cells and Genes",
-                    "GEOS1111": "Investigating Earth and Its Evolution",
-                    "ENGG1200": "Undergraduate Special Projects",
-                    "PSYC1028": "Psychology of Human Centred Design",
-                    "MINE1010": "Mineral Resources Engineering",
-                    "CHEM1021": "Chemistry 1B: Elements, Compounds and Life",
-                    "GMAT1110": "Surveying and Geospatial Engineering",
-                    "COMP1521": "Computer Systems Fundamentals",
-                    "MATH1081": "Discrete Mathematics",
-                    "MATS1101": "Engineering Materials and Chemistry",
-                    "PSYC1001": "Psychology 1A"
-                },
-                "title": "Level 1 Prescribed Electives",
-                "credits_to_complete": 12,
-                "core": false,
-                "levels": [
-                    1
-                ],
-                "notes": "NOTE: - Recommended first year electives for this program are MATS1101 and one of either ENGG1400 or GMAT1110. - CHEM1031 and CHEM1041 will only be available to students enrolled in a program which has a Chemistry major."
-            },
-            {
-                "courses": {
-                    "CVEN4101": "Problem Solving for Engineers",
-                    "CVEN9818": "Bridge Engineering",
-                    "CVEN9822": "Steel and Composite Structures",
-                    "CVEN4503": "Groundwater Resource Investigation",
-                    "CVEN4103": "Engineering Contracts",
-                    "CVEN9612": "Catchment and Water Resources Modelling",
-                    "CVEN9405": "Urban Transport Planning Practice",
                     "CVEN4204": "Ground Improvement and Monitoring Techniques",
-                    "CVEN9826": "Advanced Mechanics of Structures and Materials",
-                    "CVEN4308": "Structural Dynamics",
-                    "ENGG4102": "Humanitarian Engineering Project",
-                    "ENGG3001": "Fundamentals of Humanitarian Engineering",
-                    "CVEN4404": "Fundamentals of Traffic Engineering",
-                    "CVEN4301": "Advanced Concrete Structures",
-                    "CVEN9415": "Transport Systems Part 2",
                     "CVEN4202": "Advanced Topics in Geotechnical Engineering",
+                    "GMAT9600": "Principles of Remote Sensing",
+                    "CVEN4706": "Air Quality and Pollution",
+                    "CVEN9620": "Rivers, Estuaries and Wetlands",
+                    "CODE2170": "Building Information Modelling",
+                    "CVEN4102": "Operations and Projects",
+                    "CVEN3701": "Environmental Frameworks, Law and Economics",
+                    "CVEN4308": "Structural Dynamics",
                     "CVEN9640": "Coastal Engineering",
                     "ENGG4103": "International Humanitarian Response",
-                    "CVEN9820": "Computational Structural Mechanics",
-                    "CVEN9840": "Structural Health Monitoring Fundamentals and Practices",
-                    "CVEN4706": "Air Quality and Pollution",
                     "CVEN4104": "Sustainability in Construction",
-                    "GSOE9740": "Industrial Ecology and Sustainable Engineering",
-                    "CVEN9881": "Hazardous Waste Management",
-                    "GMAT9600": "Principles of Remote Sensing",
-                    "CVEN9620": "Rivers, Estuaries and Wetlands",
                     "CVEN9824": "Advanced Materials Technology",
-                    "CVEN4703": "Advanced Water Quality Principles",
+                    "CVEN4405": "Human Factors in Civil and Transport Engineering",
+                    "CVEN4309": "Sustainable Timber Engineering",
+                    "CVEN4404": "Fundamentals of Traffic Engineering",
+                    "GSOE9740": "Industrial Ecology and Sustainable Engineering",
+                    "CVEN9840": "Structural Health Monitoring Fundamentals and Practices",
+                    "CVEN9881": "Hazardous Waste Management",
                     "CVEN4310": "Deformation Monitoring Surveys",
                     "CVEN4701": "Planning Sustainable Infrastructure",
-                    "CVEN4705": "Environmental Sustainability - Methods, Tools, Management",
-                    "GMAT3220": "Geospatial Information Systems",
-                    "CVEN4106": "Construction Practicum",
-                    "CVEN4201": "Rock and Slope Engineering",
-                    "CVEN4300": "Structures Practicum",
-                    "CVEN4405": "Human Factors in Civil and Transport Engineering",
-                    "CVEN4800": "Satellite Remote Sensing and Applications",
-                    "GMAT9606": "Microwave Remote Sensing",
-                    "CVEN4504": "Advanced Water and Wastewater Treatment",
-                    "CVEN9809": "Reinforced Concrete Design",
+                    "CVEN9822": "Steel and Composite Structures",
+                    "CVEN9415": "Transport Systems Part 2",
                     "CVEN4402": "Transport Systems - Part 1: Network Analysis",
-                    "CODE2170": "Building Information Modelling",
-                    "CVEN3701": "Environmental Frameworks, Law and Economics",
+                    "ENGG4060": "Student Initiated Project",
                     "CVEN9806": "Prestressed Concrete Design",
-                    "CVEN4309": "Sustainable Timber Engineering",
-                    "CVEN4102": "Operations and Projects",
-                    "ENGG4060": "Student Initiated Project"
+                    "CVEN4503": "Groundwater Resource Investigation",
+                    "CVEN4103": "Engineering Contracts",
+                    "CVEN4201": "Rock and Slope Engineering",
+                    "GMAT3220": "Geospatial Information Systems",
+                    "CVEN4300": "Structures Practicum",
+                    "CVEN9405": "Urban Transport Planning Practice",
+                    "ENGG4102": "Humanitarian Engineering Project",
+                    "CVEN4800": "Satellite Remote Sensing and Applications",
+                    "CVEN9826": "Advanced Mechanics of Structures and Materials",
+                    "ENGG3001": "Fundamentals of Humanitarian Engineering",
+                    "CVEN4703": "Advanced Water Quality Principles",
+                    "CVEN4106": "Construction Practicum",
+                    "CVEN9809": "Reinforced Concrete Design",
+                    "GMAT9606": "Microwave Remote Sensing",
+                    "CVEN9612": "Catchment and Water Resources Modelling",
+                    "CVEN9818": "Bridge Engineering",
+                    "CVEN9820": "Computational Structural Mechanics",
+                    "CVEN4705": "Environmental Sustainability - Methods, Tools, Management",
+                    "CVEN4504": "Advanced Water and Wastewater Treatment",
+                    "CVEN4101": "Problem Solving for Engineers",
+                    "CVEN4301": "Advanced Concrete Structures"
                 },
                 "title": "Discipline Electives",
                 "credits_to_complete": 6,
@@ -3078,34 +3068,44 @@
             },
             {
                 "courses": {
-                    "CVEN3401": "Sustainable Transport and Highway Engineering",
-                    "CVEN3101": "Engineering Operations and Control",
-                    "CVEN3502": "Water and Wastewater Engineering",
-                    "CVEN3501": "Water Resources Engineering",
-                    "CVEN3202": "Soil Mechanics",
-                    "CVEN3203": "Applied Geotechnics and Engineering Geology",
-                    "CVEN3304": "Concrete Structures",
-                    "CVEN3303": "Steel Structures"
+                    "MATS1110": "Introduction to Materials for Engineering Applications",
+                    "ARTS2755": "Inclusive Development: Gender and Intersectionality",
+                    "COMP1521": "Computer Systems Fundamentals",
+                    "CHEM1011": "Chemistry 1A: Atoms, Molecules and Energy",
+                    "MATH1081": "Discrete Mathematics",
+                    "BIOM1010": "Engineering in Medicine and Biology",
+                    "PSYC1001": "Psychology 1A",
+                    "CEIC1000": "Sustainable Product Engineering and Design",
+                    "ENGG1100": "Grand Challenges for Engineering",
+                    "BIOS1301": "Ecology, Sustainability and Environmental Science",
+                    "GEOS1111": "Investigating Earth and Its Evolution",
+                    "CHEM1031": "Higher Chemistry 1A: Atoms, Molecules and Energy",
+                    "MATS1101": "Engineering Materials and Chemistry",
+                    "COMM1120": "Collaboration and Innovation in Business",
+                    "COMP1531": "Software Engineering Fundamentals",
+                    "SOLA1070": "Sustainable Energy",
+                    "ELEC1111": "Electrical Circuit Fundamentals",
+                    "ENGG1200": "Undergraduate Special Projects",
+                    "BABS1201": "Molecules, Cells and Genes",
+                    "MINE1010": "Mineral Resources Engineering",
+                    "CHEM1041": "Higher Chemistry 1B: Elements, Compounds and Life",
+                    "CHEM1021": "Chemistry 1B: Elements, Compounds and Life",
+                    "ENGG1400": "Engineering Infrastructure Systems",
+                    "CVEN1701": "Environmental Principles and Systems",
+                    "PHYS1231": "Higher Physics 1B",
+                    "CHEM1811": "Engineering Chemistry 1A",
+                    "PSYC1028": "Psychology of Human Centred Design",
+                    "GMAT1110": "Surveying and Geospatial Engineering",
+                    "ENGG1300": "Engineering Mechanics",
+                    "CHEM1821": "Engineering Chemistry 1B"
                 },
-                "title": "Level 3 Core Courses",
-                "credits_to_complete": 48,
-                "core": true,
-                "levels": [
-                    3
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ENGG2600": "Engineering Vertically Integrated Project",
-                    "ENGG3600": "Engineering Vertically Integrated Project",
-                    "ENGG4600": "Engineering Vertically Integrated Project"
-                },
-                "title": "Practice Electives",
-                "credits_to_complete": 6,
+                "title": "Level 1 Prescribed Electives",
+                "credits_to_complete": 12,
                 "core": false,
-                "levels": [],
-                "notes": ""
+                "levels": [
+                    1
+                ],
+                "notes": "NOTE: - Recommended first year electives for this program are MATS1101 and one of either ENGG1400 or GMAT1110. - CHEM1031 and CHEM1041 will only be available to students enrolled in a program which has a Chemistry major."
             }
         ]
     },
@@ -3121,67 +3121,14 @@
         "curriculum": [
             {
                 "courses": {
-                    "ENGG2600": "Engineering Vertically Integrated Project",
-                    "ENGG3600": "Engineering Vertically Integrated Project",
-                    "ENGG4600": "Engineering Vertically Integrated Project"
-                },
-                "title": "Practice Electives",
-                "credits_to_complete": 6,
-                "core": false,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "SOLA1070": "Sustainable Energy",
-                    "ELEC1111": "Electrical Circuit Fundamentals",
-                    "ENGG1200": "Undergraduate Special Projects",
-                    "PHYS1231": "Higher Physics 1B",
-                    "MATH1081": "Discrete Mathematics",
-                    "PSYC1001": "Psychology 1A",
-                    "ENGG1400": "Engineering Infrastructure Systems",
-                    "MATS1101": "Engineering Materials and Chemistry",
-                    "GMAT1110": "Surveying and Geospatial Engineering",
-                    "COMP1521": "Computer Systems Fundamentals",
-                    "MINE1010": "Mineral Resources Engineering",
-                    "BIOM1010": "Engineering in Medicine and Biology",
-                    "BIOS1301": "Ecology, Sustainability and Environmental Science",
-                    "COMM1120": "Collaboration and Innovation in Business",
-                    "CVEN1701": "Environmental Principles and Systems",
-                    "CHEM1031": "Higher Chemistry 1A: Atoms, Molecules and Energy",
-                    "CHEM1011": "Chemistry 1A: Atoms, Molecules and Energy",
-                    "CHEM1811": "Engineering Chemistry 1A",
-                    "COMP1531": "Software Engineering Fundamentals",
-                    "ENGG1100": "Grand Challenges for Engineering",
-                    "ENGG1300": "Engineering Mechanics",
-                    "PSYC1028": "Psychology of Human Centred Design",
-                    "GEOS1111": "Investigating Earth and Its Evolution",
-                    "MATS1110": "Introduction to Materials for Engineering Applications",
-                    "BABS1201": "Molecules, Cells and Genes",
-                    "CHEM1821": "Engineering Chemistry 1B",
-                    "ARTS2755": "Inclusive Development: Gender and Intersectionality",
-                    "CEIC1000": "Sustainable Product Engineering and Design",
-                    "CHEM1041": "Higher Chemistry 1B: Elements, Compounds and Life",
-                    "CHEM1021": "Chemistry 1B: Elements, Compounds and Life"
-                },
-                "title": "Level 1 Prescribed Electives",
-                "credits_to_complete": 12,
-                "core": false,
-                "levels": [
-                    1
-                ],
-                "notes": "ENGG1300 excludes CVEN1300, MINE1300, and MMAN1300. CHEM1031 and CHEM1041 will only be available to students enrolled in a program which has a Chemistry major."
-            },
-            {
-                "courses": {
-                    "CVEN3101": "Engineering Operations and Control",
-                    "CVEN3202": "Soil Mechanics",
-                    "CVEN3701": "Environmental Frameworks, Law and Economics",
-                    "CVEN3502": "Water and Wastewater Engineering",
-                    "CVEN3402": "Transport Engineering and Environmental Sustainability",
+                    "CVEN3501": "Water Resources Engineering",
                     "CVEN3702": "Solid Wastes and Contaminant Transport",
                     "CVEN3203": "Applied Geotechnics and Engineering Geology",
-                    "CVEN3501": "Water Resources Engineering"
+                    "CVEN3502": "Water and Wastewater Engineering",
+                    "CVEN3202": "Soil Mechanics",
+                    "CVEN3402": "Transport Engineering and Environmental Sustainability",
+                    "CVEN3101": "Engineering Operations and Control",
+                    "CVEN3701": "Environmental Frameworks, Law and Economics"
                 },
                 "title": "Level 3 Core Courses",
                 "credits_to_complete": 48,
@@ -3193,66 +3140,77 @@
             },
             {
                 "courses": {
-                    "PHYS1131 or PHYS1121": [
-                        "Higher Physics 1A",
-                        "Physics 1A"
-                    ],
-                    "MATH1241 or MATH1231": [
-                        "Higher Mathematics 1B",
-                        "Mathematics 1B"
-                    ],
-                    "DESN1000": "Introduction to Engineering Design and Innovation",
+                    "CHEM1811": "Engineering Chemistry 1A",
+                    "CVEN1701": "Environmental Principles and Systems",
+                    "BABS1201": "Molecules, Cells and Genes",
+                    "COMM1120": "Collaboration and Innovation in Business",
+                    "GMAT1110": "Surveying and Geospatial Engineering",
                     "BIOS1301": "Ecology, Sustainability and Environmental Science",
-                    "ENGG1811": "Computing for Engineers",
-                    "MATH1131 or MATH1141": [
-                        "Mathematics 1A",
-                        "Higher Mathematics 1A"
-                    ],
-                    "CHEM1011 or CHEM1811": [
-                        "Chemistry 1A: Atoms, Molecules and Energy",
-                        "Engineering Chemistry 1A"
-                    ]
+                    "PHYS1231": "Higher Physics 1B",
+                    "CHEM1821": "Engineering Chemistry 1B",
+                    "CHEM1031": "Higher Chemistry 1A: Atoms, Molecules and Energy",
+                    "BIOM1010": "Engineering in Medicine and Biology",
+                    "CHEM1021": "Chemistry 1B: Elements, Compounds and Life",
+                    "ELEC1111": "Electrical Circuit Fundamentals",
+                    "MATS1110": "Introduction to Materials for Engineering Applications",
+                    "GEOS1111": "Investigating Earth and Its Evolution",
+                    "ENGG1200": "Undergraduate Special Projects",
+                    "PSYC1028": "Psychology of Human Centred Design",
+                    "MATS1101": "Engineering Materials and Chemistry",
+                    "ENGG1400": "Engineering Infrastructure Systems",
+                    "SOLA1070": "Sustainable Energy",
+                    "CHEM1041": "Higher Chemistry 1B: Elements, Compounds and Life",
+                    "MINE1010": "Mineral Resources Engineering",
+                    "CEIC1000": "Sustainable Product Engineering and Design",
+                    "COMP1521": "Computer Systems Fundamentals",
+                    "ARTS2755": "Inclusive Development: Gender and Intersectionality",
+                    "COMP1531": "Software Engineering Fundamentals",
+                    "CHEM1011": "Chemistry 1A: Atoms, Molecules and Energy",
+                    "ENGG1300": "Engineering Mechanics",
+                    "PSYC1001": "Psychology 1A",
+                    "MATH1081": "Discrete Mathematics",
+                    "ENGG1100": "Grand Challenges for Engineering"
                 },
-                "title": "Level 1 Core Courses",
-                "credits_to_complete": 42,
-                "core": true,
+                "title": "Level 1 Prescribed Electives",
+                "credits_to_complete": 12,
+                "core": false,
                 "levels": [
                     1
                 ],
-                "notes": ""
+                "notes": "ENGG1300 excludes CVEN1300, MINE1300, and MMAN1300. CHEM1031 and CHEM1041 will only be available to students enrolled in a program which has a Chemistry major."
             },
             {
                 "courses": {
-                    "GSOE9740": "Industrial Ecology and Sustainable Engineering",
-                    "CVEN4706": "Air Quality and Pollution",
-                    "CVEN9405": "Urban Transport Planning Practice",
-                    "GMAT9606": "Microwave Remote Sensing",
-                    "CVEN9620": "Rivers, Estuaries and Wetlands",
-                    "CVEN9881": "Hazardous Waste Management",
-                    "CVEN4201": "Rock and Slope Engineering",
-                    "ENGG3001": "Fundamentals of Humanitarian Engineering",
-                    "CVEN4101": "Problem Solving for Engineers",
-                    "CVEN9415": "Transport Systems Part 2",
-                    "CVEN4404": "Fundamentals of Traffic Engineering",
-                    "CVEN9612": "Catchment and Water Resources Modelling",
-                    "CVEN4504": "Advanced Water and Wastewater Treatment",
-                    "CVEN4202": "Advanced Topics in Geotechnical Engineering",
-                    "ENGG4102": "Humanitarian Engineering Project",
-                    "ENGG4103": "International Humanitarian Response",
-                    "CVEN4104": "Sustainability in Construction",
-                    "CVEN4503": "Groundwater Resource Investigation",
-                    "CVEN9640": "Coastal Engineering",
-                    "CVEN4800": "Satellite Remote Sensing and Applications",
-                    "CVEN4703": "Advanced Water Quality Principles",
-                    "CVEN4402": "Transport Systems - Part 1: Network Analysis",
-                    "GMAT3220": "Geospatial Information Systems",
-                    "CVEN4405": "Human Factors in Civil and Transport Engineering",
-                    "CVEN4204": "Ground Improvement and Monitoring Techniques",
-                    "ENGG4060": "Student Initiated Project",
-                    "CVEN4705": "Environmental Sustainability - Methods, Tools, Management",
-                    "CVEN4507": "Advanced Water Engineering",
                     "CVEN4103": "Engineering Contracts",
-                    "GMAT9600": "Principles of Remote Sensing"
+                    "CVEN4201": "Rock and Slope Engineering",
+                    "CVEN9881": "Hazardous Waste Management",
+                    "CVEN4705": "Environmental Sustainability - Methods, Tools, Management",
+                    "ENGG4060": "Student Initiated Project",
+                    "ENGG3001": "Fundamentals of Humanitarian Engineering",
+                    "CVEN9640": "Coastal Engineering",
+                    "CVEN9612": "Catchment and Water Resources Modelling",
+                    "GMAT3220": "Geospatial Information Systems",
+                    "CVEN9620": "Rivers, Estuaries and Wetlands",
+                    "CVEN4504": "Advanced Water and Wastewater Treatment",
+                    "CVEN4800": "Satellite Remote Sensing and Applications",
+                    "GMAT9600": "Principles of Remote Sensing",
+                    "ENGG4103": "International Humanitarian Response",
+                    "CVEN9415": "Transport Systems Part 2",
+                    "ENGG4102": "Humanitarian Engineering Project",
+                    "CVEN4405": "Human Factors in Civil and Transport Engineering",
+                    "CVEN4503": "Groundwater Resource Investigation",
+                    "GMAT9606": "Microwave Remote Sensing",
+                    "CVEN4101": "Problem Solving for Engineers",
+                    "CVEN4104": "Sustainability in Construction",
+                    "CVEN4204": "Ground Improvement and Monitoring Techniques",
+                    "CVEN4507": "Advanced Water Engineering",
+                    "CVEN4706": "Air Quality and Pollution",
+                    "CVEN4404": "Fundamentals of Traffic Engineering",
+                    "CVEN9405": "Urban Transport Planning Practice",
+                    "CVEN4202": "Advanced Topics in Geotechnical Engineering",
+                    "CVEN4402": "Transport Systems - Part 1: Network Analysis",
+                    "GSOE9740": "Industrial Ecology and Sustainable Engineering",
+                    "CVEN4703": "Advanced Water Quality Principles"
                 },
                 "title": "Discipline Electives",
                 "credits_to_complete": 12,
@@ -3262,19 +3220,33 @@
             },
             {
                 "courses": {
-                    "CVEN4033": "Higher Honours Thesis B",
-                    "CVEN4952": "Research Thesis B",
-                    "CVEN4051": "Thesis B",
-                    "CVEN4953": "Research Thesis C",
-                    "CVEN4032": "Higher Honours Thesis A",
-                    "CVEN4050": "Thesis A",
-                    "CVEN4951": "Research Thesis A"
+                    "PHYS1131 or PHYS1121": [
+                        "Higher Physics 1A",
+                        "Physics 1A"
+                    ],
+                    "ENGG1811": "Computing for Engineers",
+                    "DESN1000": "Introduction to Engineering Design and Innovation",
+                    "BIOS1301": "Ecology, Sustainability and Environmental Science",
+                    "CHEM1811 or CHEM1011": [
+                        "Engineering Chemistry 1A",
+                        "Chemistry 1A: Atoms, Molecules and Energy"
+                    ],
+                    "MATH1241 or MATH1231": [
+                        "Higher Mathematics 1B",
+                        "Mathematics 1B"
+                    ],
+                    "MATH1131 or MATH1141": [
+                        "Mathematics 1A",
+                        "Higher Mathematics 1A"
+                    ]
                 },
-                "title": "Thesis Courses",
-                "credits_to_complete": 12,
-                "core": false,
-                "levels": [],
-                "notes": "Note: School approval is required to take the alternative thesis options CVEN4951/4952/4953 or CVEN4032/4033."
+                "title": "Level 1 Core Courses",
+                "credits_to_complete": 42,
+                "core": true,
+                "levels": [
+                    1
+                ],
+                "notes": ""
             },
             {
                 "courses": {
@@ -3290,11 +3262,39 @@
             },
             {
                 "courses": {
-                    "DESN2000": "Engineering Design and Professional Practice",
-                    "CVEN2002": "Civil and Environmental Engineering Computations",
+                    "ENGG3600": "Engineering Vertically Integrated Project",
+                    "ENGG2600": "Engineering Vertically Integrated Project",
+                    "ENGG4600": "Engineering Vertically Integrated Project"
+                },
+                "title": "Practice Electives",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "CVEN4033": "Higher Honours Thesis B",
+                    "CVEN4051": "Thesis B",
+                    "CVEN4951": "Research Thesis A",
+                    "CVEN4952": "Research Thesis B",
+                    "CVEN4032": "Higher Honours Thesis A",
+                    "CVEN4953": "Research Thesis C",
+                    "CVEN4050": "Thesis A"
+                },
+                "title": "Thesis Courses",
+                "credits_to_complete": 12,
+                "core": false,
+                "levels": [],
+                "notes": "Note: School approval is required to take the alternative thesis options CVEN4951/4952/4953 or CVEN4032/4033."
+            },
+            {
+                "courses": {
                     "ENGG2500": "Fluid Mechanics for Engineers",
-                    "CEIC2009": "Material and Energy Balances in the Chemical Process Industry",
+                    "CVEN2002": "Civil and Environmental Engineering Computations",
+                    "DESN2000": "Engineering Design and Professional Practice",
                     "CVEN2701": "Water and Atmospheric Chemistry",
+                    "CEIC2009": "Material and Energy Balances in the Chemical Process Industry",
                     "MATH2018 or MATH2019": [
                         "Engineering Mathematics 2D",
                         "Engineering Mathematics 2E"
@@ -5545,11 +5545,66 @@
         "curriculum": [
             {
                 "courses": {
-                    "MMAN4951": "Research Thesis A",
-                    "MMAN4952": "Research Thesis B",
-                    "MMAN4010": "Thesis A",
+                    "MATS1101": "Engineering Materials and Chemistry",
+                    "MINE1010": "Mineral Resources Engineering",
+                    "COMM1120": "Collaboration and Innovation in Business",
+                    "GEOS1111": "Investigating Earth and Its Evolution",
+                    "PHYS1231": "Higher Physics 1B",
+                    "SOLA1070": "Sustainable Energy",
+                    "CVEN1701": "Environmental Principles and Systems",
+                    "ENGG1200": "Undergraduate Special Projects",
+                    "BIOM1010": "Engineering in Medicine and Biology",
+                    "ENGG1100": "Grand Challenges for Engineering",
+                    "BIOS1301": "Ecology, Sustainability and Environmental Science",
+                    "CHEM1021": "Chemistry 1B: Elements, Compounds and Life",
+                    "PSYC1028": "Psychology of Human Centred Design",
+                    "ENGG1400": "Engineering Infrastructure Systems",
+                    "ENGG1300": "Engineering Mechanics",
+                    "GMAT1110": "Surveying and Geospatial Engineering",
+                    "ARTS2755": "Inclusive Development: Gender and Intersectionality",
+                    "MATS1110": "Introduction to Materials for Engineering Applications",
+                    "CHEM1011": "Chemistry 1A: Atoms, Molecules and Energy",
+                    "CHEM1811": "Engineering Chemistry 1A",
+                    "MATH1081": "Discrete Mathematics",
+                    "BABS1201": "Molecules, Cells and Genes",
+                    "COMP1531": "Software Engineering Fundamentals",
+                    "PSYC1001": "Psychology 1A",
+                    "CHEM1821": "Engineering Chemistry 1B",
+                    "CEIC1000": "Sustainable Product Engineering and Design",
+                    "COMP1521": "Computer Systems Fundamentals",
+                    "ELEC1111": "Electrical Circuit Fundamentals"
+                },
+                "title": "Level 1 Prescribed Electives",
+                "credits_to_complete": 12,
+                "core": false,
+                "levels": [
+                    1
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "MANF4100": "Design and Analysis of Product-Process Systems",
+                    "MANF4611": "Process Modelling and Simulation",
+                    "MANF4430": "Reliability and Maintenance Engineering",
+                    "MMAN4400": "Engineering Management",
+                    "MANF4150": "Design of Intelligent Manufacturing Systems"
+                },
+                "title": "Level 4 Core Courses",
+                "credits_to_complete": 30,
+                "core": true,
+                "levels": [
+                    4
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
                     "MMAN4020": "Thesis B",
-                    "MMAN4953": "Research Thesis C"
+                    "MMAN4952": "Research Thesis B",
+                    "MMAN4953": "Research Thesis C",
+                    "MMAN4010": "Thesis A",
+                    "MMAN4951": "Research Thesis A"
                 },
                 "title": "Thesis Courses",
                 "credits_to_complete": 12,
@@ -5559,26 +5614,56 @@
             },
             {
                 "courses": {
-                    "MATH1141 or MATH1131": [
-                        "Higher Mathematics 1A",
-                        "Mathematics 1A"
-                    ],
-                    "PHYS1131 or PHYS1121": [
-                        "Higher Physics 1A",
-                        "Physics 1A"
-                    ],
-                    "COMP1511 or ENGG1811 or COMP1911": [
-                        "Programming Fundamentals",
+                    "MMAN3200": "Linear Systems and Control",
+                    "MECH3110": "Mechanical Design 1",
+                    "DESN3000": "Strategic Design Innovation",
+                    "MANF3510": "Process Technology and Automation"
+                },
+                "title": "Level 3 Core Courses",
+                "credits_to_complete": 24,
+                "core": true,
+                "levels": [
+                    3
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "MANF9400": "Industrial Management",
+                    "MMAN4200": "Additive Manufacturing",
+                    "MANF9472": "Production Planning and Control",
+                    "MMAN4410": "Finite Element Methods",
+                    "MANF9420": "Operations and Supply Chain Management in Engineering",
+                    "MANF6860": "Strategic Manufacturing Management"
+                },
+                "title": "Recommended Disciplinary Electives",
+                "credits_to_complete": 12,
+                "core": false,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "COMP1911 or ENGG1811 or COMP1511": [
+                        "Computing 1A",
                         "Computing for Engineers",
-                        "Computing 1A"
+                        "Programming Fundamentals"
+                    ],
+                    "MATH1241 or MATH1231": [
+                        "Higher Mathematics 1B",
+                        "Mathematics 1B"
+                    ],
+                    "PHYS1121 or PHYS1131": [
+                        "Physics 1A",
+                        "Higher Physics 1A"
                     ],
                     "ENGG1300": "Engineering Mechanics",
                     "MMAN1130": "Design and Manufacturing",
                     "ELEC1111": "Electrical Circuit Fundamentals",
                     "DESN1000": "Introduction to Engineering Design and Innovation",
-                    "MATH1241 or MATH1231": [
-                        "Higher Mathematics 1B",
-                        "Mathematics 1B"
+                    "MATH1141 or MATH1131": [
+                        "Higher Mathematics 1A",
+                        "Mathematics 1A"
                     ]
                 },
                 "title": "Level 1 Core Courses",
@@ -5591,121 +5676,36 @@
             },
             {
                 "courses": {
-                    "MANF4611": "Process Modelling and Simulation",
-                    "MANF4430": "Reliability and Maintenance Engineering",
-                    "MANF4150": "Design of Intelligent Manufacturing Systems",
-                    "MMAN4400": "Engineering Management",
-                    "MANF4100": "Design and Analysis of Product-Process Systems"
-                },
-                "title": "Level 4 Core Courses",
-                "credits_to_complete": 30,
-                "core": true,
-                "levels": [
-                    4
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "MANF9400": "Industrial Management",
-                    "MANF9420": "Operations and Supply Chain Management in Engineering",
-                    "MANF9472": "Production Planning and Control",
-                    "MMAN4410": "Finite Element Methods",
-                    "MMAN4200": "Additive Manufacturing",
-                    "MANF6860": "Strategic Manufacturing Management"
-                },
-                "title": "Recommended Disciplinary Electives",
-                "credits_to_complete": 12,
-                "core": false,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "DESN3000": "Strategic Design Innovation",
-                    "MANF3510": "Process Technology and Automation",
-                    "MMAN3200": "Linear Systems and Control",
-                    "MECH3110": "Mechanical Design 1"
-                },
-                "title": "Level 3 Core Courses",
-                "credits_to_complete": 24,
-                "core": true,
-                "levels": [
-                    3
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "BABS1201": "Molecules, Cells and Genes",
-                    "MATS1101": "Engineering Materials and Chemistry",
-                    "ARTS2755": "Inclusive Development: Gender and Intersectionality",
-                    "CHEM1821": "Engineering Chemistry 1B",
-                    "PHYS1231": "Higher Physics 1B",
-                    "ELEC1111": "Electrical Circuit Fundamentals",
-                    "BIOS1301": "Ecology, Sustainability and Environmental Science",
-                    "CHEM1811": "Engineering Chemistry 1A",
-                    "MATS1110": "Introduction to Materials for Engineering Applications",
-                    "MATH1081": "Discrete Mathematics",
-                    "COMP1531": "Software Engineering Fundamentals",
-                    "MINE1010": "Mineral Resources Engineering",
-                    "PSYC1028": "Psychology of Human Centred Design",
-                    "CVEN1701": "Environmental Principles and Systems",
-                    "GMAT1110": "Surveying and Geospatial Engineering",
-                    "GEOS1111": "Investigating Earth and Its Evolution",
-                    "CHEM1021": "Chemistry 1B: Elements, Compounds and Life",
-                    "CEIC1000": "Sustainable Product Engineering and Design",
-                    "CHEM1011": "Chemistry 1A: Atoms, Molecules and Energy",
-                    "ENGG1200": "Undergraduate Special Projects",
-                    "ENGG1400": "Engineering Infrastructure Systems",
-                    "COMP1521": "Computer Systems Fundamentals",
-                    "ENGG1100": "Grand Challenges for Engineering",
-                    "PSYC1001": "Psychology 1A",
-                    "COMM1120": "Collaboration and Innovation in Business",
-                    "BIOM1010": "Engineering in Medicine and Biology",
-                    "SOLA1070": "Sustainable Energy",
-                    "ENGG1300": "Engineering Mechanics"
-                },
-                "title": "Level 1 Prescribed Electives",
-                "credits_to_complete": 12,
-                "core": false,
-                "levels": [
-                    1
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "AERO9500": "Space Systems Architectures and Orbits",
-                    "MECH4880": "Refrigeration and Air Conditioning 1",
-                    "ENGG3001": "Fundamentals of Humanitarian Engineering",
-                    "MTRN4231": "Robotics Project",
-                    "ENGG4841": "Systems Engineering Fundamentals",
-                    "MECH9660": "Biofluid Dynamics and Systems",
-                    "MECH9650": "Applied Bio and Microfluidics",
-                    "MECH4100": "Mechanical Design 2",
-                    "SOLA5052": "Bioenergy and Renewable Fuels",
-                    "MECH4305": "Fundamental and Advanced Vibration Analysis",
-                    "COMP3141": "Software System Design and Implementation",
-                    "MECH4320": "Engineering Mechanics 3",
-                    "COMP3331": "Computer Networks and Applications",
-                    "MECH9325": "Fundamentals of Acoustics & Noise",
-                    "MECH9420": "Composite Materials and Mechanics",
-                    "MECH4620": "Computational Fluid Dynamics",
-                    "ENGG4600": "Engineering Vertically Integrated Project",
-                    "ENGG3060": "Rehabilitation and Assistive Technology ",
-                    "MECH9720": "Solar Thermal Energy Design",
                     "SOLA5057": "Energy Efficiency",
-                    "ENGG3600": "Engineering Vertically Integrated Project",
-                    "ENGG2600": "Engineering Vertically Integrated Project",
-                    "MTRN9400": "Control of Robotic Systems",
-                    "AERO9660": "Advanced Aerospace Propulsion",
-                    "MECH9761": "Automobile Engine Technology",
-                    "ELEC4633": "Real-Time Engineering",
                     "MECH4900": "Mechanics of Fracture and Fatigue",
+                    "MTRN4231": "Robotics Project",
+                    "MECH9660": "Biofluid Dynamics and Systems",
+                    "MECH4320": "Engineering Mechanics 3",
+                    "ENGG4600": "Engineering Vertically Integrated Project",
+                    "ENGG4841": "Systems Engineering Fundamentals",
+                    "MECH9650": "Applied Bio and Microfluidics",
+                    "MECH4305": "Fundamental and Advanced Vibration Analysis",
+                    "ENGG3060": "Rehabilitation and Assistive Technology ",
+                    "MECH9325": "Fundamentals of Acoustics & Noise",
+                    "AERO9660": "Advanced Aerospace Propulsion",
+                    "ENGG3001": "Fundamentals of Humanitarian Engineering",
+                    "MECH9420": "Composite Materials and Mechanics",
                     "SOLA5056": "Sustainable Energy for Developing Countries",
+                    "AERO9610": "The Space Segment",
+                    "MECH9761": "Automobile Engine Technology",
+                    "AERO9500": "Space Systems Architectures and Orbits",
+                    "COMP3331": "Computer Networks and Applications",
+                    "ENGG3600": "Engineering Vertically Integrated Project",
+                    "MECH4100": "Mechanical Design 2",
+                    "MTRN9400": "Control of Robotic Systems",
                     "SOLA5053": "Wind Energy Converters",
-                    "AERO9610": "The Space Segment"
+                    "MECH9720": "Solar Thermal Energy Design",
+                    "ELEC4633": "Real-Time Engineering",
+                    "ENGG2600": "Engineering Vertically Integrated Project",
+                    "MECH4880": "Refrigeration and Air Conditioning 1",
+                    "SOLA5052": "Bioenergy and Renewable Fuels",
+                    "COMP3141": "Software System Design and Implementation",
+                    "MECH4620": "Computational Fluid Dynamics"
                 },
                 "title": "Discipline Electives",
                 "credits_to_complete": 12,
@@ -5719,12 +5719,12 @@
                         "Engineering Mathematics 2E",
                         "Engineering Mathematics 2D"
                     ],
-                    "ENGG2400": "Mechanics of Solids 1",
-                    "MMAN2300": "Engineering Mechanics 2",
-                    "MMAN2700": "Thermodynamics",
-                    "DESN2000": "Engineering Design and Professional Practice",
+                    "ENGG2500": "Fluid Mechanics for Engineers",
                     "MATH2089": "Numerical Methods and Statistics",
-                    "ENGG2500": "Fluid Mechanics for Engineers"
+                    "ENGG2400": "Mechanics of Solids 1",
+                    "DESN2000": "Engineering Design and Professional Practice",
+                    "MMAN2300": "Engineering Mechanics 2",
+                    "MMAN2700": "Thermodynamics"
                 },
                 "title": "Level 2 Core Courses",
                 "credits_to_complete": 42,
@@ -6503,142 +6503,6 @@
         "curriculum": [
             {
                 "courses": {
-                    "MMAN4952": "Research Thesis B",
-                    "MMAN4953": "Research Thesis C",
-                    "MMAN4020": "Thesis B",
-                    "MMAN4010": "Thesis A",
-                    "MMAN4951": "Research Thesis A"
-                },
-                "title": "Thesis Courses",
-                "credits_to_complete": 12,
-                "core": false,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "SOLA1070": "Sustainable Energy",
-                    "CEIC1000": "Sustainable Product Engineering and Design",
-                    "ENGG1400": "Engineering Infrastructure Systems",
-                    "CVEN1701": "Environmental Principles and Systems",
-                    "MATS1101": "Engineering Materials and Chemistry",
-                    "CHEM1011": "Chemistry 1A: Atoms, Molecules and Energy",
-                    "COMP1531": "Software Engineering Fundamentals",
-                    "CHEM1821": "Engineering Chemistry 1B",
-                    "ENGG1100": "Grand Challenges for Engineering",
-                    "ENGG1200": "Undergraduate Special Projects",
-                    "ENGG1300": "Engineering Mechanics",
-                    "GEOS1111": "Investigating Earth and Its Evolution",
-                    "CHEM1021": "Chemistry 1B: Elements, Compounds and Life",
-                    "CHEM1811": "Engineering Chemistry 1A",
-                    "GMAT1110": "Surveying and Geospatial Engineering",
-                    "PSYC1001": "Psychology 1A",
-                    "ARTS2755": "Inclusive Development: Gender and Intersectionality",
-                    "MATH1081": "Discrete Mathematics",
-                    "MINE1010": "Mineral Resources Engineering",
-                    "COMP1521": "Computer Systems Fundamentals",
-                    "PHYS1231": "Higher Physics 1B",
-                    "MATS1110": "Introduction to Materials for Engineering Applications",
-                    "ELEC1111": "Electrical Circuit Fundamentals",
-                    "PSYC1028": "Psychology of Human Centred Design",
-                    "BIOS1301": "Ecology, Sustainability and Environmental Science",
-                    "BIOM1010": "Engineering in Medicine and Biology",
-                    "COMM1120": "Collaboration and Innovation in Business",
-                    "BABS1201": "Molecules, Cells and Genes"
-                },
-                "title": "Level 1 Prescribed Electives",
-                "credits_to_complete": 12,
-                "core": false,
-                "levels": [
-                    1
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "PHYS1121 or PHYS1131": [
-                        "Physics 1A",
-                        "Higher Physics 1A"
-                    ],
-                    "MATH1241 or MATH1231": [
-                        "Higher Mathematics 1B",
-                        "Mathematics 1B"
-                    ],
-                    "ELEC1111": "Electrical Circuit Fundamentals",
-                    "ENGG1300": "Engineering Mechanics",
-                    "MMAN1130": "Design and Manufacturing",
-                    "DESN1000": "Introduction to Engineering Design and Innovation",
-                    "MATH1141 or MATH1131": [
-                        "Higher Mathematics 1A",
-                        "Mathematics 1A"
-                    ],
-                    "COMP1511 or ENGG1811 or COMP1911": [
-                        "Programming Fundamentals",
-                        "Computing for Engineers",
-                        "Computing 1A"
-                    ]
-                },
-                "title": "Level 1 Core Courses",
-                "credits_to_complete": 48,
-                "core": true,
-                "levels": [
-                    1
-                ],
-                "notes": "Note: ENGG1811 is the preferred computing course for the MECH Stream."
-            },
-            {
-                "courses": {
-                    "MANF9400": "Industrial Management",
-                    "MANF9472": "Production Planning and Control",
-                    "MANF4611": "Process Modelling and Simulation",
-                    "ENGG3060": "Rehabilitation and Assistive Technology ",
-                    "COMP3331": "Computer Networks and Applications",
-                    "SOLA5057": "Energy Efficiency",
-                    "MANF9420": "Operations and Supply Chain Management in Engineering",
-                    "SOLA5053": "Wind Energy Converters",
-                    "ENGG3600": "Engineering Vertically Integrated Project",
-                    "MECH4100": "Mechanical Design 2",
-                    "COMP3141": "Software System Design and Implementation",
-                    "MANF4100": "Design and Analysis of Product-Process Systems",
-                    "SOLA5052": "Bioenergy and Renewable Fuels",
-                    "MANF6860": "Strategic Manufacturing Management",
-                    "AERO9500": "Space Systems Architectures and Orbits",
-                    "MANF4430": "Reliability and Maintenance Engineering",
-                    "ENGG4600": "Engineering Vertically Integrated Project",
-                    "ENGG4841": "Systems Engineering Fundamentals",
-                    "MTRN4231": "Robotics Project",
-                    "SOLA5056": "Sustainable Energy for Developing Countries",
-                    "AERO9610": "The Space Segment",
-                    "ENGG2600": "Engineering Vertically Integrated Project",
-                    "MTRN9400": "Control of Robotic Systems",
-                    "ELEC4633": "Real-Time Engineering",
-                    "AERO9660": "Advanced Aerospace Propulsion",
-                    "ENGG3001": "Fundamentals of Humanitarian Engineering"
-                },
-                "title": "Discipline Electives",
-                "credits_to_complete": 12,
-                "core": false,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "MMAN3200": "Linear Systems and Control",
-                    "DESN3000": "Strategic Design Innovation",
-                    "MECH3610": "Advanced Thermofluids",
-                    "MMAN3400": "Mechanics of Solids 2",
-                    "MECH3110": "Mechanical Design 1"
-                },
-                "title": "Level 3 Core Courses",
-                "credits_to_complete": 30,
-                "core": true,
-                "levels": [
-                    3
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
                     "MECH4100": "Mechanical Design 2"
                 },
                 "title": "Level 4 Core Courses",
@@ -6651,16 +6515,122 @@
             },
             {
                 "courses": {
+                    "PHYS1131 or PHYS1121": [
+                        "Higher Physics 1A",
+                        "Physics 1A"
+                    ],
+                    "MATH1131 or MATH1141": [
+                        "Mathematics 1A",
+                        "Higher Mathematics 1A"
+                    ],
+                    "COMP1911 or ENGG1811 or COMP1511": [
+                        "Computing 1A",
+                        "Computing for Engineers",
+                        "Programming Fundamentals"
+                    ],
+                    "ELEC1111": "Electrical Circuit Fundamentals",
+                    "MMAN1130": "Design and Manufacturing",
+                    "DESN1000": "Introduction to Engineering Design and Innovation",
+                    "ENGG1300": "Engineering Mechanics",
+                    "MATH1231 or MATH1241": [
+                        "Mathematics 1B",
+                        "Higher Mathematics 1B"
+                    ]
+                },
+                "title": "Level 1 Core Courses",
+                "credits_to_complete": 48,
+                "core": true,
+                "levels": [
+                    1
+                ],
+                "notes": "Note: ENGG1811 is the preferred computing course for the MECH Stream."
+            },
+            {
+                "courses": {
+                    "COMP3141": "Software System Design and Implementation",
+                    "MANF9400": "Industrial Management",
+                    "ENGG3001": "Fundamentals of Humanitarian Engineering",
+                    "MANF9420": "Operations and Supply Chain Management in Engineering",
+                    "ENGG3060": "Rehabilitation and Assistive Technology ",
+                    "SOLA5052": "Bioenergy and Renewable Fuels",
+                    "MTRN4231": "Robotics Project",
+                    "ENGG3600": "Engineering Vertically Integrated Project",
+                    "ELEC4633": "Real-Time Engineering",
+                    "COMP3331": "Computer Networks and Applications",
+                    "MECH4100": "Mechanical Design 2",
+                    "SOLA5056": "Sustainable Energy for Developing Countries",
+                    "MANF4430": "Reliability and Maintenance Engineering",
+                    "ENGG4841": "Systems Engineering Fundamentals",
+                    "AERO9610": "The Space Segment",
+                    "SOLA5057": "Energy Efficiency",
+                    "AERO9660": "Advanced Aerospace Propulsion",
+                    "MANF4100": "Design and Analysis of Product-Process Systems",
+                    "AERO9500": "Space Systems Architectures and Orbits",
+                    "MANF4611": "Process Modelling and Simulation",
+                    "MTRN9400": "Control of Robotic Systems",
+                    "ENGG2600": "Engineering Vertically Integrated Project",
+                    "MANF9472": "Production Planning and Control",
+                    "MANF6860": "Strategic Manufacturing Management",
+                    "SOLA5053": "Wind Energy Converters",
+                    "ENGG4600": "Engineering Vertically Integrated Project"
+                },
+                "title": "Discipline Electives",
+                "credits_to_complete": 12,
+                "core": false,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "BIOS1301": "Ecology, Sustainability and Environmental Science",
+                    "COMP1531": "Software Engineering Fundamentals",
+                    "ELEC1111": "Electrical Circuit Fundamentals",
+                    "MATH1081": "Discrete Mathematics",
+                    "MATS1110": "Introduction to Materials for Engineering Applications",
+                    "CVEN1701": "Environmental Principles and Systems",
+                    "PSYC1001": "Psychology 1A",
+                    "PHYS1231": "Higher Physics 1B",
+                    "GEOS1111": "Investigating Earth and Its Evolution",
+                    "BIOM1010": "Engineering in Medicine and Biology",
+                    "ENGG1400": "Engineering Infrastructure Systems",
+                    "CHEM1011": "Chemistry 1A: Atoms, Molecules and Energy",
+                    "GMAT1110": "Surveying and Geospatial Engineering",
+                    "ENGG1200": "Undergraduate Special Projects",
+                    "BABS1201": "Molecules, Cells and Genes",
+                    "COMM1120": "Collaboration and Innovation in Business",
+                    "ENGG1100": "Grand Challenges for Engineering",
+                    "CHEM1021": "Chemistry 1B: Elements, Compounds and Life",
+                    "ENGG1300": "Engineering Mechanics",
+                    "PSYC1028": "Psychology of Human Centred Design",
+                    "MATS1101": "Engineering Materials and Chemistry",
+                    "CHEM1821": "Engineering Chemistry 1B",
+                    "ARTS2755": "Inclusive Development: Gender and Intersectionality",
+                    "CHEM1811": "Engineering Chemistry 1A",
+                    "SOLA1070": "Sustainable Energy",
+                    "CEIC1000": "Sustainable Product Engineering and Design",
+                    "COMP1521": "Computer Systems Fundamentals",
+                    "MINE1010": "Mineral Resources Engineering"
+                },
+                "title": "Level 1 Prescribed Electives",
+                "credits_to_complete": 12,
+                "core": false,
+                "levels": [
+                    1
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
                     "MATH2019 or MATH2018": [
                         "Engineering Mathematics 2E",
                         "Engineering Mathematics 2D"
                     ],
                     "MMAN2700": "Thermodynamics",
-                    "ENGG2500": "Fluid Mechanics for Engineers",
+                    "ENGG2400": "Mechanics of Solids 1",
                     "MMAN2300": "Engineering Mechanics 2",
                     "MATH2089": "Numerical Methods and Statistics",
                     "DESN2000": "Engineering Design and Professional Practice",
-                    "ENGG2400": "Mechanics of Solids 1"
+                    "ENGG2500": "Fluid Mechanics for Engineers"
                 },
                 "title": "Level 2 Core Courses",
                 "credits_to_complete": 42,
@@ -6672,23 +6642,53 @@
             },
             {
                 "courses": {
-                    "MECH4620": "Computational Fluid Dynamics",
-                    "MECH4305": "Fundamental and Advanced Vibration Analysis",
+                    "MMAN3400": "Mechanics of Solids 2",
+                    "MMAN3200": "Linear Systems and Control",
+                    "MECH3110": "Mechanical Design 1",
+                    "MECH3610": "Advanced Thermofluids",
+                    "DESN3000": "Strategic Design Innovation"
+                },
+                "title": "Level 3 Core Courses",
+                "credits_to_complete": 30,
+                "core": true,
+                "levels": [
+                    3
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
                     "MECH9720": "Solar Thermal Energy Design",
-                    "MECH9660": "Biofluid Dynamics and Systems",
-                    "MECH4900": "Mechanics of Fracture and Fatigue",
                     "MECH9761": "Automobile Engine Technology",
-                    "MECH9650": "Applied Bio and Microfluidics",
+                    "MECH4900": "Mechanics of Fracture and Fatigue",
                     "MMAN4410": "Finite Element Methods",
                     "MMAN4200": "Additive Manufacturing",
+                    "MECH4620": "Computational Fluid Dynamics",
                     "MECH4880": "Refrigeration and Air Conditioning 1",
-                    "MECH9325": "Fundamentals of Acoustics & Noise",
                     "MMAN4400": "Engineering Management",
-                    "MECH4320": "Engineering Mechanics 3",
-                    "MECH9420": "Composite Materials and Mechanics"
+                    "MECH9325": "Fundamentals of Acoustics & Noise",
+                    "MECH4305": "Fundamental and Advanced Vibration Analysis",
+                    "MECH9420": "Composite Materials and Mechanics",
+                    "MECH9660": "Biofluid Dynamics and Systems",
+                    "MECH9650": "Applied Bio and Microfluidics",
+                    "MECH4320": "Engineering Mechanics 3"
                 },
                 "title": "Recommended Discipline Electives",
                 "credits_to_complete": 18,
+                "core": false,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "MMAN4010": "Thesis A",
+                    "MMAN4952": "Research Thesis B",
+                    "MMAN4953": "Research Thesis C",
+                    "MMAN4951": "Research Thesis A",
+                    "MMAN4020": "Thesis B"
+                },
+                "title": "Thesis Courses",
+                "credits_to_complete": 12,
                 "core": false,
                 "levels": [],
                 "notes": ""
@@ -7198,42 +7198,50 @@
         "code": "MINEAH",
         "course_constraints": [
             {
-                "title": "Breadth Electives",
-                "description": "Students studying a single degree in MINEAH are required to select 12 UOC from the Breadth Elective list to satisfy their program requirements. In some situations students in double degrees where there is double counting may also have additional UOC free for practice electives. NOTE: 2 UOC and 3 UOC courses are run over consecutive terms for a final total of 6 UOC. - ENGG2600 - Engineering Vertically Integrated Project (6 UOC) - ENGG3600 - Engineering Vertically Integrated Project (6 UOC) - ENGG4600 - Engineering Vertically Integrated Project (6 UOC) - ENGG3001 - Fundamentals of Humanitarian Engineering (6 UOC) - MINE3000 - Research Elective (6 UOC) - MINE3440 - Surface Mining Systems (6 UOC) - MINE3450 - Underground Mining Systems (6 UOC) - MINE4320 - Advanced Geotechnical Engineering (6 UOC) - MINE4510 - Advanced Mine Ventilation (6 UOC) - MINE4610 - Mining Asset Management and Services (6 UOC) - MINE4910 - Mining in a Global Environment (6 UOC) - PTRL2010 - Business Practices in the Petroleum Industry (6 UOC) - PTRL2019 - Reservoir Engineering A (6 UOC) - PTRL2114 - Petroleum Geophysics (6 UOC) - PTRL2030 - Field Development Geology (6 UOC)"
-            },
-            {
                 "title": "Industrial Experience Requirement",
                 "description": "Students must each complete at least 60 days approved industrial training concurrent with enrolment in the program."
+            },
+            {
+                "title": "Breadth Electives",
+                "description": "Students studying a single degree in MINEAH are required to select 12 UOC from the Breadth Elective list to satisfy their program requirements. In some situations students in double degrees where there is double counting may also have additional UOC free for practice electives. NOTE: 2 UOC and 3 UOC courses are run over consecutive terms for a final total of 6 UOC. - ENGG2600 - Engineering Vertically Integrated Project (6 UOC) - ENGG3600 - Engineering Vertically Integrated Project (6 UOC) - ENGG4600 - Engineering Vertically Integrated Project (6 UOC) - ENGG3001 - Fundamentals of Humanitarian Engineering (6 UOC) - MINE3000 - Research Elective (6 UOC) - MINE3440 - Surface Mining Systems (6 UOC) - MINE3450 - Underground Mining Systems (6 UOC) - MINE4320 - Advanced Geotechnical Engineering (6 UOC) - MINE4510 - Advanced Mine Ventilation (6 UOC) - MINE4610 - Mining Asset Management and Services (6 UOC) - MINE4910 - Mining in a Global Environment (6 UOC) - PTRL2010 - Business Practices in the Petroleum Industry (6 UOC) - PTRL2019 - Reservoir Engineering A (6 UOC) - PTRL2114 - Petroleum Geophysics (6 UOC) - PTRL2030 - Field Development Geology (6 UOC)"
             }
         ],
         "curriculum": [
             {
                 "courses": {
-                    "MERE4951": "Research Thesis A",
-                    "MERE4953": "Research Thesis C",
-                    "MINE4250": "Hardrock Mine Design and Feasibility Project",
-                    "MINE4260": "Coal Mine Design and Feasibility Project",
-                    "MINE4710": "Mine Management",
-                    "MINE4310": "Mine Geotechnical Engineering",
-                    "MERE4952": "Research Thesis B"
+                    "MATH1241 or MATH1231": [
+                        "Higher Mathematics 1B",
+                        "Mathematics 1B"
+                    ],
+                    "PHYS1131 or PHYS1121": [
+                        "Higher Physics 1A",
+                        "Physics 1A"
+                    ],
+                    "MATH1131 or MATH1141": [
+                        "Mathematics 1A",
+                        "Higher Mathematics 1A"
+                    ],
+                    "ENGG1811": "Computing for Engineers",
+                    "ENGG1300": "Engineering Mechanics",
+                    "DESN1000": "Introduction to Engineering Design and Innovation"
                 },
-                "title": "Level 4 Core Courses",
+                "title": "Level 1 Core Courses",
                 "credits_to_complete": 36,
                 "core": true,
                 "levels": [
-                    4
+                    1
                 ],
                 "notes": ""
             },
             {
                 "courses": {
                     "MINE3630": "Rock Breakage",
-                    "MINE3510": "Mine Ventilation",
-                    "MINE3220": "Resource Estimation",
-                    "MINE3230": "Mine Planning",
                     "MINE3910": "Socio-Environmental Aspects of Mining",
                     "MINE3310": "Mining Geomechanics",
-                    "MINE3430": "Mining Systems"
+                    "MINE3430": "Mining Systems",
+                    "MINE3510": "Mine Ventilation",
+                    "MINE3220": "Resource Estimation",
+                    "MINE3230": "Mine Planning"
                 },
                 "title": "Level 3 Core Courses",
                 "credits_to_complete": 42,
@@ -7245,34 +7253,34 @@
             },
             {
                 "courses": {
-                    "MATH1081": "Discrete Mathematics",
-                    "COMP1521": "Computer Systems Fundamentals",
-                    "COMM1120": "Collaboration and Innovation in Business",
-                    "ENGG1100": "Grand Challenges for Engineering",
-                    "SOLA1070": "Sustainable Energy",
-                    "MINE1010": "Mineral Resources Engineering",
-                    "BIOM1010": "Engineering in Medicine and Biology",
-                    "MATS1101": "Engineering Materials and Chemistry",
-                    "GMAT1110": "Surveying and Geospatial Engineering",
-                    "MATS1110": "Introduction to Materials for Engineering Applications",
-                    "CEIC1000": "Sustainable Product Engineering and Design",
                     "CHEM1021": "Chemistry 1B: Elements, Compounds and Life",
-                    "ENGG1400": "Engineering Infrastructure Systems",
-                    "CHEM1821": "Engineering Chemistry 1B",
-                    "PSYC1001": "Psychology 1A",
+                    "ENGG1100": "Grand Challenges for Engineering",
+                    "ARTS2755": "Inclusive Development: Gender and Intersectionality",
+                    "ENGG1300": "Engineering Mechanics",
+                    "MINE1010": "Mineral Resources Engineering",
+                    "COMP1521": "Computer Systems Fundamentals",
                     "BABS1201": "Molecules, Cells and Genes",
+                    "ELEC1111": "Electrical Circuit Fundamentals",
+                    "ENGG1200": "Undergraduate Special Projects",
+                    "BIOM1010": "Engineering in Medicine and Biology",
+                    "CHEM1821": "Engineering Chemistry 1B",
+                    "CVEN1701": "Environmental Principles and Systems",
                     "BIOS1301": "Ecology, Sustainability and Environmental Science",
                     "CHEM1011": "Chemistry 1A: Atoms, Molecules and Energy",
-                    "PSYC1028": "Psychology of Human Centred Design",
-                    "ARTS2755": "Inclusive Development: Gender and Intersectionality",
-                    "ELEC1111": "Electrical Circuit Fundamentals",
-                    "GEOS1111": "Investigating Earth and Its Evolution",
-                    "CVEN1701": "Environmental Principles and Systems",
-                    "COMP1531": "Software Engineering Fundamentals",
                     "CHEM1811": "Engineering Chemistry 1A",
-                    "ENGG1300": "Engineering Mechanics",
-                    "ENGG1200": "Undergraduate Special Projects",
-                    "PHYS1231": "Higher Physics 1B"
+                    "GEOS1111": "Investigating Earth and Its Evolution",
+                    "CEIC1000": "Sustainable Product Engineering and Design",
+                    "COMP1531": "Software Engineering Fundamentals",
+                    "COMM1120": "Collaboration and Innovation in Business",
+                    "ENGG1400": "Engineering Infrastructure Systems",
+                    "PSYC1028": "Psychology of Human Centred Design",
+                    "SOLA1070": "Sustainable Energy",
+                    "GMAT1110": "Surveying and Geospatial Engineering",
+                    "PHYS1231": "Higher Physics 1B",
+                    "MATH1081": "Discrete Mathematics",
+                    "MATS1110": "Introduction to Materials for Engineering Applications",
+                    "PSYC1001": "Psychology 1A",
+                    "MATS1101": "Engineering Materials and Chemistry"
                 },
                 "title": "Level 1 Prescribed Electives",
                 "credits_to_complete": 12,
@@ -7288,12 +7296,12 @@
                         "Engineering Mathematics 2D",
                         "Engineering Mathematics 2E"
                     ],
-                    "ENGG2400": "Mechanics of Solids 1",
-                    "MINE2610": "Systems Engineering and Mining Services",
-                    "MATH2089": "Numerical Methods and Statistics",
-                    "DESN2000": "Engineering Design and Professional Practice",
                     "MATS2005": "Introduction to Fluid Flow and Heat Transfer",
-                    "MINE2810": "Minerals and Processing"
+                    "MATH2089": "Numerical Methods and Statistics",
+                    "MINE2610": "Systems Engineering and Mining Services",
+                    "DESN2000": "Engineering Design and Professional Practice",
+                    "MINE2810": "Minerals and Processing",
+                    "ENGG2400": "Mechanics of Solids 1"
                 },
                 "title": "Level 2 Core Courses",
                 "credits_to_complete": 42,
@@ -7305,27 +7313,19 @@
             },
             {
                 "courses": {
-                    "ENGG1300": "Engineering Mechanics",
-                    "DESN1000": "Introduction to Engineering Design and Innovation",
-                    "ENGG1811": "Computing for Engineers",
-                    "MATH1231 or MATH1241": [
-                        "Mathematics 1B",
-                        "Higher Mathematics 1B"
-                    ],
-                    "PHYS1121 or PHYS1131": [
-                        "Physics 1A",
-                        "Higher Physics 1A"
-                    ],
-                    "MATH1131 or MATH1141": [
-                        "Mathematics 1A",
-                        "Higher Mathematics 1A"
-                    ]
+                    "MINE4250": "Hardrock Mine Design and Feasibility Project",
+                    "MERE4952": "Research Thesis B",
+                    "MERE4951": "Research Thesis A",
+                    "MINE4310": "Mine Geotechnical Engineering",
+                    "MINE4260": "Coal Mine Design and Feasibility Project",
+                    "MERE4953": "Research Thesis C",
+                    "MINE4710": "Mine Management"
                 },
-                "title": "Level 1 Core Courses",
+                "title": "Level 4 Core Courses",
                 "credits_to_complete": 36,
                 "core": true,
                 "levels": [
-                    1
+                    4
                 ],
                 "notes": ""
             }
@@ -7468,116 +7468,30 @@
         "curriculum": [
             {
                 "courses": {
-                    "MANF9420": "Operations and Supply Chain Management in Engineering",
-                    "MANF9400": "Industrial Management",
-                    "MECH9650": "Applied Bio and Microfluidics",
-                    "ENGG2600": "Engineering Vertically Integrated Project",
-                    "AERO9500": "Space Systems Architectures and Orbits",
-                    "SOLA5056": "Sustainable Energy for Developing Countries",
-                    "MANF4100": "Design and Analysis of Product-Process Systems",
-                    "MECH4100": "Mechanical Design 2",
-                    "ENGG3001": "Fundamentals of Humanitarian Engineering",
-                    "ENGG3060": "Rehabilitation and Assistive Technology ",
-                    "MECH9761": "Automobile Engine Technology",
-                    "ENGG3600": "Engineering Vertically Integrated Project",
-                    "MECH4620": "Computational Fluid Dynamics",
-                    "SOLA5053": "Wind Energy Converters",
-                    "MECH9420": "Composite Materials and Mechanics",
-                    "ENGG4841": "Systems Engineering Fundamentals",
-                    "MECH4320": "Engineering Mechanics 3",
-                    "AERO9660": "Advanced Aerospace Propulsion",
-                    "AERO9610": "The Space Segment",
-                    "ENGG4600": "Engineering Vertically Integrated Project",
-                    "MANF4430": "Reliability and Maintenance Engineering",
-                    "MECH4880": "Refrigeration and Air Conditioning 1",
-                    "MECH4900": "Mechanics of Fracture and Fatigue",
-                    "MECH9325": "Fundamentals of Acoustics & Noise",
-                    "MMAN4200": "Additive Manufacturing",
-                    "SOLA5052": "Bioenergy and Renewable Fuels",
-                    "SOLA5057": "Energy Efficiency",
-                    "MECH4305": "Fundamental and Advanced Vibration Analysis",
-                    "MECH9660": "Biofluid Dynamics and Systems",
-                    "MANF9472": "Production Planning and Control",
-                    "MANF6860": "Strategic Manufacturing Management",
-                    "MECH9720": "Solar Thermal Energy Design"
+                    "MMAN3200": "Linear Systems and Control",
+                    "MTRN3500": "Computing Applications in Mechatronics Systems",
+                    "DESN3000": "Strategic Design Innovation",
+                    "MTRN3020": "Modelling and Control of Mechatronic Systems"
                 },
-                "title": "Discipline Electives",
-                "credits_to_complete": 6,
-                "core": false,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "ENGG3060": "Rehabilitation and Assistive Technology ",
-                    "MMAN4400": "Engineering Management",
-                    "ELEC4633": "Real-Time Engineering",
-                    "MTRN9400": "Control of Robotic Systems",
-                    "COMP3141": "Software System Design and Implementation",
-                    "COMP9444": "Neural Networks and Deep Learning",
-                    "COMP9517": "Computer Vision",
-                    "COMP3331": "Computer Networks and Applications",
-                    "MANF4611": "Process Modelling and Simulation",
-                    "MTRN4231": "Robotics Project",
-                    "COMP9417": "Machine Learning and Data Mining",
-                    "COMP3431": "Robotic Software Architecture"
-                },
-                "title": "Recommended Discipline Electives",
-                "credits_to_complete": 6,
-                "core": false,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "COMP1531": "Software Engineering Fundamentals",
-                    "PSYC1028": "Psychology of Human Centred Design",
-                    "CHEM1821": "Engineering Chemistry 1B",
-                    "CHEM1811": "Engineering Chemistry 1A",
-                    "ARTS2755": "Inclusive Development: Gender and Intersectionality",
-                    "BIOM1010": "Engineering in Medicine and Biology",
-                    "SOLA1070": "Sustainable Energy",
-                    "MATS1110": "Introduction to Materials for Engineering Applications",
-                    "COMP1521": "Computer Systems Fundamentals",
-                    "MATH1081": "Discrete Mathematics",
-                    "ENGG1300": "Engineering Mechanics",
-                    "CHEM1011": "Chemistry 1A: Atoms, Molecules and Energy",
-                    "MATS1101": "Engineering Materials and Chemistry",
-                    "ENGG1400": "Engineering Infrastructure Systems",
-                    "ELEC1111": "Electrical Circuit Fundamentals",
-                    "GMAT1110": "Surveying and Geospatial Engineering",
-                    "MINE1010": "Mineral Resources Engineering",
-                    "COMM1120": "Collaboration and Innovation in Business",
-                    "BABS1201": "Molecules, Cells and Genes",
-                    "CEIC1000": "Sustainable Product Engineering and Design",
-                    "PSYC1001": "Psychology 1A",
-                    "CHEM1021": "Chemistry 1B: Elements, Compounds and Life",
-                    "ENGG1200": "Undergraduate Special Projects",
-                    "GEOS1111": "Investigating Earth and Its Evolution",
-                    "CVEN1701": "Environmental Principles and Systems",
-                    "ENGG1100": "Grand Challenges for Engineering",
-                    "PHYS1231": "Higher Physics 1B",
-                    "BIOS1301": "Ecology, Sustainability and Environmental Science"
-                },
-                "title": "Level 1 Prescribed Electives",
-                "credits_to_complete": 12,
-                "core": false,
+                "title": "Level 3 Core Courses",
+                "credits_to_complete": 24,
+                "core": true,
                 "levels": [
-                    1
+                    3
                 ],
                 "notes": ""
             },
             {
                 "courses": {
-                    "MATH2018 or MATH2019": [
-                        "Engineering Mathematics 2D",
-                        "Engineering Mathematics 2E"
+                    "MATH2019 or MATH2018": [
+                        "Engineering Mathematics 2E",
+                        "Engineering Mathematics 2D"
                     ],
-                    "ELEC2141": "Digital Circuit Design",
                     "ENGG2400": "Mechanics of Solids 1",
-                    "DESN2000": "Engineering Design and Professional Practice",
-                    "MATH2089": "Numerical Methods and Statistics",
+                    "ELEC2141": "Digital Circuit Design",
                     "MMAN2300": "Engineering Mechanics 2",
+                    "MATH2089": "Numerical Methods and Statistics",
+                    "DESN2000": "Engineering Design and Professional Practice",
                     "MTRN2500": "Computing for Mechatronic Engineers"
                 },
                 "title": "Level 2 Core Courses",
@@ -7590,23 +7504,78 @@
             },
             {
                 "courses": {
-                    "MATH1141 or MATH1131": [
-                        "Higher Mathematics 1A",
-                        "Mathematics 1A"
+                    "MTRN4110": "Robot Design",
+                    "MTRN4010": "Advanced Autonomous Systems",
+                    "MTRN4230": "Robotics"
+                },
+                "title": "Level 4 Core Courses",
+                "credits_to_complete": 18,
+                "core": true,
+                "levels": [
+                    4
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "SOLA5053": "Wind Energy Converters",
+                    "ENGG4841": "Systems Engineering Fundamentals",
+                    "MECH9650": "Applied Bio and Microfluidics",
+                    "ENGG3060": "Rehabilitation and Assistive Technology ",
+                    "AERO9660": "Advanced Aerospace Propulsion",
+                    "SOLA5057": "Energy Efficiency",
+                    "MANF9400": "Industrial Management",
+                    "MANF9420": "Operations and Supply Chain Management in Engineering",
+                    "MECH9761": "Automobile Engine Technology",
+                    "MANF9472": "Production Planning and Control",
+                    "AERO9500": "Space Systems Architectures and Orbits",
+                    "SOLA5056": "Sustainable Energy for Developing Countries",
+                    "ENGG3001": "Fundamentals of Humanitarian Engineering",
+                    "MECH4900": "Mechanics of Fracture and Fatigue",
+                    "MECH9325": "Fundamentals of Acoustics & Noise",
+                    "MECH4620": "Computational Fluid Dynamics",
+                    "MECH4100": "Mechanical Design 2",
+                    "MANF4100": "Design and Analysis of Product-Process Systems",
+                    "ENGG3600": "Engineering Vertically Integrated Project",
+                    "ENGG4600": "Engineering Vertically Integrated Project",
+                    "MANF4430": "Reliability and Maintenance Engineering",
+                    "MMAN4200": "Additive Manufacturing",
+                    "MECH4305": "Fundamental and Advanced Vibration Analysis",
+                    "MECH9420": "Composite Materials and Mechanics",
+                    "MECH4320": "Engineering Mechanics 3",
+                    "MECH9660": "Biofluid Dynamics and Systems",
+                    "SOLA5052": "Bioenergy and Renewable Fuels",
+                    "MECH9720": "Solar Thermal Energy Design",
+                    "ENGG2600": "Engineering Vertically Integrated Project",
+                    "MECH4880": "Refrigeration and Air Conditioning 1",
+                    "MANF6860": "Strategic Manufacturing Management",
+                    "AERO9610": "The Space Segment"
+                },
+                "title": "Discipline Electives",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "MATH1131 or MATH1141": [
+                        "Mathematics 1A",
+                        "Higher Mathematics 1A"
                     ],
-                    "MATH1241 or MATH1231": [
-                        "Higher Mathematics 1B",
-                        "Mathematics 1B"
+                    "PHYS1121 or PHYS1131": [
+                        "Physics 1A",
+                        "Higher Physics 1A"
                     ],
-                    "ELEC1111": "Electrical Circuit Fundamentals",
-                    "COMP1531": "Software Engineering Fundamentals",
                     "MMAN1130": "Design and Manufacturing",
+                    "COMP1511": "Programming Fundamentals",
+                    "COMP1531": "Software Engineering Fundamentals",
                     "DESN1000": "Introduction to Engineering Design and Innovation",
                     "ENGG1300": "Engineering Mechanics",
-                    "COMP1511": "Programming Fundamentals",
-                    "PHYS1131 or PHYS1121": [
-                        "Higher Physics 1A",
-                        "Physics 1A"
+                    "ELEC1111": "Electrical Circuit Fundamentals",
+                    "MATH1231 or MATH1241": [
+                        "Mathematics 1B",
+                        "Higher Mathematics 1B"
                     ]
                 },
                 "title": "Level 1 Core Courses",
@@ -7619,25 +7588,11 @@
             },
             {
                 "courses": {
-                    "MTRN4230": "Robotics",
-                    "MTRN4010": "Advanced Autonomous Systems",
-                    "MTRN4110": "Robot Design"
-                },
-                "title": "Level 4 Core Courses",
-                "credits_to_complete": 18,
-                "core": true,
-                "levels": [
-                    4
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "MMAN4952": "Research Thesis B",
-                    "MMAN4010": "Thesis A",
-                    "MMAN4953": "Research Thesis C",
                     "MMAN4020": "Thesis B",
-                    "MMAN4951": "Research Thesis A"
+                    "MMAN4951": "Research Thesis A",
+                    "MMAN4952": "Research Thesis B",
+                    "MMAN4953": "Research Thesis C",
+                    "MMAN4010": "Thesis A"
                 },
                 "title": "Thesis Courses",
                 "credits_to_complete": 12,
@@ -7647,17 +7602,62 @@
             },
             {
                 "courses": {
-                    "DESN3000": "Strategic Design Innovation",
-                    "MMAN3200": "Linear Systems and Control",
-                    "MTRN3020": "Modelling and Control of Mechatronic Systems",
-                    "MTRN3500": "Computing Applications in Mechatronics Systems"
+                    "CHEM1021": "Chemistry 1B: Elements, Compounds and Life",
+                    "PSYC1028": "Psychology of Human Centred Design",
+                    "CHEM1811": "Engineering Chemistry 1A",
+                    "CHEM1011": "Chemistry 1A: Atoms, Molecules and Energy",
+                    "BABS1201": "Molecules, Cells and Genes",
+                    "CVEN1701": "Environmental Principles and Systems",
+                    "MATS1110": "Introduction to Materials for Engineering Applications",
+                    "GMAT1110": "Surveying and Geospatial Engineering",
+                    "BIOS1301": "Ecology, Sustainability and Environmental Science",
+                    "COMP1521": "Computer Systems Fundamentals",
+                    "BIOM1010": "Engineering in Medicine and Biology",
+                    "ELEC1111": "Electrical Circuit Fundamentals",
+                    "PSYC1001": "Psychology 1A",
+                    "ARTS2755": "Inclusive Development: Gender and Intersectionality",
+                    "CEIC1000": "Sustainable Product Engineering and Design",
+                    "MATH1081": "Discrete Mathematics",
+                    "MATS1101": "Engineering Materials and Chemistry",
+                    "ENGG1300": "Engineering Mechanics",
+                    "ENGG1200": "Undergraduate Special Projects",
+                    "COMM1120": "Collaboration and Innovation in Business",
+                    "GEOS1111": "Investigating Earth and Its Evolution",
+                    "PHYS1231": "Higher Physics 1B",
+                    "COMP1531": "Software Engineering Fundamentals",
+                    "CHEM1821": "Engineering Chemistry 1B",
+                    "SOLA1070": "Sustainable Energy",
+                    "MINE1010": "Mineral Resources Engineering",
+                    "ENGG1400": "Engineering Infrastructure Systems",
+                    "ENGG1100": "Grand Challenges for Engineering"
                 },
-                "title": "Level 3 Core Courses",
-                "credits_to_complete": 24,
-                "core": true,
+                "title": "Level 1 Prescribed Electives",
+                "credits_to_complete": 12,
+                "core": false,
                 "levels": [
-                    3
+                    1
                 ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "COMP3331": "Computer Networks and Applications",
+                    "COMP3141": "Software System Design and Implementation",
+                    "ENGG3060": "Rehabilitation and Assistive Technology ",
+                    "MTRN4231": "Robotics Project",
+                    "MTRN9400": "Control of Robotic Systems",
+                    "MANF4611": "Process Modelling and Simulation",
+                    "MMAN4400": "Engineering Management",
+                    "COMP3431": "Robotic Software Architecture",
+                    "COMP9517": "Computer Vision",
+                    "ELEC4633": "Real-Time Engineering",
+                    "COMP9444": "Neural Networks and Deep Learning",
+                    "COMP9417": "Machine Learning and Data Mining"
+                },
+                "title": "Recommended Discipline Electives",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [],
                 "notes": ""
             }
         ]
@@ -7937,80 +7937,85 @@
         "curriculum": [
             {
                 "courses": {
-                    "PTRL2010": "Business Practices in the Petroleum Industry",
-                    "CEIC2001": "Fluid and Particle Mechanics",
-                    "DESN2000": "Engineering Design and Professional Practice",
-                    "MERE2002": "Seismic Imaging",
-                    "PTRL2019": "Reservoir Engineering A",
-                    "MERE2001": "Sedimentary and Energy Resources Geology",
-                    "MATH2018 or MATH2019": [
-                        "Engineering Mathematics 2D",
-                        "Engineering Mathematics 2E"
-                    ]
+                    "GEOS2821": "Introduction to GIS and Remote Sensing",
+                    "CEIC2002": "Heat and Mass Transfer",
+                    "GEOS3761": "Environmental Change",
+                    "COMP4920": "Professional Issues and Ethics in Information Technology",
+                    "ENGG3001": "Fundamentals of Humanitarian Engineering",
+                    "CHEM2021": "Organic Chemistry: Mechanisms and Biomolecules",
+                    "ENGG4600": "Engineering Vertically Integrated Project",
+                    "AVIA3013": "Workplace Safety",
+                    "CHEM2011": "Physical Chemistry: Molecules, Energy and Change",
+                    "GEOS3733": "Environmental Geophysics",
+                    "GEOS2721": "Australian Physical Environments",
+                    "ELEC4445": "Entrepreneurial Engineering",
+                    "GEOS2241": "Peak Carbon: Climate Change and Energy Policy",
+                    "ECON1101": "Microeconomics 1",
+                    "CHEM2031": "Inorganic Chemistry: The Elements",
+                    "ECON1102": "Macroeconomics 1",
+                    "CVEN3502": "Water and Wastewater Engineering",
+                    "GEOS1701": "Environmental Systems, Processes and Issues",
+                    "PTRL5102": "Digital Core Analysis",
+                    "PTRL5100": "Geomechanics A",
+                    "CVEN2501": "Principles of Water Engineering",
+                    "CEIC2009": "Material and Energy Balances in the Chemical Process Industry",
+                    "MATS2001": "Physical Properties of Materials",
+                    "MARK1012": "Marketing Fundamentals",
+                    "GEOS2711": "Australian Climate and Vegetation",
+                    "CHEM2041": "Analytical Chemistry: Essential Methods",
+                    "MATS2008": "Thermodynamics and Phase Equilibria",
+                    "COMP1511": "Programming Fundamentals",
+                    "CEIC2000": "Material and Energy Systems",
+                    "PTRL5101": "Petroleum Geomechanics B",
+                    "GEOS3141": "Mineral and Energy Resources",
+                    "ENGG3600": "Engineering Vertically Integrated Project",
+                    "FINS1613": "Business Finance",
+                    "MATH2301": "Mathematical Computing",
+                    "ELEC4122": "Strategic Leadership and Ethics",
+                    "PTRL4024": "Drilling Fluids and Cementing",
+                    "ECON1107": "Elements of Environmental Economics",
+                    "GSOE9712": "Engineering Statistics and Experiment Design",
+                    "ENGG2600": "Engineering Vertically Integrated Project",
+                    "CEIC2004": "Industrial Chemistry for Chemical Engineers"
                 },
-                "title": "Level 2 Core Courses",
-                "credits_to_complete": 42,
-                "core": true,
+                "title": "Discipline Electives (Single Degree Mode)",
+                "credits_to_complete": 12,
+                "core": false,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "PTRL4011": "Integrated Oil/Gas Field Evaluation B (Thesis)",
+                    "MERE4952": "Research Thesis B",
+                    "PTRL4010": "Integrated Oil and Gas Field Evaluation A",
+                    "MERE4951": "Research Thesis A",
+                    "MERE4953": "Research Thesis C"
+                },
+                "title": "Level 4 Project / Thesis",
+                "credits_to_complete": 12,
+                "core": false,
                 "levels": [
-                    2
+                    4
                 ],
                 "notes": ""
             },
             {
                 "courses": {
-                    "BABS1201": "Molecules, Cells and Genes",
-                    "CHEM1021": "Chemistry 1B: Elements, Compounds and Life",
-                    "ENGG1300": "Engineering Mechanics",
-                    "ARTS2755": "Inclusive Development: Gender and Intersectionality",
-                    "MINE1010": "Mineral Resources Engineering",
-                    "MATH1081": "Discrete Mathematics",
-                    "ENGG1100": "Grand Challenges for Engineering",
-                    "GMAT1110": "Surveying and Geospatial Engineering",
-                    "PSYC1028": "Psychology of Human Centred Design",
-                    "COMP1531": "Software Engineering Fundamentals",
-                    "ENGG1400": "Engineering Infrastructure Systems",
-                    "PHYS1231": "Higher Physics 1B",
-                    "COMP1521": "Computer Systems Fundamentals",
-                    "ELEC1111": "Electrical Circuit Fundamentals",
-                    "SOLA1070": "Sustainable Energy",
-                    "MATS1110": "Introduction to Materials for Engineering Applications",
-                    "GEOS1111": "Investigating Earth and Its Evolution",
-                    "CHEM1811": "Engineering Chemistry 1A",
-                    "BIOM1010": "Engineering in Medicine and Biology",
-                    "CHEM1821": "Engineering Chemistry 1B",
-                    "CEIC1000": "Sustainable Product Engineering and Design",
-                    "COMM1120": "Collaboration and Innovation in Business",
-                    "BIOS1301": "Ecology, Sustainability and Environmental Science",
-                    "MATS1101": "Engineering Materials and Chemistry",
-                    "ENGG1200": "Undergraduate Special Projects",
-                    "PSYC1001": "Psychology 1A",
-                    "CVEN1701": "Environmental Principles and Systems",
-                    "CHEM1011": "Chemistry 1A: Atoms, Molecules and Energy"
-                },
-                "title": "Level 1 Prescribed Electives",
-                "credits_to_complete": 12,
-                "core": false,
-                "levels": [
-                    1
-                ],
-                "notes": "NOTE: GEOS1111 is the recommended first year elective for this specialisation."
-            },
-            {
-                "courses": {
-                    "PHYS1121 or PHYS1131": [
-                        "Physics 1A",
-                        "Higher Physics 1A"
-                    ],
-                    "MATH1231 or MATH1241": [
-                        "Mathematics 1B",
-                        "Higher Mathematics 1B"
-                    ],
-                    "MATS1101": "Engineering Materials and Chemistry",
-                    "ENGG1811": "Computing for Engineers",
-                    "DESN1000": "Introduction to Engineering Design and Innovation",
                     "MATH1131 or MATH1141": [
                         "Mathematics 1A",
                         "Higher Mathematics 1A"
+                    ],
+                    "MATH1241 or MATH1231": [
+                        "Higher Mathematics 1B",
+                        "Mathematics 1B"
+                    ],
+                    "ENGG1811": "Computing for Engineers",
+                    "MATS1101": "Engineering Materials and Chemistry",
+                    "DESN1000": "Introduction to Engineering Design and Innovation",
+                    "PHYS1121 or PHYS1131": [
+                        "Physics 1A",
+                        "Higher Physics 1A"
                     ]
                 },
                 "title": "Level 1 Core Courses",
@@ -8023,62 +8028,13 @@
             },
             {
                 "courses": {
-                    "ECON1102": "Macroeconomics 1",
-                    "PTRL5102": "Digital Core Analysis",
-                    "COMP1511": "Programming Fundamentals",
-                    "MARK1012": "Marketing Fundamentals",
-                    "ENGG2600": "Engineering Vertically Integrated Project",
-                    "GEOS2821": "Introduction to GIS and Remote Sensing",
-                    "PTRL5100": "Geomechanics A",
-                    "CEIC2000": "Material and Energy Systems",
-                    "GEOS2721": "Australian Physical Environments",
-                    "CEIC2004": "Industrial Chemistry for Chemical Engineers",
-                    "AVIA3013": "Workplace Safety",
-                    "MATH2301": "Mathematical Computing",
-                    "GEOS3141": "Mineral and Energy Resources",
-                    "CEIC2002": "Heat and Mass Transfer",
-                    "ECON1107": "Elements of Environmental Economics",
-                    "GEOS3733": "Environmental Geophysics",
-                    "CVEN3502": "Water and Wastewater Engineering",
-                    "PTRL4024": "Drilling Fluids and Cementing",
-                    "CHEM2011": "Physical Chemistry: Molecules, Energy and Change",
-                    "ENGG3001": "Fundamentals of Humanitarian Engineering",
-                    "CVEN2501": "Principles of Water Engineering",
-                    "CHEM2021": "Organic Chemistry: Mechanisms and Biomolecules",
-                    "ELEC4445": "Entrepreneurial Engineering",
-                    "GEOS2711": "Australian Climate and Vegetation",
-                    "CEIC2009": "Material and Energy Balances in the Chemical Process Industry",
-                    "GEOS1701": "Environmental Systems, Processes and Issues",
-                    "ENGG3600": "Engineering Vertically Integrated Project",
-                    "CHEM2041": "Analytical Chemistry: Essential Methods",
-                    "PTRL5101": "Petroleum Geomechanics B",
-                    "COMP4920": "Professional Issues and Ethics in Information Technology",
-                    "GSOE9712": "Engineering Statistics and Experiment Design",
-                    "FINS1613": "Business Finance",
-                    "ELEC4122": "Strategic Leadership and Ethics",
-                    "ENGG4600": "Engineering Vertically Integrated Project",
-                    "GEOS2241": "Peak Carbon: Climate Change and Energy Policy",
-                    "MATS2001": "Physical Properties of Materials",
-                    "CHEM2031": "Inorganic Chemistry: The Elements",
-                    "MATS2008": "Thermodynamics and Phase Equilibria",
-                    "ECON1101": "Microeconomics 1",
-                    "GEOS3761": "Environmental Change"
-                },
-                "title": "Discipline Electives (Single Degree Mode)",
-                "credits_to_complete": 12,
-                "core": false,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "PTRL3040": "Numerical Reservoir Simulation",
-                    "PTRL3030": "Reservoir Characterisation",
                     "PTRL2020": "Petrophysics",
-                    "PTRL3001": "Reservoir Engineering B",
+                    "PTRL3030": "Reservoir Characterisation",
+                    "PTRL3050": "Well Pressure Testing",
+                    "PTRL3040": "Numerical Reservoir Simulation",
                     "PTRL3025": "Petroleum Economics",
                     "PTRL3015": "Well Drilling Equipment and Operations",
-                    "PTRL3050": "Well Pressure Testing"
+                    "PTRL3001": "Reservoir Engineering B"
                 },
                 "title": "Level 3 Core Courses",
                 "credits_to_complete": 42,
@@ -8090,26 +8046,10 @@
             },
             {
                 "courses": {
-                    "PTRL4011": "Integrated Oil/Gas Field Evaluation B (Thesis)",
-                    "PTRL4010": "Integrated Oil and Gas Field Evaluation A",
-                    "MERE4952": "Research Thesis B",
-                    "MERE4953": "Research Thesis C",
-                    "MERE4951": "Research Thesis A"
-                },
-                "title": "Level 4 Project / Thesis",
-                "credits_to_complete": 12,
-                "core": false,
-                "levels": [
-                    4
-                ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "PTRL4012": "Enhanced Oil and Gas Recovery",
                     "PTRL4017": "Well Technology",
-                    "PTRL4020": "Natural Gas Engineering",
-                    "PTRL4021": "Petroleum Production Engineering"
+                    "PTRL4021": "Petroleum Production Engineering",
+                    "PTRL4012": "Enhanced Oil and Gas Recovery",
+                    "PTRL4020": "Natural Gas Engineering"
                 },
                 "title": "Level 4 Core Courses",
                 "credits_to_complete": 24,
@@ -8118,6 +8058,66 @@
                     4
                 ],
                 "notes": ""
+            },
+            {
+                "courses": {
+                    "MATH2018 or MATH2019": [
+                        "Engineering Mathematics 2D",
+                        "Engineering Mathematics 2E"
+                    ],
+                    "MERE2002": "Seismic Imaging",
+                    "MERE2001": "Sedimentary and Energy Resources Geology",
+                    "PTRL2019": "Reservoir Engineering A",
+                    "PTRL2010": "Business Practices in the Petroleum Industry",
+                    "DESN2000": "Engineering Design and Professional Practice",
+                    "CEIC2001": "Fluid and Particle Mechanics"
+                },
+                "title": "Level 2 Core Courses",
+                "credits_to_complete": 42,
+                "core": true,
+                "levels": [
+                    2
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "CHEM1811": "Engineering Chemistry 1A",
+                    "MATS1101": "Engineering Materials and Chemistry",
+                    "MATH1081": "Discrete Mathematics",
+                    "ENGG1100": "Grand Challenges for Engineering",
+                    "CEIC1000": "Sustainable Product Engineering and Design",
+                    "PSYC1028": "Psychology of Human Centred Design",
+                    "BIOS1301": "Ecology, Sustainability and Environmental Science",
+                    "CHEM1011": "Chemistry 1A: Atoms, Molecules and Energy",
+                    "GMAT1110": "Surveying and Geospatial Engineering",
+                    "PSYC1001": "Psychology 1A",
+                    "ENGG1400": "Engineering Infrastructure Systems",
+                    "PHYS1231": "Higher Physics 1B",
+                    "COMP1521": "Computer Systems Fundamentals",
+                    "ENGG1200": "Undergraduate Special Projects",
+                    "CHEM1021": "Chemistry 1B: Elements, Compounds and Life",
+                    "CHEM1821": "Engineering Chemistry 1B",
+                    "BABS1201": "Molecules, Cells and Genes",
+                    "ENGG1300": "Engineering Mechanics",
+                    "COMP1531": "Software Engineering Fundamentals",
+                    "GEOS1111": "Investigating Earth and Its Evolution",
+                    "MATS1110": "Introduction to Materials for Engineering Applications",
+                    "BIOM1010": "Engineering in Medicine and Biology",
+                    "ARTS2755": "Inclusive Development: Gender and Intersectionality",
+                    "MINE1010": "Mineral Resources Engineering",
+                    "SOLA1070": "Sustainable Energy",
+                    "COMM1120": "Collaboration and Innovation in Business",
+                    "ELEC1111": "Electrical Circuit Fundamentals",
+                    "CVEN1701": "Environmental Principles and Systems"
+                },
+                "title": "Level 1 Prescribed Electives",
+                "credits_to_complete": 12,
+                "core": false,
+                "levels": [
+                    1
+                ],
+                "notes": "NOTE: GEOS1111 is the recommended first year elective for this specialisation."
             }
         ]
     },
