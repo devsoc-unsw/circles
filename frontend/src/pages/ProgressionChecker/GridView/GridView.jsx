@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   Badge,
   Button,
@@ -7,10 +8,13 @@ import {
   Tooltip,
   Typography,
 } from "antd";
+import { addTab } from "reducers/courseTabsSlice";
 import getPastCourses from "../getPastCourses";
 import "./index.less";
 
 const GridView = ({ isLoading, structure }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { Title } = Typography;
   const [pastCourses, setPastCourses] = useState({});
   const [gridLayout, setGridLayout] = useState({});
@@ -74,6 +78,11 @@ const GridView = ({ isLoading, structure }) => {
     setPastCourses(getPastCourses(years, startYear, courses));
     generateGridStructure();
   }, [isLoading, structure, years, startYear, courses]);
+
+  const handleCourseLink = (courseCode) => {
+    navigate("/course-selector");
+    dispatch(addTab(courseCode));
+  };
   return (
     <div className="gridViewContainer">
       {isLoading ? (
@@ -101,12 +110,24 @@ const GridView = ({ isLoading, structure }) => {
                             </Tooltip>
                           )}
                         >
-                          <Button className="checkerButton" type="primary" style={course.completed ? null : { background: "#FFF", color: "#9254de" }} key={course.key}>
+                          <Button
+                            className="checkerButton"
+                            type="primary"
+                            style={course.completed ? null : { background: "#FFF", color: "#9254de" }}
+                            key={course.key}
+                            onClick={() => handleCourseLink(course.key)}
+                          >
                             {course.key}: {course.title}
                           </Button>
                         </Badge>
                       ) : (
-                        <Button className="checkerButton" type="primary" style={course.completed ? null : { background: "#FFF", color: "#9254de" }} key={course.key}>
+                        <Button
+                          className="checkerButton"
+                          type="primary"
+                          style={course.completed ? null : { background: "#FFF", color: "#9254de" }}
+                          key={course.key}
+                          onClick={() => handleCourseLink(course.key)}
+                        >
                           {course.key}: {course.title}
                         </Button>
                       )
