@@ -12,7 +12,7 @@ const openNotification = (msg) => {
     message: msg,
     duration: 2,
     className: "text helpNotif",
-    placement: "topRight",
+    placement: "bottomRight",
   };
   notification.error(args);
 };
