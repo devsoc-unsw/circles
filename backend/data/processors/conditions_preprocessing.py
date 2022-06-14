@@ -291,7 +291,7 @@ def convert_GRADE(processed: str) -> str:
 
 def convert_level(processed: str) -> str:
     """Converts level X to LX"""
-    return re.sub(r"level (\d)", r"L\1", processed, flags=re.IGNORECASE)
+    return re.sub(r"((at|in|of) )?level (\d)( courses)?", r"in L\3", processed, flags=re.IGNORECASE)
 
 
 def convert_program_type(processed: str) -> str:

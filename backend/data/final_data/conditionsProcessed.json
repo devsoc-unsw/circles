@@ -692,7 +692,7 @@
     },
     "ARTS2129": {
         "original": "24 units of credit at Level 1 courses<br/><br/>",
-        "processed": "24UOC in L1 courses"
+        "processed": "24UOC in L1"
     },
     "ARTS2150": {
         "original": "Prerequisite: 24 units of credit at Level 1<br/><br/>",
@@ -1168,23 +1168,23 @@
     },
     "ARTS3091": {
         "original": "Prerequisite: 48 uoc overall, including 6 uoc at level 1 and 6 uoc at level 2 in one of the following streams, MCT. Or 6 uoc  level 1 and 6 uoc level 2 Prescribed Media Electives and enrolment in a Media single or double degreel program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, MCT. || 6UOC L1 && 6UOC L2 Media Electives && enrolment in a Media single || double degreel program"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, MCT. || 6UOC in L1 && 6UOC in L2 Media Electives && enrolment in a Media single || double degreel program"
     },
     "ARTS3092": {
         "original": "Prerequisite: 48 uoc overall, including 6 uoc at level 1 and 6 uoc at level 2 in one of the following streams, MCT. Or 6 uoc  level 1 and 6 uoc level 2 Prescribed Media Electives and enrolment in a Media single or double degreel program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, MCT. || 6UOC L1 && 6UOC L2 Media Electives && enrolment in a Media single || double degreel program"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, MCT. || 6UOC in L1 && 6UOC in L2 Media Electives && enrolment in a Media single || double degreel program"
     },
     "ARTS3093": {
         "original": "Prerequisite: 48 uoc overall, including 6 uoc at level 1 and 6 uoc at level 2 in one of the following streams, MCT. Or 6 uoc  level 1 and 6 uoc level 2 Prescribed Media Electives and enrolment in a Media single or double degreel program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, MCT. || 6UOC L1 && 6UOC L2 Media Electives && enrolment in a Media single || double degreel program"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, MCT. || 6UOC in L1 && 6UOC in L2 Media Electives && enrolment in a Media single || double degreel program"
     },
     "ARTS3096": {
         "original": "Prerequisite: 48 uoc overall, including 6 uoc at level 1 and 6 uoc at level 2 in one of the following streams, MCT. Or 6 uoc  level 1 and 6 uoc level 2 Prescribed Media Electives and enrolment in a Media single or double degreel program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, MCT. || 6UOC L1 && 6UOC L2 Media Electives && enrolment in a Media single || double degreel program"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, MCT. || 6UOC in L1 && 6UOC in L2 Media Electives && enrolment in a Media single || double degreel program"
     },
     "ARTS3097": {
         "original": "Prerequisite: 48 uoc overall, including 6 uoc at level 1 and 6 uoc at level 2 in one of the following streams, MCT. Or 6 uoc  level 1 and 6 uoc level 2 Prescribed Media Electives and enrolment in a Media single or double degreel program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, MCT. || 6UOC L1 && 6UOC L2 Media Electives && enrolment in a Media single || double degreel program"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, MCT. || 6UOC in L1 && 6UOC in L2 Media Electives && enrolment in a Media single || double degreel program"
     },
     "ARTS3122": {
         "original": "Prerequisite: 48 uoc overall, including 6 uoc at level 1 and 6 uoc at level 2 in the Theatre & Performance Studies Stream<br/><br/>",
@@ -1596,7 +1596,7 @@
     },
     "ARTS3886": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC level 1 and 6 UOC level 2 in one of the following streams, Criminology/S&A. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-        "processed": "48UOC && 6UOC L1 && 6UOC L2 in one of the following streams, Criminology/S&A. || 48UOC && (3447)"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Criminology/S&A. || 48UOC && (3447)"
     },
     "ARTS3900": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Gender Studies or History.<br/><br/>",
@@ -8132,7 +8132,7 @@
     },
     "MDIA3003": {
         "original": "Prerequisite: 66 units of credit overall, including 6 units of credit Level 2 MDIA core courses and enrolment in a Media (Communication & Journalism) or Media (PR & Advertising) program<br/><br/>",
-        "processed": "66UOC && 6UOC L2 MDIA core courses && enrolment in a Media (Communication && Journalism) || Media (PR && Advertising) program"
+        "processed": "66UOC && 6UOC in L2 MDIA core courses && enrolment in a Media (Communication && Journalism) || Media (PR && Advertising) program"
     },
     "MDIA3004": {
         "original": "Prerequisite: 66 units of credit overall, and enrolment in a single or double degree Media program<br/><br/>",
@@ -9120,7 +9120,7 @@
     },
     "PHAR2011": {
         "original": "Prerequisite: 6 UOC Level 1 Biology (BABS or BIOS ), 12 UOC Level 1 Chemistry, 6 UOC Level 1 Mathematics and Physiology 1A (Note: Medicinal Chemistry students may substitute BIOC2101 for Physiology 1A) or equivalent DPST courses.<br/><br/>",
-        "processed": "6UOC L1 Biology (BABS || BIOS ), 12UOC L1 Chemistry, 6UOC L1 Mathematics && Physiology 1A (Note: Medicinal Chemistry may substitute BIOC2101 for Physiology 1A) || equivalent DPST courses"
+        "processed": "6UOC in L1 Biology (BABS || BIOS ), 12UOC in L1 Chemistry, 6UOC in L1 Mathematics && Physiology 1A (Note: Medicinal Chemistry may substitute BIOC2101 for Physiology 1A) || equivalent DPST courses"
     },
     "PHAR3101": {
         "original": "Prerequisite: PHAR2011<br/><br/>",
@@ -9204,7 +9204,7 @@
     },
     "PHSL2101": {
         "original": "Prerequisite: Prerequisite: 6 UOC of level 1 Biology; and 6 UOC of Level 1 CHEM; and 6 UOC Level 1 MATH or equivalent DPST courses.<br/><br/>",
-        "processed": "6UOC in L1 Biology && 6UOC in L1 CHEM && 6UOC L1 MATH || equivalent DPST courses"
+        "processed": "6UOC in L1 Biology && 6UOC in L1 CHEM && 6UOC in L1 MATH || equivalent DPST courses"
     },
     "PHSL2121": {
         "original": "",
@@ -11139,19 +11139,19 @@
     },
     "ZGEN2215": {
         "original": "Prerequisite: 36 Units of Credit in Level 1 courses<br/><br/>",
-        "processed": "36UOC in L1 courses"
+        "processed": "36UOC in L1"
     },
     "ZGEN2222": {
         "original": "Prerequisite: 36 Units of Credit in Level 1 courses<br/><br/>",
-        "processed": "36UOC in L1 courses"
+        "processed": "36UOC in L1"
     },
     "ZGEN2240": {
         "original": "Prerequisite: 36 Units of Credit in Level 1 courses<br/><br/>",
-        "processed": "36UOC in L1 courses"
+        "processed": "36UOC in L1"
     },
     "ZGEN2801": {
         "original": "Prerequisite: 36 Units of Credit in Level 1 courses<br/><br/>",
-        "processed": "36UOC in L1 courses"
+        "processed": "36UOC in L1"
     },
     "ZHSS1101": {
         "original": "",
