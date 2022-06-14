@@ -9,7 +9,7 @@ import {
 import PageTemplate from "components/PageTemplate";
 import { resetCourses } from "reducers/coursesSlice";
 import { resetTabs } from "reducers/courseTabsSlice";
-import { initialState, resetDegree } from "reducers/degreeSlice";
+import { resetDegree } from "reducers/degreeSlice";
 import { resetPlanner } from "reducers/plannerSlice";
 import DegreeStep from "./steps/DegreeStep";
 import MinorStep from "./steps/MinorStep";
@@ -38,8 +38,13 @@ const DegreeWizard = () => {
 
   useEffect(() => {
     // TODO: Warning dialog before planner is reset.
-    if (JSON.stringify(degree) !== JSON.stringify(initialState)) {
+    if (degree.isComplete) {
       setIsModalVisible(true);
+    } else {
+      dispatch(resetPlanner());
+      dispatch(resetDegree());
+      dispatch(resetTabs());
+      dispatch(resetCourses());
     }
     csDegreeDisclaimer();
   }, []);
