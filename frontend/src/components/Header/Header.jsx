@@ -20,6 +20,57 @@ const Header = () => {
   const [showDrawer, setShowDrawer] = useState(false);
   const { pathname } = useLocation();
 
+  const smallHeader = (
+    <S.HeaderContent>
+      {inDev && <ThemeToggle />}
+      <div style={{ margin: "10px" }}>
+        <Button
+          type="primary"
+          size="large"
+          onClick={() => setShowDrawer(true)}
+          icon={<BarsOutlined style={{ color: "#fff", fontSize: "1.7rem" }} />}
+        />
+      </div>
+    </S.HeaderContent>
+  );
+
+  const largeHeader = (
+    <S.HeaderContent>
+      <Menu
+        theme="dark"
+        selectedKeys={[pathname.split("/")[1]]}
+        mode="horizontal"
+        overflowedIndicator={null}
+        style={{
+          backgroundColor: "inherit",
+        }}
+      >
+        <Menu.Item key="course-selector">
+          <Link to="/course-selector">Course Selector</Link>
+        </Menu.Item>
+        {
+          inDev && (
+            <Menu.Item key="graphical-selector">
+              <Link to="/graphical-selector">Graphical Selector</Link>
+            </Menu.Item>
+          )
+        }
+        <Menu.Item key="term-planner">
+          <Link to="/term-planner">Term Planner</Link>
+        </Menu.Item>
+        {
+          inDev && (
+            <Menu.Item key="progression-checker">
+              <Link to="/progression-checker">Progression Checker</Link>
+            </Menu.Item>
+          )
+        }
+      </Menu>
+      {inDev && <ThemeToggle />}
+      <PlannerCart />
+    </S.HeaderContent>
+  );
+
   return (
     <S.HeaderWrapper>
       <Link to="/degree-wizard">
@@ -37,48 +88,9 @@ const Header = () => {
           </Title>
         </S.LogoWrapper>
       </Link>
-      {isSmall ? (
-        <Button
-          type="primary"
-          onClick={() => setShowDrawer(true)}
-          icon={<BarsOutlined style={{ color: "#fff", fontSize: "1.7rem" }} />}
-        />
-      ) : (
-        <S.HeaderContent>
-          <Menu
-            theme="dark"
-            selectedKeys={[pathname.split("/")[1]]}
-            mode="horizontal"
-            overflowedIndicator={null}
-            style={{
-              backgroundColor: "inherit",
-            }}
-          >
-            <Menu.Item key="course-selector">
-              <Link to="/course-selector">Course Selector</Link>
-            </Menu.Item>
-            {
-              inDev && (
-                <Menu.Item key="graphical-selector">
-                  <Link to="/graphical-selector">Graphical Selector</Link>
-                </Menu.Item>
-              )
-            }
-            <Menu.Item key="term-planner">
-              <Link to="/term-planner">Term Planner</Link>
-            </Menu.Item>
-            {
-              inDev && (
-                <Menu.Item key="progression-checker">
-                  <Link to="/progression-checker">Progression Checker</Link>
-                </Menu.Item>
-              )
-            }
-          </Menu>
-          <PlannerCart />
-          {inDev && <ThemeToggle />}
-        </S.HeaderContent>
-      )}
+
+      {isSmall ? smallHeader : largeHeader}
+
       <Drawer
         onClose={() => setShowDrawer(false)}
         visible={showDrawer}
