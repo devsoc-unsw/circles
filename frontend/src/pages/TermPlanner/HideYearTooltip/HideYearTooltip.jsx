@@ -15,6 +15,7 @@ const HideYearTooltip = ({ year }) => {
       message: "Something's not right",
       description: "You cannot hide all years in your term planner",
       duration: 2,
+      placement: "bottomRight",
     });
   };
 

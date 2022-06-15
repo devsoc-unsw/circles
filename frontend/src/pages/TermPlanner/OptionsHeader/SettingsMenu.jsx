@@ -74,7 +74,7 @@ const SettingsMenu = () => {
           onChange={handleUpdateDegreeLength}
         >
           {years.map((num) => (
-            <Option value={num}>{num}</Option>
+            <Option key={num} value={num}>{num}</Option>
           ))}
         </Select>
       </div>
