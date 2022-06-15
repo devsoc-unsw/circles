@@ -45,6 +45,7 @@ class CourseDetails(BaseModel):
     gen_ed: int
     is_legacy: bool
     is_accurate: bool
+    is_multiterm: bool
 
 
 class Structure(BaseModel):  # this is a copout - we should avoid this

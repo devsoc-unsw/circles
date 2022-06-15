@@ -157,13 +157,16 @@ def process_enrolment_rules(processed: dict, course: dict):
         "<br/><br/>", "", course["enrolment_rules"])
 
 def process_multi_term(processed: dict, formatted: dict) -> None:
-    is_multiterm = 0
+    is_multiterm = False
 
     for attribute in formatted["attributes"]:
         if attribute["type"] == "multi-term_course":
-            is_multiterm = 1
+            is_multiterm = True
 
-    processed["multi_term"] = is_multiterm
+    if int(formatted["UOC"]) % 6 == 0:
+        is_multiterm = False
+    
+    processed["is_multiterm"] = is_multiterm
 
 if __name__ == "__main__":
     process_course_data()

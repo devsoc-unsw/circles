@@ -33,6 +33,7 @@ const AddToPlannerButton = () => {
   }, [coursesInPlanner]);
 
   const addToPlanner = (type) => {
+    console.log("DA COURSE:", course);
     const data = {
       courseCode: course.code,
       courseData: {
