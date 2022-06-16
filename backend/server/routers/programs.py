@@ -79,7 +79,7 @@ def getPrograms():
                                     "COMPD1": "Computer Science (Database Systems)",
                                     "COMPY1": "Computer Science (Security Engineering)",
                                 },
-                                "note": "COMPA1 is the default stream, and will be used if no other stream is selected."
+                                "notes": "COMPA1 is the default stream, and will be used if no other stream is selected."
                             }
                         }
                     }
@@ -163,14 +163,11 @@ def addSubgroupContainer(structure: dict, type: str, container: dict, exceptions
     if container.get("type") == "gened":
         title = "General Education"
     
-    # don't do anything if it's info_rule or limit_rule
-    if container.get("type") is not None and "rule" in container.get("type"):
-        return []
-
     structure[type][title] = {}
     item = structure[type][title]
     item["UOC"] = container.get("credits_to_complete") if container.get("credits_to_complete") is not None else 0
     item["courses"] = {}
+    item["type"] = container.get("type") if container.get("type") is not None else ""
 
     if container.get("courses") is None:
         return []
