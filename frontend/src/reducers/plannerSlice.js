@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getTermsList } from "pages/TermPlanner/utils";
 
 // set up hidden object
 const generateHiddenInit = (startYear, numYears) => {
@@ -78,7 +79,16 @@ const plannerSlice = createSlice({
       state.unplanned = state.unplanned.filter(
         (c) => c !== course,
       );
-      state.years[destRow][destTerm].splice(destIndex, 0, course);
+      if (state.courses[course].isMultiterm) {
+        const termsList = getTermsList(destTerm, state.courses[course].UOC, state.isSummerEnabled);
+        termsList.forEach((termRow) => {
+          const { term, rowOffset } = termRow;
+          const index = state.years[destRow + rowOffset][term].length;
+          state.years[destRow + rowOffset][term].splice(index, 0, course);
+        });
+      } else {
+        state.years[destRow][destTerm].splice(destIndex, 0, course);
+      }
     },
     setPlannedCourseToTerm: (state, action) => {
       const {

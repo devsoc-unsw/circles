@@ -33,7 +33,6 @@ const AddToPlannerButton = () => {
   }, [coursesInPlanner]);
 
   const addToPlanner = (type) => {
-    console.log("DA COURSE:", course);
     const data = {
       courseCode: course.code,
       courseData: {
@@ -49,6 +48,7 @@ const AddToPlannerButton = () => {
         handbookNote: course.handbook_note,
         isAccurate: course.is_accurate,
         mark: null,
+        isMultiterm: course.is_multiterm,
       },
     };
     dispatch(addToUnplanned(data));

@@ -82,4 +82,49 @@ const prepareCoursesForValidation = (planner, degree, suppress) => {
   return payload;
 };
 
-export { getMostRecentPastTerm, parseMarkToInt, prepareCoursesForValidation };
+// Calculated lcm(uoc, 6) to determine number of times course must be taken.
+// e.g. 2 UOC course must be taken 3 times, 3 UOC course must be take 1 time
+const getNumTerms = (uoc) => {
+  let num1 = uoc;
+  let num2 = 6;
+  while (num2) {
+    const tempNum = num2;
+    num2 = num1 % num2;
+    num1 = tempNum;
+  }
+  console.log(uoc, num1);
+  console.log("GOT", num1);
+  return 6 / num1;
+};
+
+const getTermsList = (currentTerm, uoc, summerTerm) => {
+  const terms = ["T1", "T2", "T3"];
+  const termsList = [];
+
+  if (summerTerm) terms.shift("T0");
+
+  let index = terms.indexOf(currentTerm);
+  let rowOffset = 0;
+  console.log("UOC", uoc);
+  const numTerms = getNumTerms(uoc);
+  console.log("NUMTERMS:", numTerms);
+  for (let i = 0; i < numTerms; i++) {
+    if (index === terms.length) {
+      index = 0;
+      rowOffset += 1;
+    }
+
+    termsList.push({
+      term: terms[index],
+      rowOffset,
+    });
+
+    index += 1;
+  }
+
+  return termsList;
+};
+
+export {
+  getMostRecentPastTerm, getTermsList, parseMarkToInt, prepareCoursesForValidation,
+};

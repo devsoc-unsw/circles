@@ -211,6 +211,7 @@ const MenuItem = ({
         warnings: [],
         handbookNote: course.handbook_note,
         isAccurate: course.is_accurate,
+        isMultiterm: course.is_multiterm,
       },
     };
     dispatch(addToUnplanned(data));
