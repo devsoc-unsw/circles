@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import circlesLogo from "assets/circlesWithBg.svg";
-import { initialState } from "reducers/degreeSlice";
 import "./index.less";
 
 const PageLoading = ({ setLoading }) => {
@@ -17,7 +16,7 @@ const PageLoading = ({ setLoading }) => {
   useEffect(() => {
     setTimeout(() => {
       // check if this is a first time user
-      navigate(JSON.stringify(degree) === JSON.stringify(initialState) ? "/degree-wizard" : route);
+      navigate(!degree.isComplete ? "/degree-wizard" : route);
       setLoading(false);
     }, 750);
   }, []);

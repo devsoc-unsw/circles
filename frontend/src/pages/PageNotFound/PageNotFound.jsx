@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Typography } from "antd";
 import circlesLogo from "assets/circlesLogo.svg";
+import PageTemplate from "components/PageTemplate";
 import "./index.less";
 
 const { Title } = Typography;
@@ -9,7 +10,7 @@ const PageNotFound = () => {
   const navigate = useNavigate();
 
   return (
-    <>
+    <PageTemplate>
       <div className="main-con">
         <div className="grid-circle">
           <div className="box">
@@ -56,7 +57,7 @@ const PageNotFound = () => {
         <Title level={2} className="page-text">PAGE NOT FOUND</Title>
         <Button type="primary" size="large" onClick={() => navigate("/course-selector")}>Go Back Home</Button>
       </div>
-    </>
+    </PageTemplate>
   );
 };
 

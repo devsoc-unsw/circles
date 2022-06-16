@@ -6,7 +6,6 @@ import {
 } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { darkTheme, GlobalStyles, lightTheme } from "config/theme";
-import Header from "./components/Header";
 import PageLoading from "./components/PageLoading";
 import CourseSelector from "./pages/CourseSelector";
 import DegreeWizard from "./pages/DegreeWizard";
@@ -38,48 +37,23 @@ const App = () => {
             <Route path="/degree-wizard" element={<DegreeWizard />} />
             <Route
               path="/course-selector"
-              element={(
-                <div>
-                  <Header />
-                  <CourseSelector />
-                </div>
-            )}
+              element={<CourseSelector />}
             />
             <Route
               path="/graphical-selector"
-              element={(
-                <div>
-                  <Header />
-                  <GraphicalSelector />
-                </div>
-            )}
+              element={<GraphicalSelector />}
             />
             <Route
               path="/term-planner"
-              element={(
-                <div>
-                  <Header />
-                  <TermPlanner />
-                </div>
-            )}
+              element={<TermPlanner />}
             />
             <Route
               path="/progression-checker"
-              element={(
-                <div>
-                  <Header />
-                  <ProgressionChecker />
-                </div>
-            )}
+              element={<ProgressionChecker />}
             />
             <Route
               path="*"
-              element={(
-                <div>
-                  <Header />
-                  <PageNotFound />
-                </div>
-            )}
+              element={<PageNotFound />}
             />
           </Routes>
         )}

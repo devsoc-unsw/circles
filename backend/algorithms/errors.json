@@ -8743,44 +8743,6 @@
         ],
         "broke at": "Index 6, good"
     },
-    "INFS3830": {
-        "condition": {
-            "original": "Pre-requisite: INFS3603 or (COMM2501 and in Business Analytics major (COMMJ)).<br/>Note: Students wishing to meet SAS certification must complete INFS3603. Completion of COMM2501 in lieu of INFS3603 will not be considered equivalent for the certificate.<br/><br/>",
-            "processed": "INFS3603 || (COMM2501 && COMMJ)",
-            "handbook_note": "Students wishing to meet SAS certification must complete INFS3603. Completion of COMM2501 in lieu of INFS3603 will not be considered equivalent for the certificate"
-        },
-        "tokens": [
-            "(",
-            "INFS3603",
-            "||",
-            "(",
-            "COMM2501",
-            "&&",
-            "COMMJ",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 6, COMMJ"
-    },
-    "INFS3873": {
-        "condition": {
-            "original": "Pre-requisite: INFS3603 or (COMM2501 and in Business Analytics major (COMMJ)).<br/>Note: Students wishing to meet SAS certification must complete INFS3603. Completion of COMM2501 in lieu of INFS3603 will not be considered equivalent for the certificate.<br/><br/>",
-            "processed": "INFS3603 || (COMM2501 && COMMJ)",
-            "handbook_note": "Students wishing to meet SAS certification must complete INFS3603. Completion of COMM2501 in lieu of INFS3603 will not be considered equivalent for the certificate"
-        },
-        "tokens": [
-            "(",
-            "INFS3603",
-            "||",
-            "(",
-            "COMM2501",
-            "&&",
-            "COMMJ",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 6, COMMJ"
-    },
     "INST2003": {
         "condition": {
             "original": "Prerequisite: Enrolment in an International Studies program (pre 2017). Or INST1005 and INST1006 and enrolment in an International Studies program (2017+). Or ARTS1250 and enrolment in a Geographical Studies major or minor<br/><br/>",

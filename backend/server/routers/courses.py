@@ -403,6 +403,7 @@ def getPathFrom(course):
         ]
     }
 
+
 @router.post("/coursesUnlockedWhenTaken/{courseToBeTaken}", response_model=CoursesUnlockedWhenTaken,
             responses={
                 400: {"model": message, "description": "Uh oh you broke me"},

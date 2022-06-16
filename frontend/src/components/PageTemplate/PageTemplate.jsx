@@ -1,11 +1,9 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import { Layout } from "antd";
 import FeedbackButton from "components/FeedbackButton";
+import Header from "components/Header";
 
-const { Content } = Layout;
-
-const PageTemplate = ({ children }) => (
+const PageTemplate = ({ children, showHeader = true }) => (
   <>
     <Helmet>
       <title>Circles</title>
@@ -18,10 +16,12 @@ const PageTemplate = ({ children }) => (
         content="circles, unsw, csesoc, degree, planner, course, plan"
       />
     </Helmet>
-    <Content className="app-root content">
+    { showHeader && <Header />}
+    {/* TODO: Make below as styled component once less has been migrated */}
+    <div className="app-root content">
       {children}
       <FeedbackButton />
-    </Content>
+    </div>
   </>
 );
 
