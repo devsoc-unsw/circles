@@ -79,7 +79,7 @@ def getPrograms():
                                     "COMPD1": "Computer Science (Database Systems)",
                                     "COMPY1": "Computer Science (Security Engineering)",
                                 },
-                                "note": "COMPA1 is the default stream, and will be used if no other stream is selected."
+                                "notes": "COMPA1 is the default stream, and will be used if no other stream is selected."
                             }
                         }
                     }
