@@ -297,4 +297,5 @@ def getStructure(
         for container in programsResult['components']['non_spec_data']:
             addSubgroupContainer(structure, "General", container, [])
 
+    
     return {"structure": structure}

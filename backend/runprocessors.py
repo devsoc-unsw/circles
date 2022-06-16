@@ -23,6 +23,7 @@ from data.scrapers.courses_formatting import format_course_data
 from data.scrapers.courses_scraper import scrape_course_data
 from data.scrapers.programs_formatting import format_prg_data
 from data.scrapers.programs_scraper import scrape_prg_data
+from data.scrapers.gened_scraper import scrape_gened_data
 from data.scrapers.specialisations_formatting import format_spn_data
 from data.scrapers.specialisations_scraper import scrape_spn_data
 from data.scrapers.faculty_code_formatting import format_code_data
@@ -67,6 +68,9 @@ run = {
         "scrape": scrape_prg_data,
         "format": format_prg_data,
         "process": process_prg_data,
+    },
+     "gened": {
+        "scrape": scrape_gened_data,
     },
     "specialisation": {
         "scrape": scrape_spn_data,
@@ -113,7 +117,7 @@ if __name__ == "__main__":
 
     elif args.stage == "all":
         # Run all the stages from top to bottom
-        if args.type in ["program", "specialisation", "course"]:
+        if args.type in ["program", "specialisation", "course", "gened"]:
             # NOTE: Be careful when using this as this will rerun the scrapers
             res = input(
                 f"Careful. You are about to run all stages of {args.type} INCLUDING the scrapers... Enter 'y' if you wish to proceed or 'n' to cancel: "
