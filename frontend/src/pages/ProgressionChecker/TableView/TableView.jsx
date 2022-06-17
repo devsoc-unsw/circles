@@ -6,7 +6,7 @@ import "./index.less";
 
 const TableView = ({ isLoading, structure }) => {
   const { Title } = Typography;
-  const [pastCourses, setPastCourses] = useState({});
+  const [plannerCourses, setPlannerCourses] = useState({});
   const [tableLayout, setTableLayout] = useState({});
   const { years, startYear, courses } = useSelector((store) => store.planner);
 
@@ -66,8 +66,8 @@ const TableView = ({ isLoading, structure }) => {
   };
 
   useEffect(() => {
-    setPastCourses(getFormattedPlannerCourses(years, startYear, courses));
-    generateTableStructure(pastCourses);
+    setPlannerCourses(getFormattedPlannerCourses(years, startYear, courses));
+    generateTableStructure(plannerCourses);
   }, [isLoading, structure, years, startYear, courses]);
 
   const columns = [

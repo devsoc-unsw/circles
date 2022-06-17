@@ -16,7 +16,7 @@ const GridView = ({ isLoading, structure }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { Title } = Typography;
-  const [pastCourses, setPastCourses] = useState({});
+  const [plannerCourses, setPlannerCourses] = useState({});
   const [gridLayout, setGridLayout] = useState({});
   const { years, startYear, courses } = useSelector((store) => store.planner);
 
@@ -39,7 +39,7 @@ const GridView = ({ isLoading, structure }) => {
               newGridLayout[group][subgroup].push({
                 key: courseCode,
                 title: subgroupStructure.courses[courseCode],
-                completed: courseCode in pastCourses,
+                completed: courseCode in plannerCourses,
                 // must check null as could be undefined
                 unplanned: courses[courseCode]?.plannedFor === null,
               });
@@ -56,7 +56,7 @@ const GridView = ({ isLoading, structure }) => {
                 newGridLayout[group][subgroup].push({
                   key: courseCode,
                   title: courseData.title,
-                  completed: courseCode in pastCourses,
+                  completed: courseCode in plannerCourses,
                   unplanned: !courseData.plannedFor,
                 });
               }
@@ -75,7 +75,7 @@ const GridView = ({ isLoading, structure }) => {
   };
 
   useEffect(() => {
-    setPastCourses(getFormattedPlannerCourses(years, startYear, courses));
+    setPlannerCourses(getFormattedPlannerCourses(years, startYear, courses));
     generateGridStructure();
   }, [isLoading, structure, years, startYear, courses]);
 
