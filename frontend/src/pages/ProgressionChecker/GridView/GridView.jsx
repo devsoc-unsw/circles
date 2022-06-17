@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { EyeOutlined } from "@ant-design/icons";
 import {
   Badge,
   Button,
@@ -39,7 +40,10 @@ const GridView = ({ isLoading, structure }) => {
               newGridLayout[group][subgroup].push({
                 key: courseCode,
                 title: subgroupStructure.courses[courseCode],
-                completed: courseCode in plannerCourses,
+                planned: courseCode in plannerCourses,
+                // past and termPlanned will be undefined for courses not in planner
+                past: plannerCourses[courseCode]?.past,
+                termPlanned: plannerCourses[courseCode]?.termPlanned,
                 // must check null as could be undefined
                 unplanned: courses[courseCode]?.plannedFor === null,
               });
@@ -56,7 +60,9 @@ const GridView = ({ isLoading, structure }) => {
                 newGridLayout[group][subgroup].push({
                   key: courseCode,
                   title: courseData.title,
-                  completed: courseCode in plannerCourses,
+                  planned: courseCode in plannerCourses,
+                  past: plannerCourses[courseCode].past,
+                  termPlanned: plannerCourses[courseCode].termPlanned,
                   unplanned: !courseData.plannedFor,
                 });
               }
@@ -83,6 +89,83 @@ const GridView = ({ isLoading, structure }) => {
     navigate("/course-selector");
     dispatch(addTab(courseCode));
   };
+
+  const courseBadge = (course) => {
+    if (course.unplanned) {
+      return (
+        <Badge
+          count={(
+            <Tooltip title="Course added but not planned">
+              <div className="courseBadgeIcon">!</div>
+            </Tooltip>
+          )}
+        >
+          <Button
+            className="checkerButton"
+            type="primary"
+            style={{ background: "#FFF", color: "#9254de" }}
+            key={course.key}
+            onClick={() => handleCourseLink(course.key)}
+          >
+            {course.key}: {course.title}
+          </Button>
+        </Badge>
+      );
+    }
+
+    if (course.past) {
+      return (
+        <Button
+          className="checkerButton"
+          type="primary"
+          key={course.key}
+          onClick={() => handleCourseLink(course.key)}
+        >
+          {course.key}: {course.title}
+        </Button>
+      );
+    }
+
+    // for future courses planned
+    // course.past can be undefined if not in term planner thus check for false
+    if (course.past === false) {
+      const tooltip = `Future course planned for ${course.termPlanned}`;
+      return (
+        <Badge
+          count={(
+            <Tooltip title={tooltip}>
+              <div className="courseBadgeIcon">
+                <EyeOutlined />
+              </div>
+            </Tooltip>
+          )}
+        >
+          <Button
+            className="checkerButton"
+            type="primary"
+            key={course.key}
+            onClick={() => handleCourseLink(course.key)}
+          >
+            {course.key}: {course.title}
+          </Button>
+        </Badge>
+      );
+    }
+
+    // below is default badge for courses not in term planner
+    return (
+      <Button
+        className="checkerButton"
+        type="primary"
+        style={{ background: "#FFF", color: "#9254de" }}
+        key={course.key}
+        onClick={() => handleCourseLink(course.key)}
+      >
+        {course.key}: {course.title}
+      </Button>
+    );
+  };
+
   return (
     <div className="gridViewContainer">
       {isLoading ? (
@@ -100,37 +183,7 @@ const GridView = ({ isLoading, structure }) => {
                   </Title>
                   <div className="courseGroup">
                     {subGroupEntry.map((course) => (
-                      course.unplanned ? (
-                        <Badge
-                          count={(
-                            <Tooltip title="Course added but not planned">
-                              <div className="unplannedBadge">
-                                !
-                              </div>
-                            </Tooltip>
-                          )}
-                        >
-                          <Button
-                            className="checkerButton"
-                            type="primary"
-                            style={course.completed ? null : { background: "#FFF", color: "#9254de" }}
-                            key={course.key}
-                            onClick={() => handleCourseLink(course.key)}
-                          >
-                            {course.key}: {course.title}
-                          </Button>
-                        </Badge>
-                      ) : (
-                        <Button
-                          className="checkerButton"
-                          type="primary"
-                          style={course.completed ? null : { background: "#FFF", color: "#9254de" }}
-                          key={course.key}
-                          onClick={() => handleCourseLink(course.key)}
-                        >
-                          {course.key}: {course.title}
-                        </Button>
-                      )
+                      courseBadge(course)
                     ))}
                   </div>
                   <br />

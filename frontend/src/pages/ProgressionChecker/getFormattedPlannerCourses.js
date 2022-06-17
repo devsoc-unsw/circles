@@ -12,7 +12,7 @@ const getFormattedPlannerCourses = (years, startYear, courses) => {
         currCourse.UOC = courses[course].UOC;
         currCourse.type = courses[course].type;
         const currYear = (startYear + yearIndex).toString().slice(-2);
-        currCourse.termTaken = `${currYear}T${termIndex}`;
+        currCourse.termPlanned = `${currYear}T${termIndex}`;
         currCourse.past = yearIndex < currYearInDeg - 1
                           || (yearIndex === currYearInDeg - 1 && termIndex <= currTermInDeg);
         plannerCourses[course] = currCourse;
