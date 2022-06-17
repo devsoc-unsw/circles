@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Skeleton, Table, Typography } from "antd";
-import getPastCourses from "../getPastCourses";
+import getFormattedPlannerCourses from "../getFormattedPlannerCourses";
 import "./index.less";
 
 const TableView = ({ isLoading, structure }) => {
@@ -66,7 +66,7 @@ const TableView = ({ isLoading, structure }) => {
   };
 
   useEffect(() => {
-    setPastCourses(getPastCourses(years, startYear, courses));
+    setPastCourses(getFormattedPlannerCourses(years, startYear, courses));
     generateTableStructure(pastCourses);
   }, [isLoading, structure, years, startYear, courses]);
 

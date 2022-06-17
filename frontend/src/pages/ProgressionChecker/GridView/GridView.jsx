@@ -9,7 +9,7 @@ import {
   Typography,
 } from "antd";
 import { addTab } from "reducers/courseTabsSlice";
-import getPastCourses from "../getPastCourses";
+import getFormattedPlannerCourses from "../getFormattedPlannerCourses";
 import "./index.less";
 
 const GridView = ({ isLoading, structure }) => {
@@ -75,7 +75,7 @@ const GridView = ({ isLoading, structure }) => {
   };
 
   useEffect(() => {
-    setPastCourses(getPastCourses(years, startYear, courses));
+    setPastCourses(getFormattedPlannerCourses(years, startYear, courses));
     generateGridStructure();
   }, [isLoading, structure, years, startYear, courses]);
 
