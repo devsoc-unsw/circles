@@ -94,6 +94,7 @@ const GridView = ({ isLoading, structure }) => {
     if (course.unplanned) {
       return (
         <Badge
+          key={course.key}
           count={(
             <Tooltip title="Course added but not planned">
               <div className="courseBadgeIcon">!</div>
@@ -129,11 +130,11 @@ const GridView = ({ isLoading, structure }) => {
     // for future courses planned
     // course.past can be undefined if not in term planner thus check for false
     if (course.past === false) {
-      const tooltip = `Future course planned for ${course.termPlanned}`;
       return (
         <Badge
+          key={course.key}
           count={(
-            <Tooltip title={tooltip}>
+            <Tooltip title={`Future course planned for ${course.termPlanned}`}>
               <div className="courseBadgeIcon">
                 <EyeOutlined />
               </div>
