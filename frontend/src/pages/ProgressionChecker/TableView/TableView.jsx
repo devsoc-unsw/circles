@@ -31,10 +31,10 @@ const TableView = ({ isLoading, structure }) => {
                   key: courseCode,
                   title: plannedCourses[courseCode].title,
                   UOC: plannedCourses[courseCode].UOC,
-                  termTaken: plannedCourses[courseCode].termTaken,
+                  termPlanned: plannedCourses[courseCode].termPlanned,
                 });
                 newTableLayout[group][subgroup].sort(
-                  (a, b) => a.termTaken.localeCompare(b.termTaken),
+                  (a, b) => a.termPlanned.localeCompare(b.termPlanned),
                 );
               }
             });
@@ -48,7 +48,7 @@ const TableView = ({ isLoading, structure }) => {
                   key: courseCode,
                   title: plannedCourses.courseCode.title,
                   UOC: plannedCourses.courseCode.UOC,
-                  termTaken: plannedCourses.courseCode.termTaken,
+                  termPlanned: plannedCourses.courseCode.termPlanned,
                 });
               }
             });
@@ -87,9 +87,9 @@ const TableView = ({ isLoading, structure }) => {
       key: "UOC",
     },
     {
-      title: "Term Taken",
-      dataIndex: "termTaken",
-      key: "termTaken",
+      title: "Term Planned",
+      dataIndex: "termPlanned",
+      key: "termPlanned",
     },
   ];
 
