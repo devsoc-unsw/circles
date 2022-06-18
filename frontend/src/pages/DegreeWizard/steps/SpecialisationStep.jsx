@@ -43,7 +43,6 @@ const SpecialisationStep = ({ incrementStep, currStep }) => {
         selectedKeys={majors}
         defaultOpenKeys={["0"]}
         mode="inline"
-        inlineIndent={24}
       >
         {Object.keys(options).map((sub, index) => (
           <Menu.SubMenu
@@ -51,7 +50,6 @@ const SpecialisationStep = ({ incrementStep, currStep }) => {
             title={`Majors for ${sub}`}
             className="step-submenu"
             mode="inline"
-            style={{ height: "unset", minHeight: "40px" }}
           >
             {(options[sub].notes !== "")
               ? (
