@@ -11,7 +11,7 @@ const { Title } = Typography;
 const MinorStep = ({ incrementStep, currStep }) => {
   const dispatch = useDispatch();
   const { minors, programCode } = useSelector((store) => store.degree);
-  const [options, setOptions] = useState({ someProgramName: { specs: { major: "major data etc" } } });
+  const [options, setOptions] = useState({ someProgramName: { specs: { major: "major data etc" }, notes: "note about minors" } });
 
   const fetchAllMinors = useCallback(async () => {
     const res = await axios.get(`/programs/getMinors/${programCode}`);
@@ -56,11 +56,21 @@ const MinorStep = ({ incrementStep, currStep }) => {
             className="step-submenu"
             mode="inline"
           >
-            {Object.keys(options[sub].specs).map((key) => (
-              <Menu.Item className="text" key={key}>
-                {key} {options[sub].specs[key]}
-              </Menu.Item>
-            ))}
+            {(options[sub].notes !== "")
+              ? (
+                <Menu.ItemGroup type="group" title={`(Note: ${options[sub].notes})`}>
+                  {Object.keys(options[sub].specs).map((key) => (
+                    <Menu.Item className="text" key={key}>
+                      {key} {options[sub].specs[key]}
+                    </Menu.Item>
+                  ))}
+                </Menu.ItemGroup>
+              )
+              : Object.keys(options[sub].specs).map((key) => (
+                <Menu.Item className="text" key={key}>
+                  {key} {options[sub].specs[key]}
+                </Menu.Item>
+              ))}
           </Menu.SubMenu>
         ))}
       </Menu>
