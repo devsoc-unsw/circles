@@ -1,22 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import {
-  Badge,
-  Button,
-  Skeleton,
-  Tooltip,
-  Typography,
-} from "antd";
-import { addTab } from "reducers/courseTabsSlice";
-import getPastCourses from "../getPastCourses";
+import { useSelector } from "react-redux";
+import { Skeleton, Typography } from "antd";
+import getFormattedPlannerCourses from "../getFormattedPlannerCourses";
+import CourseBadge from "./CourseBadge";
 import "./index.less";
 
 const GridView = ({ isLoading, structure }) => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { Title } = Typography;
-  const [pastCourses, setPastCourses] = useState({});
+  const [plannerCourses, setPlannerCourses] = useState({});
   const [gridLayout, setGridLayout] = useState({});
   const { years, startYear, courses } = useSelector((store) => store.planner);
 
@@ -39,7 +30,9 @@ const GridView = ({ isLoading, structure }) => {
               newGridLayout[group][subgroup].push({
                 key: courseCode,
                 title: subgroupStructure.courses[courseCode],
-                completed: courseCode in pastCourses,
+                // past and termPlanned will be undefined for courses not in planner
+                past: plannerCourses[courseCode]?.past,
+                termPlanned: plannerCourses[courseCode]?.termPlanned,
                 // must check null as could be undefined
                 unplanned: courses[courseCode]?.plannedFor === null,
               });
@@ -56,7 +49,8 @@ const GridView = ({ isLoading, structure }) => {
                 newGridLayout[group][subgroup].push({
                   key: courseCode,
                   title: courseData.title,
-                  completed: courseCode in pastCourses,
+                  past: plannerCourses[courseCode].past,
+                  termPlanned: plannerCourses[courseCode].termPlanned,
                   unplanned: !courseData.plannedFor,
                 });
               }
@@ -75,14 +69,10 @@ const GridView = ({ isLoading, structure }) => {
   };
 
   useEffect(() => {
-    setPastCourses(getPastCourses(years, startYear, courses));
+    setPlannerCourses(getFormattedPlannerCourses(years, startYear, courses));
     generateGridStructure();
   }, [isLoading, structure, years, startYear, courses]);
 
-  const handleCourseLink = (courseCode) => {
-    navigate("/course-selector");
-    dispatch(addTab(courseCode));
-  };
   return (
     <div className="gridViewContainer">
       {isLoading ? (
@@ -100,37 +90,7 @@ const GridView = ({ isLoading, structure }) => {
                   </Title>
                   <div className="courseGroup">
                     {subGroupEntry.map((course) => (
-                      course.unplanned ? (
-                        <Badge
-                          count={(
-                            <Tooltip title="Course added but not planned">
-                              <div className="unplannedBadge">
-                                !
-                              </div>
-                            </Tooltip>
-                          )}
-                        >
-                          <Button
-                            className="checkerButton"
-                            type="primary"
-                            style={course.completed ? null : { background: "#FFF", color: "#9254de" }}
-                            key={course.key}
-                            onClick={() => handleCourseLink(course.key)}
-                          >
-                            {course.key}: {course.title}
-                          </Button>
-                        </Badge>
-                      ) : (
-                        <Button
-                          className="checkerButton"
-                          type="primary"
-                          style={course.completed ? null : { background: "#FFF", color: "#9254de" }}
-                          key={course.key}
-                          onClick={() => handleCourseLink(course.key)}
-                        >
-                          {course.key}: {course.title}
-                        </Button>
-                      )
+                      <CourseBadge course={course} />
                     ))}
                   </div>
                   <br />
