@@ -18,7 +18,7 @@ const CourseBanner = () => {
 
   return (
     <S.BannerWrapper>
-      <Title level={2}>{programCode} - {programName}</Title>
+      <Title level={2} className="text">{programCode} - {programName}</Title>
       <CourseSearchBar />
       <Tooltip placement="topLeft" title={isLockedEnabled ? "Hide locked courses" : "Show locked courses"}>
         <Switch

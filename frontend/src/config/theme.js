@@ -22,7 +22,7 @@ const lightBaseColors = {
 
 const darkBaseColors = {
   purplePrimary: "#9254de", // purple-5 from light theme
-  purpleLight: "#cda8f0", // purple-2
+  purpleLight: "#51258f", // purple-2
   purpleDark: "#854eca", // purple-7
 };
 

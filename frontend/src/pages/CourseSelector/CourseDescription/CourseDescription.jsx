@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Tag, Typography,
-} from "antd";
+import { Typography } from "antd";
 import { motion } from "framer-motion/dist/framer-motion";
 import infographic from "assets/infographicFontIndependent.svg";
 import Collapsible from "components/Collapsible";
 import CourseTag from "components/CourseTag";
 import ProgressBar from "components/ProgressBar";
+import TermTag from "components/TermTag";
 import axiosRequest from "config/axios";
 import { TERM, TIMETABLE_API_URL } from "config/constants";
 import { setCourse } from "reducers/coursesSlice";
@@ -20,7 +19,7 @@ const { Title, Text } = Typography;
 
 const CourseAttribute = ({ title, content }) => (
   <S.AttributeWrapper>
-    <Title level={3}>{title}</Title>
+    <Title level={3} className="text">{title}</Title>
     {content}
   </S.AttributeWrapper>
 );
@@ -123,9 +122,7 @@ const CourseDescription = () => {
         ? course.terms.map((term, index) => {
           const termNo = term.slice(1);
           return (
-            <Tag key={index} className="text">
-              {term === "T0" ? "Summer" : `Term ${termNo}`}
-            </Tag>
+            <TermTag key={index} name={term === "T0" ? "Summer" : `Term ${termNo}`} />
           );
         })
         : "None",
@@ -194,7 +191,7 @@ const CourseDescription = () => {
         <>
           <S.DescriptionContent>
             <S.DescriptionTitleBar>
-              <Title level={2}>{id} - {course.title}</Title>
+              <Title level={2} className="text">{id} - {course.title}</Title>
               <PlannerButton />
             </S.DescriptionTitleBar>
             {
