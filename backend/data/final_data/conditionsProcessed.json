@@ -5674,8 +5674,8 @@
     },
     "ENGG2600": {
         "original": "Please refer to the course overview section for information on prerequisite requirements.<br/><br/>",
-        "processed": "",
-        "handbook_note": "Please refer to the course overview section for information on requirements"
+        "processed": "((ENGG# && DESN1000) || COMP# || FOOD# || MEDC#) && 42UOC",
+        "handbook_note": "Please refer to the course overview section for further information on requirements"
     },
     "ENGG2997": {
         "original": "Successful completion of 72 UOC and enrolled in program 3778 or 3061<br/><br/>",
@@ -5695,8 +5695,8 @@
     },
     "ENGG3600": {
         "original": "Please refer to the course overview section for information on prerequisite requirements.<br/><br/>",
-        "processed": "",
-        "handbook_note": "Please refer to the course overview section for information on requirements"
+        "processed": "((ENGG# && DESN1000) || COMP# || FOOD# || MEDC#) && 72UOC",
+        "handbook_note": "Please refer to the course overview section for further information on requirements. Medicine students must also be eligible to overload during year 3 based on the general education requirements for BSc (Med) Hons."
     },
     "ENGG4060": {
         "original": "Prerequisite 96 UOC<br/><br/>",
@@ -5712,8 +5712,8 @@
     },
     "ENGG4600": {
         "original": "Please refer to the course overview section for information on prerequisite requirements.<br/><br/>",
-        "processed": "",
-        "handbook_note": "Please refer to the course overview section for information on requirements"
+        "processed": "((ENGG# && DESN1000) || COMP# || FOOD# || MEDC#) && 114UOC",
+        "handbook_note": "Please refer to the course overview section for further information on requirements. Medicine students must also be eligible to overload during year 3 based on the general education requirements for BSc (Med) Hons."
     },
     "ENGG4841": {
         "original": "Completion of 102 UOC<br/><br/>",

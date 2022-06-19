@@ -85,7 +85,7 @@ def ENGG_3600(conditions):
         "handbook_note": "Please refer to the course overview section for further information on requirements. Medicine students must also be eligible to overload during year 3 based on the general education requirements for BSc (Med) Hons."
     }
 
-def ENGG_3600(conditions):
+def ENGG_4600(conditions):
     """
     "original": "Please refer to the course overview section for information on prerequisite requirements.<br/><br/>"
 
