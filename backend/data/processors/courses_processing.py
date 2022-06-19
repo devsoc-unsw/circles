@@ -90,8 +90,9 @@ def process_terms(processed: dict, formatted: dict) -> None:
     res = re.sub("Summer Canberra", "SC", res)
     res = res.split(",")
     # Strip Remaining Spaces and discard empty strings
-    res = list(set(item.strip(" ") for item in res).discard(""))
-    processed["terms"] = res
+    res = set(item.strip(" ") for item in res)
+    res.discard("")
+    processed["terms"] = sorted(list(res))
 
 
 def process_gen_ed(processed: dict, formatted: dict) -> None:
