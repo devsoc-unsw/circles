@@ -10,12 +10,14 @@ const DraggableTabWrapper = styled.div`
   gap: 5px;
   padding: 6px 6px 6px 16px;
   margin-left: 2px;
-  border: 1px solid #f0f0f0;
+  border: 1px solid ${({ theme }) => theme.draggableTab.borderColor};
+  color: ${({ theme }) => theme.text};
 
-  ${({ active }) => active && `
-    background-color: #fff;
-    border-bottom-color: #fff;
+  ${({ active, theme }) => active && `
+    background-color: ${theme.body};
+    border-bottom-color: ${theme.body};
     color: #9254de;
+    font-weight: 700;
   `}
 `;
 

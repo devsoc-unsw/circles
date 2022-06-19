@@ -5,7 +5,7 @@ import axios from "axios";
 import PageTemplate from "components/PageTemplate";
 import CourseBanner from "./CourseBanner";
 import CourseDescription from "./CourseDescription";
-import CourseSidebarMenu from "./CourseSidebarMenu";
+import CourseSidebar from "./CourseSidebar";
 import CourseTabs from "./CourseTabs";
 import S from "./styles";
 
@@ -56,7 +56,7 @@ const CourseSelector = () => {
         <CourseBanner />
         <CourseTabs />
         <S.ContentWrapper>
-          <CourseSidebarMenu
+          <CourseSidebar
             structure={structure}
             showLockedCourses={isLockedEnabled}
           />

@@ -6,7 +6,7 @@ import axiosRequest from "config/axios";
 import { addToUnplanned, removeCourses } from "reducers/plannerSlice";
 import prepareUserPayload from "../utils";
 
-const AddToPlannerButton = () => {
+const PlannerButton = () => {
   const { active, tabs } = useSelector((state) => state.courseTabs);
   const coursesInPlanner = useSelector((state) => state.planner.courses);
   const course = useSelector((state) => state.courses.course);
@@ -85,4 +85,4 @@ const AddToPlannerButton = () => {
   );
 };
 
-export default AddToPlannerButton;
+export default PlannerButton;

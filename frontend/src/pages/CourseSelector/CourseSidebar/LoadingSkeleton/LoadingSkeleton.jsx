@@ -1,9 +1,9 @@
 import React from "react";
 import { Skeleton } from "antd";
-import "./index.less";
+import S from "./styles";
 
 const LoadingSkeleton = () => (
-  <div className="skelContainer">
+  <S.SkeletonWrapper>
     {[...Array(5).keys()].map(() => (
       <>
         <Skeleton.Input
@@ -28,7 +28,7 @@ const LoadingSkeleton = () => (
         />
       </>
     ))}
-  </div>
+  </S.SkeletonWrapper>
 );
 
 export default LoadingSkeleton;

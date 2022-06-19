@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const CourseTabsWrapper = styled.div`
-  background-color: #efdbff;
+  background-color: ${({ theme }) => theme.purpleLight};
   padding-left: calc(20vw - 2px); // 20vw - width of menu sidebar, 2px is tab margin-left
   padding-right: 25px;
   width: 100vw;

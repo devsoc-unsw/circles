@@ -1,23 +1,29 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { LockOutlined, PlusOutlined, WarningOutlined } from "@ant-design/icons";
-import {
-  Button, Menu, Tooltip, Typography,
-} from "antd";
+import { Menu } from "antd";
 import axios from "axios";
-import { AnimatePresence, motion } from "framer-motion/dist/framer-motion";
-import axiosRequest from "config/axios";
-import useMediaQuery from "hooks/useMediaQuery";
+import { AnimatePresence } from "framer-motion/dist/framer-motion";
 import { setCourses } from "reducers/coursesSlice";
-import { addTab } from "reducers/courseTabsSlice";
-import { addToUnplanned } from "reducers/plannerSlice";
 import prepareUserPayload from "../utils";
-import LoadingSkeleton from "./LoadingSkeleton";
-import "./index.less";
+import LoadingSkeleton from "./LoadingSkeleton/LoadingSkeleton";
+import MenuItem from "./MenuItem";
+import S from "./styles";
 
 const { SubMenu } = Menu;
 
-const CourseSidebarMenu = ({ structure, showLockedCourses }) => {
+const SubgroupTitle = ({ subGroup, group, coursesUnits }) => {
+  const { curr, total } = coursesUnits[group][subGroup];
+  return (
+    <S.SubgroupHeader>
+      {subGroup}
+      <S.UOCBadge>
+        {curr} / {total}
+      </S.UOCBadge>
+    </S.SubgroupHeader>
+  );
+};
+
+const CourseSidebar = ({ structure, showLockedCourses }) => {
   const dispatch = useDispatch();
   const [menuData, setMenuData] = useState({});
   const [coursesUnits, setCoursesUnits] = useState({});
@@ -27,7 +33,7 @@ const CourseSidebarMenu = ({ structure, showLockedCourses }) => {
   const planner = useSelector((state) => state.planner);
   const degree = useSelector((state) => state.degree);
 
-  const [isPageLoaded, setIsPageLoaded] = useState(false);
+  const [pageLoaded, setPageLoaded] = useState(false);
 
   // generate menu content
   const generateMenuData = (courses) => {
@@ -101,7 +107,7 @@ const CourseSidebarMenu = ({ structure, showLockedCourses }) => {
     });
     setMenuData(newMenu);
     setCoursesUnits(newCoursesUnits);
-    setIsPageLoaded(true);
+    setPageLoaded(true);
   };
 
   const getAllUnlocked = useCallback(async () => {
@@ -124,16 +130,15 @@ const CourseSidebarMenu = ({ structure, showLockedCourses }) => {
   }, [structure, getAllUnlocked]);
 
   return (
-    <div className="cs-menu-root">
-      {isPageLoaded
+    <S.SidebarWrapper>
+      {pageLoaded
         ? (
-          <Menu
+          <S.Menu
             onClick={() => { }}
             defaultSelectedKeys={[]}
             selectedKeys={[]}
             defaultOpenKeys={[Object.keys(menuData)[0]]}
             mode="inline"
-            className="text"
           >
             {Object.entries(menuData).map(([group, groupEntry]) => (
               <SubMenu key={group} title={group}>
@@ -141,7 +146,7 @@ const CourseSidebarMenu = ({ structure, showLockedCourses }) => {
                   <Menu.ItemGroup
                     key={subGroup}
                     title={(
-                      <SubgroupContainer
+                      <SubgroupTitle
                         subGroup={subGroup}
                         group={group}
                         coursesUnits={coursesUnits}
@@ -169,124 +174,10 @@ const CourseSidebarMenu = ({ structure, showLockedCourses }) => {
                 ))}
               </SubMenu>
             ))}
-          </Menu>
+          </S.Menu>
         ) : (<LoadingSkeleton />)}
-    </div>
+    </S.SidebarWrapper>
   );
 };
 
-const MenuItem = ({
-  selected,
-  courseCode,
-  courseTitle,
-  activeCourse,
-  setActiveCourse,
-  accurate,
-  unlocked,
-  subGroup,
-}) => {
-  const dispatch = useDispatch();
-  const handleClick = () => {
-    dispatch(addTab(courseCode));
-    setActiveCourse(courseCode);
-  };
-
-  const addToPlanner = async (e, plannedCourse) => {
-    e.stopPropagation();
-    const [course] = await axiosRequest(
-      "get",
-      `/courses/getCourse/${plannedCourse}`,
-    );
-
-    const data = {
-      courseCode: course.code,
-      courseData: {
-        title: course.title,
-        type: subGroup,
-        termsOffered: course.terms,
-        UOC: course.UOC,
-        plannedFor: null,
-        prereqs: course.raw_requirements,
-        isLegacy: course.is_legacy,
-        isUnlocked: true,
-        warnings: [],
-        handbookNote: course.handbook_note,
-        isAccurate: course.is_accurate,
-      },
-    };
-    dispatch(addToUnplanned(data));
-  };
-  const isSmall = useMediaQuery("(max-width: 1400px)");
-  const { Text } = Typography;
-  return (
-    <motion.div transition={{ ease: "easeOut", duration: 0.3 }} layout>
-      <Menu.Item
-        className={`text menuItemText
-          ${selected && "bold"}
-          ${activeCourse === courseCode && "activeCourse"}
-          ${!unlocked && "locked"}`}
-        key={courseCode}
-        onClick={handleClick}
-      >
-        <div className="menuItemContainer">
-          <div className="menuCourseContainer">
-            {isSmall ? (
-              <Tooltip title={courseTitle} placement="topLeft">
-                {courseCode}
-              </Tooltip>
-            ) : (
-              <Text>
-                {courseCode}: {courseTitle}
-              </Text>
-            )}
-            {!accurate && (
-              <TooltipWarningIcon
-                text="We couldn't parse the requirement for this course. Please manually check if you have the correct prerequisites to unlock it."
-              />
-            )}
-            {!unlocked && <LockOutlined style={{ fontSize: "11px" }} />}
-          </div>
-          {!selected && (
-            <Tooltip title="Add to Planner" placement="top">
-              <Button
-                onClick={(e) => addToPlanner(e, courseCode)}
-                size="small"
-                shape="circle"
-                icon={<PlusOutlined />}
-                className="quickAddBtn"
-              />
-            </Tooltip>
-          )}
-        </div>
-      </Menu.Item>
-    </motion.div>
-  );
-};
-
-const TooltipWarningIcon = ({ text }) => (
-  <Tooltip placement="top" title={text}>
-    <WarningOutlined
-      style={{
-        color: "#DC9930",
-        fontSize: "16px",
-        marginLeft: "0.3em",
-        textAlign: "center",
-        top: "calc(50% - 0.5em)",
-      }}
-    />
-  </Tooltip>
-);
-
-const SubgroupContainer = ({ subGroup, group, coursesUnits }) => {
-  const { curr, total } = coursesUnits[group][subGroup];
-  return (
-    <div className="subgroupContainer">
-      <div>{subGroup}</div>
-      <div className="uocBadge">
-        {curr} / {total}
-      </div>
-    </div>
-  );
-};
-
-export default CourseSidebarMenu;
+export default CourseSidebar;

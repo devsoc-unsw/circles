@@ -22,7 +22,7 @@ const lightBaseColors = {
 
 const darkBaseColors = {
   purplePrimary: "#9254de", // purple-5 from light theme
-  purpleLight: "#301c4d", // purple-2
+  purpleLight: "#cda8f0", // purple-2
   purpleDark: "#854eca", // purple-7
 };
 
@@ -33,6 +33,7 @@ export const lightTheme = {
 
   draggableTab: {
     backgroundColor: "#fafafa",
+    borderColor: "#f0f0f0",
   },
 };
 
@@ -40,9 +41,17 @@ export const darkTheme = {
   ...darkBaseColors,
   body: "#1d1f20",
   text: "#f1f1f1",
-  tagBackground: "#9254de",
+
+  courseTag: {
+    backgroundColor: "#9254de",
+  },
 
   draggableTab: {
-    backgroundColor: "#fafafa",
+    backgroundColor: "#1d1f20",
+    borderColor: "#1d1f20",
+  },
+
+  courseSidebar: {
+    menuSubColor: "#262626", // gray-10
   },
 };

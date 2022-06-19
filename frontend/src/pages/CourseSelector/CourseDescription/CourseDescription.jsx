@@ -12,8 +12,8 @@ import axiosRequest from "config/axios";
 import { TERM, TIMETABLE_API_URL } from "config/constants";
 import { setCourse } from "reducers/coursesSlice";
 import prepareUserPayload from "../utils";
-import AddToPlannerButton from "./AddToPlannerButton";
 import LoadingSkeleton from "./LoadingSkeleton";
+import PlannerButton from "./PlannerButton";
 import S from "./styles";
 
 const { Title, Text } = Typography;
@@ -195,7 +195,7 @@ const CourseDescription = () => {
           <S.DescriptionContent>
             <S.DescriptionTitleBar>
               <Title level={2}>{id} - {course.title}</Title>
-              <AddToPlannerButton />
+              <PlannerButton />
             </S.DescriptionTitleBar>
             {
               course.is_legacy
