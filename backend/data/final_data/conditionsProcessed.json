@@ -9285,7 +9285,7 @@
     },
     "PHYS1221": {
         "original": "Prerequisite: PHYS1121 or PHYS1131 or DPST1023 or PHYS1141; Corequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251<br/><br/>",
-        "processed": "PHYS1121 || PHYS1131 || DPST1023 || PHYS1141 && [MATH1231 || DPST1014 || MATH1241 || MATH1251]"
+        "processed": "(PHYS1121 || PHYS1131 || DPST1023 || PHYS1141) && [MATH1231 || DPST1014 || MATH1241 || MATH1251]"
     },
     "PHYS1231": {
         "original": "Prerequisite: PHYS1131 or DPST1023 or PHYS1141 or a mark of 65 or above in PHYS1121; Corequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251<br/><br/>",
