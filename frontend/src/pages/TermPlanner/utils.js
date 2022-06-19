@@ -105,9 +105,7 @@ const getTermsList = (currentTerm, uoc, summerTerm) => {
 
   let index = terms.indexOf(currentTerm);
   let rowOffset = 0;
-  console.log("UOC", uoc);
   const numTerms = getNumTerms(uoc);
-  console.log("NUMTERMS:", numTerms);
   for (let i = 0; i < numTerms; i++) {
     if (index === terms.length) {
       index = 0;
@@ -125,6 +123,16 @@ const getTermsList = (currentTerm, uoc, summerTerm) => {
   return termsList;
 };
 
+const getCurrentTermId = (originalTermId, term, yearOffset) => {
+  const year = parseInt(originalTermId.slice(0, 4), 10) + yearOffset;
+  console.log(`${originalTermId} -> ${year}${term}`);
+  return `${year}${term}`;
+};
+
 export {
-  getMostRecentPastTerm, getTermsList, parseMarkToInt, prepareCoursesForValidation,
+  getCurrentTermId,
+  getMostRecentPastTerm,
+  getTermsList,
+  parseMarkToInt,
+  prepareCoursesForValidation,
 };

@@ -74,8 +74,11 @@ const TermPlanner = () => {
   const plannerPic = useRef();
 
   const handleOnDragStart = (courseItem) => {
-    const course = courseItem.draggableId;
+    console.log("DRAGGING", courseItem);
+    console.log(planner);
+    const course = courseItem.draggableId.slice(0, 8);
     const terms = planner.courses[course].termsOffered;
+    console.log("terms", terms);
     setTermsOffered(terms);
     setIsDragging(true);
   };
@@ -83,7 +86,10 @@ const TermPlanner = () => {
   const handleOnDragEnd = (result) => {
     setIsDragging(false);
 
-    const { destination, source, draggableId } = result;
+    const { destination, source, draggableId: draggableIdUnique } = result;
+    const draggableId = draggableIdUnique.slice(0, 8);
+    console.log("destingation", destination);
+    console.log("dedraggstingation", draggableId);
 
     if (!destination) return; // drag outside container
 
@@ -122,6 +128,7 @@ const TermPlanner = () => {
 
     if (source.droppableId === "unplanned") {
       // === move unplanned course to term ===
+      console.log("AOOO", planner);
       dispatch(setUnplannedCourseToTerm({
         destRow, destTerm, destIndex, course: draggableId,
       }));

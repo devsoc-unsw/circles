@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getTermsList } from "pages/TermPlanner/utils";
+import { getCurrentTermId, getTermsList } from "pages/TermPlanner/utils";
 
 // set up hidden object
 const generateHiddenInit = (startYear, numYears) => {
@@ -95,13 +95,78 @@ const plannerSlice = createSlice({
         srcRow, srcTerm, srcIndex,
         destRow, destTerm, destIndex, course,
       } = action.payload;
-      state.years[srcRow][srcTerm].splice(srcIndex, 1);
-      state.years[destRow][destTerm].splice(destIndex, 0, course);
+      // Remove every instance of term
+      // state.years[srcRow][srcTerm].splice(srcIndex, 1);
+
+      // Add to new term
+      // state.years[destRow][destTerm].splice(destIndex, 0, course);
+
+      // Remove every instance of term from state.years
+      console.log("Using variables!", srcRow, srcTerm, srcIndex, destIndex);
+      console.log("setPlannedCourseToTerm COURSE:", course);
+      const { plannedFor, UOC: uoc } = state.courses[course];
+      // const uoc = state.course[course].UOC;
+      console.log("plannedFor:", plannedFor);
+      console.log("The source term is", srcTerm);
+      // console.log("The planner is", state);
+
+      console.log("numYears", state.years.length);
+      for (let year = 0; year < state.years.length; year++) {
+        const terms = Object.keys(state.years[year]);
+        // console.log("numTerms", year, Object.keys(state.years[year]).length);
+        terms.forEach((term) => {
+          const targetTerm = state.years[year][term];
+          const courseIndex = targetTerm.indexOf(course);
+          console.log("courseIndex is", courseIndex);
+          if (courseIndex !== -1) {
+            targetTerm.splice(courseIndex, 1);
+          }
+        });
+      }
+      // const oldTermList = getTermsList(srcTerm, uoc, state.isSummerEnabled);
+      // oldTermList.forEach((termRowOffset) => {
+      //   const { term, rowOffset } = termRowOffset;
+      //   const targetTerm = state.years[srcRow + rowOffset][term];
+      //   const courseIndex = targetTerm.indexOf(course);
+      //   if (courseIndex !== -1) {
+      //     targetTerm.splice(courseIndex, 1);
+      //   }
+      // });
+      // plannedFor.split(" ").forEach((termId) => {
+      //   const row = parseInt(termId.slice(0, 4), 10) - state.startYear;
+      //   const term = termId.slice(4);
+      //   console.log("Row:", row, "\nTerm:", term);
+      //   console.log("Terms booked:", state.years[row][term].length);
+      //   const termIndex = state.year[row][term].indexOf(course);
+      //   state.years[row][term].splice(termIndex, 1);
+      // });
+
+      // Add every new instance of course to state.years
+      // const uoc = state.course[course].UOC;
+      const newTermList = getTermsList(destTerm, uoc, state.isSummerEnabled);
+      newTermList.forEach((termRowOffset) => {
+        const { term, rowOffset } = termRowOffset;
+        // const termIndex = state.year[destRow + rowOffset][term].indexOf(course);
+        const targetTerm = state.years[destRow + rowOffset][term];
+        targetTerm.splice(targetTerm.length, 0, course);
+      });
     },
     moveCourse: (state, action) => {
       const { course, term } = action.payload;
       if (state.courses[course]) {
         state.courses[course].plannedFor = term;
+
+        // Moving a single course moves every instance of it.
+        if (state.courses[course].isMultiterm) {
+          const uoc = state.courses[course].UOC;
+          const terms = getTermsList(term.slice(4), uoc, state.isSummerEnabled).splice(1);
+
+          terms.forEach((termRow) => {
+            const { term: currentTerm, rowOffset } = termRow;
+            const termId = getCurrentTermId(term, currentTerm, rowOffset);
+            state.courses[course].plannedFor += ` ${termId}`;
+          });
+        }
       }
     },
     updateCourseMark: (state, action) => {
@@ -168,10 +233,12 @@ const plannerSlice = createSlice({
 
       const { plannedFor } = state.courses[code];
 
-      const yearI = parseInt(plannedFor.slice(0, 4), 10) - state.startYear;
-      const termI = plannedFor.slice(4);
+      plannedFor.split(" ").forEach((termId) => {
+        const yearI = parseInt(termId.slice(0, 4), 10) - state.startYear;
+        const termI = termId.slice(4);
 
-      state.years[yearI][termI] = state.years[yearI][termI].filter((course) => course !== code);
+        state.years[yearI][termI] = state.years[yearI][termI].filter((course) => course !== code);
+      });
 
       state.courses[code].plannedFor = null;
       state.courses[code].isUnlocked = true;

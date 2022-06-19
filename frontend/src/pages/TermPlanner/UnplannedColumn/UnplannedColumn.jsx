@@ -25,6 +25,7 @@ const UnplannedColumn = ({ isDragging }) => {
                 code={course}
                 index={courseIndex}
                 key={course}
+                term=""
               />
             ))}
             {provided.placeholder}
