@@ -6599,28 +6599,6 @@
         ],
         "broke at": "Index 2, &&"
     },
-    "DESN2000": {
-        "condition": {
-            "original": "Please refer to the course overview section for information on prerequisite requirements.<br/><br/>",
-            "processed": "Please refer to the course overview section for information on requirements"
-        },
-        "tokens": [
-            "(",
-            "Please",
-            "refer",
-            "to",
-            "the",
-            "course",
-            "overview",
-            "section",
-            "for",
-            "information",
-            "on",
-            "requirements",
-            ")"
-        ],
-        "broke at": "Index 2, refer"
-    },
     "DESN3200": {
         "condition": {
             "original": "Completed at least one first-year design course (for example, ENGG1000, DESN1000, DESN1010, GENE1500, or DPST1071)<br/><br/>Completed 72 UOC<br/><br/>",
