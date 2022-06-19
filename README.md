@@ -38,7 +38,7 @@ This project is rapidly expanding and our roadmap includes features such as:
   - Lets you understand which requirements you have met and which you still need to complete
   - Shows you what courses you can do to complete your degree
 - Graphical view:
-  - A graphical model of your degree plan, to show you a beautiful dependancy tree of courses relevant to your degree
+  - A graphical model of your degree plan, to show you a beautiful dependency tree of courses relevant to your degree
   - Will adapt to your degree structure
 
 # Our team
