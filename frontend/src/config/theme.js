@@ -12,6 +12,10 @@ export const GlobalStyles = createGlobalStyle`
     background: ${({ theme }) => theme.body};
     color: ${({ theme }) => theme.text};
   }
+
+  .text {
+    color: ${({ theme }) => theme.text} !important;
+  }
 `;
 
 const lightBaseColors = {

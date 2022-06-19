@@ -3,6 +3,7 @@ import { Draggable } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import { CloseOutlined } from "@ant-design/icons";
 import { Button } from "antd";
+import { useTheme } from "styled-components";
 import useIntersectionObserver from "hooks/useIntersectionObserver";
 import { removeTab, setActiveTab } from "reducers/courseTabsSlice";
 import S from "./styles";
@@ -13,6 +14,7 @@ const DraggableTab = ({ tabName, index }) => {
   const ref = useRef(null);
   const tabInView = useIntersectionObserver(ref);
   const { active } = useSelector((state) => state.courseTabs);
+  const theme = useTheme();
 
   const getDraggableStyle = (style) => {
     // lock x axis when dragging
@@ -60,7 +62,7 @@ const DraggableTab = ({ tabName, index }) => {
           <Button
             type="text"
             size="small"
-            icon={<CloseOutlined style={{ fontSize: "12px" }} />}
+            icon={<CloseOutlined style={{ fontSize: "12px", color: theme.text }} />}
             onClick={(e) => {
               e.stopPropagation(); // stop propagation for above tab onclick event
               dispatch(removeTab(index));
