@@ -174,9 +174,9 @@ def search(userData: UserData, search_string: str):
         ALL_COURSES = fetch_all_courses()
 
     specialisations = list(userData.specialisations.keys())
-    majors = list(filter(lambda x: x.endswith("1"), specialisations))
+    majors = list(filter(lambda x: x.endswith("1") or x.endswith("H"), specialisations))
     minors = list(filter(lambda x: x.endswith("2"), specialisations))
-    structure = get_structure(userData.program, "+".join(majors), "+".join(minors))['structure']
+    structure = get_structure(userData.program, "+".join(specialisations))['structure']
 
     top_results = sorted(ALL_COURSES.items(), reverse=True,
                          key=lambda course: fuzzy_match(course, search_string)
