@@ -64,14 +64,12 @@ def ENGG_2_4600(conditions):
     """
     "original": "Please refer to the course overview section for information on prerequisite requirements.<br/><br/>"
 
-    "processed": ""
-
-    "handbook_note": "Please refer to the course overview section for information on requirements"
+    "processed": "Please refer to the course overview section for information on prerequisite requirements"
     """
-
+    # TODO: fix
     return {
         "original": conditions["original"],
-        "processed": "",
+        "processed": "Please refer to the course overview section for information on prerequisite requirements",
         "handbook_note": "Please refer to the course overview section for information on requirements"
     }
 

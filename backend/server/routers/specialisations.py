@@ -9,7 +9,7 @@ router = APIRouter(
 
 
 @router.get("/")
-def specialisationsIndex():
+def specialisations_index():
     """ sanity test that this file is loaded """
     return "Index of specialisations"
 

@@ -17,7 +17,7 @@ router = APIRouter(
 
 
 @router.get("/")
-def programsIndex():
+def programs_index():
     """ sanity test that this file is loaded """
     return "Index of programs"
 

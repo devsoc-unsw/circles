@@ -242,6 +242,11 @@ const MenuItem = ({
       >
         <div className="menuItemContainer">
           <div className="menuCourseContainer">
+            {!accurate && (
+              <TooltipWarningIcon
+                text="We couldn't parse the requirement for this course. Please manually check if you have the correct prerequisites to unlock it."
+              />
+            )}
             {isSmall ? (
               <Tooltip title={courseTitle} placement="topLeft">
                 {courseCode}
@@ -250,11 +255,6 @@ const MenuItem = ({
               <Text>
                 {courseCode}: {courseTitle}
               </Text>
-            )}
-            {!accurate && (
-              <TooltipWarningIcon
-                text="We couldn't parse the requirement for this course. Please manually check if you have the correct prerequisites to unlock it."
-              />
             )}
             {!unlocked && <LockOutlined style={{ fontSize: "11px" }} />}
           </div>

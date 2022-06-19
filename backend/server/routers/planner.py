@@ -22,7 +22,7 @@ router = APIRouter(
 
 
 @router.get("/")
-def plannerIndex():
+def planner_index():
     """ sanity test that this file is loaded """
     return "Index of planner"
 
