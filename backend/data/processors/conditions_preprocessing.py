@@ -7,6 +7,8 @@ Some examples of preprocessing are:
 - Converting specialisation and program names to corresponding codes
 """
 
+from functools import reduce
+import json
 import re
 from data.utility.data_helpers import read_data, write_data
 
@@ -296,11 +298,9 @@ def convert_level(processed: str) -> str:
 
 def convert_program_type(processed: str) -> str:
     """Converts complex phrases into something of the form CODE# for specifying a program type"""
-    # TODO: make this more generic
-    processed = map_word_to_program_type(processed, r"actuarial( studies)?", "ACTL#")
-    processed = map_word_to_program_type(processed, r"business", "BUSN#")
-    processed = map_word_to_program_type(processed, r"commerce", "COMM#")
-    processed = map_word_to_program_type(processed, r"CDF", "CCDF#")
+    with open("algorithms/cache/cache_config.json") as f:
+        cache: dict[str, list[str]] = json.loads(f.read())
+        processed = reduce((lambda a,b: b), (map_word_to_program_type(processed, string, hashlist[0]) for string, hashlist in cache.items()))
     return processed
 
 
@@ -501,7 +501,7 @@ def l2_math_courses(processed: str) -> str:
 
 def map_word_to_program_type(processed: str, regex_word: str, type: str):
     return re.sub(
-        rf"(enrolment)? in {regex_word} (programs?|single or dual degrees?)",
+        rf"(enrolment)? in {regex_word}( studies)? (programs?|single or dual degrees?)",
         type,
         processed,
         flags=re.IGNORECASE,

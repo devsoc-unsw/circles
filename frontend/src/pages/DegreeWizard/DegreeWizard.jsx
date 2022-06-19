@@ -112,23 +112,30 @@ const DegreeWizard = () => {
         <hr className="rule" />
 
         <div className="steps-container">
-          {stepList.map((stepName, index) => (
-            currStep >= index + 1 && (
+          <div className="step-content" id="year">
+            <YearStep currStep={currStep} incrementStep={incrementStep} />
+          </div>
+          {currStep > 1 && (
+            <div className="step-content" id="degree">
+              <DegreeStep currStep={currStep} incrementStep={incrementStep} />
+            </div>
+          )}
+          {steps.map((stepName, index) => (
+            currStep - 2 > index && (
               <div className="step-content" id={stepName}>
-                {
-                  index + 1 === 1 ? <YearStep currStep={currStep} incrementStep={incrementStep} />
-                    : index + 1 === 2 ? (
-                      <DegreeStep
-                        currStep={currStep}
-                        incrementStep={incrementStep}
-                      />
-                    )
-                      : index + 1 === stepList.length ? <StartBrowsingStep />
-                        : <SpecialisationStep incrementStep={incrementStep} type={stepName} />
-                }
+                <SpecialisationStep
+                  incrementStep={incrementStep}
+                  isCurrentStep={currStep - 3 === index}
+                  type={stepName}
+                />
               </div>
             )
           ))}
+          {currStep === stepList.length && (
+          <div className="step-content" id="start browsing">
+            <StartBrowsingStep />
+          </div>
+          )}
         </div>
       </div>
     </PageTemplate>

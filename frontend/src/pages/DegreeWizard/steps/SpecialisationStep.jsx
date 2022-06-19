@@ -8,7 +8,7 @@ import springProps from "./spring";
 import "./steps.less";
 
 const { Title } = Typography;
-const SpecialisationStep = ({ incrementStep, type }) => {
+const SpecialisationStep = ({ incrementStep, isCurrentStep, type }) => {
   const dispatch = useDispatch();
   const { programCode, specs } = useSelector((store) => store.degree);
   const [options, setOptions] = useState({ someProgramName: { specs: { major: "major data" } } });
@@ -29,9 +29,11 @@ const SpecialisationStep = ({ incrementStep, type }) => {
         <Title level={4} className="text">
           What are your {type}?
         </Title>
-        <Button type="primary" onClick={incrementStep}>
-          Next
-        </Button>
+        {isCurrentStep && (
+          <Button type="primary" onClick={incrementStep}>
+            Next
+          </Button>
+        )}
       </div>
 
       <Menu
@@ -45,7 +47,7 @@ const SpecialisationStep = ({ incrementStep, type }) => {
         {Object.keys(options).map((sub, index) => (
           <Menu.SubMenu
             key={index}
-            title={`${type} for ${sub}`}
+            title={`${type.replace(/^\w/, (c) => c.toUpperCase())} for ${sub}`}
             className="step-submenu"
             mode="inline"
           >

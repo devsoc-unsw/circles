@@ -120,7 +120,7 @@ def add_specialisation(structure: dict, code: str):
             add_subgroup_container(structure, type, container, exceptions)
 
 @router.get(
-    "/getStructure/{programCode}/{major}",
+    "/getStructure/{programCode}/{spec}",
     response_model=Structure,
     responses={
         400: { "description": "Uh oh you broke me" },
@@ -185,23 +185,22 @@ def add_specialisation(structure: dict, code: str):
     },
 )
 @router.get("/getStructure/{programCode}", response_model=Structure)
-def getStructure(
-    programCode: str, major: Optional[str] = None, minor: Optional[str] = None
+def get_structure(
+    programCode: str, spec: Optional[str] = None
 ):
     """
-    NOTE: major and minor is optionally added.
+    NOTE: specialisations optionally added.
     """
     structure = {}
 
-    if major:
-        majors_l = major.split("+") if "+" in major else [major]
-        for m in majors_l:
+    if spec:
+        specs = spec.split("+") if "+" in spec else [spec]
+        for m in specs:
             add_specialisation(structure, m)
 
     # add details for program code
     programsResult = programsCOL.find_one({"code": programCode})
     if not programsResult:
-        print(programCode)
         raise HTTPException(
             status_code=400, detail="Program code was not found")
 

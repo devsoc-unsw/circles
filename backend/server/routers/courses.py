@@ -168,7 +168,7 @@ def search(userData: UserData, search_string: str):
             ……. }
     """
     global ALL_COURSES
-    from server.routers.programs import getStructure
+    from server.routers.programs import get_structure
 
     if ALL_COURSES is None:
         ALL_COURSES = fetch_all_courses()
@@ -176,7 +176,7 @@ def search(userData: UserData, search_string: str):
     specialisations = list(userData.specialisations.keys())
     majors = list(filter(lambda x: x.endswith("1"), specialisations))
     minors = list(filter(lambda x: x.endswith("2"), specialisations))
-    structure = getStructure(userData.program, "+".join(majors), "+".join(minors))['structure']
+    structure = get_structure(userData.program, "+".join(majors), "+".join(minors))['structure']
 
     top_results = sorted(ALL_COURSES.items(), reverse=True,
                          key=lambda course: fuzzy_match(course, search_string)

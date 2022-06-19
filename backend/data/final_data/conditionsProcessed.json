@@ -3361,7 +3361,7 @@
     },
     "COMM2222": {
         "original": "Pre-requisite: In Business degree, COMM6000 Career Accelerator or COMM1999 First Year Portfolio, minimum 72 UOC completed, room in degree for course, Good academic standing.<br/>Excluded: Co-op students<br/>It is recommended a progression check is completed prior to enrolling.<br/><br/>",
-        "processed": "(COMM6000 || COMM1999) && ZBUS# && 65WAM && 72UOC",
+        "processed": "(COMM6000 || COMM1999) && ZBUS# && 72UOC",
         "handbook_note": "Good Academic Standing. Co-op students are excluded. It is recommended to do a progression check prior to enrolling"
     },
     "COMM2233": {
@@ -3380,7 +3380,7 @@
     },
     "COMM3020": {
         "original": "Minimum 72 UOC, room in degree for this course, good academic standing, completed COMM6000 Career Accelerator: Essentials or COMM1999 First Year Portfolio.<br/>This course is by application only. Please visit Business School website for more information<br/><br/>",
-        "processed": "(COMM6000 || COMM1999) && ZBUS# && 65WAM && 72UOC",
+        "processed": "(COMM6000 || COMM1999) && ZBUS# && 72UOC",
         "handbook_note": "Good Academic Standing. Co-op students are excluded. It is recommended to do a progression check prior to enrolling"
     },
     "COMM3030": {
