@@ -5,9 +5,9 @@ import { CloseOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 import useIntersectionObserver from "hooks/useIntersectionObserver";
 import { removeTab, setActiveTab } from "reducers/courseTabsSlice";
-import "./index.less";
+import S from "./styles";
 
-const CourseTab = ({ tab, index }) => {
+const DraggableTab = ({ tabName, index }) => {
   const [scrolledTo, setScrolledTo] = useState(false);
   const dispatch = useDispatch();
   const ref = useRef(null);
@@ -41,11 +41,11 @@ const CourseTab = ({ tab, index }) => {
   }, [active, tabInView, index, scrolledTo]);
 
   return (
-    <Draggable key={tab} draggableId={tab} index={index}>
+    <Draggable key={tabName} draggableId={tabName} index={index}>
       {(draggableProvided, _) => (
-        <div
+        <S.DraggableTabWrapper
           role="tab"
-          className={index === active ? "cs-tab active" : "cs-tab"}
+          active={index === active}
           onClick={() => dispatch(setActiveTab(index))}
           ref={(r) => {
             ref.current = r;
@@ -56,7 +56,7 @@ const CourseTab = ({ tab, index }) => {
           style={getDraggableStyle(draggableProvided.draggableProps.style)}
           onMouseUp={handleMouseUp}
         >
-          <span className="cs-tab-name">{tab}</span>
+          <S.TabNameWrapper>{tabName}</S.TabNameWrapper>
           <Button
             type="text"
             size="small"
@@ -66,10 +66,10 @@ const CourseTab = ({ tab, index }) => {
               dispatch(removeTab(index));
             }}
           />
-        </div>
+        </S.DraggableTabWrapper>
       )}
     </Draggable>
   );
 };
 
-export default CourseTab;
+export default DraggableTab;

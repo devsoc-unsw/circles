@@ -17,7 +17,7 @@ import "./index.less";
 
 const { SubMenu } = Menu;
 
-const CourseMenu = ({ structure, showLockedCourses }) => {
+const CourseSidebarMenu = ({ structure, showLockedCourses }) => {
   const dispatch = useDispatch();
   const [menuData, setMenuData] = useState({});
   const [coursesUnits, setCoursesUnits] = useState({});
@@ -289,4 +289,4 @@ const SubgroupContainer = ({ subGroup, group, coursesUnits }) => {
   );
 };
 
-export default CourseMenu;
+export default CourseSidebarMenu;
