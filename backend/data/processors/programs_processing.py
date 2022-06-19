@@ -121,10 +121,6 @@ def add_program(processed_data: dict[str, dict], formatted_data: dict):
         if SPEC_KEY in program_data["components"]:
             program_data["components"][SPEC_KEY] = order_dict_alphabetically(program_data["components"][SPEC_KEY])
 
-        # If there was some processing warning, print
-        if program_data["processing_warnings"]:
-            print(f"Warning: Some issues when processing program {program_data['code']}")
-
         code = program_data["code"]
         processed_data[code] = program_data
 
