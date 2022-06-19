@@ -1,21 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { EyeOutlined } from "@ant-design/icons";
-import {
-  Badge,
-  Button,
-  Skeleton,
-  Tooltip,
-  Typography,
-} from "antd";
-import { addTab } from "reducers/courseTabsSlice";
+import { useSelector } from "react-redux";
+import { Skeleton, Typography } from "antd";
 import getFormattedPlannerCourses from "../getFormattedPlannerCourses";
+import CourseBadge from "./CourseBadge";
 import "./index.less";
 
 const GridView = ({ isLoading, structure }) => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { Title } = Typography;
   const [plannerCourses, setPlannerCourses] = useState({});
   const [gridLayout, setGridLayout] = useState({});
@@ -40,7 +30,6 @@ const GridView = ({ isLoading, structure }) => {
               newGridLayout[group][subgroup].push({
                 key: courseCode,
                 title: subgroupStructure.courses[courseCode],
-                planned: courseCode in plannerCourses,
                 // past and termPlanned will be undefined for courses not in planner
                 past: plannerCourses[courseCode]?.past,
                 termPlanned: plannerCourses[courseCode]?.termPlanned,
@@ -60,7 +49,6 @@ const GridView = ({ isLoading, structure }) => {
                 newGridLayout[group][subgroup].push({
                   key: courseCode,
                   title: courseData.title,
-                  planned: courseCode in plannerCourses,
                   past: plannerCourses[courseCode].past,
                   termPlanned: plannerCourses[courseCode].termPlanned,
                   unplanned: !courseData.plannedFor,
@@ -85,88 +73,6 @@ const GridView = ({ isLoading, structure }) => {
     generateGridStructure();
   }, [isLoading, structure, years, startYear, courses]);
 
-  const handleCourseLink = (courseCode) => {
-    navigate("/course-selector");
-    dispatch(addTab(courseCode));
-  };
-
-  const courseBadge = (course) => {
-    if (course.unplanned) {
-      return (
-        <Badge
-          key={course.key}
-          count={(
-            <Tooltip title="Course added but not planned">
-              <div className="courseBadgeIcon">!</div>
-            </Tooltip>
-          )}
-        >
-          <Button
-            className="checkerButton"
-            type="primary"
-            style={{ background: "#FFF", color: "#9254de" }}
-            key={course.key}
-            onClick={() => handleCourseLink(course.key)}
-          >
-            {course.key}: {course.title}
-          </Button>
-        </Badge>
-      );
-    }
-
-    if (course.past) {
-      return (
-        <Button
-          className="checkerButton"
-          type="primary"
-          key={course.key}
-          onClick={() => handleCourseLink(course.key)}
-        >
-          {course.key}: {course.title}
-        </Button>
-      );
-    }
-
-    // for future courses planned
-    // course.past can be undefined if not in term planner thus check for false
-    if (course.past === false) {
-      return (
-        <Badge
-          key={course.key}
-          count={(
-            <Tooltip title={`Future course planned for ${course.termPlanned}`}>
-              <div className="courseBadgeIcon">
-                <EyeOutlined />
-              </div>
-            </Tooltip>
-          )}
-        >
-          <Button
-            className="checkerButton"
-            type="primary"
-            key={course.key}
-            onClick={() => handleCourseLink(course.key)}
-          >
-            {course.key}: {course.title}
-          </Button>
-        </Badge>
-      );
-    }
-
-    // below is default badge for courses not in term planner
-    return (
-      <Button
-        className="checkerButton"
-        type="primary"
-        style={{ background: "#FFF", color: "#9254de" }}
-        key={course.key}
-        onClick={() => handleCourseLink(course.key)}
-      >
-        {course.key}: {course.title}
-      </Button>
-    );
-  };
-
   return (
     <div className="gridViewContainer">
       {isLoading ? (
@@ -184,7 +90,7 @@ const GridView = ({ isLoading, structure }) => {
                   </Title>
                   <div className="courseGroup">
                     {subGroupEntry.map((course) => (
-                      courseBadge(course)
+                      <CourseBadge course={course} />
                     ))}
                   </div>
                   <br />
