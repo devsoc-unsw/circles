@@ -89,7 +89,8 @@ def process_terms(processed: dict, formatted: dict) -> None:
     res = re.sub("Summer Term", "T0", res)
     res = re.sub("Summer Canberra", "SC", res)
     res = res.split(",")
-    res = [item.strip(" ") for item in res]  # Strip any remaining spaces
+    # Strip Remaining Spaces and discard empty strings
+    res = list(set(item.strip(" ") for item in res).discard(""))
     processed["terms"] = res
 
 
