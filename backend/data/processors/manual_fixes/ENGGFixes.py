@@ -33,8 +33,9 @@ def fix_conditions():
     CONDITIONS["ENGG2997"][PROCESSED] = ENGG_2997()
     CONDITIONS["ENGG4103"][PROCESSED] = ENGG_4103()
 
-    for course in ("ENGG2600", "ENGG3600", "ENGG4600"):
-        CONDITIONS[course] = ENGG_2_4600(CONDITIONS[course])
+    CONDITIONS["ENGG2600"] = ENGG_2600(CONDITIONS["ENGG2600"])
+    CONDITIONS["ENGG3600"] = ENGG_3600(CONDITIONS["ENGG3600"])
+    CONDITIONS["ENGG4600"] = ENGG_4600(CONDITIONS["ENGG4600"])
 
     # Updates the files with the modified dictionaries
     data_helpers.write_data(
@@ -60,18 +61,42 @@ def ENGG_1811():
     return ""
 
 
-def ENGG_2_4600(conditions):
+def ENGG_2600(conditions):
     """
     "original": "Please refer to the course overview section for information on prerequisite requirements.<br/><br/>"
 
     "processed": "Please refer to the course overview section for information on prerequisite requirements"
     """
-    # TODO: fix
     return {
         "original": conditions["original"],
-        "processed": "Please refer to the course overview section for information on prerequisite requirements",
-        "handbook_note": "Please refer to the course overview section for information on requirements"
+        "processed": "((ENGG# && DESN1000) || COMP# || FOOD# || MEDC#) && 42UOC",
+        "handbook_note": "Please refer to the course overview section for further information on requirements"
     }
+
+def ENGG_3600(conditions):
+    """
+    "original": "Please refer to the course overview section for information on prerequisite requirements.<br/><br/>"
+
+    "processed": "Please refer to the course overview section for information on prerequisite requirements"
+    """
+    return {
+        "original": conditions["original"],
+        "processed": "((ENGG# && DESN1000) || COMP# || FOOD# || MEDC#) && 72UOC",
+        "handbook_note": "Please refer to the course overview section for further information on requirements. Medicine students must also be eligible to overload during year 3 based on the general education requirements for BSc (Med) Hons."
+    }
+
+def ENGG_3600(conditions):
+    """
+    "original": "Please refer to the course overview section for information on prerequisite requirements.<br/><br/>"
+
+    "processed": "Please refer to the course overview section for information on prerequisite requirements"
+    """
+    return {
+        "original": conditions["original"],
+        "processed": "((ENGG# && DESN1000) || COMP# || FOOD# || MEDC#) && 114UOC",
+        "handbook_note": "Please refer to the course overview section for further information on requirements. Medicine students must also be eligible to overload during year 3 based on the general education requirements for BSc (Med) Hons."
+    }
+
 
 
 def ENGG_2997():
