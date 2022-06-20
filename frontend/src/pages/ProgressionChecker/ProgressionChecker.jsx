@@ -18,25 +18,25 @@ const degreeData = {
   completed_UOC: 108,
   concentrations: [
     {
-      type: "Degree",
+      type: "Program",
       name: "Software Engineering",
       code: "SENGAH",
-      UOC: 168,
-      completedUOC: 72,
+      UOC: 0,
+      completedUOC: 0,
     },
     {
       type: "Major",
       name: "Statistics",
       code: "MATHT1",
-      UOC: 60,
-      completedUOC: 18,
+      UOC: 0,
+      completedUOC: 0,
     },
     {
       type: "Minor",
       name: "Marine Science",
       code: "MSCIM1",
-      UOC: 36,
-      completedUOC: 6,
+      UOC: 0,
+      completedUOC: 0,
     },
   ],
 };
@@ -53,29 +53,36 @@ const ProgressionChecker = () => {
   const [structure, setStructure] = useState({});
   const majorData = "Major - ".concat(majors);
   const minorData = "Minor - ".concat(minors);
-  degreeData.concentrations[1].type = majorData;
-  degreeData.concentrations[2].type = minorData;
   degreeData.concentrations[0].name = programName;
+  degreeData.concentrations[0].code = programCode;
+  degreeData.concentrations[1].type = majorData;
+  degreeData.concentrations[1].code = majors;
 
   useEffect(() => {
     // get structure of degree
-    degreeData.concentrations.pop();
     const fetchStructure = async () => {
       try {
+        if (degreeData.concentrations.length === 3) degreeData.concentrations.pop();
         if (minors.length === 0) {
           const res = await axios.get(`/programs/getStructure/${programCode}/${majors}`);
-          console.log(res.data.structure);
           degreeData.code = programCode;
           degreeData.concentrations[1].name = res.data.structure[majorData].name;
           setStructure(res.data.structure);
         } else {
           const res = await axios.get(`/programs/getStructure/${programCode}/${majors}/${minors}`);
-          console.log(res.data.structure);
           degreeData.code = programCode;
+          degreeData.concentrations[0].name = programName;
+          degreeData.concentrations[1].name = res.data.structure[majorData].name;
           const minorObj = {
-            type: "Minor", name: res.data.structure[minorData].name, code: minors, UOC: 30, completedUOC: 6,
+            type: "Minor",
+            name: res.data.structure[minorData].name,
+            code: minors,
+            UOC: 0,
+            completedUOC: 0,
           };
           degreeData.concentrations.push(minorObj);
+          degreeData.concentrations[2].type = minorData;
+          degreeData.concentrations[1].type = majorData;
           degreeData.concentrations[1].name = res.data.structure[majorData].name;
           setStructure(res.data.structure);
         }
@@ -94,9 +101,7 @@ const ProgressionChecker = () => {
     storeUoc[group] = {};
     let totalUoc = 0;
     let completedUOC = 0;
-    console.log(planner.courses);
     Object.keys(structure[group]).forEach((sub) => {
-      console.log(structure[group][sub]);
       if (typeof structure[group][sub] !== "string") {
         totalUoc += structure[group][sub].UOC;
         if (structure[group][sub].courses) {
@@ -137,7 +142,6 @@ const ProgressionChecker = () => {
   degreeData.concentrations[0].UOC = calTotalUOC;
   degreeData.concentrations[0].completedUOC = calCompletedUOC;
   degreeData.completed_UOC = calCompletedUOC;
-  console.log(degreeData);
 
   return (
     <PageTemplate>
