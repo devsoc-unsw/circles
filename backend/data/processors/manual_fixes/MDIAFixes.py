@@ -43,11 +43,13 @@ def MDIA_3003():
     """
 
     # 3454 is Media (Comm & Journalism)
-    core_courses = PROGRAMS["3454"]["components"]["NonSpecialisationData"]["Level 2 Media Prescribed Elective Courses"].keys()
-    if not core_courses:
-        print("ERROR[MDIA3003]: No core courses found for Media (Comm & Journalism)")
+    non_spec_data: list = PROGRAMS["3454"]["components"]["non_spec_data"]
+    core_courses = next(filter(lambda x: x["type"] == "prescribed_electives", iter(non_spec_data)))["courses"].keys()
 
-    core_courses = filter(lambda x: re.match(r"[A-Z]{4}[0-9]{4}", x, flags=re.IGNORECASE),
+    if not core_courses:
+        return "ERROR[MDIA3003]: No core courses found for Media (Comm & Journalism)"
+
+    core_courses = filter(lambda x: re.match(r"[A-Z]{4}2[0-9]{3}", x, flags=re.IGNORECASE),
                           core_courses)
 
     return f"66UOC && (6UOC in ({' || '.join(core_courses)})) && (3454 || 3453)"

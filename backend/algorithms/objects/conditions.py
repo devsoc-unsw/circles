@@ -264,6 +264,9 @@ class CoresCondition(Condition):
         """ Set own category to the one given """
         self.category = category_classobj
 
+    def is_path_to(self, course: str) -> bool:
+        return False
+
     def validate(self, user: User) -> tuple[bool, list[str]]:
         return user.completed_core(self.category), []
 
