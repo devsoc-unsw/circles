@@ -1,15 +1,18 @@
 import React, { useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { LockOutlined, PlusOutlined, WarningOutlined } from "@ant-design/icons";
+import {
+  Button, Menu, Tooltip, Typography,
+} from "antd";
 import axios from "axios";
-import { useSelector, useDispatch } from "react-redux";
-import { Tooltip, Menu, Button } from "antd";
-import { motion, AnimatePresence } from "framer-motion/dist/framer-motion";
-import { WarningOutlined, PlusOutlined, LockOutlined } from "@ant-design/icons";
-import axiosRequest from "../../../axios";
+import { AnimatePresence, motion } from "framer-motion/dist/framer-motion";
+import axiosRequest from "config/axios";
+import useMediaQuery from "hooks/useMediaQuery";
+import { setCourses } from "reducers/coursesSlice";
+import { addTab } from "reducers/courseTabsSlice";
+import { addToUnplanned } from "reducers/plannerSlice";
 import prepareUserPayload from "../utils";
 import LoadingSkeleton from "./LoadingSkeleton";
-import { setCourses } from "../../../reducers/coursesSlice";
-import { addTab } from "../../../reducers/courseTabsSlice";
-import { addToUnplanned } from "../../../reducers/plannerSlice";
 import "./index.less";
 
 const { SubMenu } = Menu;
@@ -52,12 +55,14 @@ const CourseMenu = ({ structure, showLockedCourses }) => {
           };
 
           newMenu[group][subgroup] = [];
+          const isRule = subgroupStructure.type && subgroupStructure.type.includes("rule");
 
-          if (subgroupStructure.courses) {
+          if (subgroupStructure.courses && !isRule) {
             // only consider disciplinary component courses
             Object.keys(subgroupStructure.courses).forEach((courseCode) => {
               newMenu[group][subgroup].push({
                 courseCode,
+                title: subgroupStructure.courses[courseCode],
                 unlocked: !!courses[courseCode],
                 accuracy: courses[courseCode]
                   ? courses[courseCode].is_accurate
@@ -68,7 +73,7 @@ const CourseMenu = ({ structure, showLockedCourses }) => {
               // add UOC to curr
               if (planner.courses[courseCode]) {
                 newCoursesUnits[group][subgroup].curr
-                    += planner.courses[courseCode].UOC;
+                  += planner.courses[courseCode].UOC;
               }
             });
           } else {
@@ -123,7 +128,7 @@ const CourseMenu = ({ structure, showLockedCourses }) => {
       {isPageLoaded
         ? (
           <Menu
-            onClick={() => {}}
+            onClick={() => { }}
             defaultSelectedKeys={[]}
             selectedKeys={[]}
             defaultOpenKeys={[Object.keys(menuData)[0]]}
@@ -149,6 +154,7 @@ const CourseMenu = ({ structure, showLockedCourses }) => {
                         <MenuItem
                           selected={planner.courses[course.courseCode] !== undefined}
                           courseCode={course.courseCode}
+                          courseTitle={course.title}
                           accurate={course.accuracy}
                           unlocked={course.unlocked}
                           setActiveCourse={setActiveCourse}
@@ -172,6 +178,7 @@ const CourseMenu = ({ structure, showLockedCourses }) => {
 const MenuItem = ({
   selected,
   courseCode,
+  courseTitle,
   activeCourse,
   setActiveCourse,
   accurate,
@@ -209,7 +216,8 @@ const MenuItem = ({
     };
     dispatch(addToUnplanned(data));
   };
-
+  const isSmall = useMediaQuery("(max-width: 1400px)");
+  const { Text } = Typography;
   return (
     <motion.div transition={{ ease: "easeOut", duration: 0.3 }} layout>
       <Menu.Item
@@ -221,8 +229,16 @@ const MenuItem = ({
         onClick={handleClick}
       >
         <div className="menuItemContainer">
-          <div>
-            {`${courseCode} `}
+          <div className="menuCourseContainer">
+            {isSmall ? (
+              <Tooltip title={courseTitle} placement="topLeft">
+                {courseCode}
+              </Tooltip>
+            ) : (
+              <Text>
+                {courseCode}: {courseTitle}
+              </Text>
+            )}
             {!accurate && (
               <TooltipWarningIcon
                 text="We couldn't parse the requirement for this course. Please manually check if you have the correct prerequisites to unlock it."
@@ -231,7 +247,7 @@ const MenuItem = ({
             {!unlocked && <LockOutlined style={{ fontSize: "11px" }} />}
           </div>
           {!selected && (
-            <Tooltip title="Add to Planner" placement="bottom">
+            <Tooltip title="Add to Planner" placement="top">
               <Button
                 onClick={(e) => addToPlanner(e, courseCode)}
                 size="small"

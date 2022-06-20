@@ -17,15 +17,16 @@ from data.processors.conditions_preprocessing import preprocess_conditions
 from data.processors.conditions_tokenising import tokenise_conditions
 from data.processors.courses_processing import process_course_data
 from data.processors.programs_processing import process_prg_data
-from data.processors.programs_processing_type1 import process_prg_data_type1
 from data.processors.specialisations_processing import customise_spn_data
 
 from data.scrapers.courses_formatting import format_course_data
 from data.scrapers.courses_scraper import scrape_course_data
 from data.scrapers.programs_formatting import format_prg_data
 from data.scrapers.programs_scraper import scrape_prg_data
+from data.scrapers.gened_scraper import scrape_gened_data
 from data.scrapers.specialisations_formatting import format_spn_data
 from data.scrapers.specialisations_scraper import scrape_spn_data
+from data.scrapers.faculty_code_formatting import format_code_data
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
@@ -50,8 +51,8 @@ except argparse.ArgumentError:
     parser.print_help()
     exit(0)
 
-
 def run_manual_fixes():
+    """ runs all the manual fix scripts """
     try:
         subprocess.run(["data/processors/manual_fixes/run_manual_fixes.sh"], check=True)
     except subprocess.CalledProcessError:
@@ -60,11 +61,16 @@ def run_manual_fixes():
 
 
 run = {
+    "faculty": {
+        "format": format_code_data,
+    },
     "program": {
         "scrape": scrape_prg_data,
         "format": format_prg_data,
         "process": process_prg_data,
-        "type1": process_prg_data_type1,
+    },
+     "gened": {
+        "scrape": scrape_gened_data,
     },
     "specialisation": {
         "scrape": scrape_spn_data,
@@ -111,7 +117,7 @@ if __name__ == "__main__":
 
     elif args.stage == "all":
         # Run all the stages from top to bottom
-        if args.type in ["program", "specialisation", "course"]:
+        if args.type in ["program", "specialisation", "course", "gened"]:
             # NOTE: Be careful when using this as this will rerun the scrapers
             res = input(
                 f"Careful. You are about to run all stages of {args.type} INCLUDING the scrapers... Enter 'y' if you wish to proceed or 'n' to cancel: "

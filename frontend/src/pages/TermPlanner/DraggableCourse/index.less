@@ -16,6 +16,11 @@
   line-height: 1.5715;
   background-color: #d9d9d9;
 }
+@media (max-width: 1400px) {
+  .course {
+    border-radius: 0.2em;
+  }
+}
 
 .disabledWarning {
   background-color: #fff3e0;
@@ -24,6 +29,23 @@
 .warning {
   background-color: #ffe8c3;
 }
+
+.draggable-course-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+
+.draggable-course-info {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  padding: 0px;
+  margin: 0px;
+}
+
 
 .dragDisabledCourse {
   background-color: #eee;

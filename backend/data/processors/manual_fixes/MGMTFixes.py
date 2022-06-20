@@ -130,11 +130,10 @@ def MGMT_4101_4500_4501():
     # Have not been able to locate a code for the IBUS honours plans. It appears
     # to be an IBUS specialisation with an additional course.
     return {
-        "original": CONDITIONS["MGMT3110"]["original"],
+        "original": CONDITIONS["MGMT4101"]["original"],
         "processed": "4501",
         "handbook_note": "enrolment in the International Business Honours plan is required"
     }
-
 
 def MGMT_4104_4738_4739():
     """
@@ -143,7 +142,7 @@ def MGMT_4104_4738_4739():
     """
     # Have not been able to locate a code for the HRM honours plan.
     return {
-        "original": CONDITIONS["MGMT3110"]["original"],
+        "original": CONDITIONS["MGMT4104"]["original"],
         "processed": "4501",
         "handbook_note": "enrolment in the Human Resource Management Honours plan is required"
     }

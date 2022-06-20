@@ -33,6 +33,8 @@ In `frontend.env`, add:
 
 > NOTE: The `REACT_APP_BACKEND_API_BASE_URL` environment variable is the base url endpoint that the backend is running on. If the environment variable is not specified, the react application will default to using `http://localhost:8000/` as the base url when calling the API endpoint.
 
+For features that are still in progress, we have a boolean flag which enables these features to be shown while developing. To enable this, simply add `REACT_APP_ENV=dev` to `frontend.env`. 
+
 Replace the ellipses with a username and password. The username and password in `backend.env` must match the values in `mongodb.env`. The `env` folder has been added to `.gitignore` and will not be committed to the repo.
 
 ### Running Circles with Docker
@@ -55,4 +57,6 @@ To remove all containers and the docker network, run `docker-compose down`. Add 
 To stop a docker containers that is running, run `docker-compose stop <containerName>`. This will not remove the container.
 
 ### Running Circles without Docker
-It is now possible to run Circles without docker, and have your changes to the backend codebase be reflected in the development server. To do this, ensure nodemon is installed on your linux distribution by running `npm i -g nodemon`. Nodemon is a node package which automatically restarts an app when it detects code changes. Firstly, ensure the mongodb container is up by running `docker compose run --rm init-mongo`. Then, to run the backend, run `MONGODB_SERVICE_HOSTNAME=localhost MONGODB_PASSWORD=<password> MONGODB_USERNAME=<username> nodemon --exec python3 runserver.py`, where `password` and `username` are your mongodb environment variables set in `/env`. Ensure your python3 version is set to 3.10. To run the frontend, navigate to the frontend directory and run `npm start`. All parts of the app should now be running and talking to eachother. 
+It is now possible to run Circles without docker, and have your changes to the backend codebase be reflected in the development server. To do this, ensure nodemon is installed on your linux distribution by running `npm i -g nodemon`. Nodemon is a node package which automatically restarts an app when it detects code changes. 
+You can then run `python run_app.py` to run all of circles locally (assuming that you have installed all dependancies).
+ Ensure your python3 version is set to 3.10. All parts of the app should now be running and talking to eachother. 

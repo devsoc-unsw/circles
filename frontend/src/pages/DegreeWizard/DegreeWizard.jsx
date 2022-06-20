@@ -1,21 +1,22 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import {
-  Button, notification, Typography, Modal,
-} from "antd";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { scroller } from "react-scroll";
+import {
+  Button, Modal,
+  notification, Typography,
+} from "antd";
+import PageTemplate from "components/PageTemplate";
+import { resetCourses } from "reducers/coursesSlice";
+import { resetTabs } from "reducers/courseTabsSlice";
+import { resetDegree } from "reducers/degreeSlice";
+import { resetPlanner } from "reducers/plannerSlice";
 import DegreeStep from "./steps/DegreeStep";
-import SpecialisationStep from "./steps/SpecialisationStep";
 import MinorStep from "./steps/MinorStep";
-import "./index.less";
-import YearStep from "./steps/YearStep";
+import SpecialisationStep from "./steps/SpecialisationStep";
 import StartBrowsingStep from "./steps/StartBrowsingStep";
-import { resetTabs } from "../../reducers/courseTabsSlice";
-import { resetPlanner } from "../../reducers/plannerSlice";
-import { resetDegree } from "../../reducers/degreeSlice";
-import PageTemplate from "../../components/PageTemplate";
-import { resetCourses } from "../../reducers/coursesSlice";
+import YearStep from "./steps/YearStep";
+import "./index.less";
 
 const { Title } = Typography;
 
@@ -23,6 +24,8 @@ const DegreeWizard = () => {
   const dispatch = useDispatch();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const navigate = useNavigate();
+
+  const degree = useSelector((state) => state.degree);
 
   const csDegreeDisclaimer = () => {
     notification.info({
@@ -35,8 +38,13 @@ const DegreeWizard = () => {
 
   useEffect(() => {
     // TODO: Warning dialog before planner is reset.
-    if (localStorage.getItem("planner")) {
+    if (degree.isComplete) {
       setIsModalVisible(true);
+    } else {
+      dispatch(resetPlanner());
+      dispatch(resetDegree());
+      dispatch(resetTabs());
+      dispatch(resetCourses());
     }
     csDegreeDisclaimer();
   }, []);
@@ -63,7 +71,6 @@ const DegreeWizard = () => {
     dispatch(resetDegree());
     dispatch(resetTabs());
     dispatch(resetCourses());
-    localStorage.clear();
   };
 
   const handleCancel = () => {
@@ -72,7 +79,7 @@ const DegreeWizard = () => {
   };
 
   return (
-    <PageTemplate>
+    <PageTemplate showHeader={false}>
       <div className="degree-root-container">
         <Modal
           title="Reset Planner?"
@@ -102,32 +109,32 @@ const DegreeWizard = () => {
 
         <div className="steps-container">
           {currStep >= 1 && (
-          <div className="step-content" id="Year">
-            <YearStep incrementStep={incrementStep} currStep={currStep} />
-          </div>
+            <div className="step-content" id="Year">
+              <YearStep incrementStep={incrementStep} currStep={currStep} />
+            </div>
           )}
           {currStep >= 2 && (
-          <div className="step-content" id="Degree">
-            <DegreeStep incrementStep={incrementStep} currStep={currStep} />
-          </div>
+            <div className="step-content" id="Degree">
+              <DegreeStep incrementStep={incrementStep} currStep={currStep} />
+            </div>
           )}
           {currStep >= 3 && (
-          <div className="step-content" id="Specialisation">
-            <SpecialisationStep
-              incrementStep={incrementStep}
-              currStep={currStep}
-            />
-          </div>
+            <div className="step-content" id="Specialisation">
+              <SpecialisationStep
+                incrementStep={incrementStep}
+                currStep={currStep}
+              />
+            </div>
           )}
           {currStep >= 4 && (
-          <div className="step-content" id="Minor">
-            <MinorStep incrementStep={incrementStep} currStep={currStep} />
-          </div>
+            <div className="step-content" id="Minor">
+              <MinorStep incrementStep={incrementStep} currStep={currStep} />
+            </div>
           )}
           {currStep >= 5 && (
-          <div className="step-content" id="Start Browsing">
-            <StartBrowsingStep />
-          </div>
+            <div className="step-content" id="Start Browsing">
+              <StartBrowsingStep />
+            </div>
           )}
         </div>
       </div>

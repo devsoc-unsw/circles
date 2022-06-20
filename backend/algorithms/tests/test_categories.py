@@ -12,7 +12,7 @@ import json
 
 PATH = "./algorithms/exampleUsers.json"
 
-with open(PATH) as f:
+with open(PATH, encoding="utf8") as f:
     USERS = json.load(f)
 
 

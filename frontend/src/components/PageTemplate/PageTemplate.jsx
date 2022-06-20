@@ -1,54 +1,28 @@
-import { Button, Layout, Modal } from "antd";
 import React from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { resetCourses } from "../../reducers/coursesSlice";
-import { resetTabs } from "../../reducers/courseTabsSlice";
-import { resetDegree } from "../../reducers/degreeSlice";
-import { resetPlanner } from "../../reducers/plannerSlice";
-import FeedbackButton from "../FeedbackButton";
+import { Helmet } from "react-helmet";
+import FeedbackButton from "components/FeedbackButton";
+import Header from "components/Header";
 
-const { Content } = Layout;
-
-const PageTemplate = ({ children }) => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  // light mode is always on
-  document.body.classList.add("light");
-
-  const handleReset = () => {
-    dispatch(resetTabs());
-    dispatch(resetCourses());
-    dispatch(resetPlanner());
-    dispatch(resetDegree());
-    localStorage.clear();
-    navigate("/degree-wizard");
-  };
-  return (
-    <Content className="app-root content">
-      {
-        localStorage.getItem("isUpdate") && (
-        <Modal
-          title="Reset Required"
-          visible
-          onOk={handleReset}
-          closable={false}
-          footer={[
-            <Button key="submit" type="primary" danger onClick={handleReset}>
-              Reset
-            </Button>,
-          ]}
-        >
-          It looks last time you visited Circles, there has some been some major changes.
-          You would need to reset your degree to plan your courses!
-        </Modal>
-        )
-        }
+const PageTemplate = ({ children, showHeader = true }) => (
+  <>
+    <Helmet>
+      <title>Circles</title>
+      <meta
+        name="description"
+        content="Circles UNSW Degree Planner"
+      />
+      <meta
+        name="keywords"
+        content="circles, unsw, csesoc, degree, planner, course, plan"
+      />
+    </Helmet>
+    { showHeader && <Header />}
+    {/* TODO: Make below as styled component once less has been migrated */}
+    <div className="app-root content">
       {children}
       <FeedbackButton />
-    </Content>
-  );
-};
+    </div>
+  </>
+);
 
 export default PageTemplate;

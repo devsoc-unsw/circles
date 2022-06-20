@@ -25,6 +25,7 @@ COURSES = data_helpers.read_data("data/final_data/coursesProcessed.json")
 def fix_conditions():
     """ Functions to apply manual fixes """
 
+    CONDITIONS["MUSC3105"][PROCESSED] = MUSC_3105()
     CONDITIONS["MUSC4101"][PROCESSED] = MUSC_4101()
 
     # Updates the files with the modified dictionaries
@@ -32,6 +33,16 @@ def fix_conditions():
         CONDITIONS, "data/final_data/conditionsProcessed.json")
     data_helpers.write_data(COURSES, "data/final_data/coursesProcessed.json")
 
+
+def MUSC_3105():
+    """
+            "original": "Prerequisite: 24 units of credit in Music courses, including 12 at Level 1 and enrolment in a single or dual Music program. Or 48 UOC overall, including 6 UOC level 1 Music and 6 UOC level 2 Music and enrolment in a Music major or minor<br/><br/>",
+            "processed": "24UOC in Music courses && 12 at L1 && enrolment in a single || dual Music program. || 48UOC && 6UOC L1 Music && 6UOC L2 Music && enrolment in a Music major || minor"
+    """
+
+    # TODO: add proper warnings/handbook notes/conditions about enrolment in the correct program - since the enrolment requirements change depending on how you satisfy the prereq I'm not sure how to best go about this
+
+    return "(24UOC in MUSC && 12UOC in L1 MUSC) || (48UOC && 6UOC in L1 MUSC && 6UOC in L2 MUSC)"
 
 def MUSC_4101():
     """

@@ -1,9 +1,9 @@
-import { PlusOutlined, StopOutlined } from "@ant-design/icons";
-import { Button } from "antd";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import axiosRequest from "../../../axios";
-import { addToUnplanned, removeCourses } from "../../../reducers/plannerSlice";
+import { PlusOutlined, StopOutlined } from "@ant-design/icons";
+import { Button } from "antd";
+import axiosRequest from "config/axios";
+import { addToUnplanned, removeCourses } from "reducers/plannerSlice";
 import prepareUserPayload from "../utils";
 
 const AddToPlannerButton = () => {
@@ -47,6 +47,7 @@ const AddToPlannerButton = () => {
         warnings: [],
         handbookNote: course.handbook_note,
         isAccurate: course.is_accurate,
+        mark: null,
       },
     };
     dispatch(addToUnplanned(data));
@@ -56,7 +57,7 @@ const AddToPlannerButton = () => {
   const removeFromPlanner = async () => {
     const [data] = await axiosRequest("post", `/courses/unselectCourse/${id}`, prepareUserPayload(degree, planner));
     addCourseToPlannerTimeout(false);
-    dispatch(removeCourses(data.affected_courses));
+    dispatch(removeCourses(data.courses));
   };
 
   return (

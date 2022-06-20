@@ -1,21 +1,20 @@
 import React, { useState } from "react";
 import {
-  Typography,
-  Divider,
-  Select,
-  Button,
-} from "antd";
-import "tippy.js/dist/tippy.css";
-import "tippy.js/themes/light.css";
-import {
   exportComponentAsJPEG,
   exportComponentAsPNG,
 } from "react-component-export-image";
+import {
+  Button,
+  Divider,
+  Radio,
+  Typography,
+} from "antd";
+import "tippy.js/dist/tippy.css";
+import "tippy.js/themes/light.css";
 import "./index.less";
 
 const SaveMenu = ({ plannerRef }) => {
   const { Title } = Typography;
-  const { Option } = Select;
 
   const exportFormats = ["png", "jpg"];
 
@@ -44,17 +43,13 @@ const SaveMenu = ({ plannerRef }) => {
       </div>
       <div className="settingsEntry">
         <Title level={3} className="text settingsSubtitle">
-          File Type
+          File Type:
         </Title>
-        <Select
-          defaultValue="png"
-          style={{ width: 70 }}
-          onChange={(value) => setFormat(value)}
-        >
+        <Radio.Group onChange={(e) => setFormat(e.target.value)} defaultValue="png">
           {exportFormats.map((form) => (
-            <Option value={form}>{form}</Option>
+            <Radio value={form}>{form}</Radio>
           ))}
-        </Select>
+        </Radio.Group>
       </div>
       <Button style={{ width: "150px" }} onClick={download}>
         Download

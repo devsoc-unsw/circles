@@ -12,15 +12,6 @@ name: Pylint
 
 
 on:
-  push:
-    paths:
-      # Add specific files / filetypes here.
-      # Use `**` to wildcard through multiply paths
-      - "**.py"
-    # [un]-comment the following line to toggle for push to master
-    # branches-ignore: [master, main]
-
-  # This will only work when this workflow is on default branch
   pull_request:
     branches: [dev, master, main]
 
@@ -33,7 +24,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
+      uses: actions/setup-python@v4
+      with: 
+        python-version: "3.x"
 
     - name: Install dependencies
       run: |

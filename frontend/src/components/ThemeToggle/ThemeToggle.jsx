@@ -1,26 +1,15 @@
 import React, { useEffect, useState } from "react";
+import { IoIosSunny, IoMdMoon } from "react-icons/io";
+import { useDispatch, useSelector } from "react-redux";
 import { Switch } from "antd";
-import { IoMdMoon, IoIosSunny } from "react-icons/io";
-import { useDispatch } from "react-redux";
-import { toggleTheme } from "../../reducers/themeSlice";
+import { toggleTheme } from "reducers/themeSlice";
 
 const ThemeToggle = () => {
-  const [theme, setTheme] = useState(() => {
-    const t = window.localStorage.getItem("theme");
-    return t ? JSON.parse(theme) : "light";
-  });
+  const [theme, setTheme] = useState(useSelector((state) => state.theme));
   const dispatch = useDispatch();
 
   useEffect(() => {
-    window.localStorage.setItem("theme", JSON.stringify(theme));
     dispatch(toggleTheme(theme));
-    if (theme === "light") {
-      document.body.classList.remove("dark");
-      document.body.classList.add("light");
-    } else {
-      document.body.classList.remove("light");
-      document.body.classList.add("dark");
-    }
   }, [theme, dispatch]);
 
   const toggleStyle = {
