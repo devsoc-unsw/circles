@@ -43,6 +43,7 @@ SPECIALISATION_MAPPINGS = {
     'Politics and International Relations honours': 'POLSGH',
     'Global Development honours': 'COMDFH',
     'Media honours': 'MDIA?H',
+    'BABS honours': 'BABS?H',
     'Education honours': '4509',
     'Criminology honours': '4505',
     'Medical Science': '3991',
@@ -175,6 +176,8 @@ def delete_extraneous_phrasing(processed: str) -> str:
 
     # Remove 'or higher' as XXWAM implies XX minimum
     processed = re.sub("or higher", "", processed)
+    # dont care
+    processed = re.sub(r"or\s*equivalent", "", processed)
 
     # Remove 'student' references as it is implied
     processed = re.sub("students?", "", processed, flags=re.IGNORECASE)
@@ -192,7 +195,7 @@ def delete_extraneous_phrasing(processed: str) -> str:
         "must have completed",
         "completing",
         "completed",
-        "a pass in",
+        "a pass in"
         r"^None"
     ]
     for text in completion_text:
@@ -204,7 +207,7 @@ def delete_extraneous_phrasing(processed: str) -> str:
 def delete_prereq_label(processed: str) -> str:
     """Removes 'prerequisite' and variations"""
     # variations incude ["prerequisite", "pre-requisite", "prer-requisite", "pre req", "prereq:"]
-    return re.sub(r"pre( req)?[a-z\/_\-]* *[:;]*", "", processed, flags=re.IGNORECASE)
+    return re.sub(r"pre( req)?[a-z\/_\-]*( is)? *[:;]*", "", processed, flags=re.IGNORECASE)
 
 def convert_semicolon(processed: str) -> str:
     return re.sub(r"(.*);", r"(\1)", processed)
@@ -237,10 +240,10 @@ def convert_UOC(processed: str) -> str:
 
     # After UOC has been mainly converted, remove some extraneous phrasing
     processed = re.sub(
-        r"(of|at least)?\s*(\d+UOC)", r" \2", processed, flags=re.IGNORECASE
+        r"((are\s*required|need)\s*to\s*have\s*a\s*minimum)?\s*(of|at least)?\s*(\d+UOC)", r" \4", processed, flags=re.IGNORECASE
     )
     processed = re.sub(
-        r"(\d+UOC)(\s*overall\s*)", r"\1 ", processed, flags=re.IGNORECASE
+        r"(\d+UOC)(\s*(overall|to undertake this course)\s*)", r"\1 ", processed, flags=re.IGNORECASE
     )
 
     # Remove "minimum" since it is implied
@@ -343,7 +346,7 @@ def convert_manual_programs_and_specialisations(processed: str) -> str:
     """
     for prog_str, code in SPECIALISATION_MAPPINGS.items():
         processed = re.sub(
-            rf"(this course is\s*)?(enrolment\s+in|restricted\s+to)\s+((?:an?\s+)|(?:the\s+))?{prog_str}(\s*\({code}\))?(?:\s+program)?\s*",
+            rf"(this course is\s*)?(enrolment\s+in\s+|restricted\s+to\s+)?((?:an?\s+)|(?:the\s+))?{prog_str}(\s*\({code}\))?(?:\s+(program|plan))?\s*",
             f" ({code}) ",
             processed,
             flags=re.IGNORECASE

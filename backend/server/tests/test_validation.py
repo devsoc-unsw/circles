@@ -6,12 +6,11 @@ import requests
 from server.tests.courses.test_get_all_unlocked import USERS
 from server.tests.programs.test_get_structure import fake_specs
 
-ignored = ['ARCH1101', 'ECON2209', 'ECON2112', 'ECON2101', 'ECON2102', 'ADAD4100', 'ARTS3', 'AVIA2117', 'AVIA3199', 'BABS3021', 'BABS3199']
+ignored = ['ARCH1101', 'ECON2209', 'ECON2112', 'ECON2101', 'ECON2102', 'ADAD4100', 'ARTS3', 'AVIA2117', 'AVIA3199', 'BABS3021', 'BABS3199', 'BEES', 'BEIL6', 'BENV6713', 'BIOC3', 'BIOM4951', 'BIOS3161', 'BLDG', 'CDEV3101', 'CEIC', 'CHEM', 'CODE1240', 'CODE3100', 'CRIM2021', 'CRIM3', 'CVEN4701', 'DART2151']
 
 def test_validation():
     unlocked = requests.post('http://127.0.0.1:8000/courses/getAllUnlocked', json=USERS['user3']).json()['courses_state']
     for program in requests.get('http://127.0.0.1:8000/programs/getPrograms').json()['programs']:
-        print(program)
         majorsGroups = requests.get(f'http://127.0.0.1:8000/specialisations/getSpecialisations/{program}/majors')
         minorsGroups = requests.get(f'http://127.0.0.1:8000/specialisations/getSpecialisations/{program}/minors')
         honoursGroups = requests.get(f'http://127.0.0.1:8000/specialisations/getSpecialisations/{program}/honours')

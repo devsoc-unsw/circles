@@ -544,7 +544,7 @@
     "ARTS3061": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including ARTS1060 or ARTS1064, and ARTS2065. Or 66 UOC overall and enrolled in a single or double degree Media (Screen and Sound Production) program<br/><br/>",
-            "processed": "48UOC && ARTS1060 || ARTS1064 && ARTS2065. || 66UOC && a single || double degree Media (Screen && Sound Production) program"
+            "processed": "48UOC && ARTS1060 || ARTS1064 && ARTS2065. || 66UOC && (4510 || 3454 || 3438 || 3453) (Screen && Sound Production) program"
         },
         "tokens": [
             "(",
@@ -558,12 +558,15 @@
             "||",
             "66UOC",
             "&&",
-            "a",
-            "single",
+            "(",
+            "4510",
             "||",
-            "double",
-            "degree",
-            "Media",
+            "3454",
+            "||",
+            "3438",
+            "||",
+            "3453",
+            ")",
             "(",
             "Screen",
             "&&",
@@ -1077,7 +1080,7 @@
     "ARTS3125": {
         "condition": {
             "original": "Prerequisite: 48 uoc overall, including 6 uoc at level 1 and 6 uoc at level 2 in one of the following specialisations, MCT or\u00a0Theatre & Performance Studies. Or 66 uoc overall and enrolled in a single or dual award Media (S&SP) program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, MCT or\u00a0Theatre && Performance Studies. || 66UOC && a single || dual award Media (S&SP) program"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, MCT or\u00a0Theatre && Performance Studies. || 66UOC && (4510 || 3454 || 3438 || 3453) (S&SP) program"
         },
         "tokens": [
             "(",
@@ -1105,12 +1108,15 @@
             "||",
             "66UOC",
             "&&",
-            "a",
-            "single",
+            "(",
+            "4510",
             "||",
-            "dual",
-            "award",
-            "Media",
+            "3454",
+            "||",
+            "3438",
+            "||",
+            "3453",
+            ")",
             "(",
             "S&SP",
             ")",
@@ -3292,6 +3298,18 @@
         ],
         "broke at": "Index 3, enrolment"
     },
+    "AVIA1321": {
+        "condition": {
+            "original": "None<br/><br/>",
+            "processed": "None"
+        },
+        "tokens": [
+            "(",
+            "None",
+            ")"
+        ],
+        "broke at": "Index 2, )"
+    },
     "AVIA2117": {
         "condition": {
             "original": "Prerequisite: Enrolled in 3980 and completion of AVIA2111-2116<br/><br/>",
@@ -3633,20 +3651,6 @@
         ],
         "broke at": "Index 2, complete"
     },
-    "BABS4516": {
-        "condition": {
-            "original": "Pre: Enrolled in BABS Honours plan<br/><br/>",
-            "processed": "BABS Honours plan"
-        },
-        "tokens": [
-            "(",
-            "BABS",
-            "Honours",
-            "plan",
-            ")"
-        ],
-        "broke at": "Index 2, Honours"
-    },
     "BEES3199": {
         "condition": {
             "original": "Prerequisite: enrolled in a Science program (single or dual) and majoring in a BEES major or specialisation. Must pass Preparation for WIL modules prior to enrolment. Placement must be related to the student\u2019s major or specialisation, and approved by BEES prior to enrolment. <br/>Pre-requisite: 48 units of credit and a minimum 65 WAM. <br/>It is the student\u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year.<br/><br/>",
@@ -3975,6 +3979,18 @@
         ],
         "broke at": "Index 2, Thesis"
     },
+    "BIOS3081": {
+        "condition": {
+            "original": "None<br/><br/>",
+            "processed": "None"
+        },
+        "tokens": [
+            "(",
+            "None",
+            ")"
+        ],
+        "broke at": "Index 2, )"
+    },
     "BIOS3161": {
         "condition": {
             "original": "6 UOC from BIOS2031 or BIOS2051 or BIOS2061<br/><br/>",
@@ -3992,6 +4008,18 @@
             ")"
         ],
         "broke at": "Index 3, BIOS2031"
+    },
+    "BIOS3681": {
+        "condition": {
+            "original": "None<br/><br/>",
+            "processed": "None"
+        },
+        "tokens": [
+            "(",
+            "None",
+            ")"
+        ],
+        "broke at": "Index 2, )"
     },
     "BLDG1012": {
         "condition": {
@@ -4174,58 +4202,6 @@
             ")"
         ],
         "broke at": "Index 2, 4522"
-    },
-    "CDEV3100": {
-        "condition": {
-            "original": "Pre-requisite is 30 Units of Credit<br/><br/>",
-            "processed": "is 30UOC"
-        },
-        "tokens": [
-            "(",
-            "is",
-            "30UOC",
-            ")"
-        ],
-        "broke at": "Index 2, 30UOC"
-    },
-    "CDEV3101": {
-        "condition": {
-            "original": "Students are required to have completed a minimum of 30 UoC to enrol in this course.<br/><br/>",
-            "processed": "are required to have a minimum 30UOC"
-        },
-        "tokens": [
-            "(",
-            "are",
-            "required",
-            "to",
-            "have",
-            "a",
-            "minimum",
-            "30UOC",
-            ")"
-        ],
-        "broke at": "Index 2, required"
-    },
-    "CDEV3200": {
-        "condition": {
-            "original": "Students need to have completed a minimum of 30 UoC to undertake this course.<br/><br/>",
-            "processed": "need to have a minimum 30UOC to undertake this course"
-        },
-        "tokens": [
-            "(",
-            "need",
-            "to",
-            "have",
-            "a",
-            "minimum",
-            "30UOC",
-            "to",
-            "undertake",
-            "this",
-            "course",
-            ")"
-        ],
-        "broke at": "Index 2, to"
     },
     "CEIC2000": {
         "condition": {
@@ -4478,10 +4454,11 @@
     "CHEM1831": {
         "condition": {
             "original": "None<br/><br/>Must be enrolled in Exercise Physiology (3871) <br/><br/>",
-            "processed": "Must be Exercise Physiology (3871)"
+            "processed": "None Must be Exercise Physiology (3871)"
         },
         "tokens": [
             "(",
+            "None",
             "Must",
             "be",
             "Exercise",
@@ -4491,7 +4468,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 2, be"
+        "broke at": "Index 2, Must"
     },
     "CHEM2521": {
         "condition": {
@@ -4825,22 +4802,6 @@
         ],
         "broke at": "Index 3, CHEM2011,"
     },
-    "CODE1240": {
-        "condition": {
-            "original": "Prerequisite: BENV1012 or BENV1010 or equivalent<br/><br/>",
-            "processed": "BENV1012 || BENV1010 || equivalent"
-        },
-        "tokens": [
-            "(",
-            "BENV1012",
-            "||",
-            "BENV1010",
-            "||",
-            "equivalent",
-            ")"
-        ],
-        "broke at": "Index 6, )"
-    },
     "CODE3100": {
         "condition": {
             "original": "Pre: CODE2230 /CODE2250 /CODE 2270<br/><br/>",
@@ -4992,7 +4953,7 @@
     "CRIM3011": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in Criminology. Or 84 uoc and enrolled in 4787 Social Work (Honours)/Law<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in Criminology. || 84UOC && 4787 Social Work (Honours)/Law"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in Criminology. || 84UOC && 4787 (4033) (Honours)/Law"
         },
         "tokens": [
             "(",
@@ -5011,8 +4972,9 @@
             "84UOC",
             "&&",
             "4787",
-            "Social",
-            "Work",
+            "(",
+            "4033",
+            ")",
             "(",
             "Honours",
             ")",
@@ -5024,7 +4986,7 @@
     "CRIM3012": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in Criminology. Or 84 uoc and enrolled in 4787 Social Work (Honours)/Law<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in Criminology. || 84UOC && 4787 Social Work (Honours)/Law"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in Criminology. || 84UOC && 4787 (4033) (Honours)/Law"
         },
         "tokens": [
             "(",
@@ -5043,8 +5005,9 @@
             "84UOC",
             "&&",
             "4787",
-            "Social",
-            "Work",
+            "(",
+            "4033",
+            ")",
             "(",
             "Honours",
             ")",
@@ -5056,7 +5019,7 @@
     "CRIM3017": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in Criminology. Or 84 uoc and enrolled in 4787 Social Work (Honours)/Law<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in Criminology. || 84UOC && 4787 Social Work (Honours)/Law"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in Criminology. || 84UOC && 4787 (4033) (Honours)/Law"
         },
         "tokens": [
             "(",
@@ -5075,8 +5038,9 @@
             "84UOC",
             "&&",
             "4787",
-            "Social",
-            "Work",
+            "(",
+            "4033",
+            ")",
             "(",
             "Honours",
             ")",
@@ -5088,7 +5052,7 @@
     "CRIM3018": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in Criminology. Or 84 uoc and enrolled in 4787 Social Work (Honours)/Law<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in Criminology. || 84UOC && 4787 Social Work (Honours)/Law"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in Criminology. || 84UOC && 4787 (4033) (Honours)/Law"
         },
         "tokens": [
             "(",
@@ -5107,8 +5071,9 @@
             "84UOC",
             "&&",
             "4787",
-            "Social",
-            "Work",
+            "(",
+            "4033",
+            ")",
             "(",
             "Honours",
             ")",
@@ -5120,7 +5085,7 @@
     "CRIM3019": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in Criminology. Or 84 uoc and enrolled in 4787 Social Work (Honours)/Law<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in Criminology. || 84UOC && 4787 Social Work (Honours)/Law"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in Criminology. || 84UOC && 4787 (4033) (Honours)/Law"
         },
         "tokens": [
             "(",
@@ -5139,8 +5104,9 @@
             "84UOC",
             "&&",
             "4787",
-            "Social",
-            "Work",
+            "(",
+            "4033",
+            ")",
             "(",
             "Honours",
             ")",
@@ -5152,7 +5118,7 @@
     "CRIM3020": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in Criminology. Or 84 uoc and enrolled in 4787 Social Work (Honours)/Law<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in Criminology. || 84UOC && 4787 Social Work (Honours)/Law"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in Criminology. || 84UOC && 4787 (4033) (Honours)/Law"
         },
         "tokens": [
             "(",
@@ -5171,8 +5137,9 @@
             "84UOC",
             "&&",
             "4787",
-            "Social",
-            "Work",
+            "(",
+            "4033",
+            ")",
             "(",
             "Honours",
             ")",
@@ -5184,7 +5151,7 @@
     "CRIM3022": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in Criminology. Or 84 uoc and enrolled in 4787 Social Work (Honours)/Law. Or 48UOC overall, including 6UOC at level 1 and 6 UOC at level 2 in International Public Health (3880).<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in Criminology. || 84UOC && 4787 Social Work (Honours)/Law. || 48UOC && 6UOC in L1 && 6UOC in L2 in International Public Health (3880)"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in Criminology. || 84UOC && 4787 (4033) (Honours)/Law. || 48UOC && 6UOC in L1 && 6UOC in L2 in International Public Health (3880)"
         },
         "tokens": [
             "(",
@@ -5203,8 +5170,9 @@
             "84UOC",
             "&&",
             "4787",
-            "Social",
-            "Work",
+            "(",
+            "4033",
+            ")",
             "(",
             "Honours",
             ")",
@@ -5375,23 +5343,6 @@
             ")"
         ],
         "broke at": "Index 1, 72UOC"
-    },
-    "DATA3001": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in 3959 Data Science program<br/><br/>",
-            "processed": "Enrolment in 3959 Data Science program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "3959",
-            "Data",
-            "Science",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
     },
     "DDES2200": {
         "condition": {
@@ -7350,6 +7301,78 @@
             ")"
         ],
         "broke at": "Index 2, INDC2003"
+    },
+    "GEOS1701": {
+        "condition": {
+            "original": "None<br/><br/>",
+            "processed": "None"
+        },
+        "tokens": [
+            "(",
+            "None",
+            ")"
+        ],
+        "broke at": "Index 2, )"
+    },
+    "GEOS2071": {
+        "condition": {
+            "original": "None<br/><br/>",
+            "processed": "None"
+        },
+        "tokens": [
+            "(",
+            "None",
+            ")"
+        ],
+        "broke at": "Index 2, )"
+    },
+    "GEOS3281": {
+        "condition": {
+            "original": "None<br/><br/>",
+            "processed": "None"
+        },
+        "tokens": [
+            "(",
+            "None",
+            ")"
+        ],
+        "broke at": "Index 2, )"
+    },
+    "GEOS3761": {
+        "condition": {
+            "original": "None<br/><br/>",
+            "processed": "None"
+        },
+        "tokens": [
+            "(",
+            "None",
+            ")"
+        ],
+        "broke at": "Index 2, )"
+    },
+    "GEOS3811": {
+        "condition": {
+            "original": "None<br/><br/>",
+            "processed": "None"
+        },
+        "tokens": [
+            "(",
+            "None",
+            ")"
+        ],
+        "broke at": "Index 2, )"
+    },
+    "GEOS3821": {
+        "condition": {
+            "original": "None<br/><br/>",
+            "processed": "None"
+        },
+        "tokens": [
+            "(",
+            "None",
+            ")"
+        ],
+        "broke at": "Index 2, )"
     },
     "GMAT4061": {
         "condition": {
@@ -11296,6 +11319,18 @@
         ],
         "broke at": "Index 6, As"
     },
+    "MECH9325": {
+        "condition": {
+            "original": "None<br/><br/>",
+            "processed": "None"
+        },
+        "tokens": [
+            "(",
+            "None",
+            ")"
+        ],
+        "broke at": "Index 2, )"
+    },
     "MECH9650": {
         "condition": {
             "original": "Completion of 138 UOC and a WAM of >=65<br/><br/>",
@@ -12087,7 +12122,7 @@
     "NEUR2201": {
         "condition": {
             "original": "Prerequisites: 36 UOC, which must include 12 UOC of BABS / BIOS courses (or equivalent DPST courses) OR 12 UOC of PSYC courses<br/><br/>",
-            "processed": "36UOC, which must include 12UOC of BABS / BIOS courses (or equivalent DPST courses) || 12UOC of PSYC courses"
+            "processed": "36UOC, which must include 12UOC of BABS / BIOS courses (DPST courses) || 12UOC of PSYC courses"
         },
         "tokens": [
             "(",
@@ -12102,8 +12137,6 @@
             "BIOS",
             "courses",
             "(",
-            "or",
-            "equivalent",
             "DPST",
             "courses",
             ")",
@@ -12304,7 +12337,7 @@
     "PHAR2011": {
         "condition": {
             "original": "Prerequisite: 6 UOC Level 1 Biology (BABS or BIOS ), 12 UOC Level 1 Chemistry, 6 UOC Level 1 Mathematics and Physiology 1A (Note: Medicinal Chemistry students may substitute BIOC2101 for Physiology 1A) or equivalent DPST courses.<br/><br/>",
-            "processed": "6UOC in L1 Biology (BABS || BIOS ), 12UOC in L1 Chemistry, 6UOC in L1 Mathematics && Physiology 1A (Note: Medicinal Chemistry may substitute BIOC2101 for Physiology 1A) || equivalent DPST courses"
+            "processed": "6UOC in L1 Biology (BABS || BIOS ), 12UOC in L1 Chemistry, 6UOC in L1 Mathematics && Physiology 1A (Note: Medicinal Chemistry may substitute BIOC2101 for Physiology 1A) DPST courses"
         },
         "tokens": [
             "(",
@@ -12340,8 +12373,6 @@
             "Physiology",
             "1A",
             ")",
-            "||",
-            "equivalent",
             "DPST",
             "courses",
             ")"
@@ -12495,7 +12526,7 @@
     "PHSL2101": {
         "condition": {
             "original": "Prerequisite: Prerequisite: 6 UOC of level 1 Biology; and 6 UOC of Level 1 CHEM; and 6 UOC Level 1 MATH or equivalent DPST courses.<br/><br/>",
-            "processed": "(6UOC in L1 Biology; && 6UOC in L1 CHEM) && 6UOC in L1 MATH || equivalent DPST courses"
+            "processed": "(6UOC in L1 Biology; && 6UOC in L1 CHEM) && 6UOC in L1 MATH DPST courses"
         },
         "tokens": [
             "(",
@@ -12515,8 +12546,6 @@
             "in",
             "L1",
             "MATH",
-            "||",
-            "equivalent",
             "DPST",
             "courses",
             ")"
@@ -12896,7 +12925,7 @@
     "SCIF1111": {
         "condition": {
             "original": "Enrolment in the Bachelor of Medical Science (3991) or the Bachelor of Medicinal Chemistry (3992) or the bachelor of Medicinal Chemistry (Honours) (3999)<br/><br/>",
-            "processed": "Enrolment in the Bachelor of Medical Science (3991) || the Bachelor of Medicinal Chemistry (3992) || the bachelor of Medicinal Chemistry (Honours) (3999)"
+            "processed": "Enrolment in the Bachelor of (3991) || the Bachelor of Medicinal Chemistry (3992) || the bachelor of Medicinal Chemistry (Honours) (3999)"
         },
         "tokens": [
             "(",
@@ -12905,8 +12934,6 @@
             "the",
             "Bachelor",
             "of",
-            "Medical",
-            "Science",
             "(",
             "3991",
             ")",

@@ -1164,7 +1164,7 @@
     },
     "ARTS3061": {
         "original": "Prerequisite: 48 UOC overall, including ARTS1060 or ARTS1064, and ARTS2065. Or 66 UOC overall and enrolled in a single or double degree Media (Screen and Sound Production) program<br/><br/>",
-        "processed": "48UOC && ARTS1060 || ARTS1064 && ARTS2065. || 66UOC && a single || double degree Media (Screen && Sound Production) program"
+        "processed": "48UOC && ARTS1060 || ARTS1064 && ARTS2065. || 66UOC && (4510 || 3454 || 3438 || 3453) (Screen && Sound Production) program"
     },
     "ARTS3062": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Film Studies<br/><br/>",
@@ -1224,7 +1224,7 @@
     },
     "ARTS3125": {
         "original": "Prerequisite: 48 uoc overall, including 6 uoc at level 1 and 6 uoc at level 2 in one of the following specialisations, MCT or\u00a0Theatre & Performance Studies. Or 66 uoc overall and enrolled in a single or dual award Media (S&SP) program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, MCT or\u00a0Theatre && Performance Studies. || 66UOC && a single || dual award Media (S&SP) program"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, MCT or\u00a0Theatre && Performance Studies. || 66UOC && (4510 || 3454 || 3438 || 3453) (S&SP) program"
     },
     "ARTS3130": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Dance Studies or Theatre & Performance Studies. Or 72 UOC overall and enrolment in an Art & Design program<br/><br/>",
@@ -2083,7 +2083,7 @@
     },
     "AVIA1321": {
         "original": "None<br/><br/>",
-        "processed": ""
+        "processed": "None"
     },
     "AVIA1401": {
         "original": "",
@@ -2327,7 +2327,7 @@
     },
     "BABS4516": {
         "original": "Pre: Enrolled in BABS Honours plan<br/><br/>",
-        "processed": "BABS Honours plan"
+        "processed": "(BABS?H)"
     },
     "BEES0006": {
         "original": "",
@@ -2771,7 +2771,7 @@
     },
     "BIOS3081": {
         "original": "None<br/><br/>",
-        "processed": ""
+        "processed": "None"
     },
     "BIOS3123": {
         "original": "",
@@ -2795,7 +2795,7 @@
     },
     "BIOS3681": {
         "original": "None<br/><br/>",
-        "processed": ""
+        "processed": "None"
     },
     "BIOS6671": {
         "original": "",
@@ -2939,15 +2939,15 @@
     },
     "CDEV3100": {
         "original": "Pre-requisite is 30 Units of Credit<br/><br/>",
-        "processed": "is 30UOC"
+        "processed": "30UOC"
     },
     "CDEV3101": {
         "original": "Students are required to have completed a minimum of 30 UoC to enrol in this course.<br/><br/>",
-        "processed": "are required to have a minimum 30UOC"
+        "processed": "30UOC"
     },
     "CDEV3200": {
         "original": "Students need to have completed a minimum of 30 UoC to undertake this course.<br/><br/>",
-        "processed": "need to have a minimum 30UOC to undertake this course"
+        "processed": "30UOC"
     },
     "CDEV3300": {
         "original": "",
@@ -3127,7 +3127,7 @@
     },
     "CHEM1831": {
         "original": "None<br/><br/>Must be enrolled in Exercise Physiology (3871) <br/><br/>",
-        "processed": "Must be Exercise Physiology (3871)"
+        "processed": "None Must be Exercise Physiology (3871)"
     },
     "CHEM2011": {
         "original": "Prerequisite: CHEM2041<br/><br/>",
@@ -3295,7 +3295,7 @@
     },
     "CODE1240": {
         "original": "Prerequisite: BENV1012 or BENV1010 or equivalent<br/><br/>",
-        "processed": "BENV1012 || BENV1010 || equivalent"
+        "processed": "BENV1012 || BENV1010"
     },
     "CODE2120": {
         "original": "Pre:CODE2132 / CODE2170<br/><br/>",
@@ -3900,11 +3900,11 @@
     },
     "CRIM3011": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in Criminology. Or 84 uoc and enrolled in 4787 Social Work (Honours)/Law<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in Criminology. || 84UOC && 4787 Social Work (Honours)/Law"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in Criminology. || 84UOC && 4787 (4033) (Honours)/Law"
     },
     "CRIM3012": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in Criminology. Or 84 uoc and enrolled in 4787 Social Work (Honours)/Law<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in Criminology. || 84UOC && 4787 Social Work (Honours)/Law"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in Criminology. || 84UOC && 4787 (4033) (Honours)/Law"
     },
     "CRIM3015": {
         "original": "Prerequisite: CRIM2021 or LAWS1022<br/><br/>",
@@ -3912,23 +3912,23 @@
     },
     "CRIM3017": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in Criminology. Or 84 uoc and enrolled in 4787 Social Work (Honours)/Law<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in Criminology. || 84UOC && 4787 Social Work (Honours)/Law"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in Criminology. || 84UOC && 4787 (4033) (Honours)/Law"
     },
     "CRIM3018": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in Criminology. Or 84 uoc and enrolled in 4787 Social Work (Honours)/Law<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in Criminology. || 84UOC && 4787 Social Work (Honours)/Law"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in Criminology. || 84UOC && 4787 (4033) (Honours)/Law"
     },
     "CRIM3019": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in Criminology. Or 84 uoc and enrolled in 4787 Social Work (Honours)/Law<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in Criminology. || 84UOC && 4787 Social Work (Honours)/Law"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in Criminology. || 84UOC && 4787 (4033) (Honours)/Law"
     },
     "CRIM3020": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in Criminology. Or 84 uoc and enrolled in 4787 Social Work (Honours)/Law<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in Criminology. || 84UOC && 4787 Social Work (Honours)/Law"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in Criminology. || 84UOC && 4787 (4033) (Honours)/Law"
     },
     "CRIM3022": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in Criminology. Or 84 uoc and enrolled in 4787 Social Work (Honours)/Law. Or 48UOC overall, including 6UOC at level 1 and 6 UOC at level 2 in International Public Health (3880).<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in Criminology. || 84UOC && 4787 Social Work (Honours)/Law. || 48UOC && 6UOC in L1 && 6UOC in L2 in International Public Health (3880)"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in Criminology. || 84UOC && 4787 (4033) (Honours)/Law. || 48UOC && 6UOC in L1 && 6UOC in L2 in International Public Health (3880)"
     },
     "CRIM3024": {
         "original": "Prerequisite: CRIM2021 or LAWS1022<br/><br/>",
@@ -4557,7 +4557,7 @@
     },
     "DATA3001": {
         "original": "Prerequisite: Enrolment in 3959 Data Science program<br/><br/>",
-        "processed": "Enrolment in 3959 Data Science program"
+        "processed": "3959"
     },
     "DDES1100": {
         "original": "",
@@ -6146,7 +6146,7 @@
     },
     "GEOS1701": {
         "original": "None<br/><br/>",
-        "processed": ""
+        "processed": "None"
     },
     "GEOS2021": {
         "original": "",
@@ -6154,7 +6154,7 @@
     },
     "GEOS2071": {
         "original": "None<br/><br/>",
-        "processed": ""
+        "processed": "None"
     },
     "GEOS2131": {
         "original": "Pre-requisites: GEOL1111/GEOS1111 or GEOL1211/GEOS1211 or GEOS1701<br/><br/>",
@@ -6198,7 +6198,7 @@
     },
     "GEOS3281": {
         "original": "None<br/><br/>",
-        "processed": ""
+        "processed": "None"
     },
     "GEOS3721": {
         "original": "",
@@ -6214,15 +6214,15 @@
     },
     "GEOS3761": {
         "original": "None<br/><br/>",
-        "processed": ""
+        "processed": "None"
     },
     "GEOS3811": {
         "original": "None<br/><br/>",
-        "processed": ""
+        "processed": "None"
     },
     "GEOS3821": {
         "original": "None<br/><br/>",
-        "processed": ""
+        "processed": "None"
     },
     "GEOS3911": {
         "original": "",
@@ -8272,7 +8272,7 @@
     },
     "MECH9325": {
         "original": "None<br/><br/>",
-        "processed": ""
+        "processed": "None"
     },
     "MECH9420": {
         "original": "Prerequisite: ENGG2400 OR MMAN2400 OR CVEN2301<br/><br/>",
@@ -8996,7 +8996,7 @@
     },
     "NEUR2201": {
         "original": "Prerequisites: 36 UOC, which must include 12 UOC of BABS / BIOS courses (or equivalent DPST courses) OR 12 UOC of PSYC courses<br/><br/>",
-        "processed": "36UOC, which must include 12UOC of BABS / BIOS courses (or equivalent DPST courses) || 12UOC of PSYC courses"
+        "processed": "36UOC, which must include 12UOC of BABS / BIOS courses (DPST courses) || 12UOC of PSYC courses"
     },
     "NEUR3101": {
         "original": "Prerequisites: PHSL2101 or PHSL2121 or PHSL2501 or NEUR2201<br/><br/>",
@@ -9176,7 +9176,7 @@
     },
     "PHAR2011": {
         "original": "Prerequisite: 6 UOC Level 1 Biology (BABS or BIOS ), 12 UOC Level 1 Chemistry, 6 UOC Level 1 Mathematics and Physiology 1A (Note: Medicinal Chemistry students may substitute BIOC2101 for Physiology 1A) or equivalent DPST courses.<br/><br/>",
-        "processed": "6UOC in L1 Biology (BABS || BIOS ), 12UOC in L1 Chemistry, 6UOC in L1 Mathematics && Physiology 1A (Note: Medicinal Chemistry may substitute BIOC2101 for Physiology 1A) || equivalent DPST courses"
+        "processed": "6UOC in L1 Biology (BABS || BIOS ), 12UOC in L1 Chemistry, 6UOC in L1 Mathematics && Physiology 1A (Note: Medicinal Chemistry may substitute BIOC2101 for Physiology 1A) DPST courses"
     },
     "PHAR3101": {
         "original": "Prerequisite: PHAR2011<br/><br/>",
@@ -9260,7 +9260,7 @@
     },
     "PHSL2101": {
         "original": "Prerequisite: Prerequisite: 6 UOC of level 1 Biology; and 6 UOC of Level 1 CHEM; and 6 UOC Level 1 MATH or equivalent DPST courses.<br/><br/>",
-        "processed": "(6UOC in L1 Biology; && 6UOC in L1 CHEM) && 6UOC in L1 MATH || equivalent DPST courses"
+        "processed": "(6UOC in L1 Biology; && 6UOC in L1 CHEM) && 6UOC in L1 MATH DPST courses"
     },
     "PHSL2121": {
         "original": "",
@@ -9864,7 +9864,7 @@
     },
     "SCIF1111": {
         "original": "Enrolment in the Bachelor of Medical Science (3991) or the Bachelor of Medicinal Chemistry (3992) or the bachelor of Medicinal Chemistry (Honours) (3999)<br/><br/>",
-        "processed": "Enrolment in the Bachelor of Medical Science (3991) || the Bachelor of Medicinal Chemistry (3992) || the bachelor of Medicinal Chemistry (Honours) (3999)"
+        "processed": "Enrolment in the Bachelor of (3991) || the Bachelor of Medicinal Chemistry (3992) || the bachelor of Medicinal Chemistry (Honours) (3999)"
     },
     "SCIF1131": {
         "original": "Enrolment in BSc (Adv. Science), BAdvSci(Hons), BSc (Adv. Maths), BSc(AdvMath)(Hons), (incl. associated dual degrees), or BMedSci<br/><br/>",
