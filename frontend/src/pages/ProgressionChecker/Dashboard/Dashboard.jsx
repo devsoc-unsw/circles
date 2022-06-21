@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
+import { ArrowDownOutlined } from "@ant-design/icons";
 import { animated, useSpring } from "@react-spring/web";
-import { Typography } from "antd";
+import { Button, Typography } from "antd";
 import LiquidProgressChart from "components/LiquidProgressChart";
 import DegreeCard from "../DegreeCard";
 import SkeletonDashboard from "./SkeletonDashboard";
@@ -9,6 +10,7 @@ import "./index.less";
 const Dashboard = ({ isLoading, degree }) => {
   const { Title } = Typography;
   const currYear = new Date().getFullYear();
+  const [arrowButton, setarrowButton] = useState(true);
 
   const props = useSpring({
     from: { opacity: 0 },
@@ -16,6 +18,20 @@ const Dashboard = ({ isLoading, degree }) => {
     reset: true,
     config: { tension: 80, friction: 60 },
   });
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 75) {
+      setarrowButton(false);
+    }
+  });
+
+  const clickArrow = () => {
+    window.scrollTo({
+      top: 757,
+      behavior: "smooth",
+    });
+    setarrowButton(false);
+  };
 
   return (
     <div className="container">
@@ -41,6 +57,15 @@ const Dashboard = ({ isLoading, degree }) => {
                 <DegreeCard key={index} concentration={concentration} />
               ))}
           </div>
+          { arrowButton && (
+            <Button
+              className="arrowBtn"
+              type="primary"
+              shape="circle"
+              icon={<ArrowDownOutlined />}
+              onClick={clickArrow}
+            />
+          )}
         </animated.div>
       )}
     </div>
