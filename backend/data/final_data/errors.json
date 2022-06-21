@@ -906,9 +906,10 @@
     "ARTS3060": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Film Studies or MCT; or ARTS1060/ARTS1090, at least 6uoc in level 2  Film Studies electives and enrolment in a Media single or double degree<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Film Studies || MCT || (ARTS1060 || ARTS1090), 6UOC in L2 Film Studies electives && enrolment in a Media single || double degree"
+            "processed": "(48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Film Studies || MCT) || (ARTS1060 || ARTS1090), 6UOC in L2 Film Studies electives && enrolment in a Media single || double degree"
         },
         "tokens": [
+            "(",
             "(",
             "48UOC",
             "&&",
@@ -929,6 +930,7 @@
             "Studies",
             "||",
             "MCT",
+            ")",
             "||",
             "(",
             "ARTS1060",
@@ -953,7 +955,7 @@
             "degree",
             ")"
         ],
-        "broke at": "Index 11, one"
+        "broke at": "Index 11, in"
     },
     "ARTS3061": {
         "condition": {
@@ -1759,9 +1761,10 @@
     "ARTS3218": {
         "condition": {
             "original": "Prerequisiste: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Asian Studies, Gender Studies, or History; or 48 UOC overall, including 12 UOC in Japanese Studies language courses<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Asian Studies, Gender Studies || History || 48UOC && 12UOC in Japanese Studies language courses"
+            "processed": "(48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Asian Studies, Gender Studies || History) || 48UOC && 12UOC in Japanese Studies language courses"
         },
         "tokens": [
+            "(",
             "(",
             "48UOC",
             "&&",
@@ -1784,6 +1787,7 @@
             "Studies",
             "||",
             "History",
+            ")",
             "||",
             "48UOC",
             "&&",
@@ -1795,7 +1799,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 11, one"
+        "broke at": "Index 11, in"
     },
     "ARTS3220": {
         "condition": {
@@ -2136,9 +2140,10 @@
     "ARTS3295": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, European Studies or History; or 48 UOC overall, including 12 UOC in German Studies language courses<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, European Studies || History || 48UOC && 12UOC in German Studies language courses"
+            "processed": "(48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, European Studies || History) || 48UOC && 12UOC in German Studies language courses"
         },
         "tokens": [
+            "(",
             "(",
             "48UOC",
             "&&",
@@ -2159,6 +2164,7 @@
             "Studies",
             "||",
             "History",
+            ")",
             "||",
             "48UOC",
             "&&",
@@ -2170,7 +2176,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 11, one"
+        "broke at": "Index 11, in"
     },
     "ARTS3330": {
         "condition": {
@@ -2472,9 +2478,10 @@
     "ARTS3458": {
         "condition": {
             "original": "Prerequisite: 72uoc overall, including ARTS3453, ARTS2452, or ARTS3454  and enrolment in an Advanced Chinese Studies major/minor; or 72uoc overall, including ARTS2451 or ARTS2462 and enrolment in a Chinese Studies major/minor<br/><br/>",
-            "processed": "72UOC && ARTS3453, ARTS2452 || ARTS3454 && enrolment in an Advanced Chinese Studies major/minor || 72UOC && ARTS2451 || ARTS2462 && enrolment in a Chinese Studies major/minor"
+            "processed": "(72UOC && ARTS3453, ARTS2452 || ARTS3454 && enrolment in an Advanced Chinese Studies major/minor) || 72UOC && ARTS2451 || ARTS2462 && enrolment in a Chinese Studies major/minor"
         },
         "tokens": [
+            "(",
             "(",
             "72UOC",
             "&&",
@@ -2490,6 +2497,7 @@
             "Chinese",
             "Studies",
             "major/minor",
+            ")",
             "||",
             "72UOC",
             "&&",
@@ -2505,7 +2513,7 @@
             "major/minor",
             ")"
         ],
-        "broke at": "Index 4, ARTS2452"
+        "broke at": "Index 4, ARTS3453,"
     },
     "ARTS3462": {
         "condition": {
@@ -2876,9 +2884,10 @@
     "ARTS3636": {
         "condition": {
             "original": "Prerequisite: 72uoc overall, including ARTS3633 and enrolment in an Advanced Japanese Studies major/minor; or 72uoc overall, including ARTS2631 and enrolment in a Japanese Studies major/minor<br/><br/>",
-            "processed": "72UOC && ARTS3633 && enrolment in an Advanced Japanese Studies major/minor || 72UOC && ARTS2631 && enrolment in a Japanese Studies major/minor"
+            "processed": "(72UOC && ARTS3633 && enrolment in an Advanced Japanese Studies major/minor) || 72UOC && ARTS2631 && enrolment in a Japanese Studies major/minor"
         },
         "tokens": [
+            "(",
             "(",
             "72UOC",
             "&&",
@@ -2891,6 +2900,7 @@
             "Japanese",
             "Studies",
             "major/minor",
+            ")",
             "||",
             "72UOC",
             "&&",
@@ -2904,7 +2914,7 @@
             "major/minor",
             ")"
         ],
-        "broke at": "Index 6, in"
+        "broke at": "Index 6, enrolment"
     },
     "ARTS3638": {
         "condition": {
@@ -3409,9 +3419,10 @@
     "ARTS3786": {
         "condition": {
             "original": "Prerequisite: 48UOC overall, including 6UOC at level 1 and 6UOC at level 2 in European Studies or History; or 48UOC overall, including 12UOC in German Studies language courses. Or 48UOC and enrolment in an International Studies program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in European Studies || History || 48UOC && 12UOC in German Studies language courses. || 48UOC && (3447)"
+            "processed": "(48UOC && 6UOC in L1 && 6UOC in L2 in European Studies || History) || 48UOC && 12UOC in German Studies language courses. || 48UOC && (3447)"
         },
         "tokens": [
+            "(",
             "(",
             "48UOC",
             "&&",
@@ -3427,6 +3438,7 @@
             "Studies",
             "||",
             "History",
+            ")",
             "||",
             "48UOC",
             "&&",
@@ -3444,7 +3456,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 11, European"
+        "broke at": "Index 11, in"
     },
     "ARTS3787": {
         "condition": {
@@ -3469,9 +3481,10 @@
     "ARTS3789": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams; European Studies or History. Excluded: ARTS2786<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams European Studies || History"
+            "processed": "(48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams) European Studies || History"
         },
         "tokens": [
+            "(",
             "(",
             "48UOC",
             "&&",
@@ -3488,13 +3501,14 @@
             "the",
             "following",
             "streams",
+            ")",
             "European",
             "Studies",
             "||",
             "History",
             ")"
         ],
-        "broke at": "Index 11, one"
+        "broke at": "Index 11, in"
     },
     "ARTS3810": {
         "condition": {
@@ -3778,9 +3792,10 @@
     "ARTS3871": {
         "condition": {
             "original": "Prerequisite: 48UOC overall, including 6UOC lv1 and 6UOC lv2 in one of the following streams, Criminology/S&A; or enrolment in program 3422/4763 and 12UOC lv2 SRAP and 18UOC lv2 CRIM; or enrolment in Program 4034 and 30UOC at lv2 including 12UOC lv2 CRIM<br/><br/>",
-            "processed": "48UOC && 6UOC lv1 && 6UOC lv2 in one of the following streams, Criminology/S&A || enrolment in program 3422/4763 && 12UOC lv2 SRAP && 18UOC lv2 CRIM || enrolment in Program 4034 && 30UOC at lv2 && 12UOC lv2 CRIM"
+            "processed": "(48UOC && 6UOC lv1 && 6UOC lv2 in one of the following streams, Criminology/S&A; || enrolment in program 3422/4763 && 12UOC lv2 SRAP && 18UOC lv2 CRIM) || enrolment in Program 4034 && 30UOC at lv2 && 12UOC lv2 CRIM"
         },
         "tokens": [
+            "(",
             "(",
             "48UOC",
             "&&",
@@ -3795,7 +3810,7 @@
             "the",
             "following",
             "streams,",
-            "Criminology/S&A",
+            "Criminology/S&A;",
             "||",
             "enrolment",
             "in",
@@ -3809,6 +3824,7 @@
             "18UOC",
             "lv2",
             "CRIM",
+            ")",
             "||",
             "enrolment",
             "in",
@@ -3824,7 +3840,7 @@
             "CRIM",
             ")"
         ],
-        "broke at": "Index 5, &&"
+        "broke at": "Index 5, lv1"
     },
     "ARTS3872": {
         "condition": {
@@ -12221,13 +12237,15 @@
     "MDIA2012": {
         "condition": {
             "original": "Prerequisite: MDIA1002 or MDIA1003; and enrolment in a single or double degree Bachelor of Media (PR & Advertising) program<br/><br/>",
-            "processed": "MDIA1002 || MDIA1003 && enrolment in a single || double degree Bachelor of Media (PR && Advertising) program"
+            "processed": "(MDIA1002 || MDIA1003) && enrolment in a single || double degree Bachelor of Media (PR && Advertising) program"
         },
         "tokens": [
+            "(",
             "(",
             "MDIA1002",
             "||",
             "MDIA1003",
+            ")",
             "&&",
             "enrolment",
             "in",
@@ -12247,7 +12265,7 @@
             "program",
             ")"
         ],
-        "broke at": "Index 6, in"
+        "broke at": "Index 8, in"
     },
     "MDIA2013": {
         "condition": {
@@ -12777,9 +12795,10 @@
     "MUSC3805": {
         "condition": {
             "original": "Prerequisite: 24uoc in MUSC courses and enrolment in a Music single or double degree; or 66 uoc overall and enrolment in a single or double degree Media (S&SP) program<br/><br/>",
-            "processed": "24UOC in MUSC courses && enrolment in a Music single || double degree || 66UOC && (4510 || 3454 || 3438 || 3453) (S&SP) program"
+            "processed": "(24UOC in MUSC courses && enrolment in a Music single || double degree) || 66UOC && (4510 || 3454 || 3438 || 3453) (S&SP) program"
         },
         "tokens": [
+            "(",
             "(",
             "24UOC",
             "in",
@@ -12794,6 +12813,7 @@
             "||",
             "double",
             "degree",
+            ")",
             "||",
             "66UOC",
             "&&",
@@ -12812,14 +12832,15 @@
             "program",
             ")"
         ],
-        "broke at": "Index 5, &&"
+        "broke at": "Index 5, courses"
     },
     "MUSC3806": {
         "condition": {
             "original": "Prerequisite: MUSC2803 and enrolment in the Sonic Arts stream in a Music single or double degree; or 66 uoc overall, including MDIA1005 and enrolment in Media (S&SP) single or double degree<br/><br/>",
-            "processed": "MUSC2803 && enrolment in the Sonic Arts stream in a Music single || double degree || 66UOC && MDIA1005 && enrolment in Media (S&SP) single || double degree"
+            "processed": "(MUSC2803 && enrolment in the Sonic Arts stream in a Music single || double degree) || 66UOC && MDIA1005 && enrolment in Media (S&SP) single || double degree"
         },
         "tokens": [
+            "(",
             "(",
             "MUSC2803",
             "&&",
@@ -12836,6 +12857,7 @@
             "||",
             "double",
             "degree",
+            ")",
             "||",
             "66UOC",
             "&&",
@@ -12853,7 +12875,7 @@
             "degree",
             ")"
         ],
-        "broke at": "Index 4, in"
+        "broke at": "Index 4, enrolment"
     },
     "MUSC3807": {
         "condition": {
@@ -13629,19 +13651,21 @@
     "PHSL2101": {
         "condition": {
             "original": "Prerequisite: Prerequisite: 6 UOC of level 1 Biology; and 6 UOC of Level 1 CHEM; and 6 UOC Level 1 MATH or equivalent DPST courses.<br/><br/>",
-            "processed": "6UOC in L1 Biology && 6UOC in L1 CHEM && 6UOC in L1 MATH || equivalent DPST courses"
+            "processed": "(6UOC in L1 Biology; && 6UOC in L1 CHEM) && 6UOC in L1 MATH || equivalent DPST courses"
         },
         "tokens": [
+            "(",
             "(",
             "6UOC",
             "in",
             "L1",
-            "Biology",
+            "Biology;",
             "&&",
             "6UOC",
             "in",
             "L1",
             "CHEM",
+            ")",
             "&&",
             "6UOC",
             "in",
@@ -13653,7 +13677,7 @@
             "courses",
             ")"
         ],
-        "broke at": "Index 5, &&"
+        "broke at": "Index 5, Biology;"
     },
     "PHSL3211": {
         "condition": {
@@ -15255,9 +15279,10 @@
     "ZHSS3202": {
         "condition": {
             "original": "Prerequisite: 24 units of credit in upper-level History passed at Credit level or higher;<br/>Corequisite: 6 units of credit in upper-level History.<br/><br/>",
-            "processed": "24UOC in upper-level History passed at Credit level && [6UOC in upper-level History]"
+            "processed": "(24UOC in upper-level History passed at Credit level ) && [6UOC in upper-level History]"
         },
         "tokens": [
+            "(",
             "(",
             "24UOC",
             "in",
@@ -15267,6 +15292,7 @@
             "at",
             "Credit",
             "level",
+            ")",
             "&&",
             "[",
             "6UOC",
@@ -15276,7 +15302,7 @@
             "]",
             ")"
         ],
-        "broke at": "Index 1, 24UOC"
+        "broke at": "Index 1, ("
     },
     "ZHSS3231": {
         "condition": {

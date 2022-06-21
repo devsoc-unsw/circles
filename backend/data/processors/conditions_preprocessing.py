@@ -87,6 +87,7 @@ def preprocess_conditions():
         processed = delete_trailing_punc(processed)
 
         # Phase 2: Conversions
+        processed = convert_semicolon(processed)
         processed = convert_square_brackets(processed)
         processed = convert_UOC(processed)
         processed = convert_WAM(processed)
@@ -199,6 +200,8 @@ def delete_prereq_label(processed: str) -> str:
     # variations incude ["prerequisite", "pre-requisite", "prer-requisite", "pre req", "prereq:"]
     return re.sub(r"pre( req)?[a-z\/_\-]* *[:;]*", "", processed, flags=re.IGNORECASE)
 
+def convert_semicolon(processed: str) -> str:
+    return re.sub(r"(.*);", r"(\1)", processed)
 
 def delete_trailing_punc(processed: str) -> str:
     """Deletes any trailing punctuation"""
@@ -570,10 +573,6 @@ def remove_extraneous_comm_data(processed):
     # need to change this/review these
     processed = re.sub(
         r"(\d+UOC) of Business courses", r"\1 in ZBUS && COMM#", processed
-    )
-    # delete semi-colon
-    processed = re.sub(
-    r";", r"", processed, flags=re.IGNORECASE
     )
     return note, processed
 
