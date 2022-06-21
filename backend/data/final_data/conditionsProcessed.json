@@ -1895,15 +1895,15 @@
     },
     "ARTS4900": {
         "original": "Prerequisite: Enrolment in the Development Studies honours program<br/><br/>",
-        "processed": "Enrolment in the Development Studies honours program"
+        "processed": "(8942)"
     },
     "ARTS4901": {
         "original": "Prerequisite: Enrolment in the Development Studies honours program<br/><br/>",
-        "processed": "Enrolment in the Development Studies honours program"
+        "processed": "(8942)"
     },
     "ARTS4902": {
         "original": "Prerequisite: Enrolment in the Development Studies honours program<br/><br/>",
-        "processed": "Enrolment in the Development Studies honours program"
+        "processed": "(8942)"
     },
     "ARTS4904": {
         "original": "Prerequisite: Enrolment in the European Studies honours program<br/><br/>",
@@ -1919,27 +1919,27 @@
     },
     "ARTS4912": {
         "original": "Prerequisite: Enrolment in the International Relations honours program<br/><br/>",
-        "processed": "Enrolment in the International Relations honours program"
+        "processed": "(POLSGH)"
     },
     "ARTS4913": {
         "original": "Prerequisite: Enrolment in the International Relations honours program<br/><br/>",
-        "processed": "Enrolment in the International Relations honours program"
+        "processed": "(POLSGH)"
     },
     "ARTS4914": {
         "original": "Prerequisite: Enrolment in the International Relations honours program<br/><br/>",
-        "processed": "Enrolment in the International Relations honours program"
+        "processed": "(POLSGH)"
     },
     "ARTS4916": {
         "original": "Prerequisite: Enrolment in the Politics honours program<br/><br/>",
-        "processed": "Enrolment in the Politics honours program"
+        "processed": "(ZHSSPH || POLSGH)"
     },
     "ARTS4917": {
         "original": "Prerequisite: Enrolment in the Politics honours program<br/><br/>",
-        "processed": "Enrolment in the Politics honours program"
+        "processed": "(ZHSSPH || POLSGH)"
     },
     "ARTS4918": {
         "original": "Prerequisite: Enrolment in the Politics honours program<br/><br/>",
-        "processed": "Enrolment in the Politics honours program"
+        "processed": "(ZHSSPH || POLSGH)"
     },
     "ARTS4920": {
         "original": "Prerequisite: Enrolment in the Sociology and Anthropology honours program<br/><br/>",
@@ -2079,11 +2079,11 @@
     },
     "AVIA1111": {
         "original": "Prerequisite: Enrolled in Aviation Program<br/><br/>",
-        "processed": "Aviation Program"
+        "processed": "AVIA#"
     },
     "AVIA1321": {
         "original": "None<br/><br/>",
-        "processed": "None"
+        "processed": ""
     },
     "AVIA1401": {
         "original": "",
@@ -2275,11 +2275,11 @@
     },
     "BABS3041": {
         "original": "Prerequisite: BIOC2101 or (BIOC2181and MICR2011) or (BIOC2181 and BABS2202)<br/><br/>",
-        "processed": "BIOC2101 || (BIOC2181and MICR2011) || (BIOC2181 && BABS2202)"
+        "processed": "BIOC2101 || (BIOC2181 && MICR2011) || (BIOC2181 && BABS2202)"
     },
     "BABS3061": {
         "original": "Prerequisites: BIOC2101 or LIFE2101, BIOC2201<br/><br/>",
-        "processed": "BIOC2101 || LIFE2101, BIOC2201"
+        "processed": "BIOC2101 || LIFE2101 || BIOC2201"
     },
     "BABS3071": {
         "original": "",
@@ -2771,7 +2771,7 @@
     },
     "BIOS3081": {
         "original": "None<br/><br/>",
-        "processed": "None"
+        "processed": ""
     },
     "BIOS3123": {
         "original": "",
@@ -2795,7 +2795,7 @@
     },
     "BIOS3681": {
         "original": "None<br/><br/>",
-        "processed": "None"
+        "processed": ""
     },
     "BIOS6671": {
         "original": "",
@@ -3127,7 +3127,7 @@
     },
     "CHEM1831": {
         "original": "None<br/><br/>Must be enrolled in Exercise Physiology (3871) <br/><br/>",
-        "processed": "None Must be Exercise Physiology (3871)"
+        "processed": "Must be Exercise Physiology (3871)"
     },
     "CHEM2011": {
         "original": "Prerequisite: CHEM2041<br/><br/>",
@@ -6146,7 +6146,7 @@
     },
     "GEOS1701": {
         "original": "None<br/><br/>",
-        "processed": "None"
+        "processed": ""
     },
     "GEOS2021": {
         "original": "",
@@ -6154,7 +6154,7 @@
     },
     "GEOS2071": {
         "original": "None<br/><br/>",
-        "processed": "None"
+        "processed": ""
     },
     "GEOS2131": {
         "original": "Pre-requisites: GEOL1111/GEOS1111 or GEOL1211/GEOS1211 or GEOS1701<br/><br/>",
@@ -6198,7 +6198,7 @@
     },
     "GEOS3281": {
         "original": "None<br/><br/>",
-        "processed": "None"
+        "processed": ""
     },
     "GEOS3721": {
         "original": "",
@@ -6214,15 +6214,15 @@
     },
     "GEOS3761": {
         "original": "None<br/><br/>",
-        "processed": "None"
+        "processed": ""
     },
     "GEOS3811": {
         "original": "None<br/><br/>",
-        "processed": "None"
+        "processed": ""
     },
     "GEOS3821": {
         "original": "None<br/><br/>",
-        "processed": "None"
+        "processed": ""
     },
     "GEOS3911": {
         "original": "",
@@ -8272,7 +8272,7 @@
     },
     "MECH9325": {
         "original": "None<br/><br/>",
-        "processed": "None"
+        "processed": ""
     },
     "MECH9420": {
         "original": "Prerequisite: ENGG2400 OR MMAN2400 OR CVEN2301<br/><br/>",

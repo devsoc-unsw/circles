@@ -4978,35 +4978,23 @@
     ],
     "ARTS4900": [
         "(",
-        "Enrolment",
-        "in",
-        "the",
-        "Development",
-        "Studies",
-        "honours",
-        "program",
+        "(",
+        "8942",
+        ")",
         ")"
     ],
     "ARTS4901": [
         "(",
-        "Enrolment",
-        "in",
-        "the",
-        "Development",
-        "Studies",
-        "honours",
-        "program",
+        "(",
+        "8942",
+        ")",
         ")"
     ],
     "ARTS4902": [
         "(",
-        "Enrolment",
-        "in",
-        "the",
-        "Development",
-        "Studies",
-        "honours",
-        "program",
+        "(",
+        "8942",
+        ")",
         ")"
     ],
     "ARTS4904": [
@@ -5032,65 +5020,50 @@
     ],
     "ARTS4912": [
         "(",
-        "Enrolment",
-        "in",
-        "the",
-        "International",
-        "Relations",
-        "honours",
-        "program",
+        "(",
+        "POLSGH",
+        ")",
         ")"
     ],
     "ARTS4913": [
         "(",
-        "Enrolment",
-        "in",
-        "the",
-        "International",
-        "Relations",
-        "honours",
-        "program",
+        "(",
+        "POLSGH",
+        ")",
         ")"
     ],
     "ARTS4914": [
         "(",
-        "Enrolment",
-        "in",
-        "the",
-        "International",
-        "Relations",
-        "honours",
-        "program",
+        "(",
+        "POLSGH",
+        ")",
         ")"
     ],
     "ARTS4916": [
         "(",
-        "Enrolment",
-        "in",
-        "the",
-        "Politics",
-        "honours",
-        "program",
+        "(",
+        "ZHSSPH",
+        "||",
+        "POLSGH",
+        ")",
         ")"
     ],
     "ARTS4917": [
         "(",
-        "Enrolment",
-        "in",
-        "the",
-        "Politics",
-        "honours",
-        "program",
+        "(",
+        "ZHSSPH",
+        "||",
+        "POLSGH",
+        ")",
         ")"
     ],
     "ARTS4918": [
         "(",
-        "Enrolment",
-        "in",
-        "the",
-        "Politics",
-        "honours",
-        "program",
+        "(",
+        "ZHSSPH",
+        "||",
+        "POLSGH",
+        ")",
         ")"
     ],
     "ARTS4920": [
@@ -5302,13 +5275,11 @@
     ],
     "AVIA1111": [
         "(",
-        "Aviation",
-        "Program",
+        "AVIA#",
         ")"
     ],
     "AVIA1321": [
         "(",
-        "None",
         ")"
     ],
     "AVIA1401": [
@@ -5699,7 +5670,8 @@
         "BIOC2101",
         "||",
         "(",
-        "BIOC2181and",
+        "BIOC2181",
+        "&&",
         "MICR2011",
         ")",
         "||",
@@ -5714,7 +5686,8 @@
         "(",
         "BIOC2101",
         "||",
-        "LIFE2101,",
+        "LIFE2101",
+        "||",
         "BIOC2201",
         ")"
     ],
@@ -6635,7 +6608,6 @@
     ],
     "BIOS3081": [
         "(",
-        "None",
         ")"
     ],
     "BIOS3123": [
@@ -6671,7 +6643,6 @@
     ],
     "BIOS3681": [
         "(",
-        "None",
         ")"
     ],
     "BIOS6671": [
@@ -7339,7 +7310,6 @@
     ],
     "CHEM1831": [
         "(",
-        "None",
         "Must",
         "be",
         "Exercise",
@@ -14320,7 +14290,6 @@
     ],
     "GEOS1701": [
         "(",
-        "None",
         ")"
     ],
     "GEOS2021": [
@@ -14329,7 +14298,6 @@
     ],
     "GEOS2071": [
         "(",
-        "None",
         ")"
     ],
     "GEOS2131": [
@@ -14418,7 +14386,6 @@
     ],
     "GEOS3281": [
         "(",
-        "None",
         ")"
     ],
     "GEOS3721": [
@@ -14435,17 +14402,14 @@
     ],
     "GEOS3761": [
         "(",
-        "None",
         ")"
     ],
     "GEOS3811": [
         "(",
-        "None",
         ")"
     ],
     "GEOS3821": [
         "(",
-        "None",
         ")"
     ],
     "GEOS3911": [
@@ -19887,7 +19851,6 @@
     ],
     "MECH9325": [
         "(",
-        "None",
         ")"
     ],
     "MECH9420": [

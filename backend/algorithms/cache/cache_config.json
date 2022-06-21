@@ -24,5 +24,6 @@
     "Arts": ["ARTS#"],
     "Media": ["MDIA#"],
     "CDF": ["CCDF#"],
-    "Media (Screen && Sound Production)": ["MSSP#"]
+    "Media (Screen && Sound Production)": ["MSSP#"],
+    "Aviation": ["AVIA#"]
 }

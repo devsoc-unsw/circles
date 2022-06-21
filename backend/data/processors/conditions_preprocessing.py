@@ -11,7 +11,6 @@ from functools import reduce
 import json
 import re
 
-from py import process
 from data.utility.data_helpers import read_data, write_data
 
 PREPROCESSED_CONDITIONS = {}
@@ -49,6 +48,9 @@ SPECIALISATION_MAPPINGS = {
     'Medical Science': '3991',
     'Politics, Philosophy and Economics': '3478 || 4797',
     'single or double Music (Honours)': 'MUSC?H || 4508',
+    'development studies honours': '8942',
+    'International Relations honours': 'POLSGH',
+    'Politics honours': 'ZHSSPH || POLSGH',
     'Music program': 'MUSC?? || 4508',
     'Social Work': '4033',
     'single or dual award Media': '4510 || 3454 || 3438 || 3453',
@@ -191,6 +193,7 @@ def delete_extraneous_phrasing(processed: str) -> str:
         "completing",
         "completed",
         "a pass in",
+        r"^None"
     ]
     for text in completion_text:
         processed = re.sub(text, "", processed, flags=re.IGNORECASE)

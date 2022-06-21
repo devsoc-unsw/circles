@@ -3259,165 +3259,6 @@
         ],
         "broke at": "Index 2, in"
     },
-    "ARTS4900": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Development Studies honours program<br/><br/>",
-            "processed": "Enrolment in the Development Studies honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Development",
-            "Studies",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4901": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Development Studies honours program<br/><br/>",
-            "processed": "Enrolment in the Development Studies honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Development",
-            "Studies",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4902": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Development Studies honours program<br/><br/>",
-            "processed": "Enrolment in the Development Studies honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Development",
-            "Studies",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4912": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the International Relations honours program<br/><br/>",
-            "processed": "Enrolment in the International Relations honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "International",
-            "Relations",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4913": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the International Relations honours program<br/><br/>",
-            "processed": "Enrolment in the International Relations honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "International",
-            "Relations",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4914": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the International Relations honours program<br/><br/>",
-            "processed": "Enrolment in the International Relations honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "International",
-            "Relations",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4916": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Politics honours program<br/><br/>",
-            "processed": "Enrolment in the Politics honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Politics",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4917": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Politics honours program<br/><br/>",
-            "processed": "Enrolment in the Politics honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Politics",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ARTS4918": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Politics honours program<br/><br/>",
-            "processed": "Enrolment in the Politics honours program"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Politics",
-            "honours",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
     "ATSI3008": {
         "condition": {
             "original": "Prerequisite: 120 units of credit overall, enrolment in a major in Indigenous Studies and enrolled in the final semester of an Arts Faculty single or dual degree program<br/><br/>",
@@ -3450,31 +3291,6 @@
             ")"
         ],
         "broke at": "Index 3, enrolment"
-    },
-    "AVIA1111": {
-        "condition": {
-            "original": "Prerequisite: Enrolled in Aviation Program<br/><br/>",
-            "processed": "Aviation Program"
-        },
-        "tokens": [
-            "(",
-            "Aviation",
-            "Program",
-            ")"
-        ],
-        "broke at": "Index 2, Program"
-    },
-    "AVIA1321": {
-        "condition": {
-            "original": "None<br/><br/>",
-            "processed": "None"
-        },
-        "tokens": [
-            "(",
-            "None",
-            ")"
-        ],
-        "broke at": "Index 2, )"
     },
     "AVIA2117": {
         "condition": {
@@ -3686,44 +3502,6 @@
             ")"
         ],
         "broke at": "Index 3, MICR2011"
-    },
-    "BABS3041": {
-        "condition": {
-            "original": "Prerequisite: BIOC2101 or (BIOC2181and MICR2011) or (BIOC2181 and BABS2202)<br/><br/>",
-            "processed": "BIOC2101 || (BIOC2181and MICR2011) || (BIOC2181 && BABS2202)"
-        },
-        "tokens": [
-            "(",
-            "BIOC2101",
-            "||",
-            "(",
-            "BIOC2181and",
-            "MICR2011",
-            ")",
-            "||",
-            "(",
-            "BIOC2181",
-            "&&",
-            "BABS2202",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 4, BIOC2181and"
-    },
-    "BABS3061": {
-        "condition": {
-            "original": "Prerequisites: BIOC2101 or LIFE2101, BIOC2201<br/><br/>",
-            "processed": "BIOC2101 || LIFE2101, BIOC2201"
-        },
-        "tokens": [
-            "(",
-            "BIOC2101",
-            "||",
-            "LIFE2101,",
-            "BIOC2201",
-            ")"
-        ],
-        "broke at": "Index 4, BIOC2201"
     },
     "BABS3199": {
         "condition": {
@@ -4197,18 +3975,6 @@
         ],
         "broke at": "Index 2, Thesis"
     },
-    "BIOS3081": {
-        "condition": {
-            "original": "None<br/><br/>",
-            "processed": "None"
-        },
-        "tokens": [
-            "(",
-            "None",
-            ")"
-        ],
-        "broke at": "Index 2, )"
-    },
     "BIOS3161": {
         "condition": {
             "original": "6 UOC from BIOS2031 or BIOS2051 or BIOS2061<br/><br/>",
@@ -4226,18 +3992,6 @@
             ")"
         ],
         "broke at": "Index 3, BIOS2031"
-    },
-    "BIOS3681": {
-        "condition": {
-            "original": "None<br/><br/>",
-            "processed": "None"
-        },
-        "tokens": [
-            "(",
-            "None",
-            ")"
-        ],
-        "broke at": "Index 2, )"
     },
     "BLDG1012": {
         "condition": {
@@ -4724,11 +4478,10 @@
     "CHEM1831": {
         "condition": {
             "original": "None<br/><br/>Must be enrolled in Exercise Physiology (3871) <br/><br/>",
-            "processed": "None Must be Exercise Physiology (3871)"
+            "processed": "Must be Exercise Physiology (3871)"
         },
         "tokens": [
             "(",
-            "None",
             "Must",
             "be",
             "Exercise",
@@ -4738,7 +4491,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 2, Must"
+        "broke at": "Index 2, be"
     },
     "CHEM2521": {
         "condition": {
@@ -7597,78 +7350,6 @@
             ")"
         ],
         "broke at": "Index 2, INDC2003"
-    },
-    "GEOS1701": {
-        "condition": {
-            "original": "None<br/><br/>",
-            "processed": "None"
-        },
-        "tokens": [
-            "(",
-            "None",
-            ")"
-        ],
-        "broke at": "Index 2, )"
-    },
-    "GEOS2071": {
-        "condition": {
-            "original": "None<br/><br/>",
-            "processed": "None"
-        },
-        "tokens": [
-            "(",
-            "None",
-            ")"
-        ],
-        "broke at": "Index 2, )"
-    },
-    "GEOS3281": {
-        "condition": {
-            "original": "None<br/><br/>",
-            "processed": "None"
-        },
-        "tokens": [
-            "(",
-            "None",
-            ")"
-        ],
-        "broke at": "Index 2, )"
-    },
-    "GEOS3761": {
-        "condition": {
-            "original": "None<br/><br/>",
-            "processed": "None"
-        },
-        "tokens": [
-            "(",
-            "None",
-            ")"
-        ],
-        "broke at": "Index 2, )"
-    },
-    "GEOS3811": {
-        "condition": {
-            "original": "None<br/><br/>",
-            "processed": "None"
-        },
-        "tokens": [
-            "(",
-            "None",
-            ")"
-        ],
-        "broke at": "Index 2, )"
-    },
-    "GEOS3821": {
-        "condition": {
-            "original": "None<br/><br/>",
-            "processed": "None"
-        },
-        "tokens": [
-            "(",
-            "None",
-            ")"
-        ],
-        "broke at": "Index 2, )"
     },
     "GMAT4061": {
         "condition": {
@@ -11614,18 +11295,6 @@
             ")"
         ],
         "broke at": "Index 6, As"
-    },
-    "MECH9325": {
-        "condition": {
-            "original": "None<br/><br/>",
-            "processed": "None"
-        },
-        "tokens": [
-            "(",
-            "None",
-            ")"
-        ],
-        "broke at": "Index 2, )"
     },
     "MECH9650": {
         "condition": {
