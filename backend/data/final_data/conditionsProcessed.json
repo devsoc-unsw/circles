@@ -232,7 +232,7 @@
     },
     "ANAT1521": {
         "original": "Prerequisite: BABS1201 or DPST1051<br/>This course is restricted to students enrolled in Medical Science (3991) program<br/><br/>",
-        "processed": "BABS1201 || DPST1051 This course is restricted to Medical Science (3991) program"
+        "processed": "(BABS1201 || DPST1051) && 3991"
     },
     "ANAT2111": {
         "original": "Prerequisite: A pass in BABS1201 or DPST1051 plus either a pass in ANAT2241 or BABS1202 or DPST1052 or BABS2202 or BABS2204 or BIOC2201 or BIOC2291 or BIOS1101 or HESC1501 or PHSL2101 or PHSL2121 or VISN1101<br/><br/>",
@@ -452,7 +452,8 @@
     },
     "ARTS1451": {
         "original": "Prerequisite: ARTS1450 or language placement approval<br/><br/>",
-        "processed": "ARTS1450 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS1450"
     },
     "ARTS1452": {
         "original": "",
@@ -460,7 +461,8 @@
     },
     "ARTS1453": {
         "original": "Prerequisite: ARTS1452 or language placement approval<br/><br/>",
-        "processed": "ARTS1452 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS1452"
     },
     "ARTS1480": {
         "original": "Excluded: HSC Beginners, Continuers or Extension French, FREN1000, FREN1101, GENT0425<br/><br/>",
@@ -468,7 +470,8 @@
     },
     "ARTS1481": {
         "original": "Prerequisite: ARTS1480  or language placement approval<br/><br/>",
-        "processed": "ARTS1480 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS1480"
     },
     "ARTS1510": {
         "original": "",
@@ -476,7 +479,8 @@
     },
     "ARTS1511": {
         "original": "Prerequisite: ARTS1510 or language placement approval<br/><br/>",
-        "processed": "ARTS1510 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS1510"
     },
     "ARTS1540": {
         "original": "",
@@ -484,7 +488,8 @@
     },
     "ARTS1541": {
         "original": "Prerequisite: ARTS1540 or language placement approval<br/><br/>",
-        "processed": "ARTS1540 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS1540"
     },
     "ARTS1570": {
         "original": "",
@@ -492,7 +497,8 @@
     },
     "ARTS1571": {
         "original": "Prerequisite: ARTS1570 or language placement approval<br/><br/>",
-        "processed": "ARTS1570 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS1570"
     },
     "ARTS1620": {
         "original": "",
@@ -500,7 +506,8 @@
     },
     "ARTS1621": {
         "original": "Prerequisite: ARTS1620 or language placement approval<br/><br/>",
-        "processed": "ARTS1620 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS1620"
     },
     "ARTS1630": {
         "original": "",
@@ -508,7 +515,8 @@
     },
     "ARTS1631": {
         "original": "Prerequisite: ARTS1630 or language placement approval<br/><br/>",
-        "processed": "ARTS1630 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS1630"
     },
     "ARTS1660": {
         "original": "",
@@ -516,7 +524,8 @@
     },
     "ARTS1661": {
         "original": "Prerequisite: ARTS1660 or language placement approval<br/><br/>",
-        "processed": "ARTS1660 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS1660"
     },
     "ARTS1690": {
         "original": "",
@@ -812,15 +821,18 @@
     },
     "ARTS2450": {
         "original": "Prerequisite: ARTS1451 or language placement approval<br/><br/>",
-        "processed": "ARTS1451 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS1451"
     },
     "ARTS2451": {
         "original": "Prerequisite: ARTS2450 or language placement approval<br/><br/>",
-        "processed": "ARTS2450 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS2450"
     },
     "ARTS2452": {
         "original": "Prerequisite: ARTS3451 or ARTS3452 or ARTS3453 or ARTS3454 or language placement approval<br/><br/>",
-        "processed": "ARTS3451 || ARTS3452 || ARTS3453 || ARTS3454 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS3451 || ARTS3452 || ARTS3453 || ARTS3454"
     },
     "ARTS2453": {
         "original": "Prerequisite: 24 units of credit at Level 1<br/><br/>",
@@ -840,11 +852,13 @@
     },
     "ARTS2461": {
         "original": "Prerequisite: ARTS1453 or language placement approval<br/><br/>",
-        "processed": "ARTS1453 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS1453"
     },
     "ARTS2462": {
         "original": "Prerequisite: ARTS2461 or language placement approval<br/><br/>",
-        "processed": "ARTS2461 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS2461"
     },
     "ARTS2463": {
         "original": "Prerequisite: 24 units of credit at Level 1<br/><br/>",
@@ -864,11 +878,13 @@
     },
     "ARTS2480": {
         "original": "Prerequisite: ARTS1481 or language placement approval<br/><br/>",
-        "processed": "ARTS1481 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS1481"
     },
     "ARTS2481": {
         "original": "Prerequisite: ARTS2480 or language placement approval<br/><br/>",
-        "processed": "ARTS2480 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS2480"
     },
     "ARTS2482": {
         "original": "Prerequisite: 24 units of credit at Level 1<br/><br/>",
@@ -892,11 +908,13 @@
     },
     "ARTS2510": {
         "original": "Prerequisite: ARTS1511 or language placement approval<br/><br/>",
-        "processed": "ARTS1511 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS1511"
     },
     "ARTS2511": {
         "original": "Prerequisite: ARTS2510 or language placement approval<br/><br/>",
-        "processed": "ARTS2510 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS2510"
     },
     "ARTS2542": {
         "original": "Prerequisite: 24 units of credit at Level 1<br/><br/>",
@@ -904,19 +922,23 @@
     },
     "ARTS2570": {
         "original": "Prerequisite: ARTS1571 or language placement approval<br/><br/>",
-        "processed": "ARTS1571 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS1571"
     },
     "ARTS2571": {
         "original": "Prerequisite: ARTS2570 or language placement approval<br/><br/>",
-        "processed": "ARTS2570 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS2570"
     },
     "ARTS2630": {
         "original": "Prerequisite: ARTS1631 or language placement approval<br/><br/>",
-        "processed": "ARTS1631 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS1631"
     },
     "ARTS2631": {
         "original": "Prerequisite: ARTS2630 or language placement approval<br/><br/>",
-        "processed": "ARTS2630 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS2630"
     },
     "ARTS2633": {
         "original": "Prerequisite: 24 units of credit at Level 1<br/><br/>",
@@ -924,11 +946,13 @@
     },
     "ARTS2660": {
         "original": "Prerequisite: ARTS1661 or language placement approval<br/><br/>",
-        "processed": "ARTS1661 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS1661"
     },
     "ARTS2661": {
         "original": "Prerequisite: ARTS2660 or language placement approval<br/><br/>",
-        "processed": "ARTS2660 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS2660"
     },
     "ARTS2662": {
         "original": "Prerequisite: 24 units of credit at Level 1<br/><br/>",
@@ -1032,7 +1056,7 @@
     },
     "ARTS2852": {
         "original": "Prerequisite: 24 units of credit at level 1, and enrolment in a Politics, Philosophy, and Economics program or a Politics and IR major or a Development Studies major<br/><br/>",
-        "processed": "24UOC in L1 && enrolment in a Politics, Philosophy && Economics program || a Politics && IR major || a Development Studies major"
+        "processed": "24UOC in L1 && enrolment in a Politics, Philosophy && ECON# || a Politics && IR major || a Development Studies major"
     },
     "ARTS2870": {
         "original": "Prerequisite: 24 units of credit at Level 1<br/><br/>",
@@ -1204,7 +1228,7 @@
     },
     "ARTS3130": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Dance Studies or Theatre & Performance Studies. Or 72 UOC overall and enrolment in an Art & Design program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Dance Studies || Theatre && Performance Studies. || 72UOC && enrolment in an Art && Design program"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Dance Studies || Theatre && Performance Studies. || 72UOC && enrolment in an Art && DDES#"
     },
     "ARTS3131": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams,  Australian Studies or Theatre & Performance Studies. Excluded: ARTS2124<br/><br/>",
@@ -1216,7 +1240,7 @@
     },
     "ARTS3212": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Asian Studies, Development Studies, Global Development or History. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Asian Studies, Development Studies, Global Development || History. || 48UOC && (3447)"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Asian Studies, Development Studies, Global Development || History. || 48UOC && enrolment in an INST#"
     },
     "ARTS3216": {
         "original": "Prerequisite: 48 UOC including 6 UOC at level 1 and 6 UOC at level 2 in Asian Studies. Or 48 UOC including 12 UOC in Chinese Studies language courses. Or 48 UOC and enrolment in an International Studies single or double degree (2017 onwards)<br/><br/>",
@@ -1240,7 +1264,7 @@
     },
     "ARTS3241": {
         "original": "Prerequisite: 48 UOC including 6 UOC at lv 1 and 6 UOC at lv 2 in one of the following streams, Development Studies, Environmental Humanities, Geographical Studies or Global Development. Or 48 UOC and enrolment in an International Studies program<br/><br/>",
-        "processed": "48UOC && 6UOC at lv 1 && 6UOC at lv 2 in one of the following streams, Development Studies, Environmental Humanities, Geographical Studies || Global Development. || 48UOC && (3447)"
+        "processed": "48UOC && 6UOC at lv 1 && 6UOC at lv 2 in one of the following streams, Development Studies, Environmental Humanities, Geographical Studies || Global Development. || 48UOC && enrolment in an INST#"
     },
     "ARTS3242": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Environmental Humanities, Geographical Studies or History. Or 48 UOC overall and enrolment in an International Studies single or dual program<br/><br/>",
@@ -1304,19 +1328,23 @@
     },
     "ARTS3450": {
         "original": "Prerequisite: ARTS2451 or ARTS2462 or language placement approval<br/><br/>",
-        "processed": "ARTS2451 || ARTS2462 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS2451 || ARTS2462"
     },
     "ARTS3451": {
         "original": "Prerequisite: ARTS3450 or language placement approval<br/><br/>",
-        "processed": "ARTS3450 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS3450"
     },
     "ARTS3452": {
         "original": "Prerequisite: ARTS3451 or language placement approval<br/><br/>",
-        "processed": "ARTS3451 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS3451"
     },
     "ARTS3453": {
         "original": "Prerequisite: ARTS3452 or language placement approval<br/><br/>",
-        "processed": "ARTS3452 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS3452"
     },
     "ARTS3454": {
         "original": "Prerequisite: ARTS2452 or ARTS3451 or ARTS3452 or ARTS3453 or\u00a0language placement approval<br/><br/>",
@@ -1324,7 +1352,8 @@
     },
     "ARTS3455": {
         "original": "Prerequisite: ARTS2452 or ARTS3451 or ARTS3452 or ARTS3453 or ARTS3454 or language placement approval<br/><br/>",
-        "processed": "ARTS2452 || ARTS3451 || ARTS3452 || ARTS3453 || ARTS3454 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS2452 || ARTS3451 || ARTS3452 || ARTS3453 || ARTS3454"
     },
     "ARTS3456": {
         "original": "Prerequisite: ARTS2452 or ARTS3451 or ARTS3452 or ARTS3453 or ARTS3454 or\u00a0language placement approval<br/><br/>",
@@ -1336,31 +1365,38 @@
     },
     "ARTS3462": {
         "original": "Prerequisite: ARTS2452 or ARTS3451 or ARTS3452 or ARTS3453 or ARTS3454 or ARTS3463 or language placement approval<br/><br/>",
-        "processed": "ARTS2452 || ARTS3451 || ARTS3452 || ARTS3453 || ARTS3454 || ARTS3463 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS2452 || ARTS3451 || ARTS3452 || ARTS3453 || ARTS3454 || ARTS3463"
     },
     "ARTS3463": {
         "original": "Prerequisite: ARTS2452 or ARTS3451 or ARTS3452 or ARTS3453 or ARTS3454 or ARTS3462 or language placement approval<br/><br/>",
-        "processed": "ARTS2452 || ARTS3451 || ARTS3452 || ARTS3453 || ARTS3454 || ARTS3462 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS2452 || ARTS3451 || ARTS3452 || ARTS3453 || ARTS3454 || ARTS3462"
     },
     "ARTS3480": {
         "original": "rerequisite:  ARTS2481 or language placement approval<br/><br/>",
-        "processed": "rerequisite: ARTS2481 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "rerequisite: ARTS2481"
     },
     "ARTS3481": {
         "original": "Prerequisite: ARTS3480 or language placement approval<br/><br/>",
-        "processed": "ARTS3480 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS3480"
     },
     "ARTS3482": {
         "original": "Prerequisite: ARTS3481 or language placement approval<br/><br/>",
-        "processed": "ARTS3481 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS3481"
     },
     "ARTS3483": {
         "original": "Prerequisite: ARTS3481 or language placement approval<br/><br/>",
-        "processed": "ARTS3481 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS3481"
     },
     "ARTS3484": {
         "original": "Prerequisite: ARTS3481 or ARTS3482 or ARTS3483 or language placement approval<br/><br/>",
-        "processed": "ARTS3481 || ARTS3482 || ARTS3483 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS3481 || ARTS3482 || ARTS3483"
     },
     "ARTS3487": {
         "original": "Prerequisite: ARTS3481 or ARTS3482 or ARTS3483<br/><br/>",
@@ -1368,31 +1404,38 @@
     },
     "ARTS3488": {
         "original": "Prerequisite: ARTS3481 or ARTS3482 or ARTS3483 or language placement approval<br/><br/>",
-        "processed": "ARTS3481 || ARTS3482 || ARTS3483 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS3481 || ARTS3482 || ARTS3483"
     },
     "ARTS3490": {
         "original": "Prerequisite: Completion of one of the following - ARTS2481, ARTS3480, ARTS3481, ARTS3482, or ARTS3483, or language placement approval<br/><br/>",
-        "processed": "one of the following - ARTS2481, ARTS3480, ARTS3481, ARTS3482 || ARTS3483 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "one of the following - ARTS2481, ARTS3480, ARTS3481, ARTS3482 || ARTS3483,"
     },
     "ARTS3491": {
         "original": "Prerequisite: ARTS3481 or ARTS3482 or ARTS3483 or language placement approval<br/><br/>",
-        "processed": "ARTS3481 || ARTS3482 || ARTS3483 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS3481 || ARTS3482 || ARTS3483"
     },
     "ARTS3510": {
         "original": "Prerequisite: ARTS2511 or language placement approval<br/><br/>",
-        "processed": "ARTS2511 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS2511"
     },
     "ARTS3511": {
         "original": "Prerequisite: ARTS3510 or language placement approval<br/><br/>",
-        "processed": "ARTS3510 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS3510"
     },
     "ARTS3570": {
         "original": "Prerequisite: ARTS2571 or language placement approval<br/><br/>",
-        "processed": "ARTS2571 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS2571"
     },
     "ARTS3571": {
         "original": "Prerequisite: ARTS3570  or language placement approval<br/><br/>",
-        "processed": "ARTS3570 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS3570"
     },
     "ARTS3574": {
         "original": "Prerequisite: 24 units of credit at Level 1<br/><br/>",
@@ -1408,23 +1451,28 @@
     },
     "ARTS3630": {
         "original": "Prerequisite: ARTS2631 or language placement approval<br/><br/>",
-        "processed": "ARTS2631 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS2631"
     },
     "ARTS3631": {
         "original": "Prerequisite: ARTS3630 or language placement approval<br/><br/>",
-        "processed": "ARTS3630 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS3630"
     },
     "ARTS3632": {
         "original": "Prerequisite: ARTS3631 or language placement approval<br/><br/>",
-        "processed": "ARTS3631 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS3631"
     },
     "ARTS3633": {
         "original": "Prerequisite: ARTS3632 or language placement approval<br/><br/>",
-        "processed": "ARTS3632 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS3632"
     },
     "ARTS3634": {
         "original": "Prerequisite: ARTS3632 or language placement approval<br/><br/>",
-        "processed": "ARTS3632 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS3632"
     },
     "ARTS3636": {
         "original": "Prerequisite: 72uoc overall, including ARTS3633 and enrolment in an Advanced Japanese Studies major/minor; or 72uoc overall, including ARTS2631 and enrolment in a Japanese Studies major/minor<br/><br/>",
@@ -1432,7 +1480,8 @@
     },
     "ARTS3638": {
         "original": "Prerequisite: ARTS3632 or language placement approval<br/><br/>",
-        "processed": "ARTS3632 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS3632"
     },
     "ARTS3639": {
         "original": "Prerequisite: 24 units of credit at Level 1<br/><br/>",
@@ -1444,19 +1493,23 @@
     },
     "ARTS3641": {
         "original": "Prerequisite: ARTS3632 or language placement approval<br/><br/>",
-        "processed": "ARTS3632 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS3632"
     },
     "ARTS3643": {
         "original": "Prerequisite: ARTS3632 or language placement approval<br/><br/>",
-        "processed": "ARTS3632 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS3632"
     },
     "ARTS3660": {
         "original": "Prerequisite: ARTS2661 or language placement approval<br/><br/>",
-        "processed": "ARTS2661 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS2661"
     },
     "ARTS3661": {
         "original": "Prerequisite: ARTS3660 or language placement approval<br/><br/>",
-        "processed": "ARTS3660 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS3660"
     },
     "ARTS3662": {
         "original": "Prerequisite: ARTS3661, ARTS3663, ARTS3664, or ARTS3665<br/><br/>",
@@ -1468,7 +1521,8 @@
     },
     "ARTS3664": {
         "original": "Prerequisite: ARTS3661 or ARTS3662 or ARTS3663 or ARTS3665 or language placement approval<br/><br/>",
-        "processed": "ARTS3661 || ARTS3662 || ARTS3663 || ARTS3665 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS3661 || ARTS3662 || ARTS3663 || ARTS3665"
     },
     "ARTS3665": {
         "original": "Prerequisite: ARTS3661, ARTS3662, ARTS3663, ARTS3664, or langauage placement approval<br/><br/>",
@@ -1476,7 +1530,8 @@
     },
     "ARTS3667": {
         "original": "Prerequisite: ARTS3661 or ARTS3662 or ARTS3663 or ARTS3664 or ARTS3665 or language placement approval<br/><br/>",
-        "processed": "ARTS3661 || ARTS3662 || ARTS3663 || ARTS3664 || ARTS3665 || language placement approval"
+        "handbook_note": "language placement approval can also be used.",
+        "processed": "ARTS3661 || ARTS3662 || ARTS3663 || ARTS3664 || ARTS3665"
     },
     "ARTS3690": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Linguistics<br/><br/>",
@@ -1488,7 +1543,7 @@
     },
     "ARTS3750": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Development Studies, Geographical Studies or Global Development. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Development Studies, Geographical Studies || Global Development. || 48UOC && (3447)"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Development Studies, Geographical Studies || Global Development. || 48UOC && enrolment in an INST#"
     },
     "ARTS3751": {
         "original": "Prerequisite: 72 units of credit overall, and enrolment in a Global Development major or Development Studies major<br/><br/>",
@@ -1496,11 +1551,11 @@
     },
     "ARTS3755": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Development Studies, Geographical Studies or Global Development. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Development Studies, Geographical Studies || Global Development. || 48UOC && (3447)"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Development Studies, Geographical Studies || Global Development. || 48UOC && enrolment in an INST#"
     },
     "ARTS3756": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Development Studies, Geographical Studies or Global Development. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Development Studies, Geographical Studies || Global Development. || 48UOC && (3447)"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Development Studies, Geographical Studies || Global Development. || 48UOC && enrolment in an INST#"
     },
     "ARTS3757": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Development Studies or Global Development<br/><br/>",
@@ -1520,11 +1575,11 @@
     },
     "ARTS3783": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Politics and International Relations. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Politics && International Relations. || 48UOC && (3447)"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Politics && International Relations. || 48UOC && enrolment in an INST#"
     },
     "ARTS3786": {
         "original": "Prerequisite: 48UOC overall, including 6UOC at level 1 and 6UOC at level 2 in European Studies or History; or 48UOC overall, including 12UOC in German Studies language courses. Or 48UOC and enrolment in an International Studies program<br/><br/>",
-        "processed": "(48UOC && 6UOC in L1 && 6UOC in L2 in European Studies || History) || 48UOC && 12UOC in German Studies language courses. || 48UOC && (3447)"
+        "processed": "(48UOC && 6UOC in L1 && 6UOC in L2 in European Studies || History) || 48UOC && 12UOC in German Studies language courses. || 48UOC && enrolment in an INST#"
     },
     "ARTS3787": {
         "original": "Prerequisite: 24 units of credit in either the European Studies or German Studies stream.<br/>Excluded: ARTS2783<br/><br/>",
@@ -1540,7 +1595,7 @@
     },
     "ARTS3812": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Development Studies, or Politics and International Relations. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Development Studies || Politics && International Relations. || 48UOC && (3447)"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Development Studies || Politics && International Relations. || 48UOC && enrolment in an INST#"
     },
     "ARTS3814": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Australian Studies, International Relations, Politics, or Politics and International Relations<br/><br/>",
@@ -1548,7 +1603,7 @@
     },
     "ARTS3819": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Politics and International Relations. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Politics && International Relations. || 48UOC && (3447)"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Politics && International Relations. || 48UOC && enrolment in an INST#"
     },
     "ARTS3820": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Politics and International Relations<br/><br/>",
@@ -1576,7 +1631,7 @@
     },
     "ARTS3872": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Media, Culture & Technology or Sociology & Anthropology. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Media, Culture && Technology || Sociology && Anthropology. || 48UOC && (3447)"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Media, Culture && Technology || Sociology && Anthropology. || 48UOC && enrolment in an INST#"
     },
     "ARTS3874": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Australian Studies, Development Studies, Geographical Studies, Global Development, or Sociology & Anthropology<br/><br/>",
@@ -1592,11 +1647,11 @@
     },
     "ARTS3885": {
         "original": "Prerequisites: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Sociology & Anthropology. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Sociology && Anthropology. || 48UOC && (3447)"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Sociology && Anthropology. || 48UOC && enrolment in an INST#"
     },
     "ARTS3886": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC level 1 and 6 UOC level 2 in one of the following streams, Criminology/S&A. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Criminology/S&A. || 48UOC && (3447)"
+        "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Criminology/S&A. || 48UOC && enrolment in an INST#"
     },
     "ARTS3900": {
         "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Gender Studies or History.<br/><br/>",
@@ -2428,7 +2483,7 @@
     },
     "BEIL6010": {
         "original": "96 UOC and enrolment in FBE  Design program<br/><br/>",
-        "processed": "96UOC && enrolment in FBE Design program"
+        "processed": "96UOC && enrolment in FBE DDES#"
     },
     "BEIL6011": {
         "original": "Prerequisite: 96 unit of credits completed<br/><br/>",
@@ -2568,7 +2623,7 @@
     },
     "BIOC3671": {
         "original": "Prerequisite: BIOC2101, BIOC2201. Restricted to Advanced Science programs (3985, 3990, 3962, 3972, 3973, 3986, 3931, 3936)<br/><br/>",
-        "processed": "BIOC2101 && BIOC2201. Restricted to Advanced Science programs (3985, 3990, 3962, 3972, 3973, 3986, 3931, 3936)"
+        "processed": "BIOC2101 && BIOC2201. Restricted to ASCI#"
     },
     "BIOM1010": {
         "original": "",
@@ -2979,8 +3034,8 @@
         "processed": "Research Thesis B (4952)"
     },
     "CEIC4954": {
-        "original": "",
-        "processed": ""
+        "original": "Prerequisite: CEIC4952<br/><br/>Corequisite: CEIC4953<br/><br/>",
+        "processed": "CEIC4952 && [CEIC4953]"
     },
     "CEIC6004": {
         "original": "Prerequisite: POLY3000<br/><br/>",
@@ -3036,7 +3091,7 @@
     },
     "CHEM1051": {
         "original": "Prerequisite: Enrolment in the Bachelor of Medicinal Chemistry (3999 or 3992) or Bachelor of Medicinal Chemistry/Law program<br/><br/>",
-        "processed": "Enrolment in the Bachelor of Medicinal Chemistry (3999 || 3992) || Bachelor of Medicinal Chemistry/Law program"
+        "processed": "Enrolment in the Bachelor of Medicinal Chemistry (3999 || 3992) || Bachelor of Medicinal Chemistry/LAWS#"
     },
     "CHEM1061": {
         "original": "Prerequisite: Enrolment in the Bachelor of Medicinal Chemistry (3992 or 3999) program and completion of either CHEM1051 or CHEM1031 or CHEM1011 with a credit or above.<br/><br/>",
@@ -5154,7 +5209,7 @@
     },
     "EDST2002": {
         "original": "Prerequisite: 72 uoc overall, including EDST1101, EDST1104, EDST1108, and EDST2003, and enrolment in an Education program. Students must have passed the Literacy and Numeracy Test for Initial Teacher Education in order to enrol into this course<br/><br/>",
-        "processed": "72UOC && EDST1101, EDST1104, EDST1108 && EDST2003 && (4509 || 4056) . must have passed the Literacy && Numeracy Test for Initial Teacher Education"
+        "processed": "72UOC && EDST1101, EDST1104, EDST1108 && EDST2003 && enrolment in an EDST#. must have passed the Literacy && Numeracy Test for Initial Teacher Education"
     },
     "EDST2003": {
         "original": "Prerequisite: 24 units of credit at Level 1 including EDST1101 or EDST1104 and enrolment in one of the following teaching Programs 3446, 3462, 4053, 4054, 4058, 4059, 4061, 4062 or 4076<br/><br/>",
@@ -5178,19 +5233,19 @@
     },
     "EDST2094": {
         "original": "Prerequisite: 18 units of credit at Level 1, and enrolment in an Education program. Please contact the School of Education for enrolment<br/><br/>",
-        "processed": "18UOC in L1 && (4509 || 4056) . Please contact the School of Education for enrolment"
+        "processed": "18UOC in L1 && enrolment in an EDST#. Please contact the School of Education for enrolment"
     },
     "EDST4080": {
         "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in an Education program<br/><br/>",
-        "processed": "78UOC && EDST2002 && (4509 || 4056)"
+        "processed": "78UOC && EDST2002 && enrolment in an EDST#"
     },
     "EDST4084": {
         "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in an Education program<br/><br/>",
-        "processed": "78UOC && EDST2002 && (4509 || 4056)"
+        "processed": "78UOC && EDST2002 && enrolment in an EDST#"
     },
     "EDST4096": {
         "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in an Education program<br/><br/>",
-        "processed": "78UOC && EDST2002 && (4509 || 4056)"
+        "processed": "78UOC && EDST2002 && enrolment in an EDST#"
     },
     "EDST4501": {
         "original": "Prerequisite: Enrolment in the Education honours program<br/><br/>",
@@ -5386,7 +5441,7 @@
     },
     "EDST6760": {
         "original": "Prerequisite: EDST2002, EDST4084, 12 uoc Teaching Method 1 courses, and enrolment in an Education program. Students must have passed LANTITE.\u00a0 Students must have sufficient subject content knowledge in their teaching areas<br/><br/>",
-        "processed": "EDST2002 && EDST4084 && 12UOC Teaching Method 1 courses && (4509 || 4056) . must have passed LANTITE.\u00a0 must have sufficient subject content knowledge in their teaching areas"
+        "processed": "EDST2002 && EDST4084 && 12UOC Teaching Method 1 courses && enrolment in an EDST#. must have passed LANTITE.\u00a0 must have sufficient subject content knowledge in their teaching areas"
     },
     "EDST6761": {
         "original": "Prerequisite: EDST6760 and 12 units of credit in Teaching Methods courses. Students must have passed the Literacy and Numeracy Test for Initial Teacher Education in order to enrol into this course.<br/><br/>",
@@ -5394,7 +5449,7 @@
     },
     "EDST6765": {
         "original": "Prerequisite: EDST4080, EDST4096, EDST6760, 24 uoc Teaching Method courses, and enrolment in an Education program. Students must have passed LANTITE.\u00a0Students must have sufficient subject content knowledge in their teaching areas.\u00a0Excluded: EDST4081<br/><br/>",
-        "processed": "EDST4080 && EDST4096 && EDST6760 && 24UOC Teaching Method courses && (4509 || 4056) . must have passed LANTITE.\u00a0 must have sufficient subject content knowledge in their teaching areas"
+        "processed": "EDST4080 && EDST4096 && EDST6760 && 24UOC Teaching Method courses && enrolment in an EDST#. must have passed LANTITE.\u00a0 must have sufficient subject content knowledge in their teaching areas"
     },
     "EDST6771": {
         "original": "Prerequisite: 78 UOC overall, including EDST2002, and enrolment in program 4059, 4061, 4062, 4064, or 4066<br/><br/>",
@@ -6637,7 +6692,7 @@
     },
     "INST2003": {
         "original": "Prerequisite: Enrolment in an International Studies program (pre 2017). Or INST1005 and INST1006 and enrolment in an International Studies program (2017+). Or ARTS1250 and enrolment in a Geographical Studies major or minor<br/><br/>",
-        "processed": "(3447) (2017). || INST1005 && INST1006 && (3447) (2017+). || ARTS1250 && enrolment in a Geographical Studies major || minor"
+        "processed": "Enrolment in an INST#. || ARTS1250 && enrolment in a Geographical Studies major || minor"
     },
     "INST3900": {
         "original": "Prerequisite: 96 units of credit and enrolment in an International Studies single or double degree program<br/><br/>",
@@ -6833,7 +6888,7 @@
     },
     "LAWS1052": {
         "original": "This course is strictly for students undertaking Law programs only. Corequisite : LAWS1055<br/><br/>",
-        "processed": "This course is strictly for undertaking Law programs only && [LAWS1055]"
+        "processed": "This course is strictly for undertaking LAWS# only && [LAWS1055]"
     },
     "LAWS1055": {
         "original": "Co-requisite with LAWS1052. To be able to be enrolled in separately in subsequent term if LAWS1052 successfully completed<br/><br/>",
@@ -8057,27 +8112,27 @@
     },
     "MDIA1000": {
         "original": "Prerequisite: Enrolment in a single or dual award Media program<br/><br/>",
-        "processed": "(4510 || 3454 || 3438 || 3453)"
+        "processed": "Enrolment in a single || dual award MDIA#"
     },
     "MDIA1002": {
         "original": "Prerequisite: Enrolment in a single or dual award Media program<br/><br/>",
-        "processed": "(4510 || 3454 || 3438 || 3453)"
+        "processed": "Enrolment in a single || dual award MDIA#"
     },
     "MDIA1003": {
         "original": "Prerequisite: Enrolment in a single or dual award Media program<br/><br/>",
-        "processed": "(4510 || 3454 || 3438 || 3453)"
+        "processed": "Enrolment in a single || dual award MDIA#"
     },
     "MDIA1004": {
         "original": "Prerequisite: Enrolment in a Media program or Creative Writing Major<br/><br/>",
-        "processed": "Enrolment in a Media program || Creative Writing Major"
+        "processed": "MDIA# || Creative Writing Major"
     },
     "MDIA1005": {
         "original": "Prerequisite: Enrolment in a single or dual award Media program<br/><br/>",
-        "processed": "(4510 || 3454 || 3438 || 3453)"
+        "processed": "Enrolment in a single || dual award MDIA#"
     },
     "MDIA1007": {
         "original": "Prerequisite: Enrolment in a single or dual award Media program<br/><br/>",
-        "processed": "(4510 || 3454 || 3438 || 3453)"
+        "processed": "Enrolment in a single || dual award MDIA#"
     },
     "MDIA2000": {
         "original": "Prerequisite: 24 units of credit at level 1, including MDIA1000 or MDIA1005 or ARTS1064<br/><br/>",
@@ -8105,11 +8160,11 @@
     },
     "MDIA2008": {
         "original": "Prerequisite: 24 units of credit at level 1, and enrolment in a single or dual award Media program<br/><br/>",
-        "processed": "24UOC in L1 && (4510 || 3454 || 3438 || 3453)"
+        "processed": "24UOC in L1 && enrolment in a single || dual award MDIA#"
     },
     "MDIA2010": {
         "original": "Prerequisite: 24 units of credit at level 1, and enrolment in a single or dual award Media program or enrolment in a Creative Writing major or minor. Equivalent: MDIA3001<br/><br/>",
-        "processed": "24UOC in L1 && (4510 || 3454 || 3438 || 3453) || enrolment in a Creative Writing major || minor"
+        "processed": "24UOC in L1 && enrolment in a single || dual award MDIA# || enrolment in a Creative Writing major || minor"
     },
     "MDIA2011": {
         "original": "Prerequisite: 24 units of credit at level 1 including\u00a0MDIA1002 or MDIA1003. Or 24 units of credit at level 1 and enrolment  in a Global Development major<br/><br/>",
@@ -8137,7 +8192,7 @@
     },
     "MDIA3004": {
         "original": "Prerequisite: 66 units of credit overall, and enrolment in a single or double degree Media program<br/><br/>",
-        "processed": "66UOC && (4510 || 3454 || 3438 || 3453)"
+        "processed": "66UOC && MDIA#"
     },
     "MDIA3005": {
         "original": "Prerequisite: 66 units of credit overall including MDIA2005 or MDIA2006 or MDIA2012<br/><br/>",
@@ -8145,11 +8200,11 @@
     },
     "MDIA3006": {
         "original": "Prerequisite: 66 units of credit overall, including ARTS2065 or ARTS2066 or MDIA2000 or MDIA2001 or MDIA2010, and enrolment in a single or double degree media program<br/><br/>",
-        "processed": "66UOC && ARTS2065 || ARTS2066 || MDIA2000 || MDIA2001 || MDIA2010 && (4510 || 3454 || 3438 || 3453)"
+        "processed": "66UOC && ARTS2065 || ARTS2066 || MDIA2000 || MDIA2001 || MDIA2010 && MDIA#"
     },
     "MDIA3007": {
         "original": "Prerequisite: 48 units of credit overall, and enrolment in a Media program, or a Creative Writing, English, FIlm Studies or MCT major or minor. Students must have a WAM of 65 to be eligible for this course.<br/><br/>",
-        "processed": "48UOC && enrolment in a Media program || a Creative Writing, English, FIlm Studies || MCT major || minor. must have 65WAM to be eligible for this course"
+        "processed": "48UOC && MDIA# || a Creative Writing, English, FIlm Studies || MCT major || minor. must have 65WAM to be eligible for this course"
     },
     "MDIA3008": {
         "original": "Prerequisite: 66 units of credit overall including MDIA2005 or MDIA2006 or MDIA2012<br/><br/>",
@@ -8165,7 +8220,7 @@
     },
     "MDIA3011": {
         "original": "Prerequisites: 66 units of credit overall and enrolment in a single or double degree Media program<br/><br/>",
-        "processed": "66UOC && (4510 || 3454 || 3438 || 3453)"
+        "processed": "66UOC && MDIA#"
     },
     "MDIA3012": {
         "original": "Prerequisite: 66 units of credit overall including MDIA2005 or MDIA2006<br/><br/>",
@@ -8757,7 +8812,7 @@
     },
     "MUSC1707": {
         "original": "Prerequisite: Enrolment in a Music program.<br/><br/>",
-        "processed": "(MUSC?? || 4508)"
+        "processed": "MUSC#"
     },
     "MUSC1708": {
         "original": "",
@@ -8793,19 +8848,19 @@
     },
     "MUSC2703": {
         "original": "Prerequisite: Enrolment in a Music program and either MUSC1701 and MUSC1704, or MUSC1702 and MUSC1705, or MUSC1707 (12 uoc).<br/><br/>",
-        "processed": "(MUSC?? || 4508) && MUSC1701 && MUSC1704 || MUSC1702 && MUSC1705 || MUSC1707 (12UOC)"
+        "processed": "MUSC# && MUSC1701 && MUSC1704 || MUSC1702 && MUSC1705 || MUSC1707 (12UOC)"
     },
     "MUSC2801": {
         "original": "Prerequisite: Enrolment in the Music Creative Practice Stream in a Music program<br/><br/>",
-        "processed": "Enrolment in the Music Creative Practice Stream in a Music program"
+        "processed": "Enrolment in the Music Creative Practice Stream MUSC#"
     },
     "MUSC2802": {
         "original": "Prerequisite: 36uoc at Level 1 and enrolment in the Music Pedagogy stream in a Music Program. Note: This course is for instrumental or vocal students. Students who entered the music programme as composers may be required to audition.<br/><br/>",
-        "processed": "36UOC in L1 && enrolment in the Music Pedagogy stream in a Music Program. Note: This course is for instrumental || vocal . who entered the music programme as composers may be required to audition"
+        "processed": "36UOC in L1 && enrolment in the Music Pedagogy stream MUSC#. Note: This course is for instrumental || vocal . who entered the MUSC#me as composers may be required to audition"
     },
     "MUSC2803": {
         "original": "Prerequisites: 36uoc at level 1 and enrolment a Music program, or Music major or minor<br/><br/>",
-        "processed": "36UOC in L1 && enrolment a Music program || Music major || minor"
+        "processed": "36UOC in L1 && MUSC# || Music major || minor"
     },
     "MUSC2804": {
         "original": "Prerequisite: 24 units of credit at Level 1<br/><br/>",
@@ -8829,11 +8884,11 @@
     },
     "MUSC3705": {
         "original": "Prerequisite: MUSC2702 or MUSC2703 (12 uoc), and enrolment in a Music program.<br/><br/>",
-        "processed": "MUSC2702 || MUSC2703 (12UOC) && (MUSC?? || 4508)"
+        "processed": "MUSC2702 || MUSC2703 (12UOC) && MUSC#"
     },
     "MUSC3706": {
         "original": "Prerequisite: MUSC2702 or MUSC2703 (12 uoc), and enrolment in a Music Creative Practice or Music Pedagogy stream in a Music program.<br/><br/>",
-        "processed": "MUSC2702 || MUSC2703 (12UOC) && enrolment in a Music Creative Practice || Music Pedagogy stream in a Music program"
+        "processed": "MUSC2702 || MUSC2703 (12UOC) && enrolment in a Music Creative Practice || Music Pedagogy stream MUSC#"
     },
     "MUSC3801": {
         "original": "Prerequisite: MUSC2801 and enrolment in the Music Creative Practice specialisation in a Music single or double degree<br/><br/>",
@@ -8861,7 +8916,7 @@
     },
     "MUSC3808": {
         "original": "Prerequisite: Enrolment in a Music Pedagogy stream in a Music program. Note: This course is for instrumental or vocal students. Students who entered the music programme as composers may be required to audition.<br/><br/>",
-        "processed": "Enrolment in a Music Pedagogy stream in a Music program. Note: This course is for instrumental || vocal . who entered the music programme as composers may be required to audition"
+        "processed": "Enrolment in a Music Pedagogy stream MUSC#. Note: This course is for instrumental || vocal . who entered the MUSC#me as composers may be required to audition"
     },
     "MUSC4009": {
         "original": "Prerequisite: Enrolment in program 4508 Music (Honours)<br/><br/>",
@@ -8901,7 +8956,7 @@
     },
     "MUSC4102": {
         "original": "Prerequisite: MUSC4101, and enrolment in a Music program. Or 48 uoc overall including MUSC1602 or MUSC1604, and MUSC2116 and enrolment in a Music major in an Arts program<br/><br/>",
-        "processed": "MUSC4101 && (MUSC?? || 4508) . || 48UOC && MUSC1602 || MUSC1604 && MUSC2116 && enrolment in a Music major in an Arts program"
+        "processed": "MUSC4101 && (MUSC?? || 4508) . || 48UOC && MUSC1602 || MUSC1604 && MUSC2116 && enrolment in a Music major in an ARTS#"
     },
     "MUSC4103": {
         "original": "Prerequisite: 30uoc at level 1 including MUSC1603 and MUSC1604<br/><br/>",
@@ -8913,11 +8968,11 @@
     },
     "MUSC4705": {
         "original": "Prerequisite: MUSC3704 or MUSC3706 (12 uoc), and enrolment in a Music Creative Practice stream in a Music program.<br/><br/>",
-        "processed": "MUSC3704 || MUSC3706 (12UOC) && enrolment in a Music Creative Practice stream in a Music program"
+        "processed": "MUSC3704 || MUSC3706 (12UOC) && enrolment in a Music Creative Practice stream MUSC#"
     },
     "MUSC4706": {
         "original": "Prerequisite: Enrolment in a Music or Arts program<br/><br/>",
-        "processed": "Enrolment in a Music || Arts program"
+        "processed": "Enrolment in a Music || ARTS#"
     },
     "NANO2002": {
         "original": "",
@@ -9493,15 +9548,15 @@
     },
     "PPEC1001": {
         "original": "Prerequisite: Enrolment in a Politics, Philosophy and Economics program<br/><br/>",
-        "processed": "(3478 || 4797)"
+        "processed": "Enrolment in a Politics, Philosophy && ECON#"
     },
     "PPEC2001": {
         "original": "Prerequisite: 24 units of credit overall, including PPEC1001, and enrolment in a Politics, Philosophy and Economics program<br/><br/>",
-        "processed": "24UOC && PPEC1001 && (3478 || 4797)"
+        "processed": "24UOC && PPEC1001 && enrolment in a Politics, Philosophy && ECON#"
     },
     "PPEC3001": {
         "original": "Prerequisite: 72 units of credit overall, including PPEC2001, and enrolment in a Politics, Philosophy and Economics program<br/><br/>",
-        "processed": "72UOC && PPEC2001 && (3478 || 4797)"
+        "processed": "72UOC && PPEC2001 && enrolment in a Politics, Philosophy && ECON#"
     },
     "PSYC1001": {
         "original": "",
@@ -10004,75 +10059,75 @@
     },
     "SOCW2003": {
         "original": "Prerequisite: SOCW1001 and SOCW1004, and enrolment in a Social Work program<br/><br/>",
-        "processed": "SOCW1001 && SOCW1004 && (4033)"
+        "processed": "SOCW1001 && SOCW1004 && SOCW#"
     },
     "SOCW2006": {
         "original": "Prerequisite: SOCW1001 and enrolment in a Social Work Program<br/><br/>",
-        "processed": "SOCW1001 && (4033)"
+        "processed": "SOCW1001 && SOCW#"
     },
     "SOCW2008": {
         "original": "Prerequisite: SOCW1001 and SOCW1004, and enrolment in a Social Work program<br/><br/>",
-        "processed": "SOCW1001 && SOCW1004 && (4033)"
+        "processed": "SOCW1001 && SOCW1004 && SOCW#"
     },
     "SOCW2009": {
         "original": "Prerequisite: SOCW2003 and enrolment in a Social Work Program<br/><br/>",
-        "processed": "SOCW2003 && (4033)"
+        "processed": "SOCW2003 && SOCW#"
     },
     "SOCW2100": {
         "original": "Prerequisite: SOCW1001 and enrolment in a Social Work Program<br/><br/>",
-        "processed": "SOCW1001 && (4033)"
+        "processed": "SOCW1001 && SOCW#"
     },
     "SOCW3006": {
         "original": "Prerequisite: SOCW3009 and SOCW3011, or SOCW3009, SOCW3012 and SOCW3013, and enrolment in a Social Work program.  Excluded: Students enrolled in 4787 Social Work (Honours)/Law<br/><br/>",
-        "processed": "SOCW3009 && SOCW3011 || SOCW3009 && SOCW3012 && SOCW3013 && (4033)"
+        "processed": "SOCW3009 && SOCW3011 || SOCW3009 && SOCW3012 && SOCW3013 && SOCW#"
     },
     "SOCW3009": {
         "original": "Prerequisite: ARTS1753 or ARTS1870 or ARTS1871 and PSYC1001, SOCW2006, SOCW2008, SOCW2009, SOCW2100, SOCW3012, SOSS/SRAP1000, SOSS/SRAP1001, ARTS2871 or SRAP2002, and enrolment in a Social Work program. Corequisite: SOCW3013<br/><br/>",
-        "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOCW3012 || SOSS/SRAP1000 || SOSS/SRAP1001 || ARTS2871 || SRAP2002 && (4033) && [SOCW3013]"
+        "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOCW3012 || SOSS/SRAP1000 || SOSS/SRAP1001 || ARTS2871 || SRAP2002 && SOCW# && [SOCW3013]"
     },
     "SOCW3010": {
         "original": "Prerequisite: SOCW3009 and SOCW3011, or SOCW3009, SOCW3012 and SOCW3013, and enrolment in a Social Work program<br/><br/>",
-        "processed": "SOCW3009 && SOCW3011 || SOCW3009 && SOCW3012 && SOCW3013 && (4033)"
+        "processed": "SOCW3009 && SOCW3011 || SOCW3009 && SOCW3012 && SOCW3013 && SOCW#"
     },
     "SOCW3012": {
         "original": "Prerequisite: ARTS1753 or ARTS1870 or ARTS1871 and PSYC1001, SOCW2006, SOCW2008, SOCW2009, SOCW2100, SOSS/SRAP1000, SOSS/SRAP1001,  ARTS2871 or SOSS/SRAP2002, and enrolment in a Social Work program. Equivalent: SOCW3001 and SOCW3011<br/><br/>",
-        "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOSS/SRAP1000 || SOSS/SRAP1001 || ARTS2871 || SOSS/SRAP2002 && (4033)"
+        "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOSS/SRAP1000 || SOSS/SRAP1001 || ARTS2871 || SOSS/SRAP2002 && SOCW#"
     },
     "SOCW3013": {
         "original": "Prerequisite: ARTS1753 or ARTS1870 or ARTS1871 and PSYC1001, SOCW2006, SOCW2008, SOCW2009, SOCW2100, SOCW3012, SOSS1000, SOSS1001, ARTS2871 or SRAP2002, and enrolment in a Social Work program. Equivalent: SOCW3001 and SOCW3011. Corequisite: SOCW3009<br/><br/>",
-        "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOCW3012 || SOSS1000 || SOSS1001 || ARTS2871 || SRAP2002 && (4033) && [SOCW3009]"
+        "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOCW3012 || SOSS1000 || SOSS1001 || ARTS2871 || SRAP2002 && SOCW# && [SOCW3009]"
     },
     "SOCW4003": {
         "original": "Prerequisite: SOCW3006, SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work program. Or SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work/Law program<br/><br/>",
-        "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) . || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /Law program"
+        "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && SOCW#. || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /Law program"
     },
     "SOCW4011": {
         "original": "Prerequisite: SOCW3006, SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work program. Or SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work/Law program<br/><br/>",
-        "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) . || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /Law program"
+        "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && SOCW#. || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /Law program"
     },
     "SOCW4012": {
         "original": "Prerequisite: SOCW3006, SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work program. Or SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work/Law program<br/><br/>",
-        "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) . || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /Law program"
+        "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && SOCW#. || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /Law program"
     },
     "SOCW4013": {
         "original": "Prerequisite: SOCW3006, SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work program. Or SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work/Law program<br/><br/>",
-        "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) . || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /Law program"
+        "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && SOCW#. || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /Law program"
     },
     "SOCW4015": {
         "original": "Prerequisite: 168 UOC overall, SOCW4003, SOCW4011, SOCW4012, SOCW4013, enrolment in a Social Work program and an overall WAM of 70. Corequisite: SOCW4018<br/><br/>",
-        "processed": "168UOC , SOCW4003, SOCW4011, SOCW4012, SOCW4013, (4033) && an overall 70WAM && [SOCW4018]"
+        "processed": "168UOC , SOCW4003, SOCW4011, SOCW4012, SOCW4013, SOCW# && an overall 70WAM && [SOCW4018]"
     },
     "SOCW4016": {
         "original": "Prerequisite: 168 units of credit overall, including SOCW4003, SOCW4011, SOCW4012, and SOCW4013, and enrolment in Social Work program. Corequisite: SOCW4018<br/><br/>",
-        "processed": "168UOC && SOCW4003, SOCW4011, SOCW4012 && SOCW4013 && (4033) && [SOCW4018]"
+        "processed": "168UOC && SOCW4003, SOCW4011, SOCW4012 && SOCW4013 && SOCW# && [SOCW4018]"
     },
     "SOCW4017": {
         "original": "Prerequisite: SOCW4003, SOCW4011, SOCW4012, and enrolment in a Social Work program. Corequisite: SOCW4013. Equivalent: SOCW4014, SOCW4001<br/><br/>",
-        "processed": "SOCW4003 && SOCW4011 && SOCW4012 && (4033) && [SOCW4013]"
+        "processed": "SOCW4003 && SOCW4011 && SOCW4012 && SOCW# && [SOCW4013]"
     },
     "SOCW4018": {
         "original": "Prerequisite: SOCW4003, SOCW4011, SOCW4012, SOCW4013 and enrolment in a Social Work program. Corequisite: SOCW4015 or SOCW4016. Equivalent: SOCW4014, SOCW4001<br/><br/>",
-        "processed": "SOCW4003 && SOCW4011 && SOCW4012 && SOCW4013 && (4033) && [SOCW4015 || SOCW4016]"
+        "processed": "SOCW4003 && SOCW4011 && SOCW4012 && SOCW4013 && SOCW# && [SOCW4015 || SOCW4016]"
     },
     "SOLA1070": {
         "original": "",
@@ -10500,11 +10555,11 @@
     },
     "ZBUS2901": {
         "original": "Prerequisite: Enrolment in CDF Program (4462).<br/><br/>",
-        "processed": "CCDF# (4462)"
+        "processed": "CCDF#"
     },
     "ZBUS2902": {
         "original": "Prerequisite: Enrolment in CDF Program (4462).<br/><br/>",
-        "processed": "CCDF# (4462)"
+        "processed": "CCDF#"
     },
     "ZBUS3101": {
         "original": "Prerequisite ZBUS2101<br/><br/>",
@@ -10520,7 +10575,7 @@
     },
     "ZBUS3104": {
         "original": "Business Program (4405 or 4462) and ZBUS1104<br/><br/>Completion of ZBUS3108 Business Strategy Implementation is assumed prior to undertaking ZBUS3104 Business Capstone (Work Practice Project). <br/><br/>",
-        "processed": "Business Program (4405 || 4462) && ZBUS1104 ZBUS3108 Business Strategy Implementation is assumed prior to undertaking Business Capstone (Work Practice Project)"
+        "processed": "BUSN#"
     },
     "ZBUS3106": {
         "original": "",
@@ -10560,11 +10615,11 @@
     },
     "ZBUS3901": {
         "original": "Prerequisite: Enrolment in CDF Program (4462).<br/><br/>",
-        "processed": "CCDF# (4462)"
+        "processed": "CCDF#"
     },
     "ZBUS3902": {
         "original": "Prerequisite: Enrolment in CDF Program (4462).<br/><br/>",
-        "processed": "CCDF# (4462)"
+        "processed": "CCDF#"
     },
     "ZBUS4001": {
         "original": "Enrolment in Business (Honours) Program 4512.<br/><br/>",
@@ -11296,11 +11351,11 @@
     },
     "ZHSS2901": {
         "original": "Prerequisite: Enrolment in CDF Program (4461)<br/><br/>",
-        "processed": "CCDF# (4461)"
+        "processed": "CCDF#"
     },
     "ZHSS2902": {
         "original": "Prerequisite: Enrolment in CDF Program (4461)<br/><br/>",
-        "processed": "CCDF# (4461)"
+        "processed": "CCDF#"
     },
     "ZHSS3104": {
         "original": "Prerequisite: ZHSS1101 and ZHSS1102<br/><br/>",

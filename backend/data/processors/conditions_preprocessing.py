@@ -10,6 +10,8 @@ Some examples of preprocessing are:
 from functools import reduce
 import json
 import re
+
+from py import process
 from data.utility.data_helpers import read_data, write_data
 
 PREPROCESSED_CONDITIONS = {}
@@ -44,6 +46,7 @@ SPECIALISATION_MAPPINGS = {
     'Media honours': 'MDIA?H',
     'Education honours': '4509',
     'Criminology honours': '4505',
+    'Medical Science': '3991',
     'Politics, Philosophy and Economics': '3478 || 4797',
     'single or double Music (Honours)': 'MUSC?H || 4508',
     'Music program': 'MUSC?? || 4508',
@@ -78,7 +81,7 @@ def preprocess_conditions():
         # Phase 1: Deletions
         processed = delete_exclusions_and_equivalents(processed)
         processed = delete_HTML(processed)
-        note, processed = remove_extraneous_comm_data(processed)
+        note, processed = remove_extraneous_handbook_data(processed)
         if note != "":
             conditions["handbook_note"] = note
         processed = delete_self_referencing(code, processed)
@@ -303,7 +306,7 @@ def convert_program_type(processed: str) -> str:
     """Converts complex phrases into something of the form CODE# for specifying a program type"""
     with open("algorithms/cache/cache_config.json") as f:
         cache: dict[str, list[str]] = json.loads(f.read())
-        processed = reduce((lambda a,b: b), (map_word_to_program_type(processed, string, hashlist[0]) for string, hashlist in cache.items()))
+        processed = reduce((lambda a,b: b if b != processed else a), (map_word_to_program_type(processed, string, hashlist[0]) for string, hashlist in cache.items()))
     return processed
 
 
@@ -337,7 +340,7 @@ def convert_manual_programs_and_specialisations(processed: str) -> str:
     """
     for prog_str, code in SPECIALISATION_MAPPINGS.items():
         processed = re.sub(
-            rf"\s*enrolment\s+in\s+((?:an?\s+)|(?:the\s+))?{prog_str}(?:\s+program)?\s*",
+            rf"(this course is\s*)?(enrolment\s+in|restricted\s+to)\s+((?:an?\s+)|(?:the\s+))?{prog_str}(\s*\({code}\))?(?:\s+program)?\s*",
             f" ({code}) ",
             processed,
             flags=re.IGNORECASE
@@ -504,7 +507,7 @@ def l2_math_courses(processed: str) -> str:
 
 def map_word_to_program_type(processed: str, regex_word: str, type: str):
     return re.sub(
-        rf"(enrolment)? in {regex_word}( studies)? (programs?|single or dual degrees?)",
+        rf"(a )?(enrolment )?(in )?(a )?(single or (double|dual) degree )?{regex_word}( studies)? (programs?( \(.*\))?|single or dual degrees?)",
         type,
         processed,
         flags=re.IGNORECASE,
@@ -532,7 +535,7 @@ def add_note_if_found(processed, find, note, substitute_with, add_to_note):
     processed, number_of_subs = re.subn(find, substitute_with, processed, flags=re.IGNORECASE)
     return processed, note + add_to_note * (number_of_subs > 0)
 
-def remove_extraneous_comm_data(processed):
+def remove_extraneous_handbook_data(processed):
     """Adds handbook notes and removes phrasing
     example: 'good academic standing' -> '' with a handbook_note:'Students must be in Good Academic Standing.' """
     note = ""
@@ -560,6 +563,8 @@ def remove_extraneous_comm_data(processed):
     find = r"Its recommended to seek a progression check prior to application."
     processed, note = add_note_if_found(processed, find, note, r"", find)
     processed, note = add_note_if_found(processed, r"This course is by application only.( )?Please visit Business School website for more information", note, r"", "This course is by application only. Please visit Business School website for more information")
+    
+    processed, note = add_note_if_found(processed, r"or language placement approval", note, r"", "language placement approval can also be used.")
 
     # Commerce degree notes
     processed, note = add_note_if_found(processed, r"(Students are expected to be )?in their final year of a( single or )?(double)?(dual)? Bachelor of Commerce( single or dual)?( degree)?", note, r"COMM#", "Students must be in their final year of a single or double Commerce degree")

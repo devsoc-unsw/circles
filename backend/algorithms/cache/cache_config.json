@@ -23,5 +23,6 @@
     "Media Arts": ["DART#"],
     "Arts": ["ARTS#"],
     "Media": ["MDIA#"],
-    "CDF": ["CCDF#"]
+    "CDF": ["CCDF#"],
+    "Media (Screen && Sound Production)": ["MSSP#"]
 }

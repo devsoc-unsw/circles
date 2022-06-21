@@ -22,31 +22,6 @@
         ],
         "broke at": "Index 2, be"
     },
-    "ANAT1521": {
-        "condition": {
-            "original": "Prerequisite: BABS1201 or DPST1051<br/>This course is restricted to students enrolled in Medical Science (3991) program<br/><br/>",
-            "processed": "BABS1201 || DPST1051 This course is restricted to Medical Science (3991) program"
-        },
-        "tokens": [
-            "(",
-            "BABS1201",
-            "||",
-            "DPST1051",
-            "This",
-            "course",
-            "is",
-            "restricted",
-            "to",
-            "Medical",
-            "Science",
-            "(",
-            "3991",
-            ")",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 5, course"
-    },
     "ARCH1101": {
         "condition": {
             "original": "Currently enrolled in program 3261 Architectural Studies, 3268 Computational Design, or 3635 Civil Engineering with Architecture (Hons)<br/><br/>",
@@ -74,150 +49,6 @@
             ")"
         ],
         "broke at": "Index 2, program"
-    },
-    "ARTS1451": {
-        "condition": {
-            "original": "Prerequisite: ARTS1450 or language placement approval<br/><br/>",
-            "processed": "ARTS1450 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS1450",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
-    },
-    "ARTS1453": {
-        "condition": {
-            "original": "Prerequisite: ARTS1452 or language placement approval<br/><br/>",
-            "processed": "ARTS1452 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS1452",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
-    },
-    "ARTS1481": {
-        "condition": {
-            "original": "Prerequisite: ARTS1480  or language placement approval<br/><br/>",
-            "processed": "ARTS1480 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS1480",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
-    },
-    "ARTS1511": {
-        "condition": {
-            "original": "Prerequisite: ARTS1510 or language placement approval<br/><br/>",
-            "processed": "ARTS1510 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS1510",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
-    },
-    "ARTS1541": {
-        "condition": {
-            "original": "Prerequisite: ARTS1540 or language placement approval<br/><br/>",
-            "processed": "ARTS1540 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS1540",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
-    },
-    "ARTS1571": {
-        "condition": {
-            "original": "Prerequisite: ARTS1570 or language placement approval<br/><br/>",
-            "processed": "ARTS1570 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS1570",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
-    },
-    "ARTS1621": {
-        "condition": {
-            "original": "Prerequisite: ARTS1620 or language placement approval<br/><br/>",
-            "processed": "ARTS1620 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS1620",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
-    },
-    "ARTS1631": {
-        "condition": {
-            "original": "Prerequisite: ARTS1630 or language placement approval<br/><br/>",
-            "processed": "ARTS1630 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS1630",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
-    },
-    "ARTS1661": {
-        "condition": {
-            "original": "Prerequisite: ARTS1660 or language placement approval<br/><br/>",
-            "processed": "ARTS1660 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS1660",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
     },
     "ARTS2050": {
         "condition": {
@@ -250,256 +81,10 @@
         ],
         "broke at": "Index 6, in"
     },
-    "ARTS2450": {
-        "condition": {
-            "original": "Prerequisite: ARTS1451 or language placement approval<br/><br/>",
-            "processed": "ARTS1451 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS1451",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
-    },
-    "ARTS2451": {
-        "condition": {
-            "original": "Prerequisite: ARTS2450 or language placement approval<br/><br/>",
-            "processed": "ARTS2450 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS2450",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
-    },
-    "ARTS2452": {
-        "condition": {
-            "original": "Prerequisite: ARTS3451 or ARTS3452 or ARTS3453 or ARTS3454 or language placement approval<br/><br/>",
-            "processed": "ARTS3451 || ARTS3452 || ARTS3453 || ARTS3454 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS3451",
-            "||",
-            "ARTS3452",
-            "||",
-            "ARTS3453",
-            "||",
-            "ARTS3454",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 10, placement"
-    },
-    "ARTS2461": {
-        "condition": {
-            "original": "Prerequisite: ARTS1453 or language placement approval<br/><br/>",
-            "processed": "ARTS1453 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS1453",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
-    },
-    "ARTS2462": {
-        "condition": {
-            "original": "Prerequisite: ARTS2461 or language placement approval<br/><br/>",
-            "processed": "ARTS2461 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS2461",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
-    },
-    "ARTS2480": {
-        "condition": {
-            "original": "Prerequisite: ARTS1481 or language placement approval<br/><br/>",
-            "processed": "ARTS1481 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS1481",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
-    },
-    "ARTS2481": {
-        "condition": {
-            "original": "Prerequisite: ARTS2480 or language placement approval<br/><br/>",
-            "processed": "ARTS2480 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS2480",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
-    },
-    "ARTS2510": {
-        "condition": {
-            "original": "Prerequisite: ARTS1511 or language placement approval<br/><br/>",
-            "processed": "ARTS1511 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS1511",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
-    },
-    "ARTS2511": {
-        "condition": {
-            "original": "Prerequisite: ARTS2510 or language placement approval<br/><br/>",
-            "processed": "ARTS2510 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS2510",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
-    },
-    "ARTS2570": {
-        "condition": {
-            "original": "Prerequisite: ARTS1571 or language placement approval<br/><br/>",
-            "processed": "ARTS1571 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS1571",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
-    },
-    "ARTS2571": {
-        "condition": {
-            "original": "Prerequisite: ARTS2570 or language placement approval<br/><br/>",
-            "processed": "ARTS2570 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS2570",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
-    },
-    "ARTS2630": {
-        "condition": {
-            "original": "Prerequisite: ARTS1631 or language placement approval<br/><br/>",
-            "processed": "ARTS1631 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS1631",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
-    },
-    "ARTS2631": {
-        "condition": {
-            "original": "Prerequisite: ARTS2630 or language placement approval<br/><br/>",
-            "processed": "ARTS2630 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS2630",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
-    },
-    "ARTS2660": {
-        "condition": {
-            "original": "Prerequisite: ARTS1661 or language placement approval<br/><br/>",
-            "processed": "ARTS1661 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS1661",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
-    },
-    "ARTS2661": {
-        "condition": {
-            "original": "Prerequisite: ARTS2660 or language placement approval<br/><br/>",
-            "processed": "ARTS2660 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS2660",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
-    },
     "ARTS2852": {
         "condition": {
             "original": "Prerequisite: 24 units of credit at level 1, and enrolment in a Politics, Philosophy, and Economics program or a Politics and IR major or a Development Studies major<br/><br/>",
-            "processed": "24UOC in L1 && enrolment in a Politics, Philosophy && Economics program || a Politics && IR major || a Development Studies major"
+            "processed": "24UOC in L1 && enrolment in a Politics, Philosophy && ECON# || a Politics && IR major || a Development Studies major"
         },
         "tokens": [
             "(",
@@ -513,8 +98,7 @@
             "Politics,",
             "Philosophy",
             "&&",
-            "Economics",
-            "program",
+            "ECON#",
             "||",
             "a",
             "Politics",
@@ -1538,7 +1122,7 @@
     "ARTS3130": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Dance Studies or Theatre & Performance Studies. Or 72 UOC overall and enrolment in an Art & Design program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Dance Studies || Theatre && Performance Studies. || 72UOC && enrolment in an Art && Design program"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Dance Studies || Theatre && Performance Studies. || 72UOC && enrolment in an Art && DDES#"
         },
         "tokens": [
             "(",
@@ -1572,8 +1156,7 @@
             "an",
             "Art",
             "&&",
-            "Design",
-            "program",
+            "DDES#",
             ")"
         ],
         "broke at": "Index 11, one"
@@ -1644,7 +1227,7 @@
     "ARTS3212": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Asian Studies, Development Studies, Global Development or History. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Asian Studies, Development Studies, Global Development || History. || 48UOC && (3447)"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Asian Studies, Development Studies, Global Development || History. || 48UOC && enrolment in an INST#"
         },
         "tokens": [
             "(",
@@ -1674,9 +1257,10 @@
             "||",
             "48UOC",
             "&&",
-            "(",
-            "3447",
-            ")",
+            "enrolment",
+            "in",
+            "an",
+            "INST#",
             ")"
         ],
         "broke at": "Index 11, one"
@@ -1861,7 +1445,7 @@
     "ARTS3241": {
         "condition": {
             "original": "Prerequisite: 48 UOC including 6 UOC at lv 1 and 6 UOC at lv 2 in one of the following streams, Development Studies, Environmental Humanities, Geographical Studies or Global Development. Or 48 UOC and enrolment in an International Studies program<br/><br/>",
-            "processed": "48UOC && 6UOC at lv 1 && 6UOC at lv 2 in one of the following streams, Development Studies, Environmental Humanities, Geographical Studies || Global Development. || 48UOC && (3447)"
+            "processed": "48UOC && 6UOC at lv 1 && 6UOC at lv 2 in one of the following streams, Development Studies, Environmental Humanities, Geographical Studies || Global Development. || 48UOC && enrolment in an INST#"
         },
         "tokens": [
             "(",
@@ -1894,9 +1478,10 @@
             "||",
             "48UOC",
             "&&",
-            "(",
-            "3447",
-            ")",
+            "enrolment",
+            "in",
+            "an",
+            "INST#",
             ")"
         ],
         "broke at": "Index 5, lv"
@@ -2339,72 +1924,6 @@
         ],
         "broke at": "Index 11, one"
     },
-    "ARTS3450": {
-        "condition": {
-            "original": "Prerequisite: ARTS2451 or ARTS2462 or language placement approval<br/><br/>",
-            "processed": "ARTS2451 || ARTS2462 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS2451",
-            "||",
-            "ARTS2462",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 6, placement"
-    },
-    "ARTS3451": {
-        "condition": {
-            "original": "Prerequisite: ARTS3450 or language placement approval<br/><br/>",
-            "processed": "ARTS3450 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS3450",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
-    },
-    "ARTS3452": {
-        "condition": {
-            "original": "Prerequisite: ARTS3451 or language placement approval<br/><br/>",
-            "processed": "ARTS3451 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS3451",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
-    },
-    "ARTS3453": {
-        "condition": {
-            "original": "Prerequisite: ARTS3452 or language placement approval<br/><br/>",
-            "processed": "ARTS3452 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS3452",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
-    },
     "ARTS3454": {
         "condition": {
             "original": "Prerequisite: ARTS2452 or ARTS3451 or ARTS3452 or ARTS3453 or\u00a0language placement approval<br/><br/>",
@@ -2426,30 +1945,6 @@
             ")"
         ],
         "broke at": "Index 9, language"
-    },
-    "ARTS3455": {
-        "condition": {
-            "original": "Prerequisite: ARTS2452 or ARTS3451 or ARTS3452 or ARTS3453 or ARTS3454 or language placement approval<br/><br/>",
-            "processed": "ARTS2452 || ARTS3451 || ARTS3452 || ARTS3453 || ARTS3454 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS2452",
-            "||",
-            "ARTS3451",
-            "||",
-            "ARTS3452",
-            "||",
-            "ARTS3453",
-            "||",
-            "ARTS3454",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 12, placement"
     },
     "ARTS3456": {
         "condition": {
@@ -2515,167 +2010,25 @@
         ],
         "broke at": "Index 4, ARTS3453,"
     },
-    "ARTS3462": {
-        "condition": {
-            "original": "Prerequisite: ARTS2452 or ARTS3451 or ARTS3452 or ARTS3453 or ARTS3454 or ARTS3463 or language placement approval<br/><br/>",
-            "processed": "ARTS2452 || ARTS3451 || ARTS3452 || ARTS3453 || ARTS3454 || ARTS3463 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS2452",
-            "||",
-            "ARTS3451",
-            "||",
-            "ARTS3452",
-            "||",
-            "ARTS3453",
-            "||",
-            "ARTS3454",
-            "||",
-            "ARTS3463",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 14, placement"
-    },
-    "ARTS3463": {
-        "condition": {
-            "original": "Prerequisite: ARTS2452 or ARTS3451 or ARTS3452 or ARTS3453 or ARTS3454 or ARTS3462 or language placement approval<br/><br/>",
-            "processed": "ARTS2452 || ARTS3451 || ARTS3452 || ARTS3453 || ARTS3454 || ARTS3462 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS2452",
-            "||",
-            "ARTS3451",
-            "||",
-            "ARTS3452",
-            "||",
-            "ARTS3453",
-            "||",
-            "ARTS3454",
-            "||",
-            "ARTS3462",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 14, placement"
-    },
     "ARTS3480": {
         "condition": {
             "original": "rerequisite:  ARTS2481 or language placement approval<br/><br/>",
-            "processed": "rerequisite: ARTS2481 || language placement approval"
+            "handbook_note": "language placement approval can also be used.",
+            "processed": "rerequisite: ARTS2481"
         },
         "tokens": [
             "(",
             "rerequisite:",
             "ARTS2481",
-            "||",
-            "language",
-            "placement",
-            "approval",
             ")"
         ],
         "broke at": "Index 2, ARTS2481"
     },
-    "ARTS3481": {
-        "condition": {
-            "original": "Prerequisite: ARTS3480 or language placement approval<br/><br/>",
-            "processed": "ARTS3480 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS3480",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
-    },
-    "ARTS3482": {
-        "condition": {
-            "original": "Prerequisite: ARTS3481 or language placement approval<br/><br/>",
-            "processed": "ARTS3481 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS3481",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
-    },
-    "ARTS3483": {
-        "condition": {
-            "original": "Prerequisite: ARTS3481 or language placement approval<br/><br/>",
-            "processed": "ARTS3481 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS3481",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
-    },
-    "ARTS3484": {
-        "condition": {
-            "original": "Prerequisite: ARTS3481 or ARTS3482 or ARTS3483 or language placement approval<br/><br/>",
-            "processed": "ARTS3481 || ARTS3482 || ARTS3483 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS3481",
-            "||",
-            "ARTS3482",
-            "||",
-            "ARTS3483",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 8, placement"
-    },
-    "ARTS3488": {
-        "condition": {
-            "original": "Prerequisite: ARTS3481 or ARTS3482 or ARTS3483 or language placement approval<br/><br/>",
-            "processed": "ARTS3481 || ARTS3482 || ARTS3483 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS3481",
-            "||",
-            "ARTS3482",
-            "||",
-            "ARTS3483",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 8, placement"
-    },
     "ARTS3490": {
         "condition": {
             "original": "Prerequisite: Completion of one of the following - ARTS2481, ARTS3480, ARTS3481, ARTS3482, or ARTS3483, or language placement approval<br/><br/>",
-            "processed": "one of the following - ARTS2481, ARTS3480, ARTS3481, ARTS3482 || ARTS3483 || language placement approval"
+            "handbook_note": "language placement approval can also be used.",
+            "processed": "one of the following - ARTS2481, ARTS3480, ARTS3481, ARTS3482 || ARTS3483,"
         },
         "tokens": [
             "(",
@@ -2689,98 +2042,10 @@
             "ARTS3481,",
             "ARTS3482",
             "||",
-            "ARTS3483",
-            "||",
-            "language",
-            "placement",
-            "approval",
+            "ARTS3483,",
             ")"
         ],
         "broke at": "Index 2, of"
-    },
-    "ARTS3491": {
-        "condition": {
-            "original": "Prerequisite: ARTS3481 or ARTS3482 or ARTS3483 or language placement approval<br/><br/>",
-            "processed": "ARTS3481 || ARTS3482 || ARTS3483 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS3481",
-            "||",
-            "ARTS3482",
-            "||",
-            "ARTS3483",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 8, placement"
-    },
-    "ARTS3510": {
-        "condition": {
-            "original": "Prerequisite: ARTS2511 or language placement approval<br/><br/>",
-            "processed": "ARTS2511 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS2511",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
-    },
-    "ARTS3511": {
-        "condition": {
-            "original": "Prerequisite: ARTS3510 or language placement approval<br/><br/>",
-            "processed": "ARTS3510 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS3510",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
-    },
-    "ARTS3570": {
-        "condition": {
-            "original": "Prerequisite: ARTS2571 or language placement approval<br/><br/>",
-            "processed": "ARTS2571 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS2571",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
-    },
-    "ARTS3571": {
-        "condition": {
-            "original": "Prerequisite: ARTS3570  or language placement approval<br/><br/>",
-            "processed": "ARTS3570 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS3570",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
     },
     "ARTS3577": {
         "condition": {
@@ -2800,86 +2065,6 @@
             ")"
         ],
         "broke at": "Index 4, language"
-    },
-    "ARTS3630": {
-        "condition": {
-            "original": "Prerequisite: ARTS2631 or language placement approval<br/><br/>",
-            "processed": "ARTS2631 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS2631",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
-    },
-    "ARTS3631": {
-        "condition": {
-            "original": "Prerequisite: ARTS3630 or language placement approval<br/><br/>",
-            "processed": "ARTS3630 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS3630",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
-    },
-    "ARTS3632": {
-        "condition": {
-            "original": "Prerequisite: ARTS3631 or language placement approval<br/><br/>",
-            "processed": "ARTS3631 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS3631",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
-    },
-    "ARTS3633": {
-        "condition": {
-            "original": "Prerequisite: ARTS3632 or language placement approval<br/><br/>",
-            "processed": "ARTS3632 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS3632",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
-    },
-    "ARTS3634": {
-        "condition": {
-            "original": "Prerequisite: ARTS3632 or language placement approval<br/><br/>",
-            "processed": "ARTS3632 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS3632",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
     },
     "ARTS3636": {
         "condition": {
@@ -2916,108 +2101,6 @@
         ],
         "broke at": "Index 6, enrolment"
     },
-    "ARTS3638": {
-        "condition": {
-            "original": "Prerequisite: ARTS3632 or language placement approval<br/><br/>",
-            "processed": "ARTS3632 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS3632",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
-    },
-    "ARTS3641": {
-        "condition": {
-            "original": "Prerequisite: ARTS3632 or language placement approval<br/><br/>",
-            "processed": "ARTS3632 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS3632",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
-    },
-    "ARTS3643": {
-        "condition": {
-            "original": "Prerequisite: ARTS3632 or language placement approval<br/><br/>",
-            "processed": "ARTS3632 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS3632",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
-    },
-    "ARTS3660": {
-        "condition": {
-            "original": "Prerequisite: ARTS2661 or language placement approval<br/><br/>",
-            "processed": "ARTS2661 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS2661",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
-    },
-    "ARTS3661": {
-        "condition": {
-            "original": "Prerequisite: ARTS3660 or language placement approval<br/><br/>",
-            "processed": "ARTS3660 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS3660",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 4, placement"
-    },
-    "ARTS3664": {
-        "condition": {
-            "original": "Prerequisite: ARTS3661 or ARTS3662 or ARTS3663 or ARTS3665 or language placement approval<br/><br/>",
-            "processed": "ARTS3661 || ARTS3662 || ARTS3663 || ARTS3665 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS3661",
-            "||",
-            "ARTS3662",
-            "||",
-            "ARTS3663",
-            "||",
-            "ARTS3665",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 10, placement"
-    },
     "ARTS3665": {
         "condition": {
             "original": "Prerequisite: ARTS3661, ARTS3662, ARTS3663, ARTS3664, or langauage placement approval<br/><br/>",
@@ -3039,30 +2122,6 @@
             ")"
         ],
         "broke at": "Index 10, placement"
-    },
-    "ARTS3667": {
-        "condition": {
-            "original": "Prerequisite: ARTS3661 or ARTS3662 or ARTS3663 or ARTS3664 or ARTS3665 or language placement approval<br/><br/>",
-            "processed": "ARTS3661 || ARTS3662 || ARTS3663 || ARTS3664 || ARTS3665 || language placement approval"
-        },
-        "tokens": [
-            "(",
-            "ARTS3661",
-            "||",
-            "ARTS3662",
-            "||",
-            "ARTS3663",
-            "||",
-            "ARTS3664",
-            "||",
-            "ARTS3665",
-            "||",
-            "language",
-            "placement",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 12, placement"
     },
     "ARTS3690": {
         "condition": {
@@ -3121,7 +2180,7 @@
     "ARTS3750": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Development Studies, Geographical Studies or Global Development. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Development Studies, Geographical Studies || Global Development. || 48UOC && (3447)"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Development Studies, Geographical Studies || Global Development. || 48UOC && enrolment in an INST#"
         },
         "tokens": [
             "(",
@@ -3150,9 +2209,10 @@
             "||",
             "48UOC",
             "&&",
-            "(",
-            "3447",
-            ")",
+            "enrolment",
+            "in",
+            "an",
+            "INST#",
             ")"
         ],
         "broke at": "Index 11, one"
@@ -3183,7 +2243,7 @@
     "ARTS3755": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Development Studies, Geographical Studies or Global Development. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Development Studies, Geographical Studies || Global Development. || 48UOC && (3447)"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Development Studies, Geographical Studies || Global Development. || 48UOC && enrolment in an INST#"
         },
         "tokens": [
             "(",
@@ -3212,9 +2272,10 @@
             "||",
             "48UOC",
             "&&",
-            "(",
-            "3447",
-            ")",
+            "enrolment",
+            "in",
+            "an",
+            "INST#",
             ")"
         ],
         "broke at": "Index 11, one"
@@ -3222,7 +2283,7 @@
     "ARTS3756": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Development Studies, Geographical Studies or Global Development. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Development Studies, Geographical Studies || Global Development. || 48UOC && (3447)"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Development Studies, Geographical Studies || Global Development. || 48UOC && enrolment in an INST#"
         },
         "tokens": [
             "(",
@@ -3251,9 +2312,10 @@
             "||",
             "48UOC",
             "&&",
-            "(",
-            "3447",
-            ")",
+            "enrolment",
+            "in",
+            "an",
+            "INST#",
             ")"
         ],
         "broke at": "Index 11, one"
@@ -3383,7 +2445,7 @@
     "ARTS3783": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Politics and International Relations. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Politics && International Relations. || 48UOC && (3447)"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Politics && International Relations. || 48UOC && enrolment in an INST#"
         },
         "tokens": [
             "(",
@@ -3409,9 +2471,10 @@
             "||",
             "48UOC",
             "&&",
-            "(",
-            "3447",
-            ")",
+            "enrolment",
+            "in",
+            "an",
+            "INST#",
             ")"
         ],
         "broke at": "Index 11, one"
@@ -3419,7 +2482,7 @@
     "ARTS3786": {
         "condition": {
             "original": "Prerequisite: 48UOC overall, including 6UOC at level 1 and 6UOC at level 2 in European Studies or History; or 48UOC overall, including 12UOC in German Studies language courses. Or 48UOC and enrolment in an International Studies program<br/><br/>",
-            "processed": "(48UOC && 6UOC in L1 && 6UOC in L2 in European Studies || History) || 48UOC && 12UOC in German Studies language courses. || 48UOC && (3447)"
+            "processed": "(48UOC && 6UOC in L1 && 6UOC in L2 in European Studies || History) || 48UOC && 12UOC in German Studies language courses. || 48UOC && enrolment in an INST#"
         },
         "tokens": [
             "(",
@@ -3451,9 +2514,10 @@
             "||",
             "48UOC",
             "&&",
-            "(",
-            "3447",
-            ")",
+            "enrolment",
+            "in",
+            "an",
+            "INST#",
             ")"
         ],
         "broke at": "Index 11, in"
@@ -3538,7 +2602,7 @@
     "ARTS3812": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Development Studies, or Politics and International Relations. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Development Studies || Politics && International Relations. || 48UOC && (3447)"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Development Studies || Politics && International Relations. || 48UOC && enrolment in an INST#"
         },
         "tokens": [
             "(",
@@ -3567,9 +2631,10 @@
             "||",
             "48UOC",
             "&&",
-            "(",
-            "3447",
-            ")",
+            "enrolment",
+            "in",
+            "an",
+            "INST#",
             ")"
         ],
         "broke at": "Index 11, one"
@@ -3613,7 +2678,7 @@
     "ARTS3819": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Politics and International Relations. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Politics && International Relations. || 48UOC && (3447)"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Politics && International Relations. || 48UOC && enrolment in an INST#"
         },
         "tokens": [
             "(",
@@ -3639,9 +2704,10 @@
             "||",
             "48UOC",
             "&&",
-            "(",
-            "3447",
-            ")",
+            "enrolment",
+            "in",
+            "an",
+            "INST#",
             ")"
         ],
         "broke at": "Index 11, one"
@@ -3845,7 +2911,7 @@
     "ARTS3872": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Media, Culture & Technology or Sociology & Anthropology. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Media, Culture && Technology || Sociology && Anthropology. || 48UOC && (3447)"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Media, Culture && Technology || Sociology && Anthropology. || 48UOC && enrolment in an INST#"
         },
         "tokens": [
             "(",
@@ -3875,9 +2941,10 @@
             "||",
             "48UOC",
             "&&",
-            "(",
-            "3447",
-            ")",
+            "enrolment",
+            "in",
+            "an",
+            "INST#",
             ")"
         ],
         "broke at": "Index 11, one"
@@ -3989,7 +3056,7 @@
     "ARTS3885": {
         "condition": {
             "original": "Prerequisites: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Sociology & Anthropology. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Sociology && Anthropology. || 48UOC && (3447)"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following specialisations, Sociology && Anthropology. || 48UOC && enrolment in an INST#"
         },
         "tokens": [
             "(",
@@ -4014,9 +3081,10 @@
             "||",
             "48UOC",
             "&&",
-            "(",
-            "3447",
-            ")",
+            "enrolment",
+            "in",
+            "an",
+            "INST#",
             ")"
         ],
         "broke at": "Index 11, one"
@@ -4024,7 +3092,7 @@
     "ARTS3886": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC level 1 and 6 UOC level 2 in one of the following streams, Criminology/S&A. Or 48 UOC overall and enrolment in an International Studies program<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Criminology/S&A. || 48UOC && (3447)"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in one of the following streams, Criminology/S&A. || 48UOC && enrolment in an INST#"
         },
         "tokens": [
             "(",
@@ -4047,9 +3115,10 @@
             "||",
             "48UOC",
             "&&",
-            "(",
-            "3447",
-            ")",
+            "enrolment",
+            "in",
+            "an",
+            "INST#",
             ")"
         ],
         "broke at": "Index 11, one"
@@ -4993,7 +4062,7 @@
     "BEIL6010": {
         "condition": {
             "original": "96 UOC and enrolment in FBE  Design program<br/><br/>",
-            "processed": "96UOC && enrolment in FBE Design program"
+            "processed": "96UOC && enrolment in FBE DDES#"
         },
         "tokens": [
             "(",
@@ -5002,8 +4071,7 @@
             "enrolment",
             "in",
             "FBE",
-            "Design",
-            "program",
+            "DDES#",
             ")"
         ],
         "broke at": "Index 4, in"
@@ -5065,7 +4133,7 @@
     "BIOC3671": {
         "condition": {
             "original": "Prerequisite: BIOC2101, BIOC2201. Restricted to Advanced Science programs (3985, 3990, 3962, 3972, 3973, 3986, 3931, 3936)<br/><br/>",
-            "processed": "BIOC2101 && BIOC2201. Restricted to Advanced Science programs (3985, 3990, 3962, 3972, 3973, 3986, 3931, 3936)"
+            "processed": "BIOC2101 && BIOC2201. Restricted to ASCI#"
         },
         "tokens": [
             "(",
@@ -5074,19 +4142,7 @@
             "BIOC2201.",
             "Restricted",
             "to",
-            "Advanced",
-            "Science",
-            "programs",
-            "(",
-            "3985,",
-            "3990,",
-            "3962,",
-            "3972,",
-            "3973,",
-            "3986,",
-            "3931,",
-            "3936",
-            ")",
+            "ASCI#",
             ")"
         ],
         "broke at": "Index 4, Restricted"
@@ -5556,7 +4612,7 @@
     "CHEM1051": {
         "condition": {
             "original": "Prerequisite: Enrolment in the Bachelor of Medicinal Chemistry (3999 or 3992) or Bachelor of Medicinal Chemistry/Law program<br/><br/>",
-            "processed": "Enrolment in the Bachelor of Medicinal Chemistry (3999 || 3992) || Bachelor of Medicinal Chemistry/Law program"
+            "processed": "Enrolment in the Bachelor of Medicinal Chemistry (3999 || 3992) || Bachelor of Medicinal Chemistry/LAWS#"
         },
         "tokens": [
             "(",
@@ -5576,8 +4632,7 @@
             "Bachelor",
             "of",
             "Medicinal",
-            "Chemistry/Law",
-            "program",
+            "Chemistry/LAWS#",
             ")"
         ],
         "broke at": "Index 2, in"
@@ -7573,7 +6628,7 @@
     "EDST2002": {
         "condition": {
             "original": "Prerequisite: 72 uoc overall, including EDST1101, EDST1104, EDST1108, and EDST2003, and enrolment in an Education program. Students must have passed the Literacy and Numeracy Test for Initial Teacher Education in order to enrol into this course<br/><br/>",
-            "processed": "72UOC && EDST1101, EDST1104, EDST1108 && EDST2003 && (4509 || 4056) . must have passed the Literacy && Numeracy Test for Initial Teacher Education"
+            "processed": "72UOC && EDST1101, EDST1104, EDST1108 && EDST2003 && enrolment in an EDST#. must have passed the Literacy && Numeracy Test for Initial Teacher Education"
         },
         "tokens": [
             "(",
@@ -7585,12 +6640,10 @@
             "&&",
             "EDST2003",
             "&&",
-            "(",
-            "4509",
-            "||",
-            "4056",
-            ")",
-            ".",
+            "enrolment",
+            "in",
+            "an",
+            "EDST#.",
             "must",
             "have",
             "passed",
@@ -7647,7 +6700,7 @@
     "EDST2094": {
         "condition": {
             "original": "Prerequisite: 18 units of credit at Level 1, and enrolment in an Education program. Please contact the School of Education for enrolment<br/><br/>",
-            "processed": "18UOC in L1 && (4509 || 4056) . Please contact the School of Education for enrolment"
+            "processed": "18UOC in L1 && enrolment in an EDST#. Please contact the School of Education for enrolment"
         },
         "tokens": [
             "(",
@@ -7655,12 +6708,10 @@
             "in",
             "L1",
             "&&",
-            "(",
-            "4509",
-            "||",
-            "4056",
-            ")",
-            ".",
+            "enrolment",
+            "in",
+            "an",
+            "EDST#.",
             "Please",
             "contact",
             "the",
@@ -7671,7 +6722,64 @@
             "enrolment",
             ")"
         ],
-        "broke at": "Index 11, Please"
+        "broke at": "Index 6, in"
+    },
+    "EDST4080": {
+        "condition": {
+            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in an Education program<br/><br/>",
+            "processed": "78UOC && EDST2002 && enrolment in an EDST#"
+        },
+        "tokens": [
+            "(",
+            "78UOC",
+            "&&",
+            "EDST2002",
+            "&&",
+            "enrolment",
+            "in",
+            "an",
+            "EDST#",
+            ")"
+        ],
+        "broke at": "Index 6, in"
+    },
+    "EDST4084": {
+        "condition": {
+            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in an Education program<br/><br/>",
+            "processed": "78UOC && EDST2002 && enrolment in an EDST#"
+        },
+        "tokens": [
+            "(",
+            "78UOC",
+            "&&",
+            "EDST2002",
+            "&&",
+            "enrolment",
+            "in",
+            "an",
+            "EDST#",
+            ")"
+        ],
+        "broke at": "Index 6, in"
+    },
+    "EDST4096": {
+        "condition": {
+            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in an Education program<br/><br/>",
+            "processed": "78UOC && EDST2002 && enrolment in an EDST#"
+        },
+        "tokens": [
+            "(",
+            "78UOC",
+            "&&",
+            "EDST2002",
+            "&&",
+            "enrolment",
+            "in",
+            "an",
+            "EDST#",
+            ")"
+        ],
+        "broke at": "Index 6, in"
     },
     "EDST6700": {
         "condition": {
@@ -8122,7 +7230,7 @@
     "EDST6760": {
         "condition": {
             "original": "Prerequisite: EDST2002, EDST4084, 12 uoc Teaching Method 1 courses, and enrolment in an Education program. Students must have passed LANTITE.\u00a0 Students must have sufficient subject content knowledge in their teaching areas<br/><br/>",
-            "processed": "EDST2002 && EDST4084 && 12UOC Teaching Method 1 courses && (4509 || 4056) . must have passed LANTITE.\u00a0 must have sufficient subject content knowledge in their teaching areas"
+            "processed": "EDST2002 && EDST4084 && 12UOC Teaching Method 1 courses && enrolment in an EDST#. must have passed LANTITE.\u00a0 must have sufficient subject content knowledge in their teaching areas"
         },
         "tokens": [
             "(",
@@ -8136,12 +7244,10 @@
             "1",
             "courses",
             "&&",
-            "(",
-            "4509",
-            "||",
-            "4056",
-            ")",
-            ".",
+            "enrolment",
+            "in",
+            "an",
+            "EDST#.",
             "must",
             "have",
             "passed",
@@ -8193,7 +7299,7 @@
     "EDST6765": {
         "condition": {
             "original": "Prerequisite: EDST4080, EDST4096, EDST6760, 24 uoc Teaching Method courses, and enrolment in an Education program. Students must have passed LANTITE.\u00a0Students must have sufficient subject content knowledge in their teaching areas.\u00a0Excluded: EDST4081<br/><br/>",
-            "processed": "EDST4080 && EDST4096 && EDST6760 && 24UOC Teaching Method courses && (4509 || 4056) . must have passed LANTITE.\u00a0 must have sufficient subject content knowledge in their teaching areas"
+            "processed": "EDST4080 && EDST4096 && EDST6760 && 24UOC Teaching Method courses && enrolment in an EDST#. must have passed LANTITE.\u00a0 must have sufficient subject content knowledge in their teaching areas"
         },
         "tokens": [
             "(",
@@ -8208,12 +7314,10 @@
             "Method",
             "courses",
             "&&",
-            "(",
-            "4509",
-            "||",
-            "4056",
-            ")",
-            ".",
+            "enrolment",
+            "in",
+            "an",
+            "EDST#.",
             "must",
             "have",
             "passed",
@@ -8737,29 +7841,14 @@
     "INST2003": {
         "condition": {
             "original": "Prerequisite: Enrolment in an International Studies program (pre 2017). Or INST1005 and INST1006 and enrolment in an International Studies program (2017+). Or ARTS1250 and enrolment in a Geographical Studies major or minor<br/><br/>",
-            "processed": "(3447) (2017). || INST1005 && INST1006 && (3447) (2017+). || ARTS1250 && enrolment in a Geographical Studies major || minor"
+            "processed": "Enrolment in an INST#. || ARTS1250 && enrolment in a Geographical Studies major || minor"
         },
         "tokens": [
             "(",
-            "(",
-            "3447",
-            ")",
-            "(",
-            "2017",
-            ")",
-            ".",
-            "||",
-            "INST1005",
-            "&&",
-            "INST1006",
-            "&&",
-            "(",
-            "3447",
-            ")",
-            "(",
-            "2017+",
-            ")",
-            ".",
+            "Enrolment",
+            "in",
+            "an",
+            "INST#.",
             "||",
             "ARTS1250",
             "&&",
@@ -8773,7 +7862,7 @@
             "minor",
             ")"
         ],
-        "broke at": "Index 8, ||"
+        "broke at": "Index 2, in"
     },
     "INTA2004": {
         "condition": {
@@ -8811,7 +7900,7 @@
     "LAWS1052": {
         "condition": {
             "original": "This course is strictly for students undertaking Law programs only. Corequisite : LAWS1055<br/><br/>",
-            "processed": "This course is strictly for undertaking Law programs only && [LAWS1055]"
+            "processed": "This course is strictly for undertaking LAWS# only && [LAWS1055]"
         },
         "tokens": [
             "(",
@@ -8821,8 +7910,7 @@
             "strictly",
             "for",
             "undertaking",
-            "Law",
-            "programs",
+            "LAWS#",
             "only",
             "&&",
             "[",
@@ -12152,30 +11240,121 @@
         ],
         "broke at": "Index 2, in"
     },
-    "MDIA1004": {
+    "MDIA1000": {
         "condition": {
-            "original": "Prerequisite: Enrolment in a Media program or Creative Writing Major<br/><br/>",
-            "processed": "Enrolment in a Media program || Creative Writing Major"
+            "original": "Prerequisite: Enrolment in a single or dual award Media program<br/><br/>",
+            "processed": "Enrolment in a single || dual award MDIA#"
         },
         "tokens": [
             "(",
             "Enrolment",
             "in",
             "a",
-            "Media",
-            "program",
+            "single",
+            "||",
+            "dual",
+            "award",
+            "MDIA#",
+            ")"
+        ],
+        "broke at": "Index 2, in"
+    },
+    "MDIA1002": {
+        "condition": {
+            "original": "Prerequisite: Enrolment in a single or dual award Media program<br/><br/>",
+            "processed": "Enrolment in a single || dual award MDIA#"
+        },
+        "tokens": [
+            "(",
+            "Enrolment",
+            "in",
+            "a",
+            "single",
+            "||",
+            "dual",
+            "award",
+            "MDIA#",
+            ")"
+        ],
+        "broke at": "Index 2, in"
+    },
+    "MDIA1003": {
+        "condition": {
+            "original": "Prerequisite: Enrolment in a single or dual award Media program<br/><br/>",
+            "processed": "Enrolment in a single || dual award MDIA#"
+        },
+        "tokens": [
+            "(",
+            "Enrolment",
+            "in",
+            "a",
+            "single",
+            "||",
+            "dual",
+            "award",
+            "MDIA#",
+            ")"
+        ],
+        "broke at": "Index 2, in"
+    },
+    "MDIA1004": {
+        "condition": {
+            "original": "Prerequisite: Enrolment in a Media program or Creative Writing Major<br/><br/>",
+            "processed": "MDIA# || Creative Writing Major"
+        },
+        "tokens": [
+            "(",
+            "MDIA#",
             "||",
             "Creative",
             "Writing",
             "Major",
             ")"
         ],
+        "broke at": "Index 4, Writing"
+    },
+    "MDIA1005": {
+        "condition": {
+            "original": "Prerequisite: Enrolment in a single or dual award Media program<br/><br/>",
+            "processed": "Enrolment in a single || dual award MDIA#"
+        },
+        "tokens": [
+            "(",
+            "Enrolment",
+            "in",
+            "a",
+            "single",
+            "||",
+            "dual",
+            "award",
+            "MDIA#",
+            ")"
+        ],
         "broke at": "Index 2, in"
     },
-    "MDIA2010": {
+    "MDIA1007": {
         "condition": {
-            "original": "Prerequisite: 24 units of credit at level 1, and enrolment in a single or dual award Media program or enrolment in a Creative Writing major or minor. Equivalent: MDIA3001<br/><br/>",
-            "processed": "24UOC in L1 && (4510 || 3454 || 3438 || 3453) || enrolment in a Creative Writing major || minor"
+            "original": "Prerequisite: Enrolment in a single or dual award Media program<br/><br/>",
+            "processed": "Enrolment in a single || dual award MDIA#"
+        },
+        "tokens": [
+            "(",
+            "Enrolment",
+            "in",
+            "a",
+            "single",
+            "||",
+            "dual",
+            "award",
+            "MDIA#",
+            ")"
+        ],
+        "broke at": "Index 2, in"
+    },
+    "MDIA2008": {
+        "condition": {
+            "original": "Prerequisite: 24 units of credit at level 1, and enrolment in a single or dual award Media program<br/><br/>",
+            "processed": "24UOC in L1 && enrolment in a single || dual award MDIA#"
         },
         "tokens": [
             "(",
@@ -12183,15 +11362,37 @@
             "in",
             "L1",
             "&&",
+            "enrolment",
+            "in",
+            "a",
+            "single",
+            "||",
+            "dual",
+            "award",
+            "MDIA#",
+            ")"
+        ],
+        "broke at": "Index 6, in"
+    },
+    "MDIA2010": {
+        "condition": {
+            "original": "Prerequisite: 24 units of credit at level 1, and enrolment in a single or dual award Media program or enrolment in a Creative Writing major or minor. Equivalent: MDIA3001<br/><br/>",
+            "processed": "24UOC in L1 && enrolment in a single || dual award MDIA# || enrolment in a Creative Writing major || minor"
+        },
+        "tokens": [
             "(",
-            "4510",
+            "24UOC",
+            "in",
+            "L1",
+            "&&",
+            "enrolment",
+            "in",
+            "a",
+            "single",
             "||",
-            "3454",
-            "||",
-            "3438",
-            "||",
-            "3453",
-            ")",
+            "dual",
+            "award",
+            "MDIA#",
             "||",
             "enrolment",
             "in",
@@ -12203,7 +11404,7 @@
             "minor",
             ")"
         ],
-        "broke at": "Index 16, in"
+        "broke at": "Index 6, in"
     },
     "MDIA2011": {
         "condition": {
@@ -12349,17 +11550,13 @@
     "MDIA3007": {
         "condition": {
             "original": "Prerequisite: 48 units of credit overall, and enrolment in a Media program, or a Creative Writing, English, FIlm Studies or MCT major or minor. Students must have a WAM of 65 to be eligible for this course.<br/><br/>",
-            "processed": "48UOC && enrolment in a Media program || a Creative Writing, English, FIlm Studies || MCT major || minor. must have 65WAM to be eligible for this course"
+            "processed": "48UOC && MDIA# || a Creative Writing, English, FIlm Studies || MCT major || minor. must have 65WAM to be eligible for this course"
         },
         "tokens": [
             "(",
             "48UOC",
             "&&",
-            "enrolment",
-            "in",
-            "a",
-            "Media",
-            "program",
+            "MDIA#",
             "||",
             "a",
             "Creative",
@@ -12383,7 +11580,7 @@
             "course",
             ")"
         ],
-        "broke at": "Index 4, in"
+        "broke at": "Index 6, Creative"
     },
     "MDIA3010": {
         "condition": {
@@ -12579,7 +11776,7 @@
     "MUSC2801": {
         "condition": {
             "original": "Prerequisite: Enrolment in the Music Creative Practice Stream in a Music program<br/><br/>",
-            "processed": "Enrolment in the Music Creative Practice Stream in a Music program"
+            "processed": "Enrolment in the Music Creative Practice Stream MUSC#"
         },
         "tokens": [
             "(",
@@ -12590,10 +11787,7 @@
             "Creative",
             "Practice",
             "Stream",
-            "in",
-            "a",
-            "Music",
-            "program",
+            "MUSC#",
             ")"
         ],
         "broke at": "Index 2, in"
@@ -12601,7 +11795,7 @@
     "MUSC2802": {
         "condition": {
             "original": "Prerequisite: 36uoc at Level 1 and enrolment in the Music Pedagogy stream in a Music Program. Note: This course is for instrumental or vocal students. Students who entered the music programme as composers may be required to audition.<br/><br/>",
-            "processed": "36UOC in L1 && enrolment in the Music Pedagogy stream in a Music Program. Note: This course is for instrumental || vocal . who entered the music programme as composers may be required to audition"
+            "processed": "36UOC in L1 && enrolment in the Music Pedagogy stream MUSC#. Note: This course is for instrumental || vocal . who entered the MUSC#me as composers may be required to audition"
         },
         "tokens": [
             "(",
@@ -12615,10 +11809,7 @@
             "Music",
             "Pedagogy",
             "stream",
-            "in",
-            "a",
-            "Music",
-            "Program.",
+            "MUSC#.",
             "Note:",
             "This",
             "course",
@@ -12631,8 +11822,7 @@
             "who",
             "entered",
             "the",
-            "music",
-            "programme",
+            "MUSC#me",
             "as",
             "composers",
             "may",
@@ -12647,7 +11837,7 @@
     "MUSC2803": {
         "condition": {
             "original": "Prerequisites: 36uoc at level 1 and enrolment a Music program, or Music major or minor<br/><br/>",
-            "processed": "36UOC in L1 && enrolment a Music program || Music major || minor"
+            "processed": "36UOC in L1 && MUSC# || Music major || minor"
         },
         "tokens": [
             "(",
@@ -12655,10 +11845,7 @@
             "in",
             "L1",
             "&&",
-            "enrolment",
-            "a",
-            "Music",
-            "program",
+            "MUSC#",
             "||",
             "Music",
             "major",
@@ -12666,12 +11853,12 @@
             "minor",
             ")"
         ],
-        "broke at": "Index 6, a"
+        "broke at": "Index 8, major"
     },
     "MUSC3706": {
         "condition": {
             "original": "Prerequisite: MUSC2702 or MUSC2703 (12 uoc), and enrolment in a Music Creative Practice or Music Pedagogy stream in a Music program.<br/><br/>",
-            "processed": "MUSC2702 || MUSC2703 (12UOC) && enrolment in a Music Creative Practice || Music Pedagogy stream in a Music program"
+            "processed": "MUSC2702 || MUSC2703 (12UOC) && enrolment in a Music Creative Practice || Music Pedagogy stream MUSC#"
         },
         "tokens": [
             "(",
@@ -12692,10 +11879,7 @@
             "Music",
             "Pedagogy",
             "stream",
-            "in",
-            "a",
-            "Music",
-            "program",
+            "MUSC#",
             ")"
         ],
         "broke at": "Index 9, in"
@@ -12904,7 +12088,7 @@
     "MUSC3808": {
         "condition": {
             "original": "Prerequisite: Enrolment in a Music Pedagogy stream in a Music program. Note: This course is for instrumental or vocal students. Students who entered the music programme as composers may be required to audition.<br/><br/>",
-            "processed": "Enrolment in a Music Pedagogy stream in a Music program. Note: This course is for instrumental || vocal . who entered the music programme as composers may be required to audition"
+            "processed": "Enrolment in a Music Pedagogy stream MUSC#. Note: This course is for instrumental || vocal . who entered the MUSC#me as composers may be required to audition"
         },
         "tokens": [
             "(",
@@ -12914,10 +12098,7 @@
             "Music",
             "Pedagogy",
             "stream",
-            "in",
-            "a",
-            "Music",
-            "program.",
+            "MUSC#.",
             "Note:",
             "This",
             "course",
@@ -12930,8 +12111,7 @@
             "who",
             "entered",
             "the",
-            "music",
-            "programme",
+            "MUSC#me",
             "as",
             "composers",
             "may",
@@ -13146,7 +12326,7 @@
     "MUSC4102": {
         "condition": {
             "original": "Prerequisite: MUSC4101, and enrolment in a Music program. Or 48 uoc overall including MUSC1602 or MUSC1604, and MUSC2116 and enrolment in a Music major in an Arts program<br/><br/>",
-            "processed": "MUSC4101 && (MUSC?? || 4508) . || 48UOC && MUSC1602 || MUSC1604 && MUSC2116 && enrolment in a Music major in an Arts program"
+            "processed": "MUSC4101 && (MUSC?? || 4508) . || 48UOC && MUSC1602 || MUSC1604 && MUSC2116 && enrolment in a Music major in an ARTS#"
         },
         "tokens": [
             "(",
@@ -13174,8 +12354,7 @@
             "major",
             "in",
             "an",
-            "Arts",
-            "program",
+            "ARTS#",
             ")"
         ],
         "broke at": "Index 9, ||"
@@ -13183,7 +12362,7 @@
     "MUSC4705": {
         "condition": {
             "original": "Prerequisite: MUSC3704 or MUSC3706 (12 uoc), and enrolment in a Music Creative Practice stream in a Music program.<br/><br/>",
-            "processed": "MUSC3704 || MUSC3706 (12UOC) && enrolment in a Music Creative Practice stream in a Music program"
+            "processed": "MUSC3704 || MUSC3706 (12UOC) && enrolment in a Music Creative Practice stream MUSC#"
         },
         "tokens": [
             "(",
@@ -13201,10 +12380,7 @@
             "Creative",
             "Practice",
             "stream",
-            "in",
-            "a",
-            "Music",
-            "program",
+            "MUSC#",
             ")"
         ],
         "broke at": "Index 9, in"
@@ -13212,7 +12388,7 @@
     "MUSC4706": {
         "condition": {
             "original": "Prerequisite: Enrolment in a Music or Arts program<br/><br/>",
-            "processed": "Enrolment in a Music || Arts program"
+            "processed": "Enrolment in a Music || ARTS#"
         },
         "tokens": [
             "(",
@@ -13221,8 +12397,7 @@
             "a",
             "Music",
             "||",
-            "Arts",
-            "program",
+            "ARTS#",
             ")"
         ],
         "broke at": "Index 2, in"
@@ -13847,6 +13022,68 @@
         ],
         "broke at": "Index 2, complete"
     },
+    "PPEC1001": {
+        "condition": {
+            "original": "Prerequisite: Enrolment in a Politics, Philosophy and Economics program<br/><br/>",
+            "processed": "Enrolment in a Politics, Philosophy && ECON#"
+        },
+        "tokens": [
+            "(",
+            "Enrolment",
+            "in",
+            "a",
+            "Politics,",
+            "Philosophy",
+            "&&",
+            "ECON#",
+            ")"
+        ],
+        "broke at": "Index 2, in"
+    },
+    "PPEC2001": {
+        "condition": {
+            "original": "Prerequisite: 24 units of credit overall, including PPEC1001, and enrolment in a Politics, Philosophy and Economics program<br/><br/>",
+            "processed": "24UOC && PPEC1001 && enrolment in a Politics, Philosophy && ECON#"
+        },
+        "tokens": [
+            "(",
+            "24UOC",
+            "&&",
+            "PPEC1001",
+            "&&",
+            "enrolment",
+            "in",
+            "a",
+            "Politics,",
+            "Philosophy",
+            "&&",
+            "ECON#",
+            ")"
+        ],
+        "broke at": "Index 6, in"
+    },
+    "PPEC3001": {
+        "condition": {
+            "original": "Prerequisite: 72 units of credit overall, including PPEC2001, and enrolment in a Politics, Philosophy and Economics program<br/><br/>",
+            "processed": "72UOC && PPEC2001 && enrolment in a Politics, Philosophy && ECON#"
+        },
+        "tokens": [
+            "(",
+            "72UOC",
+            "&&",
+            "PPEC2001",
+            "&&",
+            "enrolment",
+            "in",
+            "a",
+            "Politics,",
+            "Philosophy",
+            "&&",
+            "ECON#",
+            ")"
+        ],
+        "broke at": "Index 6, in"
+    },
     "PSYC3199": {
         "condition": {
             "original": "Prerequisite: enrolled in a Science program (single or dual) and completing a Psychology major. Must pass Preparation for WIL modules prior to enrolment. Placement must be related to the student\u2019s Psychology major and approved by the School of Psychology prior to enrolment. <br/>Pre-requisite: 48 units of credit and a minimum 65 WAM. <br/>It is the student\u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year.<br/><br/>",
@@ -14320,7 +13557,7 @@
     "SOCW3009": {
         "condition": {
             "original": "Prerequisite: ARTS1753 or ARTS1870 or ARTS1871 and PSYC1001, SOCW2006, SOCW2008, SOCW2009, SOCW2100, SOCW3012, SOSS/SRAP1000, SOSS/SRAP1001, ARTS2871 or SRAP2002, and enrolment in a Social Work program. Corequisite: SOCW3013<br/><br/>",
-            "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOCW3012 || SOSS/SRAP1000 || SOSS/SRAP1001 || ARTS2871 || SRAP2002 && (4033) && [SOCW3013]"
+            "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOCW3012 || SOSS/SRAP1000 || SOSS/SRAP1001 || ARTS2871 || SRAP2002 && SOCW# && [SOCW3013]"
         },
         "tokens": [
             "(",
@@ -14350,9 +13587,7 @@
             "||",
             "SRAP2002",
             "&&",
-            "(",
-            "4033",
-            ")",
+            "SOCW#",
             "&&",
             "[",
             "SOCW3013",
@@ -14364,7 +13599,7 @@
     "SOCW3012": {
         "condition": {
             "original": "Prerequisite: ARTS1753 or ARTS1870 or ARTS1871 and PSYC1001, SOCW2006, SOCW2008, SOCW2009, SOCW2100, SOSS/SRAP1000, SOSS/SRAP1001,  ARTS2871 or SOSS/SRAP2002, and enrolment in a Social Work program. Equivalent: SOCW3001 and SOCW3011<br/><br/>",
-            "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOSS/SRAP1000 || SOSS/SRAP1001 || ARTS2871 || SOSS/SRAP2002 && (4033)"
+            "processed": "ARTS1753 || ARTS1870 || ARTS1871 && PSYC1001 || SOCW2006 || SOCW2008 || SOCW2009 || SOCW2100 || SOSS/SRAP1000 || SOSS/SRAP1001 || ARTS2871 || SOSS/SRAP2002 && SOCW#"
         },
         "tokens": [
             "(",
@@ -14392,9 +13627,7 @@
             "||",
             "SOSS/SRAP2002",
             "&&",
-            "(",
-            "4033",
-            ")",
+            "SOCW#",
             ")"
         ],
         "broke at": "Index 18, ||"
@@ -14402,7 +13635,7 @@
     "SOCW4003": {
         "condition": {
             "original": "Prerequisite: SOCW3006, SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work program. Or SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work/Law program<br/><br/>",
-            "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) . || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /Law program"
+            "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && SOCW#. || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /Law program"
         },
         "tokens": [
             "(",
@@ -14414,10 +13647,7 @@
             "||",
             "ARTS2871",
             "&&",
-            "(",
-            "4033",
-            ")",
-            ".",
+            "SOCW#.",
             "||",
             "SOCW3010",
             "&&",
@@ -14437,7 +13667,7 @@
     "SOCW4011": {
         "condition": {
             "original": "Prerequisite: SOCW3006, SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work program. Or SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work/Law program<br/><br/>",
-            "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) . || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /Law program"
+            "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && SOCW#. || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /Law program"
         },
         "tokens": [
             "(",
@@ -14449,10 +13679,7 @@
             "||",
             "ARTS2871",
             "&&",
-            "(",
-            "4033",
-            ")",
-            ".",
+            "SOCW#.",
             "||",
             "SOCW3010",
             "&&",
@@ -14472,7 +13699,7 @@
     "SOCW4012": {
         "condition": {
             "original": "Prerequisite: SOCW3006, SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work program. Or SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work/Law program<br/><br/>",
-            "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) . || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /Law program"
+            "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && SOCW#. || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /Law program"
         },
         "tokens": [
             "(",
@@ -14484,10 +13711,7 @@
             "||",
             "ARTS2871",
             "&&",
-            "(",
-            "4033",
-            ")",
-            ".",
+            "SOCW#.",
             "||",
             "SOCW3010",
             "&&",
@@ -14507,7 +13731,7 @@
     "SOCW4013": {
         "condition": {
             "original": "Prerequisite: SOCW3006, SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work program. Or SOCW3010, and SOSS/SRAP3000 or ARTS2871, and enrolment in a Social Work/Law program<br/><br/>",
-            "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) . || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /Law program"
+            "processed": "SOCW3006 && SOCW3010 && SOSS/SRAP3000 || ARTS2871 && SOCW#. || SOCW3010 && SOSS/SRAP3000 || ARTS2871 && (4033) /Law program"
         },
         "tokens": [
             "(",
@@ -14519,10 +13743,7 @@
             "||",
             "ARTS2871",
             "&&",
-            "(",
-            "4033",
-            ")",
-            ".",
+            "SOCW#.",
             "||",
             "SOCW3010",
             "&&",
@@ -14542,7 +13763,7 @@
     "SOCW4015": {
         "condition": {
             "original": "Prerequisite: 168 UOC overall, SOCW4003, SOCW4011, SOCW4012, SOCW4013, enrolment in a Social Work program and an overall WAM of 70. Corequisite: SOCW4018<br/><br/>",
-            "processed": "168UOC , SOCW4003, SOCW4011, SOCW4012, SOCW4013, (4033) && an overall 70WAM && [SOCW4018]"
+            "processed": "168UOC , SOCW4003, SOCW4011, SOCW4012, SOCW4013, SOCW# && an overall 70WAM && [SOCW4018]"
         },
         "tokens": [
             "(",
@@ -14552,9 +13773,7 @@
             "SOCW4011,",
             "SOCW4012,",
             "SOCW4013,",
-            "(",
-            "4033",
-            ")",
+            "SOCW#",
             "&&",
             "an",
             "overall",
@@ -14570,7 +13789,7 @@
     "SOCW4016": {
         "condition": {
             "original": "Prerequisite: 168 units of credit overall, including SOCW4003, SOCW4011, SOCW4012, and SOCW4013, and enrolment in Social Work program. Corequisite: SOCW4018<br/><br/>",
-            "processed": "168UOC && SOCW4003, SOCW4011, SOCW4012 && SOCW4013 && (4033) && [SOCW4018]"
+            "processed": "168UOC && SOCW4003, SOCW4011, SOCW4012 && SOCW4013 && SOCW# && [SOCW4018]"
         },
         "tokens": [
             "(",
@@ -14582,9 +13801,7 @@
             "&&",
             "SOCW4013",
             "&&",
-            "(",
-            "4033",
-            ")",
+            "SOCW#",
             "&&",
             "[",
             "SOCW4018",
@@ -15114,42 +14331,6 @@
             ")"
         ],
         "broke at": "Index 2, program"
-    },
-    "ZBUS3104": {
-        "condition": {
-            "original": "Business Program (4405 or 4462) and ZBUS1104<br/><br/>Completion of ZBUS3108 Business Strategy Implementation is assumed prior to undertaking ZBUS3104 Business Capstone (Work Practice Project). <br/><br/>",
-            "processed": "Business Program (4405 || 4462) && ZBUS1104 ZBUS3108 Business Strategy Implementation is assumed prior to undertaking Business Capstone (Work Practice Project)"
-        },
-        "tokens": [
-            "(",
-            "Business",
-            "Program",
-            "(",
-            "4405",
-            "||",
-            "4462",
-            ")",
-            "&&",
-            "ZBUS1104",
-            "ZBUS3108",
-            "Business",
-            "Strategy",
-            "Implementation",
-            "is",
-            "assumed",
-            "prior",
-            "to",
-            "undertaking",
-            "Business",
-            "Capstone",
-            "(",
-            "Work",
-            "Practice",
-            "Project",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 2, Program"
     },
     "ZBUS4001": {
         "condition": {

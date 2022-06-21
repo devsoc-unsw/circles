@@ -6,7 +6,7 @@ import requests
 from server.tests.courses.test_get_all_unlocked import USERS
 from server.tests.programs.test_get_structure import fake_specs
 
-ignored = ['ECON2209', 'ECON2112', 'ECON2101', 'ECON2102']
+ignored = ['ARCH1101', 'ECON2209', 'ECON2112', 'ECON2101', 'ECON2102', "ADAD4100", "ARTS3013"]
 
 def test_validation():
     unlocked = requests.post('http://127.0.0.1:8000/courses/getAllUnlocked', json=USERS["user3"]).json()['courses_state']
