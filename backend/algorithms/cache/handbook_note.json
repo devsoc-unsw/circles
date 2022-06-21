@@ -76,6 +76,7 @@
     "COMM3202": "This course is by application only. Please contact the Co-op office for more information. Excluded:DIPP1510, COMM2222, Business Co-Op programs.",
     "COMM3303": "This course is by application only.",
     "COMM3900": "You must have completed all First Year core",
+    "COMM3999": "Students must be in their final year",
     "COMP3901": "You must complete all first and second year core requirements of a CSE program and obtain agreement from a suitable CSE academic supervisor to enrol in this course.",
     "COMP3902": "You must complete all first and second year core requirements of a CSE program and obtain agreement from a suitable CSE academic supervisor to enrol in this course.",
     "COMP4920": "96UOC must be from Computer Science courses",
@@ -114,5 +115,6 @@
     "MGMT4739": "enrolment in the Human Resource Management Honours plan is required",
     "SENG2991": "Must be in an approved workplace arrangement",
     "SENG3991": "Must currently be enrolled in the Co-op program and completed attendance of IT Reflection Workshop (facilitated by Co-op Program)",
-    "SENG3992": "Must currently be enrolled in the Co-op program"
+    "SENG3992": "Must currently be enrolled in the Co-op program",
+    "ZHSS3231": "Head of school approval can also be used."
 }

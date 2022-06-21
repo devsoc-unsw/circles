@@ -42,7 +42,7 @@ def fix_conditions():
     CONDITIONS["COMM3202"] = COMM_3202(CONDITIONS["COMM3202"])
     CONDITIONS["COMM3500"][PROCESSED] = COMM_3500()
     CONDITIONS["COMM3900"] = COMM_3900(CONDITIONS["COMM3900"])
-
+    CONDITIONS["COMM3999"] = COMM_3999(CONDITIONS["COMM3999"])
     # Updates the files with the modified dictionaries
     data_helpers.write_data(
         CONDITIONS, "data/final_data/conditionsProcessed.json")

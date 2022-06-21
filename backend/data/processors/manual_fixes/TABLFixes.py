@@ -29,6 +29,7 @@ def fix_conditions():
     """ Functions to apply manual fixes """
 
     CONDITIONS["TABL2710"][PROCESSED] = TABL_2710()
+    CONDITIONS["TABL2712"][PROCESSED] = TABL_2712()
     CONDITIONS["TABL2741"][PROCESSED] = TABL_2741()
     CONDITIONS["TABL3755"][PROCESSED] = TABL_3755()
     CONDITIONS["TABL5805"][PROCESSED] = TABL_5805()
@@ -84,6 +85,11 @@ def TABL_5805():
 
     return "9245 || 9255 || 9257 || TABLBS9250 || TABLDS9250 || TABLAH4501"
 
-
+def TABL_2712():
+    """
+        "original": "Prerequisite:LEGT1710 or TABL1710 or TABL 2710 or 12 UOC offered by the UNSW Business School.<br/><br/>",
+        "processed": "LEGT1710 || TABL1710 || TABL 2710 || 12UOC in F Business"
+    """
+    return "LEGT1710 || TABL1710 || TABL2710 || 12UOC in F Business"
 if __name__ == "__main__":
     fix_conditions()

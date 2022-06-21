@@ -6,7 +6,20 @@ import requests
 from server.tests.courses.test_get_all_unlocked import USERS
 from server.tests.programs.test_get_structure import fake_specs
 
-ignored = ['ARCH1101', 'ECON2209', 'ECON2112', 'ECON2101', 'ECON2102', 'ADAD4100', 'ARTS3', 'AVIA2117', 'AVIA3199', 'BABS3021', 'BABS3199', 'BEES', 'BEIL6', 'BENV6713', 'BIOC3', 'BIOM4951', 'BIOS3161', 'BLDG', 'CDEV3101', 'CODE3100', 'CEIC', 'CHEM', 'CRIM2021', 'CRIM3', 'CVEN4701', 'DART2151', 'DATA3001', 'DP', 'EDST6716', 'EDST6761', 'EDST6771', 'GMAT4061', 'HESC3541', 'HUMS1007', 'LAWS', 'MATS3', 'MDIA', 'MICR3621', 'MMAN49', 'MUSC', 'NEUR2201']
+# some of these should probs not be ignored
+ignored = [
+    'ARCH1101', 'ECON2209', 'ECON2112', 'ECON2101',
+    'ECON2102', 'ADAD4100', 'ARTS3', 'AVIA2117', 'BABS3021',
+    'BEES', 'BEIL6', 'BENV6713', 'BIOC3', 'BIOM4951',
+    'BIOS3161', 'BLDG', 'CDEV3101', 'CODE3100', 'CEIC',
+    'CHEM', 'CRIM2021', 'CRIM3', 'CVEN4701', 'DART2151',
+    'DATA3001', 'DP', 'EDST6716', 'EDST6761', 'EDST6771',
+    'GMAT4061', 'HESC3541', 'HUMS1007', 'LAWS', 'MATS3', 'MDIA',
+    'MICR3621', 'MMAN49', 'MUSC', 'NEUR2201', 'PHAR2011',
+    'PHAR3102', 'PHAR3251', 'PHCM1001', 'PHSL', 'PHYS1116',
+    '3199', '3299', 'SDES', 'SOCW', 'SOLA49', 'SOSS',
+    'SRAP', 'ZHSS3501', 'FOOD6804', 'SCIF', 'PATH3209'
+]
 
 def test_validation():
     unlocked = requests.post('http://127.0.0.1:8000/courses/getAllUnlocked', json=USERS['user3']).json()['courses_state']

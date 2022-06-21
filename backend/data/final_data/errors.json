@@ -3441,45 +3441,6 @@
         ],
         "broke at": "Index 2, complete"
     },
-    "AVIA4002": {
-        "condition": {
-            "original": "Prerequisite: Enrolled in AVIA Honours<br/><br/>",
-            "processed": "AVIA Honours"
-        },
-        "tokens": [
-            "(",
-            "AVIA",
-            "Honours",
-            ")"
-        ],
-        "broke at": "Index 2, Honours"
-    },
-    "AVIA4003": {
-        "condition": {
-            "original": "Prerequisite: Enrolled in AVIA Honours<br/><br/>",
-            "processed": "AVIA Honours"
-        },
-        "tokens": [
-            "(",
-            "AVIA",
-            "Honours",
-            ")"
-        ],
-        "broke at": "Index 2, Honours"
-    },
-    "AVIA4004": {
-        "condition": {
-            "original": "Prerequisite: Enrolled in AVIA Honours<br/><br/>",
-            "processed": "AVIA Honours"
-        },
-        "tokens": [
-            "(",
-            "AVIA",
-            "Honours",
-            ")"
-        ],
-        "broke at": "Index 2, Honours"
-    },
     "BABS3021": {
         "condition": {
             "original": "Pre-req: 12 UoC from MICR2011 or BIOS2021/BABS2204 or BIOS2621/BABS2264 or BIOC2201<br/><br/>",
@@ -4755,42 +4716,6 @@
             ")"
         ],
         "broke at": "Index 7, 2270"
-    },
-    "COMM3999": {
-        "condition": {
-            "original": "Pre-requisite: Completed myBCom First Year Portfolio (COMM1999) and in their final year of a single or double Commerce degree (completed at least 72 UOC of Business courses).<br/><br/>",
-            "processed": "myBCom First Year Portfolio (COMM1999) && in their final year of a single || double Commerce degree (72UOC of Business courses)"
-        },
-        "tokens": [
-            "(",
-            "myBCom",
-            "First",
-            "Year",
-            "Portfolio",
-            "(",
-            "COMM1999",
-            ")",
-            "&&",
-            "in",
-            "their",
-            "final",
-            "year",
-            "of",
-            "a",
-            "single",
-            "||",
-            "double",
-            "Commerce",
-            "degree",
-            "(",
-            "72UOC",
-            "of",
-            "Business",
-            "courses",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 2, First"
     },
     "COMM6700": {
         "condition": {
@@ -9997,17 +9922,16 @@
     "MANF9550": {
         "condition": {
             "original": "Successful completion of 96 UOC and minimum WAM 65%<br/><br/>",
-            "processed": "Successful 96UOC && 65WAM%"
+            "processed": "96UOC && 65WAM%"
         },
         "tokens": [
             "(",
-            "Successful",
             "96UOC",
             "&&",
             "65WAM%",
             ")"
         ],
-        "broke at": "Index 2, 96UOC"
+        "broke at": "Index 4, )"
     },
     "MATS3199": {
         "condition": {
@@ -10403,19 +10327,6 @@
             ")"
         ],
         "broke at": "Index 4, WAM"
-    },
-    "MECH9720": {
-        "condition": {
-            "original": "Successful completion of 96 UOC<br/><br/>",
-            "processed": "Successful 96UOC"
-        },
-        "tokens": [
-            "(",
-            "Successful",
-            "96UOC",
-            ")"
-        ],
-        "broke at": "Index 2, 96UOC"
     },
     "MFAC4999": {
         "condition": {
@@ -11143,19 +11054,6 @@
         ],
         "broke at": "Index 2, in"
     },
-    "NANO4004": {
-        "condition": {
-            "original": "Prerequisite: Enrolled in Nanoscience Honours<br/><br/>",
-            "processed": "Nanoscience Honours"
-        },
-        "tokens": [
-            "(",
-            "Nanoscience",
-            "Honours",
-            ")"
-        ],
-        "broke at": "Index 2, Honours"
-    },
     "NEUR2201": {
         "condition": {
             "original": "Prerequisites: 36 UOC, which must include 12 UOC of BABS / BIOS courses (or equivalent DPST courses) OR 12 UOC of PSYC courses<br/><br/>",
@@ -11186,55 +11084,6 @@
         ],
         "broke at": "Index 2, which"
     },
-    "OPTM6411": {
-        "condition": {
-            "original": "Prerequisite: OPTM6400 and OPTM6413, or, completion of OPTM3211, OPTM3231, PHAR3306, and VISN3211<br/>Corequisite: OPTM6412<br/><br/>",
-            "processed": "OPTM6400 && OPTM6413 && or && OPTM3211 && OPTM3231 && PHAR3306 && VISN3211 && [OPTM6412]"
-        },
-        "tokens": [
-            "(",
-            "OPTM6400",
-            "&&",
-            "OPTM6413",
-            "&&",
-            "or",
-            "&&",
-            "OPTM3211",
-            "&&",
-            "OPTM3231",
-            "&&",
-            "PHAR3306",
-            "&&",
-            "VISN3211",
-            "&&",
-            "[",
-            "OPTM6412",
-            "]",
-            ")"
-        ],
-        "broke at": "Index 6, &&"
-    },
-    "PATH2201": {
-        "condition": {
-            "original": "Prerequisite: ANAT2241 plus any one of ANAT2111, ANAT1521, PHSL2101, BIOC2101, BIOC2181.<br/><br/>",
-            "processed": "ANAT2241 && any one of ANAT2111, ANAT1521, PHSL2101, BIOC2101, BIOC2181"
-        },
-        "tokens": [
-            "(",
-            "ANAT2241",
-            "&&",
-            "any",
-            "one",
-            "of",
-            "ANAT2111,",
-            "ANAT1521,",
-            "PHSL2101,",
-            "BIOC2101,",
-            "BIOC2181",
-            ")"
-        ],
-        "broke at": "Index 4, one"
-    },
     "PATH3209": {
         "condition": {
             "original": "Prerequisite: BABS3041. Highly recommended PATH2201 and PATH3205<br/><br/>",
@@ -11251,33 +11100,6 @@
             ")"
         ],
         "broke at": "Index 2, Highly"
-    },
-    "PATH3210": {
-        "condition": {
-            "original": "72 UOC including one of these courses: ANAT2111/1521/2241/2521/2341/2511, BABS2011/2202/2204, BIOC2181/2101, MICR2011, NEUR2201, PATH2201, PHAR2011, PHSL2101/2121/2201/2221, CHEM2041, NANO2002<br/><br/>",
-            "processed": "72UOC && one of these courses: ANAT2111/1521/2241/2521/2341/2511, BABS2011/2202/2204, BIOC2181/2101, MICR2011, NEUR2201, PATH2201, PHAR2011, PHSL2101/2121/2201/2221, CHEM2041, NANO2002"
-        },
-        "tokens": [
-            "(",
-            "72UOC",
-            "&&",
-            "one",
-            "of",
-            "these",
-            "courses:",
-            "ANAT2111/1521/2241/2521/2341/2511,",
-            "BABS2011/2202/2204,",
-            "BIOC2181/2101,",
-            "MICR2011,",
-            "NEUR2201,",
-            "PATH2201,",
-            "PHAR2011,",
-            "PHSL2101/2121/2201/2221,",
-            "CHEM2041,",
-            "NANO2002",
-            ")"
-        ],
-        "broke at": "Index 4, of"
     },
     "PHAR2011": {
         "condition": {
@@ -11364,25 +11186,6 @@
             ")"
         ],
         "broke at": "Index 2, Highly"
-    },
-    "PHCM1001": {
-        "condition": {
-            "original": "Currently enrolled in program 3880 Bachelor of International Public Health<br/><br/>",
-            "processed": "Currently program 3880 Bachelor of International Public Health"
-        },
-        "tokens": [
-            "(",
-            "Currently",
-            "program",
-            "3880",
-            "Bachelor",
-            "of",
-            "International",
-            "Public",
-            "Health",
-            ")"
-        ],
-        "broke at": "Index 2, program"
     },
     "PHCM3003": {
         "condition": {
@@ -11664,68 +11467,6 @@
             ")"
         ],
         "broke at": "Index 2, complete"
-    },
-    "PPEC1001": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in a Politics, Philosophy and Economics program<br/><br/>",
-            "processed": "Enrolment in a Politics, Philosophy && ECON#"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "a",
-            "Politics,",
-            "Philosophy",
-            "&&",
-            "ECON#",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "PPEC2001": {
-        "condition": {
-            "original": "Prerequisite: 24 units of credit overall, including PPEC1001, and enrolment in a Politics, Philosophy and Economics program<br/><br/>",
-            "processed": "24UOC && PPEC1001 && enrolment in a Politics, Philosophy && ECON#"
-        },
-        "tokens": [
-            "(",
-            "24UOC",
-            "&&",
-            "PPEC1001",
-            "&&",
-            "enrolment",
-            "in",
-            "a",
-            "Politics,",
-            "Philosophy",
-            "&&",
-            "ECON#",
-            ")"
-        ],
-        "broke at": "Index 6, in"
-    },
-    "PPEC3001": {
-        "condition": {
-            "original": "Prerequisite: 72 units of credit overall, including PPEC2001, and enrolment in a Politics, Philosophy and Economics program<br/><br/>",
-            "processed": "72UOC && PPEC2001 && enrolment in a Politics, Philosophy && ECON#"
-        },
-        "tokens": [
-            "(",
-            "72UOC",
-            "&&",
-            "PPEC2001",
-            "&&",
-            "enrolment",
-            "in",
-            "a",
-            "Politics,",
-            "Philosophy",
-            "&&",
-            "ECON#",
-            ")"
-        ],
-        "broke at": "Index 6, in"
     },
     "PSYC3199": {
         "condition": {
@@ -12109,7 +11850,7 @@
     "SENG3993": {
         "condition": {
             "original": "Currently enrolled in Program 3707 in the SENGAH stream and in the Co-op program and completed SENG2011 and SENG2021 and DESN2000 and COMP2511 and COMP2041.<br/><br/>Successful completion of SENG2991 and attendance at IT Reflection Workshop (facilitated by Co-op Program) are a prerequisite for this course.<br/><br/>",
-            "processed": "Currently Program 3707 in the SENGAH stream && in the Co-op program && SENG2011 && SENG2021 && DESN2000 && COMP2511 && COMP2041. Successful SENG2991 && attendance at IT Reflection Workshop (facilitated by Co-op Program) are a for this course"
+            "processed": "Currently Program 3707 in the SENGAH stream && in the Co-op program && SENG2011 && SENG2021 && DESN2000 && COMP2511 && COMP2041. SENG2991 && attendance at IT Reflection Workshop (facilitated by Co-op Program) are a for this course"
         },
         "tokens": [
             "(",
@@ -12135,7 +11876,6 @@
             "COMP2511",
             "&&",
             "COMP2041.",
-            "Successful",
             "SENG2991",
             "&&",
             "attendance",
@@ -12161,11 +11901,10 @@
     "SENG3994": {
         "condition": {
             "original": "Successful completion of SENG2991 and (SENG3991or SENG3993) are a prerequisite for this course<br/><br/>Currently enrolled in Program 3707 in the SENGAH stream and in the Co-op program and completed SENG3011.<br/><br/>",
-            "processed": "Successful SENG2991 && (SENG3991or SENG3993) are a for this course Currently Program 3707 in the SENGAH stream && in the Co-op program && SENG3011"
+            "processed": "SENG2991 && (SENG3991or SENG3993) are a for this course Currently Program 3707 in the SENGAH stream && in the Co-op program && SENG3011"
         },
         "tokens": [
             "(",
-            "Successful",
             "SENG2991",
             "&&",
             "(",
@@ -12193,7 +11932,7 @@
             "SENG3011",
             ")"
         ],
-        "broke at": "Index 2, SENG2991"
+        "broke at": "Index 4, SENG3991or"
     },
     "SOCW3009": {
         "condition": {
@@ -12501,20 +12240,6 @@
         ],
         "broke at": "Index 2, Thesis"
     },
-    "SOMS3050": {
-        "condition": {
-            "original": "Prerequisite: Completion of 72 UOC of courses<br/><br/>",
-            "processed": "72UOC of courses"
-        },
-        "tokens": [
-            "(",
-            "72UOC",
-            "of",
-            "courses",
-            ")"
-        ],
-        "broke at": "Index 3, courses"
-    },
     "SOMS3199": {
         "condition": {
             "original": "Prerequisite: enrolled in 3991 program, or in a Science program (single or dual) and majoring in a SOMS major. Must complete preparation for WIL mini-modules prior to enrolment. Placement must be related to the student\u2019s major or specialisation, and approved by SOMS prior to enrolment.  <br/>Pre-requisite of 48 units of credit and a minimum 65 WAM.  <br/><br/>",
@@ -12584,34 +12309,6 @@
             ")"
         ],
         "broke at": "Index 3, multi-term"
-    },
-    "SOMS4884": {
-        "condition": {
-            "original": "Enrolled in SOMS Hons Plan<br/><br/>",
-            "processed": "SOMS Hons Plan"
-        },
-        "tokens": [
-            "(",
-            "SOMS",
-            "Hons",
-            "Plan",
-            ")"
-        ],
-        "broke at": "Index 2, Hons"
-    },
-    "SOMS4888": {
-        "condition": {
-            "original": "Enrolled in SOMS Hons Plan<br/><br/>",
-            "processed": "SOMS Hons Plan"
-        },
-        "tokens": [
-            "(",
-            "SOMS",
-            "Hons",
-            "Plan",
-            ")"
-        ],
-        "broke at": "Index 2, Hons"
     },
     "SOSS2001": {
         "condition": {
@@ -12811,28 +12508,6 @@
         ],
         "broke at": "Index 2, in"
     },
-    "TABL2712": {
-        "condition": {
-            "original": "Prerequisite:LEGT1710 or TABL1710 or TABL 2710 or 12 UOC offered by the UNSW Business School.<br/><br/>",
-            "processed": "LEGT1710 || TABL1710 || TABL 2710 || 12UOC in F Business"
-        },
-        "tokens": [
-            "(",
-            "LEGT1710",
-            "||",
-            "TABL1710",
-            "||",
-            "TABL",
-            "2710",
-            "||",
-            "12UOC",
-            "in",
-            "F",
-            "Business",
-            ")"
-        ],
-        "broke at": "Index 6, 2710"
-    },
     "TELE9757": {
         "condition": {
             "original": "UG students should have a 65 WAM or higher, or be enrolled in ELECCH major<br/><br/>",
@@ -12851,203 +12526,6 @@
             ")"
         ],
         "broke at": "Index 2, should"
-    },
-    "VISN4003": {
-        "condition": {
-            "original": "Prerequisite: Enrolled in VISN Honours<br/><br/>",
-            "processed": "VISN Honours"
-        },
-        "tokens": [
-            "(",
-            "VISN",
-            "Honours",
-            ")"
-        ],
-        "broke at": "Index 2, Honours"
-    },
-    "VISN4016": {
-        "condition": {
-            "original": "Prerequisite: Enrolled in VISN Honours<br/><br/>",
-            "processed": "VISN Honours"
-        },
-        "tokens": [
-            "(",
-            "VISN",
-            "Honours",
-            ")"
-        ],
-        "broke at": "Index 2, Honours"
-    },
-    "YMED1001": {
-        "condition": {
-            "original": "Currently enrolled in program 3880 Bachelor of International Public Health<br/><br/>",
-            "processed": "Currently program 3880 Bachelor of International Public Health"
-        },
-        "tokens": [
-            "(",
-            "Currently",
-            "program",
-            "3880",
-            "Bachelor",
-            "of",
-            "International",
-            "Public",
-            "Health",
-            ")"
-        ],
-        "broke at": "Index 2, program"
-    },
-    "YMED1003": {
-        "condition": {
-            "original": "Currently enrolled in program 3880 Bachelor of International Public Health<br/><br/>",
-            "processed": "Currently program 3880 Bachelor of International Public Health"
-        },
-        "tokens": [
-            "(",
-            "Currently",
-            "program",
-            "3880",
-            "Bachelor",
-            "of",
-            "International",
-            "Public",
-            "Health",
-            ")"
-        ],
-        "broke at": "Index 2, program"
-    },
-    "YMED1005": {
-        "condition": {
-            "original": "Currently enrolled in program 3880 Bachelor of International Public Health<br/><br/>",
-            "processed": "Currently program 3880 Bachelor of International Public Health"
-        },
-        "tokens": [
-            "(",
-            "Currently",
-            "program",
-            "3880",
-            "Bachelor",
-            "of",
-            "International",
-            "Public",
-            "Health",
-            ")"
-        ],
-        "broke at": "Index 2, program"
-    },
-    "YMED1008": {
-        "condition": {
-            "original": "Currently enrolled in program 3880 Bachelor of International Public Health<br/><br/>",
-            "processed": "Currently program 3880 Bachelor of International Public Health"
-        },
-        "tokens": [
-            "(",
-            "Currently",
-            "program",
-            "3880",
-            "Bachelor",
-            "of",
-            "International",
-            "Public",
-            "Health",
-            ")"
-        ],
-        "broke at": "Index 2, program"
-    },
-    "YMED3007": {
-        "condition": {
-            "original": "Currently enrolled in program 3880 Bachelor of International Public Health<br/><br/>",
-            "processed": "Currently program 3880 Bachelor of International Public Health"
-        },
-        "tokens": [
-            "(",
-            "Currently",
-            "program",
-            "3880",
-            "Bachelor",
-            "of",
-            "International",
-            "Public",
-            "Health",
-            ")"
-        ],
-        "broke at": "Index 2, program"
-    },
-    "ZBUS4001": {
-        "condition": {
-            "original": "Enrolment in Business (Honours) Program 4512.<br/><br/>",
-            "processed": "Enrolment in Business (Honours) Program 4512"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "Business",
-            "(",
-            "Honours",
-            ")",
-            "Program",
-            "4512",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ZBUS4002": {
-        "condition": {
-            "original": "Enrolment in Business (Honours) Program 4512.<br/><br/>",
-            "processed": "Enrolment in Business (Honours) Program 4512"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "Business",
-            "(",
-            "Honours",
-            ")",
-            "Program",
-            "4512",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ZBUS4101": {
-        "condition": {
-            "original": "Enrolment in Business (Honours) Program 4512.<br/><br/>",
-            "processed": "Enrolment in Business (Honours) Program 4512"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "Business",
-            "(",
-            "Honours",
-            ")",
-            "Program",
-            "4512",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "ZBUS4102": {
-        "condition": {
-            "original": "Enrolment in Business (Honours) Program 4512.<br/><br/>",
-            "processed": "Enrolment in Business (Honours) Program 4512"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "Business",
-            "(",
-            "Honours",
-            ")",
-            "Program",
-            "4512",
-            ")"
-        ],
-        "broke at": "Index 2, in"
     },
     "ZHSS2506": {
         "condition": {
@@ -13125,26 +12603,6 @@
             ")"
         ],
         "broke at": "Index 1, ("
-    },
-    "ZHSS3231": {
-        "condition": {
-            "original": "Prerequisite: ZHSS1201 or ZHSS1202 or with Head of School approval<br/><br/>",
-            "processed": "ZHSS1201 || ZHSS1202 || && Head of School approval"
-        },
-        "tokens": [
-            "(",
-            "ZHSS1201",
-            "||",
-            "ZHSS1202",
-            "||",
-            "&&",
-            "Head",
-            "of",
-            "School",
-            "approval",
-            ")"
-        ],
-        "broke at": "Index 7, of"
     },
     "ZHSS3501": {
         "condition": {

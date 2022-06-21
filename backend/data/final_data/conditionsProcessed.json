@@ -2223,15 +2223,15 @@
     },
     "AVIA4002": {
         "original": "Prerequisite: Enrolled in AVIA Honours<br/><br/>",
-        "processed": "AVIA Honours"
+        "processed": "(AVIA?H)"
     },
     "AVIA4003": {
         "original": "Prerequisite: Enrolled in AVIA Honours<br/><br/>",
-        "processed": "AVIA Honours"
+        "processed": "(AVIA?H)"
     },
     "AVIA4004": {
         "original": "Prerequisite: Enrolled in AVIA Honours<br/><br/>",
-        "processed": "AVIA Honours"
+        "processed": "(AVIA?H)"
     },
     "BABS1111": {
         "original": "",
@@ -3482,7 +3482,8 @@
     },
     "COMM3999": {
         "original": "Pre-requisite: Completed myBCom First Year Portfolio (COMM1999) and in their final year of a single or double Commerce degree (completed at least 72 UOC of Business courses).<br/><br/>",
-        "processed": "myBCom First Year Portfolio (COMM1999) && in their final year of a single || double Commerce degree (72UOC of Business courses)"
+        "processed": "COMM1999 && 72UOC in ZBUS && COMM#",
+        "handbook_note": "Students must be in their final year"
     },
     "COMM6700": {
         "original": "Prerequisite: undergraduate students must have completed 72 units of credit <br/><br/>",
@@ -7552,7 +7553,7 @@
     },
     "MANF9550": {
         "original": "Successful completion of 96 UOC and minimum WAM 65%<br/><br/>",
-        "processed": "Successful 96UOC && 65WAM%"
+        "processed": "96UOC && 65WAM%"
     },
     "MARK2012": {
         "original": "",
@@ -8284,7 +8285,7 @@
     },
     "MECH9720": {
         "original": "Successful completion of 96 UOC<br/><br/>",
-        "processed": "Successful 96UOC"
+        "processed": "96UOC"
     },
     "MECH9761": {
         "original": "",
@@ -8984,7 +8985,7 @@
     },
     "NANO4004": {
         "original": "Prerequisite: Enrolled in Nanoscience Honours<br/><br/>",
-        "processed": "Nanoscience Honours"
+        "processed": "(NANO?H)"
     },
     "NANO4012": {
         "original": "",
@@ -9092,7 +9093,7 @@
     },
     "OPTM6411": {
         "original": "Prerequisite: OPTM6400 and OPTM6413, or, completion of OPTM3211, OPTM3231, PHAR3306, and VISN3211<br/>Corequisite: OPTM6412<br/><br/>",
-        "processed": "OPTM6400 && OPTM6413 && or && OPTM3211 && OPTM3231 && PHAR3306 && VISN3211 && [OPTM6412]"
+        "processed": "ANAT2241 && (ANAT2111 || ANAT1521 || PHSL2101 || BIOC2101 || BIOC2181)"
     },
     "OPTM6412": {
         "original": "Prerequisite: OPTM6400 and OPTM6411 and OPTM6413 or OPTM3211 and OPTM3231 and PHAR3306 and VISN3211<br/><br/>",
@@ -9148,7 +9149,7 @@
     },
     "PATH2201": {
         "original": "Prerequisite: ANAT2241 plus any one of ANAT2111, ANAT1521, PHSL2101, BIOC2101, BIOC2181.<br/><br/>",
-        "processed": "ANAT2241 && any one of ANAT2111, ANAT1521, PHSL2101, BIOC2101, BIOC2181"
+        "processed": "((OPTM6400 && OPTM6413) || (OPTM3211 && OPTM3231 && PHAR3306 && VISN3211)) && [OPTM6412]"
     },
     "PATH2202": {
         "original": "Prerequisite: ANAT2111 or ANAT1551 and BIOC2181 and PHSL2501<br/><br/>",
@@ -9172,7 +9173,7 @@
     },
     "PATH3210": {
         "original": "72 UOC including one of these courses: ANAT2111/1521/2241/2521/2341/2511, BABS2011/2202/2204, BIOC2181/2101, MICR2011, NEUR2201, PATH2201, PHAR2011, PHSL2101/2121/2201/2221, CHEM2041, NANO2002<br/><br/>",
-        "processed": "72UOC && one of these courses: ANAT2111/1521/2241/2521/2341/2511, BABS2011/2202/2204, BIOC2181/2101, MICR2011, NEUR2201, PATH2201, PHAR2011, PHSL2101/2121/2201/2221, CHEM2041, NANO2002"
+        "processed": "((OPTM6400 && OPTM6413) || (OPTM3211 && OPTM3231 && PHAR3306 && VISN3211)) && [OPTM6412]"
     },
     "PHAR2011": {
         "original": "Prerequisite: 6 UOC Level 1 Biology (BABS or BIOS ), 12 UOC Level 1 Chemistry, 6 UOC Level 1 Mathematics and Physiology 1A (Note: Medicinal Chemistry students may substitute BIOC2101 for Physiology 1A) or equivalent DPST courses.<br/><br/>",
@@ -9204,7 +9205,7 @@
     },
     "PHCM1001": {
         "original": "Currently enrolled in program 3880 Bachelor of International Public Health<br/><br/>",
-        "processed": "Currently program 3880 Bachelor of International Public Health"
+        "processed": "3880"
     },
     "PHCM2001": {
         "original": "",
@@ -9548,15 +9549,15 @@
     },
     "PPEC1001": {
         "original": "Prerequisite: Enrolment in a Politics, Philosophy and Economics program<br/><br/>",
-        "processed": "Enrolment in a Politics, Philosophy && ECON#"
+        "processed": "PPES#"
     },
     "PPEC2001": {
         "original": "Prerequisite: 24 units of credit overall, including PPEC1001, and enrolment in a Politics, Philosophy and Economics program<br/><br/>",
-        "processed": "24UOC && PPEC1001 && enrolment in a Politics, Philosophy && ECON#"
+        "processed": "24UOC && PPEC1001 && PPES#"
     },
     "PPEC3001": {
         "original": "Prerequisite: 72 units of credit overall, including PPEC2001, and enrolment in a Politics, Philosophy and Economics program<br/><br/>",
-        "processed": "72UOC && PPEC2001 && enrolment in a Politics, Philosophy && ECON#"
+        "processed": "72UOC && PPEC2001 && PPES#"
     },
     "PSYC1001": {
         "original": "",
@@ -10039,11 +10040,11 @@
     },
     "SENG3993": {
         "original": "Currently enrolled in Program 3707 in the SENGAH stream and in the Co-op program and completed SENG2011 and SENG2021 and DESN2000 and COMP2511 and COMP2041.<br/><br/>Successful completion of SENG2991 and attendance at IT Reflection Workshop (facilitated by Co-op Program) are a prerequisite for this course.<br/><br/>",
-        "processed": "Currently Program 3707 in the SENGAH stream && in the Co-op program && SENG2011 && SENG2021 && DESN2000 && COMP2511 && COMP2041. Successful SENG2991 && attendance at IT Reflection Workshop (facilitated by Co-op Program) are a for this course"
+        "processed": "Currently Program 3707 in the SENGAH stream && in the Co-op program && SENG2011 && SENG2021 && DESN2000 && COMP2511 && COMP2041. SENG2991 && attendance at IT Reflection Workshop (facilitated by Co-op Program) are a for this course"
     },
     "SENG3994": {
         "original": "Successful completion of SENG2991 and (SENG3991or SENG3993) are a prerequisite for this course<br/><br/>Currently enrolled in Program 3707 in the SENGAH stream and in the Co-op program and completed SENG3011.<br/><br/>",
-        "processed": "Successful SENG2991 && (SENG3991or SENG3993) are a for this course Currently Program 3707 in the SENGAH stream && in the Co-op program && SENG3011"
+        "processed": "SENG2991 && (SENG3991or SENG3993) are a for this course Currently Program 3707 in the SENGAH stream && in the Co-op program && SENG3011"
     },
     "SENG4920": {
         "original": "Prerequisite: COMP2511<br/><br/><br/>Completed more than or equal to 144 UOC in SENGAH, BINFAH or COMPBH<br/><br/>",
@@ -10231,7 +10232,7 @@
     },
     "SOMS3050": {
         "original": "Prerequisite: Completion of 72 UOC of courses<br/><br/>",
-        "processed": "72UOC of courses"
+        "processed": "72UOC"
     },
     "SOMS3199": {
         "original": "Prerequisite: enrolled in 3991 program, or in a Science program (single or dual) and majoring in a SOMS major. Must complete preparation for WIL mini-modules prior to enrolment. Placement must be related to the student\u2019s major or specialisation, and approved by SOMS prior to enrolment.  <br/>Pre-requisite of 48 units of credit and a minimum 65 WAM.  <br/><br/>",
@@ -10247,11 +10248,11 @@
     },
     "SOMS4884": {
         "original": "Enrolled in SOMS Hons Plan<br/><br/>",
-        "processed": "SOMS Hons Plan"
+        "processed": "(SOMS?H)"
     },
     "SOMS4888": {
         "original": "Enrolled in SOMS Hons Plan<br/><br/>",
-        "processed": "SOMS Hons Plan"
+        "processed": "(SOMS?H)"
     },
     "SOSS1000": {
         "original": "",
@@ -10315,7 +10316,7 @@
     },
     "TABL2712": {
         "original": "Prerequisite:LEGT1710 or TABL1710 or TABL 2710 or 12 UOC offered by the UNSW Business School.<br/><br/>",
-        "processed": "LEGT1710 || TABL1710 || TABL 2710 || 12UOC in F Business"
+        "processed": "LEGT1710 || TABL1710 || TABL2710 || 12UOC in F Business"
     },
     "TABL2721": {
         "original": "Prerequisite: LEGT1710 or TABL1710 or TABL2710 <br/><br/>",
@@ -10463,27 +10464,27 @@
     },
     "VISN4003": {
         "original": "Prerequisite: Enrolled in VISN Honours<br/><br/>",
-        "processed": "VISN Honours"
+        "processed": "(VISN?H)"
     },
     "VISN4016": {
         "original": "Prerequisite: Enrolled in VISN Honours<br/><br/>",
-        "processed": "VISN Honours"
+        "processed": "(VISN?H)"
     },
     "YMED1001": {
         "original": "Currently enrolled in program 3880 Bachelor of International Public Health<br/><br/>",
-        "processed": "Currently program 3880 Bachelor of International Public Health"
+        "processed": "3880"
     },
     "YMED1003": {
         "original": "Currently enrolled in program 3880 Bachelor of International Public Health<br/><br/>",
-        "processed": "Currently program 3880 Bachelor of International Public Health"
+        "processed": "3880"
     },
     "YMED1005": {
         "original": "Currently enrolled in program 3880 Bachelor of International Public Health<br/><br/>",
-        "processed": "Currently program 3880 Bachelor of International Public Health"
+        "processed": "3880"
     },
     "YMED1008": {
         "original": "Currently enrolled in program 3880 Bachelor of International Public Health<br/><br/>",
-        "processed": "Currently program 3880 Bachelor of International Public Health"
+        "processed": "3880"
     },
     "YMED3004": {
         "original": "",
@@ -10499,7 +10500,7 @@
     },
     "YMED3007": {
         "original": "Currently enrolled in program 3880 Bachelor of International Public Health<br/><br/>",
-        "processed": "Currently program 3880 Bachelor of International Public Health"
+        "processed": "3880"
     },
     "ZBUS1101": {
         "original": "",
@@ -10623,19 +10624,19 @@
     },
     "ZBUS4001": {
         "original": "Enrolment in Business (Honours) Program 4512.<br/><br/>",
-        "processed": "Enrolment in Business (Honours) Program 4512"
+        "processed": "4512"
     },
     "ZBUS4002": {
         "original": "Enrolment in Business (Honours) Program 4512.<br/><br/>",
-        "processed": "Enrolment in Business (Honours) Program 4512"
+        "processed": "4512"
     },
     "ZBUS4101": {
         "original": "Enrolment in Business (Honours) Program 4512.<br/><br/>",
-        "processed": "Enrolment in Business (Honours) Program 4512"
+        "processed": "4512"
     },
     "ZBUS4102": {
         "original": "Enrolment in Business (Honours) Program 4512.<br/><br/>",
-        "processed": "Enrolment in Business (Honours) Program 4512"
+        "processed": "4512"
     },
     "ZEIT1102": {
         "original": "Prerequisite: ZPEM1307<br/><br/>",
@@ -11399,7 +11400,8 @@
     },
     "ZHSS3231": {
         "original": "Prerequisite: ZHSS1201 or ZHSS1202 or with Head of School approval<br/><br/>",
-        "processed": "ZHSS1201 || ZHSS1202 || && Head of School approval"
+        "handbook_note": "Head of school approval can also be used.",
+        "processed": "ZHSS1201 || ZHSS1202"
     },
     "ZHSS3233": {
         "original": "Prerequisite: ZHSS1201 and ZHSS1202<br/><br/>",

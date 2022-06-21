@@ -3,6 +3,7 @@
     "Business": ["BUSN#", "ZBUS#"],
     "Commerce": ["COMM#", "ZBUS#"],
     "Economics": ["ECON#", "ZBUS#"],
+    "Politics, Philosophy and Economics": ["PPES#", "ZBUS#"],
     "Information Systems": ["INFS#", "ZBUS#"],
     "Data Science and Decisions": ["DATA#"],
     "Computer Science": ["COMP#"],

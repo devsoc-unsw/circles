@@ -16,10 +16,15 @@ from data.utility.data_helpers import read_data, write_data
 PREPROCESSED_CONDITIONS = {}
 CODE_MAPPING = read_data("data/utility/programCodeMappings.json")["title_to_code"]
 
+# TODO: think of how to automate some of this
 SPECIALISATION_MAPPINGS = {
     'School of the Arts and Media honours': 'MDIA?H',
     'School of Social Sciences, Asian Studies or European Studies honours': 'ASIABH || EUROBH',
     'Creative Writing honours': 'CRWTWH',
+    'VISN Honours' : 'VISN?H',
+    'AVIA Honours' : 'AVIA?H',
+    'SOMS Hons': 'SOMS?H',
+    'Nanoscience Honours' : 'NANO?H',
     'Construction Management and Property undergraduate program or minor': 'BLDG??',
     'Media, Culture and Technology honours': 'MECTBH',
     'Theatre and Performance Studies honours': 'THSTBH',
@@ -123,6 +128,8 @@ def preprocess_conditions():
         processed = enrolment_in_program(processed)
         processed = l2_math_courses(processed)
         processed = unsw_global_degrees(processed)
+        processed = international_public_health(processed)
+        processed = business_honours(processed)
 
 
 
@@ -196,6 +203,7 @@ def delete_extraneous_phrasing(processed: str) -> str:
 
     # Remove completion language
     completion_text = [
+        "Successful completion of",
         "completion of",
         "must successfully complete",
         "must have completed",
@@ -248,7 +256,7 @@ def convert_UOC(processed: str) -> str:
         r"((are\s*required|need)\s*to\s*have\s*a\s*minimum)?\s*(of|at least)?\s*(\d+UOC)", r" \4", processed, flags=re.IGNORECASE
     )
     processed = re.sub(
-        r"(\d+UOC)(\s*(overall|to undertake this course)\s*)", r"\1 ", processed, flags=re.IGNORECASE
+        r"(\d+UOC)(\s*(overall|(to undertake this|of) courses?)\s*)", r"\1 ", processed, flags=re.IGNORECASE
     )
 
     # Remove "minimum" since it is implied
@@ -581,7 +589,7 @@ def remove_extraneous_handbook_data(processed):
     processed, note = add_note_if_found(processed, r"This course is by application only.( )?Please visit Business School website for more information", note, r"", "This course is by application only. Please visit Business School website for more information")
     
     processed, note = add_note_if_found(processed, r"or language placement approval", note, r"", "language placement approval can also be used.")
-
+    processed, note = add_note_if_found(processed, r"or with Head of School approval", note, r"", "Head of school approval can also be used.")
     # Commerce degree notes
     processed, note = add_note_if_found(processed, r"(Students are expected to be )?in their final year of a( single or )?(double)?(dual)? Bachelor of Commerce( single or dual)?( degree)?", note, r"COMM#", "Students must be in their final year of a single or double Commerce degree")
     processed = re.sub(
@@ -596,6 +604,12 @@ def remove_extraneous_handbook_data(processed):
         r"(\d+UOC) of Business courses", r"\1 in ZBUS && COMM#", processed
     )
     return note, processed
+
+def international_public_health(processed: str):
+    return re.sub("Currently program 3880 Bachelor of International Public Health", '3880', processed, flags=re.IGNORECASE)
+
+def business_honours(processed: str):
+    return re.sub(r"Enrolment in Business \(Honours\) Program 4512", '4512', processed, flags=re.IGNORECASE)
 
 if __name__ == "__main__":
     preprocess_conditions()
