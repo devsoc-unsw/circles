@@ -26,6 +26,8 @@ SPECIALISATION_MAPPINGS = {
     'Environmental Humanities honours': 'ENVPEH',
     'Physics Honours': 'ZPEMPH || PHYSGH',
     'Film Studies honours': 'FILMBH',
+    'Creative Writing Major or minor': 'CRWTA1 || CRWTAH || CRWTA2',
+    'Creative Writing Major': 'CRWTA1 || CRWTAH',
     'English honours': 'ENGLDH',
     'Dance Studies honours': 'DANCBH',
     'History honours': 'HISTCH || ZHSSHH',
@@ -38,6 +40,7 @@ SPECIALISATION_MAPPINGS = {
     'Korean Studies honours': 'KORECH',
     'Linguistics honours': 'LINGCH',
     'German Studies honours': 'GERSBH',
+    'Neuroscience Honours': 'NEUR?H',
     'European Studies honours': 'EUROBH',
     'Sociology and Anthropology honours': 'SOCACH',
     'Politics and International Relations honours': 'POLSGH',
@@ -58,6 +61,7 @@ SPECIALISATION_MAPPINGS = {
     'single or double degree Media': '4510 || 3454 || 3438 || 3453',
     'Social Science or Social Research and Policy': '3321 || 3420',
     'Education program': '4509 || 4056',
+    'Landscape Architecture minor': 'LANDA2',
     'International Studies(?:\s+single)?(?:\s+or\s+((double)|(dual))\s+((degree)|(program)))?(?:\s*\(2017 onwards\))?': '3447',
 }
 
@@ -116,6 +120,7 @@ def preprocess_conditions():
 
         # Phase 5: Common patterns
         processed = uoc_in_business_school(processed)
+        processed = enrolment_in_program(processed)
         processed = l2_math_courses(processed)
         processed = unsw_global_degrees(processed)
 
@@ -178,6 +183,7 @@ def delete_extraneous_phrasing(processed: str) -> str:
     processed = re.sub("or higher", "", processed)
     # dont care
     processed = re.sub(r"or\s*equivalent", "", processed)
+    processed = re.sub(r"^None", "", processed)
 
     # Remove 'student' references as it is implied
     processed = re.sub("students?", "", processed, flags=re.IGNORECASE)
@@ -196,7 +202,6 @@ def delete_extraneous_phrasing(processed: str) -> str:
         "completing",
         "completed",
         "a pass in"
-        r"^None"
     ]
     for text in completion_text:
         processed = re.sub(text, "", processed, flags=re.IGNORECASE)
@@ -305,8 +310,8 @@ def convert_GRADE(processed: str) -> str:
 
 def convert_level(processed: str) -> str:
     """Converts level X to LX"""
-    return re.sub(r"((at|in|of) )?level (\d)( courses)?", r"in L\3", processed, flags=re.IGNORECASE)
-
+    processed = re.sub(r"((at|in|of) )?level (\d)( courses)?", r"in L\3", processed, flags=re.IGNORECASE)
+    return re.sub(r"in L(\d)( [A-Z]{4})( courses)?", r"in L\1\2", processed, flags=re.IGNORECASE)
 
 def convert_program_type(processed: str) -> str:
     """Converts complex phrases into something of the form CODE# for specifying a program type"""
@@ -513,11 +518,16 @@ def l2_math_courses(processed: str) -> str:
 
 def map_word_to_program_type(processed: str, regex_word: str, type: str):
     return re.sub(
-        rf"(a )?(enrolment )?(in )?(a )?(single or (double|dual) degree )?{regex_word}( studies)? (programs?( \(.*\))?|single or dual degrees?)",
+        rf"(a )?(enrolment )?(in )?(a )?(single or (double|dual) (degree|award) )?{regex_word}( studies)? (programs?( \(.*\))?|single or dual degrees?)",
         type,
         processed,
         flags=re.IGNORECASE,
-    )  # hard to capture a generic case?
+    )
+
+def enrolment_in_program(processed: str):
+    processed = re.sub(r"enrolment in program (.*)", r"(\1)", processed, flags=re.IGNORECASE)
+    processed = re.sub(r"^([0-9]{4}) program$", r"(\1)", processed, flags=re.IGNORECASE)
+    return re.sub(r"^program ([0-9]{4})$", r"(\1)", processed, flags=re.IGNORECASE)
 
 def unsw_global_degrees(processed: str):
     processed =  re.sub(

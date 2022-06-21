@@ -2864,7 +2864,7 @@
     "ARTS3871": {
         "condition": {
             "original": "Prerequisite: 48UOC overall, including 6UOC lv1 and 6UOC lv2 in one of the following streams, Criminology/S&A; or enrolment in program 3422/4763 and 12UOC lv2 SRAP and 18UOC lv2 CRIM; or enrolment in Program 4034 and 30UOC at lv2 including 12UOC lv2 CRIM<br/><br/>",
-            "processed": "(48UOC && 6UOC lv1 && 6UOC lv2 in one of the following streams, Criminology/S&A; || enrolment in program 3422/4763 && 12UOC lv2 SRAP && 18UOC lv2 CRIM) || enrolment in Program 4034 && 30UOC at lv2 && 12UOC lv2 CRIM"
+            "processed": "(48UOC && 6UOC lv1 && 6UOC lv2 in one of the following streams, Criminology/S&A; || (3422/4763 && 12UOC lv2 SRAP && 18UOC lv2 CRIM) || enrolment in Program 4034 && 30UOC at lv2 && 12UOC lv2 CRIM)"
         },
         "tokens": [
             "(",
@@ -2884,9 +2884,7 @@
             "streams,",
             "Criminology/S&A;",
             "||",
-            "enrolment",
-            "in",
-            "program",
+            "(",
             "3422/4763",
             "&&",
             "12UOC",
@@ -2910,6 +2908,7 @@
             "12UOC",
             "lv2",
             "CRIM",
+            ")",
             ")"
         ],
         "broke at": "Index 5, lv1"
@@ -3297,18 +3296,6 @@
             ")"
         ],
         "broke at": "Index 3, enrolment"
-    },
-    "AVIA1321": {
-        "condition": {
-            "original": "None<br/><br/>",
-            "processed": "None"
-        },
-        "tokens": [
-            "(",
-            "None",
-            ")"
-        ],
-        "broke at": "Index 2, )"
     },
     "AVIA2117": {
         "condition": {
@@ -3979,18 +3966,6 @@
         ],
         "broke at": "Index 2, Thesis"
     },
-    "BIOS3081": {
-        "condition": {
-            "original": "None<br/><br/>",
-            "processed": "None"
-        },
-        "tokens": [
-            "(",
-            "None",
-            ")"
-        ],
-        "broke at": "Index 2, )"
-    },
     "BIOS3161": {
         "condition": {
             "original": "6 UOC from BIOS2031 or BIOS2051 or BIOS2061<br/><br/>",
@@ -4008,18 +3983,6 @@
             ")"
         ],
         "broke at": "Index 3, BIOS2031"
-    },
-    "BIOS3681": {
-        "condition": {
-            "original": "None<br/><br/>",
-            "processed": "None"
-        },
-        "tokens": [
-            "(",
-            "None",
-            ")"
-        ],
-        "broke at": "Index 2, )"
     },
     "BLDG1012": {
         "condition": {
@@ -4093,32 +4056,6 @@
             "65WAM",
             "||",
             "over",
-            ")"
-        ],
-        "broke at": "Index 2, 4522"
-    },
-    "BLDG4019": {
-        "condition": {
-            "original": "Program Prerequisite: 4522<br/><br/>",
-            "processed": "Program 4522"
-        },
-        "tokens": [
-            "(",
-            "Program",
-            "4522",
-            ")"
-        ],
-        "broke at": "Index 2, 4522"
-    },
-    "BLDG4020": {
-        "condition": {
-            "original": "Program Prerequisite: 4522<br/><br/>",
-            "processed": "Program 4522"
-        },
-        "tokens": [
-            "(",
-            "Program",
-            "4522",
             ")"
         ],
         "broke at": "Index 2, 4522"
@@ -4454,11 +4391,10 @@
     "CHEM1831": {
         "condition": {
             "original": "None<br/><br/>Must be enrolled in Exercise Physiology (3871) <br/><br/>",
-            "processed": "None Must be Exercise Physiology (3871)"
+            "processed": "Must be Exercise Physiology (3871)"
         },
         "tokens": [
             "(",
-            "None",
             "Must",
             "be",
             "Exercise",
@@ -4468,7 +4404,7 @@
             ")",
             ")"
         ],
-        "broke at": "Index 2, Must"
+        "broke at": "Index 2, be"
     },
     "CHEM2521": {
         "condition": {
@@ -6485,115 +6421,10 @@
         ],
         "broke at": "Index 6, in"
     },
-    "EDST6700": {
-        "condition": {
-            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053 or 4054<br/><br/>",
-            "processed": "78UOC && EDST2002 && enrolment in program 4053 || 4054"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "&&",
-            "EDST2002",
-            "&&",
-            "enrolment",
-            "in",
-            "program",
-            "4053",
-            "||",
-            "4054",
-            ")"
-        ],
-        "broke at": "Index 6, in"
-    },
-    "EDST6701": {
-        "condition": {
-            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053 or 4054<br/><br/>",
-            "processed": "78UOC && EDST2002 && enrolment in program 4053 || 4054"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "&&",
-            "EDST2002",
-            "&&",
-            "enrolment",
-            "in",
-            "program",
-            "4053",
-            "||",
-            "4054",
-            ")"
-        ],
-        "broke at": "Index 6, in"
-    },
-    "EDST6702": {
-        "condition": {
-            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053 or 4054<br/><br/>",
-            "processed": "78UOC && EDST2002 && enrolment in program 4053 || 4054"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "&&",
-            "EDST2002",
-            "&&",
-            "enrolment",
-            "in",
-            "program",
-            "4053",
-            "||",
-            "4054",
-            ")"
-        ],
-        "broke at": "Index 6, in"
-    },
-    "EDST6704": {
-        "condition": {
-            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053 or 4054<br/><br/>",
-            "processed": "78UOC && EDST2002 && enrolment in program 4053 || 4054"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "&&",
-            "EDST2002",
-            "&&",
-            "enrolment",
-            "in",
-            "program",
-            "4053",
-            "||",
-            "4054",
-            ")"
-        ],
-        "broke at": "Index 6, in"
-    },
-    "EDST6705": {
-        "condition": {
-            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053 or 4054<br/><br/>",
-            "processed": "78UOC && EDST2002 && enrolment in program 4053 || 4054"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "&&",
-            "EDST2002",
-            "&&",
-            "enrolment",
-            "in",
-            "program",
-            "4053",
-            "||",
-            "4054",
-            ")"
-        ],
-        "broke at": "Index 6, in"
-    },
     "EDST6706": {
         "condition": {
             "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053, 4054, or 4076<br/><br/>",
-            "processed": "78UOC && EDST2002 && enrolment in program 4053, 4054 || 4076"
+            "processed": "78UOC && EDST2002 && (4053, 4054 || 4076)"
         },
         "tokens": [
             "(",
@@ -6601,126 +6432,20 @@
             "&&",
             "EDST2002",
             "&&",
-            "enrolment",
-            "in",
-            "program",
+            "(",
             "4053,",
             "4054",
             "||",
             "4076",
+            ")",
             ")"
         ],
-        "broke at": "Index 6, in"
-    },
-    "EDST6707": {
-        "condition": {
-            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053 or 4054<br/><br/>",
-            "processed": "78UOC && EDST2002 && enrolment in program 4053 || 4054"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "&&",
-            "EDST2002",
-            "&&",
-            "enrolment",
-            "in",
-            "program",
-            "4053",
-            "||",
-            "4054",
-            ")"
-        ],
-        "broke at": "Index 6, in"
-    },
-    "EDST6710": {
-        "condition": {
-            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053 or 4054<br/><br/>",
-            "processed": "78UOC && EDST2002 && enrolment in program 4053 || 4054"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "&&",
-            "EDST2002",
-            "&&",
-            "enrolment",
-            "in",
-            "program",
-            "4053",
-            "||",
-            "4054",
-            ")"
-        ],
-        "broke at": "Index 6, in"
-    },
-    "EDST6711": {
-        "condition": {
-            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053 or 4054<br/><br/>",
-            "processed": "78UOC && EDST2002 && enrolment in program 4053 || 4054"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "&&",
-            "EDST2002",
-            "&&",
-            "enrolment",
-            "in",
-            "program",
-            "4053",
-            "||",
-            "4054",
-            ")"
-        ],
-        "broke at": "Index 6, in"
-    },
-    "EDST6714": {
-        "condition": {
-            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053 or 4054<br/><br/>",
-            "processed": "78UOC && EDST2002 && enrolment in program 4053 || 4054"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "&&",
-            "EDST2002",
-            "&&",
-            "enrolment",
-            "in",
-            "program",
-            "4053",
-            "||",
-            "4054",
-            ")"
-        ],
-        "broke at": "Index 6, in"
-    },
-    "EDST6715": {
-        "condition": {
-            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 3462 or 4058<br/><br/>",
-            "processed": "78UOC && EDST2002 && enrolment in program 3462 || 4058"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "&&",
-            "EDST2002",
-            "&&",
-            "enrolment",
-            "in",
-            "program",
-            "3462",
-            "||",
-            "4058",
-            ")"
-        ],
-        "broke at": "Index 6, in"
+        "broke at": "Index 6, 4053,"
     },
     "EDST6716": {
         "condition": {
             "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 3462, 4054, or 4058<br/><br/>",
-            "processed": "78UOC && EDST2002 && enrolment in program 3462, 4054 || 4058"
+            "processed": "78UOC && EDST2002 && (3462, 4054 || 4058)"
         },
         "tokens": [
             "(",
@@ -6728,159 +6453,15 @@
             "&&",
             "EDST2002",
             "&&",
-            "enrolment",
-            "in",
-            "program",
+            "(",
             "3462,",
             "4054",
             "||",
             "4058",
+            ")",
             ")"
         ],
-        "broke at": "Index 6, in"
-    },
-    "EDST6717": {
-        "condition": {
-            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053 or 4054<br/><br/>",
-            "processed": "78UOC && EDST2002 && enrolment in program 4053 || 4054"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "&&",
-            "EDST2002",
-            "&&",
-            "enrolment",
-            "in",
-            "program",
-            "4053",
-            "||",
-            "4054",
-            ")"
-        ],
-        "broke at": "Index 6, in"
-    },
-    "EDST6718": {
-        "condition": {
-            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053 or 4054<br/><br/>",
-            "processed": "78UOC && EDST2002 && enrolment in program 4053 || 4054"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "&&",
-            "EDST2002",
-            "&&",
-            "enrolment",
-            "in",
-            "program",
-            "4053",
-            "||",
-            "4054",
-            ")"
-        ],
-        "broke at": "Index 6, in"
-    },
-    "EDST6719": {
-        "condition": {
-            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053 or 4054<br/><br/>",
-            "processed": "78UOC && EDST2002 && enrolment in program 4053 || 4054"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "&&",
-            "EDST2002",
-            "&&",
-            "enrolment",
-            "in",
-            "program",
-            "4053",
-            "||",
-            "4054",
-            ")"
-        ],
-        "broke at": "Index 6, in"
-    },
-    "EDST6722": {
-        "condition": {
-            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053 or 4054<br/><br/>",
-            "processed": "78UOC && EDST2002 && enrolment in program 4053 || 4054"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "&&",
-            "EDST2002",
-            "&&",
-            "enrolment",
-            "in",
-            "program",
-            "4053",
-            "||",
-            "4054",
-            ")"
-        ],
-        "broke at": "Index 6, in"
-    },
-    "EDST6723": {
-        "condition": {
-            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053 or 4054<br/><br/>",
-            "processed": "78UOC && EDST2002 && enrolment in program 4053 || 4054"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "&&",
-            "EDST2002",
-            "&&",
-            "enrolment",
-            "in",
-            "program",
-            "4053",
-            "||",
-            "4054",
-            ")"
-        ],
-        "broke at": "Index 6, in"
-    },
-    "EDST6725": {
-        "condition": {
-            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4076<br/><br/>",
-            "processed": "78UOC && EDST2002 && enrolment in program 4076"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "&&",
-            "EDST2002",
-            "&&",
-            "enrolment",
-            "in",
-            "program",
-            "4076",
-            ")"
-        ],
-        "broke at": "Index 6, in"
-    },
-    "EDST6726": {
-        "condition": {
-            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4076<br/><br/>",
-            "processed": "78UOC && EDST2002 && enrolment in program 4076"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "&&",
-            "EDST2002",
-            "&&",
-            "enrolment",
-            "in",
-            "program",
-            "4076",
-            ")"
-        ],
-        "broke at": "Index 6, in"
+        "broke at": "Index 6, 3462,"
     },
     "EDST6727": {
         "condition": {
@@ -6906,27 +6487,6 @@
             "4053",
             "||",
             "4054",
-            ")"
-        ],
-        "broke at": "Index 6, in"
-    },
-    "EDST6728": {
-        "condition": {
-            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 3446 or 3470<br/><br/>",
-            "processed": "78UOC && EDST2002 && enrolment in program 3446 || 3470"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "&&",
-            "EDST2002",
-            "&&",
-            "enrolment",
-            "in",
-            "program",
-            "3446",
-            "||",
-            "3470",
             ")"
         ],
         "broke at": "Index 6, in"
@@ -7043,7 +6603,7 @@
     "EDST6771": {
         "condition": {
             "original": "Prerequisite: 78 UOC overall, including EDST2002, and enrolment in program 4059, 4061, 4062, 4064, or 4066<br/><br/>",
-            "processed": "78UOC && EDST2002 && enrolment in program 4059, 4061, 4062, 4064 || 4066"
+            "processed": "78UOC && EDST2002 && (4059, 4061, 4062, 4064 || 4066)"
         },
         "tokens": [
             "(",
@@ -7051,23 +6611,22 @@
             "&&",
             "EDST2002",
             "&&",
-            "enrolment",
-            "in",
-            "program",
+            "(",
             "4059,",
             "4061,",
             "4062,",
             "4064",
             "||",
             "4066",
+            ")",
             ")"
         ],
-        "broke at": "Index 6, in"
+        "broke at": "Index 6, 4059,"
     },
     "EDST6775": {
         "condition": {
             "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4059, 4061, 4062, 4063, 4064, or 4066<br/><br/>",
-            "processed": "78UOC && EDST2002 && enrolment in program 4059, 4061, 4062, 4063, 4064 || 4066"
+            "processed": "78UOC && EDST2002 && (4059, 4061, 4062, 4063, 4064 || 4066)"
         },
         "tokens": [
             "(",
@@ -7075,9 +6634,7 @@
             "&&",
             "EDST2002",
             "&&",
-            "enrolment",
-            "in",
-            "program",
+            "(",
             "4059,",
             "4061,",
             "4062,",
@@ -7085,14 +6642,15 @@
             "4064",
             "||",
             "4066",
+            ")",
             ")"
         ],
-        "broke at": "Index 6, in"
+        "broke at": "Index 6, 4059,"
     },
     "EDST6777": {
         "condition": {
             "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4059, 4061, 4063, or 4066<br/><br/>",
-            "processed": "78UOC && EDST2002 && enrolment in program 4059, 4061, 4063 || 4066"
+            "processed": "78UOC && EDST2002 && (4059, 4061, 4063 || 4066)"
         },
         "tokens": [
             "(",
@@ -7100,173 +6658,16 @@
             "&&",
             "EDST2002",
             "&&",
-            "enrolment",
-            "in",
-            "program",
+            "(",
             "4059,",
             "4061,",
             "4063",
             "||",
             "4066",
+            ")",
             ")"
         ],
-        "broke at": "Index 6, in"
-    },
-    "EDST6920": {
-        "condition": {
-            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053 or 4054<br/><br/>",
-            "processed": "78UOC && EDST2002 && enrolment in program 4053 || 4054"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "&&",
-            "EDST2002",
-            "&&",
-            "enrolment",
-            "in",
-            "program",
-            "4053",
-            "||",
-            "4054",
-            ")"
-        ],
-        "broke at": "Index 6, in"
-    },
-    "EDST6921": {
-        "condition": {
-            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4053 or 4054<br/><br/>",
-            "processed": "78UOC && EDST2002 && enrolment in program 4053 || 4054"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "&&",
-            "EDST2002",
-            "&&",
-            "enrolment",
-            "in",
-            "program",
-            "4053",
-            "||",
-            "4054",
-            ")"
-        ],
-        "broke at": "Index 6, in"
-    },
-    "EDST6922": {
-        "condition": {
-            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4076<br/><br/>",
-            "processed": "78UOC && EDST2002 && enrolment in program 4076"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "&&",
-            "EDST2002",
-            "&&",
-            "enrolment",
-            "in",
-            "program",
-            "4076",
-            ")"
-        ],
-        "broke at": "Index 6, in"
-    },
-    "EDST6923": {
-        "condition": {
-            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4076<br/><br/>",
-            "processed": "78UOC && EDST2002 && enrolment in program 4076"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "&&",
-            "EDST2002",
-            "&&",
-            "enrolment",
-            "in",
-            "program",
-            "4076",
-            ")"
-        ],
-        "broke at": "Index 6, in"
-    },
-    "EDST6924": {
-        "condition": {
-            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4076<br/><br/>",
-            "processed": "78UOC && EDST2002 && enrolment in program 4076"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "&&",
-            "EDST2002",
-            "&&",
-            "enrolment",
-            "in",
-            "program",
-            "4076",
-            ")"
-        ],
-        "broke at": "Index 6, in"
-    },
-    "EDST6925": {
-        "condition": {
-            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4076<br/><br/>",
-            "processed": "78UOC && EDST2002 && enrolment in program 4076"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "&&",
-            "EDST2002",
-            "&&",
-            "enrolment",
-            "in",
-            "program",
-            "4076",
-            ")"
-        ],
-        "broke at": "Index 6, in"
-    },
-    "EDST6926": {
-        "condition": {
-            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4076<br/><br/>",
-            "processed": "78UOC && EDST2002 && enrolment in program 4076"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "&&",
-            "EDST2002",
-            "&&",
-            "enrolment",
-            "in",
-            "program",
-            "4076",
-            ")"
-        ],
-        "broke at": "Index 6, in"
-    },
-    "EDST6927": {
-        "condition": {
-            "original": "Prerequisite: 78 units of credit overall, including EDST2002, and enrolment in program 4076<br/><br/>",
-            "processed": "78UOC && EDST2002 && enrolment in program 4076"
-        },
-        "tokens": [
-            "(",
-            "78UOC",
-            "&&",
-            "EDST2002",
-            "&&",
-            "enrolment",
-            "in",
-            "program",
-            "4076",
-            ")"
-        ],
-        "broke at": "Index 6, in"
+        "broke at": "Index 6, 4059,"
     },
     "FADA6700": {
         "condition": {
@@ -7302,78 +6703,6 @@
         ],
         "broke at": "Index 2, INDC2003"
     },
-    "GEOS1701": {
-        "condition": {
-            "original": "None<br/><br/>",
-            "processed": "None"
-        },
-        "tokens": [
-            "(",
-            "None",
-            ")"
-        ],
-        "broke at": "Index 2, )"
-    },
-    "GEOS2071": {
-        "condition": {
-            "original": "None<br/><br/>",
-            "processed": "None"
-        },
-        "tokens": [
-            "(",
-            "None",
-            ")"
-        ],
-        "broke at": "Index 2, )"
-    },
-    "GEOS3281": {
-        "condition": {
-            "original": "None<br/><br/>",
-            "processed": "None"
-        },
-        "tokens": [
-            "(",
-            "None",
-            ")"
-        ],
-        "broke at": "Index 2, )"
-    },
-    "GEOS3761": {
-        "condition": {
-            "original": "None<br/><br/>",
-            "processed": "None"
-        },
-        "tokens": [
-            "(",
-            "None",
-            ")"
-        ],
-        "broke at": "Index 2, )"
-    },
-    "GEOS3811": {
-        "condition": {
-            "original": "None<br/><br/>",
-            "processed": "None"
-        },
-        "tokens": [
-            "(",
-            "None",
-            ")"
-        ],
-        "broke at": "Index 2, )"
-    },
-    "GEOS3821": {
-        "condition": {
-            "original": "None<br/><br/>",
-            "processed": "None"
-        },
-        "tokens": [
-            "(",
-            "None",
-            ")"
-        ],
-        "broke at": "Index 2, )"
-    },
     "GMAT4061": {
         "condition": {
             "original": "GMAT4060 Thesis A<br/><br/>",
@@ -7387,32 +6716,6 @@
             ")"
         ],
         "broke at": "Index 3, A"
-    },
-    "HESC1501": {
-        "condition": {
-            "original": "Prerequisite: 3871 program<br/><br/>",
-            "processed": "3871 program"
-        },
-        "tokens": [
-            "(",
-            "3871",
-            "program",
-            ")"
-        ],
-        "broke at": "Index 3, )"
-    },
-    "HESC2451": {
-        "condition": {
-            "original": "Prerequisite program 3871<br/><br/>",
-            "processed": "program 3871"
-        },
-        "tokens": [
-            "(",
-            "program",
-            "3871",
-            ")"
-        ],
-        "broke at": "Index 2, 3871"
     },
     "HESC2452": {
         "condition": {
@@ -7458,26 +6761,6 @@
             ")"
         ],
         "broke at": "Index 8, PHSL2501"
-    },
-    "HESC4501": {
-        "condition": {
-            "original": "Prerequisite:  MATH1041, HESC2501 and 12 UOC of Level 3 HESC Courses<br/><br/>",
-            "processed": "MATH1041 && HESC2501 && 12UOC in L3 HESC Courses"
-        },
-        "tokens": [
-            "(",
-            "MATH1041",
-            "&&",
-            "HESC2501",
-            "&&",
-            "12UOC",
-            "in",
-            "L3",
-            "HESC",
-            "Courses",
-            ")"
-        ],
-        "broke at": "Index 10, )"
     },
     "HUMS1007": {
         "condition": {
@@ -7581,25 +6864,6 @@
             ")"
         ],
         "broke at": "Index 2, INTA2001,"
-    },
-    "LAND1322": {
-        "condition": {
-            "original": "Prerequisite: LAND2272 or enrolment in the Landscape Architecture minor<br/><br/>",
-            "processed": "LAND2272 || enrolment in the Landscape Architecture minor"
-        },
-        "tokens": [
-            "(",
-            "LAND2272",
-            "||",
-            "enrolment",
-            "in",
-            "the",
-            "Landscape",
-            "Architecture",
-            "minor",
-            ")"
-        ],
-        "broke at": "Index 4, in"
     },
     "LAWS1052": {
         "condition": {
@@ -10745,34 +10009,6 @@
         ],
         "broke at": "Index 2, 96UOC"
     },
-    "MATH3191": {
-        "condition": {
-            "original": "12 Units of Credit of Level 2 MATH courses, which must include MATH2011 or MATH2111or MATH2018(DN) or MATH2019(DN)<br/><br/>",
-            "processed": "12UOC in L2 MATH, which must include MATH2011 || MATH2111or 75GRADE in MATH2018 || 75GRADE in MATH2019"
-        },
-        "tokens": [
-            "(",
-            "12UOC",
-            "in",
-            "L2",
-            "MATH,",
-            "which",
-            "must",
-            "include",
-            "MATH2011",
-            "||",
-            "MATH2111or",
-            "75GRADE",
-            "in",
-            "MATH2018",
-            "||",
-            "75GRADE",
-            "in",
-            "MATH2019",
-            ")"
-        ],
-        "broke at": "Index 5, which"
-    },
     "MATS3199": {
         "condition": {
             "original": "Prerequisite: enrolled in a Science program (single or dual) and majoring in Materials Science. Must pass Preparation for WIL modules prior to enrolment. Placement must be related to the student\u2019s major, and approved by the School of Materials Science and Engineering prior to enrolment.<br/>Pre-requisite: 48 units of credit and a minimum 65 WAM.<br/>It is the student\u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year.<br/><br/>",
@@ -10907,208 +10143,40 @@
     "MDCN8888": {
         "condition": {
             "original": "Prerequisite: Enrolment in program 3831 Science (Medicine) Honours. <br/><br/>",
-            "processed": "Enrolment in program 3831 Science (Medicine) Honours"
+            "processed": "(3831 Science (Medicine) Honours)"
         },
         "tokens": [
             "(",
-            "Enrolment",
-            "in",
-            "program",
+            "(",
             "3831",
             "Science",
             "(",
             "Medicine",
             ")",
             "Honours",
+            ")",
             ")"
         ],
-        "broke at": "Index 2, in"
+        "broke at": "Index 3, Science"
     },
     "MDCN8889": {
         "condition": {
             "original": "Prerequisite: Enrolment in program 3831 Science (Medicine) Honours.<br/><br/>",
-            "processed": "Enrolment in program 3831 Science (Medicine) Honours"
+            "processed": "(3831 Science (Medicine) Honours)"
         },
         "tokens": [
             "(",
-            "Enrolment",
-            "in",
-            "program",
+            "(",
             "3831",
             "Science",
             "(",
             "Medicine",
             ")",
             "Honours",
+            ")",
             ")"
         ],
-        "broke at": "Index 2, in"
-    },
-    "MDIA1000": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in a single or dual award Media program<br/><br/>",
-            "processed": "Enrolment in a single || dual award MDIA#"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "a",
-            "single",
-            "||",
-            "dual",
-            "award",
-            "MDIA#",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "MDIA1002": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in a single or dual award Media program<br/><br/>",
-            "processed": "Enrolment in a single || dual award MDIA#"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "a",
-            "single",
-            "||",
-            "dual",
-            "award",
-            "MDIA#",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "MDIA1003": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in a single or dual award Media program<br/><br/>",
-            "processed": "Enrolment in a single || dual award MDIA#"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "a",
-            "single",
-            "||",
-            "dual",
-            "award",
-            "MDIA#",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "MDIA1004": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in a Media program or Creative Writing Major<br/><br/>",
-            "processed": "MDIA# || Creative Writing Major"
-        },
-        "tokens": [
-            "(",
-            "MDIA#",
-            "||",
-            "Creative",
-            "Writing",
-            "Major",
-            ")"
-        ],
-        "broke at": "Index 4, Writing"
-    },
-    "MDIA1005": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in a single or dual award Media program<br/><br/>",
-            "processed": "Enrolment in a single || dual award MDIA#"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "a",
-            "single",
-            "||",
-            "dual",
-            "award",
-            "MDIA#",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "MDIA1007": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in a single or dual award Media program<br/><br/>",
-            "processed": "Enrolment in a single || dual award MDIA#"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "a",
-            "single",
-            "||",
-            "dual",
-            "award",
-            "MDIA#",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "MDIA2008": {
-        "condition": {
-            "original": "Prerequisite: 24 units of credit at level 1, and enrolment in a single or dual award Media program<br/><br/>",
-            "processed": "24UOC in L1 && enrolment in a single || dual award MDIA#"
-        },
-        "tokens": [
-            "(",
-            "24UOC",
-            "in",
-            "L1",
-            "&&",
-            "enrolment",
-            "in",
-            "a",
-            "single",
-            "||",
-            "dual",
-            "award",
-            "MDIA#",
-            ")"
-        ],
-        "broke at": "Index 6, in"
-    },
-    "MDIA2010": {
-        "condition": {
-            "original": "Prerequisite: 24 units of credit at level 1, and enrolment in a single or dual award Media program or enrolment in a Creative Writing major or minor. Equivalent: MDIA3001<br/><br/>",
-            "processed": "24UOC in L1 && enrolment in a single || dual award MDIA# || enrolment in a Creative Writing major || minor"
-        },
-        "tokens": [
-            "(",
-            "24UOC",
-            "in",
-            "L1",
-            "&&",
-            "enrolment",
-            "in",
-            "a",
-            "single",
-            "||",
-            "dual",
-            "award",
-            "MDIA#",
-            "||",
-            "enrolment",
-            "in",
-            "a",
-            "Creative",
-            "Writing",
-            "major",
-            "||",
-            "minor",
-            ")"
-        ],
-        "broke at": "Index 6, in"
+        "broke at": "Index 3, Science"
     },
     "MDIA2011": {
         "condition": {
@@ -11319,18 +10387,6 @@
         ],
         "broke at": "Index 6, As"
     },
-    "MECH9325": {
-        "condition": {
-            "original": "None<br/><br/>",
-            "processed": "None"
-        },
-        "tokens": [
-            "(",
-            "None",
-            ")"
-        ],
-        "broke at": "Index 2, )"
-    },
     "MECH9650": {
         "condition": {
             "original": "Completion of 138 UOC and a WAM of >=65<br/><br/>",
@@ -11410,22 +10466,6 @@
             ")"
         ],
         "broke at": "Index 3, MICR2011"
-    },
-    "MINE2810": {
-        "condition": {
-            "original": "Prerequsite: PHYS1131 OR MATS1101 OR GEOS111<br/><br/>",
-            "processed": "PHYS1131 || MATS1101 || GEOS111"
-        },
-        "tokens": [
-            "(",
-            "PHYS1131",
-            "||",
-            "MATS1101",
-            "||",
-            "GEOS111",
-            ")"
-        ],
-        "broke at": "Index 6, )"
     },
     "MMAN4951": {
         "condition": {
@@ -11830,59 +10870,56 @@
     "MUSC4009": {
         "condition": {
             "original": "Prerequisite: Enrolment in program 4508 Music (Honours)<br/><br/>",
-            "processed": "Enrolment in program 4508 Music (Honours)"
+            "processed": "(4508 Music (Honours))"
         },
         "tokens": [
             "(",
-            "Enrolment",
-            "in",
-            "program",
+            "(",
             "4508",
             "Music",
             "(",
             "Honours",
             ")",
+            ")",
             ")"
         ],
-        "broke at": "Index 2, in"
+        "broke at": "Index 3, Music"
     },
     "MUSC4010": {
         "condition": {
             "original": "Prerequisite: Enrolment in program 4508 Music (Honours)<br/><br/>",
-            "processed": "Enrolment in program 4508 Music (Honours)"
+            "processed": "(4508 Music (Honours))"
         },
         "tokens": [
             "(",
-            "Enrolment",
-            "in",
-            "program",
+            "(",
             "4508",
             "Music",
             "(",
             "Honours",
             ")",
+            ")",
             ")"
         ],
-        "broke at": "Index 2, in"
+        "broke at": "Index 3, Music"
     },
     "MUSC4011": {
         "condition": {
             "original": "Prerequisite: Enrolment in program 4508 Music (Honours)<br/><br/>",
-            "processed": "Enrolment in program 4508 Music (Honours)"
+            "processed": "(4508 Music (Honours))"
         },
         "tokens": [
             "(",
-            "Enrolment",
-            "in",
-            "program",
+            "(",
             "4508",
             "Music",
             "(",
             "Honours",
             ")",
+            ")",
             ")"
         ],
-        "broke at": "Index 2, in"
+        "broke at": "Index 3, Music"
     },
     "MUSC4013": {
         "condition": {
@@ -12149,75 +11186,6 @@
         ],
         "broke at": "Index 2, which"
     },
-    "NEUR4411": {
-        "condition": {
-            "original": "Prerequisite: Enrolled in Neuroscience Honours Plan<br/><br/>",
-            "processed": "Neuroscience Honours Plan"
-        },
-        "tokens": [
-            "(",
-            "Neuroscience",
-            "Honours",
-            "Plan",
-            ")"
-        ],
-        "broke at": "Index 2, Honours"
-    },
-    "NEUR4421": {
-        "condition": {
-            "original": "Prerequisite: Enrolled in Neuroscience Honours Plan<br/><br/>",
-            "processed": "Neuroscience Honours Plan"
-        },
-        "tokens": [
-            "(",
-            "Neuroscience",
-            "Honours",
-            "Plan",
-            ")"
-        ],
-        "broke at": "Index 2, Honours"
-    },
-    "NEUR4441": {
-        "condition": {
-            "original": "Enrolled in Neuroscience Honours Plan<br/><br/>",
-            "processed": "Neuroscience Honours Plan"
-        },
-        "tokens": [
-            "(",
-            "Neuroscience",
-            "Honours",
-            "Plan",
-            ")"
-        ],
-        "broke at": "Index 2, Honours"
-    },
-    "NEUR4442": {
-        "condition": {
-            "original": "Enrolled in Neuroscience Honours Plan<br/><br/>",
-            "processed": "Neuroscience Honours Plan"
-        },
-        "tokens": [
-            "(",
-            "Neuroscience",
-            "Honours",
-            "Plan",
-            ")"
-        ],
-        "broke at": "Index 2, Honours"
-    },
-    "NEUR4443": {
-        "condition": {
-            "original": "Prerequisite: Enrolled in Neuroscience Honours<br/><br/>",
-            "processed": "Neuroscience Honours"
-        },
-        "tokens": [
-            "(",
-            "Neuroscience",
-            "Honours",
-            ")"
-        ],
-        "broke at": "Index 2, Honours"
-    },
     "OPTM6411": {
         "condition": {
             "original": "Prerequisite: OPTM6400 and OPTM6413, or, completion of OPTM3211, OPTM3231, PHAR3306, and VISN3211<br/>Corequisite: OPTM6412<br/><br/>",
@@ -12245,29 +11213,6 @@
             ")"
         ],
         "broke at": "Index 6, &&"
-    },
-    "OPTM6424": {
-        "condition": {
-            "original": "Prerequisite:  OPTM6412 and OPTM6411 and OPTM6400 and enrolment in program 3182 or 8095. Exclusion: OPTM4271<br/><br/>",
-            "processed": "OPTM6412 && OPTM6411 && OPTM6400 && enrolment in program 3182 || 8095"
-        },
-        "tokens": [
-            "(",
-            "OPTM6412",
-            "&&",
-            "OPTM6411",
-            "&&",
-            "OPTM6400",
-            "&&",
-            "enrolment",
-            "in",
-            "program",
-            "3182",
-            "||",
-            "8095",
-            ")"
-        ],
-        "broke at": "Index 8, in"
     },
     "PATH2201": {
         "condition": {
