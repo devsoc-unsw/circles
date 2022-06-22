@@ -10,8 +10,8 @@ from sys import exit
 
 from algorithms.cache.cache import (cache_exclusions, cache_handbook_note,
                                     cache_mappings, cache_program_mappings)
-from algorithms.load_conditions import cache_conditions_pkl_file
-from algorithms.log_broken import log_broken_conditions
+from data.processors.load_conditions import cache_conditions_pkl_file
+from data.processors.log_broken import log_broken_conditions
 
 from data.processors.conditions_preprocessing import preprocess_conditions
 from data.processors.conditions_tokenising import tokenise_conditions
@@ -32,16 +32,16 @@ parser = argparse.ArgumentParser()
 parser.add_argument(
     "--type",
     type=str,
-    help="program, specialisation, course, condition, algorithm, data-fix",
+    help="program, specialisation, course, condition, data-fix",
 )
 parser.add_argument(
     "--stage",
     type=str,
     help="""
                     (any) --> all
-                    program/specialisation/course --> scrape, format, process, type1
-                    condition --> process, manual, tokenise
-                    cache --> exclusion, warning, mapping, program
+                    program/specialisation/course --> scrape, format, process
+                    condition --> process, manual, tokenise, parsingErrors, pickle
+                    cache --> exclusion, handbook_note, mapping, program
                     """,
 )
 
@@ -87,9 +87,9 @@ run = {
         "manual": run_manual_fixes,
         "tokenise": tokenise_conditions,
         "parsingErrors": log_broken_conditions,
+        "pickle": cache_conditions_pkl_file,
     },
     "cache": {
-        "conditions": cache_conditions_pkl_file,
         "exclusion": cache_exclusions,
         "handbook_note": cache_handbook_note,
         "mapping": cache_mappings,

@@ -35,9 +35,9 @@ or in deeper levels of 'container' (which has been accessed via recursion
 in the below code).
 
 Step in the data's journey:
-    [   ] Scrape raw data (specialisationScraper.py) [ X ] Format scraped
-    data (specialisationFormatting.py) [   ] Customise formatted data
-    (specialisationProcessing.py)
+    [   ] Scrape raw data (specialisationScraper.py)
+    [ X ] Format scraped data (specialisationFormatting.py)
+    [   ] Customise formatted data (specialisationProcessing.py)
 """
 
 import json

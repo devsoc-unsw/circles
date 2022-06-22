@@ -3,7 +3,7 @@ import pytest
 from algorithms.objects.categories import Category, CourseCategory
 from algorithms.objects.user import User
 
-PATH = "./algorithms/exampleUsers.json"
+PATH = "./algorithms/tests/exampleUsers.json"
 
 with open(PATH, encoding="utf8") as f:
     USERS = json.load(f)

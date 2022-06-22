@@ -34,11 +34,11 @@ const CourseMenu = ({ structure, showLockedCourses }) => {
     const newMenu = {};
     const newCoursesUnits = {};
 
-    function sortMenu(item1, item2) {
-      return item1.unlocked === item2.unlocked
+    const sortMenu = (item1, item2) => (
+      item1.unlocked === item2.unlocked
         ? item1.courseCode > item2.courseCode // sort within locked/unlocked by courseCode
-        : item1.unlocked < item2.unlocked; // separate locked/unlocked
-    }
+        : item1.unlocked < item2.unlocked // separate locked/unlocked
+    );
 
     // Example groups: Major, Minor, General
     Object.keys(structure).forEach((group) => {
@@ -123,6 +123,18 @@ const CourseMenu = ({ structure, showLockedCourses }) => {
     if (structure && Object.keys(structure).length) getAllUnlocked();
   }, [structure, getAllUnlocked]);
 
+  const sortGroups = (item1, item2) => {
+    if (/Core/.test(item1[0]) && !/Core/.test(item2[0])) {
+      return -1;
+    }
+
+    if (/Core/.test(item2[0]) && !/Core/.test(item1[0])) {
+      return 1;
+    }
+
+    return item1[0] > item2[0];
+  };
+
   return (
     <div className="cs-menu-root">
       {isPageLoaded
@@ -137,7 +149,7 @@ const CourseMenu = ({ structure, showLockedCourses }) => {
           >
             {Object.entries(menuData).map(([group, groupEntry]) => (
               <SubMenu key={group} title={group}>
-                {Object.entries(groupEntry).map(([subGroup, subGroupEntry]) => (
+                {Object.entries(groupEntry).sort(sortGroups).map(([subGroup, subGroupEntry]) => (
                   <Menu.ItemGroup
                     key={subGroup}
                     title={(
@@ -230,6 +242,11 @@ const MenuItem = ({
       >
         <div className="menuItemContainer">
           <div className="menuCourseContainer">
+            {!accurate && (
+              <TooltipWarningIcon
+                text="We couldn't parse the requirement for this course. Please manually check if you have the correct prerequisites to unlock it."
+              />
+            )}
             {isSmall ? (
               <Tooltip title={courseTitle} placement="topLeft">
                 {courseCode}
@@ -238,11 +255,6 @@ const MenuItem = ({
               <Text>
                 {courseCode}: {courseTitle}
               </Text>
-            )}
-            {!accurate && (
-              <TooltipWarningIcon
-                text="We couldn't parse the requirement for this course. Please manually check if you have the correct prerequisites to unlock it."
-              />
             )}
             {!unlocked && <LockOutlined style={{ fontSize: "11px" }} />}
           </div>
