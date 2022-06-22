@@ -8,7 +8,7 @@ from typing import Optional
 from fastapi import APIRouter, HTTPException
 from server.database import programsCOL, specialisationsCOL
 from server.routers.model import (Structure, Majors, message, minorInFE,
-                                  minorInSpecialisation, minors, programs)
+                                  minorInSpecialisation, minors, programs, Courses)
 from server.routers.courses import regex_search
 from data.utility import data_helpers
 
@@ -306,7 +306,7 @@ def getStructure(
 
 @router.get(
     "/getGenEds/{programCode}",
-    response_model=minors,
+    response_model=Courses,
     responses={
         400: {
             "model": message,
