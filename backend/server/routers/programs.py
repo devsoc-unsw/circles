@@ -50,11 +50,12 @@ def get_programs():
     return {
         "programs": {
             "3778": "Computer Science",
-            "3784": "Commerce / Computer Science",
             "3502": "Commerce",
             "3970": "Science",
             "3707": "Engineering (Honours)",
+            "3784": "Commerce / Computer Science",
             "3789": "Science / Computer Science",
+            "3785": "Engineering (Honours) / Computer Science",
         }
     }
 
