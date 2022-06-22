@@ -3893,7 +3893,6 @@
         "open",
         "to",
         "UNSW",
-        "undergraduate",
         "that",
         "are",
         "also",
@@ -6200,7 +6199,6 @@
     ],
     "BEIL6013": [
         "(",
-        "UG",
         "must",
         "be",
         "in",
@@ -6667,9 +6665,16 @@
     ],
     "BLDG1011": [
         "(",
-        "(",
-        "BLDG??",
-        ")",
+        "Enrolment",
+        "in",
+        "a",
+        "Construction",
+        "Management",
+        "&&",
+        "Property",
+        "program",
+        "||",
+        "minor",
         ")"
     ],
     "BLDG1012": [
@@ -6681,9 +6686,16 @@
     ],
     "BLDG1013": [
         "(",
-        "(",
-        "BLDG??",
-        ")",
+        "Enrolment",
+        "in",
+        "a",
+        "Construction",
+        "Management",
+        "&&",
+        "Property",
+        "program",
+        "||",
+        "minor",
         ")"
     ],
     "BLDG1014": [
@@ -6714,9 +6726,16 @@
     ],
     "BLDG1024": [
         "(",
-        "(",
-        "BLDG??",
-        ")",
+        "Enrolment",
+        "in",
+        "a",
+        "Construction",
+        "Management",
+        "&&",
+        "Property",
+        "program",
+        "||",
+        "minor",
         ")"
     ],
     "BLDG2011": [
@@ -7387,7 +7406,7 @@
         "Organic",
         "Chemistry",
         "course",
-        "taught",
+        "taht",
         "within",
         "the",
         "School",
@@ -8210,7 +8229,6 @@
     ],
     "COMM6700": [
         "(",
-        "undergraduate",
         "72UOC",
         ")"
     ],
@@ -19759,10 +19777,7 @@
         "(",
         "138UOC",
         "&&",
-        "a",
-        "WAM",
-        "of",
-        ">=65",
+        "65WAM",
         ")"
     ],
     "MECH9720": [
@@ -24734,14 +24749,9 @@
     ],
     "TELE9757": [
         "(",
-        "UG",
-        "should",
-        "have",
         "65WAM",
         "||",
-        "be",
         "ELECCH",
-        "major",
         ")"
     ],
     "VISN1101": [

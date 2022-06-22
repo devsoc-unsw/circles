@@ -1567,7 +1567,7 @@
     },
     "ARTS3759": {
         "original": "Prerequisite: Enrolment with consent. ARTS3759 is open to UNSW undergraduate students that are also enrolled in an internship (or international field placement course). This needs to be demonstrated prior to enrolment.<br/><br/>",
-        "processed": "Enrolment && consent. is open to UNSW undergraduate that are also an internship (or international field placement course). This needs to be demonstrated"
+        "processed": "Enrolment && consent. is open to UNSW that are also an internship (or international field placement course). This needs to be demonstrated"
     },
     "ARTS3780": {
         "original": "Prerequisite: 48 UOC including 6 UOC at level 1 and 6 UOC at level 2 in European Studies. Or 48 UOC including 12 UOC in German Studies language courses. Or 48 UOC and enrolment in an International Studies single or double degree (2017 onwards)<br/><br/>",
@@ -2491,7 +2491,7 @@
     },
     "BEIL6013": {
         "original": "UG students must be in their third year of study (having completed 96 units of credit) to enroll in this course. <br/><br/>",
-        "processed": "UG must be in their third year of study (having 96UOC)"
+        "processed": "must be in their third year of study (having 96UOC)"
     },
     "BENV0021": {
         "original": "",
@@ -2811,7 +2811,7 @@
     },
     "BLDG1011": {
         "original": "Prerequisite: Enrolment in a Construction Management and Property undergraduate program or minor<br/><br/>",
-        "processed": "(BLDG??)"
+        "processed": "Enrolment in a Construction Management && Property program || minor"
     },
     "BLDG1012": {
         "original": "Program 3331 3332<br/><br/>",
@@ -2819,7 +2819,7 @@
     },
     "BLDG1013": {
         "original": "Prerequisite: Enrolment in a Construction Management and Property undergraduate program or minor<br/><br/>",
-        "processed": "(BLDG??)"
+        "processed": "Enrolment in a Construction Management && Property program || minor"
     },
     "BLDG1014": {
         "original": "Program 3331 3332<br/><br/>",
@@ -2839,7 +2839,7 @@
     },
     "BLDG1024": {
         "original": "Prerequisite: Enrolment in a Construction Management and Property undergraduate program or minor<br/><br/>",
-        "processed": "(BLDG??)"
+        "processed": "Enrolment in a Construction Management && Property program || minor"
     },
     "BLDG2011": {
         "original": "",
@@ -3147,7 +3147,7 @@
     },
     "CHEM2521": {
         "original": "This is the main Level 2 Organic Chemistry course taught within the School of Chemistry.<br/>It assumes knowledge of CHEM1011 and CHEM1021 or CHEM1031 and CHEM1041 or CHEM1051 and CHEM1061, AND CHEM2041. It is a core element in Chemistry major programs. It is also required for industrial chemistry, biochemistry and medicinal chemistry programs.<br/><br/>",
-        "processed": "This is the main L2 Organic Chemistry course taught within the School of Chemistry. It assumes knowledge of CHEM1011 && CHEM1021 || CHEM1031 && CHEM1041 || CHEM1051 && CHEM1061 && CHEM2041. It is a core element in Chemistry major programs. It is also required for industrial chemistry, biochemistry && medicinal chemistry programs"
+        "processed": "This is the main L2 Organic Chemistry course taht within the School of Chemistry. It assumes knowledge of CHEM1011 && CHEM1021 || CHEM1031 && CHEM1041 || CHEM1051 && CHEM1061 && CHEM2041. It is a core element in Chemistry major programs. It is also required for industrial chemistry, biochemistry && medicinal chemistry programs"
     },
     "CHEM2531": {
         "original": "Prerequisite: CHEM2041 Exclusion: CHEM2031, CHEM2828, CHEM2839<br/><br/>",
@@ -3487,7 +3487,7 @@
     },
     "COMM6700": {
         "original": "Prerequisite: undergraduate students must have completed 72 units of credit <br/><br/>",
-        "processed": "undergraduate 72UOC"
+        "processed": "72UOC"
     },
     "COMP1010": {
         "original": "Exclusion: COMP1511/DPST1091<br/><br/>",
@@ -8281,7 +8281,7 @@
     },
     "MECH9650": {
         "original": "Completion of 138 UOC and a WAM of >=65<br/><br/>",
-        "processed": "138UOC && a WAM of >=65"
+        "processed": "138UOC && 65WAM"
     },
     "MECH9720": {
         "original": "Successful completion of 96 UOC<br/><br/>",
@@ -10436,7 +10436,7 @@
     },
     "TELE9757": {
         "original": "UG students should have a 65 WAM or higher, or be enrolled in ELECCH major<br/><br/>",
-        "processed": "UG should have 65WAM || be ELECCH major"
+        "processed": "65WAM || ELECCH"
     },
     "VISN1101": {
         "original": "",

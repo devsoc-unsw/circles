@@ -121,6 +121,7 @@ def preprocess_conditions():
 
         # Phase 4: Final touches
         processed = strip_spaces(processed)
+        processed = strip_specialisation(processed)
         processed = strip_bracket_spaces(processed)
 
         # Phase 5: Common patterns
@@ -198,6 +199,10 @@ def delete_extraneous_phrasing(processed: str) -> str:
     # Remove enrollment language since course and program codes imply this
     processed = re.sub("enrolled in", "", processed, flags=re.IGNORECASE)
 
+    # remove 'undergrad' because its implied
+    processed = re.sub(r"UG", "", processed, flags=re.IGNORECASE)
+    processed = re.sub(r"undergrad(uate)?", "", processed, flags=re.IGNORECASE)
+
     # Remove tautological endings
     processed = re.sub("(prior )?(in order )?to enrol(l)?(ing)?(ment)?( in(to)? this course)?", "", processed, flags=re.IGNORECASE)
 
@@ -209,7 +214,8 @@ def delete_extraneous_phrasing(processed: str) -> str:
         "must have completed",
         "completing",
         "completed",
-        "a pass in"
+        "a pass in",
+        "should have"
     ]
     for text in completion_text:
         processed = re.sub(text, "", processed, flags=re.IGNORECASE)
@@ -271,7 +277,7 @@ def convert_WAM(processed: str) -> str:
     #    - "WAM of 65" -> "65WAM"
     #    - "WAM of at least 65" -> "65WAM"
     processed = re.sub(
-        r"WAM ([a-z]* ){0,3}(\d\d)", r"\2WAM", processed, flags=re.IGNORECASE
+        r"WAM ([a-z]* ){0,3}(>=)?(\d\d)", r"\3WAM", processed, flags=re.IGNORECASE
     )
 
     # Then delete any superfluous preceding words, chars or spaces, e.g.:
@@ -488,9 +494,10 @@ def strip_bracket_spaces(processed: str) -> str:
     return processed
 
 
-# """Converts majors and minors into their respective specialisation codes.
-# E.g. Bsc COMP major """
-# def
+def strip_specialisation(processed: str) -> str:
+    """Converts majors and minors into their respective specialisation codes.
+    E.g. Bsc COMP major """
+    return re.sub(r"be ([A-Z]{6}) (major|minor|honours)", r"\1", processed)
 
 # """
 # Maybe don't need here, put it in another file at the end.
