@@ -10,6 +10,7 @@ from server.database import programsCOL, specialisationsCOL
 from server.routers.model import (Structure, Majors, message, minorInFE,
                                   minorInSpecialisation, minors, programs)
 from server.routers.courses import regex_search
+from data.utility import data_helpers
 
 router = APIRouter(
     prefix="/programs",
@@ -302,3 +303,41 @@ def getStructure(
 
     
     return {"structure": structure}
+
+@router.get(
+    "/getGenEds/{programCode}",
+    response_model=minors,
+    responses={
+        400: {
+            "model": message,
+            "description": "The given program code could not be found in the database",
+        },
+        200: {
+            "description": "Returns all geneds available to a given to the given code",
+            "content": {
+                "application/json": {
+                    "example": {
+                        "general education courses": {
+                            { 
+                                "ACTL3142",
+                                "ACTL4305",
+                                "ADAD2610",
+                                "ANAT2521",
+                                "ARTS1010",
+                                "ARTS1011",
+                                "ARTS1030",
+                                "ARTS1031",
+                                
+                            },
+                        }
+                    }
+                }
+            },
+        },
+    },
+)
+
+def getGenEds(
+    programCode: str, search = None):
+    all_geneds = data_helpers.read_data("data/scrapers/genedPureRaw.json")
+    return {"general education courses" : all_geneds[programCode]}
