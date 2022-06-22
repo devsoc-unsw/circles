@@ -31,7 +31,7 @@ const DegreeWizard = () => {
   const csDegreeDisclaimer = () => {
     notification.info({
       message: "Disclaimer",
-      description: "Currently, Circles can only support some degrees and undergrad courses.",
+      description: "Currently, Circles can only support some degrees and undergrad courses. If you find any errors, feel free to report a bug!",
       placement: "bottomRight",
       duration: 4,
     });

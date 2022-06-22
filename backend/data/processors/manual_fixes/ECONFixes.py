@@ -28,10 +28,13 @@ COURSES = data_helpers.read_data("data/final_data/coursesProcessed.json")
 def fix_conditions():
     """ Functions to apply manual fixes """
 
-    # TODO: call your functions here
     CONDITIONS["ECON1101"] = ECON_1101(CONDITIONS["ECON1101"])
     CONDITIONS["ECON1203"] = ECON_1203("ECON1203", CONDITIONS["ECON1203"])
-    CONDITIONS["ECON2206"][PROCESSED] = ECON_2206()
+    CONDITIONS["ECON2101"][PROCESSED] = ECON_2101_2102_2112()
+    CONDITIONS["ECON2102"][PROCESSED] = ECON_2101_2102_2112()
+    CONDITIONS["ECON2112"][PROCESSED] = ECON_2101_2102_2112()
+    CONDITIONS["ECON2209"][PROCESSED] = ECON_2209()
+    CONDITIONS["ECON2206"] = ECON_2206(CONDITIONS["ECON2206"])
     CONDITIONS["ECON2403"][PROCESSED] = ECON_2403()
     CONDITIONS["ECON3000"][PROCESSED] = ECON_3000()
     CONDITIONS["ECON3208"][PROCESSED] = ECON_3208()
@@ -105,16 +108,25 @@ def ECON_1203(code, conditions):
         "handbook_note": "Also, must not be enrolled in a BCom single or double degree (except 3155 Actl/Comm or 3521 Comm/Econ)"
     }
 
-
-def ECON_2206():
+def ECON_2206(conditions):
     """
-    "original": "Pre-requisite conditions: ECON1203 or COMM1190 or ECON2403 or MATH1041 or MATH1231 or MATH1241 or MATH1251<br/><br/>"
-
-    "processed": "conditions: ECON1203 || COMM1190 || ECON2403 || MATH1041 || MATH1231 || MATH1241 || MATH1251"
+        "original": "Pre-requisite: ECON1203 or COMM1110 or ECON2403 or MATH1041 or MATH1231 or MATH1241 or MATH1251. It is highly recommended that students who complete COMM1110 also complete COMM1190 before enrolling in this course.<br/><br/>",
+        "processed": "ECON1203 || COMM1110 || ECON2403 || MATH1041 || MATH1231 || MATH1241 || MATH1251. It is highly recommended that who complete COMM1110 also complete COMM1190 before enrolling in this course"
     """
 
-    return "ECON1203 || COMM1190 || ECON2403 || MATH1041 || MATH1231 || MATH1241 || MATH1251"
+    return {
+        "original": conditions["original"],
+        "processed": "ECON1203 || COMM1110 || ECON2403 || MATH1041 || MATH1231 || MATH1241 || MATH1251",
+        "handbook_note": ". It is highly recommended that who complete COMM1110 also complete COMM1190 before enrolling in this course"
+    }
 
+def ECON_2209():
+    """
+        "original": "Pre-requisite: ECON1203 or COMM1110 or MATH1041 or MATH1231 or MATH1241 or MATH1251. It is highly recommended that students who complete COMM1110 also complete COMM1190 before enrolling in this course.<br/><br/>",
+        "processed": "ECON1203 || COMM1110 || MATH1041 || MATH1231 || MATH1241 || MATH1251. It is highly recommended that who complete COMM1110 also complete COMM1190 before enrolling in this course"
+    """
+
+    return "ECON1203 || COMM1110 || MATH1041 || MATH1231 || MATH1241 || MATH1251"
 
 def ECON_2403():
     """
@@ -164,6 +176,12 @@ def ECON_4150_2():
 
     return "4501"
 
+def ECON_2101_2102_2112():
+    """
+        "original": "Prerequisite: (ECON1101 or COMM1100) and (ECON1202, MATH1031, MATH1131, MATH1141 or MATH1151)<br/><br/>",
+        "processed": "(ECON1101 || COMM1100) && (ECON1202, MATH1031, MATH1131, MATH1141 || MATH1151)"
+    """
+    return "(ECON1101 || COMM1100) && (ECON1202 || MATH1031 || MATH1131 || MATH1141 || MATH1151)"
 
 def ECON_4160_2():
     """
@@ -197,7 +215,7 @@ def ECON_4201(conditions):
     return {
         "original": conditions["original"],
         "processed": "ECON4103",
-        "handbook_note": "Assumed knowledge: Familiarity with matrix algebra && introductory statistics && econometrics. Prior Knowledge in Statistical software || programming languages will be useful"
+        "handbook_note": "Assumed knowledge: Familiarity with matrix algebra && introductory statistics && econometrics. Prior Knowledge in Statistical software or programming languages will be useful"
     }
 
 

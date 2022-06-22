@@ -117,7 +117,7 @@
     "ARTS3013": {
         "condition": {
             "original": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in the following declared streams, Music or TPS. Or 96 UOC overall and enrolment in a Music single/dual degree. Students must have a WAM of at least 65.<br/><br/>",
-            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in the following declared streams, Music || TPS. || 96UOC && enrolment in a Music single/dual degree. must have 65WAM"
+            "processed": "48UOC && 6UOC in L1 && 6UOC in L2 in the following declared streams, Music || TPS. || 96UOC && enrolment in a Music single/dual degree. 65WAM"
         },
         "tokens": [
             "(",
@@ -147,8 +147,6 @@
             "Music",
             "single/dual",
             "degree.",
-            "must",
-            "have",
             "65WAM",
             ")"
         ],
@@ -3313,18 +3311,11 @@
     "AVIA3199": {
         "condition": {
             "original": "Prerequisite: enrolled in a Science program (single or dual) and completing an Aviation major or specialisation. Must pass Preparation for WIL modules prior to enrolment. Placement must be related to the student\u2019s major or specialisation, and approved by the School of Aviation prior to enrolment.<br/>Pre-requisite: 48 units of credit and a minimum 65 WAM.<br/>It is the student\u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year.<br/><br/>",
-            "processed": "a Science program (single || dual) && an Aviation major || specialisation. Must pass for WIL modules . Placement must be related to the \u2019s major || specialisation && approved by the School of Aviation . 48UOC && a 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
+            "processed": "SCIF# && an Aviation major || specialisation. Must pass for WIL modules . Placement must be related to the \u2019s major || specialisation && approved by the School of Aviation . 48UOC && 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
         },
         "tokens": [
             "(",
-            "a",
-            "Science",
-            "program",
-            "(",
-            "single",
-            "||",
-            "dual",
-            ")",
+            "SCIF#",
             "&&",
             "an",
             "Aviation",
@@ -3357,7 +3348,6 @@
             ".",
             "48UOC",
             "&&",
-            "a",
             "65WAM.",
             "It",
             "is",
@@ -3387,7 +3377,7 @@
             "year",
             ")"
         ],
-        "broke at": "Index 2, Science"
+        "broke at": "Index 4, Aviation"
     },
     "AVIA3299": {
         "condition": {
@@ -3471,19 +3461,13 @@
     "BABS3199": {
         "condition": {
             "original": "Prerequisite: enrolled in a science Science program (single or dual) and majoring in a BABS major or specialisation. Must pass Preparation for WIL modules prior to enrolment. Placement must be related to the student\u2019s major or specialisation, and approved by BABS prior to enrolment.<br/>Pre-requisite: 48 units of credit and a minimum 65 WAM.<br/>It is the student\u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year.<br/><br/>",
-            "processed": "a science Science program (single || dual) && majoring in a BABS major || specialisation. Must pass for WIL modules . Placement must be related to the \u2019s major || specialisation && approved by BABS . 48UOC && a 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
+            "processed": "a science SCIF# && majoring in a BABS major || specialisation. Must pass for WIL modules . Placement must be related to the \u2019s major || specialisation && approved by BABS . 48UOC && 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
         },
         "tokens": [
             "(",
             "a",
             "science",
-            "Science",
-            "program",
-            "(",
-            "single",
-            "||",
-            "dual",
-            ")",
+            "SCIF#",
             "&&",
             "majoring",
             "in",
@@ -3515,7 +3499,6 @@
             ".",
             "48UOC",
             "&&",
-            "a",
             "65WAM.",
             "It",
             "is",
@@ -3601,18 +3584,11 @@
     "BEES3199": {
         "condition": {
             "original": "Prerequisite: enrolled in a Science program (single or dual) and majoring in a BEES major or specialisation. Must pass Preparation for WIL modules prior to enrolment. Placement must be related to the student\u2019s major or specialisation, and approved by BEES prior to enrolment. <br/>Pre-requisite: 48 units of credit and a minimum 65 WAM. <br/>It is the student\u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year.<br/><br/>",
-            "processed": "a Science program (single || dual) && majoring in a BEES major || specialisation. Must pass for WIL modules . Placement must be related to the \u2019s major || specialisation && approved by BEES . 48UOC && a 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
+            "processed": "SCIF# && majoring in a BEES major || specialisation. Must pass for WIL modules . Placement must be related to the \u2019s major || specialisation && approved by BEES . 48UOC && 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
         },
         "tokens": [
             "(",
-            "a",
-            "Science",
-            "program",
-            "(",
-            "single",
-            "||",
-            "dual",
-            ")",
+            "SCIF#",
             "&&",
             "majoring",
             "in",
@@ -3644,7 +3620,6 @@
             ".",
             "48UOC",
             "&&",
-            "a",
             "65WAM.",
             "It",
             "is",
@@ -3674,7 +3649,7 @@
             "year",
             ")"
         ],
-        "broke at": "Index 2, Science"
+        "broke at": "Index 4, in"
     },
     "BEES3299": {
         "condition": {
@@ -3861,7 +3836,7 @@
     "BIOC3671": {
         "condition": {
             "original": "Prerequisite: BIOC2101, BIOC2201. Restricted to Advanced Science programs (3985, 3990, 3962, 3972, 3973, 3986, 3931, 3936)<br/><br/>",
-            "processed": "BIOC2101 && BIOC2201. Restricted to ASCI#"
+            "processed": "BIOC2101 && BIOC2201. Restricted to Advanced SCIF#"
         },
         "tokens": [
             "(",
@@ -3870,7 +3845,8 @@
             "BIOC2201.",
             "Restricted",
             "to",
-            "ASCI#",
+            "Advanced",
+            "SCIF#",
             ")"
         ],
         "broke at": "Index 4, Restricted"
@@ -3890,40 +3866,6 @@
             ")"
         ],
         "broke at": "Index 4, year"
-    },
-    "BIOM4952": {
-        "condition": {
-            "original": "Prerequisite: Completion of Research Thesis A (4951)<br/><br/>",
-            "processed": "Research Thesis A (4951)"
-        },
-        "tokens": [
-            "(",
-            "Research",
-            "Thesis",
-            "A",
-            "(",
-            "4951",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 2, Thesis"
-    },
-    "BIOM4953": {
-        "condition": {
-            "original": "Prerequisite: Completion of Research Thesis B (4952)<br/><br/>",
-            "processed": "Research Thesis B (4952)"
-        },
-        "tokens": [
-            "(",
-            "Research",
-            "Thesis",
-            "B",
-            "(",
-            "4952",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 2, Thesis"
     },
     "BIOS3161": {
         "condition": {
@@ -4065,7 +4007,7 @@
     "BLDG4018": {
         "condition": {
             "original": "Program Prerequisite:4522 or Program 3332 with WAM of 65 or over<br/><br/>",
-            "processed": "Program 4522 || Program 3332 && 65WAM || over"
+            "processed": "Program 4522 || Program 3332 w 65WAM || over"
         },
         "tokens": [
             "(",
@@ -4074,7 +4016,7 @@
             "||",
             "Program",
             "3332",
-            "&&",
+            "w",
             "65WAM",
             "||",
             "over",
@@ -4085,7 +4027,7 @@
     "BLDG4022": {
         "condition": {
             "original": "Program Prerequisite:4522 or Program 3332 with WAM of 65 or over<br/><br/>",
-            "processed": "Program 4522 || Program 3332 && 65WAM || over"
+            "processed": "Program 4522 || Program 3332 w 65WAM || over"
         },
         "tokens": [
             "(",
@@ -4094,7 +4036,7 @@
             "||",
             "Program",
             "3332",
-            "&&",
+            "w",
             "65WAM",
             "||",
             "over",
@@ -4105,7 +4047,7 @@
     "BLDG4023": {
         "condition": {
             "original": "Program Prerequisite:4522 or Program 3332 with WAM of 65 or over<br/><br/>",
-            "processed": "Program 4522 || Program 3332 && 65WAM || over"
+            "processed": "Program 4522 || Program 3332 w 65WAM || over"
         },
         "tokens": [
             "(",
@@ -4114,7 +4056,7 @@
             "||",
             "Program",
             "3332",
-            "&&",
+            "w",
             "65WAM",
             "||",
             "over",
@@ -4125,7 +4067,7 @@
     "BLDG4024": {
         "condition": {
             "original": "Program Prerequisite:4522 or Program 3332 with WAM of 65 or over<br/><br/>",
-            "processed": "Program 4522 || Program 3332 && 65WAM || over"
+            "processed": "Program 4522 || Program 3332 w 65WAM || over"
         },
         "tokens": [
             "(",
@@ -4134,7 +4076,7 @@
             "||",
             "Program",
             "3332",
-            "&&",
+            "w",
             "65WAM",
             "||",
             "over",
@@ -4145,7 +4087,7 @@
     "BLDG4501": {
         "condition": {
             "original": "Program Prerequisite:4522 or Program 3332 with WAM of 65 or over<br/><br/>",
-            "processed": "Program 4522 || Program 3332 && 65WAM || over"
+            "processed": "Program 4522 || Program 3332 w 65WAM || over"
         },
         "tokens": [
             "(",
@@ -4154,7 +4096,7 @@
             "||",
             "Program",
             "3332",
-            "&&",
+            "w",
             "65WAM",
             "||",
             "over",
@@ -4234,204 +4176,10 @@
         ],
         "broke at": "Index 4, year"
     },
-    "CEIC4952": {
-        "condition": {
-            "original": "Prerequisite: Completion of Research Thesis A (4951)<br/><br/>",
-            "processed": "Research Thesis A (4951)"
-        },
-        "tokens": [
-            "(",
-            "Research",
-            "Thesis",
-            "A",
-            "(",
-            "4951",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 2, Thesis"
-    },
-    "CEIC4953": {
-        "condition": {
-            "original": "Prerequisite: Completion of Research Thesis B (4952)<br/><br/>",
-            "processed": "Research Thesis B (4952)"
-        },
-        "tokens": [
-            "(",
-            "Research",
-            "Thesis",
-            "B",
-            "(",
-            "4952",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 2, Thesis"
-    },
-    "CHEM1041": {
-        "condition": {
-            "original": "Prerequisite: CHEM1031, or CHEM1011 with a credit or above.<br/><br/>Prerequisite: Must be enrolled in a program with the option of a CHEM major<br/><br/>",
-            "processed": "CHEM1031 || CHEM1011 && a credit || above. Must be a program && the option of a CHEM major"
-        },
-        "tokens": [
-            "(",
-            "CHEM1031",
-            "||",
-            "CHEM1011",
-            "&&",
-            "a",
-            "credit",
-            "||",
-            "above.",
-            "Must",
-            "be",
-            "a",
-            "program",
-            "&&",
-            "the",
-            "option",
-            "of",
-            "a",
-            "CHEM",
-            "major",
-            ")"
-        ],
-        "broke at": "Index 6, credit"
-    },
-    "CHEM1051": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Bachelor of Medicinal Chemistry (3999 or 3992) or Bachelor of Medicinal Chemistry/Law program<br/><br/>",
-            "processed": "Enrolment in the Bachelor of Medicinal Chemistry (3999 || 3992) || Bachelor of Medicinal Chemistry/LAWS#"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Bachelor",
-            "of",
-            "Medicinal",
-            "Chemistry",
-            "(",
-            "3999",
-            "||",
-            "3992",
-            ")",
-            "||",
-            "Bachelor",
-            "of",
-            "Medicinal",
-            "Chemistry/LAWS#",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "CHEM1061": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in the Bachelor of Medicinal Chemistry (3992 or 3999) program and completion of either CHEM1051 or CHEM1031 or CHEM1011 with a credit or above.<br/><br/>",
-            "processed": "Enrolment in the Bachelor of Medicinal Chemistry (3992 || 3999) program && CHEM1051 || CHEM1031 || CHEM1011 && a credit || above"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Bachelor",
-            "of",
-            "Medicinal",
-            "Chemistry",
-            "(",
-            "3992",
-            "||",
-            "3999",
-            ")",
-            "program",
-            "&&",
-            "CHEM1051",
-            "||",
-            "CHEM1031",
-            "||",
-            "CHEM1011",
-            "&&",
-            "a",
-            "credit",
-            "||",
-            "above",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "CHEM1151": {
-        "condition": {
-            "original": "Enrolment in Medicinal Chemistry (3992) or (3999) or 4755<br/><br/>",
-            "processed": "Enrolment in Medicinal Chemistry (3992) || (3999) || 4755"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "Medicinal",
-            "Chemistry",
-            "(",
-            "3992",
-            ")",
-            "||",
-            "(",
-            "3999",
-            ")",
-            "||",
-            "4755",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "CHEM1829": {
-        "condition": {
-            "original": "Prerequisite: CHEM1011, and enrolment in 3181, 3182, 3952 or a Vision Science major.<br/><br/>",
-            "processed": "CHEM1011 && enrolment in 3181 || 3182 || 3952 || a Vision Science major"
-        },
-        "tokens": [
-            "(",
-            "CHEM1011",
-            "&&",
-            "enrolment",
-            "in",
-            "3181",
-            "||",
-            "3182",
-            "||",
-            "3952",
-            "||",
-            "a",
-            "Vision",
-            "Science",
-            "major",
-            ")"
-        ],
-        "broke at": "Index 4, in"
-    },
-    "CHEM1831": {
-        "condition": {
-            "original": "None<br/><br/>Must be enrolled in Exercise Physiology (3871) <br/><br/>",
-            "processed": "Must be Exercise Physiology (3871)"
-        },
-        "tokens": [
-            "(",
-            "Must",
-            "be",
-            "Exercise",
-            "Physiology",
-            "(",
-            "3871",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 2, be"
-    },
     "CHEM2521": {
         "condition": {
             "original": "This is the main Level 2 Organic Chemistry course taught within the School of Chemistry.<br/>It assumes knowledge of CHEM1011 and CHEM1021 or CHEM1031 and CHEM1041 or CHEM1051 and CHEM1061, AND CHEM2041. It is a core element in Chemistry major programs. It is also required for industrial chemistry, biochemistry and medicinal chemistry programs.<br/><br/>",
-            "processed": "This is the main L2 Organic Chemistry course taht within the School of Chemistry. It assumes knowledge of CHEM1011 && CHEM1021 || CHEM1031 && CHEM1041 || CHEM1051 && CHEM1061 && CHEM2041. It is a core element in Chemistry major programs. It is also required for industrial chemistry, biochemistry && medicinal chemistry programs"
+            "processed": "This is the main L2 Organic Chemistry course taht within the School of Chemistry. It assumes knowledge of CHEM1011 && CHEM1021 || CHEM1031 && CHEM1041 || CHEM1051 && CHEM1061 && CHEM2041. It is a core element in Chemistry major programs. It is also required for industrial chemistry, biochemistry && MCHM#"
         },
         "tokens": [
             "(",
@@ -4484,94 +4232,19 @@
             "chemistry,",
             "biochemistry",
             "&&",
-            "medicinal",
-            "chemistry",
-            "programs",
+            "MCHM#",
             ")"
         ],
         "broke at": "Index 2, is"
     },
-    "CHEM2701": {
-        "condition": {
-            "original": "First year chemistry is a prerequisite. One of the following courses must have been completed prior to enrolment: <br/> - CHEM1021 -- Chemistry 1B <br/> - CHEM1041/1061 -- Higher Chemistry 1B<br/> - CHEM1821 -- Engineering Chemistry 1B<br/> - CHEM1829 -- Biological Chemistry for Optometry Students<br/><br/>",
-            "processed": "First year chemistry is a . One of the following courses must have been : - CHEM1021 -- Chemistry 1B - CHEM1041/1061 -- Higher Chemistry 1B - CHEM1821 -- Engineering Chemistry 1B - CHEM1829 -- Biological Chemistry for Optometry"
-        },
-        "tokens": [
-            "(",
-            "First",
-            "year",
-            "chemistry",
-            "is",
-            "a",
-            ".",
-            "One",
-            "of",
-            "the",
-            "following",
-            "courses",
-            "must",
-            "have",
-            "been",
-            ":",
-            "-",
-            "CHEM1021",
-            "--",
-            "Chemistry",
-            "1B",
-            "-",
-            "CHEM1041/1061",
-            "--",
-            "Higher",
-            "Chemistry",
-            "1B",
-            "-",
-            "CHEM1821",
-            "--",
-            "Engineering",
-            "Chemistry",
-            "1B",
-            "-",
-            "CHEM1829",
-            "--",
-            "Biological",
-            "Chemistry",
-            "for",
-            "Optometry",
-            ")"
-        ],
-        "broke at": "Index 2, year"
-    },
-    "CHEM3051": {
-        "condition": {
-            "original": "Must be enrolled in Program 3999<br/><br/>Pre-requisite: CHEM3021<br/><br/>",
-            "processed": "Must be Program 3999 CHEM3021"
-        },
-        "tokens": [
-            "(",
-            "Must",
-            "be",
-            "Program",
-            "3999",
-            "CHEM3021",
-            ")"
-        ],
-        "broke at": "Index 2, be"
-    },
     "CHEM3199": {
         "condition": {
             "original": "Prerequisite: enrolled in a Science program (single or dual) and majoring in a Chemistry major or specialisation. Must pass Preparation for WIL modules prior to enrolment. Placement must be related to the student\u2019s major or specialisation, and approved by Chemistry prior to enrolment. <br/>Pre-requisite: 48 units of credit and a minimum 65 WAM. <br/>It is the student\u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year.<br/><br/>",
-            "processed": "a Science program (single || dual) && majoring in a Chemistry major || specialisation. Must pass for WIL modules . Placement must be related to the \u2019s major || specialisation && approved by Chemistry . 48UOC && a 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
+            "processed": "SCIF# && majoring in a Chemistry major || specialisation. Must pass for WIL modules . Placement must be related to the \u2019s major || specialisation && approved by Chemistry . 48UOC && 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
         },
         "tokens": [
             "(",
-            "a",
-            "Science",
-            "program",
-            "(",
-            "single",
-            "||",
-            "dual",
-            ")",
+            "SCIF#",
             "&&",
             "majoring",
             "in",
@@ -4603,7 +4276,6 @@
             ".",
             "48UOC",
             "&&",
-            "a",
             "65WAM.",
             "It",
             "is",
@@ -4633,7 +4305,7 @@
             "year",
             ")"
         ],
-        "broke at": "Index 2, Science"
+        "broke at": "Index 4, in"
     },
     "CHEM3299": {
         "condition": {
@@ -4684,81 +4356,6 @@
             ")"
         ],
         "broke at": "Index 2, complete"
-    },
-    "CHEM4501": {
-        "condition": {
-            "original": "Prerequisite: Enrolled in CHEM Honours Plan<br/><br/>",
-            "processed": "CHEM Honours Plan"
-        },
-        "tokens": [
-            "(",
-            "CHEM",
-            "Honours",
-            "Plan",
-            ")"
-        ],
-        "broke at": "Index 2, Honours"
-    },
-    "CHEM4503": {
-        "condition": {
-            "original": "Prerequisite: Enrolled in Medicinal Chemistry Honours<br/><br/>",
-            "processed": "Medicinal Chemistry Honours"
-        },
-        "tokens": [
-            "(",
-            "Medicinal",
-            "Chemistry",
-            "Honours",
-            ")"
-        ],
-        "broke at": "Index 2, Chemistry"
-    },
-    "CHEM4512": {
-        "condition": {
-            "original": "Prerequisite: Enrolled in Medicinal Chemistry Honours<br/><br/>",
-            "processed": "Medicinal Chemistry Honours"
-        },
-        "tokens": [
-            "(",
-            "Medicinal",
-            "Chemistry",
-            "Honours",
-            ")"
-        ],
-        "broke at": "Index 2, Chemistry"
-    },
-    "CHEM4518": {
-        "condition": {
-            "original": "Prerequisite: Enrolled in CHEM Honours<br/><br/>",
-            "processed": "CHEM Honours"
-        },
-        "tokens": [
-            "(",
-            "CHEM",
-            "Honours",
-            ")"
-        ],
-        "broke at": "Index 2, Honours"
-    },
-    "CHEM6701": {
-        "condition": {
-            "original": "12 UOC of CHEM2011, CHEM2021, CHEM2031, CHEM2839, CHEM2041 & CHEM2828<br/><br/>",
-            "processed": "12UOC of CHEM2011, CHEM2021, CHEM2031, CHEM2839, CHEM2041 && CHEM2828"
-        },
-        "tokens": [
-            "(",
-            "12UOC",
-            "of",
-            "CHEM2011,",
-            "CHEM2021,",
-            "CHEM2031,",
-            "CHEM2839,",
-            "CHEM2041",
-            "&&",
-            "CHEM2828",
-            ")"
-        ],
-        "broke at": "Index 3, CHEM2011,"
     },
     "CODE3100": {
         "condition": {
@@ -6124,119 +5721,6 @@
             ")"
         ],
         "broke at": "Index 13, credit"
-    },
-    "ECON2101": {
-        "condition": {
-            "original": "Prerequisite: (ECON1101 or COMM1100) and (ECON1202, MATH1031, MATH1131, MATH1141 or MATH1151)<br/><br/>",
-            "processed": "(ECON1101 || COMM1100) && (ECON1202, MATH1031, MATH1131, MATH1141 || MATH1151)"
-        },
-        "tokens": [
-            "(",
-            "(",
-            "ECON1101",
-            "||",
-            "COMM1100",
-            ")",
-            "&&",
-            "(",
-            "ECON1202,",
-            "MATH1031,",
-            "MATH1131,",
-            "MATH1141",
-            "||",
-            "MATH1151",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 8, ECON1202,"
-    },
-    "ECON2102": {
-        "condition": {
-            "original": "Prerequisite: (ECON1102 or COMM1150) and (ECON1202, MATH1031, MATH1131, MATH1141 or MATH1151)<br/><br/>",
-            "processed": "(ECON1102 || COMM1150) && (ECON1202, MATH1031, MATH1131, MATH1141 || MATH1151)"
-        },
-        "tokens": [
-            "(",
-            "(",
-            "ECON1102",
-            "||",
-            "COMM1150",
-            ")",
-            "&&",
-            "(",
-            "ECON1202,",
-            "MATH1031,",
-            "MATH1131,",
-            "MATH1141",
-            "||",
-            "MATH1151",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 8, ECON1202,"
-    },
-    "ECON2112": {
-        "condition": {
-            "original": "Prerequisite: (ECON1101 or COMM1100) and (ECON1202, MATH1031, MATH1131, MATH1141 or MATH1151)<br/><br/>",
-            "processed": "(ECON1101 || COMM1100) && (ECON1202, MATH1031, MATH1131, MATH1141 || MATH1151)"
-        },
-        "tokens": [
-            "(",
-            "(",
-            "ECON1101",
-            "||",
-            "COMM1100",
-            ")",
-            "&&",
-            "(",
-            "ECON1202,",
-            "MATH1031,",
-            "MATH1131,",
-            "MATH1141",
-            "||",
-            "MATH1151",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 8, ECON1202,"
-    },
-    "ECON2209": {
-        "condition": {
-            "original": "Pre-requisite: ECON1203 or COMM1110 or MATH1041 or MATH1231 or MATH1241 or MATH1251. It is highly recommended that students who complete COMM1110 also complete COMM1190 before enrolling in this course.<br/><br/>",
-            "processed": "ECON1203 || COMM1110 || MATH1041 || MATH1231 || MATH1241 || MATH1251. It is highly recommended that who complete COMM1110 also complete COMM1190 before enrolling in this course"
-        },
-        "tokens": [
-            "(",
-            "ECON1203",
-            "||",
-            "COMM1110",
-            "||",
-            "MATH1041",
-            "||",
-            "MATH1231",
-            "||",
-            "MATH1241",
-            "||",
-            "MATH1251.",
-            "It",
-            "is",
-            "highly",
-            "recommended",
-            "that",
-            "who",
-            "complete",
-            "COMM1110",
-            "also",
-            "complete",
-            "COMM1190",
-            "before",
-            "enrolling",
-            "in",
-            "this",
-            "course",
-            ")"
-        ],
-        "broke at": "Index 12, It"
     },
     "EDST2002": {
         "condition": {
@@ -9945,7 +9429,7 @@
     "LAWS9801": {
         "condition": {
             "original": "Prerequisite: Academic Program must be Environmental Science program (3988, 3932, 3965 or 3943)<br/><br/>",
-            "processed": "Academic Program must be Environmental Science program (3988, 3932, 3965 || 3943)"
+            "processed": "Academic Program must be Environmental SCIF#"
         },
         "tokens": [
             "(",
@@ -9954,15 +9438,7 @@
             "must",
             "be",
             "Environmental",
-            "Science",
-            "program",
-            "(",
-            "3988,",
-            "3932,",
-            "3965",
-            "||",
-            "3943",
-            ")",
+            "SCIF#",
             ")"
         ],
         "broke at": "Index 2, Program"
@@ -9984,18 +9460,11 @@
     "MATS3199": {
         "condition": {
             "original": "Prerequisite: enrolled in a Science program (single or dual) and majoring in Materials Science. Must pass Preparation for WIL modules prior to enrolment. Placement must be related to the student\u2019s major, and approved by the School of Materials Science and Engineering prior to enrolment.<br/>Pre-requisite: 48 units of credit and a minimum 65 WAM.<br/>It is the student\u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year.<br/><br/>",
-            "processed": "a Science program (single || dual) && majoring in Materials Science. Must pass for WIL modules . Placement must be related to the \u2019s major && approved by the School of Materials Science && Engineering . 48UOC && a 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
+            "processed": "SCIF# && majoring in Materials Science. Must pass for WIL modules . Placement must be related to the \u2019s major && approved by the School of Materials Science && Engineering . 48UOC && 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
         },
         "tokens": [
             "(",
-            "a",
-            "Science",
-            "program",
-            "(",
-            "single",
-            "||",
-            "dual",
-            ")",
+            "SCIF#",
             "&&",
             "majoring",
             "in",
@@ -10028,7 +9497,6 @@
             ".",
             "48UOC",
             "&&",
-            "a",
             "65WAM.",
             "It",
             "is",
@@ -10058,7 +9526,7 @@
             "year",
             ")"
         ],
-        "broke at": "Index 2, Science"
+        "broke at": "Index 4, in"
     },
     "MATS3299": {
         "condition": {
@@ -10294,7 +9762,7 @@
     "MDIA3007": {
         "condition": {
             "original": "Prerequisite: 48 units of credit overall, and enrolment in a Media program, or a Creative Writing, English, FIlm Studies or MCT major or minor. Students must have a WAM of 65 to be eligible for this course.<br/><br/>",
-            "processed": "48UOC && MDIA# || a Creative Writing, English, FIlm Studies || MCT major || minor. must have 65WAM to be eligible for this course"
+            "processed": "48UOC && MDIA# || a Creative Writing, English, FIlm Studies || MCT major || minor. 65WAM"
         },
         "tokens": [
             "(",
@@ -10313,15 +9781,7 @@
             "major",
             "||",
             "minor.",
-            "must",
-            "have",
             "65WAM",
-            "to",
-            "be",
-            "eligible",
-            "for",
-            "this",
-            "course",
             ")"
         ],
         "broke at": "Index 6, Creative"
@@ -10424,40 +9884,6 @@
             ")"
         ],
         "broke at": "Index 4, year"
-    },
-    "MMAN4952": {
-        "condition": {
-            "original": "Prerequisite: Completion of Research Thesis A (4951)<br/><br/>",
-            "processed": "Research Thesis A (4951)"
-        },
-        "tokens": [
-            "(",
-            "Research",
-            "Thesis",
-            "A",
-            "(",
-            "4951",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 2, Thesis"
-    },
-    "MMAN4953": {
-        "condition": {
-            "original": "Prerequisite: Completion of Research Thesis B (4952)<br/><br/>",
-            "processed": "Research Thesis B (4952)"
-        },
-        "tokens": [
-            "(",
-            "Research",
-            "Thesis",
-            "B",
-            "(",
-            "4952",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 2, Thesis"
     },
     "MUSC2801": {
         "condition": {
@@ -11354,40 +10780,14 @@
         ],
         "broke at": "Index 6, 2501"
     },
-    "PHYS1116": {
-        "condition": {
-            "original": "PHYS1121/1131/1141 Physics 1A as co-requisite or pre-requisite.<br/><br/>Exclusion - PHYS1160 Introduction to Astronomy<br/><br/>",
-            "processed": "PHYS1121/1131/1141 Physics 1A as && [||]"
-        },
-        "tokens": [
-            "(",
-            "PHYS1121/1131/1141",
-            "Physics",
-            "1A",
-            "as",
-            "&&",
-            "[",
-            "||",
-            "]",
-            ")"
-        ],
-        "broke at": "Index 2, Physics"
-    },
     "PHYS3199": {
         "condition": {
             "original": "Prerequisite: enrolled in a Science program (single or dual) and completing a Physics major. Must pass Preparation for WIL modules prior to enrolment. Placement must be related to the student\u2019s major, and approved by the School of Physics prior to enrolment.<br/>Pre-requisite: 48 units of credit and a minimum 65 WAM.<br/>It is the student\u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year.<br/><br/>",
-            "processed": "a Science program (single || dual) && a Physics major. Must pass for WIL modules . Placement must be related to the \u2019s major && approved by the School of Physics . 48UOC && a 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
+            "processed": "SCIF# && a Physics major. Must pass for WIL modules . Placement must be related to the \u2019s major && approved by the School of Physics . 48UOC && 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
         },
         "tokens": [
             "(",
-            "a",
-            "Science",
-            "program",
-            "(",
-            "single",
-            "||",
-            "dual",
-            ")",
+            "SCIF#",
             "&&",
             "a",
             "Physics",
@@ -11416,7 +10816,6 @@
             ".",
             "48UOC",
             "&&",
-            "a",
             "65WAM.",
             "It",
             "is",
@@ -11446,7 +10845,7 @@
             "year",
             ")"
         ],
-        "broke at": "Index 2, Science"
+        "broke at": "Index 4, Physics"
     },
     "PHYS3299": {
         "condition": {
@@ -11502,18 +10901,11 @@
     "PSYC3199": {
         "condition": {
             "original": "Prerequisite: enrolled in a Science program (single or dual) and completing a Psychology major. Must pass Preparation for WIL modules prior to enrolment. Placement must be related to the student\u2019s Psychology major and approved by the School of Psychology prior to enrolment. <br/>Pre-requisite: 48 units of credit and a minimum 65 WAM. <br/>It is the student\u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year.<br/><br/>",
-            "processed": "a Science program (single || dual) && a Psychology major. Must pass for WIL modules . Placement must be related to the \u2019s Psychology major && approved by the School of Psychology . 48UOC && a 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
+            "processed": "SCIF# && a Psychology major. Must pass for WIL modules . Placement must be related to the \u2019s Psychology major && approved by the School of Psychology . 48UOC && 65WAM. It is the \u2019s responsibility to check if they have space in their program for this elective. This course cannot be taken during an Honours year"
         },
         "tokens": [
             "(",
-            "a",
-            "Science",
-            "program",
-            "(",
-            "single",
-            "||",
-            "dual",
-            ")",
+            "SCIF#",
             "&&",
             "a",
             "Psychology",
@@ -11543,7 +10935,6 @@
             ".",
             "48UOC",
             "&&",
-            "a",
             "65WAM.",
             "It",
             "is",
@@ -11573,7 +10964,7 @@
             "year",
             ")"
         ],
-        "broke at": "Index 2, Science"
+        "broke at": "Index 4, Psychology"
     },
     "PSYC3299": {
         "condition": {
@@ -11638,139 +11029,6 @@
             ")"
         ],
         "broke at": "Index 2, Printmaking"
-    },
-    "SCIF1111": {
-        "condition": {
-            "original": "Enrolment in the Bachelor of Medical Science (3991) or the Bachelor of Medicinal Chemistry (3992) or the bachelor of Medicinal Chemistry (Honours) (3999)<br/><br/>",
-            "processed": "Enrolment in the Bachelor of (3991) || the Bachelor of Medicinal Chemistry (3992) || the bachelor of Medicinal Chemistry (Honours) (3999)"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "the",
-            "Bachelor",
-            "of",
-            "(",
-            "3991",
-            ")",
-            "||",
-            "the",
-            "Bachelor",
-            "of",
-            "Medicinal",
-            "Chemistry",
-            "(",
-            "3992",
-            ")",
-            "||",
-            "the",
-            "bachelor",
-            "of",
-            "Medicinal",
-            "Chemistry",
-            "(",
-            "Honours",
-            ")",
-            "(",
-            "3999",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "SCIF1131": {
-        "condition": {
-            "original": "Enrolment in BSc (Adv. Science), BAdvSci(Hons), BSc (Adv. Maths), BSc(AdvMath)(Hons), (incl. associated dual degrees), or BMedSci<br/><br/>",
-            "processed": "Enrolment in BSc (Adv. Science), BAdvSci(Hons), BSc (Adv. Maths), BSc(AdvMath)(Hons), (incl. associated dual degrees) || BMedSci"
-        },
-        "tokens": [
-            "(",
-            "Enrolment",
-            "in",
-            "BSc",
-            "(",
-            "Adv.",
-            "Science",
-            ")",
-            ",",
-            "BAdvSci",
-            "(",
-            "Hons",
-            ")",
-            ",",
-            "BSc",
-            "(",
-            "Adv.",
-            "Maths",
-            ")",
-            ",",
-            "BSc",
-            "(",
-            "AdvMath",
-            ")",
-            "(",
-            "Hons",
-            ")",
-            ",",
-            "(",
-            "incl.",
-            "associated",
-            "dual",
-            "degrees",
-            ")",
-            "||",
-            "BMedSci",
-            ")"
-        ],
-        "broke at": "Index 2, in"
-    },
-    "SCIF3000": {
-        "condition": {
-            "original": "Prerequisite: Enrolled in a science program (single or dual). Good standing. 60 units of credit. WAM requirement of 65.<br/><br/>",
-            "processed": "a science program (single || dual). Good standing. 60UOC. 65WAM"
-        },
-        "tokens": [
-            "(",
-            "a",
-            "science",
-            "program",
-            "(",
-            "single",
-            "||",
-            "dual",
-            ")",
-            ".",
-            "Good",
-            "standing.",
-            "60UOC.",
-            "65WAM",
-            ")"
-        ],
-        "broke at": "Index 2, science"
-    },
-    "SCIF3199": {
-        "condition": {
-            "original": "Prerequisite: 48 units of credit. Students must have a WAM of 65 or above to be eligible for this course<br/><br/>",
-            "processed": "48UOC. must have 65WAM || above to be eligible for this course"
-        },
-        "tokens": [
-            "(",
-            "48UOC.",
-            "must",
-            "have",
-            "65WAM",
-            "||",
-            "above",
-            "to",
-            "be",
-            "eligible",
-            "for",
-            "this",
-            "course",
-            ")"
-        ],
-        "broke at": "Index 2, must"
     },
     "SDES3404": {
         "condition": {
@@ -12237,59 +11495,17 @@
         ],
         "broke at": "Index 4, year"
     },
-    "SOLA4952": {
-        "condition": {
-            "original": "Prerequisite: Completion of Research Thesis A (4951)<br/><br/>",
-            "processed": "Research Thesis A (4951)"
-        },
-        "tokens": [
-            "(",
-            "Research",
-            "Thesis",
-            "A",
-            "(",
-            "4951",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 2, Thesis"
-    },
-    "SOLA4953": {
-        "condition": {
-            "original": "Prerequisite: Completion of Research Thesis B (4952)<br/><br/>",
-            "processed": "Research Thesis B (4952)"
-        },
-        "tokens": [
-            "(",
-            "Research",
-            "Thesis",
-            "B",
-            "(",
-            "4952",
-            ")",
-            ")"
-        ],
-        "broke at": "Index 2, Thesis"
-    },
     "SOMS3199": {
         "condition": {
             "original": "Prerequisite: enrolled in 3991 program, or in a Science program (single or dual) and majoring in a SOMS major. Must complete preparation for WIL mini-modules prior to enrolment. Placement must be related to the student\u2019s major or specialisation, and approved by SOMS prior to enrolment.  <br/>Pre-requisite of 48 units of credit and a minimum 65 WAM.  <br/><br/>",
-            "processed": "3991 program || in a Science program (single || dual) && majoring in a SOMS major. Must complete for WIL mini-modules . Placement must be related to the \u2019s major || specialisation && approved by SOMS . 48UOC && a 65WAM"
+            "processed": "3991 program || SCIF# && majoring in a SOMS major. Must complete for WIL mini-modules . Placement must be related to the \u2019s major || specialisation && approved by SOMS . 48UOC && 65WAM"
         },
         "tokens": [
             "(",
             "3991",
             "program",
             "||",
-            "in",
-            "a",
-            "Science",
-            "program",
-            "(",
-            "single",
-            "||",
-            "dual",
-            ")",
+            "SCIF#",
             "&&",
             "majoring",
             "in",
@@ -12319,7 +11535,6 @@
             ".",
             "48UOC",
             "&&",
-            "a",
             "65WAM",
             ")"
         ],

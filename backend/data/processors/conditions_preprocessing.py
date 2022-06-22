@@ -21,9 +21,6 @@ SPECIALISATION_MAPPINGS = {
     'School of the Arts and Media honours': 'MDIA?H',
     'School of Social Sciences, Asian Studies or European Studies honours': 'ASIABH || EUROBH',
     'Creative Writing honours': 'CRWTWH',
-    'VISN Honours' : 'VISN?H',
-    'AVIA Honours' : 'AVIA?H',
-    'SOMS Hons': 'SOMS?H',
     'Nanoscience Honours' : 'NANO?H',
     'Construction Management and Property undergraduate program or minor': 'BLDG??',
     'Media, Culture and Technology honours': 'MECTBH',
@@ -51,10 +48,10 @@ SPECIALISATION_MAPPINGS = {
     'Politics and International Relations honours': 'POLSGH',
     'Global Development honours': 'COMDFH',
     'Media honours': 'MDIA?H',
-    'BABS honours': 'BABS?H',
     'Education honours': '4509',
     'Criminology honours': '4505',
     'Medical Science': '3991',
+    'Medicinal Chemistry honours': 'CHEMFH',
     'Politics, Philosophy and Economics': '3478 || 4797',
     'single or double Music (Honours)': 'MUSC?H || 4508',
     'development studies honours': '8942',
@@ -131,6 +128,8 @@ def preprocess_conditions():
         processed = unsw_global_degrees(processed)
         processed = international_public_health(processed)
         processed = business_honours(processed)
+        processed = honours_plan(processed)
+        processed = research_thesis(processed)
 
 
 
@@ -189,6 +188,7 @@ def delete_extraneous_phrasing(processed: str) -> str:
 
     # Remove 'or higher' as XXWAM implies XX minimum
     processed = re.sub("or higher", "", processed)
+    processed = re.sub("or above", "", processed)
     # dont care
     processed = re.sub(r"or\s*equivalent", "", processed)
     processed = re.sub(r"^None", "", processed)
@@ -205,6 +205,7 @@ def delete_extraneous_phrasing(processed: str) -> str:
 
     # Remove tautological endings
     processed = re.sub("(prior )?(in order )?to enrol(l)?(ing)?(ment)?( in(to)? this course)?", "", processed, flags=re.IGNORECASE)
+    processed = re.sub("to be eligible for this course", "", processed, flags=re.IGNORECASE)
 
     # Remove completion language
     completion_text = [
@@ -226,7 +227,7 @@ def delete_extraneous_phrasing(processed: str) -> str:
 def delete_prereq_label(processed: str) -> str:
     """Removes 'prerequisite' and variations"""
     # variations incude ["prerequisite", "pre-requisite", "prer-requisite", "pre req", "prereq:"]
-    return re.sub(r"pre( req)?[a-z\/_\-]*( is)? *[:;]*", "", processed, flags=re.IGNORECASE)
+    return re.sub(r"pre( req)?[a-z\/_\-]*( (is|conditions))? *[:;]*", "", processed, flags=re.IGNORECASE)
 
 def convert_semicolon(processed: str) -> str:
     return re.sub(r"(.*);", r"(\1)", processed)
@@ -284,7 +285,7 @@ def convert_WAM(processed: str) -> str:
     #    - "minimum 65WAM" -> "65WAM"
     #    - "A 65WAM" -> "65WAM"
     processed = re.sub(
-        r"[a|minimum]+ (\d\d)\s*WAM", r"\1WAM", processed, flags=re.IGNORECASE
+        r"[a|minimum|must have]+ (\d\d)\s*WAM", r" \1WAM", processed, flags=re.IGNORECASE
     )
 
     # Compress any remaining spaces between digits and WAM and remove misc chars
@@ -293,7 +294,7 @@ def convert_WAM(processed: str) -> str:
     #    - "65+ WAM" -> "65WAM"
     #    - "65WAM+" -> "65WAM"
     processed = re.sub(
-        r">?(\d\d)\+?\s*WAM\+?", r"\1WAM", processed, flags=re.IGNORECASE
+        r">?=?(\d\d)\+?\s*WAM\+?", r"\1WAM", processed, flags=re.IGNORECASE
     )
 
     return processed
@@ -617,6 +618,12 @@ def international_public_health(processed: str):
 
 def business_honours(processed: str):
     return re.sub(r"Enrolment in Business \(Honours\) Program 4512", '4512', processed, flags=re.IGNORECASE)
+
+def research_thesis(processed: str):
+    return re.sub(r"Research Thesis [A|B] \(([0-9]{4})\)", r"\1", processed)
+
+def honours_plan(processed: str):
+    return re.sub(r"^([A-Z]{4}) (h|H)on(our)?s( (p|P)lan)?$", r"\1" + "?H", processed)
 
 if __name__ == "__main__":
     preprocess_conditions()
