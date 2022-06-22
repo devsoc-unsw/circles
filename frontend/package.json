@@ -43,8 +43,8 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "lint": "eslint src/**/*.{js,jsx}",
-    "lint:fix": "eslint --fix src/**/*.{js,jsx}",
+    "lint": "eslint src/**/*.{js,ts,jsx,tsx}",
+    "lint:fix": "eslint src/**/*.{js,ts,jsx,tsx} --fix",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "eject": "react-scripts eject"
@@ -68,8 +68,11 @@
     ]
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.29.0",
+    "@typescript-eslint/parser": "^5.29.0",
     "eslint": "7.32.0",
     "eslint-config-airbnb": "19.0.4",
+    "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-jsx-a11y": "6.5.1",
     "eslint-plugin-node": "11.1.0",
