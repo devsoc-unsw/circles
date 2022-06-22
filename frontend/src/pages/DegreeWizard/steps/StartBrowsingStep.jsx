@@ -12,7 +12,7 @@ const openNotification = (msg) => {
     message: msg,
     duration: 2,
     className: "text helpNotif",
-    placement: "topRight",
+    placement: "bottomRight",
   };
   notification.error(args);
 };
@@ -25,7 +25,7 @@ const StartBrowsingStep = () => {
   const saveUserSettings = () => {
     if (degree.programCode === "") {
       openNotification("Please select a degree");
-    } else if (!degree.majors.length && !degree.minors.length) {
+    } else if (!degree.specs.length) {
       openNotification("Please select a specialisation");
     } else {
       dispatch(setIsComplete(true));

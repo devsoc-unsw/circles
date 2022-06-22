@@ -19,7 +19,7 @@ def cache_conditions_pkl_file():
 
     # Load in all the courses and their conditions list
     all_conditions_tokens_file = "./data/final_data/conditionsTokens.json"
-    pickle_file = "./algorithms/conditions.pkl"
+    pickle_file = "./data/final_data/conditions.pkl"
 
     with open(all_conditions_tokens_file, "r", encoding="utf8") as f:
         all_conditions_tokens = json.load(f)

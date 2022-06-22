@@ -7,22 +7,29 @@ Some examples of preprocessing are:
 - Converting specialisation and program names to corresponding codes
 """
 
+from functools import reduce
+import json
 import re
+
 from data.utility.data_helpers import read_data, write_data
 
 PREPROCESSED_CONDITIONS = {}
 CODE_MAPPING = read_data("data/utility/programCodeMappings.json")["title_to_code"]
 
+# TODO: think of how to automate some of this
 SPECIALISATION_MAPPINGS = {
     'School of the Arts and Media honours': 'MDIA?H',
     'School of Social Sciences, Asian Studies or European Studies honours': 'ASIABH || EUROBH',
     'Creative Writing honours': 'CRWTWH',
+    'Nanoscience Honours' : 'NANO?H',
     'Construction Management and Property undergraduate program or minor': 'BLDG??',
     'Media, Culture and Technology honours': 'MECTBH',
     'Theatre and Performance Studies honours': 'THSTBH',
     'Environmental Humanities honours': 'ENVPEH',
     'Physics Honours': 'ZPEMPH || PHYSGH',
     'Film Studies honours': 'FILMBH',
+    'Creative Writing Major or minor': 'CRWTA1 || CRWTAH || CRWTA2',
+    'Creative Writing Major': 'CRWTA1 || CRWTAH',
     'English honours': 'ENGLDH',
     'Dance Studies honours': 'DANCBH',
     'History honours': 'HISTCH || ZHSSHH',
@@ -35,6 +42,7 @@ SPECIALISATION_MAPPINGS = {
     'Korean Studies honours': 'KORECH',
     'Linguistics honours': 'LINGCH',
     'German Studies honours': 'GERSBH',
+    'Neuroscience Honours': 'NEUR?H',
     'European Studies honours': 'EUROBH',
     'Sociology and Anthropology honours': 'SOCACH',
     'Politics and International Relations honours': 'POLSGH',
@@ -42,14 +50,20 @@ SPECIALISATION_MAPPINGS = {
     'Media honours': 'MDIA?H',
     'Education honours': '4509',
     'Criminology honours': '4505',
+    'Medical Science': '3991',
+    'Medicinal Chemistry honours': 'CHEMFH',
     'Politics, Philosophy and Economics': '3478 || 4797',
     'single or double Music (Honours)': 'MUSC?H || 4508',
+    'development studies honours': '8942',
+    'International Relations honours': 'POLSGH',
+    'Politics honours': 'ZHSSPH || POLSGH',
     'Music program': 'MUSC?? || 4508',
     'Social Work': '4033',
     'single or dual award Media': '4510 || 3454 || 3438 || 3453',
     'single or double degree Media': '4510 || 3454 || 3438 || 3453',
     'Social Science or Social Research and Policy': '3321 || 3420',
     'Education program': '4509 || 4056',
+    'Landscape Architecture minor': 'LANDA2',
     'International Studies(?:\s+single)?(?:\s+or\s+((double)|(dual))\s+((degree)|(program)))?(?:\s*\(2017 onwards\))?': '3447',
 }
 
@@ -76,7 +90,7 @@ def preprocess_conditions():
         # Phase 1: Deletions
         processed = delete_exclusions_and_equivalents(processed)
         processed = delete_HTML(processed)
-        note, processed = remove_extraneous_comm_data(processed)
+        note, processed = remove_extraneous_handbook_data(processed)
         if note != "":
             conditions["handbook_note"] = note
         processed = delete_self_referencing(code, processed)
@@ -85,6 +99,7 @@ def preprocess_conditions():
         processed = delete_trailing_punc(processed)
 
         # Phase 2: Conversions
+        processed = convert_semicolon(processed)
         processed = convert_square_brackets(processed)
         processed = convert_UOC(processed)
         processed = convert_WAM(processed)
@@ -103,12 +118,18 @@ def preprocess_conditions():
 
         # Phase 4: Final touches
         processed = strip_spaces(processed)
+        processed = strip_specialisation(processed)
         processed = strip_bracket_spaces(processed)
 
         # Phase 5: Common patterns
         processed = uoc_in_business_school(processed)
+        processed = enrolment_in_program(processed)
         processed = l2_math_courses(processed)
         processed = unsw_global_degrees(processed)
+        processed = international_public_health(processed)
+        processed = business_honours(processed)
+        processed = honours_plan(processed)
+        processed = research_thesis(processed)
 
 
 
@@ -167,6 +188,10 @@ def delete_extraneous_phrasing(processed: str) -> str:
 
     # Remove 'or higher' as XXWAM implies XX minimum
     processed = re.sub("or higher", "", processed)
+    processed = re.sub("or above", "", processed)
+    # dont care
+    processed = re.sub(r"or\s*equivalent", "", processed)
+    processed = re.sub(r"^None", "", processed)
 
     # Remove 'student' references as it is implied
     processed = re.sub("students?", "", processed, flags=re.IGNORECASE)
@@ -174,17 +199,24 @@ def delete_extraneous_phrasing(processed: str) -> str:
     # Remove enrollment language since course and program codes imply this
     processed = re.sub("enrolled in", "", processed, flags=re.IGNORECASE)
 
+    # remove 'undergrad' because its implied
+    processed = re.sub(r"UG", "", processed, flags=re.IGNORECASE)
+    processed = re.sub(r"undergrad(uate)?", "", processed, flags=re.IGNORECASE)
+
     # Remove tautological endings
     processed = re.sub("(prior )?(in order )?to enrol(l)?(ing)?(ment)?( in(to)? this course)?", "", processed, flags=re.IGNORECASE)
+    processed = re.sub("to be eligible for this course", "", processed, flags=re.IGNORECASE)
 
     # Remove completion language
     completion_text = [
+        "Successful completion of",
         "completion of",
         "must successfully complete",
         "must have completed",
         "completing",
         "completed",
         "a pass in",
+        "should have"
     ]
     for text in completion_text:
         processed = re.sub(text, "", processed, flags=re.IGNORECASE)
@@ -195,8 +227,10 @@ def delete_extraneous_phrasing(processed: str) -> str:
 def delete_prereq_label(processed: str) -> str:
     """Removes 'prerequisite' and variations"""
     # variations incude ["prerequisite", "pre-requisite", "prer-requisite", "pre req", "prereq:"]
-    return re.sub(r"pre( req)?[a-z\/_\-]* *[:;]*", "", processed, flags=re.IGNORECASE)
+    return re.sub(r"pre( req)?[a-z\/_\-]*( (is|conditions))? *[:;]*", "", processed, flags=re.IGNORECASE)
 
+def convert_semicolon(processed: str) -> str:
+    return re.sub(r"(.*);", r"(\1)", processed)
 
 def delete_trailing_punc(processed: str) -> str:
     """Deletes any trailing punctuation"""
@@ -226,10 +260,10 @@ def convert_UOC(processed: str) -> str:
 
     # After UOC has been mainly converted, remove some extraneous phrasing
     processed = re.sub(
-        r"(of|at least)?\s*(\d+UOC)", r" \2", processed, flags=re.IGNORECASE
+        r"((are\s*required|need)\s*to\s*have\s*a\s*minimum)?\s*(of|at least)?\s*(\d+UOC)", r" \4", processed, flags=re.IGNORECASE
     )
     processed = re.sub(
-        r"(\d+UOC)(\s*overall\s*)", r"\1 ", processed, flags=re.IGNORECASE
+        r"(\d+UOC)(\s*(overall|(to undertake this|of) courses?)\s*)", r"\1 ", processed, flags=re.IGNORECASE
     )
 
     # Remove "minimum" since it is implied
@@ -244,14 +278,14 @@ def convert_WAM(processed: str) -> str:
     #    - "WAM of 65" -> "65WAM"
     #    - "WAM of at least 65" -> "65WAM"
     processed = re.sub(
-        r"WAM ([a-z]* ){0,3}(\d\d)", r"\2WAM", processed, flags=re.IGNORECASE
+        r"WAM ([a-z]* ){0,3}(>=)?(\d\d)", r"\3WAM", processed, flags=re.IGNORECASE
     )
 
     # Then delete any superfluous preceding words, chars or spaces, e.g.:
     #    - "minimum 65WAM" -> "65WAM"
     #    - "A 65WAM" -> "65WAM"
     processed = re.sub(
-        r"[a|minimum]+ (\d\d)\s*WAM", r"\1WAM", processed, flags=re.IGNORECASE
+        r"[a|minimum|must have]+ (\d\d)\s*WAM", r" \1WAM", processed, flags=re.IGNORECASE
     )
 
     # Compress any remaining spaces between digits and WAM and remove misc chars
@@ -260,7 +294,7 @@ def convert_WAM(processed: str) -> str:
     #    - "65+ WAM" -> "65WAM"
     #    - "65WAM+" -> "65WAM"
     processed = re.sub(
-        r">?(\d\d)\+?\s*WAM\+?", r"\1WAM", processed, flags=re.IGNORECASE
+        r">?=?(\d\d)\+?\s*WAM\+?", r"\1WAM", processed, flags=re.IGNORECASE
     )
 
     return processed
@@ -291,15 +325,14 @@ def convert_GRADE(processed: str) -> str:
 
 def convert_level(processed: str) -> str:
     """Converts level X to LX"""
-    return re.sub(r"level (\d)", r"L\1", processed, flags=re.IGNORECASE)
-
+    processed = re.sub(r"((at|in|of) )?level (\d)( courses)?", r"in L\3", processed, flags=re.IGNORECASE)
+    return re.sub(r"in L(\d)( [A-Z]{4})( courses)?", r"in L\1\2", processed, flags=re.IGNORECASE)
 
 def convert_program_type(processed: str) -> str:
     """Converts complex phrases into something of the form CODE# for specifying a program type"""
-    # TODO: make this more generic
-    processed = map_word_to_program_type(processed, r"actuarial( studies)?", "ACTL#")
-    processed = map_word_to_program_type(processed, r"business", "BUSN#")
-    processed = map_word_to_program_type(processed, r"commerce", "COMM#")
+    with open("algorithms/cache/cache_config.json") as f:
+        cache: dict[str, list[str]] = json.loads(f.read())
+        processed = reduce((lambda a,b: b if b != processed else a), (map_word_to_program_type(processed, string, hashlist[0]) for string, hashlist in cache.items()))
     return processed
 
 
@@ -333,7 +366,7 @@ def convert_manual_programs_and_specialisations(processed: str) -> str:
     """
     for prog_str, code in SPECIALISATION_MAPPINGS.items():
         processed = re.sub(
-            rf"\s*enrolment\s+in\s+((?:an?\s+)|(?:the\s+))?{prog_str}(?:\s+program)?\s*",
+            rf"(this course is\s*)?(enrolment\s+in\s+|restricted\s+to\s+)?((?:an?\s+)|(?:the\s+))?{prog_str}(\s*\({code}\))?(?:\s+(program|plan))?\s*",
             f" ({code}) ",
             processed,
             flags=re.IGNORECASE
@@ -462,9 +495,10 @@ def strip_bracket_spaces(processed: str) -> str:
     return processed
 
 
-# """Converts majors and minors into their respective specialisation codes.
-# E.g. Bsc COMP major """
-# def
+def strip_specialisation(processed: str) -> str:
+    """Converts majors and minors into their respective specialisation codes.
+    E.g. Bsc COMP major """
+    return re.sub(r"be ([A-Z]{6}) (major|minor|honours)", r"\1", processed)
 
 # """
 # Maybe don't need here, put it in another file at the end.
@@ -500,11 +534,16 @@ def l2_math_courses(processed: str) -> str:
 
 def map_word_to_program_type(processed: str, regex_word: str, type: str):
     return re.sub(
-        rf"in {regex_word} (programs?|single or dual degrees?)",
+        rf"(a )?(enrolment )?(in )?(a )?(single or (double|dual) (degree|award) )?{regex_word}( studies)? (programs?( \(.*\))?|single or dual degrees?)",
         type,
         processed,
         flags=re.IGNORECASE,
-    )  # hard to capture a generic case?
+    )
+
+def enrolment_in_program(processed: str):
+    processed = re.sub(r"enrolment in program (.*)", r"(\1)", processed, flags=re.IGNORECASE)
+    processed = re.sub(r"^([0-9]{4}) program$", r"(\1)", processed, flags=re.IGNORECASE)
+    return re.sub(r"^program ([0-9]{4})$", r"(\1)", processed, flags=re.IGNORECASE)
 
 def unsw_global_degrees(processed: str):
     processed =  re.sub(
@@ -528,7 +567,7 @@ def add_note_if_found(processed, find, note, substitute_with, add_to_note):
     processed, number_of_subs = re.subn(find, substitute_with, processed, flags=re.IGNORECASE)
     return processed, note + add_to_note * (number_of_subs > 0)
 
-def remove_extraneous_comm_data(processed):
+def remove_extraneous_handbook_data(processed):
     """Adds handbook notes and removes phrasing
     example: 'good academic standing' -> '' with a handbook_note:'Students must be in Good Academic Standing.' """
     note = ""
@@ -556,7 +595,9 @@ def remove_extraneous_comm_data(processed):
     find = r"Its recommended to seek a progression check prior to application."
     processed, note = add_note_if_found(processed, find, note, r"", find)
     processed, note = add_note_if_found(processed, r"This course is by application only.( )?Please visit Business School website for more information", note, r"", "This course is by application only. Please visit Business School website for more information")
-
+    
+    processed, note = add_note_if_found(processed, r"or language placement approval", note, r"", "language placement approval can also be used.")
+    processed, note = add_note_if_found(processed, r"or with Head of School approval", note, r"", "Head of school approval can also be used.")
     # Commerce degree notes
     processed, note = add_note_if_found(processed, r"(Students are expected to be )?in their final year of a( single or )?(double)?(dual)? Bachelor of Commerce( single or dual)?( degree)?", note, r"COMM#", "Students must be in their final year of a single or double Commerce degree")
     processed = re.sub(
@@ -570,11 +611,19 @@ def remove_extraneous_comm_data(processed):
     processed = re.sub(
         r"(\d+UOC) of Business courses", r"\1 in ZBUS && COMM#", processed
     )
-    # delete semi-colon
-    processed = re.sub(
-    r";", r"", processed, flags=re.IGNORECASE
-    )
     return note, processed
+
+def international_public_health(processed: str):
+    return re.sub("Currently program 3880 Bachelor of International Public Health", '3880', processed, flags=re.IGNORECASE)
+
+def business_honours(processed: str):
+    return re.sub(r"Enrolment in Business \(Honours\) Program 4512", '4512', processed, flags=re.IGNORECASE)
+
+def research_thesis(processed: str):
+    return re.sub(r"Research Thesis [A|B] \(([0-9]{4})\)", r"\1", processed)
+
+def honours_plan(processed: str):
+    return re.sub(r"^([A-Z]{4}) (h|H)on(our)?s( (p|P)lan)?$", r"\1" + "?H", processed)
 
 if __name__ == "__main__":
     preprocess_conditions()
