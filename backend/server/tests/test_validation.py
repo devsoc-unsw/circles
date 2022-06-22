@@ -29,12 +29,9 @@ def test_validation():
         majorsGroups = majorsGroups.json()['spec'] if majorsGroups.status_code == 200 else {}
         minorsGroups = minorsGroups.json()['spec'] if minorsGroups.status_code == 200 else {}
         honoursGroups = honoursGroups.json()['spec'] if honoursGroups.status_code == 200 else {}
-        print(majorsGroups)
         for group in chain(majorsGroups.values(), minorsGroups.values(), honoursGroups.values()):
-            print(group)
             for spec in group['specs'].keys():
                 if spec not in fake_specs:
-                    print(spec)
                     assert_possible_structure(unlocked, program, spec)
 
 
