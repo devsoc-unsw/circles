@@ -41,7 +41,7 @@ const migrations = {
   1: () => undefined,
   2: (oldState) => {
     const newState = { ...oldState };
-    newState.degree.specs = newState.degree.majors + newState.degree.minors;
+    newState.degree.specs = [...newState.degree.majors, ...newState.degree.minors];
     delete newState.degree.majors;
     delete newState.degree.minors;
     return newState;
