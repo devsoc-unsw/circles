@@ -48,6 +48,7 @@ def fix_conditions():
     CONDITIONS["MATH3121"][PROCESSED] = MATH_3101_3121()
     CONDITIONS["MATH3161"][PROCESSED] = MATH_3161()
     CONDITIONS["MATH3171"][PROCESSED] = MATH_3171()
+    CONDITIONS["MATH3191"][PROCESSED] = MATH_3191()
     CONDITIONS["MATH3261"][PROCESSED] = MATH_3261()
     CONDITIONS["MATH3361"][PROCESSED] = MATH_3361()
     CONDITIONS["MATH3531"][PROCESSED] = MATH_3531()
@@ -222,6 +223,13 @@ def MATH_3171():
 
     return "((MATH2011 || MATH2111) && (MATH2501 || MATH2601)) || (65GRADE in MATH2069 && MATH2099) || ((75GRADE in MATH2018 || 75GRADE in MATH2019) && MATH2089)"
 
+def MATH_3191():
+    """
+        "original": "12 Units of Credit of Level 2 MATH courses, which must include MATH2011 or MATH2111or MATH2018(DN) or MATH2019(DN)<br/><br/>",
+        "processed": "12UOC in L2 MATH, which must include MATH2011 || MATH2111or 75GRADE in MATH2018 || 75GRADE in MATH2019"
+    """
+
+    return "12UOC in L2 MATH && (MATH2011 || MATH2111 || 75GRADE in MATH2018 || 75GRADE in MATH2019)"
 
 def MATH_3261():
     """
@@ -314,7 +322,6 @@ def MATH_4001():
     "processed": "MATH?H"
     """
 
-    # TODO: JOEL: This doesn't work?? Why? It just doesn't know what 'MATH?H'means?
     return "MATH?H"
 
 

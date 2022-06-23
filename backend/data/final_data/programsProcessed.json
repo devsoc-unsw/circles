@@ -1677,6 +1677,69 @@
         "components": {
             "non_spec_data": [
                 {
+                    "type": "core_courses",
+                    "courses": {
+                        "ANAT2111": "Introductory Anatomy",
+                        "OPTM2133": "The Clinical Environment",
+                        "OPTM2233": "Optical Dispensing",
+                        "PHSL2101": "Physiology 1A",
+                        "PHSL2201": "Physiology 1B",
+                        "VISN2111": "Ocular Anatomy and Physiology",
+                        "VISN2211": "Organisation and Function of the Visual System"
+                    },
+                    "title": "Level 2 Core Courses",
+                    "credits_to_complete": 42,
+                    "levels": [
+                        2
+                    ],
+                    "notes": "Students must take 42 UOC of the following courses."
+                },
+                {
+                    "type": "core_courses",
+                    "courses": {
+                        "BABS1201": "Molecules, Cells and Genes",
+                        "CHEM1011": "Chemistry 1A: Atoms, Molecules and Energy",
+                        "CHEM1829": "Biological Chemistry for Optometry Students",
+                        "MATH1131 or MATH1031 or MATH1141": [
+                            "Mathematics 1A",
+                            "Mathematics for Life Sciences",
+                            "Higher Mathematics 1A"
+                        ],
+                        "PHYS1131 or PHYS1121 or PHYS1111": [
+                            "Higher Physics 1A",
+                            "Physics 1A",
+                            "Fundamentals of Physics"
+                        ],
+                        "VISN1101": "Seeing the World: Perspectives from Vision Science",
+                        "VISN1111": "Geometrical and Physical Optics",
+                        "VISN1221": "Visual Optics"
+                    },
+                    "title": "Level 1 Core Courses",
+                    "credits_to_complete": 48,
+                    "levels": [
+                        1
+                    ],
+                    "notes": "Students must take 48 UOC of the following courses."
+                },
+                {
+                    "type": "core_courses",
+                    "courses": {
+                        "OPTM3105": "Disease Processes of the Eye 1",
+                        "OPTM3133": "Vision Science in the Consulting Room",
+                        "OPTM3201": "Ocular Imaging & Applied Vision Science",
+                        "OPTM3205": "Disease Processes of the Eye 2",
+                        "OPTM3233": "Working in Clinical Contexts",
+                        "PHAR3306": "Pharmacology for Optometry",
+                        "VISN3111": "Development and Aging of the Visual System"
+                    },
+                    "title": "Level 3 Core Courses",
+                    "credits_to_complete": 42,
+                    "levels": [
+                        3
+                    ],
+                    "notes": "Students must take 42 UOC of the following courses."
+                },
+                {
                     "type": "limit_rule",
                     "courses": {
                         "ANAT": "any School of Medical Sciences course",
@@ -1708,69 +1771,6 @@
                         9
                     ],
                     "notes": "Students may not undertake any of the following excluded courses."
-                },
-                {
-                    "type": "core_courses",
-                    "courses": {
-                        "OPTM3105": "Disease Processes of the Eye 1",
-                        "OPTM3133": "Vision Science in the Consulting Room",
-                        "OPTM3201": "Ocular Imaging & Applied Vision Science",
-                        "OPTM3205": "Disease Processes of the Eye 2",
-                        "OPTM3233": "Working in Clinical Contexts",
-                        "PHAR3306": "Pharmacology for Optometry",
-                        "VISN3111": "Development and Aging of the Visual System"
-                    },
-                    "title": "Level 3 Core Courses",
-                    "credits_to_complete": 42,
-                    "levels": [
-                        3
-                    ],
-                    "notes": "Students must take 42 UOC of the following courses."
-                },
-                {
-                    "type": "core_courses",
-                    "courses": {
-                        "ANAT2111": "Introductory Anatomy",
-                        "OPTM2133": "The Clinical Environment",
-                        "OPTM2233": "Optical Dispensing",
-                        "PHSL2101": "Physiology 1A",
-                        "PHSL2201": "Physiology 1B",
-                        "VISN2111": "Ocular Anatomy and Physiology",
-                        "VISN2211": "Organisation and Function of the Visual System"
-                    },
-                    "title": "Level 2 Core Courses",
-                    "credits_to_complete": 42,
-                    "levels": [
-                        2
-                    ],
-                    "notes": "Students must take 42 UOC of the following courses."
-                },
-                {
-                    "type": "core_courses",
-                    "courses": {
-                        "BABS1201": "Molecules, Cells and Genes",
-                        "CHEM1011": "Chemistry 1A: Atoms, Molecules and Energy",
-                        "CHEM1829": "Biological Chemistry for Optometry Students",
-                        "MATH1131 or MATH1141 or MATH1031": [
-                            "Mathematics 1A",
-                            "Higher Mathematics 1A",
-                            "Mathematics for Life Sciences"
-                        ],
-                        "PHYS1121 or PHYS1111 or PHYS1131": [
-                            "Physics 1A",
-                            "Fundamentals of Physics",
-                            "Higher Physics 1A"
-                        ],
-                        "VISN1101": "Seeing the World: Perspectives from Vision Science",
-                        "VISN1111": "Geometrical and Physical Optics",
-                        "VISN1221": "Visual Optics"
-                    },
-                    "title": "Level 1 Core Courses",
-                    "credits_to_complete": 48,
-                    "levels": [
-                        1
-                    ],
-                    "notes": "Students must take 48 UOC of the following courses."
                 },
                 {
                     "type": "gened",
@@ -28183,6 +28183,16 @@
         "components": {
             "non_spec_data": [
                 {
+                    "type": "info_rule",
+                    "title": "Course Information Rule",
+                    "notes": "GEN# courses cannot count towards the free elective component, or towards science core courses or science electives in the program. Any exceptions to these rules must be approved by the Associate Dean (Academic Programs) or nominee."
+                },
+                {
+                    "type": "gened",
+                    "credits_to_complete": 12,
+                    "notes": "Students must take 12 UOC of the following courses.\nAny course defined as a Science or Medicine course cannot be taken as General Education (GE). All other courses can be used to fulfil the GE requirement of this program, including GEN# coded courses. Any exceptions to these rules must be approved by the Associate Dean (Academic Programs) or nominee."
+                },
+                {
                     "type": "limit_rule",
                     "courses": {
                         "ANAT": "any School of Medical Sciences course",
@@ -28229,14 +28239,41 @@
                     "notes": "Students may not undertake any of the following excluded courses."
                 },
                 {
-                    "type": "gened",
-                    "credits_to_complete": 12,
-                    "notes": "Students must take 12 UOC of the following courses.\nAny course defined as a Science or Medicine course cannot be taken as General Education (GE). All other courses can be used to fulfil the GE requirement of this program, including GEN# coded courses. Any exceptions to these rules must be approved by the Associate Dean (Academic Programs) or nominee."
-                },
-                {
-                    "type": "info_rule",
-                    "title": "Course Information Rule",
-                    "notes": "GEN# courses cannot count towards the free elective component, or towards science core courses or science electives in the program. Any exceptions to these rules must be approved by the Associate Dean (Academic Programs) or nominee."
+                    "type": "prescribed_electives",
+                    "courses": {
+                        "AVIA": "any course offered by Faculty of Science",
+                        "BABS": "any course offered by Faculty of Science",
+                        "BEES": "any course offered by Faculty of Science",
+                        "BIOC": "any course offered by Faculty of Science",
+                        "BIOS": "any course offered by Faculty of Science",
+                        "CHEM": "any course offered by Faculty of Science",
+                        "CLIM": "any course offered by Faculty of Science",
+                        "DATA": "any course offered by Faculty of Science",
+                        "GENS": "any course offered by Faculty of Science",
+                        "GEOS": "any course offered by Faculty of Science",
+                        "MATH": "any course offered by Faculty of Science",
+                        "MATS": "any course offered by Faculty of Science",
+                        "MICR": "any course offered by Faculty of Science",
+                        "MSCI": "any course offered by Faculty of Science",
+                        "NANO": "any course offered by Faculty of Science",
+                        "PHYS": "any course offered by Faculty of Science",
+                        "PSYC": "any course offered by Faculty of Science",
+                        "SCIF": "any course offered by Faculty of Science"
+                    },
+                    "title": "Science Elective",
+                    "credits_to_complete": 6,
+                    "levels": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9
+                    ],
+                    "notes": "Students must take 6 UOC of the following courses (Psychology, Physics or other Mathematics courses are recommended)"
                 },
                 {
                     "type": "prescribed_electives",
@@ -28286,43 +28323,6 @@
                     "notes": "Students must take at least 24 UOC of the following courses.\nNote: only 6UoC from BABS3301 or SOMS3001 can be taken.\nPlease Note: When making their course choices, students who intend to do Honours should review the requirements and information on the websites of the School of Biotechnology and Biomolecular Sciences or the School of Medical Sciences prior to enrolment in Stage 3."
                 },
                 {
-                    "type": "prescribed_electives",
-                    "courses": {
-                        "AVIA": "any course offered by Faculty of Science",
-                        "BABS": "any course offered by Faculty of Science",
-                        "BEES": "any course offered by Faculty of Science",
-                        "BIOC": "any course offered by Faculty of Science",
-                        "BIOS": "any course offered by Faculty of Science",
-                        "CHEM": "any course offered by Faculty of Science",
-                        "CLIM": "any course offered by Faculty of Science",
-                        "DATA": "any course offered by Faculty of Science",
-                        "GENS": "any course offered by Faculty of Science",
-                        "GEOS": "any course offered by Faculty of Science",
-                        "MATH": "any course offered by Faculty of Science",
-                        "MATS": "any course offered by Faculty of Science",
-                        "MICR": "any course offered by Faculty of Science",
-                        "MSCI": "any course offered by Faculty of Science",
-                        "NANO": "any course offered by Faculty of Science",
-                        "PHYS": "any course offered by Faculty of Science",
-                        "PSYC": "any course offered by Faculty of Science",
-                        "SCIF": "any course offered by Faculty of Science"
-                    },
-                    "title": "Science Elective",
-                    "credits_to_complete": 6,
-                    "levels": [
-                        1,
-                        2,
-                        3,
-                        4,
-                        5,
-                        6,
-                        7,
-                        8,
-                        9
-                    ],
-                    "notes": "Students must take 6 UOC of the following courses (Psychology, Physics or other Mathematics courses are recommended)"
-                },
-                {
                     "type": "core_courses",
                     "courses": {
                         "ANAT2241": "Histology: Basic and Systematic",
@@ -28346,9 +28346,9 @@
                     "courses": {
                         "ANAT1521": "Anatomy for Medical Science",
                         "BABS1201": "Molecules, Cells and Genes",
-                        "BIOS1101 or BABS2202 or BABS2204": [
-                            "Evolutionary and Functional Biology",
+                        "BABS2202 or BIOS1101 or BABS2204": [
                             "Molecular Cell Biology 1",
+                            "Evolutionary and Functional Biology",
                             "Genetics"
                         ],
                         "CHEM1011": "Chemistry 1A: Atoms, Molecules and Energy",
@@ -28362,7 +28362,8 @@
                     "title": "Level 1 Core Courses",
                     "credits_to_complete": 42,
                     "levels": [
-                        1
+                        1,
+                        2
                     ],
                     "notes": "Students must take 42 UOC of the following courses.\nNote: Students in 3991 can only enrol in SCIF1131 in T3 if they cannot take SCIF1111 in T1"
                 }
@@ -28373,14 +28374,14 @@
                         "is_optional": false,
                         "specs": {
                             "MICRK1": "Medical Immunology",
+                            "BIOCI1": "Molecular Genetics",
+                            "PHARC1": "Medical Pharmacology",
                             "NEURB1": "Neurobiology",
+                            "PHSLC1": "Medical Physiology",
                             "BIOCH1": "Molecular Biology",
                             "MICRH1": "Medical Microbiology",
-                            "PHARC1": "Medical Pharmacology",
-                            "PHSLC1": "Medical Physiology",
                             "PATHC1": "Human Pathology",
-                            "ANATE1": "Human Anatomy",
-                            "BIOCI1": "Molecular Genetics"
+                            "ANATE1": "Human Anatomy"
                         },
                         "notes": "Students may elect to complete a major, or a double major, from the following areas. Where a student would like to graduate with a major (this is not a compulsory part of the program) this must be declared by the commencement of a student's final year of study.\nPlease Note: Students may complete a maximum of two majors but no double-counting of courses between majors is allowed at Level 3."
                     }

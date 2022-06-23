@@ -1,9 +1,7 @@
 name: Docker
 on:
   push:
-    branches:
-      - "dev"
-      - "renovate/*"
+    branches: [ "dev", "renovate/*" ]
 
 jobs:
   build:
