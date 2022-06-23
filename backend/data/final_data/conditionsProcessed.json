@@ -3654,8 +3654,7 @@
     },
     "COMP4920": {
         "original": "Prerequisite: (COMP2511 or COMP2911) and completion of 96 UOC in Computer Science.<br/><br/>",
-        "processed": "(COMP2511 || COMP2911) && 96UOC",
-        "handbook_note": "96UOC must be from Computer Science courses"
+        "processed": "(COMP2511 || COMP2911) && 96UOC in Computer Science"
     },
     "COMP4951": {
         "original": "Prerequisite: Enrolled in a CSE BE (Hons) programs, completion of 126 UOC and completion of 3rd year core.<br/><br/>",
@@ -10020,7 +10019,7 @@
     },
     "SENG2021": {
         "original": "Prerequisite:  SENG1031 or COMP1531, and enrolment in a BE or BE(Hons) Software Engineering major.<br/><br/>",
-        "processed": "SENG1031 || COMP1531 && (SENG?1 || SENG?H)"
+        "processed": "(SENG1031 || COMP1531) && ENGG#"
     },
     "SENG2991": {
         "original": "Currently enrolled in Program 3707 in the SENGAH stream <br/>and in an approved workplace arrangement <br/>and completed COMP1511, COMP1531 and COMP2521.<br/><br/>",
@@ -10051,7 +10050,7 @@
     },
     "SENG4920": {
         "original": "Prerequisite: COMP2511<br/><br/><br/>Completed more than or equal to 144 UOC in SENGAH, BINFAH or COMPBH<br/><br/>",
-        "processed": "COMP2511 && 144UOC in (SENGAH || BINFAH || COMPBH)"
+        "processed": "COMP2511 more than || equal to 144UOC in SENGAH || BINFAH || COMPBH"
     },
     "SOCW1001": {
         "original": "",

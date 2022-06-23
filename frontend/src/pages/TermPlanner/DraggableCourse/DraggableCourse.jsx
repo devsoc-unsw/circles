@@ -108,7 +108,7 @@ const DraggableCourse = ({ code, index, showMarks }) => {
             : !isUnlocked ? prereqs.trim()
               : !isOffered ? "The course is not offered in this term."
                 : warningMessage.length !== 0 ? warningMessage.join("\n")
-                  : handbookNote}
+                  : <div dangerouslySetInnerHTML={{ __html: handbookNote }} />}
           {!isAccurate ? " The course info may be inaccurate." : ""}
         </ReactTooltip>
       )}
