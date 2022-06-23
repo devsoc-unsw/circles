@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const initialState = {
+const initialState = {
   programCode: "",
   programName: "",
-  majors: [],
-  minors: [],
+  specs: [],
+  isComplete: false,
 };
 
 const degreeSlice = createSlice({
@@ -15,26 +15,22 @@ const degreeSlice = createSlice({
       state.programCode = action.payload.programCode;
       state.programName = action.payload.programName;
     },
-    addMajor: (state, action) => {
-      state.majors.push(action.payload);
+    addSpecialisation: (state, action) => {
+      state.specs.push(action.payload);
     },
-    removeMajor: (state, action) => {
-      const index = state.majors.indexOf(action.payload);
-      if (index !== -1) state.majors.splice(index, 1);
+    removeSpecialisation: (state, action) => {
+      const index = state.specs.indexOf(action.payload);
+      if (index !== -1) state.specs.splice(index, 1);
     },
-    addMinor: (state, action) => {
-      state.minors.push(action.payload);
-    },
-    removeMinor: (state, action) => {
-      const index = state.minors.indexOf(action.payload);
-      if (index !== -1) state.minors.splice(index, 1);
+    setIsComplete: (state, action) => {
+      state.isComplete = action.payload;
     },
     resetDegree: () => initialState,
   },
 });
 
 export const {
-  setProgram, resetDegree, addMajor, removeMajor, addMinor, removeMinor,
+  setProgram, resetDegree, addSpecialisation, removeSpecialisation, setIsComplete,
 } = degreeSlice.actions;
 
 export default degreeSlice.reducer;

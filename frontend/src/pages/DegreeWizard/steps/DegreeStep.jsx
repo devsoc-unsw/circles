@@ -5,7 +5,7 @@ import {
   Menu, Typography,
 } from "antd";
 import axios from "axios";
-import { setProgram } from "reducers/degreeSlice";
+import { resetDegree, setProgram } from "reducers/degreeSlice";
 import springProps from "./spring";
 import "./steps.less";
 
@@ -26,6 +26,7 @@ const DegreeStep = ({ incrementStep, currStep }) => {
   }, []);
 
   const handleDegreeChange = (e) => {
+    dispatch(resetDegree()); // reset degree to reset state of spec
     dispatch(
       setProgram({ programCode: e.key, programName: options[e.key] }),
     );

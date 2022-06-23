@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Skeleton, Table, Typography } from "antd";
-import getPastCourses from "../getPastCourses";
+import getFormattedPlannerCourses from "../getFormattedPlannerCourses";
 import "./index.less";
 
 const TableView = ({ isLoading, structure }) => {
   const { Title } = Typography;
-  const [pastCourses, setPastCourses] = useState({});
+  const [plannerCourses, setPlannerCourses] = useState({});
   const [tableLayout, setTableLayout] = useState({});
   const { years, startYear, courses } = useSelector((store) => store.planner);
 
@@ -31,10 +31,10 @@ const TableView = ({ isLoading, structure }) => {
                   key: courseCode,
                   title: plannedCourses[courseCode].title,
                   UOC: plannedCourses[courseCode].UOC,
-                  termTaken: plannedCourses[courseCode].termTaken,
+                  termPlanned: plannedCourses[courseCode].termPlanned,
                 });
                 newTableLayout[group][subgroup].sort(
-                  (a, b) => a.termTaken.localeCompare(b.termTaken),
+                  (a, b) => a.termPlanned.localeCompare(b.termPlanned),
                 );
               }
             });
@@ -48,7 +48,7 @@ const TableView = ({ isLoading, structure }) => {
                   key: courseCode,
                   title: plannedCourses.courseCode.title,
                   UOC: plannedCourses.courseCode.UOC,
-                  termTaken: plannedCourses.courseCode.termTaken,
+                  termPlanned: plannedCourses.courseCode.termPlanned,
                 });
               }
             });
@@ -66,8 +66,8 @@ const TableView = ({ isLoading, structure }) => {
   };
 
   useEffect(() => {
-    setPastCourses(getPastCourses(years, startYear, courses));
-    generateTableStructure(pastCourses);
+    setPlannerCourses(getFormattedPlannerCourses(years, startYear, courses));
+    generateTableStructure(plannerCourses);
   }, [isLoading, structure, years, startYear, courses]);
 
   const columns = [
@@ -87,9 +87,9 @@ const TableView = ({ isLoading, structure }) => {
       key: "UOC",
     },
     {
-      title: "Term Taken",
-      dataIndex: "termTaken",
-      key: "termTaken",
+      title: "Term Planned",
+      dataIndex: "termPlanned",
+      key: "termPlanned",
     },
   ];
 

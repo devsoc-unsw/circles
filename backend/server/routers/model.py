@@ -1,27 +1,18 @@
 """ model for interacting with the FE """
 # pylint: disable=missing-class-docstring
 import json
-from pickle import load
+import pickle
 from typing import Optional
 
 from algorithms.objects.conditions import CompositeCondition
 from pydantic import BaseModel
 
-
-class message(BaseModel):
-    message: str
-
-
-class programs(BaseModel):
+class Programs(BaseModel):
     programs: dict
 
 
-class Majors(BaseModel):
-    majors: dict
-
-
-class minors(BaseModel):
-    minors: dict
+class Specialisations(BaseModel):
+    spec: dict
 
 
 class ProgramCourses(BaseModel):
@@ -65,6 +56,7 @@ class CourseState(BaseModel):
     handbook_note: str
     warnings: list
 
+
 class ValidCourseState(BaseModel):
     is_accurate: bool
     unlocked: bool
@@ -72,15 +64,19 @@ class ValidCourseState(BaseModel):
     warnings: list
     supressed: bool
 
+
 class CoursesState(BaseModel):
     courses_state: dict[str, CourseState] = {}
+
 
 class ValidCoursesState(BaseModel):
     courses_state: dict[str, ValidCourseState] = {}
 
+
 class CoursesUnlockedWhenTaken (BaseModel):
     direct_unlock: list
     indirect_unlock: list
+
 
 class CourseTypeState(BaseModel):
     is_accurate: bool
@@ -101,23 +97,26 @@ class PlannerData(BaseModel):
     plan: list[list[dict]]
     mostRecentPastTerm: dict
 
+
 class Courses (BaseModel):
     courses: list[str]
+
 
 class CoursesPath (BaseModel):
     original: str
     courses: list[str]
 
-minorInFE = ["3778"]
-minorInSpecialisation = ["3502", "3970"]
+
+class Description(BaseModel):
+    description: str
 
 
-CONDITIONS_PATH = "algorithms/conditions.pkl"
+class SpecialisationTypes(BaseModel):
+    types: list[str]
+
+CONDITIONS_PATH = "data/final_data/conditions.pkl"
 with open(CONDITIONS_PATH, "rb") as file:
-    CONDITIONS: dict[str, CompositeCondition] = load(file)
+    CONDITIONS: dict[str, CompositeCondition] = pickle.load(file)
 
 with open("algorithms/cache/handbook_note.json", "r", encoding="utf8") as file:
     CACHED_HANDBOOK_NOTE: dict[str, str] = json.load(file)
-
-class description(BaseModel):
-    description: str

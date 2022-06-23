@@ -1,7 +1,7 @@
 import requests
 import json
 
-with open("algorithms/exampleUsers.json", encoding="utf8") as f:
+with open("./algorithms/tests/exampleUsers.json", encoding="utf8") as f:
     USER = json.load(f)["user6"]
 f.close()
 

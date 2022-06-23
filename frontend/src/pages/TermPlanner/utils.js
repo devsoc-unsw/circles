@@ -56,7 +56,7 @@ const getMostRecentPastTerm = (startYear) => {
 
 const prepareCoursesForValidation = (planner, degree, suppress) => {
   const { years, startYear, courses } = planner;
-  const { programCode, majors, minor } = degree;
+  const { programCode, specs } = degree;
 
   const plan = [];
   years.forEach((year) => {
@@ -73,7 +73,7 @@ const prepareCoursesForValidation = (planner, degree, suppress) => {
 
   const payload = {
     program: programCode,
-    specialisations: minor ? [...majors, minor] : majors,
+    specialisations: specs,
     year: 1,
     plan,
     mostRecentPastTerm: suppress ? getMostRecentPastTerm(startYear) : { Y: 0, T: 0 },
