@@ -83,7 +83,7 @@ const prepareCoursesForValidation = (planner, degree, suppress) => {
 };
 
 // Calculated lcm(uoc, 6) to determine number of times course must be taken.
-// e.g. 2 UOC course must be taken 3 times, 3 UOC course must be take 1 time
+// e.g. 2 UOC course must be taken 3 times, 3 UOC course must be take 2 times
 const getNumTerms = (uoc) => {
   let num1 = uoc;
   let num2 = 6;
@@ -92,20 +92,22 @@ const getNumTerms = (uoc) => {
     num2 = num1 % num2;
     num1 = tempNum;
   }
-  console.log(uoc, num1);
-  console.log("GOT", num1);
   return 6 / num1;
 };
 
-const getTermsList = (currentTerm, uoc, summerTerm) => {
-  const terms = ["T1", "T2", "T3"];
+const getTermsList = (currentTerm, uoc, availableTerms, summerTerm) => {
+  const allTerms = ["T1", "T2", "T3"];
   const termsList = [];
 
-  if (summerTerm) terms.shift("T0");
+  if (summerTerm) allTerms.unshift("T0");
+
+  // Remove any unavailable terms
+  const terms = allTerms.filter((term) => availableTerms.includes(term));
 
   let index = terms.indexOf(currentTerm);
   let rowOffset = 0;
   const numTerms = getNumTerms(uoc);
+
   for (let i = 0; i < numTerms; i++) {
     if (index === terms.length) {
       index = 0;
@@ -125,11 +127,32 @@ const getTermsList = (currentTerm, uoc, summerTerm) => {
 
 const getCurrentTermId = (originalTermId, term, yearOffset) => {
   const year = parseInt(originalTermId.slice(0, 4), 10) + yearOffset;
-  console.log(`${originalTermId} -> ${year}${term}`);
   return `${year}${term}`;
 };
 
+// Checks whether multiterm course will extend below bottom row of term planner
+const checkMultitermInBounds = (payload) => {
+  const {
+    destTerm, course, isSummerTerm, destRow, numYears,
+  } = payload;
+
+  const { UOC: uoc, termsOffered } = course;
+
+  if (!termsOffered.includes(destTerm)) {
+    return false;
+  }
+
+  const termsList = getTermsList(destTerm, uoc, termsOffered, isSummerTerm);
+  const { rowOffset } = termsList[termsList.length - 1];
+  return rowOffset < numYears - destRow;
+};
+
+// Checks whether a course is a multiterm course
+const checkIsMultiterm = (course, courses) => courses[course].isMultiterm;
+
 export {
+  checkIsMultiterm,
+  checkMultitermInBounds,
   getCurrentTermId,
   getMostRecentPastTerm,
   getTermsList,

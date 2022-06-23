@@ -11,7 +11,7 @@ import HideYearTooltip from "./HideYearTooltip";
 import OptionsHeader from "./OptionsHeader";
 import TermBox from "./TermBox";
 import UnplannedColumn from "./UnplannedColumn";
-import { prepareCoursesForValidation } from "./utils";
+import { checkIsMultiterm, checkMultitermInBounds, prepareCoursesForValidation } from "./utils";
 import "./index.less";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
@@ -74,11 +74,8 @@ const TermPlanner = () => {
   const plannerPic = useRef();
 
   const handleOnDragStart = (courseItem) => {
-    console.log("DRAGGING", courseItem);
-    console.log(planner);
     const course = courseItem.draggableId.slice(0, 8);
     const terms = planner.courses[course].termsOffered;
-    console.log("terms", terms);
     setTermsOffered(terms);
     setIsDragging(true);
   };
@@ -88,12 +85,23 @@ const TermPlanner = () => {
 
     const { destination, source, draggableId: draggableIdUnique } = result;
     const draggableId = draggableIdUnique.slice(0, 8);
-    console.log("destingation", destination);
-    console.log("dedraggstingation", draggableId);
 
     if (!destination) return; // drag outside container
 
     if (destination.droppableId !== "unplanned") {
+      if (checkIsMultiterm(draggableId, planner.courses)) {
+        // multiterm course extends below bottom row of term planner
+        if (!checkMultitermInBounds({
+          destRow: destination.droppableId.match(/[0-9]{4}/)[0] - planner.startYear,
+          destTerm: destination.droppableId.match(/T[0-3]/)[0],
+          course: planner.courses[draggableId],
+          isSummerTerm: planner.isSummerEnabled,
+          numYears: planner.numYears,
+        })) {
+          return;
+        }
+      }
+
       // === moving course to unplanned doesn't require term logic ===
       dispatch(
         moveCourse({
@@ -128,24 +136,14 @@ const TermPlanner = () => {
 
     if (source.droppableId === "unplanned") {
       // === move unplanned course to term ===
-      console.log("AOOO", planner);
       dispatch(setUnplannedCourseToTerm({
         destRow, destTerm, destIndex, course: draggableId,
       }));
     } else {
       // === move between terms ===
-      const srcYear = source.droppableId.match(/[0-9]{4}/)[0];
-      const srcTerm = source.droppableId.match(/T[0-3]/)[0];
-      const srcRow = srcYear - planner.startYear;
-      const srcIndex = source.index;
-
       dispatch(setPlannedCourseToTerm({
-        srcRow,
-        srcTerm,
-        srcIndex,
         destRow,
         destTerm,
-        destIndex: destination.index,
         course: draggableId,
       }));
     }
