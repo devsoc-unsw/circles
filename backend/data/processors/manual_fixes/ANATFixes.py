@@ -29,11 +29,18 @@ def fix_conditions():
     """ Functions to apply manual fixes """
     CONDITIONS["ANAT2241"][PROCESSED] = ANAT_2241()
     CONDITIONS["ANAT2111"][PROCESSED] = ANAT_2111()
+    CONDITIONS["ANAT1521"][PROCESSED] = ANAT_1521()
     # Updates the files with the modified dictionaries
     data_helpers.write_data(
         CONDITIONS, "data/final_data/conditionsProcessed.json")
     data_helpers.write_data(COURSES, "data/final_data/coursesProcessed.json")
 
+def ANAT_1521():
+    """
+        "original": "Prerequisite: BABS1201 or DPST1051<br/>This course is restricted to students enrolled in Medical Science (3991) program<br/><br/>",
+        "processed": "BABS1201 || DPST1051 (3991)"
+    """
+    return "(BABS1201 || DPST1051) && 3991"
 
 def ANAT_2241():
     """

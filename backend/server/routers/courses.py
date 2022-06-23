@@ -2,7 +2,7 @@
 APIs for the /courses/ route.
 """
 import re
-from typing import Optional, Tuple
+from typing import Tuple
 
 from algorithms.objects.user import User
 from data.config import ARCHIVED_YEARS
@@ -13,7 +13,7 @@ from server.database import archivesDB, coursesCOL
 from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, Courses,
                                   CourseDetails, CoursesState, CoursesPath,
                                   CoursesUnlockedWhenTaken, ProgramCourses,
-                                  UserData, message)
+                                  UserData)
 
 
 router = APIRouter(
@@ -38,7 +38,7 @@ def fetch_all_courses():
     return courses
 
 
-def fixUserData(userData: dict):
+def fix_user_data(userData: dict):
     """ Updates and returns the userData with the UOC of a course """
     coursesWithoutUoc = [
         course
@@ -46,7 +46,7 @@ def fixUserData(userData: dict):
         if not isinstance(userData["courses"][course], list)
     ]
     filledInCourses = {
-        course: [getCourse(course)["UOC"], userData["courses"][course]]
+        course: [get_course(course)["UOC"], userData["courses"][course]]
         for course in coursesWithoutUoc
     }
     userData["courses"].update(filledInCourses)
@@ -54,7 +54,7 @@ def fixUserData(userData: dict):
 
 
 @router.get("/")
-def apiIndex():
+def api_index():
     """ Returns the index of the courses API """
     return "Index of courses"
 
@@ -64,7 +64,6 @@ def apiIndex():
     response_model=CourseDetails,
     responses={
         400: {
-            "model": message,
             "description": "The given course code could not be found in the database",
         },
         200: {
@@ -102,7 +101,7 @@ def apiIndex():
         },
     },
 )
-def getCourse(courseCode: str):
+def get_course(courseCode: str):
     """
     Get info about a course given its courseCode
     - start with the current database
@@ -169,15 +168,15 @@ def search(userData: UserData, search_string: str):
             ……. }
     """
     global ALL_COURSES
-    from server.routers.programs import getStructure
+    from server.routers.programs import get_structure
 
     if ALL_COURSES is None:
         ALL_COURSES = fetch_all_courses()
 
     specialisations = list(userData.specialisations.keys())
-    majors = list(filter(lambda x: x.endswith("1"), specialisations))
+    majors = list(filter(lambda x: x.endswith("1") or x.endswith("H"), specialisations))
     minors = list(filter(lambda x: x.endswith("2"), specialisations))
-    structure = getStructure(userData.program, "+".join(majors), "+".join(minors))['structure']
+    structure = get_structure(userData.program, "+".join(specialisations))['structure']
 
     top_results = sorted(ALL_COURSES.items(), reverse=True,
                          key=lambda course: fuzzy_match(course, search_string)
@@ -192,7 +191,7 @@ def search(userData: UserData, search_string: str):
 
     return dict(weighted_results)
 
-def regex_search(search_string: str):
+def regex_search(search_string: str) -> dict[str, str]:
     """
     Uses the search string as a regex to match all courses with an exact pattern.
     """
@@ -214,7 +213,7 @@ def regex_search(search_string: str):
     "/getAllUnlocked/",
     response_model=CoursesState,
     responses={
-        400: {"model": message, "description": "Uh oh you broke me"},
+        400: {"description": "Uh oh you broke me"},
         200: {
             "description": "Returns the state of all the courses",
             "content": {
@@ -232,7 +231,7 @@ def regex_search(search_string: str):
         },
     },
 )
-def getAllUnlocked(userData: UserData):
+def get_all_unlocked(userData: UserData):
     """
     Given the userData and a list of locked courses, returns the state of all
     the courses. Note that locked courses always return as True with no warnings
@@ -241,7 +240,7 @@ def getAllUnlocked(userData: UserData):
     """
 
     coursesState = {}
-    user = User(fixUserData(userData.dict())) if not isinstance(userData, User) else userData
+    user = User(fix_user_data(userData.dict())) if not isinstance(userData, User) else userData
     for course, condition in CONDITIONS.items():
         result, warnings = condition.validate(user) if condition is not None else (True, [])
         if result:
@@ -259,7 +258,7 @@ def getAllUnlocked(userData: UserData):
     "/getLegacyCourses/{year}/{term}",
     response_model=ProgramCourses,
     responses={
-        400: {"model": message, "description": "Year or Term input is incorrect"},
+        400: {"description": "Year or Term input is incorrect"},
         200: {
             "description": "Returns the program structure",
             "content": {
@@ -286,7 +285,7 @@ def getAllUnlocked(userData: UserData):
         },
     },
 )
-def getLegacyCourses(year, term):
+def get_legacy_courses(year, term):
     """
     Gets all the courses that were offered in that term for that year
     """
@@ -299,7 +298,7 @@ def getLegacyCourses(year, term):
 
 
 @router.get("/getLegacyCourse/{year}/{courseCode}")
-def getLegacyCourse(year, courseCode):
+def get_legacy_course(year, courseCode):
     """
         Like /getCourse/ but for legacy courses in the given year.
         Returns information relating to the given course
@@ -314,8 +313,7 @@ def getLegacyCourse(year, courseCode):
 
 @router.post("/unselectCourse/{unselectedCourse}", response_model=Courses,
             responses={
-                422: {"model": message, "description": "Unselected course query is required"},
-                400: {"model": message, "description": "Uh oh you broke me"},
+                400: {"description": "Uh oh you broke me"},
                 200: {
                     "description": "Returns the state of all the courses",
                     "content": {
@@ -331,12 +329,12 @@ def getLegacyCourse(year, courseCode):
                      }
                  }
             })
-def unselectCourse(userData: UserData, unselectedCourse: str):
+def unselect_course(userData: UserData, unselectedCourse: str):
     """
     Creates a new user class and returns all the courses
     affected from the course that was unselected in sorted order
     """
-    user = User(fixUserData(userData.dict()))
+    user = User(fix_user_data(userData.dict()))
     if not user.has_taken_course(unselectedCourse):
         return { 'courses' : [] }
 
@@ -367,7 +365,7 @@ def unselectCourse(userData: UserData, unselectedCourse: str):
                     "courses": ["COMP1521", "COMP1531"]
                 }
             })
-def courseChildren(course: str):
+def course_children(course: str):
     """
     fetches courses which are dependant on taking 'course'
     eg 1511 -> 1521, 1531, 2521 etc
@@ -388,7 +386,7 @@ def courseChildren(course: str):
                     "courses": ["COMP1521", "COMP1531"]
                 }
             })
-def getPathFrom(course):
+def get_path_from(course):
     """
     fetches courses which can be used to satisfy 'course'
     eg 2521 -> 1511
@@ -406,7 +404,7 @@ def getPathFrom(course):
 
 @router.post("/coursesUnlockedWhenTaken/{courseToBeTaken}", response_model=CoursesUnlockedWhenTaken,
             responses={
-                400: {"model": message, "description": "Uh oh you broke me"},
+                400: { "description": "Uh oh you broke me" },
                 200: {
                     "description": "Returns all courses which are unlocked when this course is taken",
                     "content": {
@@ -419,21 +417,21 @@ def getPathFrom(course):
                     }
                 }
             })
-def coursesUnlockedWhenTaken(userData: UserData, courseToBeTaken: str):
+def courses_unlocked_when_taken(userData: UserData, courseToBeTaken: str):
     """ Returns all courses which are unlocked when given course is taken """
     # define the user object with user data
-    user = User(fixUserData(userData.dict()))
+    user = User(fix_user_data(userData.dict()))
 
     ## initial state
-    courses_initially_unlocked = unlocked_set(getAllUnlocked(user)['courses_state'])
+    courses_initially_unlocked = unlocked_set(get_all_unlocked(user)['courses_state'])
     ## add course to the user
-    user.add_courses({courseToBeTaken: [getCourse(courseToBeTaken)['UOC'], None]})
+    user.add_courses({courseToBeTaken: [get_course(courseToBeTaken)['UOC'], None]})
     ## final state
-    courses_now_unlocked = unlocked_set(getAllUnlocked(user)['courses_state'])
+    courses_now_unlocked = unlocked_set(get_all_unlocked(user)['courses_state'])
     new_courses = courses_now_unlocked - courses_initially_unlocked
 
     ## Differentiate direct and indirect unlocks
-    path_to = set(courseChildren(courseToBeTaken)["courses"])
+    path_to = set(course_children(courseToBeTaken)["courses"])
     direct_unlock = new_courses.intersection(path_to)
     indirect_unlock = new_courses - direct_unlock
 

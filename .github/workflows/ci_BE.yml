@@ -1,8 +1,6 @@
 name: Run Backend Unit Tests
 
 on:
-  push:
-    branches: [dev, main, "renovate/*"]
   pull_request:
     branches: [dev, main]
 
