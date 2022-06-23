@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { BorderlessTableOutlined, TableOutlined } from "@ant-design/icons";
+import { BorderlessTableOutlined, EyeInvisibleOutlined, TableOutlined } from "@ant-design/icons";
 import { Button, Divider } from "antd";
 import axios from "axios";
 import PageTemplate from "components/PageTemplate";
 import Dashboard from "./Dashboard";
 import GridView from "./GridView/GridView";
+import GridViewConcise from "./GridView/GridViewConcise";
 import TableView from "./TableView";
 import "./index.less";
 
@@ -70,7 +71,7 @@ const ProgressionChecker = () => {
     <PageTemplate>
       <Dashboard isLoading={isLoading} degree={degreeData} />
       <Divider />
-      {view === "grid" ? (
+      {(view === "grid" || view === "grid-concise") ? (
         <>
           <Button
             className="viewSwitcher"
@@ -80,7 +81,19 @@ const ProgressionChecker = () => {
           >
             Display Table View
           </Button>
-          <GridView isLoading={isLoading} structure={structure} />
+          <Button
+            className="viewSwitcher"
+            type="primary"
+            icon={<EyeInvisibleOutlined />}
+            onClick={() => setView(view === "grid" ? "grid-concise" : "grid")}
+          >
+            Display Concise Mode
+          </Button>
+          {view === "grid" ? (
+            <GridView isLoading={isLoading} structure={structure} />
+          ) : (
+            <GridViewConcise isLoading={isLoading} structure={structure} />
+          )}
         </>
       ) : (
         <>
