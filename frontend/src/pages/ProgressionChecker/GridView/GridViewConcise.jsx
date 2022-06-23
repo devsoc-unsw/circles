@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Skeleton, Typography } from "antd";
+import Collapsible from "components/Collapsible";
 import getFormattedPlannerCourses from "../getFormattedPlannerCourses";
 import CourseBadge from "./CourseBadge";
 import "./index.less";
 
+/* eslint-disable */
 const GridView = ({ isLoading, structure }) => {
   const { Title } = Typography;
   const [plannerCourses, setPlannerCourses] = useState({});
@@ -89,22 +91,24 @@ const GridView = ({ isLoading, structure }) => {
                   <Title level={3}>
                     {structure[group][subGroup].UOC} UOC of the following courses
                   </Title>
-                  <Title level={4}>Courses you have planned</Title>
-                  <div className="courseGroup">
-                    {subGroupEntry.filter((c) => (
-                      c.unplanned || c.past || c.past === false
-                    )).map((course) => (
-                      <CourseBadge course={course} />
-                    ))}
-                  </div>
-                  <Title level={4}>Unplanned Courses</Title>
-                  <div className="courseGroup">
-                    {subGroupEntry.filter((c) => (
-                      !(c.unplanned || c.past || c.past === false)
-                    )).map((course) => (
-                      <CourseBadge course={course} />
-                    ))}
-                  </div>
+                  <Collapsible title={<Title level={4}>Courses you have planned</Title>} headerStyle={{ border: "none" }}>
+                    <div className="courseGroup">
+                      {subGroupEntry.filter((c) => (
+                        c.unplanned || c.past || c.past === false
+                      )).map((course) => (
+                        <CourseBadge course={course} />
+                      ))}
+                    </div>
+                  </Collapsible>
+                  <Collapsible title={<Title level={4}>Choose from the following</Title>} headerStyle={{ border: "none" }}>
+                    <div className="courseGroup">
+                      {subGroupEntry.filter((c) => (
+                        !(c.unplanned || c.past || c.past === false)
+                      )).map((course) => (
+                        <CourseBadge course={course} />
+                      ))}
+                    </div>
+                  </Collapsible>
                   <br />
                 </div>
               ))}
