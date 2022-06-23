@@ -51,7 +51,7 @@ const SpecialisationStep = ({ incrementStep, isCurrentStep, type }) => {
             className="step-submenu"
             mode="inline"
           >
-            {(options[sub].notes !== "")
+            {(options[sub].notes)
               ? (
                 <Menu.ItemGroup type="group" title={`(Note: ${options[sub].notes})`}>
                   {Object.keys(options[sub].specs).map((key) => (
