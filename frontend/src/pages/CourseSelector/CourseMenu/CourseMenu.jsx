@@ -13,7 +13,6 @@ import useMediaQuery from "hooks/useMediaQuery";
 import { setCourses } from "reducers/coursesSlice";
 import { addTab } from "reducers/courseTabsSlice";
 import { addToUnplanned, removeCourses } from "reducers/plannerSlice";
-// import { addToUnplanned } from "reducers/plannerSlice";
 import prepareUserPayload from "../utils";
 import LoadingSkeleton from "./LoadingSkeleton";
 import "./index.less";
