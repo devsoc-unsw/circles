@@ -90,7 +90,7 @@ const TermPlanner = () => {
 
     if (destination.droppableId !== "unplanned") {
       if (checkIsMultiterm(draggableId, planner.courses)) {
-        // multiterm course extends below bottom row of term planner
+        // check if multiterm course extends below bottom row of term planner
         if (!checkMultitermInBounds({
           destRow: destination.droppableId.match(/[0-9]{4}/)[0] - planner.startYear,
           destTerm: destination.droppableId.match(/T[0-3]/)[0],
@@ -141,9 +141,17 @@ const TermPlanner = () => {
       }));
     } else {
       // === move between terms ===
+      const srcYear = source.droppableId.match(/[0-9]{4}/)[0];
+      const srcTerm = source.droppableId.match(/T[0-3]/)[0];
+      const srcRow = srcYear - planner.startYear;
+      const srcIndex = source.index;
       dispatch(setPlannedCourseToTerm({
+        srcRow,
+        srcTerm,
+        srcIndex,
         destRow,
         destTerm,
+        destIndex,
         course: draggableId,
       }));
     }

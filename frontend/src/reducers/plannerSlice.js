@@ -96,10 +96,18 @@ const plannerSlice = createSlice({
     },
     setPlannedCourseToTerm: (state, action) => {
       const {
-        destRow, destTerm, course,
+        srcRow, srcTerm, srcIndex, destRow, destTerm, destIndex, course,
       } = action.payload;
 
-      const { UOC: uoc, termsOffered } = state.courses[course];
+      const { UOC: uoc, termsOffered, isMultiterm } = state.courses[course];
+
+      // If only changing index of multiterm course, don't touch other course instances
+      if (isMultiterm && srcRow === destRow && srcTerm === destTerm) {
+        const targetTerm = state.years[srcRow][srcTerm];
+        targetTerm.splice(srcIndex, 1);
+        targetTerm.splice(destIndex, 0, course);
+        return;
+      }
 
       // Remove every instance of the course from the planner
       for (let year = 0; year < state.years.length; year++) {
@@ -114,8 +122,11 @@ const plannerSlice = createSlice({
       }
 
       // Add new instances of the course into the planner
-      const newTermList = getTermsList(destTerm, uoc, termsOffered, state.isSummerEnabled);
-      newTermList.forEach((termRowOffset) => {
+      const newTerms = getTermsList(destTerm, uoc, termsOffered, state.isSummerEnabled).splice(1);
+      const firstTerm = state.years[destRow][destTerm];
+      firstTerm.splice(destIndex, 0, course);
+
+      newTerms.forEach((termRowOffset) => {
         const { term, rowOffset } = termRowOffset;
         const targetTerm = state.years[destRow + rowOffset][term];
         targetTerm.splice(targetTerm.length, 0, course);
@@ -136,6 +147,7 @@ const plannerSlice = createSlice({
           return;
         }
       }
+
       if (state.courses[course]) {
         state.courses[course].plannedFor = term;
 
