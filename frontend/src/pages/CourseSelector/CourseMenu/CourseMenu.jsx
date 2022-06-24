@@ -233,7 +233,6 @@ const MenuItem = ({
 
   const removeFromPlanner = async (e, plannedCourse) => {
     e.stopPropagation();
-    console.log(plannedCourse);
     dispatch(removeCourses([plannedCourse]));
   };
 
@@ -282,7 +281,7 @@ const MenuItem = ({
               <Button
                 onClick={(e) => removeFromPlanner(e, courseCode)}
                 size="small"
-                shape="circle"
+                // shape="circle"
                 icon={<MinusOutlined />}
                 className="quickSubtractBtn"
               />
