@@ -13,7 +13,7 @@ name: Pylint
 
 on:
   pull_request:
-    branches: [dev, master, main]
+    branches: [dev, main]
 
 jobs:
   build:
@@ -24,7 +24,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
+      uses: actions/setup-python@v4
+      with: 
+        python-version: "3.x"
 
     - name: Install dependencies
       run: |

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
-import { notification } from "antd";
+import { Badge, notification } from "antd";
 import axios from "axios";
 import PageTemplate from "components/PageTemplate";
 import {
@@ -28,13 +28,13 @@ const openNotification = () => {
     description: "Add courses from the course selector to the term planner by dragging from the unplanned column",
     duration: 3,
     className: "text helpNotif",
-    placement: "topRight",
+    placement: "bottomRight",
   };
   notification.info(args);
 };
 
 const TermPlanner = () => {
-  const [suppress, setSuppress] = useState(true);
+  const [suppress, setSuppress] = useState(false);
   const [termsOffered, setTermsOffered] = useState([]);
   const [isDragging, setIsDragging] = useState(false);
   const [showMarks, setShowMarks] = useState(false);
@@ -170,20 +170,37 @@ const TermPlanner = () => {
               <div className="gridItem">Term 1</div>
               <div className="gridItem">Term 2</div>
               <div className="gridItem">Term 3</div>
-
               {planner.years.map((year, index) => {
                 const iYear = parseInt(planner.startYear, 10) + parseInt(index, 10);
+                let yearUOC = 0;
+                Object.keys(year).forEach((i) => {
+                  Object.keys(planner.courses).forEach((j) => {
+                    if (year[i].includes(j)) {
+                      yearUOC += planner.courses[j].UOC;
+                    }
+                  });
+                });
                 if (planner.hidden[iYear]) return null;
                 return (
                   <React.Fragment key={index}>
-                    <div className="yearContainer gridItem">
-                      <div
-                        className={`year ${currYear === iYear && "currYear"}`}
-                      >
-                        {iYear}
+                    <Badge
+                      style={{
+                        backgroundColor: "#efdbff",
+                        color: "#000000",
+                      }}
+                      size="small"
+                      count={`${yearUOC} UOC`}
+                      offset={[-46, 40]}
+                    >
+                      <div className="yearContainer gridItem">
+                        <div
+                          className={`year ${currYear === iYear && "currYear"}`}
+                        >
+                          {iYear}
+                        </div>
+                        <HideYearTooltip year={iYear} />
                       </div>
-                      <HideYearTooltip year={iYear} />
-                    </div>
+                    </Badge>
                     {Object.keys(year).map((term) => {
                       const key = iYear + term;
                       if (!planner.isSummerEnabled && term === "T0") return null;
@@ -191,7 +208,7 @@ const TermPlanner = () => {
                         <TermBox
                           key={key}
                           name={key}
-                          courses={year[term]}
+                          coursesList={year[term]}
                           termsOffered={termsOffered}
                           isDragging={isDragging}
                           showMarks={showMarks}

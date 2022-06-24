@@ -4,7 +4,7 @@ import random
 
 from server.routers.model import CONDITIONS
 
-PATH="algorithms/exampleUsers.json"
+PATH="./algorithms/tests/exampleUsers.json"
 
 with open(PATH, encoding="utf8") as f:
     USERS = json.load(f)

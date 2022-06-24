@@ -1,18 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import {
-  Badge,
-  Button,
-  Skeleton,
-  Tooltip,
-  Typography,
-} from "antd";
-import getPastCourses from "../getPastCourses";
+import { Skeleton, Typography } from "antd";
+import getFormattedPlannerCourses from "../getFormattedPlannerCourses";
+import CourseBadge from "./CourseBadge";
 import "./index.less";
 
 const GridView = ({ isLoading, structure }) => {
   const { Title } = Typography;
-  const [pastCourses, setPastCourses] = useState({});
+  const [plannerCourses, setPlannerCourses] = useState({});
   const [gridLayout, setGridLayout] = useState({});
   const { years, startYear, courses } = useSelector((store) => store.planner);
 
@@ -35,7 +30,9 @@ const GridView = ({ isLoading, structure }) => {
               newGridLayout[group][subgroup].push({
                 key: courseCode,
                 title: subgroupStructure.courses[courseCode],
-                completed: courseCode in pastCourses,
+                // past and termPlanned will be undefined for courses not in planner
+                past: plannerCourses[courseCode]?.past,
+                termPlanned: plannerCourses[courseCode]?.termPlanned,
                 // must check null as could be undefined
                 unplanned: courses[courseCode]?.plannedFor === null,
               });
@@ -52,7 +49,8 @@ const GridView = ({ isLoading, structure }) => {
                 newGridLayout[group][subgroup].push({
                   key: courseCode,
                   title: courseData.title,
-                  completed: courseCode in pastCourses,
+                  past: plannerCourses[courseCode].past,
+                  termPlanned: plannerCourses[courseCode].termPlanned,
                   unplanned: !courseData.plannedFor,
                 });
               }
@@ -60,18 +58,18 @@ const GridView = ({ isLoading, structure }) => {
           }
         }
       });
-      if (structure[group].name) {
-        // Append structure group name if exists
-        const newGroup = `${group} - ${structure[group].name}`;
-        newGridLayout[newGroup] = newGridLayout[group];
-        delete newGridLayout[group];
-      }
+      // if (structure[group].name) {
+      //   // Append structure group name if exists
+      //   const newGroup = `${group} - ${structure[group].name}`;
+      //   newGridLayout[newGroup] = newGridLayout[group];
+      //   delete newGridLayout[group];
+      // }
     });
     setGridLayout(newGridLayout);
   };
 
   useEffect(() => {
-    setPastCourses(getPastCourses(years, startYear, courses));
+    setPlannerCourses(getFormattedPlannerCourses(years, startYear, courses));
     generateGridStructure();
   }, [isLoading, structure, years, startYear, courses]);
 
@@ -83,31 +81,16 @@ const GridView = ({ isLoading, structure }) => {
         <>
           {Object.entries(gridLayout).map(([group, groupEntry]) => (
             <div key={group} className="category">
-              <Title level={1}>{group}</Title>
+              <Title level={1}>{group} - {structure[group].name} </Title>
               {Object.entries(groupEntry).map(([subGroup, subGroupEntry]) => (
                 <div key={subGroup} className="subCategory">
                   <Title level={2}>{subGroup}</Title>
+                  <Title level={4}>
+                    {structure[group][subGroup].UOC} UOC of the following courses
+                  </Title>
                   <div className="courseGroup">
                     {subGroupEntry.map((course) => (
-                      course.unplanned ? (
-                        <Badge
-                          count={(
-                            <Tooltip title="Course added but not planned">
-                              <div className="unplannedBadge">
-                                !
-                              </div>
-                            </Tooltip>
-                          )}
-                        >
-                          <Button className="checkerButton" type="primary" style={course.completed ? null : { background: "#FFF", color: "#9254de" }} key={course.key}>
-                            {course.key}: {course.title}
-                          </Button>
-                        </Badge>
-                      ) : (
-                        <Button className="checkerButton" type="primary" style={course.completed ? null : { background: "#FFF", color: "#9254de" }} key={course.key}>
-                          {course.key}: {course.title}
-                        </Button>
-                      )
+                      <CourseBadge course={course} />
                     ))}
                   </div>
                   <br />
