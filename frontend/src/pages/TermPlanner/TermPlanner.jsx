@@ -34,10 +34,9 @@ const openNotification = () => {
 };
 
 const TermPlanner = () => {
-  const [suppress, setSuppress] = useState(false);
+  const { showWarnings } = useSelector((state) => state.settings);
   const [termsOffered, setTermsOffered] = useState([]);
   const [isDragging, setIsDragging] = useState(false);
-  const [showMarks, setShowMarks] = useState(false);
 
   const planner = useSelector((state) => state.planner);
 
@@ -53,7 +52,7 @@ const TermPlanner = () => {
     try {
       const { data } = await axios.post(
         "/planner/validateTermPlanner/",
-        JSON.stringify(prepareCoursesForValidation(planner, degree, suppress)),
+        JSON.stringify(prepareCoursesForValidation(planner, degree, showWarnings)),
       );
       dispatch(toggleWarnings(data.courses_state));
     } catch (err) {
@@ -66,7 +65,7 @@ const TermPlanner = () => {
     if (isAllEmpty(planner.years)) openNotification();
     validateTermPlanner();
   }, [
-    degree, planner.years, suppress, planner.startYear, marksRef.current,
+    degree, planner.years, planner.startYear, marksRef.current,
   ]);
 
   const currYear = new Date().getFullYear();
@@ -150,10 +149,6 @@ const TermPlanner = () => {
         areYearsHidden={planner.areYearsHidden}
         plannerRef={plannerPic}
         isAllEmpty={isAllEmpty}
-        setSuppress={setSuppress}
-        suppress={suppress}
-        showMarks={showMarks}
-        setShowMarks={setShowMarks}
       />
       <div className="mainContainer">
         <DragDropContext
@@ -211,7 +206,6 @@ const TermPlanner = () => {
                           coursesList={year[term]}
                           termsOffered={termsOffered}
                           isDragging={isDragging}
-                          showMarks={showMarks}
                         />
                       );
                     })}

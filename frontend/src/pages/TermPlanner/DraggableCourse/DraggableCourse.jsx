@@ -13,7 +13,7 @@ import "./index.less";
 const DraggableCourse = ({ code, index, showMarks }) => {
   const { Text } = Typography;
   const { courses, isSummerEnabled, completedTerms } = useSelector((state) => state.planner);
-  const theme = useSelector((state) => state.theme);
+  const { theme } = useSelector((state) => state.settings);
   // prereqs are populated in CourseDescription.jsx via course.raw_requirements
   const {
     prereqs, title, isUnlocked, plannedFor,

@@ -54,7 +54,7 @@ const getMostRecentPastTerm = (startYear) => {
   };
 };
 
-const prepareCoursesForValidation = (planner, degree, suppress) => {
+const prepareCoursesForValidation = (planner, degree, showWarnings) => {
   const { years, startYear, courses } = planner;
   const { programCode, specs } = degree;
 
@@ -76,7 +76,7 @@ const prepareCoursesForValidation = (planner, degree, suppress) => {
     specialisations: specs,
     year: 1,
     plan,
-    mostRecentPastTerm: suppress ? getMostRecentPastTerm(startYear) : { Y: 0, T: 0 },
+    mostRecentPastTerm: showWarnings ? { Y: 0, T: 0 } : getMostRecentPastTerm(startYear),
   };
 
   return payload;
