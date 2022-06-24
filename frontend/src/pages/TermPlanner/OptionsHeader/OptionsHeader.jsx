@@ -98,7 +98,7 @@ const OptionsHeader = ({
             <button
               className={`settings-button ${showWarnings ? "filled" : ""}`}
               type="button"
-              onClick={() => toggleShowWarnings()}
+              onClick={() => dispatch(toggleShowWarnings())}
             >
               <WarningFilled className="settings-icon" />
             </button>
@@ -110,7 +110,7 @@ const OptionsHeader = ({
           <Switch
             defaultChecked={showMarks}
             className="cs-toggle-locked"
-            onChange={() => toggleShowMarks()}
+            onChange={() => dispatch(toggleShowMarks())}
             checkedChildren="marks shown"
             unCheckedChildren="marks hidden"
           />

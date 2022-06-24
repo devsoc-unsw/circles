@@ -65,7 +65,7 @@ const TermPlanner = () => {
     if (isAllEmpty(planner.years)) openNotification();
     validateTermPlanner();
   }, [
-    degree, planner.years, planner.startYear, marksRef.current,
+    degree, planner.years, planner.startYear, marksRef.current, showWarnings,
   ]);
 
   const currYear = new Date().getFullYear();
