@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { LockOutlined, PlusOutlined, WarningOutlined } from "@ant-design/icons";
+import {
+  LockOutlined, MinusOutlined, PlusOutlined, WarningOutlined,
+} from "@ant-design/icons";
 import {
   Button, Menu, Tooltip, Typography,
 } from "antd";
@@ -10,7 +12,8 @@ import axiosRequest from "config/axios";
 import useMediaQuery from "hooks/useMediaQuery";
 import { setCourses } from "reducers/coursesSlice";
 import { addTab } from "reducers/courseTabsSlice";
-import { addToUnplanned } from "reducers/plannerSlice";
+import { addToUnplanned, removeCourses } from "reducers/plannerSlice";
+// import { addToUnplanned } from "reducers/plannerSlice";
 import prepareUserPayload from "../utils";
 import LoadingSkeleton from "./LoadingSkeleton";
 import "./index.less";
@@ -228,6 +231,13 @@ const MenuItem = ({
     };
     dispatch(addToUnplanned(data));
   };
+
+  const removeFromPlanner = async (e, plannedCourse) => {
+    e.stopPropagation();
+    console.log(plannedCourse);
+    dispatch(removeCourses([plannedCourse]));
+  };
+
   const isSmall = useMediaQuery("(max-width: 1400px)");
   const { Text } = Typography;
   return (
@@ -258,7 +268,7 @@ const MenuItem = ({
             )}
             {!unlocked && <LockOutlined style={{ fontSize: "11px" }} />}
           </div>
-          {!selected && (
+          {!selected ? (
             <Tooltip title="Add to Planner" placement="top">
               <Button
                 onClick={(e) => addToPlanner(e, courseCode)}
@@ -266,6 +276,16 @@ const MenuItem = ({
                 shape="circle"
                 icon={<PlusOutlined />}
                 className="quickAddBtn"
+              />
+            </Tooltip>
+          ) : (
+            <Tooltip title="Remove from Planner" placement="top">
+              <Button
+                onClick={(e) => removeFromPlanner(e, courseCode)}
+                size="small"
+                shape="circle"
+                icon={<MinusOutlined />}
+                className="quickSubtractBtn"
               />
             </Tooltip>
           )}
