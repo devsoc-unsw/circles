@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Skeleton, Typography } from "antd";
 import getFormattedPlannerCourses from "../getFormattedPlannerCourses";
+import GridViewConciseSubgroup from "./GridViewConciseSubgroup";
 import GridViewSubgroup from "./GridViewSubgroup";
 import "./index.less";
 
 /* eslint-disable comma-dangle */
-const GridView = ({ isLoading, structure }) => {
+const GridView = ({ isLoading, structure, concise }) => {
   const { Title } = Typography;
   const [gridLayout, setGridLayout] = useState({});
   const { years, startYear, courses } = useSelector((store) => store.planner);
@@ -89,11 +90,19 @@ const GridView = ({ isLoading, structure }) => {
               <Title level={1}>{group} - {structure[group].name}</Title>
               {Object.entries(groupEntry).map(
                 ([subgroup, subgroupEntry]) => (
-                  <GridViewSubgroup
-                    uoc={structure[group][subgroup].UOC}
-                    subgroupKey={subgroup}
-                    subgroupEntries={subgroupEntry}
-                  />
+                  (concise === true) ? (
+                    <GridViewConciseSubgroup
+                      uoc={structure[group][subgroup].UOC}
+                      subgroupKey={subgroup}
+                      subgroupEntries={subgroupEntry}
+                    />
+                  ) : (
+                    <GridViewSubgroup
+                      uoc={structure[group][subgroup].UOC}
+                      subgroupKey={subgroup}
+                      subgroupEntries={subgroupEntry}
+                    />
+                  )
                 )
               )}
             </div>

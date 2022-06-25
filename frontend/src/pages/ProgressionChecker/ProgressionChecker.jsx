@@ -6,7 +6,6 @@ import axios from "axios";
 import PageTemplate from "components/PageTemplate";
 import Dashboard from "./Dashboard";
 import GridView from "./GridView/GridView";
-import GridViewConcise from "./GridView/GridViewConcise";
 import TableView from "./TableView";
 import "./index.less";
 
@@ -65,11 +64,7 @@ const ProgressionCheckerCourses = ({ structure, isLoading }) => {
           >
             {view === "grid" ? "Display Concise Mode" : "Display Normal Mode"}
           </Button>
-          {view === "grid" ? (
-            <GridView isLoading={isLoading} structure={structure} />
-          ) : (
-            <GridViewConcise isLoading={isLoading} structure={structure} />
-          )}
+          <GridView isLoading={isLoading} structure={structure} concise={view === "grid-concise"} />
         </>
       ) : (
         <>
