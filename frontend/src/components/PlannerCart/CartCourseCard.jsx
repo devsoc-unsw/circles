@@ -7,6 +7,7 @@ import {
 } from "antd";
 import { addTab } from "reducers/courseTabsSlice";
 import { removeCourse } from "reducers/plannerSlice";
+import S from "./styles";
 import "./index.less";
 
 const { Text } = Typography;
@@ -31,7 +32,7 @@ const CartCourseCard = ({ code, title, showAlert }) => {
   };
 
   return (
-    <div className="planner-cart-card">
+    <S.plannerCartCard>
       <div role="menuitem" onClick={handleCourseLink} style={{ cursor: "pointer" }}>
         <Text className="text" strong>
           {code}:{" "}
@@ -58,7 +59,7 @@ const CartCourseCard = ({ code, title, showAlert }) => {
           </Tooltip>
         </Popconfirm>
       </div>
-    </div>
+    </S.plannerCartCard>
   );
 };
 

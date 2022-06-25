@@ -8,7 +8,7 @@ import {
 } from "antd";
 import { removeAllCourses } from "reducers/plannerSlice";
 import CartCourseCard from "./CartCourseCard";
-import "./index.less";
+import S from "./styles";
 
 const { Text, Title } = Typography;
 
@@ -16,6 +16,7 @@ const PlannerCart = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const courses = useSelector((store) => store.planner.courses);
+  const theme = useSelector((state) => state.theme);
   const [openMenu, setOpenMenu] = useState(false);
   const [show, setShow] = useState(false);
   const [code, setCode] = useState("");
@@ -38,7 +39,7 @@ const PlannerCart = () => {
   }, [pathname]);
 
   return (
-    <div className="planner-cart-root">
+    <S.plannerCartRoot>
       <Tooltip title="Your courses">
         <Button
           type="primary"
@@ -48,7 +49,7 @@ const PlannerCart = () => {
         />
       </Tooltip>
       {openMenu && (
-        <div className="planner-cart-menu">
+        <S.plannerCartMenu style={{ backgroundColor: theme === "light" ? "#ffffff" : "#434343" }}>
           <Title className="text" level={4}>
             Your selected courses
           </Title>
@@ -64,7 +65,7 @@ const PlannerCart = () => {
             />
           )}
           {Object.keys(courses).length > 0 ? (
-            <div className="planner-cart-content">
+            <S.plannerCartContent>
               {/* Reversed map to show the most recently added courses first */}
               {Object.keys(courses).reverse().map((courseCode) => (
                 <CartCourseCard
@@ -73,14 +74,14 @@ const PlannerCart = () => {
                   showAlert={showAlert}
                 />
               ))}
-            </div>
+            </S.plannerCartContent>
           ) : (
-            <div className="planner-cart-empty-cont">
+            <S.plannerCartEmptyCont>
               <Text className="text">
                 You have not selected any courses. Find them in our course
                 selector
               </Text>
-              <Button
+              <S.linkButton
                 type="secondary"
                 shape="round"
                 className="planner-cart-link-to-cs"
@@ -89,23 +90,23 @@ const PlannerCart = () => {
                 }}
               >
                 Go to course selector
-              </Button>
-            </div>
+              </S.linkButton>
+            </S.plannerCartEmptyCont>
           )}
           {/* Hacky solution so prevent overflow.. help  */}
           {!show && Object.keys(courses).length > 0 && (
-            <Button
+            <S.delButton
               danger
               className="planner-cart-delete-all-btn"
               icon={<DeleteOutlined />}
               onClick={deleteAllCourses}
             >
               Delete all courses
-            </Button>
+            </S.delButton>
           )}
-        </div>
+        </S.plannerCartMenu>
       )}
-    </div>
+    </S.plannerCartRoot>
   );
 };
 
