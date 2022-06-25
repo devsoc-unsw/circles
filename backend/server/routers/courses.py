@@ -453,7 +453,7 @@ def fuzzy_match(course: Tuple[str, str], search_term: str):
     # (not necessarily in the same order as the title)
     search_term = search_term.lower()
     if re.match('[a-z]{4}[0-9]', search_term):
-        return fuzz.ratio(code.lower(), search_term)
+        return fuzz.ratio(code.lower(), search_term) * 10
 
     return max(fuzz.ratio(code.lower(), search_term),
                sum(fuzz.partial_ratio(title.lower(), word)
