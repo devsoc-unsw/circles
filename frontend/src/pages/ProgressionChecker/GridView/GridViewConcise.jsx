@@ -1,55 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Empty, Skeleton, Typography } from "antd";
-import Collapsible from "components/Collapsible";
+import { Skeleton, Typography } from "antd";
 import getFormattedPlannerCourses from "../getFormattedPlannerCourses";
-import CourseBadge from "./CourseBadge";
+import GridViewConciseSubgroup from "./GridViewConciseSubgroup";
 import "./index.less";
 
-/* eslint-disable max-len, comma-dangle */
-const GridViewSubgroup = ({ uoc, subgroupKey, subgroupEntries }) => {
-  const { Title } = Typography;
-
-  const planned = subgroupEntries.filter((c) => (c.unplanned || c.past || c.past === false));
-  const unplanned = subgroupEntries.filter((c) => (!(c.unplanned || c.past || c.past === false)));
-
-  // convert lists to components
-  const plannedGroup = (
-    <div className="courseGroup">
-      {planned.map((course) => (<CourseBadge course={course} key={course.key} />))}
-    </div>
-  );
-  const unplannedGroup = (
-    <div className="courseGroup">
-      {unplanned.map((course) => (<CourseBadge course={course} key={course.key} />))}
-    </div>
-  );
-
-  return (
-    <div key={subgroupKey} className="subCategory">
-      <Title level={2}>{subgroupKey}</Title>
-      <Title level={3}>
-        {uoc} UOC of the following courses
-      </Title>
-      <Collapsible
-        title={<Title level={4}>Courses you have planned</Title>}
-        headerStyle={{ border: "none" }}
-        initiallyCollapsed={planned.length === 0}
-      >
-        {planned.length > 0 ? plannedGroup : <Empty description="Nothing to see here! 👀" image={Empty.PRESENTED_IMAGE_SIMPLE} />}
-      </Collapsible>
-      <Collapsible
-        title={<Title level={4}>Choose from the following</Title>}
-        headerStyle={{ border: "none" }}
-        initiallyCollapsed={unplanned.length > 8 || unplanned.length === 0}
-      >
-        {unplanned.length > 0 ? unplannedGroup : <Empty description="Nothing to see here! 👀" image={Empty.PRESENTED_IMAGE_SIMPLE} />}
-      </Collapsible>
-      <br />
-    </div>
-  );
-};
-
+/* eslint-disable comma-dangle */
 const GridView = ({ isLoading, structure }) => {
   const { Title } = Typography;
   const [gridLayout, setGridLayout] = useState({});
@@ -61,6 +17,7 @@ const GridView = ({ isLoading, structure }) => {
     // Example groups: Major, Minor, General
     Object.keys(structure).forEach((group) => {
       newGridLayout[group] = {};
+
       // Example subgroup: Core Courses, Computing Electives, Flexible Education
       Object.keys(structure[group]).forEach((subgroup) => {
         if (typeof structure[group][subgroup] !== "string") {
@@ -126,7 +83,7 @@ const GridView = ({ isLoading, structure }) => {
               <Title level={1}>{group} - {structure[group].name}</Title>
               {Object.entries(groupEntry).map(
                 ([subgroup, subgroupEntry]) => (
-                  <GridViewSubgroup
+                  <GridViewConciseSubgroup
                     uoc={structure[group][subgroup].UOC}
                     subgroupKey={subgroup}
                     subgroupEntries={subgroupEntry}

@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Skeleton, Typography } from "antd";
 import getFormattedPlannerCourses from "../getFormattedPlannerCourses";
-import CourseBadge from "./CourseBadge";
+import GridViewSubgroup from "./GridViewSubgroup";
 import "./index.less";
 
+/* eslint-disable comma-dangle */
 const GridView = ({ isLoading, structure }) => {
   const { Title } = Typography;
   const [gridLayout, setGridLayout] = useState({});
@@ -85,21 +86,16 @@ const GridView = ({ isLoading, structure }) => {
         <>
           {Object.entries(gridLayout).map(([group, groupEntry]) => (
             <div key={group} className="category">
-              <Title level={1}>{group} - {structure[group].name} </Title>
-              {Object.entries(groupEntry).map(([subGroup, subGroupEntry]) => (
-                <div key={subGroup} className="subCategory">
-                  <Title level={2}>{subGroup}</Title>
-                  <Title level={4}>
-                    {structure[group][subGroup].UOC} UOC of the following courses
-                  </Title>
-                  <div className="courseGroup">
-                    {subGroupEntry.map((course) => (
-                      <CourseBadge course={course} />
-                    ))}
-                  </div>
-                  <br />
-                </div>
-              ))}
+              <Title level={1}>{group} - {structure[group].name}</Title>
+              {Object.entries(groupEntry).map(
+                ([subgroup, subgroupEntry]) => (
+                  <GridViewSubgroup
+                    uoc={structure[group][subgroup].UOC}
+                    subgroupKey={subgroup}
+                    subgroupEntries={subgroupEntry}
+                  />
+                )
+              )}
             </div>
           ))}
         </>
