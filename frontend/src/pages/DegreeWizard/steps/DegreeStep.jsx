@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { animated, useSpring } from "@react-spring/web";
 import {
-  Menu, Typography,
+  Input, Menu, Typography,
 } from "antd";
 import axios from "axios";
 import { resetDegree, setProgram } from "reducers/degreeSlice";
@@ -14,13 +14,14 @@ const { Title } = Typography;
 const DegreeStep = ({ incrementStep, currStep }) => {
   const dispatch = useDispatch();
   const programCode = useSelector((store) => store.degree.programCode);
+  const [input, setInput] = useState("");
   const [options, setOptions] = useState(null);
 
   const fetchAllDegrees = async () => {
     const res = await axios.get("/programs/getPrograms");
     setOptions(res.data.programs);
+    console.log(res.data);
   };
-
   useEffect(() => {
     fetchAllDegrees();
   }, []);
@@ -31,9 +32,7 @@ const DegreeStep = ({ incrementStep, currStep }) => {
       setProgram({ programCode: e.key, programName: options[e.key] }),
     );
   };
-
   const props = useSpring(springProps);
-
   return (
     <animated.div style={props}>
       <div className="steps-heading-container">
@@ -43,7 +42,14 @@ const DegreeStep = ({ incrementStep, currStep }) => {
         {programCode && currStep === 2 && dispatch(incrementStep)}
       </div>
 
-      {options && (
+      <Input
+        size="large"
+        type="text"
+        value={input}
+        placeholder="Search Degree"
+        onChange={(e) => setInput(e.target.value)}
+      />
+      {input !== "" && options && (
         <Menu
           className="degree-search-results"
           onClick={handleDegreeChange}
