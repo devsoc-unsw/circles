@@ -42,35 +42,11 @@ const degreeData = {
   ],
 };
 
-const ProgressionChecker = () => {
-  const [isLoading, setIsLoading] = useState(true);
+const ProgressionCheckerCourses = ({ structure, isLoading }) => {
   const [view, setView] = useState("grid");
 
-  const {
-    programCode, specs,
-  } = useSelector((state) => state.degree);
-
-  const [structure, setStructure] = useState({});
-
-  useEffect(() => {
-    // get structure of degree
-    const fetchStructure = async () => {
-      try {
-        const res = await axios.get(`/programs/getStructure/${programCode}/${specs.join("+")}`);
-        setStructure(res.data.structure);
-      } catch (err) {
-        // eslint-disable-next-line no-console
-        console.log(err);
-      }
-      setIsLoading(false);
-    };
-    if (programCode && specs.length > 0) fetchStructure();
-  }, [programCode, specs, view]);
-
   return (
-    <PageTemplate>
-      <Dashboard isLoading={isLoading} degree={degreeData} />
-      <Divider />
+    <div>
       {(view === "grid" || view === "grid-concise") ? (
         <>
           <Button
@@ -87,7 +63,7 @@ const ProgressionChecker = () => {
             icon={<EyeInvisibleOutlined />}
             onClick={() => setView(view === "grid" ? "grid-concise" : "grid")}
           >
-            Display Concise Mode
+            {view === "grid" ? "Display Concise Mode" : "Display Normal Mode"}
           </Button>
           {view === "grid" ? (
             <GridView isLoading={isLoading} structure={structure} />
@@ -108,6 +84,38 @@ const ProgressionChecker = () => {
           <TableView isLoading={isLoading} structure={structure} />
         </>
       )}
+    </div>
+  );
+};
+
+const ProgressionChecker = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [structure, setStructure] = useState({});
+
+  const {
+    programCode, specs,
+  } = useSelector((state) => state.degree);
+
+  useEffect(() => {
+    // get structure of degree
+    const fetchStructure = async () => {
+      try {
+        const res = await axios.get(`/programs/getStructure/${programCode}/${specs.join("+")}`);
+        setStructure(res.data.structure);
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.log(err);
+      }
+      setIsLoading(false);
+    };
+    if (programCode && specs.length > 0) fetchStructure();
+  }, [programCode, specs]);
+
+  return (
+    <PageTemplate>
+      <Dashboard isLoading={isLoading} degree={degreeData} />
+      <Divider />
+      <ProgressionCheckerCourses structure={structure} isLoading={isLoading} />
     </PageTemplate>
   );
 };

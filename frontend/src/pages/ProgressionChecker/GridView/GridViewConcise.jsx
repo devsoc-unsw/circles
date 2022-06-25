@@ -1,19 +1,61 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Skeleton, Typography } from "antd";
+import { Empty, Skeleton, Typography } from "antd";
 import Collapsible from "components/Collapsible";
 import getFormattedPlannerCourses from "../getFormattedPlannerCourses";
 import CourseBadge from "./CourseBadge";
 import "./index.less";
 
-/* eslint-disable */
+/* eslint-disable max-len, comma-dangle */
+const GridViewSubgroup = ({ uoc, subgroupKey, subgroupEntries }) => {
+  const { Title } = Typography;
+
+  const planned = subgroupEntries.filter((c) => (c.unplanned || c.past || c.past === false));
+  const unplanned = subgroupEntries.filter((c) => (!(c.unplanned || c.past || c.past === false)));
+
+  // convert lists to components
+  const plannedGroup = (
+    <div className="courseGroup">
+      {planned.map((course) => (<CourseBadge course={course} key={course.key} />))}
+    </div>
+  );
+  const unplannedGroup = (
+    <div className="courseGroup">
+      {unplanned.map((course) => (<CourseBadge course={course} key={course.key} />))}
+    </div>
+  );
+
+  return (
+    <div key={subgroupKey} className="subCategory">
+      <Title level={2}>{subgroupKey}</Title>
+      <Title level={3}>
+        {uoc} UOC of the following courses
+      </Title>
+      <Collapsible
+        title={<Title level={4}>Courses you have planned</Title>}
+        headerStyle={{ border: "none" }}
+        initiallyCollapsed={planned.length === 0}
+      >
+        {planned.length > 0 ? plannedGroup : <Empty description="Nothing to see here! 👀" image={Empty.PRESENTED_IMAGE_SIMPLE} />}
+      </Collapsible>
+      <Collapsible
+        title={<Title level={4}>Choose from the following</Title>}
+        headerStyle={{ border: "none" }}
+        initiallyCollapsed={unplanned.length > 8 || unplanned.length === 0}
+      >
+        {unplanned.length > 0 ? unplannedGroup : <Empty description="Nothing to see here! 👀" image={Empty.PRESENTED_IMAGE_SIMPLE} />}
+      </Collapsible>
+      <br />
+    </div>
+  );
+};
+
 const GridView = ({ isLoading, structure }) => {
   const { Title } = Typography;
-  const [plannerCourses, setPlannerCourses] = useState({});
   const [gridLayout, setGridLayout] = useState({});
   const { years, startYear, courses } = useSelector((store) => store.planner);
 
-  const generateGridStructure = () => {
+  const generateGridStructure = (plannerCourses) => {
     const newGridLayout = {};
 
     // Example groups: Major, Minor, General
@@ -38,10 +80,10 @@ const GridView = ({ isLoading, structure }) => {
                 // must check null as could be undefined
                 unplanned: courses[courseCode]?.plannedFor === null,
               });
-              newGridLayout[group][subgroup].sort(
-                (a, b) => a.key.localeCompare(b.key),
-              );
             });
+            newGridLayout[group][subgroup].sort(
+              (a, b) => a.key.localeCompare(b.key),
+            );
           } else {
             // If there is no specified course list for the subgroup, then manually
             // show the added courses.
@@ -60,58 +102,37 @@ const GridView = ({ isLoading, structure }) => {
           }
         }
       });
-      // if (structure[group].name) {
-      //   // Append structure group name if exists
-      //   const newGroup = `${group} - ${structure[group].name}`;
-      //   newGridLayout[newGroup] = newGridLayout[group];
-      //   delete newGridLayout[group];
-      // }
     });
-    setGridLayout(newGridLayout);
+
+    return newGridLayout;
   };
 
   useEffect(() => {
-    setPlannerCourses(getFormattedPlannerCourses(years, startYear, courses));
-
-    generateGridStructure();
+    // generate the grid structure,
+    // TODO: check if this should be in a useMemo or useCallback instead?
+    const plannerCourses = getFormattedPlannerCourses(years, startYear, courses);
+    const gridStructure = generateGridStructure(plannerCourses);
+    setGridLayout(gridStructure);
   }, [isLoading, structure, years, startYear, courses]);
 
   return (
     <div className="gridViewContainer">
-      {isLoading ? (
+      {(isLoading || Object.keys(gridLayout).length === 0) ? (
         <Skeleton />
       ) : (
         <>
           {Object.entries(gridLayout).map(([group, groupEntry]) => (
             <div key={group} className="category">
-              <Title level={1}>{group} - {structure[group].name} - Concise </Title>
-              {Object.entries(groupEntry).map(([subGroup, subGroupEntry]) => (
-                <div key={subGroup} className="subCategory">
-                  <Title level={2}>{subGroup}</Title>
-                  <Title level={3}>
-                    {structure[group][subGroup].UOC} UOC of the following courses
-                  </Title>
-                  <Collapsible title={<Title level={4}>Courses you have planned</Title>} headerStyle={{ border: "none" }}>
-                    <div className="courseGroup">
-                      {subGroupEntry.filter((c) => (
-                        c.unplanned || c.past || c.past === false
-                      )).map((course) => (
-                        <CourseBadge course={course} />
-                      ))}
-                    </div>
-                  </Collapsible>
-                  <Collapsible title={<Title level={4}>Choose from the following</Title>} headerStyle={{ border: "none" }}>
-                    <div className="courseGroup">
-                      {subGroupEntry.filter((c) => (
-                        !(c.unplanned || c.past || c.past === false)
-                      )).map((course) => (
-                        <CourseBadge course={course} />
-                      ))}
-                    </div>
-                  </Collapsible>
-                  <br />
-                </div>
-              ))}
+              <Title level={1}>{group} - {structure[group].name}</Title>
+              {Object.entries(groupEntry).map(
+                ([subgroup, subgroupEntry]) => (
+                  <GridViewSubgroup
+                    uoc={structure[group][subgroup].UOC}
+                    subgroupKey={subgroup}
+                    subgroupEntries={subgroupEntry}
+                  />
+                )
+              )}
             </div>
           ))}
         </>
