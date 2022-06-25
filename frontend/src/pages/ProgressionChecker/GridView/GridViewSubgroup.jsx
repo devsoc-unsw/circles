@@ -1,9 +1,13 @@
 import React from "react";
-import { Typography } from "antd";
+import { Empty, Typography } from "antd";
 import CourseBadge from "./CourseBadge";
 
 const GridViewSubgroup = ({ uoc, subgroupKey, subgroupEntries }) => {
   const { Title } = Typography;
+
+  const subgroup = subgroupEntries.map((course) => (
+    <CourseBadge course={course} />
+  ));
 
   return (
     <div key={subgroupKey} className="subCategory">
@@ -12,9 +16,7 @@ const GridViewSubgroup = ({ uoc, subgroupKey, subgroupEntries }) => {
         {uoc} UOC of the following courses
       </Title>
       <div className="courseGroup">
-        {subgroupEntries.map((course) => (
-          <CourseBadge course={course} />
-        ))}
+        {subgroupEntries.length > 0 ? subgroup : <Empty description="Nothing to see here! 👀" image={Empty.PRESENTED_IMAGE_SIMPLE} />}
       </div>
       <br />
     </div>
