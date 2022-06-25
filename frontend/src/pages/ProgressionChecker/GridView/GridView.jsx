@@ -7,16 +7,16 @@ import "./index.less";
 
 const GridView = ({ isLoading, structure }) => {
   const { Title } = Typography;
-  const [plannerCourses, setPlannerCourses] = useState({});
   const [gridLayout, setGridLayout] = useState({});
   const { years, startYear, courses } = useSelector((store) => store.planner);
 
-  const generateGridStructure = () => {
+  const generateGridStructure = (plannerCourses) => {
     const newGridLayout = {};
 
     // Example groups: Major, Minor, General
     Object.keys(structure).forEach((group) => {
       newGridLayout[group] = {};
+
       // Example subgroup: Core Courses, Computing Electives, Flexible Education
       Object.keys(structure[group]).forEach((subgroup) => {
         if (typeof structure[group][subgroup] !== "string") {
@@ -36,10 +36,10 @@ const GridView = ({ isLoading, structure }) => {
                 // must check null as could be undefined
                 unplanned: courses[courseCode]?.plannedFor === null,
               });
-              newGridLayout[group][subgroup].sort(
-                (a, b) => a.key.localeCompare(b.key),
-              );
             });
+            newGridLayout[group][subgroup].sort(
+              (a, b) => a.key.localeCompare(b.key),
+            );
           } else {
             // If there is no specified course list for the subgroup, then manually
             // show the added courses.
@@ -65,17 +65,21 @@ const GridView = ({ isLoading, structure }) => {
       //   delete newGridLayout[group];
       // }
     });
-    setGridLayout(newGridLayout);
+
+    return newGridLayout;
   };
 
   useEffect(() => {
-    setPlannerCourses(getFormattedPlannerCourses(years, startYear, courses));
-    generateGridStructure();
+    // generate the grid structure,
+    // TODO: check if this should be in a useMemo or useCallback instead?
+    const plannerCourses = getFormattedPlannerCourses(years, startYear, courses);
+    const gridStructure = generateGridStructure(plannerCourses);
+    setGridLayout(gridStructure);
   }, [isLoading, structure, years, startYear, courses]);
 
   return (
     <div className="gridViewContainer">
-      {isLoading ? (
+      {(isLoading || Object.keys(gridLayout).length === 0) ? (
         <Skeleton />
       ) : (
         <>
