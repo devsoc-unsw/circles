@@ -473,9 +473,9 @@ def weight_course(course: tuple, search_term: str, structure: dict,
                 for c in key[1].get("courses", {}):
                     if code in c:
                         if re.match("core|prescribed", key[0], flags=re.IGNORECASE):
-                            weight += 28
+                            weight += 40
                         else:
-                            weight += 14
+                            weight += 20
                         break
 
     for major_code in majors:
@@ -491,9 +491,9 @@ def weight_course(course: tuple, search_term: str, structure: dict,
                 for c in key[1].get("courses", {}):
                     if code in c:
                         if re.match("core|prescribed", key[0], flags=re.IGNORECASE):
-                            weight += 14
+                            weight += 20
                         else:
-                            weight += 7
+                            weight += 10
                         break
 
     for minor_code in minors:
