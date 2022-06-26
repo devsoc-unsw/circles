@@ -6,7 +6,7 @@ import DegreeCard from "../DegreeCard";
 import SkeletonDashboard from "./SkeletonDashboard";
 import "./index.less";
 
-const Dashboard = ({ isLoading, degree }) => {
+const Dashboard = ({ storeUoc, isLoading, degree }) => {
   const { Title } = Typography;
   const currYear = new Date().getFullYear();
 
@@ -24,8 +24,8 @@ const Dashboard = ({ isLoading, degree }) => {
       ) : (
         <animated.div className="centered" style={props}>
           <LiquidProgressChart
-            completedUOC={degree.completed_UOC}
-            totalUOC={degree.UOC}
+            completedUOC={storeUoc.completed_UOC}
+            totalUOC={storeUoc.total_UOC}
           />
           <a
             href={`https://www.handbook.unsw.edu.au/undergraduate/programs/${currYear}/${degree.code}?year=${currYear}`}
@@ -36,10 +36,14 @@ const Dashboard = ({ isLoading, degree }) => {
             <Title className="text textLink">{degree.name}</Title>
           </a>
           <div className="cards">
-            {degree.concentrations
-              && degree.concentrations.map((concentration, index) => (
-                <DegreeCard key={index} concentration={concentration} />
-              ))}
+            {Object.entries(degree).map(([i, obj], index) => {
+              if (i === "General") return null;
+              obj.total_UOC = storeUoc[i].total_UOC;
+              obj.completed_UOC = storeUoc[i].completed_UOC;
+              return (
+                <DegreeCard index={index} type={i} concentration={obj} />
+              );
+            })}
           </div>
         </animated.div>
       )}
