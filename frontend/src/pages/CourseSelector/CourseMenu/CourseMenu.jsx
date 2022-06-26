@@ -12,7 +12,7 @@ import axiosRequest from "config/axios";
 import useMediaQuery from "hooks/useMediaQuery";
 import { setCourses } from "reducers/coursesSlice";
 import { addTab } from "reducers/courseTabsSlice";
-import { addToUnplanned, removeCourses } from "reducers/plannerSlice";
+import { addToUnplanned, removeCourse } from "reducers/plannerSlice";
 import prepareUserPayload from "../utils";
 import LoadingSkeleton from "./LoadingSkeleton";
 import "./index.less";
@@ -233,7 +233,7 @@ const MenuItem = ({
 
   const removeFromPlanner = async (e, plannedCourse) => {
     e.stopPropagation();
-    dispatch(removeCourses([plannedCourse]));
+    dispatch(removeCourse(plannedCourse));
   };
 
   const isSmall = useMediaQuery("(max-width: 1400px)");
@@ -281,7 +281,7 @@ const MenuItem = ({
               <Button
                 onClick={(e) => removeFromPlanner(e, courseCode)}
                 size="small"
-                // shape="circle"
+                shape="circle"
                 icon={<MinusOutlined />}
                 className="quickSubtractBtn"
               />
