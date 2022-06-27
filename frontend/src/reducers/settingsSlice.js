@@ -4,7 +4,7 @@ const initialState = {
   theme: "light",
   showMarks: false,
   showLockedCourses: false,
-  showWarnings: false,
+  showWarnings: true,
 };
 
 const settingsSlice = createSlice({
