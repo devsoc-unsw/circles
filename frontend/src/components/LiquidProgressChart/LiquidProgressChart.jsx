@@ -27,7 +27,7 @@ const LiquidProgressChart = ({ completedUOC, totalUOC }) => {
   }
 
   // dark mode always has white text
-  const theme = useSelector((state) => state.theme);
+  const { theme } = useSelector((state) => state.settings);
   if (theme === "dark") {
     textColor = "white";
   }
