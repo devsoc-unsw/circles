@@ -1,28 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { IoIosSunny, IoMdMoon } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { Switch } from "antd";
-import { toggleTheme } from "reducers/themeSlice";
+import { toggleTheme } from "reducers/settingsSlice";
 
 const ThemeToggle = () => {
-  const [theme, setTheme] = useState(useSelector((state) => state.theme));
+  const { theme } = useSelector((state) => state.settings);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(toggleTheme(theme));
-  }, [theme, dispatch]);
 
   const toggleStyle = {
     backgroundColor: theme === "light" ? "#b37feb" : "#722ed1",
   };
 
   return (
-    // Disabled because too many dark features are not adjusted
     <Switch
       checkedChildren={<IoMdMoon display="flex" />}
       unCheckedChildren={<IoIosSunny display="flex" />}
       defaultChecked={theme === "dark"}
-      onChange={() => setTheme(theme === "light" ? "dark" : "light")}
+      onChange={() => dispatch(toggleTheme(theme === "light" ? "dark" : "light"))}
       style={toggleStyle}
     />
   );

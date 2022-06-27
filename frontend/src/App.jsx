@@ -18,7 +18,7 @@ import "./config/axios";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
-  const theme = useSelector((state) => state.theme);
+  const { theme } = useSelector((state) => state.settings);
 
   useEffect(() => {
     // initialise theme

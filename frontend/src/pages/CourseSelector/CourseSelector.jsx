@@ -4,7 +4,7 @@ import { LockOutlined, UnlockOutlined } from "@ant-design/icons";
 import { notification, Switch, Tooltip } from "antd";
 import axios from "axios";
 import PageTemplate from "components/PageTemplate";
-import { toggleCourseLock } from "reducers/coursesSlice";
+import { toggleLockedCourses } from "reducers/settingsSlice";
 import CourseDescription from "./CourseDescription";
 import CourseMenu from "./CourseMenu";
 import CourseSearchBar from "./CourseSearchBar";
@@ -21,11 +21,7 @@ const CourseSelector = () => {
 
   const { courses } = useSelector((state) => state.planner);
 
-  const { isLockedEnabled } = useSelector((state) => state.courses);
-
-  const handleChange = () => {
-    dispatch(toggleCourseLock());
-  };
+  const { showLockedCourses } = useSelector((state) => state.settings);
 
   useEffect(() => {
     const openNotification = () => {
@@ -70,13 +66,11 @@ const CourseSelector = () => {
             )}
           </div>
           <CourseSearchBar />
-          <Tooltip placement="topLeft" title={isLockedEnabled ? "Hide locked courses" : "Show locked courses"}>
+          <Tooltip placement="topLeft" title={showLockedCourses ? "Hide locked courses" : "Show locked courses"}>
             <Switch
-              defaultChecked={isLockedEnabled}
+              defaultChecked={showLockedCourses}
               className="cs-toggle-locked"
-              onChange={() => {
-                handleChange();
-              }}
+              onChange={() => dispatch(toggleLockedCourses())}
               checkedChildren={<LockOutlined />}
               unCheckedChildren={<UnlockOutlined />}
             />
@@ -86,7 +80,7 @@ const CourseSelector = () => {
         <div className="cs-bottom-cont">
           <CourseMenu
             structure={structure}
-            showLockedCourses={isLockedEnabled}
+            showLockedCourses={showLockedCourses}
           />
           <CourseDescription structure={structure} />
         </div>
