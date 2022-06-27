@@ -37,7 +37,6 @@ const DegreeStep = ({ incrementStep, currStep }) => {
 
   const searchDegree = (newInput) => {
     setInput(newInput);
-    // ternary operator?
     if (newInput) {
       const fullDegreeName = Object.keys(allDegrees).map((code) => `${code} ${allDegrees[code]}`);
       setOptions(
