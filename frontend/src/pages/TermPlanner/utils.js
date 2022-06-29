@@ -83,7 +83,7 @@ const prepareCoursesForValidation = (planner, degree, suppress) => {
   return payload;
 };
 
-// Calculated lcm(uoc, 6) to determine number of times course must be taken.
+// Calculated lcm(uoc, MIN_COMPLETED_COURSE_UOC) to determine number of times course must be taken.
 // e.g. 2 UOC course must be taken 3 times, 3 UOC course must be take 2 times
 const getNumTerms = (uoc) => {
   let num1 = uoc;
@@ -93,7 +93,7 @@ const getNumTerms = (uoc) => {
     num2 = num1 % num2;
     num1 = tempNum;
   }
-  return 6 / num1;
+  return MIN_COMPLETED_COURSE_UOC / num1;
 };
 
 const getTermsList = (currentTerm, uoc, availableTerms, summerTerm) => {

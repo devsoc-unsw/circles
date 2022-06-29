@@ -84,7 +84,7 @@ const plannerSlice = createSlice({
         const { UOC: uoc, termsOffered } = state.courses[course];
         const termsList = getTermsList(destTerm, uoc, termsOffered, state.isSummerEnabled);
 
-        // Add ccourse multiple times
+        // Add course multiple times
         termsList.forEach((termRow) => {
           const { term, rowOffset } = termRow;
           const index = state.years[destRow + rowOffset][term].length;
