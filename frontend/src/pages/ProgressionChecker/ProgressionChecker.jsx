@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { BorderlessTableOutlined, EyeInvisibleOutlined, TableOutlined } from "@ant-design/icons";
+import {
+  BorderlessTableOutlined,
+  EyeFilled,
+  EyeInvisibleOutlined,
+  TableOutlined,
+} from "@ant-design/icons";
 import { Button, Divider } from "antd";
 import axios from "axios";
 import PageTemplate from "components/PageTemplate";
@@ -42,7 +47,8 @@ const degreeData = {
 };
 
 const ProgressionCheckerCourses = ({ structure, isLoading }) => {
-  const [view, setView] = useState("grid");
+  const DEFAULTMODE = "grid-concise";
+  const [view, setView] = useState(DEFAULTMODE);
 
   return (
     <div>
@@ -59,10 +65,10 @@ const ProgressionCheckerCourses = ({ structure, isLoading }) => {
           <Button
             className="viewSwitcher"
             type="primary"
-            icon={<EyeInvisibleOutlined />}
+            icon={view === "grid" ? <EyeInvisibleOutlined /> : <EyeFilled />}
             onClick={() => setView(view === "grid" ? "grid-concise" : "grid")}
           >
-            {view === "grid" ? "Display Concise Mode" : "Display Normal Mode"}
+            {view === "grid" ? "Display Concise Mode" : "Display Full Mode"}
           </Button>
           <GridView isLoading={isLoading} structure={structure} concise={view === "grid-concise"} />
         </>
@@ -72,7 +78,7 @@ const ProgressionCheckerCourses = ({ structure, isLoading }) => {
             className="viewSwitcher"
             type="primary"
             icon={<BorderlessTableOutlined />}
-            onClick={() => setView("grid")}
+            onClick={() => setView(DEFAULTMODE)}
           >
             Display Grid View
           </Button>
