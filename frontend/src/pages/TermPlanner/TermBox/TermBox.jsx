@@ -68,7 +68,7 @@ const TermBox = ({
                   code={code}
                   index={index}
                   showMarks={showMarks}
-                  term={term || ""}
+                  term={term}
                 />
               ),
             )}
