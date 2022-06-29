@@ -5,7 +5,8 @@ import {
   Button, notification,
 } from "antd";
 import { setIsComplete } from "reducers/degreeSlice";
-import "./steps.less";
+import CS from "../common/styles";
+import S from "./styles";
 
 const openNotification = (msg) => {
   const args = {
@@ -20,12 +21,12 @@ const openNotification = (msg) => {
 const StartBrowsingStep = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const degree = useSelector((state) => state.degree);
+  const { programCode, specs } = useSelector((state) => state.degree);
 
-  const saveUserSettings = () => {
-    if (degree.programCode === "") {
+  const handleSaveUserSettings = () => {
+    if (programCode === "") {
       openNotification("Please select a degree");
-    } else if (!degree.specs.length) {
+    } else if (!specs.length) {
       openNotification("Please select a specialisation");
     } else {
       dispatch(setIsComplete(true));
@@ -34,17 +35,13 @@ const StartBrowsingStep = () => {
   };
 
   return (
-    <div className="steps-root-container">
-      <div className="steps-start-browsing-container">
-        <Button
-          className="steps-next-btn"
-          type="primary"
-          onClick={saveUserSettings}
-        >
+    <CS.StepContentWrapper id="start browsing">
+      <S.StartBrowsingWrapper>
+        <Button type="primary" onClick={handleSaveUserSettings}>
           Start browsing courses!
         </Button>
-      </div>
-    </div>
+      </S.StartBrowsingWrapper>
+    </CS.StepContentWrapper>
   );
 };
 
