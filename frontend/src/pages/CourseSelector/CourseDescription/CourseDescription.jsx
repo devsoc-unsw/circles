@@ -129,7 +129,7 @@ const CourseDescription = () => {
     },
     {
       title: "UNSW Handbook",
-      content: (
+      content: course.study_level ? (
         <a
           href={`https://www.handbook.unsw.edu.au/${course.study_level.toLowerCase()}/courses/2022/${course.code}/`}
           target="_blank"
@@ -137,7 +137,7 @@ const CourseDescription = () => {
         >
           View {course.code} in handbook
         </a>
-      ),
+      ) : null,
     },
     {
       title: "Faculty",

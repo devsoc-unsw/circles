@@ -32,11 +32,9 @@ const MenuItemCourseContainer = styled.div`
 `;
 
 const DeselectButton = styled(Button)`
-  display: flex;
   border: none !important;
-  align-items: center;
   background-color: #fafafa !important;
-  justify-content: center;
+  box-shadow: none !important;
 `;
 
 export default {
