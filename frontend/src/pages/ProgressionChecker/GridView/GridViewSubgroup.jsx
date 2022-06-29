@@ -12,7 +12,7 @@ const GridViewSubgroup = ({ uoc, subgroupKey, subgroupEntries }) => {
   return (
     <div key={subgroupKey} className="subCategory">
       <Title level={2}>{subgroupKey}</Title>
-      <Title level={4}>
+      <Title level={3}>
         {uoc} UOC of the following courses
       </Title>
       <div className="courseGroup">
