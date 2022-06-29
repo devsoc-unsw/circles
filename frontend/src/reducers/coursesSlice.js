@@ -3,7 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   courses: {},
   course: {},
-  isLockedEnabled: false,
 };
 
 const coursesSplice = createSlice({
@@ -16,15 +15,12 @@ const coursesSplice = createSlice({
     setCourse: (state, action) => {
       state.course = action.payload;
     },
-    toggleCourseLock: (state) => {
-      state.isLockedEnabled = !state.isLockedEnabled;
-    },
     resetCourses: () => initialState,
   },
 });
 
 export const {
-  setCourses, setCourse, toggleCourseLock, resetCourses,
+  setCourses, setCourse, resetCourses,
 } = coursesSplice.actions;
 
 export default coursesSplice.reducer;
