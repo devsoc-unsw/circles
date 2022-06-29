@@ -1,9 +1,15 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { EyeOutlined } from "@ant-design/icons";
 import { Badge, Tooltip } from "antd";
 import CourseButton from "./CourseButton";
 
 const CourseBadge = ({ course }) => {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate("/term-planner");
+  };
+
   const courseBadge = () => {
     if (course.unplanned) {
       return (
@@ -14,6 +20,7 @@ const CourseBadge = ({ course }) => {
               <div className="courseBadgeIcon">!</div>
             </Tooltip>
           )}
+          onClick={handleClick}
         >
           <CourseButton course={course} planned={false} />
         </Badge>
