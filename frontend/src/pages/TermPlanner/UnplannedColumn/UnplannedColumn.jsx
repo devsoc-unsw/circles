@@ -1,24 +1,25 @@
 import React from "react";
 import { Droppable } from "react-beautiful-dnd";
 import { useSelector } from "react-redux";
+import useMediaQuery from "hooks/useMediaQuery";
 import DraggableCourse from "../DraggableCourse";
-import "./index.less";
-
-// create separate array for each type
-// e.g. courseTypes = { Core: ["COMP1511", "COMP2521"], Elective: ["COMP6881"] }
+import S from "./styles";
 
 const UnplannedColumn = ({ isDragging }) => {
   const { isSummerEnabled, unplanned } = useSelector((state) => state.planner);
+  const isSmall = useMediaQuery("(max-width: 1400px)");
 
   return (
-    <div className={`unplannedContainer ${isSummerEnabled && "summerUnplannedContainer"}`}>
-      <div className="gridItem unplannedTitle">Unplanned</div>
+    <S.UnplannedContainer summerEnabled={isSummerEnabled}>
+      <S.UnplannedTitle>Unplanned</S.UnplannedTitle>
       <Droppable droppableId="unplanned">
         {(provided) => (
-          <ul
+          <S.UnplannedBox
             ref={provided.innerRef}
             {...provided.droppableProps}
-            className={`unplannedBox ${isDragging && "droppable "} ${isSummerEnabled && "summerUnplannedBox"}`}
+            summerEnabled={isSummerEnabled}
+            droppable={isDragging}
+            isSmall={isSmall}
           >
             {unplanned.map((course, courseIndex) => (
               <DraggableCourse
@@ -28,10 +29,10 @@ const UnplannedColumn = ({ isDragging }) => {
               />
             ))}
             {provided.placeholder}
-          </ul>
+          </S.UnplannedBox>
         )}
       </Droppable>
-    </div>
+    </S.UnplannedContainer>
   );
 };
 

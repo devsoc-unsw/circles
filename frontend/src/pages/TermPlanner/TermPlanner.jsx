@@ -7,6 +7,7 @@ import PageTemplate from "components/PageTemplate";
 import {
   moveCourse, setPlannedCourseToTerm, setUnplannedCourseToTerm, toggleWarnings, unschedule,
 } from "reducers/plannerSlice";
+import { GridItem } from "./common/styles";
 import HideYearTooltip from "./HideYearTooltip";
 import OptionsHeader from "./OptionsHeader";
 import TermBox from "./TermBox";
@@ -160,11 +161,11 @@ const TermPlanner = () => {
               className={`gridContainer ${planner.isSummerEnabled && "summerGrid"}`}
               ref={plannerPic}
             >
-              <div className="gridItem" />
-              {planner.isSummerEnabled && <div className="gridItem">Summer</div>}
-              <div className="gridItem">Term 1</div>
-              <div className="gridItem">Term 2</div>
-              <div className="gridItem">Term 3</div>
+              <GridItem />
+              {planner.isSummerEnabled && <GridItem>Summer</GridItem>}
+              <GridItem>Term 1</GridItem>
+              <GridItem>Term 2</GridItem>
+              <GridItem>Term 3</GridItem>
               {planner.years.map((year, index) => {
                 const iYear = parseInt(planner.startYear, 10) + parseInt(index, 10);
                 let yearUOC = 0;
