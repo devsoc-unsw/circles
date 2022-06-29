@@ -1,6 +1,8 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { LockOutlined, PlusOutlined, WarningOutlined } from "@ant-design/icons";
+import {
+  LockOutlined, MinusOutlined, PlusOutlined, WarningOutlined,
+} from "@ant-design/icons";
 import {
   Button, Tooltip,
 } from "antd";
@@ -8,7 +10,7 @@ import { motion } from "framer-motion/dist/framer-motion";
 import axiosRequest from "config/axios";
 import useMediaQuery from "hooks/useMediaQuery";
 import { addTab } from "reducers/courseTabsSlice";
-import { addToUnplanned } from "reducers/plannerSlice";
+import { addToUnplanned, removeCourse } from "reducers/plannerSlice";
 import S from "./styles";
 
 const TooltipWarningIcon = ({ text }) => (
@@ -66,6 +68,12 @@ const MenuItem = ({
     };
     dispatch(addToUnplanned(data));
   };
+
+  const removeFromPlanner = async (e, plannedCourse) => {
+    e.stopPropagation();
+    dispatch(removeCourse(plannedCourse));
+  };
+
   const isSmall = useMediaQuery("(max-width: 1400px)");
 
   return (
@@ -95,15 +103,24 @@ const MenuItem = ({
             )}
             {!unlocked && <LockOutlined style={{ fontSize: "11px" }} />}
           </S.MenuItemCourseContainer>
-          {!selected && (
-          <Tooltip title="Add to Planner" placement="top">
-            <Button
-              onClick={(e) => addToPlanner(e, courseCode)}
-              size="small"
-              shape="circle"
-              icon={<PlusOutlined />}
-            />
-          </Tooltip>
+          {!selected ? (
+            <Tooltip title="Add to Planner" placement="top">
+              <Button
+                onClick={(e) => addToPlanner(e, courseCode)}
+                size="small"
+                shape="circle"
+                icon={<PlusOutlined />}
+              />
+            </Tooltip>
+          ) : (
+            <Tooltip title="Remove from Planner" placement="top">
+              <S.DeselectButton
+                onClick={(e) => removeFromPlanner(e, courseCode)}
+                size="small"
+                shape="circle"
+                icon={<MinusOutlined />}
+              />
+            </Tooltip>
           )}
         </S.MenuItemContainer>
       </S.MenuItemWrapper>

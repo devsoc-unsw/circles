@@ -25,7 +25,7 @@ const StartBrowsingStep = () => {
   const saveUserSettings = () => {
     if (degree.programCode === "") {
       openNotification("Please select a degree");
-    } else if (!degree.majors.length && !degree.minors.length) {
+    } else if (!degree.specs.length) {
       openNotification("Please select a specialisation");
     } else {
       dispatch(setIsComplete(true));

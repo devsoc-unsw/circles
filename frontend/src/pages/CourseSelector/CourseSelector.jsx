@@ -3,7 +3,11 @@ import { useSelector } from "react-redux";
 import { notification } from "antd";
 import axios from "axios";
 import PageTemplate from "components/PageTemplate";
+<<<<<<< HEAD
 import CourseBanner from "./CourseBanner";
+=======
+import { toggleLockedCourses } from "reducers/settingsSlice";
+>>>>>>> dev
 import CourseDescription from "./CourseDescription";
 import CourseSidebar from "./CourseSidebar";
 import CourseTabs from "./CourseTabs";
@@ -13,10 +17,19 @@ const CourseSelector = () => {
   const [structure, setStructure] = useState({});
 
   const {
+<<<<<<< HEAD
     programCode, minors, majors,
+=======
+    programCode, programName, specs,
+>>>>>>> dev
   } = useSelector((state) => state.degree);
   const { courses } = useSelector((state) => state.planner);
+<<<<<<< HEAD
   const { isLockedEnabled } = useSelector((state) => state.courses);
+=======
+
+  const { showLockedCourses } = useSelector((state) => state.settings);
+>>>>>>> dev
 
   useEffect(() => {
     const openNotification = () => {
@@ -39,26 +52,48 @@ const CourseSelector = () => {
     // get structure of degree
     const fetchStructure = async () => {
       try {
-        const minorAppend = minors.length > 0 ? `/${minors.join("+")}` : "";
-        const res = await axios.get(`/programs/getStructure/${programCode}/${majors.join("+")}${minorAppend}`);
+        const res = await axios.get(`/programs/getStructure/${programCode}/${specs.join("+")}`);
         setStructure(res.data.structure);
       } catch (err) {
         // eslint-disable-next-line no-console
         console.log(err);
       }
     };
-    if (programCode && (majors.length > 0)) fetchStructure();
-  }, [programCode, majors, minors]);
+    if (programCode) fetchStructure();
+  }, [programCode, specs]);
 
   return (
     <PageTemplate>
+<<<<<<< HEAD
       <S.ContainerWrapper>
         <CourseBanner />
+=======
+      <div className="cs-root">
+        <div className="cs-top-cont">
+          <div className="cs-degree-cont">
+            {programCode !== "" && (
+              <h1 className="text">
+                {programCode} - {programName}
+              </h1>
+            )}
+          </div>
+          <CourseSearchBar />
+          <Tooltip placement="topLeft" title={showLockedCourses ? "Hide locked courses" : "Show locked courses"}>
+            <Switch
+              defaultChecked={showLockedCourses}
+              className="cs-toggle-locked"
+              onChange={() => dispatch(toggleLockedCourses())}
+              checkedChildren={<LockOutlined />}
+              unCheckedChildren={<UnlockOutlined />}
+            />
+          </Tooltip>
+        </div>
+>>>>>>> dev
         <CourseTabs />
         <S.ContentWrapper>
           <CourseSidebar
             structure={structure}
-            showLockedCourses={isLockedEnabled}
+            showLockedCourses={showLockedCourses}
           />
           <CourseDescription structure={structure} />
         </S.ContentWrapper>

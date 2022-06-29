@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { animated, useSpring } from "@react-spring/web";
 import {
-  Menu, Typography,
+  Input, Menu, Typography,
 } from "antd";
 import axios from "axios";
-import { setProgram } from "reducers/degreeSlice";
+import { resetDegree, setProgram } from "reducers/degreeSlice";
 import springProps from "./spring";
 import "./steps.less";
 
@@ -14,11 +14,12 @@ const { Title } = Typography;
 const DegreeStep = ({ incrementStep, currStep }) => {
   const dispatch = useDispatch();
   const programCode = useSelector((store) => store.degree.programCode);
-  const [options, setOptions] = useState(null);
-
+  const [input, setInput] = useState("");
+  const [options, setOptions] = useState([]);
+  const [allDegrees, setAllDegrees] = useState({});
   const fetchAllDegrees = async () => {
     const res = await axios.get("/programs/getPrograms");
-    setOptions(res.data.programs);
+    setAllDegrees(res.data.programs);
   };
 
   useEffect(() => {
@@ -26,9 +27,24 @@ const DegreeStep = ({ incrementStep, currStep }) => {
   }, []);
 
   const handleDegreeChange = (e) => {
+    dispatch(resetDegree());
     dispatch(
-      setProgram({ programCode: e.key, programName: options[e.key] }),
+      setProgram({ programCode: e.key.substring(0, 4), programName: e.key.substring(5) }),
     );
+    setInput(e.key);
+    setOptions([]);
+  };
+
+  const searchDegree = (newInput) => {
+    setInput(newInput);
+    if (newInput) {
+      const fullDegreeName = Object.keys(allDegrees).map((code) => `${code} ${allDegrees[code]}`);
+      setOptions(
+        fullDegreeName.filter((degree) => degree.toLowerCase().includes(newInput.toLowerCase())),
+      );
+    } else {
+      setOptions([]);
+    }
   };
 
   const props = useSpring(springProps);
@@ -41,17 +57,23 @@ const DegreeStep = ({ incrementStep, currStep }) => {
         </Title>
         {programCode && currStep === 2 && dispatch(incrementStep)}
       </div>
-
-      {options && (
+      <Input
+        size="large"
+        type="text"
+        value={input}
+        placeholder="Search Degree"
+        onChange={(e) => (searchDegree(e.target.value))}
+      />
+      {input && options && (
         <Menu
           className="degree-search-results"
           onClick={handleDegreeChange}
           selectedKeys={programCode && [programCode]}
           mode="inline"
         >
-          {Object.keys(options).map((key) => (
-            <Menu.Item className="text" key={key}>
-              {key} &nbsp; {options[key]}
+          {options.map((degreeName) => (
+            <Menu.Item className="text" key={degreeName}>
+              {degreeName}
             </Menu.Item>
           ))}
         </Menu>

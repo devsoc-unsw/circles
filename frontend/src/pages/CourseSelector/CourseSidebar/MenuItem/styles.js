@@ -1,4 +1,4 @@
-import { Menu } from "antd";
+import { Button, Menu } from "antd";
 import styled from "styled-components";
 
 const MenuItemWrapper = styled(Menu.Item)`
@@ -31,4 +31,14 @@ const MenuItemCourseContainer = styled.div`
   text-overflow: ellipsis;
 `;
 
-export default { MenuItemWrapper, MenuItemContainer, MenuItemCourseContainer };
+const DeselectButton = styled(Button)`
+  display: flex;
+  border: none !important;
+  align-items: center;
+  background-color: #fafafa !important;
+  justify-content: center;
+`;
+
+export default {
+  DeselectButton, MenuItemWrapper, MenuItemContainer, MenuItemCourseContainer,
+};

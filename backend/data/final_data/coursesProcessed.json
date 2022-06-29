@@ -852,9 +852,7 @@
         "campus": "Paddington",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": ""
     },
@@ -1027,9 +1025,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -1221,8 +1217,8 @@
         "equivalents": {},
         "exclusions": {
             "ANAT1551": 1,
-            "ANAT2151": 1,
             "ANAT2111": 1,
+            "ANAT2151": 1,
             "ANAT1521": 1,
             "ANAT2200": 1,
             "ANAT2241": 1
@@ -1337,9 +1333,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -2410,9 +2404,7 @@
             "GENT0429": 1,
             "ITAL1001": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": ""
     },
@@ -2430,9 +2422,7 @@
         "exclusions": {
             "ITAL1002": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: ARTS1620 or language placement approval"
     },
@@ -2920,9 +2910,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: 24 units of credit at Level 1"
     },
@@ -2940,9 +2928,7 @@
         "exclusions": {
             "ARTS3055": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: 24 units of credit at Level 1. Excluded: ARTS3055"
     },
@@ -3099,9 +3085,7 @@
         "exclusions": {
             "ARTS3068": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: 24 UOC at level 1. Excluded: ARTS3068"
     },
@@ -3380,9 +3364,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "24 units of credit at Level 1 courses"
     },
@@ -3418,9 +3400,7 @@
         "exclusions": {
             "HIST2008": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: 24 units of credit at Level 1"
     },
@@ -3512,9 +3492,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: 24 units of credit at Level 1"
     },
@@ -3584,9 +3562,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: 24 units of credit at Level 1"
     },
@@ -3602,9 +3578,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: 24 units of credit at Level 1"
     },
@@ -3662,9 +3636,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: 24 units of credit at Level 1"
     },
@@ -3680,9 +3652,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: 24 units of credit at Level 1"
     },
@@ -3880,9 +3850,7 @@
         "exclusions": {
             "ARTS2370": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: 24 units of credit at Level 1"
     },
@@ -4133,9 +4101,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: 24 units of credit at Level 1"
     },
@@ -4169,9 +4135,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: 24 units of credit at Level 1"
     },
@@ -4187,9 +4151,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": ""
     },
@@ -4267,9 +4229,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: 24 units of credit at Level 1"
     },
@@ -4303,9 +4263,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: 24 units of credit at Level 1"
     },
@@ -4323,9 +4281,7 @@
         "exclusions": {
             "ARTS3491": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: 24 units of credit at Level 1"
     },
@@ -4563,9 +4519,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: 24 units of credit at Level 1"
     },
@@ -4709,9 +4663,7 @@
             "SPAN2424": 1,
             "HIST2040": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: 24 units of credit at Level 1"
     },
@@ -4843,9 +4795,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: 24 units of credit at Level 1"
     },
@@ -5088,9 +5038,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: 24 units of credit at Level 1"
     },
@@ -5106,9 +5054,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: 24 units of credit at Level 1"
     },
@@ -5265,9 +5211,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: 24 units of credit at Level 1"
     },
@@ -5358,9 +5302,7 @@
             "ENGL1008": 1,
             "GENT0211": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: 48 UOC, including 6 UOC at Level 1 in an English Major or Minor"
     },
@@ -5412,9 +5354,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, English"
     },
@@ -5520,9 +5460,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Film Studies or MCT; or ARTS1060/ARTS1090, at least 6uoc in level 2  Film Studies electives and enrolment in a Media single or double degree"
     },
@@ -5836,9 +5774,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Dance Studies or Theatre & Performance Studies. Or 72 UOC overall and enrolment in an Art & Design program"
     },
@@ -5858,9 +5794,7 @@
         "exclusions": {
             "ARTS2124": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams,  Australian Studies or Theatre & Performance Studies. Excluded: ARTS2124"
     },
@@ -5876,9 +5810,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisites: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Theatre and Performance Studies"
     },
@@ -5894,9 +5826,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Asian Studies, Development Studies, Global Development or History. Or 48 UOC overall and enrolment in an International Studies program"
     },
@@ -5930,9 +5860,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: 48 UOC including 6 UOC at level 1 and 6 UOC at level 2 in Asian Studies or History. Or 48 UOC incuding 12 UOC in Chinese Studies language courses.Or 48 UOC and enrolment in an International Studies single or dual program (2017 onwards)"
     },
@@ -5989,9 +5917,7 @@
             "HPSC3500": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: 72 uoc overall and enrolment in an Environmental Humanities major or minor"
     },
@@ -6045,9 +5971,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Environmental Humanities"
     },
@@ -6155,9 +6079,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Australian Studies or History. Or 48 UOC and enrolment in an International Studies single or dual program (2017 onwards)"
     },
@@ -6435,9 +6357,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: 72uoc overall, including ARTS3453, ARTS2452, or ARTS3454  and enrolment in an Advanced Chinese Studies major/minor; or 72uoc overall, including ARTS2451 or ARTS2462 and enrolment in a Chinese Studies major/minor"
     },
@@ -6453,9 +6373,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: ARTS2452 or ARTS3451 or ARTS3452 or ARTS3453 or ARTS3454 or ARTS3463 or language placement approval"
     },
@@ -6550,9 +6468,7 @@
             "FREN1022": 1,
             "FREN3104": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: ARTS3481 or language placement approval"
     },
@@ -6568,9 +6484,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: ARTS3481 or ARTS3482 or ARTS3483 or language placement approval"
     },
@@ -6586,9 +6500,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: ARTS3481 or ARTS3482 or ARTS3483"
     },
@@ -6606,9 +6518,7 @@
         "exclusions": {
             "FREN2030": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: ARTS3481 or ARTS3482 or ARTS3483 or language placement approval"
     },
@@ -6644,9 +6554,7 @@
         "exclusions": {
             "ARTS2488": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: ARTS3481 or ARTS3482 or ARTS3483 or language placement approval"
     },
@@ -6684,9 +6592,7 @@
         "exclusions": {
             "GERS3411": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: ARTS3510 or language placement approval"
     },
@@ -6778,9 +6684,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: ARTS3571 or written language placement approval and interview"
     },
@@ -6877,9 +6781,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: ARTS3632 or language placement approval"
     },
@@ -6895,9 +6797,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: 72uoc overall, including ARTS3633 and enrolment in an Advanced Japanese Studies major/minor; or 72uoc overall, including ARTS2631 and enrolment in a Japanese Studies major/minor"
     },
@@ -6913,9 +6813,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: ARTS3632 or language placement approval"
     },
@@ -7048,9 +6946,7 @@
             "KORE5007": 1,
             "KORE3300": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: ARTS3661, ARTS3663, ARTS3664, or ARTS3665"
     },
@@ -7084,9 +6980,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: ARTS3661 or ARTS3662 or ARTS3663 or ARTS3665 or language placement approval"
     },
@@ -7102,9 +6996,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: ARTS3661, ARTS3662, ARTS3663, ARTS3664, or langauage placement approval"
     },
@@ -7253,9 +7145,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Development Studies or Global Development"
     },
@@ -7271,9 +7161,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: ARTS3759 and enrolment with consent"
     },
@@ -7289,9 +7177,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Enrolment with consent. ARTS3759 is open to UNSW undergraduate students that are also enrolled in an internship (or international field placement course). This needs to be demonstrated prior to enrolment."
     },
@@ -7343,9 +7229,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: 48UOC overall, including 6UOC at level 1 and 6UOC at level 2 in European Studies or History; or 48UOC overall, including 12UOC in German Studies language courses. Or 48UOC and enrolment in an International Studies program"
     },
@@ -7363,9 +7247,7 @@
         "exclusions": {
             "ARTS2783": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: 24 units of credit in either the European Studies or German Studies stream.<br/>Excluded: ARTS2783"
     },
@@ -7383,9 +7265,7 @@
         "exclusions": {
             "ARTS2786": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams; European Studies or History. Excluded: ARTS2786"
     },
@@ -7568,9 +7448,7 @@
             "SOCA3411": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: 48UOC overall, including 6UOC lv1 and 6UOC lv2 in one of the following streams, Criminology/S&A; or enrolment in program 3422/4763 and 12UOC lv2 SRAP and 18UOC lv2 CRIM; or enrolment in Program 4034 and 30UOC at lv2 including 12UOC lv2 CRIM"
     },
@@ -7640,9 +7518,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Asian Studies or Sociology & Anthropology"
     },
@@ -7694,9 +7570,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Gender Studies or History."
     },
@@ -7714,9 +7588,7 @@
         "exclusions": {
             "ARTS3367": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Gender Studies or Philosophy.<br/>Excluded: ARTS3367"
     },
@@ -9311,9 +9183,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -9329,9 +9199,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -9383,9 +9251,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: 30 units of credit at Level 1"
     },
@@ -9440,9 +9306,7 @@
             "GENX0102": 1,
             "ATSI2002": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: 30 units of credit at Level 1"
     },
@@ -9476,9 +9340,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: 30 units of credit at Level 1"
     },
@@ -9573,9 +9435,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: 36 units of credit"
     },
@@ -9591,9 +9451,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -9609,9 +9467,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -9627,9 +9483,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -9771,9 +9625,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Enrolled in Aviation Program"
     },
@@ -9885,9 +9737,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": ""
     },
@@ -10422,9 +10272,7 @@
         "exclusions": {
             "SCIF3900": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Minimum completion of 72 UoC"
     },
@@ -10458,9 +10306,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Enrolled in AVIA Honours"
     },
@@ -11157,9 +11003,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -11231,9 +11075,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -11285,9 +11127,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: 96 unit of credits completed"
     },
@@ -11303,9 +11143,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: 96 unit of credits completed"
     },
@@ -11343,9 +11181,7 @@
             "BENV0006": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: 96 unit of credits completed"
     },
@@ -11477,9 +11313,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: 96 unit of credits completed"
     },
@@ -11513,9 +11347,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: 96 unit of credits completed"
     },
@@ -11530,9 +11362,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: 96 unit of credits completed"
     },
@@ -11552,9 +11382,7 @@
         "exclusions": {
             "BENV6731": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: 96 units of credit completed in Built Environment"
     },
@@ -11658,9 +11486,7 @@
         "exclusions": {
             "BENV2943": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: 96 unit of credits completed"
     },
@@ -11676,9 +11502,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: 96 unit of credits completed"
     },
@@ -11694,9 +11518,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: 96 unit of credits completed"
     },
@@ -11730,9 +11552,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "96 UOC and enrolment in FBE  Design program"
     },
@@ -11784,9 +11604,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -11890,9 +11708,7 @@
         "exclusions": {
             "BENV7030": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: 72 units of credit"
     },
@@ -11908,9 +11724,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": ""
     },
@@ -11964,9 +11778,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: 96 unit of credits completed"
     },
@@ -11982,9 +11794,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -12000,9 +11810,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -12018,9 +11826,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -12038,9 +11844,7 @@
         "exclusions": {
             "BENV7145": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -12170,9 +11974,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: 96 unit of credits completed"
     },
@@ -12244,9 +12046,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: (COMP1531 or COMP2041) <br/>Co-requisite: BINF3010"
     },
@@ -12262,9 +12062,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: COMP1531 or COMP2041"
     },
@@ -12506,9 +12304,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -12564,9 +12360,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -12710,9 +12504,7 @@
             "ENGG3060": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -13124,9 +12916,7 @@
         "exclusions": {
             "BIOS9123": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -13218,9 +13008,7 @@
         "exclusions": {
             "BIOS3081": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "None"
     },
@@ -13257,9 +13045,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -13275,9 +13061,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -13819,9 +13603,7 @@
             "PLAN1006": 1,
             "LAND1421": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Program Prerequisite:4522 or Program 3332 with WAM of 65 or over"
     },
@@ -13854,9 +13636,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Student must have completed 30 UoC in order to enrol."
     },
@@ -14365,7 +14145,7 @@
         "code": "CEIC4954",
         "UOC": 6,
         "level": 4,
-        "description": "This course will provide students with an opportunity to go extend their thesis project by exploring their research problem in more breadth &amp;/or depth. The work students do for this course will build on the work completed in CEIC4951 and CEIC4952, and complement the work being undertaken for CEIC4953.\n\nFurther, this course will be especially relevant for students considering pursuing a research career in fields related to chemical engineering and food science. The activities in this course are designed to introduce students to the ways in which research is practiced and communicated in higher degree environment.\n\nAs this course acts as an extension to your thesis course, you cannot take this course at the same as CEIC4952. You are permitted to take this course at the same time as CEIC4953. In order to enrol\u00a0in this course you need to have a WAM of at least 75, as well as the approval of your project supervisor and the course coordinator. Apart from in exceptional circumstances, students should continue with the same supervisor and project as they had in CEIC4951, CEIC4952 and CEIC4953.\n",
+        "description": "Research Thesis Extension is an inquiry-based learning course that allows students to deepen and/or broaden the scope of their thesis project. It is particularly recommended to students considering a research career and/or pursuing a research degree (such as a PhD). This course provides an authentic experience of the higher degree environment through the supervisor-student relationship, and the focus of assessment on developing a draft journal paper.\nAs in other the Research Thesis courses, the project a student undertakes must be a complex, open-ended problem that allows room for creativity, and the acquisition, analysis and interpretation of results. There must be multiple possible solutions or conclusions at the outset and sufficient complexity to require a degree of project planning from the student. The project will require students to bring together discipline knowledge and principles learned through academic study and professional experience. Students apply these principles to innovatively solve problems such as the development of a specific design, process and/or the investigation of a hypothesis.\nSince this course expands the scope of your original thesis project (planned in CEIC4951 and refined in CEIC4952), you cannot take this course at the same as CEIC4951 or CEIC4952. Students normally take this course at the same time as CEIC4953 or in the following term. To enrol in this course students normally need to have a WAM of at least 75, as well as the approval of your project supervisor and the course coordinator. Apart from in exceptional circumstances, students should continue with the same supervisor and project as they had in CEIC4951, CEIC4952 and CEIC4953.",
         "study_level": "Undergraduate",
         "school": "School of Chemical Engineering",
         "faculty": "Faculty of Engineering",
@@ -14378,7 +14158,7 @@
             "T3"
         ],
         "gen_ed": 0,
-        "raw_requirements": ""
+        "raw_requirements": "Prerequisite: CEIC4952Corequisite: CEIC4953"
     },
     "CEIC6004": {
         "title": "Advanced Polymers",
@@ -14392,9 +14172,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: POLY3000"
     },
@@ -14414,9 +14192,7 @@
             "CEIC6205": 1,
             "CEIC6209": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisites: (MATS1101 OR CHEM1011 OR DPST1031 OR CHEM1021 OR DPST1032) AND CEIC2000 AND CEIC2002"
     },
@@ -14990,9 +14766,7 @@
             "CHEM2031": 1,
             "CHEM2839": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: CHEM2041 Exclusion: CHEM2031, CHEM2828, CHEM2839"
     },
@@ -15435,9 +15209,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "12 UOC of CHEM2011, CHEM2021, CHEM2031, CHEM2839, CHEM2041 & CHEM2828"
     },
@@ -15489,9 +15261,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Pre-requisites: CEIC2001, CEIC2002, MATH2019, CEIC3000"
     },
@@ -15887,9 +15657,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -15959,9 +15727,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: Students must be in Good Academic Standing"
     },
@@ -16361,9 +16127,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Students are expected to be in their final year of a Bachelor of Commerce single or dual degree with at least 108 UOC completed."
     },
@@ -16378,9 +16142,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Completed at least 72 UoC and be enrolled in a Commerce Program; be in good academic standing, and completed COMM1999"
     },
@@ -16458,9 +16220,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Pre-requisite: COMM1822, COMM2050, COMM2501, Business Analytics Modelling I course (ECON2206 or ECON2209 or RISK2002) and completing the Business Analytics major (COMMJ1). It is recommended students are in their final year when taking this course."
     },
@@ -16496,9 +16256,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Pre-requisite: Completed a minimum of 108 UOC (including First Year core), on Good standing and completed Career Accelerator Essentials (COMM6000).<br/>It is strongly recommended that students only complete this course within their final 2 terms of study."
     },
@@ -16712,9 +16470,7 @@
             "MTRN3200": 1,
             "ELEC2142": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: COMP1917 OR COMP1921 OR COMP1511 OR DPST1091 OR COMP1521 OR DPST1092 OR (COMP1911 AND MTRN2500)"
     },
@@ -17766,9 +17522,7 @@
             "COMP9152": 1,
             "COMP3152": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Pre-requisite: MATH1081"
     },
@@ -17903,9 +17657,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: [COMP3231 or COMP3891] and [COMP3331 or TELE3018]."
     },
@@ -18017,9 +17769,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: (COMP2521 or COMP1927) and COMP3311 and MATH1081"
     },
@@ -18107,9 +17857,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: COMP3331."
     },
@@ -18443,9 +18191,7 @@
             "CRIM2028": 1,
             "LAWS3105": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: 24 units of credit at Level 1 including CRIM1010 or CRIM1011"
     },
@@ -18499,9 +18245,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: 24 units of credit at Level 1 including CRIM1010 or CRIM1011"
     },
@@ -18521,9 +18265,7 @@
         "exclusions": {
             "GENT0911": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: 24 units of credit at Level 1"
     },
@@ -18623,9 +18365,7 @@
             "CRIM3006": 1,
             "LAWS8193": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: CRIM2021 or LAWS1022"
     },
@@ -18643,9 +18383,7 @@
         "exclusions": {
             "CRIM3007": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in Criminology. Or 84 uoc and enrolled in 4787 Social Work (Honours)/Law"
     },
@@ -18661,9 +18399,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in Criminology. Or 84 uoc and enrolled in 4787 Social Work (Honours)/Law"
     },
@@ -18683,9 +18419,7 @@
             "LAWS8117": 1,
             "CRIM2022": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in Criminology. Or 84 uoc and enrolled in 4787 Social Work (Honours)/Law"
     },
@@ -18925,9 +18659,7 @@
             "CVEN3402": 1,
             "CVEN3401": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -18949,9 +18681,7 @@
             "CVEN2401": 1,
             "CVEN3402": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -18995,9 +18725,7 @@
             "SOLA2052": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -19285,9 +19013,7 @@
             "CVEN4050": 1,
             "CVEN4032": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Minimum WAM of 70 and completion of 132UOC"
     },
@@ -19307,9 +19033,7 @@
             "CVEN4051": 1,
             "CVEN4033": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: CVEN4040"
     },
@@ -19511,9 +19235,7 @@
         "exclusions": {
             "CVEN4106": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Pre-requisite: 2303, 3303 & 3304"
     },
@@ -19565,9 +19287,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Pre: CVEN2301 & CVEN2303"
     },
@@ -19675,9 +19395,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -19772,9 +19490,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -19790,9 +19506,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -20078,9 +19792,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ">74 WAM UG students"
     },
@@ -20138,9 +19850,7 @@
             "ENVS1011": 1,
             "BIOS1301": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Exclusion: BIOS1301"
     },
@@ -20336,9 +20046,7 @@
         "campus": "Paddington",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -20354,9 +20062,7 @@
         "campus": "Paddington",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": ""
     },
@@ -20855,9 +20561,7 @@
         "campus": "Paddington",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: SART2818."
     },
@@ -20981,9 +20685,7 @@
         "campus": "Paddington",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Must have completed DART1210 or DDES1110"
     },
@@ -21107,9 +20809,7 @@
         "campus": "Paddington",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Must have completed DART1250"
     },
@@ -21125,9 +20825,7 @@
         "campus": "Paddington",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Must have completed DART2250"
     },
@@ -22281,9 +21979,7 @@
         "campus": "Paddington",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": ""
     },
@@ -22413,9 +22109,7 @@
         "exclusions": {
             "DESN1000": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -22430,9 +22124,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "No prerequisites required"
     },
@@ -22490,9 +22182,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Completed at least one first-year design course (for example, ENGG1000, DESN1000, DESN1010, GENE1500, or DPST1071)Completed 72 UOC"
     },
@@ -22507,9 +22197,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Completed 72 UOC"
     },
@@ -22527,9 +22215,7 @@
             "MGMT1001": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program"
     },
@@ -22547,9 +22233,7 @@
             "MGMT1101": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program"
     },
@@ -22570,9 +22254,7 @@
             "MARK1012": 1,
             "MARK2012": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program"
     },
@@ -22613,9 +22295,7 @@
             "ECON1101": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)"
     },
@@ -22633,9 +22313,7 @@
             "ECON1102": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prereq: DPBS1101 + 6UOC GLDIP + enrolment in a Global Diploma program"
     },
@@ -22807,9 +22485,7 @@
             "ECON1203": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "UNSW Global Diplomas only (7001, 7002, 7003, 7004)"
     },
@@ -22827,9 +22503,7 @@
             "ACCT1501": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program"
     },
@@ -22850,9 +22524,7 @@
             "ACCT2511": 1,
             "ACCT1511": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prereq: DPBS1501 + 6UoC GLDIP + enrolment in a Global Diploma program"
     },
@@ -22871,9 +22543,7 @@
             "INFS1602": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program"
     },
@@ -22892,9 +22562,7 @@
             "INFS1603": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program"
     },
@@ -22912,9 +22580,7 @@
             "INFS1609": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program"
     },
@@ -22935,9 +22601,7 @@
             "FINS2615": 1,
             "FINS1613": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program"
     },
@@ -22958,9 +22622,7 @@
             "TABL2710": 1,
             "TABL1710": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prereq: 6 UOC of any DPGE, DPST, DPBS and enrolled in a Global Diploma program"
     },
@@ -23023,9 +22685,7 @@
             "LAND2122": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Enrolment in 7006 UNSW Global Diploma in Architecture Program."
     },
@@ -23046,9 +22706,7 @@
             "IDES1212": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisites: DPDE1001 and DPDE1005 Enrolment in 7006 UNSW Global Diploma in Architecture Program."
     },
@@ -23069,9 +22727,7 @@
             "IDES1262": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: DPDE1002Enrolment in 7006 UNSW Global Diploma in Architecture Program."
     },
@@ -23092,9 +22748,7 @@
             "INTA2001": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Enrolment in 7006 UNSW Global Diploma in Architecture Program."
     },
@@ -23112,9 +22766,7 @@
             "ARCH1161": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Enrolment in 7006 UNSW Global Diploma in Architecture Program."
     },
@@ -23132,9 +22784,7 @@
             "INTA3002": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: DPDE1003Enrolment in 7006 UNSW Global Diploma in Architecture Program."
     },
@@ -23152,9 +22802,7 @@
             "IDES1213": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: DPDE1001 Enrolment in 7006 UNSW Global Diploma in Architecture Program."
     },
@@ -23173,9 +22821,7 @@
             "LAND2151": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Enrolment in 7006 UNSW Global Diploma in Architecture Program."
     },
@@ -23195,9 +22841,7 @@
             "CODE1240": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: DPDE1001 and DPDE1005.Enrolment in 7006 UNSW Global Diploma in Architecture Program."
     },
@@ -23315,9 +22959,7 @@
             "MDIA1004": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Enrolment in 7005 UNSW Global Diploma in Media and Communication Program."
     },
@@ -23335,9 +22977,7 @@
             "MDIA1007": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Enrolment in 7005 UNSW Global Diploma in Media and Communication Program."
     },
@@ -23355,9 +22995,7 @@
             "ARTS1060": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Enrolment in 7005 UNSW Global Diploma in Media and Communication Program."
     },
@@ -23375,9 +23013,7 @@
             "ARTS1064": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Enrolment in 7005 UNSW Global Diploma in Media and Communication Program."
     },
@@ -23395,9 +23031,7 @@
             "ARTS1091": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Enrolment in 7005 UNSW Global Diploma in Media and Communication Program."
     },
@@ -23415,9 +23049,7 @@
             "ARTS1092": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Enrolment in 7005 UNSW Global Diploma in Media and Communication Program."
     },
@@ -24207,9 +23839,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of at least one of the following: ECON2112, ECON2206, ECON2209, FINS2624, RISK2002, MARK3087, MARK3054, MARK3088, MARK3089"
     },
@@ -24791,9 +24421,7 @@
             "ECON6201": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Admission to Economics Honours (program 4502 or stream ECONFH4501) or Actuarial Honours (program 4520)"
     },
@@ -24879,9 +24507,7 @@
             "ECON6302": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Admission to Economics Honours (program 4502 or stream ECONFH4501) or Actuarial Honours (program 4520)"
     },
@@ -24900,9 +24526,7 @@
             "ECON7303": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Pre-requisite: ECON4100 AND (in Economics Honours (4502) or in stream ECONFH4501)"
     },
@@ -24940,9 +24564,7 @@
             "ECON6309": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Admission to Economics Honours (program 4502 or stream ECONFH4501) or Actuarial Honours (program 4520)"
     },
@@ -24961,9 +24583,7 @@
             "ECON6310": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Admission to Economics Honours (program 4502 or stream ECONFH4501) or Actuarial Honours (program 4520)"
     },
@@ -24981,9 +24601,7 @@
             "ECON6350": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Admission to Economics Honours (program 4502 or stream ECONFH4501)  or Actuarial Honours (program 4520)"
     },
@@ -25161,9 +24779,7 @@
         "exclusions": {
             "GENT1524": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: 18 units of credit at Level 1"
     },
@@ -26894,9 +26510,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: (COMP1911 or COMP1511) and ELEC2134"
     },
@@ -26995,9 +26609,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prereq: ELEC3106"
     },
@@ -27224,9 +26836,7 @@
             "ELEC4483": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prereq: ELEC3104"
     },
@@ -27587,9 +27197,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -27817,9 +27425,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -27835,9 +27441,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -27853,9 +27457,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -27938,9 +27540,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Enrolled in plan FINSD13554 or in FINSBH3565"
     },
@@ -28038,9 +27638,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: FINS2101 and enrolled in plan FINSD13554 or FINSBH3565"
     },
@@ -28056,9 +27654,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: FINS3202 and enrolled in plan FINSD13554 or FINSBH3565"
     },
@@ -28850,9 +28446,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -28868,9 +28462,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequsite :CHEM3811or INDC2003"
     },
@@ -28888,9 +28480,7 @@
         "exclusions": {
             "FOOD3030": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -28929,9 +28519,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": ""
     },
@@ -28985,9 +28573,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": ""
     },
@@ -29003,9 +28589,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": ""
     },
@@ -29139,9 +28723,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": ""
     },
@@ -29163,9 +28745,7 @@
             "3979": 1,
             "3971": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Exclusion: enrolment in program 3502, 3543, 3571, 3979, 3971"
     },
@@ -29183,9 +28763,7 @@
             "LAWS3523": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": ""
     },
@@ -29201,9 +28779,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": ""
     },
@@ -29219,9 +28795,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": ""
     },
@@ -29238,9 +28812,7 @@
         "exclusions": {
             "leftover_plaintext": "Not available to Undergraduate Faculty of Medicine single/dual program students"
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Excluded: Not available to Undergraduate Faculty of Medicine single/dual program students"
     },
@@ -29258,9 +28830,7 @@
         "exclusions": {
             "leftover_plaintext": "Not available to Undergraduate Faculty of Medicine single/dual program students"
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Excluded: Not available to Undergraduate Faculty of Medicine single/dual program students"
     },
@@ -29278,9 +28848,7 @@
         "exclusions": {
             "leftover_plaintext": "Not available to Undergraduate Faculty of Medicine single/dual program students"
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Excluded: Not available to Undergraduate Faculty of Medicine single/dual program students"
     },
@@ -29428,9 +28996,7 @@
             "GENY0003": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": ""
     },
@@ -29547,9 +29113,7 @@
         "exclusions": {
             "ANAT2611": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": ""
     },
@@ -29565,9 +29129,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "None"
     },
@@ -29711,9 +29273,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: BIOS1101 or GEOS1211 or DPST1041"
     },
@@ -29785,9 +29345,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -29821,9 +29379,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -29857,9 +29413,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "None"
     },
@@ -29935,9 +29489,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -30268,9 +29820,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -30715,9 +30265,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: 24 UOC required. In exceptional circumstances, students who are enrolled in, but have yet to complete 24 UOC may be considered if they can provide strong evidence of meeting the selection criteria. School consent required."
     },
@@ -30849,9 +30397,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -31159,9 +30705,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -31480,9 +31024,7 @@
             "COMP1400": 1,
             "INFS1609": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -31538,9 +31080,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: INFS1701"
     },
@@ -31556,9 +31096,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: INFS1602 or INFS2602"
     },
@@ -31769,9 +31307,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: INFS2701"
     },
@@ -31793,9 +31329,7 @@
             "INFS5848": 1,
             "INFS4858": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: INFS2603"
     },
@@ -31811,9 +31345,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: INFS2822"
     },
@@ -31890,9 +31422,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -31948,9 +31478,7 @@
         "exclusions": {
             "INFS4853": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Enrolled in Honours majoring in Information Systems."
     },
@@ -32005,9 +31533,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: INFS4886 AND enrolled in Honours majoring in Information Systems."
     },
@@ -32025,9 +31551,7 @@
         "exclusions": {
             "INFS5907": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Enrolment in Streams: Enrolled in an Honours Program majoring in Information Systems (INFSAH OR INFSBH OR INFSCH)"
     },
@@ -32079,9 +31603,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": ""
     },
@@ -32330,9 +31852,7 @@
             "BENV1015": 1,
             "IDES1122": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -32524,9 +32044,7 @@
             "ARCH1142": 1,
             "BENV1010": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -32583,9 +32101,7 @@
             "ARCH1482": 1,
             "PLAN1006": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: LAND1322"
     },
@@ -32601,9 +32117,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -33151,9 +32665,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Academic program must be 7016, Humanities Pathway Program."
     },
@@ -33187,9 +32699,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Academic program must be 7016, Humanities Pathway Program."
     },
@@ -33624,9 +33134,7 @@
             "JURD7417": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses including either Legal Theory (LAWS2320), Law and Social Theory (LAWS2820) or Theories of Law and Justice (LAWS2326)."
     },
@@ -33819,9 +33327,7 @@
         "exclusions": {
             "JURD7347": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses. <br/>Co-requisite: Resolving Civil Disputes (LAWS2371)"
     },
@@ -33839,9 +33345,7 @@
             "JURD7357": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses. <br/>Co-requisite: Foundations of Intellectual Property Law (LAWS3021/JURD7321) or Intellectual Property Law (LAWS8017/JURD7617)."
     },
@@ -33859,9 +33363,7 @@
             "JURD7360": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses including Lawyers, Ethics and Justice (LAWS1230),  Resolving Civil Disputes (LAWS2371) and Court Process, Evidence & Proof (LAWS2351)."
     },
@@ -33936,9 +33438,7 @@
             "LAWS8991": 1,
             "JURD7891": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses."
     },
@@ -33972,9 +33472,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses including Resolving Civil Disputes (LAWS2371)."
     },
@@ -34012,9 +33510,7 @@
         "exclusions": {
             "JURD7379": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses."
     },
@@ -34144,9 +33640,7 @@
             "JURD7405": 1,
             "CRIM2036": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses."
     },
@@ -34164,9 +33658,7 @@
         "exclusions": {
             "JURD7515": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses including Land Law (LAWS2383)."
     },
@@ -34185,9 +33677,7 @@
             "LAWS8135": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses."
     },
@@ -34206,9 +33696,7 @@
             "JURD7525": 1,
             "LAWS8125": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses."
     },
@@ -34267,9 +33755,7 @@
         "exclusions": {
             "JURD7435": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses including Equity & Trusts"
     },
@@ -34329,9 +33815,7 @@
             "LAWS8146": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses."
     },
@@ -34349,9 +33833,7 @@
         "exclusions": {
             "JURD7449": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses."
     },
@@ -34369,9 +33851,7 @@
             "JURD7450": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite:Completion of 78 UOC in LAWS courses including Federal Constitutional Law (LAWS2150)."
     },
@@ -34389,9 +33869,7 @@
             "JURD7352": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses."
     },
@@ -34407,9 +33885,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses including Business Associations (LAWS1091)."
     },
@@ -34425,9 +33901,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses. Students enrolled after 2013 must have also completed Law in the Global Context (LAWS2270) before enrolling in this course."
     },
@@ -34445,9 +33919,7 @@
             "JURD7559": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses."
     },
@@ -34465,9 +33937,7 @@
             "JURD7865": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses."
     },
@@ -34485,9 +33955,7 @@
             "JURD7567": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses."
     },
@@ -34658,9 +34126,7 @@
             "JURD7782": 1,
             "LAWS8082": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses."
     },
@@ -34700,9 +34166,7 @@
         "exclusions": {
             "JURD7495": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses. <br/>Co-requisite: Federal Constitutional Law (LAWS2150)"
     },
@@ -34720,9 +34184,7 @@
             "JURD7596": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses."
     },
@@ -34760,9 +34222,7 @@
         "exclusions": {
             "JURD7512": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses."
     },
@@ -34820,9 +34280,7 @@
         "exclusions": {
             "JURD7322": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses."
     },
@@ -34840,9 +34298,7 @@
         "exclusions": {
             "JURD7531": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses."
     },
@@ -34931,9 +34387,7 @@
         "exclusions": {
             "JURD7451": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses."
     },
@@ -35051,9 +34505,7 @@
         "exclusions": {
             "JURD7701": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses."
     },
@@ -35164,9 +34616,7 @@
         "exclusions": {
             "JURD7409": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses including Lawyers, Ethics and Justice (LAWS1230/1210) and Resolving Civil Disputes (LAWS2371/2311)"
     },
@@ -35205,9 +34655,7 @@
         "exclusions": {
             "JURD7316": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses."
     },
@@ -35356,9 +34804,7 @@
         "exclusions": {
             "JURD7335": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses."
     },
@@ -35396,9 +34842,7 @@
         "exclusions": {
             "JURD7645": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses."
     },
@@ -35417,9 +34861,7 @@
             "LAWS8346": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses."
     },
@@ -35438,9 +34880,7 @@
             "LAWS8348": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses."
     },
@@ -35456,9 +34896,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Restricted to students enrolled in Legal Studies:<br/>Prerequisite: Academic Program must be either 4055 or 3408 or 4054."
     },
@@ -35474,9 +34912,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Restricted to students enrolled in Legal Studies:<br/>Prerequisite: Academic Program must be either 4055 or 3408 or 4054."
     },
@@ -35572,9 +35008,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Program must be either 6001 or 6021."
     },
@@ -35612,9 +35046,7 @@
         "exclusions": {
             "JURD7482": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses."
     },
@@ -35632,9 +35064,7 @@
             "JURD7983": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses."
     },
@@ -35734,9 +35164,7 @@
         "exclusions": {
             "JURD7395": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses."
     },
@@ -35988,9 +35416,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses."
     },
@@ -36012,9 +35438,7 @@
             "JURD7594": 1,
             "LAWS8994": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses."
     },
@@ -36056,9 +35480,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses."
     },
@@ -36077,9 +35499,7 @@
             "LAWS8123": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses."
     },
@@ -36097,9 +35517,7 @@
             "GENL2323": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Restricted to students enrolled in Legal Studies. Academic Program must be either 4055 or 3408 or 4054 or 4053"
     },
@@ -36136,9 +35554,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Restricted to students enrolled in Legal Studies. Academic Program must be either 4055 or 3408 or 4054 or 4053"
     },
@@ -36157,9 +35573,7 @@
             "LAWS8241": 1,
             "JURD7841": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses."
     },
@@ -36180,9 +35594,7 @@
             "JURD7549": 1,
             "LAWS8349": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses."
     },
@@ -36314,9 +35726,7 @@
         "exclusions": {
             "JURD7758": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 78 UOC in LAWS courses."
     },
@@ -36393,9 +35803,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -36529,9 +35937,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Successful completion of 96 UOC and minimum WAM 65%"
     },
@@ -36633,9 +36039,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: MARK1012 OR MARK2012"
     },
@@ -36766,9 +36170,7 @@
         "exclusions": {
             "MARK3182": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: (MARK1012 OR MARK2012) AND (MARK2051 OR MARK2151) AND MARK2052"
     },
@@ -36823,9 +36225,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Pre-requisite: ECON1203 or COMM1190 or INFS1609 or MATH1041 or MATH1231 or MATH1241 or MATH1251 or MARK2052 or COMM2050 or COMM2501 or INFS2605 or INFS2609.<br/>Students with equivalent Statistics knowledge can seek pre-requisite waiver via webforms"
     },
@@ -36841,9 +36241,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Pre-requisite: ECON1203 or COMM1190 or INFS1609 or MATH1041 or MATH1231 or MATH1241 or MATH1251 or MARK2052 or COMM2050 or COMM2501 or INFS2605 or INFS2609.<br/>Students with equivalent Statistics knowledge can seek pre-requisite waiver via webforms"
     },
@@ -38059,9 +37457,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "(1) [MATH2011 or MATH2111] and [MATH2501 or MATH2601]; or (2) both MATH2069 (CR) and MATH2099 ; or (3) both [MATH2018 or MATH2019] (DN) and MATH2089 ."
     },
@@ -38154,9 +37550,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: MATH2011 or MATH2111 or MATH2018 (DN) or MATH2019(DN) or MATH2069(DN) and MATH2801 or MATH2901 or MATH2089(DN) or MATH2099(DN)"
     },
@@ -38208,9 +37602,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: 12 units of credit in Level 2 Math courses"
     },
@@ -38465,9 +37857,7 @@
         "exclusions": {
             "MATH3941": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: MATH3811 or MATH3911."
     },
@@ -39026,9 +38416,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: MATS3003"
     },
@@ -39221,9 +38609,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -39239,9 +38625,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -39257,9 +38641,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite : MATS5001"
     },
@@ -39275,9 +38657,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -39293,9 +38673,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -39329,9 +38707,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -39639,9 +39015,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: 24 units of credit at level 1 including\u00a0MDIA1002 or MDIA1003. Or 24 units of credit at level 1 and enrolment  in a Global Development major"
     },
@@ -39747,9 +39121,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: 66 units of credit overall, and enrolment in a single or double degree Media program"
     },
@@ -40032,9 +39404,7 @@
             "MECH9305": 1,
             "MECH3330": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: (MATH2019 OR MATH2018) AND (MMAN3300 or MMAN2300)"
     },
@@ -40050,9 +39420,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: (MATH2019 OR MATH2018) AND (MMAN3300 or MMAN2300)"
     },
@@ -40228,9 +39596,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -40418,9 +39784,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -40435,9 +39799,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -40905,9 +40267,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -41173,9 +40533,7 @@
         "exclusions": {
             "TABL2712": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": ""
     },
@@ -41210,9 +40568,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 96 UOC and in good standing. "
     },
@@ -41356,9 +40712,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite or Corequisite : MGMT2718"
     },
@@ -41410,9 +40764,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Program 4501 and enrolment in the International Business Honours plan is required."
     },
@@ -41428,9 +40780,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Program 4501 and enrolled in the Human Resource Management Honours plan."
     },
@@ -41446,9 +40796,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Program 4501 and enrolment in the International Business Honours plan is required."
     },
@@ -41464,9 +40812,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Program 4501 and enrolment in the International Business Honours plan is required."
     },
@@ -41482,9 +40828,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Program 4501 and enrolled in the Human Resource Management Honours plan."
     },
@@ -41500,9 +40844,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Program 4501 and enrolled in the Human Resource Management Honours plan."
     },
@@ -41723,9 +41065,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequsite: MINE3430"
     },
@@ -41867,9 +41207,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: MINE4440"
     },
@@ -41944,9 +41282,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -41962,9 +41298,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": ""
     },
@@ -42002,9 +41336,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -42024,9 +41356,7 @@
             "ENGG2500": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: (MATH1131 or DPST1013 or MATH1141) and (PHYS1121 or PHYS1131 or DPST1023 or PHYS1141)"
     },
@@ -42064,9 +41394,7 @@
         "exclusions": {
             "MMAN4000": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -42461,9 +41789,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: MATH2089"
     },
@@ -42517,9 +41843,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: MTRN4230"
     },
@@ -42748,9 +42072,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: 24 units of credit at Level 1"
     },
@@ -42941,9 +42263,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: MUSC1602, MUSC1603, and MUSC1604"
     },
@@ -43426,9 +42746,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -43444,9 +42762,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -43462,9 +42778,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Enrolled in Nanoscience Honours"
     },
@@ -43500,9 +42814,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -43696,9 +43008,7 @@
         "exclusions": {
             "OPTM2190": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: VISN1111 and VISN1221 and VISN1101 and VISN2111 Exclusion: OPTM2190"
     },
@@ -43750,9 +43060,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisites: VISN2111 and VISN2211 and (OPTM2291 or OPTM2211); <br/>Corequisite: VISN3111"
     },
@@ -43824,9 +43132,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Pre-requisites: VISN3111, OPTM3111, OPTM3131 Co-requisites: OPTM3231, VISN3211, PHAR3306"
     },
@@ -43860,9 +43166,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisites: OPTM4211, OPTM4231, OPTM4251, OPTM4271, PSYC4111, PHAR3306"
     },
@@ -43878,9 +43182,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisites: OPTM4110, OPTM4131, OPTM4151, OPTM4211, OPTM4231, OPTM4251, OPTM4271, OPTM4291.Co-requisites: OPTM5111, OPTM5151"
     },
@@ -43896,9 +43198,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisites: OPTM4231, OPTM4251, VISN2231, PHPH3306"
     },
@@ -43914,9 +43214,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: OPTM5111"
     },
@@ -43932,9 +43230,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: OPTM5151"
     },
@@ -43950,9 +43246,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: OPTM3133 and OPTM3201 and OPTM3233 and OPTM3205 and OPTM3105 and VISN3111 and PHAR3306"
     },
@@ -43968,9 +43262,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: OPTM6400 and OPTM6413, or, completion of OPTM3211, OPTM3231, PHAR3306, and VISN3211<br/>Corequisite: OPTM6412"
     },
@@ -43986,9 +43278,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: OPTM6400 and OPTM6411 and OPTM6413 or OPTM3211 and OPTM3231 and PHAR3306 and VISN3211"
     },
@@ -44004,9 +43294,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: PHAR3306 and VISN3111 and OPTM3133 and OPTM3201 and OPTM3233 and OPTM3205 and OPTM3105"
     },
@@ -44024,9 +43312,7 @@
         "exclusions": {
             "OPTM4211": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: OPTM6400, Corequisite: OPTM6412, Exclusion:OPTM4211"
     },
@@ -44042,9 +43328,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: OPTM6412 and OPTM6411, OPTM6413 and OPTM6421"
     },
@@ -44060,9 +43344,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: OPTM6413"
     },
@@ -44080,9 +43362,7 @@
         "exclusions": {
             "OPTM4271": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite:  OPTM6412 and OPTM6411 and OPTM6400 and enrolment in program 3182 or 8095. Exclusion: OPTM4271"
     },
@@ -44098,9 +43378,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: OPTM6422"
     },
@@ -44116,9 +43394,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: OPTM6421 and OPTM6422 and OPTM6423 and OPTM6424"
     },
@@ -44134,9 +43410,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: OPTM6411 and OPTM6413 and OPTM6423 and OPTM6422 and OPTM6421"
     },
@@ -44152,9 +43426,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -44170,9 +43442,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: OPTM6411 and OPTM6422"
     },
@@ -44188,9 +43458,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: OPTM6421 and OPTM6422 and OPTM6423 and OPTM6424"
     },
@@ -44206,9 +43474,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: OPTM8513"
     },
@@ -44535,9 +43801,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -45677,9 +44941,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -45695,9 +44957,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -45931,9 +45191,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -46044,9 +45302,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: PLAN3031."
     },
@@ -46062,9 +45318,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -46439,9 +45693,7 @@
             "SCIF0007": 1,
             "PSYC1062": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": ""
     },
@@ -46801,9 +46053,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: PSYC2001 , PSYC2071"
     },
@@ -46928,9 +46178,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -46964,9 +46212,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Pre-requisite: Enrolled in PSYCAH stream"
     },
@@ -47056,9 +46302,7 @@
         "exclusions": {
             "GEOS3331": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite:GEOS3321"
     },
@@ -47092,9 +46336,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite:CEIC2001"
     },
@@ -47320,9 +46562,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisites: PTRL2019 OR PTRL5019"
     },
@@ -47338,9 +46578,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -47542,9 +46780,7 @@
             "RISK5002": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Pre-requisite: (COMM1140 or ACCT1501) and (COMM1190 or ECON1203 or RISK2001)"
     },
@@ -47580,9 +46816,7 @@
         "campus": "Paddington",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: SART1361."
     },
@@ -47598,9 +46832,7 @@
         "campus": "Paddington",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -47616,9 +46848,7 @@
         "campus": "Paddington",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "L2 Printmaking Prerequisite"
     },
@@ -47634,9 +46864,7 @@
         "campus": "Paddington",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -47802,9 +47030,7 @@
         "exclusions": {
             "AVIA3900": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Minimum completion of 72 UoC"
     },
@@ -47912,9 +47138,7 @@
         "campus": "Paddington",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -47930,9 +47154,7 @@
         "campus": "Paddington",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -47948,9 +47170,7 @@
         "campus": "Paddington",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": ""
     },
@@ -47966,9 +47186,7 @@
         "campus": "Paddington",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -47984,9 +47202,7 @@
         "campus": "Paddington",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -48002,9 +47218,7 @@
         "campus": "Paddington",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": ""
     },
@@ -48020,9 +47234,7 @@
         "campus": "Paddington",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": ""
     },
@@ -48038,9 +47250,7 @@
         "campus": "Paddington",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -48074,9 +47284,7 @@
         "campus": "Paddington",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -48092,9 +47300,7 @@
         "campus": "Paddington",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": ""
     },
@@ -48146,9 +47352,7 @@
         "campus": "Paddington",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -48164,9 +47368,7 @@
         "campus": "Paddington",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "L2 Ceramics Prerequisite"
     },
@@ -48182,9 +47384,7 @@
         "campus": "Paddington",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "L2 Graphics Prerequisite"
     },
@@ -48200,9 +47400,7 @@
         "campus": "Paddington",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "L2 Graphics Prerequisite"
     },
@@ -48218,9 +47416,7 @@
         "campus": "Paddington",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "L2 Jewellery Prerequisite"
     },
@@ -48236,9 +47432,7 @@
         "campus": "Paddington",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "L2 Jewellery Prerequisite"
     },
@@ -48272,9 +47466,7 @@
         "campus": "Paddington",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "L2 Spatial Design Prerequisite"
     },
@@ -48290,9 +47482,7 @@
         "campus": "Paddington",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "L2 Spatial Design Prerequisite"
     },
@@ -48308,9 +47498,7 @@
         "campus": "Paddington",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "L2 Design Prerequisite"
     },
@@ -48326,9 +47514,7 @@
         "campus": "Paddington",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -48965,9 +48151,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -49234,9 +48418,7 @@
         "exclusions": {
             "SOLA4012": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -49255,9 +48437,7 @@
             "PHYS3310": 1,
             "ELEC9501": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite SOLA2060 or SOLA2540"
     },
@@ -49313,9 +48493,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite SOLA2060 or SOLA2540"
     },
@@ -49331,9 +48509,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -49349,9 +48525,7 @@
         "campus": "Paddington",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": ""
     },
@@ -49404,9 +48578,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Completion of 72 UOC of courses"
     },
@@ -49652,9 +48824,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: SOSS1001 and enrolment in a Social Science or Social Research and Policy program"
     },
@@ -49670,9 +48840,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Enrolment in 4529 Social Science (Honours)"
     },
@@ -49688,9 +48856,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Enrolment in 4529 Social Science (Honours)"
     },
@@ -49706,9 +48872,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Enrolment in 4529 Social Science (Honours)"
     },
@@ -49810,9 +48974,7 @@
             "TABL5916": 1,
             "COMM2050": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite:LEGT1710 or TABL1710 or TABL 2710 or 12 UOC offered by the UNSW Business School."
     },
@@ -49830,9 +48992,7 @@
         "exclusions": {
             "LEGT7721": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: LEGT1710 or TABL1710 or TABL2710 "
     },
@@ -49850,9 +49010,7 @@
         "exclusions": {
             "LEGT1731": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite:LEGT1710 or TABL1710 or TABL2710 or 12 UOC offered by the UNSW Business School."
     },
@@ -49953,9 +49111,7 @@
             "TABL5545": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: TABL2710 or LEGT1710 or TABL1710 or 12 UOC offered by the UNSW Business School."
     },
@@ -49973,9 +49129,7 @@
             "TABL5546": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: TABL2710 or LEGT1710 or TABL1710 or 12 UOC offered by the UNSW Business School."
     },
@@ -49993,9 +49147,7 @@
             "TABL5547": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: TABL2710 or LEGT1710 or TABL1710 or 12 UOC offered by the UNSW Business School."
     },
@@ -50013,9 +49165,7 @@
             "TABL5548": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: TABL2710 or LEGT1710 or TABL1710 or 12 UOC offered by the UNSW Business School."
     },
@@ -50116,9 +49266,7 @@
             "LEGT1761": 1,
             "LEGT2761": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite:LEGT1710 or TABL1710 or TABL2710 or 12 UOC offered by the UNSW Business School."
     },
@@ -50139,9 +49287,7 @@
             "TABL5517": 1,
             "TABL3771": 1
         },
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: LEGT1710 or TABL1710 or TABL2710 <br/>Excluded: TABL3771"
     },
@@ -50233,9 +49379,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Restricted to students enrolled in Program 9245, 9255, 9257 or Stream TABLBS9250, TABLDS9250, TABLAH4501"
     },
@@ -50251,9 +49395,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -50403,9 +49545,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "UG students should have a 65 WAM or higher, or be enrolled in ELECCH major"
     },
@@ -50533,9 +49673,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Enrolled in VISN Honours"
     },
@@ -50835,9 +49973,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -50853,9 +49989,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -50871,9 +50005,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -50925,9 +50057,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: ZBUS1103"
     },
@@ -50999,9 +50129,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite ZBUS2101"
     },
@@ -51071,9 +50199,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -51089,9 +50215,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -51125,9 +50249,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: ZBUS1102"
     },
@@ -51383,9 +50505,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Enrolment in CDF Program"
     },
@@ -51401,9 +50521,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Enrolment in CDF Program"
     },
@@ -51455,9 +50573,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Enrolment in CDF Program"
     },
@@ -51473,9 +50589,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Enrolment in CDF Program"
     },
@@ -51563,9 +50677,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Enrolment in CDF Program"
     },
@@ -51599,9 +50711,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Enrolment in CDF Program"
     },
@@ -51617,9 +50727,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Enrolment in CDF Program"
     },
@@ -52123,9 +51231,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 1,
         "raw_requirements": "Prerequisite: ZEIT2102 or ZEIT2902"
     },
@@ -52879,9 +51985,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: ZEIT3602"
     },
@@ -52899,9 +52003,7 @@
             "ZEIT6573": 1
         },
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -52971,9 +52073,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -52989,9 +52089,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -53261,9 +52359,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -53279,9 +52375,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -53297,9 +52391,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -53315,9 +52407,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -53333,9 +52423,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -53735,9 +52823,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: ZEIT3751, ZEIT3752 and either ZEIT3753 or ZEIT3902"
     },
@@ -53753,9 +52839,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: ZEIT4750 and ZEIT4752"
     },
@@ -53771,9 +52855,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -54116,9 +53198,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: ZHSS1101 and ZHSS1102"
     },
@@ -54152,9 +53232,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: ZHSS1101 and ZHSS1102"
     },
@@ -54170,9 +53248,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: ZHSS1201 and ZHSS1202"
     },
@@ -54242,9 +53318,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -54260,9 +53334,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -54278,9 +53350,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -54296,9 +53366,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -54386,9 +53454,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: ZHSS1401 and ZHSS1402"
     },
@@ -54404,9 +53470,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: ZHSS1401 and ZHSS1402"
     },
@@ -54458,9 +53522,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: ZHSS1401 and ZHSS1402"
     },
@@ -54494,9 +53556,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -54530,9 +53590,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Any 2 of ZHSS1201, ZHSS1202, ZHSS1301, ZHSS1302, ZHSS1401, ZHSS1402, ZBUS1101, ZBUS1103 or ZGEN2240 with Head of School consent."
     },
@@ -54566,9 +53624,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Enrolment in CDF Program (4461)"
     },
@@ -54584,9 +53640,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Enrolment in CDF Program (4461)"
     },
@@ -54602,9 +53656,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: ZHSS1101 and ZHSS1102"
     },
@@ -54656,9 +53708,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: ZHSS1101 and ZHSS1102"
     },
@@ -54692,9 +53742,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: ZHSS1101 and ZHSS1102"
     },
@@ -54728,9 +53776,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: ZHSS1201 and ZHSS1202"
     },
@@ -54764,9 +53810,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: ZHSS1201 and ZHSS1202"
     },
@@ -54800,9 +53844,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: ZHSS1201 and ZHSS1202"
     },
@@ -54818,9 +53860,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: Either ZHSS1201 or ZHSS1202, or both  ZHSS1401 and  ZHSS1402"
     },
@@ -54836,9 +53876,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -54908,9 +53946,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: ZHSS1401 and ZHSS1402"
     },
@@ -54926,9 +53962,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: ZHSS1401 and ZHSS1402"
     },
@@ -54944,9 +53978,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: ZHSS1401 and ZHSS1402"
     },
@@ -54962,9 +53994,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: ZHSS1401, ZHSS1402 or ZHSS2600"
     },
@@ -54998,9 +54028,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: ZHSS1401 and ZHSS1402"
     },
@@ -55016,9 +54044,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -55034,9 +54060,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -55052,9 +54076,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Prerequisite: ZHSS1401 and ZHSS1402"
     },
@@ -55070,9 +54092,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -55124,9 +54144,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Pre: Any 2 of ZHSS1102, ZHSS1202, ZHSS1302, ZHSS1304, ZHSS1402, ZPEM1202."
     },
@@ -55160,9 +54178,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": "Pre: Any 2 of ZHSS1102, ZHSS1202, ZHSS1302, ZHSS1304, ZHSS1402, ZPEM1202."
     },
@@ -55250,9 +54266,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -55394,9 +54408,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -55787,9 +54799,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -56287,9 +55297,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },
@@ -56305,9 +55313,7 @@
         "campus": "UNSW Canberra",
         "equivalents": {},
         "exclusions": {},
-        "terms": [
-            ""
-        ],
+        "terms": [],
         "gen_ed": 0,
         "raw_requirements": ""
     },

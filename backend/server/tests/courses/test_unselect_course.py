@@ -2,7 +2,7 @@ import json
 import requests
 import copy
 
-with open("algorithms/exampleUsers.json", encoding="utf8") as f:
+with open("./algorithms/tests/exampleUsers.json", encoding="utf8") as f:
     USERS = json.load(f)
 
 
@@ -15,7 +15,6 @@ def test_no_dependencies():
     x = requests.post("http://127.0.0.1:8000/courses/unselectCourse/COMP1531", json=USERS["user6"])
     assert x.status_code == 200
     assert x.json()["courses"] == ["COMP1531", "COMP9242"]
-
 
 def test_multiple_dependencies():
     x = requests.post("http://127.0.0.1:8000/courses/unselectCourse/COMP1511", json=USERS["user6"])

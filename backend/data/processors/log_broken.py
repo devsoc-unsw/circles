@@ -15,7 +15,7 @@ from data.utility import data_helpers
 
 CONDITIONS_TOKENS_FILE = "./data/final_data/conditionsTokens.json"
 CONDITIONS_PROCESSED_FILE = "./data/final_data/conditionsProcessed.json"
-ERROR_OUTPUT_FILE = "./algorithms/errors.json"
+ERROR_OUTPUT_FILE = "./data/final_data/errors.json"
 
 
 def log_broken_conditions():
@@ -33,14 +33,13 @@ def log_broken_conditions():
     for course, tokens in all_tokens.items():
         # Use make_condition instead of create_condition since it gives us more
         # information on the index
-        res = make_condition(tokens, True)
-        if res[0] is None:
-            bad_index = res[1] + 1
+        result, index = make_condition(tokens, True)
+        if result is None:
             # Something went wrong with parsing this condition...
             output[course] = {
                 "condition": conditions[course],
                 "tokens": tokens,
-                "broke at": report_index_string(tokens, bad_index),
+                "broke at": report_index_string(tokens, index + 1),
             }
 
     data_helpers.write_data(output, ERROR_OUTPUT_FILE)

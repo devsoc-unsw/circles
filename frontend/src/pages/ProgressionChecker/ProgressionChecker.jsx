@@ -46,7 +46,7 @@ const ProgressionChecker = () => {
   const [view, setView] = useState("grid");
 
   const {
-    programCode, majors, minors,
+    programCode, specs,
   } = useSelector((state) => state.degree);
 
   const [structure, setStructure] = useState({});
@@ -55,7 +55,7 @@ const ProgressionChecker = () => {
     // get structure of degree
     const fetchStructure = async () => {
       try {
-        const res = await axios.get(`/programs/getStructure/${programCode}/${majors.join("+")}/${minors.join("+")}`);
+        const res = await axios.get(`/programs/getStructure/${programCode}/${specs.join("+")}`);
         setStructure(res.data.structure);
       } catch (err) {
         // eslint-disable-next-line no-console
@@ -63,8 +63,8 @@ const ProgressionChecker = () => {
       }
       setIsLoading(false);
     };
-    if (programCode && majors.length > 0) fetchStructure();
-  }, [programCode, majors, minors, view]);
+    if (programCode && specs.length > 0) fetchStructure();
+  }, [programCode, specs, view]);
 
   return (
     <PageTemplate>
