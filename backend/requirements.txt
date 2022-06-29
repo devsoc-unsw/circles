@@ -23,5 +23,5 @@ typing-extensions==4.2.0
 urllib3==1.26.9
 uvicorn==0.17.6
 zipp==3.8.0
-hypothesis==6.47.3
+hypothesis==6.48.2
 more-itertools==8.13.0
