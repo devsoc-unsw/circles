@@ -74,7 +74,7 @@ const DegreeStep = ({ incrementStep }) => {
           mode="inline"
         >
           {options.map((degreeName) => (
-            <Menu.Item className="text" key={degreeName}>
+            <Menu.Item key={degreeName}>
               {degreeName}
             </Menu.Item>
           ))}

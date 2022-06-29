@@ -58,4 +58,8 @@ export const darkTheme = {
   courseSidebar: {
     menuSubColor: "#262626", // gray-10
   },
+
+  specialsationStep: {
+    background: "#fff",
+  },
 };

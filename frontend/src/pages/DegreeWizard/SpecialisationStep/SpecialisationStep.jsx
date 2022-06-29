@@ -6,6 +6,7 @@ import axios from "axios";
 import { addSpecialisation, removeSpecialisation } from "reducers/degreeSlice";
 import springProps from "../common/spring";
 import CS from "../common/styles";
+import S from "./styles";
 
 const { Title } = Typography;
 
@@ -37,7 +38,7 @@ const SpecialisationStep = ({ incrementStep, currStep, type }) => {
           </Button>
           )}
         </CS.StepHeadingWrapper>
-        <Menu
+        <S.Menu
           onSelect={(e) => dispatch(addSpecialisation(e.key))}
           onDeselect={(e) => dispatch(removeSpecialisation(e.key))}
           selectedKeys={specs}
@@ -62,20 +63,20 @@ const SpecialisationStep = ({ incrementStep, currStep, type }) => {
                 ? (
                   <Menu.ItemGroup type="group" title={`Note: ${options[sub].notes}`}>
                     {Object.keys(options[sub].specs).map((key) => (
-                      <Menu.Item className="text" key={key}>
+                      <Menu.Item key={key}>
                         {key} {options[sub].specs[key]}
                       </Menu.Item>
                     ))}
                   </Menu.ItemGroup>
                 )
                 : Object.keys(options[sub].specs).map((key) => (
-                  <Menu.Item className="text" key={key}>
+                  <Menu.Item key={key}>
                     {key} {options[sub].specs[key]}
                   </Menu.Item>
                 ))}
             </Menu.SubMenu>
           ))}
-        </Menu>
+        </S.Menu>
       </animated.div>
     </CS.StepContentWrapper>
   );
