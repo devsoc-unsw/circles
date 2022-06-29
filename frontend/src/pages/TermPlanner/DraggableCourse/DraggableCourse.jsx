@@ -16,7 +16,7 @@ const DraggableCourse = ({
   const { Text } = Typography;
   const { courses, isSummerEnabled, completedTerms } = useSelector((state) => state.planner);
   const theme = useSelector((state) => state.theme);
-  // prereqs are populated in CourseDescription.jsx via course.raw_requirements
+
   const {
     prereqs, title, isUnlocked, plannedFor,
     isLegacy, isAccurate, termsOffered, handbookNote, supressed, mark,

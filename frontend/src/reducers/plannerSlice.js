@@ -174,6 +174,8 @@ const plannerSlice = createSlice({
     },
     // TODO NOTE: think about if you would want to call the backend first to fetch dependant courses
     removeCourse: (state, action) => {
+      // eslint-disable-next-line no-debugger
+      debugger;
       // Remove courses from years and courses
       if (state.courses[action.payload]) {
         const { plannedFor } = state.courses[action.payload];
@@ -183,13 +185,15 @@ const plannerSlice = createSlice({
 
         if (plannedFor) {
           // course must already been planned
-          // Example plannedFor: '2021t2'
-          const yearIndex = parseInt(plannedFor.slice(0, 4), 10) - state.startYear;
-          const term = plannedFor.slice(4);
-          // remove the course from the year and term
-          state.years[yearIndex][term] = state.years[yearIndex][term].filter(
-            (course) => course !== action.payload,
-          );
+          // Example plannedFor: '2021t2 2021t3 2022t1'
+          plannedFor.split(" ").forEach((termId) => {
+            const yearIndex = parseInt(termId.slice(0, 4), 10) - state.startYear;
+            const term = termId.slice(4);
+            // remove the course from the year and term
+            state.years[yearIndex][term] = state.years[yearIndex][term].filter(
+              (course) => course !== action.payload,
+            );
+          });
         } else {
           // course must be in unplanned
           state.unplanned = state.unplanned.filter(

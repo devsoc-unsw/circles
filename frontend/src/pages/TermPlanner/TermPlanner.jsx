@@ -103,12 +103,14 @@ const TermPlanner = () => {
       }
 
       // === moving course to unplanned doesn't require term logic ===
-      dispatch(
-        moveCourse({
-          course: draggableId,
-          term: destination.droppableId,
-        }),
-      );
+      if (destination.droppableId !== source.droppableId) {
+        dispatch(
+          moveCourse({
+            course: draggableId,
+            term: destination.droppableId,
+          }),
+        );
+      }
     }
 
     if (
