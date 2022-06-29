@@ -5,6 +5,7 @@ const SEP = 9;
 const MID_MONTH_START = 14;
 const BEG_MONTH_START = 1;
 const TERM_PAST_AMOUNT = 14;
+const MIN_COMPLETED_COURSE_UOC = 6;
 
 const parseMarkToInt = (mark) => {
   // eslint-disable-next-line no-restricted-globals
@@ -86,7 +87,7 @@ const prepareCoursesForValidation = (planner, degree, suppress) => {
 // e.g. 2 UOC course must be taken 3 times, 3 UOC course must be take 2 times
 const getNumTerms = (uoc) => {
   let num1 = uoc;
-  let num2 = 6;
+  let num2 = MIN_COMPLETED_COURSE_UOC;
   while (num2) {
     const tempNum = num2;
     num2 = num1 % num2;
