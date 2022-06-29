@@ -6,17 +6,20 @@ import {
 } from "antd";
 import axios from "axios";
 import { resetDegree, setProgram } from "reducers/degreeSlice";
-import springProps from "./spring";
-import "./steps.less";
+import springProps from "../common/spring";
+import STEPS from "../common/steps";
+import CS from "../common/styles";
 
 const { Title } = Typography;
 
-const DegreeStep = ({ incrementStep, currStep }) => {
-  const dispatch = useDispatch();
-  const programCode = useSelector((store) => store.degree.programCode);
+const DegreeStep = ({ incrementStep }) => {
   const [input, setInput] = useState("");
   const [options, setOptions] = useState([]);
   const [allDegrees, setAllDegrees] = useState({});
+
+  const dispatch = useDispatch();
+  const programCode = useSelector((store) => store.degree.programCode);
+
   const fetchAllDegrees = async () => {
     const res = await axios.get("/programs/getPrograms");
     setAllDegrees(res.data.programs);
@@ -33,6 +36,8 @@ const DegreeStep = ({ incrementStep, currStep }) => {
     );
     setInput(e.key);
     setOptions([]);
+
+    if (e.key) incrementStep(STEPS.SPECS);
   };
 
   const searchDegree = (newInput) => {
@@ -50,23 +55,20 @@ const DegreeStep = ({ incrementStep, currStep }) => {
   const props = useSpring(springProps);
 
   return (
-    <animated.div style={props}>
-      <div className="steps-heading-container">
+    <CS.StepContentWrapper id="degree">
+      <animated.div style={props}>
         <Title level={4} className="text">
           What are you studying?
         </Title>
-        {programCode && currStep === 2 && dispatch(incrementStep)}
-      </div>
-      <Input
-        size="large"
-        type="text"
-        value={input}
-        placeholder="Search Degree"
-        onChange={(e) => (searchDegree(e.target.value))}
-      />
-      {input && options && (
+        <Input
+          size="large"
+          type="text"
+          value={input}
+          placeholder="Search Degree"
+          onChange={(e) => (searchDegree(e.target.value))}
+        />
+        {input && options && (
         <Menu
-          className="degree-search-results"
           onClick={handleDegreeChange}
           selectedKeys={programCode && [programCode]}
           mode="inline"
@@ -77,8 +79,9 @@ const DegreeStep = ({ incrementStep, currStep }) => {
             </Menu.Item>
           ))}
         </Menu>
-      )}
-    </animated.div>
+        )}
+      </animated.div>
+    </CS.StepContentWrapper>
   );
 };
 
