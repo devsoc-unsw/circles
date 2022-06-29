@@ -46,6 +46,7 @@ const migrations = {
     delete newState.degree.minors;
     return newState;
   },
+  3: () => undefined,
 };
 
 const persistConfig = {
