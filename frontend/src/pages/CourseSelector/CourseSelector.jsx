@@ -3,11 +3,7 @@ import { useSelector } from "react-redux";
 import { notification } from "antd";
 import axios from "axios";
 import PageTemplate from "components/PageTemplate";
-<<<<<<< HEAD
 import CourseBanner from "./CourseBanner";
-=======
-import { toggleLockedCourses } from "reducers/settingsSlice";
->>>>>>> dev
 import CourseDescription from "./CourseDescription";
 import CourseSidebar from "./CourseSidebar";
 import CourseTabs from "./CourseTabs";
@@ -17,19 +13,11 @@ const CourseSelector = () => {
   const [structure, setStructure] = useState({});
 
   const {
-<<<<<<< HEAD
-    programCode, minors, majors,
-=======
-    programCode, programName, specs,
->>>>>>> dev
+    programCode, specs,
   } = useSelector((state) => state.degree);
   const { courses } = useSelector((state) => state.planner);
-<<<<<<< HEAD
-  const { isLockedEnabled } = useSelector((state) => state.courses);
-=======
 
   const { showLockedCourses } = useSelector((state) => state.settings);
->>>>>>> dev
 
   useEffect(() => {
     const openNotification = () => {
@@ -64,31 +52,8 @@ const CourseSelector = () => {
 
   return (
     <PageTemplate>
-<<<<<<< HEAD
       <S.ContainerWrapper>
         <CourseBanner />
-=======
-      <div className="cs-root">
-        <div className="cs-top-cont">
-          <div className="cs-degree-cont">
-            {programCode !== "" && (
-              <h1 className="text">
-                {programCode} - {programName}
-              </h1>
-            )}
-          </div>
-          <CourseSearchBar />
-          <Tooltip placement="topLeft" title={showLockedCourses ? "Hide locked courses" : "Show locked courses"}>
-            <Switch
-              defaultChecked={showLockedCourses}
-              className="cs-toggle-locked"
-              onChange={() => dispatch(toggleLockedCourses())}
-              checkedChildren={<LockOutlined />}
-              unCheckedChildren={<UnlockOutlined />}
-            />
-          </Tooltip>
-        </div>
->>>>>>> dev
         <CourseTabs />
         <S.ContentWrapper>
           <CourseSidebar

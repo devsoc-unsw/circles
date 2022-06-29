@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { LockOutlined, UnlockOutlined } from "@ant-design/icons";
 import { Switch, Tooltip, Typography } from "antd";
-import { toggleCourseLock } from "reducers/coursesSlice";
+import { toggleLockedCourses } from "reducers/settingsSlice";
 import CourseSearchBar from "../CourseSearchBar";
 import S from "./styles";
 
@@ -24,7 +24,7 @@ const CourseBanner = () => {
         <Switch
           defaultChecked={isLockedEnabled}
           style={{ alignSelf: "flex-end" }}
-          onChange={() => dispatch(toggleCourseLock())}
+          onChange={() => dispatch(toggleLockedCourses())}
           checkedChildren={<LockOutlined />}
           unCheckedChildren={<UnlockOutlined />}
         />
