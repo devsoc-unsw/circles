@@ -216,33 +216,12 @@ def get_structure(
 
 @router.get(
     "/getGenEds/{programCode}",
-    response_model=Courses,
     responses={
         400: {
-            "model": message,
             "description": "The given program code could not be found in the database",
         },
         200: {
             "description": "Returns all geneds available to a given to the given code",
-            "content": {
-                "application/json": {
-                    "example": {
-                        "general education courses": {
-                            { 
-                                "ACTL3142",
-                                "ACTL4305",
-                                "ADAD2610",
-                                "ANAT2521",
-                                "ARTS1010",
-                                "ARTS1011",
-                                "ARTS1030",
-                                "ARTS1031",
-                                
-                            },
-                        }
-                    }
-                }
-            },
         },
     },
 )
