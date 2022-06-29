@@ -10,51 +10,47 @@ const CourseBadge = ({ course }) => {
     navigate("/term-planner");
   };
 
-  const courseBadge = () => {
-    if (course.unplanned) {
-      return (
-        <Badge
-          key={course.key}
-          count={(
-            <Tooltip title="Course added but not planned">
-              <div className="courseBadgeIcon">!</div>
-            </Tooltip>
+  if (course.unplanned) {
+    return (
+      <Badge
+        key={course.key}
+        count={(
+          <Tooltip title="Course added but not planned">
+            <div className="courseBadgeIcon">!</div>
+          </Tooltip>
           )}
-          onClick={handleClick}
-        >
-          <CourseButton course={course} planned={false} />
-        </Badge>
-      );
-    }
+        onClick={handleClick}
+      >
+        <CourseButton course={course} planned={false} />
+      </Badge>
+    );
+  }
 
-    if (course.past) {
-      return <CourseButton course={course} planned />;
-    }
+  if (course.past) {
+    return <CourseButton course={course} planned />;
+  }
 
-    // for future courses planned
-    // course.past can be undefined if not in term planner thus check for false
-    if (course.past === false) {
-      return (
-        <Badge
-          key={course.key}
-          count={(
-            <Tooltip title={`Future course planned for ${course.termPlanned}`}>
-              <div className="courseBadgeIcon">
-                <EyeOutlined />
-              </div>
-            </Tooltip>
+  // for future courses planned
+  // course.past can be undefined if not in term planner thus check for false
+  if (course.past === false) {
+    return (
+      <Badge
+        key={course.key}
+        count={(
+          <Tooltip title={`Future course planned for ${course.termPlanned}`}>
+            <div className="courseBadgeIcon">
+              <EyeOutlined />
+            </div>
+          </Tooltip>
           )}
-        >
-          <CourseButton course={course} planned />
-        </Badge>
-      );
-    }
+      >
+        <CourseButton course={course} planned />
+      </Badge>
+    );
+  }
 
-    // below is default badge for courses not in term planner
-    return <CourseButton course={course} planned={false} />;
-  };
-
-  return courseBadge();
+  // below is default badge for courses not in term planner
+  return <CourseButton course={course} planned={false} />;
 };
 
 export default CourseBadge;
