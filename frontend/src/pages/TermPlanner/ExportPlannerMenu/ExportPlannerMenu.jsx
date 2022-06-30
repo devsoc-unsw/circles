@@ -9,11 +9,11 @@ import {
   Radio,
   Typography,
 } from "antd";
+import CS from "../common/styles";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
-import "./index.less";
 
-const SaveMenu = ({ plannerRef }) => {
+const ExportPlannerMenu = ({ plannerRef }) => {
   const { Title } = Typography;
 
   const exportFormats = ["png", "jpg"];
@@ -25,8 +25,7 @@ const SaveMenu = ({ plannerRef }) => {
       exportComponentAsPNG(plannerRef, {
         fileName: "Term Planner",
       });
-    }
-    if (format === "jpg") {
+    } else if (format === "jpg") {
       exportComponentAsJPEG(plannerRef, {
         fileName: "Term Planner",
       });
@@ -41,7 +40,7 @@ const SaveMenu = ({ plannerRef }) => {
         </Title>
         <Divider className="settingsDivider" />
       </div>
-      <div className="settingsEntry">
+      <CS.PopupEntry>
         <Title level={3} className="text settingsSubtitle">
           File Type:
         </Title>
@@ -50,7 +49,7 @@ const SaveMenu = ({ plannerRef }) => {
             <Radio value={form}>{form}</Radio>
           ))}
         </Radio.Group>
-      </div>
+      </CS.PopupEntry>
       <Button style={{ width: "150px" }} onClick={download}>
         Download
       </Button>
@@ -58,4 +57,4 @@ const SaveMenu = ({ plannerRef }) => {
   );
 };
 
-export default SaveMenu;
+export default ExportPlannerMenu;

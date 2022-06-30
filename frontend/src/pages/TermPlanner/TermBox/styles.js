@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Droppable } from "../common/styles";
 
 const TermBoxWrapper = styled.ul`
   margin: 1em;
@@ -12,11 +13,7 @@ const TermBoxWrapper = styled.ul`
   border: 0.5px solid #d9d9d9;
   position: relative;
 
-  // TODO: reusue this component?
-  ${({ droppable }) => droppable && `
-    background-color: #e8fef2;
-    border-color: #e8fef2;
-  `}
+  ${({ droppable }) => droppable && Droppable}
 
   ${({ summerEnabled }) => summerEnabled && `
     margin: 0.5em;

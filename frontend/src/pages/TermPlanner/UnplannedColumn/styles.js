@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { GridItem } from "../common/styles";
+import { Droppable, GridItem } from "../common/styles";
 
 const UnplannedContainer = styled.div`
   grid-row-start: 1;
@@ -63,10 +63,7 @@ const UnplannedBox = styled.ul`
     background-color: #fff;
   }
 
-  ${({ droppable }) => droppable && `
-    background-color: #e8fef2;
-    border-color: #e8fef2;
-  `}
+  ${({ droppable }) => droppable && Droppable}
 
   ${({ summerEnabled }) => summerEnabled && `
     // sum of heights from the top of the page for where the unplanned header should be 
