@@ -47,30 +47,35 @@ const degreeData = {
 };
 
 const ProgressionCheckerCourses = ({ structure, isLoading }) => {
-  const DEFAULTMODE = "grid-concise";
-  const [view, setView] = useState(DEFAULTMODE);
+  const views = {
+    GRID: "grid",
+    CONCISE: "grid-concise",
+    TABLE: "table",
+  };
+  const defaultView = views.CONCISE;
+  const [view, setView] = useState(defaultView);
 
   return (
     <div>
-      {(view === "grid" || view === "grid-concise") ? (
+      {(view === views.GRID || view === views.CONCISE) ? (
         <>
           <Button
             className="viewSwitcher"
             type="primary"
             icon={<TableOutlined />}
-            onClick={() => setView("table")}
+            onClick={() => setView(views.TABLE)}
           >
             Display Table View
           </Button>
           <Button
             className="viewSwitcher"
             type="primary"
-            icon={view === "grid" ? <EyeInvisibleOutlined /> : <EyeFilled />}
-            onClick={() => setView(view === "grid" ? "grid-concise" : "grid")}
+            icon={view === views.GRID ? <EyeInvisibleOutlined /> : <EyeFilled />}
+            onClick={() => setView(view === views.GRID ? views.CONCISE : views.GRID)}
           >
-            {view === "grid" ? "Display Concise Mode" : "Display Full Mode"}
+            {view === views.GRID ? "Display Concise Mode" : "Display Full Mode"}
           </Button>
-          <GridView isLoading={isLoading} structure={structure} concise={view === "grid-concise"} />
+          <GridView isLoading={isLoading} structure={structure} concise={view === views.CONCISE} />
         </>
       ) : (
         <>
@@ -78,7 +83,7 @@ const ProgressionCheckerCourses = ({ structure, isLoading }) => {
             className="viewSwitcher"
             type="primary"
             icon={<BorderlessTableOutlined />}
-            onClick={() => setView(DEFAULTMODE)}
+            onClick={() => setView(defaultView)}
           >
             Display Grid View
           </Button>

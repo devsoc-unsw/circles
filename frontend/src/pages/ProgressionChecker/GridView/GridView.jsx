@@ -6,7 +6,6 @@ import GridViewConciseSubgroup from "./GridViewConciseSubgroup";
 import GridViewSubgroup from "./GridViewSubgroup";
 import "./index.less";
 
-/* eslint-disable comma-dangle */
 const GridView = ({ isLoading, structure, concise }) => {
   const { Title } = Typography;
   const [gridLayout, setGridLayout] = useState({});
@@ -103,7 +102,7 @@ const GridView = ({ isLoading, structure, concise }) => {
                       subgroupEntries={subgroupEntry}
                     />
                   )
-                )
+                ),
               )}
             </div>
           ))}

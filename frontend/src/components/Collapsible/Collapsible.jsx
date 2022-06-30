@@ -5,7 +5,12 @@ import "./index.less";
 
 const { Title } = Typography;
 
-const Collapsible = ({ initiallyCollapsed, title, children, headerStyle }) => { // eslint-disable-line
+const Collapsible = ({
+  initiallyCollapsed,
+  title,
+  children,
+  headerStyle,
+}) => {
   const [isCollapsed, setIsCollapsed] = useState(initiallyCollapsed);
 
   const toggleCollapse = () => {
@@ -20,7 +25,7 @@ const Collapsible = ({ initiallyCollapsed, title, children, headerStyle }) => { 
             ? "collapsible-button collapsible-button-collapsed"
             : "collapsible-button"}
         />
-        {(typeof title === "string" || title instanceof String)
+        {(typeof title === "string")
           ? (
             <Title level={3} className="text">
               {title}
