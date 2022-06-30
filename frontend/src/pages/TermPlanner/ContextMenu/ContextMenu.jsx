@@ -4,9 +4,9 @@ import { FaRegCalendarTimes } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { DeleteFilled, EditFilled, InfoCircleFilled } from "@ant-design/icons";
+import EditMarkModal from "components/EditMarkModal";
 import { addTab } from "reducers/courseTabsSlice";
 import { removeCourse, unschedule } from "reducers/plannerSlice";
-import EditMarkModal from "../EditMarkModal";
 import "react-contexify/dist/ReactContexify.css";
 
 const ContextMenu = ({ code, plannedFor }) => {
