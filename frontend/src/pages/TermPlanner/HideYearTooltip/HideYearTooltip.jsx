@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { EyeInvisibleFilled } from "@ant-design/icons";
 import { notification, Tooltip } from "antd";
 import { hideYear } from "reducers/plannerSlice";
-import "./index.less";
+import S from "./styles";
 
 const HideYearTooltip = ({ year }) => {
   const { hidden, numYears } = useSelector((state) => state.planner);
@@ -29,9 +29,9 @@ const HideYearTooltip = ({ year }) => {
 
   return (
     <Tooltip title="Hide year">
-      <div role="button" className="eye" onClick={handleHideYear}>
+      <S.EyeWrapper onClick={handleHideYear}>
         <EyeInvisibleFilled />
-      </div>
+      </S.EyeWrapper>
     </Tooltip>
   );
 };
