@@ -3,9 +3,9 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import { DeleteOutlined } from "@ant-design/icons";
 import { Popconfirm, Tooltip } from "antd";
+import DraggableTab from "components/DraggableTab";
 import { reorderTabs, resetTabs, setActiveTab } from "reducers/courseTabsSlice";
-import CourseTab from "./CourseTab";
-import "./index.less";
+import S from "./styles";
 
 const CourseTabs = () => {
   const dispatch = useDispatch();
@@ -16,7 +16,8 @@ const CourseTabs = () => {
   };
 
   const onDragEnd = (result) => {
-    if (!result.destination) return; // dropped outside of tab container
+    // dropped outside of tab container
+    if (!result.destination) return;
 
     // function to help us with reordering the result
     const reorder = (list, startIndex, endIndex) => {
@@ -38,27 +39,26 @@ const CourseTabs = () => {
   };
 
   return (
-    <div className="cs-tabs-cont">
+    <S.CourseTabsWrapper>
       <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
         <Droppable droppableId="droppable" direction="horizontal">
           {(droppableProvided, _) => (
-            <div
+            <S.CourseTabsSection
               ref={droppableProvided.innerRef}
               {...droppableProvided.droppableProps}
-              className="cs-tabs-root"
             >
               {tabs.map((tab, index) => (
-                <CourseTab tab={tab} index={index} />
+                <DraggableTab tabName={tab} index={index} />
               ))}
               {droppableProvided.placeholder}
-            </div>
+            </S.CourseTabsSection>
           )}
         </Droppable>
       </DragDropContext>
       {
         !!tabs.length
         && (
-          <div className="cs-tabs-close-all">
+          <S.TabsCloseAll>
             <Popconfirm
               placement="bottomRight"
               title="Do you want to close all tabs?"
@@ -71,10 +71,10 @@ const CourseTabs = () => {
                 <DeleteOutlined />
               </Tooltip>
             </Popconfirm>
-          </div>
+          </S.TabsCloseAll>
         )
       }
-    </div>
+    </S.CourseTabsWrapper>
   );
 };
 

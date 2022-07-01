@@ -7,7 +7,7 @@ const CourseTag = ({ name }) => {
   const dispatch = useDispatch();
 
   return (
-    <S.Tag onClick={() => dispatch(addTab(name))} className="text tag">
+    <S.Tag onClick={() => dispatch(addTab(name))} className="text">
       {name}
     </S.Tag>
   );
