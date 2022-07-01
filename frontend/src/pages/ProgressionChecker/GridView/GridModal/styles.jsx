@@ -1,5 +1,6 @@
 import { Modal, Typography } from "antd";
 import styled from "styled-components";
+import GRID from "../styles";
 
 const { Title } = Typography;
 
@@ -20,15 +21,18 @@ const Instruction = styled.p`
   margin-bottom: 0px;
 `;
 
-// const CourseSection = styled()
-
 const CourseModal = styled(Modal)`
-  top: 0;
-  float: right;
-  margin: 20px;
   .ant-modal-content, .ant-modal-header {
     border-radius: 20px;
   }
+`;
+
+const CourseList = styled(GRID.CourseGroup)`
+  padding-top: 1px;
+  padding-bottom: 1px;
+  max-height: 60vh;
+  overflow-y: auto;
+  overflow-x: hidden;
 `;
 
 export default {
@@ -36,4 +40,5 @@ export default {
   ModalTitle,
   Instruction,
   CourseModal,
+  CourseList,
 };
