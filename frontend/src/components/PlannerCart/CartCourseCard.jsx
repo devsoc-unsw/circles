@@ -17,7 +17,7 @@ const CartCourseCard = ({ code, title, showAlert }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const theme = useSelector((state) => state.theme);
+  const { theme } = useSelector((state) => state.settings);
   const confirmDelete = () => {
     dispatch(removeCourse(code));
     setLoading(true);

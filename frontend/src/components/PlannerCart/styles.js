@@ -2,9 +2,9 @@ import { Button as Btn } from "antd";
 import styled from "styled-components";
 
 const plannerCartRoot = styled.div`
-margin: 10px;
-position: relative;
-z-index: 20;
+  margin: 10px;
+  position: relative;
+  z-index: 20;
 `;
 
 const plannerCartMenu = styled.div`
@@ -19,7 +19,7 @@ const plannerCartMenu = styled.div`
   border-radius: 3px;
   box-shadow: 1px 2px #f0f0f0;
   border: #f5f5f5 solid 1px;
-  background-color: ${(props) => (props.theme === "light" ? "#ffffff" : "#434343")};
+  background-color:${({ theme }) => theme.plannerCartMenu.backgroundColor}; 
 `;
 
 const plannerCartContent = styled.div`
@@ -43,7 +43,7 @@ const plannerCartCard = styled.div`
   padding: 10px;
   border-radius: 10px;
 
-  :hover {
+  &:hover {
     background-color: ${(props) => (props.theme.plannerCartCardHover)};
   }
 `;

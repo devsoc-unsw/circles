@@ -35,6 +35,9 @@ export const lightTheme = {
   body: "#ffffff",
   text: "#323739",
   plannerCartCardHover: "#f4f4f4",
+  plannerCartMenu: {
+    backgroundColor: "#ffffff",
+  },
   draggableTab: {
     backgroundColor: "#fafafa",
     borderColor: "#f0f0f0",
@@ -46,7 +49,9 @@ export const darkTheme = {
   body: "#1d1f20",
   text: "#f1f1f1",
   plannerCartCardHover: "#292a2b",
-
+  plannerCartMenu: {
+    backgroundColor: "#434343",
+  },
   courseTag: {
     backgroundColor: "#9254de",
   },

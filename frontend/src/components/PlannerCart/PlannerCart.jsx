@@ -6,6 +6,8 @@ import {
   Alert,
   Button, Tooltip, Typography,
 } from "antd";
+import { ThemeProvider } from "styled-components";
+import { darkTheme, lightTheme } from "config/theme";
 import { removeAllCourses } from "reducers/plannerSlice";
 import CartCourseCard from "./CartCourseCard";
 import S from "./styles";
@@ -16,7 +18,7 @@ const PlannerCart = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const courses = useSelector((store) => store.planner.courses);
-  const theme = useSelector((state) => state.theme);
+  const { theme } = useSelector((state) => state.settings);
   const [openMenu, setOpenMenu] = useState(false);
   const [show, setShow] = useState(false);
   const [code, setCode] = useState("");
@@ -39,74 +41,77 @@ const PlannerCart = () => {
   }, [pathname]);
 
   return (
-    <S.plannerCartRoot>
-      <Tooltip title="Your courses">
-        <Button
-          type="primary"
-          icon={<CalendarOutlined style={{ fontSize: "26px" }} />}
-          size="large"
-          onClick={() => setOpenMenu(!openMenu)}
-        />
-      </Tooltip>
-      {openMenu && (
-        <S.plannerCartMenu style={{ backgroundColor: theme === "light" ? "#ffffff" : "#434343" }}>
-          <Title className="text" level={4}>
-            Your selected courses
-          </Title>
-          {show && (
-            <Alert
-              message={`Successfully removed ${code} from planner`}
-              type="success"
-              style={{ margin: "10px" }}
-              banner
-              showIcon
-              closable
-              afterClose={() => setShow(false)}
-            />
-          )}
-          {Object.keys(courses).length > 0 ? (
-            <S.plannerCartContent>
-              {/* Reversed map to show the most recently added courses first */}
-              {Object.keys(courses).reverse().map((courseCode) => (
-                <CartCourseCard
-                  code={courseCode}
-                  title={courses[courseCode].title}
-                  showAlert={showAlert}
-                />
-              ))}
-            </S.plannerCartContent>
-          ) : (
-            <S.plannerCartEmptyCont>
-              <Text className="text">
-                You have not selected any courses. Find them in our course
-                selector
-              </Text>
-              <S.linkButton
-                type="secondary"
-                shape="round"
-                className="planner-cart-link-to-cs"
-                onClick={() => {
-                  navigate("/course-selector");
-                }}
+    <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+      <S.plannerCartRoot>
+        <Tooltip title="Your courses">
+          <Button
+            type="primary"
+            icon={<CalendarOutlined style={{ fontSize: "26px" }} />}
+            size="large"
+            onClick={() => setOpenMenu(!openMenu)}
+          />
+        </Tooltip>
+        {openMenu && (
+          <S.plannerCartMenu>
+            <Title className="text" level={4}>
+              Your selected courses
+            </Title>
+            {show && (
+              <Alert
+                message={`Successfully removed ${code} from planner`}
+                type="success"
+                style={{ margin: "10px" }}
+                banner
+                showIcon
+                closable
+                afterClose={() => setShow(false)}
+              />
+            )}
+            {Object.keys(courses).length > 0 ? (
+              <S.plannerCartContent>
+                {/* Reversed map to show the most recently added courses first */}
+                {Object.keys(courses).reverse().map((courseCode) => (
+                  <CartCourseCard
+                    code={courseCode}
+                    title={courses[courseCode].title}
+                    showAlert={showAlert}
+                  />
+                ))}
+              </S.plannerCartContent>
+            ) : (
+              <S.plannerCartEmptyCont>
+                <Text className="text">
+                  You have not selected any courses. Find them in our course
+                  selector
+                </Text>
+                <S.linkButton
+                  type="secondary"
+                  shape="round"
+                  className="planner-cart-link-to-cs"
+                  onClick={() => {
+                    navigate("/course-selector");
+                  }}
+                >
+                  Go to course selector
+                </S.linkButton>
+              </S.plannerCartEmptyCont>
+            )}
+            {/* Hacky solution so prevent overflow.. help  */}
+            {!show && Object.keys(courses).length > 0 && (
+              <S.delButton
+                danger
+                className="planner-cart-delete-all-btn"
+                icon={<DeleteOutlined />}
+                onClick={deleteAllCourses}
               >
-                Go to course selector
-              </S.linkButton>
-            </S.plannerCartEmptyCont>
-          )}
-          {/* Hacky solution so prevent overflow.. help  */}
-          {!show && Object.keys(courses).length > 0 && (
-            <S.delButton
-              danger
-              className="planner-cart-delete-all-btn"
-              icon={<DeleteOutlined />}
-              onClick={deleteAllCourses}
-            >
-              Delete all courses
-            </S.delButton>
-          )}
-        </S.plannerCartMenu>
-      )}
-    </S.plannerCartRoot>
+                Delete all courses
+              </S.delButton>
+            )}
+          </S.plannerCartMenu>
+        )}
+      </S.plannerCartRoot>
+    </ThemeProvider>
+
   );
 };
 
