@@ -17,10 +17,12 @@ export const GlobalStyles = createGlobalStyle`
 export const lightTheme = {
   body: "#ffffff",
   text: "#323739",
+  plannerCartCardHover: "#f4f4f4",
 };
 
 export const darkTheme = {
   body: "#1d1f20",
   text: "#f1f1f1",
   tagBackground: "#9254de",
+  plannerCartCardHover: "#292a2b",
 };

@@ -19,7 +19,7 @@ const plannerCartMenu = styled.div`
   border-radius: 3px;
   box-shadow: 1px 2px #f0f0f0;
   border: #f5f5f5 solid 1px;
-  background-color: #ffffff;
+  background-color: ${(props) => (props.theme === "light" ? "#ffffff" : "#434343")};
 `;
 
 const plannerCartContent = styled.div`
@@ -44,7 +44,7 @@ const plannerCartCard = styled.div`
   border-radius: 10px;
 
   :hover {
-    background-color: #f4f4f4;
+    background-color: ${(props) => (props.theme.plannerCartCardHover)};
   }
 `;
 
