@@ -22,14 +22,17 @@ const Instruction = styled.p`
 `;
 
 const CourseModal = styled(Modal)`
+  top: 0px;
+  margin: 30px;
+  float: right;
   .ant-modal-content, .ant-modal-header {
     border-radius: 20px;
   }
 `;
 
 const CourseList = styled(GRID.CourseGroup)`
-  padding-top: 1px;
-  padding-bottom: 1px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   max-height: 60vh;
   overflow-y: auto;
   overflow-x: hidden;

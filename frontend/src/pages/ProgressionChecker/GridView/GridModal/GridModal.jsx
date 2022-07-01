@@ -24,7 +24,6 @@ const GridModal = ({ title, courses }) => {
             <S.Instruction>See your possible courses:</S.Instruction>
           </S.ModalHeader>
         )}
-        centered
         width="625px"
         visible={modalVisible}
         onCancel={() => setModalVisible(false)}
