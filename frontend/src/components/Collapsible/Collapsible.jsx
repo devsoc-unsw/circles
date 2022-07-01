@@ -5,7 +5,12 @@ import "./index.less";
 
 const { Title } = Typography;
 
-const Collapsible = ({ initiallyCollapsed, title, children }) => {
+const Collapsible = ({
+  initiallyCollapsed,
+  title,
+  children,
+  headerStyle,
+}) => {
   const [isCollapsed, setIsCollapsed] = useState(initiallyCollapsed);
 
   const toggleCollapse = () => {
@@ -13,21 +18,26 @@ const Collapsible = ({ initiallyCollapsed, title, children }) => {
   };
 
   return (
-    <>
-      <div className="collapsible-header" onClick={toggleCollapse} role="none">
+    <div className="collapsible">
+      <div className="collapsible-header" onClick={toggleCollapse} role="none" style={headerStyle}>
         <RightOutlined
           className={(isCollapsed)
             ? "collapsible-button collapsible-button-collapsed"
             : "collapsible-button"}
         />
-        <Title level={3} className="text">
-          {title}
-        </Title>
+        {(typeof title === "string")
+          ? (
+            <Title level={3} className="text">
+              {title}
+            </Title>
+          ) : (
+            title
+          )}
       </div>
       <div className={isCollapsed ? "collapsible-content-collapsed" : "collapsible-content"}>
         {children}
       </div>
-    </>
+    </div>
   );
 };
 
