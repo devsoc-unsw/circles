@@ -42,7 +42,7 @@ const PlannerCart = () => {
 
   return (
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
-      <S.plannerCartRoot>
+      <S.PlannerCartRoot>
         <Tooltip title="Your courses">
           <Button
             type="primary"
@@ -52,7 +52,7 @@ const PlannerCart = () => {
           />
         </Tooltip>
         {openMenu && (
-          <S.plannerCartMenu>
+          <S.PlannerCartMenu>
             <Title className="text" level={4}>
               Your selected courses
             </Title>
@@ -68,7 +68,7 @@ const PlannerCart = () => {
               />
             )}
             {Object.keys(courses).length > 0 ? (
-              <S.plannerCartContent>
+              <S.PlannerCartContent>
                 {/* Reversed map to show the most recently added courses first */}
                 {Object.keys(courses).reverse().map((courseCode) => (
                   <CartCourseCard
@@ -77,14 +77,14 @@ const PlannerCart = () => {
                     showAlert={showAlert}
                   />
                 ))}
-              </S.plannerCartContent>
+              </S.PlannerCartContent>
             ) : (
-              <S.plannerCartEmptyCont>
+              <S.PlannerCartEmptyCont>
                 <Text className="text">
                   You have not selected any courses. Find them in our course
                   selector
                 </Text>
-                <S.linkButton
+                <S.LinkButton
                   type="secondary"
                   shape="round"
                   className="planner-cart-link-to-cs"
@@ -93,23 +93,23 @@ const PlannerCart = () => {
                   }}
                 >
                   Go to course selector
-                </S.linkButton>
-              </S.plannerCartEmptyCont>
+                </S.LinkButton>
+              </S.PlannerCartEmptyCont>
             )}
             {/* Hacky solution so prevent overflow.. help  */}
             {!show && Object.keys(courses).length > 0 && (
-              <S.delButton
+              <S.DelButton
                 danger
                 className="planner-cart-delete-all-btn"
                 icon={<DeleteOutlined />}
                 onClick={deleteAllCourses}
               >
                 Delete all courses
-              </S.delButton>
+              </S.DelButton>
             )}
-          </S.plannerCartMenu>
+          </S.PlannerCartMenu>
         )}
-      </S.plannerCartRoot>
+      </S.PlannerCartRoot>
     </ThemeProvider>
 
   );

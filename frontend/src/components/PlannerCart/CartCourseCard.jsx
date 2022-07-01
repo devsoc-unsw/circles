@@ -34,7 +34,7 @@ const CartCourseCard = ({ code, title, showAlert }) => {
 
   return (
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
-      <S.plannerCartCard>
+      <S.PlannerCartCard>
         <div role="menuitem" onClick={handleCourseLink} style={{ cursor: "pointer" }}>
           <Text className="text" strong>
             {code}:{" "}
@@ -61,7 +61,7 @@ const CartCourseCard = ({ code, title, showAlert }) => {
             </Tooltip>
           </Popconfirm>
         </div>
-      </S.plannerCartCard>
+      </S.PlannerCartCard>
     </ThemeProvider>
   );
 };
