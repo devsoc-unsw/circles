@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { scroller } from "react-scroll";
 import { BorderlessTableOutlined, TableOutlined } from "@ant-design/icons";
 import { Button, Divider } from "antd";
 import axios from "axios";
@@ -51,6 +52,13 @@ const ProgressionChecker = () => {
 
   const [structure, setStructure] = useState({});
 
+  const clickArrow = () => {
+    scroller.scrollTo("divider", {
+      duration: 1500,
+      smooth: true,
+    });
+  };
+
   useEffect(() => {
     // get structure of degree
     const fetchStructure = async () => {
@@ -68,8 +76,8 @@ const ProgressionChecker = () => {
 
   return (
     <PageTemplate>
-      <Dashboard isLoading={isLoading} degree={degreeData} />
-      <Divider />
+      <Dashboard isLoading={isLoading} degree={degreeData} clickArrow={clickArrow} />
+      <Divider id="divider" />
       {view === "grid" ? (
         <>
           <Button
