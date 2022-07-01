@@ -7,6 +7,7 @@ import {
 import Tippy from "@tippyjs/react";
 import { Popconfirm, Switch, Tooltip } from "antd";
 import { unhideAllYears, unscheduleAll } from "reducers/plannerSlice";
+import { toggleShowMarks, toggleShowWarnings } from "reducers/settingsSlice";
 import HelpMenu from "./HelpMenu";
 import SaveMenu from "./SaveMenu";
 import SettingsMenu from "./SettingsMenu";
@@ -15,11 +16,11 @@ import "tippy.js/themes/light.css";
 import "./index.less";
 
 const OptionsHeader = ({
-  plannerRef, isAllEmpty, setSuppress, suppress, setShowMarks,
+  plannerRef, isAllEmpty,
 }) => {
-  const theme = useSelector((state) => state.theme);
-  const { areYearsHidden } = useSelector((state) => state.planner);
-  const { years } = useSelector((state) => state.planner);
+  const { theme } = useSelector((state) => state.settings);
+  const { areYearsHidden, years } = useSelector((state) => state.planner);
+  const { showMarks, showWarnings } = useSelector((state) => state.settings);
   const dispatch = useDispatch();
 
   return (
@@ -95,11 +96,9 @@ const OptionsHeader = ({
         <div>
           <Tooltip title="Toggle warnings for previous terms">
             <button
-              className={`settings-button ${suppress ? "" : "filled"}`}
+              className={`settings-button ${showWarnings ? "filled" : ""}`}
               type="button"
-              onClick={() => {
-                setSuppress((prev) => !prev);
-              }}
+              onClick={() => dispatch(toggleShowWarnings())}
             >
               <WarningFilled className="settings-icon" />
             </button>
@@ -109,8 +108,9 @@ const OptionsHeader = ({
       <div className="right-buttons">
         <div>
           <Switch
+            defaultChecked={showMarks}
             className="cs-toggle-locked"
-            onChange={() => setShowMarks((prev) => !prev)}
+            onChange={() => dispatch(toggleShowMarks())}
             checkedChildren="marks shown"
             unCheckedChildren="marks hidden"
           />

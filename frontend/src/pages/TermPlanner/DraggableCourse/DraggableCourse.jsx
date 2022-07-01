@@ -15,8 +15,8 @@ const DraggableCourse = ({
 }) => {
   const { Text } = Typography;
   const { courses, isSummerEnabled, completedTerms } = useSelector((state) => state.planner);
-  const theme = useSelector((state) => state.theme);
-
+  const { theme } = useSelector((state) => state.settings);
+  // prereqs are populated in CourseDescription.jsx via course.raw_requirements
   const {
     prereqs, title, isUnlocked, plannedFor,
     isLegacy, isAccurate, termsOffered, handbookNote, supressed, mark,
@@ -110,6 +110,7 @@ const DraggableCourse = ({
             : !isUnlocked ? prereqs.trim()
               : !isOffered ? "The course is not offered in this term."
                 : warningMessage.length !== 0 ? warningMessage.join("\n")
+                  // eslint-disable-next-line react/no-danger
                   : <div dangerouslySetInnerHTML={{ __html: handbookNote }} />}
           {!isAccurate ? " The course info may be inaccurate." : ""}
         </ReactTooltip>
