@@ -2,6 +2,7 @@ import React from "react";
 import { Empty, Typography } from "antd";
 import CourseBadge from "./CourseBadge";
 import GridModal from "./GridModal";
+import S from "./styles";
 
 const GridViewSubgroup = ({
   uoc,
@@ -28,14 +29,14 @@ const GridViewSubgroup = ({
   };
 
   return (
-    <div key={subgroupKey} className="subCategory">
+    <div key={subgroupKey}>
       <Title level={2}>{subgroupKey}</Title>
       <Title level={3}>
         {uoc} UOC of the following courses
       </Title>
-      <div className="courseGroup">
+      <S.CourseGroup>
         {courseSection()}
-      </div>
+      </S.CourseGroup>
       <br />
     </div>
   );

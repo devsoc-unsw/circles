@@ -4,7 +4,7 @@ import { Skeleton, Typography } from "antd";
 import getFormattedPlannerCourses from "../getFormattedPlannerCourses";
 import GridViewConciseSubgroup from "./GridViewConciseSubgroup";
 import GridViewSubgroup from "./GridViewSubgroup";
-import "./index.less";
+import S from "./styles";
 
 const GridView = ({ isLoading, structure, concise }) => {
   const { Title } = Typography;
@@ -83,7 +83,7 @@ const GridView = ({ isLoading, structure, concise }) => {
   }, [isLoading, structure, years, startYear, courses]);
 
   return (
-    <div className="gridViewContainer">
+    <S.GridViewContainer>
       {(isLoading || Object.keys(gridLayout).length === 0) ? (
         <Skeleton />
       ) : (
@@ -114,7 +114,7 @@ const GridView = ({ isLoading, structure, concise }) => {
           ))}
         </>
       )}
-    </div>
+    </S.GridViewContainer>
   );
 };
 

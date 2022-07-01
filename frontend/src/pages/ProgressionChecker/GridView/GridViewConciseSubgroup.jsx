@@ -3,6 +3,7 @@ import { Empty, Typography } from "antd";
 import Collapsible from "components/Collapsible";
 import CourseBadge from "./CourseBadge";
 import GridModal from "./GridModal";
+import S from "./styles";
 
 const GridViewConciseSubgroup = ({
   uoc,
@@ -21,14 +22,14 @@ const GridViewConciseSubgroup = ({
 
   // convert lists to components
   const plannedGroup = (
-    <div className="courseGroup">
+    <S.CourseGroup>
       {planned.map((course) => (<CourseBadge course={course} key={course.key} />))}
-    </div>
+    </S.CourseGroup>
   );
   const unplannedGroup = (
-    <div className="courseGroup">
+    <S.CourseGroup>
       {unplanned.map((course) => (<CourseBadge course={course} key={course.key} />))}
-    </div>
+    </S.CourseGroup>
   );
 
   const collapsibleSection = (planState) => {
@@ -48,7 +49,7 @@ const GridViewConciseSubgroup = ({
   };
 
   return (
-    <div key={subgroupKey} className="subCategory">
+    <div key={subgroupKey}>
       <Title level={2}>{subgroupKey}</Title>
       <Title level={3}>
         {uoc} UOC of the following courses

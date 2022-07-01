@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { Button } from "antd";
 import CourseBadge from "../CourseBadge";
+import GRID from "../styles";
 import S from "./styles";
 
 const GridModal = ({ title, courses }) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
-    <div className="courseGroup">
+    <GRID.CourseGroup>
       <Button
         className="viewSwitcher"
         type="primary"
@@ -20,19 +21,20 @@ const GridModal = ({ title, courses }) => {
           <S.ModalHeader>
             <S.ModalTitle level={2}>Course List</S.ModalTitle>
             <S.ModalTitle level={3}>{title}</S.ModalTitle>
-            <S.Instruction>Select your courses:</S.Instruction>
+            <S.Instruction>See your possible courses:</S.Instruction>
           </S.ModalHeader>
         )}
+        centered
         width="625px"
         visible={modalVisible}
         onCancel={() => setModalVisible(false)}
         footer={null}
       >
-        <div className="content courseGroup">
+        <S.CourseList>
           {courses.map((course) => (<CourseBadge course={course} key={course.key} />))}
-        </div>
+        </S.CourseList>
       </S.CourseModal>
-    </div>
+    </GRID.CourseGroup>
   );
 };
 
