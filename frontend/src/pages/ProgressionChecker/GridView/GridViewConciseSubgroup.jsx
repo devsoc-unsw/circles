@@ -2,9 +2,19 @@ import React from "react";
 import { Empty, Typography } from "antd";
 import Collapsible from "components/Collapsible";
 import CourseBadge from "./CourseBadge";
+import GridModal from "./GridModal";
 
-const GridViewConciseSubgroup = ({ uoc, subgroupKey, subgroupEntries }) => {
+const GridViewConciseSubgroup = ({
+  uoc,
+  subgroupKey,
+  subgroupEntries,
+  hasLotsOfCourses,
+}) => {
   const { Title } = Typography;
+  const plannedState = {
+    PLANNED: "planned",
+    UNPLANNED: "unplanned",
+  };
 
   const planned = subgroupEntries.filter((c) => (c.unplanned || c.past || c.past === false));
   const unplanned = subgroupEntries.filter((c) => (!(c.unplanned || c.past || c.past === false)));
@@ -21,6 +31,22 @@ const GridViewConciseSubgroup = ({ uoc, subgroupKey, subgroupEntries }) => {
     </div>
   );
 
+  const collapsibleSection = (planState) => {
+    if (hasLotsOfCourses && planState === plannedState.UNPLANNED && planned.length > 0) {
+      return <GridModal title={subgroupKey} courses={unplanned} />;
+    }
+
+    if (planState === plannedState.PLANNED && planned.length > 0) {
+      return plannedGroup;
+    }
+
+    if (planState === plannedState.UNPLANNED && unplanned.length > 0) {
+      return unplannedGroup;
+    }
+
+    return <Empty description="Nothing to see here! 👀" image={Empty.PRESENTED_IMAGE_SIMPLE} />;
+  };
+
   return (
     <div key={subgroupKey} className="subCategory">
       <Title level={2}>{subgroupKey}</Title>
@@ -32,14 +58,14 @@ const GridViewConciseSubgroup = ({ uoc, subgroupKey, subgroupEntries }) => {
         headerStyle={{ border: "none" }}
         initiallyCollapsed={planned.length === 0}
       >
-        {planned.length > 0 ? plannedGroup : <Empty description="Nothing to see here! 👀" image={Empty.PRESENTED_IMAGE_SIMPLE} />}
+        {collapsibleSection(plannedState.PLANNED)}
       </Collapsible>
       <Collapsible
         title={<Title level={4}>Choose from the following</Title>}
         headerStyle={{ border: "none" }}
         initiallyCollapsed={unplanned.length > 8 || unplanned.length === 0}
       >
-        {unplanned.length > 0 ? unplannedGroup : <Empty description="Nothing to see here! 👀" image={Empty.PRESENTED_IMAGE_SIMPLE} />}
+        {collapsibleSection(plannedState.UNPLANNED)}
       </Collapsible>
       <br />
     </div>

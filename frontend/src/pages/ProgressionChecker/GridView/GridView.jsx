@@ -23,12 +23,16 @@ const GridView = ({ isLoading, structure, concise }) => {
         if (typeof structure[group][subgroup] !== "string") {
           // case where structure[group][subgroup] gives information on courses in an object
           const subgroupStructure = structure[group][subgroup];
-          newGridLayout[group][subgroup] = [];
+          newGridLayout[group][subgroup] = {
+            // section types with gened or rule substring can have their courses hidden as a modal
+            hasLotsOfCourses: subgroupStructure?.type.includes("gened") || subgroupStructure?.type.includes("rule"),
+            courses: [],
+          };
 
           if (subgroupStructure.courses) {
             // only consider disciplinary component courses
             Object.keys(subgroupStructure.courses).forEach((courseCode) => {
-              newGridLayout[group][subgroup].push({
+              newGridLayout[group][subgroup].courses.push({
                 key: courseCode,
                 title: subgroupStructure.courses[courseCode],
                 // past and termPlanned will be undefined for courses not in planner
@@ -38,7 +42,7 @@ const GridView = ({ isLoading, structure, concise }) => {
                 unplanned: courses[courseCode]?.plannedFor === null,
               });
             });
-            newGridLayout[group][subgroup].sort(
+            newGridLayout[group][subgroup].courses.sort(
               (a, b) => a.key.localeCompare(b.key),
             );
           } else {
@@ -47,7 +51,7 @@ const GridView = ({ isLoading, structure, concise }) => {
             Object.keys(courses).forEach((courseCode) => {
               const courseData = courses[courseCode];
               if (courseData && courseData.type === subgroup) {
-                newGridLayout[group][subgroup].push({
+                newGridLayout[group][subgroup].courses.push({
                   key: courseCode,
                   title: courseData.title,
                   past: plannerCourses[courseCode].past,
@@ -93,13 +97,15 @@ const GridView = ({ isLoading, structure, concise }) => {
                     <GridViewConciseSubgroup
                       uoc={structure[group][subgroup].UOC}
                       subgroupKey={subgroup}
-                      subgroupEntries={subgroupEntry}
+                      subgroupEntries={subgroupEntry.courses}
+                      hasLotsOfCourses={subgroupEntry.hasLotsOfCourses}
                     />
                   ) : (
                     <GridViewSubgroup
                       uoc={structure[group][subgroup].UOC}
                       subgroupKey={subgroup}
-                      subgroupEntries={subgroupEntry}
+                      subgroupEntries={subgroupEntry.courses}
+                      hasLotsOfCourses={subgroupEntry.hasLotsOfCourses}
                     />
                   )
                 ),
