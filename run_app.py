@@ -60,10 +60,7 @@ def main():
     )
     sys.stdout = LogPipe(logging.INFO)
     sys.stderr = LogPipe(logging.ERROR)
-    print("ah")
     username, password, python_ver = get_backend_env()
-    print("up", username,password, python_ver)
-    # sys.exit(0)
     os.system('docker compose run --rm init-mongo')
     try:
         Popen(
