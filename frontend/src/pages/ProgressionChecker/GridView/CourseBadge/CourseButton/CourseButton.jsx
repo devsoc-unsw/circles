@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Button } from "antd";
 import { addTab } from "reducers/courseTabsSlice";
+import S from "./styles";
 
 const CourseButton = ({ course, planned }) => {
   const dispatch = useDispatch();
@@ -15,24 +15,22 @@ const CourseButton = ({ course, planned }) => {
 
   return (
     planned ? (
-      <Button
-        className="checkerButton"
+      <S.InTPCourseButton
         type="primary"
         key={course.key}
         onClick={() => handleCourseLink(course.key)}
       >
         {course.key}: {course.title}
-      </Button>
+      </S.InTPCourseButton>
     ) : (
-      <Button
+      <S.NotInTPCourseButton
         className="checkerButton"
         type="primary"
-        style={{ background: "#FFF", color: "#9254de" }}
         key={course.key}
         onClick={() => handleCourseLink(course.key)}
       >
         {course.key}: {course.title}
-      </Button>
+      </S.NotInTPCourseButton>
     )
   );
 };
