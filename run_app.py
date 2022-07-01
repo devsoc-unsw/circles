@@ -1,11 +1,13 @@
 # pylint: disable=cyclic-import
 """ run all of circles in one terminal """
 import logging
-from subprocess import Popen, check_call
-from dotenv import load_dotenv
-import threading
 import os
 import sys
+import threading
+from subprocess import Popen, check_call
+
+from dotenv import load_dotenv
+
 
 class LogPipe(threading.Thread):
     """ boilerplate abstraction for redirecting the logs of a process """
