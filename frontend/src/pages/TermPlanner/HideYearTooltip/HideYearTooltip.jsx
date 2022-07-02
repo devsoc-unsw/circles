@@ -29,7 +29,7 @@ const HideYearTooltip = ({ year }) => {
 
   return (
     <Tooltip title="Hide year">
-      <S.EyeWrapper onClick={handleHideYear}>
+      <S.EyeWrapper role="button" onClick={handleHideYear}>
         <EyeInvisibleFilled />
       </S.EyeWrapper>
     </Tooltip>
