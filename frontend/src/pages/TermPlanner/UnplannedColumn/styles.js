@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Droppable, GridItem } from "../common/styles";
 
 const UnplannedContainer = styled.div`
@@ -65,7 +65,7 @@ const UnplannedBox = styled.ul`
 
   ${({ droppable }) => droppable && Droppable}
 
-  ${({ summerEnabled }) => summerEnabled && `
+  ${({ summerEnabled }) => summerEnabled && css`
     // sum of heights from the top of the page for where the unplanned header should be 
     // for summer term
     height: calc(
@@ -84,12 +84,12 @@ const UnplannedBox = styled.ul`
     padding-top: 0.5em;
   `}
 
-  ${({ isSmall }) => isSmall && `
+  ${({ isSmall }) => isSmall && css`
     border-radius: 1em;
     min-width: 12em;
   `}
 
-  ${({ isSmall, summerEnabled }) => isSmall && summerEnabled && `
+  ${({ isSmall, summerEnabled }) => isSmall && summerEnabled && css`
     border-radius: 1em;
     min-width: 13em;
   `}

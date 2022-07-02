@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const CourseWrapper = styled.li`
   user-select: none;
@@ -18,25 +18,25 @@ const CourseWrapper = styled.li`
   line-height: 1.5715;
   background-color: #d9d9d9;
 
-  ${({ isSmall }) => isSmall && `
+  ${({ isSmall }) => isSmall && css`
     border-radius: 1.25em;
     padding: 0.8em;
     width: 10em;
   `}
 
-  ${({ summerEnabled, isSmall }) => summerEnabled && isSmall && `
+  ${({ summerEnabled, isSmall }) => summerEnabled && isSmall && css`
     width: 8em;
   `}
 
-  ${({ warningsDisabled }) => warningsDisabled && `
+  ${({ warningsDisabled }) => warningsDisabled && css`
     background-color: #fff3e0;
   `}
 
-  ${({ warning }) => warning && `
+  ${({ warning }) => warning && css`
     background-color: #ffe8c3;
   `}
 
-  ${({ dragDisabled }) => dragDisabled && `
+  ${({ dragDisabled }) => dragDisabled && css`
     background-color: #eee;
 
     &:hover {

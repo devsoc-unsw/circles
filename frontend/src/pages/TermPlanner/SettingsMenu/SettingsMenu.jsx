@@ -2,8 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
 import {
-  DatePicker, Divider,
-  Select, Switch, Typography,
+  DatePicker, Select, Switch, Typography,
 } from "antd";
 import moment from "moment";
 import { toggleSummer, updateDegreeLength, updateStartYear } from "reducers/plannerSlice";
@@ -36,12 +35,10 @@ const SettingsMenu = () => {
 
   return (
     <CS.MenuPopup>
-      <div className="settingsTitleContainer">
-        <Title level={2} strong className="text settingsTitle">
-          Settings
-        </Title>
-        <Divider className="settingsDivider" />
-      </div>
+      <Title level={2} strong className="text settingsTitle">
+        Settings
+      </Title>
+      <CS.MenuDivider />
       <CS.PopupEntry>
         <Title level={3} className="text settingsSubtitle">
           Summer Term

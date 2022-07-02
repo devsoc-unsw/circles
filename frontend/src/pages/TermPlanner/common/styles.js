@@ -1,3 +1,4 @@
+import { Divider } from "antd";
 import styled, { css } from "styled-components";
 
 export const GridItem = styled.div`
@@ -25,4 +26,18 @@ const PopupEntry = styled.div`
   margin-bottom: 10px;
 `;
 
-export default { MenuPopup, PopupEntry };
+const MenuWrapper = styled.div`
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5em;
+`;
+
+const MenuDivider = styled(Divider)`
+  margin: 0.5rem 0;
+`;
+
+export default {
+  MenuPopup, PopupEntry, MenuWrapper, MenuDivider,
+};

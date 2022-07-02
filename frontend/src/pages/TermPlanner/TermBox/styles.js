@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Droppable } from "../common/styles";
 
 const TermBoxWrapper = styled.ul`
@@ -15,7 +15,7 @@ const TermBoxWrapper = styled.ul`
 
   ${({ droppable }) => droppable && Droppable}
 
-  ${({ summerEnabled }) => summerEnabled && `
+  ${({ summerEnabled }) => summerEnabled && css`
     margin: 0.5em;
     min-height: 18em;
     min-width: 15em;
@@ -24,13 +24,13 @@ const TermBoxWrapper = styled.ul`
     border-radius: 1em;
   `}
 
-  ${({ isSmall }) => isSmall && `
+  ${({ isSmall }) => isSmall && css`
     min-width: 12em;
     min-height: 14em;
     border-radius: 1em;
   `}
 
-  ${({ isSmall, summerEnabled }) => isSmall && summerEnabled && `
+  ${({ isSmall, summerEnabled }) => isSmall && summerEnabled && css`
     min-height: 13.5em;
     min-width: 13em;
   `}

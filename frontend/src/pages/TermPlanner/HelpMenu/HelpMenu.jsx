@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Divider, Typography } from "antd";
+import { Typography } from "antd";
 import additionalOptionsGif from "assets/helpGifs/additional-options.gif";
 import additionalOptionsPic from "assets/helpGifs/additional-options.jpg";
 import dragAndDropGif from "assets/helpGifs/drag-and-drop.gif";
@@ -71,7 +71,7 @@ const HelpMenu = () => {
         <Title level={2} strong className="text settingsTitle">
           Term Planner Tips (Hover to Play)
         </Title>
-        <Divider className="settingsDivider" />
+        <CS.MenuDivider />
       </S.HeaderWrapper>
       {helpSteps.map(({
         title, pic, gif, altText,

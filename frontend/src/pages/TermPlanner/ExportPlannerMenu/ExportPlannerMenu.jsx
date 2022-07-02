@@ -5,11 +5,11 @@ import {
 } from "react-component-export-image";
 import {
   Button,
-  Divider,
   Radio,
   Typography,
 } from "antd";
 import CS from "../common/styles";
+import S from "./styles";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
 
@@ -33,13 +33,11 @@ const ExportPlannerMenu = ({ plannerRef }) => {
   };
 
   return (
-    <div className="settingsMenu" style={{ width: "180px" }}>
-      <div className="settingsTitleContainer">
-        <Title level={2} strong className="text settingsTitle">
-          Export
-        </Title>
-        <Divider className="settingsDivider" />
-      </div>
+    <S.Wrapper style={{ width: "180px" }}>
+      <Title level={2} strong className="text settingsTitle">
+        Export
+      </Title>
+      <CS.MenuDivider />
       <CS.PopupEntry>
         <Title level={3} className="text settingsSubtitle">
           File Type:
@@ -53,7 +51,7 @@ const ExportPlannerMenu = ({ plannerRef }) => {
       <Button style={{ width: "150px" }} onClick={download}>
         Download
       </Button>
-    </div>
+    </S.Wrapper>
   );
 };
 
