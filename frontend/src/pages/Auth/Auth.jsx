@@ -13,7 +13,6 @@ const Auth = () => {
                 />
             </MetaTags>
             <h1>SIGN IN </h1>
-
             <script src="https://apis.google.com/js/platform.js" async defer></script>
         </div>
     );

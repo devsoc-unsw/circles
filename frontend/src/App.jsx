@@ -13,6 +13,7 @@ import GraphicalSelector from "./pages/GraphicalSelector";
 import PageNotFound from "./pages/PageNotFound";
 import ProgressionChecker from "./pages/ProgressionChecker";
 import TermPlanner from "./pages/TermPlanner";
+import Auth from "./pages/Auth";
 import "./App.less";
 import "./config/axios";
 
@@ -50,6 +51,10 @@ const App = () => {
             <Route
               path="/progression-checker"
               element={<ProgressionChecker />}
+            />
+            <Route
+              path="/login"
+              element={<Auth/>}
             />
             <Route
               path="*"
