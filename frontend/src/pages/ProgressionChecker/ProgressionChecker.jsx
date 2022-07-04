@@ -86,48 +86,46 @@ const ProgressionChecker = () => {
     if (programCode && specs.length > 0) fetchStructure();
   }, [programCode, specs]);
 
-  const storeUoc = {};
+  const storeUOC = {};
   // Example groups: Major, Minor, General
   Object.keys(structure).forEach((group) => {
-    storeUoc[group] = {};
-    let totalUoc = 0;
-    let completedUOC = 0;
-    Object.keys(structure[group]).forEach((sub) => {
-      if (typeof structure[group][sub] !== "string" && sub !== "Maximum Level 1 Electives UOC") {
-        totalUoc += structure[group][sub].UOC;
-        if (structure[group][sub].courses) {
-          Object.keys(structure[group][sub].courses).forEach((code) => {
-            if (planner.courses[code]) {
-              completedUOC += planner.courses[code].UOC;
+    storeUOC[group] = {
+      total: 0,
+      curr: 0,
+    };
+    Object.keys(structure[group]).forEach((subgroup) => {
+      if (typeof structure[group][subgroup] !== "string") {
+        // case where structure[group][subgroup] gives information on courses in an object
+        storeUOC[group].total += structure[group][subgroup].UOC;
+        const subgroupStructure = structure[group][subgroup];
+
+        const isRule = subgroupStructure.type && subgroupStructure.type.includes("rule");
+
+        if (subgroupStructure.courses && !isRule) {
+          // only consider disciplinary component courses
+          Object.keys(subgroupStructure.courses).forEach((courseCode) => {
+            if (planner.courses[courseCode]) {
+              storeUOC[group].curr += planner.courses[courseCode].UOC;
             }
           });
         } else {
-          Object.keys(planner.courses).forEach((code) => {
-            if (planner.courses[code].type === "Uncategorised") {
-              completedUOC += planner.courses[code].UOC;
+          // If there is no specified course list for the subgroup, then manually
+          // show the added courses on the menu.
+          Object.keys(planner.courses).forEach((courseCode) => {
+            const courseData = planner.courses[courseCode];
+            if (courseData && courseData.type === subgroup) {
+              // add UOC to curr
+              storeUOC[group].curr += courseData.UOC;
             }
           });
         }
       }
     });
-
-    storeUoc[group] = {
-      total_UOC: totalUoc,
-      completed_UOC: completedUOC,
-    };
   });
 
-  let calTotalUOC = 0;
-  let calCompletedUOC = 0;
-  Object.keys(storeUoc).forEach((group) => {
-    calTotalUOC += storeUoc[group].total_UOC;
-    calCompletedUOC += storeUoc[group].completed_UOC;
-  });
-  storeUoc.total_UOC = calTotalUOC;
-  storeUoc.completed_UOC = calCompletedUOC;
   return (
     <PageTemplate>
-      <Dashboard storeUoc={storeUoc} isLoading={isLoading} degree={structure} />
+      <Dashboard storeUOC={storeUOC} isLoading={isLoading} degree={structure} />
       <Divider />
       <ProgressionCheckerCourses structure={structure} isLoading={isLoading} />
     </PageTemplate>

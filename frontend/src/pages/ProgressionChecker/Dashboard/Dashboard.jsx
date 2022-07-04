@@ -6,7 +6,7 @@ import DegreeCard from "../DegreeCard";
 import SkeletonDashboard from "./SkeletonDashboard";
 import "./index.less";
 
-const Dashboard = ({ storeUoc, isLoading, degree }) => {
+const Dashboard = ({ storeUOC, isLoading, degree }) => {
   const { Title } = Typography;
   const currYear = new Date().getFullYear();
 
@@ -17,6 +17,13 @@ const Dashboard = ({ storeUoc, isLoading, degree }) => {
     config: { tension: 80, friction: 60 },
   });
 
+  let calTotalUOC = 0;
+  let calCompletedUOC = 0;
+  Object.keys(storeUOC).forEach((group) => {
+    calTotalUOC += storeUOC[group].total;
+    calCompletedUOC += storeUOC[group].curr;
+  });
+
   return (
     <div className="container">
       {isLoading ? (
@@ -24,8 +31,8 @@ const Dashboard = ({ storeUoc, isLoading, degree }) => {
       ) : (
         <animated.div className="centered" style={props}>
           <LiquidProgressChart
-            completedUOC={storeUoc.completed_UOC}
-            totalUOC={storeUoc.total_UOC}
+            completedUOC={calCompletedUOC}
+            totalUOC={calTotalUOC}
           />
           <a
             href={`https://www.handbook.unsw.edu.au/undergraduate/programs/${currYear}/${degree.code}?year=${currYear}`}
@@ -36,14 +43,15 @@ const Dashboard = ({ storeUoc, isLoading, degree }) => {
             <Title className="text textLink">{degree.name}</Title>
           </a>
           <div className="cards">
-            {Object.entries(degree).map(([i, obj], index) => {
-              if (i === "General") return null;
-              obj.total_UOC = storeUoc[i].total_UOC;
-              obj.completed_UOC = storeUoc[i].completed_UOC;
-              return (
-                <DegreeCard index={index} type={i} concentration={obj} />
-              );
-            })}
+            {Object.entries(degree).map(([key, subGroup], index) => (
+              <DegreeCard
+                index={index}
+                type={key}
+                totalUOC={storeUOC[key].total}
+                currUOC={storeUOC[key].curr}
+                specialisation={subGroup}
+              />
+            ))}
           </div>
         </animated.div>
       )}
