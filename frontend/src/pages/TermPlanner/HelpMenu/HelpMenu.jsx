@@ -10,8 +10,6 @@ import unscheduleGif from "assets/helpGifs/unschedule.gif";
 import unschedulePic from "assets/helpGifs/unschedule.jpg";
 import CS from "../common/styles";
 import S from "./styles";
-import "tippy.js/dist/tippy.css";
-import "tippy.js/themes/light.css";
 
 const { Title } = Typography;
 

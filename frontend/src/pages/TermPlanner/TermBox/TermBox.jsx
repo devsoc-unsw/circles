@@ -9,7 +9,7 @@ import DraggableCourse from "../DraggableCourse";
 import S from "./styles";
 
 const TermBox = ({
-  name, coursesList, termsOffered, isDragging,
+  name, coursesList, termsOffered, dragging,
 }) => {
   const term = name.match(/T[0-3]/)[0];
 
@@ -65,7 +65,7 @@ const TermBox = ({
           offset={isSummerEnabled ? [-13, 13] : [-22, 22]}
         >
           <S.TermBoxWrapper
-            droppable={isOffered && isDragging}
+            droppable={isOffered && dragging}
             summerEnabled={isSummerEnabled}
             isSmall={isSmall}
             ref={provided.innerRef}
@@ -82,14 +82,14 @@ const TermBox = ({
               ),
             )}
             {provided.placeholder}
-            <S.UOCWrapper>
+            <S.UOCBadgeWrapper>
               <Badge
                 style={{ backgroundColor: "#9254de" }}
                 size="small"
                 count={`${totalUOC} UOC`}
                 offset={[0, 0]}
               />
-            </S.UOCWrapper>
+            </S.UOCBadgeWrapper>
           </S.TermBoxWrapper>
         </Badge>
       )}

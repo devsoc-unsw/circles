@@ -53,10 +53,10 @@ const TermCheckboxWrapper = styled.div`
   }
 `;
 
-const UOCWrapper = styled.div`
+const UOCBadgeWrapper = styled.div`
   position: absolute;
   bottom: 0;
   right: 0;
 `;
 
-export default { TermBoxWrapper, TermCheckboxWrapper, UOCWrapper };
+export default { TermBoxWrapper, TermCheckboxWrapper, UOCBadgeWrapper };

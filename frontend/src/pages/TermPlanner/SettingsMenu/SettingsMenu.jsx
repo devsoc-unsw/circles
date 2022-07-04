@@ -7,8 +7,6 @@ import {
 import moment from "moment";
 import { toggleSummer, updateDegreeLength, updateStartYear } from "reducers/plannerSlice";
 import CS from "../common/styles";
-import "tippy.js/dist/tippy.css";
-import "tippy.js/themes/light.css";
 
 const SettingsMenu = () => {
   const { Title } = Typography;

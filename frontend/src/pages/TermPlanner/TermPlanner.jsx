@@ -10,10 +10,11 @@ import {
 import { GridItem } from "./common/styles";
 import HideYearTooltip from "./HideYearTooltip";
 import OptionsHeader from "./OptionsHeader";
+import S from "./styles";
 import TermBox from "./TermBox";
 import UnplannedColumn from "./UnplannedColumn";
 import { prepareCoursesForValidation } from "./utils";
-import "./index.less";
+// Used for tippy stylings
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
 
@@ -71,7 +72,8 @@ const TermPlanner = () => {
 
   const currYear = new Date().getFullYear();
 
-  const plannerPic = useRef();
+  /* Ref used for exporting planner to image */
+  const plannerPicRef = useRef();
 
   const handleOnDragStart = (courseItem) => {
     const course = courseItem.draggableId;
@@ -148,20 +150,20 @@ const TermPlanner = () => {
     <PageTemplate>
       <OptionsHeader
         areYearsHidden={planner.areYearsHidden}
-        plannerRef={plannerPic}
+        plannerRef={plannerPicRef}
         isAllEmpty={isAllEmpty}
       />
-      <div className="mainContainer">
+      <S.ContainerWrapper>
         <DragDropContext
           onDragEnd={(result) => handleOnDragEnd(result)}
           onDragStart={handleOnDragStart}
         >
-          <div className="plannerContainer">
-            <div
-              className={`gridContainer ${planner.isSummerEnabled && "summerGrid"}`}
-              ref={plannerPic}
+          <S.PlannerContainer>
+            <S.PlannerGridWrapper
+              summerEnabled={planner.isSummerEnabled}
+              ref={plannerPicRef}
             >
-              <GridItem />
+              <GridItem /> {/* Empty grid item for the year */}
               {planner.isSummerEnabled && <GridItem>Summer</GridItem>}
               <GridItem>Term 1</GridItem>
               <GridItem>Term 2</GridItem>
@@ -179,24 +181,22 @@ const TermPlanner = () => {
                 if (planner.hidden[iYear]) return null;
                 return (
                   <React.Fragment key={index}>
-                    <Badge
-                      style={{
-                        backgroundColor: "#efdbff",
-                        color: "#000000",
-                      }}
-                      size="small"
-                      count={`${yearUOC} UOC`}
-                      offset={[-46, 40]}
-                    >
-                      <div className="yearContainer gridItem">
-                        <div
-                          className={`year ${currYear === iYear && "currYear"}`}
-                        >
+                    <S.YearGridBox>
+                      <S.YearWrapper>
+                        <S.YearText currYear={currYear === iYear}>
                           {iYear}
-                        </div>
+                        </S.YearText>
                         <HideYearTooltip year={iYear} />
-                      </div>
-                    </Badge>
+                      </S.YearWrapper>
+                      <Badge
+                        style={{
+                          backgroundColor: "#efdbff",
+                          color: "#000000",
+                        }}
+                        size="small"
+                        count={`${yearUOC} UOC`}
+                      />
+                    </S.YearGridBox>
                     {Object.keys(year).map((term) => {
                       const key = iYear + term;
                       if (!planner.isSummerEnabled && term === "T0") return null;
@@ -206,20 +206,18 @@ const TermPlanner = () => {
                           name={key}
                           coursesList={year[term]}
                           termsOffered={termsOffered}
-                          isDragging={isDragging}
+                          dragging={isDragging}
                         />
                       );
                     })}
                   </React.Fragment>
                 );
               })}
-              <UnplannedColumn
-                isDragging={isDragging}
-              />
-            </div>
-          </div>
+              <UnplannedColumn dragging={isDragging} />
+            </S.PlannerGridWrapper>
+          </S.PlannerContainer>
         </DragDropContext>
-      </div>
+      </S.ContainerWrapper>
     </PageTemplate>
   );
 };

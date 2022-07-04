@@ -5,7 +5,7 @@ import useMediaQuery from "hooks/useMediaQuery";
 import DraggableCourse from "../DraggableCourse";
 import S from "./styles";
 
-const UnplannedColumn = ({ isDragging }) => {
+const UnplannedColumn = ({ dragging }) => {
   const { isSummerEnabled, unplanned } = useSelector((state) => state.planner);
   const isSmall = useMediaQuery("(max-width: 1400px)");
 
@@ -18,7 +18,7 @@ const UnplannedColumn = ({ isDragging }) => {
             ref={provided.innerRef}
             {...provided.droppableProps}
             summerEnabled={isSummerEnabled}
-            droppable={isDragging}
+            droppable={dragging}
             isSmall={isSmall}
           >
             {unplanned.map((course, courseIndex) => (

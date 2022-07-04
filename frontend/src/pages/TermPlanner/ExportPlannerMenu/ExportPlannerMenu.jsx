@@ -10,8 +10,6 @@ import {
 } from "antd";
 import CS from "../common/styles";
 import S from "./styles";
-import "tippy.js/dist/tippy.css";
-import "tippy.js/themes/light.css";
 
 const ExportPlannerMenu = ({ plannerRef }) => {
   const { Title } = Typography;

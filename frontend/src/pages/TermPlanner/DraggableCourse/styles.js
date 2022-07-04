@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { shake } from "../common/styles";
 
 const CourseWrapper = styled.li`
   user-select: none;
@@ -40,7 +41,7 @@ const CourseWrapper = styled.li`
     background-color: #eee;
 
     &:hover {
-      animation: shake 0.25s;
+      animation: ${shake} 0.25s;
       transform: none;
       cursor: not-allowed;
     }

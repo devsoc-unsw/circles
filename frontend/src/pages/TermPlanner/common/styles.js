@@ -1,5 +1,5 @@
 import { Divider } from "antd";
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 
 export const GridItem = styled.div`
   font-size: var(--tp-grid-item-font-size);
@@ -9,6 +9,28 @@ export const GridItem = styled.div`
 export const Droppable = css`
   background-color: #e8fef2;
   border-color: #e8fef2;
+`;
+
+export const shake = keyframes`
+  0% {
+    transform: rotate(1deg);
+  }
+
+  25% {
+    transform: rotate(-1deg);
+  }
+
+  50% {
+    transform: rotate(0deg);
+  }
+
+  75% {
+    transform: rotate(1deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
 `;
 
 const MenuPopup = styled.div`

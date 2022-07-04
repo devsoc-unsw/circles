@@ -12,8 +12,6 @@ import ExportPlannerMenu from "../ExportPlannerMenu";
 import HelpMenu from "../HelpMenu/HelpMenu";
 import SettingsMenu from "../SettingsMenu";
 import S from "./styles";
-import "tippy.js/dist/tippy.css";
-import "tippy.js/themes/light.css";
 
 const OptionsHeader = ({ plannerRef, isAllEmpty }) => {
   const { theme } = useSelector((state) => state.settings);
