@@ -11,9 +11,10 @@ import { toggleShowMarks, toggleShowWarnings } from "reducers/settingsSlice";
 import ExportPlannerMenu from "../ExportPlannerMenu";
 import HelpMenu from "../HelpMenu/HelpMenu";
 import SettingsMenu from "../SettingsMenu";
+import { isPlannerEmpty } from "../utils";
 import S from "./styles";
 
-const OptionsHeader = ({ plannerRef, isAllEmpty }) => {
+const OptionsHeader = ({ plannerRef }) => {
   const { theme } = useSelector((state) => state.settings);
   const { areYearsHidden, years } = useSelector((state) => state.planner);
   const { showMarks, showWarnings } = useSelector((state) => state.settings);
@@ -61,7 +62,7 @@ const OptionsHeader = ({ plannerRef, isAllEmpty }) => {
           </div>
         </Tippy>
 
-        {!isAllEmpty(years) && (
+        {!isPlannerEmpty(years) && (
           <Tooltip title="Unplan all courses">
             <Popconfirm
               placement="bottomRight"

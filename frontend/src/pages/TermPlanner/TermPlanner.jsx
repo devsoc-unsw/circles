@@ -13,16 +13,10 @@ import OptionsHeader from "./OptionsHeader";
 import S from "./styles";
 import TermBox from "./TermBox";
 import UnplannedColumn from "./UnplannedColumn";
-import { prepareCoursesForValidation } from "./utils";
+import { isPlannerEmpty, prepareCoursesForValidation } from "./utils";
 // Used for tippy stylings
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
-
-// checks if no courses have been planned (to display help notification
-// & determine if unschedule all button available)
-const isAllEmpty = (years) => (
-  years.every((year) => Object.keys(year).every((key) => year[key].length === 0))
-);
 
 const openNotification = () => {
   const args = {
@@ -64,7 +58,7 @@ const TermPlanner = () => {
   };
 
   useEffect(() => {
-    if (isAllEmpty(planner.years)) openNotification();
+    if (isPlannerEmpty(planner.years)) openNotification();
     validateTermPlanner();
   }, [
     degree, planner.years, planner.startYear, marksRef.current, showWarnings,
@@ -151,7 +145,6 @@ const TermPlanner = () => {
       <OptionsHeader
         areYearsHidden={planner.areYearsHidden}
         plannerRef={plannerPicRef}
-        isAllEmpty={isAllEmpty}
       />
       <S.ContainerWrapper>
         <DragDropContext
