@@ -10,7 +10,7 @@ const DegreeCard = ({ type, concentration }) => {
   const { Title, Text } = Typography;
   const progress = Math.round((concentration.completed_UOC / concentration.total_UOC) * 100);
 
-  const theme = useSelector((state) => state.theme);
+  const { theme } = useSelector((state) => state.settings);
 
   return (
     <Link to={concentration.name} smooth duration={1000}>

@@ -9,7 +9,7 @@ import coursesReducer from "reducers/coursesSlice";
 import courseTabsReducer from "reducers/courseTabsSlice";
 import degreeReducer from "reducers/degreeSlice";
 import plannerReducer from "reducers/plannerSlice";
-import themeReducer from "reducers/themeSlice";
+import settingsReducer from "reducers/settingsSlice";
 import { REDUX_PERSIST_VERSION } from "./constants";
 
 const rootReducer = combineReducers({
@@ -17,7 +17,7 @@ const rootReducer = combineReducers({
   courseTabs: courseTabsReducer,
   courses: coursesReducer,
   planner: plannerReducer,
-  theme: themeReducer,
+  settings: settingsReducer,
 });
 
 /**
@@ -52,7 +52,7 @@ const persistConfig = {
   key: "root",
   version: REDUX_PERSIST_VERSION,
   storage,
-  whitelist: ["degree", "courses", "planner", "theme"],
+  whitelist: ["degree", "courses", "planner"],
   migrate: createMigrate(migrations, { debug: true }),
 
 };
