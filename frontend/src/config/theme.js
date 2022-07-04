@@ -34,7 +34,9 @@ export const lightTheme = {
   ...lightBaseColors,
   body: "#ffffff",
   text: "#323739",
-  plannerCartCardHover: "#f4f4f4",
+  plannerCartCard: {
+    backgroundColorHover: "#f4f4f4",
+  },
   plannerCartMenu: {
     backgroundColor: "#ffffff",
   },
@@ -48,7 +50,9 @@ export const darkTheme = {
   ...darkBaseColors,
   body: "#1d1f20",
   text: "#f1f1f1",
-  plannerCartCardHover: "#292a2b",
+  plannerCartCard: {
+    backgroundColorHover: "#292a2b",
+  },
   plannerCartMenu: {
     backgroundColor: "#434343",
   },

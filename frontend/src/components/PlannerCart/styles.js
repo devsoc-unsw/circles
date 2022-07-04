@@ -44,7 +44,7 @@ const PlannerCartCard = styled.div`
   border-radius: 10px;
 
   &:hover {
-    background-color: ${(props) => (props.theme.plannerCartCardHover)};
+    background-color: ${(props) => (props.theme.plannerCartCard.backgroundColorHover)};
   }
 `;
 
