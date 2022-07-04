@@ -2248,26 +2248,6 @@
                     "notes": "Students must take at least 12 UOC of the following courses."
                 },
                 {
-                    "type": "other",
-                    "courses": {
-                        "": "any course"
-                    },
-                    "title": "Free Elective",
-                    "credits_to_complete": 6,
-                    "levels": [
-                        1,
-                        2,
-                        3,
-                        4,
-                        5,
-                        6,
-                        7,
-                        8,
-                        9
-                    ],
-                    "notes": "Students must take at least 6 UOC of the following courses."
-                },
-                {
                     "type": "core_courses",
                     "courses": {
                         "ARCH1201": "Architectural Design Studio 3",
@@ -4309,26 +4289,6 @@
                         3
                     ],
                     "notes": "Students must take 12 UOC of the following courses."
-                },
-                {
-                    "type": "other",
-                    "courses": {
-                        "": "any course"
-                    },
-                    "title": "Free electives",
-                    "credits_to_complete": 36,
-                    "levels": [
-                        1,
-                        2,
-                        3,
-                        4,
-                        5,
-                        6,
-                        7,
-                        8,
-                        9
-                    ],
-                    "notes": "Students completing the program in stand-alone mode who are not completing a complementary major, are required to take an additional 36 UOC of free electives."
                 }
             ],
             "spec_data": {
@@ -16773,50 +16733,6 @@
                     "notes": "Students must take 12 UOC outside of the UNSW Business School, excepting any courses listed under 'Excluded General Education Courses'."
                 },
                 {
-                    "type": "other",
-                    "courses": {
-                        "": "any course",
-                        "ACCTA1": "Accounting",
-                        "ACCTA2": "Accounting",
-                        "ACTLE1": "Actuarial Risk Management and Analytics",
-                        "COMMJ1": "Business Analytics",
-                        "COMMJ2": "Business Analytics",
-                        "ECONF1": "Business Economics",
-                        "ECONF2": "Business Economics",
-                        "ECONJ1": "Financial Economics",
-                        "FINSA1": "Finance",
-                        "FINSA2": "Finance",
-                        "FINSR1": "Financial Technology",
-                        "FINSR2": "Financial Technology",
-                        "IBUSA1": "International Business",
-                        "IBUSA2": "International Business",
-                        "INFSA1": "Information Systems",
-                        "INFSA2": "Information Systems",
-                        "MARKA1": "Marketing",
-                        "MATHE1": "Quantitative Data Science",
-                        "MATHM1": "Mathematics",
-                        "MATHT1": "Statistics",
-                        "MGMTA2": "Management",
-                        "MGMTH1": "Human Resource Management",
-                        "MGMTH2": "Human Resource Management",
-                        "TABLC1": "Taxation"
-                    },
-                    "title": "Free electives",
-                    "credits_to_complete": 24,
-                    "levels": [
-                        1,
-                        2,
-                        3,
-                        4,
-                        5,
-                        6,
-                        7,
-                        8,
-                        9
-                    ],
-                    "notes": "Students must take at least 24 UOC of the following courses."
-                },
-                {
                     "type": "limit_rule",
                     "courses": {
                         "....": "any UNSW Business School CDEV2000 - Creating Your Career: Employability for the Future CDEV3000 - Practice of Work CDEV3001 - WIL Experience Term GENL2021 - Introduction to the Australian Legal System GENL2032 - Cyberspace Law 2.0 course"
@@ -16908,7 +16824,49 @@
                     ],
                     "notes": "Students must take 60 UOC of the following courses.\nStudents may replace ACTL2131 with the two courses MATH2901 Higher Theory of Statistics and MATH2931 Higher Linear Models. If students make this replacement, MATH2901 will count towards ACTL2131, and MATH2931 will be counted towards a major where this course is required or as an Business elective.\nIndustrial Training Experience: Students complete industrial training experience courses within the area of their Co-op scholarship."
                 }
-            ]
+            ],
+            "spec_data": {
+                "majors": {
+                    "Actuarial Studies (Co op)": {
+                        "is_optional": false,
+                        "specs": {
+                            "ACTLE1": "Actuarial Risk Management and Analytics",
+                            "IBUSA1": "International Business",
+                            "COMMJ1": "Business Analytics",
+                            "FINSR1": "Financial Technology",
+                            "MATHE1": "Quantitative Data Science",
+                            "MARKA1": "Marketing",
+                            "ECONJ1": "Financial Economics",
+                            "MATHT1": "Statistics",
+                            "TABLC1": "Taxation",
+                            "MATHM1": "Mathematics",
+                            "INFSA1": "Information Systems",
+                            "ECONF1": "Business Economics",
+                            "ACCTA1": "Accounting",
+                            "FINSA1": "Finance",
+                            "MGMTH1": "Human Resource Management"
+                        },
+                        "notes": "Students may use their free electives to complete an optional business major/minor. A maximum of one major or minor can be chosen from the list below.\nA Major in UNSW Business School is a sequence of at least 48 UOC in a single discipline or area of study.\nA Major in the School of Mathematics and Statistics comprises of at least 60 UOC. For the purposes of completing a Major in the School of Mathematics and Statistics, Students may treat: - MATH1151 as equivalent to MATH1141 - MATH1251 as equivalent to MATH1241"
+                    }
+                },
+                "minors": {
+                    "Actuarial Studies (Co op)": {
+                        "is_optional": true,
+                        "specs": {
+                            "INFSA2": "Information Systems",
+                            "FINSR2": "Financial Technology",
+                            "ECONF2": "Business Economics",
+                            "MGMTH2": "Human Resource Management",
+                            "FINSA2": "Finance",
+                            "COMMJ2": "Business Analytics",
+                            "IBUSA2": "International Business",
+                            "ACCTA2": "Accounting",
+                            "MGMTA2": "Management"
+                        },
+                        "notes": "Students may use their free electives to complete an optional business major/minor. A maximum of one major or minor can be chosen from the list below.\nA Major in UNSW Business School is a sequence of at least 48 UOC in a single discipline or area of study.\nA Major in the School of Mathematics and Statistics comprises of at least 60 UOC. For the purposes of completing a Major in the School of Mathematics and Statistics, Students may treat: - MATH1151 as equivalent to MATH1141 - MATH1251 as equivalent to MATH1241"
+                    }
+                }
+            }
         },
         "processing_warnings": [
             "Couldn't find the number of credits for item in program Actuarial Studies (Co op) (3587) in section titled 'Excluded General Education Courses'"
@@ -31927,14 +31885,6 @@
                         3
                     ],
                     "notes": "Students must take 24 UOC of the following designated CDF courses which will count towards one, or both, Arts majors."
-                },
-                {
-                    "type": "other",
-                    "courses": {},
-                    "title": "Free electives",
-                    "credits_to_complete": 24,
-                    "levels": [],
-                    "notes": "Students can take up to a maximum of 24 UOC of the following courses."
                 }
             ],
             "spec_data": {
@@ -31954,9 +31904,7 @@
                 }
             }
         },
-        "processing_warnings": [
-            "Can't figure out what abbreviated code(s) are for UNSW Canberra at ADFA in program Arts (CDF) (4461) in section titled 'Free electives'"
-        ]
+        "processing_warnings": []
     },
     "4462": {
         "title": "Business (CDF)",
@@ -42230,26 +42178,6 @@
                         3
                     ],
                     "notes": "Students must take 48 UOC of the following courses."
-                },
-                {
-                    "type": "other",
-                    "courses": {
-                        "": "any course"
-                    },
-                    "title": "Free electives",
-                    "credits_to_complete": 36,
-                    "levels": [
-                        1,
-                        2,
-                        3,
-                        4,
-                        5,
-                        6,
-                        7,
-                        8,
-                        9
-                    ],
-                    "notes": "Students must take at least 36 UOC of the following courses."
                 }
             ]
         },
