@@ -33,6 +33,17 @@ const openNotification = () => {
   notification.info(args);
 };
 
+const outOfBoundsMultitermNotification = (course) => {
+  const args = {
+    message: `${course} would extend below the term planner`,
+    description: `Keep ${course} inside the calendar by moving it to an earlier term instead`,
+    duration: 3,
+    className: "text helpNotif",
+    placement: "bottomRight",
+  };
+  notification.info(args);
+};
+
 const TermPlanner = () => {
   const { showWarnings } = useSelector((state) => state.settings);
   const [termsOffered, setTermsOffered] = useState([]);
@@ -83,22 +94,23 @@ const TermPlanner = () => {
     setIsDragging(false);
 
     const { destination, source, draggableId: draggableIdUnique } = result;
+    // draggableIdUnique contains course code + term (e.g. COMP151120T1)
+    // draggableId only contains the course code (e.g. COMP1511)
     const draggableId = draggableIdUnique.slice(0, 8);
 
     if (!destination) return; // drag outside container
 
     if (destination.droppableId !== "unplanned") {
-      if (checkIsMultiterm(draggableId, planner.courses)) {
-        // check if multiterm course extends below bottom row of term planner
-        if (!checkMultitermInBounds({
-          destRow: destination.droppableId.match(/[0-9]{4}/)[0] - planner.startYear,
-          destTerm: destination.droppableId.match(/T[0-3]/)[0],
-          course: planner.courses[draggableId],
-          isSummerTerm: planner.isSummerEnabled,
-          numYears: planner.numYears,
-        })) {
-          return;
-        }
+      // Check if multiterm course extends below bottom row of term planner
+      if (checkIsMultiterm(draggableId, planner.courses) && !checkMultitermInBounds({
+        destRow: destination.droppableId.match(/[0-9]{4}/)[0] - planner.startYear,
+        destTerm: destination.droppableId.match(/T[0-3]/)[0],
+        course: planner.courses[draggableId],
+        isSummerTerm: planner.isSummerEnabled,
+        numYears: planner.numYears,
+      })) {
+        outOfBoundsMultitermNotification(draggableId);
+        return;
       }
 
       // === moving course to unplanned doesn't require term logic ===

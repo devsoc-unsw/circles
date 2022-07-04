@@ -174,8 +174,6 @@ const plannerSlice = createSlice({
     },
     // TODO NOTE: think about if you would want to call the backend first to fetch dependant courses
     removeCourse: (state, action) => {
-      // eslint-disable-next-line no-debugger
-      debugger;
       // Remove courses from years and courses
       if (state.courses[action.payload]) {
         const { plannedFor } = state.courses[action.payload];
