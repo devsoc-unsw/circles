@@ -8,11 +8,12 @@ import DraggableCourse from "../DraggableCourse";
 import "./index.less";
 
 const TermBox = ({
-  name, coursesList, termsOffered, isDragging, showMarks,
+  name, coursesList, termsOffered, isDragging,
 }) => {
   const term = name.match(/T[0-3]/)[0];
 
   const { isSummerEnabled, completedTerms, courses } = useSelector((state) => state.planner);
+  const { showMarks } = useSelector((state) => state.settings);
   const [totalUOC, setTotalUOC] = useState(0);
   const dispatch = useDispatch();
   const handleCompleteTerm = () => {

@@ -14,7 +14,7 @@ const DegreeCard = ({ concentration }) => {
 
   const progress = Math.round((completedUOC / UOC) * 100);
 
-  const theme = useSelector((state) => state.theme);
+  const { theme } = useSelector((state) => state.settings);
 
   return (
     <Link to={name} smooth duration={1000}>
