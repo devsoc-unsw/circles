@@ -17,7 +17,7 @@ const HeaderWrapper = styled.div`
 const HelpGif = styled.img`
   width: 100%;
   image-rendering: auto;
-  border-radius: 10px;
+  border-radius: 5px;
   transition: box-shadow 0.3s ease;
 
   &:hover {
