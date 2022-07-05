@@ -13,7 +13,12 @@ import OptionsHeader from "./OptionsHeader";
 import S from "./styles";
 import TermBox from "./TermBox";
 import UnplannedColumn from "./UnplannedColumn";
-import { checkIsMultiterm, checkMultitermInBounds, prepareCoursesForValidation } from "./utils";
+import {
+  checkIsMultiterm,
+  checkMultitermInBounds,
+  isPlannerEmpty,
+  prepareCoursesForValidation,
+} from "./utils";
 // Used for tippy stylings
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
