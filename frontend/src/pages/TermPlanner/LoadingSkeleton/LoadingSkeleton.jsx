@@ -1,6 +1,8 @@
 import React from "react";
 import { Skeleton } from "antd";
+import { GridItem } from "../common/styles";
 
+// TODO: Is this still being used?
 const LoadingSkeleton = () => {
   const skeletonTermStyle = {
     width: "20em",
@@ -13,29 +15,12 @@ const LoadingSkeleton = () => {
   return (
     <div className="plannerContainer">
       <div className="gridContainer">
-        <div className="gridItem" />
-        <div className="gridItem">Term 1</div>
-        <div className="gridItem">Term 2</div>
-        <div className="gridItem">Term 3</div>
+        <GridItem />
+        <GridItem>Term 1</GridItem>
+        <GridItem>Term 2</GridItem>
+        <GridItem>Term 3</GridItem>
 
-        <div className="gridItem" />
-        <Skeleton.Button
-          active
-          shape="round"
-          style={skeletonTermStyle}
-        />
-        <Skeleton.Button
-          active
-          shape="round"
-          style={skeletonTermStyle}
-        />
-        <Skeleton.Button
-          active
-          shape="round"
-          style={skeletonTermStyle}
-        />
-
-        <div className="gridItem" />
+        <GridItem />
         <Skeleton.Button
           active
           shape="round"
@@ -52,7 +37,24 @@ const LoadingSkeleton = () => {
           style={skeletonTermStyle}
         />
 
-        <div className="gridItem" />
+        <GridItem />
+        <Skeleton.Button
+          active
+          shape="round"
+          style={skeletonTermStyle}
+        />
+        <Skeleton.Button
+          active
+          shape="round"
+          style={skeletonTermStyle}
+        />
+        <Skeleton.Button
+          active
+          shape="round"
+          style={skeletonTermStyle}
+        />
+
+        <GridItem />
         <Skeleton.Button
           active
           shape="round"
