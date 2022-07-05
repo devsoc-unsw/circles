@@ -1,64 +1,62 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Typography } from "antd";
+import { Button } from "antd";
 import circlesLogo from "assets/circlesLogo.svg";
 import PageTemplate from "components/PageTemplate";
-import "./index.less";
+import S from "./syles";
 
-const { Title } = Typography;
-const PageNotFound = () => {
+const Page404 = () => {
   const navigate = useNavigate();
 
   return (
     <PageTemplate>
-      <div className="main-con">
-        <div className="grid-circle">
-          <div className="box">
+      <S.PageWrapper>
+        <S.GridCircleWrapper>
+          <S.LogoBox>
             <img alt="circles-logo" src={circlesLogo} width="200" height="200" />
-          </div>
-          <div className="box-anti">
+          </S.LogoBox>
+          <S.LogoBox alt>
             <img alt="circles-logo" src={circlesLogo} width="200" height="200" />
-          </div>
-          <div className="box">
+          </S.LogoBox>
+          <S.LogoBox>
             <img alt="circles-logo" src={circlesLogo} width="200" height="200" />
-          </div>
-          <div className="box-anti">
+          </S.LogoBox>
+          <S.LogoBox alt>
             <img alt="circles-logo" src={circlesLogo} width="200" height="200" />
-          </div>
-          <div className="box-anti">
+          </S.LogoBox>
+          <S.LogoBox alt>
             <img alt="circles-logo" src={circlesLogo} width="200" height="200" />
-          </div>
-          <div className="box">
+          </S.LogoBox>
+          <S.LogoBox>
             <img alt="circles-logo" src={circlesLogo} width="200" height="200" />
-          </div>
-          <div className="box-anti">
+          </S.LogoBox>
+          <S.LogoBox alt>
             <img alt="circles-logo" src={circlesLogo} width="200" height="200" />
-          </div>
-          <div className="box">
+          </S.LogoBox>
+          <S.LogoBox>
             <img alt="circles-logo" src={circlesLogo} width="200" height="200" />
-          </div>
-          <div className="box-anti">
+          </S.LogoBox>
+          <S.LogoBox alt>
             <img alt="circles-logo" src={circlesLogo} width="200" height="200" />
-          </div>
-          <div className="box">
+          </S.LogoBox>
+          <S.LogoBox>
             <img alt="circles-logo" src={circlesLogo} width="200" height="200" />
-          </div>
-          <div className="box-anti">
+          </S.LogoBox>
+          <S.LogoBox alt>
             <img alt="circles-logo" src={circlesLogo} width="200" height="200" />
-          </div>
-          <div className="box">
+          </S.LogoBox>
+          <S.LogoBox>
             <img alt="circles-logo" src={circlesLogo} width="200" height="200" />
-          </div>
-        </div>
-        <div className="box-container" />
-      </div>
-      <div className="text404">
-        <Title className="not-found">404</Title>
-        <Title level={2} className="page-text">PAGE NOT FOUND</Title>
+          </S.LogoBox>
+        </S.GridCircleWrapper>
+      </S.PageWrapper>
+      <S.TextWrapper>
+        <S.Title404>404</S.Title404>
+        <S.Text404>PAGE NOT FOUND</S.Text404>
         <Button type="primary" size="large" onClick={() => navigate("/course-selector")}>Go Back Home</Button>
-      </div>
+      </S.TextWrapper>
     </PageTemplate>
   );
 };
 
-export default PageNotFound;
+export default Page404;
