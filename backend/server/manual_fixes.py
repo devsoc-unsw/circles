@@ -26,7 +26,9 @@ def fix_3785(structure: dict):
     remove_course(structure, "ENGG1811")
     remove_course(structure, "MATH1081")
     mutated_item = remove_course(structure, "COMP4920")
-    mutated_item["Core Courses"]["UOC"] -= 12
+    if mutated_item:
+        core_name = filter(lambda a: "core" in a.lower(), mutated_item.keys()).next()
+        mutated_item[core_name]["UOC"] -= 12
     return structure
 
 def apply_manual_fixes(structure, program_code):
