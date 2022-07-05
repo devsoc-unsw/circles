@@ -8,9 +8,9 @@ const Tag = styled(antdTag)`
     background: ${theme.courseTag.backgroundColor};
   `}
 
-  :hover {
+  /* :hover {
     cursor: pointer;
-  }
+  } */
 `;
 
 export default { Tag };

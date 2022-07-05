@@ -11,7 +11,7 @@ import S from "./styles";
 
 const { Text } = Typography;
 
-const CartCourseCard = ({ code, title, showAlert }) => {
+const PlannerCartCourseCard = ({ code, title, showAlert }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -30,14 +30,14 @@ const CartCourseCard = ({ code, title, showAlert }) => {
   };
 
   return (
-    <S.PlannerCartCard>
+    <S.CourseCardWrapper>
       <div role="menuitem" onClick={handleCourseLink} style={{ cursor: "pointer" }}>
         <Text className="text" strong>
           {code}:{" "}
         </Text>
         <Text className="text">{title}</Text>
       </div>
-      <div className="planner-cart-card-actions">
+      <div>
         <Popconfirm
           placement="bottomRight"
           title="Remove this course from your planner?"
@@ -57,8 +57,8 @@ const CartCourseCard = ({ code, title, showAlert }) => {
           </Tooltip>
         </Popconfirm>
       </div>
-    </S.PlannerCartCard>
+    </S.CourseCardWrapper>
   );
 };
 
-export default CartCourseCard;
+export default PlannerCartCourseCard;
