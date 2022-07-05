@@ -1,3 +1,6 @@
+from contextlib import suppress
+
+
 def remove_course(structure: dict, course: str) -> bool:
     """indescriminantly remove a course from structure"""
     for item, collection in structure.items():
@@ -15,10 +18,11 @@ def remove_course(structure: dict, course: str) -> bool:
 def fix_3784(structure: dict):
     mutated_item = remove_course(structure, "ECON1202")
     if mutated_item:
-        core_name = next(filter(lambda a: "core" in a.lower(), mutated_item.keys()))
-        elective_name = next(filter(lambda a: "prescribed" in a.lower(), mutated_item.keys()))
-        mutated_item[core_name]["UOC"] -= 6
-        mutated_item[elective_name]["UOC"] += 6
+        with suppress(StopIteration):
+            core_name = next(filter(lambda a: "core" in a.lower(), mutated_item.keys()))
+            mutated_item[core_name]["UOC"] -= 6
+            elective_name = next(filter(lambda a: "prescribed" in a.lower(), mutated_item.keys()))
+            mutated_item[elective_name]["UOC"] += 6
     return structure
 
 def fix_3785(structure: dict):
@@ -27,8 +31,9 @@ def fix_3785(structure: dict):
     remove_course(structure, "MATH1081")
     mutated_item = remove_course(structure, "COMP4920")
     if mutated_item:
-        core_name = next(filter(lambda a: "core" in a.lower(), mutated_item.keys()))
-        mutated_item[core_name]["UOC"] -= 12
+        with suppress(StopIteration):
+            core_name = next(filter(lambda a: "core" in a.lower(), mutated_item.keys()))
+            mutated_item[core_name]["UOC"] -= 12
     return structure
 
 def apply_manual_fixes(structure, program_code):

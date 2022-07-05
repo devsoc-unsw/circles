@@ -29,7 +29,7 @@ def major_minor_for_program(draw: DrawFn):
     spec2 = draw(strat)
     while spec1 in fake_specs:
         spec1 = draw(strat)
-    while spec2 in fake_specs or spec2 == spec1:
+    while spec2 in fake_specs:
         spec2 = draw(strat)
     return (program, spec1, spec2)
 
@@ -42,8 +42,11 @@ def test_all_programs_fetched(program):
     structure.json()["structure"]["General"] != {}
 
 @given(major_minor_for_program())
-@settings(deadline=1000, suppress_health_check=[HealthCheck.large_base_example])
+@settings(deadline=1000)
 def test_all_specs_fetched(specifics):
+    # this is stupid
+    if specifics[1] == specifics[2]:
+        return
     structure = requests.get(
         f"http://127.0.0.1:8000/programs/getStructure/{specifics[0]}/{specifics[1]}+{specifics[2]}"
     )
