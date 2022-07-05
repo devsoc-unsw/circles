@@ -35,8 +35,8 @@ const openNotification = () => {
 
 const outOfBoundsMultitermNotification = (course) => {
   const args = {
-    message: `${course} would extend below the term planner`,
-    description: `Keep ${course} inside the calendar by moving it to an earlier term instead`,
+    message: `${course} would extend outside of the term planner`,
+    description: `Keep ${course} inside the calendar by moving it to a different term instead`,
     duration: 3,
     className: "text helpNotif",
     placement: "bottomRight",
@@ -105,6 +105,7 @@ const TermPlanner = () => {
       if (checkIsMultiterm(draggableId, planner.courses) && !checkMultitermInBounds({
         destRow: destination.droppableId.match(/[0-9]{4}/)[0] - planner.startYear,
         destTerm: destination.droppableId.match(/T[0-3]/)[0],
+        srcTerm: source.droppableId,
         course: planner.courses[draggableId],
         isSummerTerm: planner.isSummerEnabled,
         numYears: planner.numYears,
@@ -118,7 +119,8 @@ const TermPlanner = () => {
         dispatch(
           moveCourse({
             course: draggableId,
-            term: destination.droppableId,
+            destTerm: destination.droppableId,
+            srcTerm: source.droppableId,
           }),
         );
       }

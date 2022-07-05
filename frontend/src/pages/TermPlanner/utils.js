@@ -96,7 +96,8 @@ const getNumTerms = (uoc) => {
   return MIN_COMPLETED_COURSE_UOC / num1;
 };
 
-const getTermsList = (currentTerm, uoc, availableTerms, summerTerm) => {
+// Returns a list of terms and rowOffsets that multiterm course will be added to
+const getTermsList = (currentTerm, uoc, availableTerms, summerTerm, instanceNum) => {
   const allTerms = ["T1", "T2", "T3"];
   const termsList = [];
 
@@ -109,7 +110,24 @@ const getTermsList = (currentTerm, uoc, availableTerms, summerTerm) => {
   let rowOffset = 0;
   const numTerms = getNumTerms(uoc);
 
-  for (let i = 0; i < numTerms; i++) {
+  for (let i = 0; i < instanceNum; i++) {
+    if (index <= 0) {
+      index = terms.length - 1;
+      rowOffset -= 1;
+    }
+
+    termsList.unshift({
+      term: terms[(index + terms.length - 1) % 3],
+      rowOffset,
+    });
+
+    index -= 1;
+  }
+
+  rowOffset = 0;
+  index = terms.indexOf(currentTerm);
+
+  for (let i = instanceNum; i < numTerms; i++) {
     if (index === terms.length) {
       index = 0;
       rowOffset += 1;
@@ -134,18 +152,22 @@ const getCurrentTermId = (originalTermId, term, yearOffset) => {
 // Checks whether multiterm course will extend below bottom row of term planner
 const checkMultitermInBounds = (payload) => {
   const {
-    destTerm, course, isSummerTerm, destRow, numYears,
+    destTerm, course, isSummerTerm, destRow, numYears, srcTerm,
   } = payload;
 
-  const { UOC: uoc, termsOffered } = course;
+  const { UOC: uoc, termsOffered, plannedFor } = course;
 
   if (!termsOffered.includes(destTerm)) {
     return false;
   }
 
-  const termsList = getTermsList(destTerm, uoc, termsOffered, isSummerTerm);
-  const { rowOffset } = termsList[termsList.length - 1];
-  return rowOffset < numYears - destRow;
+  const instanceNum = srcTerm === "unplanned" ? 0 : plannedFor.split(" ").indexOf(srcTerm);
+  const termsList = getTermsList(destTerm, uoc, termsOffered, isSummerTerm, instanceNum);
+
+  const { rowOffset: maxRowOffset } = termsList[termsList.length - 1];
+  const { rowOffset: minRowOffset } = termsList[0];
+
+  return (maxRowOffset < numYears - destRow) && (minRowOffset + destRow >= 0);
 };
 
 // Checks whether a course is a multiterm course

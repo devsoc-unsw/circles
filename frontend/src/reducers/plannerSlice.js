@@ -82,7 +82,7 @@ const plannerSlice = createSlice({
 
       if (state.courses[course].isMultiterm) {
         const { UOC: uoc, termsOffered } = state.courses[course];
-        const termsList = getTermsList(destTerm, uoc, termsOffered, state.isSummerEnabled);
+        const termsList = getTermsList(destTerm, uoc, termsOffered, state.isSummerEnabled, 0);
 
         // Add course multiple times
         termsList.forEach((termRow) => {
@@ -99,7 +99,11 @@ const plannerSlice = createSlice({
         srcRow, srcTerm, srcIndex, destRow, destTerm, destIndex, course,
       } = action.payload;
 
-      const { UOC: uoc, termsOffered, isMultiterm } = state.courses[course];
+      const {
+        UOC: uoc, termsOffered, isMultiterm,
+      } = state.courses[course];
+
+      const srcTermList = [];
 
       // If only changing index of multiterm course, don't touch other course instances
       if (isMultiterm && srcRow === destRow && srcTerm === destTerm) {
@@ -117,12 +121,21 @@ const plannerSlice = createSlice({
           const courseIndex = targetTerm.indexOf(course);
           if (courseIndex !== -1) {
             targetTerm.splice(courseIndex, 1);
+            srcTermList.push(term);
           }
         });
       }
 
       // Add new instances of the course into the planner
-      const newTerms = getTermsList(destTerm, uoc, termsOffered, state.isSummerEnabled).splice(1);
+      const instanceNum = srcTermList.indexOf(srcTerm);
+      const newTerms = getTermsList(
+        destTerm,
+        uoc,
+        termsOffered,
+        state.isSummerEnabled,
+        instanceNum,
+      );
+      newTerms.splice(instanceNum, 1);
       const firstTerm = state.years[destRow][destTerm];
       firstTerm.splice(destIndex, 0, course);
 
@@ -133,15 +146,22 @@ const plannerSlice = createSlice({
       });
     },
     moveCourse: (state, action) => {
-      const { course, term } = action.payload;
+      const { course, destTerm, srcTerm } = action.payload;
 
       // If about to move multiterm course out of bounds, do nothing
       if (state.courses[course].isMultiterm) {
-        const year = parseInt(term.slice(0, 4), 10);
-        const startTerm = term.slice(4);
-        const { UOC: uoc, termsOffered } = state.courses[course];
+        const year = parseInt(destTerm.slice(0, 4), 10);
+        const startTerm = destTerm.slice(4);
+        const { UOC: uoc, termsOffered, plannedFor } = state.courses[course];
+        const instanceNum = plannedFor ? plannedFor.split(" ").indexOf(srcTerm) : 0;
 
-        const terms = getTermsList(startTerm, uoc, termsOffered, state.isSummerEnabled);
+        const terms = getTermsList(
+          startTerm,
+          uoc,
+          termsOffered,
+          state.isSummerEnabled,
+          instanceNum,
+        );
         const maxRowOffset = terms[terms.length - 1].rowOffset;
         if (year + maxRowOffset > state.startYear + state.numYears) {
           return;
@@ -149,20 +169,30 @@ const plannerSlice = createSlice({
       }
 
       if (state.courses[course]) {
-        state.courses[course].plannedFor = term;
+        const newPlannedFor = [destTerm];
 
         // Moving a single course moves every instance of it.
         if (state.courses[course].isMultiterm) {
-          const { UOC: uoc, termsOffered } = state.courses[course];
-          const startTerm = term.slice(4);
-          const terms = getTermsList(startTerm, uoc, termsOffered, state.isSummerEnabled).splice(1);
+          const { UOC: uoc, termsOffered, plannedFor } = state.courses[course];
+          const startTerm = destTerm.slice(4);
+          const instanceNum = plannedFor ? plannedFor.split(" ").indexOf(srcTerm) : 0;
+          const terms = getTermsList(
+            startTerm,
+            uoc,
+            termsOffered,
+            state.isSummerEnabled,
+            instanceNum,
+          );
+          terms.splice(instanceNum, 1);
 
           terms.forEach((termRow) => {
             const { term: currentTerm, rowOffset } = termRow;
-            const termId = getCurrentTermId(term, currentTerm, rowOffset);
-            state.courses[course].plannedFor += ` ${termId}`;
+            const termId = getCurrentTermId(destTerm, currentTerm, rowOffset);
+            newPlannedFor.push(termId);
           });
         }
+        newPlannedFor.sort();
+        state.courses[course].plannedFor = newPlannedFor.join(" ");
       }
     },
     updateCourseMark: (state, action) => {
