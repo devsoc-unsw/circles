@@ -1,19 +1,18 @@
-.unplannedContainer {
+import styled, { css } from "styled-components";
+import { Droppable, GridItem } from "../common/styles";
+
+const UnplannedContainer = styled.div`
   grid-row-start: 1;
   grid-row-end: span 10;
-  grid-column-start: 5;
+  grid-column-start: ${({ summerEnabled }) => (summerEnabled ? 6 : 5)};
   display: flex;
   flex-direction: column;
   place-self: stretch;
   min-width: 18em;
   align-items: center;
-}
+`;
 
-.summerUnplannedContainer {
-  grid-column-start: 6;
-}
-
-.unplannedTitle {
+const UnplannedTitle = styled(GridItem)`
   position: absolute;
   font-weight: 500;
   // sum of heights from the top of the page for where the unplanned header should be 
@@ -23,9 +22,9 @@
     var(--tp-main-container-padding) + 
     var(--tp-planner-container-margin) 
   );
-}
+`;
 
-.unplannedBox {
+const UnplannedBox = styled.ul`
   position: absolute;
   overflow-y: auto;
   overflow-x: hidden;
@@ -63,22 +62,37 @@
   &::-webkit-scrollbar-track-piece {
     background-color: #fff;
   }
-}
 
-.summerUnplannedBox {
-  // same as above but using the summer box sizing instead
-  height: calc(
-    100vh - (
-      var(--navbar-height) + 
-      var(--option-header-height) + 
-      var(--tp-main-container-padding) + 
-      3 * var(--tp-planner-container-margin) + 
-      2 * var(--tp-summer-term-box-margin) + 
-      var(--tp-grid-item-font-size)
-    )
-  );
-  min-width: 17em;
-  max-width: 17em;
-  margin: 0.5em;
-  padding-top: 0.5em;
-}
+  ${({ droppable }) => droppable && Droppable}
+
+  ${({ summerEnabled }) => summerEnabled && css`
+    // sum of heights from the top of the page for where the unplanned header should be 
+    // for summer term
+    height: calc(
+      100vh - (
+        var(--navbar-height) + 
+        var(--option-header-height) + 
+        var(--tp-main-container-padding) + 
+        3 * var(--tp-planner-container-margin) + 
+        2 * var(--tp-summer-term-box-margin) + 
+        var(--tp-grid-item-font-size)
+      )
+    );
+    min-width: 17em;
+    max-width: 17em;
+    margin: 0.5em;
+    padding-top: 0.5em;
+  `}
+
+  ${({ isSmall }) => isSmall && css`
+    border-radius: 1em;
+    min-width: 12em;
+  `}
+
+  ${({ isSmall, summerEnabled }) => isSmall && summerEnabled && css`
+    border-radius: 1em;
+    min-width: 13em;
+  `}
+`;
+
+export default { UnplannedContainer, UnplannedBox, UnplannedTitle };
