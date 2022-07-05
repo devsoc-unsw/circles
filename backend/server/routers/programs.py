@@ -6,6 +6,7 @@ import re
 from typing import Optional
 
 from fastapi import APIRouter, HTTPException
+from server.manual_fixes import apply_manual_fixes
 from server.routers.courses import regex_search
 from server.database import programsCOL, specialisationsCOL
 from server.routers.model import (Structure, Programs)
@@ -209,6 +210,6 @@ def get_structure(
     with contextlib.suppress(KeyError):
         for container in programsResult['components']['non_spec_data']:
             add_subgroup_container(structure, "General", container, [])
-
+    apply_manual_fixes(structure, programCode)
     
     return {"structure": structure}
