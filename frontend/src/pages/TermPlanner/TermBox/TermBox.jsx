@@ -3,12 +3,13 @@ import { Droppable } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import { LockFilled, UnlockFilled } from "@ant-design/icons";
 import { Badge } from "antd";
+import useMediaQuery from "hooks/useMediaQuery";
 import { toggleTermComplete } from "reducers/plannerSlice";
 import DraggableCourse from "../DraggableCourse";
-import "./index.less";
+import S from "./styles";
 
 const TermBox = ({
-  name, coursesList, termsOffered, isDragging,
+  name, coursesList, termsOffered, dragging,
 }) => {
   const term = name.match(/T[0-3]/)[0];
 
@@ -32,35 +33,43 @@ const TermBox = ({
 
   const isOffered = termsOffered.includes(term) && !isCompleted;
 
+  const isSmall = useMediaQuery("(max-width: 1400px)");
+
+  const iconStyle = {
+    color: "#fff",
+    fontSize: "12px",
+  };
+
   return (
     <Droppable droppableId={name} isDropDisabled={isCompleted}>
       {(provided) => (
         <Badge
           count={(
-            <div className={`termCheckboxContainer ${isCompleted && "checkedTerm"}`}>
+            <S.TermCheckboxWrapper checked={isCompleted}>
               {(
                   !isCompleted
                     ? (
                       <UnlockFilled
-                        className="termCheckbox"
+                        style={iconStyle}
                         onClick={handleCompleteTerm}
                       />
                     ) : (
                       <LockFilled
-                        className="termCheckbox"
+                        style={iconStyle}
                         onClick={handleCompleteTerm}
                       />
                     )
                 )}
-            </div>
+            </S.TermCheckboxWrapper>
             )}
           offset={isSummerEnabled ? [-13, 13] : [-22, 22]}
         >
-          <ul
+          <S.TermBoxWrapper
+            droppable={isOffered && dragging}
+            summerEnabled={isSummerEnabled}
+            isSmall={isSmall}
             ref={provided.innerRef}
             {...provided.droppableProps}
-            className={`termBox ${isOffered && isDragging && "droppable "
-            } ${isSummerEnabled && "summerTermBox"} `}
           >
             {coursesList.map(
               (code, index) => (
@@ -74,10 +83,15 @@ const TermBox = ({
               ),
             )}
             {provided.placeholder}
-            <div className="uocCounter">
-              <Badge style={{ backgroundColor: "#9254de" }} size="small" count={`${totalUOC} UOC`} offset={isSummerEnabled ? [13, -13] : [22, -14]} />
-            </div>
-          </ul>
+            <S.UOCBadgeWrapper>
+              <Badge
+                style={{ backgroundColor: "#9254de" }}
+                size="small"
+                count={`${totalUOC} UOC`}
+                offset={[0, 0]}
+              />
+            </S.UOCBadgeWrapper>
+          </S.TermBoxWrapper>
         </Badge>
       )}
     </Droppable>

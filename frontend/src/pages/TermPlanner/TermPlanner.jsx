@@ -7,20 +7,16 @@ import PageTemplate from "components/PageTemplate";
 import {
   moveCourse, setPlannedCourseToTerm, setUnplannedCourseToTerm, toggleWarnings, unschedule,
 } from "reducers/plannerSlice";
+import { GridItem } from "./common/styles";
 import HideYearTooltip from "./HideYearTooltip";
 import OptionsHeader from "./OptionsHeader";
+import S from "./styles";
 import TermBox from "./TermBox";
 import UnplannedColumn from "./UnplannedColumn";
 import { checkIsMultiterm, checkMultitermInBounds, prepareCoursesForValidation } from "./utils";
-import "./index.less";
+// Used for tippy stylings
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
-
-// checks if no courses have been planned (to display help notification
-// & determine if unschedule all button available)
-const isAllEmpty = (years) => (
-  years.every((year) => Object.keys(year).every((key) => year[key].length === 0))
-);
 
 const openNotification = () => {
   const args = {
@@ -73,7 +69,7 @@ const TermPlanner = () => {
   };
 
   useEffect(() => {
-    if (isAllEmpty(planner.years)) openNotification();
+    if (isPlannerEmpty(planner.years)) openNotification();
     validateTermPlanner();
   }, [
     degree, planner.years, planner.startYear, marksRef.current, showWarnings,
@@ -81,7 +77,8 @@ const TermPlanner = () => {
 
   const currYear = new Date().getFullYear();
 
-  const plannerPic = useRef();
+  /* Ref used for exporting planner to image */
+  const plannerPicRef = useRef();
 
   const handleOnDragStart = (courseItem) => {
     const course = courseItem.draggableId.slice(0, 8);
@@ -176,24 +173,23 @@ const TermPlanner = () => {
     <PageTemplate>
       <OptionsHeader
         areYearsHidden={planner.areYearsHidden}
-        plannerRef={plannerPic}
-        isAllEmpty={isAllEmpty}
+        plannerRef={plannerPicRef}
       />
-      <div className="mainContainer">
+      <S.ContainerWrapper>
         <DragDropContext
           onDragEnd={(result) => handleOnDragEnd(result)}
           onDragStart={handleOnDragStart}
         >
-          <div className="plannerContainer">
-            <div
-              className={`gridContainer ${planner.isSummerEnabled && "summerGrid"}`}
-              ref={plannerPic}
+          <S.PlannerContainer>
+            <S.PlannerGridWrapper
+              summerEnabled={planner.isSummerEnabled}
+              ref={plannerPicRef}
             >
-              <div className="gridItem" />
-              {planner.isSummerEnabled && <div className="gridItem">Summer</div>}
-              <div className="gridItem">Term 1</div>
-              <div className="gridItem">Term 2</div>
-              <div className="gridItem">Term 3</div>
+              <GridItem /> {/* Empty grid item for the year */}
+              {planner.isSummerEnabled && <GridItem>Summer</GridItem>}
+              <GridItem>Term 1</GridItem>
+              <GridItem>Term 2</GridItem>
+              <GridItem>Term 3</GridItem>
               {planner.years.map((year, index) => {
                 const iYear = parseInt(planner.startYear, 10) + parseInt(index, 10);
                 let yearUOC = 0;
@@ -207,24 +203,22 @@ const TermPlanner = () => {
                 if (planner.hidden[iYear]) return null;
                 return (
                   <React.Fragment key={index}>
-                    <Badge
-                      style={{
-                        backgroundColor: "#efdbff",
-                        color: "#000000",
-                      }}
-                      size="small"
-                      count={`${yearUOC} UOC`}
-                      offset={[-46, 40]}
-                    >
-                      <div className="yearContainer gridItem">
-                        <div
-                          className={`year ${currYear === iYear && "currYear"}`}
-                        >
+                    <S.YearGridBox>
+                      <S.YearWrapper>
+                        <S.YearText currYear={currYear === iYear}>
                           {iYear}
-                        </div>
+                        </S.YearText>
                         <HideYearTooltip year={iYear} />
-                      </div>
-                    </Badge>
+                      </S.YearWrapper>
+                      <Badge
+                        style={{
+                          backgroundColor: "#efdbff",
+                          color: "#000000",
+                        }}
+                        size="small"
+                        count={`${yearUOC} UOC`}
+                      />
+                    </S.YearGridBox>
                     {Object.keys(year).map((term) => {
                       const key = iYear + term;
                       if (!planner.isSummerEnabled && term === "T0") return null;
@@ -234,20 +228,18 @@ const TermPlanner = () => {
                           name={key}
                           coursesList={year[term]}
                           termsOffered={termsOffered}
-                          isDragging={isDragging}
+                          dragging={isDragging}
                         />
                       );
                     })}
                   </React.Fragment>
                 );
               })}
-              <UnplannedColumn
-                isDragging={isDragging}
-              />
-            </div>
-          </div>
+              <UnplannedColumn dragging={isDragging} />
+            </S.PlannerGridWrapper>
+          </S.PlannerContainer>
         </DragDropContext>
-      </div>
+      </S.ContainerWrapper>
     </PageTemplate>
   );
 };

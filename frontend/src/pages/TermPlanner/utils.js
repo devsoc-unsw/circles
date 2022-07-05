@@ -23,6 +23,11 @@ const parseMarkToInt = (mark) => {
   return Object.keys(letterGradeToIntMap).includes(mark) ? letterGradeToIntMap[mark] : null;
 };
 
+// Checks if no courses have been planned
+const isPlannerEmpty = (years) => (
+  years.every((year) => Object.keys(year).every((key) => year[key].length === 0))
+);
+
 // takes in startYear (int) and gets current date to
 // return the most recent term that has past (week 2)
 // dictionary of year in degree and term most recent is returned
@@ -179,6 +184,7 @@ export {
   getCurrentTermId,
   getMostRecentPastTerm,
   getTermsList,
+  isPlannerEmpty,
   parseMarkToInt,
   prepareCoursesForValidation,
 };
