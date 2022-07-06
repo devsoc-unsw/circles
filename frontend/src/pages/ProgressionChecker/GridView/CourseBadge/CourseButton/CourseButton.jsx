@@ -14,24 +14,14 @@ const CourseButton = ({ course, planned }) => {
   };
 
   return (
-    planned ? (
-      <S.InTPCourseButton
-        type="primary"
-        key={course.key}
-        onClick={() => handleCourseLink(course.key)}
-      >
-        {course.key}: {course.title}
-      </S.InTPCourseButton>
-    ) : (
-      <S.NotInTPCourseButton
-        className="checkerButton"
-        type="primary"
-        key={course.key}
-        onClick={() => handleCourseLink(course.key)}
-      >
-        {course.key}: {course.title}
-      </S.NotInTPCourseButton>
-    )
+    <S.CourseButton
+      planned={planned}
+      type="primary"
+      key={course.key}
+      onClick={() => handleCourseLink(course.key)}
+    >
+      {course.key}: {course.title}
+    </S.CourseButton>
   );
 };
 
