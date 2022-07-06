@@ -14,12 +14,10 @@ const GraphicalSelector = () => {
 
   const initialiseGraph = (courses, courseEdges) => {
     const container = ref.current;
-    const width = container.scrollWidth;
-    const height = container.scrollHeight;
     const graphInstance = new G6.Graph({
       container,
-      width,
-      height,
+      width: container.scrollWidth,
+      height: container.scrollHeight,
       linkCenter: true,
       modes: {
         default: [
