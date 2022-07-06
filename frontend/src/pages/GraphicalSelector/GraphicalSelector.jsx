@@ -31,8 +31,8 @@ const GraphicalSelector = () => {
       layout: {
         type: "comboCombined",
         preventOverlap: true,
-        nodeSpacing: 25,
-        // linkDistance: 500,
+        nodeSpacing: 10,
+        linkDistance: 500,
       },
       // animate: true,
       defaultNode: {
@@ -80,12 +80,10 @@ const GraphicalSelector = () => {
         .flatMap((specialisation) => Object.values(specialisation)
           .filter((spec) => typeof spec === "object" && spec.courses && !spec.type.includes("rule"))
           .flatMap((spec) => Object.keys(spec.courses)))
-        // TODO: hardcode this as be returns 500 error for COMP4920 which breaks promise all
-        .filter((c) => c !== "COMP4920")
     );
-
-    const res = await Promise.all(courseList.map((c) => axios.get(`/courses/getPathFrom/${c}`)));
-    const children = res.map((value) => value.data);
+    const res = await Promise.all(courseList.map((c) => axios.get(`/courses/getPathFrom/${c}`).catch((e) => e)));
+    // filter any errors from res
+    const children = res.filter((value) => value?.data?.courses).map((value) => value.data);
     const edges = children
       .flatMap((courseObject) => courseObject.courses
         .filter((course) => courseList.includes(course))
@@ -100,7 +98,7 @@ const GraphicalSelector = () => {
 
   return (
     <PageTemplate>
-      {loading ? "This is loading..." : (
+      {loading ? "This page is loading..." : (
         <>
           <button
             type="button"
