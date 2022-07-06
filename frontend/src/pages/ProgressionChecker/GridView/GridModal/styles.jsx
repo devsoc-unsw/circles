@@ -11,9 +11,7 @@ const ModalHeader = styled.div`
 `;
 
 const ModalTitle = styled(Title)`
-  && {
-    margin: 0 !important;
-  }
+  margin: 0 !important;
 `;
 
 const Instruction = styled.p`
@@ -25,9 +23,6 @@ const CourseModal = styled(Modal)`
   top: 0px;
   margin: 30px;
   float: right;
-  .ant-modal-content, .ant-modal-header {
-    border-radius: 20px;
-  }
 `;
 
 const CourseList = styled(GRID.CourseGroup)`
