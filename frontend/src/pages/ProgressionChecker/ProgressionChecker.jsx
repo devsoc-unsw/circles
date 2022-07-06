@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { scroller } from "react-scroll";
 import {
   BorderlessTableOutlined,
   EyeFilled,
@@ -103,12 +102,6 @@ const ProgressionChecker = () => {
     programCode, specs,
   } = useSelector((state) => state.degree);
 
-  const clickArrow = () => {
-    scroller.scrollTo("divider", {
-      duration: 1500,
-      smooth: true,
-    });
-  };
   useEffect(() => {
     // get structure of degree
     const fetchStructure = async () => {
@@ -126,7 +119,7 @@ const ProgressionChecker = () => {
 
   return (
     <PageTemplate>
-      <Dashboard isLoading={isLoading} degree={degreeData} clickArrow={clickArrow} />
+      <Dashboard isLoading={isLoading} degree={degreeData} />
       <Divider id="divider" />
       <ProgressionCheckerCourses structure={structure} isLoading={isLoading} />
     </PageTemplate>

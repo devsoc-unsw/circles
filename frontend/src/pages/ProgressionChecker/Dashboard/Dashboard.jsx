@@ -1,4 +1,5 @@
 import React from "react";
+import { scroller } from "react-scroll";
 import { ArrowDownOutlined } from "@ant-design/icons";
 import { animated, useSpring } from "@react-spring/web";
 import { Button, Typography } from "antd";
@@ -7,7 +8,7 @@ import DegreeCard from "../DegreeCard";
 import SkeletonDashboard from "./SkeletonDashboard";
 import "./index.less";
 
-const Dashboard = ({ isLoading, degree, clickArrow }) => {
+const Dashboard = ({ isLoading, degree }) => {
   const { Title } = Typography;
   const currYear = new Date().getFullYear();
   const props = useSpring({
@@ -16,6 +17,13 @@ const Dashboard = ({ isLoading, degree, clickArrow }) => {
     reset: true,
     config: { tension: 80, friction: 60 },
   });
+
+  const clickArrow = () => {
+    scroller.scrollTo("divider", {
+      duration: 1500,
+      smooth: true,
+    });
+  };
 
   return (
     <div className="container">
