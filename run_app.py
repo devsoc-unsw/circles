@@ -1,10 +1,13 @@
 # pylint: disable=cyclic-import
 """ run all of circles in one terminal """
 import logging
-from subprocess import Popen, check_call
-import threading
 import os
 import sys
+import threading
+from subprocess import Popen, check_call
+
+from dotenv import load_dotenv
+
 
 class LogPipe(threading.Thread):
     """ boilerplate abstraction for redirecting the logs of a process """
@@ -40,14 +43,15 @@ class LogPipe(threading.Thread):
 
 
 def get_backend_env():
-    """reads backend.env"""
-    with open('env/backend.env', encoding="utf8") as f:
-        data = f.readlines()
-    data[0] = data[0].replace('MONGODB_USERNAME=', '')
-    data[1] = data[1].replace('MONGODB_PASSWORD=', '')
-    data[0] = data[0].replace('\n', '')
-    data[1] = data[1].replace('\n', '')
-    return (data[0], data[1])
+    """
+        reads backend.env for mongodb username and password and python
+        version.
+    """
+    load_dotenv("./env/backend.env")
+    username = os.getenv("MONGODB_USERNAME")
+    password = os.getenv("MONGODB_USERNAME")
+    python = os.getenv("PYTHON_VERSION") or "python"
+    return (username, password, python)
 
 def main():
     logging.basicConfig(level=logging.INFO,format='%(asctime)s %(message)s',
@@ -58,11 +62,11 @@ def main():
     )
     sys.stdout = LogPipe(logging.INFO)
     sys.stderr = LogPipe(logging.ERROR)
-    username, password = get_backend_env()
+    username, password, python_ver = get_backend_env()
     os.system('docker compose run --rm init-mongo')
     try:
         Popen(
-            f'MONGODB_SERVICE_HOSTNAME=localhost MONGODB_PASSWORD={password} MONGODB_USERNAME={username}  nodemon --exec python runserver.py',
+            f'MONGODB_SERVICE_HOSTNAME=localhost MONGODB_PASSWORD={password} MONGODB_USERNAME={username}  nodemon --exec {python_ver} runserver.py',
             stdout=sys.stdout,
             stderr=sys.stderr,
             shell=True,

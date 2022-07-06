@@ -6,6 +6,7 @@ import re
 from typing import Optional
 
 from fastapi import APIRouter, HTTPException
+from server.manual_fixes import apply_manual_fixes
 from server.routers.courses import regex_search
 from server.database import programsCOL, specialisationsCOL
 from server.routers.model import (Structure, Programs)
@@ -64,7 +65,7 @@ def convert_subgroup_object_to_courses_dict(object: str, description: str|list[s
     if " or " in object:
         return {c: description[index] for index, c in enumerate(object.split(" or "))}
     if not re.match(r"[A-Z]{4}[0-9]{4}", object):
-        return regex_search(object)
+        return regex_search(rf"^{object}")
 
     return { object: description }
 
@@ -74,7 +75,9 @@ def add_subgroup_container(structure: dict, type: str, container: dict, exceptio
     title = container.get("title")
     if container.get("type") == "gened":
         title = "General Education"
-    
+    if container.get("type") is not None and "rule" in container.get("type"):
+        type = "Rules"
+
     structure[type][title] = {}
     item = structure[type][title]
     item["UOC"] = container.get("credits_to_complete") if container.get("credits_to_complete") is not None else 0
@@ -189,11 +192,7 @@ def add_specialisation(structure: dict, code: str):
 def get_structure(
     programCode: str, spec: Optional[str] = None
 ):
-    """
-    NOTE: specialisations optionally added.
-    """
     structure = {}
-
     if spec:
         specs = spec.split("+") if "+" in spec else [spec]
         for m in specs:
@@ -206,9 +205,10 @@ def get_structure(
             status_code=400, detail="Program code was not found")
 
     structure['General'] = {}
+    structure['Rules'] = {}
     with contextlib.suppress(KeyError):
         for container in programsResult['components']['non_spec_data']:
             add_subgroup_container(structure, "General", container, [])
-
+    apply_manual_fixes(structure, programCode)
     
     return {"structure": structure}

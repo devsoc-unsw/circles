@@ -39,6 +39,10 @@ To remove all containers and the docker network, run `docker-compose down`. Add 
 To stop a docker containers that is running, run `docker-compose stop <containerName>`. This will not remove the container.
 
 ### Running Circles without Docker
+
 It is now possible to run Circles without docker, and have your changes to the backend codebase be reflected in the development server. To do this, ensure nodemon is installed on your linux distribution by running `npm i -g nodemon`. Nodemon is a node package which automatically restarts an app when it detects code changes. 
 You can then run `python run_app.py` to run all of circles locally (assuming that you have installed all dependancies).
 Ensure your python3 version is set to 3.10. All parts of the app should now be running and talking to eachother. 
+
+If you have having trouble with `python not found`, manually choose what python version is being run by adding `PYTHON_VERSION=python3` or, any version of your choosing in `backend.env`.
+
