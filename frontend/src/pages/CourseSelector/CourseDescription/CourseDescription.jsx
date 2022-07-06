@@ -38,6 +38,7 @@ const CourseDescription = () => {
 
   const getCourse = async (c) => {
     const [data, err] = await axiosRequest("get", `/courses/getCourse/${c}`);
+    console.log("Idk what this is but here's data", data);
     if (!err) {
       dispatch(setCourse(data));
     }

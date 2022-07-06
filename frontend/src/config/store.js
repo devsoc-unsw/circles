@@ -5,11 +5,13 @@ import {
   persistReducer,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import axiosRequest from "config/axios";
 import coursesReducer from "reducers/coursesSlice";
 import courseTabsReducer from "reducers/courseTabsSlice";
 import degreeReducer from "reducers/degreeSlice";
 import plannerReducer from "reducers/plannerSlice";
 import settingsReducer from "reducers/settingsSlice";
+// import { process_multi_term } from "../../../backend/data/processors/courses_processing.py";
 import { REDUX_PERSIST_VERSION } from "./constants";
 
 const rootReducer = combineReducers({
@@ -46,7 +48,26 @@ const migrations = {
     delete newState.degree.minors;
     return newState;
   },
-  3: () => undefined,
+  3: (oldState) => {
+    const newState = { ...oldState };
+    console.log("old State:");
+    console.log(oldState);
+    oldState.courses.array.forEach(async (element) => {
+      const [formattedData, err] = await axiosRequest("get", `/courses/getCourse/${element}`);
+      if (!err) {
+        const { code } = formattedData;
+        console.log("code", code);
+        newState.courses[code].is_multiterm = formattedData.is_multiterm;
+      }
+    });
+    return newState;
+  },
+  // 3: (oldState) => {
+  //   console.log("in store");
+  //   const newState = { ...oldState };
+
+  //   return undefined;
+  // },
 };
 
 const persistConfig = {
