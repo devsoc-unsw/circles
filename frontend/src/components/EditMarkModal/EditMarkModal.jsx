@@ -5,7 +5,7 @@ import {
   Modal,
 } from "antd";
 import { updateCourseMark } from "reducers/plannerSlice";
-import "./index.less";
+import S from "./styles";
 
 const EditMarkModal = ({
   code, isVisible, setIsVisible,
@@ -66,20 +66,19 @@ const EditMarkModal = ({
 
   return (
     <Modal
-      title={`Edit Mark: ${code}`}
+      title={`Edit mark for ${code}`}
       visible={isVisible}
       onOk={() => setMarkUpdateQueued(true)}
       onCancel={handleCancel}
       width="300px"
     >
-      <div className="edit-mark">
-        <div className="edit-mark-head" />
+      <S.EditMarkWrapper>
         <Input
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
           placeholder="Enter Mark"
         />
-        <div className="letter-grade-container">
+        <S.LetterGradeWrapper>
           {
             letterGrades.map((letterGrade) => (
               <Button
@@ -90,8 +89,8 @@ const EditMarkModal = ({
               </Button>
             ))
           }
-        </div>
-      </div>
+        </S.LetterGradeWrapper>
+      </S.EditMarkWrapper>
     </Modal>
   );
 };

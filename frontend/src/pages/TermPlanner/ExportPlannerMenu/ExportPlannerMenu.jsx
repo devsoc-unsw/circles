@@ -5,15 +5,13 @@ import {
 } from "react-component-export-image";
 import {
   Button,
-  Divider,
   Radio,
   Typography,
 } from "antd";
-import "tippy.js/dist/tippy.css";
-import "tippy.js/themes/light.css";
-import "./index.less";
+import CS from "../common/styles";
+import S from "./styles";
 
-const SaveMenu = ({ plannerRef }) => {
+const ExportPlannerMenu = ({ plannerRef }) => {
   const { Title } = Typography;
 
   const exportFormats = ["png", "jpg"];
@@ -25,8 +23,7 @@ const SaveMenu = ({ plannerRef }) => {
       exportComponentAsPNG(plannerRef, {
         fileName: "Term Planner",
       });
-    }
-    if (format === "jpg") {
+    } else if (format === "jpg") {
       exportComponentAsJPEG(plannerRef, {
         fileName: "Term Planner",
       });
@@ -34,14 +31,12 @@ const SaveMenu = ({ plannerRef }) => {
   };
 
   return (
-    <div className="settingsMenu" style={{ width: "180px" }}>
-      <div className="settingsTitleContainer">
-        <Title level={2} strong className="text settingsTitle">
-          Export
-        </Title>
-        <Divider className="settingsDivider" />
-      </div>
-      <div className="settingsEntry">
+    <S.Wrapper style={{ width: "180px" }}>
+      <Title level={2} strong className="text settingsTitle">
+        Export
+      </Title>
+      <CS.MenuDivider />
+      <CS.PopupEntry>
         <Title level={3} className="text settingsSubtitle">
           File Type:
         </Title>
@@ -50,12 +45,12 @@ const SaveMenu = ({ plannerRef }) => {
             <Radio value={form}>{form}</Radio>
           ))}
         </Radio.Group>
-      </div>
+      </CS.PopupEntry>
       <Button style={{ width: "150px" }} onClick={download}>
         Download
       </Button>
-    </div>
+    </S.Wrapper>
   );
 };
 
-export default SaveMenu;
+export default ExportPlannerMenu;

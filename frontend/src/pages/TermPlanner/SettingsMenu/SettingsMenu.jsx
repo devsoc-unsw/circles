@@ -2,14 +2,11 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
 import {
-  DatePicker, Divider,
-  Select, Switch, Typography,
+  DatePicker, Select, Switch, Typography,
 } from "antd";
 import moment from "moment";
 import { toggleSummer, updateDegreeLength, updateStartYear } from "reducers/plannerSlice";
-import "tippy.js/dist/tippy.css";
-import "tippy.js/themes/light.css";
-import "./index.less";
+import CS from "../common/styles";
 
 const SettingsMenu = () => {
   const { Title } = Typography;
@@ -35,14 +32,12 @@ const SettingsMenu = () => {
   const years = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (
-    <div className="settingsMenu">
-      <div className="settingsTitleContainer">
-        <Title level={2} strong className="text settingsTitle">
-          Settings
-        </Title>
-        <Divider className="settingsDivider" />
-      </div>
-      <div className="settingsEntry">
+    <CS.MenuPopup>
+      <Title level={2} strong className="text settingsTitle">
+        Settings
+      </Title>
+      <CS.MenuDivider />
+      <CS.PopupEntry>
         <Title level={3} className="text settingsSubtitle">
           Summer Term
         </Title>
@@ -52,8 +47,8 @@ const SettingsMenu = () => {
           checkedChildren={<CheckOutlined />}
           unCheckedChildren={<CloseOutlined />}
         />
-      </div>
-      <div className="settingsEntry">
+      </CS.PopupEntry>
+      <CS.PopupEntry>
         <Title level={3} className="text settingsSubtitle">
           Start Year
         </Title>
@@ -63,8 +58,8 @@ const SettingsMenu = () => {
           style={{ width: 105 }}
           value={moment(startYear, "YYYY")}
         />
-      </div>
-      <div className="settingsEntry">
+      </CS.PopupEntry>
+      <CS.PopupEntry>
         <Title level={3} className="text settingsSubtitle">
           Degree Length
         </Title>
@@ -77,8 +72,8 @@ const SettingsMenu = () => {
             <Option key={num} value={num}>{num}</Option>
           ))}
         </Select>
-      </div>
-    </div>
+      </CS.PopupEntry>
+    </CS.MenuPopup>
   );
 };
 
