@@ -7,13 +7,13 @@ import {
 import { ThemeProvider } from "styled-components";
 import { darkTheme, GlobalStyles, lightTheme } from "config/theme";
 import PageLoading from "./components/PageLoading";
+import Auth from "./pages/Auth";
 import CourseSelector from "./pages/CourseSelector";
 import DegreeWizard from "./pages/DegreeWizard";
 import GraphicalSelector from "./pages/GraphicalSelector";
 import PageNotFound from "./pages/PageNotFound";
 import ProgressionChecker from "./pages/ProgressionChecker";
 import TermPlanner from "./pages/TermPlanner";
-import Auth from "./pages/Auth";
 import "./App.less";
 import "./config/axios";
 
@@ -54,7 +54,7 @@ const App = () => {
             />
             <Route
               path="/login"
-              element={<Auth/>}
+              element={<Auth />}
             />
             <Route
               path="*"
