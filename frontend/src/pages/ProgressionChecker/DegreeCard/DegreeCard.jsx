@@ -18,7 +18,7 @@ const DegreeCard = ({
     <Link to={specialisation.name} smooth duration={1000}>
       <Card className="card text" hoverable bordered={false}>
         <Title className="text" level={5}>
-          {specialisation.name === undefined ? type : specialisation.name}
+          {specialisation.name || type}
         </Title>
         <Text className="secondaryText">{type.charAt(0).toUpperCase() + type.slice(1)}</Text>
         <div data-tip data-for={type}>
