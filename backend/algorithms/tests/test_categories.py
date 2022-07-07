@@ -10,7 +10,7 @@ import json
 
 # rest need tests for their match_definition
 
-PATH = "./algorithms/exampleUsers.json"
+PATH = "./algorithms/tests/exampleUsers.json"
 
 with open(PATH, encoding="utf8") as f:
     USERS = json.load(f)

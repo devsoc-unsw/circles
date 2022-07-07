@@ -27,7 +27,6 @@ def fix_conditions():
     CONDITIONS["SENG2991"] = SENG_2991(CONDITIONS["SENG2991"])
     CONDITIONS["SENG3991"] = SENG_3991(CONDITIONS["SENG3991"])
     CONDITIONS["SENG3992"] = SENG_3992(CONDITIONS["SENG3992"])
-    CONDITIONS["SENG4920"][PROCESSED] = SENG_4920()
 
     data_helpers.write_data(
         CONDITIONS, "data/final_data/conditionsProcessed.json")
@@ -41,7 +40,7 @@ def SENG_2021():
     "processed": "SENG1031 || COMP1531 && (SENG?1 || SENG?H)"
     """
 
-    return "SENG1031 || COMP1531 && (SENG?1 || SENG?H)"
+    return "(SENG1031 || COMP1531) && ENGG#"
 
 
 def SENG_2991(conditions):
@@ -89,16 +88,6 @@ def SENG_3992(conditions):
         "processed": "3707 && SENGAH && SENG3011 && SENG2991 && SENG3991",
         "handbook_note": "Must currently be enrolled in the Co-op program"
     }
-
-
-def SENG_4920():
-    """
-    "original": "Prerequisite: COMP2511<br/><br/><br/>Completed more than or equal to 144 UOC in SENGAH, BINFAH or COMPBH<br/><br/>"
-
-    "processed": "COMP2511 && 144UOC in (SENGAH || BINFAH || COMPBH)"
-    """
-
-    return "COMP2511 && 144UOC in (SENGAH || BINFAH || COMPBH)"
 
 
 if __name__ == "__main__":

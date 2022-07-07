@@ -42,7 +42,7 @@ def fix_conditions():
     CONDITIONS["COMM3202"] = COMM_3202(CONDITIONS["COMM3202"])
     CONDITIONS["COMM3500"][PROCESSED] = COMM_3500()
     CONDITIONS["COMM3900"] = COMM_3900(CONDITIONS["COMM3900"])
-
+    CONDITIONS["COMM3999"] = COMM_3999(CONDITIONS["COMM3999"])
     # Updates the files with the modified dictionaries
     data_helpers.write_data(
         CONDITIONS, "data/final_data/conditionsProcessed.json")
@@ -118,14 +118,14 @@ def COMM_1999(conditions):
 
 def COMM_2222(conditions):
     """
-        "original": "Pre-requisite: In Business degree, COMM6000 Career Accelerator or COMM1999 First Year Portfolio, WAM 65+, minimum 72 UOC completed, room in degree for course, Good academic standing.<br/>Excluded: Co-op students<br/>It is recommended a progression check is completed prior to enrolling.<br/><br/>",
-        "processed": "(COMM6000 || COMM1999) && ZBUS# && 65WAM && 72UOC",
+        "original": "Pre-requisite: In Business degree, COMM6000 Career Accelerator or COMM1999 First Year Portfolio, minimum 72 UOC completed, room in degree for course, Good academic standing.<br/>Excluded: Co-op students<br/>It is recommended a progression check is completed prior to enrolling.<br/><br/>",
+        "processed": "(COMM6000 || COMM1999) && ZBUS# && 72UOC",
         "handbook_note": "Good Academic Standing. Co-op students are excluded. It is recommended to do a progression check prior to enrolling"
     """
 
     return {
         "original": conditions["original"],
-        "processed": "(COMM6000 || COMM1999) && ZBUS# && 65WAM && 72UOC",
+        "processed": "(COMM6000 || COMM1999) && ZBUS# && 72UOC",
         "handbook_note": "Good Academic Standing. Co-op students are excluded. It is recommended to do a progression check prior to enrolling"
     }
 

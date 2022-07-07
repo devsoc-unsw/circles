@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { BorderlessTableOutlined, TableOutlined } from "@ant-design/icons";
+import {
+  BorderlessTableOutlined,
+  EyeFilled,
+  EyeInvisibleOutlined,
+  TableOutlined,
+} from "@ant-design/icons";
 import { Button, Divider } from "antd";
 import axios from "axios";
 import PageTemplate from "components/PageTemplate";
@@ -41,46 +46,36 @@ const degreeData = {
   ],
 };
 
-const ProgressionChecker = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [view, setView] = useState("grid");
-
-  const {
-    programCode, majors, minors,
-  } = useSelector((state) => state.degree);
-
-  const [structure, setStructure] = useState({});
-
-  useEffect(() => {
-    // get structure of degree
-    const fetchStructure = async () => {
-      try {
-        const res = await axios.get(`/programs/getStructure/${programCode}/${majors.join("+")}/${minors.join("+")}`);
-        setStructure(res.data.structure);
-      } catch (err) {
-        // eslint-disable-next-line no-console
-        console.log(err);
-      }
-      setIsLoading(false);
-    };
-    if (programCode && majors.length > 0) fetchStructure();
-  }, [programCode, majors, minors, view]);
+const ProgressionCheckerCourses = ({ structure, isLoading }) => {
+  const views = {
+    GRID: "grid",
+    CONCISE: "grid-concise",
+    TABLE: "table",
+  };
+  const defaultView = views.CONCISE;
+  const [view, setView] = useState(defaultView);
 
   return (
-    <PageTemplate>
-      <Dashboard isLoading={isLoading} degree={degreeData} />
-      <Divider />
-      {view === "grid" ? (
+    <div>
+      {(view === views.GRID || view === views.CONCISE) ? (
         <>
           <Button
             className="viewSwitcher"
             type="primary"
             icon={<TableOutlined />}
-            onClick={() => setView("table")}
+            onClick={() => setView(views.TABLE)}
           >
             Display Table View
           </Button>
-          <GridView isLoading={isLoading} structure={structure} />
+          <Button
+            className="viewSwitcher"
+            type="primary"
+            icon={view === views.GRID ? <EyeInvisibleOutlined /> : <EyeFilled />}
+            onClick={() => setView(view === views.GRID ? views.CONCISE : views.GRID)}
+          >
+            {view === views.GRID ? "Display Concise Mode" : "Display Full Mode"}
+          </Button>
+          <GridView isLoading={isLoading} structure={structure} concise={view === views.CONCISE} />
         </>
       ) : (
         <>
@@ -88,13 +83,45 @@ const ProgressionChecker = () => {
             className="viewSwitcher"
             type="primary"
             icon={<BorderlessTableOutlined />}
-            onClick={() => setView("grid")}
+            onClick={() => setView(defaultView)}
           >
             Display Grid View
           </Button>
           <TableView isLoading={isLoading} structure={structure} />
         </>
       )}
+    </div>
+  );
+};
+
+const ProgressionChecker = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [structure, setStructure] = useState({});
+
+  const {
+    programCode, specs,
+  } = useSelector((state) => state.degree);
+
+  useEffect(() => {
+    // get structure of degree
+    const fetchStructure = async () => {
+      try {
+        const res = await axios.get(`/programs/getStructure/${programCode}/${specs.join("+")}`);
+        setStructure(res.data.structure);
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.log(err);
+      }
+      setIsLoading(false);
+    };
+    if (programCode && specs.length > 0) fetchStructure();
+  }, [programCode, specs]);
+
+  return (
+    <PageTemplate>
+      <Dashboard isLoading={isLoading} degree={degreeData} />
+      <Divider id="divider" />
+      <ProgressionCheckerCourses structure={structure} isLoading={isLoading} />
     </PageTemplate>
   );
 };

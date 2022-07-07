@@ -4040,7 +4040,17 @@
         ],
         "curriculum": [
             {
-                "courses": {},
+                "courses": {
+                    "ECON3": "any level 3 Economics courses",
+                    "ECON2": "any level 2 Economics courses",
+                    "COMM3101": "Industry Experience Placement 1",
+                    "ACCT3563": "Issues in Financial Reporting and Analysis",
+                    "ACTL3192": "Retirement Saving and Spending Over the Lifecycle",
+                    "COMM3020": "Global Business Practicum",
+                    "COMM3202": "Industry Experience Placement 2",
+                    "ACTL3191": "Superannuation and Retirement Benefits",
+                    "COMM3030": "Social Entrepreneurship Practicum"
+                },
                 "title": "Prescribed Electives",
                 "credits_to_complete": 30,
                 "core": false,
@@ -4275,7 +4285,16 @@
                 "notes": ""
             },
             {
-                "courses": {},
+                "courses": {
+                    "ECON3": "any level 3 Economics courses",
+                    "COMM3020": "Global Business Practicum",
+                    "FINS3655": "Behavioural Finance",
+                    "ACCT3563": "Issues in Financial Reporting and Analysis",
+                    "COMM3202": "Industry Experience Placement 2",
+                    "ACTL3192": "Retirement Saving and Spending Over the Lifecycle",
+                    "COMM3101": "Industry Experience Placement 1",
+                    "COMM3030": "Social Entrepreneurship Practicum"
+                },
                 "title": "Level 3 Prescribed Elective",
                 "credits_to_complete": 12,
                 "core": false,
@@ -8914,6 +8933,12 @@
             },
             {
                 "courses": {
+                    "COMM2233": "Industry Consulting Project",
+                    "COMM3202": "Industry Experience Placement 2",
+                    "COMM3101": "Industry Experience Placement 1",
+                    "COMM2222": "Industry Experience Program",
+                    "COMM3020": "Global Business Practicum",
+                    "COMM3030": "Social Entrepreneurship Practicum",
                     "MGMT3729": "Managing Training and Development",
                     "MGMT3728": "Managing Pay and Performance",
                     "MGMT3721": "Negotiation Skills",
@@ -9024,7 +9049,26 @@
                 "notes": ""
             },
             {
-                "courses": {},
+                "courses": {
+                    "MGMT3721": "Negotiation Skills",
+                    "COMM3020": "Global Business Practicum",
+                    "MGMT3004": "Solving Complex Strategy and Policy Problems",
+                    "COMM3202": "Industry Experience Placement 2",
+                    "COMM3101": "Industry Experience Placement 1",
+                    "DESN3000": "Strategic Design Innovation",
+                    "COMM2233": "Industry Consulting Project",
+                    "BEIL0007": "Sustainable Design Thinking",
+                    "MGMT2726": "Business Ethics and Sustainability",
+                    "COMM2222": "Industry Experience Program",
+                    "COMM2244": "Future of Work Project",
+                    "TABL2712": "Business Ethics and the Law",
+                    "PSYC1028": "Psychology of Human Centred Design",
+                    "MARK2012": "Marketing Fundamentals",
+                    "MGMT2721": "Managing People",
+                    "DART2190": "Creative Experimentation",
+                    "COMM1000": "Creating Social Change: From Innovation to Impact",
+                    "DDES2180": "Creative Thinking Processes"
+                },
                 "title": "Elective Courses",
                 "credits_to_complete": 18,
                 "core": false,
@@ -10988,7 +11032,20 @@
                 "notes": ""
             },
             {
-                "courses": {},
+                "courses": {
+                    "PSYC3241": "Psychobiology of Memory",
+                    "PSYC3221": "Vision and Brain",
+                    "PSYC3211": "Cognitive Science",
+                    "PSYC3051": "Physiological Psychology",
+                    "PSYC3371": "Multivariate Data Analysis for Psychology",
+                    "PSYC3311": "Language and Cognition",
+                    "PSYC3121": "Social Psychology",
+                    "PSYC3301": "Psychology and Law",
+                    "PSYC3341": "Developmental Psychology",
+                    "PSYC3202": "Clinical and Cognitive Neuroscience",
+                    "PSYC3331": "Health Psychology",
+                    "PSYC3361": "Psychology Research Internship"
+                },
                 "title": "Level 3 Prescribed Electives",
                 "credits_to_complete": 18,
                 "core": false,
@@ -11579,6 +11636,55 @@
                     1
                 ],
                 "notes": "CHEM1031 and CHEM1041 will only be available to students enrolled in a program which has a Chemistry major."
+            },
+            {
+                "courses": {
+                    "SOLA2060": "Introduction to Electronic Devices",
+                    "ELEC2134": "Circuits and Signals",
+                    "SOLA3010": "Low Energy Buildings and Photovoltaics",
+                    "MECH3610": "Advanced Thermofluids",
+                    "ENGG2500": "Fluid Mechanics for Engineers",
+                    "ENGG3001": "Fundamentals of Humanitarian Engineering",
+                    "ENGG4102": "Humanitarian Engineering Project",
+                    "SOLA5056": "Sustainable Energy for Developing Countries"
+                },
+                "title": "Strand Electives",
+                "credits_to_complete": 18,
+                "core": false,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "MATH2019 or MATH2018": [
+                        "Engineering Mathematics 2E",
+                        "Engineering Mathematics 2D"
+                    ],
+                    "DESN2000": "Engineering Design and Professional Practice",
+                    "MMAN2700": "Thermodynamics",
+                    "SOLA2540": "Applied Photovoltaics",
+                    "MATH2089": "Numerical Methods and Statistics",
+                    "SOLA2051": "Project in Photovoltaics and Renewable Energy"
+                },
+                "title": "Level 2 Core Courses",
+                "credits_to_complete": 36,
+                "core": true,
+                "levels": [
+                    2
+                ],
+                "notes": "Note: Students selecting Mathematics Strand and Physics Stand, and BE/BSc students majoring in 'Mathematics' or 'Physics' should replace MATH2019 with MATH2011 Several Variable Calculus and MATH2121 Theory and Applications of Differential Equations."
+            },
+            {
+                "courses": {
+                    "MECH9720": "Solar Thermal Energy Design",
+                    "SOLA5052": "Bioenergy and Renewable Fuels",
+                    "SOLA5051": "Life Cycle Assessment"
+                },
+                "title": "Disciplinary Electives",
+                "credits_to_complete": 0,
+                "core": false,
+                "levels": [],
+                "notes": "Students may choose any level 3 or above Photovoltaics and Solar Energy course included in the list of Strand Electives. Note: Students who have chosen L1 electives other than SOLA1070 and ELEC1111 can only do 6 UOC from the courses below."
             },
             {
                 "courses": {

@@ -3,11 +3,18 @@
     "Business": ["BUSN#", "ZBUS#"],
     "Commerce": ["COMM#", "ZBUS#"],
     "Economics": ["ECON#", "ZBUS#"],
+    "Politics, Philosophy and Economics": ["PPES#", "ZBUS#"],
     "Information Systems": ["INFS#", "ZBUS#"],
     "Data Science and Decisions": ["DATA#"],
     "Computer Science": ["COMP#"],
+    "Engineering": ["ENGG#"],
+    "Food Science": ["FOOD#"],
+    "Medicine": ["MEDC#"],
+    "Medical Science": ["MSCI#"],
+    "Medicinal Chemistry": ["MCHM#"],
     "Advanced Math": ["MATH#"],
     "Advanced Science": ["ASCI#"],
+    "Science": ["SCIF#"],
     "Education": ["EDST#"],
     "Law": ["LAWS#"],
     "Criminology": ["CRIM#"],
@@ -19,5 +26,8 @@
     "Politic": ["PPEC#"],
     "Media Arts": ["DART#"],
     "Arts": ["ARTS#"],
-    "Media": ["MDIA#"]
+    "Media": ["MDIA#"],
+    "CDF": ["CCDF#"],
+    "Media (Screen && Sound Production)": ["MSSP#"],
+    "Aviation": ["AVIA#"]
 }

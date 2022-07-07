@@ -302,7 +302,7 @@ def is_other(item: dict) -> bool:
     """
     Returns boolean depending on if the given container is a 'other'
     """
-    return item["title"] != "Free Electives" and item["vertical_grouping"]["value"] == "FE"
+    return not re.match("Free Elective", item["title"], flags=re.IGNORECASE)  and item["vertical_grouping"]["value"] == "FE"
 
 
 def add_general_education_data(program_data: dict, item: dict) -> None:

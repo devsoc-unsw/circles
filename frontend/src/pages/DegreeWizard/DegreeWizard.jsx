@@ -1,45 +1,44 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { scroller } from "react-scroll";
 import {
-  Button, Modal,
   notification, Typography,
 } from "antd";
+import axios from "axios";
 import PageTemplate from "components/PageTemplate";
 import { resetCourses } from "reducers/coursesSlice";
 import { resetTabs } from "reducers/courseTabsSlice";
 import { resetDegree } from "reducers/degreeSlice";
 import { resetPlanner } from "reducers/plannerSlice";
-import DegreeStep from "./steps/DegreeStep";
-import MinorStep from "./steps/MinorStep";
-import SpecialisationStep from "./steps/SpecialisationStep";
-import StartBrowsingStep from "./steps/StartBrowsingStep";
-import YearStep from "./steps/YearStep";
-import "./index.less";
+import STEPS from "./common/steps";
+import DegreeStep from "./DegreeStep";
+import ResetModal from "./ResetModal";
+import SpecialisationStep from "./SpecialisationStep";
+import StartBrowsingStep from "./StartBrowsingStep";
+import S from "./styles";
+import YearStep from "./YearStep";
 
 const { Title } = Typography;
 
 const DegreeWizard = () => {
   const dispatch = useDispatch();
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const navigate = useNavigate();
-
+  const [modalVisible, setModalVisible] = useState(false);
+  const [specs, setSpecs] = useState(["majors", "honours", "minors"]);
+  const stepList = ["year", "degree"].concat(specs).concat(["start browsing"]);
   const degree = useSelector((state) => state.degree);
 
   const csDegreeDisclaimer = () => {
     notification.info({
       message: "Disclaimer",
-      description: "Currently, Circles can only support CS degree and undergrad courses.",
+      description: "Currently, Circles can only support some degrees and undergrad courses. If you find any errors, feel free to report a bug!",
       placement: "bottomRight",
       duration: 4,
     });
   };
 
   useEffect(() => {
-    // TODO: Warning dialog before planner is reset.
     if (degree.isComplete) {
-      setIsModalVisible(true);
+      setModalVisible(true);
     } else {
       dispatch(resetPlanner());
       dispatch(resetDegree());
@@ -49,95 +48,52 @@ const DegreeWizard = () => {
     csDegreeDisclaimer();
   }, []);
 
-  const [currStep, setCurrStep] = useState(1);
-  const incrementStep = () => {
-    setCurrStep(currStep + 1);
-    let nextId = "Degree";
-    if (currStep === 1) nextId = "Degree";
-    if (currStep === 2) nextId = "Specialisation";
-    if (currStep === 3) nextId = "Minor";
-    if (currStep === 4) nextId = "Start Browsing";
+  useEffect(() => {
+    const getSteps = async () => {
+      const res = await axios.get(`/specialisations/getSpecialisationTypes/${degree.programCode}`);
+      setSpecs(res.data.types);
+    };
+    if (degree.programCode !== "") getSteps();
+  }, [degree.programCode]);
+
+  const [currStep, setCurrStep] = useState(STEPS.YEAR);
+
+  const incrementStep = (stepTo) => {
+    const step = stepTo ? stepList[stepTo] : stepList[currStep + 1];
+    if (stepTo > currStep || !stepTo) setCurrStep((prevState) => prevState + 1);
     setTimeout(() => {
-      scroller.scrollTo(nextId, {
+      scroller.scrollTo(step, {
         duration: 1500,
         smooth: true,
       });
     }, 100);
   };
 
-  const handleOk = () => {
-    setIsModalVisible(false);
-    dispatch(resetPlanner());
-    dispatch(resetDegree());
-    dispatch(resetTabs());
-    dispatch(resetCourses());
-  };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
-    navigate("/course-selector");
-  };
-
   return (
     <PageTemplate showHeader={false}>
-      <div className="degree-root-container">
-        <Modal
-          title="Reset Planner?"
-          visible={isModalVisible}
-          onOk={handleOk}
-          onCancel={handleCancel}
-          footer={[
-            <Button key="back" onClick={handleCancel}>
-              Go back to planner
-            </Button>,
-            <Button key="submit" type="primary" danger onClick={handleOk}>
-              Reset
-            </Button>,
-          ]}
-        >
-          <p>
-            Are you sure want to reset your planner? Your existing data will be
-            permanently removed.
-          </p>
-        </Modal>
-        <Title>Welcome to Circles!</Title>
-        <h3 className=" subtitle">
+      <S.ContainerWrapper>
+        <ResetModal modalVisible={modalVisible} setModalVisible={setModalVisible} />
+        <Title className="text">Welcome to Circles!</Title>
+        <S.Subtitle>
           Let’s start by setting up your UNSW degree, so you can make a plan that
           suits you.
-        </h3>
-        <hr className="rule" />
-
-        <div className="steps-container">
-          {currStep >= 1 && (
-            <div className="step-content" id="Year">
-              <YearStep incrementStep={incrementStep} currStep={currStep} />
-            </div>
-          )}
-          {currStep >= 2 && (
-            <div className="step-content" id="Degree">
-              <DegreeStep incrementStep={incrementStep} currStep={currStep} />
-            </div>
-          )}
-          {currStep >= 3 && (
-            <div className="step-content" id="Specialisation">
-              <SpecialisationStep
-                incrementStep={incrementStep}
-                currStep={currStep}
-              />
-            </div>
-          )}
-          {currStep >= 4 && (
-            <div className="step-content" id="Minor">
-              <MinorStep incrementStep={incrementStep} currStep={currStep} />
-            </div>
-          )}
-          {currStep >= 5 && (
-            <div className="step-content" id="Start Browsing">
-              <StartBrowsingStep />
-            </div>
-          )}
-        </div>
-      </div>
+        </S.Subtitle>
+        <S.HorizontalLine />
+        <S.StepsWrapper>
+          <YearStep incrementStep={incrementStep} />
+          {currStep >= STEPS.DEGREE && <DegreeStep incrementStep={incrementStep} />}
+          {specs.map((stepName, index) => (
+            currStep - STEPS.SPECS >= index && (
+            <SpecialisationStep
+              incrementStep={incrementStep}
+              currStep={currStep - STEPS.SPECS === index}
+              type={stepName}
+            />
+            )
+          ))}
+          {currStep === stepList.length - 1 && <StartBrowsingStep />}
+        </S.StepsWrapper>
+      </S.ContainerWrapper>
     </PageTemplate>
   );
 };

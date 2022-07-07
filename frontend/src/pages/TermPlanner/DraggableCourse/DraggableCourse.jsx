@@ -8,12 +8,12 @@ import { Typography } from "antd";
 import Marks from "components/Marks";
 import useMediaQuery from "hooks/useMediaQuery";
 import ContextMenu from "../ContextMenu";
-import "./index.less";
+import S from "./styles";
 
 const DraggableCourse = ({ code, index, showMarks }) => {
   const { Text } = Typography;
   const { courses, isSummerEnabled, completedTerms } = useSelector((state) => state.planner);
-  const theme = useSelector((state) => state.theme);
+
   // prereqs are populated in CourseDescription.jsx via course.raw_requirements
   const {
     prereqs, title, isUnlocked, plannedFor,
@@ -48,18 +48,16 @@ const DraggableCourse = ({ code, index, showMarks }) => {
         index={index}
       >
         {(provided) => (
-          <li
+          <S.CourseWrapper
+            summerEnabled={isSummerEnabled}
+            isSmall={isSmall}
+            dragDisabled={isDragDisabled}
+            warningsDisabled={isDragDisabled && !isUnlocked}
+            warning={!supressed && (!isUnlocked || !isOffered)}
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             ref={provided.innerRef}
-            style={{
-              ...provided.draggableProps.style,
-            }}
-            className={`course ${isSummerEnabled && "summerViewCourse"}
-            ${isDragDisabled && " dragDisabledCourse"}
-            ${isDragDisabled && !isUnlocked && " disabledWarning"}
-            ${(!supressed && (!isUnlocked || !isOffered)) && " warning"}
-            draggable-course-container`}
+            style={provided.draggableProps.style}
             data-tip
             data-for={code}
             id={code}
@@ -68,30 +66,23 @@ const DraggableCourse = ({ code, index, showMarks }) => {
             {!isDragDisabled && shouldHaveWarning
               && (errorIsInformational ? <InfoCircleOutlined style={{ color: "#000" }} /> : (
                 <WarningOutlined
-                  className="alert"
-                  style={{ color: theme === "light" ? "#DC9930" : "white" }}
+                  style={{ color: "#DC9930", fontSize: "16px" }}
                 />
               ))}
-            <div>
-              <div className="draggable-course-info">
-                {isSmall ? (
-                  <Text className="text">{code}</Text>
-                ) : (
-                  <div>
-                    <Text strong className="text">
-                      {code}
-                    </Text>
-                    <Text className="text">: {title} </Text>
-                  </div>
-                )}
-                {showMarks ? (
-                  <Marks
-                    mark={mark}
-                  />
-                ) : null}
-              </div>
-            </div>
-          </li>
+            <S.CourseLabel>
+              {isSmall ? (
+                <Text>{code}</Text>
+              ) : (
+                <div>
+                  <Text strong>
+                    {code}
+                  </Text>
+                  <Text>: {title} </Text>
+                </div>
+              )}
+              {showMarks && <Marks mark={mark} />}
+            </S.CourseLabel>
+          </S.CourseWrapper>
         )}
       </Draggable>
       <ContextMenu code={code} plannedFor={plannedFor} />
@@ -108,7 +99,8 @@ const DraggableCourse = ({ code, index, showMarks }) => {
             : !isUnlocked ? prereqs.trim()
               : !isOffered ? "The course is not offered in this term."
                 : warningMessage.length !== 0 ? warningMessage.join("\n")
-                  : handbookNote}
+                  // eslint-disable-next-line react/no-danger
+                  : <div dangerouslySetInnerHTML={{ __html: handbookNote }} />}
           {!isAccurate ? " The course info may be inaccurate." : ""}
         </ReactTooltip>
       )}
