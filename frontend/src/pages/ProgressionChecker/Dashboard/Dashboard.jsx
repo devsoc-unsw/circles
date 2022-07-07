@@ -8,7 +8,7 @@ import DegreeCard from "../DegreeCard";
 import SkeletonDashboard from "./SkeletonDashboard";
 import "./index.less";
 
-const Dashboard = ({ isLoading, degree }) => {
+const Dashboard = ({ storeUOC, isLoading, degree }) => {
   const { Title } = Typography;
   const currYear = new Date().getFullYear();
   const props = useSpring({
@@ -16,6 +16,13 @@ const Dashboard = ({ isLoading, degree }) => {
     to: { opacity: 1 },
     reset: true,
     config: { tension: 80, friction: 60 },
+  });
+
+  let calTotalUOC = 0;
+  let calCompletedUOC = 0;
+  Object.keys(storeUOC).forEach((group) => {
+    calTotalUOC += storeUOC[group].total;
+    calCompletedUOC += storeUOC[group].curr;
   });
 
   const clickArrow = () => {
@@ -32,8 +39,8 @@ const Dashboard = ({ isLoading, degree }) => {
       ) : (
         <animated.div className="centered" style={props}>
           <LiquidProgressChart
-            completedUOC={degree.completed_UOC}
-            totalUOC={degree.UOC}
+            completedUOC={calCompletedUOC}
+            totalUOC={calTotalUOC}
           />
           <a
             href={`https://www.handbook.unsw.edu.au/undergraduate/programs/${currYear}/${degree.code}?year=${currYear}`}
@@ -44,10 +51,15 @@ const Dashboard = ({ isLoading, degree }) => {
             <Title className="text textLink">{degree.name}</Title>
           </a>
           <div className="cards">
-            {degree.concentrations
-              && degree.concentrations.map((concentration, index) => (
-                <DegreeCard key={index} concentration={concentration} />
-              ))}
+            {Object.entries(degree).map(([key, subGroup], index) => (
+              <DegreeCard
+                index={index}
+                type={key}
+                totalUOC={storeUOC[key].total}
+                currUOC={storeUOC[key].curr}
+                specialisation={subGroup}
+              />
+            ))}
           </div>
           <Button
             className="arrowBtn"
