@@ -32,7 +32,6 @@ const Dashboard = ({ storeUOC, isLoading, degree }) => {
     });
   };
 
-
   return (
     <div className="container">
       {isLoading ? (
