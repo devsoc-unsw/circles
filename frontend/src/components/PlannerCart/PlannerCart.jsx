@@ -6,8 +6,8 @@ import {
   Alert,
   Button, Tooltip, Typography,
 } from "antd";
+import PlannerCartCourseCard from "components/PlannerCartCourseCard";
 import { removeAllCourses } from "reducers/plannerSlice";
-import CartCourseCard from "./CartCourseCard";
 import S from "./styles";
 
 const { Text, Title } = Typography;
@@ -67,7 +67,7 @@ const PlannerCart = () => {
             <S.PlannerCartContent>
               {/* Reversed map to show the most recently added courses first */}
               {Object.keys(courses).reverse().map((courseCode) => (
-                <CartCourseCard
+                <PlannerCartCourseCard
                   code={courseCode}
                   title={courses[courseCode].title}
                   showAlert={showAlert}
