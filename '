@@ -3,10 +3,10 @@
 
 import React, { useState, useEffect } from "react";
 import axiosRequest from "config/axios";
-import jwt_decode from "jwt-decode";
 
 // import MetaTags from "react-meta-tags";
 import "./index.less";
+import jwt_decode from "jwt-decode";
 
 const Auth = () => {
 
@@ -14,7 +14,6 @@ const Auth = () => {
 
   const handleCallbackResponse = (response) => {
     const jwt = response.credential;
-    console.log(jwt_decode(jwt));
     if (requestLogin(jwt).err) {
       console.log("failed: ", jwt)
       return;
