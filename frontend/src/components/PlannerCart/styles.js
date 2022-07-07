@@ -1,4 +1,4 @@
-import { Button as Btn } from "antd";
+import { Button as antdButton } from "antd";
 import styled from "styled-components";
 
 const PlannerCartRoot = styled.div`
@@ -36,24 +36,12 @@ const PlannerCartEmptyCont = styled.div`
   justify-content: space-between;
 `;
 
-const PlannerCartCard = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 10px;
-  border-radius: 10px;
-
-  &:hover {
-    background-color: ${(props) => (props.theme.plannerCartCard.backgroundColorHover)};
-  }
-`;
-
-const DelButton = styled(Btn)`
+const DelButton = styled(antdButton)`
   margin-top: 15px;
   width: 260px;
 `;
 
-const LinkButton = styled(Btn)`
+const LinkButton = styled(antdButton)`
   margin-top: 70px;
   margin: 30px;
   margin-left: 20px;
@@ -66,5 +54,4 @@ export default {
   PlannerCartEmptyCont,
   DelButton,
   LinkButton,
-  PlannerCartCard,
 };
