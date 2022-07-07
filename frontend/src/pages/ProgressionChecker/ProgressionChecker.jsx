@@ -120,7 +120,7 @@ const ProgressionChecker = () => {
   return (
     <PageTemplate>
       <Dashboard isLoading={isLoading} degree={degreeData} />
-      <Divider />
+      <Divider id="divider" />
       <ProgressionCheckerCourses structure={structure} isLoading={isLoading} />
     </PageTemplate>
   );
