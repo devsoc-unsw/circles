@@ -1,6 +1,8 @@
 import React from "react";
+import { scroller } from "react-scroll";
+import { ArrowDownOutlined } from "@ant-design/icons";
 import { animated, useSpring } from "@react-spring/web";
-import { Typography } from "antd";
+import { Button, Typography } from "antd";
 import LiquidProgressChart from "components/LiquidProgressChart";
 import DegreeCard from "../DegreeCard";
 import SkeletonDashboard from "./SkeletonDashboard";
@@ -9,13 +11,19 @@ import "./index.less";
 const Dashboard = ({ isLoading, degree }) => {
   const { Title } = Typography;
   const currYear = new Date().getFullYear();
-
   const props = useSpring({
     from: { opacity: 0 },
     to: { opacity: 1 },
     reset: true,
     config: { tension: 80, friction: 60 },
   });
+
+  const clickArrow = () => {
+    scroller.scrollTo("divider", {
+      duration: 1500,
+      smooth: true,
+    });
+  };
 
   return (
     <div className="container">
@@ -41,6 +49,13 @@ const Dashboard = ({ isLoading, degree }) => {
                 <DegreeCard key={index} concentration={concentration} />
               ))}
           </div>
+          <Button
+            className="arrowBtn"
+            type="primary"
+            shape="circle"
+            icon={<ArrowDownOutlined />}
+            onClick={clickArrow}
+          />
         </animated.div>
       )}
     </div>
