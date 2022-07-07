@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "jwt-decode": "^3.1.2",
     "react-meta-tags": "^1.0.1"
   }
 }
