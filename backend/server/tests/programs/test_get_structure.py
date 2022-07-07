@@ -1,7 +1,8 @@
 # assumes that getPrograms, getMajors, and getMinors isnt borked.
+from itertools import chain
 from more_itertools import flatten
 import requests
-from hypothesis import given, settings
+from hypothesis import HealthCheck, given, settings
 from hypothesis.strategies import DrawFn, composite, sampled_from
 
 programs = [
@@ -30,7 +31,6 @@ def major_minor_for_program(draw: DrawFn):
         spec1 = draw(strat)
     while spec2 in fake_specs:
         spec2 = draw(strat)
-
     return (program, spec1, spec2)
 
 
@@ -42,8 +42,11 @@ def test_all_programs_fetched(program):
     structure.json()["structure"]["General"] != {}
 
 @given(major_minor_for_program())
-@settings(deadline=500)
+@settings(deadline=1000)
 def test_all_specs_fetched(specifics):
+    # this is stupid
+    if specifics[1] == specifics[2]:
+        return
     structure = requests.get(
         f"http://127.0.0.1:8000/programs/getStructure/{specifics[0]}/{specifics[1]}+{specifics[2]}"
     )

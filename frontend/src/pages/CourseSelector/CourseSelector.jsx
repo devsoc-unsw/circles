@@ -1,24 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { LockOutlined, UnlockOutlined } from "@ant-design/icons";
-import { notification, Switch, Tooltip } from "antd";
+import { useSelector } from "react-redux";
+import { notification } from "antd";
 import axios from "axios";
 import PageTemplate from "components/PageTemplate";
-import { toggleLockedCourses } from "reducers/settingsSlice";
+import CourseBanner from "./CourseBanner";
 import CourseDescription from "./CourseDescription";
-import CourseMenu from "./CourseMenu";
-import CourseSearchBar from "./CourseSearchBar";
+import CourseSidebar from "./CourseSidebar";
 import CourseTabs from "./CourseTabs";
-import "./index.less";
+import S from "./styles";
 
 const CourseSelector = () => {
   const [structure, setStructure] = useState({});
-  const dispatch = useDispatch();
 
   const {
-    programCode, programName, specs,
+    programCode, specs,
   } = useSelector((state) => state.degree);
-
   const { courses } = useSelector((state) => state.planner);
 
   const { showLockedCourses } = useSelector((state) => state.settings);
@@ -35,7 +31,7 @@ const CourseSelector = () => {
     };
 
     // only open for users with no courses
-    if (Object.keys(courses).length === 0) {
+    if (!Object.keys(courses).length) {
       openNotification();
     }
   }, [courses]);
@@ -56,35 +52,17 @@ const CourseSelector = () => {
 
   return (
     <PageTemplate>
-      <div className="cs-root">
-        <div className="cs-top-cont">
-          <div className="cs-degree-cont">
-            {programCode !== "" && (
-              <h1 className="text">
-                {programCode} - {programName}
-              </h1>
-            )}
-          </div>
-          <CourseSearchBar />
-          <Tooltip placement="topLeft" title={showLockedCourses ? "Hide locked courses" : "Show locked courses"}>
-            <Switch
-              defaultChecked={showLockedCourses}
-              className="cs-toggle-locked"
-              onChange={() => dispatch(toggleLockedCourses())}
-              checkedChildren={<LockOutlined />}
-              unCheckedChildren={<UnlockOutlined />}
-            />
-          </Tooltip>
-        </div>
+      <S.ContainerWrapper>
+        <CourseBanner />
         <CourseTabs />
-        <div className="cs-bottom-cont">
-          <CourseMenu
+        <S.ContentWrapper>
+          <CourseSidebar
             structure={structure}
             showLockedCourses={showLockedCourses}
           />
           <CourseDescription structure={structure} />
-        </div>
-      </div>
+        </S.ContentWrapper>
+      </S.ContainerWrapper>
     </PageTemplate>
   );
 };

@@ -6,7 +6,6 @@ import "./index.less";
 
 const TableView = ({ isLoading, structure }) => {
   const { Title } = Typography;
-  const [plannerCourses, setPlannerCourses] = useState({});
   const [tableLayout, setTableLayout] = useState({});
   const { years, startYear, courses } = useSelector((store) => store.planner);
 
@@ -62,12 +61,14 @@ const TableView = ({ isLoading, structure }) => {
         delete newTableLayout[group];
       }
     });
-    setTableLayout(newTableLayout);
+
+    return newTableLayout;
   };
 
   useEffect(() => {
-    setPlannerCourses(getFormattedPlannerCourses(years, startYear, courses));
-    generateTableStructure(plannerCourses);
+    const plannerCourses = getFormattedPlannerCourses(years, startYear, courses);
+    const tableStructure = generateTableStructure(plannerCourses);
+    setTableLayout(tableStructure);
   }, [isLoading, structure, years, startYear, courses]);
 
   const columns = [

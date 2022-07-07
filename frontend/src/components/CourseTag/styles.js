@@ -4,8 +4,8 @@ import styled from "styled-components";
 const Tag = styled(antdTag)`
   margin-bottom: 8px;
 
-  ${({ theme }) => theme.tagBackground && `
-    background: ${theme.tagBackground};
+  ${({ theme }) => theme.courseTag && `
+    background: ${theme.courseTag.backgroundColor};
   `}
 
   :hover {
