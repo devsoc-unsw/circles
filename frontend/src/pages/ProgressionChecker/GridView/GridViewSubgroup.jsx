@@ -43,8 +43,8 @@ const GridViewSubgroup = ({
 
   return (
     <div key={subgroupKey}>
-      <Title level={2}>{subgroupKey}</Title>
-      <Title level={3}>{uoc} UOC worth of courses</Title>
+      <Title level={2} className="text">{subgroupKey}</Title>
+      <Title level={3} className="text">{uoc} UOC worth of courses</Title>
       <S.CourseGroup>
         {courseSection()}
       </S.CourseGroup>
