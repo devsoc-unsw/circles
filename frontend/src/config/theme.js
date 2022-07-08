@@ -44,6 +44,10 @@ export const lightTheme = {
     backgroundColor: "#fafafa",
     borderColor: "#f0f0f0",
   },
+
+  degreeCard: {
+    backgroundColor: "#f0f0f0",
+  },
 };
 
 export const darkTheme = {
@@ -71,5 +75,9 @@ export const darkTheme = {
 
   specialsationStep: {
     background: "#fff",
+  },
+
+  degreeCard: {
+    backgroundColor: "#17191a",
   },
 };
