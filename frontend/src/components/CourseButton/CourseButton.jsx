@@ -1,18 +1,18 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/router";
 import { addTab } from "reducers/courseTabsSlice";
 import S from "./styles";
 
 const CourseButton = ({ course, planned }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const courseCode = course.key;
 
   const handleCourseLink = (e) => {
     e.stopPropagation();
-    navigate("/course-selector");
+    router.push("/course-selector");
     dispatch(addTab(courseCode));
   };
 

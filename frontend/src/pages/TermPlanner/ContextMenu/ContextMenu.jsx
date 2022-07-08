@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Item, Menu, theme } from "react-contexify";
 import { FaRegCalendarTimes } from "react-icons/fa";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { DeleteFilled, EditFilled, InfoCircleFilled } from "@ant-design/icons";
+import { useRouter } from "next/router";
 import EditMarkModal from "components/EditMarkModal";
 import { addTab } from "reducers/courseTabsSlice";
 import { removeCourse, unschedule } from "reducers/plannerSlice";
@@ -11,7 +11,7 @@ import "react-contexify/dist/ReactContexify.css";
 
 const ContextMenu = ({ code, plannedFor }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const handleDelete = () => {
     dispatch(removeCourse(code));
@@ -26,7 +26,7 @@ const ContextMenu = ({ code, plannedFor }) => {
   const id = `${code}-context`;
 
   const handleInfo = () => {
-    navigate("/course-selector");
+    router.push("/course-selector");
     dispatch(addTab(code));
   };
 

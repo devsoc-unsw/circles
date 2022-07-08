@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { DeleteOutlined } from "@ant-design/icons";
 import {
   Button, Popconfirm, Tooltip, Typography,
 } from "antd";
+import { useRouter } from "next/router";
 import { addTab } from "reducers/courseTabsSlice";
 import { removeCourse } from "reducers/plannerSlice";
 import S from "./styles";
@@ -13,7 +13,7 @@ const { Text } = Typography;
 
 const PlannerCartCourseCard = ({ code, title, showAlert }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const confirmDelete = () => {
     dispatch(removeCourse(code));
@@ -25,7 +25,7 @@ const PlannerCartCourseCard = ({ code, title, showAlert }) => {
   };
 
   const handleCourseLink = () => {
-    navigate("/course-selector");
+    router.push("/course-selector");
     dispatch(addTab(code));
   };
 

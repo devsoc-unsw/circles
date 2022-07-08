@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
 import { CalendarOutlined, DeleteOutlined } from "@ant-design/icons";
 import {
   Alert,
   Button, Tooltip, Typography,
 } from "antd";
+import { useRouter } from "next/router";
 import PlannerCartCourseCard from "components/PlannerCartCourseCard";
 import { removeAllCourses } from "reducers/plannerSlice";
 import S from "./styles";
@@ -14,7 +14,7 @@ const { Text, Title } = Typography;
 
 const PlannerCart = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const router = useRouter();
   const courses = useSelector((store) => store.planner.courses);
   const [openMenu, setOpenMenu] = useState(false);
   const [show, setShow] = useState(false);
@@ -31,7 +31,7 @@ const PlannerCart = () => {
       setCode("");
     }, 3500);
   };
-  const pathname = useLocation();
+  const { pathname } = useRouter();
 
   useEffect(() => {
     setOpenMenu(false);
@@ -85,7 +85,7 @@ const PlannerCart = () => {
                 shape="round"
                 className="planner-cart-link-to-cs"
                 onClick={() => {
-                  navigate("/course-selector");
+                  router.push("/course-selector");
                 }}
               >
                 Go to course selector

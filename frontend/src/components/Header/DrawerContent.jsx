@@ -1,14 +1,14 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { BugOutlined } from "@ant-design/icons";
 import { Menu } from "antd";
+import { useRouter } from "next/router";
 import { FEEDBACK_LINK, inDev } from "config/constants";
 
 const DrawerContent = ({ onCloseDrawer }) => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const handlePush = (url) => {
-    navigate(url);
+    router.push(url);
     onCloseDrawer();
   };
 

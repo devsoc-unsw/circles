@@ -1,15 +1,15 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { EyeOutlined } from "@ant-design/icons";
 import { Badge, Tooltip } from "antd";
+import { useRouter } from "next/router";
 import CourseButton from "components/CourseButton";
 import S from "./styles";
 
 const CourseBadge = ({ course }) => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const handleClick = () => {
-    navigate("/term-planner");
+    router.push("/term-planner");
   };
 
   if (course.unplanned) {

@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/router";
 import {
   Button, notification,
 } from "antd";
@@ -19,7 +19,7 @@ const openNotification = (msg) => {
 };
 
 const StartBrowsingStep = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const dispatch = useDispatch();
   const { programCode, specs } = useSelector((state) => state.degree);
 
@@ -30,7 +30,7 @@ const StartBrowsingStep = () => {
       openNotification("Please select a specialisation");
     } else {
       dispatch(setIsComplete(true));
-      navigate("/course-selector");
+      router.push("/course-selector");
     }
   };
 

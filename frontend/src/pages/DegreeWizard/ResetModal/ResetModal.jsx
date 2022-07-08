@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/router";
 import { Button, Modal } from "antd";
 import { resetCourses } from "reducers/coursesSlice";
 import { resetTabs } from "reducers/courseTabsSlice";
@@ -8,7 +8,7 @@ import { resetDegree } from "reducers/degreeSlice";
 import { resetPlanner } from "reducers/plannerSlice";
 
 const ResetModal = ({ modalVisible, setModalVisible }) => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const dispatch = useDispatch();
 
   const handleOk = () => {
@@ -21,7 +21,7 @@ const ResetModal = ({ modalVisible, setModalVisible }) => {
 
   const handleCancel = () => {
     setModalVisible(false);
-    navigate("/course-selector");
+    router.push("/course-selector");
   };
 
   return (

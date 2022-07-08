@@ -1,22 +1,22 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useRouter } from "next/router";
 import circlesLogo from "assets/circlesWithBg.svg";
 import S from "./styles";
 
 const PageLoading = ({ setLoading }) => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const degree = useSelector((state) => state.degree);
 
-  const { pathname } = useLocation();
+  const { pathname } = useRouter();
   // redirect index page to course selector
   const route = pathname === "/" ? "/course-selector" : pathname;
 
   useEffect(() => {
     setTimeout(() => {
       // check if this is a first time user
-      navigate(!degree.isComplete ? "/degree-wizard" : route);
+      router.push(!degree.isComplete ? "/degree-wizard" : route);
       setLoading(false);
     }, 750);
   }, []);

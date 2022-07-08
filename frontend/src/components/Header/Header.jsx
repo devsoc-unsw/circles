@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { BarsOutlined } from "@ant-design/icons";
 import {
   Button, Drawer,
   Menu, Typography,
 } from "antd";
+import { useRouter } from "next/router";
 import circlesLogo from "assets/circlesLogo.svg";
 import PlannerCart from "components/PlannerCart";
 import ThemeToggle from "components/ThemeToggle";
@@ -18,7 +19,7 @@ const { Title } = Typography;
 const Header = () => {
   const isSmall = useMediaQuery("(max-width: 1000px)");
   const [showDrawer, setShowDrawer] = useState(false);
-  const { pathname } = useLocation();
+  const { pathname } = useRouter();
 
   const smallHeader = (
     <S.HeaderContent>
