@@ -101,11 +101,11 @@ def require_login(protected_func):
 
 
 # TODO: document responses
-@router.post( "/login",)
-
+@router.post("/login")
 @require_login
 def auth_login(token = ""):
     # TODO: create a user if no exist
     print(token)
     return token
+
 

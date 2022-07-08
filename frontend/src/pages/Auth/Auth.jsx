@@ -54,18 +54,65 @@ const Auth = ({ userObject, setUserObject }) => {
     );
 
     // recent acc prompt
-    if (!Object.keys(userObject).length) {
+    if (Object.keys(userObject).length === 0) {
       google.accounts.id.prompt();
     }
   }, []);
 
+  const LogoutButton = () => {
+    const logout = () => {
+      setUserObject({})
+    };
+
+    return (
+      <div onClick={logout}>
+        <h1> LOGOUT </h1>
+      </div>
+    );
+  }
+
+  const JsonObject = ({ obj }) => {
+    return (
+      <div className="json-obj">
+        {"{"}
+          {
+            Array.from(Object.entries(obj)).map(
+              ([k, v]) => (
+                <div className="json-obj-pair">
+                  <span className="tab-char"></span>
+                  <span className="json-obj-key">"{k}"</span>
+                  :<span className="tab-char" />
+                  <span className="json-obj-val">{v}</span>
+                </div>
+              )
+            )
+          }
+        {"}"}
+      </div>
+    )
+  }
+
   return (
     <div>
-      {Object.keys(userObject).length ?
-        (<div id="signInDiv" />)
+      {Object.keys(userObject).length === 0 ?
+        (
+          <div>
+            <h1>NOT LOGGED IN</h1>
+            <div id="signInDiv" />
+          </div>
+        )
         :
         (
-          <div> signed in </div>
+          <div>
+            <div> signed in </div>
+            <div>
+              <h2>Data:</h2>
+              <JsonObject
+                obj={userObject}
+              />
+            </div>
+            <LogoutButton />
+          </div>
         )
       }
     </div>

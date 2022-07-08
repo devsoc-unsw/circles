@@ -23,32 +23,32 @@ const App = () => {
 
   const [userObject, setUserObject] = useState({});
 
-  const handleCallbackResponse = (response) => {
-    const jwt = response.credential;
-    // if (requestLogin(jwt).err) {
-    //   console.log("failed: ", jwt)
-    //   return;
-    // }
-    console.log("callBackResponse with jwt: ", jwt);
-    // Should now decode own jwt - let the BE `/auth/login` route do it
-    // decode own just for show rn
-    setUserObject(jwt);
-
-    return jwt;
-  };
+  // const handleCallbackResponse = (response) => {
+  //   const jwt = response.credential;
+  //   // if (requestLogin(jwt).err) {
+  //   //   console.log("failed: ", jwt)
+  //   //   return;
+  //   // }
+  //   console.log("callBackResponse with jwt: ", jwt);
+  //   // Should now decode own jwt - let the BE `/auth/login` route do it
+  //   // decode own just for show rn
+  //   setUserObject(jwt);
+  //
+  //   return jwt;
+  // };
 
   useEffect(() => {
     // initialise theme
     document.body.classList.add(theme);
     document.body.classList.remove(theme === "light" ? "dark" : "light");
 
-    /* global google */
-    google.accounts.id.initialize({
-      client_id: "1017197944285-i4ov50aak72667j31tuieffd8o2vd5md.apps.googleusercontent.com",
-      callback: handleCallbackResponse,
-    });
-
-    google.accounts.id.prompt();
+    // /* global google */
+    // google.accounts.id.initialize({
+    //   client_id: "1017197944285-i4ov50aak72667j31tuieffd8o2vd5md.apps.googleusercontent.com",
+    //   callback: handleCallbackResponse,
+    // });
+    //
+    // google.accounts.id.prompt();
   }, [theme]);
 
   return (
