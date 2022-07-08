@@ -4,15 +4,15 @@ import {
   BorderlessTableOutlined,
   EyeFilled,
   EyeInvisibleOutlined,
-  TableOutlined,
+  // TableOutlined,
 } from "@ant-design/icons";
 import { Button, Divider } from "antd";
 import axios from "axios";
 import PageTemplate from "components/PageTemplate";
 import Dashboard from "./Dashboard";
 import GridView from "./GridView/GridView";
+import S from "./styles";
 import TableView from "./TableView";
-import "./index.less";
 
 const ProgressionCheckerCourses = ({ structure, isLoading }) => {
   const views = {
@@ -27,34 +27,36 @@ const ProgressionCheckerCourses = ({ structure, isLoading }) => {
     <div>
       {(view === views.GRID || view === views.CONCISE) ? (
         <>
-          <Button
-            className="viewSwitcher"
-            type="primary"
-            icon={<TableOutlined />}
-            onClick={() => setView(views.TABLE)}
-          >
-            Display Table View
-          </Button>
-          <Button
-            className="viewSwitcher"
-            type="primary"
-            icon={view === views.GRID ? <EyeInvisibleOutlined /> : <EyeFilled />}
-            onClick={() => setView(view === views.GRID ? views.CONCISE : views.GRID)}
-          >
-            {view === views.GRID ? "Display Concise Mode" : "Display Full Mode"}
-          </Button>
+          <S.ViewSwitcherWrapper>
+            <Button
+              type="primary"
+              icon={view === views.GRID ? <EyeInvisibleOutlined /> : <EyeFilled />}
+              onClick={() => setView(view === views.GRID ? views.CONCISE : views.GRID)}
+            >
+              {view === views.GRID ? "Display Concise Mode" : "Display Full Mode"}
+            </Button>
+            {/* TODO: Disable TableView for now */}
+            {/* <Button
+              type="primary"
+              icon={<TableOutlined />}
+              onClick={() => setView(views.TABLE)}
+            >
+              Display Table View
+            </Button> */}
+          </S.ViewSwitcherWrapper>
           <GridView isLoading={isLoading} structure={structure} concise={view === views.CONCISE} />
         </>
       ) : (
         <>
-          <Button
-            className="viewSwitcher"
-            type="primary"
-            icon={<BorderlessTableOutlined />}
-            onClick={() => setView(defaultView)}
-          >
-            Display Grid View
-          </Button>
+          <S.ViewSwitcherWrapper>
+            <Button
+              type="primary"
+              icon={<BorderlessTableOutlined />}
+              onClick={() => setView(defaultView)}
+            >
+              Display Grid View
+            </Button>
+          </S.ViewSwitcherWrapper>
           <TableView isLoading={isLoading} structure={structure} />
         </>
       )}
@@ -87,47 +89,42 @@ const ProgressionChecker = () => {
   }, [programCode, specs]);
 
   const storeUOC = {};
-  // Example groups: Major, Minor, General
+
+  // Example groups: Major, Minor, General, Rules
   Object.keys(structure).forEach((group) => {
     storeUOC[group] = {
       total: 0,
       curr: 0,
     };
+
+    // Example subgroup: Core Courses, Computing Electives
     Object.keys(structure[group]).forEach((subgroup) => {
-      if (typeof structure[group][subgroup] !== "string") {
-        // case where structure[group][subgroup] gives information on courses in an object
-        storeUOC[group].total += structure[group][subgroup].UOC;
-        const subgroupStructure = structure[group][subgroup];
+      // Do not include if field is not an object i.e. 'name' field
+      if (typeof structure[group][subgroup] === "string") return;
 
-        const isRule = subgroupStructure.type && subgroupStructure.type.includes("rule");
+      storeUOC[group].total += structure[group][subgroup].UOC;
+      const subgroupStructure = structure[group][subgroup];
 
-        if (subgroupStructure.courses && !isRule) {
-          // only consider disciplinary component courses
-          Object.keys(subgroupStructure.courses).forEach((courseCode) => {
-            if (planner.courses[courseCode]) {
-              storeUOC[group].curr += planner.courses[courseCode].UOC;
-            }
-          });
-        } else {
-          // If there is no specified course list for the subgroup, then manually
-          // show the added courses on the menu.
-          Object.keys(planner.courses).forEach((courseCode) => {
-            const courseData = planner.courses[courseCode];
-            if (courseData && courseData.type === subgroup) {
-              // add UOC to curr
-              storeUOC[group].curr += courseData.UOC;
-            }
-          });
-        }
+      const isRule = subgroupStructure.type && subgroupStructure.type.includes("rule");
+
+      if (subgroupStructure.courses && !isRule) {
+        // only consider disciplinary component courses
+        Object.keys(subgroupStructure.courses).forEach((courseCode) => {
+          if (planner.courses[courseCode]) {
+            storeUOC[group].curr += planner.courses[courseCode].UOC;
+          }
+        });
       }
     });
   });
 
   return (
     <PageTemplate>
-      <Dashboard storeUOC={storeUOC} isLoading={isLoading} degree={structure} />
-      <Divider id="divider" />
-      <ProgressionCheckerCourses structure={structure} isLoading={isLoading} />
+      <S.Wrapper>
+        <Dashboard storeUOC={storeUOC} isLoading={isLoading} structure={structure} />
+        <Divider id="divider" />
+        <ProgressionCheckerCourses structure={structure} isLoading={isLoading} />
+      </S.Wrapper>
     </PageTemplate>
   );
 };
