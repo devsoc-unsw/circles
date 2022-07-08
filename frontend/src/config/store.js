@@ -52,6 +52,8 @@ const migrations = {
     const newState = { ...oldState };
     console.log("old State:");
     console.log(oldState);
+    console.log(oldState.planner.courses);
+    console.log(typeof (oldState.planner.courses));
     oldState.planner.courses.forEach(async (course) => {
       console.log("DOING", course);
       const [formattedData, err] = await axiosRequest("get", `/courses/getCourse/${course}`);
