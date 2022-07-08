@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Menu } from "antd";
 import axios from "axios";
-import { AnimatePresence } from "framer-motion/dist/framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { setCourses } from "reducers/coursesSlice";
 import prepareUserPayload from "../utils";
 import LoadingSkeleton from "./LoadingSkeleton/LoadingSkeleton";
