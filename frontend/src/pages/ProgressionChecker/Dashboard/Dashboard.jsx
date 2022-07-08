@@ -2,12 +2,12 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { scroller } from "react-scroll";
 import { ArrowDownOutlined } from "@ant-design/icons";
-import { animated, useSpring } from "@react-spring/web";
+import { useSpring } from "@react-spring/web";
 import { Button, Typography } from "antd";
 import LiquidProgressChart from "components/LiquidProgressChart";
 import DegreeCard from "../DegreeCard";
 import SkeletonDashboard from "./SkeletonDashboard";
-import "./index.less";
+import S from "./styles";
 
 const Dashboard = ({ storeUOC, isLoading, structure }) => {
   const { Title } = Typography;
@@ -27,7 +27,7 @@ const Dashboard = ({ storeUOC, isLoading, structure }) => {
     calCompletedUOC += storeUOC[group].curr;
   });
 
-  const clickArrow = () => {
+  const handleClick = () => {
     scroller.scrollTo("divider", {
       duration: 1500,
       smooth: true,
@@ -37,11 +37,11 @@ const Dashboard = ({ storeUOC, isLoading, structure }) => {
   const { programCode, programName } = useSelector((state) => state.degree);
 
   return (
-    <div className="container">
+    <S.Wrapper>
       {isLoading ? (
         <SkeletonDashboard />
       ) : (
-        <animated.div className="centered" style={props}>
+        <S.ContentWrapper style={props}>
           <LiquidProgressChart
             completedUOC={calCompletedUOC}
             totalUOC={calTotalUOC}
@@ -50,11 +50,10 @@ const Dashboard = ({ storeUOC, isLoading, structure }) => {
             href={`https://www.handbook.unsw.edu.au/undergraduate/programs/${currYear}/${programCode}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="textLink"
           >
-            <Title className="text textLink">{programCode} - {programName}</Title>
+            <Title className="text">{programCode} - {programName}</Title>
           </a>
-          <div className="cards">
+          <S.CardsWrapper>
             {Object.entries(structure)
               .filter(([group]) => group !== "Rules")
               .map(([group, specialisation]) => (
@@ -66,17 +65,16 @@ const Dashboard = ({ storeUOC, isLoading, structure }) => {
                   specialisation={specialisation}
                 />
               ))}
-          </div>
+          </S.CardsWrapper>
           <Button
-            className="arrowBtn"
             type="primary"
             shape="circle"
             icon={<ArrowDownOutlined />}
-            onClick={clickArrow}
+            onClick={handleClick}
           />
-        </animated.div>
+        </S.ContentWrapper>
       )}
-    </div>
+    </S.Wrapper>
   );
 };
 
