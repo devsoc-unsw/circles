@@ -2,24 +2,23 @@
 
 
 from functools import wraps
+
 from fastapi import APIRouter
 from fastapi import HTTPException
 from google.auth.transport import requests
 from google.oauth2 import id_token
-# import jwt
+from time import time
 
-# TODO: Move this to a config file
-CLIENT_ID = "1017197944285-i4ov50aak72667j31tuieffd8o2vd5md.apps.googleusercontent.com"
+from server.config import CLIENT_ID
 
 router = APIRouter(
     prefix="/auth",
     tags=["auth"],
 )
 
-# TODO: Need to validate secret somehow
+# TODO: should have own type for jwt
 
 
-# TODO: Wrap this as a decorator aroudn proptected apis
 def validate_login(token) -> bool:
     """
         Take a token and validate a login off the following criteria
@@ -104,8 +103,29 @@ def require_login(protected_func):
 @router.post("/login")
 @require_login
 def auth_login(token = ""):
-    # TODO: create a user if no exist
-    print(token)
+    if not validate_user_exists(token):
+        return auth_new_user()
     return token
 
 
+@require_login
+def auth_new_user(token):
+    """
+        Create a new user based off the token provided.
+        Not its own route, as creation is indistinguishable to "/login"
+    """
+    
+    creation_time = int(time())
+
+    return {
+        "creation_time": creation_time,
+        "user_id": token["sub"],
+        "token": token
+    }
+
+def validate_user_exists(token: str) -> bool:
+    """
+        Given a valid token, check if the associated user exists.
+    """
+    # TODO: should actually check inside of the  database once created
+    return token["sub"] not in [None, ""]
