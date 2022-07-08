@@ -19,6 +19,7 @@ const ExportPlannerMenu = ({ plannerRef }) => {
   const [format, setFormat] = useState("png");
 
   const download = () => {
+    if (typeof window === "undefined") return;
     if (format === "png") {
       exportComponentAsPNG(plannerRef, {
         fileName: "Term Planner",

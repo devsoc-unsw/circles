@@ -1,13 +1,13 @@
 import React from "react";
 import { Droppable } from "react-beautiful-dnd";
 import { useSelector } from "react-redux";
-import useMediaQuery from "hooks/useMediaQuery";
+import useMediaQuery from "react-responsive";
 import DraggableCourse from "../DraggableCourse";
 import S from "./styles";
 
 const UnplannedColumn = ({ dragging }) => {
   const { isSummerEnabled, unplanned } = useSelector((state) => state.planner);
-  const isSmall = useMediaQuery("(max-width: 1400px)");
+  const isSmall = useMediaQuery({ maxWidth: 1400 });
 
   return (
     <S.UnplannedContainer summerEnabled={isSummerEnabled}>

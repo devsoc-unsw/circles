@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import ReactTooltip from "react-tooltip";
-import { Liquid } from "@ant-design/charts";
+import dynamic from "next/dynamic";
 import {
   darkGrey,
   lightGrey,
@@ -9,6 +9,11 @@ import {
   purple,
   yellow,
 } from "config/constants";
+
+// TODO: Very hacky to resolve global css issue from this component
+const Liquid = dynamic(() => import("@ant-design/plots/es/components/liquid"), {
+  suspense: true,
+});
 
 const LiquidProgressChart = ({ completedUOC, totalUOC }) => {
   const [percent, setPercent] = useState(0);

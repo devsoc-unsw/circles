@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useMediaQuery } from "react-responsive";
 import { BarsOutlined } from "@ant-design/icons";
 import {
   Button, Drawer,
@@ -9,14 +10,13 @@ import { useRouter } from "next/router";
 import PlannerCart from "components/PlannerCart";
 import ThemeToggle from "components/ThemeToggle";
 import { inDev } from "config/constants";
-import useMediaQuery from "hooks/useMediaQuery";
 import DrawerContent from "./DrawerContent";
 import S from "./styles";
 
 const { Title } = Typography;
 
 const Header = () => {
-  const isSmall = useMediaQuery("(max-width: 1000px)");
+  const isSmall = useMediaQuery({ maxWidth: 1000 });
   const [showDrawer, setShowDrawer] = useState(false);
   const { pathname } = useRouter();
 

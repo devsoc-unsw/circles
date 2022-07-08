@@ -65,7 +65,7 @@ const GraphicalSelector = () => {
       // hide the node when clicked
       const node = ev.item;
       node.hide();
-      graph.paint();
+      graphInstance.paint();
     });
   };
 

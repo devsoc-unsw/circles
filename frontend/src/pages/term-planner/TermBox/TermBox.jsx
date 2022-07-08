@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Droppable } from "react-beautiful-dnd";
+import useMediaQuery from "react-responsive";
 import { useDispatch, useSelector } from "react-redux";
 import { LockFilled, UnlockFilled } from "@ant-design/icons";
 import { Badge } from "antd";
-import useMediaQuery from "hooks/useMediaQuery";
 import { toggleTermComplete } from "reducers/plannerSlice";
 import DraggableCourse from "../DraggableCourse";
 import S from "./styles";
@@ -33,7 +33,7 @@ const TermBox = ({
 
   const isOffered = termsOffered.includes(term) && !isCompleted;
 
-  const isSmall = useMediaQuery("(max-width: 1400px)");
+  const isSmall = useMediaQuery({ maxWidth: 1400 });
 
   const iconStyle = {
     color: "#fff",

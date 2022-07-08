@@ -6,13 +6,17 @@ import {
 } from "@ant-design/icons";
 import Tippy from "@tippyjs/react";
 import { Popconfirm, Switch, Tooltip } from "antd";
+import dynamic from "next/dynamic";
 import { unhideAllYears, unscheduleAll } from "reducers/plannerSlice";
 import { toggleShowMarks, toggleShowWarnings } from "reducers/settingsSlice";
-import ExportPlannerMenu from "../ExportPlannerMenu";
 import HelpMenu from "../HelpMenu/HelpMenu";
 import SettingsMenu from "../SettingsMenu";
 import { isPlannerEmpty } from "../utils";
 import S from "./styles";
+
+const ExportPlannerMenu = dynamic(() => import("../ExportPlannerMenu"), {
+  ssr: true,
+});
 
 const OptionsHeader = ({ plannerRef }) => {
   const { theme } = useSelector((state) => state.settings);

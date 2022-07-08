@@ -2,11 +2,11 @@ import React from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { useContextMenu } from "react-contexify";
 import { useSelector } from "react-redux";
+import useMediaQuery from "react-responsive";
 import ReactTooltip from "react-tooltip";
 import { InfoCircleOutlined, WarningOutlined } from "@ant-design/icons";
 import { Typography } from "antd";
 import Marks from "components/Marks";
-import useMediaQuery from "hooks/useMediaQuery";
 import ContextMenu from "../ContextMenu";
 import S from "./styles";
 
@@ -33,7 +33,7 @@ const DraggableCourse = ({ code, index, showMarks }) => {
     if (!isDragDisabled) show(e);
   };
 
-  const isSmall = useMediaQuery("(max-width: 1400px)");
+  const isSmall = useMediaQuery({ maxWidth: 1400 });
   const shouldHaveWarning = !supressed && (
     isLegacy || !isUnlocked || BEwarnings || !isAccurate || !isOffered
   );

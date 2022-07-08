@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import useMediaQuery from "react-responsive";
 import {
   LockOutlined, MinusOutlined, PlusOutlined, WarningOutlined,
 } from "@ant-design/icons";
@@ -8,7 +9,6 @@ import {
 } from "antd";
 import { motion } from "framer-motion";
 import axiosRequest from "config/axios";
-import useMediaQuery from "hooks/useMediaQuery";
 import { addTab } from "reducers/courseTabsSlice";
 import { addToUnplanned, removeCourse } from "reducers/plannerSlice";
 import S from "./styles";
@@ -74,7 +74,7 @@ const MenuItem = ({
     dispatch(removeCourse(plannedCourse));
   };
 
-  const isSmall = useMediaQuery("(max-width: 1400px)");
+  const isSmall = useMediaQuery({ maxWidth: 1400 });
 
   return (
     <motion.div transition={{ ease: "easeOut", duration: 0.3 }} layout>
