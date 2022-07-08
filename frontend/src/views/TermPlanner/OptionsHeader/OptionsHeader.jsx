@@ -26,6 +26,7 @@ const OptionsHeader = ({ plannerRef }) => {
 
   const iconStyles = {
     fontSize: "20px",
+    color: "#323739",
   };
 
   return (
