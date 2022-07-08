@@ -24,7 +24,8 @@ const Dashboard = ({ storeUOC, isLoading, structure }) => {
   let calCompletedUOC = 0;
   Object.keys(storeUOC).forEach((group) => {
     calTotalUOC += storeUOC[group].total;
-    calCompletedUOC += storeUOC[group].curr;
+    // Math min to handle overflow of courses
+    calCompletedUOC += Math.min(storeUOC[group].curr, storeUOC[group].total);
   });
 
   const handleClick = () => {
