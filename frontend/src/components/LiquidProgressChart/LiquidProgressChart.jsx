@@ -10,7 +10,6 @@ import {
   yellow,
 } from "config/constants";
 
-// TODO: Very hacky to resolve global css issue from this component
 const Liquid = dynamic(() => import("@ant-design/plots/es/components/liquid"), {
   ssr: false,
 });

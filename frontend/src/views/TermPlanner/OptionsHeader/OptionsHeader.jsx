@@ -15,7 +15,7 @@ import { isPlannerEmpty } from "../utils";
 import S from "./styles";
 
 const ExportPlannerMenu = dynamic(() => import("../ExportPlannerMenu"), {
-  ssr: true,
+  ssr: false,
 });
 
 const OptionsHeader = ({ plannerRef }) => {
