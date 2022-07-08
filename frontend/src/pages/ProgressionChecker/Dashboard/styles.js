@@ -2,7 +2,7 @@ import { animated } from "@react-spring/web";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-  height: calc(100vh - var(--navbar-height));
+  min-height: calc(100vh - var(--navbar-height));
   display: flex;
   justify-content: center;
   align-items: center;
