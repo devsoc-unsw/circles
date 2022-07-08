@@ -65,6 +65,9 @@ const migrations = {
         console.log(`formattedData for ${code} is`, formattedData);
         newState.planner.courses[code].isMultiterm = formattedData.isMultiterm;
         console.log(`new ${code} is:`, newState.planner.courses[code]);
+      } else {
+        console.log("UG OH ERROR");
+        console.log(err);
       }
     });
     // oldState.courses.array.forEach(async (element) => {
