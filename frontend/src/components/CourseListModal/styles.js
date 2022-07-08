@@ -1,6 +1,5 @@
 import { Modal, Typography } from "antd";
 import styled from "styled-components";
-import GRID from "../styles";
 
 const { Title } = Typography;
 
@@ -25,7 +24,12 @@ const CourseModal = styled(Modal)`
   float: right;
 `;
 
-const CourseList = styled(GRID.CourseGroup)`
+const CourseList = styled.div`
+  min-width: 70%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
   padding-top: 10px;
   padding-bottom: 10px;
   max-height: 60vh;

@@ -1,8 +1,8 @@
-import React from "react";
-import { Empty, Typography } from "antd";
+import React, { useState } from "react";
+import { Button, Empty, Typography } from "antd";
 import Collapsible from "components/Collapsible";
-import CourseBadge from "./CourseBadge";
-import GridModal from "./GridModal";
+import CourseListModal from "../../../components/CourseListModal";
+import CourseBadge from "../CourseBadge";
 import S from "./styles";
 
 const GridViewConciseSubgroup = ({
@@ -33,8 +33,25 @@ const GridViewConciseSubgroup = ({
   );
 
   const collapsibleSection = (planState) => {
+    const [modalVisible, setModalVisible] = useState(false);
     if (hasLotsOfCourses && planState === plannedState.UNPLANNED && planned.length > 0) {
-      return <GridModal title={subgroupKey} courses={unplanned} />;
+      return (
+        <S.CourseGroup>
+          <Button
+            className="viewSwitcher"
+            type="primary"
+            onClick={() => setModalVisible(true)}
+          >
+            View All Courses
+          </Button>
+          <CourseListModal
+            title={subgroupKey}
+            modalVisible={modalVisible}
+            setModalVisible={setModalVisible}
+            courses={unplanned}
+          />
+        </S.CourseGroup>
+      );
     }
 
     if (planState === plannedState.PLANNED && planned.length > 0) {

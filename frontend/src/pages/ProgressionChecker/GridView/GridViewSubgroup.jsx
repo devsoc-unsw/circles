@@ -1,7 +1,7 @@
-import React from "react";
-import { Empty, Typography } from "antd";
-import CourseBadge from "./CourseBadge";
-import GridModal from "./GridModal";
+import React, { useState } from "react";
+import { Button, Empty, Typography } from "antd";
+import CourseListModal from "components/CourseListModal";
+import CourseBadge from "../CourseBadge";
 import S from "./styles";
 
 const GridViewSubgroup = ({
@@ -17,8 +17,25 @@ const GridViewSubgroup = ({
   ));
 
   const courseSection = () => {
+    const [modalVisible, setModalVisible] = useState(false);
     if (hasLotsOfCourses && subgroupEntries.length > 0) {
-      return <GridModal title={subgroupKey} courses={subgroupEntries} />;
+      return (
+        <S.CourseGroup>
+          <Button
+            className="viewSwitcher"
+            type="primary"
+            onClick={() => setModalVisible(true)}
+          >
+            View All Courses
+          </Button>
+          <CourseListModal
+            title={subgroupKey}
+            modalVisible={modalVisible}
+            setModalVisible={setModalVisible}
+            courses={subgroupEntries}
+          />
+        </S.CourseGroup>
+      );
     }
 
     if (subgroupEntries.length > 0) {
