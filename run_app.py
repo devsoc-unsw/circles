@@ -73,7 +73,7 @@ def main():
             cwd='backend/'
         )
         check_call(
-            'REACT_APP_ENV=dev npm start',
+            'REACT_APP_ENV=dev npm run dev',
             shell=True,
             stdout=sys.stdout,
             stderr=sys.stderr,

@@ -4,7 +4,7 @@
 
 ### Running Only the Frontend
 
-If you are doing superficial work with the frontend and do not need to communicate with the backend, you can `cd` to the frontend folder, run `npm install` to install required packages locally, and then `npm start`. This is faster than running docker compose since you avoid having to set up the backend and mongodb containers.
+If you are doing superficial work with the frontend and do not need to communicate with the backend, you can `cd` to the frontend folder, run `npm install` to install required packages locally, and then `npm run dev`. This is faster than running docker compose since you avoid having to set up the backend and mongodb containers.
 
 ### Installing Docker
 
