@@ -37,11 +37,7 @@ const GridViewConciseSubgroup = ({
     if (hasLotsOfCourses && planState === plannedState.UNPLANNED && planned.length > 0) {
       return (
         <S.CourseGroup>
-          <Button
-            className="viewSwitcher"
-            type="primary"
-            onClick={() => setModalVisible(true)}
-          >
+          <Button type="primary" onClick={() => setModalVisible(true)}>
             View All Courses
           </Button>
           <CourseListModal
