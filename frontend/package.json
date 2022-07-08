@@ -37,6 +37,7 @@
   "scripts": {
     "start": "vite --host",
     "build": "vite build",
+    "preview": "vite preview --host",
     "test": "jest",
     "lint": "eslint src/**/*.{js,jsx}",
     "lint:fix": "eslint --fix src/**/*.{js,jsx,ts,tsx}"
