@@ -52,14 +52,22 @@ const migrations = {
     const newState = { ...oldState };
     console.log("old State:");
     console.log(oldState);
-    oldState.courses.array.forEach(async (element) => {
-      const [formattedData, err] = await axiosRequest("get", `/courses/getCourse/${element}`);
+    oldState.planner.courses.forEach(async (course) => {
+      console.log("DOING", course);
+      const [formattedData, err] = await axiosRequest("get", `/courses/getCourse/${course}`);
       if (!err) {
         const { code } = formattedData;
-        console.log("code", code);
-        newState.courses[code].is_multiterm = formattedData.is_multiterm;
+        newState.planner.courses[code].is_multiterm = formattedData.is_multiterm;
       }
     });
+    // oldState.courses.array.forEach(async (element) => {
+    //   const [formattedData, err] = await axiosRequest("get", `/courses/getCourse/${element}`);
+    //   if (!err) {
+    //     const { code } = formattedData;
+    //     console.log("code", code);
+    //     newState.courses[code].is_multiterm = formattedData.is_multiterm;
+    //   }
+    // });
     return newState;
   },
   // 3: (oldState) => {
