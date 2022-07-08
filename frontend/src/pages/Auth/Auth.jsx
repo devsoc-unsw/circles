@@ -15,10 +15,10 @@ const Auth = () => {
   const handleCallbackResponse = (response) => {
     const jwt = response.credential;
     console.log(jwt_decode(jwt));
-    if (requestLogin(jwt).err) {
-      console.log("failed: ", jwt)
-      return;
-    }
+    // if (requestLogin(jwt).err) {
+    //   console.log("failed: ", jwt)
+    //   return;
+    // }
     console.log("callBackResponse with jwt: ", jwt);
     setUserObject(jwt_decode(jwt));
 
@@ -31,15 +31,15 @@ const Auth = () => {
   //     console.log("successfull login return", data);
   //   }
   // };
-
-  const requestLogin = async (token) => {
-    const [data, err] = await axiosRequest(
-      "post",
-      `/auth/login`,
-      { token },
-    );
-    return { data, err };
-  };
+  //
+  // const requestLogin = async (token) => {
+  //   const [data, err] = await axiosRequest(
+  //     "post",
+  //     `/auth/login`,
+  //     { token },
+  //   );
+  //   return { data, err };
+  // };
 
 
   useEffect(() => {
