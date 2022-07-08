@@ -92,6 +92,8 @@ def require_login(protected_func):
     """
     @wraps(protected_func)
     def wrapper_require_login(*args, **kwargs):
+        # TODO: this should *actually* take kwargs["userData"]["token"] = ...
+        # once userData is refactored
         kwargs["token"] = validate_token(kwargs["token"])
         # TODO: should also do login functionality
         return protected_func(*args, **kwargs)
@@ -106,3 +108,4 @@ def auth_login(token = ""):
     # TODO: create a user if no exist
     print(token)
     return token
+

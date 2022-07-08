@@ -42,6 +42,7 @@ class Structure(BaseModel):  # this is a copout - we should avoid this
     structure: dict
 
 
+# TODO: This should just take a token now
 class UserData(BaseModel):
     program: str
     specialisations: dict
