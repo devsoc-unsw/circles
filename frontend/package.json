@@ -41,7 +41,7 @@
     "start": "next start",
     "test": "next test",
     "lint": "eslint src/**/*.{js,jsx}",
-    "lint:fix": "eslint --fix src/**/*.{js,jsx}",
+    "lint:fix": "eslint --fix src/**/*.{js,jsx}"
   },
   "eslintConfig": {
     "extends": [
