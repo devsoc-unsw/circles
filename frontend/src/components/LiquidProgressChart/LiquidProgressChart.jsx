@@ -65,7 +65,7 @@ const LiquidProgressChart = ({ completedUOC, totalUOC }) => {
     const time = 30;
     const interval = setInterval(() => {
       data += 0.01;
-      if (data <= fillValue + 0.01) {
+      if (fillValue && data <= fillValue + 0.01) {
         setPercent(data);
       } else {
         clearInterval(interval);

@@ -4,7 +4,7 @@ import {
   BorderlessTableOutlined,
   EyeFilled,
   EyeInvisibleOutlined,
-  TableOutlined,
+  // TableOutlined,
 } from "@ant-design/icons";
 import { Button, Divider } from "antd";
 import axios from "axios";
@@ -35,13 +35,14 @@ const ProgressionCheckerCourses = ({ structure, isLoading }) => {
             >
               {view === views.GRID ? "Display Concise Mode" : "Display Full Mode"}
             </Button>
-            <Button
+            {/* TODO: Disable TableView for now */}
+            {/* <Button
               type="primary"
               icon={<TableOutlined />}
               onClick={() => setView(views.TABLE)}
             >
               Display Table View
-            </Button>
+            </Button> */}
           </S.ViewSwitcherWrapper>
           <GridView isLoading={isLoading} structure={structure} concise={view === views.CONCISE} />
         </>

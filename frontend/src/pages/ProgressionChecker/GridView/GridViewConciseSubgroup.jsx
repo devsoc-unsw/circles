@@ -34,7 +34,7 @@ const GridViewConciseSubgroup = ({
 
   const collapsibleSection = (planState) => {
     const [modalVisible, setModalVisible] = useState(false);
-    if (hasLotsOfCourses && planState === plannedState.UNPLANNED && planned.length > 0) {
+    if (hasLotsOfCourses && planState === plannedState.UNPLANNED) {
       return (
         <S.CourseGroup>
           <Button type="primary" onClick={() => setModalVisible(true)}>
