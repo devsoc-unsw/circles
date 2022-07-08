@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import circlesLogo from "assets/circlesWithBg.svg";
 import S from "./styles";
 
 const PageLoading = ({ setLoading }) => {
@@ -23,7 +22,7 @@ const PageLoading = ({ setLoading }) => {
 
   return (
     <S.PageWrapper>
-      <S.LoadingLogo src={circlesLogo} alt="Circles Logo" />
+      <S.LoadingLogo src="/circlesLogoWithBg.svg" alt="Circles Logo" />
     </S.PageWrapper>
   );
 };

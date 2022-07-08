@@ -1,12 +1,12 @@
 import React from "react";
 import { Button } from "antd";
 import { useRouter } from "next/router";
-import circlesLogo from "assets/circlesLogo.svg";
 import PageTemplate from "components/PageTemplate";
 import S from "./syles";
 
 const Page404 = () => {
   const router = useRouter();
+  const circlesLogo = "/circlesLogo.svg";
 
   return (
     <PageTemplate>

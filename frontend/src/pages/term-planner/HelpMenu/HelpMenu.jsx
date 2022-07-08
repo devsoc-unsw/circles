@@ -1,13 +1,5 @@
 import React, { useState } from "react";
 import { Typography } from "antd";
-import additionalOptionsGif from "assets/helpGifs/additional-options.gif";
-import additionalOptionsPic from "assets/helpGifs/additional-options.jpg";
-import dragAndDropGif from "assets/helpGifs/drag-and-drop.gif";
-import dragAndDropPic from "assets/helpGifs/drag-and-drop.jpg";
-import hideYearGif from "assets/helpGifs/hide-year.gif";
-import hideYearPic from "assets/helpGifs/hide-year.jpg";
-import unscheduleGif from "assets/helpGifs/unschedule.gif";
-import unschedulePic from "assets/helpGifs/unschedule.jpg";
 import CS from "../common/styles";
 import S from "./styles";
 
@@ -39,26 +31,26 @@ const HelpMenu = () => {
   const helpSteps = [
     {
       title: "1. Drag and Drop Courses",
-      pic: dragAndDropPic,
-      gif: dragAndDropGif,
+      pic: "/helpGifs/drag-and-drop.jpg",
+      gif: "/helpGifs/drag-and-drop.gif",
       altText: "drag and drop walkthrough",
     },
     {
       title: "2. Right Click Courses for More Actions",
-      pic: unschedulePic,
-      gif: unscheduleGif,
+      pic: "/helpGifs/unschedule.jpg",
+      gif: "/helpGifs/unschedule.gif",
       altText: "context menu walkthrough",
     },
     {
       title: "3. Hide Year",
-      pic: hideYearPic,
-      gif: hideYearGif,
+      pic: "/helpGifs/hide-year.jpg",
+      gif: "/helpGifs/hide-year.gif",
       altText: "hide year walkthrough",
     },
     {
       title: "4. Additional Features",
-      pic: additionalOptionsPic,
-      gif: additionalOptionsGif,
+      pic: "/helpGifs/additional-options.jpg",
+      gif: "/helpGifs/additional-options.gif",
       altText: "additional options walkthrough",
     },
   ];

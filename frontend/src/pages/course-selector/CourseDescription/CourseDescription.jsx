@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Typography } from "antd";
 import { motion } from "framer-motion";
-import infographic from "assets/infographicFontIndependent.svg";
 import Collapsible from "components/Collapsible";
 import CourseTag from "components/CourseTag";
 import ProgressBar from "components/ProgressBar";
@@ -178,7 +177,7 @@ const CourseDescription = () => {
         animate={{ opacity: 1 }}
         className="empty"
       >
-        <img src={infographic} alt="How to use Circles infographic" />
+        <img src="/infographic.svg" alt="How to use Circles infographic" />
       </S.InfographicContainer>
     );
   }

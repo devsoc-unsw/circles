@@ -1,6 +1,7 @@
 import React from "react";
 import { BugOutlined } from "@ant-design/icons";
 import { Menu } from "antd";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { FEEDBACK_LINK, inDev } from "config/constants";
 
@@ -9,11 +10,6 @@ const DrawerContent = ({ onCloseDrawer }) => {
 
   const handlePush = (url) => {
     router.push(url);
-    onCloseDrawer();
-  };
-
-  const openFeedbackLink = () => {
-    window.open(FEEDBACK_LINK, "_blank");
     onCloseDrawer();
   };
 
@@ -37,8 +33,8 @@ const DrawerContent = ({ onCloseDrawer }) => {
           Progression Checker
         </Menu.Item>
       )}
-      <Menu.Item key="feedback-link" icon={<BugOutlined />} onClick={openFeedbackLink}>
-        Report a bug!
+      <Menu.Item key="feedback-link" icon={<BugOutlined />}>
+        <Link href={FEEDBACK_LINK}>Report a bug!</Link>
       </Menu.Item>
     </Menu>
   );

@@ -6,7 +6,6 @@ import {
 } from "antd";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import circlesLogo from "assets/circlesLogo.svg";
 import PlannerCart from "components/PlannerCart";
 import ThemeToggle from "components/ThemeToggle";
 import { inDev } from "config/constants";
@@ -76,7 +75,7 @@ const Header = () => {
     <S.HeaderWrapper>
       <Link href="/degree-wizard">
         <S.LogoWrapper>
-          <img alt="circles-logo" src={circlesLogo} width="40" height="40" />
+          <img alt="circles-logo" src="/circlesLogo.svg" width="40" height="40" />
           <Title
             level={3}
             style={{
