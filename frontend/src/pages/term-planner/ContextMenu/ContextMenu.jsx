@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import EditMarkModal from "components/EditMarkModal";
 import { addTab } from "reducers/courseTabsSlice";
 import { removeCourse, unschedule } from "reducers/plannerSlice";
-import "react-contexify/dist/ReactContexify.css";
+// import "react-contexify/dist/ReactContexify.css";
 
 const ContextMenu = ({ code, plannedFor }) => {
   const dispatch = useDispatch();

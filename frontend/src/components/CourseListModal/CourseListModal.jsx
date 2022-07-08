@@ -1,5 +1,5 @@
 import React from "react";
-import CourseBadge from "pages/ProgressionChecker/CourseBadge";
+import CourseBadge from "pages/progression-checker/CourseBadge";
 import S from "./styles";
 
 const CourseListModal = ({

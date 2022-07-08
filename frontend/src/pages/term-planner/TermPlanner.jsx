@@ -14,9 +14,9 @@ import S from "./styles";
 import TermBox from "./TermBox";
 import UnplannedColumn from "./UnplannedColumn";
 import { isPlannerEmpty, prepareCoursesForValidation } from "./utils";
-// Used for tippy stylings
-import "tippy.js/dist/tippy.css";
-import "tippy.js/themes/light.css";
+// // Used for tippy stylings
+// import "tippy.js/dist/tippy.css";
+// import "tippy.js/themes/light.css";
 
 const openNotification = () => {
   const args = {

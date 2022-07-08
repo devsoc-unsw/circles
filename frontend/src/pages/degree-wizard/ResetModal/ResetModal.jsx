@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { useRouter } from "next/router";
 import { Button, Modal } from "antd";
+import { useRouter } from "next/router";
 import { resetCourses } from "reducers/coursesSlice";
 import { resetTabs } from "reducers/courseTabsSlice";
 import { resetDegree } from "reducers/degreeSlice";

@@ -1,4 +1,4 @@
-import { parseMarkToInt } from "pages/TermPlanner/utils";
+import { parseMarkToInt } from "pages/term-planner/utils";
 
 const prepareUserPayload = (degree, planner) => {
   const { startYear, courses } = planner;

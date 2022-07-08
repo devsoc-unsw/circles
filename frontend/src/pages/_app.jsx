@@ -8,6 +8,12 @@ import store from "config/store";
 import { darkTheme, GlobalStyles, lightTheme } from "config/theme";
 import "config/axios";
 import "./App.css";
+// import "~antd/lib/style/themes/default.less";
+import "antd/dist/antd.css";
+import "react-contexify/dist/ReactContexify.css";
+// Used for tippy stylings
+import "tippy.js/dist/tippy.css";
+import "tippy.js/themes/light.css";
 
 const persistor = persistStore(store);
 
