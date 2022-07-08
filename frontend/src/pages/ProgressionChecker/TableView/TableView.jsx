@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Skeleton, Table, Typography } from "antd";
-import getFormattedPlannerCourses from "../getFormattedPlannerCourses";
+import { getFormattedPlannerCourses } from "../utils";
 import "./index.less";
 
 const TableView = ({ isLoading, structure }) => {

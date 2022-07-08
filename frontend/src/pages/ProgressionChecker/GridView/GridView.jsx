@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Skeleton, Typography } from "antd";
-import getFormattedPlannerCourses from "../getFormattedPlannerCourses";
 import GridViewConciseSubgroup from "./GridViewConciseSubgroup";
 import GridViewSubgroup from "./GridViewSubgroup";
 import S from "./styles";
+import { getFormattedPlannerCourses } from "../utils";
 
 const GridView = ({ isLoading, structure, concise }) => {
   const { Title } = Typography;

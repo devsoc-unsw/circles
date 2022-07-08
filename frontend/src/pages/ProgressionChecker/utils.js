@@ -23,4 +23,5 @@ const getFormattedPlannerCourses = (years, startYear, courses) => {
   return plannerCourses;
 };
 
-export default getFormattedPlannerCourses;
+// eslint-disable-next-line import/prefer-default-export
+export { getFormattedPlannerCourses };
