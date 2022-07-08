@@ -11,7 +11,6 @@ import courseTabsReducer from "reducers/courseTabsSlice";
 import degreeReducer from "reducers/degreeSlice";
 import plannerReducer from "reducers/plannerSlice";
 import settingsReducer from "reducers/settingsSlice";
-// import { process_multi_term } from "../../../backend/data/processors/courses_processing.py";
 import { REDUX_PERSIST_VERSION } from "./constants";
 
 const rootReducer = combineReducers({
@@ -49,25 +48,15 @@ const migrations = {
     return newState;
   },
   3: (oldState) => {
+    console.log("oldState", oldState);
     const newState = { ...oldState };
-    console.log("old State:");
-    console.log(oldState);
-    console.log(oldState.planner.courses);
-    console.log(typeof (oldState.planner.courses));
-    // const courses = oldState.planner.courses.keys();
     const courses = Object.keys(oldState.planner.courses);
-    // console.log
     courses.forEach(async (course, _) => {
-      console.log("DOING", course);
+      console.log("Looking at", course);
       const [formattedData, err] = await axiosRequest("get", `/courses/getCourse/${course}`);
       if (!err) {
         const { code } = formattedData;
-        console.log(`formattedData for ${code} is`, formattedData);
-        newState.planner.courses[code].isMultiterm = formattedData.isMultiterm;
-        console.log(`new ${code} is:`, newState.planner.courses[code]);
-      } else {
-        console.log("UG OH ERROR");
-        console.log(err);
+        newState.planner.courses[code].is_multiterm = formattedData.is_multiterm;
       }
     });
     // oldState.courses.array.forEach(async (element) => {
