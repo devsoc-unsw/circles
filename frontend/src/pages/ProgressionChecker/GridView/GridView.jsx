@@ -68,7 +68,7 @@ const GridView = ({ isLoading, structure, concise }) => {
       ) : (
         <>
           {Object.entries(gridLayout).map(([group, groupEntry]) => (
-            <div key={group}>
+            <div key={group} id={group}>
               <Title level={1}>{structure[group].name ? `${group} - ${structure[group].name}` : group}</Title>
               {Object.entries(groupEntry).map(
                 ([subgroup, subgroupEntry]) => (

@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { scroller } from "react-scroll";
 import { ArrowDownOutlined } from "@ant-design/icons";
 import { animated, useSpring } from "@react-spring/web";
@@ -8,9 +9,10 @@ import DegreeCard from "../DegreeCard";
 import SkeletonDashboard from "./SkeletonDashboard";
 import "./index.less";
 
-const Dashboard = ({ storeUOC, isLoading, degree }) => {
+const Dashboard = ({ storeUOC, isLoading, structure }) => {
   const { Title } = Typography;
   const currYear = new Date().getFullYear();
+
   const props = useSpring({
     from: { opacity: 0 },
     to: { opacity: 1 },
@@ -32,6 +34,8 @@ const Dashboard = ({ storeUOC, isLoading, degree }) => {
     });
   };
 
+  const { programCode, programName } = useSelector((state) => state.degree);
+
   return (
     <div className="container">
       {isLoading ? (
@@ -43,23 +47,25 @@ const Dashboard = ({ storeUOC, isLoading, degree }) => {
             totalUOC={calTotalUOC}
           />
           <a
-            href={`https://www.handbook.unsw.edu.au/undergraduate/programs/${currYear}/${degree.code}?year=${currYear}`}
+            href={`https://www.handbook.unsw.edu.au/undergraduate/programs/${currYear}/${programCode}`}
             target="_blank"
             rel="noopener noreferrer"
             className="textLink"
           >
-            <Title className="text textLink">{degree.name}</Title>
+            <Title className="text textLink">{programCode} - {programName}</Title>
           </a>
           <div className="cards">
-            {Object.entries(degree).map(([key, subGroup], index) => (
-              <DegreeCard
-                index={index}
-                type={key}
-                totalUOC={storeUOC[key].total}
-                currUOC={storeUOC[key].curr}
-                specialisation={subGroup}
-              />
-            ))}
+            {Object.entries(structure)
+              .filter(([group]) => group !== "Rules")
+              .map(([group, specialisation]) => (
+                <DegreeCard
+                  key={group}
+                  type={group}
+                  totalUOC={storeUOC[group].total}
+                  currUOC={storeUOC[group].curr}
+                  specialisation={specialisation}
+                />
+              ))}
           </div>
           <Button
             className="arrowBtn"

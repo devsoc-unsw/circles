@@ -118,7 +118,7 @@ const ProgressionChecker = () => {
 
   return (
     <PageTemplate>
-      <Dashboard storeUOC={storeUOC} isLoading={isLoading} degree={structure} />
+      <Dashboard storeUOC={storeUOC} isLoading={isLoading} structure={structure} />
       <Divider id="divider" />
       <ProgressionCheckerCourses structure={structure} isLoading={isLoading} />
     </PageTemplate>

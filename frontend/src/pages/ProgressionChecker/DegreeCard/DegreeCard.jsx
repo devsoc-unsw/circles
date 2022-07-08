@@ -15,7 +15,7 @@ const DegreeCard = ({
   const { theme } = useSelector((state) => state.settings);
 
   return (
-    <Link to={specialisation.name} smooth duration={1000}>
+    <Link to={type} smooth duration={2000}>
       <Card className="card text" hoverable bordered={false}>
         <Title className="text" level={5}>
           {specialisation.name || type}
@@ -30,7 +30,6 @@ const DegreeCard = ({
           />
         </div>
         <ReactTooltip
-          id={type}
           place="bottom"
           className="tooltip"
           type={theme === "dark" && "light"}
