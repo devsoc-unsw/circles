@@ -9,7 +9,9 @@ from fastapi import APIRouter, HTTPException
 from server.manual_fixes import apply_manual_fixes
 from server.routers.courses import regex_search
 from server.database import programsCOL, specialisationsCOL
-from server.routers.model import (Structure, Programs)
+from server.routers.courses import regex_search
+from data.utility import data_helpers
+from server.routers.model import (Structure, Programs, Courses)
 
 router = APIRouter(
     prefix="/programs",
@@ -212,3 +214,39 @@ def get_structure(
     apply_manual_fixes(structure, programCode)
     
     return {"structure": structure}
+
+@router.get(
+    "/getGenEds/{programCode}",
+    response_model=Courses,
+    responses={
+        400: {
+            "description": "The given program code could not be found in the database",
+        },
+        200: {
+            "description": "Returns all geneds available to a given to the given code",
+            "content": {
+                "application/json": {
+                    "example": 
+                        {"courses": [
+                            "ADAD2610",
+                            "ANAT2521",
+                            "ARTS1010",
+                            "ARTS1011",
+                            "ARTS1030",
+                            "ARTS1031",
+                            "ARTS1032",
+                            "ARTS1060",
+                           
+                        ]
+                    
+                    }
+                }
+            },
+        },
+    },
+)
+
+def getGenEds(
+    programCode: str):
+    all_geneds = data_helpers.read_data("data/scrapers/genedPureRaw.json")
+    return {"courses" : all_geneds[programCode]}
