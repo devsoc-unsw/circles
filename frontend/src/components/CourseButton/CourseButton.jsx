@@ -8,7 +8,10 @@ const CourseButton = ({ course, planned }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleCourseLink = (courseCode) => {
+  const courseCode = course.key;
+
+  const handleCourseLink = (e) => {
+    e.stopPropagation();
     navigate("/course-selector");
     dispatch(addTab(courseCode));
   };
@@ -18,7 +21,7 @@ const CourseButton = ({ course, planned }) => {
       planned={planned}
       type="primary"
       key={course.key}
-      onClick={() => handleCourseLink(course.key)}
+      onClick={handleCourseLink}
     >
       {course.key}: {course.title}
     </S.CourseButton>

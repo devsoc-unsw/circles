@@ -391,8 +391,9 @@ def get_path_from(course):
     fetches courses which can be used to satisfy 'course'
     eg 2521 -> 1511
     """
-
-    course_condition = CONDITIONS[course]
+    course_condition = CONDITIONS.get(course)
+    if not course_condition:
+        raise HTTPException(400, f"no course by name {course}")
     return {
         "original" : course,
         "courses" :[
