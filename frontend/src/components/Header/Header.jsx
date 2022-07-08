@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { BarsOutlined } from "@ant-design/icons";
 import {
   Button, Drawer,
   Menu, Typography,
 } from "antd";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import circlesLogo from "assets/circlesLogo.svg";
 import PlannerCart from "components/PlannerCart";
@@ -47,22 +47,22 @@ const Header = () => {
         }}
       >
         <Menu.Item key="course-selector">
-          <Link to="/course-selector">Course Selector</Link>
+          <Link href="/course-selector">Course Selector</Link>
         </Menu.Item>
         {
           inDev && (
             <Menu.Item key="graphical-selector">
-              <Link to="/graphical-selector">Graphical Selector</Link>
+              <Link href="/graphical-selector">Graphical Selector</Link>
             </Menu.Item>
           )
         }
         <Menu.Item key="term-planner">
-          <Link to="/term-planner">Term Planner</Link>
+          <Link href="/term-planner">Term Planner</Link>
         </Menu.Item>
         {
           inDev && (
             <Menu.Item key="progression-checker">
-              <Link to="/progression-checker">Progression Checker</Link>
+              <Link href="/progression-checker">Progression Checker</Link>
             </Menu.Item>
           )
         }
@@ -74,7 +74,7 @@ const Header = () => {
 
   return (
     <S.HeaderWrapper>
-      <Link to="/degree-wizard">
+      <Link href="/degree-wizard">
         <S.LogoWrapper>
           <img alt="circles-logo" src={circlesLogo} width="40" height="40" />
           <Title
