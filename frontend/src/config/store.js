@@ -56,6 +56,7 @@ const migrations = {
     console.log(typeof (oldState.planner.courses));
     // const courses = oldState.planner.courses.keys();
     const courses = Object.keys(oldState.planner.courses);
+    // console.log
     courses.forEach(async (course, _) => {
       console.log("DOING", course);
       const [formattedData, err] = await axiosRequest("get", `/courses/getCourse/${course}`);
@@ -73,6 +74,7 @@ const migrations = {
     //     newState.courses[code].is_multiterm = formattedData.is_multiterm;
     //   }
     // });
+    console.log("newSatte", newState);
     return newState;
   },
   // 3: (oldState) => {
