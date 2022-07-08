@@ -62,7 +62,7 @@ const migrations = {
       if (!err) {
         const { code } = formattedData;
         console.log(`formattedData for ${code} is`, formattedData);
-        newState.planner.courses[code].is_multiterm = formattedData.is_multiterm;
+        newState.planner.courses[code].isMultiterm = formattedData.isMultiterm;
       }
     });
     // oldState.courses.array.forEach(async (element) => {
