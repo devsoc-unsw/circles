@@ -1,6 +1,7 @@
 """ Routes to deal with user Authentication. """
 
 
+from functools import wraps
 from fastapi import APIRouter
 from fastapi import HTTPException
 from google.auth.transport import requests
@@ -60,7 +61,7 @@ def validate_token(token: str):
     try:
         # TODO: if using multiple CLIENT_IDs then, must validate
         # that aud is valid
-        idinfo = id_token.verify_oauth2_token(
+        id_info = id_token.verify_oauth2_token(
                 token, requests.Request(), CLIENT_ID
         )
     except ValueError:
@@ -69,28 +70,39 @@ def validate_token(token: str):
             status_code=400,
             detail=f"Invalid token: {token}"
         )
-    return idinfo
+    return id_info
 
-# @router.post(
-#     "/login",
-#     responses={
-#         200: {
-#             "description": "take a token, and validate it and return back user info",
-#             "content": {
-#                 "application/json": {
-#                       # Outdated TODO: update
-#                     "example": {
-#                         "token": "jwt..."
-#                     }
-#                 }
-#             }
-#         }
-#     }
-# )
-# def auth_login(token: jwt):
-#     if not validate_token(token):
-#         return False
-#     if not validate_login():
-#         # Create new user
-#         pass
-#     return token
+def require_login(protected_func):
+    """
+        Decorator to protect routes that need login.
+        This will validate the token. On a successful validation,
+        the `protected_func` will be called with the `token` kwarg
+        replaced with the contents of the decoded token (dict).
+
+        Example Usage:
+            @router.method("/protected_route", responses={200: {}})
+            @require_login
+            def protected_route(token, *args, **kwargs):
+                ...
+                pass
+        Note:
+            - The protected funtion MUST have `token` as a kwarg
+            - The token will come in as a string but, the `protected_func`
+                must be able to handle it being converted to a dict
+    """
+    @wraps(protected_func)
+    def wrapper_require_login(*args, **kwargs):
+        kwargs["token"] = validate_token(kwargs["token"])
+        # TODO: should also do login functionality
+        return protected_func(*args, **kwargs)
+    return wrapper_require_login
+
+
+# TODO: document responses
+@router.post( "/login",)
+
+@require_login
+def auth_login(token = ""):
+    # TODO: create a user if no exist
+    print(token)
+    return token
