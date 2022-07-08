@@ -35,7 +35,7 @@
     "vite-plugin-svgr": "^2.2.0"
   },
   "scripts": {
-    "start": "vite",
+    "start": "vite --host",
     "build": "vite build",
     "test": "jest",
     "lint": "eslint src/**/*.{js,jsx}",
