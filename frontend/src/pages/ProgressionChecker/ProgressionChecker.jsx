@@ -13,7 +13,6 @@ import Dashboard from "./Dashboard";
 import GridView from "./GridView/GridView";
 import S from "./styles";
 import TableView from "./TableView";
-import "./index.less";
 
 const ProgressionCheckerCourses = ({ structure, isLoading }) => {
   const views = {
@@ -28,34 +27,35 @@ const ProgressionCheckerCourses = ({ structure, isLoading }) => {
     <div>
       {(view === views.GRID || view === views.CONCISE) ? (
         <>
-          <Button
-            className="viewSwitcher"
-            type="primary"
-            icon={<TableOutlined />}
-            onClick={() => setView(views.TABLE)}
-          >
-            Display Table View
-          </Button>
-          <Button
-            className="viewSwitcher"
-            type="primary"
-            icon={view === views.GRID ? <EyeInvisibleOutlined /> : <EyeFilled />}
-            onClick={() => setView(view === views.GRID ? views.CONCISE : views.GRID)}
-          >
-            {view === views.GRID ? "Display Concise Mode" : "Display Full Mode"}
-          </Button>
+          <S.ViewSwitcherWrapper>
+            <Button
+              type="primary"
+              icon={view === views.GRID ? <EyeInvisibleOutlined /> : <EyeFilled />}
+              onClick={() => setView(view === views.GRID ? views.CONCISE : views.GRID)}
+            >
+              {view === views.GRID ? "Display Concise Mode" : "Display Full Mode"}
+            </Button>
+            <Button
+              type="primary"
+              icon={<TableOutlined />}
+              onClick={() => setView(views.TABLE)}
+            >
+              Display Table View
+            </Button>
+          </S.ViewSwitcherWrapper>
           <GridView isLoading={isLoading} structure={structure} concise={view === views.CONCISE} />
         </>
       ) : (
         <>
-          <Button
-            className="viewSwitcher"
-            type="primary"
-            icon={<BorderlessTableOutlined />}
-            onClick={() => setView(defaultView)}
-          >
-            Display Grid View
-          </Button>
+          <S.ViewSwitcherWrapper>
+            <Button
+              type="primary"
+              icon={<BorderlessTableOutlined />}
+              onClick={() => setView(defaultView)}
+            >
+              Display Grid View
+            </Button>
+          </S.ViewSwitcherWrapper>
           <TableView isLoading={isLoading} structure={structure} />
         </>
       )}

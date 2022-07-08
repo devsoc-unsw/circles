@@ -6,4 +6,10 @@ const Wrapper = styled.div`
   margin: auto;
 `;
 
-export default { Wrapper };
+const ViewSwitcherWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+`;
+
+export default { Wrapper, ViewSwitcherWrapper };
