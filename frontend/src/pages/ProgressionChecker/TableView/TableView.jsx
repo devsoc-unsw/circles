@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Skeleton, Table, Typography } from "antd";
 import { getFormattedPlannerCourses } from "../utils";
-import "./index.less";
 
 const TableView = ({ isLoading, structure }) => {
   const { Title } = Typography;
@@ -74,7 +73,7 @@ const TableView = ({ isLoading, structure }) => {
   ];
 
   return (
-    <div className="tableViewContainer">
+    <div>
       {isLoading ? (
         <Skeleton />
       ) : (
@@ -86,7 +85,6 @@ const TableView = ({ isLoading, structure }) => {
                 <div key={subGroup}>
                   <Title level={2}>{subGroup}</Title>
                   <Table
-                    className="table-striped-rows"
                     dataSource={subGroupEntry}
                     columns={columns}
                     pagination={{ position: ["none", "none"] }}
