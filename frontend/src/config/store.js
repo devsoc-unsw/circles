@@ -61,6 +61,7 @@ const migrations = {
       const [formattedData, err] = await axiosRequest("get", `/courses/getCourse/${course}`);
       if (!err) {
         const { code } = formattedData;
+        console.log(`formattedData for ${code} is`, formattedData);
         newState.planner.courses[code].is_multiterm = formattedData.is_multiterm;
       }
     });
