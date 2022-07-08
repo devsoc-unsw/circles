@@ -2,28 +2,14 @@
 /* eslint no-console: "error" */
 
 import React, { useState, useEffect } from "react";
-import axiosRequest from "config/axios";
+// import axiosRequest from "config/axios";
 import jwt_decode from "jwt-decode";
 
 // import MetaTags from "react-meta-tags";
 import "./index.less";
 
-const Auth = () => {
+const Auth = ({ userObject, setUserObject }) => {
 
-  const [userObject, setUserObject] = useState({});
-
-  const handleCallbackResponse = (response) => {
-    const jwt = response.credential;
-    console.log(jwt_decode(jwt));
-    // if (requestLogin(jwt).err) {
-    //   console.log("failed: ", jwt)
-    //   return;
-    // }
-    console.log("callBackResponse with jwt: ", jwt);
-    setUserObject(jwt_decode(jwt));
-
-    return jwt;
-  };
 
   // const requestLogin = async (c) => {
   //   const [data, err] = await axiosRequest("get", `/courses/getCourse/${c}`);
@@ -41,6 +27,19 @@ const Auth = () => {
   //   return { data, err };
   // };
 
+  const handleCallbackResponse = (response) => {
+    const jwt = response.credential;
+    // Should not decode jwt yourself - just for testing
+    console.log(jwt_decode(jwt));
+    // if (requestLogin(jwt).err) {
+    //   console.log("failed: ", jwt)
+    //   return;
+    // }
+    console.log("callBackResponse with jwt: ", jwt);
+    setUserObject(jwt_decode(jwt));
+
+    return 0;
+  }
 
   useEffect(() => {
     /* global google */
@@ -55,12 +54,20 @@ const Auth = () => {
     );
 
     // recent acc prompt
-    google.accounts.id.prompt();
+    if (!Object.keys(userObject).length) {
+      google.accounts.id.prompt();
+    }
   }, []);
 
   return (
     <div>
-      <div id="signInDiv" />
+      {Object.keys(userObject).length ?
+        (<div id="signInDiv" />)
+        :
+        (
+          <div> signed in </div>
+        )
+      }
     </div>
   );
 };
