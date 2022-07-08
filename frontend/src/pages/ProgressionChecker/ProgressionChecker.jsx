@@ -11,6 +11,7 @@ import axios from "axios";
 import PageTemplate from "components/PageTemplate";
 import Dashboard from "./Dashboard";
 import GridView from "./GridView/GridView";
+import S from "./styles";
 import TableView from "./TableView";
 import "./index.less";
 
@@ -118,9 +119,11 @@ const ProgressionChecker = () => {
 
   return (
     <PageTemplate>
-      <Dashboard storeUOC={storeUOC} isLoading={isLoading} structure={structure} />
-      <Divider id="divider" />
-      <ProgressionCheckerCourses structure={structure} isLoading={isLoading} />
+      <S.Wrapper>
+        <Dashboard storeUOC={storeUOC} isLoading={isLoading} structure={structure} />
+        <Divider id="divider" />
+        <ProgressionCheckerCourses structure={structure} isLoading={isLoading} />
+      </S.Wrapper>
     </PageTemplate>
   );
 };
