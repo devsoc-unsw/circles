@@ -1,28 +1,37 @@
-import React from "react";
-import { Helmet } from "react-helmet";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { ThemeProvider } from "styled-components";
 import FeedbackButton from "components/FeedbackButton";
 import Header from "components/Header";
+import PageLoading from "components/PageLoading";
+import { darkTheme, GlobalStyles, lightTheme } from "config/theme";
 
-const PageTemplate = ({ children, showHeader = true }) => (
-  <>
-    <Helmet>
-      <title>Circles</title>
-      <meta
-        name="description"
-        content="Circles UNSW Degree Planner"
-      />
-      <meta
-        name="keywords"
-        content="circles, unsw, csesoc, degree, planner, course, plan"
-      />
-    </Helmet>
-    { showHeader && <Header />}
-    {/* TODO: Make below as styled component once less has been migrated */}
-    <div className="app-root content">
-      {children}
-      <FeedbackButton />
-    </div>
-  </>
-);
+const PageTemplate = ({ children, showHeader = true }) => {
+  const [loading, setLoading] = useState(true);
+  const theme = useSelector((state) => state.theme);
+
+  useEffect(() => {
+    // initialise theme
+    document.body.classList.add(theme);
+    document.body.classList.remove(theme === "light" ? "dark" : "light");
+  }, [theme]);
+
+  return (
+    <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+      <GlobalStyles />
+      {loading ? (
+        <PageLoading setLoading={setLoading} />
+      ) : (
+        <>
+          {showHeader && <Header />}
+          <div>
+            {children}
+            <FeedbackButton />
+          </div>
+        </>
+      )}
+    </ThemeProvider>
+  );
+};
 
 export default PageTemplate;

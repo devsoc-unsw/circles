@@ -1,4 +1,4 @@
-import { getMostRecentPastTerm } from "pages/term-planner/utils";
+import { getMostRecentPastTerm } from "views/TermPlanner/utils";
 
 const getFormattedPlannerCourses = (years, startYear, courses) => {
   const { Y: currYearInDeg, T: currTermInDeg } = getMostRecentPastTerm(startYear);

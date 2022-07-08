@@ -1,4 +1,4 @@
-import { getMostRecentPastTerm } from "pages/term-planner/utils";
+import { getMostRecentPastTerm } from "views/TermPlanner/utils";
 
 /**
  * IMPORTANT NOTE:
