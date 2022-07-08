@@ -50,15 +50,19 @@ const migrations = {
   3: (oldState) => {
     console.log("oldState", oldState);
     const newState = { ...oldState };
-    const courses = Object.keys(oldState.planner.courses);
+    
+    const courses = Object.keys(newState.planner.courses);
     courses.forEach(async (course, _) => {
-      console.log("Looking at", course);
-      const [formattedData, err] = await axiosRequest("get", `/courses/getCourse/${course}`);
-      if (!err) {
-        const { code } = formattedData;
-        newState.planner.courses[code].is_multiterm = formattedData.is_multiterm;
-      }
-    });
+      course.is_multiterm = False;
+      course.isMultiterm = False;
+    }
+    //   console.log("Looking at", course);
+    //   const [formattedData, err] = await axiosRequest("get", `/courses/getCourse/${course}`);
+    //   if (!err) {
+    //     const { code } = formattedData;
+    //     newState.planner.courses[code].is_multiterm = formattedData.is_multiterm;
+    //   }
+    // });
     // oldState.courses.array.forEach(async (element) => {
     //   const [formattedData, err] = await axiosRequest("get", `/courses/getCourse/${element}`);
     //   if (!err) {

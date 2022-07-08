@@ -108,6 +108,7 @@ def get_course(courseCode: str):
     - if not found, check the archives
     """
     result = coursesCOL.find_one({"code": courseCode})
+    print(coursesCOL)
 
     if not result:
         for year in sorted(ARCHIVED_YEARS, reverse=True):
@@ -127,6 +128,8 @@ def get_course(courseCode: str):
     result['is_accurate'] = CONDITIONS.get(courseCode) is not None
     result['handbook_note'] = CACHED_HANDBOOK_NOTE.get(courseCode, "")
     del result["_id"]
+
+    print("beans", result)
 
     return result
 
