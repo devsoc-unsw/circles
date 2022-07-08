@@ -8,7 +8,7 @@ import { darkTheme, GlobalStyles, lightTheme } from "config/theme";
 
 const PageTemplate = ({ children, showHeader = true }) => {
   const [loading, setLoading] = useState(true);
-  const theme = useSelector((state) => state.theme);
+  const { theme } = useSelector((state) => state.settings);
 
   return (
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>

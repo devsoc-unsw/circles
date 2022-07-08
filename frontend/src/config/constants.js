@@ -25,4 +25,4 @@ export const darkGrey = "#323739";
 export const yellow = "#FAAD14";
 export const purple = "#9254de";
 
-export const inDev = process.env.REACT_APP_ENV === "dev" || (typeof window !== "undefined" && !!localStorage?.getItem("circlesEnv"));
+export const inDev = process.env.REACT_APP_ENV === "dev" || (typeof window !== "undefined" && !!localStorage.getItem("circlesEnv"));
