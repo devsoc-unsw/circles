@@ -12,54 +12,33 @@ const TableView = ({ isLoading, structure }) => {
   const generateTableStructure = (plannedCourses) => {
     const newTableLayout = {};
 
-    // Example groups: Major, Minor, General
+    // Example groups: Major, Minor, General, Rules
     Object.keys(structure).forEach((group) => {
       newTableLayout[group] = {};
-      // Example subgroup: Core Courses, Computing Electives, Flexible Education
+      // Example subgroup: Core Courses, Computing Electives
       Object.keys(structure[group]).forEach((subgroup) => {
-        if (typeof structure[group][subgroup] !== "string") {
-          // case where structure[group][subgroup] gives information on courses in an object
-          const subgroupStructure = structure[group][subgroup];
-          newTableLayout[group][subgroup] = [];
+        // Do not include if field is not an object i.e. 'name' field
+        if (typeof structure[group][subgroup] === "string") return;
 
-          if (subgroupStructure.courses) {
-            // only consider disciplinary component courses
-            Object.keys(subgroupStructure.courses).forEach((courseCode) => {
-              if (courseCode in plannedCourses) {
-                newTableLayout[group][subgroup].push({
-                  key: courseCode,
-                  title: plannedCourses[courseCode].title,
-                  UOC: plannedCourses[courseCode].UOC,
-                  termPlanned: plannedCourses[courseCode].termPlanned,
-                });
-                newTableLayout[group][subgroup].sort(
-                  (a, b) => a.termPlanned.localeCompare(b.termPlanned),
-                );
-              }
+        const subgroupStructure = structure[group][subgroup];
+
+        newTableLayout[group][subgroup] = [];
+
+        // only consider disciplinary component courses
+        Object.keys(subgroupStructure.courses).forEach((courseCode) => {
+          if (courseCode in plannedCourses) {
+            newTableLayout[group][subgroup].push({
+              key: courseCode,
+              title: plannedCourses[courseCode].title,
+              UOC: plannedCourses[courseCode].UOC,
+              termPlanned: plannedCourses[courseCode].termPlanned,
             });
-          } else {
-            // If there is no specified course list for the subgroup, then manually
-            // show the added courses.
-            Object.keys(plannedCourses).forEach((courseCode) => {
-              const courseData = plannedCourses[courseCode];
-              if (courseData && courseData.type === subgroup) {
-                newTableLayout[group][subgroup].push({
-                  key: courseCode,
-                  title: plannedCourses.courseCode.title,
-                  UOC: plannedCourses.courseCode.UOC,
-                  termPlanned: plannedCourses.courseCode.termPlanned,
-                });
-              }
-            });
+            newTableLayout[group][subgroup].sort(
+              (a, b) => a.termPlanned.localeCompare(b.termPlanned),
+            );
           }
-        }
+        });
       });
-      if (structure[group].name) {
-        // Append structure group name if exists
-        const newGroup = `${group} - ${structure[group].name}`;
-        newTableLayout[newGroup] = newTableLayout[group];
-        delete newTableLayout[group];
-      }
     });
 
     return newTableLayout;
@@ -101,10 +80,10 @@ const TableView = ({ isLoading, structure }) => {
       ) : (
         <>
           {Object.entries(tableLayout).map(([group, groupEntry]) => (
-            <div key={group} className="category">
-              <Title level={1}>{group}</Title>
+            <div key={group}>
+              <Title level={1}>{structure[group].name ? `${group} - ${structure[group].name}` : group}</Title>
               {Object.entries(groupEntry).map(([subGroup, subGroupEntry]) => (
-                <div key={subGroup} className="subCategory">
+                <div key={subGroup}>
                   <Title level={2}>{subGroup}</Title>
                   <Table
                     className="table-striped-rows"

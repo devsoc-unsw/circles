@@ -51,23 +51,25 @@ const GridViewConciseSubgroup = ({
   return (
     <div key={subgroupKey}>
       <Title level={2}>{subgroupKey}</Title>
-      <Title level={3}>
-        {uoc} UOC of the following courses
-      </Title>
-      <Collapsible
-        title={<Title level={4}>Courses you have planned</Title>}
-        headerStyle={{ border: "none" }}
-        initiallyCollapsed={planned.length === 0}
-      >
-        {collapsibleSection(plannedState.PLANNED)}
-      </Collapsible>
-      <Collapsible
-        title={<Title level={4}>Choose from the following</Title>}
-        headerStyle={{ border: "none" }}
-        initiallyCollapsed={unplanned.length > 8 || unplanned.length === 0}
-      >
-        {collapsibleSection(plannedState.UNPLANNED)}
-      </Collapsible>
+      <Title level={3}>{uoc} UOC worth of courses</Title>
+      {!!subgroupEntries.length && (
+        <>
+          <Collapsible
+            title={<Title level={4}>Courses you have in your planner</Title>}
+            headerStyle={{ border: "none" }}
+            initiallyCollapsed={!planned.length}
+          >
+            {collapsibleSection(plannedState.PLANNED)}
+          </Collapsible>
+          <Collapsible
+            title={<Title level={4}>Choose from the following courses</Title>}
+            headerStyle={{ border: "none" }}
+            initiallyCollapsed={unplanned.length > 16 || !unplanned.length}
+          >
+            {collapsibleSection(plannedState.UNPLANNED)}
+          </Collapsible>
+        </>
+      )}
       <br />
     </div>
   );

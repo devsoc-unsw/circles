@@ -87,38 +87,31 @@ const ProgressionChecker = () => {
   }, [programCode, specs]);
 
   const storeUOC = {};
-  // Example groups: Major, Minor, General
+
+  // Example groups: Major, Minor, General, Rules
   Object.keys(structure).forEach((group) => {
     storeUOC[group] = {
       total: 0,
       curr: 0,
     };
+
+    // Example subgroup: Core Courses, Computing Electives
     Object.keys(structure[group]).forEach((subgroup) => {
-      if (typeof structure[group][subgroup] !== "string") {
-        // case where structure[group][subgroup] gives information on courses in an object
-        storeUOC[group].total += structure[group][subgroup].UOC;
-        const subgroupStructure = structure[group][subgroup];
+      // Do not include if field is not an object i.e. 'name' field
+      if (typeof structure[group][subgroup] === "string") return;
 
-        const isRule = subgroupStructure.type && subgroupStructure.type.includes("rule");
+      storeUOC[group].total += structure[group][subgroup].UOC;
+      const subgroupStructure = structure[group][subgroup];
 
-        if (subgroupStructure.courses && !isRule) {
-          // only consider disciplinary component courses
-          Object.keys(subgroupStructure.courses).forEach((courseCode) => {
-            if (planner.courses[courseCode]) {
-              storeUOC[group].curr += planner.courses[courseCode].UOC;
-            }
-          });
-        } else {
-          // If there is no specified course list for the subgroup, then manually
-          // show the added courses on the menu.
-          Object.keys(planner.courses).forEach((courseCode) => {
-            const courseData = planner.courses[courseCode];
-            if (courseData && courseData.type === subgroup) {
-              // add UOC to curr
-              storeUOC[group].curr += courseData.UOC;
-            }
-          });
-        }
+      const isRule = subgroupStructure.type && subgroupStructure.type.includes("rule");
+
+      if (subgroupStructure.courses && !isRule) {
+        // only consider disciplinary component courses
+        Object.keys(subgroupStructure.courses).forEach((courseCode) => {
+          if (planner.courses[courseCode]) {
+            storeUOC[group].curr += planner.courses[courseCode].UOC;
+          }
+        });
       }
     });
   });
