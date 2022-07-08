@@ -13,15 +13,6 @@ body {
   --tp-summer-term-box-margin: 0.5em;
 }
 
-
-.dark .secondaryText {
-  color: #737372;
-}
-
-.light .secondaryText {
-  color: #737372;
-}
-
 /* Scrollbar settings */
 /* width */
 ::-webkit-scrollbar {

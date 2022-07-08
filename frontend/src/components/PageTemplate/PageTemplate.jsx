@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { ThemeProvider } from "styled-components";
 import FeedbackButton from "components/FeedbackButton";
@@ -9,12 +9,6 @@ import { darkTheme, GlobalStyles, lightTheme } from "config/theme";
 const PageTemplate = ({ children, showHeader = true }) => {
   const [loading, setLoading] = useState(true);
   const theme = useSelector((state) => state.theme);
-
-  useEffect(() => {
-    // initialise theme
-    document.body.classList.add(theme);
-    document.body.classList.remove(theme === "light" ? "dark" : "light");
-  }, [theme]);
 
   return (
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
