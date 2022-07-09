@@ -23,6 +23,8 @@ const Dashboard = ({ storeUOC, isLoading, structure }) => {
   let calTotalUOC = 0;
   let calCompletedUOC = 0;
   Object.keys(storeUOC).forEach((group) => {
+    // Do not include "Rules" group in total UOC
+    if (group === "Rules") return;
     calTotalUOC += storeUOC[group].total;
     // Math min to handle overflow of courses
     calCompletedUOC += Math.min(storeUOC[group].curr, storeUOC[group].total);
