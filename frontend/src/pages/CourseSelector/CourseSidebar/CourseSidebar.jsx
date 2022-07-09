@@ -46,64 +46,50 @@ const CourseSidebar = ({ structure, showLockedCourses }) => {
         : item1.unlocked < item2.unlocked // separate locked/unlocked
     );
 
-    // Example groups: Major, Minor, General
+    // Example groups: Major, Minor, General, Rules
     Object.keys(structure).forEach((group) => {
+      // Do not include 'Rules' group in sidebar
+      if (group === "Rules") return;
+
       newMenu[group] = {};
       newCoursesUnits[group] = {};
-      // Example subgroup: Core Courses, Computing Electives, Flexible Education
+
+      // Example subgroup: Core Courses, Computing Electives
       Object.keys(structure[group]).forEach((subgroup) => {
-        if (typeof structure[group][subgroup] !== "string") {
-          // case where structure[group][subgroup] gives information on courses in an object
-          const subgroupStructure = structure[group][subgroup];
-          newCoursesUnits[group][subgroup] = {
-            total: subgroupStructure.UOC,
-            curr: 0,
-          };
+        // Do not include if field is not an object i.e. 'name' field
+        if (typeof structure[group][subgroup] === "string") return;
 
-          newMenu[group][subgroup] = [];
-          const isRule = subgroupStructure.type && subgroupStructure.type.includes("rule");
+        const subgroupStructure = structure[group][subgroup];
 
-          if (subgroupStructure.courses && !isRule) {
-            // only consider disciplinary component courses
-            Object.keys(subgroupStructure.courses).forEach((courseCode) => {
-              newMenu[group][subgroup].push({
-                courseCode,
-                title: subgroupStructure.courses[courseCode],
-                unlocked: !!courses[courseCode],
-                accuracy: courses[courseCode]
-                  ? courses[courseCode].is_accurate
-                  : true,
-              });
-              newMenu[group][subgroup].sort(sortMenu);
+        newCoursesUnits[group][subgroup] = {
+          total: subgroupStructure.UOC,
+          curr: 0,
+        };
+        newMenu[group][subgroup] = [];
 
-              // add UOC to curr
-              if (planner.courses[courseCode]) {
-                newCoursesUnits[group][subgroup].curr
+        const isRule = subgroupStructure.type && subgroupStructure.type.includes("rule");
+
+        if (subgroupStructure.courses && !isRule) {
+          // only consider disciplinary component courses
+          Object.keys(subgroupStructure.courses).forEach((courseCode) => {
+            newMenu[group][subgroup].push({
+              courseCode,
+              title: subgroupStructure.courses[courseCode],
+              unlocked: !!courses[courseCode],
+              accuracy: courses[courseCode]
+                ? courses[courseCode].is_accurate
+                : true,
+            });
+            newMenu[group][subgroup].sort(sortMenu);
+
+            // add UOC to curr
+            if (planner.courses[courseCode]) {
+              newCoursesUnits[group][subgroup].curr
                   += planner.courses[courseCode].UOC;
-              }
-            });
-          } else {
-            // If there is no specified course list for the subgroup, then manually
-            // show the added courses on the menu.
-            Object.keys(planner.courses).forEach((courseCode) => {
-              const courseData = planner.courses[courseCode];
-              if (courseData && courseData.type === subgroup) {
-                newMenu[group][subgroup].push(courseCode);
-                // add UOC to curr
-                newCoursesUnits[group][subgroup].curr += courseData.UOC;
-              }
-            });
-          }
+            }
+          });
         }
       });
-      if (structure[group].name) {
-        // Append structure group name if exists
-        const newGroup = `${group} - ${structure[group].name}`;
-        newMenu[newGroup] = newMenu[group];
-        newCoursesUnits[newGroup] = newCoursesUnits[group];
-        delete newMenu[group];
-        delete newCoursesUnits[group];
-      }
     });
     setMenuData(newMenu);
     setCoursesUnits(newCoursesUnits);
@@ -153,7 +139,7 @@ const CourseSidebar = ({ structure, showLockedCourses }) => {
             mode="inline"
           >
             {Object.entries(menuData).map(([group, groupEntry]) => (
-              <SubMenu key={group} title={group}>
+              <SubMenu key={group} title={structure[group].name ? `${group} - ${structure[group].name}` : group}>
                 {Object.entries(groupEntry).sort(sortGroups).map(([subGroup, subGroupEntry]) => (
                   <Menu.ItemGroup
                     key={subGroup}

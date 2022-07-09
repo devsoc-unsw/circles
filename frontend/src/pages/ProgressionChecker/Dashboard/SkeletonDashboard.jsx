@@ -1,20 +1,20 @@
 import React from "react";
 import { Skeleton } from "antd";
 import { SkeletonCard } from "../DegreeCard";
+import S from "./styles";
 
 const SkeletonDashboard = () => (
-  <div className="centered">
+  <S.ContentWrapper>
     <Skeleton.Avatar style={{ width: 320, height: 320 }} active />
     <Skeleton.Input
-      className="textLink"
       style={{ width: 400, height: 40 }}
       active
     />
-    <div className="cards">
+    <S.CardsWrapper>
       <SkeletonCard />
       <SkeletonCard />
-    </div>
-  </div>
+    </S.CardsWrapper>
+  </S.ContentWrapper>
 );
 
 export default SkeletonDashboard;

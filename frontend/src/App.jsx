@@ -11,7 +11,7 @@ import Auth from "./pages/Auth";
 import CourseSelector from "./pages/CourseSelector";
 import DegreeWizard from "./pages/DegreeWizard";
 import GraphicalSelector from "./pages/GraphicalSelector";
-import PageNotFound from "./pages/PageNotFound";
+import Page404 from "./pages/Page404";
 import ProgressionChecker from "./pages/ProgressionChecker";
 import TermPlanner from "./pages/TermPlanner";
 import "./App.less";
@@ -22,20 +22,6 @@ const App = () => {
   const { theme } = useSelector((state) => state.settings);
 
   const [userObject, setUserObject] = useState({});
-
-  // const handleCallbackResponse = (response) => {
-  //   const jwt = response.credential;
-  //   // if (requestLogin(jwt).err) {
-  //   //   console.log("failed: ", jwt)
-  //   //   return;
-  //   // }
-  //   console.log("callBackResponse with jwt: ", jwt);
-  //   // Should now decode own jwt - let the BE `/auth/login` route do it
-  //   // decode own just for show rn
-  //   setUserObject(jwt);
-  //
-  //   return jwt;
-  // };
 
   useEffect(() => {
     // initialise theme
@@ -87,7 +73,7 @@ const App = () => {
             />
             <Route
               path="*"
-              element={<PageNotFound />}
+              element={<Page404 />}
             />
           </Routes>
         )}
