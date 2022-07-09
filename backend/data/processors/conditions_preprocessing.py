@@ -129,7 +129,7 @@ def preprocess_conditions():
         processed = international_public_health(processed)
         processed = business_honours(processed)
         processed = honours_plan(processed)
-        processed = research_thesis(processed)
+        processed = research_thesis(code, processed)
 
 
 
@@ -619,8 +619,8 @@ def international_public_health(processed: str):
 def business_honours(processed: str):
     return re.sub(r"Enrolment in Business \(Honours\) Program 4512", '4512', processed, flags=re.IGNORECASE)
 
-def research_thesis(processed: str):
-    return re.sub(r"Research Thesis [A|B] \(([0-9]{4})\)", r"\1", processed)
+def research_thesis(code: str, processed: str):
+    return re.sub(r"Research Thesis [A|B] \(([0-9]{4})\)", rf"{code[0:4]}\1", processed)
 
 def honours_plan(processed: str):
     return re.sub(r"^([A-Z]{4}) (h|H)on(our)?s( (p|P)lan)?$", r"\1" + "?H", processed)
