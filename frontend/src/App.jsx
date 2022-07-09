@@ -15,6 +15,8 @@ import ProgressionChecker from "./pages/ProgressionChecker";
 import TermPlanner from "./pages/TermPlanner";
 import "./App.less";
 import "./config/axios";
+// stylesheets for antd library
+import "antd/dist/antd.less";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
