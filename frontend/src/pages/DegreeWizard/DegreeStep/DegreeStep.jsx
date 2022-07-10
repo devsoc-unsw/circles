@@ -42,14 +42,10 @@ const DegreeStep = ({ incrementStep }) => {
 
   const searchDegree = (newInput) => {
     setInput(newInput);
-    if (newInput) {
-      const fullDegreeName = Object.keys(allDegrees).map((code) => `${code} ${allDegrees[code]}`);
-      setOptions(
-        fullDegreeName.filter((degree) => degree.toLowerCase().includes(newInput.toLowerCase())),
-      );
-    } else {
-      setOptions([]);
-    }
+    const fullDegreeName = Object.keys(allDegrees).map((code) => `${code} ${allDegrees[code]}`);
+    setOptions(
+      fullDegreeName.filter((degree) => degree.toLowerCase().includes(newInput.toLowerCase())).splice(0, 8),
+    );
   };
 
   const props = useSpring(springProps);

@@ -33,7 +33,6 @@ const Header = () => {
       </div>
     </S.HeaderContent>
   );
-
   const largeHeader = (
     <S.HeaderContent>
       <Menu
