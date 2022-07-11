@@ -4,8 +4,24 @@ import { EyeOutlined } from "@ant-design/icons";
 import { Badge, Tooltip } from "antd";
 import CourseButton from "components/CourseButton";
 import S from "./styles";
+import { purple, lightPurple } from "config/constants";
+
+const UOCBadge = ({ uoc }) => {
+  return (
+    <S.UOCBadgeWrapper>
+      <Badge
+        // style={{ backgroundColor: lightPurple, color: "black", lineHeight: "1.5", height: "auto" }}
+        style={{ backgroundColor: purple, color: "white", lineHeight: "1.5", height: "auto" }}
+        size="small"
+        count={`${uoc} UOC`}
+      />
+    </S.UOCBadgeWrapper>
+  )
+}
 
 const CourseBadge = ({ course }) => {
+  console.log("course", course);
+
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -29,7 +45,13 @@ const CourseBadge = ({ course }) => {
   }
 
   if (course.past) {
-    return <CourseButton course={course} planned />;
+    return (
+      <div style={{ position: "relative" }}>
+        <CourseButton course={course} planned />
+        <UOCBadge uoc={course.uoc} />
+      </div>
+    )
+    // return 
   }
 
   // for future courses planned
@@ -48,6 +70,7 @@ const CourseBadge = ({ course }) => {
         onClick={handleClick}
       >
         <CourseButton course={course} planned />
+        <UOCBadge uoc={course.uoc} />
       </Badge>
     );
   }
