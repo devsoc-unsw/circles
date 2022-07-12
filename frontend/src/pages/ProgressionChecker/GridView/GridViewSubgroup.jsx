@@ -12,31 +12,40 @@ const GridViewSubgroup = ({
 }) => {
   const { Title } = Typography;
 
-  const subgroup = subgroupEntries.map((course) => (
-    <CourseBadge course={course} key={course.key} />
-  ));
+  const subgroupSection = (courses) => (
+    <S.CourseGroup>{courses.map((course) => (
+      <CourseBadge course={course} key={course.key} />
+    ))}
+    </S.CourseGroup>
+  );
 
   const courseSection = () => {
     const [modalVisible, setModalVisible] = useState(false);
-    if (hasLotsOfCourses && subgroupEntries.length > 0) {
+
+    const coursesInPlanner = subgroupEntries.filter((course) => course.termPlanned
+    || course.unplanned);
+    const courses = subgroupEntries.filter((course) => !course.termPlanned && !course.unplanned);
+
+    if (hasLotsOfCourses && subgroupEntries.length) {
       return (
-        <S.CourseGroup>
-          <Button type="primary" onClick={() => setModalVisible(true)}>
-            View All Courses
-          </Button>
-          <CourseListModal
-            title={subgroupKey}
-            modalVisible={modalVisible}
-            setModalVisible={setModalVisible}
-            courses={subgroupEntries}
-          />
-        </S.CourseGroup>
+        <>
+          {subgroupSection(coursesInPlanner)}
+          <S.ViewAllCoursesWrapper>
+            <Button type="primary" onClick={() => setModalVisible(true)}>
+              View All Courses
+            </Button>
+            <CourseListModal
+              title={subgroupKey}
+              modalVisible={modalVisible}
+              setModalVisible={setModalVisible}
+              courses={courses}
+            />
+          </S.ViewAllCoursesWrapper>
+        </>
       );
     }
 
-    if (subgroupEntries.length > 0) {
-      return subgroup;
-    }
+    if (subgroupEntries.length) return subgroupSection(subgroupEntries);
 
     return <Empty description="Nothing to see here! 👀" image={Empty.PRESENTED_IMAGE_SIMPLE} />;
   };
@@ -45,9 +54,7 @@ const GridViewSubgroup = ({
     <div key={subgroupKey}>
       <Title level={2} className="text">{subgroupKey}</Title>
       <Title level={3} className="text">{uoc} UOC worth of courses</Title>
-      <S.CourseGroup>
-        {courseSection()}
-      </S.CourseGroup>
+      {courseSection()}
       <br />
     </div>
   );

@@ -27,8 +27,11 @@ const GridView = ({ isLoading, structure, concise }) => {
         const subgroupStructure = structure[group][subgroup];
 
         newGridLayout[group][subgroup] = {
-          // section types with gened or rule substring can have their courses hidden as a modal
-          hasLotsOfCourses: subgroupStructure.type.includes("gened") || subgroupStructure.type.includes("rule"),
+          // section types with gened or rule/elective substring can have their
+          // courses hidden as a modal
+          hasLotsOfCourses: subgroupStructure.type.includes("gened")
+            || subgroupStructure.type.includes("rule")
+            || subgroupStructure.type.includes("electives"),
           courses: [],
         };
 
