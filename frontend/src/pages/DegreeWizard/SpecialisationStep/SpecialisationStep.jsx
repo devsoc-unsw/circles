@@ -62,7 +62,7 @@ const SpecialisationStep = ({ incrementStep, currStep, type }) => {
               {(options[sub].notes)
                 ? (
                   <Menu.ItemGroup type="group" title={`Note: ${options[sub].notes}`}>
-                    {Object.keys(options[sub].specs).map((key) => (
+                    {Object.keys(options[sub].specs).sort().map((key) => (
                       <Menu.Item key={key}>
                         {key} {options[sub].specs[key]}
                       </Menu.Item>
