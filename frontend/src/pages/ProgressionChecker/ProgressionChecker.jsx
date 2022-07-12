@@ -91,7 +91,7 @@ const ProgressionChecker = () => {
   useEffect(() => {
     notification.info({
       message: "Disclaimer",
-      description: "This progression check is intended to outline the structure of your degree and may not be fully accurate. Please refer to UNSW's official progression check and handbook for further accuracy.",
+      description: "This progression check is intended to outline the courses required by your degree and may not be 100% accurate. Please refer to UNSW's official progression check and handbook for further accuracy.",
       placement: "bottomRight",
       duration: 20,
     });
