@@ -39,7 +39,7 @@
     "build": "vite build",
     "preview": "vite preview --host",
     "test": "jest",
-    "lint": "eslint src/**/*.{js,jsx}",
+    "lint": "eslint src/**/*.{js,jsx,ts,tsx}",
     "lint:fix": "eslint --fix src/**/*.{js,jsx,ts,tsx}"
   },
   "eslintConfig": {

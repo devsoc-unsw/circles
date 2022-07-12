@@ -3,7 +3,11 @@ import { useDispatch } from "react-redux";
 import { addTab } from "reducers/courseTabsSlice";
 import S from "./styles";
 
-const CourseTag = ({ name }) => {
+type Props = {
+  name: string
+}
+
+const CourseTag = ({ name }: Props) => {
   const dispatch = useDispatch();
 
   return (
