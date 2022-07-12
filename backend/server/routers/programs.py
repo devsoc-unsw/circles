@@ -1,11 +1,12 @@
 """
 API for fetching data about programs and specialisations
 """
-import contextlib
 import re
 from typing import Optional
 
 from fastapi import APIRouter, HTTPException
+from contextlib import suppress
+
 from server.manual_fixes import apply_manual_fixes
 from server.routers.courses import regex_search
 from server.database import programsCOL, specialisationsCOL
@@ -208,11 +209,13 @@ def get_structure(
 
     structure['General'] = {}
     structure['Rules'] = {}
-    with contextlib.suppress(KeyError):
+    structure['UOC'] = programsResult["UOC"]
+    with suppress(KeyError):
         for container in programsResult['components']['non_spec_data']:
             add_subgroup_container(structure, "General", container, [])
     apply_manual_fixes(structure, programCode)
-    
+
+    print("UOC:", structure["UOC"])
     return {"structure": structure}
 
 @router.get(
