@@ -8,6 +8,7 @@ import prepareUserPayload from "../utils";
 import LoadingSkeleton from "./LoadingSkeleton/LoadingSkeleton";
 import MenuItem from "./MenuItem";
 import S from "./styles";
+import Title from "antd/lib/skeleton/Title";
 
 const { SubMenu } = Menu;
 
