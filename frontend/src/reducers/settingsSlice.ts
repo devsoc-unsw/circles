@@ -1,6 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+type SettingsSliceType = {
+  theme: string
+  showMarks: boolean
+  showLockedCourses: boolean
+  showWarnings: boolean
+};
+
+const initialState: SettingsSliceType = {
   theme: "light",
   showMarks: false,
   showLockedCourses: false,

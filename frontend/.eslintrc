@@ -15,7 +15,8 @@
             "jsx": true,
             "modules": true
         },
-        "sourceType": "module"
+        "sourceType": "module",
+        "project": "tsconfig.json"
     },
     "plugins": [
         "react",
@@ -62,7 +63,8 @@
         "@typescript-eslint/quotes": ["off"],
         "@typescript-eslint/no-use-before-define": ["off"],
         "@typescript-eslint/no-unused-vars": ["off"],
-        "import/no-named-as-default": ["off"] // vite stuff
+        "import/no-named-as-default": ["off"], // vite stuff
+        "react/require-default-props": ["off"] // typescript stuff
     },
     "settings": {
         "import/resolver": {

@@ -4,12 +4,19 @@ import S from "./styles";
 
 const { Title } = Typography;
 
+type Props = {
+  initiallyCollapsed?: boolean
+  title: string
+  children: React.ReactNode
+  headerStyle: object
+};
+
 const Collapsible = ({
-  initiallyCollapsed,
+  initiallyCollapsed = false,
   title,
   children,
   headerStyle = {},
-}) => {
+}: Props) => {
   const [isCollapsed, setIsCollapsed] = useState(initiallyCollapsed);
 
   const toggleCollapse = () => {

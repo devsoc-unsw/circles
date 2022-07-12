@@ -5,7 +5,7 @@ import S from "./styles";
 
 type Props = {
   name: string
-}
+};
 
 const CourseTag = ({ name }: Props) => {
   const dispatch = useDispatch();
