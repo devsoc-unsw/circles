@@ -62,7 +62,8 @@
         "simple-import-sort/exports": ["error"],
         "@typescript-eslint/quotes": ["off"],
         "@typescript-eslint/no-use-before-define": ["off"],
-        "@typescript-eslint/no-unused-vars": ["off"]
+        "@typescript-eslint/no-unused-vars": ["off"],
+        "import/no-named-as-default": ["off"] // vite stuff
     },
     "settings": {
         "import/resolver": {

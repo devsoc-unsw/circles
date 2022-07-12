@@ -1677,6 +1677,69 @@
         "components": {
             "non_spec_data": [
                 {
+                    "type": "core_courses",
+                    "courses": {
+                        "ANAT2111": "Introductory Anatomy",
+                        "OPTM2133": "The Clinical Environment",
+                        "OPTM2233": "Optical Dispensing",
+                        "PHSL2101": "Physiology 1A",
+                        "PHSL2201": "Physiology 1B",
+                        "VISN2111": "Ocular Anatomy and Physiology",
+                        "VISN2211": "Organisation and Function of the Visual System"
+                    },
+                    "title": "Level 2 Core Courses",
+                    "credits_to_complete": 42,
+                    "levels": [
+                        2
+                    ],
+                    "notes": "Students must take 42 UOC of the following courses."
+                },
+                {
+                    "type": "core_courses",
+                    "courses": {
+                        "BABS1201": "Molecules, Cells and Genes",
+                        "CHEM1011": "Chemistry 1A: Atoms, Molecules and Energy",
+                        "CHEM1829": "Biological Chemistry for Optometry Students",
+                        "MATH1131 or MATH1031 or MATH1141": [
+                            "Mathematics 1A",
+                            "Mathematics for Life Sciences",
+                            "Higher Mathematics 1A"
+                        ],
+                        "PHYS1131 or PHYS1121 or PHYS1111": [
+                            "Higher Physics 1A",
+                            "Physics 1A",
+                            "Fundamentals of Physics"
+                        ],
+                        "VISN1101": "Seeing the World: Perspectives from Vision Science",
+                        "VISN1111": "Geometrical and Physical Optics",
+                        "VISN1221": "Visual Optics"
+                    },
+                    "title": "Level 1 Core Courses",
+                    "credits_to_complete": 48,
+                    "levels": [
+                        1
+                    ],
+                    "notes": "Students must take 48 UOC of the following courses."
+                },
+                {
+                    "type": "core_courses",
+                    "courses": {
+                        "OPTM3105": "Disease Processes of the Eye 1",
+                        "OPTM3133": "Vision Science in the Consulting Room",
+                        "OPTM3201": "Ocular Imaging & Applied Vision Science",
+                        "OPTM3205": "Disease Processes of the Eye 2",
+                        "OPTM3233": "Working in Clinical Contexts",
+                        "PHAR3306": "Pharmacology for Optometry",
+                        "VISN3111": "Development and Aging of the Visual System"
+                    },
+                    "title": "Level 3 Core Courses",
+                    "credits_to_complete": 42,
+                    "levels": [
+                        3
+                    ],
+                    "notes": "Students must take 42 UOC of the following courses."
+                },
+                {
                     "type": "limit_rule",
                     "courses": {
                         "ANAT": "any School of Medical Sciences course",
@@ -1708,69 +1771,6 @@
                         9
                     ],
                     "notes": "Students may not undertake any of the following excluded courses."
-                },
-                {
-                    "type": "core_courses",
-                    "courses": {
-                        "OPTM3105": "Disease Processes of the Eye 1",
-                        "OPTM3133": "Vision Science in the Consulting Room",
-                        "OPTM3201": "Ocular Imaging & Applied Vision Science",
-                        "OPTM3205": "Disease Processes of the Eye 2",
-                        "OPTM3233": "Working in Clinical Contexts",
-                        "PHAR3306": "Pharmacology for Optometry",
-                        "VISN3111": "Development and Aging of the Visual System"
-                    },
-                    "title": "Level 3 Core Courses",
-                    "credits_to_complete": 42,
-                    "levels": [
-                        3
-                    ],
-                    "notes": "Students must take 42 UOC of the following courses."
-                },
-                {
-                    "type": "core_courses",
-                    "courses": {
-                        "ANAT2111": "Introductory Anatomy",
-                        "OPTM2133": "The Clinical Environment",
-                        "OPTM2233": "Optical Dispensing",
-                        "PHSL2101": "Physiology 1A",
-                        "PHSL2201": "Physiology 1B",
-                        "VISN2111": "Ocular Anatomy and Physiology",
-                        "VISN2211": "Organisation and Function of the Visual System"
-                    },
-                    "title": "Level 2 Core Courses",
-                    "credits_to_complete": 42,
-                    "levels": [
-                        2
-                    ],
-                    "notes": "Students must take 42 UOC of the following courses."
-                },
-                {
-                    "type": "core_courses",
-                    "courses": {
-                        "BABS1201": "Molecules, Cells and Genes",
-                        "CHEM1011": "Chemistry 1A: Atoms, Molecules and Energy",
-                        "CHEM1829": "Biological Chemistry for Optometry Students",
-                        "MATH1131 or MATH1141 or MATH1031": [
-                            "Mathematics 1A",
-                            "Higher Mathematics 1A",
-                            "Mathematics for Life Sciences"
-                        ],
-                        "PHYS1121 or PHYS1111 or PHYS1131": [
-                            "Physics 1A",
-                            "Fundamentals of Physics",
-                            "Higher Physics 1A"
-                        ],
-                        "VISN1101": "Seeing the World: Perspectives from Vision Science",
-                        "VISN1111": "Geometrical and Physical Optics",
-                        "VISN1221": "Visual Optics"
-                    },
-                    "title": "Level 1 Core Courses",
-                    "credits_to_complete": 48,
-                    "levels": [
-                        1
-                    ],
-                    "notes": "Students must take 48 UOC of the following courses."
                 },
                 {
                     "type": "gened",
@@ -2246,26 +2246,6 @@
                         6
                     ],
                     "notes": "Students must take at least 12 UOC of the following courses."
-                },
-                {
-                    "type": "other",
-                    "courses": {
-                        "": "any course"
-                    },
-                    "title": "Free Elective",
-                    "credits_to_complete": 6,
-                    "levels": [
-                        1,
-                        2,
-                        3,
-                        4,
-                        5,
-                        6,
-                        7,
-                        8,
-                        9
-                    ],
-                    "notes": "Students must take at least 6 UOC of the following courses."
                 },
                 {
                     "type": "core_courses",
@@ -4309,26 +4289,6 @@
                         3
                     ],
                     "notes": "Students must take 12 UOC of the following courses."
-                },
-                {
-                    "type": "other",
-                    "courses": {
-                        "": "any course"
-                    },
-                    "title": "Free electives",
-                    "credits_to_complete": 36,
-                    "levels": [
-                        1,
-                        2,
-                        3,
-                        4,
-                        5,
-                        6,
-                        7,
-                        8,
-                        9
-                    ],
-                    "notes": "Students completing the program in stand-alone mode who are not completing a complementary major, are required to take an additional 36 UOC of free electives."
                 }
             ],
             "spec_data": {
@@ -16773,50 +16733,6 @@
                     "notes": "Students must take 12 UOC outside of the UNSW Business School, excepting any courses listed under 'Excluded General Education Courses'."
                 },
                 {
-                    "type": "other",
-                    "courses": {
-                        "": "any course",
-                        "ACCTA1": "Accounting",
-                        "ACCTA2": "Accounting",
-                        "ACTLE1": "Actuarial Risk Management and Analytics",
-                        "COMMJ1": "Business Analytics",
-                        "COMMJ2": "Business Analytics",
-                        "ECONF1": "Business Economics",
-                        "ECONF2": "Business Economics",
-                        "ECONJ1": "Financial Economics",
-                        "FINSA1": "Finance",
-                        "FINSA2": "Finance",
-                        "FINSR1": "Financial Technology",
-                        "FINSR2": "Financial Technology",
-                        "IBUSA1": "International Business",
-                        "IBUSA2": "International Business",
-                        "INFSA1": "Information Systems",
-                        "INFSA2": "Information Systems",
-                        "MARKA1": "Marketing",
-                        "MATHE1": "Quantitative Data Science",
-                        "MATHM1": "Mathematics",
-                        "MATHT1": "Statistics",
-                        "MGMTA2": "Management",
-                        "MGMTH1": "Human Resource Management",
-                        "MGMTH2": "Human Resource Management",
-                        "TABLC1": "Taxation"
-                    },
-                    "title": "Free electives",
-                    "credits_to_complete": 24,
-                    "levels": [
-                        1,
-                        2,
-                        3,
-                        4,
-                        5,
-                        6,
-                        7,
-                        8,
-                        9
-                    ],
-                    "notes": "Students must take at least 24 UOC of the following courses."
-                },
-                {
                     "type": "limit_rule",
                     "courses": {
                         "....": "any UNSW Business School CDEV2000 - Creating Your Career: Employability for the Future CDEV3000 - Practice of Work CDEV3001 - WIL Experience Term GENL2021 - Introduction to the Australian Legal System GENL2032 - Cyberspace Law 2.0 course"
@@ -16908,7 +16824,49 @@
                     ],
                     "notes": "Students must take 60 UOC of the following courses.\nStudents may replace ACTL2131 with the two courses MATH2901 Higher Theory of Statistics and MATH2931 Higher Linear Models. If students make this replacement, MATH2901 will count towards ACTL2131, and MATH2931 will be counted towards a major where this course is required or as an Business elective.\nIndustrial Training Experience: Students complete industrial training experience courses within the area of their Co-op scholarship."
                 }
-            ]
+            ],
+            "spec_data": {
+                "majors": {
+                    "Actuarial Studies (Co op)": {
+                        "is_optional": false,
+                        "specs": {
+                            "ACTLE1": "Actuarial Risk Management and Analytics",
+                            "IBUSA1": "International Business",
+                            "COMMJ1": "Business Analytics",
+                            "FINSR1": "Financial Technology",
+                            "MATHE1": "Quantitative Data Science",
+                            "MARKA1": "Marketing",
+                            "ECONJ1": "Financial Economics",
+                            "MATHT1": "Statistics",
+                            "TABLC1": "Taxation",
+                            "MATHM1": "Mathematics",
+                            "INFSA1": "Information Systems",
+                            "ECONF1": "Business Economics",
+                            "ACCTA1": "Accounting",
+                            "FINSA1": "Finance",
+                            "MGMTH1": "Human Resource Management"
+                        },
+                        "notes": "Students may use their free electives to complete an optional business major/minor. A maximum of one major or minor can be chosen from the list below.\nA Major in UNSW Business School is a sequence of at least 48 UOC in a single discipline or area of study.\nA Major in the School of Mathematics and Statistics comprises of at least 60 UOC. For the purposes of completing a Major in the School of Mathematics and Statistics, Students may treat: - MATH1151 as equivalent to MATH1141 - MATH1251 as equivalent to MATH1241"
+                    }
+                },
+                "minors": {
+                    "Actuarial Studies (Co op)": {
+                        "is_optional": true,
+                        "specs": {
+                            "INFSA2": "Information Systems",
+                            "FINSR2": "Financial Technology",
+                            "ECONF2": "Business Economics",
+                            "MGMTH2": "Human Resource Management",
+                            "FINSA2": "Finance",
+                            "COMMJ2": "Business Analytics",
+                            "IBUSA2": "International Business",
+                            "ACCTA2": "Accounting",
+                            "MGMTA2": "Management"
+                        },
+                        "notes": "Students may use their free electives to complete an optional business major/minor. A maximum of one major or minor can be chosen from the list below.\nA Major in UNSW Business School is a sequence of at least 48 UOC in a single discipline or area of study.\nA Major in the School of Mathematics and Statistics comprises of at least 60 UOC. For the purposes of completing a Major in the School of Mathematics and Statistics, Students may treat: - MATH1151 as equivalent to MATH1141 - MATH1251 as equivalent to MATH1241"
+                    }
+                }
+            }
         },
         "processing_warnings": [
             "Couldn't find the number of credits for item in program Actuarial Studies (Co op) (3587) in section titled 'Excluded General Education Courses'"
@@ -28183,6 +28141,16 @@
         "components": {
             "non_spec_data": [
                 {
+                    "type": "info_rule",
+                    "title": "Course Information Rule",
+                    "notes": "GEN# courses cannot count towards the free elective component, or towards science core courses or science electives in the program. Any exceptions to these rules must be approved by the Associate Dean (Academic Programs) or nominee."
+                },
+                {
+                    "type": "gened",
+                    "credits_to_complete": 12,
+                    "notes": "Students must take 12 UOC of the following courses.\nAny course defined as a Science or Medicine course cannot be taken as General Education (GE). All other courses can be used to fulfil the GE requirement of this program, including GEN# coded courses. Any exceptions to these rules must be approved by the Associate Dean (Academic Programs) or nominee."
+                },
+                {
                     "type": "limit_rule",
                     "courses": {
                         "ANAT": "any School of Medical Sciences course",
@@ -28229,14 +28197,41 @@
                     "notes": "Students may not undertake any of the following excluded courses."
                 },
                 {
-                    "type": "gened",
-                    "credits_to_complete": 12,
-                    "notes": "Students must take 12 UOC of the following courses.\nAny course defined as a Science or Medicine course cannot be taken as General Education (GE). All other courses can be used to fulfil the GE requirement of this program, including GEN# coded courses. Any exceptions to these rules must be approved by the Associate Dean (Academic Programs) or nominee."
-                },
-                {
-                    "type": "info_rule",
-                    "title": "Course Information Rule",
-                    "notes": "GEN# courses cannot count towards the free elective component, or towards science core courses or science electives in the program. Any exceptions to these rules must be approved by the Associate Dean (Academic Programs) or nominee."
+                    "type": "prescribed_electives",
+                    "courses": {
+                        "AVIA": "any course offered by Faculty of Science",
+                        "BABS": "any course offered by Faculty of Science",
+                        "BEES": "any course offered by Faculty of Science",
+                        "BIOC": "any course offered by Faculty of Science",
+                        "BIOS": "any course offered by Faculty of Science",
+                        "CHEM": "any course offered by Faculty of Science",
+                        "CLIM": "any course offered by Faculty of Science",
+                        "DATA": "any course offered by Faculty of Science",
+                        "GENS": "any course offered by Faculty of Science",
+                        "GEOS": "any course offered by Faculty of Science",
+                        "MATH": "any course offered by Faculty of Science",
+                        "MATS": "any course offered by Faculty of Science",
+                        "MICR": "any course offered by Faculty of Science",
+                        "MSCI": "any course offered by Faculty of Science",
+                        "NANO": "any course offered by Faculty of Science",
+                        "PHYS": "any course offered by Faculty of Science",
+                        "PSYC": "any course offered by Faculty of Science",
+                        "SCIF": "any course offered by Faculty of Science"
+                    },
+                    "title": "Science Elective",
+                    "credits_to_complete": 6,
+                    "levels": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9
+                    ],
+                    "notes": "Students must take 6 UOC of the following courses (Psychology, Physics or other Mathematics courses are recommended)"
                 },
                 {
                     "type": "prescribed_electives",
@@ -28286,43 +28281,6 @@
                     "notes": "Students must take at least 24 UOC of the following courses.\nNote: only 6UoC from BABS3301 or SOMS3001 can be taken.\nPlease Note: When making their course choices, students who intend to do Honours should review the requirements and information on the websites of the School of Biotechnology and Biomolecular Sciences or the School of Medical Sciences prior to enrolment in Stage 3."
                 },
                 {
-                    "type": "prescribed_electives",
-                    "courses": {
-                        "AVIA": "any course offered by Faculty of Science",
-                        "BABS": "any course offered by Faculty of Science",
-                        "BEES": "any course offered by Faculty of Science",
-                        "BIOC": "any course offered by Faculty of Science",
-                        "BIOS": "any course offered by Faculty of Science",
-                        "CHEM": "any course offered by Faculty of Science",
-                        "CLIM": "any course offered by Faculty of Science",
-                        "DATA": "any course offered by Faculty of Science",
-                        "GENS": "any course offered by Faculty of Science",
-                        "GEOS": "any course offered by Faculty of Science",
-                        "MATH": "any course offered by Faculty of Science",
-                        "MATS": "any course offered by Faculty of Science",
-                        "MICR": "any course offered by Faculty of Science",
-                        "MSCI": "any course offered by Faculty of Science",
-                        "NANO": "any course offered by Faculty of Science",
-                        "PHYS": "any course offered by Faculty of Science",
-                        "PSYC": "any course offered by Faculty of Science",
-                        "SCIF": "any course offered by Faculty of Science"
-                    },
-                    "title": "Science Elective",
-                    "credits_to_complete": 6,
-                    "levels": [
-                        1,
-                        2,
-                        3,
-                        4,
-                        5,
-                        6,
-                        7,
-                        8,
-                        9
-                    ],
-                    "notes": "Students must take 6 UOC of the following courses (Psychology, Physics or other Mathematics courses are recommended)"
-                },
-                {
                     "type": "core_courses",
                     "courses": {
                         "ANAT2241": "Histology: Basic and Systematic",
@@ -28346,9 +28304,9 @@
                     "courses": {
                         "ANAT1521": "Anatomy for Medical Science",
                         "BABS1201": "Molecules, Cells and Genes",
-                        "BIOS1101 or BABS2202 or BABS2204": [
-                            "Evolutionary and Functional Biology",
+                        "BABS2202 or BIOS1101 or BABS2204": [
                             "Molecular Cell Biology 1",
+                            "Evolutionary and Functional Biology",
                             "Genetics"
                         ],
                         "CHEM1011": "Chemistry 1A: Atoms, Molecules and Energy",
@@ -28362,7 +28320,8 @@
                     "title": "Level 1 Core Courses",
                     "credits_to_complete": 42,
                     "levels": [
-                        1
+                        1,
+                        2
                     ],
                     "notes": "Students must take 42 UOC of the following courses.\nNote: Students in 3991 can only enrol in SCIF1131 in T3 if they cannot take SCIF1111 in T1"
                 }
@@ -28373,14 +28332,14 @@
                         "is_optional": false,
                         "specs": {
                             "MICRK1": "Medical Immunology",
+                            "BIOCI1": "Molecular Genetics",
+                            "PHARC1": "Medical Pharmacology",
                             "NEURB1": "Neurobiology",
+                            "PHSLC1": "Medical Physiology",
                             "BIOCH1": "Molecular Biology",
                             "MICRH1": "Medical Microbiology",
-                            "PHARC1": "Medical Pharmacology",
-                            "PHSLC1": "Medical Physiology",
                             "PATHC1": "Human Pathology",
-                            "ANATE1": "Human Anatomy",
-                            "BIOCI1": "Molecular Genetics"
+                            "ANATE1": "Human Anatomy"
                         },
                         "notes": "Students may elect to complete a major, or a double major, from the following areas. Where a student would like to graduate with a major (this is not a compulsory part of the program) this must be declared by the commencement of a student's final year of study.\nPlease Note: Students may complete a maximum of two majors but no double-counting of courses between majors is allowed at Level 3."
                     }
@@ -31926,14 +31885,6 @@
                         3
                     ],
                     "notes": "Students must take 24 UOC of the following designated CDF courses which will count towards one, or both, Arts majors."
-                },
-                {
-                    "type": "other",
-                    "courses": {},
-                    "title": "Free electives",
-                    "credits_to_complete": 24,
-                    "levels": [],
-                    "notes": "Students can take up to a maximum of 24 UOC of the following courses."
                 }
             ],
             "spec_data": {
@@ -31953,9 +31904,7 @@
                 }
             }
         },
-        "processing_warnings": [
-            "Can't figure out what abbreviated code(s) are for UNSW Canberra at ADFA in program Arts (CDF) (4461) in section titled 'Free electives'"
-        ]
+        "processing_warnings": []
     },
     "4462": {
         "title": "Business (CDF)",
@@ -42229,26 +42178,6 @@
                         3
                     ],
                     "notes": "Students must take 48 UOC of the following courses."
-                },
-                {
-                    "type": "other",
-                    "courses": {
-                        "": "any course"
-                    },
-                    "title": "Free electives",
-                    "credits_to_complete": 36,
-                    "levels": [
-                        1,
-                        2,
-                        3,
-                        4,
-                        5,
-                        6,
-                        7,
-                        8,
-                        9
-                    ],
-                    "notes": "Students must take at least 36 UOC of the following courses."
                 }
             ]
         },

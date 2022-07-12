@@ -8,7 +8,7 @@ from algorithms.create import create_condition
 from algorithms.objects.conditions import *
 from algorithms.objects.user import User
 
-PATH = "./algorithms/exampleUsers.json"
+PATH = "./algorithms/tests/exampleUsers.json"
 
 with open(PATH, encoding="utf8") as f:
     USERS = json.load(f)

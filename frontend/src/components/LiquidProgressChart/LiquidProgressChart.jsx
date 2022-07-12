@@ -27,7 +27,7 @@ const LiquidProgressChart = ({ completedUOC, totalUOC }) => {
   }
 
   // dark mode always has white text
-  const theme = useSelector((state) => state.theme);
+  const { theme } = useSelector((state) => state.settings);
   if (theme === "dark") {
     textColor = "white";
   }
@@ -65,7 +65,7 @@ const LiquidProgressChart = ({ completedUOC, totalUOC }) => {
     const time = 30;
     const interval = setInterval(() => {
       data += 0.01;
-      if (data <= fillValue + 0.01) {
+      if (fillValue && data <= fillValue + 0.01) {
         setPercent(data);
       } else {
         clearInterval(interval);

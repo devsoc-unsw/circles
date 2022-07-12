@@ -22,6 +22,11 @@ const parseMarkToInt = (mark) => {
   return Object.keys(letterGradeToIntMap).includes(mark) ? letterGradeToIntMap[mark] : null;
 };
 
+// Checks if no courses have been planned
+const isPlannerEmpty = (years) => (
+  years.every((year) => Object.keys(year).every((key) => year[key].length === 0))
+);
+
 // takes in startYear (int) and gets current date to
 // return the most recent term that has past (week 2)
 // dictionary of year in degree and term most recent is returned
@@ -54,9 +59,9 @@ const getMostRecentPastTerm = (startYear) => {
   };
 };
 
-const prepareCoursesForValidation = (planner, degree, suppress) => {
+const prepareCoursesForValidation = (planner, degree, showWarnings) => {
   const { years, startYear, courses } = planner;
-  const { programCode, majors, minor } = degree;
+  const { programCode, specs } = degree;
 
   const plan = [];
   years.forEach((year) => {
@@ -73,13 +78,15 @@ const prepareCoursesForValidation = (planner, degree, suppress) => {
 
   const payload = {
     program: programCode,
-    specialisations: minor ? [...majors, minor] : majors,
+    specialisations: specs,
     year: 1,
     plan,
-    mostRecentPastTerm: suppress ? getMostRecentPastTerm(startYear) : { Y: 0, T: 0 },
+    mostRecentPastTerm: showWarnings ? { Y: 0, T: 0 } : getMostRecentPastTerm(startYear),
   };
 
   return payload;
 };
 
-export { getMostRecentPastTerm, parseMarkToInt, prepareCoursesForValidation };
+export {
+  getMostRecentPastTerm, isPlannerEmpty, parseMarkToInt, prepareCoursesForValidation,
+};

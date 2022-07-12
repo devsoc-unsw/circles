@@ -11,7 +11,7 @@ import { getMostRecentPastTerm } from "pages/TermPlanner/utils";
  * THESE SHOULD BE RARELY INCREMENTED UNLESS THERE IS A BREAKING CHANGE.
  *
  */
-export const REDUX_PERSIST_VERSION = 1;
+export const REDUX_PERSIST_VERSION = 2;
 
 export const FEEDBACK_LINK = "https://github.com/csesoc/Circles/issues?q=is%3Aissue+is%3Aopen";
 
@@ -25,4 +25,4 @@ export const darkGrey = "#323739";
 export const yellow = "#FAAD14";
 export const purple = "#9254de";
 
-export const inDev = process.env.REACT_APP_ENV === "dev";
+export const inDev = import.meta.env.VITE_ENV === "dev" || !!localStorage.getItem("circlesEnv");

@@ -7,64 +7,64 @@ import {
 import Tippy from "@tippyjs/react";
 import { Popconfirm, Switch, Tooltip } from "antd";
 import { unhideAllYears, unscheduleAll } from "reducers/plannerSlice";
-import HelpMenu from "./HelpMenu";
-import SaveMenu from "./SaveMenu";
-import SettingsMenu from "./SettingsMenu";
-import "tippy.js/dist/tippy.css";
-import "tippy.js/themes/light.css";
-import "./index.less";
+import { toggleShowMarks, toggleShowWarnings } from "reducers/settingsSlice";
+import ExportPlannerMenu from "../ExportPlannerMenu";
+import HelpMenu from "../HelpMenu/HelpMenu";
+import SettingsMenu from "../SettingsMenu";
+import { isPlannerEmpty } from "../utils";
+import S from "./styles";
 
-const OptionsHeader = ({
-  plannerRef, isAllEmpty, setSuppress, suppress, setShowMarks,
-}) => {
-  const theme = useSelector((state) => state.theme);
-  const { areYearsHidden } = useSelector((state) => state.planner);
-  const { years } = useSelector((state) => state.planner);
+const OptionsHeader = ({ plannerRef }) => {
+  const { theme } = useSelector((state) => state.settings);
+  const { areYearsHidden, years } = useSelector((state) => state.planner);
+  const { showMarks, showWarnings } = useSelector((state) => state.settings);
   const dispatch = useDispatch();
 
+  const iconStyles = {
+    fontSize: "20px",
+    color: "#323739",
+  };
+
   return (
-    <div className="options-header">
-      <div className="left-buttons">
+    <S.OptionsHeaderWrapper>
+      <S.OptionSection>
         <Tippy
           content={<SettingsMenu />}
           moveTransition="transform 0.2s ease-out"
           interactive
           trigger="click"
-          theme={theme === "light" ? "light" : "dark"}
+          theme={theme}
           zIndex={1}
           placement="bottom-start"
         >
           <div>
             <Tooltip title="Settings">
-              <button type="button" className="settings-button">
-                <SettingFilled className="settings-icon" />
-              </button>
+              <S.OptionButton>
+                <SettingFilled style={iconStyles} />
+              </S.OptionButton>
+            </Tooltip>
+          </div>
+        </Tippy>
+        <Tippy
+          content={<ExportPlannerMenu plannerRef={plannerRef} />}
+          moveTransition="transform 0.2s ease-out"
+          interactive
+          trigger="click"
+          theme={theme}
+          zIndex={1}
+          placement="bottom-start"
+        >
+          <div>
+            <Tooltip title="Export">
+              <S.OptionButton>
+                <DownloadOutlined style={iconStyles} />
+              </S.OptionButton>
             </Tooltip>
           </div>
         </Tippy>
 
-        {theme === "light" && (
-          <Tippy
-            content={<SaveMenu plannerRef={plannerRef} />}
-            moveTransition="transform 0.2s ease-out"
-            interactive
-            trigger="click"
-            theme={theme === "light" ? "light" : "dark"}
-            zIndex={1}
-            placement="bottom-start"
-          >
-            <div>
-              <Tooltip title="Export">
-                <button type="button" className="settings-button">
-                  <DownloadOutlined className="settings-icon" />
-                </button>
-              </Tooltip>
-            </div>
-          </Tippy>
-        )}
-
-        {!isAllEmpty(years) && (
-          <div>
+        {!isPlannerEmpty(years) && (
+          <Tooltip title="Unplan all courses">
             <Popconfirm
               placement="bottomRight"
               title="Are you sure you want to unplan all your courses?"
@@ -73,44 +73,33 @@ const OptionsHeader = ({
               okText="Yes"
               cancelText="No"
             >
-              <Tooltip title="Unplan all courses">
-                <button type="button" className="settings-button">
-                  <FaRegCalendarTimes className="settings-icon" />
-                </button>
-              </Tooltip>
+              <S.OptionButton>
+                <FaRegCalendarTimes style={iconStyles} />
+              </S.OptionButton>
             </Popconfirm>
-          </div>
+          </Tooltip>
         )}
 
         {areYearsHidden && (
-          <div>
-            <Tooltip title="Show all hidden years">
-              <button type="button" className="settings-button" onClick={() => dispatch(unhideAllYears())}>
-                <EyeFilled className="settings-icon" />
-              </button>
-            </Tooltip>
-          </div>
-        )}
-
-        <div>
-          <Tooltip title="Toggle warnings for previous terms">
-            <button
-              className={`settings-button ${suppress ? "" : "filled"}`}
-              type="button"
-              onClick={() => {
-                setSuppress((prev) => !prev);
-              }}
-            >
-              <WarningFilled className="settings-icon" />
-            </button>
+          <Tooltip title="Show all hidden years">
+            <S.OptionButton onClick={() => dispatch(unhideAllYears())}>
+              <EyeFilled style={iconStyles} />
+            </S.OptionButton>
           </Tooltip>
-        </div>
-      </div>
-      <div className="right-buttons">
+        )}
+        <Tooltip title="Toggle warnings for previous terms">
+          <S.OptionButton onClick={() => dispatch(toggleShowWarnings())}>
+            <WarningFilled style={{ ...iconStyles, ...(showWarnings && { color: "#9254de" }) }} />
+          </S.OptionButton>
+        </Tooltip>
+      </S.OptionSection>
+
+      <S.OptionSection>
         <div>
           <Switch
+            defaultChecked={showMarks}
             className="cs-toggle-locked"
-            onChange={() => setShowMarks((prev) => !prev)}
+            onChange={() => dispatch(toggleShowMarks())}
             checkedChildren="marks shown"
             unCheckedChildren="marks hidden"
           />
@@ -120,20 +109,20 @@ const OptionsHeader = ({
           moveTransition="transform 0.2s ease-out"
           interactive
           trigger="click"
-          theme={theme === "light" ? "light" : "dark"}
+          theme={theme}
           maxWidth="80vh"
           placement="bottom-start"
         >
           <div>
             <Tooltip title="Help">
-              <button type="button" className="settings-button help-button">
-                <QuestionCircleOutlined className="settings-icon" />
-              </button>
+              <S.OptionButton>
+                <QuestionCircleOutlined style={iconStyles} />
+              </S.OptionButton>
             </Tooltip>
           </div>
         </Tippy>
-      </div>
-    </div>
+      </S.OptionSection>
+    </S.OptionsHeaderWrapper>
   );
 };
 

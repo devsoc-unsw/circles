@@ -1,10 +1,8 @@
 import React from "react";
-import { Skeleton } from "antd";
-import "./index.less";
+import S from "./styles";
 
 const SkeletonCard = () => (
-  <Skeleton.Button
-    className="skeletonCard"
+  <S.SkeletonCard
     style={{ width: "20em", height: "8.5em" }}
     active
     round

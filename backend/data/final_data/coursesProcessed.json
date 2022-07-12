@@ -15838,7 +15838,11 @@
         },
         "exclusions": {
             "ECON1104": 1,
-            "ECON1102": 1
+            "ECON1102": 1,
+            "MGMT1101": 1,
+            "COMM2233": 1,
+            "CDEV3000": 1,
+            "DIPP1510": 1
         },
         "terms": [
             "T0",
@@ -16154,7 +16158,8 @@
         "equivalents": {},
         "exclusions": {
             "COMM2233": 1,
-            "COMM2222": 1
+            "COMM2222": 1,
+            "DIPP1510": 1
         },
         "terms": [
             "T1",
@@ -16397,7 +16402,13 @@
         "faculty": "Faculty of Engineering",
         "campus": "Sydney",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "COMP?1": 1,
+            "COMP?H": 1,
+            "BINF?1": 1,
+            "BINF?H": 1,
+            "SENGAH": 1
+        },
         "terms": [
             "T2"
         ],
@@ -17448,7 +17459,9 @@
         "faculty": "Faculty of Engineering",
         "campus": "Sydney",
         "equivalents": {},
-        "exclusions": {},
+        "exclusions": {
+            "SENGAH": 1
+        },
         "terms": [
             "T2"
         ],
@@ -27056,7 +27069,12 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {
-            "COMP1010": 1
+            "COMP1010": 1,
+            "COMP?1": 1,
+            "COMP?H": 1,
+            "BINF?1": 1,
+            "BINF?H": 1,
+            "SENGAH": 1
         },
         "terms": [
             "T1",
@@ -30861,7 +30879,9 @@
         },
         "exclusions": {
             "INFS2609": 1,
-            "COMP1400": 1
+            "COMP1400": 1,
+            "COMP#": 1,
+            "COMP?1": 1
         },
         "terms": [
             "T1"
@@ -36460,7 +36480,8 @@
             "ECON1202": 1,
             "DPST1013": 1,
             "3991": 1,
-            "leftover_plaintext": "Not enrolled in  or any UNSW Business Program and must not have completed  or"
+            "leftover_plaintext": "Not enrolled in  or any UNSW Business Program and must not have completed  or",
+            "BUSN#": 1
         },
         "terms": [
             "T1",
@@ -48927,8 +48948,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {
-            "DPBS1710": 1,
-            "TABL1710": 1
+            "LAWS#": 1
         },
         "terms": [
             "T1",
@@ -49006,7 +49026,7 @@
         "campus": "Sydney",
         "equivalents": {},
         "exclusions": {
-            "LEGT7741": 1
+            "LAWS#": 1
         },
         "terms": [
             "T1",
