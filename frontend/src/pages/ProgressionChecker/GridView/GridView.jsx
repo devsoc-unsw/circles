@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Skeleton, Typography } from "antd";
+import Collapsible from "components/Collapsible";
 import { getFormattedPlannerCourses } from "../utils";
 import GridViewConciseSubgroup from "./GridViewConciseSubgroup";
 import GridViewSubgroup from "./GridViewSubgroup";
@@ -68,10 +69,15 @@ const GridView = ({ isLoading, structure, concise }) => {
       ) : (
         <>
           {Object.entries(gridLayout).map(([group, groupEntry]) => (
-            <div key={group} id={group}>
-              <Title level={1} className="text">
-                {structure[group].name ? `${group} - ${structure[group].name}` : group}
-              </Title>
+            <Collapsible
+              title={(
+                <Title level={1} className="text" id={group}>
+                  {structure[group].name ? `${group} - ${structure[group].name}` : group}
+                </Title>
+              )}
+              key={group}
+              initiallyCollapsed={group === "Rules"}
+            >
               {Object.entries(groupEntry).map(
                 ([subgroup, subgroupEntry]) => (
                   (concise === true) ? (
@@ -91,7 +97,7 @@ const GridView = ({ isLoading, structure, concise }) => {
                   )
                 ),
               )}
-            </div>
+            </Collapsible>
           ))}
         </>
       )}
