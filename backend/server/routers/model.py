@@ -40,6 +40,7 @@ class CourseDetails(BaseModel):
 
 class Structure(BaseModel):  # this is a copout - we should avoid this
     structure: dict
+    uoc: int
 
 
 class UserData(BaseModel):

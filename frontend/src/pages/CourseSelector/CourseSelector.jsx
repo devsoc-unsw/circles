@@ -41,6 +41,8 @@ const CourseSelector = () => {
     const fetchStructure = async () => {
       try {
         const res = await axios.get(`/programs/getStructure/${programCode}/${specs.join("+")}`);
+        /* eslint-disable no-console */
+        console.log("structure: ", res.data.structure);
         setStructure(res.data.structure);
       } catch (err) {
         // eslint-disable-next-line no-console

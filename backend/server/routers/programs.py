@@ -209,14 +209,15 @@ def get_structure(
 
     structure['General'] = {}
     structure['Rules'] = {}
-    structure['UOC'] = programsResult["UOC"]
     with suppress(KeyError):
         for container in programsResult['components']['non_spec_data']:
             add_subgroup_container(structure, "General", container, [])
     apply_manual_fixes(structure, programCode)
 
-    print("UOC:", structure["UOC"])
-    return {"structure": structure}
+    return {
+        "structure": structure, 
+        "uoc": programsResult["UOC"],
+    }
 
 @router.get(
     "/getGenEds/{programCode}",
