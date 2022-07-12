@@ -1,6 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+type CourseTabsSlice = {
+  tabs: string[]
+  active: number
+};
+
+const initialState: CourseTabsSlice = {
   tabs: [],
   active: 0,
 };
@@ -23,11 +28,9 @@ const courseTabsSplice = createSlice({
       const index = parseInt(action.payload, 10);
       state.tabs.splice(index, 1);
 
-      const active = parseInt(state.active, 10);
-
-      if (!(active === 0 || index > active)) {
+      if (!(state.active === 0 || index > state.active)) {
         // deleting tab before/equal to active tab
-        state.active = active - 1;
+        state.active -= 1;
       }
     },
     setActiveTab: (state, action) => {
