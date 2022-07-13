@@ -105,7 +105,7 @@ const CourseSidebar = ({ structure, showLockedCourses }) => {
     if (structure && Object.keys(structure).length) getAllUnlocked();
   }, [structure, getAllUnlocked]);
 
-  const sortGroups = (item1, item2) => {
+  const sortSubgroups = (item1, item2) => {
     if (/Core/.test(item1[0]) && !/Core/.test(item2[0])) {
       return -1;
     }
@@ -114,7 +114,7 @@ const CourseSidebar = ({ structure, showLockedCourses }) => {
       return 1;
     }
 
-    return item1[0] > item2[0];
+    return item1[0] > item2[0] ? 1 : -1;
   };
 
   const sortCourses = (item1, item2) => (item1.courseCode > item2.courseCode ? 1 : -1);
@@ -124,7 +124,7 @@ const CourseSidebar = ({ structure, showLockedCourses }) => {
     key: group,
     children: Object
       .entries(groupEntry)
-      .sort(sortGroups)
+      .sort(sortSubgroups)
       .map(([subGroup, subGroupEntry]) => ({
         label: <SubgroupTitle
           subGroup={subGroup}
@@ -170,7 +170,8 @@ const CourseSidebar = ({ structure, showLockedCourses }) => {
               onClick={handleClick}
             />
           </AnimatePresence>
-        ) : (<LoadingSkeleton />)}
+        )
+        : <LoadingSkeleton />}
     </S.SidebarWrapper>
   );
 };
