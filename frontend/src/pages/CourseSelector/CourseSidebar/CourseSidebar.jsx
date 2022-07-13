@@ -115,7 +115,7 @@ const CourseSidebar = ({ structure, showLockedCourses }) => {
     if (structure && Object.keys(structure).length) getAllUnlocked();
   }, [structure, getAllUnlocked]);
 
-  const sortGroups = (item1, item2) => {
+  const sortSubgroups = (item1, item2) => {
     if (/Core/.test(item1[0]) && !/Core/.test(item2[0])) {
       return -1;
     }
@@ -124,8 +124,10 @@ const CourseSidebar = ({ structure, showLockedCourses }) => {
       return 1;
     }
 
-    return item1[0] > item2[0];
+    return item1[0] > item2[0] ? 1 : -1;
   };
+
+  const sortCourses = (item1, item2) => (item1.courseCode > item2.courseCode ? 1 : -1);
 
   return (
     <S.SidebarWrapper>
@@ -140,7 +142,7 @@ const CourseSidebar = ({ structure, showLockedCourses }) => {
           >
             {Object.entries(menuData).map(([group, groupEntry]) => (
               <SubMenu key={group} title={structure[group].name ? `${group} - ${structure[group].name}` : group}>
-                {Object.entries(groupEntry).sort(sortGroups).map(([subGroup, subGroupEntry]) => (
+                {Object.entries(groupEntry).sort(sortSubgroups).map(([subGroup, subGroupEntry]) => (
                   <Menu.ItemGroup
                     key={subGroup}
                     title={(
@@ -152,7 +154,7 @@ const CourseSidebar = ({ structure, showLockedCourses }) => {
                     )}
                   >
                     <AnimatePresence initial={false}>
-                      {subGroupEntry.map(
+                      {subGroupEntry.sort(sortCourses).map(
                         (course) => (course.unlocked || showLockedCourses) && (
                         <MenuItem
                           selected={planner.courses[course.courseCode] !== undefined}
