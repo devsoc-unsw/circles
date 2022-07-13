@@ -2,10 +2,12 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { EyeOutlined } from "@ant-design/icons";
 import { Badge, Tooltip } from "antd";
-import CourseButton from "./CourseButton";
+import CourseButton from "components/CourseButton";
+import S from "./styles";
 
 const CourseBadge = ({ course }) => {
   const navigate = useNavigate();
+
   const handleClick = () => {
     navigate("/term-planner");
   };
@@ -16,7 +18,7 @@ const CourseBadge = ({ course }) => {
         key={course.key}
         count={(
           <Tooltip title="Course added but not planned">
-            <div className="courseBadgeIcon">!</div>
+            <S.CourseBadgeIcon>!</S.CourseBadgeIcon>
           </Tooltip>
           )}
         onClick={handleClick}
@@ -38,11 +40,12 @@ const CourseBadge = ({ course }) => {
         key={course.key}
         count={(
           <Tooltip title={`Future course planned for ${course.termPlanned}`}>
-            <div className="courseBadgeIcon">
+            <S.CourseBadgeIcon>
               <EyeOutlined />
-            </div>
+            </S.CourseBadgeIcon>
           </Tooltip>
-          )}
+        )}
+        onClick={handleClick}
       >
         <CourseButton course={course} planned />
       </Badge>

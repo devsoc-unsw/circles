@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException
-from server.database import programsCOL
+from server.database import programsCOL, specialisationsCOL
 from server.routers.model import SpecialisationTypes, Specialisations
 
 router = APIRouter(
@@ -77,5 +77,10 @@ def get_specialisations(programCode: str, typeSpec: str):
     if not result["components"]["spec_data"].get(typeSpec):
         raise HTTPException(
             status_code=404, detail=f"this program has no {typeSpec}")
+
+    for item in result["components"]["spec_data"][typeSpec].values():
+        for code in [*item["specs"].keys()]:
+            if not specialisationsCOL.find_one({"code": code}):
+                del item["specs"][code]
 
     return {"spec": result["components"]["spec_data"][typeSpec]}

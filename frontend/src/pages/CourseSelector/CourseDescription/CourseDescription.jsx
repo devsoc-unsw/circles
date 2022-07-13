@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Typography } from "antd";
-import { motion } from "framer-motion/dist/framer-motion";
+import { motion } from "framer-motion";
 import infographic from "assets/infographicFontIndependent.svg";
 import Collapsible from "components/Collapsible";
 import CourseTag from "components/CourseTag";

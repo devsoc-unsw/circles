@@ -6,7 +6,7 @@ import {
 import {
   Button, Tooltip,
 } from "antd";
-import { motion } from "framer-motion/dist/framer-motion";
+import { motion } from "framer-motion";
 import axiosRequest from "config/axios";
 import useMediaQuery from "hooks/useMediaQuery";
 import { addTab } from "reducers/courseTabsSlice";

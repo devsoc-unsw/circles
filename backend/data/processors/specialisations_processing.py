@@ -136,9 +136,7 @@ def is_core(title: str) -> bool:
     """
     Returns whether container is core.
     """
-    if "core" in title:
-        return True
-    return False
+    return "core" in title.lower()
 
 
 def get_levels(title: str) -> list[int]:
@@ -196,9 +194,7 @@ def get_nested_data(container: dict, curriculum_item: dict) -> None:
             get_one_of_courses(
                 sub_container["courses"], curriculum_item["courses"])
 
-        # Sub container title matches parent container title, so simply
-        # extract courses to put into your curriculum dict
-        elif sub_container["title"] == curriculum_item["title"]:
+        else:
             get_courses(
                 curriculum_item["courses"],
                 sub_container["courses"],
@@ -243,18 +239,6 @@ def get_courses(
         else:
             course = {course: title}
         curriculum_courses.update(course)
-
-    # Below is the old code parsing description for course codes. It
-    # may come in handy later, but if not then delete
-    # Captures course codes and strings like 'any level X course offered by ... '
-    # if not container_courses:
-    # res = re.findall("[A-Z]{4}[0-9]{4}|any level[^<]+", description)
-    # print(res)
-    # for course in res:
-    #     if "any level" in course:
-    #         course = process_any_level(course)
-    #     curriculum_courses[course] = 1
-
 
 def process_any_level(unprocessed_course: str) -> str:
     """

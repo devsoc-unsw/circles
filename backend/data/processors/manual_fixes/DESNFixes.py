@@ -50,7 +50,7 @@ def DESN_2000(conditions):
     """
     return {
         "original": conditions["original"],
-        "processed": "((AEROAH || MECHAH || MANFAH || MTRNAH || CVENAH || CVENBH || GMATDH) && (DESN1000 || DPST1071)) || ((ELECAH || ELECCH || TELEAH) &&  (DESN1000 || DPST1071) && ELEC2141 && (COMP1511 || COMP1521)) && ((CHEMAH || CEICDH) && (DESN1000 || DPST1071) && CEIC2000 && (CHEM1821 || CHEM1021 || CHEM1041)) || ((SOLAAH || SOLABH) && (DESN1000 || DPST1071) && SOLA2051) && (COMPBH && COMP1521 && (DESN1000 || DPST1071)) || ((SENGAH || BINFAH) && COMP2521 && (DESN1000 || DPST1071)) && (MINEAH && (DESN1000 || DPST1071)) || (PETRAH && CEIC2001 && (DESN1000 || DPST1071))",
+        "processed": "((AEROAH || MECHAH || MANF?H || MTRNAH || CVEN?H || GMATDH) && (DESN1000 || DPST1071)) || ((ELECAH || ELECCH || TELEAH) &&  (DESN1000 || DPST1071) && ELEC2141 && (COMP1511 || COMP1521)) && ((CHEM?H || CEIC?H) && (DESN1000 || DPST1071) && CEIC2000 && (CHEM1821 || CHEM1021 || CHEM1041)) || ((SOLAAH || SOLABH) && (DESN1000 || DPST1071) && SOLA2051) && (COMPBH && COMP1521 && (DESN1000 || DPST1071)) || ((SENGAH || BINFAH) && COMP2521 && (DESN1000 || DPST1071)) && (MINEAH && (DESN1000 || DPST1071)) || (PETRAH && CEIC2001 && (DESN1000 || DPST1071))",
         "handbook_note": "Please refer to the course overview section for further information on requirements."
     }
 

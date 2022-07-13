@@ -96,7 +96,7 @@ const DraggableCourse = ({
         </ReactTooltip>
       )}
       {!isDragDisabled && shouldHaveWarning && (
-        <ReactTooltip id={code} place="bottom" className="tooltip">
+        <ReactTooltip id={code} place="bottom">
           {isLegacy ? "This course is discontinued. If an equivalent course is currently being offered, please pick that instead."
             : !isUnlocked ? prereqs.trim()
               : !isOffered ? "The course is not offered in this term."
