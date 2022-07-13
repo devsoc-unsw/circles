@@ -11,6 +11,7 @@ import ThemeToggle from "components/ThemeToggle";
 import { inDev } from "config/constants";
 import useMediaQuery from "hooks/useMediaQuery";
 import DrawerContent from "./DrawerContent";
+import routes from "./routes";
 import S from "./styles";
 
 const { Title } = Typography;
@@ -33,38 +34,24 @@ const Header = () => {
       </div>
     </S.HeaderContent>
   );
+
+  const items = routes.filter((route) => !route.dev || inDev).map((route) => ({
+    label: <Link to={route.link}>{route.label}</Link>,
+    key: route.link,
+  }));
+
   const largeHeader = (
     <S.HeaderContent>
       <Menu
         theme="dark"
-        selectedKeys={[pathname.split("/")[1]]}
+        selectedKeys={[pathname]}
         mode="horizontal"
         overflowedIndicator={null}
         style={{
           backgroundColor: "inherit",
         }}
-      >
-        <Menu.Item key="course-selector">
-          <Link to="/course-selector">Course Selector</Link>
-        </Menu.Item>
-        {
-          inDev && (
-            <Menu.Item key="graphical-selector">
-              <Link to="/graphical-selector">Graphical Selector</Link>
-            </Menu.Item>
-          )
-        }
-        <Menu.Item key="term-planner">
-          <Link to="/term-planner">Term Planner</Link>
-        </Menu.Item>
-        {
-          inDev && (
-            <Menu.Item key="progression-checker">
-              <Link to="/progression-checker">Progression Checker</Link>
-            </Menu.Item>
-          )
-        }
-      </Menu>
+        items={items}
+      />
       {inDev && <ThemeToggle />}
       <PlannerCart />
     </S.HeaderContent>

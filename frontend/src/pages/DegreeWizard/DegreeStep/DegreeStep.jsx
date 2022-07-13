@@ -44,11 +44,18 @@ const DegreeStep = ({ incrementStep }) => {
     setInput(newInput);
     const fullDegreeName = Object.keys(allDegrees).map((code) => `${code} ${allDegrees[code]}`);
     setOptions(
-      fullDegreeName.filter((degree) => degree.toLowerCase().includes(newInput.toLowerCase())).splice(0, 8),
+      fullDegreeName
+        .filter((degree) => degree.toLowerCase().includes(newInput.toLowerCase()))
+        .splice(0, 8),
     );
   };
 
   const props = useSpring(springProps);
+
+  const items = options.map((degreeName) => ({
+    label: degreeName,
+    key: degreeName,
+  }));
 
   return (
     <CS.StepContentWrapper id="degree">
@@ -64,17 +71,12 @@ const DegreeStep = ({ incrementStep }) => {
           onChange={(e) => (searchDegree(e.target.value))}
         />
         {input && options && (
-        <Menu
-          onClick={handleDegreeChange}
-          selectedKeys={programCode && [programCode]}
-          mode="inline"
-        >
-          {options.map((degreeName) => (
-            <Menu.Item key={degreeName}>
-              {degreeName}
-            </Menu.Item>
-          ))}
-        </Menu>
+          <Menu
+            onClick={handleDegreeChange}
+            selectedKeys={programCode && [programCode]}
+            items={items}
+            mode="inline"
+          />
         )}
       </animated.div>
     </CS.StepContentWrapper>
