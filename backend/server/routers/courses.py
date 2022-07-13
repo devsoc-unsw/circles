@@ -108,6 +108,7 @@ def get_course(courseCode: str):
     - if not found, check the archives
     """
     result = coursesCOL.find_one({"code": courseCode})
+    print("THE RESULT IS", result)
     print(coursesCOL)
 
     if not result:
