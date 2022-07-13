@@ -47,22 +47,26 @@ const migrations = {
     delete newState.degree.minors;
     return newState;
   },
-  3: (oldState) => {
+  3: async (oldState) => {
     console.log("oldState", oldState);
     const newState = { ...oldState };
-    
+
     const courses = Object.keys(newState.planner.courses);
-    courses.forEach(async (course, _) => {
-      course.is_multiterm = False;
-      course.isMultiterm = False;
-    }
-    //   console.log("Looking at", course);
-    //   const [formattedData, err] = await axiosRequest("get", `/courses/getCourse/${course}`);
-    //   if (!err) {
-    //     const { code } = formattedData;
-    //     newState.planner.courses[code].is_multiterm = formattedData.is_multiterm;
-    //   }
+    await courses.forEach(async (course, _) => {
+      const [formattedData, err] = await axiosRequest("get", `/courses/getCourse/${course}`);
+      if (!err) {
+        const { code } = formattedData;
+        newState.planner.courses[code].is_multiterm = formattedData.is_multiterm;
+      }
+    });
+    // console.log("Looking at", course);
+    // const [formattedData, err] = await axiosRequest("get", `/courses/getCourse/${course}`);
+    // if (!err) {
+    //   const { code } = formattedData;
+    //   newState.planner.courses[code].is_multiterm = formattedData.is_multiterm;
+    // }
     // });
+
     // oldState.courses.array.forEach(async (element) => {
     //   const [formattedData, err] = await axiosRequest("get", `/courses/getCourse/${element}`);
     //   if (!err) {
