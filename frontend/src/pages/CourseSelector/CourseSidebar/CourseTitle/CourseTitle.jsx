@@ -4,7 +4,6 @@ import {
   LockOutlined, MinusOutlined, PlusOutlined, WarningOutlined,
 } from "@ant-design/icons";
 import { Button, Tooltip } from "antd";
-import { motion } from "framer-motion";
 import axiosRequest from "config/axios";
 import useMediaQuery from "hooks/useMediaQuery";
 import prepareUserPayload from "pages/CourseSelector/utils";
@@ -52,7 +51,7 @@ const CourseTitle = ({
   const isSmall = useMediaQuery("(max-width: 1400px)");
 
   return (
-    <S.Wrapper as={motion.div} transition={{ ease: "easeOut", duration: 0.3 }} layout>
+    <S.Wrapper>
       {isSmall ? (
         <Tooltip title={title} placement="topLeft">
           <S.CourseTitleWrapper selected={selected} locked={!unlocked}>

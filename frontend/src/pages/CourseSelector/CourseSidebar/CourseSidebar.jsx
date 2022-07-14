@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { AnimatePresence } from "framer-motion";
 import { setCourses } from "reducers/coursesSlice";
 import { addTab } from "reducers/courseTabsSlice";
 import prepareUserPayload from "../utils";
@@ -161,15 +160,13 @@ const CourseSidebar = ({ structure, showLockedCourses }) => {
     <S.SidebarWrapper>
       {pageLoaded
         ? (
-          <AnimatePresence initial={false}>
-            <S.Menu
-              defaultSelectedKeys={[]}
-              defaultOpenKeys={[Object.keys(menuData)[0]]}
-              items={items}
-              mode="inline"
-              onClick={handleClick}
-            />
-          </AnimatePresence>
+          <S.Menu
+            defaultSelectedKeys={[]}
+            defaultOpenKeys={[Object.keys(menuData)[0]]}
+            items={items}
+            mode="inline"
+            onClick={handleClick}
+          />
         )
         : <LoadingSkeleton />}
     </S.SidebarWrapper>
