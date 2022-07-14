@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { BarsOutlined } from "@ant-design/icons";
 import {
   Button, Drawer,
@@ -20,6 +20,7 @@ const Header = () => {
   const isSmall = useMediaQuery("(max-width: 1000px)");
   const [showDrawer, setShowDrawer] = useState(false);
   const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   const smallHeader = (
     <S.HeaderContent>
@@ -35,10 +36,12 @@ const Header = () => {
     </S.HeaderContent>
   );
 
-  const items = routes.filter((route) => !route.dev || inDev).map((route) => ({
-    label: <Link to={route.link}>{route.label}</Link>,
-    key: route.link,
-  }));
+  const items = routes
+    .filter((route) => !route.dev || inDev) // filter out in dev features if not in dev mode
+    .map((route) => ({
+      label: route.label,
+      key: route.link,
+    }));
 
   const largeHeader = (
     <S.HeaderContent>
@@ -50,6 +53,7 @@ const Header = () => {
         style={{
           backgroundColor: "inherit",
         }}
+        onClick={(e) => navigate(e.key)}
         items={items}
       />
       {inDev && <ThemeToggle />}

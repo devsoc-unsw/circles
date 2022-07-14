@@ -20,7 +20,7 @@ const DrawerContent = ({ onCloseDrawer }) => {
   };
 
   const items = routes
-    .filter((route) => !route.dev || inDev)
+    .filter((route) => !route.dev || inDev) // filter out in dev features if not in dev mode
     .map((route) => ({
       label: route.label,
       key: route.link,

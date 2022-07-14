@@ -46,6 +46,7 @@ const DegreeStep = ({ incrementStep }) => {
     setOptions(
       fullDegreeName
         .filter((degree) => degree.toLowerCase().includes(newInput.toLowerCase()))
+        // splice to only show max 8 options
         .splice(0, 8),
     );
   };
