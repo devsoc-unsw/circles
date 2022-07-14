@@ -3,44 +3,33 @@ import { useNavigate } from "react-router-dom";
 import { BugOutlined } from "@ant-design/icons";
 import { Menu } from "antd";
 import { FEEDBACK_LINK, inDev } from "config/constants";
+import routes from "./routes";
 
 const DrawerContent = ({ onCloseDrawer }) => {
   const navigate = useNavigate();
 
-  const handlePush = (url) => {
-    navigate(url);
-    onCloseDrawer();
+  const FEEDBACK_KEY = "feedback-link";
+
+  const handleClick = (e) => {
+    if (e.key === FEEDBACK_KEY) {
+      window.open(FEEDBACK_LINK, "_blank");
+    } else {
+      navigate(e.key);
+      onCloseDrawer();
+    }
   };
 
-  const openFeedbackLink = () => {
-    window.open(FEEDBACK_LINK, "_blank");
-    onCloseDrawer();
-  };
+  const items = routes
+    .filter((route) => !route.dev || inDev) // filter out in dev features if not in dev mode
+    .map((route) => ({
+      label: route.label,
+      key: route.link,
+    }));
+
+  items.push({ label: "Report a bug!", key: FEEDBACK_KEY, icon: <BugOutlined /> });
 
   return (
-    <Menu mode="vertical" style={{ marginTop: "2em" }}>
-      <Menu.Item key="course-selector" onClick={() => handlePush("/course-selector")}>
-        Course Selector
-      </Menu.Item>
-      {
-        inDev && (
-          <Menu.Item key="graphical-selector" onClick={() => handlePush("/graphical-selector")}>
-            Graphical Selector
-          </Menu.Item>
-        )
-      }
-      <Menu.Item key="term-planner" onClick={() => handlePush("/term-planner")}>
-        Term Planner
-      </Menu.Item>
-      {inDev && (
-        <Menu.Item key="progression-checker" onClick={() => handlePush("/progression-checker")}>
-          Progression Checker
-        </Menu.Item>
-      )}
-      <Menu.Item key="feedback-link" icon={<BugOutlined />} onClick={openFeedbackLink}>
-        Report a bug!
-      </Menu.Item>
-    </Menu>
+    <Menu mode="vertical" style={{ marginTop: "2em" }} onClick={handleClick} items={items} />
   );
 };
 
