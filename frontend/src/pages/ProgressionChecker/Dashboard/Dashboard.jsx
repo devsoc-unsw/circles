@@ -20,14 +20,26 @@ const Dashboard = ({ storeUOC, isLoading, structure }) => {
     config: { tension: 80, friction: 60 },
   });
 
-  let calTotalUOC = 0;
-  let calCompletedUOC = 0;
+  const { courses } = useSelector((state) => state.planner);
+
+  const courseList = (
+    Object.values(structure)
+      .flatMap((specialisation) => Object.values(specialisation)
+        .filter((spec) => typeof spec === "object" && spec.courses && !spec.type.includes("rule"))
+        .flatMap((spec) => Object.keys(spec.courses)))
+  );
+
+  let completedUOC = 0;
+  Object.keys(courses).forEach((courseCode) => {
+    if (courseList.includes(courseCode)) completedUOC += courses[courseCode].UOC;
+  });
+
+  // TODO: Replace this with BE value when implemented
+  let totalUOC = 0;
   Object.keys(storeUOC).forEach((group) => {
     // Do not include "Rules" group in total UOC
     if (group === "Rules") return;
-    calTotalUOC += storeUOC[group].total;
-    // Math min to handle overflow of courses
-    calCompletedUOC += Math.min(storeUOC[group].curr, storeUOC[group].total);
+    totalUOC += storeUOC[group].total;
   });
 
   const handleClick = () => {
@@ -46,8 +58,8 @@ const Dashboard = ({ storeUOC, isLoading, structure }) => {
       ) : (
         <S.ContentWrapper style={props}>
           <LiquidProgressChart
-            completedUOC={calCompletedUOC}
-            totalUOC={calTotalUOC}
+            completedUOC={completedUOC}
+            totalUOC={totalUOC}
           />
           <a
             href={`https://www.handbook.unsw.edu.au/undergraduate/programs/${currYear}/${programCode}`}

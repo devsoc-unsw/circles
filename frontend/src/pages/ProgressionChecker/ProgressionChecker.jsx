@@ -6,7 +6,7 @@ import {
   EyeInvisibleOutlined,
   // TableOutlined,
 } from "@ant-design/icons";
-import { Button, Divider } from "antd";
+import { Button, Divider, notification } from "antd";
 import axios from "axios";
 import PageTemplate from "components/PageTemplate";
 import Dashboard from "./Dashboard";
@@ -87,6 +87,15 @@ const ProgressionChecker = () => {
     };
     if (programCode && specs.length > 0) fetchStructure();
   }, [programCode, specs]);
+
+  useEffect(() => {
+    notification.info({
+      message: "Disclaimer",
+      description: "This progression check is intended to outline the courses required by your degree and may not be 100% accurate. Please refer to UNSW's official progression check and handbook for further accuracy.",
+      placement: "bottomRight",
+      duration: 20,
+    });
+  }, []);
 
   const storeUOC = {};
 
