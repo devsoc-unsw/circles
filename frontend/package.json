@@ -35,7 +35,7 @@
     "vite-plugin-svgr": "2.2.0"
   },
   "scripts": {
-    "start": "vite --host",
+    "start": "vite --port 3000 --host",
     "build": "vite build",
     "preview": "vite preview --host",
     "test": "jest",
