@@ -31,11 +31,11 @@
     "redux-thunk": "2.4.1",
     "styled-components": "5.3.5",
     "use-debounce": "8.0.1",
-    "vite": "2.9.14",
+    "vite": "3.0.0",
     "vite-plugin-svgr": "2.2.0"
   },
   "scripts": {
-    "start": "vite --host",
+    "start": "vite --port 3000 --host",
     "build": "vite build",
     "preview": "vite preview --host",
     "test": "jest",
