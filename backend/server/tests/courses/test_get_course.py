@@ -18,6 +18,7 @@ def test_get_a_course():
 
     assert x.status_code == 200
     assert x.json()['code'] == "COMP1521"
+    assert x.json()['is_multiterm'] == False
 
 
 def test_get_archived_course():
