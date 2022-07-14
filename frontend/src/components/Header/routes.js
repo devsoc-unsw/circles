@@ -15,6 +15,7 @@ const routes = [
   {
     label: "Progression Checker",
     link: "/progression-checker",
+    dev: true,
   },
 ];
 
