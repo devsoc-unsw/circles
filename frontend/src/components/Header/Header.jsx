@@ -84,7 +84,6 @@ const Header = () => {
       <Drawer
         onClose={() => setShowDrawer(false)}
         visible={showDrawer}
-        className="flex-col"
       >
         <DrawerContent onCloseDrawer={() => setShowDrawer(false)} />
       </Drawer>

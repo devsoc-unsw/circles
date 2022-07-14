@@ -25,7 +25,6 @@ const CourseSelector = () => {
         message: "How do I see more sidebar courses?",
         description: "Courses are shown as you meet the requirements to take them. Any course can also be selected via the search bar.",
         duration: 30,
-        className: "text helpNotif",
         placement: "bottomRight",
       });
     };

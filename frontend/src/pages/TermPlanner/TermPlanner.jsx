@@ -28,7 +28,6 @@ const openNotification = () => {
     message: "Your terms are looking a little empty",
     description: "Add courses from the course selector to the term planner by dragging from the unplanned column",
     duration: 3,
-    className: "text helpNotif",
     placement: "bottomRight",
   };
   notification.info(args);
@@ -39,7 +38,6 @@ const outOfBoundsMultitermNotification = (course) => {
     message: `${course} would extend outside of the term planner`,
     description: `Keep ${course} inside the calendar by moving it to a different term instead`,
     duration: 3,
-    className: "text helpNotif",
     placement: "bottomRight",
   };
   notification.info(args);
