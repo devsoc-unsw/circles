@@ -65,6 +65,18 @@ const GridView = ({ isLoading, structure, concise }) => {
     setGridLayout(gridStructure);
   }, [isLoading, structure, years, startYear, courses]);
 
+  const sortSubgroups = (item1, item2) => {
+    if (/Core/.test(item1[0]) && !/Core/.test(item2[0])) {
+      return -1;
+    }
+
+    if (/Core/.test(item2[0]) && !/Core/.test(item1[0])) {
+      return 1;
+    }
+
+    return item1[0] > item2[0] ? 1 : -1;
+  };
+
   return (
     <S.GridViewContainer>
       {(isLoading || Object.keys(gridLayout).length === 0) ? (
@@ -81,7 +93,7 @@ const GridView = ({ isLoading, structure, concise }) => {
               key={group}
               initiallyCollapsed={group === "Rules"}
             >
-              {Object.entries(groupEntry).map(
+              {Object.entries(groupEntry).sort(sortSubgroups).map(
                 ([subgroup, subgroupEntry]) => (
                   (concise === true) ? (
                     <GridViewConciseSubgroup
