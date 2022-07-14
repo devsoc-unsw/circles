@@ -114,12 +114,14 @@ const plannerSlice = createSlice({
       }
 
       // Remove every instance of the course from the planner
+      const previousIndex = {};
       for (let year = 0; year < state.years.length; year++) {
         const terms = Object.keys(state.years[year]);
         terms.forEach((term) => {
           const targetTerm = state.years[year][term];
           const courseIndex = targetTerm.indexOf(course);
           if (courseIndex !== -1) {
+            previousIndex[`${year}${term}`] = courseIndex;
             targetTerm.splice(courseIndex, 1);
             srcTermList.push(term);
           }
@@ -137,12 +139,22 @@ const plannerSlice = createSlice({
       );
       newTerms.splice(instanceNum, 1);
       const firstTerm = state.years[destRow][destTerm];
-      firstTerm.splice(destIndex, 0, course);
+      let dropIndex = destIndex;
 
+      // Place dragged multiterm instance into correct index
+      if (isMultiterm && `${destRow}${destTerm}` in previousIndex) {
+        const currIndex = previousIndex[`${destRow}${destTerm}`];
+        if (currIndex < destIndex) {
+          dropIndex -= 1;
+        }
+      }
+      firstTerm.splice(dropIndex, 0, course);
       newTerms.forEach((termRowOffset) => {
         const { term, rowOffset } = termRowOffset;
         const targetTerm = state.years[destRow + rowOffset][term];
-        targetTerm.splice(targetTerm.length, 0, course);
+        const termId = `${destRow + rowOffset}${term}`;
+        const index = termId in previousIndex ? previousIndex[termId] : targetTerm.length;
+        targetTerm.splice(index, 0, course);
       });
     },
     moveCourse: (state, action) => {

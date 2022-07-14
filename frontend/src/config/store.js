@@ -48,7 +48,6 @@ const migrations = {
     return newState;
   },
   3: async (oldState) => {
-    console.log("oldState", oldState);
     const newState = { ...oldState };
 
     const courses = Object.keys(newState.planner.courses);
@@ -59,31 +58,8 @@ const migrations = {
         newState.planner.courses[code].is_multiterm = formattedData.is_multiterm;
       }
     });
-    // console.log("Looking at", course);
-    // const [formattedData, err] = await axiosRequest("get", `/courses/getCourse/${course}`);
-    // if (!err) {
-    //   const { code } = formattedData;
-    //   newState.planner.courses[code].is_multiterm = formattedData.is_multiterm;
-    // }
-    // });
-
-    // oldState.courses.array.forEach(async (element) => {
-    //   const [formattedData, err] = await axiosRequest("get", `/courses/getCourse/${element}`);
-    //   if (!err) {
-    //     const { code } = formattedData;
-    //     console.log("code", code);
-    //     newState.courses[code].is_multiterm = formattedData.is_multiterm;
-    //   }
-    // });
-    console.log("newSatte", newState);
     return newState;
   },
-  // 3: (oldState) => {
-  //   console.log("in store");
-  //   const newState = { ...oldState };
-
-  //   return undefined;
-  // },
 };
 
 const persistConfig = {

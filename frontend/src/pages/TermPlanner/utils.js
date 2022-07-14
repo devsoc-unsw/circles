@@ -111,18 +111,18 @@ const getTermsList = (currentTerm, uoc, availableTerms, summerTerm, instanceNum)
   // Remove any unavailable terms
   const terms = allTerms.filter((term) => availableTerms.includes(term));
 
-  let index = terms.indexOf(currentTerm);
+  let index = terms.indexOf(currentTerm) - 1;
   let rowOffset = 0;
   const numTerms = getNumTerms(uoc);
 
   for (let i = 0; i < instanceNum; i++) {
-    if (index <= 0) {
+    if (index < 0) {
       index = terms.length - 1;
       rowOffset -= 1;
     }
 
     termsList.unshift({
-      term: terms[(index + terms.length - 1) % 3],
+      term: terms[(index + terms.length) % 3],
       rowOffset,
     });
 

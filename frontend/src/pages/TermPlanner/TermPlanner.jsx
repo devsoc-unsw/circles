@@ -94,8 +94,6 @@ const TermPlanner = () => {
 
   const handleOnDragEnd = (result) => {
     setIsDragging(false);
-    console.log("hot potato hot potato", planner);
-
     const { destination, source, draggableId: draggableIdUnique } = result;
     // draggableIdUnique contains course code + term (e.g. COMP151120T1)
     // draggableId only contains the course code (e.g. COMP1511)
