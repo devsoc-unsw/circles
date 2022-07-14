@@ -12,7 +12,14 @@ const CourseGroup = styled.div`
   gap: 20px;
 `;
 
+const ViewAllCoursesWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+`;
+
 export default {
   GridViewContainer,
   CourseGroup,
+  ViewAllCoursesWrapper,
 };

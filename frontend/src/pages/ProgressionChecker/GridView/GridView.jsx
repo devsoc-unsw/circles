@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Skeleton, Typography } from "antd";
+import Collapsible from "components/Collapsible";
 import { getFormattedPlannerCourses } from "../utils";
 import GridViewConciseSubgroup from "./GridViewConciseSubgroup";
 import GridViewSubgroup from "./GridViewSubgroup";
@@ -26,8 +27,11 @@ const GridView = ({ isLoading, structure, concise }) => {
         const subgroupStructure = structure[group][subgroup];
 
         newGridLayout[group][subgroup] = {
-          // section types with gened or rule substring can have their courses hidden as a modal
-          hasLotsOfCourses: subgroupStructure.type.includes("gened") || subgroupStructure.type.includes("rule"),
+          // section types with gened or rule/elective substring can have their
+          // courses hidden as a modal
+          hasLotsOfCourses: subgroupStructure.type.includes("gened")
+            || subgroupStructure.type.includes("rule")
+            || subgroupStructure.type.includes("electives"),
           courses: [],
         };
 
@@ -80,10 +84,15 @@ const GridView = ({ isLoading, structure, concise }) => {
       ) : (
         <>
           {Object.entries(gridLayout).map(([group, groupEntry]) => (
-            <div key={group} id={group}>
-              <Title level={1} className="text">
-                {structure[group].name ? `${group} - ${structure[group].name}` : group}
-              </Title>
+            <Collapsible
+              title={(
+                <Title level={1} className="text" id={group}>
+                  {structure[group].name ? `${group} - ${structure[group].name}` : group}
+                </Title>
+              )}
+              key={group}
+              initiallyCollapsed={group === "Rules"}
+            >
               {Object.entries(groupEntry).sort(sortSubgroups).map(
                 ([subgroup, subgroupEntry]) => (
                   (concise === true) ? (
@@ -103,7 +112,7 @@ const GridView = ({ isLoading, structure, concise }) => {
                   )
                 ),
               )}
-            </div>
+            </Collapsible>
           ))}
         </>
       )}
