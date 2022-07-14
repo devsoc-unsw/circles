@@ -48,6 +48,7 @@ const PlannerButton = () => {
         handbookNote: course.handbook_note,
         isAccurate: course.is_accurate,
         mark: null,
+        isMultiterm: course.is_multiterm,
       },
     };
     dispatch(addToUnplanned(data));

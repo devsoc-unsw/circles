@@ -10,7 +10,9 @@ import useMediaQuery from "hooks/useMediaQuery";
 import ContextMenu from "../ContextMenu";
 import S from "./styles";
 
-const DraggableCourse = ({ code, index, showMarks }) => {
+const DraggableCourse = ({
+  code, index, showMarks, term,
+}) => {
   const { Text } = Typography;
   const { courses, isSummerEnabled, completedTerms } = useSelector((state) => state.planner);
 
@@ -44,7 +46,7 @@ const DraggableCourse = ({ code, index, showMarks }) => {
     <>
       <Draggable
         isDragDisabled={isDragDisabled}
-        draggableId={code}
+        draggableId={`${code}${term}`}
         index={index}
       >
         {(provided) => (
