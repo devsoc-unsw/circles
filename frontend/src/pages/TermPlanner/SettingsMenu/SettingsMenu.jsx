@@ -1,15 +1,12 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
-import {
-  DatePicker, Select, Switch, Typography,
-} from "antd";
+import { DatePicker, Select, Switch } from "antd";
 import moment from "moment";
 import { toggleSummer, updateDegreeLength, updateStartYear } from "reducers/plannerSlice";
 import CS from "../common/styles";
 
 const SettingsMenu = () => {
-  const { Title } = Typography;
   const { Option } = Select;
   const { isSummerEnabled, numYears, startYear } = useSelector((state) => state.planner);
 
@@ -33,14 +30,10 @@ const SettingsMenu = () => {
 
   return (
     <CS.MenuPopup>
-      <Title level={2} strong className="text settingsTitle">
-        Settings
-      </Title>
+      <CS.MenuHeader>Settings</CS.MenuHeader>
       <CS.MenuDivider />
       <CS.PopupEntry>
-        <Title level={3} className="text settingsSubtitle">
-          Summer Term
-        </Title>
+        <CS.MenuText>Summer Term</CS.MenuText>
         <Switch
           defaultChecked={isSummerEnabled}
           onChange={handleSummerToggle}
@@ -49,9 +42,7 @@ const SettingsMenu = () => {
         />
       </CS.PopupEntry>
       <CS.PopupEntry>
-        <Title level={3} className="text settingsSubtitle">
-          Start Year
-        </Title>
+        <CS.MenuText>Start Year</CS.MenuText>
         <DatePicker
           onChange={handleUpdateStartYear}
           picker="year"
@@ -60,9 +51,7 @@ const SettingsMenu = () => {
         />
       </CS.PopupEntry>
       <CS.PopupEntry>
-        <Title level={3} className="text settingsSubtitle">
-          Degree Length
-        </Title>
+        <CS.MenuText>Degree Length</CS.MenuText>
         <Select
           value={numYears}
           style={{ width: 70 }}

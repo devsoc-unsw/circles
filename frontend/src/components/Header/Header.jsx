@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { BarsOutlined } from "@ant-design/icons";
 import {
   Button, Drawer,
@@ -11,6 +11,7 @@ import ThemeToggle from "components/ThemeToggle";
 import { inDev } from "config/constants";
 import useMediaQuery from "hooks/useMediaQuery";
 import DrawerContent from "./DrawerContent";
+import routes from "./routes";
 import S from "./styles";
 
 const { Title } = Typography;
@@ -19,6 +20,7 @@ const Header = () => {
   const isSmall = useMediaQuery("(max-width: 1000px)");
   const [showDrawer, setShowDrawer] = useState(false);
   const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   const smallHeader = (
     <S.HeaderContent>
@@ -33,38 +35,27 @@ const Header = () => {
       </div>
     </S.HeaderContent>
   );
+
+  const items = routes
+    .filter((route) => !route.dev || inDev) // filter out in dev features if not in dev mode
+    .map((route) => ({
+      label: route.label,
+      key: route.link,
+    }));
+
   const largeHeader = (
     <S.HeaderContent>
       <Menu
         theme="dark"
-        selectedKeys={[pathname.split("/")[1]]}
+        selectedKeys={[pathname]}
         mode="horizontal"
         overflowedIndicator={null}
         style={{
           backgroundColor: "inherit",
         }}
-      >
-        <Menu.Item key="course-selector">
-          <Link to="/course-selector">Course Selector</Link>
-        </Menu.Item>
-        {
-          inDev && (
-            <Menu.Item key="graphical-selector">
-              <Link to="/graphical-selector">Graphical Selector</Link>
-            </Menu.Item>
-          )
-        }
-        <Menu.Item key="term-planner">
-          <Link to="/term-planner">Term Planner</Link>
-        </Menu.Item>
-        {
-          inDev && (
-            <Menu.Item key="progression-checker">
-              <Link to="/progression-checker">Progression Checker</Link>
-            </Menu.Item>
-          )
-        }
-      </Menu>
+        onClick={(e) => navigate(e.key)}
+        items={items}
+      />
       {inDev && <ThemeToggle />}
       <PlannerCart />
     </S.HeaderContent>
@@ -93,7 +84,6 @@ const Header = () => {
       <Drawer
         onClose={() => setShowDrawer(false)}
         visible={showDrawer}
-        className="flex-col"
       >
         <DrawerContent onCloseDrawer={() => setShowDrawer(false)} />
       </Drawer>

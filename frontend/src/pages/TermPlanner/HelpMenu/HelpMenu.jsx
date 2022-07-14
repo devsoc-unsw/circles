@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Typography } from "antd";
 import additionalOptionsGif from "assets/helpGifs/additional-options.gif";
 import additionalOptionsPic from "assets/helpGifs/additional-options.jpg";
 import dragAndDropGif from "assets/helpGifs/drag-and-drop.gif";
@@ -11,8 +10,6 @@ import unschedulePic from "assets/helpGifs/unschedule.jpg";
 import CS from "../common/styles";
 import S from "./styles";
 
-const { Title } = Typography;
-
 const HelpStep = ({
   title, gif, pic, altText,
 }) => {
@@ -21,9 +18,7 @@ const HelpStep = ({
   return (
     <div>
       <CS.PopupEntry>
-        <Title level={3} className="text settingsSubtitle">
-          {title}
-        </Title>
+        <CS.MenuText>{title}</CS.MenuText>
       </CS.PopupEntry>
       <S.HelpGif
         onMouseEnter={() => setPlaying(true)}
@@ -66,9 +61,7 @@ const HelpMenu = () => {
   return (
     <S.HelpMenuWrapper>
       <S.HeaderWrapper>
-        <Title level={2} strong className="text settingsTitle">
-          Term Planner Tips (Hover to Play)
-        </Title>
+        <CS.MenuHeader>Term Planner Tips (Hover to Play)</CS.MenuHeader>
         <CS.MenuDivider />
       </S.HeaderWrapper>
       {helpSteps.map(({
