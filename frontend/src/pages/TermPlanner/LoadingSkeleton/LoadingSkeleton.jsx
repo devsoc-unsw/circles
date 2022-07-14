@@ -1,6 +1,7 @@
 import React from "react";
 import { Skeleton } from "antd";
 import { GridItem } from "../common/styles";
+import CS from "../styles";
 
 // TODO: Is this still being used?
 const LoadingSkeleton = () => {
@@ -13,8 +14,8 @@ const LoadingSkeleton = () => {
   };
 
   return (
-    <div className="plannerContainer">
-      <div className="gridContainer">
+    <CS.PlannerContainer>
+      <CS.PlannerGridWrapper>
         <GridItem />
         <GridItem>Term 1</GridItem>
         <GridItem>Term 2</GridItem>
@@ -70,8 +71,8 @@ const LoadingSkeleton = () => {
           shape="round"
           style={skeletonTermStyle}
         />
-      </div>
-    </div>
+      </CS.PlannerGridWrapper>
+    </CS.PlannerContainer>
   );
 };
 
