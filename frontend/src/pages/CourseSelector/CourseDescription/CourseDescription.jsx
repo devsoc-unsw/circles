@@ -11,6 +11,7 @@ import axiosRequest from "config/axios";
 import { TERM, TIMETABLE_API_URL } from "config/constants";
 import { setCourse } from "reducers/coursesSlice";
 import prepareUserPayload from "../utils";
+import PrerequisiteTree from "./PrerequisiteTree";
 import LoadingSkeleton from "./LoadingSkeleton";
 import PlannerButton from "./PlannerButton";
 import S from "./styles";
@@ -241,6 +242,7 @@ const CourseDescription = () => {
                 ) : "None"}
               </p>
             </Collapsible>
+            <PrerequisiteTree />
           </S.DescriptionContent>
           <S.AttributesContent>
             {courseAttributesData.map(({ title, content }) => (
