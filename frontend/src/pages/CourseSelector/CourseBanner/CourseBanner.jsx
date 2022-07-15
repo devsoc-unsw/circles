@@ -14,15 +14,15 @@ const CourseBanner = () => {
     programCode, programName,
   } = useSelector((state) => state.degree);
 
-  const { isLockedEnabled } = useSelector((state) => state.courses);
+  const { showLockedCourses } = useSelector((state) => state.settings);
 
   return (
     <S.BannerWrapper>
       <Title level={2} className="text">{programCode} - {programName}</Title>
       <CourseSearchBar />
-      <Tooltip placement="topLeft" title={isLockedEnabled ? "Hide locked courses" : "Show locked courses"}>
+      <Tooltip placement="topLeft" title={showLockedCourses ? "Hide locked courses" : "Show locked courses"}>
         <Switch
-          defaultChecked={isLockedEnabled}
+          defaultChecked={showLockedCourses}
           style={{ alignSelf: "flex-end" }}
           onChange={() => dispatch(toggleLockedCourses())}
           checkedChildren={<LockOutlined />}

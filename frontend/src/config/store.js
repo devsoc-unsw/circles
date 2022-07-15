@@ -5,6 +5,7 @@ import {
   persistReducer,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import axiosRequest from "config/axios";
 import coursesReducer from "reducers/coursesSlice";
 import courseTabsReducer from "reducers/courseTabsSlice";
 import degreeReducer from "reducers/degreeSlice";
@@ -44,6 +45,19 @@ const migrations = {
     newState.degree.specs = [...newState.degree.majors, ...newState.degree.minors];
     delete newState.degree.majors;
     delete newState.degree.minors;
+    return newState;
+  },
+  3: async (oldState) => {
+    const newState = { ...oldState };
+
+    const courses = Object.keys(newState.planner.courses);
+    await courses.forEach(async (course, _) => {
+      const [formattedData, err] = await axiosRequest("get", `/courses/getCourse/${course}`);
+      if (!err) {
+        const { code } = formattedData;
+        newState.planner.courses[code].is_multiterm = formattedData.is_multiterm;
+      }
+    });
     return newState;
   },
 };

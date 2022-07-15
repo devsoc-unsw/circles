@@ -176,7 +176,6 @@ const CourseDescription = () => {
         as={motion.div}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="empty"
       >
         <img src={infographic} alt="How to use Circles infographic" />
       </S.InfographicContainer>

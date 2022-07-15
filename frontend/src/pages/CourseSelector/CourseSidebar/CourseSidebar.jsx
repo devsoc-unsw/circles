@@ -1,15 +1,12 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Menu } from "antd";
 import axios from "axios";
-import { AnimatePresence } from "framer-motion";
 import { setCourses } from "reducers/coursesSlice";
+import { addTab } from "reducers/courseTabsSlice";
 import prepareUserPayload from "../utils";
+import CourseTitle from "./CourseTitle";
 import LoadingSkeleton from "./LoadingSkeleton/LoadingSkeleton";
-import MenuItem from "./MenuItem";
 import S from "./styles";
-
-const { SubMenu } = Menu;
 
 const SubgroupTitle = ({ subGroup, group, coursesUnits }) => {
   const { curr, total } = coursesUnits[group][subGroup];
@@ -27,7 +24,6 @@ const CourseSidebar = ({ structure, showLockedCourses }) => {
   const dispatch = useDispatch();
   const [menuData, setMenuData] = useState({});
   const [coursesUnits, setCoursesUnits] = useState({});
-  const [activeCourse, setActiveCourse] = useState("");
 
   // get courses in planner
   const planner = useSelector((state) => state.planner);
@@ -39,12 +35,6 @@ const CourseSidebar = ({ structure, showLockedCourses }) => {
   const generateMenuData = (courses) => {
     const newMenu = {};
     const newCoursesUnits = {};
-
-    const sortMenu = (item1, item2) => (
-      item1.unlocked === item2.unlocked
-        ? item1.courseCode > item2.courseCode // sort within locked/unlocked by courseCode
-        : item1.unlocked < item2.unlocked // separate locked/unlocked
-    );
 
     // Example groups: Major, Minor, General, Rules
     Object.keys(structure).forEach((group) => {
@@ -80,7 +70,6 @@ const CourseSidebar = ({ structure, showLockedCourses }) => {
                 ? courses[courseCode].is_accurate
                 : true,
             });
-            newMenu[group][subgroup].sort(sortMenu);
 
             // add UOC to curr
             if (planner.courses[courseCode]) {
@@ -115,7 +104,7 @@ const CourseSidebar = ({ structure, showLockedCourses }) => {
     if (structure && Object.keys(structure).length) getAllUnlocked();
   }, [structure, getAllUnlocked]);
 
-  const sortGroups = (item1, item2) => {
+  const sortSubgroups = (item1, item2) => {
     if (/Core/.test(item1[0]) && !/Core/.test(item2[0])) {
       return -1;
     }
@@ -124,7 +113,47 @@ const CourseSidebar = ({ structure, showLockedCourses }) => {
       return 1;
     }
 
-    return item1[0] > item2[0];
+    return item1[0] > item2[0] ? 1 : -1;
+  };
+
+  const sortCourses = (item1, item2) => (item1.courseCode > item2.courseCode ? 1 : -1);
+
+  const items = Object.entries(menuData).map(([group, groupEntry]) => ({
+    label: structure[group].name ? `${group} - ${structure[group].name}` : group,
+    key: group,
+    children: Object
+      .entries(groupEntry)
+      .sort(sortSubgroups)
+      .map(([subGroup, subGroupEntry]) => ({
+        label: <SubgroupTitle
+          subGroup={subGroup}
+          group={group}
+          coursesUnits={coursesUnits}
+        />,
+        key: subGroup,
+        children: subGroupEntry.sort(sortCourses)
+          .filter((course) => course.unlocked || showLockedCourses)
+          .map((course) => ({
+            label: <CourseTitle
+              courseCode={course.courseCode}
+              title={course.title}
+              selected={planner.courses[course.courseCode] !== undefined}
+              accurate={course.accuracy}
+              unlocked={course.unlocked}
+            />,
+            // key is course code + group + subGroup to differentiate as unique
+            // course items in menu
+            key: `${course.courseCode}-${group}-${subGroup}`,
+          })),
+        type: "group",
+      })),
+  }));
+
+  const handleClick = (e) => {
+    // course code is first 8 chars due to the key being course code + group + subGroup
+    // to differentiate duplicate courses in different groups/subgroups
+    const courseCode = e.key.slice(0, 8);
+    dispatch(addTab(courseCode));
   };
 
   return (
@@ -132,48 +161,14 @@ const CourseSidebar = ({ structure, showLockedCourses }) => {
       {pageLoaded
         ? (
           <S.Menu
-            onClick={() => { }}
             defaultSelectedKeys={[]}
-            selectedKeys={[]}
             defaultOpenKeys={[Object.keys(menuData)[0]]}
+            items={items}
             mode="inline"
-          >
-            {Object.entries(menuData).map(([group, groupEntry]) => (
-              <SubMenu key={group} title={structure[group].name ? `${group} - ${structure[group].name}` : group}>
-                {Object.entries(groupEntry).sort(sortGroups).map(([subGroup, subGroupEntry]) => (
-                  <Menu.ItemGroup
-                    key={subGroup}
-                    title={(
-                      <SubgroupTitle
-                        subGroup={subGroup}
-                        group={group}
-                        coursesUnits={coursesUnits}
-                      />
-                    )}
-                  >
-                    <AnimatePresence initial={false}>
-                      {subGroupEntry.map(
-                        (course) => (course.unlocked || showLockedCourses) && (
-                        <MenuItem
-                          selected={planner.courses[course.courseCode] !== undefined}
-                          courseCode={course.courseCode}
-                          courseTitle={course.title}
-                          accurate={course.accuracy}
-                          unlocked={course.unlocked}
-                          setActiveCourse={setActiveCourse}
-                          activeCourse={activeCourse}
-                          subGroup={subGroup}
-                          key={`${course.courseCode}-${group}`}
-                        />
-                        ),
-                      )}
-                    </AnimatePresence>
-                  </Menu.ItemGroup>
-                ))}
-              </SubMenu>
-            ))}
-          </S.Menu>
-        ) : (<LoadingSkeleton />)}
+            onClick={handleClick}
+          />
+        )
+        : <LoadingSkeleton />}
     </S.SidebarWrapper>
   );
 };
