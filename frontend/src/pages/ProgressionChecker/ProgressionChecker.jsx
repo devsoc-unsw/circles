@@ -67,6 +67,7 @@ const ProgressionCheckerCourses = ({ structure, isLoading }) => {
 const ProgressionChecker = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [structure, setStructure] = useState({});
+  const [uoc, setUoc] = useState(null);
 
   const {
     programCode, specs,
@@ -79,6 +80,7 @@ const ProgressionChecker = () => {
       try {
         const res = await axios.get(`/programs/getStructure/${programCode}/${specs.join("+")}`);
         setStructure(res.data.structure);
+        setUoc(res.data.uoc);
       } catch (err) {
         // eslint-disable-next-line no-console
         console.log(err);
@@ -130,7 +132,7 @@ const ProgressionChecker = () => {
   return (
     <PageTemplate>
       <S.Wrapper>
-        <Dashboard storeUOC={storeUOC} isLoading={isLoading} structure={structure} />
+        <Dashboard storeUOC={storeUOC} isLoading={isLoading} structure={structure} uoc={uoc} />
         <Divider id="divider" />
         <ProgressionCheckerCourses structure={structure} isLoading={isLoading} />
       </S.Wrapper>
