@@ -57,7 +57,8 @@
                   ]
             ]
         }],
-        "simple-import-sort/exports": ["error"]
+        "simple-import-sort/exports": ["error"],
+        "import/no-named-as-default": ["off"] // vite stuff
     },
     "settings": {
         "import/resolver": {

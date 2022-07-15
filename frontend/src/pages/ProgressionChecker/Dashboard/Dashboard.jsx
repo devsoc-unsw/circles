@@ -1,12 +1,15 @@
 import React from "react";
-import { animated, useSpring } from "@react-spring/web";
-import { Typography } from "antd";
+import { useSelector } from "react-redux";
+import { scroller } from "react-scroll";
+import { ArrowDownOutlined } from "@ant-design/icons";
+import { useSpring } from "@react-spring/web";
+import { Button, Typography } from "antd";
 import LiquidProgressChart from "components/LiquidProgressChart";
 import DegreeCard from "../DegreeCard";
 import SkeletonDashboard from "./SkeletonDashboard";
-import "./index.less";
+import S from "./styles";
 
-const Dashboard = ({ isLoading, degree }) => {
+const Dashboard = ({ storeUOC, isLoading, structure }) => {
   const { Title } = Typography;
   const currYear = new Date().getFullYear();
 
@@ -17,33 +20,76 @@ const Dashboard = ({ isLoading, degree }) => {
     config: { tension: 80, friction: 60 },
   });
 
+  const { courses } = useSelector((state) => state.planner);
+
+  const courseList = (
+    Object.values(structure)
+      .flatMap((specialisation) => Object.values(specialisation)
+        .filter((spec) => typeof spec === "object" && spec.courses && !spec.type.includes("rule"))
+        .flatMap((spec) => Object.keys(spec.courses)))
+  );
+
+  let completedUOC = 0;
+  Object.keys(courses).forEach((courseCode) => {
+    if (courseList.includes(courseCode)) completedUOC += courses[courseCode].UOC;
+  });
+
+  // TODO: Replace this with BE value when implemented
+  let totalUOC = 0;
+  Object.keys(storeUOC).forEach((group) => {
+    // Do not include "Rules" group in total UOC
+    if (group === "Rules") return;
+    totalUOC += storeUOC[group].total;
+  });
+
+  const handleClick = () => {
+    scroller.scrollTo("divider", {
+      duration: 1500,
+      smooth: true,
+    });
+  };
+
+  const { programCode, programName } = useSelector((state) => state.degree);
+
   return (
-    <div className="container">
+    <S.Wrapper>
       {isLoading ? (
         <SkeletonDashboard />
       ) : (
-        <animated.div className="centered" style={props}>
+        <S.ContentWrapper style={props}>
           <LiquidProgressChart
-            completedUOC={degree.completed_UOC}
-            totalUOC={degree.UOC}
+            completedUOC={completedUOC}
+            totalUOC={totalUOC}
           />
           <a
-            href={`https://www.handbook.unsw.edu.au/undergraduate/programs/${currYear}/${degree.code}?year=${currYear}`}
+            href={`https://www.handbook.unsw.edu.au/undergraduate/programs/${currYear}/${programCode}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="textLink"
           >
-            <Title className="text textLink">{degree.name}</Title>
+            <Title className="text">{programCode} - {programName}</Title>
           </a>
-          <div className="cards">
-            {degree.concentrations
-              && degree.concentrations.map((concentration, index) => (
-                <DegreeCard key={index} concentration={concentration} />
+          <S.CardsWrapper>
+            {Object.entries(structure)
+              .filter(([group]) => group !== "Rules")
+              .map(([group, specialisation]) => (
+                <DegreeCard
+                  key={group}
+                  type={group}
+                  totalUOC={storeUOC[group].total}
+                  currUOC={storeUOC[group].curr}
+                  specialisation={specialisation}
+                />
               ))}
-          </div>
-        </animated.div>
+          </S.CardsWrapper>
+          <Button
+            type="primary"
+            shape="circle"
+            icon={<ArrowDownOutlined />}
+            onClick={handleClick}
+          />
+        </S.ContentWrapper>
       )}
-    </div>
+    </S.Wrapper>
   );
 };
 

@@ -4,11 +4,10 @@ import { FaRegCalendarTimes } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { DeleteFilled, EditFilled, InfoCircleFilled } from "@ant-design/icons";
+import EditMarkModal from "components/EditMarkModal";
 import { addTab } from "reducers/courseTabsSlice";
 import { removeCourse, unschedule } from "reducers/plannerSlice";
-import EditMarkModal from "../EditMarkModal";
 import "react-contexify/dist/ReactContexify.css";
-import "./index.less";
 
 const ContextMenu = ({ code, plannedFor }) => {
   const dispatch = useDispatch();
@@ -37,24 +36,27 @@ const ContextMenu = ({ code, plannedFor }) => {
     setIsEditMarkVisible(true);
   };
 
+  const iconStyle = {
+    fontSize: "14px",
+    marginRight: "5px",
+  };
+
   return (
     <>
       <Menu id={id} theme={theme.dark}>
         {plannedFor && (
           <Item onClick={handleUnschedule}>
-            <FaRegCalendarTimes className="context-menu-icon" /> Unschedule
+            <FaRegCalendarTimes style={iconStyle} /> Unschedule
           </Item>
         )}
         <Item onClick={handleDelete}>
-          <DeleteFilled className="context-menu-icon" /> Delete from Planner
+          <DeleteFilled style={iconStyle} /> Delete from Planner
         </Item>
         <Item onClick={showEditMark}>
-          <EditFilled className="context-menu-icon" />
-          Edit mark
+          <EditFilled style={iconStyle} /> Edit mark
         </Item>
         <Item onClick={handleInfo}>
-          <InfoCircleFilled className="context-menu-icon" />
-          View Info
+          <InfoCircleFilled style={iconStyle} /> View Info
         </Item>
       </Menu>
       <EditMarkModal

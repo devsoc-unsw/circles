@@ -1,11 +1,15 @@
 import React, { useState } from "react";
-import { RightOutlined } from "@ant-design/icons";
 import { Typography } from "antd";
-import "./index.less";
+import S from "./styles";
 
 const { Title } = Typography;
 
-const Collapsible = ({ initiallyCollapsed, title, children }) => {
+const Collapsible = ({
+  initiallyCollapsed,
+  title,
+  children,
+  headerStyle = {},
+}) => {
   const [isCollapsed, setIsCollapsed] = useState(initiallyCollapsed);
 
   const toggleCollapse = () => {
@@ -13,21 +17,22 @@ const Collapsible = ({ initiallyCollapsed, title, children }) => {
   };
 
   return (
-    <>
-      <div className="collapsible-header" onClick={toggleCollapse} role="none">
-        <RightOutlined
-          className={(isCollapsed)
-            ? "collapsible-button collapsible-button-collapsed"
-            : "collapsible-button"}
-        />
-        <Title level={3} className="text">
-          {title}
-        </Title>
-      </div>
-      <div className={isCollapsed ? "collapsible-content-collapsed" : "collapsible-content"}>
+    <div>
+      <S.CollapsibleHeader onClick={toggleCollapse} style={headerStyle}>
+        <S.CollapseButton collapsed={isCollapsed} />
+        {(typeof title === "string")
+          ? (
+            <Title level={3} className="text">
+              {title}
+            </Title>
+          ) : (
+            title
+          )}
+      </S.CollapsibleHeader>
+      <S.CollapsibleContent collapsed={isCollapsed}>
         {children}
-      </div>
-    </>
+      </S.CollapsibleContent>
+    </div>
   );
 };
 

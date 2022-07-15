@@ -1,24 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Space,
-  Tag, Typography,
-} from "antd";
-import { motion } from "framer-motion/dist/framer-motion";
+import { Typography } from "antd";
+import { motion } from "framer-motion";
 import infographic from "assets/infographicFontIndependent.svg";
 import Collapsible from "components/Collapsible";
 import CourseTag from "components/CourseTag";
 import ProgressBar from "components/ProgressBar";
+import TermTag from "components/TermTag";
 import axiosRequest from "config/axios";
 import { TERM, TIMETABLE_API_URL } from "config/constants";
 import { setCourse } from "reducers/coursesSlice";
 import prepareUserPayload from "../utils";
-import AddToPlannerButton from "./AddToPlannerButton";
-import CourseAttribute from "./CourseAttribute";
 import LoadingSkeleton from "./LoadingSkeleton";
-import "./index.less";
+import PlannerButton from "./PlannerButton";
+import S from "./styles";
 
 const { Title, Text } = Typography;
+
+const CourseAttribute = ({ title, content }) => (
+  <S.AttributeWrapper>
+    <Title level={3} className="text">{title}</Title>
+    {content}
+  </S.AttributeWrapper>
+);
 
 const CourseDescription = () => {
   const dispatch = useDispatch();
@@ -111,19 +115,30 @@ const CourseDescription = () => {
     if (id) fetchCourseData(id);
   }, [id]);
 
-  if (tabs.length === 0) {
-    return (
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="empty"
-      >
-        <img src={infographic} className="infographic" alt="" />
-      </motion.div>
-    );
-  }
-
   const courseAttributesData = [
+    {
+      title: "Offering Terms",
+      content: course.terms?.length
+        ? course.terms.map((term, index) => {
+          const termNo = term.slice(1);
+          return (
+            <TermTag key={index} name={term === "T0" ? "Summer" : `Term ${termNo}`} />
+          );
+        })
+        : "None",
+    },
+    {
+      title: "UNSW Handbook",
+      content: course.study_level ? (
+        <a
+          href={`https://www.handbook.unsw.edu.au/${course.study_level.toLowerCase()}/courses/2022/${course.code}/`}
+          target="_blank"
+          rel="noreferrer"
+        >
+          View {course.code} in handbook
+        </a>
+      ) : null,
+    },
     {
       title: "Faculty",
       content: course.faculty,
@@ -140,21 +155,44 @@ const CourseDescription = () => {
       title: "Campus",
       content: course.campus,
     },
+    {
+      title: "Course Capacity",
+      content: Object.keys(courseCapacity).length ? (
+        <>
+          <div>{courseCapacity.capacity} Students for {TERM}</div>
+          <ProgressBar
+            progress={
+                Math.round((courseCapacity.enrolments / courseCapacity.capacity) * 1000) / 10
+              }
+          />
+        </>
+      ) : <p>No data available</p>,
+    },
   ];
 
+  if (tabs.length === 0) {
+    return (
+      <S.InfographicContainer
+        as={motion.div}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+      >
+        <img src={infographic} alt="How to use Circles infographic" />
+      </S.InfographicContainer>
+    );
+  }
+
   return (
-    <div className="cs-description-root">
+    <S.DescriptionWrapper>
       {!pageLoaded ? (
         <LoadingSkeleton />
       ) : (
         <>
-          <div className="cs-description-content">
-            <div className="cs-desc-title-bar">
-              <Title level={2} className="text">
-                {id} - {course.title}
-              </Title>
-              <AddToPlannerButton />
-            </div>
+          <S.DescriptionContent>
+            <S.DescriptionTitleBar>
+              <Title level={2} className="text">{id} - {course.title}</Title>
+              <PlannerButton />
+            </S.DescriptionTitleBar>
             {
               course.is_legacy
               && (
@@ -163,127 +201,55 @@ const CourseDescription = () => {
                 </Text>
               )
             }
-            <Collapsible
-              title="Overview"
-            >
-              <Space direction="vertical" style={{ marginBottom: "1rem" }}>
-                <Text>
-                  {/* eslint-disable-next-line react/no-danger */}
-                  <div dangerouslySetInnerHTML={{ __html: course.description }} />
-                </Text>
-              </Space>
+            <Collapsible title="Overview">
+              {/* eslint-disable-next-line react/no-danger */}
+              <p dangerouslySetInnerHTML={{ __html: course.description || "None" }} />
             </Collapsible>
-            <Collapsible
-              title="Requirements"
-            >
-              <div>
-                <Space direction="vertical" style={{ marginBottom: "1rem" }}>
-                  <Text>
-                    {/* eslint-disable-next-line react/no-danger */}
-                    <div dangerouslySetInnerHTML={{ __html: course.raw_requirements || "None" }} />
-                  </Text>
-                </Space>
-              </div>
+            <Collapsible title="Requirements">
+              {/* eslint-disable-next-line react/no-danger */}
+              <p dangerouslySetInnerHTML={{ __html: course.raw_requirements || "None" }} />
             </Collapsible>
-            <Collapsible
-              title="Courses you have done to unlock this course"
-            >
-              <div>
+            <Collapsible title="Courses you have done to unlock this course">
+              <p>
                 {coursesPathFrom && coursesPathFrom.length > 0 ? (
-                  <div className="text course-tag-cont">
-                    {
-                      coursesPathFrom
-                        .filter((courseCode) => Object.keys(planner.courses).includes(courseCode))
-                        .map((courseCode) => (
-                          <CourseTag key={courseCode} name={courseCode} />
-                        ))
-                    }
-                  </div>
-                ) : (
-                  <p className="text">None</p>
-                )}
-              </div>
+                  coursesPathFrom
+                    .filter((courseCode) => Object.keys(planner.courses).includes(courseCode))
+                    .map((courseCode) => (
+                      <CourseTag key={courseCode} name={courseCode} />
+                    ))
+                ) : "None"}
+              </p>
             </Collapsible>
-            <Collapsible
-              title="Doing this course will directly unlock these courses"
-            >
-              <div>
+            <Collapsible title="Doing this course will directly unlock these courses">
+              <p>
                 {coursesPathTo.direct_unlock && coursesPathTo.direct_unlock.length > 0 ? (
                   coursesPathTo.direct_unlock.map((courseCode) => (
                     <CourseTag key={courseCode} name={courseCode} />
                   ))
-                ) : (
-                  <p className="text">None</p>
-                )}
-              </div>
+                ) : "None"}
+              </p>
             </Collapsible>
             <Collapsible
               title="Doing this course will indirectly unlock these courses"
               initiallyCollapsed
             >
-              <div>
+              <p>
                 {coursesPathTo.indirect_unlock && coursesPathTo.indirect_unlock.length > 0 ? (
                   coursesPathTo.indirect_unlock.map((courseCode) => (
                     <CourseTag key={courseCode} name={courseCode} />
                   ))
-                ) : (
-                  <p className="text">None</p>
-                )}
-              </div>
+                ) : "None"}
+              </p>
             </Collapsible>
-          </div>
-          <div>
+          </S.DescriptionContent>
+          <S.AttributesContent>
             {courseAttributesData.map(({ title, content }) => (
               content && <CourseAttribute title={title} content={content} />
             ))}
-            <div className="cs-course-attr">
-              <Title level={3} className="text cs-final-attr">
-                Offering Terms
-              </Title>
-              {course.terms
-                ? course.terms.map((term, index) => {
-                  const termNo = term.slice(1);
-                  return (
-                    <Tag key={index} className="text">
-                      {term === "T0" ? "Summer" : `Term ${termNo}`}
-                    </Tag>
-                  );
-                })
-                : "None"}
-            </div>
-            {
-              course.study_level && (
-              <div className="cs-course-attr">
-                <Title level={3} className="text">
-                  UNSW Handbook
-                </Title>
-                <a
-                  href={`https://www.handbook.unsw.edu.au/${course.study_level.toLowerCase()}/courses/2022/${course.code}/`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  View {course.code} in handbook
-                </a>
-              </div>
-              )
-            }
-            {Object.keys(courseCapacity).length !== 0 && (
-              <div>
-                <Title level={3} className="text cs-final-attr">
-                  Capacity
-                </Title>
-                <Text className="text">{courseCapacity.capacity} Students for {TERM}</Text>
-                <ProgressBar
-                  progress={
-                    Math.round((courseCapacity.enrolments / courseCapacity.capacity) * 1000) / 10
-                  }
-                />
-              </div>
-            )}
-          </div>
+          </S.AttributesContent>
         </>
       )}
-    </div>
+    </S.DescriptionWrapper>
   );
 };
 

@@ -1,10 +1,10 @@
 import React from "react";
 import { Skeleton } from "antd";
-import "./index.less";
+import S from "./styles";
 
 const LoadingSkeleton = () => (
-  <div className="loading-skeleton-container">
-    <div className="loading-skeleton-description">
+  <S.SkeletonWrapper>
+    <S.SkeletonDescription>
       {/* title */}
       <Skeleton.Input style={{ width: "70%", height: 70 }} active />
       {/* overview */}
@@ -19,14 +19,14 @@ const LoadingSkeleton = () => (
       {/* unlocks */}
       <Skeleton.Input style={{ width: "25%", height: 40 }} active />
       <Skeleton.Input style={{ width: "100%", height: 100 }} active />
-    </div>
-    <div className="loading-skeleton-sidebar">
+    </S.SkeletonDescription>
+    <S.SkeletonAttributes>
       <Skeleton.Input style={{ width: "100%", height: 75 }} active />
       <Skeleton.Input style={{ width: "100%", height: 75 }} active />
       <Skeleton.Input style={{ width: "100%", height: 75 }} active />
       <Skeleton.Input style={{ width: "100%", height: 75 }} active />
-    </div>
-  </div>
+    </S.SkeletonAttributes>
+  </S.SkeletonWrapper>
 );
 
 export default LoadingSkeleton;
