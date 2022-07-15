@@ -1,3 +1,6 @@
+import {
+  afterEach, describe, expect, it,
+} from "vitest";
 import store from "config/store";
 import {
   addSpecialisation, removeSpecialisation, resetDegree, setIsComplete, setProgram,
