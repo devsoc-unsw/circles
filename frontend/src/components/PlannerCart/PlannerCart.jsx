@@ -83,10 +83,7 @@ const PlannerCart = () => {
               <S.LinkButton
                 type="secondary"
                 shape="round"
-                className="planner-cart-link-to-cs"
-                onClick={() => {
-                  navigate("/course-selector");
-                }}
+                onClick={() => navigate("/course-selector")}
               >
                 Go to course selector
               </S.LinkButton>
@@ -96,7 +93,6 @@ const PlannerCart = () => {
           {!show && Object.keys(courses).length > 0 && (
             <S.DelButton
               danger
-              className="planner-cart-delete-all-btn"
               icon={<DeleteOutlined />}
               onClick={deleteAllCourses}
             >

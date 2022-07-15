@@ -1,8 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import G6 from "@antv/g6";
+import { Button } from "antd";
 import axios from "axios";
 import PageTemplate from "components/PageTemplate";
+import Spinner from "components/Spinner";
+import axiosRequest from "config/axios";
 import S from "./styles";
 
 const GraphicalSelector = () => {
@@ -10,6 +13,8 @@ const GraphicalSelector = () => {
 
   const [graph, setGraph] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [course, setCourse] = useState(null);
+
   const ref = useRef(null);
 
   const initialiseGraph = (courses, courseEdges) => {
@@ -61,11 +66,12 @@ const GraphicalSelector = () => {
     graphInstance.data(data);
     graphInstance.render();
 
-    graphInstance.on("node:click", (ev) => {
-      // hide the node when clicked
+    graphInstance.on("node:click", async (ev) => {
+      // load up course information
       const node = ev.item;
-      node.hide();
-      graph.paint();
+      const { _cfg: { id } } = node;
+      const [courseData, err] = await axiosRequest("get", `/courses/getCourse/${id}`);
+      if (!err) setCourse(courseData);
     });
   };
 
@@ -78,14 +84,15 @@ const GraphicalSelector = () => {
         .flatMap((specialisation) => Object.values(specialisation)
           .filter((spec) => typeof spec === "object" && spec.courses && !spec.type.includes("rule"))
           .flatMap((spec) => Object.keys(spec.courses)))
+        .filter((v, i, a) => a.indexOf(v) === i) // TODO: hack to make courseList unique
     );
     const res = await Promise.all(courseList.map((c) => axios.get(`/courses/getPathFrom/${c}`).catch((e) => e)));
     // filter any errors from res
     const children = res.filter((value) => value?.data?.courses).map((value) => value.data);
     const edges = children
       .flatMap((courseObject) => courseObject.courses
-        .filter((course) => courseList.includes(course))
-        .map((course) => ({ source: courseObject.original, target: course })));
+        .filter((c) => courseList.includes(c))
+        .map((c) => ({ source: courseObject.original, target: c })));
     if (courseList.length !== 0 && edges.length !== 0) initialiseGraph(courseList, edges);
     setLoading(false);
   };
@@ -94,35 +101,38 @@ const GraphicalSelector = () => {
     if (programCode) setupGraph();
   }, []);
 
+  const handleShowGraph = () => {
+    const nodes = graph.getNodes();
+    const edges = graph.getEdges();
+    nodes.forEach((n) => n.show());
+    edges.forEach((e) => e.show());
+  };
+
+  const handleHideGraph = () => {
+    const nodes = graph.getNodes();
+    const edges = graph.getEdges();
+    nodes.forEach((n) => n.hide());
+    edges.forEach((e) => e.hide());
+  };
+
   return (
     <PageTemplate>
-      {loading ? "This page is loading..." : (
-        <>
-          <button
-            type="button"
-            onClick={() => {
-              const nodes = graph.getNodes();
-              const edges = graph.getEdges();
-              nodes.forEach((n) => n.hide());
-              edges.forEach((e) => e.hide());
-            }}
-          >
-            Hide all nodes and edges
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              const nodes = graph.getNodes();
-              const edges = graph.getEdges();
-              nodes.forEach((n) => n.show());
-              edges.forEach((e) => e.show());
-            }}
-          >
-            Show all nodes and edges
-          </button>
-        </>
-      )}
-      <S.Wrapper ref={ref} />
+      <S.Wrapper>
+        <S.GraphPlaygroundWrapper ref={ref}>
+          {loading && <Spinner text="Loading graph..." />}
+        </S.GraphPlaygroundWrapper>
+        <S.SidebarWrapper>
+          <Button onClick={handleShowGraph}>
+            Show Graph
+          </Button>
+          <Button onClick={handleHideGraph}>
+            Hide Graph
+          </Button>
+          <div>
+            {course ? <div>{course.code} - {course.title}</div> : "No course selected"}
+          </div>
+        </S.SidebarWrapper>
+      </S.Wrapper>
     </PageTemplate>
   );
 };
