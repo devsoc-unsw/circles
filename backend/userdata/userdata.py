@@ -7,25 +7,32 @@ TODO: eventual merge of those two
 """
 
 from time import time
-from typing import Dict
+from typing import Dict, Optional
 
 from algorithms.objects.user import User
 
-class UserData(object):
+class UserData():
     """
         A complete data class for a user.
         Combines course data with metadata
     """
 
-    def __init__(self, uid: str, data=None) -> None:
+    def __init__(
+            self, uid: str, data: Optional[Dict] =None, email: Optional[str] = "",
+            given_name: Optional[str]="", family_name: Optional[str]="",
+        ) -> None:
         self.uid: str = uid
-        self.time_created: int = int(time())
+        self.email: Optional[str] = email
         self.user: User = User(data)
-        self.login_instances: Dict[int, int] = {}
+        self.given_name: Optional[str] = given_name
+        self.family_name: Optional[str] = family_name
 
+        self.time_created: int = int(time())
+        self.login_instances: Dict[int, int] = {}
         self.add_login_instance()
 
     def add_login_instance(self, ts: int=None):
+        """ Increment the number of login instances for today """
         day = unix_time_to_day(ts)
         try:
             self.login_instances[day] += 1
