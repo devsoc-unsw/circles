@@ -503,3 +503,16 @@ def weight_course(course: tuple, search_term: str, structure: dict,
             break
 
     return weight
+
+@router.get("/graph")
+def courses_graph():
+    """
+    Constructs a structure for the frontend to use for the graphical
+    selector.
+    Currently returns the ingoing and outgoing edges for each course
+    that is a part of the courselist
+    """
+    return {
+        "test": "test"
+    }
+

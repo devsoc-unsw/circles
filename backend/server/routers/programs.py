@@ -215,6 +215,11 @@ def get_structure(
     
     return {"structure": structure}
 
+@router.get("/getStructureCourseList/{programCode/{spec}}", response_model=Courses)
+@router.get("/getStructureCourseList/{programCode}", response_model=Courses)
+def get_structure_course_list():
+    pass
+
 @router.get(
     "/getGenEds/{programCode}",
     response_model=Courses,
