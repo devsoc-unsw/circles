@@ -3,7 +3,7 @@ API for fetching data about programs and specialisations
 """
 import contextlib
 import re
-from typing import Optional
+from typing import Optional, Dict
 
 from fastapi import APIRouter, HTTPException
 from server.manual_fixes import apply_manual_fixes
@@ -194,12 +194,38 @@ def add_specialisation(structure: dict, code: str):
 def get_structure(
     programCode: str, spec: Optional[str] = None
 ):
-    structure = {}
+    structure = add_specialisations({}, spec)
+    structure = add_program_code_details(structure, programCode)
+    return {"structure": structure}
+
+@router.get("/getStructureCourseList/{programCode/{spec}}", response_model=Courses)
+@router.get("/getStructureCourseList/{programCode}", response_model=Courses)
+def get_structure_course_list(
+        programCode: str, spec: Optional[str]=None
+    ):
+    """
+        Similar to `/getStructure` but, returns a raw list of courses with no further
+        nesting or categorisation.
+    """
+    # construct structure
+    structure = add_specialisations({}, spec)
+    structure = add_program_code_details(structure, programCode)
+
+    return structure
+
+# TODO: Move to bottom
+def add_specialisations(structure: Dict, spec: str) -> Dict:
+    """
+        Take a string of `+` joine specialisations and add
+        them to the structure
+    """
     if spec:
         specs = spec.split("+") if "+" in spec else [spec]
         for m in specs:
             add_specialisation(structure, m)
+    return structure
 
+def add_program_code_details(structure: Dict, programCode: str) -> Dict:
     # add details for program code
     programsResult = programsCOL.find_one({"code": programCode})
     if not programsResult:
@@ -212,13 +238,8 @@ def get_structure(
         for container in programsResult['components']['non_spec_data']:
             add_subgroup_container(structure, "General", container, [])
     apply_manual_fixes(structure, programCode)
-    
-    return {"structure": structure}
 
-@router.get("/getStructureCourseList/{programCode/{spec}}", response_model=Courses)
-@router.get("/getStructureCourseList/{programCode}", response_model=Courses)
-def get_structure_course_list():
-    pass
+    return structure
 
 @router.get(
     "/getGenEds/{programCode}",
@@ -241,16 +262,13 @@ def get_structure_course_list():
                             "ARTS1031",
                             "ARTS1032",
                             "ARTS1060",
-                           
                         ]
-                    
                     }
                 }
             },
         },
     },
 )
-
 def getGenEds(
     programCode: str):
     all_geneds = data_helpers.read_data("data/scrapers/genedPureRaw.json")
