@@ -3,7 +3,7 @@ API for fetching data about programs and specialisations
 """
 import contextlib
 import re
-from typing import Optional, Dict
+from typing import Optional, Dict, List
 
 from fastapi import APIRouter, HTTPException
 from server.manual_fixes import apply_manual_fixes
@@ -196,6 +196,7 @@ def get_structure(
 ):
     structure = add_specialisations({}, spec)
     structure = add_program_code_details(structure, programCode)
+    course_list_from_structure(structure)
     return {"structure": structure}
 
 @router.get("/getStructureCourseList/{programCode/{spec}}", response_model=Courses)
@@ -210,8 +211,39 @@ def get_structure_course_list(
     # construct structure
     structure = add_specialisations({}, spec)
     structure = add_program_code_details(structure, programCode)
+    # Reference:
+    # const courseList = (
+    #   Object.values(structure)
+    #     .flatMap((specialisation) => Object.values(specialisation)
+    #       .filter((spec) => typeof spec === "object" && spec.courses && !spec.type.includes("rule"))
+    #       .flatMap((spec) => Object.keys(spec.courses)))
+    #     .filter((v, i, a) => a.indexOf(v) === i) // TODO: hack to make courseList unique
+    # );
+    return course_list_from_structure(structure)
 
-    return structure
+def course_list_from_structure(structure: Dict) -> List[str]:
+    """
+        Given a formed structure, return the list of courses
+        in that structure
+    """
+    # Reference:
+    # const courseList = (
+        #   Object.values(structure)
+        #     .flatMap((specialisation) => Object.values(specialisation)
+    #       .filter((spec) => typeof spec === "object" && spec.courses && !spec.type.includes("rule"))
+    #       .flatMap((spec) => Object.keys(spec.courses)))
+    #     .filter((v, i, a) => a.indexOf(v) === i) // TODO: hack to make courseList unique
+    # );
+    specs = list(structure.values())
+    specvals = map(
+        lambda spec: spec.values(),
+        specs
+    )
+    specvals.filter(
+        lambda x: isinstance(x, dict) and x["course"] and "rule" not in x["type"]
+    )
+    print("specvals")
+    return { }
 
 # TODO: Move to bottom
 def add_specialisations(structure: Dict, spec: str) -> Dict:

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import G6 from "@antv/g6";
@@ -86,7 +87,16 @@ const GraphicalSelector = () => {
           .flatMap((spec) => Object.keys(spec.courses)))
         .filter((v, i, a) => a.indexOf(v) === i) // TODO: hack to make courseList unique
     );
+    // Step of courseLIst
+    console.log("ssteps:");
+    console.log(Object.values(structure))
     const res = await Promise.all(courseList.map((c) => axios.get(`/courses/getPathFrom/${c}`).catch((e) => e)));
+    console.log(
+      Object.values(structure)
+        .flatMap((specialisation) => Object.values(specialisation)
+          .filter((spec) => typeof spec === "object" && spec.courses && !spec.type.includes("rule"))
+          .flatMap((spec) => Object.keys(spec.courses)))
+    );
     // filter any errors from res
     const children = res.filter((value) => value?.data?.courses).map((value) => value.data);
     const edges = children
