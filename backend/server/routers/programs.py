@@ -208,7 +208,6 @@ def get_structure_course_list(
         Similar to `/getStructure` but, returns a raw list of courses with no further
         nesting or categorisation.
     """
-    # construct structure
     structure = add_specialisations({}, spec)
     structure = add_program_code_details(structure, programCode)
     # Reference:
@@ -236,12 +235,48 @@ def course_list_from_structure(structure: Dict) -> List[str]:
     #       .flatMap((spec) => Object.keys(spec.courses)))
     #     .filter((v, i, a) => a.indexOf(v) === i) // TODO: hack to make courseList unique
     # );
-    return ["TEST0000"]
+
+    # Just care for containers
+    # components = list(structure.values())
+
+    courses = []
+    print("=" * 75)
+    def __recursive_course_search(
+            structure: List[Dict | str] | Dict | None
+        ) -> List[str]:
+        """ Recursively search for courses in a structure """
+        print(structure.keys())
+        if not isinstance(structure, (list, dict)):
+            return
+        # For a list, recurse on all its object
+        if isinstance(structure, dict):
+            for k, v in structure.items():
+                with contextlib.suppress(KeyError):
+                    if not isinstance(v, dict) or "rule" in v["type"]:
+                        print(k)
+                    if "courses" in v:
+                        courses.extend(v["courses"].keys())
+                    __recursive_course_search(v)
+
+        return structure
+    __recursive_course_search(structure)
+
+    
+    # for item in structure_components_containers:
+    #     for k, v in item.items():
+    #         print("\n\n\n")
+    #         # print(f"KEY: {k}\nVAL{v}")
+    #         print(f"KEY {k}")
+    #         print("="*30)
+    #         if k != "name" and "rule" not in v["type"]:
+    #             print("Courses", v["courses"])
+
+    return courses
 
 # TODO: Move to bottom
 def add_specialisations(structure: Dict, spec: str) -> Dict:
     """
-        Take a string of `+` joine specialisations and add
+        Take a string of `+` joined specialisations and add
         them to the structure
     """
     if spec:
