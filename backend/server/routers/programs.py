@@ -1,11 +1,12 @@
 """
 API for fetching data about programs and specialisations
 """
-import contextlib
 import re
 from typing import Optional, Dict, List
 
 from fastapi import APIRouter, HTTPException
+from contextlib import suppress
+
 from server.manual_fixes import apply_manual_fixes
 from server.routers.courses import regex_search
 from server.database import programsCOL, specialisationsCOL
@@ -195,9 +196,12 @@ def get_structure(
     programCode: str, spec: Optional[str] = None
 ):
     structure = add_specialisations({}, spec)
-    structure = add_program_code_details(structure, programCode)
+    uoc = add_program_code_details(structure, programCode)
     course_list_from_structure(structure)
-    return {"structure": structure}
+    return {
+        "structure": structure, 
+        "uoc": uoc,
+    }
 
 @router.get("/getStructureCourseList/{programCode}/{spec}", response_model=Courses)
 @router.get("/getStructureCourseList/{programCode}", response_model=Courses)
@@ -278,7 +282,7 @@ def course_list_from_structure(structure: Dict) -> List[str]:
         if not isinstance(structure, dict):
             return
         for k, v in structure.items():
-            with contextlib.suppress(KeyError):
+            with suppress(KeyError):
                 if not isinstance(v, dict) or "rule" in v["type"]:
                     continue
             print(k)
@@ -300,8 +304,11 @@ def add_specialisations(structure: Dict, spec: str) -> Dict:
             add_specialisation(structure, m)
     return structure
 
-def add_program_code_details(structure: Dict, programCode: str) -> Dict:
-    # add details for program code
+def add_program_code_details(structure: Dict, programCode: str) -> int:
+    """
+    Add the details for given program code to the structure.
+    Returns the uoc (int) associated with the program code.
+    """
     programsResult = programsCOL.find_one({"code": programCode})
     if not programsResult:
         raise HTTPException(
@@ -309,11 +316,10 @@ def add_program_code_details(structure: Dict, programCode: str) -> Dict:
 
     structure['General'] = {}
     structure['Rules'] = {}
-    with contextlib.suppress(KeyError):
+    with suppress(KeyError):
         for container in programsResult['components']['non_spec_data']:
             add_subgroup_container(structure, "General", container, [])
     apply_manual_fixes(structure, programCode)
 
-    return structure
-
+    return programsResult['uoc'] if 'uoc' in programsResult.keys() else None
 
