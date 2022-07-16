@@ -199,7 +199,7 @@ def get_structure(
     course_list_from_structure(structure)
     return {"structure": structure}
 
-@router.get("/getStructureCourseList/{programCode/{spec}}", response_model=Courses)
+@router.get("/getStructureCourseList/{programCode}/{spec}", response_model=Courses)
 @router.get("/getStructureCourseList/{programCode}", response_model=Courses)
 def get_structure_course_list(
         programCode: str, spec: Optional[str]=None
@@ -219,7 +219,9 @@ def get_structure_course_list(
     #       .flatMap((spec) => Object.keys(spec.courses)))
     #     .filter((v, i, a) => a.indexOf(v) === i) // TODO: hack to make courseList unique
     # );
-    return course_list_from_structure(structure)
+    return {
+        "courses": course_list_from_structure(structure),
+    }
 
 def course_list_from_structure(structure: Dict) -> List[str]:
     """
@@ -234,16 +236,7 @@ def course_list_from_structure(structure: Dict) -> List[str]:
     #       .flatMap((spec) => Object.keys(spec.courses)))
     #     .filter((v, i, a) => a.indexOf(v) === i) // TODO: hack to make courseList unique
     # );
-    specs = list(structure.values())
-    specvals = map(
-        lambda spec: spec.values(),
-        specs
-    )
-    specvals.filter(
-        lambda x: isinstance(x, dict) and x["course"] and "rule" not in x["type"]
-    )
-    print("specvals")
-    return { }
+    return ["TEST0000"]
 
 # TODO: Move to bottom
 def add_specialisations(structure: Dict, spec: str) -> Dict:
