@@ -87,7 +87,9 @@ def add_subgroup_container(structure: dict, type: str, container: dict, exceptio
     item["courses"] = {}
     item["type"] = container.get("type") if container.get("type") is not None else ""
 
-    if container.get("courses") is None:
+    if container.get("courses") is None and container.get("type") == "gened":
+        item["courses"] = data_helpers.read_data("data/scrapers/genedPureRaw.json")
+    elif container.get("courses") is None:
         return []
 
     for object, description in container["courses"].items():

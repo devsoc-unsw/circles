@@ -103,7 +103,7 @@ class Courses(BaseModel):
     courses: list[str]
 
 class GenEdCourses(BaseModel):
-    courses: dict
+    courses: dict[str, str] = {}
 
 class CoursesPath (BaseModel):
     original: str
