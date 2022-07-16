@@ -80,6 +80,10 @@ const GraphicalSelector = () => {
     const { structure } = (
       await axios.get(`/programs/getStructure/${programCode}/${specs.join("+")}`)
     ).data;
+    const { courses } = (
+      await axios.get(`/programs/getStructureCourseList/${programCode}/${specs.join("+")}`)
+    ).data;
+    console.log("testrest", courses);
     const courseList = (
       Object.values(structure)
         .flatMap((specialisation) => Object.values(specialisation)
