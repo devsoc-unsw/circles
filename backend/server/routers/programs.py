@@ -210,96 +210,9 @@ def get_structure_course_list(
     """
     structure = add_specialisations({}, spec)
     structure = add_program_code_details(structure, programCode)
-    # Reference:
-    # const courseList = (
-    #   Object.values(structure)
-    #     .flatMap((specialisation) => Object.values(specialisation)
-    #       .filter((spec) => typeof spec === "object" && spec.courses && !spec.type.includes("rule"))
-    #       .flatMap((spec) => Object.keys(spec.courses)))
-    #     .filter((v, i, a) => a.indexOf(v) === i) // TODO: hack to make courseList unique
-    # );
     return {
         "courses": course_list_from_structure(structure),
     }
-
-def course_list_from_structure(structure: Dict) -> List[str]:
-    """
-        Given a formed structure, return the list of courses
-        in that structure
-    """
-    # Reference:
-    # const courseList = (
-        #   Object.values(structure)
-        #     .flatMap((specialisation) => Object.values(specialisation)
-    #       .filter((spec) => typeof spec === "object" && spec.courses && !spec.type.includes("rule"))
-    #       .flatMap((spec) => Object.keys(spec.courses)))
-    #     .filter((v, i, a) => a.indexOf(v) === i) // TODO: hack to make courseList unique
-    # );
-
-    # Just care for containers
-    # components = list(structure.values())
-
-    courses = []
-    print("=" * 75)
-    def __recursive_course_search(
-            structure: List[Dict | str] | Dict | None
-        ) -> List[str]:
-        """ Recursively search for courses in a structure """
-        print(structure.keys())
-        if not isinstance(structure, (list, dict)):
-            return
-        # For a list, recurse on all its object
-        if isinstance(structure, dict):
-            for k, v in structure.items():
-                with contextlib.suppress(KeyError):
-                    if not isinstance(v, dict) or "rule" in v["type"]:
-                        print(k)
-                    if "courses" in v:
-                        courses.extend(v["courses"].keys())
-                    __recursive_course_search(v)
-
-        return structure
-    __recursive_course_search(structure)
-
-    
-    # for item in structure_components_containers:
-    #     for k, v in item.items():
-    #         print("\n\n\n")
-    #         # print(f"KEY: {k}\nVAL{v}")
-    #         print(f"KEY {k}")
-    #         print("="*30)
-    #         if k != "name" and "rule" not in v["type"]:
-    #             print("Courses", v["courses"])
-
-    return courses
-
-# TODO: Move to bottom
-def add_specialisations(structure: Dict, spec: str) -> Dict:
-    """
-        Take a string of `+` joined specialisations and add
-        them to the structure
-    """
-    if spec:
-        specs = spec.split("+") if "+" in spec else [spec]
-        for m in specs:
-            add_specialisation(structure, m)
-    return structure
-
-def add_program_code_details(structure: Dict, programCode: str) -> Dict:
-    # add details for program code
-    programsResult = programsCOL.find_one({"code": programCode})
-    if not programsResult:
-        raise HTTPException(
-            status_code=400, detail="Program code was not found")
-
-    structure['General'] = {}
-    structure['Rules'] = {}
-    with contextlib.suppress(KeyError):
-        for container in programsResult['components']['non_spec_data']:
-            add_subgroup_container(structure, "General", container, [])
-    apply_manual_fixes(structure, programCode)
-
-    return structure
 
 @router.get(
     "/getGenEds/{programCode}",
@@ -333,3 +246,56 @@ def getGenEds(
     programCode: str):
     all_geneds = data_helpers.read_data("data/scrapers/genedPureRaw.json")
     return {"courses" : all_geneds[programCode]}
+
+def course_list_from_structure(structure: Dict) -> List[str]:
+    """
+        Given a formed structure, return the list of courses
+        in that structure
+    """
+    courses = []
+    def __recursive_course_search(structure: Dict) -> List[str]:
+        """ Recursively search for courses in a structure """
+        print(structure.keys())
+        if not isinstance(structure, (list, dict)):
+            return
+        # For a list, recurse on all its object
+        if not isinstance(structure, dict):
+            return
+        for k, v in structure.items():
+            with contextlib.suppress(KeyError):
+                if not isinstance(v, dict) or "rule" in v["type"]:
+                    continue
+            print(k)
+            if "courses" in k:
+                courses.extend(v.keys())
+            __recursive_course_search(v)
+        return structure
+    __recursive_course_search(structure)
+    return courses
+
+def add_specialisations(structure: Dict, spec: str) -> Dict:
+    """
+        Take a string of `+` joined specialisations and add
+        them to the structure
+    """
+    if spec:
+        specs = spec.split("+") if "+" in spec else [spec]
+        for m in specs:
+            add_specialisation(structure, m)
+    return structure
+
+def add_program_code_details(structure: Dict, programCode: str) -> Dict:
+    # add details for program code
+    programsResult = programsCOL.find_one({"code": programCode})
+    if not programsResult:
+        raise HTTPException(
+            status_code=400, detail="Program code was not found")
+
+    structure['General'] = {}
+    structure['Rules'] = {}
+    with contextlib.suppress(KeyError):
+        for container in programsResult['components']['non_spec_data']:
+            add_subgroup_container(structure, "General", container, [])
+    apply_manual_fixes(structure, programCode)
+
+    return structure

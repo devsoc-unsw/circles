@@ -77,30 +77,14 @@ const GraphicalSelector = () => {
   };
 
   const setupGraph = async () => {
-    const { structure } = (
-      await axios.get(`/programs/getStructure/${programCode}/${specs.join("+")}`)
-    ).data;
-    const { courses } = (
+    const { courses: courseList } = (
       await axios.get(`/programs/getStructureCourseList/${programCode}/${specs.join("+")}`)
     ).data;
-    console.log("testrest", courses);
-    const courseList = (
-      Object.values(structure)
-        .flatMap((specialisation) => Object.values(specialisation)
-          .filter((spec) => typeof spec === "object" && spec.courses && !spec.type.includes("rule"))
-          .flatMap((spec) => Object.keys(spec.courses)))
-        .filter((v, i, a) => a.indexOf(v) === i) // TODO: hack to make courseList unique
-    );
-    // Step of courseLIst
-    console.log("ssteps:");
-    console.log(Object.values(structure))
+
+    // TODO: Move this to the backend too
+    // should be a universal /programs/getGraphEdges/{programCode}/{specs}
     const res = await Promise.all(courseList.map((c) => axios.get(`/courses/getPathFrom/${c}`).catch((e) => e)));
-    console.log(
-      Object.values(structure)
-        .flatMap((specialisation) => Object.values(specialisation)
-          .filter((spec) => typeof spec === "object" && spec.courses && !spec.type.includes("rule"))
-          .flatMap((spec) => Object.keys(spec.courses)))
-    );
+
     // filter any errors from res
     const children = res.filter((value) => value?.data?.courses).map((value) => value.data);
     const edges = children
