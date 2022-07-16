@@ -12,7 +12,7 @@ from server.routers.courses import regex_search
 from server.database import programsCOL, specialisationsCOL
 from server.routers.courses import regex_search
 from data.utility import data_helpers
-from server.routers.model import (Structure, Programs, Courses)
+from server.routers.model import (Structure, Programs, GenEdCourses)
 
 router = APIRouter(
     prefix="/programs",
@@ -221,7 +221,7 @@ def get_structure(
 
 @router.get(
     "/getGenEds/{programCode}",
-    response_model=Courses,
+    response_model=GenEdCourses,
     responses={
         400: {
             "description": "The given program code could not be found in the database",
@@ -230,26 +230,20 @@ def get_structure(
             "description": "Returns all geneds available to a given to the given code",
             "content": {
                 "application/json": {
-                    "example": 
-                        {"courses": [
-                            "ADAD2610",
-                            "ANAT2521",
-                            "ARTS1010",
-                            "ARTS1011",
-                            "ARTS1030",
-                            "ARTS1031",
-                            "ARTS1032",
-                            "ARTS1060",
-                           
-                        ]
-                    
+                    "example": {
+                        "courses": {
+                            "ACTL3142": "Statistical Machine Learning for Risk and Actuarial Applications",
+                            "ACTL4305": "Actuarial Data Analytic Applications",
+                            "ADAD2610": "Art and Design for Environmental Challenges",
+                            "ANAT2521": "Biological Anthropology: Principles and Practices",
+                            "ARTS1010": "The Life of Words"
+                        }
                     }
                 }
             },
         },
     },
 )
-
 def getGenEds(
     programCode: str):
     all_geneds = data_helpers.read_data("data/scrapers/genedPureRaw.json")

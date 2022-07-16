@@ -99,9 +99,11 @@ class PlannerData(BaseModel):
     mostRecentPastTerm: dict
 
 
-class Courses (BaseModel):
+class Courses(BaseModel):
     courses: list[str]
 
+class GenEdCourses(BaseModel):
+    courses: dict
 
 class CoursesPath (BaseModel):
     original: str
