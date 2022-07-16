@@ -247,6 +247,22 @@ def getGenEds(
     all_geneds = data_helpers.read_data("data/scrapers/genedPureRaw.json")
     return {"courses" : all_geneds[programCode]}
 
+@router.get("/graph")
+def courses_graph():
+    """
+    Constructs a structure for the frontend to use for the graphical
+    selector.
+    Currently returns the ingoing and outgoing edges for each course
+    that is a part of the courselist
+    """
+    return {
+        "message": "This endpoint is not implemented yet",
+    }
+
+###############################################################
+#                       End of Routes                         #
+###############################################################
+
 def course_list_from_structure(structure: Dict) -> List[str]:
     """
         Given a formed structure, return the list of courses
@@ -299,3 +315,5 @@ def add_program_code_details(structure: Dict, programCode: str) -> Dict:
     apply_manual_fixes(structure, programCode)
 
     return structure
+
+
