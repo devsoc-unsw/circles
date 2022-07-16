@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import G6 from "@antv/g6";
