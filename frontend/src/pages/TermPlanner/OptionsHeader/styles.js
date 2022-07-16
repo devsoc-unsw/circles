@@ -7,6 +7,7 @@ const OptionsHeaderWrapper = styled.div`
   height: var(--option-header-height);
   padding: 0 30px;
   border-bottom-style: inset;
+  border-bottom-color: ${({ theme }) => theme.optionsHeader.borderColor};
 `;
 
 const OptionSection = styled.div`

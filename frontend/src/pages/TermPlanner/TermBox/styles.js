@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 import { Droppable } from "../common/styles";
+import { LockFilled, UnlockFilled } from "@ant-design/icons";
 
 const TermBoxWrapper = styled.ul`
   margin: 1em;
@@ -10,7 +11,7 @@ const TermBoxWrapper = styled.ul`
   padding: 1.2em;
   border-radius: 2em;
   transition: 200ms ease-out;
-  border: 0.5px solid #d9d9d9;
+  border: 0.5px solid ${({ theme }) => theme.termBoxWrapper.borderColor};
   position: relative;
 
   ${({ droppable }) => droppable && Droppable}
@@ -45,6 +46,7 @@ const TermCheckboxWrapper = styled.div`
   justify-content: center;
   padding-top: 3.5px;
   transition: all 200ms ease;
+  color: ${({ checked }) => (checked ? "#000" : "#000")}; 
 
   &:hover {
     cursor: pointer;
@@ -59,4 +61,14 @@ const UOCBadgeWrapper = styled.div`
   right: 0;
 `;
 
-export default { TermBoxWrapper, TermCheckboxWrapper, UOCBadgeWrapper };
+const IconUnlockFilled = styled(UnlockFilled)`
+  color: ${({ theme }) => theme.termCheckbox.color};
+  font-size: 12px;
+`;
+
+const IconLockFilled = styled(LockFilled)`
+  color: ${({ theme }) => theme.termCheckbox.color};
+  font-size: 12px;
+`;
+
+export default { TermBoxWrapper, TermCheckboxWrapper, UOCBadgeWrapper, IconUnlockFilled, IconLockFilled};

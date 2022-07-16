@@ -34,6 +34,7 @@ export const lightTheme = {
   ...lightBaseColors,
   body: "#ffffff",
   text: "#323739",
+  droppableBackground: "#e8fef2",
   plannerCartCard: {
     backgroundColorHover: "#f4f4f4",
   },
@@ -48,12 +49,31 @@ export const lightTheme = {
   degreeCard: {
     backgroundColor: "#f0f0f0",
   },
+  draggableCourse: {
+    backgroundColor: "#d9d9d9",
+    warningBackgroundColor: "#ffe8c3",
+    dragDisabledBackgroundColor: "#eee",
+    iconColor: "#fff",
+  },
+  termCheckbox: {
+    color: "#fff",
+  },
+  warningOutlined: {
+    color: "#DC9930",
+  },
+  termBoxWrapper: {
+    borderColor: "#d9d9d9",
+  },
+  optionsHeader: {
+    borderColor: "#d9d9d9",
+  },
 };
 
 export const darkTheme = {
   ...darkBaseColors,
   body: "#1d1f20",
   text: "#f1f1f1",
+  droppableBackground: "#282e2b",
   plannerCartCard: {
     backgroundColorHover: "#292a2b",
   },
@@ -79,5 +99,23 @@ export const darkTheme = {
 
   degreeCard: {
     backgroundColor: "#17191a",
+  },
+  draggableCourse: {
+    backgroundColor: "#121212",
+    warningBackgroundColor: "#ab6a03",
+    dragDisabledBackgroundColor: "#2b2b2b",
+    iconColor: "#fff",
+  },
+  termCheckbox: {
+    color: "#000",
+  },
+  warningOutlined: {
+    color: "#fff",
+  },
+  termBoxWrapper: {
+    borderColor: "#4d4b4a",
+  },
+  optionsHeader: {
+    borderColor: "#4d4b4a",
   },
 };

@@ -183,7 +183,7 @@ const TermPlanner = () => {
                       </S.YearWrapper>
                       <Badge
                         style={{
-                          backgroundColor: "#efdbff",
+                          backgroundColor: "#efdbff", // #51258f
                           color: "#000000",
                         }}
                         size="small"

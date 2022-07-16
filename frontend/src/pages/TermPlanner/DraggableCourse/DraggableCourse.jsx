@@ -1,6 +1,6 @@
 import React from "react";
 import { Draggable } from "react-beautiful-dnd";
-import { useContextMenu } from "react-contexify";
+import { theme, useContextMenu } from "react-contexify";
 import { useSelector } from "react-redux";
 import ReactTooltip from "react-tooltip";
 import { InfoCircleOutlined, WarningOutlined } from "@ant-design/icons";
@@ -39,7 +39,7 @@ const DraggableCourse = ({ code, index, showMarks }) => {
   );
   const errorIsInformational = shouldHaveWarning && isUnlocked
     && warningMessage.length === 0 && !isLegacy && isAccurate && isOffered;
-
+  console.log(theme);
   return (
     <>
       <Draggable
@@ -65,19 +65,17 @@ const DraggableCourse = ({ code, index, showMarks }) => {
           >
             {!isDragDisabled && shouldHaveWarning
               && (errorIsInformational ? <InfoCircleOutlined style={{ color: "#000" }} /> : (
-                <WarningOutlined
-                  style={{ color: "#DC9930", fontSize: "16px" }}
-                />
+                <S.IconWarningOutlined />
               ))}
             <S.CourseLabel>
               {isSmall ? (
-                <Text>{code}</Text>
+                <S.Text>{code}</S.Text>
               ) : (
                 <div>
-                  <Text strong>
-                    {code}
-                  </Text>
-                  <Text>: {title} </Text>
+                  <S.Text>
+                    <strong>{code}: </strong>
+                    {title}
+                  </S.Text>
                 </div>
               )}
               {showMarks && <Marks mark={mark} />}

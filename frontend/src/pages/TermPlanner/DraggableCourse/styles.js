@@ -1,5 +1,7 @@
 import styled, { css } from "styled-components";
 import { shake } from "../common/styles";
+import { Typography } from "antd";
+import { WarningOutlined } from "@ant-design/icons";
 
 const CourseWrapper = styled.li`
   user-select: none;
@@ -17,7 +19,7 @@ const CourseWrapper = styled.li`
   align-items: center;
   gap: 0.7em;
   line-height: 1.5715;
-  background-color: #d9d9d9;
+  background-color: ${({ theme }) => theme.draggableCourse.backgroundColor}; 
 
   ${({ isSmall }) => isSmall && css`
     border-radius: 1.25em;
@@ -34,11 +36,11 @@ const CourseWrapper = styled.li`
   `}
 
   ${({ warning }) => warning && css`
-    background-color: #ffe8c3;
+    background-color: ${({ theme }) => theme.draggableCourse.warningBackgroundColor}; 
   `}
 
   ${({ dragDisabled }) => dragDisabled && css`
-    background-color: #eee;
+    background-color: ${({ theme }) => theme.draggableCourse.dragDisabledBackgroundColor};
 
     &:hover {
       animation: ${shake} 0.25s;
@@ -56,4 +58,13 @@ const CourseLabel = styled.div`
   margin: 0px;
 `;
 
-export default { CourseWrapper, CourseLabel };
+const Text = styled(Typography)`
+  color: ${({ theme }) => theme.text};
+`;
+
+const IconWarningOutlined = styled(WarningOutlined)`
+  color: ${({ theme }) => theme.warningOutlined.color};
+  font-size: 16px;
+`;
+
+export default { CourseWrapper, CourseLabel, Text, IconWarningOutlined };

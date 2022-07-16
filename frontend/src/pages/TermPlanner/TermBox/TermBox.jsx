@@ -35,11 +35,6 @@ const TermBox = ({
 
   const isSmall = useMediaQuery("(max-width: 1400px)");
 
-  const iconStyle = {
-    color: "#fff",
-    fontSize: "12px",
-  };
-
   return (
     <Droppable droppableId={name} isDropDisabled={isCompleted}>
       {(provided) => (
@@ -49,13 +44,11 @@ const TermBox = ({
               {(
                   !isCompleted
                     ? (
-                      <UnlockFilled
-                        style={iconStyle}
+                      <S.IconUnlockFilled
                         onClick={handleCompleteTerm}
                       />
                     ) : (
-                      <LockFilled
-                        style={iconStyle}
+                      <S.IconLockFilled
                         onClick={handleCompleteTerm}
                       />
                     )
