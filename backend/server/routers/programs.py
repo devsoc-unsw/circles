@@ -87,9 +87,7 @@ def add_subgroup_container(structure: dict, type: str, container: dict, exceptio
     item["courses"] = {}
     item["type"] = container.get("type") if container.get("type") is not None else ""
 
-    if container.get("courses") is None and container.get("type") == "gened":
-        item["courses"] = data_helpers.read_data("data/scrapers/genedPureRaw.json")
-    elif container.get("courses") is None:
+    if container.get("courses") is None:
         return []
 
     for object, description in container["courses"].items():
@@ -98,6 +96,20 @@ def add_subgroup_container(structure: dict, type: str, container: dict, exceptio
             in convert_subgroup_object_to_courses_dict(object, description).items()
             if course not in exceptions
         }
+
+    return list(item["courses"].keys())
+
+
+def add_geneds_courses(programCode: str, structure: dict, container: dict) -> list[str]:
+    """ Returns the added courses """
+    if container.get("type") != "gened":
+        return []
+
+    item = structure["General"]["General Education"]
+    item["courses"] = {}
+    
+    if container.get("courses") is None:
+        item["courses"] = data_helpers.read_data("data/scrapers/genedPureRaw.json").get(programCode)
 
     return list(item["courses"].keys())
 
@@ -214,6 +226,8 @@ def get_structure(
     with suppress(KeyError):
         for container in programsResult['components']['non_spec_data']:
             add_subgroup_container(structure, "General", container, [])
+            if container.get("type") == "gened":
+                add_geneds_courses(programCode, structure, container)
     apply_manual_fixes(structure, programCode)
 
     return {
