@@ -98,14 +98,13 @@ class PlannerData(BaseModel):
     plan: list[list[dict]]
     mostRecentPastTerm: dict
 
-
-class Courses(BaseModel):
+class CourseCodes(BaseModel):
     courses: list[str]
 
-class GenEdCourses(BaseModel):
+class Courses(BaseModel):
     courses: dict[str, str] = {}
 
-class CoursesPath (BaseModel):
+class CoursesPath(BaseModel):
     original: str
     courses: list[str]
 

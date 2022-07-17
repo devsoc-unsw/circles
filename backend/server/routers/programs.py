@@ -12,7 +12,7 @@ from server.routers.courses import regex_search
 from server.database import programsCOL, specialisationsCOL
 from server.routers.courses import regex_search
 from data.utility import data_helpers
-from server.routers.model import (Structure, Programs, GenEdCourses)
+from server.routers.model import (Structure, Programs, Courses)
 
 router = APIRouter(
     prefix="/programs",
@@ -237,7 +237,7 @@ def get_structure(
 
 @router.get(
     "/getGenEds/{programCode}",
-    response_model=GenEdCourses,
+    response_model=Courses,
     responses={
         400: {
             "description": "The given program code could not be found in the database",

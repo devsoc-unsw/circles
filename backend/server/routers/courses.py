@@ -10,7 +10,7 @@ from data.utility.data_helpers import read_data
 from fastapi import APIRouter, HTTPException
 from fuzzywuzzy import fuzz
 from server.database import archivesDB, coursesCOL
-from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, Courses,
+from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, CourseCodes,
                                   CourseDetails, CoursesState, CoursesPath,
                                   CoursesUnlockedWhenTaken, ProgramCourses,
                                   UserData)
@@ -311,7 +311,7 @@ def get_legacy_course(year, courseCode):
     return result
 
 
-@router.post("/unselectCourse/{unselectedCourse}", response_model=Courses,
+@router.post("/unselectCourse/{unselectedCourse}", response_model=CourseCodes,
             responses={
                 400: {"description": "Uh oh you broke me"},
                 200: {
