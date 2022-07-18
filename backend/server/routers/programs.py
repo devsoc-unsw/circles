@@ -2,7 +2,7 @@
 API for fetching data about programs and specialisations
 """
 import re
-from typing import Optional
+from typing import Dict, Optional
 
 from fastapi import APIRouter, HTTPException
 from contextlib import suppress
@@ -21,7 +21,7 @@ router = APIRouter(
 
 
 @router.get("/")
-def programs_index():
+def programs_index() -> str:
     """ sanity test that this file is loaded """
     return "Index of programs"
 
@@ -47,7 +47,7 @@ def programs_index():
         }
     },
 )
-def get_programs():
+def get_programs() -> Dict[str, Dict[str, str]]:
     """ Fetch all the programs the backend knows about in the format of { code: title } """
     # return {"programs": {q["code"]: q["title"] for q in programsCOL.find()}}
     # TODO On deployment, DELETE RETURN BELOW and replace with the return above
@@ -100,7 +100,7 @@ def add_subgroup_container(structure: dict, type: str, container: dict, exceptio
     return list(item["courses"].keys())
 
 
-def add_specialisation(structure: dict, code: str):
+def add_specialisation(structure: dict, code: str) -> None:
     """ Add a specialisation to the structure of a getStructure call """
     # in a specialisation, the first container takes priority - no duplicates may exist
     if code.endswith("1"):
@@ -250,7 +250,6 @@ def get_structure(
     },
 )
 
-def getGenEds(
-    programCode: str):
+def getGenEds(programCode: str):
     all_geneds = data_helpers.read_data("data/scrapers/genedPureRaw.json")
     return {"courses" : all_geneds[programCode]}
