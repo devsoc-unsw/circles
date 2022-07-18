@@ -242,7 +242,9 @@ const CourseDescription = () => {
                 ) : "None"}
               </p>
             </Collapsible>
-            <PrerequisiteTree currCourse={id} coursesPathFrom={coursesPathFrom} coursesPathTo={coursesPathTo} />
+            <Collapsible title="Prerequisite Tree">
+              <PrerequisiteTree currCourse={id} coursesPathFrom={coursesPathFrom} coursesPathTo={coursesPathTo} />
+            </Collapsible>
           </S.DescriptionContent>
           <S.AttributesContent>
             {courseAttributesData.map(({ title, content }) => (

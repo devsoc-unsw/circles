@@ -3,16 +3,63 @@ import G6 from "@antv/g6";
 import { useDispatch } from "react-redux";
 import { addTab } from "reducers/courseTabsSlice";
 import S from "./styles";
-import { debounce } from "@antv/xflow-core/es/common/utils";
+
+// constants
+const relationship = {
+  PREREQ: "prereq",
+  UNLOCKS: "unlocks",
+}
+
+const getNodeData = (courseName, rootRelationship) => {
+  switch (rootRelationship) {
+    case relationship.PREREQ:
+      return {
+        id: courseName, 
+        label: courseName, 
+        style: {
+          fill: "#de545b",
+          stroke: "#de545b",
+        },
+        labelCfg: {
+          style: {
+            fill: "#5e2427",
+            fontWeight: "normal",
+          },
+        },
+        rootRelationship: relationship.PREREQ, 
+      }
+    case relationship.UNLOCKS:
+      return {
+        id: courseName, 
+        label: courseName,
+        style: {
+          fill: "#a0de54",
+          stroke: "#a0de54",
+        },
+        labelCfg: {
+          style: {
+            fill: "#445e24",
+            fontWeight: "normal",
+          },
+        },
+        rootRelationship: relationship.UNLOCKS, 
+      }
+    default:
+      return {
+        id: courseName, 
+        label: courseName, 
+        rootRelationship: undefined, 
+      }
+  }
+};
 
 const PrerequisiteTree = ({ currCourse, coursesPathFrom, coursesPathTo }) => {
-  const relationship = {
-    PREREQ: "prereq",
-    UNLOCKS: "unlocks",
-  }
   const [graph, setGraph] = useState(null);
   const dispatch = useDispatch();
   const ref = useRef(null);
+  
+  // TODO get max height of tree to determine canvas size
+  // TODO change edge and labels
 
   const generateTreeGraph = (data) => {
     const container = ref.current;
@@ -26,7 +73,7 @@ const PrerequisiteTree = ({ currCourse, coursesPathFrom, coursesPathTo }) => {
         type: 'mindmap',
         direction: 'H',
         getVGap: () => 5,
-        getHGap: () => 10,
+        getHGap: () => 100,
         getSide: (node) => {
           if (node.data.rootRelationship === relationship.PREREQ) return "left";
           return "right";
@@ -50,16 +97,70 @@ const PrerequisiteTree = ({ currCourse, coursesPathFrom, coursesPathTo }) => {
           },
         },
       },
+      defaultEdge: {
+        type: "polyline",
+        color: "#A6A6A6",
+        size: 1,
+        style: {
+          offset: 100,
+        },
+        labelCfg: {
+          refX: 25,
+          position: 'start',
+          autoRotate: true,
+          style: {
+            fill: "#595959",
+            fontFamily: "Arial",
+            fontWeight: "bold",
+            fontSize: 14,
+            background: {
+              fill: '#ffffff',
+              padding: [2, 2, 2, 2],
+            },
+          },
+        },
+      },
     });
 
     setGraph(treeGraphInstance);
-    treeGraphInstance.read(data);
-    // treeGraphInstance.fitCenter();
 
+    treeGraphInstance.data(data);
+
+    // edge updates
+    // edge does not contain node data so ids must be used
+    // find target node id that should have label (as defaultEdge changes all edges)
+    const prereqs = data.children.filter(child => child.rootRelationship === relationship.PREREQ);
+    const unlocks = data.children.filter(child => child.rootRelationship === relationship.UNLOCKS);
+    
+    // get middle node id, if even pick left most (equates to higher one in graph)
+    const prereqMiddleCode = prereqs[Math.floor((prereqs.length - 1) / 2)]?.id;
+    const unlocksMiddleCode = unlocks[Math.floor((unlocks.length - 1) / 2)]?.id;
+    
+    // add labels
+    treeGraphInstance.edge((edge) => {
+      switch (edge.target) {
+        case prereqMiddleCode:
+          return {
+            id: edge.id,
+            label: 'is a prereq for',
+          };
+        case unlocksMiddleCode:
+          return {
+            id: edge.id,
+            label: 'unlocks',
+          };
+        default:
+          return {
+            id: edge.id,
+          };
+      }
+    });
+
+    treeGraphInstance.render(data);
+    
     treeGraphInstance.on("node:click", (event) => {
       // open new course tab
       const node = event.item;
-      console.log(node);
       const { _cfg: { model: { label } } } = node;
       dispatch(addTab(label));
     });
@@ -67,62 +168,23 @@ const PrerequisiteTree = ({ currCourse, coursesPathFrom, coursesPathTo }) => {
 
   const updateTreeGraph = (data) => {
     graph.changeData(data);
-    // graph.fitCenter();
   };
 
-  const nodeData = (courseName, rootRelationship) => {
-    switch (rootRelationship) {
-      case relationship.PREREQ:
-        return {
-          id: courseName, 
-          label: courseName, 
-          style: {
-            fill: "#de545b",
-            stroke: "#de545b",
-          },
-          labelCfg: {
-            style: {
-              fontWeight: "normal",
-            },
-          },
-          rootRelationship: relationship.PREREQ, 
-        }
-      case relationship.UNLOCKS:
-        return {
-          id: courseName, 
-          label: courseName,
-          style: {
-            fill: "#a0de54",
-            stroke: "#a0de54",
-          },
-          labelCfg: {
-            style: {
-              fontWeight: "normal",
-            },
-          },
-          rootRelationship: relationship.UNLOCKS, 
-        }
-      default:
-        return {
-          id: courseName, 
-          label: courseName, 
-          rootRelationship: undefined, 
-        }
-    }
-  }
+  const bringLabelsToFront = () => {
+    // bring labels to front
+    const prereqLabelEdge = graph.findById('root:'.concat(prereqMiddleCode));
+    const unlocksLabelEdge = graph.findById('root:'.concat(unlocksMiddleCode));
+    prereqLabelEdge.toFront();
+    unlocksLabelEdge.toFront();
+  };
 
   useEffect(() => {
     const data = {
       id: 'root',
       label: currCourse,
-      children: coursesPathFrom.map((c) => (nodeData(c, relationship.PREREQ)))
-        .concat(coursesPathTo.direct_unlock.map((c) => (nodeData(c, relationship.UNLOCKS)))),
-    };
-
-    const handleResize = () => {
-      debounce(() => {
-        graph.fitView(20);
-      }, 1000);
+      children: coursesPathFrom?.map((c) => (getNodeData(c, relationship.PREREQ)))
+        .concat(coursesPathTo.direct_unlock?.map((c) => (getNodeData(c, relationship.UNLOCKS))))
+        .filter(c => c),
     };
 
     if (!graph) {
@@ -131,11 +193,6 @@ const PrerequisiteTree = ({ currCourse, coursesPathFrom, coursesPathTo }) => {
       updateTreeGraph(data);
     }
 
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    }
   }, [currCourse, coursesPathFrom, coursesPathTo]);
 
   return (
