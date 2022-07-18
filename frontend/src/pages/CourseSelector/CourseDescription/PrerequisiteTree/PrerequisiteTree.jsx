@@ -59,7 +59,7 @@ const PrerequisiteTree = ({ currCourse, coursesPathFrom, coursesPathTo }) => {
   const ref = useRef(null);
   
   // TODO get max height of tree to determine canvas size
-  // TODO change edge and labels
+  // TODO change edge to match amount of nodes
 
   const generateTreeGraph = (data) => {
     const container = ref.current;
@@ -98,7 +98,7 @@ const PrerequisiteTree = ({ currCourse, coursesPathFrom, coursesPathTo }) => {
         },
       },
       defaultEdge: {
-        type: "polyline",
+        type: "polyline", // could change to cubic-horizontal to avoid inconsistent polyline
         color: "#A6A6A6",
         size: 1,
         style: {
@@ -155,8 +155,13 @@ const PrerequisiteTree = ({ currCourse, coursesPathFrom, coursesPathTo }) => {
           };
       }
     });
-
+    
     treeGraphInstance.render(data);
+    
+    // bring labels to front after rendering
+    treeGraphInstance.getEdges().filter(e => e._cfg.model.hasOwnProperty('label')).forEach(e => e.toFront());
+    // Repaint the graph after shifting
+    treeGraphInstance.paint();
     
     treeGraphInstance.on("node:click", (event) => {
       // open new course tab
@@ -168,14 +173,6 @@ const PrerequisiteTree = ({ currCourse, coursesPathFrom, coursesPathTo }) => {
 
   const updateTreeGraph = (data) => {
     graph.changeData(data);
-  };
-
-  const bringLabelsToFront = () => {
-    // bring labels to front
-    const prereqLabelEdge = graph.findById('root:'.concat(prereqMiddleCode));
-    const unlocksLabelEdge = graph.findById('root:'.concat(unlocksMiddleCode));
-    prereqLabelEdge.toFront();
-    unlocksLabelEdge.toFront();
   };
 
   useEffect(() => {
