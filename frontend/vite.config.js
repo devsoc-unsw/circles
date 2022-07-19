@@ -7,6 +7,9 @@ const projectRootDir = resolve(__dirname);
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  define: {
+    'process.env': process.env
+  },
   // This changes the out put dir from dist to build
   // comment this out if that isn't relevant for your project
   build: {
