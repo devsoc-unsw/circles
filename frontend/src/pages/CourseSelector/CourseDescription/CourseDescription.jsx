@@ -8,7 +8,7 @@ import CourseTag from "components/CourseTag";
 import ProgressBar from "components/ProgressBar";
 import TermTag from "components/TermTag";
 import axiosRequest from "config/axios";
-import { TERM, TIMETABLE_API_URL } from "config/constants";
+import { inDev, TERM, TIMETABLE_API_URL } from "config/constants";
 import { setCourse } from "reducers/coursesSlice";
 import prepareUserPayload from "../utils";
 import PrerequisiteTree from "./PrerequisiteTree";
@@ -242,9 +242,10 @@ const CourseDescription = () => {
                 ) : "None"}
               </p>
             </Collapsible>
+            {inDev &&
             <Collapsible title="Prerequisite Visualisation">
               <PrerequisiteTree courseCode={id} />
-            </Collapsible>
+            </Collapsible>}
             <br />
           </S.DescriptionContent>
           <S.AttributesContent>
