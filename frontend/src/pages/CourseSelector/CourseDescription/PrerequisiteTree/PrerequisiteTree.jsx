@@ -25,8 +25,8 @@ const PrerequisiteTree = ({ currCourse }) => {
   const getHeight = () => {
     let maxCourseGroupNum = Math.max(coursesPathFrom.length, coursesPathTo.length);
     maxCourseGroupNum = maxCourseGroupNum === 0 ? 1 : maxCourseGroupNum;
-    // use node height as 30
-    return 30 * maxCourseGroupNum;
+    // take node height as 40
+    return 40 * maxCourseGroupNum;
   };
 
   const handleNodeData = (courseName, rootRelationship) => {
@@ -120,7 +120,7 @@ const PrerequisiteTree = ({ currCourse }) => {
       layout: {
         type: 'mindmap',
         direction: 'H',
-        getVGap: () => 5,
+        getVGap: () => 0,
         getHGap: () => 100,
         getSide: (node) => {
           if (node.data.rootRelationship === relationship.PREREQ) return "left";
