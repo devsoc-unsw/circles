@@ -242,7 +242,7 @@ const CourseDescription = () => {
                 ) : "None"}
               </p>
             </Collapsible>
-            <Collapsible title="Prerequisite visualisation">
+            <Collapsible title="Prerequisite Visualisation">
               <PrerequisiteTree currCourse={id} />
             </Collapsible>
             <br />

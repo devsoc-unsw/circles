@@ -2,12 +2,15 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import G6 from "@antv/g6";
 import Spinner from "components/Spinner";
+import axios from "axios";
 import axiosRequest from "config/axios";
 import { addTab } from "reducers/courseTabsSlice";
+import prepareUserPayload from "../../utils";
 import S from "./styles";
 
 const PrerequisiteTree = ({ currCourse }) => {
   const [loading, setLoading] = useState(true);
+  const [courseAccuracy, setCourseAccuracy] = useState(true);
   const [graph, setGraph] = useState(null);
   const [coursesPathTo, setCoursesPathTo] = useState([]);
   const [coursesPathFrom, setCoursesPathFrom] = useState([]);
@@ -16,7 +19,7 @@ const PrerequisiteTree = ({ currCourse }) => {
   const { degree, planner } = useSelector((state) => state);
 
   /* CONSTANTS */
-  const relationship = {
+  const RELATIONSHIP = {
     PREREQ: "prereq",
     UNLOCKS: "unlocks",
   }
@@ -31,7 +34,7 @@ const PrerequisiteTree = ({ currCourse }) => {
 
   const handleNodeData = (courseName, rootRelationship) => {
     switch (rootRelationship) {
-      case relationship.PREREQ:
+      case RELATIONSHIP.PREREQ:
         return {
           id: courseName, 
           label: courseName, 
@@ -45,9 +48,9 @@ const PrerequisiteTree = ({ currCourse }) => {
               fontWeight: "normal",
             },
           },
-          rootRelationship: relationship.PREREQ, 
+          rootRelationship: RELATIONSHIP.PREREQ, 
         }
-      case relationship.UNLOCKS:
+      case RELATIONSHIP.UNLOCKS:
         return {
           id: courseName, 
           label: courseName,
@@ -61,7 +64,7 @@ const PrerequisiteTree = ({ currCourse }) => {
               fontWeight: "normal",
             },
           },
-          rootRelationship: relationship.UNLOCKS, 
+          rootRelationship: RELATIONSHIP.UNLOCKS, 
         }
       default:
         return {
@@ -75,8 +78,8 @@ const PrerequisiteTree = ({ currCourse }) => {
   const updateEdges = (graphInstance, graphData) => {
     // edge does not contain node data so ids must be used
     // find target node id that should have label (as defaultEdge changes all edges)
-    const prereqs = graphData.children.filter(child => child.rootRelationship === relationship.PREREQ);
-    const unlocks = graphData.children.filter(child => child.rootRelationship === relationship.UNLOCKS);
+    const prereqs = graphData.children.filter(child => child.rootRelationship === RELATIONSHIP.PREREQ);
+    const unlocks = graphData.children.filter(child => child.rootRelationship === RELATIONSHIP.UNLOCKS);
     
     // get middle node id, if even pick left most (equates to higher one in graph)
     const prereqMiddleCode = prereqs[Math.floor((prereqs.length - 1) / 2)]?.id;
@@ -103,7 +106,7 @@ const PrerequisiteTree = ({ currCourse }) => {
     });
   };
 
-  const bringLabelsToFront = (graphInstance) => {
+  const bringEdgeLabelsToFront = (graphInstance) => {
     // bring edges with labels to front 
     graphInstance.getEdges().filter(e => e._cfg.model.hasOwnProperty('label')).forEach(e => e.toFront());
     // Repaint the graph after shifting
@@ -123,7 +126,7 @@ const PrerequisiteTree = ({ currCourse }) => {
         getVGap: () => 0,
         getHGap: () => 100,
         getSide: (node) => {
-          if (node.data.rootRelationship === relationship.PREREQ) return "left";
+          if (node.data.rootRelationship === RELATIONSHIP.PREREQ) return "left";
           return "right";
         },
       },
@@ -149,9 +152,6 @@ const PrerequisiteTree = ({ currCourse }) => {
         type: "cubic-horizontal", // polyline could be used but pivots are unreliable with lots of courses
         color: "#A6A6A6",
         size: 1,
-        // style: {
-        //   offset: 100,
-        // },
         labelCfg: {
           refX: 25,
           position: 'start',
@@ -179,7 +179,7 @@ const PrerequisiteTree = ({ currCourse }) => {
     
     treeGraphInstance.render(graphData);
     
-    bringLabelsToFront(treeGraphInstance);
+    bringEdgeLabelsToFront(treeGraphInstance);
     
     treeGraphInstance.on("node:click", (event) => {
       // open new course tab
@@ -191,7 +191,7 @@ const PrerequisiteTree = ({ currCourse }) => {
 
   const updateTreeGraph = (graphData) => {
     graph.changeData(graphData);
-    bringLabelsToFront(graph);
+    bringEdgeLabelsToFront(graph);
   };
 
   /* MAIN */
@@ -237,12 +237,12 @@ const PrerequisiteTree = ({ currCourse }) => {
     const graphData = {
       id: 'root',
       label: currCourse,
-      children: prereqs?.map((child) => (handleNodeData(child, relationship.PREREQ)))
-        .concat(unlocks?.map((child) => (handleNodeData(child, relationship.UNLOCKS))))
-        .filter(child => child),
+      children: prereqs?.map((child) => (handleNodeData(child, RELATIONSHIP.PREREQ)))
+        .concat(unlocks?.map((child) => (handleNodeData(child, RELATIONSHIP.UNLOCKS)))),
     };
 
     // render graph
+    // remove updateTreeGraph when not developing as new graph will instantiate every time
     if (!graph) {
       generateTreeGraph(graphData);
     } else {
@@ -253,13 +253,34 @@ const PrerequisiteTree = ({ currCourse }) => {
   };
 
   useEffect(() => {
+    const determineCourseAccuracy = async () => {
+      try {
+        const res = await axios.post(
+          "/courses/getAllUnlocked/",
+          JSON.stringify(prepareUserPayload(degree, planner)),
+        );
+        setCourseAccuracy(res.data.courses_state[currCourse].is_accurate);
+      } catch (err) {
+        // eslint-disable-next-line
+        console.log(err);
+      }
+    };
+
+    determineCourseAccuracy();
     if (currCourse) setupGraph(currCourse);
   }, [currCourse]);
 
   return (
-    <S.PrereqTreeContainer ref={ref} height={getHeight()}>
-      {loading && <Spinner text="Loading tree..." />}
-    </S.PrereqTreeContainer>
+    <>
+      {!courseAccuracy ? (
+        // TODO make cooler looking
+        <p>We could not parse the prerequisite requirements for this course</p>
+      ) : (
+        <S.PrereqTreeContainer ref={ref} height={getHeight()}>
+          {loading && <Spinner text="Loading tree..." />}
+        </S.PrereqTreeContainer>
+      )}
+    </>
   )
 };
 
