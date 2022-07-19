@@ -8,9 +8,9 @@ import { addTab } from "reducers/courseTabsSlice";
 import prepareUserPayload from "../../utils";
 import S from "./styles";
 
-const PrerequisiteTree = ({ currCourse }) => {
+const PrerequisiteTree = ({ courseCode }) => {
   const [loading, setLoading] = useState(true);
-  const [courseAccuracy, setCourseAccuracy] = useState(true);
+  const [courseAccurate, setCourseAccurate] = useState(true);
   const [graph, setGraph] = useState(null);
   const [coursesPathTo, setCoursesPathTo] = useState([]);
   const [coursesPathFrom, setCoursesPathFrom] = useState([]);
@@ -25,10 +25,11 @@ const PrerequisiteTree = ({ currCourse }) => {
   }
 
   /* GRAPH IMPLEMENTATION */
+  // Calculates height of the prereq container
   const getHeight = () => {
     let maxCourseGroupNum = Math.max(coursesPathFrom.length, coursesPathTo.length);
     maxCourseGroupNum = maxCourseGroupNum === 0 ? 1 : maxCourseGroupNum;
-    // take node height as 40
+    // estimate node height as 40
     return 40 * maxCourseGroupNum;
   };
 
@@ -116,7 +117,7 @@ const PrerequisiteTree = ({ currCourse }) => {
   const generateTreeGraph = (graphData) => {
     const container = ref.current;
     const treeGraphInstance = new G6.TreeGraph({
-      container: container,
+      container,
       width: container.scrollWidth,
       height: container.scrollHeight,
       fitView: true,
@@ -126,8 +127,7 @@ const PrerequisiteTree = ({ currCourse }) => {
         getVGap: () => 0,
         getHGap: () => 100,
         getSide: (node) => {
-          if (node.data.rootRelationship === RELATIONSHIP.PREREQ) return "left";
-          return "right";
+          return node.data.rootRelationship === RELATIONSHIP.PREREQ ? "left" : "right";
         },
       },
       defaultNode: {
@@ -201,25 +201,13 @@ const PrerequisiteTree = ({ currCourse }) => {
     let prereqs = [];
 
     // get all courses a course c unlocks
-    // must pass in no courses 
-    const { startYear } = planner;
-    const { programCode, specs } = degree;
-    const specialisations = {};
-    specs.forEach((spec) => { specialisations[spec] = 1; });
-    
     const [unlockData, unlockErr] = await axiosRequest(
-      "post",
-      `/courses/coursesUnlockedWhenTaken/${c}`,
-      {
-        program: programCode,
-        specialisations,
-        courses: {},
-        year: new Date().getFullYear() - startYear,
-      },
+      "get",
+      `/courses/courseChildren/${c}`,
     );
     if (!unlockErr) {
       // only use direct unlocks
-      unlocks = unlockData.direct_unlock;
+      unlocks = unlockData.courses;
       setCoursesPathTo(unlocks);
     }
 
@@ -236,7 +224,7 @@ const PrerequisiteTree = ({ currCourse }) => {
     // create graph data
     const graphData = {
       id: 'root',
-      label: currCourse,
+      label: courseCode,
       children: prereqs?.map((child) => (handleNodeData(child, RELATIONSHIP.PREREQ)))
         .concat(unlocks?.map((child) => (handleNodeData(child, RELATIONSHIP.UNLOCKS)))),
     };
@@ -259,7 +247,7 @@ const PrerequisiteTree = ({ currCourse }) => {
           "/courses/getAllUnlocked/",
           JSON.stringify(prepareUserPayload(degree, planner)),
         );
-        setCourseAccuracy(res.data.courses_state[currCourse].is_accurate);
+        setCourseAccurate(res.data.courses_state[courseCode]?.is_accurate);
       } catch (err) {
         // eslint-disable-next-line
         console.log(err);
@@ -267,13 +255,12 @@ const PrerequisiteTree = ({ currCourse }) => {
     };
 
     determineCourseAccuracy();
-    if (currCourse) setupGraph(currCourse);
-  }, [currCourse]);
+    if (courseCode) setupGraph(courseCode);
+  }, [courseCode]);
 
   return (
     <>
-      {!courseAccuracy ? (
-        // TODO make cooler looking
+      {!courseAccurate ? (
         <p>We could not parse the prerequisite requirements for this course</p>
       ) : (
         <S.PrereqTreeContainer ref={ref} height={getHeight()}>
