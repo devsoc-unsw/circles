@@ -243,7 +243,7 @@ const CourseDescription = () => {
               </p>
             </Collapsible>
             <Collapsible title="Prerequisite visualisation">
-              <PrerequisiteTree currCourse={id} coursesPathFrom={coursesPathFrom} coursesPathTo={coursesPathTo} />
+              <PrerequisiteTree currCourse={id} />
             </Collapsible>
             <br />
           </S.DescriptionContent>
