@@ -2,7 +2,7 @@
 APIs for the /courses/ route.
 """
 import re
-from typing import Tuple
+from typing import Dict, List, Set, Tuple
 
 from algorithms.objects.user import User
 from data.config import ARCHIVED_YEARS
@@ -10,7 +10,7 @@ from data.utility.data_helpers import read_data
 from fastapi import APIRouter, HTTPException
 from fuzzywuzzy import fuzz
 from server.database import archivesDB, coursesCOL
-from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, Courses,
+from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, CourseCodes,
                                   CourseDetails, CoursesState, CoursesPath,
                                   CoursesUnlockedWhenTaken, ProgramCourses,
                                   UserData)
@@ -22,10 +22,15 @@ router = APIRouter(
 )
 
 # TODO: would prefer to initialise ALL_COURSES here but that fails on CI for some reason
-ALL_COURSES = None
-CODE_MAPPING = read_data("data/utility/programCodeMappings.json")["title_to_code"]
+ALL_COURSES: Dict[str, str] | None = None
+CODE_MAPPING: Dict = read_data("data/utility/programCodeMappings.json")["title_to_code"]
 
-def fetch_all_courses():
+def fetch_all_courses() -> Dict[str, str]:
+    """
+    Returns a dictionary of all courses as a key-val pair with:
+        key: course code
+        value: course_title
+    """
     courses = {}
     for course in coursesCOL.find():
         courses[course["code"]] = course["title"]
@@ -54,7 +59,7 @@ def fix_user_data(userData: dict):
 
 
 @router.get("/")
-def api_index():
+def api_index() -> str:
     """ Returns the index of the courses API """
     return "Index of courses"
 
@@ -101,7 +106,7 @@ def api_index():
         },
     },
 )
-def get_course(courseCode: str):
+def get_course(courseCode: str) -> Dict:
     """
     Get info about a course given its courseCode
     - start with the current database
@@ -158,13 +163,13 @@ def get_course(courseCode: str):
         }
     },
 )
-def search(userData: UserData, search_string: str):
+def search(userData: UserData, search_string: str) -> Dict[str, str]:
     """
     Search for courses with regex
     e.g. search(COMP1) would return
-        { “COMP1511” :  “Programming Fundamentals”,
-          “COMP1521” : “Computer Systems Fundamentals”,
-          “COMP1531”: “SoftEng Fundamentals,
+        { "COMP1511" :  "Programming Fundamentals",
+          "COMP1521" : "Computer Systems Fundamentals",
+          "COMP1531": "SoftEng Fundamentals",
             ……. }
     """
     global ALL_COURSES
@@ -231,7 +236,7 @@ def regex_search(search_string: str) -> dict[str, str]:
         },
     },
 )
-def get_all_unlocked(userData: UserData):
+def get_all_unlocked(userData: UserData) -> Dict[str, Dict]:
     """
     Given the userData and a list of locked courses, returns the state of all
     the courses. Note that locked courses always return as True with no warnings
@@ -285,7 +290,7 @@ def get_all_unlocked(userData: UserData):
         },
     },
 )
-def get_legacy_courses(year, term):
+def get_legacy_courses(year, term) -> Dict[str, Dict[str, str]]:
     """
     Gets all the courses that were offered in that term for that year
     """
@@ -311,7 +316,7 @@ def get_legacy_course(year, courseCode):
     return result
 
 
-@router.post("/unselectCourse/{unselectedCourse}", response_model=Courses,
+@router.post("/unselectCourse/{unselectedCourse}", response_model=CourseCodes,
             responses={
                 400: {"description": "Uh oh you broke me"},
                 200: {
@@ -329,10 +334,10 @@ def get_legacy_course(year, courseCode):
                      }
                  }
             })
-def unselect_course(userData: UserData, unselectedCourse: str):
+def unselect_course(userData: UserData, unselectedCourse: str) -> List[str]:
     """
     Creates a new user class and returns all the courses
-    affected from the course that was unselected in sorted order
+    affected from the course that was unselected in alphabetically sorted order
     """
     user = User(fix_user_data(userData.dict()))
     if not user.has_taken_course(unselectedCourse):
@@ -386,7 +391,7 @@ def course_children(course: str):
                     "courses": ["COMP1521", "COMP1531"]
                 }
             })
-def get_path_from(course):
+def get_path_from(course: str) -> Dict[str, str | Dict[str, List[str]]]:
     """
     fetches courses which can be used to satisfy 'course'
     eg 2521 -> 1511
@@ -418,35 +423,35 @@ def get_path_from(course):
                     }
                 }
             })
-def courses_unlocked_when_taken(userData: UserData, courseToBeTaken: str):
+def courses_unlocked_when_taken(userData: UserData, courseToBeTaken: str) -> Dict[str, List[str]]:
     """ Returns all courses which are unlocked when given course is taken """
     # define the user object with user data
     user = User(fix_user_data(userData.dict()))
 
     ## initial state
-    courses_initially_unlocked = unlocked_set(get_all_unlocked(user)['courses_state'])
+    courses_initially_unlocked: set = unlocked_set(get_all_unlocked(user)['courses_state'])
     ## add course to the user
     user.add_courses({courseToBeTaken: [get_course(courseToBeTaken)['UOC'], None]})
     ## final state
-    courses_now_unlocked = unlocked_set(get_all_unlocked(user)['courses_state'])
-    new_courses = courses_now_unlocked - courses_initially_unlocked
+    courses_now_unlocked: set = unlocked_set(get_all_unlocked(user)['courses_state'])
+    new_courses: set = courses_now_unlocked - courses_initially_unlocked
 
     ## Differentiate direct and indirect unlocks
-    path_to = set(course_children(courseToBeTaken)["courses"])
-    direct_unlock = new_courses.intersection(path_to)
-    indirect_unlock = new_courses - direct_unlock
+    path_to: set = set(course_children(courseToBeTaken)["courses"])
+    direct_unlock: set  = new_courses.intersection(path_to)
+    indirect_unlock: set= new_courses - direct_unlock
 
     return {
         'direct_unlock': sorted(list(direct_unlock)),
         'indirect_unlock': sorted(list(indirect_unlock))
     }
 
-def unlocked_set(courses_state):
+def unlocked_set(courses_state) -> Set[str]:
     """ Fetch the set of unlocked courses from the courses_state of a getAllUnlocked call """
     return set(course for course in courses_state if courses_state[course]['unlocked'])
 
 
-def fuzzy_match(course: Tuple[str, str], search_term: str):
+def fuzzy_match(course: Tuple[str, str], search_term: str) -> float:
     """ Gives the course a weighting based on the relevance to the search """
     code, title = course
 
@@ -461,7 +466,7 @@ def fuzzy_match(course: Tuple[str, str], search_term: str):
                        for word in search_term.split(' ')))
 
 def weight_course(course: tuple, search_term: str, structure: dict,
-                  majors: list, minors: list):
+                  majors: list, minors: list) -> float:
     """ Gives the course a weighting based on the relevance to the user's degree """
     weight = fuzzy_match(course, search_term)
     code, _ = course
