@@ -1,20 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import G6 from "@antv/g6";
-import Spinner from "components/Spinner";
 import axios from "axios";
+import Spinner from "components/Spinner";
 import axiosRequest from "config/axios";
 import { addTab } from "reducers/courseTabsSlice";
-import TREE_CONSTANTS from "./constants";
+import prepareUserPayload from "../../pages/CourseSelector/utils";
 import GRAPH_STYLE from "./config";
-import { 
-  handleNodeData,
-  updateEdges,
+import TREE_CONSTANTS from "./constants";
+import S from "./styles";
+import {
   bringEdgeLabelsToFront,
   calcHeight,
- } from "./utils"
-import prepareUserPayload from "../../pages/CourseSelector/utils";
-import S from "./styles";
+  handleNodeData,
+  updateEdges,
+} from "./utils";
 
 const PrerequisiteTree = ({ courseCode }) => {
   const [loading, setLoading] = useState(true);
@@ -44,11 +44,11 @@ const PrerequisiteTree = ({ courseCode }) => {
     treeGraphInstance.data(graphData);
 
     updateEdges(treeGraphInstance, graphData);
-    
+
     treeGraphInstance.render(graphData);
-    
+
     bringEdgeLabelsToFront(treeGraphInstance);
-    
+
     treeGraphInstance.on("node:click", (event) => {
       // open new course tab
       const node = event.item;
@@ -69,9 +69,7 @@ const PrerequisiteTree = ({ courseCode }) => {
       "get",
       `/courses/courseChildren/${c}`,
     );
-    if (!unlockErr) {
-      return unlockData.courses;
-    }
+    return !unlockErr ? unlockData.courses : [];
   };
 
   const getCoursePrereqs = async (c) => {
@@ -79,9 +77,7 @@ const PrerequisiteTree = ({ courseCode }) => {
       "get",
       `/courses/getPathFrom/${c}`,
     );
-    if (!prereqErr) {
-      return prereqData.courses;
-    }
+    return !prereqErr ? prereqData.courses : [];
   };
 
   const determineCourseAccuracy = async () => {
@@ -108,7 +104,7 @@ const PrerequisiteTree = ({ courseCode }) => {
 
     // create graph data
     const graphData = {
-      id: 'root',
+      id: "root",
       label: courseCode,
       children: prereqs?.map((child) => (handleNodeData(child, TREE_CONSTANTS.PREREQ)))
         .concat(unlocks?.map((child) => (handleNodeData(child, TREE_CONSTANTS.UNLOCKS)))),
@@ -132,16 +128,14 @@ const PrerequisiteTree = ({ courseCode }) => {
   }, [courseCode]);
 
   return (
-    <>
-      {!courseAccurate ? (
-        <p>We could not parse the prerequisite requirements for this course</p>
-      ) : (
-        <S.PrereqTreeContainer ref={ref} height={calcHeight(coursesRequires, courseUnlocks)}>
-          {loading && <Spinner text="Loading tree..." />}
-        </S.PrereqTreeContainer>
-      )}
-    </>
-  )
+    !courseAccurate ? (
+      <p>We could not parse the prerequisite requirements for this course</p>
+    ) : (
+      <S.PrereqTreeContainer ref={ref} height={calcHeight(coursesRequires, courseUnlocks)}>
+        {loading && <Spinner text="Loading tree..." />}
+      </S.PrereqTreeContainer>
+    )
+  );
 };
 
 export default PrerequisiteTree;
