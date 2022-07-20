@@ -82,7 +82,7 @@ const GraphicalSelector = () => {
     const courseList = (
       Object.values(structure)
         .flatMap((specialisation) => Object.values(specialisation)
-          .filter((spec) => typeof spec === "object" && spec.courses && !spec.type.includes("rule"))
+          .filter((spec) => typeof spec === "object" && spec.courses && !(spec.type.includes("rule") || spec.type.includes("gened")))
           .flatMap((spec) => Object.keys(spec.courses)))
         .filter((v, i, a) => a.indexOf(v) === i) // TODO: hack to make courseList unique
     );
