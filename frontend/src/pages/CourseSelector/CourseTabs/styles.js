@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const CourseTabsWrapper = styled.div`
   background-color: ${({ theme }) => theme.purpleLight};
-  padding-left: calc(2vw - 2px); // 20vw - width of menu sidebar, 2px is tab margin-left (Edit: changed 20vw to 2vw to fit the switch)
+  padding-left: calc(2vw - 2px); // 20vw - width of menu sidebar, 2px is tab margin-left
   padding-right: 25px;
   width: 100vw;
   height: var(--cs-tabs-cont-height);
@@ -13,7 +13,7 @@ const CourseTabsWrapper = styled.div`
 const ShowAllCourses = styled.div`
   display: flex;
   align-items: center;
-  width: calc(18vw - 2px);
+  width: calc(18vw - 2px); // Added calc(18vw - 2px) so the width of the toggle switch changes when the viewport is changed.
 `;
 
 const TextShowCourses = styled.div`

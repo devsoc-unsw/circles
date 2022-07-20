@@ -43,14 +43,14 @@ const CourseTabs = () => {
   return (
     <S.CourseTabsWrapper>
       <S.ShowAllCourses>
+        <S.TextShowCourses>
+          Show all courses
+        </S.TextShowCourses>
         <Switch
           size="small"
           defaultChecked={showLockedCourses}
           onChange={() => dispatch(toggleLockedCourses())}
         />
-        <S.TextShowCourses>
-          Show all courses
-        </S.TextShowCourses>
       </S.ShowAllCourses>
       <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
         <Droppable droppableId="droppable" direction="horizontal">

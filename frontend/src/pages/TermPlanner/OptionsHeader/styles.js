@@ -31,4 +31,15 @@ const OptionButton = styled.button`
   }
 `;
 
-export default { OptionsHeaderWrapper, OptionButton, OptionSection };
+const ShowMarks = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const TextShowMarks = styled.div`
+  margin: 5px;
+  padding-bottom: 2px;
+  font-size: 16px;
+`;
+
+export default { OptionsHeaderWrapper, OptionButton, OptionSection, ShowMarks, TextShowMarks };
