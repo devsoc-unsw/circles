@@ -8,13 +8,16 @@ jobs:
   run-linter:
     name: Run linter
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend
 
     steps:
       - name: Checking out repository
         uses: actions/checkout@v3
       
       - name: Install Node.js dependencies
-        run: cd frontend && npm ci
+        run: npm ci
 
       - name: Run linters
         run: npm run lint
