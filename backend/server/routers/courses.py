@@ -303,7 +303,7 @@ def get_legacy_course(year, courseCode):
         Like /getCourse/ but for legacy courses in the given year.
         Returns information relating to the given course
     """
-    result = list(archivesDB[str(year)].find({"code": courseCode}))
+    result = archivesDB[str(year)].find_one({"code": courseCode})
     if not result:
         raise HTTPException(status_code=400, detail="invalid course code or year")
     del result["_id"]
