@@ -15,13 +15,17 @@ const handleNodeData = (courseName, rootRelationship) => {
 const updateEdges = (graphInstance, graphData) => {
   // edge does not contain node data so ids must be used
   // find target node id that should have label (as defaultEdge changes all edges)
-  const prereqs = graphData.children.filter(child => child.rootRelationship === TREE_CONSTANTS.PREREQ);
-  const unlocks = graphData.children.filter(child => child.rootRelationship === TREE_CONSTANTS.UNLOCKS);
-  
+  const prereqs = graphData.children.filter(
+    (child) => child.rootRelationship === TREE_CONSTANTS.PREREQ,
+  );
+  const unlocks = graphData.children.filter(
+    (child) => child.rootRelationship === TREE_CONSTANTS.UNLOCKS,
+  );
+
   // get middle node id, if even pick left most (equates to higher one in graph)
   const prereqMiddleCode = prereqs[Math.floor((prereqs.length - 1) / 2)]?.id;
   const unlocksMiddleCode = unlocks[Math.floor((unlocks.length - 1) / 2)]?.id;
-  
+
   // add labels
   graphInstance.edge((edge) => {
     switch (edge.target) {
@@ -36,8 +40,11 @@ const updateEdges = (graphInstance, graphData) => {
 };
 
 const bringEdgeLabelsToFront = (graphInstance) => {
-  // bring edges with labels to front 
-  graphInstance.getEdges().filter(e => e._cfg.model.hasOwnProperty('label')).forEach(e => e.toFront());
+  // bring edges with labels to front
+  graphInstance.getEdges()
+    /* eslint-disable-next-line no-underscore-dangle */
+    .filter((e) => Object.prototype.hasOwnProperty.call(e._cfg.model, "label"))
+    .forEach((e) => e.toFront());
   // Repaint the graph after shifting
   graphInstance.paint();
 };
@@ -50,9 +57,9 @@ const calcHeight = (courseRequires, courseUnlocks) => {
   return 2 * maxCourseGroupNum;
 };
 
-export { 
-  handleNodeData,
-  updateEdges,
+export {
   bringEdgeLabelsToFront,
   calcHeight,
+  handleNodeData,
+  updateEdges,
 };

@@ -1,13 +1,11 @@
 import TREE_CONSTANTS from "./constants";
 
 const graphLayout = {
-  type: 'mindmap',
-  direction: 'H',
+  type: "mindmap",
+  direction: "H",
   getVGap: () => 0,
   getHGap: () => 100,
-  getSide: (node) => {
-    return node.data.rootRelationship === TREE_CONSTANTS.PREREQ ? "left" : "right";
-  },
+  getSide: (node) => (node.data.rootRelationship === TREE_CONSTANTS.PREREQ ? "left" : "right"),
 };
 
 const defaultNode = {
@@ -29,49 +27,43 @@ const defaultNode = {
   },
 };
 
-const prereqNodeAddtionalStyle = (courseName) => {
-  return {
-    id: courseName, 
-    label: courseName, 
+const prereqNodeAddtionalStyle = (courseName) => ({
+  id: courseName,
+  label: courseName,
+  style: {
+    fill: "#de545b",
+    stroke: "#de545b",
+  },
+  labelCfg: {
     style: {
-      fill: "#de545b",
-      stroke: "#de545b",
+      fill: "#5e2427",
+      fontWeight: "normal",
     },
-    labelCfg: {
-      style: {
-        fill: "#5e2427",
-        fontWeight: "normal",
-      },
-    },
-    rootRelationship: TREE_CONSTANTS.PREREQ, 
-  };
-};
+  },
+  rootRelationship: TREE_CONSTANTS.PREREQ,
+});
 
-const unlocksNodeAddtionalStyle = (courseName) => {
-  return {
-    id: courseName, 
-    label: courseName,
+const unlocksNodeAddtionalStyle = (courseName) => ({
+  id: courseName,
+  label: courseName,
+  style: {
+    fill: "#a0de54",
+    stroke: "#a0de54",
+  },
+  labelCfg: {
     style: {
-      fill: "#a0de54",
-      stroke: "#a0de54",
+      fill: "#445e24",
+      fontWeight: "normal",
     },
-    labelCfg: {
-      style: {
-        fill: "#445e24",
-        fontWeight: "normal",
-      },
-    },
-    rootRelationship: TREE_CONSTANTS.UNLOCKS, 
-  };
-};
+  },
+  rootRelationship: TREE_CONSTANTS.UNLOCKS,
+});
 
-const unrecognisedNodeAddtionalStyle = (courseName) => {
-  return {
-    id: courseName, 
-    label: courseName, 
-    rootRelationship: undefined, 
-  };
-};
+const unrecognisedNodeAddtionalStyle = (courseName) => ({
+  id: courseName,
+  label: courseName,
+  rootRelationship: undefined,
+});
 
 const defaultEdge = {
   type: "cubic-horizontal", // polyline could be used but pivots are unreliable with lots of courses
@@ -79,7 +71,7 @@ const defaultEdge = {
   size: 1,
   labelCfg: {
     refX: 25,
-    position: 'start',
+    position: "start",
     autoRotate: true,
     style: {
       fill: "#595959",
@@ -87,7 +79,7 @@ const defaultEdge = {
       fontWeight: "bold",
       fontSize: 14,
       background: {
-        fill: '#ffffff',
+        fill: "#ffffff",
         padding: [2, 2, 2, 2],
         radius: 5,
       },
@@ -95,25 +87,19 @@ const defaultEdge = {
   },
 };
 
-const prereqEdgeAdditionalStyle = (id) => {
-  return {
-    id: id,
-    label: 'is a prereq for',
-  };
-};
+const prereqEdgeAdditionalStyle = (id) => ({
+  id,
+  label: "is a prereq for",
+});
 
-const unlocksEdgeAdditionalStyle = (id) => {
-  return {
-    id: id,
-    label: 'unlocks',
-  };
-};
+const unlocksEdgeAdditionalStyle = (id) => ({
+  id,
+  label: "unlocks",
+});
 
-const defaultEdgeAdditionalStyle = (id) => {
-  return {
-    id: id,
-  };
-};
+const defaultEdgeAdditionalStyle = (id) => ({
+  id,
+});
 
 export default {
   graphLayout,
