@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Droppable } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
-import { LockFilled, UnlockFilled } from "@ant-design/icons";
 import { Badge } from "antd";
 import useMediaQuery from "hooks/useMediaQuery";
 import { toggleTermComplete } from "reducers/plannerSlice";
@@ -14,7 +13,7 @@ const TermBox = ({
   const term = name.match(/T[0-3]/)[0];
 
   const { isSummerEnabled, completedTerms, courses } = useSelector((state) => state.planner);
-  const { showMarks } = useSelector((state) => state.settings);
+  const { showMarks, theme } = useSelector((state) => state.settings);
   const [totalUOC, setTotalUOC] = useState(0);
   const dispatch = useDispatch();
   const handleCompleteTerm = () => {
@@ -51,7 +50,7 @@ const TermBox = ({
                       <S.IconLockFilled
                         onClick={handleCompleteTerm}
                       />
-                    )
+                    ) //
                 )}
             </S.TermCheckboxWrapper>
             )}
@@ -75,9 +74,11 @@ const TermBox = ({
               ),
             )}
             {provided.placeholder}
-            <S.UOCBadgeWrapper>
+            {console.log(theme)}
+            <S.UOCBadgeWrapper> 
               <Badge
-                style={{ backgroundColor: "#9254de" }}
+                className="UOCBadge"
+                style={{ backgroundColor: theme === "light" ? "#9254de" : "#51258f", boxShadow: "none" }} 
                 size="small"
                 count={`${totalUOC} UOC`}
                 offset={[0, 0]}

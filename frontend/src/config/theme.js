@@ -73,7 +73,7 @@ export const darkTheme = {
   ...darkBaseColors,
   body: "#1d1f20",
   text: "#f1f1f1",
-  droppableBackground: "#282e2b",
+  droppableBackground: "#373A36",
   plannerCartCard: {
     backgroundColorHover: "#292a2b",
   },

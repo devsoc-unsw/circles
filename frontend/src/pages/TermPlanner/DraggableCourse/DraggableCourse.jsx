@@ -3,7 +3,7 @@ import { Draggable } from "react-beautiful-dnd";
 import { theme, useContextMenu } from "react-contexify";
 import { useSelector } from "react-redux";
 import ReactTooltip from "react-tooltip";
-import { InfoCircleOutlined, WarningOutlined } from "@ant-design/icons";
+import { InfoCircleOutlined } from "@ant-design/icons";
 import { Typography } from "antd";
 import Marks from "components/Marks";
 import useMediaQuery from "hooks/useMediaQuery";
