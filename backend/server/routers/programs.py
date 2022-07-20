@@ -99,6 +99,19 @@ def add_subgroup_container(structure: dict, type: str, container: dict, exceptio
 
     return list(item["courses"].keys())
 
+def add_geneds_courses(programCode: str, structure: dict, container: dict) -> list[str]:
+    """ Returns the added courses """
+    if container.get("type") != "gened":
+        return []
+
+    item = structure["General"]["General Education"]
+    item["courses"] = {}
+    
+    if container.get("courses") is None:
+        item["courses"] = data_helpers.read_data("data/scrapers/genedPureRaw.json").get(programCode)
+
+    return list(item["courses"].keys())
+
 
 def add_specialisation(structure: dict, code: str) -> None:
     """ Add a specialisation to the structure of a getStructure call """
@@ -212,6 +225,8 @@ def get_structure(
     with suppress(KeyError):
         for container in programsResult['components']['non_spec_data']:
             add_subgroup_container(structure, "General", container, [])
+            if container.get("type") == "gened":
+                add_geneds_courses(programCode, structure, container)
     apply_manual_fixes(structure, programCode)
 
     return {
@@ -230,19 +245,14 @@ def get_structure(
             "description": "Returns all geneds available to a given to the given code",
             "content": {
                 "application/json": {
-                    "example": 
-                        {"courses": [
-                            "ADAD2610",
-                            "ANAT2521",
-                            "ARTS1010",
-                            "ARTS1011",
-                            "ARTS1030",
-                            "ARTS1031",
-                            "ARTS1032",
-                            "ARTS1060",
-                           
-                        ]
-                    
+                    "example": {
+                        "courses": {
+                            "ACTL3142": "Statistical Machine Learning for Risk and Actuarial Applications",
+                            "ACTL4305": "Actuarial Data Analytic Applications",
+                            "ADAD2610": "Art and Design for Environmental Challenges",
+                            "ANAT2521": "Biological Anthropology: Principles and Practices",
+                            "ARTS1010": "The Life of Words"
+                        }
                     }
                 }
             },
