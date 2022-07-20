@@ -13,7 +13,7 @@ import {
   bringEdgeLabelsToFront,
   calcHeight,
  } from "./utils"
-import prepareUserPayload from "../../utils";
+import prepareUserPayload from "../../pages/CourseSelector/utils";
 import S from "./styles";
 
 const PrerequisiteTree = ({ courseCode }) => {
