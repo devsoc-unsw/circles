@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    name: Frontend CI Build
+    name: Frontend Production Build
 
     runs-on: ubuntu-latest
 
