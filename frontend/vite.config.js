@@ -34,11 +34,6 @@ export default defineConfig({
       { find: "reducers", replacement: resolve(projectRootDir, "./src/reducers") },
     ],
   },
-  server: {
-    watch: {
-      usePolling: true
-    }
-  },
 
   css: {
     preprocessorOptions: {
