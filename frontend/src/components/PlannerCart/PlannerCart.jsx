@@ -89,7 +89,7 @@ const PlannerCart = () => {
               </S.LinkButton>
             </S.PlannerCartEmptyCont>
           )}
-          {/* Hacky solution so prevent overflow.. help  */}
+          {/* TODO: Hacky solution so prevent overflow.. help  */}
           {!show && Object.keys(courses).length > 0 && (
             <S.DelButton
               danger
