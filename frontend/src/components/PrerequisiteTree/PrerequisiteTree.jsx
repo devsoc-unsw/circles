@@ -57,6 +57,7 @@ const PrerequisiteTree = ({ courseCode }) => {
     });
   };
 
+  // NOTE: This is for hot reloading in development as new graph will instantiate every time
   const updateTreeGraph = (graphData) => {
     graph.changeData(graphData);
     bringEdgeLabelsToFront(graph);
@@ -117,7 +118,7 @@ const PrerequisiteTree = ({ courseCode }) => {
     if (!graph) {
       generateTreeGraph(graphData);
     } else {
-      // remove updateTreeGraph when not developing as new graph will instantiate every time
+      // NOTE: This is for hot reloading in development as new graph will instantiate every time
       updateTreeGraph(graphData);
     }
 
