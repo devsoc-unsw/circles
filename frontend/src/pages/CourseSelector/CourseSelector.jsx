@@ -24,17 +24,14 @@ const CourseSelector = () => {
       notification.info({
         message: "How do I see more sidebar courses?",
         description: "Courses are shown as you meet the requirements to take them. Any course can also be selected via the search bar.",
-        duration: 30,
-        className: "text helpNotif",
+        duration: 5,
         placement: "bottomRight",
       });
     };
 
     // only open for users with no courses
-    if (!Object.keys(courses).length) {
-      openNotification();
-    }
-  }, [courses]);
+    if (!Object.keys(courses).length) openNotification();
+  }, []);
 
   useEffect(() => {
     // get structure of degree

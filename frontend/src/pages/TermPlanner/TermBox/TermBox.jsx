@@ -66,10 +66,11 @@ const TermBox = ({
             {coursesList.map(
               (code, index) => (
                 <DraggableCourse
-                  key={code}
+                  key={`${code}${term}`}
                   code={code}
                   index={index}
                   showMarks={showMarks}
+                  term={term}
                 />
               ),
             )}
