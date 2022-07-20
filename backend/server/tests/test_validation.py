@@ -42,8 +42,6 @@ def assert_possible_structure(unlocked, program, spec):
             del structure[container]['name']
         with suppress(KeyError):
             del structure[container]['General Education']
-        with suppress(KeyError):
-            del structure[container]['Flexible Education']
 
         for container2 in structure[container]:
             with suppress(KeyError):
