@@ -11,7 +11,7 @@ const GridViewSubgroup = ({
   hasLotsOfCourses,
 }) => {
   const { Title } = Typography;
-  
+
   const plannedUOC = subgroupEntries.reduce((sum, course) => (sum + (course.uoc ?? 0)), 0);
   const subgroupSection = (courses) => (
     <S.CourseGroup>{courses.map((course) => (
