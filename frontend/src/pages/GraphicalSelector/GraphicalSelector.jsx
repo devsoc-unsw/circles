@@ -21,6 +21,11 @@ const GraphicalSelector = () => {
 
   const ref = useRef(null);
 
+  const displayCourseDetails = async (code) => {
+    const [courseData, err] = await axiosRequest("get", `/courses/getCourse/${code}`);
+    if (!err) setCourse(courseData);
+  };
+
   // courses is a list of course codes
   const initialiseGraph = (courses, courseEdges) => {
     const container = ref.current;
@@ -60,8 +65,7 @@ const GraphicalSelector = () => {
       // load up course information
       const node = ev.item;
       const { _cfg: { id } } = node;
-      const [courseData, err] = await axiosRequest("get", `/courses/getCourse/${id}`);
-      if (!err) setCourse(courseData);
+      await displayCourseDetails(id);
     });
   };
 
@@ -99,8 +103,6 @@ const GraphicalSelector = () => {
     const edges = graph.getEdges();
     nodes.forEach((n) => n.show());
     edges.forEach((e) => e.show());
-
-    // nodes.forEach((n) => console.log(n));
   };
 
   const handleHideGraph = () => {
@@ -113,6 +115,7 @@ const GraphicalSelector = () => {
   const focusCourse = (id) => {
     if (graph) {
       graph.focusItem(id, true, { easing: "easeQuadInOut", duration: 500 });
+      displayCourseDetails(id);
     }
   };
 
