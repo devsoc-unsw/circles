@@ -58,19 +58,19 @@ const GraphicalSelector = () => {
         style: {
           endArrow: {
             path: G6.Arrow.triangle(5, 5, 30),
-            fill: '#e0e0e0',
+            fill: "#e0e0e0",
             d: 25,
           },
         },
       },
       nodeStateStyles: {
         hover: {
-          fill: '#b37feb',
-          stroke: '#b37feb',
+          fill: "#b37feb",
+          stroke: "#b37feb",
         },
         click: {
-          fill: '#b37feb',
-          stroke: '#b37feb',
+          fill: "#b37feb",
+          stroke: "#b37feb",
         },
       },
     });
@@ -91,27 +91,27 @@ const GraphicalSelector = () => {
       const { _cfg: { id } } = node;
       const [courseData, err] = await axiosRequest("get", `/courses/getCourse/${id}`);
       if (!err) setCourse(courseData);
-      
+
       // hides/ unhides dependent nodes
-      if (node.hasState('click')) {
-        graphInstance.setItemState(node, 'click', false);
+      if (node.hasState("click")) {
+        graphInstance.setItemState(node, "click", false);
         const { breadthFirstSearch } = Algorithm;
         breadthFirstSearch(data, id, {
           enter: ({ current }) => {
-            if (id !== current ) { 
+            if (id !== current) {
               const currentNode = graphInstance.findById(current);
-              // Unhiding node won't unhide other hidden nodes, 
+              // Unhiding node won't unhide other hidden nodes
               currentNode.getEdges().forEach((e) => e.show());
               currentNode.show();
             }
           },
         });
       } else if (node.getOutEdges().length !== 0) {
-        graphInstance.setItemState(node, 'click', true);
+        graphInstance.setItemState(node, "click", true);
         const { breadthFirstSearch } = Algorithm;
         breadthFirstSearch(data, id, {
           enter: ({ current }) => {
-            if (id !== current ) { 
+            if (id !== current) {
               const currentNode = graphInstance.findById(current);
               currentNode.getEdges().forEach((e) => e.hide());
               currentNode.hide();
@@ -123,12 +123,12 @@ const GraphicalSelector = () => {
 
     graphInstance.on("node:mouseenter", async (ev) => {
       const node = ev.item;
-      graphInstance.setItemState(node, 'hover', true);
+      graphInstance.setItemState(node, "hover", true);
     });
 
     graphInstance.on("node:mouseleave", async (ev) => {
       const node = ev.item;
-      graphInstance.setItemState(node, 'hover', false);
+      graphInstance.setItemState(node, "hover", false);
     });
   };
 
