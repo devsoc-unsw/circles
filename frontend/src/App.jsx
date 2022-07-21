@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import {
   BrowserRouter as Router, Route,
@@ -21,12 +21,6 @@ import "antd/dist/antd.less";
 const App = () => {
   const [loading, setLoading] = useState(true);
   const { theme } = useSelector((state) => state.settings);
-
-  useEffect(() => {
-    // initialise theme
-    document.body.classList.add(theme);
-    document.body.classList.remove(theme === "light" ? "dark" : "light");
-  }, [theme]);
 
   return (
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>

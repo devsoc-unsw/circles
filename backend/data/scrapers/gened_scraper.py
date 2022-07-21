@@ -62,9 +62,12 @@ def scrape_gened_data(year=None):
             )
         ), headers=HEADERS)
         new_gened_courses_raw = r.json()["contentlets"]
-  
+
         #gen eds by program code
-        gened_raw[program["code"]] = [course.get("code") for course in new_gened_courses_raw]
+        courses = {}
+        for course in new_gened_courses_raw:
+            courses[course["code"]] = course["title"]
+        gened_raw[program["code"]] = courses
     data_helpers.write_data(
         gened_raw,
         "data/scrapers/genedPureRaw.json"
