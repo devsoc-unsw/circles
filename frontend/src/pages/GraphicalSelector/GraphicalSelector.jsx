@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import G6 from "@antv/g6";
+import G6, { Algorithm } from "@antv/g6";
 import { Button } from "antd";
 import axios from "axios";
 import PageTemplate from "components/PageTemplate";
@@ -54,6 +54,25 @@ const GraphicalSelector = () => {
         },
 
       },
+      defaultEdge: {
+        style: {
+          endArrow: {
+            path: G6.Arrow.triangle(5, 5, 30),
+            fill: '#e0e0e0',
+            d: 25,
+          },
+        },
+      },
+      nodeStateStyles: {
+        hover: {
+          fill: '#b37feb',
+          stroke: '#b37feb',
+        },
+        click: {
+          fill: '#b37feb',
+          stroke: '#b37feb',
+        },
+      },
     });
 
     setGraph(graphInstance);
@@ -72,6 +91,44 @@ const GraphicalSelector = () => {
       const { _cfg: { id } } = node;
       const [courseData, err] = await axiosRequest("get", `/courses/getCourse/${id}`);
       if (!err) setCourse(courseData);
+      
+      // hides/ unhides dependent nodes
+      if (node.hasState('click')) {
+        graphInstance.setItemState(node, 'click', false);
+        const { breadthFirstSearch } = Algorithm;
+        breadthFirstSearch(data, id, {
+          enter: ({ current }) => {
+            if (id !== current ) { 
+              const currentNode = graphInstance.findById(current);
+              // Unhiding node won't unhide other hidden nodes, 
+              currentNode.getEdges().forEach((e) => e.show());
+              currentNode.show();
+            }
+          },
+        });
+      } else if (node.getOutEdges().length !== 0) {
+        graphInstance.setItemState(node, 'click', true);
+        const { breadthFirstSearch } = Algorithm;
+        breadthFirstSearch(data, id, {
+          enter: ({ current }) => {
+            if (id !== current ) { 
+              const currentNode = graphInstance.findById(current);
+              currentNode.getEdges().forEach((e) => e.hide());
+              currentNode.hide();
+            }
+          },
+        });
+      }
+    });
+
+    graphInstance.on("node:mouseenter", async (ev) => {
+      const node = ev.item;
+      graphInstance.setItemState(node, 'hover', true);
+    });
+
+    graphInstance.on("node:mouseleave", async (ev) => {
+      const node = ev.item;
+      graphInstance.setItemState(node, 'hover', false);
     });
   };
 
@@ -92,7 +149,7 @@ const GraphicalSelector = () => {
     const edges = children
       .flatMap((courseObject) => courseObject.courses
         .filter((c) => courseList.includes(c))
-        .map((c) => ({ source: courseObject.original, target: c })));
+        .map((c) => ({ source: c, target: courseObject.original })));
     if (courseList.length !== 0 && edges.length !== 0) initialiseGraph(courseList, edges);
     setLoading(false);
   };
