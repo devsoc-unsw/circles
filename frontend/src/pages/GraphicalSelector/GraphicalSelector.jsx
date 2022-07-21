@@ -6,10 +6,13 @@ import axios from "axios";
 import PageTemplate from "components/PageTemplate";
 import Spinner from "components/Spinner";
 import axiosRequest from "config/axios";
+import GRAPH_STYLE from "./config";
 import S from "./styles";
+import handleNodeData from "./utils";
 
 const GraphicalSelector = () => {
   const { programCode, specs } = useSelector((state) => state.degree);
+  const { courses: plannedCourses } = useSelector((state) => state.planner);
 
   const [graph, setGraph] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -17,6 +20,7 @@ const GraphicalSelector = () => {
 
   const ref = useRef(null);
 
+  // courses is a list of course codes
   const initialiseGraph = (courses, courseEdges) => {
     const container = ref.current;
     const graphInstance = new G6.Graph({
@@ -38,28 +42,13 @@ const GraphicalSelector = () => {
         linkDistance: 500,
       },
       // animate: true,
-      defaultNode: {
-        size: 70,
-        style: {
-          fill: "#9254de",
-          stroke: "#9254de",
-          cursor: "pointer",
-        },
-        labelCfg: {
-          style: {
-            fill: "#fff",
-            fontFamily: "Segoe UI",
-            cursor: "pointer",
-          },
-        },
-
-      },
+      defaultNode: GRAPH_STYLE.defaultNode,
     });
 
     setGraph(graphInstance);
 
     const data = {
-      nodes: courses.map((c) => ({ id: c, label: c })),
+      nodes: courses.map((c) => handleNodeData(c, plannedCourses)),
       edges: courseEdges,
     };
 

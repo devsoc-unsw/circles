@@ -27,7 +27,7 @@ const defaultNode = {
   },
 };
 
-const prereqNodeAddtionalStyle = (courseName) => ({
+const prereqNodeAdditionalStyle = (courseName) => ({
   id: courseName,
   label: courseName,
   style: {
@@ -43,7 +43,7 @@ const prereqNodeAddtionalStyle = (courseName) => ({
   rootRelationship: TREE_CONSTANTS.PREREQ,
 });
 
-const unlocksNodeAddtionalStyle = (courseName) => ({
+const unlocksNodeAdditionalStyle = (courseName) => ({
   id: courseName,
   label: courseName,
   style: {
@@ -59,7 +59,7 @@ const unlocksNodeAddtionalStyle = (courseName) => ({
   rootRelationship: TREE_CONSTANTS.UNLOCKS,
 });
 
-const unrecognisedNodeAddtionalStyle = (courseName) => ({
+const unrecognisedNodeAdditionalStyle = (courseName) => ({
   id: courseName,
   label: courseName,
   rootRelationship: undefined,
@@ -104,9 +104,9 @@ const defaultEdgeAdditionalStyle = (id) => ({
 export default {
   graphLayout,
   defaultNode,
-  prereqNodeAddtionalStyle,
-  unlocksNodeAddtionalStyle,
-  unrecognisedNodeAddtionalStyle,
+  prereqNodeAdditionalStyle,
+  unlocksNodeAdditionalStyle,
+  unrecognisedNodeAdditionalStyle,
   defaultEdge,
   prereqEdgeAdditionalStyle,
   unlocksEdgeAdditionalStyle,

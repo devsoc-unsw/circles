@@ -4,11 +4,11 @@ import TREE_CONSTANTS from "./constants";
 const handleNodeData = (courseName, rootRelationship) => {
   switch (rootRelationship) {
     case TREE_CONSTANTS.PREREQ:
-      return GRAPH_STYLE.prereqNodeAddtionalStyle(courseName);
+      return GRAPH_STYLE.prereqNodeAdditionalStyle(courseName);
     case TREE_CONSTANTS.UNLOCKS:
-      return GRAPH_STYLE.unlocksNodeAddtionalStyle(courseName);
+      return GRAPH_STYLE.unlocksNodeAdditionalStyle(courseName);
     default:
-      return GRAPH_STYLE.unrecognisedNodeAddtionalStyle(courseName);
+      return GRAPH_STYLE.unrecognisedNodeAdditionalStyle(courseName);
   }
 };
 
