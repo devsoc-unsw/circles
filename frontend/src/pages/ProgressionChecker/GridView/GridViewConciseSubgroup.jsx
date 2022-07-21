@@ -37,7 +37,7 @@ const GridViewConciseSubgroup = ({
     const [modalVisible, setModalVisible] = useState(false);
     if (hasLotsOfCourses && planState === plannedState.UNPLANNED) {
       return (
-        <S.CourseGroup>
+        <S.ViewAllCoursesWrapper>
           <Button type="primary" onClick={() => setModalVisible(true)}>
             View All Courses
           </Button>
@@ -47,7 +47,7 @@ const GridViewConciseSubgroup = ({
             setModalVisible={setModalVisible}
             courses={unplanned}
           />
-        </S.CourseGroup>
+        </S.ViewAllCoursesWrapper>
       );
     }
 
