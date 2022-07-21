@@ -38,7 +38,8 @@
     "start": "vite --port 3000 --host",
     "build": "vite build",
     "preview": "vite preview --host",
-    "test": "jest",
+    "test": "vitest run",
+    "coverage": "vitest run --coverage",
     "lint": "eslint src/**/*.{js,jsx}",
     "lint:fix": "eslint --fix src/**/*.{js,jsx}"
   },
