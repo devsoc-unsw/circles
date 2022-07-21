@@ -39,7 +39,7 @@ const GridView = ({ isLoading, structure, concise }) => {
             // past and termPlanned will be undefined for courses not in planner
             past: plannerCourses[courseCode]?.past,
             termPlanned: plannerCourses[courseCode]?.termPlanned,
-            uoc: plannerCourses[courseCode]?.UOC,
+            uoc: courses[courseCode]?.UOC,
             // must check null as could be undefined
             unplanned: courses[courseCode]?.plannedFor === null,
           });

@@ -20,8 +20,6 @@ const UOCBadge = ({ uoc }) => {
 }
 
 const CourseBadge = ({ course }) => {
-  console.log("course", course);
-
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -40,6 +38,7 @@ const CourseBadge = ({ course }) => {
         onClick={handleClick}
       >
         <CourseButton course={course} planned={false} />
+        <UOCBadge uoc={course.uoc} />
       </Badge>
     );
   }

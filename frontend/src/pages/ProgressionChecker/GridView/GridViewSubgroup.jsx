@@ -11,7 +11,8 @@ const GridViewSubgroup = ({
   hasLotsOfCourses,
 }) => {
   const { Title } = Typography;
-
+  
+  const plannedUOC = subgroupEntries.reduce((sum, course) => (sum + (course.uoc ?? 0)), 0);
   const subgroup = subgroupEntries.map((course) => (
     <CourseBadge course={course} key={course.key} />
   ));
@@ -44,7 +45,7 @@ const GridViewSubgroup = ({
   return (
     <div key={subgroupKey}>
       <Title level={2} className="text">{subgroupKey}</Title>
-      <Title level={3} className="text">{uoc} UOC worth of courses</Title>
+      <Title level={3} className="text">{uoc} UOC of the following courses ({Math.max(uoc - plannedUOC, 0)} UOC remaining)</Title>
       <S.CourseGroup>
         {courseSection()}
       </S.CourseGroup>
