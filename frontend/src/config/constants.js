@@ -13,7 +13,7 @@ import { getMostRecentPastTerm } from "pages/TermPlanner/utils";
  */
 export const REDUX_PERSIST_VERSION = 3;
 
-export const FEEDBACK_LINK = "https://forms.gle/dwyypMU8CLTsyp4C8";
+export const FEEDBACK_LINK = "https://docs.google.com/forms/d/e/1FAIpQLSdGoxb-1fRRLySEi5j4Gy_ERWt3XWTBwyKJaDWlTqhy8Xdlxw/viewform?usp=sf_link";
 
 export const TERM = `${new Date().getFullYear() + (getMostRecentPastTerm().T === 3 ? 1 : 0)}-T${(getMostRecentPastTerm().T + 1) % 3}`;
 export const TIMETABLE_API_URL = `https://timetable.csesoc.app/api/terms/${TERM}/courses`;
