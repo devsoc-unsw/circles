@@ -16,6 +16,7 @@ const GraphPlaygroundWrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex: 5;
+  position: relative;
 `;
 
 const SidebarWrapper = styled.div`
@@ -25,4 +26,15 @@ const SidebarWrapper = styled.div`
   flex: 2;
 `;
 
-export default { Wrapper, GraphPlaygroundWrapper, SidebarWrapper };
+const SearchBarWrapper = styled.div`
+  position: absolute;
+  top: 1em;
+  right: 1em;
+`;
+
+export default {
+  Wrapper,
+  GraphPlaygroundWrapper,
+  SidebarWrapper,
+  SearchBarWrapper,
+};

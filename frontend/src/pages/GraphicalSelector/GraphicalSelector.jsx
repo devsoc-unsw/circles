@@ -7,6 +7,7 @@ import PageTemplate from "components/PageTemplate";
 import Spinner from "components/Spinner";
 import axiosRequest from "config/axios";
 import GRAPH_STYLE from "./config";
+import NodeSearchBar from "./NodeSearchBar";
 import S from "./styles";
 import handleNodeData from "./utils";
 
@@ -15,7 +16,7 @@ const GraphicalSelector = () => {
   const { courses: plannedCourses } = useSelector((state) => state.planner);
 
   const [graph, setGraph] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [coursesDetails, setCoursesDetails] = useState(null);
   const [course, setCourse] = useState(null);
 
   const ref = useRef(null);
@@ -68,22 +69,25 @@ const GraphicalSelector = () => {
     const { structure } = (
       await axios.get(`/programs/getStructure/${programCode}/${specs.join("+")}`)
     ).data;
-    const courseList = (
+
+    const coursesList = (
       Object.values(structure)
         .flatMap((specialisation) => Object.values(specialisation)
           .filter((spec) => typeof spec === "object" && spec.courses && !(spec.type.includes("rule") || spec.type.includes("gened")))
-          .flatMap((spec) => Object.keys(spec.courses)))
+          .flatMap((spec) => Object.entries(spec.courses)))
         .filter((v, i, a) => a.indexOf(v) === i) // TODO: hack to make courseList unique
     );
-    const res = await Promise.all(courseList.map((c) => axios.get(`/courses/getPathFrom/${c}`).catch((e) => e)));
+
+    const courseKeysList = coursesList.map((c) => (c[0]));
+    const res = await Promise.all(courseKeysList.map((c) => axios.get(`/courses/getPathFrom/${c}`).catch((e) => e)));
     // filter any errors from res
     const children = res.filter((value) => value?.data?.courses).map((value) => value.data);
     const edges = children
       .flatMap((courseObject) => courseObject.courses
-        .filter((c) => courseList.includes(c))
+        .filter((c) => courseKeysList.includes(c))
         .map((c) => ({ source: courseObject.original, target: c })));
-    if (courseList.length !== 0 && edges.length !== 0) initialiseGraph(courseList, edges);
-    setLoading(false);
+    if (courseKeysList.length !== 0 && edges.length !== 0) initialiseGraph(courseKeysList, edges);
+    setCoursesDetails(coursesList);
   };
 
   useEffect(() => {
@@ -95,6 +99,8 @@ const GraphicalSelector = () => {
     const edges = graph.getEdges();
     nodes.forEach((n) => n.show());
     edges.forEach((e) => e.show());
+
+    // nodes.forEach((n) => console.log(n));
   };
 
   const handleHideGraph = () => {
@@ -104,11 +110,20 @@ const GraphicalSelector = () => {
     edges.forEach((e) => e.hide());
   };
 
+  const focusCourse = (id) => {
+    if (graph) {
+      graph.focusItem(id, true, { easing: "easeQuadInOut", duration: 500 });
+    }
+  };
+
   return (
     <PageTemplate>
       <S.Wrapper>
         <S.GraphPlaygroundWrapper ref={ref}>
-          {loading && <Spinner text="Loading graph..." />}
+          {(!coursesDetails) && <Spinner text="Loading graph..." />}
+          <S.SearchBarWrapper>
+            {(coursesDetails) && <NodeSearchBar courses={coursesDetails} onSelect={focusCourse} />}
+          </S.SearchBarWrapper>
         </S.GraphPlaygroundWrapper>
         <S.SidebarWrapper>
           <Button onClick={handleShowGraph}>
