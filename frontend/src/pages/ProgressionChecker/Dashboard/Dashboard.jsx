@@ -9,7 +9,9 @@ import DegreeCard from "../DegreeCard";
 import SkeletonDashboard from "./SkeletonDashboard";
 import S from "./styles";
 
-const Dashboard = ({ storeUOC, isLoading, structure }) => {
+const Dashboard = ({
+  storeUOC, isLoading, structure, uoc,
+}) => {
   const { Title } = Typography;
   const currYear = new Date().getFullYear();
 
@@ -34,14 +36,6 @@ const Dashboard = ({ storeUOC, isLoading, structure }) => {
     if (courseList.includes(courseCode)) completedUOC += courses[courseCode].UOC;
   });
 
-  // TODO: Replace this with BE value when implemented
-  let totalUOC = 0;
-  Object.keys(storeUOC).forEach((group) => {
-    // Do not include "Rules" group in total UOC
-    if (group === "Rules") return;
-    totalUOC += storeUOC[group].total;
-  });
-
   const handleClick = () => {
     scroller.scrollTo("divider", {
       duration: 1500,
@@ -59,7 +53,7 @@ const Dashboard = ({ storeUOC, isLoading, structure }) => {
         <S.ContentWrapper style={props}>
           <LiquidProgressChart
             completedUOC={completedUOC}
-            totalUOC={totalUOC}
+            totalUOC={uoc}
           />
           <a
             href={`https://www.handbook.unsw.edu.au/undergraduate/programs/${currYear}/${programCode}`}
