@@ -57,11 +57,12 @@ const CourseSidebar = ({ structure, showLockedCourses }) => {
         };
         newMenu[group][subgroup] = [];
 
-        const isRule = subgroupStructure.type && subgroupStructure.type.includes("rule");
-
-        if (subgroupStructure.courses && !isRule) {
+        if (subgroupStructure.courses && !subgroupStructure.type.includes("rule")) {
           // only consider disciplinary component courses
           Object.keys(subgroupStructure.courses).forEach((courseCode) => {
+            // suppress gen ed courses if it has not been added to the planner
+            if (subgroupStructure.type === "gened" && !planner.courses[courseCode]) return;
+
             newMenu[group][subgroup].push({
               courseCode,
               title: subgroupStructure.courses[courseCode],

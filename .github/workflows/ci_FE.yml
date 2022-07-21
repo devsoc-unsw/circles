@@ -1,4 +1,4 @@
-name: Run Frontend build
+name: Run Frontend Build
 
 on:
   pull_request:
