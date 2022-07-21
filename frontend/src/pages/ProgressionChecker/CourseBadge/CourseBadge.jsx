@@ -4,13 +4,12 @@ import { EyeOutlined } from "@ant-design/icons";
 import { Badge, Tooltip } from "antd";
 import CourseButton from "components/CourseButton";
 import S from "./styles";
-import { purple, lightPurple } from "config/constants";
+import { purple } from "config/constants";
 
 const UOCBadge = ({ uoc }) => {
   return (
     <S.UOCBadgeWrapper>
       <Badge
-        // style={{ backgroundColor: lightPurple, color: "black", lineHeight: "1.5", height: "auto" }}
         style={{ backgroundColor: purple, color: "white", lineHeight: "1.5", height: "auto" }}
         size="small"
         count={`${uoc} UOC`}
