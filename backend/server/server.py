@@ -44,6 +44,6 @@ app.include_router(specialisations.router)
 
 
 @app.get("/")
-async def index():
+async def index() -> str:
     """ sanity test that this file is loaded """
     return "At index inside server.py"
