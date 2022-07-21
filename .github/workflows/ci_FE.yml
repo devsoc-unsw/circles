@@ -19,6 +19,12 @@ jobs:
         with:
           python-version: "3.x"
 
+      - name: Run frontend tests
+        run: |
+          cd frontend
+          npm ci
+          npm run test
+
       - name: Test the frontend successfully builds
         run: |
           mkdir env
