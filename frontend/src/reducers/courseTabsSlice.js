@@ -14,20 +14,21 @@ const courseTabsSplice = createSlice({
       if (state.tabs.find((tab) => tab === tabName)) {
         state.active = state.tabs.indexOf(tabName);
       } else {
-        // Add new tab but don't change active
         state.tabs.push(tabName);
         state.active = state.tabs.length - 1;
       }
     },
     removeTab: (state, action) => {
       const index = parseInt(action.payload, 10);
-      state.tabs.splice(index, 1);
 
-      const active = parseInt(state.active, 10);
+      if (index >= 0) {
+        state.tabs.splice(index, 1);
 
-      if (!(active === 0 || index > active)) {
-        // deleting tab before/equal to active tab
-        state.active = active - 1;
+        const active = parseInt(state.active, 10);
+
+        if (active && active >= state.tabs.length) {
+          state.active = state.tabs.length - 1;
+        }
       }
     },
     setActiveTab: (state, action) => {
