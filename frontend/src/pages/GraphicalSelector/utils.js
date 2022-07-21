@@ -3,7 +3,7 @@ import GRAPH_STYLE from "./config";
 // plannedCourses is an object of with keys of courseCodes
 const handleNodeData = (courseCode, plannedCourses) => {
   // determine if planned or unplanned
-  if (Object.prototype.hasOwnProperty.call(plannedCourses, courseCode)) {
+  if (plannedCourses[courseCode]) {
     // uses default node style
     return { id: courseCode, label: courseCode };
   }
