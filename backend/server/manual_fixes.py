@@ -28,7 +28,11 @@ def fix_3784(structure: dict):
 def fix_3785(structure: dict):
     remove_course(structure, "COMP1911")
     remove_course(structure, "ENGG1811")
-    remove_course(structure, "MATH1081")
+
+    # eject 1081 from CS
+    compMajor = next(filter(lambda a: "COMP" in a, structure.keys()))
+    del structure[compMajor]["Core Courses"]["courses"]["MATH1081"]
+
     mutated_item = remove_course(structure, "COMP4920")
     if mutated_item:
         with suppress(StopIteration):
