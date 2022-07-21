@@ -40,8 +40,8 @@
     "preview": "vite preview --host",
     "test": "vitest run",
     "coverage": "vitest run --coverage",
-    "lint": "eslint src/**/*.{js,jsx,ts,tsx}",
-    "lint:fix": "eslint --fix src/**/*.{js,jsx,ts,tsx}"
+    "lint": "eslint src/**/*.{js,jsx}",
+    "lint:fix": "eslint --fix src/**/*.{js,jsx}"
   },
   "eslintConfig": {
     "extends": [
