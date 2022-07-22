@@ -1,7 +1,7 @@
 from contextlib import suppress
 
 
-def remove_course(structure: dict, course: str) -> bool:
+def remove_course(structure: dict, course: str) -> dict[str, dict] | None:
     """indescriminantly remove a course from structure"""
     for item, collection in structure.items():
         if item == "Rules":
@@ -14,6 +14,7 @@ def remove_course(structure: dict, course: str) -> bool:
                 return structure[item]
             except KeyError:
                 pass
+    return None
 
 def fix_3784(structure: dict):
     mutated_item = remove_course(structure, "ECON1202")
@@ -28,7 +29,13 @@ def fix_3784(structure: dict):
 def fix_3785(structure: dict):
     remove_course(structure, "COMP1911")
     remove_course(structure, "ENGG1811")
-    remove_course(structure, "MATH1081")
+
+    # eject 1081 from CS
+    with suppress(StopIteration, KeyError):
+        comp_major = next(filter(lambda a: "COMP" in a, structure.keys()))
+        core_name = next(filter(lambda a: "core" in a.lower(), structure[comp_major].keys()))
+        del structure[comp_major][core_name]["courses"]["MATH1081"]
+
     mutated_item = remove_course(structure, "COMP4920")
     if mutated_item:
         with suppress(StopIteration):
