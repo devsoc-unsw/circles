@@ -30,7 +30,7 @@ def format_prg_data() -> None:
     # Get raw data
     raw_content = data_helpers.read_data("data/scrapers/programsPureRaw.json")
     # Initialise formatted data
-    programs_formatted = {}
+    programs_formatted: dict[str, dict] = {}
     for program in raw_content:
         # Load summary infomation about program
         data = json.loads(program["data"])
