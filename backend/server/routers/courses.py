@@ -508,3 +508,4 @@ def weight_course(course: tuple, search_term: str, structure: dict,
             break
 
     return weight
+
