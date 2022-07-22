@@ -2,6 +2,8 @@
 API for fetching data about programs and specialisations
 """
 import re
+import functools
+
 from typing import Optional, Dict, List
 
 from fastapi import APIRouter, HTTPException
@@ -21,7 +23,7 @@ router = APIRouter(
 
 
 @router.get("/")
-def programs_index():
+def programs_index() -> str:
     """ sanity test that this file is loaded """
     return "Index of programs"
 
@@ -47,7 +49,7 @@ def programs_index():
         }
     },
 )
-def get_programs():
+def get_programs() -> Dict[str, Dict[str, str]]:
     """ Fetch all the programs the backend knows about in the format of { code: title } """
     # return {"programs": {q["code"]: q["title"] for q in programsCOL.find()}}
     # TODO On deployment, DELETE RETURN BELOW and replace with the return above
@@ -99,8 +101,21 @@ def add_subgroup_container(structure: dict, type: str, container: dict, exceptio
 
     return list(item["courses"].keys())
 
+def add_geneds_courses(programCode: str, structure: dict, container: dict) -> list[str]:
+    """ Returns the added courses """
+    if container.get("type") != "gened":
+        return []
 
-def add_specialisation(structure: dict, code: str):
+    item = structure["General"]["General Education"]
+    item["courses"] = {}
+    
+    if container.get("courses") is None:
+        item["courses"] = data_helpers.read_data("data/scrapers/genedPureRaw.json").get(programCode)
+
+    return list(item["courses"].keys())
+
+
+def add_specialisation(structure: dict, code: str) -> None:
     """ Add a specialisation to the structure of a getStructure call """
     # in a specialisation, the first container takes priority - no duplicates may exist
     if code.endswith("1"):
@@ -195,12 +210,34 @@ def add_specialisation(structure: dict, code: str):
 def get_structure(
     programCode: str, spec: Optional[str] = None
 ):
-    structure = add_specialisations({}, spec)
-    uoc = add_program_code_details(structure, programCode)
-    course_list_from_structure(structure)
+    # structure = add_specialisations({}, spec)
+    # uoc = add_program_code_details(structure, programCode)
+    # course_list_from_structure(structure)
+    ##### TODO: Update the old stuff
+    structure = {}
+    if spec:
+        specs = spec.split("+") if "+" in spec else [spec]
+        for m in specs:
+            add_specialisation(structure, m)
+
+    # add details for program code
+    programsResult = programsCOL.find_one({"code": programCode})
+    if not programsResult:
+        raise HTTPException(
+            status_code=400, detail="Program code was not found")
+
+    structure['General'] = {}
+    structure['Rules'] = {}
+    with suppress(KeyError):
+        for container in programsResult['components']['non_spec_data']:
+            add_subgroup_container(structure, "General", container, [])
+            if container.get("type") == "gened":
+                add_geneds_courses(programCode, structure, container)
+    apply_manual_fixes(structure, programCode)
+
     return {
         "structure": structure, 
-        "uoc": uoc,
+        # "uoc": uoc,
     }
 
 @router.get("/getStructureCourseList/{programCode}/{spec}", response_model=Courses)
@@ -229,25 +266,21 @@ def get_structure_course_list(
             "description": "Returns all geneds available to a given to the given code",
             "content": {
                 "application/json": {
-                    "example": 
-                        {"courses": [
-                            "ADAD2610",
-                            "ANAT2521",
-                            "ARTS1010",
-                            "ARTS1011",
-                            "ARTS1030",
-                            "ARTS1031",
-                            "ARTS1032",
-                            "ARTS1060",
-                        ]
+                    "example": {
+                        "courses": {
+                            "ACTL3142": "Statistical Machine Learning for Risk and Actuarial Applications",
+                            "ACTL4305": "Actuarial Data Analytic Applications",
+                            "ADAD2610": "Art and Design for Environmental Challenges",
+                            "ANAT2521": "Biological Anthropology: Principles and Practices",
+                            "ARTS1010": "The Life of Words"
+                        }
                     }
                 }
             },
         },
     },
 )
-def getGenEds(
-    programCode: str):
+def getGenEds(programCode: str):
     all_geneds = data_helpers.read_data("data/scrapers/genedPureRaw.json")
     return {"courses" : all_geneds[programCode]}
 
@@ -323,3 +356,10 @@ def add_program_code_details(structure: Dict, programCode: str) -> int:
 
     return programsResult['uoc'] if 'uoc' in programsResult.keys() else None
 
+
+def compose(*functions: callable) -> callable:
+    """
+        Compose a list of functions into a single function.
+        The functions are applied in the order they are given.
+    """
+    return functools.reduce(lambda f, g: lambda *args, **kwargs: f(g(*args, **kwargs)), functions)
