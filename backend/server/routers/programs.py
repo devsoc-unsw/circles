@@ -210,10 +210,6 @@ def add_specialisation(structure: dict, code: str) -> None:
 def get_structure(
     programCode: str, spec: Optional[str] = None
 ):
-    # structure = add_specialisations({}, spec)
-    # uoc = add_program_code_details(structure, programCode)
-    # course_list_from_structure(structure)
-    ##### TODO: Update the old stuff
     structure = {}
     if spec:
         specs = spec.split("+") if "+" in spec else [spec]
@@ -237,7 +233,7 @@ def get_structure(
 
     return {
         "structure": structure, 
-        # "uoc": uoc,
+        "uoc": programsResult["UOC"],
     }
 
 @router.get("/getStructureCourseList/{programCode}/{spec}", response_model=Courses)
