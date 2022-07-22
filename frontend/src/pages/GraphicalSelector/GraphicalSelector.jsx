@@ -6,10 +6,13 @@ import axios from "axios";
 import PageTemplate from "components/PageTemplate";
 import Spinner from "components/Spinner";
 import axiosRequest from "config/axios";
+import GRAPH_STYLE from "./config";
 import S from "./styles";
+import handleNodeData from "./utils";
 
 const GraphicalSelector = () => {
   const { programCode, specs } = useSelector((state) => state.degree);
+  const { courses: plannedCourses } = useSelector((state) => state.planner);
 
   const [graph, setGraph] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -17,6 +20,7 @@ const GraphicalSelector = () => {
 
   const ref = useRef(null);
 
+  // courses is a list of course codes
   const initialiseGraph = (courses, courseEdges) => {
     const container = ref.current;
     const graphInstance = new G6.Graph({
@@ -38,47 +42,15 @@ const GraphicalSelector = () => {
         linkDistance: 500,
       },
       // animate: true,
-      defaultNode: {
-        size: 70,
-        style: {
-          fill: "#9254de",
-          stroke: "#9254de",
-          cursor: "pointer",
-        },
-        labelCfg: {
-          style: {
-            fill: "#fff",
-            fontFamily: "Segoe UI",
-            cursor: "pointer",
-          },
-        },
-
-      },
-      defaultEdge: {
-        style: {
-          endArrow: {
-            path: G6.Arrow.triangle(5, 5, 30),
-            fill: "#e0e0e0",
-            d: 25,
-          },
-        },
-      },
-      nodeStateStyles: {
-        hover: {
-          fill: "#b37feb",
-          stroke: "#b37feb",
-        },
-        click: {
-          fill: "#b37feb",
-          stroke: "#b37feb",
-        },
-      },
+      defaultNode: GRAPH_STYLE.defaultNode,
+      defaultEdge: GRAPH_STYLE.defaultEdge,
+      nodeStateStyles: GRAPH_STYLE.nodeStateStyles,
     });
 
     setGraph(graphInstance);
 
     const data = {
-      nodes: courses.map((c) => ({ id: c, label: c })),
+      nodes: courses.map((c) => handleNodeData(c, plannedCourses)),
       edges: courseEdges,
     };
 
@@ -93,9 +65,9 @@ const GraphicalSelector = () => {
       if (!err) setCourse(courseData);
 
       // hides/ unhides dependent nodes
+      const { breadthFirstSearch } = Algorithm;
       if (node.hasState("click")) {
-        graphInstance.setItemState(node, "click", false);
-        const { breadthFirstSearch } = Algorithm;
+        graphInstance.clearItemStates(node, "click");
         breadthFirstSearch(data, id, {
           enter: ({ current }) => {
             if (id !== current) {
@@ -106,9 +78,8 @@ const GraphicalSelector = () => {
             }
           },
         });
-      } else if (node.getOutEdges().length !== 0) {
+      } else if (node.getOutEdges().length) {
         graphInstance.setItemState(node, "click", true);
-        const { breadthFirstSearch } = Algorithm;
         breadthFirstSearch(data, id, {
           enter: ({ current }) => {
             if (id !== current) {
@@ -128,7 +99,7 @@ const GraphicalSelector = () => {
 
     graphInstance.on("node:mouseleave", async (ev) => {
       const node = ev.item;
-      graphInstance.setItemState(node, "hover", false);
+      graphInstance.clearItemStates(node, "hover");
     });
   };
 
