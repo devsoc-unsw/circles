@@ -14,7 +14,7 @@ from server.routers.courses import regex_search
 from server.database import programsCOL, specialisationsCOL
 from server.routers.courses import regex_search
 from data.utility import data_helpers
-from server.routers.model import (Structure, Programs, Courses)
+from server.routers.model import (Structure, Programs, Courses, CourseCodes)
 
 router = APIRouter(
     prefix="/programs",
@@ -210,40 +210,33 @@ def add_specialisation(structure: dict, code: str) -> None:
 def get_structure(
     programCode: str, spec: Optional[str] = None
 ):
+    # TODO: This ugly, use compose instead
     structure = {}
     structure = add_specialisations(structure, spec)
     structure, uoc = add_program_code_details(structure, programCode)
-    # add details for program code
-    # programsResult = programsCOL.find_one({"code": programCode})
-    # if not programsResult:
-    #     raise HTTPException(
-    #         status_code=400, detail="Program code was not found")
-    #
-    # structure['General'] = {}
-    # structure['Rules'] = {}
-    # with suppress(KeyError):
-    #     for container in programsResult['components']['non_spec_data']:
-    #         add_subgroup_container(structure, "General", container, [])
-    #         if container.get("type") == "gened":
-    #             add_geneds_courses(programCode, structure, container)
-    # apply_manual_fixes(structure, programCode)
+    structure = add_geneds_to_structure(structure, programCode)
+    apply_manual_fixes(structure, programCode)
 
     return {
         "structure": structure, 
         "uoc": uoc,
     }
 
-@router.get("/getStructureCourseList/{programCode}/{spec}", response_model=Courses)
-@router.get("/getStructureCourseList/{programCode}", response_model=Courses)
+@router.get("/getStructureCourseList/{programCode}/{spec}", response_model=CourseCodes)
+@router.get("/getStructureCourseList/{programCode}", response_model=CourseCodes)
 def get_structure_course_list(
         programCode: str, spec: Optional[str]=None
     ):
     """
         Similar to `/getStructure` but, returns a raw list of courses with no further
         nesting or categorisation.
+        TODO: Add a test for this.
     """
-    structure = add_specialisations({}, spec)
-    structure = add_program_code_details(structure, programCode)
+    structure = {}
+    structure = add_specialisations(structure, spec)
+    structure, _ = add_program_code_details(structure, programCode)
+    apply_manual_fixes(structure, programCode)
+
     return {
         "courses": course_list_from_structure(structure),
     }
@@ -301,20 +294,20 @@ def course_list_from_structure(structure: Dict) -> List[str]:
     courses = []
     def __recursive_course_search(structure: Dict) -> None:
         """ Recursively search for courses in a structure """
-        # print(structure.keys())
-        # if not isinstance(structure, (list, dict)):
-        #     return
-        # # For a list, recurse on all its object
-        # if not isinstance(structure, dict):
-        #     return
-        # for k, v in structure.items():
-        #     with suppress(KeyError):
-        #         if not isinstance(v, dict) or "rule" in v["type"]:
-        #             continue
-        #     print(k)
-        #     if "courses" in k:
-        #         courses.extend(v.keys())
-        #     __recursive_course_search(v)
+        print(structure.keys())
+        if not isinstance(structure, (list, dict)):
+            return
+        # For a list, recurse on all its object
+        if not isinstance(structure, dict):
+            return
+        for k, v in structure.items():
+            with suppress(KeyError):
+                if not isinstance(v, dict) or "rule" in v["type"]:
+                    continue
+            print(k)
+            if "courses" in k:
+                courses.extend(v.keys())
+            __recursive_course_search(v)
         return structure
     __recursive_course_search(structure)
     return courses
@@ -344,13 +337,21 @@ def add_program_code_details(structure: Dict, programCode: str) -> Tuple[Dict, i
 
     structure['General'] = {}
     structure['Rules'] = {}
+    return (structure, programsResult["UOC"])
+
+def add_geneds_to_structure(structure: Dict={}, programCode: str="") -> Dict:
+    programsResult = programsCOL.find_one({"code": programCode})
+    if not programsResult:
+        raise HTTPException(
+            status_code=400, detail="Program code was not found")
+
     with suppress(KeyError):
         for container in programsResult['components']['non_spec_data']:
             add_subgroup_container(structure, "General", container, [])
             if container.get("type") == "gened":
                 add_geneds_courses(programCode, structure, container)
-    apply_manual_fixes(structure, programCode)
-    return (structure, programsResult["UOC"])
+    return structure
+
 
 def compose(*functions: callable) -> callable:
     """
