@@ -1,20 +1,18 @@
 """
 API for fetching data about programs and specialisations
 """
-import re
+from contextlib import suppress
 import functools
-
-from typing import Optional, Dict, List, Tuple
+import re
+from typing import Dict, List, Optional, Tuple
 
 from fastapi import APIRouter, HTTPException
-from contextlib import suppress
 
+from data.utility import data_helpers
+from server.database import programsCOL, specialisationsCOL
 from server.manual_fixes import apply_manual_fixes
 from server.routers.courses import regex_search
-from server.database import programsCOL, specialisationsCOL
-from server.routers.courses import regex_search
-from data.utility import data_helpers
-from server.routers.model import (Structure, Programs, Courses, CourseCodes)
+from server.routers.model import CourseCodes, Courses, Programs, Structure
 
 router = APIRouter(
     prefix="/programs",
@@ -108,7 +106,7 @@ def add_geneds_courses(programCode: str, structure: dict, container: dict) -> li
 
     item = structure["General"]["General Education"]
     item["courses"] = {}
-    
+
     if container.get("courses") is None:
         item["courses"] = data_helpers.read_data("data/scrapers/genedPureRaw.json").get(programCode)
 
@@ -218,7 +216,7 @@ def get_structure(
     apply_manual_fixes(structure, programCode)
 
     return {
-        "structure": structure, 
+        "structure": structure,
         "uoc": uoc,
     }
 
@@ -293,22 +291,21 @@ def course_list_from_structure(structure: Dict) -> List[str]:
     """
     courses = []
     def __recursive_course_search(structure: Dict) -> None:
-        """ Recursively search for courses in a structure """
+        """
+            Recursively search for courses in a structure. Add
+            courses found to `courses` object in upper group.
+        """
         print(structure.keys())
         if not isinstance(structure, (list, dict)):
-            return
-        # For a list, recurse on all its object
-        if not isinstance(structure, dict):
             return
         for k, v in structure.items():
             with suppress(KeyError):
                 if not isinstance(v, dict) or "rule" in v["type"]:
                     continue
-            print(k)
             if "courses" in k:
                 courses.extend(v.keys())
             __recursive_course_search(v)
-        return structure
+        return
     __recursive_course_search(structure)
     return courses
 
@@ -339,7 +336,11 @@ def add_program_code_details(structure: Dict, programCode: str) -> Tuple[Dict, i
     structure['Rules'] = {}
     return (structure, programsResult["UOC"])
 
-def add_geneds_to_structure(structure: Dict={}, programCode: str="") -> Dict:
+def add_geneds_to_structure(structure: Dict=dict(), programCode: str="") -> Dict:
+    """
+        Insert geneds of the given programCode into the structure
+        provided
+    """
     programsResult = programsCOL.find_one({"code": programCode})
     if not programsResult:
         raise HTTPException(
