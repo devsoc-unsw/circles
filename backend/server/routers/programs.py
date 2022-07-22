@@ -4,7 +4,7 @@ API for fetching data about programs and specialisations
 import re
 import functools
 
-from typing import Optional, Dict, List
+from typing import Optional, Dict, List, Tuple
 
 from fastapi import APIRouter, HTTPException
 from contextlib import suppress
@@ -211,29 +211,26 @@ def get_structure(
     programCode: str, spec: Optional[str] = None
 ):
     structure = {}
-    if spec:
-        specs = spec.split("+") if "+" in spec else [spec]
-        for m in specs:
-            add_specialisation(structure, m)
-
+    structure = add_specialisations(structure, spec)
+    structure, uoc = add_program_code_details(structure, programCode)
     # add details for program code
-    programsResult = programsCOL.find_one({"code": programCode})
-    if not programsResult:
-        raise HTTPException(
-            status_code=400, detail="Program code was not found")
-
-    structure['General'] = {}
-    structure['Rules'] = {}
-    with suppress(KeyError):
-        for container in programsResult['components']['non_spec_data']:
-            add_subgroup_container(structure, "General", container, [])
-            if container.get("type") == "gened":
-                add_geneds_courses(programCode, structure, container)
-    apply_manual_fixes(structure, programCode)
+    # programsResult = programsCOL.find_one({"code": programCode})
+    # if not programsResult:
+    #     raise HTTPException(
+    #         status_code=400, detail="Program code was not found")
+    #
+    # structure['General'] = {}
+    # structure['Rules'] = {}
+    # with suppress(KeyError):
+    #     for container in programsResult['components']['non_spec_data']:
+    #         add_subgroup_container(structure, "General", container, [])
+    #         if container.get("type") == "gened":
+    #             add_geneds_courses(programCode, structure, container)
+    # apply_manual_fixes(structure, programCode)
 
     return {
         "structure": structure, 
-        "uoc": programsResult["UOC"],
+        "uoc": uoc,
     }
 
 @router.get("/getStructureCourseList/{programCode}/{spec}", response_model=Courses)
@@ -302,27 +299,27 @@ def course_list_from_structure(structure: Dict) -> List[str]:
         in that structure
     """
     courses = []
-    def __recursive_course_search(structure: Dict) -> List[str]:
+    def __recursive_course_search(structure: Dict) -> None:
         """ Recursively search for courses in a structure """
-        print(structure.keys())
-        if not isinstance(structure, (list, dict)):
-            return
-        # For a list, recurse on all its object
-        if not isinstance(structure, dict):
-            return
-        for k, v in structure.items():
-            with suppress(KeyError):
-                if not isinstance(v, dict) or "rule" in v["type"]:
-                    continue
-            print(k)
-            if "courses" in k:
-                courses.extend(v.keys())
-            __recursive_course_search(v)
+        # print(structure.keys())
+        # if not isinstance(structure, (list, dict)):
+        #     return
+        # # For a list, recurse on all its object
+        # if not isinstance(structure, dict):
+        #     return
+        # for k, v in structure.items():
+        #     with suppress(KeyError):
+        #         if not isinstance(v, dict) or "rule" in v["type"]:
+        #             continue
+        #     print(k)
+        #     if "courses" in k:
+        #         courses.extend(v.keys())
+        #     __recursive_course_search(v)
         return structure
     __recursive_course_search(structure)
     return courses
 
-def add_specialisations(structure: Dict, spec: str) -> Dict:
+def add_specialisations(structure: Dict, spec: str="") -> Dict:
     """
         Take a string of `+` joined specialisations and add
         them to the structure
@@ -333,10 +330,12 @@ def add_specialisations(structure: Dict, spec: str) -> Dict:
             add_specialisation(structure, m)
     return structure
 
-def add_program_code_details(structure: Dict, programCode: str) -> int:
+def add_program_code_details(structure: Dict, programCode: str) -> Tuple[Dict, int]:
     """
     Add the details for given program code to the structure.
-    Returns the uoc (int) associated with the program code.
+    Returns:
+        - structure
+        - uoc (int) associated with the program code.
     """
     programsResult = programsCOL.find_one({"code": programCode})
     if not programsResult:
@@ -348,10 +347,10 @@ def add_program_code_details(structure: Dict, programCode: str) -> int:
     with suppress(KeyError):
         for container in programsResult['components']['non_spec_data']:
             add_subgroup_container(structure, "General", container, [])
+            if container.get("type") == "gened":
+                add_geneds_courses(programCode, structure, container)
     apply_manual_fixes(structure, programCode)
-
-    return programsResult['uoc'] if 'uoc' in programsResult.keys() else None
-
+    return (structure, programsResult["UOC"])
 
 def compose(*functions: callable) -> callable:
     """
