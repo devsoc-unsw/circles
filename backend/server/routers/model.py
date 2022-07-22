@@ -120,5 +120,5 @@ CONDITIONS_PATH = "data/final_data/conditions.pkl"
 with open(CONDITIONS_PATH, "rb") as file:
     CONDITIONS: dict[str, CompositeCondition] = pickle.load(file)
 
-with open("algorithms/cache/handbook_note.json", "r", encoding="utf8") as file:
-    CACHED_HANDBOOK_NOTE: dict[str, str] = json.load(file)
+with open("algorithms/cache/handbook_note.json", "r", encoding="utf8") as handbook_file:
+    CACHED_HANDBOOK_NOTE: dict[str, str] = json.load(handbook_file)

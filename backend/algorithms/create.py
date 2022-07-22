@@ -49,7 +49,7 @@ CACHED_EXCLUSIONS_PATH = "./algorithms/cache/exclusions.json"
 with open(CACHED_EXCLUSIONS_PATH, "r", encoding="utf8") as f:
     CACHED_EXCLUSIONS = json.load(f)
 
-def create_category(tokens) -> Tuple[Category, int]: # pylint: disable=too-many-return-statements
+def create_category(tokens) -> Tuple[Category | None, int]: # pylint: disable=too-many-return-statements
     """
     Given a list of tokens starting from after the connector keyword, create
     and return the category object matching the category, as well as the current index
@@ -135,7 +135,7 @@ def create_category(tokens) -> Tuple[Category, int]: # pylint: disable=too-many-
     )
 
 
-def create_condition(tokens, course=None) -> CompositeCondition:
+def create_condition(tokens, course=None) -> CompositeCondition | None:
     """
     The main wrapper for make_condition so we don't get 2 returns.
     Given the parsed logical tokens list (assuming starting and ending bracket),
@@ -145,7 +145,7 @@ def create_condition(tokens, course=None) -> CompositeCondition:
     return make_condition(tokens, True, course)[0]
 
 
-def make_condition(tokens, first=False, course=None) -> Tuple[CompositeCondition, int]:
+def make_condition(tokens, first=False, course=None) -> Tuple[CompositeCondition | None, int]:
     """
     To be called by create_condition
     Given the parsed logical tokens list, (assuming starting and ending bracket),
@@ -217,6 +217,7 @@ def make_condition(tokens, first=False, course=None) -> Tuple[CompositeCondition
         elif is_program_type(token):
             result.add_condition(ProgramTypeCondition(token))
         else:
+            cond: UOCCondition | WAMCondition | GradeCondition
             if is_uoc(token):
                 # Condition for UOC requirement
                 cond = UOCCondition(get_uoc(token))

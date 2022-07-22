@@ -140,12 +140,12 @@ def initialise_program(program: dict) -> dict:
     
     duration = re.search(r"(\d)", program["duration"])
     if duration:
-        duration = duration.group(1)
+        duration_var = duration.group(1)
 
     return {
         "title": program["title"],
         "code": program["code"],
-        "duration": int(duration),
+        "duration": int(duration_var),
         "UOC": int(program["UOC"]),
         "faculty": program["faculty"],
         "overview": program["overview"],
@@ -232,7 +232,7 @@ def find_program_name(program_data: dict, item: dict) -> str | None:
         for container in item["container"]:
             if program_name in container["title"]:
                 return program_name
-
+    return None
 
 def is_substring(needle: str, haystack: str) -> bool:
     """

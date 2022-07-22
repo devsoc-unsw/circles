@@ -13,7 +13,7 @@ import re
 
 from data.utility.data_helpers import read_data, write_data
 
-PREPROCESSED_CONDITIONS = {}
+PREPROCESSED_CONDITIONS: dict[str, dict[str, str]] = {}
 CODE_MAPPING = read_data("data/utility/programCodeMappings.json")["title_to_code"]
 
 # TODO: think of how to automate some of this
