@@ -49,7 +49,6 @@ const CourseBadge = ({ course }) => {
         <UOCBadge uoc={course.uoc} />
       </div>
     );
-    // return
   }
 
   // for future courses planned
