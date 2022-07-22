@@ -421,7 +421,7 @@ def add_course_data(program_data: dict, item: dict, req_type: str) -> None:
     """
     Adds core course data to the correct spot in program_data
     """
-    courses = {}
+    courses: dict[str, str] = {}
     add_course_tabs(program_data, courses, item)
 
     program_data["components"].setdefault(NON_SPEC_KEY, [])
@@ -464,7 +464,7 @@ def add_limit_rule(program_data: dict, item: dict) -> None:
     credits_to_complete = get_string_credits(program_data, item, notes)
     requirements = format_course_strings(requirements_str)
 
-    courses = {}
+    courses: dict[str, str] = {}
     for requirement in requirements:
         process_any_requirement(program_data, courses, requirement, item)
 
@@ -563,8 +563,7 @@ def strip_any_requirement_description(requirement: str) -> str:
     search_result = re.search(r"any (.+) course", requirement, flags = re.IGNORECASE)
     if search_result is None:
         search_result = re.search(r"any course offered by (.+)", requirement, flags = re.IGNORECASE)
-
-    return search_result.group(1)
+    return search_result.group(1) if search_result else ""
 
 
 def get_any_requirement_level(requirement: str) -> str:

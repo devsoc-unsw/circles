@@ -15,7 +15,7 @@ class User:
 
     def __init__(self, data = None):
         # Will load the data if any was given
-        self.courses: dict[str, Tuple[int, int]] = {}
+        self.courses: dict[str, Tuple[int, int | None]] = {}
         self.cur_courses: list[str, Tuple[int, int]] = []  # Courses in the current term
         self.program: str = None
         self.specialisations: dict[str, int] = {}
@@ -25,7 +25,7 @@ class User:
         if data is not None:
             self.load_json(data)
 
-    def add_courses(self, courses: dict[str, Tuple[int, int]]):
+    def add_courses(self, courses: dict[str, Tuple[int, int | None]]):
         """
         Given a dictionary of courses mapping course code to a (uoc, grade) tuple,
         adds the course to the user and updates the uoc/grade at the same time.
@@ -130,7 +130,7 @@ class User:
             if category.match_definition(course)
         )
 
-    def pop_course(self, course: str) -> Tuple[int, int]:
+    def pop_course(self, course: str) -> Tuple[int, int | None]:
         """ removes a course from done courses and returns its uoc and mark """
         
         return self.courses.pop(course)

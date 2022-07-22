@@ -97,6 +97,45 @@ class PlannerData(BaseModel):
     year: int
     plan: list[list[dict]]
     mostRecentPastTerm: dict
+    class Config:
+        schema_extra = {
+            "example": {
+                "program": "3707",
+                "specialisations": ["COMPA1"],
+                "year": 1,
+                "plan": [
+                    [
+                        {},
+                        {
+                            "COMP1511": [6, None],
+                            "MATH1141": [6, None],
+                            "MATH1081": [6, None],
+                        },
+                        {
+                            "COMP1521": [6, None],
+                            "COMP9444": [6, None],
+                        },
+                        {
+                            "COMP2521": [6, None],
+                            "MATH1241": [6, None],
+                            "COMP3331": [6, None],
+                        },
+                    ],
+                    [
+                        {},
+                        {
+                            "COMP1531": [6, None],
+                            "COMP6080": [6, None],
+                            "COMP3821": [6, None],
+                        },
+                    ],
+                ],
+                "mostRecentPastTerm": {
+                    "Y": 1,
+                    "T": 0,
+                },
+            }
+        }
 
 class CourseCodes(BaseModel):
     courses: list[str]

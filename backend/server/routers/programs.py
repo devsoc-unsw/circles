@@ -2,7 +2,7 @@
 API for fetching data about programs and specialisations
 """
 import re
-from typing import Dict, Optional
+from typing import Dict, Mapping, Optional
 
 from fastapi import APIRouter, HTTPException
 from contextlib import suppress
@@ -63,7 +63,7 @@ def get_programs() -> Dict[str, Dict[str, str]]:
         }
     }
 
-def convert_subgroup_object_to_courses_dict(object: str, description: str|list[str]) -> dict[str, str]:
+def convert_subgroup_object_to_courses_dict(object: str, description: str|list[str]) -> Mapping[str, str | list[str]]:
     """ Gets a subgroup object (format laid out in the processor) and fetches the exact courses its referring to """
     if " or " in object:
         return {c: description[index] for index, c in enumerate(object.split(" or "))}
@@ -78,7 +78,8 @@ def add_subgroup_container(structure: dict, type: str, container: dict, exceptio
     title = container.get("title")
     if container.get("type") == "gened":
         title = "General Education"
-    if container.get("type") is not None and "rule" in container.get("type"):
+    type = container.get("type") # type: ignore
+    if "rule" in type:
         type = "Rules"
 
     structure[type][title] = {}
@@ -130,7 +131,7 @@ def add_specialisation(structure: dict, code: str) -> None:
             status_code=400, detail=f"{code} of type {type} not found")
     structure[type] = {"name": spnResult["name"]}
     # NOTE: takes Core Courses are first
-    exceptions = []
+    exceptions: list[str] = []
     for cores in filter(lambda a: "Core" in a["title"], spnResult["curriculum"]):
         new = add_subgroup_container(structure, type, cores, exceptions)
         exceptions.extend(new)
@@ -208,7 +209,7 @@ def add_specialisation(structure: dict, code: str) -> None:
 def get_structure(
     programCode: str, spec: Optional[str] = None
 ):
-    structure = {}
+    structure: dict[str, dict] = {}
     if spec:
         specs = spec.split("+") if "+" in spec else [spec]
         for m in specs:

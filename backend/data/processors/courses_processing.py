@@ -23,7 +23,7 @@ KEEP_UNEDITED = [
     "exclusions"
 ]
 
-PROCESSED_COURSES = {}
+PROCESSED_COURSES: dict[str, dict] = {}
 
 
 def process_course_data(year = None):
@@ -89,10 +89,10 @@ def process_terms(processed: dict, formatted: dict) -> None:
 
     res = re.sub("Summer Term", "T0", res)
     res = re.sub("Summer Canberra", "SC", res)
-    res = res.split(",")
+    res_split = res.split(",")
     # Strip Remaining Spaces and discard empty strings
-    res = set(item.strip(" ") for item in res)
-    res.discard("")
+    res_set = set(item.strip(" ") for item in res_split)
+    res_set.discard("")
     processed["terms"] = sorted(list(res))
 
 

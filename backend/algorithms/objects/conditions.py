@@ -42,7 +42,7 @@ class Condition(ABC):
         """ checks if 'course' is able to meet any subtree's requirements"""
         pass
 
-    def beneficial(self, user: User,  course: dict[str, Tuple[int, int]]) -> bool:
+    def beneficial(self, user: User,  course: dict[str, Tuple[int, int | None]]) -> bool:
         """ checks if 'course' is able to meet any *more* subtrees' requirements """
         course_name = list(course.keys())[0]
         if self.validate(user)[0] or user.has_taken_course(course_name):
@@ -120,7 +120,7 @@ class CoreqCoursesCondition(Condition):
     def is_path_to(self, course: str) -> bool:
         return course in self.courses
 
-    def beneficial(self, user: User, course: dict[str, Tuple[int, int]]) -> bool:
+    def beneficial(self, user: User, course: dict[str, Tuple[int, int | None]]) -> bool:
         course_name = list(course.keys())[0]
         if self.validate(user)[0] or user.has_taken_course(course_name) or user.is_taking_course(course_name):
             return False
@@ -377,7 +377,7 @@ class CompositeCondition(Condition):
     def is_path_to(self, course: str) -> bool:
         return any(condition.is_path_to(course) for condition in self.conditions)
 
-    def beneficial(self, user: User, course: dict[str, Tuple[int, int]]) -> bool:
+    def beneficial(self, user: User, course: dict[str, Tuple[int, int | None]]) -> bool:
         course_name = list(course.keys())[0]
         if self.validate(user)[0] or user.has_taken_course(course_name):
             return False

@@ -9,11 +9,11 @@ from server.routers.model import ValidCoursesState, PlannerData, CONDITIONS, CAC
 
 def fix_planner_data(plannerData: PlannerData):
     """ fixes the planner data to add missing UOC info """
-    for year_index, year in enumerate(plannerData["plan"]):
+    for year_index, year in enumerate(plannerData.plan):
         for term_index, term in enumerate(year):
             for courseName, course in term.items():
                 if not isinstance(course, list):
-                    plannerData["plan"][year_index][term_index][courseName] = [get_course(courseName)["UOC"], course]
+                    plannerData.plan[year_index][term_index][courseName] = (get_course(courseName)["UOC"], course)
     return plannerData
 
 router = APIRouter(
@@ -27,47 +27,7 @@ def planner_index() -> str:
     return "Index of planner"
 
 @router.post("/validateTermPlanner/", response_model=ValidCoursesState)
-async def validate_term_planner(
-    plannerData: PlannerData = Body(
-        ...,
-        example={
-            "program": "3707",
-            "specialisations": ["COMPA1"],
-            "year": 1,
-            "plan": [
-                [
-                    {},
-                    {
-                        "COMP1511": [6, None],
-                        "MATH1141": [6, None],
-                        "MATH1081": [6, None],
-                    },
-                    {
-                        "COMP1521": [6, None],
-                        "COMP9444": [6, None],
-                    },
-                    {
-                        "COMP2521": [6, None],
-                        "MATH1241": [6, None],
-                        "COMP3331": [6, None],
-                    },
-                ],
-                [
-                    {},
-                    {
-                        "COMP1531": [6, None],
-                        "COMP6080": [6, None],
-                        "COMP3821": [6, None],
-                    },
-                ],
-            ],
-            "mostRecentPastTerm": {
-                "Y": 1,
-                "T": 0,
-            },
-        },
-    )
-):
+async def validate_term_planner(plannerData: PlannerData):
     """
     Will iteratively go through the term planner data whilst
     iteratively filling the user with courses.
@@ -77,7 +37,7 @@ async def validate_term_planner(
 
     Returns the state of all the courses on the term planner
     """
-    data = fix_planner_data(plannerData.dict())
+    data = fix_planner_data(plannerData)
     emptyUserData = {
         "program": data["program"],
         "specialisations": data["specialisations"],

@@ -30,6 +30,22 @@ def get_uoc(text: str) -> int:
     return int(uoc_str.group(1))
 
 
+def get_level_category(text: str) -> int:
+    """ will extract the L? and return as an int """
+    level_str = re.match(r"^L([0-9])$", text, flags=re.IGNORECASE)
+    if not level_str:
+        raise Exception("trying to fetch level category where it doesnt exist!")
+    return int(level_str.group(1))
+
+
+def get_course_category(text: str) -> str:
+    """ will extract the course category """
+    level_str = re.match(r"^([A-Z]{4})$", text, flags=re.IGNORECASE)
+    if not level_str:
+        raise Exception("trying to fetch course category where it doesnt exist!")
+    return level_str.group(1)
+
+
 def is_wam(text) -> bool:
     """ If the text is WAM """
     return bool(re.match(r"^\d+WAM$", text, flags=re.IGNORECASE))
