@@ -330,7 +330,7 @@ def convert_level(processed: str) -> str:
 
 def convert_program_type(processed: str) -> str:
     """Converts complex phrases into something of the form CODE# for specifying a program type"""
-    with open("algorithms/cache/cache_config.json") as f:
+    with open("algorithms/cache/cache_config.json", encoding="utf8") as f:
         cache: dict[str, list[str]] = json.loads(f.read())
         processed = reduce((lambda a,b: b if b != processed else a), (map_word_to_program_type(processed, string, hashlist[0]) for string, hashlist in cache.items()))
     return processed
