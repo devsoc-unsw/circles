@@ -2,7 +2,6 @@
 route for planner algorithms
 """
 from fastapi import APIRouter
-from fastapi.params import Body
 from algorithms.objects.user import User
 from server.routers.courses import get_course
 from server.routers.model import ValidCoursesState, PlannerData, CONDITIONS, CACHED_HANDBOOK_NOTE
@@ -39,8 +38,8 @@ async def validate_term_planner(plannerData: PlannerData):
     """
     data = fix_planner_data(plannerData)
     emptyUserData = {
-        "program": data["program"],
-        "specialisations": data["specialisations"],
+        "program": data.program,
+        "specialisations": data.specialisations,
         "year": 1,  # Start off as a first year
         "courses": {},  # Start off the user with an empty year
     }
@@ -48,10 +47,10 @@ async def validate_term_planner(plannerData: PlannerData):
     # State of courses on the term planner
     coursesState = {}  # TODO: possibly push to user class?
 
-    currYear = data["mostRecentPastTerm"]["Y"]
-    pastTerm = data["mostRecentPastTerm"]["T"]
+    currYear = data.mostRecentPastTerm["Y"]
+    pastTerm = data.mostRecentPastTerm["T"]
 
-    for yearIndex, year in enumerate(data["plan"]):
+    for yearIndex, year in enumerate(data.plan):
         # Go through all the years
         for termIndex, term in enumerate(year):
             user.add_current_courses(term)

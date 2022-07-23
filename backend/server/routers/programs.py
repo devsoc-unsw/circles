@@ -78,8 +78,7 @@ def add_subgroup_container(structure: dict, type: str, container: dict, exceptio
     title = container.get("title")
     if container.get("type") == "gened":
         title = "General Education"
-    type = container.get("type") # type: ignore
-    if "rule" in type:
+    if container.get("type") is not None and "rule" in container.get("type"): # type: ignore
         type = "Rules"
 
     structure[type][title] = {}

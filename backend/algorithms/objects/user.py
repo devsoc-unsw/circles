@@ -75,6 +75,7 @@ class User:
         return self.program == program
 
     def get_courses(self):
+        """ get all course codes """
         return list(self.courses.keys())
 
     def in_specialisation(self, specialisation: str):
@@ -132,5 +133,4 @@ class User:
 
     def pop_course(self, course: str) -> Tuple[int, int | None]:
         """ removes a course from done courses and returns its uoc and mark """
-        
         return self.courses.pop(course)

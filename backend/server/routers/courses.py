@@ -189,7 +189,7 @@ def search(userData: UserData, search_string: str) -> Dict[str, str]:
     weighted_results = sorted(top_results, reverse=True,
                               key=lambda course: weight_course(course,
                                                                search_string,
-                                                               structure, 
+                                                               structure,
                                                                majors,
                                                                minors)
                               )[:30]
@@ -236,7 +236,7 @@ def regex_search(search_string: str) -> Mapping[str, str]:
         },
     },
 )
-def get_all_unlocked(userData: UserData | User) -> Dict[str, Dict]:
+def get_all_unlocked(userData: UserData) -> Dict[str, Dict]:
     """
     Given the userData and a list of locked courses, returns the state of all
     the courses. Note that locked courses always return as True with no warnings
@@ -245,7 +245,7 @@ def get_all_unlocked(userData: UserData | User) -> Dict[str, Dict]:
     """
 
     coursesState = {}
-    user = User(fix_user_data(userData.dict())) if not isinstance(userData, User) else userData
+    user = User(fix_user_data(userData.dict()))
     for course, condition in CONDITIONS.items():
         result, warnings = condition.validate(user) if condition is not None else (True, [])
         if result:
@@ -425,21 +425,18 @@ def get_path_from(course: str) -> dict[str, str | list[str]]:
             })
 def courses_unlocked_when_taken(userData: UserData, courseToBeTaken: str) -> Dict[str, List[str]]:
     """ Returns all courses which are unlocked when given course is taken """
-    # define the user object with user data
-    user = User(fix_user_data(userData.dict()))
-
     ## initial state
-    courses_initially_unlocked: set = unlocked_set(get_all_unlocked(user)['courses_state'])
+    courses_initially_unlocked = unlocked_set(get_all_unlocked(userData)['courses_state'])
     ## add course to the user
-    user.add_courses({courseToBeTaken: (get_course(courseToBeTaken)['UOC'], None)})
+    userData.courses[courseToBeTaken] = [get_course(courseToBeTaken)['UOC'], None]
     ## final state
-    courses_now_unlocked: set = unlocked_set(get_all_unlocked(user)['courses_state'])
-    new_courses: set = courses_now_unlocked - courses_initially_unlocked
+    courses_now_unlocked = unlocked_set(get_all_unlocked(userData)['courses_state'])
+    new_courses = courses_now_unlocked - courses_initially_unlocked
 
     ## Differentiate direct and indirect unlocks
-    path_to: set = set(course_children(courseToBeTaken)["courses"])
-    direct_unlock: set  = new_courses.intersection(path_to)
-    indirect_unlock: set= new_courses - direct_unlock
+    path_to = set(course_children(courseToBeTaken)["courses"])
+    direct_unlock = new_courses.intersection(path_to)
+    indirect_unlock = new_courses - direct_unlock
 
     return {
         'direct_unlock': sorted(list(direct_unlock)),
