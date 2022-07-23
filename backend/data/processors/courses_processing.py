@@ -93,7 +93,7 @@ def process_terms(processed: dict, formatted: dict) -> None:
     # Strip Remaining Spaces and discard empty strings
     res_set = set(item.strip(" ") for item in res_split)
     res_set.discard("")
-    processed["terms"] = sorted(list(res))
+    processed["terms"] = sorted(list(res_set))
 
 
 def process_gen_ed(processed: dict, formatted: dict) -> None:
@@ -155,10 +155,12 @@ def process_exclusions(processed: dict, formatted: dict) -> None:
 
 
 def process_enrolment_rules(processed: dict, course: dict):
+    """ removed br shit """
     processed["raw_requirements"] = re.sub(
         "<br/><br/>", "", course["enrolment_rules"])
 
 def process_multi_term(processed: dict, formatted: dict) -> None:
+    """ checks if a course is multiterm """
     processed["is_multiterm"] = any(attribute["type"] == "multi-term_course" for attribute in formatted["attributes"]) and int(formatted["UOC"]) % 6 != 0
 
 if __name__ == "__main__":
