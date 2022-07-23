@@ -37,7 +37,6 @@ types-setuptools==63.2.1
 types-ujson==5.4.0
 types-urllib3==1.26.16
 typing_extensions==4.3.0
-unattended-upgrades==0.1
 urllib3==1.26.10
 uvicorn==0.18.2
 zipp==3.8.1
