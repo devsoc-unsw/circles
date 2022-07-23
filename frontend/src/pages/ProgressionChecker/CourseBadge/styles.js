@@ -17,4 +17,10 @@ const CourseBadgeIcon = styled.div`
   cursor: pointer;
 `;
 
-export default { CourseBadgeIcon };
+const UOCBadgeWrapper = styled.div`
+  position: absolute;
+  bottom: -5px;
+  right: -10px;
+`;
+
+export default { CourseBadgeIcon, UOCBadgeWrapper };

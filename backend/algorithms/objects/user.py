@@ -132,5 +132,7 @@ class User:
         )
 
     def pop_course(self, course: str) -> Tuple[int, int | None]:
-        """ removes a course from done courses and returns its uoc and mark """
+        """
+            removes a course from done courses and returns its uoc and mark
+        """
         return self.courses.pop(course)
