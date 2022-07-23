@@ -4,7 +4,7 @@ API for fetching data about programs and specialisations
 from contextlib import suppress
 import functools
 import re
-from typing import Any, Callable, Dict, List, Mapping, Optional, Tuple
+from typing import Any, Callable, Mapping, Optional, Tuple
 
 from fastapi import APIRouter, HTTPException
 
@@ -47,7 +47,7 @@ def programs_index() -> str:
         }
     },
 )
-def get_programs() -> Dict[str, Dict[str, str]]:
+def get_programs() -> dict[str, dict[str, str]]:
     """ Fetch all the programs the backend knows about in the format of { code: title } """
     # return {"programs": {q["code"]: q["title"] for q in programsCOL.find()}}
     # TODO On deployment, DELETE RETURN BELOW and replace with the return above
@@ -286,13 +286,13 @@ def courses_graph():
 #                       End of Routes                         #
 ###############################################################
 
-def course_list_from_structure(structure: Dict) -> List[str]:
+def course_list_from_structure(structure: dict) -> list[str]:
     """
         Given a formed structure, return the list of courses
         in that structure
     """
     courses = []
-    def __recursive_course_search(structure: Dict) -> None:
+    def __recursive_course_search(structure: dict) -> None:
         """
             Recursively search for courses in a structure. Add
             courses found to `courses` object in upper group.
@@ -311,7 +311,7 @@ def course_list_from_structure(structure: Dict) -> List[str]:
     __recursive_course_search(structure)
     return courses
 
-def add_specialisations(structure: Dict, spec: Optional[str]) -> Dict:
+def add_specialisations(structure: dict, spec: Optional[str]) -> dict:
     """
         Take a string of `+` joined specialisations and add
         them to the structure
@@ -322,7 +322,7 @@ def add_specialisations(structure: Dict, spec: Optional[str]) -> Dict:
             add_specialisation(structure, m)
     return structure
 
-def add_program_code_details(structure: Dict, programCode: str) -> Tuple[Dict, int]:
+def add_program_code_details(structure: dict, programCode: str) -> Tuple[dict, int]:
     """
     Add the details for given program code to the structure.
     Returns:
@@ -338,7 +338,7 @@ def add_program_code_details(structure: Dict, programCode: str) -> Tuple[Dict, i
     structure['Rules'] = {}
     return (structure, programsResult["UOC"])
 
-def add_geneds_to_structure(structure: dict, programCode: str) -> Dict:
+def add_geneds_to_structure(structure: dict, programCode: str) -> dict:
     """
         Insert geneds of the given programCode into the structure
         provided
