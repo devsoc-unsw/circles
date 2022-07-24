@@ -74,7 +74,7 @@ class CourseCondition(Condition):
         return self.course == course
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
-        return user.has_taken_course(self.course), []
+        return (True, []) if user.has_taken_course(self.course) else (False, [f"Required to take course {self.course}"])
 
     def __str__(self) -> str:
         return f"CourseCondition({self.course})"
@@ -102,17 +102,24 @@ class CoreqCoursesCondition(Condition):
         """ Returns True if the user is taking these courses in the same term """
         match self.logic:
             case Logic.AND:
-                return all(
+                met = all(
                     user.has_taken_course(course)
                     or user.is_taking_course(course)
                     for course in self.courses
-                ), []
+                )
+                warning = []
+                for course in self.courses:
+                    if not (user.has_taken_course(course)
+                    or user.is_taking_course(course)) :
+                        warning.append(f"Requires completion of: {course}")
+                return met, warning
             case Logic.OR:
-                return any(
+                met = any(
                     user.has_taken_course(course)
                     or user.is_taking_course(course)
                     for course in self.courses
-                ), []
+                )
+                return met, [f"Requires completion of one of the following courses: {course}" for course in self.courses]
 
         print("Conditions Error: validation was not of type AND or OR")
         return True, []
@@ -230,7 +237,7 @@ class GradeCondition(Condition):
             if user_grade is None:
                 return True, [self.get_warning()]
             if user_grade < self.grade:
-                return False, []
+                return False, [f"Your grade {user_grade} in course {course} does not meet the grade requirements (minimum {self.grade}) for this course"]
             return True, []
 
         if isinstance(self.category, CompositeCategory):
@@ -314,11 +321,13 @@ class CourseExclusionCondition(Condition):
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
         is_valid = not user.has_taken_course(self.exclusion)
-        return is_valid, ([] if is_valid else [f"{self.exclusion} is an exclusion course for this one"])
+        warnings = []
+        if not is_valid: warnings.append(f"Exclusion: {self.exclusion}")
+        return is_valid, warnings
 
     def is_path_to(self, course: str) -> bool:
         return False
-
+        
     def __str__(self) -> str:
         return f"Exclusion: {self.exclusion}"
 
@@ -333,7 +342,8 @@ class ProgramExclusionCondition(Condition):
         self.exclusion = exclusion
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
-        return not user.in_program(self.exclusion), []
+        excluded = not user.in_program(self.exclusion)
+        return (excluded, []) if excluded else excluded, ["This course cannot be taken in your program"]
 
     def is_path_to(self, course: str) -> bool:
         return False
@@ -368,9 +378,10 @@ class CompositeCondition(Condition):
         validations = [cond.validate(user) for cond in self.conditions]
         # unzips a zipped list - https://www.geeksforgeeks.org/python-unzip-a-list-of-tuples/
         unlocked, warnings = list(zip(*validations))
+        print(validations)
         satisfied = all(unlocked) if self.logic == Logic.AND else any(unlocked)
-
-        return satisfied, sum(warnings, [])  # warnings are flattened
+        print(satisfied)
+        return (satisfied, []) if satisfied else (satisfied, sum(warnings, []))  # warnings are flattened
 
     def is_path_to(self, course: str) -> bool:
         return any(condition.is_path_to(course) for condition in self.conditions)
