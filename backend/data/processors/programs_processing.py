@@ -93,7 +93,7 @@ def process_prg_data() -> None:
     double_degrees = [ val for val in data.values() if "/" in val["title"] ]
 
     # Process single degrees then double degrees
-    processed_data = {}
+    processed_data: dict[str, dict] = {}
     for formatted_data in single_degrees:
         add_program(processed_data, formatted_data)
     for formatted_data in double_degrees:
@@ -137,7 +137,10 @@ def initialise_program(program: dict) -> dict:
     """
     Initialises basic attributes of the specialisation.
     """
-    duration = re.search(r"(\d)", program["duration"]).group(1)
+    
+    duration = re.search(r"(\d)", program["duration"])
+    if duration:
+        duration = duration.group(1)
 
     return {
         "title": program["title"],

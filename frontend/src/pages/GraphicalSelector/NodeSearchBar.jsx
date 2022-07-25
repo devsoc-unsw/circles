@@ -9,13 +9,14 @@ const NodeSearchBar = ({ courses, onSelect }) => {
     setValue(null);
   };
 
+  // TODO: make this actually show course titles, or just convert to the BE search
   return (
     <Select
       showSearch
       placeholder="Search for a course..."
       filterOption
       size="large"
-      options={courses.map((v) => ({ label: `${v[0]}: ${v[1]}`, value: v[0] }))}
+      options={courses.map((v) => ({ label: `${v}`, value: v }))}
       value={value}
       // open attribute - close search dropdown when there is no input value or
       // when a course has been selected
