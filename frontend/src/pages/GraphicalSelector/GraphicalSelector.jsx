@@ -1,18 +1,24 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { LockOutlined, UnlockOutlined } from "@ant-design/icons";
 import G6 from "@antv/g6";
-import { Button } from "antd";
+import { Button, Switch, Tooltip } from "antd";
 import axios from "axios";
 import PageTemplate from "components/PageTemplate";
 import Spinner from "components/Spinner";
 import axiosRequest from "config/axios";
+import prepareUserPayload from "../CourseSelector/utils";
 import GRAPH_STYLE from "./config";
 import S from "./styles";
 import handleNodeData from "./utils";
 
 const GraphicalSelector = () => {
+  const dispatch = useDispatch();
   const { programCode, specs } = useSelector((state) => state.degree);
   const { courses: plannedCourses } = useSelector((state) => state.planner);
+  const { degree, planner } = useSelector((state) => state);
+
+  const { showLockedCourses } = useSelector((state) => state.settings);
 
   const [graph, setGraph] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -104,6 +110,26 @@ const GraphicalSelector = () => {
     edges.forEach((e) => e.hide());
   };
 
+  const toggleLockedNodes = () => {
+    // how to use getAllUnlocked
+    const nodes = graph.getNodes();
+    nodes.forEach((n) => n.hide());
+    // nodes.forEach((n) => n.show());
+  };
+
+  const getAllUnlocked = async () => {
+    try {
+      const res = await axios.post(
+        "/courses/getAllUnlocked/",
+        JSON.stringify(prepareUserPayload(degree, planner)),
+      );
+      dispatch(toggleLockedNodes(res.data.courses_state));
+    } catch (err) {
+      // eslint-disable-next-line
+      console.log(err);
+    }
+  };
+
   return (
     <PageTemplate>
       <S.Wrapper>
@@ -111,6 +137,15 @@ const GraphicalSelector = () => {
           {loading && <Spinner text="Loading graph..." />}
         </S.GraphPlaygroundWrapper>
         <S.SidebarWrapper>
+          <Tooltip placement="topLeft" title={showLockedCourses ? "Hide locked courses" : "Show locked courses"}>
+            <Switch
+              defaultChecked={showLockedCourses}
+              style={{ alignSelf: "flex-end" }}
+              onChange={() => dispatch(getAllUnlocked())}
+              checkedChildren={<LockOutlined />}
+              unCheckedChildren={<UnlockOutlined />}
+            />
+          </Tooltip>
           <Button onClick={handleShowGraph}>
             Show Graph
           </Button>
