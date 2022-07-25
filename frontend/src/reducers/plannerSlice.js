@@ -130,13 +130,13 @@ const plannerSlice = createSlice({
 
       // Add new instances of the course into the planner
       const instanceNum = srcTermList.indexOf(srcTerm);
-      const newTerms = getTermsList(
+      const newTerms = state.courses[course].isMultiterm ? getTermsList(
         destTerm,
         uoc,
         termsOffered,
         state.isSummerEnabled,
         instanceNum,
-      );
+      ) : [];
       newTerms.splice(instanceNum, 1);
       const firstTerm = state.years[destRow][destTerm];
       let dropIndex = destIndex;
