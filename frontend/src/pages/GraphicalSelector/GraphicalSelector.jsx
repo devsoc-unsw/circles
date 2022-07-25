@@ -112,7 +112,7 @@ const GraphicalSelector = () => {
   const isUnlockedEdge = (courses, node1, node2) => ((Object.values(courses).indexOf(node1) > -1) && (Object.values(courses).indexOf(node2) > -1));
   const isUnlockedNode = (courses, node) => (Object.values(courses).indexOf(node) > -1);
 
-  const showUnlockedNodes = (courses) => {
+  const showUnlockedGraphOnly = (courses) => {
     const nodes = graph.getNodes();
     const edges = graph.getEdges();
     nodes.forEach((n) => (isUnlockedNode(courses, Object.values(n)[0].id) ? n.show() : n.hide()));
@@ -120,7 +120,7 @@ const GraphicalSelector = () => {
   };
 
   const showNodes = (courses) => {
-    showUnlockedOnly ?  showUnlockedNodes(courses) : handleShowGraph();
+    showUnlockedOnly ? showUnlockedGraphOnly(courses) : handleShowGraph();
   };
 
   const getAllUnlocked = async () => {
