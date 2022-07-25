@@ -97,7 +97,7 @@ const OptionsHeader = ({ plannerRef }) => {
       <S.OptionSection>
         <S.ShowMarks>
           <S.TextShowMarks>
-            show/hide marks
+            Show Marks
           </S.TextShowMarks>
           <Switch
             defaultChecked={showMarks}

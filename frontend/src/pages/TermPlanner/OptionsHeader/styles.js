@@ -34,12 +34,12 @@ const OptionButton = styled.button`
 const ShowMarks = styled.div`
   display: flex;
   align-items: center;
+  gap: 5px;
 `;
 
 const TextShowMarks = styled.div`
-  margin: 5px;
   padding-bottom: 2px;
-  font-size: 16px;
+  font-size: 14px;
 `;
 
 export default { OptionsHeaderWrapper, OptionButton, OptionSection, ShowMarks, TextShowMarks };
