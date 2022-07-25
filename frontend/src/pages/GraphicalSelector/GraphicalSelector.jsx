@@ -18,11 +18,10 @@ const GraphicalSelector = () => {
   const { courses: plannedCourses } = useSelector((state) => state.planner);
   const { degree, planner } = useSelector((state) => state);
 
-  const { showLockedCourses } = useSelector((state) => state.settings);
-
   const [graph, setGraph] = useState(null);
   const [loading, setLoading] = useState(true);
   const [course, setCourse] = useState(null);
+  const [showLockedCourses, setShowLockedCourses] = useState(false);
 
   const ref = useRef(null);
 
@@ -110,11 +109,22 @@ const GraphicalSelector = () => {
     edges.forEach((e) => e.hide());
   };
 
-  const toggleLockedNodes = () => {
+  const checkNode = (courses, node) => {
+    console.log(Object.values(courses));
+    if (Object.values(courses).indexOf(node) > -1) {
+      return true;
+    }
+    return false;
+  };
+
+  const showNodes = (courses) => {
     // how to use getAllUnlocked
     const nodes = graph.getNodes();
-    nodes.forEach((n) => n.hide());
-    // nodes.forEach((n) => n.show());
+    // nodes.forEach((n) => console.log(typeof (Object.values(n)[0].id)));
+    // console.log(typeof (courses));
+
+    // nodes.forEach((n) => n.hide());
+    showLockedCourses ? nodes.forEach((n) => (checkNode(courses, Object.values(n)[0].id) ? n.show() : n.hide())) : nodes.forEach((n) => n.show());
   };
 
   const getAllUnlocked = async () => {
@@ -123,11 +133,16 @@ const GraphicalSelector = () => {
         "/courses/getAllUnlocked/",
         JSON.stringify(prepareUserPayload(degree, planner)),
       );
-      dispatch(toggleLockedNodes(res.data.courses_state));
+      showNodes(Object.keys(res.data.courses_state));
     } catch (err) {
       // eslint-disable-next-line
       console.log(err);
     }
+  };
+
+  const toggleShowLockedCouses = () => {
+    setShowLockedCourses(!showLockedCourses);
+    dispatch(() => getAllUnlocked());
   };
 
   return (
@@ -141,7 +156,7 @@ const GraphicalSelector = () => {
             <Switch
               defaultChecked={showLockedCourses}
               style={{ alignSelf: "flex-end" }}
-              onChange={() => dispatch(getAllUnlocked())}
+              onChange={() => dispatch(toggleShowLockedCouses())}
               checkedChildren={<LockOutlined />}
               unCheckedChildren={<UnlockOutlined />}
             />
