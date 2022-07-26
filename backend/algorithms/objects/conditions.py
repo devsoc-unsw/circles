@@ -378,9 +378,7 @@ class CompositeCondition(Condition):
         validations = [cond.validate(user) for cond in self.conditions]
         # unzips a zipped list - https://www.geeksforgeeks.org/python-unzip-a-list-of-tuples/
         unlocked, warnings = list(zip(*validations))
-        print(validations)
         satisfied = all(unlocked) if self.logic == Logic.AND else any(unlocked)
-        print(satisfied)
         return (satisfied, []) if satisfied else (satisfied, sum(warnings, []))  # warnings are flattened
 
     def is_path_to(self, course: str) -> bool:
