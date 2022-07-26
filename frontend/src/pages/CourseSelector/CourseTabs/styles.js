@@ -36,4 +36,6 @@ const TabsCloseAll = styled.div`
   margin: 0 15px;
 `;
 
-export default { CourseTabsWrapper, CourseTabsSection, TabsCloseAll, ShowAllCourses, TextShowCourses};
+export default {
+  CourseTabsWrapper, CourseTabsSection, TabsCloseAll, ShowAllCourses, TextShowCourses,
+};
