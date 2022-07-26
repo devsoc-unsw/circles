@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { LockOutlined, UnlockOutlined } from "@ant-design/icons";
-import G6 from "@antv/g6";
+import G6, { Algorithm } from "@antv/g6";
 import { Button, Switch, Tooltip } from "antd";
 import axios from "axios";
 import PageTemplate from "components/PageTemplate";
@@ -153,18 +153,27 @@ const GraphicalSelector = () => {
     edges.forEach((e) => e.hide());
   };
 
-  const isUnlockedEdge = (courses, node1, node2) => ((Object.values(courses).indexOf(node1) > -1) && (Object.values(courses).indexOf(node2) > -1));
+  const isUnlockedEdge = (courses, node1, node2) => (
+    (Object.values(courses).indexOf(node1) > -1) && (Object.values(courses).indexOf(node2) > -1)
+  );
   const isUnlockedNode = (courses, node) => (Object.values(courses).indexOf(node) > -1);
 
   const showUnlockedGraphOnly = (courses) => {
     const nodes = graph.getNodes();
     const edges = graph.getEdges();
     nodes.forEach((n) => (isUnlockedNode(courses, Object.values(n)[0].id) ? n.show() : n.hide()));
-    edges.forEach((e) => (isUnlockedEdge(courses, Object.values(e)[0].model.source,  Object.values(e)[0].model.target) ? e.show() : e.hide()));
+    edges.forEach((e) => (
+      isUnlockedEdge(courses, Object.values(e)[0].model.source, Object.values(e)[0].model.target)
+        ? e.show()
+        : e.hide()));
   };
 
   const showNodes = (courses) => {
-    showUnlockedOnly ? showUnlockedGraphOnly(courses) : handleShowGraph();
+    if (showUnlockedOnly) {
+      showUnlockedGraphOnly(courses);
+    } else {
+      handleShowGraph();
+    }
   };
 
   const getAllUnlocked = async () => {
