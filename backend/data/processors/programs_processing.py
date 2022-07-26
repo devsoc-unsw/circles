@@ -137,7 +137,6 @@ def initialise_program(program: dict) -> dict:
     """
     Initialises basic attributes of the specialisation.
     """
-    
     duration = re.search(r"(\d)", program["duration"])
     if duration:
         duration_var = duration.group(1)
@@ -644,8 +643,8 @@ def get_container_credits(item: dict) -> int:
 
     try:
         return int(item["credit_points_max"])
-    except ValueError:
-        raise ValueError("Couldn't find the number of credits for item")
+    except ValueError as exec:
+        raise ValueError("Couldn't find the number of credits for item") from exec
 
 
 @get_credits_decorator

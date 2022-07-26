@@ -2,7 +2,7 @@
 # pylint: disable=missing-class-docstring
 import json
 import pickle
-from typing import Optional
+from typing import Optional, TypedDict
 
 from algorithms.objects.conditions import CompositeCondition
 from pydantic import BaseModel
@@ -39,8 +39,15 @@ class CourseDetails(BaseModel):
     is_multiterm: bool
 
 
+class Container(TypedDict):
+    UOC: int
+    courses: dict[str, str | list[str]]
+    type: str
+
+StructureType = dict[str, dict[str, Container]]
+
 class Structure(BaseModel):  # this is a copout - we should avoid this
-    structure: dict
+    structure: StructureType
     uoc: int
 
 
