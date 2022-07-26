@@ -184,6 +184,7 @@ const GraphicalSelector = () => {
       );
       showNodes(Object.keys(res.data.courses_state));
     } catch (err) {
+      // eslint-disable-next-line
       console.log(err);
     }
   };
