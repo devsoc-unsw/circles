@@ -1,14 +1,15 @@
 # pylint: disable=missing-class-docstring
 # pylint: disable=missing-module-docstring
 from typing import TypedDict, Optional
+from typing_extensions import Literal, NotRequired
 
 
 class ProgramContainer(TypedDict):
-    type: str
-    courses: Optional[dict[str, str | list[str]]]
+    type: NotRequired[str]
+    courses: NotRequired[dict[str, str | list[str]]]
     title: str
-    credits_to_complete: Optional[int]
-    levels: Optional[list[int]]
+    credits_to_complete: NotRequired[int]
+    levels: NotRequired[list[int]]
     notes: str
 
 class SpecData(TypedDict):
@@ -35,3 +36,19 @@ class Program(TypedDict):
     Structure_summary: str
     components: Components
     processing_warnings: list[str]
+
+class CourseContainer(ProgramContainer):
+    core: bool
+
+class CourseConstraint(TypedDict):
+    title: str
+    description: str
+
+class Specialisation(TypedDict):
+    programs: list[str]
+    name: str
+    type: Literal["major"] | Literal["minor"] | Literal["honours"]
+    UOC: int
+    code: str
+    course_constraints: list[CourseConstraint]
+    curriculum: list[CourseContainer]

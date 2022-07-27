@@ -4,11 +4,11 @@ API for fetching data about programs and specialisations
 from contextlib import suppress
 import functools
 import re
-from typing import Any, Callable, Mapping, Optional, Tuple, cast
+from typing import Callable, Mapping, Optional, Tuple, cast
 
 from fastapi import APIRouter, HTTPException
 
-from data.processors.models import Program, ProgramContainer
+from data.processors.models import CourseContainer, Program, ProgramContainer, Specialisation
 from data.utility import data_helpers
 from server.database import programsCOL, specialisationsCOL
 from server.manual_fixes import apply_manual_fixes
@@ -73,7 +73,7 @@ def convert_subgroup_object_to_courses_dict(object: str, description: str|list[s
 
     return { object: description }
 
-def add_subgroup_container(structure: StructureType, type: str, container: ProgramContainer, exceptions: list[str]) -> list[str]:
+def add_subgroup_container(structure: StructureType, type: str, container: ProgramContainer | CourseContainer, exceptions: list[str]) -> list[str]:
     """ Returns the added courses """
     # TODO: further standardise non_spec_data to remove these lines:
     title = container["title"]
@@ -82,24 +82,18 @@ def add_subgroup_container(structure: StructureType, type: str, container: Progr
     conditional_type = container.get("type")
     if conditional_type is not None and "rule" in conditional_type:
         type = "Rules"
-    structure[type][title] = {
+    structure[type]["content"][title] = {
         "UOC": container.get("credits_to_complete") or 0,
-        "courses": {},
-        "type": container.get("type") or ""
+        "courses": functools.reduce(
+            lambda rest, current: rest | {
+                course: description for course, description
+                in convert_subgroup_object_to_courses_dict(current[0], current[1]).items()
+                if course not in exceptions
+            }, container["courses"].items(), {}
+        ),
+        "type": container.get("type", "")
     }
-    item = structure[type][title]
-
-    if container["courses"] is None:
-        return []
-
-    for object, description in container["courses"].items():
-        item["courses"] = item["courses"] | {
-            course: description for course, description
-            in convert_subgroup_object_to_courses_dict(object, description).items()
-            if course not in exceptions
-        }
-
-    return list(item["courses"].keys())
+    return list(structure[type]["content"][title]["courses"].keys())
 
 def add_geneds_courses(programCode: str, structure: dict, container: ProgramContainer) -> list[str]:
     """ Returns the added courses """
@@ -125,12 +119,12 @@ def add_specialisation(structure: StructureType, code: str) -> None:
     else:
         type = "Honours"
 
-    spnResult = specialisationsCOL.find_one({"code": code})
+    spnResult = cast(Specialisation | None, specialisationsCOL.find_one({"code": code}))
     type = f"{type} - {code}"
     if not spnResult:
         raise HTTPException(
             status_code=400, detail=f"{code} of type {type} not found")
-    structure[type] = {"name": spnResult["name"]}
+    structure[type] = {"name": spnResult["name"], "content": {}}
     # NOTE: takes Core Courses are first
     exceptions: list[str] = []
     for cores in filter(lambda a: "Core" in a["title"], spnResult["curriculum"]):
@@ -233,7 +227,7 @@ def get_structure_course_list(
         nesting or categorisation.
         TODO: Add a test for this.
     """
-    structure: dict[str, dict[str, Any]] = {}
+    structure: StructureType = {}
     structure = add_specialisations(structure, spec)
     structure, _ = add_program_code_details(structure, programCode)
     apply_manual_fixes(structure, programCode)
@@ -336,8 +330,8 @@ def add_program_code_details(structure: StructureType, programCode: str) -> Tupl
         raise HTTPException(
             status_code=400, detail="Program code was not found")
 
-    structure['General'] = {}
-    structure['Rules'] = {}
+    structure['General'] = {"name": "General Program Requirements", "content": {}}
+    structure['Rules'] = {"name": "General Program Rules", "content": {}}
     return (structure, programsResult["UOC"])
 
 def add_geneds_to_structure(structure: StructureType, programCode: str) -> StructureType:

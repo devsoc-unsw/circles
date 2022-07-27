@@ -109,12 +109,11 @@ const ProgressionChecker = () => {
     };
 
     // Example subgroup: Core Courses, Computing Electives
-    Object.keys(structure[group]).forEach((subgroup) => {
+    Object.keys(structure[group].content).forEach((subgroup) => {
       // Do not include if field is not an object i.e. 'name' field
-      if (typeof structure[group][subgroup] === "string") return;
 
-      storeUOC[group].total += structure[group][subgroup].UOC;
-      const subgroupStructure = structure[group][subgroup];
+      storeUOC[group].total += structure[group].content[subgroup].UOC;
+      const subgroupStructure = structure[group].content[subgroup];
 
       const isRule = subgroupStructure.type && subgroupStructure.type.includes("rule");
 
