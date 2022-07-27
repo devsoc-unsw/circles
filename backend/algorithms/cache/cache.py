@@ -10,6 +10,7 @@ import re
 from typing import Any
 
 from algorithms.cache.cache_config import (CACHE_CONFIG,
+                                           CACHED_EQUIVALENTS_FILE,
                                            CACHED_EXCLUSIONS_FILE,
                                            CACHED_WARNINGS_FILE,
                                            CONDITIONS_PROCESSED_FILE,
@@ -42,6 +43,16 @@ def cache_exclusions():
 
     write_data(cached_exclusions, CACHED_EXCLUSIONS_FILE)
 
+def cache_equivalents():
+    """ similar to exclusions, but just for equivilant stuff """
+    courses = read_data(COURSES_PROCESSED_FILE)
+
+    cached_exclusions = {}
+
+    for course, data in courses.items():
+        cached_exclusions[course] = data["equivalents"]
+
+    write_data(cached_exclusions, CACHED_EQUIVALENTS_FILE)
 
 def cache_handbook_note():
     """
