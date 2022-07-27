@@ -11,12 +11,17 @@ class Programs(BaseModel):
     programs: dict
 
 
+class SpecialisationsDict(TypedDict):
+    specs: dict[str, str]
+    note: str
+
+
 class Specialisations(BaseModel):
-    spec: dict
+    spec: dict[str, SpecialisationsDict]
 
 
 class ProgramCourses(BaseModel):
-    courses: dict
+    courses: dict[str, str]
 
 
 class CourseDetails(BaseModel):
@@ -84,8 +89,8 @@ class ValidCoursesState(BaseModel):
 
 
 class CoursesUnlockedWhenTaken (BaseModel):
-    direct_unlock: list
-    indirect_unlock: list
+    direct_unlock: list[str]
+    indirect_unlock: list[str]
 
 
 class CourseTypeState(BaseModel):
@@ -100,12 +105,17 @@ class CoursesTypeState(BaseModel):
     courses_state: dict[str, CourseTypeState] = {}
 
 
+class MostRecentPastTerm(TypedDict):
+    Y: int
+    T: int
+
+
 class PlannerData(BaseModel):
     program: str
     specialisations: list[str]
     year: int
-    plan: list[list[dict]]
-    mostRecentPastTerm: dict
+    plan: list[list[dict[str, list[int | None]]]]
+    mostRecentPastTerm: MostRecentPastTerm
     class Config:
         schema_extra = {
             "example": {
