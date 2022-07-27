@@ -46,7 +46,6 @@ const CourseSidebar = ({ structure, showLockedCourses }) => {
 
       // Example subgroup: Core Courses, Computing Electives
       Object.keys(structure[group].content).forEach((subgroup) => {
-
         const subgroupStructure = structure[group].content[subgroup];
         newCoursesUnits[group][subgroup] = {
           total: subgroupStructure.UOC,

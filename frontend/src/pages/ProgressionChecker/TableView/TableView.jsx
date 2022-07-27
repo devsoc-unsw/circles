@@ -16,7 +16,6 @@ const TableView = ({ isLoading, structure }) => {
       newTableLayout[group] = {};
       // Example subgroup: Core Courses, Computing Electives
       Object.keys(structure[group]).forEach((subgroup) => {
-
         const subgroupStructure = structure[group][subgroup];
 
         newTableLayout[group][subgroup] = [];
