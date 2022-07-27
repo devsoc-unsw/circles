@@ -146,59 +146,71 @@ def add_specialisation(structure: dict[str, StructureContainer], code: str) -> N
                 "application/json": {
                     "example": {
                         "Major - COMPS1 - Computer Science": {
-                            "Core Courses": {
-                                "UOC": 66,
-                                "courses": {
-                                    "COMP3821": "Extended Algorithms and Programming Techniques",
-                                    "COMP3121": "Algorithms and Programming Techniques",
+                            "name": "Database Systems",
+                            "content": {
+                                "Core Courses": {
+                                    "UOC": 66,
+                                    "courses": {
+                                        "COMP3821": "Extended Algorithms and Programming Techniques",
+                                        "COMP3121": "Algorithms and Programming Techniques",
+                                    },
                                 },
-                            },
-                            "Computing Electives": {
-                                "UOC": 30,
-                                "courses": {
-                                    "ENGG4600": "Engineering Vertically Integrated Project",
-                                    "ENGG2600": "Engineering Vertically Integrated Project",
+                                "Computing Electives": {
+                                    "UOC": 30,
+                                    "courses": {
+                                        "ENGG4600": "Engineering Vertically Integrated Project",
+                                        "ENGG2600": "Engineering Vertically Integrated Project",
+                                    },
                                 },
-                            },
+                            }
                         },
                         "Major - FINSA1 - Finance": {
-                            "Core Courses": {
-                                "UOC": 66,
-                                "courses": {
-                                    "FINS3121": "Financial Accounting",
+                            "name": "Finance",
+                            "content": {
+                                "Core Courses": {
+                                    "UOC": 66,
+                                    "courses": {
+                                        "FINS3121": "Financial Accounting",
+                                    },
                                 },
-                            },
+                            }
                         },
-                        "Minor": {
-                            "Prescribed Electives": {
-                                "UOC": 12,
-                                "courses": {
-                                    "FINS3616": "International Business Finance",
-                                    "FINS3634": "Credit Analysis and Lending",
+                        "Minor - FINSA2 - Finance": {
+                            "name": "Finance",
+                            "content": {
+                                "Prescribed Electives": {
+                                    "UOC": 12,
+                                    "courses": {
+                                        "FINS3616": "International Business Finance",
+                                        "FINS3634": "Credit Analysis and Lending",
+                                    },
                                 },
-                            },
-                            "Core Courses": {
-                                "UOC": 18,
-                                "courses": {
-                                    "FINS2613": "Intermediate Business Finance",
-                                    "COMM1180": "Value Creation",
-                                    "FINS1612": "Capital Markets and Institutions",
+                                "Core Courses": {
+                                    "UOC": 18,
+                                    "courses": {
+                                        "FINS2613": "Intermediate Business Finance",
+                                        "COMM1180": "Value Creation",
+                                        "FINS1612": "Capital Markets and Institutions",
+                                    },
                                 },
-                            },
+                            }
                         },
                         "General": {
-                            "GeneralEducation": {"UOC": 12},
-                            "FlexEducation": {"UOC": 6},
-                            "BusinessCoreCourses": {
-                                "UOC": 6,
-                                "courses": {"BUSI9999": "How To Business"},
-                            },
+                            "name": "General Program Requirements",
+                            "content": {
+                                "GeneralEducation": {"UOC": 12},
+                                "FlexEducation": {"UOC": 6},
+                                "BusinessCoreCourses": {
+                                    "UOC": 6,
+                                    "courses": {"BUSI9999": "How To Business"},
+                                },
+                            }
                         },
                     }
                 }
-            },
-        },
-    },
+            }
+        }
+    }
 )
 @router.get("/getStructure/{programCode}", response_model=Structure)
 def get_structure(
