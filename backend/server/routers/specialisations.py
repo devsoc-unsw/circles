@@ -24,6 +24,7 @@ def specialisations_index():
     }
 )
 def get_specialisation_types(programCode):
+    """ get the possible types of a program """
     result = programsCOL.find_one({"code": programCode})
 
     if not result:
@@ -65,7 +66,7 @@ def get_specialisation_types(programCode):
         },
     },
 )
-def get_specialisations(programCode: str, typeSpec: str):
+def get_specialisations(programCode: str, typeSpec: Literal["majors"] | Literal["minors"] | Literal["honours"]):
     """ Fetch all the majors known to the backend for a specific program """
     result = cast(Optional[Program], programsCOL.find_one({"code": programCode}))
 
@@ -73,18 +74,14 @@ def get_specialisations(programCode: str, typeSpec: str):
         raise HTTPException(
             status_code=400, detail="Program code was not found")
 
-    if typeSpec not in ['honours', 'minors', 'majors']:
-        raise HTTPException(
-            status_code=400, detail="type is invalid. Valid ones are: 'honours', 'minors', 'majors'")
-    castedSpec = cast(Literal["majors"] | Literal["minors"] | Literal["honours"], typeSpec)
-    specRes = result["components"]["spec_data"].get(castedSpec)
+    specRes = result["components"]["spec_data"].get(typeSpec)
     if not specRes:
         raise HTTPException(
-            status_code=404, detail=f"this program has no {castedSpec}")
+            status_code=404, detail=f"this program has no {typeSpec}")
 
     for item in specRes.values():
         for code in [*item["specs"].keys()]:
             if not specialisationsCOL.find_one({"code": code}):
                 del item["specs"][code]
 
-    return {"spec": result["components"]["spec_data"][castedSpec]}
+    return {"spec": result["components"]["spec_data"][typeSpec]}
