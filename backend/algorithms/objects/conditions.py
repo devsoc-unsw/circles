@@ -54,11 +54,6 @@ class Condition(ABC):
         return answer
 
     @abstractmethod
-    def to_json(self, id: str) -> str:
-        """ turns condition to dict for json conversion"""
-        pass
-
-    @abstractmethod
     def __str__(self) -> str:
         return super().__str__()
 
@@ -81,18 +76,10 @@ class CourseCondition(Condition):
     def validate(self, user: User) -> tuple[bool, list[str]]:
         return user.has_taken_course(self.course), []
 
-    def to_json(self, id: str) -> str:
-        return json.dumps({
-            'id': id,
-            'children': [self.__str__()]
-        })
-
     def __str__(self) -> str:
         return json.dumps({
             'children': [f"CourseCondition({self.course})"]
         })
-        # return f"CourseCondition({self.course})"
-        # return self.course
 
 
 class CoreqCoursesCondition(Condition):
@@ -141,14 +128,6 @@ class CoreqCoursesCondition(Condition):
             return False
         return any(c in course.keys() for c in self.courses)
 
-    def to_json(self, id: str) -> str:
-        logic = "&&" if self.logic == Logic.AND else "||"
-        return json.dumps({
-            'id': id,
-            'logic': logic,
-            'children': [str(course) for course in self.courses]
-        })
-
     def __str__(self, id='root') -> str:
         logic = "&&" if self.logic == Logic.AND else "||"
         return json.dumps({
@@ -183,20 +162,11 @@ class UOCCondition(Condition):
     def validate(self, user: User) -> tuple[bool, list[str]]:
         return user.uoc(self.category) >= self.uoc, []
 
-    def to_json(self, id: str) -> str:
-        return json.dumps({
-            'id': id,
-            'UOC': self.uoc,
-            'category': self.category
-        })
-
     def __str__(self) -> str:
         return json.dumps({
-            'id': id,
             'UOC': self.uoc,
-            'category': self.category
+            'category': str(self.category)
         })
-        # return f"{self.uoc}UOC in {self.category}"
 
 
 class WAMCondition(Condition):
@@ -234,20 +204,11 @@ class WAMCondition(Condition):
             return None
         return f"Requires {self.wam} WAM in {self.category}. Your WAM in {self.category} is currently {applicable_wam:.3f}"
 
-    def to_json(self, id: str) -> str:
-        return json.dumps({
-            'id': id,
-            'wam': self.wam,
-            'category': self.category
-        })
-
     def __str__(self) -> str:
         return json.dumps({
-            'id': id,
             'wam': self.wam,
-            'category': self.category
+            'category': str(self.category)
         })
-        # return f"{self.wam}WAM in {self.category}"
 
 
 class GradeCondition(Condition):
@@ -300,20 +261,11 @@ class GradeCondition(Condition):
         """ Return warning string for grade condition error """
         return f"Requires {self.grade} mark in {self.category}. Your mark has not been recorded"
 
-    def to_json(self, id: str) -> str:
-        return json.dumps({
-            'id': id,
-            'grade': self.grade,
-            'category': self.category
-        })
-
     def __str__(self) -> str:
         return json.dumps({
-            'id': id,
             'grade': self.grade,
-            'category': self.category
+            'category': str(self.category)
         })
-        # return f"{self.grade}GRADE in {self.category}"
 
 
 class ProgramCondition(Condition):
@@ -329,7 +281,9 @@ class ProgramCondition(Condition):
         return user.in_program(self.program), []
 
     def __str__(self) -> str:
-        return f"Program {self.program}"
+        return json.dumps({
+            'program': self.program,
+        })
 
 
 class ProgramTypeCondition(Condition):
@@ -350,7 +304,9 @@ class ProgramTypeCondition(Condition):
         return user.program in CACHED_PROGRAM_MAPPINGS[self.programType], []
 
     def __str__(self) -> str:
-        return f"ProgramTypeCondition: {self.programType}"
+        return json.dumps({
+            'programType': self.programType,
+        })
 
 
 class SpecialisationCondition(Condition):
@@ -366,7 +322,9 @@ class SpecialisationCondition(Condition):
         return False
 
     def __str__(self) -> str:
-        return f"SpecialisationCondition: {self.specialisation}"
+        return json.dumps({
+            'Specialisation': self.specialisation,
+        })
 
 
 class CourseExclusionCondition(Condition):
@@ -383,7 +341,9 @@ class CourseExclusionCondition(Condition):
         return False
 
     def __str__(self) -> str:
-        return f"Exclusion: {self.exclusion}"
+        return json.dumps({
+            'exclusion': self.exclusion,
+        })
 
 
 class ProgramExclusionCondition(Condition):
@@ -402,7 +362,9 @@ class ProgramExclusionCondition(Condition):
         return False
 
     def __str__(self) -> str:
-        return f"ProgramExclusionCondition: {self.exclusion}"
+        return json.dumps({
+            'programExclusion': self.exclusion,
+        })
 
 
 class CompositeCondition(Condition):
@@ -444,81 +406,15 @@ class CompositeCondition(Condition):
             return False
         return any(condition.beneficial(user, course) for condition in self.conditions)
 
-    def __repr__(self) -> str:
-        return self.__str__()
-
-
-    def to_json(self, id='root') -> str:
-        d = {}
-        d['logic'] = "&&" if self.logic == Logic.AND else "||"
-        # d['id'] = f'subtree.{id}' 
-        if id == 'root':
-            d['id'] = id
-        d['children'] = []
-        for index, cond in enumerate(self.conditions):
-            child_index = f'subtree.{index}' if id == 'root' else f'{id}.{index}'
-            d['children'].append(json.loads(cond.to_json(child_index)))
-        return json.dumps(d)
-
-
-
-
-
     def __str__(self, id='root') -> str:
-        d = {}
-        d['logic'] = "&&" if self.logic == Logic.AND else "||"
-        # d['id'] = f'subtree.{id}' 
-        # if id == 'root':
-        #     d['id'] = id
-        d['id'] = id
-        d['children'] = []
+        data = {}
+        data['logic'] = "&&" if self.logic == Logic.AND else "||"
+        data['id'] = id
+        data['children'] = []
         for index, cond in enumerate(self.conditions):
             child_index = f'subtree.{index}' if id == 'root' else f'{id}.{index}'
             if isinstance(cond, CompositeCondition) or isinstance(cond, CoreqCoursesCondition):
-                d['children'].append(json.loads(cond.__str__(child_index)))
+                data['children'].append(json.loads(cond.__str__(child_index)))
             else:
-                d['children'].append(json.loads(str(cond)))
-        return json.dumps(d)
-        # d = {}
-        # d['logic'] = "&&" if self.logic == Logic.AND else "||"
-        # # d['id'] = f'subtree.{id}' 
-        # if id == root:
-        #     d['id'] = id
-        # d['children'] = []
-        # for index, cond in enumerate(self.conditions):
-        #     child_index = f'subtree.{index}' if id == 'root' else f'{id}.{index}'
-        #     d['children'].append(cond.to_json(child_index))
-        # return d
-        # d = {}
-        # d['logic'] = "&&" if self.logic == Logic.AND else "||"
-        # d['id'] = f'subtree.{id}' 
-        # d['children'] = []
-        # for index, cond in enumerate(self.conditions):
-        #     child_index = f'subtree.{index}' if id == 'root' else f'{id}.{index}'
-
-        #     child_str = cond.__str__(child_index) if isinstance(cond, CompositeCondition) else str(cond)
-        #     d['children'].append(json.loads(child_str))
-        # return json.dumps(d)
-
-        # d = {}
-        # d['logic'] = "&&" if self.logic == Logic.AND else "||"
-        # d['id'] = f'subtree.{id}' 
-        # # first = self.conditions[0]
-        # # print(str(first))
-        # d['children'] = []
-        # # d['children'] = [str(cond) for cond in self.conditions]
-        # for index, cond in enumerate(self.conditions):
-        #     # s = str(cond, id=)
-        #     if isinstance(cond, CompositeCondition):
-        #         s = cond.__str__(id=index)
-        #         j = json.loads(s)
-        #         d['children'].append(json.dumps(s))
-        #     else:
-        #         d["children"].append(str(cond))
-        # return json.dumps(d)
-        
-
-        
-        # logic_op = "&&" if self.logic == Logic.AND else "||"
-        # return f"({f' {logic_op} '.join(str(cond) for cond in self.conditions)})"
-
+                data['children'].append(json.loads(str(cond)))
+        return json.dumps(data)
