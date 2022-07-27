@@ -2,7 +2,7 @@
 # pylint: disable=missing-class-docstring
 import json
 import pickle
-from typing import Optional, TypedDict
+from typing import Literal, Optional, TypedDict
 
 from algorithms.objects.conditions import CompositeCondition
 from pydantic import BaseModel
@@ -33,11 +33,11 @@ class CourseDetails(BaseModel):
     study_level: str
     school: Optional[str]
     campus: str
-    equivalents: dict
+    equivalents: dict[str, str]
     raw_requirements: str
-    exclusions: dict
+    exclusions: dict[str, Literal[1]]
     handbook_note: str
-    terms: list
+    terms: list[str]
     gen_ed: int
     is_legacy: bool
     is_accurate: bool
@@ -97,7 +97,7 @@ class CourseTypeState(BaseModel):
     is_accurate: bool
     unlocked: bool
     handbook_note: str
-    warnings: list
+    warnings: list[str]
     course_type: list[str]
 
 
