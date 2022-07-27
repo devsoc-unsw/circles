@@ -110,7 +110,6 @@ const ProgressionChecker = () => {
 
     // Example subgroup: Core Courses, Computing Electives
     Object.keys(structure[group].content).forEach((subgroup) => {
-
       storeUOC[group].total += structure[group].content[subgroup].UOC;
       const subgroupStructure = structure[group].content[subgroup];
 
