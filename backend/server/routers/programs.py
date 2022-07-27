@@ -325,7 +325,7 @@ def add_program_code_details(structure: dict[str, StructureContainer], programCo
         - structure
         - uoc (int) associated with the program code.
     """
-    programsResult = programsCOL.find_one({"code": programCode})
+    programsResult = cast(Optional[Program], programsCOL.find_one({"code": programCode}))
     if not programsResult:
         raise HTTPException(
             status_code=400, detail="Program code was not found")

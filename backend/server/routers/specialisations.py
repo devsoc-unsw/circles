@@ -1,6 +1,9 @@
+""" Specialisations Route """
+from typing import Literal, Optional, cast
 from fastapi import APIRouter, HTTPException
 from server.database import programsCOL, specialisationsCOL
 from server.routers.model import SpecialisationTypes, Specialisations
+from data.processors.models import Program
 
 router = APIRouter(
     prefix="/specialisations",
@@ -64,7 +67,7 @@ def get_specialisation_types(programCode):
 )
 def get_specialisations(programCode: str, typeSpec: str):
     """ Fetch all the majors known to the backend for a specific program """
-    result = programsCOL.find_one({"code": programCode})
+    result = cast(Optional[Program], programsCOL.find_one({"code": programCode}))
 
     if not result:
         raise HTTPException(
@@ -73,14 +76,15 @@ def get_specialisations(programCode: str, typeSpec: str):
     if typeSpec not in ['honours', 'minors', 'majors']:
         raise HTTPException(
             status_code=400, detail="type is invalid. Valid ones are: 'honours', 'minors', 'majors'")
-
-    if not result["components"]["spec_data"].get(typeSpec):
+    castedSpec = cast(Literal["majors"] | Literal["minors"] | Literal["honours"], typeSpec)
+    specRes = result["components"]["spec_data"].get(castedSpec)
+    if not specRes:
         raise HTTPException(
-            status_code=404, detail=f"this program has no {typeSpec}")
+            status_code=404, detail=f"this program has no {castedSpec}")
 
-    for item in result["components"]["spec_data"][typeSpec].values():
+    for item in specRes.values():
         for code in [*item["specs"].keys()]:
             if not specialisationsCOL.find_one({"code": code}):
                 del item["specs"][code]
 
-    return {"spec": result["components"]["spec_data"][typeSpec]}
+    return {"spec": result["components"]["spec_data"][castedSpec]}

@@ -113,7 +113,6 @@ def get_course(courseCode: str) -> Dict:
     - if not found, check the archives
     """
     result = coursesCOL.find_one({"code": courseCode})
-
     if not result:
         for year in sorted(ARCHIVED_YEARS, reverse=True):
             result = archivesDB[str(year)].find_one({"code": courseCode})
@@ -505,4 +504,3 @@ def weight_course(course: tuple[str, str], search_term: str, structure: dict,
             break
 
     return weight
-
