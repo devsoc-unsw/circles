@@ -50,8 +50,7 @@ const CourseSidebar = ({ structure, showLockedCourses }) => {
         if (typeof structure[group][subgroup] === "string") return;
 
         const subgroupStructure = structure[group].content[subgroup];
-
-        newCoursesUnits[group].content[subgroup] = {
+        newCoursesUnits[group][subgroup] = {
           total: subgroupStructure.UOC,
           curr: 0,
         };

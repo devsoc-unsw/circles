@@ -3,7 +3,6 @@
 import json
 import pickle
 from typing import Optional, TypedDict
-from typing_extensions import NotRequired
 
 from algorithms.objects.conditions import CompositeCondition
 from pydantic import BaseModel
@@ -41,18 +40,16 @@ class CourseDetails(BaseModel):
 
 
 class ContainerContent(TypedDict):
-    UOC: NotRequired[int]
-    courses: NotRequired[dict[str, str | list[str]]]
-    type: NotRequired[str]
+    UOC: int
+    courses: dict[str, str | list[str]]
+    type: str
 
-class Container(TypedDict):
+class StructureContainer(TypedDict):
     name: str
     content: dict[str, ContainerContent]
 
-StructureType = dict[str, Container]
-
-class Structure(BaseModel):  # this is a copout - we should avoid this
-    structure: StructureType
+class Structure(BaseModel):
+    structure: dict[str, StructureContainer]
     uoc: int
 
 

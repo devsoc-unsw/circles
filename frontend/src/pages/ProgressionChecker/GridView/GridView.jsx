@@ -20,11 +20,8 @@ const GridView = ({ isLoading, structure, concise }) => {
       newGridLayout[group] = {};
 
       // Example subgroup: Core Courses, Computing Electives
-      Object.keys(structure[group]).forEach((subgroup) => {
-        // Do not include if field is not an object i.e. 'name' field
-        if (typeof structure[group][subgroup] === "string") return;
-
-        const subgroupStructure = structure[group][subgroup];
+      Object.keys(structure[group].content).forEach((subgroup) => {
+        const subgroupStructure = structure[group].content[subgroup];
 
         newGridLayout[group][subgroup] = {
           // section types with gened or rule/elective substring can have their
@@ -98,14 +95,14 @@ const GridView = ({ isLoading, structure, concise }) => {
                 ([subgroup, subgroupEntry]) => (
                   (concise === true) ? (
                     <GridViewConciseSubgroup
-                      uoc={structure[group][subgroup].UOC}
+                      uoc={structure[group].content[subgroup].UOC}
                       subgroupKey={subgroup}
                       subgroupEntries={subgroupEntry.courses}
                       hasLotsOfCourses={subgroupEntry.hasLotsOfCourses}
                     />
                   ) : (
                     <GridViewSubgroup
-                      uoc={structure[group][subgroup].UOC}
+                      uoc={structure[group].content[subgroup].UOC}
                       subgroupKey={subgroup}
                       subgroupEntries={subgroupEntry.courses}
                       hasLotsOfCourses={subgroupEntry.hasLotsOfCourses}

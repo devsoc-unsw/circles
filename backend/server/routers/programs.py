@@ -13,7 +13,7 @@ from data.utility import data_helpers
 from server.database import programsCOL, specialisationsCOL
 from server.manual_fixes import apply_manual_fixes
 from server.routers.courses import regex_search
-from server.routers.model import CourseCodes, Courses, Programs, StructureType, Structure
+from server.routers.model import CourseCodes, Courses, Programs, StructureContainer, Structure
 
 router = APIRouter(
     prefix="/programs",
@@ -73,7 +73,7 @@ def convert_subgroup_object_to_courses_dict(object: str, description: str|list[s
 
     return { object: description }
 
-def add_subgroup_container(structure: StructureType, type: str, container: ProgramContainer | CourseContainer, exceptions: list[str]) -> list[str]:
+def add_subgroup_container(structure: dict[str, StructureContainer], type: str, container: ProgramContainer | CourseContainer, exceptions: list[str]) -> list[str]:
     """ Returns the added courses """
     # TODO: further standardise non_spec_data to remove these lines:
     title = container["title"]
@@ -109,7 +109,7 @@ def add_geneds_courses(programCode: str, structure: dict, container: ProgramCont
     return list(item["courses"].keys())
 
 
-def add_specialisation(structure: StructureType, code: str) -> None:
+def add_specialisation(structure: dict[str, StructureContainer], code: str) -> None:
     """ Add a specialisation to the structure of a getStructure call """
     # in a specialisation, the first container takes priority - no duplicates may exist
     if code.endswith("1"):
@@ -206,7 +206,7 @@ def get_structure(
 ):
     """ get the structure of a course given specs and program code """
     # TODO: This ugly, use compose instead
-    structure: StructureType = {}
+    structure: dict[str, StructureContainer] = {}
     structure = add_specialisations(structure, spec)
     structure, uoc = add_program_code_details(structure, programCode)
     structure = add_geneds_to_structure(structure, programCode)
@@ -227,7 +227,7 @@ def get_structure_course_list(
         nesting or categorisation.
         TODO: Add a test for this.
     """
-    structure: StructureType = {}
+    structure: dict[str, StructureContainer] = {}
     structure = add_specialisations(structure, spec)
     structure, _ = add_program_code_details(structure, programCode)
     apply_manual_fixes(structure, programCode)
@@ -307,7 +307,7 @@ def course_list_from_structure(structure: dict) -> list[str]:
     __recursive_course_search(structure)
     return courses
 
-def add_specialisations(structure: StructureType, spec: Optional[str]) -> StructureType:
+def add_specialisations(structure: dict[str, StructureContainer], spec: Optional[str]) -> dict[str, StructureContainer]:
     """
         Take a string of `+` joined specialisations and add
         them to the structure
@@ -318,7 +318,7 @@ def add_specialisations(structure: StructureType, spec: Optional[str]) -> Struct
             add_specialisation(structure, m)
     return structure
 
-def add_program_code_details(structure: StructureType, programCode: str) -> Tuple[StructureType, int]:
+def add_program_code_details(structure: dict[str, StructureContainer], programCode: str) -> Tuple[dict[str, StructureContainer], int]:
     """
     Add the details for given program code to the structure.
     Returns:
@@ -334,7 +334,7 @@ def add_program_code_details(structure: StructureType, programCode: str) -> Tupl
     structure['Rules'] = {"name": "General Program Rules", "content": {}}
     return (structure, programsResult["UOC"])
 
-def add_geneds_to_structure(structure: StructureType, programCode: str) -> StructureType:
+def add_geneds_to_structure(structure: dict[str, StructureContainer], programCode: str) -> dict[str, StructureContainer]:
     """
         Insert geneds of the given programCode into the structure
         provided
