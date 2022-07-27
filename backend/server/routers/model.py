@@ -11,13 +11,8 @@ class Programs(BaseModel):
     programs: dict
 
 
-class SpecialisationsDict(TypedDict):
-    specs: dict[str, str]
-    note: str
-
-
 class Specialisations(BaseModel):
-    spec: dict[str, SpecialisationsDict]
+    spec: dict[str, dict] # cant do more specific because NotRequired doesnt work
 
 
 class ProgramCourses(BaseModel):
@@ -114,7 +109,7 @@ class PlannerData(BaseModel):
     program: str
     specialisations: list[str]
     year: int
-    plan: list[list[dict[str, list[int | None]]]]
+    plan: list[list[dict[str,  None | list[int | None]]]]
     mostRecentPastTerm: MostRecentPastTerm
     class Config:
         schema_extra = {

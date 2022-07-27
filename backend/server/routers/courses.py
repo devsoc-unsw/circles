@@ -1,6 +1,7 @@
 """
 APIs for the /courses/ route.
 """
+from contextlib import suppress
 import re
 from typing import Dict, List, Mapping, Set, Tuple
 
@@ -131,7 +132,8 @@ def get_course(courseCode: str) -> Dict:
     result['is_accurate'] = CONDITIONS.get(courseCode) is not None
     result['handbook_note'] = CACHED_HANDBOOK_NOTE.get(courseCode, "")
     del result["_id"]
-
+    with suppress(KeyError):
+        del result["exclusions"]["leftover_plaintext"]
     return result
 
 
