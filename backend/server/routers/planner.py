@@ -12,7 +12,7 @@ def fix_planner_data(plannerData: PlannerData):
         for term_index, term in enumerate(year):
             for courseName, course in term.items():
                 if not isinstance(course, list):
-                    plannerData.plan[year_index][term_index][courseName] = (get_course(courseName)["UOC"], course)
+                    plannerData.plan[year_index][term_index][courseName] = [get_course(courseName)["UOC"], course]
     return plannerData
 
 router = APIRouter(
