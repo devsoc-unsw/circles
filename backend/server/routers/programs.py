@@ -11,7 +11,7 @@ from fastapi import APIRouter, HTTPException
 from data.utility import data_helpers
 from server.database import programsCOL, specialisationsCOL
 from server.manual_fixes import apply_manual_fixes
-from server.routers.courses import regex_search
+from server.routers.courses import get_path_from, regex_search
 from server.routers.model import CourseCodes, Courses, Programs, Structure
 
 router = APIRouter(
@@ -268,13 +268,22 @@ def getGenEds(programCode: str):
     all_geneds = data_helpers.read_data("data/scrapers/genedPureRaw.json")
     return {"courses" : all_geneds[programCode]}
 
-@router.get("/graphtest/{programCode}/{spec}", response_model=CourseCodes)
-@router.get("/graphtest/{programCode}", response_model=CourseCodes)
+@router.get("/graphtest/{programCode}/{spec}")
+@router.get("/graphtest/{programCode}")
 def graph_test(
         programCode: str, spec: Optional[str]=None
     ):
+    """
+        - [x] Get courselist
+        - [x] path_from from the list
+        - [ ] edgelist to graph
+    """
     course_list = get_structure_course_list(programCode, spec)["courses"]
-    pass
+    print("LISTLISTLISTLISTLISTLIST")
+    print(course_list)
+
+    return [get_path_from(course) for course in course_list]
+
 
 @router.get("/graph")
 def courses_graph():

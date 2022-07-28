@@ -122,8 +122,19 @@ const GraphicalSelector = () => {
     // );
     const res = await Promise.all(courseList.map((c) => axios.get(`/courses/getPathFrom/${c}`).catch((e) => e)));
     
-    const justData = res.data();
+    const justData = res.map((r) => r.data);
+    /**
+      * [{
+        *   "courses": [ ], // This is the stuff that poinst to the coruse
+        *   "original": "CODEXXX" // Course code being pointed at
+        * }]
+        */
+    console.log(justData);  
 
+    console.log("I ALIVEs");
+    const testGraph =  await axios.get(`/programs/graphtest/${programCode}/${specs.join("+")}`);
+    console.log("TG:::::::::::::::::::::::::::::::::::::");
+    console.log(testGraph);
 
     // filter any errors from res
     const children = res.filter((value) => value?.data?.courses).map((value) => value.data);
