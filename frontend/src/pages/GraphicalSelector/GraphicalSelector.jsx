@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import G6, { Algorithm } from "@antv/g6";
@@ -119,6 +121,9 @@ const GraphicalSelector = () => {
     //     .filter((v, i, a) => a.indexOf(v) === i) // TODO: hack to make courseList unique
     // );
     const res = await Promise.all(courseList.map((c) => axios.get(`/courses/getPathFrom/${c}`).catch((e) => e)));
+    
+    const justData = res.data();
+
 
     // filter any errors from res
     const children = res.filter((value) => value?.data?.courses).map((value) => value.data);

@@ -268,6 +268,14 @@ def getGenEds(programCode: str):
     all_geneds = data_helpers.read_data("data/scrapers/genedPureRaw.json")
     return {"courses" : all_geneds[programCode]}
 
+@router.get("/graphtest/{programCode}/{spec}", response_model=CourseCodes)
+@router.get("/graphtest/{programCode}", response_model=CourseCodes)
+def graph_test(
+        programCode: str, spec: Optional[str]=None
+    ):
+    course_list = get_structure_course_list(programCode, spec)["courses"]
+    pass
+
 @router.get("/graph")
 def courses_graph():
     """
