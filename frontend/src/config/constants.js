@@ -24,5 +24,6 @@ export const lightGrey = "#565652";
 export const darkGrey = "#323739";
 export const yellow = "#FAAD14";
 export const purple = "#9254de";
+export const lightPurple = "#efdbff";
 
 export const inDev = import.meta.env.VITE_ENV === "dev";
