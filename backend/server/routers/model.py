@@ -33,7 +33,7 @@ class CourseDetails(BaseModel):
     exclusions: dict[str, Literal[1]]
     handbook_note: str
     terms: list[str]
-    gen_ed: int
+    gen_ed: bool
     is_legacy: bool
     is_accurate: bool
     is_multiterm: bool
