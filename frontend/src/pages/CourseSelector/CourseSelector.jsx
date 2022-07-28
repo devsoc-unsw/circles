@@ -57,7 +57,7 @@ const CourseSelector = () => {
             structure={structure}
             showLockedCourses={showLockedCourses}
           />
-          <CourseDescription structure={structure} />
+          <CourseDescription />
         </S.ContentWrapper>
       </S.ContainerWrapper>
     </PageTemplate>

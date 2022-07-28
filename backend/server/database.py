@@ -16,7 +16,7 @@ from server.config import ARCHIVED_DATA_PATH, FINAL_DATA_PATH
 
 # Export these as needed
 try:
-    client = MongoClient(f'mongodb://{os.environ["MONGODB_USERNAME"]}:{os.environ["MONGODB_PASSWORD"]}@{os.environ["MONGODB_SERVICE_HOSTNAME"]}:27017')
+    client: MongoClient = MongoClient(f'mongodb://{os.environ["MONGODB_USERNAME"]}:{os.environ["MONGODB_PASSWORD"]}@{os.environ["MONGODB_SERVICE_HOSTNAME"]}:27017')
     print('Connected to database.')
 except: # pylint: disable=bare-except
     print("Unable to connect to database.")

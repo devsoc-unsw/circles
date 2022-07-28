@@ -8862,7 +8862,7 @@
             },
             {
                 "courses": {
-                    "any course": 1
+                    "any course": "1"
                 },
                 "title": "Free Elective",
                 "credits_to_complete": 6,

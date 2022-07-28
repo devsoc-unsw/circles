@@ -4,9 +4,9 @@ Contains the Conditions classes
 
 import json
 from abc import ABC, abstractmethod
-from typing import Tuple
+from typing import Optional, Tuple
 
-from algorithms.objects.categories import Category, AnyCategory, CompositeCategory
+from algorithms.objects.categories import Category, AnyCategory, ClassCategory, CompositeCategory
 from algorithms.objects.user import User
 from algorithms.objects.helper import Logic
 
@@ -42,7 +42,7 @@ class Condition(ABC):
         """ checks if 'course' is able to meet any subtree's requirements"""
         pass
 
-    def beneficial(self, user: User,  course: dict[str, Tuple[int, int]]) -> bool:
+    def beneficial(self, user: User,  course: dict[str, Tuple[int, int | None]]) -> bool:
         """ checks if 'course' is able to meet any *more* subtrees' requirements """
         course_name = list(course.keys())[0]
         if self.validate(user)[0] or user.has_taken_course(course_name):
@@ -120,7 +120,7 @@ class CoreqCoursesCondition(Condition):
     def is_path_to(self, course: str) -> bool:
         return course in self.courses
 
-    def beneficial(self, user: User, course: dict[str, Tuple[int, int]]) -> bool:
+    def beneficial(self, user: User, course: dict[str, Tuple[int, int | None]]) -> bool:
         course_name = list(course.keys())[0]
         if self.validate(user)[0] or user.has_taken_course(course_name) or user.is_taking_course(course_name):
             return False
@@ -144,7 +144,7 @@ class UOCCondition(Condition):
         # L2 MATH - level 2 courses starting with MATH
         # CORE - core courses
         # And more...
-        self.category = AnyCategory()
+        self.category: Category = AnyCategory()
 
     def is_path_to(self, course: str) -> bool:
         return False
@@ -169,7 +169,7 @@ class WAMCondition(Condition):
         # The conditional wam category attached to this object.
         # If a category is attached, then the WAM must be from within this category. E.g.
         # 80WAM in COMP
-        self.category = AnyCategory()
+        self.category: Category = AnyCategory()
 
     def set_category(self, category_classobj: Category):
         """ Set own category to the one given """
@@ -187,7 +187,7 @@ class WAMCondition(Condition):
         warning = self.get_warning(user.wam(self.category))
         return True, [warning] if warning else []
 
-    def get_warning(self, applicable_wam: int) -> str:
+    def get_warning(self, applicable_wam: Optional[float]) -> str | None:
         """ Returns an appropriate warning message or None if not needed """
         if applicable_wam is None:
             return f"Requires {self.wam} WAM in {self.category}. Your WAM in {self.category} has not been recorded"
@@ -204,7 +204,7 @@ class GradeCondition(Condition):
 
     def __init__(self, grade: int):
         self.grade = grade
-        self.category = CompositeCategory()
+        self.category: Category = CompositeCategory()
 
     def set_category(self, category_classobj: Category):
         """ Set own category to the one given """
@@ -214,24 +214,26 @@ class GradeCondition(Condition):
         return self.category.match_definition(course)
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
-        def _validate_course(course: Category):
+        def _validate_course(category: Category):
             # Grade condition can only be used with ClassCategory
-            if isinstance(course, CompositeCategory):
-                validations = [_validate_course(course) for course in self.category.categories]
+            if isinstance(category, CompositeCategory):
+                validations = [_validate_course(c) for c in category.categories]
                 unlocked, warnings = list(zip(*validations))
-                satisfied = all(unlocked) if course.logic == Logic.AND else any(unlocked)
+                satisfied = all(unlocked) if category.logic == Logic.AND else any(unlocked)
                 return satisfied, warnings
+            elif isinstance(category, ClassCategory):
+                course = category.class_name
+                if course not in user.courses:
+                    return False, []
 
-            course = course.class_name
-            if course not in user.courses:
-                return False, []
-
-            user_grade = user.get_grade(course)
-            if user_grade is None:
-                return True, [self.get_warning()]
-            if user_grade < self.grade:
-                return False, []
-            return True, []
+                user_grade = user.get_grade(course)
+                if user_grade is None:
+                    return True, [self.get_warning()]
+                if user_grade < self.grade:
+                    return False, []
+                return True, []
+            else:
+                return True, ["We have failed to parse this correctly"]
 
         if isinstance(self.category, CompositeCategory):
             validations = [_validate_course(course) for course in self.category.categories]
@@ -375,7 +377,7 @@ class CompositeCondition(Condition):
     def is_path_to(self, course: str) -> bool:
         return any(condition.is_path_to(course) for condition in self.conditions)
 
-    def beneficial(self, user: User, course: dict[str, Tuple[int, int]]) -> bool:
+    def beneficial(self, user: User, course: dict[str, Tuple[int, int | None]]) -> bool:
         course_name = list(course.keys())[0]
         if self.validate(user)[0] or user.has_taken_course(course_name):
             return False

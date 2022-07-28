@@ -5639,7 +5639,7 @@
     },
     "ELEC4605": {
         "original": "Pre-Requisite: Elec3705<br/><br/>",
-        "processed": "Elec3705"
+        "processed": "ELEC3705"
     },
     "ELEC4611": {
         "original": "Prereq: ELEC3105<br/><br/>",
