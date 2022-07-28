@@ -106,9 +106,9 @@ const GraphicalSelector = () => {
   };
 
   const setupGraph = async () => {
-    const { courses: courseList } = (
-      await axios.get(`/programs/getStructureCourseList/${programCode}/${specs.join("+")}`)
-    ).data;
+    // const { courses: courseList } = (
+    //   await axios.get(`/programs/getStructureCourseList/${programCode}/${specs.join("+")}`)
+    // ).data;
 
     // TODO: Move this to the backend too
     // should be a universal /programs/getGraphEdges/{programCode}/{specs}
@@ -120,29 +120,30 @@ const GraphicalSelector = () => {
     //       .flatMap((spec) => Object.keys(spec.courses)))
     //     .filter((v, i, a) => a.indexOf(v) === i) // TODO: hack to make courseList unique
     // );
-    const res = await Promise.all(courseList.map((c) => axios.get(`/courses/getPathFrom/${c}`).catch((e) => e)));
+    // const res = await Promise.all(courseList.map((c) => axios.get(`/courses/getPathFrom/${c}`).catch((e) => e)));
     
-    const justData = res.map((r) => r.data);
+    console.log("AHHHH");
+    // const justData = res.map((r) => r.data);
     /**
       * [{
         *   "courses": [ ], // This is the stuff that poinst to the coruse
         *   "original": "CODEXXX" // Course code being pointed at
         * }]
         */
-    console.log(justData);  
+    // console.log(justData);  
 
     console.log("I ALIVEs");
-    const testGraph =  await axios.get(`/programs/graphtest/${programCode}/${specs.join("+")}`);
-    console.log("TG:::::::::::::::::::::::::::::::::::::");
+    const testGraph = await axios.get(
+      `/programs/graphtest/${programCode}/${specs.join("+")}`);
     console.log(testGraph);
 
     // filter any errors from res
-    const children = res.filter((value) => value?.data?.courses).map((value) => value.data);
-    const edges = children
-      .flatMap((courseObject) => courseObject.courses
-        .filter((c) => courseList.includes(c))
-        .map((c) => ({ source: c, target: courseObject.original })));
-    if (courseList.length !== 0 && edges.length !== 0) initialiseGraph(courseList, edges);
+    // const children = res.filter((value) => value?.data?.courses).map((value) => value.data);
+    // const edges = children
+    //   .flatMap((courseObject) => courseObject.courses
+    //     .filter((c) => courseList.includes(c))
+    //     .map((c) => ({ source: c, target: courseObject.original })));
+    // if (courseList.length !== 0 && edges.length !== 0) initialiseGraph(courseList, edges);
     setLoading(false);
   };
 

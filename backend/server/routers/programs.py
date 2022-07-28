@@ -278,11 +278,27 @@ def graph_test(
         - [x] path_from from the list
         - [ ] edgelist to graph
     """
+    print("I AM BEING HITTT")
+    print("A\n"*50)
+    print("PAAAAAAAAAAAAAAAAATHHHHHHHHHHHHHHHHHH")
+    print(get_path_from("COMP2521"))
     course_list = get_structure_course_list(programCode, spec)["courses"]
     print("LISTLISTLISTLISTLISTLIST")
     print(course_list)
 
-    return [get_path_from(course) for course in course_list]
+    # return ["AHHHHHHH", "AAAAA"]
+
+    print("OVER"*10)
+
+    print(get_structure_course_list("COMP4920"))
+    print("DIDNT BREAK")
+
+    # for c in course_list:
+    #     print(c, get_path_from(c))
+
+    my_list = [get_path_from(course) for course in course_list]
+    print("AAA"*10)
+    print(my_list)
 
 
 @router.get("/graph")
