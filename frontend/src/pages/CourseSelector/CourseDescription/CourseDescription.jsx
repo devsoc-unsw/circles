@@ -5,10 +5,11 @@ import { motion } from "framer-motion";
 import infographic from "assets/infographicFontIndependent.svg";
 import Collapsible from "components/Collapsible";
 import CourseTag from "components/CourseTag";
+import PrerequisiteTree from "components/PrerequisiteTree";
 import ProgressBar from "components/ProgressBar";
 import TermTag from "components/TermTag";
 import axiosRequest from "config/axios";
-import { TERM, TIMETABLE_API_URL } from "config/constants";
+import { inDev, TERM, TIMETABLE_API_URL } from "config/constants";
 import { setCourse } from "reducers/coursesSlice";
 import prepareUserPayload from "../utils";
 import LoadingSkeleton from "./LoadingSkeleton";
@@ -168,6 +169,10 @@ const CourseDescription = () => {
         </>
       ) : <p>No data available</p>,
     },
+    {
+      title: "Units of Credit",
+      content: course.UOC,
+    },
   ];
 
   if (tabs.length === 0) {
@@ -241,6 +246,13 @@ const CourseDescription = () => {
                 ) : "None"}
               </p>
             </Collapsible>
+            {inDev
+            && (
+            <Collapsible title="Prerequisite Visualisation">
+              <PrerequisiteTree courseCode={id} />
+            </Collapsible>
+            )}
+            <br />
           </S.DescriptionContent>
           <S.AttributesContent>
             {courseAttributesData.map(({ title, content }) => (

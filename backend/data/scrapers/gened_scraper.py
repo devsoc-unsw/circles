@@ -32,7 +32,7 @@ def scrape_gened_data(year=None):
         faculty = program["faculty"]
         faculty_list.add(faculty)
 
-        if faculty == "Faculty of Arts, Design and Architecture" or faculty == "Faculty of Law and Justice":
+        if faculty in ["Faculty of Arts, Design and Architecture", "Faculty of Law and Justice"]:
             academicOrg = "academicOrg"
         else:
             academicOrg = "parentAcademicOrg"
@@ -41,11 +41,11 @@ def scrape_gened_data(year=None):
         try:
             resp = requests.get(URL, data=json.dumps(
             create_payload_gened(
-            TOTAL_COURSES,
-            "unsw_psubject",
-            cl_id,
-            academicOrg,
-            year
+                TOTAL_COURSES,
+                "unsw_psubject",
+                cl_id,
+                academicOrg,
+                year
             )
         ), headers=HEADERS)
             resp.raise_for_status()
@@ -53,18 +53,21 @@ def scrape_gened_data(year=None):
             print(f"{err}+ Failed at program: {program_code}")
             
         r = requests.post(URL, data=json.dumps(
-            create_payload_gened(
-            TOTAL_COURSES,
-            "unsw_psubject",
-            cl_id,
-            academicOrg,
-            year
+                create_payload_gened(
+                    TOTAL_COURSES,
+                    "unsw_psubject",
+                    cl_id,
+                    academicOrg,
+                    year
             )
         ), headers=HEADERS)
         new_gened_courses_raw = r.json()["contentlets"]
-  
+
         #gen eds by program code
-        gened_raw[program["code"]] = [course.get("code") for course in new_gened_courses_raw]
+        courses = {}
+        for course in new_gened_courses_raw:
+            courses[course["code"]] = course["title"]
+        gened_raw[program["code"]] = courses
     data_helpers.write_data(
         gened_raw,
         "data/scrapers/genedPureRaw.json"

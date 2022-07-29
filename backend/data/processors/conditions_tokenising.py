@@ -13,7 +13,7 @@ For example:
 import re
 from data.utility import data_helpers
 
-PARSED_LOGIC = {}
+PARSED_LOGIC: dict[str, list[str]] = {}
 
 """Converts the text condition into a json list"""
 

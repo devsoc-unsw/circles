@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@ant-design/charts": "1.4.0",
+    "@ant-design/charts": "1.4.1",
     "@ant-design/colors": "6.0.0",
     "@ant-design/icons": "4.7.0",
     "@react-spring/web": "9.5.0",
@@ -12,7 +12,7 @@
     "@vitejs/plugin-react": "1.3.2",
     "antd": "4.21.6",
     "axios": "0.27.2",
-    "framer-motion": "6.5.0",
+    "framer-motion": "6.5.1",
     "moment": "2.29.4",
     "react": "17.0.2",
     "react-beautiful-dnd": "13.1.0",
@@ -24,23 +24,25 @@
     "react-redux": "8.0.2",
     "react-router-dom": "6.3.0",
     "react-scroll": "1.8.7",
-    "react-svg": "15.1.2",
+    "react-svg": "15.1.3",
     "react-tooltip": "4.2.21",
     "redux": "4.2.0",
     "redux-persist": "6.0.0",
     "redux-thunk": "2.4.1",
     "styled-components": "5.3.5",
-    "use-debounce": "8.0.1",
+    "use-debounce": "8.0.2",
     "vite": "3.0.0",
     "vite-plugin-svgr": "2.2.0"
   },
   "scripts": {
     "start": "vite --port 3000 --host",
+    "start:local": "VITE_BACKEND_API_BASE_URL=https://circlesapi.csesoc.app VITE_ENV=dev vite --port 3000 --host",
     "build": "vite build",
     "preview": "vite preview --host",
-    "test": "jest",
+    "test": "vitest run",
+    "coverage": "vitest run --coverage",
     "lint": "eslint src/**/*.{js,jsx}",
-    "lint:fix": "eslint --fix src/**/*.{js,jsx,ts,tsx}"
+    "lint:fix": "eslint --fix src/**/*.{js,jsx}"
   },
   "eslintConfig": {
     "extends": [
@@ -61,7 +63,10 @@
     ]
   },
   "devDependencies": {
-    "eslint": "8.19.0",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^12.1.5",
+    "@testing-library/user-event": "^14.2.3",
+    "eslint": "8.20.0",
     "eslint-config-airbnb": "19.0.4",
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-jsx-a11y": "6.6.0",
@@ -70,6 +75,8 @@
     "eslint-plugin-react": "7.30.1",
     "eslint-plugin-react-hooks": "4.6.0",
     "eslint-plugin-simple-import-sort": "7.0.0",
-    "less": "4.1.3"
+    "less": "4.1.3",
+    "vitest": "^0.18.0",
+    "vite-plugin-eslint": "1.7.0"
   }
 }
