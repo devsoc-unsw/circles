@@ -13,6 +13,7 @@ from server.database import programsCOL, specialisationsCOL
 from server.manual_fixes import apply_manual_fixes
 from server.routers.courses import get_path_from, regex_search
 from server.routers.model import CourseCodes, Courses, Programs, Structure
+from server.routers.utility import map_suppressed_errors
 
 router = APIRouter(
     prefix="/programs",
@@ -282,23 +283,16 @@ def graph_test(
     print("A\n"*50)
     print("PAAAAAAAAAAAAAAAAATHHHHHHHHHHHHHHHHHH")
     print(get_path_from("COMP2521"))
-    course_list = get_structure_course_list(programCode, spec)["courses"]
-    print("LISTLISTLISTLISTLISTLIST")
-    print(course_list)
+    courses = get_structure_course_list(programCode, spec)["courses"]
 
-    # return ["AHHHHHHH", "AAAAA"]
+    print("DIDNT BREAK (how/???????????????????)"*5)
 
-    print("OVER"*10)
-
-    print(get_structure_course_list("COMP4920"))
-    print("DIDNT BREAK")
-
-    # for c in course_list:
-    #     print(c, get_path_from(c))
-
-    my_list = [get_path_from(course) for course in course_list]
-    print("AAA"*10)
-    print(my_list)
+    failed_courses = []
+    return [
+        map_suppressed_errors(
+            get_path_from, failed_courses, course
+        ) for course in courses
+    ]
 
 
 @router.get("/graph")
