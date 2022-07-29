@@ -85,7 +85,7 @@ class CourseCondition(Condition):
 
     def __str__(self) -> str:
         return json.dumps({
-            'children': [f"CourseCondition({self.course})"]
+            'id': self.course
         })
 
 
@@ -136,7 +136,7 @@ class CoreqCoursesCondition(Condition):
         return any(c in course.keys() for c in self.courses)
 
     def __str__(self) -> str:
-        logic = "&&" if self.logic == Logic.AND else "||"
+        logic = "and" if self.logic == Logic.AND else "or"
         return json.dumps({
             'logic': logic,
             'children': [f'CoreqCoursesCondition({course})' for course in self.courses],
@@ -416,7 +416,7 @@ class CompositeCondition(Condition):
 
     def __str__(self, id='start') -> str:
         data: CompositeJsonData = {
-            'logic': "&&" if self.logic == Logic.AND else "||",
+            'logic': "and" if self.logic == Logic.AND else "or",
             'id': id,
             'children': []
         }
