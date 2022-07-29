@@ -4,7 +4,7 @@ Contains the Conditions classes
 
 import json
 from abc import ABC, abstractmethod
-from typing import Optional, Tuple
+from typing import Optional, Tuple, TypedDict
 
 from algorithms.objects.categories import Category, AnyCategory, ClassCategory, CompositeCategory
 from algorithms.objects.user import User
@@ -19,6 +19,13 @@ with open(CACHED_CONDITIONS_TOKENS_PATH, "r", encoding="utf8") as f:
 CACHED_PROGRAM_MAPPINGS_FILE = "./algorithms/cache/programMappings.json"
 with open(CACHED_PROGRAM_MAPPINGS_FILE, "r", encoding="utf8") as f:
     CACHED_PROGRAM_MAPPINGS = json.load(f)
+
+
+
+class CompositeJsonData(TypedDict):
+    id: str
+    logic: str
+    children: list[dict]
 
 
 class Condition(ABC):
@@ -128,12 +135,11 @@ class CoreqCoursesCondition(Condition):
             return False
         return any(c in course.keys() for c in self.courses)
 
-    def __str__(self, id='root') -> str:
+    def __str__(self) -> str:
         logic = "&&" if self.logic == Logic.AND else "||"
         return json.dumps({
             'logic': logic,
             'children': [f'CoreqCoursesCondition({course})' for course in self.courses],
-            'id': id
         })
 
 class UOCCondition(Condition):
@@ -409,10 +415,12 @@ class CompositeCondition(Condition):
         return any(condition.beneficial(user, course) for condition in self.conditions)
 
     def __str__(self, id='start') -> str:
-        data = {}
-        data['logic'] = "&&" if self.logic == Logic.AND else "||"
-        data['id'] = id
-        data['children'] = []
+        data: CompositeJsonData = {
+            'logic': "&&" if self.logic == Logic.AND else "||",
+            'id': id,
+            'children': []
+        }
+
         for index, cond in enumerate(self.conditions):
             if id == 'start':
                 child_index = 'root'
@@ -420,7 +428,7 @@ class CompositeCondition(Condition):
                 child_index = f'subtree.{index}'
             else:
                 child_index = f'{id}.{index}'
-            if isinstance(cond, CompositeCondition) or isinstance(cond, CoreqCoursesCondition):
+            if isinstance(cond, CompositeCondition):
                 data['children'].append(json.loads(cond.__str__(child_index)))
             else:
                 data['children'].append(json.loads(str(cond)))
