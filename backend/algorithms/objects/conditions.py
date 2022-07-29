@@ -139,7 +139,7 @@ class CoreqCoursesCondition(Condition):
         logic = "and" if self.logic == Logic.AND else "or"
         return json.dumps({
             'logic': logic,
-            'children': [f'CoreqCoursesCondition({course})' for course in self.courses],
+            'children': [{'id': course} for course in self.courses],
         })
 
 class UOCCondition(Condition):
