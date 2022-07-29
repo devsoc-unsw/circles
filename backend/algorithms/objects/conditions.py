@@ -406,15 +406,22 @@ class CompositeCondition(Condition):
             return False
         return any(condition.beneficial(user, course) for condition in self.conditions)
 
-    def __str__(self, id='root') -> str:
+    def __str__(self, id='start') -> str:
         data = {}
         data['logic'] = "&&" if self.logic == Logic.AND else "||"
         data['id'] = id
         data['children'] = []
         for index, cond in enumerate(self.conditions):
-            child_index = f'subtree.{index}' if id == 'root' else f'{id}.{index}'
+            if id == 'start':
+                child_index = 'root'
+            elif id == 'root':
+                child_index = f'subtree.{index}'
+            else:
+                child_index = f'{id}.{index}'
             if isinstance(cond, CompositeCondition) or isinstance(cond, CoreqCoursesCondition):
                 data['children'].append(json.loads(cond.__str__(child_index)))
             else:
                 data['children'].append(json.loads(str(cond)))
+        if id == 'start':
+            return json.dumps(data['children'][0])
         return json.dumps(data)
