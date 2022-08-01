@@ -1,7 +1,5 @@
 import styled, { css } from "styled-components";
 import { Droppable } from "../common/styles";
-import { LockFilled, UnlockFilled } from "@ant-design/icons";
-import { Badge } from "antd";
 
 const TermBoxWrapper = styled.ul`
   margin: 1em;
@@ -62,19 +60,6 @@ const UOCBadgeWrapper = styled.div`
   right: 0;
 `;
 
-const IconUnlockFilled = styled(UnlockFilled)`
-  color: ${({ theme }) => theme.termCheckbox.color};
-  font-size: 12px;
-`;
-
-const IconLockFilled = styled(LockFilled)`
-  color: ${({ theme }) => theme.termCheckbox.color};
-  font-size: 12px;
-`;
-
-const UOCBadge = styled(Badge)`
-  color: ${({ theme }) => theme.text};
-  background-color: #9254de;
-`;
-
-export default { TermBoxWrapper, TermCheckboxWrapper, UOCBadgeWrapper, IconUnlockFilled, IconLockFilled, UOCBadge};
+export default {
+  TermBoxWrapper, TermCheckboxWrapper, UOCBadgeWrapper,
+};

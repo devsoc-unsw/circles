@@ -34,7 +34,9 @@ export const lightTheme = {
   ...lightBaseColors,
   body: "#ffffff",
   text: "#323739",
-  droppableBackground: "#e8fef2",
+  droppable: {
+    backgroundColor: "#e8fef2",
+  },
   plannerCartCard: {
     backgroundColorHover: "#f4f4f4",
   },
@@ -67,13 +69,21 @@ export const lightTheme = {
   optionsHeader: {
     borderColor: "#d9d9d9",
   },
+  infoOutlined: {
+    color: "#000",
+  },
+  uocBadge: {
+    backgroundColor: "#9254de",
+  },
 };
 
 export const darkTheme = {
   ...darkBaseColors,
   body: "#1d1f20",
   text: "#f1f1f1",
-  droppableBackground: "#373A36",
+  droppable: {
+    backgroundColor: "#373A36",
+  },
   plannerCartCard: {
     backgroundColorHover: "#292a2b",
   },
@@ -117,5 +127,11 @@ export const darkTheme = {
   },
   optionsHeader: {
     borderColor: "#4d4b4a",
+  },
+  infoOutlined: {
+    color: "#fff",
+  },
+  uocBadge: {
+    backgroundColor: "#51258f",
   },
 };

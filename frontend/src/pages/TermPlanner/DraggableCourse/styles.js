@@ -1,7 +1,5 @@
 import styled, { css } from "styled-components";
 import { shake } from "../common/styles";
-import { Typography } from "antd";
-import { WarningOutlined } from "@ant-design/icons";
 
 const CourseWrapper = styled.li`
   user-select: none;
@@ -58,13 +56,6 @@ const CourseLabel = styled.div`
   margin: 0px;
 `;
 
-const Text = styled(Typography)`
-  color: ${({ theme }) => theme.text};
-`;
-
-const IconWarningOutlined = styled(WarningOutlined)`
-  color: ${({ theme }) => theme.warningOutlined.color};
-  font-size: 16px;
-`;
-
-export default { CourseWrapper, CourseLabel, Text, IconWarningOutlined };
+export default {
+  CourseWrapper, CourseLabel,
+};

@@ -1,6 +1,5 @@
 import React from "react";
 import { Typography } from "antd";
-import S from "./styles";
 
 const Marks = ({ mark }) => {
   const { Text } = Typography;

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Droppable } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
+import { LockFilled, UnlockFilled } from "@ant-design/icons";
 import { Badge } from "antd";
+import { useTheme } from "styled-components";
 import useMediaQuery from "hooks/useMediaQuery";
 import { toggleTermComplete } from "reducers/plannerSlice";
 import DraggableCourse from "../DraggableCourse";
@@ -11,9 +13,10 @@ const TermBox = ({
   name, coursesList, termsOffered, dragging,
 }) => {
   const term = name.match(/T[0-3]/)[0];
+  const theme = useTheme();
 
   const { isSummerEnabled, completedTerms, courses } = useSelector((state) => state.planner);
-  const { showMarks, theme } = useSelector((state) => state.settings);
+  const { showMarks } = useSelector((state) => state.settings);
   const [totalUOC, setTotalUOC] = useState(0);
   const dispatch = useDispatch();
   const handleCompleteTerm = () => {
@@ -34,6 +37,15 @@ const TermBox = ({
 
   const isSmall = useMediaQuery("(max-width: 1400px)");
 
+  const iconStyle = {
+    fontSize: "12px",
+    color: theme.termCheckbox.color,
+  };
+
+  const uocBadgeStyle = {
+    backgroundColor: theme.uocBadge.backgroundColor,
+    boxShadow: "none",
+  };
   return (
     <Droppable droppableId={name} isDropDisabled={isCompleted}>
       {(provided) => (
@@ -43,11 +55,13 @@ const TermBox = ({
               {(
                   !isCompleted
                     ? (
-                      <S.IconUnlockFilled
+                      <UnlockFilled
+                        style={iconStyle}
                         onClick={handleCompleteTerm}
                       />
                     ) : (
-                      <S.IconLockFilled
+                      <LockFilled
+                        style={iconStyle}
                         onClick={handleCompleteTerm}
                       />
                     ) //
@@ -75,11 +89,9 @@ const TermBox = ({
               ),
             )}
             {provided.placeholder}
-            {console.log(theme)}
-            <S.UOCBadgeWrapper> 
+            <S.UOCBadgeWrapper>
               <Badge
-                className="UOCBadge"
-                style={{ backgroundColor: theme === "light" ? "#9254de" : "#51258f", boxShadow: "none" }} 
+                style={uocBadgeStyle}
                 size="small"
                 count={`${totalUOC} UOC`}
                 offset={[0, 0]}
