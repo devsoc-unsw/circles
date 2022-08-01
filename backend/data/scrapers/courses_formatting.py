@@ -8,7 +8,7 @@ Step in the course data's journey:
 import json
 from data.utility import data_helpers
 
-ALL_COURSES = {}
+ALL_COURSES: dict = {}
 
 
 def format_course_data(year = None):

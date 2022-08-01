@@ -23,7 +23,7 @@ KEEP_UNEDITED = [
     "exclusions"
 ]
 
-PROCESSED_COURSES = {}
+PROCESSED_COURSES: dict[str, dict] = {}
 
 
 def process_course_data(year = None):
@@ -89,19 +89,19 @@ def process_terms(processed: dict, formatted: dict) -> None:
 
     res = re.sub("Summer Term", "T0", res)
     res = re.sub("Summer Canberra", "SC", res)
-    res = res.split(",")
+    res_split = res.split(",")
     # Strip Remaining Spaces and discard empty strings
-    res = set(item.strip(" ") for item in res)
-    res.discard("")
-    processed["terms"] = sorted(list(res))
+    res_set = set(item.strip(" ") for item in res_split)
+    res_set.discard("")
+    processed["terms"] = sorted(list(res_set))
 
 
 def process_gen_ed(processed: dict, formatted: dict) -> None:
     """Processes whether the course is a gen ed. 0 for false and 1 for true"""
     if formatted["gen_ed"] == "false":
-        processed["gen_ed"] = 0
+        processed["gen_ed"] = False
     else:
-        processed["gen_ed"] = 1
+        processed["gen_ed"] = True
 
 def process_exclusions(processed: dict, formatted: dict) -> None:
     """Parses exclusion string from enrolment rules"""
@@ -155,10 +155,12 @@ def process_exclusions(processed: dict, formatted: dict) -> None:
 
 
 def process_enrolment_rules(processed: dict, course: dict):
+    """ removed br shit """
     processed["raw_requirements"] = re.sub(
         "<br/><br/>", "", course["enrolment_rules"])
 
 def process_multi_term(processed: dict, formatted: dict) -> None:
+    """ checks if a course is multiterm """
     processed["is_multiterm"] = any(attribute["type"] == "multi-term_course" for attribute in formatted["attributes"]) and int(formatted["UOC"]) % 6 != 0
 
 if __name__ == "__main__":
