@@ -169,6 +169,10 @@ const CourseDescription = () => {
         </>
       ) : <p>No data available</p>,
     },
+    {
+      title: "Units of Credit",
+      content: course.UOC,
+    },
   ];
 
   if (tabs.length === 0) {

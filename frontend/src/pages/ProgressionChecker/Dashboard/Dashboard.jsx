@@ -26,7 +26,7 @@ const Dashboard = ({
 
   const courseList = (
     Object.values(structure)
-      .flatMap((specialisation) => Object.values(specialisation)
+      .flatMap((specialisation) => Object.values(specialisation.content)
         .filter((spec) => typeof spec === "object" && spec.courses && !spec.type.includes("rule"))
         .flatMap((spec) => Object.keys(spec.courses)))
   );

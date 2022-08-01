@@ -4,9 +4,9 @@ Contains the Conditions classes
 
 import json
 from abc import ABC, abstractmethod
-from typing import Tuple
+from typing import Optional, Tuple, TypedDict
 
-from algorithms.objects.categories import Category, AnyCategory, CompositeCategory
+from algorithms.objects.categories import Category, AnyCategory, ClassCategory, CompositeCategory
 from algorithms.objects.user import User
 from algorithms.objects.helper import Logic
 
@@ -19,6 +19,13 @@ with open(CACHED_CONDITIONS_TOKENS_PATH, "r", encoding="utf8") as f:
 CACHED_PROGRAM_MAPPINGS_FILE = "./algorithms/cache/programMappings.json"
 with open(CACHED_PROGRAM_MAPPINGS_FILE, "r", encoding="utf8") as f:
     CACHED_PROGRAM_MAPPINGS = json.load(f)
+
+
+
+class CompositeJsonData(TypedDict):
+    id: str
+    logic: str
+    children: list[dict]
 
 
 class Condition(ABC):
@@ -42,7 +49,7 @@ class Condition(ABC):
         """ checks if 'course' is able to meet any subtree's requirements"""
         pass
 
-    def beneficial(self, user: User,  course: dict[str, Tuple[int, int]]) -> bool:
+    def beneficial(self, user: User,  course: dict[str, Tuple[int, int | None]]) -> bool:
         """ checks if 'course' is able to meet any *more* subtrees' requirements """
         course_name = list(course.keys())[0]
         if self.validate(user)[0] or user.has_taken_course(course_name):
@@ -77,7 +84,9 @@ class CourseCondition(Condition):
         return user.has_taken_course(self.course), []
 
     def __str__(self) -> str:
-        return f"CourseCondition({self.course})"
+        return json.dumps({
+            'id': self.course
+        })
 
 
 class CoreqCoursesCondition(Condition):
@@ -120,15 +129,18 @@ class CoreqCoursesCondition(Condition):
     def is_path_to(self, course: str) -> bool:
         return course in self.courses
 
-    def beneficial(self, user: User, course: dict[str, Tuple[int, int]]) -> bool:
+    def beneficial(self, user: User, course: dict[str, Tuple[int, int | None]]) -> bool:
         course_name = list(course.keys())[0]
         if self.validate(user)[0] or user.has_taken_course(course_name) or user.is_taking_course(course_name):
             return False
         return any(c in course.keys() for c in self.courses)
 
-
     def __str__(self) -> str:
-        return f"CoreqCoursesCondition(courses={self.courses}, logic={self.logic})"
+        logic = "and" if self.logic == Logic.AND else "or"
+        return json.dumps({
+            'logic': logic,
+            'children': [{'id': course} for course in self.courses],
+        })
 
 class UOCCondition(Condition):
     """ UOC conditions such as '24UOC in COMP' """
@@ -144,7 +156,7 @@ class UOCCondition(Condition):
         # L2 MATH - level 2 courses starting with MATH
         # CORE - core courses
         # And more...
-        self.category = AnyCategory()
+        self.category: Category = AnyCategory()
 
     def is_path_to(self, course: str) -> bool:
         return False
@@ -157,7 +169,10 @@ class UOCCondition(Condition):
         return user.uoc(self.category) >= self.uoc, []
 
     def __str__(self) -> str:
-        return f"{self.uoc}UOC in {self.category}"
+        return json.dumps({
+            'UOC': self.uoc,
+            'category': str(self.category)
+        })
 
 
 class WAMCondition(Condition):
@@ -169,7 +184,7 @@ class WAMCondition(Condition):
         # The conditional wam category attached to this object.
         # If a category is attached, then the WAM must be from within this category. E.g.
         # 80WAM in COMP
-        self.category = AnyCategory()
+        self.category: Category = AnyCategory()
 
     def set_category(self, category_classobj: Category):
         """ Set own category to the one given """
@@ -187,7 +202,7 @@ class WAMCondition(Condition):
         warning = self.get_warning(user.wam(self.category))
         return True, [warning] if warning else []
 
-    def get_warning(self, applicable_wam: int) -> str:
+    def get_warning(self, applicable_wam: Optional[float]) -> str | None:
         """ Returns an appropriate warning message or None if not needed """
         if applicable_wam is None:
             return f"Requires {self.wam} WAM in {self.category}. Your WAM in {self.category} has not been recorded"
@@ -196,7 +211,10 @@ class WAMCondition(Condition):
         return f"Requires {self.wam} WAM in {self.category}. Your WAM in {self.category} is currently {applicable_wam:.3f}"
 
     def __str__(self) -> str:
-        return f"{self.wam}WAM in {self.category}"
+        return json.dumps({
+            'wam': self.wam,
+            'category': str(self.category)
+        })
 
 
 class GradeCondition(Condition):
@@ -204,7 +222,7 @@ class GradeCondition(Condition):
 
     def __init__(self, grade: int):
         self.grade = grade
-        self.category = CompositeCategory()
+        self.category: Category = CompositeCategory()
 
     def set_category(self, category_classobj: Category):
         """ Set own category to the one given """
@@ -214,24 +232,26 @@ class GradeCondition(Condition):
         return self.category.match_definition(course)
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
-        def _validate_course(course: Category):
+        def _validate_course(category: Category):
             # Grade condition can only be used with ClassCategory
-            if isinstance(course, CompositeCategory):
-                validations = [_validate_course(course) for course in self.category.categories]
+            if isinstance(category, CompositeCategory):
+                validations = [_validate_course(c) for c in category.categories]
                 unlocked, warnings = list(zip(*validations))
-                satisfied = all(unlocked) if course.logic == Logic.AND else any(unlocked)
+                satisfied = all(unlocked) if category.logic == Logic.AND else any(unlocked)
                 return satisfied, warnings
+            elif isinstance(category, ClassCategory):
+                course = category.class_name
+                if course not in user.courses:
+                    return False, []
 
-            course = course.class_name
-            if course not in user.courses:
-                return False, []
-
-            user_grade = user.get_grade(course)
-            if user_grade is None:
-                return True, [self.get_warning()]
-            if user_grade < self.grade:
-                return False, []
-            return True, []
+                user_grade = user.get_grade(course)
+                if user_grade is None:
+                    return True, [self.get_warning()]
+                if user_grade < self.grade:
+                    return False, []
+                return True, []
+            else:
+                return True, ["We have failed to parse this correctly"]
 
         if isinstance(self.category, CompositeCategory):
             validations = [_validate_course(course) for course in self.category.categories]
@@ -250,7 +270,10 @@ class GradeCondition(Condition):
         return f"Requires {self.grade} mark in {self.category}. Your mark has not been recorded"
 
     def __str__(self) -> str:
-        return f"{self.grade}GRADE in {self.category}"
+        return json.dumps({
+            'grade': self.grade,
+            'category': str(self.category)
+        })
 
 
 class ProgramCondition(Condition):
@@ -266,7 +289,9 @@ class ProgramCondition(Condition):
         return user.in_program(self.program), []
 
     def __str__(self) -> str:
-        return f"Program {self.program}"
+        return json.dumps({
+            'program': self.program,
+        })
 
 
 class ProgramTypeCondition(Condition):
@@ -287,7 +312,9 @@ class ProgramTypeCondition(Condition):
         return user.program in CACHED_PROGRAM_MAPPINGS[self.programType], []
 
     def __str__(self) -> str:
-        return f"ProgramTypeCondition: {self.programType}"
+        return json.dumps({
+            'programType': self.programType,
+        })
 
 
 class SpecialisationCondition(Condition):
@@ -303,7 +330,9 @@ class SpecialisationCondition(Condition):
         return False
 
     def __str__(self) -> str:
-        return f"SpecialisationCondition: {self.specialisation}"
+        return json.dumps({
+            'specialisation': self.specialisation,
+        })
 
 
 class CourseExclusionCondition(Condition):
@@ -320,7 +349,9 @@ class CourseExclusionCondition(Condition):
         return False
 
     def __str__(self) -> str:
-        return f"Exclusion: {self.exclusion}"
+        return json.dumps({
+            'exclusion': self.exclusion,
+        })
 
 
 class ProgramExclusionCondition(Condition):
@@ -339,7 +370,9 @@ class ProgramExclusionCondition(Condition):
         return False
 
     def __str__(self) -> str:
-        return f"ProgramExclusionCondition: {self.exclusion}"
+        return json.dumps({
+            'programExclusion': self.exclusion,
+        })
 
 
 class CompositeCondition(Condition):
@@ -375,12 +408,30 @@ class CompositeCondition(Condition):
     def is_path_to(self, course: str) -> bool:
         return any(condition.is_path_to(course) for condition in self.conditions)
 
-    def beneficial(self, user: User, course: dict[str, Tuple[int, int]]) -> bool:
+    def beneficial(self, user: User, course: dict[str, Tuple[int, int | None]]) -> bool:
         course_name = list(course.keys())[0]
         if self.validate(user)[0] or user.has_taken_course(course_name):
             return False
         return any(condition.beneficial(user, course) for condition in self.conditions)
 
-    def __str__(self) -> str:
-        logic_op = "&&" if self.logic == Logic.AND else "||"
-        return f"({f' {logic_op} '.join(str(cond) for cond in self.conditions)})"
+    def __str__(self, id='start') -> str:
+        data: CompositeJsonData = {
+            'logic': "and" if self.logic == Logic.AND else "or",
+            'id': id,
+            'children': []
+        }
+
+        for index, cond in enumerate(self.conditions):
+            if id == 'start':
+                child_index = 'root'
+            elif id == 'root':
+                child_index = f'subtree.{index}'
+            else:
+                child_index = f'{id}.{index}'
+            if isinstance(cond, CompositeCondition):
+                data['children'].append(json.loads(cond.__str__(child_index)))
+            else:
+                data['children'].append(json.loads(str(cond)))
+        if id == 'start':
+            return json.dumps(data['children'][0])
+        return json.dumps(data)
