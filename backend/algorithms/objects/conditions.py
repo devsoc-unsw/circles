@@ -331,7 +331,7 @@ class SpecialisationCondition(Condition):
 
     def __str__(self) -> str:
         return json.dumps({
-            'Specialisation': self.specialisation,
+            'specialisation': self.specialisation,
         })
 
 
