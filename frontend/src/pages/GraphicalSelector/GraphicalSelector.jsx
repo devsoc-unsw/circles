@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import G6 from "@antv/g6";
+import G6, { Algorithm } from "@antv/g6";
 import { Button } from "antd";
 import axios from "axios";
 import PageTemplate from "components/PageTemplate";
@@ -43,6 +43,8 @@ const GraphicalSelector = () => {
       },
       // animate: true,
       defaultNode: GRAPH_STYLE.defaultNode,
+      defaultEdge: GRAPH_STYLE.defaultEdge,
+      nodeStateStyles: GRAPH_STYLE.nodeStateStyles,
     });
 
     setGraph(graphInstance);
@@ -61,27 +63,69 @@ const GraphicalSelector = () => {
       const { _cfg: { id } } = node;
       const [courseData, err] = await axiosRequest("get", `/courses/getCourse/${id}`);
       if (!err) setCourse(courseData);
+
+      // hides/ unhides dependent nodes
+      const { breadthFirstSearch } = Algorithm;
+      if (node.hasState("click")) {
+        graphInstance.clearItemStates(node, "click");
+        breadthFirstSearch(data, id, {
+          enter: ({ current }) => {
+            if (id !== current) {
+              const currentNode = graphInstance.findById(current);
+              // Unhiding node won't unhide other hidden nodes
+              currentNode.getEdges().forEach((e) => e.show());
+              currentNode.show();
+            }
+          },
+        });
+      } else if (node.getOutEdges().length) {
+        graphInstance.setItemState(node, "click", true);
+        breadthFirstSearch(data, id, {
+          enter: ({ current }) => {
+            if (id !== current) {
+              const currentNode = graphInstance.findById(current);
+              currentNode.getEdges().forEach((e) => e.hide());
+              currentNode.hide();
+            }
+          },
+        });
+      }
+    });
+
+    graphInstance.on("node:mouseenter", async (ev) => {
+      const node = ev.item;
+      graphInstance.setItemState(node, "hover", true);
+    });
+
+    graphInstance.on("node:mouseleave", async (ev) => {
+      const node = ev.item;
+      graphInstance.clearItemStates(node, "hover");
     });
   };
 
   const setupGraph = async () => {
-    const { structure } = (
-      await axios.get(`/programs/getStructure/${programCode}/${specs.join("+")}`)
+    const { courses: courseList } = (
+      await axios.get(`/programs/getStructureCourseList/${programCode}/${specs.join("+")}`)
     ).data;
-    const courseList = (
-      Object.values(structure)
-        .flatMap((specialisation) => Object.values(specialisation)
-          .filter((spec) => typeof spec === "object" && spec.courses && !(spec.type.includes("rule") || spec.type.includes("gened")))
-          .flatMap((spec) => Object.keys(spec.courses)))
-        .filter((v, i, a) => a.indexOf(v) === i) // TODO: hack to make courseList unique
-    );
+
+    // TODO: Move this to the backend too
+    // should be a universal /programs/getGraphEdges/{programCode}/{specs}
+    // const courseList = (
+    //   Object.values(structure)
+    //     .flatMap((specialisation) => Object.values(specialisation)
+    //       .filter((spec) => typeof spec === "object" && spec.courses &&
+    //         !(spec.type.includes("rule") || spec.type.includes("gened")))
+    //       .flatMap((spec) => Object.keys(spec.courses)))
+    //     .filter((v, i, a) => a.indexOf(v) === i) // TODO: hack to make courseList unique
+    // );
     const res = await Promise.all(courseList.map((c) => axios.get(`/courses/getPathFrom/${c}`).catch((e) => e)));
+
     // filter any errors from res
     const children = res.filter((value) => value?.data?.courses).map((value) => value.data);
     const edges = children
       .flatMap((courseObject) => courseObject.courses
         .filter((c) => courseList.includes(c))
-        .map((c) => ({ source: courseObject.original, target: c })));
+        .map((c) => ({ source: c, target: courseObject.original })));
     if (courseList.length !== 0 && edges.length !== 0) initialiseGraph(courseList, edges);
     setLoading(false);
   };
