@@ -4,7 +4,7 @@ API for fetching data about programs and specialisations
 from contextlib import suppress
 import functools
 import re
-from typing import Callable, Mapping, Optional, Tuple, cast
+from typing import Callable, Mapping, Optional, Tuple, cast, List
 
 from fastapi import APIRouter, HTTPException
 
@@ -297,7 +297,7 @@ def graph_test(
 
     print("DIDNT BREAK (how/???????????????????)"*5)
 
-    failed_courses = []
+    failed_courses: List[str] = []
     return [
         map_suppressed_errors(
             get_path_from, failed_courses, course
