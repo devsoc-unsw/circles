@@ -87,51 +87,6 @@ def test_composite_condition_course():
     })
     assert (and_or_cond.validate(user))[0]
 
-
-def test_composite_condition_course():
-    '''AND/OR conditions with only course requirements'''
-    user = User(USERS["user3"])
-
-    and_cond = create_condition(
-        ["(", "COMP1511", "&&", "COMP1521", "&&", "COMP1531", ")"])
-    assert not (and_cond.validate(user))[0]
-
-    user.add_courses({
-        "COMP1511": (6, 80),
-        "COMP1531": (6, None),
-        "MATH1141": (6, None)
-    })
-    assert not (and_cond.validate(user))[0]
-
-    user.add_courses({
-        "COMP1521": (6, None)
-    })
-    assert (and_cond.validate(user))[0]
-
-    or_cond = create_condition(
-        ["(", "MATH1081", "||", "MATH1151", "||", "MATH1241", ")"])
-    assert not (or_cond.validate(user))[0]
-
-    user.add_courses({
-        "MATH1151": (6, 90),
-    })
-    assert (or_cond.validate(user))[0]
-
-    and_or_cond = create_condition(["(", "(", "COMP1511", "||", "COMP1521", ")", "&&",
-                                   "(", "MATH1141", "&&", "MATH1151", ")", "&&", "(", "COMP2041", "&&", "COMP1531", ")", ")"])
-    assert not (and_or_cond.validate(user))[0]
-
-    user.add_courses({
-        "COMP1141": (6, None)
-    })
-    assert not (and_or_cond.validate(user))[0]
-
-    user.add_courses({
-        "COMP2041": (6, None)
-    })
-    assert (and_or_cond.validate(user))[0]
-
-
 def test_uoc_condition_simple():
     '''Testing simple uoc condition without complex keywords'''
     user = User(USERS["user3"])

@@ -1,8 +1,9 @@
 """
 APIs for the /courses/ route.
 """
+from contextlib import suppress
 import re
-from typing import Dict, List, Set, Tuple
+from typing import Dict, List, Mapping, Set, Tuple
 
 from algorithms.objects.user import User
 from data.config import ARCHIVED_YEARS
@@ -99,7 +100,7 @@ def api_index() -> str:
                         "exclusions": {"DPST1091": 1},
                         "terms": ["T1", "T2", "T3"],
                         "raw_requirements": "",
-                        "gen_ed": 1,
+                        "gen_ed": True,
                     }
                 }
             },
@@ -113,7 +114,6 @@ def get_course(courseCode: str) -> Dict:
     - if not found, check the archives
     """
     result = coursesCOL.find_one({"code": courseCode})
-
     if not result:
         for year in sorted(ARCHIVED_YEARS, reverse=True):
             result = archivesDB[str(year)].find_one({"code": courseCode})
@@ -132,7 +132,8 @@ def get_course(courseCode: str) -> Dict:
     result['is_accurate'] = CONDITIONS.get(courseCode) is not None
     result['handbook_note'] = CACHED_HANDBOOK_NOTE.get(courseCode, "")
     del result["_id"]
-
+    with suppress(KeyError):
+        del result["exclusions"]["leftover_plaintext"]
     return result
 
 
@@ -189,14 +190,14 @@ def search(userData: UserData, search_string: str) -> Dict[str, str]:
     weighted_results = sorted(top_results, reverse=True,
                               key=lambda course: weight_course(course,
                                                                search_string,
-                                                               structure, 
+                                                               structure,
                                                                majors,
                                                                minors)
                               )[:30]
 
     return dict(weighted_results)
 
-def regex_search(search_string: str) -> dict[str, str]:
+def regex_search(search_string: str) -> Mapping[str, str]:
     """
     Uses the search string as a regex to match all courses with an exact pattern.
     """
@@ -245,7 +246,7 @@ def get_all_unlocked(userData: UserData) -> Dict[str, Dict]:
     """
 
     coursesState = {}
-    user = User(fix_user_data(userData.dict())) if not isinstance(userData, User) else userData
+    user = User(fix_user_data(userData.dict()))
     for course, condition in CONDITIONS.items():
         result, warnings = condition.validate(user) if condition is not None else (True, [])
         if result:
@@ -334,7 +335,7 @@ def get_legacy_course(year, courseCode):
                      }
                  }
             })
-def unselect_course(userData: UserData, unselectedCourse: str) -> List[str]:
+def unselect_course(userData: UserData, unselectedCourse: str) -> dict[str, list[str]]:
     """
     Creates a new user class and returns all the courses
     affected from the course that was unselected in alphabetically sorted order
@@ -391,7 +392,7 @@ def course_children(course: str):
                     "courses": ["COMP1521", "COMP1531"]
                 }
             })
-def get_path_from(course: str) -> Dict[str, str | Dict[str, List[str]]]:
+def get_path_from(course: str) -> dict[str, str | list[str]]:
     """
     fetches courses which can be used to satisfy 'course'
     eg 2521 -> 1511
@@ -401,7 +402,7 @@ def get_path_from(course: str) -> Dict[str, str | Dict[str, List[str]]]:
         raise HTTPException(400, f"no course by name {course}")
     return {
         "original" : course,
-        "courses" :[
+        "courses" : [
             coursename for coursename, _ in CONDITIONS.items()
             if course_condition.is_path_to(coursename)
         ]
@@ -425,21 +426,18 @@ def get_path_from(course: str) -> Dict[str, str | Dict[str, List[str]]]:
             })
 def courses_unlocked_when_taken(userData: UserData, courseToBeTaken: str) -> Dict[str, List[str]]:
     """ Returns all courses which are unlocked when given course is taken """
-    # define the user object with user data
-    user = User(fix_user_data(userData.dict()))
-
     ## initial state
-    courses_initially_unlocked: set = unlocked_set(get_all_unlocked(user)['courses_state'])
+    courses_initially_unlocked = unlocked_set(get_all_unlocked(userData)['courses_state'])
     ## add course to the user
-    user.add_courses({courseToBeTaken: [get_course(courseToBeTaken)['UOC'], None]})
+    userData.courses[courseToBeTaken] = [get_course(courseToBeTaken)['UOC'], None]
     ## final state
-    courses_now_unlocked: set = unlocked_set(get_all_unlocked(user)['courses_state'])
-    new_courses: set = courses_now_unlocked - courses_initially_unlocked
+    courses_now_unlocked = unlocked_set(get_all_unlocked(userData)['courses_state'])
+    new_courses = courses_now_unlocked - courses_initially_unlocked
 
     ## Differentiate direct and indirect unlocks
-    path_to: set = set(course_children(courseToBeTaken)["courses"])
-    direct_unlock: set  = new_courses.intersection(path_to)
-    indirect_unlock: set= new_courses - direct_unlock
+    path_to = set(course_children(courseToBeTaken)["courses"])
+    direct_unlock = new_courses.intersection(path_to)
+    indirect_unlock = new_courses - direct_unlock
 
     return {
         'direct_unlock': sorted(list(direct_unlock)),
@@ -465,7 +463,7 @@ def fuzzy_match(course: Tuple[str, str], search_term: str) -> float:
                sum(fuzz.partial_ratio(title.lower(), word)
                        for word in search_term.split(' ')))
 
-def weight_course(course: tuple, search_term: str, structure: dict,
+def weight_course(course: tuple[str, str], search_term: str, structure: dict,
                   majors: list, minors: list) -> float:
     """ Gives the course a weighting based on the relevance to the user's degree """
     weight = fuzzy_match(course, search_term)
@@ -508,4 +506,3 @@ def weight_course(course: tuple, search_term: str, structure: dict,
             break
 
     return weight
-
