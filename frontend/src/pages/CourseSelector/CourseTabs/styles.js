@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const CourseTabsWrapper = styled.div`
   background-color: ${({ theme }) => theme.purpleLight};
-  padding-left: calc(2vw - 2px); // 20vw - width of menu sidebar, 2px is tab margin-left
+  padding-left: calc(20vw - 2px); // 20vw - width of menu sidebar, 2px is tab margin-left
   padding-right: 25px;
   width: 100vw;
   height: var(--cs-tabs-cont-height);
@@ -11,16 +11,15 @@ const CourseTabsWrapper = styled.div`
 `;
 
 const ShowAllCourses = styled.div`
+  position: absolute;
+  left: 20px;
   display: flex;
   align-items: center;
-  postion: absolute;
-  left: 20px;
-  width: calc(18vw - 2px); // Added calc(18vw - 2px) so the width of the toggle switch changes when the viewport is changed.
+  width: calc(14vw - 2px);
 `;
 
 const TextShowCourses = styled.div`
   margin: 5px;
-  padding-bottom: 2px;
 `;
 
 const CourseTabsSection = styled.div`
@@ -36,4 +35,6 @@ const TabsCloseAll = styled.div`
   margin: 0 15px;
 `;
 
-export default { CourseTabsWrapper, CourseTabsSection, TabsCloseAll, ShowAllCourses, TextShowCourses};
+export default {
+  CourseTabsWrapper, CourseTabsSection, TabsCloseAll, ShowAllCourses, TextShowCourses,
+};

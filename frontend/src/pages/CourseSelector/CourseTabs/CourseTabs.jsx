@@ -2,7 +2,7 @@ import React from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import { DeleteOutlined } from "@ant-design/icons";
-import { Popconfirm, Tooltip, Switch } from "antd";
+import { Popconfirm, Switch, Tooltip } from "antd";
 import DraggableTab from "components/DraggableTab";
 import { reorderTabs, resetTabs, setActiveTab } from "reducers/courseTabsSlice";
 import { toggleLockedCourses } from "reducers/settingsSlice";

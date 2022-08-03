@@ -43,4 +43,6 @@ const TextShowMarks = styled.div`
   font-size: 14px;
 `;
 
-export default { OptionsHeaderWrapper, OptionButton, OptionSection, ShowMarks, TextShowMarks };
+export default {
+  OptionsHeaderWrapper, OptionButton, OptionSection, ShowMarks, TextShowMarks,
+};

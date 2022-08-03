@@ -7,7 +7,6 @@ import prepareUserPayload from "../utils";
 import CourseTitle from "./CourseTitle";
 import LoadingSkeleton from "./LoadingSkeleton/LoadingSkeleton";
 import S from "./styles";
-import Title from "antd/lib/skeleton/Title";
 
 const SubgroupTitle = ({ subGroup, group, coursesUnits }) => {
   const { curr, total } = coursesUnits[group][subGroup];
