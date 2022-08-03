@@ -3,7 +3,11 @@ General purpose utility functions for the server, that do not fit
 specifically in any one function
 """
 
-def map_suppressed_errors(func: callable, errors_log: list[any], *args, **kwargs) -> any:
+
+from typing import Any
+
+
+def map_suppressed_errors(func: callable, errors_log: list[Any], *args, **kwargs) -> Any:
     """
     Map a function to a list of arguments, and return the result of the function
     if no error is raised. If an error is raised, log the error and return None.
