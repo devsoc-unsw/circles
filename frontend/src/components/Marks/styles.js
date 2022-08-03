@@ -1,3 +1,4 @@
+import { Typography } from "antd";
 import styled from "styled-components";
 
 const MarksWrapper = styled.div`
@@ -9,4 +10,9 @@ const MarksWrapper = styled.div`
     border: 1px solid #000000;
   }
 `;
-export default { MarksWrapper };
+
+const Text = styled(Typography)`
+  color: ${({ theme }) => theme.text};
+`;
+
+export default { MarksWrapper, Text };
