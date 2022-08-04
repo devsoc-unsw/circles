@@ -28,6 +28,7 @@ const HideYearTooltip = ({ year }) => {
 
   return (
     <Tooltip title="Hide year">
+      {/* TODO: Hacky way to have className for YearWrapper styling */}
       <div role="button" className="year-tooltip" onClick={handleHideYear}>
         <EyeInvisibleFilled />
       </div>

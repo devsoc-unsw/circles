@@ -18,6 +18,7 @@ const GridViewConciseSubgroup = ({
   };
 
   const planned = subgroupEntries.filter((c) => (c.unplanned || c.past || c.past === false));
+  const plannedUOC = planned.reduce((sum, course) => (sum + (course.uoc ?? 0)), 0);
   const unplanned = subgroupEntries.filter((c) => (!(c.unplanned || c.past || c.past === false)));
 
   // convert lists to components
@@ -36,7 +37,7 @@ const GridViewConciseSubgroup = ({
     const [modalVisible, setModalVisible] = useState(false);
     if (hasLotsOfCourses && planState === plannedState.UNPLANNED) {
       return (
-        <S.CourseGroup>
+        <S.ViewAllCoursesWrapper>
           <Button type="primary" onClick={() => setModalVisible(true)}>
             View All Courses
           </Button>
@@ -46,7 +47,7 @@ const GridViewConciseSubgroup = ({
             setModalVisible={setModalVisible}
             courses={unplanned}
           />
-        </S.CourseGroup>
+        </S.ViewAllCoursesWrapper>
       );
     }
 
@@ -64,18 +65,18 @@ const GridViewConciseSubgroup = ({
   return (
     <div key={subgroupKey}>
       <Title level={2} className="text">{subgroupKey}</Title>
-      <Title level={3} className="text">{uoc} UOC worth of courses</Title>
+      <Title level={3} className="text">{uoc} UOC of the following courses</Title>
       {!!subgroupEntries.length && (
         <>
           <Collapsible
-            title={<Title level={4} className="text">Courses in your planner</Title>}
+            title={<Title level={4} className="text">You have {plannedUOC} UOC worth of courses planned</Title>}
             headerStyle={{ border: "none" }}
             initiallyCollapsed={!planned.length}
           >
             {collapsibleSection(plannedState.PLANNED)}
           </Collapsible>
           <Collapsible
-            title={<Title level={4} className="text">Choose the following courses</Title>}
+            title={<Title level={4} className="text">Choose {Math.max(uoc - plannedUOC, 0)} UOC from the following courses</Title>}
             headerStyle={{ border: "none" }}
             initiallyCollapsed={!hasLotsOfCourses && (unplanned.length > 16 || !unplanned.length)}
           >

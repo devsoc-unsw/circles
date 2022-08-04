@@ -16,9 +16,8 @@ const PageTemplate = ({ children, showHeader = true }) => (
         content="circles, unsw, csesoc, degree, planner, course, plan"
       />
     </Helmet>
-    { showHeader && <Header />}
-    {/* TODO: Make below as styled component once less has been migrated */}
-    <div className="app-root content">
+    {showHeader && <Header />}
+    <div>
       {children}
       <FeedbackButton />
     </div>

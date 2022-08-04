@@ -6,7 +6,7 @@ import {
   EyeInvisibleOutlined,
   // TableOutlined,
 } from "@ant-design/icons";
-import { Button, Divider } from "antd";
+import { Button, Divider, notification } from "antd";
 import axios from "axios";
 import PageTemplate from "components/PageTemplate";
 import Dashboard from "./Dashboard";
@@ -67,6 +67,7 @@ const ProgressionCheckerCourses = ({ structure, isLoading }) => {
 const ProgressionChecker = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [structure, setStructure] = useState({});
+  const [uoc, setUoc] = useState(null);
 
   const {
     programCode, specs,
@@ -79,6 +80,7 @@ const ProgressionChecker = () => {
       try {
         const res = await axios.get(`/programs/getStructure/${programCode}/${specs.join("+")}`);
         setStructure(res.data.structure);
+        setUoc(res.data.uoc);
       } catch (err) {
         // eslint-disable-next-line no-console
         console.log(err);
@@ -87,6 +89,15 @@ const ProgressionChecker = () => {
     };
     if (programCode && specs.length > 0) fetchStructure();
   }, [programCode, specs]);
+
+  useEffect(() => {
+    notification.info({
+      message: "Disclaimer",
+      description: "This progression check is intended to outline the courses required by your degree and may not be 100% accurate. Please refer to UNSW's official progression check and handbook for further accuracy.",
+      placement: "bottomRight",
+      duration: 20,
+    });
+  }, []);
 
   const storeUOC = {};
 
@@ -98,12 +109,9 @@ const ProgressionChecker = () => {
     };
 
     // Example subgroup: Core Courses, Computing Electives
-    Object.keys(structure[group]).forEach((subgroup) => {
-      // Do not include if field is not an object i.e. 'name' field
-      if (typeof structure[group][subgroup] === "string") return;
-
-      storeUOC[group].total += structure[group][subgroup].UOC;
-      const subgroupStructure = structure[group][subgroup];
+    Object.keys(structure[group].content).forEach((subgroup) => {
+      storeUOC[group].total += structure[group].content[subgroup].UOC;
+      const subgroupStructure = structure[group].content[subgroup];
 
       const isRule = subgroupStructure.type && subgroupStructure.type.includes("rule");
 
@@ -121,7 +129,7 @@ const ProgressionChecker = () => {
   return (
     <PageTemplate>
       <S.Wrapper>
-        <Dashboard storeUOC={storeUOC} isLoading={isLoading} structure={structure} />
+        <Dashboard storeUOC={storeUOC} isLoading={isLoading} structure={structure} uoc={uoc} />
         <Divider id="divider" />
         <ProgressionCheckerCourses structure={structure} isLoading={isLoading} />
       </S.Wrapper>

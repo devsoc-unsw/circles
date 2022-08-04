@@ -7,6 +7,7 @@ if you need to  bash this, use python3 -m runprocessors --type data-fix --stage 
 import argparse
 import subprocess
 from sys import exit
+from typing import Callable
 
 from algorithms.cache.cache import (cache_exclusions, cache_handbook_note,
                                     cache_mappings, cache_program_mappings)
@@ -60,7 +61,7 @@ def run_manual_fixes():
         exit(0)
 
 
-run = {
+run: dict[str, dict[str, Callable]] = {
     "faculty": {
         "format": format_code_data,
     },

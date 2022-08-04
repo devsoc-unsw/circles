@@ -5,14 +5,18 @@ import { useSelector } from "react-redux";
 import ReactTooltip from "react-tooltip";
 import { InfoCircleOutlined, WarningOutlined } from "@ant-design/icons";
 import { Typography } from "antd";
+import { useTheme } from "styled-components";
 import Marks from "components/Marks";
 import useMediaQuery from "hooks/useMediaQuery";
 import ContextMenu from "../ContextMenu";
 import S from "./styles";
 
-const DraggableCourse = ({ code, index, showMarks }) => {
-  const { Text } = Typography;
+const DraggableCourse = ({
+  code, index, showMarks, term,
+}) => {
   const { courses, isSummerEnabled, completedTerms } = useSelector((state) => state.planner);
+  const theme = useTheme();
+  const Text = Typography;
 
   // prereqs are populated in CourseDescription.jsx via course.raw_requirements
   const {
@@ -39,12 +43,11 @@ const DraggableCourse = ({ code, index, showMarks }) => {
   );
   const errorIsInformational = shouldHaveWarning && isUnlocked
     && warningMessage.length === 0 && !isLegacy && isAccurate && isOffered;
-
   return (
     <>
       <Draggable
         isDragDisabled={isDragDisabled}
-        draggableId={code}
+        draggableId={`${code}${term}`}
         index={index}
       >
         {(provided) => (
@@ -64,20 +67,24 @@ const DraggableCourse = ({ code, index, showMarks }) => {
             onContextMenu={displayContextMenu}
           >
             {!isDragDisabled && shouldHaveWarning
-              && (errorIsInformational ? <InfoCircleOutlined style={{ color: "#000" }} /> : (
+              && (errorIsInformational ? (
+                <InfoCircleOutlined
+                  style={{ color: theme.infoOutlined.color }}
+                />
+              ) : (
                 <WarningOutlined
-                  style={{ color: "#DC9930", fontSize: "16px" }}
+                  style={{ fontSize: "16px", color: theme.warningOutlined.color }}
                 />
               ))}
             <S.CourseLabel>
               {isSmall ? (
-                <Text>{code}</Text>
+                <Text className="text">{code}</Text>
               ) : (
                 <div>
-                  <Text strong>
-                    {code}
+                  <Text className="text">
+                    <strong>{code}: </strong>
+                    {title}
                   </Text>
-                  <Text>: {title} </Text>
                 </div>
               )}
               {showMarks && <Marks mark={mark} />}

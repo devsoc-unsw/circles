@@ -3,7 +3,20 @@ import { useNavigate } from "react-router-dom";
 import { EyeOutlined } from "@ant-design/icons";
 import { Badge, Tooltip } from "antd";
 import CourseButton from "components/CourseButton";
+import { purple } from "config/constants";
 import S from "./styles";
+
+const UOCBadge = ({ uoc }) => (
+  <S.UOCBadgeWrapper>
+    <Badge
+      style={{
+        backgroundColor: purple, color: "white", lineHeight: "1.5", height: "auto",
+      }}
+      size="small"
+      count={`${uoc} UOC`}
+    />
+  </S.UOCBadgeWrapper>
+);
 
 const CourseBadge = ({ course }) => {
   const navigate = useNavigate();
@@ -24,12 +37,18 @@ const CourseBadge = ({ course }) => {
         onClick={handleClick}
       >
         <CourseButton course={course} planned={false} />
+        <UOCBadge uoc={course.uoc} />
       </Badge>
     );
   }
 
   if (course.past) {
-    return <CourseButton course={course} planned />;
+    return (
+      <div style={{ position: "relative" }}>
+        <CourseButton course={course} planned />
+        <UOCBadge uoc={course.uoc} />
+      </div>
+    );
   }
 
   // for future courses planned
@@ -48,6 +67,7 @@ const CourseBadge = ({ course }) => {
         onClick={handleClick}
       >
         <CourseButton course={course} planned />
+        <UOCBadge uoc={course.uoc} />
       </Badge>
     );
   }

@@ -39,15 +39,9 @@ def assert_possible_structure(unlocked, program, spec):
     structure = requests.get(f'http://127.0.0.1:8000/programs/getStructure/{program}/{spec}').json()['structure']
     for container in structure:
         with suppress(KeyError):
-            del structure[container]['name']
-            del structure[container]['Flexible Education']
             del structure[container]['General Education']
-
-        for container2 in structure[container]:
-            with suppress(KeyError):
-                del structure[container][container2]['name']
-
-            for course in structure[container][container2]['courses']:
+        for container2 in structure[container]['content']:
+            for course in structure[container]['content'][container2]['courses']:
                 for c in unlocked:
                     if course in c and all(ignore not in c for ignore in ignored):
                         assert unlocked[c]['is_accurate'], f'{c} is inaccurate'

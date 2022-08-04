@@ -42,6 +42,8 @@ from algorithms.objects.helper import (
     is_specialisation,
     is_uoc,
     is_wam,
+    get_level_category,
+    get_course_category
 )
 
 # Load in cached exclusions
@@ -49,7 +51,7 @@ CACHED_EXCLUSIONS_PATH = "./algorithms/cache/exclusions.json"
 with open(CACHED_EXCLUSIONS_PATH, "r", encoding="utf8") as f:
     CACHED_EXCLUSIONS = json.load(f)
 
-def create_category(tokens) -> Tuple[Category, int]: # pylint: disable=too-many-return-statements
+def create_category(tokens) -> Tuple[Category | None, int]: # pylint: disable=too-many-return-statements
     """
     Given a list of tokens starting from after the connector keyword, create
     and return the category object matching the category, as well as the current index
@@ -108,13 +110,11 @@ def create_category(tokens) -> Tuple[Category, int]: # pylint: disable=too-many-
 
     if re.match(r"^L[0-9]$", tokens[0], flags=re.IGNORECASE):
         # Level category. Get the level, then determine next token if there is one
-        level = int(re.match(r"^L([0-9])$", tokens[0], flags=re.IGNORECASE).group(1))
+        level = get_level_category(tokens[0])
 
         if re.match(r"^[A-Z]{4}$", tokens[1], flags=re.IGNORECASE):
             # Level Course Category. e.g. L2 MATH
-            course_code = re.match(
-                r"^([A-Z]{4})$", tokens[1], flags=re.IGNORECASE
-            ).group(1)
+            course_code = get_course_category(tokens[1])
 
             return LevelCourseCategory(level, course_code), 1
 
@@ -135,7 +135,7 @@ def create_category(tokens) -> Tuple[Category, int]: # pylint: disable=too-many-
     )
 
 
-def create_condition(tokens, course=None) -> CompositeCondition:
+def create_condition(tokens, course=None) -> CompositeCondition | None:
     """
     The main wrapper for make_condition so we don't get 2 returns.
     Given the parsed logical tokens list (assuming starting and ending bracket),
@@ -145,7 +145,7 @@ def create_condition(tokens, course=None) -> CompositeCondition:
     return make_condition(tokens, True, course)[0]
 
 
-def make_condition(tokens, first=False, course=None) -> Tuple[CompositeCondition, int]:
+def make_condition(tokens, first=False, course=None) -> Tuple[CompositeCondition | None, int]:
     """
     To be called by create_condition
     Given the parsed logical tokens list, (assuming starting and ending bracket),
@@ -217,6 +217,7 @@ def make_condition(tokens, first=False, course=None) -> Tuple[CompositeCondition
         elif is_program_type(token):
             result.add_condition(ProgramTypeCondition(token))
         else:
+            cond: UOCCondition | WAMCondition | GradeCondition
             if is_uoc(token):
                 # Condition for UOC requirement
                 cond = UOCCondition(get_uoc(token))

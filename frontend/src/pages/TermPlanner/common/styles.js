@@ -7,7 +7,7 @@ export const GridItem = styled.div`
 `;
 
 export const Droppable = css`
-  background-color: #e8fef2;
+  background-color: ${({ theme }) => theme.droppable.backgroundColor};
   border-color: #e8fef2;
 `;
 
@@ -44,7 +44,7 @@ const MenuPopup = styled.div`
 const PopupEntry = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
   margin-bottom: 10px;
 `;
 
@@ -60,6 +60,16 @@ const MenuDivider = styled(Divider)`
   margin: 0.5rem 0;
 `;
 
+const MenuHeader = styled.div`
+  font-size: 1.5rem;
+  font-weight: 600;
+`;
+
+const MenuText = styled.span`
+  font-size: 1rem;
+  font-weight: 500;
+`;
+
 export default {
-  MenuPopup, PopupEntry, MenuWrapper, MenuDivider,
+  MenuPopup, PopupEntry, MenuWrapper, MenuDivider, MenuHeader, MenuText,
 };

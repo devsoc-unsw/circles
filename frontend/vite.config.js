@@ -1,12 +1,16 @@
 import react from "@vitejs/plugin-react";
 import { resolve } from "path";
 import { defineConfig } from "vite";
+import eslint from "vite-plugin-eslint";
 import svgrPlugin from "vite-plugin-svgr";
 
 const projectRootDir = resolve(__dirname);
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  define: {
+    "process.env": process.env,
+  },
   // This changes the out put dir from dist to build
   // comment this out if that isn't relevant for your project
   build: {
@@ -20,6 +24,7 @@ export default defineConfig({
         // ...svgr options (https://react-svgr.com/docs/options/)
       },
     }),
+    eslint(),
   ],
   resolve: {
     alias: [

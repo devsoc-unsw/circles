@@ -10,7 +10,7 @@ const TermBoxWrapper = styled.ul`
   padding: 1.2em;
   border-radius: 2em;
   transition: 200ms ease-out;
-  border: 0.5px solid #d9d9d9;
+  border: 0.5px solid ${({ theme }) => theme.termBoxWrapper.borderColor};
   position: relative;
 
   ${({ droppable }) => droppable && Droppable}
@@ -45,6 +45,7 @@ const TermCheckboxWrapper = styled.div`
   justify-content: center;
   padding-top: 3.5px;
   transition: all 200ms ease;
+  color: ${({ checked }) => (checked ? "#000" : "#000")}; 
 
   &:hover {
     cursor: pointer;
@@ -59,4 +60,6 @@ const UOCBadgeWrapper = styled.div`
   right: 0;
 `;
 
-export default { TermBoxWrapper, TermCheckboxWrapper, UOCBadgeWrapper };
+export default {
+  TermBoxWrapper, TermCheckboxWrapper, UOCBadgeWrapper,
+};

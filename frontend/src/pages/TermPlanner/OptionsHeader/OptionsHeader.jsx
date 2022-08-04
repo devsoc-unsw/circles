@@ -98,7 +98,6 @@ const OptionsHeader = ({ plannerRef }) => {
         <div>
           <Switch
             defaultChecked={showMarks}
-            className="cs-toggle-locked"
             onChange={() => dispatch(toggleShowMarks())}
             checkedChildren="marks shown"
             unCheckedChildren="marks hidden"

@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getCurrentTermId, getTermsList } from "pages/TermPlanner/utils";
 
 // set up hidden object
 const generateHiddenInit = (startYear, numYears) => {
@@ -78,20 +79,132 @@ const plannerSlice = createSlice({
       state.unplanned = state.unplanned.filter(
         (c) => c !== course,
       );
-      state.years[destRow][destTerm].splice(destIndex, 0, course);
+
+      if (state.courses[course].isMultiterm) {
+        const { UOC: uoc, termsOffered } = state.courses[course];
+        const termsList = getTermsList(destTerm, uoc, termsOffered, state.isSummerEnabled, 0);
+
+        // Add course multiple times
+        termsList.forEach((termRow) => {
+          const { term, rowOffset } = termRow;
+          const index = state.years[destRow + rowOffset][term].length;
+          state.years[destRow + rowOffset][term].splice(index, 0, course);
+        });
+      } else {
+        state.years[destRow][destTerm].splice(destIndex, 0, course);
+      }
     },
     setPlannedCourseToTerm: (state, action) => {
       const {
-        srcRow, srcTerm, srcIndex,
-        destRow, destTerm, destIndex, course,
+        srcRow, srcTerm, srcIndex, destRow, destTerm, destIndex, course,
       } = action.payload;
-      state.years[srcRow][srcTerm].splice(srcIndex, 1);
-      state.years[destRow][destTerm].splice(destIndex, 0, course);
+
+      const {
+        UOC: uoc, termsOffered, isMultiterm,
+      } = state.courses[course];
+
+      const srcTermList = [];
+
+      // If only changing index of multiterm course, don't touch other course instances
+      if (isMultiterm && srcRow === destRow && srcTerm === destTerm) {
+        const targetTerm = state.years[srcRow][srcTerm];
+        targetTerm.splice(srcIndex, 1);
+        targetTerm.splice(destIndex, 0, course);
+        return;
+      }
+
+      // Remove every instance of the course from the planner
+      const previousIndex = {};
+      for (let year = 0; year < state.years.length; year++) {
+        const terms = Object.keys(state.years[year]);
+        terms.forEach((term) => {
+          const targetTerm = state.years[year][term];
+          const courseIndex = targetTerm.indexOf(course);
+          if (courseIndex !== -1) {
+            previousIndex[`${year}${term}`] = courseIndex;
+            targetTerm.splice(courseIndex, 1);
+            srcTermList.push(term);
+          }
+        });
+      }
+
+      // Add new instances of the course into the planner
+      const instanceNum = srcTermList.indexOf(srcTerm);
+      const newTerms = state.courses[course].isMultiterm ? getTermsList(
+        destTerm,
+        uoc,
+        termsOffered,
+        state.isSummerEnabled,
+        instanceNum,
+      ) : [];
+      newTerms.splice(instanceNum, 1);
+      const firstTerm = state.years[destRow][destTerm];
+      let dropIndex = destIndex;
+
+      // Place dragged multiterm instance into correct index
+      if (isMultiterm && `${destRow}${destTerm}` in previousIndex) {
+        const currIndex = previousIndex[`${destRow}${destTerm}`];
+        if (currIndex < destIndex) {
+          dropIndex -= 1;
+        }
+      }
+      firstTerm.splice(dropIndex, 0, course);
+      newTerms.forEach((termRowOffset) => {
+        const { term, rowOffset } = termRowOffset;
+        const targetTerm = state.years[destRow + rowOffset][term];
+        const termId = `${destRow + rowOffset}${term}`;
+        const index = termId in previousIndex ? previousIndex[termId] : targetTerm.length;
+        targetTerm.splice(index, 0, course);
+      });
     },
     moveCourse: (state, action) => {
-      const { course, term } = action.payload;
+      const { course, destTerm, srcTerm } = action.payload;
+
+      // If about to move multiterm course out of bounds, do nothing
+      if (state.courses[course].isMultiterm) {
+        const year = parseInt(destTerm.slice(0, 4), 10);
+        const startTerm = destTerm.slice(4);
+        const { UOC: uoc, termsOffered, plannedFor } = state.courses[course];
+        const instanceNum = plannedFor ? plannedFor.split(" ").indexOf(srcTerm) : 0;
+
+        const terms = getTermsList(
+          startTerm,
+          uoc,
+          termsOffered,
+          state.isSummerEnabled,
+          instanceNum,
+        );
+        const maxRowOffset = terms[terms.length - 1].rowOffset;
+        if (year + maxRowOffset > state.startYear + state.numYears) {
+          return;
+        }
+      }
+
       if (state.courses[course]) {
-        state.courses[course].plannedFor = term;
+        const newPlannedFor = [destTerm];
+
+        // Moving a single course moves every instance of it.
+        if (state.courses[course].isMultiterm) {
+          const { UOC: uoc, termsOffered, plannedFor } = state.courses[course];
+          const startTerm = destTerm.slice(4);
+          const instanceNum = plannedFor ? plannedFor.split(" ").indexOf(srcTerm) : 0;
+          const terms = getTermsList(
+            startTerm,
+            uoc,
+            termsOffered,
+            state.isSummerEnabled,
+            instanceNum,
+          );
+          terms.splice(instanceNum, 1);
+
+          terms.forEach((termRow) => {
+            const { term: currentTerm, rowOffset } = termRow;
+            const termId = getCurrentTermId(destTerm, currentTerm, rowOffset);
+            newPlannedFor.push(termId);
+          });
+        }
+        newPlannedFor.sort();
+        state.courses[course].plannedFor = newPlannedFor.join(" ");
       }
     },
     updateCourseMark: (state, action) => {
@@ -112,13 +225,15 @@ const plannerSlice = createSlice({
 
         if (plannedFor) {
           // course must already been planned
-          // Example plannedFor: '2021t2'
-          const yearIndex = parseInt(plannedFor.slice(0, 4), 10) - state.startYear;
-          const term = plannedFor.slice(4);
-          // remove the course from the year and term
-          state.years[yearIndex][term] = state.years[yearIndex][term].filter(
-            (course) => course !== action.payload,
-          );
+          // Example plannedFor: '2021t2 2021t3 2022t1'
+          plannedFor.split(" ").forEach((termId) => {
+            const yearIndex = parseInt(termId.slice(0, 4), 10) - state.startYear;
+            const term = termId.slice(4);
+            // remove the course from the year and term
+            state.years[yearIndex][term] = state.years[yearIndex][term].filter(
+              (course) => course !== action.payload,
+            );
+          });
         } else {
           // course must be in unplanned
           state.unplanned = state.unplanned.filter(
@@ -158,10 +273,12 @@ const plannerSlice = createSlice({
 
       const { plannedFor } = state.courses[code];
 
-      const yearI = parseInt(plannedFor.slice(0, 4), 10) - state.startYear;
-      const termI = plannedFor.slice(4);
+      plannedFor.split(" ").forEach((termId) => {
+        const yearI = parseInt(termId.slice(0, 4), 10) - state.startYear;
+        const termI = termId.slice(4);
 
-      state.years[yearI][termI] = state.years[yearI][termI].filter((course) => course !== code);
+        state.years[yearI][termI] = state.years[yearI][termI].filter((course) => course !== code);
+      });
 
       state.courses[code].plannedFor = null;
       state.courses[code].isUnlocked = true;

@@ -13,7 +13,12 @@ import OptionsHeader from "./OptionsHeader";
 import S from "./styles";
 import TermBox from "./TermBox";
 import UnplannedColumn from "./UnplannedColumn";
-import { isPlannerEmpty, prepareCoursesForValidation } from "./utils";
+import {
+  checkIsMultiterm,
+  checkMultitermInBounds,
+  isPlannerEmpty,
+  prepareCoursesForValidation,
+} from "./utils";
 // Used for tippy stylings
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
@@ -23,7 +28,16 @@ const openNotification = () => {
     message: "Your terms are looking a little empty",
     description: "Add courses from the course selector to the term planner by dragging from the unplanned column",
     duration: 3,
-    className: "text helpNotif",
+    placement: "bottomRight",
+  };
+  notification.info(args);
+};
+
+const outOfBoundsMultitermNotification = (course) => {
+  const args = {
+    message: `${course} would extend outside of the term planner`,
+    description: `Keep ${course} inside the calendar by moving it to a different term instead`,
+    duration: 3,
     placement: "bottomRight",
   };
   notification.info(args);
@@ -70,7 +84,7 @@ const TermPlanner = () => {
   const plannerPicRef = useRef();
 
   const handleOnDragStart = (courseItem) => {
-    const course = courseItem.draggableId;
+    const course = courseItem.draggableId.slice(0, 8);
     const terms = planner.courses[course].termsOffered;
     setTermsOffered(terms);
     setIsDragging(true);
@@ -78,19 +92,37 @@ const TermPlanner = () => {
 
   const handleOnDragEnd = (result) => {
     setIsDragging(false);
-
-    const { destination, source, draggableId } = result;
+    const { destination, source, draggableId: draggableIdUnique } = result;
+    // draggableIdUnique contains course code + term (e.g. COMP151120T1)
+    // draggableId only contains the course code (e.g. COMP1511)
+    const draggableId = draggableIdUnique.slice(0, 8);
 
     if (!destination) return; // drag outside container
 
     if (destination.droppableId !== "unplanned") {
+      // Check if multiterm course extends below bottom row of term planner
+      if (checkIsMultiterm(draggableId, planner.courses) && !checkMultitermInBounds({
+        destRow: destination.droppableId.match(/[0-9]{4}/)[0] - planner.startYear,
+        destTerm: destination.droppableId.match(/T[0-3]/)[0],
+        srcTerm: source.droppableId,
+        course: planner.courses[draggableId],
+        isSummerTerm: planner.isSummerEnabled,
+        numYears: planner.numYears,
+      })) {
+        outOfBoundsMultitermNotification(draggableId);
+        return;
+      }
+
       // === moving course to unplanned doesn't require term logic ===
-      dispatch(
-        moveCourse({
-          course: draggableId,
-          term: destination.droppableId,
-        }),
-      );
+      if (destination.droppableId !== source.droppableId) {
+        dispatch(
+          moveCourse({
+            course: draggableId,
+            destTerm: destination.droppableId,
+            srcTerm: source.droppableId,
+          }),
+        );
+      }
     }
 
     if (
@@ -127,14 +159,13 @@ const TermPlanner = () => {
       const srcTerm = source.droppableId.match(/T[0-3]/)[0];
       const srcRow = srcYear - planner.startYear;
       const srcIndex = source.index;
-
       dispatch(setPlannedCourseToTerm({
         srcRow,
         srcTerm,
         srcIndex,
         destRow,
         destTerm,
-        destIndex: destination.index,
+        destIndex,
         course: draggableId,
       }));
     }
