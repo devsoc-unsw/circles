@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-type DegreeSliceType = {
+type SliceState = {
   programCode: string
   programName: string
   specs: string[]
   isComplete: boolean
 };
 
-const initialState: DegreeSliceType = {
+const initialState: SliceState = {
   programCode: "",
   programName: "",
   specs: [],

@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-type CourseTabsSlice = {
+type SliceState = {
   tabs: string[]
   active: number
 };
 
-const initialState: CourseTabsSlice = {
+const initialState: SliceState = {
   tabs: [],
   active: 0,
 };
