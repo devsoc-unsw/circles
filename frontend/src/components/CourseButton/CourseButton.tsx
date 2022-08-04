@@ -7,7 +7,7 @@ import S from "./styles";
 type Props = {
   course: any
   planned: boolean
-}
+};
 
 const CourseButton = ({ course, planned }: Props) => {
   const dispatch = useDispatch();
