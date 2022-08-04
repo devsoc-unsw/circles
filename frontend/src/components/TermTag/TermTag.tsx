@@ -1,7 +1,11 @@
 import React from "react";
 import S from "./styles";
 
-const TermTag = ({ name }) => (
+type Props = {
+  name: string
+}
+
+const TermTag = ({ name }: Props) => (
   <S.Tag className="text">
     {name}
   </S.Tag>

@@ -45,7 +45,6 @@ const TermCheckboxWrapper = styled.div`
   justify-content: center;
   padding-top: 3.5px;
   transition: all 200ms ease;
-  color: ${({ checked }) => (checked ? "#000" : "#000")}; 
 
   &:hover {
     cursor: pointer;
