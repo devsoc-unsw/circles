@@ -8,8 +8,8 @@ type Props = {
   uoc: number
   subgroupKey: string
   subgroupEntries: any
-  hasLotsOfCourses: any
-}
+  hasLotsOfCourses?: boolean
+};
 
 const GridViewSubgroup = ({
   uoc,
