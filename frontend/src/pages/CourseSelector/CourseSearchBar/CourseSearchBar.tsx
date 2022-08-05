@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Select, Spin } from "antd";
 import axios from "axios";
 import { useDebounce } from "use-debounce";
+import prepareUserPayload from "utils/prepareUserPayload";
 import { RootState } from "config/store";
 import { addTab } from "reducers/courseTabsSlice";
-import prepareUserPayload from "../utils";
 
 const CourseSearchBar = () => {
   const [value, setValue] = useState(null);
@@ -19,7 +19,7 @@ const CourseSearchBar = () => {
   const planner = useSelector((state: RootState) => state.planner);
   const degree = useSelector((state: RootState) => state.degree);
 
-  const searchCourse = async (query) => {
+  const searchCourse = async (query: string) => {
     try {
       const res = await axios.post(
         `/courses/searchCourse/${query}`,
@@ -45,12 +45,12 @@ const CourseSearchBar = () => {
     }
   }, [debouncedSearchTerm, degree, planner]);
 
-  const handleSelect = (courseCode) => {
+  const handleSelect = (courseCode: string) => {
     setValue(null);
     dispatch(addTab(courseCode));
   };
 
-  const handleSearch = (courseCode) => {
+  const handleSearch = (courseCode: string) => {
     setValue(courseCode || null);
     setCourses([]);
     setIsLoading(true);

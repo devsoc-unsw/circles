@@ -4,8 +4,8 @@ import FeedbackButton from "components/FeedbackButton";
 import Header from "components/Header";
 
 type Props = {
-  children: any
-  showHeader: boolean
+  children: React.ReactNode
+  showHeader?: boolean
 }
 
 const PageTemplate = ({ children, showHeader = true }: Props) => (

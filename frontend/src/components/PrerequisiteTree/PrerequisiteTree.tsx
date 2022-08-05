@@ -2,10 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import G6 from "@antv/g6";
 import axios from "axios";
+import prepareUserPayload from "utils/prepareUserPayload";
 import Spinner from "components/Spinner";
 import axiosRequest from "config/axios";
+import { RootState } from "config/store";
 import { addTab } from "reducers/courseTabsSlice";
-import prepareUserPayload from "../../pages/CourseSelector/utils";
 import GRAPH_STYLE from "./config";
 import TREE_CONSTANTS from "./constants";
 import S from "./styles";
@@ -15,7 +16,6 @@ import {
   handleNodeData,
   updateEdges,
 } from "./utils";
-import { RootState } from "config/store";
 
 type Props = {
   courseCode: string

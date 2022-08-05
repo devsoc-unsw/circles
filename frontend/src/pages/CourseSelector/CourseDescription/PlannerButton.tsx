@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { PlusOutlined, StopOutlined } from "@ant-design/icons";
 import { Button } from "antd";
+import prepareUserPayload from "utils/prepareUserPayload";
 import axiosRequest from "config/axios";
 import { RootState } from "config/store";
 import { addToUnplanned, removeCourses } from "reducers/plannerSlice";
-import prepareUserPayload from "../utils";
 
 const PlannerButton = () => {
   const { active, tabs } = useSelector((state: RootState) => state.courseTabs);
@@ -64,7 +64,6 @@ const PlannerButton = () => {
   return (
     addedCourseInPlanner ? (
       <Button
-        type="secondary"
         loading={loading}
         onClick={removeFromPlanner}
         icon={<StopOutlined />}

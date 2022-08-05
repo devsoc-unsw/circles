@@ -4,10 +4,10 @@ import {
   LockOutlined, MinusOutlined, PlusOutlined, WarningOutlined,
 } from "@ant-design/icons";
 import { Button, Tooltip } from "antd";
+import prepareUserPayload from "utils/prepareUserPayload";
 import axiosRequest from "config/axios";
 import { RootState } from "config/store";
 import useMediaQuery from "hooks/useMediaQuery";
-import prepareUserPayload from "pages/CourseSelector/utils";
 import { addToUnplanned, removeCourses } from "reducers/plannerSlice";
 import S from "./styles";
 

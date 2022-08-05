@@ -5,7 +5,7 @@ axios.defaults.baseURL = "https://circlesapi.csesoc.app";
 
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
-const axiosRequest = async (method, url, body) => {
+const axiosRequest = async (method: string, url: string, body?: object) => {
   try {
     const resp = await axios({
       method,

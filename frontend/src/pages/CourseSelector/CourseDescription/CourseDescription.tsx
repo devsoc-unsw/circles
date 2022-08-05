@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Typography } from "antd";
 import { motion } from "framer-motion";
+import { CourseTimetable, EnrolmentCapacityData } from "types/courseCapacity";
+import { CourseUnlocks } from "types/courses";
+import prepareUserPayload from "utils/prepareUserPayload";
 import infographic from "assets/infographicFontIndependent.svg";
 import Collapsible from "components/Collapsible";
 import CourseTag from "components/CourseTag";
@@ -10,15 +13,20 @@ import ProgressBar from "components/ProgressBar";
 import TermTag from "components/TermTag";
 import axiosRequest from "config/axios";
 import { inDev, TERM, TIMETABLE_API_URL } from "config/constants";
+import { RootState } from "config/store";
 import { setCourse } from "reducers/coursesSlice";
-import prepareUserPayload from "../utils";
 import LoadingSkeleton from "./LoadingSkeleton";
 import PlannerButton from "./PlannerButton";
 import S from "./styles";
 
 const { Title, Text } = Typography;
 
-const CourseAttribute = ({ title, content }) => (
+type CourseAttributeProps = {
+  title: string
+  content: React.ReactNode
+};
+
+const CourseAttribute = ({ title, content }: CourseAttributeProps) => (
   <S.AttributeWrapper>
     <Title level={3} className="text">{title}</Title>
     {content}
@@ -27,24 +35,25 @@ const CourseAttribute = ({ title, content }) => (
 
 const CourseDescription = () => {
   const dispatch = useDispatch();
-  const { active, tabs } = useSelector((state) => state.courseTabs);
+  const { active, tabs } = useSelector((state: RootState) => state.courseTabs);
   const id = tabs[active];
 
-  const course = useSelector((state) => state.courses.course);
-  const { degree, planner } = useSelector((state) => state);
-  const [pageLoaded, setPageLoaded] = useState(false);
-  const [coursesPathTo, setCoursesPathTo] = useState({});
-  const [coursesPathFrom, setCoursesPathFrom] = useState([]);
-  const [courseCapacity, setCourseCapacity] = useState({});
+  const course = useSelector((state: RootState) => state.courses.course);
+  const { degree, planner } = useSelector((state: RootState) => state);
 
-  const getCourse = async (c) => {
+  const [pageLoaded, setPageLoaded] = useState(false);
+  const [coursesPathTo, setCoursesPathTo] = useState<CourseUnlocks>({});
+  const [coursesPathFrom, setCoursesPathFrom] = useState([]);
+  const [courseCapacity, setCourseCapacity] = useState<EnrolmentCapacityData>({});
+
+  const getCourse = async (c: string) => {
     const [data, err] = await axiosRequest("get", `/courses/getCourse/${c}`);
     if (!err) {
       dispatch(setCourse(data));
     }
   };
 
-  const getPathToCoursesById = async (c) => {
+  const getPathToCoursesById = async (c: string) => {
     const [data, err] = await axiosRequest(
       "post",
       `/courses/coursesUnlockedWhenTaken/${c}`,
@@ -58,7 +67,7 @@ const CourseDescription = () => {
     }
   };
 
-  const getPathFromCoursesById = async (c) => {
+  const getPathFromCoursesById = async (c: string) => {
     const [data, err] = await axiosRequest(
       "get",
       `/courses/getPathFrom/${c}`,
@@ -68,8 +77,8 @@ const CourseDescription = () => {
     }
   };
 
-  const getCapacityAndEnrolment = (data) => {
-    const enrolmentCapacityData = {
+  const getCapacityAndEnrolment = (data: CourseTimetable) => {
+    const enrolmentCapacityData: EnrolmentCapacityData = {
       enrolments: 0,
       capacity: 0,
     };
@@ -101,7 +110,7 @@ const CourseDescription = () => {
     }
   };
 
-  const fetchCourseData = async (c) => {
+  const fetchCourseData = async (c: string) => {
     setPageLoaded(false);
     await Promise.all([
       getCourse(c),
@@ -139,10 +148,6 @@ const CourseDescription = () => {
           View {course.code} in handbook
         </a>
       ) : null,
-    },
-    {
-      title: "Faculty",
-      content: course.faculty,
     },
     {
       title: "School",

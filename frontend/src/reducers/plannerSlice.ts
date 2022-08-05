@@ -23,7 +23,7 @@ const generateEmptyYears = (nYears) => {
 const fakeStartYear = parseInt(new Date().getFullYear(), 10);
 const fakeNumYears = 3;
 
-type SliceState = {
+export type PlannerSliceState = {
   unplanned: string[]
   startYear: number
   numYears: number
@@ -36,7 +36,7 @@ type SliceState = {
   areYearsHidden: any
 }
 
-const initialState: SliceState = {
+const initialState: PlannerSliceState = {
   unplanned: [],
   startYear: fakeStartYear,
   numYears: fakeNumYears,

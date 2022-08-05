@@ -1,40 +1,33 @@
 import React from "react";
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { DragDropContext, Droppable, OnDragEndResponder, OnDragStartResponder } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import { DeleteOutlined } from "@ant-design/icons";
 import { Popconfirm, Tooltip } from "antd";
 import DraggableTab from "components/DraggableTab";
+import { RootState } from "config/store";
 import { reorderTabs, resetTabs, setActiveTab } from "reducers/courseTabsSlice";
 import S from "./styles";
 
 const CourseTabs = () => {
   const dispatch = useDispatch();
-  const { tabs } = useSelector((state) => state.courseTabs);
+  const { tabs } = useSelector((state: RootState) => state.courseTabs);
 
-  const onDragStart = (result) => {
+  const onDragStart: OnDragStartResponder = (result) => {
     dispatch(setActiveTab(result.source.index));
   };
 
-  const onDragEnd = (result) => {
+  const onDragEnd: OnDragEndResponder = (result) => {
     // dropped outside of tab container
     if (!result.destination) return;
 
-    // function to help us with reordering the result
-    const reorder = (list, startIndex, endIndex) => {
-      const r = Array.from(list);
-      const [removed] = r.splice(startIndex, 1);
-      r.splice(endIndex, 0, removed);
+    // reorder tabs logic
+    const startIndex = result.source.index;
+    const endIndex = result.destination.index;
+    const reorderedTabs = Array.from(tabs);
+    const [removed] = reorderedTabs.splice(startIndex, 1);
+    reorderedTabs.splice(endIndex, 0, removed);
 
-      return r;
-    };
-
-    const reorderedTabs = reorder(
-      tabs,
-      result.source.index,
-      result.destination.index,
-    );
-
-    dispatch(setActiveTab(result.destination.index));
+    dispatch(setActiveTab(endIndex));
     dispatch(reorderTabs(reorderedTabs));
   };
 

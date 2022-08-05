@@ -8,7 +8,7 @@ type Props = {
   initiallyCollapsed?: boolean
   title: string
   children: React.ReactNode
-  headerStyle: object
+  headerStyle?: object
 };
 
 const Collapsible = ({

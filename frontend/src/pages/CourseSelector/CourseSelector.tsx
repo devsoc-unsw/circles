@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { notification } from "antd";
 import axios from "axios";
+import { ProgramStructure } from "types/structure";
 import PageTemplate from "components/PageTemplate";
+import { RootState } from "config/store";
 import CourseBanner from "./CourseBanner";
 import CourseDescription from "./CourseDescription";
 import CourseSidebar from "./CourseSidebar";
 import CourseTabs from "./CourseTabs";
 import S from "./styles";
-import { RootState } from "config/store";
-import { ProgramStructure } from "types/structure";
 
 const CourseSelector = () => {
   const [structure, setStructure] = useState<ProgramStructure>({});
