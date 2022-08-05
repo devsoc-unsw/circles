@@ -5,7 +5,7 @@ import S from "./styles";
 
 type Props = {
   text: string
-}
+};
 
 const Spinner = ({ text }: Props) => (
   <S.Wrapper>

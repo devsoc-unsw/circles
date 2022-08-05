@@ -3,7 +3,7 @@ import { Progress } from "antd";
 
 type Props = {
   progress: number
-}
+};
 
 const ProgressBar = ({ progress }: Props) => {
   let bgColor = "#3cb371";

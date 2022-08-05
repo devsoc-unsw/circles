@@ -14,14 +14,14 @@ import { RootState } from "config/store";
 type Props = {
   completedUOC: number
   totalUOC: number
-}
+};
 
 const LiquidProgressChart = ({ completedUOC, totalUOC }: Props) => {
   const [percent, setPercent] = useState(0);
   const fillValue = completedUOC / totalUOC;
 
   // light mode text color varies
-  let textColor = '';
+  let textColor = "";
   if (percent < 0.31) {
     textColor = lightYellow;
   } else if (percent < 0.45) {

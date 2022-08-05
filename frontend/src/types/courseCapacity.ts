@@ -1,8 +1,7 @@
-
 export type EnrolmentCapacityData = {
   enrolments: number
   capacity: number
-}
+};
 
 type CourseClass = {
   activity: "Lecture" | "Seminar" | "Thesis Research" | "Project",

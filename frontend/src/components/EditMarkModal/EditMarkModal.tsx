@@ -4,15 +4,15 @@ import {
   Button, Input, message,
   Modal,
 } from "antd";
+import { RootState } from "config/store";
 import { updateCourseMark } from "reducers/plannerSlice";
 import S from "./styles";
-import { RootState } from "config/store";
 
 type Props = {
   code: string
   isVisible: boolean
   setIsVisible: any
-}
+};
 
 const EditMarkModal = ({
   code, isVisible, setIsVisible,

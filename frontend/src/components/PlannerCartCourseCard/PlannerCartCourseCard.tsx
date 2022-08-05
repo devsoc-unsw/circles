@@ -15,7 +15,7 @@ type Props = {
   code: string
   title: string
   showAlert: any
-}
+};
 
 const PlannerCartCourseCard = ({ code, title, showAlert }: Props) => {
   const dispatch = useDispatch();

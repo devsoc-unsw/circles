@@ -19,7 +19,7 @@ import {
 
 type Props = {
   courseCode: string
-}
+};
 
 const PrerequisiteTree = ({ courseCode }: Props) => {
   const [loading, setLoading] = useState(true);

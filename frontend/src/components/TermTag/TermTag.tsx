@@ -3,7 +3,7 @@ import S from "./styles";
 
 type Props = {
   name: string
-}
+};
 
 const TermTag = ({ name }: Props) => (
   <S.Tag className="text">

@@ -10,7 +10,7 @@ type Props = {
   subgroupKey: string
   subgroupEntries: any
   hasLotsOfCourses: any
-}
+};
 
 const GridViewConciseSubgroup = ({
   uoc,

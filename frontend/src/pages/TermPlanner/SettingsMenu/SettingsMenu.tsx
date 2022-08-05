@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
 import { DatePicker, Select, Switch } from "antd";
-import moment, { Moment } from "moment";
+import moment from "moment";
 import { RootState } from "config/store";
 import { toggleSummer, updateDegreeLength, updateStartYear } from "reducers/plannerSlice";
 import CS from "../common/styles";

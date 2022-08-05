@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import CourseBadge from "pages/ProgressionChecker/CourseBadge";
 import S from "./styles";
 
@@ -6,8 +6,8 @@ type Props = {
   title: string
   courses: any
   modalVisible: boolean
-  setModalVisible: any
-}
+  setModalVisible: Dispatch<SetStateAction<boolean>>
+};
 
 const CourseListModal = ({
   title, courses, modalVisible, setModalVisible,

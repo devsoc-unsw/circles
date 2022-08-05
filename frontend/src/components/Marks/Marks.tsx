@@ -3,7 +3,7 @@ import { Typography } from "antd";
 
 type Prop = {
   mark: any
-}
+};
 
 const Marks = ({ mark }: Prop) => {
   const { Text } = Typography;

@@ -1,5 +1,7 @@
 import React from "react";
-import { DragDropContext, Droppable, OnDragEndResponder, OnDragStartResponder } from "react-beautiful-dnd";
+import {
+  DragDropContext, Droppable, OnDragEndResponder, OnDragStartResponder,
+} from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import { DeleteOutlined } from "@ant-design/icons";
 import { Popconfirm, Tooltip } from "antd";
