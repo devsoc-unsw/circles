@@ -6,7 +6,7 @@ const { Title } = Typography;
 
 type Props = {
   initiallyCollapsed?: boolean
-  title: string
+  title: string | React.ReactNode
   children: React.ReactNode
   headerStyle?: object
 };

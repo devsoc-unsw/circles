@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Skeleton, Table, Typography } from "antd";
+import { ProgramStructure } from "types/structure";
+import { RootState } from "config/store";
 import { getFormattedPlannerCourses } from "../utils";
+import { TableStructure } from "./types";
 
 type Props = {
   isLoading: boolean
-  structure: any
+  structure: ProgramStructure
 };
 
 const TableView = ({ isLoading, structure }: Props) => {
   const { Title } = Typography;
   const [tableLayout, setTableLayout] = useState({});
-  const { years, startYear, courses } = useSelector((store) => store.planner);
+  const { years, startYear, courses } = useSelector((store: RootState) => store.planner);
 
   const generateTableStructure = (plannedCourses) => {
-    const newTableLayout = {};
+    const newTableLayout: TableStructure = {};
 
     // Example groups: Major, Minor, General, Rules
     Object.keys(structure).forEach((group) => {

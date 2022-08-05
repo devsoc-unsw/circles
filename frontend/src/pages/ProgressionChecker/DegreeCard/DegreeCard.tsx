@@ -4,28 +4,29 @@ import { Link } from "react-scroll";
 import ReactTooltip from "react-tooltip";
 import { purple } from "@ant-design/colors";
 import { Progress, Typography } from "antd";
+import { RootState } from "config/store";
 import S from "./styles";
 
 type Props = {
   type: string
   totalUOC: number
   currUOC: number
-  specialisation: any
+  specTitle: string
 };
 
 const DegreeCard = ({
-  type, totalUOC, currUOC, specialisation,
+  type, totalUOC, currUOC, specTitle,
 }: Props) => {
   const { Title, Text } = Typography;
   const progress = Math.min(Math.round((currUOC / totalUOC) * 100), 100);
 
-  const { theme } = useSelector((state) => state.settings);
+  const { theme } = useSelector((state: RootState) => state.settings);
 
   return (
     <Link to={type} smooth duration={2000}>
       <S.Card hoverable bordered={false}>
         <Title className="text" level={5}>
-          {specialisation.name || type}
+          {specTitle || type}
         </Title>
         <Text style={{ color: "#737372" }}>{type.charAt(0).toUpperCase() + type.slice(1)}</Text>
         <div data-tip data-for={`card-${type}`}>
@@ -39,7 +40,7 @@ const DegreeCard = ({
         <ReactTooltip
           id={`card-${type}`}
           place="bottom"
-          type={theme === "dark" && "light"}
+          type={theme === "dark" ? "light" : "dark"}
         >
           <S.TooltipText>
             <div>{progress}%</div>

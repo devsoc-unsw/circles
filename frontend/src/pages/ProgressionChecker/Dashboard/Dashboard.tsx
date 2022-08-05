@@ -4,11 +4,12 @@ import { scroller } from "react-scroll";
 import { ArrowDownOutlined } from "@ant-design/icons";
 import { useSpring } from "@react-spring/web";
 import { Button, Typography } from "antd";
+import { ProgramStructure } from "types/structure";
 import LiquidProgressChart from "components/LiquidProgressChart";
+import { RootState } from "config/store";
 import DegreeCard from "../DegreeCard";
 import SkeletonDashboard from "./SkeletonDashboard";
 import S from "./styles";
-import { ProgramStructure } from "types/structure";
 
 type Props = {
   storeUOC: any
@@ -30,7 +31,8 @@ const Dashboard = ({
     config: { tension: 80, friction: 60 },
   });
 
-  const { courses } = useSelector((state) => state.planner);
+  const { courses } = useSelector((state: RootState) => state.planner);
+  const { programCode, programName } = useSelector((state: RootState) => state.degree);
 
   const courseList = (
     Object.values(structure)
@@ -50,8 +52,6 @@ const Dashboard = ({
       smooth: true,
     });
   };
-
-  const { programCode, programName } = useSelector((state) => state.degree);
 
   return (
     <S.Wrapper>
@@ -79,7 +79,7 @@ const Dashboard = ({
                   type={group}
                   totalUOC={storeUOC[group].total}
                   currUOC={storeUOC[group].curr}
-                  specialisation={specialisation}
+                  specTitle={specialisation.name}
                 />
               ))}
           </S.CardsWrapper>

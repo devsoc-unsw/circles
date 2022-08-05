@@ -10,32 +10,11 @@ import { addTab } from "reducers/courseTabsSlice";
 import CourseTitle from "./CourseTitle";
 import LoadingSkeleton from "./LoadingSkeleton/LoadingSkeleton";
 import S from "./styles";
+import { CourseUnitsStructure, MenuDataStructure, MenuDataSubgroup } from "./types";
 
 type Props = {
   structure: ProgramStructure
   showLockedCourses: boolean
-};
-
-type MenuDataSubgroup = {
-  courseCode: string
-  title: string
-  unlocked: boolean
-  accuracy: boolean
-};
-
-type MenuDataStructure = {
-  [groupKey: string]: {
-    [subgroupKey: string]: MenuDataSubgroup[]
-  }
-};
-
-type CourseUnitsStructure = {
-  [groupKey: string]: {
-    [subgroupKey: string]: {
-      total: number
-      curr: number
-    }
-  }
 };
 
 type SubgroupTitleProps = {

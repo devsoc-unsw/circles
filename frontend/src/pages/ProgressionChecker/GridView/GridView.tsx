@@ -1,25 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Skeleton, Typography } from "antd";
+import { ProgramStructure } from "types/structure";
 import Collapsible from "components/Collapsible";
+import { RootState } from "config/store";
 import { getFormattedPlannerCourses } from "../utils";
 import GridViewConciseSubgroup from "./GridViewConciseSubgroup";
 import GridViewSubgroup from "./GridViewSubgroup";
 import S from "./styles";
+import { GridStructure } from "./types";
 
 type Props = {
   isLoading: boolean
-  structure: any
+  structure: ProgramStructure
   concise: boolean
-}
+};
 
 const GridView = ({ isLoading, structure, concise }: Props) => {
   const { Title } = Typography;
   const [gridLayout, setGridLayout] = useState({});
-  const { years, startYear, courses } = useSelector((store) => store.planner);
+  const { years, startYear, courses } = useSelector((store: RootState) => store.planner);
 
   const generateGridStructure = (plannerCourses) => {
-    const newGridLayout = {};
+    const newGridLayout: GridStructure = {};
 
     // Example groups: Major, Minor, General, Rules
     Object.keys(structure).forEach((group) => {

@@ -8,18 +8,19 @@ import {
 } from "@ant-design/icons";
 import { Button, Divider, notification } from "antd";
 import axios from "axios";
+import { ProgramStructure } from "types/structure";
 import PageTemplate from "components/PageTemplate";
+import { RootState } from "config/store";
 import Dashboard from "./Dashboard";
 import GridView from "./GridView/GridView";
 import S from "./styles";
 import TableView from "./TableView";
-import { RootState } from "config/store";
-import { ProgramStructure } from "types/structure";
+import { StoreUOC } from "./types";
 
 type Props = {
   structure: ProgramStructure
   isLoading: boolean
-}
+};
 
 const ProgressionCheckerCourses = ({ structure, isLoading }: Props) => {
   const views = {
@@ -106,7 +107,7 @@ const ProgressionChecker = () => {
     });
   }, []);
 
-  const storeUOC = {};
+  const storeUOC: StoreUOC = {};
 
   // Example groups: Major, Minor, General, Rules
   Object.keys(structure).forEach((group) => {
