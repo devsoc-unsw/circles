@@ -1,17 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { PlannerCourse } from "types/courses";
 import { getCurrentTermId, getTermsList } from "pages/TermPlanner/utils";
 
+type PlannerYear = {
+  T0: string[]
+  T1: string[]
+  T2: string[]
+  T3: string[]
+};
+
 // set up hidden object
-const generateHiddenInit = (startYear, numYears) => {
-  const hiddenInit = {};
+const generateHiddenInit = (startYear: number, numYears: number) => {
+  const hiddenInit: Record<number, boolean> = {};
   for (let i = -1; i < numYears - 1; i++) {
     hiddenInit[startYear + i] = false;
   }
   return hiddenInit;
 };
 
-const generateEmptyYears = (nYears) => {
-  const res = [];
+const generateEmptyYears = (nYears: number) => {
+  const res: PlannerYear[] = [];
   for (let i = 0; i < nYears; i++) {
     res.push({
       T0: [], T1: [], T2: [], T3: [],
@@ -20,7 +28,7 @@ const generateEmptyYears = (nYears) => {
   return res;
 };
 
-const fakeStartYear = parseInt(new Date().getFullYear(), 10);
+const fakeStartYear = new Date().getFullYear();
 const fakeNumYears = 3;
 
 export type PlannerSliceState = {
@@ -28,13 +36,12 @@ export type PlannerSliceState = {
   startYear: number
   numYears: number
   isSummerEnabled: boolean
-  years: any[]
-  courses: object
-  plannedCourses: object
-  completedTerms: object
-  hidden: any
-  areYearsHidden: any
-}
+  years: PlannerYear[]
+  courses: Record<string, PlannerCourse>
+  completedTerms: Record<string, boolean>
+  hidden: Record<number, boolean>
+  areYearsHidden: boolean
+};
 
 const initialState: PlannerSliceState = {
   unplanned: [],
@@ -53,7 +60,6 @@ const initialState: PlannerSliceState = {
     },
   ],
   courses: {},
-  plannedCourses: {},
   completedTerms: {},
   hidden: generateHiddenInit(fakeStartYear, fakeNumYears),
   areYearsHidden: false,
@@ -405,7 +411,7 @@ const plannerSlice = createSlice({
 
 export const {
   addToUnplanned, setUnplannedCourseToTerm, setPlannedCourseToTerm,
-  toggleWarnings, setUnplanned, removeCourse, removeCourses, removeAllCourses,
+  toggleWarnings, removeCourse, removeCourses, removeAllCourses,
   moveCourse, unschedule, unscheduleAll, toggleSummer, toggleTermComplete,
   updateStartYear, updateDegreeLength, hideYear, unhideAllYears, resetPlanner,
   updateCourseMark,

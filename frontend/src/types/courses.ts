@@ -10,7 +10,7 @@ export type CourseDetail = {
   study_level: string
   school: string
   campus: string
-  raw_requirements: any
+  raw_requirements: string
   terms: string[]
   is_legacy: boolean
   is_accurate: boolean
@@ -27,4 +27,20 @@ export type CourseValidation = {
 export type CourseUnlocks = {
   direct_unlock: string[]
   indirect_unlock: string[]
+};
+
+export type PlannerCourse = {
+  title: string
+  termsOffered: string[]
+  UOC: number
+  plannedFor: string
+  prereqs: string
+  isLegacy: boolean
+  isUnlocked: boolean
+  warnings: string[]
+  handbookNote: string
+  isAccurate: boolean
+  supressed: boolean
+  isMultiterm: boolean
+  mark: boolean
 };

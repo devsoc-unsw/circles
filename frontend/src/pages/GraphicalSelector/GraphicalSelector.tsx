@@ -1,29 +1,31 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import G6, { Algorithm } from "@antv/g6";
+import { Algorithm, Graph } from "@antv/g6";
 import { Button } from "antd";
 import axios from "axios";
 import PageTemplate from "components/PageTemplate";
 import Spinner from "components/Spinner";
 import axiosRequest from "config/axios";
+import { RootState } from "config/store";
 import GRAPH_STYLE from "./config";
 import S from "./styles";
+import { CourseEdge } from "./types";
 import handleNodeData from "./utils";
 
 const GraphicalSelector = () => {
-  const { programCode, specs } = useSelector((state) => state.degree);
-  const { courses: plannedCourses } = useSelector((state) => state.planner);
+  const { programCode, specs } = useSelector((state: RootState) => state.degree);
+  const { courses: plannedCourses } = useSelector((state: RootState) => state.planner);
 
-  const [graph, setGraph] = useState(null);
+  const [graph, setGraph] = useState<Graph>(null);
   const [loading, setLoading] = useState(true);
   const [course, setCourse] = useState(null);
 
   const ref = useRef(null);
 
   // courses is a list of course codes
-  const initialiseGraph = (courses, courseEdges) => {
+  const initialiseGraph = (courses: string[], courseEdges: CourseEdge[]) => {
     const container = ref.current;
-    const graphInstance = new G6.Graph({
+    const graphInstance = new Graph({
       container,
       width: container.scrollWidth,
       height: container.scrollHeight,
@@ -104,7 +106,7 @@ const GraphicalSelector = () => {
   };
 
   const setupGraph = async () => {
-    const { courses: courseList } = (
+    const { courses: courseList }: { courses: string[] } = (
       await axios.get(`/programs/getStructureCourseList/${programCode}/${specs.join("+")}`)
     ).data;
 

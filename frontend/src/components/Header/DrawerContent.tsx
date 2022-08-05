@@ -6,8 +6,8 @@ import { FEEDBACK_LINK, inDev } from "config/constants";
 import routes from "./routes";
 
 type Props = {
-  onCloseDrawer: string
-}
+  onCloseDrawer: () => void
+};
 
 const DrawerContent = ({ onCloseDrawer }: Props) => {
   const navigate = useNavigate();
