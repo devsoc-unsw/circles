@@ -1,13 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { CourseDetail, CourseValidation } from "types/courses";
 
 type SliceState = {
-  courses: object
-  course: object
+  courses: Record<string, CourseValidation>
+  course: CourseDetail
 }
 
 const initialState: SliceState = {
   courses: {},
-  course: {},
+  course: null,
 };
 
 const coursesSplice = createSlice({

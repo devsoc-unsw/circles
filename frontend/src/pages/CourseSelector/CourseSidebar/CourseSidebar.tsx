@@ -8,6 +8,7 @@ import CourseTitle from "./CourseTitle";
 import LoadingSkeleton from "./LoadingSkeleton/LoadingSkeleton";
 import S from "./styles";
 import { RootState } from "config/store";
+import { ProgramStructure } from "types/structure";
 
 type SubgroupTitleProps = {
   subGroup: any
@@ -28,7 +29,7 @@ const SubgroupTitle = ({ subGroup, group, coursesUnits }: Props) => {
 };
 
 type Props = {
-  structure: any
+  structure: ProgramStructure
   showLockedCourses: boolean
 }
 

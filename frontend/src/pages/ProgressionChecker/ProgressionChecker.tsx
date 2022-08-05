@@ -13,9 +13,11 @@ import Dashboard from "./Dashboard";
 import GridView from "./GridView/GridView";
 import S from "./styles";
 import TableView from "./TableView";
+import { RootState } from "config/store";
+import { ProgramStructure } from "types/structure";
 
 type Props = {
-  structure: any
+  structure: ProgramStructure
   isLoading: boolean
 }
 
@@ -71,13 +73,13 @@ const ProgressionCheckerCourses = ({ structure, isLoading }: Props) => {
 
 const ProgressionChecker = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [structure, setStructure] = useState({});
+  const [structure, setStructure] = useState<ProgramStructure>({});
   const [uoc, setUoc] = useState(null);
 
   const {
     programCode, specs,
-  } = useSelector((state) => state.degree);
-  const planner = useSelector((state) => state.planner);
+  } = useSelector((state: RootState) => state.degree);
+  const planner = useSelector((state: RootState) => state.planner);
 
   useEffect(() => {
     // get structure of degree

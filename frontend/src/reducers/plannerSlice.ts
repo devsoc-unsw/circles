@@ -24,8 +24,8 @@ const fakeStartYear = parseInt(new Date().getFullYear(), 10);
 const fakeNumYears = 3;
 
 type SliceState = {
-  unplanned: any[]
-  startYear: any
+  unplanned: string[]
+  startYear: number
   numYears: number
   isSummerEnabled: boolean
   years: any[]

@@ -8,16 +8,18 @@ import CourseDescription from "./CourseDescription";
 import CourseSidebar from "./CourseSidebar";
 import CourseTabs from "./CourseTabs";
 import S from "./styles";
+import { RootState } from "config/store";
+import { ProgramStructure } from "types/structure";
 
 const CourseSelector = () => {
-  const [structure, setStructure] = useState({});
+  const [structure, setStructure] = useState<ProgramStructure>({});
 
   const {
     programCode, specs,
-  } = useSelector((state) => state.degree);
-  const { courses } = useSelector((state) => state.planner);
+  } = useSelector((state: RootState) => state.degree);
+  const { courses } = useSelector((state: RootState) => state.planner);
 
-  const { showLockedCourses } = useSelector((state) => state.settings);
+  const { showLockedCourses } = useSelector((state: RootState) => state.settings);
 
   useEffect(() => {
     const openNotification = () => {
