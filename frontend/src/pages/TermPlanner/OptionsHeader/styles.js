@@ -7,6 +7,7 @@ const OptionsHeaderWrapper = styled.div`
   height: var(--option-header-height);
   padding: 0 30px;
   border-bottom-style: inset;
+  border-bottom-color: ${({ theme }) => theme.optionsHeader.borderColor};
 `;
 
 const OptionSection = styled.div`
@@ -31,4 +32,17 @@ const OptionButton = styled.button`
   }
 `;
 
-export default { OptionsHeaderWrapper, OptionButton, OptionSection };
+const ShowMarks = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+`;
+
+const TextShowMarks = styled.div`
+  padding-bottom: 2px;
+  font-size: 14px;
+`;
+
+export default {
+  OptionsHeaderWrapper, OptionButton, OptionSection, ShowMarks, TextShowMarks,
+};

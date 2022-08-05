@@ -10,6 +10,18 @@ const CourseTabsWrapper = styled.div`
   align-items: center;
 `;
 
+const ShowAllCourses = styled.div`
+  position: absolute;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  width: calc(14vw - 2px);
+`;
+
+const TextShowCourses = styled.div`
+  margin: 5px;
+`;
+
 const CourseTabsSection = styled.div`
   display: flex;
   overflow: auto;
@@ -23,4 +35,6 @@ const TabsCloseAll = styled.div`
   margin: 0 15px;
 `;
 
-export default { CourseTabsWrapper, CourseTabsSection, TabsCloseAll };
+export default {
+  CourseTabsWrapper, CourseTabsSection, TabsCloseAll, ShowAllCourses, TextShowCourses,
+};

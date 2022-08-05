@@ -99,9 +99,9 @@ def process_terms(processed: dict, formatted: dict) -> None:
 def process_gen_ed(processed: dict, formatted: dict) -> None:
     """Processes whether the course is a gen ed. 0 for false and 1 for true"""
     if formatted["gen_ed"] == "false":
-        processed["gen_ed"] = 0
+        processed["gen_ed"] = False
     else:
-        processed["gen_ed"] = 1
+        processed["gen_ed"] = True
 
 def process_exclusions(processed: dict, formatted: dict) -> None:
     """Parses exclusion string from enrolment rules"""

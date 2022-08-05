@@ -100,7 +100,7 @@ def api_index() -> str:
                         "exclusions": {"DPST1091": 1},
                         "terms": ["T1", "T2", "T3"],
                         "raw_requirements": "",
-                        "gen_ed": 1,
+                        "gen_ed": True,
                     }
                 }
             },
