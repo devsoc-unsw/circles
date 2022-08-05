@@ -4,15 +4,17 @@ import {
 } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import { DeleteOutlined } from "@ant-design/icons";
-import { Popconfirm, Tooltip } from "antd";
+import { Popconfirm, Switch, Tooltip } from "antd";
 import DraggableTab from "components/DraggableTab";
 import { RootState } from "config/store";
 import { reorderTabs, resetTabs, setActiveTab } from "reducers/courseTabsSlice";
+import { toggleLockedCourses } from "reducers/settingsSlice";
 import S from "./styles";
 
 const CourseTabs = () => {
   const dispatch = useDispatch();
   const { tabs } = useSelector((state: RootState) => state.courseTabs);
+  const { showLockedCourses } = useSelector((state: RootState) => state.settings);
 
   const handleOnDragStart: OnDragStartResponder = (result) => {
     dispatch(setActiveTab(result.source.index));
@@ -35,6 +37,16 @@ const CourseTabs = () => {
 
   return (
     <S.CourseTabsWrapper>
+      <S.ShowAllCourses>
+        <S.TextShowCourses>
+          Show all courses
+        </S.TextShowCourses>
+        <Switch
+          size="small"
+          defaultChecked={showLockedCourses}
+          onChange={() => dispatch(toggleLockedCourses())}
+        />
+      </S.ShowAllCourses>
       <DragDropContext onDragEnd={handleOnDragEnd} onDragStart={handleOnDragStart}>
         <Droppable droppableId="droppable" direction="horizontal">
           {(droppableProvided, _) => (

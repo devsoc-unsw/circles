@@ -100,14 +100,15 @@ const OptionsHeader = ({ plannerRef }: Props) => {
       </S.OptionSection>
 
       <S.OptionSection>
-        <div>
+        <S.ShowMarks>
+          <S.TextShowMarks>
+            Show Marks
+          </S.TextShowMarks>
           <Switch
             defaultChecked={showMarks}
             onChange={() => dispatch(toggleShowMarks())}
-            checkedChildren="marks shown"
-            unCheckedChildren="marks hidden"
           />
-        </div>
+        </S.ShowMarks>
         <Tippy
           content={<HelpMenu />}
           moveTransition="transform 0.2s ease-out"
