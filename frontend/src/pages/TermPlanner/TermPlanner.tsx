@@ -3,6 +3,7 @@ import { DragDropContext, OnDragEndResponder, OnDragStartResponder } from "react
 import { useDispatch, useSelector } from "react-redux";
 import { Badge, notification } from "antd";
 import axios from "axios";
+import prepareCoursesForValidationPayload from "utils/prepareCoursesForValidationPayload";
 import PageTemplate from "components/PageTemplate";
 import { RootState } from "config/store";
 import {
@@ -18,7 +19,6 @@ import {
   checkIsMultiterm,
   checkMultitermInBounds,
   isPlannerEmpty,
-  prepareCoursesForValidation,
 } from "./utils";
 // Used for tippy stylings
 import "tippy.js/dist/tippy.css";
@@ -62,7 +62,7 @@ const TermPlanner = () => {
     try {
       const { data } = await axios.post(
         "/planner/validateTermPlanner/",
-        JSON.stringify(prepareCoursesForValidation(planner, degree, showWarnings)),
+        JSON.stringify(prepareCoursesForValidationPayload(planner, degree, showWarnings)),
       );
       dispatch(toggleWarnings(data.courses_state));
     } catch (err) {
