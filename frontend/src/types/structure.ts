@@ -11,9 +11,9 @@ export type ProgramStructure = {
     }
     name: string
   }
-}
+};
 
 export type Structure = {
   structure: ProgramStructure,
   uoc: number
-}
+};

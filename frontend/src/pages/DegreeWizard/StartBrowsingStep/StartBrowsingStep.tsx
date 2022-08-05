@@ -9,13 +9,12 @@ import { setIsComplete } from "reducers/degreeSlice";
 import CS from "../common/styles";
 import S from "./styles";
 
-const openNotification = (msg) => {
-  const args = {
+const openNotification = (msg: string) => {
+  notification.error({
     message: msg,
     duration: 2,
     placement: "bottomRight",
-  };
-  notification.error(args);
+  });
 };
 
 const StartBrowsingStep = () => {

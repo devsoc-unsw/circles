@@ -14,7 +14,7 @@ import CS from "../common/styles";
 const { Title } = Typography;
 
 type Props = {
-  incrementStep: any
+  incrementStep: (stepTo?: STEPS) => void
 };
 
 const DegreeStep = ({ incrementStep }: Props) => {
@@ -45,7 +45,7 @@ const DegreeStep = ({ incrementStep }: Props) => {
     if (e.key) incrementStep(STEPS.SPECS);
   };
 
-  const searchDegree = (newInput) => {
+  const searchDegree = (newInput: string) => {
     setInput(newInput);
     const fullDegreeName = Object.keys(allDegrees).map((code) => `${code} ${allDegrees[code]}`);
     setOptions(

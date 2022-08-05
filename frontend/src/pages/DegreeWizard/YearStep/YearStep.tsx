@@ -11,15 +11,15 @@ const { Title } = Typography;
 const { RangePicker } = DatePicker;
 
 type Props = {
-  incrementStep: any
+  incrementStep: (stepTo?: STEPS) => void
 };
 
 const YearStep = ({ incrementStep }: Props) => {
   const props = useSpring(springProps);
   const dispatch = useDispatch();
 
-  const handleYearChange = (_, [startYear, endYear]) => {
-    const numYears = endYear - startYear + 1;
+  const handleYearChange = (_, [startYear, endYear]: [string, string]) => {
+    const numYears = parseInt(endYear, 10) - parseInt(startYear, 10) + 1;
     dispatch(updateDegreeLength(numYears));
     dispatch(updateStartYear(startYear));
 

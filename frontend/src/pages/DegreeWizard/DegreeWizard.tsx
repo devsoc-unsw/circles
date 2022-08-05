@@ -6,6 +6,7 @@ import {
 } from "antd";
 import axios from "axios";
 import PageTemplate from "components/PageTemplate";
+import { RootState } from "config/store";
 import { resetCourses } from "reducers/coursesSlice";
 import { resetTabs } from "reducers/courseTabsSlice";
 import { resetDegree } from "reducers/degreeSlice";
@@ -25,7 +26,7 @@ const DegreeWizard = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [specs, setSpecs] = useState(["majors", "honours", "minors"]);
   const stepList = ["year", "degree"].concat(specs).concat(["start browsing"]);
-  const degree = useSelector((state) => state.degree);
+  const degree = useSelector((state: RootState) => state.degree);
 
   const csDegreeDisclaimer = () => {
     notification.info({
@@ -58,7 +59,7 @@ const DegreeWizard = () => {
 
   const [currStep, setCurrStep] = useState(STEPS.YEAR);
 
-  const incrementStep = (stepTo) => {
+  const incrementStep = (stepTo?: STEPS) => {
     const step = stepTo ? stepList[stepTo] : stepList[currStep + 1];
     if (stepTo > currStep || !stepTo) setCurrStep((prevState) => prevState + 1);
     setTimeout(() => {

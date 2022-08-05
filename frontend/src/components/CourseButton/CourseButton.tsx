@@ -5,17 +5,16 @@ import { addTab } from "reducers/courseTabsSlice";
 import S from "./styles";
 
 type Props = {
-  course: any
+  courseCode: string
+  title: string
   planned: boolean
 };
 
-const CourseButton = ({ course, planned }: Props) => {
+const CourseButton = ({ courseCode, title, planned }: Props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const courseCode = course.key;
-
-  const handleCourseLink = (e) => {
+  const handleCourseLink = (e: React.MouseEvent<HTMLElement>): void => {
     e.stopPropagation();
     navigate("/course-selector");
     dispatch(addTab(courseCode));
@@ -25,10 +24,9 @@ const CourseButton = ({ course, planned }: Props) => {
     <S.CourseButton
       planned={planned}
       type="primary"
-      key={course.key}
       onClick={handleCourseLink}
     >
-      {course.key}: {course.title}
+      {courseCode}: {title}
     </S.CourseButton>
   );
 };

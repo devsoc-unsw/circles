@@ -1,3 +1,4 @@
+import { useDispatch } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
 import {
@@ -12,7 +13,6 @@ import degreeReducer from "reducers/degreeSlice";
 import plannerReducer from "reducers/plannerSlice";
 import settingsReducer from "reducers/settingsSlice";
 import { REDUX_PERSIST_VERSION } from "./constants";
-import { useDispatch } from "react-redux";
 
 const rootReducer = combineReducers({
   degree: degreeReducer,
@@ -81,8 +81,8 @@ const store = configureStore({
   }),
 });
 
-export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch
-export const useAppDispatch: () => AppDispatch = useDispatch 
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+export const useAppDispatch: () => AppDispatch = useDispatch;
 
 export default store;

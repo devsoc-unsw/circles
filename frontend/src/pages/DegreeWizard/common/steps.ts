@@ -1,7 +1,7 @@
-const STEPS = {
-  YEAR: 0,
-  DEGREE: 1,
-  SPECS: 2,
-};
+enum STEPS {
+  YEAR,
+  DEGREE,
+  SPECS,
+}
 
 export default STEPS;

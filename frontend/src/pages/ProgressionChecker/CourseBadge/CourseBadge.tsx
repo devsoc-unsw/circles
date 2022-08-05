@@ -44,7 +44,7 @@ const CourseBadge = ({ course }: Props) => {
           )}
         onClick={handleClick}
       >
-        <CourseButton course={course} planned={false} />
+        <CourseButton courseCode={course.key} title={course.title} planned={false} />
         <UOCBadge uoc={course.uoc} />
       </Badge>
     );
@@ -53,7 +53,7 @@ const CourseBadge = ({ course }: Props) => {
   if (course.past) {
     return (
       <div style={{ position: "relative" }}>
-        <CourseButton course={course} planned />
+        <CourseButton courseCode={course.key} title={course.title} planned />
         <UOCBadge uoc={course.uoc} />
       </div>
     );
@@ -74,14 +74,14 @@ const CourseBadge = ({ course }: Props) => {
         )}
         onClick={handleClick}
       >
-        <CourseButton course={course} planned />
+        <CourseButton courseCode={course.key} title={course.title} planned />
         <UOCBadge uoc={course.uoc} />
       </Badge>
     );
   }
 
   // below is default badge for courses not in term planner
-  return <CourseButton course={course} planned={false} />;
+  return <CourseButton courseCode={course.key} title={course.title} planned={false} />;
 };
 
 export default CourseBadge;

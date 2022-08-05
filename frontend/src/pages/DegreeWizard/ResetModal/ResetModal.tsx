@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Button, Modal } from "antd";
@@ -9,7 +9,7 @@ import { resetPlanner } from "reducers/plannerSlice";
 
 type Props = {
   modalVisible: boolean
-  setModalVisible: any
+  setModalVisible: Dispatch<SetStateAction<boolean>>
 };
 
 const ResetModal = ({ modalVisible, setModalVisible }: Props) => {
