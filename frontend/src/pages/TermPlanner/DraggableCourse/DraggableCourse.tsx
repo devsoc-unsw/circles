@@ -7,6 +7,7 @@ import { InfoCircleOutlined, WarningOutlined } from "@ant-design/icons";
 import { Typography } from "antd";
 import { useTheme } from "styled-components";
 import Marks from "components/Marks";
+import { RootState } from "config/store";
 import useMediaQuery from "hooks/useMediaQuery";
 import ContextMenu from "../ContextMenu";
 import S from "./styles";
@@ -14,14 +15,18 @@ import S from "./styles";
 type Props = {
   code: string
   index: number
-  showMarks: boolean
+  showMarks?: boolean
   term: string
 };
 
 const DraggableCourse = ({
   code, index, showMarks, term,
 }: Props) => {
-  const { courses, isSummerEnabled, completedTerms } = useSelector((state) => state.planner);
+  const {
+    courses,
+    isSummerEnabled,
+    completedTerms,
+  } = useSelector((state: RootState) => state.planner);
   const theme = useTheme();
   const Text = Typography;
 
@@ -63,7 +68,7 @@ const DraggableCourse = ({
             isSmall={isSmall}
             dragDisabled={isDragDisabled}
             warningsDisabled={isDragDisabled && !isUnlocked}
-            warning={!supressed && (!isUnlocked || !isOffered)}
+            isWarning={!supressed && (!isUnlocked || !isOffered)}
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             ref={provided.innerRef}

@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import { Droppable, GridItem } from "../common/styles";
 
-const UnplannedContainer = styled.div`
+const UnplannedContainer = styled.div<{ summerEnabled: boolean }>`
   grid-row-start: 1;
   grid-row-end: span 10;
   grid-column-start: ${({ summerEnabled }) => (summerEnabled ? 6 : 5)};
@@ -24,7 +24,13 @@ const UnplannedTitle = styled(GridItem)`
   );
 `;
 
-const UnplannedBox = styled.ul`
+type UnplannedBoxProps = {
+  droppable: boolean
+  summerEnabled: boolean
+  isSmall: boolean
+};
+
+const UnplannedBox = styled.ul<UnplannedBoxProps>`
   position: absolute;
   overflow-y: auto;
   overflow-x: hidden;

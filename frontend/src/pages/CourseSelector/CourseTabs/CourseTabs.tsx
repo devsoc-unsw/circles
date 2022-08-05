@@ -12,11 +12,11 @@ const CourseTabs = () => {
   const dispatch = useDispatch();
   const { tabs } = useSelector((state: RootState) => state.courseTabs);
 
-  const onDragStart: OnDragStartResponder = (result) => {
+  const handleOnDragStart: OnDragStartResponder = (result) => {
     dispatch(setActiveTab(result.source.index));
   };
 
-  const onDragEnd: OnDragEndResponder = (result) => {
+  const handleOnDragEnd: OnDragEndResponder = (result) => {
     // dropped outside of tab container
     if (!result.destination) return;
 
@@ -33,7 +33,7 @@ const CourseTabs = () => {
 
   return (
     <S.CourseTabsWrapper>
-      <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
+      <DragDropContext onDragEnd={handleOnDragEnd} onDragStart={handleOnDragStart}>
         <Droppable droppableId="droppable" direction="horizontal">
           {(droppableProvided, _) => (
             <S.CourseTabsSection

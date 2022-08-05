@@ -1,7 +1,13 @@
 import styled, { css } from "styled-components";
 import { Droppable } from "../common/styles";
 
-const TermBoxWrapper = styled.ul`
+type TermBoxWrapperProps = {
+  droppable: boolean
+  summerEnabled: boolean
+  isSmall: boolean
+}
+
+const TermBoxWrapper = styled.ul<TermBoxWrapperProps>`
   margin: 1em;
   min-height: 18em;
   min-width: 20em;
@@ -36,7 +42,7 @@ const TermBoxWrapper = styled.ul`
   `}
 `;
 
-const TermCheckboxWrapper = styled.div`
+const TermCheckboxWrapper = styled.div<{ checked: boolean }>`
   background-color: ${({ checked }) => (checked ? "#9685f3" : "#D9D9D9")};
   border-radius: 50%;
   width: 20px;

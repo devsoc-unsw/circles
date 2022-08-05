@@ -2,23 +2,24 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
 import { DatePicker, Select, Switch } from "antd";
-import moment from "moment";
+import moment, { Moment } from "moment";
+import { RootState } from "config/store";
 import { toggleSummer, updateDegreeLength, updateStartYear } from "reducers/plannerSlice";
 import CS from "../common/styles";
 
 const SettingsMenu = () => {
   const { Option } = Select;
-  const { isSummerEnabled, numYears, startYear } = useSelector((state) => state.planner);
+  const { isSummerEnabled, numYears, startYear } = useSelector((state: RootState) => state.planner);
 
   const dispatch = useDispatch();
 
-  function handleUpdateStartYear(date, dateString) {
+  function handleUpdateStartYear(_, dateString: string) {
     if (dateString) {
       dispatch(updateStartYear(dateString));
     }
   }
 
-  function handleUpdateDegreeLength(value) {
+  function handleUpdateDegreeLength(value: number) {
     dispatch(updateDegreeLength(value));
   }
 

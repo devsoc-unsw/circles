@@ -1,7 +1,15 @@
 import styled, { css } from "styled-components";
 import { shake } from "../common/styles";
 
-const CourseWrapper = styled.li`
+type CourseWrapperProps = {
+  isSmall: boolean
+  summerEnabled: boolean
+  warningsDisabled: boolean
+  isWarning: boolean
+  dragDisabled: boolean
+};
+
+const CourseWrapper = styled.li<CourseWrapperProps>`
   user-select: none;
   font-size: 0.8rem;
   cursor: grab;
@@ -33,7 +41,7 @@ const CourseWrapper = styled.li`
     background-color: #fff3e0;
   `}
 
-  ${({ warning }) => warning && css`
+  ${({ isWarning }) => isWarning && css`
     background-color: ${({ theme }) => theme.draggableCourse.warningBackgroundColor}; 
   `}
 

@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { EyeInvisibleFilled } from "@ant-design/icons";
 import { notification, Tooltip } from "antd";
+import { RootState } from "config/store";
 import { hideYear } from "reducers/plannerSlice";
 
 type Props = {
@@ -9,7 +10,7 @@ type Props = {
 };
 
 const HideYearTooltip = ({ year }: Props) => {
-  const { hidden, numYears } = useSelector((state) => state.planner);
+  const { hidden, numYears } = useSelector((state: RootState) => state.planner);
   const dispatch = useDispatch();
 
   const showCannotHideAllYearsNotification = () => {

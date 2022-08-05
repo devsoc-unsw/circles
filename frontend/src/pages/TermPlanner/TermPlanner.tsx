@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import { DragDropContext } from "react-beautiful-dnd";
+import { DragDropContext, OnDragEndResponder, OnDragStartResponder } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import { Badge, notification } from "antd";
 import axios from "axios";
 import PageTemplate from "components/PageTemplate";
+import { RootState } from "config/store";
 import {
   moveCourse, setPlannedCourseToTerm, setUnplannedCourseToTerm, toggleWarnings, unschedule,
 } from "reducers/plannerSlice";
@@ -24,35 +25,34 @@ import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
 
 const openNotification = () => {
-  const args = {
+  notification.info({
     message: "Your terms are looking a little empty",
     description: "Add courses from the course selector to the term planner by dragging from the unplanned column",
     duration: 3,
     placement: "bottomRight",
-  };
-  notification.info(args);
+  });
 };
 
-const outOfBoundsMultitermNotification = (course) => {
-  const args = {
+const outOfBoundsMultitermNotification = (course: string) => {
+  notification.info({
     message: `${course} would extend outside of the term planner`,
     description: `Keep ${course} inside the calendar by moving it to a different term instead`,
     duration: 3,
     placement: "bottomRight",
-  };
-  notification.info(args);
+  });
 };
 
 const TermPlanner = () => {
-  const { showWarnings } = useSelector((state) => state.settings);
+  const { showWarnings } = useSelector((state: RootState) => state.settings);
+  const planner = useSelector((state: RootState) => state.planner);
+  const degree = useSelector((state: RootState) => state.degree);
+
   const [termsOffered, setTermsOffered] = useState([]);
   const [isDragging, setIsDragging] = useState(false);
 
-  const planner = useSelector((state) => state.planner);
-
-  const degree = useSelector((state) => state.degree);
   const dispatch = useDispatch();
   const getMarkList = () => Object.values(planner.courses).map(((object) => object.mark));
+
   // a memoised way to check if marks have changed
   const marksRef = useRef(getMarkList());
   if (JSON.stringify(marksRef.current) !== JSON.stringify(getMarkList())) {
@@ -83,14 +83,14 @@ const TermPlanner = () => {
   /* Ref used for exporting planner to image */
   const plannerPicRef = useRef();
 
-  const handleOnDragStart = (courseItem) => {
-    const course = courseItem.draggableId.slice(0, 8);
+  const handleOnDragStart: OnDragStartResponder = (result) => {
+    const course = result.draggableId.slice(0, 8);
     const terms = planner.courses[course].termsOffered;
     setTermsOffered(terms);
     setIsDragging(true);
   };
 
-  const handleOnDragEnd = (result) => {
+  const handleOnDragEnd: OnDragEndResponder = (result) => {
     setIsDragging(false);
     const { destination, source, draggableId: draggableIdUnique } = result;
     // draggableIdUnique contains course code + term (e.g. COMP151120T1)
@@ -174,12 +174,11 @@ const TermPlanner = () => {
   return (
     <PageTemplate>
       <OptionsHeader
-        areYearsHidden={planner.areYearsHidden}
         plannerRef={plannerPicRef}
       />
       <S.ContainerWrapper>
         <DragDropContext
-          onDragEnd={(result) => handleOnDragEnd(result)}
+          onDragEnd={handleOnDragEnd}
           onDragStart={handleOnDragStart}
         >
           <S.PlannerContainer>

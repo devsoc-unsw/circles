@@ -13,7 +13,7 @@ const PlannerContainer = styled.div`
   margin: var(--tp-planner-container-margin);
 `;
 
-const PlannerGridWrapper = styled.div`
+const PlannerGridWrapper = styled.div<{ summerEnabled: boolean }>`
   display: grid;
   grid-template-columns: ${({ summerEnabled }) => (summerEnabled ? "7em 1fr 1fr 1fr 1fr 1fr" : "7em 1fr 1fr 1fr 1fr")};
   align-items: center;
@@ -25,7 +25,7 @@ const YearGridBox = styled(GridItem)`
   align-items: center;
 `;
 
-const YearText = styled.div`
+const YearText = styled.div<{ currYear: boolean }>`
   ${({ currYear }) => currYear && css`
     color: #9254de;
     font-weight: bold;

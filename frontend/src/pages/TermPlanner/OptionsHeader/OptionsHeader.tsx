@@ -6,6 +6,7 @@ import {
 } from "@ant-design/icons";
 import Tippy from "@tippyjs/react";
 import { Popconfirm, Switch, Tooltip } from "antd";
+import { RootState } from "config/store";
 import { unhideAllYears, unscheduleAll } from "reducers/plannerSlice";
 import { toggleShowMarks, toggleShowWarnings } from "reducers/settingsSlice";
 import ExportPlannerMenu from "../ExportPlannerMenu";
@@ -15,13 +16,13 @@ import { isPlannerEmpty } from "../utils";
 import S from "./styles";
 
 type Props = {
-  plannedRef: any
-}
+  plannerRef: any
+};
 
 const OptionsHeader = ({ plannerRef }: Props) => {
-  const { theme } = useSelector((state) => state.settings);
-  const { areYearsHidden, years } = useSelector((state) => state.planner);
-  const { showMarks, showWarnings } = useSelector((state) => state.settings);
+  const { theme } = useSelector((state: RootState) => state.settings);
+  const { areYearsHidden, years } = useSelector((state: RootState) => state.planner);
+  const { showMarks, showWarnings } = useSelector((state: RootState) => state.settings);
   const dispatch = useDispatch();
 
   const iconStyles = {

@@ -8,7 +8,7 @@ import CS from "../common/styles";
 import S from "./styles";
 
 type Props = {
-  plannedRef: any
+  plannerRef: any
 };
 
 const ExportPlannerMenu = ({ plannerRef }: Props) => {
