@@ -5,7 +5,7 @@ type TermBoxWrapperProps = {
   droppable: boolean
   summerEnabled: boolean
   isSmall: boolean
-}
+};
 
 const TermBoxWrapper = styled.ul<TermBoxWrapperProps>`
   margin: 1em;

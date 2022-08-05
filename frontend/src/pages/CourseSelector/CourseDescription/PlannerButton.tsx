@@ -10,7 +10,7 @@ import { addToUnplanned, removeCourses } from "reducers/plannerSlice";
 const PlannerButton = () => {
   const { active, tabs } = useSelector((state: RootState) => state.courseTabs);
   const coursesInPlanner = useSelector((state: RootState) => state.planner.courses);
-  const course = useSelector((state: RootState) => state.courses.course);
+  const { course } = useSelector((state: RootState) => state.courses);
   const { degree, planner } = useSelector((state: RootState) => state);
 
   const id = tabs[active];

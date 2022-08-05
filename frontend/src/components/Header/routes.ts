@@ -2,7 +2,7 @@ type Route = {
   label: string
   link: string
   dev?: boolean
-}
+};
 
 const routes: Route[] = [
   {

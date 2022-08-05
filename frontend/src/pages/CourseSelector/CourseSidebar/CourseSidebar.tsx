@@ -129,21 +129,27 @@ const CourseSidebar = ({ structure, showLockedCourses }: Props) => {
     item1.courseCode > item2.courseCode ? 1 : -1
   );
 
-  const items = Object.entries(menuData).map(([group, groupEntry]) => ({
-    label: structure[group].name ? `${group} - ${structure[group].name}` : group,
-    key: group,
+  const items = Object.entries(menuData).map(([groupKey, groupEntry]) => ({
+    label: structure[groupKey].name ? `${groupKey} - ${structure[groupKey].name}` : groupKey,
+    key: groupKey,
     children: Object
       .entries(groupEntry)
       .sort(sortSubgroups)
-      .map(([subGroup, subGroupEntry]) => {
-        const { curr, total } = coursesUnits[subGroup][subGroup];
+      .map(([subgroupKey, subGroupEntry]) => {
+        let currUOC = null;
+        let totalUOC = null;
+        if (coursesUnits[groupKey] && coursesUnits[groupKey][subgroupKey]) {
+          // check as coursesUnits is {} on initial render
+          currUOC = coursesUnits[groupKey][subgroupKey].curr;
+          totalUOC = coursesUnits[groupKey][subgroupKey].total;
+        }
         return {
           label: <SubgroupTitle
-            title={subGroup}
-            currUOC={curr}
-            totalUOC={total}
+            title={subgroupKey}
+            currUOC={currUOC}
+            totalUOC={totalUOC}
           />,
-          key: subGroup,
+          key: subgroupKey,
           children: subGroupEntry.sort(sortCourses)
             .filter((course) => course.unlocked || showLockedCourses)
             .map((course) => ({
@@ -154,9 +160,9 @@ const CourseSidebar = ({ structure, showLockedCourses }: Props) => {
                 accurate={course.accuracy}
                 unlocked={course.unlocked}
               />,
-              // key is course code + group + subGroup to differentiate as unique
+              // key is course code + groupKey + subgroupKey to differentiate as unique
               // course items in menu
-              key: `${course.courseCode}-${group}-${subGroup}`,
+              key: `${course.courseCode}-${groupKey}-${subgroupKey}`,
             })),
           type: "group",
         };

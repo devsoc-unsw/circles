@@ -5,7 +5,7 @@ export type GridSubgroupCourse = {
   termPlanned: number
   uoc: number
   unplanned: boolean
-}
+};
 
 export type GridSubgroup = {
   hasLotsOfCourses: boolean

@@ -39,7 +39,6 @@
         "jsx-a11y/click-events-have-key-events": ["off"],
         "jsx-a11y/interactive-supports-focus": ["off"],
         "quotes": ["error", "double"],
-        "no-shadow": ["error", { "allow": ["_"]}],
         "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
         "no-unused-vars": ["error", { "argsIgnorePattern": "^_$" }],
         "react/function-component-definition": ["error", { "namedComponents": "arrow-function", "unnamedComponents": "arrow-function" }],

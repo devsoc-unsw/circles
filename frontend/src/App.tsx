@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import ErrorBoundary from "components/ErrorBoundary";
+import { RootState } from "config/store";
 import { darkTheme, GlobalStyles, lightTheme } from "config/theme";
 import PageLoading from "./components/PageLoading";
 import CourseSelector from "./pages/CourseSelector";
@@ -21,7 +22,7 @@ import "antd/dist/antd.less";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
-  const { theme } = useSelector((state) => state.settings);
+  const { theme } = useSelector((state: RootState) => state.settings);
 
   return (
     <ErrorBoundary>

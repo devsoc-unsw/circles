@@ -38,7 +38,7 @@ const CourseDescription = () => {
   const { active, tabs } = useSelector((state: RootState) => state.courseTabs);
   const id = tabs[active];
 
-  const course = useSelector((state: RootState) => state.courses.course);
+  const { course } = useSelector((state: RootState) => state.courses);
   const { degree, planner } = useSelector((state: RootState) => state);
 
   const [pageLoaded, setPageLoaded] = useState(false);
@@ -125,7 +125,7 @@ const CourseDescription = () => {
     if (id) fetchCourseData(id);
   }, [id]);
 
-  const courseAttributesData = [
+  const courseAttributesData = course ? [
     {
       title: "Offering Terms",
       content: course.terms?.length
@@ -178,7 +178,7 @@ const CourseDescription = () => {
       title: "Units of Credit",
       content: course.UOC,
     },
-  ];
+  ] : [];
 
   if (tabs.length === 0) {
     return (
