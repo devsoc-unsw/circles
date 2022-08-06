@@ -8,7 +8,7 @@ import CS from "../common/styles";
 import S from "./styles";
 
 type Props = {
-  plannerRef: any
+  plannerRef: React.RefObject<HTMLDivElement>
 };
 
 const ExportPlannerMenu = ({ plannerRef }: Props) => {

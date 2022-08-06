@@ -1,7 +1,7 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 import { CourseStates } from "types/courses";
-import { PlannerCourse, PlannerYear, Term } from "types/planner";
+import { Mark, PlannerCourse, PlannerYear, Term } from "types/planner";
 import { getTermsList } from "pages/TermPlanner/utils";
 
 // set up hidden object
@@ -231,7 +231,7 @@ const plannerSlice = createSlice({
         state.courses[course].plannedFor = newPlannedFor.join(" ");
       }
     },
-    updateCourseMark: (state, action: PayloadAction<{ code: string, mark: any }>) => {
+    updateCourseMark: (state, action: PayloadAction<{ code: string, mark: Mark }>) => {
       const { code, mark } = action.payload;
 
       if (state.courses[code]) {

@@ -1,8 +1,9 @@
 import React from "react";
 import { Typography } from "antd";
+import { Mark } from "types/planner";
 
 type Prop = {
-  mark: any
+  mark: Mark
 };
 
 const Marks = ({ mark }: Prop) => {
@@ -12,7 +13,7 @@ const Marks = ({ mark }: Prop) => {
       <Text strong className="text">Mark: </Text>
       <Text className="text">
         {/* Marks can be strings (i.e. HD, CR) or a number (i.e. 90, 85) */}
-        {(mark === null || mark === undefined || mark === "") ? "N/A" : mark}
+        {(mark === null) ? "N/A" : mark}
       </Text>
     </div>
   );

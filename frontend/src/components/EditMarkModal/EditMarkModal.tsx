@@ -1,3 +1,4 @@
+import type { Dispatch, SetStateAction } from "react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -11,7 +12,7 @@ import S from "./styles";
 type Props = {
   code: string
   isVisible: boolean
-  setIsVisible: any
+  setIsVisible: Dispatch<SetStateAction<boolean>>
 };
 
 const EditMarkModal = ({

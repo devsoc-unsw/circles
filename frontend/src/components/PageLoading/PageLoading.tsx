@@ -1,4 +1,5 @@
-import React, { Dispatch, SetStateAction, useEffect } from "react";
+import type { Dispatch, SetStateAction } from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import circlesLogo from "assets/circlesWithBg.svg";

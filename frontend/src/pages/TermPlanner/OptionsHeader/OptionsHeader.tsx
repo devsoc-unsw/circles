@@ -16,7 +16,7 @@ import { isPlannerEmpty } from "../utils";
 import S from "./styles";
 
 type Props = {
-  plannerRef: any
+  plannerRef: React.RefObject<HTMLDivElement>
 };
 
 const OptionsHeader = ({ plannerRef }: Props) => {

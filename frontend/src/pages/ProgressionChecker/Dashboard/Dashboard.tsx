@@ -8,11 +8,12 @@ import { ProgramStructure } from "types/structure";
 import LiquidProgressChart from "components/LiquidProgressChart";
 import { RootState } from "config/store";
 import DegreeCard from "../DegreeCard";
+import { StoreUOC } from "../types";
 import SkeletonDashboard from "./SkeletonDashboard";
 import S from "./styles";
 
 type Props = {
-  storeUOC: any
+  storeUOC: StoreUOC
   isLoading: boolean
   structure: ProgramStructure
   uoc: number
