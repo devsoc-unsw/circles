@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { DeleteOutlined } from "@ant-design/icons";
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { DeleteOutlined } from '@ant-design/icons';
 import {
   Button, Popconfirm, Tooltip, Typography,
-} from "antd";
-import { addTab } from "reducers/courseTabsSlice";
-import { removeCourse } from "reducers/plannerSlice";
-import S from "./styles";
+} from 'antd';
+import { addTab } from 'reducers/courseTabsSlice';
+import { removeCourse } from 'reducers/plannerSlice';
+import S from './styles';
 
 const { Text } = Typography;
 
@@ -31,15 +31,15 @@ const PlannerCartCourseCard = ({ code, title, showAlert }: Props) => {
   };
 
   const handleCourseLink = () => {
-    navigate("/course-selector");
+    navigate('/course-selector');
     dispatch(addTab(code));
   };
 
   return (
     <S.CourseCardWrapper>
-      <div role="menuitem" onClick={handleCourseLink} style={{ cursor: "pointer" }}>
+      <div role="menuitem" onClick={handleCourseLink} style={{ cursor: 'pointer' }}>
         <Text className="text" strong>
-          {code}:{" "}
+          {code}:&nbsp;
         </Text>
         <Text className="text">{title}</Text>
       </div>
@@ -48,7 +48,7 @@ const PlannerCartCourseCard = ({ code, title, showAlert }: Props) => {
           placement="bottomRight"
           title="Remove this course from your planner?"
           onConfirm={confirmDelete}
-          style={{ width: "200px" }}
+          style={{ width: '200px' }}
           okText="Yes"
           cancelText="No"
         >

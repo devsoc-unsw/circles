@@ -4,7 +4,7 @@ export type EnrolmentCapacityData = {
 };
 
 type CourseClass = {
-  activity: "Lecture" | "Seminar" | "Thesis Research" | "Project",
+  activity: 'Lecture' | 'Seminar' | 'Thesis Research' | 'Project',
   courseEnrolment: EnrolmentCapacityData
 };
 

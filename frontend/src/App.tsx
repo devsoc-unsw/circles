@@ -1,24 +1,24 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import {
   BrowserRouter as Router, Route,
   Routes,
-} from "react-router-dom";
-import { ThemeProvider } from "styled-components";
-import ErrorBoundary from "components/ErrorBoundary";
-import { RootState } from "config/store";
-import { darkTheme, GlobalStyles, lightTheme } from "config/theme";
-import PageLoading from "./components/PageLoading";
-import CourseSelector from "./pages/CourseSelector";
-import DegreeWizard from "./pages/DegreeWizard";
-import GraphicalSelector from "./pages/GraphicalSelector";
-import Page404 from "./pages/Page404";
-import ProgressionChecker from "./pages/ProgressionChecker";
-import TermPlanner from "./pages/TermPlanner";
-import "./App.less";
-import "./config/axios";
+} from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+import ErrorBoundary from 'components/ErrorBoundary';
+import { RootState } from 'config/store';
+import { darkTheme, GlobalStyles, lightTheme } from 'config/theme';
+import PageLoading from './components/PageLoading';
+import CourseSelector from './pages/CourseSelector';
+import DegreeWizard from './pages/DegreeWizard';
+import GraphicalSelector from './pages/GraphicalSelector';
+import Page404 from './pages/Page404';
+import ProgressionChecker from './pages/ProgressionChecker';
+import TermPlanner from './pages/TermPlanner';
+import './App.less';
+import './config/axios';
 // stylesheets for antd library
-import "antd/dist/antd.less";
+import 'antd/dist/antd.less';
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -26,7 +26,7 @@ const App = () => {
 
   return (
     <ErrorBoundary>
-      <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+      <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
         <GlobalStyles />
         <Router>
           {loading ? (
