@@ -3,11 +3,17 @@ import { parseMarkToInt } from "pages/TermPlanner/utils";
 import { DegreeSliceState } from "reducers/degreeSlice";
 import { PlannerSliceState } from "reducers/plannerSlice";
 
+type TermPlan = {
+  [courseCode: string]: number
+};
+
+type YearPlan = TermPlan[];
+
 type CoursesForValidationPayload = {
   program: string
   year: number
   specialisations: string[]
-  plan: any
+  plan: YearPlan[]
   mostRecentPastTerm: MostRecentTerm
 };
 
@@ -19,11 +25,11 @@ const prepareCoursesForValidationPayload = (
   const { years, startYear, courses } = planner;
   const { programCode, specs } = degree;
 
-  const plan = [];
+  const plan: YearPlan[] = [];
   years.forEach((year) => {
-    const formattedYear = [];
+    const formattedYear: YearPlan = [];
     Object.values(year).forEach((term) => {
-      const coursesData = {};
+      const coursesData: TermPlan = {};
       Object.values(term).forEach((c) => {
         coursesData[c] = parseMarkToInt(courses[c].mark);
       });

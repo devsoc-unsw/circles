@@ -1,31 +1,34 @@
-import { PlannerCourse, Term } from "types/planner";
+import {
+  Grade, Mark, PlannerCourse, PlannerYear, Term,
+} from "types/planner";
 
 const MIN_COMPLETED_COURSE_UOC = 6;
 
-const parseMarkToInt = (mark) => {
-  // eslint-disable-next-line no-restricted-globals
-  if (!isNaN(mark)) {
-    return parseInt(mark, 10);
+const parseMarkToInt = (mark: Mark): number => {
+  if (typeof mark === "string") {
+    const letterGradeToIntMap: Record<Grade, number> = {
+      SY: null,
+      FL: 25,
+      PS: 60,
+      CR: 70,
+      DN: 80,
+      HD: 90,
+    };
+    return Object.keys(letterGradeToIntMap).includes(mark)
+      ? letterGradeToIntMap[mark]
+      : null;
   }
-  const letterGradeToIntMap = {
-    SY: null,
-    FL: 25,
-    PS: 60,
-    CR: 70,
-    DN: 80,
-    HD: 90,
-  };
-  return Object.keys(letterGradeToIntMap).includes(mark) ? letterGradeToIntMap[mark] : null;
+  return mark;
 };
 
 // Checks if no courses have been planned
-const isPlannerEmpty = (years) => (
-  years.every((year) => Object.keys(year).every((key) => year[key].length === 0))
+const isPlannerEmpty = (years: PlannerYear[]) => (
+  years.every((year) => Object.keys(year).every((term: Term) => year[term].length === 0))
 );
 
 // Calculated lcm(uoc, MIN_COMPLETED_COURSE_UOC) to determine number of times course must be taken.
 // e.g. 2 UOC course must be taken 3 times, 3 UOC course must be take 2 times
-const getNumTerms = (uoc) => {
+const getNumTerms = (uoc: number) => {
   let num1 = uoc;
   let num2 = MIN_COMPLETED_COURSE_UOC;
   while (num2) {
@@ -90,11 +93,6 @@ const getTermsList = (
   return termsList;
 };
 
-const getCurrentTermId = (originalTermId, term, yearOffset) => {
-  const year = parseInt(originalTermId.slice(0, 4), 10) + yearOffset;
-  return `${year}${term}`;
-};
-
 // Checks whether multiterm course will extend below bottom row of term planner
 type MultitermInBoundsPayload = {
   srcTerm: Term | "unplanned"
@@ -127,7 +125,6 @@ const checkMultitermInBounds = (payload: MultitermInBoundsPayload) => {
 
 export {
   checkMultitermInBounds,
-  getCurrentTermId,
   getTermsList,
   isPlannerEmpty,
   parseMarkToInt,

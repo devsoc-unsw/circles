@@ -1,14 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { CourseStates } from "types/courses";
-import { PlannerCourse, Term } from "types/planner";
-import { getCurrentTermId, getTermsList } from "pages/TermPlanner/utils";
-
-type PlannerYear = {
-  T0: string[]
-  T1: string[]
-  T2: string[]
-  T3: string[]
-};
+import { PlannerCourse, PlannerYear, Term } from "types/planner";
+import { getTermsList } from "pages/TermPlanner/utils";
 
 // set up hidden object
 const generateHiddenInit = (startYear: number, numYears: number) => {
@@ -226,7 +219,8 @@ const plannerSlice = createSlice({
 
           terms.forEach((termRow) => {
             const { term: currentTerm, rowOffset } = termRow;
-            const termId = getCurrentTermId(destTerm, currentTerm, rowOffset);
+            const year = Number(destTerm.slice(0, 4)) + rowOffset;
+            const termId = `${year}${currentTerm}`;
             newPlannedFor.push(termId);
           });
         }

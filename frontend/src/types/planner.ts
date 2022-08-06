@@ -1,5 +1,9 @@
 export type Term = "T0" | "T1" | "T2" | "T3";
 
+export type Mark = number | Grade;
+
+export type Grade = "SY" | "FL" | "PS" | "CR" | "DN" | "HD";
+
 export type PlannerCourse = {
   title: string
   termsOffered: Term[]
@@ -13,5 +17,12 @@ export type PlannerCourse = {
   isAccurate: boolean
   supressed: boolean
   isMultiterm: boolean
-  mark: boolean
+  mark: Mark
+};
+
+export type PlannerYear = {
+  T0: string[]
+  T1: string[]
+  T2: string[]
+  T3: string[]
 };
