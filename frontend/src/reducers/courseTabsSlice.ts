@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type SliceState = {
   tabs: string[]
@@ -14,7 +14,7 @@ const courseTabsSplice = createSlice({
   name: "courseTabs",
   initialState,
   reducers: {
-    addTab: (state, action) => {
+    addTab: (state, action: PayloadAction<string>) => {
       const tabName = action.payload;
       if (state.tabs.find((tab) => tab === tabName)) {
         state.active = state.tabs.indexOf(tabName);
@@ -23,20 +23,20 @@ const courseTabsSplice = createSlice({
         state.active = state.tabs.length - 1;
       }
     },
-    removeTab: (state, action) => {
-      const index = parseInt(action.payload, 10);
+    removeTab: (state, action: PayloadAction<number>) => {
+      const tabIndex = action.payload;
 
-      if (index >= 0) {
-        state.tabs.splice(index, 1);
+      if (tabIndex >= 0) {
+        state.tabs.splice(tabIndex, 1);
         if (state.active && state.active >= state.tabs.length) {
           state.active = state.tabs.length - 1;
         }
       }
     },
-    setActiveTab: (state, action) => {
+    setActiveTab: (state, action: PayloadAction<number>) => {
       state.active = action.payload;
     },
-    reorderTabs: (state, action) => {
+    reorderTabs: (state, action: PayloadAction<string[]>) => {
       state.tabs = action.payload;
     },
     resetTabs: () => initialState,

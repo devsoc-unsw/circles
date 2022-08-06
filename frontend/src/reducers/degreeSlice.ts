@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export type DegreeSliceState = {
   programCode: string
@@ -18,18 +18,18 @@ const degreeSlice = createSlice({
   name: "degree",
   initialState,
   reducers: {
-    setProgram: (state, action) => {
+    setProgram: (state, action: PayloadAction<{ programCode: string, programName: string }>) => {
       state.programCode = action.payload.programCode;
       state.programName = action.payload.programName;
     },
-    addSpecialisation: (state, action) => {
+    addSpecialisation: (state, action: PayloadAction<string>) => {
       state.specs.push(action.payload);
     },
-    removeSpecialisation: (state, action) => {
+    removeSpecialisation: (state, action: PayloadAction<string>) => {
       const index = state.specs.indexOf(action.payload);
       if (index !== -1) state.specs.splice(index, 1);
     },
-    setIsComplete: (state, action) => {
+    setIsComplete: (state, action: PayloadAction<boolean>) => {
       state.isComplete = action.payload;
     },
     resetDegree: () => initialState,

@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { CourseDetail, CourseValidation } from "types/courses";
 
 type SliceState = {
@@ -15,10 +15,10 @@ const coursesSplice = createSlice({
   name: "courses",
   initialState,
   reducers: {
-    setCourses: (state, action) => {
+    setCourses: (state, action: PayloadAction<Record<string, CourseValidation>>) => {
       state.courses = action.payload;
     },
-    setCourse: (state, action) => {
+    setCourse: (state, action: PayloadAction<CourseDetail>) => {
       state.course = action.payload;
     },
     resetCourses: () => initialState,
