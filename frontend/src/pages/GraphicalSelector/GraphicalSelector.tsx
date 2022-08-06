@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { Algorithm, Graph } from '@antv/g6';
 import { Button } from 'antd';
 import axios from 'axios';
+import { CourseDetail } from 'types/courses';
 import PageTemplate from 'components/PageTemplate';
 import Spinner from 'components/Spinner';
 import axiosRequest from 'config/axios';
@@ -16,9 +17,9 @@ const GraphicalSelector = () => {
   const { programCode, specs } = useSelector((state: RootState) => state.degree);
   const { courses: plannedCourses } = useSelector((state: RootState) => state.planner);
 
-  const [graph, setGraph] = useState<Graph>(null);
+  const [graph, setGraph] = useState<Graph | null>(null);
   const [loading, setLoading] = useState(true);
-  const [course, setCourse] = useState(null);
+  const [course, setCourse] = useState<CourseDetail | null>(null);
 
   const ref = useRef(null);
 

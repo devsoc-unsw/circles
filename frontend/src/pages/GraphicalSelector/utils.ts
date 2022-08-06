@@ -1,7 +1,7 @@
 import GRAPH_STYLE from './config';
 
 // plannedCourses is an object of with keys of courseCodes
-const handleNodeData = (courseCode, plannedCourses) => {
+const handleNodeData = (courseCode: string, plannedCourses) => {
   // determine if planned or unplanned
   if (plannedCourses[courseCode]) {
     // uses default node style

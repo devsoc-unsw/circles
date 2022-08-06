@@ -37,7 +37,7 @@ const nodeStateStyles = {
   },
 };
 
-const unplannedNodeAdditionalStyle = (courseCode) => ({
+const unplannedNodeAdditionalStyle = (courseCode: string) => ({
   id: courseCode,
   label: courseCode,
   style: {
