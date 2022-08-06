@@ -1,4 +1,4 @@
-import LoadingSkeleton from "./LoadingSkeleton";
+import LoadingSkeleton from './LoadingSkeleton';
 
 // TODO: This component is not currently in use...
 // No point in having LoadingSkeleton for term planner

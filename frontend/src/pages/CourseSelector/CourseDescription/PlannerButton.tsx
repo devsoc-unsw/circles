@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { PlusOutlined, StopOutlined } from "@ant-design/icons";
-import { Button } from "antd";
-import { PlannerCourse } from "types/planner";
-import prepareUserPayload from "utils/prepareUserPayload";
-import axiosRequest from "config/axios";
-import { RootState } from "config/store";
-import { addToUnplanned, removeCourses } from "reducers/plannerSlice";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { PlusOutlined, StopOutlined } from '@ant-design/icons';
+import { Button } from 'antd';
+import { PlannerCourse } from 'types/planner';
+import prepareUserPayload from 'utils/prepareUserPayload';
+import axiosRequest from 'config/axios';
+import { RootState } from 'config/store';
+import { addToUnplanned, removeCourses } from 'reducers/plannerSlice';
 
 const PlannerButton = () => {
   const { active, tabs } = useSelector((state: RootState) => state.courseTabs);
@@ -56,7 +56,7 @@ const PlannerButton = () => {
   };
 
   const removeFromPlanner = async () => {
-    const [data] = await axiosRequest("post", `/courses/unselectCourse/${id}`, prepareUserPayload(degree, planner));
+    const [data] = await axiosRequest('post', `/courses/unselectCourse/${id}`, prepareUserPayload(degree, planner));
     addCourseToPlannerTimeout(false);
     dispatch(removeCourses(data.courses));
   };
@@ -68,7 +68,7 @@ const PlannerButton = () => {
         onClick={removeFromPlanner}
         icon={<StopOutlined />}
       >
-        {!loading ? "Remove from planner" : "Removing from planner"}
+        {!loading ? 'Remove from planner' : 'Removing from planner'}
       </Button>
     ) : (
       <Button
@@ -77,7 +77,7 @@ const PlannerButton = () => {
         icon={<PlusOutlined />}
         type="primary"
       >
-        {!loading ? "Add to planner" : "Adding to planner"}
+        {!loading ? 'Add to planner' : 'Adding to planner'}
       </Button>
     )
   );

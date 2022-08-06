@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Typography } from "antd";
-import { motion } from "framer-motion";
-import { CourseTimetable, EnrolmentCapacityData } from "types/courseCapacity";
-import { CourseUnlocks } from "types/courses";
-import prepareUserPayload from "utils/prepareUserPayload";
-import infographic from "assets/infographicFontIndependent.svg";
-import Collapsible from "components/Collapsible";
-import CourseTag from "components/CourseTag";
-import PrerequisiteTree from "components/PrerequisiteTree";
-import ProgressBar from "components/ProgressBar";
-import TermTag from "components/TermTag";
-import axiosRequest from "config/axios";
-import { inDev, TERM, TIMETABLE_API_URL } from "config/constants";
-import { RootState } from "config/store";
-import { setCourse } from "reducers/coursesSlice";
-import LoadingSkeleton from "./LoadingSkeleton";
-import PlannerButton from "./PlannerButton";
-import S from "./styles";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Typography } from 'antd';
+import { motion } from 'framer-motion';
+import { CourseTimetable, EnrolmentCapacityData } from 'types/courseCapacity';
+import { CourseUnlocks } from 'types/courses';
+import prepareUserPayload from 'utils/prepareUserPayload';
+import infographic from 'assets/infographicFontIndependent.svg';
+import Collapsible from 'components/Collapsible';
+import CourseTag from 'components/CourseTag';
+import PrerequisiteTree from 'components/PrerequisiteTree';
+import ProgressBar from 'components/ProgressBar';
+import TermTag from 'components/TermTag';
+import axiosRequest from 'config/axios';
+import { inDev, TERM, TIMETABLE_API_URL } from 'config/constants';
+import { RootState } from 'config/store';
+import { setCourse } from 'reducers/coursesSlice';
+import LoadingSkeleton from './LoadingSkeleton';
+import PlannerButton from './PlannerButton';
+import S from './styles';
 
 const { Title, Text } = Typography;
 
@@ -47,7 +47,7 @@ const CourseDescription = () => {
   const [courseCapacity, setCourseCapacity] = useState<EnrolmentCapacityData | null>(null);
 
   const getCourse = async (courseCode: string) => {
-    const [data, err] = await axiosRequest("get", `/courses/getCourse/${courseCode}`);
+    const [data, err] = await axiosRequest('get', `/courses/getCourse/${courseCode}`);
     if (!err) {
       dispatch(setCourse(data));
     }
@@ -55,7 +55,7 @@ const CourseDescription = () => {
 
   const getPathToCoursesById = async (courseCode: string) => {
     const [data, err] = await axiosRequest(
-      "post",
+      'post',
       `/courses/coursesUnlockedWhenTaken/${courseCode}`,
       prepareUserPayload(degree, planner),
     );
@@ -69,7 +69,7 @@ const CourseDescription = () => {
 
   const getPathFromCoursesById = async (courseCode: string) => {
     const [data, err] = await axiosRequest(
-      "get",
+      'get',
       `/courses/getPathFrom/${courseCode}`,
     );
     if (!err) {
@@ -84,10 +84,10 @@ const CourseDescription = () => {
     };
     for (let i = 0; i < data.classes.length; i++) {
       if (
-        data.classes[i].activity === "Lecture"
-        || data.classes[i].activity === "Seminar"
-        || data.classes[i].activity === "Thesis Research"
-        || data.classes[i].activity === "Project"
+        data.classes[i].activity === 'Lecture'
+        || data.classes[i].activity === 'Seminar'
+        || data.classes[i].activity === 'Thesis Research'
+        || data.classes[i].activity === 'Project'
       ) {
         enrolmentCapacityData.enrolments
           += data.classes[i].courseEnrolment.enrolments;
@@ -100,7 +100,7 @@ const CourseDescription = () => {
 
   const getCourseCapacityById = async (code: string) => {
     const [data, err] = await axiosRequest(
-      "get",
+      'get',
       `${TIMETABLE_API_URL}/${code}`,
     );
     if (!err) {
@@ -127,18 +127,18 @@ const CourseDescription = () => {
 
   const courseAttributesData = course ? [
     {
-      title: "Offering Terms",
+      title: 'Offering Terms',
       content: course.terms?.length
         ? course.terms.map((term, index) => {
           const termNo = term.slice(1);
           return (
-            <TermTag key={index} name={term === "T0" ? "Summer" : `Term ${termNo}`} />
+            <TermTag key={index} name={term === 'T0' ? 'Summer' : `Term ${termNo}`} />
           );
         })
-        : "None",
+        : 'None',
     },
     {
-      title: "UNSW Handbook",
+      title: 'UNSW Handbook',
       content: course.study_level ? (
         <a
           href={`https://www.handbook.unsw.edu.au/${course.study_level.toLowerCase()}/courses/2022/${course.code}/`}
@@ -150,19 +150,19 @@ const CourseDescription = () => {
       ) : null,
     },
     {
-      title: "School",
+      title: 'School',
       content: course.school,
     },
     {
-      title: "Study Level",
+      title: 'Study Level',
       content: course.study_level,
     },
     {
-      title: "Campus",
+      title: 'Campus',
       content: course.campus,
     },
     {
-      title: "Course Capacity",
+      title: 'Course Capacity',
       content: courseCapacity && Object.keys(courseCapacity).length ? (
         <>
           <div>{courseCapacity.capacity} Students for {TERM}</div>
@@ -175,7 +175,7 @@ const CourseDescription = () => {
       ) : <p>No data available</p>,
     },
     {
-      title: "Units of Credit",
+      title: 'Units of Credit',
       content: course.UOC,
     },
   ] : [];
@@ -213,11 +213,11 @@ const CourseDescription = () => {
             }
             <Collapsible title="Overview">
               {/* eslint-disable-next-line react/no-danger */}
-              <p dangerouslySetInnerHTML={{ __html: course?.description || "None" }} />
+              <p dangerouslySetInnerHTML={{ __html: course?.description || 'None' }} />
             </Collapsible>
             <Collapsible title="Requirements">
               {/* eslint-disable-next-line react/no-danger */}
-              <p dangerouslySetInnerHTML={{ __html: course?.raw_requirements || "None" }} />
+              <p dangerouslySetInnerHTML={{ __html: course?.raw_requirements || 'None' }} />
             </Collapsible>
             <Collapsible title="Courses you have done to unlock this course">
               <p>
@@ -227,7 +227,7 @@ const CourseDescription = () => {
                     .map((courseCode) => (
                       <CourseTag key={courseCode} name={courseCode} />
                     ))
-                ) : "None"}
+                ) : 'None'}
               </p>
             </Collapsible>
             <Collapsible title="Doing this course will directly unlock these courses">
@@ -236,7 +236,7 @@ const CourseDescription = () => {
                   coursesPathTo.direct_unlock.map((courseCode) => (
                     <CourseTag key={courseCode} name={courseCode} />
                   ))
-                ) : "None"}
+                ) : 'None'}
               </p>
             </Collapsible>
             <Collapsible
@@ -248,7 +248,7 @@ const CourseDescription = () => {
                   coursesPathTo.indirect_unlock.map((courseCode) => (
                     <CourseTag key={courseCode} name={courseCode} />
                   ))
-                ) : "None"}
+                ) : 'None'}
               </p>
             </Collapsible>
             {inDev

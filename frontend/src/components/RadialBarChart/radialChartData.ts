@@ -1,18 +1,18 @@
 const data = [
   {
-    name: "G6",
+    name: 'G6',
     UOC: 10,
-    color: "#b37feb",
+    color: '#b37feb',
   },
   {
-    name: "Specialisation",
+    name: 'Specialisation',
     UOC: 20,
-    color: "#9254de",
+    color: '#9254de',
   },
   {
-    name: "Total",
+    name: 'Total',
     UOC: 15,
-    color: "#722ed1",
+    color: '#722ed1',
   },
 ];
 

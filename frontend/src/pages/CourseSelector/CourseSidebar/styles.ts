@@ -1,5 +1,5 @@
-import { Menu as antdMenu } from "antd";
-import styled from "styled-components";
+import { Menu as antdMenu } from 'antd';
+import styled from 'styled-components';
 
 const SidebarWrapper = styled.div`
   overflow: auto;

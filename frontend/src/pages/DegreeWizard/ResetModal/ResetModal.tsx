@@ -1,12 +1,12 @@
-import type { Dispatch, SetStateAction } from "react";
-import React from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { Button, Modal } from "antd";
-import { resetCourses } from "reducers/coursesSlice";
-import { resetTabs } from "reducers/courseTabsSlice";
-import { resetDegree } from "reducers/degreeSlice";
-import { resetPlanner } from "reducers/plannerSlice";
+import type { Dispatch, SetStateAction } from 'react';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { Button, Modal } from 'antd';
+import { resetCourses } from 'reducers/coursesSlice';
+import { resetTabs } from 'reducers/courseTabsSlice';
+import { resetDegree } from 'reducers/degreeSlice';
+import { resetPlanner } from 'reducers/plannerSlice';
 
 type Props = {
   modalVisible: boolean
@@ -27,7 +27,7 @@ const ResetModal = ({ modalVisible, setModalVisible }: Props) => {
 
   const handleCancel = () => {
     setModalVisible(false);
-    navigate("/course-selector");
+    navigate('/course-selector');
   };
 
   return (

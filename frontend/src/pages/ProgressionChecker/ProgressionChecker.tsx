@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import {
   BorderlessTableOutlined,
   EyeFilled,
   EyeInvisibleOutlined,
   // TableOutlined,
-} from "@ant-design/icons";
-import { Button, Divider, notification } from "antd";
-import axios from "axios";
-import { ProgramStructure } from "types/structure";
-import PageTemplate from "components/PageTemplate";
-import { RootState } from "config/store";
-import Dashboard from "./Dashboard";
-import GridView from "./GridView/GridView";
-import S from "./styles";
-import TableView from "./TableView";
-import { StoreUOC } from "./types";
+} from '@ant-design/icons';
+import { Button, Divider, notification } from 'antd';
+import axios from 'axios';
+import { ProgramStructure } from 'types/structure';
+import PageTemplate from 'components/PageTemplate';
+import { RootState } from 'config/store';
+import Dashboard from './Dashboard';
+import GridView from './GridView/GridView';
+import S from './styles';
+import TableView from './TableView';
+import { StoreUOC } from './types';
 
 type Props = {
   structure: ProgramStructure
@@ -24,9 +24,9 @@ type Props = {
 
 const ProgressionCheckerCourses = ({ structure, isLoading }: Props) => {
   const views = {
-    GRID: "grid",
-    CONCISE: "grid-concise",
-    TABLE: "table",
+    GRID: 'grid',
+    CONCISE: 'grid-concise',
+    TABLE: 'table',
   };
   const defaultView = views.CONCISE;
   const [view, setView] = useState(defaultView);
@@ -41,7 +41,7 @@ const ProgressionCheckerCourses = ({ structure, isLoading }: Props) => {
               icon={view === views.GRID ? <EyeInvisibleOutlined /> : <EyeFilled />}
               onClick={() => setView(view === views.GRID ? views.CONCISE : views.GRID)}
             >
-              {view === views.GRID ? "Display Concise Mode" : "Display Full Mode"}
+              {view === views.GRID ? 'Display Concise Mode' : 'Display Full Mode'}
             </Button>
             {/* TODO: Disable TableView for now */}
             {/* <Button
@@ -86,7 +86,7 @@ const ProgressionChecker = () => {
     // get structure of degree
     const fetchStructure = async () => {
       try {
-        const res = await axios.get(`/programs/getStructure/${programCode}/${specs.join("+")}`);
+        const res = await axios.get(`/programs/getStructure/${programCode}/${specs.join('+')}`);
         setStructure(res.data.structure);
         setUoc(res.data.uoc);
       } catch (err) {
@@ -100,9 +100,9 @@ const ProgressionChecker = () => {
 
   useEffect(() => {
     notification.info({
-      message: "Disclaimer",
+      message: 'Disclaimer',
       description: "This progression check is intended to outline the courses required by your degree and may not be 100% accurate. Please refer to UNSW's official progression check and handbook for further accuracy.",
-      placement: "bottomRight",
+      placement: 'bottomRight',
       duration: 20,
     });
   }, []);
@@ -121,7 +121,7 @@ const ProgressionChecker = () => {
       storeUOC[group].total += structure[group].content[subgroup].UOC;
       const subgroupStructure = structure[group].content[subgroup];
 
-      const isRule = subgroupStructure.type && subgroupStructure.type.includes("rule");
+      const isRule = subgroupStructure.type && subgroupStructure.type.includes('rule');
 
       if (subgroupStructure.courses && !isRule) {
         // only consider disciplinary component courses

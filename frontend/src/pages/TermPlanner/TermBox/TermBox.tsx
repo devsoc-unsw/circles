@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { Droppable } from "react-beautiful-dnd";
-import { useDispatch, useSelector } from "react-redux";
-import { LockFilled, UnlockFilled } from "@ant-design/icons";
-import { Badge } from "antd";
-import { useTheme } from "styled-components";
-import { RootState } from "config/store";
-import useMediaQuery from "hooks/useMediaQuery";
-import { toggleTermComplete } from "reducers/plannerSlice";
-import DraggableCourse from "../DraggableCourse";
-import S from "./styles";
+import React, { useEffect, useState } from 'react';
+import { Droppable } from 'react-beautiful-dnd';
+import { useDispatch, useSelector } from 'react-redux';
+import { LockFilled, UnlockFilled } from '@ant-design/icons';
+import { Badge } from 'antd';
+import { useTheme } from 'styled-components';
+import { RootState } from 'config/store';
+import useMediaQuery from 'hooks/useMediaQuery';
+import { toggleTermComplete } from 'reducers/plannerSlice';
+import DraggableCourse from '../DraggableCourse';
+import S from './styles';
 
 type Props = {
   name: string
@@ -47,16 +47,16 @@ const TermBox = ({
 
   const isOffered = termsOffered.includes(term) && !isCompleted;
 
-  const isSmall = useMediaQuery("(max-width: 1400px)");
+  const isSmall = useMediaQuery('(max-width: 1400px)');
 
   const iconStyle = {
-    fontSize: "12px",
+    fontSize: '12px',
     color: theme.termCheckbox.color,
   };
 
   const uocBadgeStyle = {
     backgroundColor: theme.uocBadge.backgroundColor,
-    boxShadow: "none",
+    boxShadow: 'none',
   };
   return (
     <Droppable droppableId={name} isDropDisabled={isCompleted}>

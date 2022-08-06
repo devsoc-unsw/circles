@@ -1,13 +1,13 @@
-import type { Dispatch, SetStateAction } from "react";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import type { Dispatch, SetStateAction } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Button, Input, message,
   Modal,
-} from "antd";
-import { RootState } from "config/store";
-import { updateCourseMark } from "reducers/plannerSlice";
-import S from "./styles";
+} from 'antd';
+import { RootState } from 'config/store';
+import { updateCourseMark } from 'reducers/plannerSlice';
+import S from './styles';
 
 type Props = {
   code: string
@@ -23,25 +23,25 @@ const EditMarkModal = ({
     useSelector((state: RootState) => state.planner.courses[code].mark),
   );
 
-  const letterGrades = ["SY", "PS", "CR", "DN", "HD"];
+  const letterGrades = ['SY', 'PS', 'CR', 'DN', 'HD'];
 
   const handleConfirmEditMark = (mark) => {
-    const attemptedMark = ` ${mark}`.replaceAll(" ", "").toUpperCase();
+    const attemptedMark = ` ${mark}`.replaceAll(' ', '').toUpperCase();
 
     if (
       ((/[A-Z]+/.test(attemptedMark)) && !letterGrades.includes(attemptedMark))
       || (parseFloat(attemptedMark) < 0 || parseFloat(attemptedMark) > 100)
       || ((/[A-Z]+/.test(attemptedMark)) && (/[0-9]+/.test(attemptedMark)))
     ) {
-      return message.error("Could not update mark. Please enter a valid mark or letter grade");
+      return message.error('Could not update mark. Please enter a valid mark or letter grade');
     }
     dispatch(updateCourseMark({
       code,
       mark: attemptedMark,
     }));
-    setMarkValue("");
+    setMarkValue('');
     setIsVisible(false);
-    return message.success("Mark Updated");
+    return message.success('Mark Updated');
   };
 
   const [markUpdatedQueued, setMarkUpdateQueued] = useState(false);
@@ -67,7 +67,7 @@ const EditMarkModal = ({
   };
 
   const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       setMarkUpdateQueued(true);
     }
   };

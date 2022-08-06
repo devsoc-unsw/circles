@@ -1,15 +1,15 @@
-import React from "react";
+import React from 'react';
 import {
   DragDropContext, Droppable, OnDragEndResponder, OnDragStartResponder,
-} from "react-beautiful-dnd";
-import { useDispatch, useSelector } from "react-redux";
-import { DeleteOutlined } from "@ant-design/icons";
-import { Popconfirm, Switch, Tooltip } from "antd";
-import DraggableTab from "components/DraggableTab";
-import { RootState } from "config/store";
-import { reorderTabs, resetTabs, setActiveTab } from "reducers/courseTabsSlice";
-import { toggleLockedCourses } from "reducers/settingsSlice";
-import S from "./styles";
+} from 'react-beautiful-dnd';
+import { useDispatch, useSelector } from 'react-redux';
+import { DeleteOutlined } from '@ant-design/icons';
+import { Popconfirm, Switch, Tooltip } from 'antd';
+import DraggableTab from 'components/DraggableTab';
+import { RootState } from 'config/store';
+import { reorderTabs, resetTabs, setActiveTab } from 'reducers/courseTabsSlice';
+import { toggleLockedCourses } from 'reducers/settingsSlice';
+import S from './styles';
 
 const CourseTabs = () => {
   const dispatch = useDispatch();
@@ -70,7 +70,7 @@ const CourseTabs = () => {
               placement="bottomRight"
               title="Do you want to close all tabs?"
               onConfirm={() => dispatch(resetTabs())}
-              style={{ width: "500px" }}
+              style={{ width: '500px' }}
               okText="Yes"
               cancelText="No"
             >

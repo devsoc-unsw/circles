@@ -1,3 +1,3 @@
-import CourseTabs from "./CourseTabs";
+import CourseTabs from './CourseTabs';
 
 export default CourseTabs;

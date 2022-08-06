@@ -1,3 +1,3 @@
-import Collapsible from "./Collapsible";
+import Collapsible from './Collapsible';
 
 export default Collapsible;

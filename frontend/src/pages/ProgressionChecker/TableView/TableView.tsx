@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { Skeleton, Table, Typography } from "antd";
-import { ProgramStructure } from "types/structure";
-import getFormattedPlannerCourses, { FormattedPlannerCourse } from "utils/getFormattedPlannerCourses";
-import { RootState } from "config/store";
-import { TableStructure } from "./types";
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { Skeleton, Table, Typography } from 'antd';
+import { ProgramStructure } from 'types/structure';
+import getFormattedPlannerCourses, { FormattedPlannerCourse } from 'utils/getFormattedPlannerCourses';
+import { RootState } from 'config/store';
+import { TableStructure } from './types';
 
 type Props = {
   isLoading: boolean
@@ -56,24 +56,24 @@ const TableView = ({ isLoading, structure }: Props) => {
 
   const columns = [
     {
-      title: "Course Code",
-      dataIndex: "key",
-      key: "key",
+      title: 'Course Code',
+      dataIndex: 'key',
+      key: 'key',
     },
     {
-      title: "Course Name",
-      dataIndex: "title",
-      key: "title",
+      title: 'Course Name',
+      dataIndex: 'title',
+      key: 'title',
     },
     {
-      title: "UOC",
-      dataIndex: "UOC",
-      key: "UOC",
+      title: 'UOC',
+      dataIndex: 'UOC',
+      key: 'UOC',
     },
     {
-      title: "Term Planned",
-      dataIndex: "termPlanned",
-      key: "termPlanned",
+      title: 'Term Planned',
+      dataIndex: 'termPlanned',
+      key: 'termPlanned',
     },
   ];
 

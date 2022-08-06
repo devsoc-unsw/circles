@@ -1,3 +1,3 @@
-import TermBox from "./TermBox";
+import TermBox from './TermBox';
 
 export default TermBox;

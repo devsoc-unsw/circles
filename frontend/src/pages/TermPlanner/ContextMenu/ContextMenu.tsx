@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import { Item, Menu, theme } from "react-contexify";
-import { FaRegCalendarTimes } from "react-icons/fa";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { DeleteFilled, EditFilled, InfoCircleFilled } from "@ant-design/icons";
-import EditMarkModal from "components/EditMarkModal";
-import { addTab } from "reducers/courseTabsSlice";
-import { removeCourse, unschedule } from "reducers/plannerSlice";
-import "react-contexify/dist/ReactContexify.css";
+import React, { useState } from 'react';
+import { Item, Menu, theme } from 'react-contexify';
+import { FaRegCalendarTimes } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { DeleteFilled, EditFilled, InfoCircleFilled } from '@ant-design/icons';
+import EditMarkModal from 'components/EditMarkModal';
+import { addTab } from 'reducers/courseTabsSlice';
+import { removeCourse, unschedule } from 'reducers/plannerSlice';
+import 'react-contexify/dist/ReactContexify.css';
 
 type Props = {
   code: string
@@ -31,7 +31,7 @@ const ContextMenu = ({ code, plannedFor }: Props) => {
   const id = `${code}-context`;
 
   const handleInfo = () => {
-    navigate("/course-selector");
+    navigate('/course-selector');
     dispatch(addTab(code));
   };
 
@@ -42,8 +42,8 @@ const ContextMenu = ({ code, plannedFor }: Props) => {
   };
 
   const iconStyle = {
-    fontSize: "14px",
-    marginRight: "5px",
+    fontSize: '14px',
+    marginRight: '5px',
   };
 
   return (

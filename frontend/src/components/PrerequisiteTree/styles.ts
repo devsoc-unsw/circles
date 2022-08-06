@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const PrereqTreeContainer = styled.div<{ height: number }>`
   margin-top: 20px;

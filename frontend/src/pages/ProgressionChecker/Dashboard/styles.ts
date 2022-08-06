@@ -1,5 +1,5 @@
-import { animated } from "@react-spring/web";
-import styled from "styled-components";
+import { animated } from '@react-spring/web';
+import styled from 'styled-components';
 
 const Wrapper = styled.div`
   min-height: calc(100vh - var(--navbar-height));

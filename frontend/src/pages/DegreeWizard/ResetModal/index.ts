@@ -1,3 +1,3 @@
-import ResetModal from "./ResetModal";
+import ResetModal from './ResetModal';
 
 export default ResetModal;

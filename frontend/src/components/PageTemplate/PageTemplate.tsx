@@ -1,7 +1,7 @@
-import React from "react";
-import { Helmet } from "react-helmet";
-import FeedbackButton from "components/FeedbackButton";
-import Header from "components/Header";
+import React from 'react';
+import { Helmet } from 'react-helmet';
+import FeedbackButton from 'components/FeedbackButton';
+import Header from 'components/Header';
 
 type Props = {
   children: React.ReactNode

@@ -1,3 +1,3 @@
-import OptionsHeader from "./OptionsHeader";
+import OptionsHeader from './OptionsHeader';
 
 export default OptionsHeader;

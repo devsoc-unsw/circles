@@ -1,14 +1,14 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { animated, useSpring } from "@react-spring/web";
-import { Button, Menu, Typography } from "antd";
-import axios from "axios";
-import { RootState } from "config/store";
-import { addSpecialisation, removeSpecialisation } from "reducers/degreeSlice";
-import springProps from "../common/spring";
-import Steps from "../common/steps";
-import CS from "../common/styles";
-import S from "./styles";
+import React, { useCallback, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { animated, useSpring } from '@react-spring/web';
+import { Button, Menu, Typography } from 'antd';
+import axios from 'axios';
+import { RootState } from 'config/store';
+import { addSpecialisation, removeSpecialisation } from 'reducers/degreeSlice';
+import springProps from '../common/spring';
+import Steps from '../common/steps';
+import CS from '../common/styles';
+import S from './styles';
 
 const { Title } = Typography;
 
@@ -22,7 +22,7 @@ const SpecialisationStep = ({ incrementStep, currStep, type }: Props) => {
   const props = useSpring(springProps);
   const dispatch = useDispatch();
   const { programCode, specs } = useSelector((store: RootState) => store.degree);
-  const [options, setOptions] = useState({ someProgramName: { specs: { major: "major data" }, notes: "a note" } });
+  const [options, setOptions] = useState({ someProgramName: { specs: { major: 'major data' }, notes: 'a note' } });
 
   const fetchAllSpecialisations = useCallback(async () => {
     const res = await axios.get(`/specialisations/getSpecialisations/${programCode}/${type}`);
@@ -30,7 +30,7 @@ const SpecialisationStep = ({ incrementStep, currStep, type }: Props) => {
   }, [programCode, type]);
 
   useEffect(() => {
-    if (programCode !== "") fetchAllSpecialisations();
+    if (programCode !== '') fetchAllSpecialisations();
   }, [fetchAllSpecialisations, programCode, type]);
 
   return (
@@ -50,12 +50,12 @@ const SpecialisationStep = ({ incrementStep, currStep, type }: Props) => {
           onSelect={(e) => dispatch(addSpecialisation(e.key))}
           onDeselect={(e) => dispatch(removeSpecialisation(e.key))}
           selectedKeys={specs}
-          defaultOpenKeys={["0"]}
+          defaultOpenKeys={['0']}
           mode="inline"
           style={{
-            gap: "10px",
-            display: "flex",
-            flexDirection: "column",
+            gap: '10px',
+            display: 'flex',
+            flexDirection: 'column',
           }}
         >
           {Object.keys(options).map((sub, index) => (
@@ -64,7 +64,7 @@ const SpecialisationStep = ({ incrementStep, currStep, type }: Props) => {
               title={`${type.replace(/^\w/, (c) => c.toUpperCase())} for ${sub}`}
               mode="inline"
               style={{
-                border: "1px solid #a86fed",
+                border: '1px solid #a86fed',
               }}
             >
               {(options[sub].notes)

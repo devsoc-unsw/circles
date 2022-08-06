@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Select, Spin } from "antd";
-import axios from "axios";
-import { useDebounce } from "use-debounce";
-import prepareUserPayload from "utils/prepareUserPayload";
-import { RootState } from "config/store";
-import { addTab } from "reducers/courseTabsSlice";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Select, Spin } from 'antd';
+import axios from 'axios';
+import { useDebounce } from 'use-debounce';
+import prepareUserPayload from 'utils/prepareUserPayload';
+import { RootState } from 'config/store';
+import { addTab } from 'reducers/courseTabsSlice';
 
 const CourseSearchBar = () => {
   const [value, setValue] = useState<string | null>(null);
@@ -70,7 +70,7 @@ const CourseSearchBar = () => {
       onSearch={handleSearch}
       onSelect={handleSelect}
       notFoundContent={isLoading && value && <Spin size="small" />}
-      style={{ width: "30rem", marginRight: "0.5rem" }}
+      style={{ width: '30rem', marginRight: '0.5rem' }}
       showArrow={!!value}
     />
   );

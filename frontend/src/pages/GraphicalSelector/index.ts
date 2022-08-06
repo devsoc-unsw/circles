@@ -1,3 +1,3 @@
-import GraphicalSelector from "./GraphicalSelector";
+import GraphicalSelector from './GraphicalSelector';
 
 export default GraphicalSelector;

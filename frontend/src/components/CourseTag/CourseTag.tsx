@@ -1,7 +1,7 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { addTab } from "reducers/courseTabsSlice";
-import S from "./styles";
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { addTab } from 'reducers/courseTabsSlice';
+import S from './styles';
 
 type Props = {
   name: string

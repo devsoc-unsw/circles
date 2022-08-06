@@ -1,11 +1,11 @@
 import {
   Grade, Mark, PlannerCourse, PlannerYear, Term,
-} from "types/planner";
+} from 'types/planner';
 
 const MIN_COMPLETED_COURSE_UOC = 6;
 
 const parseMarkToInt = (mark: Mark): number | null => {
-  if (typeof mark === "string") {
+  if (typeof mark === 'string') {
     const letterGradeToIntMap: Record<Grade, number | null> = {
       SY: null,
       FL: 25,
@@ -47,10 +47,10 @@ const getTermsList = (
   isSummerTerm: boolean,
   instanceNum: number,
 ) => {
-  const allTerms = ["T1", "T2", "T3"];
+  const allTerms = ['T1', 'T2', 'T3'];
   const termsList = [];
 
-  if (isSummerTerm) allTerms.unshift("T0");
+  if (isSummerTerm) allTerms.unshift('T0');
 
   // Remove any unavailable terms
   const terms = allTerms.filter((term) => availableTerms.includes(term as Term)) as Term[];
@@ -95,7 +95,7 @@ const getTermsList = (
 
 // Checks whether multiterm course will extend below bottom row of term planner
 type MultitermInBoundsPayload = {
-  srcTerm: Term | "unplanned"
+  srcTerm: Term | 'unplanned'
   destTerm: Term
   destRow: number
   course: PlannerCourse
@@ -114,7 +114,7 @@ const checkMultitermInBounds = (payload: MultitermInBoundsPayload) => {
     return false;
   }
 
-  const instanceNum = srcTerm === "unplanned" || !plannedFor ? 0 : plannedFor.split(" ").indexOf(srcTerm);
+  const instanceNum = srcTerm === 'unplanned' || !plannedFor ? 0 : plannedFor.split(' ').indexOf(srcTerm);
   const termsList = getTermsList(destTerm, uoc, termsOffered, isSummerTerm, instanceNum);
 
   const { rowOffset: maxRowOffset } = termsList[termsList.length - 1];

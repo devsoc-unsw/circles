@@ -1,3 +1,3 @@
-import CourseListModal from "./CourseListModal";
+import CourseListModal from './CourseListModal';
 
 export default CourseListModal;

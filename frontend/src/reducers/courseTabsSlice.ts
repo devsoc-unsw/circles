@@ -1,5 +1,5 @@
-import type { PayloadAction } from "@reduxjs/toolkit";
-import { createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 type SliceState = {
   tabs: string[]
@@ -12,7 +12,7 @@ const initialState: SliceState = {
 };
 
 const courseTabsSplice = createSlice({
-  name: "courseTabs",
+  name: 'courseTabs',
   initialState,
   reducers: {
     addTab: (state, action: PayloadAction<string>) => {

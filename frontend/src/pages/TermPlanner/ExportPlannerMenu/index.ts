@@ -1,3 +1,3 @@
-import ExportPlannerMenu from "./ExportPlannerMenu";
+import ExportPlannerMenu from './ExportPlannerMenu';
 
 export default ExportPlannerMenu;

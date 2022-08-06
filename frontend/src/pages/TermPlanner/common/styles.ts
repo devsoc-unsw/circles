@@ -1,5 +1,5 @@
-import { Divider } from "antd";
-import styled, { css, keyframes } from "styled-components";
+import { Divider } from 'antd';
+import styled, { css, keyframes } from 'styled-components';
 
 export const GridItem = styled.div`
   font-size: var(--tp-grid-item-font-size);

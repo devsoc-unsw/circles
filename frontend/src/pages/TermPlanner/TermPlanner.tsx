@@ -1,35 +1,36 @@
-import React, { useEffect, useRef, useState } from "react";
-import { DragDropContext, OnDragEndResponder, OnDragStartResponder } from "react-beautiful-dnd";
-import { useDispatch, useSelector } from "react-redux";
-import { Badge, notification } from "antd";
-import axios from "axios";
-import { Term } from "types/planner";
-import prepareCoursesForValidationPayload from "utils/prepareCoursesForValidationPayload";
-import PageTemplate from "components/PageTemplate";
-import { RootState } from "config/store";
+import React, { useEffect, useRef, useState } from 'react';
+import { DragDropContext, OnDragEndResponder, OnDragStartResponder } from 'react-beautiful-dnd';
+import { useDispatch, useSelector } from 'react-redux';
+import { Badge, notification } from 'antd';
+import axios from 'axios';
+import { ValidateTermPlanner } from 'types/api';
+import { Term } from 'types/planner';
+import prepareCoursesForValidationPayload from 'utils/prepareCoursesForValidationPayload';
+import PageTemplate from 'components/PageTemplate';
+import { RootState } from 'config/store';
 import {
   moveCourse, setPlannedCourseToTerm, setUnplannedCourseToTerm, toggleWarnings, unschedule,
-} from "reducers/plannerSlice";
-import { GridItem } from "./common/styles";
-import HideYearTooltip from "./HideYearTooltip";
-import OptionsHeader from "./OptionsHeader";
-import S from "./styles";
-import TermBox from "./TermBox";
-import UnplannedColumn from "./UnplannedColumn";
+} from 'reducers/plannerSlice';
+import { GridItem } from './common/styles';
+import HideYearTooltip from './HideYearTooltip';
+import OptionsHeader from './OptionsHeader';
+import S from './styles';
+import TermBox from './TermBox';
+import UnplannedColumn from './UnplannedColumn';
 import {
   checkMultitermInBounds,
   isPlannerEmpty,
-} from "./utils";
+} from './utils';
 // Used for tippy stylings
-import "tippy.js/dist/tippy.css";
-import "tippy.js/themes/light.css";
+import 'tippy.js/dist/tippy.css';
+import 'tippy.js/themes/light.css';
 
 const openNotification = () => {
   notification.info({
-    message: "Your terms are looking a little empty",
-    description: "Add courses from the course selector to the term planner by dragging from the unplanned column",
+    message: 'Your terms are looking a little empty',
+    description: 'Add courses from the course selector to the term planner by dragging from the unplanned column',
     duration: 3,
-    placement: "bottomRight",
+    placement: 'bottomRight',
   });
 };
 
@@ -38,7 +39,7 @@ const outOfBoundsMultitermNotification = (course: string) => {
     message: `${course} would extend outside of the term planner`,
     description: `Keep ${course} inside the calendar by moving it to a different term instead`,
     duration: 3,
-    placement: "bottomRight",
+    placement: 'bottomRight',
   });
 };
 
@@ -60,11 +61,11 @@ const TermPlanner = () => {
   }
   const validateTermPlanner = async () => {
     try {
-      const { data } = await axios.post(
-        "/planner/validateTermPlanner/",
+      const { data }: { data: ValidateTermPlanner } = await axios.post(
+        '/planner/validateTermPlanner/',
         JSON.stringify(prepareCoursesForValidationPayload(planner, degree, showWarnings)),
       );
-      dispatch(toggleWarnings(data.courses_state));
+      dispatch(toggleWarnings(data.course_state));
     } catch (err) {
       // eslint-disable-next-line no-console
       console.log(err);
@@ -99,7 +100,7 @@ const TermPlanner = () => {
 
     if (!destination) return; // drag outside container
 
-    if (destination.droppableId !== "unplanned") {
+    if (destination.droppableId !== 'unplanned') {
       // Check if multiterm course extends below bottom row of term planner
       if (planner.courses[draggableId].isMultiterm && !checkMultitermInBounds({
         destRow: Number(destination.droppableId.match(/[0-9]{4}/)[0]) - planner.startYear,
@@ -135,7 +136,7 @@ const TermPlanner = () => {
 
     const destIndex = destination.index;
 
-    if (destination.droppableId === "unplanned") {
+    if (destination.droppableId === 'unplanned') {
       // === move course to unplanned ===
       dispatch(unschedule({
         destIndex,
@@ -148,7 +149,7 @@ const TermPlanner = () => {
     const destTerm = destination.droppableId.match(/T[0-3]/)[0] as Term;
     const destRow = destYear - planner.startYear;
 
-    if (source.droppableId === "unplanned") {
+    if (source.droppableId === 'unplanned') {
       // === move unplanned course to term ===
       dispatch(setUnplannedCourseToTerm({
         destRow, destTerm, destIndex, course: draggableId,
@@ -213,16 +214,16 @@ const TermPlanner = () => {
                       </S.YearWrapper>
                       <Badge
                         style={{
-                          backgroundColor: "#efdbff",
-                          color: "#000000",
+                          backgroundColor: '#efdbff',
+                          color: '#000000',
                         }}
                         size="small"
                         count={`${yearUOC} UOC`}
                       />
                     </S.YearGridBox>
                     {Object.keys(year).map((term) => {
-                      const key = iYear + term;
-                      if (!planner.isSummerEnabled && term === "T0") return null;
+                      const key = `${iYear}${term}`;
+                      if (!planner.isSummerEnabled && term === 'T0') return null;
                       return (
                         <TermBox
                           key={key}

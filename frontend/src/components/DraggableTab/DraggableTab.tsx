@@ -1,13 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Draggable } from "react-beautiful-dnd";
-import { useDispatch, useSelector } from "react-redux";
-import { CloseOutlined } from "@ant-design/icons";
-import { Button } from "antd";
-import { useTheme } from "styled-components";
-import { RootState } from "config/store";
-import useIntersectionObserver from "hooks/useIntersectionObserver";
-import { removeTab, setActiveTab } from "reducers/courseTabsSlice";
-import S from "./styles";
+import React, { useEffect, useRef, useState } from 'react';
+import { Draggable } from 'react-beautiful-dnd';
+import { useDispatch, useSelector } from 'react-redux';
+import { CloseOutlined } from '@ant-design/icons';
+import { Button } from 'antd';
+import { useTheme } from 'styled-components';
+import { RootState } from 'config/store';
+import useIntersectionObserver from 'hooks/useIntersectionObserver';
+import { removeTab, setActiveTab } from 'reducers/courseTabsSlice';
+import S from './styles';
 
 type Props = {
   tabName: string
@@ -27,7 +27,7 @@ const DraggableTab = ({ tabName, index }: Props) => {
     if (style.transform) {
       return {
         ...style,
-        transform: `${style.transform.split(",").shift()}, 0px)`,
+        transform: `${style.transform.split(',').shift()}, 0px)`,
       };
     }
     return style;
@@ -42,7 +42,7 @@ const DraggableTab = ({ tabName, index }: Props) => {
 
   useEffect(() => {
     if (active === index && !scrolledTo) {
-      ref.current.scrollIntoView({ behavior: "smooth" });
+      ref.current.scrollIntoView({ behavior: 'smooth' });
       setScrolledTo(true);
     }
     setScrolledTo(false);
@@ -68,7 +68,7 @@ const DraggableTab = ({ tabName, index }: Props) => {
           <Button
             type="text"
             size="small"
-            icon={<CloseOutlined style={{ fontSize: "12px", color: theme.text }} />}
+            icon={<CloseOutlined style={{ fontSize: '12px', color: theme.text }} />}
             onClick={(e) => {
               e.stopPropagation(); // stop propagation for above tab onclick event
               dispatch(removeTab(index));

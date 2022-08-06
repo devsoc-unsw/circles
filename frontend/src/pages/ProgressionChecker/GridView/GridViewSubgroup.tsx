@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { Button, Empty, Typography } from "antd";
-import CourseBadge from "../CourseBadge";
-import CourseListModal from "../CourseListModal";
-import S from "./styles";
-import { GridSubgroupCourse } from "./types";
+import React, { useState } from 'react';
+import { Button, Empty, Typography } from 'antd';
+import CourseBadge from '../CourseBadge';
+import CourseListModal from '../CourseListModal';
+import S from './styles';
+import { GridSubgroupCourse } from './types';
 
 type Props = {
   uoc: number

@@ -1,4 +1,4 @@
-import { Term } from "./planner";
+import { Term } from './planner';
 
 export type CourseCodes = {
   [courseKey: string]: string

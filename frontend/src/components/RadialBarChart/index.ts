@@ -1,4 +1,4 @@
-import RadialBarChart from "./RadialBarChart";
+import RadialBarChart from './RadialBarChart';
 
 // TODO: not currently used
 export default RadialBarChart;

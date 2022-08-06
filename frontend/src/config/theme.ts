@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle, DefaultTheme } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
   html,
@@ -19,119 +19,119 @@ export const GlobalStyles = createGlobalStyle`
 `;
 
 const lightBaseColors = {
-  purplePrimary: "#9254de", // purple-5
-  purpleLight: "#efdbff", // purple-2
-  purpleDark: "#531dab", // purple-7
+  purplePrimary: '#9254de', // purple-5
+  purpleLight: '#efdbff', // purple-2
+  purpleDark: '#531dab', // purple-7
 };
 
 const darkBaseColors = {
-  purplePrimary: "#9254de", // purple-5 from light theme
-  purpleLight: "#51258f", // purple-2
-  purpleDark: "#854eca", // purple-7
+  purplePrimary: '#9254de', // purple-5 from light theme
+  purpleLight: '#51258f', // purple-2
+  purpleDark: '#854eca', // purple-7
 };
 
-export const lightTheme = {
+export const lightTheme: DefaultTheme = {
   ...lightBaseColors,
-  body: "#ffffff",
-  text: "#323739",
+  body: '#ffffff',
+  text: '#323739',
   droppable: {
-    backgroundColor: "#e8fef2",
+    backgroundColor: '#e8fef2',
   },
   plannerCartCard: {
-    backgroundColorHover: "#f4f4f4",
+    backgroundColorHover: '#f4f4f4',
   },
   plannerCartMenu: {
-    backgroundColor: "#ffffff",
+    backgroundColor: '#ffffff',
   },
   draggableTab: {
-    backgroundColor: "#fafafa",
-    borderColor: "#f0f0f0",
+    backgroundColor: '#fafafa',
+    borderColor: '#f0f0f0',
   },
 
   degreeCard: {
-    backgroundColor: "#f0f0f0",
+    backgroundColor: '#f0f0f0',
   },
   draggableCourse: {
-    backgroundColor: "#d9d9d9",
-    warningBackgroundColor: "#ffe8c3",
-    dragDisabledBackgroundColor: "#eee",
-    iconColor: "#fff",
+    backgroundColor: '#d9d9d9',
+    warningBackgroundColor: '#ffe8c3',
+    dragDisabledBackgroundColor: '#eee',
+    iconColor: '#fff',
   },
   termCheckbox: {
-    color: "#fff",
+    color: '#fff',
   },
   warningOutlined: {
-    color: "#DC9930",
+    color: '#DC9930',
   },
   termBoxWrapper: {
-    borderColor: "#d9d9d9",
+    borderColor: '#d9d9d9',
   },
   optionsHeader: {
-    borderColor: "#d9d9d9",
+    borderColor: '#d9d9d9',
   },
   infoOutlined: {
-    color: "#000",
+    color: '#000',
   },
   uocBadge: {
-    backgroundColor: "#9254de",
+    backgroundColor: '#9254de',
   },
 };
 
-export const darkTheme = {
+export const darkTheme: DefaultTheme = {
   ...darkBaseColors,
-  body: "#1d1f20",
-  text: "#f1f1f1",
+  body: '#1d1f20',
+  text: '#f1f1f1',
   droppable: {
-    backgroundColor: "#373A36",
+    backgroundColor: '#373A36',
   },
   plannerCartCard: {
-    backgroundColorHover: "#292a2b",
+    backgroundColorHover: '#292a2b',
   },
   plannerCartMenu: {
-    backgroundColor: "#434343",
+    backgroundColor: '#434343',
   },
   courseTag: {
-    backgroundColor: "#9254de",
+    backgroundColor: '#9254de',
   },
 
   draggableTab: {
-    backgroundColor: "#1d1f20",
-    borderColor: "#1d1f20",
+    backgroundColor: '#1d1f20',
+    borderColor: '#1d1f20',
   },
 
   courseSidebar: {
-    menuSubColor: "#262626", // gray-10
+    menuSubColor: '#262626', // gray-10
   },
 
   specialsationStep: {
-    background: "#fff",
+    background: '#fff',
   },
 
   degreeCard: {
-    backgroundColor: "#17191a",
+    backgroundColor: '#17191a',
   },
   draggableCourse: {
-    backgroundColor: "#121212",
-    warningBackgroundColor: "#ab6a03",
-    dragDisabledBackgroundColor: "#2b2b2b",
-    iconColor: "#fff",
+    backgroundColor: '#121212',
+    warningBackgroundColor: '#ab6a03',
+    dragDisabledBackgroundColor: '#2b2b2b',
+    iconColor: '#fff',
   },
   termCheckbox: {
-    color: "#000",
+    color: '#000',
   },
   warningOutlined: {
-    color: "#fff",
+    color: '#fff',
   },
   termBoxWrapper: {
-    borderColor: "#4d4b4a",
+    borderColor: '#4d4b4a',
   },
   optionsHeader: {
-    borderColor: "#4d4b4a",
+    borderColor: '#4d4b4a',
   },
   infoOutlined: {
-    color: "#fff",
+    color: '#fff',
   },
   uocBadge: {
-    backgroundColor: "#51258f",
+    backgroundColor: '#51258f',
   },
 };

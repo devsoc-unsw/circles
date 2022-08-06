@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { notification } from "antd";
-import axios from "axios";
-import { ProgramStructure } from "types/structure";
-import PageTemplate from "components/PageTemplate";
-import { RootState } from "config/store";
-import CourseBanner from "./CourseBanner";
-import CourseDescription from "./CourseDescription";
-import CourseSidebar from "./CourseSidebar";
-import CourseTabs from "./CourseTabs";
-import S from "./styles";
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { notification } from 'antd';
+import axios from 'axios';
+import { ProgramStructure } from 'types/structure';
+import PageTemplate from 'components/PageTemplate';
+import { RootState } from 'config/store';
+import CourseBanner from './CourseBanner';
+import CourseDescription from './CourseDescription';
+import CourseSidebar from './CourseSidebar';
+import CourseTabs from './CourseTabs';
+import S from './styles';
 
 const CourseSelector = () => {
   const [structure, setStructure] = useState<ProgramStructure>({});
@@ -24,10 +24,10 @@ const CourseSelector = () => {
   useEffect(() => {
     const openNotification = () => {
       notification.info({
-        message: "How do I see more sidebar courses?",
-        description: "Courses are shown as you meet the requirements to take them. Any course can also be selected via the search bar.",
+        message: 'How do I see more sidebar courses?',
+        description: 'Courses are shown as you meet the requirements to take them. Any course can also be selected via the search bar.',
         duration: 5,
-        placement: "bottomRight",
+        placement: 'bottomRight',
       });
     };
 
@@ -39,7 +39,7 @@ const CourseSelector = () => {
     // get structure of degree
     const fetchStructure = async () => {
       try {
-        const res = await axios.get(`/programs/getStructure/${programCode}/${specs.join("+")}`);
+        const res = await axios.get(`/programs/getStructure/${programCode}/${specs.join('+')}`);
         setStructure(res.data.structure);
       } catch (err) {
         // eslint-disable-next-line no-console

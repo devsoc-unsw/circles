@@ -1,8 +1,8 @@
-import type { Dispatch, SetStateAction } from "react";
-import React from "react";
-import CourseBadge from "../CourseBadge";
-import { GridSubgroupCourse } from "../GridView/types";
-import S from "./styles";
+import type { Dispatch, SetStateAction } from 'react';
+import React from 'react';
+import CourseBadge from '../CourseBadge';
+import { GridSubgroupCourse } from '../GridView/types';
+import S from './styles';
 
 type Props = {
   title: string

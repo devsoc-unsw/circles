@@ -1,3 +1,3 @@
-import CourseSearchBar from "./CourseSearchBar";
+import CourseSearchBar from './CourseSearchBar';
 
 export default CourseSearchBar;

@@ -1,12 +1,12 @@
-import React from "react";
-import { RadialBar } from "@ant-design/charts";
-import data from "./radialChartData";
+import React from 'react';
+import { RadialBar } from '@ant-design/charts';
+import data from './radialChartData';
 
 const RadialBarChart = () => {
   const config = {
     data,
-    xField: "name",
-    yField: "UOC",
+    xField: 'name',
+    yField: 'UOC',
     maxAngle: 720,
     width: 320,
     height: 320,
@@ -14,15 +14,15 @@ const RadialBarChart = () => {
     tooltip: {
       formatter: function formatter(datum) {
         return {
-          name: "UOC",
+          name: 'UOC',
           value: datum.UOC,
         };
       },
     },
-    colorField: "color", // or seriesField in some cases
+    colorField: 'color', // or seriesField in some cases
     color: ({ color }) => color,
     barBackground: {},
-    barStyle: { lineCap: "round" },
+    barStyle: { lineCap: 'round' },
   };
   return <RadialBar {...config} />;
 };

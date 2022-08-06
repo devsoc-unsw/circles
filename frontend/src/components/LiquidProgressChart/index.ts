@@ -1,3 +1,3 @@
-import LiquidProgressChart from "./LiquidProgressChart";
+import LiquidProgressChart from './LiquidProgressChart';
 
 export default LiquidProgressChart;

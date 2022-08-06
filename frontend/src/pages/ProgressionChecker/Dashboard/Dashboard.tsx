@@ -1,16 +1,16 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { scroller } from "react-scroll";
-import { ArrowDownOutlined } from "@ant-design/icons";
-import { useSpring } from "@react-spring/web";
-import { Button, Typography } from "antd";
-import { ProgramStructure } from "types/structure";
-import LiquidProgressChart from "components/LiquidProgressChart";
-import { RootState } from "config/store";
-import DegreeCard from "../DegreeCard";
-import { StoreUOC } from "../types";
-import SkeletonDashboard from "./SkeletonDashboard";
-import S from "./styles";
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { scroller } from 'react-scroll';
+import { ArrowDownOutlined } from '@ant-design/icons';
+import { useSpring } from '@react-spring/web';
+import { Button, Typography } from 'antd';
+import { ProgramStructure } from 'types/structure';
+import LiquidProgressChart from 'components/LiquidProgressChart';
+import { RootState } from 'config/store';
+import DegreeCard from '../DegreeCard';
+import { StoreUOC } from '../types';
+import SkeletonDashboard from './SkeletonDashboard';
+import S from './styles';
 
 type Props = {
   storeUOC: StoreUOC
@@ -38,7 +38,7 @@ const Dashboard = ({
   const courseList = (
     Object.values(structure)
       .flatMap((specialisation) => Object.values(specialisation.content)
-        .filter((spec) => typeof spec === "object" && spec.courses && !spec.type.includes("rule"))
+        .filter((spec) => typeof spec === 'object' && spec.courses && !spec.type.includes('rule'))
         .flatMap((spec) => Object.keys(spec.courses)))
   );
 
@@ -48,7 +48,7 @@ const Dashboard = ({
   });
 
   const handleClick = () => {
-    scroller.scrollTo("divider", {
+    scroller.scrollTo('divider', {
       duration: 1500,
       smooth: true,
     });
@@ -73,7 +73,7 @@ const Dashboard = ({
           </a>
           <S.CardsWrapper>
             {Object.entries(structure)
-              .filter(([group]) => group !== "Rules")
+              .filter(([group]) => group !== 'Rules')
               .map(([group, specialisation]) => (
                 <DegreeCard
                   key={group}

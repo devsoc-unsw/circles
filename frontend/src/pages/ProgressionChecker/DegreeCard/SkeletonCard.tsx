@@ -1,9 +1,9 @@
-import React from "react";
-import S from "./styles";
+import React from 'react';
+import S from './styles';
 
 const SkeletonCard = () => (
   <S.SkeletonCard
-    style={{ width: "20em", height: "8.5em" }}
+    style={{ width: '20em', height: '8.5em' }}
     active
   />
 );

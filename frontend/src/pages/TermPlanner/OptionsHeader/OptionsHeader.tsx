@@ -1,19 +1,19 @@
-import React from "react";
-import { FaRegCalendarTimes } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
+import React from 'react';
+import { FaRegCalendarTimes } from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   DownloadOutlined, EyeFilled, QuestionCircleOutlined, SettingFilled, WarningFilled,
-} from "@ant-design/icons";
-import Tippy from "@tippyjs/react";
-import { Popconfirm, Switch, Tooltip } from "antd";
-import { RootState } from "config/store";
-import { unhideAllYears, unscheduleAll } from "reducers/plannerSlice";
-import { toggleShowMarks, toggleShowWarnings } from "reducers/settingsSlice";
-import ExportPlannerMenu from "../ExportPlannerMenu";
-import HelpMenu from "../HelpMenu/HelpMenu";
-import SettingsMenu from "../SettingsMenu";
-import { isPlannerEmpty } from "../utils";
-import S from "./styles";
+} from '@ant-design/icons';
+import Tippy from '@tippyjs/react';
+import { Popconfirm, Switch, Tooltip } from 'antd';
+import { RootState } from 'config/store';
+import { unhideAllYears, unscheduleAll } from 'reducers/plannerSlice';
+import { toggleShowMarks, toggleShowWarnings } from 'reducers/settingsSlice';
+import ExportPlannerMenu from '../ExportPlannerMenu';
+import HelpMenu from '../HelpMenu/HelpMenu';
+import SettingsMenu from '../SettingsMenu';
+import { isPlannerEmpty } from '../utils';
+import S from './styles';
 
 type Props = {
   plannerRef: React.RefObject<HTMLDivElement>
@@ -26,8 +26,8 @@ const OptionsHeader = ({ plannerRef }: Props) => {
   const dispatch = useDispatch();
 
   const iconStyles = {
-    fontSize: "20px",
-    color: "#323739",
+    fontSize: '20px',
+    color: '#323739',
   };
 
   return (
@@ -74,7 +74,7 @@ const OptionsHeader = ({ plannerRef }: Props) => {
               placement="bottomRight"
               title="Are you sure you want to unplan all your courses?"
               onConfirm={() => dispatch(unscheduleAll())}
-              style={{ width: "200px" }}
+              style={{ width: '200px' }}
               okText="Yes"
               cancelText="No"
             >
@@ -94,7 +94,7 @@ const OptionsHeader = ({ plannerRef }: Props) => {
         )}
         <Tooltip title="Toggle warnings for previous terms">
           <S.OptionButton onClick={() => dispatch(toggleShowWarnings())}>
-            <WarningFilled style={{ ...iconStyles, ...(showWarnings && { color: "#9254de" }) }} />
+            <WarningFilled style={{ ...iconStyles, ...(showWarnings && { color: '#9254de' }) }} />
           </S.OptionButton>
         </Tooltip>
       </S.OptionSection>

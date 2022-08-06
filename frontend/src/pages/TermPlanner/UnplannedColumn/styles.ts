@@ -1,5 +1,5 @@
-import styled, { css } from "styled-components";
-import { Droppable, GridItem } from "../common/styles";
+import styled, { css } from 'styled-components';
+import { Droppable, GridItem } from '../common/styles';
 
 const UnplannedContainer = styled.div<{ summerEnabled: boolean }>`
   grid-row-start: 1;

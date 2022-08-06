@@ -1,16 +1,16 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   LockOutlined, MinusOutlined, PlusOutlined, WarningOutlined,
-} from "@ant-design/icons";
-import { Button, Tooltip } from "antd";
-import { PlannerCourse } from "types/planner";
-import prepareUserPayload from "utils/prepareUserPayload";
-import axiosRequest from "config/axios";
-import { RootState } from "config/store";
-import useMediaQuery from "hooks/useMediaQuery";
-import { addToUnplanned, removeCourses } from "reducers/plannerSlice";
-import S from "./styles";
+} from '@ant-design/icons';
+import { Button, Tooltip } from 'antd';
+import { PlannerCourse } from 'types/planner';
+import prepareUserPayload from 'utils/prepareUserPayload';
+import axiosRequest from 'config/axios';
+import { RootState } from 'config/store';
+import useMediaQuery from 'hooks/useMediaQuery';
+import { addToUnplanned, removeCourses } from 'reducers/plannerSlice';
+import S from './styles';
 
 type Props = {
   courseCode: string
@@ -30,7 +30,7 @@ const CourseTitle = ({
   const addToPlanner = async (e: React.MouseEvent<HTMLElement>, code: string) => {
     e.stopPropagation();
     const [course] = await axiosRequest(
-      "get",
+      'get',
       `/courses/getCourse/${code}`,
     );
 
@@ -54,11 +54,11 @@ const CourseTitle = ({
 
   const removeFromPlanner = async (e: React.MouseEvent<HTMLElement>, code: string) => {
     e.stopPropagation();
-    const [data] = await axiosRequest("post", `/courses/unselectCourse/${code}`, prepareUserPayload(degree, planner));
+    const [data] = await axiosRequest('post', `/courses/unselectCourse/${code}`, prepareUserPayload(degree, planner));
     dispatch(removeCourses(data.courses));
   };
 
-  const isSmall = useMediaQuery("(max-width: 1400px)");
+  const isSmall = useMediaQuery('(max-width: 1400px)');
 
   return (
     <S.Wrapper>
@@ -81,13 +81,13 @@ const CourseTitle = ({
           >
             <WarningOutlined
               style={{
-                color: "#DC9930",
-                fontSize: "16px",
+                color: '#DC9930',
+                fontSize: '16px',
               }}
             />
           </Tooltip>
         )}
-        {!unlocked && <LockOutlined style={{ fontSize: "12px" }} />}
+        {!unlocked && <LockOutlined style={{ fontSize: '12px' }} />}
         {!selected ? (
           <Tooltip title="Add to Planner" placement="top">
             <Button

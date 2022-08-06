@@ -1,3 +1,3 @@
-import CourseBadge from "./CourseBadge";
+import CourseBadge from './CourseBadge';
 
 export default CourseBadge;

@@ -1,3 +1,3 @@
-import CourseTag from "./CourseTag";
+import CourseTag from './CourseTag';
 
 export default CourseTag;

@@ -1,3 +1,3 @@
-import StartBrowsingStep from "./StartBrowsingStep";
+import StartBrowsingStep from './StartBrowsingStep';
 
 export default StartBrowsingStep;

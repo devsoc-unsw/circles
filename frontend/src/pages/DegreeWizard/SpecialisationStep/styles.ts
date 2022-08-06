@@ -1,5 +1,5 @@
-import { Menu as antdMenu } from "antd";
-import styled from "styled-components";
+import { Menu as antdMenu } from 'antd';
+import styled from 'styled-components';
 
 // NOTE: Very hacky way to override menu styling
 const Menu = styled(antdMenu)`

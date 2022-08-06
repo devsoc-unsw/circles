@@ -1,17 +1,17 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { ItemType } from "antd/lib/menu/hooks/useItems";
-import axios from "axios";
-import { CourseValidation } from "types/courses";
-import { ProgramStructure } from "types/structure";
-import prepareUserPayload from "utils/prepareUserPayload";
-import { RootState } from "config/store";
-import { setCourses } from "reducers/coursesSlice";
-import { addTab } from "reducers/courseTabsSlice";
-import CourseTitle from "./CourseTitle";
-import LoadingSkeleton from "./LoadingSkeleton/LoadingSkeleton";
-import S from "./styles";
-import { CourseUnitsStructure, MenuDataStructure, MenuDataSubgroup } from "./types";
+import React, { useCallback, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { ItemType } from 'antd/lib/menu/hooks/useItems';
+import axios from 'axios';
+import { CourseValidation } from 'types/courses';
+import { ProgramStructure } from 'types/structure';
+import prepareUserPayload from 'utils/prepareUserPayload';
+import { RootState } from 'config/store';
+import { setCourses } from 'reducers/coursesSlice';
+import { addTab } from 'reducers/courseTabsSlice';
+import CourseTitle from './CourseTitle';
+import LoadingSkeleton from './LoadingSkeleton/LoadingSkeleton';
+import S from './styles';
+import { CourseUnitsStructure, MenuDataStructure, MenuDataSubgroup } from './types';
 
 type Props = {
   structure: ProgramStructure
@@ -53,7 +53,7 @@ const CourseSidebar = ({ structure, showLockedCourses }: Props) => {
     // Example groups: Major, Minor, General, Rules
     Object.keys(structure).forEach((group) => {
       // Do not include 'Rules' group in sidebar
-      if (group === "Rules") return;
+      if (group === 'Rules') return;
 
       newMenu[group] = {};
       newCoursesUnits[group] = {};
@@ -67,11 +67,11 @@ const CourseSidebar = ({ structure, showLockedCourses }: Props) => {
         };
         newMenu[group][subgroup] = [];
 
-        if (subgroupStructure.courses && !subgroupStructure.type.includes("rule")) {
+        if (subgroupStructure.courses && !subgroupStructure.type.includes('rule')) {
           // only consider disciplinary component courses
           Object.keys(subgroupStructure.courses).forEach((courseCode) => {
             // suppress gen ed courses if it has not been added to the planner
-            if (subgroupStructure.type === "gened" && !planner.courses[courseCode]) return;
+            if (subgroupStructure.type === 'gened' && !planner.courses[courseCode]) return;
 
             newMenu[group][subgroup].push({
               courseCode,
@@ -99,7 +99,7 @@ const CourseSidebar = ({ structure, showLockedCourses }: Props) => {
   const getAllUnlocked = useCallback(async () => {
     try {
       const res = await axios.post(
-        "/courses/getAllUnlocked/",
+        '/courses/getAllUnlocked/',
         JSON.stringify(prepareUserPayload(degree, planner)),
       );
       dispatch(setCourses(res.data.courses_state));
@@ -166,7 +166,7 @@ const CourseSidebar = ({ structure, showLockedCourses }: Props) => {
                   // course items in menu
                   key: `${course.courseCode}-${groupKey}-${subgroupKey}`,
                 })),
-              type: "group",
+              type: 'group',
             };
           }),
       }));

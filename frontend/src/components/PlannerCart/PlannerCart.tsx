@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
-import { CalendarOutlined, DeleteOutlined } from "@ant-design/icons";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { CalendarOutlined, DeleteOutlined } from '@ant-design/icons';
 import {
   Alert,
   Button, Tooltip, Typography,
-} from "antd";
-import PlannerCartCourseCard from "components/PlannerCartCourseCard";
-import { RootState } from "config/store";
-import { removeAllCourses } from "reducers/plannerSlice";
-import S from "./styles";
+} from 'antd';
+import PlannerCartCourseCard from 'components/PlannerCartCourseCard';
+import { RootState } from 'config/store';
+import { removeAllCourses } from 'reducers/plannerSlice';
+import S from './styles';
 
 const { Text, Title } = Typography;
 
@@ -19,7 +19,7 @@ const PlannerCart = () => {
   const courses = useSelector((store: RootState) => store.planner.courses);
   const [openMenu, setOpenMenu] = useState(false);
   const [show, setShow] = useState(false);
-  const [code, setCode] = useState("");
+  const [code, setCode] = useState('');
 
   const deleteAllCourses = () => {
     dispatch(removeAllCourses());
@@ -31,7 +31,7 @@ const PlannerCart = () => {
     setShow(true);
     setTimeout(() => {
       setShow(false);
-      setCode("");
+      setCode('');
     }, 3500);
   };
   const pathname = useLocation();
@@ -45,7 +45,7 @@ const PlannerCart = () => {
       <Tooltip title="Your courses">
         <Button
           type="primary"
-          icon={<CalendarOutlined style={{ fontSize: "26px" }} />}
+          icon={<CalendarOutlined style={{ fontSize: '26px' }} />}
           size="large"
           onClick={() => setOpenMenu(!openMenu)}
         />
@@ -59,7 +59,7 @@ const PlannerCart = () => {
             <Alert
               message={`Successfully removed ${code} from planner`}
               type="success"
-              style={{ margin: "10px" }}
+              style={{ margin: '10px' }}
               banner
               showIcon
               closable
@@ -85,7 +85,7 @@ const PlannerCart = () => {
               </Text>
               <S.LinkButton
                 shape="round"
-                onClick={() => navigate("/course-selector")}
+                onClick={() => navigate('/course-selector')}
               >
                 Go to course selector
               </S.LinkButton>

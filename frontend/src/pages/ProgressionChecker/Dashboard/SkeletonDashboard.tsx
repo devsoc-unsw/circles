@@ -1,7 +1,7 @@
-import React from "react";
-import { Skeleton } from "antd";
-import { SkeletonCard } from "../DegreeCard";
-import S from "./styles";
+import React from 'react';
+import { Skeleton } from 'antd';
+import { SkeletonCard } from '../DegreeCard';
+import S from './styles';
 
 const SkeletonDashboard = () => (
   <S.ContentWrapper>

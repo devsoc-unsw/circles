@@ -1,4 +1,4 @@
-import GRAPH_STYLE from "./config";
+import GRAPH_STYLE from './config';
 
 // plannedCourses is an object of with keys of courseCodes
 const handleNodeData = (courseCode, plannedCourses) => {

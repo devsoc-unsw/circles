@@ -1,3 +1,3 @@
-import FeedbackButton from "./FeedbackButton";
+import FeedbackButton from './FeedbackButton';
 
 export default FeedbackButton;

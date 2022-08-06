@@ -1,21 +1,21 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import G6 from "@antv/g6";
-import axios from "axios";
-import prepareUserPayload from "utils/prepareUserPayload";
-import Spinner from "components/Spinner";
-import axiosRequest from "config/axios";
-import { RootState } from "config/store";
-import { addTab } from "reducers/courseTabsSlice";
-import GRAPH_STYLE from "./config";
-import TREE_CONSTANTS from "./constants";
-import S from "./styles";
+import React, { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import G6 from '@antv/g6';
+import axios from 'axios';
+import prepareUserPayload from 'utils/prepareUserPayload';
+import Spinner from 'components/Spinner';
+import axiosRequest from 'config/axios';
+import { RootState } from 'config/store';
+import { addTab } from 'reducers/courseTabsSlice';
+import GRAPH_STYLE from './config';
+import TREE_CONSTANTS from './constants';
+import S from './styles';
 import {
   bringEdgeLabelsToFront,
   calcHeight,
   handleNodeData,
   updateEdges,
-} from "./utils";
+} from './utils';
 
 type Props = {
   courseCode: string
@@ -54,7 +54,7 @@ const PrerequisiteTree = ({ courseCode }: Props) => {
 
     bringEdgeLabelsToFront(treeGraphInstance);
 
-    treeGraphInstance.on("node:click", (event) => {
+    treeGraphInstance.on('node:click', (event) => {
       // open new course tab
       const node = event.item;
       const { _cfg: { model: { label } } } = node;
@@ -71,7 +71,7 @@ const PrerequisiteTree = ({ courseCode }: Props) => {
   /* REQUESTS */
   const getCourseUnlocks = async (c) => {
     const [unlockData, unlockErr] = await axiosRequest(
-      "get",
+      'get',
       `/courses/courseChildren/${c}`,
     );
     return !unlockErr ? unlockData.courses : [];
@@ -79,7 +79,7 @@ const PrerequisiteTree = ({ courseCode }: Props) => {
 
   const getCoursePrereqs = async (c) => {
     const [prereqData, prereqErr] = await axiosRequest(
-      "get",
+      'get',
       `/courses/getPathFrom/${c}`,
     );
     return !prereqErr ? prereqData.courses : [];
@@ -88,7 +88,7 @@ const PrerequisiteTree = ({ courseCode }: Props) => {
   const determineCourseAccuracy = async () => {
     try {
       const res = await axios.post(
-        "/courses/getAllUnlocked/",
+        '/courses/getAllUnlocked/',
         JSON.stringify(prepareUserPayload(degree, planner)),
       );
       setCourseAccurate(res.data.courses_state[courseCode]?.is_accurate);
@@ -109,7 +109,7 @@ const PrerequisiteTree = ({ courseCode }: Props) => {
 
     // create graph data
     const graphData = {
-      id: "root",
+      id: 'root',
       label: courseCode,
       children: prereqs?.map((child) => (handleNodeData(child, TREE_CONSTANTS.PREREQ)))
         .concat(unlocks?.map((child) => (handleNodeData(child, TREE_CONSTANTS.UNLOCKS)))),

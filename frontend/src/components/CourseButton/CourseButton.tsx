@@ -1,8 +1,8 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { addTab } from "reducers/courseTabsSlice";
-import S from "./styles";
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { addTab } from 'reducers/courseTabsSlice';
+import S from './styles';
 
 type Props = {
   courseCode: string
@@ -16,7 +16,7 @@ const CourseButton = ({ courseCode, title, planned }: Props) => {
 
   const handleCourseLink = (e: React.MouseEvent<HTMLElement>): void => {
     e.stopPropagation();
-    navigate("/course-selector");
+    navigate('/course-selector');
     dispatch(addTab(courseCode));
   };
 

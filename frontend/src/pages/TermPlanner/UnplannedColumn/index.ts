@@ -1,3 +1,3 @@
-import UnplannedColumn from "./UnplannedColumn";
+import UnplannedColumn from './UnplannedColumn';
 
 export default UnplannedColumn;

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { Typography } from "antd";
-import S from "./styles";
+import React, { useState } from 'react';
+import { Typography } from 'antd';
+import S from './styles';
 
 const { Title } = Typography;
 
@@ -27,7 +27,7 @@ const Collapsible = ({
     <div>
       <S.CollapsibleHeader onClick={toggleCollapse} style={headerStyle}>
         <S.CollapseButton collapsed={isCollapsed} />
-        {(typeof title === "string")
+        {(typeof title === 'string')
           ? (
             <Title level={3} className="text">
               {title}

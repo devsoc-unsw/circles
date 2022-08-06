@@ -1,3 +1,3 @@
-import PageLoading from "./PageLoading";
+import PageLoading from './PageLoading';
 
 export default PageLoading;

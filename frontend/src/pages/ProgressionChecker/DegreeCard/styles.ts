@@ -1,5 +1,5 @@
-import { Card as antdCard, Skeleton } from "antd";
-import styled from "styled-components";
+import { Card as antdCard, Skeleton } from 'antd';
+import styled from 'styled-components';
 
 const Card = styled(antdCard)`
   width: 300px;

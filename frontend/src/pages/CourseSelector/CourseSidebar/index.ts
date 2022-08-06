@@ -1,3 +1,3 @@
-import CourseSidebarMenu from "./CourseSidebar";
+import CourseSidebarMenu from './CourseSidebar';
 
 export default CourseSidebarMenu;

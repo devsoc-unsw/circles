@@ -1,11 +1,11 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { animated, useSpring } from "@react-spring/web";
-import { DatePicker, Typography } from "antd";
-import { updateDegreeLength, updateStartYear } from "reducers/plannerSlice";
-import springProps from "../common/spring";
-import Steps from "../common/steps";
-import CS from "../common/styles";
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { animated, useSpring } from '@react-spring/web';
+import { DatePicker, Typography } from 'antd';
+import { updateDegreeLength, updateStartYear } from 'reducers/plannerSlice';
+import springProps from '../common/spring';
+import Steps from '../common/steps';
+import CS from '../common/styles';
 
 const { Title } = Typography;
 const { RangePicker } = DatePicker;
@@ -28,7 +28,7 @@ const YearStep = ({ incrementStep }: Props) => {
           picker="year"
           size="large"
           style={{
-            width: "100%",
+            width: '100%',
           }}
           onChange={(_, [startYear, endYear]) => {
             const numYears = parseInt(endYear, 10) - parseInt(startYear, 10) + 1;

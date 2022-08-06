@@ -1,3 +1,3 @@
-import DraggableTab from "./DraggableTab";
+import DraggableTab from './DraggableTab';
 
 export default DraggableTab;

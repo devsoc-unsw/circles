@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const DraggableTabWrapper = styled.div<{ active: boolean }>`
   height: 100%;

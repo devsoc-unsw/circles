@@ -1,3 +1,3 @@
-import EditMarkModal from "./EditMarkModal";
+import EditMarkModal from './EditMarkModal';
 
 export default EditMarkModal;

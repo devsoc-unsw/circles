@@ -1,5 +1,5 @@
-import DegreeCard from "./DegreeCard";
-import SkeletonCard from "./SkeletonCard";
+import DegreeCard from './DegreeCard';
+import SkeletonCard from './SkeletonCard';
 
 export default DegreeCard;
 

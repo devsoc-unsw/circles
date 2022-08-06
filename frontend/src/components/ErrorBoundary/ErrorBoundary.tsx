@@ -1,8 +1,8 @@
 /* eslint-disable react/destructuring-assignment */
-import React from "react";
-import { Button } from "antd";
-import { FEEDBACK_LINK } from "config/constants";
-import S from "./styles";
+import React from 'react';
+import { Button } from 'antd';
+import { FEEDBACK_LINK } from 'config/constants';
+import S from './styles';
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -26,7 +26,7 @@ class ErrorBoundary extends React.Component {
 
     const handleClick = () => {
       localStorage.clear();
-      window.location = "/degree-wizard";
+      window.location = '/degree-wizard';
     };
 
     if (hasError) {

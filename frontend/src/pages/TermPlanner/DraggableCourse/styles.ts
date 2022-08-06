@@ -1,5 +1,5 @@
-import styled, { css } from "styled-components";
-import { shake } from "../common/styles";
+import styled, { css } from 'styled-components';
+import { shake } from '../common/styles';
 
 type CourseWrapperProps = {
   isSmall: boolean
@@ -16,7 +16,7 @@ const CourseWrapper = styled.li<CourseWrapperProps>`
   padding: 0.9em;
   padding-right: 1.1em;
   padding-left: 1.1em;
-  border-radius: ${({ isSmall }) => (isSmall ? "0.2em" : "1em")};
+  border-radius: ${({ isSmall }) => (isSmall ? '0.2em' : '1em')};
   max-width: 20em;
   min-width: 12em;
   margin-top: 1em;

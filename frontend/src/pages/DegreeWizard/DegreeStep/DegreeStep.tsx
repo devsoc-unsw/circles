@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { animated, useSpring } from "@react-spring/web";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { animated, useSpring } from '@react-spring/web';
 import {
   Input, Menu, Typography,
-} from "antd";
-import axios from "axios";
-import { RootState } from "config/store";
-import { resetDegree, setProgram } from "reducers/degreeSlice";
-import springProps from "../common/spring";
-import Steps from "../common/steps";
-import CS from "../common/styles";
+} from 'antd';
+import axios from 'axios';
+import { RootState } from 'config/store';
+import { resetDegree, setProgram } from 'reducers/degreeSlice';
+import springProps from '../common/spring';
+import Steps from '../common/steps';
+import CS from '../common/styles';
 
 const { Title } = Typography;
 
@@ -18,7 +18,7 @@ type Props = {
 };
 
 const DegreeStep = ({ incrementStep }: Props) => {
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState('');
   const [options, setOptions] = useState<string[]>([]);
   const [allDegrees, setAllDegrees] = useState<Record<string, string>>({});
 
@@ -26,7 +26,7 @@ const DegreeStep = ({ incrementStep }: Props) => {
   const programCode = useSelector((store: RootState) => store.degree.programCode);
 
   const fetchAllDegrees = async () => {
-    const res = await axios.get("/programs/getPrograms");
+    const res = await axios.get('/programs/getPrograms');
     setAllDegrees(res.data.programs);
   };
 

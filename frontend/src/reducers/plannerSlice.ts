@@ -1,10 +1,10 @@
-import type { PayloadAction } from "@reduxjs/toolkit";
-import { createSlice } from "@reduxjs/toolkit";
-import { CourseStates } from "types/courses";
+import type { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
+import { CourseStates } from 'types/courses';
 import {
   Mark, PlannerCourse, PlannerYear, Term,
-} from "types/planner";
-import { getTermsList } from "pages/TermPlanner/utils";
+} from 'types/planner';
+import { getTermsList } from 'pages/TermPlanner/utils';
 
 // set up hidden object
 const generateHiddenInit = (startYear: number, numYears: number) => {
@@ -63,7 +63,7 @@ const initialState: PlannerSliceState = {
 };
 
 const plannerSlice = createSlice({
-  name: "planner",
+  name: 'planner',
   initialState,
   reducers: {
     addToUnplanned: (state, action: PayloadAction<{
@@ -190,7 +190,7 @@ const plannerSlice = createSlice({
         const year = parseInt(destTerm.slice(0, 4), 10);
         const startTerm = destTerm.slice(4) as Term;
         const { UOC: uoc, termsOffered, plannedFor } = state.courses[course];
-        const instanceNum = plannedFor ? plannedFor.split(" ").indexOf(srcTerm) : 0;
+        const instanceNum = plannedFor ? plannedFor.split(' ').indexOf(srcTerm) : 0;
 
         const terms = getTermsList(
           startTerm,
@@ -212,7 +212,7 @@ const plannerSlice = createSlice({
         if (state.courses[course].isMultiterm) {
           const { UOC: uoc, termsOffered, plannedFor } = state.courses[course];
           const startTerm = destTerm.slice(4) as Term;
-          const instanceNum = plannedFor ? plannedFor.split(" ").indexOf(srcTerm) : 0;
+          const instanceNum = plannedFor ? plannedFor.split(' ').indexOf(srcTerm) : 0;
           const terms = getTermsList(
             startTerm,
             uoc,
@@ -230,7 +230,7 @@ const plannerSlice = createSlice({
           });
         }
         newPlannedFor.sort();
-        state.courses[course].plannedFor = newPlannedFor.join(" ");
+        state.courses[course].plannedFor = newPlannedFor.join(' ');
       }
     },
     updateCourseMark: (state, action: PayloadAction<{ code: string, mark: Mark }>) => {
@@ -252,7 +252,7 @@ const plannerSlice = createSlice({
         if (plannedFor) {
           // course must already been planned
           // Example plannedFor: '2021t2 2021t3 2022t1'
-          plannedFor.split(" ").forEach((termId) => {
+          plannedFor.split(' ').forEach((termId) => {
             const yearIndex = parseInt(termId.slice(0, 4), 10) - state.startYear;
             const term = termId.slice(4) as Term;
             // remove the course from the year and term
@@ -282,7 +282,7 @@ const plannerSlice = createSlice({
     unschedule: (state, action: PayloadAction<{ code: string, destIndex: number | null }>) => {
       const { destIndex, code } = action.payload;
 
-      if (typeof destIndex === "number") {
+      if (typeof destIndex === 'number') {
         const existsIndex = state.unplanned.indexOf(code);
         if (existsIndex !== -1) {
           state.unplanned.splice(existsIndex, 1);
@@ -299,7 +299,7 @@ const plannerSlice = createSlice({
 
       const { plannedFor } = state.courses[code];
 
-      plannedFor?.split(" ").forEach((termId) => {
+      plannedFor?.split(' ').forEach((termId) => {
         const yearI = parseInt(termId.slice(0, 4), 10) - state.startYear;
         const termI = termId.slice(4) as Term;
 
@@ -309,7 +309,7 @@ const plannerSlice = createSlice({
       state.courses[code].plannedFor = null;
       state.courses[code].isUnlocked = true;
       state.courses[code].warnings = [];
-      state.courses[code].handbookNote = "";
+      state.courses[code].handbookNote = '';
       state.courses[code].isAccurate = true;
     },
     unscheduleAll: (state) => {

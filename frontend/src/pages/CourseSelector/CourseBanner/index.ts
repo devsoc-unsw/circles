@@ -1,3 +1,3 @@
-import CourseBanner from "./CourseBanner";
+import CourseBanner from './CourseBanner';
 
 export default CourseBanner;

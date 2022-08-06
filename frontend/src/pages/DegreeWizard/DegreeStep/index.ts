@@ -1,3 +1,3 @@
-import DegreeStep from "./DegreeStep";
+import DegreeStep from './DegreeStep';
 
 export default DegreeStep;

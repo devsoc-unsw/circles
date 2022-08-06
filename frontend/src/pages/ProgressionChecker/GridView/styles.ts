@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const GridViewContainer = styled.div`
   padding: 2em;

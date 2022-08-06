@@ -1,3 +1,3 @@
-import CourseSelector from "./CourseSelector";
+import CourseSelector from './CourseSelector';
 
 export default CourseSelector;

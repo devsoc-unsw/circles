@@ -1,6 +1,6 @@
 // source: https://fireship.io/snippets/use-media-query-hook/
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 const useMediaQuery = (query: string) => {
   const [matches, setMatches] = useState(false);
@@ -11,8 +11,8 @@ const useMediaQuery = (query: string) => {
       setMatches(media.matches);
     }
     const listener = () => setMatches(media.matches);
-    window.addEventListener("resize", listener);
-    return () => window.removeEventListener("resize", listener);
+    window.addEventListener('resize', listener);
+    return () => window.removeEventListener('resize', listener);
   }, [matches, query]);
 
   return matches;

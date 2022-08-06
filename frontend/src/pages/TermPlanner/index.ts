@@ -1,3 +1,3 @@
-import TermPlanner from "./TermPlanner";
+import TermPlanner from './TermPlanner';
 
 export default TermPlanner;

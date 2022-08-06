@@ -1,5 +1,5 @@
-import { RightOutlined } from "@ant-design/icons";
-import styled, { css } from "styled-components";
+import { RightOutlined } from '@ant-design/icons';
+import styled, { css } from 'styled-components';
 
 const CollapsibleHeader = styled.div`
   display: flex;

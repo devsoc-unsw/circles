@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import ReactTooltip from "react-tooltip";
-import { Liquid, LiquidConfig } from "@ant-design/charts";
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import ReactTooltip from 'react-tooltip';
+import { Liquid, LiquidConfig } from '@ant-design/charts';
 import {
   darkGrey,
   lightGrey,
   lightYellow,
   purple,
   yellow,
-} from "config/constants";
-import { RootState } from "config/store";
+} from 'config/constants';
+import { RootState } from 'config/store';
 
 type Props = {
   completedUOC: number
@@ -21,7 +21,7 @@ const LiquidProgressChart = ({ completedUOC, totalUOC }: Props) => {
   const fillValue = completedUOC / totalUOC;
 
   // light mode text color varies
-  let textColor = "";
+  let textColor = '';
   if (percent < 0.31) {
     textColor = lightYellow;
   } else if (percent < 0.45) {
@@ -29,13 +29,13 @@ const LiquidProgressChart = ({ completedUOC, totalUOC }: Props) => {
   } else if (percent < 0.56) {
     textColor = darkGrey;
   } else {
-    textColor = "white";
+    textColor = 'white';
   }
 
   // dark mode always has white text
   const { theme } = useSelector((state: RootState) => state.settings);
-  if (theme === "dark") {
-    textColor = "white";
+  if (theme === 'dark') {
+    textColor = 'white';
   }
 
   const config: LiquidConfig = {
@@ -46,7 +46,7 @@ const LiquidProgressChart = ({ completedUOC, totalUOC }: Props) => {
     autoFit: false,
     statistic: {
       title: {
-        formatter: () => "Progress",
+        formatter: () => 'Progress',
         style: () => ({
           fill: textColor,
         }),
@@ -81,7 +81,7 @@ const LiquidProgressChart = ({ completedUOC, totalUOC }: Props) => {
 
   return (
     <div>
-      <ReactTooltip place="bottom" type={theme === "dark" ? "light" : "dark"}>
+      <ReactTooltip place="bottom" type={theme === 'dark' ? 'light' : 'dark'}>
         {completedUOC} / {totalUOC} UOC
       </ReactTooltip>
       <div data-tip>

@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { Button, Empty, Typography } from "antd";
-import Collapsible from "components/Collapsible";
-import CourseBadge from "../CourseBadge";
-import CourseListModal from "../CourseListModal";
-import S from "./styles";
-import { GridSubgroupCourse, PlannedState } from "./types";
+import React, { useState } from 'react';
+import { Button, Empty, Typography } from 'antd';
+import Collapsible from 'components/Collapsible';
+import CourseBadge from '../CourseBadge';
+import CourseListModal from '../CourseListModal';
+import S from './styles';
+import { GridSubgroupCourse, PlannedState } from './types';
 
 type Props = {
   uoc: number
@@ -74,14 +74,14 @@ const GridViewConciseSubgroup = ({
         <>
           <Collapsible
             title={<Title level={4} className="text">You have {plannedUOC} UOC worth of courses planned</Title>}
-            headerStyle={{ border: "none" }}
+            headerStyle={{ border: 'none' }}
             initiallyCollapsed={!planned.length}
           >
             {collapsibleSection(PlannedState.PLANNED)}
           </Collapsible>
           <Collapsible
             title={<Title level={4} className="text">Choose {Math.max(uoc - plannedUOC, 0)} UOC from the following courses</Title>}
-            headerStyle={{ border: "none" }}
+            headerStyle={{ border: 'none' }}
             initiallyCollapsed={!hasLotsOfCourses && (unplanned.length > 16 || !unplanned.length)}
           >
             {collapsibleSection(PlannedState.UNPLANNED)}

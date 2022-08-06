@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { Skeleton, Typography } from "antd";
-import { ProgramStructure } from "types/structure";
-import getFormattedPlannerCourses, { FormattedPlannerCourse } from "utils/getFormattedPlannerCourses";
-import Collapsible from "components/Collapsible";
-import { RootState } from "config/store";
-import GridViewConciseSubgroup from "./GridViewConciseSubgroup";
-import GridViewSubgroup from "./GridViewSubgroup";
-import S from "./styles";
-import { GridStructure, GridSubgroup } from "./types";
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { Skeleton, Typography } from 'antd';
+import { ProgramStructure } from 'types/structure';
+import getFormattedPlannerCourses, { FormattedPlannerCourse } from 'utils/getFormattedPlannerCourses';
+import Collapsible from 'components/Collapsible';
+import { RootState } from 'config/store';
+import GridViewConciseSubgroup from './GridViewConciseSubgroup';
+import GridViewSubgroup from './GridViewSubgroup';
+import S from './styles';
+import { GridStructure, GridSubgroup } from './types';
 
 type Props = {
   isLoading: boolean
@@ -35,9 +35,9 @@ const GridView = ({ isLoading, structure, concise }: Props) => {
         newGridLayout[group][subgroup] = {
           // section types with gened or rule/elective substring can have their
           // courses hidden as a modal
-          hasLotsOfCourses: subgroupStructure.type.includes("gened")
-            || subgroupStructure.type.includes("rule")
-            || subgroupStructure.type.includes("electives"),
+          hasLotsOfCourses: subgroupStructure.type.includes('gened')
+            || subgroupStructure.type.includes('rule')
+            || subgroupStructure.type.includes('electives'),
           courses: [],
         };
 
@@ -98,7 +98,7 @@ const GridView = ({ isLoading, structure, concise }: Props) => {
                 </Title>
               )}
               key={group}
-              initiallyCollapsed={group === "Rules"}
+              initiallyCollapsed={group === 'Rules'}
             >
               {Object.entries(groupEntry).sort(sortSubgroups).map(
                 ([subgroup, subgroupEntry]) => (

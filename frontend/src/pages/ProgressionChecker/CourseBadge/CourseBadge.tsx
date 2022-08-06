@@ -1,11 +1,11 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import { EyeOutlined } from "@ant-design/icons";
-import { Badge, Tooltip } from "antd";
-import CourseButton from "components/CourseButton";
-import { purple } from "config/constants";
-import { GridSubgroupCourse } from "../GridView/types";
-import S from "./styles";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { EyeOutlined } from '@ant-design/icons';
+import { Badge, Tooltip } from 'antd';
+import CourseButton from 'components/CourseButton';
+import { purple } from 'config/constants';
+import { GridSubgroupCourse } from '../GridView/types';
+import S from './styles';
 
 type UOCBadgeProps = {
   uoc: number
@@ -15,7 +15,7 @@ const UOCBadge = ({ uoc }: UOCBadgeProps) => (
   <S.UOCBadgeWrapper>
     <Badge
       style={{
-        backgroundColor: purple, color: "white", lineHeight: "1.5", height: "auto",
+        backgroundColor: purple, color: 'white', lineHeight: '1.5', height: 'auto',
       }}
       size="small"
       count={`${uoc} UOC`}
@@ -31,7 +31,7 @@ const CourseBadge = ({ course }: Props) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate("/term-planner");
+    navigate('/term-planner');
   };
 
   if (course.unplanned) {
@@ -52,7 +52,7 @@ const CourseBadge = ({ course }: Props) => {
 
   if (course.past) {
     return (
-      <div style={{ position: "relative" }}>
+      <div style={{ position: 'relative' }}>
         <CourseButton courseCode={course.key} title={course.title} planned />
         <UOCBadge uoc={course.uoc} />
       </div>

@@ -1,3 +1,3 @@
-import DegreeWizard from "./DegreeWizard";
+import DegreeWizard from './DegreeWizard';
 
 export default DegreeWizard;

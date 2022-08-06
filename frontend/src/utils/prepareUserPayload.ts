@@ -1,6 +1,6 @@
-import { parseMarkToInt } from "pages/TermPlanner/utils";
-import { DegreeSliceState } from "reducers/degreeSlice";
-import { PlannerSliceState } from "reducers/plannerSlice";
+import { parseMarkToInt } from 'pages/TermPlanner/utils';
+import { DegreeSliceState } from 'reducers/degreeSlice';
+import { PlannerSliceState } from 'reducers/plannerSlice';
 
 // key = course code, value = mark of course (number || null)
 type UserPayloadCourse = Record<string, number | null>;

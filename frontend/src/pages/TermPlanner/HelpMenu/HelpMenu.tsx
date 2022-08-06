@@ -1,19 +1,19 @@
-import React, { useState } from "react";
-import additionalOptionsGif from "assets/helpGifs/additional-options.gif";
-import additionalOptionsPic from "assets/helpGifs/additional-options.jpg";
-import dragAndDropGif from "assets/helpGifs/drag-and-drop.gif";
-import dragAndDropPic from "assets/helpGifs/drag-and-drop.jpg";
-import hideYearGif from "assets/helpGifs/hide-year.gif";
-import hideYearPic from "assets/helpGifs/hide-year.jpg";
-import unscheduleGif from "assets/helpGifs/unschedule.gif";
-import unschedulePic from "assets/helpGifs/unschedule.jpg";
-import CS from "../common/styles";
-import S from "./styles";
+import React, { useState } from 'react';
+import additionalOptionsGif from 'assets/helpGifs/additional-options.gif';
+import additionalOptionsPic from 'assets/helpGifs/additional-options.jpg';
+import dragAndDropGif from 'assets/helpGifs/drag-and-drop.gif';
+import dragAndDropPic from 'assets/helpGifs/drag-and-drop.jpg';
+import hideYearGif from 'assets/helpGifs/hide-year.gif';
+import hideYearPic from 'assets/helpGifs/hide-year.jpg';
+import unscheduleGif from 'assets/helpGifs/unschedule.gif';
+import unschedulePic from 'assets/helpGifs/unschedule.jpg';
+import CS from '../common/styles';
+import S from './styles';
 
 type HelpStepProps = {
   title: string
-  gif: any
-  pic: any
+  gif: string
+  pic: string
   altText: string
 };
 
@@ -40,28 +40,28 @@ const HelpStep = ({
 const HelpMenu = () => {
   const helpSteps = [
     {
-      title: "1. Drag and Drop Courses",
+      title: '1. Drag and Drop Courses',
       pic: dragAndDropPic,
       gif: dragAndDropGif,
-      altText: "drag and drop walkthrough",
+      altText: 'drag and drop walkthrough',
     },
     {
-      title: "2. Right Click Courses for More Actions",
+      title: '2. Right Click Courses for More Actions',
       pic: unschedulePic,
       gif: unscheduleGif,
-      altText: "context menu walkthrough",
+      altText: 'context menu walkthrough',
     },
     {
-      title: "3. Hide Year",
+      title: '3. Hide Year',
       pic: hideYearPic,
       gif: hideYearGif,
-      altText: "hide year walkthrough",
+      altText: 'hide year walkthrough',
     },
     {
-      title: "4. Additional Features",
+      title: '4. Additional Features',
       pic: additionalOptionsPic,
       gif: additionalOptionsGif,
-      altText: "additional options walkthrough",
+      altText: 'additional options walkthrough',
     },
   ];
 

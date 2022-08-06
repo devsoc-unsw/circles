@@ -1,3 +1,3 @@
-import SpecialisationStep from "./SpecialisationStep";
+import SpecialisationStep from './SpecialisationStep';
 
 export default SpecialisationStep;

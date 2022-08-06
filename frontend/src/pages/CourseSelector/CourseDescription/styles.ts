@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const DescriptionWrapper = styled.div`
   padding: 1.6rem 2rem;

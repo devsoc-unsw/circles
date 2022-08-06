@@ -1,11 +1,11 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { Link } from "react-scroll";
-import ReactTooltip from "react-tooltip";
-import { purple } from "@ant-design/colors";
-import { Progress, Typography } from "antd";
-import { RootState } from "config/store";
-import S from "./styles";
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-scroll';
+import ReactTooltip from 'react-tooltip';
+import { purple } from '@ant-design/colors';
+import { Progress, Typography } from 'antd';
+import { RootState } from 'config/store';
+import S from './styles';
 
 type Props = {
   type: string
@@ -28,19 +28,19 @@ const DegreeCard = ({
         <Title className="text" level={5}>
           {specTitle || type}
         </Title>
-        <Text style={{ color: "#737372" }}>{type.charAt(0).toUpperCase() + type.slice(1)}</Text>
+        <Text style={{ color: '#737372' }}>{type.charAt(0).toUpperCase() + type.slice(1)}</Text>
         <div data-tip data-for={`card-${type}`}>
           <Progress
             percent={progress}
             trailColor="white"
             showInfo={false}
-            strokeColor={{ "0%": purple[3], "100%": purple[4] }}
+            strokeColor={{ '0%': purple[3], '100%': purple[4] }}
           />
         </div>
         <ReactTooltip
           id={`card-${type}`}
           place="bottom"
-          type={theme === "dark" ? "light" : "dark"}
+          type={theme === 'dark' ? 'light' : 'dark'}
         >
           <S.TooltipText>
             <div>{progress}%</div>

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const PageWrapper = styled.div`
   background-color: black;
@@ -28,7 +28,7 @@ const LogoBox = styled.div<{ alt?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: ${({ alt }) => (alt ? "transform: rotate(10deg)" : "rotate(350deg)")};
+  transform: ${({ alt }) => (alt ? 'transform: rotate(10deg)' : 'rotate(350deg)')};
 `;
 
 const TextWrapper = styled.div`

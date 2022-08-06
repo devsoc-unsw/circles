@@ -1,5 +1,5 @@
-import styled, { css } from "styled-components";
-import { GridItem } from "./common/styles";
+import styled, { css } from 'styled-components';
+import { GridItem } from './common/styles';
 
 const ContainerWrapper = styled.div`
   height: calc(100vh - var(--navbar-height) - var(--option-header-height));
@@ -15,7 +15,7 @@ const PlannerContainer = styled.div`
 
 const PlannerGridWrapper = styled.div<{ summerEnabled: boolean }>`
   display: grid;
-  grid-template-columns: ${({ summerEnabled }) => (summerEnabled ? "7em 1fr 1fr 1fr 1fr 1fr" : "7em 1fr 1fr 1fr 1fr")};
+  grid-template-columns: ${({ summerEnabled }) => (summerEnabled ? '7em 1fr 1fr 1fr 1fr 1fr' : '7em 1fr 1fr 1fr 1fr')};
   align-items: center;
 `;
 

@@ -1,3 +1,3 @@
-import TermTag from "./TermTag";
+import TermTag from './TermTag';
 
 export default TermTag;

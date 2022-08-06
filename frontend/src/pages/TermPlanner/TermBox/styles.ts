@@ -1,5 +1,5 @@
-import styled, { css } from "styled-components";
-import { Droppable } from "../common/styles";
+import styled, { css } from 'styled-components';
+import { Droppable } from '../common/styles';
 
 type TermBoxWrapperProps = {
   droppable: boolean
@@ -43,7 +43,7 @@ const TermBoxWrapper = styled.ul<TermBoxWrapperProps>`
 `;
 
 const TermCheckboxWrapper = styled.div<{ checked: boolean }>`
-  background-color: ${({ checked }) => (checked ? "#9685f3" : "#D9D9D9")};
+  background-color: ${({ checked }) => (checked ? '#9685f3' : '#D9D9D9')};
   border-radius: 50%;
   width: 20px;
   height: 20px;
@@ -55,7 +55,7 @@ const TermCheckboxWrapper = styled.div<{ checked: boolean }>`
   &:hover {
     cursor: pointer;
     color: #bfbbbb;
-    background-color: ${({ checked }) => (checked ? "#b4a9f4" : "#bfbbbb")};
+    background-color: ${({ checked }) => (checked ? '#b4a9f4' : '#bfbbbb')};
   }
 `;
 

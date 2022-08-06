@@ -1,5 +1,5 @@
-import { PlannerCourse, PlannerYear } from "types/planner";
-import getMostRecentPastTerm from "utils/getMostRecentPastTerm";
+import { PlannerCourse, PlannerYear } from 'types/planner';
+import getMostRecentPastTerm from 'utils/getMostRecentPastTerm';
 
 export type FormattedPlannerCourse = {
   title: string

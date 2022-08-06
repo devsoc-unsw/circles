@@ -1,5 +1,5 @@
-import GRAPH_STYLE from "./config";
-import TREE_CONSTANTS from "./constants";
+import GRAPH_STYLE from './config';
+import TREE_CONSTANTS from './constants';
 
 const handleNodeData = (courseName, rootRelationship) => {
   switch (rootRelationship) {
@@ -43,7 +43,7 @@ const bringEdgeLabelsToFront = (graphInstance) => {
   // bring edges with labels to front
   graphInstance.getEdges()
     /* eslint-disable-next-line no-underscore-dangle */
-    .filter((e) => Object.prototype.hasOwnProperty.call(e._cfg.model, "label"))
+    .filter((e) => Object.prototype.hasOwnProperty.call(e._cfg.model, 'label'))
     .forEach((e) => e.toFront());
   // Repaint the graph after shifting
   graphInstance.paint();

@@ -1,12 +1,12 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
-import { DatePicker, Select, Switch } from "antd";
-import type { Moment } from "moment";
-import moment from "moment";
-import { RootState } from "config/store";
-import { toggleSummer, updateDegreeLength, updateStartYear } from "reducers/plannerSlice";
-import CS from "../common/styles";
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
+import { DatePicker, Select, Switch } from 'antd';
+import type { Moment } from 'moment';
+import moment from 'moment';
+import { RootState } from 'config/store';
+import { toggleSummer, updateDegreeLength, updateStartYear } from 'reducers/plannerSlice';
+import CS from '../common/styles';
 
 const SettingsMenu = () => {
   const { Option } = Select;
@@ -49,7 +49,7 @@ const SettingsMenu = () => {
           onChange={handleUpdateStartYear}
           picker="year"
           style={{ width: 105 }}
-          value={moment(startYear, "YYYY")}
+          value={moment(startYear, 'YYYY')}
         />
       </CS.PopupEntry>
       <CS.PopupEntry>

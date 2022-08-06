@@ -1,3 +1,3 @@
-import CourseButton from "./CourseButton";
+import CourseButton from './CourseButton';
 
 export default CourseButton;

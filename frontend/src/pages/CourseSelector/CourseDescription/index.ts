@@ -1,3 +1,3 @@
-import CourseDescription from "./CourseDescription";
+import CourseDescription from './CourseDescription';
 
 export default CourseDescription;

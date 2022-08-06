@@ -1,3 +1,3 @@
-import PrerequisiteTree from "./PrerequisiteTree";
+import PrerequisiteTree from './PrerequisiteTree';
 
 export default PrerequisiteTree;

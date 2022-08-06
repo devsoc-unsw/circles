@@ -1,23 +1,23 @@
-import React, { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { BarsOutlined } from "@ant-design/icons";
+import React, { useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { BarsOutlined } from '@ant-design/icons';
 import {
   Button, Drawer,
   Menu, Typography,
-} from "antd";
-import circlesLogo from "assets/circlesLogo.svg";
-import PlannerCart from "components/PlannerCart";
-import ThemeToggle from "components/ThemeToggle";
-import { inDev } from "config/constants";
-import useMediaQuery from "hooks/useMediaQuery";
-import DrawerContent from "./DrawerContent";
-import routes from "./routes";
-import S from "./styles";
+} from 'antd';
+import circlesLogo from 'assets/circlesLogo.svg';
+import PlannerCart from 'components/PlannerCart';
+import ThemeToggle from 'components/ThemeToggle';
+import { inDev } from 'config/constants';
+import useMediaQuery from 'hooks/useMediaQuery';
+import DrawerContent from './DrawerContent';
+import routes from './routes';
+import S from './styles';
 
 const { Title } = Typography;
 
 const Header = () => {
-  const isSmall = useMediaQuery("(max-width: 1000px)");
+  const isSmall = useMediaQuery('(max-width: 1000px)');
   const [showDrawer, setShowDrawer] = useState(false);
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -25,12 +25,12 @@ const Header = () => {
   const smallHeader = (
     <S.HeaderContent>
       {inDev && <ThemeToggle />}
-      <div style={{ margin: "10px" }}>
+      <div style={{ margin: '10px' }}>
         <Button
           type="primary"
           size="large"
           onClick={() => setShowDrawer(true)}
-          icon={<BarsOutlined style={{ color: "#fff", fontSize: "1.7rem" }} />}
+          icon={<BarsOutlined style={{ color: '#fff', fontSize: '1.7rem' }} />}
         />
       </div>
     </S.HeaderContent>
@@ -51,7 +51,7 @@ const Header = () => {
         mode="horizontal"
         overflowedIndicator={null}
         style={{
-          backgroundColor: "inherit",
+          backgroundColor: 'inherit',
         }}
         onClick={(e) => navigate(e.key)}
         items={items}
@@ -69,9 +69,9 @@ const Header = () => {
           <Title
             level={3}
             style={{
-              color: "white",
-              marginLeft: "0.3em",
-              marginBottom: "0",
+              color: 'white',
+              marginLeft: '0.3em',
+              marginBottom: '0',
             }}
           >
             Circles

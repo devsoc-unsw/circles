@@ -1,5 +1,5 @@
-import { Button } from "antd";
-import styled from "styled-components";
+import { Button } from 'antd';
+import styled from 'styled-components';
 
 const Wrapper = styled.div`
   display: flex;
@@ -28,9 +28,9 @@ const CourseTitleWrapper = styled.div<{ selected: boolean, locked: boolean }>`
   font-size: 0.8rem;
 
   font-weight: ${({ selected, locked }) => {
-    if (locked) return "100";
-    if (selected) return "700";
-    return "normal";
+    if (locked) return '100';
+    if (selected) return '700';
+    return 'normal';
   }};
 
 `;

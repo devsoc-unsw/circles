@@ -1,18 +1,18 @@
-import { useDispatch } from "react-redux";
-import { configureStore } from "@reduxjs/toolkit";
-import { combineReducers } from "redux";
+import { useDispatch } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers } from 'redux';
 import {
   createMigrate,
   persistReducer,
-} from "redux-persist";
-import storage from "redux-persist/lib/storage";
-import axiosRequest from "config/axios";
-import coursesReducer from "reducers/coursesSlice";
-import courseTabsReducer from "reducers/courseTabsSlice";
-import degreeReducer from "reducers/degreeSlice";
-import plannerReducer from "reducers/plannerSlice";
-import settingsReducer from "reducers/settingsSlice";
-import { REDUX_PERSIST_VERSION } from "./constants";
+} from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import axiosRequest from 'config/axios';
+import coursesReducer from 'reducers/coursesSlice';
+import courseTabsReducer from 'reducers/courseTabsSlice';
+import degreeReducer from 'reducers/degreeSlice';
+import plannerReducer from 'reducers/plannerSlice';
+import settingsReducer from 'reducers/settingsSlice';
+import { REDUX_PERSIST_VERSION } from './constants';
 
 const rootReducer = combineReducers({
   degree: degreeReducer,
@@ -53,7 +53,7 @@ const migrations = {
 
     const courses = Object.keys(newState.planner.courses);
     await courses.forEach(async (course, _) => {
-      const [formattedData, err] = await axiosRequest("get", `/courses/getCourse/${course}`);
+      const [formattedData, err] = await axiosRequest('get', `/courses/getCourse/${course}`);
       if (!err) {
         const { code } = formattedData;
         newState.planner.courses[code].is_multiterm = formattedData.is_multiterm;
@@ -64,10 +64,10 @@ const migrations = {
 };
 
 const persistConfig = {
-  key: "root",
+  key: 'root',
   version: REDUX_PERSIST_VERSION,
   storage,
-  whitelist: ["degree", "courses", "planner"],
+  whitelist: ['degree', 'courses', 'planner'],
   migrate: createMigrate(migrations, { debug: true }),
 
 };

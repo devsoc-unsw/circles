@@ -1,38 +1,38 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { scroller } from "react-scroll";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { scroller } from 'react-scroll';
 import {
   notification, Typography,
-} from "antd";
-import axios from "axios";
-import PageTemplate from "components/PageTemplate";
-import { RootState } from "config/store";
-import { resetCourses } from "reducers/coursesSlice";
-import { resetTabs } from "reducers/courseTabsSlice";
-import { resetDegree } from "reducers/degreeSlice";
-import { resetPlanner } from "reducers/plannerSlice";
-import Steps from "./common/steps";
-import DegreeStep from "./DegreeStep";
-import ResetModal from "./ResetModal";
-import SpecialisationStep from "./SpecialisationStep";
-import StartBrowsingStep from "./StartBrowsingStep";
-import S from "./styles";
-import YearStep from "./YearStep";
+} from 'antd';
+import axios from 'axios';
+import PageTemplate from 'components/PageTemplate';
+import { RootState } from 'config/store';
+import { resetCourses } from 'reducers/coursesSlice';
+import { resetTabs } from 'reducers/courseTabsSlice';
+import { resetDegree } from 'reducers/degreeSlice';
+import { resetPlanner } from 'reducers/plannerSlice';
+import Steps from './common/steps';
+import DegreeStep from './DegreeStep';
+import ResetModal from './ResetModal';
+import SpecialisationStep from './SpecialisationStep';
+import StartBrowsingStep from './StartBrowsingStep';
+import S from './styles';
+import YearStep from './YearStep';
 
 const { Title } = Typography;
 
 const DegreeWizard = () => {
   const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);
-  const [specs, setSpecs] = useState(["majors", "honours", "minors"]);
-  const stepList = ["year", "degree"].concat(specs).concat(["start browsing"]);
+  const [specs, setSpecs] = useState(['majors', 'honours', 'minors']);
+  const stepList = ['year', 'degree'].concat(specs).concat(['start browsing']);
   const degree = useSelector((state: RootState) => state.degree);
 
   const csDegreeDisclaimer = () => {
     notification.info({
-      message: "Disclaimer",
-      description: "Currently, Circles can only support some degrees and undergrad courses. If you find any errors, feel free to report a bug!",
-      placement: "bottomRight",
+      message: 'Disclaimer',
+      description: 'Currently, Circles can only support some degrees and undergrad courses. If you find any errors, feel free to report a bug!',
+      placement: 'bottomRight',
       duration: 4,
     });
   };
@@ -54,7 +54,7 @@ const DegreeWizard = () => {
       const res = await axios.get(`/specialisations/getSpecialisationTypes/${degree.programCode}`);
       setSpecs(res.data.types);
     };
-    if (degree.programCode !== "") getSteps();
+    if (degree.programCode !== '') getSteps();
   }, [degree.programCode]);
 
   const [currStep, setCurrStep] = useState(Steps.YEAR);

@@ -1,16 +1,16 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
-import { Algorithm, Graph } from "@antv/g6";
-import { Button } from "antd";
-import axios from "axios";
-import PageTemplate from "components/PageTemplate";
-import Spinner from "components/Spinner";
-import axiosRequest from "config/axios";
-import { RootState } from "config/store";
-import GRAPH_STYLE from "./config";
-import S from "./styles";
-import { CourseEdge } from "./types";
-import handleNodeData from "./utils";
+import React, { useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { Algorithm, Graph } from '@antv/g6';
+import { Button } from 'antd';
+import axios from 'axios';
+import PageTemplate from 'components/PageTemplate';
+import Spinner from 'components/Spinner';
+import axiosRequest from 'config/axios';
+import { RootState } from 'config/store';
+import GRAPH_STYLE from './config';
+import S from './styles';
+import { CourseEdge } from './types';
+import handleNodeData from './utils';
 
 const GraphicalSelector = () => {
   const { programCode, specs } = useSelector((state: RootState) => state.degree);
@@ -32,13 +32,13 @@ const GraphicalSelector = () => {
       linkCenter: true,
       modes: {
         default: [
-          "drag-canvas",
-          "zoom-canvas",
+          'drag-canvas',
+          'zoom-canvas',
           // "drag-node",
         ],
       },
       layout: {
-        type: "comboCombined",
+        type: 'comboCombined',
         preventOverlap: true,
         nodeSpacing: 10,
         linkDistance: 500,
@@ -59,17 +59,17 @@ const GraphicalSelector = () => {
     graphInstance.data(data);
     graphInstance.render();
 
-    graphInstance.on("node:click", async (ev) => {
+    graphInstance.on('node:click', async (ev) => {
       // load up course information
       const node = ev.item;
       const { _cfg: { id } } = node;
-      const [courseData, err] = await axiosRequest("get", `/courses/getCourse/${id}`);
+      const [courseData, err] = await axiosRequest('get', `/courses/getCourse/${id}`);
       if (!err) setCourse(courseData);
 
       // hides/ unhides dependent nodes
       const { breadthFirstSearch } = Algorithm;
-      if (node.hasState("click")) {
-        graphInstance.clearItemStates(node, "click");
+      if (node.hasState('click')) {
+        graphInstance.clearItemStates(node, 'click');
         breadthFirstSearch(data, id, {
           enter: ({ current }) => {
             if (id !== current) {
@@ -81,7 +81,7 @@ const GraphicalSelector = () => {
           },
         });
       } else if (node.getOutEdges().length) {
-        graphInstance.setItemState(node, "click", true);
+        graphInstance.setItemState(node, 'click', true);
         breadthFirstSearch(data, id, {
           enter: ({ current }) => {
             if (id !== current) {
@@ -94,20 +94,20 @@ const GraphicalSelector = () => {
       }
     });
 
-    graphInstance.on("node:mouseenter", async (ev) => {
+    graphInstance.on('node:mouseenter', async (ev) => {
       const node = ev.item;
-      graphInstance.setItemState(node, "hover", true);
+      graphInstance.setItemState(node, 'hover', true);
     });
 
-    graphInstance.on("node:mouseleave", async (ev) => {
+    graphInstance.on('node:mouseleave', async (ev) => {
       const node = ev.item;
-      graphInstance.clearItemStates(node, "hover");
+      graphInstance.clearItemStates(node, 'hover');
     });
   };
 
   const setupGraph = async () => {
     const { courses: courseList }: { courses: string[] } = (
-      await axios.get(`/programs/getStructureCourseList/${programCode}/${specs.join("+")}`)
+      await axios.get(`/programs/getStructureCourseList/${programCode}/${specs.join('+')}`)
     ).data;
 
     // TODO: Move this to the backend too
@@ -164,7 +164,7 @@ const GraphicalSelector = () => {
             Hide Graph
           </Button>
           <div>
-            {course ? <div>{course.code} - {course.title}</div> : "No course selected"}
+            {course ? <div>{course.code} - {course.title}</div> : 'No course selected'}
           </div>
         </S.SidebarWrapper>
       </S.Wrapper>

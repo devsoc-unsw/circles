@@ -1,3 +1,3 @@
-import HideYearTooltip from "./HideYearTooltip";
+import HideYearTooltip from './HideYearTooltip';
 
 export default HideYearTooltip;

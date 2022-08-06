@@ -1,3 +1,3 @@
-import GridView from "./GridView";
+import GridView from './GridView';
 
 export default GridView;

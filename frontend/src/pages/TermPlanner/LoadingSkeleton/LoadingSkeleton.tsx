@@ -1,16 +1,16 @@
-import React from "react";
-import { Skeleton } from "antd";
-import { GridItem } from "../common/styles";
-import CS from "../styles";
+import React from 'react';
+import { Skeleton } from 'antd';
+import { GridItem } from '../common/styles';
+import CS from '../styles';
 
 // TODO: Is this still being used?
 const LoadingSkeleton = () => {
   const skeletonTermStyle = {
-    width: "20em",
-    height: "18em",
-    margin: "1em",
-    padding: "1.2em",
-    borderRadius: "2em",
+    width: '20em',
+    height: '18em',
+    margin: '1em',
+    padding: '1.2em',
+    borderRadius: '2em',
   };
 
   return (

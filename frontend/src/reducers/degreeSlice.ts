@@ -1,5 +1,5 @@
-import type { PayloadAction } from "@reduxjs/toolkit";
-import { createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 export type DegreeSliceState = {
   programCode: string
@@ -9,14 +9,14 @@ export type DegreeSliceState = {
 };
 
 const initialState: DegreeSliceState = {
-  programCode: "",
-  programName: "",
+  programCode: '',
+  programName: '',
   specs: [],
   isComplete: false,
 };
 
 const degreeSlice = createSlice({
-  name: "degree",
+  name: 'degree',
   initialState,
   reducers: {
     setProgram: (state, action: PayloadAction<{ programCode: string, programName: string }>) => {

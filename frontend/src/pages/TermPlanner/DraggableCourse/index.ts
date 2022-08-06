@@ -1,3 +1,3 @@
-import DraggableCourse from "./DraggableCourse";
+import DraggableCourse from './DraggableCourse';
 
 export default DraggableCourse;
