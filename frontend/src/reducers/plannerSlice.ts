@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { PlannerCourse } from "types/courses";
+import { CourseStates } from "types/courses";
+import { PlannerCourse, Term } from "types/planner";
 import { getCurrentTermId, getTermsList } from "pages/TermPlanner/utils";
 
 type PlannerYear = {
@@ -11,7 +12,7 @@ type PlannerYear = {
 
 // set up hidden object
 const generateHiddenInit = (startYear: number, numYears: number) => {
-  const hiddenInit: Record<number, boolean> = {};
+  const hiddenInit: Record<string, boolean> = {};
   for (let i = -1; i < numYears - 1; i++) {
     hiddenInit[startYear + i] = false;
   }
@@ -39,7 +40,7 @@ export type PlannerSliceState = {
   years: PlannerYear[]
   courses: Record<string, PlannerCourse>
   completedTerms: Record<string, boolean>
-  hidden: Record<number, boolean>
+  hidden: Record<string, boolean>
   areYearsHidden: boolean
 };
 
@@ -76,7 +77,7 @@ const plannerSlice = createSlice({
         state.unplanned.push(courseCode);
       }
     },
-    toggleWarnings: (state, action: PayloadAction<any>) => {
+    toggleWarnings: (state, action: PayloadAction<CourseStates>) => {
       Object.keys(action.payload).forEach((course) => {
         if (state.courses[course]) {
           const {
@@ -92,7 +93,7 @@ const plannerSlice = createSlice({
       });
     },
     setUnplannedCourseToTerm: (state, action: PayloadAction<{
-      destRow: number, destTerm: string, destIndex: number, course: string
+      destRow: number, destTerm: Term, destIndex: number, course: string
     }>) => {
       const {
         destRow, destTerm, destIndex, course,
@@ -116,8 +117,8 @@ const plannerSlice = createSlice({
       }
     },
     setPlannedCourseToTerm: (state, action: PayloadAction<{
-      srcRow: number, srcTerm: string, srcIndex: number, destRow: number,
-      destTerm: string, destIndex: number, course: string
+      srcRow: number, srcTerm: Term, srcIndex: number, destRow: number,
+      destTerm: Term, destIndex: number, course: string
     }>) => {
       const {
         srcRow, srcTerm, srcIndex, destRow, destTerm, destIndex, course,
@@ -138,9 +139,9 @@ const plannerSlice = createSlice({
       }
 
       // Remove every instance of the course from the planner
-      const previousIndex = {};
+      const previousIndex: { [yearTerm: string]: number } = {};
       for (let year = 0; year < state.years.length; year++) {
-        const terms = Object.keys(state.years[year]);
+        const terms = Object.keys(state.years[year]) as Term[];
         terms.forEach((term) => {
           const targetTerm = state.years[year][term];
           const courseIndex = targetTerm.indexOf(course);
@@ -182,14 +183,14 @@ const plannerSlice = createSlice({
       });
     },
     moveCourse: (state, action: PayloadAction<{
-      course: string, destTerm: number, srcTerm: number
+      course: string, destTerm: string, srcTerm: string
     }>) => {
       const { course, destTerm, srcTerm } = action.payload;
 
       // If about to move multiterm course out of bounds, do nothing
       if (state.courses[course].isMultiterm) {
         const year = parseInt(destTerm.slice(0, 4), 10);
-        const startTerm = destTerm.slice(4);
+        const startTerm = destTerm.slice(4) as Term;
         const { UOC: uoc, termsOffered, plannedFor } = state.courses[course];
         const instanceNum = plannedFor ? plannedFor.split(" ").indexOf(srcTerm) : 0;
 
@@ -212,7 +213,7 @@ const plannerSlice = createSlice({
         // Moving a single course moves every instance of it.
         if (state.courses[course].isMultiterm) {
           const { UOC: uoc, termsOffered, plannedFor } = state.courses[course];
-          const startTerm = destTerm.slice(4);
+          const startTerm = destTerm.slice(4) as Term;
           const instanceNum = plannedFor ? plannedFor.split(" ").indexOf(srcTerm) : 0;
           const terms = getTermsList(
             startTerm,
@@ -254,7 +255,7 @@ const plannerSlice = createSlice({
           // Example plannedFor: '2021t2 2021t3 2022t1'
           plannedFor.split(" ").forEach((termId) => {
             const yearIndex = parseInt(termId.slice(0, 4), 10) - state.startYear;
-            const term = termId.slice(4);
+            const term = termId.slice(4) as Term;
             // remove the course from the year and term
             state.years[yearIndex][term] = state.years[yearIndex][term].filter(
               (course) => course !== action.payload,
@@ -271,7 +272,7 @@ const plannerSlice = createSlice({
     removeCourses: (state, action: PayloadAction<string[]>) => {
       const courses = action.payload;
       courses.forEach((course) => {
-        plannerSlice.caseReducers.removeCourse(state, { payload: course });
+        plannerSlice.caseReducers.removeCourse(state, { payload: course, type: "" });
       });
     },
     removeAllCourses: (state) => {
@@ -301,7 +302,7 @@ const plannerSlice = createSlice({
 
       plannedFor.split(" ").forEach((termId) => {
         const yearI = parseInt(termId.slice(0, 4), 10) - state.startYear;
-        const termI = termId.slice(4);
+        const termI = termId.slice(4) as Term;
 
         state.years[yearI][termI] = state.years[yearI][termI].filter((course) => course !== code);
       });
@@ -315,7 +316,7 @@ const plannerSlice = createSlice({
     unscheduleAll: (state) => {
       Object.entries(state.courses).forEach(([code, desc]) => {
         if (desc.plannedFor !== null) {
-          plannerSlice.caseReducers.unschedule(state, { payload: { destIndex: null, code } });
+          plannerSlice.caseReducers.unschedule(state, { payload: { destIndex: null, code }, type: "" });
         }
       });
     },

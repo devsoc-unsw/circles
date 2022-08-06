@@ -1,3 +1,5 @@
+import { Term } from "types/planner";
+
 const MIN_COMPLETED_COURSE_UOC = 6;
 
 const parseMarkToInt = (mark) => {
@@ -35,14 +37,20 @@ const getNumTerms = (uoc) => {
 };
 
 // Returns a list of terms and rowOffsets that multiterm course will be added to
-const getTermsList = (currentTerm, uoc, availableTerms, summerTerm, instanceNum) => {
+const getTermsList = (
+  currentTerm: Term,
+  uoc: number,
+  availableTerms: Term[],
+  isSummerTerm: boolean,
+  instanceNum: number,
+) => {
   const allTerms = ["T1", "T2", "T3"];
   const termsList = [];
 
-  if (summerTerm) allTerms.unshift("T0");
+  if (isSummerTerm) allTerms.unshift("T0");
 
   // Remove any unavailable terms
-  const terms = allTerms.filter((term) => availableTerms.includes(term));
+  const terms = allTerms.filter((term: Term) => availableTerms.includes(term)) as Term[];
 
   let index = terms.indexOf(currentTerm) - 1;
   let rowOffset = 0;

@@ -29,18 +29,12 @@ export type CourseUnlocks = {
   indirect_unlock: string[]
 };
 
-export type PlannerCourse = {
-  title: string
-  termsOffered: string[]
-  UOC: number
-  plannedFor: string
-  prereqs: string
-  isLegacy: boolean
-  isUnlocked: boolean
-  warnings: string[]
-  handbookNote: string
-  isAccurate: boolean
-  supressed: boolean
-  isMultiterm: boolean
-  mark: boolean
+export type CourseStates = {
+  [courseKey: string]: {
+    handbook_note: string
+    is_accurate: boolean
+    supressed: boolean
+    unlocked: boolean
+    warnings: string[]
+  }
 };
