@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import ReactTooltip from "react-tooltip";
-import { Liquid } from "@ant-design/charts";
+import { Liquid, LiquidConfig } from "@ant-design/charts";
 import {
   darkGrey,
   lightGrey,
@@ -38,7 +38,7 @@ const LiquidProgressChart = ({ completedUOC, totalUOC }: Props) => {
     textColor = "white";
   }
 
-  const config = {
+  const config: LiquidConfig = {
     percent,
     radius: 1,
     width: 320,
@@ -81,7 +81,7 @@ const LiquidProgressChart = ({ completedUOC, totalUOC }: Props) => {
 
   return (
     <div>
-      <ReactTooltip place="bottom" type={theme === "dark" && "light"}>
+      <ReactTooltip place="bottom" type={theme === "dark" ? "light" : "dark"}>
         {completedUOC} / {totalUOC} UOC
       </ReactTooltip>
       <div data-tip>

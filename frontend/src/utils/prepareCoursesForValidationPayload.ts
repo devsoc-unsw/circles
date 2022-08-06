@@ -4,7 +4,7 @@ import { DegreeSliceState } from "reducers/degreeSlice";
 import { PlannerSliceState } from "reducers/plannerSlice";
 
 type TermPlan = {
-  [courseCode: string]: number
+  [courseCode: string]: number | null
 };
 
 type YearPlan = TermPlan[];

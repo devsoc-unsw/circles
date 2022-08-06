@@ -43,7 +43,7 @@ const DraggableCourse = ({
     id: `${code}-context`,
   });
 
-  const isDragDisabled = !!completedTerms[plannedFor];
+  const isDragDisabled = !!plannedFor && !!completedTerms[plannedFor];
 
   const displayContextMenu = (e) => {
     if (!isDragDisabled) show(e);

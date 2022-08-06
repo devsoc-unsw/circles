@@ -47,7 +47,7 @@ const TermPlanner = () => {
   const planner = useSelector((state: RootState) => state.planner);
   const degree = useSelector((state: RootState) => state.degree);
 
-  const [termsOffered, setTermsOffered] = useState([]);
+  const [termsOffered, setTermsOffered] = useState<Term[]>([]);
   const [isDragging, setIsDragging] = useState(false);
 
   const dispatch = useDispatch();
@@ -155,7 +155,7 @@ const TermPlanner = () => {
       }));
     } else {
       // === move between terms ===
-      const srcYear = Number(source.droppableId.match(/[0-9]{4}/)[0]);
+      const srcYear = parseInt(source.droppableId.match(/[0-9]{4}/)[0], 10);
       const srcTerm = source.droppableId.match(/T[0-3]/)[0] as Term;
       const srcRow = srcYear - planner.startYear;
       const srcIndex = source.index;
@@ -194,9 +194,9 @@ const TermPlanner = () => {
               {planner.years.map((year, index) => {
                 const iYear = planner.startYear + index;
                 let yearUOC = 0;
-                Object.keys(year).forEach((termKey: Term) => {
+                Object.keys(year).forEach((termKey) => {
                   Object.keys(planner.courses).forEach((courseCode) => {
-                    if (year[termKey].includes(courseCode)) {
+                    if (year[termKey as Term].includes(courseCode)) {
                       yearUOC += planner.courses[courseCode].UOC;
                     }
                   });
@@ -220,14 +220,14 @@ const TermPlanner = () => {
                         count={`${yearUOC} UOC`}
                       />
                     </S.YearGridBox>
-                    {Object.keys(year).map((term: Term) => {
+                    {Object.keys(year).map((term) => {
                       const key = iYear + term;
                       if (!planner.isSummerEnabled && term === "T0") return null;
                       return (
                         <TermBox
                           key={key}
                           name={key}
-                          coursesList={year[term]}
+                          coursesList={year[term as Term]}
                           termsOffered={termsOffered}
                           dragging={isDragging}
                         />

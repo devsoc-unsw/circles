@@ -2,7 +2,7 @@ export type TableSubgroup = {
   key: string
   title: string
   UOC: number
-  termPlanned: number
+  termPlanned: string
 };
 
 export type TableStructure = {

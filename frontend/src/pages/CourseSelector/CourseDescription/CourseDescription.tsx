@@ -42,21 +42,21 @@ const CourseDescription = () => {
   const { degree, planner } = useSelector((state: RootState) => state);
 
   const [pageLoaded, setPageLoaded] = useState(false);
-  const [coursesPathTo, setCoursesPathTo] = useState<CourseUnlocks>({});
+  const [coursesPathTo, setCoursesPathTo] = useState<CourseUnlocks | null>(null);
   const [coursesPathFrom, setCoursesPathFrom] = useState([]);
-  const [courseCapacity, setCourseCapacity] = useState<EnrolmentCapacityData>({});
+  const [courseCapacity, setCourseCapacity] = useState<EnrolmentCapacityData | null>(null);
 
-  const getCourse = async (c: string) => {
-    const [data, err] = await axiosRequest("get", `/courses/getCourse/${c}`);
+  const getCourse = async (courseCode: string) => {
+    const [data, err] = await axiosRequest("get", `/courses/getCourse/${courseCode}`);
     if (!err) {
       dispatch(setCourse(data));
     }
   };
 
-  const getPathToCoursesById = async (c: string) => {
+  const getPathToCoursesById = async (courseCode: string) => {
     const [data, err] = await axiosRequest(
       "post",
-      `/courses/coursesUnlockedWhenTaken/${c}`,
+      `/courses/coursesUnlockedWhenTaken/${courseCode}`,
       prepareUserPayload(degree, planner),
     );
     if (!err) {
@@ -67,10 +67,10 @@ const CourseDescription = () => {
     }
   };
 
-  const getPathFromCoursesById = async (c: string) => {
+  const getPathFromCoursesById = async (courseCode: string) => {
     const [data, err] = await axiosRequest(
       "get",
-      `/courses/getPathFrom/${c}`,
+      `/courses/getPathFrom/${courseCode}`,
     );
     if (!err) {
       setCoursesPathFrom(data.courses);
@@ -98,25 +98,25 @@ const CourseDescription = () => {
     setCourseCapacity(enrolmentCapacityData);
   };
 
-  const getCourseCapacityById = async (c) => {
+  const getCourseCapacityById = async (code: string) => {
     const [data, err] = await axiosRequest(
       "get",
-      `${TIMETABLE_API_URL}/${c}`,
+      `${TIMETABLE_API_URL}/${code}`,
     );
     if (!err) {
       getCapacityAndEnrolment(data);
     } else {
-      setCourseCapacity({});
+      setCourseCapacity(null);
     }
   };
 
-  const fetchCourseData = async (c: string) => {
+  const fetchCourseData = async (courseCode: string) => {
     setPageLoaded(false);
     await Promise.all([
-      getCourse(c),
-      getPathFromCoursesById(c),
-      getPathToCoursesById(c),
-      getCourseCapacityById(c),
+      getCourse(courseCode),
+      getPathFromCoursesById(courseCode),
+      getPathToCoursesById(courseCode),
+      getCourseCapacityById(courseCode),
     ]);
     setPageLoaded(true);
   };
@@ -163,7 +163,7 @@ const CourseDescription = () => {
     },
     {
       title: "Course Capacity",
-      content: Object.keys(courseCapacity).length ? (
+      content: courseCapacity && Object.keys(courseCapacity).length ? (
         <>
           <div>{courseCapacity.capacity} Students for {TERM}</div>
           <ProgressBar
@@ -200,11 +200,11 @@ const CourseDescription = () => {
         <>
           <S.DescriptionContent>
             <S.DescriptionTitleBar>
-              <Title level={2} className="text">{id} - {course.title}</Title>
+              <Title level={2} className="text">{id} - {course?.title}</Title>
               <PlannerButton />
             </S.DescriptionTitleBar>
             {
-              course.is_legacy
+              course?.is_legacy
               && (
                 <Text strong>
                   NOTE: this course is discontinued - if a current course exists, pick that instead
@@ -213,11 +213,11 @@ const CourseDescription = () => {
             }
             <Collapsible title="Overview">
               {/* eslint-disable-next-line react/no-danger */}
-              <p dangerouslySetInnerHTML={{ __html: course.description || "None" }} />
+              <p dangerouslySetInnerHTML={{ __html: course?.description || "None" }} />
             </Collapsible>
             <Collapsible title="Requirements">
               {/* eslint-disable-next-line react/no-danger */}
-              <p dangerouslySetInnerHTML={{ __html: course.raw_requirements || "None" }} />
+              <p dangerouslySetInnerHTML={{ __html: course?.raw_requirements || "None" }} />
             </Collapsible>
             <Collapsible title="Courses you have done to unlock this course">
               <p>
@@ -232,7 +232,7 @@ const CourseDescription = () => {
             </Collapsible>
             <Collapsible title="Doing this course will directly unlock these courses">
               <p>
-                {coursesPathTo.direct_unlock && coursesPathTo.direct_unlock.length > 0 ? (
+                {coursesPathTo?.direct_unlock && coursesPathTo.direct_unlock.length > 0 ? (
                   coursesPathTo.direct_unlock.map((courseCode) => (
                     <CourseTag key={courseCode} name={courseCode} />
                   ))
@@ -244,7 +244,7 @@ const CourseDescription = () => {
               initiallyCollapsed
             >
               <p>
-                {coursesPathTo.indirect_unlock && coursesPathTo.indirect_unlock.length > 0 ? (
+                {coursesPathTo?.indirect_unlock && coursesPathTo.indirect_unlock.length > 0 ? (
                   coursesPathTo.indirect_unlock.map((courseCode) => (
                     <CourseTag key={courseCode} name={courseCode} />
                   ))

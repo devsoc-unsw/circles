@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { ItemType } from "antd/lib/menu/hooks/useItems";
 import axios from "axios";
 import { CourseValidation } from "types/courses";
 import { ProgramStructure } from "types/structure";
@@ -35,7 +36,8 @@ const SubgroupTitle = ({ title, currUOC, totalUOC }: SubgroupTitleProps) => (
 const CourseSidebar = ({ structure, showLockedCourses }: Props) => {
   const dispatch = useDispatch();
   const [menuData, setMenuData] = useState<MenuDataStructure>({});
-  const [coursesUnits, setCoursesUnits] = useState<CourseUnitsStructure>({});
+  const [coursesUnits, setCoursesUnits] = useState<CourseUnitsStructure | null>(null);
+  const [items, setItems] = useState<ItemType[]>([]);
 
   // get courses in planner
   const planner = useSelector((state: RootState) => state.planner);
@@ -113,7 +115,10 @@ const CourseSidebar = ({ structure, showLockedCourses }: Props) => {
     if (structure && Object.keys(structure).length) getAllUnlocked();
   }, [structure, getAllUnlocked]);
 
-  const sortSubgroups = (item1, item2) => {
+  const sortSubgroups = (
+    item1: [string, MenuDataSubgroup[]],
+    item2: [string, MenuDataSubgroup[]],
+  ) => {
     if (/Core/.test(item1[0]) && !/Core/.test(item2[0])) {
       return -1;
     }
@@ -129,45 +134,45 @@ const CourseSidebar = ({ structure, showLockedCourses }: Props) => {
     item1.courseCode > item2.courseCode ? 1 : -1
   );
 
-  const items = Object.entries(menuData).map(([groupKey, groupEntry]) => ({
-    label: structure[groupKey].name ? `${groupKey} - ${structure[groupKey].name}` : groupKey,
-    key: groupKey,
-    children: Object
-      .entries(groupEntry)
-      .sort(sortSubgroups)
-      .map(([subgroupKey, subGroupEntry]) => {
-        let currUOC = null;
-        let totalUOC = null;
-        if (coursesUnits[groupKey] && coursesUnits[groupKey][subgroupKey]) {
-          // check as coursesUnits is {} on initial render
-          currUOC = coursesUnits[groupKey][subgroupKey].curr;
-          totalUOC = coursesUnits[groupKey][subgroupKey].total;
-        }
-        return {
-          label: <SubgroupTitle
-            title={subgroupKey}
-            currUOC={currUOC}
-            totalUOC={totalUOC}
-          />,
-          key: subgroupKey,
-          children: subGroupEntry.sort(sortCourses)
-            .filter((course) => course.unlocked || showLockedCourses)
-            .map((course) => ({
-              label: <CourseTitle
-                courseCode={course.courseCode}
-                title={course.title}
-                selected={planner.courses[course.courseCode] !== undefined}
-                accurate={course.accuracy}
-                unlocked={course.unlocked}
+  useEffect(() => {
+    if (coursesUnits) {
+      const menuItems = Object.entries(menuData).map(([groupKey, groupEntry]) => ({
+        label: structure[groupKey].name ? `${groupKey} - ${structure[groupKey].name}` : groupKey,
+        key: groupKey,
+        children: Object
+          .entries(groupEntry)
+          .sort(sortSubgroups)
+          .map(([subgroupKey, subGroupEntry]) => {
+            const currUOC = coursesUnits[groupKey][subgroupKey].curr;
+            const totalUOC = coursesUnits[groupKey][subgroupKey].total;
+            return {
+              label: <SubgroupTitle
+                title={subgroupKey}
+                currUOC={currUOC}
+                totalUOC={totalUOC}
               />,
-              // key is course code + groupKey + subgroupKey to differentiate as unique
-              // course items in menu
-              key: `${course.courseCode}-${groupKey}-${subgroupKey}`,
-            })),
-          type: "group",
-        };
-      }),
-  }));
+              key: subgroupKey,
+              children: subGroupEntry.sort(sortCourses)
+                .filter((course) => course.unlocked || showLockedCourses)
+                .map((course) => ({
+                  label: <CourseTitle
+                    courseCode={course.courseCode}
+                    title={course.title}
+                    selected={planner.courses[course.courseCode] !== undefined}
+                    accurate={course.accuracy}
+                    unlocked={course.unlocked}
+                  />,
+                  // key is course code + groupKey + subgroupKey to differentiate as unique
+                  // course items in menu
+                  key: `${course.courseCode}-${groupKey}-${subgroupKey}`,
+                })),
+              type: "group",
+            };
+          }),
+      }));
+      setItems(menuItems);
+    }
+  }, [coursesUnits]);
 
   const handleClick = ({ key }: { key: string }) => {
     // course code is first 8 chars due to the key being course code + group + subGroup

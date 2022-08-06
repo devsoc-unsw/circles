@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Skeleton, Table, Typography } from "antd";
 import { ProgramStructure } from "types/structure";
+import getFormattedPlannerCourses, { FormattedPlannerCourse } from "utils/getFormattedPlannerCourses";
 import { RootState } from "config/store";
-import { getFormattedPlannerCourses } from "../utils";
 import { TableStructure } from "./types";
 
 type Props = {
@@ -13,10 +13,10 @@ type Props = {
 
 const TableView = ({ isLoading, structure }: Props) => {
   const { Title } = Typography;
-  const [tableLayout, setTableLayout] = useState({});
+  const [tableLayout, setTableLayout] = useState<TableStructure>({});
   const { years, startYear, courses } = useSelector((store: RootState) => store.planner);
 
-  const generateTableStructure = (plannedCourses) => {
+  const generateTableStructure = (plannedCourses: Record<string, FormattedPlannerCourse>) => {
     const newTableLayout: TableStructure = {};
 
     // Example groups: Major, Minor, General, Rules
@@ -24,7 +24,7 @@ const TableView = ({ isLoading, structure }: Props) => {
       newTableLayout[group] = {};
       // Example subgroup: Core Courses, Computing Electives
       Object.keys(structure[group]).forEach((subgroup) => {
-        const subgroupStructure = structure[group][subgroup];
+        const subgroupStructure = structure[group].content[subgroup];
 
         newTableLayout[group][subgroup] = [];
 
@@ -92,7 +92,6 @@ const TableView = ({ isLoading, structure }: Props) => {
                   <Table
                     dataSource={subGroupEntry}
                     columns={columns}
-                    pagination={{ position: ["none", "none"] }}
                   />
                   <br />
                 </div>

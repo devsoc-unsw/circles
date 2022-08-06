@@ -4,9 +4,9 @@ import {
 
 const MIN_COMPLETED_COURSE_UOC = 6;
 
-const parseMarkToInt = (mark: Mark): number => {
+const parseMarkToInt = (mark: Mark): number | null => {
   if (typeof mark === "string") {
-    const letterGradeToIntMap: Record<Grade, number> = {
+    const letterGradeToIntMap: Record<Grade, number | null> = {
       SY: null,
       FL: 25,
       PS: 60,
@@ -23,7 +23,7 @@ const parseMarkToInt = (mark: Mark): number => {
 
 // Checks if no courses have been planned
 const isPlannerEmpty = (years: PlannerYear[]) => (
-  years.every((year) => Object.keys(year).every((term: Term) => year[term].length === 0))
+  years.every((year) => Object.keys(year).every((term) => year[term as Term].length === 0))
 );
 
 // Calculated lcm(uoc, MIN_COMPLETED_COURSE_UOC) to determine number of times course must be taken.
@@ -53,7 +53,7 @@ const getTermsList = (
   if (isSummerTerm) allTerms.unshift("T0");
 
   // Remove any unavailable terms
-  const terms = allTerms.filter((term: Term) => availableTerms.includes(term)) as Term[];
+  const terms = allTerms.filter((term) => availableTerms.includes(term as Term)) as Term[];
 
   let index = terms.indexOf(currentTerm) - 1;
   let rowOffset = 0;
@@ -114,7 +114,7 @@ const checkMultitermInBounds = (payload: MultitermInBoundsPayload) => {
     return false;
   }
 
-  const instanceNum = srcTerm === "unplanned" ? 0 : plannedFor.split(" ").indexOf(srcTerm);
+  const instanceNum = srcTerm === "unplanned" || !plannedFor ? 0 : plannedFor.split(" ").indexOf(srcTerm);
   const termsList = getTermsList(destTerm, uoc, termsOffered, isSummerTerm, instanceNum);
 
   const { rowOffset: maxRowOffset } = termsList[termsList.length - 1];

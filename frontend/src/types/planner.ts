@@ -8,7 +8,7 @@ export type PlannerCourse = {
   title: string
   termsOffered: Term[]
   UOC: number
-  plannedFor: string
+  plannedFor: string | null
   prereqs: string
   isLegacy: boolean
   isUnlocked: boolean

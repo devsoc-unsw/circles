@@ -4,7 +4,7 @@ import { CourseDetail, CourseValidation } from "types/courses";
 
 type SliceState = {
   courses: Record<string, CourseValidation>
-  course: CourseDetail
+  course: CourseDetail | null
 };
 
 const initialState: SliceState = {

@@ -11,7 +11,7 @@ import "react-contexify/dist/ReactContexify.css";
 
 type Props = {
   code: string
-  plannedFor: string
+  plannedFor: string | null
 };
 
 const ContextMenu = ({ code, plannedFor }: Props) => {
@@ -24,8 +24,8 @@ const ContextMenu = ({ code, plannedFor }: Props) => {
 
   const handleUnschedule = () => {
     dispatch(unschedule({
-      destIndex: null,
       code,
+      destIndex: null,
     }));
   };
   const id = `${code}-context`;

@@ -43,7 +43,8 @@
     "test": "vitest run",
     "coverage": "vitest run --coverage",
     "lint": "eslint src/**/*.{ts,tsx}",
-    "lint:fix": "eslint --fix src/**/*.{ts,tsx}"
+    "lint:fix": "eslint --fix src/**/*.{ts,tsx}",
+    "types": "tsc --project tsconfig.json"
   },
   "eslintConfig": {
     "extends": [

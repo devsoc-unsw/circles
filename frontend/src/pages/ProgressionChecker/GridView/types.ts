@@ -2,7 +2,7 @@ export type GridSubgroupCourse = {
   key: string
   title: string
   past: boolean
-  termPlanned: number
+  termPlanned: string
   uoc: number
   unplanned: boolean
 };
@@ -17,3 +17,8 @@ export type GridStructure = {
     [subgroupKey: string]: GridSubgroup
   }
 };
+
+export enum PlannedState {
+  PLANNED,
+  UNPLANNED,
+}

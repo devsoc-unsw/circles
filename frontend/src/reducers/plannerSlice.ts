@@ -279,12 +279,10 @@ const plannerSlice = createSlice({
       state.courses = {};
       state.unplanned = [];
     },
-    unschedule: (state, action: PayloadAction<{ code: string, destIndex: number }>) => {
+    unschedule: (state, action: PayloadAction<{ code: string, destIndex: number | null }>) => {
       const { destIndex, code } = action.payload;
 
-      if (Number.isNaN(destIndex)) {
-        state.unplanned.push(code);
-      } else {
+      if (typeof destIndex === "number") {
         const existsIndex = state.unplanned.indexOf(code);
         if (existsIndex !== -1) {
           state.unplanned.splice(existsIndex, 1);
@@ -295,11 +293,13 @@ const plannerSlice = createSlice({
           // if was already unplanned don't need to modify other attributes
           return;
         }
+      } else {
+        state.unplanned.push(code);
       }
 
       const { plannedFor } = state.courses[code];
 
-      plannedFor.split(" ").forEach((termId) => {
+      plannedFor?.split(" ").forEach((termId) => {
         const yearI = parseInt(termId.slice(0, 4), 10) - state.startYear;
         const termI = termId.slice(4) as Term;
 

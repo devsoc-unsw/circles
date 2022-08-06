@@ -6,14 +6,14 @@ import axios from "axios";
 import { RootState } from "config/store";
 import { addSpecialisation, removeSpecialisation } from "reducers/degreeSlice";
 import springProps from "../common/spring";
-import STEPS from "../common/steps";
+import Steps from "../common/steps";
 import CS from "../common/styles";
 import S from "./styles";
 
 const { Title } = Typography;
 
 type Props = {
-  incrementStep: (stepTo?: STEPS) => void
+  incrementStep: (stepTo?: Steps) => void
   currStep: boolean
   type: string
 };

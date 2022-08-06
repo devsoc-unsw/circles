@@ -8,19 +8,19 @@ import axios from "axios";
 import { RootState } from "config/store";
 import { resetDegree, setProgram } from "reducers/degreeSlice";
 import springProps from "../common/spring";
-import STEPS from "../common/steps";
+import Steps from "../common/steps";
 import CS from "../common/styles";
 
 const { Title } = Typography;
 
 type Props = {
-  incrementStep: (stepTo?: STEPS) => void
+  incrementStep: (stepTo?: Steps) => void
 };
 
 const DegreeStep = ({ incrementStep }: Props) => {
   const [input, setInput] = useState("");
-  const [options, setOptions] = useState([]);
-  const [allDegrees, setAllDegrees] = useState({});
+  const [options, setOptions] = useState<string[]>([]);
+  const [allDegrees, setAllDegrees] = useState<Record<string, string>>({});
 
   const dispatch = useDispatch();
   const programCode = useSelector((store: RootState) => store.degree.programCode);
@@ -42,18 +42,15 @@ const DegreeStep = ({ incrementStep }: Props) => {
     setInput(e.key);
     setOptions([]);
 
-    if (e.key) incrementStep(STEPS.SPECS);
+    if (e.key) incrementStep(Steps.SPECS);
   };
 
   const searchDegree = (newInput: string) => {
     setInput(newInput);
-    const fullDegreeName = Object.keys(allDegrees).map((code) => `${code} ${allDegrees[code]}`);
-    setOptions(
-      fullDegreeName
-        .filter((degree) => degree.toLowerCase().includes(newInput.toLowerCase()))
-        // splice to only show max 8 options
-        .splice(0, 8),
-    );
+    const degreeOptions = Object.keys(allDegrees).map((code) => `${code} ${allDegrees[code]}`)
+      .filter((degree) => degree.toLowerCase().includes(newInput.toLowerCase()))
+      .splice(0, 8);
+    setOptions(degreeOptions);
   };
 
   const props = useSpring(springProps);
@@ -79,7 +76,7 @@ const DegreeStep = ({ incrementStep }: Props) => {
         {input && options && (
           <Menu
             onClick={handleDegreeChange}
-            selectedKeys={programCode && [programCode]}
+            selectedKeys={programCode ? [programCode] : []}
             items={items}
             mode="inline"
           />

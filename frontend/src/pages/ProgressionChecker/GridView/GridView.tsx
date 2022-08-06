@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Skeleton, Typography } from "antd";
 import { ProgramStructure } from "types/structure";
+import getFormattedPlannerCourses, { FormattedPlannerCourse } from "utils/getFormattedPlannerCourses";
 import Collapsible from "components/Collapsible";
 import { RootState } from "config/store";
-import { getFormattedPlannerCourses } from "../utils";
 import GridViewConciseSubgroup from "./GridViewConciseSubgroup";
 import GridViewSubgroup from "./GridViewSubgroup";
 import S from "./styles";
-import { GridStructure } from "./types";
+import { GridStructure, GridSubgroup } from "./types";
 
 type Props = {
   isLoading: boolean
@@ -18,10 +18,10 @@ type Props = {
 
 const GridView = ({ isLoading, structure, concise }: Props) => {
   const { Title } = Typography;
-  const [gridLayout, setGridLayout] = useState({});
+  const [gridLayout, setGridLayout] = useState<GridStructure>({});
   const { years, startYear, courses } = useSelector((store: RootState) => store.planner);
 
-  const generateGridStructure = (plannerCourses) => {
+  const generateGridStructure = (plannerCourses: Record<string, FormattedPlannerCourse>) => {
     const newGridLayout: GridStructure = {};
 
     // Example groups: Major, Minor, General, Rules
@@ -72,7 +72,7 @@ const GridView = ({ isLoading, structure, concise }: Props) => {
     setGridLayout(gridStructure);
   }, [isLoading, structure, years, startYear, courses]);
 
-  const sortSubgroups = (item1, item2) => {
+  const sortSubgroups = (item1: [string, GridSubgroup], item2: [string, GridSubgroup]) => {
     if (/Core/.test(item1[0]) && !/Core/.test(item2[0])) {
       return -1;
     }

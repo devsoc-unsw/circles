@@ -75,7 +75,7 @@ const ProgressionCheckerCourses = ({ structure, isLoading }: Props) => {
 const ProgressionChecker = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [structure, setStructure] = useState<ProgramStructure>({});
-  const [uoc, setUoc] = useState(null);
+  const [uoc, setUoc] = useState(0);
 
   const {
     programCode, specs,
@@ -138,7 +138,7 @@ const ProgressionChecker = () => {
     <PageTemplate>
       <S.Wrapper>
         <Dashboard storeUOC={storeUOC} isLoading={isLoading} structure={structure} uoc={uoc} />
-        <Divider id="divider" />
+        <div id="divider"><Divider /></div>
         <ProgressionCheckerCourses structure={structure} isLoading={isLoading} />
       </S.Wrapper>
     </PageTemplate>

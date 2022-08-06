@@ -5,7 +5,6 @@ const SkeletonCard = () => (
   <S.SkeletonCard
     style={{ width: "20em", height: "8.5em" }}
     active
-    round
   />
 );
 

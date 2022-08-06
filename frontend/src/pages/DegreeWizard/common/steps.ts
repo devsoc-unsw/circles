@@ -1,7 +1,7 @@
-enum STEPS {
+enum Steps {
   YEAR,
   DEGREE,
   SPECS,
 }
 
-export default STEPS;
+export default Steps;

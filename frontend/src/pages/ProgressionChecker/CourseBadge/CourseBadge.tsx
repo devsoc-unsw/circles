@@ -4,6 +4,7 @@ import { EyeOutlined } from "@ant-design/icons";
 import { Badge, Tooltip } from "antd";
 import CourseButton from "components/CourseButton";
 import { purple } from "config/constants";
+import { GridSubgroupCourse } from "../GridView/types";
 import S from "./styles";
 
 type UOCBadgeProps = {
@@ -23,7 +24,7 @@ const UOCBadge = ({ uoc }: UOCBadgeProps) => (
 );
 
 type Props = {
-  course: any
+  course: GridSubgroupCourse
 };
 
 const CourseBadge = ({ course }: Props) => {
@@ -39,10 +40,9 @@ const CourseBadge = ({ course }: Props) => {
         key={course.key}
         count={(
           <Tooltip title="Course added but not planned">
-            <S.CourseBadgeIcon>!</S.CourseBadgeIcon>
+            <S.CourseBadgeIcon onClick={handleClick}>!</S.CourseBadgeIcon>
           </Tooltip>
           )}
-        onClick={handleClick}
       >
         <CourseButton courseCode={course.key} title={course.title} planned={false} />
         <UOCBadge uoc={course.uoc} />
@@ -67,12 +67,11 @@ const CourseBadge = ({ course }: Props) => {
         key={course.key}
         count={(
           <Tooltip title={`Future course planned for ${course.termPlanned}`}>
-            <S.CourseBadgeIcon>
+            <S.CourseBadgeIcon onClick={handleClick}>
               <EyeOutlined />
             </S.CourseBadgeIcon>
           </Tooltip>
         )}
-        onClick={handleClick}
       >
         <CourseButton courseCode={course.key} title={course.title} planned />
         <UOCBadge uoc={course.uoc} />

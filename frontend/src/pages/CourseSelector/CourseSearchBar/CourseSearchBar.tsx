@@ -8,8 +8,8 @@ import { RootState } from "config/store";
 import { addTab } from "reducers/courseTabsSlice";
 
 const CourseSearchBar = () => {
-  const [value, setValue] = useState(null);
-  const [courses, setCourses] = useState([]);
+  const [value, setValue] = useState<string | null>(null);
+  const [courses, setCourses] = useState<{ label: string, value: string }[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const [debouncedSearchTerm] = useDebounce(value, 200);
@@ -51,7 +51,7 @@ const CourseSearchBar = () => {
   };
 
   const handleSearch = (courseCode: string) => {
-    setValue(courseCode || null);
+    setValue(courseCode);
     setCourses([]);
     setIsLoading(true);
   };

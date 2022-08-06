@@ -11,7 +11,7 @@ import { resetCourses } from "reducers/coursesSlice";
 import { resetTabs } from "reducers/courseTabsSlice";
 import { resetDegree } from "reducers/degreeSlice";
 import { resetPlanner } from "reducers/plannerSlice";
-import STEPS from "./common/steps";
+import Steps from "./common/steps";
 import DegreeStep from "./DegreeStep";
 import ResetModal from "./ResetModal";
 import SpecialisationStep from "./SpecialisationStep";
@@ -57,11 +57,11 @@ const DegreeWizard = () => {
     if (degree.programCode !== "") getSteps();
   }, [degree.programCode]);
 
-  const [currStep, setCurrStep] = useState(STEPS.YEAR);
+  const [currStep, setCurrStep] = useState(Steps.YEAR);
 
-  const incrementStep = (stepTo?: STEPS) => {
+  const incrementStep = (stepTo?: Steps) => {
     const step = stepTo ? stepList[stepTo] : stepList[currStep + 1];
-    if (stepTo > currStep || !stepTo) setCurrStep((prevState) => prevState + 1);
+    if (!stepTo || stepTo > currStep) setCurrStep((prevState) => prevState + 1);
     setTimeout(() => {
       scroller.scrollTo(step, {
         duration: 1500,
@@ -82,12 +82,12 @@ const DegreeWizard = () => {
         <S.HorizontalLine />
         <S.StepsWrapper>
           <YearStep incrementStep={incrementStep} />
-          {currStep >= STEPS.DEGREE && <DegreeStep incrementStep={incrementStep} />}
+          {currStep >= Steps.DEGREE && <DegreeStep incrementStep={incrementStep} />}
           {specs.map((stepName, index) => (
-            currStep - STEPS.SPECS >= index && (
+            currStep - Steps.SPECS >= index && (
             <SpecialisationStep
               incrementStep={incrementStep}
-              currStep={currStep - STEPS.SPECS === index}
+              currStep={currStep - Steps.SPECS === index}
               type={stepName}
             />
             )

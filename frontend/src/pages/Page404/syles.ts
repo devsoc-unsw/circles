@@ -21,7 +21,7 @@ const GridCircleWrapper = styled.div`
   width: 100%;
 `;
 
-const LogoBox = styled.div<{ alt: boolean }>`
+const LogoBox = styled.div<{ alt?: boolean }>`
   margin: 10px;
   margin-right: 50px;
   position: relative;

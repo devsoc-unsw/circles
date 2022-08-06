@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import { Button, Empty, Typography } from "antd";
 import Collapsible from "components/Collapsible";
-import CourseListModal from "../../../components/CourseListModal";
 import CourseBadge from "../CourseBadge";
+import CourseListModal from "../CourseListModal";
 import S from "./styles";
+import { GridSubgroupCourse, PlannedState } from "./types";
 
 type Props = {
   uoc: number
   subgroupKey: string
-  subgroupEntries: any
-  hasLotsOfCourses: any
+  subgroupEntries: GridSubgroupCourse[]
+  hasLotsOfCourses: boolean
 };
 
 const GridViewConciseSubgroup = ({
@@ -19,10 +20,6 @@ const GridViewConciseSubgroup = ({
   hasLotsOfCourses,
 }: Props) => {
   const { Title } = Typography;
-  const plannedState = {
-    PLANNED: "planned",
-    UNPLANNED: "unplanned",
-  };
 
   const planned = subgroupEntries.filter((c) => (c.unplanned || c.past || c.past === false));
   const plannedUOC = planned.reduce((sum, course) => (sum + (course.uoc ?? 0)), 0);
@@ -40,9 +37,9 @@ const GridViewConciseSubgroup = ({
     </S.CourseGroup>
   );
 
-  const collapsibleSection = (planState) => {
+  const collapsibleSection = (planState: PlannedState) => {
     const [modalVisible, setModalVisible] = useState(false);
-    if (hasLotsOfCourses && planState === plannedState.UNPLANNED) {
+    if (hasLotsOfCourses && planState === PlannedState.UNPLANNED) {
       return (
         <S.ViewAllCoursesWrapper>
           <Button type="primary" onClick={() => setModalVisible(true)}>
@@ -58,11 +55,11 @@ const GridViewConciseSubgroup = ({
       );
     }
 
-    if (planState === plannedState.PLANNED && planned.length > 0) {
+    if (planState === PlannedState.PLANNED && planned.length > 0) {
       return plannedGroup;
     }
 
-    if (planState === plannedState.UNPLANNED && unplanned.length > 0) {
+    if (planState === PlannedState.UNPLANNED && unplanned.length > 0) {
       return unplannedGroup;
     }
 
@@ -80,14 +77,14 @@ const GridViewConciseSubgroup = ({
             headerStyle={{ border: "none" }}
             initiallyCollapsed={!planned.length}
           >
-            {collapsibleSection(plannedState.PLANNED)}
+            {collapsibleSection(PlannedState.PLANNED)}
           </Collapsible>
           <Collapsible
             title={<Title level={4} className="text">Choose {Math.max(uoc - plannedUOC, 0)} UOC from the following courses</Title>}
             headerStyle={{ border: "none" }}
             initiallyCollapsed={!hasLotsOfCourses && (unplanned.length > 16 || !unplanned.length)}
           >
-            {collapsibleSection(plannedState.UNPLANNED)}
+            {collapsibleSection(PlannedState.UNPLANNED)}
           </Collapsible>
         </>
       )}

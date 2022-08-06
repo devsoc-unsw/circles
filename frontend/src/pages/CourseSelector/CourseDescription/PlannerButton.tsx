@@ -16,41 +16,43 @@ const PlannerButton = () => {
 
   const id = tabs[active];
   const dispatch = useDispatch();
-  const [addedCourseInPlanner, setAddedCourseInPlanner] = useState(!!coursesInPlanner[id]);
+  const [isAddedInPlanner, setIsAddedInPlanner] = useState(!!coursesInPlanner[id]);
   const [loading, setLoading] = useState(false);
 
   const addCourseToPlannerTimeout = (isCourseInPlanner: boolean) => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-      setAddedCourseInPlanner(isCourseInPlanner);
+      setIsAddedInPlanner(isCourseInPlanner);
     }, 1000);
   };
 
   useEffect(() => {
-    if (!!coursesInPlanner[id] === addedCourseInPlanner) return;
+    if (!!coursesInPlanner[id] === isAddedInPlanner) return;
     setLoading(true);
     addCourseToPlannerTimeout(!!coursesInPlanner[id]);
   }, [coursesInPlanner]);
 
   const addToPlanner = () => {
-    const courseData: PlannerCourse = {
-      title: course.title,
-      termsOffered: course.terms,
-      UOC: course.UOC,
-      plannedFor: null,
-      prereqs: course.raw_requirements,
-      isLegacy: course.is_legacy,
-      isUnlocked: true,
-      warnings: [],
-      handbookNote: course.handbook_note,
-      isAccurate: course.is_accurate,
-      isMultiterm: course.is_multiterm,
-      supressed: false,
-      mark: null,
-    };
-    dispatch(addToUnplanned({ courseCode: course.code, courseData }));
-    addCourseToPlannerTimeout(true);
+    if (course) {
+      const courseData: PlannerCourse = {
+        title: course.title,
+        termsOffered: course.terms,
+        UOC: course.UOC,
+        plannedFor: null,
+        prereqs: course.raw_requirements,
+        isLegacy: course.is_legacy,
+        isUnlocked: true,
+        warnings: [],
+        handbookNote: course.handbook_note,
+        isAccurate: course.is_accurate,
+        isMultiterm: course.is_multiterm,
+        supressed: false,
+        mark: null,
+      };
+      dispatch(addToUnplanned({ courseCode: course.code, courseData }));
+      addCourseToPlannerTimeout(true);
+    }
   };
 
   const removeFromPlanner = async () => {
@@ -60,7 +62,7 @@ const PlannerButton = () => {
   };
 
   return (
-    addedCourseInPlanner ? (
+    isAddedInPlanner ? (
       <Button
         loading={loading}
         onClick={removeFromPlanner}

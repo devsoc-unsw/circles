@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
 import { DatePicker, Select, Switch } from "antd";
+import type { Moment } from "moment";
 import moment from "moment";
 import { RootState } from "config/store";
 import { toggleSummer, updateDegreeLength, updateStartYear } from "reducers/plannerSlice";
@@ -13,7 +14,7 @@ const SettingsMenu = () => {
 
   const dispatch = useDispatch();
 
-  function handleUpdateStartYear(_, dateString: string) {
+  function handleUpdateStartYear(_: Moment | null, dateString: string) {
     if (dateString) {
       dispatch(updateStartYear(parseInt(dateString, 10)));
     }

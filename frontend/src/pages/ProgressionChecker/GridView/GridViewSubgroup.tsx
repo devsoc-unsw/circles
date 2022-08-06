@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { Button, Empty, Typography } from "antd";
-import CourseListModal from "components/CourseListModal";
 import CourseBadge from "../CourseBadge";
+import CourseListModal from "../CourseListModal";
 import S from "./styles";
+import { GridSubgroupCourse } from "./types";
 
 type Props = {
   uoc: number
   subgroupKey: string
-  subgroupEntries: any
-  hasLotsOfCourses?: boolean
+  subgroupEntries: GridSubgroupCourse[]
+  hasLotsOfCourses: boolean
 };
 
 const GridViewSubgroup = ({
@@ -20,7 +21,7 @@ const GridViewSubgroup = ({
   const { Title } = Typography;
 
   const plannedUOC = subgroupEntries.reduce((sum, course) => (sum + (course.uoc ?? 0)), 0);
-  const subgroupSection = (courses) => (
+  const subgroupSection = (courses: GridSubgroupCourse[]) => (
     <S.CourseGroup>{courses.map((course) => (
       <CourseBadge course={course} key={course.key} />
     ))}

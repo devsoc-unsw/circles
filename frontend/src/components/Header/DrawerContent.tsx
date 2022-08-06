@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { BugOutlined } from "@ant-design/icons";
 import { Menu } from "antd";
+import type { ItemType } from "antd/lib/menu/hooks/useItems";
 import { FEEDBACK_LINK, inDev } from "config/constants";
 import routes from "./routes";
 
@@ -14,16 +15,16 @@ const DrawerContent = ({ onCloseDrawer }: Props) => {
 
   const FEEDBACK_KEY = "feedback-link";
 
-  const handleClick = (e) => {
-    if (e.key === FEEDBACK_KEY) {
+  const handleClick = ({ key }: { key: string }) => {
+    if (key === FEEDBACK_KEY) {
       window.open(FEEDBACK_LINK, "_blank");
     } else {
-      navigate(e.key);
+      navigate(key);
       onCloseDrawer();
     }
   };
 
-  const items = routes
+  const items: ItemType[] = routes
     .filter((route) => !route.dev || inDev) // filter out in dev features if not in dev mode
     .map((route) => ({
       label: route.label,
