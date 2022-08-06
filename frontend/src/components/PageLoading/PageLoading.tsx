@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { Dispatch, SetStateAction, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import circlesLogo from "assets/circlesWithBg.svg";
@@ -6,7 +6,7 @@ import { RootState } from "config/store";
 import S from "./styles";
 
 type Props = {
-  setLoading: any
+  setLoading: Dispatch<SetStateAction<boolean>>
 };
 
 const PageLoading = ({ setLoading }: Props) => {

@@ -14,7 +14,7 @@ const { Text } = Typography;
 type Props = {
   code: string
   title: string
-  showAlert: any
+  showAlert: (c: string) => void
 };
 
 const PlannerCartCourseCard = ({ code, title, showAlert }: Props) => {

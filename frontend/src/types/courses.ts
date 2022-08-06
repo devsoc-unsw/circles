@@ -1,3 +1,5 @@
+import { Term } from "./planner";
+
 export type CourseCodes = {
   [courseKey: string]: string
 };
@@ -11,10 +13,11 @@ export type CourseDetail = {
   school: string
   campus: string
   raw_requirements: string
-  terms: string[]
+  terms: Term[]
   is_legacy: boolean
   is_accurate: boolean
   is_multiterm: boolean
+  handbook_note: string
 };
 
 export type CourseValidation = {

@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { CourseStates } from "types/courses";
 import { PlannerCourse, PlannerYear, Term } from "types/planner";
 import { getTermsList } from "pages/TermPlanner/utils";
@@ -63,7 +64,9 @@ const plannerSlice = createSlice({
   name: "planner",
   initialState,
   reducers: {
-    addToUnplanned: (state, action: PayloadAction<{ courseCode: string, courseData: any }>) => {
+    addToUnplanned: (state, action: PayloadAction<{
+      courseCode: string, courseData: PlannerCourse
+    }>) => {
       const { courseCode, courseData } = action.payload;
       if (!state.courses[courseCode]) {
         state.courses[courseCode] = courseData;

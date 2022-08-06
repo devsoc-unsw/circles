@@ -20,10 +20,12 @@ const PlannerCart = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const [show, setShow] = useState(false);
   const [code, setCode] = useState("");
+
   const deleteAllCourses = () => {
     dispatch(removeAllCourses());
   };
-  const showAlert = (c) => {
+
+  const showAlert = (c: string) => {
     setShow(false);
     setCode(c);
     setShow(true);
@@ -82,7 +84,6 @@ const PlannerCart = () => {
                 selector
               </Text>
               <S.LinkButton
-                type="secondary"
                 shape="round"
                 onClick={() => navigate("/course-selector")}
               >

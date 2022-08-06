@@ -4,6 +4,7 @@ import {
   LockOutlined, MinusOutlined, PlusOutlined, WarningOutlined,
 } from "@ant-design/icons";
 import { Button, Tooltip } from "antd";
+import { PlannerCourse } from "types/planner";
 import prepareUserPayload from "utils/prepareUserPayload";
 import axiosRequest from "config/axios";
 import { RootState } from "config/store";
@@ -26,34 +27,34 @@ const CourseTitle = ({
 
   const { degree, planner } = useSelector((state: RootState) => state);
 
-  const addToPlanner = async (e, plannedCourse) => {
+  const addToPlanner = async (e: React.MouseEvent<HTMLElement>, code: string) => {
     e.stopPropagation();
     const [course] = await axiosRequest(
       "get",
-      `/courses/getCourse/${plannedCourse}`,
+      `/courses/getCourse/${code}`,
     );
 
-    const data = {
-      courseCode: course.code,
-      courseData: {
-        title: course.title,
-        termsOffered: course.terms,
-        UOC: course.UOC,
-        plannedFor: null,
-        prereqs: course.raw_requirements,
-        isLegacy: course.is_legacy,
-        isUnlocked: true,
-        warnings: [],
-        handbookNote: course.handbook_note,
-        isAccurate: course.is_accurate,
-      },
+    const courseData: PlannerCourse = {
+      title: course.title,
+      termsOffered: course.terms,
+      UOC: course.UOC,
+      plannedFor: null,
+      prereqs: course.raw_requirements,
+      isLegacy: course.is_legacy,
+      isUnlocked: true,
+      warnings: [],
+      handbookNote: course.handbook_note,
+      isAccurate: course.is_accurate,
+      isMultiterm: course.is_multiterm,
+      supressed: false,
+      mark: null,
     };
-    dispatch(addToUnplanned(data));
+    dispatch(addToUnplanned({ courseCode: course.code, courseData }));
   };
 
-  const removeFromPlanner = async (e, plannedCourse) => {
+  const removeFromPlanner = async (e: React.MouseEvent<HTMLElement>, code: string) => {
     e.stopPropagation();
-    const [data] = await axiosRequest("post", `/courses/unselectCourse/${plannedCourse}`, prepareUserPayload(degree, planner));
+    const [data] = await axiosRequest("post", `/courses/unselectCourse/${code}`, prepareUserPayload(degree, planner));
     dispatch(removeCourses(data.courses));
   };
 
