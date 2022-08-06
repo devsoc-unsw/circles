@@ -21,7 +21,7 @@ const YearStep = ({ incrementStep }: Props) => {
   const handleYearChange = (_, [startYear, endYear]: [string, string]) => {
     const numYears = parseInt(endYear, 10) - parseInt(startYear, 10) + 1;
     dispatch(updateDegreeLength(numYears));
-    dispatch(updateStartYear(startYear));
+    dispatch(updateStartYear(parseInt(startYear, 10)));
 
     if (startYear && endYear) incrementStep(STEPS.DEGREE);
   };

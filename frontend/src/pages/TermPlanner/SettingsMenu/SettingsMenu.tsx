@@ -15,7 +15,7 @@ const SettingsMenu = () => {
 
   function handleUpdateStartYear(_, dateString: string) {
     if (dateString) {
-      dispatch(updateStartYear(dateString));
+      dispatch(updateStartYear(parseInt(dateString, 10)));
     }
   }
 

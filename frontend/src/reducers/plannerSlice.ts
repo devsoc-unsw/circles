@@ -1,7 +1,9 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 import { CourseStates } from "types/courses";
-import { Mark, PlannerCourse, PlannerYear, Term } from "types/planner";
+import {
+  Mark, PlannerCourse, PlannerYear, Term,
+} from "types/planner";
 import { getTermsList } from "pages/TermPlanner/utils";
 
 // set up hidden object
@@ -221,9 +223,9 @@ const plannerSlice = createSlice({
           terms.splice(instanceNum, 1);
 
           terms.forEach((termRow) => {
-            const { term: currentTerm, rowOffset } = termRow;
-            const year = Number(destTerm.slice(0, 4)) + rowOffset;
-            const termId = `${year}${currentTerm}`;
+            const { term, rowOffset } = termRow;
+            const year = parseInt(destTerm.slice(0, 4), 10) + rowOffset;
+            const termId = `${year}${term}`;
             newPlannedFor.push(termId);
           });
         }
@@ -269,7 +271,7 @@ const plannerSlice = createSlice({
     removeCourses: (state, action: PayloadAction<string[]>) => {
       const courses = action.payload;
       courses.forEach((course) => {
-        plannerSlice.caseReducers.removeCourse(state, { payload: course, type: "" });
+        plannerSlice.caseReducers.removeCourse(state, { payload: course });
       });
     },
     removeAllCourses: (state) => {
@@ -313,7 +315,7 @@ const plannerSlice = createSlice({
     unscheduleAll: (state) => {
       Object.entries(state.courses).forEach(([code, desc]) => {
         if (desc.plannedFor !== null) {
-          plannerSlice.caseReducers.unschedule(state, { payload: { destIndex: null, code }, type: "" });
+          plannerSlice.caseReducers.unschedule(state, { payload: { destIndex: null, code } });
         }
       });
     },
