@@ -3,6 +3,7 @@ import { DragDropContext, OnDragEndResponder, OnDragStartResponder } from "react
 import { useDispatch, useSelector } from "react-redux";
 import { Badge, notification } from "antd";
 import axios from "axios";
+import { Term } from "types/planner";
 import prepareCoursesForValidationPayload from "utils/prepareCoursesForValidationPayload";
 import PageTemplate from "components/PageTemplate";
 import { RootState } from "config/store";
@@ -16,7 +17,6 @@ import S from "./styles";
 import TermBox from "./TermBox";
 import UnplannedColumn from "./UnplannedColumn";
 import {
-  checkIsMultiterm,
   checkMultitermInBounds,
   isPlannerEmpty,
 } from "./utils";
@@ -101,10 +101,10 @@ const TermPlanner = () => {
 
     if (destination.droppableId !== "unplanned") {
       // Check if multiterm course extends below bottom row of term planner
-      if (checkIsMultiterm(draggableId, planner.courses) && !checkMultitermInBounds({
-        destRow: destination.droppableId.match(/[0-9]{4}/)[0] - planner.startYear,
-        destTerm: destination.droppableId.match(/T[0-3]/)[0],
-        srcTerm: source.droppableId,
+      if (planner.courses[draggableId].isMultiterm && !checkMultitermInBounds({
+        destRow: Number(destination.droppableId.match(/[0-9]{4}/)[0]) - planner.startYear,
+        destTerm: destination.droppableId.match(/T[0-3]/)[0] as Term,
+        srcTerm: source.droppableId as Term,
         course: planner.courses[draggableId],
         isSummerTerm: planner.isSummerEnabled,
         numYears: planner.numYears,
@@ -144,8 +144,8 @@ const TermPlanner = () => {
       return;
     }
 
-    const destYear = destination.droppableId.match(/[0-9]{4}/)[0];
-    const destTerm = destination.droppableId.match(/T[0-3]/)[0];
+    const destYear = Number(destination.droppableId.match(/[0-9]{4}/)[0]);
+    const destTerm = destination.droppableId.match(/T[0-3]/)[0] as Term;
     const destRow = destYear - planner.startYear;
 
     if (source.droppableId === "unplanned") {
@@ -155,8 +155,8 @@ const TermPlanner = () => {
       }));
     } else {
       // === move between terms ===
-      const srcYear = source.droppableId.match(/[0-9]{4}/)[0];
-      const srcTerm = source.droppableId.match(/T[0-3]/)[0];
+      const srcYear = Number(source.droppableId.match(/[0-9]{4}/)[0]);
+      const srcTerm = source.droppableId.match(/T[0-3]/)[0] as Term;
       const srcRow = srcYear - planner.startYear;
       const srcIndex = source.index;
       dispatch(setPlannedCourseToTerm({
@@ -192,12 +192,12 @@ const TermPlanner = () => {
               <GridItem>Term 2</GridItem>
               <GridItem>Term 3</GridItem>
               {planner.years.map((year, index) => {
-                const iYear = parseInt(planner.startYear, 10) + parseInt(index, 10);
+                const iYear = planner.startYear + index;
                 let yearUOC = 0;
-                Object.keys(year).forEach((i) => {
-                  Object.keys(planner.courses).forEach((j) => {
-                    if (year[i].includes(j)) {
-                      yearUOC += planner.courses[j].UOC;
+                Object.keys(year).forEach((termKey: Term) => {
+                  Object.keys(planner.courses).forEach((courseCode) => {
+                    if (year[termKey].includes(courseCode)) {
+                      yearUOC += planner.courses[courseCode].UOC;
                     }
                   });
                 });
@@ -220,7 +220,7 @@ const TermPlanner = () => {
                         count={`${yearUOC} UOC`}
                       />
                     </S.YearGridBox>
-                    {Object.keys(year).map((term) => {
+                    {Object.keys(year).map((term: Term) => {
                       const key = iYear + term;
                       if (!planner.isSummerEnabled && term === "T0") return null;
                       return (

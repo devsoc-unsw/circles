@@ -1,4 +1,4 @@
-import { Term } from "types/planner";
+import { PlannerCourse, Term } from "types/planner";
 
 const MIN_COMPLETED_COURSE_UOC = 6;
 
@@ -96,7 +96,16 @@ const getCurrentTermId = (originalTermId, term, yearOffset) => {
 };
 
 // Checks whether multiterm course will extend below bottom row of term planner
-const checkMultitermInBounds = (payload) => {
+type MultitermInBoundsPayload = {
+  srcTerm: Term | "unplanned"
+  destTerm: Term
+  destRow: number
+  course: PlannerCourse
+  isSummerTerm: boolean
+  numYears: number
+};
+
+const checkMultitermInBounds = (payload: MultitermInBoundsPayload) => {
   const {
     destTerm, course, isSummerTerm, destRow, numYears, srcTerm,
   } = payload;
@@ -116,11 +125,7 @@ const checkMultitermInBounds = (payload) => {
   return (maxRowOffset < numYears - destRow) && (minRowOffset + destRow >= 0);
 };
 
-// Checks whether a course is a multiterm course
-const checkIsMultiterm = (course, courses) => courses[course].isMultiterm;
-
 export {
-  checkIsMultiterm,
   checkMultitermInBounds,
   getCurrentTermId,
   getTermsList,
