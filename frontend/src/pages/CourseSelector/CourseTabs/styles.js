@@ -11,16 +11,15 @@ const CourseTabsWrapper = styled.div`
 `;
 
 const ShowAllCourses = styled.div`
+  position: absolute;
+  left: 20px;
   display: flex;
   align-items: center;
-  postion: absolute;
-  left: 20px;
-  width: calc(18vw - 2px); // Added calc(18vw - 2px) so the width of the toggle switch changes when the viewport is changed.
+  width: calc(14vw - 2px);
 `;
 
 const TextShowCourses = styled.div`
   margin: 5px;
-  padding-bottom: 2px;
 `;
 
 const CourseTabsSection = styled.div`

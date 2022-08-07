@@ -7,7 +7,7 @@ export const GridItem = styled.div`
 `;
 
 export const Droppable = css`
-  background-color: #e8fef2;
+  background-color: ${({ theme }) => theme.droppable.backgroundColor};
   border-color: #e8fef2;
 `;
 
