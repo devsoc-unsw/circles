@@ -33,3 +33,8 @@ export type SearchCourse = Record<string, string>;
 export type UnselectCourses = {
   courses: string[]
 };
+
+export type CoursesUnlockedWhenTaken = {
+  direct_unlock: string[]
+  indirect_unlock: string[]
+};

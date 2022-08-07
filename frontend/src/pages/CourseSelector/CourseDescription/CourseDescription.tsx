@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Typography } from 'antd';
 import { motion } from 'framer-motion';
+import { CoursesUnlockedWhenTaken } from 'types/api';
 import { CourseTimetable, EnrolmentCapacityData } from 'types/courseCapacity';
-import { CourseUnlocks } from 'types/courses';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import infographic from 'assets/infographicFontIndependent.svg';
 import Collapsible from 'components/Collapsible';
@@ -42,7 +42,7 @@ const CourseDescription = () => {
   const { degree, planner } = useSelector((state: RootState) => state);
 
   const [pageLoaded, setPageLoaded] = useState(false);
-  const [coursesPathTo, setCoursesPathTo] = useState<CourseUnlocks | null>(null);
+  const [coursesPathTo, setCoursesPathTo] = useState<CoursesUnlockedWhenTaken | null>(null);
   const [coursesPathFrom, setCoursesPathFrom] = useState([]);
   const [courseCapacity, setCourseCapacity] = useState<EnrolmentCapacityData | null>(null);
 
