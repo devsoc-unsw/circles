@@ -61,7 +61,7 @@ const TermPlanner = () => {
   }
   const validateTermPlanner = async () => {
     try {
-      const { data }: { data: ValidateTermPlanner } = await axios.post(
+      const { data } = await axios.post<ValidateTermPlanner>(
         '/planner/validateTermPlanner/',
         JSON.stringify(prepareCoursesForValidationPayload(planner, degree, showWarnings)),
       );

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Select, Spin } from 'antd';
 import axios from 'axios';
+import { SearchCourse } from 'types/api';
 import { useDebounce } from 'use-debounce';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import { RootState } from 'config/store';
@@ -21,7 +22,7 @@ const CourseSearchBar = () => {
 
   const searchCourse = async (query: string) => {
     try {
-      const res = await axios.post(
+      const res = await axios.post<SearchCourse>(
         `/courses/searchCourse/${query}`,
         JSON.stringify(prepareUserPayload(degree, planner)),
       );

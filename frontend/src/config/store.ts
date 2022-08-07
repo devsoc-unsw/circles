@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
+import type { MigrationManifest } from 'redux-persist';
 import {
   createMigrate,
   persistReducer,
@@ -38,7 +39,7 @@ const rootReducer = combineReducers({
  */
 
 // migration schema used to translate structure - return undefined to reset initialState
-const migrations = {
+const migrations: MigrationManifest = {
   0: () => undefined,
   1: () => undefined,
   2: (oldState) => {

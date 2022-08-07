@@ -5,6 +5,7 @@ import {
   Input, Menu, Typography,
 } from 'antd';
 import axios from 'axios';
+import { Programs } from 'types/api';
 import { RootState } from 'config/store';
 import { resetDegree, setProgram } from 'reducers/degreeSlice';
 import springProps from '../common/spring';
@@ -26,7 +27,7 @@ const DegreeStep = ({ incrementStep }: Props) => {
   const programCode = useSelector((store: RootState) => store.degree.programCode);
 
   const fetchAllDegrees = async () => {
-    const res = await axios.get('/programs/getPrograms');
+    const res = await axios.get<Programs>('/programs/getPrograms');
     setAllDegrees(res.data.programs);
   };
 
@@ -34,15 +35,15 @@ const DegreeStep = ({ incrementStep }: Props) => {
     fetchAllDegrees();
   }, []);
 
-  const handleDegreeChange = (e) => {
+  const handleDegreeChange = ({ key }: { key: string }) => {
     dispatch(resetDegree());
     dispatch(
-      setProgram({ programCode: e.key.substring(0, 4), programName: e.key.substring(5) }),
+      setProgram({ programCode: key.substring(0, 4), programName: key.substring(5) }),
     );
-    setInput(e.key);
+    setInput(key);
     setOptions([]);
 
-    if (e.key) incrementStep(Steps.SPECS);
+    if (key) incrementStep(Steps.SPECS);
   };
 
   const searchDegree = (newInput: string) => {

@@ -49,7 +49,7 @@ const CourseTabs = () => {
       </S.ShowAllCourses>
       <DragDropContext onDragEnd={handleOnDragEnd} onDragStart={handleOnDragStart}>
         <Droppable droppableId="droppable" direction="horizontal">
-          {(droppableProvided, _) => (
+          {(droppableProvided) => (
             <S.CourseTabsSection
               ref={droppableProvided.innerRef}
               {...droppableProvided.droppableProps}

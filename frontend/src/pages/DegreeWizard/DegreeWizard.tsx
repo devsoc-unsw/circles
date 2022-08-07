@@ -5,6 +5,7 @@ import {
   notification, Typography,
 } from 'antd';
 import axios from 'axios';
+import { SpecialisationTypes } from 'types/api';
 import PageTemplate from 'components/PageTemplate';
 import { RootState } from 'config/store';
 import { resetCourses } from 'reducers/coursesSlice';
@@ -51,7 +52,7 @@ const DegreeWizard = () => {
 
   useEffect(() => {
     const getSteps = async () => {
-      const res = await axios.get(`/specialisations/getSpecialisationTypes/${degree.programCode}`);
+      const res = await axios.get<SpecialisationTypes>(`/specialisations/getSpecialisationTypes/${degree.programCode}`);
       setSpecs(res.data.types);
     };
     if (degree.programCode !== '') getSteps();

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { animated, useSpring } from '@react-spring/web';
 import { Button, Menu, Typography } from 'antd';
 import axios from 'axios';
+import { Specialisations } from 'types/api';
 import { RootState } from 'config/store';
 import { addSpecialisation, removeSpecialisation } from 'reducers/degreeSlice';
 import springProps from '../common/spring';
@@ -25,7 +26,7 @@ const SpecialisationStep = ({ incrementStep, currStep, type }: Props) => {
   const [options, setOptions] = useState({ someProgramName: { specs: { major: 'major data' }, notes: 'a note' } });
 
   const fetchAllSpecialisations = useCallback(async () => {
-    const res = await axios.get(`/specialisations/getSpecialisations/${programCode}/${type}`);
+    const res = await axios.get<Specialisations>(`/specialisations/getSpecialisations/${programCode}/${type}`);
     setOptions(res.data.spec);
   }, [programCode, type]);
 

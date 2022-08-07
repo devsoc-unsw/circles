@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { notification } from 'antd';
 import axios from 'axios';
+import { Structure } from 'types/api';
 import { ProgramStructure } from 'types/structure';
 import PageTemplate from 'components/PageTemplate';
 import { RootState } from 'config/store';
@@ -39,7 +40,7 @@ const CourseSelector = () => {
     // get structure of degree
     const fetchStructure = async () => {
       try {
-        const res = await axios.get(`/programs/getStructure/${programCode}/${specs.join('+')}`);
+        const res = await axios.get<Structure>(`/programs/getStructure/${programCode}/${specs.join('+')}`);
         setStructure(res.data.structure);
       } catch (err) {
         // eslint-disable-next-line no-console

@@ -36,18 +36,14 @@ const DraggableCourse = ({
     isLegacy, isAccurate, termsOffered, handbookNote, supressed, mark,
   } = courses[code];
   const warningMessage = courses[code].warnings;
-  const isOffered = plannedFor ? termsOffered.includes(plannedFor.match(/T[0-3]/)[0]) : true;
+  const isOffered = plannedFor && /T[0-3]/.test(plannedFor) ? termsOffered.includes(plannedFor.match(/T[0-3]/)[0]) : true;
   const BEwarnings = handbookNote !== '' || !!warningMessage.length;
 
-  const { show } = useContextMenu({
+  const contextMenu = useContextMenu({
     id: `${code}-context`,
   });
 
   const isDragDisabled = !!plannedFor && !!completedTerms[plannedFor];
-
-  const displayContextMenu = (e) => {
-    if (!isDragDisabled) show(e);
-  };
 
   const isSmall = useMediaQuery('(max-width: 1400px)');
   const shouldHaveWarning = !supressed && (
@@ -76,7 +72,9 @@ const DraggableCourse = ({
             data-tip
             data-for={code}
             id={code}
-            onContextMenu={displayContextMenu}
+            onContextMenu={(e) => {
+              if (!isDragDisabled) contextMenu.show(e);
+            }}
           >
             {!isDragDisabled && shouldHaveWarning
               && (errorIsInformational ? (

@@ -4,12 +4,14 @@ import {
   BorderlessTableOutlined,
   EyeFilled,
   EyeInvisibleOutlined,
-  // TableOutlined,
+  TableOutlined,
 } from '@ant-design/icons';
 import { Button, Divider, notification } from 'antd';
 import axios from 'axios';
+import { Structure } from 'types/api';
 import { ProgramStructure } from 'types/structure';
 import PageTemplate from 'components/PageTemplate';
+import { inDev } from 'config/constants';
 import { RootState } from 'config/store';
 import Dashboard from './Dashboard';
 import GridView from './GridView/GridView';
@@ -43,14 +45,17 @@ const ProgressionCheckerCourses = ({ structure, isLoading }: Props) => {
             >
               {view === views.GRID ? 'Display Concise Mode' : 'Display Full Mode'}
             </Button>
-            {/* TODO: Disable TableView for now */}
-            {/* <Button
-              type="primary"
-              icon={<TableOutlined />}
-              onClick={() => setView(views.TABLE)}
-            >
-              Display Table View
-            </Button> */}
+            {
+              inDev && (
+                <Button
+                  type="primary"
+                  icon={<TableOutlined />}
+                  onClick={() => setView(views.TABLE)}
+                >
+                  Display Table View
+                </Button>
+              )
+            }
           </S.ViewSwitcherWrapper>
           <GridView isLoading={isLoading} structure={structure} concise={view === views.CONCISE} />
         </>
@@ -86,7 +91,7 @@ const ProgressionChecker = () => {
     // get structure of degree
     const fetchStructure = async () => {
       try {
-        const res = await axios.get(`/programs/getStructure/${programCode}/${specs.join('+')}`);
+        const res = await axios.get<Structure>(`/programs/getStructure/${programCode}/${specs.join('+')}`);
         setStructure(res.data.structure);
         setUoc(res.data.uoc);
       } catch (err) {
