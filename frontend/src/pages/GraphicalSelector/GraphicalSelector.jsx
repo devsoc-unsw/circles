@@ -149,6 +149,7 @@ const GraphicalSelector = () => {
       .flatMap((courseObject) => courseObject.courses
         .filter((c) => courseList.includes(c))
         .map((c) => ({ source: c, target: courseObject.original })));
+    console.log("edges", edges);
     if (courseList.length !== 0 && edges.length !== 0) initialiseGraph(courseList, edges);
     setLoading(false);
   };
