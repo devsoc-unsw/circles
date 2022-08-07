@@ -296,11 +296,14 @@ def graph_test(
     proto_edges = [map_suppressed_errors(
         get_path_from, failed_courses, course
     ) for course in courses]
-    edges = proto_edges_to_edges(proto_edges)
+    edges = prune_edges(
+            proto_edges_to_edges(proto_edges),
+            courses
+        )
 
     return {
         "courses": courses,
-        "edges": edges + proto_edges,
+        "edges": edges,
         "err_edges": failed_courses,
     }
 
@@ -333,7 +336,7 @@ def proto_edges_to_edges(proto_edges: Dict[str, str]):
 
 def prune_edges(edges: List[Dict[str, str]], courses: List[str]):
     """
-    Remove edges that are not in the list of courses.
+    Remove edges that are not in the list of courses provided.
     """
     return [edge for edge in edges if edge["src"] in courses and edge["dst"] in courses]
 
