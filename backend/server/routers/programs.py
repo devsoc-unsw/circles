@@ -320,6 +320,8 @@ def proto_edges_to_edges(proto_edges: Dict[str, str]):
     for proto_edge in proto_edges:
         # Incoming: { original: str,  courses: List[str]}
         # Outcome:  { "src": str, "dst": str }
+        if not proto_edge or not proto_edge["courses"]:
+            continue
         for course in proto_edge["courses"]:
             edges.append({
                     "src": course,
