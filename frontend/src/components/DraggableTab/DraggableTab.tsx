@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Draggable } from 'react-beautiful-dnd';
+import { Draggable, DraggingStyle, NotDraggingStyle } from 'react-beautiful-dnd';
 import { useDispatch, useSelector } from 'react-redux';
 import { CloseOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
@@ -17,14 +17,14 @@ type Props = {
 const DraggableTab = ({ tabName, index }: Props) => {
   const [scrolledTo, setScrolledTo] = useState(false);
   const dispatch = useDispatch();
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement | null>(null);
   const tabInView = useIntersectionObserver(ref);
   const { active } = useSelector((state: RootState) => state.courseTabs);
   const theme = useTheme();
 
-  const getDraggableStyle = (style) => {
+  const getDraggableStyle = (style: DraggingStyle | NotDraggingStyle | undefined) => {
     // lock x axis when dragging
-    if (style.transform) {
+    if (style?.transform) {
       return {
         ...style,
         transform: `${style.transform.split(',').shift()}, 0px)`,
@@ -33,7 +33,7 @@ const DraggableTab = ({ tabName, index }: Props) => {
     return style;
   };
 
-  const handleMouseUp = (e) => {
+  const handleMouseUp = (e: React.MouseEvent<HTMLElement>) => {
     const MIDDLE_CLICK_BTN = 1;
     if (e.button === MIDDLE_CLICK_BTN) {
       dispatch(removeTab(index));
@@ -41,7 +41,7 @@ const DraggableTab = ({ tabName, index }: Props) => {
   };
 
   useEffect(() => {
-    if (active === index && !scrolledTo) {
+    if (active === index && !scrolledTo && ref.current) {
       ref.current.scrollIntoView({ behavior: 'smooth' });
       setScrolledTo(true);
     }
@@ -50,7 +50,7 @@ const DraggableTab = ({ tabName, index }: Props) => {
 
   return (
     <Draggable key={tabName} draggableId={tabName} index={index}>
-      {(draggableProvided, _) => (
+      {(draggableProvided) => (
         <S.DraggableTabWrapper
           role="tab"
           active={index === active}
