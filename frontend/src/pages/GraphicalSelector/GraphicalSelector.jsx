@@ -106,9 +106,9 @@ const GraphicalSelector = () => {
   };
 
   const setupGraph = async () => {
-    // const { courses: courseList } = (
-    //   await axios.get(`/programs/getStructureCourseList/${programCode}/${specs.join("+")}`)
-    // ).data;
+    const { courses: courseList } = (
+      await axios.get(`/programs/getStructureCourseList/${programCode}/${specs.join("+")}`)
+    ).data;
 
     // TODO: Move this to the backend too
     // should be a universal /programs/getGraphEdges/{programCode}/{specs}
@@ -130,16 +130,20 @@ const GraphicalSelector = () => {
         */
     // console.log(justData);  
 
-    console.log("I ALIVEs");
-    const {data: testGraph} = await axios.get(
-      `/programs/graphtest/${programCode}/${specs.join("+")}`);
-    console.log(testGraph);
+    // const {data: testGraph} = await axios.get(
+    //   `/programs/graphtest/${programCode}/${specs.join("+")}`);
+    // console.log(testGraph);
 
-    console.log("AHHHH");
+    // console.log("AHHHH");
     const res = await Promise.all(courseList.map((c) => axios.get(`/courses/getPathFrom/${c}`).catch((e) => e)));
-    console.log(res);
+    // console.log(res);
     // filter any errors from res
     const children = res.filter((value) => value?.data?.courses).map((value) => value.data);
+    /**
+      * [x] course list
+      * [x] edges
+      * [ ] constructr edges
+      */
     const edges = children
       .flatMap((courseObject) => courseObject.courses
         .filter((c) => courseList.includes(c))

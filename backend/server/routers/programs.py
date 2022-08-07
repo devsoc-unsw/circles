@@ -300,7 +300,8 @@ def graph_test(
     print("AA\n"*10, proto_edges[0])
     return {
         "courses": courses,
-        "edges": edges + proto_edges
+        "edges": edges + proto_edges,
+        "err_edges": failed_courses,
     }
 
 def proto_edges_to_edges(proto_edges: Dict[str, str]):
