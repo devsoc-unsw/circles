@@ -38,3 +38,12 @@ export type CoursesUnlockedWhenTaken = {
   direct_unlock: string[]
   indirect_unlock: string[]
 };
+
+export type StructureCourseList = {
+  courses: string[]
+};
+
+export type CoursePathFrom = {
+  original: string
+  courses: string[]
+};

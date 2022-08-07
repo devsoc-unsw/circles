@@ -1,8 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Algorithm, Graph } from '@antv/g6';
 import { Button } from 'antd';
 import axios from 'axios';
+import { CoursePathFrom, StructureCourseList } from 'types/api';
 import { CourseDetail } from 'types/courses';
 import PageTemplate from 'components/PageTemplate';
 import Spinner from 'components/Spinner';
@@ -63,9 +67,10 @@ const GraphicalSelector = () => {
     graphInstance.on('node:click', async (ev) => {
       // load up course information
       const node = ev.item;
-      const { _cfg: { id } } = node;
+      if (!node) return;
+      const { _cfg: { id } } = node._cfg;
       const [courseData, err] = await axiosRequest('get', `/courses/getCourse/${id}`);
-      if (!err) setCourse(courseData);
+      if (!err) setCourse(courseData as CourseDetail);
 
       // hides/ unhides dependent nodes
       const { breadthFirstSearch } = Algorithm;
@@ -108,7 +113,7 @@ const GraphicalSelector = () => {
 
   const setupGraph = async () => {
     const { courses: courseList }: { courses: string[] } = (
-      await axios.get(`/programs/getStructureCourseList/${programCode}/${specs.join('+')}`)
+      await axios.get<StructureCourseList>(`/programs/getStructureCourseList/${programCode}/${specs.join('+')}`)
     ).data;
 
     // TODO: Move this to the backend too
@@ -121,10 +126,10 @@ const GraphicalSelector = () => {
     //       .flatMap((spec) => Object.keys(spec.courses)))
     //     .filter((v, i, a) => a.indexOf(v) === i) // TODO: hack to make courseList unique
     // );
-    const res = await Promise.all(courseList.map((c) => axios.get(`/courses/getPathFrom/${c}`).catch((e) => e)));
+    const res = await Promise.all(courseList.map((c) => axios.get<CoursePathFrom>(`/courses/getPathFrom/${c}`).catch()));
 
     // filter any errors from res
-    const children = res.filter((value) => value?.data?.courses).map((value) => value.data);
+    const children = res.filter((value) => value.data.courses).map((value) => value.data);
     const edges = children
       .flatMap((courseObject) => courseObject.courses
         .filter((c) => courseList.includes(c))
@@ -138,17 +143,21 @@ const GraphicalSelector = () => {
   }, []);
 
   const handleShowGraph = () => {
-    const nodes = graph.getNodes();
-    const edges = graph.getEdges();
-    nodes.forEach((n) => n.show());
-    edges.forEach((e) => e.show());
+    if (graph) {
+      const nodes = graph.getNodes();
+      const edges = graph.getEdges();
+      nodes.forEach((n) => n.show());
+      edges.forEach((e) => e.show());
+    }
   };
 
   const handleHideGraph = () => {
-    const nodes = graph.getNodes();
-    const edges = graph.getEdges();
-    nodes.forEach((n) => n.hide());
-    edges.forEach((e) => e.hide());
+    if (graph) {
+      const nodes = graph.getNodes();
+      const edges = graph.getEdges();
+      nodes.forEach((n) => n.hide());
+      edges.forEach((e) => e.hide());
+    }
   };
 
   return (
