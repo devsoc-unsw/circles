@@ -12,7 +12,7 @@ import { Structure } from 'types/api';
 import { ProgramStructure } from 'types/structure';
 import PageTemplate from 'components/PageTemplate';
 import { inDev } from 'config/constants';
-import { RootState } from 'config/store';
+import type { RootState } from 'config/store';
 import Dashboard from './Dashboard';
 import GridView from './GridView/GridView';
 import S from './styles';

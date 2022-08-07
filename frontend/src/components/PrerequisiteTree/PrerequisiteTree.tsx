@@ -11,7 +11,7 @@ import axios from 'axios';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import Spinner from 'components/Spinner';
 import axiosRequest from 'config/axios';
-import { RootState } from 'config/store';
+import type { RootState } from 'config/store';
 import { addTab } from 'reducers/courseTabsSlice';
 import GRAPH_STYLE from './config';
 import TREE_CONSTANTS from './constants';

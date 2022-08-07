@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { EyeInvisibleFilled } from '@ant-design/icons';
 import { notification, Tooltip } from 'antd';
-import { RootState } from 'config/store';
+import type { RootState } from 'config/store';
 import { hideYear } from 'reducers/plannerSlice';
 
 type Props = {

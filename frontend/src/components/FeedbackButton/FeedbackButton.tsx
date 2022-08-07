@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { BugOutlined } from '@ant-design/icons';
 import { Button, Tooltip } from 'antd';
 import { FEEDBACK_LINK } from 'config/constants';
-import { RootState } from 'config/store';
+import type { RootState } from 'config/store';
 import useMediaQuery from 'hooks/useMediaQuery';
 import S from './styles';
 

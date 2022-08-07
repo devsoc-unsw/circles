@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import circlesLogo from 'assets/circlesWithBg.svg';
-import { RootState } from 'config/store';
+import type { RootState } from 'config/store';
 import S from './styles';
 
 type Props = {

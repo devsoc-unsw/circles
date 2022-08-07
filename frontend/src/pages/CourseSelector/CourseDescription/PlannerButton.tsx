@@ -5,7 +5,7 @@ import { Button } from 'antd';
 import { PlannerCourse } from 'types/planner';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import axiosRequest from 'config/axios';
-import { RootState } from 'config/store';
+import type { RootState } from 'config/store';
 import { addToUnplanned, removeCourses } from 'reducers/plannerSlice';
 
 const PlannerButton = () => {

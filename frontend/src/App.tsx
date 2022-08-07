@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import ErrorBoundary from 'components/ErrorBoundary';
-import { RootState } from 'config/store';
+import type { RootState } from 'config/store';
 import { darkTheme, GlobalStyles, lightTheme } from 'config/theme';
 import PageLoading from './components/PageLoading';
 import CourseSelector from './pages/CourseSelector';

@@ -6,7 +6,7 @@ import {
 } from '@ant-design/icons';
 import Tippy from '@tippyjs/react';
 import { Popconfirm, Switch, Tooltip } from 'antd';
-import { RootState } from 'config/store';
+import type { RootState } from 'config/store';
 import { unhideAllYears, unscheduleAll } from 'reducers/plannerSlice';
 import { toggleShowMarks, toggleShowWarnings } from 'reducers/settingsSlice';
 import ExportPlannerMenu from '../ExportPlannerMenu';

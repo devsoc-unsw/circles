@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { DeleteOutlined } from '@ant-design/icons';
 import { Popconfirm, Switch, Tooltip } from 'antd';
 import DraggableTab from 'components/DraggableTab';
-import { RootState } from 'config/store';
+import type { RootState } from 'config/store';
 import { reorderTabs, resetTabs, setActiveTab } from 'reducers/courseTabsSlice';
 import { toggleLockedCourses } from 'reducers/settingsSlice';
 import S from './styles';

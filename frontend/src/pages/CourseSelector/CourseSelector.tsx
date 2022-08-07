@@ -5,7 +5,7 @@ import axios from 'axios';
 import { Structure } from 'types/api';
 import { ProgramStructure } from 'types/structure';
 import PageTemplate from 'components/PageTemplate';
-import { RootState } from 'config/store';
+import type { RootState } from 'config/store';
 import CourseBanner from './CourseBanner';
 import CourseDescription from './CourseDescription';
 import CourseSidebar from './CourseSidebar';

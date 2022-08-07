@@ -7,7 +7,7 @@ import {
   Button, Tooltip, Typography,
 } from 'antd';
 import PlannerCartCourseCard from 'components/PlannerCartCourseCard';
-import { RootState } from 'config/store';
+import type { RootState } from 'config/store';
 import { removeAllCourses } from 'reducers/plannerSlice';
 import S from './styles';
 

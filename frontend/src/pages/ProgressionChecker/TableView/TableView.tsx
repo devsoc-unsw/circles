@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Skeleton, Table, Typography } from 'antd';
 import { ProgramStructure } from 'types/structure';
 import getFormattedPlannerCourses, { FormattedPlannerCourse } from 'utils/getFormattedPlannerCourses';
-import { RootState } from 'config/store';
+import type { RootState } from 'config/store';
 import { TableStructure } from './types';
 
 type Props = {

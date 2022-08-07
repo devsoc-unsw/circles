@@ -7,7 +7,7 @@ import {
 import axios from 'axios';
 import { SpecialisationTypes } from 'types/api';
 import PageTemplate from 'components/PageTemplate';
-import { RootState } from 'config/store';
+import type { RootState } from 'config/store';
 import { resetCourses } from 'reducers/coursesSlice';
 import { resetTabs } from 'reducers/courseTabsSlice';
 import { resetDegree } from 'reducers/degreeSlice';

@@ -4,7 +4,7 @@ import { animated, useSpring } from '@react-spring/web';
 import { Button, Menu, Typography } from 'antd';
 import axios from 'axios';
 import { Specialisations } from 'types/api';
-import { RootState } from 'config/store';
+import type { RootState } from 'config/store';
 import { addSpecialisation, removeSpecialisation } from 'reducers/degreeSlice';
 import springProps from '../common/spring';
 import Steps from '../common/steps';

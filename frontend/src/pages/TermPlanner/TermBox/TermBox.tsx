@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LockFilled, UnlockFilled } from '@ant-design/icons';
 import { Badge } from 'antd';
 import { useTheme } from 'styled-components';
-import { RootState } from 'config/store';
+import type { RootState } from 'config/store';
 import useMediaQuery from 'hooks/useMediaQuery';
 import { toggleTermComplete } from 'reducers/plannerSlice';
 import DraggableCourse from '../DraggableCourse';

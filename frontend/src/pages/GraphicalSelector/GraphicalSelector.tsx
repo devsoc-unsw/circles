@@ -14,7 +14,7 @@ import { CourseDetail } from 'types/courses';
 import PageTemplate from 'components/PageTemplate';
 import Spinner from 'components/Spinner';
 import axiosRequest from 'config/axios';
-import { RootState } from 'config/store';
+import type { RootState } from 'config/store';
 import GRAPH_STYLE from './config';
 import S from './styles';
 import { CourseEdge } from './types';

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import {
   Button, notification,
 } from 'antd';
-import { RootState } from 'config/store';
+import type { RootState } from 'config/store';
 import { setIsComplete } from 'reducers/degreeSlice';
 import CS from '../common/styles';
 import S from './styles';

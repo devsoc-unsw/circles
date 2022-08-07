@@ -4,7 +4,7 @@ import { Skeleton, Typography } from 'antd';
 import { ProgramStructure } from 'types/structure';
 import getFormattedPlannerCourses, { FormattedPlannerCourse } from 'utils/getFormattedPlannerCourses';
 import Collapsible from 'components/Collapsible';
-import { RootState } from 'config/store';
+import type { RootState } from 'config/store';
 import GridViewConciseSubgroup from './GridViewConciseSubgroup';
 import GridViewSubgroup from './GridViewSubgroup';
 import S from './styles';

@@ -5,7 +5,7 @@ import axios from 'axios';
 import { CourseValidation } from 'types/courses';
 import { ProgramStructure } from 'types/structure';
 import prepareUserPayload from 'utils/prepareUserPayload';
-import { RootState } from 'config/store';
+import type { RootState } from 'config/store';
 import { setCourses } from 'reducers/coursesSlice';
 import { addTab } from 'reducers/courseTabsSlice';
 import CourseTitle from './CourseTitle';

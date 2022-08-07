@@ -7,7 +7,7 @@ import { InfoCircleOutlined, WarningOutlined } from '@ant-design/icons';
 import { Typography } from 'antd';
 import { useTheme } from 'styled-components';
 import Marks from 'components/Marks';
-import { RootState } from 'config/store';
+import type { RootState } from 'config/store';
 import useMediaQuery from 'hooks/useMediaQuery';
 import ContextMenu from '../ContextMenu';
 import S from './styles';

@@ -4,7 +4,7 @@ import { Link } from 'react-scroll';
 import ReactTooltip from 'react-tooltip';
 import { purple } from '@ant-design/colors';
 import { Progress, Typography } from 'antd';
-import { RootState } from 'config/store';
+import type { RootState } from 'config/store';
 import S from './styles';
 
 type Props = {

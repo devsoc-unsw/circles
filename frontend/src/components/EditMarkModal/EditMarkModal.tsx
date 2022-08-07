@@ -5,7 +5,7 @@ import {
   Button, Input, message,
   Modal,
 } from 'antd';
-import { RootState } from 'config/store';
+import type { RootState } from 'config/store';
 import { updateCourseMark } from 'reducers/plannerSlice';
 import S from './styles';
 

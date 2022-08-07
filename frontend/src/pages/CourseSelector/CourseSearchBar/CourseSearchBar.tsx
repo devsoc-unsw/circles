@@ -5,7 +5,7 @@ import axios from 'axios';
 import { SearchCourse } from 'types/api';
 import { useDebounce } from 'use-debounce';
 import prepareUserPayload from 'utils/prepareUserPayload';
-import { RootState } from 'config/store';
+import type { RootState } from 'config/store';
 import { addTab } from 'reducers/courseTabsSlice';
 
 const CourseSearchBar = () => {

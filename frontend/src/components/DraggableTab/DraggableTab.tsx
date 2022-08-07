@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CloseOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import { useTheme } from 'styled-components';
-import { RootState } from 'config/store';
+import type { RootState } from 'config/store';
 import useIntersectionObserver from 'hooks/useIntersectionObserver';
 import { removeTab, setActiveTab } from 'reducers/courseTabsSlice';
 import S from './styles';

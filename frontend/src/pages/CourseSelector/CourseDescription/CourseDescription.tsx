@@ -13,7 +13,7 @@ import ProgressBar from 'components/ProgressBar';
 import TermTag from 'components/TermTag';
 import axiosRequest from 'config/axios';
 import { inDev, TERM, TIMETABLE_API_URL } from 'config/constants';
-import { RootState } from 'config/store';
+import type { RootState } from 'config/store';
 import { setCourse } from 'reducers/coursesSlice';
 import LoadingSkeleton from './LoadingSkeleton';
 import PlannerButton from './PlannerButton';

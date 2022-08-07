@@ -6,7 +6,7 @@ import { useSpring } from '@react-spring/web';
 import { Button, Typography } from 'antd';
 import { ProgramStructure } from 'types/structure';
 import LiquidProgressChart from 'components/LiquidProgressChart';
-import { RootState } from 'config/store';
+import type { RootState } from 'config/store';
 import DegreeCard from '../DegreeCard';
 import { StoreUOC } from '../types';
 import SkeletonDashboard from './SkeletonDashboard';

@@ -9,7 +9,7 @@ import {
   purple,
   yellow,
 } from 'config/constants';
-import { RootState } from 'config/store';
+import type { RootState } from 'config/store';
 
 type Props = {
   completedUOC: number

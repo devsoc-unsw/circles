@@ -1,7 +1,7 @@
 import React from 'react';
 import { Droppable } from 'react-beautiful-dnd';
 import { useSelector } from 'react-redux';
-import { RootState } from 'config/store';
+import type { RootState } from 'config/store';
 import useMediaQuery from 'hooks/useMediaQuery';
 import DraggableCourse from '../DraggableCourse';
 import S from './styles';

@@ -6,7 +6,7 @@ import {
 } from 'antd';
 import axios from 'axios';
 import { Programs } from 'types/api';
-import { RootState } from 'config/store';
+import type { RootState } from 'config/store';
 import { resetDegree, setProgram } from 'reducers/degreeSlice';
 import springProps from '../common/spring';
 import Steps from '../common/steps';

@@ -7,7 +7,7 @@ import { Button, Tooltip } from 'antd';
 import { PlannerCourse } from 'types/planner';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import axiosRequest from 'config/axios';
-import { RootState } from 'config/store';
+import type { RootState } from 'config/store';
 import useMediaQuery from 'hooks/useMediaQuery';
 import { addToUnplanned, removeCourses } from 'reducers/plannerSlice';
 import S from './styles';

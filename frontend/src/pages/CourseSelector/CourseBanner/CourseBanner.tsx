@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Typography } from 'antd';
-import { RootState } from 'config/store';
+import type { RootState } from 'config/store';
 import CourseSearchBar from '../CourseSearchBar';
 import S from './styles';
 

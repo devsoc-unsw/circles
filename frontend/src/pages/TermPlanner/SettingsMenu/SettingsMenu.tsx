@@ -4,7 +4,7 @@ import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import { DatePicker, Select, Switch } from 'antd';
 import type { Moment } from 'moment';
 import moment from 'moment';
-import { RootState } from 'config/store';
+import type { RootState } from 'config/store';
 import { toggleSummer, updateDegreeLength, updateStartYear } from 'reducers/plannerSlice';
 import CS from '../common/styles';
 
