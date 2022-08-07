@@ -19,15 +19,22 @@ type Props = {
   type: string
 };
 
+type Specialisation = {
+  [spec: string]: {
+    specs: Record<string, string>
+    notes: string
+  }
+};
+
 const SpecialisationStep = ({ incrementStep, currStep, type }: Props) => {
   const props = useSpring(springProps);
   const dispatch = useDispatch();
   const { programCode, specs } = useSelector((store: RootState) => store.degree);
-  const [options, setOptions] = useState({ someProgramName: { specs: { major: 'major data' }, notes: 'a note' } });
+  const [options, setOptions] = useState<Specialisation>({ someProgramName: { specs: { major: 'major data' }, notes: 'a note' } });
 
   const fetchAllSpecialisations = useCallback(async () => {
     const res = await axios.get<Specialisations>(`/specialisations/getSpecialisations/${programCode}/${type}`);
-    setOptions(res.data.spec);
+    setOptions(res.data.spec as Specialisation);
   }, [programCode, type]);
 
   useEffect(() => {
@@ -63,14 +70,13 @@ const SpecialisationStep = ({ incrementStep, currStep, type }: Props) => {
             <Menu.SubMenu
               key={index}
               title={`${type.replace(/^\w/, (c) => c.toUpperCase())} for ${sub}`}
-              mode="inline"
               style={{
                 border: '1px solid #a86fed',
               }}
             >
               {(options[sub].notes)
                 ? (
-                  <Menu.ItemGroup type="group" title={`Note: ${options[sub].notes}`}>
+                  <Menu.ItemGroup title={`Note: ${options[sub].notes}`}>
                     {Object.keys(options[sub].specs).sort().map((key) => (
                       <Menu.Item key={key}>
                         {key} {options[sub].specs[key]}
