@@ -331,6 +331,11 @@ def proto_edges_to_edges(proto_edges: Dict[str, str]):
         
     return edges
 
+def prune_edges(edges: List[Dict[str, str]], courses: List[str]):
+    """
+    Remove edges that are not in the list of courses.
+    """
+    return [edge for edge in edges if edge["src"] in courses and edge["dst"] in courses]
 
 @router.get("/graph")
 def courses_graph():
