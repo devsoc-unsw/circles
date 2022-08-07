@@ -1,21 +1,31 @@
 /* eslint-disable react/destructuring-assignment */
-import React from 'react';
+import React, { ErrorInfo } from 'react';
 import { Button } from 'antd';
 import { FEEDBACK_LINK } from 'config/constants';
 import S from './styles';
 
-class ErrorBoundary extends React.Component {
-  constructor(props) {
+type Props = {
+  children?: React.ReactNode
+};
+
+type State = {
+  hasError: boolean
+  error: Error | null
+  errorInfo: ErrorInfo | null
+};
+
+class ErrorBoundary extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = { hasError: false, error: null, errorInfo: null };
   }
 
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError(error: Error) {
     // Update state so the next render will show the fallback UI.
     return { hasError: true, error };
   }
 
-  componentDidCatch(error, errorInfo) {
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     // eslint-disable-next-line no-console
     console.log({ error, errorInfo });
     this.setState({ errorInfo });
@@ -26,7 +36,7 @@ class ErrorBoundary extends React.Component {
 
     const handleClick = () => {
       localStorage.clear();
-      window.location = '/degree-wizard';
+      window.location.href = '/degree-wizard';
     };
 
     if (hasError) {

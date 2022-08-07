@@ -82,7 +82,7 @@ const TermPlanner = () => {
   const currYear = new Date().getFullYear();
 
   /* Ref used for exporting planner to image */
-  const plannerPicRef = useRef();
+  const plannerPicRef = useRef<HTMLDivElement>(null);
 
   const handleOnDragStart: OnDragStartResponder = (result) => {
     const course = result.draggableId.slice(0, 8);
