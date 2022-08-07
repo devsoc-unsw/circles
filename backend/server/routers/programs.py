@@ -319,26 +319,31 @@ def proto_edges_to_edges(proto_edges: Dict[str, str]):
     ]
     Effectively, turning an adjacency list into a flat list of edges
     """
-    edges: List = []
-    for proto_edge in proto_edges:
-        # Incoming: { original: str,  courses: List[str]}
-        # Outcome:  { "src": str, "dst": str }
-        if not proto_edge or not proto_edge["courses"]:
-            continue
-        for course in proto_edge["courses"]:
-            edges.append({
-                    "src": course,
-                    "dst": proto_edge["original"],
-                }
-            )
+    # edges: List = []
+    # for proto_edge in proto_edges:
+    #     # Incoming: { original: str,  courses: List[str]}
+    #     # Outcome:  { "src": str, "dst": str }
+    #     if not proto_edge or not proto_edge["courses"]:
+    #         continue
+    #     for course in proto_edge["courses"]:
+    #         edges.append({
+    #                 "source": course,
+    #                 "target": proto_edge["original"],
+    #             }
+    #         )
+    return [
+            { "source": course, "target": proto_edge["original"] }
+            for course in proto_edges
+            for proto_edge in proto_edges
+            if proto_edge and proto_edge["courses"]
+        ]
         
-    return edges
 
 def prune_edges(edges: List[Dict[str, str]], courses: List[str]):
     """
     Remove edges that are not in the list of courses provided.
     """
-    return [edge for edge in edges if edge["src"] in courses and edge["dst"] in courses]
+    return [edge for edge in edges if edge["source"] in courses and edge["target"] in courses]
 
 @router.get("/graph")
 def courses_graph():

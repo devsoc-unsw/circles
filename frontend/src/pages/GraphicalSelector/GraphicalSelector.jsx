@@ -143,7 +143,8 @@ const GraphicalSelector = () => {
     /**
       * [x] course list
       * [x] edges
-      * [ ] constructr edges
+      * [x] constructr edges
+      * [ ] okay but now construct them properly
       */
     const edges = children
       .flatMap((courseObject) => courseObject.courses
