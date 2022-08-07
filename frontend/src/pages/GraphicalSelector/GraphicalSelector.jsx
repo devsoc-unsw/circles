@@ -25,7 +25,6 @@ const GraphicalSelector = () => {
 
   const ref = useRef(null);
 
-  // courses is a list of course codes
   const initialiseGraph = (courses, courseEdges) => {
     const container = ref.current;
     const graphInstance = new G6.Graph({
@@ -37,7 +36,6 @@ const GraphicalSelector = () => {
         default: [
           "drag-canvas",
           "zoom-canvas",
-          // "drag-node",
         ],
       },
       layout: {
@@ -46,7 +44,6 @@ const GraphicalSelector = () => {
         nodeSpacing: 10,
         linkDistance: 500,
       },
-      // animate: true,
       defaultNode: GRAPH_STYLE.defaultNode,
       defaultEdge: GRAPH_STYLE.defaultEdge,
       nodeStateStyles: GRAPH_STYLE.nodeStateStyles,
@@ -113,16 +110,6 @@ const GraphicalSelector = () => {
       await axios.get(`/programs/getStructureCourseList/${programCode}/${specs.join("+")}`)
     ).data;
 
-    // TODO: Move this to the backend too
-    // should be a universal /programs/getGraphEdges/{programCode}/{specs}
-    // const courseList = (
-    //   Object.values(structure)
-    //     .flatMap((specialisation) => Object.values(specialisation)
-    //       .filter((spec) => typeof spec === "object" && spec.courses &&
-    //         !(spec.type.includes("rule") || spec.type.includes("gened")))
-    //       .flatMap((spec) => Object.keys(spec.courses)))
-    //     .filter((v, i, a) => a.indexOf(v) === i) // TODO: hack to make courseList unique
-    // );
     const res = await Promise.all(courseList.map((c) => axios.get(`/courses/getPathFrom/${c}`).catch((e) => e)));
 
     // filter any errors from res
@@ -161,6 +148,8 @@ const GraphicalSelector = () => {
   const showUnlockedGraphOnly = (courses) => {
     const nodes = graph.getNodes();
     const edges = graph.getEdges();
+    nodes.forEach((n) => (isUnlockedNode(courses, console.log(n))));
+
     nodes.forEach((n) => (isUnlockedNode(courses, Object.values(n)[0].id) ? n.show() : n.hide()));
     edges.forEach((e) => (
       isUnlockedEdge(courses, Object.values(e)[0].model.source, Object.values(e)[0].model.target)
