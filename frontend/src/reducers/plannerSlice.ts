@@ -1,6 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import { CourseStates } from 'types/courses';
+import { CourseList, CourseStates } from 'types/courses';
 import {
   Mark, PlannerCourse, PlannerYear, Term,
 } from 'types/planner';
@@ -268,7 +268,7 @@ const plannerSlice = createSlice({
         }
       }
     },
-    removeCourses: (state, action: PayloadAction<string[]>) => {
+    removeCourses: (state, action: PayloadAction<CourseList>) => {
       const courses = action.payload;
       courses.forEach((course) => {
         plannerSlice.caseReducers.removeCourse(state, { payload: course });

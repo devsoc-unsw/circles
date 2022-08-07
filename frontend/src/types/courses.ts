@@ -4,6 +4,8 @@ export type CourseCodes = {
   [courseKey: string]: string
 };
 
+export type CourseList = string[];
+
 export type CourseDetail = {
   title: string
   code: string
@@ -28,8 +30,8 @@ export type CourseValidation = {
 };
 
 export type CourseUnlocks = {
-  direct_unlock: string[]
-  indirect_unlock: string[]
+  direct_unlock: CourseList
+  indirect_unlock: CourseList
 };
 
 export type CourseStates = {

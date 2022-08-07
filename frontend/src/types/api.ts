@@ -1,4 +1,4 @@
-import { CourseStates } from './courses';
+import { CourseList, CourseStates } from './courses';
 import { ProgramStructure } from './structure';
 
 export type ValidateTermPlanner = {
@@ -31,19 +31,26 @@ export type Programs = {
 export type SearchCourse = Record<string, string>;
 
 export type UnselectCourses = {
-  courses: string[]
+  courses: CourseList
 };
 
 export type CoursesUnlockedWhenTaken = {
-  direct_unlock: string[]
-  indirect_unlock: string[]
+  direct_unlock: CourseList
+  indirect_unlock: CourseList
+};
+
+export type CourseChildren = {
+  original: string
+  courses: CourseList
 };
 
 export type StructureCourseList = {
-  courses: string[]
+  courses: CourseList
 };
 
 export type CoursePathFrom = {
   original: string
-  courses: string[]
+  courses: CourseList
 };
+
+// TODO: Add CourseDetail here?

@@ -13,7 +13,6 @@ import { CoursePathFrom, StructureCourseList } from 'types/api';
 import { CourseDetail } from 'types/courses';
 import PageTemplate from 'components/PageTemplate';
 import Spinner from 'components/Spinner';
-import axiosRequest from 'config/axios';
 import type { RootState } from 'config/store';
 import GRAPH_STYLE from './config';
 import S from './styles';
@@ -72,8 +71,8 @@ const GraphicalSelector = () => {
       const node = ev.item;
       if (!node) return;
       const { _cfg: { id } } = node;
-      const [courseData, err] = await axiosRequest('get', `/courses/getCourse/${id}`);
-      if (!err) setCourse(courseData as CourseDetail);
+      const res = await axios.get<CourseDetail>(`/courses/getCourse/${id}`);
+      if (res.status === 200) setCourse(res.data);
 
       // hides/ unhides dependent nodes
       const { breadthFirstSearch } = Algorithm;

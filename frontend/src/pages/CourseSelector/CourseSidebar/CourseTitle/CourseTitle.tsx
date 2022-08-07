@@ -4,9 +4,11 @@ import {
   LockOutlined, MinusOutlined, PlusOutlined, WarningOutlined,
 } from '@ant-design/icons';
 import { Button, Tooltip } from 'antd';
+import axios from 'axios';
+import { UnselectCourses } from 'types/api';
+import { CourseDetail } from 'types/courses';
 import { PlannerCourse } from 'types/planner';
 import prepareUserPayload from 'utils/prepareUserPayload';
-import axiosRequest from 'config/axios';
 import type { RootState } from 'config/store';
 import useMediaQuery from 'hooks/useMediaQuery';
 import { addToUnplanned, removeCourses } from 'reducers/plannerSlice';
@@ -29,10 +31,7 @@ const CourseTitle = ({
 
   const addToPlanner = async (e: React.MouseEvent<HTMLElement>, code: string) => {
     e.stopPropagation();
-    const [course] = await axiosRequest(
-      'get',
-      `/courses/getCourse/${code}`,
-    );
+    const { data: course } = await axios.get<CourseDetail>(`/courses/getCourse/${code}`);
 
     const courseData: PlannerCourse = {
       title: course.title,
@@ -54,8 +53,8 @@ const CourseTitle = ({
 
   const removeFromPlanner = async (e: React.MouseEvent<HTMLElement>, code: string) => {
     e.stopPropagation();
-    const [data] = await axiosRequest('post', `/courses/unselectCourse/${code}`, prepareUserPayload(degree, planner));
-    dispatch(removeCourses(data.courses));
+    const res = await axios.post<UnselectCourses>(`/courses/unselectCourse/${code}`, JSON.stringify(prepareUserPayload(degree, planner)));
+    dispatch(removeCourses(res.data.courses));
   };
 
   const isSmall = useMediaQuery('(max-width: 1400px)');

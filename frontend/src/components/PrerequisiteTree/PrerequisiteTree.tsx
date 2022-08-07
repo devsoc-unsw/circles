@@ -8,9 +8,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import G6 from '@antv/g6';
 import axios from 'axios';
+import { CourseChildren, CoursePathFrom } from 'types/api';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import Spinner from 'components/Spinner';
-import axiosRequest from 'config/axios';
 import type { RootState } from 'config/store';
 import { addTab } from 'reducers/courseTabsSlice';
 import GRAPH_STYLE from './config';
@@ -76,19 +76,13 @@ const PrerequisiteTree = ({ courseCode }: Props) => {
 
   /* REQUESTS */
   const getCourseUnlocks = async (code: string) => {
-    const [unlockData, unlockErr] = await axiosRequest(
-      'get',
-      `/courses/courseChildren/${code}`,
-    );
-    return !unlockErr ? unlockData.courses : [];
+    const res = await axios.get<CourseChildren>(`/courses/courseChildren/${code}`);
+    return res.status === 200 ? res.data.courses : [];
   };
 
   const getCoursePrereqs = async (code: string) => {
-    const [prereqData, prereqErr] = await axiosRequest(
-      'get',
-      `/courses/getPathFrom/${code}`,
-    );
-    return !prereqErr ? prereqData.courses : [];
+    const res = await axios.get<CoursePathFrom>(`/courses/getPathFrom/${code}`);
+    return res.status === 200 ? res.data.courses : [];
   };
 
   const determineCourseAccuracy = async () => {

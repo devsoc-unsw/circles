@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { PlusOutlined, StopOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
+import axios from 'axios';
+import { UnselectCourses } from 'types/api';
 import { PlannerCourse } from 'types/planner';
 import prepareUserPayload from 'utils/prepareUserPayload';
-import axiosRequest from 'config/axios';
 import type { RootState } from 'config/store';
 import { addToUnplanned, removeCourses } from 'reducers/plannerSlice';
 
@@ -56,9 +57,9 @@ const PlannerButton = () => {
   };
 
   const removeFromPlanner = async () => {
-    const [data] = await axiosRequest('post', `/courses/unselectCourse/${id}`, prepareUserPayload(degree, planner));
+    const res = await axios.post<UnselectCourses>(`/courses/unselectCourse/${id}`, JSON.stringify(prepareUserPayload(degree, planner)));
     addCourseToPlannerTimeout(false);
-    dispatch(removeCourses(data.courses));
+    dispatch(removeCourses(res.data.courses));
   };
 
   return (

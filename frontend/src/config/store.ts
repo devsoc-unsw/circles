@@ -7,13 +7,14 @@ import {
   persistReducer,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import axiosRequest from 'config/axios';
 import coursesReducer from 'reducers/coursesSlice';
 import courseTabsReducer from 'reducers/courseTabsSlice';
 import degreeReducer from 'reducers/degreeSlice';
 import plannerReducer from 'reducers/plannerSlice';
 import settingsReducer from 'reducers/settingsSlice';
 import { REDUX_PERSIST_VERSION } from './constants';
+import axios from 'axios';
+import { CourseDetail } from 'types/courses';
 
 const rootReducer = combineReducers({
   degree: degreeReducer,
@@ -54,10 +55,10 @@ const migrations: MigrationManifest = {
 
     const courses = Object.keys(newState.planner.courses);
     await courses.forEach(async (course, _) => {
-      const [formattedData, err] = await axiosRequest('get', `/courses/getCourse/${course}`);
-      if (!err) {
-        const { code } = formattedData;
-        newState.planner.courses[code].is_multiterm = formattedData.is_multiterm;
+      const res = await axios.get<CourseDetail>(`/courses/getCourse/${course}`);
+      if (res.status === 200) {
+        const courseData = res.data;
+        newState.planner.courses[courseData.code].is_multiterm = courseData.is_multiterm;
       }
     });
     return newState;
