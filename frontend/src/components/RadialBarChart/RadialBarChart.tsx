@@ -1,9 +1,10 @@
 import React from 'react';
+import type { RadialBarConfig } from '@ant-design/charts';
 import { RadialBar } from '@ant-design/charts';
 import data from './radialChartData';
 
 const RadialBarChart = () => {
-  const config = {
+  const config: RadialBarConfig = {
     data,
     xField: 'name',
     yField: 'UOC',

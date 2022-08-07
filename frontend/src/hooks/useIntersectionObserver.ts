@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-const useIntersectionObserver = (ref, config = {}) => {
+const useIntersectionObserver = (ref: React.RefObject<HTMLElement>, config = {}) => {
   const [isIntersecting, setIntersecting] = useState(false);
 
   useEffect(() => {
@@ -8,8 +8,9 @@ const useIntersectionObserver = (ref, config = {}) => {
       ([entry]) => setIntersecting(entry.isIntersecting),
       config,
     );
-
-    observer.observe(ref.current);
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
     // Remove the observer as soon as the component is unmounted
     return () => {
       observer.disconnect();

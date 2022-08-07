@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
-import { Liquid, LiquidConfig } from '@ant-design/charts';
+import type { LiquidConfig } from '@ant-design/charts';
+import { Liquid } from '@ant-design/charts';
 import {
   darkGrey,
   lightGrey,
