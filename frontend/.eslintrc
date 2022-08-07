@@ -61,7 +61,8 @@
         "@typescript-eslint/no-floating-promises": ["off"],
         "import/no-named-as-default": ["off"], // vite stuff
         "react/require-default-props": ["off"], // off since we have typescript instead
-        "@typescript-eslint/no-misused-promises": ["error", { "checksVoidReturn": false }]
+        "@typescript-eslint/no-misused-promises": ["error", { "checksVoidReturn": false }],
+        "@typescript-eslint/ban-ts-comment": ["off"] // TODO: remove this - it's here to skip type checking on some files
     },
     "settings": {
         "import/resolver": {

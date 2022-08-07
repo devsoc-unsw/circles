@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
@@ -68,7 +71,7 @@ const GraphicalSelector = () => {
       // load up course information
       const node = ev.item;
       if (!node) return;
-      const { _cfg: { id } } = node._cfg;
+      const { _cfg: { id } } = node;
       const [courseData, err] = await axiosRequest('get', `/courses/getCourse/${id}`);
       if (!err) setCourse(courseData as CourseDetail);
 

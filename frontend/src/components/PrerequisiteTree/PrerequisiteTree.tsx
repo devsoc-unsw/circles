@@ -1,3 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+// @ts-nocheck
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import G6 from '@antv/g6';
@@ -69,18 +75,18 @@ const PrerequisiteTree = ({ courseCode }: Props) => {
   };
 
   /* REQUESTS */
-  const getCourseUnlocks = async (c) => {
+  const getCourseUnlocks = async (code: string) => {
     const [unlockData, unlockErr] = await axiosRequest(
       'get',
-      `/courses/courseChildren/${c}`,
+      `/courses/courseChildren/${code}`,
     );
     return !unlockErr ? unlockData.courses : [];
   };
 
-  const getCoursePrereqs = async (c) => {
+  const getCoursePrereqs = async (code: string) => {
     const [prereqData, prereqErr] = await axiosRequest(
       'get',
-      `/courses/getPathFrom/${c}`,
+      `/courses/getPathFrom/${code}`,
     );
     return !prereqErr ? prereqData.courses : [];
   };
