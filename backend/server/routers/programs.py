@@ -4,7 +4,7 @@ API for fetching data about programs and specialisations
 from contextlib import suppress
 import functools
 import re
-from typing import Callable, Mapping, Optional, Tuple, cast, List
+from typing import Callable, Dict, Mapping, Optional, Tuple, cast, List
 
 from fastapi import APIRouter, HTTPException
 
@@ -289,20 +289,43 @@ def graph_test(
         - [x] path_from from the list
         - [ ] edgelist to graph
     """
-    print("I AM BEING HITTT")
-    print("A\n"*50)
-    print("PAAAAAAAAAAAAAAAAATHHHHHHHHHHHHHHHHHH")
-    print(get_path_from("COMP2521"))
     courses = get_structure_course_list(programCode, spec)["courses"]
-
-    print("DIDNT BREAK (how/???????????????????)"*5)
-
+    edges = []
     failed_courses: List[str] = []
-    return [
-        map_suppressed_errors(
-            get_path_from, failed_courses, course
-        ) for course in courses
+
+    proto_edges = [map_suppressed_errors(
+        get_path_from, failed_courses, course
+    ) for course in courses]
+
+    print("AA\n"*10, proto_edges[0])
+    return {
+        "courses": courses,
+        "edges": edges + proto_edges
+    }
+
+def proto_edges_to_edges(proto_edges: Dict[str, str]):
+    """
+    Take the proto-edges created by calls to `path_from` and convert them into
+    a full list of edges of form.
+    [
+        {
+            "src": (str) - course_code, # This is the 'original' value
+            "dst": (str) - course_code, # This is the value of 'courses'
+        }
     ]
+    Effectively, turning an adjacency list into a flat list of edges
+    """
+    edges: List = []
+    for proto_edge in proto_edges:
+        # Icoming: { original: str,  courses: List[str]}
+        for course in proto_edge["courses"]:
+            edges.append({
+                    "src"
+                    "dst": proto_edge["original"],
+                }
+            )
+        
+    return edges
 
 
 @router.get("/graph")

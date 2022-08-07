@@ -120,9 +120,7 @@ const GraphicalSelector = () => {
     //       .flatMap((spec) => Object.keys(spec.courses)))
     //     .filter((v, i, a) => a.indexOf(v) === i) // TODO: hack to make courseList unique
     // );
-    // const res = await Promise.all(courseList.map((c) => axios.get(`/courses/getPathFrom/${c}`).catch((e) => e)));
     
-    console.log("AHHHH");
     // const justData = res.map((r) => r.data);
     /**
       * [{
@@ -133,17 +131,20 @@ const GraphicalSelector = () => {
     // console.log(justData);  
 
     console.log("I ALIVEs");
-    const testGraph = await axios.get(
+    const {data: testGraph} = await axios.get(
       `/programs/graphtest/${programCode}/${specs.join("+")}`);
     console.log(testGraph);
 
+    console.log("AHHHH");
+    const res = await Promise.all(courseList.map((c) => axios.get(`/courses/getPathFrom/${c}`).catch((e) => e)));
+    console.log(res);
     // filter any errors from res
-    // const children = res.filter((value) => value?.data?.courses).map((value) => value.data);
-    // const edges = children
-    //   .flatMap((courseObject) => courseObject.courses
-    //     .filter((c) => courseList.includes(c))
-    //     .map((c) => ({ source: c, target: courseObject.original })));
-    // if (courseList.length !== 0 && edges.length !== 0) initialiseGraph(courseList, edges);
+    const children = res.filter((value) => value?.data?.courses).map((value) => value.data);
+    const edges = children
+      .flatMap((courseObject) => courseObject.courses
+        .filter((c) => courseList.includes(c))
+        .map((c) => ({ source: c, target: courseObject.original })));
+    if (courseList.length !== 0 && edges.length !== 0) initialiseGraph(courseList, edges);
     setLoading(false);
   };
 
