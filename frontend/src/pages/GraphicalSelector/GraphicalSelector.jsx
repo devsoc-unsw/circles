@@ -130,9 +130,9 @@ const GraphicalSelector = () => {
         */
     // console.log(justData);  
 
-    // const {data: testGraph} = await axios.get(
-    //   `/programs/graphtest/${programCode}/${specs.join("+")}`);
-    // console.log(testGraph);
+    const {data: testGraph} = await axios.get(
+      `/programs/graphtest/${programCode}/${specs.join("+")}`);
+    console.log(testGraph);
 
     // console.log("AHHHH");
     const res = await Promise.all(courseList.map((c) => axios.get(`/courses/getPathFrom/${c}`).catch((e) => e)));

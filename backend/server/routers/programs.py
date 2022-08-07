@@ -296,8 +296,8 @@ def graph_test(
     proto_edges = [map_suppressed_errors(
         get_path_from, failed_courses, course
     ) for course in courses]
+    edges = proto_edges_to_edges(proto_edges)
 
-    print("AA\n"*10, proto_edges[0])
     return {
         "courses": courses,
         "edges": edges + proto_edges,
@@ -318,10 +318,11 @@ def proto_edges_to_edges(proto_edges: Dict[str, str]):
     """
     edges: List = []
     for proto_edge in proto_edges:
-        # Icoming: { original: str,  courses: List[str]}
+        # Incoming: { original: str,  courses: List[str]}
+        # Outcome:  { "src": str, "dst": str }
         for course in proto_edge["courses"]:
             edges.append({
-                    "src"
+                    "src": course,
                     "dst": proto_edge["original"],
                 }
             )
@@ -421,3 +422,4 @@ def compose(*functions: Callable) -> Callable:
         The functions are applied in the order they are given.
     """
     return functools.reduce(lambda f, g: lambda *args, **kwargs: f(g(*args, **kwargs)), functions)
+
