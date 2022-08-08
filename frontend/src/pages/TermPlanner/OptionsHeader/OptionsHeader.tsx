@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { FaRegCalendarTimes } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,6 +15,9 @@ import HelpMenu from '../HelpMenu/HelpMenu';
 import SettingsMenu from '../SettingsMenu';
 import { isPlannerEmpty } from '../utils';
 import S from './styles';
+// Used for tippy stylings
+import 'tippy.js/dist/tippy.css';
+import 'tippy.js/themes/light.css';
 
 type Props = {
   plannerRef: React.RefObject<HTMLDivElement>

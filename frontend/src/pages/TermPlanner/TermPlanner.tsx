@@ -21,9 +21,6 @@ import {
   checkMultitermInBounds,
   isPlannerEmpty,
 } from './utils';
-// Used for tippy stylings
-import 'tippy.js/dist/tippy.css';
-import 'tippy.js/themes/light.css';
 
 const openNotification = () => {
   notification.info({

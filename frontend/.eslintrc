@@ -22,22 +22,18 @@
         "@typescript-eslint"
     ],
     "rules": {
-        "no-case-declarations": ["off"],
-        "no-param-reassign": ["error", { "ignorePropertyModificationsFor": [ "state" ] }], // redux toolkit
-        "no-nested-ternary": ["off"],
-        "import/order": "off", // for simple-import-sort plugin
-        "import/no-extraneous-dependencies": ["off"], // a problem with how tippy is used - ill leave it to an FE person to figure out
-        "react/jsx-props-no-spreading": ["off"], // turn off {...args} for props
-        "react/jsx-one-expression-per-line": ["off"],
-        "react/jsx-no-bind": ["off"], // needed for some antd components?
-        // "react/prop-types": ["off"], // TODO: this should definitely be turned back on
+        "no-param-reassign": ["error", { "ignorePropertyModificationsFor": [ "state" ] }], // enabled only for redux toolkit
+        "no-nested-ternary": ["off"], // disabled to allow for nested ternary statements
+        "import/order": "off", // disabled for simple-import-sort plugin
+        "react/jsx-props-no-spreading": ["off"], // disabled as to prefer using {...args} for props
+        "react/jsx-one-expression-per-line": ["off"], // disabled jsx needing to be only in a single line
+        "react/jsx-no-bind": ["off"], // needed for some antd components
         "react/no-array-index-key": ["off"], // there is probably a good reason to turn this back on, but I dont want to deal with it atm
         "jsx-a11y/click-events-have-key-events": ["off"],
         "jsx-a11y/interactive-supports-focus": ["off"],
         "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
         "no-unused-vars": ["error", { "argsIgnorePattern": "^_$" }],
         "react/function-component-definition": ["error", { "namedComponents": "arrow-function", "unnamedComponents": "arrow-function" }],
-        "react/no-unstable-nested-components": ["error", { "allowAsProps": true }],
         "simple-import-sort/imports": ["error", {
             "groups": [
                 [
@@ -59,11 +55,10 @@
         "simple-import-sort/exports": ["error"],
         "@typescript-eslint/no-explicit-any": ["error"],
         "@typescript-eslint/no-floating-promises": ["off"],
-        "import/no-named-as-default": ["off"], // vite stuff
         "react/require-default-props": ["off"], // off since we have typescript instead
-        "@typescript-eslint/no-misused-promises": ["error", { "checksVoidReturn": false }],
-        "@typescript-eslint/ban-ts-comment": ["off"], // TODO: remove this - it's here to skip type checking on some files,
-        "@typescript-eslint/dot-notation": ["off"]
+        "@typescript-eslint/no-misused-promises": ["error", { "checksVoidReturn": false }], 
+        "@typescript-eslint/ban-ts-comment": ["off"], // should be removed? - it's here to skip type checking on some files,
+        "@typescript-eslint/dot-notation": ["off"] // disable force use of . annotation when accessing object fields
     },
     "settings": {
         "import/resolver": {
