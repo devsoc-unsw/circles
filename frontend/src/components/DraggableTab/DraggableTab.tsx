@@ -27,7 +27,9 @@ const DraggableTab = ({ tabName, index }: Props) => {
     if (style?.transform) {
       return {
         ...style,
-        transform: `${style.transform.split(',').shift()}, 0px)`,
+        // style.transform = transform(Xpx, Ypx) - splitting string to only get the X position
+        // and lock the Y position when dragging
+        transform: `${style.transform.split(',')[0]}, 0px)`,
       };
     }
     return style;
