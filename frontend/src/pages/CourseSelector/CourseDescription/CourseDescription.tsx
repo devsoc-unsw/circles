@@ -125,7 +125,7 @@ const CourseDescription = () => {
     };
 
     if (id) fetchCourseData(id);
-  }, [degree, dispatch, id, planner]);
+  }, [dispatch, id]);
 
   const courseAttributesData = course ? [
     {
