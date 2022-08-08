@@ -73,7 +73,7 @@ const TermPlanner = () => {
 
     if (isPlannerEmpty(planner.years)) openNotification();
     validateTermPlanner();
-  }, [degree, planner.years, planner.startYear, showWarnings, planner, dispatch]);
+  }, [degree, planner.years, planner.startYear, marksRef.current, showWarnings]);
 
   const currYear = new Date().getFullYear();
 

@@ -4,7 +4,7 @@ import { DegreeSliceState } from 'reducers/degreeSlice';
 import { PlannerSliceState } from 'reducers/plannerSlice';
 
 type TermPlan = {
-  [courseCode: string]: (number | undefined)[]
+  [courseCode: string]: [number, number | null]
 };
 
 type YearPlan = TermPlan[];
@@ -31,7 +31,7 @@ const prepareCoursesForValidationPayload = (
     Object.values(year).forEach((term) => {
       const coursesData: TermPlan = {};
       Object.values(term).forEach((c) => {
-        coursesData[c] = [parseMarkToInt(courses[c].mark)];
+        coursesData[c] = [courses[c].UOC, parseMarkToInt(courses[c].mark)];
       });
       formattedYear.push(coursesData);
     });
