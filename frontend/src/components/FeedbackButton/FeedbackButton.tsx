@@ -16,7 +16,8 @@ const FeedbackButton = () => {
   };
 
   // Move this to the drawer if the screen is too small
-  return (isTablet) ? <div />
+  return isTablet
+    ? null
     : (
       <S.FeedbackBtnWrapper>
         <Tooltip title="Report a bug!">
