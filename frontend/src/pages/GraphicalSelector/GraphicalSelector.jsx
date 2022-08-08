@@ -148,13 +148,14 @@ const GraphicalSelector = () => {
   const showUnlockedGraphOnly = (courses) => {
     const nodes = graph.getNodes();
     const edges = graph.getEdges();
-    nodes.forEach((n) => (isUnlockedNode(courses, console.log(n))));
-
-    nodes.forEach((n) => (isUnlockedNode(courses, Object.values(n)[0].id) ? n.show() : n.hide()));
-    edges.forEach((e) => (
-      isUnlockedEdge(courses, Object.values(e)[0].model.source, Object.values(e)[0].model.target)
-        ? e.show()
-        : e.hide()));
+    nodes.forEach((n) => {
+      const { _cfg } = n;
+      return isUnlockedNode(courses, _cfg.id) ? n.show() : n.hide();
+    });
+    edges.forEach((e) => {
+      const { _cfg } = e;
+      return isUnlockedEdge(courses, _cfg.model.source, _cfg.model.target) ? e.show() : e.hide();
+    });
   };
 
   const showNodes = (courses) => {
