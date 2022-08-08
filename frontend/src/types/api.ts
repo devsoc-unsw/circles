@@ -2,7 +2,7 @@ import { CourseList, CourseStates, CourseValidation } from './courses';
 import { ProgramStructure } from './structure';
 
 export type ValidateTermPlanner = {
-  course_state: CourseStates
+  courses_state: CourseStates
 };
 
 export type Structure = {

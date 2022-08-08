@@ -1,6 +1,6 @@
 export type Term = 'T0' | 'T1' | 'T2' | 'T3';
 
-export type Mark = number | Grade | null;
+export type Mark = number | Grade | undefined;
 
 export type Grade = 'SY' | 'FL' | 'PS' | 'CR' | 'DN' | 'HD';
 

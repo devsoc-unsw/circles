@@ -10,10 +10,10 @@ import prepareUserPayload from 'utils/prepareUserPayload';
 import infographic from 'assets/infographicFontIndependent.svg';
 import Collapsible from 'components/Collapsible';
 import CourseTag from 'components/CourseTag';
-import PrerequisiteTree from 'components/PrerequisiteTree';
+// import PrerequisiteTree from 'components/PrerequisiteTree';
 import ProgressBar from 'components/ProgressBar';
 import TermTag from 'components/TermTag';
-import { inDev, TERM, TIMETABLE_API_URL } from 'config/constants';
+import { TERM, TIMETABLE_API_URL } from 'config/constants';
 import type { RootState } from 'config/store';
 import { setCourse } from 'reducers/coursesSlice';
 import LoadingSkeleton from './LoadingSkeleton';
@@ -84,11 +84,16 @@ const CourseDescription = () => {
   };
 
   const getCourseCapacityById = async (code: string) => {
-    const res = await axios.get<CourseTimetable>(`${TIMETABLE_API_URL}/${code}`);
-    if (res.status === 200) {
-      getCapacityAndEnrolment(res.data);
-    } else {
-      setCourseCapacity(null);
+    try {
+      const res = await axios.get<CourseTimetable>(`${TIMETABLE_API_URL}/${code}`);
+      if (res.status === 200) {
+        getCapacityAndEnrolment(res.data);
+      } else {
+        setCourseCapacity(null);
+      }
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.log('Error at getCourseCapacityById', e);
     }
   };
 
@@ -233,12 +238,12 @@ const CourseDescription = () => {
                 ) : 'None'}
               </p>
             </Collapsible>
-            {inDev
+            {/* {inDev
             && (
             <Collapsible title="Prerequisite Visualisation">
               <PrerequisiteTree courseCode={id} />
             </Collapsible>
-            )}
+            )} */}
             <br />
           </S.DescriptionContent>
           <S.AttributesContent>

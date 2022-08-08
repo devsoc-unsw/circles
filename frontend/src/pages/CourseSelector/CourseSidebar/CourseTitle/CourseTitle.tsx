@@ -46,7 +46,7 @@ const CourseTitle = ({
       isAccurate: course.is_accurate,
       isMultiterm: course.is_multiterm,
       supressed: false,
-      mark: null,
+      mark: undefined,
     };
     dispatch(addToUnplanned({ courseCode: course.code, courseData }));
   };

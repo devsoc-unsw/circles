@@ -3,7 +3,7 @@ import { DegreeSliceState } from 'reducers/degreeSlice';
 import { PlannerSliceState } from 'reducers/plannerSlice';
 
 // key = course code, value = mark of course (number || null)
-type UserPayloadCourse = Record<string, number | null>;
+type UserPayloadCourse = Record<string, number | undefined>;
 
 // key = spec, value = 1
 type UserPayloadSpecialisations = Record<string, 1>;

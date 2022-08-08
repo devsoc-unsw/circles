@@ -12,8 +12,8 @@ const Marks = ({ mark }: Prop) => {
     <div>
       <Text strong className="text">Mark: </Text>
       <Text className="text">
-        {/* Marks can be strings (i.e. HD, CR) or a number (i.e. 90, 85) */}
-        {(mark === null) ? 'N/A' : mark}
+        {/* Marks can be strings (i.e. HD, CR) or a number (i.e. 90, 85). Mark can be 0. */}
+        {(mark === undefined) ? 'N/A' : mark}
       </Text>
     </div>
   );

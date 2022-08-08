@@ -1,10 +1,11 @@
 import type { Dispatch, SetStateAction } from 'react';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   Button, Input, message,
   Modal,
 } from 'antd';
+import { Grade, Mark } from 'types/planner';
 import type { RootState } from 'config/store';
 import { updateCourseMark } from 'reducers/plannerSlice';
 import S from './styles';
@@ -19,56 +20,47 @@ const EditMarkModal = ({
   code, isVisible, setIsVisible,
 }: Props) => {
   const dispatch = useDispatch();
-  const [markValue, setMarkValue] = useState(
+  const [markValue, setMarkValue] = useState<string | number | undefined>(
     useSelector((state: RootState) => state.planner.courses[code].mark),
   );
 
-  const letterGrades = ['SY', 'PS', 'CR', 'DN', 'HD'];
+  const letterGrades: Grade[] = ['SY', 'FL', 'PS', 'CR', 'DN', 'HD'];
 
-  const handleConfirmEditMark = (mark) => {
-    const attemptedMark = ` ${mark}`.replaceAll(' ', '').toUpperCase();
-
-    if (
-      ((/[A-Z]+/.test(attemptedMark)) && !letterGrades.includes(attemptedMark))
-      || (parseFloat(attemptedMark) < 0 || parseFloat(attemptedMark) > 100)
-      || ((/[A-Z]+/.test(attemptedMark)) && (/[0-9]+/.test(attemptedMark)))
-    ) {
-      return message.error('Could not update mark. Please enter a valid mark or letter grade');
-    }
-    dispatch(updateCourseMark({
-      code,
-      mark: attemptedMark,
-    }));
-    setMarkValue('');
-    setIsVisible(false);
-    return message.success('Mark Updated');
-  };
-
-  const [markUpdatedQueued, setMarkUpdateQueued] = useState(false);
-  useEffect(() => {
-    if (markUpdatedQueued) {
-      setMarkUpdateQueued(false);
-      handleConfirmEditMark(markValue);
-    }
-  });
-
-  const handleInputChange = (e) => {
-    setMarkValue(e.target.value);
-  };
-
-  const handleLetterGrade = (e) => {
-    e.stopPropagation();
-    setMarkValue(e.target.innerText);
-    setMarkUpdateQueued(true);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    if (typeof value === 'number') setMarkValue(Number(value));
+    setMarkValue(value);
   };
 
   const handleCancel = () => {
     setIsVisible(false);
   };
 
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
-      setMarkUpdateQueued(true);
+  const updateMark = (mark: Mark) => {
+    dispatch(updateCourseMark({
+      code,
+      mark,
+    }));
+    setMarkValue(mark);
+    setIsVisible(false);
+    message.success('Mark Updated');
+  };
+
+  const handleUpdateMark = () => {
+    if (!Number.isNaN(parseInt((markValue as string), 10))) {
+      if ((Number(markValue) >= 0 && Number(markValue) <= 100)) {
+        updateMark(Number(markValue));
+      } else {
+        // number is not in range
+        message.error('Not a valid mark. Enter a mark between 0 and 100.');
+      }
+    } else if ((letterGrades as string[]).includes(markValue as string)) {
+      // mark is a letter grade
+      updateMark(markValue as Grade);
+    } else if (markValue === '') {
+      updateMark(undefined);
+    } else {
+      message.error('Could not update mark. Please enter a valid mark or letter grade');
     }
   };
 
@@ -76,23 +68,22 @@ const EditMarkModal = ({
     <Modal
       title={`Edit mark for ${code}`}
       visible={isVisible}
-      onOk={() => setMarkUpdateQueued(true)}
+      onOk={handleUpdateMark}
       onCancel={handleCancel}
-      width="300px"
+      width="350px"
     >
       <S.EditMarkWrapper>
         <Input
+          value={markValue}
           onChange={handleInputChange}
-          onKeyDown={handleKeyDown}
+          onPressEnter={handleUpdateMark}
           placeholder="Enter Mark"
+          style={{ width: '100%' }}
         />
         <S.LetterGradeWrapper>
           {
             letterGrades.map((letterGrade) => (
-              <Button
-                key={letterGrade}
-                onClick={handleLetterGrade}
-              >
+              <Button onClick={() => updateMark(letterGrade)}>
                 {letterGrade}
               </Button>
             ))

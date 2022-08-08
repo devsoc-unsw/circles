@@ -4,10 +4,10 @@ import {
 
 const MIN_COMPLETED_COURSE_UOC = 6;
 
-const parseMarkToInt = (mark: Mark): number | null => {
+const parseMarkToInt = (mark: Mark): number | undefined => {
   if (typeof mark === 'string') {
-    const letterGradeToIntMap: Record<Grade, number | null> = {
-      SY: null,
+    const letterGradeToIntMap: Record<Grade, number | undefined> = {
+      SY: undefined,
       FL: 25,
       PS: 60,
       CR: 70,
@@ -16,7 +16,7 @@ const parseMarkToInt = (mark: Mark): number | null => {
     };
     return Object.keys(letterGradeToIntMap).includes(mark)
       ? letterGradeToIntMap[mark]
-      : null;
+      : undefined;
   }
   return mark;
 };

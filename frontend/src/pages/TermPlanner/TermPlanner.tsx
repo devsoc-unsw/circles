@@ -61,11 +61,11 @@ const TermPlanner = () => {
   }
   const validateTermPlanner = async () => {
     try {
-      const { data } = await axios.post<ValidateTermPlanner>(
+      const res = await axios.post<ValidateTermPlanner>(
         '/planner/validateTermPlanner/',
         JSON.stringify(prepareCoursesForValidationPayload(planner, degree, showWarnings)),
       );
-      dispatch(toggleWarnings(data.course_state));
+      dispatch(toggleWarnings(res.data.courses_state));
     } catch (err) {
       // eslint-disable-next-line no-console
       console.log(err);
