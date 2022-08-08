@@ -10,10 +10,10 @@ import prepareUserPayload from 'utils/prepareUserPayload';
 import infographic from 'assets/infographicFontIndependent.svg';
 import Collapsible from 'components/Collapsible';
 import CourseTag from 'components/CourseTag';
-// import PrerequisiteTree from 'components/PrerequisiteTree';
+import PrerequisiteTree from 'components/PrerequisiteTree';
 import ProgressBar from 'components/ProgressBar';
 import TermTag from 'components/TermTag';
-import { TERM, TIMETABLE_API_URL } from 'config/constants';
+import { inDev, TERM, TIMETABLE_API_URL } from 'config/constants';
 import type { RootState } from 'config/store';
 import { setCourse } from 'reducers/coursesSlice';
 import LoadingSkeleton from './LoadingSkeleton';
@@ -238,12 +238,11 @@ const CourseDescription = () => {
                 ) : 'None'}
               </p>
             </Collapsible>
-            {/* {inDev
-            && (
-            <Collapsible title="Prerequisite Visualisation">
-              <PrerequisiteTree courseCode={id} />
-            </Collapsible>
-            )} */}
+            {inDev && (
+              <Collapsible title="Prerequisite Visualisation">
+                <PrerequisiteTree courseCode={id} />
+              </Collapsible>
+            )}
             <br />
           </S.DescriptionContent>
           <S.AttributesContent>

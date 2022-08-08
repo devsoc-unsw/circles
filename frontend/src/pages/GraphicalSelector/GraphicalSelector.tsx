@@ -7,7 +7,8 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Algorithm, Graph } from '@antv/g6';
+import type { Graph } from '@antv/g6';
+import { Algorithm } from '@antv/g6';
 import { Button } from 'antd';
 import axios from 'axios';
 import { CoursePathFrom, StructureCourseList } from 'types/api';
@@ -33,7 +34,7 @@ const GraphicalSelector = () => {
   // courses is a list of course codes
   const initialiseGraph = (courses: string[], courseEdges: CourseEdge[]) => {
     const container = ref.current;
-    const graphInstance = new Graph({
+    const graphInstance = new G6.Graph({
       container,
       width: container.scrollWidth,
       height: container.scrollHeight,

@@ -1,14 +1,10 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-// @ts-nocheck
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import type { TreeGraph, TreeGraphData } from '@antv/g6';
 import G6 from '@antv/g6';
 import axios from 'axios';
-import { CourseChildren, CoursePathFrom } from 'types/api';
+import { CourseChildren, CoursePathFrom, CoursesAllUnlocked } from 'types/api';
+import { CourseList } from 'types/courses';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
@@ -29,17 +25,19 @@ type Props = {
 
 const PrerequisiteTree = ({ courseCode }: Props) => {
   const [loading, setLoading] = useState(true);
-  const [graph, setGraph] = useState(null);
+  const [graph, setGraph] = useState<TreeGraph | null>(null);
   const [courseAccurate, setCourseAccurate] = useState(true);
-  const [courseUnlocks, setCourseUnlocks] = useState([]);
-  const [coursesRequires, setCoursesRequires] = useState([]);
+  const [courseUnlocks, setCourseUnlocks] = useState<CourseList>([]);
+  const [coursesRequires, setCoursesRequires] = useState<CourseList>([]);
   const dispatch = useDispatch();
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement | null>(null);
   const { degree, planner } = useSelector((state: RootState) => state);
 
   /* GRAPH IMPLEMENTATION */
-  const generateTreeGraph = (graphData) => {
+  const generateTreeGraph = (graphData: TreeGraphData) => {
     const container = ref.current;
+    if (!container) return;
+
     const treeGraphInstance = new G6.TreeGraph({
       container,
       width: container.scrollWidth,
@@ -56,50 +54,64 @@ const PrerequisiteTree = ({ courseCode }: Props) => {
 
     updateEdges(treeGraphInstance, graphData);
 
-    treeGraphInstance.render(graphData);
+    treeGraphInstance.render();
 
     bringEdgeLabelsToFront(treeGraphInstance);
 
     treeGraphInstance.on('node:click', (event) => {
       // open new course tab
       const node = event.item;
-      const { _cfg: { model: { label } } } = node;
-      dispatch(addTab(label));
+      if (node && typeof node['_cfg']?.model?.label === 'string') {
+        dispatch(addTab(node['_cfg'].model.label));
+      }
     });
   };
 
   // NOTE: This is for hot reloading in development as new graph will instantiate every time
-  const updateTreeGraph = (graphData) => {
+  const updateTreeGraph = (graphData: TreeGraphData) => {
+    if (!graph) return;
     graph.changeData(graphData);
     bringEdgeLabelsToFront(graph);
   };
 
   /* REQUESTS */
   const getCourseUnlocks = async (code: string) => {
-    const res = await axios.get<CourseChildren>(`/courses/courseChildren/${code}`);
-    return res.status === 200 ? res.data.courses : [];
+    try {
+      const res = await axios.get<CourseChildren>(`/courses/courseChildren/${code}`);
+      return res.data.courses;
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.log('Error at getCourseUnlocks', e);
+      return [];
+    }
   };
 
   const getCoursePrereqs = async (code: string) => {
-    const res = await axios.get<CoursePathFrom>(`/courses/getPathFrom/${code}`);
-    return res.status === 200 ? res.data.courses : [];
+    try {
+      const res = await axios.get<CoursePathFrom>(`/courses/getPathFrom/${code}`);
+      return res.data.courses;
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.log('Error at getCoursePrereqs', e);
+      return [];
+    }
   };
 
   const determineCourseAccuracy = async () => {
     try {
-      const res = await axios.post(
+      const res = await axios.post<CoursesAllUnlocked>(
         '/courses/getAllUnlocked/',
         JSON.stringify(prepareUserPayload(degree, planner)),
       );
-      setCourseAccurate(res.data.courses_state[courseCode]?.is_accurate);
+      setCourseAccurate(res.data.courses_state[courseCode].is_accurate);
     } catch (err) {
       // eslint-disable-next-line
-      console.log(err);
+      console.log('Error at determineCourseAccuracy', err);
     }
   };
 
   /* MAIN */
-  const setupGraph = async (c) => {
+  const setupGraph = async (c: string) => {
     setLoading(true);
 
     const unlocks = await getCourseUnlocks(c);

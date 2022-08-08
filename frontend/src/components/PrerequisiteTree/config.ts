@@ -1,11 +1,12 @@
+import type { LayoutConfig } from '@antv/g6';
 import TREE_CONSTANTS from './constants';
 
-const graphLayout = {
+const graphLayout: LayoutConfig = {
   type: 'mindmap',
   direction: 'H',
   getVGap: () => 0,
   getHGap: () => 100,
-  getSide: (node) => (node.data.rootRelationship === TREE_CONSTANTS.PREREQ ? 'left' : 'right'),
+  getSide: (node: { data: { rootRelationship: string; }; }) => (node.data.rootRelationship === TREE_CONSTANTS.PREREQ ? 'left' : 'right'),
 };
 
 const defaultNode = {
