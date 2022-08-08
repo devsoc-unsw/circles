@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
+import axios from 'axios';
 import { combineReducers } from 'redux';
 import type { MigrationManifest } from 'redux-persist';
 import {
@@ -7,14 +8,13 @@ import {
   persistReducer,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import { CourseDetail } from 'types/courses';
 import coursesReducer from 'reducers/coursesSlice';
 import courseTabsReducer from 'reducers/courseTabsSlice';
 import degreeReducer from 'reducers/degreeSlice';
 import plannerReducer from 'reducers/plannerSlice';
 import settingsReducer from 'reducers/settingsSlice';
 import { REDUX_PERSIST_VERSION } from './constants';
-import axios from 'axios';
-import { CourseDetail } from 'types/courses';
 
 const rootReducer = combineReducers({
   degree: degreeReducer,

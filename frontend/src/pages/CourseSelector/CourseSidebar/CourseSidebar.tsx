@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ItemType } from 'antd/lib/menu/hooks/useItems';
 import axios from 'axios';
+import { CoursesAllUnlocked } from 'types/api';
 import { CourseValidation } from 'types/courses';
 import { ProgramStructure } from 'types/structure';
 import prepareUserPayload from 'utils/prepareUserPayload';
@@ -46,7 +47,7 @@ const CourseSidebar = ({ structure, showLockedCourses }: Props) => {
   const [pageLoaded, setPageLoaded] = useState(false);
 
   // generate menu content
-  const generateMenuData = (courses: CourseValidation[]) => {
+  const generateMenuData = (courses: Record<string, CourseValidation>) => {
     const newMenu: MenuDataStructure = {};
     const newCoursesUnits: CourseUnitsStructure = {};
 
@@ -98,7 +99,7 @@ const CourseSidebar = ({ structure, showLockedCourses }: Props) => {
 
   const getAllUnlocked = useCallback(async () => {
     try {
-      const res = await axios.post(
+      const res = await axios.post<CoursesAllUnlocked>(
         '/courses/getAllUnlocked/',
         JSON.stringify(prepareUserPayload(degree, planner)),
       );

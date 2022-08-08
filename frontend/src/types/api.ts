@@ -1,4 +1,4 @@
-import { CourseList, CourseStates } from './courses';
+import { CourseList, CourseStates, CourseValidation } from './courses';
 import { ProgramStructure } from './structure';
 
 export type ValidateTermPlanner = {
@@ -51,6 +51,10 @@ export type StructureCourseList = {
 export type CoursePathFrom = {
   original: string
   courses: CourseList
+};
+
+export type CoursesAllUnlocked = {
+  courses_state: Record<string, CourseValidation>
 };
 
 // TODO: Add CourseDetail here?
