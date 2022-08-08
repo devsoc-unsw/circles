@@ -21,50 +21,50 @@ const GridView = ({ isLoading, structure, concise }: Props) => {
   const [gridLayout, setGridLayout] = useState<GridStructure>({});
   const { years, startYear, courses } = useSelector((store: RootState) => store.planner);
 
-  const generateGridStructure = (plannerCourses: Record<string, FormattedPlannerCourse>) => {
-    const newGridLayout: GridStructure = {};
-
-    // Example groups: Major, Minor, General, Rules
-    Object.keys(structure).forEach((group) => {
-      newGridLayout[group] = {};
-
-      // Example subgroup: Core Courses, Computing Electives
-      Object.keys(structure[group].content).forEach((subgroup) => {
-        const subgroupStructure = structure[group].content[subgroup];
-
-        newGridLayout[group][subgroup] = {
-          // section types with gened or rule/elective substring can have their
-          // courses hidden as a modal
-          hasLotsOfCourses: subgroupStructure.type.includes('gened')
-            || subgroupStructure.type.includes('rule')
-            || subgroupStructure.type.includes('electives'),
-          courses: [],
-        };
-
-        // only consider disciplinary component courses
-        Object.keys(subgroupStructure.courses).forEach((courseCode) => {
-          newGridLayout[group][subgroup].courses.push({
-            key: courseCode,
-            title: subgroupStructure.courses[courseCode],
-            // past and termPlanned will be undefined for courses not in planner
-            past: plannerCourses[courseCode]?.past,
-            termPlanned: plannerCourses[courseCode]?.termPlanned,
-            uoc: courses[courseCode]?.UOC,
-            // must check null as could be undefined
-            unplanned: courses[courseCode]?.plannedFor === null,
-          });
-        });
-
-        newGridLayout[group][subgroup].courses.sort(
-          (a, b) => a.key.localeCompare(b.key),
-        );
-      });
-    });
-
-    return newGridLayout;
-  };
-
   useEffect(() => {
+    const generateGridStructure = (plannerCourses: Record<string, FormattedPlannerCourse>) => {
+      const newGridLayout: GridStructure = {};
+
+      // Example groups: Major, Minor, General, Rules
+      Object.keys(structure).forEach((group) => {
+        newGridLayout[group] = {};
+
+        // Example subgroup: Core Courses, Computing Electives
+        Object.keys(structure[group].content).forEach((subgroup) => {
+          const subgroupStructure = structure[group].content[subgroup];
+
+          newGridLayout[group][subgroup] = {
+            // section types with gened or rule/elective substring can have their
+            // courses hidden as a modal
+            hasLotsOfCourses: subgroupStructure.type.includes('gened')
+              || subgroupStructure.type.includes('rule')
+              || subgroupStructure.type.includes('electives'),
+            courses: [],
+          };
+
+          // only consider disciplinary component courses
+          Object.keys(subgroupStructure.courses).forEach((courseCode) => {
+            newGridLayout[group][subgroup].courses.push({
+              key: courseCode,
+              title: subgroupStructure.courses[courseCode],
+              // past and termPlanned will be undefined for courses not in planner
+              past: plannerCourses[courseCode]?.past,
+              termPlanned: plannerCourses[courseCode]?.termPlanned,
+              uoc: courses[courseCode]?.UOC,
+              // must check null as could be undefined
+              unplanned: courses[courseCode]?.plannedFor === null,
+            });
+          });
+
+          newGridLayout[group][subgroup].courses.sort(
+            (a, b) => a.key.localeCompare(b.key),
+          );
+        });
+      });
+
+      return newGridLayout;
+    };
+
     // generate the grid structure,
     // TODO: check if this should be in a useMemo or useCallback instead?
     const plannerCourses = getFormattedPlannerCourses(years, startYear, courses);

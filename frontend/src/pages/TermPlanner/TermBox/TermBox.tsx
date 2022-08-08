@@ -41,7 +41,7 @@ const TermBox = ({
       if (coursesList.includes(c)) uoc += courses[c].UOC;
     });
     setTotalUOC(uoc);
-  }, [coursesList]);
+  }, [courses, coursesList]);
 
   const isCompleted = !!completedTerms[name];
 

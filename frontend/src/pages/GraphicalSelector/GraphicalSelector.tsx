@@ -27,122 +27,122 @@ const GraphicalSelector = () => {
 
   const ref = useRef<HTMLDivElement | null>(null);
 
-  // courses is a list of course codes
-  const initialiseGraph = (courses: string[], courseEdges: CourseEdge[]) => {
-    const container = ref.current;
-    const graphInstance = new G6.Graph({
-      container,
-      width: container.scrollWidth,
-      height: container.scrollHeight,
-      linkCenter: true,
-      modes: {
-        default: [
-          'drag-canvas',
-          'zoom-canvas',
+  useEffect(() => {
+    // courses is a list of course codes
+    const initialiseGraph = (courses: string[], courseEdges: CourseEdge[]) => {
+      const container = ref.current;
+      const graphInstance = new G6.Graph({
+        container,
+        width: container.scrollWidth,
+        height: container.scrollHeight,
+        linkCenter: true,
+        modes: {
+          default: [
+            'drag-canvas',
+            'zoom-canvas',
           // "drag-node",
-        ],
-      },
-      layout: {
-        type: 'comboCombined',
-        preventOverlap: true,
-        nodeSpacing: 10,
-        linkDistance: 500,
-      },
-      // animate: true,
-      defaultNode: GRAPH_STYLE.defaultNode,
-      defaultEdge: GRAPH_STYLE.defaultEdge,
-      nodeStateStyles: GRAPH_STYLE.nodeStateStyles,
-    });
+          ],
+        },
+        layout: {
+          type: 'comboCombined',
+          preventOverlap: true,
+          nodeSpacing: 10,
+          linkDistance: 500,
+        },
+        // animate: true,
+        defaultNode: GRAPH_STYLE.defaultNode,
+        defaultEdge: GRAPH_STYLE.defaultEdge,
+        nodeStateStyles: GRAPH_STYLE.nodeStateStyles,
+      });
 
-    setGraph(graphInstance);
+      setGraph(graphInstance);
 
-    const data: GraphData = {
-      nodes: courses.map((c) => handleNodeData(c, plannedCourses)),
-      edges: courseEdges,
+      const data: GraphData = {
+        nodes: courses.map((c) => handleNodeData(c, plannedCourses)),
+        edges: courseEdges,
+      };
+
+      graphInstance.data(data);
+      graphInstance.render();
+
+      graphInstance.on('node:click', async (ev) => {
+      // load up course information
+        const node = ev.item as INode;
+        if (!node || !node['_cfg']?.id) return;
+        const { _cfg: { id } } = node;
+        const res = await axios.get<CourseDetail>(`/courses/getCourse/${id}`);
+        if (res.status === 200) setCourse(res.data);
+
+        // hides/ unhides dependent nodes
+        const { breadthFirstSearch } = Algorithm;
+        if (node.hasState('click')) {
+          graphInstance.clearItemStates(node, 'click');
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+          breadthFirstSearch(data, id, {
+            enter: ({ current }: { current: string }) => {
+              if (id !== current) {
+                const currentNode = graphInstance.findById(current) as INode;
+                // Unhiding node won't unhide other hidden nodes
+                currentNode.getEdges().forEach((e) => e.show());
+                currentNode.show();
+              }
+            },
+          });
+        } else if (node.getOutEdges().length) {
+          graphInstance.setItemState(node, 'click', true);
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+          breadthFirstSearch(data, id, {
+            enter: ({ current }: { current: string }) => {
+              if (id !== current) {
+                const currentNode = graphInstance.findById(current) as INode;
+                currentNode.getEdges().forEach((e) => e.hide());
+                currentNode.hide();
+              }
+            },
+          });
+        }
+      });
+
+      graphInstance.on('node:mouseenter', async (ev) => {
+        const node = ev.item;
+        graphInstance.setItemState(node, 'hover', true);
+      });
+
+      graphInstance.on('node:mouseleave', async (ev) => {
+        const node = ev.item;
+        graphInstance.clearItemStates(node, 'hover');
+      });
     };
 
-    graphInstance.data(data);
-    graphInstance.render();
+    const setupGraph = async () => {
+      const { courses: courseList }: { courses: string[] } = (
+        await axios.get<StructureCourseList>(`/programs/getStructureCourseList/${programCode}/${specs.join('+')}`)
+      ).data;
 
-    graphInstance.on('node:click', async (ev) => {
-      // load up course information
-      const node = ev.item as INode;
-      if (!node || !node['_cfg']?.id) return;
-      const { _cfg: { id } } = node;
-      const res = await axios.get<CourseDetail>(`/courses/getCourse/${id}`);
-      if (res.status === 200) setCourse(res.data);
+      // TODO: Move this to the backend too
+      // should be a universal /programs/getGraphEdges/{programCode}/{specs}
+      // const courseList = (
+      //   Object.values(structure)
+      //     .flatMap((specialisation) => Object.values(specialisation)
+      //       .filter((spec) => typeof spec === "object" && spec.courses &&
+      //         !(spec.type.includes("rule") || spec.type.includes("gened")))
+      //       .flatMap((spec) => Object.keys(spec.courses)))
+      //     .filter((v, i, a) => a.indexOf(v) === i) // TODO: hack to make courseList unique
+      // );
+      const res = await Promise.all(courseList.map((c) => axios.get<CoursePathFrom>(`/courses/getPathFrom/${c}`).catch()));
 
-      // hides/ unhides dependent nodes
-      const { breadthFirstSearch } = Algorithm;
-      if (node.hasState('click')) {
-        graphInstance.clearItemStates(node, 'click');
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-        breadthFirstSearch(data, id, {
-          enter: ({ current }: { current: string }) => {
-            if (id !== current) {
-              const currentNode = graphInstance.findById(current) as INode;
-              // Unhiding node won't unhide other hidden nodes
-              currentNode.getEdges().forEach((e) => e.show());
-              currentNode.show();
-            }
-          },
-        });
-      } else if (node.getOutEdges().length) {
-        graphInstance.setItemState(node, 'click', true);
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-        breadthFirstSearch(data, id, {
-          enter: ({ current }: { current: string }) => {
-            if (id !== current) {
-              const currentNode = graphInstance.findById(current) as INode;
-              currentNode.getEdges().forEach((e) => e.hide());
-              currentNode.hide();
-            }
-          },
-        });
-      }
-    });
+      // filter any errors from res
+      const children = res.filter((value) => value.data.courses).map((value) => value.data);
+      const edges = children
+        .flatMap((courseObject) => courseObject.courses
+          .filter((c) => courseList.includes(c))
+          .map((c) => ({ source: c, target: courseObject.original })));
+      if (courseList.length !== 0 && edges.length !== 0) initialiseGraph(courseList, edges);
+      setLoading(false);
+    };
 
-    graphInstance.on('node:mouseenter', async (ev) => {
-      const node = ev.item;
-      graphInstance.setItemState(node, 'hover', true);
-    });
-
-    graphInstance.on('node:mouseleave', async (ev) => {
-      const node = ev.item;
-      graphInstance.clearItemStates(node, 'hover');
-    });
-  };
-
-  const setupGraph = async () => {
-    const { courses: courseList }: { courses: string[] } = (
-      await axios.get<StructureCourseList>(`/programs/getStructureCourseList/${programCode}/${specs.join('+')}`)
-    ).data;
-
-    // TODO: Move this to the backend too
-    // should be a universal /programs/getGraphEdges/{programCode}/{specs}
-    // const courseList = (
-    //   Object.values(structure)
-    //     .flatMap((specialisation) => Object.values(specialisation)
-    //       .filter((spec) => typeof spec === "object" && spec.courses &&
-    //         !(spec.type.includes("rule") || spec.type.includes("gened")))
-    //       .flatMap((spec) => Object.keys(spec.courses)))
-    //     .filter((v, i, a) => a.indexOf(v) === i) // TODO: hack to make courseList unique
-    // );
-    const res = await Promise.all(courseList.map((c) => axios.get<CoursePathFrom>(`/courses/getPathFrom/${c}`).catch()));
-
-    // filter any errors from res
-    const children = res.filter((value) => value.data.courses).map((value) => value.data);
-    const edges = children
-      .flatMap((courseObject) => courseObject.courses
-        .filter((c) => courseList.includes(c))
-        .map((c) => ({ source: c, target: courseObject.original })));
-    if (courseList.length !== 0 && edges.length !== 0) initialiseGraph(courseList, edges);
-    setLoading(false);
-  };
-
-  useEffect(() => {
     if (programCode) setupGraph();
-  }, []);
+  }, [plannedCourses, programCode, specs]);
 
   const handleShowGraph = () => {
     if (graph) {

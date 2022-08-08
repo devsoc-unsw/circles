@@ -47,70 +47,70 @@ const CourseDescription = () => {
   const [coursesPathFrom, setCoursesPathFrom] = useState<CourseList>([]);
   const [courseCapacity, setCourseCapacity] = useState<EnrolmentCapacityData | null>(null);
 
-  const getCourse = async (courseCode: string) => {
-    const res = await axios.get<CourseDetail>(`/courses/getCourse/${courseCode}`);
-    dispatch(setCourse(res.data));
-  };
-
-  const getPathToCoursesById = async (courseCode: string) => {
-    const res = await axios.post<CoursesUnlockedWhenTaken>(`/courses/coursesUnlockedWhenTaken/${courseCode}`, JSON.stringify(prepareUserPayload(degree, planner)));
-    setCoursesPathTo(res.data);
-  };
-
-  const getPathFromCoursesById = async (courseCode: string) => {
-    const res = await axios.get<CoursePathFrom>(`/courses/getPathFrom/${courseCode}`);
-    setCoursesPathFrom(res.data.courses);
-  };
-
-  const getCapacityAndEnrolment = (data: CourseTimetable) => {
-    const enrolmentCapacityData: EnrolmentCapacityData = {
-      enrolments: 0,
-      capacity: 0,
-    };
-    for (let i = 0; i < data.classes.length; i++) {
-      if (
-        data.classes[i].activity === 'Lecture'
-        || data.classes[i].activity === 'Seminar'
-        || data.classes[i].activity === 'Thesis Research'
-        || data.classes[i].activity === 'Project'
-      ) {
-        enrolmentCapacityData.enrolments
-          += data.classes[i].courseEnrolment.enrolments;
-        enrolmentCapacityData.capacity
-          += data.classes[i].courseEnrolment.capacity;
-      }
-    }
-    setCourseCapacity(enrolmentCapacityData);
-  };
-
-  const getCourseCapacityById = async (code: string) => {
-    try {
-      const res = await axios.get<CourseTimetable>(`${TIMETABLE_API_URL}/${code}`);
-      if (res.status === 200) {
-        getCapacityAndEnrolment(res.data);
-      } else {
-        setCourseCapacity(null);
-      }
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log('Error at getCourseCapacityById', e);
-    }
-  };
-
-  const fetchCourseData = async (courseCode: string) => {
-    setPageLoaded(false);
-    await Promise.all([
-      getCourse(courseCode),
-      getPathFromCoursesById(courseCode),
-      getPathToCoursesById(courseCode),
-      getCourseCapacityById(courseCode),
-    ]);
-    setPageLoaded(true);
-  };
-
   useEffect(() => {
+    const getCourse = async (courseCode: string) => {
+      const res = await axios.get<CourseDetail>(`/courses/getCourse/${courseCode}`);
+      dispatch(setCourse(res.data));
+    };
+
+    const getPathToCoursesById = async (courseCode: string) => {
+      const res = await axios.post<CoursesUnlockedWhenTaken>(`/courses/coursesUnlockedWhenTaken/${courseCode}`, JSON.stringify(prepareUserPayload(degree, planner)));
+      setCoursesPathTo(res.data);
+    };
+
+    const getPathFromCoursesById = async (courseCode: string) => {
+      const res = await axios.get<CoursePathFrom>(`/courses/getPathFrom/${courseCode}`);
+      setCoursesPathFrom(res.data.courses);
+    };
+
+    const getCapacityAndEnrolment = (data: CourseTimetable) => {
+      const enrolmentCapacityData: EnrolmentCapacityData = {
+        enrolments: 0,
+        capacity: 0,
+      };
+      for (let i = 0; i < data.classes.length; i++) {
+        if (
+          data.classes[i].activity === 'Lecture'
+          || data.classes[i].activity === 'Seminar'
+          || data.classes[i].activity === 'Thesis Research'
+          || data.classes[i].activity === 'Project'
+        ) {
+          enrolmentCapacityData.enrolments
+            += data.classes[i].courseEnrolment.enrolments;
+          enrolmentCapacityData.capacity
+            += data.classes[i].courseEnrolment.capacity;
+        }
+      }
+      setCourseCapacity(enrolmentCapacityData);
+    };
+
+    const getCourseCapacityById = async (code: string) => {
+      try {
+        const res = await axios.get<CourseTimetable>(`${TIMETABLE_API_URL}/${code}`);
+        if (res.status === 200) {
+          getCapacityAndEnrolment(res.data);
+        } else {
+          setCourseCapacity(null);
+        }
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.log('Error at getCourseCapacityById', e);
+      }
+    };
+
+    const fetchCourseData = async (courseCode: string) => {
+      setPageLoaded(false);
+      await Promise.all([
+        getCourse(courseCode),
+        getPathFromCoursesById(courseCode),
+        getPathToCoursesById(courseCode),
+        getCourseCapacityById(courseCode),
+      ]);
+      setPageLoaded(true);
+    };
+
     if (id) fetchCourseData(id);
-  }, [id]);
+  }, [degree, dispatch, id, planner]);
 
   const courseAttributesData = course ? [
     {

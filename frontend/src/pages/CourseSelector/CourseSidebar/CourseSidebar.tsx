@@ -46,58 +46,58 @@ const CourseSidebar = ({ structure, showLockedCourses }: Props) => {
 
   const [pageLoaded, setPageLoaded] = useState(false);
 
-  // generate menu content
-  const generateMenuData = (courses: Record<string, CourseValidation>) => {
-    const newMenu: MenuDataStructure = {};
-    const newCoursesUnits: CourseUnitsStructure = {};
-
-    // Example groups: Major, Minor, General, Rules
-    Object.keys(structure).forEach((group) => {
-      // Do not include 'Rules' group in sidebar
-      if (group === 'Rules') return;
-
-      newMenu[group] = {};
-      newCoursesUnits[group] = {};
-
-      // Example subgroup: Core Courses, Computing Electives
-      Object.keys(structure[group].content).forEach((subgroup) => {
-        const subgroupStructure = structure[group].content[subgroup];
-        newCoursesUnits[group][subgroup] = {
-          total: subgroupStructure.UOC,
-          curr: 0,
-        };
-        newMenu[group][subgroup] = [];
-
-        if (subgroupStructure.courses && !subgroupStructure.type.includes('rule')) {
-          // only consider disciplinary component courses
-          Object.keys(subgroupStructure.courses).forEach((courseCode) => {
-            // suppress gen ed courses if it has not been added to the planner
-            if (subgroupStructure.type === 'gened' && !planner.courses[courseCode]) return;
-
-            newMenu[group][subgroup].push({
-              courseCode,
-              title: subgroupStructure.courses[courseCode],
-              unlocked: !!courses[courseCode],
-              accuracy: courses[courseCode]
-                ? courses[courseCode].is_accurate
-                : true,
-            });
-
-            // add UOC to curr
-            if (planner.courses[courseCode]) {
-              newCoursesUnits[group][subgroup].curr
-                  += planner.courses[courseCode].UOC;
-            }
-          });
-        }
-      });
-    });
-    setMenuData(newMenu);
-    setCoursesUnits(newCoursesUnits);
-    setPageLoaded(true);
-  };
-
   const getAllUnlocked = useCallback(async () => {
+    // generate menu content
+    const generateMenuData = (courses: Record<string, CourseValidation>) => {
+      const newMenu: MenuDataStructure = {};
+      const newCoursesUnits: CourseUnitsStructure = {};
+
+      // Example groups: Major, Minor, General, Rules
+      Object.keys(structure).forEach((group) => {
+      // Do not include 'Rules' group in sidebar
+        if (group === 'Rules') return;
+
+        newMenu[group] = {};
+        newCoursesUnits[group] = {};
+
+        // Example subgroup: Core Courses, Computing Electives
+        Object.keys(structure[group].content).forEach((subgroup) => {
+          const subgroupStructure = structure[group].content[subgroup];
+          newCoursesUnits[group][subgroup] = {
+            total: subgroupStructure.UOC,
+            curr: 0,
+          };
+          newMenu[group][subgroup] = [];
+
+          if (subgroupStructure.courses && !subgroupStructure.type.includes('rule')) {
+          // only consider disciplinary component courses
+            Object.keys(subgroupStructure.courses).forEach((courseCode) => {
+            // suppress gen ed courses if it has not been added to the planner
+              if (subgroupStructure.type === 'gened' && !planner.courses[courseCode]) return;
+
+              newMenu[group][subgroup].push({
+                courseCode,
+                title: subgroupStructure.courses[courseCode],
+                unlocked: !!courses[courseCode],
+                accuracy: courses[courseCode]
+                  ? courses[courseCode].is_accurate
+                  : true,
+              });
+
+              // add UOC to curr
+              if (planner.courses[courseCode]) {
+                newCoursesUnits[group][subgroup].curr
+                  += planner.courses[courseCode].UOC;
+              }
+            });
+          }
+        });
+      });
+      setMenuData(newMenu);
+      setCoursesUnits(newCoursesUnits);
+      setPageLoaded(true);
+    };
+
     try {
       const res = await axios.post<CoursesAllUnlocked>(
         '/courses/getAllUnlocked/',
@@ -109,7 +109,7 @@ const CourseSidebar = ({ structure, showLockedCourses }: Props) => {
       // eslint-disable-next-line
       console.log(err);
     }
-  }, [planner, structure, degree]);
+  }, [structure, planner, degree, dispatch]);
 
   // get all courses
   useEffect(() => {
@@ -173,7 +173,7 @@ const CourseSidebar = ({ structure, showLockedCourses }: Props) => {
       }));
       setItems(menuItems);
     }
-  }, [coursesUnits]);
+  }, [coursesUnits, menuData, planner.courses, showLockedCourses, structure]);
 
   const handleClick = ({ key }: { key: string }) => {
     // course code is first 8 chars due to the key being course code + group + subGroup

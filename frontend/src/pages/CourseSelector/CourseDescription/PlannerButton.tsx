@@ -32,7 +32,7 @@ const PlannerButton = () => {
     if (!!coursesInPlanner[id] === isAddedInPlanner) return;
     setLoading(true);
     addCourseToPlannerTimeout(!!coursesInPlanner[id]);
-  }, [coursesInPlanner]);
+  }, [coursesInPlanner, id, isAddedInPlanner]);
 
   const addToPlanner = () => {
     if (course) {

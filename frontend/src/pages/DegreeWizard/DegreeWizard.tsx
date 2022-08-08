@@ -48,7 +48,7 @@ const DegreeWizard = () => {
       dispatch(resetCourses());
     }
     csDegreeDisclaimer();
-  }, []);
+  }, [degree.isComplete, dispatch]);
 
   useEffect(() => {
     const getSteps = async () => {

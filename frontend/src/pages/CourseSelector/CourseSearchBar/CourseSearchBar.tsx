@@ -20,26 +20,26 @@ const CourseSearchBar = () => {
   const planner = useSelector((state: RootState) => state.planner);
   const degree = useSelector((state: RootState) => state.degree);
 
-  const searchCourse = async (query: string) => {
-    try {
-      const res = await axios.post<SearchCourse>(
-        `/courses/searchCourse/${query}`,
-        JSON.stringify(prepareUserPayload(degree, planner)),
-      );
-      setCourses(
-        Object.keys(res.data).map((course) => ({
-          label: `${course}: ${res.data[course]}`,
-          value: course,
-        })),
-      );
-    } catch (err) {
-      // eslint-disable-next-line
-      console.log(err);
-    }
-    setIsLoading(false);
-  };
-
   useEffect(() => {
+    const searchCourse = async (query: string) => {
+      try {
+        const res = await axios.post<SearchCourse>(
+          `/courses/searchCourse/${query}`,
+          JSON.stringify(prepareUserPayload(degree, planner)),
+        );
+        setCourses(
+          Object.keys(res.data).map((course) => ({
+            label: `${course}: ${res.data[course]}`,
+            value: course,
+          })),
+        );
+      } catch (err) {
+        // eslint-disable-next-line
+        console.log(err);
+      }
+      setIsLoading(false);
+    };
+
     if (debouncedSearchTerm) {
       // if debounced term changes, call API
       searchCourse(debouncedSearchTerm);

@@ -56,25 +56,24 @@ const TermPlanner = () => {
   if (JSON.stringify(marksRef.current) !== JSON.stringify(getMarkList())) {
     marksRef.current = getMarkList();
   }
-  const validateTermPlanner = async () => {
-    try {
-      const res = await axios.post<ValidateTermPlanner>(
-        '/planner/validateTermPlanner/',
-        JSON.stringify(prepareCoursesForValidationPayload(planner, degree, showWarnings)),
-      );
-      dispatch(toggleWarnings(res.data.courses_state));
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.log(err);
-    }
-  };
 
   useEffect(() => {
+    const validateTermPlanner = async () => {
+      try {
+        const res = await axios.post<ValidateTermPlanner>(
+          '/planner/validateTermPlanner/',
+          JSON.stringify(prepareCoursesForValidationPayload(planner, degree, showWarnings)),
+        );
+        dispatch(toggleWarnings(res.data.courses_state));
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.log(err);
+      }
+    };
+
     if (isPlannerEmpty(planner.years)) openNotification();
     validateTermPlanner();
-  }, [
-    degree, planner.years, planner.startYear, marksRef.current, showWarnings,
-  ]);
+  }, [degree, planner.years, planner.startYear, showWarnings, planner, dispatch]);
 
   const currYear = new Date().getFullYear();
 

@@ -16,39 +16,39 @@ const TableView = ({ isLoading, structure }: Props) => {
   const [tableLayout, setTableLayout] = useState<TableStructure>({});
   const { years, startYear, courses } = useSelector((store: RootState) => store.planner);
 
-  const generateTableStructure = (plannedCourses: Record<string, FormattedPlannerCourse>) => {
-    const newTableLayout: TableStructure = {};
+  useEffect(() => {
+    const generateTableStructure = (plannedCourses: Record<string, FormattedPlannerCourse>) => {
+      const newTableLayout: TableStructure = {};
 
-    // Example groups: Major, Minor, General, Rules
-    Object.keys(structure).forEach((group) => {
-      newTableLayout[group] = {};
-      // Example subgroup: Core Courses, Computing Electives
-      Object.keys(structure[group]).forEach((subgroup) => {
-        const subgroupStructure = structure[group].content[subgroup];
+      // Example groups: Major, Minor, General, Rules
+      Object.keys(structure).forEach((group) => {
+        newTableLayout[group] = {};
+        // Example subgroup: Core Courses, Computing Electives
+        Object.keys(structure[group]).forEach((subgroup) => {
+          const subgroupStructure = structure[group].content[subgroup];
 
-        newTableLayout[group][subgroup] = [];
+          newTableLayout[group][subgroup] = [];
 
-        // only consider disciplinary component courses
-        Object.keys(subgroupStructure.courses).forEach((courseCode) => {
-          if (courseCode in plannedCourses) {
-            newTableLayout[group][subgroup].push({
-              key: courseCode,
-              title: plannedCourses[courseCode].title,
-              UOC: plannedCourses[courseCode].UOC,
-              termPlanned: plannedCourses[courseCode].termPlanned,
-            });
-            newTableLayout[group][subgroup].sort(
-              (a, b) => a.termPlanned.localeCompare(b.termPlanned),
-            );
-          }
+          // only consider disciplinary component courses
+          Object.keys(subgroupStructure.courses).forEach((courseCode) => {
+            if (courseCode in plannedCourses) {
+              newTableLayout[group][subgroup].push({
+                key: courseCode,
+                title: plannedCourses[courseCode].title,
+                UOC: plannedCourses[courseCode].UOC,
+                termPlanned: plannedCourses[courseCode].termPlanned,
+              });
+              newTableLayout[group][subgroup].sort(
+                (a, b) => a.termPlanned.localeCompare(b.termPlanned),
+              );
+            }
+          });
         });
       });
-    });
 
-    return newTableLayout;
-  };
+      return newTableLayout;
+    };
 
-  useEffect(() => {
     const plannerCourses = getFormattedPlannerCourses(years, startYear, courses);
     const tableStructure = generateTableStructure(plannerCourses);
     setTableLayout(tableStructure);

@@ -33,116 +33,116 @@ const PrerequisiteTree = ({ courseCode }: Props) => {
   const ref = useRef<HTMLDivElement | null>(null);
   const { degree, planner } = useSelector((state: RootState) => state);
 
-  /* GRAPH IMPLEMENTATION */
-  const generateTreeGraph = (graphData: TreeGraphData) => {
-    const container = ref.current;
-    if (!container) return;
+  useEffect(() => {
+    /* GRAPH IMPLEMENTATION */
+    const generateTreeGraph = (graphData: TreeGraphData) => {
+      const container = ref.current;
+      if (!container) return;
 
-    const treeGraphInstance = new G6.TreeGraph({
-      container,
-      width: container.scrollWidth,
-      height: container.scrollHeight,
-      fitView: true,
-      layout: GRAPH_STYLE.graphLayout,
-      defaultNode: GRAPH_STYLE.defaultNode,
-      defaultEdge: GRAPH_STYLE.defaultEdge,
-    });
+      const treeGraphInstance = new G6.TreeGraph({
+        container,
+        width: container.scrollWidth,
+        height: container.scrollHeight,
+        fitView: true,
+        layout: GRAPH_STYLE.graphLayout,
+        defaultNode: GRAPH_STYLE.defaultNode,
+        defaultEdge: GRAPH_STYLE.defaultEdge,
+      });
 
-    setGraph(treeGraphInstance);
+      setGraph(treeGraphInstance);
 
-    treeGraphInstance.data(graphData);
+      treeGraphInstance.data(graphData);
 
-    updateEdges(treeGraphInstance, graphData);
+      updateEdges(treeGraphInstance, graphData);
 
-    treeGraphInstance.render();
+      treeGraphInstance.render();
 
-    bringEdgeLabelsToFront(treeGraphInstance);
+      bringEdgeLabelsToFront(treeGraphInstance);
 
-    treeGraphInstance.on('node:click', (event) => {
+      treeGraphInstance.on('node:click', (event) => {
       // open new course tab
-      const node = event.item;
-      if (node && typeof node['_cfg']?.model?.label === 'string') {
-        dispatch(addTab(node['_cfg'].model.label));
-      }
-    });
-  };
-
-  // NOTE: This is for hot reloading in development as new graph will instantiate every time
-  const updateTreeGraph = (graphData: TreeGraphData) => {
-    if (!graph) return;
-    graph.changeData(graphData);
-    bringEdgeLabelsToFront(graph);
-  };
-
-  /* REQUESTS */
-  const getCourseUnlocks = async (code: string) => {
-    try {
-      const res = await axios.get<CourseChildren>(`/courses/courseChildren/${code}`);
-      return res.data.courses;
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log('Error at getCourseUnlocks', e);
-      return [];
-    }
-  };
-
-  const getCoursePrereqs = async (code: string) => {
-    try {
-      const res = await axios.get<CoursePathFrom>(`/courses/getPathFrom/${code}`);
-      return res.data.courses;
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log('Error at getCoursePrereqs', e);
-      return [];
-    }
-  };
-
-  const determineCourseAccuracy = async () => {
-    try {
-      const res = await axios.post<CoursesAllUnlocked>(
-        '/courses/getAllUnlocked/',
-        JSON.stringify(prepareUserPayload(degree, planner)),
-      );
-      setCourseAccurate(res.data.courses_state[courseCode].is_accurate);
-    } catch (err) {
-      // eslint-disable-next-line
-      console.log('Error at determineCourseAccuracy', err);
-    }
-  };
-
-  /* MAIN */
-  const setupGraph = async (c: string) => {
-    setLoading(true);
-
-    const unlocks = await getCourseUnlocks(c);
-    if (unlocks) setCourseUnlocks(unlocks);
-    const prereqs = await getCoursePrereqs(c);
-    if (prereqs) setCoursesRequires(prereqs);
-
-    // create graph data
-    const graphData = {
-      id: 'root',
-      label: courseCode,
-      children: prereqs?.map((child) => (handleNodeData(child, TREE_CONSTANTS.PREREQ)))
-        .concat(unlocks?.map((child) => (handleNodeData(child, TREE_CONSTANTS.UNLOCKS)))),
+        const node = event.item;
+        if (node && typeof node['_cfg']?.model?.label === 'string') {
+          dispatch(addTab(node['_cfg'].model.label));
+        }
+      });
     };
 
-    // render graph
-    if (!graph) {
-      generateTreeGraph(graphData);
-    } else {
+    // NOTE: This is for hot reloading in development as new graph will instantiate every time
+    const updateTreeGraph = (graphData: TreeGraphData) => {
+      if (!graph) return;
+      graph.changeData(graphData);
+      bringEdgeLabelsToFront(graph);
+    };
+
+    /* REQUESTS */
+    const getCourseUnlocks = async (code: string) => {
+      try {
+        const res = await axios.get<CourseChildren>(`/courses/courseChildren/${code}`);
+        return res.data.courses;
+      } catch (e) {
+      // eslint-disable-next-line no-console
+        console.log('Error at getCourseUnlocks', e);
+        return [];
+      }
+    };
+
+    const getCoursePrereqs = async (code: string) => {
+      try {
+        const res = await axios.get<CoursePathFrom>(`/courses/getPathFrom/${code}`);
+        return res.data.courses;
+      } catch (e) {
+      // eslint-disable-next-line no-console
+        console.log('Error at getCoursePrereqs', e);
+        return [];
+      }
+    };
+
+    const determineCourseAccuracy = async () => {
+      try {
+        const res = await axios.post<CoursesAllUnlocked>(
+          '/courses/getAllUnlocked/',
+          JSON.stringify(prepareUserPayload(degree, planner)),
+        );
+        setCourseAccurate(res.data.courses_state[courseCode].is_accurate);
+      } catch (err) {
+      // eslint-disable-next-line
+      console.log('Error at determineCourseAccuracy', err);
+      }
+    };
+
+    /* MAIN */
+    const setupGraph = async (c: string) => {
+      setLoading(true);
+
+      const unlocks = await getCourseUnlocks(c);
+      if (unlocks) setCourseUnlocks(unlocks);
+      const prereqs = await getCoursePrereqs(c);
+      if (prereqs) setCoursesRequires(prereqs);
+
+      // create graph data
+      const graphData = {
+        id: 'root',
+        label: courseCode,
+        children: prereqs?.map((child) => (handleNodeData(child, TREE_CONSTANTS.PREREQ)))
+          .concat(unlocks?.map((child) => (handleNodeData(child, TREE_CONSTANTS.UNLOCKS)))),
+      };
+
+      // render graph
+      if (!graph) {
+        generateTreeGraph(graphData);
+      } else {
       // NOTE: This is for hot reloading in development as new graph will instantiate every time
-      updateTreeGraph(graphData);
-    }
+        updateTreeGraph(graphData);
+      }
 
-    setLoading(false);
-  };
+      setLoading(false);
+    };
 
-  useEffect(() => {
     determineCourseAccuracy();
 
     if (courseCode) setupGraph(courseCode);
-  }, [courseCode]);
+  }, [courseCode, degree, dispatch, graph, planner]);
 
   return (
     !courseAccurate ? (

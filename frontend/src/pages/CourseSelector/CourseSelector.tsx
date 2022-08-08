@@ -34,7 +34,7 @@ const CourseSelector = () => {
 
     // only open for users with no courses
     if (!Object.keys(courses).length) openNotification();
-  }, []);
+  }, [courses]);
 
   useEffect(() => {
     // get structure of degree

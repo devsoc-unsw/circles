@@ -25,7 +25,7 @@ const PageLoading = ({ setLoading }: Props) => {
       navigate(!degree.isComplete ? '/degree-wizard' : route);
       setLoading(false);
     }, 750);
-  }, []);
+  }, [degree.isComplete, navigate, route, setLoading]);
 
   return (
     <S.PageWrapper>
