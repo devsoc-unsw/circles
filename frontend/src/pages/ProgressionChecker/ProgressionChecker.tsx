@@ -96,7 +96,7 @@ const ProgressionChecker = () => {
         setUoc(res.data.uoc);
       } catch (err) {
         // eslint-disable-next-line no-console
-        console.log(err);
+        console.log('Error at fetchStructure', err);
       }
       setIsLoading(false);
     };

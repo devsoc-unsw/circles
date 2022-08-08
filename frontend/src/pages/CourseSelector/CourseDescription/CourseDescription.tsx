@@ -49,18 +49,33 @@ const CourseDescription = () => {
 
   useEffect(() => {
     const getCourse = async (courseCode: string) => {
-      const res = await axios.get<CourseDetail>(`/courses/getCourse/${courseCode}`);
-      dispatch(setCourse(res.data));
+      try {
+        const res = await axios.get<CourseDetail>(`/courses/getCourse/${courseCode}`);
+        dispatch(setCourse(res.data));
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.log('Error at getCourse', e);
+      }
     };
 
     const getPathToCoursesById = async (courseCode: string) => {
-      const res = await axios.post<CoursesUnlockedWhenTaken>(`/courses/coursesUnlockedWhenTaken/${courseCode}`, JSON.stringify(prepareUserPayload(degree, planner)));
-      setCoursesPathTo(res.data);
+      try {
+        const res = await axios.post<CoursesUnlockedWhenTaken>(`/courses/coursesUnlockedWhenTaken/${courseCode}`, JSON.stringify(prepareUserPayload(degree, planner)));
+        setCoursesPathTo(res.data);
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.log('Error at getPathToCoursesById', e);
+      }
     };
 
     const getPathFromCoursesById = async (courseCode: string) => {
-      const res = await axios.get<CoursePathFrom>(`/courses/getPathFrom/${courseCode}`);
-      setCoursesPathFrom(res.data.courses);
+      try {
+        const res = await axios.get<CoursePathFrom>(`/courses/getPathFrom/${courseCode}`);
+        setCoursesPathFrom(res.data.courses);
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.log('Error at getPathFromCoursesById', e);
+      }
     };
 
     const getCapacityAndEnrolment = (data: CourseTimetable) => {

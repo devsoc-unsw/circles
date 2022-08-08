@@ -57,9 +57,14 @@ const PlannerButton = () => {
   };
 
   const removeFromPlanner = async () => {
-    const res = await axios.post<UnselectCourses>(`/courses/unselectCourse/${id}`, JSON.stringify(prepareUserPayload(degree, planner)));
-    addCourseToPlannerTimeout(false);
-    dispatch(removeCourses(res.data.courses));
+    try {
+      const res = await axios.post<UnselectCourses>(`/courses/unselectCourse/${id}`, JSON.stringify(prepareUserPayload(degree, planner)));
+      addCourseToPlannerTimeout(false);
+      dispatch(removeCourses(res.data.courses));
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.log('Error at removeFromPlanner', e);
+    }
   };
 
   return (

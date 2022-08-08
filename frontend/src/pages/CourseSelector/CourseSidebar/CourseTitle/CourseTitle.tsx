@@ -31,24 +31,29 @@ const CourseTitle = ({
 
   const addToPlanner = async (e: React.MouseEvent<HTMLElement>, code: string) => {
     e.stopPropagation();
-    const { data: course } = await axios.get<CourseDetail>(`/courses/getCourse/${code}`);
+    try {
+      const { data: course } = await axios.get<CourseDetail>(`/courses/getCourse/${code}`);
 
-    const courseData: PlannerCourse = {
-      title: course.title,
-      termsOffered: course.terms,
-      UOC: course.UOC,
-      plannedFor: null,
-      prereqs: course.raw_requirements,
-      isLegacy: course.is_legacy,
-      isUnlocked: true,
-      warnings: [],
-      handbookNote: course.handbook_note,
-      isAccurate: course.is_accurate,
-      isMultiterm: course.is_multiterm,
-      supressed: false,
-      mark: undefined,
-    };
-    dispatch(addToUnplanned({ courseCode: course.code, courseData }));
+      const courseData: PlannerCourse = {
+        title: course.title,
+        termsOffered: course.terms,
+        UOC: course.UOC,
+        plannedFor: null,
+        prereqs: course.raw_requirements,
+        isLegacy: course.is_legacy,
+        isUnlocked: true,
+        warnings: [],
+        handbookNote: course.handbook_note,
+        isAccurate: course.is_accurate,
+        isMultiterm: course.is_multiterm,
+        supressed: false,
+        mark: undefined,
+      };
+      dispatch(addToUnplanned({ courseCode: course.code, courseData }));
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.log('Error at addToPlanner', err);
+    }
   };
 
   const removeFromPlanner = async (e: React.MouseEvent<HTMLElement>, code: string) => {

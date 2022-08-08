@@ -52,8 +52,13 @@ const DegreeWizard = () => {
 
   useEffect(() => {
     const getSteps = async () => {
-      const res = await axios.get<SpecialisationTypes>(`/specialisations/getSpecialisationTypes/${degree.programCode}`);
-      setSpecs(res.data.types);
+      try {
+        const res = await axios.get<SpecialisationTypes>(`/specialisations/getSpecialisationTypes/${degree.programCode}`);
+        setSpecs(res.data.types);
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.log('Error at getSteps', e);
+      }
     };
     if (degree.programCode !== '') getSteps();
   }, [degree.programCode]);

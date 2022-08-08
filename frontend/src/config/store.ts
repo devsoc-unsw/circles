@@ -59,10 +59,15 @@ const migrations: MigrationManifest = {
 
     const courses = Object.keys(newState.planner.courses);
     await Promise.all(courses.map(async (course) => {
-      const res = await axios.get<CourseDetail>(`/courses/getCourse/${course}`);
-      if (res.status === 200) {
-        const courseData = res.data;
-        newState.planner.courses[courseData.code].is_multiterm = courseData.is_multiterm;
+      try {
+        const res = await axios.get<CourseDetail>(`/courses/getCourse/${course}`);
+        if (res.status === 200) {
+          const courseData = res.data;
+          newState.planner.courses[courseData.code].is_multiterm = courseData.is_multiterm;
+        }
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.log('Error at migrations v3', e);
       }
     }));
     return newState;

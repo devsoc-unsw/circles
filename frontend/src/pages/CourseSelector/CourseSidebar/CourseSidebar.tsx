@@ -107,7 +107,7 @@ const CourseSidebar = ({ structure, showLockedCourses }: Props) => {
       generateMenuData(res.data.courses_state);
     } catch (err) {
       // eslint-disable-next-line
-      console.log(err);
+      console.log('Error at getAllUnlocked', err);
     }
   }, [structure, planner, degree, dispatch]);
 

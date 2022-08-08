@@ -33,8 +33,13 @@ const SpecialisationStep = ({ incrementStep, currStep, type }: Props) => {
   const [options, setOptions] = useState<Specialisation>({ someProgramName: { specs: { major: 'major data' }, notes: 'a note' } });
 
   const fetchAllSpecialisations = useCallback(async () => {
-    const res = await axios.get<Specialisations>(`/specialisations/getSpecialisations/${programCode}/${type}`);
-    setOptions(res.data.spec as Specialisation);
+    try {
+      const res = await axios.get<Specialisations>(`/specialisations/getSpecialisations/${programCode}/${type}`);
+      setOptions(res.data.spec as Specialisation);
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.log('Error at getSteps', e);
+    }
   }, [programCode, type]);
 
   useEffect(() => {
