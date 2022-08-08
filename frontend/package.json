@@ -38,7 +38,7 @@
   },
   "scripts": {
     "start": "vite --port 3000 --host",
-    "start:local": "VITE_BACKEND_API_BASE_URL=https://circlesapi.csesoc.app VITE_ENV=dev vite --port 3000 --host",
+    "start:local": "VITE_BACKEND_API_BASE_URL=https://circlesapi.csesoc.app vite --port 3000 --host",
     "build": "export NODE_OPTIONS=--max_old_space_size=4096; vite build",
     "preview": "vite preview --host",
     "test": "vitest run",
