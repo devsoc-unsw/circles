@@ -11,7 +11,7 @@ import { darkTheme, GlobalStyles, lightTheme } from 'config/theme';
 import PageLoading from './components/PageLoading';
 import CourseSelector from './pages/CourseSelector';
 import DegreeWizard from './pages/DegreeWizard';
-// import GraphicalSelector from './pages/GraphicalSelector';
+import GraphicalSelector from './pages/GraphicalSelector';
 import Page404 from './pages/Page404';
 import ProgressionChecker from './pages/ProgressionChecker';
 import TermPlanner from './pages/TermPlanner';
@@ -35,7 +35,7 @@ const App = () => {
             <Routes>
               <Route path="/degree-wizard" element={<DegreeWizard />} />
               <Route path="/course-selector" element={<CourseSelector />} />
-              {/* <Route path="/graphical-selector" element={<GraphicalSelector />} /> */}
+              <Route path="/graphical-selector" element={<GraphicalSelector />} />
               <Route path="/term-planner" element={<TermPlanner />} />
               <Route path="/progression-checker" element={<ProgressionChecker />} />
               <Route path="*" element={<Page404 />} />
