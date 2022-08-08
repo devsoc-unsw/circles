@@ -22,7 +22,7 @@ const DraggableTab = ({ tabName, index }: Props) => {
   const { active } = useSelector((state: RootState) => state.courseTabs);
   const theme = useTheme();
 
-  const getDraggableStyle = (style: DraggingStyle | NotDraggingStyle | undefined) => {
+  const getDraggableStyle = (style: DraggingStyle) => {
     // lock x axis when dragging
     if (style?.transform) {
       return {
@@ -63,7 +63,7 @@ const DraggableTab = ({ tabName, index }: Props) => {
           }}
           {...draggableProvided.draggableProps}
           {...draggableProvided.dragHandleProps}
-          style={getDraggableStyle(draggableProvided.draggableProps.style)}
+          style={getDraggableStyle(draggableProvided.draggableProps.style as DraggingStyle)}
           onMouseUp={handleMouseUp}
         >
           <S.TabNameWrapper>{tabName}</S.TabNameWrapper>
