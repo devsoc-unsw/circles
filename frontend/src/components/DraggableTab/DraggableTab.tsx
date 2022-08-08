@@ -35,13 +35,6 @@ const DraggableTab = ({ tabName, index }: Props) => {
     return style;
   };
 
-  const handleMouseUp = (e: React.MouseEvent<HTMLElement>) => {
-    const MIDDLE_CLICK_BTN = 1;
-    if (e.button === MIDDLE_CLICK_BTN) {
-      dispatch(removeTab(index));
-    }
-  };
-
   useEffect(() => {
     if (active === index && !scrolledTo && ref.current) {
       ref.current.scrollIntoView({ behavior: 'smooth' });
@@ -49,6 +42,18 @@ const DraggableTab = ({ tabName, index }: Props) => {
     }
     setScrolledTo(false);
   }, [active, tabInView, index, scrolledTo]);
+
+  const handleOnClick = (e: React.MouseEvent) => {
+    e.stopPropagation(); // stop propagation for above tab onclick event
+    dispatch(removeTab(index));
+  };
+
+  const handleMouseUp = (e: React.MouseEvent<HTMLElement>) => {
+    const MIDDLE_CLICK_BTN = 1;
+    if (e.button === MIDDLE_CLICK_BTN) {
+      dispatch(removeTab(index));
+    }
+  };
 
   return (
     <Draggable key={tabName} draggableId={tabName} index={index}>
@@ -71,10 +76,7 @@ const DraggableTab = ({ tabName, index }: Props) => {
             type="text"
             size="small"
             icon={<CloseOutlined style={{ fontSize: '12px', color: theme.text }} />}
-            onClick={(e) => {
-              e.stopPropagation(); // stop propagation for above tab onclick event
-              dispatch(removeTab(index));
-            }}
+            onClick={handleOnClick}
           />
         </S.DraggableTabWrapper>
       )}

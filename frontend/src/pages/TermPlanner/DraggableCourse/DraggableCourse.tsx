@@ -51,6 +51,11 @@ const DraggableCourse = ({
   );
   const errorIsInformational = shouldHaveWarning && isUnlocked
     && warningMessage.length === 0 && !isLegacy && isAccurate && isOffered;
+
+  const handleContextMenu = (e: React.MouseEvent) => {
+    if (!isDragDisabled) contextMenu.show(e);
+  };
+
   return (
     <>
       <Draggable
@@ -72,9 +77,7 @@ const DraggableCourse = ({
             data-tip
             data-for={code}
             id={code}
-            onContextMenu={(e) => {
-              if (!isDragDisabled) contextMenu.show(e);
-            }}
+            onContextMenu={handleContextMenu}
           >
             {!isDragDisabled && shouldHaveWarning
               && (errorIsInformational ? (

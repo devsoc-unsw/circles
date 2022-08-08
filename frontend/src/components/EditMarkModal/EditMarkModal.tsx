@@ -32,10 +32,6 @@ const EditMarkModal = ({
     setMarkValue(value);
   };
 
-  const handleCancel = () => {
-    setIsVisible(false);
-  };
-
   const updateMark = (mark: Mark) => {
     dispatch(updateCourseMark({
       code,
@@ -69,7 +65,7 @@ const EditMarkModal = ({
       title={`Edit mark for ${code}`}
       visible={isVisible}
       onOk={handleUpdateMark}
-      onCancel={handleCancel}
+      onCancel={() => setIsVisible(false)}
       width="350px"
     >
       <S.EditMarkWrapper>
