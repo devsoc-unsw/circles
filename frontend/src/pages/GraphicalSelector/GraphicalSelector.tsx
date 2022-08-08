@@ -1,14 +1,10 @@
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
 // @ts-nocheck
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-import type { Graph } from '@antv/g6';
-import { Algorithm } from '@antv/g6';
+import type {
+  Graph, GraphData, INode,
+} from '@antv/g6';
+import G6, { Algorithm } from '@antv/g6';
 import { Button } from 'antd';
 import axios from 'axios';
 import { CoursePathFrom, StructureCourseList } from 'types/api';
@@ -29,7 +25,7 @@ const GraphicalSelector = () => {
   const [loading, setLoading] = useState(true);
   const [course, setCourse] = useState<CourseDetail | null>(null);
 
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement | null>(null);
 
   // courses is a list of course codes
   const initialiseGraph = (courses: string[], courseEdges: CourseEdge[]) => {
@@ -60,7 +56,7 @@ const GraphicalSelector = () => {
 
     setGraph(graphInstance);
 
-    const data = {
+    const data: GraphData = {
       nodes: courses.map((c) => handleNodeData(c, plannedCourses)),
       edges: courseEdges,
     };
@@ -70,8 +66,8 @@ const GraphicalSelector = () => {
 
     graphInstance.on('node:click', async (ev) => {
       // load up course information
-      const node = ev.item;
-      if (!node) return;
+      const node = ev.item as INode;
+      if (!node || !node['_cfg']?.id) return;
       const { _cfg: { id } } = node;
       const res = await axios.get<CourseDetail>(`/courses/getCourse/${id}`);
       if (res.status === 200) setCourse(res.data);
@@ -80,10 +76,11 @@ const GraphicalSelector = () => {
       const { breadthFirstSearch } = Algorithm;
       if (node.hasState('click')) {
         graphInstance.clearItemStates(node, 'click');
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
         breadthFirstSearch(data, id, {
-          enter: ({ current }) => {
+          enter: ({ current }: { current: string }) => {
             if (id !== current) {
-              const currentNode = graphInstance.findById(current);
+              const currentNode = graphInstance.findById(current) as INode;
               // Unhiding node won't unhide other hidden nodes
               currentNode.getEdges().forEach((e) => e.show());
               currentNode.show();
@@ -92,10 +89,11 @@ const GraphicalSelector = () => {
         });
       } else if (node.getOutEdges().length) {
         graphInstance.setItemState(node, 'click', true);
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
         breadthFirstSearch(data, id, {
-          enter: ({ current }) => {
+          enter: ({ current }: { current: string }) => {
             if (id !== current) {
-              const currentNode = graphInstance.findById(current);
+              const currentNode = graphInstance.findById(current) as INode;
               currentNode.getEdges().forEach((e) => e.hide());
               currentNode.hide();
             }
