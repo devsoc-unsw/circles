@@ -100,8 +100,8 @@ const TermPlanner = () => {
     if (destination.droppableId !== 'unplanned') {
       // Check if multiterm course extends below bottom row of term planner
       if (planner.courses[draggableId].isMultiterm && !checkMultitermInBounds({
-        destRow: Number(destination.droppableId.match(/[0-9]{4}/)[0]) - planner.startYear,
-        destTerm: destination.droppableId.match(/T[0-3]/)[0] as Term,
+        destRow: Number(destination.droppableId.match(/[0-9]{4}/)?.[0]) - planner.startYear,
+        destTerm: destination.droppableId.match(/T[0-3]/)?.[0] as Term,
         srcTerm: source.droppableId as Term,
         course: planner.courses[draggableId],
         isSummerTerm: planner.isSummerEnabled,
@@ -142,8 +142,8 @@ const TermPlanner = () => {
       return;
     }
 
-    const destYear = Number(destination.droppableId.match(/[0-9]{4}/)[0]);
-    const destTerm = destination.droppableId.match(/T[0-3]/)[0] as Term;
+    const destYear = Number(destination.droppableId.match(/[0-9]{4}/)?.[0]);
+    const destTerm = destination.droppableId.match(/T[0-3]/)?.[0] as Term;
     const destRow = destYear - planner.startYear;
 
     if (source.droppableId === 'unplanned') {
@@ -153,8 +153,8 @@ const TermPlanner = () => {
       }));
     } else {
       // === move between terms ===
-      const srcYear = parseInt(source.droppableId.match(/[0-9]{4}/)[0], 10);
-      const srcTerm = source.droppableId.match(/T[0-3]/)[0] as Term;
+      const srcYear = parseInt(source.droppableId.match(/[0-9]{4}/)?.[0] as string, 10);
+      const srcTerm = source.droppableId.match(/T[0-3]/)?.[0] as Term;
       const srcRow = srcYear - planner.startYear;
       const srcIndex = source.index;
       dispatch(setPlannedCourseToTerm({

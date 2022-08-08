@@ -271,7 +271,7 @@ const plannerSlice = createSlice({
     removeCourses: (state, action: PayloadAction<CourseList>) => {
       const courses = action.payload;
       courses.forEach((course) => {
-        plannerSlice.caseReducers.removeCourse(state, { payload: course });
+        plannerSlice.caseReducers.removeCourse(state, { payload: course, type: 'planner/removeCourse' });
       });
     },
     removeAllCourses: (state) => {
@@ -315,7 +315,7 @@ const plannerSlice = createSlice({
     unscheduleAll: (state) => {
       Object.entries(state.courses).forEach(([code, desc]) => {
         if (desc.plannedFor !== null) {
-          plannerSlice.caseReducers.unschedule(state, { payload: { destIndex: null, code } });
+          plannerSlice.caseReducers.unschedule(state, { payload: { destIndex: null, code }, type: 'planner/unschedule' });
         }
       });
     },

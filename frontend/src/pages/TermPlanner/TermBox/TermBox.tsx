@@ -20,7 +20,7 @@ type Props = {
 const TermBox = ({
   name, coursesList, termsOffered, dragging,
 }: Props) => {
-  const term = name.match(/T[0-3]/)[0];
+  const term = name.match(/T[0-3]/)?.[0] as string;
   const theme = useTheme();
 
   const {

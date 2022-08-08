@@ -13,7 +13,7 @@ const PlannerContainer = styled.div`
   margin: var(--tp-planner-container-margin);
 `;
 
-const PlannerGridWrapper = styled.div<{ summerEnabled: boolean }>`
+const PlannerGridWrapper = styled.div<{ summerEnabled?: boolean }>`
   display: grid;
   grid-template-columns: ${({ summerEnabled }) => (summerEnabled ? '7em 1fr 1fr 1fr 1fr 1fr' : '7em 1fr 1fr 1fr 1fr')};
   align-items: center;

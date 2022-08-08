@@ -53,11 +53,11 @@ const LiquidProgressChart = ({ completedUOC, totalUOC }: Props) => {
         }),
       },
       content: {
-        style: () => ({
-          fontSize: 60,
+        style: {
+          fontSize: '60px',
           lineHeight: 1,
           fill: textColor,
-        }),
+        },
         formatter: () => `${(percent * 100).toFixed(0)}%`,
       },
     },

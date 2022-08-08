@@ -36,7 +36,7 @@ const DraggableCourse = ({
     isLegacy, isAccurate, termsOffered, handbookNote, supressed, mark,
   } = courses[code];
   const warningMessage = courses[code].warnings;
-  const isOffered = plannedFor && /T[0-3]/.test(plannedFor) ? termsOffered.includes(plannedFor.match(/T[0-3]/)[0]) : true;
+  const isOffered = plannedFor && /T[0-3]/.test(plannedFor) ? (termsOffered as string[]).includes(plannedFor.match(/T[0-3]/)?.[0] as string) : true;
   const BEwarnings = handbookNote !== '' || !!warningMessage.length;
 
   const contextMenu = useContextMenu({
