@@ -8,7 +8,7 @@ import PageTemplate from 'components/PageTemplate';
 import type { RootState } from 'config/store';
 import CourseBanner from './CourseBanner';
 import CourseDescription from './CourseDescription';
-import CourseSidebar from './CourseSidebar';
+import CourseMenu from './CourseMenu';
 import CourseTabs from './CourseTabs';
 import S from './styles';
 
@@ -19,8 +19,6 @@ const CourseSelector = () => {
     programCode, specs,
   } = useSelector((state: RootState) => state.degree);
   const { courses } = useSelector((state: RootState) => state.planner);
-
-  const { showLockedCourses } = useSelector((state: RootState) => state.settings);
 
   useEffect(() => {
     const openNotification = () => {
@@ -56,10 +54,7 @@ const CourseSelector = () => {
         <CourseBanner />
         <CourseTabs />
         <S.ContentWrapper>
-          <CourseSidebar
-            structure={structure}
-            showLockedCourses={showLockedCourses}
-          />
+          <CourseMenu structure={structure} />
           <CourseDescription />
         </S.ContentWrapper>
       </S.ContainerWrapper>

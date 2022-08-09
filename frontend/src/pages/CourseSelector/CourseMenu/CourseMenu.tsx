@@ -16,7 +16,6 @@ import { CourseUnitsStructure, MenuDataStructure, MenuDataSubgroup } from './typ
 
 type Props = {
   structure: ProgramStructure
-  showLockedCourses: boolean
 };
 
 type SubgroupTitleProps = {
@@ -34,7 +33,7 @@ const SubgroupTitle = ({ title, currUOC, totalUOC }: SubgroupTitleProps) => (
   </S.SubgroupHeader>
 );
 
-const CourseSidebar = ({ structure, showLockedCourses }: Props) => {
+const CourseMenu = ({ structure }: Props) => {
   const dispatch = useDispatch();
   const [menuData, setMenuData] = useState<MenuDataStructure>({});
   const [coursesUnits, setCoursesUnits] = useState<CourseUnitsStructure | null>(null);
@@ -43,6 +42,7 @@ const CourseSidebar = ({ structure, showLockedCourses }: Props) => {
   // get courses in planner
   const planner = useSelector((state: RootState) => state.planner);
   const degree = useSelector((state: RootState) => state.degree);
+  const { showLockedCourses } = useSelector((state: RootState) => state.settings);
 
   const [pageLoaded, setPageLoaded] = useState(false);
 
@@ -199,4 +199,4 @@ const CourseSidebar = ({ structure, showLockedCourses }: Props) => {
   );
 };
 
-export default CourseSidebar;
+export default CourseMenu;
