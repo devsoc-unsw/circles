@@ -293,7 +293,7 @@ def graph_test(
     edges = []
     failed_courses: List[str] = []
 
-    proto_edges = [map_suppressed_errors(
+    proto_edges: List[Dict[str, str]] = [map_suppressed_errors(
         get_path_from, failed_courses, course
     ) for course in courses]
     edges = prune_edges(
@@ -307,7 +307,7 @@ def graph_test(
         "err_edges": failed_courses,
     }
 
-def proto_edges_to_edges(proto_edges: Dict[str, str]):
+def proto_edges_to_edges(proto_edges: List[Dict[str, str]]):
     """
     Take the proto-edges created by calls to `path_from` and convert them into
     a full list of edges of form.
