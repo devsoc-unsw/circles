@@ -106,51 +106,24 @@ const GraphicalSelector = () => {
   };
 
   const setupGraph = async () => {
+    // new epic version
+    // const {data: edges, courses: courseList} = await axios.get(
+    //   `/programs/graph/${programCode}/${specs.join("+")}`);
+
+    /* start of old  - remove this block in liue of new version above*/
     const { courses: courseList } = (
       await axios.get(`/programs/getStructureCourseList/${programCode}/${specs.join("+")}`)
     ).data;
 
-    // TODO: Move this to the backend too
-    // should be a universal /programs/getGraphEdges/{programCode}/{specs}
-    // const courseList = (
-    //   Object.values(structure)
-    //     .flatMap((specialisation) => Object.values(specialisation)
-    //       .filter((spec) => typeof spec === "object" && spec.courses &&
-    //         !(spec.type.includes("rule") || spec.type.includes("gened")))
-    //       .flatMap((spec) => Object.keys(spec.courses)))
-    //     .filter((v, i, a) => a.indexOf(v) === i) // TODO: hack to make courseList unique
-    // );
-    
-    // const justData = res.map((r) => r.data);
-    /**
-      * [{
-        *   "courses": [ ], // This is the stuff that poinst to the coruse
-        *   "original": "CODEXXX" // Course code being pointed at
-        * }]
-        */
-    // console.log(justData);  
-
-    console.log("AHHHH");
-    const {data: testGraph} = await axios.get(
-      `/programs/graphtest/${programCode}/${specs.join("+")}`);
-    console.log(testGraph);
-    console.log("we made it");
-
     const res = await Promise.all(courseList.map((c) => axios.get(`/courses/getPathFrom/${c}`).catch((e) => e)));
-    console.log([res]);
     // filter any errors from res
     const children = res.filter((value) => value?.data?.courses).map((value) => value.data);
-    /**
-      * [x] course list
-      * [x] edges
-      * [x] constructr edges
-      * [ ] okay but now construct them properly
-      */
     const edges = children
       .flatMap((courseObject) => courseObject.courses
         .filter((c) => courseList.includes(c))
         .map((c) => ({ source: c, target: courseObject.original })));
-    console.log("edges", edges);
+    /* end of old */
+
     if (courseList.length !== 0 && edges.length !== 0) initialiseGraph(courseList, edges);
     setLoading(false);
   };
