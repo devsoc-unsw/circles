@@ -6,9 +6,14 @@
 """
 
 import copy
-from typing import Optional, Tuple
+import json
+from typing import Literal, Optional, Tuple
 import re
+from algorithms.cache.cache_config import CACHED_EQUIVALENTS_FILE
 from algorithms.objects.categories import AnyCategory, Category
+
+with open(CACHED_EQUIVALENTS_FILE, "r", encoding="utf8") as f:
+    CACHED_EQUIVALENTS: dict[str, dict[str, Literal[1]]] = json.load(f)
 
 class User:
     """ A user and their data which will be used to determine if they can take a course """
@@ -62,13 +67,17 @@ class User:
         """ Adds a specialisation to this user """
         self.specialisations[specialisation] = 1
 
+    def has_taken_specific_course(self, course):
+        """ taken a course directly, no equivalents """
+        return course in self.courses
+
     def has_taken_course(self, course: str):
         """ Determines if the user has taken this course """
-        return course in self.courses
+        return course in self.courses or any(c in self.courses for c in (CACHED_EQUIVALENTS.get(course) or []))
 
     def is_taking_course(self, course: str):
         """ Determines if the user is taking this course this term """
-        return course in self.cur_courses
+        return course in self.cur_courses or any(c in self.cur_courses for c in (CACHED_EQUIVALENTS.get(course) or []))
 
     def in_program(self, program: str):
         """ Determines if the user is in this program code """
