@@ -104,25 +104,10 @@ const GraphicalSelector = () => {
   };
 
   const setupGraph = async () => {
-    // new epic version
-    // const {data: edges, courses: courseList} = await axios.get(
-    //   `/programs/graph/${programCode}/${specs.join("+")}`);
+    const { data } = await axios.get(`/programs/graph/${programCode}/${specs.join("+")}`);
+    const { edges, courses } = data;
 
-    /* start of old  - remove this block in liue of new version above */
-    const { courses: courseList } = (
-      await axios.get(`/programs/getStructureCourseList/${programCode}/${specs.join("+")}`)
-    ).data;
-
-    const res = await Promise.all(courseList.map((c) => axios.get(`/courses/getPathFrom/${c}`).catch((e) => e)));
-    // filter any errors from res
-    const children = res.filter((value) => value?.data?.courses).map((value) => value.data);
-    const edges = children
-      .flatMap((courseObject) => courseObject.courses
-        .filter((c) => courseList.includes(c))
-        .map((c) => ({ source: c, target: courseObject.original })));
-    /* end of old */
-
-    if (courseList.length !== 0 && edges.length !== 0) initialiseGraph(courseList, edges);
+    if (courses.length !== 0 && edges.length !== 0) initialiseGraph(courses, edges);
     setLoading(false);
   };
 
