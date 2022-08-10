@@ -4,16 +4,29 @@ API for fetching data about programs and specialisations
 from contextlib import suppress
 import functools
 import re
-from typing import Callable, Mapping, Optional, Tuple, cast
+from typing import Callable, Dict, List, Mapping, Optional, Tuple, cast
 
 from fastapi import APIRouter, HTTPException
 
-from data.processors.models import CourseContainer, Program, ProgramContainer, Specialisation
+from data.processors.models import (
+    CourseContainer,
+    Program,
+    ProgramContainer,
+    Specialisation,
+)
 from data.utility import data_helpers
 from server.database import programsCOL, specialisationsCOL
 from server.manual_fixes import apply_manual_fixes
-from server.routers.courses import regex_search
-from server.routers.model import CourseCodes, Courses, Programs, StructureContainer, Structure
+from server.routers.courses import get_path_from, regex_search
+from server.routers.model import (
+    CourseCodes,
+    Courses,
+    Graph,
+    Programs,
+    Structure,
+    StructureContainer,
+)
+from server.routers.utility import map_suppressed_errors
 
 router = APIRouter(
     prefix="/programs",
@@ -278,17 +291,45 @@ def get_gen_eds(programCode: str):
     all_geneds = data_helpers.read_data("data/scrapers/genedPureRaw.json")
     return {"courses" : all_geneds[programCode]}
 
-@router.get("/graph")
-def courses_graph():
+@router.get("/graph/{programCode}/{spec}", response_model=Graph)
+@router.get("/graph/{programCode}", response_model=Graph)
+def graph(
+        programCode: str, spec: Optional[str]=None
+    ):
     """
     Constructs a structure for the frontend to use for the graphical
     selector.
-    Currently returns the ingoing and outgoing edges for each course
-    that is a part of the courselist
+    Returns back a list of directed edges where u -> v => u in v's
+    prereqs or coreqs. Will also return back a 
+    Returns:
+        "edges" :{
+            [
+                {
+                    "source": (str) "CODEXXXX",
+                    "target": (str) "CODEXXXX",
+                }
+            ]
+        },
+        "err_edges": [ "CODEXXXX", ... ]
     """
+    courses = get_structure_course_list(programCode, spec)["courses"]
+    edges = []
+    failed_courses: List[str] = []
+
+    proto_edges: List[Dict[str, str]] = [map_suppressed_errors(
+        get_path_from, failed_courses, course
+    ) for course in courses]
+    edges = prune_edges(
+            proto_edges_to_edges(proto_edges),
+            courses
+        )
+
     return {
-        "message": "This endpoint is not implemented yet",
+        "edges": edges,
+        "courses": courses,
+        "err_edges": failed_courses,
     }
+
 
 ###############################################################
 #                       End of Routes                         #
@@ -370,3 +411,37 @@ def compose(*functions: Callable) -> Callable:
         The functions are applied in the order they are given.
     """
     return functools.reduce(lambda f, g: lambda *args, **kwargs: f(g(*args, **kwargs)), functions)
+
+def proto_edges_to_edges(proto_edges: List[Dict[str, str]]) -> List[Dict[str, str]]:
+    """
+    Take the proto-edges created by calls to `path_from` and convert them into
+    a full list of edges of form.
+    [
+        {
+            "source": (str) - course_code, # This is the 'original' value
+            "target": (str) - course_code, # This is the value of 'courses'
+        }
+    ]
+    Effectively, turning an adjacency list into a flat list of edges
+    """
+    edges: List = []
+    for proto_edge in proto_edges:
+        # Incoming: { original: str,  courses: List[str]}
+        # Outcome:  { "src": str, "target": str }
+        if not proto_edge or not proto_edge["courses"]:
+            continue
+        for course in proto_edge["courses"]:
+            edges.append({
+                    "source": course,
+                    "target": proto_edge["original"],
+                }
+            )
+    return edges
+        
+
+def prune_edges(edges: List[Dict[str, str]], courses: List[str]) -> List[Dict[str, str]]:
+    """
+    Remove edges between vertices that are not in the list of courses provided.
+    """
+    return [edge for edge in edges if edge["source"] in courses and edge["target"] in courses]
+

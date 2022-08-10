@@ -4,8 +4,9 @@ import json
 import pickle
 from typing import Literal, Optional, TypedDict
 
-from algorithms.objects.conditions import CompositeCondition
 from pydantic import BaseModel
+
+from algorithms.objects.conditions import CompositeCondition
 
 class Programs(BaseModel):
     programs: dict
@@ -168,6 +169,16 @@ class Description(BaseModel):
 
 class SpecialisationTypes(BaseModel):
     types: list[str]
+
+class Graph(BaseModel):
+    class Config:
+        arbitrary_types_allowed = True
+    edges: list[dict[str, str]]
+    courses: list[str]
+    # tuple is of type (str, fastapi.exceptions.HTTPException)
+    err_edges: list[tuple]
+
+
 
 CONDITIONS_PATH = "data/final_data/conditions.pkl"
 with open(CONDITIONS_PATH, "rb") as file:

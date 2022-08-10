@@ -104,29 +104,10 @@ const GraphicalSelector = () => {
   };
 
   const setupGraph = async () => {
-    const { courses: courseList } = (
-      await axios.get(`/programs/getStructureCourseList/${programCode}/${specs.join("+")}`)
-    ).data;
+    const { data } = await axios.get(`/programs/graph/${programCode}/${specs.join("+")}`);
+    const { edges, courses } = data;
 
-    // TODO: Move this to the backend too
-    // should be a universal /programs/getGraphEdges/{programCode}/{specs}
-    // const courseList = (
-    //   Object.values(structure)
-    //     .flatMap((specialisation) => Object.values(specialisation)
-    //       .filter((spec) => typeof spec === "object" && spec.courses &&
-    //         !(spec.type.includes("rule") || spec.type.includes("gened")))
-    //       .flatMap((spec) => Object.keys(spec.courses)))
-    //     .filter((v, i, a) => a.indexOf(v) === i) // TODO: hack to make courseList unique
-    // );
-    const res = await Promise.all(courseList.map((c) => axios.get(`/courses/getPathFrom/${c}`).catch((e) => e)));
-
-    // filter any errors from res
-    const children = res.filter((value) => value?.data?.courses).map((value) => value.data);
-    const edges = children
-      .flatMap((courseObject) => courseObject.courses
-        .filter((c) => courseList.includes(c))
-        .map((c) => ({ source: c, target: courseObject.original })));
-    if (courseList.length !== 0 && edges.length !== 0) initialiseGraph(courseList, edges);
+    if (courses.length !== 0 && edges.length !== 0) initialiseGraph(courses, edges);
     setLoading(false);
   };
 
