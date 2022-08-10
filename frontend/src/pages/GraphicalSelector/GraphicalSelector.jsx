@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import G6, { Algorithm } from "@antv/g6";
@@ -110,7 +108,7 @@ const GraphicalSelector = () => {
     // const {data: edges, courses: courseList} = await axios.get(
     //   `/programs/graph/${programCode}/${specs.join("+")}`);
 
-    /* start of old  - remove this block in liue of new version above*/
+    /* start of old  - remove this block in liue of new version above */
     const { courses: courseList } = (
       await axios.get(`/programs/getStructureCourseList/${programCode}/${specs.join("+")}`)
     ).data;

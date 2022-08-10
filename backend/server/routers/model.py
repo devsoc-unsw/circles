@@ -4,7 +4,6 @@ import json
 import pickle
 from typing import Literal, Optional, TypedDict
 
-from fastapi.exceptions import HTTPException
 from pydantic import BaseModel
 
 from algorithms.objects.conditions import CompositeCondition
