@@ -10,14 +10,15 @@ TODO: This should be moved as a command that can be run by `run_processors.py`
 """
 
 import json
+from data.config import GRAPH_CACHE_FILE
 from data.utility.data_helpers import read_data, write_data
 
 OUTPUT_PATH = "./data"
 
 def cache_graph():
     graph = construct_full_graph()
-    with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
-        f.write(json.dump(graph))
+    write_data(graph, GRAPH_CACHE_FILE)
+
     return graph
 
 def construct_full_graph():

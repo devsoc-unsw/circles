@@ -1,5 +1,8 @@
 """
-Configuration file for Data
+Configuration file for Data.
+
+This is intended to be imported by modules executed from `/backend`.
+Assumes that `/backend` is the current working directory.
 """
 # NOTE: UNSW releases next year's handbook during the T2 holidays. However, it's
 # assumed that circles will only stably update to this new handbook a few weeks
@@ -19,3 +22,6 @@ ARCHIVED_YEARS = [2019, 2020, 2021, 2022]
 
 CONDITIONS_TOKEN_FILE = "./data/final_data/conditionsTokens.json"
 CONDITIONS_PICKLE_FILE = "./data/final_data/conditions.pkl"
+
+GRAPH_CACHE_FILE = "./data/"
+

@@ -3,10 +3,11 @@ Will pickle all the conditions into a dictionary. Run this file from the backend
 folder with python3 -m algorithms.load_conditions
 """
 
-import json
 import pickle
 
 from algorithms.create import create_condition
+from algorithms.objects.helper import read_data
+from data.config import CONDITIONS_PICKLE_FILE, CONDITIONS_TOKEN_FILE
 
 
 def cache_conditions_pkl_file():
@@ -17,20 +18,17 @@ def cache_conditions_pkl_file():
     Returns: None
     """
 
-    # Load in all the courses and their conditions list
-    all_conditions_tokens_file = "./data/final_data/conditionsTokens.json"
-    pickle_file = "./data/final_data/conditions.pkl"
+    # Load all the conditions objects
+    all_conditions_tokens = read_data(CONDITIONS_TOKEN_FILE)
 
-    with open(all_conditions_tokens_file, "r", encoding="utf8") as f:
-        all_conditions_tokens = json.load(f)
-
+    # Create a dictionary of all the conditions objects
     all_objects = {}
-
     for course, tokens in all_conditions_tokens.items():
         all_objects[course] = create_condition(tokens, course)
 
-    with open(pickle_file, "wb") as outp:
-        pickle.dump(all_objects, outp, pickle.HIGHEST_PROTOCOL)
+    # Dump the dictionary as a pickle file
+    with open(CONDITIONS_PICKLE_FILE, "wb") as f_out:
+        pickle.dump(all_objects, f_out, pickle.HIGHEST_PROTOCOL)
 
 
 if __name__ == "__main__":
