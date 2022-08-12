@@ -4,8 +4,10 @@ folder with python3 -m algorithms.load_conditions
 """
 
 import pickle
+from typing import Dict
 
 from algorithms.create import create_condition
+from algorithms.objects.conditions import CompositeCondition
 from algorithms.objects.helper import read_data
 from data.config import CONDITIONS_PICKLE_FILE, CONDITIONS_TOKEN_FILE
 
@@ -17,7 +19,21 @@ def cache_conditions_pkl_file():
     Input: None
     Returns: None
     """
+    all_objects = construct_conditions_objects()
 
+    # Dump the dictionary as a pickle file
+    with open(CONDITIONS_PICKLE_FILE, "wb") as f_out:
+        pickle.dump(all_objects, f_out, pickle.HIGHEST_PROTOCOL)
+
+def construct_conditions_objects() -> Dict[str, CompositeCondition | None]:
+    """
+    Construct conditions objects by reading all conditions tokens
+    and then creating a condition object for each course.
+
+    Returns: {
+            "CODEXXX" (str) : <CompositeCondition>
+        }
+    """
     # Load all the conditions objects
     all_conditions_tokens = read_data(CONDITIONS_TOKEN_FILE)
 
@@ -25,10 +41,8 @@ def cache_conditions_pkl_file():
     all_objects = {}
     for course, tokens in all_conditions_tokens.items():
         all_objects[course] = create_condition(tokens, course)
+    return all_objects
 
-    # Dump the dictionary as a pickle file
-    with open(CONDITIONS_PICKLE_FILE, "wb") as f_out:
-        pickle.dump(all_objects, f_out, pickle.HIGHEST_PROTOCOL)
 
 
 if __name__ == "__main__":
