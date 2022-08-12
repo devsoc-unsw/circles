@@ -15,18 +15,16 @@ import S from './styles';
 type Props = {
   code: string
   index: number
-  showMarks?: boolean
   term: string
 };
 
-const DraggableCourse = ({
-  code, index, showMarks, term,
-}: Props) => {
+const DraggableCourse = ({ code, index, term }: Props) => {
   const {
     courses,
     isSummerEnabled,
     completedTerms,
   } = useSelector((state: RootState) => state.planner);
+  const { showMarks } = useSelector((state: RootState) => state.settings);
   const theme = useTheme();
   const Text = Typography;
 

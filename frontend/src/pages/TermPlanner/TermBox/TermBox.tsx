@@ -28,7 +28,6 @@ const TermBox = ({
     completedTerms,
     courses,
   } = useSelector((state: RootState) => state.planner);
-  const { showMarks } = useSelector((state: RootState) => state.settings);
   const [totalUOC, setTotalUOC] = useState(0);
   const dispatch = useDispatch();
   const handleCompleteTerm = () => {
@@ -95,7 +94,6 @@ const TermBox = ({
                   key={`${code}${term}`}
                   code={code}
                   index={index}
-                  showMarks={showMarks}
                   term={term}
                 />
               ),
