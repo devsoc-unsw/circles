@@ -89,7 +89,7 @@ def convert_subgroup_object_to_courses_dict(object: str, description: str|list[s
 def add_subgroup_container(structure: dict[str, StructureContainer], type: str, container: ProgramContainer | CourseContainer, exceptions: list[str]) -> list[str]:
     """ Returns the added courses """
     # TODO: further standardise non_spec_data to remove these lines:
-    title = container["title"]
+    title = container.get("title")
     if container.get("type") == "gened":
         title = "General Education"
     conditional_type = container.get("type")
@@ -102,7 +102,7 @@ def add_subgroup_container(structure: dict[str, StructureContainer], type: str, 
                 course: description for course, description
                 in convert_subgroup_object_to_courses_dict(current[0], current[1]).items()
                 if course not in exceptions
-            }, container["courses"].items(), {}
+            }, container.get("courses", {}).items(), {}
         ),
         "type": container.get("type", "")
     }
@@ -113,7 +113,7 @@ def add_geneds_courses(programCode: str, structure: dict, container: ProgramCont
     if container.get("type") != "gened":
         return []
 
-    item = structure["General"]["General Education"]
+    item = structure["General"]["content"]["General Education"]
     item["courses"] = {}
 
     if container.get("courses") is None:
