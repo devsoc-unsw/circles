@@ -22,8 +22,10 @@ def cache_graph():
 
 def construct_full_graph():
     conditions_objects = construct_conditions_objects()
+    graph = {}
     for k, v in conditions_objects.items():
         print(k, v)
+        # print(v.children)
         exit(0)
 
 
