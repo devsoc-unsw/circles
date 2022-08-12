@@ -435,3 +435,4 @@ class CompositeCondition(Condition):
         if id == 'start':
             return json.dumps(data['children'][0])
         return json.dumps(data)
+

@@ -9,10 +9,11 @@ Do NOT run this from it's current location.
 TODO: This should be moved as a command that can be run by `run_processors.py`
 """
 
+from contextlib import suppress
 from data.config import GRAPH_CACHE_FILE
 from data.processors.load_conditions import construct_conditions_objects
-from data.processors.log_broken import CONDITIONS_TOKENS_FILE
-from data.utility.data_helpers import read_data, write_data
+from data.utility.data_helpers import write_data
+import json
 
 def cache_graph():
     graph = construct_full_graph()
@@ -24,9 +25,17 @@ def construct_full_graph():
     conditions_objects = construct_conditions_objects()
     graph = {}
     for k, v in conditions_objects.items():
-        print(k, v)
-        # print(v.children)
-        exit(0)
+        print("k: ", k)
+        with suppress(AttributeError):
+            try:
+                v = json.loads(str(v))
+                with suppress(KeyError):
+                    print(v["children"])
+            except json.JSONDecodeError:
+                print("ERRORRRRR\n"*5)
+                print(v)
+                print("\n"*5)
+    print(graph)
 
 
 if __name__ == "__main__":
