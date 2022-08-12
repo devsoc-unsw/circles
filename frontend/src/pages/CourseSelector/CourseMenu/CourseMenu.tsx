@@ -54,8 +54,9 @@ const CourseMenu = ({ structure }: Props) => {
 
       // Example groups: Major, Minor, General, Rules
       Object.keys(structure).forEach((group) => {
-      // Do not include 'Rules' group in sidebar
-        if (group === 'Rules') return;
+        // Do not include 'Rules' group in sidebar or any other groups that do not
+        // have subgroups
+        if (group === 'Rules' || !Object.keys(structure[group].content).length) return;
 
         newMenu[group] = {};
         newCoursesUnits[group] = {};
