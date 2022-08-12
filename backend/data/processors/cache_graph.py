@@ -9,11 +9,10 @@ Do NOT run this from it's current location.
 TODO: This should be moved as a command that can be run by `run_processors.py`
 """
 
-import json
 from data.config import GRAPH_CACHE_FILE
+from data.processors.load_conditions import construct_conditions_objects
+from data.processors.log_broken import CONDITIONS_TOKENS_FILE
 from data.utility.data_helpers import read_data, write_data
-
-OUTPUT_PATH = "./data"
 
 def cache_graph():
     graph = construct_full_graph()
@@ -22,7 +21,11 @@ def cache_graph():
     return graph
 
 def construct_full_graph():
-    pass
+    conditions_objects = construct_conditions_objects()
+    for k, v in conditions_objects.items():
+        print(k, v)
+        exit(0)
+
 
 if __name__ == "__main__":
     cache_graph()

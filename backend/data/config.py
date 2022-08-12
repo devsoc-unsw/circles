@@ -23,5 +23,5 @@ ARCHIVED_YEARS = [2019, 2020, 2021, 2022]
 CONDITIONS_TOKEN_FILE = "./data/final_data/conditionsTokens.json"
 CONDITIONS_PICKLE_FILE = "./data/final_data/conditions.pkl"
 
-GRAPH_CACHE_FILE = "./data/"
+GRAPH_CACHE_FILE = "./data/final_data/graph.json"
 
