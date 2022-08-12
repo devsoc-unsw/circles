@@ -16,3 +16,6 @@ ARCHIVED_YEARS = [2019, 2020, 2021, 2022]
 
 # TODO: Consider adding file paths to this file so we don't have to type out
 # the exact path to write to every time
+
+CONDITIONS_TOKEN_FILE = "./data/final_data/conditionsTokens.json"
+CONDITIONS_PICKLE_FILE = "./data/final_data/conditions.pkl"
