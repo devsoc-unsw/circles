@@ -89,7 +89,7 @@ def convert_subgroup_object_to_courses_dict(object: str, description: str|list[s
 def add_subgroup_container(structure: dict[str, StructureContainer], type: str, container: ProgramContainer | CourseContainer, exceptions: list[str]) -> list[str]:
     """ Returns the added courses """
     # TODO: further standardise non_spec_data to remove these lines:
-    title = container.get("title")
+    title = container.get("title", "")
     if container.get("type") == "gened":
         title = "General Education"
     conditional_type = container.get("type")
