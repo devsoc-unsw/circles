@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Typography } from 'antd';
 import axios from 'axios';
 import { motion } from 'framer-motion';
-import { CoursePathFrom, CoursesUnlockedWhenTaken } from 'types/api';
+import { Course, CoursePathFrom, CoursesUnlockedWhenTaken } from 'types/api';
 import { CourseTimetable, EnrolmentCapacityData } from 'types/courseCapacity';
-import { CourseDetail, CourseList } from 'types/courses';
+import { CourseList } from 'types/courses';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import infographic from 'assets/infographicFontIndependent.svg';
 import Collapsible from 'components/Collapsible';
@@ -50,7 +50,7 @@ const CourseDescription = () => {
   useEffect(() => {
     const getCourse = async (courseCode: string) => {
       try {
-        const res = await axios.get<CourseDetail>(`/courses/getCourse/${courseCode}`);
+        const res = await axios.get<Course>(`/courses/getCourse/${courseCode}`);
         dispatch(setCourse(res.data));
       } catch (e) {
         // eslint-disable-next-line no-console

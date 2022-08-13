@@ -1,26 +1,8 @@
-import { Term } from './planner';
-
 export type CourseCodes = {
   [courseKey: string]: string
 };
 
 export type CourseList = string[];
-
-export type CourseDetail = {
-  title: string
-  code: string
-  UOC: number
-  description: string
-  study_level: string
-  school: string
-  campus: string
-  raw_requirements: string
-  terms: Term[]
-  is_legacy: boolean
-  is_accurate: boolean
-  is_multiterm: boolean
-  handbook_note: string
-};
 
 export type CourseValidation = {
   is_accurate: boolean

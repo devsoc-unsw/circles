@@ -13,7 +13,7 @@ import {
   persistReducer,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { CourseDetail } from 'types/courses';
+import { Course } from 'types/api';
 import coursesReducer from 'reducers/coursesSlice';
 import courseTabsReducer from 'reducers/courseTabsSlice';
 import degreeReducer from 'reducers/degreeSlice';
@@ -61,7 +61,7 @@ const migrations: MigrationManifest = {
     const courses = Object.keys(newState.planner.courses);
     await Promise.all(courses.map(async (course) => {
       try {
-        const res = await axios.get<CourseDetail>(`/courses/getCourse/${course}`);
+        const res = await axios.get<Course>(`/courses/getCourse/${course}`);
         if (res.status === 200) {
           const courseData = res.data;
           newState.planner.courses[courseData.code].is_multiterm = courseData.is_multiterm;

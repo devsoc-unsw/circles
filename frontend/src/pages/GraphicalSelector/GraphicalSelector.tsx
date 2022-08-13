@@ -5,8 +5,7 @@ import type { Graph, INode, Item } from '@antv/g6';
 import G6 from '@antv/g6';
 import { Button } from 'antd';
 import axios from 'axios';
-import { CourseEdge, GraphPayload } from 'types/api';
-import { CourseDetail } from 'types/courses';
+import { Course, CourseEdge, GraphPayload } from 'types/api';
 import PageTemplate from 'components/PageTemplate';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
@@ -20,7 +19,7 @@ const GraphicalSelector = () => {
 
   const [graph, setGraph] = useState<Graph | null>(null);
   const [loading, setLoading] = useState(true);
-  const [course, setCourse] = useState<CourseDetail | null>(null);
+  const [course, setCourse] = useState<Course | null>(null);
 
   const ref = useRef<HTMLDivElement | null>(null);
 
@@ -69,7 +68,7 @@ const GraphicalSelector = () => {
         const node = ev.item as INode;
         if (!node || !node['_cfg']?.id) return;
         const { _cfg: { id } } = node;
-        const res = await axios.get<CourseDetail>(`/courses/getCourse/${id}`);
+        const res = await axios.get<Course>(`/courses/getCourse/${id}`);
         if (res.status === 200) setCourse(res.data);
 
         // hides/ unhides dependent nodes

@@ -5,8 +5,7 @@ import {
 } from '@ant-design/icons';
 import { Button, Tooltip } from 'antd';
 import axios from 'axios';
-import { UnselectCourses } from 'types/api';
-import { CourseDetail } from 'types/courses';
+import { Course, UnselectCourses } from 'types/api';
 import { PlannerCourse } from 'types/planner';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import type { RootState } from 'config/store';
@@ -32,7 +31,7 @@ const CourseTitle = ({
   const addToPlanner = async (e: React.MouseEvent<HTMLElement>, code: string) => {
     e.stopPropagation();
     try {
-      const { data: course } = await axios.get<CourseDetail>(`/courses/getCourse/${code}`);
+      const { data: course } = await axios.get<Course>(`/courses/getCourse/${code}`);
 
       const courseData: PlannerCourse = {
         title: course.title,

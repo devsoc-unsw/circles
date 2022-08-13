@@ -4,6 +4,7 @@ import { DegreeSliceState } from 'reducers/degreeSlice';
 import { PlannerSliceState } from 'reducers/plannerSlice';
 
 type TermPlan = {
+  // key = course code, value = [UOC, mark]
   [courseCode: string]: [number, number | null]
 };
 
