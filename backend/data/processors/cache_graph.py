@@ -68,28 +68,3 @@ if __name__ == "__main__":
     initialise_conditions()
     cache_graph()
 
-def proto_edges_to_edges(proto_edges: List[Dict[str, str]]) -> List[Dict[str, str]]:
-    """
-    Take the proto-edges created by calls to `path_from` and convert them into
-    a full list of edges of form.
-    [
-        {
-            "source": (str) - course_code, # This is the 'original' value
-            "target": (str) - course_code, # This is the value of 'courses'
-        }
-    ]
-    Effectively, turning an adjacency list into a flat list of edges
-    """
-    edges: List = []
-    for proto_edge in proto_edges:
-        # Incoming: { original: str,  courses: List[str]}
-        # Outcome:  { "src": str, "target": str }
-        if not proto_edge or not proto_edge["courses"]:
-            continue
-        for course in proto_edge["courses"]:
-            edges.append({
-                    "source": course,
-                    "target": proto_edge["original"],
-                }
-            )
-    return edges
