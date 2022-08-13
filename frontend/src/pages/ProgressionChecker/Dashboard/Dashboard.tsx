@@ -5,11 +5,11 @@ import { ArrowDownOutlined } from '@ant-design/icons';
 import { useSpring } from '@react-spring/web';
 import { Button, Typography } from 'antd';
 import { ProgramStructure } from 'types/structure';
+import DegreeCard from 'components/DegreeCard';
 import LiquidProgressChart from 'components/LiquidProgressChart';
+import { LoadingDashboard } from 'components/LoadingSkeleton';
 import type { RootState } from 'config/store';
-import DegreeCard from '../DegreeCard';
 import { StoreUOC } from '../types';
-import SkeletonDashboard from './SkeletonDashboard';
 import S from './styles';
 
 type Props = {
@@ -57,7 +57,7 @@ const Dashboard = ({
   return (
     <S.Wrapper>
       {isLoading ? (
-        <SkeletonDashboard />
+        <LoadingDashboard />
       ) : (
         <S.ContentWrapper style={props}>
           <LiquidProgressChart

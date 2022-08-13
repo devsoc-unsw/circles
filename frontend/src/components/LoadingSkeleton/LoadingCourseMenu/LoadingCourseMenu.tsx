@@ -2,7 +2,7 @@ import React from 'react';
 import { Skeleton } from 'antd';
 import S from './styles';
 
-const LoadingSkeleton = () => (
+const LoadingCourseMenu = () => (
   <S.SkeletonWrapper>
     {[...Array(5).keys()].map(() => (
       <>
@@ -27,4 +27,4 @@ const LoadingSkeleton = () => (
   </S.SkeletonWrapper>
 );
 
-export default LoadingSkeleton;
+export default LoadingCourseMenu;

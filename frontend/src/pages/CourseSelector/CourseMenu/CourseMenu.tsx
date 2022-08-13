@@ -6,11 +6,11 @@ import { CoursesAllUnlocked } from 'types/api';
 import { CourseValidation } from 'types/courses';
 import { ProgramStructure } from 'types/structure';
 import prepareUserPayload from 'utils/prepareUserPayload';
+import { LoadingCourseMenu } from 'components/LoadingSkeleton';
 import type { RootState } from 'config/store';
 import { setCourses } from 'reducers/coursesSlice';
 import { addTab } from 'reducers/courseTabsSlice';
 import CourseTitle from './CourseTitle';
-import LoadingSkeleton from './LoadingSkeleton/LoadingSkeleton';
 import S from './styles';
 import { CourseUnitsStructure, MenuDataStructure, MenuDataSubgroup } from './types';
 
@@ -195,7 +195,7 @@ const CourseMenu = ({ structure }: Props) => {
             onClick={handleClick}
           />
         )
-        : <LoadingSkeleton />}
+        : <LoadingCourseMenu />}
     </S.SidebarWrapper>
   );
 };

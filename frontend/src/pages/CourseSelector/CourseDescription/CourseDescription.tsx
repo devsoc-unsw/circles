@@ -10,14 +10,14 @@ import prepareUserPayload from 'utils/prepareUserPayload';
 import infographic from 'assets/infographicFontIndependent.svg';
 import Collapsible from 'components/Collapsible';
 import CourseTag from 'components/CourseTag';
+import { LoadingCourseDescription } from 'components/LoadingSkeleton';
+import PlannerButton from 'components/PlannerButton/PlannerButton';
 import PrerequisiteTree from 'components/PrerequisiteTree';
 import ProgressBar from 'components/ProgressBar';
 import TermTag from 'components/TermTag';
 import { inDev, TERM, TIMETABLE_API_URL } from 'config/constants';
 import type { RootState } from 'config/store';
 import { setCourse } from 'reducers/coursesSlice';
-import LoadingSkeleton from './LoadingSkeleton';
-import PlannerButton from './PlannerButton';
 import S from './styles';
 
 const { Title, Text } = Typography;
@@ -197,7 +197,7 @@ const CourseDescription = () => {
   return (
     <S.DescriptionWrapper>
       {!pageLoaded ? (
-        <LoadingSkeleton />
+        <LoadingCourseDescription />
       ) : (
         <>
           <S.DescriptionContent>

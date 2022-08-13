@@ -1,10 +1,9 @@
 import React from 'react';
 import { Skeleton } from 'antd';
-import { GridItem } from '../common/styles';
-import CS from '../styles';
+import { GridItem } from 'pages/TermPlanner/common/styles';
+import CS from 'pages/TermPlanner/styles';
 
-// TODO: Is this still being used?
-const LoadingSkeleton = () => {
+const LoadingTermPlanner = () => {
   const skeletonTermStyle = {
     width: '20em',
     height: '18em',
@@ -76,4 +75,4 @@ const LoadingSkeleton = () => {
   );
 };
 
-export default LoadingSkeleton;
+export default LoadingTermPlanner;

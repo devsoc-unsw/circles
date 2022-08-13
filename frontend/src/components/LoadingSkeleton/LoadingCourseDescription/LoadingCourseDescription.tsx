@@ -2,7 +2,7 @@ import React from 'react';
 import { Skeleton } from 'antd';
 import S from './styles';
 
-const LoadingSkeleton = () => (
+const LoadingCourseDescription = () => (
   <S.SkeletonWrapper>
     <S.SkeletonDescription>
       {/* title */}
@@ -29,4 +29,4 @@ const LoadingSkeleton = () => (
   </S.SkeletonWrapper>
 );
 
-export default LoadingSkeleton;
+export default LoadingCourseDescription;

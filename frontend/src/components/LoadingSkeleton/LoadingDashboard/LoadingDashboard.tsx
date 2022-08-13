@@ -1,20 +1,20 @@
 import React from 'react';
 import { Skeleton } from 'antd';
-import { SkeletonCard } from '../DegreeCard';
+import LoadingDegreeCard from './LoadingDegreeCard';
 import S from './styles';
 
-const SkeletonDashboard = () => (
-  <S.ContentWrapper>
+const LoadingDashboard = () => (
+  <S.DashboardWrapper>
     <Skeleton.Avatar style={{ width: 320, height: 320 }} active />
     <Skeleton.Input
       style={{ width: 400, height: 40 }}
       active
     />
     <S.CardsWrapper>
-      <SkeletonCard />
-      <SkeletonCard />
+      <LoadingDegreeCard />
+      <LoadingDegreeCard />
     </S.CardsWrapper>
-  </S.ContentWrapper>
+  </S.DashboardWrapper>
 );
 
-export default SkeletonDashboard;
+export default LoadingDashboard;
