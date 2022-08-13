@@ -1,6 +1,5 @@
 """
-API for fetching data about programs and specialisations
-"""
+API for fetching data about programs and specialisations """
 from contextlib import suppress
 import functools
 import re
@@ -437,7 +436,6 @@ def proto_edges_to_edges(proto_edges: List[Dict[str, str]]) -> List[Dict[str, st
                 }
             )
     return edges
-        
 
 def prune_edges(edges: List[Dict[str, str]], courses: List[str]) -> List[Dict[str, str]]:
     """

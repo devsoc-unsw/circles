@@ -9,11 +9,10 @@ Do NOT run this from it's current location.
 TODO: This should be moved as a command that can be run by `run_processors.py`
 """
 
-from contextlib import suppress
+from typing import Dict, List
 from data.config import GRAPH_CACHE_FILE
 from data.processors.load_conditions import construct_conditions_objects
 from data.utility.data_helpers import write_data
-import json
 
 CONDITONS = None
 
@@ -24,28 +23,45 @@ def cache_graph():
     return graph
 
 def construct_full_graph():
-    conditions_objects = construct_conditions_objects()
-    graph = {}
-    fails = []
-    for k, v in conditions_objects.items():
-        try:
-            pass
-            # this is such a dumb hack; TODO: make actual __dict__ method
-            real_v = json.loads(str(v))
+    # TODO: Other processors should cache a courselist
+    # courses: List[str] = CONDITIONS.keys()
+    error_log: Dict[str, str] = {}
+    graph: Dict[str, Dict[str, str]] = {}
 
-            children = real_v.get("children", [])
-            graph[k] = children
-            # print(
-            #         "k: ", k,
-            #         json.loads(str(v))
-            #     )
-        except json.JSONDecodeError as e:
-            if v is None:
-                fails.append((v, e))
-    # for f in fails:
-    #     print(f)
-    # print("len", len(fails))
-    return graph
+    proto_edges: Dict[str, List[str]] = []
+
+    incoming_adj = {
+            course: incoming_list(course) for course, cond in CONDITIONS.items()
+            if cond is not None
+        }
+    print(incoming_list("COMP3121"))
+
+    return incoming_adj
+
+
+def incoming_list(course: str) -> List[str]:
+    """
+    Returns a list of courses which can be used to satisfy 'course'
+    eg 2521 -> 1511
+
+    TODO: Integrate this properly as a method in the `Condition` class
+    """
+    return get_path_from(course)["courses"]
+
+def get_path_from(course: str) -> dict[str, str | list[str]]:
+    """
+    fetches courses which can be used to satisfy 'course'
+    eg 2521 -> 1511
+    """
+    course_condition = CONDITIONS.get(course)
+
+    return {
+        "original" : course,
+        "courses" : [
+            coursename for coursename, _ in CONDITIONS.items()
+            if course_condition.is_path_to(coursename)
+        ]
+    }
 
 def initialisee_conditions():
     global CONDITIONS
@@ -55,14 +71,28 @@ if __name__ == "__main__":
     initialisee_conditions()
     cache_graph()
 
-def get_paths_to():
-    course_condition = CONDITIONS.get(course)
-    if not course_condition:
-        raise HTTPException(400, f"no course by name {course}")
-    return {
-        "original" : course,
-        "courses" : [
-            coursename for coursename, _ in CONDITIONS.items()
-            if course_condition.is_path_to(coursename)
-        ]
-    }
+def proto_edges_to_edges(proto_edges: List[Dict[str, str]]) -> List[Dict[str, str]]:
+    """
+    Take the proto-edges created by calls to `path_from` and convert them into
+    a full list of edges of form.
+    [
+        {
+            "source": (str) - course_code, # This is the 'original' value
+            "target": (str) - course_code, # This is the value of 'courses'
+        }
+    ]
+    Effectively, turning an adjacency list into a flat list of edges
+    """
+    edges: List = []
+    for proto_edge in proto_edges:
+        # Incoming: { original: str,  courses: List[str]}
+        # Outcome:  { "src": str, "target": str }
+        if not proto_edge or not proto_edge["courses"]:
+            continue
+        for course in proto_edge["courses"]:
+            edges.append({
+                    "source": course,
+                    "target": proto_edge["original"],
+                }
+            )
+    return edges
