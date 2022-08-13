@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { DragDropContext, OnDragEndResponder, OnDragStartResponder } from 'react-beautiful-dnd';
+import type { OnDragEndResponder, OnDragStartResponder } from 'react-beautiful-dnd';
+import { DragDropContext } from 'react-beautiful-dnd';
 import { useDispatch, useSelector } from 'react-redux';
 import { Badge, notification } from 'antd';
 import axios from 'axios';
