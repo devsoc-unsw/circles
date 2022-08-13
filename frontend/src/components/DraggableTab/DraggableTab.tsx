@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Draggable, DraggingStyle } from 'react-beautiful-dnd';
+import type { DraggingStyle } from 'react-beautiful-dnd';
+import { Draggable } from 'react-beautiful-dnd';
 import { useDispatch, useSelector } from 'react-redux';
 import { CloseOutlined } from '@ant-design/icons';
 import { Button } from 'antd';

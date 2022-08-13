@@ -1,12 +1,12 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
-type SliceState = {
+type CourseTabsSliceState = {
   tabs: string[]
   active: number
 };
 
-const initialState: SliceState = {
+const initialState: CourseTabsSliceState = {
   tabs: [],
   active: 0,
 };

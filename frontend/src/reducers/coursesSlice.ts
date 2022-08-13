@@ -3,12 +3,12 @@ import { createSlice } from '@reduxjs/toolkit';
 import { Course } from 'types/api';
 import { CourseValidation } from 'types/courses';
 
-type SliceState = {
+type CoursesSliceState = {
   courses: Record<string, CourseValidation>
   course: Course | null
 };
 
-const initialState: SliceState = {
+const initialState: CoursesSliceState = {
   courses: {},
   course: null,
 };
