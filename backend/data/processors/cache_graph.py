@@ -36,7 +36,9 @@ def construct_full_graph():
         }
     print(incoming_list("COMP3121"))
 
-    return incoming_adj
+    return {
+            "incoming_adjacency_list": incoming_adj,
+    }
 
 
 def incoming_list(course: str) -> List[str]:
@@ -63,12 +65,12 @@ def get_path_from(course: str) -> dict[str, str | list[str]]:
         ]
     }
 
-def initialisee_conditions():
+def initialise_conditions():
     global CONDITIONS
     CONDITIONS = construct_conditions_objects()
 
 if __name__ == "__main__":
-    initialisee_conditions()
+    initialise_conditions()
     cache_graph()
 
 def proto_edges_to_edges(proto_edges: List[Dict[str, str]]) -> List[Dict[str, str]]:
