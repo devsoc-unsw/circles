@@ -48,6 +48,16 @@ export type StructureCourseList = {
   courses: CourseList
 };
 
+type CourseEdge = {
+  source: string
+  target: string
+};
+
+export type GraphPayload = {
+  edges: CourseEdge[]
+  courses: CourseList
+};
+
 export type CoursePathFrom = {
   original: string
   courses: CourseList

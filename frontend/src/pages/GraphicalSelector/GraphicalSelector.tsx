@@ -7,14 +7,13 @@ import type {
 import G6, { Algorithm } from '@antv/g6';
 import { Button } from 'antd';
 import axios from 'axios';
-import { CoursePathFrom, StructureCourseList } from 'types/api';
+import { CourseEdge, GraphPayload } from 'types/api';
 import { CourseDetail } from 'types/courses';
 import PageTemplate from 'components/PageTemplate';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
 import GRAPH_STYLE from './config';
 import S from './styles';
-import { CourseEdge } from './types';
 import handleNodeData from './utils';
 
 const GraphicalSelector = () => {
@@ -115,29 +114,14 @@ const GraphicalSelector = () => {
     };
 
     const setupGraph = async () => {
-      const { courses: courseList }: { courses: string[] } = (
-        await axios.get<StructureCourseList>(`/programs/getStructureCourseList/${programCode}/${specs.join('+')}`)
-      ).data;
-
-      // TODO: Move this to the backend too
-      // should be a universal /programs/getGraphEdges/{programCode}/{specs}
-      // const courseList = (
-      //   Object.values(structure)
-      //     .flatMap((specialisation) => Object.values(specialisation)
-      //       .filter((spec) => typeof spec === "object" && spec.courses &&
-      //         !(spec.type.includes("rule") || spec.type.includes("gened")))
-      //       .flatMap((spec) => Object.keys(spec.courses)))
-      //     .filter((v, i, a) => a.indexOf(v) === i) // TODO: hack to make courseList unique
-      // );
-      const res = await Promise.all(courseList.map((c) => axios.get<CoursePathFrom>(`/courses/getPathFrom/${c}`).catch()));
-
-      // filter any errors from res
-      const children = res.filter((value) => value.data.courses).map((value) => value.data);
-      const edges = children
-        .flatMap((courseObject) => courseObject.courses
-          .filter((c) => courseList.includes(c))
-          .map((c) => ({ source: c, target: courseObject.original })));
-      if (courseList.length !== 0 && edges.length !== 0) initialiseGraph(courseList, edges);
+      try {
+        const res = await axios.get<GraphPayload>(`/programs/graph/${programCode}/${specs.join('+')}`);
+        const { edges, courses } = res.data;
+        if (courses.length !== 0 && edges.length !== 0) initialiseGraph(courses, edges);
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.log('Error at setupGraph', e);
+      }
       setLoading(false);
     };
 

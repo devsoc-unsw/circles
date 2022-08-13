@@ -37,6 +37,7 @@ def major_minor_for_program(draw):
 
 
 @given(sampled_from(programs))
+@settings(deadline=500)
 def test_all_programs_fetched(program):
     structure = requests.get(f"http://127.0.0.1:8000/programs/getStructure/{program}")
     assert structure != 500
