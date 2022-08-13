@@ -48,7 +48,7 @@ export type StructureCourseList = {
   courses: CourseList
 };
 
-type CourseEdge = {
+export type CourseEdge = {
   source: string
   target: string
 };

@@ -1,10 +1,8 @@
-// @ts-nocheck
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-import type {
-  Graph, GraphData, INode,
-} from '@antv/g6';
-import G6, { Algorithm } from '@antv/g6';
+import { breadthFirstSearch } from '@antv/algorithm';
+import type { Graph, INode, Item } from '@antv/g6';
+import G6 from '@antv/g6';
 import { Button } from 'antd';
 import axios from 'axios';
 import { CourseEdge, GraphPayload } from 'types/api';
@@ -30,6 +28,8 @@ const GraphicalSelector = () => {
     // courses is a list of course codes
     const initialiseGraph = (courses: string[], courseEdges: CourseEdge[]) => {
       const container = ref.current;
+      if (!container) return;
+
       const graphInstance = new G6.Graph({
         container,
         width: container.scrollWidth,
@@ -56,7 +56,7 @@ const GraphicalSelector = () => {
 
       setGraph(graphInstance);
 
-      const data: GraphData = {
+      const data = {
         nodes: courses.map((c) => handleNodeData(c, plannedCourses)),
         edges: courseEdges,
       };
@@ -73,10 +73,8 @@ const GraphicalSelector = () => {
         if (res.status === 200) setCourse(res.data);
 
         // hides/ unhides dependent nodes
-        const { breadthFirstSearch } = Algorithm;
         if (node.hasState('click')) {
           graphInstance.clearItemStates(node, 'click');
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-call
           breadthFirstSearch(data, id, {
             enter: ({ current }: { current: string }) => {
               if (id !== current) {
@@ -89,7 +87,6 @@ const GraphicalSelector = () => {
           });
         } else if (node.getOutEdges().length) {
           graphInstance.setItemState(node, 'click', true);
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-call
           breadthFirstSearch(data, id, {
             enter: ({ current }: { current: string }) => {
               if (id !== current) {
@@ -103,12 +100,12 @@ const GraphicalSelector = () => {
       });
 
       graphInstance.on('node:mouseenter', async (ev) => {
-        const node = ev.item;
+        const node = ev.item as Item;
         graphInstance.setItemState(node, 'hover', true);
       });
 
       graphInstance.on('node:mouseleave', async (ev) => {
-        const node = ev.item;
+        const node = ev.item as Item;
         graphInstance.clearItemStates(node, 'hover');
       });
     };
