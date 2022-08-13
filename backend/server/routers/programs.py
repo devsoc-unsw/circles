@@ -309,7 +309,8 @@ def graph(
                 }
             ]
         },
-        "err_edges": [ "CODEXXXX", ... ]
+    No longer returns 'err_edges: failed_courses' as those are suppressed and
+    caught by the processor
     """
     courses = get_structure_course_list(programCode, spec)["courses"]
     edges = []
@@ -326,7 +327,6 @@ def graph(
     return {
         "edges": edges,
         "courses": courses,
-        "err_edges": failed_courses,
     }
 
 
