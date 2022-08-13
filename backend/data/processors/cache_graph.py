@@ -25,16 +25,11 @@ def cache_graph():
 def construct_full_graph():
     # TODO: Other processors should cache a courselist
     # courses: List[str] = CONDITIONS.keys()
-    error_log: Dict[str, str] = {}
-    graph: Dict[str, Dict[str, str]] = {}
-
-    proto_edges: Dict[str, List[str]] = []
 
     incoming_adj = {
             course: incoming_list(course) for course, cond in CONDITIONS.items()
             if cond is not None
         }
-    print(incoming_list("COMP3121"))
 
     return {
             "incoming_adjacency_list": incoming_adj,
