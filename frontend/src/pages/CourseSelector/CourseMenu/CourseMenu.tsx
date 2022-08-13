@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ItemType } from 'antd/lib/menu/hooks/useItems';
 import axios from 'axios';
 import { CoursesAllUnlocked } from 'types/api';
 import { CourseValidation } from 'types/courses';
@@ -37,7 +36,6 @@ const CourseMenu = ({ structure }: Props) => {
   const dispatch = useDispatch();
   const [menuData, setMenuData] = useState<MenuDataStructure>({});
   const [coursesUnits, setCoursesUnits] = useState<CourseUnitsStructure | null>(null);
-  const [items, setItems] = useState<ItemType[]>([]);
 
   // get courses in planner
   const planner = useSelector((state: RootState) => state.planner);
@@ -71,9 +69,9 @@ const CourseMenu = ({ structure }: Props) => {
           newMenu[group][subgroup] = [];
 
           if (subgroupStructure.courses && !subgroupStructure.type.includes('rule')) {
-          // only consider disciplinary component courses
+            // only consider disciplinary component courses
             Object.keys(subgroupStructure.courses).forEach((courseCode) => {
-            // suppress gen ed courses if it has not been added to the planner
+              // suppress gen ed courses if it has not been added to the planner
               if (subgroupStructure.type === 'gened' && !planner.courses[courseCode]) return;
 
               newMenu[group][subgroup].push({
@@ -136,45 +134,40 @@ const CourseMenu = ({ structure }: Props) => {
     item1.courseCode > item2.courseCode ? 1 : -1
   );
 
-  useEffect(() => {
-    if (coursesUnits) {
-      const menuItems = Object.entries(menuData).map(([groupKey, groupEntry]) => ({
-        label: structure[groupKey].name ? `${groupKey} - ${structure[groupKey].name}` : groupKey,
-        key: groupKey,
-        children: Object
-          .entries(groupEntry)
-          .sort(sortSubgroups)
-          .map(([subgroupKey, subGroupEntry]) => {
-            const currUOC = coursesUnits[groupKey][subgroupKey].curr;
-            const totalUOC = coursesUnits[groupKey][subgroupKey].total;
-            return {
-              label: <SubgroupTitle
-                title={subgroupKey}
-                currUOC={currUOC}
-                totalUOC={totalUOC}
+  const menuItems = Object.entries(menuData).map(([groupKey, groupEntry]) => ({
+    label: structure[groupKey].name ? `${groupKey} - ${structure[groupKey].name}` : groupKey,
+    key: groupKey,
+    children: Object
+      .entries(groupEntry)
+      .sort(sortSubgroups)
+      .map(([subgroupKey, subGroupEntry]) => {
+        const currUOC = coursesUnits ? coursesUnits[groupKey][subgroupKey].curr : 0;
+        const totalUOC = coursesUnits ? coursesUnits[groupKey][subgroupKey].total : 0;
+        return {
+          label: <SubgroupTitle
+            title={subgroupKey}
+            currUOC={currUOC}
+            totalUOC={totalUOC}
+          />,
+          key: subgroupKey,
+          children: subGroupEntry.sort(sortCourses)
+            .filter((course) => course.unlocked || showLockedCourses)
+            .map((course) => ({
+              label: <CourseTitle
+                courseCode={course.courseCode}
+                title={course.title}
+                selected={planner.courses[course.courseCode] !== undefined}
+                accurate={course.accuracy}
+                unlocked={course.unlocked}
               />,
-              key: subgroupKey,
-              children: subGroupEntry.sort(sortCourses)
-                .filter((course) => course.unlocked || showLockedCourses)
-                .map((course) => ({
-                  label: <CourseTitle
-                    courseCode={course.courseCode}
-                    title={course.title}
-                    selected={planner.courses[course.courseCode] !== undefined}
-                    accurate={course.accuracy}
-                    unlocked={course.unlocked}
-                  />,
-                  // key is course code + groupKey + subgroupKey to differentiate as unique
-                  // course items in menu
-                  key: `${course.courseCode}-${groupKey}-${subgroupKey}`,
-                })),
-              type: 'group',
-            };
-          }),
-      }));
-      setItems(menuItems);
-    }
-  }, [coursesUnits, menuData, planner.courses, showLockedCourses, structure]);
+              // key is course code + groupKey + subgroupKey to differentiate as unique
+              // course items in menu
+              key: `${course.courseCode}-${groupKey}-${subgroupKey}`,
+            })),
+          type: 'group',
+        };
+      }),
+  }));
 
   const handleClick = ({ key }: { key: string }) => {
     // course code is first 8 chars due to the key being course code + group + subGroup
@@ -190,7 +183,7 @@ const CourseMenu = ({ structure }: Props) => {
           <S.Menu
             defaultSelectedKeys={[]}
             defaultOpenKeys={[Object.keys(menuData)[0]]}
-            items={items}
+            items={menuItems}
             mode="inline"
             onClick={handleClick}
           />

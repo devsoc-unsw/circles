@@ -102,11 +102,7 @@ const CourseDescription = () => {
     const getCourseCapacityById = async (code: string) => {
       try {
         const res = await axios.get<CourseTimetable>(`${TIMETABLE_API_URL}/${code}`);
-        if (res.status === 200) {
-          getCapacityAndEnrolment(res.data);
-        } else {
-          setCourseCapacity(null);
-        }
+        getCapacityAndEnrolment(res.data);
       } catch (e) {
         // eslint-disable-next-line no-console
         console.log('Error at getCourseCapacityById', e);
