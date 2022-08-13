@@ -57,8 +57,13 @@ const CourseTitle = ({
 
   const removeFromPlanner = async (e: React.MouseEvent<HTMLElement>, code: string) => {
     e.stopPropagation();
-    const res = await axios.post<UnselectCourses>(`/courses/unselectCourse/${code}`, JSON.stringify(prepareUserPayload(degree, planner)));
-    dispatch(removeCourses(res.data.courses));
+    try {
+      const res = await axios.post<UnselectCourses>(`/courses/unselectCourse/${code}`, JSON.stringify(prepareUserPayload(degree, planner)));
+      dispatch(removeCourses(res.data.courses));
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.log('Error at removeFromPlanner', err);
+    }
   };
 
   const isSmall = useMediaQuery('(max-width: 1400px)');

@@ -27,8 +27,13 @@ const DegreeStep = ({ incrementStep }: Props) => {
   const programCode = useSelector((store: RootState) => store.degree.programCode);
 
   const fetchAllDegrees = async () => {
-    const res = await axios.get<Programs>('/programs/getPrograms');
-    setAllDegrees(res.data.programs);
+    try {
+      const res = await axios.get<Programs>('/programs/getPrograms');
+      setAllDegrees(res.data.programs);
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.log('Error at fetchAllDegrees', e);
+    }
   };
 
   useEffect(() => {
