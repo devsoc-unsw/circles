@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Skeleton, Typography } from 'antd';
+import { TableStructure } from 'types/progressionViews';
 import { ProgramStructure } from 'types/structure';
 import getFormattedPlannerCourses, { FormattedPlannerCourse } from 'utils/getFormattedPlannerCourses';
 import Collapsible from 'components/Collapsible';
 import type { RootState } from 'config/store';
 import TableSubgroup from './TableSubgroup';
-import { TableStructure } from './types';
 
 type Props = {
   isLoading: boolean

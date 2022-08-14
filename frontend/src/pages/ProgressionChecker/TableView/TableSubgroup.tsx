@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Button, Table, Typography } from 'antd';
+import { TableSubgroupCourse } from 'types/progressionViews';
 import CourseListModal from '../CourseListModal';
 import S from './styles';
-import { TableSubgroupCourse } from './types';
 
 type Props = {
   subgroupTitle: string

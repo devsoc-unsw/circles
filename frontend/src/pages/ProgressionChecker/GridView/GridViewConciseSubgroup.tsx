@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Button, Empty, Typography } from 'antd';
+import { GridSubgroupCourse, PlannedState } from 'types/progressionViews';
 import Collapsible from 'components/Collapsible';
 import CourseBadge from '../CourseBadge';
 import CourseListModal from '../CourseListModal';
 import S from './styles';
-import { GridSubgroupCourse, PlannedState } from './types';
 
 type CollapsibleSectionProps = {
   title: string

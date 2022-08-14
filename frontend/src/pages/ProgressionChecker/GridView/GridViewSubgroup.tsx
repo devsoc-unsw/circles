@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Button, Empty, Typography } from 'antd';
+import { GridSubgroupCourse } from 'types/progressionViews';
 import CourseBadge from '../CourseBadge';
 import CourseListModal from '../CourseListModal';
 import S from './styles';
-import { GridSubgroupCourse } from './types';
 
 type SubgroupSectionProps = {
   courses: GridSubgroupCourse[]

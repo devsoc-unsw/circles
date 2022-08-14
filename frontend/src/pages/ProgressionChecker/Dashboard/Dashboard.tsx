@@ -9,8 +9,14 @@ import DegreeCard from 'components/DegreeCard';
 import LiquidProgressChart from 'components/LiquidProgressChart';
 import { LoadingDashboard } from 'components/LoadingSkeleton';
 import type { RootState } from 'config/store';
-import { StoreUOC } from '../types';
 import S from './styles';
+
+type StoreUOC = {
+  [groupKey: string]: {
+    total: number
+    curr: number
+  }
+};
 
 type Props = {
   isLoading: boolean

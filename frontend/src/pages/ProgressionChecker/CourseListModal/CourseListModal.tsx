@@ -1,8 +1,7 @@
 import type { Dispatch, SetStateAction } from 'react';
 import React from 'react';
+import { GridSubgroupCourse, TableSubgroupCourse } from 'types/progressionViews';
 import CourseBadge from '../CourseBadge';
-import { GridSubgroupCourse } from '../GridView/types';
-import { TableSubgroupCourse } from '../TableView/types';
 import S from './styles';
 
 type Props = {
