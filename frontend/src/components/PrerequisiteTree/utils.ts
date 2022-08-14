@@ -46,8 +46,7 @@ const updateEdges = (graphInstance: TreeGraph, graphData: TreeGraphData) => {
 const bringEdgeLabelsToFront = (graphInstance: TreeGraph) => {
   // bring edges with labels to front
   graphInstance.getEdges()
-    /* eslint-disable-next-line no-underscore-dangle */
-    .filter((e) => Object.prototype.hasOwnProperty.call(e?._cfg?.model, 'label'))
+    .filter((e) => Object.prototype.hasOwnProperty.call(e.getModel(), 'label'))
     .forEach((e) => e.toFront());
   // Repaint the graph after shifting
   graphInstance.paint();

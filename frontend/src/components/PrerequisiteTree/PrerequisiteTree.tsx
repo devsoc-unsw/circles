@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import type { TreeGraph, TreeGraphData } from '@antv/g6';
+import type { Item, TreeGraph, TreeGraphData } from '@antv/g6';
 import G6 from '@antv/g6';
 import axios from 'axios';
 import { CourseChildren, CoursePathFrom, CoursesAllUnlocked } from 'types/api';
@@ -60,11 +60,9 @@ const PrerequisiteTree = ({ courseCode }: Props) => {
       bringEdgeLabelsToFront(treeGraphInstance);
 
       treeGraphInstance.on('node:click', (event) => {
-      // open new course tab
-        const node = event.item;
-        if (node && typeof node['_cfg']?.model?.label === 'string') {
-          dispatch(addTab(node['_cfg'].model.label));
-        }
+        // open new course tab
+        const node = event.item as Item;
+        dispatch(addTab(node.getModel().label as string));
       });
     };
 
@@ -81,7 +79,7 @@ const PrerequisiteTree = ({ courseCode }: Props) => {
         const res = await axios.get<CourseChildren>(`/courses/courseChildren/${code}`);
         return res.data.courses;
       } catch (e) {
-      // eslint-disable-next-line no-console
+        // eslint-disable-next-line no-console
         console.error('Error at getCourseUnlocks', e);
         return [];
       }
@@ -92,7 +90,7 @@ const PrerequisiteTree = ({ courseCode }: Props) => {
         const res = await axios.get<CoursePathFrom>(`/courses/getPathFrom/${code}`);
         return res.data.courses;
       } catch (e) {
-      // eslint-disable-next-line no-console
+        // eslint-disable-next-line no-console
         console.error('Error at getCoursePrereqs', e);
         return [];
       }
@@ -106,8 +104,8 @@ const PrerequisiteTree = ({ courseCode }: Props) => {
         );
         setCourseAccurate(res.data.courses_state[courseCode].is_accurate);
       } catch (err) {
-      // eslint-disable-next-line
-      console.error('Error at determineCourseAccuracy', err);
+        // eslint-disable-next-line
+        console.error('Error at determineCourseAccuracy', err);
       }
     };
 
@@ -132,7 +130,7 @@ const PrerequisiteTree = ({ courseCode }: Props) => {
       if (!graph) {
         generateTreeGraph(graphData);
       } else {
-      // NOTE: This is for hot reloading in development as new graph will instantiate every time
+        // NOTE: This is for hot reloading in development as new graph will instantiate every time
         updateTreeGraph(graphData);
       }
 

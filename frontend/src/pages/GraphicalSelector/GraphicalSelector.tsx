@@ -1,11 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { LockOutlined, UnlockOutlined } from '@ant-design/icons';
 import { breadthFirstSearch } from '@antv/algorithm';
-import type { Graph, INode, Item } from '@antv/g6';
+import type {
+  Graph, INode, Item,
+} from '@antv/g6';
 import G6 from '@antv/g6';
-import { Button } from 'antd';
+import { Button, Switch, Tooltip } from 'antd';
 import axios from 'axios';
-import { Course, CourseEdge, GraphPayload } from 'types/api';
+import {
+  Course, CourseEdge, CoursesAllUnlocked, GraphPayload,
+} from 'types/api';
+import prepareUserPayload from 'utils/prepareUserPayload';
 import PageTemplate from 'components/PageTemplate';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
@@ -16,10 +22,12 @@ import handleNodeData from './utils';
 const GraphicalSelector = () => {
   const { programCode, specs } = useSelector((state: RootState) => state.degree);
   const { courses: plannedCourses } = useSelector((state: RootState) => state.planner);
+  const { degree, planner } = useSelector((state: RootState) => state);
 
   const [graph, setGraph] = useState<Graph | null>(null);
   const [loading, setLoading] = useState(true);
   const [course, setCourse] = useState<Course | null>(null);
+  const [showUnlockedOnly, setShowUnlockedOnly] = useState(true);
 
   const ref = useRef<HTMLDivElement | null>(null);
 
@@ -66,8 +74,7 @@ const GraphicalSelector = () => {
       graphInstance.on('node:click', async (ev) => {
       // load up course information
         const node = ev.item as INode;
-        if (!node || !node['_cfg']?.id) return;
-        const { _cfg: { id } } = node;
+        const id = node.getID();
         const res = await axios.get<Course>(`/courses/getCourse/${id}`);
         if (res.status === 200) setCourse(res.data);
 
@@ -124,12 +131,38 @@ const GraphicalSelector = () => {
     if (programCode) setupGraph();
   }, [plannedCourses, programCode, specs]);
 
-  const handleShowGraph = () => {
+  const handleShowAllCoursesGraph = () => {
     if (graph) {
       const nodes = graph.getNodes();
       const edges = graph.getEdges();
       nodes.forEach((n) => n.show());
       edges.forEach((e) => e.show());
+    }
+  };
+
+  const handleShowUnlockedCoursesGraph = async () => {
+    if (!graph) return;
+    try {
+      const res = await axios.post<CoursesAllUnlocked>(
+        '/courses/getAllUnlocked/',
+        JSON.stringify(prepareUserPayload(degree, planner)),
+      );
+      const coursesStates = res.data.courses_state;
+      const nodes = graph.getNodes();
+      nodes.forEach(
+        (n) => {
+          const id = n.getID();
+          if (coursesStates[id] && coursesStates[id].unlocked) {
+            n.show();
+          } else {
+            n.getEdges().forEach((e) => e.hide());
+            n.hide();
+          }
+        },
+      );
+    } catch (e) {
+      // eslint-disable-next-line
+      console.error('Error at handleShowUnlockedCoursesGraph', e);
     }
   };
 
@@ -142,6 +175,15 @@ const GraphicalSelector = () => {
     }
   };
 
+  const toggleShowLockedCourses = async () => {
+    if (showUnlockedOnly) {
+      handleShowUnlockedCoursesGraph();
+    } else {
+      handleShowAllCoursesGraph();
+    }
+    setShowUnlockedOnly((prevState) => !prevState);
+  };
+
   return (
     <PageTemplate>
       <S.Wrapper>
@@ -149,7 +191,16 @@ const GraphicalSelector = () => {
           {loading && <Spinner text="Loading graph..." />}
         </S.GraphPlaygroundWrapper>
         <S.SidebarWrapper>
-          <Button onClick={handleShowGraph}>
+          <Tooltip placement="topLeft" title={showUnlockedOnly ? 'Hide locked courses' : 'Show locked courses'}>
+            <Switch
+              defaultChecked={showUnlockedOnly}
+              style={{ alignSelf: 'flex-end' }}
+              onChange={toggleShowLockedCourses}
+              checkedChildren={<LockOutlined />}
+              unCheckedChildren={<UnlockOutlined />}
+            />
+          </Tooltip>
+          <Button onClick={handleShowAllCoursesGraph}>
             Show Graph
           </Button>
           <Button onClick={handleHideGraph}>
