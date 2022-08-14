@@ -1,9 +1,5 @@
 import styled from 'styled-components';
 
-const GridViewContainer = styled.div`
-  padding: 2em;
-`;
-
 const CourseGroup = styled.div`
   min-width: 70%;
   display: flex;
@@ -19,7 +15,6 @@ const ViewAllCoursesWrapper = styled.div`
 `;
 
 export default {
-  GridViewContainer,
   CourseGroup,
   ViewAllCoursesWrapper,
 };

@@ -33,7 +33,7 @@ const ProgressionCheckerCourses = ({ structure, isLoading }: Props) => {
   const [view, setView] = useState(defaultView);
 
   return (
-    <div>
+    <S.ProgressionViewContainer>
       {(view === views.GRID || view === views.CONCISE) ? (
         <>
           <S.ViewSwitcherWrapper>
@@ -72,7 +72,7 @@ const ProgressionCheckerCourses = ({ structure, isLoading }: Props) => {
           <TableView isLoading={isLoading} structure={structure} />
         </>
       )}
-    </div>
+    </S.ProgressionViewContainer>
   );
 };
 

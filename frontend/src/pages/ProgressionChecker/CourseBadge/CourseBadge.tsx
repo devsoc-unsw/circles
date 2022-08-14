@@ -25,10 +25,10 @@ const UOCBadge = ({ uoc }: UOCBadgeProps) => (
 type Props = {
   courseCode: string
   title: string
-  past: boolean
+  past?: boolean
   termPlanned: string
-  uoc: number
-  unplanned: boolean
+  uoc?: number
+  unplanned?: boolean
 };
 
 const CourseBadge = ({
@@ -56,7 +56,7 @@ const CourseBadge = ({
     );
   }
 
-  if (past) {
+  if (past && uoc) {
     return (
       <Badge
         count={(
@@ -75,7 +75,7 @@ const CourseBadge = ({
 
   // for future courses planned
   // past can be undefined if not in term planner thus check for false
-  if (past === false) {
+  if (past === false && uoc) {
     return (
       <Badge
         count={(

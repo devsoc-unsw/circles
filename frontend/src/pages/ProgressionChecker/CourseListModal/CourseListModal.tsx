@@ -2,11 +2,12 @@ import type { Dispatch, SetStateAction } from 'react';
 import React from 'react';
 import CourseBadge from '../CourseBadge';
 import { GridSubgroupCourse } from '../GridView/types';
+import { TableSubgroupCourse } from '../TableView/types';
 import S from './styles';
 
 type Props = {
   title: string
-  courses: GridSubgroupCourse[]
+  courses: GridSubgroupCourse[] | TableSubgroupCourse[]
   modalVisible: boolean
   setModalVisible: Dispatch<SetStateAction<boolean>>
 };
@@ -32,10 +33,8 @@ const CourseListModal = ({
         <CourseBadge
           courseCode={course.key}
           title={course.title}
-          past={course.past}
           termPlanned={course.termPlanned}
-          uoc={course.uoc}
-          unplanned={course.unplanned}
+          // unplanned={course.unplanned}
         />
       ))}
     </S.CourseList>

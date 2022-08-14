@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Skeleton, Table, Typography } from 'antd';
+import { Skeleton, Typography } from 'antd';
 import { ProgramStructure } from 'types/structure';
 import getFormattedPlannerCourses, { FormattedPlannerCourse } from 'utils/getFormattedPlannerCourses';
+import Collapsible from 'components/Collapsible';
 import type { RootState } from 'config/store';
+import TableSubgroup from './TableSubgroup';
 import { TableStructure } from './types';
 
 type Props = {
@@ -24,24 +26,20 @@ const TableView = ({ isLoading, structure }: Props) => {
       Object.keys(structure).forEach((group) => {
         newTableLayout[group] = {};
         // Example subgroup: Core Courses, Computing Electives
-        Object.keys(structure[group]).forEach((subgroup) => {
+        Object.keys(structure[group].content).forEach((subgroup) => {
           const subgroupStructure = structure[group].content[subgroup];
 
           newTableLayout[group][subgroup] = [];
 
           // only consider disciplinary component courses
           Object.keys(subgroupStructure.courses).forEach((courseCode) => {
-            if (courseCode in plannedCourses) {
-              newTableLayout[group][subgroup].push({
-                key: courseCode,
-                title: plannedCourses[courseCode].title,
-                UOC: plannedCourses[courseCode].UOC,
-                termPlanned: plannedCourses[courseCode].termPlanned,
-              });
-              newTableLayout[group][subgroup].sort(
-                (a, b) => a.termPlanned.localeCompare(b.termPlanned),
-              );
-            }
+            newTableLayout[group][subgroup].push({
+              key: courseCode,
+              title: subgroupStructure.courses[courseCode],
+              UOC: courses[courseCode]?.UOC,
+              termPlanned: plannedCourses[courseCode]?.termPlanned,
+              unplanned: courses[courseCode]?.plannedFor === null,
+            });
           });
         });
       });
@@ -54,29 +52,6 @@ const TableView = ({ isLoading, structure }: Props) => {
     setTableLayout(tableStructure);
   }, [isLoading, structure, years, startYear, courses]);
 
-  const columns = [
-    {
-      title: 'Course Code',
-      dataIndex: 'key',
-      key: 'key',
-    },
-    {
-      title: 'Course Name',
-      dataIndex: 'title',
-      key: 'title',
-    },
-    {
-      title: 'UOC',
-      dataIndex: 'UOC',
-      key: 'UOC',
-    },
-    {
-      title: 'Term Planned',
-      dataIndex: 'termPlanned',
-      key: 'termPlanned',
-    },
-  ];
-
   return (
     <div>
       {isLoading ? (
@@ -84,19 +59,23 @@ const TableView = ({ isLoading, structure }: Props) => {
       ) : (
         <>
           {Object.entries(tableLayout).map(([group, groupEntry]) => (
-            <div key={group}>
-              <Title level={1}>{structure[group].name ? `${group} - ${structure[group].name}` : group}</Title>
-              {Object.entries(groupEntry).map(([subGroup, subGroupEntry]) => (
-                <div key={subGroup}>
-                  <Title level={2}>{subGroup}</Title>
-                  <Table
-                    dataSource={subGroupEntry}
-                    columns={columns}
-                  />
-                  <br />
-                </div>
+            <Collapsible
+              title={(
+                <Title level={1} className="text" id={group}>
+                  {structure[group].name ? `${group} - ${structure[group].name}` : group}
+                </Title>
+              )}
+              key={group}
+              initiallyCollapsed={group === 'Rules'}
+            >
+              {Object.entries(groupEntry).map(([subgroup, subgroupCourses]) => (
+                <TableSubgroup
+                  subgroupTitle={subgroup}
+                  courses={subgroupCourses}
+                  uoc={structure[group].content[subgroup].UOC}
+                />
               ))}
-            </div>
+            </Collapsible>
           ))}
         </>
       )}

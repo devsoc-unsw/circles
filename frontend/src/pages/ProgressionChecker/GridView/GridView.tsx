@@ -7,7 +7,6 @@ import Collapsible from 'components/Collapsible';
 import type { RootState } from 'config/store';
 import GridViewConciseSubgroup from './GridViewConciseSubgroup';
 import GridViewSubgroup from './GridViewSubgroup';
-import S from './styles';
 import { GridStructure, GridSubgroup } from './types';
 
 type Props = {
@@ -85,46 +84,44 @@ const GridView = ({ isLoading, structure, concise }: Props) => {
   };
 
   return (
-    <S.GridViewContainer>
-      {(isLoading || Object.keys(gridLayout).length === 0) ? (
-        // TODO add skeleton
-        <Skeleton />
-      ) : (
-        <>
-          {Object.entries(gridLayout).map(([group, groupEntry]) => (
-            <Collapsible
-              title={(
-                <Title level={1} className="text" id={group}>
-                  {structure[group].name ? `${group} - ${structure[group].name}` : group}
-                </Title>
+    (isLoading || Object.keys(gridLayout).length === 0) ? (
+    // TODO add skeleton
+      <Skeleton />
+    ) : (
+      <>
+        {Object.entries(gridLayout).map(([group, groupEntry]) => (
+          <Collapsible
+            title={(
+              <Title level={1} className="text" id={group}>
+                {structure[group].name ? `${group} - ${structure[group].name}` : group}
+              </Title>
               )}
-              key={group}
-              initiallyCollapsed={group === 'Rules'}
-            >
-              {Object.entries(groupEntry).sort(sortSubgroups).map(
-                ([subgroup, subgroupEntry]) => (
-                  (concise === true) ? (
-                    <GridViewConciseSubgroup
-                      uoc={structure[group].content[subgroup].UOC}
-                      subgroupKey={subgroup}
-                      subgroupEntries={subgroupEntry.courses}
-                      hasLotsOfCourses={subgroupEntry.hasLotsOfCourses}
-                    />
-                  ) : (
-                    <GridViewSubgroup
-                      uoc={structure[group].content[subgroup].UOC}
-                      subgroupKey={subgroup}
-                      subgroupEntries={subgroupEntry.courses}
-                      hasLotsOfCourses={subgroupEntry.hasLotsOfCourses}
-                    />
-                  )
-                ),
-              )}
-            </Collapsible>
-          ))}
-        </>
-      )}
-    </S.GridViewContainer>
+            key={group}
+            initiallyCollapsed={group === 'Rules'}
+          >
+            {Object.entries(groupEntry).sort(sortSubgroups).map(
+              ([subgroup, subgroupEntry]) => (
+                (concise === true) ? (
+                  <GridViewConciseSubgroup
+                    uoc={structure[group].content[subgroup].UOC}
+                    subgroupKey={subgroup}
+                    subgroupEntries={subgroupEntry.courses}
+                    hasLotsOfCourses={subgroupEntry.hasLotsOfCourses}
+                  />
+                ) : (
+                  <GridViewSubgroup
+                    uoc={structure[group].content[subgroup].UOC}
+                    subgroupKey={subgroup}
+                    subgroupEntries={subgroupEntry.courses}
+                    hasLotsOfCourses={subgroupEntry.hasLotsOfCourses}
+                  />
+                )
+              ),
+            )}
+          </Collapsible>
+        ))}
+      </>
+    )
   );
 };
 

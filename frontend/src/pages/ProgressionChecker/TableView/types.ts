@@ -1,12 +1,13 @@
-export type TableSubgroup = {
+export type TableSubgroupCourse = {
   key: string
   title: string
   UOC: number
   termPlanned: string
+  unplanned: boolean
 };
 
 export type TableStructure = {
   [groupKey: string]: {
-    [subgroupKey: string]: TableSubgroup[]
+    [subgroupKey: string]: TableSubgroupCourse[]
   }
 };
