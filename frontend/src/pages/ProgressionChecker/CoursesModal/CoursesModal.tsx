@@ -11,7 +11,7 @@ type Props = {
   setModalVisible: Dispatch<SetStateAction<boolean>>
 };
 
-const CourseListModal = ({
+const CoursesModal = ({
   title, courses, modalVisible, setModalVisible,
 }: Props) => (
   <S.CourseModal
@@ -40,4 +40,4 @@ const CourseListModal = ({
   </S.CourseModal>
 );
 
-export default CourseListModal;
+export default CoursesModal;

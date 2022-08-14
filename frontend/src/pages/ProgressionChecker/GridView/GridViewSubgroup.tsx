@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Empty, Typography } from 'antd';
 import { GridSubgroupCourse } from 'types/progressionViews';
 import CourseBadge from '../CourseBadge';
-import CourseListModal from '../CourseListModal';
+import CourseListModal from '../CoursesModal';
 import S from './styles';
 
 type SubgroupSectionProps = {
@@ -27,16 +27,16 @@ const SubgroupSection = ({ courses }: SubgroupSectionProps) => (
 type CoursesSectionProps = {
   title: string
   subgroupEntries: GridSubgroupCourse[]
-  hasLotsOfCourses: boolean
+  isCoursesOverflow: boolean
 };
 
-const CoursesSection = ({ title, subgroupEntries, hasLotsOfCourses }: CoursesSectionProps) => {
+const CoursesSection = ({ title, subgroupEntries, isCoursesOverflow }: CoursesSectionProps) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const courses = subgroupEntries.filter((course) => !course.termPlanned && !course.unplanned);
   const coursesInPlanner = subgroupEntries.filter((course) => course.termPlanned);
 
-  if (hasLotsOfCourses && subgroupEntries.length) {
+  if (isCoursesOverflow && subgroupEntries.length) {
     // show planned courses and view all modal
     return (
       <>
@@ -65,14 +65,14 @@ type Props = {
   uoc: number
   subgroupKey: string
   subgroupEntries: GridSubgroupCourse[]
-  hasLotsOfCourses: boolean
+  isCoursesOverflow: boolean
 };
 
 const GridViewSubgroup = ({
   uoc,
   subgroupKey,
   subgroupEntries,
-  hasLotsOfCourses,
+  isCoursesOverflow,
 }: Props) => {
   const { Title } = Typography;
 
@@ -86,7 +86,7 @@ const GridViewSubgroup = ({
       <Title level={3} className="text">{uoc} UOC of the following courses ({Math.max(uoc - plannedUOC, 0)} UOC remaining)</Title>
       <CoursesSection
         title={subgroupKey}
-        hasLotsOfCourses={hasLotsOfCourses}
+        isCoursesOverflow={isCoursesOverflow}
         subgroupEntries={subgroupEntries}
       />
       <br />

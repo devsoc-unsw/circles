@@ -24,7 +24,7 @@ export type GridSubgroupCourse = {
 };
 
 export type GridSubgroup = {
-  hasLotsOfCourses: boolean
+  isCoursesOverflow: boolean
   courses: GridSubgroupCourse[]
 };
 

@@ -3,7 +3,7 @@ import { Button, Empty, Typography } from 'antd';
 import { GridSubgroupCourse, PlannedState } from 'types/progressionViews';
 import Collapsible from 'components/Collapsible';
 import CourseBadge from '../CourseBadge';
-import CourseListModal from '../CourseListModal';
+import CourseListModal from '../CoursesModal';
 import S from './styles';
 
 type CollapsibleSectionProps = {
@@ -11,11 +11,11 @@ type CollapsibleSectionProps = {
   planState: PlannedState
   planned: GridSubgroupCourse[]
   unplanned: GridSubgroupCourse[]
-  hasLotsOfCourses: boolean
+  isCoursesOverflow: boolean
 };
 
 const CollapsibleSection = ({
-  title, planState, planned, unplanned, hasLotsOfCourses,
+  title, planState, planned, unplanned, isCoursesOverflow,
 }: CollapsibleSectionProps) => {
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -49,7 +49,7 @@ const CollapsibleSection = ({
     </S.CourseGroup>
   );
 
-  if (hasLotsOfCourses && planState === PlannedState.UNPLANNED) {
+  if (isCoursesOverflow && planState === PlannedState.UNPLANNED) {
     return (
       <S.ViewAllCoursesWrapper>
         <Button type="primary" onClick={() => setModalVisible(true)}>
@@ -80,14 +80,14 @@ type Props = {
   uoc: number
   subgroupKey: string
   subgroupEntries: GridSubgroupCourse[]
-  hasLotsOfCourses: boolean
+  isCoursesOverflow: boolean
 };
 
 const GridViewConciseSubgroup = ({
   uoc,
   subgroupKey,
   subgroupEntries,
-  hasLotsOfCourses,
+  isCoursesOverflow,
 }: Props) => {
   const { Title } = Typography;
 
@@ -111,20 +111,20 @@ const GridViewConciseSubgroup = ({
               planState={PlannedState.PLANNED}
               planned={planned}
               unplanned={unplanned}
-              hasLotsOfCourses={hasLotsOfCourses}
+              isCoursesOverflow={isCoursesOverflow}
             />
           </Collapsible>
           <Collapsible
             title={<Title level={4} className="text">Choose {Math.max(uoc - plannedUOC, 0)} UOC from the following courses</Title>}
             headerStyle={{ border: 'none' }}
-            initiallyCollapsed={!hasLotsOfCourses && (unplanned.length > 16 || !unplanned.length)}
+            initiallyCollapsed={!isCoursesOverflow && (unplanned.length > 16 || !unplanned.length)}
           >
             <CollapsibleSection
               title={subgroupKey}
               planState={PlannedState.UNPLANNED}
               planned={planned}
               unplanned={unplanned}
-              hasLotsOfCourses={hasLotsOfCourses}
+              isCoursesOverflow={isCoursesOverflow}
             />
           </Collapsible>
         </>
