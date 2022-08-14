@@ -20,7 +20,7 @@ const CoursesModal = ({
         <S.ModalTitle level={2}>{title}</S.ModalTitle>
         <S.Instruction>See availiable courses:</S.Instruction>
       </S.ModalHeader>
-        )}
+    )}
     width="625px"
     visible={modalVisible}
     onCancel={() => setModalVisible(false)}
