@@ -91,9 +91,9 @@ const GridViewConciseSubgroup = ({
 }: Props) => {
   const { Title } = Typography;
 
-  const planned = subgroupEntries.filter((c) => (c.unplanned || c.past || c.past === false));
+  const planned = subgroupEntries.filter((c) => c.termPlanned);
   const plannedUOC = planned.reduce((sum, course) => (sum + (course.uoc ?? 0)), 0);
-  const unplanned = subgroupEntries.filter((c) => (!(c.unplanned || c.past || c.past === false)));
+  const unplanned = subgroupEntries.filter((c) => !c.termPlanned);
 
   return (
     <div key={subgroupKey}>
