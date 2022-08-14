@@ -35,7 +35,7 @@ const CourseSearchBar = () => {
         );
       } catch (err) {
         // eslint-disable-next-line
-        console.log(err);
+        console.log('Error at searchCourse', err);
       }
       setIsLoading(false);
     };

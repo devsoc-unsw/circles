@@ -127,10 +127,10 @@ const CourseDescription = () => {
     {
       title: 'Offering Terms',
       content: course.terms?.length
-        ? course.terms.map((term, index) => {
+        ? course.terms.map((term) => {
           const termNo = term.slice(1);
           return (
-            <TermTag key={index} name={term === 'T0' ? 'Summer' : `Term ${termNo}`} />
+            <TermTag key={term} name={term === 'T0' ? 'Summer' : `Term ${termNo}`} />
           );
         })
         : 'None',

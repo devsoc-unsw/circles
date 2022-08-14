@@ -201,7 +201,7 @@ const TermPlanner = () => {
                 });
                 if (planner.hidden[iYear]) return null;
                 return (
-                  <React.Fragment key={index}>
+                  <React.Fragment key={iYear}>
                     <S.YearGridBox>
                       <S.YearWrapper>
                         <S.YearText currYear={currYear === iYear}>

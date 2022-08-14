@@ -28,8 +28,7 @@
         "import/order": "off", // disabled for simple-import-sort plugin
         "react/jsx-props-no-spreading": ["off"], // disabled as to prefer using {...args} for props
         "react/jsx-one-expression-per-line": ["off"], // disabled jsx needing to be only in a single line
-        "react/jsx-no-bind": ["off"], // needed for some antd components
-        "react/no-array-index-key": ["off"], // there is probably a good reason to turn this back on, but I dont want to deal with it atm
+        "react/jsx-no-bind": ["off"], // disabled as it is needed for some antd components
         "jsx-a11y/click-events-have-key-events": ["off"],
         "jsx-a11y/interactive-supports-focus": ["off"],
         "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],

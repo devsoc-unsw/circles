@@ -27,4 +27,4 @@ export const yellow = '#FAAD14';
 export const purple = '#9254de';
 export const lightPurple = '#efdbff';
 
-export const inDev = import.meta.env.DEV;
+export const inDev = import.meta.env.MODE !== 'production';

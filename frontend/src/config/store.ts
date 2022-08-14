@@ -44,6 +44,8 @@ const rootReducer = combineReducers({
  *
  */
 
+// TODO: try to make this file not use ts-nocheck
+
 // migration schema used to translate structure - return undefined to reset initialState
 const migrations: MigrationManifest = {
   0: () => undefined,
