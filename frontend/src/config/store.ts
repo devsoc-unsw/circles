@@ -1,25 +1,14 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { useDispatch } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
-import axios from 'axios';
 import { combineReducers } from 'redux';
-import type { MigrationManifest } from 'redux-persist';
-import {
-  createMigrate,
-  persistReducer,
-} from 'redux-persist';
+import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { Course } from 'types/api';
 import coursesReducer from 'reducers/coursesSlice';
 import courseTabsReducer from 'reducers/courseTabsSlice';
 import degreeReducer from 'reducers/degreeSlice';
 import plannerReducer from 'reducers/plannerSlice';
 import settingsReducer from 'reducers/settingsSlice';
-import { REDUX_PERSIST_VERSION } from './constants';
+import persistMigrate, { persistVersion } from './migrations';
 
 const rootReducer = combineReducers({
   degree: degreeReducer,
@@ -29,60 +18,12 @@ const rootReducer = combineReducers({
   settings: settingsReducer,
 });
 
-/**
- * IMPORTANT NOTE:
- *
- * Since we store the state to local storage via redux-persist, this means that
- * any modifications to the state (i.e. changing the initialState data structure
- * fields, a bug created in the reducer functions that can cause some logic
- * issues, etc.) can have unintended effects for users using a previous version local
- * storage data format. This could cause Circles to break or create some weird behaviours.
- *
- * You must update/increment REDUX_STRUCTURE_VERSION value found in `constants.js`
- * to indicate is a breaking change is introduced to make it non compatible with
- * previous versions of local storage data.
- *
- */
-
-// TODO: try to make this file not use ts-nocheck
-
-// migration schema used to translate structure - return undefined to reset initialState
-const migrations: MigrationManifest = {
-  0: () => undefined,
-  1: () => undefined,
-  2: (oldState) => {
-    const newState = { ...oldState };
-    newState.degree.specs = [...newState.degree.majors, ...newState.degree.minors];
-    delete newState.degree.majors;
-    delete newState.degree.minors;
-    return newState;
-  },
-  3: async (oldState) => {
-    const newState = { ...oldState };
-
-    const courses = Object.keys(newState.planner.courses);
-    await Promise.all(courses.map(async (course) => {
-      try {
-        const res = await axios.get<Course>(`/courses/getCourse/${course}`);
-        if (res.status === 200) {
-          const courseData = res.data;
-          newState.planner.courses[courseData.code].is_multiterm = courseData.is_multiterm;
-        }
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.log('Error at migrations v3', e);
-      }
-    }));
-    return newState;
-  },
-};
-
 const persistConfig = {
   key: 'root',
-  version: REDUX_PERSIST_VERSION,
+  version: persistVersion,
   storage,
   whitelist: ['degree', 'courses', 'planner'],
-  migrate: createMigrate(migrations, { debug: true }),
+  migrate: persistMigrate,
 
 };
 
