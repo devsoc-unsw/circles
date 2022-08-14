@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Select, Spin } from 'antd';
 import axios from 'axios';
 import { SearchCourse } from 'types/api';
 import { useDebounce } from 'use-debounce';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import type { RootState } from 'config/store';
-import { addTab } from 'reducers/courseTabsSlice';
 
-const CourseSearchBar = () => {
+type Props = {
+  onSelectCallback: (courseCode: string) => void
+  style?: React.CSSProperties
+};
+
+const CourseSearchBar = ({ onSelectCallback, style }: Props) => {
   const [value, setValue] = useState<string | null>(null);
   const [courses, setCourses] = useState<{ label: string, value: string }[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const [debouncedSearchTerm] = useDebounce(value, 200);
-
-  const dispatch = useDispatch();
 
   const planner = useSelector((state: RootState) => state.planner);
   const degree = useSelector((state: RootState) => state.degree);
@@ -48,7 +50,7 @@ const CourseSearchBar = () => {
 
   const handleSelect = (courseCode: string) => {
     setValue(null);
-    dispatch(addTab(courseCode));
+    onSelectCallback(courseCode);
   };
 
   const handleSearch = (courseCode: string) => {
@@ -71,7 +73,7 @@ const CourseSearchBar = () => {
       onSearch={handleSearch}
       onSelect={handleSelect}
       notFoundContent={isLoading && value && <Spin size="small" />}
-      style={{ width: '30rem', marginRight: '0.5rem' }}
+      style={{ width: '30rem', ...style }}
       showArrow={!!value}
     />
   );

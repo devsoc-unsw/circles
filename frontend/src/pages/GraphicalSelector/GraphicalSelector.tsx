@@ -2,9 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { LockOutlined, UnlockOutlined } from '@ant-design/icons';
 import { breadthFirstSearch } from '@antv/algorithm';
-import type {
-  Graph, INode, Item,
-} from '@antv/g6';
+import type { Graph, INode, Item } from '@antv/g6';
 import G6 from '@antv/g6';
 import { Button, Switch, Tooltip } from 'antd';
 import axios from 'axios';
@@ -12,6 +10,7 @@ import {
   Course, CourseEdge, CoursesAllUnlocked, GraphPayload,
 } from 'types/api';
 import prepareUserPayload from 'utils/prepareUserPayload';
+import CourseSearchBar from 'components/CourseSearchBar';
 import PageTemplate from 'components/PageTemplate';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
@@ -30,6 +29,16 @@ const GraphicalSelector = () => {
   const [showUnlockedOnly, setShowUnlockedOnly] = useState(true);
 
   const ref = useRef<HTMLDivElement | null>(null);
+
+  const updateCourse = async (courseCode: string) => {
+    try {
+      const res = await axios.get<Course>(`/courses/getCourse/${courseCode}`);
+      setCourse(res.data);
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error('Error at updateCourse', e);
+    }
+  };
 
   useEffect(() => {
     // courses is a list of course codes
@@ -75,8 +84,7 @@ const GraphicalSelector = () => {
       // load up course information
         const node = ev.item as INode;
         const id = node.getID();
-        const res = await axios.get<Course>(`/courses/getCourse/${id}`);
-        if (res.status === 200) setCourse(res.data);
+        updateCourse(id);
 
         // hides/ unhides dependent nodes
         if (node.hasState('click')) {
@@ -128,8 +136,8 @@ const GraphicalSelector = () => {
       setLoading(false);
     };
 
-    if (programCode) setupGraph();
-  }, [plannedCourses, programCode, specs]);
+    if (!graph) setupGraph();
+  }, [graph, plannedCourses, programCode, specs]);
 
   const handleShowAllCoursesGraph = () => {
     if (graph) {
@@ -184,11 +192,26 @@ const GraphicalSelector = () => {
     setShowUnlockedOnly((prevState) => !prevState);
   };
 
+  const focusCourse = (courseCode: string) => {
+    if (graph) {
+      if (graph.findById(courseCode)) {
+        graph.focusItem(courseCode, true, { easing: 'easeQuadInOut', duration: 500 });
+        updateCourse(courseCode);
+      }
+    }
+  };
+
   return (
     <PageTemplate>
       <S.Wrapper>
         <S.GraphPlaygroundWrapper ref={ref}>
-          {loading && <Spinner text="Loading graph..." />}
+          {loading
+            ? <Spinner text="Loading graph..." />
+            : (
+              <S.SearchBarWrapper>
+                <CourseSearchBar onSelectCallback={focusCourse} style={{ width: '25rem' }} />
+              </S.SearchBarWrapper>
+            )}
         </S.GraphPlaygroundWrapper>
         <S.SidebarWrapper>
           <Tooltip placement="topLeft" title={showUnlockedOnly ? 'Hide locked courses' : 'Show locked courses'}>
