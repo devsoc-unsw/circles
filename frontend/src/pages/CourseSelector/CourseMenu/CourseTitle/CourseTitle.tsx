@@ -51,7 +51,7 @@ const CourseTitle = ({
       dispatch(addToUnplanned({ courseCode: course.code, courseData }));
     } catch (err) {
       // eslint-disable-next-line no-console
-      console.log('Error at addToPlanner', err);
+      console.error('Error at addToPlanner', err);
     }
   };
 
@@ -62,7 +62,7 @@ const CourseTitle = ({
       dispatch(removeCourses(res.data.courses));
     } catch (err) {
       // eslint-disable-next-line no-console
-      console.log('Error at removeFromPlanner', err);
+      console.error('Error at removeFromPlanner', err);
     }
   };
 

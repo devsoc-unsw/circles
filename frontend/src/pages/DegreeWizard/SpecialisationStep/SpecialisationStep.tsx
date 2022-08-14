@@ -38,7 +38,7 @@ const SpecialisationStep = ({ incrementStep, currStep, type }: Props) => {
       setOptions(res.data.spec as Specialisation);
     } catch (e) {
       // eslint-disable-next-line no-console
-      console.log('Error at getSteps', e);
+      console.error('Error at getSteps', e);
     }
   }, [programCode, type]);
 

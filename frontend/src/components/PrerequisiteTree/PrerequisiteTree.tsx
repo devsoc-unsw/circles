@@ -82,7 +82,7 @@ const PrerequisiteTree = ({ courseCode }: Props) => {
         return res.data.courses;
       } catch (e) {
       // eslint-disable-next-line no-console
-        console.log('Error at getCourseUnlocks', e);
+        console.error('Error at getCourseUnlocks', e);
         return [];
       }
     };
@@ -93,7 +93,7 @@ const PrerequisiteTree = ({ courseCode }: Props) => {
         return res.data.courses;
       } catch (e) {
       // eslint-disable-next-line no-console
-        console.log('Error at getCoursePrereqs', e);
+        console.error('Error at getCoursePrereqs', e);
         return [];
       }
     };
@@ -107,7 +107,7 @@ const PrerequisiteTree = ({ courseCode }: Props) => {
         setCourseAccurate(res.data.courses_state[courseCode].is_accurate);
       } catch (err) {
       // eslint-disable-next-line
-      console.log('Error at determineCourseAccuracy', err);
+      console.error('Error at determineCourseAccuracy', err);
       }
     };
 

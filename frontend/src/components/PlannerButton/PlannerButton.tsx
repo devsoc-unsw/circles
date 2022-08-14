@@ -63,7 +63,7 @@ const PlannerButton = () => {
       dispatch(removeCourses(res.data.courses));
     } catch (e) {
       // eslint-disable-next-line no-console
-      console.log('Error at removeFromPlanner', e);
+      console.error('Error at removeFromPlanner', e);
     }
   };
 

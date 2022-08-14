@@ -116,7 +116,7 @@ const GraphicalSelector = () => {
         if (courses.length !== 0 && edges.length !== 0) initialiseGraph(courses, edges);
       } catch (e) {
         // eslint-disable-next-line no-console
-        console.log('Error at setupGraph', e);
+        console.error('Error at setupGraph', e);
       }
       setLoading(false);
     };

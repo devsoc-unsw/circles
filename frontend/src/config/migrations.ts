@@ -49,7 +49,7 @@ const persistMigrations: MigrationManifest = {
         }
       } catch (e) {
         // eslint-disable-next-line no-console
-        console.log('Error at migrations v3', e);
+        console.error('Error at migrations v3', e);
       }
     }));
     return newState;

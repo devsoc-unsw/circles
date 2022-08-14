@@ -68,7 +68,7 @@ const TermPlanner = () => {
         dispatch(toggleWarnings(res.data.courses_state));
       } catch (err) {
         // eslint-disable-next-line no-console
-        console.log('Error at validateTermPlanner', err);
+        console.error('Error at validateTermPlanner', err);
       }
     };
 

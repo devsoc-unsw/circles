@@ -57,7 +57,7 @@ const DegreeWizard = () => {
         setSpecs(res.data.types);
       } catch (e) {
         // eslint-disable-next-line no-console
-        console.log('Error at getSteps', e);
+        console.error('Error at getSteps', e);
       }
     };
     if (degree.programCode !== '') getSteps();

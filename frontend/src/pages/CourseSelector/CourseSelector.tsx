@@ -42,7 +42,7 @@ const CourseSelector = () => {
         setStructure(res.data.structure);
       } catch (err) {
         // eslint-disable-next-line no-console
-        console.log('Error at fetchStructure', err);
+        console.error('Error at fetchStructure', err);
       }
     };
     if (programCode) fetchStructure();

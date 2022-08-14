@@ -32,7 +32,7 @@ const DegreeStep = ({ incrementStep }: Props) => {
       setAllDegrees(res.data.programs);
     } catch (e) {
       // eslint-disable-next-line no-console
-      console.log('Error at fetchAllDegrees', e);
+      console.error('Error at fetchAllDegrees', e);
     }
   };
 

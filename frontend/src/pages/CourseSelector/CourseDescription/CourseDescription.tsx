@@ -54,7 +54,7 @@ const CourseDescription = () => {
         dispatch(setCourse(res.data));
       } catch (e) {
         // eslint-disable-next-line no-console
-        console.log('Error at getCourse', e);
+        console.error('Error at getCourse', e);
       }
     };
 
@@ -64,7 +64,7 @@ const CourseDescription = () => {
         setCoursesPathTo(res.data);
       } catch (e) {
         // eslint-disable-next-line no-console
-        console.log('Error at getPathToCoursesById', e);
+        console.error('Error at getPathToCoursesById', e);
       }
     };
 
@@ -74,7 +74,7 @@ const CourseDescription = () => {
         setCoursesPathFrom(res.data.courses);
       } catch (e) {
         // eslint-disable-next-line no-console
-        console.log('Error at getPathFromCoursesById', e);
+        console.error('Error at getPathFromCoursesById', e);
       }
     };
 
@@ -105,7 +105,7 @@ const CourseDescription = () => {
         getCapacityAndEnrolment(res.data);
       } catch (e) {
         // eslint-disable-next-line no-console
-        console.log('Error at getCourseCapacityById', e);
+        console.error('Error at getCourseCapacityById', e);
       }
     };
 
