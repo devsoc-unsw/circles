@@ -1,11 +1,11 @@
+""" test file for categories """
+import json
 from algorithms.objects.categories import (
     CourseCategory,
     LevelCategory,
     LevelCourseCategory,
 )
-
-import json
-
+# pylint: disable missing-function-docstring
 # need to test if the UOC and WAM mathods are correct for 1 case only
 
 # rest need tests for their match_definition

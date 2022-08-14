@@ -73,7 +73,7 @@ def main():
             cwd='backend/'
         )
         check_call(
-            'VITE_ENV=dev npm start',
+            'npm start',
             shell=True,
             stdout=sys.stdout,
             stderr=sys.stderr,

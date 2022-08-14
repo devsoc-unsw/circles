@@ -1,9 +1,10 @@
+# pylint: disable=missing-function-docstring
+# pylint: disable=missing-module-docstring
 # assumes that getPrograms, getMajors, and getMinors isnt borked.
-from itertools import chain
 from more_itertools import flatten
 import requests
-from hypothesis import HealthCheck, given, settings
-from hypothesis.strategies import DrawFn, composite, sampled_from
+from hypothesis import given, settings
+from hypothesis.strategies import composite, sampled_from
 
 programs = [
     *requests.get("http://127.0.0.1:8000/programs/getPrograms")
@@ -14,13 +15,14 @@ programs = [
 fake_specs = ["NAVLAH", "GMATEH", "ARCYB2"]
 
 @composite
-def major_minor_for_program(draw: DrawFn):
+def major_minor_for_program(draw):
     program = draw(sampled_from(programs))
-    possible_specs = []
-    for t in ["majors", "minors", "honours"]:
+    possible_specs: list[str] = []
+    
+    for t in requests.get(f"http://127.0.0.1:8000/specialisations/getSpecialisationTypes/{program}").json()["types"]:
         majorsRequest = requests.get(f"http://127.0.0.1:8000/specialisations/getSpecialisations/{program}/{t}")
-        majorsRequest = majorsRequest.json()['spec'] if majorsRequest.status_code == 200 else {}
-        possible_specs.extend(flatten(prog['specs'].keys() for prog in majorsRequest.values()))
+        majorsRequestJson = majorsRequest.json()['spec'] if majorsRequest.status_code == 200 else {}
+        possible_specs.extend(flatten(prog['specs'].keys() for prog in majorsRequestJson.values()))
 
 
     # select doubles

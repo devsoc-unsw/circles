@@ -1,3 +1,5 @@
+# pylint: disable=missing-function-docstring
+# pylint: disable=missing-module-docstring
 import json
 import requests
 
@@ -5,7 +7,6 @@ PATH = "./algorithms/tests/exampleUsers.json"
 
 with open(PATH, encoding="utf8") as f:
     USERS = json.load(f)
-
 
 def test_no_courses_completed():
     x = requests.post(
