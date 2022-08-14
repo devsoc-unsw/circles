@@ -10,9 +10,17 @@ type SubgroupSectionProps = {
 };
 
 const SubgroupSection = ({ courses }: SubgroupSectionProps) => (
-  <S.CourseGroup>{courses.map((course) => (
-    <CourseBadge course={course} key={course.key} />
-  ))}
+  <S.CourseGroup>
+    {courses.map((course) => (
+      <CourseBadge
+        courseCode={course.key}
+        title={course.title}
+        past={course.past}
+        termPlanned={course.termPlanned}
+        uoc={course.uoc}
+        unplanned={course.unplanned}
+      />
+    ))}
   </S.CourseGroup>
 );
 
@@ -33,10 +41,6 @@ const CoursesSection = ({ title, subgroupEntries, hasLotsOfCourses }: CoursesSec
     return (
       <>
         <SubgroupSection courses={coursesInPlanner} />
-        <S.CourseGroup>{coursesInPlanner.map((course) => (
-          <CourseBadge course={course} key={course.key} />
-        ))}
-        </S.CourseGroup>
         <S.ViewAllCoursesWrapper>
           <Button type="primary" onClick={() => setModalVisible(true)}>
             View All Courses
@@ -72,7 +76,9 @@ const GridViewSubgroup = ({
 }: Props) => {
   const { Title } = Typography;
 
-  const plannedUOC = subgroupEntries.reduce((sum, course) => (sum + (course.uoc ?? 0)), 0);
+  const plannedUOC = subgroupEntries
+    .filter((course) => course.termPlanned)
+    .reduce((sum, course) => (sum + (course.uoc ?? 0)), 0);
 
   return (
     <div key={subgroupKey}>

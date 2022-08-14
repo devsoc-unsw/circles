@@ -22,12 +22,30 @@ const CollapsibleSection = ({
   // convert lists to components
   const plannedGroup = (
     <S.CourseGroup>
-      {planned.map((course) => (<CourseBadge course={course} key={course.key} />))}
+      {planned.map((course) => (
+        <CourseBadge
+          courseCode={course.key}
+          title={course.title}
+          past={course.past}
+          termPlanned={course.termPlanned}
+          uoc={course.uoc}
+          unplanned={course.unplanned}
+        />
+      ))}
     </S.CourseGroup>
   );
   const unplannedGroup = (
     <S.CourseGroup>
-      {unplanned.map((course) => (<CourseBadge course={course} key={course.key} />))}
+      {unplanned.map((course) => (
+        <CourseBadge
+          courseCode={course.key}
+          title={course.title}
+          past={course.past}
+          termPlanned={course.termPlanned}
+          uoc={course.uoc}
+          unplanned={course.unplanned}
+        />
+      ))}
     </S.CourseGroup>
   );
 

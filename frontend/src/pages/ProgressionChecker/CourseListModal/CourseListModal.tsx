@@ -28,7 +28,16 @@ const CourseListModal = ({
     footer={null}
   >
     <S.CourseList>
-      {courses.map((course) => (<CourseBadge course={course} key={course.key} />))}
+      {courses.map((course) => (
+        <CourseBadge
+          courseCode={course.key}
+          title={course.title}
+          past={course.past}
+          termPlanned={course.termPlanned}
+          uoc={course.uoc}
+          unplanned={course.unplanned}
+        />
+      ))}
     </S.CourseList>
   </S.CourseModal>
 );

@@ -7,7 +7,7 @@ import S from './styles';
 type Props = {
   courseCode: string
   title: string
-  planned: boolean
+  planned?: boolean
 };
 
 const CourseButton = ({ courseCode, title, planned }: Props) => {
