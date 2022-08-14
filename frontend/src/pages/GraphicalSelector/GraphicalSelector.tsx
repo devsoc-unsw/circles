@@ -36,7 +36,7 @@ const GraphicalSelector = () => {
       setCourse(res.data);
     } catch (e) {
       // eslint-disable-next-line no-console
-      console.error('Error at update course', e);
+      console.error('Error at updateCourse', e);
     }
   };
 
