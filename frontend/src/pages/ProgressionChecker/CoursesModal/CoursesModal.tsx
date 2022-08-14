@@ -17,9 +17,8 @@ const CoursesModal = ({
   <S.CourseModal
     title={(
       <S.ModalHeader>
-        <S.ModalTitle level={2}>Course List</S.ModalTitle>
-        <S.ModalTitle level={3}>{title}</S.ModalTitle>
-        <S.Instruction>See your possible courses:</S.Instruction>
+        <S.ModalTitle level={2}>{title}</S.ModalTitle>
+        <S.Instruction>See availiable courses:</S.Instruction>
       </S.ModalHeader>
         )}
     width="625px"
