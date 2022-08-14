@@ -16,23 +16,27 @@ const SubgroupSection = ({ courses }: SubgroupSectionProps) => (
   </S.CourseGroup>
 );
 
-type CourseSectionProps = {
+type CoursesSectionProps = {
   title: string
   subgroupEntries: GridSubgroupCourse[]
   hasLotsOfCourses: boolean
 };
 
-const CourseSection = ({ title, subgroupEntries, hasLotsOfCourses }: CourseSectionProps) => {
+const CoursesSection = ({ title, subgroupEntries, hasLotsOfCourses }: CoursesSectionProps) => {
   const [modalVisible, setModalVisible] = useState(false);
 
-  const coursesInPlanner = subgroupEntries.filter((course) => course.termPlanned
-  || course.unplanned);
   const courses = subgroupEntries.filter((course) => !course.termPlanned && !course.unplanned);
+  const coursesInPlanner = subgroupEntries.filter((course) => course.termPlanned);
 
   if (hasLotsOfCourses && subgroupEntries.length) {
+    // show planned courses and view all modal
     return (
       <>
         <SubgroupSection courses={coursesInPlanner} />
+        <S.CourseGroup>{coursesInPlanner.map((course) => (
+          <CourseBadge course={course} key={course.key} />
+        ))}
+        </S.CourseGroup>
         <S.ViewAllCoursesWrapper>
           <Button type="primary" onClick={() => setModalVisible(true)}>
             View All Courses
@@ -74,7 +78,7 @@ const GridViewSubgroup = ({
     <div key={subgroupKey}>
       <Title level={2} className="text">{subgroupKey}</Title>
       <Title level={3} className="text">{uoc} UOC of the following courses ({Math.max(uoc - plannedUOC, 0)} UOC remaining)</Title>
-      <CourseSection
+      <CoursesSection
         title={subgroupKey}
         hasLotsOfCourses={hasLotsOfCourses}
         subgroupEntries={subgroupEntries}

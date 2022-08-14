@@ -17,7 +17,6 @@ import Dashboard from './Dashboard';
 import GridView from './GridView/GridView';
 import S from './styles';
 import TableView from './TableView';
-import { StoreUOC } from './types';
 
 type Props = {
   structure: ProgramStructure
@@ -85,7 +84,6 @@ const ProgressionChecker = () => {
   const {
     programCode, specs,
   } = useSelector((state: RootState) => state.degree);
-  const planner = useSelector((state: RootState) => state.planner);
 
   useEffect(() => {
     // get structure of degree
@@ -112,37 +110,10 @@ const ProgressionChecker = () => {
     });
   }, []);
 
-  const storeUOC: StoreUOC = {};
-
-  // Example groups: Major, Minor, General, Rules
-  Object.keys(structure).forEach((group) => {
-    storeUOC[group] = {
-      total: 0,
-      curr: 0,
-    };
-
-    // Example subgroup: Core Courses, Computing Electives
-    Object.keys(structure[group].content).forEach((subgroup) => {
-      storeUOC[group].total += structure[group].content[subgroup].UOC;
-      const subgroupStructure = structure[group].content[subgroup];
-
-      const isRule = subgroupStructure.type && subgroupStructure.type.includes('rule');
-
-      if (subgroupStructure.courses && !isRule) {
-        // only consider disciplinary component courses
-        Object.keys(subgroupStructure.courses).forEach((courseCode) => {
-          if (planner.courses[courseCode]) {
-            storeUOC[group].curr += planner.courses[courseCode].UOC;
-          }
-        });
-      }
-    });
-  });
-
   return (
     <PageTemplate>
       <S.Wrapper>
-        <Dashboard storeUOC={storeUOC} isLoading={isLoading} structure={structure} uoc={uoc} />
+        <Dashboard isLoading={isLoading} structure={structure} totalUOC={uoc} />
         <div id="divider"><Divider /></div>
         <ProgressionCheckerCourses structure={structure} isLoading={isLoading} />
       </S.Wrapper>

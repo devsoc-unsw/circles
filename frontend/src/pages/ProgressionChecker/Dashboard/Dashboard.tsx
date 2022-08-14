@@ -13,15 +13,12 @@ import { StoreUOC } from '../types';
 import S from './styles';
 
 type Props = {
-  storeUOC: StoreUOC
   isLoading: boolean
   structure: ProgramStructure
-  uoc: number
+  totalUOC: number
 };
 
-const Dashboard = ({
-  storeUOC, isLoading, structure, uoc,
-}: Props) => {
+const Dashboard = ({ isLoading, structure, totalUOC }: Props) => {
   const { Title } = Typography;
   const currYear = new Date().getFullYear();
 
@@ -44,7 +41,36 @@ const Dashboard = ({
 
   let completedUOC = 0;
   Object.keys(courses).forEach((courseCode) => {
-    if (courseList.includes(courseCode)) completedUOC += courses[courseCode].UOC;
+    if (courseList.includes(courseCode) && courses[courseCode]?.plannedFor) {
+      completedUOC += courses[courseCode].UOC;
+    }
+  });
+
+  const storeUOC: StoreUOC = {};
+
+  // Example groups: Major, Minor, General, Rules
+  Object.keys(structure).forEach((group) => {
+    storeUOC[group] = {
+      total: 0,
+      curr: 0,
+    };
+
+    // Example subgroup: Core Courses, Computing Electives
+    Object.keys(structure[group].content).forEach((subgroup) => {
+      storeUOC[group].total += structure[group].content[subgroup].UOC;
+      const subgroupStructure = structure[group].content[subgroup];
+
+      const isRule = subgroupStructure.type && subgroupStructure.type.includes('rule');
+
+      if (subgroupStructure.courses && !isRule) {
+        // only consider disciplinary component courses
+        Object.keys(subgroupStructure.courses).forEach((courseCode) => {
+          if (courses[courseCode]?.plannedFor) {
+            storeUOC[group].curr += courses[courseCode].UOC;
+          }
+        });
+      }
+    });
   });
 
   const handleClick = () => {
@@ -62,7 +88,7 @@ const Dashboard = ({
         <S.ContentWrapper style={props}>
           <LiquidProgressChart
             completedUOC={completedUOC}
-            totalUOC={uoc}
+            totalUOC={totalUOC}
           />
           <a
             href={`https://www.handbook.unsw.edu.au/undergraduate/programs/${currYear}/${programCode}`}

@@ -87,6 +87,7 @@ const GridView = ({ isLoading, structure, concise }: Props) => {
   return (
     <S.GridViewContainer>
       {(isLoading || Object.keys(gridLayout).length === 0) ? (
+        // TODO add skeleton
         <Skeleton />
       ) : (
         <>
