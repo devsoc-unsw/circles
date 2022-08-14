@@ -1,0 +1,13 @@
+{
+    "eslint.workingDirectories": [
+        "frontend"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+    "python.testing.cwd": "${workspaceFolder}/backend",
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/.hypothesis": true,
+        "**/.pytest_cache": true
+    }
+}
