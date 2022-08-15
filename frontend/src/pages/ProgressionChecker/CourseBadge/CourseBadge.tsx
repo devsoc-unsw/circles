@@ -4,9 +4,9 @@ import CalendarOutlined from '@ant-design/icons/CalendarOutlined';
 import ExclamationOutlined from '@ant-design/icons/ExclamationOutlined';
 import Badge from 'antd/lib/badge';
 import Tooltip from 'antd/lib/tooltip';
+import getNumTerms from 'utils/getNumTerms';
 import CourseButton from 'components/CourseButton';
 import { purple } from 'config/constants';
-import { getNumTerms } from 'pages/TermPlanner/utils';
 import S from './styles';
 
 type UOCBadgeProps = {
@@ -21,7 +21,7 @@ const UOCBadge = ({ uoc, isMultiterm }: UOCBadgeProps) => (
         backgroundColor: purple, color: 'white', lineHeight: '1.5', height: 'auto',
       }}
       size="small"
-      count={isMultiterm ? `${getNumTerms(uoc)} × ${uoc} UOC` : `${uoc} UOC`}
+      count={isMultiterm ? `${getNumTerms(uoc, isMultiterm)} × ${uoc} UOC` : `${uoc} UOC`}
     />
   </S.UOCBadgeWrapper>
 );
@@ -33,10 +33,11 @@ type Props = {
   uoc: number
   isUnplanned: boolean
   isMultiterm: boolean
+  isDoubleCounted: boolean
 };
 
 const CourseBadge = ({
-  courseCode, title, isUnplanned, uoc, plannedFor, isMultiterm,
+  courseCode, title, isUnplanned, uoc, plannedFor, isMultiterm, isDoubleCounted,
 }: Props) => {
   const navigate = useNavigate();
 
@@ -57,6 +58,23 @@ const CourseBadge = ({
           )}
       >
         <CourseButton courseCode={courseCode} title={title} />
+      </Badge>
+    );
+  }
+
+  if (plannedFor && isDoubleCounted) {
+    return (
+      <Badge
+        count={(
+          <Tooltip title="Course has been counted previously. Progression for this course may be counted again. Please manually verify the accuracy of the progression checker.">
+            <S.CourseBadgeIcon onClick={handleClick}>
+              <ExclamationOutlined />
+            </S.CourseBadgeIcon>
+          </Tooltip>
+        )}
+      >
+        <CourseButton courseCode={courseCode} title={title} planned />
+        {uoc && <UOCBadge uoc={uoc} isMultiterm={isMultiterm} />}
       </Badge>
     );
   }

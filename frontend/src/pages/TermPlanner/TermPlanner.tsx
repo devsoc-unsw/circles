@@ -3,10 +3,10 @@ import type { OnDragEndResponder, OnDragStartResponder } from 'react-beautiful-d
 import { DragDropContext } from 'react-beautiful-dnd';
 import { useDispatch, useSelector } from 'react-redux';
 import Badge from 'antd/lib/badge';
-import notification from 'antd/lib/notification';
 import axios from 'axios';
 import { ValidateTermPlanner } from 'types/api';
 import { Term } from 'types/planner';
+import openNotification from 'utils/openNotification';
 import prepareCoursesForValidationPayload from 'utils/prepareCoursesForValidationPayload';
 import PageTemplate from 'components/PageTemplate';
 import type { RootState } from 'config/store';
@@ -23,24 +23,6 @@ import {
   checkMultitermInBounds,
   isPlannerEmpty,
 } from './utils';
-
-const openNotification = () => {
-  notification.info({
-    message: 'Your terms are looking a little empty',
-    description: 'Add courses from the course selector to the term planner by dragging from the unplanned column',
-    duration: 3,
-    placement: 'bottomRight',
-  });
-};
-
-const outOfBoundsMultitermNotification = (course: string) => {
-  notification.info({
-    message: `${course} would extend outside of the term planner`,
-    description: `Keep ${course} inside the calendar by moving it to a different term instead`,
-    duration: 3,
-    placement: 'bottomRight',
-  });
-};
 
 const TermPlanner = () => {
   const { showWarnings } = useSelector((state: RootState) => state.settings);
@@ -73,7 +55,13 @@ const TermPlanner = () => {
       }
     };
 
-    if (isPlannerEmpty(planner.years)) openNotification();
+    if (isPlannerEmpty(planner.years)) {
+      openNotification({
+        type: 'info',
+        message: 'Your terms are looking a little empty',
+        description: 'Add courses from the course selector to the term planner and drag courses from the unplanned column',
+      });
+    }
     validateTermPlanner();
   }, [degree, planner.years, planner.startYear, marksRef.current, showWarnings]);
 
@@ -108,7 +96,11 @@ const TermPlanner = () => {
         isSummerTerm: planner.isSummerEnabled,
         numYears: planner.numYears,
       })) {
-        outOfBoundsMultitermNotification(draggableId);
+        openNotification({
+          type: 'warning',
+          message: 'Course would extend outside of the term planner',
+          description: `Keep ${draggableId} inside the calendar by moving it to a different term instead`,
+        });
         return;
       }
 

@@ -7,7 +7,6 @@ import InfoCircleOutlined from '@ant-design/icons/InfoCircleOutlined';
 import WarningOutlined from '@ant-design/icons/WarningOutlined';
 import Typography from 'antd/lib/typography';
 import { useTheme } from 'styled-components';
-import Marks from 'components/Marks';
 import type { RootState } from 'config/store';
 import useMediaQuery from 'hooks/useMediaQuery';
 import ContextMenu from '../ContextMenu';
@@ -27,7 +26,7 @@ const DraggableCourse = ({ code, index, term }: Props) => {
   } = useSelector((state: RootState) => state.planner);
   const { showMarks } = useSelector((state: RootState) => state.settings);
   const theme = useTheme();
-  const Text = Typography;
+  const { Text } = Typography;
 
   // prereqs are populated in CourseDescription.jsx via course.raw_requirements
   const {
@@ -99,7 +98,18 @@ const DraggableCourse = ({ code, index, term }: Props) => {
                   </Text>
                 </div>
               )}
-              {showMarks && <Marks mark={mark} />}
+              {showMarks && (
+                <div>
+                  <Text strong className="text">Mark: </Text>
+                  <Text className="text">
+                    {/*
+                      Marks can be strings (i.e. HD, CR) or a number (i.e. 90, 85).
+                      Mark can be 0.
+                    */}
+                    {typeof mark === 'string' || typeof mark === 'number' ? mark : 'N/A'}
+                  </Text>
+                </div>
+              )}
             </S.CourseLabel>
           </S.CourseWrapper>
         )}

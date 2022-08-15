@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import EyeInvisibleFilled from '@ant-design/icons/EyeInvisibleFilled';
-import notification from 'antd/lib/notification';
 import Tooltip from 'antd/lib/tooltip';
+import openNotification from 'utils/openNotification';
 import type { RootState } from 'config/store';
 import { hideYear } from 'reducers/plannerSlice';
 
@@ -14,20 +14,15 @@ const HideYearTooltip = ({ year }: Props) => {
   const { hidden, numYears } = useSelector((state: RootState) => state.planner);
   const dispatch = useDispatch();
 
-  const showCannotHideAllYearsNotification = () => {
-    notification.open({
-      type: 'error',
-      message: "Something's not right",
-      description: 'You cannot hide all years in your term planner',
-      duration: 2,
-      placement: 'bottomRight',
-    });
-  };
-
   const handleHideYear = () => {
     const numHidden = Object.values(hidden).filter((h) => h).length;
-    if (numHidden === numYears - 1) showCannotHideAllYearsNotification();
-    else {
+    if (numHidden === numYears - 1) {
+      openNotification({
+        type: 'error',
+        message: 'Something\'s not right',
+        description: 'You cannot hide all years in your term planner',
+      });
+    } else {
       dispatch(hideYear(year));
     }
   };

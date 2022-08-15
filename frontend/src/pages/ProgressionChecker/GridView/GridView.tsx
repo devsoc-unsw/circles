@@ -1,7 +1,7 @@
 import React from 'react';
 import Typography from 'antd/lib/typography';
 import { ViewSubgroupCourse } from 'types/progressionViews';
-import { getNumTerms } from 'pages/TermPlanner/utils';
+import getNumTerms from 'utils/getNumTerms';
 import CoursesSection from './CoursesSection';
 import GridConciseView from './GridConciseView';
 
@@ -25,7 +25,8 @@ const GridView = ({
   const plannedUOC = courses
     .filter((course) => course.plannedFor)
     .reduce(
-      (sum, course) => (sum + ((course.UOC ?? 0) * getNumTerms((course.UOC ?? 0)))),
+      (sum, course) => (sum + ((course.UOC ?? 0)
+        * getNumTerms((course.UOC ?? 0), course.isMultiterm))),
       0,
     );
 

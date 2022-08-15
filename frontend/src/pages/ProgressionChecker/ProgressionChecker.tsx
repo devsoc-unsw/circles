@@ -6,12 +6,12 @@ import EyeInvisibleOutlined from '@ant-design/icons/EyeInvisibleOutlined';
 import TableOutlined from '@ant-design/icons/TableOutlined';
 import Button from 'antd/lib/button';
 import Divider from 'antd/lib/divider';
-import notification from 'antd/lib/notification';
 import Typography from 'antd/lib/typography';
 import axios from 'axios';
 import { Structure } from 'types/api';
 import { ProgressionViewStructure, Views, ViewSubgroup } from 'types/progressionViews';
 import { ProgramStructure } from 'types/structure';
+import openNotification from 'utils/openNotification';
 import Collapsible from 'components/Collapsible';
 import PageTemplate from 'components/PageTemplate';
 import { inDev } from 'config/constants';
@@ -31,6 +31,8 @@ const ProgressionCheckerCourses = ({ structure }: Props) => {
   const [view, setView] = useState(Views.GRID_CONCISE);
 
   const { courses, unplanned } = useSelector((store: RootState) => store.planner);
+
+  const countedCourses: string[] = [];
 
   const generateViewStructure = () => {
     const newViewLayout: ProgressionViewStructure = {};
@@ -61,7 +63,11 @@ const ProgressionCheckerCourses = ({ structure }: Props) => {
             plannedFor: courses[courseCode]?.plannedFor || '',
             isUnplanned: unplanned.includes(courseCode),
             isMultiterm: !!courses[courseCode]?.isMultiterm,
+            isDoubleCounted: countedCourses.includes(courseCode) && !/Core/.test(subgroup) && !group.includes('Rules'),
           });
+          if (courses[courseCode]?.plannedFor && !countedCourses.includes(courseCode)) {
+            countedCourses.push(courseCode);
+          }
         });
 
         newViewLayout[group][subgroup].courses.sort(
@@ -69,7 +75,6 @@ const ProgressionCheckerCourses = ({ structure }: Props) => {
         );
       });
     });
-
     return newViewLayout;
   };
 
@@ -127,7 +132,7 @@ const ProgressionCheckerCourses = ({ structure }: Props) => {
         <Collapsible
           title={(
             <Title level={1} className="text" id={group}>
-              {viewStructure[group].name ? `${group} - ${structure[group].name}` : group}
+              {structure[group].name ? `${group} - ${structure[group].name}` : group}
             </Title>
             )}
           key={group}
@@ -187,11 +192,10 @@ const ProgressionChecker = () => {
   }, [programCode, specs]);
 
   useEffect(() => {
-    notification.info({
+    openNotification({
+      type: 'info',
       message: 'Disclaimer',
       description: "This progression check is intended to outline the courses required by your degree and may not be 100% accurate. Please refer to UNSW's official progression check and handbook for further accuracy.",
-      placement: 'bottomRight',
-      duration: 20,
     });
   }, []);
 

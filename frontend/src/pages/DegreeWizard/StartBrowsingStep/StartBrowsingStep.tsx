@@ -2,19 +2,11 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Button from 'antd/lib/button';
-import notification from 'antd/lib/notification';
+import openNotification from 'utils/openNotification';
 import type { RootState } from 'config/store';
 import { setIsComplete } from 'reducers/degreeSlice';
 import CS from '../common/styles';
 import S from './styles';
-
-const openNotification = (msg: string) => {
-  notification.error({
-    message: msg,
-    duration: 2,
-    placement: 'bottomRight',
-  });
-};
 
 const StartBrowsingStep = () => {
   const navigate = useNavigate();
@@ -23,9 +15,15 @@ const StartBrowsingStep = () => {
 
   const handleSaveUserSettings = () => {
     if (programCode === '') {
-      openNotification('Please select a degree');
+      openNotification({
+        type: 'error',
+        message: 'Please select a degree',
+      });
     } else if (!specs.length) {
-      openNotification('Please select a specialisation');
+      openNotification({
+        type: 'error',
+        message: 'Please select a specialisation',
+      });
     } else {
       dispatch(setIsComplete(true));
       navigate('/course-selector');

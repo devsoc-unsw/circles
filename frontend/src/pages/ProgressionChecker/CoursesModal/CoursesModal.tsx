@@ -35,6 +35,7 @@ const CoursesModal = ({
           plannedFor={course.plannedFor}
           isUnplanned={course.isUnplanned}
           isMultiterm={course.isMultiterm}
+          isDoubleCounted={course.isDoubleCounted}
         />
       ))}
     </S.CourseList>

@@ -1,8 +1,8 @@
 import React from 'react';
 import Typography from 'antd/lib/typography';
 import { ViewSubgroupCourse } from 'types/progressionViews';
+import getNumTerms from 'utils/getNumTerms';
 import Collapsible from 'components/Collapsible';
-import { getNumTerms } from 'pages/TermPlanner/utils';
 import CoursesSection from './CoursesSection';
 
 type Props = {
@@ -23,9 +23,11 @@ const GridConciseView = ({
   const plannedCourses = courses.filter((c) => c.plannedFor);
   const unplannedCourses = courses.filter((c) => !c.plannedFor);
   const plannedUOC = plannedCourses.reduce(
-    (sum, course) => (sum + ((course.UOC ?? 0) * getNumTerms((course.UOC ?? 0)))),
+    (sum, course) => (sum + ((course.UOC ?? 0)
+      * getNumTerms((course.UOC ?? 0), course.isMultiterm))),
     0,
   );
+  const remainingUOC = Math.max(uoc - plannedUOC, 0);
 
   return (
     <>
@@ -45,10 +47,12 @@ const GridConciseView = ({
             />
           </Collapsible>
           <Collapsible
-            title={<Title level={4} className="text">Choose {Math.max(uoc - plannedUOC, 0)} UOC from the following courses</Title>}
+            title={<Title level={4} className="text">Choose {remainingUOC} UOC from the following courses</Title>}
             headerStyle={{ border: 'none' }}
             initiallyCollapsed={
-              !isCoursesOverflow && (unplannedCourses.length > 16 || !unplannedCourses.length)
+              !remainingUOC
+              || (!isCoursesOverflow
+              && (unplannedCourses.length > 16 || !unplannedCourses.length))
             }
           >
             <CoursesSection
