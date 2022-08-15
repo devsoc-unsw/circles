@@ -64,7 +64,7 @@ const ProgressionCheckerCourses = ({ structure }: Props) => {
             plannedFor: courses[courseCode]?.plannedFor || '',
             isUnplanned: unplanned.includes(courseCode),
             isMultiterm: !!courses[courseCode]?.isMultiterm,
-            isDoubleCounted: countedCourses.includes(courseCode) && !/Core/.test(subgroup),
+            isDoubleCounted: countedCourses.includes(courseCode) && !/Core/.test(subgroup) && !group.includes('Rules'),
           });
           if (courses[courseCode]?.plannedFor && !countedCourses.includes(courseCode)) {
             countedCourses.push(courseCode);

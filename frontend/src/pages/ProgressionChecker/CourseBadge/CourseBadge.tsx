@@ -64,7 +64,7 @@ const CourseBadge = ({
     return (
       <Badge
         count={(
-          <Tooltip title="Course has been counted previously in the progression. Please manually verify the accuracy.">
+          <Tooltip title="Course has been counted previously. Progression for this course may be counted again. Please manually verify the accuracy of the progression checker.">
             <S.CourseBadgeIcon onClick={handleClick}>
               <ExclamationOutlined />
             </S.CourseBadgeIcon>
