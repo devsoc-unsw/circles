@@ -9,7 +9,7 @@ Do NOT run this from it's current location.
 TODO: This should be moved as a command that can be run by `run_processors.py`
 """
 
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Tuple
 from algorithms.objects.conditions import CompositeCondition
 from data.config import GRAPH_CACHE_FILE
 from data.processors.load_conditions import construct_conditions_objects
@@ -44,23 +44,26 @@ def incoming_list(course: str) -> List[str]:
 
     TODO: Integrate this properly as a method in the `Condition` class
     """
-    return get_path_from(course)["courses"]
+    return get_path_from(course)[1]
 
-def get_path_from(course: str) -> dict[str, str | list[str]]:
+def get_path_from(course: str) -> Tuple[str, List[str]]:
     """
     fetches courses which can be used to satisfy 'course'
     eg 2521 -> 1511
+
+    Returns a Tuple:
+        (
+            str : The original course,
+            list[str] : The list of courses which can be used to satisfy the original course
+        )
     """
     global CONDITIONS
     course_condition = CONDITIONS.get(course)
 
-    return {
-        "original" : course,
-        "courses" : [
-            coursename for coursename, _ in CONDITIONS.items()
-            if course_condition and course_condition.is_path_to(coursename)
-        ]
-    }
+    return course, [
+        coursename for coursename, _ in CONDITIONS.items()
+        if course_condition and course_condition.is_path_to(coursename)
+    ]
 
 
 if __name__ == "__main__":
