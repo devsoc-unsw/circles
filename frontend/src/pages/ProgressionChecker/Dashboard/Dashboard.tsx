@@ -5,11 +5,11 @@ import { ArrowDownOutlined } from '@ant-design/icons';
 import { useSpring } from '@react-spring/web';
 import { Button, Typography } from 'antd';
 import { ProgramStructure } from 'types/structure';
+import getNumTerms from 'utils/getNumTerms';
 import DegreeCard from 'components/DegreeCard';
 import LiquidProgressChart from 'components/LiquidProgressChart';
 import { LoadingDashboard } from 'components/LoadingSkeleton';
 import type { RootState } from 'config/store';
-import { getNumTerms } from 'pages/TermPlanner/utils';
 import S from './styles';
 
 type StoreUOC = {
@@ -49,7 +49,8 @@ const Dashboard = ({ isLoading, structure, totalUOC }: Props) => {
   let completedUOC = 0;
   Object.keys(courses).forEach((courseCode) => {
     if (programCourseList.includes(courseCode) && courses[courseCode]?.plannedFor) {
-      completedUOC += courses[courseCode].UOC * getNumTerms(courses[courseCode].UOC);
+      completedUOC += courses[courseCode].UOC
+        * getNumTerms(courses[courseCode].UOC, courses[courseCode].isMultiterm);
     }
   });
 
@@ -73,7 +74,8 @@ const Dashboard = ({ isLoading, structure, totalUOC }: Props) => {
         // only consider disciplinary component courses
         Object.keys(subgroupStructure.courses).forEach((courseCode) => {
           if (courses[courseCode]?.plannedFor) {
-            storeUOC[group].curr += courses[courseCode].UOC * getNumTerms(courses[courseCode].UOC);
+            storeUOC[group].curr += courses[courseCode].UOC
+              * getNumTerms(courses[courseCode].UOC, courses[courseCode].isMultiterm);
           }
         });
       }

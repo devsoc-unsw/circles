@@ -6,13 +6,12 @@ import {
   EyeInvisibleOutlined,
   TableOutlined,
 } from '@ant-design/icons';
-import {
-  Button, Divider, notification, Typography,
-} from 'antd';
+import { Button, Divider, Typography } from 'antd';
 import axios from 'axios';
 import { Structure } from 'types/api';
 import { ProgressionViewStructure, Views, ViewSubgroup } from 'types/progressionViews';
 import { ProgramStructure } from 'types/structure';
+import openNotification from 'utils/openNotification';
 import Collapsible from 'components/Collapsible';
 import PageTemplate from 'components/PageTemplate';
 import { inDev } from 'config/constants';
@@ -193,11 +192,10 @@ const ProgressionChecker = () => {
   }, [programCode, specs]);
 
   useEffect(() => {
-    notification.info({
+    openNotification({
+      type: 'info',
       message: 'Disclaimer',
       description: "This progression check is intended to outline the courses required by your degree and may not be 100% accurate. Please refer to UNSW's official progression check and handbook for further accuracy.",
-      placement: 'bottomRight',
-      duration: 20,
     });
   }, []);
 
