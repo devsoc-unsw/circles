@@ -58,10 +58,10 @@ const ProgressionCheckerCourses = ({ structure }: Props) => {
           newViewLayout[group][subgroup].courses.push({
             courseCode,
             title: subgroupStructure.courses[courseCode],
-            UOC: courses[courseCode]?.UOC,
-            plannedFor: courses[courseCode]?.plannedFor,
+            UOC: courses[courseCode]?.UOC || 0,
+            plannedFor: courses[courseCode]?.plannedFor || '',
             isUnplanned: unplanned.includes(courseCode),
-            isMultiterm: courses[courseCode]?.isMultiterm,
+            isMultiterm: !!courses[courseCode]?.isMultiterm,
           });
         });
 

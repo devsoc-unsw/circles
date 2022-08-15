@@ -29,6 +29,7 @@ const CoursesSection = ({
               plannedFor={course.plannedFor}
               uoc={course.UOC}
               isUnplanned={course.isUnplanned}
+              isMultiterm={course.isMultiterm}
             />
           ))}
         </S.CourseGroup>
@@ -59,6 +60,7 @@ const CoursesSection = ({
             plannedFor={course.plannedFor}
             uoc={course.UOC}
             isUnplanned={course.isUnplanned}
+            isMultiterm={course.isMultiterm}
           />
         ))}
       </S.CourseGroup>

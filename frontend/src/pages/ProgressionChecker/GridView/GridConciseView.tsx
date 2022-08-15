@@ -2,6 +2,7 @@ import React from 'react';
 import { Typography } from 'antd';
 import { ViewSubgroupCourse } from 'types/progressionViews';
 import Collapsible from 'components/Collapsible';
+import { getNumTerms } from 'pages/TermPlanner/utils';
 import CoursesSection from './CoursesSection';
 
 type Props = {
@@ -21,7 +22,10 @@ const GridConciseView = ({
 
   const plannedCourses = courses.filter((c) => c.plannedFor);
   const unplannedCourses = courses.filter((c) => !c.plannedFor);
-  const plannedUOC = plannedCourses.reduce((sum, course) => (sum + (course.UOC ?? 0)), 0);
+  const plannedUOC = plannedCourses.reduce(
+    (sum, course) => (sum + ((course.UOC ?? 0) * getNumTerms((course.UOC ?? 0)))),
+    0,
+  );
 
   return (
     <>

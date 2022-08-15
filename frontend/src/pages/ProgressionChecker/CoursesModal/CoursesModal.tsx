@@ -31,8 +31,10 @@ const CoursesModal = ({
         <CourseBadge
           courseCode={course.courseCode}
           title={course.title}
+          uoc={course.UOC}
           plannedFor={course.plannedFor}
           isUnplanned={course.isUnplanned}
+          isMultiterm={course.isMultiterm}
         />
       ))}
     </S.CourseList>

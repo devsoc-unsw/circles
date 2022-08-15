@@ -1,11 +1,11 @@
 export type ViewSubgroupCourse = {
   courseCode: string
   title: string
-  UOC: number | null
-  plannedFor: string | null
+  UOC: number
+  plannedFor: string
   // isUnplanned used to differentiate course in planner cart but has not been planned
   isUnplanned: boolean
-  isMultiterm: boolean | null
+  isMultiterm: boolean
 };
 
 export type ViewSubgroup = {

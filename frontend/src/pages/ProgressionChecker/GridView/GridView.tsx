@@ -1,6 +1,7 @@
 import React from 'react';
 import { Typography } from 'antd';
 import { ViewSubgroupCourse } from 'types/progressionViews';
+import { getNumTerms } from 'pages/TermPlanner/utils';
 import CoursesSection from './CoursesSection';
 import GridConciseView from './GridConciseView';
 
@@ -23,7 +24,10 @@ const GridView = ({
 
   const plannedUOC = courses
     .filter((course) => course.plannedFor)
-    .reduce((sum, course) => (sum + (course.UOC ?? 0)), 0);
+    .reduce(
+      (sum, course) => (sum + ((course.UOC ?? 0) * getNumTerms((course.UOC ?? 0)))),
+      0,
+    );
 
   const plannedCourses = courses.filter((c) => c.plannedFor);
   const unplannedCourses = courses.filter((c) => !c.plannedFor);

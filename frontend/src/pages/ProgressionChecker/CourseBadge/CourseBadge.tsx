@@ -4,20 +4,22 @@ import { CalendarOutlined, ExclamationOutlined } from '@ant-design/icons';
 import { Badge, Tooltip } from 'antd';
 import CourseButton from 'components/CourseButton';
 import { purple } from 'config/constants';
+import { getNumTerms } from 'pages/TermPlanner/utils';
 import S from './styles';
 
 type UOCBadgeProps = {
   uoc: number
+  isMultiterm: boolean
 };
 
-const UOCBadge = ({ uoc }: UOCBadgeProps) => (
+const UOCBadge = ({ uoc, isMultiterm }: UOCBadgeProps) => (
   <S.UOCBadgeWrapper>
     <Badge
       style={{
         backgroundColor: purple, color: 'white', lineHeight: '1.5', height: 'auto',
       }}
       size="small"
-      count={`${uoc} UOC`}
+      count={isMultiterm ? `${getNumTerms(uoc)} × ${uoc} UOC` : `${uoc} UOC`}
     />
   </S.UOCBadgeWrapper>
 );
@@ -25,13 +27,14 @@ const UOCBadge = ({ uoc }: UOCBadgeProps) => (
 type Props = {
   courseCode: string
   title: string
-  plannedFor?: string | null
-  uoc?: number | null
-  isUnplanned?: boolean
+  plannedFor: string
+  uoc: number
+  isUnplanned: boolean
+  isMultiterm: boolean
 };
 
 const CourseBadge = ({
-  courseCode, title, isUnplanned, uoc, plannedFor,
+  courseCode, title, isUnplanned, uoc, plannedFor, isMultiterm,
 }: Props) => {
   const navigate = useNavigate();
 
@@ -68,7 +71,7 @@ const CourseBadge = ({
           )}
       >
         <CourseButton courseCode={courseCode} title={title} planned />
-        {uoc && <UOCBadge uoc={uoc} />}
+        {uoc && <UOCBadge uoc={uoc} isMultiterm={isMultiterm} />}
       </Badge>
     );
   }
