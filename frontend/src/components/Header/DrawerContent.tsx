@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BugOutlined } from '@ant-design/icons';
-import { Menu } from 'antd';
+import BugOutlined from '@ant-design/icons/BugOutlined';
+import Menu from 'antd/lib/menu';
 import type { ItemType } from 'antd/lib/menu/hooks/useItems';
 import { FEEDBACK_LINK, inDev } from 'config/constants';
 import routes from './routes';

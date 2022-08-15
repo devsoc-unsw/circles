@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Typography } from 'antd';
+import Typography from 'antd/lib/typography';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 import { Course, CoursePathFrom, CoursesUnlockedWhenTaken } from 'types/api';

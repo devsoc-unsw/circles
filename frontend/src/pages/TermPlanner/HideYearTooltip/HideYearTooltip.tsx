@@ -1,7 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { EyeInvisibleFilled } from '@ant-design/icons';
-import { notification, Tooltip } from 'antd';
+import EyeInvisibleFilled from '@ant-design/icons/EyeInvisibleFilled';
+import notification from 'antd/lib/notification';
+import Tooltip from 'antd/lib/tooltip';
 import type { RootState } from 'config/store';
 import { hideYear } from 'reducers/plannerSlice';
 

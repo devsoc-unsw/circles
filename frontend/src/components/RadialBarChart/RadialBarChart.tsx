@@ -4,8 +4,8 @@
 // TODO: fix typescript eslint here
 
 import React from 'react';
-import type { RadialBarConfig } from '@ant-design/charts';
-import { RadialBar } from '@ant-design/charts';
+import type { RadialBarConfig } from '@ant-design/plots/es/components/radial-bar';
+import RadialBar from '@ant-design/plots/es/components/radial-bar';
 import data from './radialChartData';
 
 const RadialBarChart = () => {

@@ -1,5 +1,5 @@
 import { animated } from '@react-spring/web';
-import { Skeleton } from 'antd';
+import Skeleton from 'antd/lib/skeleton';
 import styled from 'styled-components';
 
 const DashboardWrapper = styled(animated.div)`

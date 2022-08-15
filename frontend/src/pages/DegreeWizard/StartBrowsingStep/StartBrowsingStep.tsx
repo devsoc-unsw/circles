@@ -1,9 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import {
-  Button, notification,
-} from 'antd';
+import Button from 'antd/lib/button';
+import notification from 'antd/lib/notification';
 import type { RootState } from 'config/store';
 import { setIsComplete } from 'reducers/degreeSlice';
 import CS from '../common/styles';

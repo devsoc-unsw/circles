@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Select, Spin } from 'antd';
+import Select from 'antd/lib/select';
+import Spin from 'antd/lib/spin';
 import axios from 'axios';
 import { SearchCourse } from 'types/api';
 import { useDebounce } from 'use-debounce';

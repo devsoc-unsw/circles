@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import {
-  BorderlessTableOutlined,
-  EyeFilled,
-  EyeInvisibleOutlined,
-  TableOutlined,
-} from '@ant-design/icons';
-import {
-  Button, Divider, notification, Typography,
-} from 'antd';
+import BorderlessTableOutlined from '@ant-design/icons/BorderlessTableOutlined';
+import EyeFilled from '@ant-design/icons/EyeFilled';
+import EyeInvisibleOutlined from '@ant-design/icons/EyeInvisibleOutlined';
+import TableOutlined from '@ant-design/icons/TableOutlined';
+import Button from 'antd/lib/button';
+import Divider from 'antd/lib/divider';
+import notification from 'antd/lib/notification';
+import Typography from 'antd/lib/typography';
 import axios from 'axios';
 import { Structure } from 'types/api';
 import { ProgressionViewStructure, Views, ViewSubgroup } from 'types/progressionViews';

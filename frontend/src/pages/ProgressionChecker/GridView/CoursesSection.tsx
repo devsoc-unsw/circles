@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Button, Empty } from 'antd';
+import Button from 'antd/lib/button';
+import Empty from 'antd/lib/empty';
 import { ViewSubgroupCourse } from 'types/progressionViews';
 import CourseBadge from '../CourseBadge';
 import CourseListModal from '../CoursesModal';

@@ -1,4 +1,4 @@
-import { Menu as antdMenu } from 'antd';
+import antdMenu from 'antd/lib/menu';
 import styled from 'styled-components';
 
 const SidebarWrapper = styled.div`

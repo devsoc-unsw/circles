@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { scroller } from 'react-scroll';
-import {
-  notification, Typography,
-} from 'antd';
+import notification from 'antd/lib/notification';
+import Typography from 'antd/lib/typography';
 import axios from 'axios';
 import { SpecialisationTypes } from 'types/api';
 import PageTemplate from 'components/PageTemplate';

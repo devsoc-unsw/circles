@@ -3,7 +3,8 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-scroll';
 import ReactTooltip from 'react-tooltip';
 import { purple } from '@ant-design/colors';
-import { Progress, Typography } from 'antd';
+import Progress from 'antd/lib/progress';
+import Typography from 'antd/lib/typography';
 import type { RootState } from 'config/store';
 import S from './styles';
 

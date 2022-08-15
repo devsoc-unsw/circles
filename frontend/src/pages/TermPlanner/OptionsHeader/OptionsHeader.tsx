@@ -2,11 +2,15 @@
 import React from 'react';
 import { FaRegCalendarTimes } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  DownloadOutlined, EyeFilled, QuestionCircleOutlined, SettingFilled, WarningFilled,
-} from '@ant-design/icons';
+import DownloadOutlined from '@ant-design/icons/DownloadOutlined';
+import EyeFilled from '@ant-design/icons/EyeFilled';
+import QuestionCircleOutlined from '@ant-design/icons/QuestionCircleOutlined';
+import SettingFilled from '@ant-design/icons/SettingFilled';
+import WarningFilled from '@ant-design/icons/WarningFilled';
 import Tippy from '@tippyjs/react';
-import { Popconfirm, Switch, Tooltip } from 'antd';
+import Popconfirm from 'antd/lib/popconfirm';
+import Switch from 'antd/lib/switch';
+import Tooltip from 'antd/lib/tooltip';
 import type { RootState } from 'config/store';
 import { unhideAllYears, unscheduleAll } from 'reducers/plannerSlice';
 import { toggleShowMarks, toggleShowWarnings } from 'reducers/settingsSlice';

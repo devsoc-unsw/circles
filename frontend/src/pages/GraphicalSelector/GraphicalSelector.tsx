@@ -1,10 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { LockOutlined, UnlockOutlined } from '@ant-design/icons';
+import LockOutlined from '@ant-design/icons/LockOutlined';
+import UnlockOutlined from '@ant-design/icons/UnlockOutlined';
 import { breadthFirstSearch } from '@antv/algorithm';
 import type { Graph, INode, Item } from '@antv/g6';
 import G6 from '@antv/g6';
-import { Button, Switch, Tooltip } from 'antd';
+import Button from 'antd/lib/button';
+import Switch from 'antd/lib/switch';
+import Tooltip from 'antd/lib/tooltip';
 import axios from 'axios';
 import {
   Course, CourseEdge, CoursesAllUnlocked, GraphPayload,

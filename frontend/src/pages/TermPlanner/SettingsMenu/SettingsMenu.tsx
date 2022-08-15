@@ -1,7 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
-import { DatePicker, Select, Switch } from 'antd';
+import CheckOutlined from '@ant-design/icons/CheckOutlined';
+import CloseOutlined from '@ant-design/icons/CloseOutlined';
+import DatePicker from 'antd/lib/date-picker';
+import Select from 'antd/lib/select';
+import Switch from 'antd/lib/switch';
 import type { Moment } from 'moment';
 import moment from 'moment';
 import type { RootState } from 'config/store';

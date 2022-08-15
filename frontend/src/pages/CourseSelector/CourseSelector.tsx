@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { notification } from 'antd';
+import notification from 'antd/lib/notification';
 import axios from 'axios';
 import { Structure } from 'types/api';
 import { ProgramStructure } from 'types/structure';

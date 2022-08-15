@@ -1,4 +1,4 @@
-import { Button } from 'antd';
+import Button from 'antd/lib/button';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`

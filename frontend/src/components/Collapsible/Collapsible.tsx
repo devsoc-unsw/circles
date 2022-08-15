@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Typography } from 'antd';
+import Typography from 'antd/lib/typography';
 import S from './styles';
 
 const { Title } = Typography;

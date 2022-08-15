@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { BarsOutlined } from '@ant-design/icons';
-import {
-  Button, Drawer,
-  Menu, Typography,
-} from 'antd';
+import BarsOutlined from '@ant-design/icons/BarsOutlined';
+import Button from 'antd/lib/button';
+import Drawer from 'antd/lib/drawer';
+import Menu from 'antd/lib/menu';
+import Typography from 'antd/lib/typography';
 import circlesLogo from 'assets/circlesLogo.svg';
 import PlannerCart from 'components/PlannerCart';
 import ThemeToggle from 'components/ThemeToggle';

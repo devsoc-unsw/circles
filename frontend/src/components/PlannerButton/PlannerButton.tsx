@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { PlusOutlined, StopOutlined } from '@ant-design/icons';
-import { Button } from 'antd';
+import PlusOutlined from '@ant-design/icons/PlusOutlined';
+import StopOutlined from '@ant-design/icons/StopOutlined';
+import Button from 'antd/lib/button';
 import axios from 'axios';
 import { UnselectCourses } from 'types/api';
 import { PlannerCourse } from 'types/planner';

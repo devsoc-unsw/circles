@@ -1,7 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CalendarOutlined, ExclamationOutlined } from '@ant-design/icons';
-import { Badge, Tooltip } from 'antd';
+import CalendarOutlined from '@ant-design/icons/CalendarOutlined';
+import ExclamationOutlined from '@ant-design/icons/ExclamationOutlined';
+import Badge from 'antd/lib/badge';
+import Tooltip from 'antd/lib/tooltip';
 import CourseButton from 'components/CourseButton';
 import { purple } from 'config/constants';
 import { getNumTerms } from 'pages/TermPlanner/utils';

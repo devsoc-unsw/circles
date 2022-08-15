@@ -3,7 +3,8 @@ import {
   exportComponentAsJPEG,
   exportComponentAsPNG,
 } from 'react-component-export-image';
-import { Button, Radio } from 'antd';
+import Button from 'antd/lib/button';
+import Radio from 'antd/lib/radio';
 import CS from '../common/styles';
 import S from './styles';
 

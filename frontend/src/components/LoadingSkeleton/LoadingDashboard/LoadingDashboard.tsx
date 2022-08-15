@@ -1,5 +1,5 @@
 import React from 'react';
-import { Skeleton } from 'antd';
+import Skeleton from 'antd/lib/skeleton';
 import LoadingDegreeCard from './LoadingDegreeCard';
 import S from './styles';
 

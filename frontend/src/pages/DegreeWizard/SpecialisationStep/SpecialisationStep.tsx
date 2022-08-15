@@ -1,7 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { animated, useSpring } from '@react-spring/web';
-import { Button, Menu, Typography } from 'antd';
+import Button from 'antd/lib/button';
+import Menu from 'antd/lib/menu';
+import Typography from 'antd/lib/typography';
 import axios from 'axios';
 import { Specialisations } from 'types/api';
 import type { RootState } from 'config/store';
@@ -60,8 +62,8 @@ const SpecialisationStep = ({ incrementStep, currStep, type }: Props) => {
           )}
         </CS.StepHeadingWrapper>
         <S.Menu
-          onSelect={(e) => dispatch(addSpecialisation(e.key))}
-          onDeselect={(e) => dispatch(removeSpecialisation(e.key))}
+          onSelect={(e: { key: string; }) => dispatch(addSpecialisation(e.key))}
+          onDeselect={(e : { key: string; }) => dispatch(removeSpecialisation(e.key))}
           selectedKeys={specs}
           defaultOpenKeys={['0']}
           mode="inline"

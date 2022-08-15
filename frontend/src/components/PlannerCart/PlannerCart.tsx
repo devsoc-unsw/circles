@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { CalendarOutlined, DeleteOutlined } from '@ant-design/icons';
-import {
-  Alert,
-  Button, Tooltip, Typography,
-} from 'antd';
+import CalendarOutlined from '@ant-design/icons/CalendarOutlined';
+import DeleteOutlined from '@ant-design/icons/DeleteOutlined';
+import Alert from 'antd/lib/alert';
+import Button from 'antd/lib/button';
+import Tooltip from 'antd/lib/tooltip';
+import Typography from 'antd/lib/typography';
 import PlannerCartCourseCard from 'components/PlannerCartCourseCard';
 import type { RootState } from 'config/store';
 import { removeAllCourses } from 'reducers/plannerSlice';

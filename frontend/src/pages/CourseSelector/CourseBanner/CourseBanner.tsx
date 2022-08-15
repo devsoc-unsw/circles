@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Typography } from 'antd';
+import Typography from 'antd/lib/typography';
 import CourseSearchBar from 'components/CourseSearchBar';
 import type { RootState } from 'config/store';
 import { addTab } from 'reducers/courseTabsSlice';

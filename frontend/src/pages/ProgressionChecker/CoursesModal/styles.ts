@@ -1,4 +1,5 @@
-import { Modal, Typography } from 'antd';
+import Modal from 'antd/lib/modal';
+import Typography from 'antd/lib/typography';
 import styled from 'styled-components';
 
 const { Title } = Typography;

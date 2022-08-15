@@ -1,4 +1,4 @@
-import { Tag as antdTag } from 'antd';
+import antdTag from 'antd/lib/tag';
 import styled, { css } from 'styled-components';
 
 const Tag = styled(antdTag)`

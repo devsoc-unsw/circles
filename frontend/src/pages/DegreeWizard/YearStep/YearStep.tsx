@@ -1,7 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { animated, useSpring } from '@react-spring/web';
-import { DatePicker, Typography } from 'antd';
+import DatePicker from 'antd/lib/date-picker';
+import Typography from 'antd/lib/typography';
 import { updateDegreeLength, updateStartYear } from 'reducers/plannerSlice';
 import springProps from '../common/spring';
 import Steps from '../common/steps';

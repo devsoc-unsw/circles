@@ -1,9 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { scroller } from 'react-scroll';
-import { ArrowDownOutlined } from '@ant-design/icons';
+import ArrowDownOutlined from '@ant-design/icons/ArrowDownOutlined';
 import { useSpring } from '@react-spring/web';
-import { Button, Typography } from 'antd';
+import Button from 'antd/lib/button';
+import Typography from 'antd/lib/typography';
 import { ProgramStructure } from 'types/structure';
 import DegreeCard from 'components/DegreeCard';
 import LiquidProgressChart from 'components/LiquidProgressChart';

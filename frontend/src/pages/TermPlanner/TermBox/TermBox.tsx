@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Droppable } from 'react-beautiful-dnd';
 import { useDispatch, useSelector } from 'react-redux';
-import { LockFilled, UnlockFilled } from '@ant-design/icons';
-import { Badge } from 'antd';
+import LockFilled from '@ant-design/icons/LockFilled';
+import UnlockFilled from '@ant-design/icons/UnlockFilled';
+import Badge from 'antd/lib/badge';
 import { useTheme } from 'styled-components';
 import type { RootState } from 'config/store';
 import useMediaQuery from 'hooks/useMediaQuery';

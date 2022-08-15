@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography } from 'antd';
+import Typography from 'antd/lib/typography';
 import { ViewSubgroupCourse } from 'types/progressionViews';
 import Collapsible from 'components/Collapsible';
 import { getNumTerms } from 'pages/TermPlanner/utils';

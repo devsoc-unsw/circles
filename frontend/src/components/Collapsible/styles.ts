@@ -1,4 +1,4 @@
-import { RightOutlined } from '@ant-design/icons';
+import RightOutlined from '@ant-design/icons/RightOutlined';
 import styled, { css } from 'styled-components';
 
 const CollapsibleHeader = styled.div`

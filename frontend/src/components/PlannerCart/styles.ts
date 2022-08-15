@@ -1,4 +1,4 @@
-import { Button as antdButton } from 'antd';
+import antdButton from 'antd/lib/button';
 import styled from 'styled-components';
 
 const PlannerCartRoot = styled.div`

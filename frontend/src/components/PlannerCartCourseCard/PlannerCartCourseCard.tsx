@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { DeleteOutlined } from '@ant-design/icons';
-import {
-  Button, Popconfirm, Tooltip, Typography,
-} from 'antd';
+import DeleteOutlined from '@ant-design/icons/DeleteOutlined';
+import Button from 'antd/lib/button';
+import Popconfirm from 'antd/lib/popconfirm';
+import Tooltip from 'antd/lib/tooltip';
+import Typography from 'antd/lib/typography';
 import { addTab } from 'reducers/courseTabsSlice';
 import { removeCourse } from 'reducers/plannerSlice';
 import S from './styles';

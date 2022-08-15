@@ -1,4 +1,4 @@
-import { Card as antdCard } from 'antd';
+import antdCard from 'antd/lib/card';
 import styled from 'styled-components';
 
 const Card = styled(antdCard)`

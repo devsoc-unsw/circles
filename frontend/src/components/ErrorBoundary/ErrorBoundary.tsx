@@ -1,6 +1,6 @@
 /* eslint-disable react/destructuring-assignment */
 import React, { ErrorInfo } from 'react';
-import { Button } from 'antd';
+import Button from 'antd/lib/button';
 import { FEEDBACK_LINK } from 'config/constants';
 import S from './styles';
 

@@ -1,4 +1,4 @@
-import { Button } from 'antd';
+import Button from 'antd/lib/button';
 import styled, { css } from 'styled-components';
 
 const CourseButton = styled(Button)<{ planned?: boolean }>`

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { animated, useSpring } from '@react-spring/web';
-import {
-  Input, Menu, Typography,
-} from 'antd';
+import Input from 'antd/lib/input';
+import Menu from 'antd/lib/menu';
+import Typography from 'antd/lib/typography';
 import axios from 'axios';
 import { Programs } from 'types/api';
 import type { RootState } from 'config/store';

@@ -1,4 +1,4 @@
-import { Menu as antdMenu } from 'antd';
+import antdMenu from 'antd/lib/menu';
 import styled from 'styled-components';
 
 // NOTE: Very hacky way to override menu styling

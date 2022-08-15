@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button } from 'antd';
+import Button from 'antd/lib/button';
 import circlesLogo from 'assets/circlesLogo.svg';
 import PageTemplate from 'components/PageTemplate';
 import S from './syles';

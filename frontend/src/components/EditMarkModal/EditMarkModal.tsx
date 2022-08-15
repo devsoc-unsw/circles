@@ -1,10 +1,10 @@
 import type { Dispatch, SetStateAction } from 'react';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  Button, Input, message,
-  Modal,
-} from 'antd';
+import Button from 'antd/lib/button';
+import Input from 'antd/lib/input';
+import message from 'antd/lib/message';
+import Modal from 'antd/lib/modal';
 import { Grade, Mark } from 'types/planner';
 import type { RootState } from 'config/store';
 import { updateCourseMark } from 'reducers/plannerSlice';

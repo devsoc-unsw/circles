@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Button, Table, Typography } from 'antd';
+import Button from 'antd/lib/button';
+import Table from 'antd/lib/table';
+import Typography from 'antd/lib/typography';
 import { ViewSubgroupCourse } from 'types/progressionViews';
 import CourseListModal from '../CoursesModal';
 import S from './styles';

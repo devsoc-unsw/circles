@@ -1,9 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  LockOutlined, MinusOutlined, PlusOutlined, WarningOutlined,
-} from '@ant-design/icons';
-import { Button, Tooltip } from 'antd';
+import LockOutlined from '@ant-design/icons/LockOutlined';
+import MinusOutlined from '@ant-design/icons/MinusOutlined';
+import PlusOutlined from '@ant-design/icons/PlusOutlined';
+import WarningOutlined from '@ant-design/icons/WarningOutlined';
+import Button from 'antd/lib/button';
+import Tooltip from 'antd/lib/tooltip';
 import axios from 'axios';
 import { Course, UnselectCourses } from 'types/api';
 import { PlannerCourse } from 'types/planner';

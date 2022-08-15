@@ -1,4 +1,4 @@
-import { Divider } from 'antd';
+import Divider from 'antd/lib/divider';
 import styled, { css, keyframes } from 'styled-components';
 
 export const GridItem = styled.div`

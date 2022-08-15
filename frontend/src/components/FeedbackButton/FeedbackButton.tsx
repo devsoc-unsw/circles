@@ -1,7 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { BugOutlined } from '@ant-design/icons';
-import { Button, Tooltip } from 'antd';
+import BugOutlined from '@ant-design/icons/BugOutlined';
+import Button from 'antd/lib/button';
+import Tooltip from 'antd/lib/tooltip';
 import { FEEDBACK_LINK } from 'config/constants';
 import type { RootState } from 'config/store';
 import useMediaQuery from 'hooks/useMediaQuery';

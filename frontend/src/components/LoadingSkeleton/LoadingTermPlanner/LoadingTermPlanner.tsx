@@ -1,5 +1,5 @@
 import React from 'react';
-import { Skeleton } from 'antd';
+import Skeleton from 'antd/lib/skeleton';
 import { GridItem } from 'pages/TermPlanner/common/styles';
 import CS from 'pages/TermPlanner/styles';
 
