@@ -16,6 +16,7 @@ const ModalTitle = styled(Title)`
 const Instruction = styled.p`
   margin-top: 10px;
   margin-bottom: 0px;
+  font-size: 18px;
 `;
 
 const CourseModal = styled(Modal)`

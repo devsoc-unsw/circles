@@ -126,6 +126,7 @@ const checkMultitermInBounds = (payload: MultitermInBoundsPayload) => {
 
 export {
   checkMultitermInBounds,
+  getNumTerms,
   getTermsList,
   isPlannerEmpty,
   parseMarkToInt,

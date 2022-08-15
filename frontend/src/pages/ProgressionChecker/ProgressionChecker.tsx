@@ -6,74 +6,159 @@ import {
   EyeInvisibleOutlined,
   TableOutlined,
 } from '@ant-design/icons';
-import { Button, Divider, notification } from 'antd';
+import {
+  Button, Divider, notification, Typography,
+} from 'antd';
 import axios from 'axios';
 import { Structure } from 'types/api';
+import { ProgressionViewStructure, Views, ViewSubgroup } from 'types/progressionViews';
 import { ProgramStructure } from 'types/structure';
+import Collapsible from 'components/Collapsible';
 import PageTemplate from 'components/PageTemplate';
 import { inDev } from 'config/constants';
 import type { RootState } from 'config/store';
 import Dashboard from './Dashboard';
-import GridView from './GridView/GridView';
+import GridView from './GridView';
 import S from './styles';
 import TableView from './TableView';
-import { StoreUOC } from './types';
 
 type Props = {
   structure: ProgramStructure
-  isLoading: boolean
 };
 
-const ProgressionCheckerCourses = ({ structure, isLoading }: Props) => {
-  const views = {
-    GRID: 'grid',
-    CONCISE: 'grid-concise',
-    TABLE: 'table',
+const { Title } = Typography;
+
+const ProgressionCheckerCourses = ({ structure }: Props) => {
+  const [view, setView] = useState(Views.GRID_CONCISE);
+
+  const { courses, unplanned } = useSelector((store: RootState) => store.planner);
+
+  const generateViewStructure = () => {
+    const newViewLayout: ProgressionViewStructure = {};
+
+    // Example groups: Major, Minor, General, Rules
+    Object.keys(structure).forEach((group) => {
+      newViewLayout[group] = {};
+
+      // Example subgroup: Core Courses, Computing Electives
+      Object.keys(structure[group].content).forEach((subgroup) => {
+        const subgroupStructure = structure[group].content[subgroup];
+
+        newViewLayout[group][subgroup] = {
+          // section types with gened or rule/elective substring can have their
+          // courses hidden as a modal
+          isCoursesOverflow: subgroupStructure.type.includes('gened')
+            || subgroupStructure.type.includes('rule')
+            || subgroupStructure.type.includes('electives'),
+          courses: [],
+        };
+
+        // only consider disciplinary component courses
+        Object.keys(subgroupStructure.courses).forEach((courseCode) => {
+          newViewLayout[group][subgroup].courses.push({
+            courseCode,
+            title: subgroupStructure.courses[courseCode],
+            UOC: courses[courseCode]?.UOC || 0,
+            plannedFor: courses[courseCode]?.plannedFor || '',
+            isUnplanned: unplanned.includes(courseCode),
+            isMultiterm: !!courses[courseCode]?.isMultiterm,
+          });
+        });
+
+        newViewLayout[group][subgroup].courses.sort(
+          (a, b) => a.courseCode.localeCompare(b.courseCode),
+        );
+      });
+    });
+
+    return newViewLayout;
   };
-  const defaultView = views.CONCISE;
-  const [view, setView] = useState(defaultView);
+
+  const viewStructure = generateViewStructure();
+
+  const sortSubgroups = (item1: [string, ViewSubgroup], item2: [string, ViewSubgroup]) => {
+    if (/Core/.test(item1[0]) && !/Core/.test(item2[0])) {
+      return -1;
+    }
+
+    if (/Core/.test(item2[0]) && !/Core/.test(item1[0])) {
+      return 1;
+    }
+
+    return item1[0] > item2[0] ? 1 : -1;
+  };
 
   return (
-    <div>
-      {(view === views.GRID || view === views.CONCISE) ? (
-        <>
-          <S.ViewSwitcherWrapper>
-            <Button
-              type="primary"
-              icon={view === views.GRID ? <EyeInvisibleOutlined /> : <EyeFilled />}
-              onClick={() => setView(view === views.GRID ? views.CONCISE : views.GRID)}
-            >
-              {view === views.GRID ? 'Display Concise Mode' : 'Display Full Mode'}
-            </Button>
-            {
-              inDev && (
+    <S.ProgressionViewContainer>
+      <S.ViewSwitcherWrapper>
+        {
+          view === Views.GRID || view === Views.GRID_CONCISE
+            ? (
+              <>
                 <Button
                   type="primary"
-                  icon={<TableOutlined />}
-                  onClick={() => setView(views.TABLE)}
+                  icon={view === Views.GRID ? <EyeInvisibleOutlined /> : <EyeFilled />}
+                  onClick={() => setView(view === Views.GRID ? Views.GRID_CONCISE : Views.GRID)}
                 >
-                  Display Table View
+                  {view === Views.GRID ? 'Display Concise Mode' : 'Display Full Mode'}
                 </Button>
-              )
-            }
-          </S.ViewSwitcherWrapper>
-          <GridView isLoading={isLoading} structure={structure} concise={view === views.CONCISE} />
-        </>
-      ) : (
-        <>
-          <S.ViewSwitcherWrapper>
-            <Button
-              type="primary"
-              icon={<BorderlessTableOutlined />}
-              onClick={() => setView(defaultView)}
-            >
-              Display Grid View
-            </Button>
-          </S.ViewSwitcherWrapper>
-          <TableView isLoading={isLoading} structure={structure} />
-        </>
-      )}
-    </div>
+                {inDev && (
+                  <Button
+                    type="primary"
+                    icon={<TableOutlined />}
+                    onClick={() => setView(Views.TABLE)}
+                  >
+                    Display Table View
+                  </Button>
+                )}
+              </>
+            )
+            : (
+              <Button
+                type="primary"
+                icon={<BorderlessTableOutlined />}
+                onClick={() => setView(Views.GRID)}
+              >
+                Display Grid View
+              </Button>
+            )
+        }
+      </S.ViewSwitcherWrapper>
+      {Object.entries(viewStructure).map(([group, groupEntry]) => (
+        <Collapsible
+          title={(
+            <Title level={1} className="text" id={group}>
+              {viewStructure[group].name ? `${group} - ${structure[group].name}` : group}
+            </Title>
+            )}
+          key={group}
+          initiallyCollapsed={group === 'Rules'}
+        >
+          {Object.entries(groupEntry).sort(sortSubgroups).map(
+            ([subgroup, subgroupEntry]) => {
+              if (view === Views.TABLE) {
+                return (
+                  <TableView
+                    uoc={structure[group].content[subgroup].UOC}
+                    subgroupTitle={subgroup}
+                    courses={subgroupEntry.courses}
+                  />
+                );
+              }
+              return (
+                <GridView
+                  uoc={structure[group].content[subgroup].UOC}
+                  subgroupTitle={subgroup}
+                  courses={subgroupEntry.courses}
+                  isCoursesOverflow={subgroupEntry.isCoursesOverflow}
+                  isConcise={view === Views.GRID_CONCISE}
+                />
+              );
+            },
+          )}
+        </Collapsible>
+      ))}
+    </S.ProgressionViewContainer>
   );
 };
 
@@ -85,7 +170,6 @@ const ProgressionChecker = () => {
   const {
     programCode, specs,
   } = useSelector((state: RootState) => state.degree);
-  const planner = useSelector((state: RootState) => state.planner);
 
   useEffect(() => {
     // get structure of degree
@@ -112,39 +196,12 @@ const ProgressionChecker = () => {
     });
   }, []);
 
-  const storeUOC: StoreUOC = {};
-
-  // Example groups: Major, Minor, General, Rules
-  Object.keys(structure).forEach((group) => {
-    storeUOC[group] = {
-      total: 0,
-      curr: 0,
-    };
-
-    // Example subgroup: Core Courses, Computing Electives
-    Object.keys(structure[group].content).forEach((subgroup) => {
-      storeUOC[group].total += structure[group].content[subgroup].UOC;
-      const subgroupStructure = structure[group].content[subgroup];
-
-      const isRule = subgroupStructure.type && subgroupStructure.type.includes('rule');
-
-      if (subgroupStructure.courses && !isRule) {
-        // only consider disciplinary component courses
-        Object.keys(subgroupStructure.courses).forEach((courseCode) => {
-          if (planner.courses[courseCode]) {
-            storeUOC[group].curr += planner.courses[courseCode].UOC;
-          }
-        });
-      }
-    });
-  });
-
   return (
     <PageTemplate>
       <S.Wrapper>
-        <Dashboard storeUOC={storeUOC} isLoading={isLoading} structure={structure} uoc={uoc} />
+        <Dashboard isLoading={isLoading} structure={structure} totalUOC={uoc} />
         <div id="divider"><Divider /></div>
-        <ProgressionCheckerCourses structure={structure} isLoading={isLoading} />
+        <ProgressionCheckerCourses structure={structure} />
       </S.Wrapper>
     </PageTemplate>
   );
