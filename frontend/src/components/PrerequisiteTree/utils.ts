@@ -1,4 +1,5 @@
-import type { TreeGraph, TreeGraphData } from '@antv/g6';
+import type { TreeGraphData } from '@antv/g6-core';
+import type { TreeGraph } from '@antv/g6-pc';
 import { CourseList } from 'types/courses';
 import GRAPH_STYLE from './config';
 import TREE_CONSTANTS from './constants';

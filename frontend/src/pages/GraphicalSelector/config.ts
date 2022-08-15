@@ -1,4 +1,4 @@
-import G6 from '@antv/g6';
+import Arrow from '@antv/g6-core/lib/element/arrow';
 
 const defaultNode = {
   size: 70,
@@ -19,7 +19,7 @@ const defaultNode = {
 const defaultEdge = {
   style: {
     endArrow: {
-      path: G6.Arrow.triangle(5, 5, 30),
+      path: Arrow.triangle(5, 5, 30),
       fill: '#e0e0e0',
       d: 25,
     },

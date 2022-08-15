@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import type { Item, TreeGraph, TreeGraphData } from '@antv/g6';
-import G6 from '@antv/g6';
+import type { Item, TreeGraphData } from '@antv/g6-core';
+import type { TreeGraph } from '@antv/g6-pc';
 import axios from 'axios';
 import { CourseChildren, CoursePathFrom, CoursesAllUnlocked } from 'types/api';
 import { CourseList } from 'types/courses';
@@ -35,11 +35,11 @@ const PrerequisiteTree = ({ courseCode }: Props) => {
 
   useEffect(() => {
     /* GRAPH IMPLEMENTATION */
-    const generateTreeGraph = (graphData: TreeGraphData) => {
+    const generateTreeGraph = async (graphData: TreeGraphData) => {
       const container = ref.current;
       if (!container) return;
-
-      const treeGraphInstance = new G6.TreeGraph({
+      const TreeGraph = (await import('@antv/g6-pc/lib/graph/tree-graph')).default;
+      const treeGraphInstance: TreeGraph = new TreeGraph({
         container,
         width: container.scrollWidth,
         height: container.scrollHeight,
@@ -128,13 +128,12 @@ const PrerequisiteTree = ({ courseCode }: Props) => {
 
       // render graph
       if (!graph) {
-        generateTreeGraph(graphData);
+        generateTreeGraph(graphData).then(() => setLoading(false));
       } else {
         // NOTE: This is for hot reloading in development as new graph will instantiate every time
         updateTreeGraph(graphData);
+        setLoading(false);
       }
-
-      setLoading(false);
     };
 
     determineCourseAccuracy();

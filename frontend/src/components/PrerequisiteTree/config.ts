@@ -1,4 +1,4 @@
-import type { LayoutConfig } from '@antv/g6';
+import type { LayoutConfig } from '@antv/g6-core';
 import TREE_CONSTANTS from './constants';
 
 const graphLayout: LayoutConfig = {
