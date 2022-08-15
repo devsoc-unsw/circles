@@ -15,7 +15,7 @@ from data.config import GRAPH_CACHE_FILE
 from data.processors.load_conditions import construct_conditions_objects
 from data.utility.data_helpers import write_data
 
-CONDITIONS: Dict[str, Optional[CompositeCondition]] = {}
+CONDITIONS: Dict[str, Optional[CompositeCondition]] = construct_conditions_objects()
 
 def cache_graph():
     graph = construct_full_graph()
@@ -58,15 +58,11 @@ def get_path_from(course: str) -> dict[str, str | list[str]]:
         "original" : course,
         "courses" : [
             coursename for coursename, _ in CONDITIONS.items()
-            if course_condition.is_path_to(coursename)
+            if course_condition and course_condition.is_path_to(coursename)
         ]
     }
 
-def initialise_conditions():
-    global CONDITIONS
-    CONDITIONS = construct_conditions_objects()
 
 if __name__ == "__main__":
-    initialise_conditions()
     cache_graph()
 
