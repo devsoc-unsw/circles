@@ -3,7 +3,7 @@ APIs for the /courses/ route.
 """
 from contextlib import suppress
 import re
-from typing import Any, Dict, List, Mapping, Set, Tuple
+from typing import Dict, List, Mapping, Set, Tuple
 
 from algorithms.objects.user import User
 from data.config import ARCHIVED_YEARS, GRAPH_CACHE_FILE
