@@ -16,6 +16,8 @@ PROGRAMS_FORMATTED_FILE = "./data/scrapers/programsFormattedRaw.json"
 
 CACHED_EXCLUSIONS_FILE = "./algorithms/cache/exclusions.json"
 
+CACHED_EQUIVALENTS_FILE = "./algorithms/cache/equivalents.json"
+
 CONDITIONS_PROCESSED_FILE = "./data/final_data/conditionsProcessed.json"
 
 
