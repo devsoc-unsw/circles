@@ -33,6 +33,8 @@ const ProgressionCheckerCourses = ({ structure }: Props) => {
 
   const { courses, unplanned } = useSelector((store: RootState) => store.planner);
 
+  const countedCourses: string[] = [];
+
   const generateViewStructure = () => {
     const newViewLayout: ProgressionViewStructure = {};
 
@@ -62,7 +64,11 @@ const ProgressionCheckerCourses = ({ structure }: Props) => {
             plannedFor: courses[courseCode]?.plannedFor || '',
             isUnplanned: unplanned.includes(courseCode),
             isMultiterm: !!courses[courseCode]?.isMultiterm,
+            isDoubleCounted: countedCourses.includes(courseCode) && !/Core/.test(subgroup),
           });
+          if (courses[courseCode]?.plannedFor && !countedCourses.includes(courseCode)) {
+            countedCourses.push(courseCode);
+          }
         });
 
         newViewLayout[group][subgroup].courses.sort(
@@ -70,7 +76,6 @@ const ProgressionCheckerCourses = ({ structure }: Props) => {
         );
       });
     });
-
     return newViewLayout;
   };
 
@@ -128,7 +133,7 @@ const ProgressionCheckerCourses = ({ structure }: Props) => {
         <Collapsible
           title={(
             <Title level={1} className="text" id={group}>
-              {viewStructure[group].name ? `${group} - ${structure[group].name}` : group}
+              {structure[group].name ? `${group} - ${structure[group].name}` : group}
             </Title>
             )}
           key={group}
