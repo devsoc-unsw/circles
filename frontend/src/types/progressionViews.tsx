@@ -6,6 +6,7 @@ export type ViewSubgroupCourse = {
   // isUnplanned used to differentiate course in planner cart but has not been planned
   isUnplanned: boolean
   isMultiterm: boolean
+  isDoubleCounted: boolean
 };
 
 export type ViewSubgroup = {
