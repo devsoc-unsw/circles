@@ -1,86 +1,83 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { EyeOutlined } from '@ant-design/icons';
+import { CalendarOutlined, ExclamationOutlined } from '@ant-design/icons';
 import { Badge, Tooltip } from 'antd';
 import CourseButton from 'components/CourseButton';
 import { purple } from 'config/constants';
-import { GridSubgroupCourse } from '../GridView/types';
+import { getNumTerms } from 'pages/TermPlanner/utils';
 import S from './styles';
 
 type UOCBadgeProps = {
   uoc: number
+  isMultiterm: boolean
 };
 
-const UOCBadge = ({ uoc }: UOCBadgeProps) => (
+const UOCBadge = ({ uoc, isMultiterm }: UOCBadgeProps) => (
   <S.UOCBadgeWrapper>
     <Badge
       style={{
         backgroundColor: purple, color: 'white', lineHeight: '1.5', height: 'auto',
       }}
       size="small"
-      count={`${uoc} UOC`}
+      count={isMultiterm ? `${getNumTerms(uoc)} × ${uoc} UOC` : `${uoc} UOC`}
     />
   </S.UOCBadgeWrapper>
 );
 
 type Props = {
-  course: GridSubgroupCourse
+  courseCode: string
+  title: string
+  plannedFor: string
+  uoc: number
+  isUnplanned: boolean
+  isMultiterm: boolean
 };
 
-const CourseBadge = ({ course }: Props) => {
+const CourseBadge = ({
+  courseCode, title, isUnplanned, uoc, plannedFor, isMultiterm,
+}: Props) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
     navigate('/term-planner');
   };
 
-  if (course.unplanned) {
+  if (isUnplanned) {
+    // course in term planner but has not been planned
     return (
       <Badge
-        key={course.key}
         count={(
-          <Tooltip title="Course added but not planned">
-            <S.CourseBadgeIcon onClick={handleClick}>!</S.CourseBadgeIcon>
+          <Tooltip title="Course has not been planned">
+            <S.CourseBadgeIcon onClick={handleClick}>
+              <ExclamationOutlined />
+            </S.CourseBadgeIcon>
           </Tooltip>
           )}
       >
-        <CourseButton courseCode={course.key} title={course.title} planned={false} />
-        <UOCBadge uoc={course.uoc} />
+        <CourseButton courseCode={courseCode} title={title} />
       </Badge>
     );
   }
 
-  if (course.past) {
-    return (
-      <div style={{ position: 'relative' }}>
-        <CourseButton courseCode={course.key} title={course.title} planned />
-        <UOCBadge uoc={course.uoc} />
-      </div>
-    );
-  }
-
-  // for future courses planned
-  // course.past can be undefined if not in term planner thus check for false
-  if (course.past === false) {
+  if (plannedFor) {
     return (
       <Badge
-        key={course.key}
         count={(
-          <Tooltip title={`Future course planned for ${course.termPlanned}`}>
+          <Tooltip title={`Course planned for ${plannedFor}`}>
             <S.CourseBadgeIcon onClick={handleClick}>
-              <EyeOutlined />
+              <CalendarOutlined />
             </S.CourseBadgeIcon>
           </Tooltip>
-        )}
+          )}
       >
-        <CourseButton courseCode={course.key} title={course.title} planned />
-        <UOCBadge uoc={course.uoc} />
+        <CourseButton courseCode={courseCode} title={title} planned />
+        {uoc && <UOCBadge uoc={uoc} isMultiterm={isMultiterm} />}
       </Badge>
     );
   }
 
   // below is default badge for courses not in term planner
-  return <CourseButton courseCode={course.key} title={course.title} planned={false} />;
+  return <CourseButton courseCode={courseCode} title={title} />;
 };
 
 export default CourseBadge;

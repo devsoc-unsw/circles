@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { CoursesAllUnlocked } from 'types/api';
+import { CourseUnitsStructure, MenuDataStructure, MenuDataSubgroup } from 'types/courseMenu';
 import { CourseValidation } from 'types/courses';
 import { ProgramStructure } from 'types/structure';
 import prepareUserPayload from 'utils/prepareUserPayload';
@@ -11,7 +12,6 @@ import { setCourses } from 'reducers/coursesSlice';
 import { addTab } from 'reducers/courseTabsSlice';
 import CourseTitle from './CourseTitle';
 import S from './styles';
-import { CourseUnitsStructure, MenuDataStructure, MenuDataSubgroup } from './types';
 
 type Props = {
   structure: ProgramStructure

@@ -12,4 +12,8 @@ const ViewSwitcherWrapper = styled.div`
   gap: 10px;
 `;
 
-export default { Wrapper, ViewSwitcherWrapper };
+const ProgressionViewContainer = styled.div`
+  padding: 2rem;
+`;
+
+export default { Wrapper, ViewSwitcherWrapper, ProgressionViewContainer };

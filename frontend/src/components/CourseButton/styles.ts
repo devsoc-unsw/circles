@@ -1,7 +1,7 @@
 import { Button } from 'antd';
 import styled, { css } from 'styled-components';
 
-const CourseButton = styled(Button)<{ planned: boolean }>`
+const CourseButton = styled(Button)<{ planned?: boolean }>`
   border-radius: 10px;
   display: flex;
   align-items: center;
