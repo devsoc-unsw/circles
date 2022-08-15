@@ -4,7 +4,7 @@ folder with python3 -m algorithms.load_conditions
 """
 
 import pickle
-from typing import Dict
+from typing import Dict, Optional
 
 from algorithms.create import create_condition
 from algorithms.objects.conditions import CompositeCondition
@@ -25,7 +25,7 @@ def cache_conditions_pkl_file():
     with open(CONDITIONS_PICKLE_FILE, "wb") as f_out:
         pickle.dump(all_objects, f_out, pickle.HIGHEST_PROTOCOL)
 
-def construct_conditions_objects() -> Dict[str, CompositeCondition | None]:
+def construct_conditions_objects() -> Dict[str, Optional[CompositeCondition]]:
     """
     Construct conditions objects by reading all conditions tokens
     and then creating a condition object for each course.
