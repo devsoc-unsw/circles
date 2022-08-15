@@ -35,7 +35,7 @@ const CoursesSection = ({
         </S.CourseGroup>
         <S.ViewAllCoursesWrapper>
           <Button type="primary" onClick={() => setModalVisible(true)}>
-            View All Courses
+            View Courses
           </Button>
           <CourseListModal
             title={title}
