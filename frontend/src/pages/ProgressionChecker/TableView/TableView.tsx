@@ -40,8 +40,8 @@ const TableView = ({ subgroupTitle, courses, uoc }: Props) => {
     },
     {
       title: 'Term Planned',
-      dataIndex: 'termPlanned',
-      key: 'termPlanned',
+      dataIndex: 'plannedFor',
+      key: 'plannedFor',
       width: '10%',
     },
   ];
