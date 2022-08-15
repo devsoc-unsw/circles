@@ -6,6 +6,7 @@ const CourseGroup = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
+  margin: 15px 0;
 `;
 
 const ViewAllCoursesWrapper = styled.div`
