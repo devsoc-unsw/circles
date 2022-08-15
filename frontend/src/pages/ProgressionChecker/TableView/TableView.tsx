@@ -1,85 +1,72 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { Skeleton, Typography } from 'antd';
-import { TableStructure } from 'types/progressionViews';
-import { ProgramStructure } from 'types/structure';
-import getFormattedPlannerCourses, { FormattedPlannerCourse } from 'utils/getFormattedPlannerCourses';
-import Collapsible from 'components/Collapsible';
-import type { RootState } from 'config/store';
-import TableSubgroup from './TableSubgroup';
+import React, { useState } from 'react';
+import { Button, Table, Typography } from 'antd';
+import { ViewSubgroupCourse } from 'types/progressionViews';
+import CourseListModal from '../CoursesModal';
+import S from './styles';
 
 type Props = {
-  isLoading: boolean
-  structure: ProgramStructure
+  subgroupTitle: string
+  courses: ViewSubgroupCourse[]
+  uoc: number
 };
 
-const TableView = ({ isLoading, structure }: Props) => {
-  const { Title } = Typography;
-  const [tableLayout, setTableLayout] = useState<TableStructure>({});
-  const { years, startYear, courses } = useSelector((store: RootState) => store.planner);
+const { Title } = Typography;
 
-  useEffect(() => {
-    const generateTableStructure = (plannedCourses: Record<string, FormattedPlannerCourse>) => {
-      const newTableLayout: TableStructure = {};
+const TableView = ({ subgroupTitle, courses, uoc }: Props) => {
+  const planned = courses.filter((c) => c.plannedFor);
+  const unplanned = courses.filter((c) => !c.plannedFor);
 
-      // Example groups: Major, Minor, General, Rules
-      Object.keys(structure).forEach((group) => {
-        newTableLayout[group] = {};
-        // Example subgroup: Core Courses, Computing Electives
-        Object.keys(structure[group].content).forEach((subgroup) => {
-          const subgroupStructure = structure[group].content[subgroup];
+  const [modalVisible, setModalVisible] = useState(false);
 
-          newTableLayout[group][subgroup] = [];
-
-          // only consider disciplinary component courses
-          Object.keys(subgroupStructure.courses).forEach((courseCode) => {
-            newTableLayout[group][subgroup].push({
-              key: courseCode,
-              title: subgroupStructure.courses[courseCode],
-              UOC: courses[courseCode]?.UOC,
-              termPlanned: plannedCourses[courseCode]?.termPlanned,
-              unplanned: courses[courseCode]?.plannedFor === null,
-            });
-          });
-        });
-      });
-
-      return newTableLayout;
-    };
-
-    const plannerCourses = getFormattedPlannerCourses(years, startYear, courses);
-    const tableStructure = generateTableStructure(plannerCourses);
-    setTableLayout(tableStructure);
-  }, [isLoading, structure, years, startYear, courses]);
+  const columns = [
+    {
+      title: 'Course Code',
+      dataIndex: 'courseCode',
+      key: 'courseCode',
+      width: '15%',
+    },
+    {
+      title: 'Course Name',
+      dataIndex: 'title',
+      key: 'title',
+      width: '50%',
+      ellipsis: true,
+    },
+    {
+      title: 'UOC',
+      dataIndex: 'UOC',
+      key: 'UOC',
+      width: '10%',
+    },
+    {
+      title: 'Term Planned',
+      dataIndex: 'termPlanned',
+      key: 'termPlanned',
+      width: '10%',
+    },
+  ];
 
   return (
-    <div>
-      {isLoading ? (
-        <Skeleton />
-      ) : (
-        <>
-          {Object.entries(tableLayout).map(([group, groupEntry]) => (
-            <Collapsible
-              title={(
-                <Title level={1} className="text" id={group}>
-                  {structure[group].name ? `${group} - ${structure[group].name}` : group}
-                </Title>
-              )}
-              key={group}
-              initiallyCollapsed={group === 'Rules'}
-            >
-              {Object.entries(groupEntry).map(([subgroup, subgroupCourses]) => (
-                <TableSubgroup
-                  subgroupTitle={subgroup}
-                  courses={subgroupCourses}
-                  uoc={structure[group].content[subgroup].UOC}
-                />
-              ))}
-            </Collapsible>
-          ))}
-        </>
-      )}
-    </div>
+    <>
+      <Title level={2}>{subgroupTitle}</Title>
+      <Title level={3}>{uoc} UOC worth of courses</Title>
+      <Table
+        dataSource={planned}
+        columns={columns}
+        pagination={false}
+      />
+      <S.ViewCoursesButtonWrapper>
+        <Button type="primary" onClick={() => setModalVisible(true)}>
+          View Courses
+        </Button>
+        <CourseListModal
+          title={subgroupTitle}
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
+          courses={unplanned}
+        />
+      </S.ViewCoursesButtonWrapper>
+    </>
   );
 };
 

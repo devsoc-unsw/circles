@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CalendarOutlined, ExclamationOutlined, EyeOutlined } from '@ant-design/icons';
+import { CalendarOutlined, ExclamationOutlined } from '@ant-design/icons';
 import { Badge, Tooltip } from 'antd';
 import CourseButton from 'components/CourseButton';
 import { purple } from 'config/constants';
@@ -25,14 +25,13 @@ const UOCBadge = ({ uoc }: UOCBadgeProps) => (
 type Props = {
   courseCode: string
   title: string
-  past?: boolean
-  termPlanned: string
-  uoc?: number
-  unplanned?: boolean
+  plannedFor?: string | null
+  uoc?: number | null
+  isUnplanned?: boolean
 };
 
 const CourseBadge = ({
-  past, courseCode, title, unplanned, uoc, termPlanned,
+  courseCode, title, isUnplanned, uoc, plannedFor,
 }: Props) => {
   const navigate = useNavigate();
 
@@ -40,7 +39,8 @@ const CourseBadge = ({
     navigate('/term-planner');
   };
 
-  if (unplanned) {
+  if (isUnplanned) {
+    // course in term planner but has not been planned
     return (
       <Badge
         count={(
@@ -56,11 +56,11 @@ const CourseBadge = ({
     );
   }
 
-  if (past && uoc) {
+  if (plannedFor) {
     return (
       <Badge
         count={(
-          <Tooltip title={`Course planned for ${termPlanned}`}>
+          <Tooltip title={`Course planned for ${plannedFor}`}>
             <S.CourseBadgeIcon onClick={handleClick}>
               <CalendarOutlined />
             </S.CourseBadgeIcon>
@@ -68,26 +68,7 @@ const CourseBadge = ({
           )}
       >
         <CourseButton courseCode={courseCode} title={title} planned />
-        <UOCBadge uoc={uoc} />
-      </Badge>
-    );
-  }
-
-  // for future courses planned
-  // past can be undefined if not in term planner thus check for false
-  if (past === false && uoc) {
-    return (
-      <Badge
-        count={(
-          <Tooltip title={`Course will be taken in ${termPlanned}`}>
-            <S.CourseBadgeIcon onClick={handleClick}>
-              <EyeOutlined />
-            </S.CourseBadgeIcon>
-          </Tooltip>
-        )}
-      >
-        <CourseButton courseCode={courseCode} title={title} planned />
-        <UOCBadge uoc={uoc} />
+        {uoc && <UOCBadge uoc={uoc} />}
       </Badge>
     );
   }

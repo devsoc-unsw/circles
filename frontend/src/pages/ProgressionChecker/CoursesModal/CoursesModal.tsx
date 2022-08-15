@@ -1,12 +1,12 @@
 import type { Dispatch, SetStateAction } from 'react';
 import React from 'react';
-import { GridSubgroupCourse, TableSubgroupCourse } from 'types/progressionViews';
+import { ViewSubgroupCourse } from 'types/progressionViews';
 import CourseBadge from '../CourseBadge';
 import S from './styles';
 
 type Props = {
   title: string
-  courses: GridSubgroupCourse[] | TableSubgroupCourse[]
+  courses: ViewSubgroupCourse[]
   modalVisible: boolean
   setModalVisible: Dispatch<SetStateAction<boolean>>
 };
@@ -18,7 +18,7 @@ const CoursesModal = ({
     title={(
       <S.ModalHeader>
         <S.ModalTitle level={2}>{title}</S.ModalTitle>
-        <S.Instruction>See availiable courses:</S.Instruction>
+        <S.Instruction>See available courses:</S.Instruction>
       </S.ModalHeader>
     )}
     width="625px"
@@ -29,10 +29,10 @@ const CoursesModal = ({
     <S.CourseList>
       {courses.map((course) => (
         <CourseBadge
-          courseCode={course.key}
+          courseCode={course.courseCode}
           title={course.title}
-          termPlanned={course.termPlanned}
-          // unplanned={course.unplanned}
+          plannedFor={course.plannedFor}
+          isUnplanned={course.isUnplanned}
         />
       ))}
     </S.CourseList>

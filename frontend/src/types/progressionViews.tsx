@@ -1,40 +1,27 @@
-/* TableView types */
-export type TableSubgroupCourse = {
-  key: string
+export type ViewSubgroupCourse = {
+  courseCode: string
   title: string
-  UOC: number
-  termPlanned: string
-  unplanned: boolean
+  UOC: number | null
+  plannedFor: string | null
+  // isUnplanned used to differentiate course in planner cart but has not been planned
+  isUnplanned: boolean
+  isMultiterm: boolean | null
 };
 
-export type TableStructure = {
+export type ViewSubgroup = {
+  isCoursesOverflow: boolean
+  courses: ViewSubgroupCourse[]
+};
+
+export type ProgressionViewStructure = {
   [groupKey: string]: {
-    [subgroupKey: string]: TableSubgroupCourse[]
+    [subgroupKey: string]: ViewSubgroup
   }
 };
 
 /* GridView types */
-export type GridSubgroupCourse = {
-  key: string
-  title: string
-  past: boolean
-  termPlanned: string
-  uoc: number
-  unplanned: boolean
-};
-
-export type GridSubgroup = {
-  isCoursesOverflow: boolean
-  courses: GridSubgroupCourse[]
-};
-
-export type GridStructure = {
-  [groupKey: string]: {
-    [subgroupKey: string]: GridSubgroup
-  }
-};
-
-export enum PlannedState {
-  PLANNED,
-  UNPLANNED,
+export enum Views {
+  TABLE,
+  GRID,
+  GRID_CONCISE,
 }
