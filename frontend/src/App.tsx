@@ -9,6 +9,7 @@ import ErrorBoundary from 'components/ErrorBoundary';
 import type { RootState } from 'config/store';
 import { darkTheme, GlobalStyles, lightTheme } from 'config/theme';
 import PageLoading from './components/PageLoading';
+import Auth from './pages/Auth';
 import CourseSelector from './pages/CourseSelector';
 import DegreeWizard from './pages/DegreeWizard';
 import GraphicalSelector from './pages/GraphicalSelector';
@@ -39,6 +40,7 @@ const App = () => {
               <Route path="/term-planner" element={<TermPlanner />} />
               <Route path="/progression-checker" element={<ProgressionChecker />} />
               <Route path="*" element={<Page404 />} />
+              <Route path="/login" element={<Auth />} />
             </Routes>
           )}
         </Router>

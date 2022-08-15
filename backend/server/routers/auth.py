@@ -5,8 +5,8 @@ from functools import wraps
 
 from fastapi import APIRouter
 from fastapi import HTTPException
-from google.auth.transport import requests
-from google.oauth2 import id_token
+from google.auth.transport import requests # type: ignore
+from google.oauth2 import id_token # type: ignore
 from time import time
 
 from server.config import CLIENT_ID
@@ -123,7 +123,7 @@ def auth_new_user(token):
         "token": token
     }
 
-def validate_user_exists(token: str) -> bool:
+def validate_user_exists(token: dict[str, str]) -> bool:
     """
         Given a valid token, check if the associated user exists.
     """
