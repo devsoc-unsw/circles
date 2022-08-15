@@ -15,6 +15,14 @@ export default defineConfig({
   // comment this out if that isn't relevant for your project
   build: {
     outDir: "build",
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          ag6: ["@antv/g6-core", "@antv/g6-pc", "@antv/g6-pc"],
+          ag2: ["@antv/g2", "@antv/g2plot"],
+        }
+      }
+    }
   },
   plugins: [
     react(),
@@ -38,7 +46,6 @@ export default defineConfig({
       { find: "utils", replacement: resolve(projectRootDir, "./src/utils") },
     ],
   },
-
   css: {
     preprocessorOptions: {
       less: {

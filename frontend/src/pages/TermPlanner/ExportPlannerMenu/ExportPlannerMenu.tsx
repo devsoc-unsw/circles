@@ -9,7 +9,7 @@ import CS from '../common/styles';
 import S from './styles';
 
 type Props = {
-  plannerRef: React.RefObject<HTMLDivElement>
+  plannerRef: React.RefObject<HTMLDivElement>;
 };
 
 const ExportPlannerMenu = ({ plannerRef }: Props) => {
@@ -32,9 +32,14 @@ const ExportPlannerMenu = ({ plannerRef }: Props) => {
       <CS.MenuDivider />
       <CS.PopupEntry>
         <CS.MenuText>File Type</CS.MenuText>
-        <Radio.Group onChange={(e) => setFormat(e.target.value as string)} defaultValue="png">
+        <Radio.Group
+          onChange={(e) => setFormat(e.target.value as string)}
+          defaultValue="png"
+        >
           {exportFormats.map((form) => (
-            <Radio value={form} className="text">{form}</Radio>
+            <Radio value={form} className="text">
+              {form}
+            </Radio>
           ))}
         </Radio.Group>
       </CS.PopupEntry>

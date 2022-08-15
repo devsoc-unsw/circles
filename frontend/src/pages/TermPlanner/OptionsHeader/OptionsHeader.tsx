@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React from 'react';
+import React, { Suspense } from 'react';
 import { FaRegCalendarTimes } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import DownloadOutlined from '@ant-design/icons/DownloadOutlined';
@@ -14,7 +14,7 @@ import Tooltip from 'antd/lib/tooltip';
 import type { RootState } from 'config/store';
 import { unhideAllYears, unscheduleAll } from 'reducers/plannerSlice';
 import { toggleShowMarks, toggleShowWarnings } from 'reducers/settingsSlice';
-import ExportPlannerMenu from '../ExportPlannerMenu';
+// import ExportPlannerMenu from '../ExportPlannerMenu';
 import HelpMenu from '../HelpMenu/HelpMenu';
 import SettingsMenu from '../SettingsMenu';
 import { isPlannerEmpty } from '../utils';
@@ -22,6 +22,8 @@ import S from './styles';
 // Used for tippy stylings
 import 'tippy.js/dist/tippy.css';
 import 'tippy.js/themes/light.css';
+
+const ExportPlannerMenu = React.lazy(() => import('../ExportPlannerMenu'));
 
 type Props = {
   plannerRef: React.RefObject<HTMLDivElement>
@@ -59,7 +61,11 @@ const OptionsHeader = ({ plannerRef }: Props) => {
           </div>
         </Tippy>
         <Tippy
-          content={<ExportPlannerMenu plannerRef={plannerRef} />}
+          content={(
+            <Suspense fallback={<div>Loading downloader...</div>}>
+              <ExportPlannerMenu plannerRef={plannerRef} />
+            </Suspense>
+          )}
           moveTransition="transform 0.2s ease-out"
           interactive
           trigger="click"
