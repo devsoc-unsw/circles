@@ -16,7 +16,7 @@ mypy-extensions==0.4.3
 packaging==21.3
 pluggy==1.0.0
 py==1.11.0
-pycodestyle==2.8.0
+pycodestyle==2.9.1
 pydantic==1.9.1
 pymongo==4.1.1
 pyparsing==3.0.9
