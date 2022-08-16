@@ -68,7 +68,7 @@
   "devDependencies": {
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "12.1.5",
-    "@testing-library/user-event": "14.2.3",
+    "@testing-library/user-event": "14.4.3",
     "@types/react-beautiful-dnd": "13.1.2",
     "@types/react-helmet": "6.1.5",
     "@types/react-scroll": "1.8.4",
