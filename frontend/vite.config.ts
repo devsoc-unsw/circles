@@ -18,8 +18,9 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          ag6: ['@antv/g6-core', '@antv/g6-pc', '@antv/g6-pc'],
-          ag2: ['@antv/g2', '@antv/g2plot'],
+          rcei: ['react-component-export-image'],
+          ag6: ['@antv/g6-core', '@antv/g6-pc'],
+          ag2: ['@antv/g2', '@antv/g2plot']
         },
       },
     },
