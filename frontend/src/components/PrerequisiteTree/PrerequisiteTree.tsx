@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import type { Item, TreeGraphData } from '@antv/g6-core';
-import type { TreeGraph } from '@antv/g6-pc';
+import TreeGraph from '@antv/g6-pc/lib/graph/tree-graph';
 import axios from 'axios';
 import { CourseChildren, CoursePathFrom, CoursesAllUnlocked } from 'types/api';
 import { CourseList } from 'types/courses';
@@ -38,7 +38,6 @@ const PrerequisiteTree = ({ courseCode }: Props) => {
     const generateTreeGraph = async (graphData: TreeGraphData) => {
       const container = ref.current;
       if (!container) return;
-      const TreeGraph = (await import('@antv/g6-pc/lib/graph/tree-graph')).default;
       const treeGraphInstance: TreeGraph = new TreeGraph({
         container,
         width: container.scrollWidth,

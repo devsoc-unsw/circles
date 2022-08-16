@@ -4,7 +4,7 @@ import LockOutlined from '@ant-design/icons/LockOutlined';
 import UnlockOutlined from '@ant-design/icons/UnlockOutlined';
 import { breadthFirstSearch } from '@antv/algorithm';
 import type { INode, Item } from '@antv/g6-core';
-import type { Graph } from '@antv/g6-pc';
+import Graph from '@antv/g6-pc/lib/graph/graph';
 import Button from 'antd/lib/button';
 import Switch from 'antd/lib/switch';
 import Tooltip from 'antd/lib/tooltip';
@@ -48,7 +48,6 @@ const GraphicalSelector = () => {
     const initialiseGraph = async (courses: string[], courseEdges: CourseEdge[]) => {
       const container = ref.current;
       if (!container) return;
-      const Graph = (await import('@antv/g6-pc/lib/graph/graph')).default;
       const graphInstance: Graph = new Graph({
         container,
         width: container.scrollWidth,
