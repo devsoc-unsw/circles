@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import type { OnDragEndResponder, OnDragStartResponder } from 'react-beautiful-dnd';
 import { useDispatch, useSelector } from 'react-redux';
 import { DeleteOutlined } from '@ant-design/icons';
@@ -48,21 +48,23 @@ const CourseTabs = () => {
           onChange={() => dispatch(toggleLockedCourses())}
         />
       </S.ShowAllCourses>
-      <DragDropContext onDragEnd={handleOnDragEnd} onDragStart={handleOnDragStart}>
-        <Droppable droppableId="droppable" direction="horizontal">
-          {(droppableProvided) => (
-            <S.CourseTabsSection
-              ref={droppableProvided.innerRef}
-              {...droppableProvided.droppableProps}
-            >
-              {tabs.map((tab, index) => (
-                <DraggableTab tabName={tab} index={index} />
-              ))}
-              {droppableProvided.placeholder}
-            </S.CourseTabsSection>
-          )}
-        </Droppable>
-      </DragDropContext>
+      <Suspense fallback={<div>Loading...</div>}>
+        <DragDropContext onDragEnd={handleOnDragEnd} onDragStart={handleOnDragStart}>
+          <Droppable droppableId="droppable" direction="horizontal">
+            {(droppableProvided) => (
+              <S.CourseTabsSection
+                ref={droppableProvided.innerRef}
+                {...droppableProvided.droppableProps}
+              >
+                {tabs.map((tab, index) => (
+                  <DraggableTab tabName={tab} index={index} />
+                ))}
+                {droppableProvided.placeholder}
+              </S.CourseTabsSection>
+            )}
+          </Droppable>
+        </DragDropContext>
+      </Suspense>
       {
         !!tabs.length
         && (

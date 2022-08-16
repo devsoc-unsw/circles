@@ -1,4 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {
+  Suspense, useEffect, useRef, useState,
+} from 'react';
 import type { DraggingStyle } from 'react-beautiful-dnd';
 import { useDispatch, useSelector } from 'react-redux';
 import { CloseOutlined } from '@ant-design/icons';
@@ -58,31 +60,33 @@ const DraggableTab = ({ tabName, index }: Props) => {
   };
 
   return (
-    <Draggable key={tabName} draggableId={tabName} index={index}>
-      {(draggableProvided) => (
-        <S.DraggableTabWrapper
-          role="tab"
-          active={index === active}
-          onClick={() => dispatch(setActiveTab(index))}
-          ref={(r) => {
-            ref.current = r;
-            draggableProvided.innerRef(r);
-          }}
-          {...draggableProvided.draggableProps}
-          {...draggableProvided.dragHandleProps}
-          style={getDraggableStyle(draggableProvided.draggableProps.style as DraggingStyle)}
-          onMouseUp={handleMouseUp}
-        >
-          <S.TabNameWrapper>{tabName}</S.TabNameWrapper>
-          <Button
-            type="text"
-            size="small"
-            icon={<CloseOutlined style={{ fontSize: '12px', color: theme.text }} />}
-            onClick={handleOnClick}
-          />
-        </S.DraggableTabWrapper>
-      )}
-    </Draggable>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Draggable key={tabName} draggableId={tabName} index={index}>
+        {(draggableProvided) => (
+          <S.DraggableTabWrapper
+            role="tab"
+            active={index === active}
+            onClick={() => dispatch(setActiveTab(index))}
+            ref={(r) => {
+              ref.current = r;
+              draggableProvided.innerRef(r);
+            }}
+            {...draggableProvided.draggableProps}
+            {...draggableProvided.dragHandleProps}
+            style={getDraggableStyle(draggableProvided.draggableProps.style as DraggingStyle)}
+            onMouseUp={handleMouseUp}
+          >
+            <S.TabNameWrapper>{tabName}</S.TabNameWrapper>
+            <Button
+              type="text"
+              size="small"
+              icon={<CloseOutlined style={{ fontSize: '12px', color: theme.text }} />}
+              onClick={handleOnClick}
+            />
+          </S.DraggableTabWrapper>
+        )}
+      </Draggable>
+    </Suspense>
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { LockFilled, UnlockFilled } from '@ant-design/icons';
 import { Badge } from 'antd';
@@ -59,59 +59,61 @@ const TermBox = ({
     boxShadow: 'none',
   };
   return (
-    <Droppable droppableId={name} isDropDisabled={isCompleted}>
-      {(provided) => (
-        <Badge
-          count={(
-            <S.TermCheckboxWrapper checked={isCompleted}>
-              {(
-                  !isCompleted
-                    ? (
-                      <UnlockFilled
-                        style={iconStyle}
-                        onClick={handleCompleteTerm}
-                      />
-                    ) : (
-                      <LockFilled
-                        style={iconStyle}
-                        onClick={handleCompleteTerm}
-                      />
-                    ) //
-                )}
-            </S.TermCheckboxWrapper>
-            )}
-          offset={isSummerEnabled ? [-13, 13] : [-22, 22]}
-        >
-          <S.TermBoxWrapper
-            droppable={isOffered && dragging}
-            summerEnabled={isSummerEnabled}
-            isSmall={isSmall}
-            ref={provided.innerRef}
-            {...provided.droppableProps}
+    <Suspense fallback={<div>Loading...</div>}>
+      <Droppable droppableId={name} isDropDisabled={isCompleted}>
+        {(provided) => (
+          <Badge
+            count={(
+              <S.TermCheckboxWrapper checked={isCompleted}>
+                {(
+                    !isCompleted
+                      ? (
+                        <UnlockFilled
+                          style={iconStyle}
+                          onClick={handleCompleteTerm}
+                        />
+                      ) : (
+                        <LockFilled
+                          style={iconStyle}
+                          onClick={handleCompleteTerm}
+                        />
+                      ) //
+                  )}
+              </S.TermCheckboxWrapper>
+              )}
+            offset={isSummerEnabled ? [-13, 13] : [-22, 22]}
           >
-            {coursesList.map(
-              (code, index) => (
-                <DraggableCourse
-                  key={`${code}${term}`}
-                  code={code}
-                  index={index}
-                  term={term}
+            <S.TermBoxWrapper
+              droppable={isOffered && dragging}
+              summerEnabled={isSummerEnabled}
+              isSmall={isSmall}
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+            >
+              {coursesList.map(
+                (code, index) => (
+                  <DraggableCourse
+                    key={`${code}${term}`}
+                    code={code}
+                    index={index}
+                    term={term}
+                  />
+                ),
+              )}
+              {provided.placeholder}
+              <S.UOCBadgeWrapper>
+                <Badge
+                  style={uocBadgeStyle}
+                  size="small"
+                  count={`${totalUOC} UOC`}
+                  offset={[0, 0]}
                 />
-              ),
-            )}
-            {provided.placeholder}
-            <S.UOCBadgeWrapper>
-              <Badge
-                style={uocBadgeStyle}
-                size="small"
-                count={`${totalUOC} UOC`}
-                offset={[0, 0]}
-              />
-            </S.UOCBadgeWrapper>
-          </S.TermBoxWrapper>
-        </Badge>
-      )}
-    </Droppable>
+              </S.UOCBadgeWrapper>
+            </S.TermBoxWrapper>
+          </Badge>
+        )}
+      </Droppable>
+    </Suspense>
   );
 };
 

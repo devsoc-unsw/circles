@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useSelector } from 'react-redux';
 import type { RootState } from 'config/store';
 import useMediaQuery from 'hooks/useMediaQuery';
@@ -18,27 +18,29 @@ const UnplannedColumn = ({ dragging }: Props) => {
   return (
     <S.UnplannedContainer summerEnabled={isSummerEnabled}>
       <S.UnplannedTitle>Unplanned</S.UnplannedTitle>
-      <Droppable droppableId="unplanned">
-        {(provided) => (
-          <S.UnplannedBox
-            ref={provided.innerRef}
-            {...provided.droppableProps}
-            summerEnabled={isSummerEnabled}
-            droppable={dragging}
-            isSmall={isSmall}
-          >
-            {unplanned.map((course, courseIndex) => (
-              <DraggableCourse
-                code={course}
-                index={courseIndex}
-                key={course}
-                term=""
-              />
-            ))}
-            {provided.placeholder}
-          </S.UnplannedBox>
-        )}
-      </Droppable>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Droppable droppableId="unplanned">
+          {(provided) => (
+            <S.UnplannedBox
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+              summerEnabled={isSummerEnabled}
+              droppable={dragging}
+              isSmall={isSmall}
+            >
+              {unplanned.map((course, courseIndex) => (
+                <DraggableCourse
+                  code={course}
+                  index={courseIndex}
+                  key={course}
+                  term=""
+                />
+              ))}
+              {provided.placeholder}
+            </S.UnplannedBox>
+          )}
+        </Droppable>
+      </Suspense>
     </S.UnplannedContainer>
   );
 };
