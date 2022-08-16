@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
-import type { LiquidConfig } from '@ant-design/charts';
-import { Liquid } from '@ant-design/charts';
+import type { LiquidConfig } from '@ant-design/plots';
 import {
   darkGrey,
   lightGrey,
@@ -16,6 +15,8 @@ type Props = {
   completedUOC: number
   totalUOC: number
 };
+
+const Liquid = React.lazy(() => import('@ant-design/plots').then((plot) => ({ default: plot.Liquid })));
 
 const LiquidProgressChart = ({ completedUOC, totalUOC }: Props) => {
   const [percent, setPercent] = useState(0);
@@ -86,7 +87,9 @@ const LiquidProgressChart = ({ completedUOC, totalUOC }: Props) => {
         {completedUOC} / {totalUOC} UOC
       </ReactTooltip>
       <div data-tip>
-        <Liquid {...config} />
+        <Suspense fallback={<div>Loading...</div>}>
+          <Liquid {...config} />
+        </Suspense>
       </div>
     </div>
   );

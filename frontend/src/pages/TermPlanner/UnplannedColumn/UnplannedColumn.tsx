@@ -1,5 +1,4 @@
 import React from 'react';
-import { Droppable } from 'react-beautiful-dnd';
 import { useSelector } from 'react-redux';
 import type { RootState } from 'config/store';
 import useMediaQuery from 'hooks/useMediaQuery';
@@ -9,6 +8,8 @@ import S from './styles';
 type Props = {
   dragging: boolean
 };
+
+const Droppable = React.lazy(() => import('react-beautiful-dnd').then((plot) => ({ default: plot.Droppable })));
 
 const UnplannedColumn = ({ dragging }: Props) => {
   const { isSummerEnabled, unplanned } = useSelector((state: RootState) => state.planner);

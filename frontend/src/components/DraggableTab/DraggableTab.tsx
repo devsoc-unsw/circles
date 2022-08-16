@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import type { DraggingStyle } from 'react-beautiful-dnd';
-import { Draggable } from 'react-beautiful-dnd';
 import { useDispatch, useSelector } from 'react-redux';
 import { CloseOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
@@ -9,6 +8,8 @@ import type { RootState } from 'config/store';
 import useIntersectionObserver from 'hooks/useIntersectionObserver';
 import { removeTab, setActiveTab } from 'reducers/courseTabsSlice';
 import S from './styles';
+
+const Draggable = React.lazy(() => import('react-beautiful-dnd').then((plot) => ({ default: plot.Draggable })));
 
 type Props = {
   tabName: string

@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import type { OnDragEndResponder, OnDragStartResponder } from 'react-beautiful-dnd';
-import { DragDropContext } from 'react-beautiful-dnd';
 import { useDispatch, useSelector } from 'react-redux';
 import { Badge } from 'antd';
 import axios from 'axios';
@@ -23,6 +22,8 @@ import {
   checkMultitermInBounds,
   isPlannerEmpty,
 } from './utils';
+
+const DragDropContext = React.lazy(() => import('react-beautiful-dnd').then((plot) => ({ default: plot.DragDropContext })));
 
 const TermPlanner = () => {
   const { showWarnings } = useSelector((state: RootState) => state.settings);

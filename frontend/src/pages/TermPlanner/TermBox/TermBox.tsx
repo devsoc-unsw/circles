@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Droppable } from 'react-beautiful-dnd';
 import { useDispatch, useSelector } from 'react-redux';
 import { LockFilled, UnlockFilled } from '@ant-design/icons';
 import { Badge } from 'antd';
@@ -9,6 +8,8 @@ import useMediaQuery from 'hooks/useMediaQuery';
 import { toggleTermComplete } from 'reducers/plannerSlice';
 import DraggableCourse from '../DraggableCourse';
 import S from './styles';
+
+const Droppable = React.lazy(() => import('react-beautiful-dnd').then((plot) => ({ default: plot.Droppable })));
 
 type Props = {
   name: string

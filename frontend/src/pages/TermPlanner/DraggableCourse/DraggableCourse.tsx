@@ -1,5 +1,4 @@
 import React from 'react';
-import { Draggable } from 'react-beautiful-dnd';
 import { useContextMenu } from 'react-contexify';
 import { useSelector } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
@@ -16,6 +15,8 @@ type Props = {
   index: number
   term: string
 };
+
+const Draggable = React.lazy(() => import('react-beautiful-dnd').then((plot) => ({ default: plot.Draggable })));
 
 const DraggableCourse = ({ code, index, term }: Props) => {
   const {
