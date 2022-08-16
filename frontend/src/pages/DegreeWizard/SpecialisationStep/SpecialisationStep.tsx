@@ -71,9 +71,11 @@ const SpecialisationStep = ({ incrementStep, currStep, type }: Props) => {
             flexDirection: 'column',
           }}
         >
-          {Object.keys(options).map((sub) => (
+          {Object.keys(options).map((sub, index) => (
             <Menu.SubMenu
-              key={sub}
+              // TODO convert this to use items for menu
+              // eslint-disable-next-line react/no-array-index-key
+              key={index}
               title={`${type.replace(/^\w/, (c) => c.toUpperCase())} for ${sub}`}
               style={{
                 border: '1px solid #a86fed',
