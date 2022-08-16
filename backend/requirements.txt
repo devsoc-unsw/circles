@@ -32,7 +32,7 @@ types-cryptography==3.3.21
 types-pyOpenSSL==22.0.4
 types-pytz==2022.1.2
 types-requests==2.28.3
-types-setuptools==63.2.1
+types-setuptools==63.4.1
 types-ujson==5.4.0
 types-urllib3==1.26.16
 typing_extensions==4.3.0
