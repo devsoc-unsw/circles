@@ -465,20 +465,21 @@ def courses_unlocked_when_taken(userData: UserData, courseToBeTaken: str) -> Dic
 )
 def terms_offered(course: str, years:str) -> Dict[str, List[str]]:
     """
-    Returns a list of terms in which the given course is offered.
-    The list of terms is only relevant for the LIVE_YEAR and may
-    be inaccurate for courses offered every second year.
+    Recieves a course and a list of years. Returns a list of terms the
+    course is offered in for the given years.
 
     Expected Input:
         course: (str) CODEXXXX
         years: (str): `+`-connected string of years
             eg: "2020+2021+2022"
+    Output: {
+            year: [terms offered]
+        }
     """
-    years = years.split("+")
     fails: List[str] = []
     terms = {
         year: map_suppressed_errors(get_term_offered, course, year)
-        for year in years
+        for year in years.split("+")
     }
     return {
         "terms": terms,
