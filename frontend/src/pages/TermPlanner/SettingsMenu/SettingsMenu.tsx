@@ -51,7 +51,7 @@ const SettingsMenu = () => {
             onChange={handleUpdateStartYear}
             picker="year"
             style={{ width: 105 }}
-            value={dayjs(startYear, 'YYYY')}
+            value={dayjs().year(startYear)}
           />
         </Suspense>
       </CS.PopupEntry>
