@@ -1,12 +1,11 @@
-import React from 'react';
-import { Draggable } from 'react-beautiful-dnd';
+import React, { Suspense } from 'react';
 import { useContextMenu } from 'react-contexify';
 import { useSelector } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
 import { InfoCircleOutlined, WarningOutlined } from '@ant-design/icons';
 import { Typography } from 'antd';
 import { useTheme } from 'styled-components';
-import Marks from 'components/Marks';
+import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
 import useMediaQuery from 'hooks/useMediaQuery';
 import ContextMenu from '../ContextMenu';
@@ -18,6 +17,8 @@ type Props = {
   term: string
 };
 
+const Draggable = React.lazy(() => import('react-beautiful-dnd').then((plot) => ({ default: plot.Draggable })));
+
 const DraggableCourse = ({ code, index, term }: Props) => {
   const {
     courses,
@@ -26,7 +27,7 @@ const DraggableCourse = ({ code, index, term }: Props) => {
   } = useSelector((state: RootState) => state.planner);
   const { showMarks } = useSelector((state: RootState) => state.settings);
   const theme = useTheme();
-  const Text = Typography;
+  const { Text } = Typography;
 
   // prereqs are populated in CourseDescription.jsx via course.raw_requirements
   const {
@@ -56,54 +57,66 @@ const DraggableCourse = ({ code, index, term }: Props) => {
 
   return (
     <>
-      <Draggable
-        isDragDisabled={isDragDisabled}
-        draggableId={`${code}${term}`}
-        index={index}
-      >
-        {(provided) => (
-          <S.CourseWrapper
-            summerEnabled={isSummerEnabled}
-            isSmall={isSmall}
-            dragDisabled={isDragDisabled}
-            warningsDisabled={isDragDisabled && !isUnlocked}
-            isWarning={!supressed && (!isUnlocked || !isOffered)}
-            {...provided.draggableProps}
-            {...provided.dragHandleProps}
-            ref={provided.innerRef}
-            style={provided.draggableProps.style}
-            data-tip
-            data-for={code}
-            id={code}
-            onContextMenu={handleContextMenu}
-          >
-            {!isDragDisabled && shouldHaveWarning
-              && (errorIsInformational ? (
-                <InfoCircleOutlined
-                  style={{ color: theme.infoOutlined.color }}
-                />
-              ) : (
-                <WarningOutlined
-                  style={{ fontSize: '16px', color: theme.warningOutlined.color }}
-                />
-              ))}
-            <S.CourseLabel>
-              {isSmall ? (
-                <Text className="text">{code}</Text>
-              ) : (
-                <div>
-                  <Text className="text">
-                    <strong>{code}: </strong>
-                    {title}
-                  </Text>
-                </div>
-              )}
-              {showMarks && <Marks mark={mark} />}
-            </S.CourseLabel>
-          </S.CourseWrapper>
-        )}
-      </Draggable>
-      <ContextMenu code={code} plannedFor={plannedFor} />
+      <Suspense fallback={<Spinner text="Loading Course..." />}>
+        <Draggable
+          isDragDisabled={isDragDisabled}
+          draggableId={`${code}${term}`}
+          index={index}
+        >
+          {(provided) => (
+            <S.CourseWrapper
+              summerEnabled={isSummerEnabled}
+              isSmall={isSmall}
+              dragDisabled={isDragDisabled}
+              warningsDisabled={isDragDisabled && !isUnlocked}
+              isWarning={!supressed && (!isUnlocked || !isOffered)}
+              {...provided.draggableProps}
+              {...provided.dragHandleProps}
+              ref={provided.innerRef}
+              style={provided.draggableProps.style}
+              data-tip
+              data-for={code}
+              id={code}
+              onContextMenu={handleContextMenu}
+            >
+              {!isDragDisabled && shouldHaveWarning
+                && (errorIsInformational ? (
+                  <InfoCircleOutlined
+                    style={{ color: theme.infoOutlined.color }}
+                  />
+                ) : (
+                  <WarningOutlined
+                    style={{ fontSize: '16px', color: theme.warningOutlined.color }}
+                  />
+                ))}
+              <S.CourseLabel>
+                {isSmall ? (
+                  <Text className="text">{code}</Text>
+                ) : (
+                  <div>
+                    <Text className="text">
+                      <strong>{code}: </strong>
+                      {title}
+                    </Text>
+                  </div>
+                )}
+                {showMarks && (
+                  <div>
+                    <Text strong className="text">Mark: </Text>
+                    <Text className="text">
+                      {/*
+                      Marks can be strings (i.e. HD, CR) or a number (i.e. 90, 85).
+                      Mark can be 0.
+                    */}
+                      {typeof mark === 'string' || typeof mark === 'number' ? mark : 'N/A'}
+                    </Text>
+                  </div>
+                )}
+              </S.CourseLabel>
+            </S.CourseWrapper>
+          )}
+        </Draggable>
+      </Suspense><ContextMenu code={code} plannedFor={plannedFor} />
       {/* display prereq tooltip for all courses. However, if a term is marked as complete
         and the course has no warning, then disable the tooltip */}
       {isSmall && (

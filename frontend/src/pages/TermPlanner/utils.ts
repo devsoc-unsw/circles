@@ -1,8 +1,7 @@
 import {
   Grade, Mark, PlannerCourse, PlannerYear, Term,
 } from 'types/planner';
-
-const MIN_COMPLETED_COURSE_UOC = 6;
+import getNumTerms from 'utils/getNumTerms';
 
 const parseMarkToInt = (mark: Mark): number | null => {
   if (typeof mark === 'undefined') return null;
@@ -27,19 +26,6 @@ const isPlannerEmpty = (years: PlannerYear[]) => (
   years.every((year) => Object.keys(year).every((term) => year[term as Term].length === 0))
 );
 
-// Calculated lcm(uoc, MIN_COMPLETED_COURSE_UOC) to determine number of times course must be taken.
-// e.g. 2 UOC course must be taken 3 times, 3 UOC course must be take 2 times
-const getNumTerms = (uoc: number) => {
-  let num1 = uoc;
-  let num2 = MIN_COMPLETED_COURSE_UOC;
-  while (num2) {
-    const tempNum = num2;
-    num2 = num1 % num2;
-    num1 = tempNum;
-  }
-  return MIN_COMPLETED_COURSE_UOC / num1;
-};
-
 // Returns a list of terms and rowOffsets that multiterm course will be added to
 const getTermsList = (
   currentTerm: Term,
@@ -58,7 +44,7 @@ const getTermsList = (
 
   let index = terms.indexOf(currentTerm) - 1;
   let rowOffset = 0;
-  const numTerms = getNumTerms(uoc);
+  const numTerms = getNumTerms(uoc, true);
 
   for (let i = 0; i < instanceNum; i++) {
     if (index < 0) {

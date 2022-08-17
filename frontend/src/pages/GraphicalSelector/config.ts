@@ -1,4 +1,4 @@
-import G6 from '@antv/g6';
+import type { Arrow } from '@antv/g6';
 
 const defaultNode = {
   size: 70,
@@ -16,15 +16,15 @@ const defaultNode = {
   },
 };
 
-const defaultEdge = {
+const defaultEdge = (arrow: typeof Arrow) => ({
   style: {
     endArrow: {
-      path: G6.Arrow.triangle(5, 5, 30),
+      path: arrow.triangle(5, 5, 30),
       fill: '#e0e0e0',
       d: 25,
     },
   },
-};
+});
 
 const nodeStateStyles = {
   hover: {

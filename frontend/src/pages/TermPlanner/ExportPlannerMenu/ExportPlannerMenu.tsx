@@ -1,8 +1,4 @@
 import React, { useState } from 'react';
-import {
-  exportComponentAsJPEG,
-  exportComponentAsPNG,
-} from 'react-component-export-image';
 import { Button, Radio } from 'antd';
 import CS from '../common/styles';
 import S from './styles';
@@ -17,7 +13,8 @@ const ExportPlannerMenu = ({ plannerRef }: Props) => {
 
   const [format, setFormat] = useState('png');
 
-  const download = () => {
+  const download = async () => {
+    const { exportComponentAsJPEG, exportComponentAsPNG } = await import('react-component-export-image');
     if (format === 'png') {
       exportComponentAsPNG(plannerRef, exportFields);
     } else if (format === 'jpg') {
