@@ -1,7 +1,8 @@
-import React from 'react';
-import { Typography } from 'antd';
+import React, { useState } from 'react';
+import { Button, Typography } from 'antd';
 import { ViewSubgroupCourse } from 'types/progressionViews';
 import getNumTerms from 'utils/getNumTerms';
+import { sortByAlphaNumeric, sortByLevel, SortFn } from '../sortUtils';
 import CoursesSection from './CoursesSection';
 import GridConciseView from './GridConciseView';
 
@@ -33,6 +34,8 @@ const GridView = ({
   const plannedCourses = courses.filter((c) => c.plannedFor);
   const unplannedCourses = courses.filter((c) => !c.plannedFor);
 
+  const [sortFn, setSortFn] = useState(SortFn.AlphaNumeric);
+
   if (isConcise) {
     return (
       <GridConciseView
@@ -47,12 +50,19 @@ const GridView = ({
   return (
     <>
       <Title level={2} className="text">{subgroupTitle}</Title>
-      <Title level={3} className="text">{uoc} UOC of the following courses ({Math.max(uoc - plannedUOC, 0)} UOC remaining)</Title>
+      <div>
+        <Title level={3} className="text">{uoc} UOC of the following courses ({Math.max(uoc - plannedUOC, 0)} UOC remaining)</Title>
+        <div>
+          <Button onClick={() => setSortFn(SortFn.AlphaNumeric)}>Sort By AlphaNumeric</Button>
+          <Button onClick={() => setSortFn(SortFn.Level)}>Sort By Level</Button>
+        </div>
+      </div>
       <CoursesSection
         title={subgroupTitle}
         isCoursesOverflow={isCoursesOverflow}
         plannedCourses={plannedCourses}
         unplannedCourses={unplannedCourses}
+        sortFn={sortFn === SortFn.AlphaNumeric ? sortByAlphaNumeric : sortByLevel}
       />
     </>
   );

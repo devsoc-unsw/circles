@@ -1,8 +1,9 @@
-import React from 'react';
-import { Typography } from 'antd';
+import React, { useState } from 'react';
+import { Button, Typography } from 'antd';
 import { ViewSubgroupCourse } from 'types/progressionViews';
 import getNumTerms from 'utils/getNumTerms';
 import Collapsible from 'components/Collapsible';
+import { sortByAlphaNumeric, sortByLevel, SortFn } from '../sortUtils';
 import CoursesSection from './CoursesSection';
 
 type Props = {
@@ -20,6 +21,8 @@ const GridConciseView = ({
 }: Props) => {
   const { Title } = Typography;
 
+  const [sortFn, setSortFn] = useState(SortFn.AlphaNumeric);
+
   const plannedCourses = courses.filter((c) => c.plannedFor);
   const unplannedCourses = courses.filter((c) => !c.plannedFor);
   const plannedUOC = plannedCourses.reduce(
@@ -32,7 +35,13 @@ const GridConciseView = ({
   return (
     <>
       <Title level={2} className="text">{subgroupKey}</Title>
-      <Title level={3} className="text">{uoc} UOC of the following courses</Title>
+      <div>
+        <Title level={3} className="text">{uoc} UOC of the following courses</Title>
+        <div>
+          <Button onClick={() => setSortFn(SortFn.AlphaNumeric)}>Sort By AlphaNumeric</Button>
+          <Button onClick={() => setSortFn(SortFn.Level)}>Sort By Level</Button>
+        </div>
+      </div>
       {!!courses.length && (
         <>
           <Collapsible
@@ -44,6 +53,7 @@ const GridConciseView = ({
               title={subgroupKey}
               plannedCourses={plannedCourses}
               unplannedCourses={[]}
+              sortFn={sortFn === SortFn.AlphaNumeric ? sortByAlphaNumeric : sortByLevel}
             />
           </Collapsible>
           <Collapsible
@@ -60,6 +70,7 @@ const GridConciseView = ({
               isCoursesOverflow={false}
               plannedCourses={[]}
               unplannedCourses={unplannedCourses}
+              sortFn={sortFn === SortFn.AlphaNumeric ? sortByAlphaNumeric : sortByLevel}
             />
           </Collapsible>
         </>

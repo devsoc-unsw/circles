@@ -10,28 +10,16 @@ type CoursesSectionProps = {
   plannedCourses: ViewSubgroupCourse[]
   unplannedCourses: ViewSubgroupCourse[]
   isCoursesOverflow?: boolean
+  sortFn?: (courseA: ViewSubgroupCourse, courseB: ViewSubgroupCourse) => number
 };
 
 const CoursesSection = ({
-  title, plannedCourses, unplannedCourses, isCoursesOverflow,
+  title, plannedCourses, unplannedCourses, isCoursesOverflow, sortFn,
 }: CoursesSectionProps) => {
-  const sortByAlphaNumeric = (courseA: ViewSubgroupCourse, courseB: ViewSubgroupCourse)
-  : number => (courseA.courseCode
-      > courseB.courseCode ? 1 : -1);
-
-  const sortByLevel = (courseA: ViewSubgroupCourse, courseB: ViewSubgroupCourse)
-  : number => {
-    const courseALevel = courseA.courseCode.slice(4, 5);
-    const courseBLevel = courseB.courseCode.slice(4, 5);
-    if (courseALevel !== courseBLevel) return courseALevel > courseBLevel ? 1 : -1;
-    return courseA.courseCode > courseB.courseCode ? 1 : -1;
-  };
-
   const [modalVisible, setModalVisible] = useState(false);
-  const [courses, setCourses] = useState([...plannedCourses, ...unplannedCourses]
-    .sort(sortByLevel));
 
   if (isCoursesOverflow) {
+    plannedCourses.sort(sortFn);
     // show planned courses and view all modal
     return (
       <>
@@ -63,17 +51,11 @@ const CoursesSection = ({
     );
   }
 
+  const courses = [...plannedCourses, ...unplannedCourses].sort(sortFn);
+
   if (courses.length) {
     return (
       <S.CourseGroup>
-        <Button onClick={() => setCourses([...plannedCourses, ...unplannedCourses]
-          .sort(sortByAlphaNumeric))}
-        >Sort by alpha
-        </Button>
-        <Button onClick={() => setCourses([...plannedCourses, ...unplannedCourses]
-          .sort(sortByLevel))}
-        >Sort By Levels
-        </Button>
         {courses.map((course) => (
           <CourseBadge
             courseCode={course.courseCode}
