@@ -5,6 +5,7 @@ import {
   Routes,
 } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
+import PageLoading from 'components/PageLoading';
 import type { RootState } from 'config/store';
 import { darkTheme, GlobalStyles, lightTheme } from 'config/theme';
 import ErrorBoundary from './components/ErrorBoundary';
@@ -27,6 +28,7 @@ const App = () => {
       <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
         <GlobalStyles />
         <Router>
+          <PageLoading />
           <Routes>
             <Route path="/degree-wizard" element={<DegreeWizard />} />
             <Route path="/course-selector" element={<CourseSelector />} />
