@@ -5,8 +5,6 @@ From `/backend`, run this as:
     `python3 -m data.processors.cache_graph`
 
 Do NOT run this from it's current location.
-
-TODO: This should be moved as a command that can be run by `run_processors.py`
 """
 
 from typing import Dict, List, Optional, Tuple
