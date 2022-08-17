@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LockFilled, UnlockFilled } from '@ant-design/icons';
 import { Badge } from 'antd';
 import { useTheme } from 'styled-components';
+import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
 import useMediaQuery from 'hooks/useMediaQuery';
 import { toggleTermComplete } from 'reducers/plannerSlice';
@@ -59,7 +60,7 @@ const TermBox = ({
     boxShadow: 'none',
   };
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Spinner text="Loading Term..." />}>
       <Droppable droppableId={name} isDropDisabled={isCompleted}>
         {(provided) => (
           <Badge

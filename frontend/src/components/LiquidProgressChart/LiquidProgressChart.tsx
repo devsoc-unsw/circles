@@ -2,6 +2,7 @@ import React, { Suspense, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
 import type { LiquidConfig } from '@ant-design/plots';
+import Spinner from 'components/Spinner';
 import {
   darkGrey,
   lightGrey,
@@ -87,7 +88,7 @@ const LiquidProgressChart = ({ completedUOC, totalUOC }: Props) => {
         {completedUOC} / {totalUOC} UOC
       </ReactTooltip>
       <div data-tip>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Spinner text="Loading Progress..." />}>
           <Liquid {...config} />
         </Suspense>
       </div>

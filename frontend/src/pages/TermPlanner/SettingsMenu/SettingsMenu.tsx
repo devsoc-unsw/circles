@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import { Select, Switch } from 'antd';
 import dayjs from 'dayjs';
+import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
 import { toggleSummer, updateDegreeLength, updateStartYear } from 'reducers/plannerSlice';
 import CS from '../common/styles';
@@ -46,7 +47,7 @@ const SettingsMenu = () => {
       </CS.PopupEntry>
       <CS.PopupEntry>
         <CS.MenuText>Start Year</CS.MenuText>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Spinner text="Loading Year Selector..." />}>
           <DatePicker
             onChange={handleUpdateStartYear}
             picker="year"

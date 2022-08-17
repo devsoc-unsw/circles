@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CloseOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import { useTheme } from 'styled-components';
+import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
 import useIntersectionObserver from 'hooks/useIntersectionObserver';
 import { removeTab, setActiveTab } from 'reducers/courseTabsSlice';
@@ -60,7 +61,7 @@ const DraggableTab = ({ tabName, index }: Props) => {
   };
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Spinner text="Loading..." />}>
       <Draggable key={tabName} draggableId={tabName} index={index}>
         {(draggableProvided) => (
           <S.DraggableTabWrapper

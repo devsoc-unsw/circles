@@ -5,6 +5,7 @@
 
 import React, { Suspense } from 'react';
 import type { RadialBarConfig } from '@ant-design/plots';
+import Spinner from 'components/Spinner';
 import data from './radialChartData';
 
 const RadialBar = React.lazy(() => import('@ant-design/plots').then((plot) => ({ default: plot.RadialBar })));
@@ -32,7 +33,7 @@ const RadialBarChart = () => {
     barStyle: { lineCap: 'round' },
   };
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Spinner text="Loading bar..." />}>
       <RadialBar {...config} />
     </Suspense>
   );

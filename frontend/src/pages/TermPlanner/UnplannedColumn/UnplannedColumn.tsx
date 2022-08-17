@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react';
 import { useSelector } from 'react-redux';
+import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
 import useMediaQuery from 'hooks/useMediaQuery';
 import DraggableCourse from '../DraggableCourse';
@@ -18,7 +19,7 @@ const UnplannedColumn = ({ dragging }: Props) => {
   return (
     <S.UnplannedContainer summerEnabled={isSummerEnabled}>
       <S.UnplannedTitle>Unplanned</S.UnplannedTitle>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Spinner text="Loading unplanned column..." />}>
         <Droppable droppableId="unplanned">
           {(provided) => (
             <S.UnplannedBox

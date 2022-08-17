@@ -2,6 +2,7 @@ import React, { Suspense } from 'react';
 import { useDispatch } from 'react-redux';
 import { animated, useSpring } from '@react-spring/web';
 import { Typography } from 'antd';
+import Spinner from 'components/Spinner';
 import { updateDegreeLength, updateStartYear } from 'reducers/plannerSlice';
 import springProps from '../common/spring';
 import Steps from '../common/steps';
@@ -24,7 +25,7 @@ const YearStep = ({ incrementStep }: Props) => {
         <Title level={4} className="text">
           What years do you start and finish?
         </Title>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Spinner text="Loading Year Selector..." />}>
           <RangePicker
             picker="year"
             size="large"
