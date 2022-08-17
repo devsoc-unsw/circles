@@ -443,8 +443,26 @@ def courses_unlocked_when_taken(userData: UserData, courseToBeTaken: str) -> Dic
     }
 
 
-@router.get("/termsOffered/{course}", response_model=TermsList)
-def terms_offered(course: str) -> List[str]:
+@router.get(
+    "/termsOffered/{course}",
+    response_model=TermsList,
+    responses={
+        400: {
+            "description": "The given course code could not be found in the database",
+        },
+        200: {
+            "description": "Returns the terms a course is offered in",
+            "content": {
+                "application/json": {
+                    "example": {
+                        "terms": ["21T2", "21T2", "21T3"],
+                    },
+                },
+            },
+        },
+    }
+)
+def terms_offered(course: str) -> Dict[str, List[str]]:
     """
     Returns a list of terms in which the given course is offered.
     The list of terms is only relevant for the LIVE_YEAR and may
@@ -455,13 +473,29 @@ def terms_offered(course: str) -> List[str]:
         "terms": get_course(course).get("terms", []),
     }
 
-@router.get("/legacyTermsOffered/{year}/{course}", response_model=TermsList)
-def legacy_terms_offered(course: str) -> List[str]:
+@router.get(
+    "/legacyTermsOffered/{year}/{course}",
+    response_model=TermsList,
+    responses={
+        400: {"description": "Year or Term input is incorrect"},
+        200: {
+            "description": "Returns the program structure",
+            "content": {
+                "application/json": {
+                    "example": {
+                        "terms": ["21T2", "21T2", "21T3"],
+                    }
+                }
+            },
+        },
+    }
+)
+def legacy_terms_offered(year, course: str="") -> Dict[str, List[str]]:
     """
     Equivalent to `/termsOffered` but for legacy courses.
     """
     return {
-        "terms": get_legacy_course(course).get("terms", []),
+        "terms": get_legacy_course(year, course).get("terms", []),
     }
 
 
