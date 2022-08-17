@@ -1,6 +1,5 @@
 """
-API for fetching data about programs and specialisations
-"""
+API for fetching data about programs and specialisations """
 from contextlib import suppress
 import functools
 import re
@@ -310,7 +309,8 @@ def graph(
                 }
             ]
         },
-        "err_edges": [ "CODEXXXX", ... ]
+    No longer returns 'err_edges: failed_courses' as those are suppressed and
+    caught by the processor
     """
     courses = get_structure_course_list(programCode, spec)["courses"]
     edges = []
@@ -327,7 +327,6 @@ def graph(
     return {
         "edges": edges,
         "courses": courses,
-        "err_edges": failed_courses,
     }
 
 
@@ -436,7 +435,6 @@ def proto_edges_to_edges(proto_edges: List[Dict[str, str]]) -> List[Dict[str, st
                 }
             )
     return edges
-        
 
 def prune_edges(edges: List[Dict[str, str]], courses: List[str]) -> List[Dict[str, str]]:
     """
