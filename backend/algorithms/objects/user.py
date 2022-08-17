@@ -24,7 +24,6 @@ class User:
         self.cur_courses: list[str, Tuple[int, int]] = []  # Courses in the current term
         self.program: str = None
         self.specialisations: dict[str, int] = {}
-        self.year: int = 0
 
         # Data was provided
         if data is not None:
@@ -38,14 +37,14 @@ class User:
         """
         self.courses.update(courses)
 
-    def add_current_course(self, course: str):
+    def add_current_course(self, course: Tuple[int, int | None]):
         """
         Given a course the user is taking in their current term,
         adds it to their cur_courses
         """
         self.cur_courses.append(course)
 
-    def add_current_courses(self, courses: list[str]):
+    def add_current_courses(self, courses: dict[str, Tuple[int, int | None]]):
         """
         Takes in a list of courses (represented as strings by course
         code) and, adds it to the list of current courses.
@@ -108,8 +107,6 @@ class User:
             self.specialisations = copy.deepcopy(data["specialisations"])
         if "courses" in data.keys():
             self.courses = copy.deepcopy(data["courses"])
-        if "year" in data.keys():
-            self.year = copy.deepcopy(data["year"])
 
     def get_grade(self, course: str):
         """

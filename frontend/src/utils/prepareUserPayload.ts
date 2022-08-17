@@ -10,13 +10,12 @@ type UserPayloadSpecialisations = Record<string, 1>;
 
 interface UserPayload {
   program: string
-  year: number
   courses: UserPayloadCourse
   specialisations: UserPayloadSpecialisations
 }
 
 const prepareUserPayload = (degree: DegreeSliceState, planner: PlannerSliceState): UserPayload => {
-  const { startYear, courses } = planner;
+  const { courses } = planner;
   const { programCode, specs } = degree;
 
   const specialisations: UserPayloadSpecialisations = {};
@@ -31,7 +30,6 @@ const prepareUserPayload = (degree: DegreeSliceState, planner: PlannerSliceState
     program: programCode,
     specialisations,
     courses: selectedCourses,
-    year: new Date().getFullYear() - startYear,
   };
 };
 

@@ -58,7 +58,6 @@ class UserData(BaseModel):
     program: str
     specialisations: dict
     courses: dict
-    year: int
 
 
 class CourseState(BaseModel):
@@ -106,10 +105,15 @@ class MostRecentPastTerm(TypedDict):
     T: int
 
 
+class ValidPlannerData(BaseModel):
+    program: str
+    specialisations: list[str]
+    plan: list[list[dict[str, tuple[int, int | None]]]]
+    mostRecentPastTerm: MostRecentPastTerm
+
 class PlannerData(BaseModel):
     program: str
     specialisations: list[str]
-    year: int
     plan: list[list[dict[str,  None | list[int | None]]]]
     mostRecentPastTerm: MostRecentPastTerm
     class Config:
