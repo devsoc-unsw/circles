@@ -3,7 +3,6 @@ import { resolve } from "path";
 import { defineConfig } from "vite";
 import eslint from "vite-plugin-eslint";
 import svgrPlugin from "vite-plugin-svgr";
-import { visualizer } from "rollup-plugin-visualizer";
 
 const projectRootDir = resolve(__dirname);
 
