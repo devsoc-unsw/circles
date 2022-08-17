@@ -5,6 +5,7 @@ import {
   Routes,
 } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
+import PageFallback from 'components/pageFallback/PageFallback';
 import PageLoading from 'components/PageLoading';
 import type { RootState } from 'config/store';
 import { darkTheme, GlobalStyles, lightTheme } from 'config/theme';
@@ -26,7 +27,7 @@ const App = () => {
   const { theme } = useSelector((state: RootState) => state.settings);
 
   return (
-    <Suspense fallback={<div>Loading page...</div>}>
+    <Suspense fallback={<PageFallback />}>
       <ErrorBoundary>
         <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
           <GlobalStyles />

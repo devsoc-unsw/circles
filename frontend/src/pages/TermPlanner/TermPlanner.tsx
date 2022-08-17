@@ -10,6 +10,7 @@ import { Term } from 'types/planner';
 import openNotification from 'utils/openNotification';
 import prepareCoursesForValidationPayload from 'utils/prepareCoursesForValidationPayload';
 import PageTemplate from 'components/PageTemplate';
+import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
 import {
   moveCourse, setPlannedCourseToTerm, setUnplannedCourseToTerm, toggleWarnings, unschedule,
@@ -171,7 +172,7 @@ const TermPlanner = () => {
         plannerRef={plannerPicRef}
       />
       <S.ContainerWrapper>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Spinner text="Loading Table..." />}>
           <DragDropContext
             onDragEnd={handleOnDragEnd}
             onDragStart={handleOnDragStart}

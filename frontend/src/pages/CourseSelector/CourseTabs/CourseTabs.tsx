@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { DeleteOutlined } from '@ant-design/icons';
 import { Popconfirm, Switch, Tooltip } from 'antd';
 import DraggableTab from 'components/DraggableTab';
+import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
 import { reorderTabs, resetTabs, setActiveTab } from 'reducers/courseTabsSlice';
 import { toggleLockedCourses } from 'reducers/settingsSlice';
@@ -48,7 +49,7 @@ const CourseTabs = () => {
           onChange={() => dispatch(toggleLockedCourses())}
         />
       </S.ShowAllCourses>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Spinner text="Loading tabs..." />}>
         <DragDropContext onDragEnd={handleOnDragEnd} onDragStart={handleOnDragStart}>
           <Droppable droppableId="droppable" direction="horizontal">
             {(droppableProvided) => (

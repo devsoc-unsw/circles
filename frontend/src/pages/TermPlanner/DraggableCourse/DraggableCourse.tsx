@@ -5,6 +5,7 @@ import ReactTooltip from 'react-tooltip';
 import { InfoCircleOutlined, WarningOutlined } from '@ant-design/icons';
 import { Typography } from 'antd';
 import { useTheme } from 'styled-components';
+import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
 import useMediaQuery from 'hooks/useMediaQuery';
 import ContextMenu from '../ContextMenu';
@@ -56,7 +57,7 @@ const DraggableCourse = ({ code, index, term }: Props) => {
 
   return (
     <>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Spinner text="Loading Course..." />}>
         <Draggable
           isDragDisabled={isDragDisabled}
           draggableId={`${code}${term}`}
