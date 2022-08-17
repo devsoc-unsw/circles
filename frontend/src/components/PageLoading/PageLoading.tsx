@@ -14,7 +14,7 @@ const PageLoading = () => {
 
   useEffect(() => {
     // check if this is a first time user
-    navigate(!degree.isComplete ? '/degree-wizard' : route);
+    navigate(!degree.isComplete ? '/degree-wizard' : route, { replace: true });
   }, [degree.isComplete, navigate, route]);
 
   return null;
