@@ -37,7 +37,7 @@ class CourseDetails(BaseModel):
     gen_ed: bool
     is_legacy: bool
     is_accurate: bool
-    is_multiterm: bool
+    is_multiterm: Optional[bool]
 
 
 class ContainerContent(TypedDict):
@@ -177,6 +177,9 @@ class Graph(BaseModel):
     courses: list[str]
     # tuple is of type (str, fastapi.exceptions.HTTPException)
     err_edges: list[tuple]
+
+class TermsList(BaseModel):
+    terms: list[str]
 
 
 
