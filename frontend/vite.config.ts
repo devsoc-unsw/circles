@@ -1,9 +1,8 @@
 import react from "@vitejs/plugin-react";
 import { resolve } from "path";
-import { defineConfig } from "vite";
+import { defineConfig, splitVendorChunkPlugin } from "vite";
 import eslint from "vite-plugin-eslint";
 import svgrPlugin from "vite-plugin-svgr";
-import { visualizer } from "rollup-plugin-visualizer";
 
 const projectRootDir = resolve(__dirname);
 
@@ -25,7 +24,8 @@ export default defineConfig({
         // ...svgr options (https://react-svgr.com/docs/options/)
       },
     }),
-    eslint()
+    eslint(),
+    splitVendorChunkPlugin()
   ],
   resolve: {
     alias: [
