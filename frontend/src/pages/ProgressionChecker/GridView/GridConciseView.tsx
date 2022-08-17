@@ -57,7 +57,7 @@ const GridConciseView = ({
           >
             <CoursesSection
               title={subgroupKey}
-              isCoursesOverflow={isCoursesOverflow}
+              isCoursesOverflow={false}
               plannedCourses={[]}
               unplannedCourses={unplannedCourses}
             />
