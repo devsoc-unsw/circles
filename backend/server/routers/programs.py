@@ -346,7 +346,6 @@ def course_list_from_structure(structure: dict) -> list[str]:
             Recursively search for courses in a structure. Add
             courses found to `courses` object in upper group.
         """
-        print(structure.keys())
         if not isinstance(structure, (list, dict)):
             return
         for k, v in structure.items():

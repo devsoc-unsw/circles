@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import type { OnDragEndResponder, OnDragStartResponder } from 'react-beautiful-dnd';
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { useDispatch, useSelector } from 'react-redux';
 import { DeleteOutlined } from '@ant-design/icons';
 import { Popconfirm, Switch, Tooltip } from 'antd';
 import DraggableTab from 'components/DraggableTab';
+import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
 import { reorderTabs, resetTabs, setActiveTab } from 'reducers/courseTabsSlice';
 import { toggleLockedCourses } from 'reducers/settingsSlice';
 import S from './styles';
+
+const DragDropContext = React.lazy(() => import('react-beautiful-dnd').then((plot) => ({ default: plot.DragDropContext })));
+const Droppable = React.lazy(() => import('react-beautiful-dnd').then((plot) => ({ default: plot.Droppable })));
 
 const CourseTabs = () => {
   const dispatch = useDispatch();
@@ -46,21 +49,23 @@ const CourseTabs = () => {
           onChange={() => dispatch(toggleLockedCourses())}
         />
       </S.ShowAllCourses>
-      <DragDropContext onDragEnd={handleOnDragEnd} onDragStart={handleOnDragStart}>
-        <Droppable droppableId="droppable" direction="horizontal">
-          {(droppableProvided) => (
-            <S.CourseTabsSection
-              ref={droppableProvided.innerRef}
-              {...droppableProvided.droppableProps}
-            >
-              {tabs.map((tab, index) => (
-                <DraggableTab tabName={tab} index={index} />
-              ))}
-              {droppableProvided.placeholder}
-            </S.CourseTabsSection>
-          )}
-        </Droppable>
-      </DragDropContext>
+      <Suspense fallback={<Spinner text="Loading tabs..." />}>
+        <DragDropContext onDragEnd={handleOnDragEnd} onDragStart={handleOnDragStart}>
+          <Droppable droppableId="droppable" direction="horizontal">
+            {(droppableProvided) => (
+              <S.CourseTabsSection
+                ref={droppableProvided.innerRef}
+                {...droppableProvided.droppableProps}
+              >
+                {tabs.map((tab, index) => (
+                  <DraggableTab tabName={tab} index={index} />
+                ))}
+                {droppableProvided.placeholder}
+              </S.CourseTabsSection>
+            )}
+          </Droppable>
+        </DragDropContext>
+      </Suspense>
       {
         !!tabs.length
         && (

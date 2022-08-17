@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
-import { DatePicker, Select, Switch } from 'antd';
-import type { Moment } from 'moment';
-import moment from 'moment';
+import { Select, Switch } from 'antd';
+import dayjs from 'dayjs';
+import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
 import { toggleSummer, updateDegreeLength, updateStartYear } from 'reducers/plannerSlice';
 import CS from '../common/styles';
+
+const DatePicker = React.lazy(() => import('../../../components/Datepicker'));
 
 const SettingsMenu = () => {
   const { Option } = Select;
@@ -14,7 +16,7 @@ const SettingsMenu = () => {
 
   const dispatch = useDispatch();
 
-  function handleUpdateStartYear(_: Moment | null, dateString: string) {
+  function handleUpdateStartYear(_: dayjs.Dayjs | null, dateString: string) {
     if (dateString) {
       dispatch(updateStartYear(parseInt(dateString, 10)));
     }
@@ -45,12 +47,14 @@ const SettingsMenu = () => {
       </CS.PopupEntry>
       <CS.PopupEntry>
         <CS.MenuText>Start Year</CS.MenuText>
-        <DatePicker
-          onChange={handleUpdateStartYear}
-          picker="year"
-          style={{ width: 105 }}
-          value={moment(startYear, 'YYYY')}
-        />
+        <Suspense fallback={<Spinner text="Loading Year Selector..." />}>
+          <DatePicker
+            onChange={handleUpdateStartYear}
+            picker="year"
+            style={{ width: 105 }}
+            value={dayjs().year(startYear)}
+          />
+        </Suspense>
       </CS.PopupEntry>
       <CS.PopupEntry>
         <CS.MenuText>Degree Length</CS.MenuText>
