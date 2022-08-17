@@ -7,7 +7,7 @@ import type { RootState } from 'config/store';
 import { toggleSummer, updateDegreeLength, updateStartYear } from 'reducers/plannerSlice';
 import CS from '../common/styles';
 
-const DatePicker = React.lazy(() => import('./Datepicker'));
+const DatePicker = React.lazy(() => import('../../../components/Datepicker'));
 
 const SettingsMenu = () => {
   const { Option } = Select;
