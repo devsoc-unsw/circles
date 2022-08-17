@@ -3,10 +3,11 @@
 
 // TODO: fix typescript eslint here
 
-import React from 'react';
-import type { RadialBarConfig } from '@ant-design/charts';
-import { RadialBar } from '@ant-design/charts';
+import React, { Suspense } from 'react';
+import type { RadialBarConfig } from '@ant-design/plots';
 import data from './radialChartData';
+
+const RadialBar = React.lazy(() => import('@ant-design/plots').then((plot) => ({ default: plot.RadialBar })));
 
 const RadialBarChart = () => {
   const config: RadialBarConfig = {
@@ -30,7 +31,11 @@ const RadialBarChart = () => {
     barBackground: {},
     barStyle: { lineCap: 'round' },
   };
-  return <RadialBar {...config} />;
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <RadialBar {...config} />
+    </Suspense>
+  );
 };
 
 export default RadialBarChart;

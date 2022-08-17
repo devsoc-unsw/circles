@@ -1,5 +1,4 @@
-import React from 'react';
-import { Droppable } from 'react-beautiful-dnd';
+import React, { Suspense } from 'react';
 import { useSelector } from 'react-redux';
 import type { RootState } from 'config/store';
 import useMediaQuery from 'hooks/useMediaQuery';
@@ -10,6 +9,8 @@ type Props = {
   dragging: boolean
 };
 
+const Droppable = React.lazy(() => import('react-beautiful-dnd').then((plot) => ({ default: plot.Droppable })));
+
 const UnplannedColumn = ({ dragging }: Props) => {
   const { isSummerEnabled, unplanned } = useSelector((state: RootState) => state.planner);
   const isSmall = useMediaQuery('(max-width: 1400px)');
@@ -17,27 +18,29 @@ const UnplannedColumn = ({ dragging }: Props) => {
   return (
     <S.UnplannedContainer summerEnabled={isSummerEnabled}>
       <S.UnplannedTitle>Unplanned</S.UnplannedTitle>
-      <Droppable droppableId="unplanned">
-        {(provided) => (
-          <S.UnplannedBox
-            ref={provided.innerRef}
-            {...provided.droppableProps}
-            summerEnabled={isSummerEnabled}
-            droppable={dragging}
-            isSmall={isSmall}
-          >
-            {unplanned.map((course, courseIndex) => (
-              <DraggableCourse
-                code={course}
-                index={courseIndex}
-                key={course}
-                term=""
-              />
-            ))}
-            {provided.placeholder}
-          </S.UnplannedBox>
-        )}
-      </Droppable>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Droppable droppableId="unplanned">
+          {(provided) => (
+            <S.UnplannedBox
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+              summerEnabled={isSummerEnabled}
+              droppable={dragging}
+              isSmall={isSmall}
+            >
+              {unplanned.map((course, courseIndex) => (
+                <DraggableCourse
+                  code={course}
+                  index={courseIndex}
+                  key={course}
+                  term=""
+                />
+              ))}
+              {provided.placeholder}
+            </S.UnplannedBox>
+          )}
+        </Droppable>
+      </Suspense>
     </S.UnplannedContainer>
   );
 };

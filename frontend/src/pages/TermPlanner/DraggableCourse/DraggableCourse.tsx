@@ -1,5 +1,4 @@
-import React from 'react';
-import { Draggable } from 'react-beautiful-dnd';
+import React, { Suspense } from 'react';
 import { useContextMenu } from 'react-contexify';
 import { useSelector } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
@@ -16,6 +15,8 @@ type Props = {
   index: number
   term: string
 };
+
+const Draggable = React.lazy(() => import('react-beautiful-dnd').then((plot) => ({ default: plot.Draggable })));
 
 const DraggableCourse = ({ code, index, term }: Props) => {
   const {
@@ -55,65 +56,66 @@ const DraggableCourse = ({ code, index, term }: Props) => {
 
   return (
     <>
-      <Draggable
-        isDragDisabled={isDragDisabled}
-        draggableId={`${code}${term}`}
-        index={index}
-      >
-        {(provided) => (
-          <S.CourseWrapper
-            summerEnabled={isSummerEnabled}
-            isSmall={isSmall}
-            dragDisabled={isDragDisabled}
-            warningsDisabled={isDragDisabled && !isUnlocked}
-            isWarning={!supressed && (!isUnlocked || !isOffered)}
-            {...provided.draggableProps}
-            {...provided.dragHandleProps}
-            ref={provided.innerRef}
-            style={provided.draggableProps.style}
-            data-tip
-            data-for={code}
-            id={code}
-            onContextMenu={handleContextMenu}
-          >
-            {!isDragDisabled && shouldHaveWarning
-              && (errorIsInformational ? (
-                <InfoCircleOutlined
-                  style={{ color: theme.infoOutlined.color }}
-                />
-              ) : (
-                <WarningOutlined
-                  style={{ fontSize: '16px', color: theme.warningOutlined.color }}
-                />
-              ))}
-            <S.CourseLabel>
-              {isSmall ? (
-                <Text className="text">{code}</Text>
-              ) : (
-                <div>
-                  <Text className="text">
-                    <strong>{code}: </strong>
-                    {title}
-                  </Text>
-                </div>
-              )}
-              {showMarks && (
-                <div>
-                  <Text strong className="text">Mark: </Text>
-                  <Text className="text">
-                    {/*
+      <Suspense fallback={<div>Loading...</div>}>
+        <Draggable
+          isDragDisabled={isDragDisabled}
+          draggableId={`${code}${term}`}
+          index={index}
+        >
+          {(provided) => (
+            <S.CourseWrapper
+              summerEnabled={isSummerEnabled}
+              isSmall={isSmall}
+              dragDisabled={isDragDisabled}
+              warningsDisabled={isDragDisabled && !isUnlocked}
+              isWarning={!supressed && (!isUnlocked || !isOffered)}
+              {...provided.draggableProps}
+              {...provided.dragHandleProps}
+              ref={provided.innerRef}
+              style={provided.draggableProps.style}
+              data-tip
+              data-for={code}
+              id={code}
+              onContextMenu={handleContextMenu}
+            >
+              {!isDragDisabled && shouldHaveWarning
+                && (errorIsInformational ? (
+                  <InfoCircleOutlined
+                    style={{ color: theme.infoOutlined.color }}
+                  />
+                ) : (
+                  <WarningOutlined
+                    style={{ fontSize: '16px', color: theme.warningOutlined.color }}
+                  />
+                ))}
+              <S.CourseLabel>
+                {isSmall ? (
+                  <Text className="text">{code}</Text>
+                ) : (
+                  <div>
+                    <Text className="text">
+                      <strong>{code}: </strong>
+                      {title}
+                    </Text>
+                  </div>
+                )}
+                {showMarks && (
+                  <div>
+                    <Text strong className="text">Mark: </Text>
+                    <Text className="text">
+                      {/*
                       Marks can be strings (i.e. HD, CR) or a number (i.e. 90, 85).
                       Mark can be 0.
                     */}
-                    {typeof mark === 'string' || typeof mark === 'number' ? mark : 'N/A'}
-                  </Text>
-                </div>
-              )}
-            </S.CourseLabel>
-          </S.CourseWrapper>
-        )}
-      </Draggable>
-      <ContextMenu code={code} plannedFor={plannedFor} />
+                      {typeof mark === 'string' || typeof mark === 'number' ? mark : 'N/A'}
+                    </Text>
+                  </div>
+                )}
+              </S.CourseLabel>
+            </S.CourseWrapper>
+          )}
+        </Draggable>
+      </Suspense><ContextMenu code={code} plannedFor={plannedFor} />
       {/* display prereq tooltip for all courses. However, if a term is marked as complete
         and the course has no warning, then disable the tooltip */}
       {isSmall && (

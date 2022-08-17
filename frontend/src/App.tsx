@@ -5,9 +5,9 @@ import {
   Routes,
 } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-import ErrorBoundary from 'components/ErrorBoundary';
 import type { RootState } from 'config/store';
 import { darkTheme, GlobalStyles, lightTheme } from 'config/theme';
+import ErrorBoundary from './components/ErrorBoundary';
 import PageLoading from './components/PageLoading';
 import CourseSelector from './pages/CourseSelector';
 import DegreeWizard from './pages/DegreeWizard';
