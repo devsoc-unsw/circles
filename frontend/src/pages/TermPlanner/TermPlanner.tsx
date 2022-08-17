@@ -10,8 +10,8 @@ import { Term } from 'types/planner';
 import openNotification from 'utils/openNotification';
 import prepareCoursesForValidationPayload from 'utils/prepareCoursesForValidationPayload';
 import PageTemplate from 'components/PageTemplate';
-import type { RootState } from 'config/store';
 import Spinner from 'components/Spinner';
+import type { RootState } from 'config/store';
 import {
   moveCourse, setPlannedCourseToTerm, setUnplannedCourseToTerm, toggleWarnings, unschedule,
 } from 'reducers/plannerSlice';
