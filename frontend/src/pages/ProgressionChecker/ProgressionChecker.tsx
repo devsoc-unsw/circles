@@ -10,7 +10,7 @@ import { Button, Divider, Typography } from 'antd';
 import axios from 'axios';
 import { Structure } from 'types/api';
 import {
-  ProgressionOverflowCourses,
+  ProgressionAdditionalCourses,
   ProgressionViewStructure, Views, ViewSubgroup, ViewSubgroupCourse,
 } from 'types/progressionViews';
 import { ProgramStructure } from 'types/structure';
@@ -19,6 +19,7 @@ import Collapsible from 'components/Collapsible';
 import PageTemplate from 'components/PageTemplate';
 import { inDev, MAX_COURSES_OVERFLOW } from 'config/constants';
 import type { RootState } from 'config/store';
+import AdditionalElectivesSection from './AdditionalElectivesSection';
 import Dashboard from './Dashboard';
 import GridView from './GridView';
 import S from './styles';
@@ -37,7 +38,7 @@ const ProgressionCheckerCourses = ({ structure }: Props) => {
 
   const countedCourses: string[] = [];
   const newViewLayout: ProgressionViewStructure = {};
-  const overflowCourses: ProgressionOverflowCourses = {};
+  const overflowCourses: ProgressionAdditionalCourses = {};
 
   const generateViewStructure = () => {
     // Example groups: Major, Minor, General, Rules
@@ -194,31 +195,7 @@ const ProgressionCheckerCourses = ({ structure }: Props) => {
           )}
         </Collapsible>
       ))}
-      <Collapsible
-        title={(
-          <Title level={1} className="text">
-            Free Electives
-          </Title>
-        )}
-      >
-        { view === Views.TABLE
-          ? (
-            <TableView
-              uoc={999}
-              subgroupTitle="Free Electives"
-              courses={Object.values(overflowCourses)}
-            />
-          )
-          : (
-            <GridView
-              uoc={999}
-              subgroupTitle="Free Electives"
-              isCoursesOverflow={false}
-              courses={Object.values(overflowCourses)}
-              isConcise={view === Views.GRID_CONCISE}
-            />
-          )}
-      </Collapsible>
+      <AdditionalElectivesSection courses={Object.values(overflowCourses)} />
     </S.ProgressionViewContainer>
   );
 };

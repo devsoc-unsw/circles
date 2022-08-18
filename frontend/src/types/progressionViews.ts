@@ -22,7 +22,7 @@ export type ProgressionViewStructure = {
   }
 };
 
-export type ProgressionOverflowCourses = Record<string, ViewSubgroupCourse>;
+export type ProgressionAdditionalCourses = Record<string, ViewSubgroupCourse>;
 
 /* GridView types */
 export enum Views {
