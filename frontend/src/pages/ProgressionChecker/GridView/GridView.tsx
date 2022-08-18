@@ -33,8 +33,8 @@ const GridView = ({
       0,
     );
 
-  const plannedCourses = courses.filter((c) => c.plannedFor);
-  const unplannedCourses = courses.filter((c) => !c.plannedFor);
+  const plannedCourses = courses.filter((c) => c.plannedFor && !c.isOverCounted);
+  const unplannedCourses = courses.filter((c) => !c.plannedFor || c.isOverCounted);
 
   const [sortFn, setSortFn] = useState(SortFn.AlphaNumeric);
 

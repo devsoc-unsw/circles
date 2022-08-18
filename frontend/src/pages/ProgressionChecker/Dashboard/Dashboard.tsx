@@ -71,11 +71,13 @@ const Dashboard = ({ isLoading, structure, totalUOC }: Props) => {
       const isRule = subgroupStructure.type && subgroupStructure.type.includes('rule');
 
       if (subgroupStructure.courses && !isRule) {
+        let currUOC = 0;
         // only consider disciplinary component courses
         Object.keys(subgroupStructure.courses).forEach((courseCode) => {
-          if (courses[courseCode]?.plannedFor) {
+          if (courses[courseCode]?.plannedFor && currUOC < subgroupStructure.UOC) {
             storeUOC[group].curr += courses[courseCode].UOC
               * getNumTerms(courses[courseCode].UOC, courses[courseCode].isMultiterm);
+            currUOC += courses[courseCode].UOC;
           }
         });
       }

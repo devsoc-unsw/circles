@@ -9,7 +9,10 @@ import {
 import { Button, Divider, Typography } from 'antd';
 import axios from 'axios';
 import { Structure } from 'types/api';
-import { ProgressionViewStructure, Views, ViewSubgroup } from 'types/progressionViews';
+import {
+  ProgressionOverflowCourses,
+  ProgressionViewStructure, Views, ViewSubgroup, ViewSubgroupCourse,
+} from 'types/progressionViews';
 import { ProgramStructure } from 'types/structure';
 import openNotification from 'utils/openNotification';
 import Collapsible from 'components/Collapsible';
@@ -33,10 +36,10 @@ const ProgressionCheckerCourses = ({ structure }: Props) => {
   const { courses, unplanned } = useSelector((store: RootState) => store.planner);
 
   const countedCourses: string[] = [];
+  const newViewLayout: ProgressionViewStructure = {};
+  const overflowCourses: ProgressionOverflowCourses = {};
 
   const generateViewStructure = () => {
-    const newViewLayout: ProgressionViewStructure = {};
-
     // Example groups: Major, Minor, General, Rules
     Object.keys(structure).forEach((group) => {
       newViewLayout[group] = {};
@@ -45,19 +48,30 @@ const ProgressionCheckerCourses = ({ structure }: Props) => {
       Object.keys(structure[group].content).forEach((subgroup) => {
         const subgroupStructure = structure[group].content[subgroup];
 
+        const isRule = subgroupStructure.type.includes('rule');
+        const isGenEd = subgroupStructure.type.includes('gened');
+        const isElectives = subgroupStructure.type.includes('electives');
+
         newViewLayout[group][subgroup] = {
           // section types with gened or rule/elective substring can have their
           // courses hidden as a modal
-          isCoursesOverflow: subgroupStructure.type.includes('gened')
-            || subgroupStructure.type.includes('rule')
-            || subgroupStructure.type.includes('electives')
+          isCoursesOverflow: isGenEd || isRule || isElectives
             || Object.keys(subgroupStructure.courses).length > MAX_COURSES_OVERFLOW,
           courses: [],
         };
 
+        let currUOC = 0;
+
         // only consider disciplinary component courses
         Object.keys(subgroupStructure.courses).forEach((courseCode) => {
-          newViewLayout[group][subgroup].courses.push({
+          // overcounted when course is planned but subgroup structure UOC
+          // requirement is already met
+          // only exception is Rules where it should display all courses
+          const isOverCounted = !!courses[courseCode]?.plannedFor
+            && currUOC >= subgroupStructure.UOC
+            && !isRule;
+
+          const course: ViewSubgroupCourse = {
             courseCode,
             title: subgroupStructure.courses[courseCode],
             UOC: courses[courseCode]?.UOC || 0,
@@ -65,10 +79,27 @@ const ProgressionCheckerCourses = ({ structure }: Props) => {
             isUnplanned: unplanned.includes(courseCode),
             isMultiterm: !!courses[courseCode]?.isMultiterm,
             isDoubleCounted: countedCourses.includes(courseCode) && !/Core/.test(subgroup) && !group.includes('Rules'),
-          });
-          if (courses[courseCode]?.plannedFor && !countedCourses.includes(courseCode)) {
+            isOverCounted,
+          };
+
+          newViewLayout[group][subgroup].courses.push(course);
+          if (courses[courseCode]?.plannedFor
+            && !isOverCounted
+            && !countedCourses.includes(courseCode)
+          ) {
             countedCourses.push(courseCode);
           }
+
+          // adjust overflow courses
+          if (!isRule) {
+            if (!isOverCounted && overflowCourses[course.courseCode]) {
+              delete overflowCourses[course.courseCode];
+            } else if (isOverCounted) {
+              overflowCourses[course.courseCode] = course;
+            }
+          }
+
+          currUOC += courses[courseCode]?.UOC ?? 0;
         });
 
         newViewLayout[group][subgroup].courses.sort(
@@ -163,6 +194,31 @@ const ProgressionCheckerCourses = ({ structure }: Props) => {
           )}
         </Collapsible>
       ))}
+      <Collapsible
+        title={(
+          <Title level={1} className="text">
+            Free Electives
+          </Title>
+        )}
+      >
+        { view === Views.TABLE
+          ? (
+            <TableView
+              uoc={999}
+              subgroupTitle="Free Electives"
+              courses={Object.values(overflowCourses)}
+            />
+          )
+          : (
+            <GridView
+              uoc={999}
+              subgroupTitle="Free Electives"
+              isCoursesOverflow={false}
+              courses={Object.values(overflowCourses)}
+              isConcise={view === Views.GRID_CONCISE}
+            />
+          )}
+      </Collapsible>
     </S.ProgressionViewContainer>
   );
 };
