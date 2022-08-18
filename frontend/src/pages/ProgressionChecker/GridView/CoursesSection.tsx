@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Empty } from 'antd';
 import { ViewSubgroupCourse } from 'types/progressionViews';
 import CourseBadge from '../CourseBadge';
-import CourseListModal from '../CoursesModal';
+import CoursesModal from '../CoursesModal';
 import S from './styles';
 
 type CoursesSectionProps = {
@@ -40,7 +40,7 @@ const CoursesSection = ({
           <Button type="primary" onClick={() => setModalVisible(true)}>
             View Courses
           </Button>
-          <CourseListModal
+          <CoursesModal
             title={title}
             modalVisible={modalVisible}
             setModalVisible={setModalVisible}
