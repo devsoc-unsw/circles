@@ -5,7 +5,7 @@ to actual condition objects.
 
 import json
 import re
-from typing import Tuple
+from typing import Optional, Tuple
 
 from algorithms.objects.categories import (
     Category,
@@ -135,7 +135,7 @@ def create_category(tokens) -> Tuple[Category | None, int]: # pylint: disable=to
     )
 
 
-def create_condition(tokens, course=None) -> CompositeCondition | None:
+def create_condition(tokens, course=None) -> Optional[CompositeCondition]:
     """
     The main wrapper for make_condition so we don't get 2 returns.
     Given the parsed logical tokens list (assuming starting and ending bracket),
@@ -145,7 +145,7 @@ def create_condition(tokens, course=None) -> CompositeCondition | None:
     return make_condition(tokens, True, course)[0]
 
 
-def make_condition(tokens, first=False, course=None) -> Tuple[CompositeCondition | None, int]:
+def make_condition(tokens, first=False, course=None) -> Tuple[Optional[CompositeCondition], int]:
     """
     To be called by create_condition
     Given the parsed logical tokens list, (assuming starting and ending bracket),
