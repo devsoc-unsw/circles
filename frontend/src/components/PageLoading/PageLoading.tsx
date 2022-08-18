@@ -1,23 +1,11 @@
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
-import type { RootState } from 'config/store';
+import React from 'react';
+import circlesLogo from 'assets/circlesWithBg.svg';
+import S from './styles';
 
-const PageLoading = () => {
-  const navigate = useNavigate();
-
-  const degree = useSelector((state: RootState) => state.degree);
-
-  const { pathname } = useLocation();
-  // redirect index page to course selector
-  const route = pathname === '/' ? '/course-selector' : pathname;
-
-  useEffect(() => {
-    // check if this is a first time user
-    navigate(!degree.isComplete ? '/degree-wizard' : route, { replace: true });
-  }, [degree.isComplete, navigate, route]);
-
-  return null;
-};
+const PageLoading = () => (
+  <S.PageWrapper>
+    <S.LoadingLogo src={circlesLogo} alt="Circles Logo" />
+  </S.PageWrapper>
+);
 
 export default PageLoading;

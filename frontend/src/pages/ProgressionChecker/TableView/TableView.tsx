@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Table, Typography } from 'antd';
 import { ViewSubgroupCourse } from 'types/progressionViews';
-import CourseListModal from '../CoursesModal';
+import CoursesModal from '../CoursesModal';
 import S from './styles';
 
 type Props = {
@@ -59,7 +59,7 @@ const TableView = ({ subgroupTitle, courses, uoc }: Props) => {
         <Button type="primary" onClick={() => setModalVisible(true)}>
           View Courses
         </Button>
-        <CourseListModal
+        <CoursesModal
           title={subgroupTitle}
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
