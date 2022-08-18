@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { Button, Typography } from 'antd';
+import { FaSortAlphaDown, FaSortNumericDown } from 'react-icons/fa';
+import { Tooltip, Typography } from 'antd';
 import { ViewSubgroupCourse } from 'types/progressionViews';
 import getNumTerms from 'utils/getNumTerms';
+import { sortByAlphaNumeric, sortByLevel, SortFn } from 'utils/sortCourses';
 import Collapsible from 'components/Collapsible';
-import { sortByAlphaNumeric, sortByLevel, SortFn } from '../sortUtils';
 import CoursesSection from './CoursesSection';
+import S from './styles';
 
 type Props = {
   uoc: number
@@ -35,13 +37,17 @@ const GridConciseView = ({
   return (
     <>
       <Title level={2} className="text">{subgroupKey}</Title>
-      <div>
+      <S.TitleSortWrapper>
         <Title level={3} className="text">{uoc} UOC of the following courses</Title>
-        <div>
-          <Button onClick={() => setSortFn(SortFn.AlphaNumeric)}>Sort By AlphaNumeric</Button>
-          <Button onClick={() => setSortFn(SortFn.Level)}>Sort By Level</Button>
-        </div>
-      </div>
+        <S.SortBtnWrapper>
+          <Tooltip title="Sort by Alphaphet">
+            <FaSortAlphaDown onClick={() => setSortFn(SortFn.AlphaNumeric)} />
+          </Tooltip>
+          <Tooltip title="Sort by Course Level">
+            <FaSortNumericDown onClick={() => setSortFn(SortFn.Level)} />
+          </Tooltip>
+        </S.SortBtnWrapper>
+      </S.TitleSortWrapper>
       {!!courses.length && (
         <>
           <Collapsible
