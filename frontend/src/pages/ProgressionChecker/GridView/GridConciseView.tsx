@@ -5,6 +5,7 @@ import { ViewSubgroupCourse } from 'types/progressionViews';
 import getNumTerms from 'utils/getNumTerms';
 import { sortByAlphaNumeric, sortByLevel, SortFn } from 'utils/sortCourses';
 import Collapsible from 'components/Collapsible';
+import { COURSES_INITIALLY_COLLAPSED } from 'config/constants';
 import CoursesSection from './CoursesSection';
 import S from './styles';
 
@@ -40,11 +41,11 @@ const GridConciseView = ({
       <S.TitleSortWrapper>
         <Title level={3} className="text">{uoc} UOC of the following courses</Title>
         <S.SortBtnWrapper>
-          <Tooltip title="Sort by Alphaphet">
-            <FaSortAlphaDown onClick={() => setSortFn(SortFn.AlphaNumeric)} />
+          <Tooltip title="Sort by Alphabet">
+            <FaSortAlphaDown color={sortFn === SortFn.AlphaNumeric ? '#9254de' : undefined} onClick={() => setSortFn(SortFn.AlphaNumeric)} />
           </Tooltip>
           <Tooltip title="Sort by Course Level">
-            <FaSortNumericDown onClick={() => setSortFn(SortFn.Level)} />
+            <FaSortNumericDown color={sortFn === SortFn.Level ? '#9254de' : undefined} onClick={() => setSortFn(SortFn.Level)} />
           </Tooltip>
         </S.SortBtnWrapper>
       </S.TitleSortWrapper>
@@ -68,12 +69,13 @@ const GridConciseView = ({
             initiallyCollapsed={
               !remainingUOC
               || (!isCoursesOverflow
-              && (unplannedCourses.length > 16 || !unplannedCourses.length))
+              && (unplannedCourses.length > COURSES_INITIALLY_COLLAPSED
+                || !unplannedCourses.length))
             }
           >
             <CoursesSection
               title={subgroupKey}
-              isCoursesOverflow={false}
+              isCoursesOverflow={isCoursesOverflow}
               plannedCourses={[]}
               unplannedCourses={unplannedCourses}
               sortFn={sortFn === SortFn.AlphaNumeric ? sortByAlphaNumeric : sortByLevel}

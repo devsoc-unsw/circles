@@ -55,11 +55,11 @@ const GridView = ({
       <S.TitleSortWrapper>
         <Title level={3} className="text">{uoc} UOC of the following courses ({Math.max(uoc - plannedUOC, 0)} UOC remaining)</Title>
         <S.SortBtnWrapper>
-          <Tooltip title="Sort by Alphaphet">
-            <FaSortAlphaDown onClick={() => setSortFn(SortFn.AlphaNumeric)} />
+          <Tooltip title="Sort by Alphabet">
+            <FaSortAlphaDown color={sortFn === SortFn.AlphaNumeric ? '#9254de' : undefined} onClick={() => setSortFn(SortFn.AlphaNumeric)} />
           </Tooltip>
           <Tooltip title="Sort by Course Level">
-            <FaSortNumericDown onClick={() => setSortFn(SortFn.Level)} />
+            <FaSortNumericDown color={sortFn === SortFn.Level ? '#9254de' : undefined} onClick={() => setSortFn(SortFn.Level)} />
           </Tooltip>
         </S.SortBtnWrapper>
       </S.TitleSortWrapper>

@@ -15,3 +15,6 @@ export const purple = '#9254de';
 export const lightPurple = '#efdbff';
 
 export const inDev = import.meta.env.MODE !== 'production';
+
+export const MAX_COURSES_OVERFLOW = 80;
+export const COURSES_INITIALLY_COLLAPSED = 16;
