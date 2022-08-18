@@ -38,10 +38,24 @@ const CourseList = styled.div`
   overflow-x: hidden;
 `;
 
+const SortBtnWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 10px;
+  margin-right: 15px;
+
+  & > * {
+    cursor: pointer;
+    font-size: 1.25rem;
+  }
+`;
+
 export default {
   ModalHeader,
   ModalTitle,
   Instruction,
   CourseModal,
   CourseList,
+  SortBtnWrapper,
 };
