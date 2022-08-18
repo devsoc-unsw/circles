@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { notification } from 'antd';
 import axios from 'axios';
 import { Structure } from 'types/api';
 import { ProgramStructure } from 'types/structure';
+import openNotification from 'utils/openNotification';
 import PageTemplate from 'components/PageTemplate';
 import type { RootState } from 'config/store';
 import CourseBanner from './CourseBanner';
@@ -21,17 +21,14 @@ const CourseSelector = () => {
   const { courses } = useSelector((state: RootState) => state.planner);
 
   useEffect(() => {
-    const openNotification = () => {
-      notification.info({
+    // only open for users with no courses
+    if (!Object.keys(courses).length) {
+      openNotification({
+        type: 'info',
         message: 'How do I see more sidebar courses?',
         description: 'Courses are shown as you meet the requirements to take them. Any course can also be selected via the search bar.',
-        duration: 5,
-        placement: 'bottomRight',
       });
-    };
-
-    // only open for users with no courses
-    if (!Object.keys(courses).length) openNotification();
+    }
   }, [courses]);
 
   useEffect(() => {

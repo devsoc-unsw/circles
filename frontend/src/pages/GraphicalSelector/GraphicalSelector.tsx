@@ -1,9 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { LockOutlined, UnlockOutlined } from '@ant-design/icons';
-import { breadthFirstSearch } from '@antv/algorithm';
 import type { Graph, INode, Item } from '@antv/g6';
-import G6 from '@antv/g6';
 import { Button, Switch, Tooltip } from 'antd';
 import axios from 'axios';
 import {
@@ -42,11 +40,12 @@ const GraphicalSelector = () => {
 
   useEffect(() => {
     // courses is a list of course codes
-    const initialiseGraph = (courses: string[], courseEdges: CourseEdge[]) => {
+    const initialiseGraph = async (courses: string[], courseEdges: CourseEdge[]) => {
       const container = ref.current;
       if (!container) return;
-
-      const graphInstance = new G6.Graph({
+      const { Graph, Arrow } = await import('@antv/g6');
+      const { breadthFirstSearch } = await import('@antv/algorithm');
+      const graphInstance = new Graph({
         container,
         width: container.scrollWidth,
         height: container.scrollHeight,
@@ -66,7 +65,7 @@ const GraphicalSelector = () => {
         },
         // animate: true,
         defaultNode: GRAPH_STYLE.defaultNode,
-        defaultEdge: GRAPH_STYLE.defaultEdge,
+        defaultEdge: GRAPH_STYLE.defaultEdge(Arrow),
         nodeStateStyles: GRAPH_STYLE.nodeStateStyles,
       });
 

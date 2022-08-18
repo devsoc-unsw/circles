@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Empty } from 'antd';
 import { ViewSubgroupCourse } from 'types/progressionViews';
 import CourseBadge from '../CourseBadge';
-import CourseListModal from '../CoursesModal';
+import CoursesModal from '../CoursesModal';
 import S from './styles';
 
 type CoursesSectionProps = {
@@ -10,14 +10,16 @@ type CoursesSectionProps = {
   plannedCourses: ViewSubgroupCourse[]
   unplannedCourses: ViewSubgroupCourse[]
   isCoursesOverflow?: boolean
+  sortFn?: (courseA: ViewSubgroupCourse, courseB: ViewSubgroupCourse) => number
 };
 
 const CoursesSection = ({
-  title, plannedCourses, unplannedCourses, isCoursesOverflow,
+  title, plannedCourses, unplannedCourses, isCoursesOverflow, sortFn,
 }: CoursesSectionProps) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   if (isCoursesOverflow) {
+    plannedCourses.sort(sortFn);
     // show planned courses and view all modal
     return (
       <>
@@ -30,6 +32,7 @@ const CoursesSection = ({
               uoc={course.UOC}
               isUnplanned={course.isUnplanned}
               isMultiterm={course.isMultiterm}
+              isDoubleCounted={course.isDoubleCounted}
             />
           ))}
         </S.CourseGroup>
@@ -37,7 +40,7 @@ const CoursesSection = ({
           <Button type="primary" onClick={() => setModalVisible(true)}>
             View Courses
           </Button>
-          <CourseListModal
+          <CoursesModal
             title={title}
             modalVisible={modalVisible}
             setModalVisible={setModalVisible}
@@ -48,7 +51,7 @@ const CoursesSection = ({
     );
   }
 
-  const courses = [...plannedCourses, ...unplannedCourses];
+  const courses = [...plannedCourses, ...unplannedCourses].sort(sortFn);
 
   if (courses.length) {
     return (
@@ -61,6 +64,7 @@ const CoursesSection = ({
             uoc={course.UOC}
             isUnplanned={course.isUnplanned}
             isMultiterm={course.isMultiterm}
+            isDoubleCounted={course.isDoubleCounted}
           />
         ))}
       </S.CourseGroup>

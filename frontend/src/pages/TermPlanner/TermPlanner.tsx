@@ -1,13 +1,16 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {
+  Suspense, useEffect, useRef, useState,
+} from 'react';
 import type { OnDragEndResponder, OnDragStartResponder } from 'react-beautiful-dnd';
-import { DragDropContext } from 'react-beautiful-dnd';
 import { useDispatch, useSelector } from 'react-redux';
-import { Badge, notification } from 'antd';
+import { Badge } from 'antd';
 import axios from 'axios';
 import { ValidateTermPlanner } from 'types/api';
 import { Term } from 'types/planner';
+import openNotification from 'utils/openNotification';
 import prepareCoursesForValidationPayload from 'utils/prepareCoursesForValidationPayload';
 import PageTemplate from 'components/PageTemplate';
+import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
 import {
   moveCourse, setPlannedCourseToTerm, setUnplannedCourseToTerm, toggleWarnings, unschedule,
@@ -23,23 +26,7 @@ import {
   isPlannerEmpty,
 } from './utils';
 
-const openNotification = () => {
-  notification.info({
-    message: 'Your terms are looking a little empty',
-    description: 'Add courses from the course selector to the term planner by dragging from the unplanned column',
-    duration: 3,
-    placement: 'bottomRight',
-  });
-};
-
-const outOfBoundsMultitermNotification = (course: string) => {
-  notification.info({
-    message: `${course} would extend outside of the term planner`,
-    description: `Keep ${course} inside the calendar by moving it to a different term instead`,
-    duration: 3,
-    placement: 'bottomRight',
-  });
-};
+const DragDropContext = React.lazy(() => import('react-beautiful-dnd').then((plot) => ({ default: plot.DragDropContext })));
 
 const TermPlanner = () => {
   const { showWarnings } = useSelector((state: RootState) => state.settings);
@@ -72,7 +59,13 @@ const TermPlanner = () => {
       }
     };
 
-    if (isPlannerEmpty(planner.years)) openNotification();
+    if (isPlannerEmpty(planner.years)) {
+      openNotification({
+        type: 'info',
+        message: 'Your terms are looking a little empty',
+        description: 'Add courses from the course selector to the term planner and drag courses from the unplanned column',
+      });
+    }
     validateTermPlanner();
   }, [degree, planner.years, planner.startYear, marksRef.current, showWarnings]);
 
@@ -107,7 +100,11 @@ const TermPlanner = () => {
         isSummerTerm: planner.isSummerEnabled,
         numYears: planner.numYears,
       })) {
-        outOfBoundsMultitermNotification(draggableId);
+        openNotification({
+          type: 'warning',
+          message: 'Course would extend outside of the term planner',
+          description: `Keep ${draggableId} inside the calendar by moving it to a different term instead`,
+        });
         return;
       }
 
@@ -175,69 +172,71 @@ const TermPlanner = () => {
         plannerRef={plannerPicRef}
       />
       <S.ContainerWrapper>
-        <DragDropContext
-          onDragEnd={handleOnDragEnd}
-          onDragStart={handleOnDragStart}
-        >
-          <S.PlannerContainer>
-            <S.PlannerGridWrapper
-              summerEnabled={planner.isSummerEnabled}
-              ref={plannerPicRef}
-            >
-              <GridItem /> {/* Empty grid item for the year */}
-              {planner.isSummerEnabled && <GridItem>Summer</GridItem>}
-              <GridItem>Term 1</GridItem>
-              <GridItem>Term 2</GridItem>
-              <GridItem>Term 3</GridItem>
-              {planner.years.map((year, index) => {
-                const iYear = planner.startYear + index;
-                let yearUOC = 0;
-                Object.keys(year).forEach((termKey) => {
-                  Object.keys(planner.courses).forEach((courseCode) => {
-                    if (year[termKey as Term].includes(courseCode)) {
-                      yearUOC += planner.courses[courseCode].UOC;
-                    }
+        <Suspense fallback={<Spinner text="Loading Table..." />}>
+          <DragDropContext
+            onDragEnd={handleOnDragEnd}
+            onDragStart={handleOnDragStart}
+          >
+            <S.PlannerContainer>
+              <S.PlannerGridWrapper
+                summerEnabled={planner.isSummerEnabled}
+                ref={plannerPicRef}
+              >
+                <GridItem /> {/* Empty grid item for the year */}
+                {planner.isSummerEnabled && <GridItem>Summer</GridItem>}
+                <GridItem>Term 1</GridItem>
+                <GridItem>Term 2</GridItem>
+                <GridItem>Term 3</GridItem>
+                {planner.years.map((year, index) => {
+                  const iYear = planner.startYear + index;
+                  let yearUOC = 0;
+                  Object.keys(year).forEach((termKey) => {
+                    Object.keys(planner.courses).forEach((courseCode) => {
+                      if (year[termKey as Term].includes(courseCode)) {
+                        yearUOC += planner.courses[courseCode].UOC;
+                      }
+                    });
                   });
-                });
-                if (planner.hidden[iYear]) return null;
-                return (
-                  <React.Fragment key={iYear}>
-                    <S.YearGridBox>
-                      <S.YearWrapper>
-                        <S.YearText currYear={currYear === iYear}>
-                          {iYear}
-                        </S.YearText>
-                        <HideYearTooltip year={iYear} />
-                      </S.YearWrapper>
-                      <Badge
-                        style={{
-                          backgroundColor: '#efdbff',
-                          color: '#000000',
-                        }}
-                        size="small"
-                        count={`${yearUOC} UOC`}
-                      />
-                    </S.YearGridBox>
-                    {Object.keys(year).map((term) => {
-                      const key = `${iYear}${term}`;
-                      if (!planner.isSummerEnabled && term === 'T0') return null;
-                      return (
-                        <TermBox
-                          key={key}
-                          name={key}
-                          coursesList={year[term as Term]}
-                          termsOffered={termsOffered}
-                          dragging={isDragging}
+                  if (planner.hidden[iYear]) return null;
+                  return (
+                    <React.Fragment key={iYear}>
+                      <S.YearGridBox>
+                        <S.YearWrapper>
+                          <S.YearText currYear={currYear === iYear}>
+                            {iYear}
+                          </S.YearText>
+                          <HideYearTooltip year={iYear} />
+                        </S.YearWrapper>
+                        <Badge
+                          style={{
+                            backgroundColor: '#efdbff',
+                            color: '#000000',
+                          }}
+                          size="small"
+                          count={`${yearUOC} UOC`}
                         />
-                      );
-                    })}
-                  </React.Fragment>
-                );
-              })}
-              <UnplannedColumn dragging={isDragging} />
-            </S.PlannerGridWrapper>
-          </S.PlannerContainer>
-        </DragDropContext>
+                      </S.YearGridBox>
+                      {Object.keys(year).map((term) => {
+                        const key = `${iYear}${term}`;
+                        if (!planner.isSummerEnabled && term === 'T0') return null;
+                        return (
+                          <TermBox
+                            key={key}
+                            name={key}
+                            coursesList={year[term as Term]}
+                            termsOffered={termsOffered}
+                            dragging={isDragging}
+                          />
+                        );
+                      })}
+                    </React.Fragment>
+                  );
+                })}
+                <UnplannedColumn dragging={isDragging} />
+              </S.PlannerGridWrapper>
+            </S.PlannerContainer>
+          </DragDropContext>
+        </Suspense>
       </S.ContainerWrapper>
     </PageTemplate>
   );
