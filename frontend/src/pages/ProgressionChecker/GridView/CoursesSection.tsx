@@ -33,6 +33,7 @@ const CoursesSection = ({
               isUnplanned={course.isUnplanned}
               isMultiterm={course.isMultiterm}
               isDoubleCounted={course.isDoubleCounted}
+              isOverCounted={course.isOverCounted}
             />
           ))}
         </S.CourseGroup>
@@ -65,6 +66,7 @@ const CoursesSection = ({
             isUnplanned={course.isUnplanned}
             isMultiterm={course.isMultiterm}
             isDoubleCounted={course.isDoubleCounted}
+            isOverCounted={course.isOverCounted}
           />
         ))}
       </S.CourseGroup>

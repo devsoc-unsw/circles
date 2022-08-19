@@ -26,8 +26,8 @@ const GridConciseView = ({
 
   const [sortFn, setSortFn] = useState(SortFn.AlphaNumeric);
 
-  const plannedCourses = courses.filter((c) => c.plannedFor);
-  const unplannedCourses = courses.filter((c) => !c.plannedFor);
+  const plannedCourses = courses.filter((c) => c.plannedFor && !c.isOverCounted);
+  const unplannedCourses = courses.filter((c) => !c.plannedFor || c.isOverCounted);
   const plannedUOC = plannedCourses.reduce(
     (sum, course) => (sum + ((course.UOC ?? 0)
       * getNumTerms((course.UOC ?? 0), course.isMultiterm))),

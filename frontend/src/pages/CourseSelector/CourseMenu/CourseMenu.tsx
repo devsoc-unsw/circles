@@ -87,7 +87,10 @@ const CourseMenu = ({ structure }: Props) => {
               // add UOC to curr
               if (planner.courses[courseCode]) {
                 newCoursesUnits[group][subgroup].curr
-                  += planner.courses[courseCode].UOC * getNumTerms(planner.courses[courseCode].UOC);
+                  += planner.courses[courseCode].UOC * getNumTerms(
+                    planner.courses[courseCode].UOC,
+                    planner.courses[courseCode].isMultiterm,
+                  );
               }
             });
           }

@@ -7,6 +7,8 @@ export type ViewSubgroupCourse = {
   isUnplanned: boolean
   isMultiterm: boolean
   isDoubleCounted: boolean
+  // flag to determine if a subgroup has more than enough courses to meet uoc requirements
+  isOverCounted: boolean
 };
 
 export type ViewSubgroup = {
@@ -19,6 +21,8 @@ export type ProgressionViewStructure = {
     [subgroupKey: string]: ViewSubgroup
   }
 };
+
+export type ProgressionAdditionalCourses = Record<string, ViewSubgroupCourse>;
 
 /* GridView types */
 export enum Views {
