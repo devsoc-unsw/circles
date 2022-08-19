@@ -39,16 +39,9 @@ const Dashboard = ({ isLoading, structure, totalUOC }: Props) => {
   const { courses } = useSelector((state: RootState) => state.planner);
   const { programCode, programName } = useSelector((state: RootState) => state.degree);
 
-  const programCourseList = (
-    Object.values(structure)
-      .flatMap((specialisation) => Object.values(specialisation.content)
-        .filter((spec) => typeof spec === 'object' && spec.courses && !spec.type.includes('rule'))
-        .flatMap((spec) => Object.keys(spec.courses)))
-  );
-
   let completedUOC = 0;
   Object.keys(courses).forEach((courseCode) => {
-    if (programCourseList.includes(courseCode) && courses[courseCode]?.plannedFor) {
+    if (courses[courseCode]?.plannedFor) {
       completedUOC += courses[courseCode].UOC
         * getNumTerms(courses[courseCode].UOC, courses[courseCode].isMultiterm);
     }
@@ -75,9 +68,10 @@ const Dashboard = ({ isLoading, structure, totalUOC }: Props) => {
         // only consider disciplinary component courses
         Object.keys(subgroupStructure.courses).forEach((courseCode) => {
           if (courses[courseCode]?.plannedFor && currUOC < subgroupStructure.UOC) {
-            storeUOC[group].curr += courses[courseCode].UOC
+            const courseUOC = courses[courseCode].UOC
               * getNumTerms(courses[courseCode].UOC, courses[courseCode].isMultiterm);
-            currUOC += courses[courseCode].UOC;
+            storeUOC[group].curr += courseUOC;
+            currUOC += courseUOC;
           }
         });
       }

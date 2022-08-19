@@ -14,6 +14,7 @@ import {
   ProgressionViewStructure, Views, ViewSubgroup, ViewSubgroupCourse,
 } from 'types/progressionViews';
 import { ProgramStructure } from 'types/structure';
+import getNumTerms from 'utils/getNumTerms';
 import openNotification from 'utils/openNotification';
 import Collapsible from 'components/Collapsible';
 import PageTemplate from 'components/PageTemplate';
@@ -100,7 +101,8 @@ const ProgressionCheckerCourses = ({ structure }: Props) => {
             }
           }
 
-          currUOC += courses[courseCode]?.UOC ?? 0;
+          currUOC += (courses[courseCode]?.UOC ?? 0)
+            * getNumTerms(courses[courseCode]?.UOC, courses[courseCode]?.isMultiterm);
         });
 
         newViewLayout[group][subgroup].courses.sort(
