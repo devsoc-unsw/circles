@@ -39,6 +39,9 @@ const ProgressionCheckerCourses = ({ structure }: Props) => {
 
   const countedCourses: string[] = [];
   const newViewLayout: ProgressionViewStructure = {};
+
+  // keeps track of courses which overflows a subgroup UOC requirements
+  // these courses are appended as 'Additional Electives'
   const overflowCourses: ProgressionAdditionalCourses = {};
 
   const generateViewStructure = () => {
@@ -68,8 +71,8 @@ const ProgressionCheckerCourses = ({ structure }: Props) => {
         Object.keys(subgroupStructure.courses).forEach((courseCode) => {
           const isDoubleCounted = countedCourses.includes(courseCode) && !/Core/.test(subgroup) && !group.includes('Rules');
 
-          // overcounted when course is planned but subgroup structure UOC
-          // requirement is already met
+          // flag when a course is overcounted (i.e. if a subgroup UOC requirement is filled) but
+          // additional courses can be considered to count to the subgroup progression
           // only exception is Rules where it should display all courses
           const isOverCounted = !!courses[courseCode]?.plannedFor
             && currUOC >= subgroupStructure.UOC
@@ -97,8 +100,13 @@ const ProgressionCheckerCourses = ({ structure }: Props) => {
           // adjust overflow courses
           if (!isRule) {
             if (!isOverCounted && overflowCourses[course.courseCode]) {
+              // case where a course will be counted in a subgroup UOC requirement
+              // delete the entry
               delete overflowCourses[course.courseCode];
             } else if (isOverCounted && !isDoubleCounted) {
+              // check if course should be displayed as 'Additional Electives'
+              // Double counted courses should not show as 'Additional Electives'
+              // as we are counting double counted courses in the subgroup progression
               overflowCourses[course.courseCode] = course;
             }
           }
