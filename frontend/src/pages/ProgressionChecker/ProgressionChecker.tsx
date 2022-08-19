@@ -66,6 +66,8 @@ const ProgressionCheckerCourses = ({ structure }: Props) => {
 
         // only consider disciplinary component courses
         Object.keys(subgroupStructure.courses).forEach((courseCode) => {
+          const isDoubleCounted = countedCourses.includes(courseCode) && !/Core/.test(subgroup) && !group.includes('Rules');
+
           // overcounted when course is planned but subgroup structure UOC
           // requirement is already met
           // only exception is Rules where it should display all courses
@@ -80,7 +82,7 @@ const ProgressionCheckerCourses = ({ structure }: Props) => {
             plannedFor: courses[courseCode]?.plannedFor || '',
             isUnplanned: unplanned.includes(courseCode),
             isMultiterm: !!courses[courseCode]?.isMultiterm,
-            isDoubleCounted: countedCourses.includes(courseCode) && !/Core/.test(subgroup) && !group.includes('Rules'),
+            isDoubleCounted,
             isOverCounted,
           };
 
@@ -96,7 +98,7 @@ const ProgressionCheckerCourses = ({ structure }: Props) => {
           if (!isRule) {
             if (!isOverCounted && overflowCourses[course.courseCode]) {
               delete overflowCourses[course.courseCode];
-            } else if (isOverCounted) {
+            } else if (isOverCounted && !isDoubleCounted) {
               overflowCourses[course.courseCode] = course;
             }
           }
