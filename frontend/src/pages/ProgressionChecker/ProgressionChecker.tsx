@@ -107,7 +107,11 @@ const ProgressionCheckerCourses = ({ structure }: Props) => {
               // check if course should be displayed as 'Additional Electives'
               // Double counted courses should not show as 'Additional Electives'
               // as we are counting double counted courses in the subgroup progression
-              overflowCourses[course.courseCode] = course;
+              overflowCourses[course.courseCode] = {
+                ...course,
+                isDoubleCounted: false,
+                isOverCounted: false,
+              };
             }
           }
 
