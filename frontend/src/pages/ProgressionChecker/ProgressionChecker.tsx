@@ -124,6 +124,27 @@ const ProgressionCheckerCourses = ({ structure }: Props) => {
         );
       });
     });
+
+    const programCourseList = (
+      Object.values(structure)
+        .flatMap((specialisation) => Object.values(specialisation.content)
+          .filter((spec) => typeof spec === 'object' && spec.courses && !spec.type.includes('rule'))
+          .flatMap((spec) => Object.keys(spec.courses)))
+    );
+    Object.keys(courses).forEach((courseCode) => {
+      if (!programCourseList.includes(courseCode) && courses[courseCode]?.plannedFor) {
+        overflowCourses[courseCode] = {
+          courseCode,
+          title: courses[courseCode].title,
+          UOC: courses[courseCode].UOC,
+          plannedFor: courses[courseCode].plannedFor as string,
+          isUnplanned: unplanned.includes(courseCode),
+          isMultiterm: courses[courseCode].isMultiterm,
+          isDoubleCounted: false,
+          isOverCounted: false,
+        };
+      }
+    });
     return newViewLayout;
   };
 
