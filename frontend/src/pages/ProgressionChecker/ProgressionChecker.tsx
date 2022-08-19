@@ -50,7 +50,7 @@ const ProgressionCheckerCourses = ({ structure }: Props) => {
       newViewLayout[group] = {};
 
       // Example subgroup: Core Courses, Computing Electives
-      Object.keys(structure[group].content).forEach((subgroup) => {
+      Object.keys(structure[group].content).sort().forEach((subgroup) => {
         const subgroupStructure = structure[group].content[subgroup];
 
         const isRule = subgroupStructure.type.includes('rule');
