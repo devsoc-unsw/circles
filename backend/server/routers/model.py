@@ -178,6 +178,8 @@ class Graph(BaseModel):
 
 class TermsList(BaseModel):
     terms: list[str]
+    # Actually tuple(str, fastapi.exceptions.HTTPException)
+    fails: Optional[list[tuple]]
 
 CONDITIONS_PATH = "data/final_data/conditions.pkl"
 with open(CONDITIONS_PATH, "rb") as file:

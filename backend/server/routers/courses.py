@@ -463,7 +463,7 @@ def courses_unlocked_when_taken(userData: UserData, courseToBeTaken: str) -> Dic
         },
     }
 )
-def terms_offered(course: str, years:str) -> Dict[str, List[str]]:
+def terms_offered(course: str, years:str) -> Dict:
     """
     Recieves a course and a list of years. Returns a list of terms the
     course is offered in for the given years.
@@ -478,9 +478,13 @@ def terms_offered(course: str, years:str) -> Dict[str, List[str]]:
     """
     fails: List[str] = []
     terms = {
-        year: map_suppressed_errors(get_term_offered, course, year)
+        year: map_suppressed_errors(get_term_offered, fails, course, year)
         for year in years.split("+")
     }
+    print("\n"*10, "="*10)
+    print(terms)
+    print("="*10)
+    print(fails)
     return {
         "terms": terms,
         "fails": fails,
@@ -494,7 +498,11 @@ def get_course_info(course: str, year: Optional[str]) -> Dict:
     """
     if not year:
         year = LIVE_YEAR
-    return get_course(course) if year == LIVE_YEAR else get_legacy_course(course, year)
+    if year == LIVE_YEAR:
+        print("LIVE YEAR USED", year, LIVE_YEAR)
+    else:
+        print("NOT LIVE", year, LIVE_YEAR)
+    return get_course(course) if int(year) == LIVE_YEAR else get_legacy_course(course, year)
 
 def get_term_offered(course: str, year: Optional[str]) -> List[str]:
     """
