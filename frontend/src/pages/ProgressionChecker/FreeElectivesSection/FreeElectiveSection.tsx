@@ -12,7 +12,7 @@ type Props = {
   // view: Views
 };
 
-const AdditionalElectivesSection = ({ courses }: Props) => {
+const FreeElectivesSection = ({ courses }: Props) => {
   const uoc = courses.reduce(
     (sum, course) => (sum + ((course.UOC ?? 0)
       * getNumTerms((course.UOC ?? 0), course.isMultiterm))),
@@ -22,15 +22,15 @@ const AdditionalElectivesSection = ({ courses }: Props) => {
   return (
     <Collapsible
       title={(
-        <Title level={1} className="text">
-          Additional Electives
+        <Title level={1} id="Free Electives" className="text">
+          Free Electives
         </Title>
       )}
     >
       <Title level={4} className="text">You have {uoc} UOC worth of additional courses planned</Title>
       <Text>
-        These courses may be counted as free electives. Please manually verify your progression
-        with this information.
+        These courses may or may not be counted to your program. Please manually verify your
+        progression with this information.
       </Text>
       <CoursesSection
         title="Additional Electives"
@@ -41,4 +41,4 @@ const AdditionalElectivesSection = ({ courses }: Props) => {
   );
 };
 
-export default AdditionalElectivesSection;
+export default FreeElectivesSection;
