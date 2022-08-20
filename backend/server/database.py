@@ -29,6 +29,8 @@ coursesCOL = db["Courses"]
 
 archivesDB = client["Archives"]
 
+usersDB = client["Users"]
+
 
 def overwrite_collection(collection_name):
     """Overwrites the specific database via reading from the json files.
@@ -65,6 +67,56 @@ def overwrite_archives():
             except (KeyError, IOError, OSError):
                 print(f"Failed to load and overwrite {year} archive")
 
+def create_token_mapping():
+    usersDB.create_collection('tokens', {
+        'validator': {
+            '$jsonSchema': {
+                'bsonType': 'object',
+                'required': ['degree', 'planner'],
+                'properties': {
+                    'degree': {
+                        'bsonType': 'object',
+                        'required': ['programCode', 'specs'],
+                        'properties': {
+                            'programCode': {
+                                'bsonType': 'string',
+                                'description': 'the code of program taken'
+                            },
+                            'specs': {
+                                'bsonType': 'array',
+                                'description': 'an array of all the specialisations taken'
+                            },
+                        }
+                    },
+                    'planner': {
+                        'bsonType': 'object',
+                        'description': 'Set to default value',
+                        'required': ['unplanned', 'startYear', 'numYears', 'isSummerEnabled', 'years'],
+                        'properties': {
+                            "unplanned": {
+                                'bsonType': 'array'
+                            },
+                            "startYear": {
+                                'bsonType': 'integer'
+                            },
+                            "numYears": {
+                                'bsonType': 'integer'
+                            },
+                            "isSummerEnabled": {
+                                'bsonType': 'boolean'
+                            },
+                            "years": {
+                                'bsonType': 'array'
+                            },
+                        }
+                    }
+                }
+            }
+        }
+    })
+
+def create_user():
+    usersDB.create_collection('users')
 
 def overwrite_all():
     """Singular execution point to overwrite the entire database including the archives"""
