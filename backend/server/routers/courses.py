@@ -13,7 +13,7 @@ from fuzzywuzzy import fuzz # type: ignore
 from server.database import archivesDB, coursesCOL
 from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, CourseCodes,
                                   CourseDetails, CoursesState, CoursesPath,
-                                  CoursesUnlockedWhenTaken, ProgramCourses,
+                                  CoursesUnlockedWhenTaken, ProgramCourses, TermsList,
                                   UserData)
 
 
@@ -136,6 +136,7 @@ def get_course(courseCode: str) -> Dict:
     del result["_id"]
     with suppress(KeyError):
         del result["exclusions"]["leftover_plaintext"]
+    print("result is ", result)
     return result
 
 
@@ -440,6 +441,36 @@ def courses_unlocked_when_taken(userData: UserData, courseToBeTaken: str) -> Dic
         'direct_unlock': sorted(list(direct_unlock)),
         'indirect_unlock': sorted(list(indirect_unlock))
     }
+
+
+@router.get("/termsOffered/{course}", response_model=TermsList)
+def terms_offered(course: str) -> List[str]:
+    """
+    Returns a list of terms in which the given course is offered.
+    The list of terms is only relevant for the LIVE_YEAR and may
+    be inaccurate for courses offered every second year.
+    For legacy courses, see `/legacyTermsOffered/{course}`
+    """
+    return {
+        "terms": get_course(course).get("terms", []),
+    }
+
+@router.get("/legacyTermsOffered/{year}/{course}", response_model=TermsList)
+def legacy_terms_offered(course: str) -> List[str]:
+    """
+    Equivalent to `/termsOffered` but for legacy courses.
+    """
+    return {
+        "terms": get_legacy_course(course).get("terms", []),
+    }
+
+
+###############################################################################
+#                                                                             #
+#                             End of Routes                                   #
+#                                                                             #
+###############################################################################
+
 
 def unlocked_set(courses_state) -> Set[str]:
     """ Fetch the set of unlocked courses from the courses_state of a getAllUnlocked call """
