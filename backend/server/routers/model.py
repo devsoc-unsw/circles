@@ -177,7 +177,7 @@ class Graph(BaseModel):
     err_edges: list[tuple]
 
 class TermsList(BaseModel):
-    terms: list[str]
+    terms: Optional[dict[str, Optional[list[str]]]]
     # Actually tuple(str, fastapi.exceptions.HTTPException)
     fails: Optional[list[tuple]]
 

@@ -6,7 +6,7 @@ import re
 from typing import Dict, List, Mapping, Optional, Set, Tuple
 
 from algorithms.objects.user import User
-from data.config import ARCHIVED_YEARS, GRAPH_CACHE_FILE
+from data.config import ARCHIVED_YEARS, GRAPH_CACHE_FILE, LIVE_YEAR
 from data.utility.data_helpers import read_data
 from fastapi import APIRouter, HTTPException
 from fuzzywuzzy import fuzz # type: ignore
