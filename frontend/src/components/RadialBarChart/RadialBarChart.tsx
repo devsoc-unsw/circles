@@ -1,8 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-
-// TODO: fix typescript eslint here
-
 import React, { Suspense } from 'react';
 import type { RadialBarConfig } from '@ant-design/plots';
 import Spinner from 'components/Spinner';
@@ -20,15 +15,10 @@ const RadialBarChart = () => {
     height: 320,
     innerRadius: 0.3,
     tooltip: {
-      formatter: function formatter(datum) {
-        return {
-          name: 'UOC',
-          value: datum.UOC,
-        };
-      },
+      // formatter: (datum) => ({ name: datum.name, value: datum.UOC }),
     },
     colorField: 'color', // or seriesField in some cases
-    color: ({ color }) => color,
+    // color: ({ color }) => color,
     barBackground: {},
     barStyle: { lineCap: 'round' },
   };
