@@ -11,6 +11,7 @@ from typing import Callable
 
 from algorithms.cache.cache import (cache_equivalents, cache_exclusions, cache_handbook_note,
                                     cache_mappings, cache_program_mappings)
+from data.processors.cache_graph import cache_graph
 from data.processors.load_conditions import cache_conditions_pkl_file
 from data.processors.log_broken import log_broken_conditions
 
@@ -96,6 +97,7 @@ run: dict[str, dict[str, Callable]] = {
         "handbook_note": cache_handbook_note,
         "mapping": cache_mappings,
         "program": cache_program_mappings,
+        "graph": cache_graph
     },
 }
 

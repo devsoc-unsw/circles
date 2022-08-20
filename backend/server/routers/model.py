@@ -172,14 +172,8 @@ class SpecialisationTypes(BaseModel):
     types: list[str]
 
 class Graph(BaseModel):
-    class Config:
-        arbitrary_types_allowed = True
     edges: list[dict[str, str]]
     courses: list[str]
-    # tuple is of type (str, fastapi.exceptions.HTTPException)
-    err_edges: list[tuple]
-
-
 
 CONDITIONS_PATH = "data/final_data/conditions.pkl"
 with open(CONDITIONS_PATH, "rb") as file:

@@ -19,7 +19,7 @@ def read_data(file_name):
 
 def write_data(data, file_name):
     """
-    Writes data to file with given file_name
+    Writes a json dump of given data to file with given file_name
     """
     with open(file_name, "w", encoding="utf8") as OUTPUT_FILE:
         json.dump(data, OUTPUT_FILE, indent=4)

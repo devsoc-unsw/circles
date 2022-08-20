@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { scroller } from 'react-scroll';
-import {
-  notification, Typography,
-} from 'antd';
+import { Typography } from 'antd';
 import axios from 'axios';
 import { SpecialisationTypes } from 'types/api';
+import openNotification from 'utils/openNotification';
 import PageTemplate from 'components/PageTemplate';
 import type { RootState } from 'config/store';
 import { resetCourses } from 'reducers/coursesSlice';
@@ -29,15 +28,6 @@ const DegreeWizard = () => {
   const stepList = ['year', 'degree'].concat(specs).concat(['start browsing']);
   const degree = useSelector((state: RootState) => state.degree);
 
-  const csDegreeDisclaimer = () => {
-    notification.info({
-      message: 'Disclaimer',
-      description: 'Currently, Circles can only support some degrees and undergrad courses. If you find any errors, feel free to report a bug!',
-      placement: 'bottomRight',
-      duration: 4,
-    });
-  };
-
   useEffect(() => {
     if (degree.isComplete) {
       setModalVisible(true);
@@ -47,7 +37,11 @@ const DegreeWizard = () => {
       dispatch(resetTabs());
       dispatch(resetCourses());
     }
-    csDegreeDisclaimer();
+    openNotification({
+      type: 'info',
+      message: 'Disclaimer',
+      description: 'Currently, Circles can only support some degrees and undergrad courses. If you find any errors, feel free to report a bug!',
+    });
   }, [degree.isComplete, dispatch]);
 
   useEffect(() => {

@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   mongodb:
-    image: mongo:5.0.9
+    image: mongo:5.0.10
     container_name: mongodb
     volumes:
       # Named volume to persist database

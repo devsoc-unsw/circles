@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Typography } from 'antd';
 import axios from 'axios';
-import { motion } from 'framer-motion';
 import { Course, CoursePathFrom, CoursesUnlockedWhenTaken } from 'types/api';
 import { CourseTimetable, EnrolmentCapacityData } from 'types/courseCapacity';
 import { CourseList } from 'types/courses';
@@ -180,11 +179,7 @@ const CourseDescription = () => {
 
   if (tabs.length === 0) {
     return (
-      <S.InfographicContainer
-        as={motion.div}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-      >
+      <S.InfographicContainer>
         <img src={infographic} alt="How to use Circles infographic" />
       </S.InfographicContainer>
     );

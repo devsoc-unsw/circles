@@ -5,6 +5,7 @@ import { CoursesAllUnlocked } from 'types/api';
 import { CourseUnitsStructure, MenuDataStructure, MenuDataSubgroup } from 'types/courseMenu';
 import { CourseValidation } from 'types/courses';
 import { ProgramStructure } from 'types/structure';
+import getNumTerms from 'utils/getNumTerms';
 import prepareUserPayload from 'utils/prepareUserPayload';
 import { LoadingCourseMenu } from 'components/LoadingSkeleton';
 import type { RootState } from 'config/store';
@@ -86,7 +87,10 @@ const CourseMenu = ({ structure }: Props) => {
               // add UOC to curr
               if (planner.courses[courseCode]) {
                 newCoursesUnits[group][subgroup].curr
-                  += planner.courses[courseCode].UOC;
+                  += planner.courses[courseCode].UOC * getNumTerms(
+                    planner.courses[courseCode].UOC,
+                    planner.courses[courseCode].isMultiterm,
+                  );
               }
             });
           }
