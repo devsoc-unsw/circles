@@ -14,7 +14,7 @@ type Props = {
   specTitle: string
 };
 
-const DegreeCard = ({
+const SpecialisationCard = ({
   type, totalUOC, currUOC, specTitle,
 }: Props) => {
   const { Title, Text } = Typography;
@@ -52,4 +52,4 @@ const DegreeCard = ({
   );
 };
 
-export default DegreeCard;
+export default SpecialisationCard;

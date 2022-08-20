@@ -109,7 +109,7 @@ const CourseMenu = ({ structure }: Props) => {
       dispatch(setCourses(res.data.courses_state));
       generateMenuData(res.data.courses_state);
     } catch (err) {
-      // eslint-disable-next-line
+      // eslint-disable-next-line no-console
       console.error('Error at getAllUnlocked', err);
     }
   }, [structure, planner, degree, dispatch]);
