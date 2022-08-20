@@ -3,7 +3,7 @@ APIs for the /courses/ route.
 """
 from contextlib import suppress
 import re
-from typing import Dict, List, Mapping, Set, Tuple
+from typing import Dict, List, Mapping, Optional, Set, Tuple
 
 from algorithms.objects.user import User
 from data.config import ARCHIVED_YEARS, GRAPH_CACHE_FILE
@@ -15,6 +15,7 @@ from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, CourseCodes,
                                   CourseDetails, CoursesState, CoursesPath,
                                   CoursesUnlockedWhenTaken, ProgramCourses, TermsList,
                                   UserData)
+from server.routers.utility import map_suppressed_errors
 
 
 router = APIRouter(
@@ -444,7 +445,7 @@ def courses_unlocked_when_taken(userData: UserData, courseToBeTaken: str) -> Dic
 
 
 @router.get(
-    "/termsOffered/{course}",
+    "/termsOffered/{course}/{years}",
     response_model=TermsList,
     responses={
         400: {
@@ -462,41 +463,69 @@ def courses_unlocked_when_taken(userData: UserData, courseToBeTaken: str) -> Dic
         },
     }
 )
-def terms_offered(course: str) -> Dict[str, List[str]]:
+def terms_offered(course: str, years:str) -> Dict[str, List[str]]:
     """
     Returns a list of terms in which the given course is offered.
     The list of terms is only relevant for the LIVE_YEAR and may
     be inaccurate for courses offered every second year.
-    For legacy courses, see `/legacyTermsOffered/{course}`
+
+    Expected Input:
+        course: (str) CODEXXXX
+        years: (str): `+`-connected string of years
+            eg: "2020+2021+2022"
     """
+    years = years.split("+")
+    fails: List[str] = []
+    terms = {
+        year: map_suppressed_errors(get_term_offered, course, year)
+        for year in years
+    }
     return {
-        "terms": get_course(course).get("terms", []),
+        "terms": terms,
+        "fails": fails,
     }
 
-@router.get(
-    "/legacyTermsOffered/{year}/{course}",
-    response_model=TermsList,
-    responses={
-        400: {"description": "Year or Term input is incorrect"},
-        200: {
-            "description": "Returns the program structure",
-            "content": {
-                "application/json": {
-                    "example": {
-                        "terms": ["21T2", "21T2", "21T3"],
-                    }
-                }
-            },
-        },
-    }
-)
-def legacy_terms_offered(year, course: str="") -> Dict[str, List[str]]:
+def get_course_info(course: str, year: Optional[str]) -> Dict:
     """
-    Equivalent to `/termsOffered` but for legacy courses.
+    Returns the course info for the given course and year.
+    If no year is given, the current year is used.
+    If the year is not the LIVE_YEAR, then uses legacy information
     """
-    return {
-        "terms": get_legacy_course(year, course).get("terms", []),
-    }
+    if not year:
+        year = LIVE_YEAR
+    return get_course(course) if year == LIVE_YEAR else get_legacy_course(course, year)
+
+def get_term_offered(course: str, year: Optional[str]) -> List[str]:
+    """
+    Returns the terms in which the given course is offered, for the given year.
+    """
+    return get_course_info(course, year).get("terms", [])
+
+# Lol legacy, tfw misread spec
+# @router.get(
+#     "/legacyTermsOffered/{year}/{course}",
+#     response_model=TermsList,
+#     responses={
+#         400: {"description": "Year or Term input is incorrect"},
+#         200: {
+#             "description": "Returns the program structure",
+#             "content": {
+#                 "application/json": {
+#                     "example": {
+#                         "terms": ["21T2", "21T2", "21T3"],
+#                     }
+#                 }
+#             },
+#         },
+#     }
+# )
+# def legacy_terms_offered(year, course: str="") -> Dict[str, List[str]]:
+#     """
+#     Equivalent to `/termsOffered` but for legacy courses.
+#     """
+#     return {
+#         "terms": get_legacy_course(year, course).get("terms", []),
+#     }
 
 
 ###############################################################################
