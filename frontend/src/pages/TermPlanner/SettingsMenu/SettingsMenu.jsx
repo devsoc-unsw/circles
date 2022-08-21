@@ -1,7 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
-import { DatePicker, Select, Switch } from "antd";
+import {
+  DatePicker, notification, Select, Switch,
+} from "antd";
 import moment from "moment";
 import { toggleSummer, updateDegreeLength, updateStartYear } from "reducers/plannerSlice";
 import CS from "../common/styles";
@@ -24,6 +26,12 @@ const SettingsMenu = () => {
 
   function handleSummerToggle() {
     dispatch(toggleSummer());
+    notification.info({
+      message: "Your Summer terms are looking a little empty",
+      description: "Courses planned for summer have been unplanned.",
+      duration: 3,
+      placement: "bottomRight",
+    });
   }
 
   const years = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
