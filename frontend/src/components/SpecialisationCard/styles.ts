@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 const Card = styled(antdCard)`
   width: 300px;
+  min-height: 120px;
   background-color: ${({ theme }) => theme.degreeCard.backgroundColor};
 `;
 
