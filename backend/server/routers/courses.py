@@ -314,6 +314,7 @@ def get_legacy_course(year, courseCode):
         Returns information relating to the given course
     """
     result = archivesDB[str(year)].find_one({"code": courseCode})
+    print("Year is ", year, "with a courseCode of ", courseCode)
     if not result:
         raise HTTPException(status_code=400, detail="invalid course code or year")
     del result["_id"]
@@ -446,22 +447,22 @@ def courses_unlocked_when_taken(userData: UserData, courseToBeTaken: str) -> Dic
 
 @router.get(
     "/termsOffered/{course}/{years}",
-    response_model=TermsList,
-    responses={
-        400: {
-            "description": "The given course code could not be found in the database",
-        },
-        200: {
-            "description": "Returns the terms a course is offered in",
-            "content": {
-                "application/json": {
-                    "example": {
-                        "terms": ["21T2", "21T2", "21T3"],
-                    },
-                },
-            },
-        },
-    }
+    # response_model=TermsList,
+    # responses={
+    #     400: {
+    #         "description": "The given course code could not be found in the database",
+    #     },
+    #     200: {
+    #         "description": "Returns the terms a course is offered in",
+    #         "content": {
+    #             "application/json": {
+    #                 "example": {
+    #                     "terms": ["21T2", "21T2", "21T3"],
+    #                 },
+    #             },
+    #         },
+    #     },
+    # }
 )
 def terms_offered(course: str, years:str) -> Dict:
     """
@@ -502,7 +503,7 @@ def get_course_info(course: str, year: Optional[str]) -> Dict:
         print("LIVE YEAR USED", year, LIVE_YEAR)
     else:
         print("NOT LIVE", year, LIVE_YEAR)
-    return get_course(course) if int(year) == LIVE_YEAR else get_legacy_course(course, year)
+    return get_course(course) if int(year) == LIVE_YEAR else get_legacy_course(year, course)
 
 def get_term_offered(course: str, year: Optional[str]) -> List[str]:
     """
