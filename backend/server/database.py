@@ -5,12 +5,14 @@ initialisation.
 NOTE: The helper functions must be run from the backend directory due to their paths
 """
 
+from contextlib import suppress
 import json
 import os
 from sys import exit
+from wsgiref.validate import validator
 
 from data.config import ARCHIVED_YEARS
-from pymongo import MongoClient
+from pymongo import MongoClient, errors
 
 from server.config import ARCHIVED_DATA_PATH, FINAL_DATA_PATH
 
@@ -67,9 +69,9 @@ def overwrite_archives():
             except (KeyError, IOError, OSError):
                 print(f"Failed to load and overwrite {year} archive")
 
-def create_token_mapping():
-    usersDB.create_collection('tokens', {
-        'validator': {
+def create_dynamic_db():
+    usersDB.create_collection('users',
+        validator={
             '$jsonSchema': {
                 'bsonType': 'object',
                 'required': ['degree', 'planner'],
@@ -84,7 +86,10 @@ def create_token_mapping():
                             },
                             'specs': {
                                 'bsonType': 'array',
-                                'description': 'an array of all the specialisations taken'
+                                'description': 'an array of all the specialisations taken',
+                                'items': {
+                                    'bsonType': 'string'
+                                }
                             },
                         }
                     },
@@ -94,29 +99,96 @@ def create_token_mapping():
                         'required': ['unplanned', 'startYear', 'numYears', 'isSummerEnabled', 'years'],
                         'properties': {
                             "unplanned": {
-                                'bsonType': 'array'
+                                'bsonType': 'array',
+                                'items': {
+                                    'bsonType': 'string'
+                                }
                             },
                             "startYear": {
-                                'bsonType': 'integer'
+                                'bsonType': 'int'
                             },
                             "numYears": {
-                                'bsonType': 'integer'
+                                'bsonType': 'int'
                             },
                             "isSummerEnabled": {
-                                'bsonType': 'boolean'
+                                'bsonType': 'bool'
                             },
                             "years": {
-                                'bsonType': 'array'
+                                'bsonType': 'array',
+                                'items': {
+                                    'bsonType': 'object',
+                                    'required': ['T0', 'T1', 'T2', 'T3'],
+                                    'properties': {
+                                        'T0': {
+                                            'bsonType': 'array',
+                                            'items': {
+                                                'bsonType': 'string'
+                                            }
+                                        },
+                                        'T1': {
+                                            'bsonType': 'array',
+                                            'items': {
+                                                'bsonType': 'string'
+                                            }
+                                        },
+                                        'T2': {
+                                            'bsonType': 'array',
+                                            'items': {
+                                                'bsonType': 'string'
+                                            }
+                                        },
+                                        'T3': {
+                                            'bsonType': 'array',
+                                            'items': {
+                                                'bsonType': 'string'
+                                            }
+                                        }
+                                    }
+                                }
                             },
                         }
                     }
                 }
             }
+        })
+    usersDB.create_collection('tokens', validator={
+        '$jsonSchema': {
+            'bsonType': 'object',
+            'required': ['token', 'objectId'],
+            'properties': {
+                'token': {
+                    'description': 'token given by FE',
+                    'bsonType': 'int'
+                },
+                'objectId': {
+                    'description': 'objectId for the user object we are storing',
+                    'bsonType': 'int'
+                }
+            }
         }
     })
-
-def create_user():
-    usersDB.create_collection('users')
+    # example insertion
+    # usersDB['users'].insert_one({
+    #     'degree': {
+    #         "programCode":"3778",
+    #         "programName":"Computer Science",
+    #         "specs":["COMPA1"]
+    #     },
+    #     'planner': {
+    #         "unplanned":[],
+    #         "startYear": 2021,
+    #         "numYears": 4,
+    #         "isSummerEnabled": False,
+    #         "years": [
+    #             {
+    #             "T0":[],
+    #             "T1":["COMP1511"],
+    #             "T2":["COMP1521"],
+    #             "T3":["COMP1531"],
+    #             }
+    #         ],
+    #     }
+    # })
 
 def overwrite_all():
     """Singular execution point to overwrite the entire database including the archives"""
@@ -124,3 +196,7 @@ def overwrite_all():
     overwrite_collection("Specialisations")
     overwrite_collection("Programs")
     overwrite_archives()
+
+def optionally_create_new_data():
+    with suppress(errors.CollectionInvalid):
+        create_dynamic_db()
