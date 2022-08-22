@@ -307,7 +307,7 @@ def get_legacy_courses(year, term) -> Dict[str, Dict[str, str]]:
 
 
 @router.get("/getLegacyCourse/{year}/{courseCode}")
-def get_legacy_course(year, courseCode):
+def get_legacy_course(year, courseCode) -> Dict:
     """
         Like /getCourse/ but for legacy courses in the given year.
         Returns information relating to the given course
@@ -445,22 +445,22 @@ def courses_unlocked_when_taken(userData: UserData, courseToBeTaken: str) -> Dic
 
 @router.get(
     "/termsOffered/{course}/{years}",
-    # response_model=TermsList,
-    # responses={
-    #     400: {
-    #         "description": "The given course code could not be found in the database",
-    #     },
-    #     200: {
-    #         "description": "Returns the terms a course is offered in",
-    #         "content": {
-    #             "application/json": {
-    #                 "example": {
-    #                     "terms": ["21T2", "21T2", "21T3"],
-    #                 },
-    #             },
-    #         },
-    #     },
-    # }
+    response_model=TermsList,
+    responses={
+        400: {
+            "description": "The given course code could not be found in the database",
+        },
+        200: {
+            "description": "Returns the terms a course is offered in",
+            "content": {
+                "application/json": {
+                    "example": {
+                        "terms": ["21T2", "21T2", "21T3"],
+                    },
+                },
+            },
+        },
+    }
 )
 def terms_offered(course: str, years:str) -> Dict:
     """
@@ -486,32 +486,6 @@ def terms_offered(course: str, years:str) -> Dict:
         "terms": terms,
         "fails": fails,
     }
-
-# Lol legacy, tfw misread spec
-# @router.get(
-#     "/legacyTermsOffered/{year}/{course}",
-#     response_model=TermsList,
-#     responses={
-#         400: {"description": "Year or Term input is incorrect"},
-#         200: {
-#             "description": "Returns the program structure",
-#             "content": {
-#                 "application/json": {
-#                     "example": {
-#                         "terms": ["21T2", "21T2", "21T3"],
-#                     }
-#                 }
-#             },
-#         },
-#     }
-# )
-# def legacy_terms_offered(year, course: str="") -> Dict[str, List[str]]:
-#     """
-#     Equivalent to `/termsOffered` but for legacy courses.
-#     """
-#     return {
-#         "terms": get_legacy_course(year, course).get("terms", []),
-#     }
 
 
 ###############################################################################
@@ -584,15 +558,15 @@ def weight_course(course: tuple[str, str], search_term: str, structure: dict,
 
     return weight
 
-def get_course_info(course: str, year: Optional[str]) -> Dict:
+def get_course_info(course: str, year: str | int=LIVE_YEAR) -> Dict:
     """
     Returns the course info for the given course and year.
     If no year is given, the current year is used.
     If the year is not the LIVE_YEAR, then uses legacy information
     """
-    return get_course(course) if int(year) == LIVE_YEAR else get_legacy_course(year, course)
+    return get_course(course) if int(year) == int(LIVE_YEAR) else get_legacy_course(year, course)
 
-def get_term_offered(course: str, year: Optional[str]) -> List[str]:
+def get_term_offered(course: str, year: int | str=LIVE_YEAR) -> List[str]:
     """
     Returns the terms in which the given course is offered, for the given year.
     """
