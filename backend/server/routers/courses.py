@@ -474,7 +474,8 @@ def terms_offered(course: str, years:str) -> Dict:
         years: (str): `+`-connected string of years
             eg: "2020+2021+2022"
     Output: {
-            year: [terms offered]
+            year: [terms offered],
+            fails: [(year, exception)]
         }
     """
     fails: List[str] = []
