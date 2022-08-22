@@ -104,7 +104,7 @@ def add_subgroup_container(structure: dict[str, StructureContainer], type: str, 
             }, container.get("courses", {}).items(), {}
         ),
         "type": container.get("type", ""),
-        "notes": container.get("notes", "")
+        "notes": container.get("notes", "") if type == "Rules" else ""
     }
     return list(structure[type]["content"][title]["courses"].keys())
 

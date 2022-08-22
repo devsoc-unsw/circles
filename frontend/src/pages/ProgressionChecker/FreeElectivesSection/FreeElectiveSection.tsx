@@ -5,7 +5,7 @@ import getNumTerms from 'utils/getNumTerms';
 import Collapsible from 'components/Collapsible';
 import CoursesSection from '../GridView/CoursesSection';
 
-const { Title, Text } = Typography;
+const { Title } = Typography;
 
 type Props = {
   courses: ViewSubgroupCourse[]
@@ -28,10 +28,10 @@ const FreeElectivesSection = ({ courses }: Props) => {
       )}
     >
       <Title level={4} className="text">You have {uoc} UOC worth of additional courses planned</Title>
-      <Text>
+      <div style={{ fontSize: '1rem' }}>
         These courses may or may not be counted to your program. Please manually verify your
         progression with this information.
-      </Text>
+      </div>
       <CoursesSection
         title="Additional Electives"
         plannedCourses={courses}

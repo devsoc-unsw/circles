@@ -258,6 +258,9 @@ const ProgressionChecker = () => {
                     <GridView
                       uoc={structure[group].content[subgroup].UOC}
                       subgroupTitle={subgroup}
+                      notes={structure[group].content[subgroup].notes}
+                      showNotes={group === 'Rules'}
+                      type={structure[group].content[subgroup].type}
                       courses={subgroupEntry.courses}
                       isCoursesOverflow={subgroupEntry.isCoursesOverflow}
                       isConcise={view === Views.GRID_CONCISE}

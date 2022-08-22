@@ -11,6 +11,9 @@ import S from './styles';
 type Props = {
   subgroupTitle: string
   courses: ViewSubgroupCourse[]
+  notes: string
+  showNotes: boolean
+  type: string
   uoc: number
   isCoursesOverflow: boolean
   isConcise: boolean
@@ -19,6 +22,9 @@ type Props = {
 const GridView = ({
   subgroupTitle,
   courses,
+  notes,
+  showNotes,
+  type,
   uoc,
   isCoursesOverflow,
   isConcise,
@@ -43,6 +49,9 @@ const GridView = ({
       <GridConciseView
         uoc={uoc}
         subgroupKey={subgroupTitle}
+        notes={notes}
+        showNotes={showNotes}
+        type={type}
         courses={courses}
         isCoursesOverflow={isCoursesOverflow}
       />
@@ -52,17 +61,22 @@ const GridView = ({
   return (
     <>
       <Title level={2} className="text">{subgroupTitle}</Title>
-      <S.TitleSortWrapper>
-        <Title level={3} className="text">{uoc} UOC of the following courses ({Math.max(uoc - plannedUOC, 0)} UOC remaining)</Title>
-        <S.SortBtnWrapper>
-          <Tooltip title="Sort by Alphabet">
-            <FaSortAlphaDown color={sortFn === SortFn.AlphaNumeric ? '#9254de' : undefined} onClick={() => setSortFn(SortFn.AlphaNumeric)} />
-          </Tooltip>
-          <Tooltip title="Sort by Course Level">
-            <FaSortNumericDown color={sortFn === SortFn.Level ? '#9254de' : undefined} onClick={() => setSortFn(SortFn.Level)} />
-          </Tooltip>
-        </S.SortBtnWrapper>
-      </S.TitleSortWrapper>
+      {showNotes && <S.NotesText>{notes}</S.NotesText>}
+      {
+        type !== 'info_rule' && (
+          <S.TitleSortWrapper>
+            <Title level={3} className="text">{uoc} UOC of the following courses ({Math.max(uoc - plannedUOC, 0)} UOC remaining)</Title>
+            <S.SortBtnWrapper>
+              <Tooltip title="Sort by Alphabet">
+                <FaSortAlphaDown color={sortFn === SortFn.AlphaNumeric ? '#9254de' : undefined} onClick={() => setSortFn(SortFn.AlphaNumeric)} />
+              </Tooltip>
+              <Tooltip title="Sort by Course Level">
+                <FaSortNumericDown color={sortFn === SortFn.Level ? '#9254de' : undefined} onClick={() => setSortFn(SortFn.Level)} />
+              </Tooltip>
+            </S.SortBtnWrapper>
+          </S.TitleSortWrapper>
+        )
+      }
       <CoursesSection
         title={subgroupTitle}
         isCoursesOverflow={isCoursesOverflow}
