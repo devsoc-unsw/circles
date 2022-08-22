@@ -39,8 +39,8 @@ def test_term_offered_comp1511_bad_years():
 
     fails = data.get("fails", [])
     assert len(fails) == 2
-    assert "2001" in fails
-    assert "2021" in fails
+    check_year_in_fails("2022", fails)
+    check_year_in_fails("2001", fails)
 
 def test_term_offered_fake_course():
     res = requests.get("http://127.0.0.1:8000/courses/termsOffered/CODEXXXX/2020+2021")
@@ -52,3 +52,10 @@ def test_term_offered_fake_course():
     assert len(fails) == 2
     assert "2001" in fails
     assert "2021" in fails
+
+def check_year_in_fails(year, fails):
+    return any(
+        fails,
+        lambda fail: year in fail
+    )
+

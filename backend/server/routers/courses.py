@@ -478,7 +478,7 @@ def terms_offered(course: str, years:str) -> Dict:
     """
     fails: List[str] = []
     terms = {
-        year: map_suppressed_errors(get_term_offered, fails, course=course, year=year)
+        year: map_suppressed_errors(get_term_offered, fails, course, year)
         for year in years.split("+")
     }
 
