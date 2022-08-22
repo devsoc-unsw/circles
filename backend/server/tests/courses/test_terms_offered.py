@@ -11,7 +11,7 @@ from data.config import LIVE_YEAR
 
 
 def test_term_offered_comp1511_2021():
-    res = requests.get("https://127.0.0.1:8000/courses/termsOffered/COMP1511/2021")
+    res = requests.get("http://127.0.0.1:8000/courses/termsOffered/COMP1511/2021")
 
     assert res.status_code == 200
     data = res.json()
@@ -22,7 +22,7 @@ def test_term_offered_comp1511_2021():
 
 #TODO: Get a test out for multiple years, im not conviced of the `+` joined thingy
 def test_term_offered_comp1511_all_terms():
-    res = requests.get("https://127.0.0.1:8000/courses/termsOffered/COMP1511/2020+2021")
+    res = requests.get("http://127.0.0.1:8000/courses/termsOffered/COMP1511/2020+2021")
 
     assert res.status_code == 200
     data = res.json()
@@ -32,7 +32,7 @@ def test_term_offered_comp1511_all_terms():
     assert set(data.get("terms", {}).get("2021", [])) == expected
 
 def test_term_offered_comp1511_bad_years():
-    res = requests.get(f"https://127.0.0.1:8000/courses/termsOffered/COMP1511/{LIVE_YEAR + 1}+2001")
+    res = requests.get(f"http://127.0.0.1:8000/courses/termsOffered/COMP1511/{LIVE_YEAR + 1}+2001")
 
     assert res.status_code == 200
     data = res.json()
@@ -43,7 +43,7 @@ def test_term_offered_comp1511_bad_years():
     assert "2021" in fails
 
 def test_term_offered_fake_course():
-    res = requests.get("https://127.0.0.1:8000/courses/termsOffered/CODEXXXX/2020+2021")
+    res = requests.get("http://127.0.0.1:8000/courses/termsOffered/CODEXXXX/2020+2021")
 
     assert res.status_code == 200
     data = res.json()
