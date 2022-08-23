@@ -1,18 +1,31 @@
 """
-API for fetching data about programs and specialisations
-"""
+API for fetching data about programs and specialisations """
 from contextlib import suppress
 import functools
 import re
-from typing import Dict, List, Optional, Tuple
+from typing import Callable, Dict, List, Mapping, Optional, Tuple, cast
 
 from fastapi import APIRouter, HTTPException
 
+from data.processors.models import (
+    CourseContainer,
+    Program,
+    ProgramContainer,
+    Specialisation,
+)
 from data.utility import data_helpers
 from server.database import programsCOL, specialisationsCOL
 from server.manual_fixes import apply_manual_fixes
-from server.routers.courses import regex_search
-from server.routers.model import CourseCodes, Courses, Programs, Structure
+from server.routers.courses import get_path_from, regex_search
+from server.routers.model import (
+    CourseCodes,
+    Courses,
+    Graph,
+    Programs,
+    Structure,
+    StructureContainer,
+)
+from server.routers.utility import map_suppressed_errors
 
 router = APIRouter(
     prefix="/programs",
@@ -47,7 +60,7 @@ def programs_index() -> str:
         }
     },
 )
-def get_programs() -> Dict[str, Dict[str, str]]:
+def get_programs() -> dict[str, dict[str, str]]:
     """ Fetch all the programs the backend knows about in the format of { code: title } """
     # return {"programs": {q["code"]: q["title"] for q in programsCOL.find()}}
     # TODO On deployment, DELETE RETURN BELOW and replace with the return above
@@ -63,7 +76,7 @@ def get_programs() -> Dict[str, Dict[str, str]]:
         }
     }
 
-def convert_subgroup_object_to_courses_dict(object: str, description: str|list[str]) -> dict[str, str]:
+def convert_subgroup_object_to_courses_dict(object: str, description: str|list[str]) -> Mapping[str, str | list[str]]:
     """ Gets a subgroup object (format laid out in the processor) and fetches the exact courses its referring to """
     if " or " in object:
         return {c: description[index] for index, c in enumerate(object.split(" or "))}
@@ -72,39 +85,34 @@ def convert_subgroup_object_to_courses_dict(object: str, description: str|list[s
 
     return { object: description }
 
-def add_subgroup_container(structure: dict, type: str, container: dict, exceptions: list[str]) -> list[str]:
+def add_subgroup_container(structure: dict[str, StructureContainer], type: str, container: ProgramContainer | CourseContainer, exceptions: list[str]) -> list[str]:
     """ Returns the added courses """
-    # TODO: further standardise non_spec_data to remove these line:
-    title = container.get("title")
+    # TODO: further standardise non_spec_data to remove these lines:
+    title = container.get("title", "")
     if container.get("type") == "gened":
         title = "General Education"
-    if container.get("type") is not None and "rule" in container.get("type"):
+    conditional_type = container.get("type")
+    if conditional_type is not None and "rule" in conditional_type:
         type = "Rules"
+    structure[type]["content"][title] = {
+        "UOC": container.get("credits_to_complete") or 0,
+        "courses": functools.reduce(
+            lambda rest, current: rest | {
+                course: description for course, description
+                in convert_subgroup_object_to_courses_dict(current[0], current[1]).items()
+                if course not in exceptions
+            }, container.get("courses", {}).items(), {}
+        ),
+        "type": container.get("type", "")
+    }
+    return list(structure[type]["content"][title]["courses"].keys())
 
-    structure[type][title] = {}
-    item = structure[type][title]
-    item["UOC"] = container.get("credits_to_complete") if container.get("credits_to_complete") is not None else 0
-    item["courses"] = {}
-    item["type"] = container.get("type") if container.get("type") is not None else ""
-
-    if container.get("courses") is None:
-        return []
-
-    for object, description in container["courses"].items():
-        item["courses"] = item["courses"] | {
-            course: description for course, description
-            in convert_subgroup_object_to_courses_dict(object, description).items()
-            if course not in exceptions
-        }
-
-    return list(item["courses"].keys())
-
-def add_geneds_courses(programCode: str, structure: dict, container: dict) -> list[str]:
+def add_geneds_courses(programCode: str, structure: dict, container: ProgramContainer) -> list[str]:
     """ Returns the added courses """
     if container.get("type") != "gened":
         return []
 
-    item = structure["General"]["General Education"]
+    item = structure["General"]["content"]["General Education"]
     item["courses"] = {}
 
     if container.get("courses") is None:
@@ -113,7 +121,7 @@ def add_geneds_courses(programCode: str, structure: dict, container: dict) -> li
     return list(item["courses"].keys())
 
 
-def add_specialisation(structure: dict, code: str) -> None:
+def add_specialisation(structure: dict[str, StructureContainer], code: str) -> None:
     """ Add a specialisation to the structure of a getStructure call """
     # in a specialisation, the first container takes priority - no duplicates may exist
     if code.endswith("1"):
@@ -123,14 +131,14 @@ def add_specialisation(structure: dict, code: str) -> None:
     else:
         type = "Honours"
 
-    spnResult = specialisationsCOL.find_one({"code": code})
+    spnResult = cast(Specialisation | None, specialisationsCOL.find_one({"code": code}))
     type = f"{type} - {code}"
     if not spnResult:
         raise HTTPException(
             status_code=400, detail=f"{code} of type {type} not found")
-    structure[type] = {"name": spnResult["name"]}
+    structure[type] = {"name": spnResult["name"], "content": {}}
     # NOTE: takes Core Courses are first
-    exceptions = []
+    exceptions: list[str] = []
     for cores in filter(lambda a: "Core" in a["title"], spnResult["curriculum"]):
         new = add_subgroup_container(structure, type, cores, exceptions)
         exceptions.extend(new)
@@ -150,66 +158,79 @@ def add_specialisation(structure: dict, code: str) -> None:
                 "application/json": {
                     "example": {
                         "Major - COMPS1 - Computer Science": {
-                            "Core Courses": {
-                                "UOC": 66,
-                                "courses": {
-                                    "COMP3821": "Extended Algorithms and Programming Techniques",
-                                    "COMP3121": "Algorithms and Programming Techniques",
+                            "name": "Database Systems",
+                            "content": {
+                                "Core Courses": {
+                                    "UOC": 66,
+                                    "courses": {
+                                        "COMP3821": "Extended Algorithms and Programming Techniques",
+                                        "COMP3121": "Algorithms and Programming Techniques",
+                                    },
                                 },
-                            },
-                            "Computing Electives": {
-                                "UOC": 30,
-                                "courses": {
-                                    "ENGG4600": "Engineering Vertically Integrated Project",
-                                    "ENGG2600": "Engineering Vertically Integrated Project",
+                                "Computing Electives": {
+                                    "UOC": 30,
+                                    "courses": {
+                                        "ENGG4600": "Engineering Vertically Integrated Project",
+                                        "ENGG2600": "Engineering Vertically Integrated Project",
+                                    },
                                 },
-                            },
+                            }
                         },
                         "Major - FINSA1 - Finance": {
-                            "Core Courses": {
-                                "UOC": 66,
-                                "courses": {
-                                    "FINS3121": "Financial Accounting",
+                            "name": "Finance",
+                            "content": {
+                                "Core Courses": {
+                                    "UOC": 66,
+                                    "courses": {
+                                        "FINS3121": "Financial Accounting",
+                                    },
                                 },
-                            },
+                            }
                         },
-                        "Minor": {
-                            "Prescribed Electives": {
-                                "UOC": 12,
-                                "courses": {
-                                    "FINS3616": "International Business Finance",
-                                    "FINS3634": "Credit Analysis and Lending",
+                        "Minor - FINSA2 - Finance": {
+                            "name": "Finance",
+                            "content": {
+                                "Prescribed Electives": {
+                                    "UOC": 12,
+                                    "courses": {
+                                        "FINS3616": "International Business Finance",
+                                        "FINS3634": "Credit Analysis and Lending",
+                                    },
                                 },
-                            },
-                            "Core Courses": {
-                                "UOC": 18,
-                                "courses": {
-                                    "FINS2613": "Intermediate Business Finance",
-                                    "COMM1180": "Value Creation",
-                                    "FINS1612": "Capital Markets and Institutions",
+                                "Core Courses": {
+                                    "UOC": 18,
+                                    "courses": {
+                                        "FINS2613": "Intermediate Business Finance",
+                                        "COMM1180": "Value Creation",
+                                        "FINS1612": "Capital Markets and Institutions",
+                                    },
                                 },
-                            },
+                            }
                         },
                         "General": {
-                            "GeneralEducation": {"UOC": 12},
-                            "FlexEducation": {"UOC": 6},
-                            "BusinessCoreCourses": {
-                                "UOC": 6,
-                                "courses": {"BUSI9999": "How To Business"},
-                            },
+                            "name": "General Program Requirements",
+                            "content": {
+                                "GeneralEducation": {"UOC": 12},
+                                "FlexEducation": {"UOC": 6},
+                                "BusinessCoreCourses": {
+                                    "UOC": 6,
+                                    "courses": {"BUSI9999": "How To Business"},
+                                },
+                            }
                         },
                     }
                 }
-            },
-        },
-    },
+            }
+        }
+    }
 )
 @router.get("/getStructure/{programCode}", response_model=Structure)
 def get_structure(
     programCode: str, spec: Optional[str] = None
 ):
+    """ get the structure of a course given specs and program code """
     # TODO: This ugly, use compose instead
-    structure = {}
+    structure: dict[str, StructureContainer] = {}
     structure = add_specialisations(structure, spec)
     structure, uoc = add_program_code_details(structure, programCode)
     structure = add_geneds_to_structure(structure, programCode)
@@ -230,7 +251,7 @@ def get_structure_course_list(
         nesting or categorisation.
         TODO: Add a test for this.
     """
-    structure = {}
+    structure: dict[str, StructureContainer] = {}
     structure = add_specialisations(structure, spec)
     structure, _ = add_program_code_details(structure, programCode)
     apply_manual_fixes(structure, programCode)
@@ -264,38 +285,66 @@ def get_structure_course_list(
         },
     },
 )
-def getGenEds(programCode: str):
+def get_gen_eds(programCode: str):
+    """ fetches gen eds from file """
     all_geneds = data_helpers.read_data("data/scrapers/genedPureRaw.json")
     return {"courses" : all_geneds[programCode]}
 
-@router.get("/graph")
-def courses_graph():
+@router.get("/graph/{programCode}/{spec}", response_model=Graph)
+@router.get("/graph/{programCode}", response_model=Graph)
+def graph(
+        programCode: str, spec: Optional[str]=None
+    ):
     """
     Constructs a structure for the frontend to use for the graphical
     selector.
-    Currently returns the ingoing and outgoing edges for each course
-    that is a part of the courselist
+    Returns back a list of directed edges where u -> v => u in v's
+    prereqs or coreqs. Will also return back a 
+    Returns:
+        "edges" :{
+            [
+                {
+                    "source": (str) "CODEXXXX",
+                    "target": (str) "CODEXXXX",
+                }
+            ]
+        },
+    No longer returns 'err_edges: failed_courses' as those are suppressed and
+    caught by the processor
     """
+    courses = get_structure_course_list(programCode, spec)["courses"]
+    edges = []
+    failed_courses: List[str] = []
+
+    proto_edges: List[Dict[str, str]] = [map_suppressed_errors(
+        get_path_from, failed_courses, course
+    ) for course in courses]
+    edges = prune_edges(
+            proto_edges_to_edges(proto_edges),
+            courses
+        )
+
     return {
-        "message": "This endpoint is not implemented yet",
+        "edges": edges,
+        "courses": courses,
     }
+
 
 ###############################################################
 #                       End of Routes                         #
 ###############################################################
 
-def course_list_from_structure(structure: Dict) -> List[str]:
+def course_list_from_structure(structure: dict) -> list[str]:
     """
         Given a formed structure, return the list of courses
         in that structure
     """
     courses = []
-    def __recursive_course_search(structure: Dict) -> None:
+    def __recursive_course_search(structure: dict) -> None:
         """
             Recursively search for courses in a structure. Add
             courses found to `courses` object in upper group.
         """
-        print(structure.keys())
         if not isinstance(structure, (list, dict)):
             return
         for k, v in structure.items():
@@ -309,7 +358,7 @@ def course_list_from_structure(structure: Dict) -> List[str]:
     __recursive_course_search(structure)
     return courses
 
-def add_specialisations(structure: Dict, spec: str="") -> Dict:
+def add_specialisations(structure: dict[str, StructureContainer], spec: Optional[str]) -> dict[str, StructureContainer]:
     """
         Take a string of `+` joined specialisations and add
         them to the structure
@@ -320,29 +369,29 @@ def add_specialisations(structure: Dict, spec: str="") -> Dict:
             add_specialisation(structure, m)
     return structure
 
-def add_program_code_details(structure: Dict, programCode: str) -> Tuple[Dict, int]:
+def add_program_code_details(structure: dict[str, StructureContainer], programCode: str) -> Tuple[dict[str, StructureContainer], int]:
     """
     Add the details for given program code to the structure.
     Returns:
         - structure
         - uoc (int) associated with the program code.
     """
-    programsResult = programsCOL.find_one({"code": programCode})
+    programsResult = cast(Optional[Program], programsCOL.find_one({"code": programCode}))
     if not programsResult:
         raise HTTPException(
             status_code=400, detail="Program code was not found")
 
-    structure['General'] = {}
-    structure['Rules'] = {}
+    structure['General'] = {"name": "General Program Requirements", "content": {}}
+    structure['Rules'] = {"name": "General Program Rules", "content": {}}
     return (structure, programsResult["UOC"])
 
-def add_geneds_to_structure(structure: Dict=dict(), programCode: str="") -> Dict:
+def add_geneds_to_structure(structure: dict[str, StructureContainer], programCode: str) -> dict[str, StructureContainer]:
     """
         Insert geneds of the given programCode into the structure
         provided
     """
-    programsResult = programsCOL.find_one({"code": programCode})
-    if not programsResult:
+    programsResult = cast(Program | None, programsCOL.find_one({"code": programCode}))
+    if programsResult is None:
         raise HTTPException(
             status_code=400, detail="Program code was not found")
 
@@ -354,9 +403,42 @@ def add_geneds_to_structure(structure: Dict=dict(), programCode: str="") -> Dict
     return structure
 
 
-def compose(*functions: callable) -> callable:
+def compose(*functions: Callable) -> Callable:
     """
         Compose a list of functions into a single function.
         The functions are applied in the order they are given.
     """
     return functools.reduce(lambda f, g: lambda *args, **kwargs: f(g(*args, **kwargs)), functions)
+
+def proto_edges_to_edges(proto_edges: List[Dict[str, str]]) -> List[Dict[str, str]]:
+    """
+    Take the proto-edges created by calls to `path_from` and convert them into
+    a full list of edges of form.
+    [
+        {
+            "source": (str) - course_code, # This is the 'original' value
+            "target": (str) - course_code, # This is the value of 'courses'
+        }
+    ]
+    Effectively, turning an adjacency list into a flat list of edges
+    """
+    edges: List = []
+    for proto_edge in proto_edges:
+        # Incoming: { original: str,  courses: List[str]}
+        # Outcome:  { "src": str, "target": str }
+        if not proto_edge or not proto_edge["courses"]:
+            continue
+        for course in proto_edge["courses"]:
+            edges.append({
+                    "source": course,
+                    "target": proto_edge["original"],
+                }
+            )
+    return edges
+
+def prune_edges(edges: List[Dict[str, str]], courses: List[str]) -> List[Dict[str, str]]:
+    """
+    Remove edges between vertices that are not in the list of courses provided.
+    """
+    return [edge for edge in edges if edge["source"] in courses and edge["target"] in courses]
+

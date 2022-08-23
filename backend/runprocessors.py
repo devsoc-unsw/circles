@@ -7,9 +7,11 @@ if you need to  bash this, use python3 -m runprocessors --type data-fix --stage 
 import argparse
 import subprocess
 from sys import exit
+from typing import Callable
 
-from algorithms.cache.cache import (cache_exclusions, cache_handbook_note,
+from algorithms.cache.cache import (cache_equivalents, cache_exclusions, cache_handbook_note,
                                     cache_mappings, cache_program_mappings)
+from data.processors.cache_graph import cache_graph
 from data.processors.load_conditions import cache_conditions_pkl_file
 from data.processors.log_broken import log_broken_conditions
 
@@ -60,7 +62,7 @@ def run_manual_fixes():
         exit(0)
 
 
-run = {
+run: dict[str, dict[str, Callable]] = {
     "faculty": {
         "format": format_code_data,
     },
@@ -91,14 +93,15 @@ run = {
     },
     "cache": {
         "exclusion": cache_exclusions,
+        "equivalent": cache_equivalents,
         "handbook_note": cache_handbook_note,
         "mapping": cache_mappings,
         "program": cache_program_mappings,
+        "graph": cache_graph
     },
 }
 
 if __name__ == "__main__":
-
     if args.type is None and args.stage is None:
         res = input("did you mean to run all data fixes? [y/N] ")
         if res == "y":
