@@ -67,6 +67,10 @@ def api_index() -> str:
     return "Index of courses"
 
 
+@router.get("/jsonified/{courseCode}")
+def get_jsonified_course(courseCode: str) -> str:
+    return str(CONDITIONS[courseCode])
+
 @router.get(
     "/getCourse/{courseCode}",
     response_model=CourseDetails,
