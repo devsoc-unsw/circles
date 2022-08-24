@@ -6,10 +6,11 @@ import { useSpring } from '@react-spring/web';
 import { Button, Typography } from 'antd';
 import { ProgramStructure } from 'types/structure';
 import getNumTerms from 'utils/getNumTerms';
-import DegreeCard from 'components/DegreeCard';
 import LiquidProgressChart from 'components/LiquidProgressChart';
 import { LoadingDashboard } from 'components/LoadingSkeleton';
+import SpecialisationCard from 'components/SpecialisationCard';
 import type { RootState } from 'config/store';
+import FreeElectivesCard from './FreeElectivesCard';
 import S from './styles';
 
 type StoreUOC = {
@@ -23,9 +24,12 @@ type Props = {
   isLoading: boolean
   structure: ProgramStructure
   totalUOC: number
+  freeElectivesUOC: number
 };
 
-const Dashboard = ({ isLoading, structure, totalUOC }: Props) => {
+const Dashboard = ({
+  isLoading, structure, totalUOC, freeElectivesUOC,
+}: Props) => {
   const { Title } = Typography;
   const currYear = new Date().getFullYear();
 
@@ -106,7 +110,7 @@ const Dashboard = ({ isLoading, structure, totalUOC }: Props) => {
             {Object.entries(structure)
               .filter(([group]) => group !== 'Rules')
               .map(([group, specialisation]) => (
-                <DegreeCard
+                <SpecialisationCard
                   key={group}
                   type={group}
                   totalUOC={storeUOC[group].total}
@@ -114,6 +118,7 @@ const Dashboard = ({ isLoading, structure, totalUOC }: Props) => {
                   specTitle={specialisation.name}
                 />
               ))}
+            <FreeElectivesCard uoc={freeElectivesUOC} />
           </S.CardsWrapper>
           <Button
             type="primary"

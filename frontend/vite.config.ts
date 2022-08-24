@@ -3,6 +3,7 @@ import { resolve } from "path";
 import { defineConfig, splitVendorChunkPlugin } from "vite";
 import eslint from "vite-plugin-eslint";
 import svgrPlugin from "vite-plugin-svgr";
+import checker from "vite-plugin-checker";
 
 const projectRootDir = resolve(__dirname);
 
@@ -25,7 +26,8 @@ export default defineConfig({
       },
     }),
     eslint(),
-    splitVendorChunkPlugin()
+    splitVendorChunkPlugin(),
+    checker({ typescript: true }),
   ],
   resolve: {
     alias: [
