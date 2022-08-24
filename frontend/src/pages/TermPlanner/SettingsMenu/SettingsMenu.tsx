@@ -1,14 +1,3 @@
-<<<<<<< HEAD:frontend/src/pages/TermPlanner/SettingsMenu/SettingsMenu.jsx
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
-import {
-  DatePicker, notification, Select, Switch,
-} from "antd";
-import moment from "moment";
-import { toggleSummer, updateDegreeLength, updateStartYear } from "reducers/plannerSlice";
-import CS from "../common/styles";
-=======
 import React, { Suspense } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
@@ -20,7 +9,6 @@ import { toggleSummer, updateDegreeLength, updateStartYear } from 'reducers/plan
 import CS from '../common/styles';
 
 const DatePicker = React.lazy(() => import('../../../components/Datepicker'));
->>>>>>> dev:frontend/src/pages/TermPlanner/SettingsMenu/SettingsMenu.tsx
 
 const SettingsMenu = () => {
   const { Option } = Select;
@@ -40,12 +28,6 @@ const SettingsMenu = () => {
 
   function handleSummerToggle() {
     dispatch(toggleSummer());
-    notification.info({
-      message: "Your Summer terms are looking a little empty",
-      description: "Courses planned for summer have been unplanned.",
-      duration: 3,
-      placement: "bottomRight",
-    });
   }
 
   const years = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
