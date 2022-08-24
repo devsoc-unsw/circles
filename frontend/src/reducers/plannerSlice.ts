@@ -334,7 +334,7 @@ const plannerSlice = createSlice({
               Object.entries(state.courses).forEach(([code, desc]) => {
                 if (course === code && desc.plannedFor !== null) {
                   plannerSlice.caseReducers
-                    .unschedule(state, { payload: { destIndex: null, code } });
+                    .unschedule(state, { payload: { destIndex: null, code }, type: 'planner/unschedule' });
                 }
               });
             }
