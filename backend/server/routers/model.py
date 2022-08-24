@@ -37,7 +37,7 @@ class CourseDetails(BaseModel):
     gen_ed: bool
     is_legacy: bool
     is_accurate: bool
-    is_multiterm: Optional[bool]
+    is_multiterm: bool
 
 
 class ContainerContent(TypedDict):
