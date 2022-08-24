@@ -18,20 +18,8 @@ def test_term_offered_comp1511_2021():
     assert res.status_code == 200
     data = res.json()
 
-    assert data.get("fails", {}) == {}
+    assert data.get("fails", []) == []
     assert set(data.get("terms", {}).get("2021", [])) == { "T1", "T2", "T3" }
-
-
-# def test_term_offered_comp1511_all_terms():
-#     res = requests.get("http://127.0.0.1:8000/courses/termsOffered/COMP1511/2020+2021")
-# 
-#     assert res.status_code == 200
-#     data = res.json()
-#     print(data)
-#     expected = { "T1", "T2", "T3" }
-# 
-#     assert set(data.get("terms", {}).get("2020", [])) == expected
-#     assert set(data.get("terms", {}).get("2021", [])) == expected
 
 def test_term_offered_comp1511_bad_years():
     res = requests.get(f"http://127.0.0.1:8000/courses/termsOffered/COMP1511/{LIVE_YEAR + 1}+2001")
