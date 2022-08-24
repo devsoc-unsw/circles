@@ -8,8 +8,7 @@ Anything further back is not guaranteed either.
 
 import requests
 
-# from data.config import LIVE_YEAR
-LIVE_YEAR = 2022
+from data.config import LIVE_YEAR
 
 
 def test_term_offered_comp1511_2021():
