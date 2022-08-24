@@ -16,6 +16,8 @@ export default defineConfig({
       { find: "hooks", replacement: resolve(projectRootDir, "./src/hooks") },
       { find: "pages", replacement: resolve(projectRootDir, "./src/pages") },
       { find: "reducers", replacement: resolve(projectRootDir, "./src/reducers") },
+      { find: "types", replacement: resolve(projectRootDir, "./src/types") },
+      { find: "utils", replacement: resolve(projectRootDir, "./src/utils") },
     ],
   },
 })

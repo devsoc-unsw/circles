@@ -6,7 +6,7 @@ import re
 from typing import Dict, List, Mapping, Set, Tuple
 
 from algorithms.objects.user import User
-from data.config import ARCHIVED_YEARS
+from data.config import ARCHIVED_YEARS, GRAPH_CACHE_FILE
 from data.utility.data_helpers import read_data
 from fastapi import APIRouter, HTTPException
 from fuzzywuzzy import fuzz # type: ignore
@@ -25,6 +25,8 @@ router = APIRouter(
 # TODO: would prefer to initialise ALL_COURSES here but that fails on CI for some reason
 ALL_COURSES: Dict[str, str] | None = None
 CODE_MAPPING: Dict = read_data("data/utility/programCodeMappings.json")["title_to_code"]
+GRAPH: Dict[str, Dict[str, List[str]]] = read_data(GRAPH_CACHE_FILE)
+INCOMING_ADJACENCY: Dict[str, List[str]] = GRAPH.get("incoming_adjacency_list", {})
 
 def fetch_all_courses() -> Dict[str, str]:
     """
@@ -64,6 +66,10 @@ def api_index() -> str:
     """ Returns the index of the courses API """
     return "Index of courses"
 
+
+@router.get("/jsonified/{courseCode}")
+def get_jsonified_course(courseCode: str) -> str:
+    return str(CONDITIONS[courseCode])
 
 @router.get(
     "/getCourse/{courseCode}",
@@ -397,15 +403,10 @@ def get_path_from(course: str) -> dict[str, str | list[str]]:
     fetches courses which can be used to satisfy 'course'
     eg 2521 -> 1511
     """
-    course_condition = CONDITIONS.get(course)
-    if not course_condition:
-        raise HTTPException(400, f"no course by name {course}")
+    out: List[str] = list(INCOMING_ADJACENCY.get(course, []))
     return {
         "original" : course,
-        "courses" : [
-            coursename for coursename, _ in CONDITIONS.items()
-            if course_condition.is_path_to(coursename)
-        ]
+        "courses" : out,
     }
 
 

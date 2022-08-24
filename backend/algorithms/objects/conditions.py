@@ -342,7 +342,7 @@ class CourseExclusionCondition(Condition):
         self.exclusion = exclusion
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
-        is_valid = not user.has_taken_course(self.exclusion)
+        is_valid = not user.has_taken_specific_course(self.exclusion)
         return is_valid, ([] if is_valid else [f"{self.exclusion} is an exclusion course for this one"])
 
     def is_path_to(self, course: str) -> bool:
@@ -432,6 +432,5 @@ class CompositeCondition(Condition):
                 data['children'].append(json.loads(cond.__str__(child_index)))
             else:
                 data['children'].append(json.loads(str(cond)))
-        if id == 'start':
-            return json.dumps(data['children'][0])
         return json.dumps(data)
+
