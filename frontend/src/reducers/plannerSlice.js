@@ -304,10 +304,9 @@ const plannerSlice = createSlice({
         for (let i = 0; i < state.numYears; i++) {
           const courses = state.years[i].T0;
           courses.forEach((course) => {
-            console.log(state.courses[course].isMultiterm);
             if (state.courses[course].isMultiterm) {
               Object.entries(state.courses).forEach(([code, desc]) => {
-                if (desc.plannedFor !== null) {
+                if (course === code && desc.plannedFor !== null) {
                   plannerSlice.caseReducers
                     .unschedule(state, { payload: { destIndex: null, code } });
                 }
