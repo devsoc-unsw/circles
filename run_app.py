@@ -49,9 +49,18 @@ def get_backend_env():
     """
     load_dotenv("./env/backend.env")
     username = os.getenv("MONGODB_USERNAME")
-    password = os.getenv("MONGODB_USERNAME")
+    password = os.getenv("MONGODB_PASSWORD")
     python = os.getenv("PYTHON_VERSION") or "python"
     return (username, password, python)
+
+def get_frontend_env():
+    """
+        reads backend.env for mongodb username and password and python
+        version.
+    """
+    load_dotenv("./env/frontend.env")
+    username = os.getenv("VITE_BACKEND_API_BASE_URL")
+    return username
 
 def main():
     logging.basicConfig(level=logging.INFO,format='%(asctime)s %(message)s',
@@ -63,6 +72,7 @@ def main():
     sys.stdout = LogPipe(logging.INFO)
     sys.stderr = LogPipe(logging.ERROR)
     username, password, python_ver = get_backend_env()
+    backend_url = get_frontend_env()
     os.system('docker compose run --rm init-mongo')
     try:
         Popen(
@@ -73,7 +83,7 @@ def main():
             cwd='backend/'
         )
         check_call(
-            'npm start',
+            f'VITE_BACKEND_API_BASE_URL={backend_url} npm start',
             shell=True,
             stdout=sys.stdout,
             stderr=sys.stderr,
