@@ -69,10 +69,12 @@ def get_programs() -> dict[str, dict[str, str]]:
             "3778": "Computer Science",
             "3502": "Commerce",
             "3970": "Science",
+            "3543": "Economics",
             "3707": "Engineering (Honours)",
             "3784": "Commerce / Computer Science",
             "3789": "Science / Computer Science",
             "3785": "Engineering (Honours) / Computer Science",
+            "3673": "Economics / Computer Science"
         }
     }
 
