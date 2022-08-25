@@ -44,6 +44,7 @@ class ContainerContent(TypedDict):
     UOC: int
     courses: dict[str, str | list[str]]
     type: str
+    notes: str
 
 class StructureContainer(TypedDict):
     name: str

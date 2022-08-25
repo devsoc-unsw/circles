@@ -37,17 +37,19 @@ const CoursesSection = ({
             />
           ))}
         </S.CourseGroup>
-        <S.ViewAllCoursesWrapper>
-          <Button type="primary" onClick={() => setModalVisible(true)}>
-            View Courses
-          </Button>
-          <CoursesModal
-            title={title}
-            modalVisible={modalVisible}
-            setModalVisible={setModalVisible}
-            courses={unplannedCourses}
-          />
-        </S.ViewAllCoursesWrapper>
+        {!!unplannedCourses.length && (
+          <S.ViewAllCoursesWrapper>
+            <Button type="primary" onClick={() => setModalVisible(true)}>
+              View Courses
+            </Button>
+            <CoursesModal
+              title={title}
+              modalVisible={modalVisible}
+              setModalVisible={setModalVisible}
+              courses={unplannedCourses}
+            />
+          </S.ViewAllCoursesWrapper>
+        )}
       </>
     );
   }

@@ -30,9 +30,15 @@ const ViewAllCoursesWrapper = styled.div`
   margin: 20px 0;
 `;
 
+const NotesText = styled.div`
+  font-size: 1rem;
+  margin-bottom: 20px;
+`;
+
 export default {
   TitleSortWrapper,
   SortBtnWrapper,
   CourseGroup,
   ViewAllCoursesWrapper,
+  NotesText,
 };

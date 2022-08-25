@@ -105,7 +105,8 @@ def add_subgroup_container(structure: dict[str, StructureContainer], type: str, 
                 if course not in exceptions
             }, container.get("courses", {}).items(), {}
         ),
-        "type": container.get("type", "")
+        "type": container.get("type", ""),
+        "notes": container.get("notes", "") if type == "Rules" else ""
     }
     return list(structure[type]["content"][title]["courses"].keys())
 
@@ -176,7 +177,8 @@ def add_specialisation(structure: dict[str, StructureContainer], code: str) -> N
                                         "ENGG2600": "Engineering Vertically Integrated Project",
                                     },
                                 },
-                            }
+                            },
+                            "notes": "Students must take 30 UOC of the following courses.",
                         },
                         "Major - FINSA1 - Finance": {
                             "name": "Finance",
@@ -187,7 +189,8 @@ def add_specialisation(structure: dict[str, StructureContainer], code: str) -> N
                                         "FINS3121": "Financial Accounting",
                                     },
                                 },
-                            }
+                            },
+                            "notes": "Students must take 60 UOC of the following courses.",
                         },
                         "Minor - FINSA2 - Finance": {
                             "name": "Finance",
@@ -207,12 +210,13 @@ def add_specialisation(structure: dict[str, StructureContainer], code: str) -> N
                                         "FINS1612": "Capital Markets and Institutions",
                                     },
                                 },
-                            }
+                            },
+                            "notes": "Students must take 12 UOC of the following courses.",
                         },
                         "General": {
                             "name": "General Program Requirements",
                             "content": {
-                                "GeneralEducation": {"UOC": 12},
+                                "General Education": {"UOC": 12},
                                 "FlexEducation": {"UOC": 6},
                                 "BusinessCoreCourses": {
                                     "UOC": 6,
