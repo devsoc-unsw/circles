@@ -16,6 +16,10 @@ export const GlobalStyles = createGlobalStyle`
   .text {
     color: ${({ theme }) => theme.text} !important;
   }
+
+  p {
+    font-size: 1rem;
+  }
 `;
 
 const lightBaseColors = {
