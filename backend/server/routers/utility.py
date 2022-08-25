@@ -17,4 +17,3 @@ def map_suppressed_errors(func: Callable, errors_log: List[Any], *args, **kwargs
     except Exception as e:
         errors_log.append((*args, e))
     return None
-

@@ -21,7 +21,7 @@ const Liquid = React.lazy(() => import('@ant-design/plots').then((plot) => ({ de
 
 const LiquidProgressChart = ({ completedUOC, totalUOC }: Props) => {
   const [percent, setPercent] = useState(0);
-  const fillValue = completedUOC / totalUOC;
+  const fillValue = Math.min(completedUOC / totalUOC, 1);
 
   // light mode text color varies
   let textColor = '';

@@ -482,6 +482,228 @@
             }
         ]
     },
+    "ASIAB2": {
+        "programs": [
+            "3444",
+            "3409",
+            "3558",
+            "3453",
+            "3454",
+            "3447",
+            "3543",
+            "3438"
+        ],
+        "name": "Asian Studies",
+        "type": "minor",
+        "UOC": 24,
+        "code": "ASIAB2",
+        "course_constraints": [],
+        "curriculum": [
+            {
+                "courses": {
+                    "ARTS3639": "Japan in Popular Culture",
+                    "ARTS3217": "History of Modern China: Contested Visions",
+                    "ARTS3216": "Chinese Media and Communication",
+                    "ARTS3640": "Japan and Korea: Cultures in Conflict",
+                    "ARTS3883": "Personhood in Asia",
+                    "ARTS3218": "Japanese History: Modern Miracles and Mythologies",
+                    "ARTS3220": "Architecture and Urbanism in Asia",
+                    "ARTS3212": "Contemporary India Through Bollywood: Politics, Society and Culture"
+                },
+                "title": "Level 3 Prescribed Electives",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [
+                    3
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ARTS2455": "Gender in China",
+                    "ARTS2458": "Along the Silk Road: Conquerors, Traders and Explorers",
+                    "ARTS2909": "Gender in South Asia and Southeast Asia",
+                    "ARTS2212": "Southeast Asia",
+                    "ARTS2815": "Politics and Security in the Indo-Pacific",
+                    "ARTS2633": "A Cultural Survey of Japan: From Gods to Gadgets",
+                    "ARTS2213": "Asian Popular Culture",
+                    "ARTS2663": "Korea and Japan: Chinese Cultural Transmission",
+                    "ARTS2211": "East Asia",
+                    "ARTS2662": "Korea at a Glance",
+                    "ARTS2908": "Sex and Power in Early Modern China and Japan",
+                    "ARTS2210": "Modern India: Violence and Nonviolence in Colonial South Asia, 1750-1947",
+                    "ARTS2464": "Chinese Ideas of Beauty and Erotica: Ancient to Modern",
+                    "ARTS2363": "Chinese Philosophy"
+                },
+                "title": "Level 2 Prescribed Electives",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [
+                    2
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ARTS1210": "Concepts of Asia",
+                    "ARTS1211": "Australia's Asian Context"
+                },
+                "title": "Level 1 Core Courses",
+                "credits_to_complete": 12,
+                "core": true,
+                "levels": [
+                    1
+                ],
+                "notes": ""
+            }
+        ]
+    },
+    "ATSIC2": {
+        "programs": [
+            "3444",
+            "3409",
+            "3453",
+            "3454",
+            "3543",
+            "3438"
+        ],
+        "name": "Indigenous Studies",
+        "type": "minor",
+        "UOC": 24,
+        "code": "ATSIC2",
+        "course_constraints": [
+            {
+                "title": "ARTS/EDUCATION (SECONDARY) STUDENTS",
+                "description": "The minor in Indigenous Studies (24 UOC) is not available to Bachelor of Arts/Education (Secondary) students. To be eligible for the approved teaching specialisation, Bachelor of Arts/Education (Secondary) students must complete either the Indigenous Studies Major (60 UOC) or Indigenous Studies (Extended) Minor (36 UOC)."
+            }
+        ],
+        "curriculum": [
+            {
+                "courses": {
+                    "ATSI3002": "Gendered Identities in Indigenous Australia",
+                    "ARTS3241": "Environmental Justice",
+                    "ATSI3017": "Indigenous Histories and the Colonial World",
+                    "ATSI3003": "Indigenous Cultural Heritage and the Environment",
+                    "ATSI3005": "Race, Colonialism and Whiteness"
+                },
+                "title": "Level 3 Prescribed Electives",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [
+                    3
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ATSI1011": "Indigenous Australia",
+                    "ATSI1012": "Aboriginal Sydney"
+                },
+                "title": "Level 1 Core Courses",
+                "credits_to_complete": 12,
+                "core": true,
+                "levels": [
+                    1
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ATSI2012": "Contemporary Issues in Indigenous Politics",
+                    "ATSI2011": "Indigenous Australian Political History",
+                    "ATSI2015": "The Science of Indigenous Knowledges",
+                    "ATSI2004": "Popular Culture of Indigenous Australia",
+                    "ATSI2003": "Indigenous Material Culture-Objects and Their Journey",
+                    "ATSI2014": "Indigenous People and Policy"
+                },
+                "title": "Level 2 Prescribed Electives",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [
+                    2
+                ],
+                "notes": ""
+            }
+        ]
+    },
+    "AUSTB2": {
+        "programs": [
+            "3444",
+            "3409",
+            "3453",
+            "3454",
+            "3543",
+            "3438"
+        ],
+        "name": "Australian Studies",
+        "type": "minor",
+        "UOC": 24,
+        "code": "AUSTB2",
+        "course_constraints": [
+            {
+                "title": "ARTS/EDUCATION (SECONDARY) STUDENTS",
+                "description": "The 24 UOC minor in Australian Studies can be combined with a major in History as preparation for a double first teaching specialisation"
+            }
+        ],
+        "curriculum": [
+            {
+                "courses": {
+                    "ARTS1190": "Sydney: History, Landscapes, People"
+                },
+                "title": "Level 1 Core Courses",
+                "credits_to_complete": 6,
+                "core": true,
+                "levels": [
+                    1
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ATSI3017": "Indigenous Histories and the Colonial World",
+                    "ARTS3874": "Culture and Human Rights",
+                    "BIOS3161": "Life in Arid Lands",
+                    "ARTS3292": "Migrants and Refugees in Australian History",
+                    "ARTS3279": "Inequality in Australia: A History",
+                    "ARTS3875": "Decolonising Research Methods",
+                    "ARTS3814": "Australian Foreign Policy",
+                    "ARTS3131": "Australian Drama"
+                },
+                "title": "Level 3 Prescribed Electives",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [
+                    3
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ARTS2062": "Australian Cinema",
+                    "ARTS2845": "Sex, Human Rights and Justice",
+                    "ATSI2004": "Popular Culture of Indigenous Australia",
+                    "ARTS2870": "Citizens, Action and Dissent",
+                    "ARTS2873": "Doing Fieldwork: Ethnography in Place",
+                    "ATSI2011": "Indigenous Australian Political History",
+                    "ARTS2270": "The Australian Experiment and the Nineteenth-Century World",
+                    "BEES6601": "An Introduction to the Sydney Environment",
+                    "PLAN2122": "History, Heritage and the Built Environment",
+                    "ARTS2031": "Australian Literature",
+                    "ARTS2271": "Inventing Modern Australia: 1900 to Now",
+                    "ATSI2012": "Contemporary Issues in Indigenous Politics",
+                    "GEOS2711": "Australian Climate and Vegetation",
+                    "GEOS2641": "Urban Environments"
+                },
+                "title": "Level 2 Prescribed Electives",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [
+                    2
+                ],
+                "notes": ""
+            }
+        ]
+    },
     "BINFAH": {
         "programs": [
             "3707"
@@ -3602,6 +3824,190 @@
             }
         ]
     },
+    "ECONT1": {
+        "programs": [
+            "3543"
+        ],
+        "name": "Data Analytics and Econometrics",
+        "type": "major",
+        "UOC": 48,
+        "code": "ECONT1",
+        "course_constraints": [],
+        "curriculum": [
+            {
+                "courses": {
+                    "ECON3000": "Evidence-based Intervention Design and Evaluation",
+                    "ECON2209": "Business Forecasting",
+                    "ECON3208": "Applied Econometric Methods",
+                    "ECON3206": "Financial Econometrics",
+                    "ECON3210": "Big Data Econometrics"
+                },
+                "title": "  Prescribed Elective Courses",
+                "credits_to_complete": 12,
+                "core": false,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ECON3203": "Econometric Theory and Methods",
+                    "ECON1102": "Macroeconomics 1",
+                    "ECON2206": "Introductory Econometrics ",
+                    "ECON2101": "Microeconomics 2",
+                    "ECON3209": "Statistics for Econometrics",
+                    "ECON1101": "Microeconomics 1"
+                },
+                "title": "Core Courses",
+                "credits_to_complete": 36,
+                "core": true,
+                "levels": [],
+                "notes": ""
+            }
+        ]
+    },
+    "ECONU1": {
+        "programs": [
+            "3543"
+        ],
+        "name": "Economic Policy and Society",
+        "type": "major",
+        "UOC": 48,
+        "code": "ECONU1",
+        "course_constraints": [],
+        "curriculum": [
+            {
+                "courses": {
+                    "ECON3106": "Politics and Economics",
+                    "ECON3116": "International Trade Theory and Policy",
+                    "ECON3125": "Economics of Health and Human Capital",
+                    "ECON3110": "Development Economics",
+                    "ECON3127": "Environmental Economics",
+                    "ECON3123": "Organisational Economics",
+                    "ECON3124": "Behavioural Economics",
+                    "ECON3000": "Evidence-based Intervention Design and Evaluation",
+                    "ACTL3191": "Superannuation and Retirement Benefits",
+                    "ACTL3192": "Retirement Saving and Spending Over the Lifecycle"
+                },
+                "title": "  Prescribed Level 3 Elective Courses - Applications",
+                "credits_to_complete": 12,
+                "core": false,
+                "levels": [
+                    3
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ECON2103": "Business and Government",
+                    "ECON2112": "Game Theory and Business Strategy"
+                },
+                "title": "  Prescribed Level 2 Elective Courses",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [
+                    2
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ECON2206": "Introductory Econometrics ",
+                    "ECON2101": "Microeconomics 2",
+                    "ECON1101": "Microeconomics 1",
+                    "ECON1102": "Macroeconomics 1"
+                },
+                "title": "Core Courses",
+                "credits_to_complete": 24,
+                "core": true,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ECON3208": "Applied Econometric Methods",
+                    "ECON3210": "Big Data Econometrics",
+                    "ECON3101": "Markets and Frictions",
+                    "ECON3121": "Industrial Organisation"
+                },
+                "title": "  Prescribed Level 3 Elective Courses - Methods",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [
+                    3
+                ],
+                "notes": ""
+            }
+        ]
+    },
+    "ECONV1": {
+        "programs": [
+            "3543"
+        ],
+        "name": "Macroeconomics and Financial Markets",
+        "type": "major",
+        "UOC": 48,
+        "code": "ECONV1",
+        "course_constraints": [],
+        "curriculum": [
+            {
+                "courses": {
+                    "ECON2107": "Modern Labour Markets: Theory and Policy",
+                    "ECON2209": "Business Forecasting"
+                },
+                "title": "  Prescribed Level 2 Elective Courses",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [
+                    2
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ACTL3192": "Retirement Saving and Spending Over the Lifecycle",
+                    "ACTL3191": "Superannuation and Retirement Benefits",
+                    "ECON3000": "Evidence-based Intervention Design and Evaluation",
+                    "ECON3116": "International Trade Theory and Policy",
+                    "ECON3104": "International Macroeconomics",
+                    "ECON3107": "Economics of Finance"
+                },
+                "title": "  Prescribed level 3 Elective Courses - Applications",
+                "credits_to_complete": 12,
+                "core": false,
+                "levels": [
+                    3
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ECON1102": "Macroeconomics 1",
+                    "ECON1101": "Microeconomics 1",
+                    "ECON2206": "Introductory Econometrics ",
+                    "ECON2101": "Microeconomics 2"
+                },
+                "title": "Core Courses",
+                "credits_to_complete": 24,
+                "core": true,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ECON3208": "Applied Econometric Methods",
+                    "ECON3206": "Financial Econometrics",
+                    "ECON3210": "Big Data Econometrics"
+                },
+                "title": "  Prescribed Level 3 Elective Courses - Methods",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [
+                    3
+                ],
+                "notes": ""
+            }
+        ]
+    },
     "ELECAH": {
         "programs": [
             "3707"
@@ -4027,6 +4433,149 @@
                 "core": true,
                 "levels": [],
                 "notes": "Note: - With approval of the minor stream authority, a student may substitute ENGG4102 Humanitarian Engineering Project only with another suitable humanitarian project/thesis topic completed elsewhere (e.g. Thesis or Project Course). Where a 12uoc Thesis is substituted, only 6uoc counts towards the minor, in place of ENGG4102. Please contact the Humanitarian Engineering minor coordinator to seek approval for a substitution. - ENGG3001 Fundamentals of Humanitarian Engineering is considered to be an interdisciplinary course in this minor"
+            }
+        ]
+    },
+    "ENVPE2": {
+        "programs": [
+            "3444",
+            "3409",
+            "3453",
+            "3454",
+            "3447",
+            "3543",
+            "3438"
+        ],
+        "name": "Environmental Humanities",
+        "type": "minor",
+        "UOC": 24,
+        "code": "ENVPE2",
+        "course_constraints": [
+            {
+                "title": "ARTS/EDUCATION (SECONDARY) STUDENTS",
+                "description": "The 24 uoc minor in Environmental Humanities can be combined with a major in History as preparation for a double first teaching specialisation."
+            }
+        ],
+        "curriculum": [
+            {
+                "courses": {
+                    "ARTS1240": "Environment and Society",
+                    "ARTS1241": "Environmental Advocacy and Activism"
+                },
+                "title": "Level 1 Core Courses",
+                "credits_to_complete": 12,
+                "core": true,
+                "levels": [
+                    1
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ARTS2244": "The Animal: Worker, Wild, Extinct?",
+                    "ARTS2243": "Waste and Society",
+                    "ARTS2248": "Disasters and Society",
+                    "ARTS2242": "The Politics of Climate Change",
+                    "ARTS2249": "Environmental Philosophy",
+                    "ARTS2240": "Environment, Sustainability and Development"
+                },
+                "title": "Level 2 Prescribed Electives",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [
+                    2
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ATSI3003": "Indigenous Cultural Heritage and the Environment",
+                    "ARTS3241": "Environmental Justice",
+                    "ARTS3242": "Environmental History",
+                    "DART3330": "Art and the Anthropocene",
+                    "ARTS3240": "Environmental Humanities Capstone",
+                    "ARTS3243": "Remaking Nature: The Politics of Biotechnology",
+                    "ARTS3245": "Urban Environments"
+                },
+                "title": "Level 3 Prescribed Electives",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [
+                    3
+                ],
+                "notes": ""
+            }
+        ]
+    },
+    "EUROC2": {
+        "programs": [
+            "3444",
+            "3409",
+            "3558",
+            "3453",
+            "3454",
+            "3447",
+            "3543",
+            "3438"
+        ],
+        "name": "European Studies",
+        "type": "minor",
+        "UOC": 24,
+        "code": "EUROC2",
+        "course_constraints": [
+            {
+                "title": "Arts/Education (Secondary) Students",
+                "description": "The 24 uoc minor in European Studies can be combined with a major in History as preparation for a double first teaching specialisation."
+            }
+        ],
+        "curriculum": [
+            {
+                "courses": {
+                    "ARTS1780": "Concepts of Europe",
+                    "ARTS1782": "Contemporary Europe in Crisis: Power and Culture"
+                },
+                "title": "Level 1 Core Courses",
+                "credits_to_complete": 12,
+                "core": true,
+                "levels": [
+                    1
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ARTS3786": "Confronting the Past in Contemporary Europe",
+                    "ARTS3295": "Understanding Nazi Germany: Origins, Structures, Explanation",
+                    "ARTS3787": "European Modernity: Religion, Politics, Culture",
+                    "ARTS3780": "Contemporary Germany: History, Politics, Society"
+                },
+                "title": "Level 3 Prescribed Electives",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [
+                    3
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ARTS2542": "Gods, Heroines and Heroes in Greek Myth",
+                    "ARTS2785": "Europe's Age of Catastrophe, 1914-1945",
+                    "ARTS2272": "The European World, 1500-1800",
+                    "ARTS3789": "Ethnic and Religious Minorities in Modern Europe",
+                    "ARTS2781": "Europe since the Second World War: Politics, Societies and Economies",
+                    "ARTS2788": "Religion and Secularism in Modern Europe",
+                    "ARTS2285": "The Holocaust: Origins, Implementation, Aftermath",
+                    "ECON2322": "European Economic Development",
+                    "ARTS2487": "French Popular Culture"
+                },
+                "title": "Level 2 Prescribed Electives",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [
+                    2
+                ],
+                "notes": ""
             }
         ]
     },
@@ -5072,6 +5621,116 @@
                 "levels": [
                     2
                 ],
+                "notes": ""
+            }
+        ]
+    },
+    "HISTD2": {
+        "programs": [
+            "3444",
+            "3409",
+            "3558",
+            "3453",
+            "3454",
+            "3543",
+            "3438"
+        ],
+        "name": "History",
+        "type": "minor",
+        "UOC": 24,
+        "code": "HISTD2",
+        "course_constraints": [
+            {
+                "title": "Arts/Education (Secondary) Students",
+                "description": "The minor in History (24 UOC) is not available to Bachelor of Arts/Education (Secondary) students. To be eligible for the approved teaching specialisation, Bachelor of Arts/Education (Secondary) students must complete either the History Major (60 UOC) or History (Extended) Minor (36 UOC)."
+            }
+        ],
+        "curriculum": [
+            {
+                "courses": {
+                    "ATSI3017": "Indigenous Histories and the Colonial World",
+                    "ARTS3218": "Japanese History: Modern Miracles and Mythologies",
+                    "ARTS3283": "Roman Emperors: From Augustus to Nero",
+                    "ARTS3289": "Documentary Film and History",
+                    "ARTS3212": "Contemporary India Through Bollywood: Politics, Society and Culture",
+                    "ARTS3270": "Reflecting on Histories and Historians: Capstone",
+                    "ARTS3900": "Gender and Queer Critiques: Rethinking History and Other Studies",
+                    "ARTS3290": "Visions and Voices of Empire",
+                    "ARTS3242": "Environmental History",
+                    "ARTS3295": "Understanding Nazi Germany: Origins, Structures, Explanation",
+                    "ARTS3640": "Japan and Korea: Cultures in Conflict",
+                    "ARTS3279": "Inequality in Australia: A History",
+                    "ARTS3292": "Migrants and Refugees in Australian History",
+                    "ARTS3786": "Confronting the Past in Contemporary Europe",
+                    "ARTS3220": "Architecture and Urbanism in Asia",
+                    "ARTS3217": "History of Modern China: Contested Visions"
+                },
+                "title": "Level 3 Prescribed Electives",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [
+                    3
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ARTS2211": "East Asia",
+                    "ARTS2282": "Rome",
+                    "ARTS2271": "Inventing Modern Australia: 1900 to Now",
+                    "ARTS2272": "The European World, 1500-1800",
+                    "ARTS2283": "Classical Greece",
+                    "ARTS2281": "Ancient Egypt and Western Asia",
+                    "ARTS2781": "Europe since the Second World War: Politics, Societies and Economies",
+                    "ARTS2212": "Southeast Asia",
+                    "ARTS2663": "Korea and Japan: Chinese Cultural Transmission",
+                    "ARTS2278": "Slavery and Freedom: US History 1750-1890",
+                    "ARTS2904": "Dressed to Kill: Dress and Identity in History",
+                    "ARTS2210": "Modern India: Violence and Nonviolence in Colonial South Asia, 1750-1947",
+                    "ARTS2908": "Sex and Power in Early Modern China and Japan",
+                    "ARTS2750": "Modern Latin America: Dependency and Development",
+                    "ARTS2909": "Gender in South Asia and Southeast Asia",
+                    "ARTS2785": "Europe's Age of Catastrophe, 1914-1945",
+                    "ARTS2906": "History of Sexuality",
+                    "ARTS2270": "The Australian Experiment and the Nineteenth-Century World",
+                    "ARTS2150": "A House Divided: The Making of Modern America",
+                    "ARTS2662": "Korea at a Glance",
+                    "ARTS2633": "A Cultural Survey of Japan: From Gods to Gadgets",
+                    "ARTS2285": "The Holocaust: Origins, Implementation, Aftermath",
+                    "ARTS2458": "Along the Silk Road: Conquerors, Traders and Explorers",
+                    "ARTS2457": "China Imagined and Perceived",
+                    "ARTS2900": "Global Feminisms: Competing Visions, Varying Histories"
+                },
+                "title": "Level 2 Prescribed Electives",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [
+                    2
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ARTS1190": "Sydney: History, Landscapes, People",
+                    "ARTS1900": "Gendered Worlds: Introduction to Gender Studies",
+                    "ARTS1271": "History of the Present: The World since 1900"
+                },
+                "title": "Level 1 Prescribed Electives",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [
+                    1
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ARTS1270": "Global History: Exploring the First Globalization, 15th-19th Century"
+                },
+                "title": "Core Course",
+                "credits_to_complete": 6,
+                "core": true,
+                "levels": [],
                 "notes": ""
             }
         ]
@@ -8894,6 +9553,78 @@
                 "credits_to_complete": 36,
                 "core": false,
                 "levels": [],
+                "notes": ""
+            }
+        ]
+    },
+    "SOCAD2": {
+        "programs": [
+            "3444",
+            "3409",
+            "3453",
+            "3454",
+            "3447",
+            "3543",
+            "3438"
+        ],
+        "name": "Sociology and Anthropology",
+        "type": "minor",
+        "UOC": 24,
+        "code": "SOCAD2",
+        "course_constraints": [
+            {
+                "title": "Arts/Education (Secondary) Students",
+                "description": "The minor in Sociology and Anthropology (24 UOC) is not available to Bachelor of Arts/Education (Secondary) students. To be eligible for the approved teaching specialisation, Bachelor of Arts/Education (Secondary) students must complete either the Sociology and Anthropology Major (60 UOC) or Sociology and Anthropology (Extended) Minor (36 UOC)."
+            },
+            {
+                "title": "Note: Social Work (Honours)/Arts",
+                "description": "If you are enrolled in the Bachelor of Social Work (Honours)/Bachelor of Arts you will complete ARTS1753 Culture, Experience and Change (6 UOC) as part of your Social Work core requirement. If you choose a major or minor in Sociology and Anthropology you must complete an additional 6 UOC UNSW Arts and Social Sciences Prescribed Elective."
+            }
+        ],
+        "curriculum": [
+            {
+                "courses": {
+                    "ARTS2871": "Power and Powerlessness"
+                },
+                "title": "Level 2 Core Courses",
+                "credits_to_complete": 6,
+                "core": true,
+                "levels": [
+                    2
+                ],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ARTS3883": "Personhood in Asia",
+                    "ARTS3871": "Forensic Sociology",
+                    "ARTS2876": "Understanding the Self",
+                    "ARTS2873": "Doing Fieldwork: Ethnography in Place",
+                    "ARTS3872": "Media, Culture and Power",
+                    "ARTS2874": "Culture and Emotion",
+                    "ARTS2870": "Citizens, Action and Dissent",
+                    "ARTS3885": "Violence, Resistance, Change",
+                    "ARTS3874": "Culture and Human Rights",
+                    "ARTS2877": "Technologies, Culture, Society",
+                    "ARTS2872": "Living and dying"
+                },
+                "title": "Prescribed Electives",
+                "credits_to_complete": 6,
+                "core": false,
+                "levels": [],
+                "notes": ""
+            },
+            {
+                "courses": {
+                    "ARTS1753": "Culture, Experience and Change",
+                    "ARTS1870": "Rethinking the Social"
+                },
+                "title": "Level 1 Core Courses",
+                "credits_to_complete": 12,
+                "core": true,
+                "levels": [
+                    1
+                ],
                 "notes": ""
             }
         ]
