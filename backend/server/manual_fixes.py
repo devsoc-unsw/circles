@@ -26,6 +26,21 @@ def fix_3784(structure: dict[str, StructureContainer]):
             mutated_item[elective_name]["UOC"] += 6
     return structure
 
+def fix_3673(structure: dict[str, StructureContainer]):
+    mutated_item = remove_course(structure, "ECON1202")
+    if mutated_item:
+        with suppress(StopIteration):
+            core_name = next(filter(lambda a: "core" in a.lower(), mutated_item['content'].keys()))
+            mutated_item['content'][core_name]["UOC"] -= 6
+
+    mutated_item = remove_course(structure, "ECON1203")
+    if mutated_item:
+        with suppress(StopIteration):
+            core_name = next(filter(lambda a: "core" in a.lower(), mutated_item['content'].keys()))
+            mutated_item['content'][core_name]["UOC"] -= 6
+
+    return structure
+
 def fix_3785(structure: dict[str, StructureContainer]):
     remove_course(structure, "COMP1911")
     remove_course(structure, "ENGG1811")
@@ -46,6 +61,7 @@ def fix_3785(structure: dict[str, StructureContainer]):
 def apply_manual_fixes(structure: dict[str, StructureContainer], program_code: str):
     fixes = {
         "3784": fix_3784,
-        "3785": fix_3785
+        "3785": fix_3785,
+        "3673": fix_3673,
     }
     return fixes.get(program_code, lambda a: a)(structure)

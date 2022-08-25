@@ -1,18 +1,19 @@
 import React from 'react';
-import { Typography } from 'antd';
-import { ViewSubgroupCourse } from 'types/progressionViews';
+import { Table, Typography } from 'antd';
+import { Views, ViewSubgroupCourse } from 'types/progressionViews';
 import getNumTerms from 'utils/getNumTerms';
 import Collapsible from 'components/Collapsible';
+import columnsData from '../columnsData';
 import CoursesSection from '../GridView/CoursesSection';
 
-const { Title, Text } = Typography;
+const { Title } = Typography;
 
 type Props = {
   courses: ViewSubgroupCourse[]
-  // view: Views
+  view: Views
 };
 
-const FreeElectivesSection = ({ courses }: Props) => {
+const FreeElectivesSection = ({ courses, view }: Props) => {
   const uoc = courses.reduce(
     (sum, course) => (sum + ((course.UOC ?? 0)
       * getNumTerms((course.UOC ?? 0), course.isMultiterm))),
@@ -28,15 +29,28 @@ const FreeElectivesSection = ({ courses }: Props) => {
       )}
     >
       <Title level={4} className="text">You have {uoc} UOC worth of additional courses planned</Title>
-      <Text>
+      <p>
         These courses may or may not be counted to your program. Please manually verify your
         progression with this information.
-      </Text>
-      <CoursesSection
-        title="Additional Electives"
-        plannedCourses={courses}
-        unplannedCourses={[]}
-      />
+      </p>
+      {
+        view === Views.TABLE ? (
+          <Table
+            dataSource={courses.map((c) => ({
+              ...c,
+              UOC: c.isMultiterm ? getNumTerms(c.UOC, c.isMultiterm) * c.UOC : c.UOC,
+            }))}
+            columns={columnsData}
+            pagination={false}
+          />
+        ) : (
+          <CoursesSection
+            title="Additional Electives"
+            plannedCourses={courses}
+            unplannedCourses={[]}
+          />
+        )
+      }
     </Collapsible>
   );
 };
