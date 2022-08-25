@@ -331,12 +331,8 @@ const plannerSlice = createSlice({
           const courses = state.years[i].T0;
           courses.forEach((course) => {
             if (state.courses[course].isMultiterm) {
-              Object.entries(state.courses).forEach(([code, desc]) => {
-                if (course === code && desc.plannedFor !== null) {
-                  plannerSlice.caseReducers
-                    .unschedule(state, { payload: { destIndex: null, code }, type: 'planner/unschedule' });
-                }
-              });
+              plannerSlice.caseReducers
+                .unschedule(state, { payload: { destIndex: null, code: course }, type: 'planner/unschedule' });
             }
             state.courses[course].plannedFor = null;
             state.unplanned.push(course);
