@@ -81,7 +81,8 @@ class CourseCondition(Condition):
         return self.course == course
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
-        return (True, []) if user.has_taken_course(self.course) else (False, [f"Required to take course {self.course}"])
+        #return (True, []) if user.has_taken_course(self.course) else (False, [f"Prerequisite not met: {self.course}"])
+        return (True, []) if user.has_taken_course(self.course) else (False, [self.course])
 
     def __str__(self) -> str:
         return json.dumps({
@@ -109,6 +110,7 @@ class CoreqCoursesCondition(Condition):
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
         """ Returns True if the user is taking these courses in the same term """
+        
         match self.logic:
             case Logic.AND:
                 met = all(
@@ -120,16 +122,17 @@ class CoreqCoursesCondition(Condition):
                 for course in self.courses:
                     if not (user.has_taken_course(course)
                     or user.is_taking_course(course)) :
-                        warning.append(f"Requires completion of: {course}")
-                return met, warning
+                        warning.append(course)
+                return met, ['(Corequisites: ' + ' AND '.join(sum(warning, [])) + ')']
             case Logic.OR:
                 met = any(
                     user.has_taken_course(course)
                     or user.is_taking_course(course)
                     for course in self.courses
                 )
-                return met, [f"Requires completion of one of the following courses: {course}" for course in self.courses]
-
+                warning = [f'{course}' for course in self.courses]
+                return met, ['(Corequisites: ' + ' OR '.join(warning) + ')']
+        
         print("Conditions Error: validation was not of type AND or OR")
         return True, []
 
@@ -362,14 +365,9 @@ class CourseExclusionCondition(Condition):
         self.exclusion = exclusion
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
-        is_valid = not user.has_taken_course(self.exclusion)
-        warnings = []
-        if not is_valid: warnings.append(f"Exclusion: {self.exclusion}")
-        return is_valid, warnings
 
-        '''is_valid = not user.has_taken_specific_course(self.exclusion)
-        return is_valid, ([] if is_valid else [f"{self.exclusion} is an exclusion course for this one"])'''
-
+        is_valid = not user.has_taken_specific_course(self.exclusion)
+        return is_valid, ([] if is_valid else [f"Exclusion: {self.exclusion}"])
 
     def is_path_to(self, course: str) -> bool:
         return False
@@ -428,8 +426,16 @@ class CompositeCondition(Condition):
         validations = [cond.validate(user) for cond in self.conditions]
         # unzips a zipped list - https://www.geeksforgeeks.org/python-unzip-a-list-of-tuples/
         unlocked, warnings = list(zip(*validations))
-        satisfied = all(unlocked) if self.logic == Logic.AND else any(unlocked)
-        return (satisfied, []) if satisfied else (satisfied, sum(warnings, []))  # warnings are flattened
+        if self.logic == Logic.AND:
+            satisfied = all(unlocked) 
+            return (satisfied, []) if satisfied else (satisfied, ['('+' AND '.join(sum(warnings, []))+')'])  # warnings are flattened
+            #return (satisfied, []) if satisfied else (satisfied, [f"Requires completion of all of the following courses: " + ', '.join(sum(warnings, []))])
+
+        else:
+            satisfied = any(unlocked)            
+            return (satisfied, []) if satisfied else (satisfied,['('+' OR '.join(sum(warnings, []))+')'])
+            #return (satisfied, []) if satisfied else (satisfied, [f"Requires completion of one of the following courses: " + ', '.join(sum(warnings, []))])
+
 
     def is_path_to(self, course: str) -> bool:
         return any(condition.is_path_to(course) for condition in self.conditions)
