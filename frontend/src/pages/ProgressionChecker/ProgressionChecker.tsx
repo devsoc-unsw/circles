@@ -250,6 +250,9 @@ const ProgressionChecker = () => {
                       <TableView
                         uoc={structure[group].content[subgroup].UOC}
                         subgroupTitle={subgroup}
+                        notes={structure[group].content[subgroup].notes}
+                        showNotes={group === 'Rules'}
+                        type={structure[group].content[subgroup].type}
                         courses={subgroupEntry.courses}
                       />
                     );
@@ -270,7 +273,7 @@ const ProgressionChecker = () => {
               )}
             </Collapsible>
           ))}
-          <FreeElectiveSection courses={Object.values(overflowCourses)} />
+          <FreeElectiveSection courses={Object.values(overflowCourses)} view={view} />
         </S.ProgressionViewContainer>
       </S.Wrapper>
     </PageTemplate>

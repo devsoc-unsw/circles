@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const TitleSortWrapper = styled.div`
   display: flex;
-  justify-content: space-between;;
+  justify-content: space-between;
 `;
 
 const SortBtnWrapper = styled.div`
