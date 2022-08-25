@@ -18,7 +18,7 @@ import getNumTerms from 'utils/getNumTerms';
 import openNotification from 'utils/openNotification';
 import Collapsible from 'components/Collapsible';
 import PageTemplate from 'components/PageTemplate';
-import { inDev, MAX_COURSES_OVERFLOW } from 'config/constants';
+import { MAX_COURSES_OVERFLOW } from 'config/constants';
 import type { RootState } from 'config/store';
 import Dashboard from './Dashboard';
 import FreeElectiveSection from './FreeElectivesSection';
@@ -212,7 +212,6 @@ const ProgressionChecker = () => {
                   >
                     {view === Views.GRID ? 'Display Concise Mode' : 'Display Full Mode'}
                   </Button>
-                  {inDev && (
                   <Button
                     type="primary"
                     icon={<TableOutlined />}
@@ -220,7 +219,6 @@ const ProgressionChecker = () => {
                   >
                     Display Table View
                   </Button>
-                  )}
                 </>
               )
               : (
@@ -244,20 +242,18 @@ const ProgressionChecker = () => {
               initiallyCollapsed={group === 'Rules'}
             >
               {Object.entries(groupEntry).sort(sortSubgroups).map(
-                ([subgroup, subgroupEntry]) => {
-                  if (view === Views.TABLE) {
-                    return (
-                      <TableView
-                        uoc={structure[group].content[subgroup].UOC}
-                        subgroupTitle={subgroup}
-                        notes={structure[group].content[subgroup].notes}
-                        showNotes={group === 'Rules'}
-                        type={structure[group].content[subgroup].type}
-                        courses={subgroupEntry.courses}
-                      />
-                    );
-                  }
-                  return (
+                ([subgroup, subgroupEntry]) => (view === Views.TABLE
+                  ? (
+                    <TableView
+                      uoc={structure[group].content[subgroup].UOC}
+                      subgroupTitle={subgroup}
+                      notes={structure[group].content[subgroup].notes}
+                      showNotes={group === 'Rules'}
+                      type={structure[group].content[subgroup].type}
+                      courses={subgroupEntry.courses}
+                    />
+                  )
+                  : (
                     <GridView
                       uoc={structure[group].content[subgroup].UOC}
                       subgroupTitle={subgroup}
@@ -268,8 +264,7 @@ const ProgressionChecker = () => {
                       isCoursesOverflow={subgroupEntry.isCoursesOverflow}
                       isConcise={view === Views.GRID_CONCISE}
                     />
-                  );
-                },
+                  )),
               )}
             </Collapsible>
           ))}
