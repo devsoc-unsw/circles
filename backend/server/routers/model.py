@@ -37,7 +37,7 @@ class CourseDetails(BaseModel):
     gen_ed: bool
     is_legacy: bool
     is_accurate: bool
-    is_multiterm: bool
+    is_multiterm: Optional[bool]
 
 
 class ContainerContent(TypedDict):
@@ -173,6 +173,13 @@ class SpecialisationTypes(BaseModel):
 class Graph(BaseModel):
     edges: list[dict[str, str]]
     courses: list[str]
+    # tuple is of type (str, fastapi.exceptions.HTTPException)
+    err_edges: list[tuple]
+
+class TermsList(BaseModel):
+    terms: Optional[dict[str, Optional[list[str]]]]
+    # Actually tuple(str, fastapi.exceptions.HTTPException)
+    fails: Optional[list[tuple]]
 
 CONDITIONS_PATH = "data/final_data/conditions.pkl"
 with open(CONDITIONS_PATH, "rb") as file:
