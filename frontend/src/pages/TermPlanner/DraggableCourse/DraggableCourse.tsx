@@ -31,7 +31,7 @@ const DraggableCourse = ({ code, index, term }: Props) => {
 
   // prereqs are populated in CourseDescription.jsx via course.raw_requirements
   const {
-    prereqs, title, isUnlocked, plannedFor,
+    title, isUnlocked, plannedFor,
     isLegacy, isAccurate, termsOffered, handbookNote, supressed, mark,
   } = courses[code];
   const warningMessage = courses[code].warnings;
@@ -127,11 +127,10 @@ const DraggableCourse = ({ code, index, term }: Props) => {
       {!isDragDisabled && shouldHaveWarning && (
         <ReactTooltip id={code} place="bottom">
           {isLegacy ? 'This course is discontinued. If an equivalent course is currently being offered, please pick that instead.'
-            : !isUnlocked ? prereqs.trim()
-              : !isOffered ? 'The course is not offered in this term.'
-                : warningMessage.length !== 0 ? warningMessage.join('\n')
-                  // eslint-disable-next-line react/no-danger
-                  : <div dangerouslySetInnerHTML={{ __html: handbookNote }} />}
+            : !isOffered ? 'The course is not offered in this term.'
+              : warningMessage.length !== 0 ? warningMessage.join('\n')
+                // eslint-disable-next-line react/no-danger
+                : <div dangerouslySetInnerHTML={{ __html: handbookNote }} />}
           {!isAccurate ? ' The course info may be inaccurate.' : ''}
         </ReactTooltip>
       )}
