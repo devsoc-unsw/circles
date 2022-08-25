@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { LockOutlined, UnlockOutlined } from '@ant-design/icons';
+import {
+  LockOutlined, UnlockOutlined, ZoomInOutlined,
+  ZoomOutOutlined,
+} from '@ant-design/icons';
 import type { Graph, INode, Item } from '@antv/g6';
 import { Button, Switch, Tooltip } from 'antd';
 import axios from 'axios';
@@ -200,6 +203,17 @@ const GraphicalSelector = () => {
     }
   };
 
+  const zoomIn = () => {
+    if (graph) {
+      graph.zoom(1);
+    }
+  };
+  const zoomOut = () => {
+    if (graph) {
+      graph.getMinZoom();
+    }
+  };
+
   return (
     <PageTemplate>
       <S.Wrapper>
@@ -222,6 +236,8 @@ const GraphicalSelector = () => {
               unCheckedChildren={<UnlockOutlined />}
             />
           </Tooltip>
+          <ZoomInOutlined onClick={zoomIn} />
+          <ZoomOutOutlined onClick={zoomOut} />
           <Button onClick={handleShowAllCoursesGraph}>
             Show Graph
           </Button>
