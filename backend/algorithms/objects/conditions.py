@@ -88,6 +88,20 @@ class CourseCondition(Condition):
             'id': self.course
         })
 
+class MaturityCondition(Condition):
+    """
+    Handles Maturity Requirement Conditions. This is is a particularly
+    special case as it attaches to the program itself and is not neccessarily
+    a requirement of a course.
+    """
+    def __init__(self):
+        return
+
+    def validate(self, user: User) -> bool:
+        """ Validate if user has passed a maturity requirement """
+        user
+        raise NotImplementedError
+
 
 class CoreqCoursesCondition(Condition):
     """ Condition that the student has completed the course/s in or before the current term """
