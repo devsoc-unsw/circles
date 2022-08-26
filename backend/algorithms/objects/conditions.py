@@ -250,19 +250,7 @@ class GradeCondition(Condition):
                 satisfied = all(unlocked) if category.logic == Logic.AND else any(unlocked)
                 return satisfied, warnings
 
-
-            course = course.class_name
-            if course not in user.courses:
-                return False, []
-
-            user_grade = user.get_grade(course)
-            if user_grade is None:
-                return True, [self.get_warning()]
-            if user_grade < self.grade:
-                return False, [f"Your grade {user_grade} in course {course} does not meet the grade requirements (minimum {self.grade}) for this course"]
-            return True, []
-
-            '''elif isinstance(category, ClassCategory):
+            elif isinstance(category, ClassCategory):
                 course = category.class_name
                 if course not in user.courses:
                     return False, []
@@ -271,10 +259,10 @@ class GradeCondition(Condition):
                 if user_grade is None:
                     return True, [self.get_warning()]
                 if user_grade < self.grade:
-                    return False, []
+                    return False, [f"Your grade {user_grade} in course {course} does not meet the grade requirements (minimum {self.grade}) for this course"]
                 return True, []
             else:
-                return True, ["We have failed to parse this correctly"]'''
+                return True, ["We have failed to parse this correctly"]
 
         if isinstance(self.category, CompositeCategory):
             validations = [_validate_course(course) for course in self.category.categories]
@@ -389,7 +377,7 @@ class ProgramExclusionCondition(Condition):
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
         excluded = not user.in_program(self.exclusion)
-        return (excluded, []) if excluded else excluded, ["This course cannot be taken in your program"]
+        return (excluded, []) if excluded else (excluded, ["This course cannot be taken in your program"])
 
     def is_path_to(self, course: str) -> bool:
         return False
@@ -429,13 +417,9 @@ class CompositeCondition(Condition):
         if self.logic == Logic.AND:
             satisfied = all(unlocked) 
             return (satisfied, []) if satisfied else (satisfied, ['('+' AND '.join(sum(warnings, []))+')'])  # warnings are flattened
-            #return (satisfied, []) if satisfied else (satisfied, [f"Requires completion of all of the following courses: " + ', '.join(sum(warnings, []))])
-
         else:
             satisfied = any(unlocked)            
             return (satisfied, []) if satisfied else (satisfied,['('+' OR '.join(sum(warnings, []))+')'])
-            #return (satisfied, []) if satisfied else (satisfied, [f"Requires completion of one of the following courses: " + ', '.join(sum(warnings, []))])
-
 
     def is_path_to(self, course: str) -> bool:
         return any(condition.is_path_to(course) for condition in self.conditions)
