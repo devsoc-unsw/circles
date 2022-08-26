@@ -3,7 +3,7 @@ APIs for the /courses/ route.
 """
 from contextlib import suppress
 import re
-from typing import Dict, List, Mapping, Optional, Set, Tuple
+from typing import Dict, List, Mapping, Set, Tuple
 
 from algorithms.objects.user import User
 from data.config import ARCHIVED_YEARS, GRAPH_CACHE_FILE, LIVE_YEAR
@@ -459,7 +459,20 @@ def courses_unlocked_when_taken(userData: UserData, courseToBeTaken: str) -> Dic
             "content": {
                 "application/json": {
                     "example": {
-                        "terms": ["21T2", "21T2", "21T3"],
+                        "terms": {
+                            "2022": [ "T1", "T2", "T3" ],
+                        },
+                        "fails": [
+                            [
+                                "COMP1511",
+                                "2023",
+                                {
+                                    "status_code": 400,
+                                    "detail": "invalid course code or year",
+                                    "headers": None
+                                }
+                            ]
+                        ]
                     },
                 },
             },
