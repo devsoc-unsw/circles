@@ -108,6 +108,7 @@ class MostRecentPastTerm(TypedDict):
 
 
 class PlannerData(BaseModel):
+    unplanned: list[str]
     program: str
     specialisations: list[str]
     year: int

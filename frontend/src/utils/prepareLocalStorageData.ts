@@ -10,20 +10,23 @@ type TermPlan = {
 
 type YearPlan = TermPlan[];
 
-type CoursesForValidationPayload = {
+type LocalStorageData = {
   program: string
   year: number
   specialisations: string[]
   plan: YearPlan[]
   mostRecentPastTerm: MostRecentTerm
+  unplanned: string[]
 };
 
-const prepareCoursesForValidationPayload = (
+const prepareLocalStorageData = (
   planner: PlannerSliceState,
   degree: DegreeSliceState,
   showWarnings: boolean,
-): CoursesForValidationPayload => {
-  const { years, startYear, courses } = planner;
+): LocalStorageData => {
+  const {
+    years, startYear, courses, unplanned,
+  } = planner;
   const { programCode, specs } = degree;
 
   const plan: YearPlan[] = [];
@@ -45,7 +48,8 @@ const prepareCoursesForValidationPayload = (
     year: 1,
     plan,
     mostRecentPastTerm: showWarnings ? { Y: 0, T: 0 } : getMostRecentPastTerm(startYear),
+    unplanned,
   };
 };
 
-export default prepareCoursesForValidationPayload;
+export default prepareLocalStorageData;

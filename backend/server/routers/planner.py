@@ -76,3 +76,9 @@ async def validate_term_planner(plannerData: PlannerData):
         user.year += 1
 
     return {"courses_state": coursesState}
+
+@router.post("/saveLocalStorage/", response_model=bool)
+async def save_local_storage(plannerData: PlannerData):
+    #TODO: replace this with a real implementation
+    print(plannerData)
+    return True
