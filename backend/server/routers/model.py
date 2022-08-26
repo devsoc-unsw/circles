@@ -174,8 +174,6 @@ class SpecialisationTypes(BaseModel):
 class Graph(BaseModel):
     edges: list[dict[str, str]]
     courses: list[str]
-    # tuple is of type (str, fastapi.exceptions.HTTPException)
-    err_edges: list[tuple]
 
 class TermsList(BaseModel):
     terms: Optional[dict[str, Optional[list[str]]]]
