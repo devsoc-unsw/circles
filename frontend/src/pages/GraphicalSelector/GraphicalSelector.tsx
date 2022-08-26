@@ -205,12 +205,12 @@ const GraphicalSelector = () => {
 
   const zoomIn = () => {
     if (graph) {
-      graph.zoom(1);
+      // graph.zoom(1);
     }
   };
   const zoomOut = () => {
     if (graph) {
-      graph.getMinZoom();
+      // graph.getMinZoom();
     }
   };
 
