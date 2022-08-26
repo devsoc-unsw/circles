@@ -210,15 +210,16 @@ class WAMCondition(Condition):
         Will always return True and a warning since WAM can fluctuate
         """
         warning = self.get_warning(user.wam(self.category))
-        return True, [warning] if warning else []
+        return True, [warning]
 
-    def get_warning(self, applicable_wam: Optional[float]) -> str | None:
+    def get_warning(self, applicable_wam: Optional[float]) -> str:
         """ Returns an appropriate warning message or None if not needed """
+        wam_warning = f"Requires {self.wam} WAM in {self.category}. "
         if applicable_wam is None:
-            return f"Requires {self.wam} WAM in {self.category}. Your WAM in {self.category} has not been recorded"
+            return wam_warning + f"Your WAM in {self.category} has not been recorded"
         if applicable_wam >= self.wam:
-            return None
-        return f"Requires {self.wam} WAM in {self.category}. Your WAM in {self.category} is currently {applicable_wam:.3f}"
+            return wam_warning
+        return wam_warning + f"Your WAM in {self.category} is currently {applicable_wam:.3f}"
 
     def __str__(self) -> str:
         return json.dumps({
