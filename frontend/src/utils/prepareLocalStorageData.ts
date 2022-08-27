@@ -12,13 +12,13 @@ type YearPlan = TermPlan[];
 
 type LocalStorageData = {
   programCode: string
-  programName: string
-  year: number
-  numYears: number
   specialisations: string[]
+  year: number
   plan: YearPlan[]
-  unplanned: string[]
   mostRecentPastTerm: MostRecentTerm
+  programName: string
+  numYears: number
+  unplanned: string[]
   isSummerEnabled: boolean
 };
 
@@ -47,13 +47,13 @@ const prepareLocalStorageData = (
 
   return {
     programCode,
-    programName,
     specialisations: specs,
     year: 1,
-    numYears,
     plan,
-    unplanned,
     mostRecentPastTerm: showWarnings ? { Y: 0, T: 0 } : getMostRecentPastTerm(startYear),
+    programName,
+    unplanned,
+    numYears,
     isSummerEnabled,
   };
 };
