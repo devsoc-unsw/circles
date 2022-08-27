@@ -460,6 +460,8 @@ class CompositeCondition(Condition):
 
 def flatten_list_list(nested_list: List[List[str]]) -> List[str]:
     """ Takes a List[List[str]] object and flattens it down into a single list """
+    if len(nested_list) == 0:
+        return []
     return reduce(lambda x, y: x + y, nested_list)
     
 
