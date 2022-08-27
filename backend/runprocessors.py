@@ -17,6 +17,7 @@ from data.processors.log_broken import log_broken_conditions
 
 from data.processors.conditions_preprocessing import preprocess_conditions
 from data.processors.conditions_tokenising import tokenise_conditions
+from data.processors.program_conditions_tokenising import run_program_token_process
 from data.processors.courses_processing import process_course_data
 from data.processors.programs_processing import process_prg_data
 from data.processors.specialisations_processing import customise_spn_data
@@ -99,6 +100,9 @@ run: dict[str, dict[str, Callable]] = {
         "program": cache_program_mappings,
         "graph": cache_graph
     },
+    "program_condition": {
+        "tokenise": run_program_token_process,
+    }
 }
 
 if __name__ == "__main__":

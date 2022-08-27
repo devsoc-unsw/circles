@@ -6,7 +6,6 @@ This file currently does the job of two. TODO: move stuff out
 1. Pre-process condition tokenisations
 2. Tokenise conditions
 
-
 """
 
 
@@ -52,12 +51,15 @@ def pre_process_cond(condition: Dict):
         return None
     if not is_relevant_string(condition.get("notes", "")) and not is_relevant_string(condition.get("title", "")):
         return None
+    return condition
     # Epic regex happens here
     # Remove all cringe stuff
 
 def is_relevant_string(string: str) -> bool:
     """
     Checks if a string is relevant to the tokenisation process.
+    Doesn't actually make changes to the file but is instead just there to prune
+    away irrelevant strings so that we don't have to bother cleaning them up later.
     """
     return bool(
         re.search(r"*maturity*", string)
@@ -69,20 +71,20 @@ def tokenise_program_requirements(program_info: Dict) -> Dict:
     """
     return program_info
 
-def main():
-    program_info = read_data()
+def run_program_token_process():
+    program_info = read_data(PROGRAMS_PROCESSED_PATH)
 
     pre_processed: Dict = {}
     for code, info in program_info.items():
         pre_processed[code] = pre_process_program_requirements(info)
-    write_data(pre_processed)
+    write_data(pre_processed, PRE_PROCESSED_DATA_PATH)
 
     final: Dict = {}
     for code, info in pre_processed.items():
         final[code] = tokenise_program_requirements(info)
 
-    write_data(final)
+    write_data(final, FINAL_TOKENS_PATH)
 
-main()
-
+if __name__ == "__main__":
+    run_program_token_process()
 
