@@ -420,7 +420,7 @@ class CompositeCondition(Condition):
         for unlocked_cond, warning in validations:
             if unlocked_cond and len(warning) > 0:
                 wam_warning.append(warning)
-        print(sum(all_warnings, []))
+
         if self.logic == Logic.AND:
             satisfied = all(unlocked) 
             return satisfied, (wam_warning if satisfied else ['(' + ' AND '.join(sum(all_warnings,[])) + ')'])  # warnings are flattened
