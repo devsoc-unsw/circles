@@ -5,6 +5,7 @@ Contains the Conditions classes
 import json
 from abc import ABC, abstractmethod
 from typing import Optional, Tuple, TypedDict
+import warnings
 
 from algorithms.objects.categories import Category, AnyCategory, ClassCategory, CompositeCategory
 from algorithms.objects.user import User
@@ -81,7 +82,6 @@ class CourseCondition(Condition):
         return self.course == course
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
-        #return (True, []) if user.has_taken_course(self.course) else (False, [f"Prerequisite not met: {self.course}"])
         return (True, []) if user.has_taken_course(self.course) else (False, [self.course])
 
     def __str__(self) -> str:
@@ -123,7 +123,7 @@ class CoreqCoursesCondition(Condition):
                     if not (user.has_taken_course(course)
                     or user.is_taking_course(course)) :
                         warning.append(course)
-                return met, ['(Corequisites: ' + ' AND '.join(sum(warning, [])) + ')']
+                return met, ['(Corequisites: ' + ' AND '.join(warning) + ')']
             case Logic.OR:
                 met = any(
                     user.has_taken_course(course)
@@ -176,7 +176,8 @@ class UOCCondition(Condition):
         self.category = category_classobj
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
-        return user.uoc(self.category) >= self.uoc, []
+        uoc_met = user.uoc(self.category) >= self.uoc
+        return uoc_met, ([] if uoc_met else [f"{self.uoc} UOC required in {self.category}, you have {user.uoc(self.category)} UOC"])
 
     def __str__(self) -> str:
         return json.dumps({
@@ -207,7 +208,7 @@ class WAMCondition(Condition):
         """
         Determines if the user has met the WAM condition for this category.
 
-        Will always return True and a warning since WAM can fluctuate
+        Will always return False and a warning since WAM can fluctuate
         """
         warning = self.get_warning(user.wam(self.category))
         return True, [warning]
@@ -258,7 +259,7 @@ class GradeCondition(Condition):
 
                 user_grade = user.get_grade(course)
                 if user_grade is None:
-                    return True, [self.get_warning()]
+                    return False, [self.get_warning()]
                 if user_grade < self.grade:
                     return False, [f"Your grade {user_grade} in course {course} does not meet the grade requirements (minimum {self.grade}) for this course"]
                 return True, []
@@ -414,13 +415,19 @@ class CompositeCondition(Condition):
 
         validations = [cond.validate(user) for cond in self.conditions]
         # unzips a zipped list - https://www.geeksforgeeks.org/python-unzip-a-list-of-tuples/
-        unlocked, warnings = list(zip(*validations))
+        wam_warning = []
+        unlocked, all_warnings = list(zip(*validations))
+        for unlocked_cond, warning in validations:
+            if unlocked_cond and len(warning) > 0:
+                wam_warning.append(warning)
+        print(sum(all_warnings, []))
         if self.logic == Logic.AND:
             satisfied = all(unlocked) 
-            return (satisfied, []) if satisfied else (satisfied, ['('+' AND '.join(sum(warnings, []))+')'])  # warnings are flattened
+            return satisfied, (wam_warning if satisfied else sum(['('+' AND '.join(sum(all_warnings, []))+')']))  # warnings are flattened
+
         else:
-            satisfied = any(unlocked)            
-            return (satisfied, []) if satisfied else (satisfied,['('+' OR '.join(sum(warnings, []))+')'])
+            satisfied = any(unlocked)     
+            return satisfied, (wam_warning if satisfied else [' OR '.join(sum(all_warnings,[]))])
 
     def is_path_to(self, course: str) -> bool:
         return any(condition.is_path_to(course) for condition in self.conditions)
