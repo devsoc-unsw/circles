@@ -105,7 +105,7 @@ def test_validateTermPlanner_invalid_progress():
             "is_accurate": True,
             "unlocked": False,
             "handbook_note": "",
-            "warnings": [],
+            "warnings": ['((COMP1531 AND (COMP2521 OR COMP1927)))'],
             "supressed": False
         },
         "COMP4128": {
@@ -113,7 +113,7 @@ def test_validateTermPlanner_invalid_progress():
             "unlocked": False,
             "handbook_note": "",
             "warnings": [
-                "Requires 75 WAM in all courses. Your WAM in all courses has not been recorded"
+                '((COMP3821 OR (COMP3121 AND Requires 75 WAM in all courses. Your WAM in all courses has not been courses has not been recorded)))'
             ],
             "supressed": False
         }
