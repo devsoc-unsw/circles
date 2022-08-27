@@ -1,7 +1,8 @@
 """
-The driver for our procsesors. Provide the relevant command line arguments
+The driver for our processors. Provide the relevant command line arguments
 in order to run the relevant drivers
-if you need to  bash this, use python3 -m runprocessors --type data-fix --stage all
+If you need to  bash this, use:
+    python3 -m runprocessors --type data-fix --stage all
 """
 
 import argparse
