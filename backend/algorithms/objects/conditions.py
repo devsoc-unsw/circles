@@ -2,9 +2,10 @@
 Contains the Conditions classes
 """
 
+from functools import reduce
 import json
 from abc import ABC, abstractmethod
-from typing import Optional, Tuple, TypedDict
+from typing import List, Optional, Tuple, TypedDict
 import warnings
 
 from algorithms.objects.categories import Category, AnyCategory, ClassCategory, CompositeCategory
@@ -423,10 +424,10 @@ class CompositeCondition(Condition):
 
         if self.logic == Logic.AND:
             satisfied = all(unlocked) 
-            return satisfied, (wam_warning if satisfied else ['(' + ' AND '.join(sum(all_warnings,[])) + ')'])  # warnings are flattened
+            return satisfied, (flatten_list_list(wam_warning) if satisfied else ['(' + ' AND '.join(sum(all_warnings,[])) + ')'])  # warnings are flattened
         else:
             satisfied = any(unlocked)     
-            return satisfied, (wam_warning if satisfied else ['(' + ' OR '.join(sum(all_warnings,[])) + ')'])
+            return satisfied, (flatten_list_list(wam_warning) if satisfied else ['(' + ' OR '.join(sum(all_warnings,[])) + ')'])
 
     def is_path_to(self, course: str) -> bool:
         return any(condition.is_path_to(course) for condition in self.conditions)
@@ -456,4 +457,9 @@ class CompositeCondition(Condition):
             else:
                 data['children'].append(json.loads(str(cond)))
         return json.dumps(data)
+
+def flatten_list_list(nested_list: List[List[str]]) -> List[str]:
+    """ Takes a List[List[str]] object and flattens it down into a single list """
+    return reduce(lambda x, y: x + y, nested_list)
+    
 
