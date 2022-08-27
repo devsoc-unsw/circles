@@ -255,7 +255,7 @@ class GradeCondition(Condition):
             elif isinstance(category, ClassCategory):
                 course = category.class_name
                 if course not in user.courses:
-                    return False, []
+                    return False, [f"Need {self.grade} in {course} for this course"]
 
                 user_grade = user.get_grade(course)
                 if user_grade is None:
@@ -423,11 +423,10 @@ class CompositeCondition(Condition):
         print(sum(all_warnings, []))
         if self.logic == Logic.AND:
             satisfied = all(unlocked) 
-            return satisfied, (wam_warning if satisfied else sum(['('+' AND '.join(sum(all_warnings, []))+')']))  # warnings are flattened
-
+            return satisfied, (wam_warning if satisfied else ['(' + ' AND '.join(sum(all_warnings,[])) + ')'])  # warnings are flattened
         else:
             satisfied = any(unlocked)     
-            return satisfied, (wam_warning if satisfied else [' OR '.join(sum(all_warnings,[]))])
+            return satisfied, (wam_warning if satisfied else ['(' + ' OR '.join(sum(all_warnings,[])) + ')'])
 
     def is_path_to(self, course: str) -> bool:
         return any(condition.is_path_to(course) for condition in self.conditions)
