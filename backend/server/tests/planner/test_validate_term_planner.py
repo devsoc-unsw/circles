@@ -187,9 +187,7 @@ def test_validateTermPlanner_past_term_suppress_warnings():
             "is_accurate": True,
             "unlocked": False,
             "handbook_note": "",
-            "warnings": [
-                "Requires 75 WAM in all courses. Your WAM in all courses has not been recorded"
-            ],
+            "warnings": [],
             "supressed": True
         }
     }

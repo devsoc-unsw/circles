@@ -124,7 +124,7 @@ class CoreqCoursesCondition(Condition):
                     if not (user.has_taken_course(course)
                     or user.is_taking_course(course)) :
                         warning.append(course)
-                return met, ['(Corequisites: ' + ' AND '.join(warning) + ')']
+                return met, ([] if met else ['(Corequisites: ' + ' AND '.join(warning) + ')'])
             case Logic.OR:
                 met = any(
                     user.has_taken_course(course)
@@ -132,7 +132,7 @@ class CoreqCoursesCondition(Condition):
                     for course in self.courses
                 )
                 warning = [f'{course}' for course in self.courses]
-                return met, ['(Corequisites: ' + ' OR '.join(warning) + ')']
+                return met, ([] if met else ['(Corequisites: ' + ' OR '.join(warning) + ')'])
         
         print("Conditions Error: validation was not of type AND or OR")
         return True, []
@@ -260,7 +260,7 @@ class GradeCondition(Condition):
 
                 user_grade = user.get_grade(course)
                 if user_grade is None:
-                    return False, [self.get_warning()]
+                    return True, [self.get_warning()]
                 if user_grade < self.grade:
                     return False, [f"Your grade {user_grade} in course {course} does not meet the grade requirements (minimum {self.grade}) for this course"]
                 return True, []

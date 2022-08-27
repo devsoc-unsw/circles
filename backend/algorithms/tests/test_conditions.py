@@ -219,15 +219,15 @@ def test_grade_condition():
     comp1521_70 = create_condition(["(", "70GRADE", "in", "COMP1521", ")"])
     math1131_70 = create_condition(["(", "70GRADE", "in", "MATH1131", ")"])
 
-    # Mark not entered should be false 
+    # Mark not entered assume condition met and display warning
     comp1511_70_user_unlocked = comp1511_70.validate(user)
-    assert not comp1511_70_user_unlocked[0]
+    assert comp1511_70_user_unlocked[0]
     assert len(comp1511_70_user_unlocked[1]) == 1
     assert "Requires 70 mark in COMP1511. Your mark has not been recorded"
 
-    # Mark not entered should be false 
+    # Mark not entered assume condition met and display warning
     math1131_70_user_unlocked = math1131_70.validate(user)
-    assert not math1131_70_user_unlocked[0]
+    assert math1131_70_user_unlocked[0]
     assert len(math1131_70_user_unlocked[1]) == 1
     assert "Requires 70 mark in MATH1131. Your mark has not been recorded"
 
