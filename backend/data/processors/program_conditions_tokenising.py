@@ -14,7 +14,7 @@ from typing import Dict, List
 
 from data.utility.data_helpers import read_data, write_data
 
-PROGRAMS_PROCESSED_PATH = "data/processed/programsProcessed.json"
+PROGRAMS_PROCESSED_PATH = "data/final_data/programsProcessed.json"
 PRE_PROCESSED_DATA_PATH = "data/final_data/programsConditionsPreProcessed.json"
 FINAL_TOKENS_PATH = "data/final_data/programsConditionsTokens.json"
 
@@ -27,7 +27,7 @@ def pre_process_program_requirements(program_info: Dict) -> List[Dict]:
 
     The relevant conditions live inside `non_spec_data` section of a program
     """
-    non_spec_data: List[Dict] = program_info.get("componenents", {}).get("non_spec_data", [])
+    non_spec_data: List[Dict] = program_info.get("components", {}).get("non_spec_data", [])
     if not len(non_spec_data):
         return {}
     return [
