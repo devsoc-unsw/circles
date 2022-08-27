@@ -71,3 +71,7 @@ tmp.*
 **/.DS_Store
 .idea
 
+# secret
+SECRET
+secret.json
+secret.env

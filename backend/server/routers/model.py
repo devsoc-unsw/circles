@@ -55,6 +55,7 @@ class Structure(BaseModel):
     uoc: int
 
 
+# TODO: This should just take a token now
 class UserData(BaseModel):
     program: str
     specialisations: dict

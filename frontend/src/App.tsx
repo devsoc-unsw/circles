@@ -21,6 +21,7 @@ const GraphicalSelector = React.lazy(() => import('./pages/GraphicalSelector'));
 const Page404 = React.lazy(() => import('./pages/Page404'));
 const ProgressionChecker = React.lazy(() => import('./pages/ProgressionChecker'));
 const TermPlanner = React.lazy(() => import('./pages/TermPlanner'));
+const Auth = React.lazy(() => import('./pages/Auth'));
 
 const App = () => {
   const { theme } = useSelector((state: RootState) => state.settings);
@@ -38,6 +39,7 @@ const App = () => {
               <Route path="/term-planner" element={<TermPlanner />} />
               <Route path="/progression-checker" element={<ProgressionChecker />} />
               <Route path="*" element={<Page404 />} />
+              <Route path="/login" element={<Auth />} />
             </Routes>
           </Router>
         </ThemeProvider>
