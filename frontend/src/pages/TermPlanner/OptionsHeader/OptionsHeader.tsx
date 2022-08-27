@@ -29,7 +29,6 @@ const OptionsHeader = ({ plannerRef }: Props) => {
   const { theme } = useSelector((state: RootState) => state.settings);
   const { areYearsHidden, years } = useSelector((state: RootState) => state.planner);
   const { showMarks, showWarnings } = useSelector((state: RootState) => state.settings);
-  const { degree, planner } = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
 
   const iconStyles = {
@@ -84,7 +83,7 @@ const OptionsHeader = ({ plannerRef }: Props) => {
         >
           <div>
             <Tooltip title="Save">
-              <S.OptionButton onClick={() => saveLocalStorageData(planner, degree, showWarnings)}>
+              <S.OptionButton onClick={() => saveLocalStorageData()}>
                 <SaveFilled style={iconStyles} />
               </S.OptionButton>
             </Tooltip>

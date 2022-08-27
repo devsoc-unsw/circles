@@ -26,7 +26,6 @@ type LocalStorageData = {
 const prepareLocalStorageData = (
   planner: PlannerSliceState,
   degree: DegreeSliceState,
-  showWarnings: boolean,
 ): LocalStorageData => {
   const {
     years, startYear, courses, unplanned, numYears, isSummerEnabled,
@@ -51,7 +50,7 @@ const prepareLocalStorageData = (
     specialisations: specs,
     year: 1,
     plan,
-    mostRecentPastTerm: showWarnings ? { Y: 0, T: 0 } : getMostRecentPastTerm(startYear),
+    mostRecentPastTerm: getMostRecentPastTerm(startYear) ?? { Y: 0, T: 0 },
     programName,
     unplanned,
     startYear,
