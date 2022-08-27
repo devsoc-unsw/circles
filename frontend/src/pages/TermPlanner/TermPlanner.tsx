@@ -8,7 +8,7 @@ import axios from 'axios';
 import { ValidateTermPlanner } from 'types/api';
 import { Term } from 'types/planner';
 import openNotification from 'utils/openNotification';
-import prepareLocalStorageData from 'utils/prepareLocalStorageData';
+import prepareCoursesForValidationPayload from 'utils/prepareCoursesForValidationPayload';
 import PageTemplate from 'components/PageTemplate';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
@@ -50,7 +50,7 @@ const TermPlanner = () => {
       try {
         const res = await axios.post<ValidateTermPlanner>(
           '/planner/validateTermPlanner/',
-          JSON.stringify(prepareLocalStorageData(planner, degree, showWarnings)),
+          JSON.stringify(prepareCoursesForValidationPayload(planner, degree, showWarnings)),
         );
         dispatch(toggleWarnings(res.data.courses_state));
       } catch (err) {

@@ -4,7 +4,7 @@ route for planner algorithms
 from fastapi import APIRouter
 from algorithms.objects.user import User
 from server.routers.courses import get_course
-from server.routers.model import ValidCoursesState, PlannerData, CONDITIONS, CACHED_HANDBOOK_NOTE
+from server.routers.model import ValidCoursesState, PlannerData, LocalStorage, CONDITIONS, CACHED_HANDBOOK_NOTE
 
 def fix_planner_data(plannerData: PlannerData):
     """ fixes the planner data to add missing UOC info """
@@ -38,7 +38,7 @@ async def validate_term_planner(plannerData: PlannerData):
     """
     data = fix_planner_data(plannerData)
     emptyUserData = {
-        "program": data.program,
+        "program": data.programCode,
         "specialisations": data.specialisations,
         "year": 1,  # Start off as a first year
         "courses": {},  # Start off the user with an empty year
@@ -77,8 +77,16 @@ async def validate_term_planner(plannerData: PlannerData):
 
     return {"courses_state": coursesState}
 
-@router.post("/saveLocalStorage/", response_model=bool)
-async def save_local_storage(plannerData: PlannerData):
+@router.post("/saveLocalStorage/")
+async def save_local_storage(localStorage: LocalStorage):
     #TODO: replace this with a real implementation
-    print(plannerData)
-    return True
+    print(localStorage)
+    degree = {}
+    degree['programCode'] = localStorage.programCode
+    degree['specs'] = localStorage.specialisations
+
+    planner = {}
+    planner['unplanned'] = localStorage.unplanned
+    planner['plan'] = localStorage.plan
+    planner['mostRecentPastTerm'] = localStorage.mostRecentPastTerm
+    planner['numYears'] = localStorage.numYears

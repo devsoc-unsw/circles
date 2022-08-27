@@ -8,13 +8,9 @@ const saveLocalStorageData = (
   degree: DegreeSliceState,
   showWarnings: boolean,
 ): void => {
-  try {
-    axios.post(
-      '/planner/saveLocalStorage/',
-      JSON.stringify(prepareLocalStorageData(planner, degree, showWarnings)),
-    );
-  } catch (err) {
-    // console.error('Error at save Local Storage', err);
-  }
+  axios.post(
+    '/planner/saveLocalStorage/',
+    JSON.stringify(prepareLocalStorageData(planner, degree, showWarnings)),
+  );
 };
 export default saveLocalStorageData;

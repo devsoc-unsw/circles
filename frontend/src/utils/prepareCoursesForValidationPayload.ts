@@ -10,27 +10,21 @@ type TermPlan = {
 
 type YearPlan = TermPlan[];
 
-type LocalStorageData = {
+type CoursesForValidationPayload = {
   programCode: string
-  programName: string
   year: number
-  numYears: number
   specialisations: string[]
   plan: YearPlan[]
-  unplanned: string[]
   mostRecentPastTerm: MostRecentTerm
-  isSummerEnabled: boolean
 };
 
-const prepareLocalStorageData = (
+const prepareCoursesForValidationPayload = (
   planner: PlannerSliceState,
   degree: DegreeSliceState,
   showWarnings: boolean,
-): LocalStorageData => {
-  const {
-    years, startYear, courses, unplanned, numYears, isSummerEnabled,
-  } = planner;
-  const { programCode, programName, specs } = degree;
+): CoursesForValidationPayload => {
+  const { years, startYear, courses } = planner;
+  const { programCode, specs } = degree;
 
   const plan: YearPlan[] = [];
   years.forEach((year) => {
@@ -47,15 +41,11 @@ const prepareLocalStorageData = (
 
   return {
     programCode,
-    programName,
     specialisations: specs,
     year: 1,
-    numYears,
     plan,
-    unplanned,
     mostRecentPastTerm: showWarnings ? { Y: 0, T: 0 } : getMostRecentPastTerm(startYear),
-    isSummerEnabled,
   };
 };
 
-export default prepareLocalStorageData;
+export default prepareCoursesForValidationPayload;

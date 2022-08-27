@@ -108,8 +108,7 @@ class MostRecentPastTerm(TypedDict):
 
 
 class PlannerData(BaseModel):
-    unplanned: list[str]
-    program: str
+    programCode: str
     specialisations: list[str]
     year: int
     plan: list[list[dict[str,  None | list[int | None]]]]
@@ -153,6 +152,12 @@ class PlannerData(BaseModel):
                 },
             }
         }
+
+class LocalStorage(PlannerData):
+    programName: str
+    unplanned: list[str]
+    numYears: int
+    isSummerEnabled: bool
 
 class CourseCodes(BaseModel):
     courses: list[str]
