@@ -130,7 +130,7 @@ def test_validateTermPlanner_out_of_order_progress():
             "is_accurate": True,
             "unlocked": False,
             "handbook_note": "",
-            "warnings": [],
+            "warnings": ['((Need 65 in MATH1131 for this course OR Need 65 in MATH1141 for this course OR Need 65 in DPST1013 for this course))'],
             "supressed": False
         },
         "MATH1141": {
