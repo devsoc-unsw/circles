@@ -3,7 +3,7 @@ Contains the Conditions classes
 """
 
 from functools import reduce
-import json
+import json, re
 from abc import ABC, abstractmethod
 from typing import List, Optional, Tuple, TypedDict
 import warnings
@@ -178,7 +178,8 @@ class UOCCondition(Condition):
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
         uoc_met = user.uoc(self.category) >= self.uoc
-        return uoc_met, ([] if uoc_met else [f"{self.uoc} UOC required in {self.category}, you have {user.uoc(self.category)} UOC"])
+        category = re.sub(r"courses && ([A-Z]{4}) courses", r"\1 courses", str(self.category))
+        return uoc_met, ([] if uoc_met else [f"{self.uoc} UOC required in {category} you have {user.uoc(self.category)} UOC"])
 
     def __str__(self) -> str:
         return json.dumps({
