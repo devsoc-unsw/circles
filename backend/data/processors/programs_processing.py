@@ -78,6 +78,7 @@ OTH_PROGS = (
     "3502",
     "3970",
     "3707",
+    "3543",
 )
 
 # Enable or disable testing, and choose what programs to test on

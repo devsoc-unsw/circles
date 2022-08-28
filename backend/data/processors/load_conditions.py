@@ -44,6 +44,7 @@ def cache_conditions_pkl_file():
 
 
 def main() -> None:
+    """ main """
     cache_conditions_pkl_file()
 
 if __name__ == "__main__":

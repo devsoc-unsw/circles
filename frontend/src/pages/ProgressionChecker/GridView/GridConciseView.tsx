@@ -12,6 +12,9 @@ import S from './styles';
 type Props = {
   uoc: number
   subgroupKey: string
+  notes: string
+  showNotes: boolean
+  type: string
   courses: ViewSubgroupCourse[]
   isCoursesOverflow: boolean
 };
@@ -19,6 +22,9 @@ type Props = {
 const GridConciseView = ({
   uoc,
   subgroupKey,
+  notes,
+  showNotes,
+  type,
   courses,
   isCoursesOverflow,
 }: Props) => {
@@ -38,17 +44,22 @@ const GridConciseView = ({
   return (
     <>
       <Title level={2} className="text">{subgroupKey}</Title>
-      <S.TitleSortWrapper>
-        <Title level={3} className="text">{uoc} UOC of the following courses</Title>
-        <S.SortBtnWrapper>
-          <Tooltip title="Sort by Alphabet">
-            <FaSortAlphaDown color={sortFn === SortFn.AlphaNumeric ? '#9254de' : undefined} onClick={() => setSortFn(SortFn.AlphaNumeric)} />
-          </Tooltip>
-          <Tooltip title="Sort by Course Level">
-            <FaSortNumericDown color={sortFn === SortFn.Level ? '#9254de' : undefined} onClick={() => setSortFn(SortFn.Level)} />
-          </Tooltip>
-        </S.SortBtnWrapper>
-      </S.TitleSortWrapper>
+      {showNotes && <S.NotesText>{notes}</S.NotesText>}
+      {
+        type !== 'info_rule' && (
+          <S.TitleSortWrapper>
+            <Title level={3} className="text">{uoc} UOC of the following courses</Title>
+            <S.SortBtnWrapper>
+              <Tooltip title="Sort by Alphabet">
+                <FaSortAlphaDown color={sortFn === SortFn.AlphaNumeric ? '#9254de' : undefined} onClick={() => setSortFn(SortFn.AlphaNumeric)} />
+              </Tooltip>
+              <Tooltip title="Sort by Course Level">
+                <FaSortNumericDown color={sortFn === SortFn.Level ? '#9254de' : undefined} onClick={() => setSortFn(SortFn.Level)} />
+              </Tooltip>
+            </S.SortBtnWrapper>
+          </S.TitleSortWrapper>
+        )
+      }
       {!!courses.length && (
         <>
           <Collapsible

@@ -432,7 +432,5 @@ class CompositeCondition(Condition):
                 data['children'].append(json.loads(cond.__str__(child_index)))
             else:
                 data['children'].append(json.loads(str(cond)))
-        if id == 'start':
-            return json.dumps(data['children'][0])
         return json.dumps(data)
 

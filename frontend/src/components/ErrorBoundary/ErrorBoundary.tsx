@@ -1,4 +1,3 @@
-/* eslint-disable react/destructuring-assignment */
 import React, { ErrorInfo } from 'react';
 import { Button } from 'antd';
 import { FEEDBACK_LINK } from 'config/constants';
@@ -65,6 +64,7 @@ class ErrorBoundary extends React.Component<Props, State> {
       );
     }
 
+    // eslint-disable-next-line react/destructuring-assignment
     return this.props.children;
   }
 }
