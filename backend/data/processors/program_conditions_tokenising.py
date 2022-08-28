@@ -30,10 +30,16 @@ def pre_process_program_requirements(program_info: Dict) -> List[Dict]:
     non_spec_data: List[Dict] = program_info.get("components", {}).get("non_spec_data", [])
     if not len(non_spec_data):
         return {}
-    return [
-        pre_process_cond(condition) for condition in non_spec_data
-        if condition is not None
-    ]
+
+    pre_processes_conditions: List[Dict] = []
+    for condition in non_spec_data:
+        pre_procced = pre_process_cond(condition)
+        if pre_procced is not None:
+            print(pre_procced)
+            # pre_processes_conditions.append(pre_procced)
+
+    return pre_processes_conditions
+
 
 def pre_process_cond(condition: Dict):
     """
@@ -42,10 +48,12 @@ def pre_process_cond(condition: Dict):
         - "type"
         - "title"
         - "notes"
-    We care for instances where the type is "info_rule". The rest relates to items such as core courses, etc.
-    The relevant information about maturity and other rules is usually inside the "notes" field.
-    Though typically the "title" will clarify that there is a maturity requirement, it is not a guarantee
-    as  it may be of form "Program Rules and Dictionary"
+    We care for instances where the type is "info_rule". The rest relates to
+    items such as core courses, etc.
+    The relevant information about maturity and other rules is usually inside
+    the "notes" field. Though typically the "title" will clarify that there is
+    a maturity requirement, it is not a guarantee as  it may be of form
+    "Program Rules and Dictionary"
     """
     if not condition.get("type", None) == "info_rule":
         return None
@@ -61,6 +69,7 @@ def is_relevant_string(string: str) -> bool:
     Doesn't actually make changes to the file but is instead just there to prune
     away irrelevant strings so that we don't have to bother cleaning them up later.
     """
+    print("string", string)
     return bool(
         re.search(r"*maturity*", string)
     )
