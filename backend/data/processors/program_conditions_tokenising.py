@@ -29,7 +29,7 @@ def pre_process_program_requirements(program_info: Dict) -> List[Dict]:
     """
     non_spec_data: List[Dict] = program_info.get("components", {}).get("non_spec_data", [])
     if not len(non_spec_data):
-        return {}
+        return []
 
     pre_processes_conditions: List[Dict] = []
     for condition in non_spec_data:
