@@ -217,12 +217,13 @@ class WAMCondition(Condition):
 
     def get_warning(self, applicable_wam: Optional[float]) -> str:
         """ Returns an appropriate warning message or None if not needed """
-        wam_warning = f"Requires {self.wam} WAM in {self.category}. "
+        category = re.sub(r"courses && ([A-Z]{4}) courses", r"\1 courses", str(self.category))
+        wam_warning = f"Requires {self.wam} WAM in {category}. "
         if applicable_wam is None:
-            return wam_warning + f"Your WAM in {self.category} has not been recorded"
+            return wam_warning + f"Your WAM in {category} has not been recorded"
         if applicable_wam >= self.wam:
             return wam_warning
-        return wam_warning + f"Your WAM in {self.category} is currently {applicable_wam:.3f}"
+        return wam_warning + f"Your WAM in {category} is currently {applicable_wam:.3f}"
 
     def __str__(self) -> str:
         return json.dumps({
