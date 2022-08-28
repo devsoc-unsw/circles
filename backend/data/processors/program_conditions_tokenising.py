@@ -71,7 +71,7 @@ def is_relevant_string(string: str) -> bool:
     """
     print("string", string)
     return bool(
-        re.search(r"*maturity*", string)
+        re.search(r"maturity", string)
     )
 
 def tokenise_program_requirements(program_info: Dict) -> Dict:
