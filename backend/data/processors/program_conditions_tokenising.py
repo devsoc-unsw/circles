@@ -70,9 +70,12 @@ def is_relevant_string(string: str) -> bool:
     away irrelevant strings so that we don't have to bother cleaning them up later.
     """
     print("string", string)
-    return bool(
+    relevant: bool = (
         re.search(r"maturity", string)
     )
+    if relevant:
+        print("RELEVANT:", string)
+    return relevant
 
 def tokenise_program_requirements(program_info: Dict) -> Dict:
     """
