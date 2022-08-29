@@ -36,7 +36,7 @@ def pre_process_program_requirements(program_info: Dict) -> List[Dict]:
         pre_procced = pre_process_cond(condition)
         if pre_procced is not None:
             print(pre_procced)
-            # pre_processes_conditions.append(pre_procced)
+            pre_processes_conditions.append(pre_procced)
 
     return pre_processes_conditions
 
