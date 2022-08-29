@@ -11,7 +11,7 @@
     "@react-spring/web": "9.5.2",
     "@reduxjs/toolkit": "1.8.5",
     "@tippyjs/react": "4.2.6",
-    "antd": "4.22.7",
+    "antd": "4.22.8",
     "axios": "0.27.2",
     "dayjs": "1.11.5",
     "jwt-decode": "^3.1.2",
@@ -32,7 +32,7 @@
     "redux-persist": "6.0.0",
     "redux-thunk": "2.4.1",
     "styled-components": "5.3.5",
-    "use-debounce": "8.0.3"
+    "use-debounce": "8.0.4"
   },
   "scripts": {
     "start": "vite --port 3000 --host",
@@ -81,8 +81,8 @@
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-jsx-a11y": "6.6.1",
     "eslint-plugin-node": "11.1.0",
-    "eslint-plugin-promise": "6.0.0",
-    "eslint-plugin-react": "7.31.0",
+    "eslint-plugin-promise": "6.0.1",
+    "eslint-plugin-react": "7.31.1",
     "eslint-plugin-react-hooks": "4.6.0",
     "eslint-plugin-simple-import-sort": "7.0.0",
     "less": "4.1.3",
