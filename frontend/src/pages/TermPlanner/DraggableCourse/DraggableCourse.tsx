@@ -55,6 +55,25 @@ const DraggableCourse = ({ code, index, term }: Props) => {
     if (!isDragDisabled) contextMenu.show(e);
   };
 
+  const stripExtraParenthesis = (warning: string): string => {
+    if (warning[0] !== '(' || warning[warning.length - 1] !== ')') {
+      return warning;
+    }
+    let openParenCount = 0;
+    // If first open brace is ever fully closed, we don't want to strip them out
+    for (let i = 0; i < warning.length - 1; i += 1) {
+      if (warning[i] === '(') {
+        openParenCount += 1;
+      } else if (warning[i] === ')') {
+        openParenCount -= 1;
+      }
+      if (openParenCount <= 0) {
+        return warning;
+      }
+    }
+    return stripExtraParenthesis(warning.slice(1, warning.length - 1));
+  };
+
   return (
     <>
       <Suspense fallback={<Spinner text="Loading Course..." />}>
@@ -128,7 +147,7 @@ const DraggableCourse = ({ code, index, term }: Props) => {
         <ReactTooltip id={code} place="bottom">
           {isLegacy ? 'This course is discontinued. If an equivalent course is currently being offered, please pick that instead.'
             : !isOffered ? 'The course is not offered in this term.'
-              : warningMessage.length !== 0 ? warningMessage.join('\n')
+              : warningMessage.length !== 0 ? stripExtraParenthesis(warningMessage.join('\n'))
                 // eslint-disable-next-line react/no-danger
                 : <div dangerouslySetInnerHTML={{ __html: handbookNote }} />}
           {!isAccurate ? ' The course info may be inaccurate.' : ''}
