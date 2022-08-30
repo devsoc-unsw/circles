@@ -70,7 +70,7 @@ def is_relevant_string(string: str) -> bool:
     away irrelevant strings so that we don't have to bother cleaning them up later.
     """
     relevant: bool = (
-        re.match(r"(maturity)+", string.lower())
+        re.match(r".*(maturity)+", string.lower())
     )
     if relevant:
         print("RELEVANT:", string)
@@ -80,7 +80,8 @@ def tokenise_program_requirements(program_info: Dict) -> Dict:
     """
     Recieves the pre-processed program info and tokenises the conditions.
     """
-    return program_info
+    program_info
+    return []
 
 def run_program_token_process():
     program_info = read_data(PROGRAMS_PROCESSED_PATH)
@@ -92,6 +93,10 @@ def run_program_token_process():
         if pre_processed[code] != []:
             print("above was for", code, info["title"], i)
         i += 1
+
+    print("FIND A TOTAL OF ", len(list(filter(
+            lambda x: x != [], pre_processed.values()
+        ))), "PROGRAMS WITH CONDITIONS")
     write_data(pre_processed, PRE_PROCESSED_DATA_PATH)
 
     final: Dict = {}
