@@ -114,25 +114,16 @@ class CoreqCoursesCondition(Condition):
         
         match self.logic:
             case Logic.AND:
-                met = all(
-                    user.has_taken_course(course)
-                    or user.is_taking_course(course)
-                    for course in self.courses
-                )
-                warning = []
-                for course in self.courses:
-                    if not (user.has_taken_course(course)
-                    or user.is_taking_course(course)) :
-                        warning.append(course)
-                return met, ([] if met else ['(Corequisites: ' + ' AND '.join(warning) + ')'])
+                warning = [course for course in self.courses if not user.has_taken_course(course) and not user.is_taking_course(course)]
+                return (True, []) if not warning else (False, ['(Corequisites: ' + ' AND '.join(warning) + ')'])
             case Logic.OR:
-                met = any(
+                conditions_met = any(
                     user.has_taken_course(course)
                     or user.is_taking_course(course)
                     for course in self.courses
                 )
                 warning = [f'{course}' for course in self.courses]
-                return met, ([] if met else ['(Corequisites: ' + ' OR '.join(warning) + ')'])
+                return conditions_met, ([] if conditions_met else ['(Corequisites: ' + ' OR '.join(warning) + ')'])
         
         print("Conditions Error: validation was not of type AND or OR")
         return True, []
@@ -220,10 +211,10 @@ class WAMCondition(Condition):
         category = re.sub(r"courses && ([A-Z]{4}) courses", r"\1 courses", str(self.category))
         wam_warning = f"Requires {self.wam} WAM in {category}. "
         if applicable_wam is None:
-            return wam_warning + f"Your WAM in {category} has not been recorded"
+            return f"{wam_warning} Your WAM in {category} has not been recorded"
         if applicable_wam >= self.wam:
             return wam_warning
-        return wam_warning + f"Your WAM in {category} is currently {applicable_wam:.3f}"
+        return f"{wam_warning} Your WAM in {category} is currently {applicable_wam:.3f}"
 
     def __str__(self) -> str:
         return json.dumps({
@@ -418,18 +409,15 @@ class CompositeCondition(Condition):
 
         validations = [cond.validate(user) for cond in self.conditions]
         # unzips a zipped list - https://www.geeksforgeeks.org/python-unzip-a-list-of-tuples/
-        wam_warning = []
         unlocked, all_warnings = list(zip(*validations))
-        for unlocked_cond, warning in validations:
-            if unlocked_cond and len(warning) > 0:
-                wam_warning.append(warning)
+        wam_warning = sum([warning for unlocked_cond, warning in validations if unlocked_cond], []) # type: List[str]
 
         if self.logic == Logic.AND:
             satisfied = all(unlocked) 
-            return satisfied, (flatten_list_list(wam_warning) if satisfied else ['(' + ' AND '.join(sum(all_warnings,[])) + ')'])  # warnings are flattened
+            return satisfied, (wam_warning if satisfied else ['(' + ' AND '.join(sum(all_warnings,[])) + ')'])  # warnings are flattened
         else:
             satisfied = any(unlocked)     
-            return satisfied, (flatten_list_list(wam_warning) if satisfied else ['(' + ' OR '.join(sum(all_warnings,[])) + ')'])
+            return satisfied, (wam_warning if satisfied else ['(' + ' OR '.join(sum(all_warnings,[])) + ')'])
 
     def is_path_to(self, course: str) -> bool:
         return any(condition.is_path_to(course) for condition in self.conditions)
@@ -459,11 +447,4 @@ class CompositeCondition(Condition):
             else:
                 data['children'].append(json.loads(str(cond)))
         return json.dumps(data)
-
-def flatten_list_list(nested_list: List[List[str]]) -> List[str]:
-    """ Takes a List[List[str]] object and flattens it down into a single list """
-    if len(nested_list) == 0:
-        return []
-    return reduce(lambda x, y: x + y, nested_list)
-    
-
+        

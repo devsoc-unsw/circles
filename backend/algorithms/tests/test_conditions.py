@@ -232,8 +232,8 @@ def test_grade_condition():
     assert "Requires 70 mark in MATH1131. Your mark has not been recorded"
 
     # Has not taken the course. Should be false
-    assert not (comp1521_70.validate(user))[0]
-    assert len((comp1521_70.validate(user))[1]) == 1
+    assert not comp1521_70.validate(user)[0]
+    assert len(comp1521_70.validate(user)[1]) == 1
     assert '((Need 70 in COMP1521 for this course))' in ((comp1521_70.validate(user))[1])[0]
     
     comp1511_60 = create_condition(["(", "60GRADE", "in", "COMP1511", ")"])
