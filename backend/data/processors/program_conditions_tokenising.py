@@ -58,7 +58,6 @@ def pre_process_cond(condition: Dict):
         return None
     if not is_relevant_string(condition.get("notes", "")) and not is_relevant_string(condition.get("title", "")):
         return None
-    print("\n\n\nGOT COND:", condition)
     return condition
     # Epic regex happens here
     # Remove all cringe stuff
@@ -94,10 +93,13 @@ def run_program_token_process():
             print("above was for", code, info["title"], i)
         i += 1
 
-    print("FIND A TOTAL OF ", len(list(filter(
-            lambda x: x != [], pre_processed.values()
-        ))), "PROGRAMS WITH CONDITIONS")
-    write_data(pre_processed, PRE_PROCESSED_DATA_PATH)
+    pre_processed_shortlist = {
+        k: v
+        for k, v in pre_processed.items()
+        if v != []
+    }
+    print(f"Found a total of {len(pre_processed_shortlist)} relevant programs")
+    write_data(pre_processed_shortlist, PRE_PROCESSED_DATA_PATH)
 
     final: Dict = {}
     for code, info in pre_processed.items():
