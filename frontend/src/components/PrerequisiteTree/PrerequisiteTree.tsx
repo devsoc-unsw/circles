@@ -113,15 +113,13 @@ const PrerequisiteTree = ({ courseCode }: Props) => {
 
       // render graph
       if (!graph) {
-        generateTreeGraph(graphData);
+        if (graphData.children.length !== 0) generateTreeGraph(graphData);
       } else {
         // NOTE: This is for hot reloading in development as new graph will instantiate every time
         updateTreeGraph(graphData);
       }
-
       setLoading(false);
     };
-
     if (courseCode) setupGraph(courseCode);
   }, [courseCode, degree, dispatch, graph, planner]);
 
