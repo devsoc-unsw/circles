@@ -207,13 +207,13 @@ const GraphicalSelector = () => {
     if (!graph) return;
     const zoom = graph.getZoom();
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    zoom >= 1 ? graph.zoomTo(zoom + 0.5) : graph.zoomTo(zoom + 0.05);
+    zoom >= 1 ? graph.zoomTo(zoom + 0.5) : graph.zoomTo(zoom + 0.1);
   };
   const zoomOut = () => {
     if (!graph) return;
     const zoom = graph.getZoom();
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    zoom >= 1 ? graph.zoomTo(zoom - 0.5) : graph.zoomTo(zoom - 0.05);
+    zoom >= 1 ? graph.zoomTo(zoom - 0.5) : graph.zoomTo(zoom - 0.1);
   };
 
   return (
