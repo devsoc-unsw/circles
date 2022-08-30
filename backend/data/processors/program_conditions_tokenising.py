@@ -82,22 +82,22 @@ def tokenise_program_requirements(program_info: Dict) -> Dict:
     program_info
     return []
 
+def shortlist_pre_proc(full_condition_list):
+    return {
+        course_code: relevant_str_conditions
+        for course_code, relevant_str_conditions in full_condition_list.items()
+        if relevant_str_conditions != []
+    }
+
 def run_program_token_process():
     program_info = read_data(PROGRAMS_PROCESSED_PATH)
 
-    pre_processed: Dict = {}
-    i: int = 0
-    for code, info in program_info.items():
-        pre_processed[code] = pre_process_program_requirements(info)
-        if pre_processed[code] != []:
-            print("above was for", code, info["title"], i)
-        i += 1
-
-    pre_processed_shortlist = {
-        k: v
-        for k, v in pre_processed.items()
-        if v != []
+    pre_processed = {
+        code: pre_process_program_requirements(info)
+        for code, info in program_info.items()
     }
+
+    pre_processed_shortlist = shortlist_pre_proc(pre_processed)
     print(f"Found a total of {len(pre_processed_shortlist)} relevant programs")
     write_data(pre_processed_shortlist, PRE_PROCESSED_DATA_PATH)
 
