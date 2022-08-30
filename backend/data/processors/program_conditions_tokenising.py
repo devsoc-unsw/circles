@@ -18,21 +18,44 @@ PROGRAMS_PROCESSED_PATH = "data/final_data/programsProcessed.json"
 PRE_PROCESSED_DATA_PATH = "data/final_data/programsConditionsPreProcessed.json"
 # FINAL_TOKENS_PATH = "data/final_data/programsConditionsTokens.json"
 
-def pre_process_program_requirements(program_info: Dict) -> List[Dict]:
-    """ Do epic pre-proc (i only want to take in the relevant ones) """
+def pre_process_program_requirements(condition_raw: Dict[str, str]) -> List[Dict]:
+    """
+    Do epic pre-proc (i only want to take in the relevant ones)
+    If you feed me a condition with no notes, i will literally die
+    """
+    notes: str = condition_raw.get("notes", "")
+    condition_type: str = get_condition_type(notes)
+    match condition_type:
+        case "maturity":
+            return pre_process_maturity_condition(condition_raw)
 
-    non_spec_data: List[Dict] = program_info.get("components", {}).get("non_spec_data", [])
-    if not len(non_spec_data):
-        return []
+def pre_process_maturity_condition(string: str) -> List[str]:
+    """
+    Pre-processes a maturity condition.
+    These conditions are constructed of two sections
+        - "dependency": This is the conditin that must be passed before anything
+                        from the dependant my be satisfied.
+        - "dependant": This is the condition that is restricted and cannot be
+                        fulfilled before the dependency is satisfied.
+    """
+    components: List[str] = string.split("before")
+    dependency: str = components[0].strip()
+    dependant: str = components[1].strip()
+    return (dependency, dependant)
+    
+def get_condition_type(string: str) -> str:
+    """
+    Returns the condition type of a string.
 
-    pre_processes_conditions: List[Dict] = []
-    for condition in non_spec_data:
-        pre_procced = pre_process_cond(condition)
-        if pre_procced is not None:
-            pre_processes_conditions.append(pre_procced)
-            print("above is for ", condition.get("title", ""))
-    return pre_processes_conditions
+    - Add checks for condition types here.
+    - TODO: make the relevaance checker use this instead
+    """
+    if maturity_match(string):
+        return "maturity"
+    return ""
 
+def maturity_match(string: str):
+    return re.match(r".*(maturity)+", string.lower())
 
 def pre_process_cond(condition: Dict):
     """
@@ -61,9 +84,11 @@ def is_relevant_string(string: str) -> bool:
     Checks if a string is relevant to the tokenisation process.
     Doesn't actually make changes to the file but is instead just there to prune
     away irrelevant strings so that we don't have to bother cleaning them up later.
+
+    Add any future condition checkers here inside the list in the `any`
     """
-    relevant: bool = (
-        re.match(r".*(maturity)+", string.lower())
+    relevant: bool = any(
+        [maturity_match(string)]
     )
     if relevant:
         print("RELEVANT:", string)
@@ -105,6 +130,11 @@ def run_program_token_process():
     }
 
     pre_processed_shortlist = shortlist_pre_proc(pre_processed)
+    [
+        pre_process_program_requirements(cond)
+        for conds in pre_processed_shortlist.values()
+        for cond in conds
+    ]
     print(f"Found a total of {len(pre_processed_shortlist)} relevant programs")
     write_data(pre_processed_shortlist, PRE_PROCESSED_DATA_PATH)
 
