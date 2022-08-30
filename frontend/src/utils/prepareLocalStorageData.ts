@@ -2,6 +2,7 @@ import getMostRecentPastTerm, { MostRecentTerm } from 'utils/getMostRecentPastTe
 import { parseMarkToInt } from 'pages/TermPlanner/utils';
 import { DegreeSliceState } from 'reducers/degreeSlice';
 import { PlannerSliceState } from 'reducers/plannerSlice';
+import { CoursesForValidationPayload } from './prepareCoursesForValidationPayload';
 
 type TermPlan = {
   // key = course code, value = [UOC, mark]
@@ -10,22 +11,19 @@ type TermPlan = {
 
 type YearPlan = TermPlan[];
 
-type LocalStorageData = {
-  programCode: string
-  specialisations: string[]
-  year: number
-  plan: YearPlan[]
-  mostRecentPastTerm: MostRecentTerm
+type LocalStorageData = CoursesForValidationPayload & {
   programName: string
   startYear: number
   numYears: number
   unplanned: string[]
   isSummerEnabled: boolean
+  token: string
 };
 
 const prepareLocalStorageData = (
   planner: PlannerSliceState,
   degree: DegreeSliceState,
+  token: string,
 ): LocalStorageData => {
   const {
     years, startYear, courses, unplanned, numYears, isSummerEnabled,
@@ -56,6 +54,7 @@ const prepareLocalStorageData = (
     startYear,
     numYears,
     isSummerEnabled,
+    token,
   };
 };
 

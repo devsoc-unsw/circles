@@ -3,13 +3,14 @@ import { DegreeSliceState } from 'reducers/degreeSlice';
 import { PlannerSliceState } from 'reducers/plannerSlice';
 import prepareLocalStorageData from './prepareLocalStorageData';
 
-const saveLocalStorageData = (): void => {
+const migrateLocalStorageData = (): void => {
   const data = JSON.parse(localStorage.getItem('persist:root') ?? '{}') as { [key: string]: string };
   const degree = JSON.parse(data.degree ?? {}) as DegreeSliceState;
   const planner = JSON.parse(data.planner ?? {}) as PlannerSliceState;
+  const token = JSON.parse(data.token ?? '') as string;
   axios.post(
     '/planner/saveLocalStorage/',
-    JSON.stringify(prepareLocalStorageData(planner, degree)),
+    JSON.stringify(prepareLocalStorageData(planner, degree, token)),
   );
 };
-export default saveLocalStorageData;
+export default migrateLocalStorageData;

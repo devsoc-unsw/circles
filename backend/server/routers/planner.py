@@ -81,3 +81,20 @@ async def validate_term_planner(plannerData: PlannerData):
 def save_local_storage(localStorage: LocalStorage):
     #TODO: replace this with a real implementation
     print(localStorage)
+    token = localStorage.token
+    degree = {}
+    degree['programCode'] = localStorage.programCode
+    planner['programName'] = localStorage.programName
+    degree['specs'] = localStorage.specialisations
+
+    planner = {}
+    planner['unplanned'] = localStorage.unplanned
+    planner['mostRecentPastTerm'] = localStorage.mostRecentPastTerm
+    planner['plan'] = localStorage.plan
+    planner['startYear'] = localStorage.startYear
+    planner['numYears'] = localStorage.numYears
+    planner['isSummerEnabled'] = localStorage.isSummerEnabled
+
+    objectID = usersDB['tokens'][token]
+    #usersDB['users'][objectID].update_one({'degree': degree, 'planner': planner})
+

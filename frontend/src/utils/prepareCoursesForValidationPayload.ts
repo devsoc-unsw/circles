@@ -10,7 +10,7 @@ type TermPlan = {
 
 type YearPlan = TermPlan[];
 
-type CoursesForValidationPayload = {
+export type CoursesForValidationPayload = {
   programCode: string
   year: number
   specialisations: string[]

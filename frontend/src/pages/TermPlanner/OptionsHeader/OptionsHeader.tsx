@@ -8,7 +8,7 @@ import {
 } from '@ant-design/icons';
 import Tippy from '@tippyjs/react';
 import { Popconfirm, Switch, Tooltip } from 'antd';
-import saveLocalStorageData from 'utils/saveLocalStorageData';
+import migrateLocalStorageData from 'utils/migrateLocalStorageData';
 import type { RootState } from 'config/store';
 import { unhideAllYears, unscheduleAll } from 'reducers/plannerSlice';
 import { toggleShowMarks, toggleShowWarnings } from 'reducers/settingsSlice';
@@ -83,7 +83,7 @@ const OptionsHeader = ({ plannerRef }: Props) => {
         >
           <div>
             <Tooltip title="Save">
-              <S.OptionButton onClick={() => saveLocalStorageData()}>
+              <S.OptionButton onClick={() => migrateLocalStorageData()}>
                 <SaveFilled style={iconStyles} />
               </S.OptionButton>
             </Tooltip>

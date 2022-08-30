@@ -96,7 +96,7 @@ def create_dynamic_db():
                     'planner': {
                         'bsonType': 'object',
                         'description': 'Set to default value',
-                        'required': ['unplanned', 'startYear', 'numYears', 'isSummerEnabled', 'years'],
+                        'required': ['unplanned', 'startYear', 'numYears', 'isSummerEnabled', 'plan'],
                         'properties': {
                             "unplanned": {
                                 'bsonType': 'array',
@@ -113,7 +113,7 @@ def create_dynamic_db():
                             "isSummerEnabled": {
                                 'bsonType': 'bool'
                             },
-                            "years": {
+                            "plan": {
                                 'bsonType': 'array',
                                 'items': {
                                     'bsonType': 'object',
@@ -179,7 +179,7 @@ def create_dynamic_db():
     #         "startYear": 2021,
     #         "numYears": 4,
     #         "isSummerEnabled": False,
-    #         "years": [
+    #         "plan": [
     #             {
     #             "T0":[],
     #             "T1":["COMP1511"],
