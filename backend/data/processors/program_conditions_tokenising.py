@@ -16,17 +16,11 @@ from data.utility.data_helpers import read_data, write_data
 
 PROGRAMS_PROCESSED_PATH = "data/final_data/programsProcessed.json"
 PRE_PROCESSED_DATA_PATH = "data/final_data/programsConditionsPreProcessed.json"
-FINAL_TOKENS_PATH = "data/final_data/programsConditionsTokens.json"
+# FINAL_TOKENS_PATH = "data/final_data/programsConditionsTokens.json"
 
 def pre_process_program_requirements(program_info: Dict) -> List[Dict]:
-    """
-    Recieves the relevant information from a course from `programsProcessed.json`
-    and applies pre-processing requirements so that it can be tokenised.
+    """ Do epic pre-proc (i only want to take in the relevant ones) """
 
-    As a sanity check there are ~40 instances of programs with such requirements.
-
-    The relevant conditions live inside `non_spec_data` section of a program
-    """
     non_spec_data: List[Dict] = program_info.get("components", {}).get("non_spec_data", [])
     if not len(non_spec_data):
         return []
@@ -89,11 +83,24 @@ def shortlist_pre_proc(full_condition_list):
         if relevant_str_conditions != []
     }
 
+def filter_pre_processable_conditions(program_info: Dict) -> List[Dict]:
+    non_spec_data: List[Dict] = program_info.get("components", {}).get("non_spec_data", [])
+    if not len(non_spec_data):
+        return []
+
+    pre_processes_conditions: List[Dict] = []
+    for condition in non_spec_data:
+        pre_procced = pre_process_cond(condition)
+        if pre_procced is not None:
+            pre_processes_conditions.append(pre_procced)
+            print("above is for ", condition.get("title", ""))
+    return pre_processes_conditions
+
 def run_program_token_process():
     program_info = read_data(PROGRAMS_PROCESSED_PATH)
 
     pre_processed = {
-        code: pre_process_program_requirements(info)
+        code: filter_pre_processable_conditions(info)
         for code, info in program_info.items()
     }
 
@@ -101,11 +108,6 @@ def run_program_token_process():
     print(f"Found a total of {len(pre_processed_shortlist)} relevant programs")
     write_data(pre_processed_shortlist, PRE_PROCESSED_DATA_PATH)
 
-    final: Dict = {}
-    for code, info in pre_processed.items():
-        final[code] = tokenise_program_requirements(info)
-
-    write_data(final, FINAL_TOKENS_PATH)
 
 if __name__ == "__main__":
     run_program_token_process()
