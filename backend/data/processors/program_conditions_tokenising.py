@@ -22,12 +22,12 @@ def pre_process_program_requirements(condition_raw: Dict[str, str]) -> List[Dict
     """
     Do epic pre-proc (i only want to take in the relevant ones)
     If you feed me a condition with no notes, i will literally die
+
+    Currently assumes only 'maturity' conditions exist. To add support for more
+    need to actually check what the condition type is first
     """
     notes: str = condition_raw.get("notes", "")
-    condition_type: str = get_condition_type(notes)
-    match condition_type:
-        case "maturity":
-            return pre_process_maturity_condition(condition_raw)
+    return pre_process_maturity_condition(notes)
 
 def pre_process_maturity_condition(string: str) -> List[str]:
     """
@@ -38,21 +38,14 @@ def pre_process_maturity_condition(string: str) -> List[str]:
         - "dependant": This is the condition that is restricted and cannot be
                         fulfilled before the dependency is satisfied.
     """
+    print("\n"*2)
+    print("am dealing with maturity:", string)
     components: List[str] = string.split("before")
     dependency: str = components[0].strip()
     dependant: str = components[1].strip()
-    return (dependency, dependant)
+    print("reduction:::::", dependency, "---------", dependant)
+    return (dependency,  dependant)
     
-def get_condition_type(string: str) -> str:
-    """
-    Returns the condition type of a string.
-
-    - Add checks for condition types here.
-    - TODO: make the relevaance checker use this instead
-    """
-    if maturity_match(string):
-        return "maturity"
-    return ""
 
 def maturity_match(string: str):
     return re.match(r".*(maturity)+", string.lower())
@@ -129,15 +122,15 @@ def run_program_token_process():
         for code, info in program_info.items()
     }
 
-    pre_processed_shortlist = shortlist_pre_proc(pre_processed)
-    [
+    pre_pre_processed_shortlist = shortlist_pre_proc(pre_processed)
+    pre_processed_shortlist = [
         pre_process_program_requirements(cond)
-        for conds in pre_processed_shortlist.values()
+        for conds in pre_pre_processed_shortlist.values()
         for cond in conds
     ]
-    print(f"Found a total of {len(pre_processed_shortlist)} relevant programs")
-    write_data(pre_processed_shortlist, PRE_PROCESSED_DATA_PATH)
-
+    print(f"Found a total of {len(pre_pre_processed_shortlist)} relevant programs")
+    write_data(pre_pre_processed_shortlist, PRE_PROCESSED_DATA_PATH)
+    return pre_processed_shortlist
 
 if __name__ == "__main__":
     run_program_token_process()
