@@ -35,9 +35,8 @@ def pre_process_program_requirements(program_info: Dict) -> List[Dict]:
     for condition in non_spec_data:
         pre_procced = pre_process_cond(condition)
         if pre_procced is not None:
-            print(pre_procced)
             pre_processes_conditions.append(pre_procced)
-
+            print("above is for ", condition.get("title", ""))
     return pre_processes_conditions
 
 
@@ -59,6 +58,7 @@ def pre_process_cond(condition: Dict):
         return None
     if not is_relevant_string(condition.get("notes", "")) and not is_relevant_string(condition.get("title", "")):
         return None
+    print("\n\n\nGOT COND:", condition)
     return condition
     # Epic regex happens here
     # Remove all cringe stuff
@@ -69,9 +69,8 @@ def is_relevant_string(string: str) -> bool:
     Doesn't actually make changes to the file but is instead just there to prune
     away irrelevant strings so that we don't have to bother cleaning them up later.
     """
-    print("string", string)
     relevant: bool = (
-        re.search(r"maturity", string)
+        re.match(r"(maturity)+", string.lower())
     )
     if relevant:
         print("RELEVANT:", string)
@@ -87,8 +86,12 @@ def run_program_token_process():
     program_info = read_data(PROGRAMS_PROCESSED_PATH)
 
     pre_processed: Dict = {}
+    i: int = 0
     for code, info in program_info.items():
         pre_processed[code] = pre_process_program_requirements(info)
+        if pre_processed[code] != []:
+            print("above was for", code, info["title"], i)
+        i += 1
     write_data(pre_processed, PRE_PROCESSED_DATA_PATH)
 
     final: Dict = {}

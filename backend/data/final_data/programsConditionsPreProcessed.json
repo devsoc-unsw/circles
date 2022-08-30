@@ -23,7 +23,13 @@
     "3387": [],
     "3409": [],
     "3417": [],
-    "3420": [],
+    "3420": [
+        {
+            "type": "info_rule",
+            "title": "Maturity Requirements",
+            "notes": "You must complete at least 24 UOC before enrolling in Level 2 courses.\nYou must complete at least 24 UOC in your major before enrolling in Level 3 courses."
+        }
+    ],
     "3422": [],
     "3435": [],
     "3436": [],
@@ -220,7 +226,13 @@
     "4797": [],
     "4803": [],
     "4813": [],
-    "4815": [],
+    "4815": [
+        {
+            "type": "info_rule",
+            "title": "Maturity Requirements",
+            "notes": "You must complete at least 24 UOC before enrolling in Level 2 courses.\nYou must complete at least 24 UOC in your major before enrolling in Level 3 courses."
+        }
+    ],
     "4817": [],
     "4821": [],
     "4822": [],
