@@ -204,14 +204,16 @@ const GraphicalSelector = () => {
   };
 
   const zoomIn = () => {
-    if (graph) {
-      graph.zoomTo(graph.getZoom() + 0.2);
-    }
+    if (!graph) return;
+    const zoom = graph.getZoom();
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    zoom >= 1 ? graph.zoomTo(zoom + 0.5) : graph.zoomTo(zoom + 0.05);
   };
   const zoomOut = () => {
-    if (graph) {
-      graph.zoomTo(graph.getZoom() - 0.2);
-    }
+    if (!graph) return;
+    const zoom = graph.getZoom();
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    zoom >= 1 ? graph.zoomTo(zoom - 0.5) : graph.zoomTo(zoom - 0.05);
   };
 
   return (
