@@ -33,7 +33,6 @@ def fix_conditions():
     CONDITIONS["ECON2101"][PROCESSED] = ECON_2101_2102_2112()
     CONDITIONS["ECON2102"][PROCESSED] = ECON_2101_2102_2112()
     CONDITIONS["ECON2112"][PROCESSED] = ECON_2101_2102_2112()
-    CONDITIONS["ECON2209"][PROCESSED] = ECON_2209()
     CONDITIONS["ECON2206"] = ECON_2206(CONDITIONS["ECON2206"])
     CONDITIONS["ECON2403"][PROCESSED] = ECON_2403()
     CONDITIONS["ECON3000"][PROCESSED] = ECON_3000()
@@ -116,17 +115,9 @@ def ECON_2206(conditions):
 
     return {
         "original": conditions["original"],
-        "processed": "ECON1203 || COMM1110 || ECON2403 || MATH1041 || MATH1231 || MATH1241 || MATH1251",
-        "handbook_note": ". It is highly recommended that who complete COMM1110 also complete COMM1190 before enrolling in this course"
+        "processed": "ECON1203 || COMM1190 || ECON2403 || MATH1041 || MATH1231 || MATH1241 || MATH1251",
     }
 
-def ECON_2209():
-    """
-        "original": "Pre-requisite: ECON1203 or COMM1110 or MATH1041 or MATH1231 or MATH1241 or MATH1251. It is highly recommended that students who complete COMM1110 also complete COMM1190 before enrolling in this course.<br/><br/>",
-        "processed": "ECON1203 || COMM1110 || MATH1041 || MATH1231 || MATH1241 || MATH1251. It is highly recommended that who complete COMM1110 also complete COMM1190 before enrolling in this course"
-    """
-
-    return "ECON1203 || COMM1110 || MATH1041 || MATH1231 || MATH1241 || MATH1251"
 
 def ECON_2403():
     """

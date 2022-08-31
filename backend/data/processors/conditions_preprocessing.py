@@ -216,7 +216,8 @@ def delete_extraneous_phrasing(processed: str) -> str:
         "completing",
         "completed",
         "a pass in",
-        "should have"
+        "should have",
+        "No prerequisites required"
     ]
     for text in completion_text:
         processed = re.sub(text, "", processed, flags=re.IGNORECASE)

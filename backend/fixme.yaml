@@ -1,0 +1,1407 @@
+removed:
+	- ADAD3114
+	- PTRL1001
+	- MUSC4706
+	- OPTM2190
+	- CVEN3201
+	- MDIA3007
+	- SDES2407
+	- INDC3001
+	- ELEC0390
+	- AERO4120
+	- SOMA3414
+	- SART2841
+	- SART2416
+	- ZEIT2106
+	- ARTS3090
+	- TABL3028
+	- OPTM4211
+	- FOOD5400
+	- ZPEM3203
+	- GMAT4009
+	- SDES3403
+	- CHEM4004
+	- MARK1014
+	- SOMA3411
+	- YMED1004
+	- SDES2188
+	- SOMA3416
+	- TABL3055
+	- SART2405
+	- CEIC3003
+	- ARTS3816
+	- ZEIT4222
+	- PTRL3023
+	- SART3800
+	- SOMA2413
+	- MFAC3510
+	- CVEN4403
+	- VISN2231
+	- SART3801
+	- BEES0010
+	- SART2413
+	- FOOD9410
+	- SOMA3415
+	- ARTS1090
+	- PTRL2018
+	- BIOM5930
+	- SART2408
+	- SART2829
+	- OPTM3131
+	- COMM2050
+	- SDES2116
+	- SOMA3410
+	- MFAC2505
+	- SOMA2409
+	- SDES2406
+	- CVEN4502
+	- PTRL3002
+	- MFAC4508
+	- ARTS3092
+	- CVEN4401
+	- SOCW3001
+	- MECH9660
+	- SART2501
+	- VISN3211
+	- HUMS1004
+	- EDST6724
+	- SDES3411
+	- SART1311
+	- ADAD2402
+	- DDES2180
+	- FOOD3901
+	- SART3404
+	- SART3410
+	- SART2400
+	- SDES3407
+	- PTRL4040
+	- INFS3617
+	- GEOS3611
+	- SAHT4211
+	- ADAD4011
+	- MINE2010
+	- INTA2301
+	- SDES2201
+	- COMM1001
+	- MDCN8002
+	- SART3400
+	- MFAC2506
+	- EDST6750
+	- SART3415
+	- CVEN2301
+	- EDST6713
+	- BABS4524
+	- MINE2610
+	- SART2842
+	- PTRL4041
+	- MINE3440
+	- MATS4500
+	- ARTS3279
+	- GENE1015
+	- SDES2170
+	- SAHT3131
+	- SART3409
+	- TABL2058
+	- SDES1111
+	- SOMA2818
+	- SDES2403
+	- SDES3408
+	- SART1312
+	- GMAT4900
+	- SDES3402
+	- COMP6449
+	- ELEC1112
+	- SOMA2863
+	- MGMT3708
+	- ARTS2094
+	- PLAN0081
+	- COMP9844
+	- ARTS2093
+	- INDC2003
+	- ZHSS3228
+	- INFS2605
+	- SART3412
+	- ZEIT3302
+	- OPTM4271
+	- SART1314
+	- CHEN6710
+	- ARTS3817
+	- SAHT4213
+	- DDES1290
+	- ZEIT4016
+	- SART2407
+	- SART3403
+	- ZHSS3422
+	- SDES1211
+	- MDIA2001
+	- CVEN1300
+	- CVEN4305
+	- SOMA2481
+	- TABL3031
+	- CVEN4101
+	- SOMA3412
+	- CVEN2302
+	- BEES2051
+	- OPTM4151
+	- TABL2059
+	- ECON2322
+	- ZPEM3524
+	- TELE4123
+	- AVIA2013
+	- SART2410
+	- DART1390
+	- MANF3610
+	- SOMA2408
+	- GENM0510
+	- SDES2167
+	- SART2859
+	- TABL1011
+	- SDES3172
+	- YMED1006
+	- SDES2184
+	- CVEN3731
+	- DART3390
+	- ZBUS2304
+	- LAWS3356
+	- CVEN2702
+	- SAHT2480
+	- BIOT3081
+	- ARTS2021
+	- SART3401
+	- SART2401
+	- BABS7010
+	- SART3402
+	- MINE4610
+	- ZINT1006
+	- ECON4311
+	- EDST6754
+	- CHEM4003
+	- TABL3007
+	- LAND2301
+	- MINE3000
+	- MDIA1000
+	- MINE4510
+	- ARTS3096
+	- INTA2102
+	- MINE2810
+	- PHCM4013
+	- SOMA3801
+	- ADAD4010
+	- BIOT4073
+	- MINE3800
+	- TABL2060
+	- AVIA2950
+	- ARTS3093
+	- LAWS3142
+	- TABL3022
+	- BEES4515
+	- ENGG4820
+	- INDC3002
+	- SDES2400
+	- GMAT2130
+	- COMM1822
+	- GMAT4450
+	- TABL2053
+	- SOMA2410
+	- LAWS3019
+	- ARTS2095
+	- MATS4501
+	- MUSC2111
+	- INFS3632
+	- ZEIT4705
+	- PLAN4132
+	- MINE4440
+	- OPTM4251
+	- ZPEM2209
+	- EDST6743
+	- ARTS2452
+	- MINE4820
+	- FINS4775
+	- TELE3117
+	- ADAD1001
+	- CEIC3002
+	- GEOS2641
+	- INTA2202
+	- GMAT3600
+	- SOMA2412
+	- ADAD1002
+	- SART3416
+	- CVEN2201
+	- SAHT3690
+	- CVEN4033
+	- CHEM4524
+	- MATS4010
+	- COMM4002
+	- FOOD9430
+	- TABL2732
+	- ADAD3402
+	- TABL1005
+	- MINE4320
+	- TABL2057
+	- SDES2413
+	- ZHSS2204
+	- ADAD0600
+	- TABL1710
+	- ARTS1091
+	- SART2412
+	- SART2415
+	- LAWS3141
+	- MGMT1002
+	- NANO1001
+	- MICR4013
+	- AVIA3014
+	- SAHT2680
+	- TABL2015
+	- INST1006
+	- OPTM5231
+	- SDES3166
+	- FINS1612
+	- FINS3649
+	- GENM0519
+	- HUMS2004
+	- BABS4053
+	- TABL3033
+	- SART1502
+	- SART2403
+	- ACCT1501
+	- SAED4491
+	- SDES3174
+	- SART2404
+	- ZEIT4505
+	- TABL1003
+	- PLAN4031
+	- SART1501
+	- BEES4514
+	- NANO3002
+	- CVEN4003
+	- DART3391
+	- AVIA4001
+	- SOSS3001
+	- SDES2464
+	- SART3414
+	- BEES4523
+	- MANF4020
+	- SART2411
+	- BIOM5001
+	- SDES2463
+	- FOOD9420
+	- CHEM2996
+	- SERV9999
+	- YMED3002
+	- INFS1609
+	- CVEN4002
+	- LAND2401
+	- SDES3405
+	- PHCM3006
+	- SART3406
+	- CEIC2004
+	- PTRL1010
+	- ARTS3097
+	- GENM0520
+	- SART2417
+	- SART3413
+	- INFS4893
+	- ARTS2092
+	- SOMA2411
+	- FINS3634
+	- YMED3001
+	- SOMA3413
+	- OPTM5171
+	- SDES3406
+	- ZEIT4224
+	- EDST6720
+	- SDES3410
+	- INFS2621
+	- CVEN4307
+	- CVEN4702
+	- SDES3401
+	- SOMA2815
+	- MARK1012
+	- YMED1002
+	- OPTM5271
+	- GENS5003
+	- OPTM4110
+	- CVEN4501
+	- GENM0708
+	- CVEN4310
+	- ARTS1092
+	- TABL1006
+	- CVEN2501
+	- SART3411
+	- ARTS2303
+	- SOMA1001
+	- TABL4721
+	- LAWS3789
+	- SDES2203
+	- ARTS2096
+	- EDST6708
+	- ACCT2672
+	- SDES2168
+	- CVEN4032
+	- SART2836
+	- BABS3091
+	- OPTM4291
+	- OPTM4131
+	- SOMA3408
+	- TABL3025
+	- SART1313
+	- YMED3003
+	- SOMA2414
+	- DART1303
+	- SDES3400
+	- BEES4518
+	- ENVS2030
+	- OPTM2291
+	- MFAC4509
+	- OPTM4231
+	- MFAC4501
+	- LAWS3147
+	- ADAD1100
+	- AVIA2014
+	- MFAC3507
+	- INTA2101
+	- MECH9223
+	- ADAD2400
+	- ARTS3875
+	- TABL1010
+	- CHEM4006
+	- INTA2201
+	- SOMA2415
+	- GENM0518
+	- ARTS3372
+	- ADAD3400
+	- PHCM2003
+	- ZEIT4015
+	- MARK4213
+	- GENC2100
+	- ZPEM1402
+	- CHEM4005
+	- GMAT9300
+	- FINS2613
+	- SDES2401
+	- PHTN3117
+	- SDES2412
+	- PHTN4123
+	- SART3417
+	- DART2330
+	- EDST6738
+	- GENC5031
+	- ARTS3091
+	- ARTS2091
+	- MINE3450
+	- SOMA2605
+	- LAND2402
+	- CVEN3301
+	- LAND2302
+	- OPTM3231
+	- ZEIT2802
+	- MINE4260
+	- SART1641
+added:
+	- FADA2020
+	- CVEN4963
+	- ARTS1621
+	- EXPT2137
+	- PHRM1011
+	- MDIA1008
+	- ZEIT3223
+	- HLTH3000
+	- ZEIT4160
+	- DIET2005
+	- DDES1040
+	- FINS2618
+	- PHYS3299
+	- MUSC1808
+	- GMAT4061
+	- PLAN4005
+	- PHRM3021
+	- IDES2325
+	- EXPT3200
+	- PHAR2911
+	- SOSS2002
+	- DDES1043
+	- COMP6991
+	- CDEV3200
+	- MDIA3090
+	- ARTS2367
+	- PLAN3006
+	- IDES1312
+	- PHYS3199
+	- DIET3003
+	- EXPT3152
+	- PHCM9785
+	- EXPT3178
+	- DIET2003
+	- DIET3001
+	- EXPT3136
+	- MDIA3092
+	- PHCM2100
+	- DDES1062
+	- DDES1030
+	- IDES1315
+	- EXPT2168
+	- DESN3210
+	- AVIA3199
+	- MECH3700
+	- DESN3200
+	- MUSC2905
+	- MDIA1090
+	- IDES3333
+	- PHAR3921
+	- MDIA1091
+	- DESN1010
+	- COMM3050
+	- MUSC3809
+	- DIET2004
+	- DDES1033
+	- PHCM9795
+	- LAWS3198
+	- LAWS3777
+	- EXPT1200
+	- MDIA3097
+	- PHCM9630
+	- SENG3993
+	- MUSC2706
+	- PHCM1004
+	- CHEM3199
+	- IDES4114
+	- DDES1042
+	- ZPEM1508
+	- MUSC1801
+	- PHCM9794
+	- BABS3299
+	- MUSC1807
+	- PSYC3199
+	- HLTH2000
+	- INST2006
+	- EXPT3210
+	- EXPT3174
+	- CHEM3299
+	- SOMS1913
+	- ARTS3818
+	- PHCM9615
+	- PHRM2031
+	- EXPT2169
+	- INFS4777
+	- MDIA2094
+	- EXPT1182
+	- MUSC1804
+	- DDES1023
+	- ARTS2822
+	- MTRN3100
+	- ANAT1452
+	- PHCM9120
+	- ANAT2452
+	- DDES1022
+	- PHCM1003
+	- LAWS3501
+	- DESN1900
+	- PHCM1002
+	- MDIA2014
+	- ACCT3995
+	- MUSC2902
+	- HLTH1000
+	- EXPT3175
+	- FADA3900
+	- FADA3030
+	- ANAT1451
+	- CVEN4961
+	- HDAT9100
+	- COMM3091
+	- INFS4929
+	- AVIA3299
+	- MDIA3093
+	- CVEN4962
+	- IDES1316
+	- MUSC1805
+	- DIET3002
+	- MDIA2009
+	- MINE8130
+	- MINE2820
+	- HDAT9300
+	- IDES1311
+	- DDES1021
+	- FADA1010
+	- PHRM3032
+	- MTRN4231
+	- IDES4113
+	- HLTH5001
+	- EXPT2154
+	- EXPT3148
+	- SOSS3008
+	- HDAT9500
+	- IDES2323
+	- PSYC3299
+	- DDES1020
+	- MDIA3096
+	- PHCM9391
+	- IDES2321
+	- SWCH9011
+	- EXPT1155
+	- PSCY9913
+	- COMP9727
+	- MDIA2096
+	- PSCY9902
+	- PHYS2116
+	- PLAN1008
+	- MDIA1092
+	- EXPT3179
+	- COMM2822
+	- LAWS3208
+	- LAWS3139
+	- PSCY9911
+	- CHEM2832
+	- ZEIT4231
+	- DDES1041
+	- DIET1001
+	- LAWS2277
+	- BIOM9811
+	- IDES2326
+	- ARTS2022
+	- IDES3331
+	- ZBUS3302
+	- MATS3199
+	- MERE2810
+	- PLAN3008
+	- ZEIT1802
+	- DDES1045
+	- HLTH1001
+	- PHRM3031
+	- ARTS1620
+	- PHYS1116
+	- ZEIT3224
+	- ZEIT4760
+	- IDES1314
+	- EXPT3170
+	- BABS3199
+	- PHAR9101
+	- MUSC2903
+	- EXPT2151
+	- MATH3856
+	- ARTS3460
+	- DIET3005
+	- PSCY9917
+	- GENL2033
+	- IDES3334
+	- LAWS3533
+	- MATS3299
+	- MATH3431
+	- ZEIT3103
+	- PLAN3010
+	- PHRM3022
+	- FINS2615
+	- EXPT3153
+	- PHRM1021
+	- DDES1031
+	- MDIA3091
+	- MUSC1901
+	- MDIA2091
+	- HLTH3001
+	- MATH5201
+	- MATH3191
+	- MUSC2901
+	- PLAN3009
+	- PHRM3011
+	- GMAT4060
+	- MUSC1802
+	- MGMT2004
+	- PLAN3007
+	- HDAT9200
+	- PHYS3119
+	- CHEM1832
+	- SWCH9017
+	- BEES3299
+	- MUSC1803
+	- SENG3994
+	- ARTS2849
+	- CDEV3300
+	- ACCT3672
+	- CHEM2051
+	- PLAN4004
+	- SOSS2005
+	- EXPT3220
+	- DDES1032
+	- BEES3199
+	- ZEIT4161
+	- MDIA2092
+	- DDES1060
+	- DIET2001
+	- ARTS3026
+	- DIET3004
+	- DIET2002
+	- MDIA2095
+	- CEIC6713
+	- SOMS1912
+	- MDIA2093
+	- EXPT2170
+	- HDAT9400
+	- HDAT9000
+	- MICR2012
+	- IDES2322
+	- CDEV3012
+	- MUSC1806
+	- DDES1044
+	- DDES1061
+	- ARTS3015
+changed:
+
+	PATH3205:
+		 - from: "Prerequisite: PATH2201 or PATH2202"
+		 - to: "Prerequisite: Enrolment in 3831 Science (Medicine) Honours OR (Completed PATH2201 or PATH2202)"
+
+	CHEM1001:
+		 - from: "Exclusion: CHEM1011, CHEM1031, CHEM1051, CHEM1831Exclusion: CHEM1811"
+		 - to: "Exclusion: CHEM1811Exclusion: CHEM1011, CHEM1031, CHEM1051, CHEM1831"
+
+	SOLA5053:
+		 - from: ""
+		 - to: "96 UOC"
+
+	DART4101:
+		 - from: ""
+		 - to: "Prerequisite: Enrolment in Fine Arts (Honours) program"
+
+	MARK3088:
+		 - from: "Pre-requisite: ECON1203 or INFS1609 or MATH1041 or MATH1231 or MATH1241 or MATH1251 or MARK2052 or COMM2050 or COMM2501 or INFS2605 or INFS2609.<br/>Students with equivalent Statistics knowledge can seek pre-requisite waiver via webforms"
+		 - to: "Pre-requisite: ECON1203 or COMM1190 or INFS1609 or MATH1041 or MATH1231 or MATH1241 or MATH1251 or MARK2052 or COMM2050/COMM3050 or COMM2501 or INFS2605 or INFS2609.<br/>Students with equivalent Statistics knowledge can seek pre-requisite waiver via webforms"
+
+	HESC4502:
+		 - from: "Prerequisite: HESC2452 and HESC3532"
+		 - to: "Prerequisite: Enrolment in program 3831 Science (Medicine) Honours OR (Completed HESC2452 and HESC3532)"
+
+	FINS4792:
+		 - from: "Prerequisite: Must be enrolled in specialisation FINSAH4501 or FINSBH3565;  or program 4520. <br/>Corequisite:  FINS3775 or FINS4775"
+		 - to: "Prerequisite: Must be enrolled in specialisation FINSAH4501 or FINSBH3565;  or program 4520. "
+
+	MATH2089:
+		 - from: "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251. Exclusion: CVEN2002, CVEN2025, CVEN2702,ECON3209, MATH2049, MATH2829, MATH2839, MATH2899, and MINE2700"
+		 - to: "Prerequisite: MATH1231 or MATH1241 or MATH1251 or DPST1014"
+
+	ARTS3065:
+		 - from: "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Film Studies"
+		 - to: "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Cinema Studies or Film Studies"
+
+	MATH2601:
+		 - from: "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251 each with a mark of 70 or greater; Exclusion: MATH2099"
+		 - to: "Prerequisite: MATH1231 or MATH1241 or MATH1251 or DPST1014, each with a mark of 70 or higher"
+
+	ZBUS3101:
+		 - from: "Prerequisite ZBUS2101"
+		 - to: ""
+
+	BLDG1024:
+		 - from: "Program 3331 3332"
+		 - to: "Prerequisite: Enrolment in a Construction Management and Property undergraduate program or minor"
+
+	FINS2622:
+		 - from: "Prerequisite or co-requisite:FINS1612 and FINS2624"
+		 - to: "Prerequisite or co-requisite:FINS1612/FINS2618 and FINS2624"
+
+	COMM3501:
+		 - from: "Pre-requisite: COMM2501"
+		 - to: "Pre-requisite: COMM2501 or COMM1190"
+
+	COMM1180:
+		 - from: "Pre-requisite: COMM1140"
+		 - to: "Pre-requisite: COMM1140. Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Terms 1 and 3."
+
+	FINS4777:
+		 - from: "Prerequisite: Must be enrolled in specialisation FINSAH4501 or FINSBH3565; or program 4520.<br/>Corequisite: FINS3775 or FINS4775 or FINS4779 "
+		 - to: "Prerequisite: Must be enrolled in specialisation FINSAH4501 or FINSBH3565; or program 4520."
+
+	ELEC3115:
+		 - from: "Pre-requisite: MATH2069 AND (PHY1231 OR DPST1024)"
+		 - to: "Pre-requisite: (MATH2069 or MATH2018 or MATH2019) and (PHYS1231 or PHYS1221 or DPST1022 or DPST1024)"
+
+	MMAN4951:
+		 - from: "Prerequisite: Completion of 126 UOC and completion of 3rd year core"
+		 - to: "Prerequisite: Completion of 132 UOC"
+
+	INFS2822:
+		 - from: "Pre-requisite: Any of the following: COMM1190, OR  INFS1603/COMM1822 OR INFS1609/INFS2609"
+		 - to: "Prerequisite: COMM1190 OR  INFS1603 OR (COMM1822 or COMM2822)"
+
+	COMM1150:
+		 - from: "Pre-requisite: COMM1100 and excludes MGMT1101."
+		 - to: "Pre-requisite: COMM1100 and excludes MGMT1101. Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Terms 1 and 3."
+
+	COMM1170:
+		 - from: "Pre-requisite: COMM1140"
+		 - to: "Pre-requisite: COMM1140. Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Terms 1 and 3."
+
+	MATH3261:
+		 - from: "Prerequisite: 12 units of credit in Level 2 Math courses including (MATH2011 or MATH2111) and (MATH2120 or MATH2130 or MATH2121 or MATH2221), or (both MATH2019 (DN) and MATH2089), or (both MATH2069 (DN) and MATH2099)"
+		 - to: "Prerequisite: 12 units of credit in Level 2 Math courses including (MATH2011 or MATH2111) or (MATH2121 or MATH2221) or (both MATH2019 (DN) and MATH2089) or (both MATH2069 (DN) and MATH2099)"
+
+	FINS4776:
+		 - from: "Prerequisite: Must be enrolled in specialisation FINSAH4501 or FINSBH3565; or program 4520.<br/>Corequisite: FINS3775 or FINS4775 or FINS4779 "
+		 - to: "Prerequisite: Must be enrolled in specialisation FINSAH4501 or FINSBH3565; or program 4520."
+
+	CODE2132:
+		 - from: "Pre: BENV1012 / CODE1240 /CODE2121"
+		 - to: "Prerequisite: BENV1012 or CODE1240 or CODE2121"
+
+	MUSC3808:
+		 - from: "Prerequisite: Enrolment in a Music Pedagogy stream in a Music program. Note: This course is for instrumental or vocal students. Students who entered the music programme as composers may be required to audition."
+		 - to: "Prerequisite: 36 UOC overall"
+
+	LAWS3064:
+		 - from: "Prerequisite: Completion of 78 UOC in LAWS courses."
+		 - to: "Prerequisite: Completion of 36 UOC in LAWS courses."
+
+	DART4201:
+		 - from: ""
+		 - to: "Prerequisite: Enrolment in Media Arts (Honours) program"
+
+	CHEM2041:
+		 - from: "Prerequisite: CHEM1011 or CHEM1031 or CHEM1051 or CHEM1811 or DPST1031 and CHEM1021 or CHEM1041 or CHEM1061 or CHEM1821 or DPST1032 and MATH1031 or MATH1041 or MATH1131 or MATH1141 or MATH1151 or MATH1231 or MATH1241 or MATH1251 or DPST1013 or DPST1014"
+		 - to: "Prerequisite: (CHEM1011 or CHEM1031 or CHEM1051 or CHEM1811 or DPST1031) and (CHEM1021 or CHEM1041 or CHEM1061 or CHEM1821 or DPST1032) and (MATH1031 or MATH1041 or MATH1131 or MATH1141 or MATH1151 or MATH1231 or MATH1241 or MATH1251 or DPST1013 or DPST1014)."
+
+	BLDG4019:
+		 - from: "Program Prerequisite:4522 or Program 3332 with WAM of 65 or over"
+		 - to: "Program Prerequisite: 4522"
+
+	ACCT3610:
+		 - from: "Prerequisite: ACCT2542 and FINS1613"
+		 - to: "Prerequisite: ACCT2542, and, FINS1613 or COMM1180 or (COMM1140 AND ECON1102)"
+
+	BLDG4020:
+		 - from: "Program Prerequisite:4522 or Program 3332 with WAM of 65 or over"
+		 - to: "Program Prerequisite: 4522"
+
+	DART3342:
+		 - from: ""
+		 - to: "Enrolled in a Fine Arts or Art Theory program and have completed 48 UOC"
+
+	COMM3500:
+		 - from: "Pre-requisite: COMM1822, COMM2050, COMM2501, Business Analytics Modelling I course (ECON2206 or ECON2209 or RISK2002) and completing the Business Analytics major (COMMJ1). It is recommended students are in their final year when taking this course."
+		 - to: "Pre-requisite: COMM1822/COMM2822, COMM2050, COMM2501, Business Analytics Modelling I course (ECON2206 or ECON2209 or RISK2002) and completing the Business Analytics major (COMMJ1). It is recommended students are in their final year when taking this course."
+
+	MATH3801:
+		 - from: "Prerequisite: MATH2501 or MATH2601 and MATH2011 or MATH2111 or MATH2510 or MATH2610 and MATH2801 or MATH2901."
+		 - to: "Prerequisite: (MATH2501 or MATH2601) and (MATH2011 or MATH2111) and (MATH2801 or MATH2901)"
+
+	MGMT2101:
+		 - from: "Prerequisite or corequisite:MGMT1101or COMM1150  Excluded: IBUS2107"
+		 - to: "Prerequisite or corequisite:MGMT1101 or COMM1150 or COMM1900 or ECON1102. Excluded: IBUS2107"
+
+	ZEIT3218:
+		 - from: "Pre: ZEIT3215, ZPEM2309, ZPEM2310"
+		 - to: "Prerequisites: ZEIT3215 and ZPEM2310"
+
+	COMM3999:
+		 - from: "Pre-requisite: Completed myBCom First Year Portfolio (COMM1999) and in their final year of a single or double Commerce degree (completed at least 72 UOC of Business courses)."
+		 - to: "Pre-requisite: Completed myBCom First Year Portfolio (COMM1999) and in their final year of a single or double Commerce degree (ie. completed at least 72 UOC of Business courses including DPBS equivalent courses)."
+
+	BABS3151:
+		 - from: "Prerequisite: BABS2204 or BABS2264"
+		 - to: "Prerequisite: BABS2204 or BABS2264 or Enrolment in 3831 Science (Medicine) Honours"
+
+	LAWS1052:
+		 - from: "This course is strictly for students undertaking Law programs only."
+		 - to: "This course is strictly for students undertaking Law programs only. Corequisite : LAWS1055. Enrolment in corequisite LAWS1055 (Legal Research and Writing) is required in the same term or subsequent term."
+
+	CVEN4503:
+		 - from: "Prerequisite: CVEN3501."
+		 - to: "Prerequisite: CVEN3501"
+
+	ZEIT3215:
+		 - from: "Prerequisite: ZEIT2207, ZPEM2309, ZPEM2310"
+		 - to: "Prerequisites: ZEIT2207 and ZPEM2309"
+
+	ECON2209:
+		 - from: "Pre-requisite: ECON1203 or COMM1190 or MATH1041 or MATH1231 or MATH1241 or MATH1251."
+		 - to: "Pre-requisite: ECON1203 or COMM1110 or MATH1041 or MATH1231 or MATH1241 or MATH1251. It is highly recommended that students who complete COMM1110 also complete COMM1190 before enrolling in this course."
+
+	DPGE1001:
+		 - from: "UNSW Global Diplomas only (7001, 7002, 7003, 7004)"
+		 - to: "UNSW Global Diplomas only (7001, 7002, 7003, 7004, 7005, 7006)"
+
+	CVEN3701:
+		 - from: "Prerequisite: CVEN1701"
+		 - to: ""
+
+	DDES4101:
+		 - from: ""
+		 - to: "Prerequisite: Enrolment in Design (Honours) program"
+
+	MATH2011:
+		 - from: "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251 Exclusion: MATH2019, MATH2049, MATH2069, MATH2100, MATH2110"
+		 - to: "Prerequisite: MATH1231 or MATH1241 or MATH1251 or DPST1014"
+
+	ZEIT3221:
+		 - from: "Prerequisite: ZEIT3215 and ZEIT3222"
+		 - to: "Prerequisite: ZEIT3215 and ZPEM2310"
+
+	CRIM3025:
+		 - from: "Prerequisite: 96 uoc including CRIM1010, CRIM1011 and CRIM2042, WAM 75, and in the final year of a Criminology major or Criminology & Criminal Justice single or double degree. Students in program 4034 are not eligible to enrol. Consent required."
+		 - to: "Prerequisite: 96 uoc including CRIM1010, CRIM1011 and CRIM2042, WAM 70, and in the final year of a Criminology major or Criminology & Criminal Justice single or double degree. Students in program 4034 are not eligible to enrol. Consent required."
+
+	MATH3611:
+		 - from: "Prerequisite: 12 UOC of Level 2 Mathematics with an average mark of at least 70, including MATH2111 or MATH2011 (CR) or MATH2510 (CR), or permission from the Head of Department."
+		 - to: "Prerequisite: 12 units of credit of Level 2 Mathematics courses with an average mark of at least 70 or higher, including MATH2111 or MATH2011 (Credit), or permission from Head of Department."
+
+	INFS2701:
+		 - from: "Prerequisite: INFS1701"
+		 - to: "Prerequisite: INFS1701 or INFS3617"
+
+	MATH2501:
+		 - from: "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251; Exclusion: MATH2099"
+		 - to: "Prerequisite: MATH1231 or MATH1241 or MATH1251 or DPST1014"
+
+	LAWS3319:
+		 - from: "Prerequisite: Completion of 78 UOC in LAWS courses."
+		 - to: "Completion of 78 UOC in LAWS courses including LAWS1022 Criminal Laws (or LAWS1011) "
+
+	FINS3631:
+		 - from: "Pre-requisite: FINS1612"
+		 - to: "Pre-requisite: FINS1612/FINS2618 or FINS2643"
+
+	COMM1999:
+		 - from: "Pre-requisite: COMM0999 AND completed 30 UOC of Integrated First Year Core"
+		 - to: "Pre-requisite: COMM0999 AND all Integrated First Year program requirements. This includes completion of COMM1120, COMM1140, COMM1170, COMM1180, and COMM1190 (students in 3155 Actuarial Studies / Commerce are not required to complete COMM1190). Also, completion of COMM1100 & COMM1150,  OR, COMM1900. Students should enrol in COMM1999 in the term following the completion of these requirements. "
+
+	MATH2621:
+		 - from: "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251 each with a mark of at least 70; Exclusion: MATH2069"
+		 - to: "Prerequisite: MATH1231 or MATH1241 or MATH1251 or DPST1014 each with a mark of at least 70"
+
+	CVEN4050:
+		 - from: "Prerequisite: 132 UOCs needed to enrol into this course and BE Hons Programs only"
+		 - to: "Prerequisite: 120 UOCs needed to enrol into this course and BE Hons Programs only"
+
+	DART1192:
+		 - from: ""
+		 - to: "Enrolled in Fine Arts (Visual Arts) and have completed 48 UOC"
+
+	MATH1011:
+		 - from: "Exclusion: Not enrolled in 3991 or any UNSW Business Program and must not have completed MATH1031, 1131, 1141, 1151, ECON1202 or DPST1013"
+		 - to: "Not enrolled in 3991 Medical Science"
+
+	PSYC3361:
+		 - from: "Minimum completion of 72 UoC in a declared Psychology major and a current WAM of 80 or above"
+		 - to: "Minimum completion of 72 UoC in a declared Psychology major, completion of PSYC2001, and a current WAM of 75 or above"
+
+	DART4300:
+		 - from: ""
+		 - to: "Prerequisite: Enrolment in Media Arts (Honours), Fine Arts (Honours) or Art Theory (Honours) program"
+
+	ZEIT4702:
+		 - from: "Prerequisite: ZEIT1502"
+		 - to: ""
+
+	LAWS3441:
+		 - from: "Prerequisite: Completion of 78 UOC in LAWS courses."
+		 - to: "Prerequisite: Completion of 36 UOC in LAWS courses."
+
+	MATH3101:
+		 - from: "Prerequisite: 12 units of credit in Level 2 Math courses including (MATH2011 or MATH2111 and MATH2120 or MATH2130 or MATH2121 or MATH2221), or (both MATH2019 (DN) and MATH2089), or (both MATH2069 (CR) and MATH2099)"
+		 - to: "Prerequisite: 12 units of credit in Level 2 Math courses including (MATH2011 or MATH2111) and (MATH2121 or MATH2221) or (both MATH2019(DN) and MATH2089) or (both MATH2069(CR) and MATH2099)"
+
+	GEOS2821:
+		 - from: "Students must have 12 units of credit in the following:  GEOS1111; GEOS1211; GEOS1701"
+		 - to: "Excl:  GEOS2811"
+
+	PSYC2071:
+		 - from: "Pre: PSYC1001, PSYC1011"
+		 - to: "Prerequisite: PSYC1001, PSYC1011, PSYC1111"
+
+	ECON2206:
+		 - from: "Pre-requisite conditions: ECON1203 or COMM1190 or ECON2403 or MATH1041 or MATH1231 or MATH1241 or MATH1251"
+		 - to: "Pre-requisite: ECON1203 or COMM1110 or ECON2403 or MATH1041 or MATH1231 or MATH1241 or MATH1251. It is highly recommended that students who complete COMM1110 also complete COMM1190 before enrolling in this course."
+
+	NEUR4421:
+		 - from: "Prerequisite: Enrolled in Neuroscience Honours Plan"
+		 - to: "Prerequisite: Enrolment in 3831 Science (Medicine) Honours  OR Neuroscience Honours Plan."
+
+	DPDE1009:
+		 - from: "Prerequisite: DPDE1001 Enrolment in 7006 UNSW Global Diploma in Architecture Program."
+		 - to: "Enrolment in 7006 UNSW Global Diploma in Architecture Program.Prerequisite: DPDE1001 "
+
+	BLDG1011:
+		 - from: "Program 3331 3332"
+		 - to: "Prerequisite: Enrolment in a Construction Management and Property undergraduate program or minor"
+
+	ZEIT3112:
+		 - from: ""
+		 - to: "Students must contact the course convenor to arrange a topic and supervisor to gain permission to enroll in this course."
+
+	CODE2121:
+		 - from: "Pre::BENV1012 / CODE1240"
+		 - to: "Prerequisite: BENV1012 or CODE1240"
+
+	COMM1110:
+		 - from: "Students enrolled in 3764 (Eng/Comm), Actuarial Studies or Economics programs (in both single and double degree mode) are not permitted to enrol"
+		 - to: "Students enrolled in 3764 (Eng/Comm), Actuarial Studies or Economics programs (in both single and double degree mode) are not permitted to enrol. Only available to single and double degree Business School students in Term 1. It will be offered to non-Business School students in Terms 2 and 3."
+
+	FINS3647:
+		 - from: "Pre-requisite: FINS1612"
+		 - to: "Pre-requisite: FINS1612/FINS2618"
+
+	ZEIT2207:
+		 - from: "Prerequisite: ZEIT1206 or ZEIT1291"
+		 - to: "Prerequisites: ZEIT1206 and ZPEM1304 "
+
+	MATH2301:
+		 - from: "Prerequisite: MATH1031 (CR) or MATH1231 or or DPST1014 or MATH1241 or MATH1251. Exclusions: MATH2089, CVEN2002, and CVEN2702"
+		 - to: "Prerequisite: MATH1031(CR) or MATH1231 or MATH1241 or MATH1251 or DPST1014"
+
+	ZEIT4230:
+		 - from: "Prerequisite: ZEIT3216, ZEIT3218"
+		 - to: "Prerequisites: ZEIT2209 and ZEIT3xxx Embedded Systems"
+
+	MECH9325:
+		 - from: "None"
+		 - to: ""
+
+	PATH3206:
+		 - from: "Prerequisite: PATH2201 or PATH2202"
+		 - to: "Prerequisite: Enrolment in 3831 Science (Medicine) Honours OR (Completed PATH2201 or PATH2202)"
+
+	PHAR3102:
+		 - from: "Prerequisite: PHAR2011. Highly recommended BIOC2201 or BIOC2101 or BIOC2181"
+		 - to: "Prerequisite: Enrolment in 3831 Science (Medicine) Honours OR completed PHAR2011."
+
+	MATH6781:
+		 - from: "12 units of credit in Level 2 Mathematics courses including (MATH2120 or MATH2130 or MATH2121 or MATH2221), or both MATH2019 and MATH2089, or both MATH2069 and MATH2099"
+		 - to: "Prerequisite: 12 units of credit in Level 2 Mathematics courses including: MATH2121 or MATH2221 or both MATH2019 and MATH2089 or both MATH2069 and MATH2099"
+
+	MDCN8888:
+		 - from: "Students with a WAM of ≥ 65 (see WAM calculation below) and have completed 12 Units of Credit (UOC) General Education before Term 1 in year 4, are eligible to apply.<br/>WAM Calculation<br/>The WAM is calculated from the following courses:<br/>1.	MFAC 1521 Beginnings, Growth and Development A<br/>2.	MFAC 1522 Beginnings, Growth and Development B<br/>3.	MFAC 1523 Health Maintenance A<br/>4.	MFAC 1524 Health Maintenance B<br/>5.	MFAC 1525 Ageing and Endings A<br/>6.	MFAC 1526 Ageing and Endings B<br/>7.	MFAC 1527 Society & Health<br/>In addition, students are required to pass the following courses (including passing subsequent supplementary exams, but if a student fails a course then they will be ineligible):<br/>1.	MFAC 1501 Foundations<br/>2.	MFAC 1511 Phase 1 Portfolio<br/>3.	MFAC 1512 End of Phase Examination<br/>4.	MFAC 1513 Clinical and Communication Skills Examination<br/>5.	MFAC 2514 Integrated Clinical Studies 1<br/>6.	MFAC 2515 Integrated Clinical Studies 2<br/>7.	MFAC 2516 Integrated Clinical Studies 3<br/>8.	MFAC 2511 Phase 2 Portfolio<br/>9.	MFAC 2512 Integrated Clinical Examination"
+		 - to: "Prerequisite: Enrolment in program 3831 Science (Medicine) Honours. "
+
+	FINS3623:
+		 - from: "Prerequisite: FINS1613 or  COMM1180"
+		 - to: "Prerequisite: (COMM1180) or (COMM1140 and ECON1102) or FINS1613"
+
+	MGMT2718:
+		 - from: "Prerequisite or Co-requisite: MGMT1001 OR MGMT1101 OR MGMT1002 OR COMM1100 OR COMM1150 OR COMM1170"
+		 - to: "Prerequisite or Co-requisite: MGMT1001 OR MGMT1101 OR MGMT1002/MGMT2004 OR COMM1100 OR COMM1150 OR COMM1170"
+
+	FINS3646:
+		 - from: "Pre-requisite: FINS1612 OR (Business Analytics Major (COMMJ1) and COMM1180 OR FINS1613"
+		 - to: "Pre-requisite: FINS1612/FINS2618 OR (Business Analytics Major (COMMJ1) and COMM1180 OR FINS1613 OR (COMM1140 and ECON1102)"
+
+	PATH2202:
+		 - from: "Prerequisite: ANAT2111 or ANAT1551 and BIOC2181 and PHSL2501"
+		 - to: "Prerequisite: ANAT2111 and BIOC2181 and PHSL2501"
+
+	ZEIT3700:
+		 - from: "Prerequisite: ZEIT2504"
+		 - to: "Pre-requisite: ZEIT2501"
+
+	ARTS3064:
+		 - from: "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Film Studies or MCT"
+		 - to: "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Cinema Studies or Film Studies"
+
+	DPGE1002:
+		 - from: "UNSW Global Diplomas only (7001, 7002, 7003, 7004) and DPGE1001"
+		 - to: "Prerequisite: DPGE1001"
+
+	MATH2019:
+		 - from: "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251"
+		 - to: "Prerequisite: MATH1231 or MATH1241 or MATH1251 or DPST1014"
+
+	ZBUS3104:
+		 - from: "Business Program (4405 or 4462) and ZBUS1104Completion of ZBUS3108 Business Strategy Implementation is assumed prior to undertaking ZBUS3104 Business Capstone (Work Practice Project). "
+		 - to: "Completion of ZBUS3108 Business Strategy Implementation is assumed prior to undertaking ZBUS3104 Business Capstone (Work Practice Project). Business Program (4405 or 4462) and ZBUS1104"
+
+	MATH2099:
+		 - from: "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251 Exclusion: MATH2501 and MATH2601"
+		 - to: "Prerequisite: MATH1231 or MATH1241 or MATH1251 or DPST1014"
+
+	FINS3645:
+		 - from: "Pre-requisite: FINS1612 OR (Business Analytics Major (COMMJ1) and COMM1180 OR FINS1613"
+		 - to: "Pre-requisite: FINS1612/2618;  OR enrolment in a Business Analytics Major (COMMJ1) and completion of COMM1180 or FINS1613 or (COMM1140 and ECON1102)"
+
+	RISK3003:
+		 - from: "Pre-requisite: ACCT1501 and (ECON1203 or RISK2001)"
+		 - to: "Prerequisite: (COMM1140 or ACCT1501) and (ECON1203 or COMM1190 or MATH1231 or MATH1241 or MATH1251 or RISK2001)"
+
+	COMM1120:
+		 - from: ""
+		 - to: "Only available to single and double degree Business School students in Term 1. It will be offered to non-Business School students in Terms 2 and 3."
+
+	FINS3626:
+		 - from: "Prerequisite: COMM1140 or ACCT1511 and COMM1180 or FINS1613"
+		 - to: "Prerequisite: COMM1140 or ACCT1511 and COMM1180 or (COMM1140 and ECON1102) or FINS1613"
+
+	MATH3121:
+		 - from: "Prerequisite: 12 units of credit in Level 2 Math courses including (MATH2011 or MATH2111) and (MATH2120 or MATH2130 or MATH2121 or MATH2221), or (both MATH2019 (DN) and MATH2089), or (both MATH2069 (DN) and MATH2099)"
+		 - to: "Prerequisite: 12 units of credit in Level 2 Mathematics courses including (MATH2011 or MATH2111) and (MATH2121 or MATH2221) or (both MATH2019 (DN) and MATH2089) or both (MATH2069 (DN) and MATH2099)"
+
+	ZEIT2208:
+		 - from: "Pre: ZEIT1208"
+		 - to: "Prerequisites: ZEIT1208 and ZEIT1102"
+
+	MARK3089:
+		 - from: "Pre-requisite: ECON1203 or INFS1609 or MATH1041 or MATH1231 or MATH1241 or MATH1251 or MARK2052 or COMM2050 or COMM2501 or INFS2605 or INFS2609.<br/>Students with equivalent Statistics knowledge can seek pre-requisite waiver via webforms"
+		 - to: "Pre-requisite: ECON1203 or COMM1190 or INFS1609 or MATH1041 or MATH1231 or MATH1241 or MATH1251 or MARK2052 or COMM2050/COMM3050 or COMM2501 or INFS2605 or INFS2609<br/>Students with equivalent Statistics knowledge can seek pre-requisite waiver via webforms"
+
+	ECON3203:
+		 - from: "ECON3209 or ECON2215 or MATH2801 or MATH2901"
+		 - to: "ECON3209 or MATH2801 or MATH2901 or Enrolment in FINSBH Finance Co-Op Honours"
+
+	DPGE1003:
+		 - from: "UNSW Global Diplomas only (7001, 7002, 7003, 7004), DPGE1001 and DPGE1002"
+		 - to: "Prerequisite: DPGE1002"
+
+	PSYC2081:
+		 - from: "Pre: PSYC1001, PSYC1011"
+		 - to: "Prerequisite: PSYC1001, PSYC1011, PSYC1111"
+
+	DPDE1011:
+		 - from: "Prerequisite: DPDE1001 and DPDE1005.Enrolment in 7006 UNSW Global Diploma in Architecture Program."
+		 - to: "Enrolment in 7006 UNSW Global Diploma in Architecture Program.Prerequisite: DPDE1001 and DPDE1005."
+
+	MATH3311:
+		 - from: "Prerequisite: (MATH2120 or MATH2130 or MATH2121 or MATH2221 or MATH2111) and (MATH2501 or MATH2601) and (MATH2801 or MATH2901 or MATH2871)"
+		 - to: "Prerequisite:  (MATH2121 or MATH2221 or MATH2111) and (MATH2501 or MATH2601) and (MATH2801 or MATH2901 or MATH2871)"
+
+	DPDE1004:
+		 - from: "Prerequisites: DPDE1001 and DPDE1005 Enrolment in 7006 UNSW Global Diploma in Architecture Program."
+		 - to: "Enrolment in 7006 UNSW Global Diploma in Architecture Program.Prerequisites: DPDE1001 and DPDE1005 "
+
+	DART3200:
+		 - from: "Students must complete 72 UOC including two media arts disciplinary sequences prior to enrolling."
+		 - to: "Students must complete 72 UOC including at least one of: DART2211, DART2221, DART2231, DART2241, DDES2111."
+
+	LAWS1061:
+		 - from: "Prerequisite: Prerequisite: LAWS1052 or LAWS1051; JURD7152"
+		 - to: "Prerequisite: LAWS1052 or LAWS1051; "
+
+	RISK2001:
+		 - from: "Pre-requisite: ECON1101 and ACCT1501"
+		 - to: "Prerequisite: (ECON1101 or COMM1100) and (ACCT1501 or COMM1140)"
+
+	ZEIT3118:
+		 - from: "Pre: 96 Units of Credit"
+		 - to: "Prerequisite: ZEIT2105 Systems Analysis and Design and 96 Units of Credit"
+
+	COMM1140:
+		 - from: ""
+		 - to: "Only available to single and double degree Business School students in Term 1. It will be offered to non-Business School students in Terms 2 and 3."
+
+	ZEIT2103:
+		 - from: "Prerequisite: ZEIT1101 and ZEIT1102"
+		 - to: "Prerequisite: ZEIT1102"
+
+	BLDG1013:
+		 - from: "Program 3331 3332"
+		 - to: "Prerequisite: Enrolment in a Construction Management and Property undergraduate program or minor"
+
+	COMM1190:
+		 - from: "Pre-requisite: COMM1110 or ECON1203 or MATH1031 or MATH1041 or MATH1131 or MATH1141 or MATH1151. "
+		 - to: "Pre-requisite: COMM1110 or ECON1203 or MATH1031 or MATH1041 or MATH1131 or MATH1141 or MATH1151. Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Term 3."
+
+	CRIM3022:
+		 - from: "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in Criminology. Or 84 uoc and enrolled in 4787 Social Work (Honours)/Law"
+		 - to: "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in Criminology. Or 84 uoc and enrolled in 4787 Social Work (Honours)/Law. Or 48UOC overall, including 6UOC at level 1 and 6 UOC at level 2 in International Public Health (3880)."
+
+	MMAN2700:
+		 - from: "Prerequisite: (MATH1131 or DPST1013 or MATH1141) and (PHYS1121 or PHYS1131 or DPST1023 or PHYS1141)"
+		 - to: "Prerequisite: (MATH1131 or DPST1013 or MATH1141) and (PHYS1121 or PHYS1131 or DPST1021 or DPST1023 or PHYS1141)"
+
+	MINE3510:
+		 - from: "Prerequisite: ENGG2500 OR MINE2500 OR CVEN2501 OR MATS2005"
+		 - to: "Prerequisite: ENGG2500 OR MINE2500 OR CVEN2501 OR MATS2005 OR CEIC2001"
+
+	ZEIT2209:
+		 - from: "Prerequisite: ZEIT1206 and ZPEM1304"
+		 - to: "Prerequisites: ZEIT2207 and ZEIT2208"
+
+	MMAN3200:
+		 - from: "Prerequisite: MATH2019 or MATH2018 AND (MMAN1300 or CVEN1300 or ENGG1300 or DPST1072) AND ELEC1111. Exclusion: MECH3211, MTRN3212"
+		 - to: "Prerequisite: MMAN2300 AND ELEC1111. Exclusion: MECH3211, MTRN3212"
+
+	BIOM9410:
+		 - from: "Pre-Requisite: Minimum 96 UOC"
+		 - to: "Pre-Requisite: Minimum 144 UOC"
+
+	INFS2609:
+		 - from: ""
+		 - to: "Prerequisite: INFS1603 or COMM1822 or COMM2822"
+
+	ZPEM2405:
+		 - from: ""
+		 - to: "Prerequisite: ZPEM2401"
+
+	INFS2608:
+		 - from: "Prerequisite: INFS1603 OR COMM1822"
+		 - to: "Prerequisite: INFS1603 OR COMM1822 OR COMM2822"
+
+	MARK2060:
+		 - from: "Prerequisite: MARK1012 or GENC6005"
+		 - to: "Prerequisite: MARK1012 or MARK2012 or GENC6005"
+
+	TABL3755:
+		 - from: "Prerequisite: LEGT2751 or TABL2751 and LAWS3147"
+		 - to: "Prerequisite: LEGT2751 or TABL2751 or LAWS3147"
+
+	CEIC4954:
+		 - from: ""
+		 - to: "Prerequisite: CEIC4952Corequisite: CEIC4953"
+
+	MATH2018:
+		 - from: "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251"
+		 - to: "Prerequisite: MATH1231 or MATH1241 or MATH1251 or DPST1014"
+
+	MDCN8889:
+		 - from: "Students with a WAM of ≥ 65 (see WAM calculation below) and have completed 12 Units of Credit (UOC) General Education before Term 1 in year 4, are eligible to apply.<br/>WAM Calculation<br/>The WAM is calculated from the following courses:<br/>1. MFAC 1521 Beginnings, Growth and Development A<br/>2. MFAC 1522 Beginnings, Growth and Development B<br/>3. MFAC 1523 Health Maintenance A<br/>4. MFAC 1524 Health Maintenance B<br/>5. MFAC 1525 Ageing and Endings A<br/>6. MFAC 1526 Ageing and Endings B<br/>7. MFAC 1527 Society & Health<br/>In addition, students are required to pass the following courses (including passing subsequent supplementary exams, but if a student fails a course then they will be ineligible):<br/>1. MFAC 1501 Foundations<br/>2. MFAC 1511 Phase 1 Portfolio<br/>3. MFAC 1512 End of Phase Examination<br/>4. MFAC 1513 Clinical and Communication Skills Examination<br/>5. MFAC 2514 Integrated Clinical Studies 1<br/>6. MFAC 2515 Integrated Clinical Studies 2<br/>7. MFAC 2516 Integrated Clinical Studies 3<br/>8. MFAC 2511 Phase 2 Portfolio<br/>9. MFAC 2512 Integrated Clinical Examination"
+		 - to: "Prerequisite: Enrolment in program 3831 Science (Medicine) Honours."
+
+	DART4301:
+		 - from: ""
+		 - to: "Prerequisite: Enrolment in Art Theory (Honours) program"
+
+	FINS3630:
+		 - from: "Prerequisite: FINS1612, COMM1180"
+		 - to: "Prerequisite: FINS1612/FINS2618, and, COMM1180 OR (COMM1140 and ECON1102) OR FINS1613"
+
+	ANAT3121:
+		 - from: "Prerequisite: ANAT2111 or ANAT1521 or ANAT2511"
+		 - to: "Prerequisite: Enrolment in 3831 Science (Medicine) Honours OR (Completed ANAT2111 or ANAT1521 or ANAT2511)"
+
+	MARK3054:
+		 - from: "Pre-requisite: ECON1203 or MARK2052. If students can demonstrate they have equivalent statistics knowledge, but haven't completed any of the listed pre-requisite courses, they can seek permission from Program Coordinator by submitting an online form."
+		 - to: "Pre-requisite: ECON1203 or COMM1190 or MARK2052. If students can demonstrate they have equivalent statistics knowledge, but haven't completed any of the listed pre-requisite courses, they can seek permission from Program Coordinator by submitting an online form."
+
+	LAND1351:
+		 - from: "Please add pre-rec: LAND2251Pre-requisite: LAND2152"
+		 - to: "Prerequisite: LAND2152 and LAND2251"
+
+	SENG4920:
+		 - from: "Prerequisite: COMP2511<br/>Completed more than or equal to 144 UOC in SENGAH, BINFAH or COMPBH"
+		 - to: "<br/>Completed more than or equal to 144 UOC in SENGAH, BINFAH or COMPBHPrerequisite: COMP2511"
+
+	MATH2871:
+		 - from: "Prerequisite: MATH1041 or ECON1203 or ECON2292 or PSYC2001 or MATH1231 or DPST1014 or MATH1241 or MATH1251 or equivalent."
+		 - to: "Prerequisite: MATH1041 or ECON1203 or PSY2001 or MATH1231 or MATH1241 or MATH1251 or DPST1014 or equivalent"
+
+	MATH1041:
+		 - from: "Excluded: MATH2841"
+		 - to: ""
+
+	ANAT3411:
+		 - from: "Prerequisite: ANAT1521 or a minimum mark of 55 in ANAT2111 or  ANAT2511"
+		 - to: "Prerequisite: Enrolment in 3831 Science (Medicine) Honours OR (Completed ANAT1521 or a minimum mark of 55 in ANAT2111 or ANAT2511)"
+
+	ECON1102:
+		 - from: "Prerequisite: ECON1101 or COMM1100"
+		 - to: "Enrolment excluded for BCom single or dual-degree programs, except students in dual 3155 Actl/Comm and dual 3521 Comm/Econ programs."
+
+	OPTM6411:
+		 - from: "Prerequisite: OPTM6400 and OPTM6413, or, completion of OPTM3211, OPTM3231, PHAR3306, and VISN3211<br/>Corequisite: OPTM6412"
+		 - to: "Prerequisite: OPTM6400 and OPTM6413, and completion of OPTM3211, OPTM3231, PHAR3306, and VISN3211<br/>Corequisite: OPTM6412"
+
+	PSYC2061:
+		 - from: "Pre: PSYC1001, PSYC1011"
+		 - to: "Prerequisite: PSYC1001, PSYC1011, PSYC1111"
+
+	LAWS3065:
+		 - from: "Prerequisite: Completion of 78 UOC in LAWS courses."
+		 - to: "Prerequisite: Completion of 36 UOC in LAWS courses."
+
+	INFS3634:
+		 - from: "Prerequsite: INFS2605"
+		 - to: "Prerequsite: INFS2605 or INFS2609"
+
+	FINS3655:
+		 - from: "Prerequisite: COMM1180 OR FINS1613"
+		 - to: "Prerequisite: (COMM1180) or (COMM1140 and ECON1102) or FINS1613"
+
+	FINS2624:
+		 - from: "Prerequisite: COMM1180 or (COMM1140 and ECON1102)"
+		 - to: "Prerequisite: FINS2618 OR FINS1612"
+
+	MATH1231:
+		 - from: "Prerequisite: MATH1131 or DPST1013 or MATH1141"
+		 - to: "Prerequisite: MATH1131 or MATH1141 or DPST1013"
+
+	ECON2107:
+		 - from: "Prerequisites: (ECON1101 or COMM1100) and (ECON1203 or COMM1190 or ECON2292 or MATH1041 or MATH2801 or MATH2841 or MATH2901)"
+		 - to: "Prerequisites: (ECON1101 or COMM1100) and (ECON1203 or COMM1190 or MATH1041 or MATH2801 or MATH2841 or MATH2901)"
+
+	ZPEM2506:
+		 - from: "Prerequisites: ZPEM1301 or ZPEM1303, ZPEM1302 or ZPEM1304, ZPEM1501,  ZPEM1402 or ZPEM1502."
+		 - to: "ZPEM1301 or ZPEM1303, ZPEM1302 or ZPEM1304, ZPEM1501."
+
+	CODE1240:
+		 - from: "Pre: BENV1012 / BENV1010 or eruivalent"
+		 - to: "Prerequisite: BENV1012 or BENV1010 or equivalent"
+
+	ECON2111:
+		 - from: "Prerequisite: ECON1102 or COMM1150"
+		 - to: "Prerequisite: ECON1101 or COMM1100"
+
+	MATH2221:
+		 - from: "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251 each with a mark of 70."
+		 - to: "Prerequisite: MATH1231 or MATH1241 or MATH1251 or DPST1014, each with a mark of 70 or higher."
+
+	MATH2859:
+		 - from: "Prerequisite: MATH1231 or MATH1241 or MATH1251 or DPST1014; Exclusion: MATH2089; MATH2099; MATH2801; MATH2901; BEES2041; BIOS2041;CVEN2002."
+		 - to: "Prerequisite: MATH1231 or MATH1241 or MATH1251 or DPST1014"
+
+	MATH2069:
+		 - from: "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251; Exclusion: MATH2011, MATH2111, MATH2510, MATH2610, MATH2520 & MATH2620"
+		 - to: "Prerequisite: MATH1231 or MATH1241 or MATH1251 or DPST1014"
+
+	FINS4774:
+		 - from: "Prerequisite: Must be enrolled in specialisation FINSAH4501 or FINSBH3565; or program 4520. <br/>Corequisite: FINS3775 or FINS4775 or FINS4779"
+		 - to: "Prerequisite: Must be enrolled in specialisation FINSAH4501 or FINSBH3565; or program 4520. "
+
+	COMM1100:
+		 - from: "Students enrolled in Actuarial Studies or Economics programs (in single or double degree mode) are not permitted to enrol"
+		 - to: "Students enrolled in Actuarial Studies or Economics programs (in single or double degree mode) are not permitted to enrol. Only available to single and double degree Business School students in Term 1. It will be offered to non-Business School students in Terms 2 and 3."
+
+	PATH3210:
+		 - from: "72 UOC including one of these courses: ANAT2111/1521/2241/2521/2341/2511, BABS2011/2202/2204, BIOC2181/2101, MICR2011, NEUR2201, PATH2201, PHAR2011, PHSL2101/2121/2201/2221, CHEM2041, NANO2002"
+		 - to: "Prerequisite: Enrolment in 3831 Science (Medicine) Honours OR 72 UOC including one of the following courses: ANAT2111/1521/2241/2521/2341/2511, BABS2011/2202/2204, BIOC2181/2101, MICR2011, NEUR2201, PATH2201, PHAR2011, PHSL2101/2121/2201/2221, CHEM2041 or NANO2002"
+
+	MATH2121:
+		 - from: "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251"
+		 - to: "Prerequisite: MATH1231 or MATH1241 or MATH1251 or DPST1014"
+
+	MATH2801:
+		 - from: "Prerequisite: MATH1231 or MATH1241 or MATH1251 or DPST1014; Exclusion: MATH2089; MATH2099; MATH2801; MATH2901; BEES2041; BIOS2041;CVEN2002."
+		 - to: "Prerequisite: MATH1231 or MATH1241 or MATH1251 or DPST1014"
+
+	MATH2901:
+		 - from: "Prerequisite: MATH1231 or MATH1241 or MATH1251 or DPST1014; Exclusion: MATH2089; MATH2099; MATH2801; MATH2901; BEES2041; BIOS2041;CVEN2002."
+		 - to: "Prerequisite: MATH1231 or MATH1241 or MATH1251 or DPST1014"
+
+	MECH9650:
+		 - from: "Prerequisite: MMAN2600 or ENGG2500"
+		 - to: "Completion of 138 UOC and a WAM of >=65"
+
+	MATH2521:
+		 - from: "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251; Exclusion: MATH2069"
+		 - to: "Prerequisite: MATH1231 or MATH1241 or MATH1251 or DPST1014"
+
+	FINS4779:
+		 - from: "Prerequisite: Must be enrolled in specialisation FINSAH4501 or FINSBH3565; or program 4520.<br/>Corequisite: FINS3775 or FINS4775 or FINS4779 "
+		 - to: "Prerequisite: Must be enrolled in specialisation FINSAH4501 or FINSBH3565; or program 4520."
+
+	MINE3430:
+		 - from: "Prerequisite: MINE2010 or CVEN3031 or DESN2000"
+		 - to: "Prerequisite: DESN2000"
+
+	SOCW3013:
+		 - from: "Prerequisite: ARTS1753 or ARTS1870 or ARTS1871 and PSYC1001, SOCW2006, SOCW2008, SOCW2009, SOCW2100, SOCW3012, SOSS1000, SOSS1001, ARTS2871 or SOSS2002, and enrolment in a Social Work program. Equivalent: SOCW3001 and SOCW3011. Corequisite: SOCW3009"
+		 - to: "Prerequisite: ARTS1753 or ARTS1870 or ARTS1871 and PSYC1001, SOCW2006, SOCW2008, SOCW2009, SOCW2100, SOCW3012, SOSS1000, SOSS1001, ARTS2871 or SRAP2002, and enrolment in a Social Work program. Equivalent: SOCW3001 and SOCW3011. Corequisite: SOCW3009"
+
+	INFS2603:
+		 - from: "Prerequisite: INFS1602"
+		 - to: "Prerequisite: INFS1602 or INFS2602"
+
+	MATH2111:
+		 - from: "Prerequisite: MATH1231 or DPST1014 or MATH1241 or MATH1251 each with a mark of at least 70; Excluded: MATH2019, MATH2049, MATH2069, MATH2100, MATH2110."
+		 - to: "Prerequisite: MATH1231 or MATH1241 or MATH1251 or DPST1014 each with a mark of at least 70"
+
+	PHYS1160:
+		 - from: "Exclusion: GENS4001 & GENS4003"
+		 - to: "Exclusion: PHYS1116 Higher Introduction to Astronomy"
+
+	ANAT3131:
+		 - from: "Prerequisite: ANAT2111 or ANAT1521 or ANAT2511"
+		 - to: "Prerequisite: Enrolment in 3831 Science (Medicine) Honours OR (Completed ANAT2111 or ANAT1521 or ANAT2511)"
+
+	FOOD3060:
+		 - from: "Prerequisites: PHYS1111, MATH1031, MATH1041"
+		 - to: "Prerequisites: (PHYS1111 or PHYS1121 or PHYS1131) AND (MATH1031 or MATH1131 or MATH1141)"
+
+	OPTM6412:
+		 - from: "Prerequisite: OPTM6400 and OPTM6411 and OPTM6413 or OPTM3211 and OPTM3231 and PHAR3306 and VISN3211"
+		 - to: "Prerequisite: OPTM6400 and OPTM6413<br/>Corequisite: OPTM6411"
+
+	ARTS3063:
+		 - from: "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following streams, Film Studies or Media, Culture & Technology"
+		 - to: "Prerequisite: 48 UOC overall, including 6 UOC at level 1 and 6 UOC at level 2 in one of the following specialisations, Cinema Studies or Film Studies"
+
+	HESC4501:
+		 - from: "Prerequisite:  MATH1041, HESC2501 and 12 UOC of Level 3 HESC Courses"
+		 - to: "Prerequisite:  Enrolment in program 3831 Science (Medicine) Honours program OR (Completed MATH1041, HESC2501 and 12 UOC of Level 3 HESC Courses)"
+
+	MATH3901:
+		 - from: "Prerequisite: MATH2901 or MATH2801(DN) and MATH2501 or MATH2601 and MATH2011 or MATH2111 or MATH2510 or MATH2610."
+		 - to: "Prerequisite: MATH2901 or MATH2801(DN) and MATH2501 or MATH2601 and MATH2011 or MATH2111"
+
+	CVEN4701:
+		 - from: ""
+		 - to: "Completion of 126 UOC and 3rd year core"
+
+	ANAT2111:
+		 - from: "Prerequisite: A pass in BABS1201 or DPST1051 plus either a pass in ANAT2241 or BABS1202 or DPST1052 or BABS2202 or BABS2204 or BIOC2201 or BIOC2291 or BIOS1101 or HESC1501 or PHSL2101 or PHSL2121 or VISN1221"
+		 - to:   "Prerequisite: A pass in BABS1201 or DPST1051 plus either a pass in ANAT2241 or BABS1202 or DPST1052 or BABS2202 or BABS2204 or BIOC2201 or BIOC2291 or BIOS1101 or HESC1501 or PHSL2101 or PHSL2121 or VISN1101"
+
+	INFS3873:
+		 - from: "Pre-requisite: INFS3603 or (COMM2501 and in Business Analytics major (COMMJ)).<br/>Note: Students wishing to meet SAS certification must complete INFS3603. Completion of COMM2501 in lieu of INFS3603 will not be considered equivalent for the certificate."
+		 - to: "Pre-requisite: INFS3603 OR (COMM2501 AND enrolment in COMMJ Business Analytics major)"
+
+	FINS3648:
+		 - from: "Prerequisite: FINS1612 and (FINS2624 or FINS3630 or FINS3623)"
+		 - to: "Prerequisite: FINS1612/FINS2618 and (FINS2624 or FINS3630 or FINS3623)"
+
+	MARK3087:
+		 - from: "Pre-requisite: ECON1203 or INFS1609 or MATH1041 or MATH1231 or MATH1241 or MATH1251 or MARK2052 or COMM2050 or COMM2501 or INFS2605 or INFS2609.<br/>Students with equivalent Statistics knowledge can seek pre-requisite waiver via webforms"
+		 - to: "Pre-requisite: ECON1203 or COMM1190 or INFS1609 or MATH1041 or MATH1231 or MATH1241 or MATH1251 or MARK2052 or COMM2050/COMM3050 or COMM2501 or INFS2605 or INFS2609.<br/>Students with equivalent Statistics knowledge can seek pre-requisite waiver via webforms"
+
+	COMM2501:
+		 - from: "Prerequisite: (ECON1203 or COMM1190 or MATH1151 or MATH1141 or MATH1131) and (COMM1822 or ACTL1101)"
+		 - to: "Prerequisite: (ECON1203 or COMM1190 or MATH1151 or MATH1141 or MATH1131) and (COMM1822/COMM2822 or ACTL1101 or COMP3311)"
+
+	LAND1322:
+		 - from: "Pre: LAND2272"
+		 - to: "Prerequisite: LAND2272 or enrolment in the Landscape Architecture minor"
+inFixes:
+	- COMM1110
+	- COMM1150
+	- COMM1999
+	- COMM3500
+	- COMM3999
+	- CVEN4050
+	- DESN1900
+	- ECON2206
+	- ELEC3115
+	- FINS2622
+	- FINS3626
+	- FINS3630
+	- FINS3645
+	- FINS3646
+	- FINS4774
+	- FINS4776
+	- FINS4777
+	- FINS4779
+	- FINS4792
+	- INFS2605
+	- INFS2822
+	- INFS3873
+	- MARK3054
+	- MARK3087
+	- MARK3088
+	- MARK3089
+	- MATH1011
+	- MATH1041
+	- MATH2111
+	- MATH2221
+	- MATH2301
+	- MATH2601
+	- MATH2621
+	- MATH2871
+	- MATH3101
+	- MATH3121
+	- MATH3191
+	- MATH3261
+	- MATH3611
+	- MATH3801
+	- MATH3901
+	- MATH6781
+	- MGMT2101
+	- MGMT2718
+	- MMAN3200
+	- PATH3210
+	- PHYS1116
+	- PSYC2061
+	- PSYC2071
+	- PSYC2081
+	- PSYC3361
+	- TABL3755

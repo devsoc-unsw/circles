@@ -117,7 +117,7 @@ def FINS_4774():
     "processed": "Must be specialisation FINSAH4501 || FINSBH3565; || program 4520. [FINS3775 || FINS4775 || FINS4779]"
     """
 
-    return "(FINSAH4501 || FINSBH3565 || 4520) && [FINS3775 || FINS4775 || FINS4779]"
+    return "((FINSAH && 4501) || (FINSBH && 3565) || 4520) && [FINS3775 || FINS4775 || FINS4779]"
 
 
 def FINS_4776_7_9():
@@ -127,7 +127,7 @@ def FINS_4776_7_9():
     "processed": "Must be specialisation FINSAH4501 || FINSBH3565; || program 4520. [FINS3775 || FINS4775 ||]"
     """
 
-    return "(FINSAH4501 || FINSBH3565 || 4520) && ([FINS3775 || FINS4775 || FINS4779])"
+    return "((FINSAH && 4501) || (FINSBH && 3565) || 4520) && [FINS3775 || FINS4775 || FINS4779]"
 
 
 def FINS_4792():
@@ -137,7 +137,7 @@ def FINS_4792():
     "processed": "Must be specialisation FINSAH4501 || FINSBH3565; || program 4520. [ FINS3775 || FINS4775]"
     """
 
-    return "(FINSAH4501 || FINSBH3565 || 4520) && [FINS3775 || FINS4775]"
+    return "((FINSAH && 4501) || (FINSBH && 3565) || 4520) && [FINS3775 || FINS4775]"
 
 
 if __name__ == "__main__":

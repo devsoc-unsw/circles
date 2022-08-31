@@ -28,7 +28,6 @@ COURSES = data_helpers.read_data("data/final_data/coursesProcessed.json")
 def fix_conditions():
     """ Functions to apply manual fixes """
 
-    CONDITIONS["INFS1609"][PROCESSED] = INFS1609()
     CONDITIONS["INFS2101"][PROCESSED] = INFS2101()
     CONDITIONS["INFS2605"][PROCESSED] = INFS2605()
 
@@ -55,19 +54,6 @@ def fix_conditions():
     data_helpers.write_data(
         CONDITIONS, "data/final_data/conditionsProcessed.json")
     data_helpers.write_data(COURSES, "data/final_data/coursesProcessed.json")
-
-
-# PROBLEM FUNCTION
-def INFS1609():
-    """
-    "original": "Students completing Computer Science degrees or majors (including BINF, COMP, or SENG) are excluded from this course.<br/><br/>",
-    "processed": "Computer Science degrees || majors (&& BINF || COMP || SENG) are"
-    """
-    COURSES["INFS1609"]["exclusions"]["COMP#"] = 1
-    COURSES["INFS1609"]["exclusions"]["COMP?1"] = 1
-
-    return ""
-
 
 def INFS2101():
     """

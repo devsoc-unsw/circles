@@ -42,7 +42,6 @@ def fix_conditions():
         CONDITIONS, "data/final_data/conditionsProcessed.json")
     data_helpers.write_data(COURSES, "data/final_data/coursesProcessed.json")
 
-# TODO: implement your functions here
 
 def ELEC_2911():
     """

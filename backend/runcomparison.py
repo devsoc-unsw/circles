@@ -28,7 +28,7 @@ except argparse.ArgumentError:
 def check_in_fixes(cname: str, ls: list) -> None:
     """ mutates the list given to add the course name if it is in manual fixes"""
     with suppress(FileNotFoundError):
-        with open(f"data/processors/manual_fixes/{cname[0:4]}fixes.py", "r", encoding="utf8") as file:
+        with open(f"data/processors/manual_fixes/{cname[0:4]}Fixes.py", "r", encoding="utf8") as file:
             if f"CONDITIONS[\"{cname}\"]" in file.read():
                 ls.append(cname)
 
@@ -71,8 +71,8 @@ def main():
             print()
             print(f"\t{coursename}:")
             check_in_fixes(coursename, courses_in_manual)
-            print(f"\t\t - from: \"{source_course}\"")
-            print(f"\t\t - to: \"{target_course}\"")
+            print(f"\t\t - from: \"{target_course}\"")
+            print(f"\t\t - to: \"{source_course}\"")
     print("inFixes:")
     for added in courses_in_manual:
         print(f"\t- {added}")

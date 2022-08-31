@@ -37,14 +37,14 @@ def major_minor_for_program(draw):
 
 
 @given(sampled_from(programs))
-@settings(deadline=500)
+@settings(deadline=5000)
 def test_all_programs_fetched(program):
     structure = requests.get(f"http://127.0.0.1:8000/programs/getStructure/{program}")
     assert structure != 500
     structure.json()["structure"]["General"] != {}
 
 @given(major_minor_for_program())
-@settings(deadline=1000)
+@settings(deadline=1500)
 def test_all_specs_fetched(specifics):
     # this is stupid
     if specifics[1] == specifics[2]:

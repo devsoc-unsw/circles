@@ -67,11 +67,8 @@ def CVEN_4050():
     "original": "Prerequisite: 132 UOCs needed to enrol into this course and BE Hons Programs only<br/><br/>",
     "processed": "132UOCs needed to enrol into this course && BE Hons Programs only"
     """
-    # TODO: JOEL: How to say 'BE Hons Programs only", without listing them like this??
-    # Got it from majors here: https://www.handbook.unsw.edu.au/undergraduate/programs/2022/3707?year=2022
 
-    # Additionally it still fails because I haven't said '132UOC in XXXX', what's the command for that???
-    return "132UOC && (AEROAH || BINFAH || CEICAH || CEICDH || COMPBH || CVENAH || CVENBH || ELECAH || ELECCH || GMATDH || MANFBH || MECHAH || MINEAH || MTRNAH || PETRAH || SENGAH || SOLAAH || SOLABH || TELEAH)"
+    return "132UOC && ENGG# && ?????H"
 
 def CVEN_4106():
     """

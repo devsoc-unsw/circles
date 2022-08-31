@@ -66,11 +66,13 @@ def COMM_1100(conditions):
         "processed": "who have ECON1101 are not permitted to enrol"
     """
 
-    COURSES["COMM1100"]["exclusions"]["ECON1101"] = 1
+    COURSES["COMM1100"]["exclusions"]["ACTL#"] = 1
+    COURSES["COMM1100"]["exclusions"]["ECON#"] = 1
 
     return {
         "original": conditions["original"],
-        "processed": ""
+        "processed": "",
+        "handbook_note": "Only available to single and double degree Business School students in Term 1. It will be offered to non-Business School students in Terms 2 and 3."
     }
 
 
