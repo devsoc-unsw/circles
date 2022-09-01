@@ -30,10 +30,20 @@ def fix_conditions():
     CONDITIONS["ANAT2241"][PROCESSED] = ANAT_2241()
     CONDITIONS["ANAT2111"][PROCESSED] = ANAT_2111()
     CONDITIONS["ANAT1521"][PROCESSED] = ANAT_1521()
+    CONDITIONS["ANAT1451"][PROCESSED] = ANAT_1451()
+    CONDITIONS["ANAT2452"][PROCESSED] = ANAT_2452()
     # Updates the files with the modified dictionaries
     data_helpers.write_data(
         CONDITIONS, "data/final_data/conditionsProcessed.json")
     data_helpers.write_data(COURSES, "data/final_data/coursesProcessed.json")
+
+def ANAT_1451():
+    """
+    "original": "Prerequisite: Enrolment in program 3896 Exercise Science/Physiotherapy and Exercise Physiology OR <br/>3897 Applied Exercise Science/Clinical Exercise Physiology<br/><br/>",
+    "processed": "(3896 Exercise Science/Physiotherapy && Exercise Physiology || 3897 Applied Exercise Science/Clinical Exercise Physiology)"
+    """
+
+    return "3896 || 3897"
 
 def ANAT_1521():
     """
@@ -57,6 +67,13 @@ def ANAT_2111():
     """
     return "(BABS1201 || DPST1051) && (ANAT2241 || BABS1202 || DPST1052 || BABS2202 || BABS2204 || BIOC2201 || BIOC2291 || BIOS1101 || HESC1501 || PHSL2101 || PHSL2121 || VISN1101)"
 
+
+def ANAT_2452():
+    """
+        "original": "Prerequisite: Enrolment in program 3896 Exercise Science/Physiotherapy and Exercise Physiology OR <br/>3897 Applied Exercise Science/Clinical Exercise Physiology<br/><br/>",
+        "processed": "(3896 Exercise Science/Physiotherapy && Exercise Physiology || 3897 Applied Exercise Science/Clinical Exercise Physiology)"
+    """
+    return "3896 || 3897"
 
 if __name__ == "__main__":
     fix_conditions()

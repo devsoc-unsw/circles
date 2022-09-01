@@ -17,7 +17,7 @@ ignored = [
     'MICR3621', 'MMAN4951', 'MUSC', 'NEUR2201', 'PHAR2011',
     'PHAR3102', 'PHAR3251', 'PHCM1001', 'PHSL', 'SENG4920',
     '3199', '3299', 'SDES', 'SOCW', 'SOLA49', 'SOSS', 'COMP4920',
-    'SRAP', 'ZHSS3501', 'FOOD6804', 'PATH3209'
+    'SRAP', 'ZHSS3501', 'FOOD6804', 'PATH3209', 'SOMS', 'YMED'
 ]
 
 def test_validation():

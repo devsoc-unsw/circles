@@ -29,9 +29,6 @@ def fix_conditions():
     """ Functions to apply manual fixes """
 
     CONDITIONS["INFS2101"][PROCESSED] = INFS2101()
-    CONDITIONS["INFS2605"][PROCESSED] = INFS2605()
-
-    CONDITIONS["INFS2822"][PROCESSED] = INFS_2822()
 
     CONDITIONS["INFS3202"][PROCESSED] = INFS_3202()
     CONDITIONS["INFS3303"][PROCESSED] = INFS_3303()
@@ -61,27 +58,6 @@ def INFS2101():
     "processed": "plan (INFSCH3964 || INFSCH3971) && (INFS1609 || INFS2609) && INFS 2603; || plan (INFSB13554) && INFS2603"
     """
     return "(INFSCH3964 || INFSCH3971) && (INFS1609 || INFS2609) && INFS2603) || (INFSB13554 && INFS2603)"
-
-
-def INFS2605():
-    """
-    "original": "Prerequisite: INFS1603 AND (INFS2609 or INFS1609).<br/>Students completing Computer Science degrees or majors (including BINF, COMP, or SENG) are excluded from this course.<br/><br/>",
-    "processed": "INFS1603 && (INFS2609 || INFS1609). Computer Science degrees || majors (&& BINF || COMP || SENG) are"
-    """
-    # Add exclusions to courseProcessed.json. Assumes that 'majors' includes
-    # honours programs
-    COURSES["INFS1609"]["exclusions"]["COMP#"] = 1
-    COURSES["INFS1609"]["exclusions"]["COMP?1"] = 1
-
-    return "INFS1603 && (INFS2609 || INFS1609)"
-
-
-def INFS_2822():
-    """
-    "original": "Pre-requisite: Any of the following: COMM1190, OR  INFS1603/COMM1822 OR INFS1609/INFS2609<br/><br/>",
-    "processed": "Any of the following: COMM1190 || (INFS1603 || COMM1822) || (INFS1609 || INFS2609)"
-    """
-    return "COMM1190 || (INFS1603 || COMM1822) || (INFS1609 || INFS2609)"
 
 
 def INFS_3202():
@@ -117,7 +93,7 @@ def INFS_3830_3873(condition):
     return {
         "original": condition["original"],
         "processed": "INFS3603 || (COMM2501 && COMMJ1)",
-        "handbook_note": "Students wishing to meet SAS certification must complete INFS3603. Completion of COMM2501 in lieu of INFS3603 will not be considered equivalent for the certificate"
+        "handbook_note": "Students wishing to meet SAS certification must complete INFS3603. Completion of COMM2501 in lieu of INFS3603 will not be considered equivalent for the certificate" if "Note:" in condition["original"]  else ""
     }
 
 

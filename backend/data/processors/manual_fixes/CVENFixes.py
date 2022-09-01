@@ -64,11 +64,11 @@ def CVEN_2303_3303_3304():
 
 def CVEN_4050():
     """
-    "original": "Prerequisite: 132 UOCs needed to enrol into this course and BE Hons Programs only<br/><br/>",
+    "original": "Prerequisite: 120 UOCs needed to enrol into this course and BE Hons Programs only<br/><br/>",
     "processed": "132UOCs needed to enrol into this course && BE Hons Programs only"
     """
 
-    return "132UOC && ENGG# && ?????H"
+    return "120UOC && ENGG# && ?????H"
 
 def CVEN_4106():
     """

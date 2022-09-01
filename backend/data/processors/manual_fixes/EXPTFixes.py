@@ -1,7 +1,10 @@
 """
 https://github.com/csesoc/Circles/wiki/Manual-Fixes-to-Course-Prerequisites
 
-Apply manual [code] fixes to processed conditions in conditionsProcessed.json so
+Copy this into a new file for the relevant faculty's fixes:
+e.g. COMPFixes.py, ACCTFixes.py, PSYCFixes.py
+
+Apply manual DESN fixes to processed conditions in conditionsProcessed.json so
 that they can be fed into algorithms.
 
 If you make a mistake and need to regenerate conditionsProcessed.json, then you
@@ -9,7 +12,7 @@ can run:
     python3 -m data.processors.conditionsPreprocessing
 
 To then run this file:
-    python3 -m data.processors.manualFixes.MUSCFixes
+    python3 -m data.processors.manualFixes.DESNFixes
 """
 
 from data.utility import data_helpers
@@ -25,22 +28,18 @@ COURSES = data_helpers.read_data("data/final_data/coursesProcessed.json")
 def fix_conditions():
     """ Functions to apply manual fixes """
 
-    CONDITIONS["MMAN3200"][PROCESSED] = MMAN_3200()
-
+    CONDITIONS["EXPT1155"][PROCESSED] = EXPT_1155()
     # Updates the files with the modified dictionaries
     data_helpers.write_data(
         CONDITIONS, "data/final_data/conditionsProcessed.json")
     data_helpers.write_data(COURSES, "data/final_data/coursesProcessed.json")
 
-
-def MMAN_3200():
+def EXPT_1155():
     """
-        "original": "Prerequisite: MATH2019 or MATH2018 AND (MMAN1300 or CVEN1300 or ENGG1300 or DPST1072) AND ELEC1111. Exclusion: MECH3211, MTRN3212<br/><br/>",
-        "processed": "MATH2019 || MATH2018 && (MMAN1300 || CVEN1300 || ENGG1300 || DPST1072) && ELEC1111"
+        "original": "Prerequisite: Enrolment in 3959 Data Science program<br/><br/>",
+        "processed": "Enrolment in 3959 Data Science program"
     """
-
-
-    return "(MATH2019 || MATH2018) && (MMAN1300 || CVEN1300 || ENGG1300 || DPST1072) && ELEC1111"
+    return "SOMS1912 && [SOMS1913]"
 
 if __name__ == "__main__":
     fix_conditions()

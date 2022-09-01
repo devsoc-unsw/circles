@@ -26,10 +26,7 @@ COURSES = data_helpers.read_data("data/final_data/coursesProcessed.json")
 
 def fix_conditions():
     """ Functions to apply manual fixes """
-
-    # TODO: call your functions here
     CONDITIONS["ELEC2911"][PROCESSED] = ELEC_2911()
-    CONDITIONS["ELEC3115"][PROCESSED] = ELEC_3115()
     CONDITIONS["ELEC3705"][PROCESSED] = ELEC_3705()
     CONDITIONS["ELEC4605"][PROCESSED] = ELEC_4605()
     CONDITIONS["ELEC4952"][PROCESSED] = ELEC_4952()
@@ -51,13 +48,6 @@ def ELEC_2911():
 
     return "ELEC1111 && 48UOC"
 
-def ELEC_3115():
-    """
-    "original": "Pre-requisite: MATH2069 AND (PHY1231 OR DPST1024)<br/><br/>",
-    "processed": "MATH2069 && (PHY1231 || DPST1024)"
-    """
-
-    return "MATH2069 && (PHYS1231 || DPST1024)"
 
 def ELEC_3705():
     """

@@ -29,9 +29,9 @@ def fix_conditions():
     """ Functions to apply manual fixes """
 
     CONDITIONS["ACCT2101"][PROCESSED] = ACCT_2101_3202_3303()
-
     CONDITIONS["ACCT3202"][PROCESSED] = ACCT_2101_3202_3303()
     CONDITIONS["ACCT3303"][PROCESSED] = ACCT_2101_3202_3303()
+    CONDITIONS["ACCT3610"][PROCESSED] = ACCT_3610()
     CONDITIONS["ACCT3708"] = ACCT_3708(CONDITIONS["ACCT3708"])
 
     codes = ["ACCT4797", "ACCT4809", "ACCT4851", "ACCT4852", "ACCT4897"]
@@ -52,6 +52,12 @@ def ACCT_2101_3202_3303():
     """
     return "ACCTB13554"
 
+def ACCT_3610():
+    """
+        "original": "Prerequisite: ACCT2542, and, FINS1613 or COMM1180 or (COMM1140 AND ECON1102)<br/><br/>",
+        "processed": "ACCT2542 || and || FINS1613 || COMM1180 || (COMM1140 && ECON1102)"
+    """
+    return "ACCT2542 && (FINS1613 || COMM1180 || (COMM1140 && ECON1102))"
 
 def ACCT_3708(condition):
     """
