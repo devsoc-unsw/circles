@@ -45,7 +45,7 @@ class Condition(ABC):
         entered.
         """
         pass
-
+    
     @abstractmethod
     def is_path_to(self, course: str) -> bool:
         """ checks if 'course' is able to meet any subtree's requirements"""
@@ -390,6 +390,8 @@ class CompositeCondition(Condition):
     def __init__(self, logic: Logic = Logic.AND):
         self.conditions: list[Condition] = []
         self.logic = logic
+        self.child = False
+        self.isWrapAnd = False
 
     def add_condition(self, condition: Condition):
         """ Adds a condition object """
@@ -399,25 +401,56 @@ class CompositeCondition(Condition):
         """ AND or OR """
         self.logic = logic
 
+    def is_child(self, child: bool):
+        self.child = child
+
+    def set_isWrapAnd(self, isWrap: bool):
+        self.isWrapAnd = isWrap
+
     def validate(self, user: User) -> tuple[bool, list[str]]:
         """
         Validate user conditions and return the validated conditions and
         warnings
         """
+
+        # set is_child for composite conditions
+        count = 0
         if not self.conditions:
             return True, []
+        for cond in self.conditions:
+            if isinstance(cond, CompositeCondition): 
+                if self.isWrapAnd: 
+                    if count > 0: cond.is_child(True)
+                    count += 1
+                else:
+                    cond.is_child(True)
 
         validations = [cond.validate(user) for cond in self.conditions]
         # unzips a zipped list - https://www.geeksforgeeks.org/python-unzip-a-list-of-tuples/
         unlocked, all_warnings = list(zip(*validations))
         wam_warning = sum([warning for unlocked_cond, warning in validations if unlocked_cond], []) # type: List[str]
+        #checking for (...)
+        warning_count = 0
+        for warning in all_warnings: 
+            if warning: warning_count += 1
+        if warning_count < 2:
+            for cond in self.conditions:
+                if isinstance(cond, CompositeCondition): 
+                    cond.is_child(False)
+        validations = [cond.validate(user) for cond in self.conditions]
+        # unzips a zipped list - https://www.geeksforgeeks.org/python-unzip-a-list-of-tuples/
+        unlocked, all_warnings = list(zip(*validations))
 
         if self.logic == Logic.AND:
             satisfied = all(unlocked) 
-            return satisfied, (wam_warning if satisfied else ['(' + ' AND '.join(sum(all_warnings,[])) + ')'])  # warnings are flattened
+            joined = ' AND '.join(sum(all_warnings,[]))
+            warning = ['(' + joined + ')'] if self.child else [joined]
+            return satisfied, (wam_warning if satisfied else warning)  # warnings are flattened
         else:
-            satisfied = any(unlocked)     
-            return satisfied, (wam_warning if satisfied else ['(' + ' OR '.join(sum(all_warnings,[])) + ')'])
+            satisfied = any(unlocked)   
+            joined = ' OR '.join(sum(all_warnings,[]))
+            warning = ['(' + joined + 'or)'] if self.child else [joined]
+            return satisfied, (wam_warning if satisfied else warning)
 
     def is_path_to(self, course: str) -> bool:
         return any(condition.is_path_to(course) for condition in self.conditions)
@@ -427,7 +460,7 @@ class CompositeCondition(Condition):
         if self.validate(user)[0] or user.has_taken_course(course_name):
             return False
         return any(condition.beneficial(user, course) for condition in self.conditions)
-
+    
     def __str__(self, id='start') -> str:
         data: CompositeJsonData = {
             'logic': "and" if self.logic == Logic.AND else "or",
@@ -447,4 +480,5 @@ class CompositeCondition(Condition):
             else:
                 data['children'].append(json.loads(str(cond)))
         return json.dumps(data)
-        
+
+#def and_or_warning_str():

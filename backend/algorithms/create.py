@@ -142,6 +142,7 @@ def create_condition(tokens, course=None) -> Optional[CompositeCondition]:
     and optionally a course for which this condition applies to,
     returns the condition
     """
+
     return make_condition(tokens, True, course)[0]
 
 
@@ -153,6 +154,7 @@ def make_condition(tokens, first=False, course=None) -> Tuple[Optional[Composite
     """
     # Everything is wrapped in a CompositeCondition
     result = CompositeCondition()
+    result.set_isWrapAnd(first)
     # Add exclusions
     if first and CACHED_EXCLUSIONS.get(course):
         # NOTE: we dont check for broken exclusions
