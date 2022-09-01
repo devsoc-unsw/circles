@@ -321,23 +321,13 @@ const plannerSlice = createSlice({
     },
     toggleSummer: (state) => {
       state.isSummerEnabled = !state.isSummerEnabled;
-
-      // TODO: Unsure if we should keep the course in the summer column if hidden
-      // For now, keep courses hidden if summer column is also hidden. If we want
-      // to remove the courses if summer term is toggled off, then 'term complete'
-      // must also be reset.
       if (!state.isSummerEnabled) {
         for (let i = 0; i < state.numYears; i++) {
           const courses = state.years[i].T0;
           courses.forEach((course) => {
-            if (state.courses[course].isMultiterm) {
-              plannerSlice.caseReducers
-                .unschedule(state, { payload: { destIndex: null, code: course }, type: 'planner/unschedule' });
-            }
-            state.courses[course].plannedFor = null;
-            state.unplanned.push(course);
+            plannerSlice.caseReducers
+              .unschedule(state, { payload: { destIndex: null, code: course }, type: 'planner/unschedule' });
           });
-          state.years[i].T0 = [];
         }
       }
     },

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import { Select, Switch } from 'antd';
 import dayjs from 'dayjs';
+import openNotification from 'utils/openNotification';
 import Spinner from 'components/Spinner';
 import type { RootState } from 'config/store';
 import { toggleSummer, updateDegreeLength, updateStartYear } from 'reducers/plannerSlice';
@@ -28,6 +29,13 @@ const SettingsMenu = () => {
 
   function handleSummerToggle() {
     dispatch(toggleSummer());
+    if (isSummerEnabled) {
+      openNotification({
+        type: 'info',
+        message: 'Your Summer terms are looking a little empty',
+        description: 'Courses planned for summer have been unplanned.',
+      });
+    }
   }
 
   const years = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
