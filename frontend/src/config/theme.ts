@@ -20,6 +20,20 @@ export const GlobalStyles = createGlobalStyle`
   p {
     font-size: 1rem;
   }
+
+  .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+    background-color: ${({ theme }) => theme.courseMenu?.backgroundColor} !important;
+  }
+
+  .ant-notification-notice,
+  .ant-notification-notice-message,
+  .ant-notification-notice-close-x,
+  .ant-modal-content,
+  .ant-modal-header,
+  .ant-modal-close-x {
+    background-color: ${({ theme }) => theme.body};
+    color: ${({ theme }) => theme.text} !important;
+  }
 `;
 
 const lightBaseColors = {
@@ -79,6 +93,10 @@ export const lightTheme: DefaultTheme = {
   uocBadge: {
     backgroundColor: '#9254de',
   },
+  courseButton: {
+    backgroundColor: '#fff',
+    hoverBackgroundColor: '#F9F9F9',
+  },
 };
 
 export const darkTheme: DefaultTheme = {
@@ -137,5 +155,12 @@ export const darkTheme: DefaultTheme = {
   },
   uocBadge: {
     backgroundColor: '#51258f',
+  },
+  courseButton: {
+    backgroundColor: '#17191A',
+    hoverBackgroundColor: '#1e2021',
+  },
+  courseMenu: {
+    backgroundColor: darkBaseColors.purpleLight,
   },
 };
