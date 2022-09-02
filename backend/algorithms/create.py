@@ -218,7 +218,7 @@ def make_condition(tokens, first=False, course=None) -> Tuple[Optional[Composite
         elif is_program_type(token):
             result.add_condition(ProgramTypeCondition(token))
         else:
-            cond: UOCCondition | WAMCondition | GradeCondition
+            cond: UOCCondition | WAMCondition | GradeCondition | CoresCondition
             if is_uoc(token):
                 # Condition for UOC requirement
                 cond = UOCCondition(get_uoc(token))
