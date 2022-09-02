@@ -310,6 +310,7 @@ def get_legacy_courses(year, term) -> Dict[str, Dict[str, str]]:
     return {'courses' : result}
 
 
+# TODO: this should hve a response model
 @router.get("/getLegacyCourse/{year}/{courseCode}")
 def get_legacy_course(year, courseCode) -> Dict:
     """

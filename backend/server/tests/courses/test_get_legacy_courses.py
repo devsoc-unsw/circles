@@ -2,7 +2,6 @@ import requests
 
 
 
-
 def test_basic_get_legacy_courses():
     x = requests.get('http://127.0.0.1:8000/courses/getLegacyCourses/2021/T1')
 
