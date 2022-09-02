@@ -240,7 +240,7 @@ def make_condition(tokens, first=False, course=None) -> Tuple[Optional[Composite
                 next(item)  # Skip "in" keyword
 
                 # Get the category of the condition
-                category, sub_index = create_category(tokens[index + 2 :])
+                category, sub_index = create_category(tokens[index + 2:])
 
                 if category is None:
                     # Error. Return None.

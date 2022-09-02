@@ -111,6 +111,8 @@ class User:
             self.courses = copy.deepcopy(data["courses"])
         if "year" in data.keys():
             self.year = copy.deepcopy(data["year"])
+        if "core_courses" in data.keys():
+            self.core_courses = copy.deepcopy(data["core_courses"])
 
     def get_grade(self, course: str):
         """
