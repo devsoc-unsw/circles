@@ -3030,8 +3030,8 @@
         "processed": "CEIC4952"
     },
     "CEIC4954": {
-        "original": "Prerequisite: CEIC4952<br/><br/>Corequisite: CEIC4953<br/><br/>",
-        "processed": "CEIC4952 && [CEIC4953]"
+        "original": "",
+        "processed": ""
     },
     "CEIC6004": {
         "original": "Prerequisite: POLY3000<br/><br/>",
@@ -8186,7 +8186,7 @@
     },
     "MDIA3003": {
         "original": "Prerequisite: 66 units of credit overall, including 6 units of credit Level 2 MDIA core courses and enrolment in a Media (Communication & Journalism) or Media (PR & Advertising) program<br/><br/>",
-        "processed": "66UOC && (6UOC in (ARTS2094 || MDIA2008 || MDIA2013)) && (3454 || 3453)"
+        "processed": "66UOC && (6UOC in (ARTS2091 || ARTS2092 || ARTS2093 || ARTS2095 || ARTS2096)) && (3454 || 3453)"
     },
     "MDIA3004": {
         "original": "Prerequisite: 66 units of credit overall, and enrolment in a single or double degree Media program<br/><br/>",
