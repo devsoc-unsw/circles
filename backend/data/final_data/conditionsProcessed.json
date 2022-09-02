@@ -2635,11 +2635,11 @@
     },
     "BIOM4952": {
         "original": "Prerequisite: Completion of Research Thesis A (4951)<br/><br/>",
-        "processed": "4951"
+        "processed": "BIOM4951"
     },
     "BIOM4953": {
         "original": "Prerequisite: Completion of Research Thesis B (4952)<br/><br/>",
-        "processed": "4952"
+        "processed": "BIOM4952"
     },
     "BIOM5932": {
         "original": "",
@@ -3023,11 +3023,11 @@
     },
     "CEIC4952": {
         "original": "Prerequisite: Completion of Research Thesis A (4951)<br/><br/>",
-        "processed": "4951"
+        "processed": "CEIC4951"
     },
     "CEIC4953": {
         "original": "Prerequisite: Completion of Research Thesis B (4952)<br/><br/>",
-        "processed": "4952"
+        "processed": "CEIC4952"
     },
     "CEIC4954": {
         "original": "Prerequisite: CEIC4952<br/><br/>Corequisite: CEIC4953<br/><br/>",
@@ -4706,7 +4706,7 @@
     },
     "DESN2000": {
         "original": "Please refer to the course overview section for information on prerequisite requirements.<br/><br/>",
-        "processed": "((AEROAH || MECHAH || MANFAH || MTRNAH || CVENAH || CVENBH || GMATDH) && (DESN1000 || DPST1071)) || ((ELECAH || ELECCH || TELEAH) &&  (DESN1000 || DPST1071) && ELEC2141 && (COMP1511 || COMP1521)) && ((CHEMAH || CEICDH) && (DESN1000 || DPST1071) && CEIC2000 && (CHEM1821 || CHEM1021 || CHEM1041)) || ((SOLAAH || SOLABH) && (DESN1000 || DPST1071) && SOLA2051) && (COMPBH && COMP1521 && (DESN1000 || DPST1071)) || ((SENGAH || BINFAH) && COMP2521 && (DESN1000 || DPST1071)) && (MINEAH && (DESN1000 || DPST1071)) || (PETRAH && CEIC2001 && (DESN1000 || DPST1071))",
+        "processed": "((AEROAH || MECHAH || MANF?H || MTRNAH || CVEN?H || GMATDH) && (DESN1000 || DPST1071)) || ((ELECAH || ELECCH || TELEAH) &&  (DESN1000 || DPST1071) && ELEC2141 && (COMP1511 || COMP1521)) && ((CHEM?H || CEIC?H) && (DESN1000 || DPST1071) && CEIC2000 && (CHEM1821 || CHEM1021 || CHEM1041)) || ((SOLAAH || SOLABH) && (DESN1000 || DPST1071) && SOLA2051) && (COMPBH && COMP1521 && (DESN1000 || DPST1071)) || ((SENGAH || BINFAH) && COMP2521 && (DESN1000 || DPST1071)) && (MINEAH && (DESN1000 || DPST1071)) || (PETRAH && CEIC2001 && (DESN1000 || DPST1071))",
         "handbook_note": "Please refer to the course overview section for further information on requirements."
     },
     "DESN3000": {
@@ -5635,7 +5635,7 @@
     },
     "ELEC4605": {
         "original": "Pre-Requisite: Elec3705<br/><br/>",
-        "processed": "Elec3705"
+        "processed": "ELEC3705"
     },
     "ELEC4611": {
         "original": "Prereq: ELEC3105<br/><br/>",
@@ -8698,7 +8698,7 @@
     },
     "MMAN3200": {
         "original": "Prerequisite: MATH2019 or MATH2018 AND (MMAN1300 or CVEN1300 or ENGG1300 or DPST1072) AND ELEC1111. Exclusion: MECH3211, MTRN3212<br/><br/>",
-        "processed": "MATH2019 || MATH2018 && (MMAN1300 || CVEN1300 || ENGG1300 || DPST1072) && ELEC1111"
+        "processed": "(MATH2019 || MATH2018) && (MMAN1300 || CVEN1300 || ENGG1300 || DPST1072) && ELEC1111"
     },
     "MMAN3400": {
         "original": "Prerequisite: (MATH2019 OR MATH2018) AND (ENGG2400 OR MMAN2400)<br/><br/>",
@@ -8730,11 +8730,11 @@
     },
     "MMAN4952": {
         "original": "Prerequisite: Completion of Research Thesis A (4951)<br/><br/>",
-        "processed": "4951"
+        "processed": "MMAN4951"
     },
     "MMAN4953": {
         "original": "Prerequisite: Completion of Research Thesis B (4952)<br/><br/>",
-        "processed": "4952"
+        "processed": "MMAN4952"
     },
     "MSCI0501": {
         "original": "Excluded: GENS4625, MSCI2001,GENB5001<br/>Not available to students in Science Programs<br/><br/>",
@@ -10170,11 +10170,11 @@
     },
     "SOLA4952": {
         "original": "Prerequisite: Completion of Research Thesis A (4951)<br/><br/>",
-        "processed": "4951"
+        "processed": "SOLA4951"
     },
     "SOLA4953": {
         "original": "Prerequisite: Completion of Research Thesis B (4952)<br/><br/>",
-        "processed": "4952"
+        "processed": "SOLA4952"
     },
     "SOLA5050": {
         "original": "Prerequisite 96 UOC<br/><br/>",

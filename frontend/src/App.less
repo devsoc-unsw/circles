@@ -1,11 +1,8 @@
-@import "~antd/lib/style/themes/default.less";
-@import "~antd/dist/antd.less";
-
 body {
   --navbar-height: 70px;
   --option-header-height: 65px;
 
-  --cs-top-cont-height: 28%;
+  --cs-top-cont-height: 23%;
   --cs-tabs-cont-height: 40px;
   --cs-bottom-cont-height: calc(100% - var(--cs-top-cont-height) - var(--cs-tabs-cont-height));
 
@@ -14,35 +11,6 @@ body {
   --tp-planner-container-margin: 15px;
   --tp-term-box-margin: 1em;
   --tp-summer-term-box-margin: 0.5em;
-}
-
-
-.dark {
-  .secondaryText {
-    color: #737372;
-  }
-}
-
-.light {
-
-  .secondaryText {
-    color: #737372;
-  }
-  .ant-alert-message {
-    color: #1d1f20;
-  }
-
-  .ant-notification-notice-message { 
-    color: #1d1f20;
-  }
-  
-  .ant-btn-primary {
-    color: white; 
-  }
-
-  .ant-modal-title {
-    color: #1d1f20;
-  }
 }
 
 // Scrollbar settings
@@ -60,18 +28,3 @@ body {
   border-radius: 20px;       /* roundness of the scroll thumb */
   border: 3px solid #FAFAFA;  /* creates padding around scroll thumb */
 }
-
-// Term Planner - SettingsMenu, SaveMenu and HelpMenu less stylings
-.content {
-  .settingsTitle {
-    font-size: 1.75em;
-    margin-bottom: 0;
-    text-align: left;
-  }
-  
-  .settingsSubtitle {
-    font-size: 1.1em;
-    margin-bottom: 0;
-  }
-}
-

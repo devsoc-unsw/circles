@@ -31,6 +31,7 @@ def fix_conditions():
     CONDITIONS["ELEC2911"][PROCESSED] = ELEC_2911()
     CONDITIONS["ELEC3115"][PROCESSED] = ELEC_3115()
     CONDITIONS["ELEC3705"][PROCESSED] = ELEC_3705()
+    CONDITIONS["ELEC4605"][PROCESSED] = ELEC_4605()
     CONDITIONS["ELEC4952"][PROCESSED] = ELEC_4952()
     CONDITIONS["ELEC4953"][PROCESSED] = ELEC_4953()
 
@@ -78,6 +79,14 @@ def ELEC_4951(conditions):
         "processed": "126UOC",
         "warning": "Completion of ELEC 3rd year core is required"
     }
+
+def ELEC_4605():
+    """
+    "original": "Pre-Requisite: Elec3705<br/><br/>",
+    "processed": "Elec3705"
+    """
+
+    return "ELEC3705"
 
 def ELEC_4952():
     """

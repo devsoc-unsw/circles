@@ -1,19 +1,21 @@
 """
 APIs for the /courses/ route.
 """
+from contextlib import suppress
 import re
-from typing import Tuple
+from typing import Dict, List, Mapping, Set, Tuple
 
 from algorithms.objects.user import User
-from data.config import ARCHIVED_YEARS
+from data.config import ARCHIVED_YEARS, GRAPH_CACHE_FILE, LIVE_YEAR
 from data.utility.data_helpers import read_data
 from fastapi import APIRouter, HTTPException
-from fuzzywuzzy import fuzz
+from fuzzywuzzy import fuzz # type: ignore
 from server.database import archivesDB, coursesCOL
-from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, Courses,
+from server.routers.model import (CACHED_HANDBOOK_NOTE, CONDITIONS, CourseCodes,
                                   CourseDetails, CoursesState, CoursesPath,
-                                  CoursesUnlockedWhenTaken, ProgramCourses,
+                                  CoursesUnlockedWhenTaken, ProgramCourses, TermsList,
                                   UserData)
+from server.routers.utility import map_suppressed_errors
 
 
 router = APIRouter(
@@ -22,10 +24,17 @@ router = APIRouter(
 )
 
 # TODO: would prefer to initialise ALL_COURSES here but that fails on CI for some reason
-ALL_COURSES = None
-CODE_MAPPING = read_data("data/utility/programCodeMappings.json")["title_to_code"]
+ALL_COURSES: Dict[str, str] | None = None
+CODE_MAPPING: Dict = read_data("data/utility/programCodeMappings.json")["title_to_code"]
+GRAPH: Dict[str, Dict[str, List[str]]] = read_data(GRAPH_CACHE_FILE)
+INCOMING_ADJACENCY: Dict[str, List[str]] = GRAPH.get("incoming_adjacency_list", {})
 
-def fetch_all_courses():
+def fetch_all_courses() -> Dict[str, str]:
+    """
+    Returns a dictionary of all courses as a key-val pair with:
+        key: course code
+        value: course_title
+    """
     courses = {}
     for course in coursesCOL.find():
         courses[course["code"]] = course["title"]
@@ -54,10 +63,14 @@ def fix_user_data(userData: dict):
 
 
 @router.get("/")
-def api_index():
+def api_index() -> str:
     """ Returns the index of the courses API """
     return "Index of courses"
 
+
+@router.get("/jsonified/{courseCode}")
+def get_jsonified_course(courseCode: str) -> str:
+    return str(CONDITIONS[courseCode])
 
 @router.get(
     "/getCourse/{courseCode}",
@@ -94,21 +107,20 @@ def api_index():
                         "exclusions": {"DPST1091": 1},
                         "terms": ["T1", "T2", "T3"],
                         "raw_requirements": "",
-                        "gen_ed": 1,
+                        "gen_ed": True,
                     }
                 }
             },
         },
     },
 )
-def get_course(courseCode: str):
+def get_course(courseCode: str) -> Dict:
     """
     Get info about a course given its courseCode
     - start with the current database
     - if not found, check the archives
     """
     result = coursesCOL.find_one({"code": courseCode})
-
     if not result:
         for year in sorted(ARCHIVED_YEARS, reverse=True):
             result = archivesDB[str(year)].find_one({"code": courseCode})
@@ -127,7 +139,8 @@ def get_course(courseCode: str):
     result['is_accurate'] = CONDITIONS.get(courseCode) is not None
     result['handbook_note'] = CACHED_HANDBOOK_NOTE.get(courseCode, "")
     del result["_id"]
-
+    with suppress(KeyError):
+        del result["exclusions"]["leftover_plaintext"]
     return result
 
 
@@ -158,13 +171,13 @@ def get_course(courseCode: str):
         }
     },
 )
-def search(userData: UserData, search_string: str):
+def search(userData: UserData, search_string: str) -> Dict[str, str]:
     """
     Search for courses with regex
     e.g. search(COMP1) would return
-        { “COMP1511” :  “Programming Fundamentals”,
-          “COMP1521” : “Computer Systems Fundamentals”,
-          “COMP1531”: “SoftEng Fundamentals,
+        { "COMP1511" :  "Programming Fundamentals",
+          "COMP1521" : "Computer Systems Fundamentals",
+          "COMP1531": "SoftEng Fundamentals",
             ……. }
     """
     global ALL_COURSES
@@ -184,14 +197,14 @@ def search(userData: UserData, search_string: str):
     weighted_results = sorted(top_results, reverse=True,
                               key=lambda course: weight_course(course,
                                                                search_string,
-                                                               structure, 
+                                                               structure,
                                                                majors,
                                                                minors)
                               )[:30]
 
     return dict(weighted_results)
 
-def regex_search(search_string: str) -> dict[str, str]:
+def regex_search(search_string: str) -> Mapping[str, str]:
     """
     Uses the search string as a regex to match all courses with an exact pattern.
     """
@@ -231,7 +244,7 @@ def regex_search(search_string: str) -> dict[str, str]:
         },
     },
 )
-def get_all_unlocked(userData: UserData):
+def get_all_unlocked(userData: UserData) -> Dict[str, Dict]:
     """
     Given the userData and a list of locked courses, returns the state of all
     the courses. Note that locked courses always return as True with no warnings
@@ -240,7 +253,7 @@ def get_all_unlocked(userData: UserData):
     """
 
     coursesState = {}
-    user = User(fix_user_data(userData.dict())) if not isinstance(userData, User) else userData
+    user = User(fix_user_data(userData.dict()))
     for course, condition in CONDITIONS.items():
         result, warnings = condition.validate(user) if condition is not None else (True, [])
         if result:
@@ -285,7 +298,7 @@ def get_all_unlocked(userData: UserData):
         },
     },
 )
-def get_legacy_courses(year, term):
+def get_legacy_courses(year, term) -> Dict[str, Dict[str, str]]:
     """
     Gets all the courses that were offered in that term for that year
     """
@@ -298,12 +311,12 @@ def get_legacy_courses(year, term):
 
 
 @router.get("/getLegacyCourse/{year}/{courseCode}")
-def get_legacy_course(year, courseCode):
+def get_legacy_course(year, courseCode) -> Dict:
     """
         Like /getCourse/ but for legacy courses in the given year.
         Returns information relating to the given course
     """
-    result = list(archivesDB[str(year)].find({"code": courseCode}))
+    result = archivesDB[str(year)].find_one({"code": courseCode})
     if not result:
         raise HTTPException(status_code=400, detail="invalid course code or year")
     del result["_id"]
@@ -311,7 +324,7 @@ def get_legacy_course(year, courseCode):
     return result
 
 
-@router.post("/unselectCourse/{unselectedCourse}", response_model=Courses,
+@router.post("/unselectCourse/{unselectedCourse}", response_model=CourseCodes,
             responses={
                 400: {"description": "Uh oh you broke me"},
                 200: {
@@ -329,10 +342,10 @@ def get_legacy_course(year, courseCode):
                      }
                  }
             })
-def unselect_course(userData: UserData, unselectedCourse: str):
+def unselect_course(userData: UserData, unselectedCourse: str) -> dict[str, list[str]]:
     """
     Creates a new user class and returns all the courses
-    affected from the course that was unselected in sorted order
+    affected from the course that was unselected in alphabetically sorted order
     """
     user = User(fix_user_data(userData.dict()))
     if not user.has_taken_course(unselectedCourse):
@@ -386,19 +399,15 @@ def course_children(course: str):
                     "courses": ["COMP1521", "COMP1531"]
                 }
             })
-def get_path_from(course):
+def get_path_from(course: str) -> dict[str, str | list[str]]:
     """
     fetches courses which can be used to satisfy 'course'
     eg 2521 -> 1511
     """
-
-    course_condition = CONDITIONS[course]
+    out: List[str] = list(INCOMING_ADJACENCY.get(course, []))
     return {
         "original" : course,
-        "courses" :[
-            coursename for coursename, _ in CONDITIONS.items()
-            if course_condition.is_path_to(coursename)
-        ]
+        "courses" : out,
     }
 
 
@@ -417,17 +426,14 @@ def get_path_from(course):
                     }
                 }
             })
-def courses_unlocked_when_taken(userData: UserData, courseToBeTaken: str):
+def courses_unlocked_when_taken(userData: UserData, courseToBeTaken: str) -> Dict[str, List[str]]:
     """ Returns all courses which are unlocked when given course is taken """
-    # define the user object with user data
-    user = User(fix_user_data(userData.dict()))
-
     ## initial state
-    courses_initially_unlocked = unlocked_set(get_all_unlocked(user)['courses_state'])
+    courses_initially_unlocked = unlocked_set(get_all_unlocked(userData)['courses_state'])
     ## add course to the user
-    user.add_courses({courseToBeTaken: [get_course(courseToBeTaken)['UOC'], None]})
+    userData.courses[courseToBeTaken] = [get_course(courseToBeTaken)['UOC'], None]
     ## final state
-    courses_now_unlocked = unlocked_set(get_all_unlocked(user)['courses_state'])
+    courses_now_unlocked = unlocked_set(get_all_unlocked(userData)['courses_state'])
     new_courses = courses_now_unlocked - courses_initially_unlocked
 
     ## Differentiate direct and indirect unlocks
@@ -440,12 +446,78 @@ def courses_unlocked_when_taken(userData: UserData, courseToBeTaken: str):
         'indirect_unlock': sorted(list(indirect_unlock))
     }
 
-def unlocked_set(courses_state):
+
+@router.get(
+    "/termsOffered/{course}/{years}",
+    response_model=TermsList,
+    responses={
+        400: {
+            "description": "The given course code could not be found in the database",
+        },
+        200: {
+            "description": "Returns the terms a course is offered in",
+            "content": {
+                "application/json": {
+                    "example": {
+                        "terms": {
+                            "2022": [ "T1", "T2", "T3" ],
+                        },
+                        "fails": [
+                            [
+                                "COMP1511",
+                                "2023",
+                                {
+                                    "status_code": 400,
+                                    "detail": "invalid course code or year",
+                                    "headers": None
+                                }
+                            ]
+                        ]
+                    },
+                },
+            },
+        },
+    }
+)
+def terms_offered(course: str, years:str) -> Dict:
+    """
+    Recieves a course and a list of years. Returns a list of terms the
+    course is offered in for the given years.
+
+    Expected Input:
+        course: (str) CODEXXXX
+        years: (str): `+`-connected string of years
+            eg: "2020+2021+2022"
+    Output: {
+            year: [terms offered],
+            fails: [(year, exception)]
+        }
+    """
+    fails: List[str] = []
+    terms = {
+        year: map_suppressed_errors(get_term_offered, fails, course, year)
+        for year in years.split("+")
+    }
+
+    return {
+        "terms": terms,
+        "fails": fails,
+    }
+
+
+###############################################################################
+#                                                                             #
+#                             End of Routes                                   #
+#                                                                             #
+###############################################################################
+
+
+def unlocked_set(courses_state) -> Set[str]:
     """ Fetch the set of unlocked courses from the courses_state of a getAllUnlocked call """
     return set(course for course in courses_state if courses_state[course]['unlocked'])
 
 
-def fuzzy_match(course: Tuple[str, str], search_term: str):
+def fuzzy_match(course: Tuple[str, str], search_term: str) -> float:
     """ Gives the course a weighting based on the relevance to the search """
     code, title = course
 
@@ -459,8 +531,8 @@ def fuzzy_match(course: Tuple[str, str], search_term: str):
                sum(fuzz.partial_ratio(title.lower(), word)
                        for word in search_term.split(' ')))
 
-def weight_course(course: tuple, search_term: str, structure: dict,
-                  majors: list, minors: list):
+def weight_course(course: tuple[str, str], search_term: str, structure: dict,
+                  majors: list, minors: list) -> float:
     """ Gives the course a weighting based on the relevance to the user's degree """
     weight = fuzzy_match(course, search_term)
     code, _ = course
@@ -502,3 +574,18 @@ def weight_course(course: tuple, search_term: str, structure: dict,
             break
 
     return weight
+
+def get_course_info(course: str, year: str | int=LIVE_YEAR) -> Dict:
+    """
+    Returns the course info for the given course and year.
+    If no year is given, the current year is used.
+    If the year is not the LIVE_YEAR, then uses legacy information
+    """
+    return get_course(course) if int(year) == int(LIVE_YEAR) else get_legacy_course(year, course)
+
+def get_term_offered(course: str, year: int | str=LIVE_YEAR) -> List[str]:
+    """
+    Returns the terms in which the given course is offered, for the given year.
+    """
+    return get_course_info(course, year).get("terms", [])
+

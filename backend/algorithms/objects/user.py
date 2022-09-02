@@ -6,16 +6,21 @@
 """
 
 import copy
-from typing import Optional, Tuple
+import json
+from typing import Literal, Optional, Tuple
 import re
+from algorithms.cache.cache_config import CACHED_EQUIVALENTS_FILE
 from algorithms.objects.categories import AnyCategory, Category
+
+with open(CACHED_EQUIVALENTS_FILE, "r", encoding="utf8") as f:
+    CACHED_EQUIVALENTS: dict[str, dict[str, Literal[1]]] = json.load(f)
 
 class User:
     """ A user and their data which will be used to determine if they can take a course """
 
     def __init__(self, data = None):
         # Will load the data if any was given
-        self.courses: dict[str, Tuple[int, int]] = {}
+        self.courses: dict[str, Tuple[int, int | None]] = {}
         self.cur_courses: list[str, Tuple[int, int]] = []  # Courses in the current term
         self.program: str = None
         self.specialisations: dict[str, int] = {}
@@ -26,7 +31,7 @@ class User:
         if data is not None:
             self.load_json(data)
 
-    def add_courses(self, courses: dict[str, Tuple[int, int]]):
+    def add_courses(self, courses: dict[str, Tuple[int, int | None]]):
         """
         Given a dictionary of courses mapping course code to a (uoc, grade) tuple,
         adds the course to the user and updates the uoc/grade at the same time.
@@ -63,29 +68,24 @@ class User:
         """ Adds a specialisation to this user """
         self.specialisations[specialisation] = 1
 
+    def has_taken_specific_course(self, course):
+        """ taken a course directly, no equivalents """
+        return course in self.courses
+
     def has_taken_course(self, course: str):
-        """
-        Determines if the user has taken and passed this course
-        If there is no mark, we assume the user has passed the course
-        """
-        return (
-            course in self.courses
-                and (
-                    self.courses[course][1] >= 50
-                    if self.courses[course][1] is not None
-                    else True
-                )
-        )
+        """ Determines if the user has taken this course """
+        return course in self.courses or any(c in self.courses for c in (CACHED_EQUIVALENTS.get(course) or []))
 
     def is_taking_course(self, course: str):
         """ Determines if the user is taking this course this term """
-        return course in self.cur_courses
+        return course in self.cur_courses or any(c in self.cur_courses for c in (CACHED_EQUIVALENTS.get(course) or []))
 
     def in_program(self, program: str):
         """ Determines if the user is in this program code """
         return self.program == program
 
     def get_courses(self):
+        """ get all course codes """
         return list(self.courses.keys())
 
     def in_specialisation(self, specialisation: str):
@@ -190,6 +190,8 @@ class User:
         return list(sorted(affected_courses))
 
     def pop_course(self, course: str) -> Tuple[int, int]:
-        """ removes a course from done courses and returns its uoc and mark """
+        """
+            removes a course from done courses and returns its uoc and mark
+        """
         
         return self.courses.pop(course)

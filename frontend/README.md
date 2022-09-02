@@ -29,11 +29,9 @@ In `mongodb.env`, add:
 
 In `frontend.env`, add:
 
-- `REACT_APP_BACKEND_API_BASE_URL=http://localhost:8000/`
+- `VITE_BACKEND_API_BASE_URL=http://localhost:8000/`
 
-> NOTE: The `REACT_APP_BACKEND_API_BASE_URL` environment variable is the base url endpoint that the backend is running on. If the environment variable is not specified, the react application will default to using `http://localhost:8000/` as the base url when calling the API endpoint.
-
-For features that are still in progress, we have a boolean flag which enables these features to be shown while developing. To enable this, simply add `REACT_APP_ENV=dev` to `frontend.env`. 
+> NOTE: The `VITE_BACKEND_API_BASE_URL` environment variable is the base url endpoint that the backend is running on. If the environment variable is not specified, the react application will default to using `http://localhost:8000/` as the base url when calling the API endpoint.
 
 Replace the ellipses with a username and password. The username and password in `backend.env` must match the values in `mongodb.env`. The `env` folder has been added to `.gitignore` and will not be committed to the repo.
 

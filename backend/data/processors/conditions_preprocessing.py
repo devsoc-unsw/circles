@@ -13,7 +13,7 @@ import re
 
 from data.utility.data_helpers import read_data, write_data
 
-PREPROCESSED_CONDITIONS = {}
+PREPROCESSED_CONDITIONS: dict[str, dict[str, str]] = {}
 CODE_MAPPING = read_data("data/utility/programCodeMappings.json")["title_to_code"]
 
 # TODO: think of how to automate some of this
@@ -130,7 +130,7 @@ def preprocess_conditions():
         processed = international_public_health(processed)
         processed = business_honours(processed)
         processed = honours_plan(processed)
-        processed = research_thesis(processed)
+        processed = research_thesis(code, processed)
 
 
 
@@ -332,7 +332,7 @@ def convert_level(processed):
 
 def convert_program_type(processed: str) -> str:
     """Converts complex phrases into something of the form CODE# for specifying a program type"""
-    with open("algorithms/cache/cache_config.json") as f:
+    with open("algorithms/cache/cache_config.json", encoding="utf8") as f:
         cache: dict[str, list[str]] = json.loads(f.read())
         processed = reduce((lambda a,b: b if b != processed else a), (map_word_to_program_type(processed, string, hashlist[0]) for string, hashlist in cache.items()))
     return processed
@@ -625,8 +625,8 @@ def international_public_health(processed: str):
 def business_honours(processed: str):
     return re.sub(r"Enrolment in Business \(Honours\) Program 4512", '4512', processed, flags=re.IGNORECASE)
 
-def research_thesis(processed: str):
-    return re.sub(r"Research Thesis [A|B] \(([0-9]{4})\)", r"\1", processed)
+def research_thesis(code: str, processed: str):
+    return re.sub(r"Research Thesis [A|B] \(([0-9]{4})\)", rf"{code[0:4]}\1", processed)
 
 def honours_plan(processed: str):
     return re.sub(r"^([A-Z]{4}) (h|H)on(our)?s( (p|P)lan)?$", r"\1" + "?H", processed)

@@ -545,7 +545,7 @@
         "curriculum": [
             {
                 "courses": {
-                    "any course": 1
+                    "any course": "1"
                 },
                 "title": "Prescribed Electives",
                 "credits_to_complete": 12,
@@ -4455,7 +4455,18 @@
         "course_constraints": [],
         "curriculum": [
             {
-                "courses": {},
+                "courses": {
+                    "ECON3106": "Politics and Economics",
+                    "ECON3116": "International Trade Theory and Policy",
+                    "ECON3125": "Economics of Health and Human Capital",
+                    "ECON3110": "Development Economics",
+                    "ECON3127": "Environmental Economics",
+                    "ECON3123": "Organisational Economics",
+                    "ECON3124": "Behavioural Economics",
+                    "ECON3000": "Evidence-based Intervention Design and Evaluation",
+                    "ACTL3191": "Superannuation and Retirement Benefits",
+                    "ACTL3192": "Retirement Saving and Spending Over the Lifecycle"
+                },
                 "title": "  Prescribed Level 3 Elective Courses - Applications",
                 "credits_to_complete": 12,
                 "core": false,
@@ -4531,7 +4542,14 @@
                 "notes": ""
             },
             {
-                "courses": {},
+                "courses": {
+                    "ACTL3192": "Retirement Saving and Spending Over the Lifecycle",
+                    "ACTL3191": "Superannuation and Retirement Benefits",
+                    "ECON3000": "Evidence-based Intervention Design and Evaluation",
+                    "ECON3116": "International Trade Theory and Policy",
+                    "ECON3104": "International Macroeconomics",
+                    "ECON3107": "Economics of Finance"
+                },
                 "title": "  Prescribed level 3 Elective Courses - Applications",
                 "credits_to_complete": 12,
                 "core": false,
@@ -7579,7 +7597,21 @@
         ],
         "curriculum": [
             {
-                "courses": {},
+                "courses": {
+                    "MATH3161": "Optimization",
+                    "MATH3191": "Mathematical Optimization for Data Science",
+                    "MATH3361": "Stochastic Differential Equations: Theory, Applications, and Numerical Methods",
+                    "MATH3171": "Linear and Discrete Optimization Modelling",
+                    "MATH6781": "Biomathematics",
+                    "MATH3201": "Dynamical Systems and Chaos",
+                    "MATH3261": "Fluids, Oceans and Climate",
+                    "MATH3311": "Computational Mathematics for Finance",
+                    "MATH3121": "Mathematical Methods and Partial Differential Equations",
+                    "MATH3101": "Computational Mathematics for Science and Engineering",
+                    "MATH3371": "Numerical Linear Algebra",
+                    "MATH3041": "Mathematical Modelling for Real World Systems",
+                    "MATH3051": "Applied Real and Functional Analysis"
+                },
                 "title": "Level 3 Core ",
                 "credits_to_complete": 18,
                 "core": true,
@@ -11262,7 +11294,7 @@
             },
             {
                 "courses": {
-                    "any course": 1
+                    "any course": "1"
                 },
                 "title": "Free Elective",
                 "credits_to_complete": 6,
@@ -11639,55 +11671,6 @@
             },
             {
                 "courses": {
-                    "SOLA2060": "Introduction to Electronic Devices",
-                    "ELEC2134": "Circuits and Signals",
-                    "SOLA3010": "Low Energy Buildings and Photovoltaics",
-                    "MECH3610": "Advanced Thermofluids",
-                    "ENGG2500": "Fluid Mechanics for Engineers",
-                    "ENGG3001": "Fundamentals of Humanitarian Engineering",
-                    "ENGG4102": "Humanitarian Engineering Project",
-                    "SOLA5056": "Sustainable Energy for Developing Countries"
-                },
-                "title": "Strand Electives",
-                "credits_to_complete": 18,
-                "core": false,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "MATH2019 or MATH2018": [
-                        "Engineering Mathematics 2E",
-                        "Engineering Mathematics 2D"
-                    ],
-                    "DESN2000": "Engineering Design and Professional Practice",
-                    "MMAN2700": "Thermodynamics",
-                    "SOLA2540": "Applied Photovoltaics",
-                    "MATH2089": "Numerical Methods and Statistics",
-                    "SOLA2051": "Project in Photovoltaics and Renewable Energy"
-                },
-                "title": "Level 2 Core Courses",
-                "credits_to_complete": 36,
-                "core": true,
-                "levels": [
-                    2
-                ],
-                "notes": "Note: Students selecting Mathematics Strand and Physics Stand, and BE/BSc students majoring in 'Mathematics' or 'Physics' should replace MATH2019 with MATH2011 Several Variable Calculus and MATH2121 Theory and Applications of Differential Equations."
-            },
-            {
-                "courses": {
-                    "MECH9720": "Solar Thermal Energy Design",
-                    "SOLA5052": "Bioenergy and Renewable Fuels",
-                    "SOLA5051": "Life Cycle Assessment"
-                },
-                "title": "Disciplinary Electives",
-                "credits_to_complete": 0,
-                "core": false,
-                "levels": [],
-                "notes": "Students may choose any level 3 or above Photovoltaics and Solar Energy course included in the list of Strand Electives. Note: Students who have chosen L1 electives other than SOLA1070 and ELEC1111 can only do 6 UOC from the courses below."
-            },
-            {
-                "courses": {
                     "SOLA4951": "Research Thesis A",
                     "SOLA4953": "Research Thesis C",
                     "ELEC4122": "Strategic Leadership and Ethics",
@@ -11773,7 +11756,16 @@
                 "notes": ""
             },
             {
-                "courses": {},
+                "courses": {
+                    "ENGG4102": "Humanitarian Engineering Project",
+                    "ENGG3001": "Fundamentals of Humanitarian Engineering",
+                    "SOLA5056": "Sustainable Energy for Developing Countries",
+                    "SOLA3010": "Low Energy Buildings and Photovoltaics",
+                    "MECH3610": "Advanced Thermofluids",
+                    "ENGG2500": "Fluid Mechanics for Engineers",
+                    "ELEC2134": "Circuits and Signals",
+                    "SOLA2060": "Introduction to Electronic Devices"
+                },
                 "title": "Strand Electives",
                 "credits_to_complete": 18,
                 "core": false,

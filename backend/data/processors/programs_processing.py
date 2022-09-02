@@ -89,6 +89,7 @@ OTH_PROGS = (
     "3453",
     "3970",
     "3707",
+    "3543",
 )
 
 # Enable or disable testing, and choose what programs to test on
@@ -104,7 +105,7 @@ def process_prg_data() -> None:
     double_degrees = [ val for val in data.values() if "/" in val["title"] ]
 
     # Process single degrees then double degrees
-    processed_data = {}
+    processed_data: dict[str, dict] = {}
     for formatted_data in single_degrees:
         add_program(processed_data, formatted_data)
     for formatted_data in double_degrees:
@@ -148,12 +149,14 @@ def initialise_program(program: dict) -> dict:
     """
     Initialises basic attributes of the specialisation.
     """
-    duration = re.search(r"(\d)", program["duration"]).group(1)
+    duration = re.search(r"(\d)", program["duration"])
+    if duration:
+        duration_var = duration.group(1)
 
     return {
         "title": program["title"],
         "code": program["code"],
-        "duration": int(duration),
+        "duration": int(duration_var),
         "UOC": int(program["UOC"]),
         "faculty": program["faculty"],
         "overview": program["overview"],
@@ -240,7 +243,7 @@ def find_program_name(program_data: dict, item: dict) -> str | None:
         for container in item["container"]:
             if program_name in container["title"]:
                 return program_name
-
+    return None
 
 def is_substring(needle: str, haystack: str) -> bool:
     """
@@ -429,7 +432,7 @@ def add_course_data(program_data: dict, item: dict, req_type: str) -> None:
     """
     Adds core course data to the correct spot in program_data
     """
-    courses = {}
+    courses: dict[str, str] = {}
     add_course_tabs(program_data, courses, item)
 
     program_data["components"].setdefault(NON_SPEC_KEY, [])
@@ -472,7 +475,7 @@ def add_limit_rule(program_data: dict, item: dict) -> None:
     credits_to_complete = get_string_credits(program_data, item, notes)
     requirements = format_course_strings(requirements_str)
 
-    courses = {}
+    courses: dict[str, str] = {}
     for requirement in requirements:
         process_any_requirement(program_data, courses, requirement, item)
 
@@ -571,8 +574,7 @@ def strip_any_requirement_description(requirement: str) -> str:
     search_result = re.search(r"any (.+) course", requirement, flags = re.IGNORECASE)
     if search_result is None:
         search_result = re.search(r"any course offered by (.+)", requirement, flags = re.IGNORECASE)
-
-    return search_result.group(1)
+    return search_result.group(1) if search_result else ""
 
 
 def get_any_requirement_level(requirement: str) -> str:
@@ -653,8 +655,8 @@ def get_container_credits(item: dict) -> int:
 
     try:
         return int(item["credit_points_max"])
-    except ValueError:
-        raise ValueError("Couldn't find the number of credits for item")
+    except ValueError as exec:
+        raise ValueError("Couldn't find the number of credits for item") from exec
 
 
 @get_credits_decorator

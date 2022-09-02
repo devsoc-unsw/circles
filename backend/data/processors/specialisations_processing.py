@@ -144,15 +144,14 @@ def get_levels(title: str) -> list[int]:
     Parses 'title' to get curriculum levels of specialisation item.
     Level can be any combination of {1, 2, 3, 4, 5, 6, 7, 8, 9}.
     """
-    levels = []
+    levels: list[int] = []
     # s? \d[^ ]* captures cases like "Level 1/2", "Levels 1,2,3" and "Level 1-2"
     res = re.search("[Ll]evels? (\d[^ ]*)", title)
 
     if res:
         if "/" in res.group(1):
             # E.g. "Level 2/3 Mathematics Electives"
-            multi_lvls = res.group(1).split("/")
-            multi_lvls = [int(lvl) for lvl in multi_lvls]
+            multi_lvls = [int(lvl) for lvl in res.group(1).split("/")]
             levels.extend(multi_lvls)
             return levels
 
@@ -223,7 +222,7 @@ def get_one_of_courses(
 
 
 def get_courses(
-    curriculum_courses: dict, container_courses: list[str], description: str
+    curriculum_courses: dict, container_courses: dict[str, str], description: str
 ) -> None:
     """
     Adds courses from container to the customised curriculum course dict.
@@ -232,21 +231,23 @@ def get_courses(
         description = description + "" # prevent unused variable error
 
         if "any course" in course:
-            course = {"any course": 1}
+            course_processed = {"any course": "1"}
         elif "any level" in course:
             # e.g. modify "any level 4 COMP course" to "COMP4"
-            course = process_any_level(course)
+            course_processed = process_any_level(course)
         else:
-            course = {course: title}
-        curriculum_courses.update(course)
+            course_processed = {course: title}
+        curriculum_courses.update(course_processed)
 
-def process_any_level(unprocessed_course: str) -> str:
+def process_any_level(unprocessed_course: str) -> dict[str, str]:
     """
     Processes 'any level X PROGRAM NAME course' into 'CODEX'
     """
     # group 1 contains level number and group 2 contains program title
     # Note '?:' means inner parentheses is non-capturing group
     res = re.search("level (\d) ((?:[^ ]+ )+)(course)?", unprocessed_course)
+    if not res:
+        raise Exception("processing any where it doesnt exist")
     course_level = res.group(1).strip()
     program_title = res.group(2).strip()
 
