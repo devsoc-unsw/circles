@@ -32,8 +32,8 @@ const SettingsMenu = () => {
     if (isSummerEnabled) {
       openNotification({
         type: 'info',
-        message: 'Your Summer terms are looking a little empty',
-        description: 'Courses planned for summer have been unplanned.',
+        message: 'Your summer term courses have been unplanned',
+        description: 'Courses that were planned during summer terms have been unplanned including courses that have been planned across different terms.',
       });
     }
   }
