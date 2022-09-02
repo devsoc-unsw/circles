@@ -30,7 +30,8 @@ export const GlobalStyles = createGlobalStyle`
   .ant-notification-notice-close-x,
   .ant-modal-content,
   .ant-modal-header,
-  .ant-modal-close-x {
+  .ant-modal-close-x,
+  .ant-modal-title {
     background-color: ${({ theme }) => theme.body};
     color: ${({ theme }) => theme.text} !important;
   }
