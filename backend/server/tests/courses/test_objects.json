@@ -214,18 +214,8 @@
                 ""
             ],
             "gen_ed": 0,
-            "path_from": {
-                "MATH2011": 1,
-                "MATH2111": 1,
-                "MATH2018": 1,
-                "MATH2019": 1,
-                "MATH2069": 1,
-                "MATH2801": 1,
-                "MATH2901": 1,
-                "MATH2089": 1,
-                "MATH2099": 1
-            },
-            "raw_requirements": "Prerequisite: MATH2011 or MATH2111 or MATH2018 (DN) or MATH2019(DN) or MATH2069(DN) and MATH2801 or MATH2901 or MATH2089(DN) or MATH2099(DN)",
+            "path_from": {},
+            "raw_requirements": "",
             "is_legacy": true
         }
     }
