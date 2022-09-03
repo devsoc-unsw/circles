@@ -37,20 +37,15 @@ const TermPlanner = () => {
   const [isDragging, setIsDragging] = useState(false);
 
   const dispatch = useDispatch();
-  const getMarkList = () => Object.values(planner.courses).map(((object) => object.mark));
 
-  // a memoised way to check if marks have changed
-  const marksRef = useRef(getMarkList());
-  if (JSON.stringify(marksRef.current) !== JSON.stringify(getMarkList())) {
-    marksRef.current = getMarkList();
-  }
-
+  const payload = JSON.stringify(prepareCoursesForValidationPayload(planner, degree, showWarnings));
+  const plannerEmpty = isPlannerEmpty(planner.years);
   useEffect(() => {
     const validateTermPlanner = async () => {
       try {
         const res = await axios.post<ValidateTermPlanner>(
           '/planner/validateTermPlanner/',
-          JSON.stringify(prepareCoursesForValidationPayload(planner, degree, showWarnings)),
+          payload,
         );
         dispatch(toggleWarnings(res.data.courses_state));
       } catch (err) {
@@ -59,7 +54,7 @@ const TermPlanner = () => {
       }
     };
 
-    if (isPlannerEmpty(planner.years)) {
+    if (plannerEmpty) {
       openNotification({
         type: 'info',
         message: 'Your terms are looking a little empty',
@@ -67,7 +62,7 @@ const TermPlanner = () => {
       });
     }
     validateTermPlanner();
-  }, [degree, planner.years, planner.startYear, marksRef.current, showWarnings]);
+  }, [payload, showWarnings, plannerEmpty, dispatch]);
 
   const currYear = new Date().getFullYear();
 
