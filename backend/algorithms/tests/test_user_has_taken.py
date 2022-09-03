@@ -5,7 +5,6 @@ Tests `User.has_taken_course`
 """
 
 import json
-import pytest
 from algorithms.objects.user import User
 
 EXAMPLE_USERS_PATH = "./algorithms/exampleUsers.json"

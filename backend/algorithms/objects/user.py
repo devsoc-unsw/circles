@@ -165,5 +165,4 @@ class User:
         """
             Removes a course from done courses and returns its uoc and mark
         """
-        
         return self.courses.pop(course)

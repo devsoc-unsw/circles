@@ -4,6 +4,7 @@ route for planner algorithms
 from fastapi import APIRouter
 from algorithms.objects.user import User
 from server.routers.courses import get_course
+from server.routers.utility import get_core_courses
 from server.routers.model import ValidCoursesState, PlannerData, CONDITIONS, CACHED_HANDBOOK_NOTE
 
 def fix_planner_data(plannerData: PlannerData):
@@ -42,6 +43,7 @@ async def validate_term_planner(plannerData: PlannerData):
         "specialisations": data.specialisations,
         "year": 1,  # Start off as a first year
         "courses": {},  # Start off the user with an empty year
+        "core_courses": get_core_courses(data.program, data.specialisations),
     }
     user = User(emptyUserData)
     # State of courses on the term planner
