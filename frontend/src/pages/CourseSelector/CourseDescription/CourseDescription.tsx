@@ -248,6 +248,7 @@ const CourseDescription = () => {
             {inDev && (
               <Collapsible title="Prerequisite Visualisation">
                 <PrerequisiteTree courseCode={id} />
+                No prerequisite visualisation is needed for this course
               </Collapsible>
             )}
             <br />
