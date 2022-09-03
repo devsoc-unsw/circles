@@ -1,9 +1,11 @@
 import json
 import requests
 
+from server.routers.model import CourseDetails
+
 with open(
-        "./server/tests/courses/test_objects.json", "r", encoding="utf-8"
-    ) as f:
+    "./server/tests/courses/test_objects.json", "r", encoding="utf-8"
+) as f:
     TEST_OBJECTS = json.load(f)["legacy_courses"]
 
 
@@ -12,8 +14,22 @@ def get_legacy_course_wrapper(year: int, course: str):
     Wrapper for `/courses/getLegacyCourse/{year}/{courseCode}` endpoint
     """
     return requests.get(
-        f"http://127.80.0.1:8000/courses/getLegacyCourse/{year}/{course}"
+        f"http://127.0.0.1:8000/courses/getLegacyCourse/{year}/{course}"
     )
+
+def compare_legacy_course(output: CourseDetails, expected: CourseDetails, compare_desc: bool=False):
+    assert set(output.keys()) == set(expected.keys())
+    if compare_desc:
+        if output["description"] != expected["description"]:
+            return False
+
+    del output["description"]
+    del expected["description"]
+    for key, val in expected.items():
+        if output[key] != val:
+            return False
+    return True
+    
 
 def test_legacy_comp1511():
     """
@@ -21,5 +37,8 @@ def test_legacy_comp1511():
     """
     res_2019 = get_legacy_course_wrapper(2019, "COMP1511")
     assert res_2019.status_code == 200
-    assert res_2019.json() == TEST_OBJECTS["legacy_comp1511_2019"]
+    data_2019 = res_2019.json()
+    assert compare_legacy_course(data_2019, TEST_OBJECTS["comp1511_2019"])
+
+
 
