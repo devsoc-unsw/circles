@@ -113,7 +113,11 @@ const PrerequisiteTree = ({ courseCode }: Props) => {
 
       // render graph
       if (!graph) {
-        if (graphData.children.length !== 0) generateTreeGraph(graphData);
+        if (graphData.children.length !== 0) {
+          generateTreeGraph(graphData);
+        } else {
+          <p>No prerequisite visualisation is needed for this course</p>;
+        }
       } else {
         // NOTE: This is for hot reloading in development as new graph will instantiate every time
         updateTreeGraph(graphData);
