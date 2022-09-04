@@ -46,7 +46,6 @@ const CourseDescription = () => {
   const [coursesPathFrom, setCoursesPathFrom] = useState<CourseList>([]);
   const [courseCapacity, setCourseCapacity] = useState<EnrolmentCapacityData | null>(null);
 
-  const payload = JSON.stringify(prepareUserPayload(degree, planner));
   useEffect(() => {
     const getCourse = async (courseCode: string) => {
       try {
@@ -60,7 +59,7 @@ const CourseDescription = () => {
 
     const getPathToCoursesById = async (courseCode: string) => {
       try {
-        const res = await axios.post<CoursesUnlockedWhenTaken>(`/courses/coursesUnlockedWhenTaken/${courseCode}`, payload);
+        const res = await axios.post<CoursesUnlockedWhenTaken>(`/courses/coursesUnlockedWhenTaken/${courseCode}`, JSON.stringify(prepareUserPayload(degree, planner)));
         setCoursesPathTo(res.data);
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -121,7 +120,7 @@ const CourseDescription = () => {
     };
 
     if (id) fetchCourseData(id);
-  }, [dispatch, id, payload]);
+  }, [dispatch, id]);
 
   const courseAttributesData = course ? [
     {
