@@ -17,9 +17,8 @@ const SubgroupHeader = styled.div`
 `;
 
 const LabelTitle = styled.span`
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
+  white-space: initial;
+  line-height: 1.5;
 `;
 
 const UOCBadge = styled.div`
@@ -27,7 +26,8 @@ const UOCBadge = styled.div`
   background-color: ${({ theme }) => theme.purpleLight};
   padding: 5px;
   font-size: 0.7rem;
-  height: 28px;
+  white-space: initial;
+  line-height: 1.5;
   display: flex;
   align-items: center;
 `;
@@ -55,6 +55,8 @@ const Menu = styled(antdMenu)`
   ul .ant-menu-submenu > .ant-menu-submenu-title,
   .ant-menu-sub.ant-menu-inline > .ant-menu-item.ant-menu-item-only-child.ant-menu-item-disabled {
     padding-left: 32px !important;
+    min-height: 40px;
+    height: fit-content !important;
   }
   .ant-menu-sub.ant-menu-inline > .ant-menu-item.ant-menu-item-only-child.ant-menu-item-disabled {
     padding-right: 34px;

@@ -30,7 +30,7 @@ const SubgroupTitle = ({ title, currUOC, totalUOC }: SubgroupTitleProps) => (
   <S.SubgroupHeader>
     <S.LabelTitle>{title}</S.LabelTitle>
     <S.UOCBadge>
-      <span>{currUOC} / {totalUOC}</span>
+      {currUOC} / {totalUOC}
     </S.UOCBadge>
   </S.SubgroupHeader>
 );
