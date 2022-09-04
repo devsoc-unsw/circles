@@ -1,12 +1,12 @@
 import { Menu as antdMenu } from 'antd';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 // NOTE: Very hacky way to override menu styling
 const Menu = styled(antdMenu)`
   border-right: none;
   background-color: inherit;
 
-  ${({ theme }) => theme.specialsationStep && `
+  ${({ theme }) => theme.specialsationStep && css`
     .ant-menu-submenu {
       background: ${theme.specialsationStep.background}
     }

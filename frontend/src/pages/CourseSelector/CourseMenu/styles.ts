@@ -1,5 +1,5 @@
 import { Menu as antdMenu } from 'antd';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const SidebarWrapper = styled.div`
   overflow: auto;
@@ -37,11 +37,21 @@ const Menu = styled(antdMenu)`
   background-color: inherit;
   color: ${({ theme }) => theme.text};
 
+  .ant-menu-submenu-arrow {
+    color: ${({ theme }) => theme.text};
+  }
+
+  ${({ theme }) => theme.courseSidebar && css`
+    .ant-menu-sub {
+      background-color: ${theme.courseSidebar.menuSubColor} !important;
+    }
+  `}
+
+  // overwrite collapsible sub menu stylings
   .ant-menu-sub.ant-menu-inline > .ant-menu-item.ant-menu-item-only-child {
     padding-left: 48px !important;
   }
 
-  // overwrite sub menu stylings
   ul .ant-menu-submenu > .ant-menu-submenu-title,
   .ant-menu-sub.ant-menu-inline > .ant-menu-item.ant-menu-item-only-child.ant-menu-item-disabled {
     padding-left: 32px !important;
@@ -49,16 +59,6 @@ const Menu = styled(antdMenu)`
   .ant-menu-sub.ant-menu-inline > .ant-menu-item.ant-menu-item-only-child.ant-menu-item-disabled {
     padding-right: 34px;
   }
-
-  .ant-menu-submenu-arrow {
-    color: ${({ theme }) => theme.text};
-  }
-
-  ${({ theme }) => theme.courseSidebar && `
-    .ant-menu-sub {
-      background-color: ${theme.courseSidebar.menuSubColor} !important;
-    }
-  `}
 `;
 
 export default {
