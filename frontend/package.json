@@ -11,7 +11,7 @@
     "@react-spring/web": "9.5.2",
     "@reduxjs/toolkit": "1.8.5",
     "@tippyjs/react": "4.2.6",
-    "antd": "4.22.8",
+    "antd": "4.23.0",
     "axios": "0.27.2",
     "dayjs": "1.11.5",
     "rc-picker": "2.6.10",
