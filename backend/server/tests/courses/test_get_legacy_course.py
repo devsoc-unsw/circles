@@ -7,10 +7,8 @@ TODO: Update this once LIVE_YEAR is updated to 2023.
 """
 
 import json
-from typing import Annotated, Optional, Tuple
+from typing import Annotated, Optional
 import requests
-
-from server.routers.model import CourseDetails
 
 with open(
     "./server/tests/courses/test_objects.json", "r", encoding="utf-8"
