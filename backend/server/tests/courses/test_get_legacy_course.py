@@ -7,7 +7,7 @@ TODO: Update this once LIVE_YEAR is updated to 2023.
 """
 
 import json
-from typing import Optional, Tuple
+from typing import Annotated, Optional, Tuple
 import requests
 
 from server.routers.model import CourseDetails
@@ -27,21 +27,21 @@ def get_legacy_course_wrapper(year: int, course: str):
     )
 
 def compare_course_details(
-        output: CourseDetails, expected: CourseDetails, compare_desc: bool=False
-    ) -> Optional[Tuple[str, str | int | dict | bool | list]]:
+        output, expected, compare_desc: bool=False
+    ) -> Optional[dict[str, object]]:
     """
     Used to compare two course-detail objects.
     Returns the key (str) that had a differing value, otherwise None.
     By default, this skips the description value. Add the `compare_desc` flag
     to toggle this behaviour.
     """
-    assert set(output.keys()) == set(expected.keys())
+    assert set(dict(output).keys()) == set(dict(expected).keys())
     if compare_desc:
         if output["description"] != expected["description"]:
             return {
-                "key": "description",
-                "given": output["description"],
-                "expected": expected["description"]
+                "key": Annotated[str, "description"],
+                "given": Annotated[str, output["description"]],
+                "expected": Annotated[str, expected["description"]]
             }
 
     del output["description"]
@@ -49,9 +49,9 @@ def compare_course_details(
     for key, val in expected.items():
         if output[key] != val:
             return {
-                "key": key,
-                "given": output[key],
-                "expected": val
+                "key": Annotated[str, key],
+                "given": Annotated[str | int | bool | list | dict, output[key]],
+                "expected": Annotated[str | int | bool | list | dict, val]
             }
     return None
     
