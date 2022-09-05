@@ -6,16 +6,16 @@ const CourseButton = styled(Button)<{ planned?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 271px;
+  width: 270px;
   height: 80px;
   white-space: normal;
 
-  ${({ planned }) => !planned && css`
-    background: #FFF; 
+  ${({ planned, theme }) => !planned && css`
+    background-color: ${theme.courseButton.backgroundColor};
     color: #9254de !important;
 
     &:hover {
-      background-color: #F9F9F9;
+      background-color: ${theme.courseButton.hoverBackgroundColor};
     }
   `}
 `;
