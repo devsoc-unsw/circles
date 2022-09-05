@@ -95,6 +95,9 @@ def save_local_storage(localStorage: LocalStorage):
     planner['numYears'] = localStorage.numYears
     planner['isSummerEnabled'] = localStorage.isSummerEnabled
 
-    objectID = usersDB['tokens'][token]
-    #usersDB['users'][objectID].update_one({'degree': degree, 'planner': planner})
-
+    objectID = usersDB['tokens'].find_one({'token': token})['objectId']
+    if objectID is not None:
+        usersDB['users'].update_one({'_id': objectID}, {'$set': {'degree': degree, 'planner': planner}})
+    else:
+        objectID = usersDB['users'].insert_one({'degree': degree, 'planner': planner}).inserted_id
+        usersDB['tokens'].insert_one({'token': token, 'objectId': objectID})

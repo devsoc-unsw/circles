@@ -1,4 +1,4 @@
-import getMostRecentPastTerm, { MostRecentTerm } from 'utils/getMostRecentPastTerm';
+import getMostRecentPastTerm from 'utils/getMostRecentPastTerm';
 import { parseMarkToInt } from 'pages/TermPlanner/utils';
 import { DegreeSliceState } from 'reducers/degreeSlice';
 import { PlannerSliceState } from 'reducers/plannerSlice';
