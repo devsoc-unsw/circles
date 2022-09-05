@@ -3,7 +3,7 @@ import { FaSortAlphaDown, FaSortNumericDown } from 'react-icons/fa';
 import { Tooltip } from 'antd';
 import { ViewSubgroupCourse } from 'types/progressionViews';
 import { sortByAlphaNumeric, sortByLevel, SortFn } from 'utils/sortCourses';
-import CourseButtonCard from 'components/CourseButtonCard ';
+import CourseBadge from '../CourseBadge';
 import S from './styles';
 
 type Props = {
@@ -43,10 +43,15 @@ const CoursesModal = ({
       </S.SortBtnWrapper>
       <S.CourseList>
         {courses.sort(applySortFn).map((course) => (
-          <CourseButtonCard
+          <CourseBadge
             courseCode={course.courseCode}
             title={course.title}
-            planned={course.isUnplanned}
+            uoc={course.UOC}
+            plannedFor={course.plannedFor}
+            isUnplanned={course.isUnplanned}
+            isMultiterm={course.isMultiterm}
+            isDoubleCounted={course.isDoubleCounted}
+            isOverCounted={course.isOverCounted}
           />
         ))}
       </S.CourseList>
