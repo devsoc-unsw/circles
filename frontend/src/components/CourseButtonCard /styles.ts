@@ -27,14 +27,14 @@ const CourseTitle = styled.p`
   -webkit-box-orient: vertical;
 `;
 
-const QuickCartButton = styled.div`
+const QuickCartWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
   gap: 5px;
 `;
 
-const CourseCard = styled(Button)<{ planned?: boolean }>`
+const CourseButtonCard = styled(Button)<{ planned?: boolean }>`
   border-radius: 10px;
   border-width: 2px;
   display: flex;
@@ -59,6 +59,6 @@ export default {
   CourseWrapper,
   CourseCode,
   CourseTitle,
-  QuickCartButton,
-  CourseCard,
+  QuickCartWrapper,
+  CourseButtonCard,
 };

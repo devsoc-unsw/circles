@@ -11,7 +11,7 @@ type Props = {
   planned: boolean
 };
 
-const CourseCard = ({ courseCode, title, planned }: Props) => {
+const CourseButtonCard = ({ courseCode, title, planned }: Props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ const CourseCard = ({ courseCode, title, planned }: Props) => {
   };
 
   return (
-    <S.CourseCard
+    <S.CourseButtonCard
       planned={planned}
       type="primary"
       onClick={handleCourseLink}
@@ -31,11 +31,11 @@ const CourseCard = ({ courseCode, title, planned }: Props) => {
         <S.CourseCode>{courseCode}</S.CourseCode>
         <S.CourseTitle>{title}</S.CourseTitle>
       </S.CourseWrapper>
-      <S.QuickCartButton>
+      <S.QuickCartWrapper>
         <QuickAddCartButton courseCode={courseCode} planned={planned} />
-      </S.QuickCartButton>
-    </S.CourseCard>
+      </S.QuickCartWrapper>
+    </S.CourseButtonCard>
   );
 };
 
-export default CourseCard;
+export default CourseButtonCard ;
