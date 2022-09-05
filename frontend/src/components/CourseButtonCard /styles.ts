@@ -9,14 +9,14 @@ const CourseWrapper = styled.div`
 const CourseCode = styled.p`
   margin: 0 !important;
   font-size: 11px;
-  font-weight: 500;
+  font-weight: 400;
   text-align: left;
 `;
 
 const CourseTitle = styled.p`
   margin: 0 !important;
   font-size: 14px;
-  font-weight: 520;
+  font-weight: 500;
   text-align: left;
 
   text-overflow: ellipsis;
@@ -36,11 +36,11 @@ const QuickCartWrapper = styled.div`
 
 const CourseButtonCard = styled(Button)<{ planned?: boolean }>`
   border-radius: 10px;
-  border-width: 2px;
+  border-width: 1px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 271px;
+  width: 270px;
   height: 80px;
   white-space: break-spaces;
 
