@@ -17,7 +17,7 @@ type Props = {
   planned: boolean
 };
 
-const QuickCart = ({ courseCode, planned }: Props) => {
+const QuickAddCartButton = ({ courseCode, planned }: Props) => {
   const dispatch = useDispatch();
 
   const { degree, planner } = useSelector((state: RootState) => state);
@@ -83,4 +83,4 @@ const QuickCart = ({ courseCode, planned }: Props) => {
   );
 };
 
-export default QuickCart;
+export default QuickAddCartButton;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import QuickCart from 'components/QuickCart';
+import QuickAddCartButton from 'components/QuickAddCartButton';
 import { addTab } from 'reducers/courseTabsSlice';
 import S from './styles';
 
@@ -32,7 +32,7 @@ const CourseCard = ({ courseCode, title, planned }: Props) => {
         <S.CourseTitle>{title}</S.CourseTitle>
       </S.CourseWrapper>
       <S.QuickCartButton>
-        <QuickCart courseCode={courseCode} planned={planned} />
+        <QuickAddCartButton courseCode={courseCode} planned={planned} />
       </S.QuickCartButton>
     </S.CourseCard>
   );
