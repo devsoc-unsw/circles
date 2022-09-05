@@ -27,7 +27,9 @@ SPECIALISATION_MAPPINGS = {
     'Theatre and Performance Studies honours': 'THSTBH',
     'Environmental Humanities honours': 'ENVPEH',
     'Physics Honours': 'ZPEMPH || PHYSGH',
+    'Fine Arts \(Visual Arts\)': 'DARTE1',
     'Film Studies honours': 'FILMBH',
+    'FINSBH Finance Co-Op Honours': 'FINSBH',
     'Creative Writing Major or minor': 'CRWTA1 || CRWTAH || CRWTA2',
     'Creative Writing Major': 'CRWTA1 || CRWTAH',
     'English honours': 'ENGLDH',
@@ -41,8 +43,10 @@ SPECIALISATION_MAPPINGS = {
     'Japanese Studies honours': 'JAPNDH',
     'Korean Studies honours': 'KORECH',
     'Linguistics honours': 'LINGCH',
+    'Currently program 3880 Bachelor of International Public Health': '3880',
     'German Studies honours': 'GERSBH',
     'Neuroscience Honours': 'NEUR?H',
+    '(3831)? Science \(Medicine\) Honours': '3831',
     'European Studies honours': 'EUROBH',
     'Sociology and Anthropology honours': 'SOCACH',
     'Politics and International Relations honours': 'POLSGH',
@@ -197,7 +201,7 @@ def delete_extraneous_phrasing(processed: str) -> str:
     processed = re.sub("students?", "", processed, flags=re.IGNORECASE)
 
     # Remove enrollment language since course and program codes imply this
-    processed = re.sub("enrolled in", "", processed, flags=re.IGNORECASE)
+    processed = re.sub("enrol(led|ment) in( program)?", "", processed, flags=re.IGNORECASE)
 
     # remove 'undergrad' because its implied
     processed = re.sub(r"UG", "", processed, flags=re.IGNORECASE)
@@ -214,9 +218,11 @@ def delete_extraneous_phrasing(processed: str) -> str:
         "must successfully complete",
         "must have completed",
         "completing",
+        "have completed",
         "completed",
         "a pass in",
-        "should have"
+        "should have",
+        "No prerequisites required"
     ]
     for text in completion_text:
         processed = re.sub(text, "", processed, flags=re.IGNORECASE)
@@ -534,7 +540,7 @@ def l2_math_courses(processed: str) -> str:
 
 def map_word_to_program_type(processed: str, regex_word: str, type: str):
     return re.sub(
-        rf"(a )?(enrolment )?(in )?(a )?(single or (double|dual) (degree|award) )?{regex_word}( studies)? (programs?( \(.*\))?|single or dual degrees?)",
+        rf"(a )?(enrolment )?(in )?(a )?(single or (double|dual) (degree|award) )?(B.)?{regex_word}( studies)? (programs?( \(.*\))?|single or dual degrees?)",
         type,
         processed,
         flags=re.IGNORECASE,
