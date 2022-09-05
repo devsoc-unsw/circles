@@ -28,7 +28,7 @@ const CoursesModal = ({
           <S.Instruction>See available courses:</S.Instruction>
         </S.ModalHeader>
     )}
-      width="625px"
+      width="650px"
       visible={modalVisible}
       onCancel={() => setModalVisible(false)}
       footer={null}

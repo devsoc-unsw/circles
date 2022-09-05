@@ -24,7 +24,7 @@ const Header = () => {
 
   const smallHeader = (
     <S.HeaderContent>
-      {inDev && <ThemeToggle />}
+      <ThemeToggle />
       <div style={{ margin: '10px' }}>
         <Button
           type="primary"
@@ -56,7 +56,7 @@ const Header = () => {
         onClick={(e) => navigate(e.key)}
         items={items}
       />
-      {inDev && <ThemeToggle />}
+      <ThemeToggle />
       <PlannerCart />
     </S.HeaderContent>
   );
