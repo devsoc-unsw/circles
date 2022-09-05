@@ -3,7 +3,6 @@ import { FaSortAlphaDown, FaSortNumericDown } from 'react-icons/fa';
 import { Tooltip } from 'antd';
 import { ViewSubgroupCourse } from 'types/progressionViews';
 import { sortByAlphaNumeric, sortByLevel, SortFn } from 'utils/sortCourses';
-// import CourseCard from '../CourseCard';
 import CourseCard from 'components/CourseCard';
 import S from './styles';
 
