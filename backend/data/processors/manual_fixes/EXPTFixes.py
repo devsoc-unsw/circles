@@ -36,8 +36,9 @@ def fix_conditions():
 
 def EXPT_1155():
     """
-        "original": "Prerequisite: Enrolment in 3959 Data Science program<br/><br/>",
-        "processed": "Enrolment in 3959 Data Science program"
+        "original": "Corequisite: SOMS1913 Human Systems 2
+
+                    Prerequisite: SOMS1912 Human Systems 1",
     """
     return "SOMS1912 && [SOMS1913]"
 

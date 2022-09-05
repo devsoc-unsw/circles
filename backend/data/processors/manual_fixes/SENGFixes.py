@@ -27,6 +27,7 @@ def fix_conditions():
     CONDITIONS["SENG2991"] = SENG_2991(CONDITIONS["SENG2991"])
     CONDITIONS["SENG3991"] = SENG_3991(CONDITIONS["SENG3991"])
     CONDITIONS["SENG3992"] = SENG_3992(CONDITIONS["SENG3992"])
+    CONDITIONS["SENG4920"][PROCESSED] = SENG_4920()
 
     data_helpers.write_data(
         CONDITIONS, "data/final_data/conditionsProcessed.json")
@@ -89,6 +90,12 @@ def SENG_3992(conditions):
         "handbook_note": "Must currently be enrolled in the Co-op program"
     }
 
+def SENG_4920():
+    """
+        "original": "<br/>Completed more than or equal to 144 UOC in SENGAH, BINFAH or COMPBH<br/><br/>Prerequisite: COMP2511<br/><br/>",
+        "processed": "more than || equal to 144UOC in SENGAH, BINFAH || COMPBH COMP2511"
+    """
+    return "144UOC && COMP2511 && (SENGAH || BINFAH || COMPBH)"
 
 if __name__ == "__main__":
     fix_conditions()

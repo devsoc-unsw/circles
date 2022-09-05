@@ -66,7 +66,7 @@ def INFS_3202():
 
     "processed": "INFS2101 && in Plan (INFSB13554 || INFSCH3971 || INFSCH3964)"
     """
-    return "INFS2101 && (INFSB13554 || INFSCH3971 || INFSCH3964)"
+    return "INFS2101 && ((INFSB1 && 3554) || INFSCH3971 || INFSCH3964)"
 
 
 def INFS_3303():

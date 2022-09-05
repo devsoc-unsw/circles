@@ -3096,7 +3096,7 @@
     },
     "CHEM2521": {
         "original": "This is the main Level 2 Organic Chemistry course taught within the School of Chemistry.<br/>It assumes knowledge of CHEM1011 and CHEM1021 or CHEM1031 and CHEM1041 or CHEM1051 and CHEM1061, AND CHEM2041. It is a core element in Chemistry major programs. It is also required for industrial chemistry, biochemistry and medicinal chemistry programs.<br/><br/>",
-        "processed": "CHEM1011 && (CHEM1021 || CHEM1031) && (CHEM1041 || CHEM1051) && CHEM1061 && CHEM2041",
+        "processed": "(CHEM1011 && CHEM1021) || (CHEM1031 && CHEM1041) || (CHEM1051 && CHEM1061) && CHEM2041",
         "handbook_note": "This is the main Level 2 Organic Chemistry course taught within the School of Chemistry.<br/> It is a core element in Chemistry major programs. It is also required for industrial chemistry, biochemistry and medicinal chemistry programs"
     },
     "CHEM2531": {
@@ -3605,7 +3605,7 @@
     },
     "COMP4920": {
         "original": "Prerequisite: (COMP2511 or COMP2911) and completion of 96 UOC in Computer Science.<br/><br/>",
-        "processed": "(COMP2511 || COMP2911) && 96UOC in Computer Science"
+        "processed": "(COMP2511 || COMP2911) && 96UOC && COMP?1"
     },
     "COMP4951": {
         "original": "Prerequisite: Enrolled in a CSE BE (Hons) programs, completion of 126 UOC and completion of 3rd year core.<br/><br/>",
@@ -5913,7 +5913,7 @@
     },
     "FINS2622": {
         "original": "Prerequisite or co-requisite:FINS1612/FINS2618 and FINS2624<br/><br/>",
-        "processed": "[FINS2624 && FINS1612 || FINS2618]"
+        "processed": "[FINS1612 || FINS2618] && FINS2624"
     },
     "FINS2624": {
         "original": "Prerequisite: FINS2618 OR FINS1612<br/><br/>",
@@ -5989,7 +5989,7 @@
     },
     "FINS3645": {
         "original": "Pre-requisite: FINS1612/2618;  OR enrolment in a Business Analytics Major (COMMJ1) and completion of COMM1180 or FINS1613 or (COMM1140 and ECON1102)<br/><br/>",
-        "processed": "FINS1612 || FINS1612 || (COMMJ1 && (COMM1180 || FINS1613 || (COMM1140 && ECON1102)))"
+        "processed": "(FINS1612 || FINS1618) || (COMMJ1 && (COMM1180 || FINS1613 || (COMM1140 && ECON1102)))"
     },
     "FINS3646": {
         "original": "Pre-requisite: FINS1612/FINS2618 OR (Business Analytics Major (COMMJ1) and COMM1180 OR FINS1613 OR (COMM1140 and ECON1102)<br/><br/>",
@@ -6761,7 +6761,7 @@
     },
     "INFS3202": {
         "original": "Prerequisite: INFS2101 AND in Plan (INFSB13554 OR INFSCH3971 OR INFSCH3964)<br/><br/>",
-        "processed": "INFS2101 && (INFSB13554 || INFSCH3971 || INFSCH3964)"
+        "processed": "INFS2101 && ((INFSB1 && 3554) || INFSCH3971 || INFSCH3964)"
     },
     "INFS3303": {
         "original": "Prerequisite: INFS3202 and in (Plan INFSB13554 or INFSCH3964 or INFSCH3971)<br/><br/>",
@@ -10369,7 +10369,7 @@
     },
     "SENG4920": {
         "original": "<br/>Completed more than or equal to 144 UOC in SENGAH, BINFAH or COMPBH<br/><br/>Prerequisite: COMP2511<br/><br/>",
-        "processed": "more than || equal to 144UOC in SENGAH, BINFAH || COMPBH COMP2511"
+        "processed": "144UOC && COMP2511 && (SENGAH || BINFAH || COMPBH)"
     },
     "SOCW1001": {
         "original": "",

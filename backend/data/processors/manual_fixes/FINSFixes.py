@@ -66,7 +66,7 @@ def FINS_2622():
     "processed": "|| [FINS1612 && FINS2624]"
     """
 
-    return "[FINS2624 && FINS1612 || FINS2618]"
+    return "[FINS1612 || FINS2618] && FINS2624"
 
 
 def FINS_3202_3303():
@@ -103,7 +103,7 @@ def FINS_3645():
 
     """
 
-    return "FINS1612 || FINS1612 || (COMMJ1 && (COMM1180 || FINS1613 || (COMM1140 && ECON1102)))"
+    return "(FINS1612 || FINS1618) || (COMMJ1 && (COMM1180 || FINS1613 || (COMM1140 && ECON1102)))"
 
 def FINS_3646():
     """

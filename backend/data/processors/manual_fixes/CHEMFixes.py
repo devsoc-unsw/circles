@@ -134,7 +134,7 @@ def CHEM_2521(condition):
 
     return {
         'original': condition['original'],
-        'processed' : 'CHEM1011 && (CHEM1021 || CHEM1031) && (CHEM1041 || CHEM1051) && CHEM1061 && CHEM2041',
+        'processed' : '(CHEM1011 && CHEM1021) || (CHEM1031 && CHEM1041) || (CHEM1051 && CHEM1061) && CHEM2041',
         'handbook_note': 'This is the main Level 2 Organic Chemistry course taught within the School of Chemistry.<br/> It is a core element in Chemistry major programs. It is also required for industrial chemistry, biochemistry and medicinal chemistry programs'
     }
 

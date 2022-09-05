@@ -3899,27 +3899,6 @@
         ],
         "broke at": "Index 7, 2270"
     },
-    "COMP4920": {
-        "condition": {
-            "original": "Prerequisite: (COMP2511 or COMP2911) and completion of 96 UOC in Computer Science.<br/><br/>",
-            "processed": "(COMP2511 || COMP2911) && 96UOC in Computer Science"
-        },
-        "tokens": [
-            "(",
-            "(",
-            "COMP2511",
-            "||",
-            "COMP2911",
-            ")",
-            "&&",
-            "96UOC",
-            "in",
-            "Computer",
-            "Science",
-            ")"
-        ],
-        "broke at": "Index 7, 96UOC"
-    },
     "CRIM2021": {
         "condition": {
             "original": "Prerequisite: CRIM2020, not available to students in Bachelor of Laws double-degree programs<br/><br/>",
@@ -10986,29 +10965,6 @@
             ")"
         ],
         "broke at": "Index 4, SENG3991or"
-    },
-    "SENG4920": {
-        "condition": {
-            "original": "<br/>Completed more than or equal to 144 UOC in SENGAH, BINFAH or COMPBH<br/><br/>Prerequisite: COMP2511<br/><br/>",
-            "processed": "more than || equal to 144UOC in SENGAH, BINFAH || COMPBH COMP2511"
-        },
-        "tokens": [
-            "(",
-            "more",
-            "than",
-            "||",
-            "equal",
-            "to",
-            "144UOC",
-            "in",
-            "SENGAH,",
-            "BINFAH",
-            "||",
-            "COMPBH",
-            "COMP2511",
-            ")"
-        ],
-        "broke at": "Index 2, than"
     },
     "SOCW3009": {
         "condition": {
