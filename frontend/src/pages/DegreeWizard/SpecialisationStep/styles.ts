@@ -17,7 +17,7 @@ const Menu = styled(antdMenu)`
     }
   `}
 
-  .ant-menu-title-content, .ant-menu-item-group-title, .ant-menu-submenu-arrow {
+  .ant-menu-title-content, .ant-menu-submenu-arrow {
     color: ${({ theme }) => theme.text};
   }
 
