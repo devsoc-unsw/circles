@@ -111,7 +111,7 @@ export const darkTheme: DefaultTheme = {
     backgroundColorHover: '#292a2b',
   },
   plannerCartMenu: {
-    backgroundColor: '#434343',
+    backgroundColor: '#1D1F20',
   },
   courseTag: {
     backgroundColor: '#9254de',
