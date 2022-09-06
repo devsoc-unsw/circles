@@ -10887,12 +10887,45 @@
         "components": {
             "non_spec_data": [
                 {
+                    "type": "info_rule",
+                    "title": "Industrial Experience Requirement",
+                    "notes": "Students must complete a minimum of 60 days of Industrial Training to graduate. Industrial Training must be undertaken concurrently with enrolment in the program.\nFor more information on Industrial Training, please visit https://www.unsw.edu.au/engineering/student-life/industrial-training"
+                },
+                {
                     "type": "gened",
                     "credits_to_complete": 12,
                     "notes": "Students must take at least 12 UOC of the following courses."
                 }
             ],
             "spec_data": {
+                "honours": {
+                    "Engineering (Honours)": {
+                        "is_optional": false,
+                        "specs": {
+                            "TELEAH": "Telecommunications",
+                            "SOLAAH": "Photovoltaics and Solar Energy",
+                            "ELECCH": "Quantum Engineering",
+                            "SOLABH": "Renewable Energy Engineering",
+                            "ELECAH": "Electrical Engineering",
+                            "CEICAH": "Chemical Engineering",
+                            "GMATEH": "Geospatial Engineering",
+                            "GMATDH": "Surveying",
+                            "CVENBH": "Environmental Engineering",
+                            "CEICDH": "Chemical Product Engineering",
+                            "MANFBH": "Mechanical and Manufacturing Engineering",
+                            "PETRAH": "Petroleum Engineering",
+                            "COMPBH": "Computer Engineering",
+                            "MTRNAH": "Mechatronic Engineering",
+                            "MECHAH": "Mechanical Engineering",
+                            "CVENAH": "Civil Engineering",
+                            "BINFAH": "Bioinformatics Engineering",
+                            "SENGAH": "Software Engineering",
+                            "AEROAH": "Aerospace Engineering",
+                            "MINEAH": "Mining Engineering"
+                        },
+                        "notes": "Students must complete at least one of the specialisations below."
+                    }
+                },
                 "minors": {
                     "Engineering (Honours)": {
                         "is_optional": true,
@@ -13316,6 +13349,17 @@
         "structure_summary": "Students must complete 192 units of credit when taken as a standalone program.\n\nAn Advanced Computing Major - 144 UOC\nFree Electives or Optional Minor or combination of Free Elective and optional minor - 36 UOC\nGeneral Education - 12 UOC",
         "components": {
             "spec_data": {
+                "honours": {
+                    "Advanced Computer Science (Honours)": {
+                        "is_optional": false,
+                        "specs": {
+                            "COMPYH": "Security Engineering",
+                            "COMPCH": "Computer Science",
+                            "COMPIH": "Artificial Intelligence"
+                        },
+                        "notes": ""
+                    }
+                },
                 "minors": {
                     "Advanced Computer Science (Honours)": {
                         "is_optional": true,
