@@ -18,7 +18,7 @@ import getNumTerms from 'utils/getNumTerms';
 import openNotification from 'utils/openNotification';
 import Collapsible from 'components/Collapsible';
 import PageTemplate from 'components/PageTemplate';
-import { inDev, MAX_COURSES_OVERFLOW } from 'config/constants';
+import { MAX_COURSES_OVERFLOW } from 'config/constants';
 import type { RootState } from 'config/store';
 import Dashboard from './Dashboard';
 import FreeElectiveSection from './FreeElectivesSection';
@@ -212,17 +212,13 @@ const ProgressionChecker = () => {
                   >
                     {view === Views.GRID ? 'Display Concise Mode' : 'Display Full Mode'}
                   </Button>
-                  {
-                    inDev && (
-                      <Button
-                        type="primary"
-                        icon={<TableOutlined />}
-                        onClick={() => setView(Views.TABLE)}
-                      >
-                        Display Table View
-                      </Button>
-                    )
-                  }
+                  <Button
+                    type="primary"
+                    icon={<TableOutlined />}
+                    onClick={() => setView(Views.TABLE)}
+                  >
+                    Display Table View
+                  </Button>
                 </>
               )
               : (
