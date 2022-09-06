@@ -42,17 +42,7 @@ def MDIA_3003():
         "processed": "66UOC && 6UOC L2 MDIA CORES courses && enrolment in a Media (Communication && Journalism) || Media (PR && Advertising) program"
     """
 
-    # 3454 is Media (Comm & Journalism)
-    non_spec_data: list = PROGRAMS["3454"]["components"]["non_spec_data"]
-    core_courses = next(filter(lambda x: x["type"] == "prescribed_electives", iter(non_spec_data)))["courses"].keys()
-
-    if not core_courses:
-        return "ERROR[MDIA3003]: No core courses found for Media (Comm & Journalism)"
-
-    core_courses = filter(lambda x: re.match(r"[A-Z]{4}2[0-9]{3}", x, flags=re.IGNORECASE),
-                          core_courses)
-
-    return f"66UOC && (6UOC in ({' || '.join(core_courses)})) && (3454 || 3453)"
+    return f"66UOC && (6UOC in L2 MDIA CORES) && (3454 || 3453)"
 
 if __name__ == "__main__":
     fix_conditions()

@@ -31,8 +31,10 @@ def fix_conditions():
     CONDITIONS["CHEM1151"][PROCESSED] = CHEM_1151()
     CONDITIONS["CHEM1829"][PROCESSED] = CHEM_1829()
     CONDITIONS["CHEM1831"][PROCESSED] = CHEM_1831()
+    CONDITIONS["CHEM1832"][PROCESSED] = CHEM_1832()
     CONDITIONS["CHEM1777"][PROCESSED] = CHEM_1777()
-    CONDITIONS["CHEM2521"][PROCESSED] = CHEM_2521()
+    CONDITIONS["CHEM2051"][PROCESSED] = CHEM_2051()
+    CONDITIONS["CHEM2521"] = CHEM_2521(CONDITIONS["CHEM2521"])
     CONDITIONS["CHEM2701"][PROCESSED] = CHEM_2701()
     CONDITIONS["CHEM3051"][PROCESSED] = CHEM_3051()
     CONDITIONS["CHEM6701"][PROCESSED] = CHEM_6701()
@@ -59,6 +61,13 @@ def CHEM_1051():
         "processed": "Enrolment in the Bachelor of Medicinal Chemistry (3999 || 3992) || Bachelor of Medicinal Chemistry/LAWS#"
     """
     return "MCHM#"
+
+def CHEM_1832():
+    """
+    "original": "Enrolment in 3894 Nutrition/Dietetics and Food Innovation or 3895 Pharmaceutical Medicine/Pharmacy<br/><br/>",
+    "processed": "Enrolment in 3894 Nutrition/Dietetics && Food Innovation || 3895 Pharmaceutical Medicine/Pharmacy"
+    """
+    return "3894 || 3895"
 
 def CHEM_1061():
     """
@@ -103,13 +112,12 @@ def CHEM_1777():
     """
     return ""
 
-def CHEM_2521():
+def CHEM_2051():
     """
-        "original": "This is the main Level 2 Organic Chemistry course taught within the School of Chemistry.<br/>It assumes knowledge of CHEM1011 and CHEM1021 or CHEM1031 and CHEM1041 or CHEM1051 and CHEM1061, AND CHEM2041. It is a core element in Chemistry major programs. It is also required for industrial chemistry, biochemistry and medicinal chemistry programs.<br/><br/>",
-        "processed": "This is the main L2 Organic Chemistry course taught within the School of Chemistry. It assumes knowledge of CHEM1011 && CHEM1021 || CHEM1031 && CHEM1041 || CHEM1051 && CHEM1061 && CHEM2041. It is a core element in Chemistry major programs. It is also required for industrial chemistry, biochemistry && medicinal chemistry programs"
+        "original": "Enrolment into 3999 Medicinal Chemistry or 3895 Pharmaceutical Medicine/Pharmacy<br/><br/>Pre-requisites: PHRM1021 or CHEM1021 or CHEM1041 or CHEM1061 <br/><br/>",
+        "processed": "Enrolment into 3999 Medicinal Chemistry || 3895 Pharmaceutical Medicine/Pharmacy PHRM1021 || CHEM1021 || CHEM1041 || CHEM1061"
     """
-    return "((CHEM1011 && CHEM1021) || (CHEM1031 && CHEM1041) || (CHEM1051 && 1061)) && CHEM2041"
-
+    return "3999 || 3895 && (PHRM1021 || CHEM1021 || CHEM1041 || CHEM1061)"
 
 def CHEM_2701():
     """
@@ -117,6 +125,19 @@ def CHEM_2701():
         "processed": "First year chemistry is a . One of the following courses must have been : - CHEM1021 -- Chemistry 1B - CHEM1041/1061 -- Higher Chemistry 1B - CHEM1821 -- Engineering Chemistry 1B - CHEM1829 -- Biological Chemistry for Optometry"
     """
     return "CHEM1021 || CHEM1041 || CHEM1061 || CHEM1821 || CHEM1829"
+
+def CHEM_2521(condition):
+    """
+        "original": "This is the main Level 2 Organic Chemistry course taught within the School of Chemistry.<br/>It assumes knowledge of CHEM1011 and CHEM1021 or CHEM1031 and CHEM1041 or CHEM1051 and CHEM1061, AND CHEM2041. It is a core element in Chemistry major programs. It is also required for industrial chemistry, biochemistry and medicinal chemistry programs.<br/><br/>",
+        "processed": "This is the main L2 Organic Chemistry course taht within the School of Chemistry. It assumes knowledge of CHEM1011 && CHEM1021 || CHEM1031 && CHEM1041 || CHEM1051 && CHEM1061 && CHEM2041. It is a core element in Chemistry major programs. It is also required for industrial chemistry, biochemistry && MCHM#"
+    """
+
+    return {
+        'original': condition['original'],
+        'processed' : '(CHEM1011 && CHEM1021) || (CHEM1031 && CHEM1041) || (CHEM1051 && CHEM1061) && CHEM2041',
+        'handbook_note': 'This is the main Level 2 Organic Chemistry course taught within the School of Chemistry.<br/> It is a core element in Chemistry major programs. It is also required for industrial chemistry, biochemistry and medicinal chemistry programs'
+    }
+
 
 def CHEM_3051():
     """

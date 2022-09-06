@@ -30,7 +30,7 @@ def fix_conditions():
 
     CONDITIONS["COMM0999"][PROCESSED] = COMM_0999()
     CONDITIONS["COMM1100"] = COMM_1100(CONDITIONS["COMM1100"])
-    CONDITIONS["COMM1110"] = COMM_1110_1120_1140(CONDITIONS["COMM1110"])
+    CONDITIONS["COMM1110"] = COMM_1110(CONDITIONS["COMM1110"])
     CONDITIONS["COMM1150"] = COMM_1150(CONDITIONS["COMM1150"])
     CONDITIONS["COMM1999"] = COMM_1999(CONDITIONS["COMM1999"])
     CONDITIONS["COMM2222"] = COMM_2222(CONDITIONS["COMM2222"])
@@ -40,7 +40,7 @@ def fix_conditions():
     CONDITIONS["COMM3030"][PROCESSED] = COMM_3030()
     CONDITIONS["COMM3101"] = COMM_3101(CONDITIONS["COMM3101"])
     CONDITIONS["COMM3202"] = COMM_3202(CONDITIONS["COMM3202"])
-    CONDITIONS["COMM3500"][PROCESSED] = COMM_3500()
+    CONDITIONS["COMM3500"] = COMM_3500(CONDITIONS["COMM3500"])
     CONDITIONS["COMM3900"] = COMM_3900(CONDITIONS["COMM3900"])
     CONDITIONS["COMM3999"] = COMM_3999(CONDITIONS["COMM3999"])
     # Updates the files with the modified dictionaries
@@ -61,20 +61,37 @@ def COMM_0999():
 
 def COMM_1100(conditions):
     """
-        "original": "Students who have completed ECON1101 are not permitted to enrol. <br/><br/>",
+        "original": "Students enrolled in Actuarial Studies or Economics programs (in single or double degree mode) are not permitted to enrol. Only available to single and double degree Business School students in Term 1. It will be offered to non-Business School students in Terms 2 and 3.<br/><br/>",
 
         "processed": "who have ECON1101 are not permitted to enrol"
     """
 
-    COURSES["COMM1100"]["exclusions"]["ECON1101"] = 1
+    COURSES["COMM1100"]["exclusions"]["ACTL#"] = 1
+    COURSES["COMM1100"]["exclusions"]["ECON#"] = 1
 
     return {
         "original": conditions["original"],
-        "processed": ""
+        "processed": "",
+        "handbook_note": "Only available to single and double degree Business School students in Term 1. It will be offered to non-Business School students in Terms 2 and 3."
     }
 
+def COMM_1110(conditions):
+    """
+    "original": Students enrolled in 3764 (Eng/Comm), Actuarial Studies or Economics programs (in both single and double degree mode) are not permitted to enrol. Only available to single and double degree Business School students in Term 1. It will be offered to non-Business School students in Terms 2 and 3. 
+    """
 
-def COMM_1110_1120_1140(conditions):
+    COURSES["COMM1110"]["exclusions"]["ACTL#"] = 1
+    COURSES["COMM1110"]["exclusions"]["ECON#"] = 1
+    COURSES["COMM1110"]["exclusions"]["3764"] = 1
+    
+
+    return {
+        "original": conditions["original"],
+        "processed": "",
+        "handbook_note": "Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Terms 1 and 3."
+    }
+
+def COMM_1120_1140(conditions):
     """
         "original": "Only available to single and double degree Business School students in Term 1. It will be offered to non-Business School students in Terms 2 and 3.<br/><br/>",
         "processed": "Only available to single && double degree Business School in Term 1. It will be offered to non-Business School in Terms 2 && 3"
@@ -89,7 +106,7 @@ def COMM_1110_1120_1140(conditions):
 
 def COMM_1150(conditions):
     """
-        "original": "Pre-requisite: COMM1100 and excludes MGMT1101. Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Term 3.<br/><br/>",
+        "original": "Pre-requisite: COMM1100 and excludes MGMT1101. Only available to single and double degree Business School students in Term 2. It will be offered to non-Business School students in Terms 1 and 3.",
         "processed": "COMM1100 &&"
     """
 
@@ -105,14 +122,14 @@ def COMM_1150(conditions):
 
 def COMM_1999(conditions):
     """
-        "original": "Pre-requisite: COMM0999 AND completed 30 UOC of Integrated First Year Core<br/><br/>",
+        "original": "Pre-requisite: COMM0999 AND all Integrated First Year program requirements. This includes completion of COMM1120, COMM1140, COMM1170, COMM1180, and COMM1190 (students in 3155 Actuarial Studies / Commerce are not required to complete COMM1190). Also, completion of COMM1100 & COMM1150,  OR, COMM1900. Students should enrol in COMM1999 in the term following the completion of these requirements. <br/><br/>",
         "processed": "COMM0999 && 30UOC of Integrated First Year Core"
     """
 
     return {
         "original": conditions["original"],
-        "processed": "COMM0999",
-        "handbook_note": "You must have completed 30UOC of Integrated First Year Core"
+        "processed": "COMM0999 && COMM1120 && COMM1140 && COMM1170 && COMM1180 && (COMM1190 || 3155) && ((COMM1100 && COMM1150) || COMM1900)",
+        "handbook_note": "Students should enrol in COMM1999 at the earliest term they can"
     }
 
 
@@ -252,14 +269,16 @@ def COMM_3303(conditions):
     }
 
 
-def COMM_3500():
+def COMM_3500(conditions):
     """
-        "original": "Pre-requisite: COMM1822, COMM2050, COMM2501, Business Analytics Modelling I course (ECON2206 or ECON2209 or RISK2002) and completing the Business Analytics major (COMMJ1). It is recommended students are in their final year when taking this course.<br/><br/>",
-        "processed": "COMM1822 || COMM2050 || COMM2501 || Business Analytics Modelling I course (ECON2206 || ECON2209 || RISK2002) && the Business Analytics major (COMMJ1). It is recommended are in their final year when taking this course"
+        "original": "Pre-requisite: COMM1822/COMM2822, COMM2050, COMM2501, Business Analytics Modelling I course (ECON2206 or ECON2209 or RISK2002) and completing the Business Analytics major (COMMJ1). It is recommended students are in their final year when taking this course.<br/><br/>",
     """
 
-    return "(COMM1822 && COMM2050 && COMM2501) && (ECON2206 || ECON2209 || RISK2002) && COMMJ1"
-
+    return {
+        "original": conditions["original"],
+        "processed": "(COMM1822 || COMM2822) && COMM2050 && COMM2501 && (ECON2206 || ECON2209 || RISK2002)",
+        "handbook_note": "you must complete the Business Analytics major (COMMJ1). It is recommended students are in their final year when taking this course."
+    }
 
 def COMM_3900(conditions):
     """
@@ -276,7 +295,7 @@ def COMM_3900(conditions):
 
 def COMM_3999(conditions):
     """
-        "original": "Pre-requisite: Completed myBCom First Year Portfolio (COMM1999) and in their final year of a single or double Commerce degree (completed at least 72 UOC of Business courses).<br/><br/>",
+        "original": "Pre-requisite: Completed myBCom First Year Portfolio (COMM1999) and in their final year of a single or double Commerce degree (ie. completed at least 72 UOC of Business courses including DPBS equivalent courses)..<br/><br/>",
         "processed": "myBCom First Year Portfolio (COMM1999) && in their final year of a single || double Commerce degree ( 72UOC of Business courses)"
     """
 

@@ -5,6 +5,7 @@ import {
 } from '@ant-design/icons';
 import { Button, Tooltip } from 'antd';
 import axios from 'axios';
+import { useTheme } from 'styled-components';
 import { Course, UnselectCourses } from 'types/api';
 import { PlannerCourse } from 'types/planner';
 import prepareUserPayload from 'utils/prepareUserPayload';
@@ -67,6 +68,7 @@ const CourseTitle = ({
   };
 
   const isSmall = useMediaQuery('(max-width: 1400px)');
+  const theme = useTheme();
 
   return (
     <S.Wrapper>
@@ -95,7 +97,7 @@ const CourseTitle = ({
             />
           </Tooltip>
         )}
-        {!unlocked && <LockOutlined style={{ fontSize: '12px' }} />}
+        {!unlocked && <LockOutlined style={{ fontSize: '12px', color: theme.text }} />}
         {!selected ? (
           <Tooltip title="Add to Planner" placement="top">
             <Button
