@@ -126,10 +126,6 @@ export const darkTheme: DefaultTheme = {
     menuSubColor: '#262626', // gray-10
   },
 
-  specialsationStep: {
-    background: '#fff',
-  },
-
   degreeCard: {
     backgroundColor: '#17191a',
   },
