@@ -13,7 +13,6 @@ const Menu = styled(antdMenu)`
   ${({ theme }) => theme.specialsationStep && css`
     .ant-menu-submenu {
       background: ${theme.specialsationStep.background};
-      border: 1px solid #a86fed;
     }
   `};
 
