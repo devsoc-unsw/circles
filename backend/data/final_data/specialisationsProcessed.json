@@ -1479,39 +1479,6 @@
             },
             {
                 "courses": {
-                    "ARTS2755": "Inclusive Development: Gender and Intersectionality",
-                    "BIOM1010": "Engineering in Medicine and Biology",
-                    "ENGG1400": "Engineering Infrastructure Systems",
-                    "MATH1081": "Discrete Mathematics",
-                    "PSYC1028": "Psychology of Human Centred Design",
-                    "CVEN1701": "Environmental Principles and Systems",
-                    "CEIC1000": "Sustainable Product Engineering and Design",
-                    "ENGG1200": "Undergraduate Special Projects",
-                    "MATS1101": "Engineering Materials and Chemistry",
-                    "MINE1010": "Mineral Resources Engineering",
-                    "COMP1521": "Computer Systems Fundamentals",
-                    "PSYC1001": "Psychology 1A",
-                    "MATS1110": "Introduction to Materials for Engineering Applications",
-                    "BABS1201": "Molecules, Cells and Genes",
-                    "COMM1120": "Collaboration and Innovation in Business",
-                    "ENGG1300": "Engineering Mechanics",
-                    "PHYS1231": "Higher Physics 1B",
-                    "BIOS1301": "Ecology, Sustainability and Environmental Science",
-                    "ENGG1100": "Grand Challenges for Engineering",
-                    "ELEC1111": "Electrical Circuit Fundamentals",
-                    "GEOS1111": "Investigating Earth and Its Evolution",
-                    "GMAT1110": "Surveying and Geospatial Engineering",
-                    "COMP1531": "Software Engineering Fundamentals",
-                    "SOLA1070": "Sustainable Energy"
-                },
-                "title": "Recommended Free Elective List ",
-                "credits_to_complete": 0,
-                "core": false,
-                "levels": [],
-                "notes": ""
-            },
-            {
-                "courses": {
                     "PHYS1121 or PHYS1131": [
                         "Physics 1A",
                         "Higher Physics 1A"
@@ -9697,16 +9664,6 @@
                 "levels": [
                     3
                 ],
-                "notes": ""
-            },
-            {
-                "courses": {
-                    "any course": "1"
-                },
-                "title": "Free Elective",
-                "credits_to_complete": 6,
-                "core": false,
-                "levels": [],
                 "notes": ""
             },
             {

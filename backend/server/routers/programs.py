@@ -110,16 +110,27 @@ def add_subgroup_container(structure: dict[str, StructureContainer], type: str, 
     }
     return list(structure[type]["content"][title]["courses"].keys())
 
-def add_geneds_courses(programCode: str, structure: dict, container: ProgramContainer) -> list[str]:
+def add_geneds_courses(programCode: str, structure: dict[str, StructureContainer], container: ProgramContainer) -> list[str]:
     """ Returns the added courses """
     if container.get("type") != "gened":
         return []
 
     item = structure["General"]["content"]["General Education"]
     item["courses"] = {}
-
     if container.get("courses") is None:
-        item["courses"] = data_helpers.read_data("data/scrapers/genedPureRaw.json").get(programCode)
+        gen_ed_courses = list(set(get_gen_eds(programCode)["courses"].keys()) - set(sum(
+            (
+                sum((
+                    list(value["courses"].keys())
+                    for sub_group, value in spec["content"].items()
+                    if 'core' in sub_group.lower()
+                ), [])
+            for spec_name, spec in structure.items()
+            if "Major" in spec_name or "Honours" in spec_name)
+        , [])))
+        geneds = get_gen_eds(programCode)
+        item["courses"] = {course: geneds["courses"][course] for course in gen_ed_courses}
+
 
     return list(item["courses"].keys())
 
@@ -239,7 +250,7 @@ def get_structure(
     structure: dict[str, StructureContainer] = {}
     structure = add_specialisations(structure, spec)
     structure, uoc = add_program_code_details(structure, programCode)
-    structure = add_geneds_to_structure(structure, programCode)
+    structure = add_geneds_to_structure(structure, programCode, spec)
     apply_manual_fixes(structure, programCode)
 
     return {
@@ -293,8 +304,8 @@ def get_structure_course_list(
 )
 def get_gen_eds(programCode: str):
     """ fetches gen eds from file """
-    all_geneds = data_helpers.read_data("data/scrapers/genedPureRaw.json")
-    return {"courses" : all_geneds[programCode]}
+    all_geneds = data_helpers.read_data("data/scrapers/genedPureRaw.json")[programCode]
+    return {"courses" : all_geneds}
 
 @router.get("/graph/{programCode}/{spec}", response_model=Graph)
 @router.get("/graph/{programCode}", response_model=Graph)
@@ -394,7 +405,7 @@ def add_program_code_details(structure: dict[str, StructureContainer], programCo
     structure['Rules'] = {"name": "General Program Rules", "content": {}}
     return (structure, programsResult["UOC"])
 
-def add_geneds_to_structure(structure: dict[str, StructureContainer], programCode: str) -> dict[str, StructureContainer]:
+def add_geneds_to_structure(structure: dict[str, StructureContainer], programCode: str, spec: Optional[str]) -> dict[str, StructureContainer]:
     """
         Insert geneds of the given programCode into the structure
         provided
