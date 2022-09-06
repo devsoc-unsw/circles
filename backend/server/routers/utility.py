@@ -20,4 +20,14 @@ def map_suppressed_errors(func: Callable, errors_log: List[Any], *args, **kwargs
 
 def get_core_courses(program: str, specialisations: list[str]):
     req = requests.get(f"http://127.0.0.1:8000/programs/getStructure/{program}/{'+'.join(specialisations)}").json()
-    req["structure"]
+    return sum(
+            (
+                sum((
+                    list(value["courses"].keys())
+                    for sub_group, value in spec["content"].items()
+                    if 'core' in sub_group.lower()
+                ), [])
+            for spec_name, spec in req["structure"].items()
+            if "Major" in spec_name or "Honours" in spec_name)
+         , [])
+

@@ -25,7 +25,7 @@ from server.routers.model import (
     Structure,
     StructureContainer,
 )
-from server.routers.utility import map_suppressed_errors
+from server.routers.utility import get_core_courses, map_suppressed_errors
 
 router = APIRouter(
     prefix="/programs",
@@ -335,6 +335,9 @@ def graph(
         "courses": courses,
     }
 
+@router.get("/getCores/{programCode}/{spec}")
+def get_cores(programCode: str, spec: str):
+    return get_core_courses(programCode, spec.split('+'))
 
 ###############################################################
 #                       End of Routes                         #

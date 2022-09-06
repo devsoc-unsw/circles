@@ -47,7 +47,7 @@ async def validate_term_planner(plannerData: PlannerData):
     }
     user = User(emptyUserData)
     # State of courses on the term planner
-    coursesState = {}  # TODO: possibly push to user class?
+    coursesState = {}
 
     currYear = data.mostRecentPastTerm["Y"]
     pastTerm = data.mostRecentPastTerm["T"]
