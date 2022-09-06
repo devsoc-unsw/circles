@@ -6,9 +6,14 @@ const Menu = styled(antdMenu)`
   border-right: none;
   background-color: inherit;
 
+  .ant-menu-submenu {
+    border: 1px solid #a86fed;
+  }
+
   ${({ theme }) => theme.specialsationStep && css`
     .ant-menu-submenu {
-      background: ${theme.specialsationStep.background}
+      background: ${theme.specialsationStep.background};
+      border: 1px solid #a86fed;
     }
   `};
 
