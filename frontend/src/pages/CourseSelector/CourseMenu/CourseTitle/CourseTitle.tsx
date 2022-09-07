@@ -3,8 +3,8 @@ import {
   LockOutlined, WarningOutlined,
 } from '@ant-design/icons';
 import { Tooltip } from 'antd';
-import QuickCart from 'components/QuickAddCartButton';
 import { useTheme } from 'styled-components';
+import QuickCart from 'components/QuickAddCartButton';
 import useMediaQuery from 'hooks/useMediaQuery';
 import S from './styles';
 
