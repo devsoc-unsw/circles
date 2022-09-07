@@ -78,10 +78,3 @@ def test_user_has_taken_no_marks():
     user = User(USERS["user1_no_marks"])
     assert user.has_taken_course("COMP1511") is True
     assert user.has_taken_course("COMP1521") is True
-
-
-def test_user_has_taken_remove_course():
-    user = User(USERS["user1"])
-    assert user.has_taken_course("COMP1511") is True
-    user.unselect_course("COMP1511")
-    assert user.has_taken_course("COMP1511") is False

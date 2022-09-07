@@ -6,6 +6,7 @@
 """
 
 import copy
+from itertools import chain
 import json
 from typing import Literal, Optional, Tuple
 import re
@@ -77,7 +78,7 @@ class User:
 
     def has_taken_course(self, course: str):
         """ Determines if the user has taken this course """
-        return course in self.courses or any(c in self.courses for c in (CACHED_EQUIVALENTS.get(course) or []))
+        return any(c in self.courses and (self.courses[c][1] or 50) >= 50 for c in chain([course], (CACHED_EQUIVALENTS.get(course) or [])))
     
 
     def is_taking_course(self, course: str):
