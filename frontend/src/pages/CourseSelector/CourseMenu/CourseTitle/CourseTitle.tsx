@@ -4,12 +4,7 @@ import {
 } from '@ant-design/icons';
 import { Tooltip } from 'antd';
 import QuickCart from 'components/QuickAddCartButton';
-import axios from 'axios';
 import { useTheme } from 'styled-components';
-import { Course, UnselectCourses } from 'types/api';
-import { PlannerCourse } from 'types/planner';
-import prepareUserPayload from 'utils/prepareUserPayload';
-import type { RootState } from 'config/store';
 import useMediaQuery from 'hooks/useMediaQuery';
 import S from './styles';
 
@@ -25,7 +20,6 @@ const CourseTitle = ({
   courseCode, selected, accurate, unlocked, title,
 }: Props) => {
   const isSmall = useMediaQuery('(max-width: 1400px)');
-  const theme = useTheme();
 
   return (
     <S.Wrapper>
