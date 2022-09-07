@@ -57,12 +57,12 @@ const SpecialisationStep = ({ incrementStep, currStep, type }: Props) => {
           type: 'group',
           children: Object.keys(options[program].specs).sort().map((spec) => ({
             label: `${spec} ${options[program].specs[spec]}`,
-            key: `${index}-${spec}`,
+            key: spec,
           })),
         }]
         : Object.keys(options[program].specs).sort().map((spec) => ({
           label: `${spec} ${options[program].specs[spec]}`,
-          key: `${index}-${spec}`,
+          key: spec,
         })),
   }));
 
