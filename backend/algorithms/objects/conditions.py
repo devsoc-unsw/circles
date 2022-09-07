@@ -288,14 +288,17 @@ class CoresCondition(Condition):
         self.category = category_classobj
 
     def is_path_to(self, course: str) -> bool:
-        return False
+        return self.category.match_definition(course)
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
         res = user.completed_core(self.category)
         return res, [] if res else [f'you have not completed your {self.category} cores']
 
     def __str__(self) -> str:
-        return f"Core courses in {self.category}"
+        return json.dumps({
+            'cores': None,
+            'category': str(self.category)
+        })
 
 
 class ProgramCondition(Condition):

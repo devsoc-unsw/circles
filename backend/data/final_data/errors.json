@@ -4097,64 +4097,6 @@
         ],
         "broke at": "Index 7, 2270"
     },
-    "COMP3901": {
-        "condition": {
-            "original": "Prerequisite: 80+ WAM in COMP, SENG or BINF courses, completion of all first and second year core requirements a CSE program, and agreement from a suitable CSE academic supervisor.<br/><br/>",
-            "processed": "80WAM in (COMP || SENG || BINF) && CORES in L1 && CORES in L2",
-            "handbook_note": "You must obtain agreement from a suitable CSE academic supervisor to enrol in this course."
-        },
-        "tokens": [
-            "(",
-            "80WAM",
-            "in",
-            "(",
-            "COMP",
-            "||",
-            "SENG",
-            "||",
-            "BINF",
-            ")",
-            "&&",
-            "CORES",
-            "in",
-            "L1",
-            "&&",
-            "CORES",
-            "in",
-            "L2",
-            ")"
-        ],
-        "broke at": "Index 1, 80WAM"
-    },
-    "COMP3902": {
-        "condition": {
-            "original": "Prerequisite: 80+ WAM in COMP, SENG or BINF courses, completion of all first and second year core requirements a CSE program, and agreement from a suitable CSE academic supervisor.<br/><br/>",
-            "processed": "80WAM in (COMP || SENG || BINF) && CORES in L1 && CORES in L2",
-            "handbook_note": "You must obtain agreement from a suitable CSE academic supervisor to enrol in this course."
-        },
-        "tokens": [
-            "(",
-            "80WAM",
-            "in",
-            "(",
-            "COMP",
-            "||",
-            "SENG",
-            "||",
-            "BINF",
-            ")",
-            "&&",
-            "CORES",
-            "in",
-            "L1",
-            "&&",
-            "CORES",
-            "in",
-            "L2",
-            ")"
-        ],
-        "broke at": "Index 1, 80WAM"
-    },
     "CRIM2021": {
         "condition": {
             "original": "Prerequisite: CRIM2020, not available to students in Bachelor of Laws double-degree programs<br/><br/>",

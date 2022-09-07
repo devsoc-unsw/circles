@@ -27,7 +27,7 @@ def planner_index() -> str:
     return "Index of planner"
 
 @router.post("/validateTermPlanner/", response_model=ValidCoursesState)
-async def validate_term_planner(plannerData: PlannerData):
+def validate_term_planner(plannerData: PlannerData):
     """
     Will iteratively go through the term planner data whilst
     iteratively filling the user with courses.

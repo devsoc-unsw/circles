@@ -59,7 +59,7 @@ def fix_user_data(userData: dict):
         for course in coursesWithoutUoc
     }
     userData["courses"].update(filledInCourses)
-    userData["core_courses"] = get_core_courses(userData["program"], userData["specialisations"].split("+"))
+    userData["core_courses"] = get_core_courses(userData["program"], list(userData["specialisations"].keys()))
     return userData
 
 

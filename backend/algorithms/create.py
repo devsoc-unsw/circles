@@ -91,6 +91,8 @@ def create_category(tokens) -> Tuple[Category | None, int]: # pylint: disable=to
                 # (COND1 || COND2 && COND3) or similar combinations is undefined
                 print("WARNING: Found an undefined logic combination. Skipping.")
                 return None, index - 1
+            if token == category.logic.value:
+                continue
             if token == ")":
                 # We've reached the end of the condition
                 return category, index - 1
@@ -103,7 +105,7 @@ def create_category(tokens) -> Tuple[Category | None, int]: # pylint: disable=to
                 category.add_category(sub_category)
             # skip the tokens used in the sub-category
             # should only be more than one if the sub-category is a composite
-            [next(token_iter) for _ in range(sub_index + 1)]
+            [next(token_iter) for _ in range(sub_index)]
 
     if re.match(r"^[A-Z]{4}$", tokens[0], flags=re.IGNORECASE):
         # Course type

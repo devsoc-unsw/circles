@@ -12,8 +12,6 @@ To then run this file:
     python3 -m data.processors.manualFixes.MDIAFixes
 """
 
-import re
-
 from data.utility import data_helpers
 
 # Reads conditionsProcessed dictionary into 'CONDITIONS'
