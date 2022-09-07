@@ -4,7 +4,7 @@ import {
 } from '@ant-design/icons';
 import { Tooltip } from 'antd';
 import { useTheme } from 'styled-components';
-import QuickCart from 'components/QuickAddCartButton';
+import QuickAddCartButton from 'components/QuickAddCartButton';
 import useMediaQuery from 'hooks/useMediaQuery';
 import S from './styles';
 
@@ -50,7 +50,7 @@ const CourseTitle = ({
           </Tooltip>
         )}
         {!unlocked && <LockOutlined style={{ fontSize: '12px', color: theme.text }} />}
-        <QuickCart
+        <QuickAddCartButton
           courseCode={courseCode}
           planned={selected}
         />
