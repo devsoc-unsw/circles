@@ -20,6 +20,7 @@ const CourseTitle = ({
   courseCode, selected, accurate, unlocked, title,
 }: Props) => {
   const isSmall = useMediaQuery('(max-width: 1400px)');
+  const theme = useTheme();
 
   return (
     <S.Wrapper>
@@ -48,7 +49,7 @@ const CourseTitle = ({
             />
           </Tooltip>
         )}
-        {!unlocked && <LockOutlined style={{ fontSize: '12px' }} />}
+        {!unlocked && <LockOutlined style={{ fontSize: '12px', color: theme.text }} />}
         <QuickCart
           courseCode={courseCode}
           planned={selected}
