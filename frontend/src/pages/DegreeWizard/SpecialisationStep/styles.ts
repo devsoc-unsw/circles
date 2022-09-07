@@ -5,12 +5,25 @@ import styled, { css } from 'styled-components';
 const Menu = styled(antdMenu)`
   border-right: none;
   background-color: inherit;
+  color: ${({ theme }) => theme.text};
 
-  ${({ theme }) => theme.specialsationStep && css`
-    .ant-menu-submenu {
-      background: ${theme.specialsationStep.background}
+  .ant-menu-submenu-title {
+    background-color: inherit;
+  }
+
+  ${({ theme }) => theme.courseSidebar && css`
+    .ant-menu-sub {
+      background-color: ${theme.courseSidebar.menuSubColor} !important;
     }
-  `};
+  `}
+
+  .ant-menu-title-content, .ant-menu-submenu-arrow {
+    color: ${({ theme }) => theme.text};
+  }
+
+  .ant-menu-submenu {
+    border: 1px solid #a86fed;
+  }
 
 `;
 
