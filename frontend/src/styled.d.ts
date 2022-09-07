@@ -58,9 +58,6 @@ declare module 'styled-components' {
     courseSidebar?: {
       menuSubColor: string
     }
-    specialsationStep?: {
-      background: string
-    }
     courseButton: {
       backgroundColor: string
       hoverBackgroundColor: string

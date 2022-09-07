@@ -80,7 +80,7 @@ def get_programs() -> dict[str, dict[str, str]]:
 
 def convert_subgroup_object_to_courses_dict(object: str, description: str|list[str]) -> Mapping[str, str | list[str]]:
     """ Gets a subgroup object (format laid out in the processor) and fetches the exact courses its referring to """
-    if " or " in object:
+    if " or " in object and isinstance(description, list):
         return {c: description[index] for index, c in enumerate(object.split(" or "))}
     if not re.match(r"[A-Z]{4}[0-9]{4}", object):
         return regex_search(rf"^{object}")

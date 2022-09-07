@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { animated, useSpring } from '@react-spring/web';
-import { Button, Menu, Typography } from 'antd';
+import type { MenuProps } from 'antd';
+import { Button, Typography } from 'antd';
 import axios from 'axios';
 import { Specialisations } from 'types/api';
 import type { RootState } from 'config/store';
@@ -35,7 +36,7 @@ const SpecialisationStep = ({ incrementStep, currStep, type }: Props) => {
   const fetchAllSpecialisations = useCallback(async () => {
     try {
       const res = await axios.get<Specialisations>(`/specialisations/getSpecialisations/${programCode}/${type}`);
-      setOptions(res.data.spec as Specialisation);
+      setOptions(res.data.spec);
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error('Error at getSteps', e);
@@ -45,6 +46,25 @@ const SpecialisationStep = ({ incrementStep, currStep, type }: Props) => {
   useEffect(() => {
     if (programCode !== '') fetchAllSpecialisations();
   }, [fetchAllSpecialisations, programCode, type]);
+
+  const menuItems: MenuProps['items'] = Object.keys(options).map((program, index) => ({
+    label: `${type.replace(/^\w/, (c) => c.toUpperCase())} for ${program}`,
+    key: index,
+    children:
+      options[program].notes
+        ? [{
+          label: `Note: ${options[program].notes}`,
+          type: 'group',
+          children: Object.keys(options[program].specs).sort().map((spec) => ({
+            label: `${spec} ${options[program].specs[spec]}`,
+            key: `${index}-${spec}`,
+          })),
+        }]
+        : Object.keys(options[program].specs).sort().map((spec) => ({
+          label: `${spec} ${options[program].specs[spec]}`,
+          key: `${index}-${spec}`,
+        })),
+  }));
 
   return (
     <CS.StepContentWrapper id={type}>
@@ -70,35 +90,8 @@ const SpecialisationStep = ({ incrementStep, currStep, type }: Props) => {
             display: 'flex',
             flexDirection: 'column',
           }}
-        >
-          {Object.keys(options).map((sub, index) => (
-            <Menu.SubMenu
-              // TODO convert this to use items for menu
-              // eslint-disable-next-line react/no-array-index-key
-              key={index}
-              title={`${type.replace(/^\w/, (c) => c.toUpperCase())} for ${sub}`}
-              style={{
-                border: '1px solid #a86fed',
-              }}
-            >
-              {(options[sub].notes)
-                ? (
-                  <Menu.ItemGroup title={`Note: ${options[sub].notes}`}>
-                    {Object.keys(options[sub].specs).sort().map((key) => (
-                      <Menu.Item key={key}>
-                        {key} {options[sub].specs[key]}
-                      </Menu.Item>
-                    ))}
-                  </Menu.ItemGroup>
-                )
-                : Object.keys(options[sub].specs).map((key) => (
-                  <Menu.Item key={key}>
-                    {key} {options[sub].specs[key]}
-                  </Menu.Item>
-                ))}
-            </Menu.SubMenu>
-          ))}
-        </S.Menu>
+          items={menuItems}
+        />
       </animated.div>
     </CS.StepContentWrapper>
   );
