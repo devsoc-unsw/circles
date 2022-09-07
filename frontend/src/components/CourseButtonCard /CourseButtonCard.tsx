@@ -31,11 +31,9 @@ const CourseButtonCard = ({ courseCode, title, planned }: Props) => {
         <S.CourseCode>{courseCode}</S.CourseCode>
         <S.CourseTitle>{title}</S.CourseTitle>
       </S.CourseWrapper>
-      <S.QuickCartWrapper>
-        <QuickAddCartButton courseCode={courseCode} planned={planned} />
-      </S.QuickCartWrapper>
+      <QuickAddCartButton courseCode={courseCode} planned={planned} />
     </S.CourseButtonCard>
   );
 };
 
-export default CourseButtonCard ;
+export default CourseButtonCard;

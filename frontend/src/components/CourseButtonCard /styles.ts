@@ -27,22 +27,17 @@ const CourseTitle = styled.p`
   -webkit-box-orient: vertical;
 `;
 
-const QuickCartWrapper = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 5px;
-`;
-
 const CourseButtonCard = styled(Button)<{ planned?: boolean }>`
   border-radius: 10px;
   border-width: 1px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   width: 270px;
   height: 80px;
   white-space: break-spaces;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
 
   ${({ planned }) => !planned && css`
     background: #FAFAFA; 
@@ -59,6 +54,5 @@ export default {
   CourseWrapper,
   CourseCode,
   CourseTitle,
-  QuickCartWrapper,
   CourseButtonCard,
 };
