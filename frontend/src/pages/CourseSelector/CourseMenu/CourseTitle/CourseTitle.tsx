@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  LockOutlined, WarningOutlined,
-} from '@ant-design/icons';
+import { LockOutlined, WarningOutlined } from '@ant-design/icons';
 import { Tooltip } from 'antd';
 import { useTheme } from 'styled-components';
 import QuickAddCartButton from 'components/QuickAddCartButton';
