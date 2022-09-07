@@ -70,7 +70,7 @@ def pre_process_cond(condition: Dict):
         return None
     return condition
     # Epic regex happens here
-    # Remove all cringe stuff
+    # TODO: Remove all cringe stuff -- wait for conditions
 
 def is_relevant_string(string: str) -> bool:
     """

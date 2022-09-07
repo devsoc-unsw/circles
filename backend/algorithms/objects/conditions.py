@@ -94,13 +94,18 @@ class MaturityCondition(Condition):
     special case as it attaches to the program itself and is not neccessarily
     a requirement of a course.
     """
-    def __init__(self):
-        return
+    def __init__(self, program: str, dependent: Condition, dependency: Condition):
+        self.program = program
+        self.dependent = dependent
+        self.dependency = dependency
 
     def validate(self, user: User) -> bool:
         """ Validate if user has passed a maturity requirement """
-        user
         raise NotImplementedError
+
+    def has_completed_dependency(self, user: User):
+        """ Checks if the user has completed the dependency """
+        return self.dependency.validate(user)
 
 
 class CoreqCoursesCondition(Condition):
