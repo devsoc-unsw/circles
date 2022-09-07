@@ -27,23 +27,20 @@ COURSES = data_helpers.read_data("data/final_data/coursesProcessed.json")
 
 def fix_conditions():
     """ Functions to apply manual fixes """
-    CONDITIONS["AERO4110"][PROCESSED] = AERO_4110()
+
+    CONDITIONS["FADA1010"][PROCESSED] = FADA_1010()
+
     # Updates the files with the modified dictionaries
     data_helpers.write_data(
         CONDITIONS, "data/final_data/conditionsProcessed.json")
     data_helpers.write_data(COURSES, "data/final_data/coursesProcessed.json")
 
-
-def AERO_4110():
+def FADA_1010():
     """
-        "original": "Prerequisite: At least 144 Units completed in AEROAH stream.<br/><br/>Prerequisite: AERO3110<br/><br/>",
-
-        "processed": "At least 144 Units in AEROAH stream. AERO3110"
+        "original": "Prerequisite: Enrolment in a Design, Computational Design, or Industrial Design program<br/><br/>",
+        "processed": "a Design, Computational Design || Industrial DDES#"
     """
-
-
-    return "144UOC && AEROAH && AERO3110"
-
+    return "DDES#"
 
 if __name__ == "__main__":
     fix_conditions()

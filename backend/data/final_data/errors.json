@@ -46,22 +46,6 @@
         ],
         "broke at": "Index 2, be"
     },
-    "AERO4110": {
-        "condition": {
-            "original": "Prerequisite: At least 144 Units completed in AEROAH stream.<br/><br/>Prerequisite: AERO3110<br/><br/>",
-            "processed": "144UOC in AEROAH && AERO3110"
-        },
-        "tokens": [
-            "(",
-            "144UOC",
-            "in",
-            "AEROAH",
-            "&&",
-            "AERO3110",
-            ")"
-        ],
-        "broke at": "Index 1, 144UOC"
-    },
     "ARCH1101": {
         "condition": {
             "original": "Currently enrolled in program 3261 Architectural Studies, 3268 Computational Design, or 3635 Civil Engineering with Architecture (Hons)<br/><br/>",
@@ -5986,24 +5970,6 @@
             ")"
         ],
         "broke at": "Index 9, Applied"
-    },
-    "FADA1010": {
-        "condition": {
-            "original": "Prerequisite: Enrolment in a Design, Computational Design, or Industrial Design program<br/><br/>",
-            "processed": "a Design, Computational Design || Industrial DDES#"
-        },
-        "tokens": [
-            "(",
-            "a",
-            "Design,",
-            "Computational",
-            "Design",
-            "||",
-            "Industrial",
-            "DDES#",
-            ")"
-        ],
-        "broke at": "Index 2, Design,"
     },
     "FADA2020": {
         "condition": {
@@ -12096,39 +12062,6 @@
             ")"
         ],
         "broke at": "Index 2, Social"
-    },
-    "TABL3033": {
-        "condition": {
-            "original": "Pre-requisite: TABL2751, COMM6000 CA:Essentials, 65+ WAM and Good Standing.<br/>Note: This course is by application only. Visit Career Accelerator page on Business School website for more information.<br/><br/>",
-            "handbook_note": "This course is by application only.",
-            "processed": "TABL2751 && COMM6000 CA:Essentials && 65WAM && Good Standing. Note: Visit Career Accelerator page on Business School website for more information"
-        },
-        "tokens": [
-            "(",
-            "TABL2751",
-            "&&",
-            "COMM6000",
-            "CA:Essentials",
-            "&&",
-            "65WAM",
-            "&&",
-            "Good",
-            "Standing.",
-            "Note:",
-            "Visit",
-            "Career",
-            "Accelerator",
-            "page",
-            "on",
-            "Business",
-            "School",
-            "website",
-            "for",
-            "more",
-            "information",
-            ")"
-        ],
-        "broke at": "Index 5, &&"
     },
     "YMED1001": {
         "condition": {
