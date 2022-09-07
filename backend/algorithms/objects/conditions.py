@@ -291,7 +291,8 @@ class CoresCondition(Condition):
         return False
 
     def validate(self, user: User) -> tuple[bool, list[str]]:
-        return user.completed_core(self.category), []
+        res = user.completed_core(self.category)
+        return res, [] if res else [f'you have not completed your {self.category} cores']
 
     def __str__(self) -> str:
         return f"Core courses in {self.category}"

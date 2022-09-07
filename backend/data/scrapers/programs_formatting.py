@@ -19,9 +19,6 @@ Step in the data's journey:
 """
 import json
 import re
-import sys
-import os
-sys.path.append(os.getcwd())
 from data.utility import data_helpers
 
 
