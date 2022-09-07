@@ -7,7 +7,7 @@ Tests `User.has_taken_course`
 import json
 from algorithms.objects.user import User
 
-EXAMPLE_USERS_PATH = "./algorithms/exampleUsers.json"
+EXAMPLE_USERS_PATH = "./algorithms/tests/exampleUsers.json"
 
 with open(EXAMPLE_USERS_PATH) as f:
     USERS = json.load(f)
