@@ -157,8 +157,10 @@ class PlannerData(BaseModel):
 class LocalStorage(PlannerData):
     programName: str
     unplanned: list[str]
+    startYear: int
     numYears: int
     isSummerEnabled: bool
+    token: str
 
 class CourseCodes(BaseModel):
     courses: list[str]

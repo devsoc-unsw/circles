@@ -5,6 +5,7 @@ from fastapi import APIRouter
 from algorithms.objects.user import User
 from server.routers.courses import get_course
 from server.routers.model import ValidCoursesState, PlannerData, LocalStorage, CONDITIONS, CACHED_HANDBOOK_NOTE
+from server.database import usersDB
 
 def fix_planner_data(plannerData: PlannerData):
     """ fixes the planner data to add missing UOC info """
@@ -84,7 +85,7 @@ def save_local_storage(localStorage: LocalStorage):
     token = localStorage.token
     degree = {}
     degree['programCode'] = localStorage.programCode
-    planner['programName'] = localStorage.programName
+    degree['programName'] = localStorage.programName
     degree['specs'] = localStorage.specialisations
 
     planner = {}
@@ -95,8 +96,10 @@ def save_local_storage(localStorage: LocalStorage):
     planner['numYears'] = localStorage.numYears
     planner['isSummerEnabled'] = localStorage.isSummerEnabled
 
-    objectID = usersDB['tokens'].find_one({'token': token})['objectId']
-    if objectID is not None:
+    data = usersDB['tokens'].find_one({'token': token})
+    if data is not None:
+        print(data)
+        objectID = data['objectId']
         usersDB['users'].update_one({'_id': objectID}, {'$set': {'degree': degree, 'planner': planner}})
     else:
         objectID = usersDB['users'].insert_one({'degree': degree, 'planner': planner}).inserted_id
