@@ -17,6 +17,7 @@ const CourseTitleWrapper = styled.div<{ selected: boolean, locked: boolean }>`
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+  color: ${({ theme }) => theme.text};
 
   font-size: 0.8rem;
 
